@@ -10,11 +10,61 @@
 				bugnotes, as well as handling urls to other sites in general.
 			</para>
 
-			<blockquote id="dev.eventref.output.display.text">
-				<title>EVENT_DISPLAY_TEXT (Chained)</title>
+			<blockquote id="dev.eventref.output.display.email">
+				<title>EVENT_DISPLAY_EMAIL (Chained)</title>
 
 				<blockquote>
-				<para>This is an event to display generic unformatted text.</para>
+					<para>
+						This is an event to format text before being sent in an email.  Callbacks should
+						be used to process text and convert it into a plaintext-readable format so that
+						users with textual email clients can best utilize the information.  Hyperlinks
+						and other markup should be removed, leaving the core content by itself.
+					</para>
+
+					<itemizedlist>
+						<title>Parameters</title>
+						<listitem><para>String Input string to be displayed</para></listitem>
+					</itemizedlist>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>String: Modified input string</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
+			<blockquote id="dev.eventref.output.display.formatted">
+				<title>EVENT_DISPLAY_FORMATTED (Chained)</title>
+
+				<blockquote>
+					<para>
+						This is an event to display generic formatted text.  The string to be displayed is
+						passed between hooked callbacks, each taking a turn to modify the output in some
+						specific manner.  Text passed to this may be processed for all types of formatting
+						and markup, including clickable links, presentation adjustments, etc.
+					</para>
+
+					<itemizedlist>
+						<title>Parameters</title>
+						<listitem><para>String Input string to be displayed</para></listitem>
+					</itemizedlist>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>String: Modified input string</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
+			<blockquote id="dev.eventref.output.display.rss">
+				<title>EVENT_DISPLAY_RSS (Chained)</title>
+
+				<blockquote>
+					<para>
+						This is an event to format content before being displayed in an RSS feed.  Text
+						should be processed to perform any necessary character escaping to preserve 
+						hyperlinks and other appropriate markup.
+					</para>
 
 					<itemizedlist>
 						<title>Parameters</title>
@@ -26,9 +76,32 @@
 						<title>Return Value</title>
 						<listitem><para>String: Modified input string</para></listitem>
 					</itemizedlist>
-
 				</blockquote>
 			</blockquote>
+
+			<blockquote id="dev.eventref.output.display.text">
+				<title>EVENT_DISPLAY_TEXT (Chained)</title>
+				<blockquote>
+					<para>
+						This is an event to display generic unformatted text.  The string to be displayed is
+						passed between hooked callbacks, each taking a turn to modify the output in some
+						specific manner.  Text passed to this event should only be processed for the most
+						basic formatting, such as preserving line breaks and special characters.
+					</para>
+
+					<itemizedlist>
+						<title>Parameters</title>
+						<listitem><para>String Input string to be displayed</para></listitem>
+						<listitem><para>Boolean Multiline input string</para></listitem>
+					</itemizedlist>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>String: Modified input string</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
 		</sect2>
 
 		<sect2 id="dev.eventref.output.menu">
