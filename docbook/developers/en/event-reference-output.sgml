@@ -9,6 +9,26 @@
 				semantic meaning or markup.  Examples include the creation of links to other bugs or 
 				bugnotes, as well as handling urls to other sites in general.
 			</para>
+
+			<blockquote id="dev.eventref.output.display.text">
+				<title>EVENT_DISPLAY_TEXT (Chained)</title>
+
+				<blockquote>
+				<para>This is an event to display generic unformatted text.</para>
+
+					<itemizedlist>
+						<title>Parameters</title>
+						<listitem><para>String Input string to be displayed</para></listitem>
+						<listitem><para>Boolean Multiline input string</para></listitem>
+					</itemizedlist>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>String: Modified input string</para></listitem>
+					</itemizedlist>
+
+				</blockquote>
+			</blockquote>
 		</sect2>
 
 		<sect2 id="dev.eventref.output.menu">

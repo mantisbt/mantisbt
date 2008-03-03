@@ -19,7 +19,7 @@
 			simplify plugin development.
 		</para>
 
-		<sect2 id="dev.eventref.plugin.init">
+		<blockquote id="dev.eventref.plugin.init">
 			<title>EVENT_PLUGIN_INIT</title>
 
 			<itemizedlist>
@@ -48,7 +48,7 @@
 					<listitem><para>Interacting with other plugins outside the context of pages or events.</para></listitem>
 				</itemizedlist>
 			</para>
-		</sect2>
+		</blockquote>
 	</sect1>
 
 	&eventref-output;
