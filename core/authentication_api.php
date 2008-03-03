@@ -504,9 +504,9 @@
 	function auth_set_tokens( $p_user_id ) {
 		$t_auth_token = token_get( TOKEN_AUTHENTICATED, $p_user_id );
 		if ( null == $t_auth_token ) {
-			token_set( TOKEN_AUTHENTICATED, true, TOKEN_EXPIRY_AUTHENTICATED, $p_user_id );
+			token_set( TOKEN_AUTHENTICATED, true, config_get_global( 'reauthentication_expiry' ), $p_user_id );
 		} else {
-			token_touch( $t_auth_token['id'], TOKEN_EXPIRY_AUTHENTICATED );
+			token_touch( $t_auth_token['id'], config_get_global( 'reauthentication_expiry' ) );
 		}
 	}
 
@@ -516,14 +516,15 @@
 	 * this function will always "authenticate" the user (do nothing).
 	 */
 	function auth_reauthenticate() {
-		if ( BASIC_AUTH == config_get( 'login_method' ) ||
+		if ( config_get_global( 'reauthentication' ) == OFF ||
+				BASIC_AUTH == config_get( 'login_method' ) ||
 				HTTP_AUTH == config_get( 'login_method' ) ) {
 			return true;
 		}
 
 		$t_auth_token = token_get( TOKEN_AUTHENTICATED );
 		if ( null != $t_auth_token ) {
-			token_touch( $t_auth_token['id'], TOKEN_EXPIRY_AUTHENTICATED );
+			token_touch( $t_auth_token['id'], config_get_global( 'reauthentication_expiry' ) );
 			return true;
 		} else {
 			$t_anon_account = config_get( 'anonymous_account' );

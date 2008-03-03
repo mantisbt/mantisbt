@@ -482,6 +482,10 @@
 	$g_logo_image			= 'images/mantis_logo.gif';
 	$g_logo_url				= '%default_home_page%';
 
+	# --- site reauthentication -------
+	$g_reauthentication		= ON;
+	$g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
+
 	# --- advanced views --------------
 	# BOTH, SIMPLE_ONLY, ADVANCED_ONLY
 	$g_show_report			= BOTH;
