@@ -870,22 +870,23 @@
 					  ORDER BY p.name";
 			$result = db_query_bound( $query, ($p_show_disabled ? null : Array( true ) ) );
 		} else {
-			$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = ' . db_param(4) . ' AND';
+			$p = 0;
 			$query = "SELECT DISTINCT p.id, p.name, ph.parent_id
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
-					    ON p.id = u.project_id AND u.user_id=" . db_param(0) . "
+					    ON p.id = u.project_id AND u.user_id=" . db_param($p++) . "
 					  LEFT JOIN $t_project_hierarchy_table ph
 					    ON ph.child_id = p.id
-					  WHERE $t_enabled_clause
+					  WHERE " . ($p_show_disabled ? '' : ('p.enabled = ' . db_param($p++) . ' AND ')) . '
 					  	ph.parent_id IS NOT NULL AND
-						( p.view_state=" . db_param(1) . "
-						    OR (p.view_state=" . db_param(2) . "
+						( p.view_state=' . db_param($p++) . '
+						    OR (p.view_state=' . db_param($p++) . '
 							    AND
-						        u.user_id=" . db_param(3) . " )
+						        u.user_id=' . db_param($p++) . ' )
 						)
-					  ORDER BY p.name";
-			$result = db_query_bound( $query, ($p_show_disabled ? Array( $p_user_id, $t_public, $t_private, $p_user_id ) : Array( $p_user_id, $t_public, $t_private, $p_user_id, 1 ) ) );
+					  ORDER BY p.name';
+			var_dump( $query );
+			$result = db_query_bound( $query, ($p_show_disabled ? Array( $p_user_id, $t_public, $t_private, $p_user_id ) : Array( $p_user_id, 1, $t_public, $t_private, $p_user_id ) ) );
 		}
 
 		$row_count = db_num_rows( $result );
