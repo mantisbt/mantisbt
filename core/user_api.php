@@ -885,7 +885,6 @@
 						        u.user_id=' . db_param($p++) . ' )
 						)
 					  ORDER BY p.name';
-			var_dump( $query );
 			$result = db_query_bound( $query, ($p_show_disabled ? Array( $p_user_id, $t_public, $t_private, $p_user_id ) : Array( $p_user_id, 1, $t_public, $t_private, $p_user_id ) ) );
 		}
 
