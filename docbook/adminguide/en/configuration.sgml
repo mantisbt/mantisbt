@@ -37,13 +37,13 @@
             <varlistentry>
                 <term>$g_database_name</term>
                 <listitem>
-                    <para>Name of database that contains Mantis tables.</para>
+                    <para>Name of database that contains Mantis tables.  The default name is 'bugtracker'.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
                 <term>$g_db_schema</term>
                 <listitem>
-                    <para>The database schema (used in case of DB2).</para>
+                    <para>The database schema (used in case of DB2), otherwise should be left blank.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
@@ -58,11 +58,11 @@
             </varlistentry>
         </variablelist>
     </section>
-    
+
     <section>
         <title>Path</title>
         <para>These path settings are important for proper linking within
-            Mantis. In most scenarios the default values should work fine, and
+            MantisBT. In most scenarios the default values should work fine, and
             you should not need to override them.
         </para>
         <variablelist> 
@@ -71,11 +71,9 @@
                 <listitem>
                     <para>URL to your installation as seen from the web browser; this
                         is what you type into the URL field. Requires trailing '/'
-                        character. eg. $g_path =
-                        'http://www.example.com/mantis/'; In the following example
-                        https protocol is used: eg. $g_path =
-                        'https://www.example.com/mantis/'; Mantis will default this to
-                        the correct value. However, in some cases you might need to
+                        character. eg. 'http://www.example.com/mantis/'.  In the following example
+                        https protocol is used: eg. 'https://www.example.com/mantis/'.  MantisBT will default this to
+                        the correct value. However, in some cases it might be necessary to
                         override the default.  This is typically needed when an installation can be
 			accessed by multiple URLs (internal vs external).
                     </para>
@@ -85,22 +83,25 @@
                 <term>$g_icon_path</term>
                 <listitem>
                     <para>This is the URL to the icons (images) directory as seen from
-                        the web browser. All Mantis images/icons are loaded from this URL.
-                        The default value for this URL is based on $g_path, hence, if you
-                        override $g_path, you will have to override this one as
-                        well.
+                        the web browser. All MantisBT images/icons are loaded from this URL.
+                        The default value for this URL is based on $g_path (i.e. '%path%images/').  Note that a trailing 
+                        '/' is required.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_short_path</term>
+                <listitem>
+                    <para>Short web path without the domain name.  This requires the trailing '/'.
                     </para>
                 </listitem>
             </varlistentry>
             <varlistentry>
                 <term>$g_absolute_path</term>
                 <listitem>
-                    <para>This is the absolute path to your installation, it is
+                    <para>This is the absolute file system path to the MantisBT installation, it is
                         defaulted to the directory where config_defaults_inc.php resides.
-                        This is the path that you see when you make a telnet or ssh
-                        connection to the server. You can type pwd to find out. Requires
-                        trailing '/' character. eg. $g_absolute_path =
-                        '/usr/apache/htdocs/mantis/';
+                        Requires trailing '/' character (eg. '/usr/apache/htdocs/mantis/').
                     </para>
                 </listitem>
             </varlistentry>
@@ -109,7 +110,16 @@
                 <listitem>
                     <para>This is the path to the core directory of your installation.
                         The default value is usually OK, unless you move the 'core'
-                        directory out of your webroot. Requires trailing '/'
+                        directory out of your webroot. Requires trailing DIRECTORY_SEPARATOR.
+                        character.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_class_path</term>
+                <listitem>
+                    <para>This is the path to the classes directory which is a sub-directory of core by default.
+                        The default value is typically OK.  Requires trailing DIRECTORY_SEPARATOR.
                         character.
                     </para>
                 </listitem>
@@ -117,58 +127,128 @@
             <varlistentry>
                 <term>$g_manual_url</term>
                 <listitem>
-                    <para>This is the url to the Mantis manual. It is defaulted to the
-                        Mantis Online manual. Mantis links to this URL for full
-                        documentation, it will also be used in the future to link for the
-                        [?] form hints. Requires trailing '/' character.
+                    <para>This is the url to the MantisBT online manual.  Requires trailing '/' character.
                     </para>
                 </listitem>
             </varlistentry>
         </variablelist>
-        
     </section>
-    
+
     <section>
-        
         <title>Webserver</title>
+
         <variablelist> 
-            
             <varlistentry>
                 <term>$g_use_iis</term>
                 <listitem>
-                    <para>You need to set this to ON if you use Microsoft's IIS. This
-                        helps correct a bug in IIS. You should not need to change the
-                        default value since it now auto-detects IIS server software.
-                        This issue has been known since at least Jan 1999 and has not been
-                        fixed:
-                        <ulink url="http://support.microsoft.com/default.aspx?scid=kb;EN-US;q176113">BUG
-                            Q176113
-                        </ulink>
+                    <para>Indicates the IIS (Microsoft Internet Information Server) is the web server on which MantisBT is hosted.
                     </para>
                 </listitem>
             </varlistentry>
         </variablelist>
-        
     </section>
-    
-    <section>
 
-        <title>Version</title>
-        <variablelist>
+    <section>
+        <title>Configuration Settings</title>
+
+        <variablelist> 
             <varlistentry>
-                <term>$g_show_version</term>
+                <term>$g_global_settings</term>
                 <listitem>
-                    <para>Whether to show the Mantis version at the bottom of each
-                        page or not. Default is ON.
-                    </para>
+                    <para>This option contains the list of regular expressions that are used to determine if it is allowed for a specific configuraiton option to be saved to or loaded from the database.  Configuration options that matches the regular expressions are considered global only and hence are only configurable via the config_inc.php file and defaulted by config_defaults_inc.php file.</para>
                 </listitem>
             </varlistentry>
         </variablelist>
-        
     </section>
-    
+
+    <section>
+        <title>Signup and Lost Password</title>
+
+        <variablelist> 
+            <varlistentry>
+                <term>$g_allow_signup</term>
+                <listitem>
+                    <para>Allow users to signup for their own accounts. Default is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>$g_max_failed_login_count</term>
+                <listitem>
+                    <para>Maximum failing login attempts before the account is locked.
+                        Once locked, it's required to reset the password (lost password).
+                        Value resets to zero at each successfully login.  Default is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>$g_notify_new_user_created_threshold_min</term>
+                <listitem>
+                    <para>The minimum global access level required to be notified when a new user registers via the "signup form".  To pick specific access levels that are not necessarily at the higher end of access levels, use an array of access levels.  Default is ADMINISTRATOR.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>$g_send_reset_password</term>
+                <listitem>
+                    <para>When set to ON, MantisBT will email the users their new
+                        passwords when their accounts are reset. If set to OFF, the
+                        password will be reset to blank and no e-mail will be sent. Default
+                        is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>$g_password_confirm_hash_magic_string</term>
+                <listitem>
+                    <para>TODO</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>$g_signup_use_captcha</term>
+                <listitem>
+                    <para>TODO</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>$g_system_font_folder</term>
+                <listitem>
+                    <para>TODO</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>$g_font_per_captcha</term>
+                <listitem>
+                    <para>TODO</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>$g_lost_password_feature</term>
+                <listitem>
+                    <para>TODO</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>$g_max_lost_password_in_progress_count</term>
+                <listitem>
+                    <para>TODO</para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section>
         <title>Email</title>
+
         <variablelist>
             <varlistentry>
                 <term>$g_administrator_email</term>
@@ -213,19 +293,79 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_allow_signup</term>
+                <term>$g_default_notify_flags</term>
                 <listitem>
-                    <para>Allow users to signup for their own accounts. Default is ON.
+                    <para>Associated with each action a list of flags to control who
+                        should be notified.The default will be used if the action is not
+                        included in $g_notify_flags orif the flag is not included in the
+                        specific action definition. The list of actions include: new,
+                        assigned, resolved, bugnote, reopened, closed, deleted,
+                        feedback.The default is:
+                        $g_default_notify_flags = array('reporter' =&gt; ON, 'handler'
+                        =&gt; ON, 'monitor' =&gt; ON, 'bugnotes' =&gt; ON, 'threshold_min'
+                        =&gt; NOBODY, 'threshold_max' =&gt; NOBODY);
+                        threshold_min and threshold_max are used to send messages to all
+                        members of the project whose status is greater than or equal to
+                        "threshold_min" and less than or equal to "threshold_max". Sending
+                        messages to everyone would set "threshold_min" to ANYBODY and
+                        "threshold_max to "NOBODY". To send to all DEVELOPERS and above (as
+                        0.17.5), use DEVELOPER and NOBODY respectively.
                     </para>
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_send_reset_password</term>
+                <term>$g_notify_flags</term>
                 <listitem>
-                    <para>When set to ON, Mantis will email the users their new
-                        passwords when their accounts are reset. If set to OFF, the
-                        password will be reset to blank and no e-mail will be sent. Default
-                        is ON.
+                    <para>Defines the notification flags that are different from the
+                        defaults that are defined in $g_default_notify_flags. The following
+                        code overrides the default by disabling notifications to bugnote
+                        authors and users monitoring the bug on submitting a new bug:
+                        $g_notify_flags['new'] = array('bugnotes' =&gt; OFF, 'monitor'
+                        =&gt; OFF);
+                        Available actions include:
+                        <itemizedlist>
+                            <listitem>
+                                <para>'new': a new bug has been added</para>
+                            </listitem>
+                            <listitem>
+                                <para>'reopened': the bug has been reopened</para>
+                            </listitem>
+                            <listitem>
+                                <para>'deleted': a bug has been deleted</para>
+                            </listitem>
+                            <listitem>
+                                <para>'owner': the bug has been assigned a new owner</para>
+                            </listitem>
+                            <listitem>
+                                <para>'bugnote': a bugnote has been added to a bug</para>
+                            </listitem>
+                            <listitem>
+                                <para>'sponsor': the sponsorship for the bug has changed
+                                    (added, deleted or updated)
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>'relation': a relationship for the bug has changed
+                                    (added, deleted or updated)
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                        In addition, an action can match the bug status in
+                        $g_status_enum_string. Note that spaces in the string are replaced
+                        with underscores ('_') in creating the action. Thus, using the
+                        defaults, 'feedback' would be a valid action.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_email_receive_own</term>
+                <listitem>
+                    <para>This defines whether users should receive emails for their
+                        own actions. This option is defaulted to OFF, hence, users do not
+                        receive email notification for their own actions.
+                        This can be a source for confusions for users upgrading from Mantis
+                        0.17.x versions, since in these versions users used to get notified
+                        of their own actions.
                     </para>
                 </listitem>
             </varlistentry>
@@ -319,6 +459,12 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_email_send_using_cronjob</term>
+                <listitem>
+                    <para>TODO</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_email_set_category</term>
                 <listitem>
                     <para>Specify whether e-mails should be sent with the category set
@@ -352,8 +498,7 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
-        
+
         <para>Mantis uses flags and a threshold system to generate emails on
             events. For each new event, email is sent to:
             <itemizedlist>
@@ -385,7 +530,7 @@
                 </listitem>
             </itemizedlist>
         </para>
-        
+
         <para>
             From this list, those recipients who meet the following criteria
             are eliminated:
@@ -410,94 +555,23 @@
                 </listitem>
             </itemizedlist>
         </para>
-        
-        
+    </section>
+
+    <section>
+        <title>Version</title>
+
         <variablelist>
             <varlistentry>
-                <term>$g_email_receive_own</term>
+                <term>$g_show_version</term>
                 <listitem>
-                    <para>This defines whether users should receive emails for their
-                        own actions. This option is defaulted to OFF, hence, users do not
-                        receive email notification for their own actions.
-                        This can be a source for confusions for users upgrading from Mantis
-                        0.17.x versions, since in these versions users used to get notified
-                        of their own actions.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_default_notify_flags</term>
-                <listitem>
-                    <para>Associated with each action a list of flags to control who
-                        should be notified.The default will be used if the action is not
-                        included in $g_notify_flags orif the flag is not included in the
-                        specific action definition. The list of actions include: new,
-                        assigned, resolved, bugnote, reopened, closed, deleted,
-                        feedback.The default is:
-                        $g_default_notify_flags = array('reporter' =&gt; ON, 'handler'
-                        =&gt; ON, 'monitor' =&gt; ON, 'bugnotes' =&gt; ON, 'threshold_min'
-                        =&gt; NOBODY, 'threshold_max' =&gt; NOBODY);
-                        threshold_min and threshold_max are used to send messages to all
-                        members of the project whose status is greater than or equal to
-                        "threshold_min" and less than or equal to "threshold_max". Sending
-                        messages to everyone would set "threshold_min" to ANYBODY and
-                        "threshold_max to "NOBODY". To send to all DEVELOPERS and above (as
-                        0.17.5), use DEVELOPER and NOBODY respectively.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_notify_flags</term>
-                <listitem>
-                    <para>Defines the notification flags that are different from the
-                        defaults that are defined in $g_default_notify_flags. The following
-                        code overrides the default by disabling notifications to bugnote
-                        authors and users monitoring the bug on submitting a new bug:
-                        $g_notify_flags['new'] = array('bugnotes' =&gt; OFF, 'monitor'
-                        =&gt; OFF);
-                        Available actions include:
-                        <itemizedlist>
-                            <listitem>
-                                <para>'new': a new bug has been added</para>
-                            </listitem>
-                            <listitem>
-                                <para>'reopened': the bug has been reopened</para>
-                            </listitem>
-                            <listitem>
-                                <para>'deleted': a bug has been deleted</para>
-                            </listitem>
-                            <listitem>
-                                <para>'owner': the bug has been assigned a new owner</para>
-                            </listitem>
-                            <listitem>
-                                <para>'bugnote': a bugnote has been added to a bug</para>
-                            </listitem>
-                            <listitem>
-                                <para>'sponsor': the sponsorship for the bug has changed
-                                    (added, deleted or updated)
-                                </para>
-                            </listitem>
-                            <listitem>
-                                <para>'relation': a relationship for the bug has changed
-                                    (added, deleted or updated)
-                                </para>
-                            </listitem>
-                        </itemizedlist>
-                        In addition, an action can match the bug status in
-                        $g_status_enum_string. Note that spaces in the string are replaced
-                        with underscores ('_') in creating the action. Thus, using the
-                        defaults, 'feedback' would be a valid action.
+                    <para>Whether to show the Mantis version at the bottom of each
+                        page or not. Default is ON.
                     </para>
                 </listitem>
             </varlistentry>
         </variablelist>
-        
-        <para>See also:
-            <ulink url="manual.customizing.mantis.email.notifications.html">Email Notifications</ulink>
-        </para>
-        
     </section>
-    
+
     <section>
         <title>Language</title>
         <variablelist> 
@@ -545,6 +619,7 @@
             </para>
         </note>
     </section>
+    <!-- Stopped here -->
 
     <section>
         <title>Display</title>
@@ -1412,10 +1487,8 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
     </section>
-    
-    
+
     <section>
         <title>Authentication</title>
         <variablelist> 
@@ -1453,10 +1526,22 @@
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry>
+                <term>$g_reauthentication</term>
+                <listitem>
+                    <para>TODO</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_reauthentication_expiry</term>
+                <listitem>
+                    <para>TODO</para>
+                </listitem>
+            </varlistentry>
         </variablelist>
-        
+
         <para>LDAP authentication method parameters</para>
-        
+
         <variablelist>
             <varlistentry>
                 <term>$g_ldap_server</term>
@@ -1504,10 +1589,8 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
     </section>
-    
-    
+
     <section>
         <title>Status Settings</title>
         

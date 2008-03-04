@@ -8,7 +8,7 @@
 
         <para>MantisBT doesn't just track the status of issues, it also relates issues to versions.  Each project can have several versions, which can be released or not yet released (in short, not released).  Users typically report issues against released issues and developers typically fix issues in not released versions.  With every new release comes question like: what's new?  what has been fixed?  Customers wonder if the new release is of interest to them and whether they should take an upgrade.  Well, the change log is specifically tailored to answer these kind of questions.</para>
 
-        <para>In order for an issue to show up in the change log, it has to satisfy certain criteria.  The criteria is that the issue has to be resolved with a 'fixed' resolution and has to have the 'fixed_in_version' field set.  Users sometime wonder why resolved or closed issues don't show up in the change log, and the answer is that the 'fixed_in_version' field is not set.  Without the 'fixed_in_version', it is not possible for MantisBT to include the issues in the appropriate section of the changelog.</para>
+        <para>In order for an issue to show up in the change log, it has to satisfy certain criteria.  The criteria is that the issue has to be resolved with a 'fixed' resolution and has to have the 'fixed_in_version' field set.  Users sometimes wonder why resolved or closed issues don't show up in the change log, and the answer is that the 'fixed_in_version' field is not set.  Without the 'fixed_in_version', it is not possible for MantisBT to include the issues in the appropriate section of the changelog.  Note that it is possible to set the 'fixed_in_version' for multiple issues using the 'Update Fixed in Version' group action on the View Issues page (just below the issues list).  This option is only available when the selected project is not 'All Projects'.</para>
         
         <para>MantisBT also provides the ability to customize the criteria used for an issue to be included in the change log.  For example, for installations that use a custom set of resolutions, it is possible to select multiple resolutions as valid candidates for the change log.  This can be done using custom functions (see custom functions documentation for more details).  The custom function below overrides the MantisBT default behavior to include issues with both FIXED and IMPLEMENTED (a custom resolution) resolutions in the change log.
 
@@ -75,7 +75,7 @@ http://www.example.com/mantis/project_page.php?project_id=1
         <title>Roadmap</title>
 
         <para>
-            One of the very important scenarios in project management is where the project managers (or team leads) triage the issues to set their priorities, target version, and possibly assign the issues to specific developers or take other actions on the issue.  By setting the target version of an issue to a version that is not yet released, the issue shows up on the project roadmap, providing user with information about when to expect the issues to be resolved.  The roadmap page has a section for each release showing information like planned issues, issues done and percentage of issues completed.  Issues that are fixed are fixed in a specific version, but didn't have the target_version field set, will not show up in the roadmap.  This allows the ability to control the issues that are significant enough to show in the roadmap, while all resolved fields can be found in the change log.
+            One of the very important scenarios in project management is where the project managers (or team leads) triage the issues to set their priorities, target version, and possibly assign the issues to specific developers or take other actions on the issue.  By setting the target version of an issue to a version that is not yet released, the issue shows up on the project roadmap, providing user with information about when to expect the issues to be resolved.  The roadmap page has a section for each release showing information like planned issues, issues done and percentage of issues completed.  Issues that are fixed in a specific version, but didn't have the target_version field set, will not show up in the roadmap.  This allows the ability to control the issues that are significant enough to show in the roadmap, while all resolved fields can be found in the change log.  Note that it is possible to set the 'target_version' for multiple issues using the 'Update Target Version' group action that is available through the View Issues page (below the issues list).  This option is only available when the current project is not 'All Projects'.
         </para>
 
         <para>
@@ -161,12 +161,31 @@ http://www.example.com/mantis/project_page.php?project_id=1
     <section>
         <title>Graphs</title>
 
-        <para></para>
+        <para>Assigned to me: TODO</para>
+        <para>Release Delta: TODO</para>
+        <para>Category: TODO</para>
+        <para>Severity: TODO</para>
+        <para>Severity / Status: TODO</para>
+        <para>Daily Delta: TODO</para>
+        <para>Reported by Me: TODO</para>
     </section>
 
     <section>
         <title>Summary Page</title>
 
-        <para></para>
+        <para>By Status: TODO</para>
+        <para>By Severity: TODO</para>
+        <para>By Category: TODO</para>
+        <para>Time Stats for Resolved Issues (days): TODO</para>
+        <para>Developer Status: TODO</para>
+        <para>Reporter by Resolution: TODO</para>
+        <para>Developer by Resolution: TODO</para>
+        <para>By Date: TODO</para>
+        <para>Most Active: TODO</para>
+        <para>Longest Open: TODO</para>
+        <para>By Resolution: TODO</para>
+        <para>By Priority: TODO</para>
+        <para>Reporter Status: TODO</para>
+        <para>Reporter Effectiveness: TODO</para>
     </section>
 </chapter>
