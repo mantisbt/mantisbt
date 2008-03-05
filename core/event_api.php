@@ -136,6 +136,9 @@ function event_signal( $p_name, $p_params=null, $p_params_dynamic=null, $p_type=
 		case EVENT_TYPE_CHAIN:
 			return event_type_chain( $p_name, $t_callbacks, $p_params, $p_params_dynamic );
 		
+		case EVENT_TYPE_FIRST:
+			return event_type_first( $p_name, $t_callbacks, $p_params );
+
 		default:
 			return event_type_default( $p_name, $t_callbacks, $p_params );
 	}
@@ -257,6 +260,32 @@ function event_type_chain( $p_event, $p_callbacks, $p_input, $p_params ) {
 		}
 	}
 	return $t_output;
+}
+
+/**
+ * Process a first-return event.
+ * Callbacks will be called with the given parameters until a callback
+ * returns a non-null value; at this point, no other callbacks will be
+ * processed, and the return value be passed back to the event origin.
+ * @param string Event name
+ * @param array Array of callback function/plugin basename key/value pairs
+ * @param multi Parameters passed to callbacks
+ * @return multi The first non-null callback result, or null otherwise
+ */
+function event_type_first( $p_event, $p_callbacks, $p_params ) {
+	$t_output = null;
+
+	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
+		foreach( $t_callbacks as $t_callback ) {
+			$t_output = event_callback( $p_event, $t_callback, $t_plugin, $p_params );
+
+			if ( !is_null( $t_output ) ) {
+				return $t_output;
+			}
+		}
+	}
+
+	return null;
 }
 
 /**

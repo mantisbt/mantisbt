@@ -439,4 +439,5 @@
 	define( 'EVENT_TYPE_EXECUTE',		1 );
 	define( 'EVENT_TYPE_OUTPUT',		2 );
 	define( 'EVENT_TYPE_CHAIN',			3 );
+	define( 'EVENT_TYPE_FIRST',			4 );
 ?>
