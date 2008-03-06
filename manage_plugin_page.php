@@ -111,7 +111,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	}
 
 	$t_uninstall = '';
-	if ( 'mantis' != $t_basename ) {
+	if ( 'MantisCore' != $t_basename ) {
 		$t_uninstall = '<form action="manage_plugin_uninstall.php?name='.$t_basename.'" method="post">'.
 			'<input type="submit" value="'.lang_get( 'plugin_uninstall' ).'"></form>';
 	}
