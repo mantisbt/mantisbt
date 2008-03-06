@@ -43,7 +43,7 @@
 	function print_project_header( $p_project_name ) {
 		echo '<br /><span class="pagetitle">', string_display( $p_project_name ), ' - ', lang_get( 'roadmap' ), '</span><br />';
 	}
-	
+
 	$t_user_id = auth_get_current_user_id();
 	$f_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
 		
@@ -103,9 +103,10 @@
 			$t_version = $t_version_row['version'];
 			$c_version = db_prepare_string( $t_version );
 
-			$query = "SELECT $t_bug_table.*, $t_relation_table.source_bug_id FROM $t_bug_table
-						LEFT JOIN $t_relation_table ON $t_bug_table.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
-						WHERE project_id=" . db_param(0) . " AND target_version=" . db_param(1) . " ORDER BY status ASC, last_updated DESC";
+			$query = "SELECT sbt.*, $t_relation_table.source_bug_id, dbt.target_version as parent_version FROM $t_bug_table AS sbt
+						LEFT JOIN $t_relation_table ON sbt.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
+						LEFT JOIN $t_bug_table AS dbt ON dbt.id=$t_relation_table.source_bug_id
+						WHERE sbt.project_id=" . db_param(0) . " AND sbt.target_version=" . db_param(1) . " ORDER BY sbt.status ASC, sbt.last_updated DESC";
 
 			$t_description = $t_version_row['description'];
 
@@ -133,6 +134,7 @@
 
 				$t_issue_id = $t_row['id'];
 				$t_issue_parent = $t_row['source_bug_id'];
+				$t_parent_version = $t_row['parent_version'];
 
 				if ( !helper_call_custom_function( 'roadmap_include_issue', array( $t_issue_id ) ) ) {
 					continue;
@@ -148,8 +150,13 @@
 					$t_issues_counted[$t_issue_id] = true;
 				}
 
-				$t_issue_ids[] = $t_issue_id;
-				$t_issue_parents[] = $t_issue_parent;
+				if ( 0 === strcasecmp( $t_parent_version, $t_version ) ) {
+					$t_issue_ids[] = $t_issue_id;
+					$t_issue_parents[] = $t_issue_parent;
+				} else if ( !in_array( $t_issue_id, $t_issue_ids ) ) {
+					$t_issue_ids[] = $t_issue_id;
+					$t_issue_parents[] = null;
+				}
 			}
 
 			$t_progress = $t_issues_planned > 0 ? ( (integer) ( $t_issues_resolved * 100 / $t_issues_planned ) ) : 0;
