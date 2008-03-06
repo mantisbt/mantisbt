@@ -548,7 +548,7 @@ function plugin_register( $p_basename, $p_return=false, $p_child=null ) {
 
 				# Final check on the class
 				if ( is_null( $t_plugin->name ) || is_null( $t_plugin->version ) ) {
-						return null;
+					return null;
 				}
 
 				if ( $p_return ) {
