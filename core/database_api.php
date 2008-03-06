@@ -516,9 +516,7 @@
 		}
 
 		// Format
-		$t_formatted = $t_a[0] . '-';
-		$t_formatted .= ($t_a[1] < 10 ? "0" . $t_a[1] : $t_a[1]) . '-';
-		$t_formatted .= ($t_a[2] < 10 ? "0" . $t_a[2] : $t_a[2]);
+		$t_formatted = sprintf('%04d-%02d-%02d', $t_a[0], $t_a[1], $t_a[2]);
 
 		return $t_formatted;
 	}
