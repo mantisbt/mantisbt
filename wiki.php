@@ -36,10 +36,10 @@
 			project_ensure_exists( $f_id );
 		}
 
-		$t_url = wiki_get_url_for_project( $f_id );
+		$t_url = wiki_link_project( $f_id );
 	} else {
 		bug_ensure_exists( $f_id );
-		$t_url = wiki_get_url_for_issue( $f_id );
+		$t_url = wiki_link_bug( $f_id );
 	}
 
 	print_header_redirect( $t_url, true, false, true );

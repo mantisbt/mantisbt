@@ -93,7 +93,7 @@
 	<?php
 		}
 		
-		if ( wiki_is_enabled() ) {
+		if ( wiki_enabled() ) {
 	?>
 		<span class="small">
 			<?php print_bracket_link( 'wiki.php?id='.$f_bug_id, lang_get( 'wiki' ) ) ?>

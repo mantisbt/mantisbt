@@ -17,61 +17,51 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
  
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
- 
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'helper_api.php' );
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'utility_api.php' );
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'database_api.php' );
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'authentication_api.php' );
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'access_api.php' );
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'project_api.php' );
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'wiki_' . config_get( 'wiki_engine' ) . '_api.php' );
+function wiki_enabled() {
+	return ( config_get_global( 'wiki_enable' ) == ON );
+}
 
-	# ----------------------
-	# Calls a function with the specified name (not including prefix) and given the array
-	# of parameters supplied.  An example prefix is "wiki_dokuwiki_".
-	function wiki_call( $p_function, $p_args_array ) {
-		$t_function = 'wiki_' . config_get_global( 'wiki_engine' ) . '_' . $p_function;
-		return call_user_func_array( $t_function, $p_args_array );
+function wiki_ensure_enabled() {
+	if ( !wiki_enabled() ) {
+		access_denied();
 	}
+}
 
-	# ----------------------
-	# Checks if the Wiki feature is enabled or not.
-	function wiki_is_enabled() {
-		return config_get( 'wiki_enable' ) == ON;
-	}
- 
- 	# ----------------------
-	# Ensures that the wiki feature is enabled.
-	function wiki_ensure_enabled() {
-		if ( !wiki_is_enabled() ) {
-			access_denied();
+function wiki_init() {
+	if ( wiki_enabled() ) {
+
+		# handle legacy style wiki integration
+		require_once( config_get_global( 'class_path' ) . 'MantisCoreWikiPlugin.class.php' );
+		switch (config_get_global( 'wiki_engine' )) {
+			case 'dokuwiki':
+				plugin_child( 'MantisCoreDokuwiki' );
+				break;
+			case 'mediawiki':
+				plugin_child( 'MantisCoreMediaWiki' );
+				break;
+			case 'twiki':
+				plugin_child( 'MantisCoreTwiki' );
+				break;
+			case 'WikkaWiki':
+				plugin_child( 'MantisCoreWikkaWiki' );
+				break;
+			case 'xwiki':
+				plugin_child( 'MantisCoreXwiki' );
+				break;
+		}
+
+		if ( is_null( event_signal( 'EVENT_WIKI_INIT' ) ) ) {
+			config_set_global( 'wiki_enable', OFF );
 		}
 	}
- 
-	# ----------------------
-	# Gets the wiki URL for the issue with the specified id.
-	function wiki_get_url_for_issue( $p_issue_id ) {
-		return wiki_call( 'get_url_for_issue', array( $p_issue_id ) );
-	}
- 
-	# ----------------------
-	# Gets the wiki URL for the project with the specified id.  The project id can be ALL_PROJECTS.
-	function wiki_get_url_for_project( $p_project_id ) {
-		return wiki_call( 'get_url_for_project', array( $p_project_id ) );
-	}
- 
-	# ----------------------
-	/*
-	function wiki_string_display_links( $p_string ) {
-		if ( !wiki_is_enabled() ) {
-			return $p_string;
-		}
- 
-		return wiki_call( 'string_display_links', array( $p_string ) );
-	}
-	*/
-?>
+}
+
+function wiki_link_bug( $p_bug_id ) {
+	return event_signal( 'EVENT_WIKI_LINK_BUG', $p_bug_id );
+}
+
+function wiki_link_project( $p_project_id ) {
+	return event_signal( 'EVENT_WIKI_LINK_PROJECT', $p_project_id );
+}
+
+wiki_init();

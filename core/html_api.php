@@ -593,7 +593,7 @@
 				}
 
 				# Project Wiki
-				if ( wiki_is_enabled() ) {
+				if ( wiki_enabled() ) {
 					$t_menu_options[] = '<a href="' . helper_mantis_url( 'wiki.php?type=project&amp;id=' ) . $t_current_project . '">' . lang_get( 'wiki' ) . '</a>';
 				}
 
@@ -1233,7 +1233,7 @@
 	# --------------------
 	# Print a button to create a wiki page
 	function html_button_wiki( $p_bug_id ) {
-		if ( ON == config_get( 'wiki_enable' ) ) {
+		if ( wiki_enabled() ) {
 			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 				html_button( 'wiki.php',
 							 lang_get_defaulted( 'Wiki' ),

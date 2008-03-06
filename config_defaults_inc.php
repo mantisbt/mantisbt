@@ -1881,7 +1881,7 @@
 	$g_wiki_enable = OFF;
 
 	# Wiki Engine (supported engines: 'dokuwiki', 'mediawiki', 'twiki', 'wikka', 'xwiki')
-	$g_wiki_engine = 'dokuwiki';
+	$g_wiki_engine = '';
  
 	# Wiki namespace to be used as root for all pages relating to this mantis installation.
 	$g_wiki_root_namespace = 'mantis';
