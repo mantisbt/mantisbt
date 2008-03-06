@@ -21,6 +21,7 @@
 # $Id$
 # --------------------------------------------------------
 
+define( 'PLUGINS_DISABLED', true );
 require_once( 'core.php' );
 
 auth_reauthenticate();
