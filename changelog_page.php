@@ -99,9 +99,10 @@
 
 			$t_version_id = version_get_id( $t_version, $t_project_id );
 
-			$query = "SELECT $t_bug_table.*, $t_relation_table.source_bug_id FROM $t_bug_table
-					LEFT JOIN $t_relation_table ON $t_bug_table.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
-					WHERE project_id='$c_project_id' AND fixed_in_version='$c_version' ORDER BY status ASC, last_updated DESC";
+			$query = "SELECT sbt.*, dbt.target_version AS parent_version, $t_relation_table.source_bug_id FROM $t_bug_table AS sbt
+					LEFT JOIN $t_relation_table ON sbt.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
+					LEFT JOIN $t_bug_table AS dbt ON dbt.id=$t_relation_table.source_bug_id
+					WHERE sbt.project_id='$c_project_id' AND sbt.fixed_in_version='$c_version' ORDER BY sbt.status ASC, sbt.last_updated DESC";
 
 			$t_description = version_get_field( $t_version_id, 'description' );
 					
@@ -128,6 +129,7 @@
 
 				$t_issue_id = $t_row['id'];
 				$t_issue_parent = $t_row['source_bug_id'];
+				$t_parent_version = $t_row['parent_version'];
 
 				if ( !helper_call_custom_function( 'changelog_include_issue', array( $t_issue_id ) ) ) {
 					continue;
@@ -135,9 +137,13 @@
 
 				$t_issues_resolved++;
 				
-				$t_issue_ids[] = $t_issue_id;
-				$t_issue_parents[] = $t_issue_parent;
-				
+				if ( 0 === strcasecmp( $t_parent_version, $t_version ) ) {
+					$t_issue_ids[] = $t_issue_id;
+					$t_issue_parents[] = $t_issue_parent;
+				} else if ( !in_array( $t_issue_id, $t_issue_ids ) ) {
+					$t_issue_ids[] = $t_issue_id;
+					$t_issue_parents[] = null;
+				}
 			} 
 
 			if ( $t_issues_resolved > 0 ) {
