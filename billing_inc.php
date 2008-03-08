@@ -40,18 +40,6 @@
 
 <?php 
 	collapse_open( 'bugnotestats' );
-?>
-
-<table class="width100" cellspacing="0">
-<tr>
-	<td class="form-title" colspan="4">
-		<?php collapse_icon( 'bugnotestats' );
-		echo lang_get( 'time_tracking' ) ?>
-	</td>
-</tr>
-</table>
-<?php
-	collapse_closed( 'bugnotestats' );
 
 	$t_today = date( "d:m:Y" );
 	$t_date_submitted = isset( $t_bug ) ? date( "d:m:Y", $t_bug->date_submitted ) : $t_today;
@@ -194,7 +182,17 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	</td>
 </tr>
 </table>
-<?php } # end if ?>
+<?php } # end if
+	collapse_closed( 'bugnotestats' );
+?>
+<table class="width100" cellspacing="0">
+<tr>
+	<td class="form-title" colspan="4">
+		<?php collapse_icon( 'bugnotestats' );
+		echo lang_get( 'time_tracking' ) ?>
+	</td>
+</tr>
+</table>
 <?php
 	collapse_end( 'bugnotestats' );
 ?>
