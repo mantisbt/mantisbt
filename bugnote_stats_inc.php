@@ -39,20 +39,7 @@
 
 <?php 
 	collapse_open( 'bugnotestats' );
-?>
-<table class="width100" cellspacing="0">
-<tr>
-	<td class="form-title" colspan="4">
-		<?php
-			collapse_icon( 'bugnotestats' );
-			echo lang_get( 'time_tracking' ) ?>
-	</td>
-</tr>
-</table>
-<?php
-	collapse_closed( 'bugnotestats' );
-?>
-<?php
+
 	$t_bugnote_stats_from_def = date( "d:m:Y", $t_bug->date_submitted );
 	$t_bugnote_stats_from_def_ar = explode ( ":", $t_bugnote_stats_from_def );
 	$t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
@@ -150,6 +137,18 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 </tr>
 </table>
 <?php } # end if ?>
+<?php
+	collapse_closed( 'bugnotestats' );
+?>
+<table class="width100" cellspacing="0">
+<tr>
+	<td class="form-title" colspan="4">
+		<?php
+			collapse_icon( 'bugnotestats' );
+			echo lang_get( 'time_tracking' ) ?>
+	</td>
+</tr>
+</table>
 <?php
 	collapse_end( 'bugnotestats' );
 ?>
