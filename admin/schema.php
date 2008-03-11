@@ -398,5 +398,9 @@ $upgrade[] = Array( 'InsertData', Array( db_get_table( 'mantis_plugin_table' ), 
 
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_table' ), "inherit_global I UNSIGNED NOTNULL DEFAULT '0'" ) );
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_hierarchy_table' ), "inherit_parent I UNSIGNED NOTNULL DEFAULT '0'" ) );
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_plugin_table' ), "
+	protected		L		NOTNULL DEFAULT \" '0' \",
+	priority		I		UNSIGNED NOTNULL DEFAULT '3'
+	" ) );
 
 ?>

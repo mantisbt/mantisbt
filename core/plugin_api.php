@@ -30,6 +30,8 @@ require_once( $t_class_path . 'MantisPlugin.class.php' );
 ##### Cache variables #####
 
 $g_plugin_cache = array();
+$g_plugin_cache_priority = array();
+$g_plugin_cache_protected = array();
 $g_plugin_current = array();
 
 ##### Public API #####
@@ -313,6 +315,26 @@ function plugin_dependency( $p_basename, $p_required ) {
 	}
 }
 
+/**
+ * Checks to see if a plugin is 'protected' from uninstall.
+ * @param string Plugin basename
+ * @return boolean True if plugin is protected
+ */
+function plugin_protected( $p_basename ) {
+	global $g_plugin_cache_protected;
+	return $g_plugin_cache_protected[$p_basename];
+}
+
+/**
+ * Gets a plugin's priority.
+ * @param string Plugin basename
+ * @return int Plugin priority
+ */
+function plugin_priority( $p_basename ) {
+	global $g_plugin_cache_priority;
+	return $g_plugin_cache_priority[$p_basename];
+}
+
 ### Plugin management functions
 
 /**
@@ -566,14 +588,18 @@ function plugin_register( $p_basename, $p_return=false, $p_child=null ) {
  * Find and register all installed plugins.
  */
 function plugin_register_installed() {
+	global $g_plugin_cache_priority, $g_plugin_cache_protected;
+
 	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
 
-	$t_query = "SELECT basename FROM $t_plugin_table WHERE enabled=" . db_param(0);
+	$t_query = "SELECT basename, priority, protected FROM $t_plugin_table WHERE enabled=" . db_param(0) . ' ORDER BY priority DESC';
 	$t_result = db_query_bound( $t_query, Array(1) );
 
 	while ( $t_row = db_fetch_array( $t_result ) ) {
 		$t_basename = $t_row['basename'];
 		plugin_register( $t_basename );
+		$g_plugin_cache_priority[$t_basename] = $t_row['priority'];
+		$g_plugin_cache_protected[$t_basename] = $t_row['protected'];
 	}
 }
 

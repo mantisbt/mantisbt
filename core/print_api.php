@@ -1221,6 +1221,20 @@
 		}
 	}
 
+	/**
+	 * List of priorities that can be assigned to a plugin.
+	 * @param int current priority
+	 */
+	function print_plugin_priority_list( $p_priority ) {
+		if ( $p_priority < 1 && $p_priority > 5 ) {
+			echo '<option value="', $p_priority, '" selected="selected">', $p_priority, '</option>';
+		}
+
+		for ($i = 5; $i >= 1; $i--) {
+			echo '<option value="', $i, '" ', check_selected( $p_priority, $i ), ' >', $i, '</option>';
+		}
+	}
+
 	# --------------------
 	###########################################################################
 	# String printing API

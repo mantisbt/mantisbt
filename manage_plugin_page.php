@@ -68,8 +68,10 @@ foreach( $t_plugins as $t_basename => $t_plugin ) {
 <!-- Info -->
 <tr class="row-category">
 	<td width="20%"><?php echo lang_get( 'plugin' ) ?></td>
-	<td width="50%"><?php echo lang_get( 'plugin_description' ) ?></td>
-	<td width="20%"><?php echo lang_get( 'plugin_depends' ) ?></td>
+	<td width="40%"><?php echo lang_get( 'plugin_description' ) ?></td>
+	<td width="15%"><?php echo lang_get( 'plugin_depends' ) ?></td>
+	<td width="7%"><?php echo lang_get( 'plugin_priority' ) ?></td>
+	<td width="8%"><?php echo lang_get( 'plugin_protected' ) ?></td>
 	<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
 </tr>
 
@@ -82,6 +84,8 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	$t_url = $t_plugin->url;
 	$t_requires = $t_plugin->requires;
 	$t_depends = array();
+	$t_priority = plugin_priority( $t_basename );
+	$t_protected = plugin_protected( $t_basename );
 
 	$t_name = string_display_line( $t_plugin->name.' '.$t_plugin->version );
 	if ( !is_blank( $t_page ) ) {
@@ -111,7 +115,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	}
 
 	$t_uninstall = '';
-	if ( 'MantisCore' != $t_basename ) {
+	if ( 'MantisCore' != $t_basename && !$t_protected ) {
 		$t_uninstall = '<form action="manage_plugin_uninstall.php?name='.$t_basename.'" method="post">'.
 			'<input type="submit" value="'.lang_get( 'plugin_uninstall' ).'"></form>';
 	}
@@ -143,7 +147,16 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	echo '<td class="center">',$t_name,'</td>';
 	echo '<td>',$t_description,$t_author,$t_url,'</td>';
 	echo '<td class="center">',$t_depends,'</td>';
-	echo '<td class="center">',$t_upgrade,$t_uninstall,'</td>';
+	if ( 'MantisCore' != $t_basename ) {
+		echo '<td class="center"><form action="manage_plugin_update.php?name='.$t_basename.'" method="post">',
+				'<select name="priority">',print_plugin_priority_list( $t_priority ),'</select>','</td>';
+		echo '<td class="center">','<input type="checkbox" name="protected" value="1" '.( $t_protected ? 'checked="checked" ' : '').'/>','</td>';
+		$t_update = '<input type="submit" value="'.lang_get( 'plugin_update' ).'"></form>';
+	} else {
+		echo '<td>&nbsp;</td><td>&nbsp;</td>';
+		$t_update = '';
+	}
+	echo '<td class="center">',$t_update,$t_upgrade,$t_uninstall,'</td>';
 	echo '</tr>';
 } ?>
 
