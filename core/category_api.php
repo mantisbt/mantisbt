@@ -101,6 +101,11 @@
 	function category_add( $p_project_id, $p_name ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
 
+		if ( is_blank( $p_name ) ) {
+			error_parameters( lang_get( 'category' ) );
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+
 		category_ensure_unique( $p_project_id, $p_name );
 
 		$t_category_table = db_get_table( 'mantis_category_table' );
@@ -118,6 +123,11 @@
 	# --------------------
 	# Update the name and user associated with the category
 	function category_update( $p_category_id, $p_name, $p_assigned_to ) {
+		if ( is_blank( $p_name ) ) {
+			error_parameters( lang_get( 'category' ) );
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+
 		$t_old_category = category_get_row( $p_category_id );
 
 		$c_category_id	= db_prepare_int( $p_category_id );
