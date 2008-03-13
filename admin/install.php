@@ -969,7 +969,7 @@ if ( 7 == $t_install_state ) {
 ?>
 <p>Install was successful.</p>
 <?php if ( $f_db_exists ) { ?>
-<p><a href="<?php helper_mantis_url( 'login_page.php' ); ?>">Continue</a> to log into Mantis</p>
+<p><a href="<?php echo helper_mantis_url( 'login_page.php' ); ?>">Continue</a> to log into Mantis</p>
 <?php } else { ?>
 <p>Please log in as the administrator and <a href="../manage_proj_create_page.php">create</a> your first project.
 
