@@ -166,11 +166,21 @@
 			$t_issue_set_levels = array();
 			$k = 0;
 			
+			$t_cycle = false;
+			$t_cycle_ids = array();
+
 			while ( 0 < count( $t_issue_ids ) ) {
 				$t_issue_id = $t_issue_ids[$k];
 				$t_issue_parent = $t_issue_parents[$k];
 				
-				if ( !in_array( $t_issue_parent, $t_issue_ids ) ) {
+				if ( in_array( $t_issue_id, $t_cycle_ids ) || in_array( $t_parent_id, $t_cycle_ids ) ) {
+					$t_cycle = true;
+				} else {
+					$t_cycle = false;
+					$t_cycle_ids[] = $t_issue_id;
+				}
+
+				if ( $t_cycle || !in_array( $t_issue_parent, $t_issue_ids ) ) {
 					$l = array_search( $t_issue_parent, $t_issue_set_ids );
 					if ( $l !== false ) {
 						for ( $m = $l+1; $m < count( $t_issue_set_ids ) && $t_issue_set_levels[$m] > $t_issue_set_levels[$l]; $m++ ) {
@@ -189,6 +199,8 @@
 					}
 					array_splice( $t_issue_ids, $k, 1 );
 					array_splice( $t_issue_parents, $k, 1 );
+
+					$t_cycle_ids = array();
 				}
 				else {
 					$k++;
