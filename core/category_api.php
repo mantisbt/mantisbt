@@ -227,7 +227,7 @@
 
 		# update bug data
 		$query = "UPDATE $t_bug_table
-				  SET category=" . db_param(0) . '
+				  SET category_id=" . db_param(0) . '
 				  WHERE project_id=' . db_param(1);
 		db_query_bound( $query, array( $c_new_category_id, $c_project_id ) );
 
