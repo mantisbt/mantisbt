@@ -77,7 +77,7 @@
 
 	<!-- Category -->
 	<td>
-		<?php echo $t_bug->category ?>
+		<?php echo category_full_name( $t_bug->category_id ) ?>
 	</td>
 
 	<!-- Severity -->
