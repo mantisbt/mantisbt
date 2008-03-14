@@ -32,7 +32,7 @@
 	$f_view_state 	= gpc_get_int( 'view_state' );
 	$f_file_path 	= gpc_get_string( 'file_path', '' );
 	$f_enabled	 	= gpc_get_bool( 'enabled' );
-	$f_inherit_global = gpc_get_bool( 'inherit_global', 1 );
+	$f_inherit_global = gpc_get_bool( 'inherit_global', 0 );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
