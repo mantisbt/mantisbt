@@ -79,6 +79,12 @@
 	}
 
 	# --------------------
+	function mci_has_access( $p_access_level, $p_user_id, $p_project_id = ALL_PROJECTS ) {
+		$t_access_level = user_get_access_level( $p_user_id, $p_project_id );
+		return ( $t_access_level >= (int)$p_access_level );
+	}
+
+	# --------------------
 	function mci_has_administrator_access( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		$t_access_level = user_get_access_level( $p_user_id, $p_project_id );
 		return ( $t_access_level >= config_get( 'mc_admin_access_level_threshold' ) );

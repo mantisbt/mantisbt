@@ -272,27 +272,43 @@
 	 */	 
 	function mc_project_version_add( $p_username, $p_password, $p_version ) {
 		$t_user_id = mci_check_login( $p_username, $p_password );		
+
 		if ( $t_user_id === false ) {
 			return new soap_fault( 'Client', '', 'Access Denied', 'Username/password combination was incorrect');
 		}
-		if ( !mci_has_administrator_access( $t_user_id ) ) {
-			return new soap_fault( 'Client', '', 'Access Denied', 'User does not have administrator access');
-		}
+
 		extract( $p_version, EXTR_PREFIX_ALL, 'v');
+
 		if ( is_blank( $v_project_id ) ) {
 			return new soap_fault('Client', '', 'Mandatory field "project_id" was missing');
 		}
+
+		if ( !project_exists( $v_project_id ) ) {
+			return new soap_fault( 'Client', '', "Version '$v_project_id' does not exist." );
+		}
+
+		if ( !mci_has_readwrite_access( $t_user_id, $v_project_id ) ) {
+			return new soap_fault( 'Client', '', 'Access Denied' );
+		}
+
+		if ( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $v_project_id ) ) {
+			return new soap_fault( 'Client', '', 'Access Denied' );
+		}
+
 		if ( is_blank( $v_name ) ) {
 			return new soap_fault('Client', '', 'Mandatory field "name" was missing');
 		}
+
 		if ( !version_is_unique( $v_name, $v_project_id ) ) {
 			return new soap_fault( 'Client', '', 'Version exists for project', 'The version you attempted to add already exists for this project');
 		}
+
 		if ( $v_released === false ) {
 			$v_released = VERSION_FUTURE;
 		} else {
 			$v_released = VERSION_RELEASED;
 		}
+
 		if ( version_add( $v_project_id, $v_name, $v_released, $v_description ) ) {
 			$t_version_id = version_get_id( $v_name, $v_project_id );
 			if ( !is_blank( $v_date_order ) ) {
@@ -317,38 +333,53 @@
 	 */	 
 	function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_version ) {
 		$t_user_id = mci_check_login( $p_username, $p_password );		
+
 		if ( $t_user_id === false ) {
 			return new soap_fault( 'Client', '', 'Access Denied', 'Username/password combination was incorrect');
 		}
-		if ( !mci_has_administrator_access( $t_user_id ) ) {
-			return new soap_fault( 'Client', '', 'Access Denied', 'User does not have administrator access');
-		}
+
 		if ( is_blank( $p_version_id ) ) {
 			return new soap_fault('Client', '', 'Mandatory field "version_id" was missing');
 		}
+
 		if ( !version_exists( $p_version_id ) ) {
 			return new soap_fault( 'Client', '', "Version '$p_version_id' does not exist." );
 		}
+
 		extract( $p_version, EXTR_PREFIX_ALL, 'v');
+
 		if ( is_blank( $v_project_id ) ) {
 			return new soap_fault('Client', '', 'Mandatory field "project_id" was missing');
 		}
+
 		if ( !project_exists( $v_project_id ) ) {
 			return new soap_fault( 'Client', '', "Version '$v_project_id' does not exist." );
 		}
+
+		if ( !mci_has_readwrite_access( $t_user_id, $v_project_id ) ) {
+			return new soap_fault( 'Client', '', 'Access Denied' );
+		}
+
+		if ( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $v_project_id ) ) {
+			return new soap_fault( 'Client', '', 'Access Denied' );
+		}
+
 		if ( is_blank( $v_name ) ) {
 			return new soap_fault('Client', '', 'Mandatory field "name" was missing');
 		}
+
 		# check for duplicates
 		$t_old_version_name = version_get_field( $p_version_id, 'version' );
 		if ( ( strtolower( $t_old_version_name ) != strtolower( $v_name ) ) && !version_is_unique( $v_name, $v_project_id ) ) {
 			return new soap_fault( 'Client', '', 'Version exists for project', 'The version you attempted to update already exists for this project');
 		}
+
 		if ( $v_released === false ) {
 			$v_released = VERSION_FUTURE;
 		} else {
 			$v_released = VERSION_RELEASED;
 		}
+
 		$t_version_data = new VersionData();
 		$t_version_data->id = $p_version_id;
 		$t_version_data->project_id = $v_project_id;
@@ -356,6 +387,7 @@
 		$t_version_data->description = $v_description;
 		$t_version_data->released = $v_released;
 		$t_version_data->date_order = $v_date_order;
+
 		return version_update( $t_version_data );
 	}
 	
@@ -369,18 +401,29 @@
 	 */
 	function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
 		$t_user_id = mci_check_login( $p_username, $p_password );		
+
 		if ( $t_user_id === false ) {
 			return new soap_fault( 'Client', '', 'Access Denied', 'Username/password combination was incorrect');
 		}
-		if ( !mci_has_administrator_access( $t_user_id ) ) {
-			return new soap_fault( 'Client', '', 'Access Denied', 'User does not have administrator access');
-		}
+
 		if ( is_blank( $p_version_id ) ) {
 			return new soap_fault('Client', '', 'Mandatory field "version_id" was missing');
 		}
+
 		if ( !version_exists( $p_version_id ) ) {
 			return new soap_fault( 'Client', '', "Version '$p_version_id' does not exist." );
 		}
+
+		$t_project_id = version_get_field( $p_version_id, 'project_id' );
+
+		if ( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
+			return new soap_fault( 'Client', '', 'Access Denied' );
+		}
+
+		if ( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
+			return new soap_fault( 'Client', '', 'Access Denied' );
+		}
+
 		return version_remove( $p_version_id );
 	}
 	
