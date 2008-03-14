@@ -33,7 +33,6 @@
 			'category',
 			'date_submitted',
 			'description',     // new
-			'duplicate_id',
 			'edit',
 			'eta',
 			'fixed_in_version',
@@ -234,15 +233,6 @@
 		echo '<td>';
 		print_view_bug_sort_link( lang_get( 'email_project' ), 'project_id', $p_sort, $p_dir, $p_columns_target );
 		print_sort_icon( $p_dir, $p_sort, 'project_id' );
-		echo '</td>';
-	}
-
-	# --------------------
-	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
-	function print_column_title_duplicate_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-		echo '<td>';
-		print_view_bug_sort_link( lang_get( 'duplicate_id' ), 'duplicate_id', $p_sort, $p_dir, $p_columns_target );
-		print_sort_icon( $p_dir, $p_sort, 'duplicate_id' );
 		echo '</td>';
 	}
 

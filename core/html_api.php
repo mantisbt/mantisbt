@@ -1172,12 +1172,10 @@
 	# --------------------
 	# Print a button to move the given bug to a different project
 	function html_button_bug_create_child( $p_bug_id ) {
-		if ( ON == config_get( 'enable_relationship' ) ) {
-			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-				html_button( string_get_bug_report_url(),
-							 lang_get( 'create_child_bug_button' ),
-							 array( 'm_id' => $p_bug_id ) );
-			}
+		if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+			html_button( string_get_bug_report_url(),
+							lang_get( 'create_child_bug_button' ),
+							array( 'm_id' => $p_bug_id ) );
 		}
 	}
 

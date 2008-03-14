@@ -362,15 +362,6 @@
 	}
 
 	/**
-	 * Gets the formatted duplicate id.
-	 * @param $p_duplicate_id The duplicate id.
-	 * @returns The duplicate id prefixed with 0s.
-	 */
-	function excel_format_duplicate_id( $p_duplicate_id ) {
-		return excel_prepare_string( bug_format_id( $p_duplicate_id ) );
-	}
-
-	/**
 	 * Gets the formatted selection.
 	 * @param $p_selection The selection value
 	 * @returns An formatted empty string.

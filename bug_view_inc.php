@@ -176,21 +176,8 @@
 		<?php echo get_enum_element( 'status', $t_bug->status ) ?>
 	</td>
 
-	<!-- Duplicate ID -->
-	<td class="category">
-		<?php
-			if ( ! config_get( 'enable_relationship' ) ) {
-				echo lang_get( 'duplicate_id' );
-			} # MASC RELATIONSHIP
-		?>&nbsp;
-	</td>
-	<td>
-		<?php
-			if ( !config_get( 'enable_relationship' ) ) {
-				print_duplicate_id( $t_bug->duplicate_id );
-			} # MASC RELATIONSHIP
-		?>&nbsp;
-	</td>
+	<td class="category">&nbsp;</td>
+	<td>&nbsp;</td>
 
 	<!-- spacer -->
 	<td colspan="2">&nbsp;</td>

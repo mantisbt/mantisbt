@@ -122,4 +122,6 @@
 	config_obsolete( 'wait_time', 'default_redirect_delay' );
 	config_obsolete( 'default_bug_category', '' );
 
+# changes in 1.2.0a1
+	config_obsolete( 'enable_relationship', '' );
 ?>

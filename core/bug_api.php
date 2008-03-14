@@ -592,11 +592,9 @@
 			}
 		}
 
-		# COPY RELATIONSHIPS
+		# Copy Relationships
 		if ( $p_copy_relationships ) {
-			if ( ON == config_get( 'enable_relationship' ) ) {
-				relationship_copy_all( $t_bug_id,$t_new_bug_id );
-			}
+			relationship_copy_all( $t_bug_id,$t_new_bug_id );
 		}
 
 		# Copy bugnotes
@@ -907,7 +905,6 @@
 		history_log_event_direct( $p_bug_id, 'project_id', $t_old_data->project_id, $p_bug_data->project_id );
 		history_log_event_direct( $p_bug_id, 'reporter_id', $t_old_data->reporter_id, $p_bug_data->reporter_id );
 		history_log_event_direct( $p_bug_id, 'handler_id', $t_old_data->handler_id, $p_bug_data->handler_id );
-		history_log_event_direct( $p_bug_id, 'duplicate_id', $t_old_data->duplicate_id, $p_bug_data->duplicate_id );
 		history_log_event_direct( $p_bug_id, 'priority', $t_old_data->priority, $p_bug_data->priority );
 		history_log_event_direct( $p_bug_id, 'severity', $t_old_data->severity, $p_bug_data->severity );
 		history_log_event_direct( $p_bug_id, 'reproducibility', $t_old_data->reproducibility, $p_bug_data->reproducibility );
@@ -1210,8 +1207,11 @@
 		# updated the last_updated date
 		bug_update_date( $p_bug_id );
 
-		# log changes
-		history_log_event_direct( $p_bug_id, $p_field_name, $h_status, $p_status );
+		# log changes except for duplicate_id which is obsolete and should be removed in
+		# Mantis 1.3.
+		if ( $p_field_name != 'duplicate_id' ) {
+			history_log_event_direct( $p_bug_id, $p_field_name, $h_status, $p_status );
+		}
 
 		bug_clear_cache( $p_bug_id );
 
@@ -1283,12 +1283,7 @@
 		}
 
 		email_close( $p_bug_id );
-
-		# MASC RELATIONSHIP
-		if ( ON == config_get( 'enable_relationship' ) ) {
-			email_relationship_child_closed( $p_bug_id );
-		}
-		# MASC RELATIONSHIP
+		email_relationship_child_closed( $p_bug_id );
 
 		return true;
 	}
@@ -1307,32 +1302,28 @@
 			# the related bug exists...
 			bug_ensure_exists( $p_duplicate_id );
 
-			if ( ON == config_get( 'enable_relationship' ) ) {
-				# check if there is other relationship between the bugs...
-				$t_id_relationship = relationship_same_type_exists( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
+			# check if there is other relationship between the bugs...
+			$t_id_relationship = relationship_same_type_exists( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 
-				if ( $t_id_relationship == -1 ) {
-					# the relationship type is already set. Nothing to do
-				}
-				else if ( $t_id_relationship > 0 ) {
-					# there is already a relationship between them -> we have to update it and not to add a new one
-					helper_ensure_confirmed( lang_get( 'replace_relationship_sure_msg' ), lang_get( 'replace_relationship_button' ) );
+			if ( $t_id_relationship == -1 ) {
+				# the relationship type is already set. Nothing to do
+			} else if ( $t_id_relationship > 0 ) {
+				# there is already a relationship between them -> we have to update it and not to add a new one
+				helper_ensure_confirmed( lang_get( 'replace_relationship_sure_msg' ), lang_get( 'replace_relationship_button' ) );
 
-					# Update the relationship
-					relationship_update( $t_id_relationship, $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
+				# Update the relationship
+				relationship_update( $t_id_relationship, $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 
-					# Add log line to the history (both bugs)
-					history_log_event_special( $p_bug_id, BUG_REPLACE_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
-					history_log_event_special( $p_duplicate_id, BUG_REPLACE_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
-				}
-				else {
-					# Add the new relationship
-					relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
+				# Add log line to the history (both bugs)
+				history_log_event_special( $p_bug_id, BUG_REPLACE_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
+				history_log_event_special( $p_duplicate_id, BUG_REPLACE_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
+			} else {
+				# Add the new relationship
+				relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 
-					# Add log line to the history (both bugs)
-					history_log_event_special( $p_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
-					history_log_event_special( $p_duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
-				}
+				# Add log line to the history (both bugs)
+				history_log_event_special( $p_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
+				history_log_event_special( $p_duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
 			}
 
 			bug_set_field( $p_bug_id, 'duplicate_id', (int)$p_duplicate_id );
@@ -1358,16 +1349,11 @@
 		}
 
 		email_resolved( $p_bug_id );
+		email_relationship_child_resolved( $p_bug_id );
 
 		if ( $c_resolution == FIXED ) {
 			twitter_issue_resolved( $p_bug_id );
 		}
-
-		# MASC RELATIONSHIP
-		if ( ON == config_get( 'enable_relationship' ) ) {
-			email_relationship_child_resolved( $p_bug_id );
-		}
-		# MASC RELATIONSHIP
 
 		return true;
 	}

@@ -276,21 +276,7 @@
 								( ON == config_get( 'allow_reporter_close' ) ) ), $t_bug->project_id ) ?>
 	</td>
 
-	<?php
-		# Duplicate Id
-
-		# MASC RELATIONSHIP
-		if ( OFF == config_get( 'enable_relationship' ) ) {
-			# Duplicate ID
-			echo '<td class="category">', lang_get( 'duplicate_id' ), '&nbsp;</td>';
-			echo '<td>';
-			echo '<input ', helper_get_tab_index(), ' type="text" name="duplicate_id" value="', $t_bug->duplicate_id, '" maxlength="7" />&nbsp;';
-			echo '</td>';
-		} else {
-			# spacer
-			echo '<td colspan="2">&nbsp;</td>';
-		}
-	?>
+	<td colspan="2">&nbsp;</td>
 
 	<!-- Operating System -->
 	<td class="category">

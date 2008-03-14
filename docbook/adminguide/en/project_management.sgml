@@ -20,7 +20,7 @@
 function custom_function_override_changelog_include_issue( $p_issue_id ) {
     $t_issue = bug_get( $p_issue_id );
 
-    return ( ( $t_issue->duplicate_id == 0 ) && ( $t_issue->resolution == FIXED || $t_issue->resolution == IMPLEMENTED ) &&
+    return ( ( $t_issue->resolution == FIXED || $t_issue->resolution == IMPLEMENTED ) &&
         ( $t_issue->status >= config_get( 'bug_resolved_status_threshold' ) ) );
 }
 </programlisting>
@@ -90,9 +90,7 @@ http://www.example.com/mantis/project_page.php?project_id=1
 # Checks the provided bug and determines whether it should be included in the roadmap or not.
 # returns true: to include, false: to exclude.
 function custom_function_override_roadmap_include_issue( $p_issue_id ) {
-    $t_issue = bug_get( $p_issue_id );
-
-    return ( $t_issue->duplicate_id == 0 );
+    return ( true );
 }
 </programlisting>
         </para>

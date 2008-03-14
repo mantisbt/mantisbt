@@ -252,18 +252,10 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo get_enum_element( 'projection', $t_bug->projection ) ?>
 	</td>
 	<td class="print-category">
-		<?php
-			if ( !config_get( 'enable_relationship' ) ) {
-				echo lang_get( 'duplicate_id' );
-			}
-		?>&nbsp;
+		&nbsp;
 	</td>
 	<td class="print">
-		<?php
-			if ( !config_get( 'enable_relationship' ) ) {
-				print_duplicate_id( $t_bug->duplicate_id );
-			}
-		?>&nbsp;
+		&nbsp;
 	</td>
 	<td class="print" colspan="2">&nbsp;</td>
 </tr>

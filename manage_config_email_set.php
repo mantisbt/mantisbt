@@ -51,10 +51,9 @@
 	if( config_get( 'enable_sponsorship' ) == ON ) {
 		$t_valid_actions[] = 'sponsor';
 	}
-	if( config_get( 'enable_relationship' ) == ON ) {
-		$t_valid_actions[] = 'relationship';
-	}
-	
+
+	$t_valid_actions[] = 'relationship';
+
 	$t_statuses = get_enum_to_array( config_get( 'status_enum_string' ) );
     ksort( $t_statuses );
     reset( $t_statuses );

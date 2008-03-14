@@ -375,9 +375,7 @@
 			$t_keys_to_remove[] = 'attachment';
 		}
 
-		if ( OFF == config_get( 'enable_relationship' ) ) {
-			$t_keys_to_remove[] = 'duplicate_id';
-		}
+		$t_keys_to_remove[] = 'duplicate_id';
 
 		$t_current_project_id = helper_get_current_project();
 

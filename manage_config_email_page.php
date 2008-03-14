@@ -192,9 +192,9 @@
 	if( config_get( 'enable_sponsorship' ) == ON ) {
 		$t_actions[] = 'sponsor';
 	}
-	if( config_get( 'enable_relationship' ) == ON ) {
-		$t_actions[] = 'relationship';
-	}
+
+	$t_actions[] = 'relationship';
+
 	$t_statuses = get_enum_to_array( config_get( 'status_enum_string' ) );
 	foreach( $t_statuses as $t_status ) {
 		$t_actions[] =  $t_status;
@@ -261,9 +261,9 @@
 		if( config_get( 'enable_sponsorship' ) == ON ) {
 			get_capability_row_for_email( lang_get( 'email_on_sponsorship_changed' ), 'sponsor' );
 		}
-		if( config_get( 'enable_relationship' ) == ON ) {
-			get_capability_row_for_email( lang_get( 'email_on_relationship_changed' ), 'relationship' );
-		}
+
+		get_capability_row_for_email( lang_get( 'email_on_relationship_changed' ), 'relationship' );
+
 		$t_statuses = explode_enum_string( config_get( 'status_enum_string' ) );
 		foreach( $t_statuses as $t_status ) {
 			list( $t_state, $t_label ) = explode_enum_arr( $t_status );

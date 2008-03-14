@@ -225,18 +225,10 @@
 		<?php echo get_enum_element( 'projection', $v_projection ) ?>
 	</td>
 	<td class="print-category">
-		<?php
-			if ( !config_get( 'enable_relationship' ) ) {
-				echo lang_get( 'duplicate_id' );
-			} # MASC RELATIONSHIP
-		?>&nbsp;
+		&nbsp;
 	</td>
 	<td class="print">
-		<?php
-			if ( !config_get( 'enable_relationship' ) ) {
-				print_duplicate_id( $v_duplicate_id );
-			} # MASC RELATIONSHIP
-		?>&nbsp;
+		&nbsp;
 	</td>
 	<td class="print" colspan="2">&nbsp;</td>
 </tr>
@@ -336,13 +328,9 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 <?php
 	}
 
-	# MASC RELATIONSHIP
-	if ( ON == config_get( 'enable_relationship' ) ) {
-		echo "<tr class=\"print\">";
-		echo "<td class=\"print-category\">" . lang_get( 'bug_relationships' ) . "</td>";
-		echo "<td class=\"print\" colspan=\"5\">" . relationship_get_summary_html_preview( $c_bug_id ) . "</td></tr>";
-	}
-	# MASC RELATIONSHIP
+	echo "<tr class=\"print\">";
+	echo "<td class=\"print-category\">" . lang_get( 'bug_relationships' ) . "</td>";
+	echo "<td class=\"print\" colspan=\"5\">" . relationship_get_summary_html_preview( $c_bug_id ) . "</td></tr>";
 ?>
 <tr class="print">
 	<td class="print-category">

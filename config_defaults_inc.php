@@ -539,12 +539,12 @@
 	# The default columns to be included in the CSV export.
 	# This can be overriden using Manage -> Manage Configuration -> Manage Columns
 	# Also each user can configure their own columns using My Account -> Manage Columns
-	$g_csv_columns = array ( 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'reproducibility', 'version', 'projection', 'category', 'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state', 'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version', 'duplicate_id' );
+	$g_csv_columns = array ( 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'reproducibility', 'version', 'projection', 'category', 'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state', 'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version' );
 
 	# The default columns to be included in the Excel export.
 	# This can be overriden using Manage -> Manage Configuration -> Manage Columns
 	# Also each user can configure their own columns using My Account -> Manage Columns
-	$g_excel_columns = array ( 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'reproducibility', 'version', 'projection', 'category', 'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state', 'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version', 'duplicate_id' );
+	$g_excel_columns = array ( 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'reproducibility', 'version', 'projection', 'category', 'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state', 'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version' );
 
 	# --- show projects when in All Projects mode ---
 	$g_show_bug_project_links	= ON;
@@ -1773,10 +1773,6 @@
 	######################
 	# Bug Relationships
 	######################
-
-	# Enable support for bug relationships where a bug can be a related, dependent on, or duplicate of another.
-	# See relationship_api.php for more details.
-	$g_enable_relationship = ON;
 
 	# --- Relationship Graphs -----------
 	# Show issue relationships using graphs.

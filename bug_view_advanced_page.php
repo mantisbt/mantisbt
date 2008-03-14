@@ -277,20 +277,7 @@
 		<?php echo get_enum_element( 'status', $t_bug->status ) ?>
 	</td>
 
-	<?php
-		# Duplicate Id
-		# MASC RELATIONSHIP
-		if ( OFF == config_get( 'enable_relationship' ) ) {
-			# Duplicate ID
-			echo '<td class="category">', lang_get( 'duplicate_id' ), '&nbsp;</td>';
-			echo '<td>';
-			print_duplicate_id( $t_bug->duplicate_id );
-			echo '</td>';
-		} else {
-			# spacer
-			echo '<td colspan="2">&nbsp;</td>';
-		}
-	?>
+	<td colspan="2">&nbsp;</td>
 
 	<!-- Operating System -->
 	<td class="category">
@@ -574,11 +561,7 @@
 	include( $t_mantis_dir . 'bug_sponsorship_list_view_inc.php' );
 
 	# Bug Relationships
-	# MASC RELATIONSHIP
-	if ( ON == config_get( 'enable_relationship' ) ) {
-		relationship_view_box ( $f_bug_id );
-	}
-	# MASC RELATIONSHIP
+	relationship_view_box ( $f_bug_id );
 
 	# File upload box
 	if ( !bug_is_readonly( $f_bug_id ) ) {

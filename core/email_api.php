@@ -1025,7 +1025,6 @@
 		if ( config_get( 'bug_resolved_status_threshold' ) <= $t_status ) {
 			$p_visible_bug_data['email_resolution'] = get_enum_element( 'resolution', $p_visible_bug_data['email_resolution'] );
 			$t_message .= email_format_attribute( $p_visible_bug_data, 'email_resolution' );
-			$t_message .= email_format_attribute( $p_visible_bug_data, 'email_duplicate' );
 			$t_message .= email_format_attribute( $p_visible_bug_data, 'email_fixed_in_version' );
 		}
 		$t_message .= $t_email_separator1 . " \n";
@@ -1038,13 +1037,9 @@
 
 		$t_message .= lang_get( 'email_description' ) . ": \n".wordwrap( $p_visible_bug_data['email_description'] )."\n";
 
-		# MASC RELATIONSHIP
-		if ( ON == config_get( 'enable_relationship' ) ) {
-			if (isset( $p_visible_bug_data['relations'] )) {
-				$t_message .= $p_visible_bug_data['relations'];
-			}
+		if (isset( $p_visible_bug_data['relations'] )) {
+			$t_message .= $p_visible_bug_data['relations'];
 		}
-		# MASC RELATIONSHIP
 
 		# Sponsorship
 		if ( isset( $p_visible_bug_data['sponsorship_total'] ) && ( $p_visible_bug_data['sponsorship_total'] > 0 ) ) {
@@ -1184,10 +1179,6 @@
 			$t_bug_data['email_target_version'] = $row['target_version'];
 		}
 
-		if ( DUPLICATE == $row['resolution'] ) {
-			$t_bug_data['email_duplicate'] = $row['duplicate_id'];
-		}
-
 		$t_bug_data['email_summary'] = $row['summary'];
 		$t_bug_data['email_description'] = $row['description'];
 
@@ -1214,10 +1205,7 @@
 			}
 		}
 
-		# MASC RELATIONSHIP
-		if ( ON == config_get( 'enable_relationship' ) ) {
-			$t_bug_data['relations'] = relationship_get_summary_text( $p_bug_id );
-		}
+		$t_bug_data['relations'] = relationship_get_summary_text( $p_bug_id );
 
 		return $t_bug_data;
 	}

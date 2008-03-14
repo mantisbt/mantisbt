@@ -2366,29 +2366,17 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
     </section>
-    
-    
+
     <section>
         <title>Relationships</title>
-        
+
         <variablelist>
             <varlistentry>
-                <term>$g_enable_relationship</term>
-                <listitem>
-                    <para>Enable support for bug relationships where a bug can be
-                        "related to", "parent of", "child of", or "duplicate of" another.
-                        See relationship_api.php for more details. The default is
-                        ON.
-                    </para>
-                </listitem>
             </varlistentry>
         </variablelist>
-        
     </section>
-    
-    
+
     <section>
         <title>System Logging</title>
         <para>The system logging interface is used to extract detailed

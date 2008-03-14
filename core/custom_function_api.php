@@ -34,7 +34,7 @@
 	function custom_function_default_changelog_include_issue( $p_issue_id ) {
 		$t_issue = bug_get( $p_issue_id );
 
-		return ( ( $t_issue->duplicate_id == 0 ) && ( $t_issue->resolution == FIXED ) &&
+		return ( ( $t_issue->resolution == FIXED ) &&
 			( $t_issue->status >= config_get( 'bug_resolved_status_threshold' ) ) );
 	}
 
@@ -64,9 +64,7 @@
 	# Checks the provided bug and determines whether it should be included in the roadmap or not.
 	# returns true: to include, false: to exclude.
 	function custom_function_default_roadmap_include_issue( $p_issue_id ) {
-		$t_issue = bug_get( $p_issue_id );
-
-		return ( $t_issue->duplicate_id == 0 );
+		return true;
 	}
 
 	# --------------------

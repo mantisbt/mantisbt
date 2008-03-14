@@ -104,14 +104,11 @@
 </tr>
 
 <?php
-# relationship warnings
-if ( ON == config_get( 'enable_relationship' ) ) {
 	if ( $t_resolved <= $f_new_status ) {
 		if ( relationship_can_resolve_bug( $f_bug_id ) == false ) {
 			echo "<tr><td colspan=\"2\">" . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . "</td></tr>";
 		}
 	}
-}
 ?>
 
 <?php

@@ -183,12 +183,6 @@
 		}
 	}
 	# --------------------
-	function print_duplicate_id( $p_duplicate_id ) {
-		if ( $p_duplicate_id != 0 ) {
-			PRINT string_get_bug_view_link( $p_duplicate_id );
-		}
-	}
-	# --------------------
 	# print out an email editing input
 	function print_email_input( $p_field_name, $p_email ) {
 		$t_limit_email_domain = config_get( 'limit_email_domain' );
@@ -274,23 +268,6 @@
 	#  faster query actually.
 	function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
 		print_user_option_list( $p_user_id, $p_project_id, config_get( 'report_bug_threshold' ) );
-	}
-
-	# --------------------
-	function print_duplicate_id_option_list() {
-	    $query = "SELECT id
-	    		FROM " . db_get_table( 'mantis_bug_table' ) . "
-	    		ORDER BY id ASC";
-	    $result = db_query_bound( $query );
-	    $duplicate_id_count = db_num_rows( $result );
-	    PRINT '<option value="0"></option>';
-
-	    for ($i=0;$i<$duplicate_id_count;$i++) {
-	    	$row = db_fetch_array( $result );
-	    	$t_duplicate_id	= $row['id'];
-
-			PRINT "<option value=\"$t_duplicate_id\">".$t_duplicate_id."</option>";
-		}
 	}
 
 	/**
