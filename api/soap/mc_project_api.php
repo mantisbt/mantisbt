@@ -284,7 +284,7 @@
 		}
 
 		if ( !project_exists( $v_project_id ) ) {
-			return new soap_fault( 'Client', '', "Version '$v_project_id' does not exist." );
+			return new soap_fault( 'Client', '', "Project '$v_project_id' does not exist." );
 		}
 
 		if ( !mci_has_readwrite_access( $t_user_id, $v_project_id ) ) {
@@ -353,7 +353,7 @@
 		}
 
 		if ( !project_exists( $v_project_id ) ) {
-			return new soap_fault( 'Client', '', "Version '$v_project_id' does not exist." );
+			return new soap_fault( 'Client', '', "Project '$v_project_id' does not exist." );
 		}
 
 		if ( !mci_has_readwrite_access( $t_user_id, $v_project_id ) ) {
