@@ -109,7 +109,7 @@
 			}
 			$filter = $_GET['filter_target'];
 			$t_functionName = 'print_filter_'. substr($filter,0,-7);
-			echo "<!-- $filter -->";
+			echo "<!-- " . string_display_line( $filter ) . " -->";
 			if(function_exists($t_functionName)){
 				call_user_func($t_functionName);
 			}elseif('custom_field' == substr($filter, 0, 12)){
@@ -120,7 +120,7 @@
 				# error - no function to populate the target (e.g., print_filter_foo)
 				?>
 				<span style="color:red;weight:bold;">
-					unknown filter (<?php echo $filter; ?>)
+					unknown filter (<?php echo string_display_line( $filter ); ?>)
 				</span>
 				<?php
 			}
