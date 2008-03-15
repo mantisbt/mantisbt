@@ -21,7 +21,7 @@
 #   http://freemind.sourceforge.net/wiki/index.php/Flash_browser
 
 # --------------------------------------------------------
-# $Id: $
+# $Id$
 # --------------------------------------------------------
 
 require_once( 'core.php' );

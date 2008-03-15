@@ -24,7 +24,7 @@
 # Copyright (C) 2006-2008 Peter Tandler - http://www.digital-moderation.com
 
 # --------------------------------------------------------
-# $Id: $
+# $Id$
 # --------------------------------------------------------
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
