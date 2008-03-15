@@ -1505,4 +1505,8 @@ $s_update_columns_as_global_default = 'Update Columns as Global Default for All 
 $s_update_columns_for_current_project = 'Update Columns For Current Project';
 $s_update_columns_as_my_default = 'Update Columns as Default for All Projects';
 $s_reset_columns_configuration = 'Reset Columns Configuration';
+
+# mind mapping
+$s_mindmap = 'Mindmap';
+$s_freemind_export = 'Freemind Export';
 ?>

@@ -2425,6 +2425,21 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+    </section>
+
+    <section>
+	    <title>Mind Mapping</title>
+
+	    <para>This feature is about generating a mindmap based on issues matching the current active filter.</para>
+
+	    <variablelist>
+		    <varlistentry>
+			    <term>$g_mindmap_enabled</term>
+			    <listitem>
+				    <para>Enables or disables the mind mapping features including ability to export Freemind files and in browser view of generated mindmaps. Default is ON.
+				    </para>
+			    </listitem>
+		    </varlistentry>
+	    </variablelist>
     </section>
 </chapter>

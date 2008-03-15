@@ -1985,4 +1985,14 @@
 
 	# management threshold.
 	$g_manage_plugin_threshold = ADMINISTRATOR;
+
+	#############################
+	# Mind mapping
+	#############################
+	
+	# This feature is about generating a mindmap based on issues matching the current active filter.
+
+	# Enables or disables the mind mapping features including ability to export Freemind files and 
+	# in browser view of generated mindmaps.
+	$g_mindmap_enabled = ON;
 ?>
