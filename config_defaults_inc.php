@@ -1713,7 +1713,7 @@
 	$g_status_icon_arr = array (
 		NONE      => '',
 		LOW       => 'priority_low_1.gif',
-		NORMAL    => '',
+		NORMAL    => 'priority_normal.gif',
 		HIGH      => 'priority_1.gif',
 		URGENT    => 'priority_2.gif',
 		IMMEDIATE => 'priority_3.gif'
