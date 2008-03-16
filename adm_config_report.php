@@ -148,6 +148,9 @@
 	} # end for loop
 ?>
 </table>
+<?php
+    if ( access_has_global_level( config_get('set_configuration_threshold' ) ) ) {
+?>
 <br />
 <!-- Config Set Form -->
 <table class="width100" cellspacing="1">
@@ -217,6 +220,9 @@
 </tr>
 		</form>
 </table>
+<?php
+	} # end user can change config
+?>
 </div>
 <?php
 	html_page_bottom1( __FILE__ );
