@@ -98,7 +98,7 @@ $s_bug_relationships = 'Relationships';
 $s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
 $s_empty_password_button = 'Use Empty Password';
 $s_reauthenticate_title = 'Authenticate';
-$s_reauthenticate_message = 'You are visting a secure page, and your secure session has expired.  Please authenticate yourself to continue.';
+$s_reauthenticate_message = 'You are visiting a secure page, and your secure session has expired.  Please authenticate yourself to continue.';
 
 $s_duplicate_of = "duplicate of";
 $s_has_duplicate = "has duplicate";
