@@ -195,7 +195,7 @@
 				$t_issue_id = $t_issue_ids[$k];
 				$t_issue_parent = $t_issue_parents[$k];
 				
-				if ( in_array( $t_issue_id, $t_cycle_ids ) || in_array( $t_issue_parent, $t_cycle_ids ) ) {
+				if ( in_array( $t_issue_id, $t_cycle_ids ) && in_array( $t_issue_parent, $t_cycle_ids ) ) {
 					$t_cycle = true;
 				} else {
 					$t_cycle = false;
