@@ -37,6 +37,7 @@
 	$f_new_version	= gpc_get_string( 'new_version' );
 	$f_description  = gpc_get_string( 'description' );
 	$f_released     = gpc_get_bool( 'released' );
+	$f_obsolete	= gpc_get_bool( 'obsolete' );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version->project_id );
 
@@ -49,6 +50,7 @@
 	$t_version->version = $f_new_version;
 	$t_version->description = $f_description;
 	$t_version->released = $f_released ? VERSION_RELEASED : VERSION_FUTURE;
+	$t_version->obsolete = $f_obsolete;
 	$t_version->date_order = $f_date_order;
 
 	version_update( $t_version );

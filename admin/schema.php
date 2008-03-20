@@ -402,5 +402,5 @@ $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_plugin_table' )
 	protected		L		NOTNULL DEFAULT \" '0' \",
 	priority		I		UNSIGNED NOTNULL DEFAULT '3'
 	" ) );
-
-?>
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_version_table' ), "
+	obsolete		L		NOTNULL DEFAULT \" '0' \"" ) );

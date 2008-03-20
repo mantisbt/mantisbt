@@ -84,8 +84,8 @@
 		$t_bug_table	= db_get_table( 'mantis_bug_table' );
 		$t_relation_table = db_get_table( 'mantis_bug_relationship_table' );
 
-		$t_version_rows = version_get_all_rows( $t_project_id );
-				
+		$t_version_rows = version_get_all_rows( $t_project_id, /* released */ null, /* obsolete */ false );
+
 		$t_project_header_printed = false;
 
 		foreach( $t_version_rows as $t_version_row ) {
@@ -173,7 +173,7 @@
 				$t_issue_id = $t_issue_ids[$k];
 				$t_issue_parent = $t_issue_parents[$k];
 				
-				if ( in_array( $t_issue_id, $t_cycle_ids ) || in_array( $t_parent_id, $t_cycle_ids ) ) {
+				if ( in_array( $t_issue_id, $t_cycle_ids ) || in_array( $t_issue_parent, $t_cycle_ids ) ) {
 					$t_cycle = true;
 				} else {
 					$t_cycle = false;

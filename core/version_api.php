@@ -33,6 +33,7 @@
 		var $description = '';
 		var $released = VERSION_FUTURE;
 		var $date_order = '';
+		var $obsolete = 0;
 	}
 
 	#===================================
@@ -120,9 +121,10 @@
 
 	# --------------------
 	# Add a version to the project
-	function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $p_description = '', $p_date_order = null) {
+	function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $p_description = '', $p_date_order = null, $p_obsolete = false ) {
 		$c_project_id   = db_prepare_int( $p_project_id );
 		$c_released     = db_prepare_int( $p_released );
+		$c_obsolete	= db_prepare_bool( $p_obsolete );
 
 		if ( null === $p_date_order ) {
 			$c_date_order = db_now();
@@ -135,10 +137,10 @@
 		$t_project_version_table = db_get_table( 'mantis_project_version_table' );
 
 		$query = "INSERT INTO $t_project_version_table
-					( project_id, version, date_order, description, released )
+					( project_id, version, date_order, description, released, obsolete )
 				  VALUES
-					(" . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . " )";
-		db_query_bound( $query, Array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released ) );
+					(" . db_param(0) . ', ' . db_param(1) . ', ' . db_param(2) . ', ' . db_param(3) . ', ' . db_param(4) . ', ' . db_param(5) . ' )';
+		db_query_bound( $query, Array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released, $c_obsolete ) );
 
 		# db_query errors on failure so:
 		return true;
@@ -162,6 +164,7 @@
 		$c_old_version_name = $t_old_version_name;
 		$c_description  = $p_version_info->description;
 		$c_released     = db_prepare_int( $p_version_info->released );
+		$c_obsolete	= db_prepare_bool( $p_version_info->obsolete );
 		$c_date_order   = db_timestamp( $p_version_info->date_order );
 		$c_project_id	= db_prepare_int( $p_version_info->project_id );
 
@@ -172,9 +175,10 @@
 				  SET version=" . db_param(0) . ",
 					description=" .db_param(1) . ",
 					released=" . db_param(2) . ",
-					date_order=" . db_param(3) . "
-				  WHERE id=" . db_param(4);
-		db_query_bound( $query, Array( $c_version_name, $c_description, $c_released, $c_date_order, $c_version_id ) );
+					date_order=" . db_param(3) . ",
+					obsolete=" . db_param(4) . "
+				  WHERE id=" . db_param(5);
+		db_query_bound( $query, Array( $c_version_name, $c_description, $c_released, $c_date_order, $c_obsolete, $c_version_id ) );
 
 		if ( $c_version_name != $c_old_version_name ) {
 			$query = "UPDATE $t_bug_table
@@ -270,22 +274,31 @@
 
 	# --------------------
 	# Return all versions for the specified project
-	function version_get_all_rows( $p_project_id, $p_released = null ) {
+	function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 		$t_project_version_table = db_get_table( 'mantis_project_version_table' );
 
+		$t_param_count = 0;
+
 		$query = "SELECT *
 				  FROM $t_project_version_table
-				  WHERE project_id=" . db_param(0);
-		$query_params[] = $c_project_id;
-		
+				  WHERE project_id=" . db_param($t_param_count++);
+		$query_params = array( $c_project_id );
+
 		if ( $p_released !== null ) {
 			$c_released = db_prepare_int( $p_released );
-			$query .= " AND released = " . db_param(1);
+			$query .= " AND released = " . db_param($t_param_count++);
 			$query_params[] = $c_released;
 		}
+
+		if ( $p_obsolete !== null ) {
+			$c_obsolete = db_prepare_bool( $p_obsolete );
+			$query .= " AND obsolete = " . db_param($t_param_count++);
+			$query_params[] = $c_obsolete;
+		}
+
 		$query .= " ORDER BY date_order DESC";
-		
+
 		$result = db_query_bound( $query, $query_params );
 		$count = db_num_rows( $result );
 		$rows = array();
@@ -299,7 +312,7 @@
 	
 	# --------------------
 	# Return all versions for the specified project, including subprojects
-	function version_get_all_rows_with_subs( $p_project_id, $p_released = null ) {
+	function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_obsolete = false ) {
 		$t_project_where = helper_project_specific_where( $p_project_id );
 
 		if ( $p_released === null ) {
@@ -309,11 +322,18 @@
 			$t_released_where = "AND ( released = $c_released )";
 		}
 
+		if ( $p_obsolete === null ) {
+			$t_obsolete_where = '';
+		} else {
+			$c_obsolete = db_prepare_bool( $p_obsolete );
+			$t_obsolete_where = "AND ( obsolete = $c_obsolete )";
+		}
+
 		$t_project_version_table = db_get_table( 'mantis_project_version_table' );
 
 		$query = "SELECT *
 				  FROM $t_project_version_table
-				  WHERE $t_project_where $t_released_where
+				  WHERE $t_project_where $t_released_where $t_obsolete_where
 				  ORDER BY date_order DESC";
 		$result = db_query( $query );
 		$count = db_num_rows( $result );

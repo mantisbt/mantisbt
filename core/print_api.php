@@ -798,7 +798,7 @@
 	# $p_released = null to get all, 1: only released, 0: only future versions
 	# $p_leading_black = allow selection of no version
 	# $p_with_subs = include subprojects
-	function print_version_option_list( $p_version='', $p_project_id = null, $p_released = null, $p_leading_blank = true, $p_with_subs=false ) {
+	function print_version_option_list( $p_version='', $p_project_id = null, $p_released = null, $p_leading_blank = true, $p_with_subs = false ) {
 		if ( null === $p_project_id ) {
 			$c_project_id = helper_get_current_project();
 		} else {
@@ -806,9 +806,9 @@
 		}
 
 		if ( $p_with_subs ) {
-			$versions = version_get_all_rows_with_subs( $c_project_id, $p_released );
+			$versions = version_get_all_rows_with_subs( $c_project_id, $p_released, /* obsolete */ null );
 		} else {
-			$versions = version_get_all_rows( $c_project_id, $p_released );
+			$versions = version_get_all_rows( $c_project_id, $p_released, /* obsolete */ null );
 		}
 
 		if ( $p_leading_blank ) {
@@ -816,6 +816,14 @@
 		}
 
 		foreach( $versions as $version ) {
+			# If the current version is obsolete, and current version not equal to $p_version,
+			# then skip it.
+			if ( ((int)$version['obsolete']) == 1 ) {
+				if ( $version['version'] != $p_version ) {
+					continue;
+				}
+			}
+
 			$t_version = string_attribute( $version['version'] );
 			echo "<option value=\"$t_version\"";
 			check_selected( $p_version, $t_version );

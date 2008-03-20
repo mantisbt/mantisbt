@@ -414,7 +414,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	</td>
 </tr>
 <?php
-	$t_versions = version_get_all_rows( $f_project_id );
+	$t_versions = version_get_all_rows( $f_project_id, /* released = */ null, /* obsolete = */ null );
 
 	if ( count( $t_versions ) > 0 ) {
 ?>
@@ -424,6 +424,9 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			</td>
 			<td class="center">
 				<?php echo lang_get( 'released' ) ?>
+			</td>
+			<td class="center">
+				<?php echo lang_get( 'obsolete' ) ?>
 			</td>
 			<td class="center">
 				<?php echo lang_get( 'timestamp' ) ?>
@@ -438,6 +441,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	foreach ( $t_versions as $t_version ) {
 		$t_name = $t_version['version'];
 		$t_released = $t_version['released'];
+		$t_obsolete = $t_version['obsolete'];
 		$t_date_order = $t_version['date_order'];
 		$t_date_formatted = string_format_complete_date( $t_version['date_order'] );
 ?>
@@ -448,6 +452,9 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			</td>
 			<td class="center">
 				<?php echo trans_bool( $t_released ) ?>
+			</td>
+			<td class="center">
+				<?php echo trans_bool( $t_obsolete ) ?>
 			</td>
 			<td class="center">
 				<?php echo $t_date_formatted ?>

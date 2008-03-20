@@ -79,6 +79,14 @@
 		<input type="checkbox" name="released" <?php check_checked( $t_version->released, VERSION_RELEASED ); ?> />
 	</td>
 </tr>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'obsolete' ) ?>
+	</td>
+	<td>
+		<input type="checkbox" name="obsolete" <?php check_checked( $t_version->obsolete, true ); ?> />
+	</td>
+</tr>
 <tr>
 	<td>
 		&nbsp;
