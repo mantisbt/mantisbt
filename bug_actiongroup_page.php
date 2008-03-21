@@ -169,14 +169,12 @@
 			$t_question_title		= lang_get( 'fixed_in_version_bugs_conf_msg' );
 			$t_button_title			= lang_get( 'fixed_in_version_group_bugs_button' );
 			$t_form					= 'fixed_in_version';
-			$t_request				= 'fixed_in_version';
 			break;
 
 		case 'UP_TARGET_VERSION':
 			$t_question_title		= lang_get( 'target_version_bugs_conf_msg' );
 			$t_button_title			= lang_get( 'target_version_group_bugs_button' );
 			$t_form					= 'target_version';
-			$t_request				= 'target_version';
 			break;
 
 		case 'CUSTOM' :
