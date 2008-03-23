@@ -27,6 +27,8 @@
 
 	require_once( $t_core_path . 'tag_api.php' );
 
+	helper_ensure_post();
+
 	access_ensure_global_level( config_get( 'tag_edit_threshold' ) );
 
 	$f_tag_id = gpc_get_int( 'tag_id' );

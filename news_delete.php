@@ -20,15 +20,15 @@
 	# --------------------------------------------------------
 	# $Id$
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'news_api.php' );
-?>
-<?php
+
+	helper_ensure_post();
+
 	$f_news_id = gpc_get_int( 'news_id' );
 
 	$row = news_get_row( $f_news_id );

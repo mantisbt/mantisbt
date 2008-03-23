@@ -2,7 +2,7 @@
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,24 +20,22 @@
 	# --------------------------------------------------------
 	# $Id$
 	# --------------------------------------------------------
-?>
-<?php
+
 	# The specified profile is deleted and the user is redirected to
 	# account_prof_menu_page.php3
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'profile_api.php' );
-?>
-<?php
+
+	helper_ensure_post();
+
 	auth_ensure_user_authenticated();
 
 	current_user_ensure_unprotected();
-?>
-<?php
+
 	$f_profile_id	= gpc_get_int( 'profile_id' );
 
 	if ( profile_is_global( $f_profile_id ) ) {

@@ -23,6 +23,8 @@
 
 	require_once( 'core.php' );
 
+	helper_ensure_post();
+
 	$f_user_id = gpc_get_int( 'user_id' );
 	$f_project_id = gpc_get_int( 'project_id' );
 	$f_config_option = gpc_get_string( 'config_option' );

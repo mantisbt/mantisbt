@@ -2,7 +2,7 @@
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,19 +20,18 @@
 	# --------------------------------------------------------
 	# $Id$
 	# --------------------------------------------------------
-?>
-<?php
+
 	# Set an existing bugnote private or public.
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'bugnote_api.php' );
-?>
-<?php
+
+    helper_ensure_post();
+    
 	$f_bugnote_id	= gpc_get_int( 'bugnote_id' );
 	$f_private		= gpc_get_bool( 'private' );
 

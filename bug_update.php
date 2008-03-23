@@ -20,11 +20,9 @@
 	# --------------------------------------------------------
 	# $Id$
 	# --------------------------------------------------------
-?>
-<?php
+
 	# Update bug data then redirect to the appropriate viewing page
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
@@ -32,8 +30,9 @@
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'bugnote_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
-?>
-<?php
+
+	helper_ensure_post();
+
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$f_update_mode = gpc_get_bool( 'update_mode', FALSE ); # set if called from generic update page
 	$f_new_status	= gpc_get_int( 'status', bug_get_field( $f_bug_id, 'status' ) );

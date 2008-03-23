@@ -20,15 +20,15 @@
 	# --------------------------------------------------------
 	# $Id$
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'current_user_api.php' );
-?>
-<?php
+
+	helper_ensure_post();
+
 	$f_project_id	= gpc_get_string( 'project_id' );
 	$f_make_default	= gpc_get_bool  ( 'make_default' );
 	$f_ref			= gpc_get_string( 'ref', '' );

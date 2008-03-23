@@ -194,6 +194,7 @@
 	define( 'ERROR_FTP_CONNECT_ERROR',				16 );
 	define( 'ERROR_HANDLER_ACCESS_TOO_LOW',				17 );
 	define( 'ERROR_PAGE_REDIRECTION',				18 );
+	define( 'ERROR_INVALID_REQUEST_METHOD',		    19 );
 
 	# ERROR_CONFIG_*
 	define( 'ERROR_CONFIG_OPT_NOT_FOUND',			100 );

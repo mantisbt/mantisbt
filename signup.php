@@ -28,6 +28,8 @@
 	require_once( $t_core_path.'email_api.php' );
 	require_once( $t_core_path . 'disposable' . DIRECTORY_SEPARATOR . 'disposable.php' );
 
+	helper_ensure_post();
+
 	$f_username		= strip_tags( gpc_get_string( 'username' ) );
 	$f_email		= strip_tags( gpc_get_string( 'email' ) );
 	$f_captcha		= gpc_get_string( 'captcha', '' );

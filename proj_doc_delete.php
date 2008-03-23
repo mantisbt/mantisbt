@@ -23,6 +23,8 @@
 
 	require_once( 'core.php' );
 
+	helper_ensure_post();
+
 	# Check if project documentation feature is enabled.
 	if ( OFF == config_get( 'enable_project_documentation' ) ) {
 		access_denied();

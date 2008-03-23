@@ -27,6 +27,8 @@
 
 	require_once( $t_core_path . 'tag_api.php' );
 
+	helper_ensure_post();
+
 	compress_enable();
 
 	$f_tag_id = gpc_get_int( 'tag_id' );

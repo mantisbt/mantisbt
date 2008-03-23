@@ -2,7 +2,7 @@
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,19 +28,21 @@
 	require_once( $t_core_path . 'bug_api.php' );
 	require_once( $t_core_path . 'bug_group_action_api.php' );
 
-    auth_ensure_user_authenticated();
+	helper_ensure_post();
+
+	auth_ensure_user_authenticated();
 
 	helper_begin_long_process();
 
-    $f_action = gpc_get_string( 'action' );
+	$f_action = gpc_get_string( 'action' );
 	$f_bug_arr	= gpc_get_int_array( 'bug_arr', array() );
 
-    $t_action_include_file = 'bug_actiongroup_' . $f_action . '_inc.php';
+	$t_action_include_file = 'bug_actiongroup_' . $f_action . '_inc.php';
 
-    require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $t_action_include_file );
-    
-    # group bugs by project
-    $t_projects_bugs = array();
+	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $t_action_include_file );
+
+	# group bugs by project
+	$t_projects_bugs = array();
 	foreach( $f_bug_arr as $t_bug_id ) {
 		bug_ensure_exists( $t_bug_id );
 		$t_bug = bug_get( $t_bug_id, true );

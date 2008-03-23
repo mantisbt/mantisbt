@@ -23,6 +23,8 @@
 
 	require_once( 'core.php' );
 
+	helper_ensure_post();
+
 	auth_reauthenticate();
 
 	$f_user_id		= gpc_get_int( 'user_id' );

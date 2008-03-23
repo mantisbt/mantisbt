@@ -20,15 +20,15 @@
 	# --------------------------------------------------------
 	# $Id$
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'custom_field_api.php' );
-?>
-<?php
+
+	helper_ensure_post();
+
 	$f_field_id	= gpc_get_int( 'field_id' );
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_sequence	= gpc_get_int( 'sequence' );

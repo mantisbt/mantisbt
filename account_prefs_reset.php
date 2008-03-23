@@ -2,7 +2,7 @@
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -47,6 +47,8 @@
 	$f_redirect_url	= gpc_get_string( 'redirect_url', 'account_prefs_page.php' );
 
 	#============ Permissions ============
+	helper_ensure_post();
+
 	auth_ensure_user_authenticated();
 
 	user_ensure_unprotected( $f_user_id );

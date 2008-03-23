@@ -27,6 +27,8 @@
 
 	require_once( $t_core_path.'category_api.php' );
 
+	helper_ensure_post();
+
 	auth_reauthenticate();
 
 	$f_category_id = gpc_get_string( 'id' );

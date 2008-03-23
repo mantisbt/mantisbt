@@ -23,6 +23,8 @@
 
 	require_once( $t_core_path.'project_hierarchy_api.php' );
 
+	helper_ensure_post();
+
 	auth_reauthenticate();
 
 	$f_project_id = gpc_get_int( 'project_id' );
