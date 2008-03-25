@@ -459,6 +459,9 @@
 		include( $t_mantis_dir . 'bugnote_view_inc.php' );
 	}
 
+	# Allow plugins to display stuff after notes
+	event_signal( 'EVENT_VIEW_BUG_EXTRA', array( $f_bug_id ) );
+
 	# Time Tracking stats
 	if ( config_get('time_tracking_enabled') &&
 		access_has_bug_level( config_get( 'time_tracking_reporting_threshold' ), $f_bug_id ) ) {

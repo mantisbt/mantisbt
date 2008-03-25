@@ -104,6 +104,7 @@ var g_div_sponsorship   = 0x0040;
 var g_div_relationships = 0x0080;
 var g_div_filter        = 0x0100;
 
+var g_div_plugin		= 0x8000;
 
 /* List here the sections open by default */
 var g_default_view_settings = 

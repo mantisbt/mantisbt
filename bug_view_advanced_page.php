@@ -580,6 +580,9 @@
 		include( $t_mantis_dir . 'bugnote_view_inc.php' );
 	}
 
+	# Allow plugins to display stuff after notes
+	event_signal( 'EVENT_VIEW_BUG_EXTRA', array( $f_bug_id ) );
+
 	# History
 	if ( $f_history ) {
 		include( $t_mantis_dir . 'history_inc.php' );
