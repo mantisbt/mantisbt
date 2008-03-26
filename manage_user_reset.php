@@ -23,6 +23,8 @@
 
 	require_once( 'core.php' );
 
+	helper_ensure_post();
+
 	auth_reauthenticate();
 
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );

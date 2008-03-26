@@ -20,15 +20,16 @@
 	# --------------------------------------------------------
 	# $Id: print_all_bug_options_update.php,v 1.16.22.1 2007-10-13 22:34:14 giallu Exp $
 	# --------------------------------------------------------
-?>
-<?php
-	# Updates printing prefs then redirect to print_all_bug_page_page.php
-?>
-<?php require_once( 'core.php' ) ?>
-<?php require( 'print_all_bug_options_inc.php' ) ?>
 
-<?php auth_ensure_user_authenticated() ?>
-<?php
+	# Updates printing prefs then redirect to print_all_bug_page_page.php
+
+	require_once( 'core.php' );
+	require( 'print_all_bug_options_inc.php' );
+
+	helper_ensure_post();
+
+	auth_ensure_user_authenticated();
+
 	$f_user_id		= gpc_get_int( 'user_id' );
 	$f_redirect_url	= gpc_get_string( 'redirect_url' );
 

@@ -20,15 +20,15 @@
 	# --------------------------------------------------------
 	# $Id: manage_proj_custom_field_update.php,v 1.10.22.1 2007-10-13 22:33:37 giallu Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'custom_field_api.php' );
-?>
-<?php
+
+	helper_ensure_post();
+
 	$f_field_id	= gpc_get_int( 'field_id' );
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_sequence	= gpc_get_int( 'sequence' );

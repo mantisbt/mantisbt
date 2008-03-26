@@ -27,6 +27,8 @@
 
 	require_once( $t_core_path.'custom_field_api.php' );
 
+	helper_ensure_post();
+
 	auth_reauthenticate();
 
 	access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );

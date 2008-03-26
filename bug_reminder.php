@@ -2,7 +2,7 @@
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,11 +20,9 @@
 	# --------------------------------------------------------
 	# $Id: bug_reminder.php,v 1.21.2.1 2007-10-13 22:32:49 giallu Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	# This page allows an authorized user to send a reminder by email to another user
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
@@ -32,8 +30,9 @@
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'email_api.php' );
 	require_once( $t_core_path.'bugnote_api.php' );
-?>
-<?php
+
+	helper_ensure_post();
+
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_to			= gpc_get_int_array( 'to' );
 	$f_body			= gpc_get_string( 'body' );

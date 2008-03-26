@@ -20,15 +20,15 @@
 	# --------------------------------------------------------
 	# $Id: news_delete.php,v 1.23.18.1 2007-10-13 22:34:02 giallu Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'news_api.php' );
-?>
-<?php
+
+	helper_ensure_post();
+
 	$f_news_id = gpc_get_int( 'news_id' );
 
 	$row = news_get_row( $f_news_id );

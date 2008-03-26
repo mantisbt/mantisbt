@@ -2,7 +2,7 @@
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,13 +20,14 @@
 	# --------------------------------------------------------
 	# $Id: bug_set_sponsorship.php,v 1.5.14.1 2007-10-13 22:32:53 giallu Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path . 'sponsorship_api.php' );
+
+	helper_ensure_post();
 
 	if ( config_get( 'enable_sponsorship' ) == OFF ) {
 		trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );

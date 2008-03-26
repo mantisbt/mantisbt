@@ -20,8 +20,7 @@
 	# --------------------------------------------------------
 	# $Id: news_update.php,v 1.32.22.1 2007-10-13 22:34:09 giallu Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
@@ -29,8 +28,9 @@
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 	require_once( $t_core_path.'print_api.php' );
-?>
-<?php
+
+	helper_ensure_post();
+
 	$f_news_id		= gpc_get_int( 'news_id' );
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_view_state	= gpc_get_int( 'view_state' );

@@ -2,7 +2,7 @@
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,18 +20,17 @@
 	# --------------------------------------------------------
 	# $Id: bug_file_add.php,v 1.49.2.1 2007-10-13 22:32:37 giallu Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	# Add file to a bug and then view the bug
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'file_api.php' );
-?>
-<?php
+
+	helper_ensure_post();
+
 	$f_bug_id	= gpc_get_int( 'bug_id', -1 );
 	$f_file		= gpc_get_file( 'file', -1 );
 

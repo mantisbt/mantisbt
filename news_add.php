@@ -20,16 +20,16 @@
 	# --------------------------------------------------------
 	# $Id: news_add.php,v 1.32.22.1 2007-10-13 22:34:00 giallu Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'print_api.php' );
-?>
-<?php
+
+	helper_ensure_post();
+
 	access_ensure_project_level( config_get( 'manage_news_threshold' ) );
 
 	$f_view_state	= gpc_get_int( 'view_state' );

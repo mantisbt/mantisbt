@@ -27,6 +27,8 @@
 
 	require_once( $t_core_path . 'tag_api.php' );
 
+	helper_ensure_post();
+
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$f_tag_select = gpc_get_int( 'tag_select' );
 	$t_user_id = auth_get_current_user_id();
