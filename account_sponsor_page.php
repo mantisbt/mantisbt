@@ -146,7 +146,7 @@
 			echo '</td>';
 
 			# summary
-			echo '<td>' . $t_bug->summary;
+			echo '<td>' . string_display_line( $t_bug->summary );
 			if ( VS_PRIVATE == $t_bug->view_state ) {
 				printf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
 			}
@@ -249,7 +249,7 @@
 			echo '<td><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>';
 
 			# summary
-			echo '<td>' . $t_bug->summary;
+			echo '<td>' . string_display_line( $t_bug->summary );
 			if ( VS_PRIVATE == $t_bug->view_state ) {
 				printf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
 			}
