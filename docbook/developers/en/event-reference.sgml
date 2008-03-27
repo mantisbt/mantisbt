@@ -42,7 +42,7 @@
 	</sect1>
 
 	<sect1 id="dev.eventref.plugin">
-		<title>Plugin System Events</title>
+		<title>Plugin System</title>
 
 		<para>
 			These events are initiated by the plugin system itself to allow certain functionality to 
