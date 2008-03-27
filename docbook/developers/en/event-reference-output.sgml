@@ -212,16 +212,114 @@
 		</sect2>
 
 		<sect2 id="dev.eventref.output.layout">
-			<title>Page and Content Layout</title>
+			<title>Page Layout</title>
 
 			<para>
 				These events offer the chance to create output at points relevant to the overall page
 				layout of Mantis.  Page headers, footers, stylesheets, and more can be created.
+				Events listed below are in order of runtime execution.
 			</para>
 
-			<sect3>
-				<title>Another</title>
-				<para>para</para>
-			</sect3>
+			<blockquote id="dev.eventref.output.layout.resources">
+				<title>EVENT_LAYOUT_RESOURCES (Output)</title>
+				<blockquote>
+					<para>
+						This event allows plugins to output HTML code from inside the 
+						<code>&lt;head&gt;</code> tag, for use with CSS, Javascript, RSS,
+						or any other similary resources.  Note that this event is signaled
+						after all other CSS and Javascript resources are linked by Mantis.
+					</para>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>String: HTML code to output.</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
+			<blockquote id="dev.eventref.output.layout.bodybegin">
+				<title>EVENT_LAYOUT_BODY_BEGIN (Output)</title>
+				<blockquote>
+					<para>
+						This event allows plugins to output HTML code
+					</para>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>String: HTML code to output.</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
+			<blockquote id="dev.eventref.output.layout.pageheader">
+				<title>EVENT_LAYOUT_PAGE_HEADER (Output)</title>
+				<blockquote>
+					<para>
+						This event allows plugins to output HTML code
+					</para>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>String: HTML code to output.</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
+			<blockquote id="dev.eventref.output.layout.contentbegin">
+				<title>EVENT_LAYOUT_CONTENT_BEGIN (Output)</title>
+				<blockquote>
+					<para>
+						This event allows plugins to output HTML code
+					</para>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>String: HTML code to output.</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
+			<blockquote id="dev.eventref.output.layout.contentend">
+				<title>EVENT_LAYOUT_CONTENT_END (Output)</title>
+				<blockquote>
+					<para>
+						This event allows plugins to output HTML code
+					</para>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>String: HTML code to output.</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
+			<blockquote id="dev.eventref.output.layout.pagefooter">
+				<title>EVENT_LAYOUT_PAGE_FOOTER (Output)</title>
+				<blockquote>
+					<para>
+						This event allows plugins to output HTML code
+					</para>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>String: HTML code to output.</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
+			<blockquote id="dev.eventref.output.layout.bodyend">
+				<title>EVENT_LAYOUT_BODY_END (Output)</title>
+				<blockquote>
+					<para>
+						This event allows plugins to output HTML code
+					</para>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>String: HTML code to output.</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
 		</sect2>
 	</sect1>
