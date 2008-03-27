@@ -53,29 +53,30 @@
 			<title>EVENT_PLUGIN_INIT (Execute)</title>
 
 			<blockquote>
-			<para>
-				This event is triggered by the Mantis plugin system after all registered and enabled
-				plugins have been initialized (their <code>init()</code> functions have been called).
-				This event should <emphasis>always</emphasis> be the first event triggered for any
-				page load.  No parameters are passed to hooked functions, and no return values are
-				expected.
-			</para>
+				<para>
+					This event is triggered by the Mantis plugin system after all registered and enabled
+					plugins have been initialized (their <code>init()</code> functions have been called).
+					This event should <emphasis>always</emphasis> be the first event triggered for any
+					page load.  No parameters are passed to hooked functions, and no return values are
+					expected.
+				</para>
 
-			<para>
-				This event is the first point in page execution where all registered plugins are 
-				guaranteed to be enabled (assuming dependencies and such are met).  At any point 
-				before this event, any or all plugins may not yet be loaded.
-			</para>
+				<para>
+					This event is the first point in page execution where all registered plugins are 
+					guaranteed to be enabled (assuming dependencies and such are met).  At any point 
+					before this event, any or all plugins may not yet be loaded.
+				</para>
 
-			<para>
-				Suggested uses for the event include:
-				<itemizedlist>
-					<listitem><para>Checking for plugins that aren't require for normal usage.</para></listitem>
-					<listitem><para>Interacting with other plugins outside the context of pages or events.</para></listitem>
-				</itemizedlist>
-			</para>
+				<para>
+					Suggested uses for the event include:
+					<itemizedlist>
+						<listitem><para>Checking for plugins that aren't require for normal usage.</para></listitem>
+						<listitem><para>Interacting with other plugins outside the context of pages or events.</para></listitem>
+					</itemizedlist>
+				</para>
 			</blockquote>
 		</blockquote>
+
 	</sect1>
 
 	&eventref-output;
