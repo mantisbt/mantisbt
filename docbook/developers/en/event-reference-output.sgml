@@ -23,12 +23,12 @@
 
 					<itemizedlist>
 						<title>Parameters</title>
-						<listitem><para>String Input string to be displayed</para></listitem>
+						<listitem><para>String: input string to be displayed</para></listitem>
 					</itemizedlist>
 
 					<itemizedlist>
 						<title>Return Value</title>
-						<listitem><para>String: Modified input string</para></listitem>
+						<listitem><para>String: modified input string</para></listitem>
 					</itemizedlist>
 				</blockquote>
 			</blockquote>
@@ -46,12 +46,12 @@
 
 					<itemizedlist>
 						<title>Parameters</title>
-						<listitem><para>String Input string to be displayed</para></listitem>
+						<listitem><para>String: input string to be displayed</para></listitem>
 					</itemizedlist>
 
 					<itemizedlist>
 						<title>Return Value</title>
-						<listitem><para>String: Modified input string</para></listitem>
+						<listitem><para>String: modified input string</para></listitem>
 					</itemizedlist>
 				</blockquote>
 			</blockquote>
@@ -68,13 +68,13 @@
 
 					<itemizedlist>
 						<title>Parameters</title>
-						<listitem><para>String Input string to be displayed</para></listitem>
-						<listitem><para>Boolean Multiline input string</para></listitem>
+						<listitem><para>String: input string to be displayed</para></listitem>
+						<listitem><para>Boolean: multiline input string</para></listitem>
 					</itemizedlist>
 
 					<itemizedlist>
 						<title>Return Value</title>
-						<listitem><para>String: Modified input string</para></listitem>
+						<listitem><para>String: modified input string</para></listitem>
 					</itemizedlist>
 				</blockquote>
 			</blockquote>
@@ -91,13 +91,13 @@
 
 					<itemizedlist>
 						<title>Parameters</title>
-						<listitem><para>String Input string to be displayed</para></listitem>
-						<listitem><para>Boolean Multiline input string</para></listitem>
+						<listitem><para>String: input string to be displayed</para></listitem>
+						<listitem><para>Boolean: multiline input string</para></listitem>
 					</itemizedlist>
 
 					<itemizedlist>
 						<title>Return Value</title>
-						<listitem><para>String: Modified input string</para></listitem>
+						<listitem><para>String: modified input string</para></listitem>
 					</itemizedlist>
 				</blockquote>
 			</blockquote>
@@ -111,6 +111,104 @@
 				These events allow new menu items to be inserted in order for new content to be added,
 				such as new pages or integration with other applications.
 			</para>
+
+			<blockquote id="dev.eventref.output.menu.main">
+				<title>EVENT_MENU_MAIN (Default)</title>
+				<blockquote>
+					<para>
+						This event gives plugins the opportunity to add new links to the main menu at
+						the top (or bottom) of every page in Mantis.  New links will be added after the 
+						'Docs' link, and before the 'Manage' link.  Hooked events may return multiple
+						links, in which case each link in the array will be automatically separated
+						with the '|' symbol as usual.
+					</para>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>Array: List of HTML links for the main menu.</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
+			<blockquote id="dev.eventref.output.menu.manage">
+				<title>EVENT_MENU_MANAGE (Default)</title>
+				<blockquote>
+					<para>
+						This event gives plugins the opportunity to add new links to the management
+						menu available to site administrators from the 'Manage' link on the main menu.
+						Plugins should try to minimize use of these links to functions dealing with
+						core Mantis management.
+					</para>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>Array: List of HTML links for the management menu.</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
+			<blockquote id="dev.eventref.output.menu.manageconfig">
+				<title>EVENT_MENU_MANAGE_CONFIG (Default)</title>
+				<blockquote>
+					<para>
+						This event gives plugins the opportunity to add new links to the configuration
+						management menu available to site administrators from the 'Manage Configuration'
+						link on the standard management menu.  Plugins should try to minimize use of
+						these links to functions dealing with core Mantis configuration.
+					</para>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>Array: List of HTML links for the manage configuration menu.</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
+			<blockquote id="dev.eventref.output.menu.summary">
+				<title>EVENT_MENU_SUMMARY (Default)</title>
+				<blockquote>
+					<para>
+						This event gives plugins the opportunity to add new links to the summary menu
+						available to users from the 'Summary' link on the main menu.
+					</para>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>Array: List of HTML links for the summary menu.</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
+			<blockquote id="dev.eventref.output.menu.docs">
+				<title>EVENT_MENU_DOCS (Default)</title>
+				<blockquote>
+					<para>
+						This event gives plugins the opportunity to add new links to the documents
+						menu available to users from the 'Docs' link on the main menu.
+					</para>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>Array: List of HTML links for the documents menu.</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
+			<blockquote id="dev.eventref.output.menu.account">
+				<title>EVENT_MENU_ACCOUNT (Default)</title>
+				<blockquote>
+					<para>
+						This event gives plugins the opportunity to add new links to the user account
+						menu available to users from the 'My Account' link on the main menu.
+					</para>
+
+					<itemizedlist>
+						<title>Return Value</title>
+						<listitem><para>Array: List of HTML links for the user account menu.</para></listitem>
+					</itemizedlist>
+				</blockquote>
+			</blockquote>
+
 		</sect2>
 
 		<sect2 id="dev.eventref.output.layout">
