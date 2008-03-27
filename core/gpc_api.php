@@ -115,6 +115,7 @@
 		switch ($p_custom_field_type ) {
 			case CUSTOM_FIELD_TYPE_MULTILIST:
 			case CUSTOM_FIELD_TYPE_CHECKBOX:
+			case CUSTOM_FIELD_TYPE_RADIO:
 				$t_values = gpc_get_string_array( $p_var_name, $p_default );
 				if( null !== $t_values && '' != $t_values ) {
 					return implode( '|', $t_values );

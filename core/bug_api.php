@@ -1291,6 +1291,7 @@
 	# --------------------
 	# resolve the given bug
 	function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null, $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
+		$c_resolution = (int)$p_resolution;
 		$p_bugnote_text = trim( $p_bugnote_text );
 
 		$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
@@ -1331,7 +1332,7 @@
 
 		bug_set_field( $p_bug_id, 'status', config_get( 'bug_resolved_status_threshold' ) );
 		bug_set_field( $p_bug_id, 'fixed_in_version', $p_fixed_in_version );
-		bug_set_field( $p_bug_id, 'resolution', (int)$p_resolution );
+		bug_set_field( $p_bug_id, 'resolution', $c_resolution );
 
 		# only set handler if specified explicitly or if bug was not assigned to a handler
 		if ( null == $p_handler_id ) {

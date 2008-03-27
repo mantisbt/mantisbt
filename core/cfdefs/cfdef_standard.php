@@ -106,6 +106,20 @@
 		'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
 	);
 
+	$g_custom_field_type_definition[ CUSTOM_FIELD_TYPE_RADIO ] = array ( 
+		'#display_possible_values' => TRUE,
+		'#display_valid_regexp' => FALSE,
+		'#display_length_min' => FALSE,
+		'#display_length_max' => FALSE,
+		'#display_default_value' => TRUE,
+		'#function_return_distinct_values' => 'cfdef_prepare_list_distinct_values',
+		'#function_value_to_database' => 'cfdef_prepare_list_value_to_database',
+		'#function_database_to_value' => 'cfdef_prepare_list_database_to_value',
+		'#function_print_input' => 'cfdef_input_radio',
+		'#function_string_value' => 'cfdef_prepare_list_value',
+		'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
+	);
+
 	$g_custom_field_type_definition[ CUSTOM_FIELD_TYPE_LIST ] = array ( 
 		'#display_possible_values' => TRUE,
 		'#display_valid_regexp' => TRUE,
@@ -219,6 +233,21 @@
 		foreach( $t_values as $t_option ) {
 			echo '<input ', helper_get_tab_index(), ' type="checkbox" name="custom_field_' . $p_field_def['id'] . '[]"';
 			if( in_array( $t_option, $t_checked_values, true ) ) {
+				echo ' value="' . $t_option . '" checked="checked">&nbsp;' . $t_option . '&nbsp;&nbsp;';
+			} else {
+				echo ' value="' . $t_option . '">&nbsp;' . $t_option . '&nbsp;&nbsp;';
+			}
+		}
+	}
+
+	function cfdef_input_radio( $p_field_def, $p_custom_field_value ) {
+		$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
+		$t_checked_value = $p_custom_field_value;
+
+		foreach ( $t_values as $t_option ) {
+			echo '<input ', helper_get_tab_index(), ' type="radio" name="custom_field_' . $p_field_def['id'] . '[]"';
+
+			if ( $t_option == $t_checked_value ) {
 				echo ' value="' . $t_option . '" checked="checked">&nbsp;' . $t_option . '&nbsp;&nbsp;';
 			} else {
 				echo ' value="' . $t_option . '">&nbsp;' . $t_option . '&nbsp;&nbsp;';
