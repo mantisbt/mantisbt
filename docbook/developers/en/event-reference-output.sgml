@@ -241,7 +241,9 @@
 				<title>EVENT_LAYOUT_BODY_BEGIN (Output)</title>
 				<blockquote>
 					<para>
-						This event allows plugins to output HTML code
+						This event allows plugins to output HTML code immediatly after the
+						<code>&lt;body&gt;</code> tag is opened, so that Mantis may be 
+						integrated within another website's template, or other similar use.
 					</para>
 
 					<itemizedlist>
@@ -255,7 +257,8 @@
 				<title>EVENT_LAYOUT_PAGE_HEADER (Output)</title>
 				<blockquote>
 					<para>
-						This event allows plugins to output HTML code
+						This event allows plugins to output HTML code immediatly after the
+						Mantis header content, such as the logo image.
 					</para>
 
 					<itemizedlist>
@@ -269,7 +272,8 @@
 				<title>EVENT_LAYOUT_CONTENT_BEGIN (Output)</title>
 				<blockquote>
 					<para>
-						This event allows plugins to output HTML code
+						This event allows plugins to output HTML code after the top main
+						menu, but before any page-specific content begins.
 					</para>
 
 					<itemizedlist>
@@ -283,7 +287,9 @@
 				<title>EVENT_LAYOUT_CONTENT_END (Output)</title>
 				<blockquote>
 					<para>
-						This event allows plugins to output HTML code
+						This event allows plugins to output HTML code after any page-
+						specific content has completed, but before the bottom menu bar
+						(or footer).
 					</para>
 
 					<itemizedlist>
@@ -297,7 +303,9 @@
 				<title>EVENT_LAYOUT_PAGE_FOOTER (Output)</title>
 				<blockquote>
 					<para>
-						This event allows plugins to output HTML code
+						This event allows plugins to output HTML code after the Mantis
+						version, copyright, and webmaster information, but before the
+						query information.
 					</para>
 
 					<itemizedlist>
@@ -311,7 +319,9 @@
 				<title>EVENT_LAYOUT_BODY_END (Output)</title>
 				<blockquote>
 					<para>
-						This event allows plugins to output HTML code
+						This event allows plugins to output HTML code immediatly before
+						the <code>&lt;/body&gt;</code> end tag, to so that Mantis may be 
+						integrated within another website's template, or other similar use.
 					</para>
 
 					<itemizedlist>
