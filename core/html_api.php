@@ -459,6 +459,8 @@
 			echo "\t", '<address><a href="mailto:', config_get( 'webmaster_email' ), '">', config_get( 'webmaster_email' ), '</a></address>', "\n";
 		}
 
+		event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
+
 		# print timings
 		if ( ON == config_get( 'show_timer' ) ) {
 			$g_timer->print_times();
@@ -507,8 +509,6 @@
 		echo '</td><td><div align="right">';
 		echo '<a href="http://www.mantisbt.org" title="Free Web Based Bug Tracker"><img src="' . helper_mantis_url( 'images/mantis_logo_button.gif' ) . '" width="88" height="35" alt="Powered by Mantis Bugtracker" border="0" /></a>';
 		echo '</div></td></tr></table>';
-
-		event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
 	}
 
 	# --------------------
