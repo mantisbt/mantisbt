@@ -33,9 +33,9 @@
 		for ($i=1; $i<=12; $i++) {
 			$month_name = date( 'F', mktime(0,0,0,$i,1,2000) );
 			if ( $i == $p_month ) {
-				PRINT "<option value=\"$i\" selected=\"selected\">$month_name</option>";
+				echo "<option value=\"$i\" selected=\"selected\">$month_name</option>";
 			} else {
-				PRINT "<option value=\"$i\">$month_name</option>";
+				echo "<option value=\"$i\">$month_name</option>";
 			}
 		}
 	}
@@ -43,9 +43,9 @@
 	function print_numeric_month_option_list( $p_month = 0 ) {
 		for ($i=1; $i<=12; $i++) {
 			if ($i == $p_month) {
-				PRINT "<option value=\"$i\" selected=\"selected\"> $i </option>" ;
+				echo "<option value=\"$i\" selected=\"selected\">$i</option>" ;
 			} else {
-				PRINT "<option value=\"$i\"> $i </option>" ;
+				echo "<option value=\"$i\">$i</option>" ;
 			}
 		}
 	}
@@ -54,9 +54,9 @@
 	function print_day_option_list( $p_day = 0 ) {
 		for ($i=1; $i<=31; $i++) {
 			if ( $i == $p_day ) {
-				PRINT "<option value=\"$i\" selected=\"selected\"> $i </option>";
+				echo "<option value=\"$i\" selected=\"selected\">$i</option>";
 			} else {
-				PRINT "<option value=\"$i\"> $i </option>";
+				echo "<option value=\"$i\">$i</option>";
 			}
 		}
 	}
@@ -66,9 +66,9 @@
 
 		for ($i=$current_year; $i>1999; $i--) {
 			if ( $i == $p_year ) {
-				PRINT "<option value=\"$i\" selected=\"selected\"> $i </option>";
+				echo "<option value=\"$i\" selected=\"selected\">$i</option>";
 			} else {
-				PRINT "<option value=\"$i\"> $i </option>";
+				echo "<option value=\"$i\">$i</option>";
 			}
 		}
 	}
@@ -115,7 +115,7 @@
 
 		$t_disable = '' ;
 		if ( $p_default_disable == true ) {
-			$t_disable = 'disabled' ;
+			$t_disable = ' disabled="disabled"';
 		}
 		$t_blank_line = '' ;
 		if ( $p_allow_blank == true ) {
@@ -124,25 +124,25 @@
 
 		foreach( $t_chars as $t_char ) {
 			if (strcmp( $t_char, "M") == 0) {
-				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_month\" $t_disable>" ;
+				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_month\"$t_disable>" ;
 				echo $t_blank_line ;
 				print_month_option_list( $t_date[1] ) ;
 				echo "</select>\n" ;
 			}
 			if (strcmp( $t_char, "m") == 0) {
-				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_month\" $t_disable>" ;
+				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_month\"$t_disable>" ;
 				echo $t_blank_line ;
 				print_numeric_month_option_list( $t_date[1] ) ;
 				echo "</select>\n" ;
 			}
 			if (strcasecmp( $t_char, "D") == 0) {
-				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_day\" $t_disable>" ;
+				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_day\"$t_disable>" ;
 				echo $t_blank_line ;
 				print_day_option_list( $t_date[2] ) ;
 				echo "</select>\n" ;
 			}
 			if (strcasecmp( $t_char, "Y") == 0) {
-				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_year\" $t_disable>" ;
+				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_year\"$t_disable>" ;
 				echo $t_blank_line ;
 				print_year_range_option_list( $t_date[0], $p_year_start, $p_year_end ) ;
 				echo "</select>\n" ;

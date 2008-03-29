@@ -861,7 +861,7 @@
 		if( db_num_rows( $result ) > 0 ) {
 			return custom_field_database_to_value( db_result( $result ) , $row['type'] );
 		} else {
-			return $t_default_value;
+			return custom_field_default_to_value( $t_default_value, $row['type'] );
 		}
 	}
 
@@ -1082,6 +1082,19 @@
 		}			
 		return $p_value;
 	}
+	
+	# --------------------
+	# Convert the default-value to value depending on the type.  For example, in case of date, this
+	# would translate 'tomorrow' to tomorrow's date.
+	function custom_field_default_to_value( $p_value, $p_type ) {
+	    global $g_custom_field_type_definition;
+
+	    if ( isset( $g_custom_field_type_definition[$p_type]['#function_default_to_value'] ) ) {
+		return call_user_func( $g_custom_field_type_definition[$p_type]['#function_default_to_value'], $p_value );
+	    }
+
+	    return $p_value;
+	}
 
 	# --------------------
 	# Set the value of a custom field for a given bug
@@ -1201,7 +1214,7 @@
 	# NOTE: This probably belongs in the print_api.php
 	function print_custom_field_input( $p_field_def, $p_bug_id = null ) {
 		if( null === $p_bug_id ) {
-			$t_custom_field_value = $p_field_def['default_value'];
+			$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
 		} else {
 			$t_custom_field_value = custom_field_get_value( $p_field_def['id'], $p_bug_id );
 		}

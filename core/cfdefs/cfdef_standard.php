@@ -157,6 +157,7 @@
 		'#function_return_distinct_values' => null,
 		'#function_value_to_database' => null,
 		'#function_database_to_value' => null,
+		'#function_default_to_value' => 'cfdef_prepare_date_default',
 		'#function_print_input' => 'cfdef_input_date',
 		'#function_string_value' => 'cfdef_prepare_date_value',
 		'#function_string_value_for_email' => 'cfdef_prepare_date_value_for_email',
@@ -178,6 +179,37 @@
 		if ($p_value != null) {
 			return date( config_get( 'short_date_format' ), $p_value) ;
 		}		
+	}
+
+	/**
+	 * Translates the default date value entered by the creator of the custom
+	 * field into a date value.  For example, translate '=tomorrow' to tomorrow's
+	 * date.
+	 * @param $p_value The default date string.
+	 * @returns The calculated default date value if $p_value starts with '=',
+	 *          otherwise, returns $p_value.
+	 */
+	function cfdef_prepare_date_default( $p_value ) {
+	    if ( is_blank( $p_value ) ) {
+		return '';
+	    }
+
+	    $t_value = trim( $p_value );
+	    $t_value_length = strlen( $t_value );
+
+	    # We are expanding {tomorrow}, {yesterday}, {+3 days}, {-7 days}, {next week}
+	    # See strtotime() for more details about supported formats.
+	    if ( $t_value_length >= 3 && $t_value[0] == '{' && $t_value[$t_value_length - 1] == '}' ) {
+		$t_value = substr( $t_value, 1, $t_value_length - 2 );
+		$t_value = @strtotime( $t_value );
+
+		# Different versions of PHP return different values in case of error.
+		if ( $t_value == -1 || $t_value === false ) {
+		    return '';
+		}
+	    }
+
+	    return $t_value;
 	}
 
 	#string_custom_field_value
@@ -265,8 +297,14 @@
 		echo ' value="' . $t_custom_field_value .'"></input>';
 	}	
 
-	function cfdef_input_date($p_field_def, $t_custom_field_value) {
-		print_date_selection_set("custom_field_" . $p_field_def['id'], config_get('short_date_format'), $t_custom_field_value, false, true) ;
+	/**
+	 * Prints the controls for the date selector.
+	 *
+	 * @param $p_field_def  The custom field definition.
+	 * @param $p_custom_field_value  The custom field value to print.
+	 */
+	function cfdef_input_date( $p_field_def, $p_custom_field_value ) {
+		print_date_selection_set( 'custom_field_' . $p_field_def['id'], config_get( 'short_date_format' ), $p_custom_field_value, false, true );
 	}
 
 	#value to database

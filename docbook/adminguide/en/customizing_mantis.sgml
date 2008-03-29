@@ -110,9 +110,7 @@
                     </para>
                 </listitem>
                 <listitem>
-                    <para>Regular expression to use for validating user input (use
-                        <ulink url="http://au.php.net/manual/en/function.ereg.php">ereg()</ulink>
-                        syntax).
+                    <para>Regular expression to use for validating user input (use <ulink url="http://www.php.net/ereg">ereg()</ulink> syntax).
                     </para>
                 </listitem>
                 <listitem>
@@ -317,7 +315,17 @@ if ( lang_get_current() == 'german' ) {
 	    it.  To check for standard strings, inspect
 	    lang/strings_english.txt.</para></note>
 	</section>
-	
+
+        <section>
+            <title>Dynamic default values</title>
+
+            <section>
+                <title>Dynamic defaults for Date fields</title>
+
+                <para>Custom fields of type date can be defaulted to a specific dates or to relative dates.  Typically relative dates is the scenario that makes sense in most of the cases.  The format for specific dates is an integer which indicates the number of seconds since the Unix Epoch (January 1 1970 00:00:00 GMT), which is the format consumed by the PHP <ulink url="http://www.php.net/date">date()</ulink> method.  The relative scenario expects default values like {tomorrow}, {yesterday}, {+2 days}, {-3 days}, {next week}, etc.  The curly brackets indicate that this is a logical value which is then evaluated using the PHP <ulink url="http://www.php.net/strtotime">strtotime()</ulink> function.</para>
+            </section>
+        </section>
+
 	<section>
 	    <title>Dynamic values for Enumeration Custom Fields</title>
 	    
@@ -567,14 +575,9 @@ functions section.</para>
     
     <section>
         <title>Email Notifications</title>
-        
-        <para>See
-            <ulink url="manual.configuration.email.html">Email</ulink>
-            in the
-            <ulink url="manual.configuration.html">Configuration</ulink>
-            section.
-        </para>
-        
+
+        <para>See Email in the Configuration section.</para>
+
         <para>Examples:
             <itemizedlist>
                 <listitem>
