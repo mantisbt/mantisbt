@@ -389,12 +389,14 @@
 	define( 'TOKEN_GRAPH',			2 );
 	define( 'TOKEN_LAST_VISITED',	3 );
 	define( 'TOKEN_AUTHENTICATED',	4 );
+	define( 'TOKEN_COLLAPSE',		5 );
 	define( 'TOKEN_USER',			1000 );
 
 	# token expirations
 	define( 'TOKEN_EXPIRY', 		60*60 ); # Default expiration of 60 minutes ( 3600 seconds )
 	define( 'TOKEN_EXPIRY_LAST_VISITED', 24*60*60 );
 	define( 'TOKEN_EXPIRY_AUTHENTICATED', 5*60 );
+	define( 'TOKEN_EXPIRY_COLLAPSE', 365*24*60*60 );
 
 	# config types
 	define( 'CONFIG_TYPE_INT', 1 );

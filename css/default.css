@@ -129,6 +129,7 @@ div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; float: ri
 .underline-small		{ text-decoration: underline; font-size: 8pt; }
 .strike					{ text-decoration: line-through; }
 .strike-small			{ text-decoration: line-through; font-size: 8pt; }
+.hidden				{ display: none; }
 
 .nowrap
 {

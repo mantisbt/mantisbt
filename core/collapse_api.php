@@ -22,6 +22,7 @@
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	require_once( $t_core_dir . 'tokens_api.php' );
 
 	### Collapse API ###
 
@@ -36,17 +37,24 @@
 	#	:
 	#	collapse_end( 'xyz' );		# marks the end of the whole section
 	#
-	# In javascript/common.js, add the g_div_xyz constants.
-	#
 
 	$g_current_collapse_section = null;
 	$g_open_collapse_section = false;
 
-	# ---------------
-	# Use at the top of the section that should be visible when the section is expanded.
-	# sections can not be nested
-	function collapse_open( $p_name ) {
+	$g_collapse_cache_token = null;
+
+	/**
+	 * Marks the beginning of a collapse block's open phase.
+	 * This will be visible if the block is expanded, or if
+	 * javascript is disabled.
+	 * @param string Collapse block name
+	 * @param string Collapse block section
+	 */
+	function collapse_open( $p_name, $p_section = '' ) {
 		global $g_current_collapse_section, $g_open_collapse_section;
+
+		$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
+		$t_display = collapse_display( $t_block );
 
 		# make sure no other collapse section is started
 		if ( $g_current_collapse_section !== null ) {
@@ -54,21 +62,27 @@
 		}
 
 		$g_open_collapse_section = true;
-		$g_current_collapse_section = $p_name;
+		$g_current_collapse_section = $t_block;
 
-		$t_div_id = $p_name . '_open';
-		echo "<div id=\"$t_div_id\">";
+		$t_div_id = $t_block . '_open';
+		echo '<div id="', $t_div_id, '"', ( $t_display ? '' : ' class="hidden"' ) ,'>';
 	}
 
-	# ---------------
-	# Use to mark the end of the expanded section and the beginning of the closed section
-	# the closed section will not be sent to the browser if $g_Use_javascript is OFF.
-	# This is achieved using output buffering.
-	function collapse_closed( $p_name ) {
+	/**
+	 * Marks the end of a collapse block's open phase and the beginning
+	 * of the block's closed phase.  Thi will only be visible if the
+	 * block have been collapsed and javascript is enabled.
+	 * @param string Collapse block name
+	 * @param string Collapse block section
+	 */
+	function collapse_closed( $p_name, $p_section = '' ) {
 		global $g_current_collapse_section, $g_open_collapse_section;
 
+		$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
+		$t_display = !collapse_display( $t_block );
+
 		# Make sure a section is opened, and it is the same section.
-		if ( $p_name !== $g_current_collapse_section ) {
+		if ( $t_block !== $g_current_collapse_section ) {
 			trigger_error( ERROR_GENERIC, ERROR );
 		}
 
@@ -78,16 +92,23 @@
 
 		ob_start();
 
-		echo '<div id="', $p_name, '_closed" style="display: none;">';
+		$t_div_id = $t_block . '_closed';
+		echo '<div id="', $t_div_id, '"', ( $t_display ? '' : ' class="hidden"' ) ,'>';
 	}
 
-	# ---------------
-	# This is used within both the open and closed section to identify the location where the
-	# '+'/'-' icon should be placed.
-	function collapse_icon( $p_name ) {
+	/**
+	 * Marks the location where a +/- icon is placed in output
+	 * for the user to toggle the collapse block status.
+	 * This should appear in both the open and closed phase of a block.
+	 * @param string Collapse block name
+	 * @param string Collapse block section
+	 */
+	function collapse_icon( $p_name, $p_section = '' ) {
 		if ( OFF == config_get( 'use_javascript' ) ) {
 			return;
 		}
+
+		$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
 
 		global $g_open_collapse_section;
 
@@ -99,18 +120,24 @@
 			$t_alt  = '+';
 		}
 
-		echo "<a href=\"\" onclick=\"ToggleDiv( '$p_name', g_div_$p_name ); return false;\"
+		echo "<a href=\"\" onclick=\"ToggleDiv( '$t_block' ); return false;\"
 			><img border=\"0\" src=\"images/$t_icon\" alt=\"$t_alt\" /></a>&nbsp;";
 	}
 
-	# ---------------
-	# Mark the end of the collapsible section
-	function collapse_end( $p_name ) {
+	/**
+	 * Marks the end of a collaps block's closed phase.
+	 * Closed phase output is discarded if javascript is disabled.
+	 * @param string Collapse block name
+	 * @param string Collapse block section
+	 */
+	function collapse_end( $p_name, $p_section = '' ) {
 		global $g_current_collapse_section, $g_open_collapse_section;
 
+		$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
+		$t_display = collapse_display( $t_block );
 
 		# Make sure a section is opened, and it is the same section.
-		if ( $p_name !== $g_current_collapse_section ) {
+		if ( $t_block !== $g_current_collapse_section ) {
 			ob_end_clean();
 			trigger_error( ERROR_GENERIC, ERROR );
 		}
@@ -120,10 +147,6 @@
 		$g_open_collapse_section = false;
 
 		if ( ON == config_get( 'use_javascript' ) ) {
-			echo '<script type="text/javascript" language="JavaScript"><!--' . "\n";
-			echo '	SetDiv( "', $p_name, '", g_div_', $p_name, ' );' . "\n";
-			echo '--></script>';
-
 			ob_end_flush();
 		} else {
 			ob_end_clean();
@@ -131,4 +154,72 @@
 
 		$g_current_collapse_section = null;
 	}
+
+	/**
+	 * Determine if a block should be displayed open by default.
+	 * @param string Collapse block
+	 */
+	function collapse_display( $p_block ) {
+		global $g_collapse_cache_token;
+
+		if ( !isset( $g_collapse_cache_token[$p_block] ) || OFF == config_get( 'use_javascript' ) ) {
+			return true;
+		}
+
+		return ( true == $g_collapse_cache_token[$p_block] );
+	}
+
+	/**
+	 * Cache collapse API data from the database for the current user.
+	 * If the collapse cookie has been set, grab the changes and resave
+	 * the token, or touch it otherwise.
+	 */
+	function collapse_cache_token() {
+		global $g_collapse_cache_token;
+
+		if ( current_user_is_anonymous() ) {
+			$g_collapse_cache_token = array();
+			return;
+		}
+
+		if ( isset( $g_collapse_cache_token ) ) {
+			return;
+		}
+
+		$t_user_id = auth_get_current_user_id();
+		$t_token = token_get_value( TOKEN_COLLAPSE );
+
+		if ( !is_null( $t_token ) ) {
+			$t_data = unserialize( $t_token );
+		} else {
+			$t_data = array();
+		}
+
+		$g_collapse_cache_token = $t_data;
+
+		$t_cookie = gpc_get_cookie( 'MANTIS_collapse_settings', '' );
+
+		if ( false !== $t_cookie && !is_blank( $t_cookie ) ) {
+			$t_update = false;
+			$t_data = explode( '|', $t_cookie );
+
+			foreach ( $t_data as $t_pair ) {
+				$t_pair = explode( ',', $t_pair );
+
+				if ( false !== $t_pair && count( $t_pair ) == 2 ) {
+					$g_collapse_cache_token[$t_pair[0]] = ( true == $t_pair[1] );
+					$t_update = true;
+				}
+			}
+
+			if ( $t_update ) {
+				$t_token = serialize( $g_collapse_cache_token );
+				token_set( TOKEN_COLLAPSE, $t_token, TOKEN_EXPIRY_COLLAPSE );
+			} else {
+				token_touch( TOKEN_COLLAPSE );
+			}
+		}
+
+	}
+
 ?>

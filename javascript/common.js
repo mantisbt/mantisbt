@@ -94,61 +94,29 @@ function SetCookie( p_cookie, p_value ) {
  * Collapsible element functions
  */
 
-var g_div_history       = 0x0001;
-var g_div_bugnotes      = 0x0002;
-var g_div_bugnote_add   = 0x0004;
-var g_div_bugnotestats  = 0x0008;
-var g_div_upload_form   = 0x0010;
-var g_div_monitoring    = 0x0020;
-var g_div_sponsorship   = 0x0040;
-var g_div_relationships = 0x0080;
-var g_div_filter        = 0x0100;
+var g_collapse_clear = 1;
 
-var g_div_plugin		= 0x8000;
+function ToggleDiv( p_div ) {
+	t_open_div = document.getElementById( p_div + "_open" )
+	t_closed_div = document.getElementById( p_div + "_closed" )
 
-/* List here the sections open by default */
-var g_default_view_settings = 
-	g_div_history | 
-	g_div_bugnotes |
-	g_div_bugnote_add |
-	g_div_bugnotestats |
-	g_div_upload_form |
-	g_div_monitoring |
-	g_div_sponsorship |
-	g_div_relationships;
-
-
-function GetViewSettings() {
-	var t_cookie = GetCookie( "VIEW_SETTINGS" );
-
-	if ( -1 == t_cookie ) {
-		t_cookie = g_default_view_settings;
-	} else {
-		t_cookie = parseInt( t_cookie );
+	t_cookie = GetCookie( "collapse_settings" );
+	if ( 1 == g_collapse_new ) {
+		t_cookie = "";
+		g_collapse_clear = 0;
 	}
 
-	return t_cookie;
-}
-
-function SetDiv( p_div, p_cookie_bit ) {
-	var t_view_settings = GetViewSettings();
-
-	if( t_view_settings & p_cookie_bit ) {
-		document.getElementById( p_div + "_open" ).style.display = "";
-		document.getElementById( p_div + "_closed" ).style.display = "none";
+	if ( t_open_div.style.display == "none" ) {
+		t_open_div.style.display = "";
+		t_closed_div.style.display = "none";
+		t_cookie = t_cookie + "|" + p_div + ",1"
 	} else {
-		document.getElementById( p_div + "_open" ).style.display = "none";
-		document.getElementById( p_div + "_closed" ).style.display = "";
+		t_closed_div.style.display = "";
+		t_open_div.style.display = "none";
+		t_cookie = t_cookie + "|" + p_div + ",0"
 	}
-}
 
-function ToggleDiv( p_div, p_cookie_bit ) {
-	var t_view_settings = GetViewSettings();
-
-	t_view_settings ^= p_cookie_bit;
-	SetCookie( "VIEW_SETTINGS", t_view_settings );
-
-	SetDiv( p_div, p_cookie_bit );
+	SetCookie( "collapse_settings", t_cookie );
 }
 
 /* Check checkboxes */
