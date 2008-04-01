@@ -150,7 +150,9 @@
 	require_once( $t_core_path.'gpc_api.php' );
 	require_once( $t_core_path.'print_api.php' );
 	require_once( $t_core_path.'collapse_api.php' );
-	collapse_cache_token();
+	if ( !defined( 'MANTIS_INSTALLER' ) ) {
+		collapse_cache_token();
+	}
 
 	# custom functions (in main directory)
 	# @@@ Move all such files to core/

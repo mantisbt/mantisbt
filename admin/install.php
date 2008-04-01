@@ -26,6 +26,7 @@
 	//@@@ put this somewhere
 	@set_time_limit ( 0 ) ;
 	$g_skip_open_db = true;  # don't open the database in database_api.php
+	define( 'MANTIS_INSTALLER', true );
 	define( 'PLUGINS_DISABLED', true );
 	@require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 	@require_once( 'install_functions.php' );
