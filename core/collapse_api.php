@@ -177,7 +177,7 @@
 	function collapse_cache_token() {
 		global $g_collapse_cache_token;
 
-		if ( current_user_is_anonymous() ) {
+		if ( !auth_is_user_authenticated() || current_user_is_anonymous() ) {
 			$g_collapse_cache_token = array();
 			return;
 		}

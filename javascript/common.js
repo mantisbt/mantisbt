@@ -109,11 +109,11 @@ function ToggleDiv( p_div ) {
 	if ( t_open_div.style.display == "none" ) {
 		t_open_div.style.display = "";
 		t_closed_div.style.display = "none";
-		t_cookie = t_cookie + "|" + p_div + ",1"
+		t_cookie = t_cookie + "|" + p_div + ",1";
 	} else {
 		t_closed_div.style.display = "";
 		t_open_div.style.display = "none";
-		t_cookie = t_cookie + "|" + p_div + ",0"
+		t_cookie = t_cookie + "|" + p_div + ",0";
 	}
 
 	SetCookie( "collapse_settings", t_cookie );
