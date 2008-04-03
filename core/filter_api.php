@@ -1115,7 +1115,6 @@
 		if ( !$t_any_found ) {
 			$t_clauses = array();
 			$t_table_name = 'user_monitor';
-			array_push( $t_from_clauses, $t_bug_monitor_table );
 			array_push( $t_join_clauses, "LEFT JOIN $t_bug_monitor_table $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
 
 			foreach( $t_filter['user_monitor'] as $t_filter_member ) {
@@ -1149,7 +1148,6 @@
 			$t_comp_type = relationship_get_complementary_type( $c_rel_type );
 			$t_clauses = array();
 			$t_table_name = 'relationship';
-			array_push( $t_from_clauses, $t_bug_relationship_table );
 			array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_name ON $t_table_name.destination_bug_id = $t_bug_table.id" );
 			array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table ${t_table_name}2 ON ${t_table_name}2.source_bug_id = $t_bug_table.id" );
 			// get reverse relationships
