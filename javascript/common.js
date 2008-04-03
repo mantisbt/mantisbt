@@ -97,22 +97,22 @@ function SetCookie( p_cookie, p_value ) {
 var g_collapse_clear = 1;
 
 function ToggleDiv( p_div ) {
-	t_open_div = document.getElementById( p_div + "_open" )
-	t_closed_div = document.getElementById( p_div + "_closed" )
+	t_open_div = document.getElementById( p_div + "_open" );
+	t_closed_div = document.getElementById( p_div + "_closed" );
 
 	t_cookie = GetCookie( "collapse_settings" );
-	if ( 1 == g_collapse_new ) {
+	if ( 1 == g_collapse_clear ) {
 		t_cookie = "";
 		g_collapse_clear = 0;
 	}
 
-	if ( t_open_div.style.display == "none" ) {
-		t_open_div.style.display = "";
-		t_closed_div.style.display = "none";
+	if ( t_open_div.className == "hidden" ) {
+		t_open_div.className = "";
+		t_closed_div.className = "hidden";
 		t_cookie = t_cookie + "|" + p_div + ",1";
 	} else {
-		t_closed_div.style.display = "";
-		t_open_div.style.display = "none";
+		t_closed_div.className = "";
+		t_open_div.className = "hidden";
 		t_cookie = t_cookie + "|" + p_div + ",0";
 	}
 
