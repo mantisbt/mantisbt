@@ -10,6 +10,8 @@ p 					{ font-family: Verdana, Arial, Helvetica, sans-serif; }
 
 address 			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8pt }
 
+pre				{ margin-top: 0px; margin-bottom: 0px; }
+
 a					{}
 a:active 			{}
 a:link    			{}
@@ -40,6 +42,7 @@ span.dependency_upgrade		{ color: orange; }
 table				{ }
 table.hide			{ width: 100%; border: solid 0px #ffffff; }
 table.width100		{ width: 100%; border: solid 1px #000000; }
+table.width90		{ width: 90%;  border: solid 1px #000000; }
 table.width75		{ width: 75%;  border: solid 1px #000000; }
 table.width60		{ width: 60%;  border: solid 1px #000000; }
 table.width50		{ width: 50%;  border: solid 1px #000000; }
