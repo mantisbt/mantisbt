@@ -34,8 +34,22 @@
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 
 		$t_release_title = string_display( $t_project_name ) . ' - ' . string_display( $t_version_name );
+
+		if ( config_get( 'show_changelog_dates' ) ) {
+			$t_version_released = version_get_field( $p_version_id, 'released' );
+			$t_release_timestamp = version_get_field( $p_version_id, 'date_order' );
+
+			if ( (bool) $t_version_released ) {
+				$t_release_date = ' (' . strtolower( lang_get('released') ) . ' ' . date( config_get( 'short_date_format' ), $t_release_timestamp ) . ')';
+			} else {
+				$t_release_date = ' (' . strtolower( lang_get( 'not_released' ) ) . ')';
+			}
+		}
+
 		echo '<tt>';
-		echo '<br />', $t_release_title, '<br />';
+		echo '<br />', $t_release_title, $t_release_date, '<br />';
+
+		$t_release_title .= $t_release_date;
 		echo str_pad( '', strlen( $t_release_title ), '=' ), '<br />';
 	}
 	
@@ -215,6 +229,14 @@
 				$t_issue_set_level = $t_issue_set_levels[$j];
 				 
 				helper_call_custom_function( 'changelog_print_issue', array( $t_issue_set_id, $t_issue_set_level ) );
+			}
+
+			if ( $t_issues_resolved == 1 ) {
+				echo "[{$t_issues_resolved} " . lang_get( 'bug' ) . ']';
+				echo "<br />";
+			} else if ( $t_issues_resolved > 1 ) {
+				echo "[{$t_issues_resolved} " . lang_get( 'bugs' ) . ']';
+				echo "<br />";
 			}
 
 			echo '</tt>';

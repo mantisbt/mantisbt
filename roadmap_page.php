@@ -34,8 +34,17 @@
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 
 		$t_release_title = string_display( $t_project_name ) . ' - ' . string_display( $t_version_name );
+
+		if ( config_get( 'show_roadmap_dates' ) ) {
+			$t_version_timestamp = $p_version_row['date_order'];
+
+			$t_scheduled_release_date = ' (' . strtolower( lang_get( 'scheduled_release' ) ) . ' ' . date( config_get( 'short_date_format' ), $t_version_timestamp ) . ')';
+		}
+
 		echo '<tt>';
-		echo '<br />', $t_release_title, '<br />';
+		echo '<br />', $t_release_title, $t_scheduled_release_date, '<br />';
+
+		$t_release_title .= $t_scheduled_release_date;
 		echo str_pad( '', strlen( $t_release_title ), '=' ), '<br />';
 	}
 

@@ -921,6 +921,8 @@ $s_delete_version_button = 'Delete Version';
 $s_edit_project_version_title = 'Edit Project Version';
 $s_update_version_button = 'Update Version';
 $s_released = 'Released';
+$s_not_released = 'Not Yet Released';
+$s_scheduled_release = 'Scheduled For Release';
 $s_obsolete = 'Obsolete';
 
 # manage_proj_version_update.php
@@ -1310,6 +1312,7 @@ $s_resolved_progress = '%d of %d issue(s) resolved.  Progress (%d%%).';
 $s_http_auth_realm = "Mantis Login";
 
 $s_bug = "issue";
+$s_bugs = "issues";
 $s_add_new_relationship = "New relationship";
 $s_add_new_relationship_button = "Add";
 $s_this_bug = "Current issue";

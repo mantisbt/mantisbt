@@ -586,8 +586,12 @@
 	# Only users above this threshold will have their avatar shown
 	$g_show_avatar_threshold = DEVELOPER;
 
-        # Default avatar for users without a gravatar account
-        $g_default_avatar = "%path%images/no_avatar.png";
+	# Default avatar for users without a gravatar account
+	$g_default_avatar = "%path%images/no_avatar.png";
+
+	# Show release dates on roadmap/changelog
+	$g_show_changelog_dates = ON;
+	$g_show_roadmap_dates = ON;
 
 	############################
 	# Mantis JPGRAPH Addon
