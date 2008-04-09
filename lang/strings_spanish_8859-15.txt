@@ -56,7 +56,7 @@ $s_actiongroup_menu_set_sticky = 'Fijar/Desfijar';
 $s_actiongroup_menu_update_field = 'Actualizar %s';
 $s_actiongroup_menu_update_target_version = 'Actualizar Previsto para Versión';
 $s_actiongroup_menu_update_fixed_in_version = 'Actualizar Resuelta en Versión';
-$s_actiongroup_menu_update_product_build = 'Actualizar Compilación del Proyecto';
+$s_actiongroup_menu_update_product_build = 'Actualizar Compilación del Producto';
 $s_actiongroup_menu_add_note = 'Añadir Nota';
 $s_actiongroup_menu_attach_tags = 'Adjuntar Etiquetas';
 $s_actiongroup_bugs = 'Incidencias Seleccionadas';
@@ -69,6 +69,7 @@ $s_operation_successful = 'Operación exitosa.';
 $s_date_order = 'Ordenar por Fecha';
 $s_print_all_bug_page_link = 'Imprimir Informes';
 $s_csv_export = 'Exportar a CSV';
+$s_excel_export = 'Exportar a Excel';
 $s_login_anonymously = 'Conectarse Anónimamente';
 $s_anonymous = 'Anónimo';
 $s_jump_to_bugnotes = 'Ir a Notas';
@@ -106,7 +107,12 @@ $s_empty_password_sure_msg = 'El usuario tiene una contraseña vacía. ¿Está segur
 $s_empty_password_button = 'Usar Contraseña en Blanco';
 $s_reauthenticate_title = 'Autenticar';
 $s_reauthenticate_message = 'Está viendo una página segura, pero su sesión ha expirado. Por favor autentíquese para continuar.';
-$s_no_category = 'Sin Categoría';
+$s_no_category = '(Sin Categoría)';
+$s_global_categories = 'Global Categories';
+$s_inherit = 'Heredar Categorías';
+$s_inherit_global = 'Heredar Categorías Globales';
+$s_inherit_parent = 'Heredar Categorías del Padre';
+$s_update_subproject_inheritance = 'Actualizar Herencia del Subproyecto';
 
 $s_duplicate_of = "es un duplicado de";
 $s_has_duplicate = "está duplicada en";
@@ -270,6 +276,7 @@ $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Ha fallado la selección de la base de d
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Ya existe una categoría con ese nombre.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No se ha especificado ninguna acción de copia.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoría no encontrada.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Categoría \'%s\' no encontrada para el proyecto \'%s\'.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Ya existe una versión con ese nombre.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versión \'%s\' no encontrada.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'El nombre de usuario no es válido. Los nombres de usuario sólo pueden contener caracteres estándar, números, guiones medios y guiones bajos.';
@@ -308,7 +315,9 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'El evento \'%s\' no ha sido declarado a
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin no registrado en Mantis.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin ya instalado previamente.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Página del Plugin no encontrada.';
-
+$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Campo \'%s\' contiene duplicados en la columna \'%s\'.';
+$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Campo \'%s\' contiene un campo no válido: \'%s\'';
+$MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Esta página no puede ser accedida utilizando este método.';
 
 $s_login_error = 'Su cuenta puede estar deshabilitada o o bloqueada o el nombre de usuario/contraseña introducidos son incorrectos.';
 $s_login_cookies_disabled = 'Su navegador no soporta cookies, o las ha rechazado.';
@@ -820,6 +829,9 @@ $s_plugin_author = 'Autor: %s';
 $s_plugin_url = 'Sitio Web: ';
 $s_plugin_depends = 'Dependencias';
 $s_plugin_no_depends = 'Sin dependencias';
+$s_plugin_priority = 'Prioridad';             
+$s_plugin_protected = 'Protegido';
+$s_plugin_update = 'Actualizar';
 $s_plugin_actions = 'Acciones';
 $s_plugin_install = 'Instalar';
 $s_plugin_upgrade = 'Actualizar';
@@ -913,6 +925,9 @@ $s_delete_version_button = 'Eliminar Versión';
 $s_edit_project_version_title = 'Editar Versión del Proyecto';
 $s_update_version_button = 'Actualizar Versión';
 $s_released = 'Liberada';
+$s_not_released = 'No Liberada Aún';
+$s_scheduled_release = 'Liberación Programada';
+$s_obsolete = 'Obsoleta';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'La versión ha sido actualizada...';
@@ -1250,7 +1265,7 @@ $s_link_custom_field_to_project_button = 'Vincular Campo Personalizado';
 $s_linked_projects = 'Proyectos Vinculados';
 
 $s_custom_field_sequence = 'Secuencia';
-$s_custom_field_type_enum_string = '0:Cadena,1:Numérico,2:Flotante,3:Enumeración,4:E-mail,5:Casilla de verificación,6:Lista,7:Selección múltiple,8:Fecha';
+$s_custom_field_type_enum_string = '0:Cadena,1:Numérico,2:Flotante,3:Enumeración,4:E-mail,5:Casilla de verificación,6:Lista,7:Selección múltiple,8:Fecha,9:Radio';
 
 $s_confirm_used_custom_field_deletion = 'Este campo está vinculado al menos a un proyecto.  Si continúa todos los valores para este campo serán borrados permanentemente.  Esta acción no puede deshacerse.  Si no desea eliminar el campo, haga click sobre el botón Atrás de su navegador.  Para proceder, haga click sobre el botón que aparece abajo';
 $s_confirm_custom_field_deletion = '¿Está seguro que desea eliminar este campo personalizado y todos los valores asociados?';
@@ -1298,7 +1313,8 @@ $s_resolved_progress = '%d de %d incidencia(s) resuelta(s). Progreso (%d%%).';
 # Http auth
 $s_http_auth_realm = "Acceso a Mantis";
 
-$s_bug = "Incidencia";
+$s_bug = "incidencia";
+$s_bugs = "incidencias";
 $s_add_new_relationship = "Nueva relación";
 $s_add_new_relationship_button = "Añadir";
 $s_this_bug = "Incidencia actual";
@@ -1406,8 +1422,8 @@ $s_to_date = 'Hasta';
 $s_on_date = 'El';
 
 # Switch constants
-$s_on = 'El';
-$s_off = 'Off'; # Sin traducción por el momento (no estoy seguro dónde se usa)
+$s_on = 'Sí';
+$s_off = 'No';
 
 # wiki related strings
 $s_wiki = 'Wiki';
@@ -1485,4 +1501,19 @@ $s_show_graph = 'Ver Gráfico';
 $s_graph_page = 'Historial Gráfico de la Incidencia';
 $s_graph_bug_page_link = 'Gráfico';
 
+# manage columns page
+$s_manage_columns_config = 'Administrar Columnas';
+$s_all_columns_title = 'Todas las columnas disponibles';
+$s_csv_columns_title = 'Columnas CSV';
+$s_view_issues_columns_title = 'Ver Columnas de de Incidencias';
+$s_print_issues_columns_title = 'Imprimir Columnas de Incidencias';
+$s_excel_columns_title = 'Columnas Excel';
+$s_update_columns_as_global_default = 'Actualizar columnas como globales por defecto para todos los proyectos';
+$s_update_columns_for_current_project = 'Actualizar columnas para el proyecto actual';
+$s_update_columns_as_my_default = 'Actualizar como columnas por defecto para todos los proyectos';
+$s_reset_columns_configuration = 'Reinicializar Configuración de Columnas';
+
+# mind mapping                    
+$s_mindmap = 'Mapa Mental';
+$s_freemind_export = 'Exportar a Freemind';
 ?>
