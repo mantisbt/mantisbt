@@ -206,6 +206,26 @@
 		return true;
 	}
 
+	/**
+	 * Used when columns are copied from one project to another.  This function
+	 * removes the columns that are not applicable to the target project.
+	 * @param $p_field_name - The logic name of the array being validated.  Used when triggering errors.
+	 * @param $p_columns_to_validate - The array of columns to filter.
+	 * @param $p_columns_all - The list of all valid columns.
+	 * @return An array of valid columns to the target project.
+	 */
+	function columns_remove_invalid( $p_field_name, $p_columns, $p_columns_all ) {
+		$t_columns = array();
+
+		foreach ( $p_columns as $t_column ) {
+			if ( in_array( strtolower( $t_column ), $p_columns_all ) ) {
+				$t_columns[] = $t_column;
+			}
+		}
+
+		return $t_columns;
+	}
+	
 	# --------------------
 	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
 	function print_column_title_selection( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {

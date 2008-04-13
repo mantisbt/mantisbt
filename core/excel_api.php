@@ -119,7 +119,11 @@
 		$t_type = is_numeric( $p_value ) ? 'Number' : 'String';
 
 		$t_ret = "<Cell><Data ss:Type=\"$t_type\">";
-		$t_ret .= utf8_encode( str_replace( "\n", '&#10;', $p_value ) );
+		$t_value = $p_value;
+		$t_value = str_replace( "\n", '&#10;', $t_value );
+		$t_value = str_replace( "<", "&lt;", $t_value );
+		$t_value = str_replace( ">", "&gt;", $t_value );
+		$t_ret .= utf8_encode( $t_value );
 		$t_ret .= "</Data></Cell>\n"; 
 
 		return $t_ret;

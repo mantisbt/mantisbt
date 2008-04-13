@@ -93,7 +93,7 @@
 <div align="center">
 <?php
 	$t_redirect_url = $f_form_page === 'account' ? 'account_manage_columns_page.php' : 'manage_config_columns_page.php';
-	html_page_top1( lang_get( 'manage_email_config' ) );
+	html_page_top1();
 	html_meta_redirect( $t_redirect_url );
 	html_page_top2();
 	echo '<br />';

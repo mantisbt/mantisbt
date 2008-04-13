@@ -2,7 +2,7 @@
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -35,19 +35,26 @@
 
 	$t_project_id = helper_get_current_project();
 
+	# Calculate the user id to set the configuration for.
+	if ( $t_manage_page ) {
+		$t_user_id = NO_USER;
+	} else {
+		$t_user_id = auth_get_current_user_id();
+	}
+
 	$t_columns = columns_get_all();
 	$t_all = implode( ', ', $t_columns );
 
-	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_CSV_PAGE );
+	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_CSV_PAGE, /* $p_viewable_only */ false, $t_user_id );
 	$t_csv = implode( ', ', $t_columns );
 
-	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE );
+	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE, /* $p_viewable_only */ false, $t_user_id );
 	$t_view_issues = implode( ', ', $t_columns );
 
-	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE );
+	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE, /* $p_viewable_only */ false, $t_user_id );
 	$t_print_issues = implode( ', ', $t_columns );
 
-	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_EXCEL_PAGE );
+	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_EXCEL_PAGE, /* $p_viewable_only */ false, $t_user_id );
 	$t_excel = implode( ', ', $t_columns );
 
 	echo '<br />';
@@ -56,7 +63,6 @@
 <div align="center">
 <form name="report_bug_form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="manage_config_columns_set.php">
 <table class="width50" cellspacing="1">
-
 
 <!-- Title -->
 <tr>
@@ -143,6 +149,34 @@
 	</td>
 </tr>
 
+</table>
+</form>
+</div>
+
+<div align="center">
+<form method="post" action="manage_columns_copy.php">
+<table class="width50" cellspacing="1">
+
+<!-- Copy Columns -->
+<tr>
+	<td class="left" colspan="3">
+			<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
+			<input type="hidden" name="manage_page" value="<?php echo $t_manage_page ?>" />
+
+			<select name="other_project_id">
+				<?php print_project_option_list( /* project_id */ null, /* include_all_projects */ true, /* filter_project_id */ $t_project_id ); ?>
+			</select>
+<?php
+		# only administrators can overwrite ALL PROJECTS columns
+		if ( current_user_is_administrator() ) {
+?>
+			<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_columns_from' ) ?>" />
+<?php
+		}
+?>
+			<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_columns_to' ) ?>" />
+	</td>
+</tr>
 </table>
 </form>
 </div>

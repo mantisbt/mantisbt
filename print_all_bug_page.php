@@ -137,8 +137,6 @@
 		$t_search = urlencode( $f_search );
 
 		$t_icons = array(
-			array( 'print_all_bug_page_excel', 'excel', '', 'fileicons/xls.gif', 'Excel 2000' ),
-			array( 'print_all_bug_page_excel', 'html', 'target="_blank"', 'ie.gif', 'Excel View' ),
 			array( 'print_all_bug_page_word', 'word', '', 'fileicons/doc.gif', 'Word 2000' ),
 			array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'ie.gif', 'Word View' ) );
 

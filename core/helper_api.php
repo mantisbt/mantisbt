@@ -340,8 +340,8 @@
 	}
 
 	# --------------------
-	function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_viewable_only = true ) {
-		$t_columns = helper_call_custom_function( 'get_columns_to_view', array( $p_columns_target ) );
+	function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_viewable_only = true, $p_user_id = null ) {
+		$t_columns = helper_call_custom_function( 'get_columns_to_view', array( $p_columns_target, $p_user_id ) );
 
 		# An associative array that is used to map older column names to newer ones.  This is useful when a column is renamed in the database
 		# or if the value is replaced with a foreign key.

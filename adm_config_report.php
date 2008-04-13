@@ -46,6 +46,8 @@
 	}
 
 	function print_config_value_as_string( $p_type, $p_value ) {
+		$t_corrupted = false;
+
 		switch( $p_type ) {
 			case CONFIG_TYPE_INT:
 				$t_value = (integer)$p_value;
@@ -56,7 +58,10 @@
 				echo string_nl2br( string_html_specialchars( "'$t_value'" ) );
 				return;
 			case CONFIG_TYPE_COMPLEX:
-				$t_value = unserialize( $p_value );
+				$t_value = @unserialize( utf8_decode( $p_value ) );
+				if ( $t_value === false ) {
+					$t_corrupted = true;
+				}
 				break;
 			default:
 				$t_value = config_eval( $p_value );
@@ -64,11 +69,17 @@
 		}
 		
 		echo '<pre>';
-		if ( function_exists( 'var_export' ) ) {
-			var_export( $t_value );
+
+		if ( $t_corrupted ) {
+			echo lang_get( 'configuration_corrupted' );
 		} else {
-			print_r( $t_value );
+			if ( function_exists( 'var_export' ) ) {
+				var_export( $t_value );
+			} else {
+				print_r( $t_value );
+			}
 		}
+
 		echo '</pre>';
 	}
 
