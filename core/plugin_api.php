@@ -131,6 +131,19 @@ function plugin_config_set( $p_option, $p_value, $p_user=NO_USER, $p_project=ALL
 }
 
 /**
+ * Delete a plugin configuration option from the database.
+ * @param string Configuration option name
+ * @param int User ID
+ * @param int Project ID
+ */
+function plugin_config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
+	$t_basename = plugin_get_current();
+	$t_full_option = 'plugin_' . $t_basename . '_' . $p_option;
+
+	config_delete( $t_full_option, $p_user, $p_project );
+}
+
+/**
  * Set plugin default values to global values without overriding anything.
  * @param array Array of configuration option name/value pairs.
  */
