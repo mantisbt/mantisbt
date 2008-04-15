@@ -603,11 +603,57 @@
 		}
 
 		$t_user_table	= db_get_table( 'mantis_user_table' );
-		
+
 		$query = "SELECT *
 				  FROM $t_user_table
 				  WHERE username=" . db_param(0);
 		$result = db_query_bound( $query, Array( $p_username ) );
+
+		if ( 0 == db_num_rows( $result ) ) {
+			return false;
+		} else {
+			$row = db_fetch_array( $result );
+			user_cache_database_result( $row );
+			return $row['id'];
+		}
+	}
+
+	# Get a user id from an email address
+	function user_get_id_by_email( $p_email ) {
+		global $g_cache_user;
+		if ( $t_user = user_search_cache('email', $p_email ) ) {
+			return $t_user['id'];
+		}
+
+		$t_user_table	= db_get_table( 'mantis_user_table' );
+
+		$query = "SELECT *
+				  FROM $t_user_table
+				  WHERE email=" . db_param(0);
+		$result = db_query_bound( $query, Array( $p_email ) );
+
+		if ( 0 == db_num_rows( $result ) ) {
+			return false;
+		} else {
+			$row = db_fetch_array( $result );
+			user_cache_database_result( $row );
+			return $row['id'];
+		}
+	}
+
+	# Get a user id from their real name
+	function user_get_id_by_realname( $p_realname ) {
+		global $g_cache_user;
+		if ( $t_user = user_search_cache('realname', $p_realname ) ) {
+			return $t_user['id'];
+		}
+
+		$t_user_table	= db_get_table( 'mantis_user_table' );
+
+		$query = "SELECT *
+				  FROM $t_user_table
+				  WHERE realname=" . db_param(0);
+		$result = db_query_bound( $query, Array( $p_realname ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			return false;
