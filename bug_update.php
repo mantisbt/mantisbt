@@ -77,7 +77,11 @@
 	$t_bug_data->target_version		= gpc_get_string( 'target_version', $t_bug_data->target_version );
 	$t_bug_data->view_state			= gpc_get_int( 'view_state', $t_bug_data->view_state );
 	$t_bug_data->summary			= gpc_get_string( 'summary', $t_bug_data->summary );
-
+	$t_bug_data->due_date 				= gpc_get_string( 'due_date', $t_bug_data->due_date);
+	if ( is_blank ( $t_bug_data->due_date ) ) {
+		$t_bug_data->due_date = date_get_null( );
+	}
+	
 	$t_bug_data->description		= gpc_get_string( 'description', $t_bug_data->description );
 	$t_bug_data->steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', $t_bug_data->steps_to_reproduce );
 	$t_bug_data->additional_information	= gpc_get_string( 'additional_information', $t_bug_data->additional_information );

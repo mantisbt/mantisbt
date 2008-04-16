@@ -1537,6 +1537,7 @@
 			
 			$row['date_submitted'] = db_unixtimestamp ( $row['date_submitted'] );
 			$row['last_updated'] = db_unixtimestamp ( $row['last_updated'] );
+			$row['due_date']	= db_unixtimestamp( $row['due_date'] );
 					
 			array_push( $rows, $row );
 		}

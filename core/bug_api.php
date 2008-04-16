@@ -79,6 +79,9 @@
 		
 		#internal helper objects
 		var $_stats = null;
+		
+		#due date
+		var $due_date = '';
 	}
 
 	#===================================
@@ -105,6 +108,8 @@
 			$p_bug_database_result['date_submitted']	= db_unixtimestamp( $p_bug_database_result['date_submitted']['date_submitted'] );
 		if( !is_int( $p_bug_database_result['last_updated'] ) )
 			$p_bug_database_result['last_updated']	= db_unixtimestamp( $p_bug_database_result['last_updated'] );
+		if( !is_int( $p_bug_database_result['due_date'] ) ) 
+			$p_bug_datebase_result['due_date']	= db_unixtimestamp( $p_bug_datebase_result['due_date'] );
 		$g_cache_bug[ $p_bug_database_result['id'] ] = $p_bug_database_result;
 		if( !is_null( $p_stats ) ) {
 			$g_cache_bug[ $p_bug_database_result['id'] ]['_stats'] = $p_stats;
@@ -145,6 +150,8 @@
 		$row = db_fetch_array( $result );
 		$row['date_submitted']	= db_unixtimestamp( $row['date_submitted'] );
 		$row['last_updated']	= db_unixtimestamp( $row['last_updated'] );
+		$row['due_date']	= db_unixtimestamp( $row['due_date'] );
+		
 		$g_cache_bug[$c_bug_id] = $row;
 
 		return $row;
@@ -335,6 +342,23 @@
 	}
 
 	# --------------------
+	# Check if the bug is overdue
+	function bug_is_overdue( $p_bug_id ) {
+		$t_bug_row = bug_cache_row( $p_bug_id );
+		$t_due_date = $t_bug_row[ 'due_date' ];
+		if (  ! date_is_null( $t_due_date)  ) {
+			$t_now = db_unixtimestamp();
+			if ( $t_now > $t_due_date ) {
+				if ( bug_is_resolved( $p_bug_id ) ) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+
+	# --------------------
 	# Validate workflow state to see if bug can be moved to requested state
 	function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
 		$t_status_enum_workflow = config_get( 'status_enum_workflow' );
@@ -393,6 +417,8 @@
 		$c_additional_info		= $p_bug_data->additional_information;
 		$c_sponsorship_total 	= 0;
 		$c_sticky 				= 0;
+		$c_due_date				= $p_bug_data->due_date;
+		
 
 		# Summary cannot be blank
 		if ( is_blank( $c_summary ) ) {
@@ -418,6 +444,17 @@
 		} else { 
 			$c_target_version	= '';
 		}
+
+		#check due_date format
+		if ( !is_blank( $p_bug_data->due_date ) ) {
+			if ( !is_int( $p_bug_data->due_date ) ) {
+				$t_tmp = strtotime( $p_bug_data->due_date);
+				$c_due_date = date ( 'Y-m-d 00:00:01', $t_tmp );
+			} else {
+				$c_due_date = date ( 'Y-m-d H:i:s', $p_bug_data->due_date );
+			}
+		}
+
 
 		$t_bug_table				= db_get_table( 'mantis_bug_table' );
 		$t_bug_text_table			= db_get_table( 'mantis_bug_text_table' );
@@ -474,7 +511,7 @@
 				      platform, version,
 				      build,
 				      profile_id, summary, view_state, sponsorship_total, sticky, fixed_in_version,
-				      target_version 
+				      target_version, due_date 
 				    )
 				  VALUES
 				    ( " . db_param(0) . ",
@@ -503,10 +540,11 @@
 				      " . db_param(23) . ",
 				      " . db_param(24) . ",
 				      " . db_param(25) . ",
-				      " . db_param(26) . ")";
+				      " . db_param(26) . ",
+				      " . db_param(27) . ")";
 		db_query_bound( $query, Array( $c_project_id, $c_reporter_id, $c_handler_id, 0, $c_priority, $c_severity, $c_reproducibility, $t_status,
 								 $t_resolution, 10, $c_category_id, db_now(), db_now(), 10, $t_text_id, $c_os, $c_os_build, $c_platform, $c_version,$c_build,
-								 $c_profile_id, $c_summary, $c_view_state, $c_sponsorship_total, $c_sticky, '', $c_target_version ) );
+								 $c_profile_id, $c_summary, $c_view_state, $c_sponsorship_total, $c_sticky, '', $c_target_version, $c_due_date) );
 
 		$t_bug_id = db_insert_id($t_bug_table);
 
@@ -569,6 +607,7 @@
 		bug_set_field( $t_new_bug_id, 'target_version', $t_bug_data->target_version );
 		bug_set_field( $t_new_bug_id, 'sponsorship_total', 0 );
 		bug_set_field( $t_new_bug_id, 'sticky', 0 );
+		bug_set_field( $t_new_bug_id, 'due_date', $t_bug_data->due_date );
 
 		# COPY CUSTOM FIELDS
 		if ( $p_copy_custom_fields ) {
@@ -898,6 +937,16 @@
 		$t_fields[] = $c_bug_id;
 		
 		db_query_bound( $query, $t_fields );
+		
+		if ( !is_blank( $p_bug_data->due_date ) ) {
+			if ( !is_int( $p_bug_data->due_date ) ) {
+				$t_format = strtotime( $p_bug_data->due_date);
+				$p_bug_data->due_date = date ( 'Y-m-d 00:00:01', $t_format );
+			} else {
+				$p_bug_data->due_date = date ( 'Y-m-d H:i:s', $p_bug_data->due_date );
+			}
+			bug_set_field( $p_bug_id, 'due_date', $p_bug_data->due_date);
+		}
 
 		bug_clear_cache( $p_bug_id );
 
@@ -1190,17 +1239,34 @@
 		$c_status		=  $p_status; #generic, unknown type
 
 		$h_status = bug_get_field( $p_bug_id, $p_field_name );
+		
+		if ( $p_field_name == 'due_date' ) {
+			if ( !date_is_null( $h_status )  ) {
+				$h_status = date( config_get ( 'short_date_format' ), $h_status );
+			} else {
+				$h_status = '';
+			}
+			$t_tmp = $p_status;
+			if ( !is_int( $p_status ) ) {
+				$t_tmp = strtotime( $p_status );
+			} 
+			if ( !date_is_null( $t_tmp ) ) {
+				$c_status = date( 'Y-m-d', $t_tmp );
+			} else {
+				$c_status = '';
+			}
+			$c_field_name = lang_get( 'due_date' );
+		}
 
 		# return if status is already set
 		if ( $c_status == $h_status ) {
 			return true;
 		}
-
 		$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 		# Update fields
 		$query = "UPDATE $t_bug_table
-				  SET $c_field_name=" . db_param(0) . "
+				  SET $p_field_name=" . db_param(0) . "
 				  WHERE id=" .db_param(1);
 		db_query_bound( $query, Array( $c_status, $c_bug_id ) );
 
@@ -1210,7 +1276,7 @@
 		# log changes except for duplicate_id which is obsolete and should be removed in
 		# Mantis 1.3.
 		if ( $p_field_name != 'duplicate_id' ) {
-			history_log_event_direct( $p_bug_id, $p_field_name, $h_status, $p_status );
+			history_log_event_direct( $p_bug_id, $p_field_name, $h_status, $c_status );
 		}
 
 		bug_clear_cache( $p_bug_id );
@@ -1497,6 +1563,7 @@
 		$p_bug_data->summary			= string_attribute( $p_bug_data->summary );
 		$p_bug_data->sponsorship_total	= string_attribute( $p_bug_data->sponsorship_total );
 		$p_bug_data->sticky				= string_attribute( $p_bug_data->sticky );
+		$p_bug_data->due_date			= string_attribute( $p_bug_data->due_date );
 
 		$p_bug_data->description		= string_textarea( $p_bug_data->description );
 		$p_bug_data->steps_to_reproduce	= string_textarea( $p_bug_data->steps_to_reproduce );
@@ -1522,6 +1589,7 @@
 		$p_bug_data->summary			= string_display_line_links( $p_bug_data->summary );
 		$p_bug_data->sponsorship_total	= string_display_line( $p_bug_data->sponsorship_total );
 		$p_bug_data->sticky				= string_display_line( $p_bug_data->sticky );
+		$p_bug_data->due_date			= string_display_line( $p_bug_data->due_date );
 
 		$p_bug_data->description		= string_display_links( $p_bug_data->description );
 		$p_bug_data->steps_to_reproduce	= string_display_links( $p_bug_data->steps_to_reproduce );

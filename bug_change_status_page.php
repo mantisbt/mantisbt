@@ -52,7 +52,7 @@
 			) ) {
 		access_denied();
 	}
-
+	$t_can_update_due_date = access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id );
 	# get new issue handler if set, otherwise default to original handler
 	$f_handler_id = gpc_get_int( 'handler_id', bug_get_field( $f_bug_id, 'handler_id' ) );
 
@@ -157,6 +157,26 @@ if ( ( $t_resolved > $f_new_status ) &&
 			<option value="0"></option>
 			<?php print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id ) ?>
 		</select>
+	</td>
+</tr>
+<?php } ?>
+
+<!-- Due date -->
+<?php if ( $t_can_update_due_date ) {
+	$t_date_to_display = '';
+	if ( ! date_is_null( $t_bug->due_date ) ) {
+			$t_date_to_display = date( config_get( 'short_date_format' ), $t_bug->due_date );
+	}
+?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'due_date' ) ?> <?php print_documentation_link( 'due_date' ) ?>
+	</td>
+	<td>
+	<?php
+	    print "<input ".helper_get_tab_index()." type=\"text\" id=\"due_date\" name=\"due_date\" size=\"20\" maxlength=\"10\" value=\"".$t_date_to_display."\">";
+		date_print_calendar( );
+	?>
 	</td>
 </tr>
 <?php } ?>
@@ -320,6 +340,10 @@ if ( ( $f_new_status >= $t_resolved ) && ( CLOSED > $f_new_status ) ) { ?>
 </form>
 </div>
 
+<?php
+if ( $t_can_update_due_date ) {
+	date_finish_calendar( 'due_date', 'trigger');
+} ?>
 <br />
 <?php
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' );

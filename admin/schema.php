@@ -404,3 +404,5 @@ $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_plugin_table' )
 	" ) );
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_version_table' ), "
 	obsolete		L		NOTNULL DEFAULT \" '0' \"" ) );
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "
+    due_date        T       NOTNULL DEFAULT '1970-01-01' " ) );

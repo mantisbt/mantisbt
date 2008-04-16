@@ -35,7 +35,7 @@
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
 	$t_bug = bug_prepare_edit( bug_get( $f_bug_id, true ) );
-
+	
 	if( $t_bug->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...
 		# ... override the current project. This to avoid problems with categories and handlers lists etc.
@@ -48,13 +48,13 @@
 	if ( SIMPLE_ONLY == config_get( 'show_update' ) ) {
 		print_header_redirect ( 'bug_update_page.php?bug_id=' . $f_bug_id );
 	}
-
+	
 	if ( bug_is_readonly( $f_bug_id ) ) {
 		error_parameters( $f_bug_id );
 		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 	}
 
-	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
+	$t_can_update_due_date = access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id );
 
 	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	html_page_top2();
@@ -189,8 +189,34 @@
 ?>
 	</td>
 
-	<!-- spacer -->
-	<td colspan="2">&nbsp;</td>
+<?php if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $f_bug_id ) ) { ?>
+	<!-- Due Date -->
+	<td class="category">
+		<?php echo lang_get( 'due_date' ) ?>
+	</td>
+	<?php 
+	if ( bug_is_overdue( $f_bug_id ) ) {
+		print "<td class=\"overdue\">";
+	} else {
+		print "<td>";
+	}
+	if ( $t_can_update_due_date ) {
+		$t_date_to_display = '';
+		if ( ! date_is_null( $t_bug->due_date ) ) {
+			$t_date_to_display = date( config_get( 'short_date_format' ), $t_bug->due_date );
+		}
+	    print "<input ".helper_get_tab_index()." type=\"text\" id=\"due_date\" name=\"due_date\" size=\"20\" maxlength=\"10\" value=\"".$t_date_to_display."\">";
+		date_print_calendar( );
+	?>
+	</td>
+	<?php } else {
+		if ( $t_bug->due_date != $t_null_date  ) print_date( config_get( 'short_date_format' ), $t_bug->due_date  ); }?>
+	</td>
+<?php } else { ?>
+		<!-- spacer -->
+		<td colspan="2">&nbsp;</td>
+<?php } ?>
+
 </tr>
 
 
@@ -595,6 +621,10 @@
 </form>
 
 <?php
+if ( $t_can_update_due_date ) { 
+	date_finish_calendar( 'due_date', 'trigger');
+}
+
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
 	html_page_bottom1( __FILE__ );
 

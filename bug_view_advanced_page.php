@@ -217,8 +217,29 @@
 		<?php echo get_enum_element( 'project_view_state', $t_bug->view_state ) ?>
 	</td>
 
-	<!-- spacer -->
-	<td colspan="2">&nbsp;</td>
+	<!-- Due Date -->
+	<?php if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $f_bug_id ) ) { ?>
+	<td class="category">
+		<?php echo lang_get( 'due_date' ) ?>
+	</td>
+	<?php
+	if ( bug_is_overdue( $f_bug_id ) ) {
+		print "<td class=\"overdue\">";
+	} else {
+		print "<td>";
+	}
+	?>
+		<?php 
+			if ( !date_is_null( $t_bug->due_date ) ) {
+				print_date( config_get( 'short_date_format' ), $t_bug->due_date ); }
+			?>
+	</td>
+	<?php } else { ?>
+		<!-- spacer -->
+		<td colspan="2">&nbsp;</td>
+	<?php
+	}
+	?>
 
 </tr>
 

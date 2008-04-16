@@ -45,6 +45,8 @@
 						( 0 == $f_master_bug_id ) ? '' : '?m_id=' . $f_master_bug_id );
 	}
 
+	$t_can_update_due_date = access_has_project_level( config_get( 'due_date_update_threshold' ), helper_get_current_project(), auth_get_current_user_id() );
+
 	if( $f_master_bug_id > 0 ) {
 		# master bug exists...
 		bug_ensure_exists( $f_master_bug_id );
@@ -114,6 +116,11 @@
 		$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 		$f_additional_info		= gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
 		$f_view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
+		$f_due_date				=gpc_get_string( 'due_date', '');
+
+		if ( $f_due_date == '' ) {
+			$f_due_date = date_get_null();
+		}
 
 		$t_project_id			= helper_get_current_project();
 
@@ -209,6 +216,26 @@
 </tr>
 <?php } ?>
 
+<!-- Due date -->
+<?php if ( $t_can_update_due_date ) { 
+	$t_date_to_display = '';
+	if ( ! date_is_null( $f_due_date ) ) {
+			$t_date_to_display = date( config_get( 'short_date_format' ), $f_due_date );	
+	}
+
+?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'due_date' ) ?> <?php print_documentation_link( 'due_date' ) ?>
+	</td>
+	<td>
+	<?php
+	    print "<input ".helper_get_tab_index()." type=\"text\" id=\"due_date\" name=\"due_date\" size=\"20\" maxlength=\"10\" value=\"".$t_date_to_display."\">";
+		date_print_calendar();
+	?>
+	</td>
+</tr>
+<?php } ?>
 
 <!-- spacer -->
 <tr class="spacer">
@@ -554,6 +581,9 @@
 	window.document.report_bug_form.category_id.focus();
 -->
 </script>
-<?php } ?>
+<?php  }
+if ( $t_can_update_due_date ) { 
+	date_finish_calendar( 'due_date', 'trigger' );
+}
 
-<?php html_page_bottom1( __FILE__ ) ?>
+html_page_bottom1( __FILE__ ) ?>

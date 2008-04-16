@@ -52,6 +52,7 @@ td.center			{ text-align: center; }
 td.left				{ text-align: left; }
 td.right			{ text-align: right; }
 td.category			{ background-color: #c8c8e8; color: #000000; font-weight: bold; vertical-align : top; }
+td.overdue			{ background-color: #ff0000; color: #000000; font-weight: bold; }
 
 td.col-1			{ background-color: #d8d8d8; color: #000000; }
 td.col-2			{ background-color: #e8e8e8; color: #000000; }

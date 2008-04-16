@@ -280,6 +280,9 @@
 </tr>
 
 <?php
+	} else {
+		# spacer
+		echo '<td colspan="2">&nbsp;</td>';	
 	}
 ?>
 <?php /*

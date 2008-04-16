@@ -54,6 +54,10 @@
 	$t_bug_data->description			= gpc_get_string( 'description' );
 	$t_bug_data->steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 	$t_bug_data->additional_information	= gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
+	$t_bug_data->due_date 				= gpc_get_string( 'due_date', '');
+	if ( is_blank ( $t_bug_data->due_date ) ) {
+		$t_bug_data->due_date = date_get_null();
+	}
 
 	$f_file					= gpc_get_file( 'file', null ); #@@@ (thraxisp) Note that this always returns a structure
 															# size = 0, if no file
@@ -188,6 +192,7 @@
 		<input type="hidden" name="build" 		value="<?php echo $t_bug_data->build ?>" />
 		<input type="hidden" name="report_stay" 	value="1" />
 		<input type="hidden" name="view_state"		value="<?php echo $t_bug_data->view_state ?>" />
+		<input type="hidden" name="due_date"		value="<?php echo $t_bug_data->due_date ?>" />
 		<input type="submit" class="button" 		value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
 	</form>
 	</p>

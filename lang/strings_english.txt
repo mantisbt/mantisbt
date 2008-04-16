@@ -1513,6 +1513,10 @@ $s_reset_columns_configuration = 'Reset Columns Configuration';
 $s_copy_columns_from = 'Copy Columns From';
 $s_copy_columns_to = 'Copy Columns To';
 
+# due date
+$s_due_date = "Due Date";
+$s_overdue = "Overdue";
+
 # mind mapping
 $s_mindmap = 'Mindmap';
 $s_freemind_export = 'Freemind Export';

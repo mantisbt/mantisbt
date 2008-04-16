@@ -22,6 +22,20 @@
 	# --------------------------------------------------------
 
 	### Date API ###
+	# --------------------
+	# checks if date is null
+	function date_is_null ( $p_date ) {
+		if ( $p_date == date_get_null( ) ) {
+			return true;
+		}
+		return false;
+	}
+	
+	# --------------------
+	# gets null date 
+	function date_get_null ( ) {
+		return db_unixtimestamp( '1970-01-01 00:00:01' );
+	}
 
 	# --------------------
 	# prints the date given the formating string
@@ -148,5 +162,49 @@
 				echo "</select>\n" ;
 			}
 		}
+	}
+	
+	# --------------------
+	# prints calendar icon and adds required javascript files.
+	# button_name is name of button that will display calendar icon
+	# in caste there are more than one calendar on page
+	function date_print_calendar ( $p_button_name = 'trigger' ) {
+		# @@@ (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...)
+        if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ){
+			echo "<style type=\"text/css\">@import url(javascript/jscalendar/calendar-blue.css);</style>\n";
+			echo "<script type=\"text/javascript\" src=\"javascript/jscalendar/calendar.js\"></script>\n"; 
+			echo "<script type=\"text/javascript\" src=\"javascript/jscalendar/lang/calendar-en.js\"></script>\n"; 
+			echo "<script type=\"text/javascript\" src=\"javascript/jscalendar/calendar-setup.js\"></script>\n"; 	
+			$t_icon_path = config_get( 'icon_path' );
+			$t_cal_icon = $t_icon_path ."calendar-img.gif";	
+	   	 	echo "<input type=\"image\" class=\"button\" id=\"".$p_button_name."\" SRC=\"";
+	    	echo $t_cal_icon;
+			$t_format = config_get( 'short_date_format' );
+			$t_new_format = str_replace( '-', '-%', $t_format );
+			$t_format = "%".$t_new_format;
+			echo "\" onClick=\"return showCalendar ('sel1', '".$t_format."', 24, true)\" />";
+		}
+	}
+	# --------------------
+	# creates javascript calendar objects, point to input element ($p_field_name) that
+	# diaplays date, and connects it with calendar button ($p_button_name) created with
+	# date_print_calendar.
+	# should be called right after </form> tag
+	function date_finish_calendar ( $p_field_name, $p_button_name) {
+	# @@@ (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...)
+        if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ){
+			$t_format = config_get( 'short_date_format' );
+			$t_new_format = str_replace( '-', '-%', $t_format );
+			$t_format = "%".$t_new_format;
+			echo "<script type=\"text/javascript\">\n";
+			echo "Calendar.setup (\n";
+			echo "{\n";
+		 	echo "inputField 	: \"".$p_field_name."\",\n";
+		 	echo "ifFormat 	: \"".$t_format."\", \n";
+		 	echo "button		: \"".$p_button_name."\"\n";
+			echo "}\n";
+			echo ");\n";
+			echo "</script>\n";
+			}	
 	}
 ?>

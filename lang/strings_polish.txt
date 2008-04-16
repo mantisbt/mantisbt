@@ -1336,4 +1336,7 @@ $s_on = 'Dnia';
 # wiki related strings
 $s_wiki = 'Wiki';
 
+$s_due_date = "Termin realizacji";
+$s_overdue = "Przeterminowane";
+
 ?>

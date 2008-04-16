@@ -521,8 +521,12 @@
 	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
 	function print_column_edit( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 		global $t_icon_path, $t_update_bug_threshold;
-
-		echo '<td>';
+		
+		if ( bug_is_overdue( $p_row['id'] ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_row['id'] )) {
+			print "<td class=\"overdue\">";
+		} else {
+			echo '<td>';
+		}
 		if ( !bug_is_readonly( $p_row['id'] )
 			&& access_has_bug_level( $t_update_bug_threshold, $p_row['id'] ) ) {
 			echo '<a href="' . string_get_bug_update_url( $p_row['id'] ) . '">';
@@ -532,6 +536,20 @@
 		} else {
 			echo '&nbsp;';
 		}
+		if ( bug_is_overdue( $p_row['id'] ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_row['id'] ) ) {
+			echo '<a href="' . string_get_bug_update_url( $p_row['id'] ) . '">';
+			echo '<img border="0" width="16" height="16" src="' . $t_icon_path . 'overdue.png';
+			echo '" alt="' . lang_get( 'overdue' ) . '"';
+			echo ' title="' . lang_get( 'overdue' ) . '" /></a>';
+		} else if ( ! date_is_null( $p_row[ 'due_date' ] ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_row['id'] )) {
+			echo '<a href="' . string_get_bug_update_url( $p_row['id'] ) . '">';
+			echo '<img border="0" width="16" height="16" src="' . $t_icon_path . 'clock.png';
+			echo '" alt="' . lang_get( 'due_date' ) . '"';
+			echo ' title="' . lang_get( 'due_date' ) . '" /></a>';
+		} else {
+			echo '&nbsp;';
+		}
+		
 		echo '</td>';
 	}
 
