@@ -561,6 +561,18 @@
 				# Main Page
 				$t_menu_options[] = '<a href="' . helper_mantis_url( 'main_page.php">' ) . lang_get( 'main_link' ) . '</a>';
 
+				# Plugin / Event added options
+				$t_event_menu_options = event_signal( 'EVENT_MENU_MAIN_FRONT' );
+				foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+					foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+						if ( is_array( $t_callback_menu_options ) ) {
+							$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+						} else {
+							$t_menu_options[] = $t_callback_menu_options;
+						}
+					}
+				}
+
 				# My View
 				$t_menu_options[] = '<a href="' . helper_mantis_url( 'my_view_page.php">' ) . lang_get( 'my_view_link' ) . '</a>';
 
