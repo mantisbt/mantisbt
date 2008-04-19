@@ -1,253 +1,323 @@
 Mantis ChangeLog
 
+2008.04.18  -  1.2.0a1
+
+- 0008660: [administration] Provide a way to hide/show users with global access in manage project page (vboctor).
+- 0008891: [administration] change version's released property's default value to unreleased (jreese).
+- 0008965: [api soap] Adding/Updating/Deleting versions using SOAP API requires ADMINISTRATOR rights (vboctor).
+- 0008938: [authentication] Allow site administrators to customize or disable reauthentication timeout. (jreese).
+- 0001910: [bugtracker] Provide ability to make version obsolete (vboctor).
+- 0003911: [bugtracker] Mantis violates RFC2616 when redirecting (giallu).
+- 0007463: [bugtracker] Issue with many child issues produced performance problem (grangeway).
+- 0008136: [bugtracker] Some <pre></pre> texts may cause php crash without error message (grangeway).
+- 0008245: [bugtracker] Target Version value lost in update issue page (giallu).
+- 0008771: [bugtracker] Port 0008738: Allow bugs to have no category (jreese).
+- 0008778: [bugtracker] Add newly reported issues to last visited (vboctor).
+- 0008890: [bugtracker] Add group action for updating "product build" field for multiple issues (vboctor).
+- 0008920: [bugtracker] Visual mark to differentiate "none" and "normal" priorities (vboctor).
+- 0008922: [bugtracker] Support including 'description', 'steps_to_reproduce', 'additional_information' as columns (vboctor).
+- 0008923: [bugtracker] Ability for users and administrators to customize columns for View Issues, Print Issues, CSV, and Excel (vboctor).
+- 0008937: [bugtracker] Users with privileges below Administrator cannot see subprojects. (jreese).
+- 0008969: [bugtracker] Can't switch off Inherit Global Categories (jreese).
+- 0008970: [bugtracker] project delete failed due to category changes (jreese).
+- 0008981: [bugtracker] Multiple bug submissions (vboctor).
+- 0008651: [change log] Display release date in changelog for released version (jreese).
+- 0007634: [custom fields] Support relative default for Date Custom Fields (e.g. {tomorrow}, {+2 days}, {next week}) (vboctor).
+- 0008518: [custom fields] Enumerated Custom Field limited to 255 (grangeway).
+- 0008710: [custom fields] display past years in Custom date field (vboctor).
+- 0009004: [custom fields] Support enumeration custom fields exposed as radio buttons (vboctor).
+- 0007130: [customization] Unbranding Mantis (jreese).
+- 0008874: [customization] Provide the ability to add "build" column to View Issues, Print Issues, and CSV export (vboctor).
+- 0007716: [db mssql] Can not handel Querry with over 3000 bugs (grangeway).
+- 0007712: [db mysql] mantis_config_table (thraxisp).
+- 0008748: [db mysql] phpMyAdmin reports a warning message (thraxisp).
+- 0008865: [db mysql] Wrong format for insert into Database (jreese).
+- 0008346: [documentation] Use DocBook for Mantis manual (giallu).
+- 0008369: [email] Making phpMail work with Gmail (giallu).
+- 0008576: [email] Wrong links to comments in email notifications (grangeway).
+- 0008577: [email] Long utf-8 encoded subject fails (phpmailer bug) (giallu).
+- 0008706: [email] Bad email headers for notifications (giallu).
+- 0007158: [feature] Change Mantis top logo link to internal link (giallu).
+- 0008435: [feature] Implement Global and Inheriting Categories Structure (jreese).
+- 0008491: [feature] Would like label for 'check for more issues' (giallu).
+- 0008787: [feature] WikkaWiki Integration (vboctor).
+- 0008927: [filters] "Create Permalink" is controlled by $g_view_filters (vboctor).
+- 0008799: [graphs] Top logo (mantis_logo.gif) and URL it points to shall be configurable (jreese).
+- 0008887: [graphs] Graph legend displays default status names (thraxisp).
+- 0008569: [installation] Errors when default language = auto ? (grangeway).
+- 0008757: [integration] Add wiki integration for TWiki (vboctor).
+- 0008875: [integration] Refactor Wiki integration engines to achieve better consistency (jreese).
+- 0009025: [javascript] Enhance Collapse API for Extensiblity and Plugin Usage (jreese).
+- 0008795: [localization] strtoupper() fail on localized strings (thraxisp).
+- 0008797: [localization] Improve the german translation to avoid baby talk (MartinFuchs).
+- 0008826: [localization] german localization (and maybe other languages, too): blocking and blocked relation text is swapped (MartinFuchs).
+- 0009046: [localization] French translation for $s_bug_assign_to_button (Bithunter).
+- 0008514: [other] Support a dynamic and lightweight plugin system (jreese).
+- 0008873: [other] Bug print / Word export should include the URL for downloading attachments (vboctor).
+- 0008535: [other] Replace RSS icon with Universal feed icon (jreese).
+- 0008740: [other] print_all_bug_page_word.php uses raw SQL rather than API (vboctor).
+- 0006666: [other] SIGSEGV in pcre_config (grangeway).
+- 0008565: [other] Formatting of summary in My View is not consistent with View Issues page (vboctor).
+- 0009050: [other] Add support for "Copy Columns From/To" when customizing columns to view in View Issues, Print Issues, CSV, Excel (vboctor).
+- 0008766: [plug-ins] Move text processing and formatting to an official plugin (jreese).
+- 0007214: [printing] Export issues from mantis to a freemind mindmap (vboctor).
+- 0004491: [relationships] Deleting duplicate relationshilp left value in 'duplicate_id' field (vboctor).
+- 0008995: [security] CSRF Vulnerabilities in user_create (thraxisp).
+- 0003816: [sponsorships] Include total sponsorships for an issue in csv export (vboctor).
+- 0008621: [time tracking] The expand icon is inverted for the Time tracking section (vboctor).
+- 0008486: [tools] No database stat of tag table displayed (zakman).
+- 0008536: [webpage] Top header logos are all distorted to the same size (giallu).
+- 0008578: [webpage] Wrong style class used in if ... else (vboctor).
+
+
 2008.01.19  -  1.1.1
 
 This is a maintenance release for the 1.1.x branch.  It includes a fix for PHP 4 support (#8681 stripos), several fixes for SOAP API, a security fix, and other minor bug fixes.
 
-- 0008756: [security] "Most active bugs" summary XSS vulnerability (giallu) - resolved.
-- 0008759: [api soap] Improve error handler to report location of errors (vboctor) - resolved.
-- 0008767: [api soap] incorrect date and time handling in mc_project_version_add and mc_project_version_update (planser) - resolved.
-- 0008683: [api soap] mc_projects_get_user_accessible raises SYSTEM NOTICE, but it should not (vboctor) - resolved.
-- 0008695: [api soap] Error with attachments - Method DISK (planser) - resolved.
-- 0008662: [bugtracker] Unneeded executable bits on mantis modules (giallu) - resolved.
-- 0008738: [bugtracker] Could not create bug if project have not categorys and g_default_bug_category is empty (vboctor) - resolved.
-- 0008770: [email] Sending queued emails is still attempted even if email notifications are turned OFF, causing errors (vboctor) - resolved.
-- 0008707: [filters] "My View" shows warnings about "sort" / "dir" not defined (vboctor) - resolved.
-- 0008708: [graphs] graph fails with error claiming bad colour name (thraxisp) - resolved.
-- 0008732: [graphs] Many options on bug_graph_page.php broken, inconsistent, incomplete (thraxisp) - resolved.
-- 0008684: [installation] UPGRADING file missing in doc (thraxisp) - resolved.
-- 0008742: [localization] "actiongroup_error_issue_is_readonly" isn't defined (vboctor) - resolved.
-- 0008758: [localization] Application error 18 with russian language (vboctor) - resolved.
-- 0008692: [localization] Russian translation update. (vboctor) - resolved.
-- 0008681: [upgrade] Mantis 1.1.0 has a dependency on stripos which was added in PHP 5 (vboctor) - resolved.
-- 0008721: [upgrade] css and icon paths incorrect (vboctor) - resolved.
+- 0008756: [security] "Most active bugs" summary XSS vulnerability (giallu).
+- 0008759: [api soap] Improve error handler to report location of errors (vboctor).
+- 0008767: [api soap] incorrect date and time handling in mc_project_version_add and mc_project_version_update (planser).
+- 0008683: [api soap] mc_projects_get_user_accessible raises SYSTEM NOTICE, but it should not (vboctor).
+- 0008695: [api soap] Error with attachments - Method DISK (planser).
+- 0008662: [bugtracker] Unneeded executable bits on mantis modules (giallu).
+- 0008738: [bugtracker] Could not create bug if project have not categorys and g_default_bug_category is empty (vboctor).
+- 0008770: [email] Sending queued emails is still attempted even if email notifications are turned OFF, causing errors (vboctor).
+- 0008707: [filters] "My View" shows warnings about "sort" / "dir" not defined (vboctor).
+- 0008708: [graphs] graph fails with error claiming bad colour name (thraxisp).
+- 0008732: [graphs] Many options on bug_graph_page.php broken, inconsistent, incomplete (thraxisp).
+- 0008684: [installation] UPGRADING file missing in doc (thraxisp).
+- 0008742: [localization] "actiongroup_error_issue_is_readonly" isn't defined (vboctor).
+- 0008758: [localization] Application error 18 with russian language (vboctor).
+- 0008692: [localization] Russian translation update. (vboctor).
+- 0008681: [upgrade] Mantis 1.1.0 has a dependency on stripos which was added in PHP 5 (vboctor).
+- 0008721: [upgrade] css and icon paths incorrect (vboctor).
 
 2007.12.19  -  1.1.0
 
-- 0008679: [security] XSS Vulnerability in view.php , Attached Files (vboctor) - resolved.
-- 0008591: [api soap] Error in api/soap/mc_filter_api.php#mc_filter_get() (planser) - resolved.
-- 0008602: [api soap] Provide a SOAP friendly error handler (vboctor) - resolved.
-- 0008604: [api soap] Wrong URL in E-Mail notifications by changes via webservice (vboctor) - resolved.
-- 0008617: [api soap] mc_version() should return the Mantis version (vboctor) - resolved.
-- 0008644: [api soap] Many errors of type SYSTEM NOTICE are thrown (planser) - resolved.
-- 0008661: [bugtracker] Possible crash condition leading to blank or incomplete page (giallu) - resolved.
-- 0008674: [email] Php script for sending mail via cronjob raise error when lang set to auto (vboctor) - resolved.
-- 0008499: [graphs] Many graphs show "not enough data to create graph" after upgrading from 1.1.0a2 (jreese) - resolved.
-- 0008567: [installation] cannot install on shared webserver, core/*.php inconsistent use of require_once($t_core_dir) (vboctor) - resolved.
-- 0008437: [localization] Update to italian translation (giallu) - resolved.
-- 0008645: [roadmap] Issue appears more than once in the Roadmap for a release. (jreese) - resolved.
+- 0008679: [security] XSS Vulnerability in view.php , Attached Files (vboctor).
+- 0008591: [api soap] Error in api/soap/mc_filter_api.php#mc_filter_get() (planser).
+- 0008602: [api soap] Provide a SOAP friendly error handler (vboctor).
+- 0008604: [api soap] Wrong URL in E-Mail notifications by changes via webservice (vboctor).
+- 0008617: [api soap] mc_version() should return the Mantis version (vboctor).
+- 0008644: [api soap] Many errors of type SYSTEM NOTICE are thrown (planser).
+- 0008661: [bugtracker] Possible crash condition leading to blank or incomplete page (giallu).
+- 0008674: [email] Php script for sending mail via cronjob raise error when lang set to auto (vboctor).
+- 0008499: [graphs] Many graphs show "not enough data to create graph" after upgrading from 1.1.0a2 (jreese).
+- 0008567: [installation] cannot install on shared webserver, core/*.php inconsistent use of require_once($t_core_dir) (vboctor).
+- 0008437: [localization] Update to italian translation (giallu).
+- 0008645: [roadmap] Issue appears more than once in the Roadmap for a release. (jreese).
 
 2007.11.23  -  1.1.0rc3
 
-- 0008494: [api soap] Remove backward compatibility code from SOAP API (vboctor) - resolved.
-- 0008519: [api soap] Name collision between NuSoap SoapClient and PHP 5 Soap extension (vboctor) - resolved.
-- 0008525: [api soap] mc_projects_get_user_accessible() shouldn't return ALL_PROJECTS (vboctor) - resolved.
-- 0008541: [api soap] $g_mc_error_when_version_not_found is not defined (vboctor) - resolved.
-- 0008566: [api soap] mc_project_version_add() doesn't set the date_order field correctly (vboctor) - resolved.
-- 0008592: [api soap] Error in api/soap/mc_file_api.php#mc_file_add() (vboctor) - resolved.
-- 0007646: [bugtracker] Show content link should change to Hide content when clicked (giallu) - resolved.
-- 0008509: [bugtracker] Empty Note is added when updating issue (giallu) - resolved.
-- 0008589: [bugtracker] file_download.php doesn't work with attachment names that contain accentuated characters when using Firefox (vboctor) - resolved.
-- 0008564: [db db2] Attempting installation of MANTIS400, table not being created (slashsplat) - resolved.
-- 0008511: [email] send_emails.php is missing <?php at the start of the file (giallu) - resolved.
-- 0008238: [filters] urldecode() error on creating PermaLink (MartinFuchs) - resolved.
-- 0008524: [integration] core/checkin.php is missing toplevel <? causing the script to fail. (vboctor) - resolved.
-- 0008063: [other] mantis_version shouldn't be in the configuration file (jreese) - resolved.
-- 0008263: [scripting] smaller issue in email address recognition (jreese) - resolved.
+- 0008494: [api soap] Remove backward compatibility code from SOAP API (vboctor).
+- 0008519: [api soap] Name collision between NuSoap SoapClient and PHP 5 Soap extension (vboctor).
+- 0008525: [api soap] mc_projects_get_user_accessible() shouldn't return ALL_PROJECTS (vboctor).
+- 0008541: [api soap] $g_mc_error_when_version_not_found is not defined (vboctor).
+- 0008566: [api soap] mc_project_version_add() doesn't set the date_order field correctly (vboctor).
+- 0008592: [api soap] Error in api/soap/mc_file_api.php#mc_file_add() (vboctor).
+- 0007646: [bugtracker] Show content link should change to Hide content when clicked (giallu).
+- 0008509: [bugtracker] Empty Note is added when updating issue (giallu).
+- 0008589: [bugtracker] file_download.php doesn't work with attachment names that contain accentuated characters when using Firefox (vboctor).
+- 0008564: [db db2] Attempting installation of MANTIS400, table not being created (slashsplat).
+- 0008511: [email] send_emails.php is missing <?php at the start of the file (giallu).
+- 0008238: [filters] urldecode() error on creating PermaLink (MartinFuchs).
+- 0008524: [integration] core/checkin.php is missing toplevel <? causing the script to fail. (vboctor).
+- 0008063: [other] mantis_version shouldn't be in the configuration file (jreese).
+- 0008263: [scripting] smaller issue in email address recognition (jreese).
 
 2007.10.23  -  1.1.0rc2
 
-- 0008467: [security] Users can login using the MD5 hash of the password (vboctor) - resolved.
-- 0008480: [security] XSS Vulnerability in Tag details, Attach Tags (jreese) - resolved.
-- 0008457: [administration] Removing a userdefined field from project results in APPLICATION ERROR #203 (vboctor) - resolved.
-- 0008490: [administration] Undefined variable: t_version in manage_proj_ver_copy.php (vboctor) - resolved.
-- 0008492: [api soap] Add attachment succeeds but creates broken attachment if upload path not found (vboctor) - resolved.
-- 0008493: [api soap] Attachments created via SOAP API don't honor attachments_file_permissions config option (vboctor) - resolved.
-- 0008241: [customization] Disable Roadmap (vboctor) - resolved.
-- 0007787: [feature] Robust threading of e-mails using MIME headers (giallu) - resolved.
-- 0008465: [filters] collapse filter section as default (giallu) - resolved.
-- 0008254: [integration] Gravatar integration should handle empty email addresses (giallu) - resolved.
-- 0008446: [localization] Update Estonian Language (vboctor) - resolved.
-- 0008459: [localization] Update catalan translation (vboctor) - resolved.
-- 0008463: [localization] re-authentication button does not appear in user's language (jreese) - resolved.
-- 0008468: [localization] $s_select_option is missing in german language (vboctor) - resolved.
-- 0008489: [localization] Update Japanese Localization for 1.1.0rc2 (vboctor) - resolved.
-- 0005612: [other] Redirect time ignored in preferences (giallu) - resolved.
-- 0007497: [other] Summary page is little of Garble (vboctor) - resolved.
-- 0007999: [other] Project list view corrupted (vboctor) - resolved.
-- 0008378: [other] Select custom avatar for default Gravatar image. (giallu) - resolved.
-- 0008476: [other] Add a service to disposable email address checker (zakman) - resolved.
-- 0008500: [other] Empty entry in "Category" drop down (vboctor) - resolved.
-- 0008475: [printing] Function used two times in the same file (only one is necessary) (vboctor) - resolved.
-- 0008461: [signup] signup_page and lost_pwd_page don't work if anonymous access not enabled (vboctor) - resolved.
-- 0008443: [tagging] creating new tags for multi-selection (jreese) - resolved.
-- 0008454: [time tracking] time tracking sum on request wrong (vboctor) - resolved.
+- 0008467: [security] Users can login using the MD5 hash of the password (vboctor).
+- 0008480: [security] XSS Vulnerability in Tag details, Attach Tags (jreese).
+- 0008457: [administration] Removing a userdefined field from project results in APPLICATION ERROR #203 (vboctor).
+- 0008490: [administration] Undefined variable: t_version in manage_proj_ver_copy.php (vboctor).
+- 0008492: [api soap] Add attachment succeeds but creates broken attachment if upload path not found (vboctor).
+- 0008493: [api soap] Attachments created via SOAP API don't honor attachments_file_permissions config option (vboctor).
+- 0008241: [customization] Disable Roadmap (vboctor).
+- 0007787: [feature] Robust threading of e-mails using MIME headers (giallu).
+- 0008465: [filters] collapse filter section as default (giallu).
+- 0008254: [integration] Gravatar integration should handle empty email addresses (giallu).
+- 0008446: [localization] Update Estonian Language (vboctor).
+- 0008459: [localization] Update catalan translation (vboctor).
+- 0008463: [localization] re-authentication button does not appear in user's language (jreese).
+- 0008468: [localization] $s_select_option is missing in german language (vboctor).
+- 0008489: [localization] Update Japanese Localization for 1.1.0rc2 (vboctor).
+- 0005612: [other] Redirect time ignored in preferences (giallu).
+- 0007497: [other] Summary page is little of Garble (vboctor).
+- 0007999: [other] Project list view corrupted (vboctor).
+- 0008378: [other] Select custom avatar for default Gravatar image. (giallu).
+- 0008476: [other] Add a service to disposable email address checker (zakman).
+- 0008500: [other] Empty entry in "Category" drop down (vboctor).
+- 0008475: [printing] Function used two times in the same file (only one is necessary) (vboctor).
+- 0008461: [signup] signup_page and lost_pwd_page don't work if anonymous access not enabled (vboctor).
+- 0008443: [tagging] creating new tags for multi-selection (jreese).
+- 0008454: [time tracking] time tracking sum on request wrong (vboctor).
 
 2007.10.03  -  1.1.0rc1
 
-- 0008286: [security] Add .htaccess to block access to core/, doc/, lang/, packages/ (vboctor) - resolved.
-- 0008312: [security] Install script shouldn't include password in the form (jreese) - resolved.
-- 0008336: [security] Require re-login for high impact tasks (jreese) - resolved.
-- 0008340: [security] Changing password should create a new cookie_string (vboctor) - resolved.
-- 0008291: [administration] check.php: Use of undefined constant db_is_connected - assumed 'db_is_connected' (vboctor) - resolved.
-- 0008324: [administration] Rendering of "Manage Users" menu link ignores $g_manage_user_threshold (giallu) - resolved.
-- 0008343: [administration] Admin created users bypass realname validity check (vboctor) - resolved.
-- 0008380: [administration] Deleting old user Account results in Database inconsistency (vboctor) - resolved.
-- 0008231: [bugtracker] Summary "By Date" shows suspicious totals (giallu) - resolved.
-- 0008233: [bugtracker] Long standing issues report on summary page (giallu) - resolved.
-- 0008395: [bugtracker] Recently Visited is not displayed. (jreese) - resolved.
-- 0007809: [custom fields] Filter "none" on custom fields doesn't work (giallu) - resolved.
-- 0007996: [custom fields] Confusion in string values of enumerated custom field due to non strict comparison of strings (zakman) - resolved.
-- 0008371: [db db2] Use "days" instead of "to_days" when comparing dates for db2 (vboctor) - resolved.
-- 0008384: [db db2] db_table_exists() doesn't work in case of DB2 (vboctor) - resolved.
-- 0008385: [db db2] ADODB_db2._insert_id doesn't work (vboctor) - resolved.
-- 0008386: [db db2] ADODB_db2 uses an invalid time format which is not accepted by db2 (vboctor) - resolved.
-- 0008387: [db db2] adodb2-db2.DBTimeStamp uses TO_DATE() which doesn't work on DB2 (vboctor) - resolved.
-- 0008389: [db db2] Remove references to odbc_db2 driver from code (we only support db2) (vboctor) - resolved.
-- 0007690: [db mssql] number_format(); bad for SQL statments (vboctor) - resolved.
-- 0008327: [documentation] show_extended_project_browser can only be set to OFF or ON (vboctor) - resolved.
-- 0008252: [feature] Gravatars and case sensitivity of email addresses (giallu) - resolved.
-- 0008237: [graphs] Error in dependency graphs (vboctor) - resolved.
-- 0008206: [integration] Add (gr)avatars for users (giallu) - resolved.
-- 0006850: [localization] obsolete MANTIS_ERROR (giallu) - resolved.
-- 0007647: [localization] [de] Translation change from "Problem" (problem) to "Eintrag" (issue) (vboctor) - resolved.
-- 0007720: [localization] Japanese language translation patch (vboctor) - resolved.
-- 0007855: [localization] Priority colum header String not taken from strings file (vboctor) - resolved.
-- 0008423: [localization] Update German Localization (vboctor) - resolved.
-- 0008425: [localization] Update portuguese_brazil localization (vboctor) - resolved.
-- 0008428: [localization] Update French Localization (vboctor) - resolved.
-- 0008429: [localization] fix miscellanious errors in the german translation files (vboctor) - resolved.
-- 0008407: [performance] Add caller function info to queries list (giallu) - resolved.
-- 0008412: [performance] When showing queries show the time spent in SQL vs. PHP (vboctor) - resolved.
-- 0008413: [performance] Provide a way to show queries for an access level threshold (vboctor) - resolved.
-- 0007995: [other] Confusion in product_version values due to string comparisons with == operator (zakman) - resolved.
-- 0008188: [other] Consistent use of collapse_api.php (DGtlRift) - resolved.
-- 0008283: [other] $g_show_notices and $g_show_warnings should be marked as obsolete (vboctor) - resolved.
-- 0008285: [other] File Download generates an E_NOTICE (vboctor) - resolved.
-- 0008292: [other] my_view_inc: syntax error (vboctor) - resolved.
-- 0008341: [other] Xwiki integration (vboctor) - resolved.
-- 0008344: [other] Tokens API Clean-up and Changes (jreese) - resolved.
-- 0008388: [other] Undefined variable $p_this_var in helper_api.php (vboctor) - resolved.
-- 0008421: [other] Recently visted is showing some serialized filter instead of bug ids (vboctor) - resolved.
-- 0008295: [printing] Include the bug history in the printout (zakman) - resolved.
-- 0004614: [relationships] Relationship graph: sometimes arrows direction is not correct (vboctor) - resolved.
-- 0007846: [relationships] APPLICATION ERROR #1802: Relationship not found (vboctor) - resolved.
-- 0008269: [roadmap] Reporting a new issue, ADMIN/MANAGER/DEVELOPER should see field "Target Version" (jreese) - resolved.
-- 0008274: [tagging] Implement Keyword Tagging Features (jreese) - resolved.
-- 0008311: [tagging] System Notice: Undefined index 'tag_select' in view_all_bug_page.php (jreese) - resolved.
-- 0008337: [tagging] Blank page (no data) when invalid tag filter chosen (jreese) - resolved.
-- 0008368: [tagging] "Access Denied." when trying to attach a tag to an issue I reported (vboctor) - resolved.
-- 0008396: [tagging] Don't allow creating tags if user can't attach them (jreese) - resolved.
-- 0008246: [upgrade] Add support for running arbitrary functions (thraxisp) - resolved.
-- 0005093: [webpage] Rights in custom menu does not work (vboctor) - resolved.
+- 0008286: [security] Add .htaccess to block access to core/, doc/, lang/, packages/ (vboctor).
+- 0008312: [security] Install script shouldn't include password in the form (jreese).
+- 0008336: [security] Require re-login for high impact tasks (jreese).
+- 0008340: [security] Changing password should create a new cookie_string (vboctor).
+- 0008291: [administration] check.php: Use of undefined constant db_is_connected - assumed 'db_is_connected' (vboctor).
+- 0008324: [administration] Rendering of "Manage Users" menu link ignores $g_manage_user_threshold (giallu).
+- 0008343: [administration] Admin created users bypass realname validity check (vboctor).
+- 0008380: [administration] Deleting old user Account results in Database inconsistency (vboctor).
+- 0008231: [bugtracker] Summary "By Date" shows suspicious totals (giallu).
+- 0008233: [bugtracker] Long standing issues report on summary page (giallu).
+- 0008395: [bugtracker] Recently Visited is not displayed. (jreese).
+- 0007809: [custom fields] Filter "none" on custom fields doesn't work (giallu).
+- 0007996: [custom fields] Confusion in string values of enumerated custom field due to non strict comparison of strings (zakman).
+- 0008371: [db db2] Use "days" instead of "to_days" when comparing dates for db2 (vboctor).
+- 0008384: [db db2] db_table_exists() doesn't work in case of DB2 (vboctor).
+- 0008385: [db db2] ADODB_db2._insert_id doesn't work (vboctor).
+- 0008386: [db db2] ADODB_db2 uses an invalid time format which is not accepted by db2 (vboctor).
+- 0008387: [db db2] adodb2-db2.DBTimeStamp uses TO_DATE() which doesn't work on DB2 (vboctor).
+- 0008389: [db db2] Remove references to odbc_db2 driver from code (we only support db2) (vboctor).
+- 0007690: [db mssql] number_format(); bad for SQL statments (vboctor).
+- 0008327: [documentation] show_extended_project_browser can only be set to OFF or ON (vboctor).
+- 0008252: [feature] Gravatars and case sensitivity of email addresses (giallu).
+- 0008237: [graphs] Error in dependency graphs (vboctor).
+- 0008206: [integration] Add (gr)avatars for users (giallu).
+- 0006850: [localization] obsolete MANTIS_ERROR (giallu).
+- 0007647: [localization] [de] Translation change from "Problem" (problem) to "Eintrag" (issue) (vboctor).
+- 0007720: [localization] Japanese language translation patch (vboctor).
+- 0007855: [localization] Priority colum header String not taken from strings file (vboctor).
+- 0008423: [localization] Update German Localization (vboctor).
+- 0008425: [localization] Update portuguese_brazil localization (vboctor).
+- 0008428: [localization] Update French Localization (vboctor).
+- 0008429: [localization] fix miscellanious errors in the german translation files (vboctor).
+- 0008407: [performance] Add caller function info to queries list (giallu).
+- 0008412: [performance] When showing queries show the time spent in SQL vs. PHP (vboctor).
+- 0008413: [performance] Provide a way to show queries for an access level threshold (vboctor).
+- 0007995: [other] Confusion in product_version values due to string comparisons with == operator (zakman).
+- 0008188: [other] Consistent use of collapse_api.php (DGtlRift).
+- 0008283: [other] $g_show_notices and $g_show_warnings should be marked as obsolete (vboctor).
+- 0008285: [other] File Download generates an E_NOTICE (vboctor).
+- 0008292: [other] my_view_inc: syntax error (vboctor).
+- 0008341: [other] Xwiki integration (vboctor).
+- 0008344: [other] Tokens API Clean-up and Changes (jreese).
+- 0008388: [other] Undefined variable $p_this_var in helper_api.php (vboctor).
+- 0008421: [other] Recently visted is showing some serialized filter instead of bug ids (vboctor).
+- 0008295: [printing] Include the bug history in the printout (zakman).
+- 0004614: [relationships] Relationship graph: sometimes arrows direction is not correct (vboctor).
+- 0007846: [relationships] APPLICATION ERROR #1802: Relationship not found (vboctor).
+- 0008269: [roadmap] Reporting a new issue, ADMIN/MANAGER/DEVELOPER should see field "Target Version" (jreese).
+- 0008274: [tagging] Implement Keyword Tagging Features (jreese).
+- 0008311: [tagging] System Notice: Undefined index 'tag_select' in view_all_bug_page.php (jreese).
+- 0008337: [tagging] Blank page (no data) when invalid tag filter chosen (jreese).
+- 0008368: [tagging] "Access Denied." when trying to attach a tag to an issue I reported (vboctor).
+- 0008396: [tagging] Don't allow creating tags if user can't attach them (jreese).
+- 0008246: [upgrade] Add support for running arbitrary functions (thraxisp).
+- 0005093: [webpage] Rights in custom menu does not work (vboctor).
 
 2007.08.01  -  1.1.0a4
 
-- 0008154: [security] Port: CVE-2007-3215: PHPMailer vulnerability (thraxisp) - resolved.
-- 0008164: [security] Potential URL redirection flaw in set_project.php (grangeway) - resolved.
-- 0008165: [security] Potential URL redirection flaw in account_prefs_reset.php (grangeway) - resolved.
-- 0008166: [security] Potential URL redirection flaw in permalink_page.php (grangeway) - resolved.
-- 0008180: [security] Potential URL redirection flaw in login.php (grangeway) - resolved.
-- 0008181: [security] Display of database error message could be used to generate Cross site scripting issue (grangeway) - resolved.
-- 0007985: [administration] Database Schema that is more up-to-date than code is reported as out-of-date (vboctor) - resolved.
-- 0008094: [administration] Managing versions / release schedule accross multiple projects. (vboctor) - resolved.
-- 0008144: [administration] Remove obsolete CSS edit tool (vboctor) - resolved.
-- 0008224: [authentication] anonymous login is not automatic (vboctor) - resolved.
-- 0002950: [bugtracker] Hide Edit or Delete Profile when not needed (grangeway) - resolved.
-- 0002996: [bugtracker] page link from email (in browser) - display more than "access denied" (grangeway) - resolved.
-- 0003477: [bugtracker] print_mantis_error() function does not display msg. (grangeway) - resolved.
-- 0003902: [bugtracker] all logins fail with "Cannot modify header information" (grangeway) - resolved.
-- 0007125: [bugtracker] Application Error #200 (grangeway) - resolved.
-- 0007531: [bugtracker] Get a wrong (?) error message by upload a big file (grangeway) - resolved.
-- 0007812: [bugtracker] Remove white box around jump button in main menu (zakman) - resolved.
-- 0007895: [bugtracker] Recently Visited when logged in as Anonymous shows issues i have not visited (giallu) - resolved.
-- 0007928: [bugtracker] print_column_eta function missing (vboctor) - resolved.
-- 0007842: [bugtracker] File attachment permissions (giallu) - resolved.
-- 0007871: [bugtracker] Move "Add Note" pane below previous notes (giallu) - resolved.
-- 0007984: [bugtracker] Wrong default value for additional info during report (vboctor) - resolved.
-- 0008005: [bugtracker] items cannot be added to projects without categories (vboctor) - resolved.
-- 0008018: [bugtracker] Add configuration option to allow/disallow free text in platform, os, and os_build (vboctor) - resolved.
-- 0008044: [bugtracker] Edit/Delete bugnote buttons missing (giallu) - resolved.
-- 0008067: [bugtracker] show status legend on top AND bottom (zakman) - resolved.
-- 0008103: [bugtracker] Cannot modify the bugnote order. (giallu) - resolved.
-- 0008111: [bugtracker] No space between date and username in email notifications (grangeway) - resolved.
-- 0008147: [bugtracker] 'continue' while outside loop in function print_news_string_by_news_id() (grangeway) - resolved.
-- 0008150: [bugtracker] Summary By Date could show also resolved bugs count (giallu) - resolved.
-- 0008174: [bugtracker] & is displayed as & stopping us from using Unicode Characters (grangeway) - resolved.
-- 0008190: [bugtracker] Showing Access Level in Note details (giallu) - resolved.
-- 0008195: [bugtracker] Create Project Info Page (vboctor) - resolved.
-- 0008208: [bugtracker] Most popular bug table on summary page (giallu) - resolved.
-- 0006633: [change log] Editing a bug in advanced bug update page (grangeway) - resolved.
-- 0008214: [change log] Change Log displays the version description as many times as the number of issues show (grangeway) - resolved.
-- 0008091: [csv] csv_export doesn't work when project name contains accentuated characters (vboctor) - resolved.
-- 0007346: [custom fields] Copy custom fields from one project to another (zakman) - resolved.
-- 0007849: [custom fields] filters on custom date field causes SQL error (giallu) - resolved.
-- 0007981: [custom fields] Manage projects custom field: Link custom field to project Errors (vboctor) - resolved.
-- 0007986: [custom fields] Removing a custom field to project link from manage_custom_field_edit_page.php returns to wrong page (vboctor) - resolved.
-- 0007987: [custom fields] Projects that a custom field can be linked to in manage_custom_field_edit_page.php shouldn't include ALL PROJECTS (vboctor) - resolved.
-- 0008002: [custom fields] Unable to report issue. Error "data too long" on custom field name (grangeway) - resolved.
-- 0008121: [custom fields] Error message doesn't show field name after entering invalid value in custom field (zakman) - resolved.
-- 0008047: [db db2] DB2 Support (experimental) (vboctor) - resolved.
-- 0005544: [db mssql] MSSQL APPLICATION ERROR 0000401 When Uploading Files (grangeway) - resolved.
-- 0007140: [db mssql] Upload File Less than 8 K (grangeway) - resolved.
-- 0007912: [db mssql] Time tracking doesn't work- SQL syntax error (grangeway) - resolved.
-- 0008220: [db mssql] New summary item contains invalid sql (giallu) - resolved.
-- 0007417: [documentation] operating mysql user needs DELETE privilege (grangeway) - resolved.
-- 0005138: [email] Bugnote Id doesn't appear in emails (vboctor) - resolved.
-- 0007597: [email] Notification e-mail contain no messages. (grangeway) - resolved.
-- 0008016: [email] Check Email broken in 1.1.0a3 (vboctor) - resolved.
-- 0008077: [email] Block use of disposable email addresses (vboctor) - resolved.
-- 0008176: [email] Email Server offline causes a delay in mantis interface (grangeway) - resolved.
-- 0008101: [feature] List of involved developers (vboctor) - resolved.
-- 0006468: [filters] My View page incorrectly sets filters (grangeway) - resolved.
-- 0006725: [filters] Filtering on "duplicate of" fails while "has duplicate" works (giallu) - resolved.
-- 0006836: [filters] Switching to "Advanced Filters" (or "Simple Filters") forgets the ?filter=N setting (grangeway) - resolved.
-- 0007735: [filters] Filters are lost when clicking on page navigation (vboctor) - resolved.
-- 0007982: [filters] "Create Permlink" not reliable (vboctor) - resolved.
-- 0007992: [filters] "Create Permalink" should support custom fields (vboctor) - resolved.
-- 0007993: [filters] "Create Permalink" should show URL in a Mantis page (vboctor) - resolved.
-- 0007487: [graphs] wrong title of dependency-graph (grangeway) - resolved.
-- 0004831: [installation] accessing mantis webserver through a proxy websserver (vboctor) - resolved.
-- 0007907: [installation] Allow using system adodb (vboctor) - resolved.
-- 0008115: [integration] Implement Twitter Integration (vboctor) - resolved.
-- 0007733: [ldap] when using LDAP auth blank page upon login if LDAP extension not loaded (grangeway) - resolved.
-- 0006217: [localization] [all lang] Wrong fIlename on download (vboctor) - resolved.
-- 0007681: [localization] [es] Full review of spanish translation (Bithunter) - resolved.
-- 0007730: [localization] [de] Translation change from "Aktualisieren" to "Bearbeiten" (zakman) - resolved.
-- 0007961: [localization] Spanish translation (Bithunter) - resolved.
-- 0008023: [localization] [all lang] Wrong URL on summary (vboctor) - resolved.
-- 0008031: [localization] Update simplified chinese localization to 1.1.0a3 (giallu) - resolved.
-- 0008051: [localization] [all lang] Wrong fIlename on print report (zakman) - resolved.
-- 0008084: [localization] Spelling mistake in value of string $s_this_bug file lang/strings_spanish.txt (zakman) - resolved.
-- 0008113: [localization] Error typo $s_signup_link in Spanish traslation ..... (zakman) - resolved.
-- 0008168: [localization] german localisation in the current installation at www.mantisbt.org/bug (giallu) - resolved.
-- 0008177: [localization] Extra characters in lang/strings_spanish.txt (giallu) - resolved.
-- 0008201: [localization] Sync italian messages (giallu) - resolved.
-- 0008221: [localization] Sync italian messages (vboctor) - resolved.
-- 0005333: [other] Invalid zip file core/adodb/adodb-time.zip in CVS (giallu) - resolved.
-- 0006772: [other] Bugnote ids are numeric, which is not valid HTML (giallu) - resolved.
-- 0007138: [other] pages are not valid xhtml 1.0 transitional (giallu) - resolved.
-- 0007885: [other] System logging constants (vboctor) - resolved.
-- 0008054: [other] Mediawiki integration (vboctor) - resolved.
-- 0008138: [other] Add more services to disposable email address checker (zakman) - resolved.
-- 0006773: [relationships] When cloning an issue, cannot make it "not related" to parent issue (vboctor) - resolved.
-- 0007548: [relationships] Status is underlined using a deprecated HTML element (giallu) - resolved.
-- 0008130: [relationships] Custom relationships (grangeway) - resolved.
-- 0007947: [roadmap] when bulk assigning target version I get permission messages (vboctor) - resolved.
-- 0008194: [roadmap] Roadmap and Changelog list nesting for parent/child issues (grangeway) - resolved.
-- 0006116: [rss] "Issues" RSS feed doesn't work when $g_anonymous_account = '' (grangeway) - resolved.
-- 0007255: [rss] APPLICATION WARNING #user_get_field() for NO_USER (grangeway) - resolved.
-- 0007938: [rss] Replace non free RSS creation class (vboctor) - resolved.
-- 0006063: [scripting] APPLICATION ERROR 0000401 on MSSQL while uploading files (grangeway) - resolved.
-- 0008159: [scripting] Provide MantisConnect webservice out of the box as the Mantis SOAP API (vboctor) - resolved.
-- 0006782: [sql] MantisBT should do "SET NAMES $charset" on connect to database (vboctor) - resolved.
-- 0008215: [sql] APPLICATION ERROR 401 on MySQL with file_upload_method = DISK (1.1.0a4-CVS) (giallu) - resolved.
-- 0007931: [time tracking] $g_time_tracking_hours config option is never used (davidnewcomb) - resolved.
-- 0007944: [time tracking] 'Update Perfs' error in 1.1.0a3 (vboctor) - resolved.
-- 0007965: [time tracking] Time tracking information not shown on email notifications (vboctor) - resolved.
-- 0008105: [time tracking] Total time on billing page (vboctor) - resolved.
-- 0008131: [upgrade] install/upgrade tries to use "set schema" on a non db2 installation. (vboctor) - resolved.
-- 0007340: [webpage] my view: status percentage legend shown on top and not as stated (giallu) - resolved.
+- 0008154: [security] Port: CVE-2007-3215: PHPMailer vulnerability (thraxisp).
+- 0008164: [security] Potential URL redirection flaw in set_project.php (grangeway).
+- 0008165: [security] Potential URL redirection flaw in account_prefs_reset.php (grangeway).
+- 0008166: [security] Potential URL redirection flaw in permalink_page.php (grangeway).
+- 0008180: [security] Potential URL redirection flaw in login.php (grangeway).
+- 0008181: [security] Display of database error message could be used to generate Cross site scripting issue (grangeway).
+- 0007985: [administration] Database Schema that is more up-to-date than code is reported as out-of-date (vboctor).
+- 0008094: [administration] Managing versions / release schedule accross multiple projects. (vboctor).
+- 0008144: [administration] Remove obsolete CSS edit tool (vboctor).
+- 0008224: [authentication] anonymous login is not automatic (vboctor).
+- 0002950: [bugtracker] Hide Edit or Delete Profile when not needed (grangeway).
+- 0002996: [bugtracker] page link from email (in browser) - display more than "access denied" (grangeway).
+- 0003477: [bugtracker] print_mantis_error() function does not display msg. (grangeway).
+- 0003902: [bugtracker] all logins fail with "Cannot modify header information" (grangeway).
+- 0007125: [bugtracker] Application Error #200 (grangeway).
+- 0007531: [bugtracker] Get a wrong (?) error message by upload a big file (grangeway).
+- 0007812: [bugtracker] Remove white box around jump button in main menu (zakman).
+- 0007895: [bugtracker] Recently Visited when logged in as Anonymous shows issues i have not visited (giallu).
+- 0007928: [bugtracker] print_column_eta function missing (vboctor).
+- 0007842: [bugtracker] File attachment permissions (giallu).
+- 0007871: [bugtracker] Move "Add Note" pane below previous notes (giallu).
+- 0007984: [bugtracker] Wrong default value for additional info during report (vboctor).
+- 0008005: [bugtracker] items cannot be added to projects without categories (vboctor).
+- 0008018: [bugtracker] Add configuration option to allow/disallow free text in platform, os, and os_build (vboctor).
+- 0008044: [bugtracker] Edit/Delete bugnote buttons missing (giallu).
+- 0008067: [bugtracker] show status legend on top AND bottom (zakman).
+- 0008103: [bugtracker] Cannot modify the bugnote order. (giallu).
+- 0008111: [bugtracker] No space between date and username in email notifications (grangeway).
+- 0008147: [bugtracker] 'continue' while outside loop in function print_news_string_by_news_id() (grangeway).
+- 0008150: [bugtracker] Summary By Date could show also resolved bugs count (giallu).
+- 0008174: [bugtracker] & is displayed as & stopping us from using Unicode Characters (grangeway).
+- 0008190: [bugtracker] Showing Access Level in Note details (giallu).
+- 0008195: [bugtracker] Create Project Info Page (vboctor).
+- 0008208: [bugtracker] Most popular bug table on summary page (giallu).
+- 0006633: [change log] Editing a bug in advanced bug update page (grangeway).
+- 0008214: [change log] Change Log displays the version description as many times as the number of issues show (grangeway).
+- 0008091: [csv] csv_export doesn't work when project name contains accentuated characters (vboctor).
+- 0007346: [custom fields] Copy custom fields from one project to another (zakman).
+- 0007849: [custom fields] filters on custom date field causes SQL error (giallu).
+- 0007981: [custom fields] Manage projects custom field: Link custom field to project Errors (vboctor).
+- 0007986: [custom fields] Removing a custom field to project link from manage_custom_field_edit_page.php returns to wrong page (vboctor).
+- 0007987: [custom fields] Projects that a custom field can be linked to in manage_custom_field_edit_page.php shouldn't include ALL PROJECTS (vboctor).
+- 0008002: [custom fields] Unable to report issue. Error "data too long" on custom field name (grangeway).
+- 0008121: [custom fields] Error message doesn't show field name after entering invalid value in custom field (zakman).
+- 0008047: [db db2] DB2 Support (experimental) (vboctor).
+- 0005544: [db mssql] MSSQL APPLICATION ERROR 0000401 When Uploading Files (grangeway).
+- 0007140: [db mssql] Upload File Less than 8 K (grangeway).
+- 0007912: [db mssql] Time tracking doesn't work- SQL syntax error (grangeway).
+- 0008220: [db mssql] New summary item contains invalid sql (giallu).
+- 0007417: [documentation] operating mysql user needs DELETE privilege (grangeway).
+- 0005138: [email] Bugnote Id doesn't appear in emails (vboctor).
+- 0007597: [email] Notification e-mail contain no messages. (grangeway).
+- 0008016: [email] Check Email broken in 1.1.0a3 (vboctor).
+- 0008077: [email] Block use of disposable email addresses (vboctor).
+- 0008176: [email] Email Server offline causes a delay in mantis interface (grangeway).
+- 0008101: [feature] List of involved developers (vboctor).
+- 0006468: [filters] My View page incorrectly sets filters (grangeway).
+- 0006725: [filters] Filtering on "duplicate of" fails while "has duplicate" works (giallu).
+- 0006836: [filters] Switching to "Advanced Filters" (or "Simple Filters") forgets the ?filter=N setting (grangeway).
+- 0007735: [filters] Filters are lost when clicking on page navigation (vboctor).
+- 0007982: [filters] "Create Permlink" not reliable (vboctor).
+- 0007992: [filters] "Create Permalink" should support custom fields (vboctor).
+- 0007993: [filters] "Create Permalink" should show URL in a Mantis page (vboctor).
+- 0007487: [graphs] wrong title of dependency-graph (grangeway).
+- 0004831: [installation] accessing mantis webserver through a proxy websserver (vboctor).
+- 0007907: [installation] Allow using system adodb (vboctor).
+- 0008115: [integration] Implement Twitter Integration (vboctor).
+- 0007733: [ldap] when using LDAP auth blank page upon login if LDAP extension not loaded (grangeway).
+- 0006217: [localization] [all lang] Wrong fIlename on download (vboctor).
+- 0007681: [localization] [es] Full review of spanish translation (Bithunter).
+- 0007730: [localization] [de] Translation change from "Aktualisieren" to "Bearbeiten" (zakman).
+- 0007961: [localization] Spanish translation (Bithunter).
+- 0008023: [localization] [all lang] Wrong URL on summary (vboctor).
+- 0008031: [localization] Update simplified chinese localization to 1.1.0a3 (giallu).
+- 0008051: [localization] [all lang] Wrong fIlename on print report (zakman).
+- 0008084: [localization] Spelling mistake in value of string $s_this_bug file lang/strings_spanish.txt (zakman).
+- 0008113: [localization] Error typo $s_signup_link in Spanish traslation ..... (zakman).
+- 0008168: [localization] german localisation in the current installation at www.mantisbt.org/bug (giallu).
+- 0008177: [localization] Extra characters in lang/strings_spanish.txt (giallu).
+- 0008201: [localization] Sync italian messages (giallu).
+- 0008221: [localization] Sync italian messages (vboctor).
+- 0005333: [other] Invalid zip file core/adodb/adodb-time.zip in CVS (giallu).
+- 0006772: [other] Bugnote ids are numeric, which is not valid HTML (giallu).
+- 0007138: [other] pages are not valid xhtml 1.0 transitional (giallu).
+- 0007885: [other] System logging constants (vboctor).
+- 0008054: [other] Mediawiki integration (vboctor).
+- 0008138: [other] Add more services to disposable email address checker (zakman).
+- 0006773: [relationships] When cloning an issue, cannot make it "not related" to parent issue (vboctor).
+- 0007548: [relationships] Status is underlined using a deprecated HTML element (giallu).
+- 0008130: [relationships] Custom relationships (grangeway).
+- 0007947: [roadmap] when bulk assigning target version I get permission messages (vboctor).
+- 0008194: [roadmap] Roadmap and Changelog list nesting for parent/child issues (grangeway).
+- 0006116: [rss] "Issues" RSS feed doesn't work when $g_anonymous_account = '' (grangeway).
+- 0007255: [rss] APPLICATION WARNING #user_get_field() for NO_USER (grangeway).
+- 0007938: [rss] Replace non free RSS creation class (vboctor).
+- 0006063: [scripting] APPLICATION ERROR 0000401 on MSSQL while uploading files (grangeway).
+- 0008159: [scripting] Provide MantisConnect webservice out of the box as the Mantis SOAP API (vboctor).
+- 0006782: [sql] MantisBT should do "SET NAMES $charset" on connect to database (vboctor).
+- 0008215: [sql] APPLICATION ERROR 401 on MySQL with file_upload_method = DISK (1.1.0a4-CVS) (giallu).
+- 0007931: [time tracking] $g_time_tracking_hours config option is never used (davidnewcomb).
+- 0007944: [time tracking] 'Update Perfs' error in 1.1.0a3 (vboctor).
+- 0007965: [time tracking] Time tracking information not shown on email notifications (vboctor).
+- 0008105: [time tracking] Total time on billing page (vboctor).
+- 0008131: [upgrade] install/upgrade tries to use "set schema" on a non db2 installation. (vboctor).
+- 0007340: [webpage] my view: status percentage legend shown on top and not as stated (giallu).
 
 2007.05.07  -  1.1.0a3
 
@@ -282,7 +352,7 @@ This is a maintenance release for the 1.1.x branch.  It includes a fix for PHP 4
 - 0007770: [graphs] Antialias disable (grangeway)
 - 0007636: [installation] PHP requirements incorrect (vboctor)
 - 0007645: [localization] [de] Translation for new Roadmap feature (achumakov)
-- 0007648: [localization] [de] Translation change from "Wirklicher Name" to "Vollständiger Name" (ryandesign)
+- 0007648: [localization] [de] Translation change from "Wirklicher Name" to "Vollstï¿½ndiger Name" (ryandesign)
 - 0007677: [localization] [ru] Russian language translation patch (achumakov)
 - 0007683: [localization] [it] Little fixes and update of strings_italian.txt (achumakov)
 - 0007685: [localization] [de] Localization strings for target release (achumakov)
