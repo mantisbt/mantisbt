@@ -334,6 +334,12 @@ function plugin_dependency( $p_basename, $p_required ) {
  */
 function plugin_protected( $p_basename ) {
 	global $g_plugin_cache_protected;
+
+	# For pseudo-plugin MantisCore, return protected as 1.
+	if ( $p_basename == 'MantisCore' ) {
+		return 1;
+	}
+
 	return $g_plugin_cache_protected[$p_basename];
 }
 
@@ -344,6 +350,12 @@ function plugin_protected( $p_basename ) {
  */
 function plugin_priority( $p_basename ) {
 	global $g_plugin_cache_priority;
+
+	# For pseudo-plugin MantisCore, return priority as 3.
+	if ( $p_basename == 'MantisCore' ) {
+		return 3;
+	}
+
 	return $g_plugin_cache_priority[$p_basename];
 }
 
