@@ -135,7 +135,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 			if (($not_null = preg_match('/NOT NULL/i',$v))) {
 				$v = preg_replace('/NOT NULL/i','',$v);
 			}
-			if (preg_match('/^([^ ]+) .*DEFAULT ([^ ]+)/',$v,$matches)) {
+			if (preg_match('/^([^ ]+) .*DEFAULT (\'[^\']+\'|\"[^\"]+\"|[^ ]+)/',$v,$matches)) {
 				list(,$colname,$default) = $matches;
 				$sql[] = $alter . str_replace('DEFAULT '.$default,'',$v);
 				$sql[] = 'UPDATE '.$tabname.' SET '.$colname.'='.$default;
@@ -200,7 +200,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 	            $v = preg_replace('/\sNULL/i','',$v);
 	         }
 	         
-	         if (preg_match('/^([^ ]+) .*DEFAULT ([^ ]+)/',$v,$matches)) {
+	         if (preg_match('/^([^ ]+) .*DEFAULT (\'[^\']+\'|\"[^\"]+\"|[^ ]+)/',$v,$matches)) {
 	            $existing = $this->MetaColumns($tabname);
 	            list(,$colname,$default) = $matches;
 	            $v = preg_replace('/^' . preg_quote($colname) . '\s/', '', $v);
