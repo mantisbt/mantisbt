@@ -25,7 +25,7 @@
 	# --------------------
 	# checks if date is null
 	function date_is_null ( $p_date ) {
-		if ( $p_date == date_get_null( ) ) {
+		if ( $p_date <= date_get_null( ) ) {
 			return true;
 		}
 		return false;

@@ -109,7 +109,7 @@
 		if( !is_int( $p_bug_database_result['last_updated'] ) )
 			$p_bug_database_result['last_updated']	= db_unixtimestamp( $p_bug_database_result['last_updated'] );
 		if( !is_int( $p_bug_database_result['due_date'] ) ) 
-			$p_bug_datebase_result['due_date']	= db_unixtimestamp( $p_bug_datebase_result['due_date'] );
+			$p_bug_database_result['due_date']	= db_unixtimestamp( $p_bug_database_result['due_date'] );
 		$g_cache_bug[ $p_bug_database_result['id'] ] = $p_bug_database_result;
 		if( !is_null( $p_stats ) ) {
 			$g_cache_bug[ $p_bug_database_result['id'] ]['_stats'] = $p_stats;
@@ -1242,7 +1242,7 @@
 		
 		if ( $p_field_name == 'due_date' ) {
 			if ( !date_is_null( $h_status )  ) {
-				$h_status = date( config_get ( 'short_date_format' ), $h_status );
+				$h_status = date( config_get( 'short_date_format' ), $h_status );
 			} else {
 				$h_status = '';
 			}
@@ -1251,7 +1251,7 @@
 				$t_tmp = strtotime( $p_status );
 			} 
 			if ( !date_is_null( $t_tmp ) ) {
-				$c_status = date( 'Y-m-d', $t_tmp );
+				$c_status = date( config_get( 'short_date_format' ), $t_tmp );
 			} else {
 				$c_status = '';
 			}

@@ -315,18 +315,23 @@
 	function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_obsolete = false ) {
 		$t_project_where = helper_project_specific_where( $p_project_id );
 
+		$t_param_count = 0;
+		$t_query_params = array();
+
 		if ( $p_released === null ) {
 			$t_released_where = '';
 		} else {
 			$c_released = db_prepare_int( $p_released );
-			$t_released_where = "AND ( released = $c_released )";
+			$t_released_where = "AND ( released = ". db_param($t_param_count++)." )";
+			$t_query_params[] = $c_released;
 		}
 
 		if ( $p_obsolete === null ) {
 			$t_obsolete_where = '';
 		} else {
 			$c_obsolete = db_prepare_bool( $p_obsolete );
-			$t_obsolete_where = "AND ( obsolete = $c_obsolete )";
+			$t_obsolete_where = "AND ( obsolete = ". db_param($t_param_count++)." )";
+			$t_query_params[] = $c_obsolete;
 		}
 
 		$t_project_version_table = db_get_table( 'mantis_project_version_table' );
@@ -335,7 +340,7 @@
 				  FROM $t_project_version_table
 				  WHERE $t_project_where $t_released_where $t_obsolete_where
 				  ORDER BY date_order DESC";
-		$result = db_query( $query );
+		$result = db_query_bound( $query, $t_query_params );
 		$count = db_num_rows( $result );
 		$rows = array();
 		for ( $i = 0 ; $i < $count ; $i++ ) {
