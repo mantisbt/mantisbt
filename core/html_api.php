@@ -656,7 +656,7 @@
 				# Add custom options
 				$t_custom_options = prepare_custom_menu_options( 'main_menu_custom_options' );
 				$t_menu_options = array_merge( $t_menu_options, $t_custom_options );
-				if ( config_get('time_tracking_enabled') && config_get('time_tracking_with_billing') )
+				if ( config_get('time_tracking_enabled') && config_get('time_tracking_with_billing') && access_has_global_level( config_get( 'time_tracking_reporting_threshold' ) ) )
 					$t_menu_options[] = '<a href="' . helper_mantis_url( 'billing_page.php">' ) . lang_get( 'time_tracking_billing_link' ) . '</a>';
 
 				# Logout (no if anonymously logged in)
