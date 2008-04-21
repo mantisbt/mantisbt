@@ -49,7 +49,7 @@ $upgrade[] = Array('CreateTableSQL',Array(db_get_table('mantis_bug_file_table'),
   folder 		C(250) NOTNULL DEFAULT \" '' \",
   filesize 		 I NOTNULL DEFAULT '0',
   file_type 		C(250) NOTNULL DEFAULT \" '' \",
-  date_added 		T NOTNULL DEFAULT '1970-01-01 00:00:01',
+  date_added 		T NOTNULL DEFAULT '" . db_null_date() . "',
   content 		B NOTNULL
   ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_bug_file_bug_id',db_get_table('mantis_bug_file_table'),'bug_id'));
@@ -57,7 +57,7 @@ $upgrade[] = Array('CreateTableSQL',Array(db_get_table('mantis_bug_history_table
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   user_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   bug_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
-  date_modified 	T NOTNULL DEFAULT '1970-01-01 00:00:01',
+  date_modified 	T NOTNULL DEFAULT '" . db_null_date() . "',
   field_name 		C(32) NOTNULL DEFAULT \" '' \",
   old_value 		C(128) NOTNULL DEFAULT \" '' \",
   new_value 		C(128) NOTNULL DEFAULT \" '' \",
@@ -90,8 +90,8 @@ $upgrade[] = Array('CreateTableSQL',Array(db_get_table('mantis_bug_table'),"
   resolution 		I2 NOTNULL DEFAULT '10',
   projection 		I2 NOTNULL DEFAULT '10',
   category 		C(64) NOTNULL DEFAULT \" '' \",
-  date_submitted 	T NOTNULL DEFAULT '1970-01-01 00:00:01',
-  last_updated 		T NOTNULL DEFAULT '1970-01-01 00:00:01',
+  date_submitted 	T NOTNULL DEFAULT '" . db_null_date() . "',
+  last_updated 		T NOTNULL DEFAULT '" . db_null_date() . "',
   eta 			I2 NOTNULL DEFAULT '10',
   bug_text_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   os 			C(32) NOTNULL DEFAULT \" '' \",
@@ -122,8 +122,8 @@ $upgrade[] = Array('CreateTableSQL',Array(db_get_table('mantis_bugnote_table'),"
   reporter_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   bugnote_text_id 	 I  UNSIGNED NOTNULL DEFAULT '0',
   view_state 		I2 NOTNULL DEFAULT '10',
-  date_submitted 	T NOTNULL DEFAULT '1970-01-01 00:00:01',
-  last_modified 	T NOTNULL DEFAULT '1970-01-01 00:00:01',
+  date_submitted 	T NOTNULL DEFAULT '" . db_null_date() . "',
+  last_modified 	T NOTNULL DEFAULT '" . db_null_date() . "',
   note_type 		 I  DEFAULT '0',
   note_attr 		C(250) DEFAULT \" '' \"
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
@@ -178,8 +178,8 @@ $upgrade[] = Array('CreateTableSQL',Array(db_get_table('mantis_news_table'),"
   id 			 I  UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   poster_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
-  date_posted 		T NOTNULL DEFAULT '1970-01-01 00:00:01',
-  last_modified 	T NOTNULL DEFAULT '1970-01-01 00:00:01',
+  date_posted 		T NOTNULL DEFAULT '" . db_null_date() . "',
+  last_modified 	T NOTNULL DEFAULT '" . db_null_date() . "',
   view_state 		I2 NOTNULL DEFAULT '10',
   announcement 		L NOTNULL DEFAULT \" '0' \",
   headline 		C(64) NOTNULL DEFAULT \" '' \",
@@ -200,7 +200,7 @@ $upgrade[] = Array('CreateTableSQL',Array(db_get_table('mantis_project_file_tabl
   folder 		C(250) NOTNULL DEFAULT \" '' \",
   filesize 		 I NOTNULL DEFAULT '0',
   file_type 		C(250) NOTNULL DEFAULT \" '' \",
-  date_added 		T NOTNULL DEFAULT '1970-01-01 00:00:01',
+  date_added 		T NOTNULL DEFAULT '" . db_null_date() . "',
   content 		B NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateTableSQL',Array(db_get_table('mantis_project_hierarchy_table'),"
@@ -230,7 +230,7 @@ $upgrade[] = Array('CreateTableSQL',Array(db_get_table('mantis_project_version_t
   id 			 I  NOTNULL PRIMARY AUTOINCREMENT,
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   version 		C(64) NOTNULL DEFAULT \" '' \",
-  date_order 		T NOTNULL DEFAULT '1970-01-01 00:00:01',
+  date_order 		T NOTNULL DEFAULT '" . db_null_date() . "',
   description 		XL NOTNULL,
   released 		L NOTNULL DEFAULT \" '1' \"
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
@@ -243,8 +243,8 @@ $upgrade[] = Array('CreateTableSQL',Array(db_get_table('mantis_sponsorship_table
   logo 			C(128) NOTNULL DEFAULT \" '' \",
   url 			C(128) NOTNULL DEFAULT \" '' \",
   paid 			L NOTNULL DEFAULT \" '0' \",
-  date_submitted 	T NOTNULL DEFAULT '1970-01-01 00:00:01',
-  last_updated 		T NOTNULL DEFAULT '1970-01-01 00:00:01'
+  date_submitted 	T NOTNULL DEFAULT '" . db_null_date() . "',
+  last_updated 		T NOTNULL DEFAULT '" . db_null_date() . "'
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_sponsorship_bug_id',db_get_table('mantis_sponsorship_table'),'bug_id'));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_sponsorship_user_id',db_get_table('mantis_sponsorship_table'),'user_id'));
@@ -307,8 +307,8 @@ $upgrade[] = Array('CreateTableSQL',Array(db_get_table('mantis_user_table'),"
   realname 		C(64) NOTNULL DEFAULT \" '' \",
   email 		C(64) NOTNULL DEFAULT \" '' \",
   password 		C(32) NOTNULL DEFAULT \" '' \",
-  date_created 		T NOTNULL DEFAULT '1970-01-01 00:00:01',
-  last_visit 		T NOTNULL DEFAULT '1970-01-01 00:00:01',
+  date_created 		T NOTNULL DEFAULT '" . db_null_date() . "',
+  last_visit 		T NOTNULL DEFAULT '" . db_null_date() . "',
   enabled		L NOTNULL DEFAULT \" '1' \",
   protected 		L NOTNULL DEFAULT \" '0' \",
   access_level 		I2 NOTNULL DEFAULT '10',
@@ -332,7 +332,7 @@ $upgrade[] = Array('CreateTableSQL',Array(db_get_table('mantis_email_table'),"
   email_id 		I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   email		 	C(64) NOTNULL DEFAULT \" '' \",
   subject		C(250) NOTNULL DEFAULT \" '' \",
-  submitted 	T NOTNULL DEFAULT '1970-01-01 00:00:01',
+  submitted 	T NOTNULL DEFAULT '" . db_null_date() . "',
   metadata 		XL NOTNULL,
   body 			XL NOTNULL
   ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
@@ -350,14 +350,14 @@ $upgrade[] = Array('CreateTableSQL', Array( db_get_table( 'mantis_tag_table' ), 
 	user_id			I		UNSIGNED NOTNULL DEFAULT '0',
 	name			C(100)	NOTNULL PRIMARY DEFAULT \" '' \",
 	description		XL		NOTNULL,
-	date_created	T		NOTNULL DEFAULT '1970-01-01 00:00:01',
-	date_updated	T		NOTNULL DEFAULT '1970-01-01 00:00:01'
+	date_created	T		NOTNULL DEFAULT '" . db_null_date() . "',
+	date_updated	T		NOTNULL DEFAULT '" . db_null_date() . "'
 	", Array( 'mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS' ) ) );
 $upgrade[] = Array('CreateTableSQL', Array( db_get_table( 'mantis_bug_tag_table' ), "
 	bug_id			I	UNSIGNED NOTNULL PRIMARY DEFAULT '0',
 	tag_id			I	UNSIGNED NOTNULL PRIMARY DEFAULT '0',
 	user_id			I	UNSIGNED NOTNULL DEFAULT '0',
-	date_attached	T	NOTNULL DEFAULT '1970-01-01 00:00:01'
+	date_attached	T	NOTNULL DEFAULT '" . db_null_date() . "'
 	", Array( 'mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS' ) ) );
 
 $upgrade[] = Array('CreateIndexSQL', Array( 'idx_typeowner', db_get_table( 'mantis_tokens_table' ), 'type, owner' ) );
@@ -405,4 +405,4 @@ $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_plugin_table' )
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_version_table' ), "
 	obsolete		L		NOTNULL DEFAULT \" '0' \"" ) );
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "
-    due_date        T       NOTNULL DEFAULT '1970-01-01' " ) );
+    due_date        T       NOTNULL DEFAULT '" . db_null_date() . "' " ) );

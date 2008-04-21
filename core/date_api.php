@@ -25,13 +25,13 @@
 	# --------------------
 	# checks if date is null
 	function date_is_null( $p_date ) {
-		return $p_date <= date_get_null();
+		return $p_date == date_get_null();
 	}
 
 	# --------------------
 	# gets null date 
 	function date_get_null() {
-		return db_unixtimestamp( '1970-01-01 00:00:01' );
+		return db_unixtimestamp( db_null_date() );
 	}
 
 	# --------------------

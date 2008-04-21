@@ -633,6 +633,12 @@
 		return $p_date;
 	}
 
+	# return a DB compatible date, representing a unixtime(0) + 1 second.
+	function db_null_date() {
+		global $g_db;
+		
+		return $g_db->BindTimestamp($g_db->UserTimeStamp(1, 'Y-m-d H:i:s', true));
+	}
 
 	# --------------------
 	# convert minutes to a time format [h]h:mm
