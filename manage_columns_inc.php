@@ -167,8 +167,8 @@
 				<?php print_project_option_list( /* project_id */ null, /* include_all_projects */ true, /* filter_project_id */ $t_project_id ); ?>
 			</select>
 <?php
-		# only administrators can overwrite ALL PROJECTS columns
-		if ( current_user_is_administrator() ) {
+		# Skip "Copy From" if the current project is ALL PROJECTS, the current page is management page, and the user is not administrator
+		if ( !$t_manage_page || ( $t_project_id != ALL_PROJECTS ) || current_user_is_administrator() ) {
 ?>
 			<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_columns_from' ) ?>" />
 <?php
