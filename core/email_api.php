@@ -1066,9 +1066,8 @@
 			$t_formatted_bugnote_id = bugnote_format_id( $t_bugnote->id );
 			$t_bugnote_link = string_process_bugnote_link ( config_get( 'bugnote_link_tag' ) . $t_bugnote->id, false, false, true );
 
-			$t_time_tracking_minutes = bugnote_get_field ( $t_bugnote->id, 'time_tracking' );
-			if ( $t_time_tracking_minutes > 0 ) {
-				$t_time_tracking = ' ' . lang_get( 'time_tracking' ) . ' ' . db_minutes_to_hhmm( $t_time_tracking_minutes ) . "\n";
+			if ( $t_bugnote->time_tracking > 0 ) {
+				$t_time_tracking = ' ' . lang_get( 'time_tracking' ) . ' ' . db_minutes_to_hhmm( $t_bugnote->time_tracking ) . "\n";
 			} else {
 				$t_time_tracking = '';
 			}
