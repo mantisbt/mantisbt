@@ -213,7 +213,7 @@
 <?php
 		} # end for loop
 
-		if ( $t_total_time > 0 ) {
+		if ( $t_total_time > 0 && access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
 			echo '<tr><td colspan="2">', sprintf ( lang_get( 'total_time_for_issue' ), db_minutes_to_hhmm( $t_total_time ) ), '</td></tr>';
 		}
 	} # end else
