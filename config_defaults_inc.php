@@ -987,12 +987,12 @@
 	# Bug Attachments Settings
 	############################
 
-	# Specifies the maximum size below which an attachment is previewed in the bug
-	# view pages.  To disable this feature, set max size to 0.
-	# This feature applies to: bmp, png, gif, jpg
+	# Specifies the maximum size (in bytes) below which an attachment is 
+	# previewed in the bug view pages.
+	# To disable this feature, set max size to 0.
 	$g_preview_attachments_inline_max_size = 0;
 
-	# Extenstions for text files that can be expanded inline.
+	# Extensions for text files that can be expanded inline.
 	$g_preview_text_extensions = array( 'txt', 'diff', 'patch' );
 
 	# Extensions for images that can be expanded inline.
