@@ -51,20 +51,12 @@
 		$g_project_override = $t_bug->project_id;
 	}
 
-	$c_time_tracking = helper_duration_to_minutes( $f_time_tracking );
-
-	# check for blank bugnote
-	# @@@ VB: Do we want to ban adding a time without an associated note?
 	# @@@ VB: Do we want to differentiate email notifications for normal notes from time tracking entries?
-	if ( !is_blank( $f_bugnote_text ) || ( $c_time_tracking > 0 ) ) {
-		$t_note_type = ( $c_time_tracking > 0 ) ? TIME_TRACKING : BUGNOTE;
-		bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private, $t_note_type );
-
-		# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
-		if ( !is_blank( $f_bugnote_text ) ) {
-			email_bugnote_add( $f_bug_id );
-		}
-	}
+	$t_bugnote_added = bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private, $t_note_type );
+    if ( !$t_bugnote_added ) {
+        error_parameters( lang_get( 'bugnote' ) );
+        trigger_error( ERROR_EMPTY_FIELD, ERROR );
+    }
 
 	print_successful_redirect_to_bug( $f_bug_id );
 ?>
