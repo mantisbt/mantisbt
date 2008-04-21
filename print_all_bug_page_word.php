@@ -86,6 +86,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 <?php
 	$f_bug_arr = explode_enum_string( $f_export );
+	$t_count_exported = 0;
 
 	for( $j=0; $j < $t_row_count; $j++ ) {
 
@@ -95,6 +96,12 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 		# display the available and selected bugs
 		if ( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
+			if ( $t_count_exported > 0 ) {
+				echo "<br clear=all style='mso-special-character:line-break; page-break-before:always'>";
+			}
+
+			$t_count_exported++;
+
 
 			$t_bug = bug_get( $t_id, true );
 			$t_bug = bug_prepare_display( $t_bug );
