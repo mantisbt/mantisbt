@@ -58,6 +58,9 @@
 		}
 
 		echo ' - ', get_enum_element( 'status', $t_bug->status ), '.<br />';
+
+		// do not cache bug data to save memory
+		bug_clear_cache( $p_issue_id );
 	}
 
 	# --------------------
@@ -94,6 +97,9 @@
 		}
 
 		echo ' - ', get_enum_element( 'status', $t_bug->status ), $t_strike_end, '.<br />';
+
+		// do not cache bug data to save memory
+		bug_clear_cache( $p_issue_id );
 	}
 
 	# --------------------
