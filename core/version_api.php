@@ -188,12 +188,12 @@
 
 			$query = "UPDATE $t_bug_table
 					  SET fixed_in_version=" . db_param(0) . '
-					  WHERE ( project_id=' . db_param(1) . ') AND ( version=' . db_param(2) . ')';
+					  WHERE ( project_id=' . db_param(1) . ') AND ( fixed_in_version=' . db_param(2) . ')';
 			db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 			$query = "UPDATE $t_bug_table
 					  SET target_version=" . db_param(0) . '
-					  WHERE ( project_id=' . db_param(1) . ') AND ( version=' . db_param(2) . ')';
+					  WHERE ( project_id=' . db_param(1) . ') AND ( target_version=' . db_param(2) . ')';
 			db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 			# @@@ We should consider using ids instead of names for foreign keys.  The main advantage of using the names are:
