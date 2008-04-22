@@ -33,14 +33,14 @@
 	# return the mailto: href string link
 	function prepare_email_link( $p_email, $p_text ) {
 		if ( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
-			return $p_text;
+			return string_display_line( $p_text );
 		}
 
 		# If we apply string_url() to the whole mailto: link then the @
 		#  gets turned into a %40 and you can't right click in browsers to
 		#  do Copy Email Address.
 		$t_mailto	= string_attribute( "mailto:$p_email" );
-		$p_text		= string_display( $p_text );
+		$p_text		= string_display_line( $p_text );
 
 		return "<a href=\"$t_mailto\">$p_text</a>";
 	}
@@ -59,11 +59,11 @@
 			if ( !is_blank( $t_email ) ) {
 				return prepare_email_link( $t_email, $t_username );
 			} else {
-				return string_display( $t_username );
+				return string_display_line( $t_username );
 			}
 		} else {
 			$t_result = '<font STYLE="text-decoration: line-through">';
-			$t_result .= string_display( $t_username );
+			$t_result .= string_display_line( $t_username );
 			$t_result .= '</font>';
 			return $t_result;
 		}
