@@ -98,7 +98,11 @@
 		$t_bug_table	= db_get_table( 'mantis_bug_table' );
 		$t_relation_table = db_get_table( 'mantis_bug_relationship_table' );
 
+		# grab version info for later use
 		$t_version_rows = version_get_all_rows( $t_project_id, /* released */ null, /* obsolete */ false );
+
+		# cache category info, but ignore the results for now
+		category_get_all_rows( $t_project_id );
 
 		$t_project_header_printed = false;
 
@@ -110,7 +114,7 @@
 		
 			$t_version = $t_version_row['version'];
 
-			$t_version_id = version_get_id( $t_version, $t_project_id );
+			$t_version_id = $t_version_row['id'];
 
 			$query = "SELECT sbt.*, dbt.target_version AS parent_version, $t_relation_table.source_bug_id FROM $t_bug_table AS sbt
 					LEFT JOIN $t_relation_table ON sbt.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
@@ -122,7 +126,8 @@
 			$t_first_entry = true;
 			$t_issue_ids = array();
 			$t_issue_parents = array();
-
+			$t_issue_handlers = array();
+			
 			$t_result = db_query_bound( $query, Array( $c_project_id, $t_version ) );
 
 			while ( $t_row = db_fetch_array( $t_result ) ) {
@@ -157,7 +162,11 @@
 					$t_issue_ids[] = $t_issue_id;
 					$t_issue_parents[] = null;
 				}
+				
+				$t_issue_handlers[] = $t_row['handler_id'];
 			} 
+
+			user_cache_array_rows( array_unique( $t_issue_handlers ) );
 
 			if ( $t_issues_resolved > 0 ) {
 				if ( !$t_project_header_printed ) {
@@ -183,7 +192,7 @@
 			$t_cycle = false;
 			$t_cycle_ids = array();
 
-			while ( 0 < count( $t_issue_ids ) ) {
+			while ( !empty( $t_issue_ids ) ) {
 				$t_issue_id = $t_issue_ids[$k];
 				$t_issue_parent = $t_issue_parents[$k];
 				
