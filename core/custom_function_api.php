@@ -58,9 +58,6 @@
 		}
 
 		echo ' - ', get_enum_element( 'status', $t_bug->status ), '.<br />';
-
-		// do not cache bug data to save memory
-		bug_clear_cache( $p_issue_id );
 	}
 
 	# --------------------
@@ -74,7 +71,7 @@
 	# Prints one entry in the roadmap.
 	function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_level = 0 ) {
 		$t_bug = bug_get( $p_issue_id );
-		
+
 		if ( bug_is_resolved( $p_issue_id ) ) {
 			$t_strike_start = '<strike>';
 			$t_strike_end = '</strike>';
@@ -97,9 +94,6 @@
 		}
 
 		echo ' - ', get_enum_element( 'status', $t_bug->status ), $t_strike_end, '.<br />';
-
-		// do not cache bug data to save memory
-		bug_clear_cache( $p_issue_id );
 	}
 
 	# --------------------
