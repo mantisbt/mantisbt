@@ -275,6 +275,8 @@
 	# --------------------
 	# Return all versions for the specified project
 	function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false ) {
+		global $g_cache_versions;
+		
 		$c_project_id = db_prepare_int( $p_project_id );
 		$t_project_version_table = db_get_table( 'mantis_project_version_table' );
 
@@ -305,6 +307,8 @@
 		for ( $i = 0 ; $i < $count ; $i++ ) {
 			$row = db_fetch_array( $result );
 			$row['date_order'] = db_unixtimestamp( $row['date_order'] );
+			$g_cache_versions[(int)$row['id']] = $row;
+
 			$rows[] = $row;
 		}
 		return $rows;
