@@ -42,6 +42,8 @@
 	# --------------------
 	# Prints one entry in the changelog.
 	function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_level = 0 ) {
+		static $t_status;
+
 		$t_bug = bug_get( $p_issue_id );
 
 		if ( $t_bug->category_id ) {
@@ -57,7 +59,11 @@
 			echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 		}
 
-		echo ' - ', get_enum_element( 'status', $t_bug->status ), '.<br />';
+		if ( !isset ( $t_status[$t_bug->status] ) ) {
+			$t_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status );
+		}
+		echo ' - ', $t_status[$t_bug->status], '.<br />';
+
 	}
 
 	# --------------------
@@ -70,6 +76,8 @@
 	# --------------------
 	# Prints one entry in the roadmap.
 	function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_level = 0 ) {
+		static $t_status;
+
 		$t_bug = bug_get( $p_issue_id );
 
 		if ( bug_is_resolved( $p_issue_id ) ) {
@@ -93,7 +101,10 @@
 			echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 		}
 
-		echo ' - ', get_enum_element( 'status', $t_bug->status ), $t_strike_end, '.<br />';
+		if ( !isset ( $t_status[$t_bug->status] ) ) {
+			$t_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status );
+		}
+		echo ' - ', $t_status[$t_bug->status], $t_strike_end, '.<br />';
 	}
 
 	# --------------------
