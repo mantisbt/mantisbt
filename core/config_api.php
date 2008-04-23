@@ -25,7 +25,9 @@
 
 	# cache for config variables
 	$g_cache_config = array();
+	$g_cache_config_eval = array();
 	$g_cache_config_access = array();
+	$g_cache_bypass_lookup = array();
 	$g_cache_filled = false;
 	$g_cache_can_set_in_database = '';
 	
@@ -164,11 +166,13 @@
 	# ----------------------
 	# force config variable from a global to avoid recursion
 	function config_get_global( $p_option, $p_default = null ) {
-
+		global $g_cache_config_eval;
 		if ( isset( $GLOBALS['g_' . $p_option] ) ) {
-			$t_value = config_eval( $GLOBALS['g_' . $p_option] );
-			if ( $t_value !== $GLOBALS['g_' . $p_option] ) {
-    			$GLOBALS['g_' . $p_option] = $t_value;
+			if ( !isset( $g_cache_config_eval['g_' . $p_option] ) ) {
+				$t_value = config_eval( $GLOBALS['g_' . $p_option] );
+   				$g_cache_config_eval['g_' . $p_option] = $t_value;
+    		} else {
+    			$t_value = $g_cache_config_eval['g_' . $p_option];
     		}
 			return $t_value;
 		} else {
@@ -360,12 +364,19 @@
 	# Checks if the specific configuration option can be set in the database, otherwise it can only be set
 	# in the configuration file (config_inc.php / config_defaults_inc.php).
 	function config_can_set_in_database( $p_option ) {
-		global $g_cache_can_set_in_database;
+		global $g_cache_can_set_in_database, $g_cache_bypass_lookup;
+
+		if ( isset( $g_cache_bypass_lookup[$p_option] ) ) {
+			return !$g_cache_bypass_lookup[$p_option];
+		}
+
 		# bypass table lookup for certain options
 		if ( $g_cache_can_set_in_database == '' ) {
 			$g_cache_can_set_in_database = '/' . implode( '|', config_get_global( 'global_settings' ) ) . '/';
 		}
 		$t_bypass_lookup = ( 0 < preg_match( $g_cache_can_set_in_database, $p_option ) );
+
+		$g_cache_bypass_lookup[$p_option] = $t_bypass_lookup;
 
 		return !$t_bypass_lookup;
 	}
