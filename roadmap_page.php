@@ -96,6 +96,9 @@
 		
 		$t_version_rows = array_reverse( version_get_all_rows( $t_project_id ) );
 
+		# cache category info, but ignore the results for now
+		category_get_all_rows( $t_project_id );
+
 		$t_project_header_printed = false;
 		
 		foreach( $t_version_rows as $t_version_row ) {
@@ -125,6 +128,7 @@
 
 			$t_issue_ids = array();
 			$t_issue_parents = array();
+			$t_issue_handlers = array();
 
 			while ( $t_row = db_fetch_array( $t_result ) ) {
 				# hide private bugs if user doesn't have access to view them.
@@ -166,7 +170,11 @@
 					$t_issue_ids[] = $t_issue_id;
 					$t_issue_parents[] = null;
 				}
+
+				$t_issue_handlers[] = $t_row['handler_id'];
 			}
+
+			user_cache_array_rows( array_unique( $t_issue_handlers ) );
 
 			$t_progress = $t_issues_planned > 0 ? ( (integer) ( $t_issues_resolved * 100 / $t_issues_planned ) ) : 0;
 
