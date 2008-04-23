@@ -255,11 +255,10 @@
 		$t_user_id = auth_get_current_user_id();
 		$t_lang = mci_get_user_lang( $t_user_id );
 		$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
-		$t_user_access_level = user_get_access_level( $t_user_id, $t_project_id );
 		$t_user_bugnote_order = 'ASC'; // always get the notes in ascending order for consistency to the calling application.
 
 		$t_result = array();
-		foreach( bugnote_get_all_visible_bugnotes( $p_issue_id, $t_user_access_level, $t_user_bugnote_order, 0 ) as $t_value ) {
+		foreach( bugnote_get_all_visible_bugnotes( $p_issue_id, $t_user_bugnote_order, 0 ) as $t_value ) {
 			$t_bugnote = array();
 			$t_bugnote['id'] = $t_value->id;
 			$t_bugnote['reporter'] = mci_account_get_array_by_id( $t_value->reporter_id );
