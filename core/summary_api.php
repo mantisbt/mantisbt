@@ -502,8 +502,15 @@
 				ORDER BY num DESC";
 		$result = db_query( $query, $t_reporter_summary_limit );
 
+		$t_reporters = array();
 		while ( $row = db_fetch_array( $result ) ) {
-			$v_reporter_id = $row['reporter_id'];
+			$t_reporters[] = $row['reporter_id'];	
+		}
+		
+		user_cache_array_rows( $t_reporters );
+		
+		foreach ( $t_reporters as $t_reporter ) {
+			$v_reporter_id = $t_reporter;
 			$query = "SELECT COUNT(id) as bugcount, status FROM $t_mantis_bug_table
 					WHERE reporter_id=$v_reporter_id
 					AND $specific_where
