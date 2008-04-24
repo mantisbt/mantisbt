@@ -1357,7 +1357,7 @@
 		}
 	}
 	# --------------------
-	function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide=0 ) {
+	function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide=0, $p_filter=ALL ) {
 		if ( $p_sort_by == $p_field ) {   # If this is the selected field flip the order
 			if ( 'ASC' == $p_dir || ASCENDING == $p_dir ) {
 				$t_dir = 'DESC';
@@ -1368,7 +1368,7 @@
 			$t_dir = 'ASC';
 		}
 
-		PRINT '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '&amp;save=1&amp;hide=' . $p_hide . '">' . $p_string . '</a>';
+		PRINT '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '&amp;save=1&amp;hide=' . $p_hide . '&amp;filter='. $p_filter . '">' . $p_string . '</a>';
 	}
 	# --------------------
 	function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by ) {
@@ -1435,7 +1435,7 @@
 		}
 
 		if ( ( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
-			if ( $p_temp_filter_id > 0 ) {
+			if ( $p_temp_filter_id !== 0 ) {
 				PRINT " <a href=\"$p_page_url?filter=$p_temp_filter_id&amp;page_number=$p_page_no\">$p_text</a> ";		
 			} else {
 				PRINT " <a href=\"$p_page_url?page_number=$p_page_no\">$p_text</a> ";		
@@ -1489,7 +1489,7 @@
 			if ( $i == $p_current ) {
 				array_push( $t_items, $i );
 			} else {
-				if ( $p_temp_filter_id > 0 ) {
+				if ( $p_temp_filter_id !== 0 ) {
 					array_push( $t_items, "<a href=\"$p_page?filter=$p_temp_filter_id&amp;page_number=$i\">$i</a>" );				
 				} else {
 					array_push( $t_items, "<a href=\"$p_page?page_number=$i\">$i</a>" );
