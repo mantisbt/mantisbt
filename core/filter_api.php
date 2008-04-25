@@ -3436,8 +3436,13 @@
 					check_selected( $t_filter['user_monitor'], META_FILTER_MYSELF );
 					PRINT '>[' . lang_get( 'myself' ) . ']</option>';
 				}
+				$t_threshold = config_get( 'show_monitor_list_threshold' );
+				$t_has_project_level = access_has_project_level( $t_threshold );
+
+				if ( $t_has_project_level ) {
+					print_reporter_option_list( $t_filter['user_monitor'] );
+				}
 			?>
-			<?php print_reporter_option_list( $t_filter['user_monitor'] ) ?>
 		</select>
 		<?php
 	}
