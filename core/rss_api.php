@@ -52,6 +52,10 @@
 
 		$t_user_id = user_get_id_by_name( $p_username );
 
+		if ( false === $t_user_id ) {
+			return false;
+		}
+		
 		$t_correct_key = rss_calculate_key( $t_user_id );
 		if ( $p_key != $t_correct_key ) {
 			return false;
