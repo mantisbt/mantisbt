@@ -280,7 +280,7 @@
 
 		foreach ( $t_stack as $t_frame ) {
 			echo '<tr ' , error_alternate_class() , '>';
-			echo '<td>' , htmlentities(  $t_frame['file'] , ENT_COMPAT, lang_get( 'charset' ) ) , '</td><td>' , (isset( $t_frame['line'] ) ? $t_frame['line'] : '-') , '</td><td>' , (isset( $t_frame['class'] ) ? $t_frame['class'] : '-') , '</td><td>' , (isset( $t_frame['type'] ) ? $t_frame['type'] : '-') , '</td><td>' , (isset( $t_frame['function'] ) ? $t_frame['function'] : '-') , '</td>';
+			echo '<td>' , (isset( $t_frame['file']) ? htmlentities(  $t_frame['file'] , ENT_COMPAT, lang_get( 'charset' ) ) : '-' ) , '</td><td>' , (isset( $t_frame['line'] ) ? $t_frame['line'] : '-') , '</td><td>' , (isset( $t_frame['class'] ) ? $t_frame['class'] : '-') , '</td><td>' , (isset( $t_frame['type'] ) ? $t_frame['type'] : '-') , '</td><td>' , (isset( $t_frame['function'] ) ? $t_frame['function'] : '-') , '</td>';
 
 			$t_args = array();
 			if ( isset( $t_frame['args'] ) && !empty( $t_frame['args'] ) ) {
