@@ -207,6 +207,10 @@
 
 		$t_user_id = user_get_id_by_name( $p_username );
 
+		if ( false === $t_user_id ) {
+			return false;
+		}
+
 		$t_user = user_get_row( $t_user_id );
 
 		# check for disabled account
