@@ -285,7 +285,7 @@
 			echo "<div class=\"right\"><form name=\"mail_config_action\" method=\"post\" action=\"manage_config_revert.php\">\n";
 			echo "<input name=\"revert\" type=\"hidden\" value=\"notify_flags,default_notify_flags\"></input>";
 			echo "<input name=\"project\" type=\"hidden\" value=\"$t_project\"></input>";
-			echo "<input name=\"return\" type=\"hidden\" value=\"" . $_SERVER['PHP_SELF'] ."\"></input>";
+			echo "<input name=\"return\" type=\"hidden\" value=\"" . string_sanitize_url( $_SERVER['PHP_SELF'] ) ."\"></input>";
 			echo "<input type=\"submit\" class=\"button\" value=\"";
 			if ( ALL_PROJECTS == $t_project ) {
                 echo lang_get( 'revert_to_system' );
