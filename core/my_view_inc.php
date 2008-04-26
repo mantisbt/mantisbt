@@ -171,6 +171,17 @@
 	$url_link_parameters['verify'] = 'reporter_id=' . $t_current_user_id . '&amp;show_status=' . $t_bug_resolved_status_threshold;
 
         $rows = filter_get_bug_rows ( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title]  );
+
+		# Improve performance by caching category data in one pass
+		if ( helper_get_current_project() == 0 ) {
+			$t_categories = array();
+			foreach ($rows as $t_row) {
+				$t_categories[] = $t_row['category_id'];
+			}
+
+			category_cache_array_rows(array_unique( $t_categories ));
+		}
+
 		$t_filter = array_merge( $c_filter[$t_box_title], $t_filter );
 
         $box_title = lang_get( 'my_view_title_' . $t_box_title );

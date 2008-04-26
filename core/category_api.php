@@ -35,7 +35,7 @@
 	# Return true if the category exists, false otherwise
 	function category_exists( $p_category_id ) {
 		global $g_category_cache;
-		if ( isset( $g_category_cache[$p_category_id] ) ) {
+		if ( isset( $g_category_cache[(int)$p_category_id] ) ) {
 			return true;
 		}
 
@@ -326,7 +326,7 @@
 			$row = db_fetch_array( $result );
 
 			$rows[] = $row;
-			$g_category_cache[$row['id']] = $row;
+			$g_category_cache[(int)$row['id']] = $row;
 		}
 
 		if ( $p_sort_by_project ) {
@@ -336,6 +336,36 @@
 		}
 
 		return $rows;
+	}
+
+	function category_cache_array_rows( $p_cat_id_array ) {
+		global $g_category_cache;
+		$c_cat_id_array = array();
+		
+		foreach( $p_cat_id_array as $t_cat_id ) {
+			if ( !isset( $g_category_cache[(int)$t_cat_id] ) ) {
+				$c_cat_id_array[] = (int)$t_cat_id;
+			}
+		}
+
+		if( empty( $c_cat_id_array ) )
+			return;
+		
+
+		$t_category_table = db_get_table( 'mantis_category_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
+
+		$query = "SELECT c.*, p.name AS project_name FROM $t_category_table AS c
+				LEFT JOIN $t_project_table AS p
+					ON c.project_id=p.id
+				WHERE c.id IN (" . implode( ',', $c_cat_id_array ) . ')';
+		$result = db_query_bound( $query );
+
+
+		while ( $row = db_fetch_array( $result ) ) {
+			$g_category_cache[(int)$row['id']] = $row;	
+		}
+		return;
 	}
 
 	# --------------------

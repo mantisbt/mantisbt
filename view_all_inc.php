@@ -44,8 +44,15 @@
 	$t_update_bug_threshold = config_get( 'update_bug_threshold' );
 
 	# Improve performance by caching category data in one pass
-	category_get_all_rows( helper_get_current_project() );
-
+	if ( helper_get_current_project() > 0 )
+		category_get_all_rows( helper_get_current_project() );
+	else {
+		$t_categories = array();
+		foreach ($rows as $t_row) {
+			$t_categories[] = $t_row['category_id'];
+		}
+		category_cache_array_rows( array_unique( $t_categories ) );
+	}
 	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE );
 
 	$col_count = sizeof( $t_columns );
