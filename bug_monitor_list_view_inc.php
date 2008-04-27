@@ -39,6 +39,13 @@
 	$result = db_query_bound($query, Array( $c_bug_id ) );
 	$num_users = db_num_rows($result);
 
+	$t_users = array();
+	for ( $i = 0; $i < $num_users; $i++ ) {
+		$row = db_fetch_array( $result );
+		$t_users[$i] = $row['user_id'];
+	}
+	user_cache_array_rows( $t_users );
+
 	echo '<a name="monitors" id="monitors" /><br />';
 ?>
 
@@ -67,10 +74,9 @@
 	</td>
 	<td>
 <?php
- 		for ( $i = 0; $i < $num_users; $i++ ) {
- 			$row = db_fetch_array( $result );
+ 		for ( $i = 0; $i < $num_users; $i++ ) { 			
 			echo ($i > 0) ? ', ' : '';
-			echo print_user( $row['user_id'] );
+			echo print_user( $t_users[$i] );
  		}
 ?>
 	</td>
