@@ -64,7 +64,7 @@
 ?>
 
 <br />
-<form method="post" action="bug_update.php">
+<form name="update_bug_form" method="post" action="bug_update.php">
 <table class="width100" cellspacing="1">
 
 
@@ -426,7 +426,7 @@
 <!-- Submit Button -->
 <tr>
 	<td class="center" colspan="6">
-		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'update_information_button' ) ?>" onclick="this.disabled=1;" />
+		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'update_information_button' ) ?>" onclick="document.update_bug_form.submit();this.disabled=1;" />
 	</td>
 </tr>
 
