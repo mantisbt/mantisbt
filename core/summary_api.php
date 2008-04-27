@@ -362,10 +362,10 @@
 		$t_count = 0;
 		$t_private_bug_threshold = config_get( 'private_bug_threshold' );
 		while ( $row = db_fetch_array( $result ) ) {
-			// as we select all from bug_table, inject into the cache. 
-			bug_add_to_cache ( $row );
+			// as we select all from bug_table, inject into the cache.
+			bug_cache_database_result ( $row );
 			// Skip private bugs unless user has proper permissions
-			if ( ( VS_PRIVATE == bug_get_field( $row['id'], 'view_state' ) ) && 
+			if ( ( VS_PRIVATE == bug_get_field( $row['id'], 'view_state' ) ) &&
 			( false == access_has_bug_level( $t_private_bug_threshold, $row['id'] ) ) ) {
 				continue;
 			}
