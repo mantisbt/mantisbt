@@ -34,23 +34,17 @@
 	# grab the user id currently logged in
 	$t_user_id = auth_get_current_user_id();
 
-	if ( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) {
-		$t_restriction = 'AND ( view_state=' . VS_PUBLIC . ' OR reporter_id = ' . $t_user_id . ')';
-	} else {
-		$t_restriction = '';
-	}
-
-	$t_bugnote_table		= db_get_table( 'mantis_bugnote_table' );
-	$t_bugnote_text_table	= db_get_table( 'mantis_bugnote_text_table' );
-	$t_bugnote_order		= current_user_get_pref( 'bugnote_order' );
-
 	# get the bugnote data
-	$query = "SELECT *
-			FROM $t_bugnote_table
-			WHERE bug_id=" . db_param(0) . " $t_restriction
-			ORDER BY date_submitted $t_bugnote_order, id $t_bugnote_order";
-	$result = db_query_bound( $query, Array( $f_bug_id ) );
-	$num_notes = db_num_rows( $result );
+	$t_bugnotes = bugnote_get_all_visible_bugnotes( $f_bug_id, $t_bugnote_order, 0, $t_user_id );
+	
+	#precache users
+	$t_bugnote_users = array();
+	foreach($t_bugnotes as $t_bugnote) {
+		$t_bugnote_users[] = $t_bugnote->reporter_id;
+	}
+	user_cache_array_rows( $t_bugnote_users );
+	
+	$num_notes = sizeof( $t_bugnotes );
 ?>
 
 <?php # Bugnotes BEGIN ?>
@@ -84,37 +78,24 @@
 	$t_total_time = 0;
 
 	for ( $i=0; $i < $num_notes; $i++ ) {
-		# prefix all bugnote data with v3_
-		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'v3' );
-		if ( db_unixtimestamp( $v3_date_submitted ) != db_unixtimestamp( $v3_last_modified ) )
+		$t_bugnote = $t_bugnotes[$i];
+
+		if ( $t_bugnote->date_submitted != $t_bugnote->last_modified )
 			$t_bugnote_modified = true;
 		else
 			$t_bugnote_modified = false;
+		
+		$t_bugnote_id_formatted = bugnote_format_id( $t_bugnote->id );
 
-		$v3_date_submitted = date( $t_normal_date_format, ( db_unixtimestamp( $v3_date_submitted ) ) );
-		$v3_last_modified = date( $t_normal_date_format, ( db_unixtimestamp( $v3_last_modified ) ) );
-
-		# grab the bugnote text and id and prefix with v3_
-		$query = "SELECT note
-				FROM $t_bugnote_text_table
-				WHERE id=" . db_param(0);
-		$result2 = db_query_bound( $query, Array( $v3_bugnote_text_id ) );
-		$row = db_fetch_array( $result2 );
-
-		$v3_note = $row['note'];
-		$v3_note = string_display_links( $v3_note );
-		$t_bugnote_id_formatted = bugnote_format_id( $v3_id );
-
-		if ( 0 != $v3_time_tracking ) {
-			$v3_time_tracking_hhmm = db_minutes_to_hhmm( $v3_time_tracking );
-			$v3_note_type = TIME_TRACKING;   // for older entries that didn't set the type
-			$t_total_time += $v3_time_tracking;
+		if ( 0 != $t_bugnote->time_tracking ) {
+			$t_time_tracking_hhmm = db_minutes_to_hhmm( $t_bugnote->time_tracking );
+			$t_bugnote->note_type = TIME_TRACKING;   // for older entries that didn't set the type @@@PLR FIXME
+			$t_total_time += $t_bugnote->time_tracking;
 		} else {
-			$v3_time_tracking_hhmm = '';
+			$t_time_tracking_hhmm = '';
 		}
 
-		if ( VS_PRIVATE == $v3_view_state ) {
+		if ( VS_PRIVATE == $t_bugnote->view_state ) {
 			$t_bugnote_css		= 'bugnote-private';
 			$t_bugnote_note_css	= 'bugnote-note-private';
 		} else {
@@ -122,27 +103,27 @@
 			$t_bugnote_note_css	= 'bugnote-note-public';
 		}
 ?>
-<tr class="bugnote" id="c<?php echo $v3_id ?>">
+<tr class="bugnote" id="c<?php echo $t_bugnote->id ?>">
         <td class="<?php echo $t_bugnote_css ?>">
-		<?php if ( ON  == config_get("show_avatar") ) print_avatar( $v3_reporter_id ); ?>
+		<?php if ( ON  == config_get("show_avatar") ) print_avatar( $t_bugnote->reporter_id ); ?>
 		<span class="small">(<?php echo $t_bugnote_id_formatted ?>)</span><br />
 		<?php
-			echo print_user( $v3_reporter_id );
+			echo print_user( $t_bugnote->reporter_id );
 		?>
 		<span class="small"><?php
-			if ( user_exists( $v3_reporter_id ) ) {
-				$t_access_level = access_get_project_level( null, $v3_reporter_id );
+			if ( user_exists( $t_bugnote->reporter_id ) ) {
+				$t_access_level = access_get_project_level( null, (int)$t_bugnote->reporter_id );
 				echo '(', get_enum_element( 'access_levels', $t_access_level ), ')';
 			} 
 		?></span>
-		<?php if ( VS_PRIVATE == $v3_view_state ) { ?>
+		<?php if ( VS_PRIVATE == $t_bugnote->view_state ) { ?>
 		<span class="small">[ <?php echo lang_get( 'private' ) ?> ]</span>
 		<?php } ?>
 		<br />
-		<span class="small"><?php echo $v3_date_submitted ?></span><br />
+		<span class="small"><?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?></span><br />
 		<?php
 		if ( $t_bugnote_modified ) {
-			echo '<span class="small">'.lang_get( 'edited_on').' '.$v3_last_modified.'</span><br />';
+			echo '<span class="small">'.lang_get( 'edited_on').' '.date( $t_normal_date_format, $t_bugnote->last_modified ).'</span><br />';
 		}
 		?>
 		<br /><div class="small">
@@ -154,30 +135,30 @@
 
 				# admins and the bugnote creator can edit/delete this bugnote
 				if ( ( access_has_bug_level( config_get( 'manage_project_threshold' ), $f_bug_id ) ) ||
-					( ( $v3_reporter_id == $t_user_id ) && ( ON == config_get( 'bugnote_allow_user_edit_delete' ) ) ) ) {
+					( ( $t_bugnote->reporter_id == $t_user_id ) && ( ON == config_get( 'bugnote_allow_user_edit_delete' ) ) ) ) {
 					$t_can_edit_note = true;
 					$t_can_delete_note = true;
 				}
 
 				# users above update_bugnote_threshold should be able to edit this bugnote
 				if ( $t_can_edit_note || access_has_bug_level( config_get( 'update_bugnote_threshold' ), $f_bug_id ) ) {
-					print_button( 'bugnote_edit_page.php?bugnote_id='.$v3_id, lang_get( 'bugnote_edit_link' ) );
+					print_button( 'bugnote_edit_page.php?bugnote_id='.$t_bugnote->id, lang_get( 'bugnote_edit_link' ) );
 				}
 
 				# users above delete_bugnote_threshold should be able to delete this bugnote
 				if ( $t_can_delete_note || access_has_bug_level( config_get( 'delete_bugnote_threshold' ), $f_bug_id ) ) {
 					echo " ";
-					print_button( 'bugnote_delete.php?bugnote_id='.$v3_id, lang_get( 'delete_link' ) );
+					print_button( 'bugnote_delete.php?bugnote_id='.$t_bugnote->id, lang_get( 'delete_link' ) );
 				}
 
 				if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) &&
 					access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id ) ) {
-					if ( VS_PRIVATE == $v3_view_state ) {
+					if ( VS_PRIVATE == $t_bugnote->view_state ) {
 						echo " ";
-						print_button('bugnote_set_view_state.php?private=0&amp;bugnote_id='.$v3_id, lang_get( 'make_public' ));
+						print_button('bugnote_set_view_state.php?private=0&amp;bugnote_id='.$t_bugnote->id, lang_get( 'make_public' ));
 					} else {
 						echo " ";
-						print_button('bugnote_set_view_state.php?private=1&amp;bugnote_id='.$v3_id, lang_get( 'make_private' ));
+						print_button('bugnote_set_view_state.php?private=1&amp;bugnote_id='.$t_bugnote->id, lang_get( 'make_private' ));
 					}
 				}
 			}
@@ -186,27 +167,27 @@
 	</td>
 	<td class="<?php echo $t_bugnote_note_css ?>">
 		<?php
-			switch ( $v3_note_type ) {
+			switch ( $t_bugnote->note_type ) {
 				case REMINDER:
 					echo '<em>' . lang_get( 'reminder_sent_to' ) . ': ';
-					$v3_note_attr = substr( $v3_note_attr, 1, strlen( $v3_note_attr ) - 2 );
+					$t_note_attr = substr( $t_bugnote->note_attr, 1, strlen( $t_bugnote->note_attr ) - 2 );
 					$t_to = array();
-					foreach ( explode( '|', $v3_note_attr ) as $t_recipient ) {
+					foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
 						$t_to[] = prepare_user_name( $t_recipient );
 					}
 					echo implode( ', ', $t_to ) . '</em><br /><br />';
 				case TIME_TRACKING:
 					if ( access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
-						echo '<b><big>', $v3_time_tracking_hhmm, '</big></b><br /><br />';
+						echo '<b><big>', $t_time_tracking_hhmm, '</big></b><br /><br />';
 					}
 					break;
 			}
 
-			echo $v3_note;
+			echo string_display_links( $t_bugnote->note );;
 		?>
 	</td>
 </tr>
-<?php event_signal( 'EVENT_VIEW_BUGNOTE', array( $f_bug_id, $v3_id, VS_PRIVATE == $v3_view_state ) ); ?>
+<?php event_signal( 'EVENT_VIEW_BUGNOTE', array( $f_bug_id, $t_bugnote->id, VS_PRIVATE == $t_bugnote->view_state ) ); ?>
 <tr class="spacer">
 	<td colspan="2"></td>
 </tr>
