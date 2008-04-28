@@ -133,6 +133,14 @@
 				<input type="text" name="length_max" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" />
 			</td>
 		</tr>
+        <tr <?php echo helper_alternate_class() ?>>
+            <td class="category">
+                <?php echo lang_get( 'custom_field_filter_by' ) ?>
+            </td>
+            <td>
+                <input type="checkbox" name="filter_by" <?php if ( $t_definition['filter_by'] ) { ?>checked="checked"<?php } ?>  />
+            </td>
+        </tr>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td class="category">
 				<?php echo lang_get( 'custom_field_advanced' ) ?>

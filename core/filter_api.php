@@ -1227,6 +1227,11 @@
 			$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
 
 			foreach( $t_custom_fields as $t_cfid ) {
+				$t_field_info = custom_field_cache_row( $t_cfid, true );
+                if ( !$t_field_info['filter_by']) {
+                    continue; #skip this custom field it shouldn't be filterable
+                }
+
 				$t_custom_where_clause = '';
 				# Ignore all custom filters that are not set, or that are set to '' or "any"
 				$t_any_found = false;
@@ -1710,7 +1715,7 @@
 
 				foreach ( $t_custom_fields as $t_cfid ) {
 					$t_field_info = custom_field_cache_row( $t_cfid, true );
-					if ( $t_field_info['access_level_r'] <= $t_current_user_access_level ) {
+					if ( $t_field_info['access_level_r'] <= $t_current_user_access_level && $t_field_info['filter_by'] ) {
 						$t_accessible_custom_fields_ids[] = $t_cfid;
 						$t_accessible_custom_fields_names[] = $t_field_info['name'];
 						$t_accessible_custom_fields_types[] = $t_field_info['type'];

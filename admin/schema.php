@@ -406,3 +406,6 @@ $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_version
 	obsolete		L		NOTNULL DEFAULT \" '0' \"" ) );
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "
     due_date        T       NOTNULL DEFAULT '" . db_null_date() . "' " ) );
+
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_custom_field_table' ), "
+  filter_by 		L 		NOTNULL DEFAULT \" '1' \"" ) );

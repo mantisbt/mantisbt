@@ -1247,6 +1247,7 @@ $s_custom_field_access_level_r = 'Read Access';
 $s_custom_field_access_level_rw = 'Write Access';
 $s_custom_field_length_min = 'Min. Length';
 $s_custom_field_length_max = 'Max. Length';
+$s_custom_field_filter_by = "Add to Filter";
 $s_custom_field_advanced = 'Display Only On Advanced Page';
 $s_custom_field_display_report = 'Display When Reporting Issues';
 $s_custom_field_display_update = 'Display When Updating Issues';

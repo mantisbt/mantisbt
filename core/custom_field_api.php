@@ -334,6 +334,7 @@
 		$c_access_level_rw	= db_prepare_int(    $p_def_array['access_level_rw'] );
 		$c_length_min		= db_prepare_int(    $p_def_array['length_min']      );
 		$c_length_max		= db_prepare_int(    $p_def_array['length_max']      );
+		$c_filter_by		= db_prepare_bool(   $p_def_array['filter_by']       );
 		$c_advanced			= db_prepare_bool(   $p_def_array['advanced']        );
 		$c_display_report	= db_prepare_bool( 	 $p_def_array['display_report'] );
 		$c_display_update	= db_prepare_bool( 	 $p_def_array['display_update'] );
@@ -438,6 +439,14 @@
 				$query .= ', ';
 			}
 			$query .= "length_max='$c_length_max'";
+		}
+		if( array_key_exists( 'filter_by', $p_def_array ) ) {
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "filter_by='$c_filter_by'";
 		}
 		if( array_key_exists( 'advanced', $p_def_array ) ) {
 			if ( !$t_update_something ) {
