@@ -42,7 +42,7 @@
 		$t_user_id = auth_get_current_user_id();
 	}
 
-	$t_columns = columns_get_all();
+	$t_columns = columns_get_all( $t_project_id );
 	$t_all = implode( ', ', $t_columns );
 
 	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_CSV_PAGE, /* $p_viewable_only */ false, $t_user_id );

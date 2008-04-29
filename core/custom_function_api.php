@@ -24,6 +24,7 @@
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'prepare_api.php' );
+	require_once( $t_core_dir . 'columns_api.php' );
 
 	### Custom Function API ###
 
@@ -216,15 +217,19 @@
 	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
 	# $p_user_id: The user id or null for current logged in user.
 	function custom_function_default_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_user_id = null ) {
+		$t_project_id = helper_get_current_project();
+
 		if ( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
-			$t_columns = config_get( 'csv_columns', null, $p_user_id );
+			$t_columns = config_get( 'csv_columns', $t_project_id, $p_user_id );
 		} else if ( $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
-			$t_columns = config_get( 'excel_columns', null, $p_user_id );
+			$t_columns = config_get( 'excel_columns', $t_project_id, $p_user_id );
 		} else if ( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
-			$t_columns = config_get( 'view_issues_page_columns', null, $p_user_id );
+			$t_columns = config_get( 'view_issues_page_columns', $t_project_id, $p_user_id );
 		} else {
-			$t_columns = config_get( 'print_issues_page_columns', null, $p_user_id );
+			$t_columns = config_get( 'print_issues_page_columns', $t_project_id, $p_user_id );
 		}
+
+		$t_columns = columns_remove_invalid( $t_columns, columns_get_all( $t_project_id ) );
 
 		return $t_columns;
 	}
@@ -266,7 +271,7 @@
 				$t_function( $t_sort, $t_dir, $p_columns_target );
 			} else {
 				echo '<td>';
-				print_view_bug_sort_link( lang_get_defaulted( $p_column ), $p_column, $t_sort, $t_dir, $p_columns_target );
+				print_view_bug_sort_link( column_get_title( $p_column ), $p_column, $t_sort, $t_dir, $p_columns_target );
 				print_sort_icon( $t_dir, $t_sort, $p_column );
 				echo '</td>';
 			}

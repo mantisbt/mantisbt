@@ -24,13 +24,13 @@
 	/**
 	 * Get all accessible columns for the current project / current user..
 	 */
-	function columns_get_all() {
+	function columns_get_all( $p_project_id = null ) {
 		$t_columns = array(
 			'additional_information',   // new
 			'attachment',
 			'bugnotes_count',
 			'build',
-			'category',
+			'category_id',
 			'date_submitted',
 			'description',     // new
 			'edit',
@@ -59,7 +59,12 @@
 		);
 
 		# Add project custom fields to the array.  Only add the ones for which the current user has at least read access.
-		$t_project_id = helper_get_current_project();
+		if ( $p_project_id === null ) {
+			$t_project_id = helper_get_current_project();
+		} else {
+			$t_project_id = $p_project_id;
+		}
+
 		$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
 		foreach( $t_related_custom_field_ids as $t_id ) {
 			if ( !custom_field_has_read_access_by_project_id( $t_id, $t_project_id ) ) {
@@ -123,8 +128,8 @@
 
 	/**
 	 * Gets the localized title for the specified column.  The column can be native or custom.
-	 The custom fields must contain the 'custom_' prefix.
-	 * @ $p_column - The column name.
+	 * The custom fields must contain the 'custom_' prefix.
+	 * @param $p_column - The column name.
 	 * @returns The column localized name.
 	 */
 	function column_get_title( $p_column ) {
@@ -170,7 +175,7 @@
 			case 'view_state':
 				return lang_get( 'view_status' );
 			default:
-				return lang_get( $p_column );
+				return lang_get_defaulted( $p_column );
 		}
 	}
 
@@ -181,11 +186,11 @@
 	 * @param $p_columns_all - The list of all valid columns.
 	 */
 	function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns_all ) {
-		$t_columns_no_duplicates = array();
+		$t_columns_all_lower = array_map( 'strtolower', $p_columns_all );
 
 		# Check for invalid fields
 		foreach ( $p_columns_to_validate as $t_column ) {
-			if ( !in_array( strtolower( $t_column ), $p_columns_all ) ) {
+			if ( !in_array( strtolower( $t_column ), $t_columns_all_lower ) ) {
 				error_parameters( $p_field_name, $t_column );
 				trigger_error( ERROR_COLUMNS_INVALID, ERROR );
 				return false;
@@ -193,6 +198,7 @@
 		}
 
 		# Check for duplicate fields
+		$t_columns_no_duplicates = array();
 		foreach ( $p_columns_to_validate as $t_column ) {
 			$t_column_lower = strtolower( $t_column );
 			if ( in_array( $t_column, $t_columns_no_duplicates ) ) {
@@ -207,18 +213,19 @@
 	}
 
 	/**
-	 * Used when columns are copied from one project to another.  This function
-	 * removes the columns that are not applicable to the target project.
-	 * @param $p_field_name - The logic name of the array being validated.  Used when triggering errors.
-	 * @param $p_columns_to_validate - The array of columns to filter.
-	 * @param $p_columns_all - The list of all valid columns.
-	 * @return An array of valid columns to the target project.
+	 * Validates an array of column names and removes ones that are not valid.  The validation
+	 * is not case sensitive.
+	 *
+	 * @param $p_columns - The array of column names to be validated.
+	 * @param $p_columns_all - The array of all valid column names.
+	 * @returns The array of valid column names found in $p_columns.
 	 */
-	function columns_remove_invalid( $p_field_name, $p_columns, $p_columns_all ) {
+	function columns_remove_invalid( $p_columns, $p_columns_all ) {
+		$t_columns_all_lower = array_values( array_map( 'strtolower', $p_columns_all ) );
 		$t_columns = array();
 
 		foreach ( $p_columns as $t_column ) {
-			if ( in_array( strtolower( $t_column ), $p_columns_all ) ) {
+			if ( in_array( strtolower( $t_column ), $t_columns_all_lower ) ) {
 				$t_columns[] = $t_column;
 			}
 		}
