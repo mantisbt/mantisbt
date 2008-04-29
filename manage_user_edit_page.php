@@ -161,12 +161,10 @@
 ?>
 <br />
 <div align="center">
-<form method="post" action="manage_user_proj_add.php">
 <table class="width75" cellspacing="1">
 <!-- Title -->
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 		<?php echo lang_get( 'add_user_title' ) ?>
 	</td>
 </tr>
@@ -181,6 +179,8 @@
 	</td>
 </tr>
 
+<form method="post" action="manage_user_proj_add.php">
+		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 <!-- Unassigend Project Selection -->
 <tr <?php echo helper_alternate_class() ?> valign="top">
 	<td class="category">
@@ -214,8 +214,8 @@
 		<input type="submit" class="button" value="<?php echo lang_get( 'add_user_button' ) ?>" />
 	</td>
 </tr>
-</table>
 </form>
+</table>
 </div>
 <?php
 	} # End of PROJECT ACCESS conditional section

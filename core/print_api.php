@@ -1154,7 +1154,7 @@
 
 			echo $t_project_name.' ['.$t_access_level.'] ('.$t_view_state.')';
 			if ( $p_include_remove_link && access_has_project_level( config_get( 'project_user_threshold' ), $t_project_id ) ) {
-				echo ' [<a class="small" href="manage_user_proj_delete.php?project_id='.$t_project_id.'&amp;user_id='.$p_user_id.'">'. lang_get( 'remove_link' ).'</a>]';
+				html_button ( 'manage_user_proj_delete.php', lang_get( 'remove_link' ), array( 'project_id' => $t_project_id, 'user_id' => $p_user_id ) );
 			}
 			echo '<br />';
 		}
