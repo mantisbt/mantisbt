@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php 4770 2007-11-20 01:09:10Z nuclear_eclipse $
+	# $Id$
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -368,7 +368,7 @@
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td class="center">
-		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'submit_report_button' ) ?>" onclick="this.disabled=1;" />
+		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'submit_report_button' ) ?>" onclick="document.report_bug_form.submit();this.disabled=1;" />
 	</td>
 </tr>
 
