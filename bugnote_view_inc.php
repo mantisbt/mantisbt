@@ -44,6 +44,13 @@
 	}
 	user_cache_array_rows( $t_bugnote_users );
 	
+	#precache access levels
+	if ( isset( $g_project_override ) ) { 
+		access_cache_matrix_project( $g_project_override );
+	} else {
+		access_cache_matrix_project( helper_get_current_project() );
+	}
+	
 	$num_notes = sizeof( $t_bugnotes );
 ?>
 
