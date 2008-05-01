@@ -41,6 +41,12 @@
 	$f_inherit_global = gpc_get_bool( 'inherit_global', 1 );
 	$f_inherit_parent = gpc_get_bool( 'inherit_parent', 1 );
 
+	$f_parent_id	= gpc_get_int( 'parent_id', 0 );
+
+	if ( 0 != $f_parent_id ) {
+		project_ensure_exists( $f_parent_id );
+	}
+
 	$t_project_id = project_create( strip_tags( $f_name ), $f_description, $f_status, $f_view_state, $f_file_path, true, $f_inherit_global );
 
 	if ( ( $f_view_state == VS_PRIVATE ) && ( false === current_user_is_administrator() ) ) {
@@ -48,8 +54,6 @@
 		$t_current_user_id = auth_get_current_user_id();
 		project_add_user( $t_project_id, $t_current_user_id, $t_access_level );
 	}
-
-	$f_parent_id	= gpc_get_int( 'parent_id', 0 );
 
 	if ( 0 != $f_parent_id ) {
 		project_hierarchy_add( $t_project_id, $f_parent_id, $f_inherit_parent );
