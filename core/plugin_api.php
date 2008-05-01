@@ -16,15 +16,15 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-$t_class_path = config_get_global( 'class_path' );
-require_once( $t_class_path . 'MantisPlugin.class.php' );
-
 /**
  * Plugin API
  * Handles the initialisation, management, and execution of plugins.
  *
  * @package PluginAPI
  */
+
+$t_class_path = config_get_global( 'class_path' );
+require_once( $t_class_path . 'MantisPlugin.class.php' );
 
 ##### Cache variables #####
 
