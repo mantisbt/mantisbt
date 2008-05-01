@@ -100,16 +100,6 @@
 	}
 
 	# --------------------
-	# This function checks to see if a variable is set
-	# if it is not then it assigns the default value
-	# otherwise it does nothing
-	function check_varset( &$p_var, $p_default_value ) {
-	     if ( !isset( $p_var ) ) {
-	         $p_var = $p_default_value;
-	     }
-	}
-
-	# --------------------
 	# Add a trailing DIRECTORY_SEPARATOR to a string if it isn't present
 	function terminate_directory_path( $p_path ) {
 		$str_len = strlen($p_path);
