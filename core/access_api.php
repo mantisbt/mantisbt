@@ -461,7 +461,17 @@
 	# get the user's access level specific to this project.
 	# return false (0) if the user has no access override here
 	function access_get_local_level( $p_user_id, $p_project_id ) {
+		global $g_cache_access_matrix_project_ids;
+		
 		$p_project_id = (int)$p_project_id; # 000001 is different from 1.
+
+		if ( in_array( (int)$p_project_id, $g_cache_access_matrix_project_ids ) ) {
+			if ( isset( $g_cache_access_matrix[$p_user_id][$p_project_id] ) ) {
+				return $g_cache_access_matrix[$p_user_id][$p_project_id];
+			} else {
+				return false;
+			}
+		}
 
 		$t_project_level = access_cache_matrix_user( $p_user_id );
 
