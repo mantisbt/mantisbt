@@ -188,15 +188,6 @@
 	}
 
 	# --------------------
-	# Copies item with given key from source array to the destination,
-	# if the key exists in the source. If not - does nothing.
-	function copy_array_item_if_exist( &$p_arr_src, &$p_arr_dst, $key ) {
-		if( array_key_exists( $key, $p_arr_src ) ) {
-			$p_arr_dst[$key] = $p_arr_src[$key];
-		}
-	}
-
-	# --------------------
 	# Return GD version
 	# It doesn't use gd_info() so it works with PHP < 4.3.0 as well
 	function get_gd_version()
