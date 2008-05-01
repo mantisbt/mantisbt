@@ -84,7 +84,7 @@
 		}
 		
 		$t_short_file	= basename( $p_file );
-		$t_method_array = config_get( 'display_errors' );
+		$t_method_array = config_get_global( 'display_errors' );
 		if ( isset( $t_method_array[$p_type] ) ) {
 			$t_method = $t_method_array[$p_type];
 		} else {
@@ -164,7 +164,7 @@
 				}
 				echo '</p></td></tr>';
 
-				if ( ON == config_get( 'show_detailed_errors' ) ) {
+				if ( ON == config_get_global( 'show_detailed_errors' ) ) {
 					echo '<tr><td>';
 					error_print_details( $p_file, $p_line, $p_context );
 					echo '</td></tr>';
