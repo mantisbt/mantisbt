@@ -341,7 +341,7 @@
 			} else {
 				## Use offset only if order is ASC to get the last bugnotes
 				if ( 'ASC' == $p_user_bugnote_order ) {
-					$result = db_query( "SELECT COUNT(*) AS row_count FROM $t_bugnote_table WHERE bug_id = '$c_bug_id'" );
+					$result = db_query_bound( "SELECT COUNT(*) AS row_count FROM $t_bugnote_table WHERE bug_id= " . db_param(0), array( $c_bug_id ) );
 					$row    = db_fetch_array( $result );
 
 					$t_bugnote_offset = $row['row_count'] - $p_user_bugnote_limit;
@@ -400,11 +400,11 @@
 		$t_bugnote_table         = db_get_table( 'mantis_bugnote_table' );
 
 		$query = "UPDATE $t_bugnote_table
-				SET time_tracking = '$c_bugnote_time_tracking'
-				WHERE id='$c_bugnote_id'";
-		db_query( $query );
+				SET time_tracking = " . db_param(0) . "
+				WHERE id=" . db_param(1);
+		db_query_bound( $query, Array( $c_bugnote_time_tracking, $c_bugnote_id ) );
 
-		# db_query() errors if there was a problem so:
+		# db_query errors if there was a problem so:
 		return true;
 	}
 
