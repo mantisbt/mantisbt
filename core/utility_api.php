@@ -111,12 +111,6 @@
 	}
 
 	# --------------------
-	# Print a debug string by generating a notice
-	function debug( $p_string ) {
-		trigger_error( $p_string, NOTICE );
-	}
-
-	# --------------------
 	# Return true if the parameter is an empty string or a string
 	#  containing only whitespace, false otherwise
 	function is_blank( $p_var ) {
