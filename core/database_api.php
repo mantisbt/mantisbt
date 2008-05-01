@@ -747,9 +747,9 @@
 		global $g_db;
 
 		if ( null !== $p_timestamp ) {
-			$p_date = $g_db->UserTimeStamp($p_timestamp, $p_gmt);
+			$p_date = $g_db->UserTimeStamp($p_timestamp, 'Y-m-d H:i:s', $p_gmt);
 		} else {
-			$p_date = $g_db->UserTimeStamp(time(), $p_gmt);
+			$p_date = $g_db->UserTimeStamp(time(), 'Y-m-d H:i:s', $p_gmt);
 		}
 		return $p_date;
 	}
