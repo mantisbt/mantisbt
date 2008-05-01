@@ -335,9 +335,9 @@
 				}
 								
 				unset($t_graphviz);
-			} else if ( php_version_at_least( '4.3.0' ) ) {
-				# If we are not under Windows, use proc_open whenever possible,
-				# (PHP >= 4.3.0) since it avoids the need of temporary files.
+			} else {
+				# If we are not under Windows, use proc_open,
+				# since it avoids the need of temporary files.
 
 				# Start dot process
 				$t_command = $this->graphviz_tool . ' -T' . $p_format;
@@ -371,41 +371,7 @@
 					fclose( $t_pipes[1] );
 					proc_close( $t_proccess );
 				}
-			} else {
-				# If proc_open is not available (PHP < 4.3.0), use passthru.
-				# @@@  Remove this whole block once Mantis PHP requirements
-				# @@@  becomes higher.
-
-				# We need a temporary file.
-				if ( isset( $_ENV['TMPDIR'] ) )
-					$t_tmpdir = $_ENV['TMPDIR'];
-				else
-					$t_tmpdir = '/tmp';
-
-				$t_filename = tempnam( $t_tmpdir, 'mantis-dot-' );
-				register_shutdown_function( 'unlink', $t_filename );
-
-				if ( $t_file = @fopen( $t_filename, 'w' ) ) {
-					fputs( $t_file, $t_dot_source );
-					fclose( $t_file );
-				}
-
-				# Now we process it through dot or neato
-				$t_command = $this->graphviz_tool . ' -T' . $p_format . ' ' .
-							 $t_filename;
-
-				if ( $p_headers ) {
-					# Headers were requested, use another output buffer to
-					# retrieve the size for Content-Length.
-					ob_start();
-					passthru( $t_command );
-					header( 'Content-Length: ' . ob_get_length() );
-					ob_end_flush();
-				} else {
-					# No need for headers, send output directly.
-					passthru( $t_command );
-				}
-			}
+			} 
 		}
 
 		# --------------------
