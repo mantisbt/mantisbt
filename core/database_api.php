@@ -265,6 +265,14 @@
 			}
 		}
 		
+		if ( $arr_parms != null && db_is_pgsql() ) {
+			$params = count( $arr_parms );
+			for( $i = 0; $i < $params; $i++) {
+				if ( $arr_parms[$i] === false )
+					$arr_parms[$i] = 0;
+			}
+		}
+		
 		if ( ( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
 			$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset, $arr_parms );
 		} else {
