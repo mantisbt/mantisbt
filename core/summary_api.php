@@ -576,12 +576,12 @@
 		}
 		$t_project_query = ( ON == $t_summary_category_include_project ) ? 'b.project_id, ' : '';
 
-		$query = "SELECT COUNT(b.id) as bugcount, $t_project_query c.name AS category_name, c.id AS category_id, b.status
+		$query = "SELECT COUNT(b.id) as bugcount, $t_project_query c.name AS category_name, category_id, b.status
 				FROM $t_mantis_bug_table b
-				JOIN $t_mantis_category_table AS c ON category_id=c.id
+				JOIN $t_mantis_category_table AS c ON b.category_id=c.id
 				WHERE b.$specific_where
-				GROUP BY $t_project_query category_id, category_name, status
-				ORDER BY $t_project_query category_id, category_name, status";
+				GROUP BY $t_project_query category_id, category_name, b.status
+				ORDER BY $t_project_query category_id, category_name, b.status";
 
 		$result = db_query( $query );
 
