@@ -56,8 +56,10 @@
 	$t_bug_data->additional_information	= gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
 	$t_bug_data->due_date 				= gpc_get_string( 'due_date', '');
 	if ( is_blank ( $t_bug_data->due_date ) ) {
-		$t_bug_data->due_date = date_get_null();
-	}
+		$t_bug_data->due_date = date_get_null( );
+	} else {
+		$t_bug_data->due_date = db_unixtimestamp ( $t_bug_data->due_date, true ) + 1;
+	}	
 
 	$f_file					= gpc_get_file( 'file', null ); #@@@ (thraxisp) Note that this always returns a structure
 															# size = 0, if no file

@@ -503,7 +503,7 @@
 
 		#check due_date format
 		if ( !is_blank( $p_bug_data->due_date ) ) {
-			$c_due_date	= db_bind_timestamp( $p_bug_data->due_date + 1, true ) ; // 1 second past day
+			$c_due_date	= db_bind_timestamp( $p_bug_data->due_date, true );
 		}
 
 		$t_bug_table				= db_get_table( 'mantis_bug_table' );
@@ -1012,7 +1012,7 @@
 		$t_fields[] = $c_bug_data->view_state;
 		$t_fields[] = $c_bug_data->summary;
 		$t_fields[] = $c_bug_data->sponsorship_total;
-		$t_fields[] = $c_bug_data->sticky;
+		$t_fields[] = (bool)$c_bug_data->sticky;
 		$t_fields[] = $c_due_date;
 		$t_fields[] = $c_bug_id;
 				
