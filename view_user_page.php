@@ -17,7 +17,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: view_user_page.php 5219 2008-05-01 18:37:16Z prichards $
+	# $Id$
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
