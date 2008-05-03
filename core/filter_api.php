@@ -1539,11 +1539,7 @@
 		for ( $i=0 ; $i < $row_count ; $i++ ) {
 			$row = db_fetch_array( $result2 );
 			$t_id_array_lastmod[] = db_prepare_int ( $row['id'] );
-			
-			$row['date_submitted'] = db_unixtimestamp ( $row['date_submitted'] );
-			$row['last_updated'] = db_unixtimestamp ( $row['last_updated'] );
-			$row['due_date']	= db_unixtimestamp( $row['due_date'] );
-					
+							
 			array_push( $rows, $row );
 		}
 	
@@ -1565,14 +1561,16 @@
 			$row = db_fetch_array( $result3 );   
 		     
 			$t_stats[ $row['bug_id'] ] = $row;   
-		}   
-		     
+		}  
+		
+		 
+		$t_rows = array(); 
 		foreach($rows as $row) {   
 			if( !isset( $t_stats[ $row['id'] ] ) ) {   
-				bug_cache_database_result( $row, false );   
+				$t_rows[] = bug_cache_database_result( $row, false );   
 			} else {   
-				bug_cache_database_result( $row, $t_stats[ $row['id'] ] );   
-			}   
+				$t_rows[] = bug_cache_database_result( $row, $t_stats[ $row['id'] ] );   
+			}			 
 		} 
 
 		return $rows;

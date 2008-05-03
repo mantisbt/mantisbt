@@ -316,6 +316,11 @@
 			case 'sponsorship_total':
 				$t_field_localized = lang_get( 'sponsorship_total' );
 				break;
+			case 'due_date':
+				$p_old_value = date( config_get( 'short_date_format' ), (int)$p_old_value );
+				$p_new_value = date( config_get( 'short_date_format' ), (int)$p_new_value );
+				$t_field_localized = lang_get( 'due_date' );				
+				break;
 			default:
 				# assume it's a custom field name
 				$t_field_id = custom_field_get_id_from_name( $p_field_name );

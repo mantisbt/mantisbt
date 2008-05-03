@@ -78,8 +78,11 @@
 	$t_bug_data->view_state			= gpc_get_int( 'view_state', $t_bug_data->view_state );
 	$t_bug_data->summary			= gpc_get_string( 'summary', $t_bug_data->summary );
 	$t_bug_data->due_date 				= gpc_get_string( 'due_date', $t_bug_data->due_date);
+
 	if ( is_blank ( $t_bug_data->due_date ) ) {
 		$t_bug_data->due_date = date_get_null( );
+	} else {
+		$t_bug_data->due_date = db_unixtimestamp ( $t_bug_data->due_date, true ) + 1;
 	}
 	
 	$t_bug_data->description		= gpc_get_string( 'description', $t_bug_data->description );
