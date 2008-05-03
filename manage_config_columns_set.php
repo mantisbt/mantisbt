@@ -61,6 +61,7 @@
 		$t_project_id = ALL_PROJECTS;
 	} else {
 		$t_project_id = $f_project_id;
+		project_ensure_exists( $t_project_id );
 	}
 
 	# Calculate the user id to set the configuration for.
