@@ -1521,4 +1521,8 @@ $s_overdue = "Overdue";
 # mind mapping
 $s_mindmap = 'Mindmap';
 $s_freemind_export = 'Freemind Export';
+
+#account_view_page.php
+$s_view_account_title = 'User Information';
+
 ?>
