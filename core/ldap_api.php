@@ -29,13 +29,12 @@
 	# Connect and bind to the LDAP directory
 	function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		$t_ldap_server	= config_get( 'ldap_server' );
-		$t_ldap_port	= config_get( 'ldap_port' );
 
 		if (!extension_loaded('ldap')) {
 			trigger_error(ERROR_LDAP_EXTENSION_NOT_LOADED,ERROR);
 		}
 		
-		$t_ds = @ldap_connect ( $t_ldap_server, $t_ldap_port );
+		$t_ds = @ldap_connect ( $t_ldap_server );
 		if ( $t_ds > 0 ) {
 			$t_protocol_version = config_get( 'ldap_protocol_version' );
 
@@ -85,6 +84,7 @@
 		$t_ds           	= ldap_connect_bind();
 
 		$t_sr	= ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
+
 		$t_info	= ldap_get_entries( $t_ds, $t_sr );
 		ldap_free_result( $t_sr );
 		ldap_unbind( $t_ds );

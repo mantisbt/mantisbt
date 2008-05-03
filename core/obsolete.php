@@ -124,4 +124,5 @@
 
 # changes in 1.2.0a1
 	config_obsolete( 'enable_relationship', '' );
+	config_obsolete( 'ldap_port', 'ldap_server' );
 ?>

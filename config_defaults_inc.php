@@ -927,7 +927,6 @@
 
 	# --- using openldap -------------
 	$g_ldap_server			= 'ldaps://ldap.example.com.au/';
-	$g_ldap_port			= '636';
 	$g_ldap_root_dn			= 'dc=example,dc=com,dc=au';
 	$g_ldap_organization	= '';    # e.g. '(organizationname=*Traffic)'
 	$g_ldap_uid_field		= 'uid'; # Use 'sAMAccountName' for Active Directory
