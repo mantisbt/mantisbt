@@ -193,4 +193,9 @@
 	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
 		header( 'Content-type: text/html;charset=' . lang_get( 'charset' ) );
 	}
+	
+	# every page displays project dropdown box, so cache project information very early
+	if ( db_is_connected() ) {
+		project_cache_all();
+	}
 ?>
