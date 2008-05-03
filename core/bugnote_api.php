@@ -513,7 +513,7 @@
 
 		$t_results = array();
 
-		$query = "SELECT username, SUM(time_tracking) sum_time_tracking
+		$query = "SELECT username, SUM(time_tracking) AS sum_time_tracking
 				FROM $t_user_table u, $t_bugnote_table bn
 				WHERE u.id = bn.reporter_id AND
 				bn.bug_id = '$c_bug_id'
@@ -564,7 +564,7 @@
 
 		$t_results = array();
 
-		$query = "SELECT username, summary, bn.bug_id, SUM(time_tracking) sum_time_tracking
+		$query = "SELECT username, summary, bn.bug_id, SUM(time_tracking) AS sum_time_tracking
 			FROM $t_user_table u, $t_bugnote_table bn, $t_bug_table b
 			WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND bn.bug_id = b.id
 			$t_project_where $t_from_where $t_to_where
