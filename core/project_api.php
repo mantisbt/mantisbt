@@ -157,14 +157,12 @@
 	# --------------------
 	# check to see if project exists by name
 	function project_is_name_unique( $p_name ) {
-		$c_name = db_prepare_string( $p_name );
-
 		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		$query ="SELECT COUNT(*)
 				 FROM $t_project_table
 				 WHERE name=" . db_param(0);
-		$result = db_query_bound( $query, Array( $c_name ) );
+		$result = db_query_bound( $query, Array( $p_name ) );
 
 		if ( 0 == db_result( $result ) ) {
 			return true;
@@ -215,11 +213,6 @@
 		# Make sure file path has trailing slash
 		$p_file_path = terminate_directory_path( $p_file_path );
 
-		$c_name 		= db_prepare_string( $p_name );
-		$c_description 	= db_prepare_string( $p_description );
-		$c_status		= db_prepare_int( $p_status );
-		$c_view_state	= db_prepare_int( $p_view_state );
-		$c_file_path	= db_prepare_string( $p_file_path );
 		$c_enabled		= db_prepare_bool( $p_enabled );
 		$c_inherit_global = db_prepare_bool( $p_inherit_global );
 
@@ -238,9 +231,9 @@
 		$query = "INSERT INTO $t_project_table
 					( name, status, enabled, view_state, file_path, description, inherit_global )
 				  VALUES
-					( '$c_name', '$c_status', '$c_enabled', '$c_view_state', '$c_file_path', '$c_description', '$c_inherit_global' )";
+					( " . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . ", " . db_param(5) . ", " . db_param(6) . " )";
 
-		db_query( $query );
+		db_query_bound( $query, Array( $p_name, (int)$p_status, $c_enabled, (int)$p_view_state, $p_file_path, $p_description, $c_inherit_global ) );
 
 		# return the id of the new project
 		return db_insert_id($t_project_table);
@@ -307,12 +300,7 @@
 		# Make sure file path has trailing slash
 		$p_file_path	= terminate_directory_path( $p_file_path );
 
-		$c_project_id	= db_prepare_int( $p_project_id );
-		$c_name 		= db_prepare_string( $p_name );
-		$c_description 	= db_prepare_string( $p_description );
-		$c_status		= db_prepare_int( $p_status );
-		$c_view_state	= db_prepare_int( $p_view_state );
-		$c_file_path	= db_prepare_string( $p_file_path );
+		$p_project_id	= (int)$p_project_id;
 		$c_enabled		= db_prepare_bool( $p_enabled );
 		$c_inherit_global = db_prepare_bool( $p_inherit_global );
 
@@ -333,15 +321,15 @@
 		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		$query = "UPDATE $t_project_table
-				  SET name='$c_name',
-					status='$c_status',
-					enabled='$c_enabled',
-					view_state='$c_view_state',
-					file_path='$c_file_path',
-					description='$c_description',
-					inherit_global='$c_inherit_global'
-				  WHERE id='$c_project_id'";
-		db_query( $query );
+				  SET name=" . db_param(0) . ",
+					status=" . db_param(1) . ",
+					enabled=" . db_param(2) . ",
+					view_state=" . db_param(3) . ",
+					file_path=" . db_param(4) . ",
+					description=" . db_param(5) . ",
+					inherit_global=" . db_param(6) . "
+				  WHERE id=" . db_param(7);
+		db_query_bound( $query, Array( $p_name, (int)$p_status, $c_enabled, (int)$p_view_state, $p_file_path, $p_description, $c_inherit_global, $p_project_id ) );
 
 		project_clear_cache( $p_project_id );
 
@@ -369,12 +357,10 @@
 	# --------------------
 	# Get the id of the project with the specified name
 	function project_get_id_by_name( $p_project_name ) {
-		$c_project_name = db_prepare_string( $p_project_name );
-
 		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		$query = "SELECT id FROM $t_project_table WHERE name = " . db_param(0);
-		$t_result = db_query_bound( $query, Array( $c_project_name ), 1 );
+		$t_result = db_query_bound( $query, Array( $p_project_name ), 1 );
 
 		if ( db_num_rows( $t_result ) == 0 ) {
 			return 0;
@@ -424,10 +410,9 @@
 	# Return the user's local (overridden) access level on the project or false
 	#  if the user is not listed on the project
 	function project_get_local_user_access_level( $p_project_id, $p_user_id ) {
-		$c_project_id	= db_prepare_int( $p_project_id );
-		$c_user_id		= db_prepare_int( $p_user_id );
+		$p_project_id	= (int)$p_project_id;
 
-		if ( ALL_PROJECTS == $c_project_id ) {
+		if ( ALL_PROJECTS == $p_project_id ) {
 			return false;
 		}
 
@@ -435,8 +420,8 @@
 
 		$query = "SELECT access_level
 				  FROM $t_project_user_list_table
-				  WHERE user_id='$c_user_id' AND project_id='$c_project_id'";
-		$result = db_query( $query );
+				  WHERE user_id=" . db_param(0) . " AND project_id=" . db_param(1);
+		$result = db_query_bound( $query, Array( (int)$p_user_id, $p_project_id ) );
 
 		if ( db_num_rows( $result ) > 0 ) {
 			return db_result( $result );
@@ -449,15 +434,13 @@
 	# return the descriptor holding all the info from the project user list
 	# for the specified project
 	function project_get_local_user_rows( $p_project_id ) {
-		$c_project_id	= db_prepare_int( $p_project_id );
-
 		$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 
 		$query = "SELECT *
 				FROM $t_project_user_list_table
-				WHERE project_id='$c_project_id'";
+				WHERE project_id=" . db_param(0);
 
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( (int)$p_project_id ) );
 
 		$t_user_rows = array();
 		$t_row_count = db_num_rows( $result );
@@ -586,6 +569,8 @@
 				}
 			}
 		}
+		
+		user_cache_array_rows( array_keys( $t_users ) );
 
 		return array_values( $t_users );
 	}
