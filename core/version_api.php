@@ -359,10 +359,18 @@
 	# Get the version_id, given the project_id and $p_version_id
 	# returns false if not found, otherwise returns the id.
 	function version_get_id( $p_version, $p_project_id = null ) {
+		global $g_cache_versions;
 		if ( $p_project_id === null ) {
 			$c_project_id = helper_get_current_project();
 		} else {
 			$c_project_id = db_prepare_int( $p_project_id );
+		}
+
+		foreach( $g_cache_versions as $t_version ) {
+			if ( ( $t_version['version'] == $p_version ) && 
+				 ( $t_version['project_id'] == $c_project_id ) ) {
+				 return $t_version['id'];
+			}
 		}
 
 		$t_project_version_table = db_get_table( 'mantis_project_version_table' );
