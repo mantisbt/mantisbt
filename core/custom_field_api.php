@@ -138,8 +138,17 @@
 	#  return true if the field is included, false otherwise
 	#
 	function custom_field_is_linked( $p_field_id, $p_project_id ) {
+		global $g_cache_cf_linked;
+
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_field_id		= db_prepare_int( $p_field_id );
+
+		if ( isset( $g_cache_cf_linked[$c_project_id] ) ) {
+			if ( in_array( $c_field_id, $g_cache_cf_linked[$p_project_id] ) )  {
+				return true;
+			}
+			return false;
+		}
 
 		# figure out if this bug_id/field_id combination exists
 		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
@@ -688,7 +697,7 @@
 	#
 	# The ids will be sorted based on the sequence number associated with the binding
 	function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
-	global $g_cache_cf_linked;
+		global $g_cache_cf_linked, $g_cache_custom_field;
         
         if ( ! isset( $g_cache_cf_linked[$p_project_id] ) ) {
         
@@ -718,7 +727,7 @@
                 # select only the ids that the user has some access to 
                 #  e.g., all fields in public projects, or private projects where the user is listed
                 #    or private projects where the user is implicitly listed
-                $query = "SELECT cft.id as id, cft.name as name
+                $query = "SELECT cft.*
                     FROM $t_custom_field_table as cft, $t_user_table ut, $t_project_table pt, $t_custom_field_project_table cfpt
                         LEFT JOIN $t_project_user_list_table pult 
                             on cfpt.project_id = pult.project_id and pult.user_id = $t_user_id
@@ -738,7 +747,7 @@
                 } else {
                     $t_project_clause = "= $p_project_id ";
                 }			
-    			$query = "SELECT cft.id, cft.name, cfpt.sequence
+    			$query = "SELECT cft.*
 					  FROM $t_custom_field_table cft, $t_custom_field_project_table cfpt
 					  WHERE cfpt.project_id $t_project_clause AND
 							cft.id = cfpt.field_id
@@ -750,7 +759,9 @@
 
     		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
     			$row = db_fetch_array( $result );
-
+				
+				$g_cache_custom_field[(int)$row['id']] = $row;
+    			
     			array_push( $t_ids, $row['id'] );
     		}
     		$g_cache_cf_linked[$p_project_id] = $t_ids;
@@ -764,11 +775,11 @@
 	# --------------------
 	# Return an array all custom field ids sorted by name
 	function custom_field_get_ids( ) {
-        global $g_cache_cf_list;
+        global $g_cache_cf_list, $g_cache_custom_field;
        
         if ( $g_cache_cf_list === NULL ) {
             $t_custom_field_table			= db_get_table( 'mantis_custom_field_table' );
-            $query = "SELECT id, name
+            $query = "SELECT *
 				  FROM $t_custom_field_table
 				  ORDER BY name ASC";
             $result = db_query_bound( $query );
@@ -777,6 +788,8 @@
 
             for ( $i=0 ; $i < $t_row_count ; $i++ ) {
                 $row = db_fetch_array( $result );
+
+				$g_cache_custom_field[(int)$row['id']] = $row;
 
                 array_push( $t_ids, $row['id'] );
             }
