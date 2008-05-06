@@ -162,6 +162,25 @@ function plugin_config_defaults( $p_options ) {
 }
 
 /**
+ * Get a language string for the plugin.
+ * Automatically prepends plugin_<basename> to the string requested.
+ * @param string Language string name
+ * @param string Plugin basename
+ * @return string Language string
+ */
+function plugin_lang_get( $p_name, $p_basename=null ) {
+	if ( is_null( $p_basename ) ) {
+		$t_basename = plugin_get_current();
+	} else {
+		$t_basename = $p_basename;
+	}
+
+	$t_name = 'plugin_' . $t_basename . '_' . $p_name;
+
+	return lang_get( $t_name );
+}
+
+/**
  * Hook a plugin's callback function to an event.
  * @param string Event name
  * @param string Callback function
