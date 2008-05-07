@@ -169,7 +169,7 @@
 	# These patterns will be concatenated and used as a regular expression
 	# to bypass the database lookup and look here for appropriate global settings.
 	$g_global_settings = array(
-		'_table$', 'cookie', '^db_', 'hostname', 'database_name', 'show_queries_count',
+		'_table$', 'cookie', '^db_', 'hostname', 'database_name', 'show_queries_count', 'admin_checks',
 		'_path$', 'use_iis', 'language', 'use_javascript', 'display_errors', 'show_detailed_errors', 'stop_on_errors', 'login_method', '_file$',
 		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'plugins_enabled'
 	);
@@ -479,6 +479,9 @@
 	# --- sitewide variables ----------
 	$g_window_title			= 'Mantis';	 # browser window title
 	$g_page_title			= '';	 # title at top of html page (empty by default, since there is a logo now)
+
+	# --- administrative checks -------
+	$g_admin_checks			= ON;		# Check for admin directory, database upgrades, etc.
 
 	# --- site branding ---------------
 	$g_favicon_image		= 'images/favicon.ico';

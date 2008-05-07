@@ -137,81 +137,85 @@
 	# Since this is considered part of the admin-checks, the strings are not translated.
 	#
 
-	# Warning, if plain passwords are selected
-	if ( config_get( 'login_method' ) === PLAIN ) {
-		echo '<div class="warning" align="center">';
-		echo '<p><font color="red"><strong>WARNING:</strong> Plain password authentication is used, this will expose your passwords to administrators.</font></p>';
-		echo '</div>';
-	}
+	if ( config_get_global( 'admin_checks' ) == ON ) {
 
-	# Generate a warning if administrator/root is valid.
-	$t_admin_user_id = user_get_id_by_name( 'administrator' );
-	if ( $t_admin_user_id !== false ) {
-		if ( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
+		# Warning, if plain passwords are selected
+		if ( config_get( 'login_method' ) === PLAIN ) {
 			echo '<div class="warning" align="center">';
-			echo '<p><font color="red"><strong>WARNING:</strong> You should disable the default "administrator" account or change its password.</font></p>';
+			echo '<p><font color="red"><strong>WARNING:</strong> Plain password authentication is used, this will expose your passwords to administrators.</font></p>';
 			echo '</div>';
 		}
-	}
 
-	# Check if the admin directory is available and is readable.
-	$t_admin_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
-	if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) ) {
-		echo '<div class="warning" align="center">', "\n";
-		echo '<p><font color="red"><strong>WARNING:</strong> Admin directory should be removed.</font></p>', "\n";
-		echo '</div>', "\n";
-			
-		# since admin directory and db_upgrade lists are available check for missing db upgrades	
-		# Check for db upgrade for versions < 1.0.0 using old upgrader
-		$t_db_version = config_get( 'database_version' , 0 );
-		# if db version is 0, we haven't moved to new installer.
-		if ( $t_db_version == 0 ) {
-			if ( db_table_exists( db_get_table( 'mantis_upgrade_table' ) ) ) {
-				$query = "SELECT COUNT(*) from " . db_get_table( 'mantis_upgrade_table' ) . ";";
-				$result = db_query_bound( $query );
-				if ( db_num_rows( $result ) < 1 ) {
-					$t_upgrade_count = 0;
+		# Generate a warning if administrator/root is valid.
+		$t_admin_user_id = user_get_id_by_name( 'administrator' );
+		if ( $t_admin_user_id !== false ) {
+			if ( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
+				echo '<div class="warning" align="center">';
+				echo '<p><font color="red"><strong>WARNING:</strong> You should disable the default "administrator" account or change its password.</font></p>';
+				echo '</div>';
+			}
+		}
+
+		# Check if the admin directory is available and is readable.
+		$t_admin_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
+		if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) ) {
+			echo '<div class="warning" align="center">', "\n";
+			echo '<p><font color="red"><strong>WARNING:</strong> Admin directory should be removed.</font></p>', "\n";
+			echo '</div>', "\n";
+				
+			# since admin directory and db_upgrade lists are available check for missing db upgrades	
+			# Check for db upgrade for versions < 1.0.0 using old upgrader
+			$t_db_version = config_get( 'database_version' , 0 );
+			# if db version is 0, we haven't moved to new installer.
+			if ( $t_db_version == 0 ) {
+				if ( db_table_exists( db_get_table( 'mantis_upgrade_table' ) ) ) {
+					$query = "SELECT COUNT(*) from " . db_get_table( 'mantis_upgrade_table' ) . ";";
+					$result = db_query_bound( $query );
+					if ( db_num_rows( $result ) < 1 ) {
+						$t_upgrade_count = 0;
+					} else {
+						$t_upgrade_count = (int)db_result( $result );
+					}
 				} else {
-					$t_upgrade_count = (int)db_result( $result );
+					$t_upgrade_count = 0;
 				}
-			} else {
-				$t_upgrade_count = 0;
+
+				if ( $t_upgrade_count > 0 ) { # table exists, check for number of updates
+				
+					# new config table database version is 0.
+					# old upgrade tables exist. 
+					# assume user is upgrading from <1.0 and therefore needs to update to 1.x before upgrading to 1.2
+					echo '<div class="warning" align="center">';
+					echo '<p><font color="red"><strong>ERROR:</strong> The database structure appears to be out of date (config(databaseversion) is 0 and old upgrade tables exist). Version 1.x of mantis introduced a new upgrade process. You appear to be upgrading from a 0.XX Release. Please upgrade to 1.0.8 or 1.1.X, then upgrade to 1.2.</font></p>';
+					echo '</div>';
+				} else {
+					# old upgrade tables do not exist, yet config database_version is 0
+					echo '<div class="warning" align="center">';
+					echo '<p><font color="red"><strong>ERROR:</strong> The database structure appears to be out of date(config(databaseversion) is 0 and old upgrade tables do not exist). Please check that your database is running - we can not retrieve the database schema version. Config Table did not return a valid database schema version - please ask for support on the mantis-help mailing list if required.</font></p>';
+					echo '</div>';
+				}
 			}
 
-			if ( $t_upgrade_count > 0 ) { # table exists, check for number of updates
-			
-				# new config table database version is 0.
-				# old upgrade tables exist. 
-				# assume user is upgrading from <1.0 and therefore needs to update to 1.x before upgrading to 1.2
-				echo '<div class="warning" align="center">';
-				echo '<p><font color="red"><strong>ERROR:</strong> The database structure appears to be out of date (config(databaseversion) is 0 and old upgrade tables exist). Version 1.x of mantis introduced a new upgrade process. You appear to be upgrading from a 0.XX Release. Please upgrade to 1.0.8 or 1.1.X, then upgrade to 1.2.</font></p>';
-				echo '</div>';
-			} else {
-				# old upgrade tables do not exist, yet config database_version is 0
-				echo '<div class="warning" align="center">';
-				echo '<p><font color="red"><strong>ERROR:</strong> The database structure appears to be out of date(config(databaseversion) is 0 and old upgrade tables do not exist). Please check that your database is running - we can not retrieve the database schema version. Config Table did not return a valid database schema version - please ask for support on the mantis-help mailing list if required.</font></p>';
-				echo '</div>';
-			}
-		}
+			# Check for db upgrade for versions > 1.0.0 using new installer and schema
+			require_once( 'admin/schema.php' );
+			$t_upgrades_reqd = sizeof( $upgrade ) - 1;
 
-		# Check for db upgrade for versions > 1.0.0 using new installer and schema
-		require_once( 'admin/schema.php' );
-		$t_upgrades_reqd = sizeof( $upgrade ) - 1;
+			if ( ( 0 < $t_db_version ) &&
+					( $t_db_version != $t_upgrades_reqd ) ) {
 
-		if ( ( 0 < $t_db_version ) &&
-				( $t_db_version != $t_upgrades_reqd ) ) {
-
-			if ( $t_db_version < $t_upgrades_reqd ) {
-				echo '<div class="warning" align="center">';
-				echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.</font></p>';
-				echo '</div>';
-			} else {
-				echo '<div class="warning" align="center">';
-				echo '<p><font color="red"><strong>WARNING:</strong> The database structure is more up-to-date than the code installed.  Please upgrade the code.</font></p>';
-				echo '</div>';
+				if ( $t_db_version < $t_upgrades_reqd ) {
+					echo '<div class="warning" align="center">';
+					echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.</font></p>';
+					echo '</div>';
+				} else {
+					echo '<div class="warning" align="center">';
+					echo '<p><font color="red"><strong>WARNING:</strong> The database structure is more up-to-date than the code installed.  Please upgrade the code.</font></p>';
+					echo '</div>';
+				}
 			}
 		}
-	}
+
+	} # if 'admin_checks'
 ?>
 
 <!-- Autofocus JS -->
