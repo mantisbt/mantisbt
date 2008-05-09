@@ -26,8 +26,6 @@
 
 	require_once( $t_core_path . 'tag_api.php' );
 
-	helper_ensure_post();
-
 	$f_tag_id = gpc_get_int( 'tag_id' );
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
