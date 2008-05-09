@@ -79,6 +79,7 @@
 		&nbsp;
 	</td>
 	<td>
+		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'update_category_button' ) ?>" />
 	</td>
 </tr>
@@ -90,6 +91,7 @@
 
 <div class="border-center">
 	<form method="post" action="manage_proj_cat_delete.php">
+		<?php helper_show_token() ?>
 		<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
 	</form>

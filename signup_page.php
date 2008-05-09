@@ -24,7 +24,8 @@
 	require_once( 'core.php' );
 
 	# Check for invalid access to signup page
-	if ( OFF == config_get( 'allow_signup' ) ) {
+	#  use global since user may not be logged in
+	if ( OFF == config_get_global( 'allow_signup' ) ) {
 		print_header_redirect( 'login_page.php' );
 	}
 
@@ -99,6 +100,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="3">
+		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'signup_button' ) ?>" />
 	</td>
 </tr>

@@ -137,7 +137,7 @@
 
 <br />
 <div align="center">
-<form name="report_bug_form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
+<form name="report_bug_form" id="report_bug_form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
 <table class="width75" cellspacing="1">
 
 
@@ -565,7 +565,8 @@
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td class="center">
-		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'submit_report_button' ) ?>" onclick="document.report_bug_form.submit();this.disabled=1;" />
+		<?php helper_show_token() ?>
+		<input <?php echo helper_get_tab_index() ?> type="submit" id="submitButton" class="button" value="<?php echo lang_get( 'submit_report_button' ) ?>" />
 	</td>
 </tr>
 

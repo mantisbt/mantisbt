@@ -292,6 +292,7 @@
 		<td colspan="5">&nbsp;</td>
 		<!-- Update Button -->
 		<td colspan="2">
+			<?php helper_show_token() ?>
 			<input type="submit" class="button" value="<?php echo lang_get( 'update_sponsorship_button' ) ?>" />
 		</td>
 	</tr>

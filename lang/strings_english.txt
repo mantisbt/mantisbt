@@ -209,6 +209,7 @@ $s_bugnote_date = 'Date of note';
 $s_bugnote_description = 'Note description';
 
 $s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+$s_error_referred = 'Please click <a href="%s">here</a> to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 # ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC] = 'An error occurred during this action.  You may wish to report this error to your local administrator.';
@@ -244,6 +245,10 @@ $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match ve
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received for %s.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received for %s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
+$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'A required session parameter (%s) was not found.';
+$MANTIS_ERROR[ERROR_SESSION_ARRAY_EXPECTED]	 = 'An array was expected but a string was found for %s.';
+$MANTIS_ERROR[ERROR_SESSION_ARRAY_UNEXPECTED] = 'A string was expected but an array was found for %s.';
+$MANTIS_ERROR[ERROR_SESSION_NOT_NUMBER] = 'A number was found for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';

@@ -278,8 +278,11 @@
 
 		PRINT '<form method="post" action="' . $_SERVER[ 'SCRIPT_NAME' ] . "\">\n";
 
+		// clean out and regenerate CSRF token
+		unset($_POST['token']);
 		print_hidden_inputs( gpc_strip_slashes( $_POST ) );
 		print_hidden_inputs( gpc_strip_slashes( $_GET ) );
+		helper_show_token();
 
 		PRINT "<input type=\"hidden\" name=\"_confirmed\" value=\"1\" />\n";
 		PRINT '<br /><br /><input type="submit" class="button" value="' . $p_button_label . '" />';
@@ -508,10 +511,41 @@
 	# check access method is POST, return if true, else call error handler
 	function helper_ensure_post()
 	{
-		if ( isset( $_SERVER['REQUEST_METHOD'] ) && ( strtoupper( $_SERVER['REQUEST_METHOD'] ) != 'POST' ) ) {
+		$t_csrf_ok = (gpc_get( 'token', '' ) == session_get( 'CSRF_token', 'missing' ) ); 
+		$t_csrf_time = ( ( time() - session_get( 'CSRF_time', 0 ) ) < 60*60 );
+		if ( ( isset( $_SERVER['REQUEST_METHOD'] ) && ( strtoupper( $_SERVER['REQUEST_METHOD'] ) != 'POST' ) ) 
+				|| !( $t_csrf_ok && $t_csrf_time ) ) {
 			trigger_error( ERROR_INVALID_REQUEST_METHOD, ERROR );
 		}
-		
+		// clear the tokens to prevent reuse
+		session_clear( 'CSRF_token' );
+		session_clear( 'CSRF_time' );
+	}
+
+	#
+	#-------------------------------------------------
+	# generate and save a token to be tested above
+	function helper_generate_token()
+	{
+		$t_val = time() . 
+			( isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'unknown' ) .
+			( auth_is_user_authenticated() ? auth_get_current_user_id() : 'unknown' );
+		$t_val = md5( $t_val );
+		session_set( 'CSRF_token', $t_val );
+		session_set( 'CSRF_time', time() );
+
+		return $t_val;
+	}
+
+	#
+	#-------------------------------------------------
+	# generate and save a token to be tested above
+	function helper_show_token()
+	{
+		if ( session_get('CSRF_token', '' ) === '' ) {
+			helper_generate_token();
+		}
+		print_hidden_input( 'token', session_get('CSRF_token') );
 	}
 
 ?>

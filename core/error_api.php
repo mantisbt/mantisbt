@@ -158,7 +158,11 @@
 
 				echo '<tr><td><p class="center">';
 				if ( null === $g_error_proceed_url ) {
-					echo lang_get( 'error_no_proceed' );
+					$t_referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+					if ( '' === $t_referrer )
+						echo lang_get( 'error_no_proceed' );
+					else
+						echo sprintf( lang_get( 'error_referred' ), $t_referrer );
 				} else {
 					echo '<a href="', $g_error_proceed_url, '">' , lang_get( 'proceed' ) , '</a>';
 				}

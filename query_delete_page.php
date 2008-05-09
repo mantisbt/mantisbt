@@ -50,10 +50,12 @@
 	<form method="post" action="<?php print $t_delete_url; ?>">
 	<br /><br />
 	<input type="hidden" name="source_query_id" value="<?php print $f_query_id; ?>"/>
+	<?php helper_show_token() ?>
 	<input type="submit" class="button" value="<?php print lang_get( 'delete_query' ); ?>"/>
 	</form>
 
 	<form method="post" action="<?php print $t_redirect_url; ?>">
+	<?php helper_show_token() ?>
 	<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
 	</form>
 

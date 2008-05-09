@@ -53,7 +53,6 @@
 	$v_description = string_textarea( $v_description );
 
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
-
 ?>
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>
@@ -116,6 +115,7 @@
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td>
+		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'file_update_button' ) ?>" />
 	</td>
 </tr>
@@ -127,6 +127,7 @@
 		<form method="post" action="proj_doc_delete.php">
 		<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
 		<input type="hidden" name="title" value="<?php echo $v_title ?>" />
+		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'file_delete_button' ) ?>" />
 		</form>
 

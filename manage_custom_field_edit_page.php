@@ -283,6 +283,7 @@
 <!-- Submit Buttom -->
 <tr>
 	<td class="center" colspan="2">
+		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'link_custom_field_to_project_button' ) ?>" />
 	</td>
 </tr>

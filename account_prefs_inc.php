@@ -50,6 +50,7 @@
 
 	    # prefix data with u_
 		$t_pref = user_pref_get( $p_user_id );
+
 ?>
 <?php # Account Preferences Form BEGIN ?>
 <br />
@@ -299,6 +300,7 @@
 </tr>
 <tr>
 	<td colspan="2" class="center">
+		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
 	</td>
 </tr>
@@ -310,6 +312,7 @@
 
 <div class="border-center">
 	<form method="post" action="account_prefs_reset.php">
+	<?php  helper_show_token() ?>
 	<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
 	<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
 	<input type="submit" class="button" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />

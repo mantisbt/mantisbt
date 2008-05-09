@@ -100,6 +100,7 @@
 
 <form method="post" action="manage_custom_field_create.php">
 		<input type="text" name="name" size="32" maxlength="64" />
+		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'add_custom_field_button' ) ?>" />
 </form>
 

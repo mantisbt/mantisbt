@@ -25,6 +25,7 @@
 	require_once( 'core.php' );
 
 	auth_logout();
+	session_clean();
 
 	print_header_redirect( config_get( 'logout_redirect_page' ), /* die */ true, /* sanitize */ false );
 ?>

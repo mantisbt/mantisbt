@@ -34,6 +34,8 @@
 	require_once( $t_core_path.'profile_api.php' );
 ?>
 <?php
+	helper_ensure_post();
+
 	auth_ensure_user_authenticated();
 
 	current_user_ensure_unprotected();
@@ -44,11 +46,21 @@
 
 	# If deleteing profile redirect to delete script
 	if ( 'delete' == $f_action) {
-		print_header_redirect( 'account_prof_delete.php?profile_id=' . $f_profile_id );
+		if ( profile_is_global( $f_profile_id ) ) {
+			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
+
+			profile_delete( ALL_USERS, $f_profile_id );
+			print_header_redirect( 'manage_prof_menu_page.php' );
+		} else {
+			profile_delete( auth_get_current_user_id(), $f_profile_id );
+			print_header_redirect( 'account_prof_menu_page.php' );
+		}
 	}
 	# If Defaulting profile redirect to make default script
 	else if ( 'default' == $f_action ) {
-		print_header_redirect( 'account_prof_make_default.php?profile_id=' . $f_profile_id );
+		current_user_set_pref( 'default_profile', $f_profile_id );
+
+		print_header_redirect( 'account_prof_menu_page.php' );
 	}
 
 	if ( profile_is_global( $f_profile_id ) ) {
@@ -123,6 +135,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
+		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'update_profile_button' ) ?>" />
 	</td>
 </tr>
