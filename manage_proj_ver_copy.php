@@ -36,6 +36,9 @@
 	$f_copy_from		= gpc_get_bool( 'copy_from' );
 	$f_copy_to			= gpc_get_bool( 'copy_to' );
 
+	project_ensure_exists( $f_project_id );
+	project_ensure_exists( $f_other_project_id );
+
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_other_project_id );
 
