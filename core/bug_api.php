@@ -195,9 +195,9 @@
 
 		if( !is_int( $p_bug_row['date_submitted'] ) )
 			$p_bug_row['date_submitted']	= db_unixtimestamp( $p_bug_row['date_submitted'] );
-		if( !is_int( $p_bug_database_result['last_updated'] ) )
+		if( !is_int( $p_bug_row['last_updated'] ) )
 			$p_bug_row['last_updated']	= db_unixtimestamp( $p_bug_row['last_updated'] );
-		if( !is_int( $p_bug_database_result['due_date'] ) ) 
+		if( !is_int( $p_bug_row['due_date'] ) ) 
 			$p_bug_row['due_date']	= db_unixtimestamp( $p_bug_row['due_date'] );
 		$g_cache_bug[ (int)$p_bug_row['id'] ] = $p_bug_row;
 
