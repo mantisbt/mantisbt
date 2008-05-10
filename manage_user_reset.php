@@ -30,6 +30,9 @@
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	$f_user_id = gpc_get_int( 'user_id' );
+	
+	user_ensure_exists( $f_user_id );
+	
 	$t_result = user_reset_password( $f_user_id );
 	$t_redirect_url = 'manage_user_page.php';
 
