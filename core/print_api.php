@@ -1562,7 +1562,7 @@
 		if ( is_array( $p_field_val ) ) {
 			foreach( $p_field_val AS $t_key=>$t_value ) {
 				if ( is_array( $t_value ) ) {
-					$t_key = string_html_specialchars( $t_key );
+					$t_key = string_html_entities( $t_key );
 					$t_field_key = $p_field_key . "[" . $t_key . "]";
 					print_hidden_input( $t_field_key, $t_value );
 				} else {
@@ -1571,8 +1571,9 @@
 				}
 			}
 		} else {
-			$t_val = string_html_specialchars( $p_field_val );
-			PRINT "<input type=\"hidden\" name=\"$p_field_key\" value=\"$t_val\" />\n";
+			$t_key = string_html_entities( $p_field_key );
+			$t_val = string_html_entities( $p_field_val );
+			PRINT "<input type=\"hidden\" name=\"$t_key\" value=\"$t_val\" />\n";
 		}
 	}
 
