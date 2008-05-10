@@ -44,11 +44,19 @@
 
 	# If deleteing profile redirect to delete script
 	if ( 'delete' == $f_action) {
-		print_header_redirect( 'account_prof_delete.php?profile_id=' . $f_profile_id );
+		if ( profile_is_global( $f_profile_id ) ) { 
+			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) ); 
+			profile_delete( ALL_USERS, $f_profile_id ); 
+			print_header_redirect( 'manage_prof_menu_page.php', true ); 
+		} else { 
+			profile_delete( auth_get_current_user_id(), $f_profile_id ); 
+			print_header_redirect( 'account_prof_menu_page.php', true ); 
+		} 
 	}
 	# If Defaulting profile redirect to make default script
 	else if ( 'default' == $f_action ) {
-		print_header_redirect( 'account_prof_make_default.php?profile_id=' . $f_profile_id );
+		current_user_set_pref( 'default_profile', $f_profile_id );
+		print_header_redirect( 'account_prof_menu_page.php', true );
 	}
 
 	if ( profile_is_global( $f_profile_id ) ) {
