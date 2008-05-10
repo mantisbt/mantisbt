@@ -53,7 +53,6 @@
 	<div align="center">
 	<form method="post" action="bug_actiongroup_ext.php">
 		<input type="hidden" name="action" value="<?php echo string_attribute( $t_external_action ) ?>" />
-		<input type="hidden" name="action" value="<?php echo string_attribute( $t_external_action ) ?>" />
 <table class="width75" cellspacing="1">
 	<?php
 		bug_group_action_print_title( $t_external_action );
