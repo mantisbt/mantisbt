@@ -36,6 +36,8 @@
 	$f_user_id					= gpc_get_int( 'user_id' );
 	$f_redirect_url				= gpc_get_string( 'redirect_url' );
 
+	user_ensure_exists( $f_user_id );
+
 	# If the user is trying to modify an account other than their own
 	#  they must have high enough permissions to do so
 	# @@@ should we really be sharing this file between the manage section
