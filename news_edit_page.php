@@ -33,6 +33,8 @@
 	$f_news_id = gpc_get_int( 'news_id' );
 	$f_action = gpc_get_string( 'action', '' );
 
+	 helper_ensure_post();
+
 	# If deleting item redirect to delete script
 	if ( 'delete' == $f_action ) {
 		print_header_redirect( 'news_delete.php?news_id='.$f_news_id );
