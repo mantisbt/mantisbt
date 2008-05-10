@@ -261,7 +261,7 @@
 				$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
 			} else {
 				# or from a script directly?
-				$t_caller .= ' ' . $_SERVER['PHP_SELF'];
+				$t_caller .= ' - ';
 			}
 		}
 		
