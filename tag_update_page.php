@@ -104,7 +104,6 @@
 <!-- Submit Button -->
 <tr>
 	<td class="center" colspan="6">
-		<?php helper_show_token() ?>
 		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'tag_update_button' ) ?>" />
 	</td>
 </tr>

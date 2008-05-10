@@ -302,7 +302,6 @@ if ( !$t_finished ) {
 
 <tr>
 	<td class="center" colspan="2">
-		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo $t_button_title ?>" />
 	</td>
 </tr>

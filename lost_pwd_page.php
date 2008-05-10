@@ -76,7 +76,6 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" />
 	</td>
 </tr>

@@ -118,7 +118,6 @@
 	require_once( $t_core_path.'lang_api.php' );
 
 	# error functions should be loaded to allow database to print errors
-	require_once( $t_core_path.'session_api.php' );
 	require_once( $t_core_path.'error_api.php' );
 	require_once( $t_core_path.'helper_api.php' );
 

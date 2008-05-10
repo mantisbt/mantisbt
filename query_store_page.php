@@ -68,11 +68,9 @@
 	?>
 	<input type="checkbox" name="all_projects" value="on" <?php check_checked( ALL_PROJECTS == helper_get_current_project() ) ?> >
 	<?php print lang_get( 'all_projects' ); ?><br /><br />
-	<?php helper_show_token() ?>
 	<input type="submit" class="button" value="<?php print lang_get( 'save_query' ); ?>" />
 	</form>
 	<form action="view_all_bug_page.php">
-	<?php helper_show_token() ?>
 	<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>" />
 	</form>
 <?php

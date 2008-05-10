@@ -137,7 +137,6 @@
 	</td>
 	<td class="center">
 		<?php
-			helper_show_token();
 			if ( $t_account_page ) {
 				if ( $t_project_id == ALL_PROJECTS ) { ?>
 		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_my_default" value="<?php echo lang_get( 'update_columns_as_my_default' ) ?>" />
@@ -167,7 +166,6 @@
 			<select name="other_project_id">
 				<?php print_project_option_list( /* project_id */ null, /* include_all_projects */ true, /* filter_project_id */ $t_project_id ); ?>
 			</select>
-		<?php helper_show_token() ?>
 <?php
 		# Skip "Copy From" if the current project is ALL PROJECTS, the current page is management page, and the user is not administrator
 		if ( !$t_manage_page || ( $t_project_id != ALL_PROJECTS ) || current_user_is_administrator() ) {
@@ -192,7 +190,6 @@
 <div class="border-center">
 <!-- Reset Button -->
 	<form method="post" action="manage_config_columns_reset.php">
-		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'reset_columns_configuration' ) ?>" />
 	</form>
 </div>

@@ -581,11 +581,8 @@
 <form method="post" action="<?php echo string_sanitize_url( $_SERVER['PHP_SELF'] ); ?>">
 
 <?php
-		// clean up and regenerate CSRF token
-		unset($_POST['token']);
 		print_hidden_inputs( gpc_strip_slashes( $_POST ) );
 		print_hidden_inputs( gpc_strip_slashes( $_GET ) );
-		helper_show_token();
 ?>
 
 <input type="hidden" name="_authenticate" value="1" />

@@ -78,7 +78,6 @@
 		<span class="required">* <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td class="center">
-		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'post_news_button' ) ?>" />
 	</td>
 </tr>
@@ -115,7 +114,6 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" />
 	</td>
 </tr>

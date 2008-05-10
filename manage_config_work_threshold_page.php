@@ -325,7 +325,6 @@
         echo "<input name=\"revert\" type=\"hidden\" value=\"" . implode( ',', $t_overrides ) . "\"></input>";
         echo "<input name=\"project\" type=\"hidden\" value=\"$t_project_id\"></input>";
         echo "<input name=\"return\" type=\"hidden\" value=\"" . string_sanitize_url( $_SERVER['PHP_SELF'] ) ."\"></input>";
-		helper_show_token();
         echo "<input type=\"submit\" class=\"button\" value=\"";
         if ( ALL_PROJECTS == $t_project_id ) {
             echo lang_get( 'revert_to_system' );

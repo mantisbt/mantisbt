@@ -84,7 +84,6 @@
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td class="center">
-		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'upload_file_button' ) ?>" />
 	</td>
 </tr>

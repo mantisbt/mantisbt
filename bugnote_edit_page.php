@@ -113,7 +113,6 @@
 <?php } ?>
 <tr>
 	<td class="center" colspan="2">
-		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'update_information_button' ) ?>" />
 	</td>
 </tr>

@@ -73,7 +73,7 @@
 	# note if we are being included by a script of a different name, if so,
 	#  this is a mandatory password change request
 	$t_force_pw_reset = is_page_name( 'verify.php' );
-	
+
 	html_page_top1( lang_get( 'account_link' ) );
 	html_page_top2();
 ?>
@@ -242,7 +242,6 @@
 		</td>
 		<!-- Update Button -->
 		<td>
-			<?php helper_show_token() ?>
 			<input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" />
 		</td>
 	</tr>
@@ -260,7 +259,6 @@
 <!-- Delete Button -->
 <div class="border-center">
 	<form method="post" action="account_delete.php">
-	<?php helper_show_token() ?>
 	<input type="submit" class="button" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
 	</form>
 </div>

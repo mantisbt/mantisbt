@@ -143,7 +143,6 @@
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'update_project_button' ) ?>" />
 	</td>
 </tr>
@@ -160,7 +159,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <div class="border-center">
 	<form method="post" action="manage_proj_delete.php">
 		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-		<?php helper_show_token() ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'delete_project_button' ) ?>" />
 	</form>
 </div>
@@ -261,8 +259,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 
 <tr>
 	<td colspan="6">
-		<?php helper_show_token() ?>
-		<input type="submit" value="<?php echo lang_get( 'update_subproject_inheritance' ) ?>" />
+	<input type="submit" value="<?php echo lang_get( 'update_subproject_inheritance' ) ?>" />
 		</form>
 	</td>
 </tr>
@@ -294,7 +291,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	} # End looping over projects
 ?>
 			</select>
-			<?php helper_show_token() ?>
 			<input type="submit" value="<?php echo lang_get('add_subproject'); ?>">
 		</form>
 	</td>
@@ -378,7 +374,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <tr>
 	<td class="left" colspan="3">
 		<form method="post" action="manage_proj_cat_add.php">
- 			<?php helper_show_token() ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<input type="text" name="name" size="32" maxlength="128" />
 			<input type="submit" class="button" value="<?php echo lang_get( 'add_category_button' ) ?>" />
@@ -394,7 +389,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			<select name="other_project_id">
 				<?php print_project_option_list( null, false, $f_project_id ); ?>
 			</select>
-			<?php helper_show_token() ?>
 			<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_categories_from' ) ?>" />
 			<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_categories_to' ) ?>" />
 		</form>
@@ -485,7 +479,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		<form method="post" action="manage_proj_ver_add.php">
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<input type="text" name="version" size="32" maxlength="64" />
- 			<?php helper_show_token() ?>
 			<input type="submit" name="add_version" class="button" value="<?php echo lang_get( 'add_version_button' ) ?>" />
 			<input type="submit" name="add_and_edit_version" class="button" value="<?php echo lang_get( 'add_and_edit_version_button' ) ?>" />
 		</form>
@@ -498,7 +491,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			<select name="other_project_id">
 				<?php print_project_option_list( null, false, $f_project_id ); ?>
 			</select>
-			<?php helper_show_token() ?>
 			<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_versions_from' ) ?>" />
 			<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_versions_to' ) ?>" />
 		</form>
@@ -561,7 +553,6 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 	<input type="hidden" name="field_id" value="<?php echo $t_field_id ?>" />
 	<input type="text" name="sequence" value="<?php echo custom_field_get_sequence( $t_field_id, $f_project_id ) ?>" size="2" />
-	<?php helper_show_token() ?>
 	<input type="submit" class="button-small" value="<?php echo lang_get( 'update' ) ?>" />
 </form>
 	<?php 
@@ -596,7 +587,6 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 					}
 				?>
 			</select>
-			<?php helper_show_token() ?>
 			<input type="submit" class="button" value="<?php echo lang_get( 'add_existing_custom_field' ) ?>" />
 			</form>
 		</td>
@@ -608,7 +598,6 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 				<select name="other_project_id">
 					<?php print_project_option_list( null, false, $f_project_id ); ?>
 				</select>
-				<?php helper_show_token() ?>
 				<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_from' ) ?>" />
 				<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_to' ) ?>" />
 			</form>
@@ -679,7 +668,6 @@ if ( $t_can_manage_users ) {
 					</select>
 				</td>
 				<td>
-					<?php helper_show_token() ?>
 					<input type="submit" class="button" value="<?php echo lang_get( 'add_user_button' ) ?>" />
 				</td>
 			</tr>
@@ -692,7 +680,6 @@ if ( $t_can_manage_users ) {
 						<select name="other_project_id">
 							<?php print_project_option_list( null, false, $f_project_id ); ?>
 						</select>
-						<?php helper_show_token() ?>
 						<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_users_from' ) ?>" />
 						<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_users_to' ) ?>" />
 				</td>

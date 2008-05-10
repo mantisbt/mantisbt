@@ -234,7 +234,6 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 	$t_install = '';
 	if ( $t_ready ) {
 		$t_install = '<form action="manage_plugin_install.php?name='.$t_basename.'" method="post">'.
-			'<input type="hidden" name="token" value="' . helper_generate_token() . '" />'
 			'<input type="submit" value="'.lang_get( 'plugin_install' ).'"></form>';
 	}
 

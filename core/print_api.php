@@ -1391,7 +1391,6 @@
 	# $p_args_to_post - An associative array with key => value to be posted, can be null.
 	function print_button( $p_action_page, $p_label, $p_args_to_post = null ) {
 		echo '<form method="post" action="', $p_action_page, '">';
-		helper_show_token();
 		echo '<input type="submit" class="button-small" value="', $p_label, '" />';
 		
 		if ( $p_args_to_post !== null ) {
