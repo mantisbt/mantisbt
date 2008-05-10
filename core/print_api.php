@@ -1602,7 +1602,7 @@
 	# --------------------
 	# prints the signup link
 	function print_signup_link() {
-		if( ( ON == config_get( 'allow_signup' ) ) &&
+		if( ( ON == config_get_global( 'allow_signup' ) ) &&
 		    ( ON == config_get( 'enable_email_notification' ) ) ) {
 			print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
 		}

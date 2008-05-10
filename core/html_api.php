@@ -376,7 +376,7 @@
 
 					$t_return_page = string_url(  $t_return_page );
 					PRINT lang_get( 'anonymous' ) . ' | <a href="' . helper_mantis_url( 'login_page.php?return=' . $t_return_page ) . '">' . lang_get( 'login_link' ) . '</a>';
-					if ( config_get( 'allow_signup' ) == ON ) {
+					if ( config_get_global( 'allow_signup' ) == ON ) {
 						PRINT ' | <a href="' . helper_mantis_url( 'signup_page.php' ) . '">' . lang_get( 'signup_link' ) . '</a>';
 					}
 				} else {

@@ -45,7 +45,7 @@
 	}
 
 	# Check to see if signup is allowed
-	if ( OFF == config_get( 'allow_signup' ) ) {
+	if ( OFF == config_get_global( 'allow_signup' ) ) {
 		print_header_redirect( 'login_page.php' );
 		exit;
 	}

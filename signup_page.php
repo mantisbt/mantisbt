@@ -24,7 +24,7 @@
 	require_once( 'core.php' );
 
 	# Check for invalid access to signup page
-	if ( OFF == config_get( 'allow_signup' ) ) {
+	if ( OFF == config_get_global( 'allow_signup' ) ) {
 		print_header_redirect( 'login_page.php' );
 	}
 
