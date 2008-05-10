@@ -41,6 +41,8 @@
 	$f_access_level	= gpc_get_int( 'access_level' );
 	$f_user_id		= gpc_get_int( 'user_id' );
 
+	user_ensure_exists( $f_user_id );
+
 	$f_email	= trim( $f_email );
 	$f_username	= trim( $f_username );
 
