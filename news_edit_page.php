@@ -31,12 +31,12 @@
 ?>
 <?php
 	$f_news_id = gpc_get_int( 'news_id' );
-	$f_action = gpc_get_string( 'action', '' );
-
-	helper_ensure_post();
+	$f_action = gpc_get_string( 'action', '' );	
 
 	# If deleting item redirect to delete script
 	if ( 'delete' == $f_action ) {
+		helper_ensure_post();
+		
 		$row = news_get_row( $f_news_id );   
 		     
 		# This check is to allow deleting of news items that were left orphan due to bug #3723   
