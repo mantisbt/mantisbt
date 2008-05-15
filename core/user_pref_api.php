@@ -405,7 +405,13 @@
 	# returns user language
 	function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		$t_prefs = user_pref_get( $p_user_id, $p_project_id );
-		return $t_prefs->language;
+		
+		// ensure the language is a valid one
+		$t_lang = $t_prefs->language;
+		if ( ! lang_language_exists( $t_lang ) ) {
+			$t_lang = false;
+		}
+		return $t_lang;
 	}
 
 	#===================================

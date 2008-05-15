@@ -53,7 +53,10 @@
 	$t_prefs->refresh_delay		= gpc_get_int( 'refresh_delay' );
 	$t_prefs->default_project	= gpc_get_int( 'default_project' );
 
-	$t_prefs->language			= gpc_get_string( 'language' );
+	$t_lang = gpc_get_string( 'language' );
+	if ( lang_language_exists( $t_lang ) ) {
+		$t_prefs->language = $t_lang;
+	}
 
 	$t_prefs->advanced_report	= gpc_get_bool( 'advanced_report' );
 	$t_prefs->advanced_view		= gpc_get_bool( 'advanced_view' );

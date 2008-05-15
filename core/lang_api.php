@@ -44,6 +44,10 @@
 			return;
 		}
 
+		if ( ! lang_language_exists( $p_lang ) ) {
+			return;
+		}
+
 		$t_lang_dir = dirname ( dirname ( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
 
 		require_once( $t_lang_dir . 'strings_' . $p_lang . '.txt' );
@@ -139,6 +143,18 @@
 		}
 	}
 
+
+	/**
+	* Check if the given language exists
+	* 
+	* @param $p_lang string the language name
+	* @return boolean 
+	*/
+	function lang_language_exists( $p_lang ) {
+		$t_valid_langs = config_get( 'language_choices_arr' );
+		$t_valid = in_array( $p_lang, $t_valid_langs, true );
+		return $t_valid;
+	}
 
 
 	# ------------------
