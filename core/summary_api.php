@@ -571,7 +571,7 @@
 		$t_user_id = auth_get_current_user_id();
 
 		$specific_where = trim( helper_project_specific_where( $t_project_id ) );
-		if ( ' 1<>1' == $specific_where ) {
+		if ( '1<>1' == $specific_where ) {
 			return;
 		}
 		$t_project_query = ( ON == $t_summary_category_include_project ) ? 'b.project_id, ' : '';
