@@ -148,6 +148,7 @@
 	# Display API's
 	require_once( $t_core_path.'html_api.php' );
 	require_once( $t_core_path.'gpc_api.php' );
+	require_once( $t_core_path.'session_api.php' );
 	require_once( $t_core_path.'print_api.php' );
 	require_once( $t_core_path.'collapse_api.php' );
 	if ( !defined( 'MANTIS_INSTALLER' ) ) {

@@ -313,6 +313,8 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin is already installed.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Plugin page not found.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Field \'%s\' contains duplcate column \'%s\'.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Field \'%s\' contains invalid field \'%s\'';
+$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Invalid session handler.';
+$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session variable \'%s\' not found.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'This page cannot be accessed using this method.';
 
 $s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
