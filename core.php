@@ -122,6 +122,7 @@
 	require_once( $t_core_path.'html_api.php' );
 	require_once( $t_core_path.'error_api.php' );
 	require_once( $t_core_path.'gpc_api.php' );
+	require_once( $t_core_path.'session_api.php' );
 
 	# custom functions (in main directory)
 	# @@@ Move all such files to core/
