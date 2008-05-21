@@ -27,13 +27,6 @@
 
 	require_once( 'core.php' );
 
-	# lost password feature disabled or reset password via email disabled -> stop here!
-	if( OFF == config_get( 'lost_password_feature' ) ||
-		OFF == config_get( 'send_reset_password' ) ||
-		OFF == config_get( 'enable_email_notification' ) ) {
-		trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
-	}
-
 	$f_user_id = gpc_get_string('id');
 	$f_confirm_hash = gpc_get_string('confirm_hash');
 
