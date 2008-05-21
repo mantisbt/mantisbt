@@ -27,6 +27,13 @@
 
 	require_once( 'core.php' );
 
+	# check if at least one way to get here is enabled
+	if ( OFF == config_get( 'allow_signup' ) &&
+		OFF == config_get( 'lost_password_feature' ) &&
+		OFF == config_get( 'send_reset_password' ) ) {
+		trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
+	}
+
 	$f_user_id = gpc_get_string('id');
 	$f_confirm_hash = gpc_get_string('confirm_hash');
 
