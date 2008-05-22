@@ -39,20 +39,7 @@
 
 <?php 
 	collapse_open( 'bugnotestats' );
-?>
-<table class="width100" cellspacing="0">
-<tr>
-	<td class="form-title" colspan="4">
-		<?php
-			collapse_icon( 'bugnotestats' );
-			echo lang_get( 'time_tracking' ) ?>
-	</td>
-</tr>
-</table>
-<?php
-	collapse_closed( 'bugnotestats' );
-?>
-<?php
+
 	$t_bugnote_stats_from_def = date( "d:m:Y", $t_bug->date_submitted );
 	$t_bugnote_stats_from_def_ar = explode ( ":", $t_bugnote_stats_from_def );
 	$t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
@@ -86,7 +73,7 @@
 	</td>
 </tr>
 <tr class="row-2">
-        <td class="category" width="25%">
+        <td class="category" colspan="2">
                 <?php
 		$t_filter = array();
 		$t_filter['do_filter_by_date'] = 'on';
@@ -106,8 +93,6 @@
         </td>
 </tr>
 
-</table>
-</form>
 <?php
 if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	$t_from = "$t_bugnote_stats_from_y-$t_bugnote_stats_from_m-$t_bugnote_stats_from_d";
@@ -115,7 +100,6 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	$t_bugnote_stats = bugnote_stats_get_events_array( $f_bug_id, $t_from, $t_to );
 ?>
 <br />
-<table border=0 class="width100" cellspacing="0">
 <tr class="row-category-history">
 	<td class="small-caption">
 		<?php echo lang_get( 'username' ) ?>
@@ -148,8 +132,21 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 		<?php echo db_minutes_to_hhmm ( $t_sum_in_minutes ) ?>
 	</td>
 </tr>
-</table>
 <?php } # end if ?>
+</table>
+</form>
+<?php
+	collapse_closed( 'bugnotestats' );
+?>
+<table class="width100" cellspacing="0">
+<tr>
+	<td class="form-title" colspan="4">
+		<?php
+			collapse_icon( 'bugnotestats' );
+			echo lang_get( 'time_tracking' ) ?>
+	</td>
+</tr>
+</table>
 <?php
 	collapse_end( 'bugnotestats' );
 ?>

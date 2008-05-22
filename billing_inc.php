@@ -40,18 +40,6 @@
 
 <?php 
 	collapse_open( 'bugnotestats' );
-?>
-
-<table class="width100" cellspacing="0">
-<tr>
-	<td class="form-title" colspan="4">
-		<?php collapse_icon( 'bugnotestats' );
-		echo lang_get( 'time_tracking' ) ?>
-	</td>
-</tr>
-</table>
-<?php
-	collapse_closed( 'bugnotestats' );
 
 	$t_today = date( "d:m:Y" );
 	$t_date_submitted = isset( $t_bug ) ? date( "d:m:Y", $t_bug->date_submitted ) : $t_today;
@@ -89,7 +77,7 @@
 ?>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 <input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
-<table border=0 class="width100" cellspacing="0">
+<table border="0" class="width100" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
 <?php
@@ -192,9 +180,24 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	<td class="small-caption">
 		<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
 	</td>
+<?php if ($t_cost_col) { ?>
+	<td>
+		<?php echo string_attribute( number_format( $t_sum_in_minutes * $f_bugnote_cost / 60, 2 ) ); ?>
+	</td>
+<?php } ?>
 </tr>
 </table>
-<?php } # end if ?>
+<?php } # end if
+	collapse_closed( 'bugnotestats' );
+?>
+<table class="width100" cellspacing="0">
+<tr>
+	<td class="form-title" colspan="4">
+		<?php collapse_icon( 'bugnotestats' );
+		echo lang_get( 'time_tracking' ) ?>
+	</td>
+</tr>
+</table>
 <?php
 	collapse_end( 'bugnotestats' );
 ?>
