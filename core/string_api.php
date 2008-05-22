@@ -292,33 +292,39 @@
 	#  preceeded by a character that is not a letter, a number or an underscore
 	#
 	# if $p_include_anchor = false, $p_fqdn is ignored and assumed to true.
+	$string_process_bug_link_callback = array();
+
 	function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
+		global $string_process_bug_link_callback;
+
 		$t_tag = config_get( 'bug_link_tag' );
 		# bail if the link tag is blank
 		if ( '' == $t_tag || $p_string == '' ) {
 			return $p_string;
 		}
 
-		if ($p_include_anchor) {
-			$callback = create_function('$p_array','	
+		if ( !isset( $string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
+			if ($p_include_anchor) {
+				$string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function('$p_array','
 										if (bug_exists( (int)$p_array[2] ) ) { 
-											return $p_array[1] . string_get_bug_view_link( $p_array[2], null, ' . ($p_detail_info ? 'true' : 'false') . ', ' . ($p_fqdn ? 'true' : 'false') . '); 
+											return $p_array[1] . string_get_bug_view_link( (int)$p_array[2], null, ' . ($p_detail_info ? 'true' : 'false') . ', ' . ($p_fqdn ? 'true' : 'false') . ');
 										} else {    	
 											return $p_array[0];
 										}
 										');
-		} else {
-			$callback = create_function('$p_array','
+			} else {
+				$string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function('$p_array','
 										# We might as well create the link here even if the bug
 										#  doesnt exist.  In the case above we dont want to do
 										#  the summary lookup on a non-existant bug.  But here, we
 										#  can create the link and by the time it is clicked on, the
 										#  bug may exist.			
-										return $p_array[1] . string_get_bug_view_url_with_fqdn( $p_array[2], null );
+										return $p_array[1] . string_get_bug_view_url_with_fqdn( (int)$p_array[2], null );
 										');
+			}
 		}
 
-		$p_string = preg_replace_callback( '/(^|[^\w&])' . preg_quote($t_tag, '/') . '(\d+)\b/', $callback, $p_string);
+		$p_string = preg_replace_callback( '/(^|[^\w&])' . preg_quote($t_tag, '/') . '(\d+)\b/', $string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string);
 		return $p_string;
 	}
 
@@ -335,15 +341,20 @@
 	#  preceeded by a character that is not a letter, a number or an underscore
 	#
 	# if $p_include_anchor = false, $p_fqdn is ignored and assumed to true.
+	$string_process_bugnote_link_callback = array();
+
 	function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
+		global $string_process_bugnote_link_callback;
 		$t_tag = config_get( 'bugnote_link_tag' );
 
 		# bail if the link tag is blank
 		if ( '' == $t_tag || $p_string == '' ) {
 			return $p_string;
 		}
-		if ($p_include_anchor) {
-			$callback = create_function('$p_array','
+
+		if ( !isset ( $string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
+			if ($p_include_anchor) {
+				$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function('$p_array','
 										if ( bugnote_exists( (int)$p_array[2] ) ) {
 											$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
 											if ( bug_exists( $t_bug_id ) ) {
@@ -355,8 +366,8 @@
 											return $p_array[0];
 										}
 										');
-		} else {
-			$callback = create_function('$p_array','
+			} else {
+				$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function('$p_array','
 										# We might as well create the link here even if the bug
 										#  doesnt exist.  In the case above we dont want to do
 										#  the summary lookup on a non-existant bug.  But here, we
@@ -369,8 +380,9 @@
 											return $p_array[0];
 										}
 										');
+			}
 		}
-		$p_string = preg_replace_callback( '/(^|[^\w])' . preg_quote($t_tag, '/') .'(\d+)\b/', $callback, $p_string);
+		$p_string = preg_replace_callback( '/(^|[^\w])' . preg_quote($t_tag, '/') .'(\d+)\b/', $string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string);
 		return $p_string;
 	}
 
