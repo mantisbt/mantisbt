@@ -31,7 +31,7 @@
 	require_once( $t_core_path.'bugnote_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 
-	helper_ensure_post();
+	form_security_validate( 'bug_update' );
 
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$f_update_mode = gpc_get_bool( 'update_mode', FALSE ); # set if called from generic update page
