@@ -35,6 +35,7 @@
 <br />
 <div align="center">
 <form method="post" action="manage_user_create.php">
+<?php echo form_security_token( 'manage_user_create' ) ?>
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
