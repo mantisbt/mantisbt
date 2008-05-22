@@ -327,6 +327,9 @@
 	define ( 'ERROR_SESSION_HANDLER_INVALID', 2700);
 	define ( 'ERROR_SESSION_VAR_NOT_FOUND',   2701);
 
+	# ERROR_FORM_*
+	define ( 'ERROR_FORM_TOKEN_INVALID',	2800 );
+
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);
 	define( 'STATUS_LEGEND_POSITION_BOTTOM',	2);

@@ -299,6 +299,7 @@ $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'That tag already attached to that b
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Token could not be found.';
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Invalid session handler.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session variable \'%s\' not found.';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Invalid form security token.  Did you submit the form twice by accident?';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'This page cannot be accessed using this method.';
 
 $s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
