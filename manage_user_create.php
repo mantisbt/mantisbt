@@ -27,10 +27,7 @@
 
 	require_once( $t_core_path.'email_api.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
-
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	$f_username			= gpc_get_string( 'username' );
@@ -75,6 +72,8 @@
 					 lang_get( 'empty_password_button' ) );
 		}
 	}
+
+	form_security_validate( 'manage_user_create' );
 
 	$t_cookie = user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled, $f_realname );
 
