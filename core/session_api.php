@@ -1,7 +1,7 @@
 <?php
 # Mantis - a php based bugtracking system
 
-# Copyright (C) 2008 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2008 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,6 +15,15 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Session API for handling user/browser sessions in an extendable manner.
+ * New session handlers can be added and configured without affecting how
+ * the API is used.  Calls to session_*() are appropriately directed at the
+ * session handler class as chosen in config_inc.php.
+ *
+ * @package SessionAPI
+ */
 
 $g_session = null;
 
