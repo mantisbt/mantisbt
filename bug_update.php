@@ -195,6 +195,12 @@
 		}
 	}
 
+	# Plugin support
+	$t_new_bug_data = event_signal( 'EVENT_UPDATE_BUG', $t_bug_data, $f_bug_id );
+	if ( !is_null( $t_new_bug_data ) ) {
+		$t_bug_data = $t_new_bug_data;
+	}
+
 	# Add a bugnote if there is one
 	if ( false == $t_bug_note_set ) {
 		bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private, 0, '', NULL, FALSE );
