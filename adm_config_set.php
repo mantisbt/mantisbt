@@ -76,10 +76,47 @@
 	} else if ( $t_type === 'integer' ) {
 		$t_value = (integer)$f_value;
 	} else {
-		eval( '$t_value = ' . $f_value . ';' );
+		# We support these kind of variables here:
+		# 1. constant values (like the ON/OFF switches): they are defined as constants mapping to numeric values
+		# 2. simple arrays with the form: array( a, b, c, d )
+		# 3. associative arrays with the form: array( a=>1, b=>2, c=>3, d=>4 )
+		$t_full_string = trim( $f_value );
+		if ( preg_match('/array\((.*)\)/', $t_full_string, $t_match ) === 1 ) {
+			// we have an array here
+			$t_values = split( ',', trim( $t_match[1] ) );
+			foreach ( $t_values as $key => $value ) {
+				$t_split = split( '=>',  $value, 2 );
+				if ( count( $t_split ) == 2 ) {
+					// associative array
+					$t_new_key = constant_replace( trim( $t_split[0] ) );
+					$t_new_value = constant_replace( trim( $t_split[1] ) );
+					$t_value[ $t_new_key ] = $t_new_value;
+				}
+				else {
+					// regular array
+					$t_value[ $key ] = constant_replace( trim( $value ) );
+				}
+			}
+		}
+		else {
+			// scalar value
+			$t_value = constant_replace( trim( $t_full_string ) );
+		}
 	}
 
 	config_set( $f_config_option, $t_value, $f_user_id, $f_project_id );
 
 	print_successful_redirect( 'adm_config_report.php' );
-?>
+
+
+	/** 
+	 * Check if the passed string is a constant and return its value
+	 */
+	function constant_replace( $p_name ) {
+		$t_result = $p_name;
+		if ( is_string( $p_name ) && defined( $p_name ) ) {
+			// we have a constant
+			$t_result = constant( $p_name );
+		}
+		return $t_result;
+	}
