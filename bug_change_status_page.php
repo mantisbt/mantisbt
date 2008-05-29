@@ -91,6 +91,7 @@
 <br />
 <div align="center">
 <form method="post" action="bug_update.php">
+<?php echo form_security_token( 'bug_update' ) ?>
 <table class="width75" cellspacing="1">
 
 
