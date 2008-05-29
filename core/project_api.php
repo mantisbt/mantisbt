@@ -474,9 +474,8 @@
 		$t_on = ON;
 		$t_users = array();
 
+		$t_global_access_level = $p_access_level;
 		if ( $c_project_id != ALL_PROJECTS && $p_include_global_users ) {
-			$t_global_access_level = $p_access_level;
-
 			# looking for specific project
 			if ( VS_PRIVATE == project_get_field( $p_project_id, 'view_state' ) ) {
 				# @@@ (thraxisp) this is probably more complex than it needs to be
@@ -513,26 +512,25 @@
 					}
 				}
 			}
+		}
 
-			$t_project_clause = ( $c_project_id != ALL_PROJECTS ) ? ' AND p.id = ' . $c_project_id : '';
-			if ( is_array( $t_global_access_level ) ) {
-				if ( 0 == count( $t_global_access_level ) ) {
-					$t_global_access_clause = ">= " . NOBODY . " ";
-				} else if ( 1 == count( $t_global_access_level ) ) {
-					$t_global_access_clause = "= " . array_shift( $t_global_access_level ) . " ";
-				} else {
-					$t_global_access_clause = "IN (" . implode( ',', $t_global_access_level ) . ")";
-				}
+		if ( is_array( $t_global_access_level ) ) {
+			if ( 0 == count( $t_global_access_level ) ) {
+				$t_global_access_clause = ">= " . NOBODY . " ";
+			} else if ( 1 == count( $t_global_access_level ) ) {
+				$t_global_access_clause = "= " . array_shift( $t_global_access_level ) . " ";
 			} else {
-				$t_global_access_clause = ">= $t_global_access_level ";
-			}			
+				$t_global_access_clause = "IN (" . implode( ',', $t_global_access_level ) . ")";
+			}
+		} else {
+			$t_global_access_clause = ">= $t_global_access_level ";
+		}
 
-			$t_adm = ADMINISTRATOR;
-
+		if ( $p_include_global_users ) {
 			$query = "SELECT id, username, realname, access_level
-					FROM $t_user_table
-					WHERE enabled = " . db_param(0) . "
-						AND access_level $t_global_access_clause";
+				FROM $t_user_table
+				WHERE enabled = " . db_param(0) . "
+					AND access_level $t_global_access_clause";
 
 			$result = db_query_bound( $query, Array( $t_on ) );
 			$t_row_count = db_num_rows( $result );
@@ -540,7 +538,7 @@
 				$row = db_fetch_array( $result );
 				$t_users[$row['id']] = $row;
 			}
-		}				
+		}
 
 		if( $c_project_id != ALL_PROJECTS ) {
 			# Get the project overrides
