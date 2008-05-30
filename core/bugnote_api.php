@@ -369,7 +369,7 @@
 				$t_bugnote->last_modified = db_unixtimestamp( $row['last_modified'] );
 				$t_bugnote->note_type     = $row['note_type'];
 				$t_bugnote->note_attr     = $row['note_attr'];
-				$t_bugnote->time_tracking = db_minutes_to_hhmm( $row['time_tracking'] );
+				$t_bugnote->time_tracking = $row['time_tracking'];
 
 				$t_bugnotes[] = $t_bugnote;
 			}

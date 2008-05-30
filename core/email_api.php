@@ -1057,7 +1057,10 @@
 			$t_bugnote_link = string_process_bugnote_link ( config_get( 'bugnote_link_tag' ) . $t_bugnote->id, false, false, true );
 
 			$t_time_tracking = '';
-			if ( access_has_bug_level( config_get( 'time_tracking_view_threshold' ) ) ) {
+
+			# the bugnote objects array is retrieved from bugnote_get_all_visible_bugnotes which already checks for
+			# time_tracking_view_threshold.  If user does not have view permission the value is set to 0.
+			if ( $t_bugnote->time_tracking > 0 ) {
 				$t_time_tracking_minutes = bugnote_get_field ( $t_bugnote->id, 'time_tracking' );
 				if ( $t_time_tracking_minutes > 0 ) {
 					$t_time_tracking = ' ' . lang_get( 'time_tracking' ) . ' ' . db_minutes_to_hhmm( $t_time_tracking_minutes ) . "\n";
