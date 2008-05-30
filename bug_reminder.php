@@ -75,7 +75,7 @@
 			$f_to = $t_to;
 		}
 		$t_attr = '|' . implode( '|', $f_to ) . '|';
-		bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr );
+		bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, NULL, FALSE );
 	}
 
 	html_page_top1();

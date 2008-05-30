@@ -1908,6 +1908,9 @@
 	# access level required to run reports
 	$g_time_tracking_reporting_threshold = MANAGER;
 
+	#allow time tracking to be recorded without a bugnote
+	$g_time_tracking_without_note = ON;
+
 	#############################
 	# Profile Related Settings
 	#############################

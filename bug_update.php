@@ -189,8 +189,8 @@
 	}
 
 	# Add a bugnote if there is one
-	if ( ( !is_blank( $f_bugnote_text ) ) && ( false == $t_bug_note_set ) ) {
-		bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private );
+	if ( !$t_bug_note_set ) {
+		bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private, 0, '', NULL, FALSE );
 	}
 
 	# Update the bug entry, notify if we haven't done so already

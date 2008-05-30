@@ -110,6 +110,18 @@
 		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 		$t_bugnote_table     	= config_get( 'mantis_bugnote_table' );
 
+		$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
+		$t_time_tracking_without_note  = config_get( 'time_tracking_without_note' );
+		if ( ON == $t_time_tracking_enabled && $c_time_tracking > 0 ) {
+			if ( is_blank( $p_bugnote_text ) && OFF == $t_time_tracking_without_note ) {
+				error_parameters( lang_get( 'bugnote' ) );
+				trigger_error( ERROR_EMPTY_FIELD, ERROR );
+			}
+			$c_type = TIME_TRACKING;
+		} else if ( is_blank( $p_bugnote_text ) ) {
+			return false;
+		}
+
 		# insert bugnote text
 		$query = "INSERT INTO $t_bugnote_text_table
 		          		( note )
@@ -151,6 +163,10 @@
 		# log new bug
 		history_log_event_special( $p_bug_id, BUGNOTE_ADDED, bugnote_format_id( $t_bugnote_id ) );
 
+		# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
+		if ( $p_send_email && !is_blank( $p_bugnote_text ) ) {
+			email_bugnote_add( $p_bug_id );
+		}
 		return $t_bugnote_id;
 	}
 

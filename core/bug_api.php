@@ -1199,10 +1199,8 @@
 			history_log_event_direct( $c_bug_id, 'status', $h_status, $t_ass_val );
 			history_log_event_direct( $c_bug_id, 'handler_id', $h_handler_id, $p_user_id );
 
-			# Add bugnote if supplied
-			if ( !is_blank( $p_bugnote_text ) ) {
-				bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private );
-			}
+			# Add bugnote if supplied ignore false return
+			bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', NULL, FALSE );
 
 			# updated the last_updated date
 			bug_update_date( $p_bug_id );
@@ -1221,12 +1219,12 @@
 	function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
-		bug_set_field( $p_bug_id, 'status', CLOSED );
+		# Add bugnote if supplied ignore a false return
+		# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
+		# Error condition stopped execution but status had already been changed
+		bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
 
-		# Add bugnote if supplied
-		if ( !is_blank( $p_bugnote_text ) ) {
-			bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private );
-		}
+		bug_set_field( $p_bug_id, 'status', CLOSED );
 
 		email_close( $p_bug_id );
 
@@ -1243,6 +1241,11 @@
 	# resolve the given bug
 	function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null, $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
+
+		# Add bugnote if supplied
+		# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
+		# Error condition stopped execution but status had already been changed
+		bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
 
 		$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
 		if ( $t_duplicate ) {
@@ -1300,11 +1303,6 @@
 			bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
 		}
 
-		# Add bugnote if supplied
-		if ( !is_blank( $p_bugnote_text ) ) {
-			bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private );
-		}
-
 		email_resolved( $p_bug_id );
 
 		if ( $c_resolution == FIXED ) {
@@ -1325,13 +1323,13 @@
 	function bug_reopen( $p_bug_id, $p_bugnote_text='', $p_time_tracking = '0:00', $p_bugnote_private = false ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
+		# Add bugnote if supplied
+		# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
+		# Error condition stopped execution but status had already been changed
+		bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
+
 		bug_set_field( $p_bug_id, 'status', config_get( 'bug_reopen_status' ) );
 		bug_set_field( $p_bug_id, 'resolution', config_get( 'bug_reopen_resolution' ) );
-
-		# Add bugnote if supplied
-		if ( !is_blank( $p_bugnote_text ) ) {
-			bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private );
-		}
 
 		email_reopen( $p_bug_id );
 
