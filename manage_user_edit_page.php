@@ -44,6 +44,7 @@
 <!-- USER INFO -->
 <div align="center">
 <form method="post" action="manage_user_update.php">
+<?php echo form_security_field( 'manage_user' ) ?>
 <table class="width75" cellspacing="1">
 <!-- Title -->
 <tr>

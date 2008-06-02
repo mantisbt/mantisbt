@@ -27,9 +27,9 @@
 
 	require_once( $t_core_path.'email_api.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
+
+	form_security_validate('manage_user');
 
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
