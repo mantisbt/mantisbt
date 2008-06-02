@@ -27,10 +27,10 @@
 
 /**
  * Generate a random security token, prefixed by date, store it in the
- * user's session, and then return a string containing a hidden form
+ * user's session, and then return the string to be used as a form element
  * element with the security token as the value.
  * @param string Form name
- * @return string Hidden form element to output
+ * @return string Security token string
  */
 function form_security_token( $p_form_name ) {
 	$t_tokens = session_get( 'form_security_tokens', array() );
@@ -49,12 +49,40 @@ function form_security_token( $p_form_name ) {
 	$t_tokens[ $p_form_name ][] = $t_string;
 	session_set( 'form_security_tokens', $t_tokens );
 
+	# The token string
+	return $t_string;
+}
+
+/**
+ * Get a hidden form element containing a generated form security token.
+ * @param string Form name
+ * @return string Hidden form element to output
+ */
+function form_security_field( $p_form_name ) {
+	$t_string = form_security_token( $p_form_name );
+
 	# Create the form element HTML string for the security token
 	$t_form_token = $p_form_name . '_token';
 	$t_element = '<input type="hidden" name="%s" value="%s"/>';
 	$t_element = sprintf( $t_element, $t_form_token, $t_string );
 
 	return $t_element;
+}
+
+/**
+ * Get a URL parameter containing a generated form security token.
+ * @param string Form name
+ * @return string Hidden form element to output
+ */
+function form_security_param( $p_form_name ) {
+	$t_string = form_security_token( $p_form_name );
+
+	# Create the GET parameter to be used in a URL for a secure link
+	$t_form_token = $p_form_name . '_token';
+	$t_param = '&%s=%s';
+	$t_param = sprintf( $t_param, $t_form_token, $t_string );
+
+	return $t_param;
 }
 
 /**
