@@ -35,6 +35,7 @@
 	$t_user_id = auth_get_current_user_id();
 
 	# get the bugnote data
+	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 	$t_bugnotes = bugnote_get_all_visible_bugnotes( $f_bug_id, $t_bugnote_order, 0, $t_user_id );
 	
 	#precache users
