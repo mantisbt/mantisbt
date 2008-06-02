@@ -40,6 +40,7 @@
 <br />
 <div align="center">
 <form method="post" action="manage_proj_ver_update.php">
+<?php echo form_security_field( 'manage_proj_ver_update' ) ?>
 <input type="hidden" name="version_id" value="<?php echo string_attribute( $t_version->id ) ?>" />
 <table class="width50" cellspacing="1">
 <tr>

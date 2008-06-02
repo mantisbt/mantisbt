@@ -53,6 +53,7 @@
 <!-- PROJECT PROPERTIES -->
 <div align="center">
 <form method="post" action="manage_proj_update.php">
+<?php echo form_security_field( 'manage_proj_update' ) ?>
 <table class="width75" cellspacing="1">
 
 <!-- Title -->
@@ -158,6 +159,7 @@
 if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <div class="border-center">
 	<form method="post" action="manage_proj_delete.php">
+		<?php echo form_security_field( 'manage_proj_delete' ) ?>
 		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'delete_project_button' ) ?>" />
 	</form>
@@ -190,6 +192,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 
 <!-- Subprojects -->
 <form name="update_children_form" action="manage_proj_update_children.php" method="post">
+<?php echo form_security_field( 'manage_proj_update_children' ) ?>
 <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 <?php
 	project_hierarchy_cache();
@@ -248,7 +251,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	<td class="center">
 		<?php
 				print_bracket_link( 'manage_proj_edit_page.php?project_id=' . $t_subproject['id'], lang_get( 'edit_link' ) );
-				print_bracket_link( 'manage_proj_subproj_delete.php?project_id=' . $f_project_id . '&amp;subproject_id=' . $t_subproject['id'], lang_get( 'unlink_link' ) );
+				print_bracket_link( 'manage_proj_subproj_delete.php?project_id=' . $f_project_id . '&amp;subproject_id=' . $t_subproject['id'] . form_security_param( 'manage_proj_subproj_delete' ), lang_get( 'unlink_link' ) );
 		?>
 	</td>
 </tr>
@@ -268,6 +271,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <tr>
 	<td colspan="7">
 		<form method="post" action="manage_proj_subproj_add.php">
+			<?php echo form_security_field( 'manage_proj_subproj_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<select name="subproject_id">
 <?php
@@ -362,7 +366,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 
 					print_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'edit_link' ) );
 					echo '&nbsp;';
-					print_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'delete_link' ) );
+					print_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id . form_security_param( 'manage_proj_cat_delete' ), lang_get( 'delete_link' ) );
 				} ?>
 			</td>
 		</tr>
@@ -374,6 +378,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <tr>
 	<td class="left" colspan="3">
 		<form method="post" action="manage_proj_cat_add.php">
+			<?php echo form_security_field( 'manage_proj_cat_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<input type="text" name="name" size="32" maxlength="128" />
 			<input type="submit" class="button" value="<?php echo lang_get( 'add_category_button' ) ?>" />
@@ -385,6 +390,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <tr>
 	<td class="left" colspan="3">
 		<form method="post" action="manage_proj_cat_copy.php">
+			<?php echo form_security_field( 'manage_proj_cat_copy' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<select name="other_project_id">
 				<?php print_project_option_list( null, false, $f_project_id ); ?>
@@ -465,7 +471,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 
 					print_button( 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id, lang_get( 'edit_link' ) );
 					echo '&nbsp;';
-					print_button( 'manage_proj_ver_delete.php?version_id=' . $t_version_id, lang_get( 'delete_link' ) );
+					print_button( 'manage_proj_ver_delete.php?version_id=' . $t_version_id . form_security_param( 'manage_proj_ver_delete' ), lang_get( 'delete_link' ) );
 				?>
 			</td>
 		</tr>
@@ -477,6 +483,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <tr>
 	<td class="left" colspan="3">
 		<form method="post" action="manage_proj_ver_add.php">
+			<?php echo form_security_field( 'manage_proj_ver_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<input type="text" name="version" size="32" maxlength="64" />
 			<input type="submit" name="add_version" class="button" value="<?php echo lang_get( 'add_version_button' ) ?>" />
@@ -487,6 +494,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <tr>
 	<td class="left" colspan="3">
 		<form method="post" action="manage_proj_ver_copy.php">
+			<?php echo form_security_field( 'manage_proj_ver_copy' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<select name="other_project_id">
 				<?php print_project_option_list( null, false, $f_project_id ); ?>
@@ -541,6 +549,8 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	<?php
 		$t_index = 0;	
 
+		$t_custom_field_security = form_security_field( 'manage_proj_custom_field_update' );
+
 		foreach( $t_custom_fields as $t_field_id ) {
 			$t_desc = custom_field_get_definition( $t_field_id );
 	?>
@@ -550,6 +560,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 				</td>
 				<td>
 <form method="post" action="manage_proj_custom_field_update.php">
+	<?php echo $t_custom_field_security ?>
 	<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 	<input type="hidden" name="field_id" value="<?php echo $t_field_id ?>" />
 	<input type="text" name="sequence" value="<?php echo custom_field_get_sequence( $t_field_id, $f_project_id ) ?>" size="2" />
@@ -573,6 +584,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	<tr>
 		<td class="left" colspan="3">
 			<form method="post" action="manage_proj_custom_field_add_existing.php">
+			<?php echo form_security_field( 'manage_proj_custom_field_add_existing' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<select name="field_id">
 				<?php
@@ -594,6 +606,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	<tr>
 		<td class="left" colspan="3">
 			<form method="post" action="manage_proj_custom_field_copy.php">
+				<?php echo form_security_field( 'manage_proj_custom_field_copy' ) ?>
 				<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 				<select name="other_project_id">
 					<?php print_project_option_list( null, false, $f_project_id ); ?>
@@ -640,6 +653,7 @@ if ( $t_can_manage_users ) {
 <div align="center">
 	<table class="width75" cellspacing="1">
 		<form method="post" action="manage_proj_user_add.php">
+			<?php echo form_security_field( 'manage_proj_user_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<tr>
 				<td class="form-title" colspan="5">
@@ -674,6 +688,7 @@ if ( $t_can_manage_users ) {
 		</form>
 		<!-- Copy Users Form -->
 		<form method="post" action="manage_proj_user_copy.php">
+			<?php echo form_security_field( 'manage_proj_user_copy' ) ?>
 			<tr>
 				<td class="left" colspan="3">
 						<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
@@ -743,6 +758,8 @@ if ( $t_can_manage_users ) {
 	$t_users_count = count( $t_sort );
 	$t_removable_users_exist = false;
 
+	$t_user_remove_security = form_security_param( 'manage_proj_user_remove' );
+
 	for ( $i = 0; $i < $t_users_count; $i++ ) {
 		$t_user = $t_users[$i];
 ?>
@@ -765,7 +782,7 @@ if ( $t_can_manage_users ) {
 				#  from this project
 				if ( $t_can_manage_users ) {
 					if ( project_includes_user( $f_project_id, $t_user['id'] )  ) {
-						print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id . '&amp;user_id=' . $t_user['id'], lang_get( 'remove_link' ) );
+						print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id . '&amp;user_id=' . $t_user['id'] . $t_user_remove_security, lang_get( 'remove_link' ) );
 						$t_removable_users_exist = true;
 					}
 				}
@@ -791,7 +808,7 @@ if ( $t_can_manage_users ) {
 
 		if ( $t_removable_users_exist ) {
 			echo '&nbsp;';
-			print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id, lang_get( 'remove_all_link' ) );
+			print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id . $t_user_remove_security, lang_get( 'remove_all_link' ) );
 		}
 	?>
 	</td>

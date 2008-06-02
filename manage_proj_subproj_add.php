@@ -25,9 +25,8 @@
 
 	$t_core_path = config_get( 'core_path' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
+	form_security_validate( 'manage_proj_subproj_add' );
 
 	$f_project_id    = gpc_get_int( 'project_id' );
 	$f_subproject_id = gpc_get_int( 'subproject_id' );

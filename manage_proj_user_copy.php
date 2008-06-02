@@ -23,9 +23,8 @@
 
 	require_once( 'core.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
+	form_security_validate( 'manage_proj_user_copy' );
 
 	$f_project_id		= gpc_get_int( 'project_id' );
 	$f_other_project_id	= gpc_get_int( 'other_project_id' );

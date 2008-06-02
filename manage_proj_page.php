@@ -172,6 +172,8 @@
 <?php
 	}
 
+	$t_category_delete_security = form_security_param( 'manage_proj_cat_delete' );
+
 	foreach ( $t_categories as $t_category ) {
 		$t_id = $t_category['id'];
 
@@ -197,7 +199,7 @@
 
 					print_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'edit_link' ) );
 					echo '&nbsp;';
-					print_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'delete_link' ) );
+					print_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id . $t_category_delete_security, lang_get( 'delete_link' ) );
 				?>
 			</td>
 		</tr>
@@ -209,6 +211,7 @@
 <tr>
 	<td class="left" colspan="3">
 		<form method="post" action="manage_proj_cat_add.php">
+			<?php echo form_security_field( 'manage_proj_cat_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo ALL_PROJECTS ?>" />
 			<input type="text" name="name" size="32" maxlength="128" />
 			<input type="submit" class="button" value="<?php echo lang_get( 'add_category_button' ) ?>" />

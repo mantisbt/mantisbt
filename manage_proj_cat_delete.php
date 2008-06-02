@@ -27,8 +27,6 @@
 
 	require_once( $t_core_path.'category_api.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
 
 	$f_category_id = gpc_get_string( 'id' );
@@ -45,6 +43,7 @@
 		'<br/>' . lang_get( 'category' ) . ': ' . $t_name,
 		lang_get( 'delete_category_button' ) );
 
+	form_security_validate( 'manage_proj_cat_delete' );
 	category_remove( $f_category_id );
 
 	if ( $f_project_id == ALL_PROJECTS ) {

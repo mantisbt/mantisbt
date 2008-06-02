@@ -27,12 +27,11 @@
 
 	require_once( $t_core_path.'category_api.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
+	form_security_validate( 'manage_proj_cat_update' );
 
 	$f_category_id		= gpc_get_int( 'category_id' );
-	$f_project_id		= gpc_get_int( 'project_id' );
+	$f_project_id		= gpc_get_int( 'project_id', ALL_PROJECTS );
 	$f_name				= trim( gpc_get_string( 'name' ) );
 	$f_assigned_to		= gpc_get_int( 'assigned_to', 0 );
 

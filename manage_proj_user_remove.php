@@ -23,8 +23,6 @@
 
 	require_once( 'core.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
 
 	$f_project_id = gpc_get_int( 'project_id' );
@@ -40,6 +38,8 @@
 		# Confirm with the user
 		helper_ensure_confirmed( lang_get( 'remove_all_users_sure_msg' ), lang_get( 'remove_all_users_button' ) );
 
+		form_security_validate( 'manage_proj_user_remove' );
+
 		project_remove_all_users( $f_project_id );
 	}
 	else {
@@ -48,6 +48,8 @@
 		helper_ensure_confirmed( lang_get( 'remove_user_sure_msg' ) .
 			'<br/>' . lang_get( 'username' ) . ': ' . $t_user['username'],
 			lang_get( 'remove_user_button' ) );
+
+		form_security_validate( 'manage_proj_user_remove' );
 
 		project_remove_user( $f_project_id, $f_user_id );
 	}
