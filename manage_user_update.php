@@ -29,7 +29,7 @@
 
 	auth_reauthenticate();
 
-	form_security_validate('manage_user');
+	form_security_validate('manage_user_update');
 
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 

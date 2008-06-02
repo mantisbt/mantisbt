@@ -23,9 +23,9 @@
 
 	require_once( 'core.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
+
+	form_security_validate('manage_user_proj_add');
 
 	$f_user_id		= gpc_get_int( 'user_id' );
 	$f_access_level	= gpc_get_int( 'access_level' );

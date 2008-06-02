@@ -23,9 +23,9 @@
 
 	require_once( 'core.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
+
+	form_security_validate('manage_user_reset');
 
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 

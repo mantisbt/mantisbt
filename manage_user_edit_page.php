@@ -44,7 +44,7 @@
 <!-- USER INFO -->
 <div align="center">
 <form method="post" action="manage_user_update.php">
-<?php echo form_security_field( 'manage_user' ) ?>
+<?php echo form_security_field( 'manage_user_update' ) ?>
 <table class="width75" cellspacing="1">
 <!-- Title -->
 <tr>
@@ -132,6 +132,7 @@
 <div class="border-center">
 <!-- Reset Button -->
 	<form method="post" action="manage_user_reset.php">
+<?php echo form_security_field( 'manage_user_reset' ) ?>
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'reset_password_button' ) ?>" />
 	</form>
@@ -139,6 +140,8 @@
 <!-- Delete Button -->
 <?php if ( !( ( ADMINISTRATOR <= $t_user['access_level'] ) && ( 1 >= user_count_level( ADMINISTRATOR ) ) ) ) { ?>
 	<form method="post" action="manage_user_delete.php">
+<?php echo form_security_field( 'manage_user_delete' ) ?>
+
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
 	</form>
@@ -181,6 +184,7 @@
 </tr>
 
 <form method="post" action="manage_user_proj_add.php">
+<?php echo form_security_field( 'manage_user_proj_add' ) ?>
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 <!-- Unassigend Project Selection -->
 <tr <?php echo helper_alternate_class() ?> valign="top">
