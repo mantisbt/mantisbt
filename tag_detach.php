@@ -43,6 +43,7 @@
 		access_denied();
 	}
 
+	form_security_validate( 'tag_detach' );
 	tag_bug_detach( $f_tag_id, $f_bug_id );
 	
 	print_successful_redirect_to_bug( $f_bug_id );

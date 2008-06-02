@@ -27,7 +27,7 @@
 
 	require_once( $t_core_path . 'tag_api.php' );
 
-	helper_ensure_post();
+	form_security_validate( 'tag_update' );
 
 	compress_enable();
 

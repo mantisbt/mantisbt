@@ -284,6 +284,7 @@
 		?>
 		<small><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get('tag_separator') ) ?></small> 
 		<form method="post" action="tag_attach.php">
+		<?php echo form_security_field( 'tag_attach' ) ?>
 		<input type="hidden" name="bug_id" value="<?php echo $p_bug_id ?>" />
 		<?php
 			print_tag_input( $p_bug_id, $p_string );
