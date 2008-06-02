@@ -1321,35 +1321,4 @@
 		echo '</tr></table>';
 	}
 
-	/**
-	 * Print the Update Tag button
-	 * @param integer Tag ID
-	 */
-	function html_button_tag_update( $p_tag_id ) {
-		if ( access_has_global_level( config_get( 'tag_edit_threshold' ) ) 
-			|| ( auth_get_current_user_id() == tag_get_field( $p_tag_id, 'user_id' )
-				&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) )
-		{
-			html_button( 'tag_update_page.php', lang_get( 'tag_update_button' ), array( 'tag_id' => $p_tag_id ) );
-		}
-	}
-
-	/**
-	 * Print the Delete Tag button
-	 * @param integer Tag ID
-	 */
-	function html_button_tag_delete( $p_tag_id ) {
-		if ( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
-			html_button( 'tag_delete.php', lang_get( 'tag_delete_button' ), array( 'tag_id' => $p_tag_id ) );
-		}
-	}
-
-	/**
-	 * Print all buttons for the Tag View page
-	 * @param integer Tag ID
-	 */
-	function html_buttons_tag_view_page( $p_tag_id ) {
-		html_button_tag_update( $p_tag_id );
-		html_button_tag_delete( $p_tag_id );
-	}
 ?>

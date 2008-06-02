@@ -26,7 +26,7 @@
 
 	require_once( $t_core_path . 'tag_api.php' );
 
-	helper_ensure_post();
+	form_security_validate( 'tag_attach' );
 
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$f_tag_select = gpc_get_int( 'tag_select' );

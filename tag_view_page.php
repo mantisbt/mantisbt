@@ -108,7 +108,24 @@
 <!-- Buttons -->
 <tr>
 	<td colspan="5">
-		<?php html_buttons_tag_view_page( $f_tag_id ); ?>
+<?php
+	$t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
+	$t_can_edit_own = $t_can_edit || auth_get_current_user_id() == tag_get_field( $f_tag_id, 'user_id' )
+		&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) );
+
+	if ( $t_can_edit_own ) { ?>
+		<form action="tag_update_page.php" method="post">
+			<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>" />
+			<input type="submit" class="button" value="<?php echo lang_get( 'tag_update_button' ) ?>" />
+		</form>
+<?php } if ( $t_can_edit ) { ?>
+		<form action="tag_delete.php" method="post">
+			<?php echo form_security_field( 'tag_delete' ) ?>
+			<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>" />
+			<input type="submit" class="button" value="<?php echo lang_get( 'tag_delete_button' ) ?>" />
+		</form>
+<?php } ?>
+
 	</td>
 </tr>
 

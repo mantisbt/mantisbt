@@ -594,6 +594,11 @@
 	 * @param integer Bug ID
 	 */
 	function tag_display_link( $p_tag_row, $p_bug_id=0 ) {
+		static $t_security_token = null;
+		if ( is_null( $t_security_token ) ) {
+			$t_security_token = form_security_param( 'tag_detach' );
+		}
+
 		if ( auth_get_current_user_id() == $p_tag_row['user_attached'] ) {
 			$t_detach = config_get( 'tag_detach_own_threshold' );
 		} else {
@@ -607,7 +612,7 @@
 		
 		if ( access_has_global_level($t_detach) ) {
 			$t_tooltip = sprintf( lang_get( 'tag_detach' ), $t_name );
-			echo " <a href='tag_detach.php?bug_id=$p_bug_id&tag_id=$p_tag_row[id]'><img src='images/delete.png' class='delete-icon' title=\"$t_tooltip\"/></a>";
+			echo " <a href='tag_detach.php?bug_id=$p_bug_id&tag_id=$p_tag_row[id]$t_security_token'><img src='images/delete.png' class='delete-icon' title=\"$t_tooltip\"/></a>";
 		}
 		
 		return true;

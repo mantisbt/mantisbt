@@ -26,8 +26,6 @@
 
 	require_once( $t_core_path . 'tag_api.php' );
 
-	helper_ensure_post();
-
 	access_ensure_global_level( config_get( 'tag_edit_threshold' ) );
 
 	$f_tag_id = gpc_get_int( 'tag_id' );
@@ -35,6 +33,7 @@
 
 	helper_ensure_confirmed( lang_get( 'tag_delete_message' ), lang_get( 'tag_delete_button' ) );
 
+	form_security_validate( 'tag_delete' );
 	tag_delete( $f_tag_id );
 	
 	print_successful_redirect( config_get( 'default_home_page' ) );
