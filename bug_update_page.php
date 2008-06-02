@@ -65,7 +65,7 @@
 
 <br />
 <form name="update_bug_form" method="post" action="bug_update.php">
-<?php echo form_security_token( 'bug_update' ) ?>
+<?php echo form_security_field( 'bug_update' ) ?>
 <table class="width100" cellspacing="1">
 
 
