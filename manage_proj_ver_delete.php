@@ -27,8 +27,6 @@
 
 	require_once( $t_core_path.'version_api.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
 
 	$f_version_id = gpc_get_int( 'version_id' );
@@ -43,6 +41,7 @@
 		'<br/>' . lang_get( 'version' ) . ': ' . $t_version_info->version,
 		lang_get( 'delete_version_button' ) );
 
+	form_security_validate( 'manage_proj_ver_delete' );
 	version_remove( $f_version_id );
 
 	html_page_top1();

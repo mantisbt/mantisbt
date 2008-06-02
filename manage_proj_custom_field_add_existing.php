@@ -27,9 +27,8 @@
 
 	require_once( $t_core_path.'custom_field_api.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
+	form_security_validate( 'manage_proj_custom_field_add_existing' );
 
 	$f_field_id		= gpc_get_int( 'field_id' );
 	$f_project_id	= gpc_get_int( 'project_id' );

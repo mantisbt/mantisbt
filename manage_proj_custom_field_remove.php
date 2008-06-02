@@ -27,8 +27,6 @@
 
 	require_once( $t_core_path.'custom_field_api.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
 
 	$f_field_id = gpc_get_int( 'field_id' );
@@ -54,6 +52,7 @@
 		$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 	}
 
+	form_security_validate( 'manage_proj_custom_field_remove' );
 	custom_field_unlink( $f_field_id, $f_project_id );
 
 	html_page_top1();

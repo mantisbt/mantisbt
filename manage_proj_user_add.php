@@ -23,9 +23,8 @@
 
 	require_once( 'core.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
+	form_security_validate( 'manage_proj_user_add' );
 
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_user_id		= gpc_get_int_array( 'user_id', array() );

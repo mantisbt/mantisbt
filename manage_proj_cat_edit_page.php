@@ -46,6 +46,7 @@
 <br />
 <div align="center">
 <form method="post" action="manage_proj_cat_update.php">
+<?php echo form_security_field( 'manage_proj_cat_update' ) ?>
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
@@ -89,6 +90,7 @@
 
 <div class="border-center">
 	<form method="post" action="manage_proj_cat_delete.php">
+		<?php echo form_security_field( 'manage_proj_cat_delete' ) ?>
 		<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
 		<input type="hidden" name="category" value="<?php echo string_attribute( $f_category ) ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'delete_category_button' ) ?>" />

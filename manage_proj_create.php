@@ -27,9 +27,8 @@
 
 	require_once( $t_core_path.'project_hierarchy_api.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
+	form_security_validate( 'manage_proj_create' );
 
 	access_ensure_global_level( config_get( 'create_project_threshold' ) );
 
