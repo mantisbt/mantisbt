@@ -17,6 +17,7 @@ a:active 			{}
 a:link    			{}
 a:visited 			{}
 a.subtle			{ color: blue; text-decoration: none; }
+a.resolved			{ text-decoration: line-through underline; }
 
 form				{ display: inline; }
 

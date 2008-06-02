@@ -512,6 +512,11 @@
 				$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
 				$t_status = string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ) ) );
 				$t_link .=  ' title="[' . $t_status . '] ' . $t_summary . '"';
+
+				$t_resolved = bug_get_field( $p_bug_id, 'status' ) >= config_get( 'bug_resolved_status_threshold' );
+				if ( $t_resolved ) {
+					$t_link .= ' class="resolved"';
+				}
 			}
 			$t_link .= '>' . bug_format_id( $p_bug_id ) . '</a>';
 		} else {
