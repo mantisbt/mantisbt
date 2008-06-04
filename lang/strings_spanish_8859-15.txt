@@ -39,7 +39,7 @@
 ?>
 <?php
 # Charset
-$s_charset = 'iso-8859-15';
+$s_charset = 'utf-8';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Mover';
@@ -214,6 +214,8 @@ $s_bugnote_description = 'Descripción de la Nota';
 
 $s_error_no_proceed = 'Por favor, utilice el botón \"Atrás\" de su navegador web para volver a la página anterior.  Allí puede corregir los problemas que han sido identificados en esta notificación de error o seleccionar otra acción.  También puede hacer click sobre una opción de la barra de menú para ir directamente a una nueva sección.';
 
+$s_error_referred = 'Por favor haga click <a href="%s">aquí</a> para volver a la página anterior. Allí podrá corregir los problemas identificados en este error o seleccionar una acción diferente. También podría hacer click sobre una opción de la barra de menú para ir directamente a otra sección.';
+
 # ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC] = 'Ha ocurrido un error durante esta acción. Informe de este error a su administrador local.';
 $MANTIS_ERROR[ERROR_SQL] = 'Error de SQL detectado.  Por favor informe a ';
@@ -248,6 +250,10 @@ $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'La contraseña no pasó la v
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Se esperaba una matriz, pero se ha recibido una cadena de caracteres para %s.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Se esperaba una cadena de caracteres pero se ha recibido una matriz para %s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Se esperaba un número para %s.';
+$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Un parámetro de sesión esperado (%s) no se encontró.';
+$MANTIS_ERROR[ERROR_SESSION_ARRAY_EXPECTED]      = 'Se esperaba un array pero se encontró una cadena para %s.';
+$MANTIS_ERROR[ERROR_SESSION_ARRAY_UNEXPECTED] = 'Se esperaba una cadena pero se encontró un array para %s.';
+$MANTIS_ERROR[ERROR_SESSION_NOT_NUMBER] = 'Se encontró un número para %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'No se encuentra la incidencia %d.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtro %d no encontrado.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'El filtro que Ud. está tratando de usar es obsoleto y no puede ser actualizado, por favor vuelva a crearlo';
@@ -317,6 +323,9 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin ya instalado previamente
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Página del Plugin no encontrada.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Campo \'%s\' contiene duplicados en la columna \'%s\'.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Campo \'%s\' contiene un campo no válido: \'%s\'';
+$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Gestor de sesión no válido.';
+$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Variable de sesión \'%s\' no encontrada.';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Token de seguridad del formulario no válido. ¿Envió el formulario dos veces accidentalmente?';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Esta página no puede ser accedida utilizando este método.';
 
 $s_login_error = 'Su cuenta puede estar deshabilitada o o bloqueada o el nombre de usuario/contraseña introducidos son incorrectos.';
@@ -1251,6 +1260,7 @@ $s_custom_field_access_level_r = 'Acceso de lectura';
 $s_custom_field_access_level_rw = 'Acceso de escritura';
 $s_custom_field_length_min = 'Long. Mínima';
 $s_custom_field_length_max = 'Long. Máxima';
+$s_custom_field_filter_by = "Añadir a Filtro";
 $s_custom_field_advanced = 'Mostrar sólo en Vista Avanzada';
 $s_custom_field_display_report = 'Mostrar al Reportar Incidencias';
 $s_custom_field_display_update = 'Mostrar al actualizar Incidencias';
@@ -1512,8 +1522,18 @@ $s_update_columns_as_global_default = 'Actualizar columnas como globales por def
 $s_update_columns_for_current_project = 'Actualizar columnas para el proyecto actual';
 $s_update_columns_as_my_default = 'Actualizar como columnas por defecto para todos los proyectos';
 $s_reset_columns_configuration = 'Reinicializar Configuración de Columnas';
+$s_copy_columns_from = 'Copiar Columnas Desde';
+$s_copy_columns_to = 'Copiar Columnas Hacia';
+
+# due date
+$s_due_date = "Fecha límite";
+$s_overdue = "Atrasado";
 
 # mind mapping                    
 $s_mindmap = 'Mapa Mental';
 $s_freemind_export = 'Exportar a Freemind';
+
+#account_view_page.php
+$s_view_account_title = 'Información de Usuario';
+
 ?>
