@@ -311,6 +311,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Event \'%s\' has not yet been declared.
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin is not registered with Mantis.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin is already installed.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Plugin page not found.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Upgrading the plugin schema failed in block #%s.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Field \'%s\' contains duplcate column \'%s\'.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Field \'%s\' contains invalid field \'%s\'';
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Invalid session handler.';

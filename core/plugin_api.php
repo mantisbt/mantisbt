@@ -492,6 +492,8 @@ function plugin_upgrade( $p_plugin ) {
 		if ( 2 == $t_status ) {
 			plugin_config_set( 'schema', $i );
 		} else {
+			error_parameters( $i );
+			trigger_error( ERROR_PLUGIN_UPGRADE_FAILED, ERROR );
 			return null;
 		}
 
