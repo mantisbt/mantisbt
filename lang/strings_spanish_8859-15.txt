@@ -39,7 +39,7 @@
 ?>
 <?php
 # Charset
-$s_charset = 'utf-8';
+$s_charset = 'ISO-8859-15';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Mover';
