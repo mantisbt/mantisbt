@@ -302,6 +302,9 @@ $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'El nombre de la etiqueta no es válido.
 $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Esa etiqueta no está adjuntada a esa incidencia.';
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Esa etiqueta ya estaba adjuntada a esa incidencia.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Token no encontrado.';
+$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Gestor de sesión no válido.';
+$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Variable de sesión \'%s\' no encontrada.';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Token de seguridad del formulario no válido. ¿Envió el formulario dos veces accidentalmente?';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Esta página no puede ser accedida utilizando este método.';
 
 $s_login_error = 'Su cuenta puede estar deshabilitada o o bloqueada o el nombre de usuario/contraseña introducidos son incorrectos.';
