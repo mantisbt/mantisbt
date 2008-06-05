@@ -1166,6 +1166,7 @@ $s_sort = 'Sort by';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
 $s_priority_abbreviation = 'P';
+$s_note_user_id = 'Note By';
 
 # view_all_inc.php
 $s_none = 'none';

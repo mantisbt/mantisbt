@@ -191,6 +191,14 @@
 		$f_user_monitor = array( $f_user_monitor );
 	}
 
+	$f_note_user_id = array();
+    if ( is_array( gpc_get( 'note_user_id', null ) ) ) {
+        $f_note_user_id = gpc_get_string_array( 'note_user_id', META_FILTER_ANY );
+    } else {
+        $f_note_user_id = gpc_get_string( 'note_user_id', META_FILTER_ANY );
+        $f_note_user_id = array( $f_note_user_id );
+    }
+
 	# these are only single values, even when doing advanced filtering
 	$f_per_page				= gpc_get_int( 'per_page', -1 );
 	$f_highlight_changed	= gpc_get_int( 'highlight_changed', config_get( 'default_show_changed' ) );
@@ -431,6 +439,7 @@
 				$t_setting_arr['os_build'] = $f_os_build;
 				$t_setting_arr['tag_string'] = $f_tag_string;
 				$t_setting_arr['tag_select'] = $f_tag_select;
+				$t_setting_arr['note_user_id'] = $f_note_user_id;
 				break;
 		# Set the sort order and direction
 		case '2':
@@ -472,6 +481,7 @@
 				$t_setting_arr['fixed_in_version']	= array( META_FILTER_ANY );
 				$t_setting_arr['target_version']	= array( META_FILTER_ANY );
 				$t_setting_arr['user_monitor'] 		= array( META_FILTER_ANY );
+				$t_setting_arr['note_user_id']  = array( META_FILTER_ANY );
 				$t_setting_arr['relationship_type'] = -1;
 				$t_setting_arr['relationship_bug'] = 0;
 

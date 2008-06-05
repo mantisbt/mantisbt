@@ -43,9 +43,11 @@
 	define( 'FILTER_PROPERTY_REPORTER_ID', 'reporter_id' );
 	define( 'FILTER_PROPERTY_HANDLER_ID', 'handler_id' );
 	define( 'FILTER_PROPERTY_PROJECT_ID', 'project_id' );
+    define( 'FILTER_PROPERTY_NOTE_USER_ID', 'note_user_id' );
 	define( 'FILTER_PROPERTY_RESOLUTION_ID', 'show_resolution' );
 	define( 'FILTER_PROPERTY_PRODUCT_BUILD', 'show_build' );
 	define( 'FILTER_PROPERTY_PRODUCT_VERSION', 'show_version' );
+
 	define( 'FILTER_PROPERTY_MONITOR_USER_ID', 'user_monitor' );
 	define( 'FILTER_PROPERTY_HIDE_STATUS_ID', 'hide_status' );
 	define( 'FILTER_PROPERTY_SORT_FIELD_NAME', 'sort' );
@@ -85,6 +87,7 @@
 	define( 'FILTER_SEARCH_PROJECT_ID', 'project_id' );
 	define( 'FILTER_SEARCH_RESOLUTION_ID', 'resolution_id' );
 	define( 'FILTER_SEARCH_FIXED_IN_VERSION', 'fixed_in_version' );
+    define( 'FILTER_SEARCH_NOTE_USER_ID', 'note_user_id' );
 	define( 'FILTER_SEARCH_TARGET_VERSION', 'target_version' );
 	define( 'FILTER_SEARCH_START_DAY', 'start_day' );
 	define( 'FILTER_SEARCH_START_MONTH', 'start_month' );
@@ -207,6 +210,10 @@
 		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_HANDLER_ID] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_HANDLER_ID, $p_custom_filter[FILTER_PROPERTY_HANDLER_ID] );
 		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_NOTE_USER_ID] ) ) {
+            $t_query[] = filter_encode_field_and_value( FILTER_SEARCH_NOTE_USER_ID, $p_custom_filter[FILTER_PROPERTY_NOTE_USER_ID] );
+        }
 
 		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_SEVERITY_ID] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_SEVERITY_ID, $p_custom_filter[FILTER_PROPERTY_SEVERITY_ID] );
@@ -1232,6 +1239,43 @@
 			}	
 		}
 
+		# note user id
+        $t_any_found = false;
+        foreach( $t_filter['note_user_id'] as $t_filter_member ) {
+            if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+                $t_any_found = true;
+            }
+        }
+        if ( count( $t_filter['note_user_id'] ) == 0 ) {
+            $t_any_found = true;
+        }
+        if ( !$t_any_found ) {
+            $t_bugnote_table_alias = 'mbnt';
+            $t_clauses = array();
+            array_push( $t_from_clauses, "$t_bugnote_table  $t_bugnote_table_alias" );
+            array_push( $t_where_clauses, "( $t_bug_table.id = $t_bugnote_table_alias.bug_id )" );
+
+            foreach( $t_filter['note_user_id'] as $t_filter_member ) {
+                $c_note_user_id = db_prepare_int( $t_filter_member );
+                if ( META_FILTER_MYSELF == $c_note_user_id ) {
+                    array_push( $t_clauses, $c_user_id );
+                } else {
+                    array_push( $t_clauses, $c_note_user_id );
+                }
+            }
+            if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
+				foreach( $t_clauses as $t_clause ) {
+					$t_where_tmp[] = db_param($t_where_param_count++);
+					$t_where_params[] = $t_clause;
+				}
+				array_push( $t_where_clauses, "( $t_bugnote_table_alias.reporter_id in (". implode( ', ', $t_where_tmp ) .") )" );
+            } else {
+				$t_where_params[] = $t_clauses[0];
+				array_push( $t_where_clauses, "( $t_bugnote_table_alias.reporter_id=" . db_param($t_where_param_count++). " )" );
+            }
+        }
+
 		# custom field filters
 		if( ON == config_get( 'filter_by_custom_fields' ) ) {
 			# custom field filtering
@@ -1326,9 +1370,9 @@
 		if ( !is_blank( $t_filter['search'] ) ) {
 			array_push( $t_where_clauses, "($t_bug_text_table.id = $t_bug_table.bug_text_id)" );
 
-			$t_from_clauses = array( $t_bug_text_table, $t_project_table, $t_bug_table );
+			$t_from_clauses = array_merge( array( $t_bug_text_table, $t_project_table, $t_bug_table ), $t_from_clauses );
 		} else {
-			$t_from_clauses = array( $t_project_table, $t_bug_table );
+			$t_from_clauses = array_merge( array( $t_project_table, $t_bug_table ), $t_from_clauses );
 		}
 
 		$t_select	= implode( ', ', array_unique( $t_select_clauses ) );
@@ -2729,10 +2773,54 @@
 		}
 		?>
 		<tr class="row-1">
+			<td class="small-caption category2" valign="top">
+                <a href="<?php PRINT $t_filters_url . 'note_user_id'; ?>" id="note_user_id_filter"><?php PRINT lang_get( 'note_user_id' ) ?>:</a>
+            </td>
+            <td class="small-caption" valign="top" id="note_user_id_filter_target">
+                <?php
+                    $t_output = '';
+                    $t_any_found = false;
+                    if ( count( $t_filter['note_user_id'] ) == 0 ) {
+                        PRINT lang_get( 'any' );
+                    } else {
+                        $t_first_flag = true;
+                        foreach( $t_filter['note_user_id'] as $t_current ) {
+                            ?>
+                            <input type="hidden" name="note_user_id[]" value="<?php echo $t_current;?>" />
+                            <?php
+                            $t_this_name = '';
+                            if ( META_FILTER_NONE == $t_current ) {
+                                $t_this_name = lang_get( 'none' );
+                            } else if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( META_FILTER_ANY == $t_current ) ) {
+                                $t_any_found = true;
+                            } else if ( META_FILTER_MYSELF == $t_current ) {
+                                if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
+                                    $t_this_name = '[' . lang_get( 'myself' ) . ']';
+                                } else {
+                                    $t_any_found = true;
+                                }
+                            } else {
+                                $t_this_name = user_get_name( $t_current );
+                            }
+                            if ( $t_first_flag != true ) {
+                                $t_output = $t_output . '<br />';
+                            } else {
+                                $t_first_flag = false;
+                            }
+                            $t_output = $t_output . $t_this_name;
+                        }
+                        if ( true == $t_any_found ) {
+                            PRINT lang_get( 'any' );
+                        } else {
+                            PRINT $t_output;
+                        }
+                    }
+                ?>
+            </td>
 			<td class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_sort'; ?>" id="show_sort_filter"><?php PRINT lang_get( 'sort' ) ?>:</a>
 			</td>
-			<td class="small-caption" valign="top" colspan="2" id="show_sort_filter_target">
+			<td class="small-caption" valign="top" id="show_sort_filter_target">
 				<?php
 					$t_sort_fields = split( ',', $t_filter['sort'] );
 					$t_dir_fields = split( ',', $t_filter['dir'] );
@@ -3318,6 +3406,7 @@
 									  'show_status' => 'int',
 									  'reporter_id' => 'int',
 									  'handler_id' => 'int',
+									  'note_user_id' => 'int',
 									  'show_resolution' => 'int',
 									  'show_priority' => 'int',
 									  'show_build' => 'string',
@@ -3783,6 +3872,27 @@
 		</select>
 		<?php
 	}
+
+	function print_filter_note_user_id(){
+        global $t_select_modifier, $t_filter, $f_view_type;
+        ?>
+        <!-- Handler -->
+        <select <?php PRINT $t_select_modifier;?> name="note_user_id[]">
+            <option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['note_user_id'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any') ?>]</option>
+            <?php if ( access_has_project_level( config_get( 'view_handler_threshold' ) ) ) { ?>
+            <option value="<?php echo META_FILTER_NONE ?>" <?php check_selected( $t_filter['note_user_id'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
+            <?php
+                if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
+                    PRINT '<option value="' . META_FILTER_MYSELF . '" ';
+                    check_selected( $t_filter['note_user_id'], META_FILTER_MYSELF );
+                    PRINT '>[' . lang_get( 'myself' ) . ']</option>';
+                }
+            ?>
+            <?php print_assign_to_option_list( $t_filter['note_user_id'] ) ?>
+            <?php } ?>
+        </select>
+        <?php
+    }
 
 	function print_filter_custom_field($p_field_id){
 		global $t_filter, $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids, $t_select_modifier;
