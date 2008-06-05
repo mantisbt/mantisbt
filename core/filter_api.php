@@ -708,6 +708,7 @@
 			}
 
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 					$t_where_tmp[] = db_param($t_where_param_count++);
 					$t_where_params[] = $t_clause;
@@ -737,6 +738,7 @@
 				array_push( $t_clauses, $c_show_severity );
 			}
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 								$t_where_tmp[] = db_param($t_where_param_count++);
 								$t_where_params[] = $t_clause;
@@ -799,6 +801,7 @@
 				array_push( $t_clauses, $c_show_status );
 			}
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 					$t_where_tmp[] = db_param($t_where_param_count++);
 					$t_where_params[] = $t_clause;
@@ -829,6 +832,7 @@
 				array_push( $t_clauses, $c_show_resolution );
 			}
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 					$t_where_tmp[] = db_param($t_where_param_count++);
 					$t_where_params[] = $t_clause;
@@ -858,6 +862,7 @@
 						array_push( $t_clauses, $c_show_priority );
 				}
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 					$t_where_tmp[] = db_param($t_where_param_count++);
 					$t_where_params[] = $t_clause;
@@ -892,6 +897,7 @@
 				}
 			}
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 					$t_where_tmp[] = db_param($t_where_param_count++);
 					$t_where_params[] = $t_clause;
@@ -918,6 +924,7 @@
 			}
 
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 					$t_where_tmp[] = db_param($t_where_param_count++);
 					$t_where_params[] = $t_clause;
@@ -943,6 +950,7 @@
 				}
 			}
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 					$t_where_tmp[] = db_param($t_where_param_count++);
 					$t_where_params[] = $t_clause;
@@ -969,6 +977,7 @@
 			}
 
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 					$t_where_tmp[] = db_param($t_where_param_count++);
 					$t_where_params[] = $t_clause;
@@ -995,6 +1004,7 @@
 			}
 
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 					$t_where_tmp[] = db_param($t_where_param_count++);
 					$t_where_params[] = $t_clause;
@@ -1021,6 +1031,7 @@
 			}
 
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 					$t_where_tmp[] = db_param($t_where_param_count++);
 					$t_where_params[] = $t_clause;
@@ -1064,6 +1075,7 @@
 				}
 			}
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 					$t_where_tmp[] = db_param($t_where_param_count++);
 					$t_where_params[] = $t_clause;
@@ -1091,6 +1103,7 @@
 			
 			#echo var_dump( $t_clauses ); exit;
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 					$t_where_tmp[] = db_param($t_where_param_count++);
 					$t_where_params[] = $t_clause;
@@ -1126,6 +1139,7 @@
 				}
 			}
 			if ( 1 < count( $t_clauses ) ) {
+				$t_where_tmp = array();
 				foreach( $t_clauses as $t_clause ) {
 					$t_where_tmp[] = db_param($t_where_param_count++);
 					$t_where_params[] = $t_clause;
