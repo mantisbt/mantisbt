@@ -155,14 +155,12 @@
 			$t_question_title		= lang_get( 'category_bugs_conf_msg' );
 			$t_button_title			= lang_get( 'category_group_bugs_button' );
 			$t_form					= 'category';
-			$t_request				= 'category';
 			break;
 
 		case 'VIEW_STATUS' :
 			$t_question_title		= lang_get( 'view_status_bugs_conf_msg' );
 			$t_button_title			= lang_get( 'view_status_group_bugs_button' );
-			$t_form				= 'view_status';
-			$t_request			= 'view_status';
+			$t_form					= 'view_status';
 			break;
 		
 		case 'UP_FIXED_IN_VERSION':
