@@ -628,6 +628,10 @@
 		if ( is_null( $v_enabled ) ) {
 			$v_enabled = true;
 		}
+		
+		if ( is_null( $v_file_path ) ) {
+		    $v_file_path = '';
+		}
 
 		$t_project_status = mci_get_project_status_id( $v_status );
 		$t_project_view_state = mci_get_project_view_state_id( $v_view_state );
