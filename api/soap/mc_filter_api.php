@@ -116,7 +116,7 @@
 			$t_issue['additional_information'] = mci_null_if_empty( $t_additional_information );
 
 			$t_issue['attachments'] = mci_issue_get_attachments( $t_issue_data['id'] );
-			$t_issue['relationships'] = mci_issue_get_relationships( $t_issue_data['id'], $t_issue_id );
+			$t_issue['relationships'] = mci_issue_get_relationships( $t_issue_data['id'], $t_user_id);
 			$t_issue['notes'] = mci_issue_get_notes( $t_issue_data['id'] );
 			$t_issue['custom_fields'] = mci_issue_get_custom_fields( $t_issue_data['id'] );
 

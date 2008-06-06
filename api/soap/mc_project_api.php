@@ -519,12 +519,12 @@
 		$t_priv = VS_PRIVATE;
 		$t_admin = ADMINISTRATOR;
 	
-		if ( $t_project_id == ALL_PROJECTS ) {
+		if ( $p_project_id == ALL_PROJECTS ) {
 			# Select all the projects that the user has access to
 			$t_projects = user_get_accessible_projects( $t_user_id );
 		} else {
 			# Select the specific project 
-			$t_projects = array( $t_project_id );
+			$t_projects = array( $p_project_id );
 		}
 			
 		$t_projects[] = ALL_PROJECTS; # add ALL_PROJECTS to the list of projects to fetch
@@ -617,15 +617,15 @@
 					'The project name you attempted to add exists already');
 		}
 
-		if ( is_blank( $v_status ) ) {
+		if ( is_null( $v_status ) ) {
 			$v_status = array( 'name' => 'development' ); // development
 		}
 
-		if ( is_blank( $v_view_state ) ) {
+		if ( is_null( $v_view_state ) ) {
 			$v_view_state = array( 'id' => VS_PUBLIC );
 		}
 
-		if ( is_blank( $v_enabled ) ) {
+		if ( is_null( $v_enabled ) ) {
 			$v_enabled = true;
 		}
 

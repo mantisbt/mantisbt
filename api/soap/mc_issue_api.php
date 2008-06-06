@@ -770,7 +770,7 @@
  		if ( isset( $p_note['view_state'] ) ) {
  			$t_view_state = $p_note['view_state'];
  		} else {
-	 		$t_view_state = config_get( 'default_bug_view_status' );
+	 		$t_view_state = array( 'id' => config_get( 'default_bug_view_status' ) );
 	 	}
 
 		$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );

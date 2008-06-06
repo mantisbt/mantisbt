@@ -25,7 +25,7 @@
 		if ( $t_user_id === false ) {
 			return new soap_fault( 'Client', '', 'Access Denied' );
 		}
-		return mci_file_get( $p_issue_attachment_id, 'bug' );
+		return mci_file_get( $p_issue_attachment_id, 'bug', $t_user_id );
  	}
  
   	/**
