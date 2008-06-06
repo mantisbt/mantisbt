@@ -659,7 +659,7 @@
 		#
 		if ( ( ON === $t_limit_reporters ) && ( ! access_has_project_level( REPORTER + 1, $t_project_id, $t_user_id ) ) ) {
 			$c_reporter_id = $c_user_id;
-			$t_where_params = $c_reporter_id;
+			$t_where_params[] = $c_reporter_id;
 			array_push( $t_where_clauses, "($t_bug_table.reporter_id=" . db_param($t_where_param_count++) . ")" );
 		}
 
