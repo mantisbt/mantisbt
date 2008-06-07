@@ -99,6 +99,7 @@
 <br />
 
 <form method="post" action="manage_custom_field_create.php">
+<?php echo form_security_field( 'manage_custom_field_create' ); ?>
 		<input type="text" name="name" size="32" maxlength="64" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'add_custom_field_button' ) ?>" />
 </form>
