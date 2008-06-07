@@ -25,8 +25,6 @@
 
 	$t_core_path = config_get( 'core_path' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
 
 	$f_project_id = gpc_get_int( 'project', 0 );
@@ -49,7 +47,9 @@
 		helper_ensure_confirmed( lang_get( 'config_delete_sure' ) . ': ' .
 			string_html_specialchars( implode( ', ', $t_revert_vars ) ) . ' ' . lang_get( 'in_project' ) . ' ' . project_get_name( $f_project_id ),
 			lang_get( 'delete_config_button' ) );
-
+		
+		form_security_validate('manage_config_revert');
+		
 		foreach ( $t_revert_vars as $t_revert ) {
 			config_delete( $t_revert, null , $f_project_id );
 		}

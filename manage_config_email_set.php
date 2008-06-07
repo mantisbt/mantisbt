@@ -26,9 +26,9 @@
 	$t_core_path = config_get( 'core_path' );
 	require_once( $t_core_path.'email_api.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
+
+	form_security_validate('manage_config_email_set');
 
 	$t_can_change_level = min( config_get_access( 'notify_flags' ), config_get_access( 'default_notify_flags' ) );
 	access_ensure_project_level( $t_can_change_level );
