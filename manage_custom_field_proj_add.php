@@ -23,9 +23,9 @@
 
 	require_once( 'core.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
+
+	form_security_validate('manage_custom_field_proj_add');
 
 	$f_field_id = gpc_get_int( 'field_id' );
 	$f_project_id = gpc_get_int_array( 'project_id', array() );
