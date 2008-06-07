@@ -27,8 +27,6 @@
 
 	require_once( $t_core_path.'custom_field_api.php' );
 
-	helper_ensure_post();
-
 	auth_reauthenticate();
 
 	access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
@@ -47,6 +45,8 @@
 			'<br/>' . lang_get( 'custom_field' ) . ': ' . string_attribute( $t_definition['name'] ),
 			lang_get( 'field_delete_button' ) );
 	}
+
+	form_security_validate('manage_custom_field_delete');
 
 	custom_field_destroy( $f_field_id );
 

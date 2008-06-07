@@ -46,6 +46,7 @@
 <br />
 <div align="center">
 <form method="post" action="manage_custom_field_update.php">
+<?php echo form_security_field( 'manage_custom_field_update' ); ?>
 	<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
 	<input type="hidden" name="return" value="<?php echo $f_return ?>" />
 
@@ -227,6 +228,7 @@
 
 <div class="border-center">
 	<form method="post" action="manage_custom_field_delete.php">
+<?php echo form_security_field( 'manage_custom_field_delete' ); ?>
 		<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
 		<input type="hidden" name="return" value="<?php echo string_attribute( $f_return ) ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'delete_custom_field_button' ) ?>" />
@@ -239,6 +241,7 @@
 <br />
 <div align="center">
 <form method="post" action="manage_custom_field_proj_add.php">
+<?php echo form_security_field( 'manage_custom_field_proj_add' ); ?>
 <table class="width75" cellspacing="1">
 <!-- Title -->
 <tr>
