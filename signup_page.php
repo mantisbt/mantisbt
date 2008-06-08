@@ -37,6 +37,7 @@
 <br />
 <div align="center">
 <form name="signup_form" method="post" action="signup.php">
+<?php echo form_security_field( 'signup' ); ?>
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">
