@@ -35,17 +35,16 @@
 
 	# If deleting item redirect to delete script
 	if ( 'delete' == $f_action ) {
-		helper_ensure_post();
-		
 		$row = news_get_row( $f_news_id );   
 		     
 		# This check is to allow deleting of news items that were left orphan due to bug #3723   
 		if ( project_exists( $row['project_id'] ) ) {   
 			access_ensure_project_level( config_get( 'manage_news_threshold' ), $row['project_id'] );   
-		}   
-		     
+		}
+
 		helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ), lang_get( 'delete_news_item_button' ) );   
-		     
+
+		form_security_validate( 'news_delete' );
 		news_delete( $f_news_id );   
 		print_header_redirect( 'news_menu_page.php', true ); 
 	}
@@ -68,6 +67,7 @@
 <br />
 <div align="center">
 <form method="post" action="news_update.php">
+<?php echo form_security_field( 'news_update' ); ?>
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">

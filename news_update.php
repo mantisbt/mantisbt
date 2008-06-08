@@ -29,7 +29,7 @@
 	require_once( $t_core_path.'string_api.php' );
 	require_once( $t_core_path.'print_api.php' );
 
-	helper_ensure_post();
+	form_security_validate( 'news_update' );
 
 	$f_news_id		= gpc_get_int( 'news_id' );
 	$f_project_id	= gpc_get_int( 'project_id' );

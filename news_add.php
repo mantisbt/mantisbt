@@ -28,7 +28,7 @@
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'print_api.php' );
 
-	helper_ensure_post();
+	form_security_validate( 'news_add' );
 
 	access_ensure_project_level( config_get( 'manage_news_threshold' ) );
 
