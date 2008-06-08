@@ -32,6 +32,7 @@
 <br />
 <div align="center">
 <form method="post" action="news_add.php">
+<?php echo form_security_field( 'news_add' ); ?>
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
@@ -90,6 +91,7 @@
 <br />
 <div align="center">
 <form method="post" action="news_edit_page.php">
+<?php echo form_security_field( 'news_delete' ); ?>
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">

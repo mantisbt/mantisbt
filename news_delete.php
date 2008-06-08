@@ -27,8 +27,6 @@
 
 	require_once( $t_core_path.'news_api.php' );
 
-	helper_ensure_post();
-
 	$f_news_id = gpc_get_int( 'news_id' );
 
 	$row = news_get_row( $f_news_id );
@@ -40,6 +38,8 @@
 
 	helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ),
 							 lang_get( 'delete_news_item_button' ) );
+
+	form_security_validate( 'news_delete' );
 
 	news_delete( $f_news_id );
 

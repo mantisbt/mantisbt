@@ -35,7 +35,8 @@
 
 	# If deleting item redirect to delete script
 	if ( 'delete' == $f_action ) {
-		print_header_redirect( 'news_delete.php?news_id='.$f_news_id );
+		require_once( 'news_delete.php' );
+		exit;
 	}
 
 	# Retrieve news item data and prefix with v_
@@ -56,6 +57,7 @@
 <br />
 <div align="center">
 <form method="post" action="news_update.php">
+<?php echo form_security_field( 'news_update' ); ?>
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
