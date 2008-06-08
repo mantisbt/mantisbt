@@ -28,8 +28,6 @@
 	require_once( $t_core_path . 'bug_api.php' );
 	require_once( $t_core_path . 'bug_group_action_api.php' );
 
-	helper_ensure_post();
-
 	auth_ensure_user_authenticated();
 
 	helper_begin_long_process();
@@ -38,6 +36,9 @@
 	$f_bug_arr	= gpc_get_int_array( 'bug_arr', array() );
 
 	$t_action_include_file = 'bug_actiongroup_' . $f_action . '_inc.php';
+	$t_form_name = 'bug_actiongroup_' . $f_action;
+
+	form_security_validate( $t_form_name );
 
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $t_action_include_file );
 

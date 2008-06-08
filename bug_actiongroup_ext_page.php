@@ -44,6 +44,7 @@
 
 	$t_external_action = strtolower( substr( $f_action, strlen( $t_external_action_prefix ) ) );
 	$t_form_fields_page = 'bug_actiongroup_' . $t_external_action . '_inc.php';
+	$t_form_name = 'bug_actiongroup_' . $t_external_action;
 
 	bug_group_action_print_top();
 ?>
@@ -52,6 +53,7 @@
 
 	<div align="center">
 	<form method="post" action="bug_actiongroup_ext.php">
+<?php echo form_security_field( $t_form_name ); ?>
 		<input type="hidden" name="action" value="<?php echo string_attribute( $t_external_action ) ?>" />
 <table class="width75" cellspacing="1">
 	<?php
