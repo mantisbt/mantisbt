@@ -817,7 +817,6 @@
 	/**
 	 * allows bug deletion :
 	 * delete the bug, bugtext, bugnote, and bugtexts selected
-	 * used in bug_delete.php & mass treatments
 	 * @param array p_bug_id integer representing bug id
 	 * @return bool (always true)
 	 * @access public
