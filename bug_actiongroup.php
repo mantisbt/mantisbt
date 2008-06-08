@@ -29,8 +29,6 @@
 
 	require_once( $t_core_path.'bug_api.php' );
 
-	helper_ensure_post();
-
 	auth_ensure_user_authenticated();
 	helper_begin_long_process();
 
