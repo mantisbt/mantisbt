@@ -93,6 +93,7 @@
 <?php } ?>
 <div align="center">
 <form method="post" action="account_update.php">
+<?php  echo form_security_field( 'account_update' )?>
 <table class="width75" cellspacing="1">
 
 	<!-- Headings -->

@@ -31,7 +31,7 @@
 
 	require_once( $t_core_path.'email_api.php' );
 
-	helper_ensure_post();
+	form_security_validate('account_update');
 
 	auth_ensure_user_authenticated();
 
