@@ -1176,11 +1176,13 @@
 		$c_field_id = (integer)$p_field_id;
 		$t_project_ids = custom_field_get_project_ids( $p_field_id );
 
+		$t_security_token = form_security_param( 'manage_proj_custom_field_remove' );
+
 		foreach ( $t_project_ids as $t_project_id ) {
 			$t_project_name = project_get_field( $t_project_id, 'name' );
 			$t_sequence = custom_field_get_sequence( $p_field_id, $t_project_id );
 			echo '<b>', $t_project_name, '</b>: ';
-			print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$c_field_id&amp;project_id=$t_project_id&amp;return=custom_field", lang_get( 'remove_link' ) );
+			print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$c_field_id&amp;project_id=$t_project_id&amp;return=custom_field$t_security_token", lang_get( 'remove_link' ) );
 			echo '<br />- ';
 			
 			$t_linked_field_ids = custom_field_get_linked_ids( $t_project_id );
