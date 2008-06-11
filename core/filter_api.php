@@ -31,9 +31,11 @@
 	require_once( $t_core_dir . 'tag_api.php' );
     require_once( $g_absolute_path . 'config_filter_defaults_inc.php' );
 
-	# Checks the supplied value to see if it is an ANY value.
-	# $p_field_value - The value to check.
-	# Returns true for "ANY" values and false for others.  "ANY" means filter criteria not active.
+	/**
+	 *  Checks the supplied value to see if it is an ANY value.
+	 *  @param string $p_field_value - The value to check.
+	 *  @return bool true for "ANY" values and false for others.  "ANY" means filter criteria not active.
+	 */
 	function filter_str_field_is_any( $p_field_value ) {
 		if ( is_array( $p_field_value ) ) {
 			if ( count( $p_field_value ) == 0 ) {
@@ -62,10 +64,13 @@
 		return false;
 	}
 
-	# Encodes a field and it's value for the filter URL.  This handles the URL encoding
-	# and arrays.
-	# $p_field_name - The field name.
-	# $p_field_value - The field value (can be an array)
+	/**
+	 *  Encodes a field and it's value for the filter URL.  This handles the URL encoding
+	 *  and arrays.
+	 *  @param string $p_field_name The field name.
+	 *  @param string $p_field_value The field value (can be an array)
+	 *  @return string url encoded string
+	 */
 	function filter_encode_field_and_value( $p_field_name, $p_field_value ) {
 		$t_query_array = array();		
 		if ( is_array( $p_field_value ) ) {
@@ -84,10 +89,13 @@
 		return implode( $t_query_array, '&amp;' );
 	}
 
-	# Get a permalink for the current active filter.  The results of using these fields by other users
-	# can be inconsistent with the original results due to fields like "Myself", "Current Project",
-	# and due to access level.
-	# Returns the search.php?xxxx or an empty string if no criteria applied. 
+	/**
+	 *  Get a permalink for the current active filter.  The results of using these fields by other users
+	 *  can be inconsistent with the original results due to fields like "Myself", "Current Project",
+	 *  and due to access level.
+	 *  @param array $p_custom_filter
+	 *  @return string the search.php?xxxx or an empty string if no criteria applied.
+	 */
 	function filter_get_url( $p_custom_filter ) {
 		$t_query = array();
 
@@ -274,9 +282,12 @@
 	# Filter API
 	###########################################################################
 
-	# Get the standard filter that is to be used when no filter was previously saved.
-	# When creating specific filters, this can be used as a basis for the filter, where
-	# specific entries can be overridden.
+	/**
+	 *  Get the standard filter that is to be used when no filter was previously saved.
+	 *  When creating specific filters, this can be used as a basis for the filter, where
+	 *  specific entries can be overridden.
+	 *  @return mixed
+	 */
 	function filter_get_default() {
 		$t_hide_status_default  = config_get( 'hide_status_default' );
 		$t_default_show_changed = config_get( 'default_show_changed' );
@@ -302,32 +313,24 @@
 		return filter_ensure_valid_filter( $t_filter );
 	}
 
-	# @@@ Had to make all these parameters required because we can't use
-	#  call-time pass by reference anymore.  I really preferred not having
-	#  to pass all the params in if you didn't want to, but I wanted to get
-	#  rid of the errors for now.  If we can think of a better way later
-	#  (maybe return an object) that would be great.
-	#
-	# $p_page_numer
-	#   - the page you want to see (set to the actual page on return)
-	# $p_per_page
-	#   - the number of bugs to see per page (set to actual on return)
-	#     -1   indicates you want to see all bugs
-	#     null indicates you want to use the value specified in the filter
-	# $p_page_count
-	#   - you don't need to give a value here, the number of pages will be
-	#     stored here on return
-	# $p_bug_count
-	#   - you don't need to give a value here, the number of bugs will be
-	#     stored here on return
-	# $p_custom_filter
-	#   - Filter to use.
-	# $p_project_id
-	#   - project id to use in filtering.
-	# $p_user_id
-	#   - user id to use as current user when filtering.
-	# $p_show_sticky
-	#	- get sticky issues only.
+	/**
+	 * @@@ Had to make all these parameters required because we can't use
+	 *  call-time pass by reference anymore.  I really preferred not having
+	 *  to pass all the params in if you didn't want to, but I wanted to get
+	 *  rid of the errors for now.  If we can think of a better way later
+	 *  (maybe return an object) that would be great.
+	 *
+	 *  @param int $p_page_number the page you want to see (set to the actual page on return)
+	 *  @param int $p_per_page the number of bugs to see per page (set to actual on return)
+	 *      -1   indicates you want to see all bugs
+	 *      null indicates you want to use the value specified in the filter
+	 *  @param int $p_page_count you don't need to give a value here, the number of pages will be stored here on return
+	 *  @param int $p_bug_count you don't need to give a value here, the number of bugs will be stored here on return
+	 *  @param mixed $p_custom_filter Filter to use.
+	 *  @param int $p_project_id project id to use in filtering.
+	 *  @param int $p_user_id user id to use as current user when filtering.
+	 *  @param bool $p_show_sticky get sticky issues only.
+	 */
 	function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $p_custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
 		log_event( LOG_FILTERING, 'FILTERING: START NEW FILTER QUERY' );
 
@@ -1548,9 +1551,10 @@
 		return $t_rows;
 	}
 
-	# --------------------
-	# return true if the filter cookie exists and is of the correct version,
-	#  false otherwise
+	/**
+	 *  Check if the filter cookie exists and is of the correct version.
+	 *  @return bool
+	 */
 	function filter_is_cookie_valid() {
 		$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
 		$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
@@ -1584,8 +1588,12 @@
 		return true;
 	}
 
-	# --------------------
-	# return filter array if supplied serialized filter is valid, otherwise false.otherwise
+	/**
+	 *  Deserialize filter string
+	 *  @param string $p_serialized_filter
+	 *  @return mixed $t_filter array
+	 *  @see filter_ensure_valid_filter
+	 */
 	function filter_deserialize( $p_serialized_filter ) {
 		if ( is_blank( $p_serialized_filter ) ) {
 			return false;
@@ -1617,11 +1625,14 @@
 		return $t_filter_array;
 	}
 
-	# --------------------
-	# Mainly based on filter_draw_selection_area2() but adds the support for the collapsible
-	# filter display.
-	function filter_draw_selection_area( $p_page_number, $p_for_screen = true )
-	{
+	/**
+	 *  Mainly based on filter_draw_selection_area2() but adds the support for the collapsible
+	 *  filter display.
+	 *  @param int $p_page_number
+	 *  @param bool $p_for_screen
+	 *  @see filter_draw_selection_area2
+	 */
+	function filter_draw_selection_area( $p_page_number, $p_for_screen = true ) {
 		collapse_open( 'filter' );
 		filter_draw_selection_area2( $p_page_number, $p_for_screen, true );
 		collapse_closed( 'filter' );
@@ -1629,12 +1640,15 @@
 		collapse_end( 'filter' );
 	}
 
-	# --------------------
-	# Will print the filter selection area for both the bug list view screen, as well
-	# as the bug list print screen. This function was an attempt to make it easier to
-	# add new filters and rearrange them on screen for both pages.
-	function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_expanded = true )
-	{
+	/**
+	 *  Prints the filter selection area for both the bug list view screen and
+	 *  the bug list print screen. This function was an attempt to make it easier to
+	 *  add new filters and rearrange them on screen for both pages.
+	 *  @param int $p_page_number
+	 *  @param bool $p_for_screen
+	 *  @param bool $p_expanded
+	 */
+	function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_expanded = true ) {
 		$t_form_name_suffix = $p_expanded ? '_open' : '_closed';
 
 		$t_filter = current_user_get_bug_filter();
@@ -2902,9 +2916,15 @@
 <?php
 	}
 
-	# Add a filter to the database for the current user
-	function filter_db_set_for_current_user( $p_project_id, $p_is_public,
-										$p_name, $p_filter_string ) {
+	/**
+	 *  Add a filter to the database for the current user
+	 *  @param int $p_project_id
+	 *  @param bool $p_is_public
+	 *  @param string $p_name
+	 *  @param string $p_filter_string
+	 *  @return int
+	 */
+	function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $p_filter_string ) {
 		$t_user_id = auth_get_current_user_id();
 		$c_project_id = db_prepare_int( $p_project_id );
 		$c_is_public = db_prepare_bool( $p_is_public, false );
@@ -2967,10 +2987,15 @@
 	# We cache filter requests to reduce the number of SQL queries
 	$g_cache_filter_db_filters = array();
 
-	# This function will return the filter string that is
-	# tied to the unique id parameter. If the user doesn't
-	# have permission to see this filter, the function will
-	# return null
+	/**
+	 *  This function returns the filter string that is
+	 *  tied to the unique id parameter. If the user doesn't
+	 *  have permission to see this filter, the function
+	 *  returns null
+	 *  @param int $p_filter_id
+	 *  @param int $p_user_id
+	 *  @return mixed
+	 */
 	function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 		global $g_cache_filter_db_filters;
 		$t_filters_table = db_get_table( 'mantis_filters_table' );
@@ -3015,6 +3040,11 @@
 		}		
 	}
 
+	/**
+	 *  @param int $p_project_id
+	 *  @param int $p_user_id
+	 *  @return int
+	 */
 	function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 		$t_filters_table = db_get_table( 'mantis_filters_table' );
 		$c_project_id 	= db_prepare_int( $p_project_id );
@@ -3042,6 +3072,11 @@
 		return null;
 	}
 
+	/**
+	 *  Query for the filter name using the filter id
+	 *  @param int $p_filter_id
+	 *  @return string
+	 */
 	function filter_db_get_name( $p_filter_id ) {
 		$t_filters_table = db_get_table( 'mantis_filters_table' );
 		$c_filter_id = db_prepare_int( $p_filter_id );
@@ -3066,7 +3101,11 @@
 		return null;
 	}
 
-	# Will return true if the user can delete this query
+	/**
+	 *  Check if the current user has permissions to delete the stored query
+	 *  @param $p_filter_id
+	 *  @return bool
+	 */
 	function filter_db_can_delete_filter( $p_filter_id ) {
 		$t_filters_table = db_get_table( 'mantis_filters_table' );
 		$c_filter_id = db_prepare_int( $p_filter_id );
@@ -3092,6 +3131,11 @@
 		return false;
 	}
 
+	/**
+	 *  Delete the filter specified by $p_filter_id
+	 *  @param $p_filter_id
+	 *  @return bool
+	 */
 	function filter_db_delete_filter( $p_filter_id ) {
 		$t_filters_table = db_get_table( 'mantis_filters_table' );
 		$c_filter_id = db_prepare_int( $p_filter_id );
@@ -3112,6 +3156,9 @@
 		return false;
 	}
 
+	/**
+	 *  Delete all the unnamed filters
+	 */
 	function filter_db_delete_current_filters( ) {
 		$t_filters_table = db_get_table( 'mantis_filters_table' );
 		$t_all_id = ALL_PROJECTS;
@@ -3122,6 +3169,11 @@
 		$result = db_query_bound( $query, Array( $t_all_id, '' ) );
 	}
 
+	/**
+	 *  @param int $p_project_id
+	 *  @param int $p_user_id
+	 *  @return mixed
+	 */
 	function filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
 		$t_filters_table = db_get_table( 'mantis_filters_table' );
 		$t_overall_query_arr = array();
@@ -3167,8 +3219,13 @@
 		return $t_overall_query_arr;
 	}
 
-	# Make sure that our filters are entirely correct and complete (it is possible that they are not).
-	# We need to do this to cover cases where we don't have complete control over the filters given.
+	/**
+	 *  Make sure that our filters are entirely correct and complete (it is possible that they are not).
+	 *  We need to do this to cover cases where we don't have complete control over the filters given.s
+	 *  @param array $p_filter_arr
+	 *  @return mixed
+	 *  @todo function needs to be abstracted
+	 */
 	function filter_ensure_valid_filter( $p_filter_arr ) {
 		# extend current filter to add information passed via POST
 		if ( !isset( $p_filter_arr['_version'] ) ) {
@@ -3391,23 +3448,25 @@
 
 
 	/**
-	 * The following functions each print out an individual filter field.
-	 * They are derived from view_filters_page.php
+ 	 * @internal The following functions each print out filter field inputs.
+	 *      They are derived from view_filters_page.php
+	 *      The functions follow a strict naming convention:
 	 *
-	 * The functions follow a strict naming convention:
+	 *			print_filter_[filter_name]
 	 *
-	 *   print_filter_[filter_name]
-	 *
-	 * Where [filter_name] is the same as the "name" of the form element for
-	 * that filter. This naming convention is depended upon by the controller
-	 * at the end of the script.
+	 *      Where [filter_name] is the same as the "name" of the form element for
+	 *      that filter. This naming convention is depended upon by the controller
+	 *      at the end of the script.
+	 *    
+	 *  @todo print functions should be abstracted.  Many of these functions
+	 *      are virtually identical except for the property name.
+	 *      Perhaps this code could be made simpler by refactoring into a
+	 *      class so as to avoid all those calls to global(which are pretty ugly)
+	 *      These functions could also be shared by view_filters_page.php
 	 */
+
 	/**
-	 * I expect that this code could be made simpler by refactoring into a
-	 * class so as to avoid all those calls to global(which are pretty ugly)
-	 *
-	 * These functions could also be shared by view_filters_page.php
-	 *
+	 *  Print the reporter field
 	 */
 	function print_filter_reporter_id(){
 		global $t_select_modifier, $t_filter;
@@ -3443,7 +3502,9 @@
 		<?php
 	}
 
-
+	/**
+	 *  Print the user monitor field
+	 */
 	function print_filter_user_monitor(){
 		global $t_select_modifier, $t_filter;
 		?>
@@ -3467,6 +3528,9 @@
 		<?php
 	}
 
+	/**
+	 *  print the handler field
+	 */
 	function print_filter_handler_id(){
 		global $t_select_modifier, $t_filter, $f_view_type;
 		?>
@@ -3488,6 +3552,9 @@
 		<?php
 	}
 
+	/**
+	 *  print the category field
+	 */
 	function print_filter_show_category(){
 		global $t_select_modifier, $t_filter;
 		?>
@@ -3498,7 +3565,10 @@
 		</select>
 		<?php
 	}
-	
+
+	/**
+	 *  print the platform field
+	 */
 	function print_filter_platform() {
 		global $t_select_modifier, $t_filter;
 
@@ -3514,6 +3584,9 @@
 		<?php
 	}
 
+	/**
+	 *  print the os field
+	 */
 	function print_filter_os() {
 		global $t_select_modifier, $t_filter;
 
@@ -3526,6 +3599,9 @@
 		<?php
 	}
 
+	/**
+	 *  print the os build field
+	 */
 	function print_filter_os_build() {
 		global $t_select_modifier, $t_filter;
 
@@ -3538,6 +3614,9 @@
 		<?php
 	}
 
+	/**
+	 *  print the severity field
+	 */
 	function print_filter_show_severity(){
 		global $t_select_modifier, $t_filter;
 		?><!-- Severity -->
@@ -3548,6 +3627,9 @@
 		<?php
 	}
 
+	/**
+	 *  print resolution field
+	 */
 	function print_filter_show_resolution(){
 		global $t_select_modifier, $t_filter;
 		?><!-- Resolution -->
@@ -3558,6 +3640,9 @@
 		<?php
 	}
 
+	/**
+	 *  print status field
+	 */
 	function print_filter_show_status(){
 		global $t_select_modifier, $t_filter;
 		?>	<!-- Status -->
@@ -3568,6 +3653,9 @@
 		<?php
 	}
 
+	/**
+	 *  print hide status field
+	 */
 	function print_filter_hide_status(){
 		global $t_select_modifier, $t_filter;
 		?><!-- Hide Status -->
@@ -3578,6 +3666,9 @@
 		<?php
 	}
 
+	/**
+	 *  print build field
+	 */
 	function print_filter_show_build(){
 		global $t_select_modifier, $t_filter;
 		?><!-- Build -->
@@ -3589,6 +3680,9 @@
 		<?php
 	}
 
+	/**
+	 *  print version field
+	 */
 	function print_filter_show_version(){
 		global $t_select_modifier, $t_filter;
 		?><!-- Version -->
@@ -3600,6 +3694,9 @@
 		<?php
 	}
 
+	/**
+	 * print fixed in version field
+	 */
 	function print_filter_show_fixed_in_version(){
 		global $t_select_modifier, $t_filter;
 		?><!-- Fixed in Version -->
@@ -3611,6 +3708,9 @@
 		<?php
 	}
 
+	/**
+	 *  print target version field
+	 */
 	function print_filter_show_target_version(){
 		global $t_select_modifier, $t_filter;
 		?><!-- Fixed in Version -->
@@ -3622,6 +3722,9 @@
 		<?php
 	}
 
+	/**
+	 *  print priority field
+	 */
 	function print_filter_show_priority(){
 		global $t_select_modifier, $t_filter;
 		?><!-- Priority -->
@@ -3632,6 +3735,9 @@
 		<?php
 	}
 
+	/**
+	 *  print profile field
+	 */
 	function print_filter_show_profile() {
 		global $t_select_modifier, $t_filter;
 		?><!-- Profile -->
@@ -3642,6 +3748,9 @@
 		<?php
 	}
 
+	/**
+	 *  print issues per page field
+	 */
 	function print_filter_per_page(){
 		global $t_filter;
 		?><!-- Number of bugs per page -->
@@ -3649,6 +3758,9 @@
 		<?php
 	}
 
+	/**
+	 *  print view state field
+	 */
 	function print_filter_view_state(){
 		global $t_select_modifier, $t_filter;
 		?><!-- View Status -->
@@ -3668,6 +3780,9 @@
 		<?php
 	}
 
+	/**
+	 *  print sticky issues field
+	 */
 	function print_filter_sticky_issues(){
 		global $t_filter;
 		?><!-- Show or hide sticky bugs -->
@@ -3675,6 +3790,9 @@
 		<?php
 	}
 
+	/**
+	 *  print highlight changed field
+	 */
 	function print_filter_highlight_changed(){
 		global $t_filter;
 		?><!-- Highlight changed bugs -->
@@ -3682,6 +3800,11 @@
 		<?php
 	}
 
+	/**
+	 *  print filter by date fields with javascript
+	 *  @todo Javascript should be removed and added dynamically
+	 *      via external script
+	 */
 	function print_filter_do_filter_by_date( $p_hide_checkbox=false ){
 		global $t_filter;
 		?>
@@ -3759,6 +3882,9 @@
 		<?php
 	}
 
+	/**
+	 *  print relationship fields
+	 */
 	function print_filter_relationship_type(){
 		global $t_filter;
 		$c_reltype_value = $t_filter['relationship_type'];
@@ -3771,6 +3897,9 @@
 
 	}
 
+	/**
+	 *  print tag fields
+	 */
 	function print_filter_tag_string() {
 		global $t_filter;
 		$t_tag_string = $t_filter['tag_string'];
@@ -3787,6 +3916,9 @@
 		<?php
 	}
 
+	/**
+	 *  print note reporter field
+	 */
 	function print_filter_note_user_id(){
         global $t_select_modifier, $t_filter, $f_view_type;
         ?>
@@ -3808,6 +3940,10 @@
         <?php
     }
 
+	/**
+	 *  print custom fields
+	 *  @param int $p_field_id
+	 */
 	function print_filter_custom_field($p_field_id){
 		global $t_filter, $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids, $t_select_modifier;
 
@@ -3848,6 +3984,9 @@
 
 	}
 
+	/**
+	 *  print sort fields
+	 */
 	function print_filter_show_sort() {
 		global $t_filter;
 
@@ -3921,8 +4060,11 @@
 		}
 	}
 
-
-
+	/**
+	 *  print custom field date fields
+	 *  @param int $p_field_num
+	 *  @param int $p_field_id
+	 */
 	function print_filter_custom_field_date($p_field_num, $p_field_id) {
 		global $t_filter, $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids, $t_select_modifier;
 
@@ -4031,6 +4173,9 @@
 		print "</td></tr>\n</table>";
 	}
 
+	/**
+	 *  print project field
+	 */
 	function print_filter_project_id(){
 		global $t_select_modifier, $t_filter, $f_view_type;
 		?>
@@ -4041,10 +4186,12 @@
 		</select>
 		<?php
 	}
-	
-	# Prints a multi-value filter field.  For example, platform, etc.
-	# $p_field_name - The name of the field, e.g. "platform"
-	# $p_field_value - an array of values.
+
+	/**
+	 *  Prints a multi-value filter field.
+	 *  @param  string $p_field_name
+	 *  @param mixed $p_field_value
+	 */	
 	function print_multivalue_field( $p_field_name, $p_field_value ) {
 		$t_output = '';
 		$t_any_found = false;
@@ -4087,21 +4234,25 @@
 		}
 	}
 
-	#===================================
-	# Caching
-	#===================================
-
-	#########################################
-	# SECURITY NOTE: cache globals are initialized here to prevent them
-	#   being spoofed if register_globals is turned on
-
+	#==========================================================================
+	# CACHING
+	#==========================================================================
+	/**
+	 *  @internal SECURITY NOTE: cache globals are initialized here to prevent them
+	 *      being spoofed if register_globals is turned on
+	 *  @global mixed $g_cache_filter
+	 */
 	$g_cache_filter = array();
 
-	# --------------------
-	# Cache a filter row if necessary and return the cached copy
-	# If the second parameter is true (default), trigger an error
-	# if the filter can't be found.  If the second parameter is
-	# false, return false if the filter can't be found.
+	/**
+	 *  Cache a filter row if necessary and return the cached copy
+	 *  If the second parameter is true (default), trigger an error
+	 *  if the filter can't be found.  If the second parameter is
+	 *  false, return false if the filter can't be found.
+	 *  @param int $p_filter_id
+	 *  @param bool $p_trigger_errors
+	 *  @return mixed
+	 */
 	function filter_cache_row( $p_filter_id, $p_trigger_errors=true) {
 		global $g_cache_filter;
 
@@ -4134,8 +4285,11 @@
 		return $row;
 	}
 
-	# --------------------
-	# Clear the filter cache (or just the given id if specified)
+	/**
+	 *  Clear the filter cache (or just the given id if specified)
+	 *  @param int $p_filter_id
+	 *  @return bool
+	 */
 	function filter_clear_cache( $p_filter_id = null ) {
 		global $g_cache_filter;
 
@@ -4149,13 +4303,22 @@
 		return true;
 	}
 
-	# --------------------
-	# return a filter row
+	/**
+	 *  Get the array fields specified by $p_filter_id
+	 *  using the cached row if it's available
+	 *  @param int $p_filter_id
+	 *  @return mixed a filter row
+	 */
 	function filter_get_row( $p_filter_id ) {
 		return filter_cache_row( $p_filter_id );
 	}
 
-	# --------------------
+	/**
+	 *  Get the value of the filter field specified by filter id and field name
+	 *  @param int $p_filter_id
+	 *  @param string $p_field_name
+	 *  @return string
+	 */
 	function filter_get_field( $p_filter_id, $p_field_name ) {
 		$row = filter_get_row( $p_filter_id );
 
@@ -4168,10 +4331,13 @@
 		}
 	}
 	
-	# --------------------
-	# Checks if a filter value is "any".  Supports both single value as well as multiple value
-	# fields (array).
-	# $p_filter_value - The value which can be a simple value or an array.
+	/**
+	 *	Checks if a filter value is "any".  Supports both single value as well as multiple value
+	 *	fields (array).
+	 *	@param mixed $p_filter_value - The value which can be a simple value or an array.
+	 *	@return bool
+	 *	@todo remove this function and merge with filter_str_field_is_any
+	 */
 	function _filter_is_any( $p_filter_value ) {
 		if ( ( META_FILTER_ANY == $p_filter_value ) && is_numeric( $p_filter_value ) ) {
 			return true;
