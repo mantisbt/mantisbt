@@ -290,6 +290,41 @@
 	}
 
 	/**
+     *  Checks the supplied value to see if it is a NONE value.
+     *  @param string $p_field_value - The value to check.
+     *  @return bool true for "NONE" values and false for others.
+	 *	@todo is a check for these necessary?  if ( ( $t_filter_value === 'none' ) || ( $t_filter_value === '[none]' ) ) {
+     */
+    function filter_field_is_none( $p_field_value ) {
+        if ( is_array( $p_field_value ) ) {
+            foreach( $p_field_value as $t_value ) {
+                if ( ( META_FILTER_NONE == $t_value ) && ( is_numeric( $t_value ) ) ) {
+                    return true;
+                }
+            }
+        } else {
+            if ( is_string( $p_field_value ) && is_blank( $p_field_value ) ) {
+                return false;
+            }
+
+            if ( ( META_FILTER_NONE == $p_field_value ) && ( is_numeric( $p_field_value ) ) ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     *  Checks the supplied value to see if it is a MYSELF value.
+     *  @param string $p_field_value - The value to check.
+     *  @return bool true for "MYSELF" values and false for others.
+     */
+    function filter_field_is_myself( $p_field_value ) {
+        return ( META_FILTER_MYSELF == $p_field_value ? TRUE : FALSE );
+    }
+
+	/**
 	 *  Make sure that our filters are entirely correct and complete (it is possible that they are not).
 	 *  We need to do this to cover cases where we don't have complete control over the filters given.s
 	 *  @param array $p_filter_arr
@@ -870,11 +905,11 @@
 			$t_clauses = array();
 
 			foreach( $t_filter['reporter_id'] as $t_filter_member ) {
-				if ( META_FILTER_NONE == $t_filter_member ) {
+				if ( filter_field_is_none( $t_filter_member ) ) {
 					array_push( $t_clauses, "0" );
 				} else {
 					$c_reporter_id = db_prepare_int( $t_filter_member );
-					if ( META_FILTER_MYSELF == $c_reporter_id ) {
+					if ( filter_field_is_myself( $c_reporter_id ) ) {
 						array_push( $t_clauses, $c_user_id );
 					} else {
 						array_push( $t_clauses, $c_reporter_id );
@@ -909,11 +944,11 @@
 			$t_clauses = array();
 
 			foreach( $t_filter['handler_id'] as $t_filter_member ) {
-				if ( META_FILTER_NONE == $t_filter_member ) {
+				if ( filter_field_is_none( $t_filter_member ) ) {
 					array_push( $t_clauses, 0 );
 				} else {
 					$c_handler_id = db_prepare_int( $t_filter_member );
-					if ( META_FILTER_MYSELF == $c_handler_id ) {
+					if ( filter_field_is_myself( $c_handler_id ) ) {
 						array_push( $t_clauses, $c_user_id );
 					} else {
 						array_push( $t_clauses, $c_handler_id );
@@ -938,7 +973,7 @@
 			$t_clauses = array();
 
 			foreach( $t_filter['show_category'] as $t_filter_member ) {
-				if ( META_FILTER_NONE == $t_filter_member ) {
+				if ( filter_field_is_none( $t_filter_member ) ) {
 				} else {
 					array_push( $t_clauses, $t_filter_member );
 				}
@@ -1084,7 +1119,7 @@
 
 			foreach( $t_filter['show_build'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
-				if ( META_FILTER_NONE == $t_filter_member ) {
+				if ( filter_field_is_none( $t_filter_member ) ) {
 					array_push( $t_clauses, '' );
 				} else {
 					$c_show_build = db_prepare_string( $t_filter_member );
@@ -1110,7 +1145,7 @@
 
 			foreach( $t_filter['show_version'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
-				if ( META_FILTER_NONE == $t_filter_member ) {
+				if ( filter_field_is_none( $t_filter_member ) ) {
 					array_push( $t_clauses, '' );
 				} else {
 					$c_show_version = db_prepare_string( $t_filter_member );
@@ -1137,7 +1172,7 @@
 
 			foreach( $t_filter['show_profile'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
-				if ( META_FILTER_NONE == $t_filter_member ) {
+				if ( filter_field_is_none( $t_filter_member ) ) {
 					array_push( $t_clauses, "0" );
 				} else {
 					$c_show_profile = db_prepare_int( $t_filter_member );
@@ -1163,7 +1198,7 @@
 
 			foreach( $t_filter['platform'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
-				if ( META_FILTER_NONE == $t_filter_member ) {
+				if ( filter_field_is_none( $t_filter_member ) ) {
 					array_push( $t_clauses, '' );
 				} else {
 					$c_platform = db_prepare_string( $t_filter_member );
@@ -1190,7 +1225,7 @@
 
 			foreach( $t_filter['os'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
-				if ( META_FILTER_NONE == $t_filter_member ) {
+				if ( filter_field_is_none( $t_filter_member ) ) {
 					array_push( $t_clauses, '' );
 				} else {
 					$c_os = db_prepare_string( $t_filter_member );
@@ -1217,7 +1252,7 @@
 
 			foreach( $t_filter['os_build'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
-				if ( META_FILTER_NONE == $t_filter_member ) {
+				if ( filter_field_is_none( $t_filter_member ) ) {
 					array_push( $t_clauses, '' );
 				} else {
 					$c_os_build = db_prepare_string( $t_filter_member );
@@ -1262,7 +1297,7 @@
 
 			foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
-				if ( META_FILTER_NONE == $t_filter_member ) {
+				if ( filter_field_is_none( $t_filter_member ) ) {
 					array_push( $t_clauses, '' );
 				} else {
 					$c_fixed_in_version = db_prepare_string( $t_filter_member );
@@ -1288,7 +1323,7 @@
 
 			foreach( $t_filter['target_version'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
-				if ( META_FILTER_NONE == $t_filter_member ) {
+				if ( filter_field_is_none( $t_filter_member ) ) {
 					array_push( $t_clauses, '' );
 				} else {
 					$c_target_version = db_prepare_string( $t_filter_member );
@@ -1318,7 +1353,7 @@
 
 			foreach( $t_filter['user_monitor'] as $t_filter_member ) {
 				$c_user_monitor = db_prepare_int( $t_filter_member );
-				if ( META_FILTER_MYSELF == $c_user_monitor ) {
+				if ( filter_field_is_myself( $c_user_monitor ) ) {
 					array_push( $t_clauses, $c_user_id );
 				} else {
 					array_push( $t_clauses, $c_user_monitor );
@@ -1427,7 +1462,7 @@
 
             foreach( $t_filter['note_user_id'] as $t_filter_member ) {
                 $c_note_user_id = db_prepare_int( $t_filter_member );
-                if ( META_FILTER_MYSELF == $c_note_user_id ) {
+                if ( filter_field_is_myself( $c_note_user_id ) ) {
                     array_push( $t_clauses, $c_user_id );
                 } else {
                     array_push( $t_clauses, $c_note_user_id );
@@ -1499,7 +1534,7 @@
 						$t_filter_array = array();
 						foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
 							$t_filter_member = stripslashes( $t_filter_member );
-							if ( META_FILTER_NONE == $t_filter_member ) { 
+							if ( filter_field_is_none( $t_filter_member ) ) {
 								# coerce filter value if selecting META_FILTER_NONE so it will match empty fields
 								$t_filter_member = '';
 								# but also add those _not_ present in the custom field string table
@@ -1944,13 +1979,13 @@
 										<?php
 										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
-										} else if ( META_FILTER_MYSELF == $t_current ) {
+										} else if ( filter_field_is_myself( $t_current ) ) {
 											if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
 												$t_this_name = '[' . lang_get( 'myself' ) . ']';
 											} else {
 												$t_any_found = true;
 											}
-										} else if ( META_FILTER_NONE == $t_current ) {
+										} else if ( filter_field_is_none( $t_current ) ) {
 											$t_this_name = lang_get( 'none' );
 										} else {
 											$t_this_name = user_get_name( $t_current );
@@ -1985,7 +2020,7 @@
 										$t_this_name = '';
 										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
-										} else if ( META_FILTER_MYSELF == $t_current ) {
+										} else if ( filter_field_is_myself( $t_current ) ) {
 											if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 												$t_this_name = '[' . lang_get( 'myself' ) . ']';
 											} else {
@@ -2022,11 +2057,11 @@
 										<input type="hidden" name="handler_id[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_name = '';
-										if ( META_FILTER_NONE == $t_current ) {
+										if ( filter_field_is_none( $t_current ) ) {
 											$t_this_name = lang_get( 'none' );
 										} else if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
-										} else if ( META_FILTER_MYSELF == $t_current ) {
+										} else if ( filter_field_is_myself( $t_current ) ) {
 											if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
 												$t_this_name = '[' . lang_get( 'myself' ) . ']';
 											} else {
@@ -2275,7 +2310,7 @@
 											<input type="hidden" name="hide_status[]" value="<?php echo $t_current;?>" />
 											<?php
 											$t_this_string = '';
-											if ( ( $t_current == META_FILTER_NONE ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+											if ( filter_field_is_none( $t_current ) ) {
 												$t_none_found = true;
 											} else {
 												$t_this_string = get_enum_element( 'status', $t_current );
@@ -2316,7 +2351,7 @@
 										$t_this_string = '';
 										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
-										} else if ( META_FILTER_NONE == $t_current ) {
+										} else if ( filter_field_is_none( $t_current ) ) {
 											$t_this_string = lang_get( 'none' );
 										} else {
 											$t_this_string = string_display( $t_current );
@@ -2353,7 +2388,7 @@
 										$t_this_string = '';
 										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
-										} else if ( META_FILTER_NONE == $t_current ) {
+										} else if ( filter_field_is_none( $t_current ) ) {
 											$t_this_string = lang_get( 'none' );
 										} else {
 											$t_this_string = string_display( $t_current );
@@ -2389,7 +2424,7 @@
 										$t_this_string = '';
 										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
-										} else if ( META_FILTER_NONE == $t_current ) {
+										} else if ( filter_field_is_none( $t_current ) ) {
 											$t_this_string = lang_get( 'none' );
 										} else {
 											$t_this_string = string_display( $t_current );
@@ -2466,7 +2501,7 @@
 										$t_this_string = '';
 										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
-										} else if ( META_FILTER_NONE == $t_current ) {
+										} else if ( filter_field_is_none( $t_current ) ) {
 											$t_this_string = lang_get( 'none' );
 										} else {
 											$t_this_string = string_display( $t_current );
@@ -2803,7 +2838,7 @@
 								$t_this_string = '';
 								if ( filter_field_is_any( $t_current ) ) {
 									$t_any_found = true;
-								} else if ( ( META_FILTER_NONE == $t_current ) && ( is_numeric( $t_current ) ) ) {
+								} else if ( filter_field_is_none( $t_current ) ) {
 									$t_this_string = lang_get( 'none' );
 								} else {
 									$t_this_string = string_display( $t_current );
@@ -2885,11 +2920,11 @@
                             <input type="hidden" name="note_user_id[]" value="<?php echo $t_current;?>" />
                             <?php
                             $t_this_name = '';
-                            if ( META_FILTER_NONE == $t_current ) {
+							if ( filter_field_is_none( $t_current ) ) {
                                 $t_this_name = lang_get( 'none' );
 							} else if ( filter_field_is_any( $t_current ) ) {
                                 $t_any_found = true;
-                            } else if ( META_FILTER_MYSELF == $t_current ) {
+                            } else if ( filter_field_is_myself( $t_current ) ) {
                                 if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
                                     $t_this_name = '[' . lang_get( 'myself' ) . ']';
                                 } else {
