@@ -21,8 +21,13 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	# This implements temporary storage of strings.
-	# DB schema: id, type, owner, timestamp, value
+    /**
+	 *	This implements temporary storage of strings.
+	 *	DB schema: id, type, owner, timestamp, value
+     *  @package CoreAPI
+     *  @subpackage TokensAPI
+     */
+
 
 	# Set up global for token_purge_expired_once()
 	$g_tokens_purged = false;

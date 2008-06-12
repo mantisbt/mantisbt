@@ -21,7 +21,10 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	### Helper API ###
+    /**
+     *  @package CoreAPI
+     *  @subpackage HelperAPI
+     */
 
 	# These are miscellaneous functions
 

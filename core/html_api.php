@@ -21,44 +21,43 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	###########################################################################
-	# HTML API
-	#
-	# These functions control the display of each page
-	#
-	# This is the call order of these functions, should you need to figure out
-	#  which to modify or which to leave out.
-	#
-	#   html_page_top1
-	#     html_begin
-	#     html_head_begin
-	#     html_css
-	#     html_content_type
-	#     html_rss_link
-	#  (html_meta_redirect)
-	#     html_title
-	#   html_page_top2
-	#     html_page_top2a
-	#       html_head_end
-	#       html_body_begin
-	#       html_header
-	#       html_top_banner
-	#     html_login_info
-	#    (print_project_menu_bar)
-	#     print_menu
-	#
-	#  ...Page content here...
-	#
-	#   html_page_bottom1
-	#    (print_menu)
-	#     html_page_bottom1a
-	#       html_bottom_banner
-	#  	 html_footer
-	#  	 html_body_end
-	#  	 html_end
-	#
-	###########################################################################
-
+	/**
+	 *	@package CoreAPI
+	 *	@subpackage HTMLAPI
+	 *
+	 *	These functions control the display of each page
+	 *
+	 *	This is the call order of these functions, should you need to figure out
+	 *	which to modify or which to leave out.
+	 *
+	 *	html_page_top1
+	 *		html_begin
+	 *		html_head_begin
+	 *		html_css
+	 *		html_content_type
+	 *		html_rss_link
+	 *		(html_meta_redirect)
+	 *		html_title
+	 *	html_page_top2
+	 *		html_page_top2a
+	 *		html_head_end
+	 *		html_body_begin
+	 *		html_header
+	 *		html_top_banner
+	 *		html_login_info
+	 *		(print_project_menu_bar)
+	 *		print_menu
+	 *
+	 *	...Page content here...
+	 *
+	 *	html_page_bottom1
+	 *		(print_menu)
+	 *		html_page_bottom1a
+	 *		html_bottom_banner
+	 *		html_footer
+	 *		html_body_end
+	 *	html_end
+	 */
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'current_user_api.php' );

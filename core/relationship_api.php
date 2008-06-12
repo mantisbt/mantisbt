@@ -64,7 +64,8 @@
 	 * - not copy history, bugnotes, monitoring users
 	 * - set a relationship between parent and child
 	 * 
-	 * @package RelationshipAPI
+	 * @package CoreAPI
+	 * @subpackage RelationshipAPI
 	 * @author Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
 	 */
 

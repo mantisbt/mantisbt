@@ -21,17 +21,19 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	### Timer API ###
+    /**
+	 *	--- BC Timer -------
+	 *	USAGE: set $g_debug_timer to ON and just call mark_time( 'token name' );
+	 *	where 'token name' is descriptive of what is happening at that point
+	 *
+	 *	Normally you would mark_time() before and after a critical section of
+	 *	code that you are timing.  Remember to test more than once since various
+	 *	factors can affect actual runtime.
+	 *	@author Charles Killian, modified by Kenzaburo Ito
+     *  @package CoreAPI
+     *  @subpackage TimerAPI
+     */
 
-	# --- BC Timer -------
-	# Charles Killian, modified by Kenzaburo Ito
-
-	# USAGE: set $g_debug_timer to ON and just call mark_time( 'token name' );
-	# where 'token name' is descriptive of what is happening at that point
-
-	# Normally you would mark_time() before and after a critical section of
-	# code that you are timing.  Remember to test more than once since various
-	# factors can affect actual runtime.
 
 	# --------------------
 	# You should use this function instead of the class function

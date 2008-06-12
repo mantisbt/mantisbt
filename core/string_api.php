@@ -21,12 +21,16 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+     *  @package CoreAPI
+     *  @subpackage StringProcessingAPI
+     */
+
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'user_pref_api.php' );
 
-	### String Processing API ###
 
 	$g_cache_html_valid_tags = '';
 	$g_cache_html_valid_tags_single_line = '';

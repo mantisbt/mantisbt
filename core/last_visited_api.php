@@ -20,6 +20,10 @@
 	# --------------------------------------------------------
 	# $Id$
 	# --------------------------------------------------------
+    /**
+     *  @package CoreAPI
+     *  @subpackage LastVisitedAPI
+     */
 
 	$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 

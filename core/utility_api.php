@@ -21,15 +21,17 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	### Utility API ###
-
-	# Utility functions are *small* functions that are used often and therefore
-	#  have *no* prefix, to keep their names short.
-	#
-	# Utility functions have *no* dependencies on any other APIs, since they are
-	#  included first in order to make them available to all the APIs.
-	#  Miscellaneous functions that provide functionality on top of other APIS
-	#  are found in the helper_api.
+    /**
+	 *	Utility functions are *small* functions that are used often and therefore
+	 *	have *no* prefix, to keep their names short.
+	 *
+	 *	Utility functions have *no* dependencies on any other APIs, since they are
+	 *	included first in order to make them available to all the APIs.
+	 *	Miscellaneous functions that provide functionality on top of other APIS
+	 *	are found in the helper_api.
+     *  @package CoreAPI
+     *  @subpackage UtilityAPI
+     */
 
 	# --------------------
 	# converts a 1 value to X

@@ -21,9 +21,11 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	### PHP Compatibility API ###
-
-	# Functions to help in backwards compatibility of PHP versions, etc.
+    /**
+	 *	Functions to help in backwards compatibility of PHP versions, etc.
+     *  @package CoreAPI
+     *  @subpackage PHPCompatibilityAPI
+     */
 
 	# Constant for our minimum required PHP version
 	define( 'PHP_MIN_VERSION', '5.1.0' );

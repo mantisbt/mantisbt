@@ -21,7 +21,10 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	### History API ###
+    /**
+     *  @package CoreAPI
+     *  @subpackage HistoryAPI
+     */
 
 	# --------------------
 	# log the changes (old / new value are supplied to reduce db access)

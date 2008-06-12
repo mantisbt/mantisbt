@@ -21,6 +21,12 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+	 *	this file handles printing functions
+     *  @package CoreAPI
+     *  @subpackage PrintAPI
+     */
+
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'ajax_api.php' );
@@ -31,9 +37,6 @@
 	require_once( $t_core_dir . 'last_visited_api.php' );
 	require_once( $t_core_dir . 'file_api.php' );
 
-	### Print API ###
-
-	# this file handles printing functions
 
 	# --------------------
 	# Print the headers to cause the page to redirect to $p_url

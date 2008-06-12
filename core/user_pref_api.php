@@ -21,6 +21,11 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+     *  @package CoreAPI
+     *  @subpackage UserPreferencesAPI
+     */
+
 	### User Preferences API ###
 	$g_default_mapping = array(
 		'default_profile' => 'default_profile',

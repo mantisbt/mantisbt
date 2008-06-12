@@ -27,7 +27,8 @@
 	 * This is the general interface for all database calls. 
 	 * Modifications required for database support, outside of adodb support should occur here.
 	 * 
-	 * @package DatabaseAPI
+	 * @package CoreAPI
+	 * @subpackage DatabaseAPI
 	 * @uses config_api.php
 	 * @uses gpc_api.php
 	 */

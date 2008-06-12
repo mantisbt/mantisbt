@@ -21,6 +21,11 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+     *  @package CoreAPI
+     *  @subpackage GPCAPI
+     */
+
 	### GET, POST, and Cookie API ###
 
 	# ---------------

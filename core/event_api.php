@@ -23,6 +23,8 @@
 /**
  * Event API
  * Handles the event system.
+ *  @package CoreAPI
+ *  @subpackage EventAPI
  *
  * @author John Reese
  */

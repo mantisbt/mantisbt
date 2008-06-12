@@ -20,8 +20,12 @@
 	# --------------------------------------------------------
 	# $Id$
 	# --------------------------------------------------------
-?>
-<?php
+
+	/**
+	 *	@package CoreAPI
+	 *	@subpackage BugGroupActionAPI
+	 */
+
 	/**
 	 * Print the top part for the bug action group page.
 	 */

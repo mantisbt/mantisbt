@@ -21,12 +21,16 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+     *  @package CoreAPI
+     *  @subpackage UserAPI
+     */
+
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'email_api.php' );
 	require_once( $t_core_dir . 'ldap_api.php' );
 
-	### User API ###
 
 	#===================================
 	# Caching

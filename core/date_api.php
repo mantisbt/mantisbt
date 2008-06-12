@@ -21,6 +21,11 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+     *  @package CoreAPI
+     *  @subpackage DateAPI
+     */
+
 	### Date API ###
 	# --------------------
 	# checks if date is null

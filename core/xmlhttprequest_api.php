@@ -21,6 +21,11 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+     *  @package CoreAPI
+     *  @subpackage XMLHttpRequestAPI
+     */
+
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'bug_api.php' );
@@ -28,7 +33,6 @@
 	require_once( $t_core_dir . 'logging_api.php' );
 	require_once( $t_core_dir . 'projax_api.php' );
 
-	### XmlHttpRequest API ###
 
 	function xmlhttprequest_issue_reporter_combobox() {
 		$f_bug_id = gpc_get_int( 'issue_id' );

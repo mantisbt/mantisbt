@@ -17,10 +17,10 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin API
- * Handles the initialisation, management, and execution of plugins.
- *
- * @package PluginAPI
+ *	Plugin API
+ *	Handles the initialisation, management, and execution of plugins.
+ *	@package CoreAPI
+ *	@subpackage PluginAPI
  */
 
 $t_class_path = config_get_global( 'class_path' );

@@ -18,6 +18,8 @@
 
 /**
  * API for simplifying some JSON interactions.
+ *	@package CoreAPI
+ *	@subpackage JSONAPI
  */
 
 /**

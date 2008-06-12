@@ -21,7 +21,12 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	### Language (Internationalization) API ##
+    /**
+	 *	Language (Internationalization) API
+     *  @package CoreAPI
+     *  @subpackage LanguageAPI
+     */
+
 
 	# Cache of localization strings in the language specified by the last
 	# lang_load call

@@ -21,13 +21,15 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+	 *	this file handles preparing of strings like to be printed
+	 *	or stored.  print_api.php will gradually be replaced by
+	 *	think calls to echo the results of functions implemented here.
+     *  @package CoreAPI
+     *  @subpackage PrepareAPI
+     */
+
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-
-	### Prepare API ###
-
-	# this file handles preparing of strings like to be printed
-	# or stored.  print_api.php will gradually be replaced by
-	# think calls to echo the results of functions implemented here.
 
 	# --------------------
 	# return the mailto: href string link

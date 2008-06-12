@@ -22,7 +22,8 @@
  * the API is used.  Calls to session_*() are appropriately directed at the
  * session handler class as chosen in config_inc.php.
  *
- * @package SessionAPI
+ * @package CoreAPI
+ * @subpackage SessionAPI
  */
 
 $g_session = null;

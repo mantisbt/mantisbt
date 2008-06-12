@@ -21,6 +21,10 @@
 	# $Id$
 	# --------------------------------------------------------
 
+	/**
+	 *	@package CoreAPI
+	 *	@subpackage AuthenticationAPI
+	 */
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
 
 	### Authentication API ###

@@ -21,6 +21,12 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+     *  @package CoreAPI
+     *  @subpackage EmailQueueAPI
+     */
+
+
 	class EmailData {
 		// properties set during creation
 		var $email = '';

@@ -21,6 +21,11 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+     *  @package CoreAPI
+     *  @subpackage CategoryAPI
+     */
+
 	### Category API ###
 
 	# Category data cache (to prevent excessive db queries)

@@ -21,6 +21,11 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+     *  @package CoreAPI
+     *  @subpackage ConfigurationAPI
+     */
+
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'error_api.php' );
 
 	# cache for config variables

@@ -21,7 +21,10 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	### Profile API ###
+    /**
+     *  @package CoreAPI
+     *  @subpackage ProfileAPI
+     */
 
 	#===================================
 	# Boolean queries and ensures

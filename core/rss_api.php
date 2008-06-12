@@ -21,7 +21,10 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	### RSS API ###
+    /**
+     *  @package CoreAPI
+     *  @subpackage RSSAPI
+     */
 
 	# --------------------
 	# Calculates a key to be used for RSS authentication based on user name, cookie and password.

@@ -23,7 +23,8 @@
 	/**
 	 * Tag API
 	 *
-	 * @package TagAPI
+	 * @package CoreAPI
+	 * @subpackage TagAPI
 	 * @author John Reese
 	 */
 

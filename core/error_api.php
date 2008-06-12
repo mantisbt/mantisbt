@@ -21,6 +21,11 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+     *  @package CoreAPI
+     *  @subpackage ErrorAPI
+     */
+
 	### Error API ###
 
 	# set up error_handler() as the new default error handling function

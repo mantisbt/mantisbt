@@ -21,7 +21,10 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	### Summary printing API ###
+    /**
+     *  @package CoreAPI
+     *  @subpackage SummaryAPI
+     */
 
 	# --------------------
 	function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {

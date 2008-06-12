@@ -21,7 +21,8 @@
  * Security methods are targetted to work with both GET and POST form types,
  * and should allow multiple simultaneous edits of the form to be submitted.
  *
- * @package FormAPI
+ * @package CoreAPI
+ * @subpackage FormAPI
  * @uses session_api.php
  */
 

@@ -21,7 +21,10 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	### Version API ###
+    /**
+     *  @package CoreAPI
+     *  @subpackage VersionAPI
+     */
 
 	#=========================================
 	# Version Data Structure Definition

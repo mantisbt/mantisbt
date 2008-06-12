@@ -21,6 +21,13 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+	 *	Logging api
+	 *	This is used to log system events other than bug related history
+     *  @package CoreAPI
+     *  @subpackage LoggingAPI
+     */
+
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	
@@ -31,11 +38,6 @@
 		LOG_AJAX => 'ajax'
 	);
 
-	###########################################################################
-	# Logging api
-	#  This is used to log system events other than bug related history
-	###########################################################################
-	
 	function log_event( $p_level, $p_msg ) {
 		global $g_log_levels;
 	

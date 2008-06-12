@@ -21,7 +21,12 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	### Project Hierarchy API ###
+    /**
+	 *	Project Hierarchy API
+     *  @package CoreAPI
+     *  @subpackage ProjectHierarchyAPI
+     */
+
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 

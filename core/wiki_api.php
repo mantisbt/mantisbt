@@ -16,6 +16,12 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+
+    /**
+     *  @package CoreAPI
+     *  @subpackage WikiAPI
+     */
+
  
 function wiki_enabled() {
 	return ( config_get_global( 'wiki_enable' ) == ON );

@@ -20,6 +20,11 @@
 	# --------------------------------------------------------
 	# $Id$
 	# --------------------------------------------------------
+    /**
+     *  @package CoreAPI
+     *  @subpackage GraphAPI
+     */
+
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
 		$t_jpgraph_path = config_get( 'jpgraph_path' );

@@ -21,6 +21,11 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+     *  @package CoreAPI
+     *  @subpackage ColumnsAPI
+     */
+
 	/**
 	 * Get all accessible columns for the current project / current user..
 	 */

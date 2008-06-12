@@ -21,6 +21,11 @@
 	# $Id$
 	# --------------------------------------------------------
 
+    /**
+     *  @package CoreAPI
+     *  @subpackage CompressionAPI
+     */
+
 	### Compression API ###
 
 	# Starts the buffering/compression (only if the compression option is ON)

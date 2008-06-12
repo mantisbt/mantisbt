@@ -21,7 +21,12 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	### News API ###
+    /**
+	 *	News API
+     *  @package CoreAPI
+     *  @subpackage NewsAPI
+     */
+
 
 	$t_core_path = config_get( 'core_path' );
 
