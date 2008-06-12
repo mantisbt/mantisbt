@@ -44,7 +44,7 @@
 	function filter_get_url( $p_custom_filter ) {
 		$t_query = array();
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_PROJECT_ID] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PROJECT_ID] ) ) {
 			$t_project_id = $p_custom_filter[FILTER_PROPERTY_PROJECT_ID];
 
 			if ( count( $t_project_id ) == 1 && $t_project_id[0] == META_FILTER_CURRENT ) {
@@ -54,160 +54,160 @@
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PROJECT_ID, $t_project_id );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_FREE_TEXT] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FREE_TEXT] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_FREE_TEXT, $p_custom_filter[FILTER_PROPERTY_FREE_TEXT] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_CATEGORY] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_CATEGORY] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_CATEGORY, $p_custom_filter[FILTER_PROPERTY_CATEGORY] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_REPORTER_ID] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_REPORTER_ID] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_REPORTER_ID, $p_custom_filter[FILTER_PROPERTY_REPORTER_ID] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_STATUS_ID] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_STATUS_ID] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_STATUS_ID, $p_custom_filter[FILTER_PROPERTY_STATUS_ID] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_MONITOR_USER_ID] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_MONITOR_USER_ID] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_MONITOR_USER_ID, $p_custom_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_HANDLER_ID] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_HANDLER_ID] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_HANDLER_ID, $p_custom_filter[FILTER_PROPERTY_HANDLER_ID] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_NOTE_USER_ID] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_NOTE_USER_ID] ) ) {
             $t_query[] = filter_encode_field_and_value( FILTER_SEARCH_NOTE_USER_ID, $p_custom_filter[FILTER_PROPERTY_NOTE_USER_ID] );
         }
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_SEVERITY_ID] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_SEVERITY_ID] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_SEVERITY_ID, $p_custom_filter[FILTER_PROPERTY_SEVERITY_ID] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_RESOLUTION_ID] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_RESOLUTION_ID] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_RESOLUTION_ID, $p_custom_filter[FILTER_PROPERTY_RESOLUTION_ID] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_PRIORITY_ID] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PRIORITY_ID] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PRIORITY_ID, $p_custom_filter[FILTER_PROPERTY_PRIORITY_ID] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_VIEW_STATE_ID, $p_custom_filter[FILTER_PROPERTY_VIEW_STATE_ID] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_SHOW_STICKY_ISSUES, $p_custom_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_PRODUCT_VERSION] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PRODUCT_VERSION] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PRODUCT_VERSION, $p_custom_filter[FILTER_PROPERTY_PRODUCT_VERSION] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_PRODUCT_BUILD] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PRODUCT_BUILD] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PRODUCT_BUILD, $p_custom_filter[FILTER_PROPERTY_PRODUCT_BUILD] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_FIXED_IN_VERSION] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FIXED_IN_VERSION] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_FIXED_IN_VERSION, $p_custom_filter[FILTER_PROPERTY_FIXED_IN_VERSION] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_TARGET_VERSION] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_TARGET_VERSION] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_TARGET_VERSION, $p_custom_filter[FILTER_PROPERTY_TARGET_VERSION] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_SORT_FIELD_NAME] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_SORT_FIELD_NAME] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_SORT_FIELD_NAME, $p_custom_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_SORT_DIRECTION] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_SORT_DIRECTION] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_SORT_DIRECTION, $p_custom_filter[FILTER_PROPERTY_SORT_DIRECTION] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_SEARCH_ISSUES_PER_PAGE] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_SEARCH_ISSUES_PER_PAGE] ) ) {
 			if ( $p_custom_filter[FILTER_SEARCH_ISSUES_PER_PAGE] != config_get( 'default_limit_view' ) ) {
 				$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_ISSUES_PER_PAGE, $p_custom_filter[FILTER_SEARCH_ISSUES_PER_PAGE] );
 			}
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] ) ) {
 			if ( $p_custom_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] != config_get( 'default_show_changed' ) ) {
 				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_HIGHLIGHT_CHANGED, $p_custom_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] );
 			}
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_HIDE_STATUS_ID] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_HIDE_STATUS_ID] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_HIDE_STATUS_ID, $p_custom_filter[FILTER_PROPERTY_HIDE_STATUS_ID] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_NOT_ASSIGNED] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_NOT_ASSIGNED] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_NOT_ASSIGNED, $p_custom_filter[FILTER_PROPERTY_NOT_ASSIGNED] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_FILTER_BY_DATE, $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] );
 
 			# The start and end dates are only applicable if filter by date is set.
-			if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_DAY] ) ) {
+			if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_DAY] ) ) {
 				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_START_DAY, $p_custom_filter[FILTER_PROPERTY_START_DAY] );
 			}
 	
-			if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_DAY] ) ) {
+			if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_DAY] ) ) {
 				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_END_DAY, $p_custom_filter[FILTER_PROPERTY_END_DAY] );
 			}
 	
-			if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_MONTH] ) ) {
+			if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_MONTH] ) ) {
 				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_START_MONTH, $p_custom_filter[FILTER_PROPERTY_START_MONTH] );
 			}
 	
-			if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_MONTH] ) ) {
+			if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_MONTH] ) ) {
 				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_END_MONTH, $p_custom_filter[FILTER_PROPERTY_END_MONTH] );
 			}
 	
-			if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_YEAR] ) ) {
+			if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_YEAR] ) ) {
 				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_START_YEAR, $p_custom_filter[FILTER_PROPERTY_START_YEAR] );
 			}
 	
-			if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_YEAR] ) ) {
+			if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_YEAR] ) ) {
 				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_END_YEAR, $p_custom_filter[FILTER_PROPERTY_END_YEAR] );
 			}	
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] ) ) {
 			if ( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] != -1 ) {
 				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_RELATIONSHIP_TYPE, $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
 			}
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_RELATIONSHIP_BUG, $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_PLATFORM] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PLATFORM] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PLATFORM, $p_custom_filter[FILTER_PROPERTY_PLATFORM] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_OS] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_OS] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_OS, $p_custom_filter[FILTER_PROPERTY_OS] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_OS_BUILD] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_OS_BUILD] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_OS_BUILD, $p_custom_filter[FILTER_PROPERTY_OS_BUILD] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_TAG_STRING] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_TAG_STRING] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_TAG_STRING, $p_custom_filter[FILTER_PROPERTY_TAG_STRING] );
 		}
 
-		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
+		if ( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_TAG_SELECT, $p_custom_filter[FILTER_PROPERTY_TAG_SELECT] );
 		}
 
 		if ( isset( $p_custom_filter['custom_fields'] ) ) {
 			foreach( $p_custom_filter['custom_fields'] as $t_custom_field_id => $t_custom_field_values ) {
-				if ( !filter_str_field_is_any( $t_custom_field_values ) ) {
+				if ( !filter_field_is_any( $t_custom_field_values ) ) {
 					$t_query[] = filter_encode_field_and_value( 'custom_field_' . $t_custom_field_id, $t_custom_field_values );
 				}
 			}
@@ -256,7 +256,7 @@
 	 *  @param string $p_field_value - The value to check.
 	 *  @return bool true for "ANY" values and false for others.  "ANY" means filter criteria not active.
 	 */
-	function filter_str_field_is_any( $p_field_value ) {
+	function filter_field_is_any( $p_field_value ) {
 		if ( is_array( $p_field_value ) ) {
 			if ( count( $p_field_value ) == 0 ) {
 				return true;
@@ -277,31 +277,6 @@
 			}
 
 			if ( ( META_FILTER_ANY == $p_field_value ) && ( is_numeric( $p_field_value ) ) ) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 *	Checks if a filter value is "any".  Supports both single value as well as multiple value
-	 *	fields (array).
-	 *	@param mixed $p_filter_value - The value which can be a simple value or an array.
-	 *	@return bool
-	 *	@todo remove this function and merge with filter_str_field_is_any
-	 */
-	function _filter_is_any( $p_filter_value ) {
-		if ( ( META_FILTER_ANY == $p_filter_value ) && is_numeric( $p_filter_value ) ) {
-			return true;
-		}
-
-		if ( count( $p_filter_value ) == 0 ) {
-			return true;
-		}
-
-		foreach( $p_filter_value as $t_value ) {
-			if ( ( META_FILTER_ANY == $t_value ) && ( is_numeric( $t_value ) ) ) {
 				return true;
 			}
 		}
@@ -876,7 +851,7 @@
 
 		# view state
 		$t_view_state = db_prepare_int( $t_filter['view_state'] );
-		if ( ( $t_filter['view_state'] !== META_FILTER_ANY ) && ( !is_blank( $t_filter['view_state'] ) ) ) {
+		if ( !filter_field_is_any( $t_filter['view_state'] ) ) { 
 			$t_view_state_query = "($t_bug_table.view_state=" . db_param($t_where_param_count++) .")";
 			log_event( LOG_FILTERING, 'FILTERING: view_state query = ' . $t_view_state_query );
 			$t_where_params[] = $t_view_state;
@@ -886,19 +861,7 @@
 		}
 
 		# reporter
-		$t_any_found = false;
-
-		foreach( $t_filter['reporter_id'] as $t_filter_member ) {
-			if ( ( META_FILTER_ANY === $t_filter_member ) || ( 0 === $t_filter_member ) ) {
-				$t_any_found = true;
-			}
-		}
-
-		if ( count( $t_filter['reporter_id'] ) == 0 ) {
-			$t_any_found = true;
-		}
-
-		if ( !$t_any_found ) {
+		if ( !filter_field_is_any( $t_filter['reporter_id'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['reporter_id'] as $t_filter_member ) {
@@ -937,18 +900,7 @@
 		}
 
 		# handler
-		$t_any_found = false;
-
-		foreach( $t_filter['handler_id'] as $t_filter_member ) {
-			if ( ( META_FILTER_ANY === $t_filter_member ) || ( 0 === $t_filter_member ) ) {
-				$t_any_found = true;
-			}
-		}
-		if ( count( $t_filter['handler_id'] ) == 0 ) {
-			$t_any_found = true;
-		}
-
-		if ( !$t_any_found ) {
+		if ( !filter_field_is_any( $t_filter['handler_id'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['handler_id'] as $t_filter_member ) {
@@ -977,7 +929,7 @@
 		}
 
 		# category
-		if ( !_filter_is_any( $t_filter['show_category'] ) ) {
+		if ( !filter_field_is_any( $t_filter['show_category'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['show_category'] as $t_filter_member ) {
@@ -1001,16 +953,7 @@
 		}
 
 		# severity
-		$t_any_found = false;
-		foreach( $t_filter['show_severity'] as $t_filter_member ) {
-			if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
-				$t_any_found = true;
-			}
-		}
-		if ( count( $t_filter['show_severity'] ) == 0 ) {
-			$t_any_found = true;
-		}
-		if ( !$t_any_found ) {
+		if ( !filter_field_is_any( $t_filter['show_severity'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['show_severity'] as $t_filter_member ) {
@@ -1047,10 +990,7 @@
 			$t_this_status = $t_filter['show_status'][0];
 			$t_this_hide_status = $t_filter['hide_status'][0];
 
-			if ( ( META_FILTER_ANY == $t_this_status ) || ( is_blank( $t_this_status ) ) || ( 0 === $t_this_status ) ) {
-				$t_any_found = true;
-			}
-			if ( $t_any_found ) {
+			if ( filter_field_is_any( $t_this_status ) ) {
 				foreach( $t_available_statuses as $t_this_available_status ) {
 					if ( $t_this_hide_status > $t_this_available_status ) {
 						$t_desired_statuses[] = $t_this_available_status;
@@ -1061,15 +1001,12 @@
 			}
 		} else {
 			# advanced filtering: ignore the hide
-			$t_any_found = false;
-			foreach( $t_filter['show_status'] as $t_this_status ) {
-				$t_desired_statuses[] = $t_this_status;
-				if ( ( META_FILTER_ANY == $t_this_status ) || ( is_blank( $t_this_status ) ) || ( 0 === $t_this_status ) ) {
-					$t_any_found = true;
-				}
-			}
-			if ( $t_any_found ) {
+			if ( filter_field_is_any( $t_filter['show_status'] ) ) {
 				$t_desired_statuses = array();
+			} else {
+				foreach( $t_filter['show_status'] as $t_this_status ) {
+					$t_desired_statuses[] = $t_this_status;
+				}
 			}
 		}
 
@@ -1095,16 +1032,7 @@
 		}
 
 		# resolution
-		$t_any_found = false;
-		foreach( $t_filter['show_resolution'] as $t_filter_member ) {
-			if ( META_FILTER_ANY == $t_filter_member ) {
-				$t_any_found = true;
-			}
-		}
-		if ( count( $t_filter['show_resolution'] ) == 0 ) {
-			$t_any_found = true;
-		}
-		if ( !$t_any_found ) {
+		if ( !filter_field_is_any( $t_filter['show_resolution'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['show_resolution'] as $t_filter_member ) {
@@ -1125,16 +1053,7 @@
 		}
 
 		# priority
-		$t_any_found = false;
-		foreach( $t_filter['show_priority'] as $t_filter_member ) {
-				if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
-					$t_any_found = true;
-				}
-		}
-		if ( count( $t_filter['show_priority'] ) == 0 ) {
-				$t_any_found = true;
-		}
-		if ( !$t_any_found ) {
+		if ( !filter_field_is_any( $t_filter['show_priority'] ) ) {
 				$t_clauses = array();
 
 				foreach( $t_filter['show_priority'] as $t_filter_member ) {
@@ -1155,16 +1074,7 @@
 		}
 
 		# product build
-		$t_any_found = false;
-		foreach( $t_filter['show_build'] as $t_filter_member ) {
-			if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
-				$t_any_found = true;
-			}
-		}
-		if ( count( $t_filter['show_build'] ) == 0 ) {
-			$t_any_found = true;
-		}
-		if ( !$t_any_found ) {
+		if ( !filter_field_is_any( $t_filter['show_build'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['show_build'] as $t_filter_member ) {
@@ -1190,7 +1100,7 @@
 		}
 
 		# product version
-		if ( !_filter_is_any( $t_filter['show_version'] ) ) {
+		if ( !filter_field_is_any( $t_filter['show_version'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['show_version'] as $t_filter_member ) {
@@ -1217,7 +1127,7 @@
 		}
 
 		# profile
-		if ( !_filter_is_any( $t_filter['show_profile'] ) ) {
+		if ( !filter_field_is_any( $t_filter['show_profile'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['show_profile'] as $t_filter_member ) {
@@ -1243,7 +1153,7 @@
 		}
 
 		# platform
-		if ( !_filter_is_any( $t_filter['platform'] ) ) {
+		if ( !filter_field_is_any( $t_filter['platform'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['platform'] as $t_filter_member ) {
@@ -1270,7 +1180,7 @@
 		}
 
 		# os
-		if ( !_filter_is_any( $t_filter['os'] ) ) {
+		if ( !filter_field_is_any( $t_filter['os'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['os'] as $t_filter_member ) {
@@ -1297,7 +1207,7 @@
 		}
 
 		# os_build
-		if ( !_filter_is_any( $t_filter['os_build'] ) ) {
+		if ( !filter_field_is_any( $t_filter['os_build'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['os_build'] as $t_filter_member ) {
@@ -1342,7 +1252,7 @@
 		}
 
 		# fixed in version
-		if ( !_filter_is_any( $t_filter['fixed_in_version'] ) ) {
+		if ( !filter_field_is_any( $t_filter['fixed_in_version'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
@@ -1368,7 +1278,7 @@
 		}
 
 		# target version
-		if ( !_filter_is_any( $t_filter['target_version'] ) ) {
+		if ( !filter_field_is_any( $t_filter['target_version'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['target_version'] as $t_filter_member ) {
@@ -1396,16 +1306,7 @@
 		}
 
 		# users monitoring a bug
-		$t_any_found = false;
-		foreach( $t_filter['user_monitor'] as $t_filter_member ) {
-			if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
-				$t_any_found = true;
-			}
-		}
-		if ( count( $t_filter['user_monitor'] ) == 0 ) {
-			$t_any_found = true;
-		}
-		if ( !$t_any_found ) {
+		if ( !filter_field_is_any( $t_filter['user_monitor'] ) ) {
 			$t_clauses = array();
 			$t_table_name = 'user_monitor';
 			array_push( $t_join_clauses, "LEFT JOIN $t_bug_monitor_table $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
@@ -1513,16 +1414,7 @@
 		}
 
 		# note user id
-        $t_any_found = false;
-        foreach( $t_filter['note_user_id'] as $t_filter_member ) {
-            if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
-                $t_any_found = true;
-            }
-        }
-        if ( count( $t_filter['note_user_id'] ) == 0 ) {
-            $t_any_found = true;
-        }
-        if ( !$t_any_found ) {
+        if ( !filter_field_is_any( $t_filter['note_user_id'] ) ) {
             $t_bugnote_table_alias = 'mbnt';
             $t_clauses = array();
             array_push( $t_from_clauses, "$t_bugnote_table  $t_bugnote_table_alias" );
@@ -1565,16 +1457,7 @@
 
 				$t_custom_where_clause = '';
 				# Ignore all custom filters that are not set, or that are set to '' or "any"
-				$t_any_found = false;
-				foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
-				if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
-						$t_any_found = true;
-					}
-				}
-				if ( !isset( $t_filter['custom_fields'][$t_cfid] ) ) {
-					$t_any_found = true;
-				}
-				if ( !$t_any_found ) {
+				if ( !filter_field_is_any( $t_filter['custom_fields'][$t_cfid] ) ) {
 					$t_def = custom_field_get_definition( $t_cfid );
 					$t_table_name = $t_custom_field_string_table . '_' . $t_cfid;
                     # We need to filter each joined table or the result query will explode in dimensions
@@ -2054,7 +1937,7 @@
 										?>
 										<input type="hidden" name="reporter_id[]" value="<?php echo $t_current;?>" />
 										<?php
-										if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( META_FILTER_ANY == $t_current ) ) {
+										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_MYSELF == $t_current ) {
 											if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
@@ -2095,7 +1978,7 @@
 										<input type="hidden" name="user_monitor[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_name = '';
-										if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( META_FILTER_ANY == $t_current ) ) {
+										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_MYSELF == $t_current ) {
 											if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
@@ -2136,7 +2019,7 @@
 										$t_this_name = '';
 										if ( META_FILTER_NONE == $t_current ) {
 											$t_this_name = lang_get( 'none' );
-										} else if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( META_FILTER_ANY == $t_current ) ) {
+										} else if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_MYSELF == $t_current ) {
 											if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
@@ -2175,7 +2058,7 @@
 										<input type="hidden" name="show_category[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( is_blank( $t_current ) || $t_current === "0" || $t_current === META_FILTER_ANY ) {
+										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = string_display( $t_current );
@@ -2208,7 +2091,7 @@
 										<input type="hidden" name="show_severity[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
+										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'severity', $t_current );
@@ -2241,7 +2124,7 @@
 										<input type="hidden" name="show_resolution[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'resolution', $t_current );
@@ -2274,7 +2157,7 @@
 										<input type="hidden" name="show_profile[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
 										} else {
 											$t_profile = profile_get_row_direct( $t_current );
@@ -2353,7 +2236,7 @@
 										<input type="hidden" name="show_status[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'status', $t_current );
@@ -2426,8 +2309,7 @@
 										<input type="hidden" name="show_build[]" value="<?php echo string_display( $t_current );?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( ( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) 
-												|| ( is_blank( $t_current ) ) ) {
+										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
@@ -2464,8 +2346,7 @@
 										<input type="hidden" name="show_version[]" value="<?php echo string_display( $t_current );?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( ( $t_current == META_FILTER_ANY ) && (is_numeric( $t_current ) ) ) 
-												|| ( is_blank( $t_current ) ) ) {
+										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
@@ -2501,8 +2382,7 @@
 										<input type="hidden" name="fixed_in_version[]" value="<?php echo string_display( $t_current );?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( ( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) 
-												|| ( is_blank( $t_current ) ) ) {
+										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
@@ -2540,16 +2420,16 @@
                 	PRINT lang_get( 'any' );
                 } else {
                   $t_first_flag = true;
-                  foreach( $t_filter['show_priority'] as $t_current ) {
-										?>
-										<input type="hidden" name="show_priority[]" value="<?php echo $t_current;?>" />
-										<?php
-                  	$t_this_string = '';
-										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
-                  		$t_any_found = true;
-	                  } else {
-	                  	$t_this_string = get_enum_element( 'priority', $t_current );
-	                  }
+					foreach( $t_filter['show_priority'] as $t_current ) {
+						?>
+						<input type="hidden" name="show_priority[]" value="<?php echo $t_current;?>" />
+						<?php
+						$t_this_string = '';
+						if ( filter_field_is_any( $t_current ) ) {
+							$t_any_found = true;
+						} else {
+							$t_this_string = get_enum_element( 'priority', $t_current );
+						}
 	                  if ( $t_first_flag != true ) {
 	                  	$t_output = $t_output . '<br />';
 	                  } else {
@@ -2579,8 +2459,7 @@
 										<input type="hidden" name="target_version[]" value="<?php echo string_display( $t_current );?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( ( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) 
-												|| ( is_blank( $t_current ) ) ) {
+										if ( filter_field_is_any( $t_current ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
@@ -2917,8 +2796,7 @@
 							foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] as $t_current ) {
 								$t_current = stripslashes( $t_current );
 								$t_this_string = '';
-								if ( ( ( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) 
-										|| ( is_blank( $t_current ) ) ) {
+								if ( filter_field_is_any( $t_current ) ) {
 									$t_any_found = true;
 								} else if ( ( META_FILTER_NONE == $t_current ) && ( is_numeric( $t_current ) ) ) {
 									$t_this_string = lang_get( 'none' );
@@ -3004,7 +2882,7 @@
                             $t_this_name = '';
                             if ( META_FILTER_NONE == $t_current ) {
                                 $t_this_name = lang_get( 'none' );
-                            } else if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( META_FILTER_ANY == $t_current ) ) {
+							} else if ( filter_field_is_any( $t_current ) ) {
                                 $t_any_found = true;
                             } else if ( META_FILTER_MYSELF == $t_current ) {
                                 if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
