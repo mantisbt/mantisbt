@@ -31,64 +31,9 @@
 	require_once( $t_core_dir . 'tag_api.php' );
     require_once( $g_absolute_path . 'config_filter_defaults_inc.php' );
 
-	/**
-	 *  Checks the supplied value to see if it is an ANY value.
-	 *  @param string $p_field_value - The value to check.
-	 *  @return bool true for "ANY" values and false for others.  "ANY" means filter criteria not active.
-	 */
-	function filter_str_field_is_any( $p_field_value ) {
-		if ( is_array( $p_field_value ) ) {
-			if ( count( $p_field_value ) == 0 ) {
-				return true;
-			}
-
-			foreach( $p_field_value as $t_value ) {
-				if ( ( META_FILTER_ANY == $t_value ) && ( is_numeric( $t_value ) ) ) {
-					return true;
-				}
-			}
-		} else {
-			if ( is_string( $p_field_value ) && is_blank( $p_field_value ) ) {
-				return true;
-			}
-			
-			if ( is_bool( $p_field_value ) && !$p_field_value ) {
-				return true;
-			}
-
-			if ( ( META_FILTER_ANY == $p_field_value ) && ( is_numeric( $p_field_value ) ) ) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 *  Encodes a field and it's value for the filter URL.  This handles the URL encoding
-	 *  and arrays.
-	 *  @param string $p_field_name The field name.
-	 *  @param string $p_field_value The field value (can be an array)
-	 *  @return string url encoded string
-	 */
-	function filter_encode_field_and_value( $p_field_name, $p_field_value ) {
-		$t_query_array = array();		
-		if ( is_array( $p_field_value ) ) {
-			$t_count = count( $p_field_value );
-			if ( $t_count > 1 ) {
-				foreach ( $p_field_value as $t_value ) {
-					$t_query_array[] = urlencode( $p_field_name . '[]' ) . '=' . urlencode( $t_value );
-				}
-			} else if ( $t_count == 1 ) {
-				$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value[0] );
-			}
-		} else {
-			$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value );
-		}
-
-		return implode( $t_query_array, '&amp;' );
-	}
-
+    #==========================================================================
+    # PERMALINK FUNCTIONS                            						  =
+    #==========================================================================
 	/**
 	 *  Get a permalink for the current active filter.  The results of using these fields by other users
 	 *  can be inconsistent with the original results due to fields like "Myself", "Current Project",
@@ -278,9 +223,318 @@
 		return $t_url;
 	}
 
-	###########################################################################
-	# Filter API
-	###########################################################################
+	/**
+	 *  Encodes a field and it's value for the filter URL.  This handles the URL encoding
+	 *  and arrays.
+	 *  @param string $p_field_name The field name.
+	 *  @param string $p_field_value The field value (can be an array)
+	 *  @return string url encoded string
+	 */
+	function filter_encode_field_and_value( $p_field_name, $p_field_value ) {
+		$t_query_array = array();
+		if ( is_array( $p_field_value ) ) {
+			$t_count = count( $p_field_value );
+			if ( $t_count > 1 ) {
+				foreach ( $p_field_value as $t_value ) {
+					$t_query_array[] = urlencode( $p_field_name . '[]' ) . '=' . urlencode( $t_value );
+				}
+			} else if ( $t_count == 1 ) {
+				$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value[0] );
+			}
+		} else {
+			$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value );
+		}
+
+		return implode( $t_query_array, '&amp;' );
+	}
+
+    #==========================================================================
+    # GENERAL FUNCTIONS                            						      =
+    #==========================================================================
+	/**
+	 *  Checks the supplied value to see if it is an ANY value.
+	 *  @param string $p_field_value - The value to check.
+	 *  @return bool true for "ANY" values and false for others.  "ANY" means filter criteria not active.
+	 */
+	function filter_str_field_is_any( $p_field_value ) {
+		if ( is_array( $p_field_value ) ) {
+			if ( count( $p_field_value ) == 0 ) {
+				return true;
+			}
+
+			foreach( $p_field_value as $t_value ) {
+				if ( ( META_FILTER_ANY == $t_value ) && ( is_numeric( $t_value ) ) ) {
+					return true;
+				}
+			}
+		} else {
+			if ( is_string( $p_field_value ) && is_blank( $p_field_value ) ) {
+				return true;
+			}
+
+			if ( is_bool( $p_field_value ) && !$p_field_value ) {
+				return true;
+			}
+
+			if ( ( META_FILTER_ANY == $p_field_value ) && ( is_numeric( $p_field_value ) ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 *	Checks if a filter value is "any".  Supports both single value as well as multiple value
+	 *	fields (array).
+	 *	@param mixed $p_filter_value - The value which can be a simple value or an array.
+	 *	@return bool
+	 *	@todo remove this function and merge with filter_str_field_is_any
+	 */
+	function _filter_is_any( $p_filter_value ) {
+		if ( ( META_FILTER_ANY == $p_filter_value ) && is_numeric( $p_filter_value ) ) {
+			return true;
+		}
+
+		if ( count( $p_filter_value ) == 0 ) {
+			return true;
+		}
+
+		foreach( $p_filter_value as $t_value ) {
+			if ( ( META_FILTER_ANY == $t_value ) && ( is_numeric( $t_value ) ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 *  Make sure that our filters are entirely correct and complete (it is possible that they are not).
+	 *  We need to do this to cover cases where we don't have complete control over the filters given.s
+	 *  @param array $p_filter_arr
+	 *  @return mixed
+	 *  @todo function needs to be abstracted
+	 */
+	function filter_ensure_valid_filter( $p_filter_arr ) {
+		# extend current filter to add information passed via POST
+		if ( !isset( $p_filter_arr['_version'] ) ) {
+			$p_filter_arr['_version'] = config_get( 'cookie_version' );
+		}
+		$t_cookie_vers = (int) substr( $p_filter_arr['_version'], 1 );
+		if ( substr( config_get( 'cookie_version' ), 1 ) > $t_cookie_vers ) { # if the version is old, update it
+			$p_filter_arr['_version'] = config_get( 'cookie_version' );
+		}
+		if ( !isset( $p_filter_arr['_view_type'] ) ) {
+			$p_filter_arr['_view_type'] = gpc_get_string( 'view_type', 'simple' );
+		}
+		if ( !isset( $p_filter_arr['per_page'] ) ) {
+			$p_filter_arr['per_page'] = gpc_get_int( 'per_page', config_get( 'default_limit_view' ) );
+		}
+		if ( !isset( $p_filter_arr['highlight_changed'] ) ) {
+			$p_filter_arr['highlight_changed'] = config_get( 'default_show_changed' );
+		}
+		if ( !isset( $p_filter_arr['sticky_issues'] ) ) {
+			$p_filter_arr['sticky_issues'] = config_get( 'show_sticky_issues' );
+		}
+		if ( !isset( $p_filter_arr['sort'] ) ) {
+			$p_filter_arr['sort'] = "last_updated";
+		}
+		if ( !isset( $p_filter_arr['dir'] ) ) {
+			$p_filter_arr['dir'] = "DESC";
+		}
+
+		if ( !isset( $p_filter_arr['platform'] ) ) {
+			$p_filter_arr['platform'] = array( 0 => META_FILTER_ANY );
+		}
+
+		if ( !isset( $p_filter_arr['os'] ) ) {
+			$p_filter_arr['os'] = array( 0 => META_FILTER_ANY );
+		}
+
+		if ( !isset( $p_filter_arr['os_build'] ) ) {
+			$p_filter_arr['os_build'] = array( 0 => META_FILTER_ANY );
+		}
+
+		if ( !isset( $p_filter_arr['project_id'] ) ) {
+			$p_filter_arr['project_id'] = array( 0 => META_FILTER_CURRENT );
+		}
+
+		if ( !isset( $p_filter_arr['start_month'] ) ) {
+			$p_filter_arr['start_month'] = gpc_get_string( 'start_month', date( 'm' ) );
+		}
+		if ( !isset( $p_filter_arr['start_day'] ) ) {
+			$p_filter_arr['start_day'] = gpc_get_string( 'start_day', 1 );
+		}
+		if ( !isset( $p_filter_arr['start_year'] ) ) {
+			$p_filter_arr['start_year'] = gpc_get_string( 'start_year', date( 'Y' ) );
+		}
+		if ( !isset( $p_filter_arr['end_month'] ) ) {
+			$p_filter_arr['end_month'] = gpc_get_string( 'end_month', date( 'm' ) );
+		}
+		if ( !isset( $p_filter_arr['end_day'] ) ) {
+			$p_filter_arr['end_day'] = gpc_get_string( 'end_day', date( 'd' ) );
+		}
+		if ( !isset( $p_filter_arr['end_year'] ) ) {
+			$p_filter_arr['end_year'] = gpc_get_string( 'end_year', date( 'Y' ) );
+		}
+		if ( !isset( $p_filter_arr['search'] ) ) {
+			$p_filter_arr['search'] = '';
+		}
+		if ( !isset( $p_filter_arr['and_not_assigned'] ) ) {
+			$p_filter_arr['and_not_assigned'] = gpc_get_bool( 'and_not_assigned', false );
+		}
+		if ( !isset( $p_filter_arr['do_filter_by_date'] ) ) {
+			$p_filter_arr['do_filter_by_date'] = gpc_get_bool( 'do_filter_by_date', false );
+		}
+		if ( !isset( $p_filter_arr['view_state'] ) ) {
+			$p_filter_arr['view_state'] = gpc_get( 'view_state', '' );
+		} else if ( ( $p_filter_arr['view_state'] == 'any' ) || ( $p_filter_arr['view_state'] == 0 ) ) {
+			$p_filter_arr['view_state'] = META_FILTER_ANY;
+		}
+		if ( !isset( $p_filter_arr['relationship_type'] ) ) {
+			$p_filter_arr['relationship_type'] = gpc_get_int( 'relationship_type', -1 );
+		}
+		if ( !isset( $p_filter_arr['relationship_bug'] ) ) {
+			$p_filter_arr['relationship_bug'] = gpc_get_int( 'relationship_bug', 0 );
+		}
+		if ( !isset( $p_filter_arr['target_version'] ) ) {
+			$p_filter_arr['target_version'] = META_FILTER_ANY;
+		}
+		if ( !isset( $p_filter_arr['tag_string'] ) ) {
+			$p_filter_arr['tag_string'] = gpc_get_string( 'tag_string', '' );
+		}
+		if ( !isset( $p_filter_arr['tag_select'] ) ) {
+			$p_filter_arr['tag_select'] = gpc_get_string( 'tag_select', '' );
+		}
+
+		$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
+		$f_custom_fields_data 	= array();
+		if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
+			foreach( $t_custom_fields as $t_cfid ) {
+				if ( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
+					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, META_FILTER_ANY );
+				} else {
+					$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, META_FILTER_ANY );
+					$f_custom_fields_data[$t_cfid] = array( $f_custom_fields_data[$t_cfid] );
+				}
+			}
+		}
+
+		#validate sorting
+		$t_fields = helper_get_columns_to_view();
+		$t_n_fields = count( $t_fields );
+		for ( $i=0; $i < $t_n_fields; $i++ ) {
+			if ( isset( $t_fields[$i] ) && in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
+				unset( $t_fields[$i] );
+			}
+		}
+		$t_sort_fields = split( ',', $p_filter_arr['sort'] );
+		$t_dir_fields = split( ',', $p_filter_arr['dir'] );
+		for ( $i=0; $i<2; $i++ ) {
+			if ( isset( $t_sort_fields[$i] ) ) {
+				$t_drop = false;
+				$t_sort = $t_sort_fields[$i];
+				if ( strpos( $t_sort, 'custom_' ) === 0 ) {
+					if ( false === custom_field_get_id_from_name( substr( $t_sort, strlen( 'custom_' ) ) ) ) {
+						$t_drop = true;
+					}
+				} else {
+					if ( ! in_array( $t_sort, $t_fields ) ) {
+						$t_drop = true;
+					}
+				}
+				if ( ! in_array( $t_dir_fields[$i], array( "ASC", "DESC" ) ) ) {
+					$t_drop = true;
+				}
+				if ( $t_drop ) {
+					unset( $t_sort_fields[$i] );
+					unset( $t_dir_fields[$i] );
+				}
+			}
+		}
+		if ( count( $t_sort_fields ) > 0 ) {
+			$p_filter_arr['sort'] = implode( ',', $t_sort_fields );
+			$p_filter_arr['dir'] = implode( ',', $t_dir_fields );
+		} else {
+			$p_filter_arr['sort'] = "last_updated";
+			$p_filter_arr['dir'] = "DESC";
+		}
+
+		# validate or filter junk from other fields
+		$t_multi_select_list = array( 'show_category' => 'string',
+									  'show_severity' => 'int',
+									  'show_status' => 'int',
+									  'reporter_id' => 'int',
+									  'handler_id' => 'int',
+									  'note_user_id' => 'int',
+									  'show_resolution' => 'int',
+									  'show_priority' => 'int',
+									  'show_build' => 'string',
+									  'show_version' => 'string',
+									  'hide_status' => 'int',
+									  'fixed_in_version' => 'string',
+									  'target_version' => 'string',
+									  'user_monitor' => 'int',
+									  'show_profile' => 'int'
+									 );
+		foreach( $t_multi_select_list as $t_multi_field_name => $t_multi_field_type ) {
+			if ( !isset( $p_filter_arr[$t_multi_field_name] ) ) {
+				if ( 'hide_status' == $t_multi_field_name ) {
+					$p_filter_arr[$t_multi_field_name] = array( config_get( 'hide_status_default' ) );
+				} else if ( 'custom_fields' == $t_multi_field_name ) {
+					$p_filter_arr[$t_multi_field_name] = array( $f_custom_fields_data );
+				} else {
+					$p_filter_arr[$t_multi_field_name] = array( META_FILTER_ANY );
+				}
+			} else {
+				if ( !is_array( $p_filter_arr[$t_multi_field_name] ) ) {
+					$p_filter_arr[$t_multi_field_name] = array( $p_filter_arr[$t_multi_field_name] );
+				}
+				$t_checked_array = array();
+				foreach ( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
+					$t_filter_value = stripslashes( $t_filter_value );
+					if ( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
+						$t_filter_value = META_FILTER_ANY;
+					}
+					if ( ( $t_filter_value === 'none' ) || ( $t_filter_value === '[none]' ) ) {
+						$t_filter_value = META_FILTER_NONE;
+					}
+					if ( 'string' == $t_multi_field_type ) {
+						$t_checked_array[] = db_prepare_string( $t_filter_value );
+					} else if ( 'int' == $t_multi_field_type ) {
+						$t_checked_array[] = db_prepare_int( $t_filter_value );
+					} else if ( 'array' == $t_multi_field_type ) {
+						$t_checked_array[] = $t_filter_value;
+					}
+				}
+				$p_filter_arr[$t_multi_field_name] = $t_checked_array;
+			}
+		}
+
+		if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
+			foreach( $t_custom_fields as $t_cfid ) {
+				if ( !isset( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
+					$p_filter_arr['custom_fields'][$t_cfid] = array( META_FILTER_ANY );
+				} else {
+					if ( !is_array( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
+						$p_filter_arr['custom_fields'][$t_cfid] = array( $p_filter_arr['custom_fields'][$t_cfid] );
+					}
+					$t_checked_array = array();
+					foreach ( $p_filter_arr['custom_fields'][$t_cfid] as $t_filter_value ) {
+						$t_filter_value = stripslashes( $t_filter_value );
+						if ( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
+							$t_filter_value = META_FILTER_ANY;
+						}
+						$t_checked_array[] = db_prepare_string( $t_filter_value );
+					}
+					$p_filter_arr['custom_fields'][$t_cfid] = $t_checked_array;
+				}
+			}
+		}
+		# all of our filter values are now guaranteed to be there, and correct.
+		return $p_filter_arr;
+	}
 
 	/**
 	 *  Get the standard filter that is to be used when no filter was previously saved.
@@ -311,6 +565,108 @@
 		);
 
 		return filter_ensure_valid_filter( $t_filter );
+	}
+
+	/**
+	 *  Deserialize filter string
+	 *  @param string $p_serialized_filter
+	 *  @return mixed $t_filter array
+	 *  @see filter_ensure_valid_filter
+	 */
+	function filter_deserialize( $p_serialized_filter ) {
+		if ( is_blank( $p_serialized_filter ) ) {
+			return false;
+		}
+
+		# check to see if new cookie is needed
+		$t_setting_arr = explode( '#', $p_serialized_filter, 2 );
+		if ( ( $t_setting_arr[0] == 'v1' ) ||
+			 ( $t_setting_arr[0] == 'v2' ) ||
+			 ( $t_setting_arr[0] == 'v3' ) ||
+			 ( $t_setting_arr[0] == 'v4' ) ) {
+			# these versions can't be salvaged, they are too old to update
+			return false;
+		}
+
+		# We shouldn't need to do this anymore, as filters from v5 onwards should cope with changing
+		# filter indices dynamically
+		$t_filter_array = array();
+		if ( isset( $t_setting_arr[1] ) ) {
+			$t_filter_array = unserialize( $t_setting_arr[1] );
+		} else {
+			return false;
+		}
+		if ( $t_filter_array['_version'] != config_get( 'cookie_version' ) ) {
+			# if the version is not new enough, update it using defaults
+			return filter_ensure_valid_filter( $t_filter_array );
+		}
+
+		return $t_filter_array;
+	}
+
+	/**
+	 *  Check if the filter cookie exists and is of the correct version.
+	 *  @return bool
+	 */
+	function filter_is_cookie_valid() {
+		$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+		$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
+
+		# check to see if the cookie does not exist
+		if ( is_blank( $t_view_all_cookie ) ) {
+			return false;
+		}
+
+		# check to see if new cookie is needed
+		$t_setting_arr = explode( '#', $t_view_all_cookie, 2 );
+		if ( ( $t_setting_arr[0] == 'v1' ) ||
+			 ( $t_setting_arr[0] == 'v2' ) ||
+			 ( $t_setting_arr[0] == 'v3' ) ||
+			 ( $t_setting_arr[0] == 'v4' ) ) {
+			return false;
+		}
+
+		# We shouldn't need to do this anymore, as filters from v5 onwards should cope with changing
+		# filter indices dynamically
+		$t_filter_cookie_arr = array();
+		if ( isset( $t_setting_arr[1] ) ) {
+			$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
+		} else {
+			return false;
+		}
+		if ( $t_filter_cookie_arr['_version'] != config_get( 'cookie_version' ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 *  Get the array fields specified by $p_filter_id
+	 *  using the cached row if it's available
+	 *  @param int $p_filter_id
+	 *  @return mixed a filter row
+	 */
+	function filter_get_row( $p_filter_id ) {
+		return filter_cache_row( $p_filter_id );
+	}
+
+	/**
+	 *  Get the value of the filter field specified by filter id and field name
+	 *  @param int $p_filter_id
+	 *  @param string $p_field_name
+	 *  @return string
+	 */
+	function filter_get_field( $p_filter_id, $p_field_name ) {
+		$row = filter_get_row( $p_filter_id );
+
+		if ( isset( $row[$p_field_name] ) ) {
+			return $row[$p_field_name];
+		} else {
+			error_parameters( $p_field_name );
+			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+			return '';
+		}
 	}
 
 	/**
@@ -1551,80 +1907,9 @@
 		return $t_rows;
 	}
 
-	/**
-	 *  Check if the filter cookie exists and is of the correct version.
-	 *  @return bool
-	 */
-	function filter_is_cookie_valid() {
-		$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
-		$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
-
-		# check to see if the cookie does not exist
-		if ( is_blank( $t_view_all_cookie ) ) {
-			return false;
-		}
-
-		# check to see if new cookie is needed
-		$t_setting_arr = explode( '#', $t_view_all_cookie, 2 );
-		if ( ( $t_setting_arr[0] == 'v1' ) ||
-			 ( $t_setting_arr[0] == 'v2' ) ||
-			 ( $t_setting_arr[0] == 'v3' ) ||
-			 ( $t_setting_arr[0] == 'v4' ) ) {
-			return false;
-		}
-
-		# We shouldn't need to do this anymore, as filters from v5 onwards should cope with changing
-		# filter indices dynamically
-		$t_filter_cookie_arr = array();
-		if ( isset( $t_setting_arr[1] ) ) {
-			$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
-		} else {
-			return false;
-		}
-		if ( $t_filter_cookie_arr['_version'] != config_get( 'cookie_version' ) ) {
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 *  Deserialize filter string
-	 *  @param string $p_serialized_filter
-	 *  @return mixed $t_filter array
-	 *  @see filter_ensure_valid_filter
-	 */
-	function filter_deserialize( $p_serialized_filter ) {
-		if ( is_blank( $p_serialized_filter ) ) {
-			return false;
-		}
-
-		# check to see if new cookie is needed
-		$t_setting_arr = explode( '#', $p_serialized_filter, 2 );
-		if ( ( $t_setting_arr[0] == 'v1' ) ||
-			 ( $t_setting_arr[0] == 'v2' ) ||
-			 ( $t_setting_arr[0] == 'v3' ) ||
-			 ( $t_setting_arr[0] == 'v4' ) ) {
-			# these versions can't be salvaged, they are too old to update
-			return false;
-		}
-
-		# We shouldn't need to do this anymore, as filters from v5 onwards should cope with changing
-		# filter indices dynamically
-		$t_filter_array = array();
-		if ( isset( $t_setting_arr[1] ) ) {
-			$t_filter_array = unserialize( $t_setting_arr[1] );
-		} else {
-			return false;
-		}
-		if ( $t_filter_array['_version'] != config_get( 'cookie_version' ) ) {
-			# if the version is not new enough, update it using defaults
-			return filter_ensure_valid_filter( $t_filter_array );
-		}
-
-		return $t_filter_array;
-	}
-
+    #==========================================================================
+    # PRINT FUNCTIONS                            						      =
+    #==========================================================================
 	/**
 	 *  Mainly based on filter_draw_selection_area2() but adds the support for the collapsible
 	 *  filter display.
@@ -2917,537 +3202,6 @@
 	}
 
 	/**
-	 *  Add a filter to the database for the current user
-	 *  @param int $p_project_id
-	 *  @param bool $p_is_public
-	 *  @param string $p_name
-	 *  @param string $p_filter_string
-	 *  @return int
-	 */
-	function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $p_filter_string ) {
-		$t_user_id = auth_get_current_user_id();
-		$c_project_id = db_prepare_int( $p_project_id );
-		$c_is_public = db_prepare_bool( $p_is_public, false );
-		$c_name = db_prepare_string( $p_name );
-
-		$t_filters_table = db_get_table( 'mantis_filters_table' );
-
-		# check that the user can save non current filters (if required)
-		if ( ( ALL_PROJECTS <= $c_project_id ) && ( !is_blank( $p_name ) ) &&
-		     ( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
-			return -1;
-		}
-
-		# ensure that we're not making this filter public if we're not allowed
-		if ( !access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
-			$c_is_public = db_prepare_bool( false );
-		}
-
-		# Do I need to update or insert this value?
-		$query = "SELECT id FROM $t_filters_table
-					WHERE user_id=" . db_param(0) . "
-					AND project_id=" . db_param(1) . "
-					AND name=" . db_param(2);
-		$result = db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_name ) );
-
-		if ( db_num_rows( $result ) > 0 ) {
-			$row = db_fetch_array( $result );
-
-			$query = "UPDATE $t_filters_table
-					  SET is_public=" . db_param(0) . ",
-					  	filter_string=" . db_param(1) . "
-					  WHERE id=" . db_param(2);
-			db_query_bound( $query, Array( $c_is_public, $p_filter_string, $row['id'] ) );
-
-			return $row['id'];
-		} else {
-			$query = "INSERT INTO $t_filters_table
-						( user_id, project_id, is_public, name, filter_string )
-					  VALUES
-						( " . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . " )";
-			db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_is_public, $c_name, $p_filter_string ) );
-
-			# Recall the query, we want the filter ID
-			$query = "SELECT id
-						FROM $t_filters_table
-						WHERE user_id=" . db_param(0) . "
-						AND project_id=" . db_param(1) . "
-						AND name=" . db_param(2);
-			$result = db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_name ) );
-
-			if ( db_num_rows( $result ) > 0 ) {
-				$row = db_fetch_array( $result );
-				return $row['id'];
-			}
-
-			return -1;
-		}
-	}
-
-	# We cache filter requests to reduce the number of SQL queries
-	$g_cache_filter_db_filters = array();
-
-	/**
-	 *  This function returns the filter string that is
-	 *  tied to the unique id parameter. If the user doesn't
-	 *  have permission to see this filter, the function
-	 *  returns null
-	 *  @param int $p_filter_id
-	 *  @param int $p_user_id
-	 *  @return mixed
-	 */
-	function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
-		global $g_cache_filter_db_filters;
-		$t_filters_table = db_get_table( 'mantis_filters_table' );
-		$c_filter_id = db_prepare_int( $p_filter_id );
-
-		if ( isset( $g_cache_filter_db_filters[$p_filter_id] ) ) {
-			if ( $g_cache_filter_db_filters[$p_filter_id] === false ) 
-				return null;
-			return $g_cache_filter_db_filters[$p_filter_id];
-		}
-
-		if ( null === $p_user_id ) {
-			$t_user_id = auth_get_current_user_id();
-		} else {
-			$t_user_id = $p_user_id;
-		}
-
-		$query = "SELECT *
-				  FROM $t_filters_table
-				  WHERE id=" . db_param(0);
-		$result = db_query_bound( $query, Array( $c_filter_id ) );
-
-		if ( db_num_rows( $result ) > 0 ) {
-			$row = db_fetch_array( $result );
-
-			if ( $row['user_id'] != $t_user_id ) {
-				if ( $row['is_public'] != true ) {
-					return null;
-				}
-			}
-
-			# check that the user has access to non current filters
-			if ( ( ALL_PROJECTS <= $row['project_id'] ) && ( !is_blank( $row['name'] ) ) && ( !access_has_project_level( config_get( 'stored_query_use_threshold', $row['project_id'], $t_user_id ) ) ) ) {
-				return null;
-			}
-
-			$g_cache_filter_db_filters[$p_filter_id] = $row['filter_string'];
-			return $row['filter_string'];
-		} else {
-			$g_cache_filter_db_filters[$p_filter_id] = false;
-			return false;
-		}		
-	}
-
-	/**
-	 *  @param int $p_project_id
-	 *  @param int $p_user_id
-	 *  @return int
-	 */
-	function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
-		$t_filters_table = db_get_table( 'mantis_filters_table' );
-		$c_project_id 	= db_prepare_int( $p_project_id );
-		$c_project_id 	= $c_project_id * -1;
-
-		if ( null === $p_user_id ) {
-			$c_user_id 		= auth_get_current_user_id();
-		} else {
-			$c_user_id		= db_prepare_int( $p_user_id );
-		}
-
-		# we store current filters for each project with a special project index
-		$query = "SELECT *
-				  FROM $t_filters_table
-				  WHERE user_id=" . db_param(0) . "
-				  	AND project_id=" . db_param(1) . "
-				  	AND name=" . db_param(2);
-		$result = db_query_bound( $query, Array( $c_user_id, $c_project_id, '' ) );
-
-		if ( db_num_rows( $result ) > 0 ) {
-			$row = db_fetch_array( $result );
-			return $row['id'];
-		}
-
-		return null;
-	}
-
-	/**
-	 *  Query for the filter name using the filter id
-	 *  @param int $p_filter_id
-	 *  @return string
-	 */
-	function filter_db_get_name( $p_filter_id ) {
-		$t_filters_table = db_get_table( 'mantis_filters_table' );
-		$c_filter_id = db_prepare_int( $p_filter_id );
-
-		$query = "SELECT *
-				  FROM $t_filters_table
-				  WHERE id=" . db_param(0);
-		$result = db_query_bound( $query, Array( $c_filter_id ) );
-
-		if ( db_num_rows( $result ) > 0 ) {
-			$row = db_fetch_array( $result );
-
-			if ( $row['user_id'] != auth_get_current_user_id() ) {
-				if ( $row['is_public'] != true ) {
-					return null;
-				}
-			}
-
-			return $row['name'];
-		}
-
-		return null;
-	}
-
-	/**
-	 *  Check if the current user has permissions to delete the stored query
-	 *  @param $p_filter_id
-	 *  @return bool
-	 */
-	function filter_db_can_delete_filter( $p_filter_id ) {
-		$t_filters_table = db_get_table( 'mantis_filters_table' );
-		$c_filter_id = db_prepare_int( $p_filter_id );
-		$t_user_id = auth_get_current_user_id();
-
-		# Administrators can delete any filter
-		if ( access_has_global_level( ADMINISTRATOR ) ) {
-			return true;
-		}
-
-		$query = "SELECT id
-				  FROM $t_filters_table
-				  WHERE id=" . db_param(0) . "
-				  AND user_id=" . db_param(1) . "
-				  AND project_id!=" . db_param(2);
-
-		$result = db_query_bound( $query, Array( $c_filter_id, $t_user_id, -1 ) );
-
-		if ( db_num_rows( $result ) > 0 ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 *  Delete the filter specified by $p_filter_id
-	 *  @param $p_filter_id
-	 *  @return bool
-	 */
-	function filter_db_delete_filter( $p_filter_id ) {
-		$t_filters_table = db_get_table( 'mantis_filters_table' );
-		$c_filter_id = db_prepare_int( $p_filter_id );
-		$t_user_id = auth_get_current_user_id();
-
-		if ( !filter_db_can_delete_filter( $c_filter_id ) ) {
-			return false;
-		}
-
-		$query = "DELETE FROM $t_filters_table
-				  WHERE id=" . db_param(0);
-		$result = db_query_bound( $query, Array( $c_filter_id ) );
-
-		if ( db_affected_rows( $result ) > 0 ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 *  Delete all the unnamed filters
-	 */
-	function filter_db_delete_current_filters( ) {
-		$t_filters_table = db_get_table( 'mantis_filters_table' );
-		$t_all_id = ALL_PROJECTS;
-
-		$query = "DELETE FROM $t_filters_table
-					WHERE project_id<=" . db_param(0) ."
-					AND name=" . db_param(1);
-		$result = db_query_bound( $query, Array( $t_all_id, '' ) );
-	}
-
-	/**
-	 *  @param int $p_project_id
-	 *  @param int $p_user_id
-	 *  @return mixed
-	 */
-	function filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
-		$t_filters_table = db_get_table( 'mantis_filters_table' );
-		$t_overall_query_arr = array();
-
-		if ( null === $p_project_id ) {
-			$t_project_id = helper_get_current_project();
-		} else {
-			$t_project_id = db_prepare_int( $p_project_id );
-		}
-
-		if ( null === $p_user_id ) {
-			$t_user_id = auth_get_current_user_id();
-		} else {
-			$t_user_id = db_prepare_int( $p_user_id );
-		}
-
-		# If the user doesn't have access rights to stored queries, just return
-		if ( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) {
-			return $t_overall_query_arr;
-		}
-
-		# Get the list of available queries. By sorting such that public queries are
-		# first, we can override any query that has the same name as a private query
-		# with that private one
-		$query = "SELECT * FROM $t_filters_table
-					WHERE (project_id='$t_project_id'
-					OR project_id='0')
-					AND name!=''
-					ORDER BY is_public DESC, name ASC";
-		$result = db_query( $query );
-		$query_count = db_num_rows( $result );
-
-		for ( $i = 0; $i < $query_count; $i++ ) {
-			$row = db_fetch_array( $result );
-			if ( ( $row['user_id'] == $t_user_id ) || db_prepare_bool( $row['is_public'] ) ) {
-				$t_overall_query_arr[$row['id']] = $row['name'];
-			}
-		}
-
-		$t_overall_query_arr = array_unique( $t_overall_query_arr );
-		asort( $t_overall_query_arr );
-
-		return $t_overall_query_arr;
-	}
-
-	/**
-	 *  Make sure that our filters are entirely correct and complete (it is possible that they are not).
-	 *  We need to do this to cover cases where we don't have complete control over the filters given.s
-	 *  @param array $p_filter_arr
-	 *  @return mixed
-	 *  @todo function needs to be abstracted
-	 */
-	function filter_ensure_valid_filter( $p_filter_arr ) {
-		# extend current filter to add information passed via POST
-		if ( !isset( $p_filter_arr['_version'] ) ) {
-			$p_filter_arr['_version'] = config_get( 'cookie_version' );
-		}
-		$t_cookie_vers = (int) substr( $p_filter_arr['_version'], 1 );
-		if ( substr( config_get( 'cookie_version' ), 1 ) > $t_cookie_vers ) { # if the version is old, update it
-			$p_filter_arr['_version'] = config_get( 'cookie_version' );
-		}
-		if ( !isset( $p_filter_arr['_view_type'] ) ) {
-			$p_filter_arr['_view_type'] = gpc_get_string( 'view_type', 'simple' );
-		}
-		if ( !isset( $p_filter_arr['per_page'] ) ) {
-			$p_filter_arr['per_page'] = gpc_get_int( 'per_page', config_get( 'default_limit_view' ) );
-		}
-		if ( !isset( $p_filter_arr['highlight_changed'] ) ) {
-			$p_filter_arr['highlight_changed'] = config_get( 'default_show_changed' );
-		}
-		if ( !isset( $p_filter_arr['sticky_issues'] ) ) {
-			$p_filter_arr['sticky_issues'] = config_get( 'show_sticky_issues' );
-		}
-		if ( !isset( $p_filter_arr['sort'] ) ) {
-			$p_filter_arr['sort'] = "last_updated";
-		}
-		if ( !isset( $p_filter_arr['dir'] ) ) {
-			$p_filter_arr['dir'] = "DESC";
-		}
-		
-		if ( !isset( $p_filter_arr['platform'] ) ) {
-			$p_filter_arr['platform'] = array( 0 => META_FILTER_ANY );
-		}
-
-		if ( !isset( $p_filter_arr['os'] ) ) {
-			$p_filter_arr['os'] = array( 0 => META_FILTER_ANY );
-		}
-
-		if ( !isset( $p_filter_arr['os_build'] ) ) {
-			$p_filter_arr['os_build'] = array( 0 => META_FILTER_ANY );
-		}
-
-		if ( !isset( $p_filter_arr['project_id'] ) ) {
-			$p_filter_arr['project_id'] = array( 0 => META_FILTER_CURRENT );
-		}
-
-		if ( !isset( $p_filter_arr['start_month'] ) ) {
-			$p_filter_arr['start_month'] = gpc_get_string( 'start_month', date( 'm' ) );
-		}
-		if ( !isset( $p_filter_arr['start_day'] ) ) {
-			$p_filter_arr['start_day'] = gpc_get_string( 'start_day', 1 );
-		}
-		if ( !isset( $p_filter_arr['start_year'] ) ) {
-			$p_filter_arr['start_year'] = gpc_get_string( 'start_year', date( 'Y' ) );
-		}
-		if ( !isset( $p_filter_arr['end_month'] ) ) {
-			$p_filter_arr['end_month'] = gpc_get_string( 'end_month', date( 'm' ) );
-		}
-		if ( !isset( $p_filter_arr['end_day'] ) ) {
-			$p_filter_arr['end_day'] = gpc_get_string( 'end_day', date( 'd' ) );
-		}
-		if ( !isset( $p_filter_arr['end_year'] ) ) {
-			$p_filter_arr['end_year'] = gpc_get_string( 'end_year', date( 'Y' ) );
-		}
-		if ( !isset( $p_filter_arr['search'] ) ) {
-			$p_filter_arr['search'] = '';
-		}
-		if ( !isset( $p_filter_arr['and_not_assigned'] ) ) {
-			$p_filter_arr['and_not_assigned'] = gpc_get_bool( 'and_not_assigned', false );
-		}
-		if ( !isset( $p_filter_arr['do_filter_by_date'] ) ) {
-			$p_filter_arr['do_filter_by_date'] = gpc_get_bool( 'do_filter_by_date', false );
-		}
-		if ( !isset( $p_filter_arr['view_state'] ) ) {
-			$p_filter_arr['view_state'] = gpc_get( 'view_state', '' );
-		} else if ( ( $p_filter_arr['view_state'] == 'any' ) || ( $p_filter_arr['view_state'] == 0 ) ) {
-			$p_filter_arr['view_state'] = META_FILTER_ANY;
-		}
-		if ( !isset( $p_filter_arr['relationship_type'] ) ) {
-			$p_filter_arr['relationship_type'] = gpc_get_int( 'relationship_type', -1 );
-		}
-		if ( !isset( $p_filter_arr['relationship_bug'] ) ) {
-			$p_filter_arr['relationship_bug'] = gpc_get_int( 'relationship_bug', 0 );
-		}
-		if ( !isset( $p_filter_arr['target_version'] ) ) {
-			$p_filter_arr['target_version'] = META_FILTER_ANY;
-		}
-		if ( !isset( $p_filter_arr['tag_string'] ) ) {
-			$p_filter_arr['tag_string'] = gpc_get_string( 'tag_string', '' );
-		}
-		if ( !isset( $p_filter_arr['tag_select'] ) ) {
-			$p_filter_arr['tag_select'] = gpc_get_string( 'tag_select', '' );
-		}
-
-		$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
-		$f_custom_fields_data 	= array();
-		if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
-			foreach( $t_custom_fields as $t_cfid ) {
-				if ( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
-					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, META_FILTER_ANY );
-				} else {
-					$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, META_FILTER_ANY );
-					$f_custom_fields_data[$t_cfid] = array( $f_custom_fields_data[$t_cfid] );
-				}
-			}
-		}
-
-		#validate sorting
-		$t_fields = helper_get_columns_to_view();
-		$t_n_fields = count( $t_fields );
-		for ( $i=0; $i < $t_n_fields; $i++ ) {
-			if ( isset( $t_fields[$i] ) && in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
-				unset( $t_fields[$i] );
-			}
-		}
-		$t_sort_fields = split( ',', $p_filter_arr['sort'] );
-		$t_dir_fields = split( ',', $p_filter_arr['dir'] );
-		for ( $i=0; $i<2; $i++ ) {
-			if ( isset( $t_sort_fields[$i] ) ) {
-				$t_drop = false;
-				$t_sort = $t_sort_fields[$i];
-        		if ( strpos( $t_sort, 'custom_' ) === 0 ) {
-        			if ( false === custom_field_get_id_from_name( substr( $t_sort, strlen( 'custom_' ) ) ) ) {
-        				$t_drop = true;
-        			}
-        		} else {
-        			if ( ! in_array( $t_sort, $t_fields ) ) {
-        				$t_drop = true;
-        			}
-        		}
-				if ( ! in_array( $t_dir_fields[$i], array( "ASC", "DESC" ) ) ) {
-					$t_drop = true;
-				}
-				if ( $t_drop ) {
-					unset( $t_sort_fields[$i] );
-					unset( $t_dir_fields[$i] );
-				}
-			}
-		}
-		if ( count( $t_sort_fields ) > 0 ) {
-			$p_filter_arr['sort'] = implode( ',', $t_sort_fields );
-			$p_filter_arr['dir'] = implode( ',', $t_dir_fields );
-		} else {
-			$p_filter_arr['sort'] = "last_updated";
-			$p_filter_arr['dir'] = "DESC";
-		}
-
-		# validate or filter junk from other fields
-		$t_multi_select_list = array( 'show_category' => 'string',
-									  'show_severity' => 'int',
-									  'show_status' => 'int',
-									  'reporter_id' => 'int',
-									  'handler_id' => 'int',
-									  'note_user_id' => 'int',
-									  'show_resolution' => 'int',
-									  'show_priority' => 'int',
-									  'show_build' => 'string',
-									  'show_version' => 'string',
-									  'hide_status' => 'int',
-									  'fixed_in_version' => 'string',
-									  'target_version' => 'string',
-									  'user_monitor' => 'int',
-									  'show_profile' => 'int'
-									 );
-		foreach( $t_multi_select_list as $t_multi_field_name => $t_multi_field_type ) {
-			if ( !isset( $p_filter_arr[$t_multi_field_name] ) ) {
-				if ( 'hide_status' == $t_multi_field_name ) {
-					$p_filter_arr[$t_multi_field_name] = array( config_get( 'hide_status_default' ) );
-				} else if ( 'custom_fields' == $t_multi_field_name ) {
-					$p_filter_arr[$t_multi_field_name] = array( $f_custom_fields_data );
-				} else {
-					$p_filter_arr[$t_multi_field_name] = array( META_FILTER_ANY );
-				}
-			} else {
-				if ( !is_array( $p_filter_arr[$t_multi_field_name] ) ) {
-					$p_filter_arr[$t_multi_field_name] = array( $p_filter_arr[$t_multi_field_name] );
-				}
-				$t_checked_array = array();
-				foreach ( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
-					$t_filter_value = stripslashes( $t_filter_value );
-					if ( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
-						$t_filter_value = META_FILTER_ANY;
-					}
-					if ( ( $t_filter_value === 'none' ) || ( $t_filter_value === '[none]' ) ) {
-						$t_filter_value = META_FILTER_NONE;
-					}
-					if ( 'string' == $t_multi_field_type ) {
-						$t_checked_array[] = db_prepare_string( $t_filter_value );
-					} else if ( 'int' == $t_multi_field_type ) {
-						$t_checked_array[] = db_prepare_int( $t_filter_value );
-					} else if ( 'array' == $t_multi_field_type ) {
-						$t_checked_array[] = $t_filter_value;
-					}
-				}
-				$p_filter_arr[$t_multi_field_name] = $t_checked_array;
-			}
-		}
-
-		if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
-			foreach( $t_custom_fields as $t_cfid ) {
-				if ( !isset( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
-					$p_filter_arr['custom_fields'][$t_cfid] = array( META_FILTER_ANY );
-				} else {
-					if ( !is_array( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
-						$p_filter_arr['custom_fields'][$t_cfid] = array( $p_filter_arr['custom_fields'][$t_cfid] );
-					}
-					$t_checked_array = array();
-					foreach ( $p_filter_arr['custom_fields'][$t_cfid] as $t_filter_value ) {
-						$t_filter_value = stripslashes( $t_filter_value );
-						if ( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
-							$t_filter_value = META_FILTER_ANY;
-						}
-						$t_checked_array[] = db_prepare_string( $t_filter_value );
-					}
-					$p_filter_arr['custom_fields'][$t_cfid] = $t_checked_array;
-				}
-			}
-		}
-		# all of our filter values are now guaranteed to be there, and correct.
-		return $p_filter_arr;
-	}
-
-
-	/**
  	 * @internal The following functions each print out filter field inputs.
 	 *      They are derived from view_filters_page.php
 	 *      The functions follow a strict naming convention:
@@ -4303,56 +4057,309 @@
 		return true;
 	}
 
+    #==========================================================================
+    # FILTER DB FUNCTIONS
+    #==========================================================================
 	/**
-	 *  Get the array fields specified by $p_filter_id
-	 *  using the cached row if it's available
-	 *  @param int $p_filter_id
-	 *  @return mixed a filter row
+	 *  Add a filter to the database for the current user
+	 *  @param int $p_project_id
+	 *  @param bool $p_is_public
+	 *  @param string $p_name
+	 *  @param string $p_filter_string
+	 *  @return int
 	 */
-	function filter_get_row( $p_filter_id ) {
-		return filter_cache_row( $p_filter_id );
+	function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $p_filter_string ) {
+		$t_user_id = auth_get_current_user_id();
+		$c_project_id = db_prepare_int( $p_project_id );
+		$c_is_public = db_prepare_bool( $p_is_public, false );
+		$c_name = db_prepare_string( $p_name );
+
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
+
+		# check that the user can save non current filters (if required)
+		if ( ( ALL_PROJECTS <= $c_project_id ) && ( !is_blank( $p_name ) ) &&
+		     ( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
+			return -1;
+		}
+
+		# ensure that we're not making this filter public if we're not allowed
+		if ( !access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
+			$c_is_public = db_prepare_bool( false );
+		}
+
+		# Do I need to update or insert this value?
+		$query = "SELECT id FROM $t_filters_table
+					WHERE user_id=" . db_param(0) . "
+					AND project_id=" . db_param(1) . "
+					AND name=" . db_param(2);
+		$result = db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_name ) );
+
+		if ( db_num_rows( $result ) > 0 ) {
+			$row = db_fetch_array( $result );
+
+			$query = "UPDATE $t_filters_table
+					  SET is_public=" . db_param(0) . ",
+						filter_string=" . db_param(1) . "
+					  WHERE id=" . db_param(2);
+			db_query_bound( $query, Array( $c_is_public, $p_filter_string, $row['id'] ) );
+
+			return $row['id'];
+		} else {
+			$query = "INSERT INTO $t_filters_table
+						( user_id, project_id, is_public, name, filter_string )
+					  VALUES
+						( " . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . " )";
+			db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_is_public, $c_name, $p_filter_string ) );
+
+			# Recall the query, we want the filter ID
+			$query = "SELECT id
+						FROM $t_filters_table
+						WHERE user_id=" . db_param(0) . "
+						AND project_id=" . db_param(1) . "
+						AND name=" . db_param(2);
+			$result = db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_name ) );
+
+			if ( db_num_rows( $result ) > 0 ) {
+				$row = db_fetch_array( $result );
+				return $row['id'];
+			}
+
+			return -1;
+		}
+	}
+
+	# We cache filter requests to reduce the number of SQL queries
+	$g_cache_filter_db_filters = array();
+
+	/**
+	 *  This function returns the filter string that is
+	 *  tied to the unique id parameter. If the user doesn't
+	 *  have permission to see this filter, the function
+	 *  returns null
+	 *  @param int $p_filter_id
+	 *  @param int $p_user_id
+	 *  @return mixed
+	 */
+	function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
+		global $g_cache_filter_db_filters;
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
+		$c_filter_id = db_prepare_int( $p_filter_id );
+
+		if ( isset( $g_cache_filter_db_filters[$p_filter_id] ) ) {
+			if ( $g_cache_filter_db_filters[$p_filter_id] === false )
+				return null;
+			return $g_cache_filter_db_filters[$p_filter_id];
+		}
+
+		if ( null === $p_user_id ) {
+			$t_user_id = auth_get_current_user_id();
+		} else {
+			$t_user_id = $p_user_id;
+		}
+
+		$query = "SELECT *
+				  FROM $t_filters_table
+				  WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_filter_id ) );
+
+		if ( db_num_rows( $result ) > 0 ) {
+			$row = db_fetch_array( $result );
+
+			if ( $row['user_id'] != $t_user_id ) {
+				if ( $row['is_public'] != true ) {
+					return null;
+				}
+			}
+
+			# check that the user has access to non current filters
+			if ( ( ALL_PROJECTS <= $row['project_id'] ) && ( !is_blank( $row['name'] ) ) && ( !access_has_project_level( config_get( 'stored_query_use_threshold', $row['project_id'], $t_user_id ) ) ) ) {
+				return null;
+			}
+
+			$g_cache_filter_db_filters[$p_filter_id] = $row['filter_string'];
+			return $row['filter_string'];
+		} else {
+			$g_cache_filter_db_filters[$p_filter_id] = false;
+			return false;
+		}
 	}
 
 	/**
-	 *  Get the value of the filter field specified by filter id and field name
+	 *  @param int $p_project_id
+	 *  @param int $p_user_id
+	 *  @return int
+	 */
+	function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
+		$c_project_id 	= db_prepare_int( $p_project_id );
+		$c_project_id 	= $c_project_id * -1;
+
+		if ( null === $p_user_id ) {
+			$c_user_id 		= auth_get_current_user_id();
+		} else {
+			$c_user_id		= db_prepare_int( $p_user_id );
+		}
+
+		# we store current filters for each project with a special project index
+		$query = "SELECT *
+				  FROM $t_filters_table
+				  WHERE user_id=" . db_param(0) . "
+					AND project_id=" . db_param(1) . "
+					AND name=" . db_param(2);
+		$result = db_query_bound( $query, Array( $c_user_id, $c_project_id, '' ) );
+
+		if ( db_num_rows( $result ) > 0 ) {
+			$row = db_fetch_array( $result );
+			return $row['id'];
+		}
+
+		return null;
+	}
+
+	/**
+	 *  Query for the filter name using the filter id
 	 *  @param int $p_filter_id
-	 *  @param string $p_field_name
 	 *  @return string
 	 */
-	function filter_get_field( $p_filter_id, $p_field_name ) {
-		$row = filter_get_row( $p_filter_id );
+	function filter_db_get_name( $p_filter_id ) {
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
+		$c_filter_id = db_prepare_int( $p_filter_id );
 
-		if ( isset( $row[$p_field_name] ) ) {
-			return $row[$p_field_name];
-		} else {
-			error_parameters( $p_field_name );
-			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
-			return '';
-		}
-	}
-	
-	/**
-	 *	Checks if a filter value is "any".  Supports both single value as well as multiple value
-	 *	fields (array).
-	 *	@param mixed $p_filter_value - The value which can be a simple value or an array.
-	 *	@return bool
-	 *	@todo remove this function and merge with filter_str_field_is_any
-	 */
-	function _filter_is_any( $p_filter_value ) {
-		if ( ( META_FILTER_ANY == $p_filter_value ) && is_numeric( $p_filter_value ) ) {
-			return true;
-		}
+		$query = "SELECT *
+				  FROM $t_filters_table
+				  WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_filter_id ) );
 
-		if ( count( $p_filter_value ) == 0 ) {
-			return true;
-		}
+		if ( db_num_rows( $result ) > 0 ) {
+			$row = db_fetch_array( $result );
 
-		foreach( $p_filter_value as $t_value ) {
-			if ( ( META_FILTER_ANY == $t_value ) && ( is_numeric( $t_value ) ) ) {
-				return true;
+			if ( $row['user_id'] != auth_get_current_user_id() ) {
+				if ( $row['is_public'] != true ) {
+					return null;
+				}
 			}
+
+			return $row['name'];
+		}
+
+		return null;
+	}
+
+	/**
+	 *  Check if the current user has permissions to delete the stored query
+	 *  @param $p_filter_id
+	 *  @return bool
+	 */
+	function filter_db_can_delete_filter( $p_filter_id ) {
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
+		$c_filter_id = db_prepare_int( $p_filter_id );
+		$t_user_id = auth_get_current_user_id();
+
+		# Administrators can delete any filter
+		if ( access_has_global_level( ADMINISTRATOR ) ) {
+			return true;
+		}
+
+		$query = "SELECT id
+				  FROM $t_filters_table
+				  WHERE id=" . db_param(0) . "
+				  AND user_id=" . db_param(1) . "
+				  AND project_id!=" . db_param(2);
+
+		$result = db_query_bound( $query, Array( $c_filter_id, $t_user_id, -1 ) );
+
+		if ( db_num_rows( $result ) > 0 ) {
+			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 *  Delete the filter specified by $p_filter_id
+	 *  @param $p_filter_id
+	 *  @return bool
+	 */
+	function filter_db_delete_filter( $p_filter_id ) {
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
+		$c_filter_id = db_prepare_int( $p_filter_id );
+		$t_user_id = auth_get_current_user_id();
+
+		if ( !filter_db_can_delete_filter( $c_filter_id ) ) {
+			return false;
+		}
+
+		$query = "DELETE FROM $t_filters_table
+				  WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_filter_id ) );
+
+		if ( db_affected_rows( $result ) > 0 ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 *  Delete all the unnamed filters
+	 */
+	function filter_db_delete_current_filters( ) {
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
+		$t_all_id = ALL_PROJECTS;
+
+		$query = "DELETE FROM $t_filters_table
+					WHERE project_id<=" . db_param(0) ."
+					AND name=" . db_param(1);
+		$result = db_query_bound( $query, Array( $t_all_id, '' ) );
+	}
+
+	/**
+	 *  @param int $p_project_id
+	 *  @param int $p_user_id
+	 *  @return mixed
+	 */
+	function filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
+		$t_overall_query_arr = array();
+
+		if ( null === $p_project_id ) {
+			$t_project_id = helper_get_current_project();
+		} else {
+			$t_project_id = db_prepare_int( $p_project_id );
+		}
+
+		if ( null === $p_user_id ) {
+			$t_user_id = auth_get_current_user_id();
+		} else {
+			$t_user_id = db_prepare_int( $p_user_id );
+		}
+
+		# If the user doesn't have access rights to stored queries, just return
+		if ( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) {
+			return $t_overall_query_arr;
+		}
+
+		# Get the list of available queries. By sorting such that public queries are
+		# first, we can override any query that has the same name as a private query
+		# with that private one
+		$query = "SELECT * FROM $t_filters_table
+					WHERE (project_id='$t_project_id'
+					OR project_id='0')
+					AND name!=''
+					ORDER BY is_public DESC, name ASC";
+		$result = db_query( $query );
+		$query_count = db_num_rows( $result );
+
+		for ( $i = 0; $i < $query_count; $i++ ) {
+			$row = db_fetch_array( $result );
+			if ( ( $row['user_id'] == $t_user_id ) || db_prepare_bool( $row['is_public'] ) ) {
+				$t_overall_query_arr[$row['id']] = $row['name'];
+			}
+		}
+
+		$t_overall_query_arr = array_unique( $t_overall_query_arr );
+		asort( $t_overall_query_arr );
+
+		return $t_overall_query_arr;
 	}
 ?>
