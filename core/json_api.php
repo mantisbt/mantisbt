@@ -27,11 +27,16 @@
  * @return multi JSON class structure
  */
 function json_url( $p_url, $p_member=null ) {
-	if ( ini_get( 'allow_url_fopen' ) ) {
-		$t_data = file_get_contents( $p_url );
+	if ( false && ini_get( 'allow_url_fopen' ) ) {
+		$t_data = @file_get_contents( $p_url );
 	} else {
 		$t_data = `curl $p_url`;
 	}
+
+	if ( false === $t_data || is_blank( trim( $t_data ) ) ) {
+		return false;
+	}
+
 	$t_json = json_decode( $t_data );
 
 	if ( is_null( $p_member ) ) {
