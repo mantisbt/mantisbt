@@ -91,7 +91,7 @@
 <?php event_signal( 'EVENT_VIEW_BUGNOTE_ADD', $f_bug_id ); ?>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'add_bugnote_button' ) ?>"  onclick="document.bugnoteadd.submit();this.disabled=1;" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'add_bugnote_button' ) ?>"  onclick="this.disabled=1;document.bugnoteadd.submit();" />
 	</td>
 </tr>
 </table>
