@@ -73,7 +73,8 @@
 <?php # Add Profile Form BEGIN ?>
 <br />
 <div align="center">
-<form method="post" action="account_prof_add.php">
+<form method="post" action="account_prof_update.php">
+<input type="hidden" name="action" value="add">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
@@ -140,7 +141,7 @@
 ?>
 <br />
 <div align="center">
-<form method="post" action="account_prof_edit_page.php">
+<form method="post" action="account_prof_update.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
@@ -153,7 +154,7 @@
 <?php
 	if ( !$g_global_profiles ) {
 ?>
-		<input type="radio" name="action" value="default" /> <?php echo lang_get( 'make_default' ) ?>
+		<input type="radio" name="action" value="make_default" /> <?php echo lang_get( 'make_default' ) ?>
 <?php
 	}
 ?>

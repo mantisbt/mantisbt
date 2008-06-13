@@ -40,16 +40,6 @@
 ?>
 <?php
 	$f_profile_id	= gpc_get_int( 'profile_id' );
-	$f_action		= gpc_get_string( 'action' );
-
-	# If deleteing profile redirect to delete script
-	if ( 'delete' == $f_action) {
-		print_header_redirect( 'account_prof_delete.php?profile_id=' . $f_profile_id );
-	}
-	# If Defaulting profile redirect to make default script
-	else if ( 'default' == $f_action ) {
-		print_header_redirect( 'account_prof_make_default.php?profile_id=' . $f_profile_id );
-	}
 
 	if ( profile_is_global( $f_profile_id ) ) {
 		access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
@@ -75,6 +65,7 @@
 <br />
 <div align="center">
 <form method="post" action="account_prof_update.php">
+<input type="hidden" name="action" value="update">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
