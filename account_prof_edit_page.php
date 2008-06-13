@@ -65,6 +65,7 @@
 <br />
 <div align="center">
 <form method="post" action="account_prof_update.php">
+<?php  echo form_security_field( 'profile_update' )?>
 <input type="hidden" name="action" value="update">
 <table class="width75" cellspacing="1">
 <tr>
