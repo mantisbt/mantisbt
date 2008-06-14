@@ -1,4 +1,4 @@
-<?php
+3<?php
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -29,7 +29,7 @@
 
 	require_once( $t_core_path.'profile_api.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	auth_ensure_user_authenticated();
 

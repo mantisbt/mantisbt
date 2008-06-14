@@ -28,7 +28,8 @@
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'bug_api.php' );
-	helper_ensure_post();
+
+	# helper_ensure_post();
 
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$t_bug = bug_get( $f_bug_id );

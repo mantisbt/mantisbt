@@ -30,7 +30,7 @@
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'bugnote_api.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_private		= gpc_get_bool( 'private' );

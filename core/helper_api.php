@@ -504,17 +504,5 @@
 		}
 
 		return (int)$t_min;
-	}	
-
-	#
-	#-------------------------------------------------
-	# check access method is POST, return if true, else call error handler
-	function helper_ensure_post()
-	{
-		if ( isset( $_SERVER['REQUEST_METHOD'] ) && ( strtoupper( $_SERVER['REQUEST_METHOD'] ) != 'POST' ) ) {
-			trigger_error( ERROR_INVALID_REQUEST_METHOD, ERROR );
-		}
-		
 	}
-
 ?>

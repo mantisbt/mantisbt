@@ -30,7 +30,7 @@
 	require_once( $t_core_path.'current_user_api.php' );
 	require( 'print_all_bug_options_inc.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	auth_ensure_user_authenticated();
 

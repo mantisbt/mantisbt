@@ -23,7 +23,7 @@
 
 	require_once( 'core.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	auth_reauthenticate();
 

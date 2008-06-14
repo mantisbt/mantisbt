@@ -28,7 +28,7 @@
 	require_once( $t_core_path . 'columns_api.php' );
 	require_once( $t_core_path . 'gpc_api.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	# @@@ access_ensure_project_level( config_get( 'manage_project_threshold' ) );
 

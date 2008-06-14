@@ -30,7 +30,7 @@
 
 	require_once( $t_core_path.'profile_api.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	auth_ensure_user_authenticated();
 

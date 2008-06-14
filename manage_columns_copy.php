@@ -29,7 +29,7 @@
 	require_once( $t_core_path . 'gpc_api.php' );
 	require_once( $t_core_path . 'helper_api.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	auth_reauthenticate();
 

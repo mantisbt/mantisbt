@@ -29,7 +29,7 @@
 
 	require_once( $t_core_path.'file_api.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	$f_file_id = gpc_get_int( 'file_id' );
 

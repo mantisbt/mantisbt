@@ -32,7 +32,7 @@
 	require_once( $t_core_path.'bugnote_api.php' );
 	require_once( $t_core_path.'current_user_api.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	$f_bugnote_id = gpc_get_int( 'bugnote_id' );
 

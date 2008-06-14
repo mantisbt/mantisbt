@@ -27,7 +27,7 @@
 
 	require_once( $t_core_path . 'sponsorship_api.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	if ( config_get( 'enable_sponsorship' ) == OFF ) {
 		trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );

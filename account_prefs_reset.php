@@ -47,7 +47,7 @@
 	$f_redirect_url	= gpc_get_string( 'redirect_url', 'account_prefs_page.php' );
 
 	#============ Permissions ============
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	auth_ensure_user_authenticated();
 
