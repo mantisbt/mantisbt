@@ -32,7 +32,7 @@
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	access_ensure_project_level( config_get('report_bug_threshold' ) );
 

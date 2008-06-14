@@ -26,7 +26,7 @@
 	require_once( 'core.php' );
 	require( 'print_all_bug_options_inc.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	auth_ensure_user_authenticated();
 

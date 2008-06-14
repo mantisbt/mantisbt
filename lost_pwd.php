@@ -27,7 +27,7 @@
 
 	require_once( 'core.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	# lost password feature disabled or reset password via email disabled -> stop here!
 	if( OFF == config_get( 'lost_password_feature' ) ||

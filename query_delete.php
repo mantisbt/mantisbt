@@ -28,7 +28,7 @@
 	require_once( $t_core_path.'string_api.php' );
 	require_once( $t_core_path.'date_api.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	auth_ensure_user_authenticated();
 	compress_enable();

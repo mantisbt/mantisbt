@@ -421,16 +421,4 @@
 				auth_is_user_authenticated() &&
 				access_has_global_level( config_get( 'show_queries_threshold' ) );
 	}
-
-
-	#
-	#-------------------------------------------------
-	# check access method is POST, return if true, else call error handler
-	function helper_ensure_post()
-	{
-		if ( isset( $_SERVER['REQUEST_METHOD'] ) && ( strtoupper( $_SERVER['REQUEST_METHOD'] ) != 'POST' ) ) {
-			trigger_error( ERROR_INVALID_REQUEST_METHOD, ERROR );
-		}
-		
-	}
 ?>

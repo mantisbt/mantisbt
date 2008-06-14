@@ -31,7 +31,7 @@
 	require_once( $t_core_path.'email_api.php' );
 	require_once( $t_core_path.'bugnote_api.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_to			= gpc_get_int_array( 'to' );

@@ -43,7 +43,7 @@
 	# (none)
 
 	#============ Permissions ============
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	auth_ensure_user_authenticated();
 

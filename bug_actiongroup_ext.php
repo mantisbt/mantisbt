@@ -28,7 +28,7 @@
 	require_once( $t_core_path . 'bug_api.php' );
 	require_once( $t_core_path . 'bug_group_action_api.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	auth_ensure_user_authenticated();
 

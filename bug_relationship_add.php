@@ -29,7 +29,7 @@
 	$t_core_path = config_get( 'core_path' );
 	require_once( $t_core_path . 'relationship_api.php' );
 
-	helper_ensure_post();
+	# helper_ensure_post();
 
 	$f_rel_type = gpc_get_int( 'rel_type' );
 	$f_src_bug_id = gpc_get_int( 'src_bug_id' );
