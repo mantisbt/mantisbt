@@ -66,6 +66,12 @@
  	$ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
 
 	/**
+	 * Tracks the query parameter count for use with db_aparam().
+	 * @global int $g_db_param_count
+	 */
+	$g_db_param_count = 0;
+
+	/**
 	 * Open a connection to the database.
 	 * @param string $p_dsn Database connection string ( specified instead of other params)
 	 * @param string $p_hostname Database server hostname
@@ -246,7 +252,7 @@
 	 */	
 	function db_query_bound($p_query, $arr_parms = null, $p_limit = -1, $p_offset = -1 )
 	{
-		global $g_queries_array, $g_db, $g_db_log_queries;
+		global $g_queries_array, $g_db, $g_db_log_queries, $g_db_param_count;
 
 		if ( ON == $g_db_log_queries ) {		
 			$t_db_type = config_get_global( 'db_type' );
@@ -318,6 +324,8 @@
 			array_push ( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
 		}
 
+		$g_db_param_count = 0;
+
 		if ( !$t_result ) {
 			db_error($p_query);
 			trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
@@ -325,6 +333,16 @@
 		} else {
 			return $t_result;
 		}
+	}
+
+	/**
+	 * Generate a string to insert a parameter into a database query string.
+	 * Automatically increments the parameter number as it gets called.
+	 * @return string 'wildcard' matching a paramater in correct ordered format for the current database. 
+	 */
+	function db_aparam() {
+		global $g_db, $g_db_param_count;
+		return $g_db->Param($g_db_param_count++);
 	}
 
 	/**
