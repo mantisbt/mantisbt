@@ -87,14 +87,14 @@
 			$t_message = sprintf( 
 							lang_get( 'twitter_resolved_no_version' ), 
 							$c_bug_id, 
-							category_get_name( $t_bug->category_id ),
+							category_full_name( $t_bug->category_id, /* include project */ false ),
 							$t_bug->summary, 
 							user_get_name( $t_bug->handler_id ) );
 		} else {
 			$t_message = sprintf(
 							lang_get( 'twitter_resolved' ), 
 							$c_bug_id, 
-							$t_bug->category,
+							category_full_name( $t_bug->category_id, /* include project */ false ),
 							$t_bug->summary, 
 							user_get_name( $t_bug->handler_id ),
 							$t_bug->fixed_in_version );
