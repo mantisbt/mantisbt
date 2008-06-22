@@ -87,7 +87,7 @@
 			$t_message = sprintf( 
 							lang_get( 'twitter_resolved_no_version' ), 
 							$c_bug_id, 
-							$t_bug->category,
+							category_get_name( $t_bug->category_id ),
 							$t_bug->summary, 
 							user_get_name( $t_bug->handler_id ) );
 		} else {
