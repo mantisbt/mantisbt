@@ -422,7 +422,7 @@
 
 		if ( custom_field_is_linked( $t_field_id, $p_project_id ) ) {
 			$t_def = custom_field_get_definition( $t_field_id );
-			return excel_prepare_string( string_custom_field_value_text( $t_def, $t_field_id, $p_issue_id ) );
+			return excel_prepare_string( string_custom_field_value( $t_def, $t_field_id, $p_issue_id ) );
 		}
 
 		// field is not linked to project
