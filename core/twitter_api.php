@@ -147,7 +147,8 @@
 			return true;
 		}
 
-		$c_message = db_prepare_string( $p_message );
+		# don't prepare the string, otherwise it will be escaped twice once by Mantis and once by Twitter
+		$c_message = $p_message;
 
 		// Set username and password
 		$t_username = config_get( 'twitter_username' );
