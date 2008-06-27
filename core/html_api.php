@@ -97,7 +97,7 @@
 		global $g_rss_feed_url;
 
 		if ( $g_rss_feed_url !== null ) {
-			echo '<link rel="alternate" type="application/rss+xml" title="RSS" href="', $g_rss_feed_url, ' />';
+			echo '<link rel="alternate" type="application/rss+xml" title="RSS" href="', $g_rss_feed_url, '" />';
 		}
 	}
 
