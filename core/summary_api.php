@@ -319,7 +319,7 @@
 		$t_summarybugs = Array();
 		while ( $row = db_fetch_array( $result ) ) {
 			// Skip private bugs unless user has proper permissions
-			if ( ( VS_PRIVATE ==  $row['view_state'] ) && 
+			if ( ( VS_PRIVATE == bug_get_field( $row['id'], 'view_state' ) ) && 
 			( false == access_has_bug_level( $t_private_bug_threshold, $row['id'] ) ) ) {
 				continue;
 			}
