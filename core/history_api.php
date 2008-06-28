@@ -47,7 +47,7 @@
 			$query = "INSERT INTO $t_mantis_bug_history_table
 						( user_id, bug_id, date_modified, field_name, old_value, new_value )
 					VALUES
-						( " . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . ", " . db_param(5) . " )";
+						( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
 			$result = db_query_bound( $query, Array( $c_user_id, $c_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value ) );
 		}
 	}
@@ -73,7 +73,7 @@
 		$query = "INSERT INTO $t_mantis_bug_history_table
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
-					( " . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . "," . db_param(5) . ", " . db_param(6) . ")";
+					( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . "," . db_param() . ", " . db_param() . ")";
 		$result = db_query_bound( $query, Array( $t_user_id, $c_bug_id, db_now(), $c_type, $c_optional, $c_optional2, '' ) );
 	}
 	# --------------------
@@ -454,7 +454,7 @@
 		$t_bug_history_table = db_get_table( 'mantis_bug_history_table' );
 
 		$query = "DELETE FROM $t_bug_history_table
-				  WHERE bug_id=" . db_param(0);
+				  WHERE bug_id=" . db_param();
 		db_query_bound($query, Array( $c_bug_id ) );
 
 		# db_query errors on failure so:

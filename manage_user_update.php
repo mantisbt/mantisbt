@@ -93,16 +93,16 @@
 	$query_params = Array();
 	if ( $f_protected && $t_old_protected ) {
 	    $query = "UPDATE $t_user_table
-	    		SET username=" . db_param(0) . ", email=" . db_param(1) . ",
-	    			protected=" . db_param(2) . ", realname=" . db_param(3) . "
-	    		WHERE id=" . db_param(4);
+	    		SET username=" . db_param() . ", email=" . db_param() . ",
+	    			protected=" . db_param() . ", realname=" . db_param() . "
+	    		WHERE id=" . db_param();
 	    $query_params = Array( $c_username, $c_email, $c_protected, $c_realname, $c_user_id );
 	} else {
 	    $query = "UPDATE $t_user_table
-	    		SET username=" . db_param(0) . ", email=" . db_param(1) . ",
-	    			access_level=" . db_param(2) . ", enabled=" . db_param(3) . ",
-	    			protected=" . db_param(4) . ", realname=" . db_param(5) . "
-	    		WHERE id=" . db_param(6);
+	    		SET username=" . db_param() . ", email=" . db_param() . ",
+	    			access_level=" . db_param() . ", enabled=" . db_param() . ",
+	    			protected=" . db_param() . ", realname=" . db_param() . "
+	    		WHERE id=" . db_param();
 	    $query_params = Array( $c_username, $c_email, $c_access_level, $c_enabled, $c_protected, $c_realname, $c_user_id ); 
 	}
 

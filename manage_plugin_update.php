@@ -33,8 +33,8 @@ $f_priority = gpc_get_int( 'priority' );
 $f_protected = gpc_get_int( 'protected', 0 );
 
 $t_plugin_table	= db_get_table( 'mantis_plugin_table' );
-$t_query = "UPDATE $t_plugin_table SET priority=" . db_param(0) . ', protected=' . db_param(1) .
-	' WHERE basename=' . db_param(2);
+$t_query = "UPDATE $t_plugin_table SET priority=" . db_param() . ', protected=' . db_param() .
+	' WHERE basename=' . db_param();
 
 db_query_bound( $t_query, array( $f_priority, $f_protected, $f_basename ) );
 

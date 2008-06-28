@@ -39,7 +39,7 @@
 	$query = "SELECT severity, COUNT(severity) as count
 				FROM mantis_bug_table
 				WHERE status<80 AND
-				      project_id=" . db_param(0) . "
+				      project_id=" . db_param() . "
 				GROUP BY severity
 				ORDER BY severity";
 	$result = db_query_bound( $query, Array( $t_project_id ) );

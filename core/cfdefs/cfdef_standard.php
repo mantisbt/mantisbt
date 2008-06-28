@@ -321,7 +321,7 @@
 
 		$query = "SELECT possible_values
 				  FROM $t_custom_field_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $p_field_def['id'] ) );
 
 		$t_row_count = db_num_rows( $result );

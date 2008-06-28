@@ -89,7 +89,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 	# Grab the data
 	$query = "SELECT print_pref
 			FROM $t_user_print_pref_table
-			WHERE user_id=" . db_param(0);
+			WHERE user_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_user_id ) );
 
 	## OOPS, No entry in the database yet.  Lets make one
@@ -106,14 +106,14 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 				INTO $t_user_print_pref_table
 				(user_id, print_pref)
 				VALUES
-				(" . db_param(0) . "," . db_param(1) . ")";
+				(" . db_param() . "," . db_param() . ")";
 
 		$result = db_query_bound( $query, Array( $c_user_id, $t_default ) );
 
 		# Rerun select query
 		$query = "SELECT print_pref
 				FROM $t_user_print_pref_table
-				WHERE user_id=" . db_param(0);
+				WHERE user_id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_user_id ) );
 	}
 

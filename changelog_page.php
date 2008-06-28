@@ -119,7 +119,7 @@
 			$query = "SELECT sbt.*, dbt.target_version AS parent_version, $t_relation_table.source_bug_id FROM $t_bug_table AS sbt
 					LEFT JOIN $t_relation_table ON sbt.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
 					LEFT JOIN $t_bug_table AS dbt ON dbt.id=$t_relation_table.source_bug_id
-					WHERE sbt.project_id=" . db_param(0) . " AND sbt.fixed_in_version=" . db_param(1) . " ORDER BY sbt.status ASC, sbt.last_updated DESC";
+					WHERE sbt.project_id=" . db_param() . " AND sbt.fixed_in_version=" . db_param() . " ORDER BY sbt.status ASC, sbt.last_updated DESC";
 
 			$t_description = version_get_field( $t_version_id, 'description' );
 					

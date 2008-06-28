@@ -37,7 +37,7 @@
 	# Grab the Projections/Releases
 	$query = "SELECT DISTINCT projection
 			FROM mantis_bug_table
-			WHERE project_id=" . db_param(0) . "
+			WHERE project_id=" . db_param() . "
 			ORDER BY projection";
 	$result = db_query_bound( $query, Array( $t_project_id ) );
 	$projection_count = db_num_rows( $result );

@@ -164,7 +164,7 @@
 		$query = "INSERT INTO $t_mantis_bug_relationship_table
 				( source_bug_id, destination_bug_id, relationship_type )
 				VALUES
-				( " . db_param(0) . ',' . db_param(1) . ',' . db_param(2) . ')';
+				( " . db_param() . ',' . db_param() . ',' . db_param() . ')';
 		$result = db_query_bound( $query, Array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type ) );
 		$t_relationship = db_fetch_array( $result );
 
@@ -201,10 +201,10 @@
 		$c_relationship_id = db_prepare_int( $p_relationship_id );
 
 		$query = "UPDATE $t_mantis_bug_relationship_table
-				SET source_bug_id=" . db_param(0) . ",
-					destination_bug_id=" . db_param(1) . ",
-					relationship_type=" . db_param(2) . "
-				WHERE id=" . db_param(3);
+				SET source_bug_id=" . db_param() . ",
+					destination_bug_id=" . db_param() . ",
+					relationship_type=" . db_param() . "
+				WHERE id=" . db_param();
 		$result = db_query_bound( $query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type, $c_relationship_id ) );
 		$t_relationship = db_fetch_array( $result );
 
@@ -227,7 +227,7 @@
 		$t_mantis_bug_relationship_table = db_get_table( 'mantis_bug_relationship_table' );
 
 		$query = "DELETE FROM $t_mantis_bug_relationship_table
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 		$result = db_query_bound( $query, array( $c_relationship_id ) );
 	}
 
@@ -241,8 +241,8 @@
 		$t_mantis_bug_relationship_table = db_get_table( 'mantis_bug_relationship_table' );
 
 		$query = "DELETE FROM $t_mantis_bug_relationship_table
-				WHERE source_bug_id=" . db_param(0) . " OR
-				destination_bug_id=" .  db_param(1);
+				WHERE source_bug_id=" . db_param() . " OR
+				destination_bug_id=" .  db_param();
 		$result = db_query_bound( $query, array( $c_bug_id, $c_bug_id ) );
 	}
 
@@ -282,7 +282,7 @@
 
 		$query = "SELECT *
 				FROM $t_mantis_bug_relationship_table
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 		$result = db_query_bound( $query, array( (int)$p_relationship_id ) );
 
 		$t_relationship_count = db_num_rows( $result );
@@ -319,7 +319,7 @@
 				$t_mantis_bug_table.project_id
 				FROM $t_mantis_bug_relationship_table
 				INNER JOIN $t_mantis_bug_table ON $t_mantis_bug_relationship_table.destination_bug_id = $t_mantis_bug_table.id
-				WHERE source_bug_id=" . db_param(0) . "
+				WHERE source_bug_id=" . db_param() . "
 				ORDER BY relationship_type, $t_mantis_bug_relationship_table.id";
 		$result = db_query_bound( $query, array( $c_src_bug_id ) );
 
@@ -363,7 +363,7 @@
 				$t_mantis_bug_table.project_id
 				FROM $t_mantis_bug_relationship_table
 				INNER JOIN $t_mantis_bug_table ON $t_mantis_bug_relationship_table.source_bug_id = $t_mantis_bug_table.id
-				WHERE destination_bug_id=" . db_param(0) . "
+				WHERE destination_bug_id=" . db_param() . "
 				ORDER BY relationship_type, $t_mantis_bug_relationship_table.id";
 		$result = db_query_bound( $query, Array( $c_dest_bug_id ) );
 
@@ -424,11 +424,11 @@
 		$t_query = "SELECT *
 				FROM $t_mantis_bug_relationship_table
 				WHERE
-				(source_bug_id=" . db_param(0) . "
-				AND destination_bug_id=" . db_param(1) . ")
+				(source_bug_id=" . db_param() . "
+				AND destination_bug_id=" . db_param() . ")
 				OR
-				(source_bug_id=" . db_param(2) . "
-				AND destination_bug_id=" . db_param(3) . ")";
+				(source_bug_id=" . db_param() . "
+				AND destination_bug_id=" . db_param() . ")";
 		$result = db_query_bound( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_dest_bug_id, $c_src_bug_id ), 1 );
 
 		$t_relationship_count = db_num_rows( $result );

@@ -62,7 +62,7 @@
 
 		$query = "SELECT *
 				  FROM $t_project_version_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_version_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -142,7 +142,7 @@
 		$query = "INSERT INTO $t_project_version_table
 					( project_id, version, date_order, description, released, obsolete )
 				  VALUES
-					(" . db_param(0) . ', ' . db_param(1) . ', ' . db_param(2) . ', ' . db_param(3) . ', ' . db_param(4) . ', ' . db_param(5) . ' )';
+					(" . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 		db_query_bound( $query, Array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released, $c_obsolete ) );
 
 		# db_query errors on failure so:
@@ -175,28 +175,28 @@
 		$t_bug_table				= db_get_table( 'mantis_bug_table' );
 
 		$query = "UPDATE $t_project_version_table
-				  SET version=" . db_param(0) . ",
-					description=" .db_param(1) . ",
-					released=" . db_param(2) . ",
-					date_order=" . db_param(3) . ",
-					obsolete=" . db_param(4) . "
-				  WHERE id=" . db_param(5);
+				  SET version=" . db_param() . ",
+					description=" .db_param() . ",
+					released=" . db_param() . ",
+					date_order=" . db_param() . ",
+					obsolete=" . db_param() . "
+				  WHERE id=" . db_param();
 		db_query_bound( $query, Array( $c_version_name, $c_description, $c_released, $c_date_order, $c_obsolete, $c_version_id ) );
 
 		if ( $c_version_name != $c_old_version_name ) {
 			$query = "UPDATE $t_bug_table
-					  SET version=" . db_param(0) . '
-					  WHERE ( project_id=' . db_param(1) . ') AND ( version=' . db_param(2) . ')';
+					  SET version=" . db_param() . '
+					  WHERE ( project_id=' . db_param() . ') AND ( version=' . db_param() . ')';
 			db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 			$query = "UPDATE $t_bug_table
-					  SET fixed_in_version=" . db_param(0) . '
-					  WHERE ( project_id=' . db_param(1) . ') AND ( fixed_in_version=' . db_param(2) . ')';
+					  SET fixed_in_version=" . db_param() . '
+					  WHERE ( project_id=' . db_param() . ') AND ( fixed_in_version=' . db_param() . ')';
 			db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 			$query = "UPDATE $t_bug_table
-					  SET target_version=" . db_param(0) . '
-					  WHERE ( project_id=' . db_param(1) . ') AND ( target_version=' . db_param(2) . ')';
+					  SET target_version=" . db_param() . '
+					  WHERE ( project_id=' . db_param() . ') AND ( target_version=' . db_param() . ')';
 			db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 			# @@@ We should consider using ids instead of names for foreign keys.  The main advantage of using the names are:
@@ -226,17 +226,17 @@
 		$t_bug_table				= db_get_table( 'mantis_bug_table' );
 
 		$query = "DELETE FROM $t_project_version_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		db_query_bound( $query, Array( $c_version_id ) );
 
 		$query = "UPDATE $t_bug_table
-				  SET version=" . db_param(0) . "
-				  WHERE project_id=" . db_param(1) . " AND version=" . db_param(2);
+				  SET version=" . db_param() . "
+				  WHERE project_id=" . db_param() . " AND version=" . db_param();
 		db_query_bound( $query, Array( $c_new_version, $c_project_id, $t_old_version ) );
 
 		$query = "UPDATE $t_bug_table
-				  SET fixed_in_version=" . db_param(0) . '
-				  WHERE ( project_id=' . db_param(1) . ' ) AND ( fixed_in_version=' . db_param(2) .')';
+				  SET fixed_in_version=" . db_param() . '
+				  WHERE ( project_id=' . db_param() . ' ) AND ( fixed_in_version=' . db_param() .')';
 		db_query_bound( $query, Array( $c_new_version, $c_project_id, $t_old_version ) );
 
 		# db_query errors on failure so:
@@ -252,18 +252,18 @@
 		$t_bug_table				= db_get_table( 'mantis_bug_table' );
 
 		$query = "DELETE FROM $t_project_version_table
-	  			  WHERE project_id=" . db_param(0);
+	  			  WHERE project_id=" . db_param();
 
 		db_query_bound( $query, Array( $c_project_id ) );
 
 		$query = "UPDATE $t_bug_table
 				  SET version=''
-				  WHERE project_id=" . db_param(0);
+				  WHERE project_id=" . db_param();
 		db_query_bound( $query, Array( $c_project_id ) );
 
 		$query = "UPDATE $t_bug_table
 				  SET fixed_in_version=''
-				  WHERE project_id=" . db_param(0);
+				  WHERE project_id=" . db_param();
 		db_query_bound( $query, Array( $c_project_id ) );
 
 		# db_query errors on failure so:
@@ -380,8 +380,8 @@
 
 		$query = "SELECT id
 					FROM $t_project_version_table
-					WHERE project_id=" . db_param(0) . " AND
-						version=" . db_param(1);
+					WHERE project_id=" . db_param() . " AND
+						version=" . db_param();
 
 		$result = db_query_bound( $query, Array( $c_project_id, $p_version ) );
 

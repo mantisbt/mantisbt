@@ -46,7 +46,7 @@
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 	$query = "SELECT *
 			FROM $t_bug_table
-			WHERE id=" . db_param(0);
+			WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_bug_id ) );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
@@ -54,7 +54,7 @@
 	$t_bug_text_table = db_get_table( 'mantis_bug_text_table' );
 	$query = "SELECT *
 			FROM $t_bug_text_table
-			WHERE id=" . db_param(0);
+			WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $v_bug_text_id ) );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v2' );
@@ -308,7 +308,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	    $t_user_prof_table = db_get_table( 'mantis_user_profile_table' );
 		$query = "SELECT description
 				FROM $t_user_prof_table
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $v_profile_id ) );
 		$t_profile_description = '';
 		if ( db_num_rows( $result ) > 0 ) {

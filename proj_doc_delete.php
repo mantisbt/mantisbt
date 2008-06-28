@@ -38,7 +38,7 @@
 
 	$t_project_file_table = db_get_table( 'mantis_project_file_table' );
 	$query = "SELECT title FROM $t_project_file_table 
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $f_file_id ) );
 	$t_title = db_result( $result );
 

@@ -51,7 +51,7 @@
 
 	$query = "SELECT *
 			FROM $t_bugnote_table
-			WHERE bug_id=" . db_param(0) . " $t_restriction
+			WHERE bug_id=" . db_param() . " $t_restriction
 			ORDER BY date_submitted $t_bugnote_order";
 	$result = db_query_bound($query, Array( $c_bug_id ) );
 	$num_notes = db_num_rows($result);
@@ -86,7 +86,7 @@
 		# grab the bugnote text and id and prefix with v3_
 		$query = "SELECT note, id
 				FROM $t_bugnote_text_table
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 		$result2 = db_query_bound( $query, Array( $v3_bugnote_text_id ) );
 		$v3_note = db_result( $result2, 0, 0 );
 		$v3_bugnote_text_id = db_result( $result2, 0, 1 );

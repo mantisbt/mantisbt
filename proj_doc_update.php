@@ -133,14 +133,14 @@
 				trigger_error( ERROR_GENERIC, ERROR );
 		}		
 		$query = "UPDATE $t_project_file_table
-			SET title=" . db_param(0) . ", description=" . db_param(1) . ", date_added=" . db_param(2) . ",
-				filename=" . db_param(3) . ", filesize=" . db_param(4) . ", file_type=" .db_param(5) . ", content=" .db_param(6) . "
-				WHERE id=" . db_param(7);
+			SET title=" . db_param() . ", description=" . db_param() . ", date_added=" . db_param() . ",
+				filename=" . db_param() . ", filesize=" . db_param() . ", file_type=" .db_param() . ", content=" .db_param() . "
+				WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_title, $c_description, db_now(), $c_file_name, $c_file_size, $c_file_type, $c_content, $c_file_id ) );
 	} else {
 		$query = "UPDATE $t_project_file_table
-				SET title=" . db_param(0) . ", description=" . db_param(1) . "
-				WHERE id=" . db_param(2);
+				SET title=" . db_param() . ", description=" . db_param() . "
+				WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_title, $c_description, $c_file_id ) );
 	}
 	

@@ -71,7 +71,7 @@
 		$query = "INSERT INTO $t_user_profile_table
 				    ( user_id, platform, os, os_build, description )
 				  VALUES
-				    ( " . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . " )";
+				    ( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
 		db_query_bound( $query, Array( $c_user_id, $c_platform, $c_os, $c_os_build, $c_description ) );
 
 		return db_insert_id($t_user_profile_table);
@@ -95,7 +95,7 @@
 
 		# Delete the profile
 		$query = "DELETE FROM $t_user_profile_table
-				  WHERE id=" . db_param(0) . " AND user_id=" . db_param(1) ;
+				  WHERE id=" . db_param() . " AND user_id=" . db_param() ;
 		db_query_bound( $query, Array( $c_profile_id, $c_user_id ) );
 
 		# db_query errors on failure so:
@@ -138,11 +138,11 @@
 
 		# Add item
 		$query = "UPDATE $t_user_profile_table
-				  SET platform=" . db_param(0) . ",
-				  	  os=" . db_param(1) . ",
-					  os_build=" . db_param(2) . ",
-					  description=" . db_param(3) . "
-				  WHERE id=" . db_param(4) . " AND user_id=" . db_param(5);
+				  SET platform=" . db_param() . ",
+				  	  os=" . db_param() . ",
+					  os_build=" . db_param() . ",
+					  description=" . db_param() . "
+				  WHERE id=" . db_param() . " AND user_id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_platform, $c_os, $c_os_build, $c_description, $c_profile_id, $c_user_id ) );
 
 		# db_query errors on failure so:
@@ -163,7 +163,7 @@
 
 		$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE id=" . db_param(0) . " AND user_id=" . db_param(1);
+				  WHERE id=" . db_param() . " AND user_id=" . db_param();
 	    $result = db_query_bound( $query, Array( $c_profile_id, $c_user_id ) );
 
 		return db_fetch_array( $result );
@@ -178,7 +178,7 @@
 
 		$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 	    $result = db_query_bound( $query, Array( $c_profile_id ) );
 
 		return db_fetch_array( $result );
@@ -193,7 +193,7 @@
 
 		$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE user_id=" . db_param(0) . "
+				  WHERE user_id=" . db_param() . "
 				  ORDER BY platform, os, os_build";
 	    $result = db_query_bound( $query, Array( $c_user_id ) );
 
@@ -287,7 +287,7 @@
 
 		$query = "SELECT default_profile
 			FROM $t_mantis_user_pref_table
-			WHERE user_id=" . db_param(0);
+			WHERE user_id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_user_id ) );
 
 	    $t_default_profile = db_result( $result, 0, 0 );

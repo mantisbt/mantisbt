@@ -134,7 +134,7 @@
 
 		$query = "SELECT *
 				  FROM $t_bug_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -252,7 +252,7 @@
 
 		$query = "SELECT bt.*
 				  FROM $t_bug_text_table bt, $t_bug_table b
-				  WHERE b.id=" . db_param(0) . " AND
+				  WHERE b.id=" . db_param() . " AND
 				  		b.bug_text_id = bt.id";
 		$result = db_query_bound( $query, Array( $c_bug_id ) );
 
@@ -518,7 +518,7 @@
 		$query = "INSERT INTO $t_bug_text_table
 				    ( description, steps_to_reproduce, additional_information )
 				  VALUES
-				    ( " . db_param(0) . ',' . db_param(1) . ','. db_param(2) . ')';
+				    ( " . db_param() . ',' . db_param() . ','. db_param() . ')';
 		db_query_bound( $query, Array( $c_description, $c_steps_to_reproduce, $c_additional_info ) );
 
 		# Get the id of the text information we just inserted
@@ -536,7 +536,7 @@
 			# that that the bug was not assigned to somebody, then assign it automatically.
 			$query = "SELECT user_id
 					  FROM $t_category_table
-					  WHERE project_id=" . db_param(0) . ' AND id=' . db_param(1);
+					  WHERE project_id=" . db_param() . ' AND id=' . db_param();
 			$result = db_query_bound( $query, array( $c_project_id, $c_category_id ) );
 
 			if ( db_num_rows( $result ) > 0 ) {
@@ -568,34 +568,34 @@
 				      target_version, due_date 
 				    )
 				  VALUES
-				    ( " . db_param(0) . ",
-				      " . db_param(1) . ",
-				      " . db_param(2) . ",
-				      " . db_param(3) . ", 
-				      " . db_param(4) . ",
-				      " . db_param(5) . ", 
-				      " . db_param(6) . ",
-				      " . db_param(7) . ", 
-				      " . db_param(8) . ",
-				      " . db_param(9) . ",
-				      " . db_param(10) .",
-				      " . db_param(11) . ",
-				      " . db_param(12) . ",
-				      " . db_param(13) . ", 
-				      " . db_param(14) . ",
-				      " . db_param(15) . ",
-				      " . db_param(16) . ",
-				      " . db_param(17) . ",
-				      " . db_param(18) . ",
-				      " . db_param(19) . ",
-				      " . db_param(20) . ",
-				      " . db_param(21) . ",
-				      " . db_param(22) . ",
-				      " . db_param(23) . ",
-				      " . db_param(24) . ",
-				      " . db_param(25) . ",
-				      " . db_param(26) . ",
-				      " . db_param(27) . ")";
+				    ( " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ", 
+				      " . db_param() . ",
+				      " . db_param() . ", 
+				      " . db_param() . ",
+				      " . db_param() . ", 
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() .",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ", 
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ")";
 		db_query_bound( $query, Array( $c_project_id, $c_reporter_id, $c_handler_id, 0, $c_priority, $c_severity, $c_reproducibility, $t_status,
 								 $t_resolution, 10, $c_category_id, db_now(), db_now(), 10, $t_text_id, $c_os, $c_os_build, $c_platform, $c_version,$c_build,
 								 $c_profile_id, $c_summary, $c_view_state, $c_sponsorship_total, $c_sticky, '', $c_target_version, $c_due_date) );
@@ -673,7 +673,7 @@
 		if ( $p_copy_custom_fields ) {
 			$query = "SELECT field_id, bug_id, value
 					   FROM $t_mantis_custom_field_string_table
-					   WHERE bug_id=" . db_param(0);
+					   WHERE bug_id=" . db_param();
 			$result = db_query_bound( $query, Array( $t_bug_id ) );
 			$t_count = db_num_rows( $result );
 
@@ -686,7 +686,7 @@
 
 				$query = "INSERT INTO $t_mantis_custom_field_string_table
 						   ( field_id, bug_id, value )
-						   VALUES (" . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ")";
+						   VALUES (" . db_param() . ", " . db_param() . ", " . db_param() . ")";
 				db_query_bound( $query, Array( $c_field_id, $c_new_bug_id, $c_value ) );
 			}
 		}
@@ -700,7 +700,7 @@
 		if ( $p_copy_bugnotes ) {
 			$query = "SELECT *
 					  FROM $t_mantis_bugnote_table
-					  WHERE bug_id=" . db_param(0);
+					  WHERE bug_id=" . db_param();
 			$result = db_query_bound( $query, Array( $t_bug_id ) );
 			$t_count = db_num_rows( $result );
 
@@ -710,7 +710,7 @@
 
 				$query2 = "SELECT *
 						   FROM $t_mantis_bugnote_text_table
-						   WHERE id=" . db_param(0);
+						   WHERE id=" . db_param();
 				$result2 = db_query_bound( $query2, Array( $t_bugnote_text_id ) );
 				$t_count2 = db_num_rows( $result2 );
 
@@ -720,19 +720,19 @@
 
 					$query2 = "INSERT INTO $t_mantis_bugnote_text_table
 							   ( note )
-							   VALUES ( " . db_param(0) . " );";
+							   VALUES ( " . db_param() . " );";
 					db_query_bound( $query2, Array( $t_bugnote_text['note'] ) );
 					$t_bugnote_text_insert_id = db_insert_id( $t_mantis_bugnote_text_table );
 				}
 
 				$query2 = "INSERT INTO $t_mantis_bugnote_table
 						   ( bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified )
-						   VALUES ( " . db_param(0) . ",
-						   			" . db_param(1) . ",
-						   			" . db_param(2) . ",
-						   			" . db_param(3) . ",
-						   			" . db_param(4) . ",
-						   			" . db_param(5) . ");";
+						   VALUES ( " . db_param() . ",
+						   			" . db_param() . ",
+						   			" . db_param() . ",
+						   			" . db_param() . ",
+						   			" . db_param() . ",
+						   			" . db_param() . ");";
 				db_query_bound( $query2, Array( $t_new_bug_id, $t_bug_note['reporter_id'], $t_bugnote_text_insert_id, $t_bug_note['view_state'], $t_bug_note['date_submitted'], $t_bug_note['last_modified'] ) );
 			}
 		}
@@ -741,7 +741,7 @@
 		if ( $p_copy_attachments ) {
 			$query = "SELECT *
 					  FROM $t_mantis_bug_file_table
-					  WHERE bug_id = " . db_param(0);
+					  WHERE bug_id = " . db_param();
 			$result = db_query_bound( $query, Array( $t_bug_id ) );
 			$t_count = db_num_rows( $result );
 
@@ -760,16 +760,16 @@
 
 				$query = "INSERT INTO $t_mantis_bug_file_table
 						( bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content )
-						VALUES ( " . db_param(0) . ",
-								 " . db_param(1) . ",
-								 " . db_param(2) . ",
-								 " . db_param(3) . ",
-								 " . db_param(4) . ",
-								 " . db_param(5) . ",
-								 " . db_param(6) . ",
-								 " . db_param(7) . ",
-								 " . db_param(8) . ",
-								 " . db_param(9) . ");";
+						VALUES ( " . db_param() . ",
+								 " . db_param() . ",
+								 " . db_param() . ",
+								 " . db_param() . ",
+								 " . db_param() . ",
+								 " . db_param() . ",
+								 " . db_param() . ",
+								 " . db_param() . ",
+								 " . db_param() . ",
+								 " . db_param() . ");";
 				db_query_bound( $query, Array( $t_new_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_bug_file['folder'], $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
 			}
 		}
@@ -778,7 +778,7 @@
 		if ( $p_copy_monitoring_users ) {
 			$query = "SELECT *
 					  FROM $t_mantis_bug_monitor_table
-					  WHERE bug_id = " . db_param(0);
+					  WHERE bug_id = " . db_param();
 			$result = db_query_bound( $query, Array( $t_bug_id ) );
 			$t_count = db_num_rows( $result );
 
@@ -786,7 +786,7 @@
 				$t_bug_monitor = db_fetch_array( $result );
 				$query = "INSERT INTO $t_mantis_bug_monitor_table
 						 ( user_id, bug_id )
-						 VALUES ( " . db_param(0) . ", " . db_param(1) . ")";
+						 VALUES ( " . db_param() . ", " . db_param() . ")";
 				db_query_bound( $query, Array( $t_bug_monitor['user_id'], $t_new_bug_id ) );
 			}
 		}
@@ -796,7 +796,7 @@
 		if ( $p_copy_history ) {
 			$query = "SELECT *
 					  FROM $t_mantis_bug_history_table
-					  WHERE bug_id = " . db_param(0);
+					  WHERE bug_id = " . db_param();
 			$result = db_query_bound( $query, Array( $t_bug_id ) );
 			$t_count = db_num_rows( $result );
 
@@ -804,13 +804,13 @@
 				$t_bug_history = db_fetch_array( $result );
 				$query = "INSERT INTO $t_mantis_bug_history_table
 						  ( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
-						  VALUES ( " . db_param(0) . ",
-						  		   " . db_param(1) . ",
-						  		   " . db_param(2) . ",
-						  		   " . db_param(3) . ",
-						  		   " . db_param(4) . ",
-						  		   " . db_param(5) . ",
-						  		   " . db_param(6) . " );";
+						  VALUES ( " . db_param() . ",
+						  		   " . db_param() . ",
+						  		   " . db_param() . ",
+						  		   " . db_param() . ",
+						  		   " . db_param() . ",
+						  		   " . db_param() . ",
+						  		   " . db_param() . " );";
 				db_query_bound( $query, Array( $t_bug_history['user_id'], $t_new_bug_id, $t_bug_history['date_modified'], $t_bug_history['field_name'], $t_bug_history['old_value'], $t_bug_history['new_value'], $t_bug_history['type'] ) );
 			}
 		}
@@ -873,12 +873,12 @@
 		$t_bug_text_id = bug_get_field( $p_bug_id, 'bug_text_id' );
 
 		$query = "DELETE FROM $t_bug_text_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		db_query_bound( $query, Array( $t_bug_text_id ) );
 
 		# Delete the bug entry
 		$query = "DELETE FROM $t_bug_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		db_query_bound( $query, Array( $c_bug_id ) );
 
 		bug_clear_cache( $p_bug_id );
@@ -902,7 +902,7 @@
 
 		$query = "SELECT id
 				  FROM $t_bug_table
-				  WHERE project_id=" . db_param(0);
+				  WHERE project_id=" . db_param();
 		$result = db_query_bound( $query, array( $c_project_id ) );
 
 		$bug_count = db_num_rows( $result );
@@ -974,24 +974,24 @@
 		#  shouldn't get updated like this anyway.  If you really need to change
 		#  them use bug_set_field()
 		$query = "UPDATE $t_bug_table
-				SET project_id=" . db_param(0) . ",
-					reporter_id=" . db_param(1) . ",
-					handler_id=" . db_param(2) . ",
-					duplicate_id=" . db_param(3) . ",
-					priority=" . db_param(4) . ",
-					severity=" . db_param(5) . ",
-					reproducibility=" . db_param(6) . ",
-					status=" . db_param(7) . ",
-					resolution=" . db_param(8) . ",
-					projection=" . db_param(9) . ",
-					category_id=" . db_param(10) . ",
-					eta=" . db_param(11) . ",
-					os=" . db_param(12) . ",
-					os_build=" . db_param(13) . ",
-					platform=" . db_param(14) . ",
-					version=" . db_param(15) . ",
-					build=" . db_param(16) . ",
-					fixed_in_version=" . db_param(17) . ",";
+				SET project_id=" . db_param() . ",
+					reporter_id=" . db_param() . ",
+					handler_id=" . db_param() . ",
+					duplicate_id=" . db_param() . ",
+					priority=" . db_param() . ",
+					severity=" . db_param() . ",
+					reproducibility=" . db_param() . ",
+					status=" . db_param() . ",
+					resolution=" . db_param() . ",
+					projection=" . db_param() . ",
+					category_id=" . db_param() . ",
+					eta=" . db_param() . ",
+					os=" . db_param() . ",
+					os_build=" . db_param() . ",
+					platform=" . db_param() . ",
+					version=" . db_param() . ",
+					build=" . db_param() . ",
+					fixed_in_version=" . db_param() . ",";
 
 		$t_fields = Array( $c_bug_data->project_id, $c_bug_data->reporter_id, $c_bug_data->handler_id, $c_bug_data->duplicate_id, $c_bug_data->priority, $c_bug_data->severity, $c_bug_data->reproducibility,
 								 $c_bug_data->status, $c_bug_data->resolution, $c_bug_data->projection, $c_bug_data->category_id, $c_bug_data->eta, $c_bug_data->os, $c_bug_data->os_build, $c_bug_data->platform,
@@ -1000,18 +1000,18 @@
 		$t_roadmap_updated = false;
 		if ( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
 			$query .= "
-					target_version=" . db_param( $t_field_count++ ) . ",";
+					target_version=" . db_param() . ",";
 			$t_fields[] = $c_bug_data->target_version;
 			$t_roadmap_updated = true;
 		}
 
 		$query .= "
-					view_state=" . db_param( $t_field_count++ ) .",
-					summary=" . db_param( $t_field_count++ ) .",
-					sponsorship_total=" . db_param( $t_field_count++ ) .",
-					sticky=" . db_param( $t_field_count++ ) .",
-					due_date=" . db_param( $t_field_count++ ) ." 
-				WHERE id=" . db_param( $t_field_count++ );
+					view_state=" . db_param() .",
+					summary=" . db_param() .",
+					sponsorship_total=" . db_param() .",
+					sticky=" . db_param() .",
+					due_date=" . db_param() ." 
+				WHERE id=" . db_param();
 		$t_fields[] = $c_bug_data->view_state;
 		$t_fields[] = $c_bug_data->summary;
 		$t_fields[] = $c_bug_data->sponsorship_total;
@@ -1059,10 +1059,10 @@
 			$t_bug_text_id = bug_get_field( $p_bug_id, 'bug_text_id' );
 
 			$query = "UPDATE $t_bug_text_table
-						SET description=" . db_param(0) . ",
-							steps_to_reproduce=" . db_param(1) . ",
-							additional_information=" . db_param(2) . "
-						WHERE id=" . db_param(3);
+						SET description=" . db_param() . ",
+							steps_to_reproduce=" . db_param() . ",
+							additional_information=" . db_param() . "
+						WHERE id=" . db_param();
 			db_query_bound( $query, Array( $c_bug_data->description, $c_bug_data->steps_to_reproduce, $c_bug_data->additional_information, $t_bug_text_id ) );
 
 			bug_text_clear_cache( $p_bug_id );
@@ -1244,7 +1244,7 @@
 		$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 		$query = "SELECT COUNT(*)
 				  FROM $t_bugnote_table
-				  WHERE bug_id =" . db_param(0) . " $t_restriction";
+				  WHERE bug_id =" . db_param() . " $t_restriction";
 		$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 		return db_result( $result );
@@ -1265,7 +1265,7 @@
 
 		$query = "SELECT last_modified
 				  FROM $t_bugnote_table
-				  WHERE bug_id=" . db_param(0) . "
+				  WHERE bug_id=" . db_param() . "
 				  ORDER BY last_modified DESC";
 		$result = db_query_bound( $query, Array( $c_bug_id ), 1 );
 		$row = db_result( $result );
@@ -1304,7 +1304,7 @@
 
 		$query = "SELECT last_modified
 				  FROM $t_bugnote_table
-				  WHERE bug_id=" . db_param(0) . "
+				  WHERE bug_id=" . db_param() . "
 				  ORDER BY last_modified DESC";
 		$result = db_query_bound( $query, Array( $c_bug_id ) );
 		$row = db_fetch_array( $result );
@@ -1339,7 +1339,7 @@
 
 		$query = "SELECT id, title, diskfile, filename, filesize, file_type, date_added
 		                FROM $t_bug_file_table
-		                WHERE bug_id=" . db_param(0) . "
+		                WHERE bug_id=" . db_param() . "
 		                ORDER BY date_added";
 		$db_result = db_query_bound( $query, Array( $c_bug_id ) );
 		$num_notes = db_num_rows( $db_result );
@@ -1430,8 +1430,8 @@
 
 		# Update fields
 		$query = "UPDATE $t_bug_table
-				  SET $p_field_name=" . db_param(0) . "
-				  WHERE id=" .db_param(1);
+				  SET $p_field_name=" . db_param() . "
+				  WHERE id=" .db_param();
 		db_query_bound( $query, Array( $c_value, $c_bug_id ) );
 
 		# updated the last_updated date
@@ -1480,8 +1480,8 @@
 
 			# get user id
 			$query = "UPDATE $t_bug_table
-					  SET handler_id=" . db_param(0) . ", status=" . db_param(1) . "
-					  WHERE id=" . db_param(2);
+					  SET handler_id=" . db_param() . ", status=" . db_param() . "
+					  WHERE id=" . db_param();
 			db_query_bound( $query, Array( $c_user_id, $t_ass_val, $c_bug_id ) );
 
 			# log changes
@@ -1644,8 +1644,8 @@
 		$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 		$query = "UPDATE $t_bug_table
-				  SET last_updated= " . db_param(0) . "
-				  WHERE id=" . db_param(1);
+				  SET last_updated= " . db_param() . "
+				  WHERE id=" . db_param();
 		db_query_bound( $query, Array( db_now(), $c_bug_id) );
 
 		bug_clear_cache( $c_bug_id );
@@ -1679,7 +1679,7 @@
 				"INTO $t_bug_monitor_table ".
 				"( user_id, bug_id ) ".
 				"VALUES ".
-				"(" . db_param(0) . ',' . db_param(1) . ')';
+				"(" . db_param() . ',' . db_param() . ')';
 		db_query_bound( $query, Array( $c_user_id, $c_bug_id ) );
 
 		# log new monitoring action
@@ -1707,11 +1707,11 @@
 		# Delete monitoring record
 		$query ="DELETE ".
 				"FROM $t_bug_monitor_table ".
-				"WHERE bug_id = " . db_param(0);
+				"WHERE bug_id = " . db_param();
 		$db_query_params[] = $c_bug_id;
 		
 		if ( $p_user_id !== null ) {
-			$query .= " AND user_id = " . db_param(1);
+			$query .= " AND user_id = " . db_param();
 			$db_query_params[] = $c_user_id;
 		}
 

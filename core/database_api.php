@@ -336,23 +336,14 @@
 	}
 
 	/**
-	 * Generate a string to insert a parameter into a database query string.
-	 * Automatically increments the parameter number as it gets called.
-	 * @return string 'wildcard' matching a paramater in correct ordered format for the current database. 
-	 */
-	function db_aparam() {
-		global $g_db, $g_db_param_count;
-		return $g_db->Param($g_db_param_count++);
-	}
-
-	/**
 	 * Generate a string to insert a parameter into a database query string
-	 * @param int $p_param Integer representing ordered paramater for a future bound query.
 	 * @return string 'wildcard' matching a paramater in correct ordered format for the current database. 
 	 */	
-	function db_param($p_param) {
+	function db_param() {
 		global $g_db;
-		return $g_db->Param($p_param);
+		static $t_param = 0;
+
+		return $g_db->Param($t_param++);
 	}
 
 	/**
@@ -808,7 +799,7 @@
 	 * @param bool $p_case_sensitive true: case sensitive, false: case insensitive
 	 * @return string returns (field LIKE 'value') OR (field ILIKE 'value')
 	 */
-	function db_helper_like( $p_field_name, $p_param_id, $p_case_sensitive = false ) {
+	function db_helper_like( $p_field_name, $p_case_sensitive = false ) {
 		$t_like_keyword = 'LIKE';
 
 		if ( $p_case_sensitive === false ) {
@@ -817,7 +808,7 @@
 			}
 		}
 
-		return "($p_field_name $t_like_keyword " . db_param( $p_param_id ) . ')';
+		return "($p_field_name $t_like_keyword " . db_param() . ')';
 	}
 
 	/**
@@ -834,10 +825,10 @@
 		$p_date1 = $p_date1_id_or_column;
 		$p_date2 = $p_date2_id_or_column;
 		if( is_int( $p_date1_id_or_column ) ) {
-			$p_date1 = db_param( $p_date1_id_or_column );
+			$p_date1 = db_param();
 		}
 		if( is_int( $p_date2_id_or_column ) ) { 
-			$p_date2 = db_param( $p_date2_id_or_column );
+			$p_date2 = db_param();
 		}
 		switch( $t_db_type ) {
 			case 'mssql':

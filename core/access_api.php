@@ -102,7 +102,7 @@
 
 			$query = "SELECT user_id, access_level
 					  FROM $t_project_user_list_table
-					  WHERE project_id=" . db_param(0);
+					  WHERE project_id=" . db_param();
 			$result = db_query_bound( $query, Array( $c_project_id ) );
 			$count = db_num_rows( $result );
 			for ( $i=0 ; $i < $count ; $i++ ) {
@@ -136,7 +136,7 @@
 
 			$query = "SELECT project_id, access_level
 					  FROM $t_project_user_list_table
-					  WHERE user_id=" . db_param(0);
+					  WHERE user_id=" . db_param();
 			$result = db_query_bound( $query, Array( $c_user_id ) );
 
 			$count = db_num_rows( $result );

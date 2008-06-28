@@ -45,7 +45,7 @@
 		$query = "INSERT INTO $t_project_hierarchy_table
 		                ( child_id, parent_id, inherit_parent )
 						VALUES
-						( " . db_param(0) . ', ' . db_param(1) . ', ' . db_param(2) . ' )';
+						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 
 		db_query_bound($query, Array( $c_child_id, $c_parent_id, $c_inherit_parent ) );
 	}
@@ -58,9 +58,9 @@
 		$c_inherit_parent = db_prepare_bool( $p_inherit_parent );
 
 		$query = "UPDATE $t_project_hierarchy_table
-					SET inherit_parent=" . db_param(0) . '
-					WHERE child_id=' . db_param(1) . '
-						AND parent_id=' . db_param(2);
+					SET inherit_parent=" . db_param() . '
+					WHERE child_id=' . db_param() . '
+						AND parent_id=' . db_param();
 		db_query_bound( $query, Array( $c_inherit_parent, $c_child_id, $c_parent_id ) );
 	}
 
@@ -72,8 +72,8 @@
 		$c_parent_id = db_prepare_int( $p_parent_id );
 
 		$query = "DELETE FROM $t_project_hierarchy_table
-		                WHERE child_id = " . db_param(0) . "
-						AND parent_id = " . db_param(1);
+		                WHERE child_id = " . db_param() . "
+						AND parent_id = " . db_param();
 
 		db_query_bound($query, Array( $c_child_id, $c_parent_id ) );
 	}
@@ -85,8 +85,8 @@
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$query = "DELETE FROM $t_project_hierarchy_table
-		                WHERE child_id = " . db_param(0) . "
-						  OR parent_id = " . db_param(1);
+		                WHERE child_id = " . db_param() . "
+						  OR parent_id = " . db_param();
 
 		db_query_bound($query, Array( $c_project_id, $c_project_id ) );
 	}
@@ -119,7 +119,7 @@
 
 		$t_project_table			= db_get_table( 'mantis_project_table' );
 		$t_project_hierarchy_table	= db_get_table( 'mantis_project_hierarchy_table' );
-		$t_enabled_clause = $p_show_disabled ? '1=1' : 'p.enabled = ' . db_param(0);
+		$t_enabled_clause = $p_show_disabled ? '1=1' : 'p.enabled = ' . db_param();
 
 		$query = "SELECT DISTINCT p.id, ph.parent_id, p.name, p.inherit_global, ph.inherit_parent
 				  FROM $t_project_table p

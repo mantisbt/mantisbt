@@ -58,7 +58,7 @@
 
 		$query = "SELECT *
 				  FROM $t_user_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $p_user_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -191,7 +191,7 @@
 
 		$query = "SELECT username
 				FROM $t_user_table
-				WHERE username=" . db_param(0);
+				WHERE username=" . db_param();
 		$result = db_query_bound( $query, Array( $c_username ), 1 );
 
 		if ( db_num_rows( $result ) > 0 ) {
@@ -230,7 +230,7 @@
 			$t_user_table 		= db_get_table( 'mantis_user_table' );
 			$query = "SELECT id
 				FROM $t_user_table
-				WHERE realname=" . db_param(0);
+				WHERE realname=" . db_param();
 			$result = db_query_bound( $query, Array( $c_realname ) );
 			$t_count = db_num_rows( $result );
 			if ( $t_count > 0 ) {
@@ -309,7 +309,7 @@
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_bug_monitor_table
-				  WHERE user_id=" . db_param(0) . " AND bug_id=" . db_param(1);
+				  WHERE user_id=" . db_param() . " AND bug_id=" . db_param();
 
 		$result = db_query_bound( $query, Array( $c_user_id, $c_bug_id ) );
 
@@ -365,7 +365,7 @@
 	function user_count_level( $p_level=ANYBODY ) {
 		$t_level = db_prepare_int( $p_level );
 		$t_user_table = db_get_table( 'mantis_user_table' );
-		$query = "SELECT COUNT(id) FROM $t_user_table WHERE access_level>=" . db_param(0);
+		$query = "SELECT COUNT(id) FROM $t_user_table WHERE access_level>=" . db_param();
 		$result = db_query_bound( $query, Array( $t_level ) );
 
 		# Get the list of connected users
@@ -519,7 +519,7 @@
 		$t_project_user_list_table 	= db_get_table('mantis_project_user_list_table');
 
 		$query = "DELETE FROM $t_project_user_list_table
-				  WHERE user_id=" . db_param(0);
+				  WHERE user_id=" . db_param();
 		db_query_bound( $query, Array( $c_user_id ) );
 
 		user_clear_cache( $p_user_id );
@@ -539,7 +539,7 @@
 
 		# Remove associated profiles
 		$query = "DELETE FROM $t_user_profile_table
-				  WHERE user_id=" . db_param(0);
+				  WHERE user_id=" . db_param();
 		db_query_bound( $query, Array( $c_user_id ) );
 
 		user_clear_cache( $p_user_id );
@@ -570,7 +570,7 @@
 			$c_realname = db_prepare_string( user_get_field( $p_user_id, 'realname' ) );
 			$query = "SELECT id
 					FROM $t_user_table
-					WHERE realname=" . db_param(0);
+					WHERE realname=" . db_param();
 			$result = db_query_bound( $query, Array( $c_realname ) );
 			$t_count = db_num_rows( $result );
 
@@ -587,7 +587,7 @@
 
 		# Remove account
 		$query = "DELETE FROM $t_user_table
-				  WHERE id=" .db_param(0);
+				  WHERE id=" .db_param();
 		db_query_bound( $query, Array( $c_user_id ) );
 
 		return true;
@@ -610,7 +610,7 @@
 
 		$query = "SELECT *
 				  FROM $t_user_table
-				  WHERE username=" . db_param(0);
+				  WHERE username=" . db_param();
 		$result = db_query_bound( $query, Array( $p_username ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -633,7 +633,7 @@
 
 		$query = "SELECT *
 				  FROM $t_user_table
-				  WHERE email=" . db_param(0);
+				  WHERE email=" . db_param();
 		$result = db_query_bound( $query, Array( $p_email ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -656,7 +656,7 @@
 
 		$query = "SELECT *
 				  FROM $t_user_table
-				  WHERE realname=" . db_param(0);
+				  WHERE realname=" . db_param();
 		$result = db_query_bound( $query, Array( $p_realname ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -826,14 +826,14 @@
 				$query = "SELECT p.id, p.name, ph.parent_id
 								  FROM $t_project_table p
 								  LEFT JOIN $t_project_user_list_table u
-								    ON p.id=u.project_id AND u.user_id=" . db_param(0) . "
+								    ON p.id=u.project_id AND u.user_id=" . db_param() . "
 								  LEFT JOIN $t_project_hierarchy_table ph
 								    ON ph.child_id = p.id
 								  WHERE 
-									( p.view_state=" . db_param(1) . "
-									    OR (p.view_state=" . db_param(2) . "
+									( p.view_state=" . db_param() . "
+									    OR (p.view_state=" . db_param() . "
 										    AND
-									        u.user_id=" . db_param(3) . " )
+									        u.user_id=" . db_param() . " )
 									)
 					  ORDER BY p.name";
 				$result = db_query_bound( $query, Array( $p_user_id, $t_public, $t_private, $p_user_id ) );
@@ -841,14 +841,14 @@
 				$query = "SELECT p.id, p.name, ph.parent_id
 							  FROM $t_project_table p
 							  LEFT JOIN $t_project_user_list_table u
-							    ON p.id=u.project_id AND u.user_id=" . db_param(0) . "
+							    ON p.id=u.project_id AND u.user_id=" . db_param() . "
 							  LEFT JOIN $t_project_hierarchy_table ph
 							    ON ph.child_id = p.id
-							  WHERE p.enabled = " . db_param(1) . " AND
-								( p.view_state=" . db_param(2) . "
-								    OR (p.view_state=" . db_param(3) . "
+							  WHERE p.enabled = " . db_param() . " AND
+								( p.view_state=" . db_param() . "
+								    OR (p.view_state=" . db_param() . "
 									    AND
-								        u.user_id=" . db_param(4) . " )
+								        u.user_id=" . db_param() . " )
 								)
 				  ORDER BY p.name";
 				$result = db_query_bound( $query, Array( $p_user_id, true, $t_public, $t_private, $p_user_id ) );
@@ -910,7 +910,7 @@
 		$t_private	= VS_PRIVATE;
 
 		if ( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
-			$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = ' . db_param(0) . ' AND';
+			$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = ' . db_param() . ' AND';
 			$query = "SELECT DISTINCT p.id, p.name, ph.parent_id
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_hierarchy_table ph
@@ -994,7 +994,7 @@
 				  FROM $t_bug_table
 				  WHERE $t_where_prj
 				  		status<'$t_resolved' AND
-				  		handler_id=" . db_param(0);
+				  		handler_id=" . db_param();
 		$result = db_query_bound( $query, Array( $p_user_id ) );
 
 		return db_result( $result );
@@ -1013,7 +1013,7 @@
 				  FROM $t_bug_table
 				  WHERE $t_where_prj
 						  status<'$t_resolved' AND
-						  reporter_id=" . db_param(0);
+						  reporter_id=" . db_param();
 		$result = db_query_bound( $query, Array( $p_user_id ) );
 
 		return db_result( $result );
@@ -1029,8 +1029,8 @@
 
 		$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE id=" . db_param(0) . " AND
-				  		user_id=" . db_param(1);
+				  WHERE id=" . db_param() . " AND
+				  		user_id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_profile_id, $c_user_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -1100,8 +1100,8 @@
 		$t_user_table = db_get_table( 'mantis_user_table' );
 		
 		$query = "UPDATE $t_user_table
-				  SET last_visit= " . db_param(0) . "
-				  WHERE id=" . db_param(1);
+				  SET last_visit= " . db_param() . "
+				  WHERE id=" . db_param();
 
 		db_query_bound( $query, Array( $c_value, $c_user_id ) );
 
@@ -1119,7 +1119,7 @@
 
 		$query = "UPDATE $t_user_table
 				SET login_count=login_count+1
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 
 		db_query_bound( $query, Array( $p_user_id ) );
 
@@ -1136,7 +1136,7 @@
 
 		$query = "UPDATE $t_user_table
 				SET failed_login_count=0
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 		db_query_bound( $query, Array( $p_user_id ) );
 
 		user_clear_cache( $p_user_id );
@@ -1151,7 +1151,7 @@
 
 		$query = "UPDATE $t_user_table
 				SET failed_login_count=failed_login_count+1
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 		db_query_bound( $query, Array( $p_user_id ) );
 
 		user_clear_cache( $p_user_id );
@@ -1166,7 +1166,7 @@
 
 		$query = "UPDATE $t_user_table
 				SET lost_password_request_count=0
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 		db_query_bound( $query, Array( $p_user_id ) );
 
 		user_clear_cache( $p_user_id );
@@ -1181,7 +1181,7 @@
 
 		$query = "UPDATE $t_user_table
 				SET lost_password_request_count=lost_password_request_count+1
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 		db_query_bound( $query, Array( $p_user_id ) );
 
 		user_clear_cache( $p_user_id );
@@ -1203,8 +1203,8 @@
 		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
-				  SET $c_field_name=" . db_param(0) . "
-				  WHERE id=" . db_param(1);
+				  SET $c_field_name=" . db_param() . "
+				  WHERE id=" . db_param();
 
 		db_query_bound( $query, Array( $c_field_value, $c_user_id ) );
 
@@ -1240,9 +1240,9 @@
 		$c_user_table	= db_get_table( 'mantis_user_table' );
 
 		$query = "UPDATE $c_user_table
-				  SET password=" . db_param(0) . ",
-				  cookie_string=" . db_param(1) . "
-				  WHERE id=" . db_param(2);
+				  SET password=" . db_param() . ",
+				  cookie_string=" . db_param() . "
+				  WHERE id=" . db_param();
 		db_query_bound( $query, Array( $c_password, $c_cookie_string, $c_user_id ) );
 
 		#db_query errors on failure so:

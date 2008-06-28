@@ -259,7 +259,7 @@
 		# Delete files from disk
 		$query = "SELECT diskfile, filename
 				FROM $t_bug_file_table
-				WHERE bug_id=" . db_param(0);
+				WHERE bug_id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 		$file_count = db_num_rows( $result );
@@ -291,7 +291,7 @@
 
 		# Delete the corresponding db records
 		$query = "DELETE FROM $t_bug_file_table
-				  WHERE bug_id=" . db_param(0);
+				  WHERE bug_id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 		# db_query errors on failure so:
@@ -307,7 +307,7 @@
 			# Delete files from disk
 			$query = "SELECT diskfile, filename
 					FROM $t_project_file_table
-					WHERE project_id=" . db_param(0);
+					WHERE project_id=" . db_param();
 			$result = db_query_bound( $query, array( (int)$p_project_id ) );
 
 			$file_count = db_num_rows( $result );
@@ -334,7 +334,7 @@
 
 		# Delete the corresponding db records
 		$query = "DELETE FROM $t_project_file_table
-				WHERE project_id=" . db_param(0);
+				WHERE project_id=" . db_param();
 		$result = db_query_bound($query, Array( (int)$p_project_id ) );
 	}
 	# --------------------
@@ -393,7 +393,7 @@
 		# get info
 		$query = "SELECT $c_field_name
 				  FROM $t_bug_file_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( (int)$p_file_id ), 1 );
 
 		return db_result( $result );
@@ -426,7 +426,7 @@
 
 		$t_file_table	= db_get_table( 'mantis_' . $p_table . '_file_table' );
 		$query = "DELETE FROM $t_file_table
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 		db_query_bound( $query, Array( $c_file_id ) );
 		return true;
 	}
@@ -501,7 +501,7 @@
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_file_table
-				  WHERE diskfile=" . db_param(0);
+				  WHERE diskfile=" . db_param();
 		$result = db_query_bound( $query, Array( $c_name ) );
 		$t_count = db_result( $result );
 
@@ -519,7 +519,7 @@
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_file_table
-				  WHERE filename=" . db_param(0) . " AND bug_id=" . db_param(1);
+				  WHERE filename=" . db_param() . " AND bug_id=" . db_param();
 		$result = db_query_bound( $query, Array( $p_name, $p_bug_id ) );
 		$t_count = db_result( $result );
 

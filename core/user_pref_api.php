@@ -131,7 +131,7 @@
 
 		$query = "SELECT *
 				  FROM $t_user_pref_table
-				  WHERE user_id=" . db_param(0) . " AND project_id=" . db_param(1);
+				  WHERE user_id=" . db_param() . " AND project_id=" . db_param();
 		$result = db_query_bound( $query, Array( $p_user_id, $p_project_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -278,8 +278,8 @@
 		$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
 		$query = "DELETE FROM $t_user_pref_table
-				  WHERE user_id=" . db_param(0) . " AND
-				  		project_id=" . db_param(1);
+				  WHERE user_id=" . db_param() . " AND
+				  		project_id=" . db_param();
 		db_query_bound( $query, Array( $c_user_id, $c_project_id ) );
 
 		user_pref_clear_cache( $p_user_id, $p_project_id );
@@ -325,7 +325,7 @@
 		$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
 		$query = "DELETE FROM $t_user_pref_table
-				  WHERE project_id=" . db_param(0);
+				  WHERE project_id=" . db_param();
 		db_query_bound( $query, Array( $c_project_id ) );
 
 		# db_query errors on failure so:

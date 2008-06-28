@@ -242,7 +242,7 @@
 		if ( ON == email_notify_flag( $p_notify_type, 'monitor' ) ) {
 			$query = "SELECT DISTINCT user_id
 					  FROM $t_bug_monitor_table
-					  WHERE bug_id=" . db_param(0);
+					  WHERE bug_id=" . db_param();
 			$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 			$count = db_num_rows( $result );
@@ -263,7 +263,7 @@
 		if ( ON == email_notify_flag( $p_notify_type, 'bugnotes' ) ) {
 			$query = "SELECT DISTINCT reporter_id
 					  FROM $t_bugnote_table
-					  WHERE bug_id = " . db_param(0);
+					  WHERE bug_id = " . db_param();
 			$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 			$count = db_num_rows( $result );

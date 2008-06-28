@@ -65,7 +65,7 @@
 
 		$query 	= "SELECT COUNT(*)
 		          	FROM $t_bugnote_table
-		          	WHERE id=" . db_param(0);
+		          	WHERE id=" . db_param();
 		$result	= db_query_bound( $query, Array( $c_bugnote_id ) );
 
 		if ( 0 == db_result( $result ) ) {
@@ -130,7 +130,7 @@
 		$query = "INSERT INTO $t_bugnote_text_table
 				( note )
 			VALUES
-				( " . db_param(0) . " )";
+				( " . db_param() . " )";
 		db_query_bound( $query, Array( $p_bugnote_text ) );
 
 		# retrieve bugnote text id number
@@ -155,7 +155,7 @@
 		$query = "INSERT INTO $t_bugnote_table
 				(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified, note_type, note_attr, time_tracking )
 			VALUES
-				(" . db_param(0) . ", " . db_param(1) . "," . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . "," . db_param(5) . ", " . db_param(6) . ", " . db_param(7) . ", " . db_param(8) . " )";
+				(" . db_param() . ", " . db_param() . "," . db_param() . ", " . db_param() . ", " . db_param() . "," . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
 		db_query_bound( $query, Array( $c_bug_id, $c_user_id, $t_bugnote_text_id, $t_view_state, db_now(), db_now(), $c_type, $p_attr, $c_time_tracking ) );
 
 		# get bugnote id
@@ -186,12 +186,12 @@
 
 		# Remove the bugnote
 		$query = "DELETE FROM $t_bugnote_table
-		          	WHERE id=" . db_param(0);
+		          	WHERE id=" . db_param();
 		db_query_bound( $query, Array( $c_bugnote_id ) );
 
 		# Remove the bugnote text
 		$query = "DELETE FROM $t_bugnote_text_table
-		          	WHERE id=" . db_param(0);
+		          	WHERE id=" . db_param();
 		db_query_bound( $query, Array( $t_bugnote_text_id ) );
 
 		# log deletion of bug
@@ -210,7 +210,7 @@
 		# Delete the bugnote text items
 		$query = "SELECT bugnote_text_id
 		          	FROM $t_bugnote_table
-		          	WHERE bug_id=" . db_param(0);
+		          	WHERE bug_id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_bug_id ) );
 		$bugnote_count = db_num_rows( $result );
 		for ( $i = 0 ; $i < $bugnote_count ; $i++ ) {
@@ -219,13 +219,13 @@
 
 			# Delete the corresponding bugnote texts
 			$query = "DELETE FROM $t_bugnote_text_table
-			          	WHERE id=" . db_param(0);
+			          	WHERE id=" . db_param();
 			db_query_bound( $query, Array( $t_bugnote_text_id ) );
 		}
 
 		# Delete the corresponding bugnotes
 		$query = "DELETE FROM $t_bugnote_table
-		          	WHERE bug_id=" . db_param(0);
+		          	WHERE bug_id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 		# db_query errors on failure so:
@@ -246,7 +246,7 @@
 		# grab the bugnote text
 		$query = "SELECT note
 		          	FROM $t_bugnote_text_table
-		          	WHERE id=" . db_param(0);
+		          	WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $t_bugnote_text_id ) );
 
 		return db_result( $result );
@@ -261,7 +261,7 @@
 
 		$query = "SELECT $c_field_name
 		          	FROM $t_bugnote_table
-		          	WHERE id=" . db_param(0);
+		          	WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_bugnote_id ), 1 );
 
 		return db_result( $result );
@@ -275,7 +275,7 @@
 
 		$query = "SELECT id
 		          	FROM $t_bugnote_table
-		          	WHERE bug_id=" . db_param(0) . "
+		          	WHERE bug_id=" . db_param() . "
 		          	ORDER by last_modified DESC";
 		$result = db_query_bound( $query, Array( $c_bug_id ), 1 );
 
@@ -346,7 +346,7 @@
 			} else {
 				## Use offset only if order is ASC to get the last bugnotes
 				if ( 'ASC' == $p_user_bugnote_order ) {
-					$result = db_query_bound( "SELECT COUNT(*) AS row_count FROM $t_bugnote_table WHERE bug_id= " . db_param(0), array( $c_bug_id ) );
+					$result = db_query_bound( "SELECT COUNT(*) AS row_count FROM $t_bugnote_table WHERE bug_id= " . db_param(), array( $c_bug_id ) );
 					$row    = db_fetch_array( $result );
 
 					$t_bugnote_offset = $row['row_count'] - $p_user_bugnote_limit;
@@ -405,8 +405,8 @@
 		$t_bugnote_table         = db_get_table( 'mantis_bugnote_table' );
 
 		$query = "UPDATE $t_bugnote_table
-				SET time_tracking = " . db_param(0) . "
-				WHERE id=" . db_param(1);
+				SET time_tracking = " . db_param() . "
+				WHERE id=" . db_param();
 		db_query_bound( $query, Array( $c_bugnote_time_tracking, $c_bugnote_id ) );
 
 		# db_query errors if there was a problem so:
@@ -420,8 +420,8 @@
 		$t_bugnote_table	= db_get_table( 'mantis_bugnote_table' );
 
 		$query = "UPDATE $t_bugnote_table
-					SET last_modified=" . db_param(0) . "
-					WHERE id=" . db_param(1);
+					SET last_modified=" . db_param() . "
+					WHERE id=" . db_param();
 		db_query_bound( $query, Array( db_now(), $c_bugnote_id ) );
 
 		# db_query errors if there was a problem so:
@@ -436,8 +436,8 @@
 		$t_bugnote_text_table	= db_get_table( 'mantis_bugnote_text_table' );
 
 		$query = "UPDATE $t_bugnote_text_table
-			SET note=" . db_param(0) .
-			"WHERE id=" . db_param(1);
+			SET note=" . db_param() .
+			"WHERE id=" . db_param();
 		db_query_bound( $query, Array( $p_bugnote_text, $t_bugnote_text_id ) );
 
 		# updated the last_updated date
@@ -465,8 +465,8 @@
 
 		# update view_state
 		$query = "UPDATE $t_bugnote_table
-		          	SET view_state=" . db_param(0) . "
-		          	WHERE id=" . db_param(1);
+		          	SET view_state=" . db_param() . "
+		          	WHERE id=" . db_param();
 		db_query_bound( $query, Array( $t_view_state, $c_bugnote_id ) );
 
 		history_log_event_special( $t_bug_id, BUGNOTE_STATE_CHANGED, bugnote_format_id( $t_view_state ), $p_bugnote_id );

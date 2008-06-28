@@ -67,7 +67,7 @@
 
 		$query = "SELECT *
 				  FROM $t_project_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_project_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -166,7 +166,7 @@
 
 		$query ="SELECT COUNT(*)
 				 FROM $t_project_table
-				 WHERE name=" . db_param(0);
+				 WHERE name=" . db_param();
 		$result = db_query_bound( $query, Array( $p_name ) );
 
 		if ( 0 == db_result( $result ) ) {
@@ -197,8 +197,8 @@
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_project_user_list_table
-				  WHERE project_id=" . db_param(0) . " AND
-						user_id=" . db_param(1);
+				  WHERE project_id=" . db_param() . " AND
+						user_id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_project_id, $c_user_id ) );
 
 		if ( 0 == db_result( $result ) ) {
@@ -236,7 +236,7 @@
 		$query = "INSERT INTO $t_project_table
 					( name, status, enabled, view_state, file_path, description, inherit_global )
 				  VALUES
-					( " . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . ", " . db_param(5) . ", " . db_param(6) . " )";
+					( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
 
 		db_query_bound( $query, Array( $p_name, (int)$p_status, $c_enabled, (int)$p_view_state, $p_file_path, $p_description, $c_inherit_global ) );
 
@@ -287,7 +287,7 @@
 
 		# Delete the project entry
 		$query = "DELETE FROM $t_project_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 
 		db_query_bound( $query, Array( $c_project_id ) );
 
@@ -326,14 +326,14 @@
 		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		$query = "UPDATE $t_project_table
-				  SET name=" . db_param(0) . ",
-					status=" . db_param(1) . ",
-					enabled=" . db_param(2) . ",
-					view_state=" . db_param(3) . ",
-					file_path=" . db_param(4) . ",
-					description=" . db_param(5) . ",
-					inherit_global=" . db_param(6) . "
-				  WHERE id=" . db_param(7);
+				  SET name=" . db_param() . ",
+					status=" . db_param() . ",
+					enabled=" . db_param() . ",
+					view_state=" . db_param() . ",
+					file_path=" . db_param() . ",
+					description=" . db_param() . ",
+					inherit_global=" . db_param() . "
+				  WHERE id=" . db_param();
 		db_query_bound( $query, Array( $p_name, (int)$p_status, $c_enabled, (int)$p_view_state, $p_file_path, $p_description, $c_inherit_global, $p_project_id ) );
 
 		project_clear_cache( $p_project_id );
@@ -364,7 +364,7 @@
 	function project_get_id_by_name( $p_project_name ) {
 		$t_project_table = db_get_table( 'mantis_project_table' );
 
-		$query = "SELECT id FROM $t_project_table WHERE name = " . db_param(0);
+		$query = "SELECT id FROM $t_project_table WHERE name = " . db_param();
 		$t_result = db_query_bound( $query, Array( $p_project_name ), 1 );
 
 		if ( db_num_rows( $t_result ) == 0 ) {
@@ -425,7 +425,7 @@
 
 		$query = "SELECT access_level
 				  FROM $t_project_user_list_table
-				  WHERE user_id=" . db_param(0) . " AND project_id=" . db_param(1);
+				  WHERE user_id=" . db_param() . " AND project_id=" . db_param();
 		$result = db_query_bound( $query, Array( (int)$p_user_id, $p_project_id ) );
 
 		if ( db_num_rows( $result ) > 0 ) {
@@ -443,7 +443,7 @@
 
 		$query = "SELECT *
 				FROM $t_project_user_list_table
-				WHERE project_id=" . db_param(0);
+				WHERE project_id=" . db_param();
 
 		$result = db_query_bound( $query, Array( (int)$p_project_id ) );
 
@@ -534,7 +534,7 @@
 		if ( $p_include_global_users ) {
 			$query = "SELECT id, username, realname, access_level
 				FROM $t_user_table
-				WHERE enabled = " . db_param(0) . "
+				WHERE enabled = " . db_param() . "
 					AND access_level $t_global_access_clause";
 
 			$result = db_query_bound( $query, Array( $t_on ) );
@@ -550,8 +550,8 @@
 			$query = "SELECT u.id, u.username, u.realname, l.access_level
 				FROM $t_project_user_list_table l, $t_user_table u
 				WHERE l.user_id = u.id
-				AND u.enabled = " . db_param(0) . "
-				AND l.project_id = " . db_param(1);
+				AND u.enabled = " . db_param() . "
+				AND l.project_id = " . db_param();
 
 			$result = db_query_bound( $query, Array( $t_on, $c_project_id ) );
 			$t_row_count = db_num_rows( $result );
@@ -601,7 +601,7 @@
 				  INTO $t_project_user_list_table
 				    ( project_id, user_id, access_level )
 				  VALUES
-				    ( " . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ")";
+				    ( " . db_param() . ", " . db_param() . ", " . db_param() . ")";
 
 		db_query_bound( $query, Array( $c_project_id, $c_user_id, $c_access_level ) );
 
@@ -620,9 +620,9 @@
 		$c_access_level	= db_prepare_int( $p_access_level );
 
 		$query = "UPDATE $t_project_user_list_table
-				  SET access_level=" . db_param(0) . "
-				  WHERE	project_id=" . db_param(1) . " AND
-						user_id=" . db_param(2);
+				  SET access_level=" . db_param() . "
+				  WHERE	project_id=" . db_param() . " AND
+						user_id=" . db_param();
 
 		db_query_bound( $query, Array( $c_access_level, $c_project_id, $c_user_id ) );
 
@@ -651,8 +651,8 @@
 		$c_user_id		= db_prepare_int( $p_user_id );
 
 		$query = "DELETE FROM $t_project_user_list_table
-				  WHERE project_id=" . db_param(0) . " AND
-						user_id=" . db_param(1);
+				  WHERE project_id=" . db_param() . " AND
+						user_id=" . db_param();
 
 		db_query_bound( $query, Array( $c_project_id, $c_user_id ) );
 
@@ -669,7 +669,7 @@
 		$c_project_id	= db_prepare_int( $p_project_id );
 
 		$query = "DELETE FROM $t_project_user_list_table
-				WHERE project_id=" . db_param(0);
+				WHERE project_id=" . db_param();
 
 		db_query_bound( $query, Array( $c_project_id ) );
 
@@ -723,7 +723,7 @@
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_file_table
-				  WHERE filename=" . db_param(0);
+				  WHERE filename=" . db_param();
 		$result = db_query_bound( $query, Array( $c_name ) );
 		$t_count = db_result( $result );
 

@@ -62,14 +62,14 @@
 	    		  ( project_id, poster_id, date_posted, last_modified,
 	    		    view_state, announcement, headline, body )
 				VALUES
-				    ( " . db_param(0) . ",
-				      " . db_param(1) . ",
-				      " . db_param(2) . ",
-				      " . db_param(3) . ",
-				      " . db_param(4) . ",
-				      " . db_param(5) . ",
-				      " . db_param(6) . ",
-				      " . db_param(7) . "
+				    ( " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . "
 					)";
 		db_query_bound( $query, Array( $c_project_id, $c_poster_id, db_now(), db_now(),
 						$c_view_state, $c_announcement, $c_headline, $c_body) ); 
@@ -88,7 +88,7 @@
 		$t_news_table = db_get_table( 'mantis_news_table' );
 
 		$query = "DELETE FROM $t_news_table
-	    		  WHERE id=" . db_param(0);
+	    		  WHERE id=" . db_param();
 
 		db_query_bound( $query, Array( $c_news_id ) );
 
@@ -103,7 +103,7 @@
 		$t_news_table = db_get_table( 'mantis_news_table' );
 
 		$query = "DELETE FROM $t_news_table
-	    		  WHERE project_id=" . db_param(0);
+	    		  WHERE project_id=" . db_param();
 
 		db_query_bound( $query, Array( $c_project_id ) );
 
@@ -134,13 +134,13 @@
 
 		# Update entry
 		$query = "UPDATE $t_news_table
-				  SET view_state=" . db_param(0) . ",
-					announcement=" . db_param(1) . ",
-					headline=" . db_param(2) . ",
-					body=" . db_param(3) . ",
-					project_id=" . db_param(4) . ",
-					last_modified= " . db_param(5) . "
-				  WHERE id=" . db_param(6);
+				  SET view_state=" . db_param() . ",
+					announcement=" . db_param() . ",
+					headline=" . db_param() . ",
+					body=" . db_param() . ",
+					project_id=" . db_param() . ",
+					last_modified= " . db_param() . "
+				  WHERE id=" . db_param();
 
 		db_query_bound( $query, Array( $c_view_state, $c_announcement, $c_headline, $c_body, $c_project_id, db_now(), $c_news_id ) );
 
@@ -156,7 +156,7 @@
 
 		$query = "SELECT *
 				  FROM $t_news_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_news_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -280,11 +280,11 @@
 				$query = "SELECT *
 						FROM $t_news_table WHERE 
 						( " . db_helper_compare_days( 0, 'date_posted', "< $t_news_view_limit_days") . "
-						 OR announcement = " . db_param(1) . " ) ";
+						 OR announcement = " . db_param() . " ) ";
 				$t_params = Array( db_now(), 1 ) ;
 				if ( 1 == count( $t_projects ) ) {
 					$c_project_id = $t_projects[0];
-					$query .= " AND project_id=" . db_param(1);
+					$query .= " AND project_id=" . db_param();
 					$t_params[] = $c_project_id;
 				} else {
 					$query .= ' AND project_id IN (' . join( $t_projects, ',' ) . ')';

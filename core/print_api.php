@@ -660,8 +660,8 @@
 			$query = "SELECT p.id, p.name
 					FROM $t_mantis_project_table p, $t_mantis_project_user_list_table m
 					WHERE 	p.id=m.project_id AND
-							m.user_id=" . db_param(0) . " AND
-							p.enabled=" . db_param(1);
+							m.user_id=" . db_param() . " AND
+							p.enabled=" . db_param();
 			$result = db_query_bound( $query, Array( $t_user_id, 1 ) );
 		}
 		
@@ -1143,7 +1143,7 @@
 				LEFT JOIN $t_mantis_project_user_list_table u
 				ON p.id=u.project_id
 				WHERE p.enabled = '1' AND
-					u.user_id=" . db_param(0) . " 
+					u.user_id=" . db_param() . " 
 				ORDER BY p.name";
 		$result = db_query_bound( $query, Array( $c_user_id ) );
 		$category_count = db_num_rows( $result );
@@ -1307,7 +1307,7 @@
 
 		$query = "SELECT version
 				FROM $t_mantis_project_version_table
-				WHERE project_id=" . db_param(0);
+				WHERE project_id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_project_id ) );
 		$version_count = db_num_rows( $result );
 		$t_string = '';
@@ -1844,7 +1844,7 @@ document.getElementById( span ).style.display = displayType;
 						default:
                   					$query = "SELECT *
 	                  						FROM $t_bug_file_table
-				            			WHERE id=" . db_param(0);
+				            			WHERE id=" . db_param();
         	               				$result = db_query_bound( $query, Array( $c_id ) );
 			                 		$row = db_fetch_array( $result );
                         	                        $v_content=$row['content'];

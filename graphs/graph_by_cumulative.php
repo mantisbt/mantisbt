@@ -90,8 +90,8 @@
 
 	$query = "SELECT status, date_submitted, last_updated
 			FROM mantis_bug_table
-			WHERE project_id=" . db_param(0) . " AND
-					date_submitted>=" . db_param(1) . "
+			WHERE project_id=" . db_param() . " AND
+					date_submitted>=" . db_param() . "
 			ORDER BY date_submitted ASC";
 	$result = db_query_bound( $query, Array( $t_project_id, $g_start_date ) );
 	$bug_count = db_num_rows( $result );

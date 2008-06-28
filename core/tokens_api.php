@@ -43,7 +43,7 @@
 
 		$t_query 	= "SELECT id
 		          	FROM $t_tokens_table
-		          	WHERE id=" . db_param(0);
+		          	WHERE id=" . db_param();
 		$t_result	= db_query_bound( $t_query, Array( $c_token_id ), 1 );
 
 		return( 1 == db_num_rows( $t_result ) );
@@ -79,7 +79,7 @@
 		$t_tokens_table = db_get_table( 'mantis_tokens_table' );
 
 		$t_query = "SELECT * FROM $t_tokens_table 
-					WHERE type=" . db_param(0) . " AND owner=" . db_param(1);
+					WHERE type=" . db_param() . " AND owner=" . db_param();
 		$t_result = db_query_bound( $t_query, Array( $c_type, $c_user_id ) );
 
 		if ( db_num_rows( $t_result ) > 0 ) {
@@ -137,8 +137,8 @@
 		$t_tokens_table = db_get_table( 'mantis_tokens_table' );
 
 		$t_query = "UPDATE $t_tokens_table
-					SET expiry=" . db_param(0) . "
-					WHERE id=" . db_param(1);
+					SET expiry=" . db_param() . "
+					WHERE id=" . db_param();
 		db_query_bound( $t_query, Array( $c_token_expiry, $c_token_id ) );
 
 		return true;
@@ -157,7 +157,7 @@
 		$t_tokens_table = db_get_table( 'mantis_tokens_table' );
 
 		$t_query = "DELETE FROM $t_tokens_table 
-					WHERE type=" . db_param(0) . " AND owner=" . db_param(1);
+					WHERE type=" . db_param() . " AND owner=" . db_param();
 		db_query_bound( $t_query, Array( $c_type, $c_user_id ) );
 
 		return true;
@@ -179,7 +179,7 @@
 
 		# Remove
 		$t_query = "DELETE FROM $t_tokens_table
-		          	WHERE owner=" . db_param(0);
+		          	WHERE owner=" . db_param();
 		db_query_bound( $t_query, Array( $c_user_id ) );
 
 		return true;
@@ -205,7 +205,7 @@
 
 		$t_query = "INSERT INTO $t_tokens_table
 					( type, value, timestamp, expiry, owner )
-					VALUES ( " . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . " , " . db_param(3) . " , " . db_param(4) . " )";
+					VALUES ( " . db_param() . ", " . db_param() . ", " . db_param() . " , " . db_param() . " , " . db_param() . " )";
 		db_query_bound( $t_query, Array( $c_type, $p_value, $c_timestamp, $c_expiry, $c_user_id ) );
 		return db_insert_id( $t_tokens_table );
 	}
@@ -225,8 +225,8 @@
 		$t_tokens_table = db_get_table( 'mantis_tokens_table' );
 
 		$t_query = "UPDATE $t_tokens_table 
-					SET value=" . db_param(0) . ", expiry=" . db_param(1) . "
-					WHERE id=" . db_param(2);
+					SET value=" . db_param() . ", expiry=" . db_param() . "
+					WHERE id=" . db_param();
 		db_query_bound( $t_query, Array( $p_value, $c_expiry, $c_token_id ) );
 
 		return true;
@@ -244,7 +244,7 @@
 
 		# Remove
 		$t_query = "DELETE FROM $t_tokens_table
-		          	WHERE type=" . db_param(0);
+		          	WHERE type=" . db_param();
 		db_query_bound( $t_query, Array( $c_token_type ) );
 
 		return true;
@@ -260,10 +260,10 @@
 
 		$t_tokens_table	= db_get_table( 'mantis_tokens_table' );
 
-		$t_query = "DELETE FROM $t_tokens_table WHERE " . db_param(0) . " > expiry";
+		$t_query = "DELETE FROM $t_tokens_table WHERE " . db_param() . " > expiry";
 		if ( !is_null( $p_token_type ) ) {
 			$c_token_type = db_prepare_int( $p_token_type );
-			$t_query .= " AND type=" . db_param(1);
+			$t_query .= " AND type=" . db_param();
 			db_query_bound( $t_query, Array( db_now(), $c_token_type ) );
 		} else {
 			db_query_bound( $t_query, Array( db_now() ) );

@@ -32,7 +32,7 @@
 		# get the bugnote data
 		$query = "SELECT user_id, enabled
 				FROM $t_bug_monitor_table m, $t_user_table u
-				WHERE m.bug_id=" . db_param(0) . " AND m.user_id = u.id
+				WHERE m.bug_id=" . db_param() . " AND m.user_id = u.id
 				ORDER BY u.realname, u.username";
 		$result = db_query_bound($query, Array( $c_bug_id ) );
 		$num_users = db_num_rows($result);

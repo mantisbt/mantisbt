@@ -49,7 +49,7 @@
 		$t_category_table = db_get_table( 'mantis_category_table' );
 
 		$query = "SELECT COUNT(*) FROM $t_category_table
-					WHERE id=" . db_param(0);
+					WHERE id=" . db_param();
 		$count = db_result( db_query_bound( $query, array( $c_category_id ) ) );
 
 		if ( 0 < $count ) {
@@ -77,7 +77,7 @@
 		$t_category_table = db_get_table( 'mantis_category_table' );
 
 		$query = "SELECT COUNT(*) FROM $t_category_table
-					WHERE project_id=" . db_param(0) . " AND " . db_helper_like( 'name', 1 );
+					WHERE project_id=" . db_param() . " AND " . db_helper_like( 'name' );
 		$count = db_result( db_query_bound( $query, array( $c_project_id, $p_name ) ) );
 
 		if ( 0 < $count ) {
@@ -118,7 +118,7 @@
 		$query = "INSERT INTO $t_category_table
 					( project_id, name )
 				  VALUES
-					( " . db_param(0) . ', ' . db_param(1) . ' )';
+					( " . db_param() . ', ' . db_param() . ' )';
 		db_query_bound( $query, array( $c_project_id, $p_name ) );
 
 		# db_query errors on failure so:
@@ -143,14 +143,14 @@
 		$t_bug_table		= db_get_table( 'mantis_bug_table' );
 
 		$query = "UPDATE $t_category_table
-				  SET name=" . db_param(0) . ',
-					user_id=' . db_param(1) . '
-				  WHERE id=' . db_param(2);
+				  SET name=" . db_param() . ',
+					user_id=' . db_param() . '
+				  WHERE id=' . db_param();
 		db_query_bound( $query, array( $c_name, $c_assigned_to, $c_category_id ) );
 
 		# Add bug history entries if we update the category's name
 		if ( $t_old_category['name'] != $c_name ) {
-			$query = "SELECT id FROM $t_bug_table WHERE category_id=" . db_param(0);
+			$query = "SELECT id FROM $t_bug_table WHERE category_id=" . db_param();
 			$t_result = db_query_bound( $query, array( $c_category_id ) );
 
 			while ( $t_bug_row = db_fetch_array( $t_result ) ) {
@@ -179,11 +179,11 @@
 		$t_bug_table		= db_get_table( 'mantis_bug_table' );
 
 		$query = "DELETE FROM $t_category_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		db_query_bound( $query, array( $c_category_id ) );
 
 		# update bug history entries
-		$query = "SELECT id FROM $t_bug_table WHERE category_id=" . db_param(0);
+		$query = "SELECT id FROM $t_bug_table WHERE category_id=" . db_param();
 		$t_result = db_query_bound( $query, array( $c_category_id ) );
 
 		while ( $t_bug_row = db_fetch_array( $t_result ) ) {
@@ -192,8 +192,8 @@
 
 		# update bug data
 		$query = "UPDATE $t_bug_table
-				  SET category_id=" . db_param(0) . "
-				  WHERE category_id=" . db_param(1);
+				  SET category_id=" . db_param() . "
+				  WHERE category_id=" . db_param();
 		db_query_bound( $query, array( $c_new_category_id, $c_category_id ) );
 
 		# db_query errors on failure so:
@@ -215,14 +215,14 @@
 		$t_bug_table		= db_get_table( 'mantis_bug_table' );
 
 		$query = "DELETE FROM $t_category_table
-				  WHERE project_id=" . db_param(0);
+				  WHERE project_id=" . db_param();
 		db_query_bound( $query, array( $c_project_id ) );
 
 		# cache category names
 		category_get_all_rows();
 
 		# update bug history entries
-		$query = "SELECT id, category_id FROM $t_bug_table WHERE project_id=" . db_param(0);
+		$query = "SELECT id, category_id FROM $t_bug_table WHERE project_id=" . db_param();
 		$t_result = db_query_bound( $query, array( $c_project_id ) );
 
 		while ( $t_bug_row = db_fetch_array( $t_result ) ) {
@@ -232,8 +232,8 @@
 
 		# update bug data
 		$query = "UPDATE $t_bug_table
-				  SET category_id=" . db_param(0) . '
-				  WHERE project_id=' . db_param(1);
+				  SET category_id=" . db_param() . '
+				  WHERE project_id=' . db_param();
 		db_query_bound( $query, array( $c_new_category_id, $c_project_id ) );
 
 		# db_query errors on failure so:
@@ -259,7 +259,7 @@
 		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		$query = "SELECT * FROM $t_category_table
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 		$result = db_query_bound( $query, array( $c_category_id ) );
 		$count = db_num_rows( $result );
 		if ( 0 == $count ) {
@@ -398,7 +398,7 @@
 		$t_project_name = project_get_name( $p_project_id );
 	
 		$t_query = "SELECT id FROM $t_category_table
-				WHERE name=". db_param(0) . " AND project_id=" . db_param(1);
+				WHERE name=". db_param() . " AND project_id=" . db_param();
 		$t_result = db_query_bound( $t_query, array( $p_category_name, (int) $p_project_id ) );
 		$t_count = db_num_rows( $t_result );
 		if ( 1 > $t_count ) {

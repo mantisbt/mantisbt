@@ -313,24 +313,24 @@
 
 			$t_config_table = db_get_table( 'mantis_config_table' );
 			$query = "SELECT COUNT(*) from $t_config_table
-				WHERE config_id = " . db_param(0) . " AND
-					project_id = " . db_param(1) . " AND
-					user_id = " . db_param(2);
+				WHERE config_id = " . db_param() . " AND
+					project_id = " . db_param() . " AND
+					user_id = " . db_param();
 			$result = db_query_bound( $query, Array( $c_option, $c_project, $c_user ) );
 
 			$t_params = Array();
 			if ( 0 < db_result( $result ) ) {
 				$t_set_query = "UPDATE $t_config_table
-					SET value=" . db_param(0) . ", type=" . db_param(1) . ", access_reqd=" . db_param(2) . "
-					WHERE config_id = " . db_param(3) . " AND
-						project_id = " . db_param(4) . " AND
-						user_id = " . db_param(5);
+					SET value=" . db_param() . ", type=" . db_param() . ", access_reqd=" . db_param() . "
+					WHERE config_id = " . db_param() . " AND
+						project_id = " . db_param() . " AND
+						user_id = " . db_param();
 				$t_params = Array( $c_value, $t_type, $c_access, $c_option, $c_project, $c_user );
 			} else {
 				$t_set_query = "INSERT INTO $t_config_table
 					( value, type, access_reqd, config_id, project_id, user_id )
 					VALUES 
-					(" . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . "," . db_param(5) . " )";
+					(" . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . "," . db_param() . " )";
 				$t_params = Array( $c_value, $t_type, $c_access, $c_option, $c_project, $c_user );
 			}
 
@@ -416,9 +416,9 @@
 			$c_user = db_prepare_int( $p_user );
 			$c_project = db_prepare_int( $p_project );
 			$query = "DELETE FROM $t_config_table
-				WHERE config_id = " . db_param(0) . " AND
-					project_id=" . db_param(1) . " AND
-					user_id=" . db_param(2);
+				WHERE config_id = " . db_param() . " AND
+					project_id=" . db_param() . " AND
+					user_id=" . db_param();
 
 			$result = @db_query_bound( $query, Array( $c_option, $c_project, $c_user ) );
 		}
@@ -442,7 +442,7 @@
 
 		# Delete the corresponding bugnote texts
 		$query = "DELETE FROM $t_config_table
-					WHERE config_id=" . db_param(0) . " AND user_id=" . db_param(1);
+					WHERE config_id=" . db_param() . " AND user_id=" . db_param();
 		db_query_bound( $query, array( $c_option, $c_user_id ) );
 	}
 
@@ -453,7 +453,7 @@
 		$t_config_table = db_get_table( 'mantis_config_table' );
 		$c_project = db_prepare_int( $p_project );
 		$query = "DELETE FROM $t_config_table
-				WHERE project_id=" . db_param(0);
+				WHERE project_id=" . db_param();
 
 		$result = @db_query_bound( $query, Array( $c_project ) );
 		

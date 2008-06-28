@@ -83,11 +83,11 @@
 					  submitted,
 					  metadata)
 				  VALUES
-				    ( " . db_param(0) . ",
-				      " . db_param(1) . ",
-				      " . db_param(2) . ",
-					  " . db_param(3) . ",
-					  " . db_param(4) . "
+				    ( " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+					  " . db_param() . ",
+					  " . db_param() . "
 					)";
 		db_query_bound( $query, Array( $c_email, $c_subject, $c_body, db_now(), $c_metadata ) );
 
@@ -129,7 +129,7 @@
 
 		$query = "SELECT *
 				  FROM $t_email_table
-				  WHERE email_id=" . db_param(0);
+				  WHERE email_id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_email_id ) );
 
 		$t_row = db_fetch_array( $result );
@@ -143,7 +143,7 @@
 		$t_email_table = db_get_table( 'mantis_email_table' );
 
 		$query = "DELETE FROM $t_email_table
-				  WHERE email_id=" . db_param(0);
+				  WHERE email_id=" . db_param();
 		db_query_bound( $query, Array( $c_email_id ) );
 	}
 

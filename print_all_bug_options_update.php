@@ -61,8 +61,8 @@
 	# update preferences
 	$t_user_print_pref_table = db_get_table( 'mantis_user_print_pref_table' );
 	$query = "UPDATE $t_user_print_pref_table
-			SET print_pref=" . db_param(0) . "
-			WHERE user_id=" . db_param(1);
+			SET print_pref=" . db_param() . "
+			WHERE user_id=" . db_param();
 
 	$result = db_query_bound( $query, Array( $c_export, $t_user_id ) );
 

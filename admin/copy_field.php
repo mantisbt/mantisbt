@@ -62,7 +62,7 @@
 
 	$t_string_table = db_get_table( 'mantis_custom_field_string_table' );
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$query = 'SELECT * FROM ' . $t_string_table . ' WHERE field_id = ' . db_param(0) . ' and value <> ' . db_param(1);
+	$query = 'SELECT * FROM ' . $t_string_table . ' WHERE field_id = ' . db_param() . ' and value <> ' . db_param();
 
 	$result = @db_query_bound( $query, Array( $f_source_field_id, '' ) );
 	if ( FALSE == $result ) {

@@ -56,12 +56,12 @@
 		# In every project, go through all the categories found, and create them and update the bug
 		foreach ( $t_data as $t_project_id => $t_categories ) {
 			foreach ( $t_categories as $t_name => $t_true ) {
-				$query = "INSERT INTO $t_category_table ( name, project_id ) VALUES ( " . db_param(0) . ', ' . db_param(1) . ' )';
+				$query = "INSERT INTO $t_category_table ( name, project_id ) VALUES ( " . db_param() . ', ' . db_param() . ' )';
 				db_query_bound( $query, array( $t_name, $t_project_id ) );
 				$t_category_id = db_insert_id( $t_category_table );
 
-				$query = "UPDATE $t_bug_table SET category_id=" . db_param(0) . '
-							WHERE project_id=' . db_param(1) . ' AND category=' . db_param(2);
+				$query = "UPDATE $t_bug_table SET category_id=" . db_param() . '
+							WHERE project_id=' . db_param() . ' AND category=' . db_param();
 				db_query_bound( $query, array( $t_category_id, $t_project_id, $t_name ) );
 			}
 		}

@@ -236,9 +236,9 @@
 				ON b.id = h.bug_id 
 				AND h.type = " . NORMAL_TYPE ."
 				AND h.field_name = 'status' 
-				WHERE b.status >= " . db_param(0) . " 
-				AND h.old_value < " . db_param(1) . "
-				AND h.new_value >= " . db_param(2) . "
+				WHERE b.status >= " . db_param() . " 
+				AND h.old_value < " . db_param() . "
+				AND h.new_value >= " . db_param() . "
 				AND ".db_helper_compare_days(3,"date_modified","<= '$c_time_length'")." 
 				AND $specific_where";
 		$result = db_query_bound( $query, Array( $t_resolved, $t_resolved, $t_resolved, db_now() ) );

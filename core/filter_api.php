@@ -1545,7 +1545,7 @@
 								case CUSTOM_FIELD_TYPE_MULTILIST:
 								case CUSTOM_FIELD_TYPE_CHECKBOX:
 									$t_where_params[] = '%|'  . $t_filter_member . '|%';
-									array_push( $t_filter_array , db_helper_like( "$t_table_name.value", db_param($t_where_param_count++)) );
+									array_push( $t_filter_array , db_helper_like( "$t_table_name.value" ) );
 									break;
 								default:
 									array_push( $t_filter_array, "$t_table_name.value = '" . db_prepare_string( $t_filter_member ) . "'" );
@@ -1596,10 +1596,10 @@
 				if ( !is_blank( $t_id_where ) && !is_blank( $t_filter['search'] ) ) {
 					$c_search = '%' . $t_filter['search'] . '%';
 					$c_search_int = db_prepare_int( $t_filter['search'] );
-					$t_textsearch_where_clause = '(' . db_helper_like( 'summary', db_param($t_search_where_param_count++) ) .
-												 ' OR ' . db_helper_like( "$t_bug_text_table.description", db_param($t_search_where_param_count++) ) . 
-												 ' OR ' . db_helper_like( "$t_bug_text_table.steps_to_reproduce", db_param($t_search_where_param_count++) ) .
-												 ' OR ' . db_helper_like( "$t_bug_text_table.additional_information", db_param($t_search_where_param_count++) ) .
+					$t_textsearch_where_clause = '(' . db_helper_like( 'summary' ) .
+												 ' OR ' . db_helper_like( "$t_bug_text_table.description" ) . 
+												 ' OR ' . db_helper_like( "$t_bug_text_table.steps_to_reproduce" ) .
+												 ' OR ' . db_helper_like( "$t_bug_text_table.additional_information" ) .
 							 " OR ( $t_bug_table.id = " . db_param($t_search_where_param_count++) . " ) )";
 					$t_search_where_params = array();
 					$t_search_where_params[] = $c_search;
@@ -1612,12 +1612,12 @@
 			} else if ( !is_blank( $t_filter['search'] ) ) {
 				$c_search = '%' . $t_filter['search'] . '%';
 				$c_search_int = db_prepare_int( $t_filter['search'] );
-				$t_textsearch_wherejoin_clause = '(' . db_helper_like( 'summary', db_param($t_search_where_param_count++) ) .
-											 ' OR ' . db_helper_like( "$t_bug_text_table.description", db_param($t_search_where_param_count++) ) .
-											 ' OR ' . db_helper_like( "$t_bug_text_table.steps_to_reproduce", db_param($t_search_where_param_count++) ) .
-											 ' OR ' . db_helper_like( "$t_bug_text_table.additional_information", db_param($t_search_where_param_count++) ) .
-											 ' OR ' . db_helper_like( "$t_bug_table.id", db_param($t_search_where_param_count++) ) .
-							 ' OR ' . db_helper_like( "$t_bugnote_text_table.note", db_param($t_search_where_param_count++) ) . ' )';
+				$t_textsearch_wherejoin_clause = '(' . db_helper_like( 'summary' ) .
+											 ' OR ' . db_helper_like( "$t_bug_text_table.description" ) .
+											 ' OR ' . db_helper_like( "$t_bug_text_table.steps_to_reproduce" ) .
+											 ' OR ' . db_helper_like( "$t_bug_text_table.additional_information" ) .
+											 ' OR ' . db_helper_like( "$t_bug_table.id" ) .
+							 ' OR ' . db_helper_like( "$t_bugnote_text_table.note" ) . ' )';
 				$t_search_where_params2 = array();
 				$t_search_where_params2[] = $c_search;
 				$t_search_where_params2[] = $c_search;
@@ -3938,7 +3938,7 @@
 
 		$query = 'SELECT *
 				  FROM ' . $t_filters_table . '
-				  WHERE id=' . db_param(0);
+				  WHERE id=' . db_param();
 		$result = db_query_bound( $query, Array( $c_filter_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -4007,18 +4007,18 @@
 
 		# Do I need to update or insert this value?
 		$query = "SELECT id FROM $t_filters_table
-					WHERE user_id=" . db_param(0) . "
-					AND project_id=" . db_param(1) . "
-					AND name=" . db_param(2);
+					WHERE user_id=" . db_param() . "
+					AND project_id=" . db_param() . "
+					AND name=" . db_param();
 		$result = db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_name ) );
 
 		if ( db_num_rows( $result ) > 0 ) {
 			$row = db_fetch_array( $result );
 
 			$query = "UPDATE $t_filters_table
-					  SET is_public=" . db_param(0) . ",
-						filter_string=" . db_param(1) . "
-					  WHERE id=" . db_param(2);
+					  SET is_public=" . db_param() . ",
+						filter_string=" . db_param() . "
+					  WHERE id=" . db_param();
 			db_query_bound( $query, Array( $c_is_public, $p_filter_string, $row['id'] ) );
 
 			return $row['id'];
@@ -4026,15 +4026,15 @@
 			$query = "INSERT INTO $t_filters_table
 						( user_id, project_id, is_public, name, filter_string )
 					  VALUES
-						( " . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . " )";
+						( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
 			db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_is_public, $c_name, $p_filter_string ) );
 
 			# Recall the query, we want the filter ID
 			$query = "SELECT id
 						FROM $t_filters_table
-						WHERE user_id=" . db_param(0) . "
-						AND project_id=" . db_param(1) . "
-						AND name=" . db_param(2);
+						WHERE user_id=" . db_param() . "
+						AND project_id=" . db_param() . "
+						AND name=" . db_param();
 			$result = db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_name ) );
 
 			if ( db_num_rows( $result ) > 0 ) {
@@ -4077,7 +4077,7 @@
 
 		$query = "SELECT *
 				  FROM $t_filters_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_filter_id ) );
 
 		if ( db_num_rows( $result ) > 0 ) {
@@ -4121,9 +4121,9 @@
 		# we store current filters for each project with a special project index
 		$query = "SELECT *
 				  FROM $t_filters_table
-				  WHERE user_id=" . db_param(0) . "
-					AND project_id=" . db_param(1) . "
-					AND name=" . db_param(2);
+				  WHERE user_id=" . db_param() . "
+					AND project_id=" . db_param() . "
+					AND name=" . db_param();
 		$result = db_query_bound( $query, Array( $c_user_id, $c_project_id, '' ) );
 
 		if ( db_num_rows( $result ) > 0 ) {
@@ -4145,7 +4145,7 @@
 
 		$query = "SELECT *
 				  FROM $t_filters_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_filter_id ) );
 
 		if ( db_num_rows( $result ) > 0 ) {
@@ -4180,9 +4180,9 @@
 
 		$query = "SELECT id
 				  FROM $t_filters_table
-				  WHERE id=" . db_param(0) . "
-				  AND user_id=" . db_param(1) . "
-				  AND project_id!=" . db_param(2);
+				  WHERE id=" . db_param() . "
+				  AND user_id=" . db_param() . "
+				  AND project_id!=" . db_param();
 
 		$result = db_query_bound( $query, Array( $c_filter_id, $t_user_id, -1 ) );
 
@@ -4208,7 +4208,7 @@
 		}
 
 		$query = "DELETE FROM $t_filters_table
-				  WHERE id=" . db_param(0);
+				  WHERE id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_filter_id ) );
 
 		if ( db_affected_rows( $result ) > 0 ) {
@@ -4226,8 +4226,8 @@
 		$t_all_id = ALL_PROJECTS;
 
 		$query = "DELETE FROM $t_filters_table
-					WHERE project_id<=" . db_param(0) ."
-					AND name=" . db_param(1);
+					WHERE project_id<=" . db_param() ."
+					AND name=" . db_param();
 		$result = db_query_bound( $query, Array( $t_all_id, '' ) );
 	}
 

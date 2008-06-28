@@ -389,7 +389,7 @@ function plugin_is_installed( $p_basename ) {
 	$t_plugin_table	= db_get_table( 'mantis_plugin_table' );
 	$c_basename 	= db_prepare_string( $p_basename );
 
-	$t_query = "SELECT COUNT(*) FROM $t_plugin_table WHERE basename=" . db_param(0);
+	$t_query = "SELECT COUNT(*) FROM $t_plugin_table WHERE basename=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $c_basename ) );
 	return ( 0 < db_result( $t_result ) );
 }
@@ -418,7 +418,7 @@ function plugin_install( $p_plugin ) {
 	$c_basename = db_prepare_string( $p_plugin->basename );
 
 	$t_query = "INSERT INTO $t_plugin_table ( basename, enabled )
-				VALUES ( ".db_param(0).", '1' )";
+				VALUES ( ".db_param().", '1' )";
 	db_query_bound( $t_query, array( $c_basename ) );
 
 	if ( false === ( plugin_config_get( 'schema', false ) ) ) {
@@ -519,7 +519,7 @@ function plugin_uninstall( $p_plugin ) {
 	$t_plugin_table	= db_get_table( 'mantis_plugin_table' );
 	$c_basename = db_prepare_string( $p_plugin->basename );
 
-	$t_query = "DELETE FROM $t_plugin_table WHERE basename=" . db_param(0);
+	$t_query = "DELETE FROM $t_plugin_table WHERE basename=" . db_param();
 	db_query_bound( $t_query, array( $c_basename ) );
 
 	plugin_push_current( $p_plugin->basename );
@@ -637,7 +637,7 @@ function plugin_register_installed() {
 
 	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
 
-	$t_query = "SELECT basename, priority, protected FROM $t_plugin_table WHERE enabled=" . db_param(0) . ' ORDER BY priority DESC';
+	$t_query = "SELECT basename, priority, protected FROM $t_plugin_table WHERE enabled=" . db_param() . ' ORDER BY priority DESC';
 	$t_result = db_query_bound( $t_query, Array(1) );
 
 	while ( $t_row = db_fetch_array( $t_result ) ) {

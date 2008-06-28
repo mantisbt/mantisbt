@@ -47,13 +47,13 @@
 			$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
 			$query = "SELECT *
 				FROM $t_bug_file_table
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 			break;
 		case 'doc':
 			$t_project_file_table = db_get_table( 'mantis_project_file_table' );
 			$query = "SELECT *
 				FROM $t_project_file_table
-				WHERE id=" . db_param(0);
+				WHERE id=" . db_param();
 			break;
 		default:
 			access_denied();

@@ -69,9 +69,9 @@
 		$t_severity = $t_severity_arr[0];
 		$query = "SELECT COUNT(*) as count
 				FROM mantis_bug_table
-				WHERE project_id=" . db_param(0) . " AND
+				WHERE project_id=" . db_param() . " AND
 						status<80 AND
-						severity=" . db_param(1);
+						severity=" . db_param();
 		$result = db_query_bound( $query, Array( $t_project_id, $t_severity ) );
 		$count = db_result( $result, 0, 0 );
 		switch ( $t_severity ) {
@@ -95,9 +95,9 @@
 		$t_severity = $t_severity_arr[0];
 		$query = "SELECT COUNT(*) as count
 				FROM mantis_bug_table
-				WHERE project_id=" . db_param(0) . " AND
+				WHERE project_id=" . db_param() . " AND
 						status=80 AND
-						severity=" . db_param(1);
+						severity=" . db_param();
 		$result = db_query_bound( $query, Array( $t_project_id, $t_severity ) );
 		$count = db_result( $result, 0, 0 );
 
@@ -122,9 +122,9 @@
 		$t_severity = $t_severity_arr[0];
 		$query = "SELECT COUNT(*) as count
 				FROM mantis_bug_table
-				WHERE project_id=" . db_param(0) . " AND
+				WHERE project_id=" . db_param() . " AND
 						status=90 AND
-						severity=" . db_param(1);
+						severity=" . db_param();
 		$result = db_query_bound( $query, Array( $t_project_id, $t_severity ) );
 		$count = db_result( $result, 0, 0 );
 

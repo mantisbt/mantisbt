@@ -443,7 +443,7 @@
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_user_table
-				  WHERE cookie_string=" . db_param(0);
+				  WHERE cookie_string=" . db_param();
 		$result = db_query_bound( $query, Array( $p_cookie_string ) );
 		$t_count = db_result( $result );
 
@@ -481,7 +481,7 @@
 				if ( $g_cache_anonymous_user_cookie_string === null ) {
                     if ( function_exists( 'db_is_connected' ) && db_is_connected() ) { 
                         # get anonymous information if database is available
-                        $query = 'SELECT id, cookie_string FROM ' . db_get_table( 'mantis_user_table' ) . ' WHERE username = ' . db_param(0);
+                        $query = 'SELECT id, cookie_string FROM ' . db_get_table( 'mantis_user_table' ) . ' WHERE username = ' . db_param();
                         $result = db_query_bound( $query, Array( config_get( 'anonymous_account' ) ) );
                         
                         if ( 1 == db_num_rows( $result ) ) {
@@ -654,7 +654,7 @@
 
 		$query = "SELECT *
 				  FROM $t_user_table
-				  WHERE cookie_string=" . db_param(0);
+				  WHERE cookie_string=" . db_param();
 		$result = db_query_bound( $query, Array( $p_cookie_string ) );
 
 		# return true if a matching cookie was found
@@ -694,7 +694,7 @@
 
 		$query = "SELECT id
 				  FROM $t_user_table
-				  WHERE cookie_string=" . db_param(0);
+				  WHERE cookie_string=" . db_param();
 		$result = db_query_bound( $query, Array( $t_cookie_string ) );
 
 		# The cookie was invalid. Clear the cookie (to allow people to log in again)
