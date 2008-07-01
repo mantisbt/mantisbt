@@ -164,7 +164,7 @@
 		history_log_event_special( $p_bug_id, BUGNOTE_ADDED, bugnote_format_id( $t_bugnote_id ) );
 
 		# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
-		if ( $p_send_email && !is_blank( $p_bugnote_text ) ) {
+		if ( !is_blank( $p_bugnote_text ) ) {
 			email_bugnote_add( $p_bug_id );
 		}
 		return $t_bugnote_id;
