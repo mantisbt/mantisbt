@@ -302,7 +302,7 @@
 		if ( !isset( $string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 			if ($p_include_anchor) {
 				$string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function('$p_array','
-										if (bug_exists( (int)$p_array[2] ) ) {
+										if ( bug_exists( (int)$p_array[2] ) && access_has_bug_level( VIEWER, (int)$p_array[2] ) ) {
 											return $p_array[1] . string_get_bug_view_link( (int)$p_array[2], null, ' . ($p_detail_info ? 'true' : 'false') . ', ' . ($p_fqdn ? 'true' : 'false') . ');
 										} else {
 											return $p_array[0];
