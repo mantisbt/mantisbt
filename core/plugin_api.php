@@ -81,6 +81,58 @@ function plugin_page( $p_page, $p_redirect=false, $p_basename=null ) {
 }
 
 /**
+ * Return a path to a plugin file.
+ * @param string File name
+ * @param string Plugin basename
+ * @return mixed File path or false if FNF
+ */
+function plugin_file_path( $p_filename, $p_basename ) {
+	$t_file_path = config_get( 'plugin_path' );
+	$t_file_path .= $p_basename . DIRECTORY_SEPARATOR;
+	$t_file_path .= 'files' . DIRECTORY_SEPARATOR . $p_filename;
+
+	return ( is_file( $t_file_path ) ? $t_file_path : false );
+}
+
+/**
+ * Get the URL to the plugin wrapper page.
+ * @param string Page name
+ * @param string Plugin basename (defaults to current plugin)
+ */
+function plugin_file( $p_file, $p_redirect=false, $p_basename=null ) {
+	if ( is_null( $p_basename ) ) {
+		$t_current = plugin_get_current();
+	} else {
+		$t_current = $p_basename;
+	}
+	if ( $p_redirect ) {
+		return 'plugin_file.php?file=' . $t_current . '/' . $p_file;
+	} else {
+		return helper_mantis_url( 'plugin_file.php?file=' . $t_current . '/' . $p_file );
+	}
+}
+
+/**
+ * Include the contents of a file as output.
+ * @param string File name
+ * @param string Plugin basename
+ */
+function plugin_file_include( $p_filename, $p_basename=null ) {
+	if ( is_null( $p_basename ) ) {
+		$t_current = plugin_get_current();
+	} else {
+		$t_current = $p_basename;
+	}
+
+	$t_file_path = plugin_file_path( $p_filename, $t_current );
+	if ( false === $t_file_path ) {
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+
+	readfile( $t_file_path );
+}
+
+/**
  * Given a base table name for a plugin, add appropriate prefix and suffix.
  * Convenience for plugin schema definitions.
  * @param string Table name
