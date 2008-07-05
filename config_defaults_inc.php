@@ -2003,16 +2003,15 @@
 	# management threshold.
 	$g_manage_plugin_threshold = ADMINISTRATOR;
 
- 
- 	#############################
- 	# Due Date 
- 	#############################
- 
- 	# threshold to update due date submitted
- 	$g_due_date_update_threshold = DEVELOPER;
- 	
+	#############################
+	# Due Date 
+	#############################
+
+	# threshold to update due date submitted
+	$g_due_date_update_threshold = NOBODY;
+
 	# threshold to see due date
- 	$g_due_date_view_threshold = REPORTER;
+	$g_due_date_view_threshold = NOBODY;
 
 	#############################
 	# Mind mapping
