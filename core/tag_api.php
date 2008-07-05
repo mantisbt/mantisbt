@@ -526,6 +526,9 @@
 		$t_tag_name = tag_get_field( $p_tag_id, 'name' );
 		history_log_event_special( $p_bug_id, TAG_ATTACHED, $t_tag_name );
 
+		# updated the last_updated date
+		bug_update_date( $p_bug_id );
+
 		return true;
 	}
 
@@ -568,6 +571,9 @@
 			$t_tag_name = tag_get_field( $p_tag_id, 'name' );
 			history_log_event_special( $p_bug_id, TAG_DETACHED, $t_tag_name );
 		}
+
+		# updated the last_updated date
+		bug_update_date( $p_bug_id );
 
 		return true;
 	}
