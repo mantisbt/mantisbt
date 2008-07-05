@@ -176,7 +176,7 @@
         <section>
             
             <title>Requirements</title>
-            
+
             
             <para>The following versions are required for proper operation:</para>
             <informaltable>
@@ -209,7 +209,23 @@
                     </tbody>
                 </tgroup>
             </informaltable>
-            
+
+            <para>MantisBT is designed in a way to work in as many environments as possible.
+            Hence the required extensions are minimal and many of them are optional affecting
+            only one feature.  The following PHP extensions are the ones used:</para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>mysqli (or the extension for the DBMS being used) - mandatory.</para>
+                </listitem>
+                <listitem>
+                    <para>Curl - if the Twitter integration feature is required.</para>
+                </listitem>
+                <listitem>
+                    <para>GD - if the graphs feature is required.</para>
+                </listitem>
+            </itemizedlist>
+
         </section>
         
         <section>
