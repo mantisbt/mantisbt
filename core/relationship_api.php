@@ -576,8 +576,6 @@
 		$t_summary_wrap_at = strlen( config_get( 'email_separator2' ) ) - 28;
 		$t_icon_path = config_get( 'icon_path' );
 
-		$p_user_id = auth_get_current_user_id();
-
 		if ( $p_bug_id == $p_relationship->src_bug_id ) {
 			# root bug is in the src side, related bug in the dest side
 			$t_related_bug_id = $p_relationship->dest_bug_id;
