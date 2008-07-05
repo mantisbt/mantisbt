@@ -126,6 +126,7 @@
 		$t_user_id = ( ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
 		$t_roadmap_view_access_level = config_get( 'roadmap_view_threshold' );
+		$t_due_date_view_threshold = config_get( 'due_date_view_threshold' );
 		
 		# grab history and display by date_modified then field_name
 		# @@@ by MASC I guess it's better by id then by field_name. When we have more history lines with the same
@@ -158,6 +159,10 @@
 			}
 			
 			if ( ( $v_field_name == 'target_version' ) && !access_has_bug_level( $t_roadmap_view_access_level, $p_bug_id, $t_user_id ) ) {
+				continue;
+			}
+
+			if ( ( $v_field_name == 'due_date' ) && !access_has_bug_level( $t_due_date_view_threshold, $p_bug_id, $t_user_id ) ) {
 				continue;
 			}
 
