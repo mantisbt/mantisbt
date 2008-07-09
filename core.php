@@ -135,15 +135,15 @@
 		plugin_init_installed();
 	}
 
-	# Wiki Integration
-	require_once( $t_core_path.'wiki_api.php' );
-
 	# Authentication and user setup
 	require_once( $t_core_path.'authentication_api.php' );
 	require_once( $t_core_path.'project_api.php' );
 	require_once( $t_core_path.'project_hierarchy_api.php' );
 	require_once( $t_core_path.'user_api.php' );
 	require_once( $t_core_path.'access_api.php' );
+
+	# Wiki Integration
+	require_once( $t_core_path.'wiki_api.php' );
 
 	# Display API's
 	require_once( $t_core_path.'html_api.php' );
