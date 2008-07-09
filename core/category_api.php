@@ -219,7 +219,7 @@
 		db_query_bound( $query, array( $c_project_id ) );
 
 		# cache category names
-		category_get_all_rows();
+		category_get_all_rows( $p_project_id );
 
 		# update bug history entries
 		$query = "SELECT id, category_id FROM $t_bug_table WHERE project_id=" . db_param();
