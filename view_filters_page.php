@@ -37,7 +37,11 @@
 	html_page_top1();
 	html_page_top2();
 
+	$t_filter = filter_get_default();
 	$t_target_field = gpc_get_string( 'target_field', '' );
+	if ( !isset( $t_filter[ rtrim( $t_target_field, '[]' ) ] ) ) {
+		$t_target_field = '';	
+	}
 
 	if ( ON == config_get( 'use_javascript' ) ) {
 		?>
