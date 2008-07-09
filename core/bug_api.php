@@ -1264,9 +1264,6 @@
 					# the relationship type is already set. Nothing to do
 				}
 				else if ( $t_id_relationship > 0 ) {
-					# there is already a relationship between them -> we have to update it and not to add a new one
-					helper_ensure_confirmed( lang_get( 'replace_relationship_sure_msg' ), lang_get( 'replace_relationship_button' ) );
-
 					# Update the relationship
 					relationship_update( $t_id_relationship, $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 
