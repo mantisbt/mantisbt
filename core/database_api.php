@@ -324,7 +324,9 @@
 			array_push ( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
 		}
 
-		$g_db_param_count = 0;
+		# We can't reset the counter because we have queries being built
+		# and executed while building bigger queries in filter_api. -jreese
+		#$g_db_param_count = 0;
 
 		if ( !$t_result ) {
 			db_error($p_query);
