@@ -891,7 +891,7 @@
 			case $t_proj_doc_add_page	: $t_proj_doc_add_page	= ''; break;
 		}
 
-		print_bracket_link( helper_mantis_url( $t_documentation_html ), lang_get( 'user_documentation' ) );
+		print_bracket_link( $t_documentation_html, lang_get( 'user_documentation' ) );
 		print_bracket_link( helper_mantis_url( $t_proj_doc_page ), lang_get( 'project_documentation' ) );
 		if ( file_allow_project_upload() ) {
 			print_bracket_link( helper_mantis_url( $t_proj_doc_add_page ), lang_get( 'add_file' ) );
