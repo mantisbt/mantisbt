@@ -341,9 +341,9 @@
 	 */	
 	function db_param() {
 		global $g_db;
-		static $t_param = 0;
+		global $g_db_param_count;
 
-		return $g_db->Param($t_param++);
+		return $g_db->Param($g_db_param_count++);
 	}
 
 	/**
