@@ -321,6 +321,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'El evento \'%s\' no ha sido declarado a
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin no registrado en Mantis.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin ya instalado previamente.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Página del Plugin no encontrada.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'La actualización del esquema del plugin falló en el bloque #%s.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Campo \'%s\' contiene duplicados en la columna \'%s\'.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Campo \'%s\' contiene un campo no válido: \'%s\'';
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Gestor de sesión no válido.';
@@ -1175,6 +1176,7 @@ $s_sort = 'Ordenadas por';
 $s_issue_id = 'Incidencia #';
 $s_recently_visited = 'Visitadas recientemente';
 $s_priority_abbreviation = 'P';
+$s_note_user_id = 'Nota De';
 
 # view_all_inc.php
 $s_none = 'Ninguno';
