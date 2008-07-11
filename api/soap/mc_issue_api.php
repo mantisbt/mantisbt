@@ -71,7 +71,7 @@
  		$t_issue_data['last_updated'] = timestamp_to_iso8601( $t_bug['last_updated'] );
 
 		$t_issue_data['project'] = mci_project_as_array_by_id( $t_bug['project_id'] );
-		$t_issue_data['category'] = mci_null_if_empty( $t_bug['category'] );
+		$t_issue_data['category'] = mci_null_if_empty( category_get_name( $t_bug['category_id'] ) );
  		$t_issue_data['priority'] = mci_enum_get_array_by_id( $t_bug['priority'], 'priority', $t_lang );
  		$t_issue_data['severity'] = mci_enum_get_array_by_id( $t_bug['severity'], 'severity', $t_lang );
  		$t_issue_data['status'] = mci_enum_get_array_by_id( $t_bug['status'], 'status', $t_lang );
@@ -437,18 +437,13 @@
 		if ( ( $t_handler_id != 0 ) && !user_exists( $t_handler_id ) ) {
 			return new soap_fault( 'Client', '', "User '$t_handler_id' does not exist." );
 		}
-
-		if ( !in_array( $v_category, mci_category_get_all_rows( $t_project_id, $t_user_id ) ) ) {
-			$t_error_when_category_not_found = config_get( 'mc_error_when_category_not_found' );
-			if ( $t_error_when_category_not_found == ON ) {
-				if ( is_blank( $v_category ) && ( count( category_get_all_rows( $t_project_id ) ) == 0 ) ) {
-					$v_category = '';	// it is ok to have category as empty if project has no categories
-				} else {
-					return new soap_fault( 'Client', '', "Category '$v_category' does not exist in project '$t_project_id'." );
-				}
+		
+		$t_category_id = translate_category_name_to_id( $v_category, $t_project_id );
+		if ( $t_category_id == 0 ) {
+			if ( is_blank( $v_category ) ) {
+				return new soap_fault( 'Client', '', "Category cannot be empty." );
 			} else {
-				$t_category_when_not_found = config_get( 'mc_category_when_not_found' );
-				$v_category = $t_category_when_not_found;
+				return new soap_fault( 'Client', '', "Category '$v_category' does not exist in project '$t_project_id'." );
 			}
 		}
 
@@ -497,7 +492,7 @@
 		$t_bug_data->status = $t_status_id;
 		$t_bug_data->resolution = $t_resolution_id;
 		$t_bug_data->projection = $t_projection_id;
-		$t_bug_data->category = $v_category;
+		$t_bug_data->category_id = $t_category_id;
 		$t_bug_data->date_submitted = isset( $v_date_submitted ) ? $v_date_submitted : '';
 		$t_bug_data->last_updated = isset( $v_last_updated ) ? $v_last_updated : '';
 		$t_bug_data->eta = $t_eta_id;
@@ -510,6 +505,7 @@
 		$t_bug_data->view_state = $t_view_state_id;
 		$t_bug_data->summary = $v_summary;
 		$t_bug_data->sponsorship_total = isset( $v_sponsorship_total ) ? $v_sponsorship_total : 0;
+		$t_bug_data->due_date = date_get_null();
 
 		# omitted:
 		# var $bug_text_id
@@ -601,19 +597,14 @@
             return new soap_fault( 'Client', '', "User '$t_handler_id' does not exist." );
         }
 
-        if ( !in_array( $v_category, mci_category_get_all_rows( $t_project_id, $t_user_id ) ) ) {
-            $t_error_when_category_not_found = config_get( 'mc_error_when_category_not_found' );
-            if ( $t_error_when_category_not_found == ON ) {
-                if ( is_blank( $v_category ) && ( count( category_get_all_rows( $t_project_id ) ) == 0 ) ) {
-                    $v_category = ''; // it is ok to have category as empty if project has no categories
-                } else {
-                    return new soap_fault( 'Client', '', "Category '$v_category' does not exist in project '$t_project_id'." );
-                }
-            } else {
-                $t_category_when_not_found = config_get( 'mc_category_when_not_found' );
-                $v_category = $t_category_when_not_found;
-            }
-        }
+		$t_category_id = translate_category_name_to_id( $v_category, $t_project_id );
+		if ( $t_category_id == 0 ) {
+			if ( is_blank( $v_category ) ) {
+				return new soap_fault( 'Client', '', "Category cannot be empty." );
+			} else {
+				return new soap_fault( 'Client', '', "Category '$v_category' does not exist in project '$t_project_id'." );
+			}
+		}
 
         if ( isset( $v_version ) && !is_blank( $v_version ) && !version_get_id( $v_version, $t_project_id ) ) {
             $t_error_when_version_not_found = config_get( 'mc_error_when_version_not_found' );
@@ -660,7 +651,7 @@
         $t_bug_data->status = $t_status_id;
         $t_bug_data->resolution = $t_resolution_id;
         $t_bug_data->projection = $t_projection_id;
-        $t_bug_data->category = $v_category;
+        $t_bug_data->category_id = $t_category_id;
         $t_bug_data->date_submitted = isset( $v_date_submitted ) ? $v_date_submitted : '';
         $t_bug_data->last_updated = isset( $v_last_updated ) ? $v_last_updated : '';
         $t_bug_data->eta = $t_eta_id;
@@ -673,6 +664,7 @@
         $t_bug_data->view_state = $t_view_state_id;
         $t_bug_data->summary = $v_summary;
         $t_bug_data->sponsorship_total = isset( $v_sponsorship_total ) ? $v_sponsorship_total : 0;
+        $t_bug_data->due_date = date_get_null();
 
         # omitted:
         # var $bug_text_id

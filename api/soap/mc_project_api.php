@@ -39,7 +39,7 @@
             $t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data['last_updated'] );
 
             $t_issue['project'] = mci_project_as_array_by_id( $t_issue_data['project_id'] );
-            $t_issue['category'] = mci_null_if_empty( $t_issue_data['category'] );
+            $t_issue['category'] = mci_null_if_empty( category_get_name( $t_issue_data['category_id'] ) );
             $t_issue['priority'] = mci_enum_get_array_by_id( $t_issue_data['priority'], 'priority', $t_lang );
             $t_issue['severity'] = mci_enum_get_array_by_id( $t_issue_data['severity'], 'severity', $t_lang );
             $t_issue['status'] = mci_enum_get_array_by_id( $t_issue_data['status'], 'status', $t_lang );
@@ -143,7 +143,12 @@
 			return new soap_fault( 'Client', '', 'Access Denied' );
 		}
 		
-		return mci_category_get_all_rows( $p_project_id, $t_user_id );
+		$t_result = array();
+		$t_cat_array = category_get_all_rows( $p_project_id );
+		foreach( $t_cat_array as $t_category_row ) {
+			$t_result[] = $t_category_row['name'];
+		}
+		return $t_result;
 	}
 
 	/**
@@ -183,7 +188,7 @@
 
 		return $t_result;
 	}
-
+	
 	/**
 	 * Get all released versions of a project.
 	 *
@@ -695,7 +700,7 @@
             $t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data['last_updated'] );
 
             $t_issue['project'] = $t_issue_data['project_id'];
-            $t_issue['category'] = mci_null_if_empty( $t_issue_data['category'] );
+            $t_issue['category'] = mci_null_if_empty( category_get_name( $t_issue_data['category_id'] ) );
             $t_issue['priority'] = $t_issue_data['priority'];
             $t_issue['severity'] = $t_issue_data['severity'];
             $t_issue['status'] = $t_issue_data['status'];

@@ -260,33 +260,15 @@
 		return $t_result;
 	}
 	
-	# --------------------
-	# category_get_all_rows did't respect subprojects.
-	function mci_category_get_all_rows( $p_project_id, $p_user_id ) {
-		$t_category_table = db_get_table( 'mantis_category_table' );
-		$t_project_table = db_get_table( 'mantis_project_table' );
-
-		$c_project_id = db_prepare_int( $p_project_id );
-
-		$t_project_where = helper_project_specific_where( $c_project_id, $p_user_id );
-
-		$query = "SELECT c.name as category FROM $t_category_table AS c
-				JOIN $t_project_table AS p
-					ON c.project_id=p.id
-				WHERE $t_project_where
-				ORDER BY c.name ";
-		$result = db_query_bound( $query );
-		$count = db_num_rows( $result );
-		$cat_arr = array();
-		for ( $i = 0 ; $i < $count ; $i++ ) {
-			$row = db_fetch_array( $result );
-			$cat_arr[] = string_attribute( $row['category'] );
+    function translate_category_name_to_id( $p_category_name, $p_project_id ) {
+		$t_cat_array = category_get_all_rows( $p_project_id );
+		foreach( $t_cat_array as $t_category_row ) {
+			if ( $t_category_row['name'] == $p_category_name ) {
+				return $t_category_row['id'];
+			}
 		}
-
-		sort( $cat_arr );
-
-		return $cat_arr;
-	}
+		return 0;
+    }
 
 	/**
 	 * Basically this is a copy of core/filter_api.php#filter_db_get_available_queries().
@@ -333,6 +315,19 @@
 		}
 
 		return array_values( $t_overall_query_arr );
+	}
+	
+	/**
+	 * Get a category definition.
+	 *
+	 * @param integer $p_category_id  The id of the category to retrieve.
+	 * @return Array an Array containing the id and the name of the category.
+	 */
+	function mci_category_as_array_by_id( $p_category_id ) {
+		$t_result = array();
+		$t_result['id'] = $p_category_id;
+		$t_result['name'] = category_get_name( $p_category_id );
+		return $t_result;
 	}
 		
 	#########################################
