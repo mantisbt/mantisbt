@@ -49,6 +49,10 @@
 			return;
 		}
 
+		if ( ! lang_language_exists( $p_lang ) ) {
+			return;
+		}
+
 		$t_lang_dir = $p_dir;
 
 		if ( is_null( $t_lang_dir ) ) {
@@ -152,6 +156,18 @@
 		}
 	}
 
+
+	/**
+	* Check if the given language exists
+	* 
+	* @param $p_lang string the language name
+	* @return boolean 
+	*/
+	function lang_language_exists( $p_lang ) {
+		$t_valid_langs = config_get( 'language_choices_arr' );
+		$t_valid = in_array( $p_lang, $t_valid_langs, true );
+		return $t_valid;
+	}
 
 
 	# ------------------
