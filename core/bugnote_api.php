@@ -99,7 +99,7 @@
 	# Add a bugnote to a bug
 	#
 	# return the ID of the new bugnote
-	function bugnote_add ( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = 0, $p_attr = '', $p_user_id = null ) {
+	function bugnote_add ( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = 0, $p_attr = '', $p_user_id = null, $p_send_email = TRUE ) {
 		$c_bug_id            	= db_prepare_int( $p_bug_id );
 		$c_bugnote_text      	= db_prepare_string( $p_bugnote_text );
 		$c_time_tracking	= db_prepare_time( $p_time_tracking );
@@ -164,7 +164,7 @@
 		history_log_event_special( $p_bug_id, BUGNOTE_ADDED, bugnote_format_id( $t_bugnote_id ) );
 
 		# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
-		if ( !is_blank( $p_bugnote_text ) ) {
+		if ( $p_send_email && !is_blank( $p_bugnote_text ) ) {
 			email_bugnote_add( $p_bug_id );
 		}
 		return $t_bugnote_id;
