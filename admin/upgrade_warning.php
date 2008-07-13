@@ -72,7 +72,7 @@
 				?>
 				<td align="center" nowrap="nowrap"><p>When you have backed up your database click the link below to continue</p>[ <a href="install.php">Upgrade Now</a> ]</td>
 				<?php } else { ?>
-				<td align="center" nowrap="nowrap"><p>When you have backed up your database click the link below to continue</p>[ <a href="upgrade_list.php">Upgrade Now</a> ]</td>
+				<td align="center" nowrap="nowrap"><p>You aware to be running an old (pre 1.1.0) release of mantis. To update to this release of mantis, you must first update your installation to 1.1</td>
 				<?php } ?>
 			<?php } ?>
 		</tr>
