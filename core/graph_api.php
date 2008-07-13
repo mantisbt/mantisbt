@@ -117,7 +117,7 @@
 		# count up array portions that are set
 		$t_count = 0;
 		foreach ( array( 'open', 'resolved', 'closed' ) as $t_label ) {
-			if ( is_array( $p_metrics[$t_label] ) ) {
+			if ( isset( $p_metrics[$t_label] ) && is_array( $p_metrics[$t_label] ) ) {
 				$t_count += array_sum( $p_metrics[$t_label] );
 			}
 		}
