@@ -266,7 +266,7 @@ $upgrade[] = Array('CreateTableSQL',Array(db_get_table('mantis_user_pref_table')
   advanced_view 	L NOTNULL DEFAULT \" '0' \",
   advanced_update 	L NOTNULL DEFAULT \" '0' \",
   refresh_delay 	 I  NOTNULL DEFAULT '0',
-  redirect_delay 	I NOTNULL DEFAULT \" '0' \",
+  redirect_delay 	L NOTNULL DEFAULT \" '0' \",
   bugnote_order 	C(4) NOTNULL DEFAULT 'ASC',
   email_on_new 		L NOTNULL DEFAULT \" '0' \",
   email_on_assigned 	L NOTNULL DEFAULT \" '0' \",
