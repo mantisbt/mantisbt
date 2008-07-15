@@ -2022,4 +2022,3 @@
 	# Enables or disables the mind mapping features including ability to export Freemind files and 
 	# in browser view of generated mindmaps.
 	$g_mindmap_enabled = ON;
-?>
