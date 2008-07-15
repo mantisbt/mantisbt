@@ -508,6 +508,8 @@
 		#check due_date format
 		if ( !is_blank( $p_bug_data->due_date ) ) {
 			$c_due_date	= db_bind_timestamp( $p_bug_data->due_date, true );
+		} else {
+			$c_due_date	= date_get_null();
 		}
 
 		$t_bug_table				= db_get_table( 'mantis_bug_table' );
