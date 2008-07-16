@@ -608,7 +608,7 @@
 					$label = sprintf( '[%s] %s', project_get_name( $last_project ), $label );
 				}
 
-				$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . urlencode( $last_category_id );
+				$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . urlencode( $last_category_name );
 				if ( 0 < $t_bugs_open ) {
 					$t_bugs_open = $t_bug_link . '&amp;hide_status=' . RESOLVED . '">' . $t_bugs_open . '</a>';
 				}
@@ -652,7 +652,7 @@
 				$label = sprintf( '[%s] %s', project_get_name( $last_project ), $label );
 			}
 
-			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . urlencode( $last_category_id );
+			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . urlencode( $last_category_name );
 			if ( !is_blank( $t_bug_link ) ) {
 				if ( 0 < $t_bugs_open ) {
 					$t_bugs_open = $t_bug_link . '&amp;hide_status=' . RESOLVED . '">' . $t_bugs_open . '</a>';
