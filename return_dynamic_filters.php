@@ -37,10 +37,6 @@
 	$t_filter = current_user_get_bug_filter();
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 	$t_project_id = helper_get_current_project();
-
-	$t_sort = $t_filter['sort'];
-	$t_dir = $t_filter['dir'];
-
 	$t_current_user_access_level = current_user_get_access_level();
 	$t_accessible_custom_fields_ids = array();
 	$t_accessible_custom_fields_names = array();
@@ -72,12 +68,11 @@
 
 	$f_for_screen = gpc_get_bool( 'for_screen', true );
 
-	$t_sort = $t_filter['sort'];
-	$t_dir = $t_filter['dir'];
+	$t_sort = $t_filter[ FILTER_PROPERTY_SORT_FIELD_NAME ];
+	$t_dir = $t_filter[ FILTER_PROPERTY_SORT_DIRECTION ];
 	$t_action  = "view_all_set.php?f=3";
 
-	if ( $f_for_screen == false )
-	{
+	if ( $f_for_screen == false ) {
 		$t_action  = "view_all_set.php";
 	}
 

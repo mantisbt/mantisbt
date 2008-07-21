@@ -49,126 +49,126 @@
 
 <?php
 	$c_filter['assigned'] = array(
-		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_severity'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_status'		=> Array ( '0' => META_FILTER_ANY ),
-		'highlight_changed'	=> $t_default_show_changed,
-		'reporter_id'		=> Array ( '0' => META_FILTER_ANY ),
-		'handler_id'		=> Array ( '0' => $t_current_user_id ),
-		'show_resolution'	=> Array ( '0' => META_FILTER_ANY ),
-		'show_build'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_version'		=> Array ( '0' => META_FILTER_ANY ),
-		'hide_status'		=> Array ( '0' => $t_bug_resolved_status_threshold ),
-		'user_monitor'		=> Array ( '0' => META_FILTER_ANY )
+		FILTER_PROPERTY_CATEGORY			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_SEVERITY_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_STATUS_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HIGHLIGHT_CHANGED	=> $t_default_show_changed,
+		FILTER_PROPERTY_REPORTER_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HANDLER_ID			=> Array ( '0' => $t_current_user_id ),
+		FILTER_PROPERTY_RESOLUTION_ID		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_BUILD		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_VERSION		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HIDE_STATUS_ID		=> Array ( '0' => $t_bug_resolved_status_threshold ),
+		FILTER_PROPERTY_MONITOR_USER_ID		=> Array ( '0' => META_FILTER_ANY )
 	);
-	$url_link_parameters['assigned'] = 'handler_id=' . $t_current_user_id . '&amp;hide_status=' . $t_bug_resolved_status_threshold;
+	$url_link_parameters['assigned'] = FILTER_PROPERTY_HANDLER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
 
 	$c_filter['recent_mod'] = array(
-		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_severity'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_status'		=> Array ( '0' => META_FILTER_ANY ),
-		'highlight_changed'	=> $t_default_show_changed,
-		'reporter_id'		=> Array ( '0' => META_FILTER_ANY ),
-		'handler_id'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_resolution'	=> Array ( '0' => META_FILTER_ANY ),
-		'show_build'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_version'		=> Array ( '0' => META_FILTER_ANY ),
-		'hide_status'		=> Array ( '0' => META_FILTER_NONE ),
-		'user_monitor'		=> Array ( '0' => META_FILTER_ANY )
+		FILTER_PROPERTY_CATEGORY			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_SEVERITY_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_STATUS_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HIGHLIGHT_CHANGED	=> $t_default_show_changed,
+		FILTER_PROPERTY_REPORTER_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HANDLER_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_RESOLUTION_ID		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_BUILD		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_VERSION		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HIDE_STATUS_ID		=> Array ( '0' => META_FILTER_NONE ),
+		FILTER_PROPERTY_MONITOR_USER_ID		=> Array ( '0' => META_FILTER_ANY )
 	);
-	$url_link_parameters['recent_mod'] = 'hide_status=none';
+	$url_link_parameters['recent_mod'] = FILTER_PROPERTY_HIDE_STATUS_ID . '=none';
 
 	$c_filter['reported'] = array(
-		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_severity'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_status'		=> Array ( '0' => META_FILTER_ANY ),
-		'highlight_changed'	=> $t_default_show_changed,
-		'reporter_id'		=> Array ( '0' => $t_current_user_id ),
-		'handler_id'		=> Array ( '0' => META_FILTER_ANY ),
-		'sort'			=> 'last_updated',
-		'show_resolution'	=> Array ( '0' => META_FILTER_ANY ),
-		'show_build'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_version'		=> Array ( '0' => META_FILTER_ANY ),
-		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
-		'user_monitor'		=> Array ( '0' => META_FILTER_ANY )
+		FILTER_PROPERTY_CATEGORY			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_SEVERITY_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_STATUS_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HIGHLIGHT_CHANGED	=> $t_default_show_changed,
+		FILTER_PROPERTY_REPORTER_ID			=> Array ( '0' => $t_current_user_id ),
+		FILTER_PROPERTY_HANDLER_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_SORT_FIELD_NAME		=> 'last_updated',
+		FILTER_PROPERTY_RESOLUTION_ID		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_BUILD		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_VERSION		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HIDE_STATUS_ID		=> Array ( '0' => $t_hide_status_default ),
+		FILTER_PROPERTY_MONITOR_USER_ID		=> Array ( '0' => META_FILTER_ANY )
 	);
-	$url_link_parameters['reported'] = 'reporter_id=' . $t_current_user_id . '&amp;hide_status=' . $t_hide_status_default;
+	$url_link_parameters['reported'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 
 	$c_filter['resolved'] = array(
-		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_severity'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_status'		=> Array ( '0' => $t_bug_resolved_status_threshold ),
-		'highlight_changed'	=> $t_default_show_changed,
-		'reporter_id'		=> Array ( '0' => META_FILTER_ANY ),
-		'handler_id'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_resolution'	=> Array ( '0' => META_FILTER_ANY ),
-		'show_build'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_version'		=> Array ( '0' => META_FILTER_ANY ),
-		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
-		'user_monitor'		=> Array ( '0' => META_FILTER_ANY )
+		FILTER_PROPERTY_CATEGORY			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_SEVERITY_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_STATUS_ID			=> Array ( '0' => $t_bug_resolved_status_threshold ),
+		FILTER_PROPERTY_HIGHLIGHT_CHANGED	=> $t_default_show_changed,
+		FILTER_PROPERTY_REPORTER_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HANDLER_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_RESOLUTION_ID		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_BUILD		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_VERSION		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HIDE_STATUS_ID		=> Array ( '0' => $t_hide_status_default ),
+		FILTER_PROPERTY_MONITOR_USER_ID		=> Array ( '0' => META_FILTER_ANY )
 	);
-	$url_link_parameters['resolved'] = 'show_status=' . $t_bug_resolved_status_threshold . '&amp;hide_status=' . $t_bug_resolved_status_threshold;
+	$url_link_parameters['resolved'] = FILTER_PROPERTY_STATUS_ID . '=' . $t_bug_resolved_status_threshold . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
 
 	$c_filter['unassigned'] = array(
-		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_severity'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_status'		=> Array ( '0' => META_FILTER_ANY ),
-		'highlight_changed'	=> $t_default_show_changed,
-		'reporter_id'		=> Array ( '0' => META_FILTER_ANY ),
-		'handler_id'		=> Array ( '0' => META_FILTER_NONE ),
-		'show_resolution'	=> Array ( '0' => META_FILTER_ANY ),
-		'show_build'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_version'		=> Array ( '0' => META_FILTER_ANY ),
-		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
-		'user_monitor'		=> Array ( '0' => META_FILTER_ANY )
+		FILTER_PROPERTY_CATEGORY			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_SEVERITY_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_STATUS_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HIGHLIGHT_CHANGED	=> $t_default_show_changed,
+		FILTER_PROPERTY_REPORTER_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HANDLER_ID			=> Array ( '0' => META_FILTER_NONE ),
+		FILTER_PROPERTY_RESOLUTION_ID		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_BUILD		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_VERSION		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HIDE_STATUS_ID		=> Array ( '0' => $t_hide_status_default ),
+		FILTER_PROPERTY_MONITOR_USER_ID		=> Array ( '0' => META_FILTER_ANY )
 	);
-	$url_link_parameters['unassigned'] = 'handler_id=[none]' . '&amp;hide_status=' . $t_hide_status_default;
+	$url_link_parameters['unassigned'] = FILTER_PROPERTY_HANDLER_ID . '=[none]' . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default; #TODO: check. handler value looks wrong
 
 	$c_filter['monitored'] = array(
-		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_severity'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_status'		=> Array ( '0' => META_FILTER_ANY ),
-		'highlight_changed'	=> $t_default_show_changed,
-		'reporter_id'		=> Array ( '0' => META_FILTER_ANY ),
-		'handler_id'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_resolution'	=> Array ( '0' => META_FILTER_ANY ),
-		'show_build'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_version'		=> Array ( '0' => META_FILTER_ANY ),
-		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
-		'user_monitor'		=> Array ( '0' => $t_current_user_id )
+		FILTER_PROPERTY_CATEGORY			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_SEVERITY_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_STATUS_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HIGHLIGHT_CHANGED	=> $t_default_show_changed,
+		FILTER_PROPERTY_REPORTER_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HANDLER_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_RESOLUTION_ID		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_BUILD		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_VERSION		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HIDE_STATUS_ID		=> Array ( '0' => $t_hide_status_default ),
+		FILTER_PROPERTY_MONITOR_USER_ID		=> Array ( '0' => $t_current_user_id )
 	);
-	$url_link_parameters['monitored'] = 'user_monitor=' . $t_current_user_id . '&amp;hide_status=' . $t_hide_status_default;
+	$url_link_parameters['monitored'] = FILTER_PROPERTY_MONITOR_USER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 
 
 	$c_filter['feedback'] = array(
-		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_severity'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_status'		=> Array ( '0' => FEEDBACK ),
-		'highlight_changed'	=> $t_default_show_changed,
-		'reporter_id'		=> Array ( '0' => $t_current_user_id ),
-		'handler_id'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_resolution'	=> Array ( '0' => META_FILTER_ANY ),
-		'show_build'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_version'		=> Array ( '0' => META_FILTER_ANY ),
-		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
-		'user_monitor'		=> Array ( '0' => META_FILTER_ANY )
+		FILTER_PROPERTY_CATEGORY			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_SEVERITY_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_STATUS_ID			=> Array ( '0' => FEEDBACK ),
+		FILTER_PROPERTY_HIGHLIGHT_CHANGED	=> $t_default_show_changed,
+		FILTER_PROPERTY_REPORTER_ID			=> Array ( '0' => $t_current_user_id ),
+		FILTER_PROPERTY_HANDLER_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_RESOLUTION_ID		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_BUILD		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_VERSION		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HIDE_STATUS_ID		=> Array ( '0' => $t_hide_status_default ),
+		FILTER_PROPERTY_MONITOR_USER_ID		=> Array ( '0' => META_FILTER_ANY )
 	);
-	$url_link_parameters['feedback'] = 'reporter_id=' . $t_current_user_id . '&amp;show_status=' . FEEDBACK . '&amp;hide_status=' . $t_hide_status_default;
+	$url_link_parameters['feedback'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . FEEDBACK . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 
 	$c_filter['verify'] = array(
-		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_severity'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_status'		=> Array ( '0' => $t_bug_resolved_status_threshold ),
-		'highlight_changed'	=> $t_default_show_changed,
-		'reporter_id'		=> Array ( '0' => $t_current_user_id ),
-		'handler_id'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_resolution'	=> Array ( '0' => META_FILTER_ANY ),
-		'show_build'		=> Array ( '0' => META_FILTER_ANY ),
-		'show_version'		=> Array ( '0' => META_FILTER_ANY ),
-		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
-		'user_monitor'		=> Array ( '0' => META_FILTER_ANY )
+		FILTER_PROPERTY_CATEGORY			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_SEVERITY_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_STATUS_ID			=> Array ( '0' => $t_bug_resolved_status_threshold ),
+		FILTER_PROPERTY_HIGHLIGHT_CHANGED	=> $t_default_show_changed,
+		FILTER_PROPERTY_REPORTER_ID			=> Array ( '0' => $t_current_user_id ),
+		FILTER_PROPERTY_HANDLER_ID			=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_RESOLUTION_ID		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_BUILD		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_PRODUCT_VERSION		=> Array ( '0' => META_FILTER_ANY ),
+		FILTER_PROPERTY_HIDE_STATUS_ID		=> Array ( '0' => $t_hide_status_default ),
+		FILTER_PROPERTY_MONITOR_USER_ID		=> Array ( '0' => META_FILTER_ANY )
 	);
-	$url_link_parameters['verify'] = 'reporter_id=' . $t_current_user_id . '&amp;show_status=' . $t_bug_resolved_status_threshold;
+	$url_link_parameters['verify'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
 
         $rows = filter_get_bug_rows ( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title]  );
 
@@ -206,7 +206,7 @@
 		?>
 		<?php
 			if ( sizeof( $rows ) > 0 ) {
-				$v_start = $t_filter['per_page'] * ($f_page_number-1) +1;
+				$v_start = $t_filter[ FILTER_PROPERTY_ISSUES_PER_PAGE ] * ($f_page_number-1) +1;
 				$v_end   = $v_start + sizeof( $rows ) -1;
 			} else {
 				$v_start = 0;
@@ -295,7 +295,7 @@
 				echo string_display( category_full_name( $v_category_id, false ) );
 			}
 
-			if ( $v_last_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
+			if ( $v_last_updated > strtotime( '-'.$t_filter[ FILTER_PROPERTY_HIGHLIGHT_CHANGED ].' hours' ) ) {
 				echo ' - <b>' . $t_last_updated . '</b>';
 			} else {
 				echo ' - ' . $t_last_updated;

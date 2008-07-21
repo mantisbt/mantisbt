@@ -39,10 +39,11 @@
 	require_once( $t_core_path.'icon_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 	require_once( $t_core_path.'columns_api.php' );
+	require_once( 'config_filter_defaults_inc.php' );
 
 	auth_ensure_user_authenticated();
 
-	$f_search		= gpc_get_string( 'search', false ); # @@@ need a better default
+	$f_search		= gpc_get_string( FILTER_PROPERTY_FREE_TEXT, false ); # @@@ need a better default
 	$f_offset		= gpc_get_int( 'offset', 0 );
 
 	$t_cookie_value_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
@@ -67,9 +68,9 @@
 		$t_setting_arr = explode( '#', $t_cookie_value, 2 );
 		$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
 
-		$f_highlight_changed 	= $t_filter_cookie_arr['highlight_changed'];
-		$f_sort 				= $t_filter_cookie_arr['sort'];
-		$f_dir		 			= $t_filter_cookie_arr['dir'];
+		$f_highlight_changed 	= $t_filter_cookie_arr[ FILTER_PROPERTY_HIGHLIGHT_CHANGED ];
+		$f_sort 				= $t_filter_cookie_arr[ FILTER_PROPERTY_SORT_FIELD_NAME ];
+		$f_dir		 			= $t_filter_cookie_arr[ FILTER_PROPERTY_SORT_DIRECTION ];
 		$t_project_id 			= helper_get_current_project( );
 	}
 
@@ -101,8 +102,8 @@
 <input type="hidden" name="type" value="1" />
 <input type="hidden" name="print" value="1" />
 <input type="hidden" name="offset" value="0" />
-<input type="hidden" name="sort" value="<?php echo $f_sort ?>" />
-<input type="hidden" name="dir" value="<?php echo $f_dir ?>" />
+<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_FIELD_NAME; ?>" value="<?php echo $f_sort ?>" />
+<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_DIRECTION; ?>" value="<?php echo $f_dir ?>" />
 
 <table class="width100" cellpadding="2px">
 <?php
@@ -142,9 +143,9 @@
 
 		foreach ( $t_icons as $t_icon ) {
 			echo '<a href="' . $t_icon[0] . '.php' .
-				"?search=$t_search" .
-				"&amp;sort=$f_sort" .
-				"&amp;dir=$t_new_dir" .
+				'?' . FILTER_PROPERTY_FREE_TEXT . "=$t_search" .
+				'&amp;' . FILTER_PROPERTY_SORT_FIELD_NAME . "=$f_sort" .
+				'&amp;' . FILTER_PROPERTY_SORT_DIRECTION . "=$t_new_dir" .
 				'&amp;type_page=' . $t_icon[1] .
 				"&amp;export=$f_export" .
 				"&amp;show_flag=$t_show_flag" .

@@ -54,10 +54,10 @@
 			global $t_target_field;
 			if ( $t_target_field ) {
 				$f_view_type = gpc_get_string( 'view_type', '' );
-				if ( ( 'hide_status[]' == $t_target_field ) && ( 'advanced' == $f_view_type ) ) {
-					print "field_to_focus = \"show_status[]\";";
+				if ( ( FILTER_PROPERTY_HIDE_STATUS_ID . '[]' == $t_target_field ) && ( 'advanced' == $f_view_type ) ) {
+					echo 'field_to_focus = "', FILTER_PROPERTY_STATUS_ID, '[]";';
 				} else {
-					print "field_to_focus = \"$t_target_field\";";
+					echo 'field_to_focus = "', $t_target_field, '";';
 				}
 			} else {
 				print "field_to_focus = null;";
@@ -72,12 +72,14 @@
 
 		function SwitchDateFields() {
 		    // All fields need to be enabled to go back to the script
-			document.filters.start_month.disabled = ! document.filters.do_filter_by_date.checked;
-			document.filters.start_day.disabled = ! document.filters.do_filter_by_date.checked;
-			document.filters.start_year.disabled = ! document.filters.do_filter_by_date.checked;
-			document.filters.end_month.disabled = ! document.filters.do_filter_by_date.checked;
-			document.filters.end_day.disabled = ! document.filters.do_filter_by_date.checked;
-			document.filters.end_year.disabled = ! document.filters.do_filter_by_date.checked;
+			<?php
+			echo 'document.filters.', FILTER_PROPERTY_START_MONTH, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
+			echo 'document.filters.', FILTER_PROPERTY_START_DAY, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
+			echo 'document.filters.', FILTER_PROPERTY_START_YEAR, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
+			echo 'document.filters.', FILTER_PROPERTY_END_MONTH, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
+			echo 'document.filters.', FILTER_PROPERTY_END_DAY, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
+			echo 'document.filters.', FILTER_PROPERTY_END_YEAR, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
+			?>
 
 		    return true;
 		}
@@ -174,10 +176,9 @@
 <input type="hidden" name="type" value="1" />
 <input type="hidden" name="view_type" value="<?php PRINT $f_view_type; ?>" />
 <?php
-	if ( $f_for_screen == false )
-	{
-		print "<input type=\"hidden\" name=\"print\" value=\"1\" />";
-		print "<input type=\"hidden\" name=\"offset\" value=\"0\" />";
+	if ( $f_for_screen == false ) {
+		print '<input type="hidden" name="print" value="1" />';
+		print '<input type="hidden" name="offset" value="0" />';
 	}
 ?>
 <table class="width100" cellspacing="1">
