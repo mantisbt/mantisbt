@@ -439,7 +439,7 @@
 					$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . RESOLVED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . CLOSED .'">' . $t_bugs_resolved . '</a>';
 				}
 				if ( 0 < $t_bugs_closed ) {
-					$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . CLOSED . '&amp;' FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
+					$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . CLOSED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
 				}
 				if ( 0 < $t_bugs_total ) {
 					$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_total . '</a>';

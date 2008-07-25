@@ -1676,7 +1676,7 @@
 	# Prints an RSS image that is hyperlinked to an RSS feed.
 	function print_rss( $p_feed_url, $p_title = '' ) {
 		$t_path = config_get( 'path' );
-		echo '<a href="', $p_feed_url, '" title="', $p_title, '"><img src="', $t_path, '/images/', 'rss.png" border="0" alt="', $p_title, '" /></a>';
+		echo '<a href="', $p_feed_url, '" title="', $p_title, '"><img src="', $t_path, '/images/', 'rss.png" width="16" height="16" border="0" alt="', $p_title, '" /></a>';
 	}
 
 	# --------------------
