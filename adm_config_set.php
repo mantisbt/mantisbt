@@ -83,7 +83,7 @@
 		# 2. simple arrays with the form: array( a, b, c, d )
 		# 3. associative arrays with the form: array( a=>1, b=>2, c=>3, d=>4 )
 		$t_full_string = trim( $f_value );
-		if ( preg_match('/array\((.*)\)/', $t_full_string, $t_match ) === 1 ) {
+		if ( preg_match('/array[\s]*\((.*)\)/', $t_full_string, $t_match ) === 1 ) {
 			// we have an array here
 			$t_values = split( ',', trim( $t_match[1] ) );
 			foreach ( $t_values as $key => $value ) {
