@@ -88,7 +88,6 @@
 	} # end for loop
 ?>
 </table>
-</div>
 <?php
 	collapse_closed( 'history' );
 ?>

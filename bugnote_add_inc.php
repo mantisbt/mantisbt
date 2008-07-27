@@ -96,7 +96,6 @@
 </tr>
 </table>
 </form>
-</div>
 <?php
 	collapse_closed( 'bugnote_add' );
 ?>
