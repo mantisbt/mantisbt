@@ -1521,7 +1521,7 @@
 	#  to add a P3P header.  You could try something like 'P3P: CP="CUR ADM"' in your
 	#  config file, but make sure to check that the your policy actually matches with
 	#  what you are promising. See
-	#  http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnpriv/html/ie6privacyfeature.asp
+	#  http://msdn.microsoft.com/en-us/library/ms537343.aspx
 	#  for more information.
 
 	$g_custom_headers				= array();
