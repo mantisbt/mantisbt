@@ -390,30 +390,31 @@
 				PRINT "<span class=\"italic\">$t_now</span>";
 			PRINT '</td>';
 			PRINT '<td class="login-info-right">';
-				PRINT '<form method="post" name="form_set_project" action="' . helper_mantis_url( 'set_project.php' ) . '">';
+				if ( sizeof( current_user_get_accessible_projects() ) > 1 ) { 
+					PRINT '<form method="post" name="form_set_project" action="' . helper_mantis_url( 'set_project.php' ) . '">';
 
-				echo lang_get( 'email_project' ), ': ';
-				if ( ON == config_get( 'show_extended_project_browser' ) ) {
-					print_extended_project_browser( helper_get_current_project_trace() );
-				} else {
-					if ( ON == config_get( 'use_javascript' ) ) {
-						PRINT '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
+					echo lang_get( 'email_project' ), ': ';
+					if ( ON == config_get( 'show_extended_project_browser' ) ) {
+						print_extended_project_browser( helper_get_current_project_trace() );
 					} else {
-						PRINT '<select name="project_id" class="small">';
+						if ( ON == config_get( 'use_javascript' ) ) {
+							PRINT '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
+						} else {
+							PRINT '<select name="project_id" class="small">';
+						}
+						print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
+						PRINT '</select> ';
 					}
-					print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
-					PRINT '</select> ';
-				}
-				PRINT '<input type="submit" class="button-small" value="' . lang_get( 'switch' ) . '" />';
-
+					PRINT '<input type="submit" class="button-small" value="' . lang_get( 'switch' ) . '" />';
+					PRINT '</form>';
+				}	
 				if ( OFF != config_get( 'rss_enabled' ) ) {
 					# Link to RSS issues feed for the selected project, including authentication details.
 					PRINT '<a href="' . rss_get_issues_feed_url() . '">';
 					PRINT '<img src="' . helper_mantis_url( 'images/rss.png' ) . '" alt="' . lang_get( 'rss' ) . '" style="border-style: none; margin: 5px; vertical-align: middle;" />';
 					PRINT '</a>';
 				}
-
-				PRINT '</form>';
+			
 			PRINT '</td>';
 		PRINT '</tr>';
 		PRINT '</table>';
