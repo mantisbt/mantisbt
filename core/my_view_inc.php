@@ -247,7 +247,7 @@
 
 <tr bgcolor="<?php echo $status_color ?>">
 	<?php # -- Bug ID and details link + Pencil shortcut -- ?>
-	<td class="center" valign="top" width ="0" nowrap>
+	<td class="center" valign="top" width ="0" nowrap="nowrap">
 		<span class="small">
 		<?php
 			print_bug_link( $v_id );
