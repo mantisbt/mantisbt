@@ -45,8 +45,7 @@
 				$t_release_date = ' (' . strtolower( lang_get( 'not_released' ) ) . ')';
 			}
 		}
-
-		echo '<tt>';
+		
 		echo '<br />', $t_release_title, $t_release_date, '<br />';
 
 		$t_release_title .= $t_release_date;
@@ -55,6 +54,7 @@
 	
 	function print_project_header ( $p_project_name ) {
 		echo '<br /><span class="pagetitle">', string_display( $p_project_name ), ' - ', lang_get( 'changelog' ), '</span><br />';
+		echo '<tt>';
 	}
 
 	$t_user_id = auth_get_current_user_id();
@@ -248,9 +248,10 @@
 				echo "<br />";
 			}
 
+ 		}
+ 		if ( $t_project_header_printed ) {
 			echo '</tt>';
- 		}			
-
+		}
 
 		$t_project_index++;
 	}
