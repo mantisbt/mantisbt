@@ -313,7 +313,9 @@
 	# (9) Print the title displayed at the top of the page
 	function html_header() {
 		$t_title = config_get( 'page_title' );
-		echo '<div class="center"><span class="pagetitle">', string_display( $t_title ), '</span></div>', "\n";
+		if ( !is_blank( $t_title ) ) {
+			echo '<div class="center"><span class="pagetitle">', string_display( $t_title ), '</span></div>', "\n";
+		}
 	}
 
 	# --------------------
