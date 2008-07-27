@@ -517,6 +517,14 @@
 		echo "<!--\n";
 		echo "var subprojects = new Object();\n";
 
+		echo 'function unescapeHTML(html) {'. "\n";
+		echo '	var htmlNode = document.createElement("DIV");'. "\n";
+		echo '	htmlNode.innerHTML = html;'. "\n";
+		echo '	if(htmlNode.innerText)'. "\n";
+		echo '		return htmlNode.innerText; // IE'. "\n";
+		echo '	return htmlNode.textContent; // FF'. "\n";
+		echo '} '. "\n";
+
 		$t_projects = Array();
 
 		$t_project_count = count( $t_project_ids );
@@ -543,7 +551,7 @@
 		echo "\t\t" . 'var i = 0;' . "\n";
 		echo "\t\t" . 'var project = subprojects[ projectVal ];' . "\n";
 		echo "\t\t" . 'for ( var sp in project ) {' . "\n";
-		echo "\t\t\t" . 'spInput.options[ i++ ] = new Option( project[sp], sp );' . "\n";
+		echo "\t\t\t" . 'spInput.options[ i++ ] = new Option( unescapeHTML(project[sp]), sp );' . "\n";
 		echo "\t\t" . '}' . "\n";
 		echo "\t" . '}' . "\n";
 		echo '}' . "\n";
@@ -591,9 +599,8 @@
 		$t_project_count = count( $t_project_ids );
 
 		for ($i=0;$i<$t_project_count;$i++) {
-			$t_id = $t_project_ids[$i];
-			$t_nbsp = chr( 160 );
-			$t_name = addslashes( str_repeat( $t_nbsp , $t_level ) . str_repeat( '&raquo;', $t_level ) . ' ' . project_get_field( $t_id, 'name' ) );
+			$t_id = $t_project_ids[$i];			
+			$t_name = addslashes( str_repeat( ( '&nbsp;' ) , $t_level ) . str_repeat( ( '&raquo;' ), $t_level ) . ' ' . project_get_field( $t_id, 'name' ) );
 			echo 'subprojects[\'' . $t_top_id . '\'][\'' . $p_trace . ';' . $t_id . '\'] = \'' . $t_name . '\';' . "\n";
 
 			print_extended_project_browser_subproject_javascript( $p_trace . ';' . $t_id );
