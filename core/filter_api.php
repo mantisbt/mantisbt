@@ -3614,13 +3614,15 @@
 					check_selected( $t_filter['custom_fields'][ $p_field_id ], META_FILTER_NONE );
 					echo '>[' . lang_get( 'none' ) .']</option>';
 				}
-				foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
-					if ( ( strtolower( $t_item ) !== META_FILTER_ANY ) && ( strtolower( $t_item ) !== META_FILTER_NONE ) ) {
-						echo '<option value="' .  string_html_entities( $t_item )  . '" ';
-						if ( isset( $t_filter['custom_fields'][ $p_field_id ] ) ) {
-							check_selected( $t_filter['custom_fields'][ $p_field_id ], $t_item );
+				if ( is_array( $t_accessible_custom_fields_values[$j] ) ) {
+					foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
+						if ( ( strtolower( $t_item ) !== META_FILTER_ANY ) && ( strtolower( $t_item ) !== META_FILTER_NONE ) ) {
+							echo '<option value="' .  string_html_entities( $t_item )  . '" ';
+							if ( isset( $t_filter['custom_fields'][ $p_field_id ] ) ) {
+								check_selected( $t_filter['custom_fields'][ $p_field_id ], $t_item );
+							}
+							echo '>' . string_shorten( $t_item )  . '</option>' . "\n";
 						}
-						echo '>' . string_shorten( $t_item )  . '</option>' . "\n";
 					}
 				}
 				echo '</select>';
