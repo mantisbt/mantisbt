@@ -80,7 +80,7 @@ function form_security_param( $p_form_name ) {
 
 	# Create the GET parameter to be used in a URL for a secure link
 	$t_form_token = $p_form_name . '_token';
-	$t_param = '&%s=%s';
+	$t_param = '&amp;%s=%s';
 	$t_param = sprintf( $t_param, $t_form_token, $t_string );
 
 	return $t_param;
