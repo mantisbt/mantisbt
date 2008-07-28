@@ -88,9 +88,9 @@
 				FROM $t_bug_history_table b
 				LEFT JOIN $t_mantis_user_table u
 				ON b.user_id=u.id
-				WHERE bug_id='$c_bug_id'
+				WHERE bug_id=" . db_param() . "
 				ORDER BY date_modified DESC";
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( $c_bug_id ) );
 	}
 	# --------------------
 	# Retrieves the history events for the specified bug id and returns it in an array
@@ -136,9 +136,9 @@
 		# for the new bug with the same timestamp...)
 		$query = "SELECT *
 				FROM $t_mantis_bug_history_table
-				WHERE bug_id='$c_bug_id'
+				WHERE bug_id=" . db_param() . "
 				ORDER BY date_modified $t_history_order,id";
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( $c_bug_id ) );
 		$raw_history_count = db_num_rows( $result );
 		$raw_history = array();
 
