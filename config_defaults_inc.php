@@ -149,8 +149,8 @@
 	#   'memcached' -> Memcached storage sessions
 	$g_session_handler = 'php';
 
-	# Session save path.  If null, uses default value as set by session handler.
-	$g_session_save_path = null;
+	# Session save path.  If false, uses default value as set by session handler.
+	$g_session_save_path = false;
 
 	#############################
 	# Configuration Settings
