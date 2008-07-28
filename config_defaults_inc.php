@@ -149,6 +149,9 @@
 	#   'memcached' -> Memcached storage sessions
 	$g_session_handler = 'php';
 
+	# Session save path.  If null, uses default value as set by session handler.
+	$g_session_save_path = null;
+
 	#############################
 	# Configuration Settings
 	#############################
@@ -1938,4 +1941,4 @@
 	
 	# The twitter account password.
 	$g_twitter_password = '';
-?>
+
