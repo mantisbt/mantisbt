@@ -144,7 +144,7 @@
 		
 		echo '<td>' . $t_link;
 		if ($t_prefix == 'UNUSED' ) {
-			echo '[' . $unused_user_count . ']' . '<br />' . lang_get( 'never_logged_in_title' ) . '<br>';
+			echo '[' . $unused_user_count . ']' . '<br />' . lang_get( 'never_logged_in_title' ) . '<br />';
 			echo print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) );
 		} else if ($t_prefix == 'NEW' ) {
 			echo '[' . $new_user_count . ']<br />' . '(' . lang_get( '1_week_title' ) . ')';
