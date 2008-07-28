@@ -315,6 +315,7 @@
 	}  # end for
 ?>
 <?php # -- Page number links -- ?>
+	<tr>
 		<td class="right" colspan="8">
 			<span class="small">
 				<?php
@@ -323,6 +324,7 @@
 				?>
 			</span>
 		</td>
+	</tr>
 </table>
 <?php # Manage Form END ?>
 
