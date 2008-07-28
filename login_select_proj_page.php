@@ -29,6 +29,13 @@
 
 	$f_ref = gpc_get_string( 'ref', '' );
 
+	if ( count( current_user_get_accessible_projects() ) == 1) {
+		$t_project_ids = current_user_get_accessible_projects();
+		$t_project_id = (int) $t_project_ids[0];
+		print_header_redirect( "set_project.php?project_id=" . $t_project_id . "&ref=" . string_html_specialchars( $f_ref ), true);
+		/* print_header_redirect terminates script execution */
+	}
+
 	html_page_top1( lang_get( 'select_project_button' ) );
 	html_page_top2();
 ?>
