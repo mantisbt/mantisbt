@@ -390,7 +390,16 @@
 				PRINT "<span class=\"italic\">$t_now</span>";
 			PRINT '</td>';
 			PRINT '<td class="login-info-right">';
-				if ( sizeof( current_user_get_accessible_projects() ) > 1 ) { 
+				$t_show_project_selector = true;
+				if ( count( current_user_get_accessible_projects() ) == 1) { // >1
+					$t_project_ids = current_user_get_accessible_projects();
+					$t_project_id = (int) $t_project_ids[0];
+					if ( count( current_user_get_accessible_subprojects( $t_project_id ) ) == 0 ) {
+						$t_show_project_selector = false;
+					}
+				}
+				
+				if ( $t_show_project_selector ) {
 					PRINT '<form method="post" name="form_set_project" action="' . helper_mantis_url( 'set_project.php' ) . '">';
 
 					echo lang_get( 'email_project' ), ': ';
