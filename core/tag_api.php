@@ -87,18 +87,21 @@
 
 	/**
 	 * Determine if a given name is valid.
-	 * Name must start with letter/number and consist of letters, numbers, 
-	 * hyphens, underscores, periods, or spaces.  The matches parameter allows 
-	 * you to also receive an array of regex matches, which by default only 
-	 * includes the valid tag name itself.  The prefix parameter is optional,
-	 * but allows you to prefix the regex check, which is useful for filters, etc.
+	 *
+	 * Name must not contain '+' and '-' characters (they are used for 
+	 * filters) and the configured tag separator.
+	 * The matches parameter allows to also receive an array of regex matches,
+	 * which by default only includes the valid tag name itself.  
+	 * The prefix parameter is optional, but allows you to prefix the regex 
+	 * check, which is useful for filters, etc.
 	 * @param string Tag name
 	 * @param array Array reference for regex matches
 	 * @param string Prefix regex pattern
 	 * @return boolean True if the name is valid
 	 */
 	function tag_name_is_valid( $p_name, &$p_matches, $p_prefix="" ) {
-		$t_pattern = "/^$p_prefix([a-zA-Z0-9][a-zA-Z0-9-_. ]*)$/";
+		$t_separator = config_get( 'tag_separator' );
+		$t_pattern = "/^$p_prefix([^\+\-{$t_separator}]*)$/";
 		return preg_match( $t_pattern, $p_name, $p_matches );
 	}
 
