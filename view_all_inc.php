@@ -132,7 +132,7 @@
 					print_bracket_link( 'freemind_page.php', lang_get( 'mindmap' ), true );
 				}
 
-				$t_links = event_signal( 'EVENT_VIEW_ISSUES_LINKS' );
+				$t_links = event_signal( 'EVENT_MENU_FILTER' );
 
 				foreach ( $t_links as $t_plugin => $t_hooks ) {
 					foreach( $t_hooks as $t_hook ) {

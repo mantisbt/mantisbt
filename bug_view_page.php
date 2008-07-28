@@ -100,6 +100,17 @@
 		</span>
 	<?php
 		}
+
+		$t_links = event_signal( 'EVENT_MENU_ISSUE', $f_bug_id );
+
+		foreach ( $t_links as $t_plugin => $t_hooks ) {
+			foreach( $t_hooks as $t_hook ) {
+				foreach( $t_hook as $t_label => $t_href ) {
+					echo '&nbsp;';
+					print_bracket_link( $t_href, $t_label );
+				}
+			}
+		}
 	?>
 	</td>
 
