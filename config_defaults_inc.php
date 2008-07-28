@@ -381,7 +381,8 @@
 	#############################
 
 	# --- version variables -----------
-	$g_show_version			= ON;
+	# Set to off by default to not expose version to anonymous users
+	$g_show_version			= OFF;
 
 	################################
 	# Mantis Language Settings
