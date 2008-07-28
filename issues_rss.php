@@ -187,7 +187,7 @@
 		$description = string_rss_links( $t_bug->description );
 
 		# subject is category.
-		$subject = string_rss_links( $t_bug->category );
+		$subject = string_rss_links( category_full_name( $t_bug->category_id, false ) );
 
 		# optional DC value
 		$date = date( 'Y-m-d\TH:i:sO', $t_bug->last_updated );
