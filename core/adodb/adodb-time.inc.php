@@ -242,6 +242,12 @@ b. Implement daylight savings, which looks awfully complicated, see
 
 CHANGELOG
 
+- 11 Feb 2008 0.33
+* Bug in 0.32 fix for hour handling. Fixed.
+
+- 1 Feb 2008 0.32
+* Now adodb_mktime(0,0,0,12+$m,20,2040) works properly. 
+
 - 10 Jan 2008 0.31
 * Now adodb_mktime(0,0,0,24,1,2037) works correctly.
 
@@ -380,7 +386,7 @@ First implementation.
 /*
 	Version Number
 */
-define('ADODB_DATE_VERSION',0.31);
+define('ADODB_DATE_VERSION',0.33);
 
 $ADODB_DATETIME_CLASS = (PHP_VERSION >= 5.2);
 
@@ -429,6 +435,9 @@ function adodb_date_test_strftime($fmt)
 */
 function adodb_date_test()
 {
+	
+	for ($m=-24; $m<=24; $m++)
+		echo "$m :",adodb_date('d-m-Y',adodb_mktime(0,0,0,1+$m,20,2040)),"<br>";
 	
 	error_reporting(E_ALL);
 	print "<h4>Testing adodb_date and adodb_mktime. version=".ADODB_DATE_VERSION.' PHP='.PHP_VERSION."</h4>";
@@ -1211,7 +1220,7 @@ function adodb_mktime($hr,$min,$sec,$mon=false,$day=false,$year=false,$is_dst=fa
 			); 
 			
 		
-		if ($usephpfns && ($year + $mon/12+$day/365.25+$hr/24/365.25 >= 2038)) $usephpfns = false;
+		if ($usephpfns && ($year + $mon/12+$day/365.25+$hr/(24*365.25) >= 2038)) $usephpfns = false;
 			
 		if ($usephpfns) {
 				return $is_gmt ?
@@ -1237,7 +1246,7 @@ function adodb_mktime($hr,$min,$sec,$mon=false,$day=false,$year=false,$is_dst=fa
 	$year = adodb_year_digit_check($year);
 
 	if ($mon > 12) {
-		$y = floor($mon / 12);
+		$y = floor(($mon-1)/ 12);
 		$year += $y;
 		$mon -= $y*12;
 	} else if ($mon < 1) {

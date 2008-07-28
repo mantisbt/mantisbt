@@ -1,6 +1,6 @@
 <?php
 /* 
-V5.03 22 Jan 2008   (c) 2000-2008 John Lim. All rights reserved.
+V5.05 11 July 2008   (c) 2000-2008 John Lim. All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. 
@@ -177,12 +177,12 @@ class ADODB_sybase extends ADOConnection {
 		return @sybase_close($this->_connectionID);
 	}
 	
-	function UnixDate($v)
+	static function UnixDate($v)
 	{
 		return ADORecordSet_array_sybase::UnixDate($v);
 	}
 	
-	function UnixTimeStamp($v)
+	static function UnixTimeStamp($v)
 	{
 		return ADORecordSet_array_sybase::UnixTimeStamp($v);
 	}	
@@ -211,7 +211,7 @@ class ADODB_sybase extends ADOConnection {
                 $s .= "convert(char(3),$col,0)";
                 break;
             case 'm':
-                $s .= "replace(str(month($col),2),' ','0')";
+                $s .= "str_replace(str(month($col),2),' ','0')";
                 break;
             case 'Q':
             case 'q':
@@ -219,21 +219,21 @@ class ADODB_sybase extends ADOConnection {
                 break;
             case 'D':
             case 'd':
-                $s .= "replace(str(datepart(dd,$col),2),' ','0')";
+                $s .= "str_replace(str(datepart(dd,$col),2),' ','0')";
                 break;
             case 'h':
                 $s .= "substring(convert(char(14),$col,0),13,2)";
                 break;
 
             case 'H':
-                $s .= "replace(str(datepart(hh,$col),2),' ','0')";
+                $s .= "str_replace(str(datepart(hh,$col),2),' ','0')";
                 break;
 
             case 'i':
-                $s .= "replace(str(datepart(mi,$col),2),' ','0')";
+                $s .= "str_replace(str(datepart(mi,$col),2),' ','0')";
                 break;
             case 's':
-                $s .= "replace(str(datepart(ss,$col),2),' ','0')";
+                $s .= "str_replace(str(datepart(ss,$col),2),' ','0')";
                 break;
             case 'a':
             case 'A':
@@ -353,12 +353,12 @@ class ADORecordset_sybase extends ADORecordSet {
 	}
 	
 	// sybase/mssql uses a default date like Dec 30 2000 12:00AM
-	function UnixDate($v)
+	static function UnixDate($v)
 	{
 		return ADORecordSet_array_sybase::UnixDate($v);
 	}
 	
-	function UnixTimeStamp($v)
+	static function UnixTimeStamp($v)
 	{
 		return ADORecordSet_array_sybase::UnixTimeStamp($v);
 	}
@@ -371,7 +371,7 @@ class ADORecordSet_array_sybase extends ADORecordSet_array {
 	}
 	
 		// sybase/mssql uses a default date like Dec 30 2000 12:00AM
-	function UnixDate($v)
+	static function UnixDate($v)
 	{
 	global $ADODB_sybase_mths;
 	
@@ -388,7 +388,7 @@ class ADORecordSet_array_sybase extends ADORecordSet_array {
 		return  mktime(0,0,0,$themth,$rr[2],$rr[3]);
 	}
 	
-	function UnixTimeStamp($v)
+	static function UnixTimeStamp($v)
 	{
 	global $ADODB_sybase_mths;
 		//11.02.2001 Toni Tunkkari toni.tunkkari@finebyte.com

@@ -69,12 +69,12 @@ $db->Execute("CREATE TEMPORARY TABLE `persons` (
 ADOdb_Active_Record's are object representations of table rows. Each table in the database is represented by a class in PHP. To begin working with a table as a ADOdb_Active_Record, a class that extends ADOdb_Active_Records needs to be created for it.
 
 <pre>
-class Person extends ADOdb_Active_Record{}
-$person = new Person();
+class person extends ADOdb_Active_Record{}
+$person = new person();
 </pre>   
 
 <p>
-In the above example, a new ADOdb_Active_Record object $person was created to access the "persons" table. Zend_Db_DataObject takes the name of the class, pluralizes it (according to American English rules), and assumes that this is the name of the table in the database.
+In the above example, a new ADOdb_Active_Record object $person was created to access the "persons" table. Zend_Db_DataObject takes the name of the class, pluralizes it (according to American English rules), and assumes that this is the name of the table in the database. Also note that with MySQL, table names are case-sensitive, so your class name must match the table name's case. With other databases with case-insensitive tables, your class can be capitalized differently.
 <p>
 This kind of behavior is typical of ADOdb_Active_Record. It will assume as much as possible by convention rather than explicit configuration. In situations where it isn't possible to use the conventions that ADOdb_Active_Record expects, options can be overridden as we'll see later.
 

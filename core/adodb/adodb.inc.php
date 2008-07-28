@@ -14,7 +14,7 @@
 /**
 	\mainpage 	
 	
-	 @version V5.03 22 Jan 2008   (c) 2000-2008 John Lim (jlim#natsoft.com.my). All rights reserved.
+	 @version V5.05 11 July 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
 
 	Released under both BSD license and Lesser GPL library license. You can choose which license
 	you prefer.
@@ -54,6 +54,8 @@
 		$ADODB_vers, 		// database version
 		$ADODB_COUNTRECS,	// count number of records returned - slows down query
 		$ADODB_CACHE_DIR,	// directory to cache recordsets
+		$ADODB_CACHE,
+		$ADODB_CACHE_CLASS,
 		$ADODB_EXTENSION,   // ADODB extension installed
 		$ADODB_COMPAT_FETCH, // If $ADODB_COUNTRECS and this is true, $rs->fields is available on EOF
 	 	$ADODB_FETCH_MODE,	// DEFAULT, NUM, ASSOC or BOTH. Default follows native driver default...
@@ -146,9 +148,12 @@
 		$ADODB_COUNTRECS,	// count number of records returned - slows down query
 		$ADODB_CACHE_DIR,	// directory to cache recordsets
 	 	$ADODB_FETCH_MODE,
+		$ADODB_CACHE,
+		$ADODB_CACHE_CLASS,
 		$ADODB_FORCE_TYPE,
 		$ADODB_QUOTE_FIELDNAMES;
 		
+		$ADODB_CACHE_CLASS = 'ADODB_Cache_File';
 		$ADODB_FETCH_MODE = ADODB_FETCH_DEFAULT;
 		$ADODB_FORCE_TYPE = ADODB_FORCE_VALUE;
 
@@ -169,7 +174,7 @@
 		/**
 		 * ADODB version as a string.
 		 */
-		$ADODB_vers = 'V5.03 22 Jan 2008  (c) 2000-2008 John Lim (jlim#natsoft.com.my). All rights reserved. Released BSD & LGPL.';
+		$ADODB_vers = 'V5.05 11 July 2008  (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved. Released BSD & LGPL.';
 	
 		/**
 		 * Determines whether recordset->RecordCount() is used. 
@@ -208,7 +213,7 @@
 */
 	}
 	
-
+	// for transaction handling
 	
 	function ADODB_TransMonitor($dbms, $fn, $errno, $errmsg, $p1, $p2, &$thisConnection)
 	{
@@ -217,6 +222,95 @@
 		if ($thisConnection->_oldRaiseFn) {
 			$fn = $thisConnection->_oldRaiseFn;
 			$fn($dbms, $fn, $errno, $errmsg, $p1, $p2,$thisConnection);
+		}
+	}
+	
+	//------------------
+	// class for caching
+	class ADODB_Cache_File {
+	
+		var $createdir = true; // requires creation of temp dirs
+		
+		function ADODB_Cache_File()
+		{
+		global $ADODB_INCLUDED_CSV;
+			if (empty($ADODB_INCLUDED_CSV)) include(ADODB_DIR.'/adodb-csvlib.inc.php');
+		}
+		
+		// write serialised recordset to cache item/file
+		function writecache($filename, $contents,  $debug, $secs2cache)
+		{
+			return adodb_write_file($filename, $contents,$debug);
+		}
+		
+		// load serialised recordset and unserialise it
+		function &readcache($filename, &$err, $secs2cache, $rsClass)
+		{
+			$rs = csv2rs($filename,$err,$secs2cache,$rsClass);
+			return $rs;
+		}
+		
+		// flush all items in cache
+		function flushall($debug=false)
+		{
+		global $ADODB_CACHE_DIR;
+
+		$rez = false;
+		
+			if (strlen($ADODB_CACHE_DIR) > 1) {
+				$rez = $this->_dirFlush($ADODB_CACHE_DIR);
+	         	if ($debug) DOConnection::outp( "flushall: $dir<br><pre>\n". $rez."</pre>");
+	   		}
+			return $rez;
+		}
+		
+		// flush one file in cache
+		function flushcache($f, $debug=false)
+		{
+			if (!@unlink($f)) {
+		   		if ($debug) ADOConnection::outp( "flushcache: failed for $f");
+			}
+		}
+		
+		function getdirname($hash)
+		{
+		global $ADODB_CACHE_DIR;
+			if (!isset($this->notSafeMode)) $this->notSafeMode = !ini_get('safe_mode');
+			return ($this->notSafeMode) ? $ADODB_CACHE_DIR.'/'.substr($hash,0,2) : $ADODB_CACHE_DIR;
+		}
+		
+		// create temp directories
+		function createdir($hash, $debug)
+		{
+			$dir = $this->getdirname($hash);
+			if ($this->notSafeMode && !file_exists($dir)) {
+				$oldu = umask(0);
+				if (!@mkdir($dir,0771)) if(!is_dir($dir) && $debug) ADOConnection::outp("Cannot create $dir");
+				umask($oldu);
+			}
+		
+			return $dir;
+		}
+		
+		/**
+		* Private function to erase all of the files and subdirectories in a directory.
+		*
+		* Just specify the directory, and tell it if you want to delete the directory or just clear it out.
+		* Note: $kill_top_level is used internally in the function to flush subdirectories.
+		*/
+		function _dirFlush($dir, $kill_top_level = false) 
+		{
+		   if(!$dh = @opendir($dir)) return;
+		   
+		   while (($obj = readdir($dh))) {
+		   		if($obj=='.' || $obj=='..') continue;
+				$f = $dir.'/'.$obj;
+		
+				if (strpos($obj,'.cache')) @unlink($f);
+				if (is_dir($f)) $this->_dirFlush($f, true);
+		   }
+		   if ($kill_top_level === true) @rmdir($dir);
+		   return true;
 		}
 	}
 	
@@ -417,6 +511,10 @@
 		if ($argDatabaseName != "") $this->database = $argDatabaseName;		
 		
 		$this->_isPersistentConnection = false;	
+			
+		global $ADODB_CACHE;
+		if (empty($ADODB_CACHE)) $this->_CreateCache();
+		
 		if ($forceNew) {
 			if ($rez=$this->_nconnect($this->host, $this->user, $this->password, $this->database)) return true;
 		} else {
@@ -472,6 +570,7 @@
 	 */	
 	function PConnect($argHostname = "", $argUsername = "", $argPassword = "", $argDatabaseName = "")
 	{
+		
 		if (defined('ADODB_NEVER_PERSIST')) 
 			return $this->Connect($argHostname,$argUsername,$argPassword,$argDatabaseName);
 		
@@ -481,6 +580,10 @@
 		if ($argDatabaseName != "") $this->database = $argDatabaseName;		
 			
 		$this->_isPersistentConnection = true;	
+		
+		global $ADODB_CACHE;
+		if (empty($ADODB_CACHE)) $this->_CreateCache();
+		
 		if ($rez = $this->_pconnect($this->host, $this->user, $this->password, $this->database)) return true;
 		if (isset($rez)) {
 			$err = $this->ErrorMsg();
@@ -506,6 +609,21 @@
 			return;
 		} 
 		ADOConnection::outp($msg);
+	}
+	
+	// create cache class. Code is backward compat with old memcache implementation
+	function _CreateCache()
+	{
+	global $ADODB_CACHE, $ADODB_CACHE_CLASS;
+	
+		if ($this->memCache) {
+		global $ADODB_INCLUDED_MEMCACHE;
+		
+			if (empty($ADODB_INCLUDED_MEMCACHE)) include(ADODB_DIR.'/adodb-memcache.lib.inc.php');
+				$ADODB_CACHE = new ADODB_Cache_MemCache($this);
+		} else
+				$ADODB_CACHE = new $ADODB_CACHE_CLASS($this);
+		
 	}
 	
 	// Format date column in sql string given an input format that understands Y M D
@@ -1181,13 +1299,10 @@
 		$savec = $ADODB_COUNTRECS;
 		$ADODB_COUNTRECS = false;
 			
-		if ($offset>0){
+
 			if ($secs2cache != 0) $rs = $this->CacheExecute($secs2cache,$sql,$inputarr);
 			else $rs = $this->Execute($sql,$inputarr);
-		} else {
-			if ($secs2cache != 0) $rs = $this->CacheExecute($secs2cache,$sql,$inputarr);
-			else $rs = $this->Execute($sql,$inputarr);
-		}
+		
 		$ADODB_COUNTRECS = $savec;
 		if ($rs && !$rs->EOF) {
 			$rs = $this->_rs2rs($rs,$nrows,$offset);
@@ -1456,7 +1571,7 @@
 	function GetRandRow($sql, $arr= false)
 	{
 		$rezarr = $this->GetAll($sql, $arr);
-		$sz = sizeof($rez);
+		$sz = sizeof($rezarr);
 		return $rezarr[abs(rand()) % $sz];
 	}
 	
@@ -1573,103 +1688,17 @@
     */
 	function CacheFlush($sql=false,$inputarr=false)
 	{
-	global $ADODB_CACHE_DIR;
-	
-		if ($this->memCache) {
-		global $ADODB_INCLUDED_MEMCACHE;
-		
-			$key = false;
-			if (empty($ADODB_INCLUDED_MEMCACHE)) include(ADODB_DIR.'/adodb-memcache.lib.inc.php');
-			if ($sql) $key = $this->_gencachename($sql.serialize($inputarr),false,true);
-			FlushMemCache($key, $this->memCacheHost, $this->memCachePort, $this->debug);
-			return;
-		}
-	
-		if (strlen($ADODB_CACHE_DIR) > 1 && !$sql) {
-         /*if (strncmp(PHP_OS,'WIN',3) === 0)
-            $dir = str_replace('/', '\\', $ADODB_CACHE_DIR);
-         else */
-            $dir = $ADODB_CACHE_DIR;
+	global $ADODB_CACHE_DIR, $ADODB_CACHE;
             
-         if ($this->debug) {
-            ADOConnection::outp( "CacheFlush: $dir<br><pre>\n". $this->_dirFlush($dir)."</pre>");
-         } else {
-            $this->_dirFlush($dir);
-         }
+		if (!$sql) {
+			 $ADODB_CACHE->flushall($this->debug);
          return;
       } 
       
-      global $ADODB_INCLUDED_CSV;
-      if (empty($ADODB_INCLUDED_CSV)) include(ADODB_DIR.'/adodb-csvlib.inc.php');
-      
       $f = $this->_gencachename($sql.serialize($inputarr),false);
-      adodb_write_file($f,''); // is adodb_write_file needed?
-      if (!@unlink($f)) {
-         if ($this->debug) ADOConnection::outp( "CacheFlush: failed for $f");
-      }
+		return $ADODB_CACHE->flushcache($f, $this->debug);
    }
    
-   /**
-   * Private function to erase all of the files and subdirectories in a directory.
-   *
-   * Just specify the directory, and tell it if you want to delete the directory or just clear it out.
-   * Note: $kill_top_level is used internally in the function to flush subdirectories.
-   *
-   */
-   function _dirFlush($dir, $kill_top_level = false) 
-   {
-      if(!$dh = @opendir($dir)) return;
-      
-      while (($obj = readdir($dh))) {
-         if($obj=='.' || $obj=='..') continue;
-		$f = $dir.'/'.$obj;
-		
-		if (strpos($obj,'.cache')) @unlink($f);
-		if (is_dir($f)) $this->_dirFlush($f, true);
-      }
-      if ($kill_top_level === true) @rmdir($dir);
-      return true;
-   }
-   
-    // this only deletes .cache files
-	function xCacheFlush($sql=false,$inputarr=false)
-	{
-	global $ADODB_CACHE_DIR;
-	
-		if ($this->memCache) {
-			global $ADODB_INCLUDED_MEMCACHE;
-			$key = false;
-			if (empty($ADODB_INCLUDED_MEMCACHE)) include(ADODB_DIR.'/adodb-memcache.lib.inc.php');
-			if ($sql) $key = $this->_gencachename($sql.serialize($inputarr),false,true);
-			flushmemCache($key, $this->memCacheHost, $this->memCachePort, $this->debug);
-			return;
-		}
-
-		if (strlen($ADODB_CACHE_DIR) > 1 && !$sql) {
-			if (strncmp(PHP_OS,'WIN',3) === 0) {
-				$cmd = 'del /s '.str_replace('/','\\',$ADODB_CACHE_DIR).'\adodb_*.cache';
-			} else {
-				//$cmd = 'find "'.$ADODB_CACHE_DIR.'" -type f -maxdepth 1 -print0 | xargs -0 rm -f';
-				$cmd = 'rm -rf '.$ADODB_CACHE_DIR.'/[0-9a-f][0-9a-f]/'; 
-				// old version 'rm -f `find '.$ADODB_CACHE_DIR.' -name adodb_*.cache`';
-			}
-			if ($this->debug) {
-				ADOConnection::outp( "CacheFlush: $cmd<br><pre>\n", system($cmd),"</pre>");
-			} else {
-				exec($cmd);
-			}
-			return;
-		} 
-		
-		global $ADODB_INCLUDED_CSV;
-		if (empty($ADODB_INCLUDED_CSV)) include(ADODB_DIR.'/adodb-csvlib.inc.php');
-		
-		$f = $this->_gencachename($sql.serialize($inputarr),false);
-		adodb_write_file($f,''); // is adodb_write_file needed?
-		if (!@unlink($f)) {
-			if ($this->debug) ADOConnection::outp( "CacheFlush: failed for $f");
-		}
-	}
 	
 	/**
 	* Private function to generate filename for caching.
@@ -1685,10 +1714,9 @@
 	* Assuming that we can have 50,000 files per directory with good performance, 
 	* then we can scale to 12.8 million unique cached recordsets. Wow!
  	*/
-	function _gencachename($sql,$createdir,$memcache=false)
+	function _gencachename($sql,$createdir)
 	{
-	global $ADODB_CACHE_DIR;
-	static $notSafeMode;
+	global $ADODB_CACHE, $ADODB_CACHE_DIR;
 		
 		if ($this->fetchMode === false) { 
 		global $ADODB_FETCH_MODE;
@@ -1697,17 +1725,10 @@
 			$mode = $this->fetchMode;
 		}
 		$m = md5($sql.$this->databaseType.$this->database.$this->user.$mode);
-		if ($memcache) return $m;
+		if (!$ADODB_CACHE->createdir) return $m;
+		if (!$createdir) $dir = $ADODB_CACHE->getdirname($m);
+		else $dir = $ADODB_CACHE->createdir($m, $this->debug);
 		
-		if (!isset($notSafeMode)) $notSafeMode = !ini_get('safe_mode');
-		$dir = ($notSafeMode) ? $ADODB_CACHE_DIR.'/'.substr($m,0,2) : $ADODB_CACHE_DIR;
-			
-		if ($createdir && $notSafeMode && !file_exists($dir)) {
-			$oldu = umask(0);
-			if (!@mkdir($dir,0771)) 
-				 if(!is_dir($dir) && $this->debug) ADOConnection::outp( "Unable to mkdir $dir for $sql");
-			umask($oldu);
-		}
 		return $dir.'/adodb_'.$m.'.cache';
 	}
 	
@@ -1723,6 +1744,8 @@
 	 */
 	function CacheExecute($secs2cache,$sql=false,$inputarr=false)
 	{
+	global $ADODB_CACHE;
+	
 		if (!is_numeric($secs2cache)) {
 			$inputarr = $sql;
 			$sql = $secs2cache;
@@ -1735,30 +1758,19 @@
 		} else
 			$sqlparam = $sql;
 			
-		if ($this->memCache) {
-			global $ADODB_INCLUDED_MEMCACHE;
-			if (empty($ADODB_INCLUDED_MEMCACHE)) include(ADODB_DIR.'/adodb-memcache.lib.inc.php');
-			$md5file = $this->_gencachename($sql.serialize($inputarr),false,true);
-		} else {
-		global $ADODB_INCLUDED_CSV;
-			if (empty($ADODB_INCLUDED_CSV)) include(ADODB_DIR.'/adodb-csvlib.inc.php');
+		
 			$md5file = $this->_gencachename($sql.serialize($inputarr),true);
-		}
-
 		$err = '';
 		
 		if ($secs2cache > 0){
-			if ($this->memCache)
-				$rs = getmemCache($md5file,$err,$secs2cache, $this->memCacheHost, $this->memCachePort);
-			else
-				$rs = csv2rs($md5file,$err,$secs2cache,$this->arrayClass);
+			$rs = &$ADODB_CACHE->readcache($md5file,$err,$secs2cache,$this->arrayClass);
 			$this->numCacheHits += 1;
 		} else {
 			$err='Timeout 1';
 			$rs = false;
 			$this->numCacheMisses += 1;
 		}
-		$rs = false;
+		
 		if (!$rs) {
 		// no cached rs found
 			if ($this->debug) {
@@ -1770,19 +1782,14 @@
 			
 			$rs = $this->Execute($sqlparam,$inputarr);
 
-			if ($rs && $this->memCache) {
-				$rs = $this->_rs2rs($rs); // read entire recordset into memory immediately
-				if(!putmemCache($md5file, $rs, $this->memCacheHost, $this->memCachePort, $this->memCacheCompress, $this->debug)) {
-					if ($fn = $this->raiseErrorFn)
-						$fn($this->databaseType,'CacheExecute',-32000,"Cache write error",$md5file,$sql,$this);
-					if ($this->debug) ADOConnection::outp( " Cache write error");
-				}
-			} else if ($rs) {
+			if ($rs) {
+
 				$eof = $rs->EOF;
 				$rs = $this->_rs2rs($rs); // read entire recordset into memory immediately
+				$rs->timeCreated = time(); // used by caching
 				$txt = _rs2serialize($rs,false,$sql); // serialize
 	
-				$ok = adodb_write_file($md5file,$txt,$this->debug);
+				$ok = $ADODB_CACHE->writecache($md5file,$txt,$this->debug, $secs2cache);
 				if (!$ok) {
 					if ($ok === false) {
 						$em = 'Cache write error';
@@ -1805,9 +1812,8 @@
 					$rs->connection = $this; // Pablo suggestion
 				}  
 				
-			} else
-			if (!$this->memCache)
-				@unlink($md5file);
+			} else if (!$this->memCache)
+				$ADODB_CACHE->flushcache($md5file);
 		} else {
 			$this->_errorMsg = '';
 			$this->_errorCode = 0;
@@ -2719,12 +2725,12 @@ http://www.stanford.edu/dept/itss/docs/oracle/10g/server.101/b10759/statements_1
 		
 	    function key() 
 		{
-	        return $false;
+	        return false;
 	    }
 		
 	    function current() 
 		{
-	        return $false;
+	        return false;
 	    }
 		
 	    function next() 

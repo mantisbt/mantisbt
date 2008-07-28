@@ -1,7 +1,7 @@
 <?php
 /*
 
-  version V5.03 22 Jan 2008  (c) 2000-2008 John Lim. All rights reserved.
+  version V5.05 11 July 2008  (c) 2000-2008 John Lim. All rights reserved.
 
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
@@ -945,7 +945,7 @@ NATSOFT.DOMAIN =
 			if ($isOutput == false) {
 				$var = $this->BlobEncode($var);
 				$tmp->WriteTemporary($var);
-				$this->_refLOBs[$numlob]['VAR'] = $var;
+				$this->_refLOBs[$numlob]['VAR'] = &$var;
 				if ($this->debug) {
 					ADOConnection::outp("<b>Bind</b>: LOB has been written to temp");
 				}
