@@ -95,11 +95,7 @@
 	# person, an organization, or a service
 	$contributor = (string) '';
 
-	$rssfile->setPublisher( $publisher );
-	$rssfile->setCreator( $creator );
-	$rssfile->setRights( $rights );
-	$rssfile->setCoverage( $coverage );
-	$rssfile->setContributor( $contributor );
+	$rssfile->addDCdata( $publisher, $creator, $date, $language, $rights, $coverage, $contributor );
 
 	# hourly / daily / weekly / ...
 	$period = (string) 'daily';
