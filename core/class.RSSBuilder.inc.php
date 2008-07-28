@@ -1259,7 +1259,7 @@ class RSSBuilder extends RSSBase {
 					$this->output .= (string) '<link>' . $item->getLink() . '</link>' . "\n";
 
 					if (strlen($item->getDescription()) > 0) {
-						$this->output .= (string) '<description>' . $item->getDescription() . '</description>' . "\n";
+						$this->output .= (string) '<description><![CDATA[' . $item->getDescription() . ']]></description>' . "\n";
 					} // end if
 
 					if ($this->use_dc_data === TRUE && strlen($item->getSubject()) > 0) {
