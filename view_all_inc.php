@@ -124,21 +124,17 @@
 				print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
 				echo '&nbsp;';
 				print_bracket_link( 'excel_xml_export.php', lang_get( 'excel_export' ) );
-				echo '&nbsp;';
 
-				if ( config_get( 'mindmap_enabled' ) == ON ) {
-					print_bracket_link( 'freemind_export.php', lang_get( 'freemind_export' ) );
-					echo '&nbsp;';
-					print_bracket_link( 'freemind_page.php', lang_get( 'mindmap' ), true );
-				}
+				$t_event_menu_options = $t_links = event_signal( 'EVENT_MENU_FILTER' );
 
-				$t_links = event_signal( 'EVENT_MENU_FILTER' );
+				foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+					foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+						if ( !is_array( $t_callback_menu_options ) ) {
+							$t_callback_menu_options = array( $t_callback_menu_options );
+						}
 
-				foreach ( $t_links as $t_plugin => $t_hooks ) {
-					foreach( $t_hooks as $t_hook ) {
-						foreach( $t_hook as $t_label => $t_href ) {
-							echo '&nbsp;';
-							print_bracket_link( $t_href, $t_label );
+						foreach ( $t_callback_menu_options as $t_menu_option ) {
+							print_bracket_link_prepared( $t_menu_option );
 						}
 					}
 				}

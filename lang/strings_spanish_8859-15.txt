@@ -1531,11 +1531,5 @@ $s_copy_columns_to = 'Copiar Columnas Hacia';
 $s_due_date = "Fecha límite";
 $s_overdue = "Atrasado";
 
-# mind mapping                    
-$s_mindmap = 'Mapa Mental';
-$s_freemind_export = 'Exportar a Freemind';
-
 #account_view_page.php
 $s_view_account_title = 'Información de Usuario';
-
-?>

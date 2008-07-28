@@ -1523,11 +1523,5 @@ $s_copy_columns_to = 'Copy Columns To';
 $s_due_date = "Due Date";
 $s_overdue = "Overdue";
 
-# mind mapping
-$s_mindmap = 'Mindmap';
-$s_freemind_export = 'Freemind Export';
-
 #account_view_page.php
 $s_view_account_title = 'User Information';
-
-?>

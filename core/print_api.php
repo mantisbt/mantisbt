@@ -1415,6 +1415,11 @@
 		echo '</form>';
 	}
 	# --------------------
+	# print brackets around a pre-prepared link (i.e. '<a href' html tag).
+	function print_bracket_link_prepared( $p_link ) {
+		echo '<span class="bracket-link">[&nbsp;' . $p_link . '&nbsp;]</span> ';
+	}
+	# --------------------
 	# print the bracketed links used near the top
 	# if the $p_link is blank then the text is printed but no link is created
 	# if $p_new_window is true, link will open in a new window, default false.
