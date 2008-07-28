@@ -50,6 +50,11 @@ abstract class MantisSession {
  */
 class MantisPHPSession extends MantisSession {
 	function __construct() {
+		$t_session_save_path = config_get_global( 'session_save_path' );
+		if ( !is_null( $t_session_save_path ) ) {
+			session_save_path( $t_session_save_path );
+		}
+
 		session_start();
 		$this->id = session_id();
 	}
