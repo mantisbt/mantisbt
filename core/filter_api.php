@@ -3005,9 +3005,9 @@
 			<td colspan="2">
 				<?php
 					collapse_icon( 'filter' );
-					echo lang_get( 'search' );
+					echo lang_get( 'search' ) . '&nbsp;';
 					echo '<input type="text" size="16" name="', FILTER_PROPERTY_FREE_TEXT, '" value="', string_html_specialchars( $t_filter[ FILTER_PROPERTY_FREE_TEXT ] ), '" />';
-				?>:
+				?>
 
 				<input type="submit" name="filter" class="button-small" value="<?php PRINT lang_get( 'filter_button' ) ?>" />
 			</td>
