@@ -287,8 +287,6 @@
 			user_ensure_exists( $p_user_id );
 		}
 
-		$c_name			= trim( db_prepare_string( $p_name ) );
-		$c_description	= db_prepare_string( $p_description );
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_date_created	= db_now();
 		
@@ -309,7 +307,7 @@
 				  " . db_param() . "
 				)";
 
-		db_query_bound( $query, Array( $c_user_id, $c_name, $c_description, $c_date_created, $c_date_created ) );
+		db_query_bound( $query, Array( $c_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
 		return db_insert_id( $t_tag_table );
 	}
 
@@ -614,7 +612,7 @@
 		} else {
 			$t_detach = config_get( 'tag_detach_threshold' );
 		}
-		
+
 		$t_name = string_display_line( $p_tag_row['name'] );
 		$t_description = string_display_line( $p_tag_row['description'] );
 		
