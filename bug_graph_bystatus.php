@@ -148,6 +148,8 @@
 	}
 	
     ksort($t_view_status);
+    $t_label_string = lang_get('orct'); //use the (open/resolved/closed/total) label
+    $t_label_strings = explode('/', substr($t_label_string, 1, strlen($t_label_string)-2));
     
     // add headers for table
     if ($f_show_as_table) {
@@ -159,9 +161,9 @@
     	html_body_begin();
 	    echo '<table class="width100"><tr><td></td>';
         if ($f_summary) {
-            echo '<th>' . lang_get_defaulted('open') . '</th>';
-            echo '<th>' . lang_get_defaulted('resolved') . '</th>';
-            echo '<th>' . lang_get_defaulted('closed') . '</th>';
+            echo '<th>' . $t_label_strings[0] . '</th>';
+            echo '<th>' . $t_label_strings[1] . '</th>';
+            echo '<th>' . $t_label_strings[2] . '</th>';
         } else {
             foreach ( $t_view_status as $t_status => $t_label ) {
                 echo '<th>'.$t_label.' ('.$t_status.')</th>';
@@ -176,9 +178,10 @@
 	$t_labels = array();
 	$i = 0;
     if ($f_summary) {
-        $t_labels[++$i] = lang_get_defaulted('open');
-        $t_labels[++$i] = lang_get_defaulted('resolved');
-        $t_labels[++$i] = lang_get_defaulted('closed');
+        
+        $t_labels[++$i] = $t_label_strings[0];
+        $t_labels[++$i] = $t_label_strings[1];
+        $t_labels[++$i] = $t_label_strings[2];
     } else {
         foreach ( $t_view_status as $t_status => $t_label ) {
             $t_labels[++$i] = isset($t_status_labels[$t_status]) ? $t_status_labels[$t_status] : lang_get_defaulted($t_label);
@@ -228,6 +231,6 @@
     	html_body_end();
     	html_end();
     } else {
-	    graph_bydate( $t_metrics, $t_labels, lang_get( 'by_category' ), $f_width, $f_width * $t_ar );
+	    graph_bydate( $t_metrics, $t_labels, lang_get( 'by_status' ), $f_width, $f_width * $t_ar );
 	}
 ?>
