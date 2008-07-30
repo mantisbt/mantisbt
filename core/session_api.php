@@ -54,6 +54,7 @@ class MantisPHPSession extends MantisSession {
 			session_save_path( $t_session_save_path );
 		}
 
+		session_cache_limiter( 'private_no_expire' );
 		session_start();
 		$this->id = session_id();
 	}
