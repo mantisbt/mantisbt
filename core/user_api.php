@@ -281,6 +281,11 @@
 			return false;
 		}
 
+		# username must consist of at least one character
+		if ( is_blank( $p_username ) ) {
+			return false;
+		}
+		
 		# Only allow a basic set of characters
 		if ( 0 == preg_match( config_get( 'user_login_valid_regex' ), $p_username ) ) {
 			return false;
