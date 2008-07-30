@@ -304,7 +304,7 @@
 		?>
 		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' ) ?>" />
 		<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo string_attribute( $p_string ) ?>" />
-		<select <?php echo helper_get_tab_index() ?> name="tag_select" id="tag_select">
+		<select <?php echo helper_get_tab_index() ?> name="tag_select" id="tag_select" onchange="tag_string_append( this.options[ this.selectedIndex ].text );">
 			<?php print_tag_option_list( $p_bug_id ); ?>
 		</select>
 		<?php
@@ -334,7 +334,7 @@
 
 		echo '<option value="0">',lang_get( 'tag_existing' ),'</option>';
 		while ( $row = db_fetch_array( $result ) ) {
-			echo '<option value="',$row['id'],'" onclick="tag_string_append(\'',$row['name'],'\')">',$row['name'],'</option>';
+			echo '<option value="',$row['id'],'">',$row['name'],'</option>';
 		}
 	}
 
