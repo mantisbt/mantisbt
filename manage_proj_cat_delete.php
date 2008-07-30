@@ -38,9 +38,13 @@
 	$t_name = category_full_name( $f_category_id );
 	$t_project_id = $t_row['project_id'];
 
+	# Get a bug count
+	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_query = "SELECT COUNT(id) FROM $t_bug_table WHERE category_id=" . db_param();
+	$t_bug_count = db_result( db_query_bound( $t_query, array( $f_category_id ) ) );
+
 	# Confirm with the user
-	helper_ensure_confirmed( lang_get( 'category_delete_sure_msg' ) .
-		'<br/>' . lang_get( 'category' ) . ': ' . $t_name,
+	helper_ensure_confirmed( sprintf( lang_get( 'category_delete_sure_msg' ), $t_name, $t_bug_count ),
 		lang_get( 'delete_category_button' ) );
 
 	form_security_validate( 'manage_proj_cat_delete' );
