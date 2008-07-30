@@ -538,8 +538,8 @@
 			# that that the bug was not assigned to somebody, then assign it automatically.
 			$query = "SELECT user_id
 					  FROM $t_category_table
-					  WHERE project_id=" . db_param() . ' AND id=' . db_param();
-			$result = db_query_bound( $query, array( $c_project_id, $c_category_id ) );
+					  WHERE id=" . db_param();
+			$result = db_query_bound( $query, array( $c_category_id ) );
 
 			if ( db_num_rows( $result ) > 0 ) {
 				$c_handler_id = $p_handler_id = db_result( $result );
