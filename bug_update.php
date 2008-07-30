@@ -31,8 +31,6 @@
 	require_once( $t_core_path.'bugnote_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 
-	form_security_validate( 'bug_update' );
-
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$f_update_mode = gpc_get_bool( 'update_mode', FALSE ); # set if called from generic update page
 	$f_new_status	= gpc_get_int( 'status', bug_get_field( $f_bug_id, 'status' ) );
@@ -53,6 +51,8 @@
 			) ) {
 		access_denied();
 	}
+
+	form_security_validate( 'bug_update' );
 
 	# extract current extended information
 	$t_old_bug_status = $t_bug_data->status;

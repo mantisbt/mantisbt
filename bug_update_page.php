@@ -55,8 +55,6 @@
 
 	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
 
-	$t_bug = bug_prepare_edit( bug_get( $f_bug_id, true ) );
-
 	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	html_page_top2();
 
