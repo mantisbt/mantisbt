@@ -122,6 +122,7 @@
 				$t_path = '';
 			}
 		}
+		$t_path = rtrim($t_path, '/');
 
 		$g_path	= $t_protocol . '://' . $t_host . $t_path.'/';
 	} else {
