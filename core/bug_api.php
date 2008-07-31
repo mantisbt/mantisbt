@@ -1442,7 +1442,7 @@
 		# log changes except for duplicate_id which is obsolete and should be removed in
 		# Mantis 1.3.
 		if ( $p_field_name != 'duplicate_id' ) {
-			history_log_event_direct( $p_bug_id, $p_field_name, $h_status, $c_value );
+			history_log_event_direct( $p_bug_id, $p_field_name, $t_current_value, $c_value );
 		}
 
 		bug_clear_cache( $p_bug_id );
