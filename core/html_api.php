@@ -113,7 +113,7 @@
 		html_rss_link();
 		$t_favicon_image = config_get( 'favicon_image' );
 		if ( !is_blank( $t_favicon_image ) ) {
-			echo '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />';
+			echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
 		}
 		html_title( $p_page_title );
 		html_head_javascript();
@@ -517,9 +517,9 @@
 			}
 		}
 
-		echo '</td><td><div align="right">';
+		echo '</td><td>', "\n\t", '<div align="right">';
 		echo '<a href="http://www.mantisbt.org" title="Free Web Based Bug Tracker"><img src="' . helper_mantis_url( 'images/mantis_logo_button.gif' ) . '" width="88" height="35" alt="Powered by Mantis Bugtracker" border="0" /></a>';
-		echo '</div></td></tr></table>';
+		echo '</div>', "\n", '</td></tr></table>', "\n";
 	}
 
 	# --------------------

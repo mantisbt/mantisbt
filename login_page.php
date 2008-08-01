@@ -141,18 +141,18 @@
 
 		# Warning, if plain passwords are selected
 		if ( config_get( 'login_method' ) === PLAIN ) {
-			echo '<div class="warning" align="center">';
-			echo '<p><font color="red"><strong>WARNING:</strong> Plain password authentication is used, this will expose your passwords to administrators.</font></p>';
-			echo '</div>';
+			echo '<div class="warning" align="center">', "\n";
+			echo "\t", '<p><font color="red"><strong>WARNING:</strong> Plain password authentication is used, this will expose your passwords to administrators.</font></p>', "\n";
+			echo '</div>', "\n";
 		}
 
 		# Generate a warning if administrator/root is valid.
 		$t_admin_user_id = user_get_id_by_name( 'administrator' );
 		if ( $t_admin_user_id !== false ) {
 			if ( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
-				echo '<div class="warning" align="center">';
-				echo '<p><font color="red"><strong>WARNING:</strong> You should disable the default "administrator" account or change its password.</font></p>';
-				echo '</div>';
+				echo '<div class="warning" align="center">', "\n";
+				echo "\t", '<p><font color="red"><strong>WARNING:</strong> You should disable the default "administrator" account or change its password.</font></p>', "\n";
+				echo '</div>', "\n";
 			}
 		}
 
