@@ -325,6 +325,60 @@
     }
 
 	/**
+     *  @param $p_count
+     *  @param $p_per_page
+     *  @return int
+     */
+    function filter_per_page( $p_filter, $p_count, $p_per_page ) {
+        $p_per_page = ( ( NULL == $p_per_page ) ? (int)$p_filter[ FILTER_PROPERTY_ISSUES_PER_PAGE ] : $p_per_page );
+        $p_per_page = ( ( 0 == $p_per_page || -1 == $p_per_page ) ? $p_count : $p_per_page );
+
+        return (int)abs( $p_per_page );
+    }
+
+	/**
+     *  Use $p_count and $p_per_page to determine how many pages to split this list up into.
+     *  For the sake of consistency have at least one page, even if it is empty.
+     *  @param $p_count
+     *  @param $p_per_page
+     *  @return $t_page_count
+     */
+    function filter_page_count( $p_count, $p_per_page ) {
+        $t_page_count = ceil($p_count / $p_per_page);
+        if ( $t_page_count < 1 ) {
+            $t_page_count = 1;
+        }
+        return $t_page_count;
+    }
+
+	/**
+     *  Checks to make sure $p_page_number isn't past the last page.
+     *  and that $p_page_number isn't before the first page
+     *   @param $p_page_number
+     *   @param $p_page_count
+     */
+    function filter_valid_page_number( $p_page_number, $p_page_count ) {
+        if ( $p_page_number > $p_page_count ) {
+            $p_page_number = $p_page_count;
+        }
+
+        if ( $p_page_number < 1 ) {
+            $p_page_number = 1;
+        }
+        return $p_page_number;
+    }
+
+	/**
+     *  Figure out the offset into the db query, offset is which record to start querying from
+     *  @param int $p_page_number
+     *  @param int $p_per_page
+     *  @return int
+     */
+    function filter_offset( $p_page_number, $p_per_page ) {
+        return ( ( (int)$p_page_number - 1 ) * (int)$p_per_page );
+    }
+
+	/**
 	 *  Make sure that our filters are entirely correct and complete (it is possible that they are not).
 	 *  We need to do this to cover cases where we don't have complete control over the filters given.s
 	 *  @param array $p_filter_arr
@@ -684,6 +738,100 @@
 		}
 	}
 
+    /**
+     *  Add sort parameters to the query clauses
+     *  @param array $p_filter
+     *  @param bool $p_show_sticky
+     *  @param array $p_query_clauses
+     *  @return array $p_query_clauses
+     */
+    function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clauses ) {
+        $t_bug_table                    = db_get_table( 'mantis_bug_table' );
+        $t_custom_field_string_table    = db_get_table( 'mantis_custom_field_string_table' );
+
+		# if sort is blank then default the sort and direction.  This is to fix the
+		# symptoms of #3953.  Note that even if the main problem is fixed, we may
+		# have to keep this code for a while to handle filters saved with this blank field.
+		if ( is_blank( $p_filter[ FILTER_PROPERTY_SORT_FIELD_NAME ] ) ) {
+			$p_filter[ FILTER_PROPERTY_SORT_FIELD_NAME ] = 'last_updated';
+			$p_filter[ FILTER_PROPERTY_SORT_DIRECTION ] = 'DESC';
+		}
+
+        $p_query_clauses['order'] = array();
+		$t_sort_fields = split( ',', $p_filter[ FILTER_PROPERTY_SORT_FIELD_NAME ] );
+		$t_dir_fields = split( ',', $p_filter[ FILTER_PROPERTY_SORT_DIRECTION ] );
+
+		if ( ( 'on' == $p_filter[ FILTER_PROPERTY_SHOW_STICKY_ISSUES ] ) && ( NULL !== $p_show_sticky ) ) {
+            $p_query_clauses['order'][] =  "sticky DESC";
+		}
+
+        for ( $i=0; $i < count( $t_sort_fields ); $i++ ) {
+            $c_sort = db_prepare_string( $t_sort_fields[$i] );
+            if ( ! in_array( $t_sort_fields[$i], array_slice( $t_sort_fields, $i + 1) ) ) {
+                # if sorting by a custom field
+                if ( strpos( $c_sort, 'custom_' ) === 0 ) {
+					$t_custom_field = substr( $c_sort, strlen( 'custom_' ) );
+					$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
+
+					$c_cf_alias         = str_replace(' ', '_', $t_custom_field );
+					$t_cf_table_alias   = $t_custom_field_string_table . '_' . $t_custom_field_id;
+					$t_cf_select        = "$t_cf_table_alias.value $c_cf_alias";
+					# check to be sure this field wasn't already added to the query.
+					if ( !in_array( $t_cf_select, $p_query_clauses['select'] ) ) {
+						$p_query_clauses['select'][] = $t_cf_select;
+						$p_query_clauses['join'][] = "LEFT JOIN $t_custom_field_string_table $t_cf_table_alias ON $t_bug_table.id  = $t_cf_table_alias.bug_id AND $t_cf_table_alias.field_id = " . db_param();
+						$p_query_clauses['where_values'][] = $t_custom_field_id;
+#$c_sort = "$t_custom_field_string_table.value";
+					}
+
+                }
+                $c_dir = 'DESC' == $t_dir_fields[$i] ? 'DESC' : 'ASC';
+                $p_query_clauses['order'][] = "$c_sort $c_dir";
+            }
+        }
+
+        # add basic sorting if necessary
+        if ( ! in_array( 'last_updated', $t_sort_fields ) ) {
+            $p_query_clauses['order'][] = "$t_bug_table.last_updated DESC";
+        }
+        if ( ! in_array( 'date_submitted', $t_sort_fields ) ) {
+            $p_query_clauses['order'][] = 'date_submitted DESC'; }
+
+        return $p_query_clauses;
+    }
+
+	/**
+     *  Remove any duplicate values in certain elements of query_clauses
+     *  Do not loop over query clauses as some keys may contain valid duplicate values.
+     *  We basically want unique values for just the base query elements select, from, and join
+     *  'where' and 'where_values' key should not have duplicates as that is handled earlier and applying
+     *  array_unique here could cause problems with the query.
+     *  @param $p_query_clauses
+     *  @return $p_query_clauses
+     */
+    function filter_unique_query_clauses( $p_query_clauses ) {
+        $p_query_clauses['select']  = array_unique( $p_query_clauses['select'] );
+        $p_query_clauses['from']    = array_unique( $p_query_clauses['from'] );
+        $p_query_clauses['join']    = array_unique( $p_query_clauses['join'] );
+        return $p_query_clauses;
+    }
+
+	/**
+     *  Build a query with the query clauses array, query for bug count and return the result
+     *  @param array $p_query_clauses
+     *  @return int
+     */
+    function filter_get_bug_count( $p_query_clauses ) {
+        $t_bug_table = db_get_table( 'mantis_bug_table' );
+        $p_query_clauses    = filter_unique_query_clauses( $p_query_clauses );
+        $t_select_string    = "SELECT Count( DISTINCT $t_bug_table.id ) as idcnt ";
+        $t_from_string      = " FROM " . implode( ', ', $p_query_clauses['from'] );
+        $t_join_string      = ( ( count( $p_query_clauses['join']  ) > 0 ) ? implode( ' ', $p_query_clauses['join'] ) : '' );
+        $t_where_string     = ( ( count( $p_query_clauses['where'] ) > 0 ) ? 'WHERE ' . implode( ' AND ', $p_query_clauses['where'] ) : '' );
+        $t_result           = db_query_bound( "$t_select_string $t_from_string $t_join_string $t_where_string", $p_query_clauses['where_values'] );
+        return db_result( $t_result );
+    }
+
 	/**
 	 * @@@ Had to make all these parameters required because we can't use
 	 *  call-time pass by reference anymore.  I really preferred not having
@@ -709,7 +857,7 @@
 		$t_bug_text_table		= db_get_table( 'mantis_bug_text_table' );
 		$t_bugnote_table		= db_get_table( 'mantis_bugnote_table' );
 		$t_category_table		= db_get_table( 'mantis_category_table' );
-		$t_custom_field_string_table	= db_get_table( 'mantis_custom_field_string_table' );
+		$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 		$t_bugnote_text_table	= db_get_table( 'mantis_bugnote_text_table' );
 		$t_project_table		= db_get_table( 'mantis_project_table' );
 		$t_bug_monitor_table	= db_get_table( 'mantis_bug_monitor_table' );
@@ -755,10 +903,10 @@
 		}
 
 		$t_view_type = $t_filter['_view_type'];
-
 		$t_where_clauses = array( "$t_project_table.enabled = " . db_param(), "$t_project_table.id = $t_bug_table.project_id" );
 		$t_where_params = array( 1 );
-		$t_select_clauses = array( "$t_bug_table.*" );
+		$t_select_clauses = array( "$t_bug_table.*", "$t_bug_table.last_updated", "$t_bug_table.date_submitted" );
+
 		$t_join_clauses = array();
 		$t_from_clauses = array();
 
@@ -1371,6 +1519,7 @@
 				array_push( $t_where_clauses, "( $t_table_name.user_id=" . db_param(). " )" );
 			}
 		}
+
 		# bug relationship
 		$t_any_found = false;
 		$c_rel_type = $t_filter[ FILTER_PROPERTY_RELATIONSHIP_TYPE ];
@@ -1560,275 +1709,108 @@
 			}
 		}
 
-		$t_textsearch_where_clause = '';
-		$t_textsearch_wherejoin_clause = '';
-		# Simple Text Search - Thanks to Alan Knowles
+		# Text search
 		if ( !is_blank( $t_filter[ FILTER_PROPERTY_FREE_TEXT ] ) ) {
-			array_push( $t_where_clauses, "($t_bug_text_table.id = $t_bug_table.bug_text_id)" );
+			$c_search = '%' . $t_filter[ FILTER_PROPERTY_FREE_TEXT ] . '%';
+			$t_textsearch_where_clause = '(' . db_helper_like( 'summary' ) .
+										' OR ' . db_helper_like( "$t_bug_text_table.description" ) .
+										' OR ' . db_helper_like( "$t_bug_text_table.steps_to_reproduce" ) .
+										' OR ' . db_helper_like( "$t_bug_text_table.additional_information" ) .
+										' OR ' . db_helper_like( "$t_bugnote_text_table.note" );
 
-			$t_from_clauses = array_merge( array( $t_bug_text_table, $t_project_table, $t_bug_table ), $t_from_clauses );
-		} else {
-			$t_from_clauses = array_merge( array( $t_project_table, $t_bug_table ), $t_from_clauses );
-		}
+			$t_where_params[] = $c_search;
+			$t_where_params[] = $c_search;
+			$t_where_params[] = $c_search;
+			$t_where_params[] = $c_search;
+			$t_where_params[] = $c_search;
 
-		$t_select	= implode( ', ', array_unique( $t_select_clauses ) );
-		$t_from		= 'FROM ' . implode( ', ', array_unique( $t_from_clauses ) );
-		$t_join		= implode( ' ', $t_join_clauses );
-		if ( count( $t_where_clauses ) > 0 ) {
-			$t_where	= 'WHERE ' . implode( ' AND ', $t_where_clauses );
-		} else {
-			$t_where	= '';
-		}
+			if ( is_numeric( $t_filter[ FILTER_PROPERTY_FREE_TEXT ] ) ) {
+                $c_search_int = (int)$t_filter[ FILTER_PROPERTY_FREE_TEXT ];
+                $t_textsearch_where_clause .= " OR $t_bug_table.id = " . db_param();
+                $t_textsearch_where_clause .= " OR $t_bugnote_table.id = " . db_param();
+                $t_where_params[] = $c_search_int;
+                $t_where_params[] = $c_search_int;
+            }
+            $t_textsearch_where_clause .= " )";
 
-		# Possibly do two passes. First time, grab the IDs of issues that match the filters. Second time, grab the IDs of issues that
-		# have bugnotes that match the text search if necessary.
-		$t_id_array = array();
-		$q1 = "";
-		$q2 = "";
-		$bug_count = 0;
-		$t_search_where_params = array();
-		$t_search_where_params2 = array();
-		for ( $i = 0; $i < 2; $i++ ) {
-			$t_search_where_param_count = $t_where_param_count;
-			$t_id_where = $t_where;
-			$t_id_join = $t_join;
-			if ( $i == 0 ) {
-				if ( !is_blank( $t_id_where ) && !is_blank( $t_filter[ FILTER_PROPERTY_FREE_TEXT ] ) ) {
-					$c_search = '%' . $t_filter[ FILTER_PROPERTY_FREE_TEXT ] . '%';
-					$c_search_int = db_prepare_int( $t_filter[ FILTER_PROPERTY_FREE_TEXT ] );
-					$t_textsearch_where_clause = '(' . db_helper_like( 'summary' ) .
-												 ' OR ' . db_helper_like( "$t_bug_text_table.description" ) . 
-												 ' OR ' . db_helper_like( "$t_bug_text_table.steps_to_reproduce" ) .
-												 ' OR ' . db_helper_like( "$t_bug_text_table.additional_information" ) .
-							 " OR ( $t_bug_table.id = " . db_param($t_search_where_param_count++) . " ) )";
-					$t_search_where_params = array();
-					$t_search_where_params[] = $c_search;
-					$t_search_where_params[] = $c_search;
-					$t_search_where_params[] = $c_search;
-					$t_search_where_params[] = $c_search;
-					$t_search_where_params[] = $c_search_int;
-					$t_id_where = $t_id_where . ' AND ' . $t_textsearch_where_clause;
-				}
-			} else if ( !is_blank( $t_filter[ FILTER_PROPERTY_FREE_TEXT ] ) ) {
-				$c_search = '%' . $t_filter[ FILTER_PROPERTY_FREE_TEXT ] . '%';
-				$c_search_int = db_prepare_int( $t_filter[ FILTER_PROPERTY_FREE_TEXT ] );
-				$t_textsearch_wherejoin_clause = '(' . db_helper_like( 'summary' ) .
-											 ' OR ' . db_helper_like( "$t_bug_text_table.description" ) .
-											 ' OR ' . db_helper_like( "$t_bug_text_table.steps_to_reproduce" ) .
-											 ' OR ' . db_helper_like( "$t_bug_text_table.additional_information" ) .
-											 ' OR ' . db_helper_like( "$t_bug_table.id" ) .
-							 ' OR ' . db_helper_like( "$t_bugnote_text_table.note" ) . ' )';
-				$t_search_where_params2 = array();
-				$t_search_where_params2[] = $c_search;
-				$t_search_where_params2[] = $c_search;
-				$t_search_where_params2[] = $c_search;
-				$t_search_where_params2[] = $c_search;
-				$t_search_where_params2[] = $c_search;
-				$t_search_where_params2[] = $c_search;
-				$t_id_where = $t_id_where . ' AND ' . $t_textsearch_wherejoin_clause;
-				$t_id_join = $t_id_join . " INNER JOIN $t_bugnote_table ON $t_bugnote_table.bug_id = $t_bug_table.id";
-				$t_id_join = $t_id_join . " INNER JOIN $t_bugnote_text_table ON $t_bugnote_text_table.id = $t_bugnote_table.bugnote_text_id";
-				
-			}
-			$query  = "	$t_from
-						$t_id_join
-						$t_id_where";
-			$t_query_params = array();
-			
-			if ( ( $i == 0 ) || ( !is_blank( $t_filter[ FILTER_PROPERTY_FREE_TEXT ] ) ) ) {
-				if( $i == 0) {
-					$q1 = "SELECT DISTINCT $t_bug_table.id AS id" . $query;
-					$t_query_params = array_merge($t_where_params, $t_search_where_params);
-				} else {
-					$q2 = "SELECT DISTINCT $t_bug_table.id AS id" . $query;
-					$t_query_params = array_merge($t_where_params, $t_search_where_params2);
-				}
-						
-				$result = db_query_bound( "SELECT Count(DISTINCT $t_bug_table.id) as idcnt" . $query, $t_query_params );
-				$row = db_fetch_array( $result );
-				$bug_count += $row['idcnt'];
-			}
-		}
+			# add text query elements to arrays
+            $t_from_clauses[]	= "$t_bug_text_table";
+			$t_where_clauses[]	= "$t_bug_table.bug_text_id = $t_bug_text_table.id";
+			$t_where_clauses[]	= $t_textsearch_where_clause;
+			$t_join_clauses[]	= " LEFT JOIN $t_bugnote_table ON $t_bug_table.id = $t_bugnote_table.bug_id";
+			$t_join_clauses[]	= " LEFT JOIN $t_bugnote_text_table ON $t_bugnote_table.bugnote_text_id = $t_bugnote_text_table.id";
+		} # End text search
 
+		$t_from_clauses[] = $t_project_table;
+		$t_from_clauses[] = $t_bug_table;
+
+		$t_query_clauses['select'] = $t_select_clauses;
+		$t_query_clauses['from'] = $t_from_clauses;
+		$t_query_clauses['join'] = $t_join_clauses;
+		$t_query_clauses['where'] = $t_where_clauses;
+		$t_query_clauses['where_values'] = $t_where_params;
+		$t_query_clauses = filter_get_query_sort_data( $t_filter, $p_show_sticky, $t_query_clauses );
+
+		# assigning to $p_* for this function writes the values back in case the caller wants to know
 		# Get the total number of bugs that meet the criteria.
-
-		$rows = array();
-		$t_where = '';
-		$t_where_params2 = array();
-		if ( $bug_count > 0 ) {
-			$t_where .= "WHERE $t_bug_table.id in ( ";
-			if ( !is_blank($q1) ) {
-				$t_where .= "$q1";
-				$t_where_params2 = array_merge($t_where_params, $t_search_where_params);
-				if ( !is_blank($q2) ) {
-					$t_where .= ") OR $t_bug_table.id in ( $q2";
-					$t_where_params2 = array_merge($t_where_params2, $t_where_params, $t_search_where_params2);
-				}
-				$t_where .= ")";
-			} else {
-				$t_where .= " $q2)";
-				$t_where_params2 = array_merge($t_where_params, $t_search_where_params2);
-			}
-		} else {
-			return $rows;
-		}
-
-		$t_from = 'FROM ' . $t_bug_table;
-
-		# write the value back in case the caller wants to know
-		$p_bug_count = $bug_count;
-
-		if ( null === $p_per_page ) {
-			$p_per_page = (int)$t_filter[ FILTER_PROPERTY_ISSUES_PER_PAGE ];
-		} else if ( -1 == $p_per_page ) {
-			$p_per_page = $bug_count;
-		}
-
-		# Guard against silly values of $f_per_page.
-		if ( 0 == $p_per_page ) {
-			$p_per_page = $bug_count;	// 0 - means show all
-		}
-
-		$p_per_page = (int)abs( $p_per_page );
-
-		# Use $bug_count and $p_per_page to determine how many pages
-		# to split this list up into.
-		# For the sake of consistency have at least one page, even if it
-		# is empty.
-		$t_page_count = ceil($bug_count / $p_per_page);
-		if ( $t_page_count < 1 ) {
-			$t_page_count = 1;
-		}
-
-		# write the value back in case the caller wants to know
-		$p_page_count = $t_page_count;
-
-		# Make sure $p_page_number isn't past the last page.
-		if ( $p_page_number > $t_page_count ) {
-			$p_page_number = $t_page_count;
-		}
-
-		# Make sure $p_page_number isn't before the first page
-		if ( $p_page_number < 1 ) {
-			$p_page_number = 1;
-		}
-
-		# Now add the rest of the criteria i.e. sorting, limit.
-
-		# if sort is blank then default the sort and direction.  This is to fix the
-		# symptoms of #3953.  Note that even if the main problem is fixed, we may
-		# have to keep this code for a while to handle filters saved with this blank field.
-		if ( is_blank( $t_filter[ FILTER_PROPERTY_SORT_FIELD_NAME ] ) ) {
-			$t_filter[ FILTER_PROPERTY_SORT_FIELD_NAME ] = 'last_updated';
-			$t_filter[ FILTER_PROPERTY_SORT_DIRECTION ] = 'DESC';
-		}
-
-		$t_order_array = array();
-		$t_sort_fields = split( ',', $t_filter[ FILTER_PROPERTY_SORT_FIELD_NAME ] );
-		$t_dir_fields = split( ',', $t_filter[ FILTER_PROPERTY_SORT_DIRECTION ] );
-
-		if ( ( 'on' == $t_filter[ FILTER_PROPERTY_SHOW_STICKY_ISSUES ] ) && ( NULL !== $p_show_sticky ) ) {
-			$t_order_array[] = "sticky DESC";
-		}
-		
-		$t_join = '';
-		for ( $i=0; $i < count( $t_sort_fields ); $i++ ) {
-			$c_sort = db_prepare_string( $t_sort_fields[$i] );
-
-			if ( ! in_array( $t_sort_fields[$i], array_slice( $t_sort_fields, $i + 1) ) ) {
-
-        		# if sorting by a custom field
-        		if ( strpos( $c_sort, 'custom_' ) === 0 ) {
-	        		$t_custom_field = substr( $c_sort, strlen( 'custom_' ) );
-        			$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
-    	    		$t_join .= " LEFT JOIN $t_custom_field_string_table ON ( ( $t_custom_field_string_table.bug_id = $t_bug_table.id ) AND ( $t_custom_field_string_table.field_id = $t_custom_field_id ) )";
-        			$c_sort = "$t_custom_field_string_table.value";
-        			$t_select_clauses[] = "$t_custom_field_string_table.value";
-     		   	}
-
-				if ( 'DESC' == $t_dir_fields[$i] ) {
-					$c_dir = 'DESC';
-				} else {
-					$c_dir = 'ASC';
-				}
-
-				$t_order_array[] = "$c_sort $c_dir";
-			}
-		}
-
-		# add basic sorting if necessary
-		if ( ! in_array( 'last_updated', $t_sort_fields ) ) {
-			$t_order_array[] = 'last_updated DESC';
+		$p_bug_count = filter_get_bug_count( $t_query_clauses );
+		if ( 0 == $p_bug_count ) {
+            return array();
         }
-		if ( ! in_array( 'date_submitted', $t_sort_fields ) ) {
-			$t_order_array[] = 'date_submitted DESC';
-        }
+        $p_per_page     	= filter_per_page( $t_filter, $p_bug_count, $p_per_page );
+		$p_page_count   	= filter_page_count( $p_bug_count, $p_per_page );
+        $p_page_number  	= filter_valid_page_number( $p_page_number, $p_page_count );
+        $t_offset       	= filter_offset( $p_page_number, $p_per_page );
+        $t_query_clauses    = filter_unique_query_clauses( $t_query_clauses );
+        $t_select_string    = "SELECT DISTINCT " . implode( ', ', $t_query_clauses['select'] );
+        $t_from_string      = " FROM " . implode( ', ', $t_query_clauses['from'] );
+        $t_order_string     = " ORDER BY " . implode( ', ', $t_query_clauses['order']);
+        $t_join_string      = count( $t_query_clauses['join']  ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : '';
+        $t_where_string     = count( $t_query_clauses['where'] ) > 0 ? 'WHERE ' . implode( ' AND ', $t_query_clauses['where'] ) : '';
+        $t_result 			= db_query_bound( "$t_select_string $t_from_string $t_join_string $t_where_string $t_order_string", $t_query_clauses['where_values'], $p_per_page, $t_offset );
+        $t_row_count        = db_num_rows( $t_result );
 
-		$t_order = " ORDER BY " . implode( ', ', $t_order_array );
-		$t_select	= implode( ', ', array_unique( $t_select_clauses ) );
-
-		$query2  = "SELECT DISTINCT $t_select
-					$t_from
-					$t_join
-					$t_where
-					$t_order";
-
-		# Figure out the offset into the db query
-		#
-		# for example page number 1, per page 5:
-		#     t_offset = 0
-		# for example page number 2, per page 5:
-		#     t_offset = 5
-		$c_per_page = db_prepare_int( $p_per_page );
-		$c_page_number = db_prepare_int( $p_page_number );
-		$t_offset = ( ( $c_page_number - 1 ) * $c_per_page );
-
-		# perform query
-		$result2 = db_query_bound( $query2, $t_where_params2, $c_per_page, $t_offset );
-
-		$row_count = db_num_rows( $result2 );
-	
 		$t_id_array_lastmod = array();
-		
-		for ( $i=0 ; $i < $row_count ; $i++ ) {
-			$row = db_fetch_array( $result2 );
-			$t_id_array_lastmod[] = db_prepare_int ( $row['id'] );
-							
-			array_push( $rows, $row );
-		}
-	
-		$t_id_array_lastmod = array_unique( $t_id_array_lastmod );   
-		     
-		// paulr: it should be impossible for t_id_array_lastmod to be array():   
-		// that would imply that $t_id_array is null which aborts this function early   
-		//if ( count( $t_id_array_lastmod ) > 0 )
-		$t_where = "WHERE $t_bugnote_table.bug_id in (" . implode( ", ", $t_id_array_lastmod ) . ")";   
-		     
-		$query3 = "SELECT DISTINCT bug_id,MAX(last_modified) as last_modified, COUNT(last_modified) as count FROM $t_bugnote_table $t_where GROUP BY bug_id";   
-		     
-		# perform query   
-		$result3 = db_query_bound( $query3 );   
-		     
-		$row_count = db_num_rows( $result3 );   
-		     
-		for ( $i=0 ; $i < $row_count ; $i++ ) {   
-			$row = db_fetch_array( $result3 );   
-		     
-			$t_stats[ $row['bug_id'] ] = $row;   
-		}  
-		
-		 
-		$t_rows = array(); 
-		foreach($rows as $row) {   
-			if( !isset( $t_stats[ $row['id'] ] ) ) {   
-				$t_rows[] = bug_cache_database_result( $row, false );   
-			} else {   
-				$t_rows[] = bug_cache_database_result( $row, $t_stats[ $row['id'] ] );   
-			}			 
-		} 
+        for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+            $t_row = db_fetch_array( $t_result );
+            $t_id_array_lastmod[] = (int) $t_row['id'];
+            $t_rows[] = $t_row;
+        }
 
-		return $t_rows;
+		return filter_cache_result( $t_rows, $t_id_array_lastmod );
 	}
+
+    /**
+     *  Cache the filter results with bugnote stats for later use
+     *  @param array $p_rows results of the filter query
+     *  @param array $p_id_array_lastmod array of bug ids
+     *  @return array
+     */
+    function filter_cache_result( $p_rows, $p_id_array_lastmod ) {
+        $t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+
+        $t_id_array_lastmod = array_unique( $p_id_array_lastmod );
+        $t_where_string = "WHERE $t_bugnote_table.bug_id in (" . implode( ", ", $t_id_array_lastmod ) . ")";
+        $t_query = "SELECT DISTINCT bug_id,MAX(last_modified) as last_modified, COUNT(last_modified) as count FROM $t_bugnote_table $t_where_string GROUP BY bug_id";
+
+        # perform query
+        $t_result = db_query_bound( $t_query );
+        $t_row_count = db_num_rows( $t_result );
+        for ( $i=0; $i < $t_row_count ; $i++ ) {
+            $t_row = db_fetch_array( $t_result );
+            $t_stats[ $t_row['bug_id'] ] = $t_row;
+        }
+
+        $t_rows = array();
+        foreach($p_rows as $t_row) {
+            if( !isset( $t_stats[ $t_row['id'] ] ) ) {
+                $t_rows[] = bug_cache_database_result( $t_row, false );
+            } else {
+                $t_rows[] = bug_cache_database_result( $t_row, $t_stats[ $t_row['id'] ] );
+            }
+        }
+        return $t_rows;
+    }
 
     #==========================================================================
     # PRINT FUNCTIONS                            						      =
@@ -4255,4 +4237,3 @@
 
 		return $t_overall_query_arr;
 	}
-?>
