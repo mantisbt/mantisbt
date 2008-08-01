@@ -732,7 +732,7 @@
                 # select only the ids that the user has some access to 
                 #  e.g., all fields in public projects, or private projects where the user is listed
                 #    or private projects where the user is implicitly listed
-                $query = "SELECT cft.*
+                $query = "SELECT DISTINCT cft.*
                     FROM $t_custom_field_table as cft, $t_user_table ut, $t_project_table pt, $t_custom_field_project_table cfpt
                         LEFT JOIN $t_project_user_list_table pult 
                             on cfpt.project_id = pult.project_id and pult.user_id = $t_user_id
@@ -740,7 +740,6 @@
                         ( pt.view_state = $t_pub OR 
                         ( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR 
                         ( pult.user_id is null and ut.access_level $t_access_clause ) )
-                    GROUP BY cft.id, cft.name
                     ORDER BY cft.name ASC";
     		} else {
                 if ( is_array( $p_project_id ) ) {
