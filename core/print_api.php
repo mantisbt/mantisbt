@@ -343,7 +343,7 @@
 
 		$t_project_id = helper_get_current_project();
 
-		if ( access_has_project_level( ADMINISTRATOR ) ) {
+		if ( access_has_global_level( ADMINISTRATOR ) ) {
 			$query = "SELECT id, headline, announcement, view_state
 				FROM $t_mantis_news_table
 				ORDER BY date_posted DESC";

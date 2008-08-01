@@ -74,7 +74,7 @@
 		db_query_bound( $query, Array( $c_project_id, $c_poster_id, db_now(), db_now(),
 						$c_view_state, $c_announcement, $c_headline, $c_body) ); 
 
-		$t_news_id = db_insert_id();
+		$t_news_id = db_insert_id( $t_news_table );
  
 		twitter_news( $t_news_id );
 
