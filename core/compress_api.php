@@ -43,8 +43,8 @@
 		#@@@ temporarily disable compression when using IIS because of
 		#   issue #2953
 		return ( $g_compression_started &&
-				ON == config_get( 'compress_html' ) &&
-				OFF == config_get( 'use_iis' )  &&
+				ON == config_get_global( 'compress_html' ) &&
+				OFF == config_get_global( 'use_iis' )  &&
 				( 'ob_gzhandler' != ini_get('output_handler') ) &&
 				extension_loaded( 'zlib' ) &&
 				!ini_get('zlib.output_compression') );
