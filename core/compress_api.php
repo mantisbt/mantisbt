@@ -39,12 +39,14 @@
 	# Check if compression should be enabled.
 	function compress_is_enabled() {
 		global $g_compression_started;
+		global $g_compress_html, $g_use_iis;
 
 		#@@@ temporarily disable compression when using IIS because of
 		#   issue #2953
+		# Dont use config_get here so only dependency is on consantinc.php in this module
 		return ( $g_compression_started &&
-				ON == config_get_global( 'compress_html' ) &&
-				OFF == config_get_global( 'use_iis' )  &&
+				ON == $g_compress_html &&
+				OFF == $g_use_iis  &&
 				( 'ob_gzhandler' != ini_get('output_handler') ) &&
 				extension_loaded( 'zlib' ) &&
 				!ini_get('zlib.output_compression') );

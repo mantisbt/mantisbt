@@ -34,9 +34,7 @@
 
 	$g_request_time = microtime_float();
 
-	# Before doing anything else, start output buffering so we don't prevent
-	#  headers from being sent if there's a blank line in an included file
-	ob_start( 'compress_handler' );
+	ob_start();
 
 	# Include compatibility file before anything else
 	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'php_api.php' );
@@ -58,6 +56,7 @@
 
 	# Load constants and configuration files
   	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'constant_inc.php' );
+  	
 	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' ) ) {
 		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' );
 	}
@@ -70,7 +69,7 @@
 		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
 		$t_config_inc_found = true;
 	}
-
+	
 	# Allow an environment variable (defined in an Apache vhost for example)
 	#  to specify a config file to load to override other local settings
 	$t_local_config = getenv( 'MANTIS_CONFIG' );
@@ -78,6 +77,25 @@
 		require_once( $t_local_config );
 		$t_config_inc_found = true;
 	}
+	
+	# Attempt to find the location of the core files.
+	$t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR;
+	if (isset($GLOBALS['g_core_path']) && !isset( $HTTP_GET_VARS['g_core_path'] ) && !isset( $HTTP_POST_VARS['g_core_path'] ) && !isset( $HTTP_COOKIE_VARS['g_core_path'] ) ) {
+		$t_core_path = $g_core_path;
+	}	
+
+
+	if ( ($t_output = ob_get_contents()) != '') {
+		echo 'Possible Whitespace/Error in Configuration File - Aborting. Output so far follows:<br />';
+		echo var_dump($t_output);
+		die;
+	}
+	
+	require_once( $t_core_path.'compress_api.php' );
+
+	# Before doing anything else, start output buffering so we don't prevent
+	#  headers from being sent if there's a blank line in an included file
+	ob_start( 'compress_handler' );
 
 	if ( false === $t_config_inc_found ) {
 		# if not found, redirect to the admin page to install the system
@@ -98,12 +116,6 @@
 		}
 	}
 
-	# Attempt to find the location of the core files.
-	$t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR;
-	if (isset($GLOBALS['g_core_path']) && !isset( $HTTP_GET_VARS['g_core_path'] ) && !isset( $HTTP_POST_VARS['g_core_path'] ) && !isset( $HTTP_COOKIE_VARS['g_core_path'] ) ) {
-		$t_core_path = $g_core_path;
-	}
-
 	# Load rest of core in separate directory.
 
 	require_once( $t_core_path.'config_api.php' );
@@ -112,7 +124,6 @@
 
 	# load utility functions used by everything else
 	require_once( $t_core_path.'utility_api.php' );
-	require_once( $t_core_path.'compress_api.php' );
 
 	# Load internationalization functions (needed before database_api, in case database connection fails)
 	require_once( $t_core_path.'lang_api.php' );
