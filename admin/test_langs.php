@@ -30,7 +30,7 @@
 	if ( function_exists( 'xdebug_disable' ) ) {
 		xdebug_disable();
 	}
-	
+
 	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'constant_inc.php' );
 
 	if (!defined('T_ML_COMMENT')) {
@@ -58,7 +58,7 @@
 			$t_lang_files[] = $t_lang;
 		}
 	}
-	
+
 	if (sizeof($t_lang_files) > 0 ) {
 		echo 'Retrived ' , sizeof($t_lang_files) , ' languages<br />';
 		
@@ -199,6 +199,9 @@
 					case T_STRING:
 						if ($variablearr ) {
 							$current_var .= $text;
+							if (!defined($text) ) {
+								print_error( "undefined constant: $current_var");
+							}
 						} else {
 							print_error ("ERROR: T_STRING found at unexpected location (line $line)");
 							$pass = false;
