@@ -210,14 +210,16 @@
 			}
 		} else {
 			// relative hyperlink
+			
 			if ( $return_absolute == true ) {
-				if ( strpos( $p_url, config_get_global( 'short_path' ) ) === 0) {
+				if ( strpos( $p_url, config_get_global( 'short_path' ) ) === 0 && config_get_global( 'short_path' ) != '/') {
 					$t_url = str_replace( config_get_global( 'short_path' ), '', config_get_global( 'path' ) ) . $t_url;
 				} else {
-					$t_url = config_get_global( 'path' ) . $t_url; 
+					$t_url = config_get_global( 'path' ) . ltrim($t_url, '/'); 
 				}
 			}
 		}
+
 		if ( $t_url == '' ) {
 			if ( $return_absolute == true ) {
 				$t_url = config_get_global( 'path' ) . 'index.php';
@@ -225,7 +227,6 @@
 				$t_url = 'index.php';
 			}
 		}
-
 		
 		// split and encode parameters
 		if ( strpos( $t_url, '?' ) !== FALSE ) {

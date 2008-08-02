@@ -124,6 +124,11 @@
 		}
 		$t_path = rtrim($t_path, '/');
 
+		$inc_files = get_included_files();
+		
+		$t_relative_path = str_replace( dirname($t_file_path), '', str_replace( DIRECTORY_SEPARATOR, '/', dirname($inc_files[0])));
+		$t_path = str_replace( $t_relative_path, '', $t_path );
+
 		$g_path	= $t_protocol . '://' . $t_host . $t_path.'/';
 	} else {
 		$g_path	= 'http://www.example.com/mantis/';

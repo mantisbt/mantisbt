@@ -23,6 +23,8 @@
 
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
+	access_ensure_global_level( ADMINISTRATOR );
+
 	# --------------------
 	function helper_table_row_count( $p_table ) {
 		$t_table = $p_table;

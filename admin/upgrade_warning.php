@@ -22,15 +22,16 @@
 	# --------------------------------------------------------
 ?>
 <?php
-	$g_skip_open_db = true;  # don't open the database in database_api.php
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+
+	access_ensure_global_level( ADMINISTRATOR );
+
 	$g_error_send_page_header = false; # suppress page headers in the error handler
 
 	# @@@ upgrade list moved to the bottom of upgrade_inc.php
 
 	$f_advanced = gpc_get_bool( 'advanced', false );
 
-	$result = @db_connect( config_get_global( 'dsn', false ), config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -64,17 +65,13 @@
 <div align="center">
 	<table width="80%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
 		<tr bgcolor="#ffffff">
-			<?php if ( false == $result ) { ?>
-			 <td align="center" nowrap="nowrap"><p>Opening connection to database [<?php echo config_get_global( 'database_name' ) ?>] on host [<?php echo config_get_global( 'hostname' ) ?>] with username [<?php echo config_get_global( 'db_username' ) ?>] failed ( <?php echo db_error_msg() ?> ).</p></td>
-			<?php } else { 
-				# check to see if the new installer was used
+				<?php # check to see if the new installer was used
     			if ( -1 != config_get( 'database_version', -1 ) ) {
 				?>
 				<td align="center" nowrap="nowrap"><p>When you have backed up your database click the link below to continue</p>[ <a href="install.php">Upgrade Now</a> ]</td>
 				<?php } else { ?>
 				<td align="center" nowrap="nowrap"><p>You aware to be running an old (pre 1.1.0) release of mantis. To update to this release of mantis, you must first update your installation to 1.1</td>
 				<?php } ?>
-			<?php } ?>
 		</tr>
 	</table>
 </div>

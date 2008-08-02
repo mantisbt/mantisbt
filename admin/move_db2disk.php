@@ -22,9 +22,10 @@
 	# --------------------------------------------------------
 	# $Id$
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+
+	access_ensure_global_level( ADMINISTRATOR );
 
 	$f_move_type = gpc_get( 'doc' );
 

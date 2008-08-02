@@ -1,3 +1,31 @@
+<?php
+# Mantis - a php based bugtracking system
+
+# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+
+	# --------------------------------------------------------
+	# $Id$
+	# --------------------------------------------------------
+
+	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+
+	access_ensure_global_level( ADMINISTRATOR );
+
+?>
 <html>
 <head>
 <title> Mantis Administration </title>
@@ -23,6 +51,13 @@
 	<p>[ <a href="upgrade_warning.php">Upgrade your installation</a> ]</p>
 	<p>[ <a href="system_utils.php">System Utilities</a> ]</p>
 	</td></tr></table>
+	<h2>advanced tools</h2>
+	<table width="75%"><tr><td align="center">
+		<p>[ <a href="test_icons.php">Test Icons</a> ]</p>
+		<p>[ <a href="test_langs.php">Test Langs</a> ]</p>
+		
+	</td></tr></table>
+
 </div>
 </body>
 </html>
