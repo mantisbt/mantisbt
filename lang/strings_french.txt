@@ -42,8 +42,6 @@
 	# $Id$
 	###########################################################################
 
-?>
-<?php
 # Charset
 $s_charset = 'utf-8';
 
@@ -230,7 +228,6 @@ $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Un paramètre requis par cette page n\
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ce nom d\'utilisateur est déjà utilisé.  Merci de recommencer et choisir un autre nom.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'L\'option de configuration \'%s\' n\'a pas été trouvé.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Chaîne « %s » non trouvée.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note non trouvée.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projet non trouvé.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Champ de base de données non trouvé.';
@@ -1461,5 +1458,3 @@ $s_show_as_table = 'Afficher en tableau';
 $s_show_graph = 'Afficher graphique';
 $s_graph_page = 'Afficher graphique de l\'historique';
 $s_graph_bug_page_link = 'Graphique';
-
-?>

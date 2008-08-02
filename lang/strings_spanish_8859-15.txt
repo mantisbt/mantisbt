@@ -251,9 +251,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Se esperaba una matriz, pero se ha re
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Se esperaba una cadena de caracteres pero se ha recibido una matriz para %s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Se esperaba un número para %s.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Un parámetro de sesión esperado (%s) no se encontró.';
-$MANTIS_ERROR[ERROR_SESSION_ARRAY_EXPECTED]      = 'Se esperaba un array pero se encontró una cadena para %s.';
-$MANTIS_ERROR[ERROR_SESSION_ARRAY_UNEXPECTED] = 'Se esperaba una cadena pero se encontró un array para %s.';
-$MANTIS_ERROR[ERROR_SESSION_NOT_NUMBER] = 'Se encontró un número para %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'No se encuentra la incidencia %d.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtro %d no encontrado.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'El filtro que Ud. está tratando de usar es obsoleto y no puede ser actualizado, por favor vuelva a crearlo';
@@ -325,7 +322,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'La actualización del esquema del p
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Campo \'%s\' contiene duplicados en la columna \'%s\'.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Campo \'%s\' contiene un campo no válido: \'%s\'';
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Gestor de sesión no válido.';
-$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Variable de sesión \'%s\' no encontrada.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Token de seguridad del formulario no válido. ¿Envió el formulario dos veces accidentalmente?';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Esta página no puede ser accedida utilizando este método.';
 
