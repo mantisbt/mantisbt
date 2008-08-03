@@ -1,5 +1,91 @@
 Mantis ChangeLog
 
+2008.08.04  -  1.2.0a2
+=======================
+This is the second alpha release on the road to version 1.2.0, and includes
+the same security fixes we released in 1.1.2. 
+As usual with alpha releases, it is intended to be a technology preview aimed 
+at early adopters, testers, translators etc.
+We do not recommend using it in production environments.
+
+[75 issues]
+- 0009247: [security] A reporter can update an incidence (jreese) - resolved.
+- 0008764: [security] Remove mantis version number from publicly searchable pages (grangeway) - resolved.
+- 0009187: [security] arbitrary file inclusion through user preferences page (giallu) - resolved.
+- 0009322: [security] Port of 0009321: Users can get title and status of issues that they don't have access to. (vboctor) - resolved.
+- 0008980: [security] Port: Remote Code Execution in adm_config (giallu) - resolved.
+- 0008977: [security] Port 0008974: XSS Vulnerability in filters (thraxisp) - resolved.
+- 0009133: [security] "APPLICATION ERROR #19" when switching project in revision 5250 (thraxisp) - resolved.
+- 0006235: [administration] Impossible to select a user with empty user name (grangeway) - resolved.
+- 0009040: [administration] Missing category_id column (vboctor) - resolved.
+- 0009115: [administration] Removing user's access to a private project doesn't work (vboctor) - resolved.
+- 0009364: [administration] SYSTEM WARNING message received when deleting a project (jreese) - resolved.
+- 0009258: [api soap] Adding bug throws fault for undefined "due_date" field (vboctor) - resolved.
+- 0008606: [api soap] Problem with categories (planser) - resolved.
+- 0009223: [bugtracker] auto-assigned in parent project categories doesn't work (jreese) - resolved.
+- 0009346: [bugtracker] Due Date is shown in history even if user doesn't have access to view due dates (vboctor) - resolved.
+- 0009347: [bugtracker] Due Date should be disabled by default (vboctor) - resolved.
+- 0009461: [bugtracker] History of status changes broken (grangeway) - resolved.
+- 0009251: [bugtracker] Issue history contains the '@' symbol as the old value when certain fields of the bug report are modified (grangeway) - resolved.
+- 0009348: [bugtracker] Monitoring/unmonitoring an issue should update it's last modified date (vboctor) - resolved.
+- 0009060: [bugtracker] “Open and assigned to me:” and “Open and reported by me:” links on the “Main” page are incorrect. (grangeway) - resolved.
+- 0009141: [bugtracker] summary_page error when DB is empty (giallu) - resolved.
+- 0009395: [bugtracker] Summary page generates incorrect filter links for categories (daryn) - resolved.
+- 0009349: [bugtracker] Tagging/untagging an issue should update it's last modified date (vboctor) - resolved.
+- 0009275: [bugtracker] Tags filter not filling into text field when selecting from list using Internet Explorer (jreese) - resolved.
+- 0009228: [bugtracker] THIS INSTALLATION: sorting of notes does not work any more (jreese) - resolved.
+- 0009001: [change log] memory exhausted on changelog (giallu) - resolved.
+- 0009087: [change log] Renaming a version doesn't update the corresponding issue fields (jreese) - resolved.
+- 0009285: [custom fields] bad named function in /core/excel_api.php file (vboctor) - resolved.
+- 0009387: [db postgresql] Cannot create new user (invalid input syntax for type boolean: "2") (jreese) - resolved.
+- 0006236: [db postgresql] Escaping error in PostgreSQL (grangeway) - resolved.
+- 0008699: [db postgresql] Get Time Tracking Information return a SQL query error (grangeway) - resolved.
+- 0008675: [db postgresql] Incorrect use of boolean in postgres 8.2.4 (grangeway) - resolved.
+- 0008933: [documentation] Bad link in source code. (grangeway) - resolved.
+- 0009345: [documentation] Document PHP extensions required by Mantis (vboctor) - resolved.
+- 0009370: [documentation] User Documentation link is wrong (jreese) - resolved.
+- 0003786: [feature] deleting a category that is in use should issue a warning (jreese) - resolved.
+- 0007508: [filters] Custom fields should have a additional flag, if they should be avaliable as filter or not. (daryn) - resolved.
+- 0008160: [filters] filter for notes (daryn) - resolved.
+- 0009104: [filters] Last page of search results not showing because of error 401 (daryn) - resolved.
+- 0008916: [filters] Monitor by filter ignores show_monitor_list_threshold (daryn) - resolved.
+- 0009099: [filters] using advanced filtering leads to APPLICATION ERROR 0000401 (daryn) - resolved.
+- 0009166: [graphs] JPGraph - Array keys Should be checked with isset() - especially when error reporting is E_ALL (grangeway) - resolved.
+- 0009377: [installation] Installation: upgrade_list.php does not exist (grangeway) - resolved.
+- 0009043: [installation] Invalid link to login page after installation (bug + patch) (jreese) - resolved.
+- 0008192: [integration] Twitter message has wrong escaping for quotation marks (vboctor) - resolved.
+- 0009288: [integration] Twitter updates don't show category correctly (always []) (vboctor) - resolved.
+- 0009312: [integration] wiki integration and undefined function auth_is_user_authenticated (with patch) (jreese) - resolved.
+- 0009281: [localization] czech translation (vboctor) - resolved.
+- 0008827: [localization] Some modifications in strings_french.txt (vboctor) - resolved.
+- 0009100: [news] RSS Feeds do no include date posted (grangeway) - resolved.
+- 0009170: [other] Fix for 0008981 (protection against multiple submissions) broken IE and Opera support (vboctor) - resolved.
+- 0008908: [other] Incorrectl dropdown menu while $g_show_extended_project_browser is on (grangeway) - resolved.
+- 0009094: [other] Insert page break between issues when exporting Microsoft Word DOC format (vboctor) - resolved.
+- 0003241: [other] On Excel, no column headings display. (vboctor) - resolved.
+- 0009392: [other] Remove ?> from the end of config_defaults_inc.php and config_inc.php to avoid errors due to blank lines (vboctor) - resolved.
+- 0009138: [other] Submit Report doesn't work (grangeway) - resolved.
+- 0008372: [performance] Control Page Overload (grangeway) - resolved.
+- 0002963: [performance] manage_proj_edit_page executes more than 5000 queries (grangeway) - resolved.
+- 0009265: [plug-ins] Add an event to allow adding links to View Issues page (vboctor) - resolved.
+- 0009448: [plug-ins] Move the Freemind feature to a plugin (vboctor) - resolved.
+- 0009267: [plug-ins] URL for updating plugin settings is wrong. (jreese) - resolved.
+- 0009332: [relationships] Remove auth_get_current_user_id from relationship_api.php (vboctor) - resolved.
+- 0006731: [rss] Date not shown in RSS (grangeway) - resolved.
+- 0008761: [scripting] compress_handler called before defined (grangeway) - resolved.
+- 0009237: [sql] When using g_limit_reporters produces SQL error for reporters (daryn) - resolved.
+- 0008353: [tagging] Handling accentuated tags (giallu) - resolved.
+- 0009451: [tagging] Tags with single quotes and double quotes are escaped more than once (vboctor) - resolved.
+- 0008849: [time tracking] Emails ignore time tracking view threshold (daryn) - resolved.
+- 0008843: [time tracking] Ignores tracking_reporting_threshold (daryn) - resolved.
+- 0007953: [time tracking] Time Tracking assigment lost, when changing issue status without note text (daryn) - resolved.
+- 0008357: [time tracking] "Total time for issue" is shown even for users under threshold (daryn) - resolved.
+- 0009266: [upgrade] webpath to the mantis installation is calculated wrong, if mantis is installed in the root directory of a webserver (grangeway) - resolved.
+- 0003838: [webpage] HTML Beautification (rainmkr) - resolved.
+- 0006796: [webpage] Webpages generated do not produce "Valid HTML" (grangeway) - resolved.
+- 0009383: [webpage] Wrong URL directory path computed (CSS & images and JS not accessible) (grangeway) - resolved.
+
+
 2008.04.18  -  1.2.0a1
 
 - 0008660: [administration] Provide a way to hide/show users with global access in manage project page (vboctor).
