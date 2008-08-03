@@ -201,13 +201,14 @@
 	} else {
 		print "<td>";
 	}
-	if ( $t_can_update_due_date ) {
+	if ( access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id ) ) {
 		$t_date_to_display = '';
 		if ( ! date_is_null( $t_bug->due_date ) ) {
 			$t_date_to_display = date( config_get( 'short_date_format' ), $t_bug->due_date );
 		}
 	    print "<input ".helper_get_tab_index()." type=\"text\" id=\"due_date\" name=\"due_date\" size=\"20\" maxlength=\"10\" value=\"".$t_date_to_display."\">";
 		date_print_calendar( );
+		date_finish_calendar( 'due_date', 'trigger');
 	?>
 	</td>
 	<?php } else {
@@ -625,9 +626,7 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, $t_bug->project_id ) );
 </form>
 
 <?php
-if ( $t_can_update_due_date ) { 
-	date_finish_calendar( 'due_date', 'trigger');
-}
+
 
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
 	html_page_bottom1( __FILE__ );
