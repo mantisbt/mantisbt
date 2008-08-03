@@ -62,6 +62,7 @@ td.nopad			{ padding: 0px; }
 td.small-caption	{ font-size: 8pt; }
 td.print			{ font-size: 8pt; text-align: left; padding: 2px; }
 td.print-category	{ font-size: 8pt; color: #000000; font-weight: bold; text-align: right; padding: 2px; }
+td.print-overdue	{ font-size: 8pt; color: #000000; font-weight: bold; padding: 2px; }
 td.print-bottom		{ border-bottom: 1px solid #000000; }
 td.print-spacer		{ background-color: #ffffff; color: #000000; font-size: 1pt; line-height: 0.1; padding: 0px;}
 

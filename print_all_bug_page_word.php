@@ -185,7 +185,26 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo $t_bug->platform ?>
 	</td>
+<?php if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_id ) ) { ?>
+	<td class="print-category">
+		<?php echo lang_get( 'due_date' ) ?>:
+	</td>
+<?php
+		if ( bug_is_overdue( $t_id ) ) { ?>
+		<td class="print-overdue">
+<?php
+		} else	{ ?>
+		<td class="print">
+<?php
+		}
+		if ( !date_is_null( $t_bug->due_date ) ) {
+				print_date( config_get( 'short_date_format' ), $t_bug->due_date ); 
+		print "\t\t</td>\n";
+		}
+	} else {
+?>
 	<td class="print" colspan="2">&nbsp;</td>
+<?php } ?>
 </tr>
 <tr class="print">
 	<td class="print-category">
