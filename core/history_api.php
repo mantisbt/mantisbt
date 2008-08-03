@@ -325,8 +325,10 @@
 				$t_field_localized = lang_get( 'sponsorship_total' );
 				break;
 			case 'due_date':
-				$p_old_value = date( config_get( 'short_date_format' ), (int)$p_old_value );
-				$p_new_value = date( config_get( 'short_date_format' ), (int)$p_new_value );
+				if ( $p_old_value !== "")
+					$p_old_value = date( config_get( 'short_date_format' ), (int)$p_old_value );
+				if ( $p_new_value !== "")
+					$p_new_value = date( config_get( 'short_date_format' ), (int)$p_new_value );
 				$t_field_localized = lang_get( 'due_date' );				
 				break;
 			default:
