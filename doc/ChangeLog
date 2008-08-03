@@ -2,6 +2,8 @@ Mantis ChangeLog
 
 2008.06.17  -  1.1.2
 ====================
+This release focused on fixing few security issues; also includes assorted fixes for translations, usability and compatibility (most notably, with postgres) and a nasty memory leak on the string API causing incomplete rendering of pages. All users are advised to upgrade.
+
 - 0008974: [security] XSS Vulnerability in filters (thraxisp) - closed.
 - 0008975: [security] CSRF Vulnerabilities in user_create (jreese) - closed.
 - 0008976: [security] Remote Code Execution in adm_config (giallu) - closed.
