@@ -226,7 +226,7 @@
 		$t_result = db_query_bound( $query, array( $c_project_id ) );
 
 		while ( $t_bug_row = db_fetch_array( $t_result ) ) {
-			var_dump( $t_bug_row );
+			//var_dump( $t_bug_row );
 			history_log_event_direct( $t_bug_row['id'], 'category', category_full_name( $t_bug_row['category_id'], false ), category_full_name( $p_new_category_id, false ) );
 		}
 
