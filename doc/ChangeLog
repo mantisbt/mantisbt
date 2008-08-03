@@ -70,6 +70,34 @@ Mantis ChangeLog
 - 0008578: [webpage] Wrong style class used in if ... else (vboctor).
 
 
+2008.06.17  -  1.1.2
+====================
+This release focused on fixing few security issues; also includes assorted fixes for translations, usability and compatibility (most notably, with postgres) and a nasty memory leak on the string API causing incomplete rendering of pages. All users are advised to upgrade.
+
+- 0008974: [security] XSS Vulnerability in filters (thraxisp) - closed.
+- 0008975: [security] CSRF Vulnerabilities in user_create (jreese) - closed.
+- 0008976: [security] Remote Code Execution in adm_config (giallu) - closed.
+- 0009154: [security] arbitrary file inclusion through user preferences page (giallu) - closed.
+- 0008123: [administration] Adding a user requires "$g_lost_password_feature = ON" (giallu) - closed.
+- 0008924: [bugtracker] Port 8245: Target Version value lost in update issue page (giallu) - closed.
+- 0008886: [change log] Change Log shows duplicate entries (jreese) - closed.
+- 0008880: [db postgresql] Problem with date formatting in db_prepare_date function (giallu) - closed.
+- 0009176: [db postgresql] Port 0008699: Get Time Tracking Information return a SQL query error (vboctor) - closed.
+- 0009177: [filters] Port 0008916: Monitor by filter ignores show_monitor_list_threshold (vboctor) - closed.
+- 0008830: [installation] set_time_limit() doesn't work in PHP safe mode (daryn) - closed.
+- 0008858: [integration] DokuWiki integration: EMail notification on wiki page changes not working (vboctor) - closed.
+- 0008774: [localization] Complete Hungarian retranslation (vboctor) - closed.
+- 0009186: [localization] Port 0009046: French translation for $s_bug_assign_to_button (vboctor) - closed.
+- 0009178: [other] Fix memleak in string api (vboctor) - closed.
+- 0009208: [other] Several actions on bug update page lead into System Warning and App. Error (daryn) - closed.
+- 0008931: [relationships] Circle Relations cause roadmap to malfunction (jreese) - closed.
+- 0008853: [roadmap] Issue appears more than once in the Roadmap for a release. (jreese) - closed.
+- 0007764: [scripting] APPLICATION WARNING #100: Configuration option 'category_enum_string' not found (vboctor) - closed.
+- 0009183: [time tracking] Port 0008357: "Total time for issue" is shown even for users under threshold (vboctor) - closed.
+- 0009184: [time tracking] Port 0008849: Emails ignore time tracking view threshold (vboctor) - closed.
+- 0009185: [time tracking] Port 0008621: The expand icon is inverted for the Time tracking section (vboctor) - closed.
+
+
 2008.01.19  -  1.1.1
 
 This is a maintenance release for the 1.1.x branch.  It includes a fix for PHP 4 support (#8681 stripos), several fixes for SOAP API, a security fix, and other minor bug fixes.
