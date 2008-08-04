@@ -429,7 +429,7 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, $t_bug->project_id ) );
 <!-- Submit Button -->
 <tr>
 	<td class="center" colspan="6">
-		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'update_information_button' ) ?>" onclick="this.disabled=1;document.update_bug_form.submit();" />
+		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'update_information_button' ) ?>" />
 	</td>
 </tr>
 
