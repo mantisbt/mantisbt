@@ -374,11 +374,17 @@ function plugin_version_check( $p_version1, $p_version2, $p_maximum = false ) {
  * @param string Required version
  * @return integer Plugin dependency status
  */
-function plugin_dependency( $p_basename, $p_required ) {
-	global $g_plugin_cache;
+function plugin_dependency( $p_basename, $p_required, $p_initialized=false ) {
+	global $g_plugin_cache, $g_plugin_cache_init;
 
 	# check for registered dependency
 	if ( isset( $g_plugin_cache[$p_basename] ) ) {
+
+		# require dependency initialized?
+		if ( $p_initialized && !isset( $g_plugin_cache_init[$p_basename] ) ) {
+			return 0;
+		}
+
 		$t_required = trim( $p_required );
 		$t_maximum =  false;
 
@@ -709,9 +715,12 @@ function plugin_init_installed() {
 		return;
 	}
 
-	global $g_plugin_cache, $g_plugin_current;
+	global $g_plugin_cache, $g_plugin_current, $g_plugin_cache_priority, $g_plugin_cache_protected, $g_plugin_cache_init;
 	$g_plugin_cache = array();
 	$g_plugin_current = array();
+	$g_plugin_cache_init = array();
+	$g_plugin_cache_priority = array();
+	$g_plugin_cache_protected = array();
 
 	plugin_register( 'MantisCore' );
 	plugin_register_installed();
@@ -746,7 +755,7 @@ function plugin_init_installed() {
  * @return boolean True if plugin initialized, false otherwise.
  */
 function plugin_init( $p_basename ) {
-	global $g_plugin_cache;
+	global $g_plugin_cache, $g_plugin_cache_init;
 
 	# handle dependent plugins
 	if ( isset( $g_plugin_cache[$p_basename] ) ) {
@@ -754,7 +763,7 @@ function plugin_init( $p_basename ) {
 
 		if ( is_array( $t_plugin->requires ) ) {
 			foreach ( $t_plugin->requires as $t_required => $t_version ) {
-				if ( plugin_dependency( $t_required, $t_version ) !== 1 ) {
+				if ( plugin_dependency( $t_required, $t_version, true ) !== 1 ) {
 					return false;
 				}
 			}
@@ -763,6 +772,7 @@ function plugin_init( $p_basename ) {
 		plugin_push_current( $p_basename );
 
 		$t_plugin->__init();
+		$g_plugin_cache_init[ $p_basename ] = true;
 
 		plugin_pop_current();
 
