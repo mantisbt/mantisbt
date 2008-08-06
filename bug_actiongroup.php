@@ -229,7 +229,7 @@
 			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
 				if ( category_exists( $t_project, $f_category ) ) {
 					# @@@ we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
-					bug_set_field( $t_bug_id, 'category', $f_category );
+					bug_set_field( $t_bug_id, 'category_id', $f_category );
 					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_category' );
