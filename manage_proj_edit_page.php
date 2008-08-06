@@ -527,7 +527,8 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 				<td class="center">
 				<?php
 					# You need global permissions to edit custom field defs
-					print_button( "manage_proj_custom_field_remove.php?field_id={$t_field_id}&amp;project_id={$f_project_id}", lang_get( 'remove_link' ) );
+					$t_remove_token = form_security_param( 'manage_proj_custom_field_remove' );
+					print_button( "manage_proj_custom_field_remove.php?field_id={$t_field_id}&amp;project_id={$f_project_id}$t_remove_token", lang_get( 'remove_link' ) );
 				?>
 				</td>
 			</tr>
