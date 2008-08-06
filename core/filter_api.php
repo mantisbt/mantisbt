@@ -779,14 +779,12 @@
 					# check to be sure this field wasn't already added to the query.
 					if ( !in_array( $t_cf_select, $p_query_clauses['select'] ) ) {
 						$p_query_clauses['select'][] = $t_cf_select;
-						$p_query_clauses['join'][] = "LEFT JOIN $t_custom_field_string_table $t_cf_table_alias ON $t_bug_table.id  = $t_cf_table_alias.bug_id AND $t_cf_table_alias.field_id = " . db_param();
-						$p_query_clauses['where_values'][] = $t_custom_field_id;
-#$c_sort = "$t_custom_field_string_table.value";
+						$p_query_clauses['join'][] = "LEFT JOIN $t_custom_field_string_table $t_cf_table_alias ON $t_bug_table.id  = $t_cf_table_alias.bug_id AND $t_cf_table_alias.field_id = $t_custom_field_id";
 					}
 
+					$c_dir = 'DESC' == $t_dir_fields[$i] ? 'DESC' : 'ASC';
+					$p_query_clauses['order'][] = "$c_cf_alias $c_dir";
                 }
-                $c_dir = 'DESC' == $t_dir_fields[$i] ? 'DESC' : 'ASC';
-                $p_query_clauses['order'][] = "$c_sort $c_dir";
             }
         }
 
