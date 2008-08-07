@@ -453,4 +453,8 @@
 	define( 'EVENT_TYPE_OUTPUT',		2 );
 	define( 'EVENT_TYPE_CHAIN',			3 );
 	define( 'EVENT_TYPE_FIRST',			4 );
-?>
+
+	# Timeline types
+	define( 'TIMELINE_TARGETTED',		1 );
+	define( 'TIMELINE_FIXED',			2 );
+
