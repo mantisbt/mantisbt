@@ -140,6 +140,8 @@
 		}
 	}
 
+	form_security_validate( 'bug_update' );
+
 	$t_notify = true;
 	$t_bug_note_set = false;
 	if ( ( $t_old_bug_status != $t_bug_data->status ) && ( FALSE == $f_update_mode ) ) {
