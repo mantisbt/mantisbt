@@ -52,8 +52,6 @@
 		access_denied();
 	}
 
-	form_security_validate( 'bug_update' );
-
 	# extract current extended information
 	$t_old_bug_status = $t_bug_data->status;
 
@@ -146,6 +144,8 @@
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}
 	}
+
+	form_security_validate( 'bug_update' );
 
 	$t_notify = true;
 	$t_bug_note_set = false;
