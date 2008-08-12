@@ -112,10 +112,12 @@
 	# --------------------
 	function project_hierarchy_cache( $p_show_disabled = false ) {
 		global $g_cache_project_hierarchy, $g_cache_project_inheritance;
+		global $g_cache_show_disabled;
 
-		if ( !is_null( $g_cache_project_hierarchy ) ) {
+		if ( !is_null( $g_cache_project_hierarchy ) && ($g_cache_show_disabled == $p_show_disabled)) {
 			return;
 		}
+		$g_cache_show_disabled = $p_show_disabled;
 
 		$t_project_table			= db_get_table( 'mantis_project_table' );
 		$t_project_hierarchy_table	= db_get_table( 'mantis_project_hierarchy_table' );
