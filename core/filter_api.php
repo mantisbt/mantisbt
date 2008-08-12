@@ -3037,7 +3037,7 @@
 					<option value="-1"></option>
 					<?php
 					foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
-						PRINT '<option value="' . $t_query_id . '">' . stripslashes( $t_query_name ) . '</option>';
+						PRINT '<option value="' . $t_query_id . '">' . $t_query_name . '</option>';
 					}
 					?>
 					</select>
