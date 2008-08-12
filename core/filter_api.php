@@ -3037,7 +3037,7 @@
 					<option value="-1"></option>
 					<?php
 					foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
-						PRINT '<option value="' . $t_query_id . '">' . $t_query_name . '</option>';
+						PRINT '<option value="' . $t_query_id . '">' . stripslashes( $t_query_name ) . '</option>';
 					}
 					?>
 					</select>
@@ -3948,7 +3948,6 @@
 		$t_user_id = auth_get_current_user_id();
 		$c_project_id = db_prepare_int( $p_project_id );
 		$c_is_public = db_prepare_bool( $p_is_public, false );
-		$c_name = db_prepare_string( $p_name );
 
 		$t_filters_table = db_get_table( 'mantis_filters_table' );
 
@@ -3968,7 +3967,7 @@
 					WHERE user_id=" . db_param() . "
 					AND project_id=" . db_param() . "
 					AND name=" . db_param();
-		$result = db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_name ) );
+		$result = db_query_bound( $query, Array( $t_user_id, $c_project_id, $p_name ) );
 
 		if ( db_num_rows( $result ) > 0 ) {
 			$row = db_fetch_array( $result );
@@ -3985,7 +3984,7 @@
 						( user_id, project_id, is_public, name, filter_string )
 					  VALUES
 						( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
-			db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_is_public, $c_name, $p_filter_string ) );
+			db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_is_public, $p_name, $p_filter_string ) );
 
 			# Recall the query, we want the filter ID
 			$query = "SELECT id
@@ -3993,7 +3992,7 @@
 						WHERE user_id=" . db_param() . "
 						AND project_id=" . db_param() . "
 						AND name=" . db_param();
-			$result = db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_name ) );
+			$result = db_query_bound( $query, Array( $t_user_id, $c_project_id, $p_name ) );
 
 			if ( db_num_rows( $result ) > 0 ) {
 				$row = db_fetch_array( $result );
