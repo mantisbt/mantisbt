@@ -40,8 +40,6 @@
 		$c_poster_id	= db_prepare_int( $p_poster_id );
 		$c_view_state	= db_prepare_int( $p_view_state );
 		$c_announcement	= db_prepare_bool( $p_announcement );
-		$c_headline		= db_prepare_string( $p_headline );
-		$c_body			= db_prepare_string( $p_body );
 
 		if ( is_blank( $c_headline ) ) {
 			error_parameters( lang_get( 'headline' ) );
@@ -72,7 +70,7 @@
 				      " . db_param() . "
 					)";
 		db_query_bound( $query, Array( $c_project_id, $c_poster_id, db_now(), db_now(),
-						$c_view_state, $c_announcement, $c_headline, $c_body) ); 
+						$c_view_state, $c_announcement, $p_headline, $p_body) );
 
 		$t_news_id = db_insert_id( $t_news_table );
  
@@ -117,8 +115,6 @@
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_view_state	= db_prepare_int( $p_view_state );
 		$c_announcement	= db_prepare_bool( $p_announcement );
-		$c_headline		= db_prepare_string( $p_headline );
-		$c_body			= db_prepare_string( $p_body );
 
 		if ( is_blank( $c_headline ) ) {
 			error_parameters( lang_get( 'headline' ) );
@@ -142,7 +138,7 @@
 					last_modified= " . db_param() . "
 				  WHERE id=" . db_param();
 
-		db_query_bound( $query, Array( $c_view_state, $c_announcement, $c_headline, $c_body, $c_project_id, db_now(), $c_news_id ) );
+		db_query_bound( $query, Array( $c_view_state, $c_announcement, $p_headline, $p_body, $c_project_id, db_now(), $c_news_id ) );
 
 		# db_query errors on failure so:
 		return true;
