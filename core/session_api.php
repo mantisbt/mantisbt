@@ -56,6 +56,9 @@ class MantisPHPSession extends MantisSession {
 		}
 
 		session_cache_limiter( 'private_no_expire' );
+		if ( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), true, true );
+		}
 		session_start();
 		$this->id = session_id();
 	}
