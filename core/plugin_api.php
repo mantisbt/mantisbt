@@ -233,6 +233,32 @@ function plugin_lang_get( $p_name, $p_basename=null ) {
 }
 
 /**
+ * Trigger a plugin-specific error with the given name and type.
+ * @param string Error name
+ * @param int Error type
+ * @param string Plugin basename
+ */
+function plugin_error( $p_error_name, $p_error_type=ERROR, $p_basename=null ) {
+	if ( is_null( $p_basename ) ) {
+		$t_basename = plugin_get_current();
+	} else {
+		$t_basename = $p_basename;
+	}
+
+	$t_error_code = "plugin_${t_basename}_${p_error_name}";
+	$MANTIS_ERROR = lang_get( 'MANTIS_ERROR' );
+
+	if ( isset( $MANTIS_ERROR[$t_error_code] ) ) {
+		trigger_error( $t_error_code, $p_error_type );
+	} else {
+		error_parameters( $p_error_name, $t_basename );
+		trigger_error( ERROR_PLUGIN_GENERIC, ERROR );
+	}
+
+	return null;
+}
+
+/**
  * Hook a plugin's callback function to an event.
  * @param string Event name
  * @param string Callback function
@@ -771,6 +797,17 @@ function plugin_init( $p_basename ) {
 
 		plugin_push_current( $p_basename );
 
+		# load plugin error strings
+		global $g_lang_strings;
+		$t_lang = lang_get_current();
+		$t_plugin_errors = $t_plugin->errors();
+
+		foreach( $t_plugin_errors as $t_error_name => $t_error_string ) {
+			$t_error_code = "plugin_${p_basename}_${t_error_name}";
+			$g_lang_strings[$t_lang]['MANTIS_ERROR'][$t_error_code] = $t_error_string;
+		}
+
+		# finish initializing the plugin
 		$t_plugin->__init();
 		$g_plugin_cache_init[ $p_basename ] = true;
 

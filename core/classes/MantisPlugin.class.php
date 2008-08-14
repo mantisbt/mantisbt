@@ -38,6 +38,10 @@ abstract class MantisPlugin {
 
 	public function init() {}
 
+	public function errors() {
+		return array();
+	}
+
 	public function config() {
 		return array();
 	}
