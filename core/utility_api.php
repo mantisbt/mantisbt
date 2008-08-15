@@ -85,23 +85,6 @@
 	}
 
 	# --------------------
-	# Contributed by Peter Palmreuther
-	function mime_encode( $p_string = '' ) {
-		$output = '';
-		$str_len = strlen( $p_string );
-		for ( $i=0; $i < $str_len; $i++ ) {
-			if (( ord( $p_string[$i] ) < 33 ) ||
-				( ord( $p_string[$i] ) > 127 ) ||
-				( eregi( "[\%\[\]\{\}\(\)]", $p_string[$i] ) )) {
-				$output .= sprintf( '%%%02X', ord( $p_string[$i] ) );
-			} else {
-				$output .= $p_string[$i];
-			}
-		}
-		return( $output );
-	}
-
-	# --------------------
 	# Add a trailing DIRECTORY_SEPARATOR to a string if it isn't present
 	function terminate_directory_path( $p_path ) {
 		$str_len = strlen($p_path);
