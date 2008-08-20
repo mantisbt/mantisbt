@@ -203,40 +203,45 @@
 	# --------------------
 	# Remove all categories associated with a project
 	function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
-		$c_project_id = db_prepare_int( $p_project_id );
-		$c_new_category_id = db_prepare_int( $p_new_category_id );
 
 		project_ensure_exists( $p_project_id );
 		if ( 0 != $p_new_category_id ) {
 			category_ensure_exists( $p_new_category_id );
 		}
 
-		$t_category_table	= db_get_table( 'mantis_category_table' );
-		$t_bug_table		= db_get_table( 'mantis_bug_table' );
-
-		$query = "DELETE FROM $t_category_table
-				  WHERE project_id=" . db_param();
-		db_query_bound( $query, array( $c_project_id ) );
-
 		# cache category names
 		category_get_all_rows( $p_project_id );
 
+		$t_category_table	= db_get_table( 'mantis_category_table' );
+		$t_bug_table		= db_get_table( 'mantis_bug_table' );
+
+		# get a list of affected categories
+		$t_query = "SELECT id FROM $t_category_table WHERE project_id=" . db_param();
+		$t_result = db_query_bound( $t_query, array( $p_project_id ) );
+
+		$t_category_ids = array();
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			$t_category_ids[] = $t_row['id'];
+		}
+		$t_category_ids = join( ',', $t_category_ids );
+
 		# update bug history entries
-		$query = "SELECT id, category_id FROM $t_bug_table WHERE project_id=" . db_param();
-		$t_result = db_query_bound( $query, array( $c_project_id ) );
+		$t_query = "SELECT id, category_id FROM $t_bug_table WHERE category_id IN ( $t_category_ids )";
+		$t_result = db_query_bound( $t_query );
 
 		while ( $t_bug_row = db_fetch_array( $t_result ) ) {
-			//var_dump( $t_bug_row );
 			history_log_event_direct( $t_bug_row['id'], 'category', category_full_name( $t_bug_row['category_id'], false ), category_full_name( $p_new_category_id, false ) );
 		}
 
 		# update bug data
-		$query = "UPDATE $t_bug_table
-				  SET category_id=" . db_param() . '
-				  WHERE project_id=' . db_param();
-		db_query_bound( $query, array( $c_new_category_id, $c_project_id ) );
+		$t_query = "UPDATE $t_bug_table SET category_id=" . db_param() .
+			" WHERE category_id IN ( $t_category_ids )";
+		db_query_bound( $t_query, array( $p_new_category_id ) );
 
-		# db_query errors on failure so:
+		# delete categories
+		$t_query = "DELETE FROM $t_category_table WHERE project_id=" . db_param();
+		db_query_bound( $t_query, array( $p_project_id ) );
+
 		return true;
 	}
 
