@@ -633,20 +633,25 @@
 				}
 
 				# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
-				$t_show_access = min( config_get( 'manage_user_threshold' ), config_get( 'manage_project_threshold' ), config_get( 'manage_custom_fields_threshold' ) );
-				if ( access_has_global_level( $t_show_access) || access_has_any_project( $t_show_access ) )  {
-					$t_current_project = helper_get_current_project();
-					if ( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-						$t_link = helper_mantis_url( 'manage_user_page.php' );
-					} else {
-						if ( access_has_project_level( config_get( 'manage_project_threshold' ), $t_current_project )
-								&& ( $t_current_project <> ALL_PROJECTS ) ) {
-							$t_link = helper_mantis_url( 'manage_proj_edit_page.php?project_id=' ) . $t_current_project;
-						} else {
-							$t_link = helper_mantis_url( 'manage_proj_page.php' );
-						}
-					}
+				if ( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
+					$t_link = helper_mantis_url( 'manage_overview_page.php' );
 					$t_menu_options[] = "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a>';
+				} else {
+					$t_show_access = min( config_get( 'manage_user_threshold' ), config_get( 'manage_project_threshold' ), config_get( 'manage_custom_fields_threshold' ) );
+					if ( access_has_global_level( $t_show_access) || access_has_any_project( $t_show_access ) )  {
+						$t_current_project = helper_get_current_project();
+						if ( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+							$t_link = helper_mantis_url( 'manage_user_page.php' );
+						} else {
+							if ( access_has_project_level( config_get( 'manage_project_threshold' ), $t_current_project )
+									&& ( $t_current_project <> ALL_PROJECTS ) ) {
+								$t_link = helper_mantis_url( 'manage_proj_edit_page.php?project_id=' ) . $t_current_project;
+							} else {
+								$t_link = helper_mantis_url( 'manage_proj_page.php' );
+							}
+						}
+						$t_menu_options[] = "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a>';
+					}
 				}
 
 				# News Page

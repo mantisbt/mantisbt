@@ -707,6 +707,13 @@ $s_older_news_link = 'Older News';
 $s_archives = 'Archives';
 $s_rss = 'RSS';
 
+# manage_overview_page
+$s_mantis_version = 'Mantis Version';
+$s_schema_version = 'Schema Version';
+$s_site_path = 'Site Path';
+$s_core_path = 'Core Path';
+$s_plugin_path = 'Plugin Path';
+
 # manage_create_new_user.php
 $s_created_user_part1 = 'Created user';
 $s_created_user_part2 = 'with an access level of';

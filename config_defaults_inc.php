@@ -1129,6 +1129,12 @@
 	# Threshold needed to view project documentation
 	$g_view_proj_doc_threshold = ANYBODY;
 
+	# Site manager
+	$g_manage_site_threshold = MANAGER;
+
+	# Site admin
+	$g_admin_site_threshold = ADMINISTRATOR;
+
 	# Threshold needed to manage a project: edit project
 	# details (not to add/delete projects), upload documentation, ...etc.
 	$g_manage_project_threshold = MANAGER;
