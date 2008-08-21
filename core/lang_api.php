@@ -76,8 +76,14 @@
 
 		foreach ( array_keys( $t_vars ) as $t_var ) {
 			$t_lang_var = ereg_replace( '^s_', '', $t_var );
-			if ( $t_lang_var != $t_var || 'MANTIS_ERROR' == $t_var ) {
+			if ( $t_lang_var != $t_var  ) {
 				$g_lang_strings[ $p_lang ][ $t_lang_var ] = $$t_var;
+			} else if ( 'MANTIS_ERROR' == $t_var ) {
+				if ( isset( $g_lang_strings[ $p_lang ][ $t_lang_var ] ) ) {
+					$g_lang_strings[ $p_lang ][ $t_lang_var ] = array_merge( $g_lang_strings[ $p_lang ][ $t_lang_var ], $$t_var );
+				} else {
+					$g_lang_strings[ $p_lang ][ $t_lang_var ] = $$t_var;
+				}
 			}
 		}
 	}
