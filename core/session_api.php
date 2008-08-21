@@ -50,7 +50,7 @@ $g_session = null;
 class MantisPHPSession extends MantisSession {
 	function __construct() {
 		$t_session_save_path = config_get_global( 'session_save_path' );
-		if ( ! $t_session_save_path ) {
+		if ( $t_session_save_path ) {
 			session_save_path( $t_session_save_path );
 		}
 
