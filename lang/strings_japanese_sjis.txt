@@ -25,9 +25,9 @@
 	# Japanese strings for Mantis
 	# Based on strings_english.txt rev. 1.281
 	# -------------------------------------------------
-	# $Revision: 1.92 $
-	# $Author: giallu $
-	# $Date: 2007-10-24 22:31:16 $
+	# $Revision$
+	# $Author$
+	# $Date$
 	#
 	# $Id$
 	###########################################################################

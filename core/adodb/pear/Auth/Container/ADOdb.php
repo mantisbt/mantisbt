@@ -35,7 +35,7 @@ require_once 'adodb-errorpear.inc.php';
  *
  * @author   Richard Tango-Lowy <richtl@arscognita.com>
  * @package  Auth
- * @version  $Revision: 1.3 $
+ * @version  $Revision$
  */
 class Auth_Container_ADOdb extends Auth_Container
 {

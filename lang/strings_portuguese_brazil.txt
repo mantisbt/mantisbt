@@ -27,9 +27,9 @@
 	# Brazilian Portuguese strings for Mantis
 	# Based on strings_english.txt rev. 1.316 $
 	# -------------------------------------------------
-	# $Revision: 1.107 $
-	# $Author: giallu $
-	# $Date: 2007-10-24 22:31:18 $
+	# $Revision$
+	# $Author$
+	# $Date$
 	#
 	# $Id$
 	###########################################################################

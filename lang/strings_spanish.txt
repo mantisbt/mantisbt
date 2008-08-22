@@ -29,9 +29,9 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.115 $
-	# $Author: jbrugger $
-	# $Date: 2007-10-25 17:29:23 $
+	# $Revision$
+	# $Author$
+	# $Date$
 	#
 	# $Id$
 	###########################################################################

@@ -22,9 +22,9 @@
 	# Turkish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.94 $
-	# $Author: giallu $
-	# $Date: 2007-10-24 22:31:20 $
+	# $Revision$
+	# $Author$
+	# $Date$
 	#
 	# $Id$
 	###########################################################################

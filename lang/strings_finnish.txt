@@ -25,9 +25,9 @@
 	# Finnish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.52 $
-	# $Author: giallu $
-	# $Date: 2007-10-24 22:31:13 $
+	# $Revision$
+	# $Author$
+	# $Date$
 	#
 	# $Id$
 	###########################################################################

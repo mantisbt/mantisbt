@@ -23,9 +23,9 @@
 	# Slovak strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.2 $
-	# $Author: giallu $
-	# $Date: 2007-10-24 22:31:19 $
+	# $Revision$
+	# $Author$
+	# $Date$
 	#
 	# $Id$
 	###########################################################################

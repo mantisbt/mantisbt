@@ -18,9 +18,9 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
        # --------------------------------------------------------
-       # $Revision: 1.6 $
-       # $Author: giallu $
-       # $Date: 2007-10-24 22:30:52 $
+       # $Revision$
+       # $Author$
+       # $Date$
        #
        # $Id$
        # --------------------------------------------------------

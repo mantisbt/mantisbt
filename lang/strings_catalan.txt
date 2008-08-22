@@ -23,9 +23,9 @@
 	# Catalan strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.12 $
-	# $Author: giallu $
-	# $Date: 2007-10-24 22:31:06 $
+	# $Revision$
+	# $Author$
+	# $Date$
 	#
 	# $Id$
 	###########################################################################
