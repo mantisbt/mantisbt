@@ -41,12 +41,12 @@
 		$c_view_state	= db_prepare_int( $p_view_state );
 		$c_announcement	= db_prepare_bool( $p_announcement );
 
-		if ( is_blank( $c_headline ) ) {
+		if ( is_blank( $p_headline ) ) {
 			error_parameters( lang_get( 'headline' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
-		if ( is_blank( $c_body ) ) {
+		if ( is_blank( $p_body ) ) {
 			error_parameters( lang_get( 'body' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
@@ -116,12 +116,12 @@
 		$c_view_state	= db_prepare_int( $p_view_state );
 		$c_announcement	= db_prepare_bool( $p_announcement );
 
-		if ( is_blank( $c_headline ) ) {
+		if ( is_blank( $p_headline ) ) {
 			error_parameters( lang_get( 'headline' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
-		if ( is_blank( $c_body ) ) {
+		if ( is_blank( $p_body ) ) {
 			error_parameters( lang_get( 'body' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
