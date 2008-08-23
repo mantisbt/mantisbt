@@ -102,7 +102,7 @@
 
 <br />
 
-<div class="border-center">
+<div class="border center">
 	<form method="post" action="manage_proj_ver_delete.php">
 	<input type="hidden" name="version_id" value="<?php echo string_attribute( $t_version->id ) ?>" />
 	<input type="submit" class="button" value="<?php echo lang_get( 'delete_version_button' ) ?>" />

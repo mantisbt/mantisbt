@@ -129,7 +129,7 @@
 <br />
 
 <!-- RESET AND DELETE -->
-<div class="border-center">
+<div class="border center">
 <!-- Reset Button -->
 	<form method="post" action="manage_user_reset.php">
 <?php echo form_security_field( 'manage_user_reset' ) ?>

@@ -170,7 +170,7 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 
 <br />
 
-<div class="border-center">
+<div class="border center">
 	<form method="post" action="print_all_bug_options_reset.php">
 	<input type="submit" class="button" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
 	</form>

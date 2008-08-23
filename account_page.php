@@ -258,7 +258,7 @@
 ?>
 
 <!-- Delete Button -->
-<div class="border-center">
+<div class="border center">
 	<form method="post" action="account_delete.php">
 	<input type="submit" class="button" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
 	</form>

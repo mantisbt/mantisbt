@@ -89,7 +89,7 @@
 
 <br />
 
-<div class="border-center">
+<div class="border center">
 	<form method="post" action="manage_proj_cat_delete.php">
 		<?php echo form_security_field( 'manage_proj_cat_delete' ) ?>
 		<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />

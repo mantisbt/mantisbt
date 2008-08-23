@@ -783,7 +783,7 @@
 #				break;
 		}
 
-		PRINT '<br /><div align="center">';
+		PRINT '<div align="center"><p>';
 		if ( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
 			print_bracket_link( helper_mantis_url( $t_manage_user_page ), lang_get( 'manage_users_link' ) );
 		}
@@ -803,7 +803,7 @@
 			print_bracket_link( helper_mantis_url( $t_manage_config_page ), lang_get( 'manage_config_link' ) );
 		}
 			# print_bracket_link( $t_documentation_page, lang_get( 'documentation_link' ) );
-		PRINT '</div>';
+		PRINT '</p></div>';
 	}
 
 	# --------------------

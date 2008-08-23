@@ -187,7 +187,7 @@
 	if ( $t_account_page ) {
 ?>
 <!-- RESET CONFIGURATION -->
-<div class="border-center">
+<div class="border center">
 <!-- Reset Button -->
 	<form method="post" action="manage_config_columns_reset.php">
 		<input type="submit" class="button" value="<?php echo lang_get( 'reset_columns_configuration' ) ?>" />

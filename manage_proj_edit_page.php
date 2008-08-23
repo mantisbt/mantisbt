@@ -157,7 +157,7 @@
 <?php
 # You must have global permissions to delete projects
 if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
-<div class="border-center">
+<div class="border center">
 	<form method="post" action="manage_proj_delete.php">
 		<?php echo form_security_field( 'manage_proj_delete' ) ?>
 		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />

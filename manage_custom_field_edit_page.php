@@ -226,7 +226,7 @@
 
 <br />
 
-<div class="border-center">
+<div class="border center">
 	<form method="post" action="manage_custom_field_delete.php">
 <?php echo form_security_field( 'manage_custom_field_delete' ); ?>
 		<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />

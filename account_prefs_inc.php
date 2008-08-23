@@ -308,7 +308,7 @@
 
 <br />
 
-<div class="border-center">
+<div class="border center">
 	<form method="post" action="account_prefs_reset.php">
 	<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
 	<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />

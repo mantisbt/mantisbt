@@ -116,7 +116,19 @@ img.delete-icon			{ position: relative; top: 5px; border: 0; }
 div						{ padding: 3px; }
 div.menu				{ background-color: #e8e8e8; color: #000000; text-align: center; width: 100%; padding: 1px; }
 
-div.border-center		{ background-color: #ffffff; border: solid 1px #000000; text-align: center; width: 50%; position: relative; margin-right: auto; margin-left: auto; }
+div.center {
+	width: 50%; 
+	margin-right: auto; 
+	margin-left: auto; 
+}
+
+div.border 
+{
+	background-color: #ffffff; 
+	border: solid 1px #000000; 
+	text-align: center; 
+	position: relative; 
+}
 
 div.quick-summary-left	{ width: 49%; padding: 2px; text-align: left;  float: left; }
 div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; float: right;}
