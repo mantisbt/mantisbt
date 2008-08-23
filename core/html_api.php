@@ -747,9 +747,11 @@
 		}
 	}
 
-	# --------------------
-	# Print the menu for the manage section
-	# $p_page specifies the current page name so it's link can be disabled
+	/**
+	 * Print the menu for the manage section
+	 *
+	 * @param string $p_page specifies the current page name so it's link can be disabled
+	 */
 	function print_manage_menu( $p_page = '' ) {
 		$t_manage_user_page 		= 'manage_user_page.php';
 		$t_manage_project_menu_page = 'manage_proj_page.php';
@@ -757,7 +759,6 @@
 		$t_manage_plugin_page		= 'manage_plugin_page.php';
 		$t_manage_config_page		= 'adm_config_report.php';
 		$t_manage_prof_menu_page    = 'manage_prof_menu_page.php';
-		# $t_documentation_page 		= 'documentation_page.php';
 
 		switch ( $p_page ) {
 			case $t_manage_user_page:
@@ -778,9 +779,6 @@
 			case $t_manage_prof_menu_page:
 				$t_manage_prof_menu_page = '';
 				break;
-#			case $t_documentation_page:
-#				$t_documentation_page = '';
-#				break;
 		}
 
 		PRINT '<div align="center"><p>';
@@ -802,8 +800,29 @@
 		if ( access_has_project_level( config_get( 'view_configuration_threshold' ) ) ) {
 			print_bracket_link( helper_mantis_url( $t_manage_config_page ), lang_get( 'manage_config_link' ) );
 		}
-			# print_bracket_link( $t_documentation_page, lang_get( 'documentation_link' ) );
-		PRINT '</p></div>';
+
+		# Plugin / Event added options
+		$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE' );
+		$t_menu_options = array();
+		foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+			foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+				if ( is_array( $t_callback_menu_options ) ) {
+					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+				} else {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
+			}
+		}
+		
+		// Plugins menu items
+		// TODO: this would be a call to print_pracket_link but the events returns cooked links so we cant
+		foreach ( $t_menu_options as $t_menu_item ) {
+			PRINT '<span class="bracket-link">[&nbsp;';
+			PRINT  $t_menu_item;
+			PRINT '&nbsp;]</span> ';
+		}
+
+		PRINT '</div>';
 	}
 
 	# --------------------
