@@ -1423,28 +1423,30 @@
 	# print the bracketed links used near the top
 	# if the $p_link is blank then the text is printed but no link is created
 	# if $p_new_window is true, link will open in a new window, default false.
-	function print_bracket_link( $p_link, $p_url_text, $p_new_window = false ) {
+	function print_bracket_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
 		PRINT '<span class="bracket-link">[&nbsp;';
-		if (is_blank( $p_link )) {
-			PRINT $p_url_text;
-		} else {
-			if( true == $p_new_window ) {
-				PRINT "<a href=\"$p_link\" target=\"_blank\">$p_url_text</a>";
-			} else {
-				PRINT "<a href=\"$p_link\">$p_url_text</a>";
-			}
-		}
+		print_link( $p_link, $p_url_text, $p_new_window, $p_class = '' );
 		PRINT '&nbsp;]</span> ';
 	}
+
 	# --------------------
 	# print a HTML link
-	function print_link( $p_link, $p_url_text ) {
+	function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
+		$t_class = $p_class;
+		if ($p_class !== '') {
+			$t_class = "class='$p_class' ";
+		}
 		if (is_blank( $p_link )) {
-			PRINT " $p_url_text ";
+			PRINT "$p_url_text";
 		} else {
-			PRINT " <a href=\"$p_link\">$p_url_text</a> ";
+			if( $p_new_window === true ) {
+				PRINT "<a ${t_class}href=\"$p_link\" target=\"_blank\">$p_url_text</a>";
+			} else {
+				PRINT "<a ${t_class}href=\"$p_link\">$p_url_text</a>";
+			}
 		}
 	}
+
 	# --------------------
 	# print a HTML page link
 	function print_page_link( $p_page_url, $p_text = '', $p_page_no=0, $p_page_cur=0, $p_temp_filter_id = 0 ) {
