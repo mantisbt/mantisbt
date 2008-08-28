@@ -64,18 +64,13 @@
 		$t_email_updated = true;
 	}
 
-	if ( $f_realname != user_get_field( $t_user_id, 'realname' ) ) {
+    # strip extra spaces from real name
+    $t_realname = preg_replace('/\s+/', ' ', $f_realname);
+	if ( $t_realname != user_get_field( $t_user_id, 'realname' ) ) {
 		# checks for problems with realnames
 		$t_username = user_get_field( $t_user_id, 'username' );
-		switch ( user_is_realname_unique( $t_username, $f_realname ) ) {
-			case 1:
-				break;
-			case 0:
-			default:
-				trigger_error( ERROR_USER_REAL_MATCH_USER, ERROR );
-				break;
-		}
-		user_set_realname( $t_user_id, $f_realname );
+		user_ensure_realname_unique( $t_username, $t_realname );
+		user_set_realname( $t_user_id, $t_realname );
 		$t_realname_updated = true;
 	}
 

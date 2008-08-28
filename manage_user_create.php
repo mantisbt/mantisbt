@@ -48,8 +48,11 @@
 	# Check the name for validity here so we do it before promting to use a
 	#  blank password (don't want to prompt the user if the process will fail
 	#  anyway)
+    # strip extra space from real name
+    $t_realname = preg_replace('/\s+/', ' ', $f_realname);
 	user_ensure_name_valid( $f_username );
-	user_ensure_realname_valid( $f_realname );
+	user_ensure_realname_valid( $t_realname );
+	user_ensure_realname_unique( $f_username, $f_realname );
 
 	if ( $f_password != $f_password_verify ) {
 		trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
@@ -75,7 +78,7 @@
 
 	form_security_validate( 'manage_user_create' );
 
-	$t_cookie = user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled, $f_realname );
+	$t_cookie = user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled, $t_realname );
 
 	if ( $t_cookie === false ) {
 		$t_redirect_url = 'manage_user_page.php';

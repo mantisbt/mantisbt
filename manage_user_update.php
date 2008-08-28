@@ -54,6 +54,9 @@
 		trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
 	}
 
+    # strip extra space from real name
+    $t_realname = preg_replace('/\s+/', ' ', $f_realname);
+    
 	user_ensure_name_valid( $f_username );
 	user_ensure_realname_valid( $f_realname );
 	user_ensure_realname_unique( $f_username, $f_realname );
@@ -63,7 +66,7 @@
 	email_ensure_not_disposable( $f_email );
 
 	$c_email		= $f_email;
-	$c_username		= $f_username;
+	$c_username		= $t_username;
 	$c_realname		= $f_realname;
 	$c_protected	= db_prepare_bool( $f_protected );
 	$c_enabled		= db_prepare_bool( $f_enabled );
@@ -82,7 +85,7 @@
 
 	# Project specific access rights override global levels, hence, for users who are changed
 	# to be administrators, we have to remove project specific rights.
-        if ( ( $c_access_level >= ADMINISTRATOR ) && ( !user_is_administrator( $c_user_id ) ) ) {
+    if ( ( $c_access_level >= ADMINISTRATOR ) && ( !user_is_administrator( $c_user_id ) ) ) {
 		user_delete_project_specific_access_levels( $c_user_id );
 	}
 
