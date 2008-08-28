@@ -655,10 +655,22 @@
 		} else {
 			$t_default_image = config_get( 'default_avatar' );
 			$t_size = 80;
-			$t_avatar_url = "http://www.gravatar.com/avatar.php?gravatar_id=" . md5( $t_email ) .
-				"&amp;default=" . urlencode( $t_default_image ) .
-				"&amp;size=" . $t_size .
-				"&amp;rating=G";
+
+			$t_use_ssl = false;
+			if ( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+				$t_use_ssl = true;
+			}
+
+			if ( !$t_use_ssl ) {
+				$t_gravatar_domain = 'http://www.gravatar.com/';
+			} else {
+				$t_gravatar_domain = 'https://secure.gravatar.com/';
+			}
+
+			$t_avatar_url = $t_gravatar_domain . 'avatar.php?gravatar_id=' . md5( $t_email ) .
+				'&amp;default=' . urlencode( $t_default_image ) .
+				'&amp;size=' . $t_size .
+				'&amp;rating=G';
 			$t_result = array( $t_avatar_url, $t_size, $t_size );
 		}
 
