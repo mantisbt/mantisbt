@@ -65,7 +65,7 @@
 	}
 
     # strip extra spaces from real name
-    $t_realname = preg_replace('/\s+/', ' ', $f_realname);
+    $t_realname = string_normalize( $f_realname );
 	if ( $t_realname != user_get_field( $t_user_id, 'realname' ) ) {
 		# checks for problems with realnames
 		$t_username = user_get_field( $t_user_id, 'username' );

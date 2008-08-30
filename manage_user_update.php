@@ -55,7 +55,7 @@
 	}
 
     # strip extra space from real name
-    $t_realname = preg_replace('/\s+/', ' ', $f_realname);
+    $t_realname = string_normalize( $f_realname );
     
 	user_ensure_name_valid( $f_username );
 	user_ensure_realname_valid( $f_realname );
@@ -66,8 +66,8 @@
 	email_ensure_not_disposable( $f_email );
 
 	$c_email		= $f_email;
-	$c_username		= $t_username;
-	$c_realname		= $f_realname;
+	$c_username		= $f_username;
+	$c_realname		= $t_realname;
 	$c_protected	= db_prepare_bool( $f_protected );
 	$c_enabled		= db_prepare_bool( $f_enabled );
 	$c_user_id		= db_prepare_int( $f_user_id );

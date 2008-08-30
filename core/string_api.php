@@ -690,6 +690,14 @@
 	}
 
 	# --------------------
+	# Normalize a string by removing leading, trailing and excessive internal spaces
+	#   note a space is used as the pattern instead of '\s' to make it work with UTF-8 strings 
+
+	function string_normalize( $p_string ) {
+		return preg_replace( '/ +/', ' ', trim( $p_string ) );
+	}
+
+	# --------------------
 	# remap a field name to a string name (for sort filter)
 
 	function string_get_field_name( $p_string ) {
