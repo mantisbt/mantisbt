@@ -407,6 +407,7 @@
 </tr>
 <?php } ?>
 
+<?php event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id, true ) ); ?>
 
 <!-- spacer -->
 <tr class="spacer">
