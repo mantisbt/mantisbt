@@ -298,6 +298,10 @@
 </tr>
 */ ?>
 
+<?php # Plugins
+event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, $t_bug->project_id ) );
+?>
+
 <!-- spacer -->
 <tr class="spacer">
 	<td colspan="6"></td>
@@ -373,10 +377,6 @@
 	<td colspan="6"></td>
 </tr>
 <?php } # custom fields found ?>
-
-<?php # Plugins
-event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, $t_bug->project_id ) );
-?>
 
 <!-- Bugnote Text Box -->
 <tr <?php echo helper_alternate_class() ?>>

@@ -312,6 +312,8 @@
 </tr>
 
 
+<?php event_signal( 'EVENT_VIEW_BUG_DETAILS', $f_bug_id ); ?>
+
 <!-- spacer -->
 <tr class="spacer">
 	<td colspan="6"></td>
@@ -378,8 +380,6 @@
 <tr class="spacer">
 	<td colspan="6"></td>
 </tr>
-
-<?php event_signal( 'EVENT_VIEW_BUG_DETAILS', $f_bug_id ); ?>
 
 
 <!-- Custom Fields -->
