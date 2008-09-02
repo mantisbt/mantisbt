@@ -312,7 +312,7 @@
 </tr>
 
 
-<?php event_signal( 'EVENT_VIEW_BUG_DETAILS', $f_bug_id ); ?>
+<?php event_signal( 'EVENT_VIEW_BUG_DETAILS', array( $f_bug_id, false ) ); ?>
 
 <!-- spacer -->
 <tr class="spacer">

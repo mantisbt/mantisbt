@@ -476,7 +476,7 @@
 ?>
 
 <?php # Plugins
-event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, $t_bug->project_id ) );
+event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, true ) );
 ?>
 
 <!-- spacer -->
