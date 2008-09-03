@@ -967,13 +967,23 @@
 		PRINT '<table class="width100" cellspacing="1">';
 		PRINT '<tr>';
 
-		$t_arr		= explode_enum_string( config_get( 'status_enum_string' ) );
-		$enum_count	= count( $t_arr );
-		$width		= (int)(100 / $enum_count);
-		for ( $i=0; $i < $enum_count; $i++) {
-			$t_s = explode_enum_arr( $t_arr[$i] );
-			$t_val = get_enum_element( 'status', $t_s[0] );
-			$t_color = get_status_color( $t_s[0] );
+		$t_status_array = get_enum_to_array( config_get( 'status_enum_string' ) );
+		$t_status_names = get_enum_to_array( lang_get( 'status_enum_string' ) );
+		$enum_count	= count( $t_status_array );
+		# read through the list and eliminate unused ones for the selected project
+		# assumes that all status are are in the enum array
+    	$t_workflow = config_get( 'status_enum_workflow' );
+		foreach ( $t_status_array as $t_status => $t_name) {
+			if ( !isset( $t_workflow[ $t_status ] ) || ( $t_workflow[ $t_status ] == '' ) ) {
+			    # drop elements that are not in the workflow
+			    unset( $t_status_array[ $t_status ] );
+			}
+		}
+		# draw the status bar
+		$width		= (int)( 100 / count( $t_status_array ) );
+		foreach ( $t_status_array as $t_status => $t_name) {
+			$t_val = $t_status_names[ $t_status ];
+			$t_color = get_status_color( $t_status );
 
 			PRINT "<td class=\"small-caption\" width=\"$width%\" bgcolor=\"$t_color\">$t_val</td>";
 		}
