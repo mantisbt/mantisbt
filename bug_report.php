@@ -167,7 +167,7 @@
 	helper_call_custom_function( 'issue_create_notify', array( $t_bug_id ) );
 
 	# Allow plugins to post-process bug data with the new bug ID
-	event_signal( 'EVENT_REPORT_BUG', array( $t_bug_id, $t_bug_data ) );
+	event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
 
 	html_page_top1();
 
