@@ -968,15 +968,18 @@
 		PRINT '<tr>';
 
 		$t_status_array = get_enum_to_array( config_get( 'status_enum_string' ) );
+
 		$t_status_names = get_enum_to_array( lang_get( 'status_enum_string' ) );
 		$enum_count	= count( $t_status_array );
 		# read through the list and eliminate unused ones for the selected project
 		# assumes that all status are are in the enum array
     	$t_workflow = config_get( 'status_enum_workflow' );
-		foreach ( $t_status_array as $t_status => $t_name) {
-			if ( !isset( $t_workflow[ $t_status ] ) || ( $t_workflow[ $t_status ] == '' ) ) {
-			    # drop elements that are not in the workflow
-			    unset( $t_status_array[ $t_status ] );
+    	if ( !empty( $t_workflow) ) {
+			foreach ( $t_status_array as $t_status => $t_name) {
+				if ( !isset( $t_workflow[ $t_status ] ) || ( $t_workflow[ $t_status ] == '' ) ) {
+				    # drop elements that are not in the workflow
+				    unset( $t_status_array[ $t_status ] );
+				}
 			}
 		}
 		# draw the status bar
