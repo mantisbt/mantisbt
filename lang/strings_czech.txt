@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -35,8 +35,6 @@
   # $Id$
   ###########################################################################
 
-?>
-<?php
 # Charset
 $s_charset = 'utf-8';
 
@@ -721,11 +719,8 @@ $s_create_user_button = 'Vytvořit';
 # manage_page.php
 $s_hide_disabled = 'Skrýt nepovolené';
 $s_filter_button = 'Použít filtr';
-$s_manage_users_link = 'Správa uživatelů';
 $s_manage_users_link = 'Spravovat uživatele';
-$s_manage_projects_link = 'Správa projektů';
 $s_manage_projects_link = 'Spravovat projekty';
-$s_manage_custom_field_link = 'Správa uživatelských polí';
 $s_manage_custom_field_link = 'Spravovat vlastní sloupce';
 $s_manage_global_profiles_link = 'Spravovat globální profily';
 $s_manage_plugin_link = 'Spravovat Pluginy';
