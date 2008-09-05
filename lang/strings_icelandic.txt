@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,6 +29,10 @@
 	#
 	# $Id$
 	###########################################################################
+	# Translation issue:
+	#  ** Þýðingu á issue/bug breytt úr atriði í beiðni til að fá betri samsvörun
+	#    á notkun kerfisins sem verkbeiðnakerfis. 2008/07/10 GJE **
+	###########################################################################
 
 ?>
 <?php
@@ -46,13 +50,13 @@ $s_actiongroup_menu_update_priority = 'Uppfæra forgang';
 $s_actiongroup_menu_update_status = 'Staða uppfærslu';
 $s_actiongroup_menu_update_view_status = 'Skoða uppfærða stöðu';
 $s_actiongroup_menu_update_category = 'Uppfæra verkþætti';
-$s_actiongroup_menu_set_sticky = 'Líming á/af';
+$s_actiongroup_menu_set_sticky = 'Líming af/á';
 $s_actiongroup_menu_update_field = 'Uppfæra %s';
-$s_actiongroup_bugs = 'Sérvalin atriði';
+$s_actiongroup_bugs = 'Sérvalin beiðni';
 
 # new strings:
 $s_all_projects = 'Öll verkefni';
-$s_move_bugs = 'Færa atriði';
+$s_move_bugs = 'Færa beiðni';
 $s_operation_successful = 'Aðgerð tókst.';
 $s_date_order = 'Raða eftir dagsetningu';
 $s_print_all_bug_page_link = 'Prenta skýrslu';
@@ -73,7 +77,7 @@ $s_copy_categories_from = 'Afrita verkþætti frá';
 $s_copy_categories_to = 'Afrita verkþætti til';
 $s_copy_users_from = 'Afrita notendur frá';
 $s_copy_users_to = 'Afrita notendur til';
-$s_bug_history = 'Ferill atriða';
+$s_bug_history = 'Ferill beiðna';
 $s_field = 'Svæði';
 $s_old_value = 'Gamalt gildi';
 $s_new_value = 'Nýtt gildi';
@@ -97,7 +101,7 @@ $s_related_to = 'tengt við';
 $s_dependant_on = 'háður af';
 $s_blocks = 'tálmaður af';
 
-$s_new_bug = 'Nýtt atriði';
+$s_new_bug = 'Ný verkbeiðni';
 $s_bugnote_added = 'Bætt við athugasemd';
 $s_bugnote_edited = 'Athugasemd skrifuð';
 $s_bugnote_deleted = 'Athugasemd eytt';
@@ -119,30 +123,30 @@ $s_login_link = 'Innskráning';
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Þú hafðir ekki leyfi til að framkvæma þessa aðgerð á eftirfarandi atriðum: ';
 $s_bug_actiongroup_access = 'Þú hafðir ekki leyfi til að framkvæma þessa aðgerð.';
-$s_bug_actiongroup_status = 'Þessu atriði er ekki hægt að breyta í þessa stöðu.';
-$s_bug_actiongroup_category = 'Þessu atriði er ekki hægt að breyta í þennan verkþátt.';
-$s_close_bugs_conf_msg = 'Ertu viss um að vilja loka þessu atriði?';
-$s_delete_bugs_conf_msg = 'Ertu viss um að vilja eyða þessu atriði?';
-$s_move_bugs_conf_msg = 'Færa atriði til';
-$s_copy_bugs_conf_msg = 'Afrita atriði til';
-$s_assign_bugs_conf_msg = 'Úthluta atriði til';
-$s_resolve_bugs_conf_msg = 'Velja úrlausn atriðis';
-$s_priority_bugs_conf_msg = 'Velja forgang atriðis';
-$s_status_bugs_conf_msg = 'Velja stöðu atriðis';
-$s_view_status_bugs_conf_msg = 'Velja uppfærða stöðu atriðis';
-$s_category_bugs_conf_msg = 'Velja verkþátt atriðis';
-$s_set_sticky_bugs_conf_msg = 'Ertu viss um að vilja setja límingu atriðis á/af?';
-$s_close_group_bugs_button = 'Loka atriði';
-$s_delete_group_bugs_button = 'Eyða atriði';
-$s_move_group_bugs_button = 'Færa atriði';
-$s_copy_group_bugs_button = 'Afrita atriði';
-$s_assign_group_bugs_button = 'Úthluta atriði';
-$s_resolve_group_bugs_button = 'Leysa atriði';
+$s_bug_actiongroup_status = 'Þessari beiðni er ekki hægt að breyta í þessa stöðu.';
+$s_bug_actiongroup_category = 'Þessari beiðni er ekki hægt að breyta í þennan verkþátt.';
+$s_close_bugs_conf_msg = 'Ertu viss um að vilja loka þessari beiðni?';
+$s_delete_bugs_conf_msg = 'Ertu viss um að vilja eyða þessari beiðni?';
+$s_move_bugs_conf_msg = 'Færa beiðni til';
+$s_copy_bugs_conf_msg = 'Afrita beiðni til';
+$s_assign_bugs_conf_msg = 'Úthluta beiðni til';
+$s_resolve_bugs_conf_msg = 'Velja lausn á beiðni';
+$s_priority_bugs_conf_msg = 'Velja forgang á beiðni';
+$s_status_bugs_conf_msg = 'Velja stöðu á beiðni';
+$s_view_status_bugs_conf_msg = 'Velja uppfærða stöðu á beiðni';
+$s_category_bugs_conf_msg = 'Velja verkþátt á beiðni';
+$s_set_sticky_bugs_conf_msg = 'Ertu viss um að vilja setja límingu verkbeiðnar af/á?';
+$s_close_group_bugs_button = 'Loka beiðni';
+$s_delete_group_bugs_button = 'Eyða beiðni';
+$s_move_group_bugs_button = 'Færa beiðni';
+$s_copy_group_bugs_button = 'Afrita beiðni';
+$s_assign_group_bugs_button = 'Úthluta beiðni';
+$s_resolve_group_bugs_button = 'Leysa beiðni';
 $s_priority_group_bugs_button = 'Uppfæra forgang';
 $s_status_group_bugs_button = 'Uppfæra stöðu';
 $s_category_group_bugs_button = 'Uppfæra verkþátt';
-$s_view_status_group_bugs_button = 'Uppfæra stöðu atriðis';
-$s_set_sticky_group_bugs_button = 'Setja límingu á/af';
+$s_view_status_group_bugs_button = 'Uppfæra stöðu á beiðni';
+$s_set_sticky_group_bugs_button = 'Setja límingu af/á';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Samþætt graf eftir stöðu';
@@ -186,7 +190,7 @@ $s_bugnote_title = 'Meðferð athugasemdar';
 $s_bugnote_date = 'Dagsetning athugasemdar';
 $s_bugnote_description = 'Lýsing athugasemdar';
 
-$s_error_no_proceed = 'Notaðu "Bakk" hnappinn á vafranum til að komast á fyrri síðu. Þar getur þú leiðrétt þau vandamál sem komu upp við þessa villu eða valið aðra aðgerð. Þú getur einnig valið möguleika frá valrönd til að fara beint yfir í ný atriði.';
+$s_error_no_proceed = 'Notaðu "Bakk" hnappinn á vafranum til að komast á fyrri síðu. Þar getur þú leiðrétt þau vandamál sem komu upp við þessa villu eða valið aðra aðgerð. Þú getur einnig valið möguleika frá valrönd til að fara beint yfir í nýja verkbeiðni.';
 
 # ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC] = 'Villa hefur orðið við þessa aðgerð. Þú ættir að tilkynna það til verkefnisstjóra.';
@@ -211,7 +215,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Athugasemd fannst ekki.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Verkefni fannst ekki.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Gagnagrunns svæðið \'%s\' fannst ekki.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Get ekki tengst FTP þjóni.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Sá sem fer með atriðið hefur ekki nægilegan aðgang til þess að meðhöndla það á þessu stigi.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Sá sem fer með verkbeiðnina hefur ekki nægilegan aðgang til þess að meðhöndla það á þessu stigi.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Verkefni með sama nafni er þegar til staðar. Farðu til baka og settu inn nýtt nafn.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ógilt verkefnisnafn uppgefið. Verkefnisnöfn geta ekki verið auð.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Notandi finnst ekki.';
@@ -222,7 +226,7 @@ $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Lykilorð stenst ekki sta�
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Búist var við fylki en í staðin kom strengur fyrir %s.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Búist var við streng en fylki kom í staðin fyrir %s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Búist var við tölu fyrir %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Atriði %d finnst ekki.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Verkbeiðni %d finnst ekki.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Sía %d finnst ekki.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Sían sem þú ert að reyna að nota er of gömul til að vera uppfærð, endurskapaðu hana';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Ógilt tölvupóstfang.';
@@ -232,7 +236,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Þetta er afrit. Eyddu skránni fyrst.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Óleyfileg slóð upphlaðningar. Annaðhvort er skráin ekki til eða ekki skrifanleg á vefþjón.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Engri skrá var upphlaðið. Farið til baka og veljið skrá áður en ýtt er á upphlaðningu.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Upphlaðna skrá er ekki hægt að færa yfir á geymslu skrá. Skráin er annað hvort ekki  til eða ekki skrifanleg á vefþjón.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Þú getur ekki sett inn atriði sem afrit af sjálfu sér.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Þú getur ekki sett inn beiðni sem afrit af sjálfu sér.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Sérsniðið svæði finnst ekki';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Þetta er nafn afrits.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Að minnsta kosti eitt verkefni notar þetta svæði.';
@@ -260,11 +264,11 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does no
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Stillimöguleiki \'%s\'hefur ógilt gildi \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Ekki er hægt að framkvæma aðgerðina þar sem atriði \'%d\' er aðeins lesanlegt.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Það eru þegar tengsl milli þessara atriða.";
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Ekki er hægt að framkvæma aðgerðina þar sem beiðnin \'%d\' er aðeins lesanlegt.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Það eru þegar tengsl milli þessara beiðna.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Engin tengsl fundust.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Aðgangi hafnað: Atriði %d krefst hærri aðgangs heimildar.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Atriði getur ekki tengst sjálfu sér.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Aðgangi hafnað: Beiðni %d krefst hærri aðgangs heimildar.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Beiðnin getur ekki tengst sjálfu sér.";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Staðfestingin hefur ekki gildi. Reyndu aftur.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Möguleikinn  \'týnt lykilorð\' er ekki tiltækur.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Þú verður að gefa upp tölvupóstfang til að endurstilla lykilorðið.';
@@ -322,36 +326,36 @@ $s_new_account_signup_msg = 'Eftirfarandi aðgangur hefur verið leyfður:';
 $s_reset_request_msg = 'Einhver (líklega þú) óskaðir eftir að breyta lykilorði með staðfestum tölvupósti. Ef þetta var ekki þú, hunsaðu þessi boð og ekkert mun gerast.' . "\n\n" . 'Ef þú óskaðir eftir þessari staðfestingu, heimsóttu eftirfarandi veffang til þess að breyta lykilorðinu:';
 $s_reset_request_in_progress_msg = 'Ef þú hefur gefið upp rétt lykilorð og tölvupóstfang fyrir aðgang þinn, munum við nú hafa sent staðfest boð til uppgefins tölvupóstfangs. Þegar þessi boð hafa verið móttekinn, fylgdu eftir leiðbeiningunum til þess að breyta lykilorði fyrir þinn aðgang.';
 
-$s_email_notification_title_for_status_bug_new = 'Eftirfarandi atriði er (aftur) í stöðu NÝTT';
-$s_email_notification_title_for_status_bug_feedback = 'Eftirfarandi atriði krefst VIÐBRAGÐA frá þér.';
-$s_email_notification_title_for_status_bug_acknowledged = 'Eftirfarandi atriði hefur verið MÓTTEKIÐ.';
-$s_email_notification_title_for_status_bug_confirmed = 'Eftirfarandi atriði er STAÐFEST.';
-$s_email_notification_title_for_status_bug_assigned = 'Eftirfarandi atriði hefur verið ÚTHLUTAÐ.';
-$s_email_notification_title_for_status_bug_resolved = 'Eftirfarandi atriði hefur verið LEYST.';
-$s_email_notification_title_for_status_bug_closed = 'Eftirfarandi atriði hefur verið LOKAÐ.';
+$s_email_notification_title_for_status_bug_new = 'Eftirfarandi beiðni er (aftur) í stöðu NÝTT';
+$s_email_notification_title_for_status_bug_feedback = 'Eftirfarandi beiðni krefst VIÐBRAGÐA frá þér.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Eftirfarandi beiðni hefur verið MÓTTEKIÐ.';
+$s_email_notification_title_for_status_bug_confirmed = 'Eftirfarandi beiðni er STAÐFEST.';
+$s_email_notification_title_for_status_bug_assigned = 'Eftirfarandi beiðni hefur verið ÚTHLUTAÐ.';
+$s_email_notification_title_for_status_bug_resolved = 'Eftirfarandi beiðni hefur verið LEYST.';
+$s_email_notification_title_for_status_bug_closed = 'Eftirfarandi beiðni hefur verið LOKAÐ.';
 
-$s_email_notification_title_for_action_bug_submitted = 'Eftirfarandi atriði hefur verið SENT.';
-$s_email_notification_title_for_action_bug_assigned = 'Eftirfarandi atriði hefur verið ÚTHLUTAÐ.';
-$s_email_notification_title_for_action_bug_reopened = 'Eftirfarandi atriði hefur verið OPNAÐ AFTUR.';
-$s_email_notification_title_for_action_bug_deleted = 'Eftirfarandi atriði hefur verið EYTT.';
-$s_email_notification_title_for_action_bug_updated = 'Eftirfarandi atriði hefur verið UPPFÆRT.';
+$s_email_notification_title_for_action_bug_submitted = 'Eftirfarandi beiðni hefur verið SENT.';
+$s_email_notification_title_for_action_bug_assigned = 'Eftirfarandi beiðni hefur verið ÚTHLUTAÐ.';
+$s_email_notification_title_for_action_bug_reopened = 'Eftirfarandi beiðni hefur verið OPNAÐ AFTUR.';
+$s_email_notification_title_for_action_bug_deleted = 'Eftirfarandi beiðni hefur verið EYTT.';
+$s_email_notification_title_for_action_bug_updated = 'Eftirfarandi beiðni hefur verið UPPFÆRT.';
 $s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
 $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'Athugasemd hefur verið bætt við þetta atriði.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "Eftirfarandi atriði hefur verið sett sem AFRIT AF atriði %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "Atriðið %s hefur verið sett sem AFRIT AF eftirfarandi atriði.";
-$s_email_notification_title_for_action_related_to_relationship_added = "Eftirfarandi atriði hefur verið sett sem TENGT VIÐ atriði %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "Eftirfarandi atriði hefur verið sett sem HÁÐUR AF atriði %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "Eftirfarandi atriði hefur verið sett sem TÁLMAÐUR AF atriði %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Eftirfarandi atriði hefur verið tekið af sem AFRIT af atriði %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Atriðið %s hefur verið fjarlægt sem AFRIT af eftirfarandi atriði.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "Eftirfarandi atriði hafa verið merkt sem ÓTENGD atriði %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Eftirfarandi atriði hefur verið fjarlægt sem TENGSL VIÐ atriði %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "Eftirfarandi atriði hefur verið fjarlægt sem TÁLMAÐUR AF atriði %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "Atriði TENGT %s hefur verið LEYST.";
-$s_email_notification_title_for_action_relationship_child_closed = "Atriði TENGT %s hefur verið LOKAÐ.";
+$s_email_notification_title_for_action_bugnote_submitted = 'Athugasemd hefur verið bætt við þessa beiðni.';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "Eftirfarandi beiðni hefur verið sett sem AFRIT AF beiðni %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "Atriðið %s hefur verið sett sem AFRIT AF eftirfarandi beiðni.";
+$s_email_notification_title_for_action_related_to_relationship_added = "Eftirfarandi beiðni hefur verið sett sem TENGT VIÐ beiðni %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "Eftirfarandi beiðni hefur verið sett sem HÁÐ AF beiðni %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "Eftirfarandi beiðni hefur verið sett sem TÁLMUÐ AF beiðni %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Eftirfarandi beiðni hefur verið tekið af sem AFRIT af beiðni %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Verkbeiðnin %s hefur verið fjarlægð sem AFRIT af eftirfarandi verkbeiðni.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "Eftirfarandi beiðni hafa verið merkt sem ÓTENGD beiðni %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Eftirfarandi beiðni hefur verið fjarlægð sem TENGSL VIÐ beiðni %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "Eftirfarandi beiðni hefur verið fjarlægð sem TÁLMUÐ AF beiðni %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "Beiðni TENGD %s hefur verið LEYST.";
+$s_email_notification_title_for_action_relationship_child_closed = "Beiðni TENGd %s hefur verið LOKAÐ.";
 
 $s_email_reporter = 'Tilkynnt af';
 $s_email_handler = 'Úthlutað til';
@@ -488,33 +492,33 @@ $s_multiple_projects = 'Atriðin sem þú hefur valið tilheyra öðrum verkefnu
 $s_bug_assign_msg = 'Efninu hefur verið úthlutað...';
 
 # bug_change_status_page.php
-$s_new_bug_title = 'Nýtt atriði';
-$s_feedback_bug_title = 'Óska viðbragða við atriði';
-$s_acknowledged_bug_title = 'Móttekið atriði';
-$s_confirmed_bug_title = 'Staðfesta atriði';
-$s_assigned_bug_title = 'Úthluta atriði';
-$s_new_bug_button = 'Nýtt atriði';
+$s_new_bug_title = 'Ný verkbeiðni';
+$s_feedback_bug_title = 'Óska viðbragða við beiðni';
+$s_acknowledged_bug_title = 'Móttekin beiðni';
+$s_confirmed_bug_title = 'Staðfesta beiðni';
+$s_assigned_bug_title = 'Úthluta beiðni';
+$s_new_bug_button = 'Ný verkbeiðni';
 $s_feedback_bug_button = 'Óska viðbragða';
-$s_acknowledged_bug_button = 'Móttaka atriði';
-$s_confirmed_bug_button = 'Staðfesta atriði';
-$s_assigned_bug_button = 'Úthluta atriði';
+$s_acknowledged_bug_button = 'Móttaka á verkbeiðni';
+$s_confirmed_bug_button = 'Staðfesta verkbeiðni';
+$s_assigned_bug_button = 'Úthluta verkbeiðni';
 
 # bug_close.php
-$s_bug_close_msg = 'Atriðinu hefur verið lokað...';
+$s_bug_close_msg = 'Beiðninni hefur verið lokað...';
 $s_close_immediately = 'Lokist strax:';
 
 # bug_close_page.php
-$s_closed_bug_title = 'Loka atriði';
+$s_closed_bug_title = 'Loka beiðni';
 
 # bug_delete.php
-$s_bug_deleted_msg = 'Atriðinu hefur verið eytt...';
+$s_bug_deleted_msg = 'Verkbeiðninni hefur verið eytt...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = 'Ertu viss um að þú viljir eyða þessu atriði?';
-$s_delete_bug_button = 'Eyða atriði';
+$s_delete_bug_sure_msg = 'Ertu viss um að þú viljir eyða þessari beiðni?';
+$s_delete_bug_button = 'Eyða beiðni';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Vakta atriði';
+$s_monitor_bug_button = 'Vakta beiðni';
 $s_unmonitor_bug_button = 'Hætta vöktun';
 
 # bug_file_add.php
@@ -527,17 +531,17 @@ $s_upload_file_button = 'Upphala skrá';
 $s_max_file_size = 'Hámarks stærð';
 
 # bug_reopen.php
-$s_bug_reopened_msg = 'Atriðið hefur verið opnað aftur...';
-$s_reopen_add_bugnote_title = 'Settu ástæðu til að opna atriði aftur';
-$s_bugnote_add_reopen_button = 'Settu athugasemd og opnaðu atriðið aftur';
+$s_bug_reopened_msg = 'Verkbeiðnin hefur verið opnað aftur...';
+$s_reopen_add_bugnote_title = 'Settu ástæðu til að opna beiðnina aftur';
+$s_bugnote_add_reopen_button = 'Settu athugasemd og opnaðu beiðnina aftur';
 
 # bug_resolve_page.php
-$s_resolved_bug_title = 'Leysa atriði';
-$s_resolved_bug_button = 'Leysa atriði';
+$s_resolved_bug_title = 'Leysa beiðni';
+$s_resolved_bug_button = 'Leysa beiðni';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Atriði hefur verið leyst. Settu athugasemd fyrir neðan...';
-$s_resolve_add_bugnote_title = 'Settu athugasemd um að atriðið var leyst';
+$s_bug_resolved_msg = 'Beiðnin hefur verið leyst. Settu athugasemd fyrir neðan...';
+$s_resolve_add_bugnote_title = 'Settu athugasemd um að beiðnin var leyst';
 $s_bugnote_add_resolve_button = 'Bæta við athugasemd';
 
 # bug_reminder_page.php
@@ -548,20 +552,20 @@ $s_bug_reminder = 'Senda minnisatriði';
 $s_reminder_sent_to = 'Minnisatriði sent til';
 $s_bug_send_button = 'Senda';
 $s_reminder = 'Minnisatriði';
-$s_reminder_explain = 'Þessi athugasemd mun verða send til allra sem hafa óskað eftir viðbrögðum við þessu atriði.';
-$s_reminder_monitor = 'Þessir viðtakendur munu einnig vakta atriðið. Þeir geta afskráð sig með því að nota hnappinn Hætta vöktun.';
-$s_reminder_store = 'Þessi athugasemd verður vistuð með atriðinu.';
+$s_reminder_explain = 'Þessi athugasemd mun verða send til allra sem hafa óskað eftir viðbrögðum við þessari beiðni.';
+$s_reminder_monitor = 'Þessir viðtakendur munu einnig vakta beiðnina. Þeir geta afskráð sig með því að nota hnappinn Hætta vöktun.';
+$s_reminder_store = 'Þessi athugasemd verður vistuð með beiðninni.';
 
 # bug_set_sponsorship.php
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
-$s_bug_updated_msg = 'Atriðið hefur verið uppfært...';
+$s_bug_updated_msg = 'Verkbeiðnin hefur verið uppfært...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = 'Aftur til atriðis';
+$s_back_to_bug_link = 'Aftur til beiðni';
 $s_update_simple_link = 'Einföld uppfærsla';
-$s_updating_bug_advanced_title = 'Uppfæri upplýsingar um atriði';
+$s_updating_bug_advanced_title = 'Uppfæri upplýsingar um beiðni';
 $s_id = 'ID';
 $s_category = 'Verkþáttur';
 $s_severity = 'Mikilvægi';
@@ -586,12 +590,12 @@ $s_summary = 'Yfirlit';
 $s_description = 'Lýsing';
 $s_steps_to_reproduce = 'Skref til endursköpunar';
 $s_update_information_button = 'Uppfæra upplýsingar';
-$s_sticky_issue = 'Límt atriði';
+$s_sticky_issue = 'Límd verkbeiðni';
 $s_profile = 'Snið';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Hærri uppfærsla';
-$s_updating_bug_simple_title = 'Uppfæri upplýsingar um atriði';
+$s_updating_bug_simple_title = 'Uppfæri upplýsingar um beiðni';
 
 # bug_vote_add.php
 $s_vote_added_msg = 'Atkvæði hefur bæst við...';
@@ -607,12 +611,12 @@ $s_bug_notes_title = 'Athugasemd';
 $s_edit_bugnote_title = 'Skrifa athugasemd';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'Það er enginn athugasemd tengt þessu atriði.';
+$s_no_bugnotes_msg = 'Það er enginn athugasemd tengd þessari beiðni.';
 $s_delete_link = 'Eyða';
 $s_add_bugnote_title = 'Bæta við athugasemd';
 $s_add_bugnote_button = 'Bæta við athugasemd';
 $s_bugnote_edit_link = 'Skrifa';
-$s_closed_bug_button = 'Loka atriði';
+$s_closed_bug_button = 'Loka verkbeiðni';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'Athugasemdin hefur verið uppfærð...';
@@ -628,7 +632,7 @@ $s_click_to_login = 'Ýtið hér til innskráningar';
 
 # login_page.php
 #@@@ should the following string be related to $g_window_title?
-$s_login_page_info = 'Velkominn í tilkynningakerfið.';
+$s_login_page_info = 'Velkomin í verkbeiðnakerfið.';
 $s_login_title = 'Innskráning';
 $s_save_login = 'Vista innskráningu';
 $s_choose_project = 'Velja verkefni';
@@ -702,8 +706,8 @@ $s_config_project = 'Athugið: Þessi stilling gildir aðeins fyrir %s verkefni.
 $s_colour_coding = 'Í töflunni fyrir neðan, gilda eftirfarandi litakóðar:';
 $s_colour_project = 'Verkefnastillingin skrifar yfir aðra.';
 $s_colour_global = 'Allar verkefnastillingarnar skrifa yfir sjálfgefna stillingu.';
-$s_issue_reporter = 'Notandinn sem tilkynnti um atriðið';
-$s_issue_handler = 'Notandinn sem meðhöndlar atiðið';
+$s_issue_reporter = 'Notandinn sem tilkynnti um beiðnina';
+$s_issue_handler = 'Notandinn sem meðhöndlar beiðnina';
 $s_users_added_bugnote = 'Notandinn sem bætti við athugasemd';
 $s_change_configuration = 'Uppfæra stillingar';
 $s_message = 'Skilaboð';
@@ -726,13 +730,13 @@ $s_alter_level = 'Hver getur breytt þessu gildi';
 $s_validation = 'Staðfesting á verkefnaflæði';
 $s_comment = 'Ábending um verkefnaflæði';
 $s_superfluous = 'ör frá stöðu að því sjálfu er undanskilið og þarfnast því ekki aðgerða.';
-$s_unreachable = 'Þú getur ekki fært atriði í þessa stöðu';
-$s_no_exit = 'Þú getur ekki fært atrið úr þessari stöðu';
+$s_unreachable = 'Þú getur ekki fært beiðni í þessa stöðu';
+$s_no_exit = 'Þú getur ekki fært beiðni úr þessari stöðu';
 $s_access_levels = 'Aðgangsstig';
 $s_access_change = 'Lágmarks aðgangsstig til að breyta þessari stöðu';
-$s_desc_bug_submit_status = 'Staða sem ný atriði fá';
-$s_desc_bug_reopen_status = 'Staða sem enduropnuðu atriði fá';
-$s_desc_bug_resolved_status_threshold = 'Staða þar sem atriði er álitið leyst';
+$s_desc_bug_submit_status = 'Staða sem nýjar beiðnir fá';
+$s_desc_bug_reopen_status = 'Staða sem enduropnaðar beiðnir fá';
+$s_desc_bug_resolved_status_threshold = 'Staða þar sem beiðnin er álitin leyst';
 $s_workflow_change_access = 'Hver getur breytt verkefnaflæði';
 $s_access_change_access = 'Hver getur breytt aðgangsstigi';
 
@@ -740,19 +744,19 @@ $s_access_change_access = 'Hver getur breytt aðgangsstigi';
 $s_default_not_in_flow = 'Sjálfgefin staða %s er ekki valinn fyrir næstu stöðu %s. Því verður hafnað';
 
 # manage_config_work_threshold_page
-$s_assign_issue = 'Úthluta atriði';
-$s_allow_close_immediate = 'Heimila að Leystu atriði sé lokað';
-$s_allow_reporter_close = 'Heimila tilkynnanda að loka atriði';
-$s_allow_reporter_reopen = 'Heimila tilkynnanda að opna aftur atriði';
+$s_assign_issue = 'Úthluta verkbeiðni';
+$s_allow_close_immediate = 'Heimila að Leystri beiðni sé lokað';
+$s_allow_reporter_close = 'Heimila tilkynnanda að loka beiðni';
+$s_allow_reporter_reopen = 'Heimila tilkynnanda að opna aftur beiðni';
 $s_set_status_assigned = 'Setja úthlutunarstöðu á höndlara atriðis';
 $s_allow_user_edit = 'Heimila notanda að skrifa sínar eigin athugasemdir';
-$s_limit_access = 'Takmarka aðgang tilkynnanda að sínum eigin atriðum';
-$s_submit_status = 'Staða sem ný atriði fá';
-$s_assigned_status = 'Staða sem sjálfvirk úthlutuð atrið fá';
-$s_resolved_status = 'Staða þar sem atriði er álitið leyst';
-$s_readonly_status = 'Staða þar sem atriði verður aðeins lesanlegt';
-$s_reopen_status = 'Staða sem enduropnuð atriði fá';
-$s_reopen_resolution = 'Úrlausn sem enduropnuð atriði fá';
+$s_limit_access = 'Takmarka aðgang tilkynnanda að sinni eigin beiðni';
+$s_submit_status = 'Staða sem nýjar beiðnir fá';
+$s_assigned_status = 'Staða sem sjálfvirk úthlutaðar beiðnir fá';
+$s_resolved_status = 'Staða þar sem beiðni er álitin leyst';
+$s_readonly_status = 'Staða þar sem beiðni verður aðeins lesanlegt';
+$s_reopen_status = 'Staða sem enduropnuð beiðni fær';
+$s_reopen_resolution = 'Úrlausn sem enduropnaðar beiðnir fá';
 
 # manage_config_revert_page
 $s_config_delete_sure = 'Ertu viss um að vilja eyða stillingum fyrir';
@@ -825,7 +829,7 @@ $s_unlink_link = 'Aftengja';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Bæta við verkefni';
-$s_upload_file_path = 'Upphala skrár slóð';
+$s_upload_file_path = 'Upphala slóð skráar';
 $s_add_project_button = 'Bæta við verkefni';
 $s_projects_title = 'Verkefni';
 $s_name = 'Nafn';
@@ -882,8 +886,8 @@ $s_manage_user_updated_msg = 'Aðgangsheimild uppfærð...';
 
 # menu_inc.php
 $s_main_link = 'Aðalsíða';
-$s_view_bugs_link = 'Skoða atriði';
-$s_report_bug_link = 'Tilkynna atriði';
+$s_view_bugs_link = 'Skoða verkbeiðni';
+$s_report_bug_link = 'Verkbeiðni';
 $s_changelog_link = 'Breytingaskrá';
 $s_summary_link = 'Yfirlit';
 $s_account_link = 'Minn aðgangur';
@@ -1059,8 +1063,8 @@ $s_percentage_fixed = '% lagað';
 $s_percentage_errors = '% óleyst';
 $s_errors = 'Óleyst';
 $s_total = 'Alls';
-$s_time_stats = 'Tíma-tölfræði á úrlausn atriða (dagar)';
-$s_longest_open_bug = 'Atriði lengst opið';
+$s_time_stats = 'Tíma-tölfræði á úrlausn beiðna (dagar)';
+$s_longest_open_bug = 'Beiðni lengst opin';
 $s_longest_open = 'Lengst opið';
 $s_average_time = 'Meðal tími';
 $s_total_time = 'Heildar tími';
@@ -1072,11 +1076,11 @@ $s_orct = '(opið/leyst/lokað/alls)';
 $s_any = 'allir';
 $s_show = 'Sýna';
 $s_changed = 'Breytt (tími)';
-$s_viewing_bugs_title = 'Skoða atriði';
+$s_viewing_bugs_title = 'Skoða beiðni';
 $s_updated = 'Uppfært';
 $s_sticky = 'Sýna límd atriði';
 $s_sort = 'Raða eftir';
-$s_issue_id = 'Atriði #';
+$s_issue_id = 'Beiðni #';
 $s_recently_visited = 'Nýlega sótt';
 
 # view_all_inc.php
@@ -1115,14 +1119,14 @@ $s_query_delete_msg = 'Ertu viss um að þú viljir eyða þessari fyrirspurn?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Einföld skoðun';
-$s_viewing_bug_advanced_details_title = 'Ítarleg yfirsýn yfir atriði í þessu verkefni';
+$s_viewing_bug_advanced_details_title = 'Ítarleg yfirsýn yfir verkbeiðnir í þessu verkefni';
 $s_product_build = 'Útgáfa verkefnis';
 $s_system_profile = 'Lýsing kerfis';
-$s_update_bug_button = 'Uppfæra atriði';
+$s_update_bug_button = 'Uppfæra beiðni';
 $s_bug_assign_to_button = 'Úthluta til';
 $s_bug_status_to_button = 'Breyta stöðu í';
-$s_reopen_bug_button = 'Enduropna atriði';
-$s_move_bug_button = 'Færa atriði';
+$s_reopen_bug_button = 'Enduropna verkbeiðni';
+$s_move_bug_button = 'Færa beiðni';
 $s_attached_files = 'Viðhengdar skrár';
 $s_publish = 'Útgefið';
 $s_cached = 'Falið';
@@ -1131,11 +1135,11 @@ $s_cached = 'Falið';
 
 # view_bug_page.php
 $s_view_advanced_link = 'Ítarleg skoðun';
-$s_viewing_bug_simple_details_title = 'Einföld skoðun yfir atriði í þessu verkefni';
+$s_viewing_bug_simple_details_title = 'Einföld skoðun yfir verkbeiðnir í þessu verkefni';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'Það er enginn notandi að vakta þetta atriði.';
-$s_users_monitoring_bug = 'Notendur sem vakta þetta atriði';
+$s_no_users_monitoring_bug = 'Það er enginn notandi að vakta þessa beiðni.';
+$s_users_monitoring_bug = 'Notendur sem vakta þessa beiðni';
 $s_monitoring_user_list = 'Notenda listi';
 
 # bug_sponsorship_list_view_inc.php
@@ -1164,10 +1168,10 @@ $s_custom_field_access_level_rw = 'Skrifaðgangur';
 $s_custom_field_length_min = 'Lágmarks lengd';
 $s_custom_field_length_max = 'Hámarks lengd';
 $s_custom_field_advanced = 'Sýna aðeins á hærra stigi';
-$s_custom_field_display_report = 'Sýna þegar atriði er tilkynnt';
-$s_custom_field_display_update = 'Sýna þegar atriði er uppfært';
-$s_custom_field_display_resolved = 'Sýna þegar atriði er leyst';
-$s_custom_field_display_closed = 'Sýna þegar atriði er lokað';
+$s_custom_field_display_report = 'Sýna þegar beiðni er tilkynnt';
+$s_custom_field_display_update = 'Sýna þegar beiðni er uppfærð';
+$s_custom_field_display_resolved = 'Sýna þegar beiðni er leyst';
+$s_custom_field_display_closed = 'Sýna þegar beiðni er lokað';
 $s_custom_field_require_report = 'Krafa í skýrslu';
 $s_custom_field_require_update = 'Krafa í uppfærslu';
 $s_custom_field_require_resolved = 'Krafa við lausn';
@@ -1219,24 +1223,24 @@ $s_changelog = 'Breyta dagbók';
 # Http auth
 $s_http_auth_realm = "Mantis innskráning";
 
-$s_bug = "atriði";
+$s_bug = "verkbeiðni";
 $s_add_new_relationship = "Ný tengsl";
 $s_add_new_relationship_button = "Viðbót";
-$s_this_bug = "Núverandi atriði";
+$s_this_bug = "Núverandi beiðni";
 $s_relationship_added = "Tengslum bætt við";
 $s_relationship_deleted = "Tengslum eytt";
 $s_no_relationship = "enginn tengsl";
 $s_relationship_replaced = "Tengsl endurnýjuð";
 $s_replace_relationship_button = "Endurnýja";
-$s_replace_relationship_sure_msg = "Það eru þegar tengsl milli þessara tveggja atriða. Ertu viss um að þú viljir endurnýja þau?";
-$s_relationship_with_parent = "Tengsl við æðra atriði";
+$s_replace_relationship_sure_msg = "Það eru þegar tengsl milli þessara tveggja beiðna. Ertu viss um að þú viljir endurnýja þau?";
+$s_relationship_with_parent = "Tengsl við æðri beiðni";
 $s_delete_relationship_button = "Eyða";
 $s_delete_relationship_sure_msg = "Ertu viss um að vilja eyða þessum tengslum?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Ekki er búið að leysa eða loka öllum undiratriðum þessa atriðis.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATHUGAÐU</b>. Ekki hafa öll undiratriði þessa atriðis enn verið leyst eða lokuð.<br />Áður en hægt er að <b>leysa/loka<b> æðra atriði þarf að vera búið að leysa eða loka öllum undiratriðum tengdum þessu atriði.";
+$s_relationship_warning_blocking_bugs_not_resolved = "Ekki er búið að leysa eða loka öllum undiratriðum þessarar beiðni.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATHUGAÐU</b>. Ekki hafa öll undiratriði þessarar beiðni enn verið leyst eða lokuð.<br />Áður en hægt er að <b>leysa/loka<b> æðri beiðni þarf að vera búið að leysa eða loka öllum undiratriðum tengdum þessari beiðni.";
 $s_create_child_bug_button = "Útbúa samrit";
-$s_bug_cloned_to = "Samrit atriðis";
-$s_bug_created_from = "Atriði myndað af";
+$s_bug_cloned_to = "Samrit verkbeiðnar";
+$s_bug_created_from = "Beiðni mynduð af";
 
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Skyldleika graf";
@@ -1244,7 +1248,7 @@ $s_relation_graph = "Tengsla graf";
 $s_dependency_graph = "Tengsla graf æðri/undir";
 $s_vertical = "Lóðrétt";
 $s_horizontal = "Lárétt";
-$s_view_issue = "Skoða atriði";
+$s_view_issue = "Skoða beiðni";
 
 # Source Control Integration
 $s_checkin = 'Skráning inn';
@@ -1252,20 +1256,20 @@ $s_checkin = 'Skráning inn';
 # Pemissions report
 $s_perm_rpt_capability = 'Möguleikar';
 $s_view = 'Skoða';
-$s_issues = 'ATRIÐI';
-$s_report_issue = 'Tilkynna atriði';
-$s_update_issue = 'Uppfæra atriði';
-$s_monitor_issue = 'Vakta atriði';
-$s_handle_issue = 'Annast atriði';
-$s_move_issue = 'Færa atriði';
-$s_delete_issue = 'Eyða atriði';
-$s_reopen_issue = 'Enduropna atriði';
-$s_view_private_issues = 'Skoða læst atriði';
-$s_update_readonly_issues = 'Uppfæri lesaðgang atriðis';
-$s_update_issue_status = 'Uppfæri stöðu atriðis';
+$s_issues = 'VERKBEIÐNI';
+$s_report_issue = 'Tilkynna beiðni';
+$s_update_issue = 'Uppfæra beiðni';
+$s_monitor_issue = 'Vakta beiðni';
+$s_handle_issue = 'Annast beiðni';
+$s_move_issue = 'Færa beiðni';
+$s_delete_issue = 'Eyða beiðni';
+$s_reopen_issue = 'Enduropna beiðni';
+$s_view_private_issues = 'Skoða læsta beiðni';
+$s_update_readonly_issues = 'Uppfæri lesaðgang beiðni';
+$s_update_issue_status = 'Uppfæri stöðu á beiðni';
 $s_set_view_status = 'Setja skoðunarstöðu (almennt eða læst)';
 $s_update_view_status = 'Uppfæri skoðunarstöðu (almennt eða læst)';
-$s_show_list_of_users_monitoring_issue = 'Sýna lista með notendum sem vakta atriðið';
+$s_show_list_of_users_monitoring_issue = 'Sýna lista með notendum sem vakta beiðnina';
 $s_notes = 'ATHUGASEMDIR';
 $s_add_notes = 'Bæta við athugasemdum';
 $s_update_notes = 'Uppfæri athugasemdir';
@@ -1279,7 +1283,7 @@ $s_download_attachments = 'Niðurhala viðhengi';
 $s_delete_attachments = 'Eyða viðhengi';
 $s_delete_attachment_button = "Eyða";
 $s_delete_attachment_sure_msg = "Ertu viss um að þú viljir eyða þessu viðhengi?";
-$s_upload_issue_attachments = 'Upphala viðhengi með atriðinu';
+$s_upload_issue_attachments = 'Upphala viðhengi með beiðninni';
 $s_filters = 'síur';
 $s_save_filters = 'Vista síur';
 $s_save_filters_as_shared = 'Vista síur sem samnýttar';
@@ -1330,5 +1334,3 @@ $s_on = 'Á';
 
 # wiki related strings
 $s_wiki = 'Wiki';
-
-?>
