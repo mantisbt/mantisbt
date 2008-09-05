@@ -60,23 +60,23 @@
 	}
 
 	if (sizeof($t_lang_files) > 0 ) {
-		echo 'Retrived ' , sizeof($t_lang_files) , ' languages<br />';
+		echo 'Retrieved ' , sizeof($t_lang_files) , ' languages<br />';
 		
 		foreach ( $t_lang_files as $file ) {
-			echo "Testing language file '$file' (phase 1)...<br />";
+			$t_short_name = $file;
+
+			echo "Testing language file '$t_short_name' (phase 1)...<br />";
 			flush();
 			
 			$file = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . $file;
 			
 			$result = checktoken($file);
 			
-			if ($result == true ) {
-			
-			} else {
-				print_error ("FAILED: Language file $file failed at phase 1");
+			if ( !$result ) {
+				print_error ("FAILED: Language file '$t_short_name' failed at phase 1.");
 			}
-			
-			echo "Testing language file '$file' (phase 2)...<br />";		
+
+			echo "Testing language file '$t_short_name' (phase 2)...<br />";		
 			flush();
 			
 			set_error_handler( 'lang_error_handler' );
@@ -87,10 +87,11 @@
 			restore_error_handler();
 
 			if ($result === false ) {
-				print_error ("FAILED: Language file $file failed at eval");
+				print_error ("FAILED: Language file '$t_short_name' failed at eval");
 			}
+
 			if (strlen($data) > 0 ) {
-				print_error ("FAILED: Language file $file failed at require_once (data output of length " .  strlen($data) . ")");			
+				print_error ("FAILED: Language file '$t_short_name' failed at require_once (data output of length " .  strlen($data) . ")");			
 			}
 		}
 	}
@@ -238,11 +239,9 @@
 	
 
 	function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-	 print_error ("error handler thrown: ",  $p_type, $p_error, $p_file, $p_line, $p_context);
+		print_error ("error handler thrown: ",  $p_type, $p_error, $p_file, $p_line, $p_context);
 	}
 
 	function print_error( $p_string ) {
-	 echo "<font color='red'>ERROR: ",  $p_string, '</font><br>';
+		echo "<font color='red'>ERROR: ",  $p_string, '</font><br>';
 	}
-
-?>
