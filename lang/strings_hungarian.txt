@@ -1,41 +1,39 @@
 <?php
-# Mantis - a php based bugtracking system
+/** Mantis - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ *
+ * Mantis is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Mantis is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * $Revision$
+ * $Author$
+ * $Date$
+ * $Id$
+ */
 
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+/**
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author CSÉCSY László, boobaa@nospam.frugalware.org (complete retranslation)
+ * @author Istvan Back, back@webmuves.hu
+ * @author Attila Vági, avagi@v-comp.hu
+ * @author Gergő Bácskai, gergo@bacskai.hu
+ */
 
-# Mantis is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# Mantis is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-	#
-	# Hungarian: CSÉCSY László, boobaa@nospam.frugalware.org (complete retranslation)
-	# Hungarian: Istvan Back, back@webmuves.hu
-	# Hungarian: Attila Vági, avagi@v-comp.hu
-	# Hungarian: Gergő Bácskai, gergo@bacskai.hu
-	#
-	# English: various developers
-	#
-	###########################################################################
-	# Hungarian strings for Mantis
-	# -------------------------------------------------
-	# $Revision$
-	# $Author$
-	# $Date$
-	#
-	# $Id$
-	###########################################################################
-
-?>
-<?php
 # Charset
 $s_charset = 'utf-8';
 
@@ -1453,5 +1451,3 @@ $s_show_as_table = 'Megjelenítés táblázatban';
 $s_show_graph = 'Diagram megjelenítése';
 $s_graph_page = 'Ügytörténeti diagram';
 $s_graph_bug_page_link = 'Diagramkészítés';
-
-?>

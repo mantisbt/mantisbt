@@ -1,42 +1,41 @@
 <?php
-# Mantis - a php based bugtracking system
+/** Mantis - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ *
+ * Mantis is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Mantis is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * $Revision$
+ * $Author$
+ * $Date$
+ * $Id$
+ */
 
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+/**
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Adam Bienias <adam@fireworks.atomnet.pl>
+ * @author Jaroslaw Lewandowski <jotel@jotel.net>
+ * @author Kacper Kruszewski <kacper@netcetera.pl>
+ * @author Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
+ * @author Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/08/10
+ * @author Marcin Ulanecki <marcin dot ulanecki at vm dot pl> 2005/09/17
+ */
 
-# Mantis is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# Mantis is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-	#
-	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
-	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
-	# Polish: Kacper Kruszewski <kacper@netcetera.pl>
-	# Polish: Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
-	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/08/10
-	# Polish: Marcin Ulanecki <marcin dot ulanecki at vm dot pl> 2005/09/17
-	#
-	###########################################################################
-	# Polish strings for Mantis
-	# Based on strings_english.txt rev. 1.???
-	# -------------------------------------------------
-	# $Revision$
-	# $Author$
-	# $Date$
-	#
-	# $Id$
-	###########################################################################
-
-?>
-<?php
 # Charset
 $s_charset = 'iso-8859-2';
 
@@ -1338,5 +1337,3 @@ $s_wiki = 'Wiki';
 
 $s_due_date = "Termin realizacji";
 $s_overdue = "Przeterminowane";
-
-?>

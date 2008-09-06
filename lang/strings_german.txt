@@ -1,43 +1,42 @@
 <?php
-# Mantis - a php based bugtracking system
+/** Mantis - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ *
+ * Mantis is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Mantis is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * $Revision$
+ * $Author$
+ * $Date$
+ * $Id$
+ */
 
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+/**
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Hermann-Josef Beckers, hjb-rheine@t-online.de
+ * @author Heiko Gierer, gierer@rittershaus.de
+ * @author Stefan Meier, Stefan.Meier@cimsource.com
+ * @author Matthias Bauer, mantis-de@moeffju.de
+ * @author Andre Eisenbach, andre@eisenbach.com
+ * @author Dr. Jürgen Kehrel, jkehrel@kehrel.de
+ * @author Martin Fuchs, martin-fuchs@gmx.net
+ */
 
-# Mantis is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# Mantis is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-	#
-	# German: Hermann-Josef Beckers, hjb-rheine@t-online.de
-	# German: Heiko Gierer, gierer@rittershaus.de
-	# German: Stefan Meier, Stefan.Meier@cimsource.com
-	# German: Matthias Bauer, mantis-de@moeffju.de
-	# German: Andre Eisenbach, andre@eisenbach.com
-	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
-	# German: Martin Fuchs, martin-fuchs@gmx.net
-	#
-	###########################################################################
-	# German strings for Mantis
-	# Based on strings_english.txt Revision 4927
-	# -------------------------------------------------
-	# $Revision$
-	# $Author$
-	# $Date$
-	#
-	# $Id$
-	###########################################################################
-
-?>
-<?php
 # Charset
 $s_charset = 'utf-8';
 
@@ -1484,5 +1483,3 @@ $s_show_as_table = 'Als Tabelle anzeigen';
 $s_show_graph = 'Grafik anzeigen';
 $s_graph_page = 'Grafische Eintrags-Historie';
 $s_graph_bug_page_link = 'Grafik';
-
-?>

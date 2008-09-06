@@ -1,68 +1,42 @@
 <?php
-# Mantis - a php based bugtracking system
+/** Mantis - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ *
+ * Mantis is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Mantis is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * $Revision$
+ * $Author$
+ * $Date$
+ * $Id$
+ */
 
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+/** Simplified Chinese
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Kai-Zheng Cheng, neek@sina.com
+ * @author Singoo, singoo@163.com
+ * @author zoomq@itcase.com
+ * @author liaobin@jite.net
+ * @author NetCobra, netcobra@gmail.com
+ * @author Hacked by justin schnell_18@yahoo.com
+ * @author Riceball LEE riceballl@hotmail.com
+ */
 
-# Mantis is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# Mantis is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-	#
-	# Chinese_Simplified: Kai-Zheng Cheng, neek@sina.com
-	# Chinese_Simplified: Singoo, singoo@163.com
-	# Chinese_Simplified: zoomq@itcase.com
-	# Chinese_Simplified: liaobin@jite.net
-	# Chinese_Simplified: NetCobra, netcobra@gmail.com
-	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
-	# Chinese_Simplified: Riceball LEE riceballl@hotmail.com
-	#
-	###########################################################################
-	# Mantis 1.1.0 简体中文语言包
-	# 有任何建议或意见请与我联系：netcobra@gmail.com，谢谢！
-	# Based on strings_english.txt rev. 1.294
-	# -------------------------------------------------
-	# $Revision$
-	# $Author$
-	# $Date$
-	#
-	# $Id$
-	###########################################################################
-	#Mantis 1.0.0 简体中文语言包的翻译说明(by NetCobra,2006-01-05)
-	#
-	#1.在此版本中将错误信息部分参照繁体中文语言包全部翻译，感谢繁体中文语言包的翻译
-	#  人 Pao-Hsi Huang；
-	#2.对于所有的“Issue”，我翻译为“问题”，但感觉仍然不是很准确；
-	#3.咨询网友后，“Sticky”翻译为置顶；
-	#4.对于$s_superfluous一句，因为无法明确地用中文表达，只翻译了后半句；
-	#
-	#有任何建议或意见请与我联系：netcobra@gmail.com，谢谢！
-	#
-	# Riceball LEE:
-	#   * Resolution -- 翻译为解决状况(而不是完成度，完成度和进度相当)
-	#   * Bug Tracking System -- 翻译为缺陷管理系统
-	#   * Always -- 应该翻译为 "总是"
-	#   * this_bug -- 应该是特指的“添加问题”。
-  #   * “管理全局配置”-- 实际上设置的是平台信息，所以改为 管理平台配置
-  #   * 优先权 -- 优先级
-  #   * Changelog -- 变更日志
-  #   * on_or_before -- 不晚于
-  #   * on_or_after -- 不早于
-  #   * Time tracking -- 实际上这里就是对时间做个记录，并根据记录的时间计算一个成本。翻译成记录更容易理解。
-	#   * the "phpmailer_language" is not the string to dispaly! Do not translate it!
-	#   * Update to 1.1.0a3-cvs
-	###########################################################################
-
-?>
-<?php
 # Charset
 $s_charset = 'utf-8';
 
@@ -1393,5 +1367,3 @@ $s_time_tracking_cost = '成本';
 $s_total_time_for_issue = '问题共计花费时间： %s';
 
 $s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
-
-?>

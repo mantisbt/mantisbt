@@ -1,41 +1,40 @@
 <?php
-# Mantis - a php based bugtracking system
+/** Mantis - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ *
+ * Mantis is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Mantis is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * $Revision$
+ * $Author$
+ * $Date$
+ * $Id$
+ */
 
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+/**
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Felipe Tonioli, tonioli@easyline.com.br
+ * @author Fernando Machado, fm-nospam@fmachado.com
+ * @author Juliano F. Ravasi, dev at juliano info
+ * @author André Sencioles, andre spiritlinux com br
+ * @author Jeferson Oliveira, jefersonfoliveira@gmail.com
+ */
 
-# Mantis is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# Mantis is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-	#
-	# Brazilian Portuguese: Felipe Tonioli, tonioli@easyline.com.br
-	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
-	# Brazilian Portuguese: Juliano F. Ravasi, dev at juliano info
-	# Brazilian Portuguese: André Sencioles, andre spiritlinux com br
-	# Brazilian Portuguese: Jeferson Oliveira, jefersonfoliveira@gmail.com
-	#
-	###########################################################################
-	# Brazilian Portuguese strings for Mantis
-	# Based on strings_english.txt rev. 1.316 $
-	# -------------------------------------------------
-	# $Revision$
-	# $Author$
-	# $Date$
-	#
-	# $Id$
-	###########################################################################
-
-?>
-<?php
 # Charset
 $s_charset = 'utf-8';
 
@@ -1452,4 +1451,3 @@ $s_show_as_table = 'Mostrar como Tabela';
 $s_show_graph = 'Mostrar Gráfico';
 $s_graph_page = 'Gráfico do histórico do caso';
 $s_graph_bug_page_link = 'Gráfico';
-?>

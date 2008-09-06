@@ -1,46 +1,47 @@
 <?php
-# Mantis - a php based bugtracking system
+/** Mantis - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ *
+ * Mantis is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Mantis is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * $Revision$
+ * $Author$
+ * $Date$
+ * $Id$
+ */
 
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-
-# Mantis is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# Mantis is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-	#
-	# French: Hellekin O. Wolf, hellekin@mmania.com
-	# French: Eric Hartmann, eric@rhinfo.com
-	# French: Samuel Tardieu, sam@rfc1149.net
-	# French: Quentin Delance, quentin.delance@insalien.org
-	# French: Roland Meyer, Daniel Coquette
-	# French: Jean-Charles Trosset, jean-charles.trosset@laposte.net
-	# French: Laurent LABAT, wizzz@apinc.org
-	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
-	# French: Réda Bourebaba, bzctoons@free.fr
-	# French-Canadian: Francis Labrie, francis.labrie@smoguli.com
-	# French-Canadian: Langis Gagnon, gagnon.langis@ic.gc.ca
-	# French-Canadian: Maurice A. LeBlanc, leblancma@cooptel.qc.ca
-	# French: Maurice A. LeBlanc, leblancma@cooptel.qc.ca
-	#
-	###########################################################################
-	# French strings for Mantis
-	# Based on strings_english.txt rev. 1.316
-	# -------------------------------------------------
-	# $Revision$
-	# $Author$
-	# $Date$
-	#
-	# $Id$
-	###########################################################################
+/**
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Samuel Tardieu, sam@rfc1149.net
+ * @author Hellekin O. Wolf, hellekin@mmania.com
+ * @author Eric Hartmann, eric@rhinfo.com
+ * @author Quentin Delance, quentin.delance@insalien.org
+ * @author Roland Meyer, Daniel Coquette
+ * @author Jean-Charles Trosset, jean-charles.trosset@laposte.net
+ * @author Laurent LABAT, wizzz@apinc.org
+ * @author Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
+ * @author Réda Bourebaba, bzctoons@free.fr
+ * @author Francis Labrie, francis.labrie@smoguli.com
+ * @author Langis Gagnon, gagnon.langis@ic.gc.ca
+ * @author Maurice A. LeBlanc, leblancma@cooptel.qc.ca
+ * @author Maurice A. LeBlanc, leblancma@cooptel.qc.ca
+ */
 
 # Charset
 $s_charset = 'utf-8';
