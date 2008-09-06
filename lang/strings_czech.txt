@@ -1,39 +1,40 @@
 ﻿<?php
-# Mantis - a php based bugtracking system
+/** Mantis - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ *
+ * Mantis is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Mantis is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * $Revision$
+ * $Author$
+ * $Date$
+ * $Id$
+ */
 
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-
-# Mantis is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# Mantis is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-  #
-  # Czech: Pavel Loupal, Pavel.Loupal@seznam.cz
-  # Czech: Jiri Kuchta, kuchta@feec.vutbr.cz
-  # Czech: Vít Jurásek, vit.jurasek@vegateam.cz
-  # Czech: Milan Cizek, cizek.milan@seznam.cz
-  # Czech: Přemek Brada, brada@kiv.zcu.cz
-  # Czech: Petr Švec, petr.svec@pak.izscr.cz
-  #
-  ###########################################################################
-  # Czech strings for Mantis
-  # Based on strings_english.txt rev. 1.318
-  # -------------------------------------------------
-  # $Revision$
-  # $Author$
-  # $Date$
-  #
-  # $Id$
-  ###########################################################################
+/** Czech
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Pavel Loupal, Pavel.Loupal@seznam.cz
+ * @author Jiri Kuchta, kuchta@feec.vutbr.cz
+ * @author Vít Jurásek, vit.jurasek@vegateam.cz
+ * @author Milan Cizek, cizek.milan@seznam.cz
+ * @author Přemek Brada, brada@kiv.zcu.cz
+ * @author Petr Švec, petr.svec@pak.izscr.cz
+ */
 
 # Charset
 $s_charset = 'utf-8';
