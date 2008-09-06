@@ -259,7 +259,11 @@
 		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
 	<?php } ?>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'priority' ) ?></td>
+	<?php if ( $t_show_version ) { ?>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'target_version' ) ?></td>
+	<?php } else { ?>
 	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 7 ) * $t_custom_cols ); ?>">&nbsp;</td>
+	<?php } ?>
 </tr>
 <tr class="row-1">
 	<!-- Status -->
@@ -300,7 +304,14 @@
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_priority(); ?>
 	</td>
-	<td colspan="<?php echo ( ( $t_filter_cols - 7 ) * $t_custom_cols ); ?>">&nbsp;</td>
+	<!-- Target Version -->
+	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+ 		<?php if ( $t_show_version ) {
+ 			print_filter_show_target_version();
+ 		} else {
+ 			echo "&nbsp;";
+ 		} ?>
+ 	</td>
 </tr>
 
 <tr class="row-category2">
