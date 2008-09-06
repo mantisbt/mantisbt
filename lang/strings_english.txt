@@ -247,8 +247,8 @@ $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
-$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'It is not allowed to use disposable email addresses.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid e-mail address.';
+$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'It is not allowed to use disposable e-mail addresses.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'This is a duplicate file.  Please delete the file first.';
@@ -284,17 +284,17 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an e-mail address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'There is already a relationship between these two issues.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relationship not found.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Access denied: The issue %d requires higher access level.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue can't be related to itself.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue cannot be related to itself.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information does not match any registered account!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
@@ -321,7 +321,7 @@ $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Invalid form security token.  Did you
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'This page cannot be accessed using this method.';
 
 $s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
-$s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+$s_login_cookies_disabled = 'Your browser either does not know how to handle cookies, or refuses to handle them.';
 
 # General Strings
 $s_go_back = 'Go Back';
@@ -353,19 +353,19 @@ $s_projection_enum_string = '10:none,30:tweak,50:minor fix,70:major rework,90:re
 $s_eta_enum_string = '10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month';
 $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
-# Email Strings
+# E-mail Strings
 $s_new_account_subject = 'Account registration';
 $s_new_account_greeting = 'Thank you for registering. You have account with username \'';
 $s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = 'Username: ';
-$s_new_account_message = 'If you didn\'t request any registration, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_message = 'If you did not request any registration, ignore this message and nothing will happen.\n\n';
 $s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = 'Remote IP address: ';
 $s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
-$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through e-mail verification. If this was not you, ignore this message and nothing will happen.\n\nIf you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and e-mail address for your account, we will now have sent a confirmation message to that e-mail address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'The following issue requires your FEEDBACK.';
@@ -430,7 +430,7 @@ $s_change_preferences_link = 'Preferences';
 $s_edit_account_title = 'Edit Account';
 $s_username = 'Username';
 $s_realname = 'Real Name';
-$s_email = 'Email';
+$s_email = 'E-mail';
 $s_password = 'Password';
 $s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password = 'Confirm Password';
@@ -451,16 +451,16 @@ $s_with_minimum_severity = 'With Minimum Severity of';
 $s_bugnote_order = 'Notes Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';
-$s_email_on_new = 'Email on New';
-$s_email_on_assigned = 'Email on Change of Handler';
-$s_email_on_feedback = 'Email on Feedback';
-$s_email_on_resolved = 'Email on Resolved';
-$s_email_on_closed = 'Email on Closed';
-$s_email_on_reopened = 'Email on Reopened';
-$s_email_on_bugnote_added = 'Email on note Added';
-$s_email_on_status_change = 'Email on Status Change';
-$s_email_on_priority_change = 'Email on Priority Change';
-$s_email_bugnote_limit = 'Email Notes Limit';
+$s_email_on_new = 'E-mail on New';
+$s_email_on_assigned = 'E-mail on Change of Handler';
+$s_email_on_feedback = 'E-mail on Feedback';
+$s_email_on_resolved = 'E-mail on Resolved';
+$s_email_on_closed = 'E-mail on Closed';
+$s_email_on_reopened = 'E-mail on Reopened';
+$s_email_on_bugnote_added = 'E-mail on note Added';
+$s_email_on_status_change = 'E-mail on Status Change';
+$s_email_on_priority_change = 'E-mail on Priority Change';
+$s_email_bugnote_limit = 'E-mail Notes Limit';
 $s_language = 'Language';
 $s_update_prefs_button = 'Update Prefs';
 $s_reset_prefs_button = 'Reset Prefs';
@@ -520,7 +520,7 @@ $s_payment_updated = 'Payment information updated.';
 
 # account_update.php
 $s_account_updated_msg = 'Your account has been successfully updated...';
-$s_email_updated = 'Email address successfully updated';
+$s_email_updated = 'E-mail address successfully updated';
 $s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Password successfully updated';
@@ -696,7 +696,7 @@ $s_here = 'Here';
 $s_lost_password_title = 'Password Reset';
 $s_lost_password_done_title = 'Password Message Sent';
 $s_lost_password_subject = 'Password Reset';
-$s_lost_password_info = 'To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.';
+$s_lost_password_info = 'To reinstate your lost password, please supply the name and e-mail address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via e-mail that contains a validation code for your account. Please follow this link to change your password.';
 $s_lost_password_confirm_hash_OK = 'Your confirmation has been accepted. Please update your password.';
 
 # main_page.php
@@ -739,7 +739,7 @@ $s_manage_plugin_link = 'Manage Plugins';
 $s_permissions_summary_report = 'Permissions Report';
 $s_manage_config_link = 'Manage Configuration';
 $s_manage_threshold_config = 'Workflow Thresholds';
-$s_manage_email_config = 'Email Notifications';
+$s_manage_email_config = 'E-mail Notifications';
 $s_manage_workflow_config = 'Workflow Transitions';
 $s_create_new_account_link = 'Create New Account';
 $s_projects_link = 'Projects';
@@ -956,13 +956,13 @@ $s_confirm_account_pruning = 'Are you sure you want to delete old accounts that 
 $s_edit_user_title = 'Edit User';
 $s_reset_password_button = 'Reset Password';
 $s_delete_user_button = 'Delete User';
-$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
+$s_reset_password_msg = 'Reset Password sends the confirmation URL via e-mail.';
 $s_reset_password_msg2 = 'Reset Password resets the password to be blank.';
 $s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Account protected. Cannot reset the password.';
-$s_account_reset_msg = 'A confirmation request has been sent to the selected user\'s email address. Using this, the user will be able to change their password.';
+$s_account_reset_msg = 'A confirmation request has been sent to the selected user\'s e-mail address. Using this, the user will be able to change their password.';
 $s_account_reset_msg2 = 'Account password has been set to blank...';
 
 # manage_user_update.php
@@ -1108,12 +1108,12 @@ $s_valid_project_msg = 'You must choose a valid project';
 
 # signup.php
 $s_signup_done_title = 'Account registration processed';
-$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation e-mail to verify your e-mail address. Visiting the link sent to you in this e-mail will activate your account.';
 $s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
 $s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
-$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able to activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation e-mail to the e-mail address you specified.<br/>Using the confirmation e-mail, you will be able to activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid e-mail address in order to receive the account confirmation e-mail.';
 $s_signup_title = 'Signup';
 $s_signup_button = 'Signup';
 $s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
@@ -1275,7 +1275,7 @@ $s_link_custom_field_to_project_button = 'Link Custom Field';
 $s_linked_projects = 'Linked Projects';
 
 $s_custom_field_sequence = 'Sequence';
-$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email,5:Checkbox,6:List,7:Multiselection list,8:Date,9:Radio';
+$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:E-mail,5:Checkbox,6:List,7:Multiselection list,8:Date,9:Radio';
 
 $s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
 $s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
@@ -1408,15 +1408,15 @@ $s_sponsor_issue = 'Sponsor issue';
 $s_assign_sponsored_issue = 'Assign sponsored issue';
 $s_handle_sponsored_issue = 'Handle sponsored issue';
 $s_others = 'OTHERS';
-$s_see_email_addresses_of_other_users = 'See email addresses of other users';
+$s_see_email_addresses_of_other_users = 'See e-mail addresses of other users';
 $s_send_reminders = 'Send reminders';
 $s_add_profiles = 'Add profiles';
 $s_notify_of_new_user_created = 'Notify of new user created';
-$s_email_notification = 'EMAIL NOTIFICATION';
+$s_email_notification = 'E-MAIL NOTIFICATION';
 $s_status_changed_to = 'Status changes to';
-$s_email_on_deleted = 'Email on Deleted';
-$s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
-$s_email_on_relationship_changed = 'Email on Relationship changed';
+$s_email_on_deleted = 'E-mail on Deleted';
+$s_email_on_sponsorship_changed = 'E-mail on Sponsorship changed';
+$s_email_on_relationship_changed = 'E-mail on Relationship changed';
 
 # DHTML filters
 $s_loading = 'Loading...';
