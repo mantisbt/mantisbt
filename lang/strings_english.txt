@@ -109,11 +109,11 @@ $s_inherit_global = 'Inherit Global Categories';
 $s_inherit_parent = 'Inherit Parent Categories';
 $s_update_subproject_inheritance = 'Update Subproject Inheritance';
 
-$s_duplicate_of = "duplicate of";
-$s_has_duplicate = "has duplicate";
-$s_related_to = "related to";
-$s_dependant_on = "parent of";
-$s_blocks = "child of";
+$s_duplicate_of = 'duplicate of';
+$s_has_duplicate = 'has duplicate';
+$s_related_to = 'related to';
+$s_dependant_on = 'parent of';
+$s_blocks = 'child of';
 
 $s_new_bug = 'New Issue';
 $s_bugnote_added = 'Note Added';
@@ -287,10 +287,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'There is already a relationship between these two issues.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relationship not found.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Access denied: The issue %d requires higher access level.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue can't be related to itself.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
@@ -333,7 +333,7 @@ $s_logged_in_as = 'Logged in as';
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrator';
-$s_myself = "Myself";
+$s_myself = 'Myself';
 $s_default_access_level = 'Default access level';
 
 $s_issue_status_percentage = 'Issue Status Percentage';
@@ -385,18 +385,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'A NOTE has been added to this issue.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been removed as a DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been marked as UNRELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been removed as the PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been removed as the CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'The issue %s has been set as DUPLICATE OF the following issue.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'The following issue has been set as RELATED TO issue %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'The following issue has been set PARENT OF issue %s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'The following issue has been set CHILD OF issue %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'The following issue has been UNset as DUPLICATE OF issue %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'The issue %s has been removed as a DUPLICATE OF the following issue.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'The following issue has been marked as UNRELATED TO issue %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'The following issue has been removed as the PARENT OF issue %s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'The following issue has been removed as the CHILD OF issue %s.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'The RELATED issue %s has been RESOLVED.';
+$s_email_notification_title_for_action_relationship_child_closed = 'The RELATED issue %s has been CLOSED.';
 
 $s_email_reporter = 'Reported By';
 $s_email_handler = 'Assigned To';
@@ -693,11 +693,11 @@ $s_redirecting = '...Redirecting';
 $s_here = 'Here';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Password Reset";
-$s_lost_password_done_title = "Password Message Sent";
-$s_lost_password_subject = "Password Reset";
-$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
-$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
+$s_lost_password_title = 'Password Reset';
+$s_lost_password_done_title = 'Password Message Sent';
+$s_lost_password_subject = 'Password Reset';
+$s_lost_password_info = 'To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.';
+$s_lost_password_confirm_hash_OK = 'Your confirmation has been accepted. Please update your password.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Open and assigned to me';
@@ -770,8 +770,8 @@ $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Who can change notification defaults';
 $s_notify_actions_change_access = 'Who can change notifications';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_revert_to_system = 'Delete All Projects Settings';
+$s_revert_to_all_project = 'Delete Project Specific Settings';
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
@@ -1260,7 +1260,7 @@ $s_custom_field_access_level_r = 'Read Access';
 $s_custom_field_access_level_rw = 'Write Access';
 $s_custom_field_length_min = 'Min. Length';
 $s_custom_field_length_max = 'Max. Length';
-$s_custom_field_filter_by = "Add to Filter";
+$s_custom_field_filter_by = 'Add to Filter';
 $s_custom_field_advanced = 'Display Only On Advanced Page';
 $s_custom_field_display_report = 'Display When Reporting Issues';
 $s_custom_field_display_update = 'Display When Updating Issues';
@@ -1285,17 +1285,17 @@ $s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) th
 $s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Hide Status';
-$s_filter_closed = "Closed";
-$s_filter_resolved = "Resolved";
-$s_hide_closed = "Hide Closed";
-$s_hide_resolved = "Hide Resolved";
+$s_filter_closed = 'Closed';
+$s_filter_resolved = 'Resolved';
+$s_hide_closed = 'Hide Closed';
+$s_hide_resolved = 'Hide Resolved';
 $s_and_above = 'And Above';
 $s_advanced_filters = 'Advanced Filters';
 $s_simple_filters = 'Simple Filters';
 $s_monitored_by = 'Monitored By';
 
-$s_attachments = "attachment(s)";
-$s_attachment_alt = "A";
+$s_attachments = 'attachment(s)';
+$s_attachment_alt = 'A';
 
 # PHPMailer
 $s_phpmailer_language = 'en';
@@ -1323,36 +1323,36 @@ $s_roadmap = 'Roadmap';
 $s_resolved_progress = '%d of %d issue(s) resolved.  Progress (%d%%).';
 
 # Http auth
-$s_http_auth_realm = "Mantis Login";
+$s_http_auth_realm = 'Mantis Login';
 
-$s_bug = "issue";
-$s_bugs = "issues";
-$s_add_new_relationship = "New relationship";
-$s_add_new_relationship_button = "Add";
-$s_this_bug = "Current issue";
-$s_relationship_added = "Relationship added";
-$s_relationship_deleted = "Relationship deleted";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
-$s_delete_relationship_button = "Delete";
-$s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br />Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
-$s_create_child_bug_button = "Create Clone";
-$s_bug_cloned_to = "Issue cloned";
-$s_bug_created_from = "Issue generated from";
+$s_bug = 'issue';
+$s_bugs = 'issues';
+$s_add_new_relationship = 'New relationship';
+$s_add_new_relationship_button = 'Add';
+$s_this_bug = 'Current issue';
+$s_relationship_added = 'Relationship added';
+$s_relationship_deleted = 'Relationship deleted';
+$s_no_relationship = 'no relationship';
+$s_relationship_replaced = 'Relationship replaced';
+$s_replace_relationship_button = 'Replace';
+$s_replace_relationship_sure_msg = 'There is already a relationship between the two issues. Are you sure you want to replace it?';
+$s_relationship_with_parent = 'Relationship with the parent issue';
+$s_delete_relationship_button = 'Delete';
+$s_delete_relationship_sure_msg = 'Are you sure you wish to delete this relationship?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Not all the children of this issue are yet resolved or closed.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br />Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.';
+$s_create_child_bug_button = 'Create Clone';
+$s_bug_cloned_to = 'Issue cloned';
+$s_bug_created_from = 'Issue generated from';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relationship Graph";
-$s_viewing_bug_dependency_graph_title = "Dependency Graph";
-$s_relation_graph = "Relation Graph";
-$s_dependency_graph = "Dependency Graph";
-$s_vertical = "Vertical";
-$s_horizontal = "Horizontal";
-$s_view_issue = "View Issue";
+$s_viewing_bug_relationship_graph_title = 'Relationship Graph';
+$s_viewing_bug_dependency_graph_title = 'Dependency Graph';
+$s_relation_graph = 'Relation Graph';
+$s_dependency_graph = 'Dependency Graph';
+$s_vertical = 'Vertical';
+$s_horizontal = 'Horizontal';
+$s_view_issue = 'View Issue';
 
 # Source Control Integration
 $s_checkin = 'Checkin';
@@ -1385,8 +1385,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
-$s_delete_attachment_button = "Delete";
-$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
+$s_delete_attachment_button = 'Delete';
+$s_delete_attachment_sure_msg = 'Are you sure you wish to delete this attachment?';
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
@@ -1461,7 +1461,7 @@ $s_tag_attach = 'Attach';
 $s_tag_attach_long = 'Attach Tags';
 $s_tag_attach_failed = 'Tag attachment failed.';
 $s_tag_detach = 'Detach \'%s\'';
-$s_tag_separate_by = "(Separate by '%s')";
+$s_tag_separate_by = '(Separate by '%s')';
 $s_tag_invalid_name = 'Invalid tag name.';
 $s_tag_create_denied = 'Create permission denied.';
 $s_tag_filter_default = 'Attached Issues (%s)';
@@ -1483,8 +1483,8 @@ $s_total_time_for_issue = 'Total time for issue = %s';
 $s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
 
 # Twitter Integration
-$s_twitter_resolved = "%d: [%s] %s (resolved by %s in %s)";
-$s_twitter_resolved_no_version = "%d: [%s] %s (resolved by %s)";
+$s_twitter_resolved = '%d: [%s] %s (resolved by %s in %s)';
+$s_twitter_resolved_no_version = '%d: [%s] %s (resolved by %s)';
 
 # Project Page
 $s_development_team = 'Development Team';
@@ -1500,13 +1500,13 @@ $s_period_last_month = 'Last Month';
 $s_period_this_quarter = 'This Quarter';
 $s_period_last_quarter = 'Last Quarter';
 $s_period_year_to_date = 'Year to Date';
-$s_period_select = "Arbitrary Dates";
+$s_period_select = 'Arbitrary Dates';
 $s_period_last_year = 'Last Year';
 $s_select = 'Please Select';
 $s_select_bystatus = 'by Status';
 $s_select_summbystatus = 'Summary by Status';
-$s_select_bycat = "Summary by Category";
-$s_select_both = "Summary by Status and Category";
+$s_select_bycat = 'Summary by Category';
+$s_select_both = 'Summary by Status and Category';
 $s_show_as_graph = 'Show as Graph';
 $s_show_as_table = 'Show as Table';
 $s_show_graph = 'Show Graph';
@@ -1528,8 +1528,8 @@ $s_copy_columns_from = 'Copy Columns From';
 $s_copy_columns_to = 'Copy Columns To';
 
 # due date
-$s_due_date = "Due Date";
-$s_overdue = "Overdue";
+$s_due_date = 'Due Date';
+$s_overdue = 'Overdue';
 
 #account_view_page.php
 $s_view_account_title = 'User Information';
