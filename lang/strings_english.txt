@@ -293,7 +293,7 @@ $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Access den
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue cannot be related to itself.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The "lost your password" feature is not available.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information does not match any registered account!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator.';
@@ -313,8 +313,8 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin is already installed.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Plugin page not found.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Upgrading the plugin schema failed in block #%s.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'There was an unknown error "%s" during execution of the "%s" plugin.';
-$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Field "%s" contains duplcate column "%s".';
-$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Field "%s" contains invalid field "%s"';
+$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Field "%s" contains duplicate column "%s".';
+$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Field "%s" contains invalid field "%s".';
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Invalid session handler.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session variable "%s" not found.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Invalid form security token.  Did you submit the form twice by accident?';
@@ -564,13 +564,13 @@ $s_monitor_bug_button = 'Monitor Issue';
 $s_unmonitor_bug_button = 'End Monitoring';
 
 # bug_file_add.php
-$s_file_upload_msg = 'File upload successful';
+$s_file_upload_msg = 'File upload successful.';
 
 # bug_file_upload_inc.php
 $s_upload_file = 'Upload File';
 $s_select_file = 'Select File';
 $s_upload_file_button = 'Upload File';
-$s_max_file_size = 'Max size';
+$s_max_file_size = 'Max. size';
 
 # bug_reopen.php
 $s_bug_reopened_msg = 'Issue has been reopened...';
@@ -796,7 +796,7 @@ $s_workflow_change_access = 'Who can change workflow';
 $s_access_change_access = 'Who can change access levels';
 
 # manage_config_workflow_set
-$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored.';
 
 # manage_config_work_threshold_page
 $s_assign_issue = 'Assign an issue';
@@ -1028,14 +1028,14 @@ $s_news_updated_msg = 'News item updated...';
 $s_back_link = 'Back';
 
 # proj_doc_add.php
-$s_file_uploaded_msg = 'File upload successful';
+$s_file_uploaded_msg = 'File upload successful.';
 
 # proj_doc_add_page.php
 $s_upload_file_title = 'Upload File';
 $s_title = 'Title';
 
 # proj_doc_delete.php
-$s_project_file_deleted_msg = 'Project file deleted';
+$s_project_file_deleted_msg = 'Project file deleted.';
 
 # proj_doc_delete_page.php
 $s_confirm_file_delete_msg = 'Are you sure you wish to delete this file?';
@@ -1052,13 +1052,13 @@ $s_project_documentation = 'Project Documentation';
 $s_add_file = 'Add File';
 
 # proj_doc_update.php
-$s_project_document_updated = 'Project update successful';
+$s_project_document_updated = 'Project update successful.';
 
 # proj_user_add.php
-$s_project_user_added_msg = 'Successfully added user to project';
+$s_project_user_added_msg = 'Successfully added user to project.';
 
 # proj_user_delete.php
-$s_project_removed_user_msg = 'Successfully removed user from project';
+$s_project_removed_user_msg = 'Successfully removed user from project.';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Are you sure you wish to remove this user?';
@@ -1074,16 +1074,16 @@ $s_remove_link = 'Remove';
 $s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
-$s_updated_user_msg = 'Successfully updated user';
+$s_updated_user_msg = 'Successfully updated user.';
 
 # report_add.php
-$s_must_enter_category = 'You must select a category';
-$s_must_enter_severity = 'You must select a severity';
-$s_must_enter_reproducibility = 'You must select a reproducibility';
-$s_must_enter_summary = 'You must enter a summary';
-$s_must_enter_description = 'You must enter a description';
+$s_must_enter_category = 'You must select a category.';
+$s_must_enter_severity = 'You must select a severity.';
+$s_must_enter_reproducibility = 'You must select a reproducibility.';
+$s_must_enter_summary = 'You must enter a summary.';
+$s_must_enter_description = 'You must enter a description.';
 $s_report_more_bugs = 'Report More Issues';
-$s_submission_thanks_msg = 'Thank you for your submission';
+$s_submission_thanks_msg = 'Thank you for your submission.';
 
 # report_bug_advanced_page.php
 $s_simple_report_link = 'Simple Report';
@@ -1104,7 +1104,7 @@ $s_report_stay = 'Report Stay';
 
 # set_project.php
 $s_selected_project = 'Selected project';
-$s_valid_project_msg = 'You must choose a valid project';
+$s_valid_project_msg = 'You must choose a valid project.';
 
 # signup.php
 $s_signup_done_title = 'Account registration processed';
