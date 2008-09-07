@@ -23,7 +23,7 @@
  * $Id$
  */
 
-/** Estonian
+/** English (English)
  *
  * @ingroup Language
  * @file
@@ -1480,7 +1480,7 @@ $s_time_tracking_cost_per_hour = 'Cost / Hour';
 $s_time_tracking_cost = 'Cost';
 $s_total_time_for_issue = 'Total time for issue = %s';
 
-$s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
+$s_access_denied = 'Access Denied.';
 
 # Twitter Integration
 $s_twitter_resolved = '%d: [%s] %s (resolved by %s in %s)';
