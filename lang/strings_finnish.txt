@@ -23,20 +23,17 @@
  * $Id$
  */
 
-/**
+/** Finnish (Suomi)
  *
  * @ingroup Language
  * @file
  *
- * @author Tomi Hurenius, tkh@iki.fi
  * @author Jani Reinikainen, devel@reinikainen.net
  * @author Juha, jomustaj@iki.fi
+ * @author Tomi Hurenius, tkh@iki.fi
  */
 
-# Charset
 $s_charset = 'utf-8';
-
-# Group commands menuitems
 $s_actiongroup_menu_move = 'Siirrä';
 $s_actiongroup_menu_copy = 'Kopioi';
 $s_actiongroup_menu_assign = 'Osoita';
@@ -50,8 +47,6 @@ $s_actiongroup_menu_update_category = 'Päivitä kategoria';
 $s_actiongroup_menu_set_sticky = 'Aseta/poista pysyvyys päällimmäisenä';
 $s_actiongroup_menu_update_field = 'Päivitä %s';
 $s_actiongroup_bugs = 'Valitut tapahtumat';
-
-# new strings:
 $s_all_projects = 'Kaikki projektit';
 $s_move_bugs = 'Siirrä tapahtumat';
 $s_operation_successful = 'Komento suoritettu onnistuneesti.';
@@ -91,13 +86,11 @@ $s_delete_bugnote_sure_msg = 'Oletko varma, että haluat poistaa tämän muistii
 $s_bug_relationships = 'Relaatiot';
 $s_empty_password_sure_msg = 'Käyttäjällä on tyhjä salasana. Oletko varma, että tämä on haluttua?';
 $s_empty_password_button = 'Käytä tyhjää salasanaa';
-
 $s_duplicate_of = 'kaksoiskappale tapahtumasta %id';
 $s_has_duplicate = 'on kaksoiskappale %id';
 $s_related_to = 'sukulainen tapahtumalle %id';
 $s_dependant_on = 'riippuu tapahtumasta %id';
 $s_blocks = 'estää tapahtuman %id';
-
 $s_new_bug = 'Uusi tapahtuma';
 $s_bugnote_added = 'Muistiinpano lisätty';
 $s_bugnote_edited = 'Muistiinpano muokattu';
@@ -109,16 +102,10 @@ $s_steps_to_reproduce_updated = 'Toisto-ohjeet päivitetty';
 $s_file_added = 'Tiedosto lisätty';
 $s_file_deleted = 'Tiedosto poistettu';
 $s_bug_deleted = 'Tapahtuma poistettu';
-
 $s_make_private = 'Tee yksityinen';
 $s_make_public = 'Tee julkinen';
-
 $s_create_new_project_link = 'Luo uusi projekti';
-
 $s_login_link = 'Kirjaudu sisään';
-
-# bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'Sinulla ei ole tarvittavia oikeuksia suorittaa tätä komentoa näille tapahtumille: ';
 $s_bug_actiongroup_access = 'Sinulla ei ole tarvittavia oikeuksia komennon suorittamiseksi.';
 $s_bug_actiongroup_status = 'Tämän tapahtuman tilaa ei voi muuttaa määritellyksi';
 $s_bug_actiongroup_category = 'Tätä tapahtumaa ei voida siirtää valittuun kategoriaan';
@@ -144,8 +131,6 @@ $s_status_group_bugs_button = 'Päivitä tila';
 $s_category_group_bugs_button = 'Päivitä kategoria';
 $s_view_status_group_bugs_button = 'Päivitä tilanäkymä';
 $s_set_sticky_group_bugs_button = 'Aseta/poista pysyvyys päällimmäisenä';
-
-# improved JPgraphs strings
 $s_graph_imp_status_title = 'Synteesitaulukot tilan mukaan';
 $s_graph_imp_priority_title = 'Synteesitaulukot prioriteetin mukaan';
 $s_graph_imp_severity_title = 'Synteesitaulukot vakavuusasteen mukaan';
@@ -174,84 +159,75 @@ $s_legend_closed = 'Suljettu';
 $s_legend_reported = 'Raportoitu';
 $s_cumulative = 'Kumulatiivinen';
 $s_not_enough_data = 'Ei tarpeeksi tietoa graafin luomiseksi';
-
-# print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Näytä vain valitut';
-
-# print_all_bug_options.php : printing preferences
 $s_printing_preferences_title = 'Valitse tulostettavat kentät';
 $s_printing_options_link = 'Tulostusasetukset';
-
-# word and excel export
 $s_bugnote_title = 'Muistiinpanojen hallinta';
 $s_bugnote_date = 'Muistiinpanon päiväys';
 $s_bugnote_description = 'Muistiinpanon kuvaus';
-
 $s_error_no_proceed = 'Ole hyvä, siirry edelliselle sivulle, jossa voit korjata virheviestissä osoitetut kohdat tai valita uuden tapahtuman. Voit myös suoraan siirtyä toiseen osioon klikkaamalla menupalkkia.';
-
-# ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = 'Virhe suoritettaessa tätä komentoa. Saatat haluta ilmoittaa tästä virheestä paikallisen järjestelmäsi ylläpitäjälle.';
-$MANTIS_ERROR[ERROR_SQL]                = 'SQL-virhe havaitty.  Ole hyvä ja raportoi tämä virhe ';
-$MANTIS_ERROR[ERROR_REPORT]             = 'Raportissasi oli virhe.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = 'Tiedostoa ei ole määritelty';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'Tämä tiedostotyyppi ei ole sallittu';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'Hakemistoa ei ole olemassa. Ole hyvä ja tarkista projektin asetukset.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'Tämä tiedosto on kaksoiskappale.  Ole hyvä ja poista alkuperäinen tiedosto ensin.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'Samanniminen projekti on jo olemassa.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'Tarvittu kenttä on tyhjä. Ole hyvä ja tarkista syöttösi.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Tämä käyttäjätunnus on suojattu.  Pääsy on sallittu vasta kun suojaus poistetaan.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Pääsy kielletty.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'Tiedoston lähetys epäonnistui. PHP:n tiedostolähetystoiminnot saattavat olla pois päältä.  Ole hyvä ja pyydä järjestelmäsi ylläpitäjää ajamaan admin_check-skripti debuggaustoimenpiteitä varten.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Tiedoston lähetys epäonnistui. Tämä johtuu luutavasti siitä, että tiedoston koko ylittää PHP:n nykyisen enimmäiskoon.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'Tämän sivun vaatimaa muuttujaa ei löydy.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Virhe suoritettaessa tätä komentoa. Saatat haluta ilmoittaa tästä virheestä paikallisen järjestelmäsi ylläpitäjälle.';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL-virhe havaitty.  Ole hyvä ja raportoi tämä virhe ';
+$MANTIS_ERROR[ERROR_REPORT] = 'Raportissasi oli virhe.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Tiedostoa ei ole määritelty';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Tämä tiedostotyyppi ei ole sallittu';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Hakemistoa ei ole olemassa. Ole hyvä ja tarkista projektin asetukset.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Tämä tiedosto on kaksoiskappale.  Ole hyvä ja poista alkuperäinen tiedosto ensin.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Samanniminen projekti on jo olemassa.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Tarvittu kenttä on tyhjä. Ole hyvä ja tarkista syöttösi.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Tämä käyttäjätunnus on suojattu.  Pääsy on sallittu vasta kun suojaus poistetaan.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Pääsy kielletty.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Tiedoston lähetys epäonnistui. PHP:n tiedostolähetystoiminnot saattavat olla pois päältä.  Ole hyvä ja pyydä järjestelmäsi ylläpitäjää ajamaan admin_check-skripti debuggaustoimenpiteitä varten.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Tiedoston lähetys epäonnistui. Tämä johtuu luutavasti siitä, että tiedoston koko ylittää PHP:n nykyisen enimmäiskoon.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Tämän sivun vaatimaa muuttujaa ei löydy.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Käyttäjänimi on jo käytössä. Palaa edelliselle sivulla ja valitse uusi käyttäjänimi.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Ohjelma-asetus  \'%s\' ei löytynyt.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Merkkijonoa \'%s\' ei löytynyt.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Muistiinpanoa ei löydy.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Projektia ei löydy.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Muistiinpanoa ei löydy.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projektia ei löydy.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Tietokantakenttää ei löydy.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Yhteys FTP-palvelimelle epäonnistui.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Tapahtumankäsittelijällä ei ole tarpeeksi oikeuksia tapahtuman käsittelyyn tällä tilalla.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Yhteys FTP-palvelimelle epäonnistui.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Tapahtumankäsittelijällä ei ole tarpeeksi oikeuksia tapahtuman käsittelyyn tällä tilalla.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Samanniminen projekti on jo olemassa.  Palaa edelliselle sivulle ja anna toinen nimi.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Virheellinen projektinimi. Projektilla on oltava nimi, se ei voi olla tyhjä.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Käyttäjätunnusta ei löydy.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Käyttäjätunnusta ei löydy.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Selaimesi välittämä kirjautumistietosi on virheellinen.  Käyttäjätilisi on ehkä poistettu.';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Käyttäjän asetustietoja ei löytynyt.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Uutisartikkelia ei löydy.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Uutisartikkelia ei löydy.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Salasanavirhe.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Odotin matriisia, mutta sain merkkijonon.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Odotin matriisia, mutta sain merkkijonon.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Taulukkodataa merkkijonodatan tilalla.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Odotettiin numeroa: %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Tapahtumaa ei löydy.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Suodinta %d ei löytynyt.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Tapahtumaa ei löydy.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Suodinta %d ei löytynyt.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Käyttämäsi suodin on liian vanha päivitettäväksi. Ole hyvä ja luo se uudestaan.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Virheellinen sähköpostiosoite.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Virheellinen sähköpostiosoite.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Käyttäjäprofiilia ei löytynyt.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Tämän tyyppiset tiedostot eivät ole sallittuja.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Tämä tiedosto on kaksoiskappale.  Ole hyvä ja poista alkuperäinen tiedosto ensin.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Tämän tyyppiset tiedostot eivät ole sallittuja.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Tämä tiedosto on kaksoiskappale.  Ole hyvä ja poista alkuperäinen tiedosto ensin.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Virheellinen lähetettävän tiedoston hakemistopolku. Hakemistoa ei ole tai siihen ei voida kirjoittaa.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Tiedostoa ei lähetetty. Ole hyvä ja siirry edelliselle sivulle sekä valitse läheteettävä tiedosto ennen \'Lähetä\'-painikkeen painamista.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Vastaanotettua tiedostoa ei voitu siirtää säilytyshakemistoon. Hakemistoa ei ole olemassa tai siihen ei voi kirjoittaa.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'Et voi määritellä tapahtumaa itsensä kaksoiskappaleeksi.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Et voi määritellä tapahtumaa itsensä kaksoiskappaleeksi.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Räätälöityä kenttää ei löytynyt.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Nimiduplikaatti.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Kenttä on käytössä ainakin yhdessä projektissa.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Kentällä on virheellinen arvo';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Virheellinen mukautetun kentän määrite.';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'LDAP-autentikaatio epäonnistui';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-autentikaatio epäonnistui';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP-palvelinyhteys epäonnistui.';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'LDAP-tietueen päivittäminen epäonnistui.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP-tietueen päivittäminen epäonnistui.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-käyttäjätietoja ei löytynyt.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Tietokantayhteys epäonnistui.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Tietokantakysely epäonnistui.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Tietokantavalinta epäonnistui.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Tietokantayhteys epäonnistui.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Tietokantakysely epäonnistui.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Tietokantavalinta epäonnistui.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Samanniminen kategoria on jo olemassa.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Kopiointitoimea ei ole määritelty.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategoriaa ei löydy.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'Samanniminen versio on jo olemassa.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'Versiota ei löydy.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'Virheellinen käyttäjätunnus.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Samanniminen versio on jo olemassa.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versiota ei löydy.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Virheellinen käyttäjätunnus.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Käyttäjätaso liian alhainen';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Syöttämäsi nimi on jo käytössä toisella käyttäjällä käyttäjänimenä. Ole hyvä, ja syötä uusi nimi.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorointitukea ei ole aktivoitu.';
@@ -262,10 +238,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Pääsy estett
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsori ei ole syöttänyt sähköpostiosoitetta. Ole hyvä, ja päivitä käyttäjätietosi.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguraatioasetuksessa \'%s\' on virheellinen arvo \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Haluttua toimintoa ei voida suorittaa, koska tapahtumaan \'%d\' ei ole sallittu tehdä muutoksia';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Näiden kahden tapahtuman välillä on jo relaatio.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relaatiota ei löytynyt.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Pääsy estetty: tapahtuman %d käsittely vaatii korkeamman käyttäjätason, kuin sinulla on.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Tapahtumaa ei voi kytkeä relaationa itseensä.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Näiden kahden tapahtuman välillä on jo relaatio.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relaatiota ei löytynyt.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Pääsy estetty: tapahtuman %d käsittely vaatii korkeamman käyttäjätason, kuin sinulla on.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Tapahtumaa ei voi kytkeä relaationa itseensä.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Vahvistushash-koodi on virheellinen. Yritä uudelleen.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'Unohdettu salasana\' -toiminto ei ole käytössä.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Syötä sähköpostiosoite, jotta salasanasi uudistetaan';
@@ -275,54 +251,40 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Kyselyjen
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Tämä toiminto aiheuttaisi päättymättömän silmukan aliprojektihierarkiassa.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Ainoan ylläpitäjän oikeustasoa ei voi muuttaa.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
-
 $s_login_error = 'Käyttäjätunnuksesi saattaa olla pois käytöstä tai antamasi käyttäjätunnus/salasanayhdistelmä on virheellinen.';
 $s_login_cookies_disabled = 'Selaimesi ei tunnu ymmärtävän tai hyväksyvän evästeitä.';
-
-# General Strings
 $s_go_back = 'Takaisin';
 $s_proceed = 'Klikkaa tästä jatkaaksesi';
-
 $s_switch = 'Vaihda';
 $s_logged_in_as = 'Olet sisäänkirjautuneena käyttäjätunnuksella';
-
 $s_prefix_for_deleted_users = 'käyttäjä';
-
 $s_administrator = 'pääkäyttäjä';
-$s_myself = "Minä";
+$s_myself = 'Minä';
 $s_default_access_level = 'Oletuskäyttäjätaso';
-
 $s_issue_status_percentage = 'Tapahtuman tilan prosenttiosuus';
-
-# Enum Strings
-$s_access_levels_enum_string      = '10:seuraaja,25:raportoija,40:päivittäjä,55:kehittäjä,70:ylläpitäjä,90:pääkäyttäjä';
-$s_project_status_enum_string     = '10:kehitysversio,30:julkaisuversio,50:vakaa versio,70:vanhentunut versio';
+$s_access_levels_enum_string = '10:seuraaja,25:raportoija,40:päivittäjä,55:kehittäjä,70:ylläpitäjä,90:pääkäyttäjä';
+$s_project_status_enum_string = '10:kehitysversio,30:julkaisuversio,50:vakaa versio,70:vanhentunut versio';
 $s_project_view_state_enum_string = '10:julkinen,50:yksityinen';
-$s_view_state_enum_string         = '10:julkinen,50:yksityinen';
-
-$s_priority_enum_string           = '10:ei ole,20:alhainen,30:normaali,40:korkea,50:kiireellinen,60:välitön';
-$s_severity_enum_string           = '10:ominaisuus,20:triviaali,30:tekstivirhe,40:pieni muutos,50:vähäinen virhe,60:vakava,70:kaataa ohjelman,80:estää käytön';
-$s_reproducibility_enum_string    = '10:aina,30:joskus,50:satunnaisesti,70:ei kokeiltu,90:ei toistettavissa,100:N/A';
-$s_status_enum_string             = '10:uusi,20:palaute,30:huomioitu,40:varmistettu,50:osoitettu,80:ratkaistu,85:testattu,90:suljettu';
-$s_resolution_enum_string         = '10:avoin,20:korjattu,30:uudelleenavattu,40:ei toistettavissa,50:ei korjattavissa,60:kaksoiskappale,70:ei ole virhe,80:jäädytetty,90:ei korjata';
-$s_projection_enum_string         = '10:ei määritelty,30:pieni muutos,50:pieni korjaus,70:suuri muutos,90:vaatii uudelleensuunnittelun';
-$s_eta_enum_string                = '10:ei määritelty,20:< 1 päivä,30:2-3 päivää,40:< 1 viikko,50:< 1 kuukausi,60:> 1 kuukausi';
+$s_view_state_enum_string = '10:julkinen,50:yksityinen';
+$s_priority_enum_string = '10:ei ole,20:alhainen,30:normaali,40:korkea,50:kiireellinen,60:välitön';
+$s_severity_enum_string = '10:ominaisuus,20:triviaali,30:tekstivirhe,40:pieni muutos,50:vähäinen virhe,60:vakava,70:kaataa ohjelman,80:estää käytön';
+$s_reproducibility_enum_string = '10:aina,30:joskus,50:satunnaisesti,70:ei kokeiltu,90:ei toistettavissa,100:N/A';
+$s_status_enum_string = '10:uusi,20:palaute,30:huomioitu,40:varmistettu,50:osoitettu,80:ratkaistu,85:testattu,90:suljettu';
+$s_resolution_enum_string = '10:avoin,20:korjattu,30:uudelleenavattu,40:ei toistettavissa,50:ei korjattavissa,60:kaksoiskappale,70:ei ole virhe,80:jäädytetty,90:ei korjata';
+$s_projection_enum_string = '10:ei määritelty,30:pieni muutos,50:pieni korjaus,70:suuri muutos,90:vaatii uudelleensuunnittelun';
+$s_eta_enum_string = '10:ei määritelty,20:< 1 päivä,30:2-3 päivää,40:< 1 viikko,50:< 1 kuukausi,60:> 1 kuukausi';
 $s_sponsorship_enum_string = '0:Maksamatta,1:Pyydetty,2:Maksettu';
-
-# Email Strings
 $s_new_account_subject = 'Käyttäjätilin rekisteröinti';
 $s_new_account_greeting = 'Kiitos rekisteröinnistä. Sinulle on luotu käyttäjätili nimellä \'';
 $s_new_account_greeting2 = '\'. Viimeistele rekisteröinti käymällä ao. osoitteessa (varmista, että koko osoite tulee linkkiin mukaan) ja vaihda salasana halutuksi:';
 $s_new_account_username = 'Käyttäjätunnus: ';
-$s_new_account_message = 'Jos et ole yrittänyt rekisteröityä tällä sähköpostiosoitteella, sinun ei tarvitse tehdä mitään.' . "\n\n";
+$s_new_account_message = 'Jos et ole yrittänyt rekisteröityä tällä sähköpostiosoitteella, sinun ei tarvitse tehdä mitään.\n\n';
 $s_new_account_do_not_reply = 'ÄLÄ VASTAA TÄHÄN SÄHKÖPOSTIVIESTIIN';
 $s_new_account_email = 'Sähköpostiosoite: ';
 $s_new_account_IP = 'IP-osoite: ';
 $s_new_account_signup_msg = 'Käyttäjätili on luotu:';
-
-$s_reset_request_msg = 'Osoitteellasi on pyydetty salasanan vaihtoa. Jos et ole tätä tehnyt, voit jättää tämän viestin huomioimatta.' . "\n\n" . 'Vaihtaaksesi salasanansi, ole hyvä ja vieraile ao. osoitteessa:';
+$s_reset_request_msg = 'Osoitteellasi on pyydetty salasanan vaihtoa. Jos et ole tätä tehnyt, voit jättää tämän viestin huomioimatta.\n\nVaihtaaksesi salasanansi, ole hyvä ja vieraile ao. osoitteessa:';
 $s_reset_request_in_progress_msg = 'Mikäli syötit käyttäjätilisi nimen ja sähköpostiosoitteen oikein, sähköpostiosoitteeseesi on lähetetty vahvistusviesti. Ole hyvä ja noudata viestissä olevia ohjeita vaihtaaksesi käyttäjätilisi salasanan.';
-
 $s_email_notification_title_for_status_bug_new = 'Seuraavan tapahtuman tila on jälleen UUSI';
 $s_email_notification_title_for_status_bug_feedback = 'Seuraava tapahtuma vaatii palautettasi.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Seuraava tapahtuma on huomioitu.';
@@ -330,7 +292,6 @@ $s_email_notification_title_for_status_bug_confirmed = 'Seuraava tapahtuma on va
 $s_email_notification_title_for_status_bug_assigned = 'Seuraava tapahtuma on osoitettu.';
 $s_email_notification_title_for_status_bug_resolved = 'Seuraava tapahtuma on ratkaistu.';
 $s_email_notification_title_for_status_bug_closed = 'Seuraava tapahtuma on suljettu';
-
 $s_email_notification_title_for_action_bug_submitted = 'Seuraava tapahtuma on lähetetty.';
 $s_email_notification_title_for_action_bug_assigned = 'Seuraava tapahtuma on osoitettu.';
 $s_email_notification_title_for_action_bug_reopened = 'Seuraava tapahtuma on avattu uudelleen.';
@@ -339,21 +300,19 @@ $s_email_notification_title_for_action_bug_updated = 'Seuraava tapahtuma on päi
 $s_email_notification_title_for_action_sponsorship_added = 'Seuraavaa tapahtumaa on sponsoroitu.';
 $s_email_notification_title_for_action_sponsorship_updated = 'Seuraavan tapahtuman sponsorointia on muokattu.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'Seuraavan tapahtuman sponsorointi on peruttu.';
-
 $s_email_notification_title_for_action_bugnote_submitted = 'Tähän tapahtumaan on lisätty muistiinpano.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "Seuraava tapahtuma on duplikaatti tapahtumasta %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "Tapahtuma %s on määritelty duplikaatiksi seuraavalle tapahtumalle.";
-$s_email_notification_title_for_action_related_to_relationship_added = "Seuraava tapahtuma on määritelty relaatioksi tapahtumalle %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "Seuraava tapahtuma on määritelty isätapahtumaksi tapahtumalle %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "Seuraava tapahtuma on määritelty lapsitapahtumaksi tapahtumalle %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Seuraavalta tapahtumalta on poistettu tapahtuman %s duplikaattisuus.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Tapahtumalta %s on poistettu seuraavan tapahtuman duplikaattitila.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "Seuraavalta tapahtumalta on poistettu relaatio tapahtumaan %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Seuraava tapahtuma ei ole enää tapahtuman %s isätapahtuma.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "Seuraava tapahtuma ei enää ole tapahtuman %s lapsitapahtuma.";
-$s_email_notification_title_for_action_relationship_child_resolved = "Relaatiotapahtuma %s on ratkaistu.";
-$s_email_notification_title_for_action_relationship_child_closed = "Relaatiotapahtuma %s on suljettu.";
-
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'Seuraava tapahtuma on duplikaatti tapahtumasta %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'Tapahtuma %s on määritelty duplikaatiksi seuraavalle tapahtumalle.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'Seuraava tapahtuma on määritelty relaatioksi tapahtumalle %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'Seuraava tapahtuma on määritelty isätapahtumaksi tapahtumalle %s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'Seuraava tapahtuma on määritelty lapsitapahtumaksi tapahtumalle %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'Seuraavalta tapahtumalta on poistettu tapahtuman %s duplikaattisuus.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'Tapahtumalta %s on poistettu seuraavan tapahtuman duplikaattitila.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'Seuraavalta tapahtumalta on poistettu relaatio tapahtumaan %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'Seuraava tapahtuma ei ole enää tapahtuman %s isätapahtuma.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'Seuraava tapahtuma ei enää ole tapahtuman %s lapsitapahtuma.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'Relaatiotapahtuma %s on ratkaistu.';
+$s_email_notification_title_for_action_relationship_child_closed = 'Relaatiotapahtuma %s on suljettu.';
 $s_email_reporter = 'Raportoija';
 $s_email_handler = 'Käsittelijä';
 $s_email_project = 'Projekti';
@@ -368,18 +327,12 @@ $s_email_duplicate = 'Kaksoiskappale';
 $s_email_fixed_in_version = 'Korjattu versiossa';
 $s_email_date_submitted = 'Luontiajankohta';
 $s_email_last_modified = 'Muokkausajankohta';
-$s_email_summary =  'Yhteenveto';
+$s_email_summary = 'Yhteenveto';
 $s_email_description = 'Kuvaus';
-
-# account_delete.php
 $s_account_protected_msg = 'Käyttäjätunnus on suojattu. Asetuksia ei voi muuttaa...';
 $s_account_removed_msg = 'Käyttäjätunnuksesi on poistettu...';
-
-# account_delete_page.php
 $s_confirm_delete_msg = 'Oletko varma, että haluat poistaa käyttäjätunnuksesi?';
 $s_delete_account_button = 'Poista käyttäjätunnus';
-
-# account_page.php
 $s_manage_profiles_link = 'Profiilit';
 $s_change_preferences_link = 'Asetukset';
 $s_edit_account_title = 'Muokkaa käyttäjätiliä';
@@ -388,13 +341,11 @@ $s_realname = 'Nimi';
 $s_email = 'Sähköpostiosoite';
 $s_password = 'Salasana';
 $s_no_password_change = 'Salasanaa ei voi muokata, koska sen ylläpidosta vastaa toinen järjestelmä.';
-$s_confirm_password  = 'Vahvista salasana';
+$s_confirm_password = 'Vahvista salasana';
 $s_access_level = 'Käyttöoikeustaso';
 $s_update_user_button = 'Päivitä käyttäjätunnustiedot';
 $s_verify_warning = 'Käyttäjätilitietosi on vahvistettu. Sähköpostina vastaanottamasi käyttäjätilin vahvistusviestin vahvistustietoja ei voi enää käyttää.';
 $s_verify_change_password = 'Sinun pitää syöttää salasana sisäänkirjautumista varten.';
-
-# account_prefs_page.php
 $s_default_account_preferences_title = 'Käyttäjätilin asetukset';
 $s_default_project = 'Oletusprojekti';
 $s_advanced_report = 'Näytä yksityiskohtaiset tapahtumaraportit';
@@ -419,30 +370,16 @@ $s_email_bugnote_limit = 'Sähköpostitse välitettävien tapahtumien raja';
 $s_language = 'Kieli';
 $s_update_prefs_button = 'Päivitä asetukset';
 $s_reset_prefs_button = 'Oletusasetukset';
-
-# account_prefs_reset.php
 $s_prefs_reset_msg = 'Asetukset palautettu oletuksiin...';
-
-# account_prefs_update.php
 $s_prefs_updated_msg = 'Asetukset päivitetty...';
-
-# account_profile_add.php
 $s_profile_added_msg = 'Profiili lisätty...';
-
-# account_profile_delete.php
 $s_profile_deleted_msg = 'Profiili poistettu...';
-
-# account_profile_edit_page.php
 $s_edit_profile_title = 'Muokkaa profiilia';
 $s_platform = 'Alusta';
 $s_operating_system = 'Käyttöjärjestelmä';
 $s_additional_description = 'Lisätietoja';
 $s_update_profile_button = 'Päivitä profiili';
-
-# account_profile_make_default.php
 $s_profile_defaulted_msg = 'Oletusprofiili päivitetty...';
-
-# account_profile_manage_page.php
 $s_add_profile_title = 'Lisää profiili';
 $s_add_profile_button = 'Lisää profiili';
 $s_edit_or_delete_profiles_title = 'Muokkaa tai poista profiileja';
@@ -451,44 +388,28 @@ $s_make_default = 'Tee oletus';
 $s_delete_profile = 'Poista profiiili';
 $s_select_profile = 'Valitse profiili';
 $s_submit_button = 'Lähetä';
-
-# account_profile_update.php
 $s_profile_updated_msg = 'Profiili päivitetty...';
-
-# account_sponsor_page.php
 $s_my_sponsorship = 'Omat sponsoritapahtumat';
 $s_update_sponsorship_button = 'Muokkaa maksatustilaa';
 $s_no_sponsored = 'Yhtään sinulle osoitettua sponsoroitua tapahtumaa ei löytynyt.';
 $s_own_sponsored = 'Tapahtumat, joita olet sponsoroinut:';
 $s_issues_handled = 'Sponsoroidut tapahtumat jotka on osoitettu sinulle:';
 $s_no_own_sponsored = 'Et ole sponsoroinut yhtään tapahtumaa.';
-$s_sponsor = 'Sponsori';	# like in 'The sponsor of...'
-$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
+$s_sponsor = 'Sponsori';
+$s_sponsor_verb = 'Sponsor';
 $s_amount = 'Määrä';
 $s_total_owing = 'Maksamattomia/velkasaldo yhteensä';
 $s_total_paid = 'Maksettu yhteensä';
 $s_sponsor_hide = 'Piilota ratkaistut ja maksetut';
 $s_sponsor_show = 'Näytä kaikki';
-
-# account_sponsor_update.php
 $s_payment_updated = 'Maksutieto päivitetty.';
-
-# account_update.php
 $s_account_updated_msg = 'Käyttäjätunnuksesi on onnistuneesti päivitetty...';
 $s_email_updated = 'Sähköpostiosoite onnistuneesti päivitetty ';
 $s_realname_duplicated = 'Nimi on jo käytössä toisella käyttäjällä';
 $s_realname_updated = 'Nimi onnistuneesti päivitetty';
 $s_password_updated = 'Salasana onnistuneesti vaihdettu';
-
-# adm_permission_report.php
-
-# bug_action_group_page
 $s_multiple_projects = 'Valitsemasi tapahtumat ovat eri projekteista. Alla näkyvät parametrit ovat kaikkiin projekteihin vaikuttavia parametreja. Mikäli nämä eivät ole oikein, ole hyvä ja vähennä valittujen tapahtumien määrää sekä yritä uudestaan.';
-
-# bug_assign.php
-$s_bug_assign_msg       = 'Tapahtuma on onnistuneesti osoitettu...';
-
-# bug_change_status_page.php
+$s_bug_assign_msg = 'Tapahtuma on onnistuneesti osoitettu...';
 $s_new_bug_title = 'Uusi tapahtuma';
 $s_feedback_bug_title = 'Lähetä tapahtumapalautetta';
 $s_acknowledged_bug_title = 'Kuittaa tapahtuma';
@@ -499,49 +420,27 @@ $s_feedback_bug_button = 'Lähetä palautetta';
 $s_acknowledged_bug_button = 'Kuittaa tapahtuma';
 $s_confirmed_bug_button = 'Vahvista tapahtuma';
 $s_assigned_bug_button = 'Osoita tapahtuma';
-
-# bug_close.php
-$s_bug_close_msg       = 'Tapahtuma on suljettu...';
-$s_close_immediately   = 'Sulje välittömästi:';
-
-# bug_close_page.php
+$s_bug_close_msg = 'Tapahtuma on suljettu...';
+$s_close_immediately = 'Sulje välittömästi:';
 $s_closed_bug_title = 'Sulje tapahtuma';
-
-# bug_delete.php
 $s_bug_deleted_msg = 'Tapahtuma on poistettu...';
-
-# bug_delete_page.php
 $s_delete_bug_sure_msg = 'Oletko varma, että haluat poistaa tämän tapahtuman?';
 $s_delete_bug_button = 'Poista tapahtuma';
-
-# bug_monitor.php
 $s_monitor_bug_button = 'Seuraa tapahtumaa';
 $s_unmonitor_bug_button = 'Lopeta tapahtuman seuranta';
-
-# bug_file_add.php
 $s_file_upload_msg = 'Tiedoston lähetys onnistui';
-
-# bug_file_upload_inc.php
 $s_upload_file = 'Lähetä tiedosto';
 $s_select_file = 'Valitse tiedosto';
 $s_upload_file_button = 'Lähetä tiedosto';
 $s_max_file_size = 'Enimmäiskoko';
-
-# bug_reopen.php
 $s_bug_reopened_msg = 'Tapahtuma on uudelleenavattu...';
 $s_reopen_add_bugnote_title = 'Lisää muistiinpanoksi uudelleenavaamisen syy';
 $s_bugnote_add_reopen_button = 'Lisää muistiinpano ja avaa tapahtuma uudelleen';
-
-# bug_resolve_page.php
 $s_resolved_bug_title = 'Ratkaise tapahtuma';
 $s_resolved_bug_button = 'Ratkaise tapahtuma';
-
-# bug_resolve_page2.php
 $s_bug_resolved_msg = 'Tapahtuma on ratkaistu. Lisää muistiinpanoja alla...';
 $s_resolve_add_bugnote_title = 'Lisää muistiinpanoksi ratkaisuaste';
 $s_bugnote_add_resolve_button = 'Lisää muistiinpano';
-
-# bug_reminder_page.php
 $s_from = 'Keneltä';
 $s_to = 'Kenelle';
 $s_sent_you_this_reminder_about = 'lähetti sinulle muistutuksen seuraavasta asiasta';
@@ -552,14 +451,8 @@ $s_reminder = 'Muistutus';
 $s_reminder_explain = 'Tämä muistutus lähetetään niille vastaanottajille, jotka seuraavat tätä tapahtumaa.';
 $s_reminder_monitor = 'Nämä vastaanottajat lisätään tapahtuman seuraajien listalle. Tapahtumaseurannan voi peruuttaa painamalla painiketta Lopeta tapahtuman seuranta.';
 $s_reminder_store = 'Tämä muistutus talletetaan tapahtuman tietoihin.';
-
-# bug_set_sponsorship.php
 $s_confirm_sponsorship = 'Vahvista tapahtuman %d sponsorointi %s:lla.';
-
-# bug_update.php
 $s_bug_updated_msg = 'Tapahtuma on onnistuneesti päivitetty...';
-
-# bug_update_advanced_page.php
 $s_back_to_bug_link = 'Takaisin tapahtumaan';
 $s_update_simple_link = 'Yksinkertainen päivitys';
 $s_updating_bug_advanced_title = 'Päivitetään tapahtuman tietoja';
@@ -589,46 +482,23 @@ $s_steps_to_reproduce = 'Toisto-ohjeet';
 $s_update_information_button = 'Päivitä tiedot';
 $s_sticky_issue = 'Päällimmäisenä pysyvä tapahtuma';
 $s_profile = 'Profiili';
-
-# bug_update_page.php
 $s_update_advanced_link = 'Päivitä yksityiskohtaiset tiedot';
 $s_updating_bug_simple_title = 'Päivitetään tapahtuman tietoja';
-
-# bug_vote_add.php
 $s_vote_added_msg = 'Ääni lisätty...';
-
-# bugnote_add.php
 $s_bugnote_added_msg = 'Muistiinpano lisätty...';
-
-# bugnote_delete.php
 $s_bugnote_deleted_msg = 'Muistiinpano poistettu...';
 $s_bug_notes_title = 'Tapahtuman muistiinpanot';
-
-# bugnote_edit_page.php
 $s_edit_bugnote_title = 'Muokkaa muistiinpanoa';
-
-# bugnote_inc.php
 $s_no_bugnotes_msg = 'Tällä tapahtumalla ei ole muistiinpanoja.';
 $s_delete_link = 'Poista';
 $s_add_bugnote_title = 'Lisää muistiinpano';
 $s_add_bugnote_button = 'Lisää muistiinpano';
 $s_bugnote_edit_link = 'Muokkaa';
 $s_closed_bug_button = 'Sulje tapahtuma';
-
-# bugnote_update.php
 $s_bugnote_updated_msg = 'Muistiinpano onnistuneesti päivitetty...';
 $s_edited_on = 'muokattu: ';
-
-# file_api.php
-$s_show_content ='Show Content';
-
-# index.php
+$s_show_content = 'Show Content';
 $s_click_to_login = 'Klikkaa tästä kirjautuaksesi sisään';
-
-# login.php
-
-# login_page.php
-#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Tervetuloa projektitapahtumaseurantaan.';
 $s_login_title = 'Kirjaudu sisään';
 $s_save_login = 'Tallenna sisäänkirjautumistiedot';
@@ -636,42 +506,28 @@ $s_choose_project = 'Valitse projekti';
 $s_login_button = 'Kirjaudu sisään';
 $s_signup_link = 'Rekisteröi uusi käyttäjätunnus';
 $s_lost_password_link = 'Oletko unohtanut salasanasi?';
-
-# login_select_proj_page.php
 $s_select_project_button = 'Valitse projekti';
-
-# logout_page.php
 $s_logged_out_title = 'Uloskirjauduttu...';
 $s_redirecting = '... edelleenohjataan';
 $s_here = 'Tänne';
-
-# lost_pwd_page.php
-$s_lost_password_title = "Uusi unohtunut salasana";
-$s_lost_password_done_title = "Salasanaviesti lähetetty";
-$s_lost_password_subject = "Unohtunut salasana";
-$s_lost_password_info = "Salasanasi uusimista varten syötä käyttäjätunnuksesi sekä sähköpostiosoitteesi.<br/><br/>Sinulle lähetetään linkki, jonka kautta pääset uusimaan salasanasi.";
-$s_lost_password_confirm_hash_OK = "Salasanamuutoksen vahvistus hyväksytty. Päivitä salasanasi.";
-
-# main_page.php
+$s_lost_password_title = 'Uusi unohtunut salasana';
+$s_lost_password_done_title = 'Salasanaviesti lähetetty';
+$s_lost_password_subject = 'Unohtunut salasana';
+$s_lost_password_info = 'Salasanasi uusimista varten syötä käyttäjätunnuksesi sekä sähköpostiosoitteesi.<br/><br/>Sinulle lähetetään linkki, jonka kautta pääset uusimaan salasanasi.';
+$s_lost_password_confirm_hash_OK = 'Salasanamuutoksen vahvistus hyväksytty. Päivitä salasanasi.';
 $s_open_and_assigned_to_me = 'Avoimia ja minulle osoitettuja';
 $s_open_and_reported_to_me = 'Avoimia ja minun raportoimia';
 $s_newer_news_link = 'Uudempia uutisia';
 $s_older_news_link = 'Vanhempia uutisia';
 $s_archives = 'Arkistot';
 $s_rss = 'RSS';
-
-# manage_create_new_user.php
 $s_created_user_part1 = 'Luotu käyttäjätunnus';
 $s_created_user_part2 = 'käyttöoikeustasolla';
-
-# manage_create_user_page.php
 $s_create_new_account_title = 'Luo uusi käyttäjätunnus';
 $s_verify_password = 'Varmista salasana';
 $s_enabled = 'Käytössä';
 $s_protected = 'Suojattu';
 $s_create_user_button = 'Luo käyttäjä';
-
-# manage_page.php
 $s_hide_disabled = 'Piilota pois käytöstä olevat';
 $s_filter_button = 'Sovella suodinta';
 $s_manage_users_link = 'Käyttäjähallinta';
@@ -696,8 +552,6 @@ $s_p = 'p';
 $s_date_created = 'Luontiajankohta';
 $s_last_visit = 'Edellinen käynti';
 $s_edit_user_link = 'Muokkaa käyttäjää';
-
-# manage_config_email_page
 $s_config_all_projects = 'HUOMAA: Nämä asetukset vaikuttavat KAIKKIIN PROJEKTEIHIN.';
 $s_config_project = 'HUOMAA: Nämä asetukset vaikuttavat projektiin %s.';
 $s_colour_coding = 'Alla olevassa taulukossa seuraavat väriarvo ovat voimassa:';
@@ -712,10 +566,8 @@ $s_default_notify = 'Oletustiedonantoasetus:';
 $s_action_notify = 'Toimenpidetiedonantoasetus:';
 $s_notify_defaults_change_access = 'Käyttäjätaso, jolla voidaan muokata oletusmuistutusten muokkaustasoa';
 $s_notify_actions_change_access = 'Käyttäjätaso, jolla voidaan muokata muistutuksia';
-$s_revert_to_system = "Poista kaikki projektien asetukset.";
-$s_revert_to_all_project = "Poista projektikohtaiset asetukset.";
-
-# manage_config_workflow_page
+$s_revert_to_system = 'Poista kaikki projektien asetukset.';
+$s_revert_to_all_project = 'Poista projektikohtaiset asetukset.';
 $s_non_existent = 'ei olemassa';
 $s_current_status = 'Nykyinen tila';
 $s_next_status = 'Seuraava tila';
@@ -736,11 +588,7 @@ $s_desc_bug_reopen_status = 'Tapahtuman tila, jolle uudelleenavatut tapahtumat a
 $s_desc_bug_resolved_status_threshold = 'Tapahtuman tila, jolla tapahtumaa pidetään ratkaistuna';
 $s_workflow_change_access = 'Tapahtumaketjua voi muokata käyttäjätasolla';
 $s_access_change_access = 'Käyttäjätaso, jolla voidaan vaihtaa tilojen käyttöoikeustason muokkaustasoa';
-
-# manage_config_workflow_set
 $s_default_not_in_flow = '%s:n oletustilaa ei ole valittu %s:n seuraavissa tiloissa ja se ohitetaan.';
-
-# manage_config_work_threshold_page
 $s_assign_issue = 'Osoita tapahtuma';
 $s_allow_close_immediate = 'Salli tapahtuman sulkeminen ratkaisun jälkeen';
 $s_allow_reporter_close = 'Salli raportoijien sulkea tapahtuma';
@@ -754,13 +602,9 @@ $s_resolved_status = 'Tapahtuman tila, jolla tapahtumaa pidetään ratkaistuna';
 $s_readonly_status = 'Tapahtuman tila, jolla tapahtumaa ei voida enää muokata (vain lukuoikeus)';
 $s_reopen_status = 'Tapahtuman tila, jolle uudelleenavatut tapahtumat asetetaan';
 $s_reopen_resolution = 'Ratkaisuaste, jolle uudelleeavattu tapahtuma asetetaan';
-
-# manage_config_revert_page
 $s_config_delete_sure = 'Oletko varma, että haluat poistaa asetukset kohteelta';
 $s_in_project = 'projektissa';
 $s_delete_config_button = 'Poista asetukset';
-
-# adm_config_report.php
 $s_configuration_report = 'Configuration Report';
 $s_database_configuration = 'Database Configuration';
 $s_configuration_option = 'Configuration Option';
@@ -769,38 +613,18 @@ $s_configuration_option_value = 'Value';
 $s_all_users = 'All Users';
 $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
-
-# manage_proj_add.php
 $s_project_added_msg = 'Projekti lisätty...';
-
-# manage_proj_category_add.php
 $s_category_added_msg = 'Kategoria lisätty...';
-
-# manage_proj_category_delete.php
 $s_category_deleted_msg = 'Kategoria poistettu...';
-
-# manage_proj_category_delete_page.php
 $s_category_delete_sure_msg = 'Oletko varma, että haluat poistaa tämän kategorian?';
 $s_delete_category_button = 'Poista kategoria';
-
-# manage_proj_category_edit_page.php
 $s_edit_project_category_title = 'Muokkaa projektin kategoriaa';
 $s_update_category_button = 'Päivitä kategoria';
-
-# manage_proj_category_update.php
 $s_category_updated_msg = 'Kategoria päivitetty...';
-
-# manage_proj_create_page.php
 $s_add_subproject_title = 'Lisää aliprojekti';
-
-# manage_proj_delete.php
 $s_project_deleted_msg = 'Projekti poistettu...';
-
-# manage_proj_delete_page.php
 $s_project_delete_msg = 'Oletko varma, että haluat poistaa tämän projektin ja kaikki siihen liitetyt tapahtumat?';
 $s_project_delete_button = 'Poista projekti';
-
-# manage_proj_edit_page.php
 $s_edit_project_title = 'Muokkaa projektia';
 $s_project_name = 'Projektin nimi';
 $s_view_status = 'Tila';
@@ -823,65 +647,37 @@ $s_subprojects = 'Aliprojektit';
 $s_add_subproject = 'Lisää aliprojektina';
 $s_create_new_subproject_link = 'Luo uusi aliprojekti';
 $s_unlink_link = 'Pura linkitys';
-
-# manage_proj_menu_page.php
 $s_add_project_title = 'Lisää projekti';
 $s_upload_file_path = 'Lähetettävän tiedoston polku';
 $s_add_project_button = 'Lisää projekti';
 $s_projects_title = 'Projektit';
 $s_name = 'Nimi';
-
-# manage_proj_update.php
 $s_project_updated_msg = 'Projekti päivitetty...';
-
-# manage_proj_version_add.php
 $s_version_added_msg = 'Versio lisätty...';
-
-# manage_proj_version_delete.php
 $s_version_deleted_msg = 'Versio poistettu...';
-
-# manage_proj_version_delete_page.php
 $s_version_delete_sure = 'Oletko varma, että haluat poistaa tämän version?';
 $s_delete_version_button = 'Poista versio';
-
-# manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Muokkaa projektin versiota';
 $s_update_version_button = 'Päivitä versio';
 $s_released = 'Julkaistu';
-
-# manage_proj_version_update.php
 $s_version_updated_msg = 'Versio on päivitetty...';
-
-# manage_user_delete.php
 $s_account_delete_protected_msg = 'Käyttäjätunnus on suojattu. Tämä käyttäjätunnus ei ole poistettavissa.';
 $s_account_deleted_msg = 'Käyttäjätunnus poistettu...';
-
-# manage_user_delete_page.php
 $s_delete_account_sure_msg = 'Oletko varma, että haluat poistaa tämän käyttäjätunnuksen?';
-
-# manage_user_prune.php
 $s_accounts_pruned_msg = 'Kaikki yli viikon vanhat käyttäjätunnukset joilla ei ole sisäänkirjauduttu kertaakaan on poistettu';
 $s_prune_accounts_button = 'Karsi';
 $s_confirm_account_pruning = 'Oletko varma, että haluat poistaa kaikki vanhat käyttäjätunnukset joilla ei ole sisäänkirjauduttu kertaakaan?';
-
-# manage_user_page.php
 $s_edit_user_title = 'Muokkaa käyttäjää';
 $s_reset_password_button = 'Resetoi salasana';
 $s_delete_user_button = 'Poista käyttäjä';
 $s_reset_password_msg = 'Resetoi salasana lähettää vahvistuslinkin osoitteen sähköpostitse.';
 $s_reset_password_msg2 = 'Resetoi salasana asettaa käyttäjälle tyhjän salasanan.';
 $s_show_all_users = 'KAIKKI';
-
-# manage_user_reset.php
 $s_account_reset_protected_msg = 'Käyttäjätunnus on suojattu. Salasanaa ei voida resetoida.';
 $s_account_reset_msg = 'Vahvistusviesti on lähetetty sähköpostiosoitteeseesi...';
 $s_account_reset_msg2 = 'Käyttäjätunnukselle on asetettu tyhjä salasana...';
-
-# manage_user_update.php
 $s_manage_user_protected_msg = 'Käyttäjätunnus on suojattu. Käyttöoikeustaso ja Käytössä -valinnat suojattu. Kaikki muu käyttäjätunnuksessa päivitetty...';
 $s_manage_user_updated_msg = 'Käyttäjätunnus päivitetty...';
-
-# menu_inc.php
 $s_main_link = 'Pääsivu';
 $s_view_bugs_link = 'Näytä tapahtumat';
 $s_report_bug_link = 'Lisää tapahtuma';
@@ -894,10 +690,6 @@ $s_edit_news_link = 'Muokkaa uutisia';
 $s_docs_link = 'Dokumentaatio';
 $s_logout_link = 'Kirjaudu ulos';
 $s_my_view_link = 'Oma näkymä';
-
-# meta_inc.php
-
-# my_view_page.php
 $s_my_view_title_unassigned = 'Osoittamattomat';
 $s_my_view_title_recent_mod = 'Hiljattain muokattuja';
 $s_my_view_title_reported = 'Minun raportoimat';
@@ -906,24 +698,14 @@ $s_my_view_title_resolved = 'Ratkaistut';
 $s_my_view_title_monitored = 'Minun seuraamia';
 $s_my_view_title_feedback = 'Odottaa palautetta minulta';
 $s_my_view_title_verify = 'Odottaa ratkaisun vahvistusta minulta';
-
-# news_add.php
 $s_news_added_msg = 'Uutisartikkeli lisätty...';
-
-# news_delete.php
 $s_news_deleted_msg = 'Uutisartikkeli poistettu...';
-
-# news_delete_page.php
 $s_delete_news_sure_msg = 'Oletko varma, että haluat poistaa tämän uutisartikkelin?';
 $s_delete_news_item_button = 'Poista uutisartikkeli';
-
-# news_edit_page.php
 $s_edit_news_title = 'Muokkaa uutisia';
 $s_headline = 'Otsikko';
 $s_body = 'Leipäteksti';
 $s_update_news_button = 'Päivitä uutiset';
-
-# news_menu_page.php
 $s_add_news_title = 'Lisää uutisia';
 $s_post_to = 'Lähetä osoitteeseen:';
 $s_post_news_button = 'Lisää uutinen';
@@ -931,63 +713,33 @@ $s_edit_or_delete_news_title = 'Muokkaa tai poista uutisia';
 $s_edit_post = 'Muokkaa artikkelia';
 $s_delete_post = 'Poista artikkeli';
 $s_select_post = 'Valitse artikkeli';
-
-# news_update.php
 $s_news_updated_msg = 'Uutinen päivitetty...';
-
-# news_view_page.php
 $s_back_link = 'Takaisin';
-
-# proj_doc_add.php
 $s_file_uploaded_msg = 'Tiedosto onnistuneesti lähetetty';
-
-# proj_doc_add_page.php
 $s_upload_file_title = 'Lähetä tiedosto';
 $s_title = 'Otsikko';
-
-# proj_doc_delete.php
 $s_project_file_deleted_msg = 'Projektin tiedosto poistettu';
-
-# proj_doc_delete_page.php
 $s_confirm_file_delete_msg = 'Oletko varma, että haluat poistaa tämän tiedoston?';
-
-# proj_doc_edit_page.php
 $s_filename = 'Tiedostonimi';
 $s_file_update_button = 'Päivitä tiedosto';
 $s_file_delete_button = 'Poista tiedosto';
-
-# proj_doc_page.php
 $s_project_documentation_title = 'Projektin dokumentaatio';
 $s_user_documentation = 'Käyttäjien dokumentaatio';
 $s_project_documentation = 'Projektin dokumentaatio';
 $s_add_file = 'Lisää tiedosto';
-
-# proj_doc_update.php
 $s_project_document_updated = 'Projekti päivitetty onnistuneesti';
-
-# proj_user_add.php
 $s_project_user_added_msg = 'Käyttäjä onnistuneesti lisätty tähän projektiin';
-
-# proj_user_delete.php
 $s_project_removed_user_msg = 'Käyttäjä onnistuneesti poistettu tästä projektista';
-
-# proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Oletko varma, että haluat poistaa tämän käyttäjätunnuksen?';
 $s_remove_user_button = 'Poista käyttäjä';
 $s_remove_all_users_sure_msg = 'Oletko varma, että haluat poistaa kaikki käyttäjät tästä projektista?';
 $s_remove_all_users_button = 'Poista kaikki käyttäjät';
-
-# proj_user_menu_page.php
 $s_add_user_title = 'Lisää käyttäjä projektiin';
 $s_add_user_button = 'Lisää käyttäjätunnus';
 $s_project_selection_title = 'Projektin valinta';
 $s_remove_link = 'Poista';
 $s_remove_all_link = 'Poista kaikki';
-
-# proj_user_update.php
 $s_updated_user_msg = 'Käyttäjätunnus päivitetty';
-
-# report_add.php
 $s_must_enter_category = 'Sinun on valittava kategoria';
 $s_must_enter_severity = 'Sinun on valittava vakavuusaste';
 $s_must_enter_reproducibility = 'Sinun on annettava toistettavuus';
@@ -995,8 +747,6 @@ $s_must_enter_summary = 'Sinun on annettava yhteenveto';
 $s_must_enter_description = 'Sinun on annettava kuvaus';
 $s_report_more_bugs = 'Raportoi lisää tapahtumia';
 $s_submission_thanks_msg = 'Kiitos';
-
-# report_bug_advanced_page.php
 $s_simple_report_link = 'Yksinkertainen tapahtumaraportti';
 $s_enter_report_details_title = 'Syötä tapahtumaraportin tiedot';
 $s_required = 'pakollinen tieto';
@@ -1008,40 +758,24 @@ $s_assign_to = 'Osoita käyttäjälle';
 $s_additional_information = 'Lisätietoja';
 $s_submit_report_button = 'Lähetä raportti';
 $s_check_report_more_bugs = 'rastita raportoidaksesi lisää tapahtumia';
-
-# report_bug_page.php
 $s_advanced_report_link = 'Yksityiskohtainen raportti';
 $s_report_stay = 'Raportoi useita tapahtumia';
-
-# set_project.php
 $s_selected_project = 'Valittu projekti';
 $s_valid_project_msg = 'Sinun täytyy valita voimassaoleva projekti';
-
-# signup.php
 $s_signup_done_title = 'Käyttäjätilin rekisteröinti suoritettu';
 $s_password_emailed_msg = 'Olet rekisteröitynyt onnistuneesti. Syöttämääsi sähköpostiosoitteen lähetetään vahvistusviesti. Sähköpostiviestissä on linkki, jonka avulla käyttäjätilisi aktivoidaan käyttöön.';
 $s_no_reponse_msg = 'Sinulla on 7 päivää aikaa vahvistaa käyttäjätilisi. Jos et vahvista rekisteröintiäsi, käyttäjätilisi voidaan poistaa ja joudut syöttämään käyttäjätietosi uudelleen.';
-
-# signup_page.php
 $s_signup_captcha_request = 'Syötä koodi siinä muodossa, kuin se on oikealla olevassa laatikossa';
 $s_signup_info = 'Sinulle lähetetään syöttämääsi sähköpostiosoitteeseen vahvistusviesti.<br/>Viestissä on ohjeet, miten vahvistat rekisteröintisi. Jos et aktivoi tunnustasi 7 päivän sisällä, tunnuksesi poistetaan ja joudut rekisteröitymään uudelleen.<br/>';
 $s_signup_title = 'Uuden käyttäjätunnuksen rekisteröinti';
 $s_signup_button = 'Rekisteröidy';
 $s_no_password_request = 'Salasanaasi ylläpidetään toisessa järjestelmässä. Ole hyvä, ja ota yhteys ylläpitoon.';
-
-# site_settings_edit_page.php
 $s_edit_site_settings_title = 'Muokkaa sivuston asetuksia';
 $s_save_settings_button = 'Tallenna asetukset';
-
-# site_settings_page.php
 $s_site_settings_title = 'Sivuston asetukset';
 $s_system_info_link = 'Järjestelmätiedot';
 $s_site_settings_link = 'Sivuston asetukset';
-
-# site_settings_update.php
 $s_site_settings_updated_msg = 'Sivuston asetukset päivitetty';
-
-# summary_page.php
 $s_summary_title = 'Yhteenveto';
 $s_summary_jpgraph_link = 'Yksityiskohtainen yhteenveto';
 $s_by_project = 'Projektin mukaan';
@@ -1052,7 +786,7 @@ $s_by_resolution = 'Ratkaisuasteen mukaan';
 $s_by_category = 'Kategorian mukaan';
 $s_by_priority = 'Prioriteetin mukaan';
 $s_by_developer = 'Kehittäjän mukaan';
-$s_by_reporter ='Raportoijan mukaan';
+$s_by_reporter = 'Raportoijan mukaan';
 $s_reporter_by_resolution = 'Raportoija / ratkaisuaste';
 $s_reporter_effectiveness = 'Raportoijan tehokkuus';
 $s_developer_by_resolution = 'Kehittäjä / ratkaisuaste';
@@ -1068,8 +802,6 @@ $s_total_time = 'Yhteenlaskettu aika';
 $s_developer_stats = 'Kehittäjien tilastot';
 $s_reporter_stats = 'Raportoijien tilastot';
 $s_orct = '(avoin/ratkaistu/suljettu/yhteensä)';
-
-# view_all_bug_page.php
 $s_any = 'mikä tahansa';
 $s_show = 'Näytä';
 $s_changed = 'Muutettu (tuntia)';
@@ -1079,11 +811,9 @@ $s_sticky = 'Näytä päällimmäisinä pysyvät tapahtumat';
 $s_sort = 'Lajittelujärjestys';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
-
-# view_all_inc.php
 $s_none = 'ei mikään';
 $s_current = 'current';
-$s_search ='Haku';
+$s_search = 'Haku';
 $s_view_prev_link = 'Näytä edelliset';
 $s_view_next_link = 'Näytä seuraavat';
 $s_prev = 'Edellinen';
@@ -1099,8 +829,6 @@ $s_open_filters = 'Muokkaa suodinta';
 $s_or_unassigned = 'tai osoittamattomat';
 $s_ok = 'OK';
 $s_select_all = 'Valitse kaikki';
-
-# stored query strings
 $s_use_query = 'Käytä suodinta';
 $s_delete_query = 'Poista suodin';
 $s_query_deleted = 'Suodin poistettu';
@@ -1113,8 +841,6 @@ $s_query_blank_name = 'Jokaisella talletettavalla suotimella on oltava nimi. Ole
 $s_query_store_error = 'Kyselyn tallettamisessa tapahtui virhe.';
 $s_open_queries = 'Muokkaa suotimia';
 $s_query_delete_msg = 'Oletko varma, että haluat poistaa tämän kyselyn?';
-
-# view_bug_advanced_page.php
 $s_view_simple_link = 'Näytä yksinkertaiset tiedot';
 $s_viewing_bug_advanced_details_title = 'Näytetään tapahtuman yksityiskohtaiset tiedot';
 $s_product_build = 'Tuotteen kooste';
@@ -1127,25 +853,15 @@ $s_move_bug_button = 'Siirrä tapahtuma';
 $s_attached_files = 'Liitetiedostot';
 $s_publish = 'Julkaise';
 $s_cached = 'Välimuistissa';
-
-# view_bug_inc.php
-
-# view_bug_page.php
 $s_view_advanced_link = 'Näytä yksityiskohdat';
 $s_viewing_bug_simple_details_title = 'Näytetään tapahtuman yksinkertaiset tiedot';
-
-# bug_monitor_list_view_inc.php
 $s_no_users_monitoring_bug = 'Yksikään käyttäjä ei seuraa tätä tapahtumaa.';
 $s_users_monitoring_bug = 'Käyttäjät jotka seuraavat tätä tapahtumaa';
 $s_monitoring_user_list = 'Käyttäjälistaus';
-
-# bug_sponsorship_list_view_inc.php
 $s_no_users_sponsoring_bug = 'Tätä tapahtumaa ei sponsoroida.';
 $s_users_sponsoring_bug = 'Tätä tapahtumaa sponsoroivat käyttäjät';
 $s_sponsors_list = 'Sponsorilista';
 $s_total_sponsorship_amount = 'Sponsorit yhteensä = %s';
-
-# custom field strings
 $s_add_custom_field_button = 'Lisää mukautettu kenttä';
 $s_delete_custom_field_button = 'Poista mukautettu kenttä';
 $s_delete_custom_field_everywhere = 'Poista mukautettu kenttä kaikkialta';
@@ -1173,34 +889,25 @@ $s_custom_field_require_report = 'Vaadittu kenttä raportilla';
 $s_custom_field_require_update = 'Vaadittu kenttä päivitettäessä';
 $s_custom_field_require_resolved = 'Vaadittu kenttä ratkaistaessa';
 $s_custom_field_require_closed = 'Vaadittu kenttä sulkemisessa';
-
 $s_custom_field_sequence = 'Järjestys';
 $s_custom_field_type_enum_string = '0:Merkkijono,1:Numeerinen,2:Liukuluku,3:Joukkoluettelo,4:Sähköpostiosoite,5:Valintaruutu,6:Lista,7:Monivalintalista,8:Päivämäärä';
-
 $s_confirm_used_custom_field_deletion = 'Tämä kenttä on liitetty ainakin yhteen projektiin.  Jos jatkat, kaikki tähän kenttään liitetyt arvot poistetaan. Tätä komentoa ei voida jälkeenpäin kumota.  Jos et halua poistaa tätä kenttää, paina selaimesi Takaisin-painiketta.  Jatkaaksesi, paina allaolevaa painiketta';
 $s_confirm_custom_field_deletion = 'Oletko varma, että haluat poistaa tämän mukautetun kentän ja kaikki siihen liitetyt arvot?';
 $s_field_delete_button = 'Poista kenttä';
-
 $s_confirm_custom_field_unlinking = 'Oletko varma, että haluat poistaa tämän mukautetun kentän projektista sekä kaikki mukautettuun kenttään syötetyt arvot?';
 $s_field_remove_button = 'Poista kenttä';
-
 $s_hide_status = 'Piilota tila';
-$s_filter_closed = "Suljettu";
-$s_filter_resolved = "Ratkaistu";
-$s_hide_closed = "Piilota suljetut";
-$s_hide_resolved = "Piilota ratkaistut";
+$s_filter_closed = 'Suljettu';
+$s_filter_resolved = 'Ratkaistu';
+$s_hide_closed = 'Piilota suljetut';
+$s_hide_resolved = 'Piilota ratkaistut';
 $s_and_above = 'ja korkeammat';
 $s_advanced_filters = 'Lisäsuotimet';
 $s_simple_filters = 'Yksinkertaiset suotimet';
 $s_monitored_by = 'Seuraaja';
-
-$s_attachments = "liitteet";
-$s_attachment_alt = "A";
-
-# PHPMailer
+$s_attachments = 'liitteet';
+$s_attachment_alt = 'A';
 $s_phpmailer_language = 'fi';
-
-# Sponsorship Strings
 $s_sponsors = '%d sponsoria';
 $s_sponsorship_added = 'Sponsori lisätty';
 $s_sponsorship_updated = 'Sponsori päivitetty';
@@ -1208,49 +915,33 @@ $s_sponsorship_deleted = 'Sponsori poistettu';
 $s_sponsorship_paid = 'Sponsoritapahtuma maksettu';
 $s_sponsorship_more_info = 'Lisää tietoa sponsoroinnista';
 $s_sponsorship_total = 'Sponsorointi yhteensä';
-
-# URL explaining the process of sponsoring an issue.  This is defined here rather than
-# in the config to allow for a URL per language.  This can be set to an empty string if there
-# is not need to provide such process information.
-$s_sponsorship_process_url = '';
-
-# Changelog
 $s_changelog = 'Muutosloki';
-
-# Http auth
-$s_http_auth_realm = "Mantis kirjautuminen";
-
-$s_bug = "tapahtuma";
-$s_add_new_relationship = "Uusi relaatio";
-$s_add_new_relationship_button = "Lisää";
-$s_this_bug = "Nykyinen tapahtuma";
-$s_relationship_added = "Relaatio lisätty";
-$s_relationship_deleted = "Relaatio poistettu";
-$s_no_relationship = "ei relaatiota";
-$s_relationship_replaced = "Relaatio korvattu";
-$s_replace_relationship_button = "Korvaa";
-$s_replace_relationship_sure_msg = "Näiden kahden tapahtuman välillä on jo relaatio. Oletko varma, että haluat korvata sen?";
-$s_relationship_with_parent = "Relaatio isätapahtuman kanssa";
-$s_delete_relationship_button = "Poista";
-$s_delete_relationship_sure_msg = "Oletko varma, että haluat poistaa tämän relaation?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>HUOM!</b>. Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.<br>Ennen isätapahtuman <b>ratkaisua/sulkemista</b> kaikki lapsitapahtumat tulisi merkitä ratkaistuiksi tai suljetuiksi.";
-$s_create_child_bug_button = "Luo klooni";
-$s_bug_cloned_to = "Tapahtuma kloonattu";
-$s_bug_created_from = "Tapahtuma luotu tapahtumasta";
-
-# Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relaatiograafi";
-$s_relation_graph = "Relaatiograafi";
-$s_dependency_graph = "Riippuvuusgraafi";
-$s_vertical = "Pysty";
-$s_horizontal = "Vaaka";
-$s_view_issue = "Näytä tapahtuma";
-
-# Source Control Integration
+$s_http_auth_realm = 'Mantis kirjautuminen';
+$s_bug = 'tapahtuma';
+$s_add_new_relationship = 'Uusi relaatio';
+$s_add_new_relationship_button = 'Lisää';
+$s_this_bug = 'Nykyinen tapahtuma';
+$s_relationship_added = 'Relaatio lisätty';
+$s_relationship_deleted = 'Relaatio poistettu';
+$s_no_relationship = 'ei relaatiota';
+$s_relationship_replaced = 'Relaatio korvattu';
+$s_replace_relationship_button = 'Korvaa';
+$s_replace_relationship_sure_msg = 'Näiden kahden tapahtuman välillä on jo relaatio. Oletko varma, että haluat korvata sen?';
+$s_relationship_with_parent = 'Relaatio isätapahtuman kanssa';
+$s_delete_relationship_button = 'Poista';
+$s_delete_relationship_sure_msg = 'Oletko varma, että haluat poistaa tämän relaation?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>HUOM!</b>. Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.<br>Ennen isätapahtuman <b>ratkaisua/sulkemista</b> kaikki lapsitapahtumat tulisi merkitä ratkaistuiksi tai suljetuiksi.';
+$s_create_child_bug_button = 'Luo klooni';
+$s_bug_cloned_to = 'Tapahtuma kloonattu';
+$s_bug_created_from = 'Tapahtuma luotu tapahtumasta';
+$s_viewing_bug_relationship_graph_title = 'Relaatiograafi';
+$s_relation_graph = 'Relaatiograafi';
+$s_dependency_graph = 'Riippuvuusgraafi';
+$s_vertical = 'Pysty';
+$s_horizontal = 'Vaaka';
+$s_view_issue = 'Näytä tapahtuma';
 $s_checkin = 'Checkin';
-
-# Pemissions report
 $s_perm_rpt_capability = 'Oikeus';
 $s_view = 'Näytä';
 $s_issues = 'TAPAHTUMAT';
@@ -1278,8 +969,8 @@ $s_manage_news = 'Hallinnoi uutisia';
 $s_view_list_of_attachments = 'Näytä liitetiedostolistaukset';
 $s_download_attachments = 'Imuroi liitetiedostoja';
 $s_delete_attachments = 'Poista liitetiedostoja';
-$s_delete_attachment_button = "Poista";
-$s_delete_attachment_sure_msg = "Oletko varma, että haluat poistaa tämän liitetiedoston?";
+$s_delete_attachment_button = 'Poista';
+$s_delete_attachment_sure_msg = 'Oletko varma, että haluat poistaa tämän liitetiedoston?';
 $s_upload_issue_attachments = 'Päivitä tapahtuman liitetiedostoja';
 $s_filters = 'suotimet';
 $s_save_filters = 'Tallenna suotimet';
@@ -1310,24 +1001,14 @@ $s_status_changed_to = 'Tila muutettu';
 $s_email_on_deleted = 'Sähköpostia, kun tapahtuma poistetaan';
 $s_email_on_sponsorship_changed = 'Sähköpostia, kun tapahtuman sponssi muuttuu';
 $s_email_on_relationship_changed = 'Sähköpostia, kun tapahtuman relaatioita muokataan';
-
-# DHTML filters
 $s_loading = 'Ladataan...';
-
-# filter_api.php
 $s_between_date = 'Välillä';
 $s_on_or_before_date = 'Tällöin tai ennen';
 $s_before_date = 'Ennen';
 $s_after_date = 'Jälkeen';
 $s_on_or_after_date = 'Tällöin tai jälkeen';
-
-# Date constants
 $s_from_date = 'Keneltä';
 $s_to_date = 'Kenelle';
 $s_on_date = 'Milloin';
-
-# Switch constants
 $s_on = 'Milloin';
-
-# wiki related strings
 $s_wiki = 'Wiki';

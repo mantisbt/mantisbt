@@ -23,7 +23,7 @@
  * $Id$
  */
 
-/**
+/** Traditional Chinese (‪中文(繁體)‬)
  *
  * @ingroup Language
  * @file
@@ -31,10 +31,7 @@
  * @author Jonathan Tsai, tryweb@ichiayi.com
  */
 
-# Charset
 $s_charset = 'utf-8';
-
-# Group commands menuitems
 $s_actiongroup_menu_move = '搬移';
 $s_actiongroup_menu_copy = '複製';
 $s_actiongroup_menu_assign = '分派';
@@ -48,8 +45,6 @@ $s_actiongroup_menu_update_category = '更改類別';
 $s_actiongroup_menu_set_sticky = '設定/取消難題';
 $s_actiongroup_menu_update_field = '更改 %s';
 $s_actiongroup_bugs = '已選擇問題';
-
-# new strings:
 $s_all_projects = '全部專案';
 $s_move_bugs = '搬移 Bugs';
 $s_operation_successful = '正確執行完成';
@@ -89,13 +84,11 @@ $s_delete_bugnote_sure_msg = '你確定要刪除這個 Bug 筆記嗎?';
 $s_bug_relationships = '相關的 Bug';
 $s_empty_password_sure_msg = '這使用者的密碼為空白. 你確定這樣是正確的嗎?';
 $s_empty_password_button = '使用空白密碼';
-
-$s_duplicate_of = "複製 of";
-$s_has_duplicate = "已經複製";
-$s_related_to = "相關 to";
-$s_dependant_on = "上層 of";
-$s_blocks = "下層 of";
-
+$s_duplicate_of = '複製 of';
+$s_has_duplicate = '已經複製';
+$s_related_to = '相關 to';
+$s_dependant_on = '上層 of';
+$s_blocks = '下層 of';
 $s_new_bug = '新 Bug';
 $s_bugnote_added = 'Bug 筆記已新增';
 $s_bugnote_edited = 'Bug 筆記已編輯';
@@ -107,16 +100,10 @@ $s_steps_to_reproduce_updated = '已更新產生問題步驟';
 $s_file_added = '檔案已新增: ';
 $s_file_deleted = '檔案已刪除: ';
 $s_bug_deleted = 'Bug 已刪除';
-
 $s_make_private = '設為封閉';
 $s_make_public = '設為公開';
-
 $s_create_new_project_link = '建立新的專案';
-
 $s_login_link = '登入';
-
-# bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = '你沒有適當的權限去執行這作業, 出現以下的 bugs: ';
 $s_bug_actiongroup_access = '你沒有適當的權限去執行這作業.';
 $s_bug_actiongroup_status = '這問題不能更動為需求狀態';
 $s_bug_actiongroup_category = '這問題不能更動為需求類別';
@@ -142,8 +129,6 @@ $s_status_group_bugs_button = '更新狀態';
 $s_category_group_bugs_button = '更新類別';
 $s_view_status_group_bugs_button = '更新檢視狀態';
 $s_set_sticky_group_bugs_button = '設定/取消難題';
-
-# improved JPgraphs strings
 $s_graph_imp_status_title = '狀態合成圖';
 $s_graph_imp_priority_title = '優先度合成圖';
 $s_graph_imp_severity_title = '嚴重性合成圖';
@@ -172,22 +157,13 @@ $s_legend_closed = '已結案';
 $s_legend_reported = '已回報';
 $s_cumulative = '累積';
 $s_not_enough_data = '資料不足無法建立圖形';
-
-# print_all_bug_page.php : display selected bugs
 $s_hide_button = '只顯示已選擇';
-
-# print_all_bug_options.php : printing preferences
 $s_printing_preferences_title = '選擇列印欄位';
 $s_printing_options_link = '列印選項';
-
-# word and excel export
 $s_bugnote_title = 'Bug 筆記處理者';
 $s_bugnote_date = 'Bug 筆記日期';
 $s_bugnote_description = 'Bug 筆記說明';
-
 $s_error_no_proceed = '請使用瀏覽器的 "上ㄧ頁" 按鈕回到前個畫面.  來修正產生這個錯誤的問題資料或者選擇其他的作業.  你也可以在選單列點選你想要執行的新項目.';
-
-# ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC] = '執行這個動作時發生異常錯誤. 請將這錯誤訊息回報給你的系統管理員.';
 $MANTIS_ERROR[ERROR_SQL] = '發生 SQL 錯誤.  請將這訊息回報給 ';
 $MANTIS_ERROR[ERROR_REPORT] = '在你的回報中發生錯誤.';
@@ -209,41 +185,41 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '缺少 \'%s\' 這個字串.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '筆記找不到.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '專案找不到.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = '找不到 \'%s\' 這個資料庫欄位.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = '無法連上 FTP 主機.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = '在目前的問題狀態, 處理者沒有適合的權限去處理這問題.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = '無法連上 FTP 主機.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = '在目前的問題狀態, 處理者沒有適合的權限去處理這問題.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '專案名稱已經存在. 請返回上ㄧ頁輸入其他名稱.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '這專案名稱不合規定. 專案名稱不可為空白字串.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = '使用者找不到.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = '使用者找不到.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = '無法將登入資訊存入你的瀏覽器中. 可能你的帳號已經被刪除或是沒有開啟瀏覽器的 Cookie 功能?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '無法找到這使用者的設定值.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = '新的項目找不到.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = '新的項目找不到.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '輸入的密碼與圖形中的英數字不符.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = '預期是陣列但收到的是字串。';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = '預期是陣列但收到的是字串。';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '預期是字串但收到的是陣列。';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%s的預期數據為數值。';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Bug %d 找不到.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = '過濾條件 %d 無法找到.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Bug %d 找不到.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = '過濾條件 %d 無法找到.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = '你所要使用的過濾條件版本過舊, 煩請重新建立';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'E-Mail 格式不正確.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'E-Mail 格式不正確.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '找不到個人設定.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = '上傳檔案的類型不被接受.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = '這是重複的檔案。請先刪除已重複的檔案。';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = '上傳檔案的類型不被接受.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = '這是重複的檔案。請先刪除已重複的檔案。';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '上傳路徑錯誤. 目錄可能不存在或者沒有寫入的權限';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = '沒有檔案被上傳. 請返回上頁並且選擇要上傳的檔案';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = '上傳檔案無法被搬移到檔案儲存目錄. 目錄可能不存在或者沒有寫入的權限';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = '你不能循環設定這問題。';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = '你不能循環設定這問題。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = '找不到自訂欄位';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '這是一個重複的名稱。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '最少有一個以上的專案仍在使用這欄位。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '這欄位的數值無效';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = '無效的自訂欄位定義';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP 認證失敗';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP 認證失敗';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = '連線至 LDAP 伺服器失敗';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = '更新 LDAP 記錄失敗。';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = '更新 LDAP 記錄失敗。';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = '找不到 LDAP 帳號記錄。';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = '連線至資料庫伺服器失敗。資料庫的錯誤訊息是#%d: %s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = '資料庫查詢失敗。資料庫的錯誤訊息是#%d: %s，查詢%s';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = '選擇資料庫失敗。資料庫的錯誤訊息是#%d: %s';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = '連線至資料庫伺服器失敗。資料庫的錯誤訊息是#%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = '資料庫查詢失敗。資料庫的錯誤訊息是#%d: %s，查詢%s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = '選擇資料庫失敗。資料庫的錯誤訊息是#%d: %s';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '相同名稱的類別已經存在.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '沒有指定的複製作業.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '類別找不到.';
@@ -260,10 +236,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = '拒絕存取: 
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = '資助者沒有提供 E-Mail. 請更新你的個人設定.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '參數設定選項 \'%s\' 出現不合理的內容 \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '這作業無法執行, 因誤問題 \'%d\' 是設定唯讀狀態';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "這兩個問題之前就已經設定為相關問題.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "相關問題找不到.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "拒絕存取: 這問題 %d 需要更高的存取權限.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "不可將自己設定為相關問題.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = '這兩個問題之前就已經設定為相關問題.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = '相關問題找不到.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = '拒絕存取: 這問題 %d 需要更高的存取權限.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = '不可將自己設定為相關問題.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = '確認編碼不符. 請重試一次.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'忘記密碼\' 功能未啟用.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = '你必須提供一個 E-Mail 來重新設定密碼';
@@ -273,54 +249,40 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '目前已
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '這樣會將自己建立為下層專案的下層專案而造成無窮迴路問題.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '你不可以更改系統中最後一個系統管理員的權限';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
-
 $s_login_error = '你的帳號可能被暫停或封鎖或者輸入不正確的帳號密碼.';
 $s_login_cookies_disabled = '錯誤: 你的瀏覽器可能不支援 cookies 功能或是沒有將 cookies 功能開啟.';
-
-# General Strings
 $s_go_back = '回上頁';
 $s_proceed = '按這裡繼續';
-
 $s_switch = '切換';
 $s_logged_in_as = '登入為';
-
 $s_prefix_for_deleted_users = '使用者';
-
 $s_administrator = '系統管理員';
-$s_myself = "我自己";
+$s_myself = '我自己';
 $s_default_access_level = '預設存取等級';
-
 $s_issue_status_percentage = '問題狀態百分比';
-
-# Enum Strings
-$s_access_levels_enum_string      = '10:參觀者,25:回報人,40:更新者,55:開發者,70:管理者,90:系統管理員';
-$s_project_status_enum_string     = '10:開發中,30:已上線,50:已穩定,70:已作廢';
+$s_access_levels_enum_string = '10:參觀者,25:回報人,40:更新者,55:開發者,70:管理者,90:系統管理員';
+$s_project_status_enum_string = '10:開發中,30:已上線,50:已穩定,70:已作廢';
 $s_project_view_state_enum_string = '10:公開型,50:封閉型';
-$s_view_state_enum_string         = '10:公開,50:封閉';
-
-$s_priority_enum_string           = '10:無,20:低,30:一般,40:高,50:緊急,60:立即';
-$s_severity_enum_string           = '10:特徵,20:不重要,30:文字,40:不耐壓,50:次要,60:重要,70:當機,80:咬住';
-$s_reproducibility_enum_string    = '10:時常,30:偶然,50:隨機,70:未測試,90:無法重現,100:N/A';
-$s_status_enum_string             = '10:新問題,20:有回覆,30:已收到,40:有確認,50:已分派,80:已解決,90:已結案';
-$s_resolution_enum_string         = '10:未結案,20:已修正,30:重設未結案,40:無法重現錯誤,50:無法修復,60:重複回報問題,70:不是 Bug,80:暫時擱置,90:不須修正';
-$s_projection_enum_string         = '10:沒有,30:壓力測試,50:小幅修正,70:主要修訂,90:重新設計';
-$s_eta_enum_string                = '10:沒有,20:< 一天,30:二至三天,40:< 一星期,50:< 一個月,60:> 一個月';
-$s_sponsorship_enum_string        = '0:未付款,1:已要求付款,2:已付款';
-
-# Email Strings
+$s_view_state_enum_string = '10:公開,50:封閉';
+$s_priority_enum_string = '10:無,20:低,30:一般,40:高,50:緊急,60:立即';
+$s_severity_enum_string = '10:特徵,20:不重要,30:文字,40:不耐壓,50:次要,60:重要,70:當機,80:咬住';
+$s_reproducibility_enum_string = '10:時常,30:偶然,50:隨機,70:未測試,90:無法重現,100:N/A';
+$s_status_enum_string = '10:新問題,20:有回覆,30:已收到,40:有確認,50:已分派,80:已解決,90:已結案';
+$s_resolution_enum_string = '10:未結案,20:已修正,30:重設未結案,40:無法重現錯誤,50:無法修復,60:重複回報問題,70:不是 Bug,80:暫時擱置,90:不須修正';
+$s_projection_enum_string = '10:沒有,30:壓力測試,50:小幅修正,70:主要修訂,90:重新設計';
+$s_eta_enum_string = '10:沒有,20:< 一天,30:二至三天,40:< 一星期,50:< 一個月,60:> 一個月';
+$s_sponsorship_enum_string = '0:未付款,1:已要求付款,2:已付款';
 $s_new_account_subject = '新帳號註冊通知';
 $s_new_account_greeting = '謝謝您的註冊. 您的帳號為 \'';
 $s_new_account_greeting2 = '\'. 請點選下面的網址來完成註冊程序, 點選後會自動開啟瀏覽器連入讓你設定密碼的畫面:';
 $s_new_account_username = '帳號: ';
-$s_new_account_message = '如果你沒有在本網站註冊, 請不要理這封註冊確認信件, 就當成沒發生過好了.' . "\n\n";
+$s_new_account_message = '如果你沒有在本網站註冊, 請不要理這封註冊確認信件, 就當成沒發生過好了.\n\n';
 $s_new_account_do_not_reply = '請不要直接回覆這封註冊確認信件';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = '遠端 IP 位址: ';
 $s_new_account_signup_msg = '這個帳號已經建立完成:';
-
-$s_reset_request_msg = '有人 (或許是你自己) 提出更改密碼的需求. 如果你沒有提出更改密碼的需求, 請不要理這封註冊確認信件, 就當成沒發生過好了.' . "\n\n" . '如果這個需求確定是你提出, 請點選以下的網址來更改你的密碼:';
+$s_reset_request_msg = '有人 (或許是你自己) 提出更改密碼的需求. 如果你沒有提出更改密碼的需求, 請不要理這封註冊確認信件, 就當成沒發生過好了.\n\n如果這個需求確定是你提出, 請點選以下的網址來更改你的密碼:';
 $s_reset_request_in_progress_msg = '如果你提供正確的帳號以及 E-Mail, 系統將會自動寄發一封確認信函到你的 E-Mail 中. 當你收到這封確認信函, 依照信中的指示步驟, 將可以容易的去更改你的密碼.';
-
 $s_email_notification_title_for_status_bug_new = '以下的問題現在被重設為新問題狀態';
 $s_email_notification_title_for_status_bug_feedback = '以下的問題需要你的回覆.';
 $s_email_notification_title_for_status_bug_acknowledged = '以下的 bug 已經收到.';
@@ -328,7 +290,6 @@ $s_email_notification_title_for_status_bug_confirmed = '以下的 bug 已經確�
 $s_email_notification_title_for_status_bug_assigned = '以下的 bug 已經分派.';
 $s_email_notification_title_for_status_bug_resolved = '以下的 bug 已經解決.';
 $s_email_notification_title_for_status_bug_closed = '以下的 bug 已經結案';
-
 $s_email_notification_title_for_action_bug_submitted = '以下的 bug 已經回報.';
 $s_email_notification_title_for_action_bug_assigned = '以下的 bug 已經分派.';
 $s_email_notification_title_for_action_bug_reopened = '以下的 bug 已經重設未結案.';
@@ -337,21 +298,19 @@ $s_email_notification_title_for_action_bug_updated = '以下的問題已經更�
 $s_email_notification_title_for_action_sponsorship_added = '以下的問題已經被資助.';
 $s_email_notification_title_for_action_sponsorship_updated = '這問題的資助部分已更改.';
 $s_email_notification_title_for_action_sponsorship_deleted = '這問題的資助部分已撤銷.';
-
 $s_email_notification_title_for_action_bugnote_submitted = 'Bug 筆記已經被新增到這 bug 內.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "以下的問題已經被設定為重複的問題 %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "這問題 %s 已經被設定為和以下的問題重複.";
-$s_email_notification_title_for_action_related_to_relationship_added = "以下的問題已經被設定為這問題的相關問題 %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "以下的問題已經被設定為這個問題的上層問題 %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "以下的問題已經被設定為這問題的下層問題 %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "以下的問題已經被取消這問題的重複問題 %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "這問題 %s 已經被取消設定為以下問題的重複問題.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "以下的問題已經被取消這問題的相關問題 %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "以下的問題已經被取消這問題的上層問題 %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "以下的問題已經被取消這問題的下層問題 %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "這相關問題 %s 已經被解決.";
-$s_email_notification_title_for_action_relationship_child_closed = "這相關問題 %s 已經被結案.";
-
+$s_email_notification_title_for_action_duplicate_of_relationship_added = '以下的問題已經被設定為重複的問題 %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = '這問題 %s 已經被設定為和以下的問題重複.';
+$s_email_notification_title_for_action_related_to_relationship_added = '以下的問題已經被設定為這問題的相關問題 %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = '以下的問題已經被設定為這個問題的上層問題 %s.';
+$s_email_notification_title_for_action_blocks_relationship_added = '以下的問題已經被設定為這問題的下層問題 %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = '以下的問題已經被取消這問題的重複問題 %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = '這問題 %s 已經被取消設定為以下問題的重複問題.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = '以下的問題已經被取消這問題的相關問題 %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = '以下的問題已經被取消這問題的上層問題 %s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = '以下的問題已經被取消這問題的下層問題 %s.';
+$s_email_notification_title_for_action_relationship_child_resolved = '這相關問題 %s 已經被解決.';
+$s_email_notification_title_for_action_relationship_child_closed = '這相關問題 %s 已經被結案.';
 $s_email_reporter = '回報人';
 $s_email_handler = '處理者';
 $s_email_project = '專案';
@@ -366,18 +325,12 @@ $s_email_duplicate = '複製';
 $s_email_fixed_in_version = '已修正版本';
 $s_email_date_submitted = '回報日期';
 $s_email_last_modified = '上次更新';
-$s_email_summary =  '摘要';
+$s_email_summary = '摘要';
 $s_email_description = '說明';
-
-# account_delete.php
 $s_account_protected_msg = '帳號被保護. 無法變更設定...';
 $s_account_removed_msg = '你的帳號已經被移除...';
-
-# account_delete_page.php
 $s_confirm_delete_msg = '您確定要刪除你的帳號?';
 $s_delete_account_button = '刪除帳號';
-
-# account_page.php
 $s_manage_profiles_link = '管理個人設定';
 $s_change_preferences_link = '變更喜好設定';
 $s_edit_account_title = '編輯帳號';
@@ -386,13 +339,11 @@ $s_realname = '真實姓名';
 $s_email = 'E-Mail';
 $s_password = '密碼';
 $s_no_password_change = '這個密碼已經被其他系統控制中, 所以目前無法被更改編輯.';
-$s_confirm_password  = '確認密碼';
+$s_confirm_password = '確認密碼';
 $s_access_level = '存取權限';
 $s_update_user_button = '更新使用者';
 $s_verify_warning = '你的帳號資訊已經驗證無誤. 你所收到的帳號確認信現在已經失效.';
 $s_verify_change_password = '你必須在此設定密碼才可重新登入.';
-
-# account_prefs_page.php
 $s_default_account_preferences_title = '預設帳號喜好設定';
 $s_default_project = '預設專案';
 $s_advanced_report = '進階報告';
@@ -417,30 +368,16 @@ $s_email_bugnote_limit = 'Bug 筆記數超過指定數就 E-Mail 給我';
 $s_language = '語系';
 $s_update_prefs_button = '更新喜好';
 $s_reset_prefs_button = '重設喜好';
-
-# account_prefs_reset.php
 $s_prefs_reset_msg = '喜好設定已經重設...';
-
-# account_prefs_update.php
 $s_prefs_updated_msg = '喜好設定已經更新...';
-
-# account_profile_add.php
 $s_profile_added_msg = '個人設定已新增...';
-
-# account_profile_delete.php
 $s_profile_deleted_msg = '刪除個人設定...';
-
-# account_profile_edit_page.php
 $s_edit_profile_title = '編輯個人設定';
 $s_platform = '作業平台';
 $s_operating_system = '作業系統';
 $s_additional_description = '額外說明';
 $s_update_profile_button = '更新個人設定';
-
-# account_profile_make_default.php
 $s_profile_defaulted_msg = '預設個人設定更新...';
-
-# account_profile_manage_page.php
 $s_add_profile_title = '新增個人設定';
 $s_add_profile_button = '新增個人設定';
 $s_edit_or_delete_profiles_title = '編輯或刪除個人設定';
@@ -449,44 +386,28 @@ $s_make_default = '指定預設值';
 $s_delete_profile = '刪除個人設定';
 $s_select_profile = '選擇個人設定';
 $s_submit_button = '送出';
-
-# account_profile_update.php
 $s_profile_updated_msg = '個人設定更新...';
-
-# account_sponsor_page.php
 $s_my_sponsorship = '我的資助者';
 $s_update_sponsorship_button = '更改付款狀態';
 $s_no_sponsored = '找不到指派給你的問題有被資助.';
 $s_own_sponsored = '你被資助的問題:';
 $s_issues_handled = '指派給你有被資助的問題:';
 $s_no_own_sponsored = '指派給你的問題均沒有被資助.';
-$s_sponsor = '資助者';	# like in 'The sponsor of...'
-$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
+$s_sponsor = '資助者';
+$s_sponsor_verb = 'Sponsor';
 $s_amount = '金額';
 $s_total_owing = '欠款總額';
 $s_total_paid = '付款總額';
 $s_sponsor_hide = '隱藏已解決及已付款';
 $s_sponsor_show = '全部顯視';
-
-# account_sponsor_update.php
 $s_payment_updated = '付款資料已更新.';
-
-# account_update.php
 $s_account_updated_msg = '你的帳戶已經成功更新...';
 $s_email_updated = 'Email 地址已成功更新';
 $s_realname_duplicated = '有其他使用者已經使用這個真實姓名';
 $s_realname_updated = '真實姓名已成功更新';
 $s_password_updated = '密碼已成功更新';
-
-# adm_permission_report.php
-
-# bug_action_group_page
 $s_multiple_projects = '你所選擇的問題屬於不同的專案。以下參數將影響到所有專案的設定, 如果你不是想這樣的話, 請重新選定較少的問題.';
-
-# bug_assign.php
-$s_bug_assign_msg       = 'Bug 已經成功被指定...';
-
-# bug_change_status_page.php
+$s_bug_assign_msg = 'Bug 已經成功被指定...';
 $s_new_bug_title = '新問題';
 $s_feedback_bug_title = '提供對這問題的回覆';
 $s_acknowledged_bug_title = '已收到問題';
@@ -497,49 +418,27 @@ $s_feedback_bug_button = '提供回覆';
 $s_acknowledged_bug_button = '已收到問題';
 $s_confirmed_bug_button = '有確認問題';
 $s_assigned_bug_button = '已分派問題';
-
-# bug_close.php
-$s_bug_close_msg       = 'Bug 已經被結案...';
-$s_close_immediately   = '立刻結案:';
-
-# bug_close_page.php
+$s_bug_close_msg = 'Bug 已經被結案...';
+$s_close_immediately = '立刻結案:';
 $s_closed_bug_title = '結案';
-
-# bug_delete.php
 $s_bug_deleted_msg = 'Bug 已經被刪除...';
-
-# bug_delete_page.php
 $s_delete_bug_sure_msg = '你確定要刪除此 Bug?';
 $s_delete_bug_button = '刪除 Bug';
-
-# bug_monitor.php
 $s_monitor_bug_button = '監控 Bug';
 $s_unmonitor_bug_button = '取消監控';
-
-# bug_file_add.php
 $s_file_upload_msg = '檔案上傳成功';
-
-# bug_file_upload_inc.php
 $s_upload_file = '上傳檔案';
 $s_select_file = '選擇檔案';
 $s_upload_file_button = '上傳檔案';
 $s_max_file_size = '檔案大小限制';
-
-# bug_reopen.php
 $s_bug_reopened_msg = 'Bug 已經被重設未結案...';
 $s_reopen_add_bugnote_title = '新增 Bug 筆記理由 For 重開 Bug';
 $s_bugnote_add_reopen_button = '新增 Bug 筆記且重開 Bug';
-
-# bug_resolve_page.php
 $s_resolved_bug_title = '解決 Bug';
 $s_resolved_bug_button = '解決 Bug';
-
-# bug_resolve_page2.php
 $s_bug_resolved_msg = 'Bug 已經被解決. 請在下方輸入 Bug 筆記...';
 $s_resolve_add_bugnote_title = '新增 Bug 筆記理由 For 解決 Bug';
 $s_bugnote_add_resolve_button = '新增 Bug 筆記';
-
-# bug_reminder_page.php
 $s_from = 'From';
 $s_to = 'To';
 $s_sent_you_this_reminder_about = '傳送給你這個提醒訊息, 內容說明如下';
@@ -550,14 +449,8 @@ $s_reminder = '提醒訊息(會自動加入 Bug 筆記內)';
 $s_reminder_explain = '這訊息將被傳送到清單裡面指定的收信者, 去要求他們能夠回覆有關這問題的處理狀況.';
 $s_reminder_monitor = '系統會自動將這些指定的收信者設定監控這個問題. 他們也可以使用取消監控的功能將這問題移出他的監控清單內.';
 $s_reminder_store = '你所輸入的訊息也會被當成一個 Bug 筆記記錄在這 Bug 問題內.';
-
-# bug_set_sponsorship.php
 $s_confirm_sponsorship = '請確認你所要資助的這問題 %d - %s.';
-
-# bug_update.php
 $s_bug_updated_msg = 'Bug 已經成功被更新...';
-
-# bug_update_advanced_page.php
 $s_back_to_bug_link = '回到 Bug';
 $s_update_simple_link = '簡易更新';
 $s_updating_bug_advanced_title = '正在更新 Bug 資訊';
@@ -587,46 +480,23 @@ $s_steps_to_reproduce = 'Bug 發生的步驟說明';
 $s_update_information_button = '更新資訊';
 $s_sticky_issue = '棘手問題';
 $s_profile = '個人設定';
-
-# bug_update_page.php
 $s_update_advanced_link = '進階更新';
 $s_updating_bug_simple_title = '正在更新 Bug 資訊';
-
-# bug_vote_add.php
 $s_vote_added_msg = '投票已新增...';
-
-# bugnote_add.php
 $s_bugnote_added_msg = 'Bug 筆記已新增...';
-
-# bugnote_delete.php
 $s_bugnote_deleted_msg = 'Bug 筆記已刪除...';
 $s_bug_notes_title = 'Bug 筆記';
-
-# bugnote_edit_page.php
 $s_edit_bugnote_title = '編輯 Bug 筆記';
-
-# bugnote_inc.php
 $s_no_bugnotes_msg = '沒有 Bug 筆記附在這 Bug 身上';
 $s_delete_link = '刪除';
 $s_add_bugnote_title = '新增 Bug 筆記';
 $s_add_bugnote_button = '新增 Bug 筆記';
 $s_bugnote_edit_link = '編輯';
 $s_closed_bug_button = '結案';
-
-# bugnote_update.php
 $s_bugnote_updated_msg = 'Bug 筆記已經被更新成功...';
 $s_edited_on = '已編輯: ';
-
-# file_api.php
-$s_show_content ='Show Content';
-
-# index.php
+$s_show_content = 'Show Content';
 $s_click_to_login = '點選這裡登入';
-
-# login.php
-
-# login_page.php
-#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = '歡迎來到 Bug 追蹤中心';
 $s_login_title = '登入';
 $s_save_login = '記住此次登入';
@@ -634,42 +504,28 @@ $s_choose_project = '選擇專案';
 $s_login_button = '登入';
 $s_signup_link = '註冊一個新帳號';
 $s_lost_password_link = '忘記密碼按這裡';
-
-# login_select_proj_page.php
 $s_select_project_button = '選擇專案';
-
-# logout_page.php
 $s_logged_out_title = '登出中...';
 $s_redirecting = '...轉址中';
 $s_here = '到這裡';
-
-# lost_pwd_page.php
-$s_lost_password_title = "重新設定密碼";
-$s_lost_password_done_title = "重設密碼訊息已經送出";
-$s_lost_password_subject = "重新設定密碼";
-$s_lost_password_info = "當你忘記密碼時, 請輸入正確的帳號和 E-Mail 然後點選送出.<br/><br/>當你輸入的帳號和 E-Mail 正確無誤, 你將可在你的 E-Mail 信箱收到一封通知信, 點選信中的網址, 你就可以連上本站更新你的密碼.";
-$s_lost_password_confirm_hash_OK = "你的申請已經被接受. 請更新你的密碼.";
-
-# main_page.php
+$s_lost_password_title = '重新設定密碼';
+$s_lost_password_done_title = '重設密碼訊息已經送出';
+$s_lost_password_subject = '重新設定密碼';
+$s_lost_password_info = '當你忘記密碼時, 請輸入正確的帳號和 E-Mail 然後點選送出.<br/><br/>當你輸入的帳號和 E-Mail 正確無誤, 你將可在你的 E-Mail 信箱收到一封通知信, 點選信中的網址, 你就可以連上本站更新你的密碼.';
+$s_lost_password_confirm_hash_OK = '你的申請已經被接受. 請更新你的密碼.';
 $s_open_and_assigned_to_me = '分派給我且尚未結案';
 $s_open_and_reported_to_me = '由我回報且尚未結案';
 $s_newer_news_link = '更新的新聞';
 $s_older_news_link = '稍早的新聞';
 $s_archives = '清單模式';
 $s_rss = 'RSS';
-
-# manage_create_new_user.php
 $s_created_user_part1 = '建立使用者';
 $s_created_user_part2 = '存取權限為';
-
-# manage_create_user_page.php
 $s_create_new_account_title = '建立使用者帳號';
 $s_verify_password = '確認密碼';
 $s_enabled = '啟用';
 $s_protected = '保護';
 $s_create_user_button = '建立使用者';
-
-# manage_page.php
 $s_hide_disabled = '隱藏未啟用的';
 $s_filter_button = '確定過濾條件';
 $s_manage_users_link = '管理使用者';
@@ -694,8 +550,6 @@ $s_p = 'p';
 $s_date_created = '建立日期';
 $s_last_visit = '最後一次瀏覽';
 $s_edit_user_link = '編輯使用者';
-
-# manage_config_email_page
 $s_config_all_projects = '注意: 這些參數設定將影響所有專案.';
 $s_config_project = '注意: 這些參數設定將只影響 %s 這個專案.';
 $s_colour_coding = '表格內如出現顏色, 請參考以下各顏色的內容說明:';
@@ -710,10 +564,8 @@ $s_default_notify = '設定預設 E-Mail 通知';
 $s_action_notify = '設定作業 E-Mail 通知';
 $s_notify_defaults_change_access = '誰可以更動預設 E-Mail 通知';
 $s_notify_actions_change_access = '誰可以更動 E-Mail 通知';
-$s_revert_to_system = "刪除全部專案設定值";
-$s_revert_to_all_project = "刪除專案特定設定值";
-
-# manage_config_workflow_page
+$s_revert_to_system = '刪除全部專案設定值';
+$s_revert_to_all_project = '刪除專案特定設定值';
 $s_non_existent = '不存在的';
 $s_current_status = '目前狀態';
 $s_next_status = '下個狀態';
@@ -734,11 +586,7 @@ $s_desc_bug_reopen_status = '狀態已被重設為未結案的問題';
 $s_desc_bug_resolved_status_threshold = '狀態已被設為已解決問題';
 $s_workflow_change_access = '誰可以更動工作流程';
 $s_access_change_access = '誰可以更動存取權限';
-
-# manage_config_workflow_set
 $s_default_not_in_flow = ' %s 的預設狀態沒被選擇 %s 的下個狀態. 這個會被忽略的';
-
-# manage_config_work_threshold_page
 $s_assign_issue = '分派問題';
 $s_allow_close_immediate = '允許問題在解決後就結案';
 $s_allow_reporter_close = '允許回報人能結案';
@@ -752,13 +600,9 @@ $s_resolved_status = '這問題的狀態已被設為已解決問題';
 $s_readonly_status = '這問題的狀態已被設為唯讀問題';
 $s_reopen_status = '這問題的狀態已被設為重設未結案問題';
 $s_reopen_resolution = '分析已被重設為未結案問題';
-
-# manage_config_revert_page
 $s_config_delete_sure = '你確定要刪除刪除這設定值--';
 $s_in_project = '在專案';
 $s_delete_config_button = '刪除設定值';
-
-# adm_config_report.php
 $s_configuration_report = 'Configuration Report';
 $s_database_configuration = 'Database Configuration';
 $s_configuration_option = 'Configuration Option';
@@ -767,38 +611,18 @@ $s_configuration_option_value = 'Value';
 $s_all_users = 'All Users';
 $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
-
-# manage_proj_add.php
 $s_project_added_msg = '專案已新增...';
-
-# manage_proj_category_add.php
 $s_category_added_msg = '類別已新增...';
-
-# manage_proj_category_delete.php
 $s_category_deleted_msg = '類別已刪除...';
-
-# manage_proj_category_delete_page.php
 $s_category_delete_sure_msg = '你確定要刪除此類別? 所有相關連的 Bug 將會被刪除!!';
 $s_delete_category_button = '刪除類別';
-
-# manage_proj_category_edit_page.php
 $s_edit_project_category_title = '編輯專案類別';
 $s_update_category_button = '更新類別';
-
-# manage_proj_category_update.php
 $s_category_updated_msg = '類別已經成功更新...';
-
-# manage_proj_create_page.php
 $s_add_subproject_title = '新增下層專案';
-
-# manage_proj_delete.php
 $s_project_deleted_msg = '專案已經成功刪除...';
-
-# manage_proj_delete_page.php
 $s_project_delete_msg = '你確定要刪除此專案和所有附屬的 Bug?';
 $s_project_delete_button = '刪除專案';
-
-# manage_proj_edit_page.php
 $s_edit_project_title = '編輯專案';
 $s_project_name = '專案名稱';
 $s_view_status = '檢視狀態';
@@ -821,65 +645,37 @@ $s_subprojects = '下層專案';
 $s_add_subproject = '新增為下層專案';
 $s_create_new_subproject_link = '建立新的下層專案';
 $s_unlink_link = '刪除';
-
-# manage_proj_menu_page.php
 $s_add_project_title = '新增專案';
 $s_upload_file_path = '上傳檔案路徑';
 $s_add_project_button = '新增專案';
 $s_projects_title = '所有專案';
 $s_name = '名稱';
-
-# manage_proj_update.php
 $s_project_updated_msg = '專案已經成功更新...';
-
-# manage_proj_version_add.php
 $s_version_added_msg = '版本已經成功已新增...';
-
-# manage_proj_version_delete.php
 $s_version_deleted_msg = '版本已經成功已刪除...';
-
-# manage_proj_version_delete_page.php
 $s_version_delete_sure = '你確定要刪除此版本? 所有相關連的 Bug 將會被刪除!!';
 $s_delete_version_button = '刪除版本';
-
-# manage_proj_version_edit_page.php
 $s_edit_project_version_title = '編輯專案版本';
 $s_update_version_button = '更新版本';
 $s_released = '發行';
-
-# manage_proj_version_update.php
 $s_version_updated_msg = '版本已經成功更新...';
-
-# manage_user_delete.php
 $s_account_delete_protected_msg = '帳號受保護，無法刪除此帳號';
 $s_account_deleted_msg = '帳號已刪除...';
-
-# manage_user_delete_page.php
 $s_delete_account_sure_msg = '你確定要刪除此一帳號?';
-
-# manage_user_prune.php
 $s_accounts_pruned_msg = '所有未登入過以及超過一星期還未通過認證的帳號將被刪除';
 $s_prune_accounts_button = '清除';
 $s_confirm_account_pruning = '你確定你要刪除尚未登入過的帳號嗎?';
-
-# manage_user_page.php
 $s_edit_user_title = '編輯使用者';
 $s_reset_password_button = '重設密碼';
 $s_delete_user_button = '刪除使用者';
 $s_reset_password_msg = '點下[重設密碼]後系統會寄出一封通知信件, 點選信件內的 URL 就可以連上來更改密碼.';
 $s_reset_password_msg2 = '重新設定密碼為空白.';
 $s_show_all_users = '全部使用者';
-
-# manage_user_reset.php
 $s_account_reset_protected_msg = '帳號受保護. 不可以重設密碼.';
 $s_account_reset_msg = '確認訊息已經被寄送到你的 E-Mail 信箱...';
 $s_account_reset_msg2 = '這帳號的密碼已經被設為空白...';
-
-# manage_user_update.php
 $s_manage_user_protected_msg = '帳號受保護. 存取權限且保護功能已啟動. 否則，帳號將會被更新...';
 $s_manage_user_updated_msg = '帳號成功更新...';
-
-# menu_inc.php
 $s_main_link = '首頁';
 $s_view_bugs_link = '檢視 Bug';
 $s_report_bug_link = '回報 Bug';
@@ -892,10 +688,6 @@ $s_edit_news_link = '編輯新聞';
 $s_docs_link = '使用說明';
 $s_logout_link = '登出';
 $s_my_view_link = '我的匯整頁面';
-
-# meta_inc.php
-
-# my_view_page.php
 $s_my_view_title_unassigned = '尚未分派';
 $s_my_view_title_recent_mod = '最近增修';
 $s_my_view_title_reported = '我反應的';
@@ -904,24 +696,14 @@ $s_my_view_title_resolved = '已經解決';
 $s_my_view_title_monitored = '我監控的';
 $s_my_view_title_feedback = '等待我的回覆';
 $s_my_view_title_verify = '等待我的確認';
-
-# news_add.php
 $s_news_added_msg = '新聞項目已新增...';
-
-# news_delete.php
 $s_news_deleted_msg = '已刪除新聞項目...';
-
-# news_delete_page.php
 $s_delete_news_sure_msg = '你確定要刪除此新聞項目?';
 $s_delete_news_item_button = '刪除新聞項目';
-
-# news_edit_page.php
 $s_edit_news_title = '編輯新聞';
 $s_headline = '標題';
 $s_body = '內文';
 $s_update_news_button = '更新新聞';
-
-# news_menu_page.php
 $s_add_news_title = '新增新聞';
 $s_post_to = '發表到';
 $s_post_news_button = '發表新聞';
@@ -929,63 +711,33 @@ $s_edit_or_delete_news_title = '編輯或刪除新聞';
 $s_edit_post = '編輯發表';
 $s_delete_post = '刪除發表';
 $s_select_post = '選擇發表';
-
-# news_update.php
 $s_news_updated_msg = '新聞項目已更新...';
-
-# news_view_page.php
 $s_back_link = '返回';
-
-# proj_doc_add.php
 $s_file_uploaded_msg = '檔案上傳成功';
-
-# proj_doc_add_page.php
 $s_upload_file_title = '上傳檔案';
 $s_title = '標題';
-
-# proj_doc_delete.php
 $s_project_file_deleted_msg = '專案檔案刪除';
-
-# proj_doc_delete_page.php
 $s_confirm_file_delete_msg = '你確定要刪除這檔案?';
-
-# proj_doc_edit_page.php
 $s_filename = '檔案名稱';
 $s_file_update_button = '更新檔案';
 $s_file_delete_button = '刪除檔案';
-
-# proj_doc_page.php
 $s_project_documentation_title = '專案文件';
 $s_user_documentation = '使用者文件';
 $s_project_documentation = '專案文件';
 $s_add_file = '新增檔案';
-
-# proj_doc_update.php
 $s_project_document_updated = '專案更新成功';
-
-# proj_user_add.php
 $s_project_user_added_msg = '成功新增這專案使用者';
-
-# proj_user_delete.php
 $s_project_removed_user_msg = '成功刪除這專案使用者';
-
-# proj_user_delete_page.php
 $s_remove_user_sure_msg = '你確定要移除這使用者在這專案的權限嗎?';
 $s_remove_user_button = '移除使用者';
 $s_remove_all_users_sure_msg = '你確定要移除這專案全部使用者權限嗎?';
 $s_remove_all_users_button = '移除全部使用者';
-
-# proj_user_menu_page.php
 $s_add_user_title = '新增使用者在專案的權限';
 $s_add_user_button = '確定新增';
 $s_project_selection_title = '專案選擇';
 $s_remove_link = '移除';
 $s_remove_all_link = '全部移除';
-
-# proj_user_update.php
 $s_updated_user_msg = '更新使用者成功';
-
-# report_add.php
 $s_must_enter_category = '您必須選擇類別';
 $s_must_enter_severity = '您必須選擇嚴重性';
 $s_must_enter_reproducibility = '您必須選擇出現頻率';
@@ -993,8 +745,6 @@ $s_must_enter_summary = '您必須輸入摘要';
 $s_must_enter_description = '您必須輸入說明';
 $s_report_more_bugs = '回報更多 Bug';
 $s_submission_thanks_msg = '感謝您的意見! ^_^';
-
-# report_bug_advanced_page.php
 $s_simple_report_link = '簡易報告';
 $s_enter_report_details_title = '輸入回報詳細資料';
 $s_required = '必填';
@@ -1006,40 +756,24 @@ $s_assign_to = '指派給';
 $s_additional_information = '額外資訊';
 $s_submit_report_button = '送出回報';
 $s_check_report_more_bugs = '勾選可繼續回報其他的 Bug';
-
-# report_bug_page.php
 $s_advanced_report_link = '進階報告';
 $s_report_stay = '回報狀態';
-
-# set_project.php
 $s_selected_project = '已選擇專案';
 $s_valid_project_msg = '你必須選擇一個正確的專案';
-
-# signup.php
 $s_signup_done_title = '註冊帳號已處理';
 $s_password_emailed_msg = '恭喜! 你已經註冊成功. 系統正在送出認證信到你的 E-Mail 信箱內. 請開啟確認信件點選信中的網址, 你將連上系統輸入密碼來啟動你的帳號.';
 $s_no_reponse_msg = '你必須在七天內完成這個確認信的作業程序, 如果在七天內你沒成功啟動帳號, 這個帳號將會自動刪除.';
-
-# signup_page.php
 $s_signup_captcha_request = '請輸入右邊圖中的驗證英數字';
 $s_signup_info = '<ul><li>輸入帳號, E-Mail 以及圖中的驗證英數字後, 點選 [註冊] 按鈕. <li>系統會確認你輸入資料的正確性, 當確認無誤後, 系統會自動寄發一封認證信到你輸入的 E-Mail 內.<li>開啟這個認證信, 點選信中的網址, 你將連上系統輸入密碼來啟動你的帳號. <li>如果在七天內你沒成功啟動帳號, 這個帳號將會自動刪除.<li>所以你必須在 E-Mail 中輸入你真正可以收到信件的 E-Mail.</ul>';
 $s_signup_title = '註冊';
 $s_signup_button = '註冊';
 $s_no_password_request = '你的密碼正在被其他系統維護中, 請聯絡系統管理員來解決這問題!';
-
-# site_settings_edit_page.php
 $s_edit_site_settings_title = '編輯整體設定值';
 $s_save_settings_button = '儲存設定值';
-
-# site_settings_page.php
 $s_site_settings_title = '整體設定值';
 $s_system_info_link = '系統資訊';
 $s_site_settings_link = '整體設定值';
-
-# site_settings_update.php
 $s_site_settings_updated_msg = '整體設定值已更新完成';
-
-# summary_page.php
 $s_summary_title = '摘要';
 $s_summary_jpgraph_link = '進階摘要';
 $s_by_project = '依專案';
@@ -1050,7 +784,7 @@ $s_by_resolution = '依分析';
 $s_by_category = '依類別';
 $s_by_priority = '依優先度';
 $s_by_developer = '依開發者';
-$s_by_reporter ='依回報人';
+$s_by_reporter = '依回報人';
 $s_reporter_by_resolution = '依回報人與分析';
 $s_reporter_effectiveness = '回報人有效度';
 $s_developer_by_resolution = '依開發者與分析';
@@ -1066,8 +800,6 @@ $s_total_time = '總共時間';
 $s_developer_stats = '開發者狀態';
 $s_reporter_stats = '回報人狀態';
 $s_orct = '(未結案/已解決/已結案/總數)';
-
-# view_all_bug_page.php
 $s_any = '任意';
 $s_show = '顯示';
 $s_changed = '已更動(小時)';
@@ -1077,11 +809,9 @@ $s_sticky = '顯示棘手問題';
 $s_sort = '排序方式';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
-
-# view_all_inc.php
 $s_none = '無';
 $s_current = 'current';
-$s_search ='搜尋 Bug 內容關鍵字';
+$s_search = '搜尋 Bug 內容關鍵字';
 $s_view_prev_link = '檢視前一筆';
 $s_view_next_link = '檢視下一筆';
 $s_prev = '前一筆';
@@ -1097,8 +827,6 @@ $s_open_filters = '更動過濾條件';
 $s_or_unassigned = '或取消分派';
 $s_ok = '是';
 $s_select_all = '選擇全部';
-
-# stored query strings
 $s_use_query = '使用過濾條件';
 $s_delete_query = '刪除過濾條件';
 $s_query_deleted = '過濾條件已刪除';
@@ -1111,8 +839,6 @@ $s_query_blank_name = '你不可以沒指定過濾條件名稱. 儲存前請先�
 $s_query_store_error = '儲存過濾條件過程出現錯誤.';
 $s_open_queries = '管理過濾條件';
 $s_query_delete_msg = '你確定你要刪除這個過濾條件嗎?';
-
-# view_bug_advanced_page.php
 $s_view_simple_link = '簡易檢視';
 $s_viewing_bug_advanced_details_title = '檢視 Bug 進階詳細資料';
 $s_product_build = '產品建立';
@@ -1125,25 +851,15 @@ $s_move_bug_button = '搬移問題';
 $s_attached_files = '附件檔案';
 $s_publish = '發表';
 $s_cached = '快取';
-
-# view_bug_inc.php
-
-# view_bug_page.php
 $s_view_advanced_link = '進階檢視';
 $s_viewing_bug_simple_details_title = '檢視 Bug 詳細資料(簡式)';
-
-# bug_monitor_list_view_inc.php
 $s_no_users_monitoring_bug = '沒有使用者監控這 bug.';
 $s_users_monitoring_bug = '使用者監控這 bug';
 $s_monitoring_user_list = '使用者清單';
-
-# bug_sponsorship_list_view_inc.php
 $s_no_users_sponsoring_bug = '沒有使用者資助這問題.';
 $s_users_sponsoring_bug = '使用者資助這問題';
 $s_sponsors_list = '資助者清單';
 $s_total_sponsorship_amount = '資助總額 = %s';
-
-# custom field strings
 $s_add_custom_field_button = '新增自訂欄位';
 $s_delete_custom_field_button = '刪除自訂欄位';
 $s_delete_custom_field_everywhere = '刪除所有自訂欄位';
@@ -1171,34 +887,25 @@ $s_custom_field_require_report = '回報時需要這欄位';
 $s_custom_field_require_update = '更新時需要這欄位';
 $s_custom_field_require_resolved = '解決時需要這欄位';
 $s_custom_field_require_closed = '結案時需要這欄位';
-
 $s_custom_field_sequence = '序列';
 $s_custom_field_type_enum_string = '0:字串,1:整數,2:浮點數字,3:列舉項目,4:E-Mail,5:選項,6:清單,7:多重選項清單,8:日期';
-
 $s_confirm_used_custom_field_deletion = '這欄位已經在一個以上的專案使用. 如果確定繼續執行, 使用這欄位的資料內容將會完全被刪除. 而且執行之後就無法復原. 如果你不要刪除這欄位, 請點選瀏覽器的 [上一頁] 按鈕. 要刪除的話, 就點下面的按鈕';
 $s_confirm_custom_field_deletion = '你確定要刪除這自訂欄位和使用到這自訂欄位的資料嗎?';
 $s_field_delete_button = '刪除欄位';
-
 $s_confirm_custom_field_unlinking = '你確定要由這專案移除這個自訂欄位和刪除使用到這自訂欄位的資料嗎?';
 $s_field_remove_button = '移除欄位';
-
 $s_hide_status = '隱藏狀態';
-$s_filter_closed = "已結案";
-$s_filter_resolved = "已解決";
-$s_hide_closed = "隱藏已結案";
-$s_hide_resolved = "隱藏已解決";
+$s_filter_closed = '已結案';
+$s_filter_resolved = '已解決';
+$s_hide_closed = '隱藏已結案';
+$s_hide_resolved = '隱藏已解決';
 $s_and_above = '以及之前';
 $s_advanced_filters = '進階過濾條件';
 $s_simple_filters = '簡易過濾條件';
 $s_monitored_by = '監控人';
-
-$s_attachments = "附件";
-$s_attachment_alt = "A";
-
-# PHPMailer
+$s_attachments = '附件';
+$s_attachment_alt = 'A';
 $s_phpmailer_language = 'en';
-
-# Sponsorship Strings
 $s_sponsors = '%d 資助者';
 $s_sponsorship_added = '資助已新增';
 $s_sponsorship_updated = '資助已更新';
@@ -1206,49 +913,33 @@ $s_sponsorship_deleted = '資助已刪除';
 $s_sponsorship_paid = '資助款已付';
 $s_sponsorship_more_info = '更多有關資助的資訊';
 $s_sponsorship_total = '資助總數';
-
-# URL explaining the process of sponsoring an issue.  This is defined here rather than
-# in the config to allow for a URL per language.  This can be set to an empty string if there
-# is not need to provide such process information.
-$s_sponsorship_process_url = '';
-
-# Changelog
 $s_changelog = '版本更動紀錄';
-
-# Http auth
-$s_http_auth_realm = "Mantis 登入";
-
-$s_bug = "問題";
-$s_add_new_relationship = "新增相關問題";
-$s_add_new_relationship_button = "新增";
-$s_this_bug = "這個問題";
-$s_relationship_added = "相關問題已新增";
-$s_relationship_deleted = "相關問題已刪除";
-$s_no_relationship = "沒有相關問題";
-$s_relationship_replaced = "相關問題已被取代";
-$s_replace_relationship_button = "取代";
-$s_replace_relationship_sure_msg = "這兩個問題已建立為相關問題. 你確定你要取代這關聯嗎?";
-$s_relationship_with_parent = "上層問題為關聯問題";
-$s_delete_relationship_button = "刪除";
-$s_delete_relationship_sure_msg = "你確定你要刪除這個相關問題嗎?";
-$s_relationship_warning_blocking_bugs_not_resolved = "並非所有這問題的下層問題都已解決或已結案.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b>. 不是所有這問題的下層問題已解決或已結案.<br>在<b>解決或結案</b>之前, 這問題的所有下層相關問題應該是已解決或已結案的狀態.";
-$s_create_child_bug_button = "建立複製";
-$s_bug_cloned_to = "問題已被複製";
-$s_bug_created_from = "問題建立來源";
-
-# Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "相關問題圖";
-$s_relation_graph = "相關問題圖";
-$s_dependency_graph = "依存問題圖";
-$s_vertical = "垂直";
-$s_horizontal = "水平";
-$s_view_issue = "檢視問題";
-
-# Source Control Integration
+$s_http_auth_realm = 'Mantis 登入';
+$s_bug = '問題';
+$s_add_new_relationship = '新增相關問題';
+$s_add_new_relationship_button = '新增';
+$s_this_bug = '這個問題';
+$s_relationship_added = '相關問題已新增';
+$s_relationship_deleted = '相關問題已刪除';
+$s_no_relationship = '沒有相關問題';
+$s_relationship_replaced = '相關問題已被取代';
+$s_replace_relationship_button = '取代';
+$s_replace_relationship_sure_msg = '這兩個問題已建立為相關問題. 你確定你要取代這關聯嗎?';
+$s_relationship_with_parent = '上層問題為關聯問題';
+$s_delete_relationship_button = '刪除';
+$s_delete_relationship_sure_msg = '你確定你要刪除這個相關問題嗎?';
+$s_relationship_warning_blocking_bugs_not_resolved = '並非所有這問題的下層問題都已解決或已結案.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>注意</b>. 不是所有這問題的下層問題已解決或已結案.<br>在<b>解決或結案</b>之前, 這問題的所有下層相關問題應該是已解決或已結案的狀態.';
+$s_create_child_bug_button = '建立複製';
+$s_bug_cloned_to = '問題已被複製';
+$s_bug_created_from = '問題建立來源';
+$s_viewing_bug_relationship_graph_title = '相關問題圖';
+$s_relation_graph = '相關問題圖';
+$s_dependency_graph = '依存問題圖';
+$s_vertical = '垂直';
+$s_horizontal = '水平';
+$s_view_issue = '檢視問題';
 $s_checkin = '登入';
-
-# Pemissions report
 $s_perm_rpt_capability = '權限功能';
 $s_view = '檢視';
 $s_issues = '問題';
@@ -1276,8 +967,8 @@ $s_manage_news = '管理新聞';
 $s_view_list_of_attachments = '檢視附件清單';
 $s_download_attachments = '下載附件';
 $s_delete_attachments = '刪除附件';
-$s_delete_attachment_button = "刪除";
-$s_delete_attachment_sure_msg = "你確定你要刪除這個附件嗎?";
+$s_delete_attachment_button = '刪除';
+$s_delete_attachment_sure_msg = '你確定你要刪除這個附件嗎?';
 $s_upload_issue_attachments = '上傳問題的附件';
 $s_filters = '過濾條件';
 $s_save_filters = '儲存過濾條件';
@@ -1308,24 +999,14 @@ $s_status_changed_to = '狀態更動為';
 $s_email_on_deleted = '在刪除時發出 E-Mail';
 $s_email_on_sponsorship_changed = '資助資料更動時發出 E-Mail';
 $s_email_on_relationship_changed = '相關問題更動時發出 E-Mail';
-
-# DHTML filters
 $s_loading = '載入中...';
-
-# filter_api.php
 $s_between_date = '之間';
 $s_on_or_before_date = '於此或之前';
 $s_before_date = '之前';
 $s_after_date = '之後';
 $s_on_or_after_date = '於此或之後';
-
-# Date constants
 $s_from_date = 'From';
 $s_to_date = 'To';
 $s_on_date = '在';
-
-# Switch constants
 $s_on = '在';
-
-# wiki related strings
 $s_wiki = 'Wiki';

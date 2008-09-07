@@ -23,7 +23,7 @@
  * $Id$
  */
 
-/** Serbian
+/** Serbian Cyrillic ekavian (ћирилица)
  *
  * @ingroup Language
  * @file
@@ -31,10 +31,7 @@
  * @author Dragan Matic, dragan@panforma.co.yu
  */
 
-# Charset
 $s_charset = 'utf-8';
-
-# Group commands menuitems
 $s_actiongroup_menu_move = 'Premesti';
 $s_actiongroup_menu_copy = 'Kopiraj';
 $s_actiongroup_menu_assign = 'Dodeli';
@@ -48,8 +45,6 @@ $s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Izabrane greske';
-
-# new strings:
 $s_all_projects = 'Svi projekti';
 $s_move_bugs = 'Premesti greške';
 $s_operation_successful = 'Akcija uspešna.';
@@ -89,13 +84,11 @@ $s_delete_bugnote_sure_msg = 'Da li ste sigurni da želite da izbrišete komenta
 $s_bug_relationships = 'Relacije';
 $s_empty_password_sure_msg = 'Korisnik ima praznu šifru.  Da li ste sigurni da to želite?';
 $s_empty_password_button = 'Koristi praznu šifru';
-
 $s_duplicate_of = 'duplikat od %id';
 $s_has_duplicate = 'ima duplikat %id';
 $s_related_to = 'u relaciji sa %id';
 $s_dependant_on = 'zavistan od %id';
 $s_blocks = 'blokira %id';
-
 $s_new_bug = 'Nova greška';
 $s_bugnote_added = 'Komentar uz grešku dodat';
 $s_bugnote_edited = 'Komentar uz grešku izmenjen';
@@ -107,16 +100,10 @@ $s_steps_to_reproduce_updated = 'Koraci za reprodukciju su ažurirani';
 $s_file_added = 'File Dodat';
 $s_file_deleted = 'Fajl izbrisan';
 $s_bug_deleted = 'Greska izbrisana';
-
 $s_make_private = 'Nacini privatnim';
 $s_make_public = 'Nacini javnim';
-
 $s_create_new_project_link = 'Kreiranje novog projekta';
-
 $s_login_link = 'Prijava';
-
-# bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'Niste imali odgovarajuce dozvole za izvršenje akcije nad sledecim greškama: ';
 $s_bug_actiongroup_access = 'Niste imali odgovarajuce dozvole za izvrsenje akcije..';
 $s_bug_actiongroup_status = 'Ova greska ne moze biti izmenjena u traženi status';
 $s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
@@ -142,8 +129,6 @@ $s_status_group_bugs_button = 'Status ažuriranja';
 $s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Izmena statusa pregleda';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
-
-# improved JPgraphs strings
 $s_graph_imp_status_title = 'Synthesis graphs by status';
 $s_graph_imp_priority_title = 'Synthesis graphs by priority';
 $s_graph_imp_severity_title = 'Synthesis graphs by severity';
@@ -172,22 +157,13 @@ $s_legend_closed = 'Closed';
 $s_legend_reported = 'Reported';
 $s_cumulative = 'Cumulative';
 $s_not_enough_data = 'Not enough data to create graph';
-
-# print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Prikaz samo izabranih';
-
-# print_all_bug_options.php : printing preferences
 $s_printing_preferences_title = 'Izbor polja za štampu';
 $s_printing_options_link = 'Opcije štampe';
-
-# word and excel export
 $s_bugnote_title = 'Bugnote handler';
 $s_bugnote_date = 'Datum komentara uz grešku';
 $s_bugnote_description = 'Opis komentara uz grešku';
-
 $s_error_no_proceed = 'Molim koristite dugme "Back" u svom internet pretrazivacu radi povratka na prethodnu stranicu. Nakon povratka mozete ispraviti grešku koja je tamo nastala ili izabrati drugu akciju. Takodje mozete kliknuti na opciju iz menija radi odlaska u novu sekciju.';
-
-# ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC] = 'Došlo je do greške tokom izvrsavanja akcije. Verovatno zelite da prijavite gresku vasem lokalnom administratoru.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL greska detektovana. Molimo prijavite ovu gresku na ';
 $MANTIS_ERROR[ERROR_REPORT] = 'Postoji greska u vasem izvestaju.';
@@ -209,41 +185,41 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String nije pronadjen.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Komentar uz gresku nije pronadjen.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekat nije pronadjen.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Polje u bazi nije pronadjeno.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Ne mogu da se konektujem na FTP server.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Ne mogu da se konektujem na FTP server.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Projekat pod tim imenom vec postoji. Molim vratite se i unesite novo ime.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Pogresno ime projekta.  Imena projekta ne mogu biti prazni stringovi.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Korisnik nije pronadjen.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Korisnik nije pronadjen.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Informacija o nalogu u vašem intenet pretraživacu je pogrešna. Da li je vaš nalog izbrisan?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Parametri za korisnika nisu pronadeni.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Stavka Vesti nije pronadjena.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Stavka Vesti nije pronadjena.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Lozinka se ne slaže.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'String je poslat umesto niza.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'String je poslat umesto niza.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Niz je poslat umesto stringa.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Greška %d nije pronadjena.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Greška %d nije pronadjena.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'pogresan email.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'pogresan email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'profil nije pronadjen.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Ovaj tip fajla je zabranjen za prenos.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Duplo ime fajla. Molim prvo izbrišite fajl.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Ovaj tip fajla je zabranjen za prenos.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Duplo ime fajla. Molim prvo izbrišite fajl.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Pogrešna putanja slanja fajla.  Direktorijum ne postoji ili mu web server ne može pristupiti';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Grešku ne možete definisati kao duplikat same sebe.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Grešku ne možete definisati kao duplikat same sebe.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Koricnicko polje nije pronadjeno';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ovo je duplo ime.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Najmanje još jedan projekat koristi ovo polje.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Pogresna vrednost polja';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentifikacija neuspela';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP Authentifikacija neuspela';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP konekcija sa serverom neuspešna';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP ažuriranje sloga nije uspelo.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP ažuriranje sloga nije uspelo.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP korisnicki slog nije pronadjen.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Veza sa bazom podataka nije uspostavljena. Greška primljena od baze je #%d: %s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Upit bazi nije uspešan.  Greška primljena od baze je #%d: %s for the query: %s';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Izbor baze neuspešan.  Greška primljena od baze je #%d: %s';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Veza sa bazom podataka nije uspostavljena. Greška primljena od baze je #%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Upit bazi nije uspešan.  Greška primljena od baze je #%d: %s for the query: %s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Izbor baze neuspešan.  Greška primljena od baze je #%d: %s';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorija pod tim imenom vec postoji';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Nije odredjena akcija za kopiranje.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorija nije pronadjena.';
@@ -260,10 +236,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Pristup zabran
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponzor nije uneo e-mail adresu. Molim izmenite profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguracijska opcija \'%s\' ima pogresnu vrednost \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Ova akcija ne moze biti izvrsena jer je greska \'%d\' ukljucena samo za citanje';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "vec postoji veza izmedju ove dve greske.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Veza nije pronadjena.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Pristup zabranjen: Greska %d zahteva visi nivo pristupa.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Greska ne moze biti povezana sa samom sobom.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'vec postoji veza izmedju ove dve greske.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Veza nije pronadjena.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Pristup zabranjen: Greska %d zahteva visi nivo pristupa.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Greska ne moze biti povezana sa samom sobom.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
@@ -273,31 +249,21 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. numb
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
-
 $s_login_error = 'vaš nalog je iskljucen ili ste pogrešno uneli korisnicko ime ili lozinku.';
 $s_login_cookies_disabled = 'Vaš internet pretraživac ili ne zna da obradi kukije (cookies) ili odbija da ih prihvati.';
-
-# General Strings
 $s_go_back = 'Nazad';
 $s_proceed = 'Kliknite ovde za nastavak';
-
 $s_switch = 'Prebacivanje';
 $s_logged_in_as = 'prikljuceni ste kao';
-
 $s_prefix_for_deleted_users = 'korisnik';
-
 $s_administrator = 'administrator';
-$s_myself = "Sebi samom";
+$s_myself = 'Sebi samom';
 $s_default_access_level = 'Default access level';
-
 $s_issue_status_percentage = 'Issue Status Percentage';
-
-# Enum Strings
 $s_access_levels_enum_string = '10:gledalac,25:reporter,40:updater,55:razvoj,70:menadzer,90:administrator';
 $s_project_status_enum_string = '10:u razvoju,30:release,50:stabilna,70:zastarela';
 $s_project_view_state_enum_string = '10:javan,50:privatan';
 $s_view_state_enum_string = '10:javan,50:privatan';
-
 $s_priority_enum_string = '10:bez prioriteta,20:nizak,30:normalan,40:visok,50:hitan,60:trenutno';
 $s_severity_enum_string = '10:nova osobina,20:trivijalna,30:tekst,40:izmena,50:mala,60:velika,70:rusenje,80:blokiranje';
 $s_reproducibility_enum_string = '10:uvek,30:ponekad,50:slucajan,70:nije isprobano,90:nemogucnost dupliciranja,100:N/A';
@@ -306,21 +272,17 @@ $s_resolution_enum_string = '10:otvoreno,20:popravljeno,30:ponovo otvoreno,40:ne
 $s_projection_enum_string = '10:nema,30:izmena,50:mala izmena,70:major rework,90:redesign';
 $s_eta_enum_string = '10:nema,20:< 1 dan,30:2-3 dana,40:< 1 nedelja,50:< 1 mesec,60:> 1 mesec';
 $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
-
-# Email Strings
 $s_new_account_subject = 'Registracija naloga';
 $s_new_account_greeting = 'Zahvaljujemo na registraciji. Vas nalog je aktivan pod imenom \'';
 $s_new_account_greeting2 = '\'. Da biste zavrsili registraciju, posetite sledecu adresu (proverite da je uneta u jednom redu) i podesite lozinku za pristup:';
 $s_new_account_username = 'Korisnicko ime: ';
-$s_new_account_message = 'Ukoliko niste trazili nikakvu registraciju jednostavno ignorisite ovu poruku.' . "\n\n";
+$s_new_account_message = 'Ukoliko niste trazili nikakvu registraciju jednostavno ignorisite ovu poruku.\n\n';
 $s_new_account_do_not_reply = 'NEMOJTE ODGOVARATI NA OVU PORUKU';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = 'Udaljena IP adreas: ';
 $s_new_account_signup_msg = 'Sledeci nalog je kreiran:';
-
-$s_reset_request_msg = 'Neko (najverovatnije vi) je podneo zahtev za promenu lozinke putem provere elektronske poste. Ukoliko to niste bili vi, ignorisite ovu poruku i nista se nece desiti.' . "\n\n" . 'Ukoliko ste vi zatrazili proveru, molim posetite sledecu adresu radi promene lozinke:';
+$s_reset_request_msg = 'Neko (najverovatnije vi) je podneo zahtev za promenu lozinke putem provere elektronske poste. Ukoliko to niste bili vi, ignorisite ovu poruku i nista se nece desiti.\n\nUkoliko ste vi zatrazili proveru, molim posetite sledecu adresu radi promene lozinke:';
 $s_reset_request_in_progress_msg = 'Ukoliko ste pravilno uneli korisnicko ime i email adresu vaseg naloga, sada cemo vam poslati poruku na unetu adresu. Nakon sto ste primili poruku sledite uputstva u njoj da biste promenili lozinku vaseg naloga.';
-
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'Sledeca greška zahteva vašu POVRATNU INFORMACIJU.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Sledeca greška je PRIMLJENA.';
@@ -328,7 +290,6 @@ $s_email_notification_title_for_status_bug_confirmed = 'Sledeca greška je POTVR
 $s_email_notification_title_for_status_bug_assigned = 'Sledeca greška je DODELJENA.';
 $s_email_notification_title_for_status_bug_resolved = 'Sledeca greška je REŠENA.';
 $s_email_notification_title_for_status_bug_closed = 'Sledeca greška je ZATVORENA';
-
 $s_email_notification_title_for_action_bug_submitted = 'Sledeca greška je POSLATA.';
 $s_email_notification_title_for_action_bug_assigned = 'Sledeca greška je DODELJENA.';
 $s_email_notification_title_for_action_bug_reopened = 'Sledeca greška je PONOVO OTVORENA.';
@@ -337,21 +298,19 @@ $s_email_notification_title_for_action_bug_updated = 'Sledeca greska je IZMENJEN
 $s_email_notification_title_for_action_sponsorship_added = 'Sledeca greska je SPONZORISANA.';
 $s_email_notification_title_for_action_sponsorship_updated = 'Sponzorstvo sledece greske je modifikovano.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'Sponzorstvo sledece greske je povuceno.';
-
 $s_email_notification_title_for_action_bugnote_submitted = 'KOMENTAR UZ GREŠKU je dodat uz grešku.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been removed as a DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been marked as UNRELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been removed as the PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been removed as the CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
-
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'The following issue has been set as DUPLICATE OF issue %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'The issue %s has been set as DUPLICATE OF the following issue.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'The following issue has been set as RELATED TO issue %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'The following issue has been set PARENT OF issue %s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'The following issue has been set CHILD OF issue %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'The following issue has been UNset as DUPLICATE OF issue %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'The issue %s has been removed as a DUPLICATE OF the following issue.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'The following issue has been marked as UNRELATED TO issue %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'The following issue has been removed as the PARENT OF issue %s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'The following issue has been removed as the CHILD OF issue %s.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'The RELATED issue %s has been RESOLVED.';
+$s_email_notification_title_for_action_relationship_child_closed = 'The RELATED issue %s has been CLOSED.';
 $s_email_reporter = 'Prijavljivac';
 $s_email_handler = 'Obradjivac';
 $s_email_project = 'projekat';
@@ -368,16 +327,10 @@ $s_email_date_submitted = 'Datum slanja';
 $s_email_last_modified = 'Poslednja modifikacija';
 $s_email_summary = 'Sažetak';
 $s_email_description = 'Opis';
-
-# account_delete.php
 $s_account_protected_msg = 'Nalog je zasticen. Ne mogu da izmenim podesavanja...';
 $s_account_removed_msg = 'Vas nalog je uklonjen...';
-
-# account_delete_page.php
 $s_confirm_delete_msg = 'Da li ste sigurni da zelite da izbrisete nalog?';
 $s_delete_account_button = 'Brisanje naloga';
-
-# account_page.php
 $s_manage_profiles_link = 'Profili';
 $s_change_preferences_link = 'Podesavanja';
 $s_edit_account_title = 'Izmena naloga';
@@ -391,8 +344,6 @@ $s_access_level = 'Pristupni nivo';
 $s_update_user_button = 'ažuriranje naloga';
 $s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
-
-# account_prefs_page.php
 $s_default_account_preferences_title = 'Podešavanja naloga';
 $s_default_project = 'Podrazumevani projekat';
 $s_advanced_report = 'Napredni izvestaj';
@@ -417,30 +368,16 @@ $s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = 'Jezik';
 $s_update_prefs_button = 'ažuriranje podesavanja';
 $s_reset_prefs_button = 'Resetovanje podesavanja';
-
-# account_prefs_reset.php
 $s_prefs_reset_msg = 'Podesavanja su resetovana...';
-
-# account_prefs_update.php
 $s_prefs_updated_msg = 'Podesavanja su ažurirana...';
-
-# account_profile_add.php
 $s_profile_added_msg = 'Profil je dodat...';
-
-# account_profile_delete.php
 $s_profile_deleted_msg = 'Profil je izbrisan...';
-
-# account_profile_edit_page.php
 $s_edit_profile_title = 'Izmene profila';
 $s_platform = 'Platforma';
 $s_operating_system = 'Operativni Sistem';
 $s_additional_description = 'Dodatni opis';
 $s_update_profile_button = 'ažuriranje profila';
-
-# account_profile_make_default.php
 $s_profile_defaulted_msg = 'Podrazumevani profil je ažuriran...';
-
-# account_profile_manage_page.php
 $s_add_profile_title = 'Dodaj Profil';
 $s_add_profile_button = 'Dodaj Profil';
 $s_edit_or_delete_profiles_title = 'Izmena ili brisanje profila';
@@ -449,44 +386,28 @@ $s_make_default = 'Nacini podrazumevanim';
 $s_delete_profile = 'Brisanje profila';
 $s_select_profile = 'Izbor profila';
 $s_submit_button = 'Pošalji';
-
-# account_profile_update.php
 $s_profile_updated_msg = 'Profil je ažuriran...';
-
-# account_sponsor_page.php
 $s_my_sponsorship = 'My Sponsorships';
 $s_update_sponsorship_button = 'Change Payment Status';
 $s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
 $s_own_sponsored = 'Issues You have Sponsored:';
 $s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
 $s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
-$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
+$s_sponsor = 'Sponsor';
+$s_sponsor_verb = 'Sponsor';
 $s_amount = 'Amount';
 $s_total_owing = 'Total Owing';
 $s_total_paid = 'Total Paid';
 $s_sponsor_hide = 'Hide Resolved and Paid';
 $s_sponsor_show = 'Show All';
-
-# account_sponsor_update.php
 $s_payment_updated = 'Payment information updated.';
-
-# account_update.php
 $s_account_updated_msg = 'Vas nalog je uspesno ažuriran...';
 $s_email_updated = 'Email adresa je uspesno ažurirana';
 $s_realname_duplicated = 'Pravo ime je korisceno od strane drugog korisnika';
 $s_realname_updated = 'Pravo ime je uspesno izmenjeno';
 $s_password_updated = 'Lozinka je uspesno ažurirana';
-
-# adm_permission_report.php
-
-# bug_action_group_page
 $s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
-
-# bug_assign.php
 $s_bug_assign_msg = 'Greška je uspesno dodeljena...';
-
-# bug_change_status_page.php
 $s_new_bug_title = 'Nova greska';
 $s_feedback_bug_title = 'Obezbedite potvrdnu informaciju o greski';
 $s_acknowledged_bug_title = 'Primljena greska';
@@ -497,49 +418,27 @@ $s_feedback_bug_button = 'Provide Feedback';
 $s_acknowledged_bug_button = 'Primi gresku';
 $s_confirmed_bug_button = 'Potvrdi gresku';
 $s_assigned_bug_button = 'Dodeli gresku';
-
-# bug_close.php
 $s_bug_close_msg = 'Greška je upravo zatvorena...';
 $s_close_immediately = 'Zatvori odmah:';
-
-# bug_close_page.php
 $s_closed_bug_title = 'Zatvori gresku';
-
-# bug_delete.php
 $s_bug_deleted_msg = 'Greska je upravo izbrisana...';
-
-# bug_delete_page.php
 $s_delete_bug_sure_msg = 'Jeste li sigurni da zelite da izbrisete ovu grešku?';
 $s_delete_bug_button = 'Brisanje greške';
-
-# bug_monitor.php
 $s_monitor_bug_button = 'Pracenje greske';
 $s_unmonitor_bug_button = 'Zavrsetak pracenja';
-
-# bug_file_add.php
 $s_file_upload_msg = 'Fajl uspešno poslat';
-
-# bug_file_upload_inc.php
 $s_upload_file = 'Slanje fajla';
 $s_select_file = 'Izbor fajla';
 $s_upload_file_button = 'Slanje fajla';
 $s_max_file_size = 'Max velicina';
-
-# bug_reopen.php
 $s_bug_reopened_msg = 'Greška je ponovno otvorena...';
 $s_reopen_add_bugnote_title = 'Dodajte komentar uz grešku za ponovno otvaranje greške';
 $s_bugnote_add_reopen_button = 'Dodaj komentar uz grešku i ponovno otvori grešku';
-
-# bug_resolve_page.php
 $s_resolved_bug_title = 'Rešenje greške';
 $s_resolved_bug_button = 'Rešenje greške';
-
-# bug_resolve_page2.php
 $s_bug_resolved_msg = 'Greška je rešena. Unesite komentar uz grešku ispod...';
 $s_resolve_add_bugnote_title = 'Dodajte komentar za rešenje greške';
 $s_bugnote_add_resolve_button = 'Dodaj komentar uz grešku';
-
-# bug_reminder_page.php
 $s_from = 'From';
 $s_to = 'To';
 $s_sent_you_this_reminder_about = 'Vam je poslao podsetnik o';
@@ -550,14 +449,8 @@ $s_reminder = 'Podsetnik';
 $s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
 $s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
 $s_reminder_store = 'This note will be stored with the issue.';
-
-# bug_set_sponsorship.php
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
-
-# bug_update.php
 $s_bug_updated_msg = 'Greška je uspesno ažurirana...';
-
-# bug_update_advanced_page.php
 $s_back_to_bug_link = 'Povratak na grešku';
 $s_update_simple_link = 'Osnovno ažuriranje';
 $s_updating_bug_advanced_title = 'Ažuriranje informacije o grešci';
@@ -587,46 +480,23 @@ $s_steps_to_reproduce = 'Koraci za reprodukciju';
 $s_update_information_button = 'ažuriranje informacija';
 $s_sticky_issue = 'Sticky Issue';
 $s_profile = 'Profile';
-
-# bug_update_page.php
 $s_update_advanced_link = 'Napredno ažuriranje';
 $s_updating_bug_simple_title = 'ažuriranje infomacija o gresci';
-
-# bug_vote_add.php
 $s_vote_added_msg = 'Glas je dodat...';
-
-# bugnote_add.php
 $s_bugnote_added_msg = 'Komentar uz grešku je dodat...';
-
-# bugnote_delete.php
 $s_bugnote_deleted_msg = 'Komentar uz grešku je uspesno izbrisan...';
 $s_bug_notes_title = 'Komentari uz grešku';
-
-# bugnote_edit_page.php
 $s_edit_bugnote_title = 'Izmena komentara uz grešku';
-
-# bugnote_inc.php
 $s_no_bugnotes_msg = 'Nema komentara uz ovaj grešku.';
 $s_delete_link = 'Brisanje';
 $s_add_bugnote_title = 'Dodaj komentar uz grešku';
 $s_add_bugnote_button = 'Dodaj komentar uz grešku';
 $s_bugnote_edit_link = 'Izmena';
 $s_closed_bug_button = 'Zatvaranje greške';
-
-# bugnote_update.php
 $s_bugnote_updated_msg = 'Komentar uz grešku je uspesno ažuriran...';
 $s_edited_on = 'izmenjeno: ';
-
-# file_api.php
-$s_show_content ='Show Content';
-
-# index.php
+$s_show_content = 'Show Content';
 $s_click_to_login = 'Kliknite ovde za prijavljivanje';
-
-# login.php
-
-# login_page.php
-#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Dobrodosli u sistem za pracenje i prijavu grešaka.';
 $s_login_title = 'Operater';
 $s_save_login = 'Zapamti nalog';
@@ -634,42 +504,28 @@ $s_choose_project = 'Izbor projekta';
 $s_login_button = 'Prijava';
 $s_signup_link = 'Prijava novog naloga';
 $s_lost_password_link = 'Izgubljena lozinka?';
-
-# login_select_proj_page.php
 $s_select_project_button = 'Izbor projekta';
-
-# logout_page.php
 $s_logged_out_title = 'Odjavljen...';
 $s_redirecting = '...Redirekcija';
 $s_here = 'Ovde';
-
-# lost_pwd_page.php
-$s_lost_password_title = "Lozinka Resetovana";
-$s_lost_password_done_title = "Poruka o lozinki poslata";
-$s_lost_password_subject = "Lozinka resetovana";
-$s_lost_password_info = "Da biste povratili izgubljenu lozinku, molim unesite ime i email adresu naloga.<br/><br/>Ukoliko uneti podaci odgovaraju, bice vam poslata specijalna adresa putem e-maila koja ce sadrzati aktivacioni kod vaseg naloga. Molim pratite sledeci link da biste izmenili lozinku.";
-$s_lost_password_confirm_hash_OK = "Vasa potvrda je primljena. Molim izmenite vasu lozinku.";
-
-# main_page.php
+$s_lost_password_title = 'Lozinka Resetovana';
+$s_lost_password_done_title = 'Poruka o lozinki poslata';
+$s_lost_password_subject = 'Lozinka resetovana';
+$s_lost_password_info = 'Da biste povratili izgubljenu lozinku, molim unesite ime i email adresu naloga.<br/><br/>Ukoliko uneti podaci odgovaraju, bice vam poslata specijalna adresa putem e-maila koja ce sadrzati aktivacioni kod vaseg naloga. Molim pratite sledeci link da biste izmenili lozinku.';
+$s_lost_password_confirm_hash_OK = 'Vasa potvrda je primljena. Molim izmenite vasu lozinku.';
 $s_open_and_assigned_to_me = 'Otvoreni i meni dodeljeni';
 $s_open_and_reported_to_me = 'Otvoreni i licno prijavljeni';
 $s_newer_news_link = 'Nove vesti';
 $s_older_news_link = 'Stare vesti';
 $s_archives = 'Arhiva';
 $s_rss = 'RSS';
-
-# manage_create_new_user.php
 $s_created_user_part1 = 'Kreiran je korisnik';
 $s_created_user_part2 = 'sa pristupnim nivoom';
-
-# manage_create_user_page.php
 $s_create_new_account_title = 'Kreiranje novog naloga';
 $s_verify_password = 'Potvrda lozinke';
 $s_enabled = 'Ukljucen';
 $s_protected = 'Zasticen';
 $s_create_user_button = 'Kreiranje korisnika';
-
-# manage_page.php
 $s_hide_disabled = 'Sakrij iskljucene';
 $s_filter_button = 'Primena filtera';
 $s_manage_users_link = 'ažuriranje Korisnika';
@@ -694,8 +550,6 @@ $s_p = 'p';
 $s_date_created = 'Datum kreiranja';
 $s_last_visit = 'Poslednja poseta';
 $s_edit_user_link = 'Izmena korisnika';
-
-# manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
 $s_config_project = 'Note: These configurations affect only the %s project.';
 $s_colour_coding = 'In the table below, the following color code applies:';
@@ -710,10 +564,8 @@ $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Who can change notification defaults';
 $s_notify_actions_change_access = 'Who can change notifications';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
-
-# manage_config_workflow_page
+$s_revert_to_system = 'Delete All Projects Settings';
+$s_revert_to_all_project = 'Delete Project Specific Settings';
 $s_non_existent = 'non-existent';
 $s_current_status = 'Current Status';
 $s_next_status = 'Next Status';
@@ -734,11 +586,7 @@ $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
 $s_workflow_change_access = 'Who can change workflow';
 $s_access_change_access = 'Who can change access levels';
-
-# manage_config_workflow_set
 $s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
-
-# manage_config_work_threshold_page
 $s_assign_issue = 'Assign an issue';
 $s_allow_close_immediate = 'Allow issue to be closed on Resolve';
 $s_allow_reporter_close = 'Allow Reporter to close Issue';
@@ -752,13 +600,9 @@ $s_resolved_status = 'Status where an issue is considered resolved';
 $s_readonly_status = 'Status where an issue becomes read only';
 $s_reopen_status = 'Status to which a reopened issue is set';
 $s_reopen_resolution = 'Resolution to which a reopened issue is set';
-
-# manage_config_revert_page
 $s_config_delete_sure = 'Are you sure you want to delete the settings for';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
-
-# adm_config_report.php
 $s_configuration_report = 'Configuration Report';
 $s_database_configuration = 'Database Configuration';
 $s_configuration_option = 'Configuration Option';
@@ -767,38 +611,18 @@ $s_configuration_option_value = 'Value';
 $s_all_users = 'All Users';
 $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
-
-# manage_proj_add.php
 $s_project_added_msg = 'projekat je uspesno dodat...';
-
-# manage_proj_category_add.php
 $s_category_added_msg = 'Kategorija je upravo uspesno dodata...';
-
-# manage_proj_category_delete.php
 $s_category_deleted_msg = 'Kategorija je upravo uspesno izbrisana...';
-
-# manage_proj_category_delete_page.php
 $s_category_delete_sure_msg = 'Da li ste sigurni da zelite da izbrisete ovu kategoriju?';
 $s_delete_category_button = 'Brisanje kategorije';
-
-# manage_proj_category_edit_page.php
 $s_edit_project_category_title = 'Izmena kategorije projekta';
 $s_update_category_button = 'ažuriranje kategorije';
-
-# manage_proj_category_update.php
 $s_category_updated_msg = 'Kategorija je upravo uspesno ažurirana...';
-
-# manage_proj_create_page.php
 $s_add_subproject_title = 'Add Subproject';
-
-# manage_proj_delete.php
 $s_project_deleted_msg = 'Projekat je uspesno izbrisan...';
-
-# manage_proj_delete_page.php
 $s_project_delete_msg = 'Da li ste sigurni da zelite da izbrisete ovaj projekat i sve njemu pridruzene prijave grešaka?';
 $s_project_delete_button = 'Brisanje projekta';
-
-# manage_proj_edit_page.php
 $s_edit_project_title = 'Izmena projekta';
 $s_project_name = 'Naziv projekta';
 $s_view_status = 'Pregled statusa';
@@ -821,65 +645,37 @@ $s_subprojects = 'Subprojects';
 $s_add_subproject = 'Add as Subproject';
 $s_create_new_subproject_link = 'Create New Subproject';
 $s_unlink_link = 'Unlink';
-
-# manage_proj_menu_page.php
 $s_add_project_title = 'Dodavanje projekta';
 $s_upload_file_path = 'Putanja za slanje fajla';
 $s_add_project_button = 'Dodavanje projekta';
 $s_projects_title = 'Projekti';
 $s_name = 'Naziv';
-
-# manage_proj_update.php
 $s_project_updated_msg = 'Projekat je upravo uspesno ažuriran...';
-
-# manage_proj_version_add.php
 $s_version_added_msg = 'Verzija je uspesno dodata...';
-
-# manage_proj_version_delete.php
 $s_version_deleted_msg = 'Verzija je uspesno izbrisana...';
-
-# manage_proj_version_delete_page.php
 $s_version_delete_sure = 'da li ste sigurni da zelite da izbrisete ovu verziju?';
 $s_delete_version_button = 'Brisanje verzije';
-
-# manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Izmena verzije projekta';
 $s_update_version_button = 'ažuriranje verzije';
 $s_released = 'Pustena';
-
-# manage_proj_version_update.php
 $s_version_updated_msg = 'Verzija je uspesno ažurirana...';
-
-# manage_user_delete.php
 $s_account_delete_protected_msg = 'Nalog je zašticen. Ne mogu da izbrišem nalog.';
 $s_account_deleted_msg = 'Nalog je izbrisan...';
-
-# manage_user_delete_page.php
 $s_delete_account_sure_msg = 'Da li ste sigurni da zelite da izbrisete ovaj nalog?';
-
-# manage_user_prune.php
 $s_accounts_pruned_msg = 'Svi korisnici koji se nikad nisu prijavili i stariji su od jedne nedelje su uklonjeni';
 $s_prune_accounts_button = 'Neaktivan';
 $s_confirm_account_pruning = 'Da li ste sigurni da zelite da izbrisete stare naloge koji se nikad nisu prijavili?';
-
-# manage_user_page.php
 $s_edit_user_title = 'Izmena korisnika';
 $s_reset_password_button = 'Resetovanje lozinke';
 $s_delete_user_button = 'Brisanje korisnika';
 $s_reset_password_msg = 'Resetovanje lozinke salje adresu za potvrdu putem e-maila.';
 $s_reset_password_msg2 = 'Po resetovanju lozinke lozinka ostaje prazna.';
 $s_show_all_users = 'SVE';
-
-# manage_user_reset.php
 $s_account_reset_protected_msg = 'Nalog je zasticen. Nije moguce resetovanje lozinke.';
 $s_account_reset_msg = 'Poruka za potvrdjivanje akcije je upravo poslata na vasu e-mail adresu...';
 $s_account_reset_msg2 = 'Lozinka naloga je ostavljena praznom...';
-
-# manage_user_update.php
 $s_manage_user_protected_msg = 'Nalog je zašticen. Nivo pristupa i aktivnost su zasticeni. Ostale informacije su ažurirane...';
 $s_manage_user_updated_msg = 'Nalog je uspesno ažuriran...';
-
-# menu_inc.php
 $s_main_link = 'Glavni';
 $s_view_bugs_link = 'Pregled grešaka';
 $s_report_bug_link = 'Prijava grešaka';
@@ -892,10 +688,6 @@ $s_edit_news_link = 'Izmena vesti';
 $s_docs_link = 'Dokumenti';
 $s_logout_link = 'Odjava';
 $s_my_view_link = 'Moj pregled';
-
-# meta_inc.php
-
-# my_view_page.php
 $s_my_view_title_unassigned = 'Nedodeljeno';
 $s_my_view_title_recent_mod = 'Nedavno izmenjeno';
 $s_my_view_title_reported = 'Prijavljeno od strane mene';
@@ -904,24 +696,14 @@ $s_my_view_title_resolved = 'Reseno';
 $s_my_view_title_monitored = 'Praceno od strane mene';
 $s_my_view_title_feedback = 'Awaiting Feedback from Me';
 $s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
-
-# news_add.php
 $s_news_added_msg = 'Stavka vesti dotata...';
-
-# news_delete.php
 $s_news_deleted_msg = 'Izbrisana stavka vesti...';
-
-# news_delete_page.php
 $s_delete_news_sure_msg = 'Da li ste sigurni da želite da izbrisete ovu stavku vesti?';
 $s_delete_news_item_button = 'Stavka vesti izbrisana';
-
-# news_edit_page.php
 $s_edit_news_title = 'Izmene vesti';
 $s_headline = 'Naslovna linija';
 $s_body = 'Telo';
 $s_update_news_button = 'ažuriranje vesti';
-
-# news_menu_page.php
 $s_add_news_title = 'Dodavanje vesti';
 $s_post_to = 'Poslati';
 $s_post_news_button = 'Slanje vesti';
@@ -929,63 +711,33 @@ $s_edit_or_delete_news_title = 'Izmene ili brisanje vesti';
 $s_edit_post = 'Izmena clanka';
 $s_delete_post = 'Brisanje clanka';
 $s_select_post = 'Izbor clanka';
-
-# news_update.php
 $s_news_updated_msg = 'Stavka vesti ažurirana...';
-
-# news_view_page.php
 $s_back_link = 'Nazad';
-
-# proj_doc_add.php
 $s_file_uploaded_msg = 'Fajl uspešno poslat';
-
-# proj_doc_add_page.php
 $s_upload_file_title = 'Slanje fajla';
 $s_title = 'Naziv';
-
-# proj_doc_delete.php
 $s_project_file_deleted_msg = 'Fajl Projekta zbrisan';
-
-# proj_doc_delete_page.php
 $s_confirm_file_delete_msg = 'Da li ste sigurni da zelite da izbrisete ovaj fajl?';
-
-# proj_doc_edit_page.php
 $s_filename = 'Naziv fajla';
 $s_file_update_button = 'ažuriranje fajla';
 $s_file_delete_button = 'Brisanje fajla';
-
-# proj_doc_page.php
 $s_project_documentation_title = 'Dokumentacija projekta';
 $s_user_documentation = 'Korisnicka dokumentacija';
 $s_project_documentation = 'Dokumentacija projekta';
 $s_add_file = 'Dodavanje fajla';
-
-# proj_doc_update.php
 $s_project_document_updated = 'Projekat uspesno ažuriran';
-
-# proj_user_add.php
 $s_project_user_added_msg = 'Korisnik je uspesno dodat u projekat';
-
-# proj_user_delete.php
 $s_project_removed_user_msg = 'Korisnik je uspesno uklonjen iz projekta';
-
-# proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Da li ste sigurni da zelite da uklonite ovog korisnika?';
 $s_remove_user_button = 'Remove User';
 $s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
 $s_remove_all_users_button = 'Remove All Users';
-
-# proj_user_menu_page.php
 $s_add_user_title = 'Dodavanje korisnika u projekat';
 $s_add_user_button = 'Dodavanje korisnika';
 $s_project_selection_title = 'Izbor projekta';
 $s_remove_link = 'Ukloni';
 $s_remove_all_link = 'Remove all';
-
-# proj_user_update.php
 $s_updated_user_msg = 'Korisnik uspesno ažuriran';
-
-# report_add.php
 $s_must_enter_category = 'Morate izabrati kategoriju';
 $s_must_enter_severity = 'Morate izabrati tezinu';
 $s_must_enter_reproducibility = 'Morate izabrati reproduktivnost';
@@ -993,8 +745,6 @@ $s_must_enter_summary = 'Morate uneti sazetak';
 $s_must_enter_description = 'Morate uneti opis';
 $s_report_more_bugs = 'Prijava dodatnih gresaka';
 $s_submission_thanks_msg = 'Hvala na saradnji';
-
-# report_bug_advanced_page.php
 $s_simple_report_link = 'Osnovni izvestaj';
 $s_enter_report_details_title = 'Unos detalja izveštaja';
 $s_required = 'zahtevano';
@@ -1006,40 +756,24 @@ $s_assign_to = 'Dodeljivanje';
 $s_additional_information = 'Dodatne informacije';
 $s_submit_report_button = 'Slanje izvestaja';
 $s_check_report_more_bugs = 'Ukljucite za prijavu dodatnih gresaka';
-
-# report_bug_page.php
 $s_advanced_report_link = 'Napredni izvestaj';
 $s_report_stay = 'Prijava dodatnih';
-
-# set_project.php
 $s_selected_project = 'Izabrani projekat';
 $s_valid_project_msg = 'Morate izabrati projekat';
-
-# signup.php
 $s_signup_done_title = 'Registracija naloga je obradjena';
 $s_password_emailed_msg = 'Cestitamo. Uspesno ste se registrovali. U ovom trenutku vam je poslata e-mail poruka radi potvrde vase e-mail adrese. Nakon sto posetite adresu poslatu u poruci vas nalog ce biti aktiviran.';
 $s_no_reponse_msg = 'Imate sedam dana da kompletirate proces aktivacije naloga; Ukoliko ne zavrsite aktivaciju naloga u roku od sedam dana ovaj nalog ce biti izbrisan.';
-
-# signup_page.php
 $s_signup_captcha_request = 'Unesite kod tacno kako je prikazan u prozoru na desnoj strani';
 $s_signup_info = 'Po popunjavanju ove prijave i provera vasih odgovora, bice vam poslata poruka radi provere e-mail adrese.<br/>Koristeci tu poruku, moci cete da aktivirate vas nalog. Ukoliko ne aktivirate nalog u roku od sedam dana on ce biti izbrisan.<br/>Da biste primili e-mail sa aktivacijom naloga morate da unesete aktivnu e-mail adresu.';
 $s_signup_title = 'Prijava';
 $s_signup_button = 'Prijava';
 $s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
-
-# site_settings_edit_page.php
 $s_edit_site_settings_title = 'Izmena posesavanja sajta';
 $s_save_settings_button = 'Zapamti podešavanja';
-
-# site_settings_page.php
 $s_site_settings_title = 'Podešavanja sajta';
 $s_system_info_link = 'Sistem Info';
 $s_site_settings_link = 'Podešavanja sajta';
-
-# site_settings_update.php
 $s_site_settings_updated_msg = 'Podešavanja sajta su ažurirana';
-
-# summary_page.php
 $s_summary_title = 'Sažetak';
 $s_summary_jpgraph_link = 'Prošireni sazetak';
 $s_by_project = 'po projektu';
@@ -1066,8 +800,6 @@ $s_total_time = 'ukupno vreme';
 $s_developer_stats = 'statistika razvojnog tima';
 $s_reporter_stats = 'statistika reportera';
 $s_orct = '(otvoreni/reseni/zatvoreni/ukupno)';
-
-# view_all_bug_page.php
 $s_any = 'Bilo koji';
 $s_show = 'Prikazi';
 $s_changed = 'Izmenjeni(casovi)';
@@ -1077,8 +809,6 @@ $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
-
-# view_all_inc.php
 $s_none = 'nijedan';
 $s_current = 'current';
 $s_search = 'Pretraga';
@@ -1097,8 +827,6 @@ $s_open_filters = 'Izmena filtera';
 $s_or_unassigned = 'Ili nedodeljeno';
 $s_ok = 'OK';
 $s_select_all = 'Izaberi sve';
-
-# stored query strings
 $s_use_query = 'Koristi filter';
 $s_delete_query = 'Brisi filter';
 $s_query_deleted = 'Filter izbrisan';
@@ -1111,8 +839,6 @@ $s_query_blank_name = 'Ne mozete snimiti filter bez imena. Molim dajte naziv fil
 $s_query_store_error = 'Greska tokom snimanja upita.';
 $s_open_queries = 'Upravljanje filterima';
 $s_query_delete_msg = 'Da li ste sigurni da zelite da izbrisete ovaj upit?';
-
-# view_bug_advanced_page.php
 $s_view_simple_link = 'Osnovni pregled';
 $s_viewing_bug_advanced_details_title = 'Detaljan pregled grešaka';
 $s_product_build = 'Product Build';
@@ -1125,25 +851,15 @@ $s_move_bug_button = 'Premesti gresku';
 $s_attached_files = 'Prikaceni fajlovi';
 $s_publish = 'Publikuj';
 $s_cached = 'Keširano';
-
-# view_bug_inc.php
-
-# view_bug_page.php
 $s_view_advanced_link = 'Napredni pregled';
 $s_viewing_bug_simple_details_title = 'Osnovni pregled grešaka';
-
-# bug_monitor_list_view_inc.php
 $s_no_users_monitoring_bug = 'Nema korisnika koji prate ovu gresku.';
 $s_users_monitoring_bug = 'Korisnici koji prate ovu grešku';
 $s_monitoring_user_list = 'Lista korisnika';
-
-# bug_sponsorship_list_view_inc.php
 $s_no_users_sponsoring_bug = 'Nema korisnika koji sponzorisu ovu gresku.';
 $s_users_sponsoring_bug = 'Korisnici koji sponzorisu ovu gresku';
 $s_sponsors_list = 'Lista sponzora';
 $s_total_sponsorship_amount = 'Ukupno sponzorstvo = %s';
-
-# custom field strings
 $s_add_custom_field_button = 'Novo korisnicko polje';
 $s_delete_custom_field_button = 'Brisanje korisnickog polja';
 $s_delete_custom_field_everywhere = 'Brisanje svih korisnickih polja svuda';
@@ -1171,34 +887,25 @@ $s_custom_field_require_report = 'Potrebno pri prijavljivanju';
 $s_custom_field_require_update = 'Potrebno pri izmeni';
 $s_custom_field_require_resolved = 'Potrebno pri resenju';
 $s_custom_field_require_closed = 'Potrebno pri zatvaranju';
-
 $s_custom_field_sequence = 'sekvenca';
 $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email,5:Checkbox,6:List,7:Multiselection list,8:Date';
-
 $s_confirm_used_custom_field_deletion = 'Ovo polje je trenutno povezano sa bar jednim projektom.  Ukoliko nastavite, sve vrednosti ovog polja ce permanentno biti izbrisane.  Ovo je nepovratna akcija.  Ako ne želite da izbrišete ovo polje kliknite na "Back" polje u vašem internet pretraživacu. Da bi ste nastavili kliknite na dugme ispod.';
 $s_confirm_custom_field_deletion = 'Da li ste sigurni da želite da izbrisete ovo korisnicko polje i sve njemu pridružene vrednosti?';
 $s_field_delete_button = 'Brisanje polja';
-
 $s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
 $s_field_remove_button = 'Remove Field';
-
 $s_hide_status = 'Skrivanje statusa';
-$s_filter_closed = "Zatvoren";
-$s_filter_resolved = "Rešen";
-$s_hide_closed = "Skrivanje zatvorenih";
-$s_hide_resolved = "Skrivanje resenih";
+$s_filter_closed = 'Zatvoren';
+$s_filter_resolved = 'Rešen';
+$s_hide_closed = 'Skrivanje zatvorenih';
+$s_hide_resolved = 'Skrivanje resenih';
 $s_and_above = 'I iznad';
 $s_advanced_filters = 'Napredni filteri';
 $s_simple_filters = 'Prosti filteri';
 $s_monitored_by = 'praceno od strane';
-
-$s_attachments = "Prilozi";
-$s_attachment_alt = "A";
-
-# PHPMailer
+$s_attachments = 'Prilozi';
+$s_attachment_alt = 'A';
 $s_phpmailer_language = 'en';
-
-# Sponsorship Strings
 $s_sponsors = '%d sponsor(s)';
 $s_sponsorship_added = 'Sponzorstvo dodato';
 $s_sponsorship_updated = 'Sponzorstvo izmenjeno';
@@ -1206,49 +913,33 @@ $s_sponsorship_deleted = 'Sponzorstvo izbrisano';
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Vise informacija o sponzorstvu';
 $s_sponsorship_total = 'Sponsorship Total';
-
-# URL explaining the process of sponsoring an issue.  This is defined here rather than
-# in the config to allow for a URL per language.  This can be set to an empty string if there
-# is not need to provide such process information.
-$s_sponsorship_process_url = '';
-
-# Changelog
 $s_changelog = 'Dnevnik izmena';
-
-# Http auth
-$s_http_auth_realm = "Mantis Login";
-
-$s_bug = "greska";
-$s_add_new_relationship = "Nova relacija";
-$s_add_new_relationship_button = "Dodavanje";
-$s_this_bug = "Trenutna greska";
-$s_relationship_added = "Relacija dodata";
-$s_relationship_deleted = "Relacija izbrisana";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
-$s_delete_relationship_button = "Brisanje";
-$s_delete_relationship_sure_msg = "Da li ste sigurni da zelite da izbrisete ovu relaciju?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Nisu svi potomci ove greske reseni ili zatvoreni.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>UPOZORENJE</b>. Nisu svi potomci ove greske zatvoreni ili reseni.<br>Pre <b>resenja/zatvaranja</b> roditeljske greske, sve njima pripadajuce greske bi trebale da budu resene ili zatvorene.";
-$s_create_child_bug_button = "Create Clone";
-$s_bug_cloned_to = "Issue cloned";
-$s_bug_created_from = "Greska generisana iz";
-
-# Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relationship Graph";
-$s_relation_graph = "Relation Graph";
-$s_dependency_graph = "Dependency Graph";
-$s_vertical = "Vertical";
-$s_horizontal = "Horizontal";
-$s_view_issue = "View Issue";
-
-# Source Control Integration
+$s_http_auth_realm = 'Mantis Login';
+$s_bug = 'greska';
+$s_add_new_relationship = 'Nova relacija';
+$s_add_new_relationship_button = 'Dodavanje';
+$s_this_bug = 'Trenutna greska';
+$s_relationship_added = 'Relacija dodata';
+$s_relationship_deleted = 'Relacija izbrisana';
+$s_no_relationship = 'no relationship';
+$s_relationship_replaced = 'Relationship replaced';
+$s_replace_relationship_button = 'Replace';
+$s_replace_relationship_sure_msg = 'There is already a relationship between the two issues. Are you sure you want to replace it?';
+$s_relationship_with_parent = 'Relationship with the parent issue';
+$s_delete_relationship_button = 'Brisanje';
+$s_delete_relationship_sure_msg = 'Da li ste sigurni da zelite da izbrisete ovu relaciju?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Nisu svi potomci ove greske reseni ili zatvoreni.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>UPOZORENJE</b>. Nisu svi potomci ove greske zatvoreni ili reseni.<br>Pre <b>resenja/zatvaranja</b> roditeljske greske, sve njima pripadajuce greske bi trebale da budu resene ili zatvorene.';
+$s_create_child_bug_button = 'Create Clone';
+$s_bug_cloned_to = 'Issue cloned';
+$s_bug_created_from = 'Greska generisana iz';
+$s_viewing_bug_relationship_graph_title = 'Relationship Graph';
+$s_relation_graph = 'Relation Graph';
+$s_dependency_graph = 'Dependency Graph';
+$s_vertical = 'Vertical';
+$s_horizontal = 'Horizontal';
+$s_view_issue = 'View Issue';
 $s_checkin = 'Checkin';
-
-# Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
 $s_issues = 'ISSUES';
@@ -1276,8 +967,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
-$s_delete_attachment_button = "Delete";
-$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
+$s_delete_attachment_button = 'Delete';
+$s_delete_attachment_sure_msg = 'Are you sure you wish to delete this attachment?';
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
@@ -1308,24 +999,14 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
-
-# DHTML filters
 $s_loading = 'Loading...';
-
-# filter_api.php
 $s_between_date = 'Between';
 $s_on_or_before_date = 'On Or Before';
 $s_before_date = 'Before';
 $s_after_date = 'After';
 $s_on_or_after_date = 'On Or After';
-
-# Date constants
 $s_from_date = 'From';
 $s_to_date = 'To';
 $s_on_date = 'On';
-
-# Switch constants
 $s_on = 'On';
-
-# wiki related strings
 $s_wiki = 'Wiki';
