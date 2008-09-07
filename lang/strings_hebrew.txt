@@ -491,8 +491,6 @@ $s_add_bugnote_title = 'הוספת הערה';
 $s_add_bugnote_button = 'הוספה';
 $s_bugnote_edit_link = 'עריכה...';
 $s_closed_bug_button = 'Close Issue';
-
-# bugnote_update.php
 $s_bugnote_updated_msg = 'ההערה עודכנה';
 $s_edited_on = 'נערכה ב: ';
 $s_show_content = 'הצגת התוכן';
@@ -549,8 +547,6 @@ $s_manage_accounts_title = 'ניהול חשבונות';
 $s_p = 'p';
 $s_date_created = 'מועד פתיחה';
 $s_last_visit = 'כניסה אחרונה';
-
-# manage_config_email_page
 $s_config_all_projects = 'ההגדרות להלן חלות על כל הפרוייקטים, אלא אם הוגדרו ערכים שונים ברמת פרוייקט מסויים.';
 $s_config_project = 'הגדרות אלה חלות רק על פרוייקט "%s"';
 $s_colour_coding = 'מקרא צבעים לטבלה:';
@@ -770,16 +766,10 @@ $s_signup_button = 'שליחה';
 $s_no_password_request = 'סיסמתך מנוהלת במערכת נפרדת. נא לפנות למנהל המערכת שלך.';
 $s_edit_site_settings_title = 'Edit Site Settings';
 $s_save_settings_button = 'Save Settings';
-
-# site_settings_page.php
 $s_site_settings_title = 'Site Settings';
 $s_system_info_link = 'System Info';
 $s_site_settings_link = 'Site Settings';
-
-# site_settings_update.php
 $s_site_settings_updated_msg = 'Site settings have been updated';
-
-# summary_page.php
 $s_summary_title = 'דו"ח מרכז';
 $s_summary_jpgraph_link = 'מתקדם';
 $s_by_project = 'לפי פרוייקט';
