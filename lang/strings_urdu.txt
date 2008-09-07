@@ -923,7 +923,6 @@ $s_simple_filters = 'سادہ فلٹر';
 $s_monitored_by = 'اس کی طرف سے مانیٹر ڈ ';
 $s_attachments = 'منسلک';
 $s_attachment_alt = 'اے';
-$s_phpmailer_language = 'en';
 $s_sponsors = '%سپانسر ڈی  ';
 $s_sponsorship_added = ' سپانسر شپ جمع ھو گی ھے ';
 $s_sponsorship_updated = ' سپانسر شپ اپ ڈیٹ ھو گی ھے ';
