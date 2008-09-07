@@ -649,7 +649,7 @@ $s_here = 'Tukaj';
 $s_lost_password_title = "Password Reset";
 $s_lost_password_done_title = "Password Message Sent";
 $s_lost_password_subject = "Password Reset";
-$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
+$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br /><br />If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
 $s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
 
 # main_page.php
@@ -1234,7 +1234,7 @@ $s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Bri¹i";
 $s_delete_relationship_sure_msg = "Ali ste preprièani, da ¾elite izbrisati to relacijo?";
 $s_relationship_warning_blocking_bugs_not_resolved = 'Niso vsi potomci te zadeve re¹eni ali zaprti.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>POZOR</b>. Niso vsi potomci te zadeve re¹eni ali zaprti. <br> Pred zaprtjem ali razre¹itvijo zadeve morajo biti vsi potomci te zadeve razre¹eni ali zaprti.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>POZOR</b>. Niso vsi potomci te zadeve re¹eni ali zaprti. <br /> Pred zaprtjem ali razre¹itvijo zadeve morajo biti vsi potomci te zadeve razre¹eni ali zaprti.';
 $s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Zadeva klonirana";
 $s_bug_created_from = "Zadeva ustvarjena iz";

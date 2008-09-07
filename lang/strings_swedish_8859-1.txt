@@ -648,7 +648,7 @@ $s_here = 'Här';
 $s_lost_password_title = "Återställning av lösenord";
 $s_lost_password_done_title = "E-post med lösenord har skickats";
 $s_lost_password_subject = "Lösenord återställt";
-$s_lost_password_info = "För att återställa det förlorade lösenordet, var vänlig ange användarnamn och e-postadress för kontot.<br/><br/>Om informationen motsvarar ett giltigt konto kommer du att via e-post bli tillsänd en webbadress som innehåller en verifieringskod för ditt konto. Var vänligt följ länken för att ändra ditt lösenord.";
+$s_lost_password_info = "För att återställa det förlorade lösenordet, var vänlig ange användarnamn och e-postadress för kontot.<br /><br />Om informationen motsvarar ett giltigt konto kommer du att via e-post bli tillsänd en webbadress som innehåller en verifieringskod för ditt konto. Var vänligt följ länken för att ändra ditt lösenord.";
 $s_lost_password_confirm_hash_OK = "Din bekräftelse har accepterats. Var vänlig och uppdatera ditt lösenord.";
 
 # main_page.php
@@ -1023,7 +1023,7 @@ $s_no_reponse_msg = 'Du har sju dagar på dig att bekräfta ditt konto; om så inte
 
 # signup_page.php
 $s_signup_captcha_request = 'Mata in koden som den visas i rutan till höger';
-$s_signup_info = 'När du kompletterat detta formulär och dina svar kontrollerats, kommer du att bli tillsänd en bekräftelse via e-post till e-postadressen du angett.<br/>Med detta e-postmeddelande kan du aktivera ditt konto. Om du inte bekräftar ditt konto inom sju dagar, så kan konton komma att tas bort.<br/>Du måste alltså ange en giltig e-postadress för att kunna få bekräftelsemeddelandet.';
+$s_signup_info = 'När du kompletterat detta formulär och dina svar kontrollerats, kommer du att bli tillsänd en bekräftelse via e-post till e-postadressen du angett.<br />Med detta e-postmeddelande kan du aktivera ditt konto. Om du inte bekräftar ditt konto inom sju dagar, så kan konton komma att tas bort.<br />Du måste alltså ange en giltig e-postadress för att kunna få bekräftelsemeddelandet.';
 $s_signup_title = 'Skapa ett användarkonto';
 $s_signup_button = 'Skapa kontot';
 $s_no_password_request = 'Ditt lösenord hanteras i ett annat system. Kontakta systemadministratören.';
@@ -1233,7 +1233,7 @@ $s_relationship_with_parent = "Förhållande med föräldraärendet";
 $s_delete_relationship_button = "Ta bort";
 $s_delete_relationship_sure_msg = "Är du säker på att du vill bryta detta förhållande?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Alla barn till detta ärende har ännu inte lösts eller stängts.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>VARNING</b>. Alla barn till detta ärende har ännu inte lösts eller stängts.<br>Innan du <b>löser/stänger</b> ett föräldraärende, bör barnärendena till denna lösas eller stängas.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>VARNING</b>. Alla barn till detta ärende har ännu inte lösts eller stängts.<br />Innan du <b>löser/stänger</b> ett föräldraärende, bör barnärendena till denna lösas eller stängas.";
 $s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Ärende klonat";
 $s_bug_created_from = "Ärende skapat från";

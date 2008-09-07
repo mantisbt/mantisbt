@@ -661,7 +661,7 @@ $s_here = 'Èia';
 $s_lost_password_title = "Slaptaþodþio keitimas";
 $s_lost_password_done_title = "Laiðkas apie slaptaþodþio pakeitimà iðsiøstas";
 $s_lost_password_subject = "Slaptaþodio keitimas";
-$s_lost_password_info = "Norëdami pakeisti savo slaptaþodá áraðykite savo vartotojo vardà ir el. paðto adresà. <br/><br/>Jeigu duomenys sutaps su esamu vartotoju mûsø sistemoje, jûs gausite laiðkà su instrukcijomis kaip elgtis toliau.";
+$s_lost_password_info = "Norëdami pakeisti savo slaptaþodá áraðykite savo vartotojo vardà ir el. paðto adresà. <br /><br />Jeigu duomenys sutaps su esamu vartotoju mûsø sistemoje, jûs gausite laiðkà su instrukcijomis kaip elgtis toliau.";
 $s_lost_password_confirm_hash_OK = "Jûsø patvirtinimo kodas priimtas. Dabar galite pasikeisti savo slaptaþodá.";
 
 # main_page.php
@@ -1036,7 +1036,7 @@ $s_no_reponse_msg = 'Jûs turite septynias dienas uþbaigti registracijos procesà,
 
 # signup_page.php
 $s_signup_captcha_request = 'Áraðykite kodà, kuris rodomas deþinëje';
-$s_signup_info = 'Uþpildæ ðià formà gausite patvirtinimo laiðkà.<br/>Pasinaudodami minëtu laiðku galësite aktyvuoti savo vartotojo vardà. Jeigu per septynias dienas nespësite to padaryti, jûsø vartotojo vardas bus iðtrintas.<br/>Norëdami gauti patvirtinimo laiðkà, turi ávesti tikrà el. paðto adresà.';
+$s_signup_info = 'Uþpildæ ðià formà gausite patvirtinimo laiðkà.<br />Pasinaudodami minëtu laiðku galësite aktyvuoti savo vartotojo vardà. Jeigu per septynias dienas nespësite to padaryti, jûsø vartotojo vardas bus iðtrintas.<br />Norëdami gauti patvirtinimo laiðkà, turi ávesti tikrà el. paðto adresà.';
 $s_signup_title = 'Registracija';
 $s_signup_button = 'Pegistruotis';
 $s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
@@ -1246,7 +1246,7 @@ $s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Iðtrinti";
 $s_delete_relationship_sure_msg = "Ar tikrai norite iðtrinti ðá ryðá?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Ne visos su ðia klaida susijusios klaidos buvo iðspræstos arba uþdarytos.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>DËMESIO</b>. Ne visos su ðia klaida susijusios klaidos buvo iðspræstos arba uþdarytos.<br>Prieð <b>iðsprændþiant/uþdarant</b> ðià klaidà, turite iðspræsti arba uþdaryti visas susijusias klaidas.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>DËMESIO</b>. Ne visos su ðia klaida susijusios klaidos buvo iðspræstos arba uþdarytos.<br />Prieð <b>iðsprændþiant/uþdarant</b> ðià klaidà, turite iðspræsti arba uþdaryti visas susijusias klaidas.";
 $s_create_child_bug_button = "Sukurti sàryðá";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Klaida sukurta ið";

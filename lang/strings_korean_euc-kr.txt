@@ -652,7 +652,7 @@ $s_here = '여기';
 $s_lost_password_title = "비밀번호 초기화";
 $s_lost_password_done_title = "비밀번호 변경 메일이 보내졌습니다.";
 $s_lost_password_subject = "비밀번호 변경 확인 메일입니다.";
-$s_lost_password_info = "비밀번호를 찾기 원하시면 가입할때 사용하셨던 아이디와 메일 주소를 입력하시기 바랍니다.<br/><br/>메일 주소를 입력하시면 비밀번호를 변경할 수 있는 코드가 포함된 주소를 메일로 받으실 수 있습니다. ";
+$s_lost_password_info = "비밀번호를 찾기 원하시면 가입할때 사용하셨던 아이디와 메일 주소를 입력하시기 바랍니다.<br /><br />메일 주소를 입력하시면 비밀번호를 변경할 수 있는 코드가 포함된 주소를 메일로 받으실 수 있습니다. ";
 $s_lost_password_confirm_hash_OK = "요청이 수락 되었습니다. 비밀번호를 변경하시기 바랍니다.";
 
 # main_page.php
@@ -1027,7 +1027,7 @@ $s_no_reponse_msg = '일주일이 지나도 등록을 하지 않으시면 등록된 계정 정보는 자�
 
 # signup_page.php
 $s_signup_captcha_request = '오른쪽 상자에 보이는 내용을 입력합니다.';
-$s_signup_info = '위 사항을 입력후 등록을 하시면 확인 메시지를 메일로 받게 됩니다. <br>확인메일을 통해서 계정을 등록할 수 있으므로, 반드시 정확한 메일 주소를 입력해 주셔야 합니다. <br>만일, 일주일이 지나도 확인이 되지 않으면 등록된 정보는 자동으로 사라집니다.';
+$s_signup_info = '위 사항을 입력후 등록을 하시면 확인 메시지를 메일로 받게 됩니다. <br />확인메일을 통해서 계정을 등록할 수 있으므로, 반드시 정확한 메일 주소를 입력해 주셔야 합니다. <br />만일, 일주일이 지나도 확인이 되지 않으면 등록된 정보는 자동으로 사라집니다.';
 $s_signup_title = '신규등록';
 $s_signup_button = '신규등록';
 $s_no_password_request = '비밀번호는 다른 시스템에서 관리합니다. 시스템 관리자에게 확인하세요.';
@@ -1237,7 +1237,7 @@ $s_relationship_with_parent = "원인이 되는 이슈와의 관계";
 $s_delete_relationship_button = "삭제";
 $s_delete_relationship_sure_msg = "이 관계를 삭제합니까?";
 $s_relationship_warning_blocking_bugs_not_resolved = "이 이슈 때문에 발생한 이슈가 아직 모두 해결되거나 폐쇄되지 않았습니다.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>주의</b>. 이 이슈 때문에 발생한 이슈가 아직 모두 해결되거나 폐쇄되지 않았습니다.<br>원인이 되는 이슈를 <b>해결/폐쇄</b>하기 전에, 이 이슈 때문에 발생한 모든 이슈를 해결 또는 폐쇄해야 합니다.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>주의</b>. 이 이슈 때문에 발생한 이슈가 아직 모두 해결되거나 폐쇄되지 않았습니다.<br />원인이 되는 이슈를 <b>해결/폐쇄</b>하기 전에, 이 이슈 때문에 발생한 모든 이슈를 해결 또는 폐쇄해야 합니다.";
 $s_create_child_bug_button = "내용 복사후 관련이슈추가";
 $s_bug_cloned_to = "이슈 복사됨";
 $s_bug_created_from = "다음으로부터 생성된 이슈 :";

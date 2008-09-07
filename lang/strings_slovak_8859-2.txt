@@ -648,7 +648,7 @@ $s_here = 'tu';
 $s_lost_password_title = "Zmena hesla";
 $s_lost_password_done_title = "Odoslaný dopis o zmene hesla";
 $s_lost_password_subject = "Zmena hesla";
-$s_lost_password_info = "Ak chcete obnovit va¹e stratené heslo, zadajte prosím u¾ivatelské méno va¹eho úètu a va¹ú elektronickú adresu.<br/><br/>Pokud bude tato zadaná kombinace odpovídat nìkterému úètu, za¹leme vám dopis s unikátní webovou adresou pro potvrzení zmìny hesla. Pøejdìte na tuto adresu a dokonèete zmìnu va¹eho hesla.";
+$s_lost_password_info = "Ak chcete obnovit va¹e stratené heslo, zadajte prosím u¾ivatelské méno va¹eho úètu a va¹ú elektronickú adresu.<br /><br />Pokud bude tato zadaná kombinace odpovídat nìkterému úètu, za¹leme vám dopis s unikátní webovou adresou pro potvrzení zmìny hesla. Pøejdìte na tuto adresu a dokonèete zmìnu va¹eho hesla.";
 $s_lost_password_confirm_hash_OK = "Va¹e potvrdenie bolo prijaté. Teraz mô¾ete zmìnit va¹e prístupové heslo.";
 
 # main_page.php
@@ -1023,7 +1023,7 @@ $s_no_reponse_msg = 'Na dokonèenie potvrdenia va¹eho úètu máte termín sedem dní.
 
 # signup_page.php
 $s_signup_captcha_request = 'Zadajte kód ktorý vidíte v rámiku na pravej strane';
-$s_signup_info = 'Po dokonèení tejto kontroly va¹ich odpovedí Vám po¹leme kontrolný elektronický dopis.<br/>Pou¾itím tohoto kontrolného dopisu budete môc» aktivova» Vá¹ úèet. Nepodarí sa Vám aktivova» úèet v priebehu siedmych dní, bude úèet zmazaný.<br/>Abyste dostali tento kontrolní dopis, musí být vámi zadaná elektronická adresa platná.';
+$s_signup_info = 'Po dokonèení tejto kontroly va¹ich odpovedí Vám po¹leme kontrolný elektronický dopis.<br />Pou¾itím tohoto kontrolného dopisu budete môc» aktivova» Vá¹ úèet. Nepodarí sa Vám aktivova» úèet v priebehu siedmych dní, bude úèet zmazaný.<br />Abyste dostali tento kontrolní dopis, musí být vámi zadaná elektronická adresa platná.';
 $s_signup_title = 'Vytvorenie pou¾ívateµa';
 $s_signup_button = 'Vytvori»';
 $s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
@@ -1233,7 +1233,7 @@ $s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Odobra»";
 $s_delete_relationship_sure_msg = "Naozaj chcete odobra» tento vz»ah_";
 $s_relationship_warning_blocking_bugs_not_resolved = "Nie v¹etci potomkovia tohoto problému sú vyrie¹ený alebo uzavretí ";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Nie v¹etci potomkovia tohoto problému sú vyrie¹ení alebo uzavretí.<br>Pred <b>vyrie¹ením/uzavrením</b> otcovského problému musia by» vyrie¹ené alebo uzavreté v¹etky problémy, pova¾ované za jeho potomkov.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Nie v¹etci potomkovia tohoto problému sú vyrie¹ení alebo uzavretí.<br />Pred <b>vyrie¹ením/uzavrením</b> otcovského problému musia by» vyrie¹ené alebo uzavreté v¹etky problémy, pova¾ované za jeho potomkov.";
 $s_create_child_bug_button = "Vytvori» potomka";
 $s_bug_cloned_to = "Problém je klonovaný";
 $s_bug_created_from = "Problém generovaný z";

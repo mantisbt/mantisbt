@@ -1177,7 +1177,7 @@ $s_custom_field_require_closed = '完了時は必須';
 $s_custom_field_sequence = '表示順';
 $s_custom_field_type_enum_string = '0:文字列,1:整数,2:浮動小数点,3:列挙,4:メール,5:チェックボックス,6:リスト,7:複数選択リスト,8:日付';
 
-$s_confirm_used_custom_field_deletion = 'このカスタム項目は、現在1つ以上のプロジェクトで使用されています。<br>もし続行するならば、この項目のすべての値は削除されます。削除したら戻すことはできません。<br>削除したくないなら、ブラウザの戻るボタンを選択してください。続行するなら、下のボタンをクリックしてください。';
+$s_confirm_used_custom_field_deletion = 'このカスタム項目は、現在1つ以上のプロジェクトで使用されています。<br />もし続行するならば、この項目のすべての値は削除されます。削除したら戻すことはできません。<br />削除したくないなら、ブラウザの戻るボタンを選択してください。続行するなら、下のボタンをクリックしてください。';
 $s_confirm_custom_field_deletion = 'このカスタム項目とすべての設定した値を削除してよろしいですか。';
 $s_field_delete_button = '項目の削除';
 
@@ -1234,7 +1234,7 @@ $s_relationship_with_parent = "複製元は";
 $s_delete_relationship_button = "削除";
 $s_delete_relationship_sure_msg = "本当にこの関連を削除しますか?";
 $s_relationship_warning_blocking_bugs_not_resolved = "この改善要求の子番号に、解決済か完了ではない改善要求があります。";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b> この改善要求の子番号に、まだ解決済か完了ではない改善要求があります。<br>この改善要求を<b>解決済/完了</b>にする前に、子として関連した改善要求をすべて解決するか完了するべきです。";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b> この改善要求の子番号に、まだ解決済か完了ではない改善要求があります。<br />この改善要求を<b>解決済/完了</b>にする前に、子として関連した改善要求をすべて解決するか完了するべきです。";
 $s_create_child_bug_button = "複製";
 $s_bug_cloned_to = "改善要求を複製しました";
 $s_bug_created_from = "改善要求を生成しました。 対象";

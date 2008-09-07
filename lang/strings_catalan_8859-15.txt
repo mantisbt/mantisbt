@@ -672,7 +672,7 @@ $s_here = "Aquí";
 $s_lost_password_title = "Restaura la contrasenya";
 $s_lost_password_done_title = "Missatge de contrasenya enviat";
 $s_lost_password_subject = "Restaura la contrasenya";
-$s_lost_password_info = "Per a recuperar la seva contrasenya oblidada, si us plau completi el seu correu i contrasenya.<br/><br/>Si les dades es corresponen amb un compte vàlid, rebrà un correu amb una URL especial per a canviar la contrasenya. Si us plau segueixi les instruccions que rebrà i podrà canviar la contrasenya.";
+$s_lost_password_info = "Per a recuperar la seva contrasenya oblidada, si us plau completi el seu correu i contrasenya.<br /><br />Si les dades es corresponen amb un compte vàlid, rebrà un correu amb una URL especial per a canviar la contrasenya. Si us plau segueixi les instruccions que rebrà i podrà canviar la contrasenya.";
 $s_lost_password_confirm_hash_OK = "La seva confirmació ha estat acceptada. Si us plau canviï la seva contrasenya.";
 
 # main_page.php
@@ -1053,7 +1053,7 @@ $s_no_reponse_msg = "Té set dies per completar el procés de registre. Si no el c
 
 # signup_page.php
 $s_signup_captcha_request = "Introdueixi el codi tal com el veu en el camp de la dreta";
-$s_signup_info = "Al completar aquest procés i la verificació de les seves respostes, li enviarem un correu de confirmació a l'adreça especificada.<br/>Amb aquest correu podrà activar el seu compte. Si la confirmació no s'efectua en set dies, el compte serà eliminat.<br/>Ha de consignar una adreça de correu vàlida per a rebre el missatge de confirmació.";
+$s_signup_info = "Al completar aquest procés i la verificació de les seves respostes, li enviarem un correu de confirmació a l'adreça especificada.<br />Amb aquest correu podrà activar el seu compte. Si la confirmació no s'efectua en set dies, el compte serà eliminat.<br />Ha de consignar una adreça de correu vàlida per a rebre el missatge de confirmació.";
 $s_signup_title = "Registrar-se";
 $s_signup_button = "Registrar-se";
 $s_no_password_request = "La seva contrasenya està gestionada per un altre sistema. Si us plau contacti amb l'administrador del sistema.";
@@ -1277,7 +1277,7 @@ $s_relationship_with_parent = "Relació amb la comanda pare ";
 $s_delete_relationship_button = "Elimina";
 $s_delete_relationship_sure_msg = "¿Estar segur que desitja eliminar aquesta relació?";
 $s_relationship_warning_blocking_bugs_not_resolved = "No tots els fills d'aquesta comanda estan resolts o tancats.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENCIó</b>. No tots els fills d'aquesta comanda estan resolts o tancats.<br>Abans de <b>tancar/resoldre</b> una comanda pare, totes les seves comandes filles han d'estar resoltes o tancades.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENCIó</b>. No tots els fills d'aquesta comanda estan resolts o tancats.<br />Abans de <b>tancar/resoldre</b> una comanda pare, totes les seves comandes filles han d'estar resoltes o tancades.";
 $s_create_child_bug_button = "Crea Clon";
 $s_bug_cloned_to = "Comanda clonada";
 $s_bug_created_from = "Comanda generada des de";

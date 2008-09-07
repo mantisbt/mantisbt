@@ -650,7 +650,7 @@ $s_here = 'Her';
 $s_lost_password_title = "Adgangskoden nulstillet";
 $s_lost_password_done_title = "Adgangskodemeddelelse sendt";
 $s_lost_password_subject = "Adgangskoden nulstillet";
-$s_lost_password_info = "For at genindtaste din glemte adgangskode skal du angive kontoens navn og e-mail-adresse.<br/><br/>Hvis dataene passer på en eksisterende konto, vil der blive sendt en speciel URL som e-mail, som indeholder en valideringskode for din konto. Føjg dette link for at ændre din adgangskode.";
+$s_lost_password_info = "For at genindtaste din glemte adgangskode skal du angive kontoens navn og e-mail-adresse.<br /><br />Hvis dataene passer på en eksisterende konto, vil der blive sendt en speciel URL som e-mail, som indeholder en valideringskode for din konto. Føjg dette link for at ændre din adgangskode.";
 $s_lost_password_confirm_hash_OK = "Din bekræftelse er blevet accepteret. Opdater din adgangskode.";
 
 # main_page.php
@@ -1025,7 +1025,7 @@ $s_no_reponse_msg = 'Du har syv dage til at færdiggøre bekræftigelsesprocessen f
 
 # signup_page.php
 $s_signup_captcha_request = 'Skriv koden som den er skrevet i boksen til højre';
-$s_signup_info = 'Når du har udfyldt denne formular og bekræftiget dine oplysninger, får du tilsendt en e-mail til den e-mail-adresse du angav.<br/>Du skal bruge den e-mail til at aktivere din konto. Hvis du undlader at aktivere din konto indenfor syv dage bliver din konto slettet.<br/>Du skal angive en gyldig e-mail-adresse, ellers kan du ikke modtage denne e-mail du skal bruge til kontobekræftigelse.';
+$s_signup_info = 'Når du har udfyldt denne formular og bekræftiget dine oplysninger, får du tilsendt en e-mail til den e-mail-adresse du angav.<br />Du skal bruge den e-mail til at aktivere din konto. Hvis du undlader at aktivere din konto indenfor syv dage bliver din konto slettet.<br />Du skal angive en gyldig e-mail-adresse, ellers kan du ikke modtage denne e-mail du skal bruge til kontobekræftigelse.';
 $s_signup_title = 'Tilmeld';
 $s_signup_button = 'Tilmeld';
 $s_no_password_request = 'Din adgangskode er styret af et andet system. Kontakt din systemadministrator.';
@@ -1235,7 +1235,7 @@ $s_relationship_with_parent = "Afhængighed med overordnet fejl";
 $s_delete_relationship_button = "Slet";
 $s_delete_relationship_sure_msg = "Er du sikker på at du vil fjerne denne afhængighed?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Ikke alle underordnede af denne fejl er løste eller lukkede endnu.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>BEMÆRK</b>. Ikke alle underordnede af denne fejl er løste eller lukkede endnu.<br>Før en overordnet fejl kan makeres som <b>løst/lukket</b>, skal alle underordnede fejl være lukkede eller løst.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>BEMÆRK</b>. Ikke alle underordnede af denne fejl er løste eller lukkede endnu.<br />Før en overordnet fejl kan makeres som <b>løst/lukket</b>, skal alle underordnede fejl være lukkede eller løst.";
 $s_create_child_bug_button = "Opret klon";
 $s_bug_cloned_to = "Fejl klonet";
 $s_bug_created_from = "Fejl genereret fra";

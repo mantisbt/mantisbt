@@ -648,7 +648,7 @@ $s_here = 'Hér';
 $s_lost_password_title = "Lykilorð endurstillt";
 $s_lost_password_done_title = "Skilaboð um lykilorð sent";
 $s_lost_password_subject = "Lykilorð endurstillt";
-$s_lost_password_info = "Til að endurstilla týnt lykilorð, gefðu upp nafn og tölvupóstfang fyrir aðganginn.<br/><br/>Ef gögnin samsvara gildum aðgangi, verður þú sendur á sérstakt veffang með tölvupósti sem inniheldur staðfestingar kóða fyrir þinn aðgang. Fylgdu þessari slóð til að breyta lykilorðinu.";
+$s_lost_password_info = "Til að endurstilla týnt lykilorð, gefðu upp nafn og tölvupóstfang fyrir aðganginn.<br /><br />Ef gögnin samsvara gildum aðgangi, verður þú sendur á sérstakt veffang með tölvupósti sem inniheldur staðfestingar kóða fyrir þinn aðgang. Fylgdu þessari slóð til að breyta lykilorðinu.";
 $s_lost_password_confirm_hash_OK = "Staðfesting þín hefur verið samþykkt. Uppfærðu lykilorðið.";
 
 # main_page.php
@@ -1023,7 +1023,7 @@ $s_no_reponse_msg = 'Þú hefur sjö daga til að ljúka staðfestinu á aðgangs ferlin
 
 # signup_page.php
 $s_signup_captcha_request = 'Sláðu inn kódann sem sést í hólfinu til hægri';
-$s_signup_info = 'Þegar þú hefur fyllt þetta form út og sannreynt svör þín, verður þér sendur tölvupóstur til staðfestingar, í tölvupóstfangið sem þú gafst upp.<br/>Með því að nota þennan staðfestingar póst, getur þú virkjað aðgang þinn. Ef þú virkjar hann ekki innan sjö daga, verður honum eytt.<br/>Þú verður að gefa upp gilt tölvupóstfang til þess að fá staðfestingu á aðganginum.';
+$s_signup_info = 'Þegar þú hefur fyllt þetta form út og sannreynt svör þín, verður þér sendur tölvupóstur til staðfestingar, í tölvupóstfangið sem þú gafst upp.<br />Með því að nota þennan staðfestingar póst, getur þú virkjað aðgang þinn. Ef þú virkjar hann ekki innan sjö daga, verður honum eytt.<br />Þú verður að gefa upp gilt tölvupóstfang til þess að fá staðfestingu á aðganginum.';
 $s_signup_title = 'Skráning';
 $s_signup_button = 'Skráning';
 $s_no_password_request = 'Lykilorði þínu er stjórnað af öðru kerfi. Hafðu samband við kerfisstjóra.';

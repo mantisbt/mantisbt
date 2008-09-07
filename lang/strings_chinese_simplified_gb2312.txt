@@ -665,7 +665,7 @@ $s_here = '到这里';
 $s_lost_password_title = '重置密码';
 $s_lost_password_done_title = '密码邮件已发出';
 $s_lost_password_subject = '密码重置';
-$s_lost_password_info = '如果你想重置忘记的密码, 请填写你的用户名和邮件地址。<br/><br/>如果你填写的信息是有效的, 你将通过电子邮件收到一个含有特殊验证码的网页链接，点击该链接即可修改你的密码。';
+$s_lost_password_info = '如果你想重置忘记的密码, 请填写你的用户名和邮件地址。<br /><br />如果你填写的信息是有效的, 你将通过电子邮件收到一个含有特殊验证码的网页链接，点击该链接即可修改你的密码。';
 $s_lost_password_confirm_hash_OK = '系统已经接受了你的确认，请更新密码。';
 
 # main_page.php
@@ -1042,7 +1042,7 @@ $s_no_reponse_msg = '你必须在7天之内激活你的账号，否则逾期该账号将被自动清除';
 
 # signup_page.php
 $s_signup_captcha_request = '请输入右边的字符串';
-$s_signup_info = '填完此表单后，你将在你填写的邮箱里收到一封确认信。<br/>通过确认信，你可以激活你的账号。如果你在7天之内不激活你的账号，系统将自动清除此账号。<br/>为了你能够收到这封确认信，请务必确保你输入的邮件地址是有效的。';
+$s_signup_info = '填完此表单后，你将在你填写的邮箱里收到一封确认信。<br />通过确认信，你可以激活你的账号。如果你在7天之内不激活你的账号，系统将自动清除此账号。<br />为了你能够收到这封确认信，请务必确保你输入的邮件地址是有效的。';
 $s_signup_title = '注册';
 $s_signup_button = '注册';
 $s_no_password_request = '你的密码被另一个系统所管理，请联系系统管理员进行修改。';
@@ -1261,7 +1261,7 @@ $s_relationship_with_parent = '与上级问题关联';
 $s_delete_relationship_button = '删除';
 $s_delete_relationship_sure_msg = '你确定要删除该关联吗？';
 $s_relationship_warning_blocking_bugs_not_resolved = '当前问题的部分子项还没有解决或关闭。';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>注意</b>：当前问题的部分子项还没有解决或关闭。<br>在<b>解决或关闭</b>一个祖先问题前，应该解决或关闭所有相关联的子项问题。';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>注意</b>：当前问题的部分子项还没有解决或关闭。<br />在<b>解决或关闭</b>一个祖先问题前，应该解决或关闭所有相关联的子项问题。';
 $s_create_child_bug_button = '创建子项问题';
 $s_bug_cloned_to = '问题已复制';
 $s_bug_created_from = '问题产生于';

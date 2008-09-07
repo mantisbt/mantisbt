@@ -648,7 +648,7 @@ $s_here = 'Ovde';
 $s_lost_password_title = "Lozinka Resetovana";
 $s_lost_password_done_title = "Poruka o lozinki poslata";
 $s_lost_password_subject = "Lozinka resetovana";
-$s_lost_password_info = "Da biste povratili izgubljenu lozinku, molim unesite ime i email adresu naloga.<br/><br/>Ukoliko uneti podaci odgovaraju, bice vam poslata specijalna adresa putem e-maila koja ce sadrzati aktivacioni kod vaseg naloga. Molim pratite sledeci link da biste izmenili lozinku.";
+$s_lost_password_info = "Da biste povratili izgubljenu lozinku, molim unesite ime i email adresu naloga.<br /><br />Ukoliko uneti podaci odgovaraju, bice vam poslata specijalna adresa putem e-maila koja ce sadrzati aktivacioni kod vaseg naloga. Molim pratite sledeci link da biste izmenili lozinku.";
 $s_lost_password_confirm_hash_OK = "Vasa potvrda je primljena. Molim izmenite vasu lozinku.";
 
 # main_page.php
@@ -1023,7 +1023,7 @@ $s_no_reponse_msg = 'Imate sedam dana da kompletirate proces aktivacije naloga; 
 
 # signup_page.php
 $s_signup_captcha_request = 'Unesite kod tacno kako je prikazan u prozoru na desnoj strani';
-$s_signup_info = 'Po popunjavanju ove prijave i provera vasih odgovora, bice vam poslata poruka radi provere e-mail adrese.<br/>Koristeci tu poruku, moci cete da aktivirate vas nalog. Ukoliko ne aktivirate nalog u roku od sedam dana on ce biti izbrisan.<br/>Da biste primili e-mail sa aktivacijom naloga morate da unesete aktivnu e-mail adresu.';
+$s_signup_info = 'Po popunjavanju ove prijave i provera vasih odgovora, bice vam poslata poruka radi provere e-mail adrese.<br />Koristeci tu poruku, moci cete da aktivirate vas nalog. Ukoliko ne aktivirate nalog u roku od sedam dana on ce biti izbrisan.<br />Da biste primili e-mail sa aktivacijom naloga morate da unesete aktivnu e-mail adresu.';
 $s_signup_title = 'Prijava';
 $s_signup_button = 'Prijava';
 $s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
@@ -1233,7 +1233,7 @@ $s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Brisanje";
 $s_delete_relationship_sure_msg = "Da li ste sigurni da zelite da izbrisete ovu relaciju?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Nisu svi potomci ove greske reseni ili zatvoreni.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>UPOZORENJE</b>. Nisu svi potomci ove greske zatvoreni ili reseni.<br>Pre <b>resenja/zatvaranja</b> roditeljske greske, sve njima pripadajuce greske bi trebale da budu resene ili zatvorene.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>UPOZORENJE</b>. Nisu svi potomci ove greske zatvoreni ili reseni.<br />Pre <b>resenja/zatvaranja</b> roditeljske greske, sve njima pripadajuce greske bi trebale da budu resene ili zatvorene.";
 $s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Greska generisana iz";

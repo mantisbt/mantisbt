@@ -648,7 +648,7 @@ $s_here = '®Ï≥o∏Ã';
 $s_lost_password_title = "≠´∑s≥]©w±KΩX";
 $s_lost_password_done_title = "≠´≥]±KΩX∞TÆß§w∏g∞e•X";
 $s_lost_password_subject = "≠´∑s≥]©w±KΩX";
-$s_lost_password_info = "∑ÌßAß—∞O±KΩXÆ…, Ω–øÈ§J•øΩT™∫±b∏π©M E-Mail µM´·¬IøÔ∞e•X.<br/><br/>∑ÌßAøÈ§J™∫±b∏π©M E-Mail •øΩTµLª~, ßA±N•i¶bßA™∫ E-Mail ´HΩc¶¨®Ï§@´ ≥q™æ´H, ¬IøÔ´H§§™∫∫Ùß}, ßA¥N•i•H≥s§W•ªØ∏ßÛ∑sßA™∫±KΩX.";
+$s_lost_password_info = "∑ÌßAß—∞O±KΩXÆ…, Ω–øÈ§J•øΩT™∫±b∏π©M E-Mail µM´·¬IøÔ∞e•X.<br /><br />∑ÌßAøÈ§J™∫±b∏π©M E-Mail •øΩTµLª~, ßA±N•i¶bßA™∫ E-Mail ´HΩc¶¨®Ï§@´ ≥q™æ´H, ¬IøÔ´H§§™∫∫Ùß}, ßA¥N•i•H≥s§W•ªØ∏ßÛ∑sßA™∫±KΩX.";
 $s_lost_password_confirm_hash_OK = "ßA™∫•”Ω–§w∏g≥Q±µ®¸. Ω–ßÛ∑sßA™∫±KΩX.";
 
 # main_page.php
@@ -1233,7 +1233,7 @@ $s_relationship_with_parent = "§Wºh∞›√D¨∞√ˆ¡p∞›√D";
 $s_delete_relationship_button = "ßR∞£";
 $s_delete_relationship_sure_msg = "ßAΩT©wßA≠nßR∞£≥o≠”¨€√ˆ∞›√D∂‹?";
 $s_relationship_warning_blocking_bugs_not_resolved = "®√´D©“¶≥≥o∞›√D™∫§Uºh∞›√D≥£§w∏—®M©Œ§wµ≤Æ◊.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>™`∑N</b>. §£¨O©“¶≥≥o∞›√D™∫§Uºh∞›√D§w∏—®M©Œ§wµ≤Æ◊.<br>¶b<b>∏—®M©Œµ≤Æ◊</b>§ß´e, ≥o∞›√D™∫©“¶≥§Uºh¨€√ˆ∞›√D¿≥∏”¨O§w∏—®M©Œ§wµ≤Æ◊™∫™¨∫A.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>™`∑N</b>. §£¨O©“¶≥≥o∞›√D™∫§Uºh∞›√D§w∏—®M©Œ§wµ≤Æ◊.<br />¶b<b>∏—®M©Œµ≤Æ◊</b>§ß´e, ≥o∞›√D™∫©“¶≥§Uºh¨€√ˆ∞›√D¿≥∏”¨O§w∏—®M©Œ§wµ≤Æ◊™∫™¨∫A.";
 $s_create_child_bug_button = "´ÿ•ﬂΩ∆ªs";
 $s_bug_cloned_to = "∞›√D§w≥QΩ∆ªs";
 $s_bug_created_from = "∞›√D´ÿ•ﬂ®”∑Ω";

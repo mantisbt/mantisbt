@@ -684,7 +684,7 @@ $s_here = 'hier klicken';
 $s_lost_password_title = 'Passwort zurücksetzen';
 $s_lost_password_done_title = 'Passwort Nachricht gesendet';
 $s_lost_password_subject = 'Passwort zurücksetzen';
-$s_lost_password_info = 'Um ihr verlorenes Passwort zu erhalten, geben Sie bitte Benutzername und E-Mail Adresse Ihres Kontos an.<br/><br/>Wenn die Daten mit einem gültigen Konto übereinstimmen, wird Ihnen eine spezielle URL über E-Mail geschickt die einen Bestätigungscode für Ihr Konto enthält. Bitte folgen Sie dem Link und ändern Sie ihr Passwort.';
+$s_lost_password_info = 'Um ihr verlorenes Passwort zu erhalten, geben Sie bitte Benutzername und E-Mail Adresse Ihres Kontos an.<br /><br />Wenn die Daten mit einem gültigen Konto übereinstimmen, wird Ihnen eine spezielle URL über E-Mail geschickt die einen Bestätigungscode für Ihr Konto enthält. Bitte folgen Sie dem Link und ändern Sie ihr Passwort.';
 $s_lost_password_confirm_hash_OK = 'Ihre Bestätigung wurde akzeptiert. Bitte aktualisieren Sie Ihr Passwort.';
 
 # main_page.php
@@ -1088,7 +1088,7 @@ $s_no_reponse_msg = 'Sie haben sieben Tage um die Kontobestätigung auszuführen. 
 
 # signup_page.php
 $s_signup_captcha_request = 'Geben Sie den Code ein, den Sie im Rahmen auf der rechten Seite sehen.';
-$s_signup_info = 'Nach dem Abschicken dieses Formulars und der Überprüfung Ihrer Antworten wird Ihnen einen Bestätigungsmail an die angegebene Adresse geschickt.<br/>Benutzen Sie diese E-Mail, um Ihr Konto zu aktivieren. Wenn Sie Ihr Konto nicht innerhalb von sieben Tagen freischalten, wird das Konto entfernt.<br/>Sie müssen eine gültige E-Mail-Adresse angeben, um die Bestätigungsmail zu erhalten.';
+$s_signup_info = 'Nach dem Abschicken dieses Formulars und der Überprüfung Ihrer Antworten wird Ihnen einen Bestätigungsmail an die angegebene Adresse geschickt.<br />Benutzen Sie diese E-Mail, um Ihr Konto zu aktivieren. Wenn Sie Ihr Konto nicht innerhalb von sieben Tagen freischalten, wird das Konto entfernt.<br />Sie müssen eine gültige E-Mail-Adresse angeben, um die Bestätigungsmail zu erhalten.';
 $s_signup_title = 'Anmeldung';
 $s_signup_button = 'Anmelden';
 $s_no_password_request = 'Ihr Passwort wird von einem anderen System verwaltet. Nehmen Sie Kontakt mit Ihrem Administrator auf.';
@@ -1312,7 +1312,7 @@ $s_relationship_with_parent = 'Beziehung zum Original-Problem';
 $s_delete_relationship_button = 'Löschen';
 $s_delete_relationship_sure_msg = 'Sind Sie sicher, dass Sie diese Beziehung löschen wollen?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Nicht alle blockierenden Probleme sind bereits behoben oder geschlossen.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ACHTUNG</b>. Nicht alle blockierenden Probleme sind bereits behoben oder geschlossen.<br>Bevor Sie ein Problem <b>beheben/schließen</b>, sollten alle Probleme, die es blockieren, erledigt, behoben oder geschlossen werden.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ACHTUNG</b>. Nicht alle blockierenden Probleme sind bereits behoben oder geschlossen.<br />Bevor Sie ein Problem <b>beheben/schließen</b>, sollten alle Probleme, die es blockieren, erledigt, behoben oder geschlossen werden.';
 $s_create_child_bug_button = 'Klon erzeugen';
 $s_bug_cloned_to = 'Problem dupliziert';
 $s_bug_created_from = 'Problem angelegt von';

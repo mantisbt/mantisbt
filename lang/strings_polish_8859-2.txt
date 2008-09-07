@@ -653,7 +653,7 @@ $s_here = 'Tutaj';
 $s_lost_password_title = "Resetowanie has³a";
 $s_lost_password_done_title = "Wiadomo¶æ o ha¶le wys³ana";
 $s_lost_password_subject = "Resetowanie has³a";
-$s_lost_password_info = "Aby zmieniæ zapomniane has³o, proszê podaæ nazwe u¿ytkownika i adres email dla konta.<br/><br/>Je¶li podane dane odpowiadaj± poprawnemu kontu, otrzymasz w wiadomo¶ci email specjalny adres URL zawieraj±cy kod weryfikuj±cy dla twojego konta. Proszê otworzyæ podany adres aby zmieniæ has³o.";
+$s_lost_password_info = "Aby zmieniæ zapomniane has³o, proszê podaæ nazwe u¿ytkownika i adres email dla konta.<br /><br />Je¶li podane dane odpowiadaj± poprawnemu kontu, otrzymasz w wiadomo¶ci email specjalny adres URL zawieraj±cy kod weryfikuj±cy dla twojego konta. Proszê otworzyæ podany adres aby zmieniæ has³o.";
 $s_lost_password_confirm_hash_OK = "Twoje potwierdzenie zosta³o zaakceptowane. Proszê zmieniæ has³o.";
 
 # main_page.php
@@ -1028,7 +1028,7 @@ $s_no_reponse_msg = 'Masz siedem dni na dokoñczenie procesu potwierdzania konta.
 
 # signup_page.php
 $s_signup_captcha_request = 'Wprowad¼ kod widoczny w ramce po prawej stronie.';
-$s_signup_info = 'Po wype³nieniu formularza i sprawdzeniu twoich odpowiedzi, otrzymasz na podany adres email wiadomo¶æ potwierdzaj±c±.<br/>Wiadomo¶æ ta umo¿liwi pe³n± aktywacjê konta. Je¶li nie aktywujesz go w ci±gu 7 dni, konto zostanie usuniête.<br/>Musisz podaæ poprawny adres email aby otrzymaæ wiadomo¶æ potwiedzaj±c±.';
+$s_signup_info = 'Po wype³nieniu formularza i sprawdzeniu twoich odpowiedzi, otrzymasz na podany adres email wiadomo¶æ potwierdzaj±c±.<br />Wiadomo¶æ ta umo¿liwi pe³n± aktywacjê konta. Je¶li nie aktywujesz go w ci±gu 7 dni, konto zostanie usuniête.<br />Musisz podaæ poprawny adres email aby otrzymaæ wiadomo¶æ potwiedzaj±c±.';
 $s_signup_title = 'Zapisywanie siê';
 $s_signup_button = 'Zapisz siê';
 $s_no_password_request = 'Twoje has³o jest zarz±dzane przez inny system. Skontaktuj siê z administratorem.';
@@ -1238,7 +1238,7 @@ $s_relationship_with_parent = "Powi±zanie z zagadnieniem ¼ród³owym";
 $s_delete_relationship_button = "Usuñ";
 $s_delete_relationship_sure_msg = "Czy na pewno chcesz usun±æ powi±zanie?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Nie wszyskie zagadnienia blokuj±ce s± rozwi±zane lub zamkniête.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>UWAGA</b>. Nie wszystkie zagadnienia blokuj±ce s± rozwi±zane lub zamkniête.<br>Przed <b>rozwi±zaniem/zamkniêciem</b> tego zagadnienia wszystkie zagadnienia blokuj±ce powinny byæ rozwi±zane/zamkniête.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>UWAGA</b>. Nie wszystkie zagadnienia blokuj±ce s± rozwi±zane lub zamkniête.<br />Przed <b>rozwi±zaniem/zamkniêciem</b> tego zagadnienia wszystkie zagadnienia blokuj±ce powinny byæ rozwi±zane/zamkniête.";
 $s_create_child_bug_button = "Klonuj";
 $s_bug_cloned_to = "Zagadnienie sklonowane";
 $s_bug_created_from = "Zagadnienie wygenerowane z";

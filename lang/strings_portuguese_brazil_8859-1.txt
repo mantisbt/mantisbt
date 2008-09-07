@@ -651,7 +651,7 @@ $s_here = 'Aqui';
 $s_lost_password_title = "Reajuste de Senha";
 $s_lost_password_done_title = "Mensagem de Senha Enviada";
 $s_lost_password_subject = "Reajuste de Senha";
-$s_lost_password_info = "Para reestabelecer sua senha perdida, por favor forneça o nome e endereço de e-mail da sua conta.<br/><br/>Se os dados corresponderem a uma conta válida, lhe será enviado um endereço especial via e-mail que contém um código de validação para a sua conta. Por favor, siga este link para mudar a sua senha.";
+$s_lost_password_info = "Para reestabelecer sua senha perdida, por favor forneça o nome e endereço de e-mail da sua conta.<br /><br />Se os dados corresponderem a uma conta válida, lhe será enviado um endereço especial via e-mail que contém um código de validação para a sua conta. Por favor, siga este link para mudar a sua senha.";
 $s_lost_password_confirm_hash_OK = "Sua confirmação foi aceita. Por favor, atualize sua senha.";
 
 # main_page.php
@@ -1026,7 +1026,7 @@ $s_no_reponse_msg = 'Você terá sete dias para completar o processo de confirmaçã
 
 # signup_page.php
 $s_signup_captcha_request = 'Digite o código que é mostrado no quadro à direita.';
-$s_signup_info = 'Ao completar este formulário e verificar suas respostas, um e-mail de confirmação lhe será enviado para o endereço de e-mail que você especificou.<br/>Usando o e-mail de confirmação, você será capaz de ativar sua conta. Se você falhar em ativar sua conta dentro de sete dias, ela será apagada.<br/>Você deve especificar um endereço de e-mail válido para poder receber o e-mail de confirmação de conta.';
+$s_signup_info = 'Ao completar este formulário e verificar suas respostas, um e-mail de confirmação lhe será enviado para o endereço de e-mail que você especificou.<br />Usando o e-mail de confirmação, você será capaz de ativar sua conta. Se você falhar em ativar sua conta dentro de sete dias, ela será apagada.<br />Você deve especificar um endereço de e-mail válido para poder receber o e-mail de confirmação de conta.';
 $s_signup_title = 'Criar Conta';
 $s_signup_button = 'Criar Conta';
 $s_no_password_request = 'Sua senha é gerenciada por outro sistema. Por favor, contate o administrador de sistemas.';

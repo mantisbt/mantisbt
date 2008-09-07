@@ -696,7 +696,7 @@ $s_here = 'Here';
 $s_lost_password_title = 'Password Reset';
 $s_lost_password_done_title = 'Password Message Sent';
 $s_lost_password_subject = 'Password Reset';
-$s_lost_password_info = 'To reinstate your lost password, please supply the name and e-mail address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via e-mail that contains a validation code for your account. Please follow this link to change your password.';
+$s_lost_password_info = 'To reinstate your lost password, please supply the name and e-mail address for the account.<br /><br />If the data corresponds to a valid account, you will be sent a special URL via e-mail that contains a validation code for your account. Please follow this link to change your password.';
 $s_lost_password_confirm_hash_OK = 'Your confirmation has been accepted. Please update your password.';
 
 # main_page.php
@@ -861,7 +861,7 @@ $s_category_added_msg = 'Category has been successfully added...';
 $s_category_deleted_msg = 'Category has been successfully deleted...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = 'Are you sure you want to delete this category?<br/>Category "%s" contains %d bugs.';
+$s_category_delete_sure_msg = 'Are you sure you want to delete this category?<br />Category "%s" contains %d bugs.';
 $s_delete_category_button = 'Delete Category';
 
 # manage_proj_category_edit_page.php
@@ -1107,13 +1107,13 @@ $s_selected_project = 'Selected project';
 $s_valid_project_msg = 'You must choose a valid project.';
 
 # signup.php
-$s_signup_done_title = 'Account registration processed';
+$s_signup_done_title = 'Account registration processed.';
 $s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation e-mail to verify your e-mail address. Visiting the link sent to you in this e-mail will activate your account.';
 $s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
-$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
-$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation e-mail to the e-mail address you specified.<br/>Using the confirmation e-mail, you will be able to activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid e-mail address in order to receive the account confirmation e-mail.';
+$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right.';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation e-mail to the e-mail address you specified.<br />Using the confirmation e-mail, you will be able to activate your account. If you fail to activate your account within seven days, it will be purged.<br />You must specify a valid e-mail address in order to receive the account confirmation e-mail.';
 $s_signup_title = 'Signup';
 $s_signup_button = 'Signup';
 $s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
