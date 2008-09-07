@@ -230,10 +230,15 @@
 		
 		// split and encode parameters
 		if ( strpos( $t_url, '?' ) !== FALSE ) {
-			list( $t_path, $t_param ) = split( '\?', $t_url, 2 );
+			list( $t_path, $t_param ) = explode( '?', $t_url, 2 );
 			if ( !is_blank($t_param ) ) {
+			    if ( strpos( $t_param, '#' ) !== FALSE ) {
+			        list( $t_query, $t_anchor ) = explode( '#', $t_param, 2 );
+			    } else {
+			        $t_query = $t_param; $t_anchor = '';
+			    }
 				$t_vals = array();
-				parse_str( html_entity_decode( $t_param ), $t_vals );
+				parse_str( html_entity_decode( $t_query ), $t_vals );
 				$t_param = '';
 				foreach( $t_vals as $k => $v ) {
 					if ( $t_param != '' ) {
@@ -248,7 +253,9 @@
 						$t_param .= "$k=" . urlencode( strip_tags( urldecode( $v ) ) );
 					}
 				}
-				return $t_path . '?' . $t_param;
+				if (!is_blank($t_anchor)) 
+				    $t_anchor = '#' . urlencode( $t_anchor );
+				return $t_path . '?' . $t_param . $t_anchor;
 			} else {
 				return $t_path;
 			}
