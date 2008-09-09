@@ -29,6 +29,7 @@
  * @file
  *
  * @author Luís Martins, lmar@ualg.pt
+ * @author Malafaya
  * @author Rui Alexandre Coelho, rac@iosoft.pt
  */
 
@@ -123,6 +124,7 @@ $s_priority_link = 'Por Prioridade';
 $s_severity_link = 'Por Importância';
 $s_category_link = 'Por Categoria';
 $s_resolution_link = 'Por Resolução';
+$s_legend_total = 'Total';
 $s_hide_button = 'Mostar Apenas os Selecionados';
 $s_printing_preferences_title = 'Escolha os Elementos a Imprimir';
 $s_printing_options_link = 'Opções de Impressão';
@@ -508,6 +510,7 @@ $s_by_category = 'por Categoria';
 $s_by_priority = 'por Prioridade';
 $s_by_developer = 'por Gestor';
 $s_by_reporter = 'por Relator';
+$s_days = 'Dias';
 $s_time_stats = 'Estado para Bug Resolvido(dias)';
 $s_longest_open_bug = 'Bug de Maior tempo sem Solução';
 $s_longest_open = 'Mais tempo Aberto';
