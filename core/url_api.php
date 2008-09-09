@@ -31,7 +31,7 @@
  */
 function url_get( $p_url ) {
 	# Generic PHP call
-	if ( false && ini_get( 'allow_url_fopen' ) ) {
+	if ( ini_get( 'allow_url_fopen' ) ) {
 		return @file_get_contents( $p_url );
 	}
 
@@ -47,6 +47,6 @@ function url_get( $p_url ) {
 	}
 
 	# Last resort system call
-	return `curl $p_url`;
+	return `curl "$p_url"`;
 }
 
