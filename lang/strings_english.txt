@@ -355,7 +355,7 @@ $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # E-mail Strings
 $s_new_account_subject = 'Account registration';
-$s_new_account_greeting = 'Thank you for registering. You have account with username "';
+$s_new_account_greeting = 'Thank you for registering. You have an account with username "';
 $s_new_account_greeting2 = '". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = 'Username: ';
 $s_new_account_message = 'If you did not request any registration, ignore this message and nothing will happen.\n\n';
