@@ -33,6 +33,7 @@
  * @author Alexey Chumakov alex@chumakov.ru
  * @author Mikhail Oleynik (MiTo Team), m.oleynik@gmail.com
  * @author Oleg Gashev gashev@zahav.net.il
+ * @author Yuri Volokhov <volohovy@niiri.kharkov.com>
  */
 
 	###########################################################################
@@ -126,7 +127,7 @@ $s_bug_relationships = 'Связи';
 $s_empty_password_sure_msg = 'У пользователя пустой пароль. Вы уверены, что хотите именно этого?';
 $s_empty_password_button = 'Использовать пустой пароль';
 $s_reauthenticate_title = 'Авторизация';
-$s_reauthenticate_message = 'Вы навестили защищенную страницу и время сессии завершено. Пожалуйста, авторизируйте себя для продолжения работы.';
+$s_reauthenticate_message = 'Вы переходите на защищенную страницу, но время авторизации истекло. Пожалуйста, авторизируйтесь для продолжения работы.';
 $s_duplicate_of = 'дублирует';
 $s_has_duplicate = 'имеет дубль';
 $s_related_to = 'связан с';
@@ -578,6 +579,9 @@ $s_protected = 'Защищена';
 $s_create_user_button = 'Создать';
 $s_hide_disabled = 'скрыть заблокированные';
 $s_filter_button = 'Фильтровать';
+$s_create_filter_link = 'Создать постоянную ссылку';
+$s_create_short_link = 'Создать короткую ссылку (TinyURL)';
+$s_filter_permalink = 'Постоянная ссылка на сконфигурированный Вами фильтр:';
 $s_manage_users_link = 'управление пользователями';
 $s_manage_projects_link = 'управление проектами';
 $s_manage_custom_field_link = 'управление настраиваемыми полями';
@@ -865,6 +869,7 @@ $s_sticky = 'Выводить прикрепленные';
 $s_sort = 'Сортировать по';
 $s_issue_id = 'Вопрос #';
 $s_recently_visited = 'Недавно посещенные';
+$s_priority_abbreviation = 'П';
 $s_none = 'никакие';
 $s_current = 'текущий';
 $s_search = 'Поиск';
@@ -881,6 +886,7 @@ $s_yes = 'да';
 $s_no = 'нет';
 $s_open_filters = 'Изменить фильтр';
 $s_or_unassigned = 'или неназначенные';
+$s_ok = 'OK';
 $s_select_all = 'выбрать все';
 $s_use_query = 'Использовать фильтр';
 $s_delete_query = 'Удалить фильтр';
@@ -1073,8 +1079,9 @@ $s_tag_id = 'Тэг ID';
 $s_tag_name = 'Название';
 $s_tag_creator = 'Автор';
 $s_tag_created = 'Дата создания';
-$s_tag_updated = 'Последнее изменения';
+$s_tag_updated = 'Последнее изменение';
 $s_tag_description = 'Описание тэга';
+$s_tag_statistics = 'Статистика использования';
 $s_tag_update = 'Обновить тэг: %s';
 $s_tag_update_return = 'Назад';
 $s_tag_update_button = 'Изменить тэг';
@@ -1086,11 +1093,12 @@ $s_tag_attach = 'Прикрепить';
 $s_tag_attach_long = 'Прикрепить тэги';
 $s_tag_attach_failed = 'Невозможно прикрепить тэг.';
 $s_tag_detach = 'Открепить \'%s\'';
-$s_tag_separate_by = '(Раделять \'%s\')';
+$s_tag_separate_by = '(Разделять \'%s\')';
 $s_tag_invalid_name = 'Ошибочное название тэга.';
+$s_tag_create_denied = 'Create permission denied.';
 $s_tag_filter_default = 'Прикрепленные вопросы (%s)';
 $s_tag_history_attached = 'Тэг прикреплен';
-$s_tag_history_detached = 'Tag откреплен';
+$s_tag_history_detached = 'Тэг откреплен';
 $s_tag_history_renamed = 'Тэг переименован';
 $s_tag_related = 'Связанные тэги';
 $s_tag_related_issues = 'Общие вопросы (%s)';
