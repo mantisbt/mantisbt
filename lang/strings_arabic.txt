@@ -208,7 +208,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'الملاحظة لم يتم العث�
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'المشروع "%d" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'حقل قاعدة البيانات "%s" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'غير قادر على الاتصال بخادم FTP.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'متحكم القضايا لا يمتلك الصلاحية الكافية لمعالجة القضايا في هذه الحالة.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'معالج القضايا لا يمتلك الصلاحية الكافية لمعالجة القضايا في هذه الحالة.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'يوجد مشروع بهذا الاسم بالفعل. من فضلك عد وأدخل اسما مختلفا.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'اسم مشروع غير صحيح تم تحديده. أسماء المشاريع لا يمكن أن تكون فارغة.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'المستخدم لم يتم العثور عليه.';
@@ -235,7 +235,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'الحقل المخصص لم يت
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'هذا اسم مكرر.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'على الأقل مشروع واحد مازال يستخدم هذا الحقل.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'قيمة غير صحيحة ل%s.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'تعريف حقل مخصص غير صحيح';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'تعريف حقل مخصص غير صحيح.';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'تحقق LDAP فشل.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'الاتصال بخادم LDAP فشل.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'تحديث سجل LDAP فشل.';
@@ -515,7 +515,7 @@ $s_duplicate_id = 'رقم التكرار';
 $s_os = 'نظام التشغيل';
 $s_projection = 'مسقط';
 $s_os_version = 'نسخة نظام التشغيل';
-$s_eta = 'ETA';
+$s_eta = 'زمن الوصول المتوقع';
 $s_product_version = 'نسخة المنتج';
 $s_build = 'نسخة';
 $s_fixed_in_version = 'أصلحت في النسخة';

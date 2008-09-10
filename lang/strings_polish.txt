@@ -32,6 +32,7 @@
  * @author Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/08/10
  * @author Jaroslaw Lewandowski <jotel@jotel.net>
  * @author Kacper Kruszewski <kacper@netcetera.pl>
+ * @author Leinad
  * @author Marcin Ulanecki <marcin dot ulanecki at vm dot pl> 2005/09/17
  * @author Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
  */
@@ -102,8 +103,8 @@ $s_summary_updated = 'Zaktualizowano temat';
 $s_description_updated = 'Zaktualizowano opis';
 $s_additional_information_updated = 'Zaktualizowano informacje dodatkowe';
 $s_steps_to_reproduce_updated = 'Zaktualizowano kroki, by powtórzyć';
-$s_file_added = 'Dodano plik ';
-$s_file_deleted = 'Usunięto plik ';
+$s_file_added = 'Dodano plik';
+$s_file_deleted = 'Usunięto plik';
 $s_bug_deleted = 'Usunięto zagadnienie';
 $s_make_private = 'Zmień stan na prywatny';
 $s_make_public = 'Zmień stan na publiczny';
@@ -170,7 +171,7 @@ $s_bugnote_date = 'Data komentarza';
 $s_bugnote_description = 'Treść komentarza';
 $s_error_no_proceed = 'Proszę użyć przycisku "Powrót" w przeglądarce by powrócić do poprzedniej strony. Tam można poprawić to co spowodowało błąd lub wybrać inną operację. Można również kliknąć opcję w górnym menu, aby przejść bezpośrednio do innej sekcji.';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Wystąpił błąd podczas wykonywanej operacji. Możesz zgłosić błąd Twojemu administratorowi.';
-$MANTIS_ERROR[ERROR_SQL] = 'Wykryto błąd SQL. Proszę o zgłoszenie błędu do ';
+$MANTIS_ERROR[ERROR_SQL] = 'Wykryto błąd SQL. Proszę o zgłoszenie błędu do';
 $MANTIS_ERROR[ERROR_REPORT] = 'Wystąpił błąd w twoim zgłoszeniu.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nie został podany żaden plik.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Typ przesyłanego pliku nie jest dozwolony.';
@@ -188,7 +189,7 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Opcja konfiguracji \'%s\' nie znale
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Napis \'%s\' nie znaleziony.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Nie znaleziono komentarza.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Nie znaleziono projektu.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Nie znaleziono projektu "%d".';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Nie znaleziono pola \'%s\' w bazie danych.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Nie można nawiązać połączenia z serwerem FTP.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Operator nie ma wystarczających praw dostępu do modyfikacji zgłoszenia z tym stanem.';
@@ -278,11 +279,11 @@ $s_sponsorship_enum_string = '0:Nieopłacony,1:Żądanie zapłaty,2:Opłacony';
 $s_new_account_subject = 'Rejestracja konta';
 $s_new_account_greeting = 'Dziękujemy za zapisanie. Masz konto o nazwie \'';
 $s_new_account_greeting2 = '\'. Aby zakończyć rejestrację, odwiedź podany adres (upewnij się, że jest wprowadzony w jednej linii) i ustaw swoje hasło dostępu:';
-$s_new_account_username = 'Nazwa użytkownika: ';
+$s_new_account_username = 'Nazwa użytkownika:';
 $s_new_account_message = 'Jeśli to nie twoje zgłoszenie, zignoruj tę wiadomość. Nic się nie stanie.\n\n';
 $s_new_account_do_not_reply = 'NIE ODPOWIADAJ NA TĘ WIADOMOŚĆ';
-$s_new_account_email = 'Email: ';
-$s_new_account_IP = 'Zdalny adres IP: ';
+$s_new_account_email = 'Email:';
+$s_new_account_IP = 'Zdalny adres IP:';
 $s_new_account_signup_msg = 'Następujące konto zostało założone:';
 $s_reset_request_msg = 'Ktoś (prawdopodobnie Ty) zażądał zmiany hasła przez weryfikację emailem. Jeśli to nie Ty, zignoruj tę wiadomość.\n\nJeśli prosiłeś o to, odwiedź poniższy adres aby zmienić hasło:';
 $s_reset_request_in_progress_msg = 'Jeśli nazwa użytkownika i adres email dla twojego konta są prawidłowe to prześlemy teraz wiadomość potwierdzającą na podany adres. Gdy otrzymasz wiadomość, postępuj zgodnie z podanymi w niej instrukcjami i zmień hasło.';
@@ -354,7 +355,7 @@ $s_advanced_view = 'Widok zaawansowany';
 $s_advanced_update = 'Aktualizacja zaawansowana';
 $s_refresh_delay = 'Opóźnienie odświeżania';
 $s_redirect_delay = 'Opóźnienie przekierowania';
-$s_with_minimum_severity = 'Z minimalną ważnością ';
+$s_with_minimum_severity = 'Z minimalną ważnością';
 $s_bugnote_order = 'Kolejność sortowania komentarzy';
 $s_bugnote_order_asc = 'Rosnąco';
 $s_bugnote_order_desc = 'Malejąco';
@@ -495,7 +496,7 @@ $s_add_bugnote_button = 'Dodaj komentarz';
 $s_bugnote_edit_link = 'Edytuj';
 $s_closed_bug_button = 'Zamknij Zagadnienie';
 $s_bugnote_updated_msg = 'Komentarz został pomyślnie zaktualizowany...';
-$s_edited_on = 'edytowano: ';
+$s_edited_on = 'edytowano:';
 $s_click_to_login = 'Kilknij tutaj, aby się zalogować';
 $s_login_page_info = 'Witaj w programie do zarządzania i rozwiązywania Zagadnień.';
 $s_login_title = 'Logowanie';

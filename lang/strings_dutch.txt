@@ -32,7 +32,6 @@
  * @author Jan-Bart de Vreede, jvreede@outdare.nl
  * @author Jeroen Latour, jlatour@calaquendi.net
  * @author Klaasjan Brand, kjb@dds.nl
- * @author Siebrand
  * @author Siebrand Mazeland, s.mazeland@xs4all.nl
  */
 
@@ -192,7 +191,7 @@ $s_bugnote_date = 'Datum opmerking';
 $s_bugnote_description = 'Beschrijving opmerking';
 $s_error_no_proceed = 'Gebruik alstublieft de knop "Terug" in uw webbrowser om terug te keren naar de vorige pagina. Daar kunt u de in deze foutmelding aangegeven problemen oplossen of een andere handeling selecteren. U kunt ook een optie in de menubalk selecteren om direct naar een nieuwe sectie te gaan.';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Deze actie had een fout tot gevolg. Meld dit aan uw systeembeheerder.';
-$MANTIS_ERROR[ERROR_SQL] = 'SQL fout ontdekt.  Meld dit alstublieft aan ';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL fout ontdekt.  Meld dit alstublieft aan';
 $MANTIS_ERROR[ERROR_REPORT] = 'Er is een fout in uw rapport gevonden.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Geen bestand opgegeven.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Het bestandstype is niet toegestaan.';
@@ -210,7 +209,7 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Instelling "%s" niet gevonden.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Instelling "%s" kan niet in de database gezet worden. Dit moet gedaan worden in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String "%s" niet gevonden.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Opmerking niet gevonden.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project niet gevonden.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project "%d" niet gevonden.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Databaseveld "%s" niet gevonden.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Kan geen verbinding maken met de FTP-server';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'De behandelaar heeft onvoldoende rechten om de melding af te handelen in de huidige status.';
@@ -239,7 +238,7 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Een melding kan geen duplicaat van zi
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Gebruikersveld niet gevonden.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Deze naam komt al voor.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Tenminste één project gebruikt dit veld nog.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ongeldige waarde voor veld.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ongeldige waarde voor veld %s.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Ongeldige definitie gebruikersveld.';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP authenticatie mislukt.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP serververbinding mislukt.';
@@ -325,7 +324,7 @@ $s_sponsorship_enum_string = '0:Niet betaald,1:Gemaand,2:Betaald';
 $s_new_account_subject = 'Gebruikersregistratie';
 $s_new_account_greeting = 'Bedankt voor het aanmelden. Uw gebruikersnaam is "';
 $s_new_account_greeting2 = '". Bezoek om uw registratie af te ronden de volgende verwijzing om uw eigen wachtwoord in te stellen:';
-$s_new_account_username = 'Gebruikersnaam: ';
+$s_new_account_username = 'Gebruikersnaam:';
 $s_new_account_message = 'Als u zich niet hebt aangemeld, dan kunt u dit bericht negeren. Dan gebeurt er niets.\n\n';
 $s_new_account_do_not_reply = 'VERSTUUR GEEN ANTWOORD OP DIT BERICHT';
 $s_new_account_email = 'E-mailadres:';
@@ -546,7 +545,7 @@ $s_add_bugnote_button = 'Opmerking toevoegen';
 $s_bugnote_edit_link = 'Aanpassen';
 $s_closed_bug_button = 'Melding sluiten';
 $s_bugnote_updated_msg = 'De opmerking is aangepast.';
-$s_edited_on = 'gewijzigd op: ';
+$s_edited_on = 'gewijzigd op:';
 $s_hide_content = 'Inhoud verbergen';
 $s_show_content = 'Inhoud weergeven';
 $s_click_to_login = 'Klik hier om aan te melden';
@@ -697,7 +696,7 @@ $s_plugin_key_upgrade = 'upgrade nodig';
 $s_project_added_msg = 'Het project is toegevoegd.';
 $s_category_added_msg = 'De categorie is toegevoegd.';
 $s_category_deleted_msg = 'De categorie is verwijderd.';
-$s_category_delete_sure_msg = 'Weet u zeker dat u deze categorie wilt verwijderen?';
+$s_category_delete_sure_msg = 'Weet u zeker dat u deze categorie wilt verwijderen?<br />Categorie "%s" bevat %d bugs.';
 $s_delete_category_button = 'Categorie verwijderen';
 $s_edit_project_category_title = 'Projectcategorie aanpassen';
 $s_update_category_button = 'Categorie aanpassen';
