@@ -232,6 +232,18 @@ function plugin_lang_get( $p_name, $p_basename=null ) {
 	return lang_get( $t_name );
 }
 
+function plugin_history_log( $p_bug_id, $p_field_name, $p_old_value, $p_new_value='', $p_user_id=null, $p_basename=null ) {
+	if ( is_null( $p_basename ) ) {
+		$t_basename = plugin_get_current();
+	} else {
+		$t_basename = $p_basename;
+	}
+
+	$t_field_name = $t_basename . '_' . $p_field_name;
+
+	history_log_event_direct( $p_bug_id, $t_field_name, $p_old_value, $p_new_value, $p_user_id, PLUGIN_HISTORY );
+}
+
 /**
  * Trigger a plugin-specific error with the given name and type.
  * @param string Error name

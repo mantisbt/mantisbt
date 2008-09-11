@@ -170,6 +170,7 @@
 	define( 'TAG_ATTACHED', 				25 );
 	define( 'TAG_DETACHED', 				26 );
 	define( 'TAG_RENAMED', 					27 );
+	define( 'PLUGIN_HISTORY',				100 );
 
 	# bug relationship constants
 	define( 'BUG_DUPLICATE',	0 );

@@ -29,26 +29,27 @@
 	# --------------------
 	# log the changes (old / new value are supplied to reduce db access)
 	# events should be logged *after* the modification
-	function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_new_value, $p_user_id = null ) {
+	function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_new_value, $p_user_id = null, $p_type=0 ) {
 		# Only log events that change the value
 		if ( $p_new_value != $p_old_value ) {
 			if ( null === $p_user_id ) {
 				$p_user_id	= auth_get_current_user_id();
 			}
 
-			$c_field_name	= db_prepare_string( $p_field_name );
-			$c_old_value	= db_prepare_string( $p_old_value );
-			$c_new_value	= db_prepare_string( $p_new_value );
+			$c_field_name	= ( $p_field_name );
+			$c_old_value	= ( $p_old_value );
+			$c_new_value	= ( $p_new_value );
 			$c_bug_id		= db_prepare_int( $p_bug_id );
 			$c_user_id		= db_prepare_int( $p_user_id );
+			$c_type			= db_prepare_int( $p_type );
 
 			$t_mantis_bug_history_table = db_get_table( 'mantis_bug_history_table' );
 
 			$query = "INSERT INTO $t_mantis_bug_history_table
-						( user_id, bug_id, date_modified, field_name, old_value, new_value )
+						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 					VALUES
-						( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
-			$result = db_query_bound( $query, Array( $c_user_id, $c_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value ) );
+						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+			$result = db_query_bound( $query, Array( $c_user_id, $c_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value, $c_type ) );
 		}
 	}
 	# --------------------
@@ -64,8 +65,8 @@
 	function history_log_event_special( $p_bug_id, $p_type, $p_optional='',  $p_optional2='' ) {
 		$c_bug_id		= db_prepare_int( $p_bug_id );
 		$c_type			= db_prepare_int( $p_type );
-		$c_optional		= db_prepare_string( $p_optional );
-		$c_optional2	= db_prepare_string( $p_optional2 );
+		$c_optional		= ( $p_optional );
+		$c_optional2	= ( $p_optional2 );
 		$t_user_id		= auth_get_current_user_id();
 
 		$t_mantis_bug_history_table = db_get_table( 'mantis_bug_history_table' );
@@ -219,6 +220,13 @@
 		$t_note = '';
 		$t_change = '';
 		$t_field_localized = $p_field_name;
+
+		if ( PLUGIN_HISTORY == $p_type ) {
+			$t_note = lang_get_defaulted( "plugin_$p_field_name", $p_field_name );
+			$t_change = ( $p_new_value ? "$p_old_value => $p_new_value" : $p_old_value );
+
+			return array( 'note' => $t_note, 'change' => $t_change );
+		}
 
 		switch ( $p_field_name ) {
 			case 'category':
