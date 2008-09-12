@@ -33,6 +33,7 @@
  * @author Jeroen Latour, jlatour@calaquendi.net
  * @author Klaasjan Brand, kjb@dds.nl
  * @author Siebrand Mazeland, s.mazeland@xs4all.nl
+ * @author Tvdm
  */
 
 $s_charset = 'utf-8';
@@ -361,7 +362,7 @@ $s_email_notification_title_for_action_blocks_relationship_deleted = 'De volgend
 $s_email_notification_title_for_action_relationship_child_resolved = 'De GERELATEERDE melding %s is AFGEMELD.';
 $s_email_notification_title_for_action_relationship_child_closed = 'De GERELATEERDE melding %s is AFGESLOTEN.';
 $s_email_reporter = 'Aanmelder';
-$s_email_handler = 'Toegewezen aan:';
+$s_email_handler = 'Toegewezen aan';
 $s_email_project = 'Project';
 $s_email_bug = 'Meldingsnummer';
 $s_email_category = 'Categorie';
@@ -686,8 +687,8 @@ $s_plugin_update = 'Bijwerken';
 $s_plugin_actions = 'Handelingen';
 $s_plugin_install = 'Installeren';
 $s_plugin_upgrade = 'Upgraden';
-$s_plugin_uninstall = 'Deinstalleren';
-$s_plugin_uninstall_message = 'Weet u zeker dat u de uitbreiding "%s" wilt deinstalleren?';
+$s_plugin_uninstall = 'Deïnstalleren';
+$s_plugin_uninstall_message = 'Weet u zeker dat u de uitbreiding "%s" wilt deïnstalleren?';
 $s_plugin_key = 'Sleutel';
 $s_plugin_key_met = 'uitbreiding beschikbaar';
 $s_plugin_key_unmet = 'niet-beschikbare afhankelijkheden';

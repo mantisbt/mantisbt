@@ -28,6 +28,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Darth Kule
  * @author Lele Gaifax, lele@seldati.it
  * @author Luca Pescatore, l.pescatore@network.it
  * @author Marcello Scatà, marcello@marcelloscata.com
@@ -58,6 +59,7 @@ $s_operation_successful = 'Operazione completata con successo.';
 $s_date_order = 'Ordina per data';
 $s_print_all_bug_page_link = 'Stampa il report';
 $s_csv_export = 'Esporta in formato CSV';
+$s_excel_export = 'Esporta in Excel';
 $s_login_anonymously = 'Accedi anonimamente';
 $s_anonymous = 'Anonimo';
 $s_jump_to_bugnotes = 'Vai alle note';
@@ -95,6 +97,8 @@ $s_empty_password_sure_msg = 'L\'utente ha una password vuota.  Sei sicuro sia q
 $s_empty_password_button = 'Conferma password vuota';
 $s_reauthenticate_title = 'Autenticazione';
 $s_reauthenticate_message = 'Stai visitando una pagina protetta, e la tua sessione è scaduta.  Per continuare devi rifare l\'autenticazione.';
+$s_no_category = '(Nessuna Categoria)';
+$s_global_categories = 'Categorie Globali';
 $s_duplicate_of = 'duplicato di';
 $s_has_duplicate = 'duplicata da';
 $s_related_to = 'in relazione con';
@@ -199,7 +203,7 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'L\'opzione di configurazione \"%s\"
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'L\'opzione di configurazione \"%s\" non può essere impostata nel database.  Deve essere specificata nel file config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'La stringa \"%s\" non è stata trovata.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Annotazione non trovata.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Progetto non trovato.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Progetto "%d" non trovato.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Campo del database \"%s\" non trovato.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Impossibile connettersi con il server FTP.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'L\'assegnatario dell\'anomalia non ha permessi sufficienti per intervenire sull\'anomalia nel suo stato corrente.';
@@ -634,7 +638,7 @@ $s_delete_config_sure_msg = 'Sei sicuro di voler eliminare questa opzione di con
 $s_project_added_msg = 'Il progetto è stato inserito...';
 $s_category_added_msg = 'La categoria è stata inserita...';
 $s_category_deleted_msg = 'La categoria è stata eliminata...';
-$s_category_delete_sure_msg = 'Sei sicuro di voler eliminare questa categoria?';
+$s_category_delete_sure_msg = 'Sei sicuro di voler eliminare questa categoria?<br />La categoria "%s" contiene %d bug.';
 $s_delete_category_button = 'Elimina categoria';
 $s_edit_project_category_title = 'Modifica categoria del progetto';
 $s_update_category_button = 'Aggiorna categoria';
@@ -1056,7 +1060,7 @@ $s_tag_detach = 'Rimuovi \"%s\"';
 $s_tag_separate_by = '(Separa con \"%s\")';
 $s_tag_invalid_name = 'Nome etichetta non valido';
 $s_tag_create_denied = 'Permesso di creazione negato.';
-$s_tag_filter_default = 'Anomalie collegate';
+$s_tag_filter_default = 'Anomalie collegate (%s)';
 $s_tag_history_attached = 'Etichetta assegnata';
 $s_tag_history_detached = 'Etichetta rimossa';
 $s_tag_history_renamed = 'Etichetta rinominata';

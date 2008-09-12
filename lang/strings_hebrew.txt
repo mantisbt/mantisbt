@@ -29,7 +29,7 @@
  * @file
  *
  * @author Eyal Zvi, eyal@bikoret-bona.com
- * @comment requires right-to-left CSS at the moment!
+ * @author Rotemliss
  */
 
 $s_charset = 'utf-8';
@@ -156,7 +156,7 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'הגדרת תצורה \'%s\' לא �
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'הגדרת תצורה \'%s\' לא ניתנת לעדכון בקובץ ה-Database. יש להגדירה בקובץ config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'המחרוזת \'%s\' לא נמצאה.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'הערה לא נמצאה.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'פרוייקט לא נמצא.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'הפרויקט "%d" לא נמצא.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'שדה Database \'%s\' לא נמצא.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'נכשלו נסיונות ההתחברות לשרת FTP.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'פרוייקט בשם זה כבר קיים. נא לחזור ולבחור בשם אחר';
@@ -169,6 +169,7 @@ $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'הסיסמא אינה תו
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'באג %d לא נמצא.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'מסנן %d לא נמצא.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'המסנן שבחרת ישן ולא ניתן לשדרג אותו לגרסה תואמת - עליך להגדיר אותו מחדש.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ערך בלתי תקין של %s.';
 $s_login_error = 'חשבונך מבוטל או חסום או שהזנת שם והסיסמא שגויים.';
 $s_login_cookies_disabled = 'הדפדפן שלך אינו תומך ב-Cookies, או שהוגדר לסרב להן.';
 $s_go_back = 'חזרה';
@@ -433,7 +434,7 @@ $s_delete_config_sure_msg = 'האם ברצונך למחוק את הגדרת הת
 $s_project_added_msg = 'הפרוייקט הוקם';
 $s_category_added_msg = 'הקטגוריה נוספה';
 $s_category_deleted_msg = 'הקטגוריה נמחקה';
-$s_category_delete_sure_msg = 'האם ברצונך למחוק את הקטגוריה?';
+$s_category_delete_sure_msg = 'האם ברצונכם למחוק את הקטגוריה?<br />הקטגוריה "%s" כוללת %d באגים.';
 $s_delete_category_button = 'מחיקה!';
 $s_edit_project_category_title = 'עריכת קטגורייה';
 $s_update_category_button = 'שמירה';

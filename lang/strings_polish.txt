@@ -30,6 +30,7 @@
  *
  * @author Adam Bienias <adam@fireworks.atomnet.pl>
  * @author Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/08/10
+ * @author Derbeth
  * @author Jaroslaw Lewandowski <jotel@jotel.net>
  * @author Kacper Kruszewski <kacper@netcetera.pl>
  * @author Leinad
@@ -217,7 +218,7 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Nie można wskazać jako duplikat zag
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Pole własne nie znalezione';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ta nazwa jest już używana.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Przynajmniej jeden projekt używa jeszcze tego pola.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Błędna wartość pola';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Błędna wartość pola %s.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Błędna definicja pola dodatkowego.';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Autentykacja LDAP nie powiodła się.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Komunikacja z serwerem LDAP nie powiodła się.';
@@ -606,7 +607,7 @@ $s_delete_config_button = 'Usuń ustawienia';
 $s_project_added_msg = 'Projekt został pomyślnie dodany...';
 $s_category_added_msg = 'Kategoria została pomyślnie dodana...';
 $s_category_deleted_msg = 'Kategoria została pomyślnie usunięta...';
-$s_category_delete_sure_msg = 'Czy na pewno chcesz usunąć tą kategorię? Wszystkie przypisane do niej Zagadnienia zostaną usunięte.';
+$s_category_delete_sure_msg = 'Czy na pewno chcesz usunąć tę kategorię?<br />Kategoria "%s" zawiera %d błędów.';
 $s_delete_category_button = 'Usuń kategorię';
 $s_edit_project_category_title = 'Edycja kategorii';
 $s_update_category_button = 'Aktualizuj Kategorię';
