@@ -39,7 +39,7 @@
 	$f_email = email_append_domain( trim( $f_email ) );
 	$f_captcha = strtolower( trim( $f_captcha ) );
 
-	# forse logout on the current user if already authenticated
+	# force logout on the current user if already authenticated
 	if( auth_is_user_authenticated() ) {
 		auth_logout();
 	}
