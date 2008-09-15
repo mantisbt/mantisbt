@@ -36,9 +36,9 @@
 				$p_user_id	= auth_get_current_user_id();
 			}
 
-			$c_field_name	= ( $p_field_name );
-			$c_old_value	= ( $p_old_value );
-			$c_new_value	= ( $p_new_value );
+			$c_field_name	= $p_field_name;
+			$c_old_value	= ( is_null( $p_old_value ) ? '' : $p_old_value );
+			$c_new_value	= ( is_null( $p_new_value ) ? '' : $p_new_value );
 			$c_bug_id		= db_prepare_int( $p_bug_id );
 			$c_user_id		= db_prepare_int( $p_user_id );
 			$c_type			= db_prepare_int( $p_type );
