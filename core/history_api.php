@@ -147,24 +147,30 @@
 		$t_private_bugnote_visible = access_has_bug_level( 
 			config_get( 'private_bugnote_threshold' ), $p_bug_id, $t_user_id );
 			
+		$t_standard_fields = columns_get_standard();
+
 		for ( $i=0,$j=0; $i < $raw_history_count; ++$i ) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			// check that the item should be visible to the user
-			// custom fields - we are passing 32 here to notify the API that the custom field name is truncated by the history column from 64 to 32 characters.
-			$t_field_id = custom_field_get_id_from_name( $v_field_name, 32 );
-			if ( false !== $t_field_id && 
-					!custom_field_has_read_access( $t_field_id, $p_bug_id, $t_user_id ) ) {
-				continue; 
-			}
-			
-			if ( ( $v_field_name == 'target_version' ) && !access_has_bug_level( $t_roadmap_view_access_level, $p_bug_id, $t_user_id ) ) {
-				continue;
-			}
+			if ( $v_type == NORMAL_TYPE ) {
+				if ( !in_array( $v_field_name, $t_standard_fields ) ) {
+					// check that the item should be visible to the user
+					// custom fields - we are passing 32 here to notify the API that the custom field name is truncated by the history column from 64 to 32 characters.
+					$t_field_id = custom_field_get_id_from_name( $v_field_name, 32 );
+					if ( false !== $t_field_id &&
+							!custom_field_has_read_access( $t_field_id, $p_bug_id, $t_user_id ) ) {
+						continue;
+					}
+				}
 
-			if ( ( $v_field_name == 'due_date' ) && !access_has_bug_level( $t_due_date_view_threshold, $p_bug_id, $t_user_id ) ) {
-				continue;
+				if ( ( $v_field_name == 'target_version' ) && !access_has_bug_level( $t_roadmap_view_access_level, $p_bug_id, $t_user_id ) ) {
+					continue;
+				}
+
+				if ( ( $v_field_name == 'due_date' ) && !access_has_bug_level( $t_due_date_view_threshold, $p_bug_id, $t_user_id ) ) {
+					continue;
+				}
 			}
 
 			// bugnotes

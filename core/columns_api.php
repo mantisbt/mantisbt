@@ -27,10 +27,10 @@
      */
 
 	/**
-	 * Get all accessible columns for the current project / current user..
+	 * Get a list of standard columns.
 	 */
-	function columns_get_all( $p_project_id = null ) {
-		$t_columns = array(
+	function columns_get_standard() {
+		return array(
 			'additional_information',   // new
 			'attachment',
 			'bugnotes_count',
@@ -62,6 +62,13 @@
 			'version',
 			'view_state',
 		);
+	}
+
+	/**
+	 * Get all accessible columns for the current project / current user..
+	 */
+	function columns_get_all( $p_project_id = null ) {
+		$t_columns = columns_get_standard();
 
 		# Add project custom fields to the array.  Only add the ones for which the current user has at least read access.
 		if ( $p_project_id === null ) {
