@@ -85,10 +85,18 @@
 	$t_excel_columns = columns_string_to_array( $f_excel_columns );
 	columns_ensure_valid( 'excel', $t_excel_columns, $t_all_columns );
 
-	config_set( 'view_issues_page_columns', $t_view_issues_columns, $t_user_id, $t_project_id );
-	config_set( 'print_issues_page_columns', $t_print_issues_columns, $t_user_id, $t_project_id );
-	config_set( 'csv_columns', $t_csv_columns, $t_user_id, $t_project_id );
-	config_set( 'excel_columns', $t_excel_columns, $t_user_id, $t_project_id );
+	if ( serialize( config_get( 'view_issues_page_columns', '', $t_user_id, $t_project_id ) ) !== serialize( $t_view_issues_columns ) ) {
+		config_set( 'view_issues_page_columns', $t_view_issues_columns, $t_user_id, $t_project_id );
+	}
+	if ( serialize( config_get( 'print_issues_page_columns', '', $t_user_id, $t_project_id ) ) !== serialize( $t_print_issues_columns ) ) {
+		config_set( 'print_issues_page_columns', $t_print_issues_columns, $t_user_id, $t_project_id );
+	}
+	if ( serialize( config_get( 'csv_columns', '', $t_user_id, $t_project_id ) ) !== serialize( $t_csv_columns ) ) {
+		config_set( 'csv_columns', $t_csv_columns, $t_user_id, $t_project_id );
+	}
+	if ( serialize( config_get( 'excel_columns', '', $t_user_id, $t_project_id ) ) !== serialize( $t_excel_columns ) ) {
+		config_set( 'excel_columns', $t_excel_columns, $t_user_id, $t_project_id );
+	}
 ?>
 <br />
 <div align="center">

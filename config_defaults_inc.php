@@ -554,22 +554,22 @@
 	# resolution, fixed_in_version, view_state, os, os_build, build (for product build), platform, version, date_submitted, attachment,
 	# category, sponsorship_total, severity, status, last_updated, summary, bugnotes_count, description,
 	# steps_to_reproduce, additional_information
-	$g_view_issues_page_columns = array ( 'selection', 'edit', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment', 'category', 'severity', 'status', 'last_updated', 'summary' );
+	$g_view_issues_page_columns = array ( 'selection', 'edit', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment', 'category_id', 'severity', 'status', 'last_updated', 'summary' );
 	
 	# The default columns to be included in the Print Issues Page.
 	# This can be overriden using Manage -> Manage Configuration -> Manage Columns
 	# Also each user can configure their own columns using My Account -> Manage Columns
-	$g_print_issues_page_columns = array ( 'selection', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment', 'category', 'severity', 'status', 'last_updated', 'summary' );
+	$g_print_issues_page_columns = array ( 'selection', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment', 'category_id', 'severity', 'status', 'last_updated', 'summary' );
 
 	# The default columns to be included in the CSV export.
 	# This can be overriden using Manage -> Manage Configuration -> Manage Columns
 	# Also each user can configure their own columns using My Account -> Manage Columns
-	$g_csv_columns = array ( 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'reproducibility', 'version', 'projection', 'category', 'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state', 'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version' );
+	$g_csv_columns = array ( 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'reproducibility', 'version', 'projection', 'category_id', 'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state', 'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version' );
 
 	# The default columns to be included in the Excel export.
 	# This can be overriden using Manage -> Manage Configuration -> Manage Columns
 	# Also each user can configure their own columns using My Account -> Manage Columns
-	$g_excel_columns = array ( 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'reproducibility', 'version', 'projection', 'category', 'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state', 'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version' );
+	$g_excel_columns = array ( 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'reproducibility', 'version', 'projection', 'category_id', 'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state', 'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version' );
 
 	# --- show projects when in All Projects mode ---
 	$g_show_bug_project_links	= ON;
