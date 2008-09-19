@@ -136,6 +136,9 @@
 	# OPENED ANYWHERE ELSE.
 	require_once( $t_core_path.'database_api.php' );
 
+	# PHP Sessions
+	require_once( $t_core_path.'session_api.php' );
+
 	# Initialize Event System
 	require_once( $t_core_path.'event_api.php' );
 	require_once( $t_core_path.'events_inc.php' );
@@ -159,7 +162,6 @@
 	# Display API's
 	require_once( $t_core_path.'html_api.php' );
 	require_once( $t_core_path.'gpc_api.php' );
-	require_once( $t_core_path.'session_api.php' );
 	require_once( $t_core_path.'form_api.php' );
 	require_once( $t_core_path.'print_api.php' );
 	require_once( $t_core_path.'collapse_api.php' );
