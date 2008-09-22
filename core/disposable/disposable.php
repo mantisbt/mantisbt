@@ -431,4 +431,4 @@ class DisposableEmailChecker
 		return strtolower( substr( $p_email, $t_domain_pos + 1 ) );
 	}
 }
-?>
+

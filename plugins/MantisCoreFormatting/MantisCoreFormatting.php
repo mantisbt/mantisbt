@@ -168,3 +168,4 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	}
 
 }
+

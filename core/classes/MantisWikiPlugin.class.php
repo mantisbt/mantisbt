@@ -49,3 +49,4 @@ abstract class MantisCoreWikiPlugin extends MantisWikiPlugin {
 		);
 	}
 }
+

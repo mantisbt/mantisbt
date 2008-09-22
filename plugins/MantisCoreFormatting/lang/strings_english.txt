@@ -26,3 +26,4 @@ $s_plugin_format_process_buglinks = 'Mantis Links ( Bug/Bugnote )';
 $s_plugin_format_process_vcslinks = 'VCS Links';
 $s_plugin_format_enabled = 'On';
 $s_plugin_format_disabled = 'Off';
+

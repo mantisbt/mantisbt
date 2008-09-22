@@ -215,4 +215,4 @@
 	if ( db_is_connected() ) {
 		project_cache_all();
 	}
-?>
+

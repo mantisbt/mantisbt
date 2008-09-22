@@ -2032,3 +2032,4 @@
 
 	# threshold to see due date
 	$g_due_date_view_threshold = NOBODY;
+
