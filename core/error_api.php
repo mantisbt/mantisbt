@@ -403,4 +403,4 @@
 			return 'class="row-2"';
 		}
 	}
-?>
+

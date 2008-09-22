@@ -153,4 +153,4 @@
 
 		return $t_rss_link;
 	}
-?>
+

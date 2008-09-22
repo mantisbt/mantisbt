@@ -745,4 +745,4 @@
 
 		return( $t_cookie > '' );
 	}
-?>
+

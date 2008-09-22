@@ -228,3 +228,4 @@
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 		return $t_filter;
 	}
+

@@ -1293,4 +1293,3 @@
 		return $p_value;
 	}
 
-?>

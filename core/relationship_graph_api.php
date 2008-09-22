@@ -453,4 +453,3 @@
 		$p_graph->add_node( $p_bug_id, $t_node_attributes );
 	}
 
-?>

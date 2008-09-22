@@ -399,4 +399,3 @@ function set_period_from_selector ( $p_control_name, $p_start_field='start_date'
 
 } // end class
 
-?>

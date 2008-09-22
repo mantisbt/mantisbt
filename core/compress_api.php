@@ -78,4 +78,4 @@
 
 		$g_compression_started = false;
 	}
-?>
+

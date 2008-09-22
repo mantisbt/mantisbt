@@ -481,4 +481,4 @@
 		# db_query errors on failure so:
 		return true;
 	}
-?>
+

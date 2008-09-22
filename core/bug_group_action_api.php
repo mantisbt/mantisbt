@@ -155,4 +155,4 @@
 		$t_function_name = 'action_' . $p_action . '_process';
 		return $t_function_name( $p_bug_id );
 	}
-?>
+

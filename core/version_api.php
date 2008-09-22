@@ -437,4 +437,4 @@
 
 		return $p_version_info;
 	}
-?>
+

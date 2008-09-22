@@ -312,4 +312,6 @@
 
 </table>
 
-<?php mark_time( 'end loop' ); ?>
+<?php
+mark_time( 'end loop' );
+

@@ -1898,4 +1898,4 @@ document.getElementById( span ).style.display = displayType;
 			}
 		}
 	}
-?>
+

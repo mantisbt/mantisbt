@@ -505,4 +505,4 @@
 
 		return (int)$t_min;
 	}
-?>
+

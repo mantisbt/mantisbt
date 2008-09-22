@@ -1213,4 +1213,4 @@
 
 		return $t_bug_data;
 	}
-?>
+

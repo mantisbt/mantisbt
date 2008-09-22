@@ -189,4 +189,3 @@
 	   return isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], $p_string ) );
 	}
 	
-?>

@@ -830,3 +830,4 @@ function plugin_init( $p_basename ) {
 		return false;
 	}
 }
+

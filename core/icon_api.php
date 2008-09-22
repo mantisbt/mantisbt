@@ -88,4 +88,4 @@
 			PRINT "<img src=\"$t_icon_path$t_status_icon_arr[$t_none]\" alt=\"\" />";
 		}
 	}
-?>
+

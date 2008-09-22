@@ -272,4 +272,4 @@ function freemind_find_descendents( &$p_rows ) {
 
 	return $v_bug_list;
 }
-?>
+

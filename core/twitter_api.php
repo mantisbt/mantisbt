@@ -173,3 +173,4 @@
 		
 		return !is_blank( $t_buffer );
 	}
+

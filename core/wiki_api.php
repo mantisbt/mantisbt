@@ -71,3 +71,4 @@ function wiki_link_project( $p_project_id ) {
 }
 
 wiki_init();
+

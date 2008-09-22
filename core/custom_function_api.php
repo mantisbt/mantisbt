@@ -426,4 +426,4 @@
 	# html_api.php.  For each button, this function needs to generate the enclosing '<td>' and '</td>'.
 	function custom_function_default_print_bug_view_page_custom_buttons( $p_bug_id ) {
 	}
-?>
+

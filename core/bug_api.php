@@ -1805,4 +1805,4 @@
 
 		return $p_bug_data;
 	}
-?>
+

@@ -91,4 +91,4 @@
 
 		echo projax_array_serialize_for_autocomplete( $t_matching_entries );
 	}
-?>
+

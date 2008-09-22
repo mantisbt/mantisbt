@@ -498,4 +498,4 @@
 			return config_get( 'update_bug_status_threshold' );
 		}
 	}
-?>
+

@@ -428,4 +428,4 @@
 		// field is not linked to project
 		return excel_prepare_string( '' );
 	}
-?>
+

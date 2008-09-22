@@ -181,3 +181,4 @@ function session_clean() {
 
 ##### Initialize the session
 session_init();
+

@@ -91,3 +91,4 @@
 		bug_cache_array_rows($t_ids);
 		return $t_ids;
 	}
+

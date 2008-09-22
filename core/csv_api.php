@@ -254,4 +254,4 @@
 	function csv_format_selection( $p_duplicate_id ) {
 		return csv_escape_string( '' );
 	}
-?>
+

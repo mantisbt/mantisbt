@@ -75,4 +75,3 @@
 	# --------------------
 	ini_set('magic_quotes_runtime', 0);
 
-?>
