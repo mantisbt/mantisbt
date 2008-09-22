@@ -96,6 +96,7 @@
 			}
 
 			if ( access_has_bug_level( config_get( 'delete_bug_threshold' ), $t_bug_id ) ) {
+				event_signal( 'EVENT_BUG_DELETED', array( $t_bug_id ) );
 				bug_delete( $t_bug_id );
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
@@ -335,6 +336,9 @@
 		default:
 			trigger_error( ERROR_GENERIC, ERROR );
 		}
+
+		# Bug Action Event
+		event_signal( 'EVENT_BUG_ACTION', array( $f_action, $t_bug_id ) );
 
 		$t_first_issue = false;
 	}

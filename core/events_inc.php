@@ -75,6 +75,10 @@ event_declare_many( array(
 	'EVENT_UPDATE_BUG_FORM'				=> EVENT_TYPE_EXECUTE,
 	'EVENT_UPDATE_BUG'					=> EVENT_TYPE_CHAIN,
 
+	##### Other bug events
+	'EVENT_BUG_DELETED'					=> EVENT_TYPE_EXECUTE,
+	'EVENT_BUG_ACTION'					=> EVENT_TYPE_EXECUTE,
+
 	##### Wiki events
 	'EVENT_WIKI_INIT'					=> EVENT_TYPE_FIRST,
 	'EVENT_WIKI_LINK_BUG'				=> EVENT_TYPE_FIRST,
