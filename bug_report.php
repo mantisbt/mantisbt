@@ -110,6 +110,8 @@
 	# Allow plugins to pre-process bug data
 	$t_bug_data = event_signal( 'EVENT_REPORT_BUG_DATA', $t_bug_data );
 
+	form_security_validate( 'bug_report' );
+	
 	# Create the bug
 	$t_bug_id = bug_create( $t_bug_data );
 
