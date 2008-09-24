@@ -144,13 +144,29 @@
 	# OPENED ANYWHERE ELSE.
 	require_once( $t_core_path.'database_api.php' );
 
+	# Basic browser detection
+	$t_user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+	$t_browser_name = 'Normal';
+	if ( strpos( $t_user_agent, 'MSIE' ) ) {
+		$t_browser_name = 'IE';
+	}
+
 	# Headers to prevent caching
 	#  with option to bypass if running from script
 	global $g_bypass_headers, $g_allow_browser_cache;
 	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
 
 		if ( isset( $g_allow_browser_cache ) ) {
-			header( 'Cache-Control: private, proxy-revalidate' );
+			switch ( $t_browser_name ) {
+			case 'IE':
+				header( 'Cache-Control: private, proxy-revalidate' );
+				break;
+			default:
+				header( 'Cache-Control: private, must-revalidate' );
+				break;
+			}
+
 		} else {
 			header( 'Cache-Control: no-store, no-cache, must-revalidate' );
 		}
