@@ -22,6 +22,8 @@ auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_site_threshold' ) );
 $t_is_admin = access_has_global_level( config_get( 'admin_site_threshold' ) );
 
+$t_version_suffix = config_get_global( 'version_suffix' );
+
 html_page_top1( lang_get( 'manage_link' ) );
 html_page_top2();
 
@@ -37,7 +39,7 @@ print_manage_menu();
 
 <tr <?php echo helper_alternate_class() ?>>
 <td class="category"><?php echo lang_get( 'mantis_version' ) ?></td>
-<td><?php echo MANTIS_VERSION ?></td>
+<td><?php echo MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ) ?></td>
 </tr>
 
 <tr <?php echo helper_alternate_class() ?>>

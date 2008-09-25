@@ -459,7 +459,9 @@
 
 		echo '<table border="0" width="100%" cellspacing="0" cellpadding="0"><tr valign="top"><td>';
 		if ( ON == config_get( 'show_version' ) ) {
-			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/" title="Free Web Based Bug Tracker">Mantis ', MANTIS_VERSION, '</a>',
+			$t_version_suffix = config_get_global( 'version_suffix' );
+			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/" title="Free Web Based Bug Tracker">Mantis ',
+					MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ), '</a>',
 					'[<a href="http://www.mantisbt.org/"  title="Free Web Based Bug Tracker" target="_blank">^</a>]</span>', "\n";
 		}
 		echo "\t", '<address>Copyright &copy; 2000 - 2008 Mantis Group</address>', "\n";
