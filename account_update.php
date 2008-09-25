@@ -17,14 +17,20 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
-
-	# This page updates a user's information
-	# If an account is protected then changes are forbidden
-	# The page gets redirected back to account_page.php
-
+	/**
+	 * This page updates a user's information
+	 * If an account is protected then changes are forbidden
+	 * The page gets redirected back to account_page.php
+	 *
+	 * @package MantisBT
+	 * @version $Id$
+	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @link http://www.mantisbt.org
+	 */
+	 /**
+	  * Mantis Core API's
+	  */
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );

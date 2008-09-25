@@ -1,9 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
 
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -17,13 +14,15 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
-?>
-<?php
-	# This include file prints out the bug file upload form
-	# It POSTs to bug_file_add.php
+	/**
+	 * This include file prints out the bug file upload form
+	 * It POSTs to bug_file_add.php
+	 * @package MantisBT
+	 * @version $Id$
+	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @link http://www.mantisbt.org
+	 */
 
 	$t_core_path = config_get( 'core_path' );
 	require_once( $t_core_path.'file_api.php' );

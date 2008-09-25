@@ -1,9 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
 
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -17,21 +14,22 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
-?>
-<?php
-	# This include file prints out the bug information
-	# $f_bug_id MUST be specified before the file is included
-?>
-<?php
+	/**
+	 * This include file prints out the bug information
+	 * $f_bug_id MUST be specified before the file is included
+	 *
+	 * @package MantisBT
+	 * @version $Id$
+	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @link http://www.mantisbt.org
+	 */
+
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'date_api.php' );
-?>
-<?php
+
 	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
 ?>
 

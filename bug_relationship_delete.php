@@ -1,9 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
 
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -17,26 +14,26 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
-
-	# ======================================================================
-	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
-	# ======================================================================
-	# To delete a relationship we need to ensure that:
-	# - User not anomymous
-	# - Source bug exists and is not in read-only state (peer bug could not exist...)
-	# - User that update the source bug and at least view the destination bug
-	# - Relationship must exist
-	# ----------------------------------------------------------------------
-
+	/**
+	 * To delete a relationship we need to ensure that:
+	 * - User not anomymous
+	 * - Source bug exists and is not in read-only state (peer bug could not exist...)
+	 * - User that update the source bug and at least view the destination bug
+	 * - Relationship must exist
+	 * @package MantisBT
+	 * @version $Id$
+	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @author Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
+	 * @link http://www.mantisbt.org
+	 */
+	 /**
+	  * Mantis Core API's
+	  */
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 	require_once( $t_core_path . 'relationship_api.php' );
-
-	# helper_ensure_post();
 
 	$f_rel_id = gpc_get_int( 'rel_id' );
 	$f_bug_id = gpc_get_int( 'bug_id' );

@@ -1,8 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
 
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -16,12 +14,19 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
+	/**
+	 * @package MantisBT
+	 * @version $Id$
+	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @link http://www.mantisbt.org
+	 */
+	 
+	 define( 'PLUGINS_DISABLED', true );
 
-define( 'PLUGINS_DISABLED', true );
-require_once( 'core.php' );
+	 /**
+	  * Mantis Core API's
+	  */
+	require_once( 'core.php' );
 
 # helper_ensure_post();
 
