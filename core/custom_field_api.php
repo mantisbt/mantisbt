@@ -116,6 +116,31 @@
 		return $row;
 	}
 
+	function custom_field_cache_array_rows( $p_cf_id_array ) {
+		global $g_cache_custom_field;
+		$c_cf_id_array = array();
+		
+		foreach( $p_cf_id_array as $t_cf_id ) {
+			if ( !isset( $g_cache_custom_field[(int)$t_cf_id] ) ) {
+				$c_cf_id_array[] = (int)$t_cf_id;
+			}
+		}
+
+		if( empty( $c_cf_id_array ) )
+			return;
+		
+		$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
+
+		$query = "SELECT *
+				  FROM $t_custom_field_table
+				  WHERE id IN (" . implode( ',', $c_cf_id_array ) . ')';
+		$result = db_query_bound( $query );
+
+		while ( $row = db_fetch_array( $result ) ) {
+			$g_cache_custom_field[(int)$row['id']] = $row;
+		}		
+		return;
+	}
 	# --------------------
 	# Clear the custom field cache (or just the given id if specified)
 	function custom_field_clear_cache( $p_field_id = null ) {
@@ -732,15 +757,14 @@
                 # select only the ids that the user has some access to 
                 #  e.g., all fields in public projects, or private projects where the user is listed
                 #    or private projects where the user is implicitly listed
-                $query = "SELECT DISTINCT cft.*
+                $query = "SELECT DISTINCT cft.id
                     FROM $t_custom_field_table as cft, $t_user_table ut, $t_project_table pt, $t_custom_field_project_table cfpt
                         LEFT JOIN $t_project_user_list_table pult 
                             on cfpt.project_id = pult.project_id and pult.user_id = $t_user_id
                     WHERE cft.id = cfpt.field_id AND cfpt.project_id = pt.id AND ut.id = $t_user_id AND 
                         ( pt.view_state = $t_pub OR 
                         ( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR 
-                        ( pult.user_id is null and ut.access_level $t_access_clause ) )
-                    ORDER BY cft.name ASC";
+                        ( pult.user_id is null and ut.access_level $t_access_clause ) )";
     		} else {
                 if ( is_array( $p_project_id ) ) {
                     if ( 1 == count( $p_project_id ) ) {
@@ -751,7 +775,7 @@
                 } else {
                     $t_project_clause = "= $p_project_id ";
                 }			
-    			$query = "SELECT cft.*
+    			$query = "SELECT cft.id
 					  FROM $t_custom_field_table cft, $t_custom_field_project_table cfpt
 					  WHERE cfpt.project_id $t_project_clause AND
 							cft.id = cfpt.field_id
@@ -763,16 +787,14 @@
 
     		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
     			$row = db_fetch_array( $result );
-				
-				$g_cache_custom_field[(int)$row['id']] = $row;
-    			
     			array_push( $t_ids, $row['id'] );
     		}
+    		custom_field_cache_array_rows($t_ids);
+    		
     		$g_cache_cf_linked[$p_project_id] = $t_ids;
     	} else {
     		$t_ids = $g_cache_cf_linked[$p_project_id];
         }
-        
 		return $t_ids;
 	}
 
