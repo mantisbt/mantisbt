@@ -383,7 +383,7 @@
 		}
 
 		# mysql obeys FETCH_MODE_BOTH, hence ->fields works, other drivers do not support this
-		if( $g_db_type == 'mysql' ) {
+		if( $g_db_type == 'mysql' || $g_db_type == 'odbc_mssql' ) {
 			$t_array = $p_result->fields;
  			$p_result->MoveNext();
 			return $t_array;
