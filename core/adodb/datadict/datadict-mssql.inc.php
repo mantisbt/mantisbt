@@ -121,19 +121,62 @@ class ADODB2_mssql extends ADODB_DataDict {
 		return $sql;
 	}
 	
-	/*
-	function AlterColumnSQL($tabname, $flds)
+	function AlterColumnSQL($tabname, $flds, $tableflds='',$tableoptions='')
 	{
 		$tabname = $this->TableName ($tabname);
 		$sql = array();
-		list($lines,$pkey) = $this->_GenFields($flds);
-		foreach($lines as $v) {
-			$sql[] = "ALTER TABLE $tabname $this->alterCol $v";
-		}
 
+		list($lines,$pkey,$idxs) = $this->_GenFields($flds);
+		// genfields can return FALSE at times
+		if ($lines == null) $lines = array();
+		$alter = 'ALTER TABLE ' . $tabname . $this->alterCol . ' ';
+		foreach($lines as $v) {
+
+	       $not_null = false;
+	        if ($not_null = preg_match('/NOT NULL/i',$v)) {
+	           $v = preg_replace('/NOT NULL/i','',$v);
+	        }         
+
+			if (preg_match('/^([^ ]+) .*DEFAULT (\'[^\']+\'|\"[^\"]+\"|[^ ]+)/',$v,$matches)) {
+	            list(,$colname,$default) = $matches;
+				$existing = $this->MetaColumns($tabname);
+				$constraintname = false;
+				$rs = $this->connection->Execute( "select name from sys.default_constraints WHERE object_name(parent_object_id) = '" . $tabname ."' AND col_name(parent_object_id, parent_column_id) = '" . $colname . "'");
+				if ( is_object($rs) ) {
+					$row = $rs->FetchRow();
+					$constraintname = $row[0];
+				}
+	            $v = preg_replace('/^' . preg_quote($colname) . '\s/', '', $v);
+	            $t = trim(str_replace('DEFAULT '.$default,'',$v));
+				if ( $constraintname != false ) {
+					$sql[] = 'ALTER TABLE '.$tabname.' DROP CONSTRAINT '. $constraintname;
+				}
+				$sql[] = $alter . $colname . ' ' . $t ;
+				if ( $constraintname != false ) {
+					$sql[] = 'ALTER TABLE '.$tabname.' ADD CONSTRAINT '.$constraintname.' DEFAULT ' . $default . ' FOR ' . $colname;
+				} else {
+					$sql[] = 'ALTER TABLE '.$tabname.' ADD CONSTRAINT DF__'. $tabname . '__'.  $colname.  '__' . dechex(rand()) .' DEFAULT ' . $default . ' FOR ' . $colname;				
+				}
+				if ($not_null) {
+					$sql[] = $alter . $colname . ' ' . $t  . ' NOT NULL';
+				}
+			} else {
+				if ($not_null) {
+					$sql[] = $alter . $v  . ' NOT NULL';
+		         } else {
+					$sql[] = $alter . $v;
+				}
+			}
+		}
+		if (is_array($idxs)) {
+			foreach($idxs as $idx => $idxdef) {
+				$sql_idxs = $this->CreateIndexSql($idx, $tabname, $idxdef['cols'], $idxdef['opts']);
+				$sql = array_merge($sql, $sql_idxs);
+			}
+
+		}
 		return $sql;
-	}
-	*/
+	}	
 	
 	function DropColumnSQL($tabname, $flds)
 	{
@@ -143,6 +186,13 @@ class ADODB2_mssql extends ADODB_DataDict {
 		$f = array();
 		$s = 'ALTER TABLE ' . $tabname;
 		foreach($flds as $v) {
+			$rs = $this->connection->Execute( "select name from sys.default_constraints WHERE object_name(parent_object_id) = '" . $tabname ."' AND col_name(parent_object_id, parent_column_id) = '" . $v . "'");
+			if ( is_object($rs) ) {
+				$row = $rs->FetchRow();
+				$constraintname = $row[0];
+				$sql[] = 'ALTER TABLE '.$tabname.' DROP CONSTRAINT '. $constraintname;
+			}
+		
 			$f[] = "\n$this->dropCol ".$this->NameQuote($v);
 		}
 		$s .= implode(', ',$f);

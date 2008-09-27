@@ -500,13 +500,13 @@ See http://msdn.microsoft.com/library/default.asp?url=/library/en-us/odbc/htm/od
 				$stmtid = $sql[1];
 			} else {
 				$stmtid = odbc_prepare($this->_connectionID,$sql);
-	
+
 				if ($stmtid == false) {
 					$this->_errorMsg = isset($php_errormsg) ? $php_errormsg : '';
 					return false;
 				}
 			}
-			
+
 			if (! odbc_execute($stmtid,$inputarr)) {
 				//@odbc_free_result($stmtid);
 				if ($this->_haserrorfunctions) {
@@ -515,7 +515,6 @@ See http://msdn.microsoft.com/library/default.asp?url=/library/en-us/odbc/htm/od
 				}
 				return false;
 			}
-		
 		} else if (is_array($sql)) {
 			$stmtid = $sql[1];
 			if (!odbc_execute($stmtid)) {
@@ -531,6 +530,9 @@ See http://msdn.microsoft.com/library/default.asp?url=/library/en-us/odbc/htm/od
 		
 		$this->_lastAffectedRows = 0;
 		if ($stmtid) {
+			if (!is_array($sql) && preg_match('/^\\s*insert/i', $sql)) {
+				return $stmtid;
+			}
 			if (@odbc_num_fields($stmtid) == 0) {
 				$this->_lastAffectedRows = odbc_num_rows($stmtid);
 				$stmtid = true;
