@@ -194,6 +194,9 @@
         if (auth_clear_cookies()) {
             helper_clear_pref_cookies();
         }
+
+		session_clean();
+
 		return true;
 	}
 

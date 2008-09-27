@@ -57,6 +57,8 @@ class MantisPHPSession extends MantisSession {
 		session_cache_limiter( 'private_no_expire' );
 		if ( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
 			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), true, true );
+		} else {
+			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), false, true );
 		}
 		session_start();
 		$this->id = session_id();
@@ -89,6 +91,10 @@ class MantisPHPSession extends MantisSession {
 	}
 
 	function destroy() {
+		if ( isset( $_COOKIE[ session_name() ] ) && !headers_sent() ) {
+			gpc_set_cookie( session_name(), '', time() - 42000 );
+		}
+
 		unset( $_SESSION );
 		session_destroy();
 	}
