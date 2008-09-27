@@ -207,8 +207,8 @@
 
 		$query = "SELECT COUNT(*)
 				FROM $t_mantis_bug_table
-				WHERE ".db_helper_compare_days(0,"date_submitted","<= '$c_time_length'")." AND $specific_where";
-		$result = db_query_bound( $query, Array( db_now() ) );
+				WHERE ".db_helper_compare_days("'" . db_now() . "'","date_submitted","<= '$c_time_length'")." AND $specific_where";
+		$result = db_query_bound( $query);
 		return db_result( $result, 0 );
 	}
 
@@ -240,9 +240,9 @@
 				WHERE b.status >= " . db_param() . " 
 				AND h.old_value < " . db_param() . "
 				AND h.new_value >= " . db_param() . "
-				AND ".db_helper_compare_days(3,"date_modified","<= '$c_time_length'")." 
+				AND ".db_helper_compare_days("'" . db_now() . "'","date_modified","<= '$c_time_length'")." 
 				AND $specific_where";
-		$result = db_query_bound( $query, Array( $t_resolved, $t_resolved, $t_resolved, db_now() ) );
+		$result = db_query_bound( $query, Array( $t_resolved, $t_resolved, $t_resolved ) );
 		return db_result( $result, 0 );
 	}
 
@@ -310,7 +310,7 @@
 				WHERE h.bug_id = b.id
 				AND b.status < $t_resolved
 				AND $specific_where
-				GROUP BY h.bug_id, b.id, b.summary, b.last_updated
+				GROUP BY h.bug_id, b.id, b.summary, b.last_updated, b.view_state
 				ORDER BY count DESC, b.last_updated DESC";
 		$result = db_query( $query );
 
