@@ -265,6 +265,8 @@
 			auth_http_set_logout_pending( true );
 		}
 
+		session_clean();
+
 		return true;
 	}
 
