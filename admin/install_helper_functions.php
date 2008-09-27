@@ -38,6 +38,9 @@
 			case 'db2':
 				$t_support = function_exists( 'db2_connect' );
 				break;
+			case 'odbc_mssql':
+				$t_support = function_exists('odbc_connect');
+				break;								
 			default:
 				$t_support = false;
 		}
