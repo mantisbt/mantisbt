@@ -793,7 +793,7 @@
             $p_query_clauses['order'][] = "$t_bug_table.last_updated DESC";
         }
         if ( ! in_array( 'date_submitted', $t_sort_fields ) ) {
-            $p_query_clauses['order'][] = 'date_submitted DESC'; }
+            $p_query_clauses['order'][] = $t_bug_table . '.date_submitted DESC'; }
 
         return $p_query_clauses;
     }
