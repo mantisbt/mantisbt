@@ -94,6 +94,24 @@
 		}
 	}
 
+	# Summary cannot be blank
+	if ( is_blank( $t_bug_data->summary ) ) {
+		error_parameters( lang_get( 'summary' ) );
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	}
+
+	# Description cannot be blank
+	if ( is_blank( $t_bug_data->description ) ) {
+		error_parameters( lang_get( 'description' ) );
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	}
+
+	# Make sure a category is set
+	if ( 0 == $t_bug_data->category_id && !config_get( 'allow_no_category' ) ) {
+		error_parameters( lang_get( 'category' ) );
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	}
+
 	helper_call_custom_function( 'issue_create_validate', array( $t_bug_data ) );
 
 	# Validate the custom fields before adding the bug.

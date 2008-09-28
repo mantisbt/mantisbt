@@ -480,24 +480,6 @@
 		$c_sponsorship_total 	= 0;
 		$c_sticky 				= 0;		
 
-		# Summary cannot be blank
-		if ( is_blank( $c_summary ) ) {
-			error_parameters( lang_get( 'summary' ) );
-			trigger_error( ERROR_EMPTY_FIELD, ERROR );
-		}
-
-		# Description cannot be blank
-		if ( is_blank( $c_description ) ) {
-			error_parameters( lang_get( 'description' ) );
-			trigger_error( ERROR_EMPTY_FIELD, ERROR );
-		}
-
-		# Make sure a category is set
-		if ( 0 == $c_category_id && !config_get( 'allow_no_category' ) ) {
-			error_parameters( lang_get( 'category' ) );
-			trigger_error( ERROR_EMPTY_FIELD, ERROR );
-		}
-		
 		# Only set target_version if user has access to do so
 		if ( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
 			$c_target_version	= $p_bug_data->target_version;
