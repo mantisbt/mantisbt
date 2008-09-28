@@ -699,7 +699,7 @@
 
 		if ( config_get( 'allow_no_category' ) ) {
 			echo "<option value=\"0\"", check_selected( $p_category_id, 0 ), '>';
-			echo category_full_name( 0, $t_category_row['project_id'] != $p_project_id ), '</option>';
+			echo category_full_name( 0, $t_category_row['project_id'] != $t_project_id ), '</option>';
 		} else {
 			if ( 0 == $p_category_id ) {
 				echo "<option value=\"0\"", check_selected( $p_category_id, 0 ), '>';
@@ -707,12 +707,12 @@
 			}
 		}
 
-		$cat_arr = category_get_all_rows( $t_project_id, true, !is_null( $p_project_id ) );
+		$cat_arr = category_get_all_rows( $t_project_id, true, true );
 
 		foreach( $cat_arr as $t_category_row ) {
 			$t_category_id = $t_category_row['id'];
 			echo "<option value=\"$t_category_id\"", check_selected( $p_category_id, $t_category_id ), '>';
-			echo category_full_name( $t_category_id, $t_category_row['project_id'] != $p_project_id ), '</option>';
+			echo category_full_name( $t_category_id, $t_category_row['project_id'] != $t_project_id ), '</option>';
 		}
 	}
 	# --------------------
