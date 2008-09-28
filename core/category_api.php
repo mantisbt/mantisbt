@@ -397,7 +397,7 @@
 	# Given a category name and project, this function returns the category id.
 	# An error will be triggered if the specified project does not have a 
 	# category with that name. 
-	function category_get_id_by_name( $p_category_name, $p_project_id ) {
+	function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_errors = true ) {
 
 		$t_category_table = db_get_table( 'mantis_category_table' );
 		$t_project_name = project_get_name( $p_project_id );
@@ -407,8 +407,13 @@
 		$t_result = db_query_bound( $t_query, array( $p_category_name, (int) $p_project_id ) );
 		$t_count = db_num_rows( $t_result );
 		if ( 1 > $t_count ) {
- 			error_parameters( $p_category_name, $t_project_name );
-			trigger_error( ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT, ERROR );
+			if ( $p_trigger_errors ) {
+				error_parameters( $p_category_name, $t_project_name );
+				trigger_error( ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT, ERROR );
+			}
+			else {
+				return false;
+			}
 		}
 
 		return db_result( $t_result );
