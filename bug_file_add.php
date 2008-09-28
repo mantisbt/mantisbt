@@ -55,8 +55,7 @@
 		$g_project_override = $t_bug->project_id;
 	}
 
-    $f_file_error =  ( isset( $f_file['error'] ) ) ? $f_file['error'] : 0;
-	file_add( $f_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'], 'bug', $f_file_error );
+	file_add( $f_bug_id, $f_file, 'bug' );
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = string_get_bug_view_url( $f_bug_id );

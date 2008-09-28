@@ -48,8 +48,7 @@
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-    $f_file_error =  ( isset( $f_file['error'] ) ) ? $f_file['error'] : 0;
-	file_add( 0, $f_file['tmp_name'], $f_file['name'], $f_file['type'], 'project', $f_file_error, $f_title, $f_description );
+	file_add( 0, $f_file, 'project', $f_title, $f_description );
 
 	$t_redirect_url = 'proj_doc_page.php';
 

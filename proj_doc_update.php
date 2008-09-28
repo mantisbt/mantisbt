@@ -61,34 +61,11 @@
 	#@@@ (thraxisp) this code should probably be integrated into file_api to share
 	#  methods used to store files
 
+	file_ensure_uploaded( $f_file );
+
 	extract( $f_file, EXTR_PREFIX_ALL, 'v' );
 
 	if ( is_uploaded_file( $v_tmp_name ) ) {
-		if ( php_version_at_least( '4.2.0' ) ) {
-		    switch ( (int) $v_error ) {
-		        case UPLOAD_ERR_INI_SIZE:
-		        case UPLOAD_ERR_FORM_SIZE:
-                    trigger_error( ERROR_FILE_TOO_BIG, ERROR );
-                    break;
-		        case UPLOAD_ERR_PARTIAL:
-		        case UPLOAD_ERR_NO_FILE:
-                    trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
-                    break;
-                default:
-                    break;
-            }
-        }
-        
-	    if ( ( '' == $v_tmp_name ) || ( '' == $v_name ) ) {
-		    trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
-        }
-		if ( !file_type_check( $v_name ) ) {
-			trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
-		}
-
-		if ( !is_readable( $v_tmp_name ) ) {
-			trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
-		}
 
 		$t_project_id = helper_get_current_project();
 

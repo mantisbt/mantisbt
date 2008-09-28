@@ -531,32 +531,23 @@
 	}
 
 	# --------------------
-	function file_add( $p_bug_id, $p_tmp_file, $p_file_name, $p_file_type='', $p_table = 'bug', $p_file_error = 0, $p_title = '', $p_desc = '' ) {
-	    switch ( (int) $p_file_error ) {
-	        case UPLOAD_ERR_INI_SIZE:
-	        case UPLOAD_ERR_FORM_SIZE:
-				trigger_error( ERROR_FILE_TOO_BIG, ERROR );
-				break;
-			case UPLOAD_ERR_PARTIAL:
-			case UPLOAD_ERR_NO_FILE:
-				trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
-				break;
-			default:
-			break;
-		}
+	/**
+	 * Add a file to the system using the configured storage method
+	 *
+	 * @param integer $p_bug_id the bug id
+	 * @param array $p_file the uploaded file info, as retrieved from gpc_get_file()
+	 */
+	function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc = '' ) {
 
-	    if ( ( '' == $p_tmp_file ) || ( '' == $p_file_name ) ) {
-		    trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
-        }
-		if ( !is_readable( $p_tmp_file ) ) {
-			trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
-		}
+		file_ensure_uploaded( $p_file );
+		$t_file_name = $p_file['name'];
+		$t_tmp_file = $p_file['tmp_name'];
 
-		if ( !file_type_check( $p_file_name ) ) {
+		if ( !file_type_check( $t_file_name ) ) {
 			trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
 		}
 
-		if ( !file_is_name_unique( $p_file_name, $p_bug_id ) ) {
+		if ( !file_is_name_unique( $t_file_name, $p_bug_id ) ) {
 			trigger_error( ERROR_DUPLICATE_FILE, ERROR );
 		}
 
@@ -571,7 +562,7 @@
 		# prepare variables for insertion
 		$c_bug_id		= db_prepare_int( $p_bug_id );
 		$c_project_id		= db_prepare_int( $t_project_id );
-		$c_file_type	= db_prepare_string( $p_file_type );
+		$c_file_type	= db_prepare_string( $p_file['type'] );
 		$c_title = db_prepare_string( $p_title );
 		$c_desc = db_prepare_string( $p_desc );
 
@@ -585,13 +576,13 @@
 			}
 		}
 		$c_file_path = db_prepare_string( $t_file_path );
-		$c_new_file_name = db_prepare_string( $p_file_name );
+		$c_new_file_name = db_prepare_string( $t_file_name );
 
 		$t_file_hash = ( 'bug' == $p_table ) ? $t_bug_id : config_get( 'document_files_prefix' ) . '-' . $t_project_id;
-		$t_disk_file_name = $t_file_path . file_generate_unique_name( $t_file_hash . '-' . $p_file_name, $t_file_path );
+		$t_disk_file_name = $t_file_path . file_generate_unique_name( $t_file_hash . '-' . $t_file_name, $t_file_path );
 		$c_disk_file_name = db_prepare_string( $t_disk_file_name );
 
-		$t_file_size = filesize( $p_tmp_file );
+		$t_file_size = filesize( $t_tmp_file );
 	    if ( 0 == $t_file_size ) {
 		    trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
         }
@@ -611,11 +602,11 @@
 				if ( !file_exists( $t_disk_file_name ) ) {
 					if ( FTP == $t_method ) {
 						$conn_id = file_ftp_connect();
-						file_ftp_put ( $conn_id, $t_disk_file_name, $p_tmp_file );
+						file_ftp_put ( $conn_id, $t_disk_file_name, $t_tmp_file );
 						file_ftp_disconnect ( $conn_id );
 					}
 
-					if ( !move_uploaded_file( $p_tmp_file, $t_disk_file_name ) ) {
+					if ( !move_uploaded_file( $t_tmp_file, $t_disk_file_name ) ) {
 					    trigger_error( FILE_MOVE_FAILED, ERROR );
 					}
 
@@ -627,7 +618,7 @@
 				}
 				break;
 			case DATABASE:
-				$c_content = db_prepare_binary_string ( fread ( fopen( $p_tmp_file, 'rb' ), $t_file_size ) ) ;
+				$c_content = db_prepare_binary_string ( fread ( fopen( $t_tmp_file, 'rb' ), $t_file_size ) ) ;
 				break;
 			default:
 				trigger_error( ERROR_GENERIC, ERROR );
@@ -647,7 +638,7 @@
 			$result = bug_update_date( $p_bug_id );
 
 			# log new bug
-			history_log_event_special( $p_bug_id, FILE_ADDED, $p_file_name );
+			history_log_event_special( $p_bug_id, FILE_ADDED, $t_file_name );
 		}
 
 	}
@@ -723,6 +714,37 @@
 	function file_ensure_valid_upload_path( $p_upload_path ) {
 		if ( !file_exists( $p_upload_path ) || !is_dir( $p_upload_path ) || !is_writable( $p_upload_path ) || !is_readable( $p_upload_path ) ) {
 			trigger_error( ERROR_FILE_INVALID_UPLOAD_PATH, ERROR );
+		}
+	}
+
+
+	/**
+	 * Ensure a file was uploaded
+	 *
+	 * This function perform various checks for determining if the upload
+	 * was successful
+	 * 
+	 * @param array $p_file the uploaded file info, as retrieved from gpc_get_file()
+	 */
+	function file_ensure_uploaded( $p_file ) {
+	switch ( $p_file['error'] ) {
+	        case UPLOAD_ERR_INI_SIZE:
+	        case UPLOAD_ERR_FORM_SIZE:
+				trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+				break;
+			case UPLOAD_ERR_PARTIAL:
+			case UPLOAD_ERR_NO_FILE:
+				trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+				break;
+			default:
+			break;
+		}
+
+	    if ( ( '' == $p_file['tmp_name'] ) || ( '' == $p_file['name'] ) ) {
+		    trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+        }
+		if ( !is_readable( $p_file['tmp_name'] ) ) {
+			trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
 		}
 	}
 

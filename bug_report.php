@@ -141,8 +141,7 @@
 
 	# Handle the file upload
 	if ( !is_blank( $f_file['tmp_name'] ) && ( 0 < $f_file['size'] ) ) {
-    	$f_file_error =  ( isset( $f_file['error'] ) ) ? $f_file['error'] : 0;
-		file_add( $t_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'], 'bug', $f_file_error );
+		file_add( $t_bug_id, $f_file, 'bug' );
 	}
 
 	# Handle custom field submission
