@@ -1,0 +1,33 @@
+	<sect1 id="dev.plugins.building">
+		<title>Building a Plugin</title>
+
+		<para>
+			This section will act as a walkthrough of how to build a plugin, from the
+			bare basics all the way up to advanced topics.  A general understanding of
+			the concepts covered in the last section is assumed, as well as knowledge
+			of how the event system works.  Later topics in this section will require
+			knowledge of database schemas and how they are used with Mantis.
+		</para>
+
+		<sect2 id="dev.plugins.building.basics">
+			<title>The Basics</title>
+
+			<para>
+			</para>
+		</sect2>
+
+		<sect2 id="dev.plugins.building.events">
+			<title>Using Events</title>
+
+			<para>
+			</para>
+		</sect2>
+
+		<sect2 id="dev.plugins.building.config">
+			<title>Configuration and Languages</title>
+
+			<para>
+			</para>
+		</sect2>
+	</sect1>
+
