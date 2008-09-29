@@ -30,6 +30,7 @@
  *
  * @author Jani Reinikainen, devel@reinikainen.net
  * @author Juha, jomustaj@iki.fi
+ * @author Nike
  * @author Tomi Hurenius, tkh@iki.fi
  */
 
@@ -174,19 +175,19 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Tämä tiedostotyyppi ei ole sallittu';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Hakemistoa ei ole olemassa. Ole hyvä ja tarkista projektin asetukset.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Tämä tiedosto on kaksoiskappale.  Ole hyvä ja poista alkuperäinen tiedosto ensin.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Samanniminen projekti on jo olemassa.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Tarvittu kenttä on tyhjä. Ole hyvä ja tarkista syöttösi.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Tarvittu kenttä %s on tyhjä. Tarkista syötteet.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Tämä käyttäjätunnus on suojattu.  Pääsy on sallittu vasta kun suojaus poistetaan.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Pääsy kielletty.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Tiedoston lähetys epäonnistui. PHP:n tiedostolähetystoiminnot saattavat olla pois päältä.  Ole hyvä ja pyydä järjestelmäsi ylläpitäjää ajamaan admin_check-skripti debuggaustoimenpiteitä varten.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Tiedoston lähetys epäonnistui. Tämä johtuu luutavasti siitä, että tiedoston koko ylittää PHP:n nykyisen enimmäiskoon.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Tämän sivun vaatimaa muuttujaa ei löydy.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Tämän sivun vaatimaa muuttujaa %s ei löydy.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Käyttäjänimi on jo käytössä. Palaa edelliselle sivulla ja valitse uusi käyttäjänimi.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Ohjelma-asetus  \'%s\' ei löytynyt.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Merkkijonoa \'%s\' ei löytynyt.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Muistiinpanoa ei löydy.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projektia ei löydy.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Tietokantakenttää ei löydy.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projektia %d ei löydy.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Tietokantakenttää %s ei löydy.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Yhteys FTP-palvelimelle epäonnistui.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Tapahtumankäsittelijällä ei ole tarpeeksi oikeuksia tapahtuman käsittelyyn tällä tilalla.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Samanniminen projekti on jo olemassa.  Palaa edelliselle sivulle ja anna toinen nimi.';
@@ -199,7 +200,7 @@ $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Salasanavirhe.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Odotin matriisia, mutta sain merkkijonon.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Taulukkodataa merkkijonodatan tilalla.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Odotettiin numeroa: %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Tapahtumaa ei löydy.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Tapahtumaa %s ei löydy.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Suodinta %d ei löytynyt.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Käyttämäsi suodin on liian vanha päivitettäväksi. Ole hyvä ja luo se uudestaan.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Virheellinen sähköpostiosoite.';
@@ -213,7 +214,7 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Et voi määritellä tapahtumaa itsen
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Räätälöityä kenttää ei löytynyt.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Nimiduplikaatti.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Kenttä on käytössä ainakin yhdessä projektissa.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Kentällä on virheellinen arvo';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Kentällä %s on virheellinen arvo';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Virheellinen mukautetun kentän määrite.';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-autentikaatio epäonnistui';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP-palvelinyhteys epäonnistui.';
@@ -600,7 +601,8 @@ $s_delete_config_button = 'Poista asetukset';
 $s_project_added_msg = 'Projekti lisätty...';
 $s_category_added_msg = 'Kategoria lisätty...';
 $s_category_deleted_msg = 'Kategoria poistettu...';
-$s_category_delete_sure_msg = 'Oletko varma, että haluat poistaa tämän kategorian?';
+$s_category_delete_sure_msg = 'Haluatko varmasti poistaa tämän luokan?<br />
+Luokassa %s on %d virheilmoitusta.';
 $s_delete_category_button = 'Poista kategoria';
 $s_edit_project_category_title = 'Muokkaa projektin kategoriaa';
 $s_update_category_button = 'Päivitä kategoria';

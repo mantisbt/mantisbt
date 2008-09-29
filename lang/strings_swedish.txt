@@ -28,6 +28,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Najami
  */
 
 $s_charset = 'utf-8';
@@ -83,6 +84,7 @@ $s_delete_bugnote_sure_msg = 'Är du säker på att du vill ta bort detta meddel
 $s_bug_relationships = 'Samband';
 $s_empty_password_sure_msg = 'Användaren har ett tomt lösenord.  Är du säker på att detta är vad du vill?';
 $s_empty_password_button = 'Använd tomt lösenord';
+$s_no_category = '(Ingen kategori)';
 $s_duplicate_of = 'kopia av %id';
 $s_has_duplicate = 'har kopia %id';
 $s_related_to = 'relaterad till %id';
