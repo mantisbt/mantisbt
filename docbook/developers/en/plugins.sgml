@@ -46,6 +46,9 @@
 		<title>API Usage</title>
 
 		<para>
+			This is a general overview of the plugin API.  For more detailed analysis,
+			you may reference the file <filename>core/plugin_api.php</filename> in the
+			codebase.
 		</para>
 	</sect1>
 

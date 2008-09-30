@@ -24,7 +24,8 @@
 
 		<para>
 			This is a general overview of the event API.  For more detailed analysis,
-			you may reference the file core/event_api.php in the codebase.
+			you may reference the file <filename>core/event_api.php</filename> in the
+			codebase.
 		</para>
 
 		<blockquote id="dev.events.api.declare">
@@ -35,7 +36,7 @@
 				and event type.  Events can be declared alone using the form:
 			</para>
 
-			<para><code>event_declare( $name, $type=EVENT_TYPE_DEFAULT )</code></para>
+			<para><code>event_declare( $name, $type=EVENT_TYPE_DEFAULT );</code></para>
 
 			<para>
 				or they can be declared in groups using key/value pairs of name => type
@@ -43,13 +44,13 @@
 			</para>
 
 			<para><code>
-				$events = array(
-					$name_1 => $type_1,
-					$name_2 => $type_2,
-					...
-					);
+$events = array(
+	$name_1 => $type_1,
+	$name_2 => $type_2,
+	...
+	);
 
-				event_declare_many( $events );
+event_declare_many( $events );
 			</code></para>
 		</blockquote>
 
@@ -63,7 +64,7 @@
 				be declared in the global namespace.
 			</para>
 
-			<para><code>event_hook( $event_name, $callback, [$plugin] )</code></para>
+			<para><code>event_hook( $event_name, $callback, [$plugin] );</code></para>
 
 			<para>
 				In order to hook many functions at once, using key/value pairs of name
@@ -71,13 +72,13 @@
 			</para>
 
 			<para><code>
-				$events = array(
-					$event_1 => $callback_1,
-					$event_2 => $callback_2,
-					...
-					);
+$events = array(
+	$event_1 => $callback_1,
+	$event_2 => $callback_2,
+	...
+	);
 
-				event_hook( $events, [$plugin] );
+event_hook( $events, [$plugin] );
 			</code></para>
 		</blockquote>
 
@@ -90,7 +91,7 @@
 				for signalling an event uses the following structure:
 			</para>
 
-			<para><code>$value = event_signal( $event_name, [ array( $param, ... ), [ array( $static_param, ... ) ] ] )</code></para>
+			<para><code>$value = event_signal( $event_name, [ array( $param, ... ), [ array( $static_param, ... ) ] ] );</code></para>
 
 			<para>
 				Each type of event (and individual events themselves) will use different
@@ -134,7 +135,7 @@
 			</para>
 
 			<para>
-				Example usage: <code>event_signal( $event_name, [ array( $param, ... ) ] )</code>
+				Example usage: <code>event_signal( $event_name, [ array( $param, ... ) ] );</code>
 			</para>
 		</blockquote>
 
@@ -154,7 +155,7 @@
 			</para>
 
 			<para>
-				Example usage: <code>event_signal( $event_name, [ array( $param, ... ) ] )</code>
+				Example usage: <code>event_signal( $event_name, [ array( $param, ... ) ] );</code>
 			</para>
 		</blockquote>
 
@@ -184,7 +185,7 @@
 			</para>
 
 			<para>
-				Example usage: <code>$value = event_signal( $event_name, $param, [ array( $static_param, ... ) ] )</code>
+				Example usage: <code>$value = event_signal( $event_name, $param, [ array( $static_param, ... ) ] );</code>
 			</para>
 		</blockquote>
 
@@ -207,7 +208,7 @@
 			</para>
 
 			<para>
-				Example usage: <code>$value = event_signal( $event_name, [ array( $param, ... ) ] )</code>
+				Example usage: <code>$value = event_signal( $event_name, [ array( $param, ... ) ] );</code>
 			</para>
 		</blockquote>
 
@@ -227,7 +228,7 @@
 			</para>
 
 			<para>
-				Example usage: <code>$values = event_signal( $event_name, [ array( $param, ... ) ] )</code>
+				Example usage: <code>$values = event_signal( $event_name, [ array( $param, ... ) ] );</code>
 			</para>
 		</blockquote>
 	</sect1>

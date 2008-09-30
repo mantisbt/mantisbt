@@ -767,6 +767,12 @@
 ;(define %stylesheet-type% 
 ;"text/css")
 
+(define ($code-seq$ #!optional (sosofo (process-children)))
+  ;; fragments of computer code
+  (make element gi: "PRE"
+	attributes: (list
+		     (list "CLASS" (gi)))
+	sosofo))
 
 ;;========================
 ;;Title Pages for Books
@@ -856,6 +862,7 @@
 
 ;Define my own series of fonts for various elements
 (element application ($mono-seq$))
+(element code ($code-seq$))
 (element command ($bold-seq$))
 (element filename ($mono-seq$))
 (element function ($mono-seq$))

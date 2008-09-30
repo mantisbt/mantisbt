@@ -13,11 +13,27 @@
 			<title>The Basics</title>
 
 			<para>
+				This section will introduce the general concepts of plugin structure,
+				and how to get a barebones plugin working with Mantis.  Not much will be
+				mentioned yet on the topic of adding functionality to plugins, just how to
+				get the development process rolling.
 			</para>
+
+			<sect3 id="dev.plugins.building.basics.structure">
+				<title>Plugin Structure</title>
+
+				<para>
+					The backbone of every plugin is what Mantis calls the "basename", a
+					succinct, and most importantly, unique name that identifies the plugin.
+					It may not contain any spacing or special characters beyond the ASCII
+					upper- and lowercase alphabet, numerals, and underscore.  This is used
+					to identify the plugin everywhere except for what the end-user sees.
+				</para>
+			</sect3>
 		</sect2>
 
 		<sect2 id="dev.plugins.building.events">
-			<title>Using Events</title>
+			<title>Using Events and Pages</title>
 
 			<para>
 			</para>
