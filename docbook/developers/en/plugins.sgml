@@ -13,14 +13,16 @@
 		</para>
 
 		<para>
-			Plugins are defined as implementations, or subclasses, of the MantisPlugin
-			class as defined in <filename>core/classes/MantisPlugin.php</filename>.  Each
-			plugin may define information about itself, as well as a list of conflicts
-			and dependencies upon other plugins.  There are many methods defined in the
-			MantisPlugin class that may be used as convenient places to define extra
-			behaviors, such as configuration options, event declarations, event hooks,
-			errors, and database schemas.  Outside a plugin's core class, there is a
-			standard method of handling language strings, content pages, and files.
+			Plugins are defined as implementations, or subclasses, of the
+			<classname>MantisPlugin</classname> class as defined in
+			<filename>core/classes/MantisPlugin.php</filename>.  Each plugin may define
+			information about itself, as well as a list of conflicts and dependencies
+			upon other plugins.  There are many methods defined in the
+			<classname>MantisPlugin</classname> class that may be used as convenient
+			places to define extra behaviors, such as configuration options, event
+			declarations, event hooks, errors, and database schemas.  Outside a plugin's
+			core class, there is a standard method of handling language strings, content
+			pages, and files.
 		</para>
 
 		<para>
@@ -35,12 +37,13 @@
 			The plugin system includes a special set of API functions that provide
 			convenience wrappers around the more useful Mantis API calls, including
 			configuration, language strings, and link generation.  This API allows
-			plugins to use core API's in 'sandboxed' fashions to aid interoperation
+			plugins to use core API's in "sandboxed" fashions to aid interoperation
 			with other plugins, and simplification of common functionality.
 		</para>
 	</sect1>
 
 	&plugins-building;
+	&plugins-building-source;
 
 	<sect1 id="dev.plugins.api">
 		<title>API Usage</title>

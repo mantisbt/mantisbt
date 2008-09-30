@@ -9,6 +9,13 @@
 			knowledge of database schemas and how they are used with Mantis.
 		</para>
 
+		<para>
+			This walkthrough will be working towards building a single end result: the
+			"Example" plugin as listed in the <link linkend="dev.plugins.building.source">
+			next section</link>.  You may refer to the final source code along the way,
+			although every part of it will be built up in steps throughout this section.
+		</para>
+
 		<sect2 id="dev.plugins.building.basics">
 			<title>The Basics</title>
 
@@ -28,6 +35,70 @@
 					It may not contain any spacing or special characters beyond the ASCII
 					upper- and lowercase alphabet, numerals, and underscore.  This is used
 					to identify the plugin everywhere except for what the end-user sees.
+					For our "Example" plugin, the basename we will use should be obvious
+					enough: "Example".
+				</para>
+
+				<para>
+					Every plugin must be contained in a single directory named to match the
+					plugin's basename, as well as contain at least a single PHP file, also
+					named to match the basename, as such:
+				</para>
+
+				<programlisting>
+Example/
+	Example.php
+				</programlisting>
+
+				<para>
+					This top-level PHP file must then contain a concrete class deriving from
+					the <classname>MantisPlugin</classname> class, which must be named in the
+					form of <classname>%Basename%Plugin</classname>, which for our purpose
+					becomes <classname>ExamplePlugin</classname>.
+				</para>
+
+				<para>
+					Because of how <classname>MantisPlugin</classname> declares the
+					<code>register()</code>	method as <code>abstract</code>, our plugin must
+					implement that method before PHP will find it semantically valid.  This
+					method is meant for one simple purpose, and should never be used for any
+					other task: setting the plugin's information properties, including the
+					plugin's name, description, version, and more.
+				</para>
+
+				<para>
+					Once your plugin defines its class, implements the <code>register()</code>
+					method, and sets at least the name and version properties, it is then
+					considered a "complete" plugin, and can be loaded and installed within
+					Mantis' plugin manager.  At this stage, our Example plugin, with all the
+					possible plugin properties set at registration, looks like this:
+				</para>
+
+				<programlisting><filename>Example/Example.php</filename>
+
+&lt;?php
+class ExamplePlugin extends MantisPlugin {
+    function register() {
+        $this->name = 'Example';    # Proper name of plugin
+        $this->description = '';    # Short description of the plugin
+        $this->page = '';           # Default plugin page
+
+        $this->version = '1.0';     # Plugin version string
+        $this->requires = array(    # Plugin dependencies, array of basename => version pairs
+            'MantisCore' => '1.2',  #   Should always depend on an appropriate version of Mantis
+            );
+
+        $this->author = '';         # Author/team name
+        $this->contact = '';        # Author/team e-mail address
+        $this->url = '';            # Support webpage
+    }
+}
+				</programlisting>
+
+				<para>
+					This alone will allow the Example plugin to be installed with Mantis, and
+					is the foundation of any plugin.  More of the plugin development process
+					will be continued in the next section.
 				</para>
 			</sect3>
 		</sect2>
@@ -45,5 +116,6 @@
 			<para>
 			</para>
 		</sect2>
+
 	</sect1>
 

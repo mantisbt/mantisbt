@@ -1,0 +1,17 @@
+	<sect1 id="dev.plugins.building.source">
+		<title>Example Plugin Source Listing</title>
+
+		<para>
+			The code in this section, for the Example plugin, is available for use,
+			modification, and redistribution without any restrictions and without any
+			warranty or implied warranties.  You may use this code however you want.
+		</para>
+
+		<sect2 id="dev.plugins.building.source.Example.php">
+			<title>Example/Example.php</title>
+
+			<programlisting>
+			</programlisting>
+		</sect2>
+	</sect1>
+
