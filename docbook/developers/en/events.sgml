@@ -36,14 +36,14 @@
 				and event type.  Events can be declared alone using the form:
 			</para>
 
-			<para><code>event_declare( $name, $type=EVENT_TYPE_DEFAULT );</code></para>
+			<programlisting>event_declare( $name, $type=EVENT_TYPE_DEFAULT );</programlisting>
 
 			<para>
 				or they can be declared in groups using key/value pairs of name => type
 				relations, stored in a single array, such as:
 			</para>
 
-			<para><code>
+			<programlisting>
 $events = array(
 	$name_1 => $type_1,
 	$name_2 => $type_2,
@@ -51,7 +51,7 @@ $events = array(
 	);
 
 event_declare_many( $events );
-			</code></para>
+			</programlisting>
 		</blockquote>
 
 		<blockquote id="dev.events.api.hook">
@@ -64,14 +64,14 @@ event_declare_many( $events );
 				be declared in the global namespace.
 			</para>
 
-			<para><code>event_hook( $event_name, $callback, [$plugin] );</code></para>
+			<programlisting>event_hook( $event_name, $callback, [$plugin] );</programlisting>
 
 			<para>
 				In order to hook many functions at once, using key/value pairs of name
 				=> callback relations, in a single array:
 			</para>
 
-			<para><code>
+			<programlisting>
 $events = array(
 	$event_1 => $callback_1,
 	$event_2 => $callback_2,
@@ -79,7 +79,7 @@ $events = array(
 	);
 
 event_hook( $events, [$plugin] );
-			</code></para>
+			</programlisting>
 		</blockquote>
 
 		<blockquote id="dev.events.api.signal">
@@ -91,7 +91,7 @@ event_hook( $events, [$plugin] );
 				for signalling an event uses the following structure:
 			</para>
 
-			<para><code>$value = event_signal( $event_name, [ array( $param, ... ), [ array( $static_param, ... ) ] ] );</code></para>
+			<programlisting>$value = event_signal( $event_name, [ array( $param, ... ), [ array( $static_param, ... ) ] ] );</programlisting>
 
 			<para>
 				Each type of event (and individual events themselves) will use different
@@ -131,12 +131,10 @@ event_hook( $events, [$plugin] );
 
 			<para>
 				These events only use the first parameter array, and return values from
-				hooked functions are ignored.
+				hooked functions are ignored.  Example usage:
 			</para>
 
-			<para>
-				Example usage: <code>event_signal( $event_name, [ array( $param, ... ) ] );</code>
-			</para>
+			<programlisting>event_signal( $event_name, [ array( $param, ... ) ] );</programlisting>
 		</blockquote>
 
 		<blockquote id="dev.events.types.output">
@@ -152,11 +150,10 @@ event_hook( $events, [$plugin] );
 			<para>
 				These events only use the first parameter array, and return values from
 				hooked functions are immediatly sent to the output buffer via 'echo'.
+				Example usage:
 			</para>
 
-			<para>
-				Example usage: <code>event_signal( $event_name, [ array( $param, ... ) ] );</code>
-			</para>
+			<programlisting>event_signal( $event_name, [ array( $param, ... ) ] );</programlisting>
 		</blockquote>
 
 		<blockquote id="dev.events.types.chain">
@@ -181,12 +178,10 @@ event_hook( $events, [$plugin] );
 				This type allows events to optionally make use of the second parameter set,
 				which are sent to every callback in the series, but should not be returned
 				by each callback.  This allows the signalling function to send extra,
-				immutable information to every callback in the chain.
+				immutable information to every callback in the chain.  Example usage:
 			</para>
 
-			<para>
-				Example usage: <code>$value = event_signal( $event_name, $param, [ array( $static_param, ... ) ] );</code>
-			</para>
+			<programlisting>$value = event_signal( $event_name, $param, [ array( $static_param, ... ) ] );</programlisting>
 		</blockquote>
 
 		<blockquote id="dev.events.types.first">
@@ -204,12 +199,10 @@ event_hook( $events, [$plugin] );
 			<para>
 				These events only use the first parameter array, and the first non-null
 				return value from a hook function is returned to the caller. Subsequent
-				callbacks are never executed.
+				callbacks are never executed.  Example usage:
 			</para>
 
-			<para>
-				Example usage: <code>$value = event_signal( $event_name, [ array( $param, ... ) ] );</code>
-			</para>
+			<programlisting>$value = event_signal( $event_name, [ array( $param, ... ) ] );</programlisting>
 		</blockquote>
 
 		<blockquote id="dev.events.types.default">
@@ -224,12 +217,10 @@ event_hook( $events, [$plugin] );
 			<para>
 				These events only use the first parameter array, and return values from
 				hooked functions are returned in a multi-dimensional array keyed by plugin
-				name and hooked function name.
+				name and hooked function name.  Example usage:
 			</para>
 
-			<para>
-				Example usage: <code>$values = event_signal( $event_name, [ array( $param, ... ) ] );</code>
-			</para>
+			<programlisting>$values = event_signal( $event_name, [ array( $param, ... ) ] );</programlisting>
 		</blockquote>
 	</sect1>
 

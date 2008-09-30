@@ -14,7 +14,7 @@
 
 		<para>
 			Plugins are defined as implementations, or subclasses, of the MantisPlugin
-			class as defined in <code>core/classes/MantisPlugin.php</code>.  Each
+			class as defined in <filename>core/classes/MantisPlugin.php</filename>.  Each
 			plugin may define information about itself, as well as a list of conflicts
 			and dependencies upon other plugins.  There are many methods defined in the
 			MantisPlugin class that may be used as convenient places to define extra
