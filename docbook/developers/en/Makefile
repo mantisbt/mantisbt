@@ -23,7 +23,8 @@ BOOK:=developers
 # Stylesheet name. Original file from:
 # /usr/share/sgml/docbook/utils-0.6.11/docbook-utils.dsl
 #
-STYLE=stylesheet.dsl
+STYLE=../../template/stylesheet.dsl
+CSS=../../template/stylesheet.css
 
 FILES:=$(BOOK).sgml $(wildcard *.sgml) $(STYLE) $(BUILD_DIR) builddate
 
@@ -63,6 +64,7 @@ $(BUILD_DIR)/$(BOOK)/$(BOOK).html: $(FILES) $(IMAGES)
 	jw -d $(STYLE)#html -f docbook -b html -o $(BUILD_DIR)/$(BOOK) $<
 	mkdir -p $(BUILD_DIR)/$(BOOK)/images
 	-cp images/* $(BUILD_DIR)/$(BOOK)/images/
+	-cp $(CSS) $(BUILD_DIR)/$(BOOK)/
 
 $(BUILD_DIR)/$(BOOK).pdf: $(FILES) $(IMAGES)
 	jw -d $(STYLE)#print -f docbook -b pdf -o $(BUILD_DIR) $<

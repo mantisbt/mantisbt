@@ -525,6 +525,9 @@
 
 (define %html-pubid% "-//W3C//DTD HTML 4.01//EN")
 
+(define %stylesheet% "stylesheet.css")
+(define %stylesheet-type% "text/css")
+
 ;;=========================
 ;;Common Stuff
 ;;=========================
@@ -769,6 +772,13 @@
 
 (define ($code-seq$ #!optional (sosofo (process-children)))
   ;; fragments of computer code
+  (make element gi: "CODE"
+	attributes: (list
+		     (list "CLASS" (gi)))
+	sosofo))
+
+(define ($programlisting-seq$ #!optional (sosofo (process-children)))
+  ;; fragments of computer code
   (make element gi: "PRE"
 	attributes: (list
 		     (list "CLASS" (gi)))
@@ -877,6 +887,7 @@
 (element literal ($mono-seq$))
 (element parameter ($italic-mono-seq$))
 (element prompt ($mono-seq$))
+(element programlisting ($programlisting-seq$))
 (element symbol ($charseq$))
 (element emphasis ($italic-seq$))
 
