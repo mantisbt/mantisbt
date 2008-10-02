@@ -1,0 +1,42 @@
+<?php
+# Mantis - a php based bugtracking system
+ 
+# Copyright (C) 2002 - 2008 Mantis Team - mantisbt-dev@lists.sourceforge.net
+ 
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis. If not, see <http://www.gnu.org/licenses/>.
+ 
+$s_plugin_XmlImportExport_title = 'Import/Export issues';
+$s_plugin_XmlImportExport_description = 'Adds XML based import and export capabilities to Mantis.';
+
+$s_plugin_XmlImportExport_import = 'Import issues';
+$s_plugin_XmlImportExport_export = 'XML Export';
+
+$s_plugin_XmlImportExport_importing_in_project = 'Importing issues in project:';
+$s_plugin_XmlImportExport_import_options = 'Import options';
+
+
+$s_plugin_XmlImportExport_cross_references = 'Cross references';
+$s_plugin_XmlImportExport_default_strategy = 'Default conversion strategy:';
+$s_plugin_XmlImportExport_default_strategy = 'Default conversion strategy:';
+$s_plugin_XmlImportExport_renumber = 'Renumber';
+$s_plugin_XmlImportExport_renumber_desc = 'Try to convert references to new numbering';
+$s_plugin_XmlImportExport_link = 'Link';
+$s_plugin_XmlImportExport_link_desc = 'Convert into a link to the original item';
+$s_plugin_XmlImportExport_disable = 'Disable';
+$s_plugin_XmlImportExport_disable_desc = 'Disable the link';
+
+$s_plugin_XmlImportExport_fallback = 'Fallback strategy (when "Renumber" does not apply):';
+
+$s_plugin_XmlImportExport_fallback_category = 'Fallback category:';
+$s_plugin_XmlImportExport_keep_same_category = 'Try keeping same category';
