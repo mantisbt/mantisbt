@@ -22,8 +22,7 @@ $s_plugin_format_description = 'Official text processing and formatting plugin.'
 $s_plugin_format_config = 'Configuration';
 $s_plugin_format_process_text = 'Text Processing';
 $s_plugin_format_process_urls = 'URL Processing';
-$s_plugin_format_process_buglinks = 'Mantis Links ( Bug/Bugnote )';
+$s_plugin_format_process_buglinks = 'Mantis Links ( Issue/Issuenote )';
 $s_plugin_format_process_vcslinks = 'VCS Links';
 $s_plugin_format_enabled = 'On';
 $s_plugin_format_disabled = 'Off';
-
