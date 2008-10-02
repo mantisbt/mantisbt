@@ -1,8 +1,8 @@
 <?php
 # Mantis - a php based bugtracking system
- 
+
 # Copyright (C) 2002 - 2008 Mantis Team - mantisbt-dev@lists.sourceforge.net
- 
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -15,7 +15,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis. If not, see <http://www.gnu.org/licenses/>.
- 
+
 $s_plugin_XmlImportExport_title = 'Import/Export issues';
 $s_plugin_XmlImportExport_description = 'Adds XML based import and export capabilities to Mantis.';
 
@@ -24,7 +24,6 @@ $s_plugin_XmlImportExport_export = 'XML Export';
 
 $s_plugin_XmlImportExport_importing_in_project = 'Importing issues in project:';
 $s_plugin_XmlImportExport_import_options = 'Import options';
-
 
 $s_plugin_XmlImportExport_cross_references = 'Cross references';
 $s_plugin_XmlImportExport_default_strategy = 'Default conversion strategy:';

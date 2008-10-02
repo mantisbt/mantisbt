@@ -16,8 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-
-
 /**
   * Mapper class
   *
@@ -31,26 +29,23 @@ class ImportXml_Mapper {
 		$this->{$type}[ $old ] = $new;
 	}
 
-
 	public function exists( $type, $id )
 	{
 		return array_key_exists( $id, $this->{$type} );
 	}
-
 
 	public function getNewID( $type, $old )
 	{
 		if ( $this->exists( $type, $old ) ) {
 			return $this->{$type}[ $old ];
 		}
-		else { 
+		else {
 			return $old;
 		}
 	}
 
-	public function getAll( $type ) 
+	public function getAll( $type )
 	{
 		return $this->{$type};
 	}
-	
 }

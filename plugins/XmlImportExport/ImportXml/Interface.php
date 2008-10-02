@@ -30,11 +30,10 @@ interface ImportXml_Interface {
 	  *
 	  * This function works on a Mapper object, storing the
 	  * type/old_id/new_id triplet for later use.
-	  * Import Classes for items not needing this info can use an 
+	  * Import Classes for items not needing this info can use an
 	  * empty implementation
-	  * 
+	  *
 	  * @param Mapper $mapper
 	  */
 	public function update_map( Mapper $mapper );
 }
-

@@ -61,39 +61,39 @@
 
 <!ELEMENT duplicate_id (#PCDATA)>
 <!ELEMENT priority (#PCDATA)>
-<!ATTLIST priority 
+<!ATTLIST priority
 		  id (ID) #REQUIRED
 >
 
 <!ELEMENT severity (#PCDATA)>
-<!ATTLIST severity 
+<!ATTLIST severity
 		  id (ID) #REQUIRED
 >
 
 <!ELEMENT reproducibility (#PCDATA)>
-<!ATTLIST reproducibility 
+<!ATTLIST reproducibility
 		  id (ID) #REQUIRED
 >
 
 <!ELEMENT status (#PCDATA)>
-<!ATTLIST status 
+<!ATTLIST status
 		  id (ID) #REQUIRED
 >
 
 <!ELEMENT resolution (#PCDATA)>
-<!ATTLIST resolution 
+<!ATTLIST resolution
 		  id (ID) #REQUIRED
 >
 
 <!ELEMENT projection (#PCDATA)>
-<!ATTLIST projection 
+<!ATTLIST projection
 		  id (ID) #REQUIRED
 >
 
 <!ELEMENT date_submitted (#PCDATA)>
 <!ELEMENT last_updated (#PCDATA)>
 <!ELEMENT eta (#PCDATA)>
-<!ATTLIST eta 
+<!ATTLIST eta
 		  id (ID) #REQUIRED
 >
 

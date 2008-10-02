@@ -19,7 +19,7 @@
 require_once('ImportXml/Mapper.php');
 require_once('ImportXml/Issue.php');
 
-class SourceData 
+class SourceData
 {
 	public $version;
 	public $urlbase;
@@ -36,11 +36,10 @@ class SourceData
 	}
 }
 
-
 /**
   * Perform import from an XML file
   */
-class ImportXML 
+class ImportXML
 {
 	private $source_;
 	private $reader_;
@@ -69,7 +68,7 @@ class ImportXML
 		$this->fallback_ = $fallback;
 		$this->keepCategory_ = $keepCategory;
 		$this->defaultCategory_ = $defaultCategory;
-	
+
 		$this->reader_->open( $filename['tmp_name'] );
 	}
 
@@ -95,7 +94,7 @@ class ImportXML
 		// loop through the elements
 		while ( $this->reader_->read() ) {
 			switch ( $this->reader_->nodeType ) {
-				case XMLReader::ELEMENT: 
+				case XMLReader::ELEMENT:
 					/* element start */
 					$t_element_name = $this->reader_->localName;
 					$t_importer = $this->get_importer_object( $t_element_name );
@@ -119,11 +118,9 @@ class ImportXML
 
 			$bugData->description = preg_replace( $bugLinkRegexp, $replacement, $bugData->description );
 			bug_update( $newId, $bugData, true, true );
-
 		}
 		echo " Done\n";
 	}
-
 
 	/**
 	 * Compute and return the new link
@@ -163,9 +160,7 @@ class ImportXML
 		}
 		//echo "$oldId -> $replacement\n"; // DEBUG
 		return $replacement;
-
 	}
-
 
 	private function get_importer_object( $p_element_name )
 	{
@@ -178,9 +173,7 @@ class ImportXML
 		}
 		return $importer;
 	}
-
 }
-
 
 /** candidates for string api **/
 /**
@@ -193,7 +186,6 @@ function htmlFullEntities( $string )
 	$escaped = array_map( 'getEntity', $chars);
 	return implode( '', $escaped );
 }
-
 
 function getEntity( $char )
 {

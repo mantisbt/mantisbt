@@ -21,7 +21,6 @@ require_once( $t_core_dir . '/bug_api.php' );
 require_once( $t_core_dir . '/user_api.php' );
 require_once( 'Interface.php' );
 
-
 class ImportXml_Issue implements ImportXml_Interface {
 
 	private $old_id_;
@@ -32,7 +31,6 @@ class ImportXml_Issue implements ImportXml_Interface {
 	// import Issues options
 	private $keepCategory_;
 	private $defaultCategory_;
-
 
 	public function __construct( $keepCategory, $defaultCategory ) {
 		$this->newbug_ = new BugData;
@@ -48,8 +46,8 @@ class ImportXml_Issue implements ImportXml_Interface {
 		$userId = auth_get_current_user_id();
 
 		$depth = $reader->depth;
-		while( $reader->read() && 
-				($reader->depth > $depth || 
+		while( $reader->read() &&
+				($reader->depth > $depth ||
 				 $reader->nodeType != XMLReader::END_ELEMENT))
 		{
 			if ($reader->nodeType == XMLReader::ELEMENT) {
@@ -119,10 +117,9 @@ class ImportXml_Issue implements ImportXml_Interface {
 						$reader->read();
 						$this->newbug_->$field = $reader->value;
 				}
-
 			}
 		}
-		
+
 		// now save the new bug
 		$this->new_id_ = bug_create( $this->newbug_ );
 		//echo "\nnew bug: $this->new_id_\n";
@@ -138,7 +135,6 @@ class ImportXml_Issue implements ImportXml_Interface {
 		var_dump( $this->newbug_ );
 		var_dump( $this->issueMap );
 	}
-
 
 	/**
 	* Return the user id in the destination tracker

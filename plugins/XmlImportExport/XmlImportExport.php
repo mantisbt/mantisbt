@@ -40,8 +40,8 @@ class XmlImportExportPlugin extends MantisPlugin {
 	/**
 	 * Default plugin configuration.
 	 */
-        function hooks() { 
-            $hooks = array( 
+        function hooks() {
+            $hooks = array(
                     'EVENT_MENU_MANAGE' => 'import_issues_menu',
                     'EVENT_MENU_FILTER' => 'export_issues_menu'
                     );
@@ -58,5 +58,5 @@ class XmlImportExportPlugin extends MantisPlugin {
 		return array(
 				'<a href="' . plugin_page( 'export' ) . '">' . plugin_lang_get( 'export' ) . '</a>',
 				);
-	} 
+	}
 }
