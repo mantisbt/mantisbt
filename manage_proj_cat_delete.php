@@ -53,6 +53,8 @@
 	form_security_validate( 'manage_proj_cat_delete' );
 	category_remove( $f_category_id );
 
+	form_security_purge( 'manage_proj_cat_delete' );
+
 	if ( $f_project_id == ALL_PROJECTS ) {
 		$t_redirect_url = 'manage_proj_page.php';
 	} else {

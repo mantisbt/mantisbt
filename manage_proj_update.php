@@ -42,5 +42,7 @@
 
 	project_update( $f_project_id, $f_name, $f_description, $f_status, $f_view_state, $f_file_path, $f_enabled, $f_inherit_global );
 
+	form_security_purge( 'manage_proj_update' );
+
 	print_header_redirect( 'manage_proj_page.php' );
 ?>

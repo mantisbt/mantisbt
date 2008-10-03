@@ -114,6 +114,9 @@
 
 	$result = db_query_bound( $query, $query_params );
 	$t_redirect_url = 'manage_user_edit_page.php?user_id=' . $c_user_id;
+
+	form_security_purge('manage_user_update');
+
 ?>
 <?php html_page_top1() ?>
 <?php

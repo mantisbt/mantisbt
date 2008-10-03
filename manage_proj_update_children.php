@@ -44,4 +44,6 @@
 		project_hierarchy_update( $t_subproject_id, $f_project_id, $f_inherit_child );
 	}
 
+	form_security_purge( 'manage_proj_update_children' );
+
 	print_successful_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id );

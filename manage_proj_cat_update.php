@@ -55,6 +55,8 @@
 	
 	category_update( $f_category_id, $f_name, $f_assigned_to );
 
+	form_security_purge( 'manage_proj_cat_update' );
+
 	if ( $f_project_id == ALL_PROJECTS ) {
 		$t_redirect_url = 'manage_proj_page.php';
 	} else {

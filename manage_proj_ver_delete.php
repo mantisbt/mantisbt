@@ -46,6 +46,7 @@
 
 	form_security_validate( 'manage_proj_ver_delete' );
 	version_remove( $f_version_id );
+	form_security_purge( 'manage_proj_ver_delete' );
 
 	html_page_top1();
 	html_meta_redirect( $t_redirect_url );

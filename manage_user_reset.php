@@ -39,6 +39,8 @@
 	$t_result = user_reset_password( $f_user_id );
 	$t_redirect_url = 'manage_user_page.php';
 
+	form_security_purge('manage_user_reset');
+
 	html_page_top1();
 	if ( $t_result ) {
 		html_meta_redirect( $t_redirect_url );

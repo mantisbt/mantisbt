@@ -151,7 +151,7 @@
         }
 	}
 
-
+	form_security_purge('manage_config_email_set');
 ?>
 
 <br />

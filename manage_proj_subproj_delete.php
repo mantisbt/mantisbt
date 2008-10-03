@@ -37,6 +37,8 @@
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
 	project_hierarchy_remove( $f_subproject_id, $f_project_id );
+	
+	form_security_purge( 'manage_proj_subproj_delete' );
 
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 

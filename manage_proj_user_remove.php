@@ -27,6 +27,7 @@
 	require_once( 'core.php' );
 
 	auth_reauthenticate();
+	form_security_validate( 'manage_proj_user_remove' );
 
 	$f_project_id = gpc_get_int( 'project_id' );
 	$f_user_id = gpc_get_int( 'user_id', 0 );
@@ -41,8 +42,6 @@
 		# Confirm with the user
 		helper_ensure_confirmed( lang_get( 'remove_all_users_sure_msg' ), lang_get( 'remove_all_users_button' ) );
 
-		form_security_validate( 'manage_proj_user_remove' );
-
 		project_remove_all_users( $f_project_id );
 	}
 	else {
@@ -52,10 +51,10 @@
 			'<br/>' . lang_get( 'username' ) . ': ' . $t_user['username'],
 			lang_get( 'remove_user_button' ) );
 
-		form_security_validate( 'manage_proj_user_remove' );
-
 		project_remove_user( $f_project_id, $f_user_id );
 	}
+
+	form_security_purge( 'manage_proj_user_remove' );
 
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 

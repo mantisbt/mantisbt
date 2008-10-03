@@ -56,6 +56,8 @@
 		foreach ( $t_revert_vars as $t_revert ) {
 			config_delete( $t_revert, null , $f_project_id );
 		}
+
+		form_security_purge('manage_config_revert');
 	}
 
 	$t_redirect_url = $f_return;
