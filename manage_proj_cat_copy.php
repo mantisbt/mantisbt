@@ -58,5 +58,7 @@
 		}
 	}
 
+	form_security_purge( 'manage_proj_cat_copy' );
+
 	print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id );
-?>
+

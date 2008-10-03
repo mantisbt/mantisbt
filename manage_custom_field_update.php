@@ -56,6 +56,8 @@
 
 	custom_field_update( $f_field_id, $t_values );
 
+	form_security_purge('manage_custom_field_update');
+
 	html_page_top1();
 
 	html_meta_redirect( $f_return );

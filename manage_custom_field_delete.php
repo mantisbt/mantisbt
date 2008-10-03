@@ -50,6 +50,8 @@
 
 	custom_field_destroy( $f_field_id );
 
+	form_security_purge('manage_custom_field_delete');
+
 	html_page_top1();
 	html_meta_redirect( $f_return );
 	html_page_top2();

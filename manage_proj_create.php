@@ -52,6 +52,8 @@
 		project_hierarchy_add( $t_project_id, $f_parent_id );
 	}
 
+	form_security_purge( 'manage_proj_create' );
+
 	$t_redirect_url = 'manage_proj_page.php';
 
 	html_page_top1();

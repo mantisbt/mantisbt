@@ -43,6 +43,8 @@
 		$t_redirect_url = 'manage_custom_field_page.php';
 	}
 
+	form_security_purge('manage_custom_field_create');
+
 	html_page_top1();
 	html_meta_redirect( $t_redirect_url );
 	html_page_top2();

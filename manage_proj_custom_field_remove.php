@@ -55,6 +55,8 @@
 	form_security_validate( 'manage_proj_custom_field_remove' );
 	custom_field_unlink( $f_field_id, $f_project_id );
 
+	form_security_purge( 'manage_proj_custom_field_remove' );
+
 	html_page_top1();
 	html_meta_redirect( $t_redirect_url );
 	html_page_top2();

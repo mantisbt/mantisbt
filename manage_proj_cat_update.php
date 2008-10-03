@@ -48,6 +48,8 @@
 	if ( strtolower( $f_category ) == strtolower( $f_new_category ) ||
 		 category_is_unique( $f_project_id, $f_new_category ) ) {
 		category_update( $f_project_id, $f_category, $f_new_category, $f_assigned_to );
+
+		form_security_purge( 'manage_proj_cat_update' );
 	} else {
 		trigger_error( ERROR_CATEGORY_DUPLICATE, ERROR );
 	}

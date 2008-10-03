@@ -39,6 +39,8 @@
 
 	user_delete( $f_user_id );
 
+	form_security_purge('manage_user_delete');
+
 	$t_redirect_url = 'manage_user_page.php';
 
 	html_page_top1();

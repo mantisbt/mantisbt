@@ -60,6 +60,8 @@
 		}
 	}
 
+	form_security_purge( 'manage_proj_cat_add' );
+
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 
 	print_header_redirect( $t_redirect_url );

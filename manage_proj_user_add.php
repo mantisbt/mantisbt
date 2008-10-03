@@ -41,5 +41,7 @@
 		project_add_user( $f_project_id, $t_user_id, $f_access_level );
 	}
 
+	form_security_purge( 'manage_proj_user_add' );
+
 	print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id );
 ?>

@@ -77,6 +77,8 @@
 
 	$t_cookie = user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled, $f_realname );
 
+	form_security_purge( 'manage_user_create' );
+
 	if ( $t_cookie === false ) {
 		$t_redirect_url = 'manage_user_page.php';
 	} else {

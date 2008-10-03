@@ -42,6 +42,8 @@
 	form_security_validate( 'manage_proj_cat_delete' );
 	category_remove( $f_project_id, $f_category );
 
+	form_security_purge( 'manage_proj_cat_delete' );
+
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 
 	html_page_top1();
