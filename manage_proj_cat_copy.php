@@ -27,8 +27,9 @@
 
 	require_once( $t_core_path.'category_api.php' );
 
-	auth_reauthenticate();
 	form_security_validate( 'manage_proj_cat_copy' );
+
+	auth_reauthenticate();
 
 	$f_project_id		= gpc_get_int( 'project_id' );
 	$f_other_project_id	= gpc_get_int( 'other_project_id' );

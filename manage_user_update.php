@@ -27,10 +27,9 @@
 
 	require_once( $t_core_path.'email_api.php' );
 
-	auth_reauthenticate();
-
 	form_security_validate('manage_user_update');
 
+	auth_reauthenticate();
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	$f_protected	= gpc_get_bool( 'protected' );

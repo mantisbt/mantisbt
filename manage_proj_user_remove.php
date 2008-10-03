@@ -23,8 +23,8 @@
 
 	require_once( 'core.php' );
 
-	auth_reauthenticate();
 	form_security_validate( 'manage_proj_user_remove' );
+	auth_reauthenticate();
 
 	$f_project_id = gpc_get_int( 'project_id' );
 	$f_user_id = gpc_get_int( 'user_id', 0 );

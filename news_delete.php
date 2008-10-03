@@ -27,8 +27,9 @@
 
 	require_once( $t_core_path.'news_api.php' );
 
-	$f_news_id = gpc_get_int( 'news_id' );
+	form_security_validate( 'news_delete' );
 
+	$f_news_id = gpc_get_int( 'news_id' );
 	$row = news_get_row( $f_news_id );
 
 	# This check is to allow deleting of news items that were left orphan due to bug #3723
@@ -38,8 +39,6 @@
 
 	helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ),
 							 lang_get( 'delete_news_item_button' ) );
-
-	form_security_validate( 'news_delete' );
 
 	news_delete( $f_news_id );
 

@@ -27,8 +27,9 @@
 
 	require_once( $t_core_path.'version_api.php' );
 
-	auth_reauthenticate();
 	form_security_validate( 'manage_proj_ver_update' );
+
+	auth_reauthenticate();
 
 	$f_version_id = gpc_get_int( 'version_id' );
 
