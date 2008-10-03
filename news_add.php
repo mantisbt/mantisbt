@@ -42,6 +42,8 @@
 
 	$t_news_id = news_create( helper_get_current_project(), auth_get_current_user_id(), $f_view_state, $f_announcement, $f_headline, $f_body );
 
+	form_security_purge( 'news_add' );
+
 	$t_news_row = news_get_row( $t_news_id );
 ?>
 <?php html_page_top1() ?>

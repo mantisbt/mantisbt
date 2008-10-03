@@ -43,6 +43,7 @@
 	switch ( $f_action ) {
 		case 'edit':
 			$f_profile_id = gpc_get_int( 'profile_id' );
+			form_security_purge('profile_update');
 			print_header_redirect( 'account_prof_edit_page.php?profile_id=' . $f_profile_id );
 			break;
 
@@ -64,6 +65,7 @@
 			}
 
 			profile_create( $t_user_id, $f_platform, $f_os, $f_os_build, $f_description );
+			form_security_purge('profile_update');
 
 			if ( ALL_USERS == $t_user_id ) {
 				print_header_redirect( 'manage_prof_menu_page.php' );
@@ -83,9 +85,11 @@
 				access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 
 				profile_update( ALL_USERS, $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
+				form_security_purge('profile_update');
 				print_header_redirect( 'manage_prof_menu_page.php' );
 			} else {
 				profile_update( auth_get_current_user_id(), $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
+				form_security_purge('profile_update');
 				print_header_redirect( 'account_prof_menu_page.php' );
 			}
 			break;
@@ -96,9 +100,11 @@
 				access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 
 				profile_delete( ALL_USERS, $f_profile_id );
+				form_security_purge('profile_update');
 				print_header_redirect( 'manage_prof_menu_page.php' );
 			} else {
 				profile_delete( auth_get_current_user_id(), $f_profile_id );
+				form_security_purge('profile_update');
 				print_header_redirect( 'account_prof_menu_page.php' );
 			}
 			break;
@@ -106,6 +112,7 @@
 		case 'make_default':
 			$f_profile_id = gpc_get_int( 'profile_id' );
 			current_user_set_pref( 'default_profile', $f_profile_id );
+			form_security_purge('profile_update');
 			print_header_redirect( 'account_prof_menu_page.php' );
 			break;
 	}

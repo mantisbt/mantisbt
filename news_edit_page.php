@@ -48,6 +48,7 @@
 
 		form_security_validate( 'news_delete' );
 		news_delete( $f_news_id );   
+		form_security_purge( 'news_delete' );
 		print_header_redirect( 'news_menu_page.php', true ); 
 	}
 

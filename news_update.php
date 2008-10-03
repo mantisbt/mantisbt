@@ -48,6 +48,8 @@
 	access_ensure_project_level( config_get( 'manage_news_threshold' ), $f_project_id );
 
 	news_update( $f_news_id, $f_project_id, $f_view_state, $f_announcement, $f_headline, $f_body );
+
+	form_security_purge( 'news_update' );
 ?>
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>
