@@ -26,6 +26,8 @@
 	  */
 	require_once( 'core.php' );
 
+	form_security_validate( 'manage_proj_delete' );
+
 	auth_reauthenticate();
 
 	$f_project_id = gpc_get_int( 'project_id' );
@@ -38,8 +40,8 @@
 			'<br/>' . lang_get( 'project_name' ) . ': ' . $t_project_name,
 			lang_get( 'project_delete_button' ) );
 
-	form_security_validate( 'manage_proj_delete' );
 	project_delete( $f_project_id );
+
 	form_security_purge( 'manage_proj_delete' );
 
 	# Don't leave the current project set to a deleted project -

@@ -37,6 +37,8 @@
 
 	# If deleting item redirect to delete script
 	if ( 'delete' == $f_action ) {
+		form_security_validate( 'news_delete' );
+
 		$row = news_get_row( $f_news_id );   
 		     
 		# This check is to allow deleting of news items that were left orphan due to bug #3723   
@@ -46,9 +48,10 @@
 
 		helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ), lang_get( 'delete_news_item_button' ) );   
 
-		form_security_validate( 'news_delete' );
 		news_delete( $f_news_id );   
+
 		form_security_purge( 'news_delete' );
+
 		print_header_redirect( 'news_menu_page.php', true ); 
 	}
 

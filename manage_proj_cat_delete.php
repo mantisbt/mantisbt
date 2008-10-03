@@ -30,6 +30,8 @@
 
 	require_once( $t_core_path.'category_api.php' );
 
+	form_security_validate( 'manage_proj_cat_delete' );
+
 	auth_reauthenticate();
 
 	$f_category_id = gpc_get_string( 'id' );
@@ -50,7 +52,6 @@
 	helper_ensure_confirmed( sprintf( lang_get( 'category_delete_sure_msg' ), $t_name, $t_bug_count ),
 		lang_get( 'delete_category_button' ) );
 
-	form_security_validate( 'manage_proj_cat_delete' );
 	category_remove( $f_category_id );
 
 	form_security_purge( 'manage_proj_cat_delete' );

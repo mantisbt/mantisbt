@@ -26,8 +26,9 @@
 	  */
 	require_once( 'core.php' );
 
-	auth_reauthenticate();
+	form_security_validate('manage_user_delete');
 
+	auth_reauthenticate();
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	$f_user_id	= gpc_get_int( 'user_id' );
@@ -37,8 +38,6 @@
 	helper_ensure_confirmed( lang_get( 'delete_account_sure_msg' ) .
 		'<br/>' . lang_get( 'username' ) . ': ' . $t_user['username'],
 		lang_get( 'delete_account_button' ) );
-
-	form_security_validate('manage_user_delete');
 
 	user_delete( $f_user_id );
 

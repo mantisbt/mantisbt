@@ -29,11 +29,13 @@
 
 	require_once( $t_core_path . 'tag_api.php' );
 
+	form_security_validate( 'tag_detach' );
+
 	$f_tag_id = gpc_get_int( 'tag_id' );
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
-	form_security_validate( 'tag_detach' );
 	tag_bug_detach( $f_tag_id, $f_bug_id );
+
 	form_security_purge( 'tag_detach' );
 	
 	print_successful_redirect_to_bug( $f_bug_id );

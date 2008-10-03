@@ -30,8 +30,9 @@
 
 	require_once( $t_core_path.'category_api.php' );
 
-	auth_reauthenticate();
 	form_security_validate( 'manage_proj_cat_update' );
+
+	auth_reauthenticate();
 
 	$f_category_id		= gpc_get_int( 'category_id' );
 	$f_project_id		= gpc_get_int( 'project_id', ALL_PROJECTS );

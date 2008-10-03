@@ -30,8 +30,9 @@
 
 	require_once( $t_core_path.'project_hierarchy_api.php' );
 
-	auth_reauthenticate();
 	form_security_validate( 'manage_proj_update_children' );
+
+	auth_reauthenticate();
 
 	$f_project_id = gpc_get_int( 'project_id' );
 

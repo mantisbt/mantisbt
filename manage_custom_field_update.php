@@ -30,10 +30,9 @@
 
 	require_once( $t_core_path.'custom_field_api.php' );
 
-	auth_reauthenticate();
-
 	form_security_validate('manage_custom_field_update');
 
+	auth_reauthenticate();
 	access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
 	$f_field_id						= gpc_get_int( 'field_id' );

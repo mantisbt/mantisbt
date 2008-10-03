@@ -26,8 +26,9 @@
 	  */
 	require_once( 'core.php' );
 
-	auth_reauthenticate();
 	form_security_validate( 'manage_proj_update' );
+
+	auth_reauthenticate();
 
 	$f_project_id 	= gpc_get_int( 'project_id' );
 	$f_name 		= gpc_get_string( 'name' );

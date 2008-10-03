@@ -30,6 +30,8 @@
 
 	require_once( $t_core_path.'email_api.php' );
 
+	form_security_validate( 'manage_user_create' );
+
 	auth_reauthenticate();
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
@@ -78,8 +80,6 @@
 					 lang_get( 'empty_password_button' ) );
 		}
 	}
-
-	form_security_validate( 'manage_user_create' );
 
 	$t_cookie = user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled, $t_realname );
 

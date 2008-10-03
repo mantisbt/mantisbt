@@ -26,10 +26,9 @@
 	  */
 	require_once( 'core.php' );
 
-	auth_reauthenticate();
-
 	form_security_validate('manage_user_reset');
 
+	auth_reauthenticate();
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	$f_user_id = gpc_get_int( 'user_id' );
