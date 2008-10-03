@@ -38,6 +38,9 @@
 	$f_custom_field_id = gpc_get_int( 'custom_field_id', 0 );
 	$f_bug_arr	= gpc_get_int_array( 'bug_arr', array() );
 
+	$t_form_name = 'bug_actiongroup_' . $f_action;
+	form_security_validate( $t_form_name );
+
 	$t_custom_group_actions = config_get( 'custom_group_actions' );
 
 	foreach( $t_custom_group_actions as $t_custom_group_action ) {
@@ -52,8 +55,6 @@
 	if ( 0 != $f_custom_field_id ) {
 		$t_custom_field_def = custom_field_get_definition( $f_custom_field_id );
 	}
-
-	$t_first_issue = true;
 
 	foreach( $f_bug_arr as $t_bug_id ) {
 		bug_ensure_exists( $t_bug_id );
@@ -72,10 +73,6 @@
 		switch ( $f_action ) {
 
 		case 'CLOSE':
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_close' );
-			}
-
 			if ( access_can_close_bug( $t_bug_id ) &&
 					( $t_status < CLOSED ) &&
 					bug_check_workflow($t_status, CLOSED) ) {
@@ -93,10 +90,6 @@
 			break;
 
 		case 'DELETE':
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_delete' );
-			}
-
 			if ( access_has_bug_level( config_get( 'delete_bug_threshold' ), $t_bug_id ) ) {
 				event_signal( 'EVENT_BUG_DELETED', array( $t_bug_id ) );
 				bug_delete( $t_bug_id );
@@ -106,10 +99,6 @@
 			break;
 
 		case 'MOVE':
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_move' );
-			}
-
 			if ( access_has_bug_level( config_get( 'move_bug_threshold' ), $t_bug_id ) ) {
 				# @@@ we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 				$f_project_id = gpc_get_int( 'project_id' );
@@ -121,10 +110,6 @@
 			break;
 
 		case 'COPY':
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_copy' );
-			}
-
 			$f_project_id = gpc_get_int( 'project_id' );
 
 			if ( access_has_project_level( config_get( 'report_bug_threshold' ), $f_project_id ) ) {
@@ -135,10 +120,6 @@
 			break;
 
 		case 'ASSIGN':
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_assign' );
-			}
-
 			$f_assign = gpc_get_int( 'assign' );
 			if ( ON == config_get( 'auto_set_status_to_assigned' ) ) {
 				$t_assign_status = config_get( 'bug_assigned_status' );
@@ -164,10 +145,6 @@
 			break;
 
 		case 'RESOLVE':
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_resolve' );
-			}
-
 			$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
 			if ( access_has_bug_level( access_get_status_threshold( $t_resolved_status, bug_get_field( $t_bug_id, 'project_id' ) ), $t_bug_id ) &&
 				 		( $t_status < $t_resolved_status ) &&
@@ -188,10 +165,6 @@
 			break;
 
 		case 'UP_PRIOR':
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_update_priority' );
-			}
-
 			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
 				$f_priority = gpc_get_int( 'priority' );
 				# @@@ we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
@@ -203,10 +176,6 @@
 			break;
 
 		case 'UP_STATUS':
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_update_status' );
-			}
-
 			$f_status = gpc_get_int( 'status' );
 			$t_project = bug_get_field( $t_bug_id, 'project_id' );
 			if ( access_has_bug_level( access_get_status_threshold( $f_status, $t_project ), $t_bug_id ) ) {
@@ -223,10 +192,6 @@
 			break;
 
 		case 'UP_CATEGORY':
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_update_category' );
-			}
-
 			$f_category_id = gpc_get_int( 'category' );
 			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
 				if ( category_exists( $f_category_id ) ) {
@@ -242,10 +207,6 @@
 			break;
 		
 		case 'UP_FIXED_IN_VERSION':
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_update_fixed_in_version' );
-			}
-
 			$f_fixed_in_version = gpc_get_string( 'fixed_in_version' );
 			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
 			$t_success = false;
@@ -265,10 +226,6 @@
 			break;
 
 		case 'UP_TARGET_VERSION':
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_update_target_version' );
-			}
-
 			$f_target_version = gpc_get_string( 'target_version' );
 			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
 			$t_success = false;
@@ -288,10 +245,6 @@
 			break;
 
 		case 'VIEW_STATUS':
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_update_view_status' );
-			}
-
 			if ( access_has_bug_level( config_get( 'change_view_status_threshold' ), $t_bug_id ) ) {
 				$f_view_status = gpc_get_int( 'view_status' );
 				# @@@ we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
@@ -303,10 +256,6 @@
 			break;
 
 		case 'SET_STICKY':
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_set_sticky' );
-			}
-
 			if ( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $t_bug_id ) ) {
 				$f_sticky = bug_get_field( $t_bug_id, 'sticky' );
 				// The new value is the inverted old value
@@ -323,10 +272,6 @@
 				trigger_error( ERROR_GENERIC, ERROR );
 			}
 
-			if ( $t_first_issue ) {
-				form_security_validate( 'bug_update_custom_field_' . $f_custom_field_id );
-			}
-
 			# @@@ we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 			$t_form_var = "custom_field_$f_custom_field_id";
 			$t_custom_field_value = gpc_get_custom_field( $t_form_var, $t_custom_field_def['type'], null );
@@ -340,9 +285,9 @@
 
 		# Bug Action Event
 		event_signal( 'EVENT_BUG_ACTION', array( $f_action, $t_bug_id ) );
-
-		$t_first_issue = false;
 	}
+
+	form_security_purge( $t_form_name );
 
 	$t_redirect_url = 'view_all_bug_page.php';
 
