@@ -43,6 +43,8 @@
 
 	news_delete( $f_news_id );
 
+	form_security_purge( 'news_delete' );
+
 	$t_redirect_url = 'news_menu_page.php';
 	html_page_top1();
 	html_meta_redirect( $t_redirect_url );

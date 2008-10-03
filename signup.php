@@ -67,6 +67,8 @@
 		email_notify_new_account( $f_username, $f_email );
 	}
 
+	form_security_purge( 'signup' );
+
 	html_page_top1();
 	html_page_top2a();
 ?>

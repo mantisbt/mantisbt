@@ -196,6 +196,8 @@
 	# Update the bug entry, notify if we haven't done so already
 	bug_update( $f_bug_id, $t_bug_data, true, ( false == $t_notify ) );
 
+	form_security_purge( 'bug_update' );
+
 	helper_call_custom_function( 'issue_update_notify', array( $f_bug_id ) );
 
 	print_successful_redirect_to_bug( $f_bug_id );

@@ -91,6 +91,8 @@
 		}
 	}
 
+	form_security_purge('account_update');
+
 	html_page_top1();
 	html_meta_redirect( $t_redirect );
 	html_page_top2();

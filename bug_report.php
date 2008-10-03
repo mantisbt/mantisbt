@@ -154,6 +154,8 @@
 
 	helper_call_custom_function( 'issue_create_notify', array( $t_bug_id ) );
 
+	form_security_purge( 'bug_report' );
+	
 	html_page_top1();
 
 	if ( ! $f_report_stay ) {
