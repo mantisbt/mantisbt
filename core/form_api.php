@@ -117,6 +117,47 @@ function form_security_validate( $p_form_name ) {
 	# Generate a date string of three days ago
 	$t_date = date( 'Ymd', time() - (3 * 24 * 60 * 60) );
 
+	# Check all stored security tokens
+	$t_valid = false;
+	foreach( $t_tokens[ $p_form_name ] as $t_token ) {
+		$t_token_date = substr( $t_token, 0, 8 );
+
+		# Newer than three days, check for match
+		if ( $t_date < $t_token_date && $t_token == $t_input ) {
+			$t_valid = true;
+		}
+	}
+
+	if( !$t_valid ) {
+		trigger_error( ERROR_FORM_TOKEN_INVALID, ERROR );
+	}
+
+	return $t_valid;
+}
+
+/**
+ * Purge form security tokens that are older than 3 days, or used
+ * for form validation.
+ * @param string Form name
+ */
+function form_security_purge( $p_form_name ) {
+	$t_tokens = session_get( 'form_security_tokens', array() );
+
+	# Short-circuit if we don't have any tokens for the given form name
+	if ( !isset( $t_tokens[ $p_form_name ] )
+		|| !is_array( $t_tokens[ $p_form_name ] )
+		|| count( $t_tokens[ $p_form_name ] ) < 1 ) {
+
+		return;
+	}
+
+	# Get the form input
+	$t_form_token = $p_form_name . '_token';
+	$t_input = gpc_get_string( $t_form_token, '' );
+
+	# Generate a date string of three days ago
+	$t_date = date( 'Ymd', time() - (3 * 24 * 60 * 60) );
+
 	# Check all stored security tokens, purging old ones as necessary
 	$t_tokens_kept = array();
 	$t_valid = false;
@@ -124,12 +165,8 @@ function form_security_validate( $p_form_name ) {
 		$t_token_date = substr( $t_token, 0, 8 );
 
 		# Newer than three days, check for match, keep otherwise
-		if ( $t_date < $t_token_date ) {
-			if ( $t_token == $t_input ) {
-				$t_valid = true;
-			} else {
-				$t_tokens_kept[] = $t_token;
-			}
+		if ( $t_date < $t_token_date && $t_token != $t_input ) {
+			$t_tokens_kept[] = $t_token;
 		}
 	}
 
@@ -137,10 +174,6 @@ function form_security_validate( $p_form_name ) {
 	$t_tokens[ $p_form_name ] = $t_tokens_kept;
 	session_set( 'form_security_tokens', $t_tokens );
 
-	if( !$t_valid ) {
-		trigger_error( ERROR_FORM_TOKEN_INVALID, ERROR );
-	}
-
-	return $t_valid;
+	return;
 }
 
