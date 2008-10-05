@@ -163,9 +163,9 @@
                 
                 <listitem>
                     <para>Login to your bugtracker and go to the manage section.
-                        Click on theprojects link. You will need to ADD a new project. Then
-                        EDIT the new projectand remember to ADD at least one category.
-                        Otherwise you won't be able to addany bug reports.That should be
+                        Click on the projects link. You will need to ADD a new project. Then
+                        EDIT the new project and remember to ADD at least one category.
+                        Otherwise you won't be able to add any issues. That should be
                         it. You're off and running.
                     </para>
                 </listitem>
@@ -252,7 +252,7 @@
                 make cataloguing easier.
                 !!! Backups should always be performed before an upgrade !!!
                 Make sure to backup Mantis code (which includes your configs +
-                possibly customization), bug attachments / project documents, and
+                possibly customization), issue attachments / project documents, and
                 database contents.
             </para>
             
@@ -264,7 +264,7 @@
             
             
             <para>CVS integration allows Mantis to register commits to the CVS
-                source control system into corresponding bug notes in the issue
+                source control system into corresponding issue notes in the issue
                 tracker.The setup requires that the mantis installation be
                 accessible on the computer running the CVS server. A copy of the
                 Mantis config_inc.php file must be present.Note that the mysql
@@ -276,8 +276,8 @@
                 ALL /usr/bin/php /path_to_mantis/core/checkin.php
                 This will pass the commit message to checkin.php for all commits.
                 If the stringissue #nnnn is found in the commit message, the Mantis
-                corresponding to "nnnn" will have the CVS commit message added as a
-                bug note to the issue. Multiple issues can be listed.This feature
+                corresponding to "nnnn" will have the CVS commit message added as an
+                issue note to the issue. Multiple issues can be listed.This feature
                 is configured through config_inc.php and through custom
                 functions.
             </para>

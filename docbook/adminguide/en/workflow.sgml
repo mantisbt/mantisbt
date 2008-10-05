@@ -51,7 +51,7 @@
 	    "assigned" or "resolved".</para></listitem>
 	    <listitem><para>Acknowledged - This status is used by the development team
 	    to reflect their agreement to the suggested feature request.  Or to
-	    agree with what the reporter is suggesting in a bug report, although
+	    agree with what the reporter is suggesting in an issue report, although
 	    they didn't yet attempt to reproduce what the reporter is referring
 	    to.  The next status is typically "assigned" or "confirmed".</para></listitem>
 	    <listitem><para>Confirmed - This status is typically used by the
@@ -206,7 +206,7 @@
 		to be able to add notes.</para></listitem>
 	        <listitem><para>Update notes - The access levels required for
 		users to be able to update issue notes.</para></listitem>
-	        <listitem><para>Allow user to edit their own bugnotes - A flag
+	        <listitem><para>Allow user to edit their own issue notes - A flag
 		that indicates the ability for users to edit issue notes report by them.</para></listitem>
 	        <listitem><para>Delete note - The access levels required for a
 		user to delete a note that they may or may not have reported

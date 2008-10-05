@@ -50,48 +50,58 @@
     
     
     <section>
-        <title>View Bugs page</title>
+        <title>View Issues page</title>
         
-        <para>Here we can view the bug listings. The page has a set of
-            viewing filters at the top and the bugs are listed below.FiltersThe
-            filters control the behavior of the bug list. The filters are saved
+        <para>Here we can view the issue listings. The page has a set of
+            viewing filters at the top and the issues are listed below.FiltersThe
+            filters control the behavior of the issues list. The filters are saved
             between browsing sessions but do not currently save sort order or
-            direction.If the number of bugs exceeds the "Show" count in the
+            direction.If the number of issues exceeds the "Show" count in the
             filter a set of navigation to go to "First", "Last", "Previous",
             "Next" and specific page numbers are added.The Search field will
             look for simple keyword matches in the summary, description, steps
-            to reproduce, additional information, bug id, or bug text id
-            fields. It does not search through bugnotes.Bug ListThe bugs are
+            to reproduce, additional information, issue id, or issue text id
+            fields. It does not search through issue notes.
+            
+            Issue List - The issues are
             listed in a table and the attributes are listed in the following
-            order: priority, id, number of bugnotes, category, severity,
+            order: priority, id, number of issue notes, category, severity,
             status, last updated, and summary. Each (except for number of
-            bugnotes) can be clicked on to sort by that column. Clicking again
+            issue notes) can be clicked on to sort by that column. Clicking again
             will reverse the direction of the sort. The default is to sort by
-            last modification time, where the last modified bug appears at the
-            top.The bug id is a link that leads to a more detailed report about
-            the bug. Depending on what you have set in your Account Preferences
+            last modification time, where the last modified issue appears at the
+            top. The issue id is a link that leads to a more detailed report about
+            the issue. Depending on what you have set in your Account Preferences
             you will be sent to the simple or advanced view. You can also add
-            bugnotes here.The number in the bugnote count column will be bold
-            if a bugnote has been added in the specified time frame. The
-            addition of a bugnote will make the bugnote link of the bug appear
+            issue notes here.The number in the issue note count column will be bold
+            if an issue note has been added in the specified time frame. The
+            addition of an issue note will make the issue note link of the issue appear
             in the unvisited state.The text in the "Severity" column will be
-            bold if the severity is major, crash, or block and the bug not
-            resolved.The text in the "Updated" column will be bold if the bug
+            bold if the severity is major, crash, or block and the issue not
+            resolved.The text in the "Updated" column will be bold if the issue
             has changed in the last "Changed(hrs)" field which is specified in
             the viewing filters.Each table row is color coded according to the
-            bug status. The colors can be customised through Mantis
+            issue status. The colors can be customised through Mantis
             <ulink url="manual.configuration.html">Configuration</ulink>
             .Severitiesblock
-            - prevents further work/progress from being madecrash - crashes the
-            application or OSmajor - major bugminor - minor bugtweak - needs
-            tweakingtext - error in the texttrivial - being nitpickyfeature -
-            requesting new featureStatusnew - new bugsfeedback - bug requires
-            more information, the original posters should pay
-            attentionacknowledged - bug has been looked at but not confirmed or
-            assignedconfirmed - confirmed and reproducible (typically set by an
-            Updater or other Developer)assigned - assigned to a
-            Developerresolved - bug should be fixed, waiting on confirmation of
-            fixclosed - bug is closedMoving the mouse over the status text will
+            - prevents further work/progress from being made
+            crash - crashes the application or blocking,
+            major - major issue,
+            minor - minor issue,
+            tweak - needs tweaking,
+            text - error in the text,
+            trivial - being nit picky,
+            feature - requesting new feature
+            - Status
+            new - new issue,
+            feedback - issue requires more information from reporter,
+            acknowledged - issue has been looked at but not confirmed or assigned,
+            confirmed - confirmed and reproducible (typically set by an
+            Updater or other Developer),
+            assigned - assigned to a Developer,
+            resolved - issue should be fixed, waiting on confirmation of fix,
+            closed - issue is closed,
+            Moving the mouse over the status text will
             show the resolution as a title. This is rendered by some browsers
             as a bubble and in others as a status line text.
         </para>
@@ -100,16 +110,16 @@
     
     <section>
         
-        <title>Bug View Simple page</title>
+        <title>Issue View Simple page</title>
         
         
-        <para>Here is the simple listing of the bug report. Most of the
+        <para>Here is the simple listing of the issue report. Most of the
             fields are self-explanatory. "Assigned To" will contain the
-            developer assigned to handle the bug. Priority is fully functional
+            developer assigned to handle the issue. Priority is fully functional
             but currently does nothing of importance. Duplicate ID is used when
-            a bug is a duplicate of another. It links to the duplicate bug
-            which allows users to read up on the original bug report.Below the
-            bug report is a set of buttons that a user can select to work on
+            an issue is a duplicate of another. It links to the duplicate issue
+            which allows users to read up on the original issue report. Below the
+            issue report is a set of buttons that a user can select to work on
             the issue.
         </para>
         <itemizedlist>
@@ -155,8 +165,8 @@
             </listitem>
             <listitem>
                 <para>Delete Issue - Allows the user to delete the issue
-                    permanently. It is recommended against deleting bugs unless the
-                    entry is frivolous. Instead bugs should be set to resolved and an
+                    permanently. It is recommended against deleting issues unless the
+                    entry is frivolous. Instead issues should be set to resolved and an
                     appropriate resolution category chosen.
                 </para>
             </listitem>
@@ -170,36 +180,28 @@
             is also possible.Below this, there may be a form for uploading file
             attachments. The Administrator needs to configure the bugtracker to
             handle file uploads. If uploading to disk is selected, each project
-            needs to set its own upload path.Bugnotes are shown at the bottom
-            of the bug report. A panel to add bugnotes is also shown.
-        </para>
-        
+            needs to set its own upload path.  Issue notes are shown at the bottom
+            of the issue report. A panel to add issue notes is also shown.
+        </para>    
     </section>
-    
-    
+
     <section>
-        <title>Bug View Advanced page</title>
+        <title>Issue View Advanced page</title>
         
         <para>The advanced view is much the same as the simple view with a
             few additional fields. Here you can see Projection, ETA, Platform,
             OS, OSBuild, Product Version, Product Build, and Steps to
             Reproduce.
         </para>
-        <para>See also:
-            <ulink url="manual.page.descriptions.bug.view.simple.page.html">Bug
-                View Simple page
-            </ulink>
-        </para>
+        <para>See also: Issue View Simple page.</para>
         
     </section>
     
-    
     <section>
-        <title>Bug Change Status page</title>
-        
+        <title>Issue Change Status page</title>
         
         <para>This page is used to change the status of an issue. A user
-            can add a bugnote to describe the reason for change.In addition,
+            can add an issue note to describe the reason for change.In addition,
             the following fields may be displayed for update:
             <itemizedlist>
                 <listitem>
@@ -231,24 +233,24 @@
     
     <section>
         
-        <title>Bug Update Simple page</title>
+        <title>Issue Update Simple page</title>
         
         <para>The layout of this page resemples the Simple Issue View
-            page, but here you can update various bug fields. The Reporter,
+            page, but here you can update various issue fields. The Reporter,
             Category, Severity, and Reproducibility fields are editable but
             shouldn't be unless there is a gross mis-categorization.Also
             modifiable are the Assigned To, Priority, Projection, ETA,
             Resolution, and Duplicate ID fields.As per version 0.18.0, the user
-            can also add a bugnote as part of a bug update.
+            can also add an issue note as part of an issue update.
         </para>
         
     </section>
     
     
     <section>
-        <title>Bug Update Advanced page</title>
+        <title>Issue Update Advanced page</title>
         
-        <para>Similar to Bug Update Simple page but has the extra advanced
+        <para>Similar to Issue Update Simple page but has the extra advanced
             fields. The difference between the simple/advanced update pages
             should be consistent with the difference between the
             simple/advanced view pages.
@@ -282,7 +284,7 @@
                     </listitem>
                     <listitem>
                         <para>the delay in minutes between refreshes of the view all
-                            bugs page
+                            issues page
                         </para>
                     </listitem>
                     <listitem>
@@ -546,7 +548,7 @@
                             </row>
                             <row>
                                 <entry>Display Only On Advanced Page</entry>
-                                <entry>If checked, the field will NOT be shown on the simple bug
+                                <entry>If checked, the field will NOT be shown on the simple issue
                                     displays
                                 </entry>
                             </row>
@@ -774,8 +776,8 @@
                             <row>
                                 <entry>Update View Status</entry>
                                 <entry>$g_change_view_status_threshold</entry>
-                                <entry>threshold needed to update the view status while updating a
-                                    bug or a bug note
+                                <entry>threshold needed to update the view status while updating an
+                                    issue or an issue note
                                 </entry>
                             </row>
                             <row>
@@ -817,27 +819,27 @@
                             <row>
                                 <entry>Add Notes</entry>
                                 <entry>$g_add_bugnote_threshold</entry>
-                                <entry>threshold to add a bugnote</entry>
+                                <entry>threshold to add an issue note</entry>
                             </row>
                             <row>
                                 <entry>Update Notes</entry>
                                 <entry>$g_update_bugnote_threshold</entry>
-                                <entry>threshold to edit a bugnote</entry>
+                                <entry>threshold to edit an issue note</entry>
                             </row>
                             <row>
                                 <entry>Allow users to edit their own bugnotes</entry>
                                 <entry>$g_bugnote_allow_user_edit_delete</entry>
-                                <entry>can a user edit/delete their own bugnotes</entry>
+                                <entry>can a user edit/delete their own issue notes</entry>
                             </row>
                             <row>
                                 <entry>Delete Note</entry>
                                 <entry>$g_delete_bugnote_threshold</entry>
-                                <entry>threshold to delete a bugnote</entry>
+                                <entry>threshold to delete an issue note</entry>
                             </row>
                             <row>
                                 <entry>View private notes</entry>
                                 <entry>$g_private_bugnote_threshold</entry>
-                                <entry>threshold to view a private bugnote</entry>
+                                <entry>threshold to view a private issue note</entry>
                             </row>
                         </tbody>
                     </tgroup>
@@ -902,7 +904,7 @@
                             <row>
                                 <entry>Status where an issue is considered resolved</entry>
                                 <entry>$g_bug_resolved_status_threshold</entry>
-                                <entry>status where bug is resolved</entry>
+                                <entry>status where issue is resolved</entry>
                             </row>
                             <row>
                                 <entry>Status to which a reopened Issue is set</entry>
@@ -940,10 +942,10 @@
                             <para>the handler (or Assigned to)</para>
                         </listitem>
                         <listitem>
-                            <para>anyone monitoring the bug</para>
+                            <para>anyone monitoring the issue</para>
                         </listitem>
                         <listitem>
-                            <para>anyone who has ever added a bugnote the bug</para>
+                            <para>anyone who has ever added a issue note the issue</para>
                         </listitem>
                         <listitem>
                             <para>anyone assigned to the project whose access level matches
@@ -985,13 +987,13 @@
     </section>
     
     <section>
-        <title>Monitor Bug</title>
+        <title>Monitor Issue</title>
         
         <para>The monitor issues feature allows users to subscribe to
             certain issues and hence get copied on all notification emails that
             are sent for these issues.Depending on the configuration, sending a
             reminder to a user about an issue can add this issue to the user's
-            list of monitored bugs.Users who reported the issue or are assigned
+            list of monitored issues. Users who reported the issue or are assigned
             the issue typically don't need to monitor the issue to get the
             notifications. This is because by default they get notified on
             changes related to the issue anyway. However, administrators can
@@ -1001,41 +1003,41 @@
     </section>
     
     <section>
-        <title>Reopen Bug</title>
+        <title>Reopen Issue</title>
         
-        <para>Re-open bug button is visible in the bug view pages if the
-            user has the appropriate access level and the bug is
-            resolved/closed. Re-opening a bug will allow users to enter a
-            bugnotes for the re-opening reason. The bug will automatically be
+        <para>Re-open issue button is visible in the issue view pages if the
+            user has the appropriate access level and the issue is
+            resolved/closed. Re-opening a issue will allow users to enter
+            issue notes for the re-opening reason. The issue will automatically be
             put into the Feedback status.
         </para>
     </section>
     
     
     <section>
-        <title>Delete Bug</title>
+        <title>Delete Issue</title>
         
         
-        <para>The delete bugs button appears on the bug view pages for the
+        <para>The delete issues button appears on the issue view pages for the
             users who have the appropriate access level. This allows you to
-            delete an existing bug. This should only be used on frivolous or
-            test bugs. A confirmation screen will prompt you if you really want
-            to delete the bug. Updaters, Developers, Managers, and
-            Administrators can remove bugs (you can also configure
+            delete an existing issue. This should only be used on frivolous or
+            test issues. A confirmation screen will prompt you if you really want
+            to delete the issue. Updaters, Developers, Managers, and
+            Administrators can remove issues (you can also configure
             this).
         </para>
     </section>
     
     
     <section>
-        <title>Close Bug</title>
+        <title>Close Issue</title>
         
-        <para>This is a button that appears on the bug view pages for
-            users that are authorized to close bugs. Depending on the
-            configuration, users may be able to close bugs without having to
-            resolve them first, or may be able to only close resolved bugs.
+        <para>This is a button that appears on the issue view pages for
+            users that are authorized to close issues. Depending on the
+            configuration, users may be able to close issues without having to
+            resolve them first, or may be able to only close resolved issues.
             After the button is clicked, the user is redirected to a page where
-            a bugnote maybe added.
+            an issue note maybe added.
         </para>
     </section>
     
@@ -1043,27 +1045,23 @@
     <section>
         <title>Assign to Me</title>
         
-        <para>This button appears in the bug view pages in case of users
+        <para>This button appears in the issue view pages in case of users
             with access level that is equal to handle_bug_threshold or higher.
-            When this button is clicked the bug is assigned to the
+            When this button is clicked the issue is assigned to the
             user.
         </para>
     </section>
     
     <section>
-        <title>Resolve Bug</title>
+        <title>Resolve Issue</title>
         
         
-        <para>This option on the View Bugs page allows you to resolve the
-            bug. It will lead you to a page where you can set the resolution
+        <para>This option on the View Issues page allows you to resolve the
+            issue. It will lead you to a page where you can set the resolution
             state and a duplicate id (if applicable). After choosing that the
-            user can choose to enter a bugnote detailing the reason for the
-            closure. The bug is then set to the Resolved state. The reporter
-            should check off on the bug by using the
-            <ulink url="manual.page.descriptions.close.bug.html">Close
-                Bug
-            </ulink>
-            button.
+            user can choose to enter an issue note detailing the reason for the
+            closure. The issue is then set to the Resolved state. The reporter
+            should check off on the issue by using the Close Issue button.
         </para>
     </section>
     

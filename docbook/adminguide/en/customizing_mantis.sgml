@@ -259,10 +259,10 @@
                         <para>To unlink a custom field, click on "Remove" link next to
                             the field.
                             Unlinking a custom field will not delete the values that are
-                            associated with the bugs for this field. These values are only
+                            associated with the issues for this field. These values are only
                             deleted if the custom field definition is removed (not unlinked!)
                             from the database. This is useful if you decide to re-link the
-                            custom field. These values may also re-appear if bugs are moved to
+                            custom field. These values may also re-appear if issues are moved to
                             another project which has this field linked.
                         </para>
                     </listitem>
@@ -270,11 +270,11 @@
             </para>
 
         <formalpara>
-            <title>Moving Bugs</title>
+            <title>Moving Issues</title>
             <para>
-                When a bug is moved from one project to another, custom
+                When an issue is moved from one project to another, custom
                 fields that are not defined for the new project are not deleted.
-                These fields will re-appear with their correct values if the bug is
+                These fields will re-appear with their correct values if the issue is
                 moved back to the original project, or if these custom fields are
                 linked to the new project.
             </para>
@@ -599,19 +599,19 @@ functions section.</para>
                     </para>
                 </listitem>
                 <listitem>
-                    <para>Exclude those who contributed bug notes from getting
-                        messages about other changes in the bug.
+                    <para>Exclude those who contributed issue notes from getting
+                        messages about other changes in the issue.
                         <programlisting>$g_default_notify_flags['bugnotes'] = OFF;</programlisting>
                     </para>
                 </listitem>
                 <listitem>
-                    <para>Exclude those monitoring bugs from seeing the 'closed'
+                    <para>Exclude those monitoring issues from seeing the 'closed'
                         message
                         <programlisting>$g_notify_flags['closed']['monitor'] = OFF;</programlisting>
                     </para>
                 </listitem>
                 <listitem>
-                    <para>Only notify developers when bugnotes are added.
+                    <para>Only notify developers when issue notes are added.
                         <programlisting>$g_notify_flags['bugnote']['threshold_min'] = DEVELOPER;
                             $g_notify_flags['bugnote']['threshold_max'] = DEVELOPER;
                         </programlisting>
@@ -636,7 +636,7 @@ functions section.</para>
                 <listitem>
                     <para>I'm paranoid about mail. Only send information on issues
                         to those involved in them. Don't send mail people already know
-                        about. Also send new bug notifications to managers so they can
+                        about. Also send new issue notifications to managers so they can
                         screen them.
                         <programlisting>$g_mail_receive_own = OFF; 
                             $g_default_notify_flags =
@@ -780,20 +780,20 @@ functions section.</para>
                     Changelogcustom_function_default_checkin( $p_issue_id, $p_comment,
                     $p_file, $p_new_version ) registers a checkin in source control in
                     MantisBT custom_function_default_issue_update_validate( $p_issue_id,
-                    $p_new_bug, $p_bug_note_text ) validate bug field settings before
+                    $p_new_bug, $p_bug_note_text ) validate issue field settings before
                     an update occurs. It returns true or fails with an
                     error.custom_function_default_issue_update_notify( $p_issue_id )
-                    notify after a bug has been
+                    notify after an issue has been
                     updatedcustom_function_default_issue_create_validate( $p_new_bug )
-                    validate bug field settings before an issue is created. It returns
+                    validate issue field settings before an issue is created. It returns
                     true or fails with an
                     error.custom_function_default_issue_create_notify( $p_issue_id )
-                    notify after a bug has been
+                    notify after an issue has been
                     openedcustom_function_default_issue_delete_validate( $p_issue_id )
-                    validate bug field settings before an issue can be deleted. It
+                    validate issue field settings before an issue can be deleted. It
                     returns true or fails with an
                     error.custom_function_default_issue_delete_notify( $p_issue_id )
-                    notify after a bug has been deleted
+                    notify after an issue has been deleted
                 </para>
             </section>
 
