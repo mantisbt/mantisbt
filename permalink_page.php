@@ -37,16 +37,18 @@
 ?>
 <div align="center">
 	<p>
-	<?php
-		echo lang_get( 'filter_permalink' ), '<br />';
-		echo "<a href=\"$f_url\">$f_url</a>"; ?></p><br />
 <?php
+	echo lang_get( 'filter_permalink' ), '<br />';
+	echo "<a href=\"$f_url\">$f_url</a></p>";
 
-	print_bracket_link( 
-		sprintf( config_get( 'create_short_url' ), $f_url ), 
-		lang_get( 'create_short_link' ), 
-		/* new window = */ true );
+	$t_create_short_url = config_get( 'create_short_url' );
 
+	if ( !is_blank( $t_create_short_url ) ) {
+		print_bracket_link( 
+			sprintf( $t_create_short_url, $f_url ), 
+			lang_get( 'create_short_link' ), 
+			/* new window = */ true );
+	}
 ?>
 </div>
 <?php
