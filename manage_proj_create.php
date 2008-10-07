@@ -40,8 +40,8 @@
 	$f_view_state	= gpc_get_int( 'view_state' );
 	$f_status		= gpc_get_int( 'status' );
 	$f_file_path	= gpc_get_string( 'file_path', '' );
-	$f_inherit_global = gpc_get_bool( 'inherit_global', 1 );
-	$f_inherit_parent = gpc_get_bool( 'inherit_parent', 1 );
+	$f_inherit_global = gpc_get_bool( 'inherit_global', 0 );
+	$f_inherit_parent = gpc_get_bool( 'inherit_parent', 0 );
 
 	$f_parent_id	= gpc_get_int( 'parent_id', 0 );
 
