@@ -223,6 +223,12 @@
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_category_ids[] = $t_row['id'];
 		}
+
+		# Handle projects with no categories
+		if ( count( $t_category_ids ) < 1 ) {
+			return true;
+		}
+
 		$t_category_ids = join( ',', $t_category_ids );
 
 		# update bug history entries
