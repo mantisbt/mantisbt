@@ -28,6 +28,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Helix84
  * @author Lubos Magat <lubos@magat.sk>
  */
 
@@ -41,13 +42,25 @@ $s_actiongroup_menu_resolve = 'Vyriešiť';
 $s_actiongroup_menu_update_priority = 'Aktualizovať prioritu';
 $s_actiongroup_menu_update_status = 'Aktualizovať status';
 $s_actiongroup_menu_update_view_status = 'Aktualizovať stav';
+$s_actiongroup_menu_update_category = 'Aktualizovať kategóriu';
+$s_actiongroup_menu_set_sticky = 'Nastaviť/zrušiť lepkavosť';
+$s_actiongroup_menu_update_field = 'Aktualizovať %s';
+$s_actiongroup_menu_update_target_version = 'Aktualizovať Cieľovú verziu';
+$s_actiongroup_menu_update_fixed_in_version = 'Aktualizovať Opravené vo verzii';
+$s_actiongroup_menu_update_product_build = 'Aktualizovať Zostavenie produktu';
+$s_actiongroup_menu_add_note = 'Pridať poznámku';
+$s_actiongroup_menu_attach_tags = 'Pridať značky';
 $s_actiongroup_bugs = 'Vybrané problémy';
+$s_actiongroup_error_issue_is_readonly = 'Problém je iba na čítanie.';
 $s_all_projects = 'Všetky projekty';
 $s_move_bugs = 'Presunúť bugy';
 $s_operation_successful = 'Operácia prebehla úspešne.';
 $s_date_order = 'Usporiadať podľa dátumu';
 $s_print_all_bug_page_link = 'Vytlačiť reporty';
+$s_csv_export = 'Export do CSV';
+$s_excel_export = 'Export do Excelu';
 $s_login_anonymously = 'Prihlásiť sa anonymne';
+$s_anonymous = 'Anonym';
 $s_jump_to_bugnotes = 'Preskočiť na poznámky k bugom';
 $s_public_project_msg = 'Tento projekt je VEREJNÝ.  Všetci používatelia majú prístup k tomuto projektu..';
 $s_private_project_msg = 'Tento projekt je PRIVÁTNY.  Iba administrátori a manuálne pridaní používatelia majú prístup k tomuto projektu.';
@@ -60,6 +73,10 @@ $s_jump = 'Preskočiť';
 $s_copy_users = 'Kopírovať používateľov';
 $s_copy_categories_from = 'Kopírovať kategórie z';
 $s_copy_categories_to = 'Kopírovať kategórie do';
+$s_copy_versions_from = 'Kopírovať verzie z';
+$s_copy_versions_to = 'Kopírovať verzie do';
+$s_copy_users_from = 'Kopírovať používateľov z';
+$s_copy_users_to = 'Kopírovať používateľov do';
 $s_bug_history = 'História bugov';
 $s_field = 'Pole';
 $s_old_value = 'Stará hodnota';
@@ -77,6 +94,8 @@ $s_delete_bugnote_sure_msg = 'Ste si istí, že chcete zmazať túto poznámku k
 $s_bug_relationships = 'Vzťahy';
 $s_empty_password_sure_msg = 'Užívateľ má prázdné heslo.  Naozaj je to to, co si prajete?';
 $s_empty_password_button = 'Používať prázdne heslá';
+$s_reauthenticate_title = 'Overiť';
+$s_reauthenticate_message = 'Vstupujete na zabezpečenú stránku a vaša relácia vypršala. Prosím, overte sa, abby ste mohli pokračovať.';
 $s_duplicate_of = 'duplicita %id';
 $s_has_duplicate = 'má duplicitné %id';
 $s_related_to = 'vo vzťahu s %id';

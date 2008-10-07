@@ -29,6 +29,7 @@
  * @file
  *
  * @author Darth Kule
+ * @author Giallu
  * @author Lele Gaifax, lele@seldati.it
  * @author Luca Pescatore, l.pescatore@network.it
  * @author Marcello Scatà, marcello@marcelloscata.com
@@ -684,6 +685,7 @@ $s_delete_version_button = 'Elimina versione';
 $s_edit_project_version_title = 'Modifica la versione del progetto';
 $s_update_version_button = 'Aggiorna versione';
 $s_released = 'Rilasciata';
+$s_obsolete = 'Obsoleto';
 $s_version_updated_msg = 'La versione è stata aggiornata...';
 $s_account_delete_protected_msg = 'Account protetto.  Non è possibile eliminarlo.';
 $s_account_deleted_msg = 'L\'account è stato eliminato...';
