@@ -127,8 +127,8 @@
 	for ( $i = 0; $i <= 9; $i++ ) {
 		$t_prefix_array[] = "$i";
 	}
-	$t_prefix_array[] = 'UNUSED';
-	$t_prefix_array[] = 'NEW';
+	$t_prefix_array[] = lang_get( 'users_unused' );
+	$t_prefix_array[] = lang_get( 'users_new' );
 	
 	echo '<br /><center><table class="width75"><tr>';
 	foreach ( $t_prefix_array as $t_prefix ) {

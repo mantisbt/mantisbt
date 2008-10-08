@@ -483,7 +483,7 @@
 		# print db queries that were run
 		if ( helper_show_queries() ) {
 			$t_count = count( $g_queries_array );
-			echo "\t",  $t_count, ' total queries executed.<br />', "\n";
+			echo "\t",  $t_count, ' ', lang_get( 'total_queries_executed' ), '<br />', "\n";
 			$t_unique_queries = 0;
 			$t_shown_queries = array();
 			for ( $i = 0; $i < $t_count; $i++ ) {
@@ -495,7 +495,7 @@
 					$g_queries_array[$i][3] = true;
 				}
 			}
-			echo "\t",  $t_unique_queries . ' unique queries executed.<br />', "\n";
+			echo "\t",  $t_unique_queries, ' ', lang_get( 'unique_queries_executed' ), '<br />', "\n";
 			if ( ON == config_get( 'show_queries_list' ) ) {
 				echo "\t",  '<table>', "\n";
 				$t_total = 0;

@@ -669,6 +669,10 @@ $s_edited_on = 'edited on: ';
 $s_hide_content = 'Hide Content';
 $s_show_content = 'Show Content';
 
+# html_api.php
+$s_total_queries_executed = 'total queries executed.';
+$s_unique_queries_executed = 'unique queries executed.';
+
 # index.php
 $s_click_to_login = 'Click here to login';
 
@@ -959,6 +963,8 @@ $s_delete_user_button = 'Delete User';
 $s_reset_password_msg = 'Reset Password sends the confirmation URL via e-mail.';
 $s_reset_password_msg2 = 'Reset Password resets the password to be blank.';
 $s_show_all_users = 'ALL';
+$s_users_unused = 'UNUSED';
+$s_users_new = 'NEW';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Account protected. Cannot reset the password.';
