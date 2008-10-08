@@ -14,16 +14,16 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * @package MantisBT
-	 * @version $Id$
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
-	 /**
-	  * Mantis Core API's
-	  */
-	require_once( 'core.php' );
+/**
+ * @package MantisBT
+ * @version $Id$
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
+ /**
+  * Mantis Core API's
+  */
+require_once( 'core.php' );
 
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
@@ -57,6 +57,8 @@ foreach( $t_plugins as $t_basename => $t_plugin ) {
 
 <?php if ( 0 < count( $t_plugins_installed ) ) { ?>
 <br/>
+<form action="manage_plugin_update.php" method="post">
+<?php echo form_security_field( 'manage_plugin_update' ) ?>
 <table class="width100" cellspacing="1">
 
 <!-- Title -->
@@ -70,8 +72,8 @@ foreach( $t_plugins as $t_basename => $t_plugin ) {
 <!-- Info -->
 <tr class="row-category">
 	<td width="20%"><?php echo lang_get( 'plugin' ) ?></td>
-	<td width="40%"><?php echo lang_get( 'plugin_description' ) ?></td>
-	<td width="15%"><?php echo lang_get( 'plugin_depends' ) ?></td>
+	<td width="35%"><?php echo lang_get( 'plugin_description' ) ?></td>
+	<td width="20%"><?php echo lang_get( 'plugin_depends' ) ?></td>
 	<td width="7%"><?php echo lang_get( 'plugin_priority' ) ?></td>
 	<td width="8%"><?php echo lang_get( 'plugin_protected' ) ?></td>
 	<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
@@ -110,31 +112,22 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 		$t_url = '<br/>' . lang_get( 'plugin_url' ) . "<a href=\"$t_url\">$t_url</a>";
 	}
 
-	$t_upgrade = '';
-	if ( plugin_needs_upgrade( $t_plugin ) ) {
-		$t_upgrade = '<form action="manage_plugin_upgrade.php?name='.$t_basename.'" method="post">'.
-			'<input type="submit" value="'.lang_get( 'plugin_upgrade' ).'"></form>';
-	}
-
-	$t_uninstall = '';
-	if ( 'MantisCore' != $t_basename && !$t_protected ) {
-		$t_uninstall = '<form action="manage_plugin_uninstall.php?name='.$t_basename.'" method="post">'.
-			'<input type="submit" value="'.lang_get( 'plugin_uninstall' ).'"></form>';
-	}
+	$t_upgrade = plugin_needs_upgrade( $t_plugin );
+	$t_uninstall = ( 'MantisCore' != $t_basename && !$t_protected );
 
 	if ( is_array( $t_requires ) ) {
 		foreach( $t_requires as $t_plugin => $t_version ) {
 			$t_dependency = plugin_dependency( $t_plugin, $t_version );
 			if ( 1 == $t_dependency ) {
 				if ( is_blank( $t_upgrade ) ) {
-					$t_depends[] = '<span class="dependency_met">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
+					$t_depends[] = '<span class="small dependency_met">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
 				} else {
-					$t_depends[] = '<span class="dependency_upgrade">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
+					$t_depends[] = '<span class="small dependency_upgrade">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
 				}
 			} elseif ( -1 == $t_dependency ) {
-				$t_depends[] = '<span class="dependency_dated">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
+				$t_depends[] = '<span class="small dependency_dated">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
 			} else {
-				$t_depends[] = '<span class="dependency_unmet">'.string_display_line( $t_plugin.' '.$t_version ).'</span>';
+				$t_depends[] = '<span class="small dependency_unmet">'.string_display_line( $t_plugin.' '.$t_version ).'</span>';
 			}
 		}
 	}
@@ -142,27 +135,33 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	if ( 0 < count( $t_depends ) ) {
 		$t_depends = implode( $t_depends, '<br/>' );
 	} else {
-		$t_depends = '<span class="dependency_met">' . lang_get( 'plugin_no_depends' ) . '</span>';
+		$t_depends = '<span class="small dependency_met">' . lang_get( 'plugin_no_depends' ) . '</span>';
 	}
 
 	echo '<tr ',helper_alternate_class(),'>';
-	echo '<td class="center">',$t_name,'</td>';
-	echo '<td>',$t_description,$t_author,$t_url,'</td>';
-	echo '<td class="center">',$t_depends,'</td>';
+	echo '<td class="small center">',$t_name,'<input type="hidden" name="change_',$t_basename,'" value="1"/></td>';
+	echo '<td class="small">',$t_description,$t_author,$t_url,'</td>';
+	echo '<td class="small center">',$t_depends,'</td>';
 	if ( 'MantisCore' != $t_basename ) {
-		echo '<td class="center"><form action="manage_plugin_update.php?name='.$t_basename.'" method="post">',
-				'<select name="priority">',print_plugin_priority_list( $t_priority ),'</select>','</td>';
-		echo '<td class="center">','<input type="checkbox" name="protected" value="1" '.( $t_protected ? 'checked="checked" ' : '').'/>','</td>';
-		$t_update = '<input type="submit" value="'.lang_get( 'plugin_update' ).'"></form>';
+		echo '<td class="center">','<select name="priority_',$t_basename,'">',print_plugin_priority_list( $t_priority ),'</select>','</td>';
+		echo '<td class="center">','<input type="checkbox" name="protected_',$t_basename,'" '.( $t_protected ? 'checked="checked" ' : '').'/>','</td>';
 	} else {
 		echo '<td>&nbsp;</td><td>&nbsp;</td>';
-		$t_update = '';
 	}
-	echo '<td class="center">',$t_update,$t_upgrade,$t_uninstall,'</td>';
-	echo '</tr>';
+	echo '<td class="center">';
+	if ( $t_upgrade ) { print_bracket_link( 'manage_plugin_upgrade.php?name=' . $t_basename, lang_get( 'plugin_upgrade' ) ); }
+	if ( $t_uninstall ) { print_bracket_link( 'manage_plugin_uninstall.php?name=' . $t_basename, lang_get( 'plugin_uninstall' ) ); }
+	echo '</td></tr>';
 } ?>
 
+<tr>
+	<td colspan="3"></td>
+	<td colspan="2" class="center"><input type="submit" value="<?php echo lang_get( 'plugin_update' ) ?>"/></td>
+	<td></td>
+</tr>
+
 </table>
+</form>
 <?php } ?>
 
 <?php if ( 0 < count( $t_plugins_available ) ) { ?>
@@ -179,8 +178,8 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 
 <!-- Info -->
 <tr class="row-category">
-	<td width="20%"><?php echo lang_get( 'plugin' ) ?></td>
-	<td width="50%"><?php echo lang_get( 'plugin_description' ) ?></td>
+	<td width="25%"><?php echo lang_get( 'plugin' ) ?></td>
+	<td width="45%"><?php echo lang_get( 'plugin_description' ) ?></td>
 	<td width="20%"><?php echo lang_get( 'plugin_depends' ) ?></td>
 	<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
 </tr>
@@ -217,13 +216,13 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 		foreach( $t_requires as $t_plugin => $t_version ) {
 			$t_dependency = plugin_dependency( $t_plugin, $t_version );
 			if ( 1 == $t_dependency ) {
-				$t_depends[] = '<span class="dependency_met">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</font>';
+				$t_depends[] = '<span class="small dependency_met">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</font>';
 			} elseif ( -1 == $t_dependency ) {
 				$t_ready = false;
-				$t_depends[] = '<span class="dependency_dated">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</font>';
+				$t_depends[] = '<span class="small dependency_dated">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</font>';
 			} else {
 				$t_ready = false;
-				$t_depends[] = '<span class="dependency_unmet">'.string_display_line( $t_plugin.' '.$t_version ).'</font>';
+				$t_depends[] = '<span class="small dependency_unmet">'.string_display_line( $t_plugin.' '.$t_version ).'</font>';
 			}
 		}
 	}
@@ -231,21 +230,16 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 	if ( 0 < count( $t_depends ) ) {
 		$t_depends = implode( $t_depends, '<br/>' );
 	} else {
-		$t_depends = '<span class="dependency_met">' . lang_get( 'plugin_no_depends' ) . '</font>';
-	}
-
-	$t_install = '';
-	if ( $t_ready ) {
-		$t_install = '<form action="manage_plugin_install.php?name='.$t_basename.'" method="post">'.
-			'<input type="submit" value="'.lang_get( 'plugin_install' ).'"></form>';
+		$t_depends = '<span class="small dependency_met">' . lang_get( 'plugin_no_depends' ) . '</font>';
 	}
 
 	echo '<tr ',helper_alternate_class(),'>';
-	echo '<td class="center">',$t_name,'</td>';
-	echo '<td>',$t_description,$t_author,$t_url,'</td>';
+	echo '<td class="small center">',$t_name,'</td>';
+	echo '<td class="small">',$t_description,$t_author,$t_url,'</td>';
 	echo '<td class="center">',$t_depends,'</td>';
-	echo '<td class="center">',$t_install,'</td>';
-	echo '</tr>';
+	echo '<td class="center">';
+	if ( $t_ready ) { print_bracket_link( 'manage_plugin_install.php?name='.$t_basename, lang_get( 'plugin_install' ) ); }
+	echo '</td></tr>';
 } ?>
 
 </table>
