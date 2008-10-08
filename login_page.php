@@ -145,7 +145,7 @@
 		# Warning, if plain passwords are selected
 		if ( config_get( 'login_method' ) === PLAIN ) {
 			echo '<div class="warning" align="center">', "\n";
-			echo "\t", '<p><font color="red"><strong>WARNING:</strong> Plain password authentication is used, this will expose your passwords to administrators.</font></p>', "\n";
+			echo "\t", '<p><font color="red">', lang_get( 'warning_plain_password_authentication' ), '</font></p>', "\n";
 			echo '</div>', "\n";
 		}
 
@@ -154,7 +154,7 @@
 		if ( $t_admin_user_id !== false ) {
 			if ( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
 				echo '<div class="warning" align="center">', "\n";
-				echo "\t", '<p><font color="red"><strong>WARNING:</strong> You should disable the default "administrator" account or change its password.</font></p>', "\n";
+				echo "\t", '<p><font color="red">', lang_get( 'warning_default_administrator_account_present' ), '</font></p>', "\n";
 				echo '</div>', "\n";
 			}
 		}
@@ -163,7 +163,7 @@
 		$t_admin_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
 		if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) ) {
 			echo '<div class="warning" align="center">', "\n";
-			echo '<p><font color="red"><strong>WARNING:</strong> Admin directory should be removed.</font></p>', "\n";
+			echo '<p><font color="red">', lang_get( 'warning_admin_directory_present' ), '</font></p>', "\n";
 			echo '</div>', "\n";
 				
 			# since admin directory and db_upgrade lists are available check for missing db upgrades	
@@ -189,12 +189,12 @@
 					# old upgrade tables exist. 
 					# assume user is upgrading from <1.0 and therefore needs to update to 1.x before upgrading to 1.2
 					echo '<div class="warning" align="center">';
-					echo '<p><font color="red"><strong>ERROR:</strong> The database structure appears to be out of date (config(databaseversion) is 0 and old upgrade tables exist). Version 1.x of mantis introduced a new upgrade process. You appear to be upgrading from a 0.XX Release. Please upgrade to 1.0.8 or 1.1.X, then upgrade to 1.2.</font></p>';
+					echo '<p><font color="red">', lang_get( 'error_database_version_out_of_date_1' ), '</font></p>';
 					echo '</div>';
 				} else {
 					# old upgrade tables do not exist, yet config database_version is 0
 					echo '<div class="warning" align="center">';
-					echo '<p><font color="red"><strong>ERROR:</strong> The database structure appears to be out of date(config(databaseversion) is 0 and old upgrade tables do not exist). Please check that your database is running - we can not retrieve the database schema version. Config Table did not return a valid database schema version - please ask for support on the mantis-help mailing list if required.</font></p>';
+					echo '<p><font color="red">', lang_get( 'error_database_no_schema_version' ), '</font></p>';
 					echo '</div>';
 				}
 			}
@@ -208,11 +208,11 @@
 
 				if ( $t_db_version < $t_upgrades_reqd ) {
 					echo '<div class="warning" align="center">';
-					echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.</font></p>';
+					echo '<p><font color="red">', lang_get( 'error_database_version_out_of_date_2' ), '</font></p>';
 					echo '</div>';
 				} else {
 					echo '<div class="warning" align="center">';
-					echo '<p><font color="red"><strong>WARNING:</strong> The database structure is more up-to-date than the code installed.  Please upgrade the code.</font></p>';
+					echo '<p><font color="red">', lang_get( 'error_code_version_out_of_date' ), '</font></p>';
 					echo '</div>';
 				}
 			}
