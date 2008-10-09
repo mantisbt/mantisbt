@@ -17,29 +17,27 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
-?>
-<?php
-	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
-	access_ensure_global_level( ADMINISTRATOR );
+require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
+access_ensure_global_level( ADMINISTRATOR );
 
-	foreach( $g_file_type_icons as $t_ext => $t_filename ) {
-		$t_file_path = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileicons' . DIRECTORY_SEPARATOR . $t_filename;
+$t_core_path = config_get( 'core_path' );
 
-		echo "Testing icon for extension '$t_ext'... $t_file_path ... ";
-		flush();
+foreach( $g_file_type_icons as $t_ext => $t_filename ) {
+	$t_file_path = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileicons' . DIRECTORY_SEPARATOR . $t_filename;
 
-		if ( file_exists( $t_file_path ) ) {
-			echo 'OK';
-		} else {
-			echo '<font color="red">NOT FOUND</font>';
-		}
-		
-		echo '<br />';
+	echo "Testing icon for extension '$t_ext'... $t_file_path ... ";
+	flush();
+
+	if ( file_exists( $t_file_path ) ) {
+		echo 'OK';
+	} else {
+		echo '<font color="red">NOT FOUND</font>';
 	}
-?>
+
+	echo '<br />';
+}

@@ -17,48 +17,48 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	function check_database_support($p_db_type) {
-		$t_support = false;
-		switch ($p_db_type) {
-			case 'mysql':
-				$t_support = function_exists('mysql_connect');
-				break;
-			case 'mysqli':
-				$t_support = function_exists('mysqli_connect');
-				break;
-			case 'pgsql':
-				$t_support = function_exists('pg_connect');
-				break;
-			case 'mssql':
-				$t_support = function_exists('mssql_connect');
-				break;
-			case 'oci8':
-				$t_support = function_exists('OCILogon');
-				break;
-			case 'db2':
-				$t_support = function_exists( 'db2_connect' );
-				break;
-			case 'odbc_mssql':
-				$t_support = function_exists('odbc_connect');
-				break;								
-			default:
-				$t_support = false;
-		}
-		return $t_support;
+function check_database_support($p_db_type) {
+	$t_support = false;
+	switch ($p_db_type) {
+		case 'mysql':
+			$t_support = function_exists('mysql_connect');
+			break;
+		case 'mysqli':
+			$t_support = function_exists('mysqli_connect');
+			break;
+		case 'pgsql':
+			$t_support = function_exists('pg_connect');
+			break;
+		case 'mssql':
+			$t_support = function_exists('mssql_connect');
+			break;
+		case 'oci8':
+			$t_support = function_exists('OCILogon');
+			break;
+		case 'db2':
+			$t_support = function_exists( 'db2_connect' );
+			break;
+		case 'odbc_mssql':
+			$t_support = function_exists('odbc_connect');
+			break;
+		default:
+			$t_support = false;
 	}
-	
-	function check_php_version( $p_version ) {
-		if ($p_version == PHP_MIN_VERSION) {
-			return true;
-		} else {
-			if ( function_exists ( 'version_compare' ) ) {
-				if ( version_compare ( phpversion() , PHP_MIN_VERSION, '>=' ) ) {
-					return true;
-				} else {
-					return false;
-				}
+	return $t_support;
+}
+
+function check_php_version( $p_version ) {
+	if ($p_version == PHP_MIN_VERSION) {
+		return true;
+	} else {
+		if ( function_exists ( 'version_compare' ) ) {
+			if ( version_compare ( phpversion() , PHP_MIN_VERSION, '>=' ) ) {
+				return true;
 			} else {
-			 	return false;
+				return false;
 			}
+		} else {
+		 	return false;
 		}
 	}
+}

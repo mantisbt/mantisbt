@@ -17,14 +17,13 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
-	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
-	access_ensure_global_level( ADMINISTRATOR );
-
+access_ensure_global_level( ADMINISTRATOR );
 ?>
 <html>
 <head>
@@ -55,9 +54,8 @@
 	<table width="75%"><tr><td align="center">
 		<p>[ <a href="test_icons.php">Test Icons</a> ]</p>
 		<p>[ <a href="test_langs.php">Test Langs</a> ]</p>
-		
-	</td></tr></table>
 
+	</td></tr></table>
 </div>
 </body>
 </html>

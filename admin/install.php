@@ -17,76 +17,76 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
-	error_reporting( E_ALL );
+error_reporting( E_ALL );
 
-	//@@@ put this somewhere
-	@set_time_limit ( 0 ) ;
-	$g_skip_open_db = true;  # don't open the database in database_api.php
-	define( 'MANTIS_INSTALLER', true );
-	define( 'PLUGINS_DISABLED', true );
-	@require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
-	@require_once( 'install_functions.php' );
-	@require_once( 'install_helper_functions.php' );
-	$g_error_send_page_header = false; # bypass page headers in error handler
+//@@@ put this somewhere
+@set_time_limit ( 0 ) ;
+$g_skip_open_db = true;  # don't open the database in database_api.php
+define( 'MANTIS_INSTALLER', true );
+define( 'PLUGINS_DISABLED', true );
+@require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+@require_once( 'install_functions.php' );
+@require_once( 'install_helper_functions.php' );
+$g_error_send_page_header = false; # bypass page headers in error handler
 
-	define( 'BAD', 0 );
-	define( 'GOOD', 1 );
-	$g_failed = false;
-	$g_database_upgrade = false; 
-	
-	# -------
-	# print test result
-	function print_test_result( $p_result, $p_hard_fail=true, $p_message='' ) {
-		global $g_failed;
-		echo '<td ';
-		if ( BAD == $p_result ) {
-			if ( $p_hard_fail ) {
-				$g_failed = true;
-				echo 'bgcolor="red">BAD';
-			} else {
-				echo 'bgcolor="pink">POSSIBLE PROBLEM';
-			}
-			if ( '' != $p_message ) {
-				echo '<br />' . $p_message;
-			}
+define( 'BAD', 0 );
+define( 'GOOD', 1 );
+$g_failed = false;
+$g_database_upgrade = false;
+
+# -------
+# print test result
+function print_test_result( $p_result, $p_hard_fail=true, $p_message='' ) {
+	global $g_failed;
+	echo '<td ';
+	if ( BAD == $p_result ) {
+		if ( $p_hard_fail ) {
+			$g_failed = true;
+			echo 'bgcolor="red">BAD';
+		} else {
+			echo 'bgcolor="pink">POSSIBLE PROBLEM';
 		}
-
-		if ( GOOD == $p_result ) {
-			echo 'bgcolor="green">GOOD';			
+		if ( '' != $p_message ) {
+			echo '<br />' . $p_message;
 		}
-		echo '</td>';
 	}
 
-	# -------
-	# print test header and result
-	function print_test( $p_test_description, $p_result, $p_hard_fail=true, $p_message='' ) {
-
-		echo "\n<tr><td bgcolor=\"#ffffff\">$p_test_description</td>";
-		print_test_result( $p_result, $p_hard_fail, $p_message );
-		echo "</tr>\n";
+	if ( GOOD == $p_result ) {
+		echo 'bgcolor="green">GOOD';
 	}
+	echo '</td>';
+}
 
-	# --------
-	# create an SQLArray to insert data
-	function InsertData( $p_table, $p_data ) {
-		$query = "INSERT INTO " . $p_table . $p_data;
-		return Array( $query );
-	}
+# -------
+# print test header and result
+function print_test( $p_test_description, $p_result, $p_hard_fail=true, $p_message='' ) {
 
-	# install_state
-	#   0 = no checks done
-	#   1 = server ok, get database information
-	#   2 = check the database information
-	#   3 = install the database
-	#   4 = get additional config file information
-	#   5 = write the config file
-	#	6 = post install checks
-	#	7 = done, link to login or db updater
-	$t_install_state = gpc_get_int( 'install', 0 );
+	echo "\n<tr><td bgcolor=\"#ffffff\">$p_test_description</td>";
+	print_test_result( $p_result, $p_hard_fail, $p_message );
+	echo "</tr>\n";
+}
+
+# --------
+# create an SQLArray to insert data
+function InsertData( $p_table, $p_data ) {
+	$query = "INSERT INTO " . $p_table . $p_data;
+	return Array( $query );
+}
+
+# install_state
+#   0 = no checks done
+#   1 = server ok, get database information
+#   2 = check the database information
+#   3 = install the database
+#   4 = get additional config file information
+#   5 = write the config file
+#	6 = post install checks
+#	7 = done, link to login or db updater
+$t_install_state = gpc_get_int( 'install', 0 );
 ?>
 <html>
 <head>
@@ -143,9 +143,6 @@ if ( 0 == $t_install_state ) {
 </tr>
 <?php
 }
-?>
-
-<?php
 
 	$t_config_filename = $g_absolute_path . 'config_inc.php';
 	$t_config_exists = file_exists ( $t_config_filename );
@@ -162,16 +159,16 @@ if ( 0 == $t_install_state ) {
 		$f_database_name = config_get( 'database_name', '');
 		$f_db_username = config_get( 'db_username', '' );
 		$f_db_password = config_get( 'db_password', '' );
-	
+
 		if ( 0 == $t_install_state ) {
 			print_test( 'Setting Database Type', '' !== $f_db_type , true, 'database type is blank?' );
 			print_test( 'Checking Database connection settings exist', ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) ) , true, 'database connection settings do not exist?' );
 			print_test( 'Checking PHP support for database type', check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.');
 		}
-		
+
 		$g_db = ADONewConnection($f_db_type);
 		$t_result = @$g_db->Connect($f_hostname, $f_db_username, $f_db_password, $f_database_name);
-		if( $g_db->IsConnected() ) { 
+		if( $g_db->IsConnected() ) {
 			$g_db_connected = true;
 		}
 		$t_cur_version = config_get( 'database_version', -1);
@@ -182,8 +179,8 @@ if ( 0 == $t_install_state ) {
 			if ( 0 == $t_install_state ) {
 				print_test( 'Config File Exists but Database does not', false , false, 'Bad config_inc.php?' );
 			}
-		}	
-		
+		}
+
 	} else {
 		# read control variables with defaults
 		$f_hostname = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
@@ -192,7 +189,7 @@ if ( 0 == $t_install_state ) {
 		$f_db_username = gpc_get( 'db_username', config_get( 'db_username', '' ) );
 		$f_db_password = gpc_get( 'db_password', config_get( 'db_password', '' ) );
 		if ( CONFIGURED_PASSWORD == $f_db_password ) {
-			$f_db_password = config_get( 'db_password' ); 
+			$f_db_password = config_get( 'db_password' );
 		}
 	}
 	$f_admin_username = gpc_get( 'admin_username', '' );
@@ -200,7 +197,7 @@ if ( 0 == $t_install_state ) {
 	$f_log_queries = gpc_get_bool( 'log_queries', false );
 	$f_db_exists = gpc_get_bool( 'db_exists', false );
 
-	$f_db_schema='';	
+	$f_db_schema='';
 	if ( $f_db_type == 'db2' ) {
 		# If schema name is supplied, then separate it from database name.
 		if ( strpos( $f_database_name, '/' ) != false ) {
@@ -208,7 +205,7 @@ if ( 0 == $t_install_state ) {
 			list( $f_database_name, $f_db_schema ) = split( '/', $f_db2AS400, 2 );
 		}
 	}
-	
+
 	if ( 0 == $t_install_state ) {
 ?>
 
@@ -255,12 +252,12 @@ if ( 2 == $t_install_state ) {
 		Setting Admin Username
 	</td>
 	<?php
-			if ( '' !== $f_admin_username ) {
-				print_test_result( GOOD );
-			} else {
-				print_test_result( BAD, false, 'admin user name is blank, using database user instead' );
-				$f_admin_username = $f_db_username;
-			}
+		if ( '' !== $f_admin_username ) {
+			print_test_result( GOOD );
+		} else {
+			print_test_result( BAD, false, 'admin user name is blank, using database user instead' );
+			$f_admin_username = $f_db_username;
+		}
 	?>
 </tr>
 <tr>
@@ -268,16 +265,16 @@ if ( 2 == $t_install_state ) {
 		Setting Admin Password
 	</td>
 	<?php
-			if ( '' !== $f_admin_password ) {
-				print_test_result( GOOD );
+		if ( '' !== $f_admin_password ) {
+			print_test_result( GOOD );
+		} else {
+			if (  '' != $f_db_password ) {
+				print_test_result( BAD, false, 'admin user password is blank, using database user password instead' );
+				$f_admin_password = $f_db_password;
 			} else {
-				if (  '' != $f_db_password ) {
-					print_test_result( BAD, false, 'admin user password is blank, using database user password instead' );
-					$f_admin_password = $f_db_password;
-				} else {
-					print_test_result( GOOD );
-				}
+				print_test_result( GOOD );
 			}
+		}
 	?>
 </tr>
 
@@ -287,7 +284,7 @@ if ( 2 == $t_install_state ) {
 		Attempting to connect to database as admin
 	</td>
 	<?php
-        $t_db_open = false;
+		$t_db_open = false;
 		$g_db = ADONewConnection($f_db_type);
 		$t_result = @$g_db->Connect($f_hostname, $f_admin_username, $f_admin_password);
 
@@ -295,22 +292,20 @@ if ( 2 == $t_install_state ) {
 			# check if db exists for the admin
 			$t_result = @$g_db->Connect($f_hostname, $f_admin_username, $f_admin_password, $f_database_name);
 			if ( $t_result ) {
-    			$t_db_open = true;
+				$t_db_open = true;
 				$f_db_exists = true;
 			}
-    		if ( $f_db_type == 'db2' ) {
-    			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
-    			if ( $result === false ) {
-        			print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
-    			}
-    		} else {			
-			    print_test_result( GOOD );
+			if ( $f_db_type == 'db2' ) {
+				$result = &$g_db->execute( 'set schema ' . $f_db_schema );
+			if ( $result === false ) {
+				print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
+			}
+		} else {
+			print_test_result( GOOD );
 			}
 		} else {
 			print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' .  db_error_msg() . ' )' );
 		}
-
-		
 	?>
 </tr>
 <?php
@@ -326,23 +321,23 @@ if ( 2 == $t_install_state ) {
 
 		if ( $t_result == true ) {
 			$t_db_open = true;
-    		if ( $f_db_type == 'db2' ) {
-    			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
-    			if ( $result === false ) {
-        			print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
-    			}
-    		} else {		
-			    print_test_result( GOOD );
-		    }
+			if ( $f_db_type == 'db2' ) {
+				$result = &$g_db->execute( 'set schema ' . $f_db_schema );
+				if ( $result === false ) {
+					print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
+				}
+			} else {
+				print_test_result( GOOD );
+			}
 		} else {
 			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' .  db_error_msg() . ' )' );
 		}
 	?>
 </tr>
 
-<?php 
-    }
-    if( $t_db_open ) {
+<?php
+	}
+	if( $t_db_open ) {
 ?>
 <!-- display database version -->
 <tr>
@@ -371,7 +366,7 @@ if ( 2 == $t_install_state ) {
 			default:
 				break;
 		}
-			
+
 		print_test_result( ( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
 	?>
 </tr>
@@ -426,7 +421,7 @@ if ( 1 == $t_install_state ) {
 			} else {
 				echo '<option value="pgsql">PGSQL (experimental)</option>';
 			}
-			
+
 			if ( $f_db_type == 'oci8' ) {
 				echo '<option value="oci8" selected="selected">Oracle - oci8 (Experimental)</option>';
 			} else {
@@ -532,7 +527,6 @@ if ( 1 == $t_install_state ) {
 # all checks have passed, install the database
 if ( 3 == $t_install_state ) {
 ?>
-
 <table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
@@ -548,7 +542,7 @@ if ( 3 == $t_install_state ) {
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 
 		if ( $f_db_type == 'db2' ) {
-			$rs = $g_db->Execute("select * from SYSIBM.SCHEMATA WHERE SCHEMA_NAME = '" . $f_db_schema . "' AND SCHEMA_OWNER = '" . $f_db_username . "'" ); 
+			$rs = $g_db->Execute("select * from SYSIBM.SCHEMATA WHERE SCHEMA_NAME = '" . $f_db_schema . "' AND SCHEMA_OWNER = '" . $f_db_username . "'" );
 			if ( $rs === false ) {
 				echo "<br />false";
 			}
@@ -562,7 +556,7 @@ if ( 3 == $t_install_state ) {
 		}
 
 		$t_db_open = false;
-		
+
 	if ( $t_result == true ) {
 		print_test_result( GOOD );
 		$t_db_open = true;
@@ -574,7 +568,7 @@ if ( 3 == $t_install_state ) {
 		$dict = NewDataDictionary( $g_db );
 
 		if ( $f_db_type == 'db2' ) {
-			$rs = &$g_db->Execute("CREATE SCHEMA "   . $f_db_schema  );   
+			$rs = &$g_db->Execute("CREATE SCHEMA "   . $f_db_schema  );
 
 			if ( !$rs ) {
 				$t_result = false;
@@ -603,8 +597,8 @@ if ( 3 == $t_install_state ) {
 	}
 	?>
 </tr>
-<?php 
-    if( $t_db_open ) {
+<?php
+	if( $t_db_open ) {
 ?>
 <!-- display database version -->
 <tr>
@@ -632,12 +626,12 @@ if ( 3 == $t_install_state ) {
 			default:
 				break;
 		}
-			
+
 		print_test_result( ( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
 	?>
 </tr>
 <?php
-    }
+	}
 	$g_db->Close();
 ?>
 <tr>
@@ -701,33 +695,33 @@ if ( 3 == $t_install_state ) {
 			if ( $upgrade[$i][0] == 'InsertData' ) {
 				$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
 			} else if ( $upgrade[$i][0] == 'UpdateSQL' ) {
-    			$sqlarray = array( $upgrade[$i][1] );
-    			$t_target = $upgrade[$i][1];
-    		} else if ( $upgrade[$i][0] == 'UpdateFunction' ) {
-        		$sqlarray = array( $upgrade[$i][1] );
-        		$t_sql = false;
-    			$t_target = $upgrade[$i][1];
-    		} else {
-    			/* 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade. */
-    			if ( isset ( $upgrade[$i][2] ) ) {    			
+				$sqlarray = array( $upgrade[$i][1] );
+				$t_target = $upgrade[$i][1];
+			} else if ( $upgrade[$i][0] == 'UpdateFunction' ) {
+				$sqlarray = array( $upgrade[$i][1] );
+				$t_sql = false;
+				$t_target = $upgrade[$i][1];
+			} else {
+			/* 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade. */
+					if ( isset ( $upgrade[$i][2] ) ) {
 					if ( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) )
 						$sqlarray = call_user_func_array(Array($dict,$upgrade[$i][0]),$upgrade[$i][1]);
 					else
 						$sqlarray = array();
 				} else {
 					$sqlarray = call_user_func_array(Array($dict,$upgrade[$i][0]),$upgrade[$i][1]);
-				}				
+				}
 			}
 			if ( $f_log_queries ) {
 				foreach ( $sqlarray as $sql ) {
 					echo htmlentities( $sql ) . ";\r\n\r\n";
 				}
 			} else {
-    			echo 'Schema ' . $upgrade[$i][0] . ' ( ' . $t_target . ' )</td>';
-			    if ($t_sql)
-				    $ret = $dict->ExecuteSQLArray($sqlarray);
-				else 
-				    $ret = call_user_func( 'install_' . $sqlarray[0] );
+				echo 'Schema ' . $upgrade[$i][0] . ' ( ' . $t_target . ' )</td>';
+				if ($t_sql)
+					$ret = $dict->ExecuteSQLArray($sqlarray);
+				else
+					$ret = call_user_func( 'install_' . $sqlarray[0] );
 				if ( $ret == 2 ) {
 					print_test_result( GOOD );
 					config_set( 'database_version', $i );
@@ -904,7 +898,7 @@ if ( 6 == $t_install_state ) {
 
 		if ( $t_result != false ) {
 			print_test_result( GOOD );
-			
+
 		} else {
 			print_test_result( BAD, true, 'Database user doesn\'t have SELECT access to the database ( ' .  db_error_msg() . ' )' );
 		}
@@ -920,7 +914,7 @@ if ( 6 == $t_install_state ) {
 
 		if ( $t_result != false ) {
 			print_test_result( GOOD );
-			
+
 		} else {
 			print_test_result( BAD, true, 'Database user doesn\'t have INSERT access to the database ( ' .  db_error_msg() . ' )' );
 		}
@@ -936,7 +930,7 @@ if ( 6 == $t_install_state ) {
 
 		if ( $t_result != false ) {
 			print_test_result( GOOD );
-			
+
 		} else {
 			print_test_result( BAD, true, 'Database user doesn\'t have UPDATE access to the database ( ' .  db_error_msg() . ' )' );
 		}
@@ -952,7 +946,7 @@ if ( 6 == $t_install_state ) {
 
 		if ( $t_result != false ) {
 			print_test_result( GOOD );
-			
+
 		} else {
 			print_test_result( BAD, true, 'Database user doesn\'t have DELETE access to the database ( ' .  db_error_msg() . ' )' );
 		}
@@ -1003,12 +997,9 @@ if( $g_failed ) {
 	</td>
 </tr>
 </table>
-
 <?php
 }
 ?>
-
 </form>
-
 </body>
 </html>

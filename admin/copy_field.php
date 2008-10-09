@@ -17,18 +17,18 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# This upgrade moves attachments from the database to the disk
+# This upgrade moves attachments from the database to the disk
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
-	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
-	access_ensure_global_level( ADMINISTRATOR );
+access_ensure_global_level( ADMINISTRATOR );
 
-	$f_source_field_id = gpc_get_int( 'source_id' );
-	$f_dest_field = gpc_get( 'dest_id' );
+$f_source_field_id = gpc_get_int( 'source_id' );
+$f_dest_field = gpc_get( 'dest_id' );
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>

@@ -17,109 +17,108 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
-?>
-<?php
-	error_reporting( E_ALL );
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
-	$g_skip_open_db = true;  # don't open the database in database_api.php
+error_reporting( E_ALL );
 
-	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+$g_skip_open_db = true;  # don't open the database in database_api.php
 
-	$t_core_path = config_get_global( 'core_path' );
+require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
-	require_once ( $t_core_path . 'email_api.php' );
-	require_once ( $t_core_path . 'database_api.php' );
+$t_core_path = config_get_global( 'core_path' );
 
-	$f_mail_test	= gpc_get_bool( 'mail_test' );
-	$f_password		= gpc_get_string( 'password', null );
+require_once ( $t_core_path . 'email_api.php' );
+require_once ( $t_core_path . 'database_api.php' );
 
-	define( 'BAD', 0 );
-	define( 'GOOD', 1 );
+$f_mail_test	= gpc_get_bool( 'mail_test' );
+$f_password		= gpc_get_string( 'password', null );
 
-	function print_test_result( $p_result ) {
-		if ( BAD == $p_result ) {
-			echo '<td bgcolor="#ff0088">BAD</td>';
-		}
+define( 'BAD', 0 );
+define( 'GOOD', 1 );
 
-		if ( GOOD == $p_result ) {
-			echo '<td bgcolor="#00ff88">GOOD</td>';
-		}
+function print_test_result( $p_result ) {
+	if ( BAD == $p_result ) {
+		echo '<td bgcolor="#ff0088">BAD</td>';
 	}
 
-	function print_yes_no( $p_result ) {
-		if ( ( 0 === $p_result ) || ( "no" === strtolower( $p_result ) ) ) {
-			echo 'No';
-		}
+	if ( GOOD == $p_result ) {
+		echo '<td bgcolor="#00ff88">GOOD</td>';
+	}
+}
 
-		if ( ( 1 === $p_result ) || ( "yes" === strtolower( $p_result ) ) ) {
-			echo 'Yes';
-		}
+function print_yes_no( $p_result ) {
+	if ( ( 0 === $p_result ) || ( "no" === strtolower( $p_result ) ) ) {
+		echo 'No';
 	}
 
-	function print_test_row( $p_description, $p_pass )
-	{
-		echo '<tr>';
-		echo '<td bgcolor="#ffffff">';
-		echo $p_description;
-		echo '</td>';
+	if ( ( 1 === $p_result ) || ( "yes" === strtolower( $p_result ) ) ) {
+		echo 'Yes';
+	}
+}
 
-		if ( $p_pass ) {
-			print_test_result( GOOD );
-		} else {
-			print_test_result( BAD );
-		}
+function print_test_row( $p_description, $p_pass )
+{
+	echo '<tr>';
+	echo '<td bgcolor="#ffffff">';
+	echo $p_description;
+	echo '</td>';
 
-		echo '</tr>';
+	if ( $p_pass ) {
+		print_test_result( GOOD );
+	} else {
+		print_test_result( BAD );
 	}
 
-	function test_bug_download_threshold()
-	{
-		$t_pass = true;
+	echo '</tr>';
+}
 
-		$t_view_threshold = config_get_global( 'view_attachments_threshold' );
-		$t_download_threshold = config_get_global( 'download_attachments_threshold' );
-		$t_delete_threshold = config_get_global( 'delete_attachments_threshold' );
+function test_bug_download_threshold()
+{
+	$t_pass = true;
 
-		if ( $t_view_threshold > $t_download_threshold ) {
+	$t_view_threshold = config_get_global( 'view_attachments_threshold' );
+	$t_download_threshold = config_get_global( 'download_attachments_threshold' );
+	$t_delete_threshold = config_get_global( 'delete_attachments_threshold' );
+
+	if ( $t_view_threshold > $t_download_threshold ) {
+		$t_pass = false;
+	} else {
+		if ( $t_download_threshold > $t_delete_threshold ) {
 			$t_pass = false;
-		} else {
-			if ( $t_download_threshold > $t_delete_threshold ) {
-				$t_pass = false;
-			}
 		}
-
-		print_test_row( 'Bug attachments download thresholds (view_attachments_threshold, ' .
-				'download_attachments_threshold, delete_attachments_threshold)', $t_pass );
-
-		return $t_pass;
 	}
 
-	function test_bug_attachments_allow_flags()
-	{
-		$t_pass = true;
+	print_test_row( 'Bug attachments download thresholds (view_attachments_threshold, ' .
+			'download_attachments_threshold, delete_attachments_threshold)', $t_pass );
 
-		$t_own_view = config_get_global( 'allow_view_own_attachments' );
-		$t_own_download = config_get_global( 'allow_download_own_attachments' );
-		$t_own_delete = config_get_global( 'allow_delete_own_attachments' );
+	return $t_pass;
+}
 
-		if ( ( $t_own_delete == ON ) && ( $t_own_download == FALSE ) ) {
+function test_bug_attachments_allow_flags()
+{
+	$t_pass = true;
+
+	$t_own_view = config_get_global( 'allow_view_own_attachments' );
+	$t_own_download = config_get_global( 'allow_download_own_attachments' );
+	$t_own_delete = config_get_global( 'allow_delete_own_attachments' );
+
+	if ( ( $t_own_delete == ON ) && ( $t_own_download == FALSE ) ) {
+		$t_pass = false;
+	} else {
+		if ( ( $t_own_download == ON ) && ( $t_own_view == OFF ) ) {
 			$t_pass = false;
-		} else {
-			if ( ( $t_own_download == ON ) && ( $t_own_view == OFF ) ) {
-				$t_pass = false;
-			}
 		}
-
-		print_test_row( 'Bug attachments allow own flags (allow_view_own_attachments, ' .
-				'allow_download_own_attachments, allow_delete_own_attachments)', $t_pass );
-
-		return $t_pass;
 	}
 
-	$version = phpversion();
+	print_test_row( 'Bug attachments allow own flags (allow_view_own_attachments, ' .
+			'allow_download_own_attachments, allow_delete_own_attachments)', $t_pass );
+
+	return $t_pass;
+}
+
+$version = phpversion();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -183,7 +182,7 @@
 </tr>
 
 <!-- Test DATABASE part 2 -->
-<?php if ( db_is_connected() ) { 
+<?php if ( db_is_connected() ) {
 	$t_serverinfo = $g_db->ServerInfo()
 ?>
 <tr>
@@ -213,7 +212,7 @@
 	</td>
 	<td bgcolor="#ffffff">
 			<?php echo $t_serverinfo['version'] ?>
-	</td>	
+	</td>
 </tr>
 <?php } ?>
 
@@ -234,10 +233,9 @@
 	?>
 </tr>
 
-
 <?php
-# Windows-only checks
-if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
+	# Windows-only checks
+	if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 ?>
 <!-- Email Validation -->
 <tr>
@@ -267,8 +265,6 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 	?>
 </tr>
 <?php } # windows-only check ?>
-
-
 
 <!-- PHP Setup check -->
 <?php
@@ -382,9 +378,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 		<br /><?php
 	}
 ?>
-
 <br />
-
 
 <!-- Uploads -->
 <table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
@@ -434,9 +428,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 	</td>
 </tr>
 </table>
-
 <br />
-
 
 <!-- Email testing -->
 <a name="email" id="email" />
@@ -474,9 +466,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 	</td>
 </tr>
 </table>
-
 <br />
-
 
 <!-- CRYPT CHECKS -->
 <a name="crypt" id="crypt" />
@@ -500,6 +490,5 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 	</td>
 </tr>
 </table>
-
 </body>
 </html>

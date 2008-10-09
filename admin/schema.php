@@ -16,20 +16,22 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
 
-	# Each entry below defines the schema. The upgrade array consists of
-	#  two elements
-	# The first is the function to generate SQL statements (see adodb schema doc for more details)
-	#  e.g., CreateTableSQL, DropTableSQL, ChangeTableSQL, RenameTableSQL, RenameColumnSQL,
-	#  DropTableSQL, ChangeTableSQL, RenameTableSQL, RenameColumnSQL, AlterColumnSQL, DropColumnSQL
-	#  A local function "InsertData" has been provided to add data to the db
-	# The second parameter is an array of the parameters to be passed to the function.
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
-	# An update identifier is inferred from the ordering of this table. ONLY ADD NEW CHANGES TO THE
-	#  END OF THE TABLE!!!
+# Each entry below defines the schema. The upgrade array consists of
+#  two elements
+# The first is the function to generate SQL statements (see adodb schema doc for more details)
+#  e.g., CreateTableSQL, DropTableSQL, ChangeTableSQL, RenameTableSQL, RenameColumnSQL,
+#  DropTableSQL, ChangeTableSQL, RenameTableSQL, RenameColumnSQL, AlterColumnSQL, DropColumnSQL
+#  A local function "InsertData" has been provided to add data to the db
+# The second parameter is an array of the parameters to be passed to the function.
+
+# An update identifier is inferred from the ordering of this table. ONLY ADD NEW CHANGES TO THE
+#  END OF THE TABLE!!!
+
 $upgrade[] = Array('CreateTableSQL',Array(db_get_table( 'mantis_config_table' ),"
 			  config_id C(64) NOTNULL PRIMARY,
 			  project_id I DEFAULT '0' PRIMARY,

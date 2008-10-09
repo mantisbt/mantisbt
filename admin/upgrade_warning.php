@@ -17,20 +17,19 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
-?>
-<?php
-	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
-	access_ensure_global_level( ADMINISTRATOR );
+require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
-	$g_error_send_page_header = false; # suppress page headers in the error handler
+access_ensure_global_level( ADMINISTRATOR );
 
-	# @@@ upgrade list moved to the bottom of upgrade_inc.php
+$g_error_send_page_header = false; # suppress page headers in the error handler
 
-	$f_advanced = gpc_get_bool( 'advanced', false );
+# @@@ upgrade list moved to the bottom of upgrade_inc.php
+
+$f_advanced = gpc_get_bool( 'advanced', false );
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

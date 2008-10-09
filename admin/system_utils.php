@@ -17,14 +17,16 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
-	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
-	
-	access_ensure_global_level( ADMINISTRATOR );
-	
+# FIXME: Looks like "From", "to", and "Copy" need i18n. Possibly more in this file.
+
+require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+
+access_ensure_global_level( ADMINISTRATOR );
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -66,7 +68,7 @@
 	<!-- move custom field content to standard field -->
 	<tr bgcolor="#ffffff"><td>Copy Custom Field to Standard Field.</td><td><center>
 	<form method="post" action="copy_field.php">
-	   From
+		From
 		<SELECT name="source_id">
 			<?php
 				$t_custom_ids = custom_field_get_ids();

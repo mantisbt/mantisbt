@@ -17,45 +17,41 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
-	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
-	access_ensure_global_level( ADMINISTRATOR );
+access_ensure_global_level( ADMINISTRATOR );
 
-	# --------------------
-	function helper_table_row_count( $p_table ) {
-		$t_table = $p_table;
+# --------------------
+function helper_table_row_count( $p_table ) {
+	$t_table = $p_table;
 
-		$query = "SELECT COUNT(*) FROM $t_table";
-		$result = db_query_bound( $query );
+	$query = "SELECT COUNT(*) FROM $t_table";
+	$result = db_query_bound( $query );
 
-		$t_users = db_result( $result );
+	$t_users = db_result( $result );
 
-		return $t_users;
+	return $t_users;
+}
+
+
+# --------------------
+function print_table_stats( $p_table_name ) {
+	$t_count = helper_table_row_count( $p_table_name );
+	echo "$p_table_name = $t_count records<br />";
+}
+
+echo '<html><head><title>Mantis Database Statistics</title></head><body>';
+
+echo '<h1>Mantis Database Statistics</h1>';
+
+foreach( db_get_table_list() as $t_table ) {
+	if( db_table_exists( $t_table ) ) {
+		print_table_stats($t_table);
 	}
+}
 
-
-	# --------------------
-	function print_table_stats( $p_table_name ) {
-		$t_count = helper_table_row_count( $p_table_name );
-		# echo "<tr><td>$p_table_name</td><td>$t_count</td></tr>";
-		echo "$p_table_name = $t_count records<br />";
-	}
-
-	echo '<html><head><title>Mantis Database Statistics</title></head><body>';
-
-	echo '<h1>Mantis Database Statistics</h1>';
-	# echo '<table border="1" width="50%" cellpadding="3" cellspacing="0">';
-
-	foreach( db_get_table_list() as $t_table ) {
-		if( db_table_exists( $t_table ) ) {
-			print_table_stats($t_table);
-		}
-	}
-
-	# echo '</table>';
-	echo '</body></html>';
-?>
+echo '</body></html>';
