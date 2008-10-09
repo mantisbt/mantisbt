@@ -76,7 +76,7 @@
 	}  # end for loop
 	
 	if ( $t_count > 0 ) {
-			echo '<ul>';
+			echo '</ul>';
 	}
 
 	html_page_bottom1( __FILE__ );
