@@ -195,22 +195,24 @@
 	function string_sanitize_url( $p_url, $return_absolute = false ) {
 		$t_url = strip_tags( urldecode( $p_url ) );
 		if ( preg_match( '?http(s)*://?', $t_url ) > 0 ) { 
-			// no embedded addresses
+			/* url string contains http(s) */
 			if ( preg_match( '?^' . config_get( 'path' ) . '?', $t_url ) == 0 ) { 
-				// url is ok if it begins with our path, if not, replace it
+				/* url string does not begin with our path, therefore, replace it with a link to index.php */
 				if ( $return_absolute == true ) {
 					$t_url = config_get_global( 'path' ) . 'index.php';
 				} else {
 					$t_url = 'index.php';
 				}
 			} else {
+				/* url string is an absolute url to our site - if we need to return a relative link, strip out the absolute part */
 				if ( $return_absolute == false ) {
 					str_replace( config_get_global( 'path' ), '', $t_url ); 
 				}
 			}
 		} else {
-			// relative hyperlink
+			/* url string is a relative link */
 			
+			/* if we need to return an absolute link, we append our path to the url */
 			if ( $return_absolute == true ) {
 				if ( strpos( $p_url, config_get_global( 'short_path' ) ) === 0 && config_get_global( 'short_path' ) != '/') {
 					$t_url = str_replace( config_get_global( 'short_path' ), '', config_get_global( 'path' ) ) . $t_url;
@@ -219,17 +221,27 @@
 				}
 			}
 		}
-
+		/* currently we checked for a valid host part of a url, however rest of url is unvalidated */
+		
+		/* if url is blank, we just return a relative/absolute link to index.php as appropriate. 
+		 * we can trust global path, therefore we can return immediately at this point without url-encoding. */
 		if ( $t_url == '' ) {
 			if ( $return_absolute == true ) {
-				$t_url = config_get_global( 'path' ) . 'index.php';
+				return config_get_global( 'path' ) . 'index.php';
 			} else {
-				$t_url = 'index.php';
+				return 'index.php';
 			}
 		}
 		
-		// split and encode parameters
+		/* see if we have any query params to the page 
+		 * we need to validate 3 types of request: 
+		 * a) path?query#fragment
+		 * b) path?query
+		 * c) path?
+		 * d) path#fragment
+		 * e) path */
 		if ( strpos( $t_url, '?' ) !== FALSE ) {
+			/* A / B */
 			list( $t_path, $t_param ) = explode( '?', $t_url, 2 );
 			if ( !is_blank($t_param ) ) {
 			    if ( strpos( $t_param, '#' ) !== FALSE ) {
@@ -244,6 +256,7 @@
 					if ( $t_param != '' ) {
 						$t_param .= '&amp;'; 
 					}
+					/* urlencode any query params (A/B) */
 					if ( is_array( $v ) ) {
 						for ( $i = 0, $t_size = sizeof( $v ); $i < $t_size; $i++ ) {
 							$t_param .= $k . urlencode( '[]' ) . '=' . urlencode( strip_tags( urldecode( $v[$i] ) ) );
@@ -254,13 +267,24 @@
 					}
 				}
 				if (!is_blank($t_anchor)) 
+					/* urlencode anchor part of url (A) */
 				    $t_anchor = '#' . urlencode( $t_anchor );
 				return $t_path . '?' . $t_param . $t_anchor;
 			} else {
-				return $t_path;
+				/* C */
+				/* at this point, I believe we've got a url containing a ? that does not have any query params
+				 * therefore, urlencode the path component and re-add the trailing ? */
+				return urlencode ($t_path). '?';
 			}
 		} else {
-			return $t_url;
+			if ( strpos( $t_url, '#' ) !== FALSE ) {
+				/* D */
+				list( $t_path, $t_anchor ) = explode( '#', $t_url, 2 );
+				return implode("/", array_map("rawurlencode", explode("/", $t_path))) . '#' . urlencode( $t_anchor );
+			} else {
+				/* E */
+				return implode("/", array_map("rawurlencode", explode("/", $t_url)));
+			}
 		}
 	}
 	
