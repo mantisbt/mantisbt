@@ -37,12 +37,17 @@
 <?php html_page_top2() ?>
 
 <br />
-<ul>
 <?php
 	# Select the news posts
 	$rows = news_get_rows( helper_get_current_project() );
+	$t_count = sizeof( $rows );
+	
+	if ( $t_count ) {
+		echo '<ul>';
+	}
+	
     # Loop through results
-	for ( $i=0 ; $i < sizeof( $rows ) ; $i++ ) {
+	for ( $i=0 ; $i < $t_count ; $i++ ) {
 		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
 		if ( VS_PRIVATE == $v_view_state &&
 			 ! access_has_project_level( config_get( 'private_news_threshold' ), $v_project_id ) ) 		{
@@ -69,7 +74,9 @@
 		echo ' ' . $t_note_string;
 		echo "</span></li>";
 	}  # end for loop
-?>
-</ul>
+	
+	if ( $t_count ) {
+			echo '<ul>';
+	}
 
-<?php html_page_bottom1( __FILE__ ) ?>
+	html_page_bottom1( __FILE__ );
