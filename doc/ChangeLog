@@ -1,5 +1,29 @@
 Mantis ChangeLog
 
+2008.10.09 - 1.1.3
+===================================
+
+In this release we fixed a couple of nasty bugs sneaked into 1.1.2, where sending bugnotes email notifications would fail and browser caching was not functional.
+We also refined the implementation of form security tokens and closed a couple of security issues, an information disclosure (with no CVE) and a session hijacking (CVE-2008-3102).
+
+- 0009321: [security] Users can get title and status of issues that they don't have access to. (vboctor) - resolved.
+- 0009533: [security] Mantis should use secure sessions on https connections (jreese) - resolved.
+- 0009286: [administration] stray "2" in manage_user_prune.php (vboctor) - resolved.
+- 0009664: [authentication] Logout without unsetting session cookie (jreese) - resolved.
+- 0009323: [bugtracker] Browser caching broken since 1.1.2 (jreese) - resolved.
+- 0009470: [bugtracker] Tags filter not filling into text field when selecting from list using Internet Explorer (jreese) - resolved.
+- 0009493: [custom fields] Removing custom fields from project causes application error 2800 (giallu) - resolved.
+- 0009309: [email] Problems with e-mail notifications about bugnotes [PATCH] (giallu) - resolved.
+- 0004678: [filters] Filter combos don't fill up on if switched to 'All Projects' - closed.
+- 0009430: [graphs] bug_graph_bystatus shows heading by_category (thraxisp) - resolved.
+- 0009431: [localization] no localization for usage of open, resolved, closed in bug_graph_bystatus.php (thraxisp) - resolved.
+- 0008882: [other] Gravatar causes annoying security popups on IE when using Mantis over HTTPS/SSL (jreese) - resolved.
+- 0009361: [other] php session fail created cause mantis app error. (jreese) - resolved.
+- 0009560: [other] Wrong behaviour in Session API (session_save_path error message) (jreese) - resolved.
+- 0009672: [other] Fixing form error by going back fails because of security token (jreese) - resolved.
+- 0009343: [scripting] form security token prevents changing relationship while resolving bug (jreese) - resolved.
+
+
 2008.06.17  -  1.1.2
 ====================
 This release focused on fixing few security issues; also includes assorted fixes for translations, usability and compatibility (most notably, with postgres) and a nasty memory leak on the string API causing incomplete rendering of pages. All users are advised to upgrade.
