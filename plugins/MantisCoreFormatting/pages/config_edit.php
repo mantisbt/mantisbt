@@ -41,4 +41,3 @@ if ( plugin_config_get( 'process_vcslinks' ) != $f_process_vcslinks ) {
 }
 
 print_successful_redirect( plugin_page( 'config', true ) );
-

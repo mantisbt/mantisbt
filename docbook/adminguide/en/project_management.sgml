@@ -27,7 +27,7 @@ function custom_function_override_changelog_include_issue( $p_issue_id ) {
         </para>
 
         <para>MantisBT also provides the ability to customize the details to include from the issue and in what format.  This can be done using the following custom function.
-            
+
 <programlisting>
 # --------------------
 # Prints one entry in the changelog.
@@ -61,7 +61,7 @@ function custom_function_override_changelog_print_issue( $p_issue_id, $p_issue_l
 http://www.example.com/mantis/changelog_page.php?project_id=1
 </programlisting>
         </para>
-        
+
         <para>Another approach is to go to the project page and from there users can get to multiple other locations relating to the project include the change log.  This can be done by a URL like the following:
 <programlisting>
 http://www.example.com/mantis/project_page.php?project_id=1

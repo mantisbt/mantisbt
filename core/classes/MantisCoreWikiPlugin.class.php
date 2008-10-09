@@ -52,7 +52,6 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 	function link_project( $p_event, $p_project_id ) {
 		return $this->base_url( $p_project_id ) . 'start';
 	}
-
 }
 
 /**
@@ -85,7 +84,6 @@ class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 	function link_project( $p_event, $p_project_id ) {
 		return $this->base_url( $p_project_id ) . 'Main_Page';
 	}
-
 }
 
 /**
@@ -122,7 +120,6 @@ class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 	function link_project( $p_event, $p_project_id ) {
 		return $this->base_url( $p_project_id );
 	}
-
 }
 
 /**
@@ -159,7 +156,6 @@ class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 	function link_project( $p_event, $p_project_id ) {
 		return $this->base_url( $p_project_id ) . 'Start';
 	}
-
 }
 
 /**
@@ -192,6 +188,4 @@ class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 	function link_project( $p_event, $p_project_id ) {
 		return $this->base_url( $p_project_id ) . 'Main_Page';
 	}
-
 }
-

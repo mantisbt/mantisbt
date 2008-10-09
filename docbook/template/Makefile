@@ -1,14 +1,14 @@
 # Makefile for DocBoook compilation
-# 
+#
 # $Id: Makefile,v 1.5 2004/10/01 12:54:37 giallu Exp $
-# 
+#
 #
 # Some things to remember:
 # - The main DocBook name is $BOOK.sgml
 # - All other files should have .sgml extension
 # - Images should go into ./images directory
 # - Images should be in png format
-# 
+#
 
 # Output directory
 BUILD_DIR:=build
@@ -36,7 +36,7 @@ default: help
 all: html pdf
 #all: html html_onefile text pdf ps sgml.gz html.tar.gz
 
-html: $(BUILD_DIR)/$(BOOK)/$(BOOK).html 
+html: $(BUILD_DIR)/$(BOOK)/$(BOOK).html
 
 html_onefile: $(BUILD_DIR)/$(BOOK).html
 
@@ -71,7 +71,7 @@ $(BUILD_DIR)/$(BOOK).pdf: $(FILES) $(IMAGES)
 
 $(BUILD_DIR)/$(BOOK).html: $(FILES) $(IMAGES)
 	jw -d $(STYLE)#html -f docbook -b html -o $(BUILD_DIR) -u $<
-	
+
 $(BUILD_DIR)/$(BOOK).ps: $(FILES) $(EPSS)
 	jw -d $(STYLE) -f docbook -b ps -o $(BUILD_DIR) $<
 
@@ -82,7 +82,7 @@ $(BUILD_DIR)/$(BOOK).txt: $(FILES)
 	jw -f docbook -b txt -o $(BUILD_DIR) $<
 
 # pattern rules to convert PNGs to EPS
-# 
+#
 %.eps : %.png
 	pngtopnm $< | pnmtops -noturn > $@
 

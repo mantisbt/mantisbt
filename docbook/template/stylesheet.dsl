@@ -37,7 +37,7 @@
 
 
 <style-specification id="print" use="docbook">
-<style-specification-body> 
+<style-specification-body>
 
 ;;==========================================================================
 ;;                               PRINT
@@ -48,11 +48,11 @@
 ;;======================================
 
 ;;Do you want to print on both sides of the paper?
-(define %two-side% 
+(define %two-side%
  #t)
 
 ;;Do you want enumerated sections? (E.g, 1.1, 1.1.1, 1.2, etc.)
-(define %section-autolabel% 
+(define %section-autolabel%
  #f)
 
 ;;Show URL links? If the text of the link and the URL are identical,
@@ -67,7 +67,7 @@
   #t)
 
 ;;Tex Backend on
-(define tex-backend 
+(define tex-backend
  #t)
 
 ;;Define Line Spacing
@@ -85,7 +85,7 @@
 (define %para-indent%
   ;; First line start-indent for paragraphs (other than the first)
   10pt)
-    
+
 (define ($object-titles-after$)
   (list (normalize "figure")))
 
@@ -103,7 +103,7 @@
  #t)
 
 ;;Generate Book TOC?
-(define %generate-book-toc% 
+(define %generate-book-toc%
  #t)
 
 ;;What depth should the TOC generate?
@@ -116,7 +116,7 @@
         1)))
 
 ;;Do you want a TOC for the element part?
-(define %generate-part-toc% 
+(define %generate-part-toc%
  #f)
 
 ;;Do you want the part toc on the part titlepage or separate?
@@ -124,7 +124,7 @@
  #t)
 
 ;;Generate Part Title Page?
-(define %generate-part-titlepage% 
+(define %generate-part-titlepage%
   #f)
 
 ;;Do you want the Part intro on the part title page?
@@ -136,12 +136,12 @@
   (list (normalize "equation")))
 
 ;;Do you want chapters enumerated?
-(define %chapter-autolabel% 
+(define %chapter-autolabel%
  #t)
 
-;;Do you want Chapter's and Appendix's 
+;;Do you want Chapter's and Appendix's
 ;;to have automatic labels?
-(define %chap-app-running-head-autolabel% 
+(define %chap-app-running-head-autolabel%
   #t)
 
 
@@ -154,7 +154,7 @@
  #t)
 
 ;;Generate Article TOC?
-(define %generate-article-toc% 
+(define %generate-article-toc%
  #t)
 
 ;;Do you want a separate page for the title?
@@ -203,25 +203,25 @@
 ;;======================================
 
 ;;Defines the general size of the text in the document. normal(10),
-;;presbyopic(12), and large-type(24). 
+;;presbyopic(12), and large-type(24).
 (define %visual-acuity%
  "normal")
 
 ;;What font would you like for titles?
-(define %title-font-family% 
+(define %title-font-family%
   "Helvetica")
 
 ;;What font would you like for the body?
-(define %body-font-family% 
+(define %body-font-family%
  "Palatino")
 
 ;;What font would you like for mono-seq?
-(define %mono-font-family% 
+(define %mono-font-family%
  "Courier New")
 
 ;;If the base fontsize is 10pt, and '%hsize-bump-factor%' is
 ;; 1.2, hsize 1 is 12pt, hsize 2 is 14.4pt, hsize 3 is 17.28pt, etc
-(define %hsize-bump-factor% 
+(define %hsize-bump-factor%
  1.1)
 
 ;;What size do you want the body fonts?
@@ -241,15 +241,15 @@
 (define %left-right-margin% 6pi)
 
 ;;How much indentation for the body?
-(define %body-start-indent% 
+(define %body-start-indent%
  2pi)
 
 ;;How big is the left margin? (relative to physical page)
-(define %left-margin% 
+(define %left-margin%
  8pi) ;white-paper-column
 
 ;;How big is the right margin? (relative to physical page)
-(define %right-margin% 
+(define %right-margin%
  8pi) ;white-paper-column
 
 ;;How big do you want the margin at the top?
@@ -259,9 +259,9 @@
       6pi))
 
 ;;How big do you want the margin at the bottom?
-(define %bottom-margin% 
+(define %bottom-margin%
  (if (equal? %visual-acuity% "large-type")
-      7.5pi 
+      7.5pi
       5pi))
 
 ;;Define the text width. (Change the elements in the formula rather
@@ -271,19 +271,19 @@
 
 ;;Define the body width. (Change the elements in the formula rather
 ;;than the formula itself)
-(define %body-width% 
+(define %body-width%
  (- %text-width% %body-start-indent%))
 
 ;;Define distance between paragraphs
-(define %para-sep% 
+(define %para-sep%
  (/ %bf-size% 2.0))
 
 ;;Define distance between block elements (figures, tables, etc.).
-(define %block-sep% 
+(define %block-sep%
  (* %para-sep% 2.0))
 
 ;;Indent block elements?
-(define %block-start-indent% 
+(define %block-start-indent%
   0pt)
 ;0pt
 
@@ -308,11 +308,11 @@
  'justify)
 
 ;;What quadding for component titles(Chapter, Appendix, etc)?
-(define %component-title-quadding% 
+(define %component-title-quadding%
  'start)
 
 ;;What quadding for section titles?
-(define %section-title-quadding% 
+(define %section-title-quadding%
  'start)
 
 ;;What quadding for section sub-titles?
@@ -320,7 +320,7 @@
  'start)
 
 ;;What quadding for article title?
-(define %article-title-quadding% 
+(define %article-title-quadding%
  'center)
 
 ;;What quadding for article sub-titles?
@@ -328,11 +328,11 @@
  'center)
 
 ;;What quadding for division subtitles?
-(define %division-subtitle-quadding% 
+(define %division-subtitle-quadding%
   'start)
 
 ;;What quadding for component subtitles?
-(define %component-subtitle-quadding% 
+(define %component-subtitle-quadding%
   'start)
 
 
@@ -396,7 +396,7 @@
 	(process-children-trim)))
 
 ;;Callouts are confusing in Postscript... fix them.
-(define %callout-fancy-bug% 
+(define %callout-fancy-bug%
  #f)
 
 
@@ -404,15 +404,15 @@
 ;;big border - I have simply decreased the border thickness -
 ;;unfortunately it takes all this to do it - sigh.
 (define ($peril$)
-  (let* ((title     (select-elements 
+  (let* ((title     (select-elements
 		     (children (current-node)) (normalize "title")))
 	 (has-title (not (node-list-empty? title)))
-	 (adm-title (if has-title 
+	 (adm-title (if has-title
 			(make sequence
 			  (with-mode title-sosofo-mode
 			    (process-node-list (node-list-first title))))
 			(literal
-			 (gentext-element-name 
+			 (gentext-element-name
 			  (current-node)))))
 	 (hs (HSIZE 2)))
   (if %admon-graphics%
@@ -471,7 +471,7 @@
 
 
 ;;Change the way Formal Paragraph titles are displayed. The commented
-;;out section will run the titles in the paragraphs. 
+;;out section will run the titles in the paragraphs.
 (element (formalpara title)
   ;(make sequence
   ;font-weight: 'bold
@@ -503,14 +503,14 @@
 </style-specification>
 
 
-<!-- 
+<!--
 ;;===========================================================================
 ;;                                HTML
 ;;===========================================================================
 -->
 
 <style-specification id="html" use="docbook">
-<style-specification-body> 
+<style-specification-body>
 
 ;; this is necessary because right now jadetex does not understand
 ;; symbolic entities, whereas things work well with numeric entities.
@@ -537,7 +537,7 @@
   #t)
 
 ;;What graphics extensions allowed?
-(define %graphic-extensions% 
+(define %graphic-extensions%
 '("gif" "png" "jpg" "jpeg" "tif" "tiff" "eps" "epsf" ))
 
 ;;What is the default extension for images?
@@ -553,7 +553,7 @@
 ;;=========================
 
 ;;Do you want a TOC for Books?
-(define %generate-book-toc% 
+(define %generate-book-toc%
   #t)
 
 ;;What depth should the TOC generate?
@@ -578,7 +578,7 @@
 ;;=========================
 
 ;;Should parts have TOCs?
-(define %generate-part-toc% 
+(define %generate-part-toc%
   #t)
 
 ;;Should part TOCs be on their titlepages?
@@ -586,7 +586,7 @@
   #t)
 
 ;;Do you want a title page for your part?
-(define %generate-part-titlepage% 
+(define %generate-part-titlepage%
   #t)
 
 ;;Should the Part intro be on the part title page?
@@ -621,17 +621,17 @@
 (define %gentext-nav-use-tables%
  #t)
 
-;;If tables are used for navigation, 
-;;how wide should they be? 
-(define %gentext-nav-tblwidth% 
+;;If tables are used for navigation,
+;;how wide should they be?
+(define %gentext-nav-tblwidth%
 "100%")
 
-;;Add arrows to navigation (comment these 
+;;Add arrows to navigation (comment these
 ;;out if you want admon graphics here)
-(define (gentext-en-nav-prev prev) 
+(define (gentext-en-nav-prev prev)
   (make sequence (literal "<<< Previous")))
 
-;;Add arrows to navigation (comment these 
+;;Add arrows to navigation (comment these
 ;;out if you want admon graphics here)
 (define (gentext-en-nav-next next)
   (make sequence (literal "Next >>>")))
@@ -649,15 +649,15 @@
 (define %default-variablelist-termlength%
   20)
 
-;;When true | If the terms are shorter than 
-;;the termlength above then the variablelist 
+;;When true | If the terms are shorter than
+;;the termlength above then the variablelist
 ;;will be formatted as a table.
 (define %may-format-variablelist-as-table%
 #f)
 
-;;This overrides the tgroup definition 
+;;This overrides the tgroup definition
 ;;(copied from 1.20, dbtable.dsl).
-;;It changes the table background color, 
+;;It changes the table background color,
 ;;cell spacing and cell padding.
 ;;This is based on gtk-doc additions - thanks!
 
@@ -665,7 +665,7 @@
   (let* ((wrapper   (parent (current-node)))
 	 (frameattr (attribute-string (normalize "frame") wrapper))
 	 (pgwide    (attribute-string (normalize "pgwide") wrapper))
-	 (footnotes (select-elements (descendants (current-node)) 
+	 (footnotes (select-elements (descendants (current-node))
 				     (normalize "footnote")))
 	 (border (if (equal? frameattr (normalize "none"))
 		     '(("BORDER" "0"))
@@ -704,12 +704,12 @@
 (define %admon-graphics-path%
   "images/")
 
-;;Given an admonition node, returns the 
+;;Given an admonition node, returns the
 ;;name of the graphic that should
 ;;be used for that admonition.
 ;;Define admon graphics usage
-;;NOTE these will change to pngs 
-;;soon in the GDP when Tigert gets 
+;;NOTE these will change to pngs
+;;soon in the GDP when Tigert gets
 ;;the time to make special ones for us!
 (define ($admon-graphic$ #!optional (nd (current-node)))
   (cond ((equal? (gi nd) (normalize "tip"))
@@ -724,7 +724,7 @@
 	 (string-append %admon-graphics-path% "warning.gif"))
 	(else (error (string-append (gi nd) " is not an admonition.")))))
 
-;;Given an admonition node, returns 
+;;Given an admonition node, returns
 ;;the width of the graphic that will
 ;;be used for that admonition.
 (define ($admon-graphic-width$ #!optional (nd (current-node)))
@@ -735,7 +735,7 @@
 ;;=========================
 
 ;;Enumerate Chapters?
-(define %chapter-autolabel% 
+(define %chapter-autolabel%
  #f)
 
 ;;Enumerate Sections?
@@ -746,7 +746,7 @@
 ;;    HTML Attributes
 ;;=========================
 
-;;What attributes should be hung off 
+;;What attributes should be hung off
 ;;of 'body'?
 (define %body-attr%
  (list
@@ -757,17 +757,17 @@
    (list "ALINK" "#0000FF")))
 
 ;;Default extension for filenames?
-(define %html-ext% 
+(define %html-ext%
   ".html")
 
 ;;Use a CSS stylesheet?
-;;Which one? Should work on 
+;;Which one? Should work on
 ;;this one soon
-;(define %stylesheet% 
+;(define %stylesheet%
 ;        "./gnome.css")
 
 ;;Use it
-;(define %stylesheet-type% 
+;(define %stylesheet-type%
 ;"text/css")
 
 (define ($code-seq$ #!optional (sosofo (process-children)))
@@ -807,10 +807,10 @@
 ;;========================
 
 ;;Should Articles have a TOC?
-(define %generate-article-toc% 
+(define %generate-article-toc%
   #t)
 
-;;Which elements should appear 
+;;Which elements should appear
 ;;on title page?
 (define (article-titlepage-recto-elements)
   (list (normalize "title")
@@ -826,9 +826,9 @@
 ;;Author name is too big - change it!
   (element author
     (let ((author-name  (author-string))
-	  (author-affil (select-elements (children (current-node)) 
+	  (author-affil (select-elements (children (current-node))
 					 (normalize "affiliation"))))
-      (make sequence      
+      (make sequence
 	(make element gi: "H4"
 	      attributes: (list (list "CLASS" (gi)))
 	      (make element gi: "A"
@@ -837,21 +837,21 @@
 	(process-node-list author-affil))))
 
 ;;Address?
-  (element address 
+  (element address
     (make sequence
       (make element gi: "DIV"
             attributes: (list (list "CLASS" (gi)))
             (process-children))))
 
 ;;Get rid of spam-producing "mailto" links
-;;and get rid of email indentation  
+;;and get rid of email indentation
   (element email
     (make sequence
       (make element gi: "DIV"
             attributes: (list (list "CLASS" (gi)))
             (process-children))))
 
-;;Point Abstract to custom table function 
+;;Point Abstract to custom table function
 ;;(See $dcm-abstract-object$ below. For default
 ;;use $semiformal-object$
   (element abstract
@@ -861,7 +861,7 @@
   (element (abstract title) (empty-sosofo))
 
 ;;subtitle sizing
-(element subtitle 
+(element subtitle
   (make element gi: "H4"
         attributes: (list (list "CLASS" (gi)))
         (process-children-trim))))
@@ -900,7 +900,7 @@
 ;;====================
 
 ;;Formal Paras are ugly by default!
-;;Make the title run in - otherwise 
+;;Make the title run in - otherwise
 ;;you should use a sect!
 (element formalpara
   (make element gi: "DIV"
@@ -909,12 +909,12 @@
   	(make element gi: "P"
 	      (process-children))))
 
-;;This is the old one 
-;(element (formalpara title) 
+;;This is the old one
+;(element (formalpara title)
 ;($lowtitle$ 5))
 
 ;;This is the new one
-(element (formalpara title) 
+(element (formalpara title)
   (make element gi: "B"
 	($runinhead$)))
 
@@ -935,7 +935,7 @@
 	 (restch   (node-list-rest chlist)))
     (make element gi: "DIV"
 	  attributes: (list (list "CLASS" (gi)))
-	  (make element gi: "P" 
+	  (make element gi: "P"
 		(make element gi: "BIG"
 		      (make element gi: "A"
 			    attributes: (list
@@ -950,7 +950,7 @@
 ;;Literal Elements
 
 ;;Indent Literal layouts?
-(define %indent-literallayout-lines% 
+(define %indent-literallayout-lines%
   #f)
 
 ;;Indent Programlistings?
@@ -962,7 +962,7 @@
  #f)
 
 ;;Should verbatim items be 'shaded' with a table?
-(define %shade-verbatim% 
+(define %shade-verbatim%
  #t)
 
 ;;Define shade-verbatim attributes
@@ -976,7 +976,7 @@
 ;;    Entities
 ;;===================
 
-;;Netscape doesn't handle trademark 
+;;Netscape doesn't handle trademark
 ;;entity right at all!! Get rid of it.
 ;;Make a TM in a superscipt font.
 (element trademark
@@ -1023,7 +1023,7 @@
 (define (chunk-element-list)
   (list (normalize "preface")
 	(normalize "chapter")
-	(normalize "appendix") 
+	(normalize "appendix")
 	(normalize "article")
 	(normalize "glossary")
 	(normalize "bibliography")
@@ -1033,8 +1033,8 @@
 	(normalize "reference")
 	(normalize "refentry")
 	(normalize "part")
-	(normalize "sect1") 
-	(normalize "section") 
+	(normalize "sect1")
+	(normalize "section")
 	(normalize "book") ;; just in case nothing else matches...
 	(normalize "set")  ;; sets are definitely chunks...
 	))

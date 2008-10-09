@@ -223,6 +223,4 @@ event_hook( $events, [$plugin] );
 			<programlisting>$values = event_signal( $event_name, [ array( $param, ... ) ] );</programlisting>
 		</blockquote>
 	</sect1>
-
 </chapter>
-

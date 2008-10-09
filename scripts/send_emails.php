@@ -17,31 +17,30 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-	# See the README and LICENSE files for details
+# See the README and LICENSE files for details
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
-	global $g_bypass_headers;
-	$g_bypass_headers = 1;
+global $g_bypass_headers;
+$g_bypass_headers = 1;
 
-	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
+$t_core_path = config_get( 'core_path' );
 
-	require_once( $t_core_path . 'email_api.php' );
+require_once( $t_core_path . 'email_api.php' );
 
-	# Make sure this script doesn't run via the webserver
-	# @@@ This is a hack to detect php-cgi, there must be a better way.
-	if ( isset( $_SERVER['SERVER_PORT'] ) ) {
-		echo "send_emails.php is not allowed to run through the webserver.\n";
-		exit( 1 );
-	}
+# Make sure this script doesn't run via the webserver
+# @@@ This is a hack to detect php-cgi, there must be a better way.
+if ( isset( $_SERVER['SERVER_PORT'] ) ) {
+	echo "send_emails.php is not allowed to run through the webserver.\n";
+	exit( 1 );
+}
 
-	echo "Sending emails...\n";
-	email_send_all();
-	echo "Done.\n";
+echo "Sending emails...\n";
+email_send_all();
+echo "Done.\n";
 
-	exit( 0 );
-?>
+exit( 0 );

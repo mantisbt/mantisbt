@@ -103,4 +103,3 @@ final class MantisCorePlugin extends MantisPlugin {
 		$this->url = 'http://www.mantisbt.org';
 	}
 }
-

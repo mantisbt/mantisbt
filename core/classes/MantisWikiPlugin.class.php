@@ -23,9 +23,9 @@ abstract class MantisWikiPlugin extends MantisPlugin {
 
 	function hooks() {
 		return array(
-			'EVENT_WIKI_INIT'			=> 'wiki_init',
-			'EVENT_WIKI_LINK_BUG'		=> 'link_bug',
-			'EVENT_WIKI_LINK_PROJECT'	=> 'link_project',
+			'EVENT_WIKI_INIT' => 'wiki_init',
+			'EVENT_WIKI_LINK_BUG' => 'link_bug',
+			'EVENT_WIKI_LINK_PROJECT' => 'link_project',
 		);
 	}
 
@@ -35,7 +35,6 @@ abstract class MantisWikiPlugin extends MantisPlugin {
 
 	abstract function link_bug( $p_event, $p_bug_id );
 	abstract function link_project( $p_event, $p_project_id );
-
 }
 
 /**
@@ -49,4 +48,3 @@ abstract class MantisCoreWikiPlugin extends MantisWikiPlugin {
 		);
 	}
 }
-

@@ -6,7 +6,7 @@
 
 	<section>
 	<title>Overview</title>
-	
+
         <para>Different teams typically like to capture different information
 	as users report issues, in some cases, the data required is even
 	different from one project to another.  Hence, MantisBT provides the
@@ -14,7 +14,7 @@
 	to extend MantisBT to deal with information that is specific to their
 	teams or their projects.  The aim is for this to keep MantisBT native
 	fields to a minimum.
-	
+
 	Following are some facts about the implementation of
         custom fields in MantisBT:
             <itemizedlist>
@@ -60,10 +60,10 @@
             </itemizedlist>
         </para>
         </section>
-	
+
 	<section>
 	    <title>Custom Field Definition</title>
-	  
+
         <para>
             The definition of a custom field includes the following logical
             attributes:
@@ -172,7 +172,7 @@
                 </listitem>
             </itemizedlist>
         </para>
-        
+
         <para>All custom fields are currently saved to a field of type
         VARCHAR(255) in the database. However, in future releases, it is
         possible to support custom fields of different types (eg: memo,
@@ -183,10 +183,10 @@
             the default value is assumed.
         </para>
     </section>
-    
+
     <section>
         <title>Adding/Editing Custom Fields</title>
-    
+
             <para>
                 <itemizedlist>
                     <listitem>
@@ -214,7 +214,7 @@
                     </listitem>
                 </itemizedlist>
             </para>
-	    
+
 	    <note><para>Added custom fields will not show up in any of the issues
 	    until the added custom field is linked to the appropriate
 	    projects.</para></note>
@@ -280,13 +280,13 @@
             </para>
         </formalpara>
 	</section>
- 
+
  	<section>
 	    <title>Localizing Custom Field Names</title>
-	    
-	    <para>It is possible to localize the label for the custom fields. 
+
+	    <para>It is possible to localize the label for the custom fields.
 	    This can be as follows:
-	    
+
 	        <itemizedlist>
 		    <listitem><para>Give the custom field a valid variable name
 		    (i.e. start with an alpha character, no spaces, etc) - For
@@ -307,7 +307,7 @@ if ( lang_get_current() == 'german' ) {
 ?&gt;</programlisting></para></listitem>
 	    	</itemizedlist>
 	    </para>
-	    
+
 	    <note><para>If we would have decided to use start_date as the
 	    name of the custom field, then we have used an already localized
 	    string from MantisBT standard strings.  In this case, there is no
@@ -328,7 +328,7 @@ if ( lang_get_current() == 'german' ) {
 
 	<section>
 	    <title>Dynamic values for Enumeration Custom Fields</title>
-	    
+
 	    <para>As discussed earlier, one of the possible types of a custom
 	    field is "enumeration".  This type of custom field allows the user
 	    to select one value from a provided list of possible values.  The
@@ -337,14 +337,14 @@ if ( lang_get_current() == 'german' ) {
 	    limitations: the list is static, and the maximum length of the list
 	    must be no longer than 255 characters.  Hence, the need for the
 	    ability to construct the list of possible values dynamically.</para>
-	    
+
 
             <section>
 	       <title>Dynamic possible values included by default</title>
-	    
+
 	    <para>MantisBT ships with some dynamic possible values, these
 	    include the following:
-	    
+
 	    	<itemizedlist>
 		    <listitem><para>=categories - a list of categories defined
 		    in the current project (or the project to which the issue
@@ -360,22 +360,22 @@ if ( lang_get_current() == 'german' ) {
 		    true.</para></listitem>
 		</itemizedlist>
 	    </para>
-	    
+
 	    <note><para>The '=' before the name of the dynamic list of options is used
 	    to tell MantisBT that this is a dynamic list, rather than a static
 	    list with just one option.</para></note>
-	    
+
 	    </section>
-	    
+
 	    <section>
 	        <title>Defining Custom Dynamic Possible Values</title>
 
 		<para>If the user selects =versions, the actual custom function
-		that is executed is custom_function_*_enum_versions(). The reason 
-		why the "enum_" is not included is to have a fixed prefix for all 
-		custom functions used for this purpose and protect against users 
-		using custom functions that were not intended for this purpose. 
-		For example, you don't want the user to use 
+		that is executed is custom_function_*_enum_versions(). The reason
+		why the "enum_" is not included is to have a fixed prefix for all
+		custom functions used for this purpose and protect against users
+		using custom functions that were not intended for this purpose.
+		For example, you don't want the user to use
 		custom_function_*_issue_delete_notify() which may be overridden
 		by the web master to delete associated data in other
 		databases.</para>
@@ -391,14 +391,14 @@ if ( lang_get_current() == 'german' ) {
 # To use this in a custom field type "=categories" in the possible values field.
 function custom_function_override_enum_categories() {
     $t_categories = category_get_all_rows( helper_get_current_project() );
- 
+
     $t_enum = array();
     foreach( $t_categories as $t_category ) {
         $t_enum[] = $t_category['category'];
     }
- 
+
     $t_possible_values = implode( '|', $t_enum );
- 
+
     return $t_possible_values;
 }</programlisting>
 </para>
@@ -425,11 +425,11 @@ with the following signature:
 # To use this in a custom field type "=mine" in the possible values field.
 function custom_function_override_enum_mine() {
     $t_enum = array();
- 
+
     :
- 
+
     $t_possible_values = implode( '|', $t_enum );
- 
+
     return $t_possible_values;
 }
 </programlisting>
@@ -439,20 +439,20 @@ function custom_function_override_enum_mine() {
 defined by the MantisBT adminstrator/webmaster and not part of the MantisBT source.
 It is OK to override a method that doesn't exist.</para>
 
-<para>As usual, when MantisBT is upgraded to future releases, the custom functions 
-will not be overwritten. The difference between the "default" implementation and 
+<para>As usual, when MantisBT is upgraded to future releases, the custom functions
+will not be overwritten. The difference between the "default" implementation and
 the "override" implementation is explained in more details in the custom
 functions section.</para>
 
 	</section>
 
         </section>
-	
+
     </section>
     <section>
         <title>Enumerations</title>
-        
-        
+
+
         <para>Enumerations are used in MantisBT to represent a set of
             possible values for an attribute. Enumerations are used for access
             levels, severities, priorities, project statuses, project view
@@ -461,25 +461,25 @@ functions section.</para>
             values in these enumerations. The rest of this topic explains how
             enumerations work, and then how they can be customised.
         </para>
-        
+
         <formalpara>
             <title>How enumerations work?</title>
-            
+
             <para>
                 <filename>core/constant_inc.php</filename> defines the
                 constants that correspond to those in the enumeration. These are
                 useful to refer to these enumerations in the configs and the code.
                 <programlisting>
-                    define( 'VIEWER', 10 ) 
-                    define( 'REPORTER', 25 ) 
-                    define( 'UPDATER',  40 ) 
-                    define( 'DEVELOPER', 55 ) 
-                    define( 'MANAGER', 70 ) 
+                    define( 'VIEWER', 10 )
+                    define( 'REPORTER', 25 )
+                    define( 'UPDATER',  40 )
+                    define( 'DEVELOPER', 55 )
+                    define( 'MANAGER', 70 )
                     define( 'ADMINISTRATOR', 90 )
                 </programlisting>
             </para>
         </formalpara>
-        
+
         <para>
             <filename>config_defaults_inc.php</filename> includes the defaults for the
             enumerations. The configuration options that are defaulted here are
@@ -489,7 +489,7 @@ functions section.</para>
             (due to the need for localisation). Hence, if an entry in this
             enumeration is not found in the corresponding localised enumeration
             (i.e. 70:manager), then it will be printed to the user as @70@.
-            
+
             <programlisting>
                 $g_access_levels_enum_string =
                 '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
@@ -505,12 +505,12 @@ functions section.</para>
             the users even if the enumerations in the language files still
             includes the full list.
             <programlisting>
-                
+
                 $s_access_levels_enum_string =
                 '10:Betrachter,25:Reporter,40:Updater,55:Entwickler,70:Manager,90:Administrator';
             </programlisting>
         </para>
-        
+
         <formalpara>
             <title>How can they be customised?</title> <para>Let say we want to remove access level
                 "Updater" and add access level "Senior
@@ -529,7 +529,7 @@ functions section.</para>
                 define ( 'SENIOR_DEVELOPER', 60 );
             </programlisting>
         </para>
-        
+
         <para>
             In <filename>config_inc.php</filename>
             <programlisting>
@@ -540,7 +540,7 @@ functions section.</para>
                 $g_manage_custom_fields_threshold = SENIOR_DEVELOPER;
             </programlisting>
         </para>
-        
+
         <para>
             The file <filename>custom_strings_inc.php</filename> is introduced for a similar reason
             to that of custom_constant_inc.php, which is to define custom
@@ -557,7 +557,7 @@ functions section.</para>
                 Developer,70:Manager,90:Administrator'; }
             </programlisting>
         </para>
-        
+
         <formalpara>
             <title>Conclusion</title><para>We have covered how enumerations work in general, and how
                 to customise one of them. If you are interested in customising
@@ -569,10 +569,10 @@ functions section.</para>
                 constants / language files directly.
             </para>
         </formalpara>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>Email Notifications</title>
 
@@ -638,7 +638,7 @@ functions section.</para>
                         to those involved in them. Don't send mail people already know
                         about. Also send new issue notifications to managers so they can
                         screen them.
-                        <programlisting>$g_mail_receive_own = OFF; 
+                        <programlisting>$g_mail_receive_own = OFF;
                             $g_default_notify_flags =
                             array('reporter' =&gt; ON, 'handler' =&gt; ON, 'monitor' =&gt; ON,
                             'bugnotes' =&gt; ON, 'threshold_min' =&gt; NOBODY, 'threshold_max'
@@ -802,24 +802,24 @@ functions section.</para>
 
                 <para>The following function is used to validate an issue before
                     it is resolved.
-                    <programlisting width="102"><![CDATA[<?php 
-# -------------------- 
-# Hook to validate Validate field settings before resolving 
-# verify that the resolution is not set to OPEN 
+                    <programlisting width="102"><![CDATA[<?php
+# --------------------
+# Hook to validate Validate field settings before resolving
+# verify that the resolution is not set to OPEN
 # verify that the fixed in version is set (if versions of the product exist)
 
 function custom_function_override_issue_update_validate( $p_issue_id, $p_bug_data, $p_bugnote_text ) {
-if ( $p_bug_data->status == RESOLVED ) { 
+if ( $p_bug_data->status == RESOLVED ) {
 if ( $p_bug_data->resolution == OPEN ) {
-error_parameters( 'the resolution cannot be open to resolve the issue' ); 
-trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR ); 
+error_parameters( 'the resolution cannot be open to resolve the issue' );
+trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR );
 }
 $t_version_count = count( version_get_all_rows( $p_bug_data-&gt;project_id ) );
 if ( ( $t_version_count > 0 ) && ( $p_bug_data->fixed_in_version == '' ) ) {
-error_parameters( 'fixed in version must be set to resolve the issue' ); 
-trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR ); 
-} 
-} 
+error_parameters( 'fixed in version must be set to resolve the issue' );
+trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR );
+}
+}
 }
 ?>]]>
                     </programlisting>

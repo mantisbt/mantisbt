@@ -1,34 +1,34 @@
 <?php
-	# Disposable Email Checker - a static php based check for spam emails
-	# Copyright (C) 2007 Victor Boctor
-	#
-	#     http://www.futureware.biz/disposable
-	#     http://www.mantisbt.org/
-	#
-	# This program is distributed under the terms and conditions of the LGPL
-	# See the README and LICENSE files for details
-	#
-	# Version 1.0.1 - Release Date: 31-July-2007 
+# Disposable Email Checker - a static php based check for spam emails
+# Copyright (C) 2007 Victor Boctor
+#
+#     http://www.futureware.biz/disposable
+#     http://www.mantisbt.org/
+#
+# This program is distributed under the terms and conditions of the LGPL
+# See the README and LICENSE files for details
+#
+# Version 1.0.1 - Release Date: 31-July-2007
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
 /**
  * A class that checks an email address and provides some facts about whether
- * it is a disposable, free web mail, etc.  The data that is used to make 
+ * it is a disposable, free web mail, etc.  The data that is used to make
  * such decision is static as part of the class implementation, hence
  * avoiding a round trip to a remote service.  This makes the class much
  * more efficient in scenarios where performance is an issue.
- */      
+ */
 class DisposableEmailChecker
 {
 	/**
 	 * Determines if the email address is disposable.
-	 * 
+	 *
 	 * @param $p_email  The email address to validate.
 	 * @returns true: disposable, false: non-disposable.
-	 */	 	 	 	 	
+	 */
 	public static function is_disposable_email( $p_email ) {
 		return (
 			DisposableEmailChecker::is_forwarding_email( $p_email ) ||
@@ -39,13 +39,13 @@ class DisposableEmailChecker
 
 	/**
 	 * Determines if the email address is disposable email that forwards to
-	 * users' email address.  This is one of the best kind of disposable 
+	 * users' email address.  This is one of the best kind of disposable
 	 * addresses since emails end up in the user's inbox unless the user
 	 * cancel the address.
-	 * 
+	 *
 	 * @param $p_email  The email address to check.
 	 * @returns true: disposable forwarding, false: otherwise.
-	 */	 	 
+	 */
 	public static function is_forwarding_email( $p_email ) {
 		$t_domain = DisposableEmailChecker::_get_domain_from_address( $p_email );
 
@@ -80,12 +80,12 @@ class DisposableEmailChecker
 			case 'xmaily.com':
 			case 'fakemailz.com':
 			case 'shiftmail.com':
-			case '1chuan.com': 
-			case '1zhuan.com': 
-			case '4warding.com': 
-			case '4warding.net': 
-			case '4warding.org': 
-			case 'imstations.com': 
+			case '1chuan.com':
+			case '1zhuan.com':
+			case '4warding.com':
+			case '4warding.net':
+			case '4warding.org':
+			case 'imstations.com':
 				return true;
 		}
 
@@ -94,14 +94,14 @@ class DisposableEmailChecker
 
 	/**
 	 * Determines if the email address is trash email that doesn't forward to
-	 * user's email address.  This kind of address can be checked using a 
+	 * user's email address.  This kind of address can be checked using a
 	 * web page and no password is required for such check.  Hence, data sent
 	 * to such address is not protected.  Typically users use these addresses
 	 * to signup for a service, and then they never check it again.
-	 * 
+	 *
 	 * @param $p_email  The email address to check.
 	 * @returns true: disposable trash mail, false: otherwise.
-	 */	 	 	 	 	 	 	 	 	
+	 */
 	public static function is_trash_email( $p_email ) {
 		$t_domain = DisposableEmailChecker::_get_domain_from_address( $p_email );
 
@@ -151,61 +151,61 @@ class DisposableEmailChecker
 			case 'willselfdestruct.com':
 			case 'yopmail.com':
 			case 'mailinator.com':
-			case 'mailinator2.com': 
-			case 'sogetthis.com': 
-			case 'mailin8r.com': 
-			case 'mailinator.net': 
+			case 'mailinator2.com':
+			case 'sogetthis.com':
+			case 'mailin8r.com':
+			case 'mailinator.net':
 			case 'klassmaster.com':
 			case 'fastacura.com':
 			case 'fastchevy.com':
-			case 'fastchrysler.com': 
+			case 'fastchrysler.com':
 			case 'fastkawasaki.com':
 			case 'fastmazda.com':
-			case 'fastmitsubishi.com': 
+			case 'fastmitsubishi.com':
 			case 'fastnissan.com':
 			case 'fastsubaru.com':
 			case 'fastsuzuki.com':
 			case 'fasttoyota.com':
 			case 'fastyamaha.com':
-			case '675hosting.com': 
-			case '675hosting.net': 
-			case '675hosting.org': 
-			case '75hosting.com': 
-			case '75hosting.net': 
-			case '75hosting.org': 
-			case 'ajaxapp.net': 
-			case 'amiri.net': 
-			case 'amiriindustries.com': 
-			case 'emailmiser.com': 
-			case 'etranquil.com': 
-			case 'etranquil.net': 
-			case 'etranquil.org': 
-			case 'gowikibooks.com': 
-			case 'gowikicampus.com': 
-			case 'gowikicars.com': 
-			case 'gowikifilms.com': 
-			case 'gowikigames.com': 
-			case 'gowikimusic.com': 
-			case 'gowikinetwork.com': 
-			case 'gowikitravel.com': 
+			case '675hosting.com':
+			case '675hosting.net':
+			case '675hosting.org':
+			case '75hosting.com':
+			case '75hosting.net':
+			case '75hosting.org':
+			case 'ajaxapp.net':
+			case 'amiri.net':
+			case 'amiriindustries.com':
+			case 'emailmiser.com':
+			case 'etranquil.com':
+			case 'etranquil.net':
+			case 'etranquil.org':
+			case 'gowikibooks.com':
+			case 'gowikicampus.com':
+			case 'gowikicars.com':
+			case 'gowikifilms.com':
+			case 'gowikigames.com':
+			case 'gowikimusic.com':
+			case 'gowikinetwork.com':
+			case 'gowikitravel.com':
 			case 'gowikitv.com':
-			case 'myspaceinc.com': 
-			case 'myspaceinc.net': 
-			case 'myspaceinc.org': 
-			case 'myspacepimpedup.com': 
-			case 'ourklips.com': 
-			case 'pimpedupmyspace.com': 
-			case 'rklips.com': 
-			case 'turual.com': 
-			case 'upliftnow.com': 
-			case 'uplipht.com': 
-			case 'viditag.com': 
-			case 'viewcastmedia.com': 
-			case 'viewcastmedia.net': 
-			case 'viewcastmedia.org': 
-			case 'wetrainbayarea.com': 
-			case 'wetrainbayarea.org': 
-			case 'xagloo.com': 
+			case 'myspaceinc.com':
+			case 'myspaceinc.net':
+			case 'myspaceinc.org':
+			case 'myspacepimpedup.com':
+			case 'ourklips.com':
+			case 'pimpedupmyspace.com':
+			case 'rklips.com':
+			case 'turual.com':
+			case 'upliftnow.com':
+			case 'uplipht.com':
+			case 'viditag.com':
+			case 'viewcastmedia.com':
+			case 'viewcastmedia.net':
+			case 'viewcastmedia.org':
+			case 'wetrainbayarea.com':
+			case 'wetrainbayarea.org':
+			case 'xagloo.com':
 			case 'buyusedlibrarybooks.org':
 			case 'mailquack.com':
 			case 'mailslapping.com':
@@ -225,12 +225,12 @@ class DisposableEmailChecker
 
 	/**
 	 * Determines if the email address is a shredder email address.  Shredder
-	 * email address delete all received emails without forwarding them or 
+	 * email address delete all received emails without forwarding them or
 	 * making them available for a user to check.
-	 * 
+	 *
 	 * @param $p_email  The email address to check.
 	 * @returns true: shredded disposable email, false: otherwise.
-	 */	 	 	 	 	 	 	
+	 */
 	public static function is_shredder_email( $p_email ) {
 		$t_domain = DisposableEmailChecker::_get_domain_from_address( $p_email );
 
@@ -247,10 +247,10 @@ class DisposableEmailChecker
 	 * addresses that auto expire after a pre-configured time.  For example,
 	 * 10 minutes, 1 hour, 2 hours, 1 day, 1 month, etc.  These address can
 	 * also be trash emails or forwarding emails.
-	 * 
+	 *
 	 * @param $p_email  The email address to check.
 	 * @returns true: time bound disposable email, false: otherwise.
-	 */	 	 	 	 	 	 	 	
+	 */
 	public static function is_time_bound_email( $p_email ) {
 		$t_domain = DisposableEmailChecker::_get_domain_from_address( $p_email );
 
@@ -307,15 +307,15 @@ class DisposableEmailChecker
 	/**
 	 * Determines if the email address is a free email address.  These are
 	 * addresses that users can sign up for free.  They then has to login to
-	 * these address to get the emails.  These are not considered to be 
+	 * these address to get the emails.  These are not considered to be
 	 * disposable emails, however, if the application is providing a free
 	 * trial for an expensive server, then users can signup for more accounts
 	 * to get further trials.
-	 * 
+	 *
 	 * If applications are to block these addresses, it is important to be aware
 	 * that some users use free webmail as their primary email and that such
 	 * service providers include hotmail, gmail, and yahoo.
-	 */	 	 	 	 	  	 	 	 	 	
+	 */
 	public static function is_free_email( $p_email ) {
 		$t_domain = DisposableEmailChecker::_get_domain_from_address( $p_email );
 
@@ -397,18 +397,18 @@ class DisposableEmailChecker
 	/**
 	 * A debugging function that takes in an email address and dumps out the
 	 * details for such email.
-	 * 
-	 * @param $p_email  The email address to echo results for.  This must be a 
-	 *                  safe script (i.e. no javascript, etc).                	 	 
-	 */	 	 	 	 	
+	 *
+	 * @param $p_email  The email address to echo results for.  This must be a
+	 *                  safe script (i.e. no javascript, etc).
+	 */
 	function echo_results( $p_email ) {
 		echo 'email address = ', htmlspecialchars( $p_email ), '<br />';
-		echo 'is_disposable_email = ', DisposableEmailChecker::is_disposable_email( $p_email ), '<br />'; 
-		echo 'is_forwarding_email = ', DisposableEmailChecker::is_forwarding_email( $p_email ), '<br />'; 
-		echo 'is_trash_email = ', DisposableEmailChecker::is_trash_email( $p_email ), '<br />'; 
-		echo 'is_time_bound_email = ', DisposableEmailChecker::is_time_bound_email( $p_email ), '<br />'; 
-		echo 'is_shredder_email = ', DisposableEmailChecker::is_shredder_email( $p_email ), '<br />'; 
-		echo 'is_free_email = ', DisposableEmailChecker::is_free_email( $p_email ), '<br />'; 
+		echo 'is_disposable_email = ', DisposableEmailChecker::is_disposable_email( $p_email ), '<br />';
+		echo 'is_forwarding_email = ', DisposableEmailChecker::is_forwarding_email( $p_email ), '<br />';
+		echo 'is_trash_email = ', DisposableEmailChecker::is_trash_email( $p_email ), '<br />';
+		echo 'is_time_bound_email = ', DisposableEmailChecker::is_time_bound_email( $p_email ), '<br />';
+		echo 'is_shredder_email = ', DisposableEmailChecker::is_shredder_email( $p_email ), '<br />';
+		echo 'is_free_email = ', DisposableEmailChecker::is_free_email( $p_email ), '<br />';
 	}
 
 	//
@@ -421,7 +421,7 @@ class DisposableEmailChecker
 	 *
 	 * @param $p_email  The email address to extra the domain from.
 	 * @returns The lower case domain or empty string if email not valid.
-	 */	 	 	 	 	 	
+	 */
 	private static function _get_domain_from_address( $p_email ) {
 		$t_domain_pos = strpos( $p_email, '@' );
 		if ( $t_domain_pos === false ) {
@@ -431,4 +431,3 @@ class DisposableEmailChecker
 		return strtolower( substr( $p_email, $t_domain_pos + 1 ) );
 	}
 }
-

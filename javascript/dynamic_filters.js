@@ -83,10 +83,7 @@
 // | There are no event handlers in the HTML code. The events are added   |
 // | on pageload(based on specific id names).                             |
 // +----------------------------------------------------------------------+
-//
-//
 */
-
 
 var processURI    = './return_dynamic_filters.php';
 var liveReq = false;
@@ -99,7 +96,7 @@ function liveReqDoReq() {
 	if (liveReq && liveReq.readyState < 4) {
 		liveReq.abort();
 	}
-	
+
 	if (window.XMLHttpRequest) {
 		// branch for IE7, Firefox, Opera, etc.
 		liveReq = new XMLHttpRequest();

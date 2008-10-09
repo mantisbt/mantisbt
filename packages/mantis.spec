@@ -19,11 +19,11 @@ Requires: php
 
 
 %description
-Mantis is a web-based bugtracking system. It is written in the PHP 
-scripting language and requires the MySQL database and a webserver. 
-Mantis has been installed on Windows, MacOS, OS/2, and a variety of 
-Unix operating systems. Any web browser should be able to function 
-as a client. It is released under the terms of the GNU General 
+Mantis is a web-based bugtracking system. It is written in the PHP
+scripting language and requires the MySQL database and a webserver.
+Mantis has been installed on Windows, MacOS, OS/2, and a variety of
+Unix operating systems. Any web browser should be able to function
+as a client. It is released under the terms of the GNU General
 Public License (GPL).
 
 

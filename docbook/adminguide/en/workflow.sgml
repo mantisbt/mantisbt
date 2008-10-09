@@ -1,12 +1,12 @@
 <chapter>
     <title>Issue Lifecycle and Workflow</title>
-    
+
     <section>
         <title>Issue Creation</title>
-	
+
 	<para>The life cycle of an issue starts with its creation.  An issue can
 	be created via one of the following channels:
-	
+
 	<itemizedlist>
 	    <listitem><para>MantisBT Web Interface - This is where a user logs
 	    into MantisBT and reports a new issue.</para></listitem>
@@ -26,10 +26,10 @@
 	</itemizedlist>
 	</para>
     </section>
-    
+
     <section>
         <title>Issue Statuses</title>
-	
+
 	<para>An important part of issue tracking is to classify issues as
 	per their status.  Each team may decide to have a different set of
 	categorization for the status of the issues, and hence, MantisBT
@@ -40,10 +40,10 @@
 	following statuses: new, feedback, acknowledged, confirmed, assigned,
 	resolved and closed.  In this case "new" -> "assigned" map to opened,
 	"resolved" means resolved and "closed" means closed.</para>
-	
+
 	<para>Following is the explanation of what the standard statuses that
 	are shipped with MantisBT means.
-	
+
 	<itemizedlist>
 	    <listitem><para>New - This is the landing status for new issues.  Issues
 	    stay in this status until they are assigned, acknowledged, confirmed
@@ -77,14 +77,14 @@
 	</itemizedlist>
 	</para>
     </section>
-    
+
     <section>
         <title>Workflow</title>
-	
+
 	<para>Now that we have covered how an issue gets created, and what are
 	the different statuses during the life cycle of such issues, the next
 	step is to define the workflow.  In other words, how issues move from
-	one status to another and who has access to trigger such transitions. 
+	one status to another and who has access to trigger such transitions.
 	MantisBT provides the ability for teams to define their own custom
 	workflow which works on top of their custom status.  The workflow
 	dictates the valid transitions between statuses and the user access
@@ -92,11 +92,11 @@
 
         <section>
 	    <title>Workflow Transitions</title>
-	    
+
 	    <para>This "Manage &gt; Manage Configuration &gt; Workflow
 	    Transitions" page allows users with ADMINISTRATOR access level to do the
 	    following tasks.
-	    
+
 	    <itemizedlist>
 	        <listitem><para>Define the valid next statuses for each status.</para></listitem>
 		<listitem><para>Define the default next status for each
@@ -115,7 +115,7 @@
 		workflow.</para></listitem>
             </itemizedlist>
 	    </para>
-	    
+
 	    <para>Note that the scope of the applied change is
 	    dependent on the selected project.  If "All Projects" is selected,
 	    then the configuration is to be used as the default for all
@@ -126,12 +126,12 @@
 
 	<section>
 	    <title>Workflow Thresholds</title>
-	    
+
 	    <para>This "Manage &gt; Manage Configuration &gt; Workflow
 	    Thresholds" page allows users with ADMINISTRATOR access level to
 	    define the thresholds required to do certain actions.  Following is
 	    a list of such actions and what they mean:
-	    
+
 	    <itemizedlist>
 	        <listitem><para>Report an issue - The access levels that are
 		allowed to report an issue.</para></listitem>

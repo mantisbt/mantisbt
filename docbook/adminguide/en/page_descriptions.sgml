@@ -1,10 +1,10 @@
 <chapter>
     <title>Page descriptions</title>
     <section>
-        
+
         <title>Login page</title>
-        
-        
+
+
         <para>Just enter your username and password and hit the login
             button. There is also a Save Login checkbox to have the package
             remember that you are logged in between browser sessions. You will
@@ -24,12 +24,12 @@
             to be emailed, newly generated accounts will have an empty
             password.
         </para>
-        
+
     </section>
-    
+
     <section>
         <title>Main page</title>
-        
+
         <para>This is the first page you see upon logging in. It shows you
             the latest news updates for the bugtracker. This is a simple news
             module (based off of work by Scott Roberts) and is to keep users
@@ -47,11 +47,11 @@
             that are either global or specific to the selected project.
         </para>
     </section>
-    
-    
+
+
     <section>
         <title>View Issues page</title>
-        
+
         <para>Here we can view the issue listings. The page has a set of
             viewing filters at the top and the issues are listed below.FiltersThe
             filters control the behavior of the issues list. The filters are saved
@@ -62,7 +62,7 @@
             look for simple keyword matches in the summary, description, steps
             to reproduce, additional information, issue id, or issue text id
             fields. It does not search through issue notes.
-            
+
             Issue List - The issues are
             listed in a table and the attributes are listed in the following
             order: priority, id, number of issue notes, category, severity,
@@ -105,14 +105,14 @@
             show the resolution as a title. This is rendered by some browsers
             as a bubble and in others as a status line text.
         </para>
-        
+
     </section>
-    
+
     <section>
-        
+
         <title>Issue View Simple page</title>
-        
-        
+
+
         <para>Here is the simple listing of the issue report. Most of the
             fields are self-explanatory. "Assigned To" will contain the
             developer assigned to handle the issue. Priority is fully functional
@@ -182,24 +182,24 @@
             handle file uploads. If uploading to disk is selected, each project
             needs to set its own upload path.  Issue notes are shown at the bottom
             of the issue report. A panel to add issue notes is also shown.
-        </para>    
+        </para>
     </section>
 
     <section>
         <title>Issue View Advanced page</title>
-        
+
         <para>The advanced view is much the same as the simple view with a
             few additional fields. Here you can see Projection, ETA, Platform,
             OS, OSBuild, Product Version, Product Build, and Steps to
             Reproduce.
         </para>
         <para>See also: Issue View Simple page.</para>
-        
+
     </section>
-    
+
     <section>
         <title>Issue Change Status page</title>
-        
+
         <para>This page is used to change the status of an issue. A user
             can add an issue note to describe the reason for change.In addition,
             the following fields may be displayed for update:
@@ -227,14 +227,14 @@
                 </listitem>
             </itemizedlist>
         </para>
-        
+
     </section>
-    
-    
+
+
     <section>
-        
+
         <title>Issue Update Simple page</title>
-        
+
         <para>The layout of this page resemples the Simple Issue View
             page, but here you can update various issue fields. The Reporter,
             Category, Severity, and Reproducibility fields are editable but
@@ -243,32 +243,32 @@
             Resolution, and Duplicate ID fields.As per version 0.18.0, the user
             can also add an issue note as part of an issue update.
         </para>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>Issue Update Advanced page</title>
-        
+
         <para>Similar to Issue Update Simple page but has the extra advanced
             fields. The difference between the simple/advanced update pages
             should be consistent with the difference between the
             simple/advanced view pages.
         </para>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>My Account Page</title>
-        
+
         <para>This page changes user alterable parameters for the system.
             These selections are user specific.My AccountThis allows the user
             to change their password, screen name, and email address. It also
             reports the user's access levels on the current and other
             projects.
         </para>
-        
+
         <section>
             <title>Preferences</title>
             <para>
@@ -313,7 +313,7 @@
                     </listitem>
                 </itemizedlist>
             </para>
-            
+
         </section>
         <section>
             <title>Profiles</title>
@@ -324,21 +324,21 @@
             </para>
         </section>
     </section>
-    
-    
+
+
     <section>
         <title>System Management Pages</title>
-        
-        
+
+
         <para>A number of pages exist under the "Manage" link. These will
             only be visible to those who have an appropriate access
             level.
         </para>
-        
+
         <section>
             <title>Manage Users</title>
-            
-            
+
+
             <para>This page allow an administrator to manage the users in the
                 system.It essentially supplies a list of users defined in the
                 system. The user names are linked to a page where you can change
@@ -352,11 +352,11 @@
                 on the screen) cannot match another user's user name.
             </para>
         </section>
-        
+
         <section>
             <title>Manage Projects Page</title>
-            
-            
+
+
             <para>This page allows the user to manage the projects listed in
                 the system.Each project is listed along with a link to manage that
                 specific project. The specific project pages allow the user to
@@ -417,10 +417,10 @@
                 </itemizedlist>
             </para>
         </section>
-        
+
         <section>
             <title>Manage Custom Fields</title>
-            
+
             <para>This page is the base point for managing custom fields. It
                 lists the custom fields defined in the system. There is also a
                 place to enter a new field name to create a new field.The "Edit"
@@ -537,7 +537,7 @@
                     </tbody>
                 </tgroup>
             </informaltable>
-            
+
             <para>
                 The display entries are used as follows:
                 <informaltable>
@@ -606,7 +606,7 @@
                     </tgroup>
                 </informaltable>
             </para>
-            
+
             <para>Notes on Display
                 <itemizedlist>
                     <listitem>
@@ -619,23 +619,23 @@
                 </itemizedlist>
             </para>
         </section>
-        
-        
+
+
         <section>
             <title>Manage Global Profiles</title>
-            
+
             <para>This page allows the definition of global profiles
                 accessible to all users of the system. It is similar to the user
                 definition of a profile consisting of Platform, OS and
                 Version.
             </para>
         </section>
-        
-        
+
+
         <section>
             <title>Manage Configuration</title>
-            
-            
+
+
             <para>This set of pages control the configuration of the Mantis
                 system. Note that the configuration items displayed may be on a
                 project by project basis.These pages serve two purposes. First,
@@ -646,12 +646,12 @@
                 this should be left alone, but administrators may want to delegate
                 some of these settings to managers.
             </para>
-            
+
             <section>
-                
+
                 <title>Workflow Thresholds</title>
-                
-                
+
+
                 <para>This page covers the adjustment of the settings for many of
                     the workflow related parameters. For most of these, the fields are
                     self explanatory and relate to a similarly named setting in the
@@ -660,7 +660,7 @@
                     change the particular parameter.The values changeable on this page
                     are:
                 </para>
-                
+
                 <formalpara><title>Issues</title>
                 <para><informaltable>
                     <tgroup cols="3"><tbody>
@@ -806,7 +806,7 @@
                     </tgroup>
                 </informaltable></para>
                 </formalpara>
-                
+
                 <formalpara><title>Notes</title>
                 <para>
                 <informaltable>
@@ -845,7 +845,7 @@
                     </tgroup>
                 </informaltable></para>
                 </formalpara>
-               
+
                 <formalpara>
                     <title>Others</title>
                     <para>
@@ -875,12 +875,12 @@
                     </tgroup>
                 </informaltable></para>
                 </formalpara>
-                
+
             </section>
-            
+
             <section>
                 <title>Workflow Transitions</title>
-                
+
                 <para>This page covers the status workflow. For most of these, the
                     fields are self explanatory and relate to a similarly named setting
                     in the configuration file. At the right of each row is a selector
@@ -926,11 +926,11 @@
                     setting.
                 </para>
             </section>
-            
-            
+
+
             <section>
                 <title>Email Notifications</title>
-                
+
                 <para>This page sets the system defaults for sending emails on
                     issue related events.Mantis uses flags and a threshold system to
                     generate emails on events. For each new event, email is sent to:
@@ -985,10 +985,10 @@
             </section>
         </section>
     </section>
-    
+
     <section>
         <title>Monitor Issue</title>
-        
+
         <para>The monitor issues feature allows users to subscribe to
             certain issues and hence get copied on all notification emails that
             are sent for these issues.Depending on the configuration, sending a
@@ -1001,10 +1001,10 @@
             handlers in specific scenarios.
         </para>
     </section>
-    
+
     <section>
         <title>Reopen Issue</title>
-        
+
         <para>Re-open issue button is visible in the issue view pages if the
             user has the appropriate access level and the issue is
             resolved/closed. Re-opening a issue will allow users to enter
@@ -1012,12 +1012,12 @@
             put into the Feedback status.
         </para>
     </section>
-    
-    
+
+
     <section>
         <title>Delete Issue</title>
-        
-        
+
+
         <para>The delete issues button appears on the issue view pages for the
             users who have the appropriate access level. This allows you to
             delete an existing issue. This should only be used on frivolous or
@@ -1027,11 +1027,11 @@
             this).
         </para>
     </section>
-    
-    
+
+
     <section>
         <title>Close Issue</title>
-        
+
         <para>This is a button that appears on the issue view pages for
             users that are authorized to close issues. Depending on the
             configuration, users may be able to close issues without having to
@@ -1040,22 +1040,22 @@
             an issue note maybe added.
         </para>
     </section>
-    
-    
+
+
     <section>
         <title>Assign to Me</title>
-        
+
         <para>This button appears in the issue view pages in case of users
             with access level that is equal to handle_bug_threshold or higher.
             When this button is clicked the issue is assigned to the
             user.
         </para>
     </section>
-    
+
     <section>
         <title>Resolve Issue</title>
-        
-        
+
+
         <para>This option on the View Issues page allows you to resolve the
             issue. It will lead you to a page where you can set the resolution
             state and a duplicate id (if applicable). After choosing that the
@@ -1064,12 +1064,12 @@
             should check off on the issue by using the Close Issue button.
         </para>
     </section>
-    
+
     <section>
-        
+
         <title>News Syndication</title>
-        
-        
+
+
         <para>News syndication was added in Mantis 0.18.2. The syndication
             is done using the RSS v2.0 protocol.Up until Mantis 1.0.x releases,
             the news syndication were only available for:

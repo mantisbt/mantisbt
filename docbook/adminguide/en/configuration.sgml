@@ -65,7 +65,7 @@
             MantisBT. In most scenarios the default values should work fine, and
             you should not need to override them.
         </para>
-        <variablelist> 
+        <variablelist>
             <varlistentry>
                 <term>$g_path</term>
                 <listitem>
@@ -84,7 +84,7 @@
                 <listitem>
                     <para>This is the URL to the icons (images) directory as seen from
                         the web browser. All MantisBT images/icons are loaded from this URL.
-                        The default value for this URL is based on $g_path (i.e. '%path%images/').  Note that a trailing 
+                        The default value for this URL is based on $g_path (i.e. '%path%images/').  Note that a trailing
                         '/' is required.
                     </para>
                 </listitem>
@@ -137,7 +137,7 @@
     <section>
         <title>Webserver</title>
 
-        <variablelist> 
+        <variablelist>
             <varlistentry>
                 <term>$g_use_iis</term>
                 <listitem>
@@ -151,7 +151,7 @@
     <section>
         <title>Configuration Settings</title>
 
-        <variablelist> 
+        <variablelist>
             <varlistentry>
                 <term>$g_global_settings</term>
                 <listitem>
@@ -164,7 +164,7 @@
     <section>
         <title>Signup and Lost Password</title>
 
-        <variablelist> 
+        <variablelist>
             <varlistentry>
                 <term>$g_allow_signup</term>
                 <listitem>
@@ -418,7 +418,7 @@
                 <term>$g_mail_priority</term>
                 <listitem>
                     <para>If use_x_priority is set to ON, what should the value be?
-                        Urgent = 1, Not Urgent = 5, Disable = 0 . Default is 3 
+                        Urgent = 1, Not Urgent = 5, Disable = 0 . Default is 3
                         Some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
                     </para>
                 </listitem>
@@ -574,11 +574,11 @@
 
     <section>
         <title>Language</title>
-        <variablelist> 
+        <variablelist>
             <varlistentry>
                 <term>$g_default_language</term>
                 <listitem>
-                    <para>This is the language used by default in Mantis.  This may be set 
+                    <para>This is the language used by default in Mantis.  This may be set
 		    to 'auto' where MantisBT will try to determine the language from the browser.
                     </para>
                 </listitem>
@@ -624,7 +624,7 @@
     <section>
         <title>Display</title>
 
-        <variablelist> 
+        <variablelist>
             <varlistentry>
                 <term>$g_window_title</term>
                 <listitem>
@@ -736,7 +736,7 @@
                 <listitem>
                     <para>This configuration option is used to select the columns to be included in the View Issues page and in which order.  If one of the column is not accessible to the logged in user, or corresponds to a disabled feature, then it will be automatically removed from the list at runtime.  Hence, the same column list may show a different set of columns based on the logged in user, the currently selected project and enabled features (e.g. sponsorship_total is only shown if the sponsorship feature is enabled).</para>
                     <para>The supported columns are: selection, edit, id, project_id, reporter_id, handler_id, priority, reproducibility, projection, eta, resolution, fixed_in_version, view_state, os, os_build, build (for product build), platform, version, date_submitted, attachment, category, sponsorship_total, severity, status, last_updated, summary, bugnotes_count, description, steps_to_reproduce, additional_information.  As for custom fields they can be referenced by adding a 'custom_' to their name (e.g. xyz would be custom_xyz).</para>
-                    <para>By default the following columns are selected: selection, edit, priority, id, sponsorship_total, bugnotes_count, attachment, category_id, severity, status, last_updated, summary.</para> 
+                    <para>By default the following columns are selected: selection, edit, priority, id, sponsorship_total, bugnotes_count, attachment, category_id, severity, status, last_updated, summary.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
@@ -811,7 +811,7 @@
                 <term>$g_show_avatar</term>
                 <listitem>
                     <para>Show user avatar (default OFF); the current implementation is based on http://www.gravatar.com,
-                    users will need to register there with the same email address used in 
+                    users will need to register there with the same email address used in
                     this MantisBT installation to have their avatar shown.</para>
                     <note><para>Upon registration or avatar change, it takes some time for the updated gravatar images to show on sites.</para></note>
                 </listitem>
@@ -872,10 +872,10 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>JpGraph</title>
         <para>Jpgraph is a package that is used to render graphs. It is
@@ -899,7 +899,7 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
         <note>
             <para>To use the Jpgraph addon you need the
                 <ulink url="http://www.aditus.nu/jpgraph/index.php">JpGraph</ulink>
@@ -909,8 +909,8 @@
             </para>
         </note>
     </section>
-    
-    
+
+
     <section>
         <title>Date</title>
         <para>These variables control how the date is displayed (default
@@ -919,7 +919,7 @@
             function in PHP online manual for detailed instructions on date
             formatting.
         </para>
-        
+
         <variablelist>
             <varlistentry>
                 <term>$g_short_date_format</term>
@@ -945,18 +945,18 @@
                     </para>
                 </listitem>
             </varlistentry>
-            
+
         </variablelist>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>News</title>
         <para>These options are used to control the query that selects the
             news entries to be displayed.
         </para>
-        
+
         <variablelist>
             <varlistentry>
                 <term>$g_news_limit_method</term>
@@ -994,8 +994,8 @@
             </varlistentry>
         </variablelist>
     </section>
-    
-    
+
+
     <section>
         <title>Default Preferences</title>
         <variablelist>
@@ -1212,8 +1212,8 @@
             </ulink>
         </para>
     </section>
-    
-    
+
+
     <section>
         <title>Summary</title>
         <para>These are the settings that are used to configuration
@@ -1258,14 +1258,14 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>Bugnote</title>
         <variablelist>
-            
+
             <varlistentry>
                 <term>$g_bugnote_order</term>
                 <listitem>
@@ -1276,13 +1276,13 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>File Upload</title>
-        
+
         <para>Mantis allows users to upload file attachements and
             associated them with bugs as well as projects. Bug attachments /
             project documents can be uploaded to the webserver, database, or an
@@ -1296,7 +1296,7 @@
             .
         </para>
         <para>Mantis FAQ</para>
-        
+
         <variablelist>
             <varlistentry>
                 <term>$g_allow_file_upload</term>
@@ -1407,14 +1407,14 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>HTML</title>
-        
-        <variablelist> 
+
+        <variablelist>
             <varlistentry>
                 <term>$g_html_tags</term>
                 <listitem>
@@ -1491,7 +1491,7 @@
 
     <section>
         <title>Authentication</title>
-        <variablelist> 
+        <variablelist>
             <varlistentry>
                 <term>$g_login_method</term>
                 <listitem><para>
@@ -1593,8 +1593,8 @@
 
     <section>
         <title>Status Settings</title>
-        
-        
+
+
         <variablelist>
             <varlistentry>
                 <term>$g_bug_submit_status</term>
@@ -1740,19 +1740,19 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
         <para>See also:
             <ulink url="manual.customizing.mantis.customizing.status.values.html">Customizing
                 Status Values
             </ulink>
         </para>
     </section>
-    
-    
+
+
     <section>
         <title>Filters</title>
-        
-        
+
+
         <variablelist>
             <varlistentry>
                 <term>$g_filter_by_custom_fields</term>
@@ -1823,7 +1823,7 @@
             </varlistentry>
         </variablelist>
     </section>
- 
+
     <section>
         <title>Misc</title>
         <variablelist>
@@ -1944,10 +1944,10 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>Cookies</title>
         <para>The configuration variables $g_string_cookie,
@@ -1956,7 +1956,7 @@
             prefix in config_inc.php, you need to follow it with a copy of the
             four lines that calculate the names for these cookies.
         </para>
-        
+
         <variablelist>
             <varlistentry>
                 <term>$g_cookie_path</term>
@@ -1997,21 +1997,21 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>Database Tables</title>
-        
+
         <para>Mantis enables users to configure a table prefix for all its
             tables. This is useful to be able to have multiple Mantis
             installation in the same database. The advantage of that is for
             users who are limited by their ISP to have one database.
         </para>
-        
+
         <variablelist>
-            
+
             <varlistentry>
                 <term>$g_db_table_prefix</term>
                 <listitem>
@@ -2021,7 +2021,7 @@
                         database. The other option is to import db_generate.sql as is, then
                         rename the tables to match the new prefix.
                     </para>
-                    
+
                     <para>The prefix is used to help make sure table names are unique.
                         This is useful for users who are limited to one database.
                     </para>
@@ -2037,13 +2037,13 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
     </section>
-    
+
     <section>
         <title>Speed Optimisation</title>
-        
-        
+
+
         <variablelist>
             <varlistentry>
                 <term>$g_compress_html</term>
@@ -2084,13 +2084,13 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>Reminders</title>
-        
+
         <para>Sending reminders is a feature where a user can notify /
             remind other users about a bug. In the past, only selected users
             like the managers, or developers would get notified about bugs.
@@ -2102,7 +2102,7 @@
             needing this person to do this manual outside Mantis. It also
             records the history of such reminders.
         </para>
-        
+
         <variablelist>
             <varlistentry>
                 <term>$g_store_reminders</term>
@@ -2123,14 +2123,14 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>Bug History</title>
-        
-        
+
+
         <para>Bug history is a feature where Mantis tracks all
             modifications that are made to bugs. These include everything
             starting from its creation, till it is closed. For each change, the
@@ -2159,14 +2159,14 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
     </section>
-    
-    
-    <section>    
+
+
+    <section>
         <title>Sponsorship</title>
-        
-        
+
+
         <variablelist>
             <varlistentry>
                 <term>$g_enable_sponsorship</term>
@@ -2238,14 +2238,14 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>Source Control Integration</title>
-        
-        
+
+
         <variablelist>
             <varlistentry>
                 <term>$g_source_control_account</term>
@@ -2288,13 +2288,13 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>Custom Fields</title>
-        
+
         <variablelist>
             <varlistentry>
                 <term>$g_manage_custom_fields_threshold</term>
@@ -2322,14 +2322,14 @@
                 </listitem>
             </varlistentry>
         </variablelist>
-        
+
     </section>
-    
-    
+
+
     <section>
         <title>My View Settings</title>
-        
-        
+
+
         <variablelist>
             <varlistentry>
                 <term>$g_my_view_boxes</term>
@@ -2380,14 +2380,14 @@
             debugging information for the Mantis system. It can also serve as
             an audit trail for user actions.
         </para>
-        
+
         <variablelist>
             <varlistentry>
                 <term>$g_log_level</term>
                 <listitem>
                     <para>This controls the type of logging information recorded.
                         Possible values include:
-                        
+
                         <variablelist>
                             <varlistentry>
                                 <term>LOG_EMAIL</term>

@@ -118,4 +118,3 @@ class ExamplePlugin extends MantisPlugin {
 		</sect2>
 
 	</sect1>
-

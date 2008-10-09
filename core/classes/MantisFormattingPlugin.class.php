@@ -74,6 +74,4 @@ abstract class MantisFormattingPlugin extends MantisPlugin {
 	function email( $p_event, $p_string ) {
 		return $p_string;
 	}
-
 }
-

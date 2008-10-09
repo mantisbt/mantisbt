@@ -1,9 +1,9 @@
 body {
-	background-color: #ffffff; 
-	color: #000000; 
-	font-family: Verdana, Arial, Helvetica, sans-serif; 
-	font-size: 10pt; 
-	margin: 6px 4px; 
+	background-color: #ffffff;
+	color: #000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	margin: 6px 4px;
 }
 
 p 					{ font-family: Verdana, Arial, Helvetica, sans-serif; }
@@ -91,8 +91,8 @@ td.login-info-left		{ width: 33%; padding: 0px; text-align: left; }
 td.login-info-middle	{ width: 33%; padding: 0px; text-align: center; }
 td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space: nowrap; }
 
-td.menu	
-{ 
+td.menu
+{
 	background-color: #e8e8e8;
 	color: #000000;
 	text-align: center;
@@ -117,17 +117,17 @@ div						{ padding: 3px; }
 div.menu				{ background-color: #e8e8e8; color: #000000; text-align: center; width: 100%; padding: 1px; }
 
 div.center {
-	width: 50%; 
-	margin-right: auto; 
-	margin-left: auto; 
+	width: 50%;
+	margin-right: auto;
+	margin-left: auto;
 }
 
-div.border 
+div.border
 {
-	background-color: #ffffff; 
-	border: solid 1px #000000; 
-	text-align: center; 
-	position: relative; 
+	background-color: #ffffff;
+	border: solid 1px #000000;
+	text-align: center;
+	position: relative;
 }
 
 div.quick-summary-left	{ width: 49%; padding: 2px; text-align: left;  float: left; }

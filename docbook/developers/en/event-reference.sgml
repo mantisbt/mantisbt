@@ -17,7 +17,7 @@
 			Following that should be a list of event parameters (if any), as well as the expected return
 			value (if any).
 		</para>
-	
+
 		<blockquote id="dev.eventref.example">
 			<title>EVENT_EXAMPLE (Default)</title>
 
@@ -38,14 +38,14 @@
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
-	
+
 	</sect1>
 
 	<sect1 id="dev.eventref.plugin">
 		<title>Plugin System</title>
 
 		<para>
-			These events are initiated by the plugin system itself to allow certain functionality to 
+			These events are initiated by the plugin system itself to allow certain functionality to
 			simplify plugin development.
 		</para>
 
@@ -62,8 +62,8 @@
 				</para>
 
 				<para>
-					This event is the first point in page execution where all registered plugins are 
-					guaranteed to be enabled (assuming dependencies and such are met).  At any point 
+					This event is the first point in page execution where all registered plugins are
+					guaranteed to be enabled (assuming dependencies and such are met).  At any point
 					before this event, any or all plugins may not yet be loaded.
 				</para>
 
@@ -81,7 +81,4 @@
 
 	&eventref-output;
 	&eventref-bug;
-
 </chapter>
-
-

@@ -16,5 +16,3 @@ DisposableEmailChecker ChangeLog
 - 11 disposable trash email providers.
 - 1 disposable shredder email provider.
 - 3 free email providers
-
-

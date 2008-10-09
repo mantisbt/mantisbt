@@ -1,5 +1,3 @@
-
-
 var time_tracking_ms = 0;
 var time_tracking_running = 0;
 
@@ -43,4 +41,3 @@ function time_tracking_display() {
 }
 
 setTimeout("time_tracking_display();", 1000);
-

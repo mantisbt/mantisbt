@@ -1,6 +1,6 @@
 <chapter>
     <title>Installation</title>
-    
+
     <para>Following are the steps for a new Mantis installation:</para>
     <itemizedlist>
         <listitem>
@@ -27,7 +27,7 @@
             </para>
         </listitem>
     </itemizedlist>
-    
+
     <para>Following are the steps to upgrade a Mantis installation:See
         <ulink url="manual.installation.upgrading.html">Upgrading</ulink>.The
         following details the basic steps for installation on any system.
@@ -35,10 +35,10 @@
         Windows systems.Barring complications, it should take you about
         10-20 minutes to install,configure, and be using Mantis.
     </para>
-    
+
     <section>
         <title>Summary</title>
-        
+
         <orderedlist>
             <listitem>
                 <para>Tranfer files</para>
@@ -62,11 +62,11 @@
                 <para>Add projects and users</para>
             </listitem>
         </section>
-         
-        
+
+
         <section>
             <title>New Installations</title>
-            
+
             <orderedlist>
                 <listitem>
                     <para>First, transfer the file to your webserver using whatever
@@ -93,7 +93,7 @@
                         basic configurationfile.From your web server, access
                         http://yoursite/mantis/admin/install.phpThis page will walk through
                         the following steps:
-                        
+
                         <orderedlist>
                             <listitem>
                                 <para>check basic parameters for the web server</para>
@@ -131,7 +131,7 @@
                                 </para>
                             </listitem>
                         </orderedlist>
-                        
+
                     </para>
                 </listitem>
                 <listitem>
@@ -151,7 +151,7 @@
                         register_globals that youare using.
                     </para>
                 </listitem>
-                
+
                 <listitem>
                     <para>Mantis now uses only .php files.If your webserver is
                         configured for other extensions (.PHP3, .PHTML) then youwill have
@@ -160,7 +160,7 @@
                         http://www.php.net/manual/en/installation.php
                     </para>
                 </listitem>
-                
+
                 <listitem>
                     <para>Login to your bugtracker and go to the manage section.
                         Click on the projects link. You will need to ADD a new project. Then
@@ -170,14 +170,14 @@
                     </para>
                 </listitem>
             </orderedlist>
-            
+
         </section>
-        
+
         <section>
-            
+
             <title>Requirements</title>
 
-            
+
             <para>The following versions are required for proper operation:</para>
             <informaltable>
                 <tgroup cols="3"><tbody>
@@ -227,12 +227,12 @@
             </itemizedlist>
 
         </section>
-        
+
         <section>
-            
+
             <title>Backups</title>
-            
-            
+
+
             <para>It is recommended to backup your Mantis database on a
                 regular basis. This is easy to accomplish using the mysqldump
                 command:
@@ -255,14 +255,14 @@
                 possibly customization), issue attachments / project documents, and
                 database contents.
             </para>
-            
+
         </section>
-        
+
         <section>
-            
+
             <title>CVS Integration</title>
-            
-            
+
+
             <para>CVS integration allows Mantis to register commits to the CVS
                 source control system into corresponding issue notes in the issue
                 tracker.The setup requires that the mantis installation be
@@ -281,7 +281,7 @@
                 is configured through config_inc.php and through custom
                 functions.
             </para>
-            
+
             <para>See also:
                 <ulink url="manual.configuration.source.control.integration.html">Source
                     Control Integration
@@ -292,12 +292,12 @@
                 </ulink>
             </para>
         </section>
-        
+
         <section>
-            
+
             <title>Uninstall</title>
-            
-            
+
+
             <para>
                 It is recommended that you make an backup in case you wish to use
                 your data in the future. See the
@@ -326,5 +326,5 @@
                 specific database for Mantis that does not contain any other data,
                 you can drop the whole database.
             </para>
-            
+
         </section>

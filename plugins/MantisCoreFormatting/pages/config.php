@@ -103,4 +103,3 @@ print_manage_menu();
 
 <?php
 html_page_bottom1( __FILE__ );
-

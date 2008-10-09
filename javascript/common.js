@@ -22,11 +22,9 @@
  * --------------------------------------------------------
  */
 
-
 /*
  * String manipulation
  */
-
 function Trim( p_string ) {
 	if (typeof p_string != "string") {
 		return p_string;
@@ -54,11 +52,9 @@ function Trim( p_string ) {
 	return t_string;
 }
 
-
 /*
  * Cookie functions
  */
-
 function GetCookie( p_cookie ) {
 	var t_cookie_name = "MANTIS_" + p_cookie;
 	var t_cookies = document.cookie;
@@ -89,11 +85,9 @@ function SetCookie( p_cookie, p_value ) {
 	document.cookie = t_cookie_name + "=" + p_value + "; expires=" + t_expires.toUTCString() + ";";
 }
 
-
 /*
  * Collapsible element functions
  */
-
 var g_collapse_clear = 1;
 
 function ToggleDiv( p_div ) {
@@ -124,10 +118,10 @@ function checkall( p_formname, p_state) {
 	var t_elements = (eval("document." + p_formname + ".elements"));
 
 	for (var i = 0; i < t_elements.length; i++) {
-    	if(t_elements[i].type == 'checkbox') {
-      		t_elements[i].checked = p_state;
-   		}
-  	}
+		if(t_elements[i].type == 'checkbox') {
+			t_elements[i].checked = p_state;
+		}
+	}
 }
 
 // global code to determine how to set visibility
@@ -135,26 +129,26 @@ var a = navigator.userAgent.indexOf("MSIE");
 var style_display;
 
 if (a!= -1) {
-  style_display = 'block';
+	style_display = 'block';
 } else {
-  style_display = 'table-row';
+	style_display = 'table-row';
 }
 style_display = 'block';
 
-function setDisplay(idTag, state) 
+function setDisplay(idTag, state)
 {
-  if(!document.getElementById(idTag)) alert('SetDisplay(): id '+idTag+' is empty');
-  // change display visibility
-  if ( state != 0 ) {
-      document.getElementById(idTag).style.display = style_display;
-  } else {
-      document.getElementById(idTag).style.display = 'none';
-  }
+	if(!document.getElementById(idTag)) alert('SetDisplay(): id '+idTag+' is empty');
+	// change display visibility
+	if ( state != 0 ) {
+		document.getElementById(idTag).style.display = style_display;
+	} else {
+		document.getElementById(idTag).style.display = 'none';
+	}
 }
 
-function toggleDisplay(idTag) 
+function toggleDisplay(idTag)
 {
-  setDisplay( idTag, (document.getElementById(idTag).style.display == 'none')?1:0 );
+	setDisplay( idTag, (document.getElementById(idTag).style.display == 'none')?1:0 );
 }
 
 /* Append a tag name to the tag input box, with repect for tag separators, etc */
@@ -169,4 +163,3 @@ function tag_string_append( p_string ) {
 	}
 	t_tag_select.selectedIndex=0;
 }
-

@@ -166,6 +166,4 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 		return $t_string;
 	}
-
 }
-

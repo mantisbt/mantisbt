@@ -27,8 +27,8 @@ We also refined the implementation of form security tokens and closed a couple o
 2008.08.04  -  1.2.0a2
 =======================
 This is the second alpha release on the road to version 1.2.0, and includes
-the same security fixes we released in 1.1.2. 
-As usual with alpha releases, it is intended to be a technology preview aimed 
+the same security fixes we released in 1.1.2.
+As usual with alpha releases, it is intended to be a technology preview aimed
 at early adopters, testers, translators etc.
 We do not recommend using it in production environments.
 
@@ -2792,4 +2792,3 @@ Users installing Mantis for the first time should sql/db_generate.sql to create 
  * Access levels
  * News system
  * Basic functionality
-
