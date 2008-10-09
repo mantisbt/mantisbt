@@ -42,7 +42,7 @@
 	$rows = news_get_rows( helper_get_current_project() );
 	$t_count = sizeof( $rows );
 	
-	if ( $t_count ) {
+	if ( $t_count > 0 ) {
 		echo '<ul>';
 	}
 	
@@ -75,7 +75,7 @@
 		echo "</span></li>";
 	}  # end for loop
 	
-	if ( $t_count ) {
+	if ( $t_count > 0 ) {
 			echo '<ul>';
 	}
 
