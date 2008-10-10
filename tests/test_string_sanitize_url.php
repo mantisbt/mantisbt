@@ -31,6 +31,8 @@
 	  */
 require_once( 'core.php' );
 
+$my_path = config_get('path');
+echo "my path is ".$my_path."\n<br />";
 $t_test = array(
     '',
     'abc.php',
@@ -40,9 +42,18 @@ $t_test = array(
     'abc.php?abc=def&z=xyz',
     'abc.php?abc=def&z=xyz#a',
     'abc.php?abc=def&z=<script>alert("foo")</script>z#a',
-    'abc.php?abc=def&z=z#<script>alert("foo")</script>a'
+    'abc.php?abc=def&z=z#<script>alert("foo")</script>a',
+    $my_path.'abc.php',
+    $my_path.'abc.php#a',
+    $my_path.'abc.php?abc=def',
+    $my_path.'abc.php?abc=def#a',
+    $my_path.'abc.php?abc=def&z=xyz',
+    $my_path.'abc.php?abc=def&z=xyz#a',
+    $my_path.'abc.php?abc=def&z=<script>alert("foo")</script>z#a',
+    $my_path.'abc.php?abc=def&z=z#<script>alert("foo")</script>a',
+    'http://www.test.my.url/'
     );
     
 foreach($t_test as $t_url) {
-    echo $t_url . ' => ' . string_sanitize_url($t_url, false) . "\n";
+    echo '<br />  '.$t_url . ' => ' . string_sanitize_url($t_url, false) . "\n";
 }
