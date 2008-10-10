@@ -67,7 +67,7 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
 	$query = "INSERT INTO $t_user_profile_table
 				    ( user_id, platform, os, os_build, description )
 				  VALUES
-				    ( " . db_param( ) . ", " . db_param( ) . ", " . db_param( ) . ", " . db_param( ) . ", " . db_param( ) . " )";
+				    ( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
 	db_query_bound( $query, Array( $c_user_id, $c_platform, $c_os, $c_os_build, $c_description ) );
 
 	return db_insert_id( $t_user_profile_table );
@@ -90,7 +90,7 @@ function profile_delete( $p_user_id, $p_profile_id ) {
 
 	# Delete the profile
 	$query = "DELETE FROM $t_user_profile_table
-				  WHERE id=" . db_param( ) . " AND user_id=" . db_param( );
+				  WHERE id=" . db_param() . " AND user_id=" . db_param();
 	db_query_bound( $query, Array( $c_profile_id, $c_user_id ) );
 
 	# db_query errors on failure so:
@@ -132,11 +132,11 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 
 	# Add item
 	$query = "UPDATE $t_user_profile_table
-				  SET platform=" . db_param( ) . ",
-				  	  os=" . db_param( ) . ",
-					  os_build=" . db_param( ) . ",
-					  description=" . db_param( ) . "
-				  WHERE id=" . db_param( ) . " AND user_id=" . db_param( );
+				  SET platform=" . db_param() . ",
+				  	  os=" . db_param() . ",
+					  os_build=" . db_param() . ",
+					  description=" . db_param() . "
+				  WHERE id=" . db_param() . " AND user_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_platform, $c_os, $c_os_build, $c_description, $c_profile_id, $c_user_id ) );
 
 	# db_query errors on failure so:
@@ -156,7 +156,7 @@ function profile_get_row( $p_user_id, $p_profile_id ) {
 
 	$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE id=" . db_param( ) . " AND user_id=" . db_param( );
+				  WHERE id=" . db_param() . " AND user_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_profile_id, $c_user_id ) );
 
 	return db_fetch_array( $result );
@@ -170,7 +170,7 @@ function profile_get_row_direct( $p_profile_id ) {
 
 	$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE id=" . db_param( );
+				  WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_profile_id ) );
 
 	return db_fetch_array( $result );
@@ -184,11 +184,11 @@ function profile_get_all_rows( $p_user_id ) {
 
 	$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE user_id=" . db_param( ) . "
+				  WHERE user_id=" . db_param() . "
 				  ORDER BY platform, os, os_build";
 	$result = db_query_bound( $query, Array( $c_user_id ) );
 
-	$t_rows = array( );
+	$t_rows = array();
 	$t_row_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $t_row_count;$i++ ) {
@@ -214,7 +214,7 @@ function profile_get_all_for_user( $p_user_id ) {
 # Return an array of strings containing unique values for the specified field based
 # on private and public profiles accessible to the specified user.
 function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
-	$c_user_id = ( $p_user_id === null ) ? auth_get_current_user_id( ) : db_prepare_int( $p_user_id );
+	$c_user_id = ( $p_user_id === null ) ? auth_get_current_user_id() : db_prepare_int( $p_user_id );
 	$c_field = db_prepare_string( $p_field );
 
 	$t_user_profile_table = db_get_table( 'mantis_user_profile_table' );
@@ -225,7 +225,7 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 				  ORDER BY $c_field";
 	$result = db_query( $query );
 
-	$t_rows = array( );
+	$t_rows = array();
 
 	$t_row_count = db_num_rows( $result );
 
@@ -251,7 +251,7 @@ function profile_get_all_for_project( $p_project_id ) {
 				  AND up.id = b.profile_id";
 	$result = db_query( $query );
 
-	$t_rows = array( );
+	$t_rows = array();
 	$t_row_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $t_row_count;$i++ ) {
@@ -262,7 +262,7 @@ function profile_get_all_for_project( $p_project_id ) {
 }
 
 # Return an array containing all global profiles
-function profile_get_global( ) {
+function profile_get_global() {
 	return profile_get_all_rows( ALL_USERS );
 }
 
@@ -274,7 +274,7 @@ function profile_get_default( $p_user_id ) {
 
 	$query = "SELECT default_profile
 			FROM $t_mantis_user_pref_table
-			WHERE user_id=" . db_param( );
+			WHERE user_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_user_id ) );
 
 	$t_default_profile = db_result( $result, 0, 0 );

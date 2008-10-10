@@ -276,7 +276,7 @@
 		echo '<tr><td class="form-title" colspan="2">' . lang_get( 'access_change' ) . '</td></tr>';
 	}
 
-	function access_row( ) {
+	function access_row() {
 		global $t_access, $t_can_change_flags, $t_colour_project, $t_colour_global;
 
 		$t_enum_status = get_enum_to_array( config_get( 'status_enum_string' ) );
@@ -460,7 +460,7 @@
 
 	# display the access levels required to move an issue
 	access_begin( lang_get( 'access_levels' ) );
-	access_row( );
+	access_row();
 	section_end();
 
 	if ( $t_access >= config_get_access( 'set_status_threshold' ) ) {

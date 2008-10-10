@@ -29,7 +29,7 @@
 
 # Cache variables #####
 
-$g_event_cache = array( );
+$g_event_cache = array();
 
 # Public API #####
 /**
@@ -45,7 +45,7 @@ function event_declare( $p_name, $p_type = EVENT_TYPE_DEFAULT ) {
 
 		$g_event_cache[$p_name] = array(
 			'type' => $p_type,
-			'callbacks' => array( ),
+			'callbacks' => array(),
 		);
 	}
 }
@@ -165,7 +165,7 @@ function event_callback( $p_event, $p_callback, $p_plugin, $p_params = null ) {
 			$t_value = call_user_func_array( array( $g_plugin_cache[$p_plugin], $p_callback ), array_merge( array( $p_event ), $p_params ) );
 		}
 
-		plugin_pop_current( );
+		plugin_pop_current();
 	}
 	else {
 		if( function_exists( $p_callback ) ) {
@@ -220,7 +220,7 @@ function event_type_output( $p_event, $p_callbacks, $p_params = null ) {
 		$t_separator = $p_params;
 	}
 
-	$t_output = array( );
+	$t_output = array();
 	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
 		foreach( $t_callbacks as $t_callback ) {
 			$t_output[] = event_callback( $p_event, $t_callback, $t_plugin, $p_params );
@@ -301,7 +301,7 @@ function event_type_first( $p_event, $p_callbacks, $p_params ) {
  * @return array Array of callback/return key/value pairs
  */
 function event_type_default( $p_event, $p_callbacks, $p_data ) {
-	$t_output = array( );
+	$t_output = array();
 	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
 		foreach( $t_callbacks as $t_callback ) {
 			$t_output[$t_plugin][$t_callback] = event_callback( $p_event, $t_callback, $t_plugin, $p_data );

@@ -72,7 +72,7 @@
 		$f_highlight_changed 	= $t_filter_cookie_arr[ FILTER_PROPERTY_HIGHLIGHT_CHANGED ];
 		$f_sort 				= $t_filter_cookie_arr[ FILTER_PROPERTY_SORT_FIELD_NAME ];
 		$f_dir		 			= $t_filter_cookie_arr[ FILTER_PROPERTY_SORT_DIRECTION ];
-		$t_project_id 			= helper_get_current_project( );
+		$t_project_id 			= helper_get_current_project();
 	}
 
 	# This replaces the actual search that used to be here
@@ -87,9 +87,9 @@
 	# for export
 	$t_show_flag = gpc_get_int( 'show_flag', 0 );
 ?>
-<?php html_page_top1( ) ?>
-<?php html_head_end( ) ?>
-<?php html_body_begin( ) ?>
+<?php html_page_top1() ?>
+<?php html_head_end() ?>
+<?php html_body_begin() ?>
 
 <table class="width100"><tr><td class="form-title">
 	<div class="center">

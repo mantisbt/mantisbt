@@ -190,7 +190,7 @@ $g_cache_current_project = null;
 # --------------------
 # Return the current project id as stored in a cookie
 #  If no cookie exists, the user's default project is returned
-function helper_get_current_project( ) {
+function helper_get_current_project() {
 	global $g_project_override, $g_cache_current_project;
 
 	if( $g_project_override !== null ) {
@@ -203,7 +203,7 @@ function helper_get_current_project( ) {
 		$t_project_id = gpc_get_cookie( $t_cookie_name, null );
 
 		if( null === $t_project_id ) {
-			$t_pref_row = user_pref_cache_row( auth_get_current_user_id( ), ALL_PROJECTS, false );
+			$t_pref_row = user_pref_cache_row( auth_get_current_user_id(), ALL_PROJECTS, false );
 			if( false === $t_pref_row ) {
 				$t_project_id = ALL_PROJECTS;
 			}
@@ -229,7 +229,7 @@ function helper_get_current_project( ) {
 #  If no cookie exists, the user's default project is returned
 #  If the current project is a subproject, the return value will include
 #   any parent projects
-function helper_get_current_project_trace( ) {
+function helper_get_current_project_trace() {
 	$t_cookie_name = config_get( 'project_cookie' );
 
 	$t_project_id = gpc_get_cookie( $t_cookie_name, null );
@@ -266,7 +266,7 @@ function helper_set_current_project( $p_project_id ) {
 
 # --------------------
 # Clear all known user preference cookies
-function helper_clear_pref_cookies( ) {
+function helper_clear_pref_cookies() {
 	gpc_clear_cookie( config_get( 'project_cookie' ) );
 	gpc_clear_cookie( config_get( 'manage_cookie' ) );
 }
@@ -283,15 +283,15 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 		return true;
 	}
 
-	html_page_top1( );
-	html_page_top2( );
+	html_page_top1();
+	html_page_top2();
 
 	# @@@ we need to improve this formatting.  I'd like the text to only
 	#  be about 50% the width of the screen so that it doesn't become to hard
 	#  to read.
 
 	PRINT "<br />\n<div align=\"center\">\n";
-	print_hr( );
+	print_hr();
 	PRINT "\n$p_message\n";
 
 	PRINT '<form method="post" action="' . $_SERVER['SCRIPT_NAME'] . "\">\n";
@@ -303,9 +303,9 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 	PRINT '<br /><br /><input type="submit" class="button" value="' . $p_button_label . '" />';
 	PRINT "\n</form>\n";
 
-	print_hr( );
+	print_hr();
 	PRINT "</div>\n";
-	html_page_bottom1( );
+	html_page_bottom1();
 	exit;
 }
 
@@ -328,7 +328,7 @@ function helper_call_custom_function( $p_function, $p_args_array ) {
 # --------------------
 function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 	if( null === $p_user_id ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	if( ALL_PROJECTS == $p_project_id ) {
@@ -380,7 +380,7 @@ function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAG
 		return $t_columns;
 	}
 
-	$t_keys_to_remove = array( );
+	$t_keys_to_remove = array();
 
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE || $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
 		$t_keys_to_remove[] = 'selection';
@@ -399,7 +399,7 @@ function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAG
 
 	$t_keys_to_remove[] = 'duplicate_id';
 
-	$t_current_project_id = helper_get_current_project( );
+	$t_current_project_id = helper_get_current_project();
 
 	if( $t_current_project_id != ALL_PROJECTS && !access_has_project_level( config_get( 'view_handler_threshold' ), $t_current_project_id ) ) {
 		$t_keys_to_remove[] = 'handler_id';
@@ -428,10 +428,10 @@ function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAG
 function helper_get_default_export_filename( $p_extension_with_dot, $p_prefix = '', $p_suffix = '' ) {
 	$t_filename = $p_prefix;
 
-	$t_current_project_id = helper_get_current_project( );
+	$t_current_project_id = helper_get_current_project();
 
 	if( ALL_PROJECTS == $t_current_project_id ) {
-		$t_filename .= user_get_name( auth_get_current_user_id( ) );
+		$t_filename .= user_get_name( auth_get_current_user_id() );
 	}
 	else {
 		$t_filename .= project_get_field( $t_current_project_id, 'name' );
@@ -443,7 +443,7 @@ function helper_get_default_export_filename( $p_extension_with_dot, $p_prefix = 
 # --------------------
 # returns a tab index value and increments it by one.  This is used to give sequential tab index on
 # a form.
-function helper_get_tab_index_value( ) {
+function helper_get_tab_index_value() {
 	static $tab_index = 0;
 	return ++$tab_index;
 }
@@ -451,18 +451,18 @@ function helper_get_tab_index_value( ) {
 # --------------------
 # returns a tab index and increments internal state by 1.  This is used to give sequential tab index on
 # a form.  For example, this function returns: tabindex="1"
-function helper_get_tab_index( ) {
-	return 'tabindex="' . helper_get_tab_index_value( ) . '"';
+function helper_get_tab_index() {
+	return 'tabindex="' . helper_get_tab_index_value() . '"';
 }
 
 # --------------------
 # returns a boolean indicating whether SQL queries executed should be shown
 # or not.
-function helper_show_queries( ) {
+function helper_show_queries() {
 
 	# Check is authenticated before checking access level, otherwise user gets
 	# redirected to login_page.php.  See #8461.
-	return ON == config_get( 'show_queries_count' ) && auth_is_user_authenticated( ) && access_has_global_level( config_get( 'show_queries_threshold' ) );
+	return ON == config_get( 'show_queries_count' ) && auth_is_user_authenticated() && access_has_global_level( config_get( 'show_queries_threshold' ) );
 }
 
 # Return a URL relative to the web root, compatible with other applications

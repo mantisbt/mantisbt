@@ -43,7 +43,7 @@ function excel_get_header( $p_worksheet_title ) {
  * A method that returns the footer for an Excel Xml file.
  * @returns the footer xml.
  */
-function excel_get_footer( ) {
+function excel_get_footer() {
 	return "</Table>\n</Worksheet></Workbook>\n";
 }
 
@@ -59,7 +59,7 @@ function excel_format_column_title( $p_column_title ) {
  * Generates the xml for the start of an Excel row.
  * @returns The Row tag.
  */
-function excel_get_start_row( ) {
+function excel_get_start_row() {
 	return '<Row>';
 }
 
@@ -67,7 +67,7 @@ function excel_get_start_row( ) {
  * Generates the xml for the end of an Excel row.
  * @returns The Row end tag.
  */
-function excel_get_end_row( ) {
+function excel_get_end_row() {
 	return '</Row>';
 }
 
@@ -75,8 +75,8 @@ function excel_get_end_row( ) {
  * Gets an Xml Row that contains all column titles.
  * @returns The xml row.
  */
-function excel_get_titles_row( ) {
-	$t_columns = excel_get_columns( );
+function excel_get_titles_row() {
+	$t_columns = excel_get_columns();
 	$t_ret = '<Row>';
 
 	foreach( $t_columns as $t_column ) {
@@ -100,11 +100,11 @@ function excel_get_titles_row( ) {
  * otherwise default to <projectname>.
 * @returns file name without extension
 */
-function excel_get_default_filename( ) {
-	$t_current_project_id = helper_get_current_project( );
+function excel_get_default_filename() {
+	$t_current_project_id = helper_get_current_project();
 
 	if( ALL_PROJECTS == $t_current_project_id ) {
-		$t_filename = user_get_name( auth_get_current_user_id( ) );
+		$t_filename = user_get_name( auth_get_current_user_id() );
 	}
 	else {
 		$t_filename = project_get_field( $t_current_project_id, 'name' );
@@ -136,7 +136,7 @@ function excel_prepare_string( $p_value ) {
  * Gets the columns to be included in the Excel Xml export.
  * @returns column names.
  */
-function excel_get_columns( ) {
+function excel_get_columns() {
 	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_EXCEL_PAGE );
 	return $t_columns;
 }

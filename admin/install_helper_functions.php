@@ -55,7 +55,7 @@ function check_php_version( $p_version ) {
 	}
 	else {
 		if( function_exists( 'version_compare' ) ) {
-			if( version_compare( phpversion( ), PHP_MIN_VERSION, '>=' ) ) {
+			if( version_compare( phpversion(), PHP_MIN_VERSION, '>=' ) ) {
 				return true;
 			}
 			else {

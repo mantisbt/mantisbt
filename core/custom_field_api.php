@@ -71,9 +71,9 @@ function custom_field_allow_manage_display( $p_type, $p_display ) {
 # SECURITY NOTE: cache globals are initialized here to prevent them
 #   being spoofed if register_globals is turned on
 
-$g_cache_custom_field = array( );
+$g_cache_custom_field = array();
 $g_cache_cf_list = NULL;
-$g_cache_cf_linked = array( );
+$g_cache_cf_linked = array();
 
 # Cache a custom field row if necessary and return the cached copy
 #  If the second parameter is true (default), trigger an error
@@ -92,7 +92,7 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 
 	$query = "SELECT *
 				  FROM $t_custom_field_table
-				  WHERE id=" . db_param( );
+				  WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_field_id ) );
 
 	if( 0 == db_num_rows( $result ) ) {
@@ -114,7 +114,7 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 
 function custom_field_cache_array_rows( $p_cf_id_array ) {
 	global $g_cache_custom_field;
-	$c_cf_id_array = array( );
+	$c_cf_id_array = array();
 
 	foreach( $p_cf_id_array as $t_cf_id ) {
 		if( !isset( $g_cache_custom_field[(int) $t_cf_id] ) ) {
@@ -147,7 +147,7 @@ function custom_field_clear_cache( $p_field_id = null ) {
 	$g_cached_custom_field_lists = null;
 
 	if( null === $p_field_id ) {
-		$g_cache_custom_field = array( );
+		$g_cache_custom_field = array();
 	}
 	else {
 		$c_field_id = db_prepare_int( $p_field_id );
@@ -181,8 +181,8 @@ function custom_field_is_linked( $p_field_id, $p_project_id ) {
 	$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 	$query = "SELECT COUNT(*)
 				FROM $t_custom_field_project_table
-				WHERE field_id=" . db_param( ) . " AND
-					  project_id=" . db_param( );
+				WHERE field_id=" . db_param() . " AND
+					  project_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_field_id, $c_project_id ) );
 	$count = db_result( $result );
 
@@ -271,7 +271,7 @@ function custom_field_has_read_access( $p_field_id, $p_bug_id, $p_user_id = null
 	custom_field_ensure_exists( $p_field_id );
 
 	if( null === $p_user_id ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	$t_access_level_r = custom_field_get_field( $p_field_id, 'access_level_r' );
@@ -287,7 +287,7 @@ function custom_field_has_read_access_by_project_id( $p_field_id, $p_project_id,
 	custom_field_ensure_exists( $p_field_id );
 
 	if( null === $p_user_id ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	$t_access_level_r = custom_field_get_field( $p_field_id, 'access_level_r' );
@@ -301,7 +301,7 @@ function custom_field_has_write_access_to_project( $p_field_id, $p_project_id, $
 	custom_field_ensure_exists( $p_field_id );
 
 	if( null === $p_user_id ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	$t_access_level_rw = custom_field_get_field( $p_field_id, 'access_level_rw' );
@@ -340,7 +340,7 @@ function custom_field_create( $p_name ) {
 	$query = "INSERT INTO $t_custom_field_table
 					( name )
 				  VALUES
-					( " . db_param( ) . " )";
+					( " . db_param() . " )";
 
 	db_query_bound( $query, Array( $c_name ) );
 
@@ -602,7 +602,7 @@ function custom_field_link( $p_field_id, $p_project_id ) {
 	$query = "INSERT INTO $t_custom_field_project_table
 					( field_id, project_id )
 				  VALUES
-					( " . db_param( ) . ", " . db_param( ) . " )";
+					( " . db_param() . ", " . db_param() . " )";
 	db_query_bound( $query, Array( $c_field_id, $c_project_id ) );
 
 	# db_query errors on failure so:
@@ -621,8 +621,8 @@ function custom_field_unlink( $p_field_id, $p_project_id ) {
 
 	$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 	$query = "DELETE FROM $t_custom_field_project_table
-				  WHERE field_id = " . db_param( ) . " AND
-				  		project_id = " . db_param( );
+				  WHERE field_id = " . db_param() . " AND
+				  		project_id = " . db_param();
 	db_query_bound( $query, Array( $c_field_id, $c_project_id ) );
 
 	# db_query errors on failure so:
@@ -638,13 +638,13 @@ function custom_field_destroy( $p_field_id ) {
 	# delete all values
 	$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 	$query = "DELETE FROM $t_custom_field_string_table
-				  WHERE field_id=" . db_param( );
+				  WHERE field_id=" . db_param();
 	db_query_bound( $query, Array( $c_field_id ) );
 
 	# delete all project associations
 	$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 	$query = "DELETE FROM $t_custom_field_project_table
-				  WHERE field_id=" . db_param( );
+				  WHERE field_id=" . db_param();
 	db_query_bound( $query, Array( $c_field_id ) );
 
 	$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
@@ -670,7 +670,7 @@ function custom_field_unlink_all( $p_project_id ) {
 	# delete all project associations
 	$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 	$query = "DELETE FROM $t_custom_field_project_table
-				  WHERE project_id=" . db_param( );
+				  WHERE project_id=" . db_param();
 	db_query_bound( $query, Array( $c_project_id ) );
 
 	# db_query errors on failure so:
@@ -744,7 +744,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 			$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 			$t_project_table = db_get_table( 'mantis_project_table' );
 			$t_user_table = db_get_table( 'mantis_user_table' );
-			$t_user_id = auth_get_current_user_id( );
+			$t_user_id = auth_get_current_user_id();
 			$t_pub = VS_PUBLIC;
 			$t_priv = VS_PRIVATE;
 
@@ -793,7 +793,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 		}
 		$result = db_query( $query );
 		$t_row_count = db_num_rows( $result );
-		$t_ids = array( );
+		$t_ids = array();
 
 		for( $i = 0;$i < $t_row_count;$i++ ) {
 			$row = db_fetch_array( $result );
@@ -810,7 +810,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 }
 
 # Return an array all custom field ids sorted by name
-function custom_field_get_ids( ) {
+function custom_field_get_ids() {
 	global $g_cache_cf_list, $g_cache_custom_field;
 
 	if( $g_cache_cf_list === NULL ) {
@@ -820,7 +820,7 @@ function custom_field_get_ids( ) {
 				  ORDER BY name ASC";
 		$result = db_query_bound( $query );
 		$t_row_count = db_num_rows( $result );
-		$t_ids = array( );
+		$t_ids = array();
 
 		for( $i = 0;$i < $t_row_count;$i++ ) {
 			$row = db_fetch_array( $result );
@@ -845,11 +845,11 @@ function custom_field_get_project_ids( $p_field_id ) {
 	$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 	$query = "SELECT project_id
 				  FROM $t_custom_field_project_table
-				  WHERE field_id = " . db_param( );
+				  WHERE field_id = " . db_param();
 	$result = db_query_bound( $query, Array( $c_field_id ) );
 
 	$t_row_count = db_num_rows( $result );
-	$t_ids = array( );
+	$t_ids = array();
 
 	for( $i = 0;$i < $t_row_count;$i++ ) {
 		$row = db_fetch_array( $result );
@@ -895,22 +895,22 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 	$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 	$query = "SELECT access_level_r, default_value, type
 				  FROM $t_custom_field_table
-				  WHERE id=" . db_param( );
+				  WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_field_id ) );
 	$row = db_fetch_array( $result );
 
 	$t_access_level_r = $row['access_level_r'];
 	$t_default_value = $row['default_value'];
 
-	if( !custom_field_has_read_access( $p_field_id, $p_bug_id, auth_get_current_user_id( ) ) ) {
+	if( !custom_field_has_read_access( $p_field_id, $p_bug_id, auth_get_current_user_id() ) ) {
 		return false;
 	}
 
 	$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 	$query = "SELECT value
 				  FROM $t_custom_field_string_table
-				  WHERE bug_id=" . db_param( ) . " AND
-				  		field_id=" . db_param( );
+				  WHERE bug_id=" . db_param() . " AND
+				  		field_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_bug_id, $c_field_id ) );
 
 	if( db_num_rows( $result ) > 0 ) {
@@ -944,7 +944,7 @@ function custom_field_get_all_linked_fields( $p_bug_id ) {
 	global $g_cached_custom_field_lists;
 
 	if( !is_array( $g_cached_custom_field_lists ) ) {
-		$g_cached_custom_field_lists = array( );
+		$g_cached_custom_field_lists = array();
 	}
 
 	# is the list in cache ?
@@ -968,7 +968,7 @@ function custom_field_get_all_linked_fields( $p_bug_id ) {
 
 		$t_row_count = db_num_rows( $result );
 
-		$t_custom_fields = array( );
+		$t_custom_fields = array();
 
 		for( $i = 0;$i < $t_row_count;++$i ) {
 			$row = db_fetch_array( $result );
@@ -1002,8 +1002,8 @@ function custom_field_get_sequence( $p_field_id, $p_project_id ) {
 	$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 	$query = "SELECT sequence
 				  FROM $t_custom_field_project_table
-				  WHERE field_id=" . db_param( ) . " AND
-						project_id=" . db_param( );
+				  WHERE field_id=" . db_param() . " AND
+						project_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_field_id, $c_project_id ), 1 );
 
 	if( 0 == db_num_rows( $result ) ) {
@@ -1027,7 +1027,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
 	$query = "SELECT name, type, possible_values, valid_regexp,
 				  		 access_level_rw, length_min, length_max, default_value
 				  FROM $t_custom_field_table
-				  WHERE id=" . db_param( );
+				  WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_field_id ) );
 	$row = db_fetch_array( $result );
 
@@ -1064,7 +1064,7 @@ function custom_field_prepare_possible_values( $p_possible_values ) {
 	$t_possible_values = $p_possible_values;
 
 	if( !is_blank( $t_possible_values ) && ( $t_possible_values[0] == '=' ) ) {
-		$t_possible_values = helper_call_custom_function( 'enum_' . substr( $t_possible_values, 1 ), array( ) );
+		$t_possible_values = helper_call_custom_function( 'enum_' . substr( $t_possible_values, 1 ), array() );
 	}
 
 	return $t_possible_values;
@@ -1077,7 +1077,7 @@ function custom_field_distinct_values( $p_field_def, $p_project_id = ALL_PROJECT
 	$c_project_id = db_prepare_int( $p_project_id );
 	$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 	$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_return_arr = array( );
+	$t_return_arr = array();
 
 	# If an enumeration type, we get all possible values, not just used values
 	if( isset( $g_custom_field_type_definition[$p_field_def['type']]['#function_return_distinct_values'] ) ) {
@@ -1187,7 +1187,7 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value ) {
 		return false;
 	}
 
-	if( !custom_field_has_write_access( $p_field_id, $p_bug_id, auth_get_current_user_id( ) ) ) {
+	if( !custom_field_has_write_access( $p_field_id, $p_bug_id, auth_get_current_user_id() ) ) {
 		return false;
 	}
 

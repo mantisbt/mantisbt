@@ -210,7 +210,7 @@
 			$t_date_to_display = date( config_get( 'short_date_format' ), $t_bug->due_date );
 		}
 	    print "<input ".helper_get_tab_index()." type=\"text\" id=\"due_date\" name=\"due_date\" size=\"20\" maxlength=\"10\" value=\"".$t_date_to_display."\">";
-		date_print_calendar( );
+		date_print_calendar();
 		date_finish_calendar( 'due_date', 'trigger');
 	?>
 	</td>

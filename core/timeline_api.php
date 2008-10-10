@@ -40,25 +40,25 @@ function timeline_get_bug_ids( $p_project_id, $p_version, $p_type = null ) {
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 	$t_query = "SELECT DISTINCT( id ) FROM $t_bug_table
-		WHERE project_id=" . db_param( );
-	$t_query_where = array( );
+		WHERE project_id=" . db_param();
+	$t_query_where = array();
 	$t_query_params = array(
 		$p_project_id,
 	);
 
 	if( $p_type&TIMELINE_TARGETTED ) {
-		$t_query_where[] = 'target_version=' . db_param( );
+		$t_query_where[] = 'target_version=' . db_param();
 		$t_query_params[] = $p_version;
 	}
 	if( $p_type&TIMELINE_FIXED ) {
-		$t_query_where[] = 'fixed_in_version=' . db_param( );
+		$t_query_where[] = 'fixed_in_version=' . db_param();
 		$t_query_params[] = $p_version;
 	}
 
 	$t_query .= ' AND ( ' . join( ' OR ', $t_query_where ) . ' ) ORDER BY id ASC';
 	$t_result = db_query_bound( $t_query, $t_query_params );
 
-	$t_bug_ids = array( );
+	$t_bug_ids = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_bug_ids[] = $t_row['id'];
 	}
@@ -74,36 +74,36 @@ function timeline_get_bug_ids( $p_project_id, $p_version, $p_type = null ) {
  */
 function timeline_get_hierarchy( $p_bug_ids ) {
 	if( !is_array( $p_bug_ids ) || count( $p_bug_ids ) < 1 ) {
-		return array( );
+		return array();
 	}
 
-	$t_bugs = array( );
+	$t_bugs = array();
 	foreach( $p_bug_ids as $t_bug_id ) {
-		$t_bugs[$t_bug_id] = array( );
+		$t_bugs[$t_bug_id] = array();
 	}
 
 	$t_relationship_table = db_get_table( 'mantis_bug_relationship_table' );
 	$t_bug_ids_joined = join( ',', $p_bug_ids );
 
-	$t_params = array( );
+	$t_params = array();
 	$t_query = "SELECT * FROM $t_relationship_table
 		WHERE source_bug_id IN ( $t_bug_ids_joined )
 			AND destination_bug_id IN ( $t_bug_ids_joined )";
 
 	$t_result = db_query_bound( $t_query, $t_params );
 
-	$t_rows = array( );
+	$t_rows = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_source_id = $t_row['source_bug_id'];
 		$t_dest_id = $t_row['destination_bug_id'];
 
 		switch( $t_row['relationship_type'] ) {
 			case BUG_DEPENDANT:
-				$t_bugs[$t_source_id][$t_dest_id] = array( );
+				$t_bugs[$t_source_id][$t_dest_id] = array();
 				break;
 
 			case BUG_DUPLICATE:
-				$t_bugs[$t_dest_id][$t_source_id] = array( );
+				$t_bugs[$t_dest_id][$t_source_id] = array();
 				break;
 
 			case BUG_RELATED:
@@ -124,20 +124,20 @@ function timeline_get_hierarchy( $p_bug_ids ) {
  */
 function timeline_generate_hierarchy( $p_all_bugs, $p_local_bugs = null, $p_seen_ids = null ) {
 	if( is_null( $p_seen_ids ) ) {
-		$p_seen_ids = array( );
+		$p_seen_ids = array();
 	}
 
 	# Outer pass
 	# Only care about calling recursively on the children
 	if( is_null( $p_local_bugs ) ) {
-		$p_new_bugs = array( );
+		$p_new_bugs = array();
 
 		foreach( $p_all_bugs as $t_bug_id => $t_children ) {
 			if( count( $t_children ) > 0 ) {
 				$p_new_bugs[$t_bug_id] = timeline_generate_hierarchy( $p_all_bugs, $t_children, array( $t_bug_id ) );
 			}
 			else {
-				$p_new_bugs[$t_bug_id] = array( );
+				$p_new_bugs[$t_bug_id] = array();
 			}
 		}
 
@@ -154,7 +154,7 @@ function timeline_generate_hierarchy( $p_all_bugs, $p_local_bugs = null, $p_seen
 				$p_local_bugs[$t_bug_id] = timeline_generate_hierarchy( $p_all_bugs, $p_all_bugs[$t_bug_id], $t_seen_ids );
 			}
 			else {
-				return array( );
+				return array();
 			}
 		}
 

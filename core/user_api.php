@@ -36,7 +36,7 @@ require_once( $t_core_dir . 'ldap_api.php' );
 # SECURITY NOTE: cache globals are initialized here to prevent them
 #   being spoofed if register_globals is turned on
 
-$g_cache_user = array( );
+$g_cache_user = array();
 
 # --------------------
 # Cache a user row if necessary and return the cached copy
@@ -54,7 +54,7 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 
 	$query = "SELECT *
 				  FROM $t_user_table
-				  WHERE id=" . db_param( );
+				  WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $p_user_id ) );
 
 	if( 0 == db_num_rows( $result ) ) {
@@ -76,7 +76,7 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 
 function user_cache_array_rows( $p_user_id_array ) {
 	global $g_cache_user;
-	$c_user_id_array = array( );
+	$c_user_id_array = array();
 
 	foreach( $p_user_id_array as $t_user_id ) {
 		if( !isset( $g_cache_user[(int) $t_user_id] ) ) {
@@ -120,7 +120,7 @@ function user_clear_cache( $p_user_id = null ) {
 	global $g_cache_user;
 
 	if( null === $p_user_id ) {
-		$g_cache_user = array( );
+		$g_cache_user = array();
 	}
 	else {
 		unset( $g_cache_user[$p_user_id] );
@@ -192,7 +192,7 @@ function user_is_name_unique( $p_username ) {
 
 	$query = "SELECT username
 				FROM $t_user_table
-				WHERE username=" . db_param( );
+				WHERE username=" . db_param();
 	$result = db_query_bound( $query, Array( $c_username ), 1 );
 
 	if( db_num_rows( $result ) > 0 ) {
@@ -236,7 +236,7 @@ function user_is_realname_unique( $p_username, $p_realname ) {
 		$t_user_table = db_get_table( 'mantis_user_table' );
 		$query = "SELECT id
 				FROM $t_user_table
-				WHERE realname=" . db_param( );
+				WHERE realname=" . db_param();
 		$result = db_query_bound( $query, Array( $c_realname ) );
 		$t_count = db_num_rows( $result );
 		if( $t_count > 0 ) {
@@ -322,7 +322,7 @@ function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 
 	$query = "SELECT COUNT(*)
 				  FROM $t_bug_monitor_table
-				  WHERE user_id=" . db_param( ) . " AND bug_id=" . db_param( );
+				  WHERE user_id=" . db_param() . " AND bug_id=" . db_param();
 
 	$result = db_query_bound( $query, Array( $c_user_id, $c_bug_id ) );
 
@@ -382,7 +382,7 @@ function user_is_enabled( $p_user_id ) {
 function user_count_level( $p_level = ANYBODY ) {
 	$t_level = db_prepare_int( $p_level );
 	$t_user_table = db_get_table( 'mantis_user_table' );
-	$query = "SELECT COUNT(id) FROM $t_user_table WHERE access_level>=" . db_param( );
+	$query = "SELECT COUNT(id) FROM $t_user_table WHERE access_level>=" . db_param();
 	$result = db_query_bound( $query, Array( $t_level ) );
 
 	# Get the list of connected users
@@ -401,7 +401,7 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 
 	# if session duration is 0, then there is no logged in users.
 	if( $t_session_duration_in_minutes == 0 ) {
-		return array( );
+		return array();
 	}
 
 	# Generate timestamp
@@ -416,7 +416,7 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 	$result = db_query( $query, 1 );
 
 	# Get the list of connected users
-	$t_users_connected = array( );
+	$t_users_connected = array();
 	while( $row = db_fetch_array( $result ) ) {
 		$t_users_connected[] = $row['id'];
 	}
@@ -459,7 +459,7 @@ function user_create( $p_username, $p_password, $p_email = '', $p_access_level =
 				    ( username, email, password, date_created, last_visit,
 				     enabled, access_level, login_count, cookie_string, realname )
 				  VALUES
-				    ( '$c_username', '$c_email', '$c_password', '" . db_now( ) . "', '" . db_now( ) . "',
+				    ( '$c_username', '$c_email', '$c_password', '" . db_now() . "', '" . db_now() . "',
 				     $c_enabled, $c_access_level, 0, '$t_cookie_string', '$c_realname')";
 	db_query( $query );
 
@@ -534,7 +534,7 @@ function user_delete_project_specific_access_levels( $p_user_id ) {
 	$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 
 	$query = "DELETE FROM $t_project_user_list_table
-				  WHERE user_id=" . db_param( );
+				  WHERE user_id=" . db_param();
 	db_query_bound( $query, Array( $c_user_id ) );
 
 	user_clear_cache( $p_user_id );
@@ -554,7 +554,7 @@ function user_delete_profiles( $p_user_id ) {
 
 	# Remove associated profiles
 	$query = "DELETE FROM $t_user_profile_table
-				  WHERE user_id=" . db_param( );
+				  WHERE user_id=" . db_param();
 	db_query_bound( $query, Array( $c_user_id ) );
 
 	user_clear_cache( $p_user_id );
@@ -585,7 +585,7 @@ function user_delete( $p_user_id ) {
 		$c_realname = db_prepare_string( user_get_field( $p_user_id, 'realname' ) );
 		$query = "SELECT id
 					FROM $t_user_table
-					WHERE realname=" . db_param( );
+					WHERE realname=" . db_param();
 		$result = db_query_bound( $query, Array( $c_realname ) );
 		$t_count = db_num_rows( $result );
 
@@ -603,7 +603,7 @@ function user_delete( $p_user_id ) {
 
 	# Remove account
 	$query = "DELETE FROM $t_user_table
-				  WHERE id=" . db_param( );
+				  WHERE id=" . db_param();
 	db_query_bound( $query, Array( $c_user_id ) );
 
 	return true;
@@ -625,7 +625,7 @@ function user_get_id_by_name( $p_username ) {
 
 	$query = "SELECT *
 				  FROM $t_user_table
-				  WHERE username=" . db_param( );
+				  WHERE username=" . db_param();
 	$result = db_query_bound( $query, Array( $p_username ) );
 
 	if( 0 == db_num_rows( $result ) ) {
@@ -649,7 +649,7 @@ function user_get_id_by_email( $p_email ) {
 
 	$query = "SELECT *
 				  FROM $t_user_table
-				  WHERE email=" . db_param( );
+				  WHERE email=" . db_param();
 	$result = db_query_bound( $query, Array( $p_email ) );
 
 	if( 0 == db_num_rows( $result ) ) {
@@ -673,7 +673,7 @@ function user_get_id_by_realname( $p_realname ) {
 
 	$query = "SELECT *
 				  FROM $t_user_table
-				  WHERE realname=" . db_param( );
+				  WHERE realname=" . db_param();
 	$result = db_query_bound( $query, Array( $p_realname ) );
 
 	if( 0 == db_num_rows( $result ) ) {
@@ -841,7 +841,7 @@ $g_user_accessible_projects_cache = null;
 function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 	global $g_user_accessible_projects_cache;
 
-	if( null !== $g_user_accessible_projects_cache && auth_get_current_user_id( ) == $p_user_id && false == $p_show_disabled ) {
+	if( null !== $g_user_accessible_projects_cache && auth_get_current_user_id() == $p_user_id && false == $p_show_disabled ) {
 		return $g_user_accessible_projects_cache;
 	}
 
@@ -862,14 +862,14 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 			$query = "SELECT p.id, p.name, ph.parent_id
 								  FROM $t_project_table p
 								  LEFT JOIN $t_project_user_list_table u
-								    ON p.id=u.project_id AND u.user_id=" . db_param( ) . "
+								    ON p.id=u.project_id AND u.user_id=" . db_param() . "
 								  LEFT JOIN $t_project_hierarchy_table ph
 								    ON ph.child_id = p.id
 								  WHERE
-									( p.view_state=" . db_param( ) . "
-									    OR (p.view_state=" . db_param( ) . "
+									( p.view_state=" . db_param() . "
+									    OR (p.view_state=" . db_param() . "
 										    AND
-									        u.user_id=" . db_param( ) . " )
+									        u.user_id=" . db_param() . " )
 									)
 					  ORDER BY p.name";
 			$result = db_query_bound( $query, Array( $p_user_id, $t_public, $t_private, $p_user_id ) );
@@ -878,14 +878,14 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 			$query = "SELECT p.id, p.name, ph.parent_id
 							  FROM $t_project_table p
 							  LEFT JOIN $t_project_user_list_table u
-							    ON p.id=u.project_id AND u.user_id=" . db_param( ) . "
+							    ON p.id=u.project_id AND u.user_id=" . db_param() . "
 							  LEFT JOIN $t_project_hierarchy_table ph
 							    ON ph.child_id = p.id
-							  WHERE p.enabled = " . db_param( ) . " AND
-								( p.view_state=" . db_param( ) . "
-								    OR (p.view_state=" . db_param( ) . "
+							  WHERE p.enabled = " . db_param() . " AND
+								( p.view_state=" . db_param() . "
+								    OR (p.view_state=" . db_param() . "
 									    AND
-								        u.user_id=" . db_param( ) . " )
+								        u.user_id=" . db_param() . " )
 								)
 				  ORDER BY p.name";
 			$result = db_query_bound( $query, Array( $p_user_id, true, $t_public, $t_private, $p_user_id ) );
@@ -893,7 +893,7 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 
 		$row_count = db_num_rows( $result );
 
-		$t_projects = array( );
+		$t_projects = array();
 
 		for( $i = 0;$i < $row_count;$i++ ) {
 			$row = db_fetch_array( $result );
@@ -903,7 +903,7 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 
 		# prune out children where the parents are already listed. Make the list
 		#  first, then prune to avoid pruning a parent before the child is found.
-		$t_prune = array( );
+		$t_prune = array();
 		foreach( $t_projects as $t_id => $t_parent ) {
 			if(( $t_parent !== 0 ) && isset( $t_projects[$t_parent] ) ) {
 				$t_prune[] = $t_id;
@@ -915,7 +915,7 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 		$t_projects = array_keys( $t_projects );
 	}
 
-	if( auth_get_current_user_id( ) == $p_user_id ) {
+	if( auth_get_current_user_id() == $p_user_id ) {
 		$g_user_accessible_projects_cache = $t_projects;
 	}
 
@@ -929,12 +929,12 @@ $g_user_accessible_subprojects_cache = null;
 function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_disabled = false ) {
 	global $g_user_accessible_subprojects_cache;
 
-	if( null !== $g_user_accessible_subprojects_cache && auth_get_current_user_id( ) == $p_user_id && false == $p_show_disabled ) {
+	if( null !== $g_user_accessible_subprojects_cache && auth_get_current_user_id() == $p_user_id && false == $p_show_disabled ) {
 		if( isset( $g_user_accessible_subprojects_cache[$p_project_id] ) ) {
 			return $g_user_accessible_subprojects_cache[$p_project_id];
 		}
 		else {
-			return Array( );
+			return Array();
 		}
 	}
 
@@ -946,7 +946,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 	$t_private = VS_PRIVATE;
 
 	if( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
-		$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = ' . db_param( ) . ' AND';
+		$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = ' . db_param() . ' AND';
 		$query = "SELECT DISTINCT p.id, p.name, ph.parent_id
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_hierarchy_table ph
@@ -977,24 +977,24 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 
 	$row_count = db_num_rows( $result );
 
-	$t_projects = array( );
+	$t_projects = array();
 
 	for( $i = 0;$i < $row_count;$i++ ) {
 		$row = db_fetch_array( $result );
 
 		if( !isset( $t_projects[$row['parent_id']] ) ) {
-			$t_projects[$row['parent_id']] = array( );
+			$t_projects[$row['parent_id']] = array();
 		}
 
 		array_push( $t_projects[$row['parent_id']], $row['id'] );
 	}
 
-	if( auth_get_current_user_id( ) == $p_user_id ) {
+	if( auth_get_current_user_id() == $p_user_id ) {
 		$g_user_accessible_subprojects_cache = $t_projects;
 	}
 
 	if( !isset( $t_projects[$p_project_id] ) ) {
-		$t_projects[$p_project_id] = array( );
+		$t_projects[$p_project_id] = array();
 	}
 
 	return $t_projects[$p_project_id];
@@ -1006,7 +1006,7 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 	# @@@ (thraxisp) Should all top level projects be a sub-project of ALL_PROJECTS implicitly?
 	#   affects how news and some summaries are generated
 	$t_todo = user_get_accessible_subprojects( $p_user_id, $p_project_id );
-	$t_subprojects = Array( );
+	$t_subprojects = Array();
 
 	while( $t_todo ) {
 		$t_elem = array_shift( $t_todo );
@@ -1032,7 +1032,7 @@ function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 				  FROM $t_bug_table
 				  WHERE $t_where_prj
 				  		status<'$t_resolved' AND
-				  		handler_id=" . db_param( );
+				  		handler_id=" . db_param();
 	$result = db_query_bound( $query, Array( $p_user_id ) );
 
 	return db_result( $result );
@@ -1051,7 +1051,7 @@ function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 				  FROM $t_bug_table
 				  WHERE $t_where_prj
 						  status<'$t_resolved' AND
-						  reporter_id=" . db_param( );
+						  reporter_id=" . db_param();
 	$result = db_query_bound( $query, Array( $p_user_id ) );
 
 	return db_result( $result );
@@ -1067,8 +1067,8 @@ function user_get_profile_row( $p_user_id, $p_profile_id ) {
 
 	$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE id=" . db_param( ) . " AND
-				  		user_id=" . db_param( );
+				  WHERE id=" . db_param() . " AND
+				  		user_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_profile_id, $c_user_id ) );
 
 	if( 0 == db_num_rows( $result ) ) {
@@ -1103,7 +1103,7 @@ function user_is_lost_password_request_allowed( $p_user_id ) {
 # return the bug filter parameters for the specified user
 function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 	if( null === $p_project_id ) {
-		$t_project_id = helper_get_current_project( );
+		$t_project_id = helper_get_current_project();
 	}
 	else {
 		$t_project_id = $p_project_id;
@@ -1131,13 +1131,13 @@ function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 # Update the last_visited field to be now
 function user_update_last_visit( $p_user_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
-	$c_value = db_now( );
+	$c_value = db_now();
 
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	$query = "UPDATE $t_user_table
-				  SET last_visit= " . db_param( ) . "
-				  WHERE id=" . db_param( );
+				  SET last_visit= " . db_param() . "
+				  WHERE id=" . db_param();
 
 	db_query_bound( $query, Array( $c_value, $c_user_id ) );
 
@@ -1155,7 +1155,7 @@ function user_increment_login_count( $p_user_id ) {
 
 	$query = "UPDATE $t_user_table
 				SET login_count=login_count+1
-				WHERE id=" . db_param( );
+				WHERE id=" . db_param();
 
 	db_query_bound( $query, Array( $p_user_id ) );
 
@@ -1172,7 +1172,7 @@ function user_reset_failed_login_count_to_zero( $p_user_id ) {
 
 	$query = "UPDATE $t_user_table
 				SET failed_login_count=0
-				WHERE id=" . db_param( );
+				WHERE id=" . db_param();
 	db_query_bound( $query, Array( $p_user_id ) );
 
 	user_clear_cache( $p_user_id );
@@ -1187,7 +1187,7 @@ function user_increment_failed_login_count( $p_user_id ) {
 
 	$query = "UPDATE $t_user_table
 				SET failed_login_count=failed_login_count+1
-				WHERE id=" . db_param( );
+				WHERE id=" . db_param();
 	db_query_bound( $query, Array( $p_user_id ) );
 
 	user_clear_cache( $p_user_id );
@@ -1202,7 +1202,7 @@ function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
 
 	$query = "UPDATE $t_user_table
 				SET lost_password_request_count=0
-				WHERE id=" . db_param( );
+				WHERE id=" . db_param();
 	db_query_bound( $query, Array( $p_user_id ) );
 
 	user_clear_cache( $p_user_id );
@@ -1217,7 +1217,7 @@ function user_increment_lost_password_in_progress_count( $p_user_id ) {
 
 	$query = "UPDATE $t_user_table
 				SET lost_password_request_count=lost_password_request_count+1
-				WHERE id=" . db_param( );
+				WHERE id=" . db_param();
 	db_query_bound( $query, Array( $p_user_id ) );
 
 	user_clear_cache( $p_user_id );
@@ -1239,8 +1239,8 @@ function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	$query = "UPDATE $t_user_table
-				  SET $c_field_name=" . db_param( ) . "
-				  WHERE id=" . db_param( );
+				  SET $c_field_name=" . db_param() . "
+				  WHERE id=" . db_param();
 
 	db_query_bound( $query, Array( $c_field_value, $c_user_id ) );
 
@@ -1276,9 +1276,9 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 	$c_user_table = db_get_table( 'mantis_user_table' );
 
 	$query = "UPDATE $c_user_table
-				  SET password=" . db_param( ) . ",
-				  cookie_string=" . db_param( ) . "
-				  WHERE id=" . db_param( );
+				  SET password=" . db_param() . ",
+				  cookie_string=" . db_param() . "
+				  WHERE id=" . db_param();
 	db_query_bound( $query, Array( $c_password, $c_cookie_string, $c_user_id ) );
 
 	# db_query errors on failure so:

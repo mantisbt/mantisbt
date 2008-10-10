@@ -36,26 +36,26 @@ require_once( $t_core_dir . 'bug_api.php' );
 /**
 * Get the new line marker to use when export mind map files.
 */
-function freemind_get_newline( ) {
+function freemind_get_newline() {
 	return "\n";
 }
 
 /**
 * Export issues as freemind mind map
 */
-function freemind_export_map( ) {
+function freemind_export_map() {
 	$t_page_number = 1;
 	$t_per_page = -1;
 	$t_bug_count = null;
 	$t_page_count = null;
 
-	$t_nl = freemind_get_newline( );
+	$t_nl = freemind_get_newline();
 
 	# Get bug rows according to the current filter
 	$t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 
 	if( $t_rows === false ) {
-		$t_rows = array( );
+		$t_rows = array();
 	}
 
 	$t_bug_list = freemind_find_descendents( $t_rows );
@@ -88,7 +88,7 @@ function freemind_export_bug( $p_bug, &$p_bug_list ) {
 	$t_project = $p_bug->project;
 	$t_category = $p_bug->category;
 	$t_reporter = $p_bug->reporter;
-	$t_nl = freemind_get_newline( );
+	$t_nl = freemind_get_newline();
 	$t_line = '----------';
 
 	echo "<node ID=\"Freemind_Link_$t_id\" ",
@@ -226,7 +226,7 @@ function freemind_prepare_export( $p_bug_data ) {
 function freemind_find_descendents( &$p_rows ) {
 
 	# List of visited issues and their data.
-	$v_bug_list = array( );
+	$v_bug_list = array();
 
 	foreach( $p_rows as $t_row ) {
 		$t_bug_id = $t_row['id'];
@@ -235,9 +235,9 @@ function freemind_find_descendents( &$p_rows ) {
 
 		$v_bug_list[$t_bug_id] = $t_bug;
 		$v_bug_list[$t_bug_id]->id = $t_bug_id;
-		$v_bug_list[$t_bug_id]->parents = array( );
-		$v_bug_list[$t_bug_id]->children = array( );
-		$v_bug_list[$t_bug_id]->related_to = array( );
+		$v_bug_list[$t_bug_id]->parents = array();
+		$v_bug_list[$t_bug_id]->children = array();
+		$v_bug_list[$t_bug_id]->related_to = array();
 	}
 
 	foreach( array_keys( $v_bug_list ) as $t_bug_id ) {

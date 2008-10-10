@@ -43,7 +43,7 @@ echo '<html><head><title>Mantis Database Statistics</title></head><body>';
 
 echo '<h1>Mantis Database Statistics</h1>';
 
-foreach( db_get_table_list( ) as $t_table ) {
+foreach( db_get_table_list() as $t_table ) {
 	if( db_table_exists( $t_table ) ) {
 		print_table_stats( $t_table );
 	}

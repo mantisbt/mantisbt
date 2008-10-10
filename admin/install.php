@@ -171,7 +171,7 @@ if( $t_config_exists ) {
 
 	$g_db = ADONewConnection( $f_db_type );
 	$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
-	if( $g_db->IsConnected( ) ) {
+	if( $g_db->IsConnected() ) {
 		$g_db_connected = true;
 	}
 	$t_cur_version = config_get( 'database_version', -1 );
@@ -216,7 +216,7 @@ if( 0 == $t_install_state ) {
 	?>
 
 <!-- Check PHP Version -->
-<?php print_test( ' Checking PHP version (your version is ' . phpversion( ) . ')', check_php_version( phpversion( ) ), true, 'Upgrade to a more recent version of PHP' );?>
+<?php print_test( ' Checking PHP version (your version is ' . phpversion() . ')', check_php_version( phpversion() ), true, 'Upgrade to a more recent version of PHP' );?>
 
 <!-- Check Safe Mode -->
 <?php
@@ -309,7 +309,7 @@ if( 2 == $t_install_state ) {
 		if( $f_db_type == 'db2' ) {
 			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
 			if( $result === false ) {
-				print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg( ) );
+				print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
 			}
 		}
 		else {
@@ -317,7 +317,7 @@ if( 2 == $t_install_state ) {
 		}
 	}
 	else {
-		print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' . db_error_msg( ) . ' )' );
+		print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' . db_error_msg() . ' )' );
 	}
 	?>
 </tr>
@@ -337,7 +337,7 @@ if( 2 == $t_install_state ) {
 			if( $f_db_type == 'db2' ) {
 				$result = &$g_db->execute( 'set schema ' . $f_db_schema );
 				if( $result === false ) {
-					print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg( ) );
+					print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
 				}
 			}
 			else {
@@ -345,7 +345,7 @@ if( 2 == $t_install_state ) {
 			}
 		}
 		else {
-			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg( ) . ' )' );
+			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
 		}
 		?>
 </tr>
@@ -361,7 +361,7 @@ if( 2 == $t_install_state ) {
 		<?php
 		# due to a bug in ADODB, this call prompts warnings, hence the @
 		# the check only works on mysql if the database is open
-		$t_version_info = @$g_db->ServerInfo( );
+		$t_version_info = @$g_db->ServerInfo();
 		echo '<br /> Running ' . $f_db_type . ' version ' . $t_version_info['description'];
 		?>
 	</td>
@@ -576,7 +576,7 @@ if( 3 == $t_install_state ) {
 
 			if( $rs->EOF ) {
 				$t_result = false;
-				echo $g_db->errorMsg( );
+				echo $g_db->errorMsg();
 			}
 			else {
 				$t_result = &$g_db->execute( 'set schema ' . $f_db_schema );
@@ -602,7 +602,7 @@ if( 3 == $t_install_state ) {
 
 				if( !$rs ) {
 					$t_result = false;
-					print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error_msg( ) . ' )' );
+					print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error_msg() . ' )' );
 					$t_install_state--; # db creation failed, allow user to re-enter user/password info
 				}
 				else {
@@ -618,12 +618,12 @@ if( 3 == $t_install_state ) {
 					$t_db_open = true;
 				}
 				else {
-					$t_error = db_error_msg( );
+					$t_error = db_error_msg();
 					if( strstr( $t_error, 'atabase exists' ) ) {
-						print_test_result( BAD, false, 'Database already exists? ( ' . db_error_msg( ) . ' )' );
+						print_test_result( BAD, false, 'Database already exists? ( ' . db_error_msg() . ' )' );
 					}
 					else {
-						print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error_msg( ) . ' )' );
+						print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error_msg() . ' )' );
 						$t_install_state--; # db creation failed, allow user to re-enter user/password info
 					}
 				}
@@ -640,7 +640,7 @@ if( 3 == $t_install_state ) {
 		Checking Database Server Version
 		<?php
 			# due to a bug in ADODB, this call prompts warnings, hence the @
-			$t_version_info = @$g_db->ServerInfo( );
+			$t_version_info = @$g_db->ServerInfo();
 			echo '<br /> Running ' . $f_db_type . ' version ' . $t_version_info['description'];
 			?>
 	</td>
@@ -666,7 +666,7 @@ if( 3 == $t_install_state ) {
 </tr>
 <?php
 		}
-		$g_db->Close( );
+		$g_db->Close();
 		?>
 <tr>
 	<td bgcolor="#ffffff">
@@ -679,7 +679,7 @@ if( 3 == $t_install_state ) {
 		if( $f_db_type == 'db2' ) {
 			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
 			if( $result === false ) {
-				echo $g_db->errorMsg( );
+				echo $g_db->errorMsg();
 			}
 		}
 
@@ -687,9 +687,9 @@ if( 3 == $t_install_state ) {
 			print_test_result( GOOD );
 		}
 		else {
-			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg( ) . ' )' );
+			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
 		}
-		$g_db->Close( );
+		$g_db->Close();
 		?>
 </tr>
 <?php
@@ -721,7 +721,7 @@ if( 3 == $t_install_state ) {
 		if( $f_db_type == 'db2' ) {
 			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
 			if( $result === false ) {
-				echo $g_db->errorMsg( );
+				echo $g_db->errorMsg();
 			}
 		}
 
@@ -757,7 +757,7 @@ if( 3 == $t_install_state ) {
 						$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
 					}
 					else {
-						$sqlarray = array( );
+						$sqlarray = array();
 					}
 				}
 				else {
@@ -782,7 +782,7 @@ if( 3 == $t_install_state ) {
 					config_set( 'database_version', $i );
 				}
 				else {
-					print_test_result( BAD, true, $sqlarray[0] . '<br />' . $g_db->ErrorMsg( ) );
+					print_test_result( BAD, true, $sqlarray[0] . '<br />' . $g_db->ErrorMsg() );
 				}
 				echo '</tr>';
 			}
@@ -943,13 +943,13 @@ if( 6 == $t_install_state ) {
 		print_test_result( GOOD );
 	}
 	else {
-		print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg( ) . ' )' );
+		print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
 	}
 
 	if( $f_db_type == 'db2' ) {
 		$result = &$g_db->execute( 'set schema ' . $f_db_schema );
 		if( $result === false ) {
-			echo $g_db->errorMsg( );
+			echo $g_db->errorMsg();
 		}
 	}
 	?>
@@ -967,7 +967,7 @@ if( 6 == $t_install_state ) {
 		print_test_result( GOOD );
 	}
 	else {
-		print_test_result( BAD, true, 'Database user doesn\'t have SELECT access to the database ( ' . db_error_msg( ) . ' )' );
+		print_test_result( BAD, true, 'Database user doesn\'t have SELECT access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
 </tr>
@@ -983,7 +983,7 @@ if( 6 == $t_install_state ) {
 		print_test_result( GOOD );
 	}
 	else {
-		print_test_result( BAD, true, 'Database user doesn\'t have INSERT access to the database ( ' . db_error_msg( ) . ' )' );
+		print_test_result( BAD, true, 'Database user doesn\'t have INSERT access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
 </tr>
@@ -999,7 +999,7 @@ if( 6 == $t_install_state ) {
 		print_test_result( GOOD );
 	}
 	else {
-		print_test_result( BAD, true, 'Database user doesn\'t have UPDATE access to the database ( ' . db_error_msg( ) . ' )' );
+		print_test_result( BAD, true, 'Database user doesn\'t have UPDATE access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
 </tr>
@@ -1015,7 +1015,7 @@ if( 6 == $t_install_state ) {
 		print_test_result( GOOD );
 	}
 	else {
-		print_test_result( BAD, true, 'Database user doesn\'t have DELETE access to the database ( ' . db_error_msg( ) . ' )' );
+		print_test_result( BAD, true, 'Database user doesn\'t have DELETE access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
 </tr>

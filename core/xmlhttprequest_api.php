@@ -30,7 +30,7 @@ require_once( $t_core_dir . 'profile_api.php' );
 require_once( $t_core_dir . 'logging_api.php' );
 require_once( $t_core_dir . 'projax_api.php' );
 
-function xmlhttprequest_issue_reporter_combobox( ) {
+function xmlhttprequest_issue_reporter_combobox() {
 	$f_bug_id = gpc_get_int( 'issue_id' );
 
 	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
@@ -46,7 +46,7 @@ function xmlhttprequest_issue_reporter_combobox( ) {
 /**
  * Print a generic combobox with a list of users above a given access level.
  */
-function xmlhttprequest_user_combobox( ) {
+function xmlhttprequest_user_combobox() {
 	$f_user_id = gpc_get_int( 'user_id' );
 	$f_user_access = gpc_get_int( 'access_level' );
 
@@ -57,7 +57,7 @@ function xmlhttprequest_user_combobox( ) {
 
 # ---------------
 # Echos a serialized list of platforms starting with the prefix specified in the $_POST
-function xmlhttprequest_platform_get_with_prefix( ) {
+function xmlhttprequest_platform_get_with_prefix() {
 	$f_platform = gpc_get_string( 'platform' );
 
 	$t_unique_entries = profile_get_field_all_for_user( 'platform' );
@@ -68,7 +68,7 @@ function xmlhttprequest_platform_get_with_prefix( ) {
 
 # ---------------
 # Echos a serialized list of OSes starting with the prefix specified in the $_POST
-function xmlhttprequest_os_get_with_prefix( ) {
+function xmlhttprequest_os_get_with_prefix() {
 	$f_os = gpc_get_string( 'os' );
 
 	$t_unique_entries = profile_get_field_all_for_user( 'os' );
@@ -79,7 +79,7 @@ function xmlhttprequest_os_get_with_prefix( ) {
 
 # ---------------
 # Echos a serialized list of OS Versions starting with the prefix specified in the $_POST
-function xmlhttprequest_os_build_get_with_prefix( ) {
+function xmlhttprequest_os_build_get_with_prefix() {
 	$f_os_build = gpc_get_string( 'os_build' );
 
 	$t_unique_entries = profile_get_field_all_for_user( 'os_build' );

@@ -47,7 +47,7 @@
 
 	    if ( ( $t_access >= config_get_access( $p_threshold ) )
 		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only ) ) {
-	        $f_threshold = gpc_get_int_array( 'flag_thres_' . $p_threshold, array( ) );
+	        $f_threshold = gpc_get_int_array( 'flag_thres_' . $p_threshold, array() );
 	        $f_access = gpc_get_int( 'access_' . $p_threshold );
             # @@debug @@ echo "<br />for $p_threshold "; var_dump($f_threshold, $f_access); echo '<br />';
 		    $t_access_levels = get_enum_to_array( config_get( 'access_levels_enum_string' ) );

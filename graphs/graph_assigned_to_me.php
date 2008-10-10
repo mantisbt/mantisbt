@@ -36,21 +36,21 @@ require_once( $t_core_path . 'graph_api.php' );
 
 # Grab Data
 # ---
-$t_project_id = helper_get_current_project( );
+$t_project_id = helper_get_current_project();
 
-$data_category_arr = array( );
-$data_count_arr = array( );
-$t_user_id = auth_get_current_user_id( );
+$data_category_arr = array();
+$data_count_arr = array();
+$t_user_id = auth_get_current_user_id();
 $query = "SELECT status, COUNT( status ) as count
 		FROM mantis_bug_table
-		WHERE project_id=" . db_param( ) . " AND
-			  handler_id=" . db_param( ) . "
+		WHERE project_id=" . db_param() . " AND
+			  handler_id=" . db_param() . "
 		GROUP BY status
 		ORDER BY status";
 $result = db_query_bound( $query, Array( $t_project_id, $t_user_id ) );
 $status_count = db_num_rows( $result );
 
-$status_arr = array( );
+$status_arr = array();
 $status_arr[10] = 0;
 $status_arr[20] = 0;
 $status_arr[30] = 0;
@@ -81,13 +81,13 @@ $graph->title->Set( $s_assigned_to );
 $graph->title->SetFont( FF_FONT1 );
 $graph->title->SetMargin( 0 );
 
-$t_arr1 = array( );
-$t_arr2 = array( );
-$t_arr3 = array( );
-$t_arr4 = array( );
-$t_arr5 = array( );
-$t_arr6 = array( );
-$t_arr7 = array( );
+$t_arr1 = array();
+$t_arr2 = array();
+$t_arr3 = array();
+$t_arr4 = array();
+$t_arr5 = array();
+$t_arr6 = array();
+$t_arr7 = array();
 
 $t_arr1[0] = $status_arr[10];
 $t_arr2[0] = $status_arr[20];
@@ -113,13 +113,13 @@ $bplot5->SetFillColor( 'cornflowerblue' );
 $bplot6->SetFillColor( 'darkseagreen2' );
 $bplot7->SetFillColor( 'white' );
 
-$bplot1->SetShadow( );
-$bplot2->SetShadow( );
-$bplot3->SetShadow( );
-$bplot4->SetShadow( );
-$bplot5->SetShadow( );
-$bplot6->SetShadow( );
-$bplot7->SetShadow( );
+$bplot1->SetShadow();
+$bplot2->SetShadow();
+$bplot3->SetShadow();
+$bplot4->SetShadow();
+$bplot5->SetShadow();
+$bplot6->SetShadow();
+$bplot7->SetShadow();
 
 $bplot1->value->SetFont( FF_FONT0 );
 $bplot2->value->SetFont( FF_FONT0 );
@@ -150,4 +150,4 @@ $gbarplot = new GroupBarPlot( array( $bplot1, $bplot2, $bplot3, $bplot4, $bplot5
 $gbarplot->SetWidth( 1.0 );
 $graph->Add( $gbarplot );
 
-$graph->Stroke( );
+$graph->Stroke();

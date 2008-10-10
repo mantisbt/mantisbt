@@ -27,7 +27,7 @@
 /**
  * Get a list of standard columns.
  */
-function columns_get_standard( ) {
+function columns_get_standard() {
 	return array(
 		'additional_information',
 		'attachment',
@@ -66,11 +66,11 @@ function columns_get_standard( ) {
  * Get all accessible columns for the current project / current user..
  */
 function columns_get_all( $p_project_id = null ) {
-	$t_columns = columns_get_standard( );
+	$t_columns = columns_get_standard();
 
 	# Add project custom fields to the array.  Only add the ones for which the current user has at least read access.
 	if( $p_project_id === null ) {
-		$t_project_id = helper_get_current_project( );
+		$t_project_id = helper_get_current_project();
 	}
 	else {
 		$t_project_id = $p_project_id;
@@ -183,7 +183,7 @@ function column_get_title( $p_column ) {
 		case 'selection':
 			return '';
 		case 'sponsorship_total':
-			return sponsorship_get_currency( );
+			return sponsorship_get_currency();
 		case 'version':
 			return lang_get( 'product_version' );
 		case 'view_state':
@@ -212,7 +212,7 @@ function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns
 	}
 
 	# Check for duplicate fields
-	$t_columns_no_duplicates = array( );
+	$t_columns_no_duplicates = array();
 	foreach( $p_columns_to_validate as $t_column ) {
 		$t_column_lower = strtolower( $t_column );
 		if( in_array( $t_column, $t_columns_no_duplicates ) ) {
@@ -237,7 +237,7 @@ function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns
  */
 function columns_remove_invalid( $p_columns, $p_columns_all ) {
 	$t_columns_all_lower = array_values( array_map( 'strtolower', $p_columns_all ) );
-	$t_columns = array( );
+	$t_columns = array();
 
 	foreach( $p_columns as $t_column ) {
 		if( in_array( strtolower( $t_column ), $t_columns_all_lower ) ) {
@@ -432,7 +432,7 @@ function print_column_title_category( $p_sort, $p_dir, $p_columns_target = COLUM
 # $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
 function print_column_title_sponsorship_total( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo "\t<td>";
-	print_view_bug_sort_link( sponsorship_get_currency( ), 'sponsorship_total', $p_sort, $p_dir, $p_columns_target );
+	print_view_bug_sort_link( sponsorship_get_currency(), 'sponsorship_total', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'sponsorship_total' );
 	echo "</td>\n";
 }
@@ -650,7 +650,7 @@ function print_column_category_id( $p_row, $p_columns_target = COLUMNS_TARGET_VI
 	echo '<td class="center">';
 
 	# type project name if viewing 'all projects' or if issue is in a subproject
-	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project( ) != $p_row['project_id'] ) {
+	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $p_row['project_id'] ) {
 		echo '<small>[';
 		print_view_bug_sort_link( $t_project_name, 'project_id', $t_sort, $t_dir, $p_columns_target );
 		echo ']</small><br />';
@@ -696,7 +696,7 @@ function print_column_handler_id( $p_row, $p_columns_target = COLUMNS_TARGET_VIE
 
 	# In case of a specific project, if the current user has no access to the field, then it would have been excluded from the
 	# list of columns to view.  In case of ALL_PROJECTS, then we need to check the access per row.
-	if( $p_row['handler_id'] > 0 && ( helper_get_current_project( ) != ALL_PROJECTS || access_has_project_level( config_get( 'view_handler_threshold' ), $p_row['project_id'] ) ) ) {
+	if( $p_row['handler_id'] > 0 && ( helper_get_current_project() != ALL_PROJECTS || access_has_project_level( config_get( 'view_handler_threshold' ), $p_row['project_id'] ) ) ) {
 		echo prepare_user_name( $p_row['handler_id'] );
 	}
 
@@ -785,7 +785,7 @@ function print_column_target_version( $p_row, $p_columns_target = COLUMNS_TARGET
 
 	# In case of a specific project, if the current user has no access to the field, then it would have been excluded from the
 	# list of columns to view.  In case of ALL_PROJECTS, then we need to check the access per row.
-	if( helper_get_current_project( ) != ALL_PROJECTS || access_has_project_level( config_get( 'roadmap_view_threshold' ), $p_row['project_id'] ) ) {
+	if( helper_get_current_project() != ALL_PROJECTS || access_has_project_level( config_get( 'roadmap_view_threshold' ), $p_row['project_id'] ) ) {
 		echo $p_row['target_version'];
 	}
 

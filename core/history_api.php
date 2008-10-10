@@ -31,7 +31,7 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 	# Only log events that change the value
 	if( $p_new_value != $p_old_value ) {
 		if( null === $p_user_id ) {
-			$p_user_id = auth_get_current_user_id( );
+			$p_user_id = auth_get_current_user_id();
 		}
 
 		$c_field_name = $p_field_name;
@@ -46,8 +46,8 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 		$query = "INSERT INTO $t_mantis_bug_history_table
 						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 					VALUES
-						( " . db_param( ) . ', ' . db_param( ) . ', ' . db_param( ) . ', ' . db_param( ) . ', ' . db_param( ) . ', ' . db_param( ) . ', ' . db_param( ) . ' )';
-		$result = db_query_bound( $query, Array( $c_user_id, $c_bug_id, db_now( ), $c_field_name, $c_old_value, $c_new_value, $c_type ) );
+						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+		$result = db_query_bound( $query, Array( $c_user_id, $c_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value, $c_type ) );
 	}
 }
 
@@ -67,15 +67,15 @@ function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_opt
 	$c_type = db_prepare_int( $p_type );
 	$c_optional = ( $p_optional );
 	$c_optional2 = ( $p_optional2 );
-	$t_user_id = auth_get_current_user_id( );
+	$t_user_id = auth_get_current_user_id();
 
 	$t_mantis_bug_history_table = db_get_table( 'mantis_bug_history_table' );
 
 	$query = "INSERT INTO $t_mantis_bug_history_table
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
-					( " . db_param( ) . ", " . db_param( ) . ", " . db_param( ) . ", " . db_param( ) . ", " . db_param( ) . "," . db_param( ) . ", " . db_param( ) . ")";
-	$result = db_query_bound( $query, Array( $t_user_id, $c_bug_id, db_now( ), $c_type, $c_optional, $c_optional2, '' ) );
+					( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . "," . db_param() . ", " . db_param() . ")";
+	$result = db_query_bound( $query, Array( $t_user_id, $c_bug_id, db_now(), $c_type, $c_optional, $c_optional2, '' ) );
 }
 
 # --------------------
@@ -90,7 +90,7 @@ function history_get_events( $p_bug_id ) {
 				FROM $t_bug_history_table b
 				LEFT JOIN $t_mantis_user_table u
 				ON b.user_id=u.id
-				WHERE bug_id=" . db_param( ) . "
+				WHERE bug_id=" . db_param() . "
 				ORDER BY date_modified DESC";
 	$result = db_query_bound( $query, Array( $c_bug_id ) );
 }
@@ -104,7 +104,7 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
 
 	$raw_history = history_get_raw_events_array( $p_bug_id, $p_user_id );
 	$raw_history_count = count( $raw_history );
-	$history = array( );
+	$history = array();
 
 	for( $i = 0;$i < $raw_history_count;$i++ ) {
 		$history[$i] = history_localize_item( $raw_history[$i]['field'], $raw_history[$i]['type'], $raw_history[$i]['old_value'], $raw_history[$i]['new_value'] );
@@ -126,7 +126,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	$t_history_order = config_get( 'history_order' );
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
-	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id( ) : $p_user_id );
+	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
 	$t_roadmap_view_access_level = config_get( 'roadmap_view_threshold' );
 	$t_due_date_view_threshold = config_get( 'due_date_view_threshold' );
@@ -139,16 +139,16 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	# for the new bug with the same timestamp...)
 	$query = "SELECT *
 				FROM $t_mantis_bug_history_table
-				WHERE bug_id=" . db_param( ) . "
+				WHERE bug_id=" . db_param() . "
 				ORDER BY date_modified $t_history_order,id";
 	$result = db_query_bound( $query, Array( $c_bug_id ) );
 	$raw_history_count = db_num_rows( $result );
-	$raw_history = array( );
+	$raw_history = array();
 
 	$t_private_bugnote_threshold = config_get( 'private_bugnote_threshold' );
 	$t_private_bugnote_visible = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $t_user_id );
 
-	$t_standard_fields = columns_get_standard( );
+	$t_standard_fields = columns_get_standard();
 
 	for( $i = 0, $j = 0;$i < $raw_history_count;++$i ) {
 		$row = db_fetch_array( $result );
@@ -484,7 +484,7 @@ function history_delete( $p_bug_id ) {
 	$t_bug_history_table = db_get_table( 'mantis_bug_history_table' );
 
 	$query = "DELETE FROM $t_bug_history_table
-				  WHERE bug_id=" . db_param( );
+				  WHERE bug_id=" . db_param();
 	db_query_bound( $query, Array( $c_bug_id ) );
 
 	# db_query errors on failure so:

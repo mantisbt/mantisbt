@@ -118,7 +118,7 @@ function upgrade_move_att2disk( $p_source ) {
 		$t_real_file_path = $prefix . $t_file_path;
 		$c_filename = file_clean_name( $v_filename );
 
-		printf( "\n<tr %s><td>%8d</td><td>%s</td><td>", helper_alternate_class( ), $t_bug_id, $v_filename );
+		printf( "\n<tr %s><td>%8d</td><td>%s</td><td>", helper_alternate_class(), $t_bug_id, $v_filename );
 
 		if( is_blank( $t_real_file_path ) || !file_exists( $t_real_file_path ) || !is_dir( $t_real_file_path ) || !is_writable( $t_real_file_path ) ) {
 			echo 'Destination ' . $t_real_file_path . ' not writable';

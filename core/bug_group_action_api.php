@@ -29,15 +29,15 @@
 /**
  * Print the top part for the bug action group page.
  */
-function bug_group_action_print_top( ) {
-	html_page_top1( );
-	html_page_top2( );
+function bug_group_action_print_top() {
+	html_page_top1();
+	html_page_top2();
 }
 
 /**
  * Print the bottom part for the bug action group page.
  */
-function bug_group_action_print_bottom( ) {
+function bug_group_action_print_bottom() {
 	html_page_bottom1( __FILE__ );
 }
 
@@ -50,7 +50,7 @@ function bug_group_action_print_bug_list( $p_bug_ids_array ) {
 	$t_legend_position = config_get( 'status_legend_position' );
 
 	if( STATUS_LEGEND_POSITION_TOP == $t_legend_position ) {
-		html_status_legend( );
+		html_status_legend();
 		echo '<br />';
 	}
 
@@ -75,7 +75,7 @@ function bug_group_action_print_bug_list( $p_bug_ids_array ) {
 
 	if( STATUS_LEGEND_POSITION_BOTTOM == $t_legend_position ) {
 		echo '<br />';
-		html_status_legend( );
+		html_status_legend();
 	}
 }
 
@@ -101,7 +101,7 @@ function bug_group_action_print_hidden_fields( $p_bug_ids_array ) {
 function bug_group_action_print_action_fields( $p_action ) {
 	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
 	$t_function_name = 'action_' . $p_action . '_print_fields';
-	$t_function_name( );
+	$t_function_name();
 }
 
 /**
@@ -113,7 +113,7 @@ function bug_group_action_print_action_fields( $p_action ) {
 function bug_group_action_print_title( $p_action ) {
 	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
 	$t_function_name = 'action_' . $p_action . '_print_title';
-	$t_function_name( );
+	$t_function_name();
 }
 
 /**

@@ -158,7 +158,7 @@ function multi_sort( $p_array, $p_key, $p_direction = ASCENDING ) {
 
 # Return GD version
 # It doesn't use gd_info() so it works with PHP < 4.3.0 as well
-function get_gd_version( ) {
+function get_gd_version() {
 	$t_GDfuncList = get_extension_funcs( 'gd' );
 	if( !is_array( $t_GDfuncList ) ) {
 		return 0;

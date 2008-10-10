@@ -27,10 +27,10 @@
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'error_api.php' );
 
 # cache for config variables
-$g_cache_config = array( );
-$g_cache_config_eval = array( );
-$g_cache_config_access = array( );
-$g_cache_bypass_lookup = array( );
+$g_cache_config = array();
+$g_cache_config_eval = array();
+$g_cache_config_access = array();
+$g_cache_bypass_lookup = array();
 $g_cache_filled = false;
 $g_cache_can_set_in_database = '';
 
@@ -67,7 +67,7 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 		# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes " : "no " );
 		if( !$g_cache_db_table_exists ) {
 			$t_config_table = db_get_table( 'mantis_config_table' );
-			$g_cache_db_table_exists = ( TRUE === db_is_connected( ) ) && db_table_exists( $t_config_table );
+			$g_cache_db_table_exists = ( TRUE === db_is_connected() ) && db_table_exists( $t_config_table );
 		}
 
 		if( $g_cache_db_table_exists ) {
@@ -75,10 +75,10 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 			# @@ debug @@ echo " lu db $p_option ";
 			# @@ debug @@ error_print_stack_trace();
 			# prepare the user's list
-			$t_users = array( );
+			$t_users = array();
 			if( null === $p_user ) {
 				if( !isset( $g_cache_config_user ) ) {
-					$t_users[] = auth_is_user_authenticated( ) ? auth_get_current_user_id( ) : ALL_USERS;
+					$t_users[] = auth_is_user_authenticated() ? auth_get_current_user_id() : ALL_USERS;
 					if( !in_array( ALL_USERS, $t_users ) ) {
 						$t_users[] = ALL_USERS;
 					}
@@ -96,10 +96,10 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 			}
 
 			# prepare the projects list
-			$t_projects = array( );
+			$t_projects = array();
 			if(( null === $p_project ) ) {
 				if( !isset( $g_cache_config_project ) ) {
-					$t_projects[] = auth_is_user_authenticated( ) ? helper_get_current_project( ) : ALL_PROJECTS;
+					$t_projects[] = auth_is_user_authenticated() ? helper_get_current_project() : ALL_PROJECTS;
 					if( !in_array( ALL_PROJECTS, $t_projects ) ) {
 						$t_projects[] = ALL_PROJECTS;
 					}
@@ -208,9 +208,9 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 	}
 
 	# prepare the user's list
-	$t_users = array( );
-	if(( null === $p_user ) && ( auth_is_user_authenticated( ) ) ) {
-		$t_users[] = auth_get_current_user_id( );
+	$t_users = array();
+	if(( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
+		$t_users[] = auth_get_current_user_id();
 	}
 	elseif( !in_array( $p_user, $t_users ) ) {
 		$t_users[] = $p_user;
@@ -218,9 +218,9 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 	$t_users[] = ALL_USERS;
 
 	# prepare the projects list
-	$t_projects = array( );
-	if(( null === $p_project ) && ( auth_is_user_authenticated( ) ) ) {
-		$t_selected_project = helper_get_current_project( );
+	$t_projects = array();
+	if(( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
+		$t_selected_project = helper_get_current_project();
 		if( ALL_PROJECTS <> $t_selected_project ) {
 			$t_projects[] = $t_selected_project;
 		}
@@ -265,8 +265,8 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 	$t_users = array(
 		ALL_USERS,
 	);
-	if(( null === $p_user ) && ( auth_is_user_authenticated( ) ) ) {
-		$t_users[] = auth_get_current_user_id( );
+	if(( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
+		$t_users[] = auth_get_current_user_id();
 	}
 	elseif( !in_array( $p_user, $t_users ) ) {
 		$t_users[] = $p_user;
@@ -277,8 +277,8 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 	$t_projects = array(
 		ALL_PROJECTS,
 	);
-	if(( null === $p_project ) && ( auth_is_user_authenticated( ) ) ) {
-		$t_selected_project = helper_get_current_project( );
+	if(( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
+		$t_selected_project = helper_get_current_project();
 		if( ALL_PROJECTS <> $t_selected_project ) {
 			$t_projects[] = $t_selected_project;
 		}
@@ -330,18 +330,18 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 
 		$t_config_table = db_get_table( 'mantis_config_table' );
 		$query = "SELECT COUNT(*) from $t_config_table
-				WHERE config_id = " . db_param( ) . " AND
-					project_id = " . db_param( ) . " AND
-					user_id = " . db_param( );
+				WHERE config_id = " . db_param() . " AND
+					project_id = " . db_param() . " AND
+					user_id = " . db_param();
 		$result = db_query_bound( $query, Array( $c_option, $c_project, $c_user ) );
 
-		$t_params = Array( );
+		$t_params = Array();
 		if( 0 < db_result( $result ) ) {
 			$t_set_query = "UPDATE $t_config_table
-					SET value=" . db_param( ) . ", type=" . db_param( ) . ", access_reqd=" . db_param( ) . "
-					WHERE config_id = " . db_param( ) . " AND
-						project_id = " . db_param( ) . " AND
-						user_id = " . db_param( );
+					SET value=" . db_param() . ", type=" . db_param() . ", access_reqd=" . db_param() . "
+					WHERE config_id = " . db_param() . " AND
+						project_id = " . db_param() . " AND
+						user_id = " . db_param();
 			$t_params = Array(
 				$c_value,
 				$t_type,
@@ -355,7 +355,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 			$t_set_query = "INSERT INTO $t_config_table
 					( value, type, access_reqd, config_id, project_id, user_id )
 					VALUES
-					(" . db_param( ) . ", " . db_param( ) . ", " . db_param( ) . ", " . db_param( ) . ", " . db_param( ) . "," . db_param( ) . " )";
+					(" . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . "," . db_param() . " )";
 			$t_params = Array(
 				$c_value,
 				$t_type,
@@ -435,7 +435,7 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 	# @@ debug @@ if ($t_bypass_lookup) { echo "bp=$p_option match=$t_match_pattern <br />"; }
 	# @@ debug @@ if ( ! db_is_connected() ) { echo "no db"; }
 
-	if(( !$t_bypass_lookup ) && ( TRUE === db_is_connected( ) ) && ( db_table_exists( db_get_table( 'mantis_config_table' ) ) ) ) {
+	if(( !$t_bypass_lookup ) && ( TRUE === db_is_connected() ) && ( db_table_exists( db_get_table( 'mantis_config_table' ) ) ) ) {
 		if( !config_can_delete( $p_option ) ) {
 			return;
 		}
@@ -449,9 +449,9 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 		$c_user = db_prepare_int( $p_user );
 		$c_project = db_prepare_int( $p_project );
 		$query = "DELETE FROM $t_config_table
-				WHERE config_id = " . db_param( ) . " AND
-					project_id=" . db_param( ) . " AND
-					user_id=" . db_param( );
+				WHERE config_id = " . db_param() . " AND
+					project_id=" . db_param() . " AND
+					user_id=" . db_param();
 
 		$result = @db_query_bound( $query, Array( $c_option, $c_project, $c_user ) );
 	}
@@ -475,7 +475,7 @@ function config_delete_for_user( $p_option, $p_user_id ) {
 
 	# Delete the corresponding bugnote texts
 	$query = "DELETE FROM $t_config_table
-					WHERE config_id=" . db_param( ) . " AND user_id=" . db_param( );
+					WHERE config_id=" . db_param() . " AND user_id=" . db_param();
 	db_query_bound( $query, array( $c_option, $c_user_id ) );
 }
 
@@ -486,12 +486,12 @@ function config_delete_project( $p_project = ALL_PROJECTS ) {
 	$t_config_table = db_get_table( 'mantis_config_table' );
 	$c_project = db_prepare_int( $p_project );
 	$query = "DELETE FROM $t_config_table
-				WHERE project_id=" . db_param( );
+				WHERE project_id=" . db_param();
 
 	$result = @db_query_bound( $query, Array( $c_project ) );
 
 	# flush cache here in case some of the deleted configs are in use.
-	config_flush_cache( );
+	config_flush_cache();
 }
 
 # ------------------

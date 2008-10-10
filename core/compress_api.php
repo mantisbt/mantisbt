@@ -33,7 +33,7 @@ $g_compression_started = false;
 
 # ----------------
 # Check if compression should be enabled.
-function compress_is_enabled( ) {
+function compress_is_enabled() {
 	global $g_compression_started;
 	global $g_compress_html, $g_use_iis;
 
@@ -47,7 +47,7 @@ function compress_is_enabled( ) {
 # Output Buffering handler that either compresses the buffer or just
 #  returns it, depending on the return value of compress_is_enabled()
 function compress_handler( $p_buffer, $p_mode ) {
-	if( compress_is_enabled( ) ) {
+	if( compress_is_enabled() ) {
 		return ob_gzhandler( $p_buffer, $p_mode );
 	}
 	else {
@@ -57,7 +57,7 @@ function compress_handler( $p_buffer, $p_mode ) {
 
 # ----------------
 # Enable output buffering with compression.
-function compress_enable( ) {
+function compress_enable() {
 	global $g_compression_started;
 
 	$g_compression_started = true;
@@ -65,7 +65,7 @@ function compress_enable( ) {
 
 # ----------------
 # Disable output buffering with compression.
-function compress_disable( ) {
+function compress_disable() {
 	global $g_compression_started;
 
 	$g_compression_started = false;

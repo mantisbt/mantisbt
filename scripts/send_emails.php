@@ -38,7 +38,7 @@ if( isset( $_SERVER['SERVER_PORT'] ) ) {
 }
 
 echo "Sending emails...\n";
-email_send_all( );
+email_send_all();
 echo "Done.\n";
 
 exit( 0 );

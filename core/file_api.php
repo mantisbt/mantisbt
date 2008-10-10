@@ -29,7 +29,7 @@ $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 require_once( $t_core_dir . 'history_api.php' );
 require_once( $t_core_dir . 'bug_api.php' );
 
-$g_cache_file_count = array( );
+$g_cache_file_count = array();
 
 # ## File API ###
 # Gets the filename without the bug id prefix.
@@ -112,7 +112,7 @@ function file_bug_has_attachments( $p_bug_id ) {
 
 # Check if the current user can view attachments for the specified bug.
 function file_can_view_bug_attachments( $p_bug_id ) {
-	$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id( ) );
+	$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
 	$t_can_view = access_has_bug_level( config_get( 'view_attachments_threshold' ), $p_bug_id );
 
 	# @@@ Fix this to be readable
@@ -123,7 +123,7 @@ function file_can_view_bug_attachments( $p_bug_id ) {
 
 # Check if the current user can download attachments for the specified bug.
 function file_can_download_bug_attachments( $p_bug_id ) {
-	$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id( ) );
+	$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
 	$t_can_download = access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
 
 	# @@@ Fix this to be readable
@@ -138,7 +138,7 @@ function file_can_delete_bug_attachments( $p_bug_id ) {
 		return false;
 	}
 
-	$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id( ) );
+	$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
 	$t_can_download = access_has_bug_level( config_get( 'delete_attachments_threshold' ), $p_bug_id );
 
 	# @@@ Fix this to be readable
@@ -178,14 +178,14 @@ function file_get_icon_url( $p_display_filename ) {
 # icon - array with icon information, contains 'url' and 'alt' elements.
 function file_get_visible_attachments( $p_bug_id ) {
 	$t_attachment_rows = bug_get_attachments( $p_bug_id );
-	$t_visible_attachments = array( );
+	$t_visible_attachments = array();
 
 	$t_attachments_count = sizeof( $t_attachment_rows );
 	if( $t_attachments_count === 0 ) {
 		return $t_visible_attachments;
 	}
 
-	$t_attachments = array( );
+	$t_attachments = array();
 
 	$t_can_download = file_can_download_bug_attachments( $p_bug_id );
 	$t_can_delete = file_can_delete_bug_attachments( $p_bug_id );
@@ -197,7 +197,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$row = $t_attachment_rows[$i];
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-		$t_attachment = array( );
+		$t_attachment = array();
 		$t_attachment['display_name'] = file_get_display_name( $v_filename );
 		$t_attachment['size'] = $v_filesize;
 		$t_attachment['date_added'] = db_unixtimestamp( $v_date_added );
@@ -251,7 +251,7 @@ function file_delete_attachments( $p_bug_id ) {
 	# Delete files from disk
 	$query = "SELECT diskfile, filename
 				FROM $t_bug_file_table
-				WHERE bug_id=" . db_param( );
+				WHERE bug_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 	$file_count = db_num_rows( $result );
@@ -264,7 +264,7 @@ function file_delete_attachments( $p_bug_id ) {
 		# there may be more than one file
 		$ftp = 0;
 		if( FTP == $t_method ) {
-			$ftp = file_ftp_connect( );
+			$ftp = file_ftp_connect();
 		}
 
 		for( $i = 0;$i < $file_count;$i++ ) {
@@ -284,7 +284,7 @@ function file_delete_attachments( $p_bug_id ) {
 
 	# Delete the corresponding db records
 	$query = "DELETE FROM $t_bug_file_table
-				  WHERE bug_id=" . db_param( );
+				  WHERE bug_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 	# db_query errors on failure so:
@@ -301,14 +301,14 @@ function file_delete_project_files( $p_project_id ) {
 		# Delete files from disk
 		$query = "SELECT diskfile, filename
 					FROM $t_project_file_table
-					WHERE project_id=" . db_param( );
+					WHERE project_id=" . db_param();
 		$result = db_query_bound( $query, array( (int) $p_project_id ) );
 
 		$file_count = db_num_rows( $result );
 
 		$ftp = 0;
 		if( FTP == $t_method ) {
-			$ftp = file_ftp_connect( );
+			$ftp = file_ftp_connect();
 		}
 
 		for( $i = 0;$i < $file_count;$i++ ) {
@@ -328,16 +328,16 @@ function file_delete_project_files( $p_project_id ) {
 
 	# Delete the corresponding db records
 	$query = "DELETE FROM $t_project_file_table
-				WHERE project_id=" . db_param( );
+				WHERE project_id=" . db_param();
 	$result = db_query_bound( $query, Array( (int) $p_project_id ) );
 }
 
 # Delete all cached files that are older than configured number of days.
-function file_ftp_cache_cleanup( ) {
+function file_ftp_cache_cleanup() {
 }
 
 # Connect to ftp server using configured server address, user name, and password.
-function file_ftp_connect( ) {
+function file_ftp_connect() {
 	$conn_id = ftp_connect( config_get( 'file_upload_ftp_server' ) );
 	$login_result = ftp_login( $conn_id, config_get( 'file_upload_ftp_user' ), config_get( 'file_upload_ftp_pass' ) );
 
@@ -350,13 +350,13 @@ function file_ftp_connect( ) {
 
 # Put a file to the ftp server.
 function file_ftp_put( $p_conn_id, $p_remote_filename, $p_local_filename ) {
-	helper_begin_long_process( );
+	helper_begin_long_process();
 	$upload = ftp_put( $p_conn_id, $p_remote_filename, $p_local_filename, FTP_BINARY );
 }
 
 # Get a file from the ftp server.
 function file_ftp_get( $p_conn_id, $p_local_filename, $p_remote_filename ) {
-	helper_begin_long_process( );
+	helper_begin_long_process();
 	$download = ftp_get( $p_conn_id, $p_local_filename, $p_remote_filename, FTP_BINARY );
 }
 
@@ -386,7 +386,7 @@ function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
 	# get info
 	$query = "SELECT $c_field_name
 				  FROM $t_bug_file_table
-				  WHERE id=" . db_param( );
+				  WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( (int) $p_file_id ), 1 );
 
 	return db_result( $result );
@@ -401,7 +401,7 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 
 	if(( DISK == $t_upload_method ) || ( FTP == $t_upload_method ) ) {
 		if( FTP == $t_upload_method ) {
-			$ftp = file_ftp_connect( );
+			$ftp = file_ftp_connect();
 			file_ftp_delete( $ftp, $t_diskfile );
 			file_ftp_disconnect( $ftp );
 		}
@@ -420,7 +420,7 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 
 	$t_file_table = db_get_table( 'mantis_' . $p_table . '_file_table' );
 	$query = "DELETE FROM $t_file_table
-				WHERE id=" . db_param( );
+				WHERE id=" . db_param();
 	db_query_bound( $query, Array( $c_file_id ) );
 	return true;
 }
@@ -468,7 +468,7 @@ function file_clean_name( $p_filename ) {
 # It is not guaranteed to be unique and should be checked
 # The string returned should be 32 characters in length
 function file_generate_name( $p_seed ) {
-	$t_val = md5( $p_seed . time( ) );
+	$t_val = md5( $p_seed . time() );
 
 	return substr( $t_val, 0, 32 );
 }
@@ -492,7 +492,7 @@ function diskfile_is_name_unique( $p_name, $p_filepath ) {
 
 	$query = "SELECT COUNT(*)
 				  FROM $t_file_table
-				  WHERE diskfile=" . db_param( );
+				  WHERE diskfile=" . db_param();
 	$result = db_query_bound( $query, Array( $c_name ) );
 	$t_count = db_result( $result );
 
@@ -510,7 +510,7 @@ function file_is_name_unique( $p_name, $p_bug_id ) {
 
 	$query = "SELECT COUNT(*)
 				  FROM $t_file_table
-				  WHERE filename=" . db_param( ) . " AND bug_id=" . db_param( );
+				  WHERE filename=" . db_param() . " AND bug_id=" . db_param();
 	$result = db_query_bound( $query, Array( $p_name, $p_bug_id ) );
 	$t_count = db_result( $result );
 
@@ -547,7 +547,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 		$t_bug_id = bug_format_id( $p_bug_id );
 	}
 	else {
-		$t_project_id = helper_get_current_project( );
+		$t_project_id = helper_get_current_project();
 		$t_bug_id = 0;
 	}
 
@@ -593,7 +593,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 
 			if( !file_exists( $t_disk_file_name ) ) {
 				if( FTP == $t_method ) {
-					$conn_id = file_ftp_connect( );
+					$conn_id = file_ftp_connect();
 					file_ftp_put( $conn_id, $t_disk_file_name, $t_tmp_file );
 					file_ftp_disconnect( $conn_id );
 				}
@@ -623,7 +623,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	$query = "INSERT INTO $t_file_table
 						(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 					  VALUES
-						($c_id, '$c_title', '$c_desc', '$c_disk_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now( ) . "', $c_content)";
+						($c_id, '$c_title', '$c_desc', '$c_disk_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now() . "', $c_content)";
 	db_query( $query );
 
 	if( 'bug' == $p_table ) {
@@ -639,7 +639,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 # --------------------
 # Return true if file uploading is enabled (in our config and PHP's),
 #  false otherwise
-function file_is_uploading_enabled( ) {
+function file_is_uploading_enabled() {
 	if( ini_get_bool( 'file_uploads' ) && ( ON == config_get( 'allow_file_upload' ) ) ) {
 		return true;
 	}
@@ -653,12 +653,12 @@ function file_is_uploading_enabled( ) {
 #  the project defaults to the current project and the user to the current user
 function file_allow_project_upload( $p_project_id = null, $p_user_id = null ) {
 	if( null === $p_project_id ) {
-		$p_project_id = helper_get_current_project( );
+		$p_project_id = helper_get_current_project();
 	}
 	if( null === $p_user_id ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
-	return( file_is_uploading_enabled( ) && ( access_has_project_level( config_get( 'upload_project_file_threshold' ), $p_project_id, $p_user_id ) ) );
+	return( file_is_uploading_enabled() && ( access_has_project_level( config_get( 'upload_project_file_threshold' ), $p_project_id, $p_user_id ) ) );
 }
 
 # --------------------
@@ -670,18 +670,18 @@ function file_allow_project_upload( $p_project_id = null, $p_user_id = null ) {
 #   upload a file to a new bug in the current project
 function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
 	if( null === $p_user_id ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	# If uploads are disbled just return false
-	if( !file_is_uploading_enabled( ) ) {
+	if( !file_is_uploading_enabled() ) {
 		return false;
 	}
 
 	if( null === $p_bug_id ) {
 
 		# new bug
-		$t_project_id = helper_get_current_project( );
+		$t_project_id = helper_get_current_project();
 
 		# the user must be the reporter if they're reporting a new bug
 		$t_reporter = true;

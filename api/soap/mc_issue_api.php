@@ -65,7 +65,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	}
 
 	$t_bug = get_object_vars( bug_get( $p_issue_id, true ) );
-	$t_issue_data = array( );
+	$t_issue_data = array();
 
 	$t_issue_data['id'] = $p_issue_id;
 	$t_issue_data['view_state'] = mci_enum_get_array_by_id( $t_bug['view_state'], 'view_state', $t_lang );
@@ -159,7 +159,7 @@ function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields ) {
 function mci_issue_get_custom_fields( $p_issue_id ) {
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 
-	$t_custom_fields = array( );
+	$t_custom_fields = array();
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
 
 	foreach( $t_related_custom_field_ids as $t_id ) {
@@ -173,8 +173,8 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 				continue;
 			}
 
-			$t_custom_field_value = array( );
-			$t_custom_field_value['field'] = array( );
+			$t_custom_field_value = array();
+			$t_custom_field_value['field'] = array();
 			$t_custom_field_value['field']['id'] = $t_id;
 			$t_custom_field_value['field']['name'] = $t_def['name'];
 			$t_custom_field_value['value'] = $t_value;
@@ -196,16 +196,16 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
  */
 function mci_issue_get_attachments( $p_issue_id ) {
 	$t_attachment_rows = bug_get_attachments( $p_issue_id );
-	$t_result = array( );
+	$t_result = array();
 
 	foreach( $t_attachment_rows as $t_attachment_row ) {
-		$t_attachment = array( );
+		$t_attachment = array();
 		$t_attachment['id'] = $t_attachment_row['id'];
 		$t_attachment['filename'] = $t_attachment_row['filename'];
 		$t_attachment['size'] = $t_attachment_row['filesize'];
 		$t_attachment['content_type'] = $t_attachment_row['file_type'];
 		$t_attachment['date_submitted'] = timestamp_to_iso8601( db_unixtimestamp( $t_attachment_row['date_added'] ) );
-		$t_attachment['download_url'] = mci_get_mantis_path( ) . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&amp;type=bug';
+		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&amp;type=bug';
 		$t_result[] = $t_attachment;
 	}
 
@@ -219,13 +219,13 @@ function mci_issue_get_attachments( $p_issue_id ) {
  * @return Array that represents an RelationShipData structure
  */
 function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
-	$t_relationships = array( );
+	$t_relationships = array();
 
 	$t_src_relationships = relationship_get_all_src( $p_issue_id );
 	foreach( $t_src_relationships as $t_relship_row ) {
 		if( access_has_bug_level( config_get( 'mc_readonly_access_level_threshold' ), $t_relship_row->dest_bug_id, $p_user_id ) ) {
-			$t_relationship = array( );
-			$t_reltype = array( );
+			$t_relationship = array();
+			$t_reltype = array();
 			$t_relationship['id'] = $t_relship_row->id;
 			$t_reltype['id'] = $t_relship_row->type;
 			$t_reltype['name'] = relationship_get_description_src_side( $t_relship_row->type );
@@ -238,9 +238,9 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 	$t_dest_relationships = relationship_get_all_dest( $p_issue_id );
 	foreach( $t_dest_relationships as $t_relship_row ) {
 		if( access_has_bug_level( config_get( 'mc_readonly_access_level_threshold' ), $t_relship_row->src_bug_id, $p_user_id ) ) {
-			$t_relationship = array( );
+			$t_relationship = array();
 			$t_relationship['id'] = $t_relship_row->id;
-			$t_reltype = array( );
+			$t_reltype = array();
 			$t_reltype['id'] = $t_relship_row->type;
 			$t_reltype['name'] = relationship_get_description_dest_side( $t_relship_row->type );
 			$t_relationship['type'] = $t_reltype;
@@ -259,15 +259,15 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
  * @return Array that represents an IssueNoteData structure
  */
 function mci_issue_get_notes( $p_issue_id ) {
-	$t_user_id = auth_get_current_user_id( );
+	$t_user_id = auth_get_current_user_id();
 	$t_lang = mci_get_user_lang( $t_user_id );
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	$t_user_bugnote_order = 'ASC'; // always get the notes in ascending order for consistency to the calling application.
 
 
-	$t_result = array( );
+	$t_result = array();
 	foreach( bugnote_get_all_visible_bugnotes( $p_issue_id, $t_user_bugnote_order, 0 ) as $t_value ) {
-		$t_bugnote = array( );
+		$t_bugnote = array();
 		$t_bugnote['id'] = $t_value->id;
 		$t_bugnote['reporter'] = mci_account_get_array_by_id( $t_value->reporter_id );
 		$t_bugnote['date_submitted'] = timestamp_to_iso8601( $t_value->date_submitted );
@@ -340,7 +340,7 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	# Get project id, if -1, then retrieve the current which will be the default since there is no cookie.
 	$t_project_id = $p_project_id;
 	if( $t_project_id == -1 ) {
-		$t_project_id = helper_get_current_project( );
+		$t_project_id = helper_get_current_project();
 	}
 
 	if(( $t_project_id > 0 ) && !project_exists( $t_project_id ) ) {
@@ -540,7 +540,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $v_summary;
 	$t_bug_data->sponsorship_total = isset( $v_sponsorship_total ) ? $v_sponsorship_total : 0;
-	$t_bug_data->due_date = date_get_null( );
+	$t_bug_data->due_date = date_get_null();
 
 	# omitted:
 	# var $bug_text_id
@@ -703,7 +703,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $v_summary;
 	$t_bug_data->sponsorship_total = isset( $v_sponsorship_total ) ? $v_sponsorship_total : 0;
-	$t_bug_data->due_date = date_get_null( );
+	$t_bug_data->due_date = date_get_null();
 
 	# omitted:
 	# var $bug_text_id

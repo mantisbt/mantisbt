@@ -54,7 +54,7 @@ class RSSBase {
 	* @return void
 	* @access private
 	*/
-	function RSSBase( ) {
+	function RSSBase() {
 	}
 
 }
@@ -231,7 +231,7 @@ class RSSBuilder extends RSSBase {
 	* @desc array wich all the rss items
 	* @var array
 	*/
-	var $items = array( );
+	var $items = array();
 
 	/**
 	* use DC data
@@ -638,7 +638,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $encoding
 	* @see $image_link
 	*/
-	function getEncoding( ) {
+	function getEncoding() {
 		return (string) $this->encoding;
 	}
 
@@ -649,7 +649,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $about
 	* @see $about
 	*/
-	function getAbout( ) {
+	function getAbout() {
 		return (string) $this->about;
 	}
 
@@ -660,7 +660,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $title
 	* @see $title
 	*/
-	function getTitle( ) {
+	function getTitle() {
 		return (string) $this->title;
 	}
 
@@ -671,7 +671,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $description
 	* @see $description
 	*/
-	function getDescription( ) {
+	function getDescription() {
 		return (string) $this->description;
 	}
 
@@ -682,7 +682,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $publisher
 	* @see $publisher
 	*/
-	function getPublisher( ) {
+	function getPublisher() {
 		return (string) $this->publisher;
 	}
 
@@ -693,7 +693,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $creator
 	* @see $creator
 	*/
-	function getCreator( ) {
+	function getCreator() {
 		return (string) $this->creator;
 	}
 
@@ -704,7 +704,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $date
 	* @see $date
 	*/
-	function getDate( ) {
+	function getDate() {
 		return (string) $this->date;
 	}
 
@@ -715,7 +715,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $language
 	* @see $language
 	*/
-	function getLanguage( ) {
+	function getLanguage() {
 		return (string) $this->language;
 	}
 
@@ -726,7 +726,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $rights
 	* @see $rights
 	*/
-	function getRights( ) {
+	function getRights() {
 		return (string) $this->rights;
 	}
 
@@ -737,7 +737,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $coverage
 	* @see $coverage
 	*/
-	function getCoverage( ) {
+	function getCoverage() {
 		return (string) $this->coverage;
 	}
 
@@ -748,7 +748,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $contributor
 	* @see $contributor
 	*/
-	function getContributor( ) {
+	function getContributor() {
 		return (string) $this->contributor;
 	}
 
@@ -759,7 +759,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $image_link
 	* @see $image_link
 	*/
-	function getImageLink( ) {
+	function getImageLink() {
 		return (string) $this->image_link;
 	}
 
@@ -770,7 +770,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $period
 	* @see $period
 	*/
-	function getPeriod( ) {
+	function getPeriod() {
 		return (string) $this->period;
 	}
 
@@ -781,7 +781,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $frequency
 	* @see $frequency
 	*/
-	function getFrequency( ) {
+	function getFrequency() {
 		return (int) $this->frequency;
 	}
 
@@ -792,7 +792,7 @@ class RSSBuilder extends RSSBase {
 	* @return string $base
 	* @see $base
 	*/
-	function getBase( ) {
+	function getBase() {
 		return (string) $this->base;
 	}
 
@@ -804,7 +804,7 @@ class RSSBuilder extends RSSBase {
 	* @see $category
 	* @since 1.001 - 2003-05-30
 	*/
-	function getCategory( ) {
+	function getCategory() {
 		return (string) $this->category;
 	}
 
@@ -816,7 +816,7 @@ class RSSBuilder extends RSSBase {
 	* @see $cache
 	* @since 1.001 - 2003-05-30
 	*/
-	function getCache( ) {
+	function getCache() {
 		return (int) $this->cache;
 	}
 
@@ -870,7 +870,7 @@ class RSSBuilder extends RSSBase {
 	* @return array array with all the keys of the $items array
 	* @see $items
 	*/
-	function getItemList( ) {
+	function getItemList() {
 		return (array) array_keys( $this->items );
 	}
 
@@ -880,7 +880,7 @@ class RSSBuilder extends RSSBase {
 	* @desc Returns the $items array
 	* @return array $items
 	*/
-	function getItems( ) {
+	function getItems() {
 		return (array) $this->items;
 	}
 
@@ -915,10 +915,10 @@ class RSSBuilder extends RSSBase {
 	* @desc creates the output based on the 0.91 rss version
 	* @see $output
 	*/
-	function createOutputV090( ) {
+	function createOutputV090() {
 
 		// not implemented
-		$this->createOutputV100( );
+		$this->createOutputV100();
 	}
 
 	/**
@@ -928,7 +928,7 @@ class RSSBuilder extends RSSBase {
 	* @see $output
 	* @since 1.001 - 2003-05-30
 	*/
-	function createOutputV091( ) {
+	function createOutputV091() {
 		$this->output = (string) '<!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.91.dtd">' . "\n";
 		$this->output .= (string) '<rss version="0.91">' . "\n";
 		$this->output .= (string) '<channel>' . "\n";
@@ -1003,16 +1003,16 @@ class RSSBuilder extends RSSBase {
 
 		// end if
 
-		if( count( $this->getItemList( ) ) > 0 ) {
-			foreach( $this->getItemList( ) as $id ) {
+		if( count( $this->getItemList() ) > 0 ) {
+			foreach( $this->getItemList() as $id ) {
 				$item = &$this->items[$id];
 
-				if( strlen( $item->getTitle( ) ) > 0 && strlen( $item->getLink( ) ) > 0 ) {
+				if( strlen( $item->getTitle() ) > 0 && strlen( $item->getLink() ) > 0 ) {
 					$this->output .= (string) '<item>' . "\n";
-					$this->output .= (string) '<title>' . $item->getTitle( ) . '</title>' . "\n";
-					$this->output .= (string) '<link>' . $item->getLink( ) . '</link>' . "\n";
-					if( strlen( $item->getDescription( ) ) > 0 ) {
-						$this->output .= (string) '<description>' . $item->getDescription( ) . '</description>' . "\n";
+					$this->output .= (string) '<title>' . $item->getTitle() . '</title>' . "\n";
+					$this->output .= (string) '<link>' . $item->getLink() . '</link>' . "\n";
+					if( strlen( $item->getDescription() ) > 0 ) {
+						$this->output .= (string) '<description>' . $item->getDescription() . '</description>' . "\n";
 					}
 
 					// end if
@@ -1037,7 +1037,7 @@ class RSSBuilder extends RSSBase {
 	* @desc creates the output based on the 1.0 rss version
 	* @see $output
 	*/
-	function createOutputV100( ) {
+	function createOutputV100() {
 		$this->output = (string) '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:im="http://purl.org/rss/1.0/item-images/" ';
 
 		if( $this->use_dc_data === TRUE ) {
@@ -1156,12 +1156,12 @@ class RSSBuilder extends RSSBase {
 
 		// end if
 
-		if( count( $this->getItemList( ) ) > 0 ) {
+		if( count( $this->getItemList() ) > 0 ) {
 			$this->output .= (string) '<items><rdf:Seq>' . "\n";
-			foreach( $this->getItemList( ) as $id ) {
+			foreach( $this->getItemList() as $id ) {
 				$item = &$this->items[$id];
-				if( strlen( $item->getAbout( ) ) > 0 ) {
-					$this->output .= (string) ' <rdf:li resource="' . $item->getAbout( ) . '" />' . "\n";
+				if( strlen( $item->getAbout() ) > 0 ) {
+					$this->output .= (string) ' <rdf:li resource="' . $item->getAbout() . '" />' . "\n";
 				}
 
 				// end if
@@ -1174,13 +1174,13 @@ class RSSBuilder extends RSSBase {
 		// end if
 		$this->output .= (string) '</channel>' . "\n";
 
-		if( count( $this->getItemList( ) ) > 0 ) {
-			foreach( $this->getItemList( ) as $id ) {
+		if( count( $this->getItemList() ) > 0 ) {
+			foreach( $this->getItemList() as $id ) {
 				$item = &$this->items[$id];
 
-				if( strlen( $item->getTitle( ) ) > 0 && strlen( $item->getLink( ) ) > 0 ) {
-					if( strlen( $item->getAbout( ) ) > 0 ) {
-						$this->output .= (string) '<item rdf:about="' . $item->getAbout( ) . '">' . "\n";
+				if( strlen( $item->getTitle() ) > 0 && strlen( $item->getLink() ) > 0 ) {
+					if( strlen( $item->getAbout() ) > 0 ) {
+						$this->output .= (string) '<item rdf:about="' . $item->getAbout() . '">' . "\n";
 					}
 					else {
 						$this->output .= (string) '<item>' . "\n";
@@ -1188,29 +1188,29 @@ class RSSBuilder extends RSSBase {
 
 					// end if
 
-					$this->output .= (string) '<title>' . $item->getTitle( ) . '</title>' . "\n";
-					$this->output .= (string) '<link>' . $item->getLink( ) . '</link>' . "\n";
+					$this->output .= (string) '<title>' . $item->getTitle() . '</title>' . "\n";
+					$this->output .= (string) '<link>' . $item->getLink() . '</link>' . "\n";
 
-					if( strlen( $item->getDescription( ) ) > 0 ) {
-						$this->output .= (string) '<description>' . $item->getDescription( ) . '</description>' . "\n";
+					if( strlen( $item->getDescription() ) > 0 ) {
+						$this->output .= (string) '<description>' . $item->getDescription() . '</description>' . "\n";
 					}
 
 					// end if
 
-					if( $this->use_dc_data === TRUE && strlen( $item->getSubject( ) ) > 0 ) {
-						$this->output .= (string) '<dc:subject>' . $item->getSubject( ) . '</dc:subject>' . "\n";
+					if( $this->use_dc_data === TRUE && strlen( $item->getSubject() ) > 0 ) {
+						$this->output .= (string) '<dc:subject>' . $item->getSubject() . '</dc:subject>' . "\n";
 					}
 
 					// end if
 
-					if( $this->use_dc_data === TRUE && strlen( $item->getDate( ) ) > 0 ) {
-						$this->output .= (string) '<dc:date>' . $item->getDate( ) . '</dc:date>' . "\n";
+					if( $this->use_dc_data === TRUE && strlen( $item->getDate() ) > 0 ) {
+						$this->output .= (string) '<dc:date>' . $item->getDate() . '</dc:date>' . "\n";
 					}
 
 					// end if
 
-					if( strlen( $item->getImage( ) ) > 0 ) {
-						$this->output .= (string) '<im:image>' . $item->getImage( ) . '</im:image>' . "\n";
+					if( strlen( $item->getImage() ) > 0 ) {
+						$this->output .= (string) '<im:image>' . $item->getImage() . '</im:image>' . "\n";
 					}
 
 					// end if
@@ -1236,7 +1236,7 @@ class RSSBuilder extends RSSBase {
 	* @see $output
 	* @since 1.001 - 2003-05-30
 	*/
-	function createOutputV200( ) {
+	function createOutputV200() {
 		$this->output = (string) '<rss version="2.0" xmlns:im="http://purl.org/rss/1.0/item-images/" ';
 
 		if( $this->use_dc_data === TRUE ) {
@@ -1398,53 +1398,53 @@ class RSSBuilder extends RSSBase {
 
 		// end if
 
-		if( count( $this->getItemList( ) ) > 0 ) {
-			foreach( $this->getItemList( ) as $id ) {
+		if( count( $this->getItemList() ) > 0 ) {
+			foreach( $this->getItemList() as $id ) {
 				$item = &$this->items[$id];
 
-				if( strlen( $item->getTitle( ) ) > 0 && strlen( $item->getLink( ) ) > 0 ) {
+				if( strlen( $item->getTitle() ) > 0 && strlen( $item->getLink() ) > 0 ) {
 					$this->output .= (string) '<item>' . "\n";
-					$this->output .= (string) '<title>' . $item->getTitle( ) . '</title>' . "\n";
-					$this->output .= (string) '<link>' . $item->getLink( ) . '</link>' . "\n";
+					$this->output .= (string) '<title>' . $item->getTitle() . '</title>' . "\n";
+					$this->output .= (string) '<link>' . $item->getLink() . '</link>' . "\n";
 
-					if( strlen( $item->getDescription( ) ) > 0 ) {
-						$this->output .= (string) '<description><![CDATA[' . $item->getDescription( ) . ']]></description>' . "\n";
+					if( strlen( $item->getDescription() ) > 0 ) {
+						$this->output .= (string) '<description><![CDATA[' . $item->getDescription() . ']]></description>' . "\n";
 					}
 
 					// end if
 
-					if( $this->use_dc_data === TRUE && strlen( $item->getSubject( ) ) > 0 ) {
-						$this->output .= (string) '<category>' . $item->getSubject( ) . '</category>' . "\n";
+					if( $this->use_dc_data === TRUE && strlen( $item->getSubject() ) > 0 ) {
+						$this->output .= (string) '<category>' . $item->getSubject() . '</category>' . "\n";
 					}
 
 					// end if
 
-					if( $this->use_dc_data === TRUE && strlen( $item->getDate( ) ) > 0 ) {
-						$this->output .= (string) '<pubDate>' . $item->getDate( ) . '</pubDate>' . "\n";
+					if( $this->use_dc_data === TRUE && strlen( $item->getDate() ) > 0 ) {
+						$this->output .= (string) '<pubDate>' . $item->getDate() . '</pubDate>' . "\n";
 					}
 
 					// end if
 
-					if( strlen( $item->getAbout( ) ) > 0 ) {
-						$this->output .= (string) '<guid>' . $item->getAbout( ) . '</guid>' . "\n";
+					if( strlen( $item->getAbout() ) > 0 ) {
+						$this->output .= (string) '<guid>' . $item->getAbout() . '</guid>' . "\n";
 					}
 
 					// end if
 
-					if( strlen( $item->getAuthor( ) ) > 0 ) {
-						$this->output .= (string) '<author>' . $item->getAuthor( ) . '</author>' . "\n";
+					if( strlen( $item->getAuthor() ) > 0 ) {
+						$this->output .= (string) '<author>' . $item->getAuthor() . '</author>' . "\n";
 					}
 
 					// end if
 
-					if( strlen( $item->getComments( ) ) > 0 ) {
-						$this->output .= (string) '<comments>' . $item->getComments( ) . '</comments>' . "\n";
+					if( strlen( $item->getComments() ) > 0 ) {
+						$this->output .= (string) '<comments>' . $item->getComments() . '</comments>' . "\n";
 					}
 
 					// end if
 
-					if( strlen( $item->getImage( ) ) > 0 ) {
-						$this->output .= (string) '<im:image>' . $item->getImage( ) . '</im:image>' . "\n";
+					if( strlen( $item->getImage() ) > 0 ) {
+						$this->output .= (string) '<im:image>' . $item->getImage() . '</im:image>' . "\n";
 					}
 
 					// end if
@@ -1481,17 +1481,17 @@ class RSSBuilder extends RSSBase {
 
 		switch( $version ) {
 			case '0.9':
-				$this->createOutputV090( );
+				$this->createOutputV090();
 				break;
 			case '0.91':
-				$this->createOutputV091( );
+				$this->createOutputV091();
 				break;
 			case '2.00':
-				$this->createOutputV200( );
+				$this->createOutputV200();
 				break;
 			case '1.0':
 			default:
-				$this->createOutputV100( );
+				$this->createOutputV100();
 				break;
 		}
 
@@ -1824,7 +1824,7 @@ class RSSItem extends RSSBase {
 	* @return string $about
 	* @see $about
 	*/
-	function getAbout( ) {
+	function getAbout() {
 		return (string) $this->about;
 	}
 
@@ -1835,7 +1835,7 @@ class RSSItem extends RSSBase {
 	* @return string $title
 	* @see $title
 	*/
-	function getTitle( ) {
+	function getTitle() {
 		return (string) $this->title;
 	}
 
@@ -1846,7 +1846,7 @@ class RSSItem extends RSSBase {
 	* @return string $link
 	* @see $link
 	*/
-	function getLink( ) {
+	function getLink() {
 		return (string) $this->link;
 	}
 
@@ -1857,7 +1857,7 @@ class RSSItem extends RSSBase {
 	* @return string $description
 	* @see $description
 	*/
-	function getDescription( ) {
+	function getDescription() {
 		return (string) $this->description;
 	}
 
@@ -1868,7 +1868,7 @@ class RSSItem extends RSSBase {
 	* @return string $subject
 	* @see $subject
 	*/
-	function getSubject( ) {
+	function getSubject() {
 		return (string) $this->subject;
 	}
 
@@ -1879,7 +1879,7 @@ class RSSItem extends RSSBase {
 	* @return string $date
 	* @see $date
 	*/
-	function getDate( ) {
+	function getDate() {
 		return (string) $this->date;
 	}
 
@@ -1891,7 +1891,7 @@ class RSSItem extends RSSBase {
 	* @see $author
 	* @since 1.001 - 2003-05-30
 	*/
-	function getAuthor( ) {
+	function getAuthor() {
 		return (string) $this->author;
 	}
 
@@ -1903,7 +1903,7 @@ class RSSItem extends RSSBase {
 	* @see $comments
 	* @since 1.001 - 2003-05-30
 	*/
-	function getComments( ) {
+	function getComments() {
 		return (string) $this->comments;
 	}
 
@@ -1915,7 +1915,7 @@ class RSSItem extends RSSBase {
 	* @see $image
 	* @since 1.002 - 2003-06-26
 	*/
-	function getImage( ) {
+	function getImage() {
 		return (string) $this->image;
 	}
 	/**#@-*/

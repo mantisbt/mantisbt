@@ -36,7 +36,7 @@ require_once( $t_core_path . 'graph_api.php' );
 
 # Grab Data
 # ---
-$t_project_id = helper_get_current_project( );
+$t_project_id = helper_get_current_project();
 
 $critical_count_arr = array(
 	2,
@@ -85,9 +85,9 @@ for( $i = 0;$i < $severity_count;$i++ ) {
 	$t_severity = $t_severity_arr[0];
 	$query = "SELECT COUNT(*) as count
 			FROM mantis_bug_table
-			WHERE project_id=" . db_param( ) . " AND
+			WHERE project_id=" . db_param() . " AND
 					status<80 AND
-					severity=" . db_param( );
+					severity=" . db_param();
 	$result = db_query_bound( $query, Array( $t_project_id, $t_severity ) );
 	$count = db_result( $result, 0, 0 );
 	switch( $t_severity ) {
@@ -118,9 +118,9 @@ for( $i = 0;$i < $severity_count;$i++ ) {
 	$t_severity = $t_severity_arr[0];
 	$query = "SELECT COUNT(*) as count
 			FROM mantis_bug_table
-			WHERE project_id=" . db_param( ) . " AND
+			WHERE project_id=" . db_param() . " AND
 					status=80 AND
-					severity=" . db_param( );
+					severity=" . db_param();
 	$result = db_query_bound( $query, Array( $t_project_id, $t_severity ) );
 	$count = db_result( $result, 0, 0 );
 
@@ -152,9 +152,9 @@ for( $i = 0;$i < $severity_count;$i++ ) {
 	$t_severity = $t_severity_arr[0];
 	$query = "SELECT COUNT(*) as count
 			FROM mantis_bug_table
-			WHERE project_id=" . db_param( ) . " AND
+			WHERE project_id=" . db_param() . " AND
 					status=90 AND
-					severity=" . db_param( );
+					severity=" . db_param();
 	$result = db_query_bound( $query, Array( $t_project_id, $t_severity ) );
 	$count = db_result( $result, 0, 0 );
 
@@ -187,7 +187,7 @@ $proj_name = project_get_field( $t_project_id, 'name' );
 $graph = new Graph( 800, 600, 'auto' );
 $graph->SetColor( "whitesmoke" );
 $graph->SetScale( "textlin" );
-$graph->SetShadow( );
+$graph->SetShadow();
 $graph->img->SetMargin( 40, 30, 40, 40 );
 
 $graph->xaxis->SetTickLabels( array( 'Open', 'Resolved', 'Closed' ) );
@@ -212,12 +212,12 @@ $bplot4->SetFillColor( "paleturquoise" );
 $bplot5->SetFillColor( "palegreen3" );
 $bplot6->SetFillColor( "sienna2" );
 
-$bplot1->SetShadow( );
-$bplot2->SetShadow( );
-$bplot3->SetShadow( );
-$bplot4->SetShadow( );
-$bplot5->SetShadow( );
-$bplot6->SetShadow( );
+$bplot1->SetShadow();
+$bplot2->SetShadow();
+$bplot3->SetShadow();
+$bplot4->SetShadow();
+$bplot5->SetShadow();
+$bplot6->SetShadow();
 
 $bplot1->SetLegend( 'Critical' );
 $bplot2->SetLegend( 'High' );
@@ -226,12 +226,12 @@ $bplot4->SetLegend( 'Low' );
 $bplot5->SetLegend( 'None' );
 $bplot6->SetLegend( 'Duplicate' );
 
-$bplot1->value->Show( );
-$bplot2->value->Show( );
-$bplot3->value->Show( );
-$bplot4->value->Show( );
-$bplot5->value->Show( );
-$bplot6->value->Show( );
+$bplot1->value->Show();
+$bplot2->value->Show();
+$bplot3->value->Show();
+$bplot4->value->Show();
+$bplot5->value->Show();
+$bplot6->value->Show();
 
 $bplot1->value->SetFont( FF_FONT1 );
 $bplot2->value->SetFont( FF_FONT1 );
@@ -259,4 +259,4 @@ $gbarplot = new GroupBarPlot( array( $bplot1, $bplot2, $bplot3, $bplot4, $bplot5
 $gbarplot->SetWidth( 0.9 );
 $graph->Add( $gbarplot );
 
-$graph->Stroke( );
+$graph->Stroke();

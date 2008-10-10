@@ -28,7 +28,7 @@
 # if the user changes his user name or password, then the key becomes invalid.
 function rss_calculate_key( $p_user_id = null ) {
 	if( $p_user_id === null ) {
-		$t_user_id = auth_get_current_user_id( );
+		$t_user_id = auth_get_current_user_id();
 	}
 	else {
 		$t_user_id = $p_user_id;
@@ -77,7 +77,7 @@ function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_f
 	}
 
 	if( $p_project_id === null ) {
-		$t_project_id = helper_get_current_project( );
+		$t_project_id = helper_get_current_project();
 	}
 	else {
 		$t_project_id = (integer) $p_project_id;
@@ -123,7 +123,7 @@ function rss_get_news_feed_url( $p_project_id = null, $p_username = null, $p_rel
 	}
 
 	if( $p_project_id === null ) {
-		$t_project_id = helper_get_current_project( );
+		$t_project_id = helper_get_current_project();
 	}
 	else {
 		$t_project_id = (integer) $p_project_id;

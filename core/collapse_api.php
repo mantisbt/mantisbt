@@ -91,7 +91,7 @@ function collapse_closed( $p_name, $p_section = '' ) {
 
 	$g_open_collapse_section = false;
 
-	ob_start( );
+	ob_start();
 
 	$t_div_id = $t_block . '_closed';
 	echo '<div id="', $t_div_id, '"', ( $t_display ? '' : ' class="hidden"' ), '>';
@@ -140,7 +140,7 @@ function collapse_end( $p_name, $p_section = '' ) {
 
 	# Make sure a section is opened, and it is the same section.
 	if( $t_block !== $g_current_collapse_section ) {
-		ob_end_clean( );
+		ob_end_clean();
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
@@ -149,10 +149,10 @@ function collapse_end( $p_name, $p_section = '' ) {
 	$g_open_collapse_section = false;
 
 	if( ON == config_get( 'use_javascript' ) ) {
-		ob_end_flush( );
+		ob_end_flush();
 	}
 	else {
-		ob_end_clean( );
+		ob_end_clean();
 	}
 
 	$g_current_collapse_section = null;
@@ -177,11 +177,11 @@ function collapse_display( $p_block ) {
  * If the collapse cookie has been set, grab the changes and resave
  * the token, or touch it otherwise.
  */
-function collapse_cache_token( ) {
+function collapse_cache_token() {
 	global $g_collapse_cache_token;
 
-	if( !auth_is_user_authenticated( ) || current_user_is_anonymous( ) ) {
-		$g_collapse_cache_token = array( );
+	if( !auth_is_user_authenticated() || current_user_is_anonymous() ) {
+		$g_collapse_cache_token = array();
 		return;
 	}
 
@@ -189,14 +189,14 @@ function collapse_cache_token( ) {
 		return;
 	}
 
-	$t_user_id = auth_get_current_user_id( );
+	$t_user_id = auth_get_current_user_id();
 	$t_token = token_get_value( TOKEN_COLLAPSE );
 
 	if( !is_null( $t_token ) ) {
 		$t_data = unserialize( $t_token );
 	}
 	else {
-		$t_data = array( );
+		$t_data = array();
 	}
 
 	$g_collapse_cache_token = $t_data;

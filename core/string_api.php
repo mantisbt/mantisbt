@@ -315,7 +315,7 @@ function string_process_cvs_link( $p_string, $p_include_anchor = true ) {
 #  preceeded by a character that is not a letter, a number or an underscore
 #
 # if $p_include_anchor = false, $p_fqdn is ignored and assumed to true.
-$string_process_bug_link_callback = array( );
+$string_process_bug_link_callback = array();
 
 function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
 	global $string_process_bug_link_callback;
@@ -366,7 +366,7 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 #  preceeded by a character that is not a letter, a number or an underscore
 #
 # if $p_include_anchor = false, $p_fqdn is ignored and assumed to true.
-$string_process_bugnote_link_callback = array( );
+$string_process_bugnote_link_callback = array();
 
 function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
 	global $string_process_bugnote_link_callback;
@@ -434,7 +434,7 @@ function string_insert_hrefs( $p_string ) {
 		ini_set( 'magic_quotes_sybase', true );
 	}
 
-	$p_string = preg_replace( '/\b' . email_regex_simple( ) . '\b/i', '<a href="mailto:\0">\0</a>', $p_string );
+	$p_string = preg_replace( '/\b' . email_regex_simple() . '\b/i', '<a href="mailto:\0">\0</a>', $p_string );
 
 	return $p_string;
 }
@@ -502,8 +502,8 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
 # If $p_user_id is null or not specified, use the current user
 function string_get_bug_page( $p_action, $p_user_id = null ) {
 	if( null === $p_user_id ) {
-		if( auth_is_user_authenticated( ) ) {
-			$p_user_id = auth_get_current_user_id( );
+		if( auth_is_user_authenticated() ) {
+			$p_user_id = auth_get_current_user_id();
 		}
 	}
 

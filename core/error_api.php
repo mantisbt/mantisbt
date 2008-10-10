@@ -32,7 +32,7 @@ set_error_handler( 'error_handler' );
 # SECURITY NOTE: these globals are initialized here to prevent them
 #   being spoofed if register_globals is turned on
 #
-$g_error_parameters = array( );
+$g_error_parameters = array();
 $g_error_handled = false;
 $g_error_proceed_url = null;
 
@@ -61,7 +61,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	global $g_error_send_page_header;
 
 	# check if errors were disabled with @ somewhere in this call chain
-	if( 0 == error_reporting( ) ) {
+	if( 0 == error_reporting() ) {
 		return;
 	}
 
@@ -69,7 +69,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 
 	$t_db_connected = false;
 	if( function_exists( 'db_is_connected' ) ) {
-		if( db_is_connected( ) ) {
+		if( db_is_connected() ) {
 			$t_db_connected = true;
 		}
 	}
@@ -80,7 +80,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 
 	# flush any language overrides to return to user's natural default
 	if( $t_db_connected ) {
-		lang_push( lang_get_default( ) );
+		lang_push( lang_get_default() );
 		$t_lang_pushed = true;
 	}
 
@@ -133,28 +133,28 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 
 	switch( $t_method ) {
 		case 'halt':
-			$t_oblen = ob_get_length( );
-			if( error_handled( ) && $t_oblen > 0 ) {
-				$t_old_contents = ob_get_contents( );
+			$t_oblen = ob_get_length();
+			if( error_handled() && $t_oblen > 0 ) {
+				$t_old_contents = ob_get_contents();
 			}
 
 			# We need to ensure compression is off - otherwise the compression headers are output.
-			compress_disable( );
+			compress_disable();
 
 			# then clean the buffer, leaving output buffering on.
 			if( $t_oblen > 0 ) {
-				ob_clean( );
+				ob_clean();
 			}
 
 			# don't send the page header information if it has already been sent
 			if( $g_error_send_page_header || $g_error_send_page_header == null ) {
 				if( $t_html_api ) {
-					html_page_top1( );
+					html_page_top1();
 					if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
-						html_page_top2( );
+						html_page_top2();
 					}
 					else {
-						html_page_top2a( );
+						html_page_top2a();
 					}
 				}
 				else {
@@ -180,7 +180,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 				error_print_details( $p_file, $p_line, $p_context );
 				echo '</td></tr>';
 				echo '<tr><td>';
-				error_print_stack_trace( );
+				error_print_stack_trace();
 				echo '</td></tr>';
 			}
 			echo '</table></div>';
@@ -194,17 +194,17 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 
 			if( $t_html_api ) {
 				if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
-					html_page_bottom1( );
+					html_page_bottom1();
 				}
 				else {
-					html_body_end( );
-					html_end( );
+					html_body_end();
+					html_end();
 				}
 			}
 			else {
 				echo '</body></html>', "\n";
 			}
-			exit( );
+			exit();
 		case 'inline':
 			echo '<p style="color:red">', $t_error_type, ': ', $t_error_description, '</p>';
 			break;
@@ -214,10 +214,10 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 		}
 
 		if( $t_lang_pushed ) {
-			lang_pop( );
+			lang_pop();
 	}
 
-	$g_error_parameters = array( );
+	$g_error_parameters = array();
 	$g_error_handled = true;
 	$g_error_proceed_url = null;
 }
@@ -280,11 +280,11 @@ function error_print_context( $p_context ) {
 }
 
 # Print out a stack trace
-function error_print_stack_trace( ) {
+function error_print_stack_trace() {
 	echo '<center><table class="width75">';
 	echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>';
 
-	$t_stack = debug_backtrace( );
+	$t_stack = debug_backtrace();
 
 	array_shift( $t_stack );
 
@@ -294,10 +294,10 @@ function error_print_stack_trace( ) {
 	# remove the call to the error handler from the stack trace
 
 	foreach( $t_stack as $t_frame ) {
-		echo '<tr ', error_alternate_class( ), '>';
+		echo '<tr ', error_alternate_class(), '>';
 		echo '<td>', ( isset( $t_frame['file'] ) ? htmlentities( $t_frame['file'], ENT_COMPAT, lang_get( 'charset' ) ) : '-' ), '</td><td>', ( isset( $t_frame['line'] ) ? $t_frame['line'] : '-' ), '</td><td>', ( isset( $t_frame['class'] ) ? $t_frame['class'] : '-' ), '</td><td>', ( isset( $t_frame['type'] ) ? $t_frame['type'] : '-' ), '</td><td>', ( isset( $t_frame['function'] ) ? $t_frame['function'] : '-' ), '</td>';
 
-		$t_args = array( );
+		$t_args = array();
 		if( isset( $t_frame['args'] ) && !empty( $t_frame['args'] ) ) {
 			foreach( $t_frame['args'] as $t_value ) {
 				$t_args[] = error_build_parameter_string( $t_value );
@@ -318,7 +318,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 	}
 
 	if( is_array( $p_param ) ) {
-		$t_results = array( );
+		$t_results = array();
 
 		foreach( $p_param as $t_key => $t_value ) {
 			$t_results[] = '[' . error_build_parameter_string( $t_key, false, $p_depth ) . ']' . ' => ' . error_build_parameter_string( $t_value, false, $p_depth );
@@ -327,7 +327,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 		return '<Array> { ' . implode( $t_results, ', ' ) . ' }';
 	}
 	elseif( is_object( $p_param ) ) {
-		$t_results = array( );
+		$t_results = array();
 
 		$t_class_name = get_class( $p_param );
 		$t_inst_vars = get_object_vars( $p_param );
@@ -357,7 +357,7 @@ function error_string( $p_error ) {
 
 	# We pad the parameter array to make sure that we don't get errors if
 	#  the caller didn't give enough parameters for the error string
-	$t_padding = array_pad( array( ), 10, '' );
+	$t_padding = array_pad( array(), 10, '' );
 
 	$t_error = $MANTIS_ERROR[$p_error];
 
@@ -368,7 +368,7 @@ function error_string( $p_error ) {
 
 # Check if we have handled an error during this page
 # Return true if an error has been handled, false otherwise
-function error_handled( ) {
+function error_handled() {
 	global $g_error_handled;
 
 	return( true == $g_error_handled );
@@ -381,10 +381,10 @@ function error_handled( ) {
 #  order of parameters in the string.  See the PHP manual page for the
 #  sprintf() function for more details.
 # @access public
-function error_parameters( ) {
+function error_parameters() {
 	global $g_error_parameters;
 
-	$g_error_parameters = func_get_args( );
+	$g_error_parameters = func_get_args();
 }
 
 # Set a url to give to the user to proceed after viewing the error
@@ -401,7 +401,7 @@ function error_proceed_url( $p_url ) {
 # @access private
 # @return string representing css class
 # @usedby error_print_stack_trace
-function error_alternate_class( ) {
+function error_alternate_class() {
 	static $t_errindex = 1;
 
 	if( 1 == $t_errindex++ % 2 ) {

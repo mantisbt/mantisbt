@@ -40,7 +40,7 @@ function tag_exists( $p_tag_id ) {
 	$c_tag_id = db_prepare_int( $p_tag_id );
 	$t_tag_table = db_get_table( 'mantis_tag_table' );
 
-	$query = "SELECT * FROM $t_tag_table WHERE id=" . db_param( );
+	$query = "SELECT * FROM $t_tag_table WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_tag_id ) );
 
 	return db_num_rows( $result ) > 0;
@@ -108,7 +108,7 @@ function tag_name_is_valid( $p_name, &$p_matches, $p_prefix = "" ) {
  * @param string Tag name
  */
 function tag_ensure_name_is_valid( $p_name ) {
-	$t_matches = array( );
+	$t_matches = array();
 	if( !tag_name_is_valid( $p_name, $t_matches ) ) {
 		trigger_error( ERROR_TAG_NAME_INVALID, ERROR );
 	}
@@ -135,7 +135,7 @@ function tag_cmp_name( $p_tag1, $p_tag2 ) {
  * @return array Rows of tags parsed from input string
  */
 function tag_parse_string( $p_string ) {
-	$t_tags = array( );
+	$t_tags = array();
 
 	$t_strings = explode( config_get( 'tag_separator' ), $p_string );
 	foreach( $t_strings as $t_name ) {
@@ -144,7 +144,7 @@ function tag_parse_string( $p_string ) {
 			continue;
 		}
 
-		$t_matches = array( );
+		$t_matches = array();
 		$t_tag_row = tag_get_by_name( $t_name );
 		if( $t_tag_row !== false ) {
 			$t_tags[] = $t_tag_row;
@@ -177,13 +177,13 @@ function tag_parse_string( $p_string ) {
  * @return array Rows of tags parsed from filter string
  */
 function tag_parse_filters( $p_string ) {
-	$t_tags = array( );
+	$t_tags = array();
 	$t_prefix = "[+-]{0,1}";
 
 	$t_strings = explode( config_get( 'tag_separator' ), $p_string );
 	foreach( $t_strings as $t_name ) {
 		$t_name = trim( $t_name );
-		$t_matches = array( );
+		$t_matches = array();
 
 		if( !is_blank( $t_name ) && tag_name_is_valid( $t_name, $t_matches, $t_prefix ) ) {
 			$t_tag_row = tag_get_by_name( $t_matches[1] );
@@ -225,7 +225,7 @@ function tag_get( $p_tag_id ) {
 	$t_tag_table = db_get_table( 'mantis_tag_table' );
 
 	$query = "SELECT * FROM $t_tag_table
-					WHERE id=" . db_param( );
+					WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_tag_id ) );
 
 	if( 0 == db_num_rows( $result ) ) {
@@ -290,14 +290,14 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 	tag_ensure_unique( $p_name );
 
 	if( null == $p_user_id ) {
-		$p_used_id = auth_get_current_user_id( );
+		$p_used_id = auth_get_current_user_id();
 	}
 	else {
 		user_ensure_exists( $p_user_id );
 	}
 
 	$c_user_id = db_prepare_int( $p_user_id );
-	$c_date_created = db_now( );
+	$c_date_created = db_now();
 
 	$t_tag_table = db_get_table( 'mantis_tag_table' );
 
@@ -309,11 +309,11 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 				  date_updated
 				)
 				VALUES
-				( " . db_param( ) . ",
-				  " . db_param( ) . ",
-				  " . db_param( ) . ",
-				  " . db_param( ) . ",
-				  " . db_param( ) . "
+				( " . db_param() . ",
+				  " . db_param() . ",
+				  " . db_param() . ",
+				  " . db_param() . ",
+				  " . db_param() . "
 				)";
 
 	db_query_bound( $query, Array( $c_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
@@ -330,7 +330,7 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	user_ensure_exists( $p_user_id );
 
-	if( auth_get_current_user_id( ) == tag_get_field( $p_tag_id, 'user_id' ) ) {
+	if( auth_get_current_user_id() == tag_get_field( $p_tag_id, 'user_id' ) ) {
 		$t_update_level = config_get( 'tag_edit_own_threshold' );
 	}
 	else {
@@ -353,16 +353,16 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	$c_user_id = db_prepare_string( $p_user_id );
 	$c_name = db_prepare_string( $p_name );
 	$c_description = db_prepare_string( $p_description );
-	$c_date_updated = db_now( );
+	$c_date_updated = db_now();
 
 	$t_tag_table = db_get_table( 'mantis_tag_table' );
 
 	$query = "UPDATE $t_tag_table
-					SET user_id=" . db_param( ) . ",
-						name=" . db_param( ) . ",
-						description=" . db_param( ) . ",
-						date_updated=" . db_param( ) . "
-					WHERE id=" . db_param( );
+					SET user_id=" . db_param() . ",
+						name=" . db_param() . ",
+						description=" . db_param() . ",
+						date_updated=" . db_param() . "
+					WHERE id=" . db_param();
 	db_query_bound( $query, Array( $c_user_id, $c_name, $c_description, $c_date_updated, $c_tag_id ) );
 
 	if( $t_rename ) {
@@ -396,7 +396,7 @@ function tag_delete( $p_tag_id ) {
 	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
 
 	$query = "DELETE FROM $t_tag_table
-					WHERE id=" . db_param( );
+					WHERE id=" . db_param();
 	db_query_bound( $query, Array( $c_tag_id ) );
 
 	return true;
@@ -416,7 +416,7 @@ function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
 	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
 
 	$query = "SELECT * FROM $t_bug_tag_table
-					WHERE tag_id=" . db_param( ) . " AND bug_id=" . db_param( );
+					WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_tag_id, $c_bug_id ) );
 	return( db_num_rows( $result ) > 0 );
 }
@@ -434,7 +434,7 @@ function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
 
 	$query = "SELECT * FROM $t_bug_tag_table
-					WHERE tag_id=" . db_param( ) . " AND bug_id=" . db_param( );
+					WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_tag_id, $c_bug_id ) );
 
 	if( db_num_rows( $result ) == 0 ) {
@@ -458,10 +458,10 @@ function tag_bug_get_attached( $p_bug_id ) {
 					FROM $t_tag_table as t
 					LEFT JOIN $t_bug_tag_table as b
 						on t.id=b.tag_id
-					WHERE b.bug_id=" . db_param( );
+					WHERE b.bug_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_bug_id ) );
 
-	$rows = array( );
+	$rows = array();
 	while( $row = db_fetch_array( $result ) ) {
 		$rows[] = $row;
 	}
@@ -481,10 +481,10 @@ function tag_get_bugs_attached( $p_tag_id ) {
 	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
 
 	$query = "SELECT bug_id FROM $t_bug_tag_table
-					WHERE tag_id=" . db_param( );
+					WHERE tag_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_tag_id ) );
 
-	$bugs = array( );
+	$bugs = array();
 	while( $row = db_fetch_array( $result ) ) {
 		$bugs[] = $row['bug_id'];
 	}
@@ -508,7 +508,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 	}
 
 	if( null == $p_user_id ) {
-		$p_used_id = auth_get_current_user_id( );
+		$p_used_id = auth_get_current_user_id();
 	}
 	else {
 		user_ensure_exists( $p_user_id );
@@ -527,12 +527,12 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 					  date_attached
 					)
 					VALUES
-					( " . db_param( ) . ",
-					  " . db_param( ) . ",
-					  " . db_param( ) . ",
-					  " . db_param( ) . "
+					( " . db_param() . ",
+					  " . db_param() . ",
+					  " . db_param() . ",
+					  " . db_param() . "
 					)";
-	db_query_bound( $query, Array( $c_tag_id, $c_bug_id, $c_user_id, db_now( ) ) );
+	db_query_bound( $query, Array( $c_tag_id, $c_bug_id, $c_user_id, db_now() ) );
 
 	$t_tag_name = tag_get_field( $p_tag_id, 'name' );
 	history_log_event_special( $p_bug_id, TAG_ATTACHED, $t_tag_name );
@@ -552,7 +552,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
  */
 function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id = null ) {
 	if( $p_user_id === null ) {
-		$t_user_id = auth_get_current_user_id( );
+		$t_user_id = auth_get_current_user_id();
 	}
 	else {
 		$t_user_id = $p_user_id;
@@ -577,7 +577,7 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
 
 	$query = "DELETE FROM $t_bug_tag_table
-					WHERE tag_id=" . db_param( ) . ' AND bug_id=' . db_param( );
+					WHERE tag_id=" . db_param() . ' AND bug_id=' . db_param();
 	db_query_bound( $query, Array( $c_tag_id, $c_bug_id ) );
 
 	if( $p_add_history ) {
@@ -618,7 +618,7 @@ function tag_display_link( $p_tag_row, $p_bug_id = 0 ) {
 		$t_security_token = form_security_param( 'tag_detach' );
 	}
 
-	if( auth_get_current_user_id( ) == $p_tag_row['user_attached'] ) {
+	if( auth_get_current_user_id() == $p_tag_row['user_attached'] ) {
 		$t_detach = config_get( 'tag_detach_own_threshold' );
 	}
 	else {
@@ -671,7 +671,7 @@ function tag_stats_attached( $p_tag_id ) {
 	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
 
 	$query = "SELECT COUNT(*) FROM $t_bug_tag_table
-					WHERE tag_id=" . db_param( );
+					WHERE tag_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_tag_id ) );
 
 	return db_result( $result );
@@ -694,7 +694,7 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	$c_tag_id = db_prepare_int( $p_tag_id );
-	$c_user_id = auth_get_current_user_id( );
+	$c_user_id = auth_get_current_user_id();
 
 	$subquery = "SELECT b.id FROM $t_bug_table AS b
 					LEFT JOIN $t_project_user_list_table AS p
@@ -712,7 +712,7 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 
 	$result = db_query( $query );
 
-	$t_tag_counts = array( );
+	$t_tag_counts = array();
 	while( $row = db_fetch_array( $result ) ) {
 		if( !isset( $t_tag_counts[$row['tag_id']] ) ) {
 			$t_tag_counts[$row['tag_id']] = 1;
@@ -724,7 +724,7 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 
 	arsort( $t_tag_counts );
 
-	$t_tags = array( );
+	$t_tags = array();
 	$i = 1;
 	foreach( $t_tag_counts as $t_tag_id => $t_count ) {
 		$t_tag_row = tag_get( $t_tag_id );

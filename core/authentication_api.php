@@ -43,7 +43,7 @@ $g_cache_cookie_valid = null;
 function auth_ensure_user_authenticated( $p_return_page = '' ) {
 
 	# if logged in
-	if( auth_is_user_authenticated( ) ) {
+	if( auth_is_user_authenticated() ) {
 
 		# check for access enabled
 		#  This also makes sure the cookie is valid
@@ -67,12 +67,12 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
 
 # Return true if there is a currently logged in and authenticated user,
 #  false otherwise
-function auth_is_user_authenticated( ) {
+function auth_is_user_authenticated() {
 	global $g_cache_cookie_valid;
 	if( $g_cache_cookie_valid == true ) {
 		return $g_cache_cookie_valid;
 	}
-	$g_cache_cookie_valid = auth_is_cookie_valid( auth_get_current_user_cookie( ) );
+	$g_cache_cookie_valid = auth_is_cookie_valid( auth_get_current_user_cookie() );
 	return $g_cache_cookie_valid;
 }
 
@@ -87,14 +87,14 @@ function auth_prepare_username( $p_username ) {
 			$f_username = $_SERVER['REMOTE_USER'];
 			break;
 		case HTTP_AUTH:
-			if( !auth_http_is_logout_pending( ) ) {
+			if( !auth_http_is_logout_pending() ) {
 				if( isset( $_SERVER['PHP_AUTH_USER'] ) ) {
 					$f_username = $_SERVER['PHP_AUTH_USER'];
 				}
 			}
 			else {
 				auth_http_set_logout_pending( false );
-				auth_http_prompt( );
+				auth_http_prompt();
 
 				/* calls exit */
 				return;
@@ -115,7 +115,7 @@ function auth_prepare_password( $p_password ) {
 			$f_password = $_SERVER['PHP_AUTH_PW'];
 			break;
 		case HTTP_AUTH:
-			if( !auth_http_is_logout_pending( ) ) {
+			if( !auth_http_is_logout_pending() ) {
 
 				/* this will never get hit - see auth_prepare_username */
 				if( isset( $_SERVER['PHP_AUTH_PW'] ) ) {
@@ -124,7 +124,7 @@ function auth_prepare_password( $p_password ) {
 			}
 			else {
 				auth_http_set_logout_pending( false );
-				auth_http_prompt( );
+				auth_http_prompt();
 
 				/* calls exit */
 				return;
@@ -252,7 +252,7 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 
 # Logout the current user and remove any remaining cookies from their browser
 # Returns true on success, false otherwise
-function auth_logout( ) {
+function auth_logout() {
 	global $g_cache_current_user_id, $g_cache_cookie_valid;
 
 	# clear cached userid
@@ -261,20 +261,20 @@ function auth_logout( ) {
 	$g_cache_cookie_valid = null;
 
 	# clear cookies, if they were set
-	if( auth_clear_cookies( ) ) {
-		helper_clear_pref_cookies( );
+	if( auth_clear_cookies() ) {
+		helper_clear_pref_cookies();
 	}
 
 	if( HTTP_AUTH == config_get( 'login_method' ) ) {
 		auth_http_set_logout_pending( true );
 	}
 
-	session_clean( );
+	session_clean();
 
 	return true;
 }
 
-function auth_automatic_logon_bypass_form( ) {
+function auth_automatic_logon_bypass_form() {
 	switch( config_get( 'login_method' ) ) {
 		case HTTP_AUTH:
 			return true;
@@ -362,7 +362,7 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
 # Generate a random 12 character password
 # p_email is unused
 function auth_generate_random_password( $p_email ) {
-	$t_val = mt_rand( 0, mt_getrandmax( ) ) + mt_rand( 0, mt_getrandmax( ) );
+	$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
 	$t_val = md5( $t_val );
 
 	return substr( $t_val, 0, 12 );
@@ -402,7 +402,7 @@ function auth_set_cookies( $p_user_id, $p_perm_login = false ) {
 }
 
 # Clear login cookies, return true if they were cleared
-function auth_clear_cookies( ) {
+function auth_clear_cookies() {
 	global $g_script_login_cookie, $g_cache_cookie_valid;
 
 	$t_cookies_cleared = false;
@@ -425,18 +425,18 @@ function auth_clear_cookies( ) {
 # Generate a string to use as the identifier for the login cookie
 # It is not guaranteed to be unique and should be checked
 # The string returned should be 64 characters in length
-function auth_generate_cookie_string( ) {
-	$t_val = mt_rand( 0, mt_getrandmax( ) ) + mt_rand( 0, mt_getrandmax( ) );
-	$t_val = md5( $t_val ) . md5( time( ) );
+function auth_generate_cookie_string() {
+	$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
+	$t_val = md5( $t_val ) . md5( time() );
 
 	return substr( $t_val, 0, 64 );
 }
 
 # Generate a UNIQUE string to use as the identifier for the login cookie
 # The string returned should be 64 characters in length
-function auth_generate_unique_cookie_string( ) {
+function auth_generate_unique_cookie_string() {
 	do {
-		$t_cookie_string = auth_generate_cookie_string( );
+		$t_cookie_string = auth_generate_cookie_string();
 	}
 	while( !auth_is_cookie_string_unique( $t_cookie_string ) );
 
@@ -449,7 +449,7 @@ function auth_is_cookie_string_unique( $p_cookie_string ) {
 
 	$query = "SELECT COUNT(*)
 				  FROM $t_user_table
-				  WHERE cookie_string=" . db_param( );
+				  WHERE cookie_string=" . db_param();
 	$result = db_query_bound( $query, Array( $p_cookie_string ) );
 	$t_count = db_result( $result );
 
@@ -469,7 +469,7 @@ function auth_is_cookie_string_unique( $p_cookie_string ) {
 #  userid.
 # if no user is logged in and anonymous login is enabled, returns cookie for anonymous user
 # otherwise returns '' (an empty string)
-function auth_get_current_user_cookie( ) {
+function auth_get_current_user_cookie() {
 	global $g_script_login_cookie, $g_cache_anonymous_user_cookie_string;
 
 	# if logging in via a script, return that cookie
@@ -485,10 +485,10 @@ function auth_get_current_user_cookie( ) {
 	if( is_blank( $t_cookie ) ) {
 		if( ON == config_get( 'allow_anonymous_login' ) ) {
 			if( $g_cache_anonymous_user_cookie_string === null ) {
-				if( function_exists( 'db_is_connected' ) && db_is_connected( ) ) {
+				if( function_exists( 'db_is_connected' ) && db_is_connected() ) {
 
 					# get anonymous information if database is available
-					$query = 'SELECT id, cookie_string FROM ' . db_get_table( 'mantis_user_table' ) . ' WHERE username = ' . db_param( );
+					$query = 'SELECT id, cookie_string FROM ' . db_get_table( 'mantis_user_table' ) . ' WHERE username = ' . db_param();
 					$result = db_query_bound( $query, Array( config_get( 'anonymous_account' ) ) );
 
 					if( 1 == db_num_rows( $result ) ) {
@@ -531,7 +531,7 @@ function auth_set_tokens( $p_user_id ) {
  * Currently, if using BASIC or HTTP authentication methods, or if logged in anonymously,
  * this function will always "authenticate" the user (do nothing).
  */
-function auth_reauthenticate( ) {
+function auth_reauthenticate() {
 	if( config_get_global( 'reauthentication' ) == OFF || BASIC_AUTH == config_get( 'login_method' ) || HTTP_AUTH == config_get( 'login_method' ) ) {
 		return true;
 	}
@@ -545,7 +545,7 @@ function auth_reauthenticate( ) {
 		$t_anon_account = config_get( 'anonymous_account' );
 		$t_anon_allowed = config_get( 'allow_anonymous_login' );
 
-		$t_user_id = auth_get_current_user_id( );
+		$t_user_id = auth_get_current_user_id();
 		$t_username = user_get_field( $t_user_id, 'username' );
 
 		# check for anonymous login
@@ -577,8 +577,8 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 		}
 	}
 
-	html_page_top1( );
-	html_page_top2( );
+	html_page_top1();
+	html_page_top2();
 
 	?>
 <div align="center">
@@ -623,7 +623,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 </div>
 
 		<?php
-		html_page_bottom1( );
+		html_page_bottom1();
 
 	exit;
 }
@@ -637,7 +637,7 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 	global $g_cache_current_user_id;
 
 	# fail if DB isn't accessible
-	if( !db_is_connected( ) ) {
+	if( !db_is_connected() ) {
 		return false;
 	}
 
@@ -660,7 +660,7 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 
 	$query = "SELECT *
 				  FROM $t_user_table
-				  WHERE cookie_string=" . db_param( );
+				  WHERE cookie_string=" . db_param();
 	$result = db_query_bound( $query, Array( $p_cookie_string ) );
 
 	# return true if a matching cookie was found
@@ -679,14 +679,14 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 #
 $g_cache_current_user_id = null;
 
-function auth_get_current_user_id( ) {
+function auth_get_current_user_id() {
 	global $g_cache_current_user_id;
 
 	if( null !== $g_cache_current_user_id ) {
 		return $g_cache_current_user_id;
 	}
 
-	$t_cookie_string = auth_get_current_user_cookie( );
+	$t_cookie_string = auth_get_current_user_cookie();
 
 	if( $t_result = user_search_cache( 'cookie_string', $t_cookie_string ) ) {
 		$t_user_id = (int) $t_result['id'];
@@ -700,14 +700,14 @@ function auth_get_current_user_id( ) {
 	#     Or redirect to the login page maybe?
 	$query = "SELECT id
 				  FROM $t_user_table
-				  WHERE cookie_string=" . db_param( );
+				  WHERE cookie_string=" . db_param();
 	$result = db_query_bound( $query, Array( $t_cookie_string ) );
 
 	# The cookie was invalid. Clear the cookie (to allow people to log in again)
 	# and give them an Access Denied message.
 	if( db_num_rows( $result ) < 1 ) {
-		auth_clear_cookies( );
-		access_denied( );
+		auth_clear_cookies();
+		access_denied();
 
 		# never returns
 		return false;
@@ -723,7 +723,7 @@ function auth_get_current_user_id( ) {
 # HTTP Auth
 # ===================================
 
-function auth_http_prompt( ) {
+function auth_http_prompt() {
 	header( "HTTP/1.0 401 Authorization Required" );
 	header( "WWW-Authenticate: Basic realm=\"" . lang_get( 'http_auth_realm' ) . "\"" );
 	header( 'status: 401 Unauthorized' );
@@ -748,7 +748,7 @@ function auth_http_set_logout_pending( $p_pending ) {
 	}
 }
 
-function auth_http_is_logout_pending( ) {
+function auth_http_is_logout_pending() {
 	$t_cookie_name = config_get( 'logout_cookie' );
 	$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
 

@@ -36,7 +36,7 @@ $g_twitter_enabled = null;
  * @return true: twitter enabled, false: otherwise.
  * @access public
  */
-function twitter_enabled( ) {
+function twitter_enabled() {
 	global $g_twitter_enabled;
 
 	if( null === $g_twitter_enabled ) {
@@ -57,7 +57,7 @@ function twitter_enabled( ) {
  * @access public
  */
 function twitter_issue_resolved( $p_bug_id ) {
-	if( !twitter_enabled( ) ) {
+	if( !twitter_enabled() ) {
 		return true;
 	}
 
@@ -103,7 +103,7 @@ function twitter_issue_resolved( $p_bug_id ) {
  * @access public
  */
 function twitter_news( $p_news_id ) {
-	if( !twitter_enabled( ) ) {
+	if( !twitter_enabled() ) {
 		return true;
 	}
 
@@ -132,7 +132,7 @@ function twitter_news( $p_news_id ) {
  * @access private
  */
 function twitter_update( $p_message ) {
-	if( !twitter_enabled( ) ) {
+	if( !twitter_enabled() ) {
 		return true;
 	}
 
@@ -151,7 +151,7 @@ function twitter_update( $p_message ) {
 	$t_url = 'http://twitter.com/statuses/update.xml';
 
 	// Set up and execute the curl process
-	$t_curl = curl_init( );
+	$t_curl = curl_init();
 
 	curl_setopt( $t_curl, CURLOPT_URL, $t_url );
 	curl_setopt( $t_curl, CURLOPT_CONNECTTIMEOUT, 2 );

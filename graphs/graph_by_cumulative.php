@@ -49,7 +49,7 @@ function tmpcmp( $a, $b ) {
 
 # get total bugs before a date
 function get_total_count_by_date( $p_date ) {
-	$t_project_id = helper_get_current_project( );
+	$t_project_id = helper_get_current_project();
 
 	$d_arr = explode( '/', $p_date );
 	$p_date = $d_arr[2] . '-' . $d_arr[0] . '-' . $d_arr[1];
@@ -63,7 +63,7 @@ function get_total_count_by_date( $p_date ) {
 
 # get resolved bugs before a date
 function get_resolved_count_by_date( $p_date ) {
-	$t_project_id = helper_get_current_project( );
+	$t_project_id = helper_get_current_project();
 
 	$d_arr = explode( '/', $p_date );
 	$p_date = $d_arr[2] . '-' . $d_arr[0] . '-' . $d_arr[1];
@@ -78,7 +78,7 @@ function get_resolved_count_by_date( $p_date ) {
 
 # get closed bugs before a date
 function get_closed_count_by_date( $p_date ) {
-	$t_project_id = helper_get_current_project( );
+	$t_project_id = helper_get_current_project();
 
 	$d_arr = explode( '/', $p_date );
 	$p_date = $d_arr[2] . '-' . $d_arr[0] . '-' . $d_arr[1];
@@ -92,17 +92,17 @@ function get_closed_count_by_date( $p_date ) {
 }
 
 # -- start --
-$t_project_id = helper_get_current_project( );
+$t_project_id = helper_get_current_project();
 
 $query = "SELECT status, date_submitted, last_updated
 		FROM mantis_bug_table
-		WHERE project_id=" . db_param( ) . " AND
-				date_submitted>=" . db_param( ) . "
+		WHERE project_id=" . db_param() . " AND
+				date_submitted>=" . db_param() . "
 		ORDER BY date_submitted ASC";
 $result = db_query_bound( $query, Array( $t_project_id, $g_start_date ) );
 $bug_count = db_num_rows( $result );
 
-$data_date_arr = array( );
+$data_date_arr = array();
 
 while( $row = db_fetch_array( $result ) ) {
 	extract( $row );
@@ -123,26 +123,26 @@ while( $row = db_fetch_array( $result ) ) {
 }
 
 $data_date_arr_temp = array_unique( $data_date_arr );
-$data_date_arr = array( );
+$data_date_arr = array();
 foreach( $data_date_arr_temp as $key => $val ) {
 	$data_date_arr[] = $val;
 }
 usort( $data_date_arr, 'tmpcmp' );
 
 # total up open
-$data_open_count_arr = array( );
+$data_open_count_arr = array();
 foreach( $data_date_arr as $val ) {
 	$data_open_count_arr[] = get_total_count_by_date( $val );
 }
 
 # total up resolved
-$data_resolved_count_arr = array( );
+$data_resolved_count_arr = array();
 foreach( $data_date_arr as $val ) {
 	$data_resolved_count_arr[] = get_resolved_count_by_date( $val );
 }
 
 # total up closed
-$data_closed_count_arr = array( );
+$data_closed_count_arr = array();
 foreach( $data_date_arr as $val ) {
 	$data_closed_count_arr[] = get_closed_count_by_date( $val );
 }
@@ -162,7 +162,7 @@ if( ON == config_get_global( 'jpgraph_antialias' ) ) {
 	$graph->img->SetAntiAliasing( "white" );
 }
 $graph->SetScale( "textlin" );
-$graph->SetShadow( );
+$graph->SetShadow();
 $graph->SetColor( 'whitesmoke' );
 $graph->title->Set( "Cumulative - New, Resolved and Closed: $proj_name" );
 $graph->title->SetFont( FF_FONT1, FS_BOLD );
@@ -179,7 +179,7 @@ $p1->mark->SetType( MARK_FILLEDCIRCLE );
 $p1->mark->SetFillColor( "blue" );
 $p1->mark->SetWidth( 3 );
 $p1->SetColor( "blue" );
-$p1->SetCenter( );
+$p1->SetCenter();
 $p1->SetLegend( "Total" );
 $graph->Add( $p1 );
 
@@ -189,7 +189,7 @@ $p2->mark->SetType( MARK_SQUARE );
 $p2->mark->SetFillColor( "hotpink" );
 $p2->mark->SetWidth( 5 );
 $p2->SetColor( "hotpink" );
-$p2->SetCenter( );
+$p2->SetCenter();
 $p2->SetLegend( "Resolved" );
 $graph->Add( $p2 );
 
@@ -199,13 +199,13 @@ $p3->mark->SetType( MARK_UTRIANGLE );
 $p3->mark->SetFillColor( "yellow1" );
 $p3->mark->SetWidth( 6 );
 $p3->SetColor( "yellow1" );
-$p3->SetCenter( );
+$p3->SetCenter();
 $p3->SetLegend( "Closed" );
 $graph->Add( $p3 );
 
-$p1->value->Show( );
-$p2->value->Show( );
-$p3->value->Show( );
+$p1->value->Show();
+$p2->value->Show();
+$p3->value->Show();
 
 $p1->value->SetFont( FF_FONT1, FS_NORMAL, 8 );
 $p2->value->SetFont( FF_FONT1, FS_NORMAL, 8 );
@@ -220,4 +220,4 @@ $p2->value->SetFormat( '%d' );
 $p3->value->SetFormat( '%d' );
 
 // Output line
-$graph->Stroke( );
+$graph->Stroke();

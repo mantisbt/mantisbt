@@ -26,22 +26,22 @@
 
 # ## CSV API ###
 # get the csv file new line, can be moved to config in the future
-function csv_get_newline( ) {
+function csv_get_newline() {
 	return "\r\n";
 }
 
 # get the csv file separator, can be moved to config in the future
-function csv_get_separator( ) {
+function csv_get_separator() {
 	return config_get( 'csv_separator' );
 }
 
 # if all projects selected, default to <username>.csv, otherwise default to
 # <projectname>.csv.
-function csv_get_default_filename( ) {
-	$t_current_project_id = helper_get_current_project( );
+function csv_get_default_filename() {
+	$t_current_project_id = helper_get_current_project();
 
 	if( ALL_PROJECTS == $t_current_project_id ) {
-		$t_filename = user_get_name( auth_get_current_user_id( ) );
+		$t_filename = user_get_name( auth_get_current_user_id() );
 	}
 	else {
 		$t_filename = project_get_field( $t_current_project_id, 'name' );
@@ -54,7 +54,7 @@ function csv_get_default_filename( ) {
 function csv_escape_string( $p_str ) {
 
 	# enclose strings with separators with quotaiton marks
-	if( strpos( $p_str, csv_get_separator( ) ) !== false ) {
+	if( strpos( $p_str, csv_get_separator() ) !== false ) {
 		$p_str = '"' . str_replace( '"', '""', $p_str ) . '"';
 	}
 
@@ -67,7 +67,7 @@ function csv_escape_string( $p_str ) {
 }
 
 # An array of column names that are used to identify  fields to include and in which order.
-function csv_get_columns( ) {
+function csv_get_columns() {
 	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_CSV_PAGE );
 	return $t_columns;
 }

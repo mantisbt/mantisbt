@@ -100,7 +100,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 			if( !file_exists( $t_disk_file_name ) ) {
 				mci_file_write_local( $t_disk_file_name, $p_content );
 				if( FTP == $t_method ) {
-					$conn_id = file_ftp_connect( );
+					$conn_id = file_ftp_connect();
 					file_ftp_put( $conn_id, $t_disk_file_name, $t_disk_file_name );
 					file_ftp_disconnect( $conn_id );
 					file_delete_local( $p_disk_file_name );
@@ -121,7 +121,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	$query = "INSERT INTO $t_file_table
 			(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 		VALUES
-			($c_id, '$c_title', '$c_desc', '$c_disk_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now( ) . "', '$c_content')";
+			($c_id, '$c_title', '$c_desc', '$c_disk_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now() . "', '$c_content')";
 	db_query( $query );
 
 	# get attachment id
@@ -198,7 +198,7 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 				return base64_encode( mci_file_read_local( $v_diskfile ) );
 			}
 			else {
-				$ftp = file_ftp_connect( );
+				$ftp = file_ftp_connect();
 				file_ftp_get( $ftp, $v_diskfile, $v_diskfile );
 				file_ftp_disconnect( $ftp );
 				return base64_encode( mci_file_read_local( $v_diskfile ) );

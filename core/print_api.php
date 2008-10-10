@@ -51,7 +51,7 @@ require_once( $t_core_dir . 'file_api.php' );
 function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute = false ) {
 	$t_use_iis = config_get( 'use_iis' );
 
-	if( ON == config_get( 'stop_on_errors' ) && error_handled( ) ) {
+	if( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
 		return false;
 	}
 
@@ -74,7 +74,7 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 	}
 
 	# don't send more headers if they have already been sent (guideweb)
-	if( !headers_sent( ) ) {
+	if( !headers_sent() ) {
 		header( 'Content-Type: text/html; charset=' . lang_get( 'charset' ) );
 
 		if( ON == $t_use_iis ) {
@@ -108,7 +108,7 @@ function print_header_redirect_view( $p_bug_id ) {
 # Get a view URL for the bug id based on the user's preference and
 #  call print_successful_redirect() with that URL
 function print_successful_redirect_to_bug( $p_bug_id ) {
-	$t_url = string_get_bug_view_url( $p_bug_id, auth_get_current_user_id( ) );
+	$t_url = string_get_bug_view_url( $p_bug_id, auth_get_current_user_id() );
 
 	print_successful_redirect( $t_url );
 }
@@ -118,15 +118,15 @@ function print_successful_redirect_to_bug( $p_bug_id ) {
 #  configured system wait time.
 # If the show query count is OFF, redirect right away.
 function print_successful_redirect( $p_redirect_to ) {
-	if( helper_show_queries( ) ) {
+	if( helper_show_queries() ) {
 		html_meta_redirect( $p_redirect_to );
-		html_page_top1( );
-		html_page_top2( );
+		html_page_top1();
+		html_page_top2();
 		PRINT '<br /><div class="center">';
 		PRINT lang_get( 'operation_successful' ) . '<br />';
 		print_bracket_link( $p_redirect_to, lang_get( 'proceed' ) );
 		PRINT '</div>';
-		html_page_bottom1( );
+		html_page_bottom1();
 	}
 	else {
 		print_header_redirect( $p_redirect_to );
@@ -141,8 +141,8 @@ function print_header_redirect_update( $p_bug_id ) {
 
 # --------------------
 # Print a redirect header to update a bug
-function print_header_redirect_report( ) {
-	print_header_redirect( string_get_bug_report_url( ) );
+function print_header_redirect_report() {
+	print_header_redirect( string_get_bug_report_url() );
 }
 
 # Print avatar image for the given user ID
@@ -233,18 +233,18 @@ function cmp( $p_var1, $p_var2 ) {
 #
 # @@@ from print_reporter_option_list
 function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY ) {
-	$t_users = array( );
+	$t_users = array();
 
 	if( null === $p_project_id ) {
-		$p_project_id = helper_get_current_project( );
+		$p_project_id = helper_get_current_project();
 	}
 
 	$t_users = project_get_all_user_rows( $p_project_id, $p_access );
 
 	# handles ALL_PROJECTS case
 
-	$t_display = array( );
-	$t_sort = array( );
+	$t_display = array();
+	$t_sort = array();
 	$t_show_realname = ( ON == config_get( 'show_realname' ) );
 	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
 	foreach( $t_users as $t_user ) {
@@ -315,7 +315,7 @@ function print_tag_input( $p_bug_id = 0, $p_string = "" ) {
 	?>
 		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
 		<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo string_attribute( $p_string )?>" />
-		<select <?php echo helper_get_tab_index( )?> name="tag_select" id="tag_select" onchange="tag_string_append( this.options[ this.selectedIndex ].text );">
+		<select <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select" onchange="tag_string_append( this.options[ this.selectedIndex ].text );">
 			<?php print_tag_option_list( $p_bug_id );?>
 		</select>
 		<?php
@@ -351,10 +351,10 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 
 # --------------------
 # Get current headlines and id  prefix with v_
-function print_news_item_option_list( ) {
+function print_news_item_option_list() {
 	$t_mantis_news_table = db_get_table( 'mantis_news_table' );
 
-	$t_project_id = helper_get_current_project( );
+	$t_project_id = helper_get_current_project();
 
 	if( access_has_global_level( ADMINISTRATOR ) ) {
 		$query = "SELECT id, headline, announcement, view_state
@@ -375,7 +375,7 @@ function print_news_item_option_list( ) {
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 		$v_headline = string_display( $v_headline );
 
-		$t_notes = array( );
+		$t_notes = array();
 		$t_note_string = '';
 		if( 1 == $v_announcement ) {
 			array_push( $t_notes, lang_get( 'announcement' ) );
@@ -488,8 +488,8 @@ function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_
 # --------------------
 # List projects that the current user has access to
 function print_project_option_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false ) {
-	project_cache_all( );
-	$t_project_ids = current_user_get_accessible_projects( );
+	project_cache_all();
+	$t_project_ids = current_user_get_accessible_projects();
 	if( $p_include_all_projects ) {
 		PRINT '<option value="' . ALL_PROJECTS . '"';
 		check_selected( $p_project_id, ALL_PROJECTS );
@@ -510,7 +510,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 
 # --------------------
 # List projects that the current user has access to
-function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_parents = Array( ) ) {
+function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_parents = Array() ) {
 	array_push( $p_parents, $p_parent_id );
 	$t_project_ids = current_user_get_accessible_subprojects( $p_parent_id );
 	$t_project_count = count( $t_project_ids );
@@ -531,9 +531,9 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 
 # --------------------
 # Print extended project browser
-function print_extended_project_browser( $p_trace = Array( ), $p_project_id = null ) {
-	project_cache_all( );
-	$t_project_ids = current_user_get_accessible_projects( );
+function print_extended_project_browser( $p_trace = Array(), $p_project_id = null ) {
+	project_cache_all();
+	$t_project_ids = current_user_get_accessible_projects();
 
 	echo '<script type="text/javascript" language="JavaScript">' . "\n";
 	echo "<!--\n";
@@ -547,7 +547,7 @@ function print_extended_project_browser( $p_trace = Array( ), $p_project_id = nu
 	echo '	return htmlNode.textContent; // FF' . "\n";
 	echo '} ' . "\n";
 
-	$t_projects = Array( );
+	$t_projects = Array();
 
 	$t_project_count = count( $t_project_ids );
 	for( $i = 0;$i < $t_project_count;$i++ ) {
@@ -689,12 +689,12 @@ function print_news_project_option_list( $p_project_id ) {
 		$result = db_query_bound( $query );
 	}
 	else {
-		$t_user_id = auth_get_current_user_id( );
+		$t_user_id = auth_get_current_user_id();
 		$query = "SELECT p.id, p.name
 					FROM $t_mantis_project_table p, $t_mantis_project_user_list_table m
 					WHERE 	p.id=m.project_id AND
-							m.user_id=" . db_param( ) . " AND
-							p.enabled=" . db_param( );
+							m.user_id=" . db_param() . " AND
+							p.enabled=" . db_param();
 		$result = db_query_bound( $query, Array( $t_user_id, 1 ) );
 	}
 
@@ -720,7 +720,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 	$t_project_table = db_get_table( 'mantis_project_table' );
 
 	if( null === $p_project_id ) {
-		$t_project_id = helper_get_current_project( );
+		$t_project_id = helper_get_current_project();
 	}
 	else {
 		$t_project_id = $p_project_id;
@@ -760,16 +760,16 @@ function print_category_filter_option_list( $p_category_name = '', $p_project_id
 	$t_project_table = db_get_table( 'mantis_project_table' );
 
 	if( null === $p_project_id ) {
-		$c_project_id = helper_get_current_project( );
+		$c_project_id = helper_get_current_project();
 	}
 	else {
 		$c_project_id = db_prepare_int( $p_project_id );
 	}
 
-	project_hierarchy_cache( );
+	project_hierarchy_cache();
 	$t_project_ids = project_hierarchy_inheritance( $c_project_id );
 
-	$t_subproject_ids = array( );
+	$t_subproject_ids = array();
 	foreach( $t_project_ids as $t_project_id ) {
 		$t_subproject_ids = array_merge( $t_subproject_ids, current_user_get_all_accessible_subprojects( $t_project_id ) );
 	}
@@ -778,7 +778,7 @@ function print_category_filter_option_list( $p_category_name = '', $p_project_id
 	$t_project_where = ' project_id IN ( ' . implode( ', ', $t_project_ids ) . ' ) ';
 
 	# grab all categories in the project category table
-	$cat_arr = array( );
+	$cat_arr = array();
 	$query = "SELECT DISTINCT name FROM $t_category_table
 				WHERE $t_project_where
 				ORDER BY name";
@@ -839,7 +839,7 @@ function print_os_build_option_list( $p_os_build, $p_user_id = null ) {
 # $p_with_subs = include subprojects
 function print_version_option_list( $p_version = '', $p_project_id = null, $p_released = null, $p_leading_blank = true, $p_with_subs = false ) {
 	if( null === $p_project_id ) {
-		$c_project_id = helper_get_current_project( );
+		$c_project_id = helper_get_current_project();
 	}
 	else {
 		$c_project_id = db_prepare_int( $p_project_id );
@@ -881,9 +881,9 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 
 function print_build_option_list( $p_build = '' ) {
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_overall_build_arr = array( );
+	$t_overall_build_arr = array();
 
-	$t_project_id = helper_get_current_project( );
+	$t_project_id = helper_get_current_project();
 
 	$t_project_where = helper_project_specific_where( $t_project_id );
 
@@ -955,7 +955,7 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 	}
 
 	$t_enum_count = count( $t_arr );
-	$t_enum_list = array( );
+	$t_enum_list = array();
 
 	for( $i = 0;$i < $t_enum_count;$i++ ) {
 		$t_elem = explode_enum_arr( $t_arr[$i] );
@@ -985,7 +985,7 @@ function print_status_option_list( $p_select_label, $p_current_value = 0, $p_all
 		# resort the list into ascending order
 		ksort( $t_enum_list );
 		reset( $t_enum_list );
-		echo '<select ', helper_get_tab_index( ), ' name="' . $p_select_label . '">';
+		echo '<select ', helper_get_tab_index(), ' name="' . $p_select_label . '">';
 		foreach( $t_enum_list as $key => $val ) {
 			echo "<option value=\"$key\"";
 			check_selected( $key, $p_current_value );
@@ -1049,7 +1049,7 @@ function print_language_option_list( $p_language ) {
 }
 
 # @@@ preliminary support for multiple bug actions.
-function print_all_bug_action_option_list( ) {
+function print_all_bug_action_option_list() {
 	$commands = array(
 		'MOVE' => lang_get( 'actiongroup_menu_move' ),
 		'COPY' => lang_get( 'actiongroup_menu_copy' ),
@@ -1067,10 +1067,10 @@ function print_all_bug_action_option_list( ) {
 		'EXT_ATTACH_TAGS' => lang_get( 'actiongroup_menu_attach_tags' ),
 	);
 
-	$t_project_id = helper_get_current_project( );
+	$t_project_id = helper_get_current_project();
 
 	if( ALL_PROJECTS != $t_project_id ) {
-		$t_user_id = auth_get_current_user_id( );
+		$t_user_id = auth_get_current_user_id();
 
 		if( access_has_project_level( config_get( 'update_bug_threshold' ), $t_project_id ) ) {
 			$commands['UP_FIXED_IN_VERSION'] = lang_get( 'actiongroup_menu_update_fixed_in_version' );
@@ -1124,7 +1124,7 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 	$t_mantis_user_table = db_get_table( 'mantis_user_table' );
 
 	if( null === $p_project_id ) {
-		$p_project_id = helper_get_current_project( );
+		$p_project_id = helper_get_current_project();
 	}
 	$c_project_id = (int) $p_project_id;
 
@@ -1138,9 +1138,9 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 					p.user_id IS NULL
 				ORDER BY u.realname, u.username";
 	$result = db_query( $query );
-	$t_display = array( );
-	$t_sort = array( );
-	$t_users = array( );
+	$t_display = array();
+	$t_sort = array();
+	$t_users = array();
 	$t_show_realname = ( ON == config_get( 'show_realname' ) );
 	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
 	$category_count = db_num_rows( $result );
@@ -1204,7 +1204,7 @@ function print_project_user_list( $p_user_id, $p_include_remove_link = true ) {
 				LEFT JOIN $t_mantis_project_user_list_table u
 				ON p.id=u.project_id
 				WHERE p.enabled = '1' AND
-					u.user_id=" . db_param( ) . "
+					u.user_id=" . db_param() . "
 				ORDER BY p.name";
 	$result = db_query_bound( $query, Array( $c_user_id ) );
 	$category_count = db_num_rows( $result );
@@ -1246,7 +1246,7 @@ function print_custom_field_projects_list( $p_field_id ) {
 
 		$t_linked_field_ids = custom_field_get_linked_ids( $t_project_id );
 
-		$t_current_project_fields = array( );
+		$t_current_project_fields = array();
 
 		$t_first = true;
 		foreach( $t_linked_field_ids as $t_current_field_id ) {
@@ -1365,7 +1365,7 @@ function print_project_version_string( $p_project_id ) {
 
 	$query = "SELECT version
 				FROM $t_mantis_project_version_table
-				WHERE project_id=" . db_param( );
+				WHERE project_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_project_id ) );
 	$version_count = db_num_rows( $result );
 	$t_string = '';
@@ -1545,7 +1545,7 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 
 # print a list of page number links (eg [1 2 3])
 function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter_id = 0 ) {
-	$t_items = array( );
+	$t_items = array();
 	$t_link = '';
 
 	# Check if we have more than one page,
@@ -1703,19 +1703,19 @@ function print_hr( $p_hr_size = null, $p_hr_width = null ) {
 }
 
 # prints the signup link
-function print_signup_link( ) {
+function print_signup_link() {
 	if(( ON == config_get_global( 'allow_signup' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
 	}
 }
 
 # prints the login link
-function print_login_link( ) {
+function print_login_link() {
 	print_bracket_link( 'login_page.php', lang_get( 'login_title' ) );
 }
 
 # prints the lost pwd link
-function print_lost_password_link( ) {
+function print_lost_password_link() {
 
 	# lost password feature disabled or reset password via email disabled -> stop here!
 	if(( ON == config_get( 'lost_password_feature' ) ) && ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
@@ -1775,12 +1775,12 @@ function print_rss( $p_feed_url, $p_title = '' ) {
 }
 
 # Prints the recently visited issues.
-function print_recently_visited( ) {
-	if( !last_visited_enabled( ) ) {
+function print_recently_visited() {
+	if( !last_visited_enabled() ) {
 		return;
 	}
 
-	$t_ids = last_visited_get_array( );
+	$t_ids = last_visited_get_array();
 
 	if( count( $t_ids ) == 0 ) {
 		return;
@@ -1927,7 +1927,7 @@ document.getElementById( span ).style.display = displayType;
 							file_get_contents( $v_diskfile );
 						}
 						else {
-							$ftp = file_ftp_connect( );
+							$ftp = file_ftp_connect();
 							file_ftp_get( $ftp, $v_diskfile, $v_diskfile );
 							file_ftp_disconnect( $ftp );
 							$v_content = file_get_contents( $v_diskfile );
@@ -1936,7 +1936,7 @@ document.getElementById( span ).style.display = displayType;
 					default:
 						$query = "SELECT *
 	                  						FROM $t_bug_file_table
-				            			WHERE id=" . db_param( );
+				            			WHERE id=" . db_param();
 						$result = db_query_bound( $query, Array( $c_id ) );
 						$row = db_fetch_array( $result );
 						$v_content = $row['content'];

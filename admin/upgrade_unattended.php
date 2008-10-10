@@ -82,7 +82,7 @@ if( -1 == config_get( 'database_version', -1 ) ) {
 
 	# link the data structures and upgrade list
 	require_once( 'upgrade_inc.php' );
-	$error = $upgrade_set->run_all_unattended( );
+	$error = $upgrade_set->run_all_unattended();
 
 	if( true == $error ) {
 		exit( 1 );
@@ -135,7 +135,7 @@ while(( $i <= $lastid ) && !$g_failed ) {
 		config_set( 'database_version', $i );
 	}
 	else {
-		print_test_result( BAD, true, $sqlarray[0] . '<br />' . $g_db->ErrorMsg( ) );
+		print_test_result( BAD, true, $sqlarray[0] . '<br />' . $g_db->ErrorMsg() );
 	}
 
 	$i++;

@@ -67,7 +67,7 @@ access_ensure_global_level( ADMINISTRATOR );
 		From
 		<SELECT name="source_id">
 			<?php
-				$t_custom_ids = custom_field_get_ids( );
+				$t_custom_ids = custom_field_get_ids();
 foreach( $t_custom_ids as $t_id ) {
 	printf( "<OPTION VALUE=\"%d\">%s", $t_id, custom_field_get_field( $t_id, 'name' ) );
 }
@@ -91,7 +91,7 @@ foreach( $t_dest_ids as $t_id ) {
 
 	<!-- Database Statistics -->
 	<tr bgcolor="#ffffff"><td>Show database statistics.</td><td><center>
-	<?php html_button( 'db_stats.php', 'Display', array( ) );?>
+	<?php html_button( 'db_stats.php', 'Display', array() );?>
 	</center></td></tr>
 
 </table>

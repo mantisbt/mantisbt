@@ -30,17 +30,17 @@ require_once( $t_class_path . 'MantisPlugin.class.php' );
 
 # Cache variables #####
 
-$g_plugin_cache = array( );
-$g_plugin_cache_priority = array( );
-$g_plugin_cache_protected = array( );
-$g_plugin_current = array( );
+$g_plugin_cache = array();
+$g_plugin_cache_priority = array();
+$g_plugin_cache_protected = array();
+$g_plugin_current = array();
 
 # Public API #####
 /**
  * Get the currently executing plugin's basename.
  * @return string Plugin basename, or null if no current plugin
  */
-function plugin_get_current( ) {
+function plugin_get_current() {
 	global $g_plugin_current;
 	return( isset( $g_plugin_current[0] ) ? $g_plugin_current[0] : null );
 }
@@ -58,7 +58,7 @@ function plugin_push_current( $p_basename ) {
  * Remove the current plugin from the stack
  * @return string Plugin basename, or null if no current plugin
  */
-function plugin_pop_current( ) {
+function plugin_pop_current() {
 	global $g_plugin_current;
 	return( isset( $g_plugin_current[0] ) ? array_shift( $g_plugin_current ) : null );
 }
@@ -70,7 +70,7 @@ function plugin_pop_current( ) {
  */
 function plugin_page( $p_page, $p_redirect = false, $p_basename = null ) {
 	if( is_null( $p_basename ) ) {
-		$t_current = plugin_get_current( );
+		$t_current = plugin_get_current();
 	}
 	else {
 		$t_current = $p_basename;
@@ -104,7 +104,7 @@ function plugin_file_path( $p_filename, $p_basename ) {
  */
 function plugin_file( $p_file, $p_redirect = false, $p_basename = null ) {
 	if( is_null( $p_basename ) ) {
-		$t_current = plugin_get_current( );
+		$t_current = plugin_get_current();
 	}
 	else {
 		$t_current = $p_basename;
@@ -124,7 +124,7 @@ function plugin_file( $p_file, $p_redirect = false, $p_basename = null ) {
  */
 function plugin_file_include( $p_filename, $p_basename = null ) {
 	if( is_null( $p_basename ) ) {
-		$t_current = plugin_get_current( );
+		$t_current = plugin_get_current();
 	}
 	else {
 		$t_current = $p_basename;
@@ -147,7 +147,7 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
  */
 function plugin_table( $p_name, $p_basename = null ) {
 	if( is_null( $p_basename ) ) {
-		$t_current = plugin_get_current( );
+		$t_current = plugin_get_current();
 	}
 	else {
 		$t_current = $p_basename;
@@ -161,7 +161,7 @@ function plugin_table( $p_name, $p_basename = null ) {
  * @param multi Default option value
  */
 function plugin_config_get( $p_option, $p_default = null, $p_global = false ) {
-	$t_basename = plugin_get_current( );
+	$t_basename = plugin_get_current();
 	$t_full_option = 'plugin_' . $t_basename . '_' . $p_option;
 
 	if( $p_global ) {
@@ -181,7 +181,7 @@ function plugin_config_get( $p_option, $p_default = null, $p_global = false ) {
  * @param int Access threshold
  */
 function plugin_config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = ADMINISTRATOR ) {
-	$t_basename = plugin_get_current( );
+	$t_basename = plugin_get_current();
 	$t_full_option = 'plugin_' . $t_basename . '_' . $p_option;
 
 	config_set( $t_full_option, $p_value, $p_user, $p_project, $p_access );
@@ -194,7 +194,7 @@ function plugin_config_set( $p_option, $p_value, $p_user = NO_USER, $p_project =
  * @param int Project ID
  */
 function plugin_config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
-	$t_basename = plugin_get_current( );
+	$t_basename = plugin_get_current();
 	$t_full_option = 'plugin_' . $t_basename . '_' . $p_option;
 
 	config_delete( $t_full_option, $p_user, $p_project );
@@ -209,7 +209,7 @@ function plugin_config_defaults( $p_options ) {
 		return;
 	}
 
-	$t_basename = plugin_get_current( );
+	$t_basename = plugin_get_current();
 	$t_option_base = 'plugin_' . $t_basename . '_';
 
 	foreach( $p_options as $t_option => $t_value ) {
@@ -228,7 +228,7 @@ function plugin_config_defaults( $p_options ) {
  */
 function plugin_lang_get( $p_name, $p_basename = null ) {
 	if( is_null( $p_basename ) ) {
-		$t_basename = plugin_get_current( );
+		$t_basename = plugin_get_current();
 	}
 	else {
 		$t_basename = $p_basename;
@@ -241,7 +241,7 @@ function plugin_lang_get( $p_name, $p_basename = null ) {
 
 function plugin_history_log( $p_bug_id, $p_field_name, $p_old_value, $p_new_value = '', $p_user_id = null, $p_basename = null ) {
 	if( is_null( $p_basename ) ) {
-		$t_basename = plugin_get_current( );
+		$t_basename = plugin_get_current();
 	}
 	else {
 		$t_basename = $p_basename;
@@ -260,7 +260,7 @@ function plugin_history_log( $p_bug_id, $p_field_name, $p_old_value, $p_new_valu
  */
 function plugin_error( $p_error_name, $p_error_type = ERROR, $p_basename = null ) {
 	if( is_null( $p_basename ) ) {
-		$t_basename = plugin_get_current( );
+		$t_basename = plugin_get_current();
 	}
 	else {
 		$t_basename = $p_basename;
@@ -286,7 +286,7 @@ function plugin_error( $p_error_name, $p_error_type = ERROR, $p_basename = null 
  * @param string Callback function
  */
 function plugin_event_hook( $p_name, $p_callback ) {
-	$t_basename = plugin_get_current( );
+	$t_basename = plugin_get_current();
 	event_hook( $p_name, $p_callback, $t_basename );
 }
 
@@ -299,7 +299,7 @@ function plugin_event_hook_many( $p_hooks ) {
 		return;
 	}
 
-	$t_basename = plugin_get_current( );
+	$t_basename = plugin_get_current();
 
 	foreach( $p_hooks as $t_event => $t_callbacks ) {
 		if( !is_array( $t_callbacks ) ) {
@@ -319,7 +319,7 @@ function plugin_event_hook_many( $p_hooks ) {
  * @param string Child plugin basename.
  */
 function plugin_child( $p_child ) {
-	$t_basename = plugin_get_current( );
+	$t_basename = plugin_get_current();
 
 	$t_plugin = plugin_register( $t_basename, false, $p_child );
 
@@ -500,7 +500,7 @@ function plugin_is_installed( $p_basename ) {
 	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
 	$c_basename = db_prepare_string( $p_basename );
 
-	$t_query = "SELECT COUNT(*) FROM $t_plugin_table WHERE basename=" . db_param( );
+	$t_query = "SELECT COUNT(*) FROM $t_plugin_table WHERE basename=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $c_basename ) );
 	return( 0 < db_result( $t_result ) );
 }
@@ -519,7 +519,7 @@ function plugin_install( $p_plugin ) {
 
 	plugin_push_current( $p_plugin->basename );
 
-	if( !$p_plugin->install( ) ) {
+	if( !$p_plugin->install() ) {
 		plugin_pop_current( $p_basename );
 		return null;
 	}
@@ -529,7 +529,7 @@ function plugin_install( $p_plugin ) {
 	$c_basename = db_prepare_string( $p_plugin->basename );
 
 	$t_query = "INSERT INTO $t_plugin_table ( basename, enabled )
-				VALUES ( " . db_param( ) . ", '1' )";
+				VALUES ( " . db_param() . ", '1' )";
 	db_query_bound( $t_query, array( $c_basename ) );
 
 	if( false === ( plugin_config_get( 'schema', false ) ) ) {
@@ -538,7 +538,7 @@ function plugin_install( $p_plugin ) {
 
 	plugin_upgrade( $p_plugin );
 
-	plugin_pop_current( );
+	plugin_pop_current();
 }
 
 /**
@@ -549,14 +549,14 @@ function plugin_install( $p_plugin ) {
 function plugin_needs_upgrade( $p_plugin ) {
 	plugin_push_current( $p_plugin->basename );
 
-	$t_plugin_schema = $p_plugin->schema( );
+	$t_plugin_schema = $p_plugin->schema();
 	if( is_null( $t_plugin_schema ) ) {
 		return false;
 	}
 
 	$t_plugin_schema_version = plugin_config_get( 'schema', -1 );
 
-	plugin_pop_current( );
+	plugin_pop_current();
 
 	return( $t_plugin_schema_version < count( $t_plugin_schema ) - 1 );
 }
@@ -576,7 +576,7 @@ function plugin_upgrade( $p_plugin ) {
 	plugin_push_current( $p_plugin->basename );
 
 	$t_schema_version = plugin_config_get( 'schema', -1 );
-	$t_schema = $p_plugin->schema( );
+	$t_schema = $p_plugin->schema();
 
 	global $g_db;
 	$t_dict = NewDataDictionary( $g_db );
@@ -584,7 +584,7 @@ function plugin_upgrade( $p_plugin ) {
 	$i = $t_schema_version + 1;
 	while( $i < count( $t_schema ) ) {
 		if( !$p_plugin->upgrade( $i ) ) {
-			plugin_pop_current( );
+			plugin_pop_current();
 			return false;
 		}
 
@@ -618,7 +618,7 @@ function plugin_upgrade( $p_plugin ) {
 		$i++;
 	}
 
-	plugin_pop_current( );
+	plugin_pop_current();
 
 	return true;
 }
@@ -637,14 +637,14 @@ function plugin_uninstall( $p_plugin ) {
 	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
 	$c_basename = db_prepare_string( $p_plugin->basename );
 
-	$t_query = "DELETE FROM $t_plugin_table WHERE basename=" . db_param( );
+	$t_query = "DELETE FROM $t_plugin_table WHERE basename=" . db_param();
 	db_query_bound( $t_query, array( $c_basename ) );
 
 	plugin_push_current( $p_plugin->basename );
 
-	$p_plugin->uninstall( );
+	$p_plugin->uninstall();
 
-	plugin_pop_current( );
+	plugin_pop_current();
 }
 
 # ## Core usage only.
@@ -652,7 +652,7 @@ function plugin_uninstall( $p_plugin ) {
  * Search the plugins directory for plugins.
  * @return array Plugin basename/info key/value pairs.
  */
-function plugin_find_all( ) {
+function plugin_find_all() {
 	$t_plugin_path = config_get_global( 'plugin_path' );
 	$t_plugins = array(
 		'MantisCore' => new MantisCorePlugin( 'MantisCore' ),
@@ -728,7 +728,7 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 
 			$t_plugin = new $t_classname( is_null( $p_child ) ? $p_basename : $p_child );
 
-			plugin_pop_current( );
+			plugin_pop_current();
 
 			# Final check on the class
 			if( is_null( $t_plugin->name ) || is_null( $t_plugin->version ) ) {
@@ -750,12 +750,12 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 /**
  * Find and register all installed plugins.
  */
-function plugin_register_installed( ) {
+function plugin_register_installed() {
 	global $g_plugin_cache_priority, $g_plugin_cache_protected;
 
 	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
 
-	$t_query = "SELECT basename, priority, protected FROM $t_plugin_table WHERE enabled=" . db_param( ) . ' ORDER BY priority DESC';
+	$t_query = "SELECT basename, priority, protected FROM $t_plugin_table WHERE enabled=" . db_param() . ' ORDER BY priority DESC';
 	$t_result = db_query_bound( $t_query, Array( 1 ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -770,29 +770,29 @@ function plugin_register_installed( ) {
  * Initialize all installed plugins.
  * Post-signals EVENT_PLUGIN_INIT.
  */
-function plugin_init_installed( ) {
+function plugin_init_installed() {
 	if( OFF == config_get_global( 'plugins_enabled' ) || !db_table_exists( db_get_table( 'mantis_plugin_table' ) ) ) {
 		return;
 	}
 
 	global $g_plugin_cache, $g_plugin_current, $g_plugin_cache_priority, $g_plugin_cache_protected, $g_plugin_cache_init;
-	$g_plugin_cache = array( );
-	$g_plugin_current = array( );
-	$g_plugin_cache_init = array( );
-	$g_plugin_cache_priority = array( );
-	$g_plugin_cache_protected = array( );
+	$g_plugin_cache = array();
+	$g_plugin_current = array();
+	$g_plugin_cache_init = array();
+	$g_plugin_cache_priority = array();
+	$g_plugin_cache_protected = array();
 
 	plugin_register( 'MantisCore' );
-	plugin_register_installed( );
+	plugin_register_installed();
 
-	$t_plugins = array( );
+	$t_plugins = array();
 	foreach( $g_plugin_cache as $t_basename => $t_plugin ) {
 		$t_plugins[] = $t_basename;
 	}
 
 	$t_passes = 0;
 	do {
-		$t_plugins_retry = array( );
+		$t_plugins_retry = array();
 
 		foreach( $t_plugins as $t_basename ) {
 			if( !plugin_init( $t_basename ) ) {
@@ -834,8 +834,8 @@ function plugin_init( $p_basename ) {
 
 		# load plugin error strings
 		global $g_lang_strings;
-		$t_lang = lang_get_current( );
-		$t_plugin_errors = $t_plugin->errors( );
+		$t_lang = lang_get_current();
+		$t_plugin_errors = $t_plugin->errors();
 
 		foreach( $t_plugin_errors as $t_error_name => $t_error_string ) {
 			$t_error_code = "plugin_${p_basename}_${t_error_name}";
@@ -843,10 +843,10 @@ function plugin_init( $p_basename ) {
 		}
 
 		# finish initializing the plugin
-		$t_plugin->__init( );
+		$t_plugin->__init();
 		$g_plugin_cache_init[$p_basename] = true;
 
-		plugin_pop_current( );
+		plugin_pop_current();
 
 		return true;
 	}

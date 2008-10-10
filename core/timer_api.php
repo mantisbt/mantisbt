@@ -45,18 +45,18 @@ class BC_Timer {
 
 	# this is an array of ( string token => time ) array elements.
 	# ---
-	function BC_Timer( ) {
-		$this->atime = array( );
+	function BC_Timer() {
+		$this->atime = array();
 		$this->atime[] = array(
 			"START",
-			$this->get_microtime( ),
+			$this->get_microtime(),
 		);
 	}
 
 	# ---
 	# get_microtime function taken from Everett Michaud on Zend.com
-	function get_microtime( ) {
-		$tmp = split( ' ', microtime( ) );
+	function get_microtime() {
+		$tmp = split( ' ', microtime() );
 		$rt = $tmp[0] + $tmp[1];
 		return $rt;
 	}
@@ -66,19 +66,19 @@ class BC_Timer {
 	function mark_time( $p_marker_name ) {
 		$this->atime[] = array(
 			$p_marker_name,
-			$this->get_microtime( ),
+			$this->get_microtime(),
 		);
 	}
 
 	# ---
 	# print out the timings.  If not in debug then just print out the total time.
-	function print_times( ) {
+	function print_times() {
 		global $g_debug_timer;
 
 		# store end time
 		$this->atime[] = array(
 			"END",
-			$this->get_microtime( ),
+			$this->get_microtime(),
 		);
 
 		# calculate end time

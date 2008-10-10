@@ -34,19 +34,19 @@ $t_core_path = config_get( 'core_path' );
 
 require_once( $t_core_path . 'graph_api.php' );
 
-$data_category_arr = array( );
-$data_count_arr = array( );
+$data_category_arr = array();
+$data_count_arr = array();
 
-$t_project_id = helper_get_current_project( );
+$t_project_id = helper_get_current_project();
 
 # Grab the Projections/Releases
 $query = "SELECT DISTINCT projection
 		FROM mantis_bug_table
-		WHERE project_id=" . db_param( ) . "
+		WHERE project_id=" . db_param() . "
 		ORDER BY projection";
 $result = db_query_bound( $query, Array( $t_project_id ) );
 $projection_count = db_num_rows( $result );
-$projection_arr = array( );
+$projection_arr = array();
 for( $i = 0;$i < $projection_count;$i++ ) {
 	$row = db_fetch_array( $result );
 	extract( $row );
@@ -54,9 +54,9 @@ for( $i = 0;$i < $projection_count;$i++ ) {
 	$projection_arr[] = $projection;
 }
 
-$open_count_arr = array( );
-$resolved_count_arr = array( );
-$closed_count_arr = array( );
+$open_count_arr = array();
+$resolved_count_arr = array();
+$closed_count_arr = array();
 foreach( $projection_arr as $t_projection ) {
 
 	# OPEN
@@ -91,7 +91,7 @@ $proj_name = get_project_field( $t_project_id, 'name' );
 
 $graph = new Graph( 800, 600, 'auto' );
 $graph->SetScale( "textlin" );
-$graph->SetShadow( );
+$graph->SetShadow();
 $graph->img->SetMargin( 40, 30, 40, 80 );
 
 $graph->xaxis->SetFont( FF_ARIAL, FS_NORMAL, 10 );
@@ -110,17 +110,17 @@ $bplot1->SetFillColor( "slateblue" );
 $bplot2->SetFillColor( "maroon" );
 $bplot3->SetFillColor( "lightgoldenrodyellow" );
 
-$bplot1->SetShadow( );
-$bplot2->SetShadow( );
-$bplot3->SetShadow( );
+$bplot1->SetShadow();
+$bplot2->SetShadow();
+$bplot3->SetShadow();
 
 $bplot1->SetLegend( 'Open' );
 $bplot2->SetLegend( 'Resolved' );
 $bplot3->SetLegend( 'Closed' );
 
-$bplot1->value->Show( );
-$bplot2->value->Show( );
-$bplot3->value->Show( );
+$bplot1->value->Show();
+$bplot2->value->Show();
+$bplot3->value->Show();
 
 $bplot1->value->SetFont( FF_FONT1, FS_NORMAL, 8 );
 $bplot2->value->SetFont( FF_FONT1, FS_NORMAL, 8 );
@@ -139,4 +139,4 @@ $gbarplot = new GroupBarPlot( array( $bplot1, $bplot2, $bplot3 ) );
 $gbarplot->SetWidth( 0.6 );
 $graph->Add( $gbarplot );
 
-$graph->Stroke( );
+$graph->Stroke();

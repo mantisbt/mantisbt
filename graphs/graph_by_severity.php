@@ -36,14 +36,14 @@ require_once( $t_core_path . 'graph_api.php' );
 
 # Grab Data
 # ---
-$t_project_id = helper_get_current_project( );
+$t_project_id = helper_get_current_project();
 
-$data_category_arr = array( );
-$data_count_arr = array( );
+$data_category_arr = array();
+$data_count_arr = array();
 $query = "SELECT severity, COUNT(severity) as count
 			FROM mantis_bug_table
 			WHERE status<80 AND
-			      project_id=" . db_param( ) . "
+			      project_id=" . db_param() . "
 			GROUP BY severity
 			ORDER BY severity";
 $result = db_query_bound( $query, Array( $t_project_id ) );
@@ -79,7 +79,7 @@ $proj_name = project_get_field( $t_project_id, 'name' );
 # Setup Graph
 # ---
 $graph = new PieGraph( 800, 600 );
-$graph->SetShadow( );
+$graph->SetShadow();
 
 # Set A title for the plot
 $graph->title->Set( "SPR Severity Distribution Graph: $proj_name" );
@@ -95,4 +95,4 @@ $p1->SetStartAngle( - 90 );
 
 $graph->Add( $p1 );
 
-$graph->Stroke( );
+$graph->Stroke();

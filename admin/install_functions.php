@@ -27,7 +27,7 @@
 /**
  * Migrate the legacy category data to the new category_id-based schema.
  */
-function install_category_migrate( ) {
+function install_category_migrate() {
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_category_table = db_get_table( 'mantis_category_table' );
 	$t_project_category_table = db_get_table( 'mantis_project_category_table' );
@@ -38,7 +38,7 @@ function install_category_migrate( ) {
 	$query = "SELECT project_id, category FROM $t_bug_table ORDER BY project_id, category";
 	$t_bug_result = db_query_bound( $query );
 
-	$t_data = Array( );
+	$t_data = Array();
 
 	# Find categories specified by project
 	while( $row = db_fetch_array( $t_category_result ) ) {
@@ -58,12 +58,12 @@ function install_category_migrate( ) {
 	# In every project, go through all the categories found, and create them and update the bug
 	foreach( $t_data as $t_project_id => $t_categories ) {
 		foreach( $t_categories as $t_name => $t_true ) {
-			$query = "INSERT INTO $t_category_table ( name, project_id ) VALUES ( " . db_param( ) . ', ' . db_param( ) . ' )';
+			$query = "INSERT INTO $t_category_table ( name, project_id ) VALUES ( " . db_param() . ', ' . db_param() . ' )';
 			db_query_bound( $query, array( $t_name, $t_project_id ) );
 			$t_category_id = db_insert_id( $t_category_table );
 
-			$query = "UPDATE $t_bug_table SET category_id=" . db_param( ) . '
-						WHERE project_id=' . db_param( ) . ' AND category=' . db_param( );
+			$query = "UPDATE $t_bug_table SET category_id=" . db_param() . '
+						WHERE project_id=' . db_param() . ' AND category=' . db_param();
 			db_query_bound( $query, array( $t_category_id, $t_project_id, $t_name ) );
 		}
 	}

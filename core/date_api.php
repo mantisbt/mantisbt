@@ -27,12 +27,12 @@
 # ## Date API ###
 # checks if date is null
 function date_is_null( $p_date ) {
-	return $p_date == date_get_null( );
+	return $p_date == date_get_null();
 }
 
 # gets null date
-function date_get_null( ) {
-	return db_unixtimestamp( db_null_date( ) );
+function date_get_null() {
+	return db_unixtimestamp( db_null_date() );
 }
 
 # prints the date given the formating string
@@ -144,25 +144,25 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 
 	foreach( $t_chars as $t_char ) {
 		if( strcmp( $t_char, "M" ) == 0 ) {
-			echo "<select ", helper_get_tab_index( ), " name=\"" . $p_name . "_month\"$t_disable>";
+			echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_month\"$t_disable>";
 			echo $t_blank_line;
 			print_month_option_list( $t_date[1] );
 			echo "</select>\n";
 		}
 		if( strcmp( $t_char, "m" ) == 0 ) {
-			echo "<select ", helper_get_tab_index( ), " name=\"" . $p_name . "_month\"$t_disable>";
+			echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_month\"$t_disable>";
 			echo $t_blank_line;
 			print_numeric_month_option_list( $t_date[1] );
 			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, "D" ) == 0 ) {
-			echo "<select ", helper_get_tab_index( ), " name=\"" . $p_name . "_day\"$t_disable>";
+			echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_day\"$t_disable>";
 			echo $t_blank_line;
 			print_day_option_list( $t_date[2] );
 			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, "Y" ) == 0 ) {
-			echo "<select ", helper_get_tab_index( ), " name=\"" . $p_name . "_year\"$t_disable>";
+			echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_year\"$t_disable>";
 			echo $t_blank_line;
 			print_year_range_option_list( $t_date[0], $p_year_start, $p_year_end );
 			echo "</select>\n";

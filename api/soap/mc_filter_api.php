@@ -25,9 +25,9 @@ function mc_filter_get( $p_username, $p_password, $p_project_id ) {
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
-	$t_result = array( );
+	$t_result = array();
 	foreach( mci_filter_db_get_available_queries( $p_project_id, $t_user_id ) as $t_filter_row ) {
-		$t_filter = array( );
+		$t_filter = array();
 		$t_filter['id'] = $t_filter_row['id'];
 		$t_filter['owner'] = mci_account_get_array_by_id( $t_filter_row['user_id'] );
 		$t_filter['project_id'] = $t_filter_row['project_id'];
@@ -69,13 +69,13 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 	$t_filter = unserialize( $t_filter_detail[1] );
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 
-	$t_result = array( );
+	$t_result = array();
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
 
 	foreach( $t_rows as $t_issue_data ) {
 		$t_id = $t_issue_data['id'];
 
-		$t_issue = array( );
+		$t_issue = array();
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = mci_enum_get_array_by_id( $t_issue_data['view_state'], 'view_state', $t_lang );
 		$t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data['last_updated'] );
@@ -154,13 +154,13 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	$t_filter = unserialize( $t_filter_detail[1] );
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 
-	$t_result = array( );
+	$t_result = array();
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
 
 	foreach( $t_rows as $t_issue_data ) {
 		$t_id = $t_issue_data['id'];
 
-		$t_issue = array( );
+		$t_issue = array();
 
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = $t_issue_data['view_state'];

@@ -35,7 +35,7 @@ if( ON == config_get( 'use_jpgraph' ) ) {
 	require_once( $t_jpgraph_path . 'jpgraph_canvas.php' );
 }
 
-function graph_get_font( ) {
+function graph_get_font() {
 	$t_font_map = array(
 		'arial' => FF_ARIAL,
 		'verdana' => FF_VERDANA,
@@ -64,14 +64,14 @@ function graph_get_font( ) {
 # --------------------
 function graph_bar( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_height = 400 ) {
 
-	$t_graph_font = graph_get_font( );
+	$t_graph_font = graph_get_font();
 
 	error_check( is_array( $p_metrics ) ? array_sum( $p_metrics ) : 0, $p_title );
 
 	$graph = new Graph( $p_graph_width, $p_graph_height );
 	$graph->img->SetMargin( 40, 40, 40, 170 );
 	if( ON == config_get_global( 'jpgraph_antialias' ) ) {
-		$graph->img->SetAntiAliasing( );
+		$graph->img->SetAntiAliasing();
 	}
 	$graph->SetScale( 'textlin' );
 	$graph->SetMarginColor( 'white' );
@@ -98,12 +98,12 @@ function graph_bar( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_he
 	$p1->SetFillColor( 'yellow' );
 	$p1->SetWidth( 0.8 );
 	$graph->Add( $p1 );
-	if( helper_show_queries( ) ) {
-		$graph->subtitle->Set( db_count_queries( ) . ' queries (' . db_count_unique_queries( ) . ' unique) (' . db_time_queries( ) . 'sec)' );
+	if( helper_show_queries() ) {
+		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
 		$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 	}
 
-	$graph->Stroke( );
+	$graph->Stroke();
 }
 
 # Function which displays the charts using the absolute values according to the status (opened/closed/resolved)
@@ -114,7 +114,7 @@ function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_
 	#   $p_metrics['resolved']
 	#   $p_metrics['closed']
 
-	$t_graph_font = graph_get_font( );
+	$t_graph_font = graph_get_font();
 
 	# count up array portions that are set
 	$t_count = 0;
@@ -133,7 +133,7 @@ function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_
 	$graph = new Graph( $p_graph_width, $p_graph_height );
 	$graph->img->SetMargin( 45, 35, 35, $p_baseline );
 	if( ON == config_get_global( 'jpgraph_antialias' ) ) {
-		$graph->img->SetAntiAliasing( );
+		$graph->img->SetAntiAliasing();
 	}
 	$graph->SetScale( 'textlin' );
 	$graph->SetMarginColor( 'white' );
@@ -182,12 +182,12 @@ function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_
 	$gbplot = new GroupBarPlot( array( $p1, $p3, $p2 ) );
 	$graph->Add( $gbplot );
 
-	if( helper_show_queries( ) ) {
-		$graph->subtitle->Set( db_count_queries( ) . ' queries (' . db_count_unique_queries( ) . ' unique) (' . db_time_queries( ) . 'sec)' );
+	if( helper_show_queries() ) {
+		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
 		$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 	}
 
-	$graph->Stroke( );
+	$graph->Stroke();
 }
 
 # --------------------
@@ -202,7 +202,7 @@ function graph_group_pct( $p_title = '', $p_graph_width = 350, $p_graph_height =
 	$graph = new Graph( 250, 400 );
 	$graph->img->SetMargin( 35, 35, 35, 150 );
 	if( ON == config_get_global( 'jpgraph_antialias' ) ) {
-		$graph->img->SetAntiAliasing( );
+		$graph->img->SetAntiAliasing();
 	}
 	$graph->SetScale( 'textlin' );
 	$graph->SetMarginColor( 'white' );
@@ -231,17 +231,17 @@ function graph_group_pct( $p_title = '', $p_graph_width = 350, $p_graph_height =
 	$gbplot = new GroupBarPlot( array( $p1, $p2, $p3 ) );
 
 	$graph->Add( $gbplot );
-	if( helper_show_queries( ) ) {
-		$graph->subtitle->Set( db_count_queries( ) . ' queries (' . db_count_unique_queries( ) . ' unique)' );
+	if( helper_show_queries() ) {
+		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique)' );
 	}
-	$graph->Stroke( );
+	$graph->Stroke();
 }
 
 # --------------------
 # Function that displays pie charts
 function graph_pie( $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_height = 350, $p_center = 0.4, $p_poshorizontal = 0.10, $p_posvertical = 0.09 ) {
 
-	$t_graph_font = graph_get_font( );
+	$t_graph_font = graph_get_font();
 
 	error_check( is_array( $p_metrics ) ? array_sum( $p_metrics ) : 0, $p_title );
 
@@ -268,21 +268,21 @@ function graph_pie( $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_he
 
 	# Label format
 	$p1->value->SetFormat( '%2.0f' );
-	$p1->value->Show( );
+	$p1->value->Show();
 	$p1->value->SetFont( $t_graph_font );
 
 	$graph->Add( $p1 );
-	if( helper_show_queries( ) ) {
-		$graph->subtitle->Set( db_count_queries( ) . ' queries (' . db_count_unique_queries( ) . ' unique) (' . db_time_queries( ) . 'sec)' );
+	if( helper_show_queries() ) {
+		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
 		$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 	}
-	$graph->Stroke( );
+	$graph->Stroke();
 }
 
 # --------------------
 function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_height = 380 ) {
 
-	$t_graph_font = graph_get_font( );
+	$t_graph_font = graph_get_font();
 	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
 
 	foreach( $p_metrics as $i => $vals ) {
@@ -297,7 +297,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 	$graph = new Graph( $p_graph_width, $p_graph_height );
 	$graph->img->SetMargin( 40, 40, 40, 170 );
 	if( ON == config_get_global( 'jpgraph_antialias' ) ) {
-		$graph->img->SetAntiAliasing( );
+		$graph->img->SetAntiAliasing();
 	}
 	$graph->SetScale( 'linlin' );
 	$graph->SetMarginColor( 'white' );
@@ -327,39 +327,39 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 
 	$p1 = new LinePlot( $reported_plot, $plot_date );
 	$p1->SetColor( 'blue' );
-	$p1->SetCenter( );
+	$p1->SetCenter();
 	$p1->SetLegend( lang_get( 'legend_reported' ) );
 	$graph->Add( $p1 );
 
 	$p3 = new LinePlot( $still_open_plot, $plot_date );
 	$p3->SetColor( 'red' );
-	$p3->SetCenter( );
+	$p3->SetCenter();
 	$p3->SetLegend( lang_get( 'legend_still_open' ) );
 	$graph->Add( $p3 );
 
 	$p2 = new LinePlot( $resolved_plot, $plot_date );
 	$p2->SetColor( 'black' );
-	$p2->SetCenter( );
+	$p2->SetCenter();
 	$p2->SetLegend( lang_get( 'legend_resolved' ) );
 	$graph->Add( $p2 );
 
-	if( helper_show_queries( ) ) {
-		$graph->subtitle->Set( db_count_queries( ) . ' queries (' . db_count_unique_queries( ) . ' unique) (' . db_time_queries( ) . 'sec)' );
+	if( helper_show_queries() ) {
+		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
 		$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 	}
-	$graph->Stroke( );
+	$graph->Stroke();
 }
 
 # --------------------
 function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p_graph_height = 380 ) {
 
-	$t_graph_font = graph_get_font( );
+	$t_graph_font = graph_get_font();
 	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, lang_get( 'by_date' ) );
 
 	$graph = new Graph( $p_graph_width, $p_graph_height );
 	$graph->img->SetMargin( 40, 140, 40, 100 );
 	if( ON == config_get_global( 'jpgraph_antialias' ) ) {
-		$graph->img->SetAntiAliasing( );
+		$graph->img->SetAntiAliasing();
 	}
 	$graph->SetScale( 'linlin' );
 	$graph->SetMarginColor( 'white' );
@@ -391,20 +391,20 @@ function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p
 	$t_line_colours = config_get( 'graph_colors' );
 	$t_count_colours = count( $t_line_colours );
 	$t_lines = count( $p_metrics ) - 1;
-	$t_line = array( );
+	$t_line = array();
 	for( $i = 1;$i <= $t_lines;$i++ ) {
 		$t_line[$i] = new LinePlot( $p_metrics[$i], $p_metrics[0] );
 		$t_line[$i]->SetColor( $t_line_colours[$i % $t_count_colours] );
-		$t_line[$i]->SetCenter( );
+		$t_line[$i]->SetCenter();
 		$t_line[$i]->SetLegend( $p_labels[$i] );
 		$graph->Add( $t_line[$i] );
 	}
 
-	if( helper_show_queries( ) ) {
-		$graph->subtitle->Set( db_count_queries( ) . ' queries (' . db_count_unique_queries( ) . ' unique) (' . db_time_queries( ) . 'sec)' );
+	if( helper_show_queries() ) {
+		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
 		$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 	}
-	$graph->Stroke( );
+	$graph->Stroke();
 }
 
 # --------------------
@@ -423,9 +423,9 @@ function graph_total_metrics( $p_metrics ) {
 # --------------------
 # summarize metrics by a single field in the bug table
 function create_bug_enum_summary( $p_enum_string, $p_enum ) {
-	$t_project_id = helper_get_current_project( );
+	$t_project_id = helper_get_current_project();
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_user_id = auth_get_current_user_id( );
+	$t_user_id = auth_get_current_user_id();
 	$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$t_arr = explode_enum_string( $p_enum_string );
@@ -450,9 +450,9 @@ function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 function enum_bug_group( $p_enum_string, $p_enum ) {
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
-	$t_project_id = helper_get_current_project( );
+	$t_project_id = helper_get_current_project();
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_user_id = auth_get_current_user_id( );
+	$t_user_id = auth_get_current_user_id();
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
 	$t_clo_val = CLOSED;
 	$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
@@ -495,12 +495,12 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 }
 
 # --------------------
-function create_developer_summary( ) {
+function create_developer_summary() {
 
-	$t_project_id = helper_get_current_project( );
+	$t_project_id = helper_get_current_project();
 	$t_user_table = db_get_table( 'mantis_user_table' );
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_user_id = auth_get_current_user_id( );
+	$t_user_id = auth_get_current_user_id();
 	$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
@@ -512,7 +512,7 @@ function create_developer_summary( ) {
 	$result = db_query( $query );
 	$t_total_handled = db_num_rows( $result );
 
-	$t_handler_arr = array( );
+	$t_handler_arr = array();
 	for( $i = 0;$i < $t_total_handled;$i++ ) {
 		$row = db_fetch_array( $result );
 		if( !isset( $t_handler_arr[$row['handler_id']] ) ) {
@@ -534,7 +534,7 @@ function create_developer_summary( ) {
 	}
 
 	if( count( $t_handler_arr ) == 0 ) {
-		return array( 'open' => array( ) );
+		return array( 'open' => array() );
 	}
 
 	$t_imploded_handlers = implode( ',', array_keys( $t_handler_arr ) );
@@ -559,14 +559,14 @@ function create_developer_summary( ) {
 }
 
 # --------------------
-function create_reporter_summary( ) {
+function create_reporter_summary() {
 	global $reporter_name, $reporter_count;
 
 
-	$t_project_id = helper_get_current_project( );
+	$t_project_id = helper_get_current_project();
 	$t_user_table = db_get_table( 'mantis_user_table' );
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_user_id = auth_get_current_user_id( );
+	$t_user_id = auth_get_current_user_id();
 	$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$query = "SELECT reporter_id
@@ -575,7 +575,7 @@ function create_reporter_summary( ) {
 	$result = db_query( $query );
 	$t_total_reported = db_num_rows( $result );
 
-	$t_reporter_arr = array( );
+	$t_reporter_arr = array();
 	for( $i = 0;$i < $t_total_reported;$i++ ) {
 		$row = db_fetch_array( $result );
 
@@ -588,7 +588,7 @@ function create_reporter_summary( ) {
 	}
 
 	if( count( $t_reporter_arr ) == 0 ) {
-		return array( );
+		return array();
 	}
 
 	$t_imploded_reporters = implode( ',', array_keys( $t_reporter_arr ) );
@@ -611,13 +611,13 @@ function create_reporter_summary( ) {
 }
 
 # --------------------
-function create_category_summary( ) {
+function create_category_summary() {
 	global $category_name, $category_bug_count;
 
-	$t_project_id = helper_get_current_project( );
+	$t_project_id = helper_get_current_project();
 	$t_cat_table = db_get_table( 'mantis_category_table' );
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_user_id = auth_get_current_user_id( );
+	$t_user_id = auth_get_current_user_id();
 	$specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$query = "SELECT id, name
@@ -627,7 +627,7 @@ function create_category_summary( ) {
 	$result = db_query( $query );
 	$category_count = db_num_rows( $result );
 
-	$t_metrics = array( );
+	$t_metrics = array();
 	for( $i = 0;$i < $category_count;$i++ ) {
 		$row = db_fetch_array( $result );
 		$t_cat_name = $row['name'];
@@ -665,15 +665,15 @@ function find_date_in_metrics( $aDate ) {
 }
 
 # --------------------
-function create_cumulative_bydate( ) {
+function create_cumulative_bydate() {
 
 	$t_clo_val = CLOSED;
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_history_table = db_get_table( 'mantis_bug_history_table' );
 
-	$t_project_id = helper_get_current_project( );
-	$t_user_id = auth_get_current_user_id( );
+	$t_project_id = helper_get_current_project();
+	$t_user_id = auth_get_current_user_id();
 	$specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
 	# Get all the submitted dates
@@ -780,7 +780,7 @@ function graph_date_format( $p_date ) {
 function error_check( $bug_count, $title ) {
 
 	if( 0 == $bug_count ) {
-		$t_graph_font = graph_get_font( );
+		$t_graph_font = graph_get_font();
 
 		$graph = new CanvasGraph( 300, 380 );
 
@@ -790,7 +790,7 @@ function error_check( $bug_count, $title ) {
 		$graph->title->Set( $title );
 		$graph->title->SetFont( $t_graph_font, FS_BOLD );
 		$graph->AddText( $txt );
-		$graph->Stroke( );
-		die( );
+		$graph->Stroke();
+		die();
 	}
 }

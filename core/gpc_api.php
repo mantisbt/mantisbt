@@ -40,7 +40,7 @@ function gpc_get( $p_var_name, $p_default = null ) {
 	elseif( isset( $_GET[$p_var_name] ) ) {
 		$t_result = gpc_strip_slashes( $_GET[$p_var_name] );
 	}
-	elseif( func_num_args( ) > 1 ) {
+	elseif( func_num_args() > 1 ) {
 
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
@@ -61,7 +61,7 @@ function gpc_get_string( $p_var_name, $p_default = null ) {
 
 	# Don't pass along a default unless one was given to us
 	#  otherwise we prevent an error being triggered
-	$args = func_get_args( );
+	$args = func_get_args();
 	$t_result = call_user_func_array( 'gpc_get', $args );
 
 	if( is_array( $t_result ) ) {
@@ -79,7 +79,7 @@ function gpc_get_int( $p_var_name, $p_default = null ) {
 
 	# Don't pass along a default unless one was given to us
 	#  otherwise we prevent an error being triggered
-	$args = func_get_args( );
+	$args = func_get_args();
 	$t_result = call_user_func_array( 'gpc_get', $args );
 
 	if( is_array( $t_result ) ) {
@@ -162,11 +162,11 @@ function gpc_get_string_array( $p_var_name, $p_default = null ) {
 
 	# Don't pass along a default unless one was given to us
 	#  otherwise we prevent an error being triggered
-	$args = func_get_args( );
+	$args = func_get_args();
 	$t_result = call_user_func_array( 'gpc_get', $args );
 
 	# If we the result isn't the default we were given or an array, error
-	if( !((( 1 < func_num_args( ) ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
+	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
@@ -181,11 +181,11 @@ function gpc_get_int_array( $p_var_name, $p_default = null ) {
 
 	# Don't pass along a default unless one was given to us
 	#  otherwise we prevent an error being triggered
-	$args = func_get_args( );
+	$args = func_get_args();
 	$t_result = call_user_func_array( 'gpc_get', $args );
 
 	# If we the result isn't the default we were given or an array, error
-	if( !((( 1 < func_num_args( ) ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
+	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
@@ -204,11 +204,11 @@ function gpc_get_bool_array( $p_var_name, $p_default = null ) {
 
 	# Don't pass along a default unless one was given to us
 	#  otherwise we prevent an error being triggered
-	$args = func_get_args( );
+	$args = func_get_args();
 	$t_result = call_user_func_array( 'gpc_get', $args );
 
 	# If we the result isn't the default we were given or an array, error
-	if( !((( 1 < func_num_args( ) ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
+	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
@@ -231,7 +231,7 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
 	if( isset( $_COOKIE[$p_var_name] ) ) {
 		$t_result = gpc_strip_slashes( $_COOKIE[$p_var_name] );
 	}
-	elseif( func_num_args( ) > 1 ) {
+	elseif( func_num_args() > 1 ) {
 
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
@@ -259,7 +259,7 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
 	}
 	elseif( true === $p_expire ) {
 		$t_cookie_length = config_get( 'cookie_time_length' );
-		$p_expire = time( ) + $t_cookie_length;
+		$p_expire = time() + $t_cookie_length;
 	}
 	if( null === $p_path ) {
 		$p_path = config_get( 'cookie_path' );
@@ -285,7 +285,7 @@ function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null ) {
 	}
 
 	# dont try to send cookie if headers are send (guideweb)
-	if( !headers_sent( ) ) {
+	if( !headers_sent() ) {
 		return setcookie( $p_name, '', -1, $p_path, $p_domain );
 	}
 	else {
@@ -306,7 +306,7 @@ function gpc_get_file( $p_var_name, $p_default = null ) {
 		# FILES are not escaped even if magic_quotes is ON, this applies to Windows paths.
 		$t_result = $_FILES[$p_var_name];
 	}
-	elseif( func_num_args( ) > 1 ) {
+	elseif( func_num_args() > 1 ) {
 
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
@@ -351,7 +351,7 @@ function gpc_string_to_bool( $p_string ) {
 
 # Strip slashes if necessary (supports arrays)
 function gpc_strip_slashes( $p_var ) {
-	if( 0 == get_magic_quotes_gpc( ) ) {
+	if( 0 == get_magic_quotes_gpc() ) {
 		return $p_var;
 	}
 	elseif( !is_array( $p_var ) ) {

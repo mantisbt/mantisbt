@@ -66,11 +66,11 @@ define( 'GRAPHVIZ_PDF', 28 );
 # class.
 class Graph {
 	var $name = 'G';
-	var $attributes = array( );
+	var $attributes = array();
 	var $default_node = null;
 	var $default_edge = null;
-	var $nodes = array( );
-	var $edges = array( );
+	var $nodes = array();
+	var $edges = array();
 
 	var $graphviz_tool;
 	var $graphviz_com_module;
@@ -174,7 +174,7 @@ class Graph {
 	);
 
 	# Constructor for Graph objects.
-	function Graph( $p_name = 'G', $p_attributes = array( ), $p_tool = 'neato', $p_com_module = 'WinGraphviz.NEATO' ) {
+	function Graph( $p_name = 'G', $p_attributes = array(), $p_tool = 'neato', $p_com_module = 'WinGraphviz.NEATO' ) {
 		if( is_string( $p_name ) ) {
 			$this->name = $p_name;
 		}
@@ -207,14 +207,14 @@ class Graph {
 	}
 
 	# Adds a node to the graph.
-	function add_node( $p_name, $p_attributes = array( ) ) {
+	function add_node( $p_name, $p_attributes = array() ) {
 		if( is_array( $p_attributes ) ) {
 			$this->nodes[$p_name] = $p_attributes;
 		}
 	}
 
 	# Adds an edge to the graph.
-	function add_edge( $p_src, $p_dst, $p_attributes = array( ) ) {
+	function add_edge( $p_src, $p_dst, $p_attributes = array() ) {
 		if( is_array( $p_attributes ) ) {
 			$this->edges[] = array(
 				'src' => $p_src,
@@ -235,10 +235,10 @@ class Graph {
 	}
 
 	# Generates an undirected graph representation (suitable for neato).
-	function generate( ) {
+	function generate() {
 		echo 'graph ' . $this->name . ' {' . "\n";
 
-		$this->_print_graph_defaults( );
+		$this->_print_graph_defaults();
 
 		foreach( $this->nodes as $t_name => $t_attr ) {
 			$t_name = '"' . addcslashes( $t_name, "\0..\37\"\\" ) . '"';
@@ -275,10 +275,10 @@ class Graph {
 		}
 
 		# Retrieve the source dot document into a buffer
-		ob_start( );
-		$this->generate( );
-		$t_dot_source = ob_get_contents( );
-		ob_end_clean( );
+		ob_start();
+		$this->generate();
+		$t_dot_source = ob_get_contents();
+		ob_end_clean();
 
 		# There are three different ways to generate the output depending
 		# on the operating system and PHP version.
@@ -314,15 +314,15 @@ class Graph {
 
 					# Headers were requested, use another output buffer
 					# to retrieve the size for Content-Length.
-					ob_start( );
-					echo base64_decode( $t_dot_output->ToBase64String( ) );
-					header( 'Content-Length: ' . ob_get_length( ) );
-					ob_end_flush( );
+					ob_start();
+					echo base64_decode( $t_dot_output->ToBase64String() );
+					header( 'Content-Length: ' . ob_get_length() );
+					ob_end_flush();
 				}
 				else {
 
 					# No need for headers, send output directly.
-					echo base64_decode( $ret->ToBase64String( ) );
+					echo base64_decode( $ret->ToBase64String() );
 				}
 			}
 			else {
@@ -373,12 +373,12 @@ class Graph {
 
 					# Headers were requested, use another output buffer to
 					# retrieve the size for Content-Length.
-					ob_start( );
+					ob_start();
 					while( !feof( $t_pipes[1] ) ) {
 						echo fgets( $t_pipes[1], 1024 );
 					}
-					header( 'Content-Length: ' . ob_get_length( ) );
-					ob_end_flush( );
+					header( 'Content-Length: ' . ob_get_length() );
+					ob_end_flush();
 				}
 				else {
 
@@ -400,7 +400,7 @@ class Graph {
 			return '';
 		}
 
-		$t_result = array( );
+		$t_result = array();
 
 		foreach( $p_attributes as $t_name => $t_value ) {
 			if( !ereg( "[a-zA-Z]+", $t_name ) ) {
@@ -424,7 +424,7 @@ class Graph {
 	}
 
 	# PROTECTED function to print graph attributes and defaults.
-	function _print_graph_defaults( ) {
+	function _print_graph_defaults() {
 		foreach( $this->attributes as $t_name => $t_value ) {
 			if( !ereg( "[a-zA-Z]+", $t_name ) ) {
 				continue;
@@ -459,15 +459,15 @@ class Graph {
 class Digraph extends Graph {
 
 	# Constructor for Digraph objects.
-	function Digraph( $p_name = 'G', $p_attributes = array( ), $p_tool = 'dot', $p_com_module = 'WinGraphviz.DOT' ) {
+	function Digraph( $p_name = 'G', $p_attributes = array(), $p_tool = 'dot', $p_com_module = 'WinGraphviz.DOT' ) {
 		parent::Graph( $p_name, $p_attributes, $p_tool, $p_com_module );
 	}
 
 	# Generates a directed graph representation (suitable for dot).
-	function generate( ) {
+	function generate() {
 		echo 'digraph ' . $this->name . ' {' . "\n";
 
-		$this->_print_graph_defaults( );
+		$this->_print_graph_defaults();
 
 		foreach( $this->nodes as $t_name => $t_attr ) {
 			$t_name = '"' . addcslashes( $t_name, "\0..\37\"\\" ) . '"';

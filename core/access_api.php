@@ -38,8 +38,8 @@ require_once( $t_core_dir . 'project_api.php' );
 # Function to be called when a user is attempting to access a page that
 # he/she is not authorised to.  This outputs an access denied message then
 # re-directs to the mainpage.
-function access_denied( ) {
-	if( !auth_is_user_authenticated( ) ) {
+function access_denied() {
+	if( !auth_is_user_authenticated() ) {
 		if( basename( $_SERVER['SCRIPT_NAME'] ) != 'login_page.php' ) {
 			$t_return_page = $_SERVER['PHP_SELF'];
 			if( isset( $_SERVER['QUERY_STRING'] ) ) {
@@ -50,7 +50,7 @@ function access_denied( ) {
 		}
 	}
 	else {
-		if( auth_get_current_user_id( ) == user_get_id_by_name( config_get_global( 'anonymous_account' ) ) ) {
+		if( auth_get_current_user_id() == user_get_id_by_name( config_get_global( 'anonymous_account' ) ) ) {
 			if( basename( $_SERVER['SCRIPT_NAME'] ) != 'login_page.php' ) {
 				$t_return_page = $_SERVER['PHP_SELF'];
 				if( isset( $_SERVER['QUERY_STRING'] ) ) {
@@ -82,9 +82,9 @@ function access_denied( ) {
 # SECURITY NOTE: cache globals are initialized here to prevent them
 #   being spoofed if register_globals is turned on
 
-$g_cache_access_matrix = array( );
-$g_cache_access_matrix_project_ids = array( );
-$g_cache_access_matrix_user_ids = array( );
+$g_cache_access_matrix = array();
+$g_cache_access_matrix_project_ids = array();
+$g_cache_access_matrix_user_ids = array();
 
 # --------------------
 function access_cache_matrix_project( $p_project_id ) {
@@ -93,7 +93,7 @@ function access_cache_matrix_project( $p_project_id ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
 	if( ALL_PROJECTS == $c_project_id ) {
-		return array( );
+		return array();
 	}
 
 	if( !in_array( (int) $p_project_id, $g_cache_access_matrix_project_ids ) ) {
@@ -101,7 +101,7 @@ function access_cache_matrix_project( $p_project_id ) {
 
 		$query = "SELECT user_id, access_level
 					  FROM $t_project_user_list_table
-					  WHERE project_id=" . db_param( );
+					  WHERE project_id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_project_id ) );
 		$count = db_num_rows( $result );
 		for( $i = 0;$i < $count;$i++ ) {
@@ -113,7 +113,7 @@ function access_cache_matrix_project( $p_project_id ) {
 		$g_cache_access_matrix_project_ids[] = (int) $p_project_id;
 	}
 
-	$t_results = array( );
+	$t_results = array();
 
 	foreach( $g_cache_access_matrix as $t_user ) {
 		if( isset( $t_user[(int) $p_project_id] ) ) {
@@ -134,13 +134,13 @@ function access_cache_matrix_user( $p_user_id ) {
 
 		$query = "SELECT project_id, access_level
 					  FROM $t_project_user_list_table
-					  WHERE user_id=" . db_param( );
+					  WHERE user_id=" . db_param();
 		$result = db_query_bound( $query, Array( $c_user_id ) );
 
 		$count = db_num_rows( $result );
 
 		# make sure we always have an array to return
-		$g_cache_access_matrix[(int) $p_user_id] = array( );
+		$g_cache_access_matrix[(int) $p_user_id] = array();
 
 		for( $i = 0;$i < $count;$i++ ) {
 			$row = db_fetch_array( $result );
@@ -177,13 +177,13 @@ function access_compare_level( $p_user_access_level, $p_threshold = NOBODY ) {
 #  overrides they might have at a project level
 function access_get_global_level( $p_user_id = null ) {
 	if( $p_user_id === null ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	# Deal with not logged in silently in this case
 	# @@@ we may be able to remove this and just error
 	#     and once we default to anon login, we can remove it for sure
-	if( !auth_is_user_authenticated( ) ) {
+	if( !auth_is_user_authenticated() ) {
 		return false;
 	}
 
@@ -201,7 +201,7 @@ function access_has_global_level( $p_access_level, $p_user_id = null ) {
 	}
 
 	if( $p_user_id === null ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	$t_access_level = access_get_global_level( $p_user_id );
@@ -213,7 +213,7 @@ function access_has_global_level( $p_access_level, $p_user_id = null ) {
 #  and deny access to the page if not
 function access_ensure_global_level( $p_access_level, $p_user_id = null ) {
 	if( !access_has_global_level( $p_access_level, $p_user_id ) ) {
-		access_denied( );
+		access_denied();
 	}
 }
 
@@ -227,16 +227,16 @@ function access_get_project_level( $p_project_id = null, $p_user_id = null ) {
 	# Deal with not logged in silently in this case
 	# @@@ we may be able to remove this and just error
 	#     and once we default to anon login, we can remove it for sure
-	if( !auth_is_user_authenticated( ) ) {
+	if( !auth_is_user_authenticated() ) {
 		return ANYBODY;
 	}
 
 	if( null === $p_user_id ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	if( null === $p_project_id ) {
-		$p_project_id = helper_get_current_project( );
+		$p_project_id = helper_get_current_project();
 	}
 
 	$t_global_access_level = access_get_global_level( $p_user_id );
@@ -287,10 +287,10 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
 	}
 
 	if( null === $p_user_id ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 	if( null === $p_project_id ) {
-		$p_project_id = helper_get_current_project( );
+		$p_project_id = helper_get_current_project();
 	}
 
 	$t_access_level = access_get_project_level( $p_project_id, $p_user_id );
@@ -302,7 +302,7 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
 #  and deny access to the page if not
 function access_ensure_project_level( $p_access_level, $p_project_id = null, $p_user_id = null ) {
 	if( !access_has_project_level( $p_access_level, $p_project_id, $p_user_id ) ) {
-		access_denied( );
+		access_denied();
 	}
 }
 
@@ -316,11 +316,11 @@ function access_has_any_project( $p_access_level, $p_user_id = null ) {
 	}
 
 	if( null === $p_user_id ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	$t_access = false;
-	$t_projects = project_get_all_rows( );
+	$t_projects = project_get_all_rows();
 	foreach( $t_projects as $t_project ) {
 		$t_access = $t_access || access_has_project_level( $p_access_level, $t_project['id'], $p_user_id );
 	}
@@ -338,12 +338,12 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 	# Deal with not logged in silently in this case
 	# @@@ we may be able to remove this and just error
 	#     and once we default to anon login, we can remove it for sure
-	if( !auth_is_user_authenticated( ) ) {
+	if( !auth_is_user_authenticated() ) {
 		return false;
 	}
 
 	if( $p_user_id === null ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
@@ -368,7 +368,7 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 #  and deny access to the page if not
 function access_ensure_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 	if( !access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id ) ) {
-		access_denied( );
+		access_denied();
 	}
 }
 
@@ -379,7 +379,7 @@ function access_ensure_bug_level( $p_access_level, $p_bug_id, $p_user_id = null 
 #  against that bug
 function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = null ) {
 	if( null === $p_user_id ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	# If the bug is private and the user is not the reporter, then the
@@ -397,14 +397,14 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
 #  and deny access to the page if not
 function access_ensure_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = null ) {
 	if( !access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id ) ) {
-		access_denied( );
+		access_denied();
 	}
 }
 
 # Check if the current user can close the specified bug
 function access_can_close_bug( $p_bug_id, $p_user_id = null ) {
 	if( null === $p_user_id ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	# If allow_reporter_close is enabled, then reporters can always close
@@ -420,14 +420,14 @@ function access_can_close_bug( $p_bug_id, $p_user_id = null ) {
 # See access_can_close_bug() for details.
 function access_ensure_can_close_bug( $p_bug_id, $p_user_id = null ) {
 	if( !access_can_close_bug( $p_bug_id, $p_user_id ) ) {
-		access_denied( );
+		access_denied();
 	}
 }
 
 # Check if the current user can reopen the specified bug
 function access_can_reopen_bug( $p_bug_id, $p_user_id = null ) {
 	if( $p_user_id === null ) {
-		$p_user_id = auth_get_current_user_id( );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	# If allow_reporter_reopen is enabled, then reporters can always reopen
@@ -443,7 +443,7 @@ function access_can_reopen_bug( $p_bug_id, $p_user_id = null ) {
 # See access_can_reopen_bug() for details.
 function access_ensure_can_reopen_bug( $p_bug_id, $p_user_id = null ) {
 	if( !access_can_reopen_bug( $p_bug_id, $p_user_id ) ) {
-		access_denied( );
+		access_denied();
 	}
 }
 

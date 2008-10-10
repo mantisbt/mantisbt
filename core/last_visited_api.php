@@ -34,8 +34,8 @@ require_once( $t_core_dir . 'tokens_api.php' );
  * @return true: enabled; false: otherwise.
  * @access public
  */
-function last_visited_enabled( ) {
-	return !( OFF == config_get( 'recently_visited' ) || current_user_is_anonymous( ) );
+function last_visited_enabled() {
+	return !( OFF == config_get( 'recently_visited' ) || current_user_is_anonymous() );
 }
 
 /**
@@ -48,7 +48,7 @@ function last_visited_enabled( ) {
  * @access public
  */
 function last_visited_issue( $p_issue_id, $p_user_id = null ) {
-	if( !last_visited_enabled( ) ) {
+	if( !last_visited_enabled() ) {
 		return;
 	}
 
@@ -81,7 +81,7 @@ function last_visited_get_array( $p_user_id = null ) {
 	$t_value = token_get_value( TOKEN_LAST_VISITED, $p_user_id );
 
 	if( is_null( $t_value ) ) {
-		return array( );
+		return array();
 	}
 
 	# we don't slice the array here to optimise for performance.  If the user reduces the number of recently

@@ -27,10 +27,10 @@
 
 # Cache of localization strings in the language specified by the last
 # lang_load call
-$g_lang_strings = array( );
+$g_lang_strings = array();
 
 # stack for language overrides
-$g_lang_overrides = array( );
+$g_lang_overrides = array();
 
 # To be used in custom_strings_inc.php :
 $g_active_language = '';
@@ -71,7 +71,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 		# this may be loaded multiple times, once per language
 	}
 
-	$t_vars = get_defined_vars( );
+	$t_vars = get_defined_vars();
 
 	foreach( array_keys( $t_vars ) as $t_var ) {
 		$t_lang_var = ereg_replace( '^s_', '', $t_var );
@@ -91,14 +91,14 @@ function lang_load( $p_lang, $p_dir = null ) {
 
 # ------------------
 # Determine the preferred language
-function lang_get_default( ) {
+function lang_get_default() {
 	global $g_active_language;
 
 	$t_lang = false;
 
 	# Confirm that the user's language can be determined
-	if( function_exists( 'auth_is_user_authenticated' ) && auth_is_user_authenticated( ) ) {
-		$t_lang = user_pref_get_language( auth_get_current_user_id( ) );
+	if( function_exists( 'auth_is_user_authenticated' ) && auth_is_user_authenticated() ) {
+		$t_lang = user_pref_get_language( auth_get_current_user_id() );
 	}
 
 	# Otherwise fall back to default
@@ -107,7 +107,7 @@ function lang_get_default( ) {
 	}
 
 	if( 'auto' == $t_lang ) {
-		$t_lang = lang_map_auto( );
+		$t_lang = lang_map_auto();
 	}
 
 	# Remember the language
@@ -117,7 +117,7 @@ function lang_get_default( ) {
 }
 
 
-function lang_map_auto( ) {
+function lang_map_auto() {
 	$t_lang = config_get( 'fallback_language' );
 
 	if( isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
@@ -125,7 +125,7 @@ function lang_map_auto( ) {
 		$t_auto_map = config_get( 'language_auto_map' );
 
 		# Expand language map
-		$t_auto_map_exp = array( );
+		$t_auto_map_exp = array();
 		foreach( $t_auto_map as $t_encs => $t_enc_lang ) {
 			$t_encs_arr = explode( ',', $t_encs );
 
@@ -207,7 +207,7 @@ function lang_push( $p_lang = null ) {
 }
 
 # pop a language onto the stack and return it
-function lang_pop( ) {
+function lang_pop() {
 	global $g_lang_overrides;
 
 	return array_pop( $g_lang_overrides );
@@ -215,7 +215,7 @@ function lang_pop( ) {
 
 # return value on top of the language stack
 #  return default if stack is empty
-function lang_get_current( ) {
+function lang_get_current() {
 	global $g_lang_overrides;
 
 	$t_count_overrides = count( $g_lang_overrides );
@@ -223,7 +223,7 @@ function lang_get_current( ) {
 		$t_lang = $g_lang_overrides[$t_count_overrides - 1];
 	}
 	else {
-		$t_lang = lang_get_default( );
+		$t_lang = lang_get_default();
 	}
 
 	return $t_lang;
@@ -244,7 +244,7 @@ function lang_get( $p_string, $p_lang = null ) {
 	$t_lang = $p_lang;
 
 	if( null === $t_lang ) {
-		$t_lang = lang_get_current( );
+		$t_lang = lang_get_current();
 	}
 
 	# Now we'll make sure that the requested language is loaded
@@ -262,7 +262,7 @@ function lang_get( $p_string, $p_lang = null ) {
 		return $g_lang_strings[$t_lang][$p_string];
 	}
 	else {
-		$t_plugin_current = plugin_get_current( );
+		$t_plugin_current = plugin_get_current();
 		if( !is_null( $t_plugin_current ) ) {
 			lang_load( $t_lang, config_get( 'plugin_path' ) . $t_plugin_current . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR );
 			if( lang_exists( $p_string, $t_lang ) ) {
@@ -299,7 +299,7 @@ function lang_get_defaulted( $p_string, $p_default = null, $p_lang = null ) {
 	$t_lang = $p_lang;
 
 	if( null === $t_lang ) {
-		$t_lang = lang_get_current( );
+		$t_lang = lang_get_current();
 	}
 
 	# Now we'll make sure that the requested language is loaded

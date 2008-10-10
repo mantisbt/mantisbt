@@ -29,7 +29,7 @@
 define( 'PHP_MIN_VERSION', '5.1.0' );
 
 # cache array of comparisons
-$g_cached_version = array( );
+$g_cached_version = array();
 
 # Returns true if the current PHP version is higher than the one
 #  specified in the given string
@@ -40,7 +40,7 @@ function php_version_at_least( $p_version_string ) {
 		return $g_cached_version[$p_version_string];
 	}
 
-	$t_curver = array_pad( explode( '.', phpversion( ) ), 3, 0 );
+	$t_curver = array_pad( explode( '.', phpversion() ), 3, 0 );
 	$t_minver = array_pad( explode( '.', $p_version_string ), 3, 0 );
 
 	for( $i = 0;$i < 3;$i = $i + 1 ) {
@@ -64,9 +64,9 @@ function php_version_at_least( $p_version_string ) {
 
 # Enforce our minimum requirements
 if( !php_version_at_least( PHP_MIN_VERSION ) ) {
-	@ob_end_clean( );
-	PRINT '<b>FATAL ERROR: Your version of PHP is too old.  Mantis requires PHP version ' . PHP_MIN_VERSION . ' or newer</b><br />Your version of PHP is version ' . phpversion( );
-	die( );
+	@ob_end_clean();
+	PRINT '<b>FATAL ERROR: Your version of PHP is too old.  Mantis requires PHP version ' . PHP_MIN_VERSION . ' or newer</b><br />Your version of PHP is version ' . phpversion();
+	die();
 }
 
 ini_set( 'magic_quotes_runtime', 0 );

@@ -28,12 +28,12 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 	$t_bug_count = 0;
 
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, null, $p_project_id );
-	$t_result = array( );
+	$t_result = array();
 
 	foreach( $t_rows as $t_issue_data ) {
 		$t_id = $t_issue_data['id'];
 
-		$t_issue = array( );
+		$t_issue = array();
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = mci_enum_get_array_by_id( $t_issue_data['view_state'], 'view_state', $t_lang );
 		$t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data['last_updated'] );
@@ -98,10 +98,10 @@ function mc_projects_get_user_accessible( $p_username, $p_password ) {
 
 	$t_lang = mci_get_user_lang( $t_user_id );
 
-	$t_result = array( );
+	$t_result = array();
 	foreach( user_get_accessible_projects( $t_user_id ) as $t_project_id ) {
 		$t_project_row = project_cache_row( $t_project_id );
-		$t_project = array( );
+		$t_project = array();
 		$t_project['id'] = $t_project_id;
 		$t_project['name'] = $t_project_row['name'];
 		$t_project['status'] = mci_enum_get_array_by_id( $t_project_row['status'], 'project_status', $t_lang );
@@ -140,7 +140,7 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	$t_result = array( );
+	$t_result = array();
 	$t_cat_array = category_get_all_rows( $p_project_id );
 	foreach( $t_cat_array as $t_category_row ) {
 		$t_result[] = $t_category_row['name'];
@@ -171,7 +171,7 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	$t_result = array( );
+	$t_result = array();
 	foreach( version_get_all_rows( $p_project_id, VERSION_ALL ) as $t_version ) {
 		$t_result[] = array(
 			'id' => $t_version['id'],
@@ -209,7 +209,7 @@ function mc_project_get_released_versions( $p_username, $p_password, $p_project_
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	$t_result = array( );
+	$t_result = array();
 
 	foreach( version_get_all_rows( $p_project_id, VERSION_RELEASED ) as $t_version ) {
 		$t_result[] = array(
@@ -248,7 +248,7 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	$t_result = array( );
+	$t_result = array();
 
 	foreach( version_get_all_rows( $p_project_id, VERSION_FUTURE ) as $t_version ) {
 		$t_result[] = array(
@@ -385,7 +385,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_
 		$v_released = VERSION_RELEASED;
 	}
 
-	$t_version_data = new VersionData( );
+	$t_version_data = new VersionData();
 	$t_version_data->id = $p_version_id;
 	$t_version_data->project_id = $v_project_id;
 	$t_version_data->version = $v_name;
@@ -455,7 +455,7 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	$t_result = array( );
+	$t_result = array();
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $p_project_id );
 
 	foreach( custom_field_get_linked_ids( $p_project_id ) as $t_id ) {
@@ -505,7 +505,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	}
 
 	# Check if project documentation feature is enabled.
-	if( OFF == config_get( 'enable_project_documentation' ) || !file_is_uploading_enabled( ) ) {
+	if( OFF == config_get( 'enable_project_documentation' ) || !file_is_uploading_enabled() ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
@@ -568,11 +568,11 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	$result = db_query( $query );
 	$num_files = db_num_rows( $result );
 
-	$t_result = array( );
+	$t_result = array();
 	for( $i = 0;$i < $num_files;$i++ ) {
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
-		$t_attachment = array( );
+		$t_attachment = array();
 		$t_attachment['id'] = $v_id;
 		$t_attachment['filename'] = $v_filename;
 		$t_attachment['title'] = $v_title;
@@ -580,7 +580,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		$t_attachment['size'] = $v_filesize;
 		$t_attachment['content_type'] = $v_file_type;
 		$t_attachment['date_submitted'] = timestamp_to_iso8601( db_unixtimestamp( $v_date_added ) );
-		$t_attachment['download_url'] = mci_get_mantis_path( ) . 'file_download.php?file_id=' . $v_id . '&amp;type=doc';
+		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $v_id . '&amp;type=doc';
 		$t_result[] = $t_attachment;
 	}
 
@@ -594,7 +594,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
  * @return Array an Array containing the id and the name of the project.
  */
 function mci_project_as_array_by_id( $p_project_id ) {
-	$t_result = array( );
+	$t_result = array();
 	$t_result['id'] = $p_project_id;
 	$t_result['name'] = project_get_name( $p_project_id );
 	return $t_result;
@@ -694,12 +694,12 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 	$t_bug_count = 0;
 
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, null, $p_project_id );
-	$t_result = array( );
+	$t_result = array();
 
 	foreach( $t_rows as $t_issue_data ) {
 		$t_id = $t_issue_data['id'];
 
-		$t_issue = array( );
+		$t_issue = array();
 
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = $t_issue_data['view_state'];
@@ -743,12 +743,12 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	$t_users = array( );
+	$t_users = array();
 
 	$t_users = project_get_all_user_rows( $p_project_id, $p_access ); # handles ALL_PROJECTS case
 
-	$t_display = array( );
-	$t_sort = array( );
+	$t_display = array();
+	$t_sort = array();
 	$t_show_realname = ( ON == config_get( 'show_realname' ) );
 	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
 	foreach( $t_users as $t_user ) {
@@ -769,7 +769,7 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 	}
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
 
-	$t_result = array( );
+	$t_result = array();
 	for( $i = 0;$i < count( $t_sort );$i++ ) {
 		$t_row = $t_users[$i];
 

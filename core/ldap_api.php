@@ -85,7 +85,7 @@ function ldap_email_from_username( $p_username ) {
 		'mail',
 		'dn',
 	);
-	$t_ds = ldap_connect_bind( );
+	$t_ds = ldap_connect_bind();
 
 	$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
 
@@ -109,7 +109,7 @@ function ldap_has_group( $p_user_id, $p_group ) {
 		'dn',
 		'assignedgroup',
 	);
-	$t_ds = ldap_connect_bind( );
+	$t_ds = ldap_connect_bind();
 
 	$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
 	$t_entries = ldap_count_entries( $t_ds, $t_sr );
@@ -145,7 +145,7 @@ function ldap_authenticate( $p_user_id, $p_password ) {
 		$t_ldap_uid_field,
 		'dn',
 	);
-	$t_ds = ldap_connect_bind( );
+	$t_ds = ldap_connect_bind();
 
 	# Search for the user id
 	$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );

@@ -42,7 +42,7 @@ require_once( 'adodb/adodb.inc.php' );
  * An array in which all executed queries are stored.  This is used for profiling
  * @global array $g_queries_array
  	 */
-$g_queries_array = array( );
+$g_queries_array = array();
 
 /**
  * Stores whether a database connection was succesfully opened.
@@ -95,13 +95,13 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 	}
 	else {
 		$g_db = ADONewConnection( $p_dsn );
-		$t_result = $g_db->IsConnected( );
+		$t_result = $g_db->IsConnected();
 	}
 
 	if( $t_result ) {
 
 		# For MySQL, the charset for the connection needs to be specified.
-		if( db_is_mysql( ) ) {
+		if( db_is_mysql() ) {
 
 			# @@@ Is there a way to translate any charset name to MySQL format? e.g. remote the dashes?
 			# @@@ Is this needed for other databases?
@@ -109,17 +109,17 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 				db_query_bound( 'SET NAMES UTF8' );
 			}
 		}
-		elseif( db_is_db2( ) && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
+		elseif( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
 			$t_result2 = db_query_bound( 'set schema ' . $p_db_schema );
 			if( $t_result2 === false ) {
-				db_error( );
+				db_error();
 				trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
 				return false;
 			}
 		}
 	}
 	else {
-		db_error( );
+		db_error();
 		trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
 		return false;
 	}
@@ -134,7 +134,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
  * @global stores database connection state
  * @return bool indicating if the a database connection has been made
  */
-function db_is_connected( ) {
+function db_is_connected() {
 	global $g_db_connected;
 
 	return $g_db_connected;
@@ -144,7 +144,7 @@ function db_is_connected( ) {
  * Checks if the database driver is MySQL
  * @return bool true if mysql
  */
-function db_is_mysql( ) {
+function db_is_mysql() {
 	$t_db_type = config_get_global( 'db_type' );
 
 	switch( $t_db_type ) {
@@ -160,7 +160,7 @@ function db_is_mysql( ) {
  * Checks if the database driver is PostgreSQL
  * @return bool true if postgres
  */
-function db_is_pgsql( ) {
+function db_is_pgsql() {
 	$t_db_type = config_get_global( 'db_type' );
 
 	switch( $t_db_type ) {
@@ -178,7 +178,7 @@ function db_is_pgsql( ) {
  * Checks if the database driver is DB2
  * @return bool true if db2
  */
-function db_is_db2( ) {
+function db_is_db2() {
 	$t_db_type = config_get_global( 'db_type' );
 
 	switch( $t_db_type ) {
@@ -205,9 +205,9 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 	global $g_queries_array, $g_db, $g_db_log_queries;
 
 	if( ON == $g_db_log_queries ) {
-		$t_start = microtime_float( );
+		$t_start = microtime_float();
 
-		$t_backtrace = debug_backtrace( );
+		$t_backtrace = debug_backtrace();
 		$t_caller = basename( $t_backtrace[0]['file'] );
 		$t_caller .= ":" . $t_backtrace[0]['line'];
 
@@ -230,7 +230,7 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 	}
 
 	if( ON == $g_db_log_queries ) {
-		$t_elapsed = number_format( microtime_float( ) - $t_start, 4 );
+		$t_elapsed = number_format( microtime_float() - $t_start, 4 );
 
 		array_push( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
 	}
@@ -263,9 +263,9 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 	if( ON == $g_db_log_queries ) {
 		$t_db_type = config_get_global( 'db_type' );
 
-		$t_start = microtime_float( );
+		$t_start = microtime_float();
 
-		$t_backtrace = debug_backtrace( );
+		$t_backtrace = debug_backtrace();
 		$t_caller = basename( $t_backtrace[0]['file'] );
 		$t_caller .= ":" . $t_backtrace[0]['line'];
 
@@ -280,7 +280,7 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 		}
 	}
 
-	if( $arr_parms != null && db_is_pgsql( ) ) {
+	if( $arr_parms != null && db_is_pgsql() ) {
 		$params = count( $arr_parms );
 		for( $i = 0;$i < $params;$i++ ) {
 			if( $arr_parms[$i] === false ) {
@@ -297,7 +297,7 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 	}
 
 	if( ON == $g_db_log_queries ) {
-		$t_elapsed = number_format( microtime_float( ) - $t_start, 4 );
+		$t_elapsed = number_format( microtime_float() - $t_start, 4 );
 
 		$lastoffset = 0;
 		$i = 1;
@@ -358,7 +358,7 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
  * Generate a string to insert a parameter into a database query string
  * @return string 'wildcard' matching a paramater in correct ordered format for the current database.
  */
-function db_param( ) {
+function db_param() {
 	global $g_db;
 	global $g_db_param_count;
 
@@ -373,7 +373,7 @@ function db_param( ) {
 function db_num_rows( $p_result ) {
 	global $g_db;
 
-	return $p_result->RecordCount( );
+	return $p_result->RecordCount();
 }
 
 /**
@@ -381,10 +381,10 @@ function db_num_rows( $p_result ) {
  * @param ADORecordSet $p_result Database Query Record Set to retrieve affected rows for.
  * @return int Affected Rows
  */
-function db_affected_rows( ) {
+function db_affected_rows() {
 	global $g_db;
 
-	return $g_db->Affected_Rows( );
+	return $g_db->Affected_Rows();
 }
 
 /**
@@ -402,13 +402,13 @@ function db_fetch_array( &$p_result ) {
 	# mysql obeys FETCH_MODE_BOTH, hence ->fields works, other drivers do not support this
 	if( $g_db_type == 'mysql' || $g_db_type == 'odbc_mssql' ) {
 		$t_array = $p_result->fields;
-		$p_result->MoveNext( );
+		$p_result->MoveNext();
 		return $t_array;
 	}
 	else {
 		$t_row = $p_result->GetRowAssoc( false );
 
-		for( $i = 0;$i < $p_result->FieldCount( );$i++ ) {
+		for( $i = 0;$i < $p_result->FieldCount();$i++ ) {
 			$t_field = $p_result->FetchField( $i );
 			switch( $t_field->type ) {
 				case 'bool':
@@ -425,7 +425,7 @@ function db_fetch_array( &$p_result ) {
 					break;
 			}
 		}
-		$p_result->MoveNext( );
+		$p_result->MoveNext();
 		return $t_row;
 	}
 }
@@ -442,7 +442,7 @@ function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
 
 	if( $p_result && ( db_num_rows( $p_result ) > 0 ) ) {
 		$p_result->Move( $p_index1 );
-		$t_result = $p_result->GetArray( );
+		$t_result = $p_result->GetArray();
 
 		if( isset( $t_result[0][$p_index2] ) ) {
 			return $t_result[0][$p_index2];
@@ -465,12 +465,12 @@ function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
 function db_insert_id( $p_table = null ) {
 	global $g_db;
 
-	if( isset( $p_table ) && db_is_pgsql( ) ) {
+	if( isset( $p_table ) && db_is_pgsql() ) {
 		$query = "SELECT currval('" . $p_table . "_id_seq')";
 		$result = db_query_bound( $query );
 		return db_result( $result );
 	}
-	return $g_db->Insert_ID( );
+	return $g_db->Insert_ID();
 }
 
 /**
@@ -487,7 +487,7 @@ function db_table_exists( $p_table_name ) {
 		// no tables found
 	}
 
-	if( db_is_db2( ) ) {
+	if( db_is_db2() ) {
 
 		// must pass schema
 		$t_tables = $g_db->MetaTables( 'TABLE', false, '', $g_db_schema );
@@ -560,10 +560,10 @@ function db_field_names( $p_table_name ) {
  * @return int last error number
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
  */
-function db_error_num( ) {
+function db_error_num() {
 	global $g_db;
 
-	return $g_db->ErrorNo( );
+	return $g_db->ErrorNo();
 }
 
 /**
@@ -572,10 +572,10 @@ function db_error_num( ) {
  * @return string last error string
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
  */
-function db_error_msg( ) {
+function db_error_msg() {
 	global $g_db;
 
-	return $g_db->ErrorMsg( );
+	return $g_db->ErrorMsg();
 }
 
 /**
@@ -584,10 +584,10 @@ function db_error_msg( ) {
  */
 function db_error( $p_query = null ) {
 	if( null !== $p_query ) {
-		error_parameters( db_error_num( ), db_error_msg( ), $p_query );
+		error_parameters( db_error_num(), db_error_msg(), $p_query );
 	}
 	else {
-		error_parameters( db_error_num( ), db_error_msg( ) );
+		error_parameters( db_error_num(), db_error_msg() );
 	}
 }
 
@@ -595,10 +595,10 @@ function db_error( $p_query = null ) {
  * close the connection.
  * Not really necessary most of the time since a connection is automatically closed when a page finishes loading.
  */
-function db_close( ) {
+function db_close() {
 	global $g_db;
 
-	$t_result = $g_db->Close( );
+	$t_result = $g_db->Close();
 }
 
 /**
@@ -747,10 +747,10 @@ function db_prepare_bool( $p_bool ) {
  * @todo add param bool $p_gmt whether to use GMT or current timezone (default false)
  * @return string Formatted Date for DB insertion e.g. 1970-01-01 00:00:00 ready for database insertion
  */
-function db_now( ) {
+function db_now() {
 	global $g_db;
 
-	return $g_db->BindTimeStamp( time( ) );
+	return $g_db->BindTimeStamp( time() );
 }
 
 /**
@@ -767,7 +767,7 @@ function db_timestamp( $p_date = null, $p_gmt = false ) {
 		$p_timestamp = $g_db->UnixTimeStamp( $p_date, $p_gmt );
 	}
 	else {
-		$p_timestamp = time( );
+		$p_timestamp = time();
 	}
 	return $g_db->BindTimeStamp( $p_timestamp );
 }
@@ -786,7 +786,7 @@ function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
 		$p_timestamp = $g_db->UnixTimeStamp( $p_date, $p_gmt );
 	}
 	else {
-		$p_timestamp = time( );
+		$p_timestamp = time();
 	}
 	return $p_timestamp;
 }
@@ -805,7 +805,7 @@ function db_date( $p_timestamp = null, $p_gmt = false ) {
 		$p_date = $g_db->UserTimeStamp( $p_timestamp, 'Y-m-d H:i:s', $p_gmt );
 	}
 	else {
-		$p_date = $g_db->UserTimeStamp( time( ), 'Y-m-d H:i:s', $p_gmt );
+		$p_date = $g_db->UserTimeStamp( time(), 'Y-m-d H:i:s', $p_gmt );
 	}
 	return $p_date;
 }
@@ -814,7 +814,7 @@ function db_date( $p_timestamp = null, $p_gmt = false ) {
  * return a DB compatible date, representing a unixtime(0) + 1 second. Internally considered a NULL date
  * @return string Formatted Date for DB insertion e.g. 1970-01-01 00:00:00 ready for database insertion
  */
-function db_null_date( ) {
+function db_null_date() {
 	global $g_db;
 
 	return $g_db->BindTimestamp( $g_db->UserTimeStamp( 1, 'Y-m-d H:i:s', true ) );
@@ -841,12 +841,12 @@ function db_helper_like( $p_field_name, $p_case_sensitive = false ) {
 	$t_like_keyword = 'LIKE';
 
 	if( $p_case_sensitive === false ) {
-		if( db_is_pgsql( ) ) {
+		if( db_is_pgsql() ) {
 			$t_like_keyword = 'ILIKE';
 		}
 	}
 
-	return "($p_field_name $t_like_keyword " . db_param( ) . ')';
+	return "($p_field_name $t_like_keyword " . db_param() . ')';
 }
 
 /**
@@ -863,10 +863,10 @@ function db_helper_compare_days( $p_date1_id_or_column, $p_date2_id_or_column, $
 	$p_date1 = $p_date1_id_or_column;
 	$p_date2 = $p_date2_id_or_column;
 	if( is_int( $p_date1_id_or_column ) ) {
-		$p_date1 = db_param( );
+		$p_date1 = db_param();
 	}
 	if( is_int( $p_date2_id_or_column ) ) {
-		$p_date2 = db_param( );
+		$p_date2 = db_param();
 	}
 	switch( $t_db_type ) {
 		case 'mssql':
@@ -897,7 +897,7 @@ function db_helper_compare_days( $p_date1_id_or_column, $p_date2_id_or_column, $
  * count queries
  * @return int
  */
-function db_count_queries( ) {
+function db_count_queries() {
 	global $g_queries_array;
 
 	return count( $g_queries_array );
@@ -907,11 +907,11 @@ function db_count_queries( ) {
  * count unique queries
  * @return int
  */
-function db_count_unique_queries( ) {
+function db_count_unique_queries() {
 	global $g_queries_array;
 
 	$t_unique_queries = 0;
-	$t_shown_queries = array( );
+	$t_shown_queries = array();
 	foreach( $g_queries_array as $t_val_array ) {
 		if( !in_array( $t_val_array[0], $t_shown_queries ) ) {
 			$t_unique_queries++;
@@ -925,7 +925,7 @@ function db_count_unique_queries( ) {
  * get total time for queries
  * @return int
  */
-function db_time_queries( ) {
+function db_time_queries() {
 	global $g_queries_array;
 	$t_count = count( $g_queries_array );
 	$t_total = 0;
@@ -957,8 +957,8 @@ function db_get_table( $p_option ) {
  * get list database tables
  * @return array containing table names
  */
-function db_get_table_list( ) {
-	$t_tables = Array( );
+function db_get_table_list() {
+	$t_tables = Array();
 	foreach( $GLOBALS['g_db_table'] as $t_table ) {
 		$t_tables[] = config_eval( $t_table );
 	}

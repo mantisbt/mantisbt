@@ -29,7 +29,7 @@ require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'projax' . DIRECTORY_S
 # enables the projax library for this page.
 $g_enable_projax = true;
 
-$g_projax = new Projax( );
+$g_projax = new Projax();
 
 # Outputs an auto-complete field to the HTML form.  The supported attribute keys in the attributes array are:
 # class, size, maxlength, value, and tabindex.
@@ -43,7 +43,7 @@ function projax_autocomplete( $p_entrypoint, $p_field_name, $p_attributes_array 
 # Returns the array of the filtered strings, or an empty array.  If the input array has non-unique
 # entries, then the output one may contain duplicates.
 function projax_array_filter_by_prefix( $p_array, $p_prefix ) {
-	$t_matches = array( );
+	$t_matches = array();
 
 	foreach( $p_array as $t_entry ) {
 		if( strtolower( substr( $t_entry, 0, strlen( $p_prefix ) ) ) == strtolower( $p_prefix ) ) {

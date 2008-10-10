@@ -89,7 +89,7 @@ class UserPreferences {
 	var $email_bugnote_limit = NULL;
 	var $language = NULL;
 
-	function UserPreferences( ) {
+	function UserPreferences() {
 		$this->default_profile = 0;
 		$this->default_project = ALL_PROJECTS;
 	}
@@ -116,7 +116,7 @@ class UserPreferences {
 # SECURITY NOTE: cache globals are initialized here to prevent them
 #   being spoofed if register_globals is turned on
 
-$g_cache_user_pref = array( );
+$g_cache_user_pref = array();
 
 # --------------------
 # Cache a user preferences row if necessary and return the cached copy
@@ -134,7 +134,7 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 
 	$query = "SELECT *
 				  FROM $t_user_pref_table
-				  WHERE user_id=" . db_param( ) . " AND project_id=" . db_param( );
+				  WHERE user_id=" . db_param() . " AND project_id=" . db_param();
 	$result = db_query_bound( $query, Array( $p_user_id, $p_project_id ) );
 
 	if( 0 == db_num_rows( $result ) ) {
@@ -150,7 +150,7 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 	$row = db_fetch_array( $result );
 
 	if( !isset( $g_cache_user_pref[$p_user_id] ) ) {
-		$g_cache_user_pref[$p_user_id] = array( );
+		$g_cache_user_pref[$p_user_id] = array();
 	}
 
 	$g_cache_user_pref[$p_user_id][$p_project_id] = $row;
@@ -167,7 +167,7 @@ function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
 	if( null === $p_user_id ) {
-		$g_cache_user_pref = array( );
+		$g_cache_user_pref = array();
 	}
 	elseif( null === $p_project_id ) {
 		unset( $g_cache_user_pref[$c_user_id] );
@@ -214,7 +214,7 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
 	$t_vars = get_object_vars( $p_prefs );
-	$t_values = array( );
+	$t_values = array();
 
 	foreach( $t_vars as $var => $val ) {
 		array_push( $t_values, '\'' . db_prepare_string( $p_prefs->Get( $var ) ) . '\'' );
@@ -246,7 +246,7 @@ function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
 	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 	$t_vars = get_object_vars( $p_prefs );
 
-	$t_pairs = array( );
+	$t_pairs = array();
 
 	foreach( $t_vars as $var => $val ) {
 		if( is_bool( $p_prefs->$var ) ) {
@@ -285,8 +285,8 @@ function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
 	$query = "DELETE FROM $t_user_pref_table
-				  WHERE user_id=" . db_param( ) . " AND
-				  		project_id=" . db_param( );
+				  WHERE user_id=" . db_param() . " AND
+				  		project_id=" . db_param();
 	db_query_bound( $query, Array( $c_user_id, $c_project_id ) );
 
 	user_pref_clear_cache( $p_user_id, $p_project_id );
@@ -332,7 +332,7 @@ function user_pref_delete_project( $p_project_id ) {
 	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
 	$query = "DELETE FROM $t_user_pref_table
-				  WHERE project_id=" . db_param( );
+				  WHERE project_id=" . db_param();
 	db_query_bound( $query, Array( $c_project_id ) );
 
 	# db_query errors on failure so:
@@ -371,7 +371,7 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		if( false === $row ) {
 
 			# We use an empty array
-			$row = array( );
+			$row = array();
 		}
 	}
 
@@ -468,7 +468,7 @@ function user_pref_set( $p_user_id, $p_prefs, $p_project_id = ALL_PROJECTS ) {
 function user_pref_set_default( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 
 	# get a default preferences object
-	$t_prefs = new UserPreferences( );
+	$t_prefs = new UserPreferences();
 
 	return user_pref_set( $p_user_id, $t_prefs, $p_project_id );
 }

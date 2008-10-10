@@ -27,10 +27,10 @@ require_once( $t_core_path . 'string_api.php' );
 require_once( $t_core_path . 'date_api.php' );
 require_once( $t_core_path . 'icon_api.php' );
 
-$t_filter = current_user_get_bug_filter( );
+$t_filter = current_user_get_bug_filter();
 
 if( $t_filter === false ) {
-	$t_filter = filter_get_default( );
+	$t_filter = filter_get_default();
 }
 
 $t_sort = $t_filter['sort'];
@@ -333,8 +333,8 @@ $url_link_parameters['verify'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_
 $rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title] );
 
 # Improve performance by caching category data in one pass
-if( helper_get_current_project( ) == 0 ) {
-	$t_categories = array( );
+if( helper_get_current_project() == 0 ) {
+	$t_categories = array();
 	foreach( $rows as $t_row ) {
 		$t_categories[] = $t_row['category_id'];
 	}
@@ -456,7 +456,7 @@ echo "($v_start - $v_end / $t_bug_count)";
 		<br />
 		<?php
 	# type project name if viewing 'all projects' or bug is in subproject
-	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project( ) != $v_project_id ) {
+	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $v_project_id ) {
 		echo string_display( category_full_name( $v_category_id ) );
 	}
 	else {

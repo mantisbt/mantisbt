@@ -72,7 +72,7 @@ function print_test_row( $p_description, $p_pass ) {
 	echo '</tr>';
 }
 
-function test_bug_download_threshold( ) {
+function test_bug_download_threshold() {
 	$t_pass = true;
 
 	$t_view_threshold = config_get_global( 'view_attachments_threshold' );
@@ -94,7 +94,7 @@ function test_bug_download_threshold( ) {
 	return $t_pass;
 }
 
-function test_bug_attachments_allow_flags( ) {
+function test_bug_attachments_allow_flags() {
 	$t_pass = true;
 
 	$t_own_view = config_get_global( 'allow_view_own_attachments' );
@@ -116,7 +116,7 @@ function test_bug_attachments_allow_flags( ) {
 	return $t_pass;
 }
 
-$version = phpversion( );
+$version = phpversion();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -155,7 +155,7 @@ $version = phpversion( );
 		Mantis requires at least <b>PHP <?php echo PHP_MIN_VERSION?></b>. You are running <b>PHP <?php echo $version?>
 	</td>
 	<?php
-		$result = version_compare( phpversion( ), PHP_MIN_VERSION, '>=' );
+		$result = version_compare( phpversion(), PHP_MIN_VERSION, '>=' );
 if( false == $result ) {
 	print_test_result( BAD );
 }
@@ -182,8 +182,8 @@ else {
 </tr>
 
 <!-- Test DATABASE part 2 -->
-<?php if( db_is_connected( ) ) {
-	$t_serverinfo = $g_db->ServerInfo( )?>
+<?php if( db_is_connected() ) {
+	$t_serverinfo = $g_db->ServerInfo()?>
 <tr>
 	<td bgcolor="#ffffff">
 		Database Type (adodb)
@@ -235,7 +235,7 @@ else {
 
 <?php
 # Windows-only checks
-if( substr( php_uname( ), 0, 7 ) == 'Windows' ) {
+if( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 	?>
 <!-- Email Validation -->
 <tr>
@@ -296,8 +296,8 @@ while( list( $t_foo, $t_var ) = each( $t_vars ) ) {
 <?php
 }
 
-test_bug_download_threshold( );
-test_bug_attachments_allow_flags( );
+test_bug_download_threshold();
+test_bug_attachments_allow_flags();
 
 print_test_row( 'check mail configuration: send_reset_password = ON requires allow_blank_email = OFF',
 	( ( OFF == config_get_global( 'send_reset_password' ) ) || ( OFF == config_get_global( 'allow_blank_email' ) ) ) );
@@ -459,7 +459,7 @@ else {
 	$t_email_data->subject = 'Testing PHP mail() function';
 	$t_email_data->body = 'Your PHP mail settings appear to be correctly set.';
 	$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
-	$t_email_data->metadata['charset'] = lang_get( 'charset', lang_get_current( ) );
+	$t_email_data->metadata['charset'] = lang_get( 'charset', lang_get_current() );
 	$result = email_send( $t_email_data );
 
 	# $result = email_send( config_get_global( 'administrator_email' ), 'Testing PHP mail() function',	'Your PHP mail settings appear to be correctly set.');

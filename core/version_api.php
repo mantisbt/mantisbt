@@ -41,7 +41,7 @@ class VersionData {
 # Boolean queries and ensures
 # ===================================
 
-$g_cache_versions = array( );
+$g_cache_versions = array();
 
 # --------------------
 # Cache a version row if necessary and return the cached copy
@@ -60,7 +60,7 @@ function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 
 	$query = "SELECT *
 				  FROM $t_project_version_table
-				  WHERE id=" . db_param( );
+				  WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_version_id ) );
 
 	if( 0 == db_num_rows( $result ) ) {
@@ -127,7 +127,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 	$c_obsolete = db_prepare_bool( $p_obsolete );
 
 	if( null === $p_date_order ) {
-		$c_date_order = db_now( );
+		$c_date_order = db_now();
 	}
 	else {
 		$c_date_order = db_timestamp( $p_date_order );
@@ -140,7 +140,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 	$query = "INSERT INTO $t_project_version_table
 					( project_id, version, date_order, description, released, obsolete )
 				  VALUES
-					(" . db_param( ) . ', ' . db_param( ) . ', ' . db_param( ) . ', ' . db_param( ) . ', ' . db_param( ) . ', ' . db_param( ) . ' )';
+					(" . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	db_query_bound( $query, Array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released, $c_obsolete ) );
 
 	# db_query errors on failure so:
@@ -172,28 +172,28 @@ function version_update( $p_version_info ) {
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 	$query = "UPDATE $t_project_version_table
-				  SET version=" . db_param( ) . ",
-					description=" . db_param( ) . ",
-					released=" . db_param( ) . ",
-					date_order=" . db_param( ) . ",
-					obsolete=" . db_param( ) . "
-				  WHERE id=" . db_param( );
+				  SET version=" . db_param() . ",
+					description=" . db_param() . ",
+					released=" . db_param() . ",
+					date_order=" . db_param() . ",
+					obsolete=" . db_param() . "
+				  WHERE id=" . db_param();
 	db_query_bound( $query, Array( $c_version_name, $c_description, $c_released, $c_date_order, $c_obsolete, $c_version_id ) );
 
 	if( $c_version_name != $c_old_version_name ) {
 		$query = "UPDATE $t_bug_table
-					  SET version=" . db_param( ) . '
-					  WHERE ( project_id=' . db_param( ) . ') AND ( version=' . db_param( ) . ')';
+					  SET version=" . db_param() . '
+					  WHERE ( project_id=' . db_param() . ') AND ( version=' . db_param() . ')';
 		db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 		$query = "UPDATE $t_bug_table
-					  SET fixed_in_version=" . db_param( ) . '
-					  WHERE ( project_id=' . db_param( ) . ') AND ( fixed_in_version=' . db_param( ) . ')';
+					  SET fixed_in_version=" . db_param() . '
+					  WHERE ( project_id=' . db_param() . ') AND ( fixed_in_version=' . db_param() . ')';
 		db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 		$query = "UPDATE $t_bug_table
-					  SET target_version=" . db_param( ) . '
-					  WHERE ( project_id=' . db_param( ) . ') AND ( target_version=' . db_param( ) . ')';
+					  SET target_version=" . db_param() . '
+					  WHERE ( project_id=' . db_param() . ') AND ( target_version=' . db_param() . ')';
 		db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 		# @@@ We should consider using ids instead of names for foreign keys.  The main advantage of using the names are:
@@ -223,17 +223,17 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 	$query = "DELETE FROM $t_project_version_table
-				  WHERE id=" . db_param( );
+				  WHERE id=" . db_param();
 	db_query_bound( $query, Array( $c_version_id ) );
 
 	$query = "UPDATE $t_bug_table
-				  SET version=" . db_param( ) . "
-				  WHERE project_id=" . db_param( ) . " AND version=" . db_param( );
+				  SET version=" . db_param() . "
+				  WHERE project_id=" . db_param() . " AND version=" . db_param();
 	db_query_bound( $query, Array( $c_new_version, $c_project_id, $t_old_version ) );
 
 	$query = "UPDATE $t_bug_table
-				  SET fixed_in_version=" . db_param( ) . '
-				  WHERE ( project_id=' . db_param( ) . ' ) AND ( fixed_in_version=' . db_param( ) . ')';
+				  SET fixed_in_version=" . db_param() . '
+				  WHERE ( project_id=' . db_param() . ' ) AND ( fixed_in_version=' . db_param() . ')';
 	db_query_bound( $query, Array( $c_new_version, $c_project_id, $t_old_version ) );
 
 	# db_query errors on failure so:
@@ -249,18 +249,18 @@ function version_remove_all( $p_project_id ) {
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 	$query = "DELETE FROM $t_project_version_table
-	  			  WHERE project_id=" . db_param( );
+	  			  WHERE project_id=" . db_param();
 
 	db_query_bound( $query, Array( $c_project_id ) );
 
 	$query = "UPDATE $t_bug_table
 				  SET version=''
-				  WHERE project_id=" . db_param( );
+				  WHERE project_id=" . db_param();
 	db_query_bound( $query, Array( $c_project_id ) );
 
 	$query = "UPDATE $t_bug_table
 				  SET fixed_in_version=''
-				  WHERE project_id=" . db_param( );
+				  WHERE project_id=" . db_param();
 	db_query_bound( $query, Array( $c_project_id ) );
 
 	# db_query errors on failure so:
@@ -303,7 +303,7 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 
 	$result = db_query_bound( $query, $query_params );
 	$count = db_num_rows( $result );
-	$rows = array( );
+	$rows = array();
 	for( $i = 0;$i < $count;$i++ ) {
 		$row = db_fetch_array( $result );
 		$row['date_order'] = db_unixtimestamp( $row['date_order'] );
@@ -320,7 +320,7 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
 	$t_project_where = helper_project_specific_where( $p_project_id );
 
 	$t_param_count = 0;
-	$t_query_params = array( );
+	$t_query_params = array();
 
 	if( $p_released === null ) {
 		$t_released_where = '';
@@ -348,7 +348,7 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
 				  ORDER BY date_order DESC";
 	$result = db_query_bound( $query, $t_query_params );
 	$count = db_num_rows( $result );
-	$rows = array( );
+	$rows = array();
 	for( $i = 0;$i < $count;$i++ ) {
 		$row = db_fetch_array( $result );
 		$row['date_order'] = db_unixtimestamp( $row['date_order'] );
@@ -363,7 +363,7 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
 function version_get_id( $p_version, $p_project_id = null ) {
 	global $g_cache_versions;
 	if( $p_project_id === null ) {
-		$c_project_id = helper_get_current_project( );
+		$c_project_id = helper_get_current_project();
 	}
 	else {
 		$c_project_id = db_prepare_int( $p_project_id );
@@ -379,8 +379,8 @@ function version_get_id( $p_version, $p_project_id = null ) {
 
 	$query = "SELECT id
 					FROM $t_project_version_table
-					WHERE project_id=" . db_param( ) . " AND
-						version=" . db_param( );
+					WHERE project_id=" . db_param() . " AND
+						version=" . db_param();
 
 	$result = db_query_bound( $query, Array( $c_project_id, $p_version ) );
 

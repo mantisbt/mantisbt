@@ -25,7 +25,7 @@ access_ensure_global_level( ADMINISTRATOR );
 set_time_limit( 0 );
 
 if( function_exists( 'xdebug_disable' ) ) {
-	xdebug_disable( );
+	xdebug_disable();
 }
 
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'constant_inc.php' );
@@ -38,7 +38,7 @@ else {
 }
 
 if( function_exists( 'opendir' ) && function_exists( 'readdir' ) ) {
-	$t_lang_files = Array( );
+	$t_lang_files = Array();
 	if( $handle = opendir( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' ) ) {
 		while( false !== ( $file = readdir( $handle ) ) ) {
 			if( $file[0] != '.' && $file != 'langreadme.txt' && $file != 'CVS' && !is_dir( $file ) ) {
@@ -49,7 +49,7 @@ if( function_exists( 'opendir' ) && function_exists( 'readdir' ) ) {
 	}
 }
 else {
-	$t_lang_files = Array( );
+	$t_lang_files = Array();
 	foreach( $g_language_choices_arr as $t_lang ) {
 		if( $t_lang == 'auto' ) {
 			continue;
@@ -65,7 +65,7 @@ if( sizeof( $t_lang_files ) > 0 ) {
 		$t_short_name = $file;
 
 		echo "Testing language file '$t_short_name' (phase 1)...<br />";
-		flush( );
+		flush();
 
 		$file = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . $file;
 
@@ -76,14 +76,14 @@ if( sizeof( $t_lang_files ) > 0 ) {
 		}
 
 		echo "Testing language file '$t_short_name' (phase 2)...<br />";
-		flush( );
+		flush();
 
 		set_error_handler( 'lang_error_handler' );
-		ob_start( );
+		ob_start();
 		$result = eval( "require_once( '$file' );" );
-		$data = ob_get_contents( );;
-		ob_end_clean( );
-		restore_error_handler( );
+		$data = ob_get_contents();;
+		ob_end_clean();
+		restore_error_handler();
 
 		if( $result === false ) {
 			print_error( "FAILED: Language file '$t_short_name' failed at eval" );
@@ -97,7 +97,7 @@ if( sizeof( $t_lang_files ) > 0 ) {
 
 function checktoken( $file ) {
 	$in_php_code = false;
-	$variables = Array( );
+	$variables = Array();
 	$current_var = null;
 	$last_token = 0;
 	$set_variable = false;

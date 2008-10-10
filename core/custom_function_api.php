@@ -185,7 +185,7 @@ function custom_function_default_issue_delete_notify( $p_issue_data ) {
 
 # Hook for authentication
 # can Mantis update the password
-function custom_function_default_auth_can_change_password( ) {
+function custom_function_default_auth_can_change_password() {
 	$t_can_change = array(
 		PLAIN,
 		CRYPT,
@@ -211,7 +211,7 @@ function custom_function_default_auth_can_change_password( ) {
 # $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
 # $p_user_id: The user id or null for current logged in user.
 function custom_function_default_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_user_id = null ) {
-	$t_project_id = helper_get_current_project( );
+	$t_project_id = helper_get_current_project();
 
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
 		$t_columns = config_get( 'csv_columns', $t_project_id, $p_user_id );
@@ -351,10 +351,10 @@ function custom_function_default_print_column_value( $p_column, $p_issue_row, $p
 # The enumeration will be empty if current project is ALL PROJECTS.
 # Enumerations format is: "abc|lmn|xyz"
 # To use this in a custom field type "=versions" in the possible values field.
-function custom_function_default_enum_versions( ) {
-	$t_versions = version_get_all_rows( helper_get_current_project( ) );
+function custom_function_default_enum_versions() {
+	$t_versions = version_get_all_rows( helper_get_current_project() );
 
-	$t_enum = array( );
+	$t_enum = array();
 	foreach( $t_versions as $t_version ) {
 		$t_enum[] = $t_version['version'];
 	}
@@ -368,10 +368,10 @@ function custom_function_default_enum_versions( ) {
 # The enumeration will be empty if current project is ALL PROJECTS.
 # Enumerations format is: "abc|lmn|xyz"
 # To use this in a custom field type "=released_versions" in the possible values field.
-function custom_function_default_enum_released_versions( ) {
-	$t_versions = version_get_all_rows( helper_get_current_project( ) );
+function custom_function_default_enum_released_versions() {
+	$t_versions = version_get_all_rows( helper_get_current_project() );
 
-	$t_enum = array( );
+	$t_enum = array();
 	foreach( $t_versions as $t_version ) {
 		if( $t_version['released'] == 1 ) {
 			$t_enum[] = $t_version['version'];
@@ -387,10 +387,10 @@ function custom_function_default_enum_released_versions( ) {
 # The enumeration will be empty if current project is ALL PROJECTS.
 # Enumerations format is: "abc|lmn|xyz"
 # To use this in a custom field type "=future_versions" in the possible values field.
-function custom_function_default_enum_future_versions( ) {
-	$t_versions = version_get_all_rows( helper_get_current_project( ) );
+function custom_function_default_enum_future_versions() {
+	$t_versions = version_get_all_rows( helper_get_current_project() );
 
-	$t_enum = array( );
+	$t_enum = array();
 	foreach( $t_versions as $t_version ) {
 		if( $t_version['released'] == 0 ) {
 			$t_enum[] = $t_version['version'];
@@ -406,10 +406,10 @@ function custom_function_default_enum_future_versions( ) {
 # The enumeration will be empty if current project is ALL PROJECTS.
 # Enumerations format is: "abc|lmn|xyz"
 # To use this in a custom field type "=categories" in the possible values field.
-function custom_function_default_enum_categories( ) {
-	$t_categories = category_get_all_rows( helper_get_current_project( ) );
+function custom_function_default_enum_categories() {
+	$t_categories = category_get_all_rows( helper_get_current_project() );
 
-	$t_enum = array( );
+	$t_enum = array();
 	foreach( $t_categories as $t_category ) {
 		$t_enum[] = $t_category['category'];
 	}

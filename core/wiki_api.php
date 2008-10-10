@@ -24,18 +24,18 @@
  * @subpackage WikiAPI
  */
 
-function wiki_enabled( ) {
+function wiki_enabled() {
 	return( config_get_global( 'wiki_enable' ) == ON );
 }
 
-function wiki_ensure_enabled( ) {
-	if( !wiki_enabled( ) ) {
-		access_denied( );
+function wiki_ensure_enabled() {
+	if( !wiki_enabled() ) {
+		access_denied();
 	}
 }
 
-function wiki_init( ) {
-	if( wiki_enabled( ) ) {
+function wiki_init() {
+	if( wiki_enabled() ) {
 
 		# handle legacy style wiki integration
 		require_once( config_get_global( 'class_path' ) . 'MantisCoreWikiPlugin.class.php' );
@@ -71,4 +71,4 @@ function wiki_link_project( $p_project_id ) {
 	return event_signal( 'EVENT_WIKI_LINK_PROJECT', $p_project_id );
 }
 
-wiki_init( );
+wiki_init();

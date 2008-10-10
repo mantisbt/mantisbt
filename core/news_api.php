@@ -57,16 +57,16 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
 	    		  ( project_id, poster_id, date_posted, last_modified,
 	    		    view_state, announcement, headline, body )
 				VALUES
-				    ( " . db_param( ) . ",
-				      " . db_param( ) . ",
-				      " . db_param( ) . ",
-				      " . db_param( ) . ",
-				      " . db_param( ) . ",
-				      " . db_param( ) . ",
-				      " . db_param( ) . ",
-				      " . db_param( ) . "
+				    ( " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . ",
+				      " . db_param() . "
 					)";
-	db_query_bound( $query, Array( $c_project_id, $c_poster_id, db_now( ), db_now( ), $c_view_state, $c_announcement, $p_headline, $p_body ) );
+	db_query_bound( $query, Array( $c_project_id, $c_poster_id, db_now(), db_now(), $c_view_state, $c_announcement, $p_headline, $p_body ) );
 
 	$t_news_id = db_insert_id( $t_news_table );
 
@@ -83,7 +83,7 @@ function news_delete( $p_news_id ) {
 	$t_news_table = db_get_table( 'mantis_news_table' );
 
 	$query = "DELETE FROM $t_news_table
-	    		  WHERE id=" . db_param( );
+	    		  WHERE id=" . db_param();
 
 	db_query_bound( $query, Array( $c_news_id ) );
 
@@ -99,7 +99,7 @@ function news_delete_all( $p_project_id ) {
 	$t_news_table = db_get_table( 'mantis_news_table' );
 
 	$query = "DELETE FROM $t_news_table
-	    		  WHERE project_id=" . db_param( );
+	    		  WHERE project_id=" . db_param();
 
 	db_query_bound( $query, Array( $c_project_id ) );
 
@@ -129,15 +129,15 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
 
 	# Update entry
 	$query = "UPDATE $t_news_table
-				  SET view_state=" . db_param( ) . ",
-					announcement=" . db_param( ) . ",
-					headline=" . db_param( ) . ",
-					body=" . db_param( ) . ",
-					project_id=" . db_param( ) . ",
-					last_modified= " . db_param( ) . "
-				  WHERE id=" . db_param( );
+				  SET view_state=" . db_param() . ",
+					announcement=" . db_param() . ",
+					headline=" . db_param() . ",
+					body=" . db_param() . ",
+					project_id=" . db_param() . ",
+					last_modified= " . db_param() . "
+				  WHERE id=" . db_param();
 
-	db_query_bound( $query, Array( $c_view_state, $c_announcement, $p_headline, $p_body, $c_project_id, db_now( ), $c_news_id ) );
+	db_query_bound( $query, Array( $c_view_state, $c_announcement, $p_headline, $p_body, $c_project_id, db_now(), $c_news_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -152,7 +152,7 @@ function news_get_row( $p_news_id ) {
 
 	$query = "SELECT *
 				  FROM $t_news_table
-				  WHERE id=" . db_param( );
+				  WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_news_id ) );
 
 	if( 0 == db_num_rows( $result ) ) {
@@ -215,7 +215,7 @@ function news_get_rows( $p_project_id, $p_sitewide = true ) {
 
 	$result = db_query( $query );
 
-	$t_rows = array( );
+	$t_rows = array();
 	$t_row_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $t_row_count;$i++ ) {
@@ -245,7 +245,7 @@ function news_is_private( $p_news_id ) {
 # defined in the configuration file.
 function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 	if( $p_project_id === null ) {
-		$p_project_id = helper_get_current_project( );
+		$p_project_id = helper_get_current_project();
 	}
 
 	$c_offset = db_prepare_int( $p_offset );
@@ -286,14 +286,14 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 			$query = "SELECT *
 						FROM $t_news_table WHERE
 						( " . db_helper_compare_days( 0, 'date_posted', "< $t_news_view_limit_days" ) . "
-						 OR announcement = " . db_param( ) . " ) ";
+						 OR announcement = " . db_param() . " ) ";
 			$t_params = Array(
-				db_now( ),
+				db_now(),
 				1,
 			);
 			if( 1 == count( $t_projects ) ) {
 				$c_project_id = $t_projects[0];
-				$query .= " AND project_id=" . db_param( );
+				$query .= " AND project_id=" . db_param();
 				$t_params[] = $c_project_id;
 			}
 			else {
@@ -308,7 +308,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 
 	$t_row_count = db_num_rows( $result );
 
-	$t_rows = array( );
+	$t_rows = array();
 	for( $i = 0;$i < $t_row_count;$i++ ) {
 		$row = db_fetch_array( $result );
 		$row['date_posted'] = db_unixtimestamp( $row['date_posted'] );

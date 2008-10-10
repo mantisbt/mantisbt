@@ -47,8 +47,8 @@ $t_commit_regexp = config_get( 'source_control_regexp' );
 $t_commit_fixed_regexp = config_get( 'source_control_fixed_regexp' );
 
 $t_comment = '';
-$t_issues = array( );
-$t_fixed_issues = array( );
+$t_issues = array();
+$t_fixed_issues = array();
 while(( $t_line = fgets( STDIN, 1024 ) ) ) {
 	$t_comment .= $t_line;
 	if( preg_match_all( $t_commit_regexp, $t_line, $t_matches ) ) {
