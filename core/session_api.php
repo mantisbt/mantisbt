@@ -1,8 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-
 # Copyright (C) 2008 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -15,6 +13,10 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+#
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
 /**
  * Session API for handling user/browser sessions in an extendable manner.
@@ -34,13 +36,13 @@ $g_session = null;
 abstract class MantisSession {
 	var $id;
 
-	abstract function __construct();
+	abstract function __construct( );
 
-	abstract function get( $p_name, $p_default=null );
+	abstract function get( $p_name, $p_default = null );
 	abstract function set( $p_name, $p_value );
 	abstract function delete( $p_name );
 
-	abstract function destroy();
+	abstract function destroy( );
 }
 
 /**
@@ -49,28 +51,29 @@ abstract class MantisSession {
  * to PHP's session.* settings in 'php.ini'.
  */
 class MantisPHPSession extends MantisSession {
-	function __construct() {
+	function __construct( ) {
 		$t_session_save_path = config_get_global( 'session_save_path' );
-		if ( $t_session_save_path ) {
+		if( $t_session_save_path ) {
 			session_save_path( $t_session_save_path );
 		}
 
 		session_cache_limiter( 'private_no_expire' );
-		if ( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+		if( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
 			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), true, true );
-		} else {
+		}
+		else {
 			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), false, true );
 		}
-		session_start();
-		$this->id = session_id();
+		session_start( );
+		$this->id = session_id( );
 	}
 
-	function get( $p_name, $p_default=null ) {
-		if ( isset( $_SESSION[ $p_name ] ) ) {
-			return unserialize( $_SESSION[ $p_name ] );
+	function get( $p_name, $p_default = null ) {
+		if( isset( $_SESSION[$p_name] ) ) {
+			return unserialize( $_SESSION[$p_name] );
 		}
 
-		if ( func_num_args() > 1 ) {
+		if( func_num_args( ) > 1 ) {
 			return $p_default;
 		}
 
@@ -79,37 +82,39 @@ class MantisPHPSession extends MantisSession {
 	}
 
 	function set( $p_name, $p_value ) {
-		$_SESSION[ $p_name ] = serialize( $p_value );
+		$_SESSION[$p_name] = serialize( $p_value );
 	}
 
 	function delete( $p_name ) {
-		unset( $_SESSION[ $p_name ] );
+		unset( $_SESSION[$p_name] );
 	}
 
-	function destroy() {
-		if ( isset( $_COOKIE[ session_name() ] ) && !headers_sent() ) {
-			gpc_set_cookie( session_name(), '', time() - 42000 );
+	function destroy( ) {
+		if( isset( $_COOKIE[session_name( )] ) && !headers_sent( ) ) {
+			gpc_set_cookie( session_name( ), '', time( ) - 42000 );
 		}
 
 		unset( $_SESSION );
-		session_destroy();
+		session_destroy( );
 	}
 }
 
 /**
  * Initialize the appropriate session handler.
  */
-function session_init() {
+function session_init( ) {
 	global $g_session, $g_session_handler;
 
 	switch( strtolower( $g_session_handler ) ) {
 		case 'php':
-			$g_session = new MantisPHPSession();
+			$g_session = new MantisPHPSession( );
 			break;
 
 		case 'adodb':
+
 			# Not yet implemented
 		case 'memcached':
+
 			# Not yet implemented
 		default:
 			trigger_error( ERROR_SESSION_HANDLER_INVALID, ERROR );
@@ -123,10 +128,10 @@ function session_init() {
  * @param mixed Default value
  * @return mixed Session variable
  */
-function session_get( $p_name, $p_default=null ) {
+function session_get( $p_name, $p_default = null ) {
 	global $g_session;
 
-	$t_args = func_get_args();
+	$t_args = func_get_args( );
 	return call_user_func_array( array( $g_session, 'get' ), $t_args );
 }
 
@@ -136,9 +141,9 @@ function session_get( $p_name, $p_default=null ) {
  * @param mixed Default value
  * @return int Session variable
  */
-function session_get_int( $p_name, $p_default=null ) {
+function session_get_int( $p_name, $p_default = null ) {
 	global $g_session;
-	$t_args = func_get_args();
+	$t_args = func_get_args( );
 	return (int) call_user_func_array( 'session_get', $t_args );
 }
 
@@ -148,9 +153,9 @@ function session_get_int( $p_name, $p_default=null ) {
  * @param mixed Default value
  * @return boolean Session variable
  */
-function session_get_bool( $p_name, $p_default=null ) {
+function session_get_bool( $p_name, $p_default = null ) {
 	global $g_session;
-	$t_args = func_get_args();
+	$t_args = func_get_args( );
 	return true && call_user_func_array( 'session_get', $t_args );
 }
 
@@ -160,9 +165,9 @@ function session_get_bool( $p_name, $p_default=null ) {
  * @param mixed Default value
  * @return string Session variable
  */
-function session_get_string( $p_name, $p_default=null ) {
+function session_get_string( $p_name, $p_default = null ) {
 	global $g_session;
-	$t_args = func_get_args();
+	$t_args = func_get_args( );
 	return "" . call_user_func_array( 'session_get', $t_args );
 }
 
@@ -179,12 +184,10 @@ function session_set( $p_name, $p_value ) {
 /**
  * Destroy the session entirely.
  */
-function session_clean() {
+function session_clean( ) {
 	global $g_session;
-	$g_session->destroy();
+	$g_session->destroy( );
 }
 
-
-##### Initialize the session
-session_init();
-
+# Initialize the session
+session_init( );

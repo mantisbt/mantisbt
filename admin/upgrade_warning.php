@@ -1,9 +1,7 @@
 <?php
 # Mantis - a php based bugtracking system
-
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 # Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -16,12 +14,11 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-
 # --------------------------------------------------------
 # $Id$
 # --------------------------------------------------------
 
-require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
 access_ensure_global_level( ADMINISTRATOR );
 
@@ -64,13 +61,17 @@ $f_advanced = gpc_get_bool( 'advanced', false );
 <div align="center">
 	<table width="80%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
 		<tr bgcolor="#ffffff">
-				<?php # check to see if the new installer was used
-    			if ( -1 != config_get( 'database_version', -1 ) ) {
-				?>
+				<?php
+# check to see if the new installer was used
+if( -1 != config_get( 'database_version', -1 ) ) {
+	?>
 				<td align="center" nowrap="nowrap"><p>When you have backed up your database click the link below to continue</p>[ <a href="install.php">Upgrade Now</a> ]</td>
-				<?php } else { ?>
+				<?php
+}
+else {?>
 				<td align="center" nowrap="nowrap"><p>You aware to be running an old (pre 1.1.0) release of mantis. To update to this release of mantis, you must first update your installation to 1.1</td>
-				<?php } ?>
+				<?php
+}?>
 		</tr>
 	</table>
 </div>

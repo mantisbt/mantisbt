@@ -5,11 +5,10 @@
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
-
+#
 # --------------------------------------------------------
 # $Id$
 # --------------------------------------------------------
-
 
 /**
  * Get all available status.
@@ -153,10 +152,10 @@ function mc_enum_custom_field_types( $p_username, $p_password ) {
  */
 function mc_enum_get( $p_username, $p_password, $p_enumeration ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
-	if ( $t_user_id === false ) {
+	if( $t_user_id === false ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
-	if ( !mci_has_readonly_access( $t_user_id ) ) {
+	if( !mci_has_readonly_access( $t_user_id ) ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 	$t_lang = mci_get_user_lang( $t_user_id );
@@ -175,10 +174,10 @@ function mci_explode_to_objectref( $p_config_enum_string ) {
 		return $p_config_enum_string;
 	}
 	foreach( explode_enum_string( $p_config_enum_string ) as $t_enum_element ) {
-		list($t_id, $t_name) = explode_enum_arr( $t_enum_element );
+		list( $t_id, $t_name ) = explode_enum_arr( $t_enum_element );
 		$t_result[] = array(
-		  'id'		=> $t_id,
-		  'name'	=> $t_name
+			'id' => $t_id,
+			'name' => $t_name,
 		);
 	};
 	return $t_result;
@@ -193,7 +192,7 @@ function mci_explode_to_objectref( $p_config_enum_string ) {
  * @return Array an Array containing the id and the name of the enumeration element.
  */
 function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
-	$t_result = array();
+	$t_result = array( );
 	$t_result['id'] = $p_enum_id;
 	$t_result['name'] = mci_get_enum_element( $p_enum_type, $p_enum_id, $p_lang );
 	return $t_result;
@@ -211,9 +210,9 @@ function mci_get_enum_value_from_label( $p_enum_string, $p_label ) {
 	$t_arr = explode_enum_string( $p_enum_string );
 	$enum_count = count( $t_arr );
 
-	for ( $i = 0; $i < $enum_count; $i++ ) {
+	for( $i = 0;$i < $enum_count;$i++ ) {
 		$t_s = explode_enum_arr( $t_arr[$i] );
-		if ( $t_s[1] == $p_label ) {
+		if( $t_s[1] == $p_label ) {
 			return $t_s[0];
 		}
 	}
@@ -233,21 +232,24 @@ function mci_get_enum_value_from_label( $p_enum_string, $p_label ) {
  * @return enum id
  */
 function mci_get_enum_id_from_objectref( $p_enum, $p_object_ref ) {
-	if ( !is_null( $p_object_ref ) && isset( $p_object_ref['id'] ) && (int)$p_object_ref['id'] != 0 ) {
-		$t_id =  (int)$p_object_ref['id'];
-	} else {
+	if( !is_null( $p_object_ref ) && isset( $p_object_ref['id'] ) && (int) $p_object_ref['id'] != 0 ) {
+		$t_id = (int) $p_object_ref['id'];
+	}
+	else {
 		$t_enum = config_get( $p_enum . '_enum_string' );
-		if ( !is_null( $p_object_ref ) && isset( $p_object_ref['name'] ) && !is_blank( $p_object_ref['name'] ) ) {
+		if( !is_null( $p_object_ref ) && isset( $p_object_ref['name'] ) && !is_blank( $p_object_ref['name'] ) ) {
 			$t_id = mci_get_enum_value_from_label( $t_enum, $p_object_ref['name'] );
-			if ( $t_id == 0 ) {
+			if( $t_id == 0 ) {
 				$t_id = config_get( 'mc_' . $p_enum . '_enum_default_when_not_found' );
 			}
-		} else {
+		}
+		else {
 			$t_default_id = config_get( 'default_bug_' . $p_enum, 0 );
-			if ( $t_default_id == 0 ) {
+			if( $t_default_id == 0 ) {
 				$t_array = mci_explode_to_objectref( $t_enum );
-				$t_id = (int)$t_array[0]['id'];
-			} else {
+				$t_id = (int) $t_array[0]['id'];
+			}
+			else {
 				$t_id = $t_default_id;
 			}
 		}

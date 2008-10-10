@@ -5,7 +5,7 @@
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
-
+#
 # --------------------------------------------------------
 # $Id$
 # --------------------------------------------------------
@@ -35,9 +35,6 @@ $l_oServer->xml_encoding = "UTF-8";
 $l_oServer->soap_defencoding = "UTF-8";
 $l_oServer->decode_utf8 = false;
 
-
-
-
 ###
 ###  PUBLIC TYPES
 ###
@@ -56,7 +53,6 @@ $l_oServer->wsdl->addComplexType(
 	)),
 	'xsd:string'
 );
-
 
 ### ObjectRef
 $l_oServer->wsdl->addComplexType(
@@ -166,7 +162,6 @@ $l_oServer->wsdl->addComplexType(
 		'download_url'		=>	array( 'name' => 'download_url',	'type' => 'xsd:anyURI', 	'minOccurs' => '0')
 	)
 );
-
 
 ### ProjectAttachmentDataArray
 $l_oServer->wsdl->addComplexType(
@@ -330,7 +325,7 @@ $l_oServer->wsdl->addComplexType(
 		'summary'			=>	array( 'name' => 'summary',			'type' => 'xsd:string' ),
 		'handler'		=>	array( 'name' => 'handler',		'type' => 'xsd:integer' ),
 		'resolution'		=>	array( 'name' => 'resolution',		'type' => 'xsd:integer' ),
-		
+
 		'attachments_count'	=>	array( 'name' => 'attachments_count', 	'type' => 'xsd:integer' ),
 		'notes_count'	=>	array( 'name' => 'notes_count', 	'type' => 'xsd:integer' ),
 	)
@@ -385,7 +380,6 @@ $l_oServer->wsdl->addComplexType(
 	)),
 	'tns:ProjectData'
 );
-
 
 ### ProjectVersionData
 $l_oServer->wsdl->addComplexType(
@@ -972,14 +966,13 @@ $l_oServer->register( 'mc_issue_attachment_get',
 	'Get the data for the specified issue attachment.'
 );
 
-
 ###
 ###  PUBLIC METHODS (defined in mc_project_api.php)
 ###
 
 ### mc_project_add
 $l_oServer->register( 'mc_project_add',
-	array( 
+	array(
 		'username' => 'xsd:string',
 		'password' => 'xsd:string',
 		'project' => 'tns:ProjectData'
@@ -994,7 +987,7 @@ $l_oServer->register( 'mc_project_add',
 
 ### mc_project_delete
 $l_oServer->register( 'mc_project_delete',
-	array( 
+	array(
 		'username' => 'xsd:string',
 		'password' => 'xsd:string',
 		'project_id' => 'xsd:integer'
@@ -1007,10 +1000,9 @@ $l_oServer->register( 'mc_project_delete',
 	'Add a new project to the tracker (must have admin privileges)'
 );
 
-
 ### mc_project_get_issues
 $l_oServer->register( 'mc_project_get_issues',
-	array( 
+	array(
 		'username' => 'xsd:string',
 		'password' => 'xsd:string',
 		'project_id' => 'xsd:integer',
@@ -1027,7 +1019,7 @@ $l_oServer->register( 'mc_project_get_issues',
 
 ### mc_project_get_issue_headers
 $l_oServer->register( 'mc_project_get_issue_headers',
-	array( 
+	array(
 		'username' => 'xsd:string',
 		'password' => 'xsd:string',
 		'project_id' => 'xsd:integer',
@@ -1056,7 +1048,7 @@ $l_oServer->register( 'mc_project_get_users',
 	$t_namespace,
 	false, false, false,
 	'Get appropriate users assigned to a project by access level.'
-);	
+);
 
 ### mc_projects_get_user_accessible
 $l_oServer->register( 'mc_projects_get_user_accessible',
@@ -1207,7 +1199,7 @@ $l_oServer->register( 'mc_project_get_custom_fields',
 	$t_namespace,
 	false, false, false,
 	'Get the custom fields that belong to the specified project.'
-);	
+);
 
 ### mc_project_attachment_get
 $l_oServer->register( 'mc_project_attachment_get',

@@ -1,8 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-
 # Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -15,7 +13,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-
+#
 # --------------------------------------------------------
 # $Id$
 # --------------------------------------------------------
@@ -23,34 +21,33 @@
 /**
  * Event API
  * Handles the event system.
- *  @package CoreAPI
- *  @subpackage EventAPI
+ * @package CoreAPI
+ * @subpackage EventAPI
  *
  * @author John Reese
  */
 
-##### Cache variables #####
+# Cache variables #####
 
-$g_event_cache = array();
+$g_event_cache = array( );
 
-##### Public API #####
-
+# Public API #####
 /**
  * Declare an event of a given type.
  * Will do nothing if event already exists.
  * @param string Event name
  * @param int Event type
  */
-function event_declare( $p_name, $p_type=EVENT_TYPE_DEFAULT ) {
+function event_declare( $p_name, $p_type = EVENT_TYPE_DEFAULT ) {
 	global $g_event_cache;
 
-	if ( !isset( $g_event_cache[$p_name] ) ) {
+	if( !isset( $g_event_cache[$p_name] ) ) {
 
-		$g_event_cache[$p_name] = array( 
-			'type' => $p_type, 
-			'callbacks' => array()
+		$g_event_cache[$p_name] = array(
+			'type' => $p_type,
+			'callbacks' => array( ),
 		);
-	}	
+	}
 }
 
 /**
@@ -58,7 +55,7 @@ function event_declare( $p_name, $p_type=EVENT_TYPE_DEFAULT ) {
  * @param array Events
  */
 function event_declare_many( $p_events ) {
-	foreach ( $p_events as $t_name => $t_type ) {
+	foreach( $p_events as $t_name => $t_type ) {
 		event_declare( $t_name, $t_type );
 	}
 }
@@ -70,10 +67,10 @@ function event_declare_many( $p_events ) {
  * @param string Callback function
  * @param string Plugin basename
  */
-function event_hook( $p_name, $p_callback, $p_plugin=0 ) {
+function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
 	global $g_event_cache;
 
-	if ( !isset( $g_event_cache[$p_name] ) ) { 
+	if( !isset( $g_event_cache[$p_name] ) ) {
 		error_parameters( $p_name );
 		trigger_error( ERROR_EVENT_UNDECLARED, WARNING );
 		return null;
@@ -87,13 +84,13 @@ function event_hook( $p_name, $p_callback, $p_plugin=0 ) {
  * @param array Event name/callback pairs
  * @param string Plugin basename
  */
-function event_hook_many( $p_hooks, $p_plugin=0 ) {
-	if ( ! is_array( $p_hooks ) ) {
+function event_hook_many( $p_hooks, $p_plugin = 0 ) {
+	if( !is_array( $p_hooks ) ) {
 		return;
 	}
 
 	foreach( $p_hooks as $t_name => $t_callbacks ) {
-		if ( !is_array( $t_callbacks ) ) {
+		if( !is_array( $t_callbacks ) ) {
 			event_hook( $t_name, $t_callback, $p_plugin );
 			continue;
 		}
@@ -111,42 +108,38 @@ function event_hook_many( $p_hooks, $p_plugin=0 ) {
  * @param int Event type override
  * @return multi Null if event undeclared, appropriate return value otherwise
  */
-function event_signal( $p_name, $p_params=null, $p_params_dynamic=null, $p_type=null ) {
+function event_signal( $p_name, $p_params = null, $p_params_dynamic = null, $p_type = null ) {
 	global $g_event_cache;
 
-	if ( !isset( $g_event_cache[$p_name] ) ) {
+	if( !isset( $g_event_cache[$p_name] ) ) {
 		error_parameters( $p_name );
 		trigger_error( ERROR_EVENT_UNDECLARED, WARNING );
 		return null;
 	}
 
-	if ( is_null( $p_type ) ) {
+	if( is_null( $p_type ) ) {
 		$t_type = $g_event_cache[$p_name]['type'];
-	} else {
+	}
+	else {
 		$t_type = $p_type;
 	}
 	$t_callbacks = $g_event_cache[$p_name]['callbacks'];
 
-	switch ( $t_type ) {
+	switch( $t_type ) {
 		case EVENT_TYPE_EXECUTE:
 			return event_type_execute( $p_name, $t_callbacks, $p_params );
-
 		case EVENT_TYPE_OUTPUT:
 			return event_type_output( $p_name, $t_callbacks, $p_params );
-
 		case EVENT_TYPE_CHAIN:
 			return event_type_chain( $p_name, $t_callbacks, $p_params, $p_params_dynamic );
-		
 		case EVENT_TYPE_FIRST:
 			return event_type_first( $p_name, $t_callbacks, $p_params );
-
 		default:
 			return event_type_default( $p_name, $t_callbacks, $p_params );
 	}
 }
 
-##### Event-handling functions #####
-
+# Event-handling functions #####
 /**
  * Executes a plugin's callback function for a given event.
  * @param string Event name
@@ -155,24 +148,27 @@ function event_signal( $p_name, $p_params=null, $p_params_dynamic=null, $p_type=
  * @param multi Parameters for event callback
  * @return multi Null if callback not found, value from callback otherwise
  */
-function event_callback( $p_event, $p_callback, $p_plugin, $p_params=null ) {
+function event_callback( $p_event, $p_callback, $p_plugin, $p_params = null ) {
 	$t_value = null;
-	if ( !is_array( $p_params ) ) {
-		$p_params = array( $p_params );
+	if( !is_array( $p_params ) ) {
+		$p_params = array(
+			$p_params,
+		);
 	}
 
-	if ( $p_plugin !== 0 ) {
+	if( $p_plugin !== 0 ) {
 		global $g_plugin_cache;
 
 		plugin_push_current( $p_plugin );
 
-		if ( method_exists( $g_plugin_cache[$p_plugin], $p_callback ) ) {
-			$t_value = call_user_func_array( array( $g_plugin_cache[$p_plugin], $p_callback), array_merge( array( $p_event ), $p_params ) );
+		if( method_exists( $g_plugin_cache[$p_plugin], $p_callback ) ) {
+			$t_value = call_user_func_array( array( $g_plugin_cache[$p_plugin], $p_callback ), array_merge( array( $p_event ), $p_params ) );
 		}
 
-		plugin_pop_current();
-	} else {
-		if ( function_exists( $p_callback ) ) {
+		plugin_pop_current( );
+	}
+	else {
+		if( function_exists( $p_callback ) ) {
 			$t_value = call_user_func_array( $p_callback, array_merge( array( $p_event ), $p_params ) );
 		}
 	}
@@ -205,13 +201,13 @@ function event_type_execute( $p_event, $p_callbacks, $p_params ) {
  * @param array Array of callback function/plugin basename key/value pairs
  * @param multi Output separator (if single string) or indexed array of pre, mid, and post strings
  */
-function event_type_output( $p_event, $p_callbacks, $p_params=null ) {
+function event_type_output( $p_event, $p_callbacks, $p_params = null ) {
 	$t_prefix = '';
 	$t_separator = '';
 	$t_postfix = '';
 
-	if ( is_array( $p_params ) ) {
-		switch ( count( $p_params ) ) {
+	if( is_array( $p_params ) ) {
+		switch( count( $p_params ) ) {
 			case 3:
 				$t_postfix = $p_params[2];
 			case 2:
@@ -219,17 +215,18 @@ function event_type_output( $p_event, $p_callbacks, $p_params=null ) {
 			case 1:
 				$t_prefix = $p_params[0];
 		}
-	} else {
+	}
+	else {
 		$t_separator = $p_params;
 	}
 
-	$t_output = array();
+	$t_output = array( );
 	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
 		foreach( $t_callbacks as $t_callback ) {
 			$t_output[] = event_callback( $p_event, $t_callback, $t_plugin, $p_params );
 		}
 	}
-	if ( count( $p_callbacks ) > 0 ) {
+	if( count( $p_callbacks ) > 0 ) {
 		echo $t_prefix, implode( $t_separator, $t_output ), $t_postfix;
 	}
 }
@@ -245,15 +242,19 @@ function event_type_output( $p_event, $p_callbacks, $p_params=null ) {
  * @return string Output string
  */
 function event_type_chain( $p_event, $p_callbacks, $p_input, $p_params ) {
-	if ( !is_array( $p_params ) ) {
-		$p_params = array( $p_params );
+	if( !is_array( $p_params ) ) {
+		$p_params = array(
+			$p_params,
+		);
 	}
 	$t_output = $p_input;
 
 	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
 		foreach( $t_callbacks as $t_callback ) {
-			if ( !is_array( $t_output ) ) {
-				$t_output = array( $t_output );
+			if( !is_array( $t_output ) ) {
+				$t_output = array(
+					$t_output,
+				);
 			}
 
 			$t_params = array_merge( $t_output, $p_params );
@@ -280,7 +281,7 @@ function event_type_first( $p_event, $p_callbacks, $p_params ) {
 		foreach( $t_callbacks as $t_callback ) {
 			$t_output = event_callback( $p_event, $t_callback, $t_plugin, $p_params );
 
-			if ( !is_null( $t_output ) ) {
+			if( !is_null( $t_output ) ) {
 				return $t_output;
 			}
 		}
@@ -300,7 +301,7 @@ function event_type_first( $p_event, $p_callbacks, $p_params ) {
  * @return array Array of callback/return key/value pairs
  */
 function event_type_default( $p_event, $p_callbacks, $p_data ) {
-	$t_output = array();	
+	$t_output = array( );
 	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
 		foreach( $t_callbacks as $t_callback ) {
 			$t_output[$t_plugin][$t_callback] = event_callback( $p_event, $t_callback, $t_plugin, $p_data );
@@ -308,4 +309,3 @@ function event_type_default( $p_event, $p_callbacks, $p_data ) {
 	}
 	return $t_output;
 }
-

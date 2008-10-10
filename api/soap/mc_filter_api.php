@@ -5,11 +5,10 @@
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
-
+#
 # --------------------------------------------------------
 # $Id$
 # --------------------------------------------------------
-
 /**
  * Get all user defined issue filters for the given project.
  *
@@ -20,15 +19,15 @@
  */
 function mc_filter_get( $p_username, $p_password, $p_project_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
-	if ( $t_user_id === false ) {
+	if( $t_user_id === false ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
-	if ( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
+	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
-	$t_result = array();
+	$t_result = array( );
 	foreach( mci_filter_db_get_available_queries( $p_project_id, $t_user_id ) as $t_filter_row ) {
-		$t_filter = array();
+		$t_filter = array( );
 		$t_filter['id'] = $t_filter_row['id'];
 		$t_filter['owner'] = mci_account_get_array_by_id( $t_filter_row['user_id'] );
 		$t_filter['project_id'] = $t_filter_row['project_id'];
@@ -53,10 +52,10 @@ function mc_filter_get( $p_username, $p_password, $p_project_id ) {
 function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	$t_lang = mci_get_user_lang( $t_user_id );
-	if ( $t_user_id === false ) {
+	if( $t_user_id === false ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
-	if ( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
+	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
@@ -64,21 +63,21 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 	$t_bug_count = 0;
 	$t_filter = filter_db_get_filter( $p_filter_id );
 	$t_filter_detail = explode( '#', $t_filter, 2 );
-	if ( !isset( $t_filter_detail[1] ) ) {
+	if( !isset( $t_filter_detail[1] ) ) {
 		return new soap_fault( 'Server', '', 'Invalid Filter' );
 	}
 	$t_filter = unserialize( $t_filter_detail[1] );
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 
-	$t_result = array();
+	$t_result = array( );
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
 
 	foreach( $t_rows as $t_issue_data ) {
 		$t_id = $t_issue_data['id'];
 
-		$t_issue = array();
+		$t_issue = array( );
 		$t_issue['id'] = $t_id;
-		$t_issue['view_state'] = mci_enum_get_array_by_id( $t_issue_data['view_state'], 'view_state', $t_lang);
+		$t_issue['view_state'] = mci_enum_get_array_by_id( $t_issue_data['view_state'], 'view_state', $t_lang );
 		$t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data['last_updated'] );
 
 		$t_issue['project'] = mci_project_as_array_by_id( $t_issue_data['project_id'] );
@@ -116,7 +115,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 		$t_issue['additional_information'] = mci_null_if_empty( $t_additional_information );
 
 		$t_issue['attachments'] = mci_issue_get_attachments( $t_issue_data['id'] );
-		$t_issue['relationships'] = mci_issue_get_relationships( $t_issue_data['id'], $t_user_id);
+		$t_issue['relationships'] = mci_issue_get_relationships( $t_issue_data['id'], $t_user_id );
 		$t_issue['notes'] = mci_issue_get_notes( $t_issue_data['id'] );
 		$t_issue['custom_fields'] = mci_issue_get_custom_fields( $t_issue_data['id'] );
 
@@ -138,10 +137,10 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
  */
 function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
-	if ( $t_user_id === false ) {
+	if( $t_user_id === false ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
-	if ( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
+	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
@@ -149,40 +148,40 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	$t_bug_count = 0;
 	$t_filter = filter_db_get_filter( $p_filter_id );
 	$t_filter_detail = explode( '#', $t_filter, 2 );
-	if ( !isset( $t_filter_detail[1] ) ) {
+	if( !isset( $t_filter_detail[1] ) ) {
 		return new soap_fault( 'Server', '', 'Invalid Filter' );
 	}
 	$t_filter = unserialize( $t_filter_detail[1] );
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 
-	$t_result = array();
+	$t_result = array( );
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
 
 	foreach( $t_rows as $t_issue_data ) {
 		$t_id = $t_issue_data['id'];
-	
-		$t_issue = array();
-	
+
+		$t_issue = array( );
+
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = $t_issue_data['view_state'];
 		$t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data['last_updated'] );
-	
+
 		$t_issue['project'] = $t_issue_data['project_id'];
 		$t_issue['category'] = mci_null_if_empty( category_get_name( $t_issue_data['category_id'] ) );
 		$t_issue['priority'] = $t_issue_data['priority'];
 		$t_issue['severity'] = $t_issue_data['severity'];
 		$t_issue['status'] = $t_issue_data['status'];
-	
+
 		$t_issue['reporter'] = $t_issue_data['reporter_id'];
 		$t_issue['summary'] = $t_issue_data['summary'];
 		if( !empty( $t_issue_data['handler_id'] ) ) {
 			$t_issue['handler'] = $t_issue_data['handler_id'];
 		}
 		$t_issue['resolution'] = $t_issue_data['resolution'];
-	
+
 		$t_issue['attachments_count'] = count( mci_issue_get_attachments( $t_issue_data['id'] ) );
 		$t_issue['notes_count'] = count( mci_issue_get_notes( $t_issue_data['id'] ) );
-	
+
 		$t_result[] = $t_issue;
 	}
 

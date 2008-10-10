@@ -1,6 +1,5 @@
 <?php
 # Mantis - a php based bugtracking system
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -13,6 +12,10 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+#
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
 /**
  * @package MantisBT
@@ -29,18 +32,30 @@ require_once( '../core.php' );
 
 $t_core_path = config_get( 'core_path' );
 
-require_once( $t_core_path.'graph_api.php' );
+require_once( $t_core_path . 'graph_api.php' );
 
 # Grab Data
 # ---
-$t_project_id = helper_get_current_project();
+$t_project_id = helper_get_current_project( );
 
-$critical_count_arr 	= array(2);
-$high_count_arr 		= array(2);
-$medium_count_arr 		= array(2);
-$low_count_arr 			= array(2);
-$none_count_arr 		= array(2);
-$duplicate_count_arr 	= array(2);
+$critical_count_arr = array(
+	2,
+);
+$high_count_arr = array(
+	2,
+);
+$medium_count_arr = array(
+	2,
+);
+$low_count_arr = array(
+	2,
+);
+$none_count_arr = array(
+	2,
+);
+$duplicate_count_arr = array(
+	2,
+);
 
 $critical_count_arr[0] = 0;
 $critical_count_arr[1] = 0;
@@ -65,85 +80,103 @@ $severity_arr = explode( ',', $g_severity_enum_string );
 $severity_count = count( $severity_arr );
 
 # GET OPEN
-for ($i=0;$i<$severity_count;$i++) {
+for( $i = 0;$i < $severity_count;$i++ ) {
 	$t_severity_arr = explode( ':', $severity_arr[$i] );
 	$t_severity = $t_severity_arr[0];
 	$query = "SELECT COUNT(*) as count
 			FROM mantis_bug_table
-			WHERE project_id=" . db_param() . " AND
+			WHERE project_id=" . db_param( ) . " AND
 					status<80 AND
-					severity=" . db_param();
+					severity=" . db_param( );
 	$result = db_query_bound( $query, Array( $t_project_id, $t_severity ) );
 	$count = db_result( $result, 0, 0 );
-	switch ( $t_severity ) {
-		case 20:$critical_count_arr[0] = $count;
-				break;
-		case 30:$high_count_arr[0] = $count;
-				break;
-		case 40:$medium_count_arr[0] = $count;
-				break;
-		case 50:$low_count_arr[0] = $count;
-				break;
-		case 60:$none_count_arr[0] = $count;
-				break;
-		case 70:$duplicate_count_arr[0] = $count;
-				break;
+	switch( $t_severity ) {
+		case 20:
+			$critical_count_arr[0] = $count;
+			break;
+		case 30:
+			$high_count_arr[0] = $count;
+			break;
+		case 40:
+			$medium_count_arr[0] = $count;
+			break;
+		case 50:
+			$low_count_arr[0] = $count;
+			break;
+		case 60:
+			$none_count_arr[0] = $count;
+			break;
+		case 70:
+			$duplicate_count_arr[0] = $count;
+			break;
 	}
 }
 
 # GET RESOLVED
-for ($i=0;$i<$severity_count;$i++) {
+for( $i = 0;$i < $severity_count;$i++ ) {
 	$t_severity_arr = explode( ':', $severity_arr[$i] );
 	$t_severity = $t_severity_arr[0];
 	$query = "SELECT COUNT(*) as count
 			FROM mantis_bug_table
-			WHERE project_id=" . db_param() . " AND
+			WHERE project_id=" . db_param( ) . " AND
 					status=80 AND
-					severity=" . db_param();
+					severity=" . db_param( );
 	$result = db_query_bound( $query, Array( $t_project_id, $t_severity ) );
 	$count = db_result( $result, 0, 0 );
 
-	switch ( $t_severity ) {
-		case 20:$critical_count_arr[1] = $count;
-				break;
-		case 30:$high_count_arr[1] = $count;
-				break;
-		case 40:$medium_count_arr[1] = $count;
-				break;
-		case 50:$low_count_arr[1] = $count;
-				break;
-		case 60:$none_count_arr[1] = $count;
-				break;
-		case 70:$duplicate_count_arr[1] = $count;
-				break;
+	switch( $t_severity ) {
+		case 20:
+			$critical_count_arr[1] = $count;
+			break;
+		case 30:
+			$high_count_arr[1] = $count;
+			break;
+		case 40:
+			$medium_count_arr[1] = $count;
+			break;
+		case 50:
+			$low_count_arr[1] = $count;
+			break;
+		case 60:
+			$none_count_arr[1] = $count;
+			break;
+		case 70:
+			$duplicate_count_arr[1] = $count;
+			break;
 	}
 }
 
 # GET CLOSED
-for ($i=0;$i<$severity_count;$i++) {
+for( $i = 0;$i < $severity_count;$i++ ) {
 	$t_severity_arr = explode( ':', $severity_arr[$i] );
 	$t_severity = $t_severity_arr[0];
 	$query = "SELECT COUNT(*) as count
 			FROM mantis_bug_table
-			WHERE project_id=" . db_param() . " AND
+			WHERE project_id=" . db_param( ) . " AND
 					status=90 AND
-					severity=" . db_param();
+					severity=" . db_param( );
 	$result = db_query_bound( $query, Array( $t_project_id, $t_severity ) );
 	$count = db_result( $result, 0, 0 );
 
-	switch ( $t_severity ) {
-		case 20:$critical_count_arr[2] = $count;
-				break;
-		case 30:$high_count_arr[2] = $count;
-				break;
-		case 40:$medium_count_arr[2] = $count;
-				break;
-		case 50:$low_count_arr[2] = $count;
-				break;
-		case 60:$none_count_arr[2] = $count;
-				break;
-		case 70:$duplicate_count_arr[2] = $count;
-				break;
+	switch( $t_severity ) {
+		case 20:
+			$critical_count_arr[2] = $count;
+			break;
+		case 30:
+			$high_count_arr[2] = $count;
+			break;
+		case 40:
+			$medium_count_arr[2] = $count;
+			break;
+		case 50:
+			$low_count_arr[2] = $count;
+			break;
+		case 60:
+			$none_count_arr[2] = $count;
+			break;
+		case 70:
+			$duplicate_count_arr[2] = $count;
+			break;
 	}
 }
 
@@ -154,7 +187,7 @@ $proj_name = project_get_field( $t_project_id, 'name' );
 $graph = new Graph( 800, 600, 'auto' );
 $graph->SetColor( "whitesmoke" );
 $graph->SetScale( "textlin" );
-$graph->SetShadow();
+$graph->SetShadow( );
 $graph->img->SetMargin( 40, 30, 40, 40 );
 
 $graph->xaxis->SetTickLabels( array( 'Open', 'Resolved', 'Closed' ) );
@@ -179,12 +212,12 @@ $bplot4->SetFillColor( "paleturquoise" );
 $bplot5->SetFillColor( "palegreen3" );
 $bplot6->SetFillColor( "sienna2" );
 
-$bplot1->SetShadow();
-$bplot2->SetShadow();
-$bplot3->SetShadow();
-$bplot4->SetShadow();
-$bplot5->SetShadow();
-$bplot6->SetShadow();
+$bplot1->SetShadow( );
+$bplot2->SetShadow( );
+$bplot3->SetShadow( );
+$bplot4->SetShadow( );
+$bplot5->SetShadow( );
+$bplot6->SetShadow( );
 
 $bplot1->SetLegend( 'Critical' );
 $bplot2->SetLegend( 'High' );
@@ -193,12 +226,12 @@ $bplot4->SetLegend( 'Low' );
 $bplot5->SetLegend( 'None' );
 $bplot6->SetLegend( 'Duplicate' );
 
-$bplot1->value->Show();
-$bplot2->value->Show();
-$bplot3->value->Show();
-$bplot4->value->Show();
-$bplot5->value->Show();
-$bplot6->value->Show();
+$bplot1->value->Show( );
+$bplot2->value->Show( );
+$bplot3->value->Show( );
+$bplot4->value->Show( );
+$bplot5->value->Show( );
+$bplot6->value->Show( );
 
 $bplot1->value->SetFont( FF_FONT1 );
 $bplot2->value->SetFont( FF_FONT1 );
@@ -226,4 +259,4 @@ $gbarplot = new GroupBarPlot( array( $bplot1, $bplot2, $bplot3, $bplot4, $bplot5
 $gbarplot->SetWidth( 0.9 );
 $graph->Add( $gbarplot );
 
-$graph->Stroke();
+$graph->Stroke( );

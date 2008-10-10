@@ -1,9 +1,7 @@
 <?php
 # Mantis - a php based bugtracking system
-
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 # Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -16,36 +14,37 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-
 # This upgrade moves attachments from the database to the disk
-
 # --------------------------------------------------------
 # $Id$
 # --------------------------------------------------------
 
-require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
 access_ensure_global_level( ADMINISTRATOR );
 
 $f_move_type = gpc_get( 'doc' );
 
 function get_prefix( $file_path ) {
-	if ( substr($file_path, 0, 1) == '/' ) {
+	if( substr( $file_path, 0, 1 ) == '/' ) {
+
 		# Unix absolute
 		return '';
 	}
-	if ( substr($file_path, 0, 1) == '\\' ) {
+	if( substr( $file_path, 0, 1 ) == '\\' ) {
+
 		# Windows absolute
 		return '';
 	}
-	if ( substr($file_path, 1, 2) == ':\\' ) {
+	if( substr( $file_path, 1, 2 ) == ':\\' ) {
+
 		# Windows absolute
 		return '';
 	}
 	return dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR;
 }
 
-#------ move file attachments to issues from database to disk
+# ------ move file attachments to issues from database to disk
 # select non-empty data fields
 # match with the project to get the file path
 # store the file in the correct folder
@@ -56,25 +55,27 @@ function get_prefix( $file_path ) {
 # Re-running this is safe because the data
 # is not removed from the database until it is successfully copied.
 #
-function upgrade_move_att2disk($p_source) {
+function upgrade_move_att2disk( $p_source ) {
+
 	# $p_source is the string "attachment" or "project"
-	if ( $p_source == 'attachment' ) {
-			$t_file_table = db_get_table( 'mantis_bug_file_table' );
-			$t_bug_label = "Bug";
+	if( $p_source == 'attachment' ) {
+		$t_file_table = db_get_table( 'mantis_bug_file_table' );
+		$t_bug_label = "Bug";
 	}
-	if ( $p_source == 'project' ) {
-			$t_file_table = db_get_table( 'mantis_project_file_table' );
-			$t_bug_label = "Project";
+	if( $p_source == 'project' ) {
+		$t_file_table = db_get_table( 'mantis_project_file_table' );
+		$t_bug_label = "Project";
 	}
+
 	# check that the source was valid
-	if ( ! isset($t_file_table) ) {
+	if( !isset( $t_file_table ) ) {
 		echo 'Failure: Internal Error: File source not set';
 		return;
 	}
 
 	# check that the destination is set up properly
 	$t_upload_method = config_get_global( 'file_upload_method' );
-	if ( $t_upload_method <> DISK ) {
+	if( $t_upload_method <> DISK ) {
 		echo 'Failure: Upload Method is not DISK';
 		return;
 	}
@@ -83,7 +84,7 @@ function upgrade_move_att2disk($p_source) {
 
 	$result = @db_query_bound( $query );
 
-	if ( false == $result ) {
+	if( false == $result ) {
 		echo '<p>No attachments need to be moved.</p>';
 		return;
 	}
@@ -92,39 +93,42 @@ function upgrade_move_att2disk($p_source) {
 	echo '<p>Found ' . $count . ' attachments to be moved.</p>';
 	$t_failures = 0;
 
-	if ( $count > 0 ) {
+	if( $count > 0 ) {
 		echo '<table width="80%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">';
+
 		# Headings
 		echo '<tr bgcolor="#ffffff"><th width="10%">' . $t_bug_label . '</th><th width="20%">Attachment</th><th width="70%">Status</th></tr>';
 	}
 
-	for ( $i=0 ; $i < $count ; $i++ ) {
+	for( $i = 0;$i < $count;$i++ ) {
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		// trace bug id back to project to determine the proper file path
-		if ( $p_source == 'attachment' ) {
+		if( $p_source == 'attachment' ) {
 			$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
 			$t_bug_id = $v_bug_id;
-		} else {
+		}
+		else {
 			$t_project_id = (int) $v_project_id;
 			$t_bug_id = $t_project_id;
 		}
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
 		$prefix = get_prefix( $t_file_path );
 		$t_real_file_path = $prefix . $t_file_path;
-		$c_filename = file_clean_name($v_filename);
+		$c_filename = file_clean_name( $v_filename );
 
-		printf("\n<tr %s><td>%8d</td><td>%s</td><td>", helper_alternate_class(), $t_bug_id, $v_filename);
+		printf( "\n<tr %s><td>%8d</td><td>%s</td><td>", helper_alternate_class( ), $t_bug_id, $v_filename );
 
-		if ( is_blank( $t_real_file_path ) || !file_exists( $t_real_file_path ) || !is_dir( $t_real_file_path ) || !is_writable( $t_real_file_path ) ) {
-			echo 'Destination '. $t_real_file_path . ' not writable';
+		if( is_blank( $t_real_file_path ) || !file_exists( $t_real_file_path ) || !is_dir( $t_real_file_path ) || !is_writable( $t_real_file_path ) ) {
+			echo 'Destination ' . $t_real_file_path . ' not writable';
 			$t_failures++;
-		} else {
+		}
+		else {
 			$t_file_name = $t_real_file_path . $c_filename;
 
 			// write file to disk store after adjusting the path
-			if ( file_put_contents( $t_file_name, $v_content ) ){
+			if( file_put_contents( $t_file_name, $v_content ) ) {
 
 				// successful, update database
 				# @@@ do we want to check the size of data transfer matches here?
@@ -133,13 +137,15 @@ function upgrade_move_att2disk($p_source) {
 				$query2 = "UPDATE $t_file_table SET diskfile = '$c_new_file_name',
 						folder = '$c_file_path', content = '' WHERE id = $v_id";
 				$update = @db_query( $query2 );
-				if ( ! $update ) {
+				if( !$update ) {
 					echo 'database update failed';
 					$t_failures++;
-				} else {
+				}
+				else {
 					echo 'moved to ' . $t_file_name;
 				}
-			} else {
+			}
+			else {
 				echo 'copy to ' . $t_file_name . ' failed';
 				$t_failures++;
 			}
@@ -150,15 +156,17 @@ function upgrade_move_att2disk($p_source) {
 	echo '</table><br />' . $count . ' attachments processed, ' . $t_failures . ' failures';
 }
 
-#---------------------
+# ---------------------
 # main code
 #
-if ( $f_move_type == 'attachment' ) {
+if( $f_move_type == 'attachment' ) {
 	$t_type = 'Attachments';
-} else {
-	if ( $f_move_type == 'project' ) {
+}
+else {
+	if( $f_move_type == 'project' ) {
 		$t_type = 'Project Files';
-	} else {
+	}
+	else {
 		echo "<p>Invalid value '$f_move_type' for parameter 'doc'.</p>";
 		exit;
 	}
@@ -167,7 +175,7 @@ if ( $f_move_type == 'attachment' ) {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<title>Mantis Administration - Move <?php echo $t_type ?> to Disk</title>
+<title>Mantis Administration - Move <?php echo $t_type?> to Disk</title>
 <link rel="stylesheet" type="text/css" href="admin.css" />
 </head>
 <body>
@@ -179,7 +187,7 @@ if ( $f_move_type == 'attachment' ) {
 			[ <a href="move_db2disk.php">Refresh view</a> ]
 		</td>
 		<td class="title">
-			Move <?php echo $t_type ?> to Disk
+			Move <?php echo $t_type?> to Disk
 		</td>
 	</tr>
 </table>
@@ -187,7 +195,7 @@ if ( $f_move_type == 'attachment' ) {
 
 <?php
 	upgrade_move_att2disk( $f_move_type );
-	echo '<p>Completed...</p>';
+echo '<p>Completed...</p>';
 ?>
 </body>
 </html>

@@ -1,6 +1,5 @@
 <?php
 # Mantis - a php based bugtracking system
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -13,6 +12,10 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+#
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
 /**
  * @package MantisBT
@@ -29,39 +32,40 @@ require_once( '../core.php' );
 
 $t_core_path = config_get( 'core_path' );
 
-require_once( $t_core_path.'graph_api.php' );
+require_once( $t_core_path . 'graph_api.php' );
 
-$data_category_arr = array();
-$data_count_arr = array();
+$data_category_arr = array( );
+$data_count_arr = array( );
 
-$t_project_id = helper_get_current_project();
+$t_project_id = helper_get_current_project( );
 
 # Grab the Projections/Releases
 $query = "SELECT DISTINCT projection
 		FROM mantis_bug_table
-		WHERE project_id=" . db_param() . "
+		WHERE project_id=" . db_param( ) . "
 		ORDER BY projection";
 $result = db_query_bound( $query, Array( $t_project_id ) );
 $projection_count = db_num_rows( $result );
-$projection_arr = array();
-for ($i=0;$i<$projection_count;$i++) {
+$projection_arr = array( );
+for( $i = 0;$i < $projection_count;$i++ ) {
 	$row = db_fetch_array( $result );
 	extract( $row );
 
 	$projection_arr[] = $projection;
 }
 
-$open_count_arr = array();
-$resolved_count_arr = array();
-$closed_count_arr = array();
-foreach ( $projection_arr as $t_projection ) {
+$open_count_arr = array( );
+$resolved_count_arr = array( );
+$closed_count_arr = array( );
+foreach( $projection_arr as $t_projection ) {
+
 	# OPEN
 	$query = "SELECT COUNT(*) as count
 			FROM mantis_bug_table
 			WHERE project_id='$t_project_id' AND
 				projection='$t_projection' AND
 				status<80";
-	$result = db_query ( $query );
+	$result = db_query( $query );
 	$open_count_arr[] = db_result( $result, 0, 0 );
 
 	# RESOLVED
@@ -70,7 +74,7 @@ foreach ( $projection_arr as $t_projection ) {
 			WHERE project_id='$t_project_id' AND
 				projection='$t_projection' AND
 				status=80";
-	$result = db_query ( $query );
+	$result = db_query( $query );
 	$resolved_count_arr[] = db_result( $result, 0, 0 );
 
 	# CLOSED
@@ -79,60 +83,60 @@ foreach ( $projection_arr as $t_projection ) {
 			WHERE project_id='$t_project_id' AND
 				projection='$t_projection' AND
 				status=90";
-	$result = db_query ( $query );
+	$result = db_query( $query );
 	$closed_count_arr[] = db_result( $result, 0, 0 );
 }
 
 $proj_name = get_project_field( $t_project_id, 'name' );
 
-$graph = new Graph(800,600,'auto');
-$graph->SetScale("textlin");
-$graph->SetShadow();
-$graph->img->SetMargin(40,30,40,80);
+$graph = new Graph( 800, 600, 'auto' );
+$graph->SetScale( "textlin" );
+$graph->SetShadow( );
+$graph->img->SetMargin( 40, 30, 40, 80 );
 
-$graph->xaxis->SetFont(FF_ARIAL,FS_NORMAL,10);
-$graph->xaxis->SetTickLabels($projection_arr);
-$graph->xaxis->SetLabelAngle(45);
+$graph->xaxis->SetFont( FF_ARIAL, FS_NORMAL, 10 );
+$graph->xaxis->SetTickLabels( $projection_arr );
+$graph->xaxis->SetLabelAngle( 45 );
 
-$graph->title->Set("$proj_name Release Delta Chart");
-$graph->title->SetFont(FF_FONT1,FS_BOLD);
+$graph->title->Set( "$proj_name Release Delta Chart" );
+$graph->title->SetFont( FF_FONT1, FS_BOLD );
 
 # Create graph
-$bplot1 = new BarPlot($open_count_arr);
-$bplot2 = new BarPlot($resolved_count_arr);
-$bplot3 = new BarPlot($closed_count_arr);
+$bplot1 = new BarPlot( $open_count_arr );
+$bplot2 = new BarPlot( $resolved_count_arr );
+$bplot3 = new BarPlot( $closed_count_arr );
 
-$bplot1->SetFillColor("slateblue");
-$bplot2->SetFillColor("maroon");
-$bplot3->SetFillColor("lightgoldenrodyellow");
+$bplot1->SetFillColor( "slateblue" );
+$bplot2->SetFillColor( "maroon" );
+$bplot3->SetFillColor( "lightgoldenrodyellow" );
 
-$bplot1->SetShadow();
-$bplot2->SetShadow();
-$bplot3->SetShadow();
+$bplot1->SetShadow( );
+$bplot2->SetShadow( );
+$bplot3->SetShadow( );
 
-$bplot1->SetLegend('Open');
-$bplot2->SetLegend('Resolved');
-$bplot3->SetLegend('Closed');
+$bplot1->SetLegend( 'Open' );
+$bplot2->SetLegend( 'Resolved' );
+$bplot3->SetLegend( 'Closed' );
 
-$bplot1->value->Show();
-$bplot2->value->Show();
-$bplot3->value->Show();
+$bplot1->value->Show( );
+$bplot2->value->Show( );
+$bplot3->value->Show( );
 
-$bplot1->value->SetFont(FF_FONT1,FS_NORMAL,8);
-$bplot2->value->SetFont(FF_FONT1,FS_NORMAL,8);
-$bplot3->value->SetFont(FF_FONT1,FS_NORMAL,8);
+$bplot1->value->SetFont( FF_FONT1, FS_NORMAL, 8 );
+$bplot2->value->SetFont( FF_FONT1, FS_NORMAL, 8 );
+$bplot3->value->SetFont( FF_FONT1, FS_NORMAL, 8 );
 
-$bplot1->value->SetColor("black","darkred");
-$bplot2->value->SetColor("black","darkred");
-$bplot3->value->SetColor("black","darkred");
+$bplot1->value->SetColor( "black", "darkred" );
+$bplot2->value->SetColor( "black", "darkred" );
+$bplot3->value->SetColor( "black", "darkred" );
 
-$bplot1->value->SetFormat('%d');
-$bplot2->value->SetFormat('%d');
-$bplot3->value->SetFormat('%d');
+$bplot1->value->SetFormat( '%d' );
+$bplot2->value->SetFormat( '%d' );
+$bplot3->value->SetFormat( '%d' );
 
-$gbarplot = new GroupBarPlot(array($bplot1,$bplot2,$bplot3));
+$gbarplot = new GroupBarPlot( array( $bplot1, $bplot2, $bplot3 ) );
 
-$gbarplot->SetWidth(0.6);
-$graph->Add($gbarplot);
+$gbarplot->SetWidth( 0.6 );
+$graph->Add( $gbarplot );
 
-$graph->Stroke();
+$graph->Stroke( );

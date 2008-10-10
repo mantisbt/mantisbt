@@ -5,11 +5,10 @@
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
-
+#
 # --------------------------------------------------------
 # $Id$
 # --------------------------------------------------------
-
 /**
  * Get the custom field id given an object ref.  The id is set based on the following algorithm:
  * - id from objectref (if not zero).
@@ -19,12 +18,14 @@
  * @param ObjectRef  $p_object_ref   An associate array with "id" and "name" keys.
  */
 function mci_get_custom_field_id_from_objectref( $p_object_ref ) {
-	if ( (int)$p_object_ref['id'] != 0 ) {
-		$t_id =  (int)$p_object_ref['id'];
-	} else {
-		if ( !is_blank( $p_object_ref['name'] ) ) {
+	if( (int) $p_object_ref['id'] != 0 ) {
+		$t_id = (int) $p_object_ref['id'];
+	}
+	else {
+		if( !is_blank( $p_object_ref['name'] ) ) {
 			$t_id = custom_field_get_id_from_name( $p_object_ref['name'] );
-		} else {
+		}
+		else {
 			$t_id = 0;
 		}
 	}

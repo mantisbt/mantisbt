@@ -5,7 +5,7 @@
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
-
+#
 # --------------------------------------------------------
 # $Id$
 # --------------------------------------------------------
@@ -15,7 +15,7 @@
 # This can not be a configuration option, then MantisConnect configuration
 # needs Mantis to be included first to make use of the constants and possibly
 # configuration defined in Mantis.
-$t_mantis_dir  = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
+$t_mantis_dir = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
 
 # include Mantis files
 $g_bypass_headers = true;
@@ -26,7 +26,7 @@ $t_current_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 require_once( $t_current_dir . 'mc_config_defaults_inc.php' );
 
 $t_user_configs = $t_current_dir . 'mc_config_inc.php';
-if ( file_exists( $t_user_configs ) ) {
+if( file_exists( $t_user_configs ) ) {
 	require_once( $t_user_configs );
 }
 

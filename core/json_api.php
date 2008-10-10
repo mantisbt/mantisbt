@@ -1,8 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-
 # Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -15,11 +13,15 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+#
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
 /**
  * API for simplifying some JSON interactions.
- *	@package CoreAPI
- *	@subpackage JSONAPI
+ * @package CoreAPI
+ * @subpackage JSONAPI
  */
 
 require_once( config_get( 'core_path' ) . 'url_api.php' );
@@ -30,14 +32,14 @@ require_once( config_get( 'core_path' ) . 'url_api.php' );
  * @param string Top-level member to retrieve
  * @return multi JSON class structure
  */
-function json_url( $p_url, $p_member=null ) {
+function json_url( $p_url, $p_member = null ) {
 	$t_data = url_get( $p_url );
 	$t_json = json_decode( $t_data );
 
-	if ( is_null( $p_member ) ) {
+	if( is_null( $p_member ) ) {
 		return $t_json;
-	} else {
+	}
+	else {
 		return $t_json->$p_member;
 	}
 }
-

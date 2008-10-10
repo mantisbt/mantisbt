@@ -1,9 +1,7 @@
 <?php
 # Mantis - a php based bugtracking system
-
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 # Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -16,29 +14,32 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+#
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
-    /**
-     *  @package CoreAPI
-     *  @subpackage WikiAPI
-     */
+/**
+ * @package CoreAPI
+ * @subpackage WikiAPI
+ */
 
- 
-function wiki_enabled() {
-	return ( config_get_global( 'wiki_enable' ) == ON );
+function wiki_enabled( ) {
+	return( config_get_global( 'wiki_enable' ) == ON );
 }
 
-function wiki_ensure_enabled() {
-	if ( !wiki_enabled() ) {
-		access_denied();
+function wiki_ensure_enabled( ) {
+	if( !wiki_enabled( ) ) {
+		access_denied( );
 	}
 }
 
-function wiki_init() {
-	if ( wiki_enabled() ) {
+function wiki_init( ) {
+	if( wiki_enabled( ) ) {
 
 		# handle legacy style wiki integration
 		require_once( config_get_global( 'class_path' ) . 'MantisCoreWikiPlugin.class.php' );
-		switch (config_get_global( 'wiki_engine' )) {
+		switch( config_get_global( 'wiki_engine' ) ) {
 			case 'dokuwiki':
 				plugin_child( 'MantisCoreDokuwiki' );
 				break;
@@ -56,7 +57,7 @@ function wiki_init() {
 				break;
 		}
 
-		if ( is_null( event_signal( 'EVENT_WIKI_INIT' ) ) ) {
+		if( is_null( event_signal( 'EVENT_WIKI_INIT' ) ) ) {
 			config_set_global( 'wiki_enable', OFF );
 		}
 	}
@@ -70,5 +71,4 @@ function wiki_link_project( $p_project_id ) {
 	return event_signal( 'EVENT_WIKI_LINK_PROJECT', $p_project_id );
 }
 
-wiki_init();
-
+wiki_init( );

@@ -1,8 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-
 # Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -15,11 +13,15 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+#
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
 /**
  * API for simplifying remote URL operations
- *	@package CoreAPI
- *	@subpackage URLAPI
+ * @package CoreAPI
+ * @subpackage URLAPI
  */
 
 /**
@@ -30,13 +32,14 @@
  * @return string URL contents
  */
 function url_get( $p_url ) {
+
 	# Generic PHP call
-	if ( ini_get( 'allow_url_fopen' ) ) {
+	if( ini_get( 'allow_url_fopen' ) ) {
 		return @file_get_contents( $p_url );
 	}
 
 	# Use the PHP cURL extension
-	if ( function_exists( 'curl_init' ) ) {
+	if( function_exists( 'curl_init' ) ) {
 		$t_curl = curl_init( $p_url );
 		curl_setopt( $t_curl, CURLOPT_RETURNTRANSFER, true );
 
@@ -50,4 +53,3 @@ function url_get( $p_url ) {
 	$t_url = escapeshellarg( $p_url );
 	return shell_exec( "curl $t_url" );
 }
-

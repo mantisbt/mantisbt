@@ -1,27 +1,30 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
-//+----------------------------------------------------------------------+
-//| WAMP (XP-SP1/1.3.27/4.0.12/4.3.2)                                    |
-//+----------------------------------------------------------------------+
-//| Copyright (c) 1992-2003 Michael Wimmer                               |
-//+----------------------------------------------------------------------+
-//| I don't have the time to read through all the licences to find out   |
-//| what the exactly say. But it's simple. It's free for non commercial  |
-//| projects, but as soon as you make money with it, i want my share :-) |
-//| (License : Free for non-commercial use)                              |
-//|                                                                      |
-//| *** LICENSE CHANGED TO GPL, see news post by owner at: *****         |
-//| http://sourceforge.net/forum/forum.php?forum_id=694707               |
-//+----------------------------------------------------------------------+
-//| Authors: Michael Wimmer <flaimo@gmx.net>                             |
-//+----------------------------------------------------------------------+
-//
-// $Id$
+// +----------------------------------------------------------------------+
+// | WAMP (XP-SP1/1.3.27/4.0.12/4.3.2)                                    |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 1992-2003 Michael Wimmer                               |
+// +----------------------------------------------------------------------+
+// | I don't have the time to read through all the licences to find out   |
+// | what the exactly say. But it's simple. It's free for non commercial  |
+// | projects, but as soon as you make money with it, i want my share :-) |
+// | (License : Free for non-commercial use)                              |
+// |                                                                      |
+// | *** LICENSE CHANGED TO GPL, see news post by owner at: *****         |
+// | http://sourceforge.net/forum/forum.php?forum_id=694707               |
+// +----------------------------------------------------------------------+
+// | Authors: Michael Wimmer <flaimo@gmx.net>                             |
+// +----------------------------------------------------------------------+
+
+# --------------------------------------------------------
+# $Id$
+# --------------------------------------------------------
 
 /**
 * @package RSSBuilder
 * @category FLP
 */
+
 /**
 * Abstract class for getting ini preferences
 *
@@ -44,7 +47,6 @@ class RSSBase {
 	/*-----------------------*/
 	/* C O N S T R U C T O R */
 	/*-----------------------*/
-
 	/**
 	* Constructor
 	*
@@ -52,12 +54,10 @@ class RSSBase {
 	* @return void
 	* @access private
 	*/
-	function RSSBase() {
-	} // end constructor
+	function RSSBase( ) {
+	}
 
-} // end class RSSBase
-
-//---------------------------------------------------------------------------
+}
 
 /**
 * Class for creating a RSS file
@@ -80,7 +80,6 @@ class RSSBuilder extends RSSBase {
 	/*-------------------*/
 	/* V A R I A B L E S */
 	/*-------------------*/
-
 	/**#@+
 	* @access private
 	* @var string
@@ -204,8 +203,8 @@ class RSSBuilder extends RSSBase {
 	* @desc compiled outputstring
 	*/
 	var $output;
-	/**#@-*/
 
+	/**#@-*/
 	/**#@+
 	* @access private
 	*/
@@ -232,7 +231,7 @@ class RSSBuilder extends RSSBase {
 	* @desc array wich all the rss items
 	* @var array
 	*/
-	var $items = array();
+	var $items = array( );
 
 	/**
 	* use DC data
@@ -249,12 +248,11 @@ class RSSBuilder extends RSSBase {
 	* @var boolean
 	*/
 	var $use_sy_data = FALSE;
-	/**#@-*/
 
+	/**#@-*/
 	/*-----------------------*/
 	/* C O N S T R U C T O R */
 	/*-----------------------*/
-
 	/**#@+
 	* @return void
 	*/
@@ -276,26 +274,19 @@ class RSSBuilder extends RSSBase {
 	* @uses etCache()
 	* @access private
 	*/
-	function RSSBuilder($encoding = '',
-						$about = '',
-						$title = '',
-						$description = '',
-						$image_link = '',
-						$category = '',
-						$cache = '') {
-		$this->setEncoding($encoding);
-		$this->setAbout($about);
-		$this->setTitle($title);
-		$this->setDescription($description);
-		$this->setImageLink($image_link);
-		$this->setCategory($category);
-		$this->setCache($cache);
-	} // end constructor
+	function RSSBuilder( $encoding = '', $about = '', $title = '', $description = '', $image_link = '', $category = '', $cache = '' ) {
+		$this->setEncoding( $encoding );
+		$this->setAbout( $about );
+		$this->setTitle( $title );
+		$this->setDescription( $description );
+		$this->setImageLink( $image_link );
+		$this->setCategory( $category );
+		$this->setCache( $cache );
+	}
 
 	/*-------------------*/
 	/* F U N C T I O N S */
 	/*-------------------*/
-
 	/**
 	* add additional DC data
 	*
@@ -316,22 +307,16 @@ class RSSBuilder extends RSSBase {
 	* @uses setContributor()
 	* @access public
 	*/
-	function addDCdata($publisher = '',
-						$creator = '',
-						$date = '',
-						$language = '',
-						$rights = '',
-						$coverage = '',
-						$contributor = '') {
-		$this->setPublisher($publisher);
-		$this->setCreator($creator);
-		$this->setDate($date);
-		$this->setLanguage($language);
-		$this->setRights($rights);
-		$this->setCoverage($coverage);
-		$this->setContributor($contributor);
+	function addDCdata( $publisher = '', $creator = '', $date = '', $language = '', $rights = '', $coverage = '', $contributor = '' ) {
+		$this->setPublisher( $publisher );
+		$this->setCreator( $creator );
+		$this->setDate( $date );
+		$this->setLanguage( $language );
+		$this->setRights( $rights );
+		$this->setCoverage( $coverage );
+		$this->setContributor( $contributor );
 		$this->use_dc_data = (boolean) TRUE;
-	} // end function
+	}
 
 	/**
 	* add additional SY data
@@ -345,14 +330,15 @@ class RSSBuilder extends RSSBase {
 	* @uses setBase()
 	* @access public
 	*/
-	function addSYdata($period = '', $frequency = '', $base = '') {
-		$this->setPeriod($period);
-		$this->setFrequency($frequency);
-		$this->setBase($base);
+	function addSYdata( $period = '', $frequency = '', $base = '' ) {
+		$this->setPeriod( $period );
+		$this->setFrequency( $frequency );
+		$this->setBase( $base );
 		$this->use_sy_data = (boolean) TRUE;
-	} // end function
-	/**#@-*/
+	}
 
+	// end function
+	/**#@-*/
 	/**#@+
 	* @return void
 	* @access private
@@ -364,11 +350,13 @@ class RSSBuilder extends RSSBase {
 	* @param string $encoding  encoding of the xml file
 	* @see $encoding
 	*/
-	function setEncoding($encoding = '') {
-		if (!isset($this->encoding)) {
-			$this->encoding = (string) ((strlen(trim($encoding)) > 0) ? trim($encoding) : 'UTF-8');
-		} // end if
-	} // end function
+	function setEncoding( $encoding = '' ) {
+		if( !isset( $this->encoding ) ) {
+			$this->encoding = (string)(( strlen( trim( $encoding ) ) > 0 ) ? trim( $encoding ) : 'UTF-8' );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $about variable
@@ -377,11 +365,13 @@ class RSSBuilder extends RSSBase {
 	* @param string $about
 	* @see $about
 	*/
-	function setAbout($about = '') {
-		if (!isset($this->about) && strlen(trim($about)) > 0) {
-			$this->about = (string) trim($about);
-		} // end if
-	} // end function
+	function setAbout( $about = '' ) {
+		if( !isset( $this->about ) && strlen( trim( $about ) ) > 0 ) {
+			$this->about = (string) trim( $about );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $title variable
@@ -390,11 +380,13 @@ class RSSBuilder extends RSSBase {
 	* @param string $title
 	* @see $title
 	*/
-	function setTitle($title = '') {
-		if (!isset($this->title) && strlen(trim($title)) > 0) {
-			$this->title = (string) trim($title);
-		} // end if
-	} // end function
+	function setTitle( $title = '' ) {
+		if( !isset( $this->title ) && strlen( trim( $title ) ) > 0 ) {
+			$this->title = (string) trim( $title );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $description variable
@@ -403,11 +395,13 @@ class RSSBuilder extends RSSBase {
 	* @param string $description
 	* @see $description
 	*/
-	function setDescription($description = '') {
-		if (!isset($this->description) && strlen(trim($description)) > 0) {
-			$this->description = (string) trim($description);
-		} // end if
-	} // end function
+	function setDescription( $description = '' ) {
+		if( !isset( $this->description ) && strlen( trim( $description ) ) > 0 ) {
+			$this->description = (string) trim( $description );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $publisher variable
@@ -416,11 +410,13 @@ class RSSBuilder extends RSSBase {
 	* @param string $publisher
 	* @see $publisher
 	*/
-	function setPublisher($publisher = '') {
-		if (!isset($this->publisher) && strlen(trim($publisher)) > 0) {
-			$this->publisher = (string) trim($publisher);
-		} // end if
-	} // end function
+	function setPublisher( $publisher = '' ) {
+		if( !isset( $this->publisher ) && strlen( trim( $publisher ) ) > 0 ) {
+			$this->publisher = (string) trim( $publisher );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $creator variable
@@ -429,11 +425,13 @@ class RSSBuilder extends RSSBase {
 	* @param string $creator
 	* @see $creator
 	*/
-	function setCreator($creator = '') {
-		if (!isset($this->creator) && strlen(trim($creator)) > 0) {
-			$this->creator = (string) trim($creator);
-		} // end if
-	} // end function
+	function setCreator( $creator = '' ) {
+		if( !isset( $this->creator ) && strlen( trim( $creator ) ) > 0 ) {
+			$this->creator = (string) trim( $creator );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $date variable
@@ -442,11 +440,13 @@ class RSSBuilder extends RSSBase {
 	* @param string $date  format: 2003-05-29T00:03:07+0200
 	* @see $date
 	*/
-	function setDate($date = '') {
-		if (!isset($this->date) && strlen(trim($date)) > 0) {
-			$this->date = (string) trim($date);
-		} // end if
-	} // end function
+	function setDate( $date = '' ) {
+		if( !isset( $this->date ) && strlen( trim( $date ) ) > 0 ) {
+			$this->date = (string) trim( $date );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $language variable
@@ -456,11 +456,13 @@ class RSSBuilder extends RSSBase {
 	* @see $language
 	* @uses isValidLanguageCode()
 	*/
-	function setLanguage($language = '') {
-		if (!isset($this->language) && $this->isValidLanguageCode($language) === TRUE) {
-			$this->language = (string) trim($language);
-		} // end if
-	} // end function
+	function setLanguage( $language = '' ) {
+		if( !isset( $this->language ) && $this->isValidLanguageCode( $language ) === TRUE ) {
+			$this->language = (string) trim( $language );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $rights variable
@@ -469,11 +471,13 @@ class RSSBuilder extends RSSBase {
 	* @param string $rights
 	* @see $rights
 	*/
-	function setRights($rights = '') {
-		if (!isset($this->rights) && strlen(trim($rights)) > 0) {
-			$this->rights = (string) trim($rights);
-		} // end if
-	} // end function
+	function setRights( $rights = '' ) {
+		if( !isset( $this->rights ) && strlen( trim( $rights ) ) > 0 ) {
+			$this->rights = (string) trim( $rights );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $coverage variable
@@ -482,12 +486,13 @@ class RSSBuilder extends RSSBase {
 	* @param string $coverage
 	* @see $coverage
 	*/
-	function setCoverage($coverage = '') {
-		if (!isset($this->coverage) && strlen(trim($coverage)) > 0) {
-			$this->coverage = (string) trim($coverage);
-		} // end if
-	} // end function
+	function setCoverage( $coverage = '' ) {
+		if( !isset( $this->coverage ) && strlen( trim( $coverage ) ) > 0 ) {
+			$this->coverage = (string) trim( $coverage );
+		}
 
+		// end if
+	}
 
 	/**
 	* Sets $contributor variable
@@ -496,11 +501,13 @@ class RSSBuilder extends RSSBase {
 	* @param string $contributor
 	* @see $contributor
 	*/
-	function setContributor($contributor = '') {
-		if (!isset($this->contributor) && strlen(trim($contributor)) > 0) {
-			$this->contributor = (string) trim($contributor);
-		} // end if
-	} // end function
+	function setContributor( $contributor = '' ) {
+		if( !isset( $this->contributor ) && strlen( trim( $contributor ) ) > 0 ) {
+			$this->contributor = (string) trim( $contributor );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $image_link variable
@@ -509,11 +516,13 @@ class RSSBuilder extends RSSBase {
 	* @param string $image_link
 	* @see $image_link
 	*/
-	function setImageLink($image_link = '') {
-		if (!isset($this->image_link) && strlen(trim($image_link)) > 0) {
-			$this->image_link = (string) trim($image_link);
-		} // end if
-	} // end function
+	function setImageLink( $image_link = '' ) {
+		if( !isset( $this->image_link ) && strlen( trim( $image_link ) ) > 0 ) {
+			$this->image_link = (string) trim( $image_link );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $period variable
@@ -522,22 +531,26 @@ class RSSBuilder extends RSSBase {
 	* @param string $period  'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly'
 	* @see $period
 	*/
-	function setPeriod($period = '') {
-		if (!isset($this->period) && strlen(trim($period)) > 0) {
-			switch ($period) {
+	function setPeriod( $period = '' ) {
+		if( !isset( $this->period ) && strlen( trim( $period ) ) > 0 ) {
+			switch( $period ) {
 				case 'hourly':
 				case 'daily':
 				case 'weekly':
 				case 'monthly':
 				case 'yearly':
-					$this->period = (string) trim($period);
+					$this->period = (string) trim( $period );
 					break;
 				default:
 					$this->period = (string) '';
 					break;
-			} // end switch
-		} // end if
-	} // end function
+			}
+
+			// end switch
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $frequency variable
@@ -546,11 +559,13 @@ class RSSBuilder extends RSSBase {
 	* @param int $frequency
 	* @see $frequency
 	*/
-	function setFrequency($frequency = '') {
-		if (!isset($this->frequency) && strlen(trim($frequency)) > 0) {
+	function setFrequency( $frequency = '' ) {
+		if( !isset( $this->frequency ) && strlen( trim( $frequency ) ) > 0 ) {
 			$this->frequency = (int) $frequency;
-		} // end if
-	} // end function
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $base variable
@@ -559,11 +574,13 @@ class RSSBuilder extends RSSBase {
 	* @param string $base
 	* @see $base
 	*/
-	function setBase($base = '') {
-		if (!isset($this->base) && strlen(trim($base)) > 0) {
-			$this->base = (string) trim($base);
-		} // end if
-	} // end function
+	function setBase( $base = '' ) {
+		if( !isset( $this->base ) && strlen( trim( $base ) ) > 0 ) {
+			$this->base = (string) trim( $base );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $category variable
@@ -573,11 +590,13 @@ class RSSBuilder extends RSSBase {
 	* @see $category
 	* @since 1.001 - 2003-05-30
 	*/
-	function setCategory($category = '') {
-		if (strlen(trim($category)) > 0) {
-			$this->category = (string) trim($category);
-		} // end if
-	} // end function
+	function setCategory( $category = '' ) {
+		if( strlen( trim( $category ) ) > 0 ) {
+			$this->category = (string) trim( $category );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $cache variable
@@ -587,13 +606,16 @@ class RSSBuilder extends RSSBase {
 	* @see $cache
 	* @since 1.001 - 2003-05-30
 	*/
-	function setCache($cache = '') {
-		if (strlen(trim($cache)) > 0) {
+	function setCache( $cache = '' ) {
+		if( strlen( trim( $cache ) ) > 0 ) {
 			$this->cache = (int) $cache;
-		} // end if
-	} // end function
-	/**#@-*/
+		}
 
+		// end if
+	}
+
+	// end function
+	/**#@-*/
 	/**#@+
 	* @access public
 	*/
@@ -605,9 +627,9 @@ class RSSBuilder extends RSSBase {
 	* @return boolean $isvalid  If string is valid or not
 	* @static
 	*/
-	function isValidLanguageCode($code = '') {
-		return (boolean) ((preg_match('(^([a-zA-Z]{2})$)',$code) > 0) ? TRUE : FALSE);
-	} // end function
+	function isValidLanguageCode( $code = '' ) {
+		return (boolean)(( preg_match( '(^([a-zA-Z]{2})$)', $code ) > 0 ) ? TRUE : FALSE );
+	}
 
 	/**
 	* Returns $encoding variable
@@ -616,9 +638,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $encoding
 	* @see $image_link
 	*/
-	function getEncoding() {
+	function getEncoding( ) {
 		return (string) $this->encoding;
-	} // end function
+	}
 
 	/**
 	* Returns $about variable
@@ -627,9 +649,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $about
 	* @see $about
 	*/
-	function getAbout() {
+	function getAbout( ) {
 		return (string) $this->about;
-	} // end function
+	}
 
 	/**
 	* Returns $title variable
@@ -638,9 +660,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $title
 	* @see $title
 	*/
-	function getTitle() {
+	function getTitle( ) {
 		return (string) $this->title;
-	} // end function
+	}
 
 	/**
 	* Returns $description variable
@@ -649,9 +671,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $description
 	* @see $description
 	*/
-	function getDescription() {
+	function getDescription( ) {
 		return (string) $this->description;
-	} // end function
+	}
 
 	/**
 	* Returns $publisher variable
@@ -660,9 +682,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $publisher
 	* @see $publisher
 	*/
-	function getPublisher() {
+	function getPublisher( ) {
 		return (string) $this->publisher;
-	} // end function
+	}
 
 	/**
 	* Returns $creator variable
@@ -671,9 +693,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $creator
 	* @see $creator
 	*/
-	function getCreator() {
+	function getCreator( ) {
 		return (string) $this->creator;
-	} // end function
+	}
 
 	/**
 	* Returns $date variable
@@ -682,9 +704,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $date
 	* @see $date
 	*/
-	function getDate() {
+	function getDate( ) {
 		return (string) $this->date;
-	} // end function
+	}
 
 	/**
 	* Returns $language variable
@@ -693,9 +715,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $language
 	* @see $language
 	*/
-	function getLanguage() {
+	function getLanguage( ) {
 		return (string) $this->language;
-	} // end function
+	}
 
 	/**
 	* Returns $rights variable
@@ -704,9 +726,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $rights
 	* @see $rights
 	*/
-	function getRights() {
+	function getRights( ) {
 		return (string) $this->rights;
-	} // end function
+	}
 
 	/**
 	* Returns $coverage variable
@@ -715,9 +737,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $coverage
 	* @see $coverage
 	*/
-	function getCoverage() {
+	function getCoverage( ) {
 		return (string) $this->coverage;
-	} // end function
+	}
 
 	/**
 	* Returns $contributor variable
@@ -726,9 +748,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $contributor
 	* @see $contributor
 	*/
-	function getContributor() {
+	function getContributor( ) {
 		return (string) $this->contributor;
-	} // end function
+	}
 
 	/**
 	* Returns $image_link variable
@@ -737,9 +759,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $image_link
 	* @see $image_link
 	*/
-	function getImageLink() {
+	function getImageLink( ) {
 		return (string) $this->image_link;
-	} // end function
+	}
 
 	/**
 	* Returns $period variable
@@ -748,9 +770,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $period
 	* @see $period
 	*/
-	function getPeriod() {
+	function getPeriod( ) {
 		return (string) $this->period;
-	} // end function
+	}
 
 	/**
 	* Returns $frequency variable
@@ -759,9 +781,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $frequency
 	* @see $frequency
 	*/
-	function getFrequency() {
+	function getFrequency( ) {
 		return (int) $this->frequency;
-	} // end function
+	}
 
 	/**
 	* Returns $base variable
@@ -770,9 +792,9 @@ class RSSBuilder extends RSSBase {
 	* @return string $base
 	* @see $base
 	*/
-	function getBase() {
+	function getBase( ) {
 		return (string) $this->base;
-	} // end function
+	}
 
 	/**
 	* Returns $category variable
@@ -782,9 +804,9 @@ class RSSBuilder extends RSSBase {
 	* @see $category
 	* @since 1.001 - 2003-05-30
 	*/
-	function getCategory() {
+	function getCategory( ) {
 		return (string) $this->category;
-	} // end function
+	}
 
 	/**
 	* Returns $cache variable
@@ -794,9 +816,9 @@ class RSSBuilder extends RSSBase {
 	* @see $cache
 	* @since 1.001 - 2003-05-30
 	*/
-	function getCache() {
+	function getCache( ) {
 		return (int) $this->cache;
-	} // end function
+	}
 
 	/**
 	* Adds another rss item to the object
@@ -815,27 +837,11 @@ class RSSBuilder extends RSSBase {
 	* @see $items
 	* @uses RSSItem
 	*/
-	function addItem($about = '',
-					$title = '',
-					$link = '',
-					$description = '',
-					$subject = '',
-					$date = '',
-					$author = '',
-					$comments = '',
-					$image = '') {
+	function addItem( $about = '', $title = '', $link = '', $description = '', $subject = '', $date = '', $author = '', $comments = '', $image = '' ) {
 
-		$item = new RSSItem($about,
-							$title,
-							$link,
-							$description,
-							$subject,
-							$date,
-							$author,
-							$comments,
-							$image);
+		$item = new RSSItem( $about, $title, $link, $description, $subject, $date, $author, $comments, $image );
 		$this->items[] = $item;
-	} // end function
+	}
 
 	/**
 	* Deletes a rss item from the array
@@ -845,14 +851,17 @@ class RSSBuilder extends RSSBase {
 	* @return boolean true if item was deleted
 	* @see $items
 	*/
-	function deleteItem($id = -1) {
-		if (array_key_exists($id, $this->items)) {
-			unset($this->items[$id]);
+	function deleteItem( $id = -1 ) {
+		if( array_key_exists( $id, $this->items ) ) {
+			unset( $this->items[$id] );
 			return (boolean) TRUE;
-		} else {
+		}
+		else {
 			return (boolean) FALSE;
-		} // end if
-	} // end function
+		}
+
+		// end if
+	}
 
 	/**
 	* Returns an array with all the keys of the $items array
@@ -861,9 +870,9 @@ class RSSBuilder extends RSSBase {
 	* @return array array with all the keys of the $items array
 	* @see $items
 	*/
-	function getItemList() {
-		return (array) array_keys($this->items);
-	} // end function
+	function getItemList( ) {
+		return (array) array_keys( $this->items );
+	}
 
 	/**
 	* Returns the $items array
@@ -871,9 +880,9 @@ class RSSBuilder extends RSSBase {
 	* @desc Returns the $items array
 	* @return array $items
 	*/
-	function getItems() {
+	function getItems( ) {
 		return (array) $this->items;
-	} // end function
+	}
 
 	/**
 	* Returns a single rss item by ID
@@ -883,15 +892,19 @@ class RSSBuilder extends RSSBase {
 	* @return mixed RSSItem or FALSE
 	* @see RSSItem
 	*/
-	function getItem($id = -1) {
-		if (array_key_exists($id, $this->items)) {
+	function getItem( $id = -1 ) {
+		if( array_key_exists( $id, $this->items ) ) {
 			return (object) $this->items[$id];
-		} else {
+		}
+		else {
 			return (boolean) FALSE;
-		} // end if
-	} // end function
-	/**#@-*/
+		}
 
+		// end if
+	}
+
+	// end function
+	/**#@-*/
 	/**#@+
 	* @return void
 	* @access private
@@ -902,10 +915,11 @@ class RSSBuilder extends RSSBase {
 	* @desc creates the output based on the 0.91 rss version
 	* @see $output
 	*/
-	function createOutputV090() {
+	function createOutputV090( ) {
+
 		// not implemented
-		$this->createOutputV100();
-	} // end function
+		$this->createOutputV100( );
+	}
 
 	/**
 	* creates the output based on the 0.91 rss version
@@ -914,78 +928,108 @@ class RSSBuilder extends RSSBase {
 	* @see $output
 	* @since 1.001 - 2003-05-30
 	*/
-	function createOutputV091() {
-		$this->output  = (string) '<!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.91.dtd">' . "\n";
+	function createOutputV091( ) {
+		$this->output = (string) '<!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.91.dtd">' . "\n";
 		$this->output .= (string) '<rss version="0.91">' . "\n";
 		$this->output .= (string) '<channel>' . "\n";
 
-		if (strlen($this->rights) > 0) {
+		if( strlen( $this->rights ) > 0 ) {
 			$this->output .= (string) '<copyright>' . $this->rights . '</copyright>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->date) > 0) {
-			$this->output .= (string) '<pubDate>' .$this->date . '</pubDate>' . "\n";
-			$this->output .= (string) '<lastBuildDate>' .$this->date . '</lastBuildDate>' . "\n";
-		} // end if
+		// end if
 
-		if (strlen($this->about) > 0) {
+		if( strlen( $this->date ) > 0 ) {
+			$this->output .= (string) '<pubDate>' . $this->date . '</pubDate>' . "\n";
+			$this->output .= (string) '<lastBuildDate>' . $this->date . '</lastBuildDate>' . "\n";
+		}
+
+		// end if
+
+		if( strlen( $this->about ) > 0 ) {
 			$this->output .= (string) '<docs>' . $this->about . '</docs>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->description) > 0) {
+		// end if
+
+		if( strlen( $this->description ) > 0 ) {
 			$this->output .= (string) '<description>' . $this->description . '</description>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->about) > 0) {
+		// end if
+
+		if( strlen( $this->about ) > 0 ) {
 			$this->output .= (string) '<link>' . $this->about . '</link>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->title) > 0) {
+		// end if
+
+		if( strlen( $this->title ) > 0 ) {
 			$this->output .= (string) '<title>' . $this->title . '</title>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->image_link) > 0) {
+		// end if
+
+		if( strlen( $this->image_link ) > 0 ) {
 			$this->output .= (string) '<image>' . "\n";
 			$this->output .= (string) '<title>' . $this->title . '</title>' . "\n";
 			$this->output .= (string) '<url>' . $this->image_link . '</url>' . "\n";
 			$this->output .= (string) '<link>' . $this->about . '</link>' . "\n";
-			if (strlen($this->description) > 0) {
+			if( strlen( $this->description ) > 0 ) {
 				$this->output .= (string) '<description>' . $this->description . '</description>' . "\n";
-			} // end if
+			}
+
+			// end if
 			$this->output .= (string) '</image>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->publisher) > 0) {
+		// end if
+
+		if( strlen( $this->publisher ) > 0 ) {
 			$this->output .= (string) '<managingEditor>' . $this->publisher . '</managingEditor>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->creator) > 0) {
+		// end if
+
+		if( strlen( $this->creator ) > 0 ) {
 			$this->output .= (string) '<webMaster>' . $this->creator . '</webMaster>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->language) > 0) {
+		// end if
+
+		if( strlen( $this->language ) > 0 ) {
 			$this->output .= (string) '<language>' . $this->language . '</language>' . "\n";
-		} // end if
+		}
 
-		if (count($this->getItemList()) > 0) {
-			foreach ($this->getItemList() as $id) {
-				$item =& $this->items[$id];
+		// end if
 
-				if (strlen($item->getTitle()) > 0 && strlen($item->getLink()) > 0) {
+		if( count( $this->getItemList( ) ) > 0 ) {
+			foreach( $this->getItemList( ) as $id ) {
+				$item = &$this->items[$id];
+
+				if( strlen( $item->getTitle( ) ) > 0 && strlen( $item->getLink( ) ) > 0 ) {
 					$this->output .= (string) '<item>' . "\n";
-					$this->output .= (string) '<title>' . $item->getTitle() . '</title>' . "\n";
-					$this->output .= (string) '<link>' . $item->getLink() . '</link>' . "\n";
-					if (strlen($item->getDescription()) > 0) {
-						$this->output .= (string) '<description>' . $item->getDescription() . '</description>' . "\n";
-					} // end if
+					$this->output .= (string) '<title>' . $item->getTitle( ) . '</title>' . "\n";
+					$this->output .= (string) '<link>' . $item->getLink( ) . '</link>' . "\n";
+					if( strlen( $item->getDescription( ) ) > 0 ) {
+						$this->output .= (string) '<description>' . $item->getDescription( ) . '</description>' . "\n";
+					}
+
+					// end if
 					$this->output .= (string) '</item>' . "\n";
-				} // end if
-			} // end foreach
-		} // end if
+				}
+
+				// end if
+			}
+
+			// end foreach
+		}
+
+		// end if
 
 		$this->output .= (string) '</channel>' . "\n";
 		$this->output .= (string) '</rss>' . "\n";
-	} // end function
+	}
 
 	/**
 	* creates the output based on the 1.0 rss version
@@ -993,139 +1037,197 @@ class RSSBuilder extends RSSBase {
 	* @desc creates the output based on the 1.0 rss version
 	* @see $output
 	*/
-	function createOutputV100() {
-		$this->output  = (string) '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:im="http://purl.org/rss/1.0/item-images/" ';
+	function createOutputV100( ) {
+		$this->output = (string) '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:im="http://purl.org/rss/1.0/item-images/" ';
 
-		if ($this->use_dc_data === TRUE) {
+		if( $this->use_dc_data === TRUE ) {
 			$this->output .= (string) 'xmlns:dc="http://purl.org/dc/elements/1.1/" ';
-		} // end if
+		}
 
-		if ($this->use_sy_data === TRUE) {
+		// end if
+
+		if( $this->use_sy_data === TRUE ) {
 			$this->output .= (string) 'xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" ';
-		} // end if
+		}
+
+		// end if
 
 		$this->output .= (string) 'xmlns="http://purl.org/rss/1.0/">' . "\n";
 
-		if (strlen($this->about) > 0) {
+		if( strlen( $this->about ) > 0 ) {
 			$this->output .= (string) '<channel rdf:about="' . $this->about . '">' . "\n";
-		} else {
+		}
+		else {
 			$this->output .= (string) '<channel>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->title) > 0) {
+		// end if
+
+		if( strlen( $this->title ) > 0 ) {
 			$this->output .= (string) '<title>' . $this->title . '</title>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->about) > 0) {
+		// end if
+
+		if( strlen( $this->about ) > 0 ) {
 			$this->output .= (string) '<link>' . $this->about . '</link>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->description) > 0) {
+		// end if
+
+		if( strlen( $this->description ) > 0 ) {
 			$this->output .= (string) '<description>' . $this->description . '</description>' . "\n";
-		} // end if
+		}
 
+		// end if
 		// additional dc data
-		if (strlen($this->publisher) > 0) {
+		if( strlen( $this->publisher ) > 0 ) {
 			$this->output .= (string) '<dc:publisher>' . $this->publisher . '</dc:publisher>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->creator) > 0) {
+		// end if
+
+		if( strlen( $this->creator ) > 0 ) {
 			$this->output .= (string) '<dc:creator>' . $this->creator . '</dc:creator>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->date) > 0) {
-			$this->output .= (string) '<dc:date>' .$this->date . '</dc:date>' . "\n";
-		} // end if
+		// end if
 
-		if (strlen($this->language) > 0) {
+		if( strlen( $this->date ) > 0 ) {
+			$this->output .= (string) '<dc:date>' . $this->date . '</dc:date>' . "\n";
+		}
+
+		// end if
+
+		if( strlen( $this->language ) > 0 ) {
 			$this->output .= (string) '<dc:language>' . $this->language . '</dc:language>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->rights) > 0) {
+		// end if
+
+		if( strlen( $this->rights ) > 0 ) {
 			$this->output .= (string) '<dc:rights>' . $this->rights . '</dc:rights>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->coverage) > 0) {
+		// end if
+
+		if( strlen( $this->coverage ) > 0 ) {
 			$this->output .= (string) '<dc:coverage>' . $this->coverage . '</dc:coverage>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->contributor) > 0) {
+		// end if
+
+		if( strlen( $this->contributor ) > 0 ) {
 			$this->output .= (string) '<dc:contributor>' . $this->contributor . '</dc:contributor>' . "\n";
-		} // end if
+		}
 
+		// end if
 		// additional SY data
-		if (strlen($this->period) > 0) {
+		if( strlen( $this->period ) > 0 ) {
 			$this->output .= (string) '<sy:updatePeriod>' . $this->period . '</sy:updatePeriod>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->frequency) > 0) {
+		// end if
+
+		if( strlen( $this->frequency ) > 0 ) {
 			$this->output .= (string) '<sy:updateFrequency>' . $this->frequency . '</sy:updateFrequency>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->base) > 0) {
+		// end if
+
+		if( strlen( $this->base ) > 0 ) {
 			$this->output .= (string) '<sy:updateBase>' . $this->base . '</sy:updateBase>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->image_link) > 0) {
+		// end if
+
+		if( strlen( $this->image_link ) > 0 ) {
 			$this->output .= (string) '<image rdf:about="' . $this->image_link . '">' . "\n";
 			$this->output .= (string) '<title>' . $this->title . '</title>' . "\n";
 			$this->output .= (string) '<url>' . $this->image_link . '</url>' . "\n";
 			$this->output .= (string) '<link>' . $this->about . '</link>' . "\n";
-			if (strlen($this->description) > 0) {
+			if( strlen( $this->description ) > 0 ) {
 				$this->output .= (string) '<description>' . $this->description . '</description>' . "\n";
-			} // end if
-			$this->output .= (string) '</image>' . "\n";
-		} // end if
+			}
 
-		if (count($this->getItemList()) > 0) {
+			// end if
+			$this->output .= (string) '</image>' . "\n";
+		}
+
+		// end if
+
+		if( count( $this->getItemList( ) ) > 0 ) {
 			$this->output .= (string) '<items><rdf:Seq>' . "\n";
-			foreach ($this->getItemList() as $id) {
-				$item =& $this->items[$id];
-				if (strlen($item->getAbout()) > 0) {
-					$this->output .= (string) ' <rdf:li resource="' . $item->getAbout() . '" />' . "\n";
-				} // end if
-			} // end foreach
+			foreach( $this->getItemList( ) as $id ) {
+				$item = &$this->items[$id];
+				if( strlen( $item->getAbout( ) ) > 0 ) {
+					$this->output .= (string) ' <rdf:li resource="' . $item->getAbout( ) . '" />' . "\n";
+				}
+
+				// end if
+			}
+
+			// end foreach
 			$this->output .= (string) '</rdf:Seq></items>' . "\n";
-		} // end if
+		}
+
+		// end if
 		$this->output .= (string) '</channel>' . "\n";
 
-		if (count($this->getItemList()) > 0) {
-			foreach ($this->getItemList() as $id) {
-				$item =& $this->items[$id];
+		if( count( $this->getItemList( ) ) > 0 ) {
+			foreach( $this->getItemList( ) as $id ) {
+				$item = &$this->items[$id];
 
-				if (strlen($item->getTitle()) > 0 && strlen($item->getLink()) > 0) {
-					if (strlen($item->getAbout()) > 0) {
-						$this->output .= (string) '<item rdf:about="' . $item->getAbout() . '">' . "\n";
-					} else {
+				if( strlen( $item->getTitle( ) ) > 0 && strlen( $item->getLink( ) ) > 0 ) {
+					if( strlen( $item->getAbout( ) ) > 0 ) {
+						$this->output .= (string) '<item rdf:about="' . $item->getAbout( ) . '">' . "\n";
+					}
+					else {
 						$this->output .= (string) '<item>' . "\n";
-					} // end if
+					}
 
-					$this->output .= (string) '<title>' . $item->getTitle() . '</title>' . "\n";
-					$this->output .= (string) '<link>' . $item->getLink() . '</link>' . "\n";
+					// end if
 
-					if (strlen($item->getDescription()) > 0) {
-						$this->output .= (string) '<description>' . $item->getDescription() . '</description>' . "\n";
-					} // end if
+					$this->output .= (string) '<title>' . $item->getTitle( ) . '</title>' . "\n";
+					$this->output .= (string) '<link>' . $item->getLink( ) . '</link>' . "\n";
 
-					if ($this->use_dc_data === TRUE && strlen($item->getSubject()) > 0) {
-						$this->output .= (string) '<dc:subject>' . $item->getSubject() . '</dc:subject>' . "\n";
-					} // end if
+					if( strlen( $item->getDescription( ) ) > 0 ) {
+						$this->output .= (string) '<description>' . $item->getDescription( ) . '</description>' . "\n";
+					}
 
-					if ($this->use_dc_data === TRUE && strlen($item->getDate()) > 0) {
-						$this->output .= (string) '<dc:date>' . $item->getDate() . '</dc:date>' . "\n";
-					} // end if
+					// end if
 
-					if (strlen($item->getImage()) > 0) {
-						$this->output .= (string) '<im:image>' . $item->getImage() . '</im:image>' . "\n";
-					} // end if
+					if( $this->use_dc_data === TRUE && strlen( $item->getSubject( ) ) > 0 ) {
+						$this->output .= (string) '<dc:subject>' . $item->getSubject( ) . '</dc:subject>' . "\n";
+					}
+
+					// end if
+
+					if( $this->use_dc_data === TRUE && strlen( $item->getDate( ) ) > 0 ) {
+						$this->output .= (string) '<dc:date>' . $item->getDate( ) . '</dc:date>' . "\n";
+					}
+
+					// end if
+
+					if( strlen( $item->getImage( ) ) > 0 ) {
+						$this->output .= (string) '<im:image>' . $item->getImage( ) . '</im:image>' . "\n";
+					}
+
+					// end if
 
 					$this->output .= (string) '</item>' . "\n";
-				} // end if
-			} // end foreach
-		} // end if
+				}
+
+				// end if
+			}
+
+			// end foreach
+		}
+
+		// end if
 
 		$this->output .= (string) '</rdf:RDF>';
-	} // end function
+	}
 
 	/**
 	* creates the output based on the 2.0 rss draft
@@ -1134,165 +1236,232 @@ class RSSBuilder extends RSSBase {
 	* @see $output
 	* @since 1.001 - 2003-05-30
 	*/
-	function createOutputV200() {
-		$this->output  = (string) '<rss version="2.0" xmlns:im="http://purl.org/rss/1.0/item-images/" ';
+	function createOutputV200( ) {
+		$this->output = (string) '<rss version="2.0" xmlns:im="http://purl.org/rss/1.0/item-images/" ';
 
-		if ($this->use_dc_data === TRUE) {
+		if( $this->use_dc_data === TRUE ) {
 			$this->output .= (string) 'xmlns:dc="http://purl.org/dc/elements/1.1/" ';
-		} // end if
+		}
 
-		if ($this->use_sy_data === TRUE) {
+		// end if
+
+		if( $this->use_sy_data === TRUE ) {
 			$this->output .= (string) 'xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" ';
-		} // end if
+		}
+
+		// end if
 
 		$this->output .= (string) '>' . "\n";
 
 		$this->output .= (string) '<channel>' . "\n";
 
-		if (strlen($this->rights) > 0) {
+		if( strlen( $this->rights ) > 0 ) {
 			$this->output .= (string) '<copyright>' . $this->rights . '</copyright>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->date) > 0) {
-			$this->output .= (string) '<pubDate>' .$this->date . '</pubDate>' . "\n";
-			$this->output .= (string) '<lastBuildDate>' .$this->date . '</lastBuildDate>' . "\n";
-		} // end if
+		// end if
 
-		if (strlen($this->about) > 0) {
+		if( strlen( $this->date ) > 0 ) {
+			$this->output .= (string) '<pubDate>' . $this->date . '</pubDate>' . "\n";
+			$this->output .= (string) '<lastBuildDate>' . $this->date . '</lastBuildDate>' . "\n";
+		}
+
+		// end if
+
+		if( strlen( $this->about ) > 0 ) {
 			$this->output .= (string) '<docs>' . $this->about . '</docs>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->description) > 0) {
+		// end if
+
+		if( strlen( $this->description ) > 0 ) {
 			$this->output .= (string) '<description>' . $this->description . '</description>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->about) > 0) {
+		// end if
+
+		if( strlen( $this->about ) > 0 ) {
 			$this->output .= (string) '<link>' . $this->about . '</link>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->title) > 0) {
+		// end if
+
+		if( strlen( $this->title ) > 0 ) {
 			$this->output .= (string) '<title>' . $this->title . '</title>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->image_link) > 0) {
+		// end if
+
+		if( strlen( $this->image_link ) > 0 ) {
 			$this->output .= (string) '<image>' . "\n";
 			$this->output .= (string) '<title>' . $this->title . '</title>' . "\n";
 			$this->output .= (string) '<url>' . $this->image_link . '</url>' . "\n";
 			$this->output .= (string) '<link>' . $this->about . '</link>' . "\n";
-			if (strlen($this->description) > 0) {
+			if( strlen( $this->description ) > 0 ) {
 				$this->output .= (string) '<description>' . $this->description . '</description>' . "\n";
-			} // end if
+			}
+
+			// end if
 			$this->output .= (string) '</image>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->publisher) > 0) {
+		// end if
+
+		if( strlen( $this->publisher ) > 0 ) {
 			$this->output .= (string) '<managingEditor>' . $this->publisher . '</managingEditor>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->creator) > 0) {
+		// end if
+
+		if( strlen( $this->creator ) > 0 ) {
 			$this->output .= (string) '<webMaster>' . $this->creator . '</webMaster>' . "\n";
 			$this->output .= (string) '<generator>' . $this->creator . '</generator>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->language) > 0) {
+		// end if
+
+		if( strlen( $this->language ) > 0 ) {
 			$this->output .= (string) '<language>' . $this->language . '</language>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->category) > 0) {
+		// end if
+
+		if( strlen( $this->category ) > 0 ) {
 			$this->output .= (string) '<category>' . $this->category . '</category>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->cache) > 0) {
+		// end if
+
+		if( strlen( $this->cache ) > 0 ) {
 			$this->output .= (string) '<ttl>' . $this->cache . '</ttl>' . "\n";
-		} // end if
+		}
 
-
+		// end if
 		// additional dc data
-		if (strlen($this->publisher) > 0) {
+		if( strlen( $this->publisher ) > 0 ) {
 			$this->output .= (string) '<dc:publisher>' . $this->publisher . '</dc:publisher>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->creator) > 0) {
+		// end if
+
+		if( strlen( $this->creator ) > 0 ) {
 			$this->output .= (string) '<dc:creator>' . $this->creator . '</dc:creator>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->date) > 0) {
-			$this->output .= (string) '<dc:date>' .$this->date . '</dc:date>' . "\n";
-		} // end if
+		// end if
 
-		if (strlen($this->language) > 0) {
+		if( strlen( $this->date ) > 0 ) {
+			$this->output .= (string) '<dc:date>' . $this->date . '</dc:date>' . "\n";
+		}
+
+		// end if
+
+		if( strlen( $this->language ) > 0 ) {
 			$this->output .= (string) '<dc:language>' . $this->language . '</dc:language>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->rights) > 0) {
+		// end if
+
+		if( strlen( $this->rights ) > 0 ) {
 			$this->output .= (string) '<dc:rights>' . $this->rights . '</dc:rights>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->coverage) > 0) {
+		// end if
+
+		if( strlen( $this->coverage ) > 0 ) {
 			$this->output .= (string) '<dc:coverage>' . $this->coverage . '</dc:coverage>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->contributor) > 0) {
+		// end if
+
+		if( strlen( $this->contributor ) > 0 ) {
 			$this->output .= (string) '<dc:contributor>' . $this->contributor . '</dc:contributor>' . "\n";
-		} // end if
+		}
 
+		// end if
 		// additional SY data
-		if (strlen($this->period) > 0) {
+		if( strlen( $this->period ) > 0 ) {
 			$this->output .= (string) '<sy:updatePeriod>' . $this->period . '</sy:updatePeriod>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->frequency) > 0) {
+		// end if
+
+		if( strlen( $this->frequency ) > 0 ) {
 			$this->output .= (string) '<sy:updateFrequency>' . $this->frequency . '</sy:updateFrequency>' . "\n";
-		} // end if
+		}
 
-		if (strlen($this->base) > 0) {
+		// end if
+
+		if( strlen( $this->base ) > 0 ) {
 			$this->output .= (string) '<sy:updateBase>' . $this->base . '</sy:updateBase>' . "\n";
-		} // end if
+		}
 
-		if (count($this->getItemList()) > 0) {
-			foreach ($this->getItemList() as $id) {
-				$item =& $this->items[$id];
+		// end if
 
-				if (strlen($item->getTitle()) > 0 && strlen($item->getLink()) > 0) {
+		if( count( $this->getItemList( ) ) > 0 ) {
+			foreach( $this->getItemList( ) as $id ) {
+				$item = &$this->items[$id];
+
+				if( strlen( $item->getTitle( ) ) > 0 && strlen( $item->getLink( ) ) > 0 ) {
 					$this->output .= (string) '<item>' . "\n";
-					$this->output .= (string) '<title>' . $item->getTitle() . '</title>' . "\n";
-					$this->output .= (string) '<link>' . $item->getLink() . '</link>' . "\n";
+					$this->output .= (string) '<title>' . $item->getTitle( ) . '</title>' . "\n";
+					$this->output .= (string) '<link>' . $item->getLink( ) . '</link>' . "\n";
 
-					if (strlen($item->getDescription()) > 0) {
-						$this->output .= (string) '<description><![CDATA[' . $item->getDescription() . ']]></description>' . "\n";
-					} // end if
+					if( strlen( $item->getDescription( ) ) > 0 ) {
+						$this->output .= (string) '<description><![CDATA[' . $item->getDescription( ) . ']]></description>' . "\n";
+					}
 
-					if ($this->use_dc_data === TRUE && strlen($item->getSubject()) > 0) {
-						$this->output .= (string) '<category>' . $item->getSubject() . '</category>' . "\n";
-					} // end if
+					// end if
 
-					if ($this->use_dc_data === TRUE && strlen($item->getDate()) > 0) {
-						$this->output .= (string) '<pubDate>' . $item->getDate() . '</pubDate>' . "\n";
-					} // end if
+					if( $this->use_dc_data === TRUE && strlen( $item->getSubject( ) ) > 0 ) {
+						$this->output .= (string) '<category>' . $item->getSubject( ) . '</category>' . "\n";
+					}
 
-					if (strlen($item->getAbout()) > 0) {
-						$this->output .= (string) '<guid>' . $item->getAbout() . '</guid>' . "\n";
-					} // end if
+					// end if
 
-					if (strlen($item->getAuthor()) > 0) {
-						$this->output .= (string) '<author>' . $item->getAuthor() . '</author>' . "\n";
-					} // end if
+					if( $this->use_dc_data === TRUE && strlen( $item->getDate( ) ) > 0 ) {
+						$this->output .= (string) '<pubDate>' . $item->getDate( ) . '</pubDate>' . "\n";
+					}
 
-					if (strlen($item->getComments()) > 0) {
-						$this->output .= (string) '<comments>' . $item->getComments() . '</comments>' . "\n";
-					} // end if
+					// end if
 
-					if (strlen($item->getImage()) > 0) {
-						$this->output .= (string) '<im:image>' . $item->getImage() . '</im:image>' . "\n";
-					} // end if
+					if( strlen( $item->getAbout( ) ) > 0 ) {
+						$this->output .= (string) '<guid>' . $item->getAbout( ) . '</guid>' . "\n";
+					}
+
+					// end if
+
+					if( strlen( $item->getAuthor( ) ) > 0 ) {
+						$this->output .= (string) '<author>' . $item->getAuthor( ) . '</author>' . "\n";
+					}
+
+					// end if
+
+					if( strlen( $item->getComments( ) ) > 0 ) {
+						$this->output .= (string) '<comments>' . $item->getComments( ) . '</comments>' . "\n";
+					}
+
+					// end if
+
+					if( strlen( $item->getImage( ) ) > 0 ) {
+						$this->output .= (string) '<im:image>' . $item->getImage( ) . '</im:image>' . "\n";
+					}
+
+					// end if
 					$this->output .= (string) '</item>' . "\n";
-				} // end if
-			} // end foreach
-		} // end if
+				}
+
+				// end if
+			}
+
+			// end foreach
+		}
+
+		// end if
 
 		$this->output .= (string) '</channel>' . "\n";
 		$this->output .= (string) '</rss>' . "\n";
-	} // end function
+	}
 
 	/**
 	* creates the output
@@ -1303,27 +1472,33 @@ class RSSBuilder extends RSSBase {
 	* @uses createOutputV200()
 	* @uses createOutputV100()
 	*/
-	function createOutput($version = '') {
-		if (strlen(trim($version)) === 0) {
+	function createOutput( $version = '' ) {
+		if( strlen( trim( $version ) ) === 0 ) {
 			$version = (string) '1.0';
-		} // end if
+		}
 
-		switch ($version) {
+		// end if
+
+		switch( $version ) {
 			case '0.9':
-				$this->createOutputV090();
+				$this->createOutputV090( );
 				break;
 			case '0.91':
-				$this->createOutputV091();
+				$this->createOutputV091( );
 				break;
 			case '2.00':
-				$this->createOutputV200();
+				$this->createOutputV200( );
 				break;
 			case '1.0':
 			default:
-				$this->createOutputV100();
+				$this->createOutputV100( );
 				break;
-		} // end switch
-	} // end function
+		}
+
+		// end switch
+	}
+
+	// end function
 	/**
 	* echos the output
 	*
@@ -1334,18 +1509,17 @@ class RSSBuilder extends RSSBase {
 	* @access public
 	* @uses createOutput()
 	*/
-	function outputRSS($version = '') {
-		if (!isset($this->output)) {
-			$this->createOutput($version);
-		} // end if
+	function outputRSS( $version = '' ) {
+		if( !isset( $this->output ) ) {
+			$this->createOutput( $version );
+		}
 
 		# Mantis: text/xml -> application/xml
-		header ('content-type: application/xml');
-		header('Content-Disposition: inline; filename=rss_' . str_replace(' ','',$this->title) . '.xml');
-		$this->output = '<?xml version="1.0" encoding="' . $this->encoding . '"?>' . "\n" .
-						'<!--  RSS generated by Flaimo.com RSS Builder [' .  date('Y-m-d H:i:s')  .']  --> ' . $this->output;
+		header( 'content-type: application/xml' );
+		header( 'Content-Disposition: inline; filename=rss_' . str_replace( ' ', '', $this->title ) . '.xml' );
+		$this->output = '<?xml version="1.0" encoding="' . $this->encoding . '"?>' . "\n" . '<!--  RSS generated by Flaimo.com RSS Builder [' . date( 'Y-m-d H:i:s' ) . ']  --> ' . $this->output;
 		echo $this->output;
-	} // end function
+	}
 
 	/**
 	* returns the output
@@ -1354,17 +1528,18 @@ class RSSBuilder extends RSSBase {
 	*
 	* @desc returns the output
 	*/
-	function getRSSOutput($version = '') {
-		if (!isset($this->output)) {
-			$this->createOutput($version);
-		} // end if
-		return (string) '<?xml version="1.0" encoding="' . $this->encoding . '"?>' . "\n" .
-						'<!--  RSS generated by Flaimo.com RSS Builder [' .  date('Y-m-d H:i:s')  .']  --> ' . $this->output;
-	} // end function
-	/**#@-*/
-} // end class RSSBuilder
+	function getRSSOutput( $version = '' ) {
+		if( !isset( $this->output ) ) {
+			$this->createOutput( $version );
+		}
 
-//---------------------------------------------------------------------------
+		// end if
+		return (string) '<?xml version="1.0" encoding="' . $this->encoding . '"?>' . "\n" . '<!--  RSS generated by Flaimo.com RSS Builder [' . date( 'Y-m-d H:i:s' ) . ']  --> ' . $this->output;
+	}
+
+	// end function
+	/**#@-*/
+}
 
 /**
 * single rss item object
@@ -1386,7 +1561,6 @@ class RSSItem extends RSSBase {
 	/*-------------------*/
 	/* V A R I A B L E S */
 	/*-------------------*/
-
 	/**#@+
 	* @access private
 	* @var string
@@ -1456,12 +1630,11 @@ class RSSItem extends RSSBase {
 	* @since 1.002 - 2003-06-26
 	*/
 	var $image;
-	/**#@-*/
 
+	/**#@-*/
 	/*-----------------------*/
 	/* C O N S T R U C T O R */
 	/*-----------------------*/
-
 	/**#@+
 	* @access private
 	* @return void
@@ -1489,26 +1662,17 @@ class RSSItem extends RSSBase {
 	* @uses setComments()
 	* @uses setImage()
 	*/
-	function RSSItem($about = '',
-					$title = '',
-					$link = '',
-					$description = '',
-					$subject = '',
-					$date = '',
-					$author = '',
-					$comments = '',
-					$image = '') {
-		$this->setAbout($about);
-		$this->setTitle($title);
-		$this->setLink($link);
-		$this->setDescription($description);
-		$this->setSubject($subject);
-		$this->setDate($date);
-		$this->setAuthor($author);
-		$this->setComments($comments);
-		$this->setImage($image);
-	} // end constructor
-
+	function RSSItem( $about = '', $title = '', $link = '', $description = '', $subject = '', $date = '', $author = '', $comments = '', $image = '' ) {
+		$this->setAbout( $about );
+		$this->setTitle( $title );
+		$this->setLink( $link );
+		$this->setDescription( $description );
+		$this->setSubject( $subject );
+		$this->setDate( $date );
+		$this->setAuthor( $author );
+		$this->setComments( $comments );
+		$this->setImage( $image );
+	}
 
 	/**
 	* Sets $about variable
@@ -1517,11 +1681,13 @@ class RSSItem extends RSSBase {
 	* @param string $about
 	* @see $about
 	*/
-	function setAbout($about = '') {
-		if (!isset($this->about) && strlen(trim($about)) > 0) {
-			$this->about = (string) trim($about);
-		} // end if
-	} // end function
+	function setAbout( $about = '' ) {
+		if( !isset( $this->about ) && strlen( trim( $about ) ) > 0 ) {
+			$this->about = (string) trim( $about );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $title variable
@@ -1530,11 +1696,13 @@ class RSSItem extends RSSBase {
 	* @param string $title
 	* @see $title
 	*/
-	function setTitle($title = '') {
-		if (!isset($this->title) && strlen(trim($title)) > 0) {
-			$this->title = (string) trim($title);
-		} // end if
-	} // end function
+	function setTitle( $title = '' ) {
+		if( !isset( $this->title ) && strlen( trim( $title ) ) > 0 ) {
+			$this->title = (string) trim( $title );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $link variable
@@ -1543,11 +1711,13 @@ class RSSItem extends RSSBase {
 	* @param string $link
 	* @see $link
 	*/
-	function setLink($link = '') {
-		if (!isset($this->link) && strlen(trim($link)) > 0) {
-			$this->link = (string) trim($link);
-		} // end if
-	} // end function
+	function setLink( $link = '' ) {
+		if( !isset( $this->link ) && strlen( trim( $link ) ) > 0 ) {
+			$this->link = (string) trim( $link );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $description variable
@@ -1556,11 +1726,13 @@ class RSSItem extends RSSBase {
 	* @param string $description
 	* @see $description
 	*/
-	function setDescription($description = '') {
-		if (!isset($this->description) && strlen(trim($description)) > 0) {
-			$this->description = (string) trim($description);
-		} // end if
-	} // end function
+	function setDescription( $description = '' ) {
+		if( !isset( $this->description ) && strlen( trim( $description ) ) > 0 ) {
+			$this->description = (string) trim( $description );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $subject variable
@@ -1569,11 +1741,13 @@ class RSSItem extends RSSBase {
 	* @param string $subject
 	* @see $subject
 	*/
-	function setSubject($subject = '') {
-		if (!isset($this->subject) && strlen(trim($subject)) > 0) {
-			$this->subject = (string) trim($subject);
-		} // end if
-	} // end function
+	function setSubject( $subject = '' ) {
+		if( !isset( $this->subject ) && strlen( trim( $subject ) ) > 0 ) {
+			$this->subject = (string) trim( $subject );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $date variable
@@ -1582,11 +1756,13 @@ class RSSItem extends RSSBase {
 	* @param string $date
 	* @see $date
 	*/
-	function setDate($date = '') {
-		if (!isset($this->date) && strlen(trim($date)) > 0) {
-			$this->date = (string) trim($date);
-		} // end if
-	} // end function
+	function setDate( $date = '' ) {
+		if( !isset( $this->date ) && strlen( trim( $date ) ) > 0 ) {
+			$this->date = (string) trim( $date );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $author variable
@@ -1596,11 +1772,13 @@ class RSSItem extends RSSBase {
 	* @see $author
 	* @since 1.001 - 2003-05-30
 	*/
-	function setAuthor($author = '') {
-		if (!isset($this->author) && strlen(trim($author)) > 0) {
-			$this->author = (string) trim($author);
-		} // end if
-	} // end function
+	function setAuthor( $author = '' ) {
+		if( !isset( $this->author ) && strlen( trim( $author ) ) > 0 ) {
+			$this->author = (string) trim( $author );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $comments variable
@@ -1610,11 +1788,13 @@ class RSSItem extends RSSBase {
 	* @see $comments
 	* @since 1.001 - 2003-05-30
 	*/
-	function setComments($comments = '') {
-		if (!isset($this->comments) && strlen(trim($comments)) > 0) {
-			$this->comments = (string) trim($comments);
-		} // end if
-	} // end function
+	function setComments( $comments = '' ) {
+		if( !isset( $this->comments ) && strlen( trim( $comments ) ) > 0 ) {
+			$this->comments = (string) trim( $comments );
+		}
+
+		// end if
+	}
 
 	/**
 	* Sets $image variable
@@ -1624,13 +1804,16 @@ class RSSItem extends RSSBase {
 	* @see $image
 	* @since 1.002 - 2003-06-26
 	*/
-	function setImage($image = '') {
-		if (!isset($this->image) && strlen(trim($image)) > 0) {
-			$this->image = (string) trim($image);
-		} // end if
-	} // end function
-	/**#@-*/
+	function setImage( $image = '' ) {
+		if( !isset( $this->image ) && strlen( trim( $image ) ) > 0 ) {
+			$this->image = (string) trim( $image );
+		}
 
+		// end if
+	}
+
+	// end function
+	/**#@-*/
 	/**#@+
 	* @access public
 	*/
@@ -1641,9 +1824,9 @@ class RSSItem extends RSSBase {
 	* @return string $about
 	* @see $about
 	*/
-	function getAbout() {
+	function getAbout( ) {
 		return (string) $this->about;
-	} // end function
+	}
 
 	/**
 	* Returns $title variable
@@ -1652,9 +1835,9 @@ class RSSItem extends RSSBase {
 	* @return string $title
 	* @see $title
 	*/
-	function getTitle() {
+	function getTitle( ) {
 		return (string) $this->title;
-	} // end function
+	}
 
 	/**
 	* Returns $link variable
@@ -1663,9 +1846,9 @@ class RSSItem extends RSSBase {
 	* @return string $link
 	* @see $link
 	*/
-	function getLink() {
+	function getLink( ) {
 		return (string) $this->link;
-	} // end function
+	}
 
 	/**
 	* Returns $description variable
@@ -1674,9 +1857,9 @@ class RSSItem extends RSSBase {
 	* @return string $description
 	* @see $description
 	*/
-	function getDescription() {
+	function getDescription( ) {
 		return (string) $this->description;
-	} // end function
+	}
 
 	/**
 	* Returns $subject variable
@@ -1685,9 +1868,9 @@ class RSSItem extends RSSBase {
 	* @return string $subject
 	* @see $subject
 	*/
-	function getSubject() {
+	function getSubject( ) {
 		return (string) $this->subject;
-	} // end function
+	}
 
 	/**
 	* Returns $date variable
@@ -1696,9 +1879,9 @@ class RSSItem extends RSSBase {
 	* @return string $date
 	* @see $date
 	*/
-	function getDate() {
+	function getDate( ) {
 		return (string) $this->date;
-	} // end function
+	}
 
 	/**
 	* Returns $author variable
@@ -1708,9 +1891,9 @@ class RSSItem extends RSSBase {
 	* @see $author
 	* @since 1.001 - 2003-05-30
 	*/
-	function getAuthor() {
+	function getAuthor( ) {
 		return (string) $this->author;
-	} // end function
+	}
 
 	/**
 	* Returns $comments variable
@@ -1720,9 +1903,9 @@ class RSSItem extends RSSBase {
 	* @see $comments
 	* @since 1.001 - 2003-05-30
 	*/
-	function getComments() {
+	function getComments( ) {
 		return (string) $this->comments;
-	} // end function
+	}
 
 	/**
 	* Returns $image variable
@@ -1732,9 +1915,8 @@ class RSSItem extends RSSBase {
 	* @see $image
 	* @since 1.002 - 2003-06-26
 	*/
-	function getImage() {
+	function getImage( ) {
 		return (string) $this->image;
-	} // end function
+	}
 	/**#@-*/
-} // end class RSSItem
-
+}

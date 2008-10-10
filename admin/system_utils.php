@@ -1,9 +1,7 @@
 <?php
 # Mantis - a php based bugtracking system
-
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 # Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -16,14 +14,12 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-
 # --------------------------------------------------------
 # $Id$
 # --------------------------------------------------------
-
 # FIXME: Looks like "From", "to", and "Copy" need i18n. Possibly more in this file.
 
-require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
 access_ensure_global_level( ADMINISTRATOR );
 
@@ -57,12 +53,12 @@ access_ensure_global_level( ADMINISTRATOR );
 	<!-- each row links to an upgrade
 		move database bug attachments to disk -->
 	<tr bgcolor="#ffffff"><td>Move attachments stored in database schema to disk files.</td><td><center>
-	<?php html_button( 'move_db2disk.php', 'Move Attachments to Disk', array( 'doc' => 'attachment') ); ?>
+	<?php html_button( 'move_db2disk.php', 'Move Attachments to Disk', array( 'doc' => 'attachment' ) );?>
 	</center></td></tr>
 
 	<!-- move database project files to disk -->
 	<tr bgcolor="#ffffff"><td>Move project files stored in database schema to disk.</td><td><center>
-	<?php html_button( 'move_db2disk.php', 'Move Project Files to Disk', array( 'doc' => 'project') ); ?>
+	<?php html_button( 'move_db2disk.php', 'Move Project Files to Disk', array( 'doc' => 'project' ) );?>
 	</center></td></tr>
 
 	<!-- move custom field content to standard field -->
@@ -71,21 +67,23 @@ access_ensure_global_level( ADMINISTRATOR );
 		From
 		<SELECT name="source_id">
 			<?php
-				$t_custom_ids = custom_field_get_ids();
-				foreach ( $t_custom_ids as $t_id ) {
-					printf("<OPTION VALUE=\"%d\">%s", $t_id, custom_field_get_field($t_id, 'name' ) );
-				}
-			?>
+				$t_custom_ids = custom_field_get_ids( );
+foreach( $t_custom_ids as $t_id ) {
+	printf( "<OPTION VALUE=\"%d\">%s", $t_id, custom_field_get_field( $t_id, 'name' ) );
+}
+?>
 		</SELECT> to
 		<SELECT name="dest_id">
 			<?php
-				# @@@ should be expanded and configurable
-				# list matches exact field name from database
-				$t_dest_ids = array('fixed_in_version');
-				foreach ( $t_dest_ids as $t_id ) {
-					printf("<OPTION VALUE=\"%s\">%s", $t_id, $t_id );
-				}
-			?>
+# @@@ should be expanded and configurable
+# list matches exact field name from database
+$t_dest_ids = array(
+	'fixed_in_version',
+);
+foreach( $t_dest_ids as $t_id ) {
+	printf( "<OPTION VALUE=\"%s\">%s", $t_id, $t_id );
+}
+?>
 		</SELECT>
 	<input type="submit" class="button" value="Copy" />
 	</form>
@@ -93,7 +91,7 @@ access_ensure_global_level( ADMINISTRATOR );
 
 	<!-- Database Statistics -->
 	<tr bgcolor="#ffffff"><td>Show database statistics.</td><td><center>
-	<?php html_button( 'db_stats.php', 'Display', array() ); ?>
+	<?php html_button( 'db_stats.php', 'Display', array( ) );?>
 	</center></td></tr>
 
 </table>
