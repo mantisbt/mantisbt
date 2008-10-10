@@ -49,7 +49,6 @@
 	}
 
 	# set a temporary cookie so the login information is passed between pages.
-	auth_logout();
 	auth_set_cookies( $f_user_id, false );
 
 	user_reset_failed_login_count_to_zero( $f_user_id );
