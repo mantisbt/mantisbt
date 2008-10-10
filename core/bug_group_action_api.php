@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -20,8 +19,11 @@
 # --------------------------------------------------------
 
 /**
- * @package CoreAPI
- * @subpackage BugGroupActionAPI
+ * @version $Id$
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ *	@package CoreAPI
+ *	@subpackage BugGroupActionAPI
  */
 
 /**
@@ -89,9 +91,6 @@ function bug_group_action_print_hidden_fields( $p_bug_ids_array ) {
 	}
 }
 
-# #####
-# Call-Outs for EXT_* custom group actions
-# #####
 /**
  * Prints the list of fields in the custom action form.  These are the user inputs
  * and the submit button.  This ends up calling action_<action>_print_fields()
@@ -118,20 +117,20 @@ function bug_group_action_print_title( $p_action ) {
 }
 
 /**
- * Validates the combination of an action and a bug.  This ends up calling
- * action_<action>_validate() from bug_actiongroup_<action>_inc.php
+ * Validates the combination of an action and a bug.  This ends up calling 
+ * action_<action>_validate() from bug_actiongroup_<action>_inc.php	 
  *
  * @param $p_action   The custom action name without the "EXT_" prefix.
  * @param $p_bug_id   The id of the bug to validate the action on.
- *
- * @returns true      Action can be applied.
- * @returns array( bug_id => reason for failure to validate )
+ * 
+ * @returns true|array true if action can be applied or array of ( bug_id => reason for failure to validate )
  */
 function bug_group_action_validate( $p_action, $p_bug_id ) {
 	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
 	$t_function_name = 'action_' . $p_action . '_validate';
 	return $t_function_name( $p_bug_id );
 }
+
 
 /**
  * Executes an action on a bug.  This ends up calling

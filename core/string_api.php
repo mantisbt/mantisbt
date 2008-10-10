@@ -198,38 +198,20 @@ function string_url( $p_string ) {
 function string_sanitize_url( $p_url, $return_absolute = false ) {
 	$t_url = strip_tags( urldecode( $p_url ) );
 	if( preg_match( '?http(s)*://?', $t_url ) > 0 ) {
-
 		/* url string contains http(s) */
 		if( preg_match( '?^' . config_get( 'path' ) . '?', $t_url ) == 0 ) {
-
 			/* url string does not begin with our path, therefore, replace it with a link to index.php */
 			if( $return_absolute == true ) {
-				$t_url = config_get_global( 'path' ) . 'index.php';
+				return config_get_global( 'path' ) . 'index.php';
+			} else {
+				return 'index.php';
 			}
-			else {
-				$t_url = 'index.php';
-			}
+		} else {
+			/* url string is an absolute url to our site - strip out the absolute part we will add it later if required */
+			str_replace( config_get_global( 'path' ), '', $t_url ); 	
 		}
-		else {
-
-			/* url string is an absolute url to our site - if we need to return a relative link, strip out the absolute part */
-			if( $return_absolute == false ) {
-				str_replace( config_get_global( 'path' ), '', $t_url );
-			}
-		}
-	}
-	else {
-
-		/* url string is a relative link */
-		/* if we need to return an absolute link, we append our path to the url */
-		if( $return_absolute == true ) {
-			if( strpos( $p_url, config_get_global( 'short_path' ) ) === 0 && config_get_global( 'short_path' ) != '/' ) {
-				$t_url = str_replace( config_get_global( 'short_path' ), '', config_get_global( 'path' ) ) . $t_url;
-			}
-			else {
-				$t_url = config_get_global( 'path' ) . ltrim( $t_url, '/' );
-			}
-		}
+	} else {
+		/* url string is a relative link */		
 	}
 
 	/* currently we checked for a valid host part of a url, however rest of url is unvalidated */
@@ -252,62 +234,52 @@ function string_sanitize_url( $p_url, $return_absolute = false ) {
 	 * d) path#fragment
 	 * e) path */
 	if( strpos( $t_url, '?' ) !== FALSE ) {
-
 		/* A / B */
 		list( $t_path, $t_param ) = explode( '?', $t_url, 2 );
-		if( !is_blank( $t_param ) ) {
-			if( strpos( $t_param, '#' ) !== FALSE ) {
-				list( $t_query, $t_anchor ) = explode( '#', $t_param, 2 );
-			}
-			else {
-				$t_query = $t_param;
-				$t_anchor = '';
-			}
-			$t_vals = array( );
+		if( !is_blank($t_param ) ) {
+		    if( strpos( $t_param, '#' ) !== FALSE ) {
+		        list( $t_query, $t_anchor ) = explode( '#', $t_param, 2 );
+		    } else {
+		        $t_query = $t_param;
+		        $t_anchor = '';
+		    }		    
+			$t_vals = array();
 			parse_str( html_entity_decode( $t_query ), $t_vals );
 			$t_param = '';
 			foreach( $t_vals as $k => $v ) {
 				if( $t_param != '' ) {
-					$t_param .= '&amp;';
-				}
-
-				/* urlencode any query params (A/B) */
-				if( is_array( $v ) ) {
-					for( $i = 0, $t_size = sizeof( $v );$i < $t_size;$i++ ) {
-						$t_param .= $k . urlencode( '[]' ) . '=' . urlencode( strip_tags( urldecode( $v[$i] ) ) );
-						$t_param .= ( $i != $t_size - 1 ) ? '&amp;' : '';
-					}
-				}
-				else {
-					$t_param .= "$k=" . urlencode( strip_tags( urldecode( $v ) ) );
+					$t_param .= '&amp;'; 
 				}
 			}
+
 			if( !is_blank( $t_anchor ) ) {
-
 				/* urlencode anchor part of url (A) */
-				$t_anchor = '#' . urlencode( $t_anchor );
+			    $t_anchor = '#' . urlencode( $t_anchor );
 			}
-			return $t_path . '?' . $t_param . $t_anchor;
-		}
-		else {
-
+			$t_validated_path =  $t_path . '?' . $t_param . $t_anchor;
+		} else {
 			/* C */
 			/* at this point, I believe we've got a url containing a ? that does not have any query params
 			 * therefore, urlencode the path component and re-add the trailing ? */
-			return urlencode( $t_path ) . '?';
+			$t_validated_path = urlencode ($t_path). '?';
 		}
-	}
-	else {
+	} else {
 		if( strpos( $t_url, '#' ) !== FALSE ) {
-
 			/* D */
 			list( $t_path, $t_anchor ) = explode( '#', $t_url, 2 );
-			return implode( "/", array_map( "rawurlencode", explode( "/", $t_path ) ) ) . '#' . urlencode( $t_anchor );
-		}
-		else {
-
+			$t_validated_path = implode("/", array_map("rawurlencode", explode("/", $t_path))) . '#' . urlencode( $t_anchor );
+		} else {				
 			/* E */
-			return implode( "/", array_map( "rawurlencode", explode( "/", $t_url ) ) );
+			$t_validated_path = implode("/", array_map("rawurlencode", explode("/", $t_url)));
+		}
+	}
+
+	/* if we need to return an absolute link, we append our path to the url */
+	if( $return_absolute == true ) {
+		if( strpos( $p_url, config_get_global( 'short_path' ) ) === 0 && config_get_global( 'short_path' ) != '/') {
+			return str_replace( config_get_global( 'short_path' ), '', config_get_global( 'path' ) ) . $t_validated_path;
+		} else {
+			return config_get_global( 'path' ) . ltrim($t_validated_path, '/'); 
 		}
 	}
 }
