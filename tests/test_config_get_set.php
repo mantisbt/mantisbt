@@ -31,7 +31,7 @@
 	  * Notes:
 	  *  data set from the test may need to be removed from the database manually
 	  */
-require_once( 'core.php' );
+require_once( 'test.php' );
 
 $t_config = 'main_menu_custom_options';
 $t_test = config_get( $t_config );
