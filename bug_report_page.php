@@ -112,6 +112,7 @@
 <br />
 <div align="center">
 <form name="report_bug_form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
+<?php echo form_security_field( 'bug_report' ) ?>
 <table class="width75" cellspacing="1">
 
 
