@@ -281,6 +281,8 @@ function string_sanitize_url( $p_url, $return_absolute = false ) {
 		} else {
 			return config_get_global( 'path' ) . ltrim($t_validated_path, '/'); 
 		}
+	} else {
+		return $t_validated_path;
 	}
 }
 
