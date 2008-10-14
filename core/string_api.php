@@ -559,7 +559,9 @@ function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info 
 # return an href anchor that links to a bug VIEW page for the given bug
 #  account for the user preference and site override
 function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = null, $p_detail_info = true, $p_fqdn = false ) {
-	if( bug_exists( $p_bug_id ) && bugnote_exists( $p_bugnote_id ) ) {
+	$t_bug_id = (int)$p_bug_id;
+
+	if( bug_exists( $t_bug_id ) && bugnote_exists( $p_bugnote_id ) ) {
 		$t_link = '<a href="';
 		if( $p_fqdn ) {
 			$t_link .= config_get_global( 'path' );
@@ -572,12 +574,13 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = nu
 		if( $p_detail_info ) {
 			$t_reporter = string_attribute( user_get_name( bugnote_get_field( $p_bugnote_id, 'reporter_id' ) ) );
 			$t_update_date = string_attribute( date( config_get( 'normal_date_format' ), ( db_unixtimestamp( bugnote_get_field( $p_bugnote_id, 'last_modified' ) ) ) ) );
-			$t_link .= ' title="[' . $t_update_date . '] ' . $t_reporter . '"';
+			$t_link .= ' title="' . bug_format_id( $t_bug_id ) . ': [' . $t_update_date . '] ' . $t_reporter . '"';
 		}
-		$t_link .= '>' . lang_get( 'bugnote' ) . ': ' . bugnote_format_id( $p_bugnote_id ) . '</a>';
+
+		$t_link .= '>' . bug_format_id( $t_bug_id ) . ':' . bugnote_format_id( $p_bugnote_id ) . '</a>';
 	}
 	else {
-		$t_link = lang_get( 'bugnote' ) . ': ' . bugnote_format_id( $p_bugnote_id );
+		$t_link = bugnote_format_id( $t_bug_id ) . ':' . bugnote_format_id( $p_bugnote_id );
 	}
 
 	return $t_link;
