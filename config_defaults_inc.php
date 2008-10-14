@@ -85,7 +85,8 @@
 		}
 
 		if ( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) { // Support ProxyPass
-			$t_host = $_SERVER['HTTP_X_FORWARDED_HOST'];
+			$t_hosts = split( ',', $_SERVER['HTTP_X_FORWARDED_HOST'] );
+			$t_host = $t_hosts[0];
 		} else if ( isset( $_SERVER['HTTP_HOST'] ) ) {
 			$t_host = $_SERVER['HTTP_HOST'];
 		} else if ( isset( $_SERVER['SERVER_NAME'] ) ) {
