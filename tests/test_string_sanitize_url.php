@@ -29,7 +29,7 @@
 	  * run from command line using: php -q test_string_sanitize_url.php 
 	  *  inspect results manually
 	  */
-require_once( 'core.php' );
+require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
 $my_path = config_get('path');
 echo "my path is ".$my_path."\n<br />";
