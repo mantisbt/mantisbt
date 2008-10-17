@@ -1,5 +1,17 @@
 Mantis ChangeLog
 
+2008.10.18 - 1.1.4
+===================================
+
+We had to withdraw 1.1.3 because of a serious flaw affecting the bug_report*
+pages. This new release fixes that problem and for a newly discovered security issue.
+
+- 0009704: [security] Remote Code Execution in manage_proj_page.php (giallu) - resolved.
+- 0009691: [bugtracker] Failed to report issue.(Always APPLICATION ERROR #2800) (jreese) - resolved.
+- 0009690: [other] Wrong parameter count for session_set_cookie_params() (jreese) - resolved.
+- 0009693: [webpage] Generated HTML contains multiple hostnames when proxied (jreese) - resolved.
+
+
 2008.10.09 - 1.1.3
 ===================================
 
