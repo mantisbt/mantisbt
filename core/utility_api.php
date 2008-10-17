@@ -192,8 +192,11 @@
 			$t_factor = 1;
 		}
 
-		$t_function = create_function( '$a, $b', "return $t_factor * strnatcasecmp( \$a['$p_key'], \$b['$p_key'] );" );
-		uasort( $p_array, $t_function );
+		// Security measure: see http://www.mantisbt.org/bugs/view.php?id=9704 for details
+		if ( array_key_exists( $p_array, $p_key ) ) {
+			$t_function = create_function( '$a, $b', "return $t_factor * strnatcasecmp( \$a['$p_key'], \$b['$p_key'] );" );
+			uasort( $p_array, $t_function );
+		}
 		return $p_array;
 	}
 
