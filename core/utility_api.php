@@ -152,7 +152,7 @@ function multi_sort( $p_array, $p_key, $p_direction = ASCENDING ) {
 	}
 
 	// Security measure: see http://www.mantisbt.org/bugs/view.php?id=9704 for details
-	if ( array_key_exist( $p_array, $p_key ) ) {
+	if ( array_key_exist( $p_key, $p_array ) ) {
 		$t_function = create_function( '$a, $b', "return $t_factor * strnatcasecmp( \$a['$p_key'], \$b['$p_key'] );" );
 		uasort( $p_array, $t_function );
 	}
