@@ -36,7 +36,7 @@
 		$t_version_name = version_get_field( $p_version_id, 'version' );
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 
-		$t_release_title = string_display( $t_project_name ) . ' - ' . string_display( $t_version_name );
+		$t_release_title = '<a href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display( $t_project_name ) . '</a> - <a href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display( $t_version_name ) . '</a>';
 
 		if ( config_get( 'show_changelog_dates' ) ) {
 			$t_version_released = version_get_field( $p_version_id, 'released' );
@@ -61,9 +61,21 @@
 	}
 
 	$t_user_id = auth_get_current_user_id();
-	$f_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
+	$f_version_id = gpc_get_int( 'version_id', -1 );
+	$f_project_id = gpc_get_int( 'project_id', -1 );
 
-	if ( ALL_PROJECTS == $f_project_id ) {
+	# If both version_id and project_id parameters are supplied, then version_id take precedence.
+	if ( $f_version_id == -1 ) {
+		if ( $f_project_id == -1 ) {
+			$t_project_id = helper_get_current_project();
+		} else {
+			$t_project_id = $f_project_id;
+		}
+	} else {
+		$t_project_id = version_get_field( $f_version_id, 'project_id' );		
+	}
+
+	if ( ALL_PROJECTS == $t_project_id ) {
 		$t_topprojects = $t_project_ids = user_get_accessible_projects( $t_user_id );
 		foreach ( $t_topprojects as $t_project ) {
 			$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $t_user_id, $t_project ) );
@@ -79,9 +91,9 @@
 			}
 		}
 	} else {
-		access_ensure_project_level( config_get( 'view_changelog_threshold' ), $f_project_id );
-		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $f_project_id );
-		array_unshift( $t_project_ids, $f_project_id );
+		access_ensure_project_level( config_get( 'view_changelog_threshold' ), $t_project_id );
+		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $t_project_id );
+		array_unshift( $t_project_ids, $t_project_id );
 	}
 
 	html_page_top1( lang_get( 'changelog' ) );  // title
@@ -118,6 +130,11 @@
 			$t_version = $t_version_row['version'];
 
 			$t_version_id = $t_version_row['id'];
+			
+			# Skip all versions except the specified one (if any).
+			if ( $f_version_id != -1 && $f_version_id != $t_version_id ) {
+				continue;
+			}
 
 			$query = "SELECT sbt.*, dbt.target_version AS parent_version, $t_relation_table.source_bug_id FROM $t_bug_table AS sbt
 					LEFT JOIN $t_relation_table ON sbt.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
@@ -186,7 +203,6 @@
 					echo string_display( "<br />$t_description<br /><br />" );
 				}
 			}
-
 
 			$t_issue_set_ids = array();
 			$t_issue_set_levels = array();
