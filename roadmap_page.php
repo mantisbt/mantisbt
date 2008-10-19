@@ -33,10 +33,12 @@
 	# Print header for the specified project version.
 	function print_version_header( $p_version_row ) {
 		$t_project_id   = $p_version_row['project_id'];
+		$t_version_id   = $p_version_row['id'];
 		$t_version_name = $p_version_row['version'];
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 
-		$t_release_title = string_display( $t_project_name ) . ' - ' . string_display( $t_version_name );
+		$t_release_title_without_hyperlinks = string_display( $t_project_name ) . ' - ' . string_display( $t_version_name );
+		$t_release_title = '<a href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display( $t_project_name ) . '</a> - <a href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display( $t_version_name ) . '</a>';
 
 		if ( config_get( 'show_roadmap_dates' ) ) {
 			$t_version_timestamp = $p_version_row['date_order'];
@@ -47,8 +49,8 @@
 		echo '<tt>';
 		echo '<br />', $t_release_title, $t_scheduled_release_date, '<br />';
 
-		$t_release_title .= $t_scheduled_release_date;
-		echo str_pad( '', strlen( $t_release_title ), '=' ), '<br />';
+		$t_release_title_without_hyperlinks .= $t_scheduled_release_date;
+		echo str_pad( '', strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';
 	}
 
 	# print project header
@@ -57,9 +59,21 @@
 	}
 
 	$t_user_id = auth_get_current_user_id();
-	$f_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
-		
-	if ( ALL_PROJECTS == $f_project_id ) {
+	$f_version_id = gpc_get_int( 'version_id', -1 );
+	$f_project_id = gpc_get_int( 'project_id', -1 );
+
+	# If both version_id and project_id parameters are supplied, then version_id take precedence.
+	if ( $f_version_id == -1 ) {
+		if ( $f_project_id == -1 ) {
+			$t_project_id = helper_get_current_project();
+		} else {
+			$t_project_id = $f_project_id;
+		}
+	} else {
+		$t_project_id = version_get_field( $f_version_id, 'project_id' );		
+	}
+
+	if ( ALL_PROJECTS == $t_project_id ) {
 		$t_topprojects = $t_project_ids = user_get_accessible_projects( $t_user_id );
 		foreach ( $t_topprojects as $t_project ) {
 			$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $t_user_id, $t_project ) );
@@ -75,9 +89,9 @@
 			}
 		}
 	} else {
-		access_ensure_project_level( config_get( 'roadmap_view_threshold' ), $f_project_id );
-		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $f_project_id );
-		array_unshift( $t_project_ids, $f_project_id );
+		access_ensure_project_level( config_get( 'roadmap_view_threshold' ), $t_project_id );
+		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $t_project_id );
+		array_unshift( $t_project_ids, $t_project_id );
 	}
 
 	html_page_top1( lang_get( 'roadmap' ) );  // title
@@ -109,6 +123,11 @@
 				continue;
 			}
 			
+			# Skip all versions except the specified one (if any).
+			if ( $f_version_id != -1 && $f_version_id != $t_version_row['id'] ) {
+				continue;
+			}
+
 			$t_issues_planned = 0;
 			$t_issues_resolved = 0;
 			$t_issues_counted = array();
