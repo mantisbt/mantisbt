@@ -30,6 +30,7 @@
  *
  * @author Consta
  * @author Kostas Vorilas, math1890@yahoo.gr
+ * @author Omnipaedista
  * @author ZaDiak
  */
 
@@ -106,6 +107,7 @@ $s_make_private = 'Όρισε Ιδιωτικό';
 $s_make_public = 'Όρισε Δημόσιο';
 $s_create_new_project_link = 'Δημιουργία Νέας Εφαρμογής';
 $s_login_link = 'Σύνδεση';
+$s_priority_link = 'Κατά προτεραιότητα';
 $s_hide_button = 'Προβολή επιλεγμένων μόνο';
 $s_printing_preferences_title = 'Επιλογή πεδίων προς εκτύπωση';
 $s_printing_options_link = 'Επιλογές Εκτύπωσης';
