@@ -1389,7 +1389,7 @@ if ( mci_is_webservice_call( $l_oServer, $t_input ) ) {
 	# if we have a documentation request, do some tidy up to prevent lame bot loops e.g. /mantisconnect.php/mc_enum_etas/mc_project_get_versions/
 	$parts = explode ( 'mantisconnect.php/', strtolower($_SERVER['PHP_SELF'] ), 2 );
 	if (isset( $parts[1] ) && (strlen ( $parts[1] ) > 0 ) ) {
-		header('Location: '.  $parts[0] . 'mantisconnect.php');
+		echo 'This is not a SOAP webservice request, for documentation, see ' .  $parts[0] . 'mantisconnect.php';
 		exit();
 	}
 }
