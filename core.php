@@ -145,7 +145,7 @@
 	require_once( $t_core_path.'database_api.php' );
 
 	# Basic browser detection
-	$t_user_agent = $_SERVER['HTTP_USER_AGENT'];
+	$t_user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'none';
 
 	$t_browser_name = 'Normal';
 	if ( strpos( $t_user_agent, 'MSIE' ) ) {
