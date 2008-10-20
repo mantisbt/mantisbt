@@ -465,3 +465,9 @@ define( 'EVENT_TYPE_FIRST', 4 );
 # Timeline types
 define( 'TIMELINE_TARGETTED', 1 );
 define( 'TIMELINE_FIXED', 2 );
+
+# Version Check Result Strings
+define( 'VERSION_CHECK_UP_TO_DATE', 'up_to_date' );
+define( 'VERSION_CHECK_UPDATE_AVAILABLE', 'update_available' );
+define( 'VERSION_CHECK_ACCESS_DENIED', 'access_denied' );
+define( 'VERSION_CHECK_FAILURE', 'failure' );

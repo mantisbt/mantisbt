@@ -31,6 +31,7 @@ class VersionData {
 	var $id = 0;
 	var $project_id = 0;
 	var $version = '';
+	var $upgrade_tag = '';
 	var $description = '';
 	var $released = VERSION_FUTURE;
 	var $date_order = '';
@@ -121,15 +122,14 @@ function version_ensure_unique( $p_version, $p_project_id = null ) {
 # ===================================
 # --------------------
 # Add a version to the project
-function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $p_description = '', $p_date_order = null, $p_obsolete = false ) {
+function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $p_description = '', $p_date_order = null, $p_obsolete = false, $p_upgrade_tag = '' ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 	$c_released = db_prepare_int( $p_released );
 	$c_obsolete = db_prepare_bool( $p_obsolete );
 
 	if( null === $p_date_order ) {
 		$c_date_order = db_now();
-	}
-	else {
+	} else {
 		$c_date_order = db_timestamp( $p_date_order );
 	}
 
@@ -138,10 +138,10 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
 
 	$query = "INSERT INTO $t_project_version_table
-					( project_id, version, date_order, description, released, obsolete )
+					( project_id, version, upgrade_tag, date_order, description, released, obsolete )
 				  VALUES
-					(" . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query_bound( $query, Array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released, $c_obsolete ) );
+					(" . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+	db_query_bound( $query, array( $c_project_id, $p_version, $p_upgrade_tag, $c_date_order, $p_description, $c_released, $c_obsolete ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -163,6 +163,7 @@ function version_update( $p_version_info ) {
 	$c_version_name = $p_version_info->version;
 	$c_old_version_name = $t_old_version_name;
 	$c_description = $p_version_info->description;
+	$c_upgrade_tag = $p_version_info->upgrade_tag;
 	$c_released = db_prepare_int( $p_version_info->released );
 	$c_obsolete = db_prepare_bool( $p_version_info->obsolete );
 	$c_date_order = db_timestamp( $p_version_info->date_order );
@@ -173,12 +174,13 @@ function version_update( $p_version_info ) {
 
 	$query = "UPDATE $t_project_version_table
 				  SET version=" . db_param() . ",
+				  	upgrade_tag =" . db_param() .",
 					description=" . db_param() . ",
 					released=" . db_param() . ",
 					date_order=" . db_param() . ",
 					obsolete=" . db_param() . "
 				  WHERE id=" . db_param();
-	db_query_bound( $query, Array( $c_version_name, $c_description, $c_released, $c_date_order, $c_obsolete, $c_version_id ) );
+	db_query_bound( $query, array( $c_version_name, $c_upgrade_tag, $c_description, $c_released, $c_date_order, $c_obsolete, $c_version_id ) );
 
 	if( $c_version_name != $c_old_version_name ) {
 		$query = "UPDATE $t_bug_table
@@ -205,6 +207,30 @@ function version_update( $p_version_info ) {
 
 	# db_query errors on failure so:
 	return true;
+}
+
+# --------------------
+# Get the latest version with the specified upgrade tag as the specified client version
+function version_get_latest_by_upgrade_tag( $p_client_version_id ) {
+	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
+
+	$t_client_version = version_get( $p_client_version_id );
+
+	$query = "SELECT id FROM $t_project_version_table
+				WHERE project_id = " . db_param() . " AND released = 1 AND upgrade_tag = " . db_param() . "
+				ORDER BY date_order DESC";
+
+	$t_result = db_query_bound( $query, array( $t_client_version->project_id, $t_client_version->upgrade_tag ), /* limit */ 1, /* offset */ 0 );
+	if ( $t_result === false ) {
+		return $t_client_version;
+	}
+
+	$t_row = db_fetch_array( $t_result );
+	if ( $t_row === false ) {
+		return $t_client_version;
+	}
+
+	return version_get( $t_row['id'] );
 }
 
 # --------------------
@@ -272,7 +298,7 @@ function version_remove_all( $p_project_id ) {
 # ===================================
 # --------------------
 # Return all versions for the specified project
-function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false ) {
+function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false, $p_upgrade_tag = null ) {
 	global $g_cache_versions;
 
 	$c_project_id = db_prepare_int( $p_project_id );
@@ -297,6 +323,11 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 		$c_obsolete = db_prepare_bool( $p_obsolete );
 		$query .= " AND obsolete = " . db_param( $t_param_count++ );
 		$query_params[] = $c_obsolete;
+	}
+
+	if ( $p_upgrade_tag !== null ) {
+		$query .= " AND upgrade_tag = " . db_param( $t_param_count++ );
+		$query_params[] = $p_upgrade_tag;
 	}
 
 	$query .= " ORDER BY date_order DESC";

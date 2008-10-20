@@ -69,6 +69,14 @@
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
+		<?php echo lang_get( 'upgrade_tag' ) ?>
+	</td>
+	<td>
+		<input type="text" name="upgrade_tag" size="32" maxlength="128" value="<?php echo string_attribute( $t_version->upgrade_tag ) ?>" />
+	</td>
+</tr>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td>

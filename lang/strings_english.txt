@@ -725,6 +725,10 @@ $s_schema_version = 'Schema Version';
 $s_site_path = 'Site Path';
 $s_core_path = 'Core Path';
 $s_plugin_path = 'Plugin Path';
+$s_check_version_mantis_update = 'Mantis Updates Check';
+$s_check_version_up_to_date = 'Mantis version is up to date.';
+$s_check_version_update_available = 'Mantis \'%s\' is available.';
+$s_check_version_failure = 'Unable to check for latest Mantis version.';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Created user';
@@ -948,6 +952,7 @@ $s_released = 'Released';
 $s_not_released = 'Not Yet Released';
 $s_scheduled_release = 'Scheduled For Release';
 $s_obsolete = 'Obsolete';
+$s_upgrade_tag = 'Upgrade Tag';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'Version has been successfully updated...';
