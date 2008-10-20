@@ -48,7 +48,7 @@ $g_session = null;
  * to PHP's session.* settings in 'php.ini'.
  */
 class MantisPHPSession extends MantisSession {
-	function __construct() {
+	function __construct( $p_session_id=null ) {
 		$t_session_save_path = config_get_global( 'session_save_path' );
 		if ( $t_session_save_path ) {
 			session_save_path( $t_session_save_path );
@@ -60,6 +60,11 @@ class MantisPHPSession extends MantisSession {
 		} else {
 			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), false );
 		}
+
+		if ( !is_null( $p_session_id ) ) {
+			session_id( $p_session_id );
+		}
+
 		session_start();
 		$this->id = session_id();
 	}
@@ -103,12 +108,12 @@ class MantisPHPSession extends MantisSession {
 /**
  * Initialize the appropriate session handler.
  */
-function session_init() {
+function session_init( $p_session_id=null ) {
 	global $g_session, $g_session_handler;
 
 	switch( strtolower( $g_session_handler ) ) {
 		case 'php':
-			$g_session = new MantisPHPSession();
+			$g_session = new MantisPHPSession( $p_session_id );
 			break;
 
 		case 'adodb':
@@ -190,4 +195,11 @@ function session_clean() {
 
 
 ##### Initialize the session
-session_init();
+$t_session_id = gpc_get_string( 'session_id', '' );
+
+if ( empty( $t_session_id ) ) {
+	session_init();
+} else {
+	session_init( $t_session_id );
+}
+
