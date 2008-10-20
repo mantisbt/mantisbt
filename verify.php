@@ -42,6 +42,9 @@
 		auth_logout();
 	}
 
+	# (Re)initialize session
+	session_init();
+	
 	$t_calculated_confirm_hash = auth_generate_confirm_hash( $f_user_id );
 
 	if ( $f_confirm_hash != $t_calculated_confirm_hash ) {
