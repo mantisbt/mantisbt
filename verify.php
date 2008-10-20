@@ -43,8 +43,10 @@
 	}
 
 	# (Re)initialize session
-	session_init();
-	
+	session_regenerate_id()
+	session_init( session_id() );
+	$g_session_pass_id = ON;
+
 	$t_calculated_confirm_hash = auth_generate_confirm_hash( $f_user_id );
 
 	if ( $f_confirm_hash != $t_calculated_confirm_hash ) {
@@ -63,3 +65,4 @@
 	user_increment_failed_login_count( $f_user_id );
 
 	include ( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'account_page.php' );
+

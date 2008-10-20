@@ -98,6 +98,9 @@
 <div align="center">
 <form method="post" action="account_update.php">
 <?php  echo form_security_field( 'account_update' )?>
+<?php if ( isset( $g_session_pass_id ) ) { ?>
+<input type="hidden" name="session_id" value="<?php echo session_id() ?>"/>
+<?php } ?>
 <table class="width75" cellspacing="1">
 
 	<!-- Headings -->
