@@ -192,10 +192,20 @@
 			$t_factor = 1;
 		}
 
+		if( empty( $p_array ) ) {
+			return $p_array;
+		}
+		if( !is_array( current($p_array ) ) ) {
+			error_parameters( 'tried to multisort an invalid multi-dimensional array' );
+			trigger_error(ERROR_GENERIC, ERROR);
+		}
+
 		// Security measure: see http://www.mantisbt.org/bugs/view.php?id=9704 for details
-		if ( array_key_exists( $p_key, $p_array ) ) {
-			$t_function = create_function( '$a, $b', "return $t_factor * strnatcasecmp( \$a['$p_key'], \$b['$p_key'] );" );
+		if( array_key_exists( $p_key, current($p_array) ) ) {
+			$t_function = create_function( '$a, $b', "return $t_factor * strnatcasecmp( \$a['" . $p_key . "'], \$b['" . $p_key . "'] );" );
 			uasort( $p_array, $t_function );
+		} else {
+			trigger_error(ERROR_INVALID_SORT_FIELD, ERROR);
 		}
 		return $p_array;
 	}
