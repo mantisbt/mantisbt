@@ -105,6 +105,7 @@ class MantisPHPSession extends MantisSession {
 
 /**
  * Initialize the appropriate session handler.
+ * @param string Session ID
  */
 function session_init( $p_session_id=null ) {
 	global $g_session, $g_session_handler;
@@ -123,6 +124,39 @@ function session_init( $p_session_id=null ) {
 		default:
 			trigger_error( ERROR_SESSION_HANDLER_INVALID, ERROR );
 			break;
+	}
+
+	session_validate( $g_session );
+}
+
+/**
+ * Validate the legitimacy of a session.
+ * Checks may include last-known IP address, or more.
+ * Triggers an error when the session is invalid.
+ * @param object Session object
+ */
+function session_validate( $p_session ) {
+	$t_user_ip = '';
+	if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
+		$t_user_ip = trim( $_SERVER['REMOTE_ADDR'] );
+	}
+
+	if ( is_null( $t_last_ip = $p_session->get( 'last_ip', null ) ) ) {
+		# First session usage
+		$p_session->set( 'last_ip', $t_user_ip );
+
+	} else {
+		# Check a continued session request
+		if ( $t_user_ip != $t_last_ip ) {
+			session_clean();
+
+			trigger_error( ERROR_SESSION_NOT_VALID, WARNING );
+
+			$t_url = config_get_global( 'path' ) . config_get_global( 'default_home_page' );
+			echo "\t<meta http-equiv=\"Refresh\" content=\"4;URL=$t_url\" />\n";
+
+			die();
+		}
 	}
 }
 
