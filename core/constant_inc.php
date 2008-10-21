@@ -327,6 +327,7 @@
 	# ERROR_SESSION_*
 	define ( 'ERROR_SESSION_HANDLER_INVALID', 2700);
 	define ( 'ERROR_SESSION_VAR_NOT_FOUND',   2701);
+	define ( 'ERROR_SESSION_NOT_VALID',	      2702);
 
 	# ERROR_FORM_*
 	define ( 'ERROR_FORM_TOKEN_INVALID',	2800 );
@@ -423,4 +424,3 @@
 	define( 'SPONSORSHIP_REQUESTED',      1 );
 	define( 'SPONSORSHIP_PAID',           2 );
 
-?>
