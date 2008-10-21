@@ -40,12 +40,12 @@
 	# force logout on the current user if already authenticated
 	if( auth_is_user_authenticated() ) {
 		auth_logout();
-	}
 
-	# (Re)initialize session
-	session_regenerate_id()
-	session_init( session_id() );
-	$g_session_pass_id = ON;
+		# (Re)initialize session
+		session_regenerate_id()
+		session_init( session_id() );
+		$g_session_pass_id = ON;
+	}
 
 	$t_calculated_confirm_hash = auth_generate_confirm_hash( $f_user_id );
 
