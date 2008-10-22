@@ -58,6 +58,10 @@ $t_test = array(
     'http://www.test.my.url/'
     );
     
+echo '<tt>';
+
 foreach($t_test as $t_url) {
-    echo '<br />  '.$t_url . ' => ' . string_sanitize_url($t_url, false) . "\n";
+    echo '<br/>' . htmlspecialchars($t_url) . ' => ' . htmlspecialchars(string_sanitize_url($t_url, false)) . "\n";
 }
+
+echo '</tt>';
