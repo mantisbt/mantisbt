@@ -43,6 +43,8 @@ $t_test = array(
     'abc.php?abc=def&z=xyz#a',
     'abc.php?abc=def&z=<script>alert("foo")</script>z#a',
     'abc.php?abc=def&z=z#<script>alert("foo")</script>a',
+	'plugin.php?page=Source/index',
+	'plugin.php?page=Source/list&id=1',
     $my_path.'abc.php',
     $my_path.'abc.php#a',
     $my_path.'abc.php?abc=def',
@@ -51,6 +53,8 @@ $t_test = array(
     $my_path.'abc.php?abc=def&z=xyz#a',
     $my_path.'abc.php?abc=def&z=<script>alert("foo")</script>z#a',
     $my_path.'abc.php?abc=def&z=z#<script>alert("foo")</script>a',
+	$my_path.'plugin.php?page=Source/index',
+	$my_path.'plugin.php?page=Source/list&id=1',
     'http://www.test.my.url/'
     );
     
