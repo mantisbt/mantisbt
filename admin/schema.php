@@ -411,5 +411,5 @@ $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "
 
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_custom_field_table' ), "
   filter_by 		L 		NOTNULL DEFAULT \" '1' \"" ) );
-$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_version_table' ), "
-    upgrade_tag        C(128)       NOTNULL DEFAULT '' " ) );
+#$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_version_table' ), "
+#    upgrade_tag        C(128)       NOTNULL DEFAULT '' " ) );
