@@ -32,8 +32,8 @@
 
 	auth_reauthenticate();
 
-	$f_category_id		= gpc_get_string( 'id' );
-	$f_project_id		= gpc_get_string( 'project_id' );
+	$f_category_id		= gpc_get_int( 'id' );
+	$f_project_id		= gpc_get_int( 'project_id' );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
@@ -52,6 +52,7 @@
 <div align="center">
 <form method="post" action="manage_proj_cat_update.php">
 <?php echo form_security_field( 'manage_proj_cat_update' ) ?>
+<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>"/>
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
