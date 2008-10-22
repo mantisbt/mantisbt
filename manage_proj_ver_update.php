@@ -40,7 +40,6 @@
 
 	$f_date_order	= gpc_get_string( 'date_order' );
 	$f_new_version	= gpc_get_string( 'new_version' );
-	$f_upgrade_tag   = gpc_get_string( 'upgrade_tag' );
 	$f_description  = gpc_get_string( 'description' );
 	$f_released     = gpc_get_bool( 'released' );
 	$f_obsolete	= gpc_get_bool( 'obsolete' );
@@ -54,7 +53,6 @@
 	$f_new_version	= trim( $f_new_version );
 
 	$t_version->version = $f_new_version;
-	$t_version->upgrade_tag = $f_upgrade_tag;
 	$t_version->description = $f_description;
 	$t_version->released = $f_released ? VERSION_RELEASED : VERSION_FUTURE;
 	$t_version->obsolete = $f_obsolete;

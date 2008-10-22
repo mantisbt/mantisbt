@@ -2038,21 +2038,3 @@
 	# threshold to see due date
 	$g_due_date_view_threshold = NOBODY;
 
-	#############################
-	# Checking for Updates
-	#############################
-
-	# Ability for applications to anonymously check for updates available for public projects.
-	# This feature exposes the availability of released version names, project ids, and the
-	# version descriptions.  This feature works independent of anonymous access.
-	$g_check_version_for_public_projects_enabled = OFF;
-
-	# Ability for clients to anonymously check for updates available for private projects.
-	# This feature exposes the availability of released version names, project ids, and the
-	# version descriptions.  This feature works independent of anonymous access.
-	$g_check_version_for_private_projects_enabled = OFF;
-
-	# Enable Mantis checking for updates for its own code base.
-	# This is shown for administrators on the Manage Overview Page.
-	# @@@ Apache seems to crash if remote URL is not found.
-	$g_check_version_for_mantis_enabled = OFF;

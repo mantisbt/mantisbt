@@ -431,19 +431,16 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			<td>
 				<?php echo lang_get( 'version' ) ?>
 			</td>
-			<td>
-				<?php echo lang_get( 'upgrade_tag' ) ?>
-			</td>
-			<td>
+			<td class="center">
 				<?php echo lang_get( 'released' ) ?>
 			</td>
-			<td>
+			<td class="center">
 				<?php echo lang_get( 'obsolete' ) ?>
 			</td>
-			<td>
+			<td class="center">
 				<?php echo lang_get( 'timestamp' ) ?>
 			</td>
-			<td>
+			<td class="center">
 				<?php echo lang_get( 'actions' ) ?>
 			</td>
 		</tr>
@@ -452,7 +449,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 
 	foreach ( $t_versions as $t_version ) {
 		$t_name = $t_version['version'];
-		$t_upgrade_tag = $t_version['upgrade_tag'];
 		$t_released = $t_version['released'];
 		$t_obsolete = $t_version['obsolete'];
 		$t_date_order = $t_version['date_order'];
@@ -462,9 +458,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td>
 				<?php echo string_display( $t_name ) ?>
-			</td>
-			<td>
-				<?php echo string_display( $t_upgrade_tag ) ?>
 			</td>
 			<td class="center">
 				<?php echo trans_bool( $t_released ) ?>
