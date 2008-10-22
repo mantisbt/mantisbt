@@ -195,94 +195,60 @@ function string_url( $p_string ) {
 
 # --------------------
 # validate the url as part of this site before continuing
-function string_sanitize_url( $p_url, $return_absolute = false ) {
+# see tests/test_string_sanitize_url.php for test cases
+function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	$t_url = strip_tags( urldecode( $p_url ) );
-	if( preg_match( '?http(s)*://?', $t_url ) > 0 ) {
-		/* url string contains http(s) */
-		if( preg_match( '?^' . config_get( 'path' ) . '?', $t_url ) == 0 ) {
-			/* url string does not begin with our path, therefore, replace it with a link to index.php */
-			if( $return_absolute == true ) {
-				return config_get_global( 'path' ) . 'index.php';
-			} else {
-				return 'index.php';
-			}
-		} else {
-			/* url string is an absolute url to our site - strip out the absolute part we will add it later if required */
-			str_replace( config_get_global( 'path' ), '', $t_url ); 	
-		}
-	} else {
-		/* url string is a relative link */		
+
+	$t_path = rtrim( config_get( 'path' ), '/' );
+	$t_short_path = rtrim( config_get( 'short_path' ), '/' );
+
+	$t_pattern = '(?:/*(?<script>[^\?#]*))(?:\?(?<query>[^#]*))?(?:#(?<anchor>[^#]*))?';
+
+	# Break the given URL into pieces for path, script, query, and anchor
+	$t_type = 0;
+	if ( preg_match( "@^(?<path>$t_path)$t_pattern\$@", $t_url, $t_matches ) ) {
+		$t_type = 1;
+	} else if ( preg_match( "@^(?<path>$t_short_path)$t_pattern\$@", $t_url, $t_matches ) ) {
+		$t_type = 2;
+	} else if ( preg_match( "@^(?<path>)$t_pattern\$@", $t_url, $t_matches ) ) {
+		$t_type = 3;
 	}
 
-	/* currently we checked for a valid host part of a url, however rest of url is unvalidated */
-	/* if url is blank, we just return a relative/absolute link to index.php as appropriate.
-	 * we can trust global path, therefore we can return immediately at this point without url-encoding. */
-	if( $t_url == '' ) {
-		if( $return_absolute == true ) {
-			return config_get_global( 'path' ) . 'index.php';
-		}
-		else {
-			return 'index.php';
-		}
+	# Check for URL's pointing to other domains
+	if ( 0 == $t_type || empty( $t_matches['script'] ) ||
+		3 == $t_type && preg_match( '@(?:[^:]*)?://@', $t_url ) > 0 ) {
+
+		return ( $p_return_absolute ? $t_path . '/' : '' ) . 'index.php';
 	}
 
-	/* see if we have any query params to the page
-	 * we need to validate 3 types of request:
-	 * a) path?query#fragment
-	 * b) path?query
-	 * c) path?
-	 * d) path#fragment
-	 * e) path */
-	if( strpos( $t_url, '?' ) !== FALSE ) {
-		/* A / B */
-		list( $t_path, $t_param ) = explode( '?', $t_url, 2 );
-		if( !is_blank($t_param ) ) {
-		    if( strpos( $t_param, '#' ) !== FALSE ) {
-		        list( $t_query, $t_anchor ) = explode( '#', $t_param, 2 );
-		    } else {
-		        $t_query = $t_param;
-		        $t_anchor = '';
-		    }		    
-			$t_vals = array();
-			parse_str( html_entity_decode( $t_query ), $t_vals );
-			$t_param = '';
-			foreach( $t_vals as $k => $v ) {
-				if( $t_param != '' ) {
-					$t_param .= '&amp;'; 
-				}
-			}
+	# Start extracting regex matches
+	$t_script = $t_matches['script'];
+	$t_script_path = $t_matches['path'];
 
-			if( !is_blank( $t_anchor ) ) {
-				/* urlencode anchor part of url (A) */
-			    $t_anchor = '#' . urlencode( $t_anchor );
-			}
-			$t_validated_path =  $t_path . '?' . $t_param . $t_anchor;
-		} else {
-			/* C */
-			/* at this point, I believe we've got a url containing a ? that does not have any query params
-			 * therefore, urlencode the path component and re-add the trailing ? */
-			$t_validated_path = urlencode ($t_path). '?';
+	# Clean/encode query params
+	$t_query = '';
+	if ( isset( $t_matches['query'] ) ) {
+		parse_str( $t_matches['query'], $t_pairs );
+
+		$t_clean_pairs = array();
+		foreach( $t_pairs as $t_key => $t_value ) {
+			$t_clean_pairs[] = rawurlencode( $t_key ) . '=' . rawurlencode( $t_value );
 		}
-	} else {
-		if( strpos( $t_url, '#' ) !== FALSE ) {
-			/* D */
-			list( $t_path, $t_anchor ) = explode( '#', $t_url, 2 );
-			$t_validated_path = implode("/", array_map("rawurlencode", explode("/", $t_path))) . '#' . urlencode( $t_anchor );
-		} else {				
-			/* E */
-			$t_validated_path = implode("/", array_map("rawurlencode", explode("/", $t_url)));
-		}
+
+		$t_query = '?' . join( '&amp;', $t_clean_pairs );
 	}
 
-	/* if we need to return an absolute link, we append our path to the url */
-	if( $return_absolute == true ) {
-		if( strpos( $p_url, config_get_global( 'short_path' ) ) === 0 && config_get_global( 'short_path' ) != '/') {
-			return str_replace( config_get_global( 'short_path' ), '', config_get_global( 'path' ) ) . $t_validated_path;
-		} else {
-			return config_get_global( 'path' ) . ltrim($t_validated_path, '/'); 
-		}
+	# encode link anchor
+	$t_anchor = '';
+	if ( isset( $t_matches['anchor'] ) ) {
+		$t_anchor = '#' . rawurlencode( $t_matches['anchor'] );
+	}
+
+	# Return an appropriate re-combined URL string
+	if ( $p_return_absolute ) {
+		return $t_path . '/' . $t_script . $t_query . $t_anchor;
 	} else {
-		return $t_validated_path;
+		return ( !empty( $t_script_path ) ? $t_script_path . '/' : '' ) . $t_script . $t_query . $t_anchor;
 	}
 }
 
