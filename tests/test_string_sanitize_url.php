@@ -36,6 +36,7 @@ echo "my path is ".$my_path."\n<br />";
 $t_test = array(
     '',
     'abc.php',
+    'abc.php?',
     'abc.php#a',
     'abc.php?abc=def',
     'abc.php?abc=def#a',
@@ -45,7 +46,9 @@ $t_test = array(
     'abc.php?abc=def&z=z#<script>alert("foo")</script>a',
 	'plugin.php?page=Source/index',
 	'plugin.php?page=Source/list&id=1',
+	'plugin.php?page=Source/list&id=1#abc',
     $my_path.'abc.php',
+    $my_path.'abc.php?',
     $my_path.'abc.php#a',
     $my_path.'abc.php?abc=def',
     $my_path.'abc.php?abc=def#a',
@@ -55,13 +58,14 @@ $t_test = array(
     $my_path.'abc.php?abc=def&z=z#<script>alert("foo")</script>a',
 	$my_path.'plugin.php?page=Source/index',
 	$my_path.'plugin.php?page=Source/list&id=1',
+	$my_path.'plugin.php?page=Source/list&id=1#abc',
     'http://www.test.my.url/'
     );
     
-echo '<tt>';
+echo '<pre>';
 
 foreach($t_test as $t_url) {
-    echo '<br/>' . htmlspecialchars($t_url) . ' => ' . htmlspecialchars(string_sanitize_url($t_url, false)) . "\n";
+    echo "\n: ", htmlspecialchars($t_url), "\n: ", htmlspecialchars(string_sanitize_url($t_url, false)), "\n";
 }
 
-echo '</tt>';
+echo '</pre>';
