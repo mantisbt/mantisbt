@@ -41,7 +41,9 @@ $t_test = array(
     'abc.php?abc=def',
     'abc.php?abc=def#a',
     'abc.php?abc=def&z=xyz',
+	'abc.php?abc=def&amp;z=xyz',
     'abc.php?abc=def&z=xyz#a',
+    'abc.php?abc=def&amp;z=xyz#a',
     'abc.php?abc=def&z=<script>alert("foo")</script>z#a',
     'abc.php?abc=def&z=z#<script>alert("foo")</script>a',
 	'plugin.php?page=Source/index',
@@ -53,7 +55,9 @@ $t_test = array(
     $my_path.'abc.php?abc=def',
     $my_path.'abc.php?abc=def#a',
     $my_path.'abc.php?abc=def&z=xyz',
+    $my_path.'abc.php?abc=def&amp;z=xyz',
     $my_path.'abc.php?abc=def&z=xyz#a',
+    $my_path.'abc.php?abc=def&amp;z=xyz#a',
     $my_path.'abc.php?abc=def&z=<script>alert("foo")</script>z#a',
     $my_path.'abc.php?abc=def&z=z#<script>alert("foo")</script>a',
 	$my_path.'plugin.php?page=Source/index',
@@ -61,11 +65,18 @@ $t_test = array(
 	$my_path.'plugin.php?page=Source/list&id=1#abc',
     'http://www.test.my.url/'
     );
-    
-echo '<pre>';
+
+echo '<h2>Normal</h2><pre>';
 
 foreach($t_test as $t_url) {
     echo "\n: ", htmlspecialchars($t_url), "\n: ", htmlspecialchars(string_sanitize_url($t_url, false)), "\n";
 }
 
+echo '</pre><h2>Absolute</h2><pre>';
+
+foreach($t_test as $t_url) {
+    echo "\n: ", htmlspecialchars($t_url), "\n: ", htmlspecialchars(string_sanitize_url($t_url, true)), "\n";
+}
+
 echo '</pre>';
+
