@@ -672,8 +672,9 @@ $s_hide_content = 'Hide Content';
 $s_show_content = 'Show Content';
 
 # html_api.php
-$s_total_queries_executed = 'total queries executed.'; # FIXME: the query cound should be part of the message for better localisation
-$s_unique_queries_executed = 'unique queries executed.'; # FIXME: the query cound should be part of the message for better localisation
+$s_total_queries_executed = 'total queries executed.'; # FIXME: the query count should be part of the message for better localisation
+$s_unique_queries_executed = 'unique queries executed.'; # FIXME: the query count should be part of the message for better localisation
+$s_memory_usage_in_kb = 'memory usage: %s KB';
 
 # index.php
 $s_click_to_login = 'Click here to login';

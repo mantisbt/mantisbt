@@ -526,3 +526,33 @@ function helper_duration_to_minutes( $p_hhmm ) {
 
 	return (int) $t_min;
 }
+
+# -----------------------
+# Gets the max or current memory usage depending on the PHP version / OS.
+# returns the memory usage in bytes.
+# Based on a comments in the PHP manual.
+function helper_get_max_memory_usage() {
+	if ( function_exists( 'memory_get_peak_usage' ) ) {
+		return memory_get_peak_usage();
+	}
+
+	if ( function_exists( 'memory_get_usage' ) ) {
+		return memory_get_usage();
+	}
+
+	// If we are running on Windows
+	if ( substr( PHP_OS, 0, 3 ) == 'WIN' ) {
+		$output = array();
+
+		// Should check whether tasklist is available, but I'm lazy
+		exec( 'tasklist /FI "PID eq ' . getmypid() . '" /FO LIST', $output );
+
+		// Filter non-numeric characters from output. Why not use substr & strpos?
+		// I'm running Windows XP Pro Dutch, and it's output does not match the
+		// English variant, as will all other translations. This is a more generic
+		// approach, and has a better chance of actually working
+		// Tasklist outputs memory usage in kilobytes, memory_get_usage in bytes.
+		// So we multiply by 1024 and in the process convert from string to integer.
+		return preg_replace( '/[^0-9]/', '', $output[5] ) * 1024;
+	}
+}

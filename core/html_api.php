@@ -485,9 +485,7 @@ function html_footer( $p_file ) {
 	# print timings
 	if( ON == config_get( 'show_timer' ) ) {
 		$g_timer->print_times();
-		if( function_exists( 'memory_get_peak_usage' ) ) {
-			echo ' ' . number_format( memory_get_peak_usage() / 1000 ) . 'k peak<br />';
-		}
+		echo sprintf( lang_get( 'memory_usage_in_kb' ), number_format( helper_get_max_memory_usage() / 1024 ) ), '<br />';
 	}
 
 	# print db queries that were run
