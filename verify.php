@@ -42,8 +42,8 @@
 		auth_logout();
 
 		# (Re)initialize session
-		session_regenerate_id()
-		session_init( session_id() );
+		session_regenerate_id();
+		session_init();
 		$g_session_pass_id = ON;
 	}
 
