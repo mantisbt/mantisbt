@@ -51,8 +51,9 @@
 		$g_project_override = $t_bug->project_id;
 	}
 
-	# @@@ VB: Do we want to differentiate email notifications for normal notes from time tracking entries?
-	$t_bugnote_added = bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private, $t_note_type );
+	// We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING
+	// if $f_time_tracking is not 0 and the time tracking feature is enabled.
+	$t_bugnote_added = bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private, BUGNOTE );
 	if ( !$t_bugnote_added ) {
 		error_parameters( lang_get( 'bugnote' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
