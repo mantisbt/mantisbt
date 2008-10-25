@@ -304,7 +304,8 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 	$t_time_tracking_visible = access_compare_level( $t_user_access_level, config_get( 'time_tracking_view_threshold' ) );
 
 	$t_bugnotes = array();
-	foreach( $t_all_bugnotes as $t_note_index => $t_bugnote ) {
+	$t_note_index = 0;
+	foreach( $t_all_bugnotes as $t_bugnote ) {
 		if( $t_private_bugnote_visible || $t_bugnote->reporter_id == $t_user_id || ( VS_PUBLIC == $t_bugnote->view_state ) ) {
 
 			# If the access level specified is not enough to see time tracking information
@@ -313,7 +314,7 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 				$t_bugnote->time_tracking = 0;
 			}
 
-			$t_bugnotes[$t_note_index] = $t_bugnote;
+			$t_bugnotes[$t_note_index++] = $t_bugnote;
 		}
 	}
 
