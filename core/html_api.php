@@ -66,6 +66,7 @@ require_once( $t_core_dir . 'authentication_api.php' );
 require_once( $t_core_dir . 'user_api.php' );
 require_once( $t_core_dir . 'rss_api.php' );
 require_once( $t_core_dir . 'wiki_api.php' );
+require_once( $t_core_dir . 'php_api.php' );
 
 $g_rss_feed_url = null;
 
@@ -485,7 +486,7 @@ function html_footer( $p_file ) {
 	# print timings
 	if( ON == config_get( 'show_timer' ) ) {
 		$g_timer->print_times();
-		echo sprintf( lang_get( 'memory_usage_in_kb' ), number_format( helper_get_max_memory_usage() / 1024 ) ), '<br />';
+		echo sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) ), '<br />';
 	}
 
 	# print db queries that were run

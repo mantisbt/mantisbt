@@ -70,3 +70,10 @@ if( !php_version_at_least( PHP_MIN_VERSION ) ) {
 }
 
 ini_set( 'magic_quotes_runtime', 0 );
+
+# Added in PHP 5.2.0
+if ( !function_exists( 'memory_get_peak_usage') ) {
+	function memory_get_peak_usage() {
+		return memory_get_usage();
+	}
+}
