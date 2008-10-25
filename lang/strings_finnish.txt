@@ -602,8 +602,7 @@ $s_delete_config_button = 'Poista asetukset';
 $s_project_added_msg = 'Projekti lisätty...';
 $s_category_added_msg = 'Kategoria lisätty...';
 $s_category_deleted_msg = 'Kategoria poistettu...';
-$s_category_delete_sure_msg = 'Haluatko varmasti poistaa tämän luokan?<br />
-Luokassa %s on %d virheilmoitusta.';
+$s_category_delete_sure_msg = 'Haluatko varmasti poistaa tämän luokan?';
 $s_delete_category_button = 'Poista kategoria';
 $s_edit_project_category_title = 'Muokkaa projektin kategoriaa';
 $s_update_category_button = 'Päivitä kategoria';
