@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,34 +13,57 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
+ * Collapse API 
+ * 
+ * collapse_open( 'xyz' );		# marks the start of the expanded section
+ * :
+ * ... collapse_icon( 'xyz' );	# this will add the '+' icon
+ * :
+ * collapse_closed( 'xyz' );	# marks the start of the collapsed section
+ * : 
+ * ... collapse_icon( 'xyz' );	# this will add the '-' icon
+ * :
+ * collapse_end( 'xyz' );		# marks the end of the whole section
+ *
+ * @version $Id$
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @package CoreAPI
  * @subpackage CollapseAPI
+ * 
+ * @uses tokens_api.php
+ * @uses utility_api.php
+ * @uses config_api.php
+ * @uses authentiction_api.php
+ * @uses current_user_api.php
+ * @uses gpc_api.php
  */
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+
+/**
+ * requires tokens_api
+ */
 require_once( $t_core_dir . 'tokens_api.php' );
 
-# ## Collapse API ###
-#
-#	collapse_open( 'xyz' );		# marks the start of the expanded section
-#	:
-#	... collapse_icon( 'xyz' );	# this will add the '+' icon
-#	:
-#	collapse_closed( 'xyz' );	# marks the start of the collapsed section
-#	:
-#	... collapse_icon( 'xyz' );	# this will add the '-' icon
-#	:
-#	collapse_end( 'xyz' );		# marks the end of the whole section
-#
+/**
+ * 
+ * @global string $g_current_collapse_section
+ */
 $g_current_collapse_section = null;
+
+/**
+ * 
+ * @global bool $g_open_collapse_section
+ */
 $g_open_collapse_section = false;
 
+/**
+ * 
+ * @global string $g_collapse_cache_token
+ */
 $g_collapse_cache_token = null;
 
 /**
@@ -161,6 +183,7 @@ function collapse_end( $p_name, $p_section = '' ) {
 /**
  * Determine if a block should be displayed open by default.
  * @param string Collapse block
+ * @return bool
  */
 function collapse_display( $p_block ) {
 	global $g_collapse_cache_token;
