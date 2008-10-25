@@ -1,40 +1,38 @@
 <?php
-# Mantis - a php based bugtracking system
+/** Mantis - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ *
+ * Mantis is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Mantis is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * $Revision$
+ * $Author$
+ * $Date$
+ * $Id$
+ */
 
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+/** Urdu (اردو)
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Kenzaburo Ito, kenito@300baud.org
+ * @author various developers
+ */
 
-# Mantis is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# Mantis is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-	#
-	# English: Kenzaburo Ito, kenito@300baud.org
-	# English: various developers
-	#
-	###########################################################################
-	# English strings for Mantis (source language for translations)
-	# -------------------------------------------------
-	# $Revision: 1.1.2.1 $
-	# $Author: giallu $
-	# $Date: 2007-10-13 22:36:41 $
-	#
-	# $Id: strings_urdu.txt,v 1.1.2.1 2007-10-13 22:36:41 giallu Exp $
-	###########################################################################
-?>
-<?php
-# Charset
 $s_charset = 'utf-8';
-
-# Group commands menuitems
 $s_actiongroup_menu_move = 'حرکت مين لاو';
 $s_actiongroup_menu_copy = 'نقل کرو';
 $s_actiongroup_menu_assign = 'سپرد کرو';
@@ -43,133 +41,120 @@ $s_actiongroup_menu_delete = 'ختم کرو';
 $s_actiongroup_menu_resolve = 'حل کرو';
 $s_actiongroup_menu_update_priority = 'سب سیےپیلا نیا کرو';
 $s_actiongroup_menu_update_status = 'مقام نیا کرو';
-$s_actiongroup_menu_update_view_status = ' مقام دیکھنے والا نیا کرو' ;
+$s_actiongroup_menu_update_view_status = ' مقام دیکھنے والا نیا کرو';
 $s_actiongroup_menu_update_category = 'قسم نئ کرو';
-$s_actiongroup_menu_set_sticky = 'سیٹ کرو / سیٹ نا کرو ';
+$s_actiongroup_menu_set_sticky = 'سیٹ کرو / سیٹ نا کرو';
 $s_actiongroup_menu_update_field = ' نیا کرو %s';
 $s_actiongroup_menu_update_target_version = 'نئ تبدیلی کی تاریخ';
 $s_actiongroup_menu_update_fixed_in_version = ' نئ تبدیلی مین تبدیلی مقرر';
 $s_actiongroup_menu_add_note = 'معلومات شامل کرو';
 $s_actiongroup_bugs = 'مقررہ ایشوذ';
-
-# new strings:
 $s_all_projects = 'تمام منصوبہے';
 $s_move_bugs = ' مسلۂ ھٹاو';
 $s_operation_successful = 'عمل کامیاب.';
 $s_date_order = 'حکم کی تاریخ';
 $s_print_all_bug_page_link = ' معلومات چھاپنا';
 $s_csv_export = ' برآمند کروCSV';
-$s_login_anonymously = ' نامعلوم اندراج ';
-$s_anonymous = ' نامعلوم ';
-$s_jump_to_bugnotes = ' معلومات پر جاو ';
+$s_login_anonymously = ' نامعلوم اندراج';
+$s_anonymous = ' نامعلوم';
+$s_jump_to_bugnotes = ' معلومات پر جاو';
 $s_public_project_msg = 'یہ منصوبہ آزاد ہے ھر کوی استہمال کر سکتا ہے.';
 $s_private_project_msg = 'یہ منصوبہ آزاد نہی ہے صرف انتطامیا اور خاص آدمی استہمال کر سکتے ہین  .';
-$s_access_level_project = ' منصوبہے کو استہمال کرنے کادرجا ';
-$s_view_submitted_bug_link = 'جمح کہے گے مسلے دکھاو ';
+$s_access_level_project = ' منصوبہے کو استہمال کرنے کادرجا';
+$s_view_submitted_bug_link = 'جمح کہے گے مسلے دکھاو';
 $s_assigned_projects = ' منصوبہے سپرد کرو';
-$s_unassigned_projects = 'جو منصوبہے سپرد نھی ھوے ';
+$s_unassigned_projects = 'جو منصوبہے سپرد نھی ھوے';
 $s_print = 'چھاپو';
 $s_jump = ' چھلانگ';
-$s_copy_users = ' استہمال کرنے والوں کو نقل کرو ';
+$s_copy_users = ' استہمال کرنے والوں کو نقل کرو';
 $s_copy_categories_from = 'قسم نقل کرو اس سہے';
 $s_copy_categories_to = ' قسم نقل کرو اس مین';
-$s_copy_users_from = ' استہمال کرنے والوں کو نقل کرو اس سہے ';
-$s_copy_users_to = ' استہمال کرنے والوں کو نقل کرو اس مین ';
+$s_copy_users_from = ' استہمال کرنے والوں کو نقل کرو اس سہے';
+$s_copy_users_to = ' استہمال کرنے والوں کو نقل کرو اس مین';
 $s_bug_history = ' ایشوذوں کا کھاتا';
 $s_field = 'حصۂ';
 $s_old_value = 'پرانی قیمت';
-$s_new_value = 'نئ قیمت ';
-$s_date_modified = ' تبدیلی کی تریخ ';
-$s_bugnote = ' معلومات ';
+$s_new_value = 'نئ قیمت';
+$s_date_modified = ' تبدیلی کی تریخ';
+$s_bugnote = ' معلومات';
 $s_change = 'تبدیلی';
-$s_bugnote_view_state ='  معلومات کا درجا دکھاو  ';
-$s_bug_monitor = '  ایشوذ کا نگران ';
-$s_bug_end_monitor = ' مسئلے کی نگرانی ختم ';
+$s_bugnote_view_state = '  معلومات کا درجا دکھاو';
+$s_bug_monitor = '  ایشوذ کا نگران';
+$s_bug_end_monitor = ' مسئلے کی نگرانی ختم';
 $s_announcement = 'اطلاح';
 $s_stays_on_top = 'اوپر رکو';
-$s_delete_bugnote_button = '   معلومات خارج کرو ';
+$s_delete_bugnote_button = '   معلومات خارج کرو';
 $s_delete_bugnote_sure_msg = 'کیا آپ یہ معلومات خارج کرنا جاہتے ہین?';
 $s_bug_relationships = 'تعلوقات';
 $s_empty_password_sure_msg = 'استعمال کرنے والوں کا راذ لفظ خالی ہے کیا یہ وہی ہے جو آپ چاہتے ہیں  ?';
-$s_empty_password_button = '  خالی راذ لفظ  استہمال  کرو ';
-
-$s_duplicate_of = "اس کی نقل";
-$s_has_duplicate = "نقل رکھتی ہے";
-$s_related_to = "اس سیے متہلقہ";
-$s_dependant_on = " اس کا ماتحت ";
-$s_blocks = "اس کا حصۂ";
-
-$s_new_bug = 'نیا مسلۂ ';
-$s_bugnote_added = ' معلومات جمحع ';
-$s_bugnote_edited = '  معلومات تبدیل ';
-$s_bugnote_deleted = ' معلومات حارج ';
+$s_empty_password_button = '  خالی راذ لفظ  استہمال  کرو';
+$s_duplicate_of = 'اس کی نقل';
+$s_has_duplicate = 'نقل رکھتی ہے';
+$s_related_to = 'اس سیے متہلقہ';
+$s_dependant_on = ' اس کا ماتحت';
+$s_blocks = 'اس کا حصۂ';
+$s_new_bug = 'نیا مسلۂ';
+$s_bugnote_added = ' معلومات جمحع';
+$s_bugnote_edited = '  معلومات تبدیل';
+$s_bugnote_deleted = ' معلومات حارج';
 $s_summary_updated = 'خلاصۂ نیا ھو گیا ہے';
 $s_description_updated = 'وصاحت نئ ھو گئ ہے';
-$s_additional_information_updated = ' اضافی معلومات نئ ھو گئ ہے  ';
-$s_steps_to_reproduce_updated = '  نئ حالت کے حصے نہے ھو گے ہین  ';
+$s_additional_information_updated = ' اضافی معلومات نئ ھو گئ ہے';
+$s_steps_to_reproduce_updated = '  نئ حالت کے حصے نہے ھو گے ہین';
 $s_file_added = 'کیس جمح ھو گیا ھے';
-$s_file_deleted = 'کیس خارج ھو گیا ھے ';
-$s_bug_deleted = ' مسلۂ خارج ھو گیا ھے ';
-
+$s_file_deleted = 'کیس خارج ھو گیا ھے';
+$s_bug_deleted = ' مسلۂ خارج ھو گیا ھے';
 $s_make_private = 'خاص بناو';
 $s_make_public = 'آزاد بناو';
-
 $s_create_new_project_link = 'نیا منصو بہ';
-
 $s_login_link = 'لاگن';
-$s_select_option = '(استمہال کرنے والوں کو بتاو کے بکس سے اپنی مرضی کی  قیمت منتحب کرو  )';   
-
-
-# bug_actiongroup_page.php : اکھٹی دیکھ بھال
-$s_bug_actiongroup_failed = ' آپ اس مسۂلے کو  استمہال کرنے کا خاص حق نیہں رکھتے: ';
+$s_select_option = '(استمہال کرنے والوں کو بتاو کے بکس سے اپنی مرضی کی  قیمت منتحب کرو  )';
 $s_bug_actiongroup_access = '  آپ اس کام کو  استمہال کرنے کا خاص حق نیہں رکھتے.';
 $s_bug_actiongroup_status = 'یہ ایشوذ آپ کے کہے ھوے مقام پر تبدیل نہئ ھو سکتا';
-$s_bug_actiongroup_category = 'یہ ایشوذ آپ کے کہے ھوے قسم پر تبدیل نہئ ھو سکت ';
+$s_bug_actiongroup_category = 'یہ ایشوذ آپ کے کہے ھوے قسم پر تبدیل نہئ ھو سکت';
 $s_close_bugs_conf_msg = 'کیا آپ یہ ایشوذ بند کرنا جاہتے ہین?';
 $s_delete_bugs_conf_msg = 'کیا آپ یہ ایشوذ خارج کرنا جاہتے ہین?';
 $s_move_bugs_conf_msg = 'ایشوذ اس مین ڈالو';
 $s_copy_bugs_conf_msg = ' ایشوذ اس مین نقل کرو';
-$s_assign_bugs_conf_msg = ' ایشوذ اس کے حوالے کرو   ';
-$s_resolve_bugs_conf_msg = '   ایشوذ کا ساہز منتہب کرو ';
-$s_priority_bugs_conf_msg = ' ایشوذ کی خصوصیت منتہب کرو ';
-$s_status_bugs_conf_msg = ' ایشوذ کا مقام منتہب کرو ';
-$s_view_status_bugs_conf_msg = ' ایشوذ کا مقام دیکھنے والہ منتہب کرو ';
-$s_category_bugs_conf_msg = ' ایشوذ کی قسم منتہب کرو ';
+$s_assign_bugs_conf_msg = ' ایشوذ اس کے حوالے کرو';
+$s_resolve_bugs_conf_msg = '   ایشوذ کا ساہز منتہب کرو';
+$s_priority_bugs_conf_msg = ' ایشوذ کی خصوصیت منتہب کرو';
+$s_status_bugs_conf_msg = ' ایشوذ کا مقام منتہب کرو';
+$s_view_status_bugs_conf_msg = ' ایشوذ کا مقام دیکھنے والہ منتہب کرو';
+$s_category_bugs_conf_msg = ' ایشوذ کی قسم منتہب کرو';
 $s_set_sticky_bugs_conf_msg = 'کیا آپ یہ ایشوذ سیٹ کرو / سیٹ نا کرو  کرنا جاہتے ہین?';
 $s_fixed_in_version_bugs_conf_msg = ' نئ تبدیلی مین تبدیلی اس مین کرو';
-$s_target_version_bugs_conf_msg = ' نئ تبدیلی اس مین کرو ';
-$s_close_group_bugs_button = '  ایشوذ بند کر دو ' ;
-$s_delete_group_bugs_button = ' ایشوذ خارج کر دو ' ;
-$s_move_group_bugs_button = ' ایشوذ اس مین' ;
-$s_copy_group_bugs_button = ' ایشوذ نقل کرو ' ;
-$s_assign_group_bugs_button = 'ایشوذ اس کے حوالے ' ;
-$s_resolve_group_bugs_button = 'حل ایشوذ ' ;
-$s_priority_group_bugs_button = 'خصوصیت نی ھو گی ھے' ;
-$s_status_group_bugs_button = 'مقام نیا ھو گیا ھے' ;
+$s_target_version_bugs_conf_msg = ' نئ تبدیلی اس مین کرو';
+$s_close_group_bugs_button = '  ایشوذ بند کر دو';
+$s_delete_group_bugs_button = ' ایشوذ خارج کر دو';
+$s_move_group_bugs_button = ' ایشوذ اس مین';
+$s_copy_group_bugs_button = ' ایشوذ نقل کرو';
+$s_assign_group_bugs_button = 'ایشوذ اس کے حوالے';
+$s_resolve_group_bugs_button = 'حل ایشوذ';
+$s_priority_group_bugs_button = 'خصوصیت نی ھو گی ھے';
+$s_status_group_bugs_button = 'مقام نیا ھو گیا ھے';
 $s_category_group_bugs_button = 'قسم نی ھو گی ھے';
 $s_view_status_group_bugs_button = '  دیکھنے والہ مقام نیا ھو گیا ھے';
-$s_set_sticky_group_bugs_button = ' سیٹ کرو / سیٹ نا کرو نی ھو گی ھے  ';
-$s_fixed_in_version_group_bugs_button = ' نئ تبدیلی مین تبدیلی ھو گی ھے ';
-$s_target_version_group_bugs_button = '  نئ تبدیلی ھو گی ھے ';
-
-# improved JPgraphs strings
-$s_graph_imp_status_title = 'ترکیب کا گراف مقامکے لہاظ سے ' ;
-$s_graph_imp_priority_title = ' ترکیب کا گراف خصوصیت کے لہاظ سے ' ;
-$s_graph_imp_severity_title = ' ترکیب کا گراف خرابی کے لہاظ سے ';
-$s_graph_imp_category_title = ' ترکیب کا گراف قسمکے لہاظ سے ';
-$s_graph_imp_resolution_title = ' ترکیب کا گراف ساہز کے لہاظ سے ';
+$s_set_sticky_group_bugs_button = ' سیٹ کرو / سیٹ نا کرو نی ھو گی ھے';
+$s_fixed_in_version_group_bugs_button = ' نئ تبدیلی مین تبدیلی ھو گی ھے';
+$s_target_version_group_bugs_button = '  نئ تبدیلی ھو گی ھے';
+$s_graph_imp_status_title = 'ترکیب کا گراف مقامکے لہاظ سے';
+$s_graph_imp_priority_title = ' ترکیب کا گراف خصوصیت کے لہاظ سے';
+$s_graph_imp_severity_title = ' ترکیب کا گراف خرابی کے لہاظ سے';
+$s_graph_imp_category_title = ' ترکیب کا گراف قسمکے لہاظ سے';
+$s_graph_imp_resolution_title = ' ترکیب کا گراف ساہز کے لہاظ سے';
 $s_by_status_pct = 'مقام کے لہاظ سے تناسب';
 $s_by_priority_pct = 'خصوصیت کے لہاظ سے تناسب';
 $s_by_severity_pct = ' خرابی کے لہاظ سے تناسب';
-$s_by_category_pct = ' قسم کے لہاظ سے تناسب ';
-$s_by_resolution_pct = ' ساہز کے لہاظ سے تناسب ';
-$s_by_severity_mix = '  خرابی اور مقامکے لہاظ سے  ';
-$s_by_priority_mix = 'خصوصیت اور مقامکے لہاظ سے  ';
+$s_by_category_pct = ' قسم کے لہاظ سے تناسب';
+$s_by_resolution_pct = ' ساہز کے لہاظ سے تناسب';
+$s_by_severity_mix = '  خرابی اور مقامکے لہاظ سے';
+$s_by_priority_mix = 'خصوصیت اور مقامکے لہاظ سے';
 $s_by_resolution_mix = ' ساہز اور مقامکے لہاظ سے';
 $s_synthesis_link = 'ترکیب';
 $s_status_link = ' فی مقام';
-$s_priority_link = ' فی خصوصیت ';
-$s_severity_link = ' فی خرابی  ';
+$s_priority_link = ' فی خصوصیت';
+$s_severity_link = ' فی خرابی';
 $s_category_link = ' فی قسم';
 $s_resolution_link = ' فی ساہز';
 $s_legend_still_open = 'ابھی کھلا ھوا ھے';
@@ -181,28 +166,19 @@ $s_legend_closed = 'بند ھے';
 $s_legend_reported = 'خبر ھو گی ھے';
 $s_cumulative = 'مجموعی';
 $s_not_enough_data = 'اعداد تھوڈے ھین گراف بنانے کے لے';
-
-# print_all_bug_page.php : منتحب خرابی دکھاو
-$s_hide_button = 'صرف منتحب دکھاو ';
-
-# print_all_bug_options.php : چھاپنے کی سہولت
-$s_printing_preferences_title = 'جو چیز چھاپنی ھے منتحب کرو ';
+$s_hide_button = 'صرف منتحب دکھاو';
+$s_printing_preferences_title = 'جو چیز چھاپنی ھے منتحب کرو';
 $s_printing_options_link = ' چھاپنے کے اختیار';
-
-# word and excel export
-$s_bugnote_title = 'معلومات کو سنبھالنے والہ' ;
-$s_bugnote_date = '  معلومات کی تاریخ ';
+$s_bugnote_title = 'معلومات کو سنبھالنے والہ';
+$s_bugnote_date = '  معلومات کی تاریخ';
 $s_bugnote_description = ' معلومات کی وضاحت';
-
-$s_error_no_proceed = ' مۂربانی کر کے پہچھے والے صہفےپر جا نے کے لۓ پہچھے والہ بٹن استہمال کرین۔ آپ وہہاں سے اپنی خرابی دیکھ سکھتے ہیں یا اور کام منتہب کر سکتے ہیں۔آپ لسٹ سے بھی کسی کام کو دبا کر کسی نۓ حصے پر جا سکتے ہیں۔ ';
-
-# ERROR strings
+$s_error_no_proceed = ' مۂربانی کر کے پہچھے والے صہفےپر جا نے کے لۓ پہچھے والہ بٹن استہمال کرین۔ آپ وہہاں سے اپنی خرابی دیکھ سکھتے ہیں یا اور کام منتہب کر سکتے ہیں۔آپ لسٹ سے بھی کسی کام کو دبا کر کسی نۓ حصے پر جا سکتے ہیں۔';
 $MANTIS_ERROR[ERROR_GENERIC] = 'یہ کام کرتے ھوے ایک خرابی آ گی ھے.  آپ اپنی انتضامیہ کو اس کے بارے میں آگاہ کر سکتے ہیں۔ .';
-$MANTIS_ERROR[ERROR_SQL] = ' کی خرابی آ گی ھے اس کے بارے میں اگ ہ کر یںSQL ';
+$MANTIS_ERROR[ERROR_SQL] = ' کی خرابی آ گی ھے اس کے بارے میں اگ ہ کر یںSQL';
 $MANTIS_ERROR[ERROR_REPORT] = 'آپ کی معلومات مین خرابی تھی.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'کوی فاہل بتای نہی گی';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'اس قسم کی فاہل کی اجازت نہی';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'لسٹ دستیاب نہی ھے. 
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'لسٹ دستیاب نہی ھے.
 Please check the project settings.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'یہ نقل والی فاہل ھےمہربانی کر کے پہلے اسے خارج کریں.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'اس نام کا منصو بہ پہلے ہی موجود ھے.';
@@ -213,47 +189,47 @@ $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'فایل دوبارہ نئ نہی ھوی 
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = ' فایل دوبارہ نئ نہی ھوی ھے۔ کیونکہ فایل کا ساہز  پی ایچ پیکے تقرر سے زیادہ ھے۔ .';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '(%s)  اس صہفے کا ضروری حصہ نہیں ملا.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'استہمال کرنے والے کا نام پہلے ہی استہمال ھو رہ ھے۔مہربانی کر کے پیچھے جاہیں اور کوی اور نام منتہب کریں.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = "ساخت کا انتخاب نہیں  ملا '%s'.";
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'ساخت کا انتخاب نہیں  ملا \'%s\'.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = ' ساخت کا انتخاب ڈیٹا بیس میں سیٹ   نہی ھو سکتا یہ میں     config_inc.php ھونا چاہیے  .';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = " '%s' سٹرنگ نہیں ملی.";
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = ' \'%s\' سٹرنگ نہیں ملی.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = ' معلومات نہیں ملی.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '   منصو بہ نہی ملا .';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ڈیٹا بیس کا حصہ نہی ملا \'%s\'.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = ' نے سے قاصر ھے   صرور سے ملاFTP.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'ایشوذ کو چل نے والے کے پاس اس مقام پر ایشوذ چلانے کے اختیار نہیں ھیںا.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = ' نے سے قاصر ھے   صرور سے ملاFTP.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'ایشوذ کو چل نے والے کے پاس اس مقام پر ایشوذ چلانے کے اختیار نہیں ھیںا.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = ' اس منصوبے کا نام پہلے ہی استہمال ھو رہ ھے۔مہربانی کر کے پیچھے جاہیں اور کوی اور نام منتہب کریں..';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '  منصوبے کا نام ٹھیک نہی ھے۔منصوبے کا نام خالی نہی ھو سکتا.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = ' استہمال کرنے والا نہی ملا.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = ' استہمال کرنے والا نہی ملا.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'لاگن کی معلومات جو آپ نے مہیا کی ہیں وہ  ٹھیک نہیں ہیں۔ھو سکتا ھے آپ کا کھاتہ خارج ھو چکا ھو ?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'ااس استہمال کرنے والے بندے کے لیے انتخاب نہیں ملا.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'خبروں والوں چیزیں نہیں ملیں.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'خبروں والوں چیزیں نہیں ملیں.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'راز والا لفظ تصدیق وا لے  لفظ کے ساتھ نہیں ملا.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = ' ایک ایرے متوقہع تھا لیکن   کے لیے آیا ھے %s ایک لفظ   .';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = ' ایک ایرے متوقہع تھا لیکن   کے لیے آیا ھے %s ایک لفظ   .';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = ' ایک لفظ متوقہع تھا لیکن ایک ایرے     کےلیےآیا ھے%s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'متوقہع تھا  کے لیے %sایک نمبر .';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'کے لیے نہیں ملا%d مسہلہ .';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = '  نہیں ملا%d فلژ.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'آپ جو فلژ استہمال کر رھے ھیں وہ پرانا ھے آپ استہمال کرنے کے لیے نیا بنایں ';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'ای میل ٹھیک نہہیں ھے.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'کے لیے نہیں ملا%d مسہلہ .';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = '  نہیں ملا%d فلژ.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'آپ جو فلژ استہمال کر رھے ھیں وہ پرانا ھے آپ استہمال کرنے کے لیے نیا بنایں';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'ای میل ٹھیک نہہیں ھے.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'جاہزہ نہیں ملا.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'فاہل کی قسم اپ لوڈ کے لیے ٹھیک نہیں ھے.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'یہ نقل والی فاہل ھےمہربانی کر کے پہلے اسے خارج کریں.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'فاہل کی قسم اپ لوڈ کے لیے ٹھیک نہیں ھے.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'یہ نقل والی فاہل ھےمہربانی کر کے پہلے اسے خارج کریں.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'اپ لوڈ کا راستہ ٹھیک نہی ھے.  فاہل یا تو ٹھیک نہی ھے یا ویب سرور پر کا پی نھی ھوی ھے';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'کوی فاہل اپ لوڈ نہی ھوی ھے. مہربانی کرکے پیچھے جایں اور اپ لوڈ کرنے کے لیے فاہل منتہب کرہں';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'اپ لوڈ فاہل سٹوریج فہرست میں نہں ڈالی جا سکتی یا تو فہرست ھے ھی نھی یا ویب سرور کی طرف سے اجاذت نہیں';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'آپ ایک مسہلے جیسا دوسرا مسلہ نہں بنا سکتے.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'آپ ایک مسہلے جیسا دوسرا مسلہ نہں بنا سکتے.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'کسٹم کی جگہ نہی ملی';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = ' یہ فاہل نقل ھے.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = ' یہ منصوبہ صرف ایک جیز کو ایک وقت میں استہمال کر سکتا ھے .';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'اس چیز کے لیے قیمت ٹھیک نہیں ھے';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'اس قسٹم والی چیز کا نام ٹھیک نہی ھے ';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = ' کی اجازت فیل ھو گی ھےLDAP';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = ' کے سرور سے رابطہ فیل ھو گیا ھے LDAP ';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = ' LDAP       کے ریکارڈ نہے نہیں  ھوے      .';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'اس قسٹم والی چیز کا نام ٹھیک نہی ھے';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = ' کی اجازت فیل ھو گی ھےLDAP';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = ' کے سرور سے رابطہ فیل ھو گیا ھے LDAP';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = ' LDAP       کے ریکارڈ نہے نہیں  ھوے      .';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = ' کے استہمال کرنے والوں کے نام نہیں ملے LDAP      .';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'ڈیٹا بیس سے رابطہ فیل ھو گیا ھے. خرابی ڈیٹا بیس سے حاصل ھوی ھے #%d: %s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = ' ڈیٹا بیس کی کیوری فیل ھو گی ھے  کیوری کیلیے %s #%d: %s خرابی جو ڈیٹا بیس سے حاصل ھوی ھے  ';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = ' ڈیٹا بیس سے رابطہ ختم ھو گیا ھے #%d: %s خرابی جو ڈیٹا بیس سے حاصل ھوی ھے.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'ڈیٹا بیس سے رابطہ فیل ھو گیا ھے. خرابی ڈیٹا بیس سے حاصل ھوی ھے #%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = ' ڈیٹا بیس کی کیوری فیل ھو گی ھے  کیوری کیلیے %s #%d: %s خرابی جو ڈیٹا بیس سے حاصل ھوی ھے';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = ' ڈیٹا بیس سے رابطہ ختم ھو گیا ھے #%d: %s خرابی جو ڈیٹا بیس سے حاصل ھوی ھے.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'اسی قسم کی جماعت کا نام پہلے ہی موجود ھے.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'کوی نقل کا کام نہی ملا.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = ' جماعت نہی ملی .';
@@ -265,74 +241,58 @@ $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'استہمال کرنے و
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'آپ نے جو نام منتخب کیا ھےوہ کسی اور کے نام سے مل رھا ھے مہربانی کر کے کوی دوسرا نام استہمال کریں.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'سپانسرشپ کی سپورٹ ٹھیک نہیں ھے.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '  نہی ملا %d سپانسرشپ.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = ' (%s) سپانسرشپ کی قیمت مقررہ قیمت سے قم ھے  ';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = ' (%s) سپانسرشپ کی قیمت مقررہ قیمت سے قم ھے';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'ٹھیک کرنےوالےکے پاس مقررہ ایشوذ ٹھیک کرنے کا حق حاصل نہیں ھے.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = ' داخلۂ ممنوع ھے مقررہ ایشوذ کو زیادہ حق کی ضرورت ھے.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'پیش کار کادیا ھوا ای میل ٹھیک نہی ھے مھربانی کر کے اپنا ریکارڈ نیا کریں.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'ساخت کے اختیار کی قیمت ٹھیک نہی ھے \'%s\' \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = ' یہ عمل نہی چل سکتا کیونکہ اس  ایشوذ کو صرف پڑھ سکتے ہیں  ';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "يہاں پہلے ھی دو ایشوذوں کے درمیان تہلق ھے.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = " تہلق نہی ملا.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = " داخلۂ ممنوع ھے مقررہ ایشوذ کو زیادہ حق کی ضرورت ھے.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ایک ایشوذ خود سے تہلق نہی رکھ سکتا .";
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = ' یہ عمل نہی چل سکتا کیونکہ اس  ایشوذ کو صرف پڑھ سکتے ہیں';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'يہاں پہلے ھی دو ایشوذوں کے درمیان تہلق ھے.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = ' تہلق نہی ملا.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = ' داخلۂ ممنوع ھے مقررہ ایشوذ کو زیادہ حق کی ضرورت ھے.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'ایک ایشوذ خود سے تہلق نہی رکھ سکتا .';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'اجازت نہی مل سکتی مہربانی کر کے دوبارہ کوشش کریں  .';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'آپ کا راز والہ لفظ نہی ملا یہ فیچر آپ کے لیے دستیاب نہی ھے.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'آپ کو راز والہ لفظ تبدیل کرنے کے لیے ای میل کی ضرورت ھے لفظ ';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'آپ کو راز والہ لفظ تبدیل کرنے کے لیے ای میل کی ضرورت ھے لفظ';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '  آپ نے  جو مہلومات فراہم کی ھے وہ کسی استہمال کرنے والے کے کھاتے سے نہی ملتی !';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] =  'ٹھیک نہی ھےیا وہ استہمال ھو رھا ھے مہربانی کر کے آپ دوبارہ  رجسٹر ھونے کی کو شش کریں  URL ثبوت والہ .';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'ٹھیک نہی ھےیا وہ استہمال ھو رھا ھے مہربانی کر کے آپ دوبارہ  رجسٹر ھونے کی کو شش کریں  URL ثبوت والہ .';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'درخواستیں بہت زیادہ ھو چکی ھیں مھربانی کر کے اپنی انتظامیہ سے رابطہ کریں';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'یہ کام دوسرے ایشوذوں پر لوپ بنا دے  گا .';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'آپ چلا نے کے عمل کو تبدیل نہی کر سکتے صرف انتظامیہ یہ کام کر سکتی ھے.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = ' صہفے  پر واپس جانے کی حرابی ھے یقین کر لیں کوی جگہ پی ایچ پی کے خانے سے باہر تو نہی (&ایل ٹی;?پی ایج پی ?&جی ٹی;) مین config_inc.php یا custom_*.php files.';
-
 $s_login_error = ' آپ کا کھا تہ ختم ھو گیا ھے یا بند کر دیا گیا ھے،یا پھر آپ کا استہمال والہ نام یا راز لفظ جو آپ نے دیا ھے ٹھیک نہی ھے .';
 $s_login_cookies_disabled = ' آپ کا براوزر                         یا تو یہ جانتا نہی کے کوکیز کو کہسے   چلانہ ھے یا چلانے سے انکار کر رھا ھے                               .';
-
-# General Strings
 $s_go_back = 'پیچھے جاو';
-$s_proceed = ' آگے جانے کے لیے یہاں پر کلک کریں ';
-
+$s_proceed = ' آگے جانے کے لیے یہاں پر کلک کریں';
 $s_switch = 'تبدیل';
 $s_logged_in_as = 'اس کے طور پر اندراج';
-
 $s_prefix_for_deleted_users = 'استہمال کرنے والہ';
-
-$s_administrator = 'انتظا میہ ';
-$s_myself = "میرے طور پر";
+$s_administrator = 'انتظا میہ';
+$s_myself = 'میرے طور پر';
 $s_default_access_level = 'یہ استہمال ھونے والہ لیول ڈیفالٹ ھے';
-
 $s_issue_status_percentage = 'ایشوذ کے مقام کی فی صد';
-
-# Enum Strings
-$s_access_levels_enum_string = 
-'10:دیکھنے والے,25:    رپورٹ کرنے وال     ,40:نیا بنا نے والہ  ,55:بنا نے  والہ,70:مینجر,90:انتظا میہ';
-$s_project_status_enum_string = 
-'10:فروغ,30:رھای,50:مضبوط,70:منسوخ';
+$s_access_levels_enum_string = '10:دیکھنے والے,25:    رپورٹ کرنے وال     ,40:نیا بنا نے والہ  ,55:بنا نے  والہ,70:مینجر,90:انتظا میہ';
+$s_project_status_enum_string = '10:فروغ,30:رھای,50:مضبوط,70:منسوخ';
 $s_project_view_state_enum_string = '10: آزاد,50:غیر آزاد';
-$s_view_state_enum_string = '10: آزاد,50: غیر آزاد ';
-
+$s_view_state_enum_string = '10: آزاد,50: غیر آزاد';
 $s_priority_enum_string = '10:کوی نہی,20:کم,30:عام,40:زیادہ,50:ضروری,60:جلدی';
 $s_severity_enum_string = '10:خصوصیت,20: چھوٹا,30:لفظ,40:دھچکا,50:تھوڈا,60:خاص,70:ختم,80:بند';
 $s_reproducibility_enum_string = '10:ہمیشہ,30:کبھی کبھی   ,50:باری باری ,70:کوشش نہی کی گی,90:دوبارہ نہی بن سکتا ,100:این/اے';
 $s_status_enum_string = '10:نیا,20:راے,30:راضی,40:پکا,50:ذ مہ,80:حل ھو گیا ھے,90:بندھو گیا ھے';
-$s_resolution_enum_string = '10:کھلا ھے,20: پکا,30:دوبارہ کھولو,40: دوبارہ نہی بن سکتا,50: پکا نہی ھے ,60:نقل,70:تبدیل نہی ھوا ضرورت ھے,80:روک دیا گیا ھے,90: پکا نہی ھوا ھے ';
+$s_resolution_enum_string = '10:کھلا ھے,20: پکا,30:دوبارہ کھولو,40: دوبارہ نہی بن سکتا,50: پکا نہی ھے ,60:نقل,70:تبدیل نہی ھوا ضرورت ھے,80:روک دیا گیا ھے,90: پکا نہی ھوا ھے';
 $s_projection_enum_string = '10:کوی  نہی ھے,30: دھچکا,50: تھوڑا پکا,70:خاص کام دوبارہ,90:دوبارہ ڑیزاین';
 $s_eta_enum_string = '10:کوی  نہی ھے ,20:<  دن1 ,30:2-3 دنوں,40:<  ہفتہ1 ,50:< مۂینہ1 ,60:>  مۂینہ 1';
 $s_sponsorship_enum_string = '0:ادا نہی ھوا  ھے ,1:گزارش کی ھوی ھے,2:ادا ھو گی ھے';
-
-# Email Strings
 $s_new_account_subject = 'کھاتے کا اندراج ھو گیا ھے';
 $s_new_account_greeting = 'اندراج کے لیے شکریہ آپ کا کھاتہ آپ کے استہمال کرنے کے نام سے. \'';
 $s_new_account_greeting2 = '\'. اندراج کر نے  کے لیے آپ اس یو آر ایل پر جایں اور اپنا راز والہ لفظ سیٹ کر لیں , :';
-$s_new_account_username = 'استہمال کرنے والہ: ';
-$s_new_account_message = ' اگر آپ نے اندراج کرنے کے لیے نہی کہا تو اس پیغام کو نظر انداز کر دیں کچھ نہی ھو گا.' . "\n\n";
-$s_new_account_do_not_reply = 'اس پیغام کو جواب نہ دو ';
-$s_new_account_email = 'ای-میل: ';
-$s_new_account_IP = 'ریموٹ آی پی کا پتہ: ';
+$s_new_account_username = 'استہمال کرنے والہ:';
+$s_new_account_message = ' اگر آپ نے اندراج کرنے کے لیے نہی کہا تو اس پیغام کو نظر انداز کر دیں کچھ نہی ھو گا.\n\n';
+$s_new_account_do_not_reply = 'اس پیغام کو جواب نہ دو';
+$s_new_account_email = 'ای-میل:';
+$s_new_account_IP = 'ریموٹ آی پی کا پتہ:';
 $s_new_account_signup_msg = 'یہ والہ کھاتہ بن چکا ھے:';
-
 $s_reset_request_msg = ' کسی نے راز والے لفظ کو تبدیل کر نے  کے لیے کہا ھے ای میل کی تصدیق کے  ذریعے اگر یہ آپ  نہی ہیں ہیں تو اس پیغام کو نظر انداز کر دیں یں کچھ نہی ھو گا،اگر آپ ہی نے کہا ھے اس تصدیق کے لیے آپ اس یو آر ایل پر جایں اور اپنا راز والہ لفظ تبدیل کر لیں، اگر آپ نے استہمال کرنے والہ نام اور ای-میل ٹھیک دیا،تو ھم آپ کو تصدیق کا پیغام آپ کے ای-میل کے پتے پر بھیج دیں گے،اب ھم اس ای-میل کے پتے پر تصدیق کا پیغام بھیج رھے ھیں،جب آپ پیغام لے لیں تو آپ د ی  گی  مہلومات پر عمل کر کے  اپنا راز والہ لفظ تبدیل کر لیں  .';
-
 $s_email_notification_title_for_status_bug_new = ' یہ ایشوذ اب نئے مقام پر ھے (دوبارہ)';
 $s_email_notification_title_for_status_bug_feedback = ' اس ایشوذ کو آپ  کی راے کی ضرورت ھے  .';
 $s_email_notification_title_for_status_bug_acknowledged = 'یہ ایشوذ مانا جا چکا ھے .';
@@ -340,7 +300,6 @@ $s_email_notification_title_for_status_bug_confirmed = '  یہ ایشوذ پکا
 $s_email_notification_title_for_status_bug_assigned = '  یہ ایشوذ سپرد ھو چکا ھے.';
 $s_email_notification_title_for_status_bug_resolved = '  یہ ایشوذ حل ھو چکا ھے.';
 $s_email_notification_title_for_status_bug_closed = '  یہ ایشوذ بند ھو چکا ھے';
-
 $s_email_notification_title_for_action_bug_submitted = '  یہ ایشوذ جمہع ھو چکا ھے.';
 $s_email_notification_title_for_action_bug_assigned = '  یہ ایشوذ سپرد ھو چکا ھے.';
 $s_email_notification_title_for_action_bug_reopened = '  یہ ایشوذ دوبارہ کھولا جا چکا ھے.';
@@ -349,21 +308,19 @@ $s_email_notification_title_for_action_bug_updated = '  یہ ایشوذ نیا �
 $s_email_notification_title_for_action_sponsorship_added = '  یہ ایشوذ زامن ھو چکا ھے.';
 $s_email_notification_title_for_action_sponsorship_updated = '  اس ایشوذ کی زمۂ داری کی ترمیم ھو گی ھے  .';
 $s_email_notification_title_for_action_sponsorship_deleted = ' اس ایشوذ کی زمۂ داریختم ھو گی ھے .';
-
 $s_email_notification_title_for_action_bugnote_submitted = ' اس ایشوذ میں ایک معلومت جمع ھو چکی ھے.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = " ایشوذ کی نقل بن  چکا ھے%s یہ ایشوذ .";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = " ایشوذ کی نقل بن  چکا ھے%s یہ ایشوذ.";
-$s_email_notification_title_for_action_related_to_relationship_added = " ایشوذ سےتعلق بنا  چکا ھے%s یہ ایشوذ.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = " ایشوذ سے  والد کا تعلق بنا  چکا ھے%sیہ ایشوذ.";
-$s_email_notification_title_for_action_blocks_relationship_added = " ایشوذ سے بچے کا تعلق بنا  چکا ھے%sیہ ایشوذ.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = " ایشوذ  سے   نقل کا ان/سیٹ  تعلق بنا  چکا ھے%sیہ ایشوذ.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "٪ ایشوذ  سے   نقل کے تعلق طور پر خارج ھو چکا ھے  sیہ ایشوذ  .";
-$s_email_notification_title_for_action_related_to_relationship_deleted = " ایشوذ  سے  بے  تعلق کیا جا  چکا ھے%sیہ ایشوذ.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = " ایشوذ سے  والد کے تعلق کی بنا پر ختم کیا جا  چکا ھے%sیہ ایشوذ .";
-$s_email_notification_title_for_action_blocks_relationship_deleted = " ایشوذ سے بچے کے تعلق کی بنا پر ختم کیاجا چکا ھے%sیہ ایشوذ.";
-$s_email_notification_title_for_action_relationship_child_resolved = " ایشوذ سے متعلقہ حل کیا جا  چکا ھے%s.";
-$s_email_notification_title_for_action_relationship_child_closed = "ایشوذ سے متعلقہ بند کیا جا  چکا ھے%s.";
-
+$s_email_notification_title_for_action_duplicate_of_relationship_added = ' ایشوذ کی نقل بن  چکا ھے%s یہ ایشوذ .';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = ' ایشوذ کی نقل بن  چکا ھے%s یہ ایشوذ.';
+$s_email_notification_title_for_action_related_to_relationship_added = ' ایشوذ سےتعلق بنا  چکا ھے%s یہ ایشوذ.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = ' ایشوذ سے  والد کا تعلق بنا  چکا ھے%sیہ ایشوذ.';
+$s_email_notification_title_for_action_blocks_relationship_added = ' ایشوذ سے بچے کا تعلق بنا  چکا ھے%sیہ ایشوذ.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = ' ایشوذ  سے   نقل کا ان/سیٹ  تعلق بنا  چکا ھے%sیہ ایشوذ.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = '٪ ایشوذ  سے   نقل کے تعلق طور پر خارج ھو چکا ھے  sیہ ایشوذ  .';
+$s_email_notification_title_for_action_related_to_relationship_deleted = ' ایشوذ  سے  بے  تعلق کیا جا  چکا ھے%sیہ ایشوذ.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = ' ایشوذ سے  والد کے تعلق کی بنا پر ختم کیا جا  چکا ھے%sیہ ایشوذ .';
+$s_email_notification_title_for_action_blocks_relationship_deleted = ' ایشوذ سے بچے کے تعلق کی بنا پر ختم کیاجا چکا ھے%sیہ ایشوذ.';
+$s_email_notification_title_for_action_relationship_child_resolved = ' ایشوذ سے متعلقہ حل کیا جا  چکا ھے%s.';
+$s_email_notification_title_for_action_relationship_child_closed = 'ایشوذ سے متعلقہ بند کیا جا  چکا ھے%s.';
 $s_email_reporter = 'اطلاع  کسی کی طرف سے';
 $s_email_handler = 'سپردگی کسی کی طرف';
 $s_email_project = 'منصوبہ';
@@ -376,25 +333,19 @@ $s_email_status = 'مقام';
 $s_email_resolution = 'ساہز';
 $s_email_duplicate = 'نقل';
 $s_email_fixed_in_version = ' نہے پارٹ مین پکا';
-$s_email_target_version = ' نہے پارٹ کا مقصر ';
+$s_email_target_version = ' نہے پارٹ کا مقصر';
 $s_email_date_submitted = 'جمعح کرا نے کی تاریخ';
 $s_email_last_modified = 'آخری دفع جب تبدیل کیا گیا';
 $s_email_summary = 'خلاصا';
 $s_email_description = 'وضاحت';
-
-# account_delete.php
 $s_account_protected_msg = 'کھاتہ پروٹیکٹیڈ ھے یہ تبدیل نہی ھو سکتا۔۔۔';
 $s_account_removed_msg = 'آپ کا کھاتہ ختم ھو چکا ھے';
-
-# account_delete_page.php
 $s_confirm_delete_msg = '? کیا آپ واقہی اپنا کھاتہ خارج کرنا چاہتے ھیں';
 $s_delete_account_button = 'کھاتہ خارج';
-
-# account_page.php
 $s_manage_profiles_link = 'مختصر جاہزے';
 $s_change_preferences_link = 'پسند';
 $s_edit_account_title = 'کھاتہ مین تبدیلی';
-$s_username = 'استعمال کرنے والے کا نام ';
+$s_username = 'استعمال کرنے والے کا نام';
 $s_realname = 'اصلی نام';
 $s_email = 'ای-میل';
 $s_password = 'راز وا لہ لفظ';
@@ -404,21 +355,19 @@ $s_access_level = 'استعمال کر نے کا درجہ';
 $s_update_user_button = 'نیا استعمال کر نے والہ';
 $s_verify_warning = 'آپ کے کھاتے کی معلومات کو چیک کیا جا چکا ھے . آپ کو جو کھاتے کی معلومات ملی ھے وہ اب استعمال کرنے کے قابل نہی رہی.';
 $s_verify_change_password = 'آپ کو دوبارہ لاگن ھونے کے لیے راز والہ لفظ ضرور سیٹ کرنا پڑے گا.';
-
-# account_prefs_page.php
 $s_default_account_preferences_title = 'کھاتے کے پسند';
-$s_default_project = ' سسٹم کا دیا ھوا منصو بے   ';
-$s_advanced_report = 'اڈوانس اطلاع ';
+$s_default_project = ' سسٹم کا دیا ھوا منصو بے';
+$s_advanced_report = 'اڈوانس اطلاع';
 $s_advanced_view = ' اڈوانس ویو';
-$s_advanced_update = ' اڈوانس نیا بننا ';
+$s_advanced_update = ' اڈوانس نیا بننا';
 $s_refresh_delay = 'وقفے کو تازہ دم کرنا';
 $s_redirect_delay = 'وقفہ آگے بیجنا';
 $s_with_minimum_severity = 'تھوڈی سی شدت کے ساتھ';
 $s_bugnote_order = 'معلومات کی ترتیب کی شکل';
 $s_bugnote_order_asc = 'اوپرجانا';
 $s_bugnote_order_desc = 'نیچے آنا';
-$s_email_on_new = ' نہے پر ای- میل ';
-$s_email_on_assigned = ' ای- میل کنٹرول کرنے پر ';
+$s_email_on_new = ' نہے پر ای- میل';
+$s_email_on_assigned = ' ای- میل کنٹرول کرنے پر';
 $s_email_on_feedback = ' ای- میل راے کرنے پر';
 $s_email_on_resolved = ' ای- میل حل کرنے پر';
 $s_email_on_closed = ' ای- میل بند کرنے پر';
@@ -430,30 +379,16 @@ $s_email_bugnote_limit = ' ای- میل معلومات کی حد';
 $s_language = 'ذبان';
 $s_update_prefs_button = 'پسند کو نیا کرنا';
 $s_reset_prefs_button = ' پسند کو دوبارہ سیٹ کرنا';
-
-# account_prefs_reset.php
-$s_prefs_reset_msg = 'پسند کو  تبدیل کیا جا چکا ھے ';
-
-# account_prefs_update.php
+$s_prefs_reset_msg = 'پسند کو  تبدیل کیا جا چکا ھے';
 $s_prefs_updated_msg = 'پسند کو  نیا کیا جا چکا ھے';
-
-# account_profile_add.php
 $s_profile_added_msg = 'مختصر جاہزہ جمعح کیا جا چکا ھے';
-
-# account_profile_delete.php
 $s_profile_deleted_msg = 'مختصر جاہزہ خارج کیا جا چکا ھے';
-
-# account_profile_edit_page.php
 $s_edit_profile_title = 'مختصر جاہزہ تبدیل کیا جا چکا ھے';
 $s_platform = 'پليٹ فارم';
 $s_operating_system = 'اپريٹنگ سسٹم';
 $s_additional_description = 'اضافی وضاحت';
 $s_update_profile_button = 'مختصر جاہزہ نیا';
-
-# account_profile_make_default.php
 $s_profile_defaulted_msg = 'ڈی فالٹ جاہزہ نیا ھو گیا ھے';
-
-# account_profile_manage_page.php
 $s_add_profile_title = 'جاہزہ شامل کرو';
 $s_add_profile_button = ' جاہزہ شامل کرو';
 $s_edit_or_delete_profiles_title = ' جاہزہ تبدیل یا خارج کرو';
@@ -462,11 +397,7 @@ $s_make_default = 'ڈی فالٹ بناو';
 $s_delete_profile = ' جاہزہ خارج کرو';
 $s_select_profile = ' جاہزہ منتخب کرو';
 $s_submit_button = 'جمعح';
-
-# account_profile_update.php
-$s_profile_updated_msg = 'جاہزہ نیا ھو گیا ھے ';
-
-# account_sponsor_page.php
+$s_profile_updated_msg = 'جاہزہ نیا ھو گیا ھے';
 $s_my_sponsorship = 'میرے زمہ دار';
 $s_update_sponsorship_button = 'پیسوں کا مقام تبدیل کرو';
 $s_no_sponsored = 'کوی ساپنسرڑ ایشوذ جو آپ کے زمہ لگایا گیا ھے نہی ملا.';
@@ -480,101 +411,61 @@ $s_total_owing = 'جتنی ادا کرنی ھے';
 $s_total_paid = ' جتنی ادا کر دی ھے';
 $s_sponsor_hide = 'جوادا اور حل کر دی ھے وہ چھپا دو';
 $s_sponsor_show = 'سارے دکھاو';
-
-# account_sponsor_update.php
 $s_payment_updated = 'خرچا کی معلومات تبدیل ھو کر نی ھو گی ھے.';
-
-# account_update.php
 $s_account_updated_msg = 'آپ کا کھاتہ کامیابی کے ساتھ تبدیل ھو کر نیا ھو گیا ھے ...';
-$s_email_updated = 'ای-میل کا ايڈریس تبدیل ھو کر نیا ھو گیا ھے ';
-$s_realname_duplicated = 'حقیقی نام کسی اور کے استعمال میں ھے ';
-$s_realname_updated = 'حقیقی نامکامیابی کے ساتھ تبدیل ھو کر نیا ھو گیا ھے  ';
-$s_password_updated = ' راذ والا لفظ تبدیل ھو کر نیا ھو گیا ھے ';
-
-# adm_permission_report.php
-
-# bug_action_group_page
+$s_email_updated = 'ای-میل کا ايڈریس تبدیل ھو کر نیا ھو گیا ھے';
+$s_realname_duplicated = 'حقیقی نام کسی اور کے استعمال میں ھے';
+$s_realname_updated = 'حقیقی نامکامیابی کے ساتھ تبدیل ھو کر نیا ھو گیا ھے';
+$s_password_updated = ' راذ والا لفظ تبدیل ھو کر نیا ھو گیا ھے';
 $s_multiple_projects = ' ایشوذ جو آپ نے چنا ھے وہ کسی اور منصوبے/پروجیکٹ سے تعلق رکھتا ھے نیچے دی گی معلومات تمام منصوبوں کی سیٹنگ دکھا رھا ھے اگر یہ ٹھیک نہی ھے تو مہربانی کر کے اپنی تبدیلی دیے گے تھوڈے منصوبے میں سے دوبارہ کوشش کریں .';
-
-# bug_assign.php
-$s_bug_assign_msg = ' ایشوذ کامیابی کے ساتھ سپرد کر دیا گیا ھے ';
-
-# bug_change_status_page.php
-$s_new_bug_title = 'نیا ایشوذ ';
-$s_feedback_bug_title = 'آپ نے جس ایشوذ کے لیے کہا تھا اس کی راے/فیڑ بیک ';
+$s_bug_assign_msg = ' ایشوذ کامیابی کے ساتھ سپرد کر دیا گیا ھے';
+$s_new_bug_title = 'نیا ایشوذ';
+$s_feedback_bug_title = 'آپ نے جس ایشوذ کے لیے کہا تھا اس کی راے/فیڑ بیک';
 $s_acknowledged_bug_title = 'ایشوذ جس کی اجازت مل گی ھے';
 $s_confirmed_bug_title = 'ایشوذ جو ثابت ھو گیا ھے';
-$s_assigned_bug_title = ' ایشوذ سپرد ';
-$s_new_bug_button = 'نیا ایشوذ ';
-$s_feedback_bug_button = ' آپ نے جس ایشوذ کے لیے کہا تھا اس کی راے/فیڑ بیک ';
+$s_assigned_bug_title = ' ایشوذ سپرد';
+$s_new_bug_button = 'نیا ایشوذ';
+$s_feedback_bug_button = ' آپ نے جس ایشوذ کے لیے کہا تھا اس کی راے/فیڑ بیک';
 $s_acknowledged_bug_button = ' ایشوذ جس کی اجازت مل گی ھے';
 $s_confirmed_bug_button = ' ایشوذ جو ثابت ھو گیا ھے';
-$s_assigned_bug_button = ' ایشوذ سپرد ';
-
-# bug_close.php
-$s_bug_close_msg = ' ایشوذ  بند ھو چکے ھیں ';
+$s_assigned_bug_button = ' ایشوذ سپرد';
+$s_bug_close_msg = ' ایشوذ  بند ھو چکے ھیں';
 $s_close_immediately = 'جلدی سے بند کرو :';
-
-# bug_close_page.php
 $s_closed_bug_title = 'ایشوذ بند';
-
-# bug_delete.php
 $s_bug_deleted_msg = ' ایشوذ  خارج ھو چکے ھیں...';
-
-# bug_delete_page.php
 $s_delete_bug_sure_msg = 'کیاآپ واقعی اس ایشوذ کو خارج کرنا چاہتے ھیں?';
 $s_delete_bug_button = ' ایشوذ  خارج کرو';
-
-# bug_monitor.php
-$s_monitor_bug_button = ' ایشوذ کا دھیان رکھو ';
-$s_unmonitor_bug_button = ' ایشوذ کا دھیان ختم کر دو ';
-
-# bug_file_add.php
+$s_monitor_bug_button = ' ایشوذ کا دھیان رکھو';
+$s_unmonitor_bug_button = ' ایشوذ کا دھیان ختم کر دو';
 $s_file_upload_msg = 'فایل کامیابی کے ساتھ اپ لوڈ ھو چکی ھے';
-
-# bug_file_upload_inc.php
 $s_upload_file = ' فایل کو اپ لوڈ کرو';
-$s_select_file = '  فایل منتخب کرو ';
+$s_select_file = '  فایل منتخب کرو';
 $s_upload_file_button = ' فایل کو اپ لوڈ کرو';
 $s_max_file_size = 'زیادہ ساہز';
-
-# bug_reopen.php
 $s_bug_reopened_msg = '  ایشوذ دوبارہ کھل چکا ھے...';
 $s_reopen_add_bugnote_title = 'دوبارہ موصوع جو کھو لے گے ھیں معلومات کو جمع کر نے کی وجہ A';
 $s_bugnote_add_reopen_button = ' معلومات کو جمع کر و اور ایشوذ دوبارہ کھولو';
-
-# bug_resolve_page.php
 $s_resolved_bug_title = 'حل ایشوذ';
 $s_resolved_bug_button = ' حل ایشوذ';
-
-# bug_resolve_page2.php
 $s_bug_resolved_msg = ' ایشوذ حل ھو چکا ھے معلومات کو جمعع کر لو ...';
-$s_resolve_add_bugnote_title = ' معلومات کو جمعح کرنے کی وجہ ایشوذ حل ھو ےہیں ان کیلیے ';
-$s_bugnote_add_resolve_button = ' معلومات کو جمعع کرو  ';
-
-# bug_reminder_page.php
+$s_resolve_add_bugnote_title = ' معلومات کو جمعح کرنے کی وجہ ایشوذ حل ھو ےہیں ان کیلیے';
+$s_bugnote_add_resolve_button = ' معلومات کو جمعع کرو';
 $s_from = ' سے';
 $s_to = '	 کے لۓ';
 $s_on = 'پر';
 $s_sent_you_this_reminder_about = 'یہ یاد دلانے والہ آپ کو بھیجا گیا اس کے متعلق';
 $s_bug_reminder = 'یاد دلانے والہ بھیج دو';
-$s_reminder_sent_to = 'یاد دلانے والہ بھیجا ھے کی طرف  ';
-$s_bug_send_button = ' بھیجو ';
-$s_reminder = 'یاد دلانے والہ ';
+$s_reminder_sent_to = 'یاد دلانے والہ بھیجا ھے کی طرف';
+$s_bug_send_button = ' بھیجو';
+$s_reminder = 'یاد دلانے والہ';
 $s_reminder_explain = ' جس نے راے کے لۓ کہا ھے اس ایشوذ کے لۓ بھیج دی گی ھے   معلومات یہ  .';
 $s_reminder_monitor = 'یہ وصول کرنے والے بھی ایشوذ کو مانیٹر/دھیان رکھنا شروع کر دیں گے وہ اسے بند بھی کر سکتے ھیں ان مانیٹر/دھیان نہ کے بٹن سے .';
 $s_reminder_store = 'یہ معلومات  ایشوذ کے ساتھ سٹور ھو جاے گی.';
-
-# bug_set_sponsorship.php
 $s_confirm_sponsorship = ' مہربانی کر کے کنفرم کريں کے آپ ایشوذ ٪ڈی کو سپانسر/ذمہ کرنا چاہتے ھيں.';
-
-# bug_update.php
 $s_bug_updated_msg = ' ایشوذ کاميابی کے ساتھ تبديل ھو کر نيا ھو گيا ھے...';
-
-# bug_update_advanced_page.php
-$s_back_to_bug_link = 'پھر ایشوذ پر ';
-$s_update_simple_link = 'صرف ا سے تبديل ھو کر نيا ھو گيا ھے ';
-$s_updating_bug_advanced_title = ' ایشوذ کی معلومات تبديل ھو کر ني ھو گي ھے  ';
+$s_back_to_bug_link = 'پھر ایشوذ پر';
+$s_update_simple_link = 'صرف ا سے تبديل ھو کر نيا ھو گيا ھے';
+$s_updating_bug_advanced_title = ' ایشوذ کی معلومات تبديل ھو کر ني ھو گي ھے';
 $s_id = 'پھچان/آی ڈی';
 $s_category = 'قسم';
 $s_severity = 'سختی';
@@ -586,7 +477,7 @@ $s_assigned_to = 'اس کو سپرد کیا گیا ھے';
 $s_priority = 'سبقت';
 $s_resolution = 'سایز';
 $s_status = 'مقام';
-$s_duplicate_id = ' IDنقل والہ ';
+$s_duplicate_id = ' IDنقل والہ';
 $s_os = 'او/ايس';
 $s_projection = 'خاکہ';
 $s_os_version = '  او/ايس کا ماڈل';
@@ -600,100 +491,63 @@ $s_summary = 'خاکہ';
 $s_description = 'وضاحت';
 $s_steps_to_reproduce = 'دوبارہ بنانے کے سٹیپ';
 $s_update_information_button = ' معلومات تبديل ھو کر ني ھو گي ھے';
-$s_sticky_issue = 'مشکل ایشوذ ';
+$s_sticky_issue = 'مشکل ایشوذ';
 $s_profile = 'جایزہ';
-
-# bug_update_page.php
-$s_update_advanced_link = 'پہلے کو تبديل کر کے ني ھو گي ھے ';
+$s_update_advanced_link = 'پہلے کو تبديل کر کے ني ھو گي ھے';
 $s_updating_bug_simple_title = ' ایشوذ کی معلومات تبديل ھو کر ني ھو گي ھے';
-
-# bug_vote_add.php
 $s_vote_added_msg = 'ووٹ جمہع ھو چکا ھے...';
-
-# bugnote_add.php
 $s_bugnote_added_msg = ' معلومات جمہع ھو چکی ھیں ...';
-
-# bugnote_delete.php
 $s_bugnote_deleted_msg = ' معلومات کامیابی کے ساتھ جمہع ھو چکی ھیں...';
-$s_bug_notes_title = ' معلومات ';
-
-# bugnote_edit_page.php
-$s_edit_bugnote_title = '  معلومات کو تبدیل کرو ';
-
-# bugnote_inc.php
+$s_bug_notes_title = ' معلومات';
+$s_edit_bugnote_title = '  معلومات کو تبدیل کرو';
 $s_no_bugnotes_msg = '  اس  ایشوذ کے ساتھ کوی معلومات بندھی ھوی نہی ھے.';
 $s_delete_link = 'خارج';
-$s_add_bugnote_title = ' معلومات کو جمع کرو ';
-$s_add_bugnote_button = ' معلومات کو جمع کرو ';
+$s_add_bugnote_title = ' معلومات کو جمع کرو';
+$s_add_bugnote_button = ' معلومات کو جمع کرو';
 $s_bugnote_edit_link = 'تبدیل';
 $s_closed_bug_button = 'ایشوذ بند کر دو';
-
-# bugnote_update.php
 $s_bugnote_updated_msg = ' معلومات کامیابی کے ساتھ جمہع ھو چکی ھیں...';
-$s_edited_on = 'تبدیلی پر: ';
-
-# file_api.php
-$s_show_content ='حصا دکھاو';
-
-# index.php
+$s_edited_on = 'تبدیلی پر:';
+$s_show_content = 'حصا دکھاو';
 $s_click_to_login = 'لاگن کر نے کیلیے کلک کریں';
-
-# login.php
-
-# login_page.php
-#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'ایشوذ کو ٹریک کرنے میں خوش آمدید.';
-$s_login_title = ' لاگن ';
+$s_login_title = ' لاگن';
 $s_save_login = ' لاگن محفوظ کرو';
 $s_choose_project = 'منصوبہ کو منتخب کرو';
-$s_login_button = ' لاگن ';
-$s_signup_link = ' نۓ کھاتے کیلیے ساہن اپ کریں ';
+$s_login_button = ' لاگن';
+$s_signup_link = ' نۓ کھاتے کیلیے ساہن اپ کریں';
 $s_lost_password_link = 'راذ وا لہ لفظ کھو گیا ھے?';
-
-# login_select_proj_page.php
 $s_select_project_button = 'منصوبہ منتخب کرو';
-
-# logout_page.php
 $s_logged_out_title = 'لاگ آوٹ...';
 $s_redirecting = '...دوبارہ کوشش';
 $s_here = 'يہاں';
-
-# lost_pwd_page.php
-$s_lost_password_title = "' راذ وا لہ لفظ دوبارہ سیٹ کرو ";
-$s_lost_password_done_title = " راذ وا لے لفظ کی معلومات بھیج دی گی ھیں";
-$s_lost_password_subject = " راذ وا لہ لفظ دوبارہ سیٹ کرو ";
-$s_lost_password_info = " اگر آپ اپنا کھویا ھوا راذ والہ لفظ حاصل کرنا چاھتے ھیں  تو مہربانی کر کے اپنے کھاتے کیلیے اپنا نام اور ای میل دیں اس تصدیق کے لیے آپ اس یو آر ایل پر جایں اور اپنا راز والہ لفظ تبدیل کر لیں،جب آپ پیغام لے لیں تو آپ د ی  گی  مہلومات پر عمل کر کے  اپنا راز والہ لفظ تبدیل کر لیں  .";
-$s_lost_password_confirm_hash_OK = "آپ کی التجا قبول ھو چکی ھے مہربانی کر کے اپنا راذ والہ لفظ تبدیل کر لیں .";
-
-# main_page.php
+$s_lost_password_title = 'راذ وا لہ لفظ دوبارہ سیٹ کرو';
+$s_lost_password_done_title = 'راذ وا لے لفظ کی معلومات بھیج دی گی ھیں';
+$s_lost_password_subject = 'راذ وا لہ لفظ دوبارہ سیٹ کرو';
+$s_lost_password_info = ' اگر آپ اپنا کھویا ھوا راذ والہ لفظ حاصل کرنا چاھتے ھیں  تو مہربانی کر کے اپنے کھاتے کیلیے اپنا نام اور ای میل دیں اس تصدیق کے لیے آپ اس یو آر ایل پر جایں اور اپنا راز والہ لفظ تبدیل کر لیں،جب آپ پیغام لے لیں تو آپ د ی  گی  مہلومات پر عمل کر کے  اپنا راز والہ لفظ تبدیل کر لیں  .';
+$s_lost_password_confirm_hash_OK = 'آپ کی التجا قبول ھو چکی ھے مہربانی کر کے اپنا راذ والہ لفظ تبدیل کر لیں .';
 $s_open_and_assigned_to_me = 'کھولو اور میرے ذمہ لگا دو';
-$s_open_and_reported_to_me = 'کھولو اور مجھے رپورٹ کرو ';
+$s_open_and_reported_to_me = 'کھولو اور مجھے رپورٹ کرو';
 $s_newer_news_link = 'نی خبر';
 $s_older_news_link = 'پرانی خبر';
 $s_archives = 'ریکارڈ';
 $s_rss = 'آر ایس ایس';
-
-# manage_create_new_user.php
 $s_created_user_part1 = ' استعمال کر نے والے بناو';
 $s_created_user_part2 = '  استعمال کر نے کے لیول کے ساتھ';
-
-# manage_create_user_page.php
 $s_create_new_account_title = 'نیا کھاتہ بناو';
-$s_verify_password = '  راذ وا لے لفظ کو چیک کر لیں ';
+$s_verify_password = '  راذ وا لے لفظ کو چیک کر لیں';
 $s_enabled = 'قابل ھے';
 $s_protected = 'محفوظ ھے';
 $s_create_user_button = '  استعمال کر نے والے بناو';
-
-# manage_page.php
 $s_hide_disabled = 'نا قابل کو چپھاو';
 $s_filter_button = 'فلٹر لگاو';
 $s_create_filter_link = 'پکا لنک بناو';
-$s_manage_users_link = ' استعمال کر نے والوں کا بندوبست کرو ';
-$s_manage_projects_link = 'منصوبہ کا بندوبست کرو ';
-$s_manage_custom_field_link = 'کسٹم فیلڈ کا بندوبست کرو ';
-$s_manage_global_profiles_link = 'گلوبل جاہزے کا بندوبست کرو ';
+$s_manage_users_link = ' استعمال کر نے والوں کا بندوبست کرو';
+$s_manage_projects_link = 'منصوبہ کا بندوبست کرو';
+$s_manage_custom_field_link = 'کسٹم فیلڈ کا بندوبست کرو';
+$s_manage_global_profiles_link = 'گلوبل جاہزے کا بندوبست کرو';
 $s_permissions_summary_report = 'اجازت کی رپورٹ کرو';
-$s_manage_config_link = 'سيٹنگ کا بندوبست کرو ';
+$s_manage_config_link = 'سيٹنگ کا بندوبست کرو';
 $s_manage_threshold_config = 'کام کا تریش ھولڈ';
 $s_manage_email_config = 'ای میل کی تصدیق';
 $s_manage_workflow_config = 'کام کی ٹرانذیشن';
@@ -710,10 +564,8 @@ $s_p = 'پی';
 $s_date_created = 'تاریخ بن چکی ھے';
 $s_last_visit = 'پرانا وزٹ';
 $s_edit_user_link = ' استعمال کر نے والے کو تبدیل کرو';
-
-# manage_config_email_page
 $s_config_all_projects = ' یہ تبدیلیاں تمام منصوبوں پر اثر انداذ ھوی ھیں صرف اور ریڈن منصوبے کے لیول تک منصوبے نوٹ:.';
-$s_config_project =  ' یہ تبدیلیاں صرف ٪ایس منصوبوں پر اثر انداذ ھوی ھینوٹ:.';
+$s_config_project = ' یہ تبدیلیاں صرف ٪ایس منصوبوں پر اثر انداذ ھوی ھینوٹ:.';
 $s_colour_coding = ' نیچے ٹیبل میں یہ والہ رنگ دیا گیا ھے:';
 $s_colour_project = 'منصوبے کی سیٹنگ اس کو اور رایڈ کر دے گی.';
 $s_colour_global = ' تمام منصوبے کی سیٹنگ نے ڈیفالٹ سیٹنگ  کو اور رایڈ کر دیا ھے.';
@@ -724,12 +576,10 @@ $s_change_configuration = 'ساحت کو نیا کر دو';
 $s_message = 'پیغام';
 $s_default_notify = ' ڈیفالٹ اطلاع کے فلیگ کی سیٹنگ';
 $s_action_notify = 'ڈیفالٹ اطلاع کے فلیگ کی سیٹنگ';
-$s_notify_defaults_change_access = ' جوڈیفالٹ اطلاع کو تبدیل کر سکتا ھے ';
+$s_notify_defaults_change_access = ' جوڈیفالٹ اطلاع کو تبدیل کر سکتا ھے';
 $s_notify_actions_change_access = ' جو اطلاع کو تبدیل کر سکتا ھے';
-$s_revert_to_system = "تمام منصوبوں کی سیٹنگ خارج کر دو";
-$s_revert_to_all_project = " تمام منصوبوں کی خاص سیٹنگ خارج کر دو ";
-
-# manage_config_workflow_page
+$s_revert_to_system = 'تمام منصوبوں کی سیٹنگ خارج کر دو';
+$s_revert_to_all_project = ' تمام منصوبوں کی خاص سیٹنگ خارج کر دو';
 $s_non_existent = 'جو موجود ھے';
 $s_current_status = 'موجودہ مقام';
 $s_next_status = 'اگلا مقام';
@@ -738,282 +588,178 @@ $s_workflow_thresholds = ' تریش ھولڈ جو کام کے فلو کو اثر
 $s_threshold = ' تریش ھولڈ';
 $s_status_level = 'مقام';
 $s_alter_level = 'جو اس قیمت کو تبدیل کر سکتا ھے';
-$s_validation = 'کامکے فلو کی اجاذت ';
+$s_validation = 'کامکے فلو کی اجاذت';
 $s_comment = 'اجاذت کی شرح';
 $s_superfluous = ' آرک مقام سے اپنے آپ پر آ رھا ھے اور اسے دینے کی کوی ضرورت نہی';
-$s_unreachable = 'آپ اس ایشوذ کو اس مقام سے دوسری جگہ پر نہی لے جا سکتے ';
-$s_no_exit = ' آپ اس ایشوذ کو اس مقام سے دوسری جگہ پر نہی لے جا سکتے ';
+$s_unreachable = 'آپ اس ایشوذ کو اس مقام سے دوسری جگہ پر نہی لے جا سکتے';
+$s_no_exit = ' آپ اس ایشوذ کو اس مقام سے دوسری جگہ پر نہی لے جا سکتے';
 $s_access_levels = 'استعمال کر نے کے لیول';
 $s_access_change = 'سب سے چھوٹا لیول اس ایشوذ کو تبدیل کرنے کیلیے';
 $s_desc_bug_submit_status = 'مقام جہاں نیا ایشوذ سیٹ کیا گیا ھے';
 $s_desc_bug_reopen_status = 'مقام جہاں دوبارہ کھلنے والہ ایشوذ سیٹ کیا گیا ھے';
-$s_desc_bug_resolved_status_threshold = ' مقام جہاں پر   ایشوذ حل نظر آے ';
+$s_desc_bug_resolved_status_threshold = ' مقام جہاں پر   ایشوذ حل نظر آے';
 $s_workflow_change_access = 'کامکے فلو کو تبدیل کر سکتا ھے  جو';
 $s_access_change_access = ' پر کر سکتا ھے جو کام کے فلو کو استعمال کر نے کے لیول';
-
-# manage_config_workflow_set
-$s_default_not_in_flow = '  کا ڈیفالٹ مقام منتخب نہی کیا گیا اگلے مقام ٪  ایس کیلیے اس کو نہی دیکھا جاے گا    %s ';
-
-# manage_config_work_threshold_page
+$s_default_not_in_flow = '  کا ڈیفالٹ مقام منتخب نہی کیا گیا اگلے مقام ٪  ایس کیلیے اس کو نہی دیکھا جاے گا    %s';
 $s_assign_issue = 'ایک ایشوذ سپرد کرو';
-$s_allow_close_immediate = ' ایشوذ کو اجاذت دو کے وہ حل ھونے پر بند ھو جاے ';
-$s_allow_reporter_close = 'رپوٹ کرنے والے کو اجاذت دو کہ وہ ایشوذ کو بند کر سکے ';
-$s_allow_reporter_reopen = 'رپوٹ کرنے والے کو اجاذت دو کہ وہ ایشوذ کو دوبارہ کھول سکے ';
+$s_allow_close_immediate = ' ایشوذ کو اجاذت دو کے وہ حل ھونے پر بند ھو جاے';
+$s_allow_reporter_close = 'رپوٹ کرنے والے کو اجاذت دو کہ وہ ایشوذ کو بند کر سکے';
+$s_allow_reporter_reopen = 'رپوٹ کرنے والے کو اجاذت دو کہ وہ ایشوذ کو دوبارہ کھول سکے';
 $s_set_status_assigned = 'مقام کو سہٹ کرو ھہنڈلر کی سپردگی پر';
 $s_allow_user_edit = ' استعمال کر نے  والے کو اجازت دو کہ وہ اپنے غلطی کی معلومات کو تبدیل کر سکے';
 $s_limit_access = ' رپورٹ کرنے والے کے اپنے ایشوذ کو استہمال کرنے پر حد مقرر کرو';
 $s_submit_status = ' مقام جس پر نیا ایشوذ سہٹ کیا گیا';
 $s_assigned_status = ' مقام جس پر آٹو سپردگی ایشوذ کو دی گی ھے';
 $s_resolved_status = '  مقام جس جگہ ایشوذ حل سمھجا جاتا ھے';
-$s_readonly_status = ' مقام جس جگہ صرف پٹراھا جا سکتا ھے ';
+$s_readonly_status = ' مقام جس جگہ صرف پٹراھا جا سکتا ھے';
 $s_reopen_status = ' مقام جس جگہ پر دوبارہ کھولا گیا ایشوذ سیٹ کیاگیا ھے';
-$s_reopen_resolution = 'ساہز جس جگہ پر دوبارہ کھولا گیا ایشوذ سیٹ کیا گیا ھے  ';
-
-# manage_config_revert_page
+$s_reopen_resolution = 'ساہز جس جگہ پر دوبارہ کھولا گیا ایشوذ سیٹ کیا گیا ھے';
 $s_config_delete_sure = ' کیا آپ واقعی سيٹنگز کو خارج کرنا چاھتے ھیں';
-$s_in_project = '  منصو بہ میں ';
+$s_in_project = '  منصو بہ میں';
 $s_delete_config_button = 'سيٹنگز کو خارج کرو';
-
-# adm_config_report.php
 $s_configuration_report = 'ڈیزاہن کی رپورٹ';
 $s_database_configuration = 'ڈیٹا بیس کا ڈیزاہن';
-$s_configuration_option = 'ڈیزاہن کی آپشن ';
+$s_configuration_option = 'ڈیزاہن کی آپشن';
 $s_configuration_option_type = 'قسم';
 $s_configuration_option_value = 'قیمت';
 $s_all_users = 'تمام استعمال کر نے والے';
-$s_set_configuration_option = 'ڈیزاہن کی آپشن سیٹ کرو ';
+$s_set_configuration_option = 'ڈیزاہن کی آپشن سیٹ کرو';
 $s_delete_config_sure_msg = ' کیا آپ واقعی ڈیزاہن کی آپشن کو خارج کرنا چاھتے ھیں?';
-
-# manage_proj_add.php
 $s_project_added_msg = '  منصو بہ کامیابی کے ساتھ جمع ھو گیا ھے...';
-
-# manage_proj_category_add.php
 $s_category_added_msg = 'کيٹگری کامیابی کے ساتھ جمع ھو گی ھے ...';
-
-# manage_proj_category_delete.php
 $s_category_deleted_msg = 'کيٹگری کامیابی کے ساتھ خارج ھو گی ھے...';
-
-# manage_proj_category_delete_page.php
 $s_category_delete_sure_msg = 'کیا آپ واقعی اس کيٹگری کو خارج کرنا چاھتے ھیں ?';
-$s_delete_category_button = 'کيٹگری کو خارج کرو ';
-
-# manage_proj_category_edit_page.php
-$s_edit_project_category_title = ' منصو بہ کی کيٹگری کو تبدیل کرو ';
-$s_update_category_button = 'کيٹگری کو تبدیل کر کے نیا کرو ';
-
-# manage_proj_category_update.php
+$s_delete_category_button = 'کيٹگری کو خارج کرو';
+$s_edit_project_category_title = ' منصو بہ کی کيٹگری کو تبدیل کرو';
+$s_update_category_button = 'کيٹگری کو تبدیل کر کے نیا کرو';
 $s_category_updated_msg = 'کيٹگری کامیابی کے ساتھ تبدیل ھو کر نی گی ھے ...';
-
-# manage_proj_create_page.php
-$s_add_subproject_title = ' منصو بہ جو سب منصو بہ ھے جمع کرو ';
-
-# manage_proj_delete.php
+$s_add_subproject_title = ' منصو بہ جو سب منصو بہ ھے جمع کرو';
 $s_project_deleted_msg = ' منصو بہ کامیابی کے ساتھ ختم ھو گیا ھے...';
-
-# manage_proj_delete_page.php
 $s_project_delete_msg = 'کیا آپ واقعی اس منصو بہ کو خارج کرنا چاھتے ھیں اور تمام ایشوذ کی رپورٹ کو?';
 $s_project_delete_button = ' منصو بہ کو خارج کرو';
-
-# manage_proj_edit_page.php
-$s_edit_project_title = ' منصو بہ کو تبدیل کرو ';
+$s_edit_project_title = ' منصو بہ کو تبدیل کرو';
 $s_project_name = ' منصو بہ کا نام';
 $s_view_status = 'مقام دکھاو';
 $s_public = 'آذاد/پبلک';
 $s_private = 'پرایویٹ';
 $s_update_project_button = 'منصو بہ کو تبدیل کر کے نیا کرو';
-$s_delete_project_button = ' منصو بہ کو خارج کرو ';
+$s_delete_project_button = ' منصو بہ کو خارج کرو';
 $s_categories_and_version_title = 'کيٹگری اور ویرین';
 $s_categories = 'کيٹگریز';
 $s_add_category_button = 'کيٹگری کو جمع کرو';
-$s_versions = ' ویرین ';
-$s_add_version_button = ' ویرین کو جمع کرو ';
-$s_add_and_edit_version_button = '  ویرین کو جمع اور تبدیل کرو ';
-$s_edit_link = ' تبدیل ';
+$s_versions = ' ویرین';
+$s_add_version_button = ' ویرین کو جمع کرو';
+$s_add_and_edit_version_button = '  ویرین کو جمع اور تبدیل کرو';
+$s_edit_link = ' تبدیل';
 $s_actions = 'ایکشنز';
-$s_version = ' ویرین ';
+$s_version = ' ویرین';
 $s_timestamp = 'ٹاہم سٹیمپ';
 $s_update = 'اپ ڈیٹ/نیا';
-$s_subprojects = 'سب منصو بہ ';
+$s_subprojects = 'سب منصو بہ';
 $s_add_subproject = ' سب منصو بہ کے لیے جمع کرو';
-$s_create_new_subproject_link = 'نیا سب منصو بہ بناو ';
+$s_create_new_subproject_link = 'نیا سب منصو بہ بناو';
 $s_unlink_link = 'ان لنک';
-
-# manage_proj_menu_page.php
 $s_add_project_title = ' منصو بہ کو جمع کرو';
 $s_upload_file_path = 'فاہل کا پاتھ اپ لوڈ کرو';
 $s_add_project_button = ' منصو بہ کو جمع کرو';
 $s_projects_title = ' منصو بہے';
 $s_name = 'نام';
-
-# manage_proj_update.php
 $s_project_updated_msg = ' منصو بہ کامیابی کے ساتھ تبدیل ھو کر نیا ھو گیا ھے ...';
-
-# manage_proj_version_add.php
 $s_version_added_msg = ' ویرین کامیابی کے ساتھ جمع ھو گیا ھے ...';
-
-# manage_proj_version_delete.php
 $s_version_deleted_msg = ' ویرین کامیابی کے ساتھ خارج ھو گیا ھے...';
-
-# manage_proj_version_delete_page.php
 $s_version_delete_sure = 'کیا آپ واقعی اس ویرین  کو خارج کرنا چاھتے ھیں?';
-$s_delete_version_button = ' ویرین کو خارج کرو ';
-
-# manage_proj_version_edit_page.php
-$s_edit_project_version_title = ' منصو بہ کے ویرین کو تبدیل کرو ';
-$s_update_version_button = ' ویرین کوتبدیل کر کے نیا کرو  ';
+$s_delete_version_button = ' ویرین کو خارج کرو';
+$s_edit_project_version_title = ' منصو بہ کے ویرین کو تبدیل کرو';
+$s_update_version_button = ' ویرین کوتبدیل کر کے نیا کرو';
 $s_released = 'ریلیزڈ';
-
-# manage_proj_version_update.php
 $s_version_updated_msg = ' ویرین  کامیابی کے ساتھ تبدیل ھو کر نیا ھو گیا ھے...';
-
-# manage_user_delete.php
 $s_account_delete_protected_msg = ' کھاتہ محفوظ ھے خارج نھی ھو سکتا.';
 $s_account_deleted_msg = 'کھاتہ خارج ھو گیا ھے ...';
-
-# manage_user_delete_page.php
 $s_delete_account_sure_msg = 'کیا آپ واقعی اس کھاتے  کو خارج کرنا چاھتے ھیں?';
-
-# manage_user_prune.php
 $s_accounts_pruned_msg = ' تمام کھاتے جو لاگن نھی ھوے ایک ھفتے سے خارج ھو چکے ھیں';
 $s_prune_accounts_button = 'حصہ مین کرو';
 $s_confirm_account_pruning = 'کیا آپ واقعی پرانا کھاتے  کو خارج کرنا چاھتے ھین جو لاگن نھی ھوے  ?';
-
-# manage_user_page.php
 $s_edit_user_title = ' استعمال کر نے کو تبدیل کرو';
 $s_reset_password_button = 'راذ والا لفظ دوبارہ سیٹ کرو';
-$s_delete_user_button = ' استعمال کر نے کو خارج کرو ';
+$s_delete_user_button = ' استعمال کر نے کو خارج کرو';
 $s_reset_password_msg = ' راذ والا لفظ کو دوبارہ سیٹ کرنا ای میل کے ذریعے آپ کو کنفرم کر دیا جاے گا  .';
 $s_reset_password_msg2 = 'راذ والا لفظ کو دوبارہ سیٹ کرو اور خالی چھوڈ دو.';
 $s_show_all_users = 'تمام';
-
-# manage_user_reset.php
 $s_account_reset_protected_msg = 'کھاتہ محفوظ ھے   راذ والا لفظ تبدیل  نھی ھو سکتا.';
 $s_account_reset_msg = ' اب ھم اس استعمال کرنے والے کے ای-میل کے پتے پر تصدیق کا پیغام بھیج رھے ھیں،جب آپ پیغام لے لیں تو آپ د ی  گی  مہلومات پر عمل کر کے  اپنا راز والہ لفظ تبدیل کر لیں.';
 $s_account_reset_msg2 = 'کھاتے کا راذ والا لفظ خالی چھوڈ دیا گیا ھے  ...';
-
-# manage_user_update.php
 $s_manage_user_protected_msg = ' کھاتہ محفوظ ھے   استعمال کرنے کا لیول محفوظ نظر آ رھا ھے اس کے علاوہ  کھاتہ تبدیل ھو کر نیا کر دیا جاے گا ...';
 $s_manage_user_updated_msg = 'کھاتہ  کامیابی کے ساتھ تبدیل ھو کر نیا ھو گیا ھے...';
-
-# menu_inc.php
 $s_main_link = 'مین';
 $s_view_bugs_link = 'ایشوذ کو ویو کرو';
-$s_report_bug_link = ' ایشوذ رپورٹ کرو ';
+$s_report_bug_link = ' ایشوذ رپورٹ کرو';
 $s_changelog_link = 'لاگ تبدیل کرو';
 $s_roadmap_link = 'روڈ میپ';
 $s_summary_link = 'خلاصہ';
-$s_account_link = 'میرا کھاتہ  ';
+$s_account_link = 'میرا کھاتہ';
 $s_users_link = '  استعمال کر نے والا';
 $s_manage_link = 'کنٹرول';
 $s_edit_news_link = 'خبري تبدیل کرو';
 $s_docs_link = 'ڈاکس';
 $s_logout_link = 'لاگ آوٹ';
 $s_my_view_link = 'میرا ویو';
-
-# meta_inc.php
-
-# my_view_page.php
 $s_my_view_title_unassigned = 'سپرد نہی کیا گیا';
 $s_my_view_title_recent_mod = 'تھوڈی دیر پہلے تبدیل کیا گیا';
-$s_my_view_title_reported = 'میری طرف سے  رپورٹ ';
-$s_my_view_title_assigned = 'جو مجھے سپرد کی گی ھے (حل نہی ھوا) ';
-$s_my_view_title_resolved = '  حل ھو گیا ھے ';
+$s_my_view_title_reported = 'میری طرف سے  رپورٹ';
+$s_my_view_title_assigned = 'جو مجھے سپرد کی گی ھے (حل نہی ھوا)';
+$s_my_view_title_resolved = '  حل ھو گیا ھے';
 $s_my_view_title_monitored = 'میری طرف سے مانیٹرڈ';
-
-$s_my_view_title_feedback = ' میری طرف سے  راے کا انتظار ';
+$s_my_view_title_feedback = ' میری طرف سے  راے کا انتظار';
 $s_my_view_title_verify = ' میری طرف سے ساہز کی اجاذت';
-
-# news_add.php
 $s_news_added_msg = 'خبرہں جمع ھو گی ھیں...';
-
-# news_delete.php
 $s_news_deleted_msg = ' خبرہں خارج ھو گی ھیں......';
-
-# news_delete_page.php
 $s_delete_news_sure_msg = 'کیا آپ واقعی اس خبرہں  کو خارج کرنا چاھتے?';
-
 $s_delete_news_item_button = 'خبرہں  کو خارج کرو';
-
-# news_edit_page.php
 $s_edit_news_title = 'خبرہں  کو تبدیل کرو';
 $s_headline = 'ھیڈ لاہن';
 $s_body = 'باڈی';
 $s_update_news_button = 'خبروں  کو اپ ڈیٹ کرو';
-
-# news_menu_page.php
-$s_add_news_title = 'خبروں  کو جمع کرو ';
+$s_add_news_title = 'خبروں  کو جمع کرو';
 $s_post_to = 'پوسٹ اس کی طرف';
 $s_post_news_button = 'خبروں  کو  پوسٹ کرو';
 $s_edit_or_delete_news_title = ' خبروں  کو  خارج/تبدیل کرو';
 $s_edit_post = 'پوسٹ کو تبدیل کرو';
 $s_delete_post = ' پوسٹ کو  خارج کرو';
 $s_select_post = 'پوسٹ کو منتخب کرو';
-
-# news_update.php
 $s_news_updated_msg = '  خبروں  کو اپ ڈیٹ کرو...';
-
-# news_view_page.php
 $s_back_link = 'پیچھے';
-
-# proj_doc_add.php
-$s_file_uploaded_msg = ' فاہل کامیابی کے ساتھ اپ ڈیٹ ھو گی ھے ';
-
-# proj_doc_add_page.php
-$s_upload_file_title = ' فاہل کو اپ لوڈ کرو ';
+$s_file_uploaded_msg = ' فاہل کامیابی کے ساتھ اپ ڈیٹ ھو گی ھے';
+$s_upload_file_title = ' فاہل کو اپ لوڈ کرو';
 $s_title = 'ٹایٹل';
-
-# proj_doc_delete.php
 $s_project_file_deleted_msg = 'منصوبہ کی فاہل خارج ھو گی ھے';
-
-# proj_doc_delete_page.php
-$s_confirm_file_delete_msg = ' کیا آپ واقعی اس  فاہل کو خارج کرنا چاھتے ھیں? ';
-
-# proj_doc_edit_page.php
-$s_filename = ' فاہل کا نام ';
-$s_file_update_button = ' فاہل کو اپ ڈیٹ کرو ';
-$s_file_delete_button = '  فاہل کو خارج کرو ';
-
-# proj_doc_page.php
+$s_confirm_file_delete_msg = ' کیا آپ واقعی اس  فاہل کو خارج کرنا چاھتے ھیں?';
+$s_filename = ' فاہل کا نام';
+$s_file_update_button = ' فاہل کو اپ ڈیٹ کرو';
+$s_file_delete_button = '  فاہل کو خارج کرو';
 $s_project_documentation_title = 'منصوبہ کی ڈاکو مینٹیشن';
-$s_user_documentation = ' استعمال کر نے والےکی ڈاکو مینٹیشن ';
+$s_user_documentation = ' استعمال کر نے والےکی ڈاکو مینٹیشن';
 $s_project_documentation = 'منصوبہ کی ڈاکو مینٹیشن';
-$s_add_file = ' فاہل کو جمع کرو ';
-
-# proj_doc_update.php
+$s_add_file = ' فاہل کو جمع کرو';
 $s_project_document_updated = ' منصوبہ  کامیابی کے ساتھ اپ ڈیٹ ھو گیا ھے';
-
-# proj_user_add.php
-$s_project_user_added_msg = '  استعمال کر نے والے کامیابی کے ساتھ منصوبہ میں شامل ھو گے ھیں ';
-
-# proj_user_delete.php
-$s_project_removed_user_msg = ' استعمال کر نے والے کامیابی کے ساتھ منصوبہ سے خارج ھو گہے ھیں ';
-
-# proj_user_delete_page.php
+$s_project_user_added_msg = '  استعمال کر نے والے کامیابی کے ساتھ منصوبہ میں شامل ھو گے ھیں';
+$s_project_removed_user_msg = ' استعمال کر نے والے کامیابی کے ساتھ منصوبہ سے خارج ھو گہے ھیں';
 $s_remove_user_sure_msg = ' کیا آپ واقعی اس  استعمال والے کو خارج کرنا چاھتے ھیں ?';
-$s_remove_user_button = '   استعمال کر نے والے کو ختم کرو ';
+$s_remove_user_button = '   استعمال کر نے والے کو ختم کرو';
 $s_remove_all_users_sure_msg = ' کیا آپ واقعی اس منصوبہ کو استعمال والے کو خارج کرنا چاھتے?';
-$s_remove_all_users_button = '   تمام استعمال کر نے  والوں کو خارج کرو ';
-
-# proj_user_menu_page.php
-$s_add_user_title = ' استعمال کر نے  والوں کو منصوبہ میں جمع کرو  ';
-$s_add_user_button = 'استعمال کر نے والے کو جمع کرو ';
+$s_remove_all_users_button = '   تمام استعمال کر نے  والوں کو خارج کرو';
+$s_add_user_title = ' استعمال کر نے  والوں کو منصوبہ میں جمع کرو';
+$s_add_user_button = 'استعمال کر نے والے کو جمع کرو';
 $s_project_selection_title = ' منصوبہ کو منتخب کرو';
 $s_remove_link = 'ختم';
-$s_remove_all_link = 'تمام کو ختم کرو ';
-
-# proj_user_update.php
-$s_updated_user_msg = ' استعمال کر نے  والے کو کامیابی کے ساتھ نیا کر دیا گیا ھے ';
-
-# report_add.php
-$s_must_enter_category = 'آپ کو ضرور کيٹگری منتخب کرنا پڑ ے گی ';
+$s_remove_all_link = 'تمام کو ختم کرو';
+$s_updated_user_msg = ' استعمال کر نے  والے کو کامیابی کے ساتھ نیا کر دیا گیا ھے';
+$s_must_enter_category = 'آپ کو ضرور کيٹگری منتخب کرنا پڑ ے گی';
 $s_must_enter_severity = 'آپ کو ضرور شدت/سختی منتخب کرنا پڑ ے گی';
-$s_must_enter_reproducibility = ' آپ کو ضرور  ری پروڈیوسبیلٹی منتخب کرنا پڑ ے گی ';
-$s_must_enter_summary = ' آپ کو ضرور  خلاصا کا اندراج کرنا پڑ ے گا ';
-$s_must_enter_description = ' آپ کو ضرور  وضاحت کا اندراج کرنا پڑ ے گا ';
+$s_must_enter_reproducibility = ' آپ کو ضرور  ری پروڈیوسبیلٹی منتخب کرنا پڑ ے گی';
+$s_must_enter_summary = ' آپ کو ضرور  خلاصا کا اندراج کرنا پڑ ے گا';
+$s_must_enter_description = ' آپ کو ضرور  وضاحت کا اندراج کرنا پڑ ے گا';
 $s_report_more_bugs = 'اور ایشوذ رپورٹ کرو';
 $s_submission_thanks_msg = 'آپ کی سبمشن کر نے کا شکریہ';
-
-# report_bug_advanced_page.php
 $s_simple_report_link = 'سادہ رپورٹ';
 $s_enter_report_details_title = 'رپورٹ کی وضاحت کا اندراج کرو';
 $s_required = 'چاھیے';
@@ -1021,52 +767,36 @@ $s_select_category = 'کيٹگری کو منتخب کرو';
 $s_select_reproducibility = ' ری پروڈیوسبیلٹی کو  منتخب کرو';
 $s_select_severity = 'شدت/سختی منتخب کرو';
 $s_or_fill_in = 'یا اس مین بھرو';
-$s_assign_to = 'اس کے سپرد کرو ';
+$s_assign_to = 'اس کے سپرد کرو';
 $s_additional_information = 'اضافی معلومات';
 $s_submit_report_button = 'رپورٹ حوالے کرو';
 $s_check_report_more_bugs = 'رپورٹ سے اور ایشوذ چیک کرو';
-
-# report_bug_page.php
-$s_advanced_report_link = 'ايڑونس ';
+$s_advanced_report_link = 'ايڑونس';
 $s_report_stay = 'رپورٹ انتظار';
-
-# set_project.php
 $s_selected_project = 'منصوبہ جو منتخب کیا گیا';
 $s_valid_project_msg = 'منصوبہ  منتخب کرنا ھو گا آپ کو ضرور ٹھیک';
-
-# signup.php
 $s_signup_done_title = 'اکاونٹ کی کاروای ھو گی ھے';
 $s_password_emailed_msg = 'آپ کو مبارک ھو آپ کامیابی کے ساتھ رجسٹرڈ ھو چکے ھیں۔ اب آپ کو ایک ای میل بھیجی جاے گی جس سے آپ کا ای میل چیک کیا جاے گا۔لنک پر جانے سے آپ کا کھاتہ چل پڑے گا.';
 $s_no_reponse_msg = '  آپ کے پاس صرف سات دن ھیں اپنا کھاتہ کا پراسیس پورا کرنے کو اگر آپ  سات دن میں پراسیس پورا میں ناکام ھو جاتے ھیں تو یہ نیا کھاتہ ختم کر دیا جاے گا .';
-
-# signup_page.php
 $s_signup_captcha_request = ' کوڈ کا اندراج کریں جیسا یہ دایں طرف ڈبے میں نظر آ رھا ھے';
 $s_signup_info = ' اس فارم کے پورا ھونے اور آپکے جواب کے ثبوت پر آپ کو کو ایک ای میل بھیجی جاے گی جو آپ نے مہیا کی ھے آپ  سات دن میں پراسیس پورا میں ناکام ھو جاتے ھیں تو یہ نیا کھاتہ ختم کر دیا جاے گاآپ کو ٹھیک ای میل فراھم کرنا ھو گا تا کے آپ کو تصدیق والی ای-میل بھیجی جاے On completion .';
 $s_signup_title = 'ساہن اپ';
 $s_signup_button = ' ساہن اپ';
 $s_no_password_request = ' آپ کا راذ والہ لفظ ایک اور سسٹم سے ھینڈل ھو رھا ھے مہربانی کر کے آپ اپنی انتظامیہ سے رابطہ کریں .';
-
-# site_settings_edit_page.php
 $s_edit_site_settings_title = 'ساہٹ کی سیٹنگ تبدیل کریں';
-$s_save_settings_button = ' سیٹنگ سٹور کریں ';
-
-# site_settings_page.php
-$s_site_settings_title = ' ساہٹ کی سیٹنگ ';
+$s_save_settings_button = ' سیٹنگ سٹور کریں';
+$s_site_settings_title = ' ساہٹ کی سیٹنگ';
 $s_system_info_link = 'سسٹم کی معلومات';
-$s_site_settings_link = ' ساہٹ کی سیٹنگ ';
-
-# site_settings_update.php
+$s_site_settings_link = ' ساہٹ کی سیٹنگ';
 $s_site_settings_updated_msg = ' ساہٹ کی سیٹنگ  تبدیل ھو کر نی ھو گی ھیں';
-
-# summary_page.php
 $s_summary_title = 'خلاصہ';
-$s_summary_jpgraph_link = 'ايڑونس خلاصہ ';
+$s_summary_jpgraph_link = 'ايڑونس خلاصہ';
 $s_by_project = 'منصوبہ سے';
 $s_by_status = 'مقام سے';
 $s_by_date = 'تاریخ سے';
 $s_by_severity = 'سختی سے';
 $s_by_resolution = 'ساہز سے';
-$s_by_category = 'کيٹگری سے ';
+$s_by_category = 'کيٹگری سے';
 $s_by_priority = 'خصوصیت سے';
 $s_by_developer = 'ڈیولپر سے';
 $s_by_reporter = 'رپورٹر سے';
@@ -1077,16 +807,14 @@ $s_percentage_fixed = '% فکسڈ';
 $s_percentage_errors = '% غلط';
 $s_errors = 'غلط';
 $s_total = 'پورا';
-$s_time_stats = 'حل کرنے پر ٹایم ';
-$s_longest_open_bug = 'ایشوذ جو سب سے ذیادہ کھلا رھا ';
-$s_longest_open = ' ذیادہ کھلا رھا ';
+$s_time_stats = 'حل کرنے پر ٹایم';
+$s_longest_open_bug = 'ایشوذ جو سب سے ذیادہ کھلا رھا';
+$s_longest_open = ' ذیادہ کھلا رھا';
 $s_average_time = 'ایورج وقت';
 $s_total_time = 'مجموعی وقت';
-$s_developer_stats = 'ڈیولپر سٹاٹس ';
+$s_developer_stats = 'ڈیولپر سٹاٹس';
 $s_reporter_stats = 'رپورٹر سٹاٹس';
 $s_orct = '(کھلا ھوا/حل کیا گیا/بند/مکمل)';
-
-# view_all_bug_page.php
 $s_any = 'کوی بھی';
 $s_all = 'تمام';
 $s_show = 'دکھاو';
@@ -1097,8 +825,6 @@ $s_sticky = 'سب سے گندا ایشوذ';
 $s_sort = 'الگ کر نے سے';
 $s_issue_id = 'ایشوذ #';
 $s_recently_visited = 'تھو ڈی دیر پہلے ھی وذٹ کیا ھوا';
-
-# view_all_inc.php
 $s_none = 'کوی نہی';
 $s_current = 'موجودا';
 $s_search = 'تلاش';
@@ -1109,30 +835,26 @@ $s_next = 'آگے والہ';
 $s_first = 'پہلا';
 $s_last = 'آخر والا';
 $s_start_date = 'شروع والی تاریخ';
-$s_end_date = ' آخر والی تاریخ ';
-$s_use_date_filters = ' تاریخ کی فلٹر ';
+$s_end_date = ' آخر والی تاریخ';
+$s_use_date_filters = ' تاریخ کی فلٹر';
 $s_yes = 'ھاں';
 $s_no = 'ناں';
 $s_open_filters = 'فلٹر تبدیل کرو';
 $s_or_unassigned = 'یا سپرد نہی کیا گیا';
 $s_ok = 'او-کے';
 $s_select_all = 'سارے منتخب کرو';
-
-# stored query strings
 $s_use_query = 'فلٹر استعمال کرو';
 $s_delete_query = ' فلٹر خارج کر دو';
-$s_query_deleted = ' فلٹر خارج ھو چکا ھے ';
+$s_query_deleted = ' فلٹر خارج ھو چکا ھے';
 $s_save_query = 'موجودا فلٹر محفوظ کرو';
-$s_reset_query = ' فلٹر کو ری-سیٹ کرو ';
-$s_query_name = ' فلٹر کا نام ';
+$s_reset_query = ' فلٹر کو ری-سیٹ کرو';
+$s_query_name = ' فلٹر کا نام';
 $s_query_exists = 'یہ کیوری پہلےھی موجود ھے.';
 $s_query_dupe_name = 'ایک اور کیوری کا نام بھی یہی ھے مہربانی کر کے کوی اور نام اس کیوری کا منتخب کر یں.';
 $s_query_blank_name = ' آپ نام کے بغیر فلٹر سٹور نہی کر سکتے مہربانی کر کے اس فلٹر کو  سٹور کرنے سے پہلے اس کا نام  رکھیں ۔.';
 $s_query_store_error = '  اس کیوری کو سٹور کرنے پر ایک غلطی آ ہی ھے.';
 $s_open_queries = ' فلٹرذ کو مینج کرو';
 $s_query_delete_msg = ' کیا آپ واقعی اس کیوری  کو خارج کرنا چاھتے ھیں?';
-
-# view_bug_advanced_page.php
 $s_view_simple_link = 'صرف دکھاو';
 $s_viewing_bug_advanced_details_title = ' ایشوذ کی ايڑونس  ڈیٹیل دکھاو';
 $s_product_build = 'پراڈکٹ بنانا';
@@ -1140,37 +862,27 @@ $s_system_profile = 'سسٹم کی وضاحت';
 $s_update_bug_button = 'ایشوذ کو اپ ڈیٹ کرو';
 $s_bug_assign_to_button = 'سپرد کرو:';
 $s_bug_status_to_button = 'مقام کو تبدیل کرو اس پر:';
-$s_reopen_bug_button = ' ایشوذ کو دوبارہ کھولو ';
-$s_move_bug_button = ' ایشوذ کو حرکت میں  لاو  ';
+$s_reopen_bug_button = ' ایشوذ کو دوبارہ کھولو';
+$s_move_bug_button = ' ایشوذ کو حرکت میں  لاو';
 $s_attached_files = 'فایلز کو باندو';
 $s_publish = 'پبلش';
 $s_cached = 'کیشڈ';
-
-# view_bug_inc.php
-
-# view_bug_page.php
-$s_view_advanced_link = '  ايڑونس ویو کرو ';
+$s_view_advanced_link = '  ايڑونس ویو کرو';
 $s_viewing_bug_simple_details_title = 'ایشوذ کی سسادہ ڈیٹیل ویو کرو';
-
-# bug_monitor_list_view_inc.php
 $s_no_users_monitoring_bug = '  کوی اور استعمال کر نے والہ اس ایشوذ کو نہی ھے.';
-$s_users_monitoring_bug = ' استعمال کر نے والہ اس ایشوذ کو مانیٹر کر رھا ھے ';
+$s_users_monitoring_bug = ' استعمال کر نے والہ اس ایشوذ کو مانیٹر کر رھا ھے';
 $s_monitoring_user_list = ' استعمال کر نے والوں کی لسٹ';
-
-# bug_sponsorship_list_view_inc.php
 $s_no_users_sponsoring_bug = 'کوی اور استعمال کر نے والہ اس ایشوذ کو سپانسر نہی کر رھا.';
-$s_users_sponsoring_bug = ' استعمال کر نے والہ اس ایشوذ کو سپانسر کر رھے ھیں ';
-$s_sponsors_list = ' سپانسرذ کی لسٹ ';
+$s_users_sponsoring_bug = ' استعمال کر نے والہ اس ایشوذ کو سپانسر کر رھے ھیں';
+$s_sponsors_list = ' سپانسرذ کی لسٹ';
 $s_total_sponsorship_amount = 'مکمل سپانسرشپ = %s';
-
-# custom field strings
 $s_add_custom_field_button = 'نی کسٹم فیلڈ';
 $s_delete_custom_field_button = 'کسٹم فیلڈ خارج کرو';
-$s_delete_custom_field_everywhere = ' ھر جگہ سے کسٹم فیلڈ خارج کرو ';
-$s_update_custom_field_button = 'کسٹم فیلڈ کو اپ ڈیٹ کرو ';
+$s_delete_custom_field_everywhere = ' ھر جگہ سے کسٹم فیلڈ خارج کرو';
+$s_update_custom_field_button = 'کسٹم فیلڈ کو اپ ڈیٹ کرو';
 $s_add_existing_custom_field = 'اس کسٹم فیلڈ کو جمع کرو';
 $s_edit_custom_field_title = 'کسٹم فیلڈ تبدیل کرو اس';
-$s_custom_field = ' فیلڈ ';
+$s_custom_field = ' فیلڈ';
 $s_custom_fields_setup = 'کسٹم فیلڈ';
 $s_custom_field_name = 'نام';
 $s_custom_field_project_count = 'منصوبہ کا کاونٹ';
@@ -1182,117 +894,93 @@ $s_custom_field_access_level_r = 'رسای پڑو';
 $s_custom_field_access_level_rw = ' رسای لکھو';
 $s_custom_field_length_min = 'کم لمبای';
 $s_custom_field_length_max = 'ذیادہ لمبای';
-$s_custom_field_advanced = ' صرف ايڑونس صحفے پر دکھاو ';
-$s_custom_field_display_report = '  صرف رپورٹنگ ایشوذ پردکھاو ';
+$s_custom_field_advanced = ' صرف ايڑونس صحفے پر دکھاو';
+$s_custom_field_display_report = '  صرف رپورٹنگ ایشوذ پردکھاو';
 $s_custom_field_display_update = 'ایشوذ کو دوبارہ کھولنے پر دکھاو';
 $s_custom_field_display_resolved = 'جب ایشوذ حل ھو جاے تو دکھاو';
-$s_custom_field_display_closed = ' جب ایشوذ بند ھو تو دکھاو ';
+$s_custom_field_display_closed = ' جب ایشوذ بند ھو تو دکھاو';
 $s_custom_field_require_report = 'رپورٹ پر چاھیے';
 $s_custom_field_require_update = 'اپ ڈیٹ پر ضرورت ھے';
 $s_custom_field_require_resolved = 'حل پر ضرورت ھے';
-$s_custom_field_require_closed = 'بند ھونے پر ضرورت ھے ';
+$s_custom_field_require_closed = 'بند ھونے پر ضرورت ھے';
 $s_link_custom_field_to_project_title = 'کسٹم فیلڈ کا ایشوذ سے لنک کرو';
 $s_link_custom_field_to_project_button = ' کسٹم فیلڈ سے لنک';
 $s_linked_projects = 'جو پراجیکٹ لنک کیا گیا ھے';
-
 $s_custom_field_sequence = 'ترتیب';
 $s_custom_field_type_enum_string = '0:سٹرنگ,1:نمیرک,2:فلوٹ,3:انیمیریشن,4:ای-میل,5:چیک باکس,6:لسٹ,7:ملٹی سیلیکشن لسٹ,8:تاریخ';
-
-$s_confirm_used_custom_field_deletion = '  یہ فیلڈ اس وقت صرف ایک منصوبے سے لنکڈ ھے اگر آپ اسے جاری رکھیں گے تو یہ مستقل طور پر ختم ھو جاے گی یہ کام دوبارہ ریکور بھی نہی ھو گا اگر آپ اس فیلڈ کو خارج نہی کرنا چاھتے پیچھے والے بٹن کو دبایں اگر آگے جانا چاھتے ھیں  تو نیچے والے بٹن کو کلک کریں ';
+$s_confirm_used_custom_field_deletion = '  یہ فیلڈ اس وقت صرف ایک منصوبے سے لنکڈ ھے اگر آپ اسے جاری رکھیں گے تو یہ مستقل طور پر ختم ھو جاے گی یہ کام دوبارہ ریکور بھی نہی ھو گا اگر آپ اس فیلڈ کو خارج نہی کرنا چاھتے پیچھے والے بٹن کو دبایں اگر آگے جانا چاھتے ھیں  تو نیچے والے بٹن کو کلک کریں';
 $s_confirm_custom_field_deletion = 'کیا آپ واقعی اس کسٹم فیلڈ اور اس سے تعلق والی ویلیو کو خارج کرنا چاھتے ھیں?';
 $s_field_delete_button = ' فیلڈ کو خارج کرو';
-
 $s_confirm_custom_field_unlinking = 'کیا آپ واقعی اس کسٹم فیلڈ اور اس سے تعلق والی ویلیو کو  منصوبے سے خارج کرنا چاھتے ھیں?';
-
 $s_field_remove_button = ' فیلڈ کو ختم کر دو';
-
 $s_hide_status = 'مقام کو چھپاو';
-$s_filter_closed = "بند";
-$s_filter_resolved = "حل";
-$s_hide_closed = " بند کو چھپاو ";
-$s_hide_resolved = " چھپاو حل ھوے ";
+$s_filter_closed = 'بند';
+$s_filter_resolved = 'حل';
+$s_hide_closed = ' بند کو چھپاو';
+$s_hide_resolved = ' چھپاو حل ھوے';
 $s_and_above = 'اوراوپر';
-$s_advanced_filters = ' ايڑونس فلٹر ';
+$s_advanced_filters = ' ايڑونس فلٹر';
 $s_simple_filters = 'سادہ فلٹر';
-$s_monitored_by = 'اس کی طرف سے مانیٹر ڈ ';
-
-$s_attachments = "منسلک";
-$s_attachment_alt = "اے";
-
-# PHPMailer
-$s_phpmailer_language = 'en';
-
-# Sponsorship Strings
-$s_sponsors = '%سپانسر ڈی  ';
-$s_sponsorship_added = ' سپانسر شپ جمع ھو گی ھے ';
-$s_sponsorship_updated = ' سپانسر شپ اپ ڈیٹ ھو گی ھے ';
-$s_sponsorship_deleted = ' سپانسر شپ خارج ھو گی ھے ';
-$s_sponsorship_paid = ' سپانسر شپ ادا ھو گی ھے ';
-$s_sponsorship_more_info = '  سپانسر شپ سے متعلق اور معلومات  ';
-$s_sponsorship_total = 'مجمعوی سپانسر شپ 
+$s_monitored_by = 'اس کی طرف سے مانیٹر ڈ';
+$s_attachments = 'منسلک';
+$s_attachment_alt = 'اے';
+$s_sponsors = '%سپانسر ڈی';
+$s_sponsorship_added = ' سپانسر شپ جمع ھو گی ھے';
+$s_sponsorship_updated = ' سپانسر شپ اپ ڈیٹ ھو گی ھے';
+$s_sponsorship_deleted = ' سپانسر شپ خارج ھو گی ھے';
+$s_sponsorship_paid = ' سپانسر شپ ادا ھو گی ھے';
+$s_sponsorship_more_info = '  سپانسر شپ سے متعلق اور معلومات';
+$s_sponsorship_total = 'مجمعوی سپانسر شپ
 
 # URL explaining the process of sponsoring an issue.اس جگہ پر بتایا گیا ھے بجاے اس کے کنفگ میں اس کو ھر ذبان کے لیے یو آر ایل کی اجاذت دی جاے   اس  پراسیس کی معلومات دینے کی کوی ضرورت نہی یہ ایک خالی سٹرنگ پر بھی سیٹ ھو سکتی ھے   یہ .';
-$s_sponsorship_process_url = ' سپانسر شپ کا یو آر ایل  ';
-
-# Changelog
+$s_sponsorship_process_url = ' سپانسر شپ کا یو آر ایل';
 $s_changelog = 'لاگ کو بدلو';
-
-# Roadmap
 $s_roadmap = 'روڈ میپ';
 $s_resolved_progress = '  ایشوذ حل ھو چکے ھیں پراگریس( ڈی)%ڈی کا %ڈی .';
-
-# Http auth
-$s_http_auth_realm = "    مینٹس کا لاگن ";
-
-$s_bug = "ایشوذ";
-$s_add_new_relationship = "نیا تعلق";
-$s_add_new_relationship_button = "جمع";
-$s_this_bug = "موجودہ ایشوذ";
-$s_relationship_added = " تعلق جمع ھو گے ھیں ";
-$s_relationship_deleted = " تعلق خارج ھو گے ھیں";
-$s_no_relationship = "کوی تعلق نہی ";
-$s_relationship_replaced = "  تعلق بدل دیاگیا ھے ";
-$s_replace_relationship_button = "بدل دو";
-$s_replace_relationship_sure_msg = "دو ایشوذوں کے درمیان پہلے ھی تعلق ھے کیا آپ واقعی اس کو بدلنا چاھتے ھیں ?";
-$s_relationship_with_parent = "والد ایشوذ کے ساتھ تعلق ";
-$s_delete_relationship_button = "خارج";
-$s_delete_relationship_sure_msg = "  کیا آپ واقعی اس تعلق کو خارج کرنا چاھتے ھیں  ?";
-$s_relationship_warning_blocking_bugs_not_resolved = "اس ایشوذ کے سارے  بچے ابھی تک حل یا بند نہی ھوے .";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>توجا دیں</b>. اس ایشوذ کے سارے  بچے ابھی تک حل یا بند نہی ھوے .<br />پہلے <b>حل ھوے /بند</b>ایک والد ایشوذ کے ساتھ جتنے بھی بچے ھیں حل یا بند ھونے چاھیں .";
-$s_create_child_bug_button = "کاپی بناو";
-$s_bug_cloned_to = "ایشوذ کی کاپی بناو ";
-$s_bug_created_from = "  ایشوذ اس سے بن رھے ھیں  ";
-
-# Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "تعلق کا گراف";
-$s_relation_graph = " تعلق کا گراف ";
-$s_dependency_graph = "دارو مدار کا گراف";
-$s_vertical = "ویرٹیکل";
-$s_horizontal = "ھوریذینٹل";
-$s_view_issue = "ایشوذ دکھاو";
-
-# Source Control Integration
+$s_http_auth_realm = '    مینٹس کا لاگن';
+$s_bug = 'ایشوذ';
+$s_add_new_relationship = 'نیا تعلق';
+$s_add_new_relationship_button = 'جمع';
+$s_this_bug = 'موجودہ ایشوذ';
+$s_relationship_added = ' تعلق جمع ھو گے ھیں';
+$s_relationship_deleted = ' تعلق خارج ھو گے ھیں';
+$s_no_relationship = 'کوی تعلق نہی';
+$s_relationship_replaced = '  تعلق بدل دیاگیا ھے';
+$s_replace_relationship_button = 'بدل دو';
+$s_replace_relationship_sure_msg = 'دو ایشوذوں کے درمیان پہلے ھی تعلق ھے کیا آپ واقعی اس کو بدلنا چاھتے ھیں ?';
+$s_relationship_with_parent = 'والد ایشوذ کے ساتھ تعلق';
+$s_delete_relationship_button = 'خارج';
+$s_delete_relationship_sure_msg = '  کیا آپ واقعی اس تعلق کو خارج کرنا چاھتے ھیں  ?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'اس ایشوذ کے سارے  بچے ابھی تک حل یا بند نہی ھوے .';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>توجا دیں</b>. اس ایشوذ کے سارے  بچے ابھی تک حل یا بند نہی ھوے .<br />پہلے <b>حل ھوے /بند</b>ایک والد ایشوذ کے ساتھ جتنے بھی بچے ھیں حل یا بند ھونے چاھیں .';
+$s_create_child_bug_button = 'کاپی بناو';
+$s_bug_cloned_to = 'ایشوذ کی کاپی بناو';
+$s_bug_created_from = '  ایشوذ اس سے بن رھے ھیں';
+$s_viewing_bug_relationship_graph_title = 'تعلق کا گراف';
+$s_relation_graph = ' تعلق کا گراف';
+$s_dependency_graph = 'دارو مدار کا گراف';
+$s_vertical = 'ویرٹیکل';
+$s_horizontal = 'ھوریذینٹل';
+$s_view_issue = 'ایشوذ دکھاو';
 $s_checkin = 'چیک ان';
-
-# Pemissions report
 $s_perm_rpt_capability = 'صلاحیت';
 $s_view = 'دکھاو';
 $s_issues = 'ایشوذ';
 $s_report_issue = ' ایشوذ رپورٹ کرو ایک';
-$s_update_issue = ' ایک ایشوذ کو اپ ڈیٹ کرو ';
-$s_monitor_issue = '  ایک ایشوذ کو مانیٹر کرو  ';
-$s_handle_issue = ' ایک ایشوذ کو ھینڈل کرو ';
+$s_update_issue = ' ایک ایشوذ کو اپ ڈیٹ کرو';
+$s_monitor_issue = '  ایک ایشوذ کو مانیٹر کرو';
+$s_handle_issue = ' ایک ایشوذ کو ھینڈل کرو';
 $s_move_issue = 'ایک ایشوذ کو حرکت کرو';
 $s_delete_issue = 'ایک ایشوذ کو خارج کرو';
 $s_reopen_issue = 'ایک ایشوذ کو رپورٹ کرو';
 $s_view_private_issues = 'پرایویٹ ایشوذ دکھاو';
 $s_update_readonly_issues = 'جن کو ھم پڑ سکتے ھیں ان کو اپ ڈیٹ کرو';
-$s_update_issue_status = '  ایشوذ کا مقام اپ ڈیٹ کرو  ';
+$s_update_issue_status = '  ایشوذ کا مقام اپ ڈیٹ کرو';
 $s_set_view_status = 'ویو کا مقام سیٹ کرو(پبلک مقابلہ پرایویٹ)';
 $s_update_view_status = ' ویو کا مقام اپ ڈیٹ کرو(پبلک مقابلہ پرایویٹ)';
-$s_show_list_of_users_monitoring_issue = 'جو استعمال کر نے والے ھیں ان کی لسٹ دکھاو جو ایشوذ کو مانیٹر کر رھے ھیں ';
+$s_show_list_of_users_monitoring_issue = 'جو استعمال کر نے والے ھیں ان کی لسٹ دکھاو جو ایشوذ کو مانیٹر کر رھے ھیں';
 $s_notes = 'معلومات';
-$s_add_notes = '  معلومات کو جمع کرو ';
+$s_add_notes = '  معلومات کو جمع کرو';
 $s_update_notes = 'معلومات کو اپ ڈیٹ کرو';
 $s_delete_note = 'معلومات کو خارج کرو';
 $s_view_private_notes = '   پرایویٹ معلومات کو دکھاو';
@@ -1301,29 +989,29 @@ $s_view_private_news = 'پرایویٹ نیوذ کو دکھاو';
 $s_manage_news = ' نیوذ کو ٹھیک کرو';
 $s_view_list_of_attachments = 'جو اس سے منسلک ھے اس کی لسٹ دکھاو';
 $s_download_attachments = ' منسلک ھیں ان کو ڈاون لوڈ کرو';
-$s_delete_attachments = ' منسلک ھیں ان کو خارج کرو ';
-$s_delete_attachment_button = "خارج";
-$s_delete_attachment_sure_msg = "کیا آپ واقعی اس منسلک کو خارج کرنا چاھتے?";
+$s_delete_attachments = ' منسلک ھیں ان کو خارج کرو';
+$s_delete_attachment_button = 'خارج';
+$s_delete_attachment_sure_msg = 'کیا آپ واقعی اس منسلک کو خارج کرنا چاھتے?';
 $s_upload_issue_attachments = 'ایشوذ کی منسلک کو اپ لوڈ کرو';
 $s_filters = 'فلٹرذ';
 $s_save_filters = 'فلٹرذ کو محفوظ کرو';
 $s_save_filters_as_shared = ' فلٹرذ کو محفوظ کرو';
-$s_use_saved_filters = ' محفوظ فلٹرذ کو استعمال کرو  ';
+$s_use_saved_filters = ' محفوظ فلٹرذ کو استعمال کرو';
 $s_create_project = 'منصوبہ کو تیار کرو';
 $s_delete_project = ' منصوبہ کو خارج کرو';
 $s_manage_project = 'منصوبہ کو ٹھیک کرو';
 $s_manage_user_access_to_project = 'استعمال کر نے والے کی منصوبے تک رسای کو ٹھیک کرو';
-$s_automatically_included_in_private_projects = 'خود کار پرایویٹ منصوبوں میں شامل ھے ';
+$s_automatically_included_in_private_projects = 'خود کار پرایویٹ منصوبوں میں شامل ھے';
 $s_project_documents = ' منصوبوں کے ڈاکو مینٹس';
-$s_view_project_documents = ' منصوبوں کے ڈاکو مینٹس دکھاو ';
+$s_view_project_documents = ' منصوبوں کے ڈاکو مینٹس دکھاو';
 $s_upload_project_documents = 'منصوبوں کے ڈاکو مینٹس اپ لوڈ کرو';
 $s_link_custom_fields_to_projects = '  منصوبوں کو کسٹم فیلڈ سے لنک کرو';
-$s_sponsorships = ' سپانسر شپس ';
-$s_view_sponsorship_details = '  سپانسر شپس کی ڈیٹیل دکھاو ';
-$s_view_sponsorship_total = ' سپانسر شپس کا ٹوٹل دکھاو ';
-$s_sponsor_issue = '  سپانسر ایشوذ ';
-$s_assign_sponsored_issue = ' سپانسرڈ ایشوذ سپرد کرو ';
-$s_handle_sponsored_issue = ' سپانسرڈ ایشوذ ھینڈل کرو ';
+$s_sponsorships = ' سپانسر شپس';
+$s_view_sponsorship_details = '  سپانسر شپس کی ڈیٹیل دکھاو';
+$s_view_sponsorship_total = ' سپانسر شپس کا ٹوٹل دکھاو';
+$s_sponsor_issue = '  سپانسر ایشوذ';
+$s_assign_sponsored_issue = ' سپانسرڈ ایشوذ سپرد کرو';
+$s_handle_sponsored_issue = ' سپانسرڈ ایشوذ ھینڈل کرو';
 $s_others = 'دوسرے';
 $s_see_email_addresses_of_other_users = '   دوسرے استعمال کرنے والوں کے ای_میل ایڈریس دیھکو';
 $s_send_reminders = 'یاد کر نے والے بھیجو';
@@ -1334,29 +1022,18 @@ $s_status_changed_to = 'مقام تبدیل کیا گیا ھے اس کی طرف'
 $s_email_on_deleted = 'خارج کر نے پر ای میل';
 $s_email_on_sponsorship_changed = 'سپانسرشپ کے بدلنے پر ای میل';
 $s_email_on_relationship_changed = ' تعلق بد لنے پر ای میل';
-
-# DHTML filters
 $s_loading = 'لوڈنگ...';
-
-# filter_api.php
 $s_between = 'درمیان' ;
 $s_on_or_before = 'پر یا پہلے' ;
 $s_before = 'پہلے' ;
 $s_after = 'بعد' ;
 $s_on_or_after = 'پر یا بعد' ;
-
-# wiki related strings
 $s_wiki = 'ویکی';
-
-# Time Tracking
 $s_time_tracking_billing_link = 'بلنگ';
 $s_time_tracking = 'وقت کی ٹریکنگ';
 $s_time_tracking_get_info_button = '  وقت کی ٹریکنگ کی معلومات حاصل کرو';
 $s_time_tracking_cost_per_hour = 'قیمت / گھنٹہ';
-$s_time_tracking_cost = ' قیمت ';
+$s_time_tracking_cost = ' قیمت';
 $s_total_time_for_issue = 'تمام وقت ایشوذ کے لیے  = %ایس';
-$s_from_date = 'اس سے ';
+$s_from_date = 'اس سے';
 $s_to_date = 'کی طرف';
-
-$s_access_denied = ' مینٹس کی غلطی[غلطی کی رسای منظور نہی ھوی]$ ';
-?>
