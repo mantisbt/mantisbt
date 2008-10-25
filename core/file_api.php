@@ -194,25 +194,30 @@ function file_get_visible_attachments( $p_bug_id ) {
 
 	$image_previewed = false;
 	for( $i = 0;$i < $t_attachments_count;$i++ ) {
-		$row = $t_attachment_rows[$i];
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		$t_row = $t_attachment_rows[$i];
+
+		$t_id = $t_row['id'];
+		$t_filename = $t_row['filename'];
+		$t_filesize = $t_row['filesize'];
+		$t_diskfile = $t_row['diskfile'];
+		$t_date_added = $t_row['date_added'];
 
 		$t_attachment = array();
-		$t_attachment['display_name'] = file_get_display_name( $v_filename );
-		$t_attachment['size'] = $v_filesize;
-		$t_attachment['date_added'] = db_unixtimestamp( $v_date_added );
+		$t_attachment['display_name'] = file_get_display_name( $t_filename );
+		$t_attachment['size'] = $t_filesize;
+		$t_attachment['date_added'] = db_unixtimestamp( $t_date_added );
 		$t_attachment['can_download'] = $t_can_download;
-		$t_attachment['diskfile'] = $v_diskfile;
+		$t_attachment['diskfile'] = $t_diskfile;
 
 		if( $t_can_download ) {
-			$t_attachment['download_url'] = "file_download.php?file_id=$v_id&amp;type=bug";
+			$t_attachment['download_url'] = "file_download.php?file_id=$t_id&amp;type=bug";
 		}
 
 		if( $image_previewed ) {
 			$image_previewed = false;
 		}
 
-		$t_attachment['exists'] = config_get( 'file_upload_method' ) != DISK || file_exists( $v_diskfile );
+		$t_attachment['exists'] = config_get( 'file_upload_method' ) != DISK || file_exists( $t_diskfile );
 		$t_attachment['icon'] = file_get_icon_url( $t_attachment['display_name'] );
 		$t_attachment['can_delete'] = $t_can_delete;
 
@@ -223,12 +228,12 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_attachment['alt'] = $t_ext;
 
 		if( $t_attachment['exists'] ) {
-			if( $t_can_download && ( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( $v_filesize != 0 ) && ( in_array( $t_ext, $t_preview_text_ext, true ) ) ) {
+			if ( $t_can_download && ( $t_filesize != 0 ) && ( $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( in_array( $t_ext, $t_preview_text_ext, true ) ) ) {
 				$t_attachment['preview'] = true;
 				$t_attachment['type'] = 'text';
 			}
 
-			if( $t_can_download && ( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( $v_filesize != 0 ) && ( in_array( strtolower( file_get_extension( $t_attachment['display_name'] ) ), $t_preview_image_ext, true ) ) ) {
+			if ( $t_can_download && ( $t_filesize != 0 ) && ( $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( in_array( strtolower( file_get_extension( $t_attachment['display_name'] ) ), $t_preview_image_ext, true ) ) ) {
 				$t_attachment['preview'] = true;
 				$t_attachment['type'] = 'image';
 			}

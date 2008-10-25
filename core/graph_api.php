@@ -546,8 +546,10 @@ function create_developer_summary() {
 	$user_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $user_count;$i++ ) {
-		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		$t_row = db_fetch_array( $result );
+
+		$v_id = $t_row['id'];
+		$v_username = $t_row['username'];
 
 		$t_metrics['open'][$v_username] = $t_handler_arr[$v_id]['open'];
 		$t_metrics['resolved'][$v_username] = $t_handler_arr[$v_id]['res'];
@@ -600,8 +602,10 @@ function create_reporter_summary() {
 	$user_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $user_count;$i++ ) {
-		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		$t_row = db_fetch_array( $result );
+		
+		$v_username = $t_row['username'];
+		$v_id = $t_row['id'];
 
 		$t_metrics[$v_username] = $t_reporter_arr[$v_id];
 	}
@@ -718,6 +722,8 @@ function create_cumulative_bydate() {
 	$bug_count = db_num_rows( $result );
 
 	$t_last_id = 0;
+	$t_last_date = 0;
+
 	for( $i = 0;$i < $bug_count;$i++ ) {
 		$row = db_fetch_array( $result );
 		$t_id = $row['id'];

@@ -435,7 +435,8 @@ function summary_print_by_developer() {
 	user_cache_array_rows( array_unique( $t_summaryusers ) );
 
 	foreach( $t_summarydata as $row ) {
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		$v_handler_id = $row['handler_id'];
+		$v_bugcount = $row['bugcount'];
 
 		if(( $v_handler_id != $t_last_handler ) && ( -1 != $t_last_handler ) ) {
 			$t_user = user_get_name( $t_last_handler );
@@ -614,7 +615,9 @@ function summary_print_by_category() {
 	$t_closed_val = CLOSED;
 
 	while( $row = db_fetch_array( $result ) ) {
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		$v_project_id = $row['project_id'];
+		$v_category_id = $row['category_id'];
+		$v_category_name = $row['category_name'];
 
 		if(( $v_category_id != $last_category_id ) && ( $last_category_id != -1 ) ) {
 			$label = $last_category_name;
@@ -719,29 +722,27 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
 		$t_closed_val = CLOSED;
 
 		while( $row = db_fetch_array( $result ) ) {
-			extract( $row, EXTR_PREFIX_ALL, 'v' );
-			if( $t_closed_val <= $v_status ) {
-				if( isset( $p_cache[$v_project_id]['closed'] ) ) {
-					$p_cache[$v_project_id]['closed'] += $v_bugcount;
+			$t_project_id = $row['project_id'];
+			$t_status = $row['status'];
+			$t_bugcount = $row['bugcount'];
+
+			if ( $t_closed_val <= $t_status ) {
+				if ( isset( $p_cache[$t_project_id]['closed'] ) ) {
+					$p_cache[$t_project_id]['closed'] += $t_bugcount;
+				} else {
+					$p_cache[$t_project_id]['closed'] = $t_bugcount;
 				}
-				else {
-					$p_cache[$v_project_id]['closed'] = $v_bugcount;
+			} elseif ( $t_resolved_val <= $t_status ) {
+				if ( isset( $p_cache[$t_project_id]['resolved'] ) ) {
+					$p_cache[$t_project_id]['resolved'] += $t_bugcount;
+				} else {
+					$p_cache[$t_project_id]['resolved'] = $t_bugcount;
 				}
-			}
-			elseif( $t_resolved_val <= $v_status ) {
-				if( isset( $p_cache[$v_project_id]['resolved'] ) ) {
-					$p_cache[$v_project_id]['resolved'] += $v_bugcount;
-				}
-				else {
-					$p_cache[$v_project_id]['resolved'] = $v_bugcount;
-				}
-			}
-			else {
-				if( isset( $p_cache[$v_project_id]['open'] ) ) {
-					$p_cache[$v_project_id]['open'] += $v_bugcount;
-				}
-				else {
-					$p_cache[$v_project_id]['open'] = $v_bugcount;
+			} else {
+				if ( isset( $p_cache[$t_project_id]['open'] ) ) {
+					$p_cache[$t_project_id]['open'] += $t_bugcount;
+				} else {
+					$p_cache[$t_project_id]['open'] = $t_bugcount;
 				}
 			}
 		}
