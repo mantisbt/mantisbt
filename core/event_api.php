@@ -1,6 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -13,30 +13,32 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
  * Event API
  * Handles the event system.
+ * @version $Id$
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @package CoreAPI
  * @subpackage EventAPI
- *
  * @author John Reese
+ *
+ * @uses error_api.php
+ * @uses pluging_api.php
  */
 
-# Cache variables #####
-
+/**
+ * 
+ * @global array $g_event_cache
+ */
 $g_event_cache = array();
 
-# Public API #####
 /**
  * Declare an event of a given type.
  * Will do nothing if event already exists.
  * @param string Event name
  * @param int Event type
+ * @access public
  */
 function event_declare( $p_name, $p_type = EVENT_TYPE_DEFAULT ) {
 	global $g_event_cache;
@@ -53,6 +55,7 @@ function event_declare( $p_name, $p_type = EVENT_TYPE_DEFAULT ) {
 /**
  * Convenience function for decleare multiple events.
  * @param array Events
+ * @access public 
  */
 function event_declare_many( $p_events ) {
 	foreach( $p_events as $t_name => $t_type ) {
@@ -66,6 +69,7 @@ function event_declare_many( $p_events ) {
  * @param string Event name
  * @param string Callback function
  * @param string Plugin basename
+ * @access public 
  */
 function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
 	global $g_event_cache;
@@ -83,6 +87,7 @@ function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
  * Hook multiple callback functions to multiple events.
  * @param array Event name/callback pairs
  * @param string Plugin basename
+ * @access public
  */
 function event_hook_many( $p_hooks, $p_plugin = 0 ) {
 	if( !is_array( $p_hooks ) ) {
@@ -107,6 +112,7 @@ function event_hook_many( $p_hooks, $p_plugin = 0 ) {
  * @param multi Event parameters
  * @param int Event type override
  * @return multi Null if event undeclared, appropriate return value otherwise
+ * @access public
  */
 function event_signal( $p_name, $p_params = null, $p_params_dynamic = null, $p_type = null ) {
 	global $g_event_cache;
@@ -139,7 +145,6 @@ function event_signal( $p_name, $p_params = null, $p_params_dynamic = null, $p_t
 	}
 }
 
-# Event-handling functions #####
 /**
  * Executes a plugin's callback function for a given event.
  * @param string Event name
@@ -147,6 +152,7 @@ function event_signal( $p_name, $p_params = null, $p_params_dynamic = null, $p_t
  * @param string Plugin basename
  * @param multi Parameters for event callback
  * @return multi Null if callback not found, value from callback otherwise
+ * @access public
  */
 function event_callback( $p_event, $p_callback, $p_plugin, $p_params = null ) {
 	$t_value = null;
@@ -183,6 +189,7 @@ function event_callback( $p_event, $p_callback, $p_plugin, $p_params = null ) {
  * @param string Event name
  * @param array Array of callback function/plugin basename key/value pairs
  * @param array Callback parameters
+ * @access public 
  */
 function event_type_execute( $p_event, $p_callbacks, $p_params ) {
 	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
@@ -200,6 +207,7 @@ function event_type_execute( $p_event, $p_callbacks, $p_params ) {
  * @param string Event name
  * @param array Array of callback function/plugin basename key/value pairs
  * @param multi Output separator (if single string) or indexed array of pre, mid, and post strings
+ * @access public 
  */
 function event_type_output( $p_event, $p_callbacks, $p_params = null ) {
 	$t_prefix = '';
@@ -240,6 +248,7 @@ function event_type_output( $p_event, $p_callbacks, $p_params = null ) {
  * @param array Array of callback function/plugin basename key/value pairs
  * @param string Input string
  * @return string Output string
+ * @access public
  */
 function event_type_chain( $p_event, $p_callbacks, $p_input, $p_params ) {
 	if( !is_array( $p_params ) ) {
@@ -273,6 +282,7 @@ function event_type_chain( $p_event, $p_callbacks, $p_input, $p_params ) {
  * @param array Array of callback function/plugin basename key/value pairs
  * @param multi Parameters passed to callbacks
  * @return multi The first non-null callback result, or null otherwise
+ * @access public
  */
 function event_type_first( $p_event, $p_callbacks, $p_params ) {
 	$t_output = null;
@@ -299,6 +309,7 @@ function event_type_first( $p_event, $p_callbacks, $p_params ) {
  * @param array Array of callback function/plugin basename key/value pairs
  * @param multi Data
  * @return array Array of callback/return key/value pairs
+ * @access public
  */
 function event_type_default( $p_event, $p_callbacks, $p_data ) {
 	$t_output = array();
