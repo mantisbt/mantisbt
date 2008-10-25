@@ -96,7 +96,7 @@ function event_hook_many( $p_hooks, $p_plugin = 0 ) {
 
 	foreach( $p_hooks as $t_name => $t_callbacks ) {
 		if( !is_array( $t_callbacks ) ) {
-			event_hook( $t_name, $t_callback, $p_plugin );
+			event_hook( $t_name, $t_callbacks, $p_plugin );
 			continue;
 		}
 

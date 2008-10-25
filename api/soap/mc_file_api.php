@@ -99,14 +99,15 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 
 			if( !file_exists( $t_disk_file_name ) ) {
 				mci_file_write_local( $t_disk_file_name, $p_content );
+
 				if( FTP == $t_method ) {
 					$conn_id = file_ftp_connect();
 					file_ftp_put( $conn_id, $t_disk_file_name, $t_disk_file_name );
 					file_ftp_disconnect( $conn_id );
-					file_delete_local( $p_disk_file_name );
+					file_delete_local( $t_disk_file_name );
+				} else {
+					chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 				}
-
-				chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
 				$c_content = '';
 			}

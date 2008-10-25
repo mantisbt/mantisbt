@@ -721,16 +721,14 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
-	}
-	else {
+	} else {
 		$t_project_id = $p_project_id;
 	}
 
 	if( config_get( 'allow_no_category' ) ) {
 		echo "<option value=\"0\"", check_selected( $p_category_id, 0 ), '>';
-		echo category_full_name( 0, $t_category_row['project_id'] != $t_project_id ), '</option>';
-	}
-	else {
+		echo category_full_name( 0, /* show project */ false ), '</option>';
+	} else {
 		if( 0 == $p_category_id ) {
 			echo "<option value=\"0\"", check_selected( $p_category_id, 0 ), '>';
 			echo string_attribute( lang_get( 'select_option' ) ), '</option>';

@@ -139,7 +139,8 @@ function email_is_valid( $p_email ) {
 		$t_domain = $t_check[2];
 
 		# see if we're limited to one domain
-		if( ON == config_get( 'limit_email_domain' ) ) {
+		$t_limit_email_domain = config_get( 'limit_email_domain' ); 
+		if( $t_limit_email_domain !== OFF  ) {
 			if( 0 != strcasecmp( $t_limit_email_domain, $t_domain ) ) {
 				return false;
 			}
@@ -873,13 +874,28 @@ function make_lf_crlf( $p_string ) {
 }
 
 # Check limit_email_domain option and append the domain name if it is set
+
+/**
+ * Appends an email domain to the specified email address if email is 
+ * not empty, it doesn't already have a domain part and if a
+ * limit_email_domain is configured.
+ * 
+ * @param string $p_email The email address to append the domain to.
+ * @returns The email address with the appended domain (if applicable).
+ */
 function email_append_domain( $p_email ) {
-	$t_limit_email_domain = config_get( 'limit_email_domain' );
-	if( $t_limit_email_domain && !is_blank( $p_email ) ) {
-		$p_email = "$p_email@$t_limit_email_domain";
+	# If email is empty or already contains a domain, then return as is.
+	if ( is_blank( $p_email ) || strchr( $p_email, '@' ) ) {
+		return $p_email;
 	}
 
-	return $p_email;
+	# If limit email domain is set, then append it.
+	$t_limit_email_domain = config_get( 'limit_email_domain' );
+	if ( $t_limit_email_domain === OFF ) {
+		return $p_email;
+	}
+
+	return "$p_email@$t_limit_email_domain";
 }
 
 # Send a bug reminder to each of the given user, or to each user if the first

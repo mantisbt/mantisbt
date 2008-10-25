@@ -239,14 +239,13 @@ function user_is_realname_unique( $p_username, $p_realname ) {
 				WHERE realname=" . db_param();
 		$result = db_query_bound( $query, Array( $c_realname ) );
 		$t_count = db_num_rows( $result );
-		if( $t_count > 0 ) {
 
+		if( $t_count > 0 ) {
 			# set flags for non-unique realnames
 			if( config_get( 'differentiate_duplicates' ) ) {
-				user_set_field( $t_user_id, 'duplicate_realname', ON );
 				for( $i = 0;$i < $t_count;$i++ ) {
-					$t_id = db_result( $result, $i );
-					user_set_field( $t_id, 'duplicate_realname', ON );
+					$t_user_id = db_result( $result, $i );
+					user_set_field( $t_user_id, 'duplicate_realname', ON );
 				}
 			}
 		}

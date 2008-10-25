@@ -336,6 +336,7 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	$t_page_number = 1;
 	$t_per_page = 1;
 	$t_bug_count = 0;
+	$t_page_count = 0;
 
 	# Get project id, if -1, then retrieve the current which will be the default since there is no cookie.
 	$t_project_id = $p_project_id;
