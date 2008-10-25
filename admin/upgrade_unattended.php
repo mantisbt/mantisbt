@@ -29,8 +29,14 @@ define( 'GOOD', 1 );
 
 $g_failed = false;
 
-# -------
-# print test result
+/**
+ * Print the result of an upgrade step.
+ * 
+ * @param integer $result       GOOD or BAD.
+ * @param bool    $p_hard_fail  If result is BAD, sets the global failure flag.
+ * @param string  $p_message    The message describing the upgrade step.
+ * @access private
+ */
 function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	global $g_failed;
 	if( BAD == $p_result ) {
@@ -52,7 +58,6 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	echo "\n";
 }
 
-# @@@ upgrade list moved to the bottom of upgrade_inc.php
 $result = @db_connect( config_get_global( 'dsn', false ), config_get_global( 'hostname' ),
 	config_get_global( 'db_username' ), config_get_global( 'db_password' ),
 	config_get_global( 'database_name' ) );
@@ -67,26 +72,9 @@ if( false == $result ) {
 }
 
 # check to see if the new installer was used
-if( -1 == config_get( 'database_version', -1 ) ) {
-
-	# Old database detected: run the old style upgrade set
-	if( !db_table_exists( db_get_table( 'mantis_upgrade_table' ) ) ) {
-
-		# Create the upgrade table if it does not exist
-		$query = "CREATE TABLE " . db_get_table( 'mantis_upgrade_table' ) . "(upgrade_id char(20) NOT NULL,
-			description char(255) NOT NULL,
-			PRIMARY KEY (upgrade_id))";
-
-		$result = db_query_bound( $query );
-	}
-
-	# link the data structures and upgrade list
-	require_once( 'upgrade_inc.php' );
-	$error = $upgrade_set->run_all_unattended();
-
-	if( true == $error ) {
-		exit( 1 );
-	}
+if ( -1 == config_get( 'database_version', -1 ) ) {
+	echo "Upgrade from the current installed Mantis version is no longer supported.  If you are using Mantis version older than 1.0.0, then upgrade to v1.0.0 first.";
+	exit( 1 );
 }
 
 # read control variables with defaults
@@ -145,6 +133,6 @@ if( false == $g_failed ) {
 	exit( 0 );
 }
 
-exit( 1 )
+exit( 1 );
 
 # vim: noexpandtab tabstop=4 softtabstop=0:
