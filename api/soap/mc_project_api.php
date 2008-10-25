@@ -279,51 +279,55 @@ function mc_project_version_add( $p_username, $p_password, $p_version ) {
 		return new soap_fault( 'Client', '', 'Access Denied', 'Username/password combination was incorrect' );
 	}
 
-	extract( $p_version, EXTR_PREFIX_ALL, 'v' );
+	$t_project_id = $p_version['project_id'];
+	$t_name = $p_version['name'];
+	$t_released = $p_version['released'];
+	$t_description = $p_version['description'];
+	$t_date_order = $p_version['date_order'];
 
-	if( is_blank( $v_project_id ) ) {
+	if ( is_blank( $t_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Mandatory field "project_id" was missing' );
 	}
 
-	if( !project_exists( $v_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$v_project_id' does not exist." );
+	if ( !project_exists( $t_project_id ) ) {
+		return new soap_fault( 'Client', '', "Project '$t_project_id' does not exist." );
 	}
 
-	if( !mci_has_readwrite_access( $t_user_id, $v_project_id ) ) {
+	if ( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $v_project_id ) ) {
+	if ( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	if( is_blank( $v_name ) ) {
+	if ( is_blank( $t_name ) ) {
 		return new soap_fault( 'Client', '', 'Mandatory field "name" was missing' );
 	}
 
-	if( !version_is_unique( $v_name, $v_project_id ) ) {
+	if ( !version_is_unique( $t_name, $t_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Version exists for project', 'The version you attempted to add already exists for this project' );
 	}
 
-	if( $v_released === false ) {
-		$v_released = VERSION_FUTURE;
-	}
-	else {
-		$v_released = VERSION_RELEASED;
+	if ( $t_released === false ) {
+		$t_released = VERSION_FUTURE;
+	} else {
+		$t_released = VERSION_RELEASED;
 	}
 
-	if( version_add( $v_project_id, $v_name, $v_released, $v_description ) ) {
-		$t_version_id = version_get_id( $v_name, $v_project_id );
-		if( !is_blank( $v_date_order ) ) {
+	if ( version_add( $t_project_id, $t_name, $t_released, $t_description ) ) {
+		$t_version_id = version_get_id( $t_name, $t_project_id );
+
+		if ( !is_blank( $t_date_order ) ) {
 			$t_version = version_get( $t_version_id );
-			$t_version->date_order = date( "Y-m-d H:i:s", strtotime( $v_date_order ) );
+			$t_version->date_order = date( "Y-m-d H:i:s", strtotime( $t_date_order ) );
 			version_update( $t_version );
 		}
+
 		return $t_version_id;
 	}
-	else {
-		return null;
-	}
+
+	return null;
 }
 
 /**
@@ -350,48 +354,51 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_
 		return new soap_fault( 'Client', '', "Version '$p_version_id' does not exist." );
 	}
 
-	extract( $p_version, EXTR_PREFIX_ALL, 'v' );
+	$t_project_id = $p_version['project_id'];
+	$t_name = $p_version['name'];
+	$t_released = $p_version['released'];
+	$t_description = $p_version['description'];
+	$t_date_order = $p_version['date_order'];
 
-	if( is_blank( $v_project_id ) ) {
+	if ( is_blank( $t_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Mandatory field "project_id" was missing' );
 	}
 
-	if( !project_exists( $v_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$v_project_id' does not exist." );
+	if ( !project_exists( $t_project_id ) ) {
+		return new soap_fault( 'Client', '', "Project '$t_project_id' does not exist." );
 	}
 
-	if( !mci_has_readwrite_access( $t_user_id, $v_project_id ) ) {
+	if ( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $v_project_id ) ) {
+	if ( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	if( is_blank( $v_name ) ) {
+	if ( is_blank( $t_name ) ) {
 		return new soap_fault( 'Client', '', 'Mandatory field "name" was missing' );
 	}
 
 	# check for duplicates
 	$t_old_version_name = version_get_field( $p_version_id, 'version' );
-	if(( strtolower( $t_old_version_name ) != strtolower( $v_name ) ) && !version_is_unique( $v_name, $v_project_id ) ) {
+	if ( ( strtolower( $t_old_version_name ) != strtolower( $t_name ) ) && !version_is_unique( $t_name, $t_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Version exists for project', 'The version you attempted to update already exists for this project' );
 	}
 
-	if( $v_released === false ) {
-		$v_released = VERSION_FUTURE;
-	}
-	else {
-		$v_released = VERSION_RELEASED;
+	if ( $t_released === false ) {
+		$t_released = VERSION_FUTURE;
+	} else {
+		$t_released = VERSION_RELEASED;
 	}
 
 	$t_version_data = new VersionData();
 	$t_version_data->id = $p_version_id;
-	$t_version_data->project_id = $v_project_id;
-	$t_version_data->version = $v_name;
-	$t_version_data->description = $v_description;
-	$t_version_data->released = $v_released;
-	$t_version_data->date_order = date( "Y-m-d H:i:s", strtotime( $v_date_order ) );
+	$t_version_data->project_id = $t_project_id;
+	$t_version_data->version = $t_name;
+	$t_version_data->description = $t_description;
+	$t_version_data->released = $t_released;
+	$t_version_data->date_order = date( "Y-m-d H:i:s", strtotime( $t_date_order ) );
 
 	return version_update( $t_version_data );
 }
@@ -571,16 +578,16 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	$t_result = array();
 	for( $i = 0;$i < $num_files;$i++ ) {
 		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+
 		$t_attachment = array();
-		$t_attachment['id'] = $v_id;
-		$t_attachment['filename'] = $v_filename;
-		$t_attachment['title'] = $v_title;
-		$t_attachment['description'] = $v_description;
-		$t_attachment['size'] = $v_filesize;
-		$t_attachment['content_type'] = $v_file_type;
-		$t_attachment['date_submitted'] = timestamp_to_iso8601( db_unixtimestamp( $v_date_added ) );
-		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $v_id . '&amp;type=doc';
+		$t_attachment['id'] = $row['id'];
+		$t_attachment['filename'] = $row['filename'];
+		$t_attachment['title'] = $row['title'];
+		$t_attachment['description'] = $row['description'];
+		$t_attachment['size'] = $row['filesize'];
+		$t_attachment['content_type'] = $row['file_type'];
+		$t_attachment['date_submitted'] = timestamp_to_iso8601( db_unixtimestamp( $row['date_added'] ) );
+		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $row['id'] . '&amp;type=doc';
 		$t_result[] = $t_attachment;
 	}
 
@@ -619,37 +626,39 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 		return new soap_fault( 'Client', '', 'Access Denied', 'User does not have administrator access' );
 	}
 
-	extract( $p_project, EXTR_PREFIX_ALL, 'v' );
+	$t_name = $p_project['name'];
+	$t_status = $p_project['status'];
+	$t_view_state = $p_project['view_state'];
+	$t_enabled = $p_project['enabled'];
+	$t_file_path = $p_project['file_path'];
+	$t_description = $p_project['description'];
 
-	/*	if ( is_blank($v_name) )
-	return new soap_fault('Client', '', 'Mandatory field "name" was missing');
-	*/
 	// check to make sure project doesn't already exist
-	if( !project_is_name_unique( $v_name ) ) {
+	if( !project_is_name_unique( $t_name ) ) {
 		return new soap_fault( 'Client', '', 'Project name exists', 'The project name you attempted to add exists already' );
 	}
 
-	if( is_null( $v_status ) ) {
-		$v_status = array( 'name' => 'development' ); // development
+	if( is_null( $t_status ) ) {
+		$t_status = array( 'name' => 'development' ); // development
 	}
 
-	if ( is_null( $v_view_state ) ) {
-		$v_view_state = array( 'id' => VS_PUBLIC );
+	if ( is_null( $t_view_state ) ) {
+		$t_view_state = array( 'id' => VS_PUBLIC );
 	}
 
-	if( is_null( $v_enabled ) ) {
-		$v_enabled = true;
+	if( is_null( $t_enabled ) ) {
+		$t_enabled = true;
 	}
 
-	if( is_null( $v_file_path ) ) {
-		$v_file_path = '';
+	if( is_null( $t_file_path ) ) {
+		$t_file_path = '';
 	}
 
-	$t_project_status = mci_get_project_status_id( $v_status );
-	$t_project_view_state = mci_get_project_view_state_id( $v_view_state );
+	$t_project_status = mci_get_project_status_id( $t_status );
+	$t_project_view_state = mci_get_project_view_state_id( $t_view_state );
 
 	// project_create returns the new project's id, spit that out to webservice caller
-	return project_create( $v_name, $v_description, $t_project_status, $t_project_view_state, $v_file_path, $v_enabled );
+	return project_create( $t_name, $t_description, $t_project_status, $t_project_view_state, $t_file_path, $t_enabled );
 }
 
 /**

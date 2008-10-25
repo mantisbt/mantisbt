@@ -23,6 +23,7 @@ require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' 
 
 access_ensure_global_level( ADMINISTRATOR );
 
+// Move type should be attachment or project.
 $f_move_type = gpc_get( 'doc' );
 
 function get_prefix( $file_path ) {
@@ -101,55 +102,52 @@ function upgrade_move_att2disk( $p_source ) {
 	}
 
 	for( $i = 0;$i < $count;$i++ ) {
-		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		$t_row = db_fetch_array( $result );
 
 		// trace bug id back to project to determine the proper file path
 		if( $p_source == 'attachment' ) {
-			$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
-			$t_bug_id = $v_bug_id;
-		}
-		else {
-			$t_project_id = (int) $v_project_id;
+			$t_project_id = bug_get_field( $t_row['bug_id'], 'project_id' );
+			$t_bug_id = $t_row['bug_id'];
+		} else {
+			$t_project_id = (int) $t_row['project_id'];
 			$t_bug_id = $t_project_id;
 		}
+
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
 		$prefix = get_prefix( $t_file_path );
 		$t_real_file_path = $prefix . $t_file_path;
-		$c_filename = file_clean_name( $v_filename );
+		$c_filename = file_clean_name( $t_row['filename'] );
 
-		printf( "\n<tr %s><td>%8d</td><td>%s</td><td>", helper_alternate_class(), $t_bug_id, $v_filename );
+		printf( "\n<tr %s><td>%8d</td><td>%s</td><td>", helper_alternate_class(), $t_bug_id, $t_row['filename'] );
 
 		if( is_blank( $t_real_file_path ) || !file_exists( $t_real_file_path ) || !is_dir( $t_real_file_path ) || !is_writable( $t_real_file_path ) ) {
 			echo 'Destination ' . $t_real_file_path . ' not writable';
 			$t_failures++;
-		}
-		else {
+		} else {
 			$t_file_name = $t_real_file_path . $c_filename;
 
 			// write file to disk store after adjusting the path
-			if( file_put_contents( $t_file_name, $v_content ) ) {
+			if( file_put_contents( $t_file_name, $t_row['content'] ) ) {
 
 				// successful, update database
 				# @@@ do we want to check the size of data transfer matches here?
 				$c_file_path = db_prepare_string( $t_file_path );
 				$c_new_file_name = db_prepare_string( $t_file_path . $c_filename );
 				$query2 = "UPDATE $t_file_table SET diskfile = '$c_new_file_name',
-						folder = '$c_file_path', content = '' WHERE id = $v_id";
+						folder = '$c_file_path', content = '' WHERE id = " . $t_row['id'];
 				$update = @db_query( $query2 );
 				if( !$update ) {
 					echo 'database update failed';
 					$t_failures++;
-				}
-				else {
+				} else {
 					echo 'moved to ' . $t_file_name;
 				}
-			}
-			else {
+			} else {
 				echo 'copy to ' . $t_file_name . ' failed';
 				$t_failures++;
 			}
 		}
+
 		echo '</td></tr>';
 	}
 

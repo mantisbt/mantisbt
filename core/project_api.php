@@ -683,20 +683,18 @@ function project_remove_all_users( $p_project_id ) {
 # Copy all users and their permissions from the source project to the
 #  destination project
 function project_copy_users( $p_destination_id, $p_source_id ) {
-
 	# Copy all users from current project over to another project
-	$rows = project_get_local_user_rows( $p_source_id );
+	$t_rows = project_get_local_user_rows( $p_source_id );
 
-	for( $i = 0;$i < sizeof( $rows );$i++ ) {
-		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
+	for ( $i = 0; $i < sizeof( $t_rows ); $i++ ) {
+		$t_row = $t_rows[$i];
 
 		# if there is no duplicate then add a new entry
 		# otherwise just update the access level for the existing entry
-		if( project_includes_user( $p_destination_id, $v_user_id ) ) {
-			project_update_user_access( $p_destination_id, $v_user_id, $v_access_level );
-		}
-		else {
-			project_add_user( $p_destination_id, $v_user_id, $v_access_level );
+		if ( project_includes_user( $p_destination_id, $t_row['user_id'] ) ) {
+			project_update_user_access( $p_destination_id, $t_row['user_id'], $t_row['access_level'] );
+		} else {
+			project_add_user( $p_destination_id, $t_row['user_id'], $t_row['access_level'] );
 		}
 	}
 }
