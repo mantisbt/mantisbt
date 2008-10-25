@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,37 +13,57 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
+ * Authentication API
+ * @version $Id$
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @package CoreAPI
  * @subpackage AuthenticationAPI
  */
+ 
+ /**
+  * requires helper_api
+ */
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
 
-# ## Authentication API ###
-
+/**
+ * 
+ * @global array $g_script_login_cookie
+ */
 $g_script_login_cookie = null;
+
+/**
+ * 
+ * @global array $g_cache_anonymous_user_cookie_string
+ */
 $g_cache_anonymous_user_cookie_string = null;
+
+/**
+ * 
+ * @global array $g_cache_cookie_valid
+ */
 $g_cache_cookie_valid = null;
 
-# ===================================
-# Boolean queries and ensures
-# ===================================
-# --------------------
-# Check that there is a user logged-in and authenticated
-#  If the user's account is disabled they will be logged out
-#  If there is no user logged in, redirect to the login page
-#  If parameter is given it is used as a URL to redirect to following
-#   successful login.  If none is given, the URL of the current page is used
-function auth_ensure_user_authenticated( $p_return_page = '' ) {
+/**
+ * 
+ * @global array $g_cache_current_user_id
+ */
+$g_cache_current_user_id = null;
 
+/**
+ * Check that there is a user logged-in and authenticated
+ * If the user's account is disabled they will be logged out
+ * If there is no user logged in, redirect to the login page
+ * If parameter is given it is used as a URL to redirect to following
+ * successful login.  If none is given, the URL of the current page is used
+ * @param string $p_return_page Page to redirect to following successful logon, defaults to current page
+ * @access public
+ */
+function auth_ensure_user_authenticated( $p_return_page = '' ) {
 	# if logged in
 	if( auth_is_user_authenticated() ) {
-
 		# check for access enabled
 		#  This also makes sure the cookie is valid
 		if( OFF == current_user_get_field( 'enabled' ) ) {
@@ -52,7 +71,6 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
 		}
 	}
 	else {
-
 		# not logged in
 		if( is_blank( $p_return_page ) ) {
 			if( !isset( $_SERVER['REQUEST_URI'] ) ) {
@@ -65,8 +83,12 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
 	}
 }
 
-# Return true if there is a currently logged in and authenticated user,
-#  false otherwise
+/**
+ * Return true if there is a currently logged in and authenticated user, false otherwise
+ * 
+ * @return bool
+ * @access public
+ */
 function auth_is_user_authenticated() {
 	global $g_cache_cookie_valid;
 	if( $g_cache_cookie_valid == true ) {
@@ -76,11 +98,13 @@ function auth_is_user_authenticated() {
 	return $g_cache_cookie_valid;
 }
 
-# ===================================
-# Login / Logout
-# ===================================
-# prepare/override the username provided from logon form (if necessary)
-# @@@when we rewrite authentication api for plugins, this should be merged with prepare_password and return some object
+/**
+ * prepare/override the username provided from logon form (if necessary)
+ * @todo when we rewrite authentication api for plugins, this should be merged with prepare_password and return some object
+ * @param string $p_username
+ * @return string prepared username
+ * @access public
+ */
 function auth_prepare_username( $p_username ) {
 	switch( config_get( 'login_method' ) ) {
 		case BASIC_AUTH:
@@ -107,8 +131,13 @@ function auth_prepare_username( $p_username ) {
 	return $f_username;
 }
 
-# prepare/override the password provided from logon form (if necessary)
-# @@@when we rewrite authentication api for plugins, this should be merged with prepare_username and return some object
+/**
+ * prepare/override the password provided from logon form (if necessary)
+ * @todo when we rewrite authentication api for plugins, this should be merged with prepare_username and return some object
+ * @param string $p_password
+ * @return string prepared password
+ * @access public
+ */
 function auth_prepare_password( $p_password ) {
 	switch( config_get( 'login_method' ) ) {
 		case BASIC_AUTH:
@@ -137,11 +166,18 @@ function auth_prepare_password( $p_password ) {
 	return $f_password;
 }
 
-# Attempt to login the user with the given password
-#  If the user fails validation, false is returned
-#  If the user passes validation, the cookies are set and
-#   true is returned.  If $p_perm_login is true, the long-term
-#   cookie is created.
+/**
+ * Attempt to login the user with the given password
+ * If the user fails validation, false is returned
+ * If the user passes validation, the cookies are set and
+ * true is returned.  If $p_perm_login is true, the long-term
+ * cookie is created.
+ * @param string $p_username a prepared username
+ * @param string $p_password a prepared password
+ * @param bool $p_perm_login whether to create a long-term cookie
+ * @return bool indicates if authentication was successful
+ * @access public
+ */
 function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 	$t_user_id = user_get_id_by_name( $p_username );
 
@@ -149,7 +185,6 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 
 	if( false === $t_user_id ) {
 		if( BASIC_AUTH == $t_login_method ) {
-
 			# attempt to create the user if using BASIC_AUTH
 			$t_cookie_string = user_create( $p_username, $p_password );
 
@@ -212,7 +247,13 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 	return true;
 }
 
-# Allows scripts to login using a login name or ( login name + password )
+/**
+ * Allows scripts to login using a login name or ( login name + password )
+ * @param string $p_username username
+ * @param string $p_password username
+ * @return bool indicates if authentication was successful
+ * @access public
+ */
 function auth_attempt_script_login( $p_username, $p_password = null ) {
 	global $g_script_login_cookie, $g_cache_current_user_id;
 
@@ -250,8 +291,11 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 	return true;
 }
 
-# Logout the current user and remove any remaining cookies from their browser
-# Returns true on success, false otherwise
+/**
+ * Logout the current user and remove any remaining cookies from their browser
+ * Returns true on success, false otherwise
+ * @access public
+ */
 function auth_logout() {
 	global $g_cache_current_user_id, $g_cache_cookie_valid;
 
@@ -270,10 +314,13 @@ function auth_logout() {
 	}
 
 	session_clean();
-
-	return true;
 }
 
+/**
+ * Identicates whether to bypass logon form e.g. when using http auth
+ * @return bool
+ * @access public
+ */
 function auth_automatic_logon_bypass_form() {
 	switch( config_get( 'login_method' ) ) {
 		case HTTP_AUTH:
@@ -282,11 +329,14 @@ function auth_automatic_logon_bypass_form() {
 	return false;
 }
 
-# ===================================
-# Password functions
-# ===================================
-# Return true if the password for the user id given matches the given
-#  password (taking into account the global login method)
+/**
+ * Return true if the password for the user id given matches the given
+ * password (taking into account the global login method)
+ * @param int $p_user_id User id to check password against
+ * @param string $p_test_password Password
+ * @return bool indicating whether password matches given the user id
+ * @access public
+ */
 function auth_does_password_match( $p_user_id, $p_test_password ) {
 	$t_configured_login_method = config_get( 'login_method' );
 
@@ -325,14 +375,22 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 	return false;
 }
 
-# Encrypt and return the plain password given, as appropriate for the current
-#  global login method.
-#
-# When generating a new password, no salt should be passed in.
-# When encrypting a password to compare to a stored password, the stored
-#  password should be passed in as salt.  If the auth method is CRYPT then
-#  crypt() will extract the appropriate portion of the stored password as its salt
-function auth_process_plain_password( $p_password, $p_salt = null, $p_method = null ) {
+/**
+ * Encrypt and return the plain password given, as appropriate for the current
+ *  global login method.
+ *
+ * When generating a new password, no salt should be passed in.
+ * When encrypting a password to compare to a stored password, the stored
+ *  password should be passed in as salt.  If the auth method is CRYPT then
+ *  crypt() will extract the appropriate portion of the stored password as its salt
+ *
+ * @param string $p_password
+ * @param string $p_salt salt, defaults to null
+ * @param string $p_method logon method, defaults to null (use config login method)
+ * @return string processed password, maximum 32 chars in length
+ * @access public
+ */
+ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = null ) {
 	$t_login_method = config_get( 'login_method' );
 	if( $p_method !== null ) {
 		$t_login_method = $p_method;
@@ -359,8 +417,13 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
 	return substr( $t_processed_password, 0, 32 );
 }
 
-# Generate a random 12 character password
-# p_email is unused
+/**
+ * Generate a random 12 character password
+ * @todo Review use of $p_email within mantis
+ * @param string $p_email unused
+ * @return string 12 character random password
+ * @access public
+ */
 function auth_generate_random_password( $p_email ) {
 	$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
 	$t_val = md5( $t_val );
@@ -368,7 +431,12 @@ function auth_generate_random_password( $p_email ) {
 	return substr( $t_val, 0, 12 );
 }
 
-# Generate a confirm_hash 12 character to valide the password reset request
+/**
+ * Generate a confirm_hash 12 character to valide the password reset request
+ * @param int $p_user_id user id
+ * @return string representing MD5 hash
+ * @access public
+ */
 function auth_generate_confirm_hash( $p_user_id ) {
 	$t_confirm_hash_generator = config_get( 'password_confirm_hash_magic_string' );
 	$t_password = user_get_field( $p_user_id, 'password' );
@@ -379,29 +447,33 @@ function auth_generate_confirm_hash( $p_user_id ) {
 	return $t_confirm_hash;
 }
 
-# ===================================
-# Cookie functions
-# ===================================
-# Set login cookies for the user
-#  If $p_perm_login is true, a long-term cookie is created
+/**
+ * Set login cookies for the user
+ * If $p_perm_login is true, a long-term cookie is created
+ * @param int $p_user_id user id
+ * @param bool $p_perm_login indicates whether to generate a long-term cookie
+ * @access public
+ */
 function auth_set_cookies( $p_user_id, $p_perm_login = false ) {
 	$t_cookie_string = user_get_field( $p_user_id, 'cookie_string' );
 
 	$t_cookie_name = config_get( 'string_cookie' );
 
 	if( $p_perm_login ) {
-
 		# set permanent cookie (1 year)
 		gpc_set_cookie( $t_cookie_name, $t_cookie_string, true );
 	}
 	else {
-
 		# set temp cookie, cookie dies after browser closes
 		gpc_set_cookie( $t_cookie_name, $t_cookie_string, false );
 	}
 }
 
-# Clear login cookies, return true if they were cleared
+/**
+ * Clear login cookies, return true if they were cleared
+ * @return bool indicating whether cookies were cleared
+ * @access public
+ */
 function auth_clear_cookies() {
 	global $g_script_login_cookie, $g_cache_cookie_valid;
 
@@ -422,9 +494,13 @@ function auth_clear_cookies() {
 	return $t_cookies_cleared;
 }
 
-# Generate a string to use as the identifier for the login cookie
-# It is not guaranteed to be unique and should be checked
-# The string returned should be 64 characters in length
+/**
+ * Generate a string to use as the identifier for the login cookie
+ * It is not guaranteed to be unique and should be checked
+ * The string returned should be 64 characters in length
+ * @return string 64 character cookie string
+ * @access public
+ */
 function auth_generate_cookie_string() {
 	$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
 	$t_val = md5( $t_val ) . md5( time() );
@@ -432,8 +508,12 @@ function auth_generate_cookie_string() {
 	return substr( $t_val, 0, 64 );
 }
 
-# Generate a UNIQUE string to use as the identifier for the login cookie
-# The string returned should be 64 characters in length
+/**
+ * Generate a UNIQUE string to use as the identifier for the login cookie
+ * The string returned should be 64 characters in length
+ * @return string 64 character cookie string
+ * @access public
+ */
 function auth_generate_unique_cookie_string() {
 	do {
 		$t_cookie_string = auth_generate_cookie_string();
@@ -443,7 +523,12 @@ function auth_generate_unique_cookie_string() {
 	return $t_cookie_string;
 }
 
-# Return true if the cookie login identifier is unique, false otherwise
+/**
+ * Return true if the cookie login identifier is unique, false otherwise
+ * @param string $p_cookie_string
+ * @return bool indicating whether cookie string is unique
+ * @access public
+ */
 function auth_is_cookie_string_unique( $p_cookie_string ) {
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
@@ -461,14 +546,19 @@ function auth_is_cookie_string_unique( $p_cookie_string ) {
 	}
 }
 
-# Return the current user login cookie string,
-# note that the cookie cached by a script login superceeds the cookie provided by
-#  the browser. This shouldn't normally matter, except that the password verification uses
-#  this routine to bypass the normal authentication, and can get confused when a normal user
-#  logs in, then runs the verify script. the act of fetching config variables may get the wrong
-#  userid.
-# if no user is logged in and anonymous login is enabled, returns cookie for anonymous user
-# otherwise returns '' (an empty string)
+/**
+ * Return the current user login cookie string,
+ * note that the cookie cached by a script login superceeds the cookie provided by
+ *  the browser. This shouldn't normally matter, except that the password verification uses
+ *  this routine to bypass the normal authentication, and can get confused when a normal user
+ *  logs in, then runs the verify script. the act of fetching config variables may get the wrong
+ *  userid.
+ * if no user is logged in and anonymous login is enabled, returns cookie for anonymous user
+ * otherwise returns '' (an empty string)
+ *
+ * @return string current user login cookie string
+ * @access public
+ */
 function auth_get_current_user_cookie() {
 	global $g_script_login_cookie, $g_cache_anonymous_user_cookie_string;
 
@@ -509,12 +599,10 @@ function auth_get_current_user_cookie() {
 	return $t_cookie;
 }
 
-# ===================================
-# Re-Authentication Tokens
-# ===================================
 /**
  * Set authentication tokens for secure session.
  * @param integer User ID
+ * @access public
  */
 function auth_set_tokens( $p_user_id ) {
 	$t_auth_token = token_get( TOKEN_AUTHENTICATED, $p_user_id );
@@ -530,6 +618,9 @@ function auth_set_tokens( $p_user_id ) {
  * Check for authentication tokens, and display re-authentication page if needed.
  * Currently, if using BASIC or HTTP authentication methods, or if logged in anonymously,
  * this function will always "authenticate" the user (do nothing).
+ *
+ * @return bool
+ * @access public
  */
 function auth_reauthenticate() {
 	if( config_get_global( 'reauthentication' ) == OFF || BASIC_AUTH == config_get( 'login_method' ) || HTTP_AUTH == config_get( 'login_method' ) ) {
@@ -561,6 +652,8 @@ function auth_reauthenticate() {
  * Generate the intermediate authentication page.
  * @param integer User ID
  * @param string Username
+ * @return bool
+ * @access public 
  */
 function auth_reauthenticate_page( $p_user_id, $p_username ) {
 	$t_error = false;
@@ -628,11 +721,12 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 	exit;
 }
 
-# ===================================
-# Data Access
-# ===================================
-# ########################################
-# is cookie valid?
+/**
+ * is cookie valid?
+ * @param string $p_cookie_string
+ * @return bool
+ * @access public
+ */
 function auth_is_cookie_valid( $p_cookie_string ) {
 	global $g_cache_current_user_id;
 
@@ -673,12 +767,11 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 	}
 }
 
-# ########################################
-# SECURITY NOTE: cache globals are initialized here to prevent them
-#   being spoofed if register_globals is turned on
-#
-$g_cache_current_user_id = null;
-
+/**
+ * Retrieve user id of current user
+ * @return int user id
+ * @access public
+ */
 function auth_get_current_user_id() {
 	global $g_cache_current_user_id;
 
@@ -708,9 +801,7 @@ function auth_get_current_user_id() {
 	if( db_num_rows( $result ) < 1 ) {
 		auth_clear_cookies();
 		access_denied();
-
-		# never returns
-		return false;
+		exit();
 	}
 
 	$t_user_id = (int) db_result( $result );
@@ -719,10 +810,11 @@ function auth_get_current_user_id() {
 	return $t_user_id;
 }
 
-# ===================================
-# HTTP Auth
-# ===================================
 
+/**
+ *
+ * @access public
+ */
 function auth_http_prompt() {
 	header( "HTTP/1.0 401 Authorization Required" );
 	header( "WWW-Authenticate: Basic realm=\"" . lang_get( 'http_auth_realm' ) . "\"" );
@@ -736,6 +828,11 @@ function auth_http_prompt() {
 	exit;
 }
 
+/**
+ *
+ * @param bool $p_pending
+ * @access public
+ */
 function auth_http_set_logout_pending( $p_pending ) {
 	$t_cookie_name = config_get( 'logout_cookie' );
 
@@ -748,6 +845,11 @@ function auth_http_set_logout_pending( $p_pending ) {
 	}
 }
 
+/**
+ *
+ * @return bool
+ * @access public
+ */
 function auth_http_is_logout_pending() {
 	$t_cookie_name = config_get( 'logout_cookie' );
 	$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
