@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,21 +13,26 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
+ * Ajax API, containing functions to support use of ajax within mantis
+ *
  * @package CoreAPI
  * @subpackage AjaxAPI
+ * @version $Id$
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ * @uses lang_api.php
  */
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
-require_once( $t_core_dir . 'bug_api.php' );
-
-# ## Ajax API ###
-
+/**
+ * @todo @@@function documentation
+ * @param string $p_initial_string 
+ * @param string $p_element_id_prefix
+ * @param string $p_query_string
+ * @return string returns raw html containing AjaxLoad
+ */
 function ajax_click_to_edit( $p_initial_string, $p_element_id_prefix, $p_query_string ) {
 	$t_element_id_target = $p_element_id_prefix . '_target';
 	$t_element_id_edit = $p_element_id_prefix . '_edit';
