@@ -11,7 +11,7 @@
         </listitem>
         <listitem>
             <para>
-                Go through Mantis <ulink url="manual.configuration.html">Configuration</ulink>
+                Go through MantisBT <ulink url="manual.configuration.html">Configuration</ulink>
                 and set the database options + whatever options where you need to
                 override the default values.
             </para>
@@ -28,12 +28,12 @@
         </listitem>
     </itemizedlist>
 
-    <para>Following are the steps to upgrade a Mantis installation:See
+    <para>Following are the steps to upgrade a MantisBT installation:See
         <ulink url="manual.installation.upgrading.html">Upgrading</ulink>.The
         following details the basic steps for installation on any system.
         Theinstructions may seem unix-centric but should work fine on
         Windows systems.Barring complications, it should take you about
-        10-20 minutes to install,configure, and be using Mantis.
+        10-20 minutes to install,configure, and be using MantisBT.
     </para>
 
     <section>
@@ -82,16 +82,16 @@
                         gunzip &lt;filename.tar.gz&gt; tar xvf &lt;filename.tar&gt;
                         Winzip, Stuffit, and other programs should also be able to
                         handledecompression of the archive.At this point you may want to
-                        rename the directory to something simpler like'mantis'. You will
-                        use the mv command to rename a directory (Windows userssubstitute
+                        rename the directory to something simpler like 'mantisbt'. You will
+                        use the mv command to rename a directory (Windows users substitute
                         the "ren" command or use explorer).
-                        mv &lt;directoryname&gt; mantis
+                        mv &lt;directoryname&gt; mantisbt
                     </para>
                 </listitem>
                 <listitem>
                     <para>Next we will create the necessary database tables and a
                         basic configurationfile.From your web server, access
-                        http://yoursite/mantis/admin/install.phpThis page will walk through
+                        http://yoursite/mantisbt/admin/install.php.  This page will walk through
                         the following steps:
 
                         <orderedlist>
@@ -100,9 +100,9 @@
                             </listitem>
                             <listitem>
                                 <para>prompt for the database type and location, and a database
-                                    user/passwordpair. For installiion, an administrative user/password
-                                    pair can also beprovided. The operating user requires SELECT,
-                                    INSERT, UPDATE, and DELETEprivileges. For installation, INDEX,
+                                    user/passwordpair. For installion, an administrative user/password
+                                    pair can also be provided. The operating user requires SELECT,
+                                    INSERT, UPDATE, and DELETE privileges. For installation, INDEX,
                                     CREATE, ALTER, and DROP privileges arealso required.
                                 </para>
                             </listitem>
@@ -110,7 +110,7 @@
                                 <para>create the database and tables.
                                     WARNING: A DEFAULT ADMINISTRATOR level account is created. The
                                     account name and password are administrator / root.
-                                    Use this when you first login to Mantis. Immediately go to Manage
+                                    Use this when you first login to MantisBT. Immediately go to Manage
                                     and create at least one administrator level account. Immediately
                                     after that DISABLE or DELETE the administrator account. You can
                                     recreate it but you should delete the account to prevent the
@@ -138,7 +138,7 @@
                     <para>The next part involves configuring the installation to
                         work with yourspecific setup.Open the file in an editor and add
                         anyother values that are required. There aremany more that you can
-                        use to customize your Mantis installation.
+                        use to customize your MantisBT installation.
                         See<ulink url="manual.configuration.html">Configuration</ulink> for
                         in depth explanations.The file will overwrite the default values
                         with those necessary for setup.You can load up admin/check.php to
@@ -153,7 +153,7 @@
                 </listitem>
 
                 <listitem>
-                    <para>Mantis now uses only .php files.If your webserver is
+                    <para>MantisBT now uses only .php files.If your webserver is
                         configured for other extensions (.PHP3, .PHTML) then youwill have
                         to have the administrator add support for .PHP files. This shouldbe
                         a trivial modification.Documentation can be found at:
@@ -233,7 +233,7 @@
             <title>Backups</title>
 
 
-            <para>It is recommended to backup your Mantis database on a
+            <para>It is recommended to backup your MantisBT database on a
                 regular basis. This is easy to accomplish using the mysqldump
                 command:
                 mysqldump -u&lt;username&gt; -p&lt;password&gt; &lt;database
@@ -251,7 +251,7 @@
                 Using the current date in the filename can prevent overwriting and
                 make cataloguing easier.
                 !!! Backups should always be performed before an upgrade !!!
-                Make sure to backup Mantis code (which includes your configs +
+                Make sure to backup MantisBT code (which includes your configs +
                 possibly customization), issue attachments / project documents, and
                 database contents.
             </para>
@@ -263,19 +263,19 @@
             <title>CVS Integration</title>
 
 
-            <para>CVS integration allows Mantis to register commits to the CVS
+            <para>CVS integration allows MantisBT to register commits to the CVS
                 source control system into corresponding issue notes in the issue
-                tracker.The setup requires that the mantis installation be
+                tracker.  The setup requires that the MantisBT installation be
                 accessible on the computer running the CVS server. A copy of the
-                Mantis config_inc.php file must be present.Note that the mysql
+                MantisBT config_inc.php file must be present.Note that the mysql
                 database also needs to be accessible from the cvs machine. That is,
-                "localhost" for $g_hostname won't work unless CVS and Mantis are
+                "localhost" for $g_hostname won't work unless CVS and MantisBT are
                 hosted on the same machine.To activate the integration, the
                 following line to the cvs "commitinfo" file. (Instructions to edit
                 this file are in any number of CVS primers).
                 ALL /usr/bin/php /path_to_mantis/core/checkin.php
                 This will pass the commit message to checkin.php for all commits.
-                If the stringissue #nnnn is found in the commit message, the Mantis
+                If the stringissue #nnnn is found in the commit message, the MantisBT
                 corresponding to "nnnn" will have the CVS commit message added as an
                 issue note to the issue. Multiple issues can be listed.This feature
                 is configured through config_inc.php and through custom
@@ -303,15 +303,15 @@
                 your data in the future. See the
                 <ulink url="manual.installation.backups.html">Backups</ulink>
                 page for details.
-                To uninstall Mantis:
+                To uninstall MantisBT:
                 <itemizedlist>
                     <listitem>
-                        <para>Delete the Mantis directory and all files and
+                        <para>Delete the MantisBT directory and all files and
                             subdirectories.
                         </para>
                     </listitem>
                     <listitem>
-                        <para>Drop all Mantis tables from the database, these can be
+                        <para>Drop all MantisBT tables from the database, these can be
                             identified by the configured prefix for the installation. The
                             default prefix is 'mantis'.
                         </para>
@@ -323,7 +323,7 @@
                     </listitem>
                 </itemizedlist>
                 If you have the permissions to create/drop databases and you have a
-                specific database for Mantis that does not contain any other data,
+                specific database for MantisBT that does not contain any other data,
                 you can drop the whole database.
             </para>
 

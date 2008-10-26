@@ -21,7 +21,7 @@
                 <term>$g_db_username</term>
                 <listitem>
                     <para>User name to use for connecting to the database. The user
-                        needs to have read/write access to the Mantis database. The default
+                        needs to have read/write access to the MantisBT database. The default
                         user name is "root".
                     </para>
                 </listitem>
@@ -37,7 +37,7 @@
             <varlistentry>
                 <term>$g_database_name</term>
                 <listitem>
-                    <para>Name of database that contains Mantis tables.  The default name is 'bugtracker'.</para>
+                    <para>Name of database that contains MantisBT tables.  The default name is 'bugtracker'.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
@@ -71,8 +71,8 @@
                 <listitem>
                     <para>URL to your installation as seen from the web browser; this
                         is what you type into the URL field. Requires trailing '/'
-                        character. eg. 'http://www.example.com/mantis/'.  In the following example
-                        https protocol is used: eg. 'https://www.example.com/mantis/'.  MantisBT will default this to
+                        character. eg. 'http://www.example.com/mantisbt/'.  In the following example
+                        https protocol is used: eg. 'https://www.example.com/mantisbt/'.  MantisBT will default this to
                         the correct value. However, in some cases it might be necessary to
                         override the default.  This is typically needed when an installation can be
 			accessed by multiple URLs (internal vs external).
@@ -101,7 +101,7 @@
                 <listitem>
                     <para>This is the absolute file system path to the MantisBT installation, it is
                         defaulted to the directory where config_defaults_inc.php resides.
-                        Requires trailing '/' character (eg. '/usr/apache/htdocs/mantis/').
+                        Requires trailing '/' character (eg. '/usr/apache/htdocs/mantisbt/').
                     </para>
                 </listitem>
             </varlistentry>
@@ -264,7 +264,7 @@
                 <term>$g_webmaster_email</term>
                 <listitem>
                     <para>The webmaster's e-mail address. This address is displayed in
-                        the bottom of all Mantis
+                        the bottom of all MantisBT
                         pages. webmaster@example.com
                     </para>
                 </listitem>
@@ -273,7 +273,7 @@
                 <term>$g_from_email</term>
                 <listitem>
                     <para>The email address to be used as the source of all emails
-                        sent by Mantis. noreply@example.com
+                        sent by MantisBT. noreply@example.com
                     </para>
                 </listitem>
             </varlistentry>
@@ -363,7 +363,7 @@
                     <para>This defines whether users should receive emails for their
                         own actions. This option is defaulted to OFF, hence, users do not
                         receive email notification for their own actions.
-                        This can be a source for confusions for users upgrading from Mantis
+                        This can be a source for confusions for users upgrading from MantisBT
                         0.17.x versions, since in these versions users used to get notified
                         of their own actions.
                     </para>
@@ -499,7 +499,7 @@
             </varlistentry>
         </variablelist>
 
-        <para>Mantis uses flags and a threshold system to generate emails on
+        <para>MantisBT uses flags and a threshold system to generate emails on
             events. For each new event, email is sent to:
             <itemizedlist>
                 <listitem>
@@ -564,7 +564,7 @@
             <varlistentry>
                 <term>$g_show_version</term>
                 <listitem>
-                    <para>Whether to show the Mantis version at the bottom of each
+                    <para>Whether to show the MantisBT version at the bottom of each
                         page or not. Default is ON.
                     </para>
                 </listitem>
@@ -578,7 +578,7 @@
             <varlistentry>
                 <term>$g_default_language</term>
                 <listitem>
-                    <para>This is the language used by default in Mantis.  This may be set
+                    <para>This is the language used by default in MantisBT.  This may be set
 		    to 'auto' where MantisBT will try to determine the language from the browser.
                     </para>
                 </listitem>
@@ -588,15 +588,15 @@
                 <listitem>
                     <para>This is to be set to an array of languages that are
                         available for users to choose from. The default value includes all
-                        languages supported by Mantis. The administrator can limit the
+                        languages supported by MantisBT. The administrator can limit the
                         languages available for users to choose from by overriding this
                         value. For example, to support English, French and German include
                         the following code: array( 'english', 'french', 'german'
                         ); Of course, administrators can also add their own languages
                         by translating the strings and creating their own language files.
                         You are encouraged to share any translation work that you do with
-                        the Mantis team. This will ensure that the newly created language
-                        file is maintained with future Mantis releases.All language files
+                        the MantisBT team. This will ensure that the newly created language
+                        file is maintained with future MantisBT releases.All language files
                         reside in the lang/ folder. They are all named according to the
                         following pattern: strings_&lt;language&gt;.txt.
                     </para>
@@ -605,9 +605,9 @@
             <varlistentry>
                 <term>$g_fallback_language</term>
                 <listitem>
-                    <para>This is the language used if Mantis cannot determine the
+                    <para>This is the language used if MantisBT cannot determine the
                         language from the browser. It defaults to 'english'.As of 0.19.0,
-                        this may be set to 'auto' where Mantis will try to determine the
+                        this may be set to 'auto' where MantisBT will try to determine the
                         language from the browser.
                     </para>
                 </listitem>
@@ -879,7 +879,7 @@
     <section>
         <title>JpGraph</title>
         <para>Jpgraph is a package that is used to render graphs. It is
-            used by Mantis to provide the users with graphs that capture the
+            used by MantisBT to provide the users with graphs that capture the
             state of the bugs database. Following are the configuration options
             that are related to configuring it:
         </para>
@@ -1218,7 +1218,7 @@
         <title>Summary</title>
         <para>These are the settings that are used to configuration
             options related to the Summary page. This page contains statistics
-            about the bugs in Mantis.
+            about the bugs in MantisBT.
         </para>
         <variablelist>
             <varlistentry>
@@ -1283,7 +1283,7 @@
     <section>
         <title>File Upload</title>
 
-        <para>Mantis allows users to upload file attachements and
+        <para>MantisBT allows users to upload file attachements and
             associated them with bugs as well as projects. Bug attachments /
             project documents can be uploaded to the webserver, database, or an
             FTP server. When bugs are uploaded to the webserver they are
@@ -1295,7 +1295,7 @@
             </ulink>
             .
         </para>
-        <para>Mantis FAQ</para>
+        <para>MantisBT FAQ</para>
 
         <variablelist>
             <varlistentry>
@@ -1963,8 +1963,8 @@
                 <listitem>
                     <para>This is specifies to the path under which a cookie is
                         visible. All scripts in this directory and its sub-directories will
-                        be able to access Mantis cookies. Default value is '/'. It is
-                        recommended to set this to the actual Mantis path.
+                        be able to access MantisBT cookies. Default value is '/'. It is
+                        recommended to set this to the actual MantisBT path.
                     </para>
                 </listitem>
             </varlistentry>
@@ -1990,9 +1990,9 @@
                 <term>$g_cookie_prefix</term>
                 <listitem>
                     <para>This should be set to a unique identifier which does not
-                        include spaces. Again, this should be unique per Mantis
+                        include spaces. Again, this should be unique per MantisBT
                         installation, specially if the $g_cookie_path is not restricting
-                        the cookies scope to the actual Mantis directory.
+                        the cookies scope to the actual MantisBT directory.
                     </para>
                 </listitem>
             </varlistentry>
@@ -2004,8 +2004,8 @@
     <section>
         <title>Database Tables</title>
 
-        <para>Mantis enables users to configure a table prefix for all its
-            tables. This is useful to be able to have multiple Mantis
+        <para>MantisBT enables users to configure a table prefix for all its
+            tables. This is useful to be able to have multiple MantisBT
             installation in the same database. The advantage of that is for
             users who are limited by their ISP to have one database.
         </para>
@@ -2094,12 +2094,12 @@
         <para>Sending reminders is a feature where a user can notify /
             remind other users about a bug. In the past, only selected users
             like the managers, or developers would get notified about bugs.
-            However, these people can not invite other people (through Mantis)
+            However, these people can not invite other people (through MantisBT)
             to look at or monitor these bugs.
         </para>
         <para>This feature is useful if the Manager needs to get feedback
             from testers / requirements team about a certain bug. It avoid
-            needing this person to do this manual outside Mantis. It also
+            needing this person to do this manual outside MantisBT. It also
             records the history of such reminders.
         </para>
 
@@ -2131,13 +2131,13 @@
         <title>Bug History</title>
 
 
-        <para>Bug history is a feature where Mantis tracks all
+        <para>Bug history is a feature where MantisBT tracks all
             modifications that are made to bugs. These include everything
             starting from its creation, till it is closed. For each change, the
             bug history will record the time stamp, user who made the change,
             field that changed, old value, and new value.
         </para>
-        <para>Independent of the these settings, Mantis will always track
+        <para>Independent of the these settings, MantisBT will always track
             the changes to a bug and add them to its history.
         </para>
         <variablelist>
@@ -2377,7 +2377,7 @@
     <section>
         <title>System Logging</title>
         <para>The system logging interface is used to extract detailed
-            debugging information for the Mantis system. It can also serve as
+            debugging information for the MantisBT system. It can also serve as
             an audit trail for user actions.
         </para>
 
@@ -2414,7 +2414,7 @@
                 <term>$g_log_destination</term>
                 <listitem>
                     <para>specifies the file where the log data goes. This file must
-                        be writable by the web server userid running mantis. Right now,
+                        be writable by the web server userid running MantisBT. Right now,
                         only "file:&lt;file path&gt;" is supported. For example,
                         $g_log_destination = 'file:/tmp/mantis_log';
                         See http://www.php.net/error_log for details.

@@ -20,7 +20,7 @@
             from your Account Options.SignupHere you can signup for a new
             account. You must supply a valid email address and select a unique
             username. Your randomly generated password will be emailed to your
-            email account. If Mantis is setup so that the email password is not
+            email account. If MantisBT is setup so that the email password is not
             to be emailed, newly generated accounts will have an empty
             password.
         </para>
@@ -81,7 +81,7 @@
             resolved.The text in the "Updated" column will be bold if the issue
             has changed in the last "Changed(hrs)" field which is specified in
             the viewing filters.Each table row is color coded according to the
-            issue status. The colors can be customised through Mantis
+            issue status. The colors can be customised through MantisBT
             <ulink url="manual.configuration.html">Configuration</ulink>
             .Severitiesblock
             - prevents further work/progress from being made
@@ -382,7 +382,7 @@
                         <para>afile directory used to store attachments for issues and
                             documents associated with the project. This folder is located on
                             the webserver, it can be absolute path or path relative to the main
-                            Mantis folder. Note that this is only used if the files are stored
+                            MantisBT folder. Note that this is only used if the files are stored
                             on disk or via FTP. In case of FTP, the cached version that is
                             saved on the webserver, is stored in the specified path.
                         </para>
@@ -636,7 +636,7 @@
             <title>Manage Configuration</title>
 
 
-            <para>This set of pages control the configuration of the Mantis
+            <para>This set of pages control the configuration of the MantisBT
                 system. Note that the configuration items displayed may be on a
                 project by project basis.These pages serve two purposes. First,
                 they will display the settings for the particular aspects of the
@@ -932,7 +932,7 @@
                 <title>Email Notifications</title>
 
                 <para>This page sets the system defaults for sending emails on
-                    issue related events.Mantis uses flags and a threshold system to
+                    issue related events.  MantisBT uses flags and a threshold system to
                     generate emails on events. For each new event, email is sent to:
                     <itemizedlist>
                         <listitem>
@@ -1070,26 +1070,15 @@
         <title>News Syndication</title>
 
 
-        <para>News syndication was added in Mantis 0.18.2. The syndication
-            is done using the RSS v2.0 protocol.Up until Mantis 1.0.x releases,
-            the news syndication were only available for:
-            <itemizedlist>
-                <listitem>
-                    <para>Public Projects</para>
-                </listitem>
-                <listitem>
-                    <para>Installations with anonymous access</para>
-                </listitem>
-            </itemizedlist>
-            If the above two conditions are not satisfied, then an "Access
-            Denied" message will be prompted.In Mantis 1.1, support for
-            authenticated news feeds was added. Authenticated feeds takes a
+        <para>MantisBT supports news syndication using RSS v2.0 protocol.
+            MantisBT also supports authenticated news feeds for private projects
+            or installations where anonymous access is not enabled. Authenticated feeds takes a
             user name and a key token that are used to authenticate the user
             and generate the feed results in the context of the user's access
             rights (i.e. the same as what the user would see if they were to
-            logged into Mantis).To get access to the News RSS as anonymous
+            logged into MantisBT).To get access to the News RSS as anonymous
             user, visit the following
-            page:&nbsp;http://www.example.com/mantis/news_rss.php&nbsp;While a
+            page:&nbsp;http://www.example.com/mantisbt/news_rss.php&nbsp;While a
             user is logged in, the RSS links provided in the UI will always
             provide links to the authenticated feeds, if no user is logged in
             (i.e. anonymous), then anonymous links will be provided.

@@ -5,7 +5,7 @@
 		<title>General Concepts</title>
 
 		<para>
-			The event system in Mantis uses the concept of signals and hooked events
+			The event system in MantisBT uses the concept of signals and hooked events
 			to drive dynamic actions.  Functions, or plugin methods, can be hooked
 			during runtime to various defined events, which can be signalled at any
 			point to initiate execution of hooked functions.
@@ -106,7 +106,7 @@ event_hook( $events, [$plugin] );
 		<title>Event Types</title>
 
 		<para>
-			There are five standard event types currently defined in Mantis.  Each type
+			There are five standard event types currently defined in MantisBT.  Each type
 			is a generalization of a certain "class" of solution to the problems that
 			the event system is designed to solve.  Each type allows for simplifying
 			a different set of communication needs between event signals and hooked

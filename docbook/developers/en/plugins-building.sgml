@@ -6,7 +6,7 @@
 			bare basics all the way up to advanced topics.  A general understanding of
 			the concepts covered in the last section is assumed, as well as knowledge
 			of how the event system works.  Later topics in this section will require
-			knowledge of database schemas and how they are used with Mantis.
+			knowledge of database schemas and how they are used with MantisBT.
 		</para>
 
 		<para>
@@ -21,7 +21,7 @@
 
 			<para>
 				This section will introduce the general concepts of plugin structure,
-				and how to get a barebones plugin working with Mantis.  Not much will be
+				and how to get a barebones plugin working with MantisBT.  Not much will be
 				mentioned yet on the topic of adding functionality to plugins, just how to
 				get the development process rolling.
 			</para>
@@ -30,7 +30,7 @@
 				<title>Plugin Structure</title>
 
 				<para>
-					The backbone of every plugin is what Mantis calls the "basename", a
+					The backbone of every plugin is what MantisBT calls the "basename", a
 					succinct, and most importantly, unique name that identifies the plugin.
 					It may not contain any spacing or special characters beyond the ASCII
 					upper- and lowercase alphabet, numerals, and underscore.  This is used
@@ -70,7 +70,7 @@ Example/
 					Once your plugin defines its class, implements the <code>register()</code>
 					method, and sets at least the name and version properties, it is then
 					considered a "complete" plugin, and can be loaded and installed within
-					Mantis' plugin manager.  At this stage, our Example plugin, with all the
+					MantisBT' plugin manager.  At this stage, our Example plugin, with all the
 					possible plugin properties set at registration, looks like this:
 				</para>
 
@@ -85,7 +85,7 @@ class ExamplePlugin extends MantisPlugin {
 
         $this->version = '1.0';     # Plugin version string
         $this->requires = array(    # Plugin dependencies, array of basename => version pairs
-            'MantisCore' => '1.2',  #   Should always depend on an appropriate version of Mantis
+            'MantisCore' => '1.2',  #   Should always depend on an appropriate version of MantisBT
             );
 
         $this->author = '';         # Author/team name
@@ -96,7 +96,7 @@ class ExamplePlugin extends MantisPlugin {
 				</programlisting>
 
 				<para>
-					This alone will allow the Example plugin to be installed with Mantis, and
+					This alone will allow the Example plugin to be installed with MantisBT, and
 					is the foundation of any plugin.  More of the plugin development process
 					will be continued in the next section.
 				</para>

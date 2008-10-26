@@ -561,8 +561,8 @@ functions section.</para>
         <formalpara>
             <title>Conclusion</title><para>We have covered how enumerations work in general, and how
                 to customise one of them. If you are interested in customising
-                other enumerations, a good starting point would be to go to "Mantis
-                Enum Strings" section inconfig_defaults_inc.php. This section
+                other enumerations, a good starting point would be to go to "MantisBT
+                Enum Strings" section in config_defaults_inc.php. This section
                 defines all enumerations that are used by MantisBT.
                 For versions that are older than 0.18.0, custom_*_inc.php files are
                 not supported, and hence you will need to change in the actual

@@ -58,13 +58,13 @@ function custom_function_override_changelog_print_issue( $p_issue_id, $p_issue_l
 
         <para>Another common requirement is to be able to link to the change log of a specific project from the project's main website.  This can be done by a link that looks like the one below.  The project id can be figured out by going to the management page for the project and getting the value of project_id field form the URL.
 <programlisting>
-http://www.example.com/mantis/changelog_page.php?project_id=1
+http://www.example.com/mantisbt/changelog_page.php?project_id=1
 </programlisting>
         </para>
 
         <para>Another approach is to go to the project page and from there users can get to multiple other locations relating to the project include the change log.  This can be done by a URL like the following:
 <programlisting>
-http://www.example.com/mantis/project_page.php?project_id=1
+http://www.example.com/mantisbt/project_page.php?project_id=1
 </programlisting>
         </para>
 
@@ -135,13 +135,13 @@ function custom_function_override_roadmap_print_issue( $p_issue_id, $p_issue_lev
 
         <para>Another common requirement is to be able to link to the roadmap of a specific project from the project's main website.  This can be done by a link that looks like the one below.  The project id can be figured out by going to the management page for the project and getting the value of project_id field form the URL.
 <programlisting>
-http://www.example.com/mantis/roadmap_page.php?project_id=1
+http://www.example.com/mantisbt/roadmap_page.php?project_id=1
 </programlisting>
         </para>
 
         <para>Another approach is to go to the project page and from there users can get to multiple other locations relating to the project include the roadmap.  This can be done by a URL like the following:
 <programlisting>
-http://www.example.com/mantis/project_page.php?project_id=1
+http://www.example.com/mantisbt/project_page.php?project_id=1
 </programlisting>
         </para>
 

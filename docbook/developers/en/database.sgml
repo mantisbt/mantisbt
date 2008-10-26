@@ -5,7 +5,7 @@
 		<title>Schema Definition</title>
 
 		<para>
-			TODO: Discuss the ADODB datadict formats and the format Mantis expects for schema deinitions.
+			TODO: Discuss the ADODB datadict formats and the format MantisBT expects for schema deinitions.
 		</para>
 	</sect1>
 
@@ -13,7 +13,7 @@
 		<title>Installation / Upgrade Process</title>
 
 		<para>
-			TODO: Discuss how Mantis handles a database installation / upgrade, including the use of the config system and schema definitions.
+			TODO: Discuss how MantisBT handles a database installation / upgrade, including the use of the config system and schema definitions.
 		</para>
 	</sect1>
 </chapter>

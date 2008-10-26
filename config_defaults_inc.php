@@ -38,7 +38,7 @@
 	# For more details see http://manual.mantisbt.org/
 
 	################################
-	# Mantis Database Settings
+	# MantisBT Database Settings
 	################################
 
 	# --- database variables ---------
@@ -60,7 +60,7 @@
 	$g_db_type				= 'mysql';
 
 	############################
-	# Mantis Path Settings
+	# MantisBT Path Settings
 	############################
 
 	# --- path variables --------------
@@ -132,7 +132,7 @@
 
 		$g_path	= $t_protocol . '://' . $t_host . $t_path.'/';
 	} else {
-		$g_path	= 'http://www.example.com/mantis/';
+		$g_path	= 'http://www.example.com/mantisbt/';
 	}
 
 	# path to your images directory (for icons)
@@ -241,7 +241,7 @@
 	$g_max_lost_password_in_progress_count = 3;
 
 	#############################
-	# Mantis Email Settings
+	# MantisBT Email Settings
 	#############################
 
 	# --- email variables -------------
@@ -387,18 +387,18 @@
 	$g_email_padding_length	= 28;
 
 	#############################
-	# Mantis Version String
+	# MantisBT Version String
 	#############################
 
 	# --- version variables -----------
 	# Set to off by default to not expose version to users
 	$g_show_version			= OFF;
 
-	# String appended to the Mantis version when displayed to the user
+	# String appended to the MantisBT version when displayed to the user
 	$g_version_suffix		= '';
 
 	################################
-	# Mantis Language Settings
+	# MantisBT Language Settings
 	################################
 
 	# --- language settings -----------
@@ -496,11 +496,11 @@
 	$g_fallback_language	= 'english';
 
 	###############################
-	# Mantis Display Settings
+	# MantisBT Display Settings
 	###############################
 
 	# --- sitewide variables ----------
-	$g_window_title			= 'Mantis';	 # browser window title
+	$g_window_title			= 'MantisBT';	 # browser window title
 	$g_page_title			= '';	 # title at top of html page (empty by default, since there is a logo now)
 
 	# --- administrative checks -------
@@ -607,7 +607,7 @@
 	# Show user avatar
 	# the current implementation is based on http://www.gravatar.com
 	# users will need to register there the same address used in 
-	# this mantis installation to have their avatar shown
+	# this MantisBT installation to have their avatar shown
 	# Please note: upon registration or avatar change, it takes some time for
 	# the updated gravatar images to show on sites
 	$g_show_avatar = OFF;
@@ -623,7 +623,7 @@
 	$g_show_roadmap_dates = ON;
 
 	############################
-	# Mantis JPGRAPH Addon
+	# MantisBT JPGRAPH Addon
 	############################
 
 	# --- jpgraph settings --- #
@@ -664,7 +664,7 @@
 	        'blueviolet','chartreuse','magenta','purple3','teal','tan','olivedrab','magenta');
 
 	############################
-	# Mantis Time Settings
+	# MantisBT Time Settings
 	############################
 
 	# time for 'permanent' cookie to live in seconds (1 year)
@@ -680,7 +680,7 @@
 	$g_long_process_timeout	= 0;
 
 	############################
-	# Mantis Date Settings
+	# MantisBT Date Settings
 	############################
 
 	# --- date format settings --------
@@ -692,7 +692,7 @@
 	$g_complete_date_format = 'Y-m-d H:i T';
 
 	############################
-	# Mantis News Settings
+	# MantisBT News Settings
 	############################
 
 	# --- Limit News Items ------------
@@ -711,7 +711,7 @@
 	$g_private_news_threshold	= DEVELOPER;
 
 	##################################
-	# Mantis Default Preferences
+	# MantisBT Default Preferences
 	##################################
 
 	# --- signup default ---------------
@@ -778,7 +778,7 @@
 	# default_language - is set to site language
 
 	###############################
-	# Mantis Summary Settings
+	# MantisBT Summary Settings
 	###############################
 
 	# how many reporters to show
@@ -797,7 +797,7 @@
 	$g_view_summary_threshold	= MANAGER;
 
 	###############################
-	# Mantis Bugnote Settings
+	# MantisBT Bugnote Settings
 	###############################
 
 	# --- bugnote ordering ------------
@@ -805,7 +805,7 @@
 	$g_bugnote_order		= 'DESC';
 
 	################################
-	# Mantis Bug History Settings
+	# MantisBT Bug History Settings
 	################################
 
 	# --- bug history visible by default when you view a bug ----
@@ -817,7 +817,7 @@
 	$g_history_order		= 'ASC';
 
 	###############################
-	# Mantis Reminder Settings
+	# MantisBT Reminder Settings
 	###############################
 
 	# are reminders stored as bugnotes
@@ -832,7 +832,7 @@
 	$g_default_reminder_view_status = VS_PUBLIC;
 
 	###################################
-	# Mantis Sponsorship Settings
+	# MantisBT Sponsorship Settings
 	###################################
 
 	# Whether to enable/disable the whole issue sponsorship feature
@@ -862,7 +862,7 @@
 	$g_minimum_sponsorship_amount = 5;
 
 	###################################
-	# Mantis File Upload Settings
+	# MantisBT File Upload Settings
 	###################################
 
 	# --- file upload settings --------
@@ -912,7 +912,7 @@
 	$g_absolute_path_default_upload_folder = '';
 
 	############################
-	# Mantis HTML Settings
+	# MantisBT HTML Settings
 	############################
 
 	# --- html tags -------------------
@@ -941,7 +941,7 @@
 	$g_wrap_in_preformatted_text = ON;
 
 	##########################
-	# Mantis HR Settings
+	# MantisBT HR Settings
 	##########################
 
 	# --- hr --------------------------
@@ -949,7 +949,7 @@
 	$g_hr_width				= 50;
 
 	#############################
-	# Mantis LDAP Settings
+	# MantisBT LDAP Settings
 	#############################
 
 	# look in README.LDAP for details
@@ -1070,7 +1070,7 @@
 	$g_allow_delete_own_attachments = OFF;
 
 	############################
-	# Mantis Misc Settings
+	# MantisBT Misc Settings
 	############################
 
 	# --- access level thresholds (*_threshold) ---
@@ -1232,7 +1232,7 @@
 
 	# --- login method ----------------
 	# CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH
-	# You can simply change this at will. Mantis will try to figure out how the passwords were encrypted.
+	# You can simply change this at will. MantisBT will try to figure out how the passwords were encrypted.
 	$g_login_method				= MD5;
 
 	# --- limit reporters -------------
@@ -1337,14 +1337,14 @@
 	# threshold for users to view the system configurations
 	$g_view_configuration_threshold = DEVELOPER;
 
-	# threshold for users to set the system configurations generically via Mantis web interface.
+	# threshold for users to set the system configurations generically via MantisBT web interface.
 	# WARNING: Users who have access to set configuration via the interface MUST be trusted.  This is due
 	# to the fact that such users can set configurations to PHP code and hence there can be a security
 	# risk if such users are not trusted.
 	$g_set_configuration_threshold = ADMINISTRATOR;
 
 	################################
-	# Mantis Look and Feel Variables
+	# MantisBT Look and Feel Variables
 	################################
 
 	# --- status color codes ----------
@@ -1374,7 +1374,7 @@
 	$g_colour_global = 'LightBlue';
 
 	###############################
-	# Mantis Cookie Variables
+	# MantisBT Cookie Variables
 	###############################
 
 	# --- cookie path ---------------
@@ -1398,7 +1398,7 @@
 	$g_bug_list_cookie		= '%cookie_prefix%_BUG_LIST_COOKIE';
 
 	#######################################
-	# Mantis Filter Variables
+	# MantisBT Filter Variables
 	#######################################
 	$g_filter_by_custom_fields = ON;
 	$g_filter_custom_fields_per_row = 8;
@@ -1417,7 +1417,7 @@
 	$g_create_short_url = 'http://tinyurl.com/create.php?url=%s';
 
 	#######################################
-	# Mantis Database Table Variables
+	# MantisBT Database Table Variables
 	#######################################
 
 	# --- table prefix ----------------
@@ -1460,12 +1460,12 @@
 	$g_db_table['mantis_email_table']					= '%db_table_prefix%_email%db_table_suffix%';
 
 	###########################
-	# Mantis Enum Strings
+	# MantisBT Enum Strings
 	###########################
 
 	# --- enum strings ----------------
 	# status from $g_status_index-1 to 79 are used for the onboard customization (if enabled)
-	# directly use Mantis to edit them.
+	# directly use MantisBT to edit them.
 	$g_access_levels_enum_string		= '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
 	$g_project_status_enum_string		= '10:development,30:release,50:stable,70:obsolete';
 	$g_project_view_state_enum_string	= '10:public,50:private';
@@ -1487,14 +1487,14 @@
 	$g_custom_field_type_enum_string    = '0:string,1:numeric,2:float,3:enum,4:email,5:checkbox,6:list,7:multiselection list,8:date,9:radio';
 
 	#############################
-	# Mantis Javascript Variables
+	# MantisBT Javascript Variables
 	#############################
 
 	# allow the use of Javascript?
 	$g_use_javascript		= ON;
 
 	###########################
-	# Mantis Speed Optimisation
+	# MantisBT Speed Optimisation
 	###########################
 
 	# Use compression of generated html if browser supports it
@@ -1518,7 +1518,7 @@
 	###########################
 
 	# Specify your top/bottom include file (logos, banners, etc)
-	# if a top file is supplied, the default Mantis logo at the top will be hidden
+	# if a top file is supplied, the default MantisBT logo at the top will be hidden
 	$g_bottom_include_page			= '%absolute_path%';
 	$g_top_include_page				= '%absolute_path%';
 	# CSS file
@@ -1541,8 +1541,8 @@
 	###########################
 
 	# An array of headers to be sent with each page.
-	# For example, to allow your mantis installation to be viewed in a frame in IE 6
-	#  when the frameset is not at the same hostname as the mantis install, you need
+	# For example, to allow your MantisBT installation to be viewed in a frame in IE 6
+	#  when the frameset is not at the same hostname as the MantisBT install, you need
 	#  to add a P3P header.  You could try something like 'P3P: CP="CUR ADM"' in your
 	#  config file, but make sure to check that the your policy actually matches with
 	#  what you are promising. See
@@ -1643,8 +1643,8 @@
 	#
 	# $g_log_destination specifies the file where the data goes
 	#   right now, only "file:<file path>" is supported
-	#   e.g. (Linux), $g_log_destination = 'file:/tmp/mantis.log';
-	#   e.g. (Windows), $g_log_destination = 'file:c:/temp/mantis.log';
+	#   e.g. (Linux), $g_log_destination = 'file:/tmp/mantisbt.log';
+	#   e.g. (Windows), $g_log_destination = 'file:c:/temp/mantisbt.log';
 	#   see http://www.php.net/error_log for details
 	$g_log_level = LOG_NONE;
 	$g_log_destination = '';
@@ -1918,7 +1918,7 @@
 	# Wiki Engine (supported engines: 'dokuwiki', 'mediawiki', 'twiki', 'wikka', 'xwiki')
 	$g_wiki_engine = '';
  
-	# Wiki namespace to be used as root for all pages relating to this mantis installation.
+	# Wiki namespace to be used as root for all pages relating to this MantisBT installation.
 	$g_wiki_root_namespace = 'mantis';
  
 	# URL under which the wiki engine is hosted.  Must be on the same server.
@@ -2005,7 +2005,7 @@
 	# Twitter Settings
 	#############################
 
-	# The integration with twitter allows for a Mantis installation to post
+	# The integration with twitter allows for a MantisBT installation to post
 	# updates to a twitter account.  This feature will be disabled if username
 	# is empty or if the curl extension is not enabled.
 

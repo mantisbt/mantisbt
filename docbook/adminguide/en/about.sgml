@@ -271,7 +271,7 @@ whenever an issue is resolved.  Twitter users are encouraged to follow
             designed to be easily modifiable, customizable, and upgradeable.
             Anyone with intermediate PHP and MySQL experience should be able to
             customize MantisBT to suit their needs.  Here are some of the
-            guidelines that are followed in Mantis:
+            guidelines that are followed in MantisBT:
         </para>
         <itemizedlist>
             <listitem>

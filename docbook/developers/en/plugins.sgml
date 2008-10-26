@@ -5,8 +5,8 @@
 		<title>General Concepts</title>
 
 		<para>
-			The plugin system for Mantis is designed as a lightweight extension to the
-			standard Mantis API, allowing for simple and flexible addition of new
+			The plugin system for MantisBT is designed as a lightweight extension to the
+			standard MantisBT API, allowing for simple and flexible addition of new
 			features and customization of core operations.  It takes advantage ofthe new
 			<link linkend="dev.events">Event System</link> to offer developers rapid
 			creation and testing of extensions, without the need to modify core files.
@@ -26,16 +26,16 @@
 		</para>
 
 		<para>
-			At page load, the core Mantis API will find and process any conforming
+			At page load, the core MantisBT API will find and process any conforming
 			plugins.  Plugins will be checked for minimal information, such as its name,
 			version, and dependencies.  Plugins that meet requirements will then be
-			initialized.  At this point, Mantis will interact with the plugins when
+			initialized.  At this point, MantisBT will interact with the plugins when
 			appropriate.
 		</para>
 
 		<para>
 			The plugin system includes a special set of API functions that provide
-			convenience wrappers around the more useful Mantis API calls, including
+			convenience wrappers around the more useful MantisBT API calls, including
 			configuration, language strings, and link generation.  This API allows
 			plugins to use core API's in "sandboxed" fashions to aid interoperation
 			with other plugins, and simplification of common functionality.
