@@ -107,10 +107,16 @@ function html_page_top1( $p_page_title = null ) {
 	html_content_type();
 	include( config_get( 'meta_include_file' ) );
 	html_rss_link();
+
 	$t_favicon_image = config_get( 'favicon_image' );
 	if( !is_blank( $t_favicon_image ) ) {
 		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
 	}
+
+	// Advertise the availability of the browser search plug-ins.
+	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="http://localhost/mantisbt/browser_search_plugin.php?type=text" />';
+	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="http://localhost/mantisbt/browser_search_plugin.php?type=id" />';
+
 	html_title( $p_page_title );
 	html_head_javascript();
 }
