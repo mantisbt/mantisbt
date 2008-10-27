@@ -484,4 +484,7 @@ echo "($v_start - $v_end / $t_bug_count)";
 </table>
 
 <?php
+// Free the memory allocated for the rows in this box since it is not longer needed.
+unset( $rows );
+
 mark_time( 'end loop' );

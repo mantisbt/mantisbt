@@ -768,7 +768,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 			# prepare the new diskfile name and then copy the file
 			$t_file_path = dirname( $t_bug_file['folder'] );
-			$t_new_diskfile_name = $t_file_path . file_generate_unique_name( 'bug-' . $p_file_name, $t_file_path );
+			$t_new_diskfile_name = $t_file_path . file_generate_unique_name( 'bug-' . $t_bug_file['filename'], $t_file_path );
 			$t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
 			if(( config_get( 'file_upload_method' ) == DISK ) ) {
 				copy( $t_bug_file['diskfile'], $t_new_diskfile_name );

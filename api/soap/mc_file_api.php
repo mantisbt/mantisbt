@@ -164,12 +164,16 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
+
+	$t_bug_id = $row['bug_id'];
+	$t_project_id = $row['project_id'];
+	$t_diskfile = $row['diskfile'];
+	$t_content = base64_encode( $row['content'] );
 
 	# Check access rights
 	switch( $p_type ) {
 		case 'bug':
-			if( !mci_file_can_download_bug_attachments( $v_bug_id, $p_user_id ) ) {
+			if( !mci_file_can_download_bug_attachments( $t_bug_id, $p_user_id ) ) {
 				return new soap_fault( 'Client', '', 'Access Denied' );
 			}
 			break;
@@ -179,7 +183,7 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 			if( OFF == config_get( 'enable_project_documentation' ) ) {
 				return new soap_fault( 'Client', '', 'Access Denied' );
 			}
-			if( !access_has_project_level( config_get( 'view_proj_doc_threshold' ), $v_project_id, $p_user_id ) ) {
+			if( !access_has_project_level( config_get( 'view_proj_doc_threshold' ), $t_project_id, $p_user_id ) ) {
 				return new soap_fault( 'Client', '', 'Access Denied' );
 			}
 			break;
@@ -188,23 +192,23 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	# dump file content to the connection.
 	switch( config_get( 'file_upload_method' ) ) {
 		case DISK:
-			if( file_exists( $v_diskfile ) ) {
-				return base64_encode( mci_file_read_local( $v_diskfile ) );
+			if( file_exists( $t_diskfile ) ) {
+				return base64_encode( mci_file_read_local( $t_diskfile ) );
 			}
 			else {
 				return null;
 			}
 		case FTP:
-			if( file_exists( $v_diskfile ) ) {
-				return base64_encode( mci_file_read_local( $v_diskfile ) );
+			if( file_exists( $t_diskfile ) ) {
+				return base64_encode( mci_file_read_local( $t_diskfile ) );
 			}
 			else {
 				$ftp = file_ftp_connect();
-				file_ftp_get( $ftp, $v_diskfile, $v_diskfile );
+				file_ftp_get( $ftp, $t_diskfile, $t_diskfile );
 				file_ftp_disconnect( $ftp );
-				return base64_encode( mci_file_read_local( $v_diskfile ) );
+				return base64_encode( mci_file_read_local( $t_diskfile ) );
 			}
 		default:
-			return base64_encode( $v_content );
+			return $t_content;
 	}
 }

@@ -155,6 +155,7 @@ function email_is_valid( $p_email ) {
 			}
 		}
 		elseif( ON == config_get( 'check_mx_record' ) ) {
+			$temp = '';
 
 			# Check for valid mx records
 			if( getmxrr( $t_domain, $temp ) ) {

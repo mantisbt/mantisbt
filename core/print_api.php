@@ -372,21 +372,28 @@ function print_news_item_option_list() {
 
 	for( $i = 0;$i < $news_count;$i++ ) {
 		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
-		$v_headline = string_display( $v_headline );
+
+		$t_headline = string_display( $row['headline'] );
+		$t_announcement = $row['announcement'];
+		$t_view_state = $row['view_state'];
+		$t_id = $row['id'];
 
 		$t_notes = array();
 		$t_note_string = '';
-		if( 1 == $v_announcement ) {
+
+		if ( 1 == $t_announcement ) {
 			array_push( $t_notes, lang_get( 'announcement' ) );
 		}
-		if( VS_PRIVATE == $v_view_state ) {
+
+		if ( VS_PRIVATE == $t_view_state ) {
 			array_push( $t_notes, lang_get( 'private' ) );
 		}
-		if( sizeof( $t_notes ) > 0 ) {
+
+		if ( sizeof( $t_notes ) > 0 ) {
 			$t_note_string = ' [' . implode( ' ', $t_notes ) . ']';
 		}
-		PRINT "<option value=\"$v_id\">$v_headline$t_note_string</option>";
+
+		echo "<option value=\"$t_id\">$t_headline$t_note_string</option>";
 	}
 }
 
@@ -440,8 +447,14 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 # --------------------
 # print a news item given a row in the news table.
 function print_news_entry_from_row( $p_news_row ) {
-	extract( $p_news_row, EXTR_PREFIX_ALL, 'v' );
-	print_news_entry( $v_headline, $v_body, $v_poster_id, $v_view_state, $v_announcement, $v_date_posted );
+	$t_headline = $p_news_row['headline'];
+	$t_body = $p_news_row['body'];
+	$t_poster_id = $p_news_row['poster_id'];
+	$t_view_state = $p_news_row['view_state'];
+	$t_announcement = $p_news_row['announcement'];
+	$t_date_posted = $p_news_row['date_posted'];
+
+	print_news_entry( $t_headline, $t_body, $t_poster_id, $t_view_state, $t_announcement, $t_date_posted );
 }
 
 # --------------------
@@ -649,7 +662,7 @@ function print_profile_option_list( $p_user_id, $p_select_id = '', $p_profiles =
 # prints the profiles used in a certain project
 function print_profile_option_list_for_project( $p_project_id, $p_select_id = '', $p_profiles = null ) {
 	if( '' === $p_select_id ) {
-		$p_select_id = profile_get_default( $p_user_id );
+		$p_select_id = profile_get_default( auth_get_current_user_id() );
 	}
 	if( $p_profiles != null ) {
 		$t_profiles = $p_profiles;
@@ -666,13 +679,14 @@ function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
 	echo '<option value=""></option>';
 	foreach( $p_profiles as $t_profile ) {
 		extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
-		$v_platform = string_display( $v_platform );
-		$v_os = string_display( $v_os );
-		$v_os_build = string_display( $v_os_build );
+		
+		$t_platform = string_display( $t_profile['platform'] );
+		$t_os = string_display( $t_profile['os'] );
+		$t_os_build = string_display( $t_profile['os_build'] );
 
-		echo '<option value="' . $v_id . '"';
-		check_selected( $p_select_id, $v_id );
-		echo '>' . $v_platform . ' ' . $v_os . ' ' . $v_os_build . '</option>';
+		echo '<option value="' . $t_profile['id'] . '"';
+		check_selected( $p_select_id, $t_profile['id'] );
+		echo '>' . $t_platform . ' ' . $t_os . ' ' . $t_os_build . '</option>';
 	}
 }
 
@@ -701,11 +715,11 @@ function print_news_project_option_list( $p_project_id ) {
 	$project_count = db_num_rows( $result );
 	for( $i = 0;$i < $project_count;$i++ ) {
 		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		$t_id = $row['id'];
 
-		PRINT "<option value=\"$v_id\"";
-		check_selected( $v_id, $p_project_id );
-		PRINT ">$v_name</option>";
+		PRINT "<option value=\"$t_id\"";
+		check_selected( $t_id, $p_project_id );
+		PRINT ">$t_name</option>";
 	}
 
 	# end for
@@ -1855,10 +1869,16 @@ function print_bug_attachments_list( $p_bug_id ) {
 	for( $i = 0;$i < $num_files;$i++ ) {
 		$row = $t_attachment_rows[$i];
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		
+		$t_filename = $row['filename'];
+		$t_date_added = $row['date_added'];
+		$t_filesize = $row['filesize'];
+		$t_diskfile = $row['diskfile'];
+		$t_id = $row['id'];
 
-		$t_file_display_name = string_display_line( file_get_display_name( $v_filename ) );
-		$t_filesize = number_format( $v_filesize );
-		$t_date_added = date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_date_added ) );
+		$t_file_display_name = string_display_line( file_get_display_name( $t_filename ) );
+		$t_filesize = number_format( $t_filesize );
+		$t_date_added = date( config_get( 'normal_date_format' ), db_unixtimestamp( $t_date_added ) );
 
 		if( $image_previewed ) {
 			$image_previewed = false;
@@ -1878,7 +1898,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 			$t_href_clicket = '';
 		}
 
-		$t_exists = config_get( 'file_upload_method' ) != DISK || file_exists( $v_diskfile );
+		$t_exists = config_get( 'file_upload_method' ) != DISK || file_exists( $t_diskfile );
 
 		if( !$t_exists ) {
 			print_file_icon( $t_file_display_name );
@@ -1893,13 +1913,13 @@ function print_bug_attachments_list( $p_bug_id ) {
 				PRINT " [<a class=\"small\" href=\"bug_file_delete.php?file_id=$v_id\">" . lang_get( 'delete_link' ) . '</a>]';
 			}
 
-			if(( FTP == config_get( 'file_upload_method' ) ) && file_exists( $v_diskfile ) ) {
+			if ( ( FTP == config_get( 'file_upload_method' ) ) && file_exists( $t_diskfile ) ) {
 				PRINT ' (' . lang_get( 'cached' ) . ')';
 			}
 
-			if( $t_can_download && ( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( $v_filesize != 0 ) && ( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_text_ext, true ) ) ) {
-				$c_id = db_prepare_int( $v_id );
-				$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
+			if ( $t_can_download && ( $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( $t_filesize != 0 ) && ( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_text_ext, true ) ) ) {
+				 $c_id = db_prepare_int( $t_id );
+				 $t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
 
 				echo "<script type=\"text/javascript\" language=\"JavaScript\">
 <!--
@@ -1916,19 +1936,19 @@ document.getElementById( span ).style.display = displayType;
 				PRINT "<pre>";
 				switch( config_get( 'file_upload_method' ) ) {
 					case DISK:
-						if( file_exists( $v_diskfile ) ) {
-							$v_content = file_get_contents( $v_diskfile );
+						if( file_exists( $t_diskfile ) ) {
+							$v_content = file_get_contents( $t_diskfile );
 						}
 						break;
 					case FTP:
-						if( file_exists( $v_diskfile ) ) {
-							file_get_contents( $v_diskfile );
+						if( file_exists( $t_diskfile ) ) {
+							file_get_contents( $t_diskfile );
 						}
 						else {
 							$ftp = file_ftp_connect();
-							file_ftp_get( $ftp, $v_diskfile, $v_diskfile );
+							file_ftp_get( $ftp, $t_diskfile, $t_diskfile );
 							file_ftp_disconnect( $ftp );
-							$v_content = file_get_contents( $v_diskfile );
+							$v_content = file_get_contents( $t_diskfile );
 						}
 						break;
 					default:
@@ -1945,8 +1965,7 @@ document.getElementById( span ).style.display = displayType;
 			}
 
 
-			if( $t_can_download && ( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( $v_filesize != 0 ) && ( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_image_ext, true ) ) ) {
-
+			if ( $t_can_download && ( $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( $t_filesize != 0 ) && ( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_image_ext, true ) ) ) {
 				$t_preview_style = 'border: 0;';
 				$t_max_width = config_get( 'preview_max_width' );
 				if( $t_max_width > 0 ) {
@@ -1959,7 +1978,7 @@ document.getElementById( span ).style.display = displayType;
 				}
 
 				$t_preview_style = 'style="' . $t_preview_style . '"';
-				$t_title = file_get_field( $v_id, 'title' );
+				$t_title = file_get_field( $t_id, 'title' );
 
 				PRINT "\n<br />$t_href_start<img alt=\"$t_title\" $t_preview_style src=\"file_download.php?file_id=$v_id&amp;type=bug\" />$t_href_end";
 				$image_previewed = true;

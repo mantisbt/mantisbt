@@ -228,6 +228,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	# Clean/encode query params
 	$t_query = '';
 	if ( isset( $t_matches['query'] ) ) {
+		$t_pairs = array();
 		parse_str( html_entity_decode( $t_matches['query'] ), $t_pairs );
 
 		$t_clean_pairs = array();

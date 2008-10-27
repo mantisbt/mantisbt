@@ -361,6 +361,7 @@ class Graph {
 				),
 			);
 
+			$t_pipes = array();
 			$t_proccess = proc_open( $t_command, $t_descriptors, $t_pipes );
 
 			if( is_resource( $t_proccess ) ) {

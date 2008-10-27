@@ -417,29 +417,33 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	extract( $p_issue, EXTR_PREFIX_ALL, 'v' );
+	$t_project = $p_issue['project'];
 
-	$t_project_id = mci_get_project_id( $v_project );
+	$t_project_id = mci_get_project_id( $t_project );
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	$t_handler_id = mci_get_user_id( $v_handler );
-	$t_priority_id = mci_get_priority_id( $v_priority );
-	$t_severity_id = mci_get_severity_id( $v_severity );
-	$t_status_id = mci_get_status_id( $v_status );
-	$t_reproducibility_id = mci_get_reproducibility_id( $v_reproducibility );
-	$t_resolution_id = mci_get_resolution_id( $v_resolution );
-	$t_projection_id = mci_get_projection_id( $v_projection );
-	$t_eta_id = mci_get_eta_id( $v_eta );
-	$t_view_state_id = mci_get_view_state_id( $v_view_state );
+	$t_handler_id = mci_get_user_id( $p_issue['handler'] );
+	$t_priority_id = mci_get_priority_id( $p_issue['priority'] );
+	$t_severity_id = mci_get_severity_id( $p_issue['severity'] );
+	$t_status_id = mci_get_status_id( $p_issue['status'] );
+	$t_reproducibility_id = mci_get_reproducibility_id( $p_issue['reproducibility'] );
+	$t_resolution_id = mci_get_resolution_id( $p_issue['resolution'] );
+	$t_projection_id = mci_get_projection_id( $p_issue['projection'] );
+	$t_eta_id = mci_get_eta_id( $p_issue['eta'] );
+	$t_view_state_id = mci_get_view_state_id( $p_issue['view_state'] );
+	$t_reporter_id = mci_get_user_id( $p_issue['reporter'] );
+	$t_category = $p_issue['category'];
+	$t_version = $p_issue['version'];
+	$t_summary = $p_issue['summary'];
+	$t_description = $p_issue['description'];
+	$t_custom_fields = $p_issue['custom_fields'];
 
-	$t_reporter_id = mci_get_user_id( $v_reporter );
 	if( $t_reporter_id == 0 ) {
 		$t_reporter_id = $t_user_id;
-	}
-	else {
+	} else {
 		if( $t_reporter_id != $t_user_id ) {
 
 			# Make sure that active user has access level required to specify a different reporter.
@@ -452,7 +456,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
 	if(( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id == 0 ) {
-			return new soap_fault( 'Client', '', "Project '" . $v_project['name'] . "' does not exist." );
+			return new soap_fault( 'Client', '', "Project '" . $t_project['name'] . "' does not exist." );
 		}
 		else {
 			return new soap_fault( 'Client', '', "Project '$t_project_id' does not exist." );
@@ -472,17 +476,17 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		return new soap_fault( 'Client', '', "User '$t_handler_id' does not exist." );
 	}
 
-	$t_category_id = translate_category_name_to_id( $v_category, $t_project_id );
+	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if( $t_category_id == 0 ) {
-		if( is_blank( $v_category ) ) {
+		if ( is_blank( $t_category ) ) {
 			return new soap_fault( 'Client', '', "Category cannot be empty." );
 		}
 		else {
-			return new soap_fault( 'Client', '', "Category '$v_category' does not exist in project '$t_project_id'." );
+			return new soap_fault( 'Client', '', "Category '$t_category' does not exist in project '$t_project_id'." );
 		}
 	}
 
-	if( isset( $v_version ) && !is_blank( $v_version ) && !version_get_id( $v_version, $t_project_id ) ) {
+	if ( isset( $t_version ) && !is_blank( $t_version ) && !version_get_id( $t_version, $t_project_id ) ) {
 		$t_error_when_version_not_found = config_get( 'mc_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
@@ -494,28 +498,28 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		}
 	}
 
-	if( is_blank( $v_summary ) ) {
+	if ( is_blank( $t_summary ) ) {
 		return new soap_fault( 'Client', '', "Mandatory field 'summary' is missing." );
 	}
 
-	if( is_blank( $v_description ) ) {
+	if ( is_blank( $t_description ) ) {
 		return new soap_fault( 'Client', '', "Mandatory field 'description' is missing." );
 	}
 
-	if( $v_priority == 0 ) {
-		$v_priority = config_get( 'default_bug_priority' );
+	if ( $t_priority_id == 0 ) {
+		$t_priority_id = config_get( 'default_bug_priority' );
 	}
 
-	if( $v_severity == 0 ) {
-		$v_severity = config_get( 'default_bug_severity' );
+	if ( $t_severity_id == 0 ) {
+		$t_severity_id = config_get( 'default_bug_severity' );
 	}
 
-	if( $v_view_state == 0 ) {
-		$v_view_state = config_get( 'default_bug_view_status' );
+	if ( $t_view_state_id == 0 ) {
+		$t_view_state_id = config_get( 'default_bug_view_status' );
 	}
 
-	if( $v_reproducibility == 0 ) {
-		$v_reproducibility = 10;
+	if ( $t_reproducibility_id == 0 ) {
+		$t_reproducibility_id = 10;
 	}
 
 	$t_bug_data = new BugData;
@@ -539,7 +543,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_bug_data->fixed_in_version = isset( $v_fixed_in_version ) ? $v_fixed_in_version : '';
 	$t_bug_data->build = isset( $v_build ) ? $v_build : '';
 	$t_bug_data->view_state = $t_view_state_id;
-	$t_bug_data->summary = $v_summary;
+	$t_bug_data->summary = $t_summary;
 	$t_bug_data->sponsorship_total = isset( $v_sponsorship_total ) ? $v_sponsorship_total : 0;
 	$t_bug_data->due_date = date_get_null();
 
@@ -547,14 +551,14 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	# var $bug_text_id
 	# $t_bug_data->profile_id;
 	# extended info
-	$t_bug_data->description = $v_description;
+	$t_bug_data->description = $t_description;
 	$t_bug_data->steps_to_reproduce = isset( $v_steps_to_reproduce ) ? $v_steps_to_reproduce : '';
 	$t_bug_data->additional_information = isset( $v_additional_information ) ? $v_additional_information : '';
 
 	# submit the issue
 	$t_issue_id = bug_create( $t_bug_data );
 
-	mci_issue_set_custom_fields( $t_issue_id, $v_custom_fields );
+	mci_issue_set_custom_fields( $t_issue_id, $t_custom_fields );
 
 	if( isset( $v_notes ) && is_array( $v_notes ) ) {
 		foreach( $v_notes as $t_note ) {
@@ -600,31 +604,33 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	extract( $p_issue, EXTR_PREFIX_ALL, 'v' );
+	$t_project_id = mci_get_project_id( $p_issue['project'] );
+	$t_handler_id = mci_get_user_id( $p_issue['handler'] );
+	$t_priority_id = mci_get_priority_id( $p_issue['priority'] );
+	$t_severity_id = mci_get_severity_id( $p_issue['severity'] );
+	$t_status_id = mci_get_status_id( $p_issue['status'] );
+	$t_reproducibility_id = mci_get_reproducibility_id( $p_issue['reproducibility'] );
+	$t_resolution_id = mci_get_resolution_id( $p_issue['resolution'] );
+	$t_projection_id = mci_get_projection_id( $p_issue['projection'] );
+	$t_eta_id = mci_get_eta_id( $p_issue['eta'] );
+	$t_view_state_id = mci_get_view_state_id( $p_issue['view_state'] );
+	$t_reporter_id = mci_get_user_id( $p_issue['reporter'] );
+	$t_project = $p_issue['project'];
+	$t_category = $p_issue['category'];
+	$t_summary = $p_issue['summary'];
+	$t_description = $p_issue['description'];
+	$t_custom_fields = $p_issue['custom_fields'];
 
-	$t_project_id = mci_get_project_id( $v_project );
-	$t_handler_id = mci_get_user_id( $v_handler );
-	$t_priority_id = mci_get_priority_id( $v_priority );
-	$t_severity_id = mci_get_severity_id( $v_severity );
-	$t_status_id = mci_get_status_id( $v_status );
-	$t_reproducibility_id = mci_get_reproducibility_id( $v_reproducibility );
-	$t_resolution_id = mci_get_resolution_id( $v_resolution );
-	$t_projection_id = mci_get_projection_id( $v_projection );
-	$t_eta_id = mci_get_eta_id( $v_eta );
-	$t_view_state_id = mci_get_view_state_id( $v_view_state );
-
-	$t_reporter_id = mci_get_user_id( $v_reporter );
 	if( $t_reporter_id == 0 ) {
 		$t_reporter_id = $t_user_id;
 	}
 
 	if(( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id == 0 ) {
-			return new soap_fault( 'Client', '', "Project '" . $v_project['name'] . "' does not exist." );
+			return new soap_fault( 'Client', '', "Project '" . $t_project['name'] . "' does not exist." );
 		}
-		else {
-			return new soap_fault( 'Client', '', "Project '$t_project_id' does not exist." );
-		}
+
+		return new soap_fault( 'Client', '', "Project '$t_project_id' does not exist." );
 	}
 
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
@@ -635,14 +641,13 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		return new soap_fault( 'Client', '', "User '$t_handler_id' does not exist." );
 	}
 
-	$t_category_id = translate_category_name_to_id( $v_category, $t_project_id );
+	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if( $t_category_id == 0 ) {
-		if( is_blank( $v_category ) ) {
+		if ( is_blank( $t_category ) ) {
 			return new soap_fault( 'Client', '', "Category cannot be empty." );
 		}
-		else {
-			return new soap_fault( 'Client', '', "Category '$v_category' does not exist in project '$t_project_id'." );
-		}
+
+		return new soap_fault( 'Client', '', "Category '$v_category' does not exist in project '$t_project_id'." );
 	}
 
 	if( isset( $v_version ) && !is_blank( $v_version ) && !version_get_id( $v_version, $t_project_id ) ) {
@@ -657,28 +662,28 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		}
 	}
 
-	if( is_blank( $v_summary ) ) {
+	if ( is_blank( $t_summary ) ) {
 		return new soap_fault( 'Client', '', "Mandatory field 'summary' is missing." );
 	}
 
-	if( is_blank( $v_description ) ) {
+	if ( is_blank( $t_description ) ) {
 		return new soap_fault( 'Client', '', "Mandatory field 'description' is missing." );
 	}
 
-	if( $v_priority == 0 ) {
-		$v_priority = config_get( 'default_bug_priority' );
+	if ( $t_priority_id == 0 ) {
+		$t_priority_id = config_get( 'default_bug_priority' );
 	}
 
-	if( $v_severity == 0 ) {
-		$v_severity = config_get( 'default_bug_severity' );
+	if ( $t_severity_id == 0 ) {
+		$t_severity_id = config_get( 'default_bug_severity' );
 	}
 
-	if( $v_view_state == 0 ) {
-		$v_view_state = config_get( 'default_bug_view_status' );
+	if ( $t_view_state_id == 0 ) {
+		$t_view_state_id = config_get( 'default_bug_view_status' );
 	}
 
-	if( $v_reproducibility == 0 ) {
-		$v_reproducibility = 10;
+	if ( $t_reproducibility_id == 0 ) {
+		$t_reproducibility_id = 10;
 	}
 
 	$t_bug_data = new BugData;
@@ -702,7 +707,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_bug_data->fixed_in_version = isset( $v_fixed_in_version ) ? $v_fixed_in_version : '';
 	$t_bug_data->build = isset( $v_build ) ? $v_build : '';
 	$t_bug_data->view_state = $t_view_state_id;
-	$t_bug_data->summary = $v_summary;
+	$t_bug_data->summary = $t_summary;
 	$t_bug_data->sponsorship_total = isset( $v_sponsorship_total ) ? $v_sponsorship_total : 0;
 	$t_bug_data->due_date = date_get_null();
 
@@ -710,14 +715,14 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	# var $bug_text_id
 	# $t_bug_data->profile_id;
 	# extended info
-	$t_bug_data->description = $v_description;
+	$t_bug_data->description = $t_description;
 	$t_bug_data->steps_to_reproduce = isset( $v_steps_to_reproduce ) ? $v_steps_to_reproduce : '';
 	$t_bug_data->additional_information = isset( $v_additional_information ) ? $v_additional_information : '';
 
 	# submit the issue
 	$t_is_success = bug_update( $p_issue_id, $t_bug_data, true, false );
 
-	mci_issue_set_custom_fields( $p_issue_id, $v_custom_fields );
+	mci_issue_set_custom_fields( $p_issue_id, $t_custom_fields );
 
 	if( isset( $v_notes ) && is_array( $v_notes ) ) {
 		foreach( $v_notes as $t_note ) {
