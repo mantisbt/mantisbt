@@ -128,6 +128,7 @@ $s_bugnote_title = 'Bugnote handler';
 $s_bugnote_date = 'Data da bugnote';
 $s_bugnote_description = 'Descrição da Bugnote';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projecto "%d" não encontrado.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Campo de base de dados "%s" não encontrado.';
 $s_go_back = 'Anterior';
 $s_proceed = 'Clique para continuar';
 $s_switch = 'Selecionar';
