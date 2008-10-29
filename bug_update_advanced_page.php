@@ -24,6 +24,8 @@
 	 /**
 	  * Mantis Core API's
 	  */
+
+	$g_allow_browser_cache = 1;
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
