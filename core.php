@@ -198,7 +198,7 @@
 	global $g_bypass_headers, $g_allow_browser_cache;
 	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
 
-		if ( isset( $g_allow_browser_cache ) ) {
+		if ( isset( $g_allow_browser_cache ) && ON == $g_allow_browser_cache ) {
 			switch ( $t_browser_name ) {
 			case 'IE':
 				header( 'Cache-Control: private, proxy-revalidate' );
