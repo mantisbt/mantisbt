@@ -126,7 +126,8 @@ function session_init( $p_session_id=null ) {
 			break;
 	}
 
-	session_validate( $g_session );
+	# Disable session validation for the time being
+	#session_validate( $g_session );
 }
 
 /**
