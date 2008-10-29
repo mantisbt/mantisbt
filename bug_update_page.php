@@ -21,6 +21,7 @@
 	# $Id: bug_update_page.php,v 1.100.2.1 2007-10-13 22:32:58 giallu Exp $
 	# --------------------------------------------------------
 
+	$g_allow_browser_cache = 1;
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
