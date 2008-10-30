@@ -202,15 +202,15 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	$t_path = rtrim( config_get( 'path' ), '/' );
 	$t_short_path = rtrim( config_get( 'short_path' ), '/' );
 
-	$t_pattern = '(?:/*(?<script>[^\?#]*))(?:\?(?<query>[^#]*))?(?:#(?<anchor>[^#]*))?';
+	$t_pattern = '(?:/*(?P<script>[^\?#]*))(?:\?(?P<query>[^#]*))?(?:#(?P<anchor>[^#]*))?';
 
 	# Break the given URL into pieces for path, script, query, and anchor
 	$t_type = 0;
-	if ( preg_match( "@^(?<path>$t_path)$t_pattern\$@", $t_url, $t_matches ) ) {
+	if ( preg_match( "@^(?P<path>$t_path)$t_pattern\$@", $t_url, $t_matches ) ) {
 		$t_type = 1;
-	} else if ( preg_match( "@^(?<path>$t_short_path)$t_pattern\$@", $t_url, $t_matches ) ) {
+	} else if ( preg_match( "@^(?P<path>$t_short_path)$t_pattern\$@", $t_url, $t_matches ) ) {
 		$t_type = 2;
-	} else if ( preg_match( "@^(?<path>)$t_pattern\$@", $t_url, $t_matches ) ) {
+	} else if ( preg_match( "@^(?P<path>)$t_pattern\$@", $t_url, $t_matches ) ) {
 		$t_type = 3;
 	}
 
