@@ -78,4 +78,7 @@ event_declare_many( array(
 	'EVENT_WIKI_INIT' => EVENT_TYPE_FIRST,
 	'EVENT_WIKI_LINK_BUG' => EVENT_TYPE_FIRST,
 	'EVENT_WIKI_LINK_PROJECT' => EVENT_TYPE_FIRST,
+
+	# Logging (tracing) events
+	'EVENT_LOG' => EVENT_TYPE_EXECUTE,
 ) );

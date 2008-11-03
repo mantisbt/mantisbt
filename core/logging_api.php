@@ -41,19 +41,35 @@ function log_event( $p_level, $p_msg ) {
 
 	# check to see if logging is enabled
 	$t_sys_log = config_get_global( 'log_level' );
-	if( 0 == ( $t_sys_log&$p_level ) ) {
+
+	if ( 0 == ( $t_sys_log & $p_level ) ) {
 		return;
 	}
 
 	$t_now = date( config_get( 'complete_date_format' ) );
 	$t_level = $g_log_levels[$p_level];
 
-	list( $t_destination, $t_modifiers ) = split( ':', config_get_global( 'log_destination' ), 2 );
+	$t_plugin_event = '[' . $t_level . '] ' . $p_msg;
+
+	event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
+
+	$t_php_event = $t_now . ' ' . $t_level . ' ' . $p_msg;
+
+	$t_log_destination = config_get_global( 'log_destination' );
+	
+	if ( is_blank( $t_log_destination ) ) {
+		$t_destination = '';
+	} else {
+		list( $t_destination, $t_modifiers ) = split( ':', $t_log_destination, 2 );
+	}
+
 	switch( $t_destination ) {
 		case 'file':
-			error_log( $t_now . ' ' . $t_level . ' ' . $p_msg . "\n", 3, $t_modifiers );
+			error_log( $t_php_event . "\n", 3, $t_modifiers );
 			break;
 		default:
+			# use default PHP error log settings
+			error_log( $t_php_event . "\n" );
 			break;
 	}
 }

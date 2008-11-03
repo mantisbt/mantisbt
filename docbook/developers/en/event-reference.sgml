@@ -79,6 +79,30 @@
 
 	</sect1>
 
+	<sect1 id="dev.eventref.logging">
+		<title>Logging</title>
+
+		<para>
+			The following event is used to submit a logging message to the plugins.  The event gets the
+			logging string as a parameter.  Logging plugins can capture extra context information  like
+			timestamp, current logged in user, etc.
+		</para>
+
+		<blockquote id="dev.eventref.logging.log">
+			<title>EVENT_LOG (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event is triggered by MantisBT to log a message.  The contents of the message
+					should be hyper linked based on the following rules: #123 means issue 123, ~123
+					means issue note 123, @P123 means project 123, @U123 means user 123.
+					expected.
+				</para>
+			</blockquote>
+		</blockquote>
+
+	</sect1>
+
 	&eventref-output;
 	&eventref-bug;
 </chapter>
