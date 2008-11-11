@@ -132,7 +132,30 @@ $ git checkout -b master-1.1.x origin/master-1.1.x
 		<sect2 id="dev.contrib.submit.patch">
 			<title>Via Formatted Patches</title>
 
-			<para></para>
+			<para>
+				Assuming that you have an existing local branch that you've kept up to date
+				with <code>master</code> as described in
+				<link linkend="dev.contrib.branch">Maintaining Branches</link>, generating
+				a formatted patch set should be relatively straightforward, using an
+				appropriate filename as the target of the patch set:
+			</para>
+
+			<programlisting>
+$ git format-patch --binary --stdout origin/master..HEAD > feature_branch.patch
+			</programlisting>
+
+			<para>
+				Once you've generated the formatted patch file, you can easily attach it
+				to a bug report, or even use the patch file as an email to send to the
+				developer mailing list.  Developers, or other users, can then import this
+				patch set into their local repositories using the following command, again
+				substituting the appropriate filename:
+			</para>
+
+			<programlisting>
+$ git am --signoff feature_branch.patch
+			</programlisting>
+
 		</sect2>
 
 		<sect2 id="dev.contrib.submit.repo">
