@@ -124,7 +124,7 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
 		case CUSTOM_FIELD_TYPE_RADIO:
 			$t_values = gpc_get_string_array( $p_var_name, $p_default );
-			if( null !== $t_values && '' != $t_values ) {
+			if( is_array( $t_values ) ) {
 				return implode( '|', $t_values );
 			}
 			else {
