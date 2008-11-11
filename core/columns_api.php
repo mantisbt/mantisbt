@@ -57,6 +57,7 @@ function columns_get_standard() {
 		'status',
 		'steps_to_reproduce',
 		'summary',
+		'target_version',
 		'version',
 		'view_state',
 	);
