@@ -125,7 +125,8 @@ $ git checkout -b master-1.1.x origin/master-1.1.x
 			constantly upload and download new formatted patches whenever you change
 			anything.  There is no need for a special server, as free hosting for public
 			repositories can be found on many sites, such as
-			<ulink url="http://github.com">GitHub</ulink> or
+			<ulink url="http://git.mantisforge.org">MantisForge.org</ulink>,
+			<ulink url="http://github.com">GitHub</ulink>, or
 			<ulink url="http://gitorious.com">Gitorious</ulink>.
 		</para>
 
