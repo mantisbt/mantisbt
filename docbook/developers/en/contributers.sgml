@@ -1,0 +1,55 @@
+<chapter id="dev.contrib">
+	<title>Contributing to MantisBT</title>
+
+	<para>
+		MantisBT uses the source control tool <ulink url="http://git.or.cz">Git</ulink>
+		for tracking development of the project.  If you are new to Git, you can
+		find some good resources for learning and installing Git in the
+		<link linkend="dev.appendix.git">Appendix</link>.
+	</para>
+
+	<sect1 id="dev.contrib.clone">
+		<title>Cloning the Repository</title>
+
+		<para>
+			The primary repository for MantisBT is hosted and available in multiple
+			methods depending on user status and intentions.  For most contributers,
+			the public clone URL is
+			<ulink url="git://mantisbt.org/mantisbt.git">git://mantisbt.org/mantisbt.git</ulink>.
+			To clone the repository, perform the following from your target workspace:
+		</para>
+
+		<programlisting>
+$ git clone git://mantisbt.org/mantisbt.git
+		</programlisting>
+
+		<para>
+			If you are a member of the MantisBT development team with write access to
+			the repository, there is a special clone URL that uses your SSH key to
+			handle access permissions and allow you read and write access.  Note: This
+			action <emphasis>will fail</emphasis> if you do not have developer access
+			or do not have your public SSH key set up correctly.
+		</para>
+
+		<programlisting>
+$ git clone git@mantisbt.org:mantisbt.git
+		</programlisting>
+
+		<para>
+			After performing the cloning operation, you should end up with a new
+			directory in your workspace, <filename>mantisbt/</filename>.  By default,
+			it will only track code from the primary remote branch, <code>master</code>,
+			which is the latest development version of MantisBT.  For contributers
+			planning to work with stable release branches, or other development
+			branches, you will need to set up local tracking branches in your
+			repository.  The following commands will set up a tracking branch for the
+			current stable branch, <code>master-1.1.x</code>.
+		</para>
+
+		<programlisting>
+$ git checkout -b master-1.1.x origin/master-1.1.x
+		</programlisting>
+
+	</sect1>
+</chapter>
+
