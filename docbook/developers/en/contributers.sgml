@@ -162,7 +162,56 @@ $ git am --signoff feature_branch.patch
 		<sect2 id="dev.contrib.submit.repo">
 			<title>Via Public Repository</title>
 
-			<para></para>
+			<para>
+				We'll assume that you've already set up a public repository, either on a
+				free repository hosting site, or using <code>git-daemon</code> on your own
+				machine, and that you know both the public clone URL and the private push
+				URL for your public repository.
+			</para>
+
+			<para>
+				For the purpose of this demonstration, we'll use a public clone URL of
+				<code>git://mantisbt.org/contrib.git</code>, a private push URL of
+				<code>git@mantisbt.org:contrib.git</code>, and a hypothetical
+				topic branch named <code>feature</code>.
+			</para>
+
+			<para>
+				You'll need to start by registering your public repository as a 'remote' for
+				your working repository, and then push your topic branch to the public
+				repository.  We'll call the remote <code>public</code> for this; remember to
+				replace the URL's and branch name as appropriate:
+			</para>
+
+			<programlisting>
+$ git remote add public git@mantisbt.org:contrib.git
+$ git push public feature
+			</programlisting>
+
+			<para>
+				Next, you'll need to generate a 'pull request', which will list information
+				about your changes and how to access them.  This process will attempt to
+				verify that you've pushed the correct data to the public repository, and
+				will generate a summary of changes that you should paste into a bug report
+				or into an email to the developer mailing list:
+			</para>
+
+			<programlisting>
+$ git request-pull origin/master git://mantisbt.org/contrib.git feature
+			</programlisting>
+
+			<para>
+				Once your pull request has been posted, developers and other users can add
+				your public repository as a remote, and track your feature branch in their
+				own working repository using the following commands, replacing the remote
+				name and local branch name as appropriate:
+			</para>
+
+			<programlisting>
+$ git remote add feature git://mantisbt.org/contrib.git
+$ git checkout -b feature feature/feature
+			</programlisting>
+
 		</sect2>
 
 	</sect1>
