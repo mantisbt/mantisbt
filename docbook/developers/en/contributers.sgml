@@ -8,6 +8,45 @@
 		<link linkend="dev.appendix.git">Appendix</link>.
 	</para>
 
+	<sect1 id="dev.contrib.setup">
+		<title>Initial Setup</title>
+
+		<para>
+			There are a few steps the MantisBT team requires of contributers when
+			accepting code submissions.  The contributer needs to configure Git to
+			know their full name (not screen name) and an email address they can be
+			contacted at (not a throwaway address).
+		</para>
+
+		<para>
+			To set up your name and email address with Git, run the following
+			commands, substituting your own real name and email address:
+		</para>
+
+		<programlisting>
+$ git config --global user.name "John Smith"
+$ git config --global user.email "jsmith@mantisbt.org"
+		</programlisting>
+
+		<para>
+			Optionally, you may want to also configure Git to use terminal colors
+			when displaying file diffs and other information, and you may want to
+			alias certain Git actions to shorter phrases for less typing:
+		</para>
+
+		<programlisting>
+$ git config --global color.diff "auto"
+$ git config --global color.status "auto"
+$ git config --global color.branch "auto"
+
+$ git config --global alias.st "status"
+$ git config --global alias.di "diff"
+$ git config --global alias.co "checkout"
+$ git config --global alias.ci "commit"
+		</programlisting>
+
+	</sect1>
+
 	<sect1 id="dev.contrib.clone">
 		<title>Cloning the Repository</title>
 
