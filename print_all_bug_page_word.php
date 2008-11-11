@@ -293,7 +293,29 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo get_enum_element( 'eta', $t_bug->eta ) ?>
 	</td>
-	<td class="print" colspan="4">&nbsp;</td>
+	<td class="print-category">
+		<?php echo lang_get( 'fixed_in_version' ) ?>:
+	</td>
+	<td class="print">
+		<?php echo $t_bug->fixed_in_version ?>
+	</td>
+	<td class="print" colspan="2">&nbsp;</td>
+
+</tr>
+<tr class="print">
+	<td class="print-category">
+		&nbsp;
+	</td>
+	<td class="print">
+		&nbsp;
+	</td>
+	<td class="print-category">
+		<?php echo lang_get( 'target_version' ) ?>:
+	</td>
+	<td class="print">
+		<?php echo $t_bug->target_version ?>
+	</td>
+	<td class="print" colspan="2">&nbsp;</td>
 </tr>
 <?php
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
