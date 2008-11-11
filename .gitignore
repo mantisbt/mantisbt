@@ -1,6 +1,11 @@
 # Config files
 config_inc.php
 
+# Docbook builds
+docbook/*/*/builddate
+docbook/*/*/build
+docbook/*/*/install
+
 # IDE/Editor temporary files
 *~
 *.swp
