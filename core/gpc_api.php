@@ -116,7 +116,7 @@
 			case CUSTOM_FIELD_TYPE_MULTILIST:
 			case CUSTOM_FIELD_TYPE_CHECKBOX:
 				$t_values = gpc_get_string_array( $p_var_name, $p_default );
-				if( null !== $t_values && '' != $t_values ) {
+				if( is_array( $t_values ) ) {
 					return implode( '|', $t_values );
 				} else {
 					return '';
