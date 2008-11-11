@@ -7,3 +7,5 @@
 <!ENTITY eventref SYSTEM "event-reference.sgml">
 <!ENTITY eventref-output SYSTEM "event-reference-output.sgml">
 <!ENTITY eventref-bug SYSTEM "event-reference-bug.sgml">
+
+<!ENTITY appendix SYSTEM "appendix.sgml">
