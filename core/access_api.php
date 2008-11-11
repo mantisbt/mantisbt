@@ -576,7 +576,7 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
  * @access public
  */
 function access_get_local_level( $p_user_id, $p_project_id ) {
-	global $g_cache_access_matrix_project_ids;
+	global $g_cache_access_matrix, $g_cache_access_matrix_project_ids;
 
 	$p_project_id = (int) $p_project_id;
 	$p_user_id = (int) $p_user_id;
