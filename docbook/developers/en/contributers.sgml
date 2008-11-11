@@ -12,10 +12,10 @@
 		<title>Initial Setup</title>
 
 		<para>
-			There are a few steps the MantisBT team requires of contributers when
-			accepting code submissions.  The contributer needs to configure Git to
-			know their full name (not screen name) and an email address they can be
-			contacted at (not a throwaway address).
+			There are a few steps the MantisBT team requires of contributers and
+			developers when accepting code submissions.  The user needs to configure
+			Git to know their full name (not a screen name) and an email address they
+			can be contacted at (not a throwaway address).
 		</para>
 
 		<para>
