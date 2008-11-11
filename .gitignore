@@ -4,4 +4,4 @@ config_inc.php
 # IDE/Editor temporary files
 *~
 *.swp
-
+.project
