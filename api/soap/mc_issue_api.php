@@ -98,6 +98,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 
 	$t_issue_data['resolution'] = mci_enum_get_array_by_id( $t_bug['resolution'], 'resolution', $t_lang );
 	$t_issue_data['fixed_in_version'] = mci_null_if_empty( $t_bug['fixed_in_version'] );
+	$t_issue_data['target_version'] = mci_null_if_empty( $t_bug['target_version'] );
 
 	$t_issue_data['description'] = $t_bug['description'];
 	$t_issue_data['steps_to_reproduce'] = mci_null_if_empty( $t_bug['steps_to_reproduce'] );
@@ -541,6 +542,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_bug_data->platform = isset( $v_platform ) ? $v_platform : '';
 	$t_bug_data->version = isset( $v_version ) ? $v_version : '';
 	$t_bug_data->fixed_in_version = isset( $v_fixed_in_version ) ? $v_fixed_in_version : '';
+	$t_bug_data->target_version = isset( $v_target_version ) ? $v_target_version : '';
 	$t_bug_data->build = isset( $v_build ) ? $v_build : '';
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
@@ -705,6 +707,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_bug_data->platform = isset( $v_platform ) ? $v_platform : '';
 	$t_bug_data->version = isset( $v_version ) ? $v_version : '';
 	$t_bug_data->fixed_in_version = isset( $v_fixed_in_version ) ? $v_fixed_in_version : '';
+	$t_bug_data->target_version = isset( $v_target_version ) ? $v_target_version : '';
 	$t_bug_data->build = isset( $v_build ) ? $v_build : '';
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
