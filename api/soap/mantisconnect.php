@@ -275,6 +275,7 @@ $l_oServer->wsdl->addComplexType(
 
 		'resolution'		=>	array( 'name' => 'resolution',		'type' => 'tns:ObjectRef', 	'minOccurs' => '0' ),
 		'fixed_in_version'	=>	array( 'name'=>'fixed_in_version',	'type' => 'xsd:string', 	'minOccurs' => '0' ),
+		'target_version'	=>	array( 'name'=>'target_version',	'type' => 'xsd:string', 	'minOccurs' => '0' ),
 
 		'description'				=>	array( 'name' => 'description',				'type' => 'xsd:string', 	'minOccurs' => '0' ),
 		'steps_to_reproduce'		=>	array( 'name' => 'steps_to_reproduce',		'type' => 'xsd:string', 	'minOccurs' => '0' ),

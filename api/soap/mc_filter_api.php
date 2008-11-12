@@ -105,6 +105,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 
 		$t_issue['resolution'] = mci_enum_get_array_by_id( $t_issue_data['resolution'], 'resolution', $t_lang );
 		$t_issue['fixed_in_version'] = mci_null_if_empty( $t_issue_data['fixed_in_version'] );
+		$t_issue['target_version'] = mci_null_if_empty( $t_issue_data['target_version'] );
 
 		$t_issue['description'] = bug_get_text_field( $t_id, 'description' );
 
