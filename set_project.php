@@ -88,6 +88,9 @@
 					case 'bug_change_status_page.php':
 						$t_path = $t_home_page;
 						break;
+					case 'tag_view_page.php':
+						$t_path = $t_referrer_page;
+						break;
 					default:					
 						break;
 				}
