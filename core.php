@@ -159,9 +159,9 @@
 
 		if ( isset( $g_allow_browser_cache ) && ON == $g_allow_browser_cache ) {
 			switch ( $t_browser_name ) {
-			case 'IE':
-				header( 'Cache-Control: private, proxy-revalidate' );
-				break;
+			#case 'IE':
+			#	header( 'Cache-Control: private, proxy-revalidate' );
+			#	break;
 			default:
 				header( 'Cache-Control: private, must-revalidate' );
 				break;
