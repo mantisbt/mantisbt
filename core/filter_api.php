@@ -3787,6 +3787,10 @@ function print_filter_relationship_type() {
  *  print tag fields
  */
 function print_filter_tag_string() {
+	if ( !access_has_global_level( config_get( 'tag_view_threshold' ) ) ) {
+		return;
+	}
+
 	global $t_filter;
 	$t_tag_string = $t_filter[FILTER_PROPERTY_TAG_STRING];
 	if( $t_filter[FILTER_PROPERTY_TAG_SELECT] != 0 ) {
