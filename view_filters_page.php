@@ -164,6 +164,8 @@
 	$t_show_version = ( ON == config_get( 'show_product_version' ) )
 			|| ( ( AUTO == config_get( 'show_product_version' ) )
 						&& ( count( version_get_all_rows_with_subs( $t_project_id ) ) > 0 ) );
+
+	$t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 ?>
 <br />
 <form method="post" name="filters" action="<?php echo $t_action; ?>">
@@ -419,7 +421,7 @@ if ( 'simple' == $f_view_type ) {
 </tr>
 <tr class="row-category2">
 <td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'search' ) ?></td>
-<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php echo lang_get( 'tags' ) ?></td>
+<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php if ( $t_show_tags ) { echo lang_get( 'tags' ); } ?></td>
 <td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"></td>
 </tr>
 <tr>
@@ -428,7 +430,7 @@ if ( 'simple' == $f_view_type ) {
 		<input type="text" size="16" name="search" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>" />
 	</td>
 
-	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php print_filter_tag_string() ?></td>
+	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php if ( $t_show_tags ) { print_filter_tag_string(); } ?></td>
 
 	<!-- Submit button -->
 	<td class="right" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">

@@ -3635,6 +3635,10 @@
 	}
 
 	function print_filter_tag_string() {
+		if ( !access_has_global_level( config_get( 'tag_view_threshold' ) ) ) {
+			return;
+		}
+
 		global $t_filter;
 		$t_tag_string = $t_filter['tag_string'];
 		if ( $t_filter['tag_select'] != 0 ) {
