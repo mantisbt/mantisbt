@@ -164,6 +164,7 @@
 	</td>
 </tr>
 
+<?php event_signal( 'EVENT_REPORT_BUG_FORM_TOP', array( $t_project_id, true ) ); ?>
 
 <!-- Category -->
 <tr <?php echo helper_alternate_class() ?>>

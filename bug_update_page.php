@@ -90,6 +90,7 @@
 	</td>
 </tr>
 
+<?php event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', array( $f_bug_id, false ) ) ?>
 
 <tr class="row-category">
 	<td width="15%">
