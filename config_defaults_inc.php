@@ -1351,13 +1351,13 @@
 
 	# --- status color codes ----------
 	#
-	$g_status_colors		= array( 'new'			=> '#ffa0a0', # red,
-									 'feedback'		=> '#ff50a8', # purple
-									 'acknowledged'	=> '#ffd850', # orange
+	$g_status_colors		= array( 'new'			=> '#ffcdcd', # red,
+									 'feedback'		=> '#ffcdec', # purple
+									 'acknowledged'	=> '#ffeccd', # orange
 									 'confirmed'	=> '#ffffb0', # yellow
-									 'assigned'		=> '#c8c8ff', # blue
-									 'resolved'		=> '#cceedd', # buish-green
-									 'closed'		=> '#e8e8e8'); # light gray
+									 'assigned'		=> '#cde2ff', # blue
+									 'resolved'		=> '#daf5ec', # buish-green
+									 'closed'		=> '#e6e6e6'); # light gray
 
 	# The padding level when displaying project ids
 	#  The bug id will be padded with 0's up to the size given
