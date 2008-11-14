@@ -44,6 +44,8 @@
 			$t_version_timestamp = $p_version_row['date_order'];
 
 			$t_scheduled_release_date = ' (' . strtolower( lang_get( 'scheduled_release' ) ) . ' ' . date( config_get( 'short_date_format' ), $t_version_timestamp ) . ')';
+		} else {
+			$t_scheduled_release_date = '';
 		}
 
 		echo '<tt>';

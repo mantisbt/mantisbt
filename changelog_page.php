@@ -36,6 +36,7 @@
 		$t_version_name = version_get_field( $p_version_id, 'version' );
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 
+		$t_release_title_without_hyperlinks = string_display( $t_project_name ) . ' - ' . string_display( $t_version_name );
 		$t_release_title = '<a href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display( $t_project_name ) . '</a> - <a href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display( $t_version_name ) . '</a>';
 
 		if ( config_get( 'show_changelog_dates' ) ) {
@@ -47,12 +48,14 @@
 			} else {
 				$t_release_date = ' (' . strtolower( lang_get( 'not_released' ) ) . ')';
 			}
+		} else {
+			$t_release_date = '';
 		}
 		
 		echo '<br />', $t_release_title, $t_release_date, '<br />';
 
-		$t_release_title .= $t_release_date;
-		echo str_pad( '', strlen( $t_release_title ), '=' ), '<br />';
+		$t_release_title_without_hyperlinks .= $t_scheduled_release_date;
+		echo str_pad( '', strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';
 	}
 	
 	function print_project_header ( $p_project_name ) {
