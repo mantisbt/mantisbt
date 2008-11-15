@@ -1,5 +1,9 @@
 # Config files
 config_inc.php
+custom_constant_inc.php
+custom_strings_inc.php
+custom_functions_inc.php
+mantis_offline.php
 
 # Docbook builds
 docbook/*/*/builddate
