@@ -236,7 +236,8 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Unable to connect to FTP server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists.  Please go back and enter a different name.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'User not found.';
+$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'User with name "%s" not found.';
+$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'User with id "%d" not found.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'News item not found.';
@@ -1549,3 +1550,6 @@ $s_overdue = 'Overdue';
 
 #account_view_page.php
 $s_view_account_title = 'User Information';
+
+# view_user_page.php
+$s_manage_user = 'Manage User';

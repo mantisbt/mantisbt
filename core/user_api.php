@@ -61,7 +61,8 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 		$g_cache_user[$p_user_id] = false;
 
 		if( $p_trigger_errors ) {
-			trigger_error( ERROR_USER_NOT_FOUND, ERROR );
+			error_parameters( (integer)$p_user_id );
+			trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
 		}
 
 		return false;
@@ -177,8 +178,11 @@ function user_exists( $p_user_id ) {
 # if it doesn't exist then error
 #  otherwise let execution continue undisturbed
 function user_ensure_exists( $p_user_id ) {
-	if( !user_exists( $p_user_id ) ) {
-		trigger_error( ERROR_USER_NOT_FOUND, ERROR );
+	$c_user_id = (integer)$p_user_id;
+
+	if ( !user_exists( $c_user_id ) ) {
+		error_parameters( $c_user_id );
+		trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
 	}
 }
 

@@ -58,7 +58,7 @@
 	</tr>
 
 	<!-- Username -->
-	<tr class="row-1">
+	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category" width="25%">
 			<?php echo lang_get( 'username' ) ?>
 		</td>
@@ -68,7 +68,7 @@
 	</tr>
 
 	<!-- Email -->
-	<tr class="row-1">
+	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php echo lang_get( 'email' ) ?>
 		</td>
@@ -88,7 +88,7 @@
 	</tr>
 
 	<!-- Realname -->
-	<tr class="row-1" valign="top">
+	<tr <?php echo helper_alternate_class() ?> valign="top">
 		<td class="category">
 			<?php echo lang_get( 'realname' ) ?>
 		</td>
@@ -103,7 +103,13 @@
 		</td>
 	</tr>
 
-
+	<?php if ( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) { ?>
+	<tr>
+		<td colspan="2" class="center">
+			<?php print_bracket_link( 'manage_user_edit_page.php?user_id=' . $f_user_id, lang_get( 'manage_user' ) ); ?>
+		</td>
+	</tr>
+	<?php } ?>
 </table>
 </div>
 

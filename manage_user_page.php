@@ -329,6 +329,15 @@
 		</td>
 	</tr>
 </table>
-<?php # Manage Form END ?>
-
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	# Manage Form END
+?>
+	<br />
+	<form method="get" action="manage_user_edit_page.php">
+		<?php echo lang_get( 'username' ) ?>
+		<input type="text" name="username" value="" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" />
+	</form>
+<?php
+	html_page_bottom1( __FILE__ );
+?>
