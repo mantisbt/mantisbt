@@ -115,7 +115,7 @@
 		$t_file_path = str_replace( DIRECTORY_SEPARATOR, '/', __FILE__ );
 
 		# Extract the unique directory path of this file relative to the server's documunt root
-		if ( preg_match( '@'.$t_docroot.'(.*)@', $t_file_path, $t_matches ) ) {
+		if ( preg_match( '@' . preg_quote( $t_docroot ) . '(.*)@', $t_file_path, $t_matches ) ) {
 			$t_path = dirname( strip_tags( $t_matches[1] ) );
 		} else {
 			$t_path = dirname( strip_tags( $_SERVER['PHP_SELF'] ) );
