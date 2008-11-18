@@ -64,18 +64,46 @@
 	}
 
 	$t_user_id = auth_get_current_user_id();
-	$f_version_id = gpc_get_int( 'version_id', -1 );
-	$f_project_id = gpc_get_int( 'project_id', -1 );
 
-	# If both version_id and project_id parameters are supplied, then version_id take precedence.
-	if ( $f_version_id == -1 ) {
+	$f_project = gpc_get_string( 'project', '' );
+	if ( is_blank( $f_project ) ) {
+		$f_project_id = gpc_get_int( 'project_id', -1 );
+	} else {
+		$f_project_id = project_get_id_by_name( $f_project );
+
+		if ( $f_project_id === 0 ) {
+			trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
+		}
+	}
+
+	$f_version = gpc_get_string( 'version', '' );
+
+	if ( is_blank( $f_version ) ) {
+		$f_version_id = gpc_get_int( 'version_id', -1 );
+
+		# If both version_id and project_id parameters are supplied, then version_id take precedence.
+		if ( $f_version_id == -1 ) {
+			if ( $f_project_id == -1 ) {
+				$t_project_id = helper_get_current_project();
+			} else {
+				$t_project_id = $f_project_id;
+			}
+		} else {
+			$t_project_id = version_get_field( $f_version_id, 'project_id' );		
+		}
+	} else {
 		if ( $f_project_id == -1 ) {
 			$t_project_id = helper_get_current_project();
 		} else {
 			$t_project_id = $f_project_id;
 		}
-	} else {
-		$t_project_id = version_get_field( $f_version_id, 'project_id' );		
+
+		$f_version_id = version_get_id( $f_version, $t_project_id );
+
+		if ( $f_version_id === false ) {
+			error_parameters( $f_version );
+			trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
+		}
 	}
 
 	if ( ALL_PROJECTS == $t_project_id ) {
