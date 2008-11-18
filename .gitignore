@@ -14,3 +14,6 @@ docbook/*/*/install
 *~
 *.swp
 .project
+
+# IIS7 
+web.config
