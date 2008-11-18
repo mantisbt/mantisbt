@@ -315,7 +315,7 @@ function print_tag_input( $p_bug_id = 0, $p_string = "" ) {
 	?>
 		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
 		<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo string_attribute( $p_string )?>" />
-		<select <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select" onchange="tag_string_append( this.options[ this.selectedIndex ].text );">
+		<select <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select" onchange="tag_string_append( this.options[ this.selectedIndex ].label );">
 			<?php print_tag_option_list( $p_bug_id );?>
 		</select>
 		<?php
@@ -331,7 +331,7 @@ function print_tag_input( $p_bug_id = 0, $p_string = "" ) {
 function print_tag_option_list( $p_bug_id = 0 ) {
 	$t_tag_table = db_get_table( 'mantis_tag_table' );
 
-	$query = "SELECT id, name FROM $t_tag_table ";
+	$query = "SELECT id, name, description FROM $t_tag_table ";
 	if( 0 != $p_bug_id ) {
 		$c_bug_id = db_prepare_int( $p_bug_id );
 		$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
@@ -345,7 +345,11 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 
 	echo '<option value="0">', lang_get( 'tag_existing' ), '</option>';
 	while( $row = db_fetch_array( $result ) ) {
-		echo '<option value="', $row['id'], '">', $row['name'], '</option>';
+		$t_string = $row['name'];
+		if ( !empty( $row['description'] ) ) {
+			$t_string .= ' - ' . substr( $row['description'], 0, 20 );
+		}
+		echo '<option value="', $row['id'], '" label="', $row['name'], '">', $t_string, '</option>';
 	}
 }
 
