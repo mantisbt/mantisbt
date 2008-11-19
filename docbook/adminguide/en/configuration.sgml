@@ -1033,6 +1033,15 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_reminder_receive_threshold</term>
+                <listitem>
+                    <para>The minimum access level for a user to show up in the reminder user picker.
+                    Note that this is the access level for the project for which the issue belongs.
+                    The default is DEVELOPER.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_default_bug_severity</term>
                 <listitem>
                     <para>The severity for a newly created issue. The default is

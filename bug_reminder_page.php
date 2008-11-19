@@ -72,7 +72,12 @@
 <tr <?php echo helper_alternate_class() ?>>
 	<td>
 		<select name="to[]" multiple="multiple" size="10">
-			<?php echo print_project_user_option_list( bug_get_field( $f_bug_id, 'project_id' ) ) ?>
+			<?php
+				$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
+				$t_access_level = config_get( 'reminder_receive_threshold' );
+				$t_selected_user_id = 0;
+				print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
+			?>
 		</select>
 	</td>
 	<td class="center">

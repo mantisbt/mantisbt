@@ -833,6 +833,10 @@
 	# Default Reminder View Status (VS_PUBLIC or VS_PRIVATE)
 	$g_default_reminder_view_status = VS_PUBLIC;
 
+	# The minimum access level required to show up in the list of users who can receive a reminder.
+	# The access level is that of the project to which the issue belongs.
+	$g_reminder_receive_threshold = DEVELOPER;
+
 	###################################
 	# MantisBT Sponsorship Settings
 	###################################
