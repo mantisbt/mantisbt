@@ -1735,6 +1735,8 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
 	# updated the last_updated date
 	bug_update_date( $p_bug_id );
 
+	email_monitor_added( $p_bug_id, $p_user_id );
+
 	return true;
 }
 

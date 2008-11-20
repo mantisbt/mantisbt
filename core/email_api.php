@@ -222,10 +222,18 @@ function email_notify_flag( $action, $flag ) {
 # @@@ yarick123: email_collect_recipients(...) will be completely rewritten to provide additional
 #     information such as language, user access,..
 # @@@ yarick123:sort recipients list by language to reduce switches between different languages
-function email_collect_recipients( $p_bug_id, $p_notify_type ) {
+function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email = array() ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
 	$t_recipients = array();
+
+	# add explicitly specified users
+	if ( ON == email_notify_flag( $p_notify_type, 'explicit' ) ) {
+		foreach ( $p_extra_user_ids_to_email as $t_user_id ) {
+			$t_recipients[$t_user_id] = true;
+			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add explicitly specified user = @U%d', $p_bug_id, $t_user_id ) );
+		}
+	}
 
 	# add Reporter
 	if( ON == email_notify_flag( $p_notify_type, 'reporter' ) ) {
@@ -482,7 +490,7 @@ function email_notify_new_account( $p_username, $p_email ) {
 # $p_notify_type: use check who she get notified of such event.
 # $p_message_id: message id to be translated and included at the top of the email message.
 # Return false if it were problems sending email
-function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_header_optional_params = null ) {
+function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_header_optional_params = null, $p_extra_user_ids_to_email = array() ) {
 	$t_ok = true;
 
 	if( ON === config_get( 'enable_email_notification' ) ) {
@@ -491,7 +499,7 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_head
 		# @@@ yarick123: email_collect_recipients(...) will be completely rewritten to provide additional
 		#     information such as language, user access,..
 		# @@@ yarick123:sort recipients list by language to reduce switches between different languages
-		$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type );
+		$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		if( is_array( $t_recipients ) ) {
@@ -518,9 +526,23 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_head
 	return $t_ok;
 }
 
+# Send notices that a user is now monitoring the bug.  Typically this will only be sent when the added
+# user is not the logged in user.  This is assuming that receive own notifications is OFF (default).
+function email_monitor_added( $p_bug_id, $p_user_id ) {
+	log_event( LOG_EMAIL, sprintf( 'Issue #%d monitored by user @U%d', $p_bug_id, $p_user_id ) );
+
+	$t_opt = array();
+	$t_opt[] = bug_format_id( $p_bug_id );
+	$t_opt[] = user_get_name( $p_user_id );
+
+	email_generic( $p_bug_id, 'monitor', 'email_notification_title_for_action_monitor', $t_opt, array( $p_user_id ) );
+}
+
 # send notices when a relationship is ADDED
 # MASC RELATIONSHIP
 function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
+	log_event( LOG_EMAIL, sprintf( 'Relationship added: Issue #%d, related issue %d, relationship type %s.', $p_bug_id, $p_related_bug_id, $p_rel_type ) );
+
 	$t_opt = array();
 	$t_opt[] = bug_format_id( $p_related_bug_id );
 	global $g_relationships;
@@ -533,6 +555,8 @@ function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
 # send notices when a relationship is DELETED
 # MASC RELATIONSHIP
 function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
+	log_event( LOG_EMAIL, sprintf( 'Relationship deleted: Issue #%d, related issue %d, relationship type %s.', $p_bug_id, $p_related_bug_id, $p_rel_type ) );
+
 	$t_opt = array();
 	$t_opt[] = bug_format_id( $p_related_bug_id );
 	global $g_relationships;

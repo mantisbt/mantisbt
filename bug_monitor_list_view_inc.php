@@ -50,13 +50,6 @@
 	collapse_open( 'monitoring' );
 ?>
 <table class="width100" cellspacing="1">
-<?php 	if ( 0 == $num_users ) { ?>
-<tr>
-	<td class="center">
-		<?php echo lang_get( 'no_users_monitoring_bug' ); ?>
-	</td>
-</tr>
-<?php	} else { ?>
 <tr>
 	<td class="form-title" colspan="2">
 <?php
@@ -71,14 +64,25 @@
 	</td>
 	<td>
 <?php
- 		for ( $i = 0; $i < $num_users; $i++ ) { 			
-			echo ($i > 0) ? ', ' : '';
-			echo print_user( $t_users[$i] );
+		if ( 0 == $num_users ) {
+			echo lang_get( 'no_users_monitoring_bug' );
+		} else {
+	 		for ( $i = 0; $i < $num_users; $i++ ) { 			
+				echo ($i > 0) ? ', ' : '';
+				echo print_user( $t_users[$i] );
+	 		}
  		}
+ 		
+ 		echo '<br /><br />', lang_get( 'username' );
 ?>
+ 		<form method="get" action="bug_monitor.php">
+ 			<input type="hidden" name="bug_id" value="<?php echo (integer)$f_bug_id; ?>" />
+ 			<input type="hidden" name="action" value="add" />
+ 			<input type="text" name="username" />
+			<input type="submit" class="button" value="<?php echo lang_get( 'add_user_to_monitor' ) ?>" />
+ 		</form>
 	</td>
 </tr>
-<?php 	} ?>
 </table>
 <?php
 	collapse_closed( 'monitoring' ); 

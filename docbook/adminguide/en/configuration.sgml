@@ -302,8 +302,8 @@
                         assigned, resolved, bugnote, reopened, closed, deleted,
                         feedback.The default is:
                         $g_default_notify_flags = array('reporter' =&gt; ON, 'handler'
-                        =&gt; ON, 'monitor' =&gt; ON, 'bugnotes' =&gt; ON, 'threshold_min'
-                        =&gt; NOBODY, 'threshold_max' =&gt; NOBODY);
+                        =&gt; ON, 'monitor' =&gt; ON, 'bugnotes' =&gt; ON, 'explicit' =&gt; ON,
+                        'threshold_min' =&gt; NOBODY, 'threshold_max' =&gt; NOBODY);
                         threshold_min and threshold_max are used to send messages to all
                         members of the project whose status is greater than or equal to
                         "threshold_min" and less than or equal to "threshold_max". Sending
@@ -347,6 +347,10 @@
                             <listitem>
                                 <para>'relation': a relationship for the bug has changed
                                     (added, deleted or updated)
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>'monitor': a user is added to the monitor list.
                                 </para>
                             </listitem>
                         </itemizedlist>

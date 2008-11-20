@@ -271,6 +271,7 @@
 	#       'handler': the handler of the bug
 	#       'monitor': users who are monitoring a bug
 	#      'bugnotes': users who have added a bugnote to the bug
+	#      'explicit': users who are explicitly specified by the code based on the action (e.g. user added to monitor list).
 	# 'threshold_max': all users with access <= max
 	# 'threshold_min': ..and with access >= min
 	#
@@ -286,6 +287,7 @@
 	#         'bugnote': a bugnote has been added to a bug
 	#         'sponsor': sponsorship has changed on this bug
 	#        'relation': a relationship has changed on this bug
+	#         'monitor': an issue is monitored.
 	#        '<status>': eg: 'resolved', 'closed', 'feedback', 'acknowledged', ...etc.
 	#                     this list corresponds to $g_status_enum_string
 
@@ -306,6 +308,7 @@
 									'handler'	=> ON,
 									'monitor'	=> ON,
 									'bugnotes'	=> ON,
+									'explicit'  => ON,
 									'threshold_min'	=> NOBODY,
 									'threshold_max' => NOBODY);
 
@@ -317,6 +320,14 @@
 	#      config option
 	$g_notify_flags['new']	= array('bugnotes'	=> OFF,
 									'monitor'	=> OFF);
+
+	$g_notify_flags['monitor'] = array(	'reporter'	=> OFF,
+										'handler'	=> OFF,
+										'monitor'	=> OFF,
+										'bugnotes'	=> OFF,
+										'explicit'  => ON,
+										'threshold_min'	=> NOBODY,
+										'threshold_max' => NOBODY);
 
 	# Whether user's should receive emails for their own actions
 	$g_email_receive_own	= OFF;
@@ -1092,6 +1103,10 @@
 	# access level needed to monitor bugs
 	# Look in the constant_inc.php file if you want to set a different value
 	$g_monitor_bug_threshold		= REPORTER;
+
+	# access level needed to add other users to monitor bugs
+	# Look in the constant_inc.php file if you want to set a different value
+	$g_monitor_add_others_bug_threshold		= DEVELOPER;
 
 	# access level needed to view private bugs
 	# Look in the constant_inc.php file if you want to set a different value

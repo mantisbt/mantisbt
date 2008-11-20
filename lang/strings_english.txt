@@ -400,6 +400,7 @@ $s_email_notification_title_for_action_dependant_on_relationship_deleted = 'The 
 $s_email_notification_title_for_action_blocks_relationship_deleted = 'The following issue has been removed as the CHILD OF issue %s.';
 $s_email_notification_title_for_action_relationship_child_resolved = 'The RELATED issue %s has been RESOLVED.';
 $s_email_notification_title_for_action_relationship_child_closed = 'The RELATED issue %s has been CLOSED.';
+$s_email_notification_title_for_action_monitor = 'Issue %s is now monitored by user %s.';
 
 $s_email_reporter = 'Reported By';
 $s_email_handler = 'Assigned To';
@@ -1227,7 +1228,7 @@ $s_query_store_error = 'There was an error saving this query.';
 $s_open_queries = 'Manage Filters';
 $s_query_delete_msg = 'Are you sure you wish to delete this query?';
 
-# view_bug_advanced_page.php
+# bug_view_advanced_page.php
 $s_view_simple_link = 'View Simple';
 $s_viewing_bug_advanced_details_title = 'Viewing Issue Advanced Details';
 $s_product_build = 'Product Build';
@@ -1240,6 +1241,7 @@ $s_move_bug_button = 'Move Issue';
 $s_attached_files = 'Attached Files';
 $s_publish = 'Publish';
 $s_cached = 'Cached';
+$s_add_user_to_monitor = 'Add';
 
 # view_bug_inc.php
 
