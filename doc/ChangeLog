@@ -1,5 +1,22 @@
 Mantis ChangeLog
 
+2008.11.21 - 1.1.5
+===================================
+
+This release solves more issues relating to the security fixes introduced by 1.1.3, as well as various other minor bugs.
+
+- 0009713: [authentication] Users are unable to confirm registration (jreese) - resolved.
+- 0009017: [bugtracker] SYSTEM WARNING implode() [function.implode]: Bad arguments. (jreese) - resolved.
+- 0009738: [bugtracker] Browser caching should be enabled on bug_change_status_page.php (jreese) - resolved.
+- 0009748: [bugtracker] Port 9737: bugnote_add.php contains undefined t_note_type (vboctor) - resolved.
+- 0009754: [bugtracker] Failed to report issue (APPLICATION ERROR #2800) (jreese) - resolved.
+- 0009714: [csv] Error message/warning, if HTTP_USER_AGENT is not set (jreese) - resolved.
+- 0009808: [db mysql] Linking Sub-Projects to a project -> APPLICATION ERROR #200 (jreese) - resolved.
+- 0009760: [other] Mantis checks $g_allow_browser_caching setting incorrectly (jreese) - resolved.
+- 0009780: [tagging] Changing project in Tag Details view gives "APPLICATION ERROR #200" (jreese) - resolved.
+- 0009803: [tagging] Tags field in filter should not be shown when user has no access to tags (jreese) - resolved.
+
+
 2008.10.18 - 1.1.4
 ===================================
 
