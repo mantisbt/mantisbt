@@ -87,8 +87,7 @@ function mci_has_administrator_access( $p_user_id, $p_project_id = ALL_PROJECTS 
 function mci_get_project_id( $p_project ) {
 	if( (int) $p_project['id'] != 0 ) {
 		$t_project_id = (int) $p_project['id'];
-	}
-	else {
+	} else {
 		$t_project_id = project_get_id_by_name( $p_project['name'] );
 	}
 
@@ -112,8 +111,7 @@ function mci_get_user_id( &$p_user ) {
 
 	if( (int) $p_user['id'] != 0 ) {
 		$t_user_id = (int) $p_user['id'];
-	}
-	else {
+	} else {
 		if( isset( $p_user['name'] ) ) {
 			$t_user_id = user_get_id_by_name( $p_user['name'] );
 		}
@@ -216,8 +214,7 @@ function mci_get_enum_element( $p_enum_name, $p_val, $p_lang ) {
 function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, $p_lang = null ) {
 	if( $p_lang === null ) {
 		$t_lang = mci_get_user_lang( $p_user_id );
-	}
-	else {
+	} else {
 		$t_lang = $p_lang;
 	}
 
@@ -261,15 +258,13 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
-	}
-	else {
+	} else {
 		$t_project_id = db_prepare_int( $p_project_id );
 	}
 
 	if( null === $p_user_id ) {
 		$t_user_id = auth_get_current_user_id();
-	}
-	else {
+	} else {
 		$t_user_id = db_prepare_int( $p_user_id );
 	}
 
@@ -354,8 +349,7 @@ function mc_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	$t_method_array = config_get( 'display_errors' );
 	if( isset( $t_method_array[$p_type] ) ) {
 		$t_method = $t_method_array[$p_type];
-	}
-	else {
+	} else {
 		$t_method = 'none';
 	}
 
@@ -425,21 +419,17 @@ function error_get_stack_trace() {
 				}
 
 				$t_stack .= '(' . implode( $t_args, ', ' ) . ')';
-			}
-			else {
+			} else {
 				$t_stack .= '()';
 			}
 
 			$t_stack .= "\n";
 		}
-	}
-	else {
+	} else {
 		$t_stack = debug_backtrace();
-
 
 		array_shift( $t_stack ); #remove the call to this function from the stack trace
 		array_shift( $t_stack ); #remove the call to the error handler from the stack trace
-
 
 		foreach( $t_stack as $t_frame ) {
 			$t_stack .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' ) . ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' ) . ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
@@ -451,8 +441,7 @@ function error_get_stack_trace() {
 				}
 
 				$t_stack .= '(' . implode( $t_args, ', ' ) . ')';
-			}
-			else {
+			} else {
 				$t_stack .= '()';
 			}
 

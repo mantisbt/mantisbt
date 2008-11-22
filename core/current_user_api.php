@@ -173,8 +173,7 @@ function current_user_is_protected() {
 function current_user_is_anonymous() {
 	if( auth_is_user_authenticated() ) {
 		return(( ON == config_get( 'allow_anonymous_login' ) ) && ( current_user_get_field( 'username' ) == config_get( 'anonymous_account' ) ) );
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -206,15 +205,12 @@ function current_user_get_bug_filter( $p_project_id = null ) {
 			if( null != $t_token ) {
 				$t_filter = unserialize( $t_token );
 			}
-		}
-		else {
+		} else {
 			$t_filter = unserialize( $f_filter_string );
 		}
-	}
-	elseif( !filter_is_cookie_valid() ) {
+	} elseif( !filter_is_cookie_valid() ) {
 		return false;
-	}
-	else {
+	} else {
 		$t_user_id = auth_get_current_user_id();
 		$t_filter = user_get_bug_filter( $t_user_id, $p_project_id );
 	}

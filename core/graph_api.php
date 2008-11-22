@@ -52,8 +52,7 @@ function graph_get_font() {
 	$t_font = config_get( 'graph_font', '' );
 	if( isset( $t_font_map[$t_font] ) ) {
 		return $t_font_map[$t_font];
-	}
-	else {
+	} else {
 		return FF_FONT1;
 	}
 }
@@ -81,8 +80,7 @@ function graph_bar( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_he
 	$graph->xaxis->SetTickLabels( array_keys( $p_metrics ) );
 	if( FF_FONT2 <= $t_graph_font ) {
 		$graph->xaxis->SetLabelAngle( 60 );
-	}
-	else {
+	} else {
 		$graph->xaxis->SetLabelAngle( 90 );
 
 		# can't rotate non truetype fonts
@@ -143,8 +141,7 @@ function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_
 	$graph->xaxis->SetTickLabels( array_keys( $p_metrics['open'] ) );
 	if( FF_FONT2 <= $t_graph_font ) {
 		$graph->xaxis->SetLabelAngle( 60 );
-	}
-	else {
+	} else {
 		$graph->xaxis->SetLabelAngle( 90 );
 
 		# can't rotate non truetype fonts
@@ -316,8 +313,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 
 	if( FF_FONT2 <= $t_graph_font ) {
 		$graph->xaxis->SetLabelAngle( 60 );
-	}
-	else {
+	} else {
 		$graph->xaxis->SetLabelAngle( 90 );
 
 		# can't rotate non truetype fonts
@@ -379,8 +375,7 @@ function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p
 
 	if( FF_FONT2 <= $t_graph_font ) {
 		$graph->xaxis->SetLabelAngle( 60 );
-	}
-	else {
+	} else {
 		$graph->xaxis->SetLabelAngle( 90 );
 
 		# can't rotate non truetype fonts
@@ -523,12 +518,10 @@ function create_developer_summary() {
 		if( $row['status'] >= $t_res_val ) {
 			if( $row['status'] >= $t_clo_val ) {
 				$t_handler_arr[$row['handler_id']]['close']++;
-			}
-			else {
+			} else {
 				$t_handler_arr[$row['handler_id']]['res']++;
 			}
-		}
-		else {
+		} else {
 			$t_handler_arr[$row['handler_id']]['open']++;
 		}
 	}
@@ -583,8 +576,7 @@ function create_reporter_summary() {
 
 		if( isset( $t_reporter_arr[$row['reporter_id']] ) ) {
 			$t_reporter_arr[$row['reporter_id']]++;
-		}
-		else {
+		} else {
 			$t_reporter_arr[$row['reporter_id']] = 1;
 		}
 	}
@@ -697,13 +689,8 @@ function create_cumulative_bydate() {
 
 		if( isset( $metrics[$t_date] ) ) {
 			$metrics[$t_date][0]++;
-		}
-		else {
-			$metrics[$t_date] = array(
-				1,
-				0,
-				0,
-			);
+		} else {
+			$metrics[$t_date] = array( 1, 0, 0, );
 		}
 	}
 
@@ -732,8 +719,7 @@ function create_cumulative_bydate() {
 		#  (i.e. pre 0.18 data), use last_updated from bug table instead
 		if( NULL == $row['date_modified'] ) {
 			$t_date = db_unixtimestamp( $row['last_updated'] );
-		}
-		else {
+		} else {
 			if( $t_res_val > $row['old_value'] ) {
 				$t_date = db_unixtimestamp( $row['date_modified'] );
 			}
@@ -746,8 +732,7 @@ function create_cumulative_bydate() {
 
 				if( isset( $metrics[$t_date_index] ) ) {
 					$metrics[$t_date_index][1]++;
-				}
-				else {
+				} else {
 					$metrics[$t_date_index] = array(
 						0,
 						1,

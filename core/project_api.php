@@ -72,8 +72,7 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 
 		if( $p_trigger_errors ) {
 			trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -117,8 +116,7 @@ function project_clear_cache( $p_project_id = null ) {
 		$g_cache_project = array();
 		$g_cache_project_missing = array();
 		$g_cache_project_all = false;
-	}
-	else {
+	} else {
 		unset( $g_cache_project[(int) $p_project_id] );
 		unset( $g_cache_project_missing[(int) $p_project_id] );
 		$g_cache_project_all = false;
@@ -140,8 +138,7 @@ function project_exists( $p_project_id ) {
 	#  cache it we return false.
 	if( false == project_cache_row( $p_project_id, false ) ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -167,8 +164,7 @@ function project_is_name_unique( $p_name ) {
 
 	if( 0 == db_result( $result ) ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -198,8 +194,7 @@ function project_includes_user( $p_project_id, $p_user_id ) {
 
 	if( 0 == db_result( $result ) ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -364,8 +359,7 @@ function project_get_id_by_name( $p_project_name ) {
 
 	if( db_num_rows( $t_result ) == 0 ) {
 		return 0;
-	}
-	else {
+	} else {
 		return db_result( $t_result );
 	}
 }
@@ -386,8 +380,7 @@ function project_get_field( $p_project_id, $p_field_name ) {
 
 	if( isset( $row[$p_field_name] ) ) {
 		return $row[$p_field_name];
-	}
-	else {
+	} else {
 		error_parameters( $p_field_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 		return '';
@@ -399,8 +392,7 @@ function project_get_field( $p_project_id, $p_field_name ) {
 function project_get_name( $p_project_id ) {
 	if( ALL_PROJECTS == $p_project_id ) {
 		return lang_get( 'all_projects' );
-	}
-	else {
+	} else {
 		return project_get_field( $p_project_id, 'name' );
 	}
 }
@@ -423,8 +415,7 @@ function project_get_local_user_access_level( $p_project_id, $p_user_id ) {
 
 	if( db_num_rows( $result ) > 0 ) {
 		return db_result( $result );
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -485,12 +476,9 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 			$t_private_project_threshold = config_get( 'private_project_threshold' );
 			if( is_array( $t_private_project_threshold ) ) {
 				if( is_array( $p_access_level ) ) {
-
 					# both private threshold and request are arrays, use intersection
 					$t_global_access_level = array_intersect( $p_access_level, $t_private_project_threshold );
-				}
-				else {
-
+				} else {
 					# private threshold is an array, but request is a number, use values in threshold higher than request
 					$t_global_access_level = array();
 					foreach( $t_private_project_threshold as $t_threshold ) {
@@ -499,10 +487,8 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 						}
 					}
 				}
-			}
-			else {
+			} else {
 				if( is_array( $p_access_level ) ) {
-
 					# private threshold is a number, but request is an array, use values in request higher than threshold
 					$t_global_access_level = array();
 					foreach( $p_access_level as $t_threshold ) {
@@ -510,9 +496,7 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 							$t_global_access_level[] = $t_threshold;
 						}
 					}
-				}
-				else {
-
+				} else {
 					# both private threshold and request are numbers, use maximum
 					$t_global_access_level = max( $p_access_level, $t_private_project_threshold );
 				}
@@ -523,15 +507,12 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 	if( is_array( $t_global_access_level ) ) {
 		if( 0 == count( $t_global_access_level ) ) {
 			$t_global_access_clause = ">= " . NOBODY . " ";
-		}
-		elseif( 1 == count( $t_global_access_level ) ) {
+		} elseif( 1 == count( $t_global_access_level ) ) {
 			$t_global_access_clause = "= " . array_shift( $t_global_access_level ) . " ";
-		}
-		else {
+		} else {
 			$t_global_access_clause = "IN (" . implode( ',', $t_global_access_level ) . ")";
 		}
-	}
-	else {
+	} else {
 		$t_global_access_clause = ">= $t_global_access_level ";
 	}
 
@@ -564,16 +545,13 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 			$row = db_fetch_array( $result );
 			if( is_array( $p_access_level ) ) {
 				$t_keep = in_array( $row['access_level'], $p_access_level );
-			}
-			else {
+			} else {
 				$t_keep = $row['access_level'] >= $p_access_level;
 			}
 
 			if( $t_keep ) {
 				$t_users[$row['id']] = $row;
-			}
-			else {
-
+			} else {
 				# If user's overridden level is lower than required, so remove
 				#  them from the list if they were previously there
 				unset( $t_users[$row['id']] );
@@ -641,8 +619,7 @@ function project_update_user_access( $p_project_id, $p_user_id, $p_access_level 
 function project_set_user_access( $p_project_id, $p_user_id, $p_access_level ) {
 	if( project_includes_user( $p_project_id, $p_user_id ) ) {
 		return project_update_user_access( $p_project_id, $p_user_id, $p_access_level );
-	}
-	else {
+	} else {
 		return project_add_user( $p_project_id, $p_user_id, $p_access_level );
 	}
 }
@@ -729,8 +706,7 @@ function project_file_is_name_unique( $p_name ) {
 
 	if( $t_count > 0 ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }

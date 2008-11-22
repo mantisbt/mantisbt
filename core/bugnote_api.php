@@ -66,8 +66,7 @@ function bugnote_exists( $p_bugnote_id ) {
 
 	if( 0 == db_result( $result ) ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -88,8 +87,7 @@ function bugnote_ensure_exists( $p_bugnote_id ) {
 function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
 	if( bugnote_get_field( $p_bugnote_id, 'reporter_id' ) == $p_user_id ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -119,8 +117,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 		$c_type = TIME_TRACKING;
-	}
-	elseif( is_blank( $p_bugnote_text ) ) {
+	} elseif( is_blank( $p_bugnote_text ) ) {
 		return false;
 	}
 
@@ -137,8 +134,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	# get user information
 	if( $p_user_id === null ) {
 		$c_user_id = auth_get_current_user_id();
-	}
-	else {
+	} else {
 		$c_user_id = db_prepare_int( $p_user_id );
 	}
 
@@ -146,8 +142,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	# @@@ VB: Should we allow users to report private bugnotes, and possibly see only their own private ones
 	if( $p_private && access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $c_user_id ) ) {
 		$t_view_state = VS_PRIVATE;
-	}
-	else {
+	} else {
 		$t_view_state = VS_PUBLIC;
 	}
 
@@ -289,8 +284,7 @@ function bugnote_get_latest_id( $p_bug_id ) {
 function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit, $p_user_id = null ) {
 	if( $p_user_id === null ) {
 		$t_user_id = auth_get_current_user_id();
-	}
-	else {
+	} else {
 		$t_user_id = $p_user_id;
 	}
 
@@ -341,21 +335,17 @@ function bugnote_get_all_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bug
 		$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
 
 		if( 0 == $p_user_bugnote_limit ) {
-
 			# # Show all bugnotes
 			$t_bugnote_limit = -1;
 			$t_bugnote_offset = -1;
-		}
-		else {
-
+		} else {
 			# # Use offset only if order is ASC to get the last bugnotes
 			if( 'ASC' == $p_user_bugnote_order ) {
 				$result = db_query_bound( "SELECT COUNT(*) AS row_count FROM $t_bugnote_table WHERE bug_id= " . db_param(), array( $c_bug_id ) );
 				$row = db_fetch_array( $result );
 
 				$t_bugnote_offset = $row['row_count'] - $p_user_bugnote_limit;
-			}
-			else {
+			} else {
 				$t_bugnote_offset = -1;
 			}
 
@@ -460,8 +450,7 @@ function bugnote_set_view_state( $p_bugnote_id, $p_private ) {
 
 	if( $p_private ) {
 		$t_view_state = VS_PRIVATE;
-	}
-	else {
+	} else {
 		$t_view_state = VS_PUBLIC;
 	}
 
@@ -506,15 +495,13 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 
 	if( !is_blank( $c_from ) ) {
 		$t_from_where = " AND bn.date_submitted >= '$c_from '";
-	}
-	else {
+	} else {
 		$t_from_where = '';
 	}
 
 	if( !is_blank( $c_to ) ) {
 		$t_to_where = " AND bn.date_submitted <= '$c_to '";
-	}
-	else {
+	} else {
 		$t_to_where = '';
 	}
 
@@ -553,22 +540,19 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 
 	if( !is_blank( $c_from ) ) {
 		$t_from_where = " AND bn.date_submitted >= '$c_from'";
-	}
-	else {
+	} else {
 		$t_from_where = '';
 	}
 
 	if( !is_blank( $c_to ) ) {
 		$t_to_where = " AND bn.date_submitted <= '$c_to'";
-	}
-	else {
+	} else {
 		$t_to_where = '';
 	}
 
 	if( ALL_PROJECTS != $c_project_id ) {
 		$t_project_where = " AND b.project_id = '$c_project_id' AND bn.bug_id = b.id ";
-	}
-	else {
+	} else {
 		$t_project_where = '';
 	}
 

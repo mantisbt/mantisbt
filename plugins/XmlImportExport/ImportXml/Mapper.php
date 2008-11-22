@@ -37,8 +37,7 @@ class ImportXml_Mapper {
 	public function getNewID( $type, $old ) {
 		if( $this->exists( $type, $old ) ) {
 			return $this->{$type}[ $old ];
-		}
-		else {
+		} else {
 			return $old;
 		}
 	}

@@ -43,8 +43,7 @@
 		helper_ensure_confirmed( lang_get( 'remove_all_users_sure_msg' ), lang_get( 'remove_all_users_button' ) );
 
 		project_remove_all_users( $f_project_id );
-	}
-	else {
+	} else {
 		$t_user = user_get_row( $f_user_id );
 		# Confirm with the user
 		helper_ensure_confirmed( lang_get( 'remove_user_sure_msg' ) .

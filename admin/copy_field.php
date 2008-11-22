@@ -106,12 +106,10 @@ else {
 			if( !bug_set_field( $v_bug_id, $f_dest_field, $t_cust_value ) ) {
 				echo 'database update failed';
 				$t_failures++;
-			}
-			else {
+			} else {
 				echo 'applied';
 			}
-		}
-		else {
+		} else {
 			echo 'field value was not valid or previously defined';
 			$t_failures++;
 		}

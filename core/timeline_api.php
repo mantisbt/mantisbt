@@ -135,8 +135,7 @@ function timeline_generate_hierarchy( $p_all_bugs, $p_local_bugs = null, $p_seen
 		foreach( $p_all_bugs as $t_bug_id => $t_children ) {
 			if( count( $t_children ) > 0 ) {
 				$p_new_bugs[$t_bug_id] = timeline_generate_hierarchy( $p_all_bugs, $t_children, array( $t_bug_id ) );
-			}
-			else {
+			} else {
 				$p_new_bugs[$t_bug_id] = array();
 			}
 		}
@@ -144,16 +143,14 @@ function timeline_generate_hierarchy( $p_all_bugs, $p_local_bugs = null, $p_seen
 		return $p_new_bugs;
 
 		# Inner passes
-	}
-	else {
+	} else {
 		foreach( $p_local_bugs as $t_bug_id => $t_children ) {
 			if( !in_array( $t_bug_id, $p_seen_ids ) ) {
 				$t_seen_ids = $p_seen_ids;
 				$t_seen_ids[] = $t_bug_id;
 
 				$p_local_bugs[$t_bug_id] = timeline_generate_hierarchy( $p_all_bugs, $p_all_bugs[$t_bug_id], $t_seen_ids );
-			}
-			else {
+			} else {
 				return array();
 			}
 		}

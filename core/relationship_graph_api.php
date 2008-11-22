@@ -85,8 +85,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
 			if( BUG_DEPENDANT == $t_relationship->type ) {
 				$v_rel_list[$t_id][$t_dst] = BUG_DEPENDANT;
 				$v_rel_list[$t_dst][$t_id] = BUG_BLOCKS;
-			}
-			else {
+			} else {
 				$v_rel_list[$t_id][$t_dst] = $t_relationship->type;
 				$v_rel_list[$t_dst][$t_id] = $t_relationship->type;
 			}
@@ -102,8 +101,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
 			if( BUG_DEPENDANT == $t_relationship->type ) {
 				$v_rel_list[$t_id][$t_dst] = BUG_BLOCKS;
 				$v_rel_list[$t_dst][$t_id] = BUG_DEPENDANT;
-			}
-			else {
+			} else {
 				$v_rel_list[$t_id][$t_dst] = $t_relationship->type;
 				$v_rel_list[$t_dst][$t_id] = $t_relationship->type;
 			}
@@ -154,8 +152,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
 
 		if( $t_view_on_click ) {
 			$t_url = string_get_bug_view_url( $t_id );
-		}
-		else {
+		} else {
 			$t_url = 'bug_relationship_graph.php?bug_id=' . $t_id . '&amp;graph=relation';
 		}
 
@@ -180,8 +177,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
 				global $g_relationships;
 				if( isset( $g_relationships[$t_relation] ) && isset( $g_relationships[$t_relation]['#edge_style'] ) ) {
 					$t_edge_style = $g_relationships[$t_relation]['#edge_style'];
-				}
-				else {
+				} else {
 					$t_edge_style = array();
 				}
 
@@ -256,8 +252,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_bug = null, $p_horizontal = 
 	if( $p_horizontal ) {
 		$t_graph_attributes['rankdir'] = 'LR';
 		$t_graph_orientation = 'horizontal';
-	}
-	else {
+	} else {
 		$t_graph_orientation = 'vertical';
 	}
 
@@ -284,8 +279,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_bug = null, $p_horizontal = 
 
 		if( $t_view_on_click ) {
 			$t_url = string_get_bug_view_url( $t_related_bug_id );
-		}
-		else {
+		} else {
 			$t_url = 'bug_relationship_graph.php?bug_id=' . $t_related_bug_id . '&amp;graph=dependency&orientation=' . $t_graph_orientation;
 		}
 
@@ -381,9 +375,7 @@ function relgraph_add_child( &$p_bug_list, $p_bug_id ) {
 				relgraph_add_child( $p_bug_id, $t_child );
 			}
 		}
-	}
-	else {
-
+	} else {
 		# The issue is not in the list, proceed as usual.
 		# Check if the issue really exists and we have access to it.
 		# If not, it is like it didn't exist.
@@ -452,8 +444,7 @@ function relgraph_add_bug_to_graph( &$p_graph, $p_bug_id, $p_bug, $p_url = null,
 	if( $p_highlight ) {
 		$t_node_attributes['color'] = '#0000FF';
 		$t_node_attributes['style'] = 'bold, filled';
-	}
-	else {
+	} else {
 		$t_node_attributes['color'] = 'black';
 		$t_node_attributes['style'] = 'filled';
 	}

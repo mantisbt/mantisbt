@@ -356,8 +356,7 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	$t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, $t_project_id, $t_user_id );
 	if( count( $t_rows ) == 0 ) {
 		return 0;
-	}
-	else {
+	} else {
 		return $t_rows[0]['id'];
 	}
 }
@@ -388,8 +387,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 
 	if( db_num_rows( $result ) == 0 ) {
 		return 0;
-	}
-	else {
+	} else {
 		while(( $row = db_fetch_array( $result ) ) !== false ) {
 			$t_issue_id = (int) $row['id'];
 			$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
@@ -458,8 +456,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	if(( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id == 0 ) {
 			return new soap_fault( 'Client', '', "Project '" . $t_project['name'] . "' does not exist." );
-		}
-		else {
+		} else {
 			return new soap_fault( 'Client', '', "Project '$t_project_id' does not exist." );
 		}
 	}
@@ -481,8 +478,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	if( $t_category_id == 0 ) {
 		if ( is_blank( $t_category ) ) {
 			return new soap_fault( 'Client', '', "Category cannot be empty." );
-		}
-		else {
+		} else {
 			return new soap_fault( 'Client', '', "Category '$t_category' does not exist in project '$t_project_id'." );
 		}
 	}
@@ -492,8 +488,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
 			return new soap_fault( 'Client', '', "Version '$v_version' does not exist in project '$t_project_name'." );
-		}
-		else {
+		} else {
 			$t_version_when_not_found = config_get( 'mc_version_when_not_found' );
 			$v_version = $t_version_when_not_found;
 		}
@@ -566,8 +561,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		foreach( $v_notes as $t_note ) {
 			if( isset( $t_note['view_state'] ) ) {
 				$t_view_state = $t_note['view_state'];
-			}
-			else {
+			} else {
 				$t_view_state = config_get( 'default_bugnote_view_status' );
 			}
 
@@ -657,8 +651,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
 			return new soap_fault( 'Client', '', "Version '$v_version' does not exist in project '$t_project_name'." );
-		}
-		else {
+		} else {
 			$t_version_when_not_found = config_get( 'mc_version_when_not_found' );
 			$v_version = $t_version_when_not_found;
 		}
@@ -731,8 +724,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		foreach( $v_notes as $t_note ) {
 			if( isset( $t_note['view_state'] ) ) {
 				$t_view_state = $t_note['view_state'];
-			}
-			else {
+			} else {
 				$t_view_state = config_get( 'default_bugnote_view_status' );
 			}
 
@@ -809,8 +801,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 
 	if( isset( $p_note['view_state'] ) ) {
 		$t_view_state = $p_note['view_state'];
-	}
-	else {
+	} else {
 		$t_view_state = array(
 			'id' => config_get( 'default_bug_view_status' ),
 		);
@@ -920,8 +911,7 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
 		email_relationship_added( $t_dest_issue_id, $p_issue_id, relationship_get_complementary_type( $t_rel_type['id'] ) );
 
 		return $t_relationship_id;
-	}
-	else {
+	} else {
 		return new soap_fault( 'Client', '', "Relationship already exists." );
 	}
 }
@@ -980,8 +970,7 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 	if( $p_issue_id == $t_bug_relationship_data->src_bug_id ) {
 		$t_bug_rel_type = $t_rel_type;
 		$t_dest_bug_rel_type = relationship_get_complementary_type( $t_rel_type );
-	}
-	else {
+	} else {
 		$t_bug_rel_type = relationship_get_complementary_type( $t_rel_type );
 		$t_dest_bug_rel_type = $t_rel_type;
 	}

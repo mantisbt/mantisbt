@@ -72,8 +72,7 @@ function columns_get_all( $p_project_id = null ) {
 	# Add project custom fields to the array.  Only add the ones for which the current user has at least read access.
 	if( $p_project_id === null ) {
 		$t_project_id = helper_get_current_project();
-	}
-	else {
+	} else {
 		$t_project_id = $p_project_id;
 	}
 
@@ -153,8 +152,7 @@ function column_get_title( $p_column ) {
 
 		if( $t_field_id === false ) {
 			$t_custom_field = '@' . $t_custom_field . '@';
-		}
-		else {
+		} else {
 			$t_def = custom_field_get_definition( $t_field_id );
 			$t_custom_field = lang_get_defaulted( $t_def['name'] );
 		}
@@ -219,8 +217,7 @@ function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns
 		if( in_array( $t_column, $t_columns_no_duplicates ) ) {
 			error_parameters( $p_field_name, $t_column );
 			trigger_error( ERROR_COLUMNS_DUPLICATE, ERROR );
-		}
-		else {
+		} else {
 			$t_columns_no_duplicates[] = $t_column_lower;
 		}
 	}
@@ -379,8 +376,7 @@ function print_column_title_build( $p_sort, $p_dir, $p_columns_target = COLUMNS_
 		print_view_bug_sort_link( lang_get( 'build' ), 'build', $p_sort, $p_dir, $p_columns_target );
 		print_sort_icon( $p_dir, $p_sort, 'build' );
 		echo '</td>';
-	}
-	else {
+	} else {
 		echo lang_get( 'build' );
 	}
 }
@@ -504,8 +500,7 @@ function print_column_selection( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW
 	if( access_has_bug_level( $t_update_bug_threshold, $p_row['id'] ) ) {
 		$t_checkboxes_exist = true;
 		printf( "<input type=\"checkbox\" name=\"bug_arr[]\" value=\"%d\" />", $p_row['id'] );
-	}
-	else {
+	} else {
 		echo "&nbsp;";
 	}
 	echo '</td>';
@@ -519,8 +514,7 @@ function print_column_edit( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE
 
 	if( $t_is_overdue && $t_view_level ) {
 		print "<td class=\"overdue\">";
-	}
-	else {
+	} else {
 		echo '<td>';
 	}
 	if( !bug_is_readonly( $p_row['id'] ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $p_row['id'] ) ) {
@@ -528,8 +522,7 @@ function print_column_edit( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE
 		echo '<img border="0" width="16" height="16" src="' . $t_icon_path . 'update.png';
 		echo '" alt="' . lang_get( 'update_bug_button' ) . '"';
 		echo ' title="' . lang_get( 'update_bug_button' ) . '" /></a>';
-	}
-	else {
+	} else {
 		echo '&nbsp;';
 	}
 	if( $t_is_overdue && $t_view_level ) {
@@ -543,8 +536,7 @@ function print_column_edit( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE
 		echo '<img border="0" width="16" height="16" src="' . $t_icon_path . 'clock.png';
 		echo '" alt="' . lang_get( 'due_date' ) . '"';
 		echo ' title="' . lang_get( 'due_date' ) . '" /></a>';
-	}
-	else {
+	} else {
 		echo '&nbsp;';
 	}
 
@@ -556,8 +548,7 @@ function print_column_priority( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_
 	echo '<td>';
 	if( ON == config_get( 'show_priority_text' ) ) {
 		print_formatted_priority_string( $p_row['status'], $p_row['priority'] );
-	}
-	else {
+	} else {
 		print_status_icon( $p_row['priority'] );
 	}
 	echo '</td>';
@@ -591,8 +582,7 @@ function print_column_bugnotes_count( $p_row, $p_columns_target = COLUMNS_TARGET
 	if( NULL !== $t_bugnote_stats ) {
 		$bugnote_count = $t_bugnote_stats['count'];
 		$v_bugnote_updated = $t_bugnote_stats['last_modified'];
-	}
-	else {
+	} else {
 		$bugnote_count = 0;
 	}
 
@@ -602,12 +592,10 @@ function print_column_bugnotes_count( $p_row, $p_columns_target = COLUMNS_TARGET
 
 		if( $v_bugnote_updated > strtotime( '-' . $t_filter['highlight_changed'] . ' hours' ) ) {
 			printf( '<span class="bold">%s</span>', $t_bugnote_link );
-		}
-		else {
+		} else {
 			echo $t_bugnote_link;
 		}
-	}
-	else {
+	} else {
 		echo '&nbsp;';
 	}
 
@@ -633,8 +621,7 @@ function print_column_attachment( $p_row, $p_columns_target = COLUMNS_TARGET_VIE
 		echo ' title="' . $t_attachment_count . ' ' . lang_get( 'attachments' ) . '"';
 		echo ' />';
 		echo '</a>';
-	}
-	else {
+	} else {
 		echo ' &nbsp; ';
 	}
 
@@ -720,8 +707,7 @@ function print_column_last_updated( $p_row, $p_columns_target = COLUMNS_TARGET_V
 	echo '<td class="center">';
 	if( $p_row['last_updated'] > strtotime( '-' . $t_filter['highlight_changed'] . ' hours' ) ) {
 		printf( '<span class="bold">%s</span>', $t_last_updated );
-	}
-	else {
+	} else {
 		echo $t_last_updated;
 	}
 	echo '</td>';
@@ -740,8 +726,7 @@ function print_column_summary( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_P
 
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
 		$t_summary = string_attribute( $p_row['summary'] );
-	}
-	else {
+	} else {
 		$t_summary = string_display_line_links( $p_row['summary'] );
 	}
 

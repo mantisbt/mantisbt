@@ -114,8 +114,8 @@
 </table>
 <?php
 		html_page_bottom1( __FILE__ );
-	} // end failed to attach tag
-	else {
+		// end failed to attach tag
+	} else {
 		foreach( $t_tags_create as $t_tag_row ) {
 			$t_tag_row['id'] = tag_create( $t_tag_row['name'], $t_user_id );
 			$t_tags_attach[] = $t_tag_row;

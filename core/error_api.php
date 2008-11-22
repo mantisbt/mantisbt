@@ -88,12 +88,10 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	$t_method_array = config_get_global( 'display_errors' );
 	if( isset( $t_method_array[$p_type] ) ) {
 		$t_method = $t_method_array[$p_type];
-	}
-	else {
+	} else {
 		if( isset( $t_method_array[E_ALL] ) ) {
 			$t_method = $t_method_array[E_ALL];
-		}
-		else {
+		} else {
 			$t_method = 'none';
 		}
 	}
@@ -152,12 +150,10 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 					html_page_top1();
 					if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
 						html_page_top2();
-					}
-					else {
+					} else {
 						html_page_top2a();
 					}
-				}
-				else {
+				} else {
 					echo '<html><head><title>', $t_error_type, '</title></head><body>';
 				}
 			}
@@ -169,8 +165,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 			echo '<tr><td><p class="center">';
 			if( null === $g_error_proceed_url ) {
 				echo lang_get( 'error_no_proceed' );
-			}
-			else {
+			} else {
 				echo '<a href="', $g_error_proceed_url, '">', lang_get( 'proceed' ), '</a>';
 			}
 			echo '</p></td></tr>';
@@ -195,13 +190,11 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 			if( $t_html_api ) {
 				if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
 					html_page_bottom1();
-				}
-				else {
+				} else {
 					html_body_end();
 					html_end();
 				}
-			}
-			else {
+			} else {
 				echo '</body></html>', "\n";
 			}
 			exit();
@@ -303,8 +296,7 @@ function error_print_stack_trace() {
 				$t_args[] = error_build_parameter_string( $t_value );
 			}
 			echo '<td>( ', htmlentities( implode( $t_args, ', ' ), ENT_COMPAT, lang_get( 'charset' ) ), ' )</td></tr>';
-		}
-		else {
+		} else {
 			echo '<td>-</td></tr>';
 		}
 	}
@@ -337,12 +329,10 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 		}
 
 		return '<Object><' . $t_class_name . '> ( ' . implode( $t_results, ', ' ) . ' )';
-	}
-	else {
+	} else {
 		if( $p_showtype ) {
 			return '<' . gettype( $p_param ) . '>' . var_export( $p_param, true );
-		}
-		else {
+		} else {
 			return var_export( $p_param, true );
 		}
 	}
@@ -406,8 +396,7 @@ function error_alternate_class() {
 
 	if( 1 == $t_errindex++ % 2 ) {
 		return 'class="row-1"';
-	}
-	else {
+	} else {
 		return 'class="row-2"';
 	}
 }

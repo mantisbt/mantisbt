@@ -45,8 +45,7 @@ function print_month_option_list( $p_month = 0 ) {
 		$month_name = date( 'F', mktime( 0, 0, 0, $i, 1, 2000 ) );
 		if( $i == $p_month ) {
 			echo "<option value=\"$i\" selected=\"selected\">$month_name</option>";
-		}
-		else {
+		} else {
 			echo "<option value=\"$i\">$month_name</option>";
 		}
 	}
@@ -56,8 +55,7 @@ function print_numeric_month_option_list( $p_month = 0 ) {
 	for( $i = 1;$i <= 12;$i++ ) {
 		if( $i == $p_month ) {
 			echo "<option value=\"$i\" selected=\"selected\">$i</option>";
-		}
-		else {
+		} else {
 			echo "<option value=\"$i\">$i</option>";
 		}
 	}
@@ -67,8 +65,7 @@ function print_day_option_list( $p_day = 0 ) {
 	for( $i = 1;$i <= 31;$i++ ) {
 		if( $i == $p_day ) {
 			echo "<option value=\"$i\" selected=\"selected\">$i</option>";
-		}
-		else {
+		} else {
 			echo "<option value=\"$i\">$i</option>";
 		}
 	}
@@ -80,8 +77,7 @@ function print_year_option_list( $p_year = 0 ) {
 	for( $i = $current_year;$i > 1999;$i-- ) {
 		if( $i == $p_year ) {
 			echo "<option value=\"$i\" selected=\"selected\">$i</option>";
-		}
-		else {
+		} else {
 			echo "<option value=\"$i\">$i</option>";
 		}
 	}
@@ -112,8 +108,7 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
 	for( $i = $t_start_year;$i <= $t_end_year;$i++ ) {
 		if( $i == $p_year ) {
 			echo "<option value=\"$i\" selected=\"selected\">$i</option>";
-		}
-		else {
+		} else {
 			echo "<option value=\"$i\">$i</option>";
 		}
 	}
@@ -124,8 +119,7 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 	$t_chars = preg_split( '//', $p_format, -1, PREG_SPLIT_NO_EMPTY );
 	if( $p_date != 0 ) {
 		$t_date = preg_split( '/-/', date( 'Y-m-d', $p_date ), -1, PREG_SPLIT_NO_EMPTY );
-	}
-	else {
+	} else {
 		$t_date = array(
 			0,
 			0,

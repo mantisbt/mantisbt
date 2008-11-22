@@ -36,16 +36,13 @@
 function gpc_get( $p_var_name, $p_default = null ) {
 	if( isset( $_POST[$p_var_name] ) ) {
 		$t_result = gpc_strip_slashes( $_POST[$p_var_name] );
-	}
-	elseif( isset( $_GET[$p_var_name] ) ) {
+	} elseif( isset( $_GET[$p_var_name] ) ) {
 		$t_result = gpc_strip_slashes( $_GET[$p_var_name] );
 	}
 	elseif( func_num_args() > 1 ) {
-
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
-	}
-	else {
+	} else {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_VAR_NOT_FOUND, ERROR );
 		$t_result = null;
@@ -112,8 +109,7 @@ function gpc_get_bool( $p_var_name, $p_default = false ) {
 
 	if( $t_result === $p_default ) {
 		return $p_default;
-	}
-	else {
+	} else {
 		if( is_array( $t_result ) ) {
 			error_parameters( $p_var_name );
 			trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
@@ -141,8 +137,7 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			$t_values = gpc_get_string_array( $p_var_name, $p_default );
 			if( is_array( $t_values ) ) {
 				return implode( '|', $t_values );
-			}
-			else {
+			} else {
 			    echo 'not an array';
 				return '';
 			}
@@ -154,12 +149,10 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			if(( $t_year == 0 ) || ( $t_month == 0 ) || ( $t_day == 0 ) ) {
 				if( $p_default == null ) {
 					return '';
-				}
-				else {
+				} else {
 					return $p_default;
 				}
-			}
-			else {
+			} else {
 				return strtotime( $t_year . "-" . $t_month . "-" . $t_day );
 			}
 			break;
@@ -251,8 +244,7 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
 
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
-	}
-	else {
+	} else {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_VAR_NOT_FOUND, ERROR );
 	}
@@ -303,8 +295,7 @@ function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null ) {
 	# dont try to send cookie if headers are send (guideweb)
 	if( !headers_sent() ) {
 		return setcookie( $p_name, '', -1, $p_path, $p_domain );
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -326,8 +317,7 @@ function gpc_get_file( $p_var_name, $p_default = null ) {
 
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
-	}
-	else {
+	} else {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_VAR_NOT_FOUND, ERROR );
 	}
@@ -359,8 +349,7 @@ function gpc_make_array( $p_var_name ) {
 function gpc_string_to_bool( $p_string ) {
 	if( 0 == strcasecmp( 'off', $p_string ) || 0 == strcasecmp( 'no', $p_string ) || 0 == strcasecmp( 'false', $p_string ) || 0 == strcasecmp( '', $p_string ) || 0 == strcasecmp( '0', $p_string ) ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -369,11 +358,9 @@ function gpc_string_to_bool( $p_string ) {
 function gpc_strip_slashes( $p_var ) {
 	if( 0 == get_magic_quotes_gpc() ) {
 		return $p_var;
-	}
-	elseif( !is_array( $p_var ) ) {
+	} elseif( !is_array( $p_var ) ) {
 		return stripslashes( $p_var );
-	}
-	else {
+	} else {
 		foreach( $p_var as $key => $value ) {
 			$p_var[$key] = gpc_strip_slashes( $value );
 		}

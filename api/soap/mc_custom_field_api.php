@@ -20,12 +20,10 @@
 function mci_get_custom_field_id_from_objectref( $p_object_ref ) {
 	if( (int) $p_object_ref['id'] != 0 ) {
 		$t_id = (int) $p_object_ref['id'];
-	}
-	else {
+	} else {
 		if( !is_blank( $p_object_ref['name'] ) ) {
 			$t_id = custom_field_get_id_from_name( $p_object_ref['name'] );
-		}
-		else {
+		} else {
 			$t_id = 0;
 		}
 	}

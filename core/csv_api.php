@@ -42,8 +42,7 @@ function csv_get_default_filename() {
 
 	if( ALL_PROJECTS == $t_current_project_id ) {
 		$t_filename = user_get_name( auth_get_current_user_id() );
-	}
-	else {
+	} else {
 		$t_filename = project_get_field( $t_current_project_id, 'name' );
 	}
 

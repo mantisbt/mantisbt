@@ -14,10 +14,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
  * Database
@@ -88,12 +84,10 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 
 		if( $p_pconnect ) {
 			$t_result = $g_db->PConnect( $p_hostname, $p_username, $p_password, $p_database_name );
-		}
-		else {
+		} else {
 			$t_result = $g_db->Connect( $p_hostname, $p_username, $p_password, $p_database_name );
 		}
-	}
-	else {
+	} else {
 		$g_db = ADONewConnection( $p_dsn );
 		$t_result = $g_db->IsConnected();
 	}
@@ -108,8 +102,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 			if( strtolower( lang_get( 'charset' ) ) === 'utf-8' ) {
 				db_query_bound( 'SET NAMES UTF8' );
 			}
-		}
-		elseif( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
+		} elseif( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
 			$t_result2 = db_query_bound( 'set schema ' . $p_db_schema );
 			if( $t_result2 === false ) {
 				db_error();
@@ -117,8 +110,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 				return false;
 			}
 		}
-	}
-	else {
+	} else {
 		db_error();
 		trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
 		return false;
@@ -214,9 +206,7 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 		# Is this called from another function?
 		if( isset( $t_backtrace[1] ) ) {
 			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
-		}
-		else {
-
+		} else {
 			# or from a script directly?
 			$t_caller .= ' ' . $_SERVER['PHP_SELF'];
 		}
@@ -224,8 +214,7 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 
 	if(( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
 		$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset );
-	}
-	else {
+	} else {
 		$t_result = $g_db->Execute( $p_query );
 	}
 
@@ -239,8 +228,7 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 		db_error( $p_query );
 		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
 		return false;
-	}
-	else {
+	} else {
 		return $t_result;
 	}
 }
@@ -272,9 +260,7 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 		# Is this called from another function?
 		if( isset( $t_backtrace[1] ) ) {
 			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
-		}
-		else {
-
+		} else {
 			# or from a script directly?
 			$t_caller .= ' - ';
 		}
@@ -291,8 +277,7 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 
 	if(( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
 		$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset, $arr_parms );
-	}
-	else {
+	} else {
 		$t_result = $g_db->Execute( $p_query, $arr_parms );
 	}
 
@@ -322,15 +307,13 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 							$replace = $arr_parms[$i - 1];
 							break;
 						}
-					}
-					else {
+					} else {
 						echo( "Invalid argument type passed to query_bound(): $i" );
 						exit( 1 );
 					}
 					$p_query = substr( $p_query, 0, $matches[1][1] ) . $replace . substr( $p_query, $matches[1][1] + strlen( $matches[1][0] ) );
 					$lastoffset = $matches[1][1] + strlen( $replace );
-				}
-				else {
+				} else {
 					$lastoffset = $matches[1][1] + 1;
 				}
 				$i++;
@@ -348,8 +331,7 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 		db_error( $p_query );
 		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
 		return false;
-	}
-	else {
+	} else {
 		return $t_result;
 	}
 }
@@ -404,8 +386,7 @@ function db_fetch_array( &$p_result ) {
 		$t_array = $p_result->fields;
 		$p_result->MoveNext();
 		return $t_array;
-	}
-	else {
+	} else {
 		$t_row = $p_result->GetRowAssoc( false );
 
 		for( $i = 0;$i < $p_result->FieldCount();$i++ ) {
@@ -483,16 +464,12 @@ function db_table_exists( $p_table_name ) {
 
 	if( is_blank( $p_table_name ) ) {
 		return false;
-
-		// no tables found
 	}
 
 	if( db_is_db2() ) {
-
 		// must pass schema
 		$t_tables = $g_db->MetaTables( 'TABLE', false, '', $g_db_schema );
-	}
-	else {
+	} else {
 		$t_tables = $g_db->MetaTables( 'TABLE' );
 	}
 
@@ -585,8 +562,7 @@ function db_error_msg() {
 function db_error( $p_query = null ) {
 	if( null !== $p_query ) {
 		error_parameters( db_error_num(), db_error_msg(), $p_query );
-	}
-	else {
+	} else {
 		error_parameters( db_error_num(), db_error_msg() );
 	}
 }
@@ -617,8 +593,7 @@ function db_prepare_string( $p_string ) {
 		case 'ado_mssql':
 			if( ini_get( 'magic_quotes_sybase' ) ) {
 				return addslashes( $p_string );
-			}
-			else {
+			} else {
 				ini_set( 'magic_quotes_sybase', true );
 				$t_string = addslashes( $p_string );
 				ini_set( 'magic_quotes_sybase', false );
@@ -637,10 +612,9 @@ function db_prepare_string( $p_string ) {
 			break;
 		case 'mysql':
 			return mysql_real_escape_string( $p_string );
-
+		case 'mysqli':
 			# For some reason mysqli_escape_string( $p_string ) always returns an empty
 			# string.  This is happening with PHP v5.0.2.
-		case 'mysqli':
 			$t_escaped = $g_db->qstr( $p_string, false );
 			return substr( $t_escaped, 1, strlen( $t_escaped ) - 2 );
 		case 'postgres':
@@ -703,8 +677,7 @@ function db_bind_timestamp( $p_date, $p_gmt = false ) {
 	global $g_db;
 	if( $p_gmt ) {
 		return $g_db->BindTimestamp( $g_db->UserTimeStamp( $p_date, 'Y-m-d H:i:s', true ) );
-	}
-	else {
+	} else {
 		return $g_db->BindTimeStamp( $p_date );
 	}
 }
@@ -765,8 +738,7 @@ function db_timestamp( $p_date = null, $p_gmt = false ) {
 
 	if( null !== $p_date ) {
 		$p_timestamp = $g_db->UnixTimeStamp( $p_date, $p_gmt );
-	}
-	else {
+	} else {
 		$p_timestamp = time();
 	}
 	return $g_db->BindTimeStamp( $p_timestamp );
@@ -784,8 +756,7 @@ function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
 
 	if( null !== $p_date ) {
 		$p_timestamp = $g_db->UnixTimeStamp( $p_date, $p_gmt );
-	}
-	else {
+	} else {
 		$p_timestamp = time();
 	}
 	return $p_timestamp;
@@ -803,8 +774,7 @@ function db_date( $p_timestamp = null, $p_gmt = false ) {
 
 	if( null !== $p_timestamp ) {
 		$p_date = $g_db->UserTimeStamp( $p_timestamp, 'Y-m-d H:i:s', $p_gmt );
-	}
-	else {
+	} else {
 		$p_date = $g_db->UserTimeStamp( time(), 'Y-m-d H:i:s', $p_gmt );
 	}
 	return $p_date;
@@ -946,8 +916,7 @@ function db_get_table( $p_option ) {
 			$GLOBALS['g_db_table'][$p_option] = $t_value;
 		}
 		return $t_value;
-	}
-	else {
+	} else {
 		error_parameters( $p_option );
 		trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, WARNING );
 	}
@@ -969,11 +938,9 @@ function db_get_table_list() {
 if( !isset( $g_skip_open_db ) ) {
 	if( OFF == $g_use_persistent_connections ) {
 		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ) );
-	}
-	else {
+	} else {
 		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ), true );
 	}
-}
-else {
+} else {
 	define( 'PLUGINS_DISABLED', true );
 }

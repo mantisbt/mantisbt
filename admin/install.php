@@ -44,8 +44,7 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 		if( $p_hard_fail ) {
 			$g_failed = true;
 			echo 'bgcolor="red">BAD';
-		}
-		else {
+		} else {
 			echo 'bgcolor="pink">POSSIBLE PROBLEM';
 		}
 		if( '' != $p_message ) {
@@ -178,15 +177,12 @@ if( $t_config_exists ) {
 	if( $t_cur_version > 1 ) {
 		$g_database_upgrade = true;
 		$f_db_exists = true;
-	}
-	else {
+	} else {
 		if( 0 == $t_install_state ) {
 			print_test( 'Config File Exists but Database does not', false, false, 'Bad config_inc.php?' );
 		}
 	}
-}
-else {
-
+} else {
 	# read control variables with defaults
 	$f_hostname = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
 	$f_db_type = gpc_get( 'db_type', config_get( 'db_type', '' ) );
@@ -261,8 +257,7 @@ if( 2 == $t_install_state ) {
 	<?php
 		if( '' !== $f_admin_username ) {
 		print_test_result( GOOD );
-	}
-	else {
+	} else {
 		print_test_result( BAD, false, 'admin user name is blank, using database user instead' );
 		$f_admin_username = $f_db_username;
 	}
@@ -275,13 +270,11 @@ if( 2 == $t_install_state ) {
 	<?php
 		if( '' !== $f_admin_password ) {
 		print_test_result( GOOD );
-	}
-	else {
+	} else {
 		if( '' != $f_db_password ) {
 			print_test_result( BAD, false, 'admin user password is blank, using database user password instead' );
 			$f_admin_password = $f_db_password;
-		}
-		else {
+		} else {
 			print_test_result( GOOD );
 		}
 	}
@@ -311,12 +304,10 @@ if( 2 == $t_install_state ) {
 			if( $result === false ) {
 				print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
 			}
-		}
-		else {
+		} else {
 			print_test_result( GOOD );
 		}
-	}
-	else {
+	} else {
 		print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' . db_error_msg() . ' )' );
 	}
 	?>
@@ -339,12 +330,10 @@ if( 2 == $t_install_state ) {
 				if( $result === false ) {
 					print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
 				}
-			}
-			else {
+			} else {
 				print_test_result( GOOD );
 			}
-		}
-		else {
+		} else {
 			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
 		}
 		?>
@@ -389,8 +378,7 @@ if( 2 == $t_install_state ) {
 	}
 	if( false == $g_failed ) {
 		$t_install_state++;
-	}
-	else {
+	} else {
 		$t_install_state--; # a check failed, redisplay the questions
 	}
 } # end 2 == $t_install_state
@@ -416,43 +404,37 @@ if( 1 == $t_install_state ) {
 		<?php
 			if( $f_db_type == 'mysql' ) {
 			echo '<option value="mysql" selected="selected">MySql (default)</option>';
-		}
-		else {
+		} else {
 			echo '<option value="mysql">MySql (default)</option>';
 		}
 
 		if( $f_db_type == 'mysqli' ) {
 			echo '<option value="mysqli" selected="selected">MySqli</option>';
-		}
-		else {
+		} else {
 			echo '<option value="mysqli">MySqli</option>';
 		}
 
 		if( $f_db_type == 'mssql' ) {
 			echo '<option value="mssql" selected="selected">Microsoft SQL Server (experimental)</option>';
-		}
-		else {
+		} else {
 			echo '<option value="mssql">Microsoft SQL Server (experimental)</option>';
 		}
 
 		if( $f_db_type == 'pgsql' ) {
 			echo '<option value="pgsql" selected="selected">PGSQL (experimental)</option>';
-		}
-		else {
+		} else {
 			echo '<option value="pgsql">PGSQL (experimental)</option>';
 		}
 
 		if( $f_db_type == 'oci8' ) {
 			echo '<option value="oci8" selected="selected">Oracle - oci8 (Experimental)</option>';
-		}
-		else {
+		} else {
 			echo '<option value="oci8">Oracle - oci8 (Experimental)</option>';
 		}
 
 		if( $f_db_type == 'db2' ) {
 			echo '<option value="db2" selected="selected">db2/400 (experimental)</option>';
-		}
-		else {
+		} else {
 			echo '<option value="db2">db2/400 (experimental)</option>';
 		}
 		?>
@@ -577,8 +559,7 @@ if( 3 == $t_install_state ) {
 			if( $rs->EOF ) {
 				$t_result = false;
 				echo $g_db->errorMsg();
-			}
-			else {
+			} else {
 				$t_result = &$g_db->execute( 'set schema ' . $f_db_schema );
 			}
 		}
@@ -588,9 +569,7 @@ if( 3 == $t_install_state ) {
 		if( $t_result == true ) {
 			print_test_result( GOOD );
 			$t_db_open = true;
-		}
-		else {
-
+		} else {
 			// create db
 			$g_db = ADONewConnection( $f_db_type );
 			$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
@@ -604,25 +583,21 @@ if( 3 == $t_install_state ) {
 					$t_result = false;
 					print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error_msg() . ' )' );
 					$t_install_state--; # db creation failed, allow user to re-enter user/password info
-				}
-				else {
+				} else {
 					print_test_result( GOOD );
 					$t_db_open = true;
 				}
-			}
-			else {
+			} else {
 				$sqlarray = $dict->CreateDatabase( $f_database_name );
 				$ret = $dict->ExecuteSQLArray( $sqlarray );
 				if( $ret == 2 ) {
 					print_test_result( GOOD );
 					$t_db_open = true;
-				}
-				else {
+				} else {
 					$t_error = db_error_msg();
 					if( strstr( $t_error, 'atabase exists' ) ) {
 						print_test_result( BAD, false, 'Database already exists? ( ' . db_error_msg() . ' )' );
-					}
-					else {
+					} else {
 						print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error_msg() . ' )' );
 						$t_install_state--; # db creation failed, allow user to re-enter user/password info
 					}
@@ -685,8 +660,7 @@ if( 3 == $t_install_state ) {
 
 		if( $t_result == true ) {
 			print_test_result( GOOD );
-		}
-		else {
+		} else {
 			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
 		}
 		$g_db->Close();
@@ -741,26 +715,21 @@ if( 3 == $t_install_state ) {
 					$upgrade[$i][1],
 				);
 				$t_target = $upgrade[$i][1];
-			}
-			elseif( $upgrade[$i][0] == 'UpdateFunction' ) {
+			} elseif( $upgrade[$i][0] == 'UpdateFunction' ) {
 				$sqlarray = array(
 					$upgrade[$i][1],
 				);
 				$t_sql = false;
 				$t_target = $upgrade[$i][1];
-			}
-			else {
-
+			} else {
 				/* 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade. */
 				if( isset( $upgrade[$i][2] ) ) {
 					if( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) ) {
 						$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
-					}
-					else {
+					} else {
 						$sqlarray = array();
 					}
-				}
-				else {
+				} else {
 					$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
 				}
 			}
@@ -768,20 +737,17 @@ if( 3 == $t_install_state ) {
 				foreach( $sqlarray as $sql ) {
 					echo htmlentities( $sql ) . ";\r\n\r\n";
 				}
-			}
-			else {
+			} else {
 				echo 'Schema ' . $upgrade[$i][0] . ' ( ' . $t_target . ' )</td>';
 				if( $t_sql ) {
 					$ret = $dict->ExecuteSQLArray( $sqlarray );
-				}
-				else {
+				} else {
 					$ret = call_user_func( 'install_' . $sqlarray[0] );
 				}
 				if( $ret == 2 ) {
 					print_test_result( GOOD );
 					config_set( 'database_version', $i );
-				}
-				else {
+				} else {
 					print_test_result( BAD, true, $sqlarray[0] . '<br />' . $g_db->ErrorMsg() );
 				}
 				echo '</tr>';
@@ -789,7 +755,6 @@ if( 3 == $t_install_state ) {
 			$i++;
 		}
 		if( $f_log_queries ) {
-
 			# add a query to set the database version
 			echo 'INSERT INTO mantis_config_table ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . "\r\n";
 			echo '</pre></br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</td></tr>';
@@ -797,8 +762,7 @@ if( 3 == $t_install_state ) {
 	}
 	if( false == $g_failed ) {
 		$t_install_state++;
-	}
-	else {
+	} else {
 		$t_install_state--;
 	}
 
@@ -846,8 +810,7 @@ if( 5 == $t_install_state ) {
 			if( !$t_config_exists ) {
 		echo 'Creating Configuration File (config_inc.php)<br />';
 		echo '<font color="red">(if this file is not created, create it manually with the contents below)</font>';
-	}
-	else {
+	} else {
 		echo 'Updating Configuration File (config_inc.php)<br />';
 	}
 	?>
@@ -876,13 +839,10 @@ if( 5 == $t_install_state ) {
 		if( file_exists( $t_config_filename ) ) {
 			print_test_result( GOOD );
 			$t_write_failed = false;
-		}
-		else {
+		} else {
 			print_test_result( BAD, false, 'cannot write ' . $t_config_filename );
 		}
-	}
-	else {
-
+	} else {
 		# already exists, see if the information is the same
 		if ( ( $f_hostname != config_get( 'hostname', '' ) ) ||
 			( $f_db_type != config_get( 'db_type', '' ) ) ||
@@ -891,8 +851,7 @@ if( 5 == $t_install_state ) {
 			( $f_db_username != config_get( 'db_username', '' ) ) ||
 			( $f_db_password != config_get( 'db_password', '' ) ) ) {
 			print_test_result( BAD, false, 'file ' . $g_absolute_path . 'config_inc.php' . ' already exists and has different settings' );
-		}
-		else {
+		} else {
 			print_test_result( GOOD, false );
 			$t_write_failed = false;
 		}
@@ -941,8 +900,7 @@ if( 6 == $t_install_state ) {
 
 	if( $t_result == true ) {
 		print_test_result( GOOD );
-	}
-	else {
+	} else {
 		print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
 	}
 
@@ -965,8 +923,7 @@ if( 6 == $t_install_state ) {
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
-	}
-	else {
+	} else {
 		print_test_result( BAD, true, 'Database user doesn\'t have SELECT access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
@@ -981,8 +938,7 @@ if( 6 == $t_install_state ) {
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
-	}
-	else {
+	} else {
 		print_test_result( BAD, true, 'Database user doesn\'t have INSERT access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
@@ -997,8 +953,7 @@ if( 6 == $t_install_state ) {
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
-	}
-	else {
+	} else {
 		print_test_result( BAD, true, 'Database user doesn\'t have UPDATE access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
@@ -1013,8 +968,7 @@ if( 6 == $t_install_state ) {
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
-	}
-	else {
+	} else {
 		print_test_result( BAD, true, 'Database user doesn\'t have DELETE access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
@@ -1029,15 +983,13 @@ if( 6 == $t_install_state ) {
 # end install_state == 6
 
 if( 7 == $t_install_state ) {
-
 	# cleanup and launch upgrade
 	?>
 <p>Install was successful.</p>
 <?php if( $f_db_exists ) {?>
 <p><a href="../login_page.php">Continue</a> to log into Mantis</p>
 <?php
-	}
-	else {?>
+	} else {?>
 <p>Please log in as the administrator and <a href="../manage_proj_create_page.php">create</a> your first project.
 
 <?php
@@ -1045,7 +997,6 @@ if( 7 == $t_install_state ) {
 }
 
 # end install_state == 7
-
 
 if( $g_failed ) {
 	?>

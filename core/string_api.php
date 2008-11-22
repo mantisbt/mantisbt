@@ -47,8 +47,7 @@ function string_preserve_spaces_at_bol( $p_string ) {
 		while(( $t_char == ' ' ) || ( $t_char == "\t" ) ) {
 			if( $t_char == ' ' ) {
 				$spaces++;
-			}
-			else {
+			} else {
 				$spaces += 4;
 			}
 
@@ -72,8 +71,7 @@ function string_preserve_spaces_at_bol( $p_string ) {
 function string_no_break( $p_string ) {
 	if( strpos( $p_string, ' ' ) !== false ) {
 		return '<span class="nowrap">' . $p_string . "</span>";
-	}
-	else {
+	} else {
 		return $p_string;
 	}
 }
@@ -95,18 +93,15 @@ function string_nl2br( $p_string, $p_wrap = 100 ) {
 				$piece = preg_replace( "/&nbsp;/", " ", $piece );
 				if( ON == config_get( 'wrap_in_preformatted_text' ) ) {
 					$output .= preg_replace( '/([^\n]{' . $p_wrap . '})(?!<\/pre>)/', "$1\n", $piece );
-				}
-				else {
+				} else {
 					$output .= $piece;
 				}
-			}
-			else {
+			} else {
 				$output .= nl2br( $piece );
 			}
 		}
 		return $output;
-	}
-	else {
+	} else {
 		return nl2br( $p_string );
 	}
 }
@@ -263,8 +258,7 @@ function string_process_cvs_link( $p_string, $p_include_anchor = true ) {
 
 	if( $p_include_anchor ) {
 		$t_replace_with = '[CVS] <a href="' . $t_cvs_web . '\\1?rev=\\4" target="_new">\\1</a>\\5';
-	}
-	else {
+	} else {
 		$t_replace_with = '[CVS] ' . $t_cvs_web . '\\1?rev=\\4\\5';
 	}
 
@@ -305,8 +299,7 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 											return $p_array[0];
 										}
 										' );
-		}
-		else {
+		} else {
 			$string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
 										# We might as well create the link here even if the bug
 										#  doesnt exist.  In the case above we dont want to do
@@ -360,8 +353,7 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 											return $p_array[0];
 										}
 										' );
-		}
-		else {
+		} else {
 			$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
 										# We might as well create the link here even if the bug
 										#  doesnt exist.  In the case above we dont want to do
@@ -444,12 +436,10 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
 		$tags = implode( '|', $tags );
 		if( $p_multiline ) {
 			$g_cache_html_valid_tags = $tags;
-		}
-		else {
+		} else {
 			$g_cache_html_valid_tags_single_line = $tags;
 		}
-	}
-	else {
+	} else {
 		$tags = ( $p_multiline ? $g_cache_html_valid_tags : $g_cache_html_valid_tags_single_line );
 	}
 
@@ -481,8 +471,7 @@ function string_get_bug_page( $p_action, $p_user_id = null ) {
 		case BOTH:
 			if(( null !== $p_user_id ) && ( ON == user_pref_get_pref( $p_user_id, 'advanced_' . $p_action ) ) ) {
 				return 'bug_' . $p_action . '_advanced_page.php';
-			}
-			else {
+			} else {
 				return 'bug_' . $p_action . '_page.php';
 			}
 		case SIMPLE_ONLY:
@@ -500,8 +489,7 @@ function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info 
 		$t_link = '<a href="';
 		if( $p_fqdn ) {
 			$t_link .= config_get_global( 'path' );
-		}
-		else {
+		} else {
 			$t_link .= config_get_global( 'short_path' );
 		}
 		$t_link .= string_get_bug_view_url( $p_bug_id, $p_user_id ) . '"';
@@ -516,8 +504,7 @@ function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info 
 			}
 		}
 		$t_link .= '>' . bug_format_id( $p_bug_id ) . '</a>';
-	}
-	else {
+	} else {
 		$t_link = bug_format_id( $p_bug_id );
 	}
 
@@ -534,8 +521,7 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = nu
 		$t_link = '<a href="';
 		if( $p_fqdn ) {
 			$t_link .= config_get_global( 'path' );
-		}
-		else {
+		} else {
 			$t_link .= config_get_global( 'short_path' );
 		}
 
@@ -547,8 +533,7 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = nu
 		}
 
 		$t_link .= '>' . bug_format_id( $t_bug_id ) . ':' . bugnote_format_id( $p_bugnote_id ) . '</a>';
-	}
-	else {
+	} else {
 		$t_link = bugnote_format_id( $t_bug_id ) . ':' . bugnote_format_id( $p_bugnote_id );
 	}
 
@@ -675,15 +660,13 @@ function string_shorten( $p_string ) {
 		foreach( $t_bits as $t_bit ) {
 			if(( strlen( $t_string ) + strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
 				$t_string .= $t_bit;
-			}
-			else {
+			} else {
 				break;
 			}
 		}
 		$t_string .= '...' . $t_last;
 		return $t_string;
-	}
-	else {
+	} else {
 		return $p_string;
 	}
 }

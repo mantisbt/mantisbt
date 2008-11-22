@@ -47,8 +47,7 @@ function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_le
 
 	if( $t_bug->category_id ) {
 		$t_category_name = category_get_name( $t_bug->category_id );
-	}
-	else {
+	} else {
 		$t_category_name = '';
 	}
 
@@ -80,15 +79,13 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 	if( bug_is_resolved( $p_issue_id ) ) {
 		$t_strike_start = '<strike>';
 		$t_strike_end = '</strike>';
-	}
-	else {
+	} else {
 		$t_strike_start = $t_strike_end = '';
 	}
 
 	if( $t_bug->category_id ) {
 		$t_category_name = category_get_name( $t_bug->category_id );
-	}
-	else {
+	} else {
 		$t_category_name = '';
 	}
 
@@ -194,8 +191,7 @@ function custom_function_default_auth_can_change_password() {
 	);
 	if( in_array( config_get( 'login_method' ), $t_can_change ) ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -215,14 +211,11 @@ function custom_function_default_get_columns_to_view( $p_columns_target = COLUMN
 
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
 		$t_columns = config_get( 'csv_columns', $t_project_id, $p_user_id );
-	}
-	elseif( $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
+	} elseif( $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
 		$t_columns = config_get( 'excel_columns', $t_project_id, $p_user_id );
-	}
-	elseif( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
+	} elseif( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
 		$t_columns = config_get( 'view_issues_page_columns', $t_project_id, $p_user_id );
-	}
-	else {
+	} else {
 		$t_columns = config_get( 'print_issues_page_columns', $t_project_id, $p_user_id );
 	}
 
@@ -246,16 +239,14 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 		$t_field_id = custom_field_get_id_from_name( $t_custom_field );
 		if( $t_field_id === false ) {
 			echo '@', $t_custom_field, '@';
-		}
-		else {
+		} else {
 			$t_def = custom_field_get_definition( $t_field_id );
 			$t_custom_field = lang_get_defaulted( $t_def['name'] );
 
 			if( COLUMNS_TARGET_CSV_PAGE != $p_columns_target ) {
 				print_view_bug_sort_link( $t_custom_field, $p_column, $t_sort, $t_dir, $p_columns_target );
 				print_sort_icon( $t_dir, $t_sort, $p_column );
-			}
-			else {
+			} else {
 				echo $t_custom_field;
 			}
 		}
@@ -263,13 +254,11 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 		if( COLUMNS_TARGET_CSV_PAGE != $p_columns_target ) {
 			echo '</td>';
 		}
-	}
-	else {
+	} else {
 		$t_function = 'print_column_title_' . $p_column;
 		if( function_exists( $t_function ) ) {
 			$t_function( $t_sort, $t_dir, $p_columns_target );
-		}
-		else {
+		} else {
 			echo '<td>';
 			print_view_bug_sort_link( column_get_title( $p_column ), $p_column, $t_sort, $t_dir, $p_columns_target );
 			print_sort_icon( $t_dir, $t_sort, $p_column );
@@ -289,8 +278,7 @@ function custom_function_default_print_column_value( $p_column, $p_issue_row, $p
 		$t_column_start = '';
 		$t_column_end = '';
 		$t_column_empty = '';
-	}
-	else {
+	} else {
 		$t_column_start = '<td>';
 		$t_column_end = '</td>';
 		$t_column_empty = '&nbsp;';
@@ -303,44 +291,36 @@ function custom_function_default_print_column_value( $p_column, $p_issue_row, $p
 		$t_field_id = custom_field_get_id_from_name( $t_custom_field );
 		if( $t_field_id === false ) {
 			echo '@', $t_custom_field, '@';
-		}
-		else {
+		} else {
 			$t_issue_id = $p_issue_row['id'];
 			$t_project_id = $p_issue_row['project_id'];
 
 			if( custom_field_is_linked( $t_field_id, $t_project_id ) ) {
 				$t_def = custom_field_get_definition( $t_field_id );
 				print_custom_field_value( $t_def, $t_field_id, $t_issue_id );
-			}
-			else {
-
+			} else {
 				// field is not linked to project
 				echo $t_column_empty;
 			}
 		}
 		echo $t_column_end;
-	}
-	else {
+	} else {
 		if( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
 			$t_function = 'print_column_' . $p_column;
-		}
-		else {
+		} else {
 			$t_function = 'csv_format_' . $p_column;
 		}
 
 		if( function_exists( $t_function ) ) {
 			if( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
 				$t_function( $p_issue_row, $p_columns_target );
-			}
-			else {
+			} else {
 				$t_function( $p_issue_row[$p_column] );
 			}
-		}
-		else {
+		} else {
 			if( isset( $p_issue_row[$p_column] ) ) {
 				echo $t_column_start . $p_issue_row[$p_column] . $t_column_end;
-			}
-			else {
+			} else {
 				echo $t_column_start . '@' . $p_column . '@' . $t_column_end;
 			}
 		}

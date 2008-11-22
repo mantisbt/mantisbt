@@ -89,8 +89,7 @@
 			# Add log line to the history (both bugs)
 			history_log_event_special( $f_src_bug_id, BUG_REPLACE_RELATIONSHIP, $f_rel_type, $f_dest_bug_id );
 			history_log_event_special( $f_dest_bug_id, BUG_REPLACE_RELATIONSHIP, relationship_get_complementary_type( $f_rel_type ), $f_src_bug_id );
-		}
-		else {
+		} else {
 			# Add the new relationship
 			relationship_add( $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
 

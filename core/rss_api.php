@@ -29,8 +29,7 @@
 function rss_calculate_key( $p_user_id = null ) {
 	if( $p_user_id === null ) {
 		$t_user_id = auth_get_current_user_id();
-	}
-	else {
+	} else {
 		$t_user_id = $p_user_id;
 	}
 
@@ -71,15 +70,13 @@ function rss_login( $p_username, $p_key ) {
 function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_filter_id = null, $p_relative = true ) {
 	if( $p_username === null ) {
 		$t_username = current_user_get_field( 'username' );
-	}
-	else {
+	} else {
 		$t_username = $p_username;
 	}
 
 	if( $p_project_id === null ) {
 		$t_project_id = helper_get_current_project();
-	}
-	else {
+	} else {
 		$t_project_id = (integer) $p_project_id;
 	}
 
@@ -87,8 +84,7 @@ function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_f
 
 	if( $p_relative ) {
 		$t_url = config_get( 'path' );
-	}
-	else {
+	} else {
 		$t_url = '';
 	}
 
@@ -98,8 +94,7 @@ function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_f
 		if( $t_project_id == ALL_PROJECTS ) {
 			$t_url .= 'project_id=' . $t_project_id;
 		}
-	}
-	else {
+	} else {
 		$t_url .= 'issues_rss.php?username=' . $t_username . '&amp;key=' . rss_calculate_key( $t_user_id );
 
 		if( $t_project_id != ALL_PROJECTS ) {
@@ -117,22 +112,19 @@ function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_f
 function rss_get_news_feed_url( $p_project_id = null, $p_username = null, $p_relative = true ) {
 	if( $p_username === null ) {
 		$t_username = current_user_get_field( 'username' );
-	}
-	else {
+	} else {
 		$t_username = $p_username;
 	}
 
 	if( $p_project_id === null ) {
 		$t_project_id = helper_get_current_project();
-	}
-	else {
+	} else {
 		$t_project_id = (integer) $p_project_id;
 	}
 
 	if( $p_relative ) {
 		$t_rss_link = '';
-	}
-	else {
+	} else {
 		$t_rss_link = config_get( 'path' );
 	}
 
@@ -145,8 +137,7 @@ function rss_get_news_feed_url( $p_project_id = null, $p_username = null, $p_rel
 		if( $t_project_id != ALL_PROJECTS ) {
 			$t_rss_link .= "news_rss.php?project_id=" . $t_project_id;
 		}
-	}
-	else {
+	} else {
 		$t_rss_link .= "news_rss.php?username=" . $t_username . "&amp;key=" . rss_calculate_key( $t_user_id );
 
 		if( $t_project_id != ALL_PROJECTS ) {

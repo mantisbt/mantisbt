@@ -55,8 +55,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 	if( is_null( $t_lang_dir ) ) {
 		$t_lang_dir = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
 		require_once( $t_lang_dir . 'strings_' . $p_lang . '.txt' );
-	}
-	else {
+	} else {
 		if( is_file( $t_lang_dir . 'strings_' . $p_lang . '.txt' ) ) {
 			include_once( $t_lang_dir . 'strings_' . $p_lang . '.txt' );
 		}
@@ -81,8 +80,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 		elseif( 'MANTIS_ERROR' == $t_var ) {
 			if( isset( $g_lang_strings[$p_lang][$t_lang_var] ) ) {
 				$g_lang_strings[$p_lang][$t_lang_var] = array_merge( $g_lang_strings[$p_lang][$t_lang_var], $$t_var );
-			}
-			else {
+			} else {
 				$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
 			}
 		}
@@ -221,8 +219,7 @@ function lang_get_current() {
 	$t_count_overrides = count( $g_lang_overrides );
 	if( $t_count_overrides > 0 ) {
 		$t_lang = $g_lang_overrides[$t_count_overrides - 1];
-	}
-	else {
+	} else {
 		$t_lang = lang_get_default();
 	}
 
@@ -260,8 +257,7 @@ function lang_get( $p_string, $p_lang = null ) {
 
 	if( lang_exists( $p_string, $t_lang ) ) {
 		return $g_lang_strings[$t_lang][$p_string];
-	}
-	else {
+	} else {
 		$t_plugin_current = plugin_get_current();
 		if( !is_null( $t_plugin_current ) ) {
 			lang_load( $t_lang, config_get( 'plugin_path' ) . $t_plugin_current . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR );
@@ -274,8 +270,7 @@ function lang_get( $p_string, $p_lang = null ) {
 			error_parameters( $p_string );
 			trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
 			return '';
-		}
-		else {
+		} else {
 
 			# if string is not found in a language other than english, then retry using the english language.
 			return lang_get( $p_string, 'english' );
@@ -307,12 +302,10 @@ function lang_get_defaulted( $p_string, $p_default = null, $p_lang = null ) {
 
 	if( lang_exists( $p_string, $t_lang ) ) {
 		return lang_get( $p_string );
-	}
-	else {
+	} else {
 		if( null === $p_default ) {
 			return $p_string;
-		}
-		else {
+		} else {
 			return $p_default;
 		}
 	}

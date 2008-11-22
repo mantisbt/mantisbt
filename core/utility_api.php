@@ -36,8 +36,7 @@
 function trans_bool( $p_num ) {
 	if( 0 == $p_num ) {
 		return '&nbsp;';
-	}
-	else {
+	} else {
 		return 'X';
 	}
 }
@@ -120,8 +119,7 @@ function ini_get_bool( $p_name ) {
 				return true;
 				break;
 		}
-	}
-	else {
+	} else {
 		return (bool) $result;
 	}
 }
@@ -144,8 +142,7 @@ function ini_get_number( $p_name ) {
 function multi_sort( $p_array, $p_key, $p_direction = ASCENDING ) {
 	if( DESCENDING == $p_direction ) {
 		$t_factor = -1;
-	}
-	else {
+	} else {
 		# might as well allow everything else to mean ASC rather than erroring
 		$t_factor = 1;
 	}
@@ -174,12 +171,10 @@ function get_gd_version() {
 	$t_GDfuncList = get_extension_funcs( 'gd' );
 	if( !is_array( $t_GDfuncList ) ) {
 		return 0;
-	}
-	else {
+	} else {
 		if( in_array( 'imagegd2', $t_GDfuncList ) ) {
 			return 2;
-		}
-		else {
+		} else {
 			return 1;
 		}
 	}

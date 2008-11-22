@@ -167,8 +167,7 @@ function token_delete( $p_type, $p_user_id = null ) {
 function token_delete_by_owner( $p_user_id = null ) {
 	if( $p_user_id == null ) {
 		$c_user_id = auth_get_current_user_id();
-	}
-	else {
+	} else {
 		$c_user_id = db_prepare_int( $p_user_id );
 	}
 
@@ -261,8 +260,7 @@ function token_purge_expired( $p_token_type = null ) {
 		$c_token_type = db_prepare_int( $p_token_type );
 		$t_query .= " AND type=" . db_param();
 		db_query_bound( $t_query, Array( db_now(), $c_token_type ) );
-	}
-	else {
+	} else {
 		db_query_bound( $t_query, Array( db_now() ) );
 	}
 

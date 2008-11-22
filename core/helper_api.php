@@ -37,8 +37,7 @@ function helper_alternate_colors( $p_index, $p_odd_color, $p_even_color ) {
 
 	if( 1 == $t_index++ % 2 ) {
 		return $p_odd_color;
-	}
-	else {
+	} else {
 		return $p_even_color;
 	}
 }
@@ -55,8 +54,7 @@ function helper_alternate_class( $p_index = null, $p_odd_class = "row-1", $p_eve
 
 	if( 1 == $t_index++ % 2 ) {
 		return "class=\"$p_odd_class\"";
-	}
-	else {
+	} else {
 		return "class=\"$p_even_class\"";
 	}
 }
@@ -137,8 +135,7 @@ function check_selected( $p_var, $p_val = true ) {
 				return;
 			}
 		}
-	}
-	else {
+	} else {
 		if( is_string( $p_var ) && is_string( $p_val ) ) {
 			if( $p_var === $p_val ) {
 				PRINT ' selected="selected" ';
@@ -206,12 +203,10 @@ function helper_get_current_project() {
 			$t_pref_row = user_pref_cache_row( auth_get_current_user_id(), ALL_PROJECTS, false );
 			if( false === $t_pref_row ) {
 				$t_project_id = ALL_PROJECTS;
-			}
-			else {
+			} else {
 				$t_project_id = $t_pref_row['default_project'];
 			}
-		}
-		else {
+		} else {
 			$t_project_id = split( ';', $t_project_id );
 			$t_project_id = $t_project_id[count( $t_project_id ) - 1];
 		}
@@ -239,8 +234,7 @@ function helper_get_current_project_trace() {
 		$t_project_id = Array(
 			$t_bottom,
 		);
-	}
-	else {
+	} else {
 		$t_project_id = split( ';', $t_project_id );
 		$t_bottom = $t_project_id[count( $t_project_id ) - 1];
 	}
@@ -338,8 +332,7 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 		}
 
 		$t_project_ids = array_unique( $t_project_ids );
-	}
-	else {
+	} else {
 		access_ensure_project_level( VIEWER, $p_project_id );
 		$t_project_ids = user_get_all_accessible_subprojects( $p_user_id, $p_project_id );
 		array_unshift( $t_project_ids, $p_project_id );
@@ -349,11 +342,9 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 
 	if( 0 == count( $t_project_ids ) ) {
 		$t_project_filter = ' 1<>1';
-	}
-	elseif( 1 == count( $t_project_ids ) ) {
+	} elseif( 1 == count( $t_project_ids ) ) {
 		$t_project_filter = ' project_id=' . $t_project_ids[0];
-	}
-	else {
+	} else {
 		$t_project_filter = ' project_id IN (' . join( ',', $t_project_ids ) . ')';
 	}
 
@@ -432,8 +423,7 @@ function helper_get_default_export_filename( $p_extension_with_dot, $p_prefix = 
 
 	if( ALL_PROJECTS == $t_current_project_id ) {
 		$t_filename .= user_get_name( auth_get_current_user_id() );
-	}
-	else {
+	} else {
 		$t_filename .= project_get_field( $t_current_project_id, 'name' );
 	}
 

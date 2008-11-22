@@ -160,8 +160,7 @@ function email_is_valid( $p_email ) {
 			# Check for valid mx records
 			if( getmxrr( $t_domain, $temp ) ) {
 				return true;
-			}
-			else {
+			} else {
 				$host = $t_domain . '.';
 
 				# for no mx record... try dns check
@@ -169,8 +168,7 @@ function email_is_valid( $p_email ) {
 					return true;
 				}
 			}
-		}
-		else {
+		} else {
 
 			# Email format was valid but did't check for valid mx records
 			return true;
@@ -320,8 +318,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	}
 	elseif( in_array( $p_notify_type, $t_status_change ) ) {
 		$t_pref_field = 'email_on_status';
-	}
-	else {
+	} else {
 		$t_pref_field = 'email_on_' . $p_notify_type;
 	}
 	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
@@ -355,9 +352,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 			if( OFF == $t_notify ) {
 				log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (pref %s off)', $p_bug_id, $t_id, $t_pref_field ) );
 				continue;
-			}
-			else {
-
+			} else {
 				# Users can define the severity of an issue before they are emailed for
 				# each type of notification
 				$t_min_sev_pref_field = $t_pref_field . '_min_severity';
@@ -383,9 +378,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		$t_email = user_get_email( $t_id );
 		if( is_blank( $t_email ) ) {
 			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (no email)', $p_bug_id, $t_id ) );
-		}
-		else {
-
+		} else {
 			# @@@ we could check the emails for validity again but I think
 			#   it would be too slow
 			$t_final_recipients[$t_id] = $t_email;
@@ -402,9 +395,9 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash ) {
 		return;
 	}
 
-	#		@@@ thraxisp - removed to address #6084 - user won't have any settings yet,
-	#       use same language as display for the email
-	#       lang_push( user_pref_get_language( $p_user_id ) );
+	#	@@@ thraxisp - removed to address #6084 - user won't have any settings yet,
+	#  use same language as display for the email
+	#  lang_push( user_pref_get_language( $p_user_id ) );
 	# retrieve the username and email
 	$t_username = user_get_field( $p_user_id, 'username' );
 	$t_email = user_get_email( $p_user_id );
@@ -684,8 +677,7 @@ function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) 
 	$t_server = isset( $_SERVER ) ? $_SERVER : $HTTP_SERVER_VARS;
 	if( isset( $t_server['SERVER_NAME'] ) ) {
 		$t_hostname = $t_server['SERVER_NAME'];
-	}
-	else {
+	} else {
 		$t_address = explode( '@', config_get( 'from_email' ) );
 		if( isset( $t_address[1] ) ) {
 			$t_hostname = $t_address[1];
@@ -720,8 +712,7 @@ function email_send_all() {
 		if( !email_send( $t_email_data ) ) {
 			if( microtime_float() - $t_start > 5 ) {
 				break;
-			}
-			else {
+			} else {
 				continue;
 			}
 		}
@@ -780,26 +771,23 @@ function email_send( $p_email_data ) {
 
 				if( is_null( $g_phpMailer_smtp ) ) {
 					register_shutdown_function( 'email_smtp_close' );
-				}
-				else {
+				} else {
 					$mail->smtp = $g_phpMailer_smtp;
 				}
 			}
 			break;
 	}
 
-		$mail->IsHTML( false );              # set email format to plain text
-		$mail->WordWrap = 80;              # set word wrap to 50 characters
-		$mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
+	$mail->IsHTML( false );              # set email format to plain text
+	$mail->WordWrap = 80;              # set word wrap to 50 characters
+	$mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
 	$mail->CharSet = $t_email_data->metadata['charset'];
 	$mail->Host = config_get( 'smtp_host' );
 	$mail->From = config_get( 'from_email' );
 	$mail->Sender = config_get( 'return_path_email' );
 	$mail->FromName = config_get( 'from_name' );
 
-
 	if( !is_blank( config_get( 'smtp_username' ) ) ) {
-
 		# Use SMTP Authentication
 		$mail->SMTPAuth = true;
 		$mail->Username = config_get( 'smtp_username' );
@@ -813,8 +801,7 @@ function email_send( $p_email_data ) {
 	if( OFF !== $t_debug_email ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;
 		$mail->AddAddress( $t_debug_email, '' );
-	}
-	else {
+	} else {
 		$mail->AddAddress( $t_recipient, '' );
 	}
 
@@ -841,8 +828,7 @@ function email_send( $p_email_data ) {
 
 	if( !$mail->Send() ) {
 		$t_success = false;
-	}
-	else {
+	} else {
 		$t_success = true;
 
 		if( $t_email_data->email_id > 0 ) {
@@ -952,8 +938,7 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 
 		if( access_has_project_level( config_get( 'show_user_email_threshold' ), $t_project_id, $t_recipient ) ) {
 			$t_sender_email = ' <' . current_user_get_field( 'email' ) . '>';
-		}
-		else {
+		} else {
 			$t_sender_email = '';
 		}
 		$t_header = "\n" . lang_get( 'on_date' ) . " $t_date, $t_sender $t_sender_email " . lang_get( 'sent_you_this_reminder_about' ) . ": \n\n";
@@ -1010,8 +995,7 @@ function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_proj
 	);
 	if( $p_message_id == 'email_notification_title_for_action_bug_submitted' ) {
 		$t_mail_headers['Message-ID'] = $t_message_md5;
-	}
-	else {
+	} else {
 		$t_mail_headers['In-Reply-To'] = $t_message_md5;
 	}
 
@@ -1116,16 +1100,14 @@ function email_format_bug_message( $p_visible_bug_data ) {
 
 		if( $t_bugnote->time_tracking > 0 ) {
 			$t_time_tracking = ' ' . lang_get( 'time_tracking' ) . ' ' . db_minutes_to_hhmm( $t_bugnote->time_tracking ) . "\n";
-		}
-		else {
+		} else {
 			$t_time_tracking = '';
 		}
 
 		if( user_exists( $t_bugnote->reporter_id ) ) {
 			$t_access_level = access_get_project_level( null, $t_bugnote->reporter_id );
 			$t_access_level_string = ' (' . get_enum_element( 'access_levels', $t_access_level ) . ') - ';
-		}
-		else {
+		} else {
 			$t_access_level_string = '';
 		}
 
@@ -1187,8 +1169,7 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 	if( access_compare_level( $t_user_access_level, config_get( 'view_handler_threshold' ) ) ) {
 		if( 0 != $row['handler_id'] ) {
 			$t_bug_data['email_handler'] = user_get_name( $row['handler_id'] );
-		}
-		else {
+		} else {
 			$t_bug_data['email_handler'] = '';
 		}
 	}

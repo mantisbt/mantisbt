@@ -134,8 +134,7 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 	if( 0 == db_num_rows( $result ) ) {
 		if( $p_trigger_errors ) {
 			trigger_error( ERROR_USER_PREFS_NOT_FOUND, ERROR );
-		}
-		else {
+		} else {
 			$g_cache_user_pref[$p_user_id][$p_project_id] = false;
 			return false;
 		}
@@ -162,11 +161,9 @@ function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 
 	if( null === $p_user_id ) {
 		$g_cache_user_pref = array();
-	}
-	elseif( null === $p_project_id ) {
+	} elseif( null === $p_project_id ) {
 		unset( $g_cache_user_pref[$c_user_id] );
-	}
-	else {
+	} else {
 		unset( $g_cache_user_pref[$c_user_id][$c_project_id] );
 	}
 
@@ -186,8 +183,7 @@ function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	if( false === user_pref_cache_row( $p_user_id, $p_project_id, false ) ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -380,8 +376,7 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 
 			# Store that value in the object
 			$t_prefs->$var = $row[$var];
-		}
-		else {
+		} else {
 			$t_prefs->$var = $t_prefs->Get( $var );
 		}
 	}
@@ -399,8 +394,7 @@ function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJE
 
 	if( in_array( $p_pref_name, array_keys( $t_vars ), true ) ) {
 		return $t_prefs->Get( $p_pref_name );
-	}
-	else {
+	} else {
 		error_parameters( $p_pref_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 		return '';
@@ -446,8 +440,7 @@ function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project
 function user_pref_set( $p_user_id, $p_prefs, $p_project_id = ALL_PROJECTS ) {
 	if( user_pref_exists( $p_user_id, $p_project_id ) ) {
 		return user_pref_update( $p_user_id, $p_project_id, $p_prefs );
-	}
-	else {
+	} else {
 		return user_pref_insert( $p_user_id, $p_project_id, $p_prefs );
 	}
 }

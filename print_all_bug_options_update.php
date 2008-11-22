@@ -49,8 +49,7 @@
 
 		if ( $t_flag === null ) {
 			$t_prefs_arr[$i] = 0;
-		}
-		else {
+		} else {
 			$t_prefs_arr[$i] = 1;
 		}
 	}

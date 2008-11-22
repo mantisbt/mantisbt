@@ -139,12 +139,9 @@ class ImportXML {
 
 			case 'renumber':
 				if( $this->itemsMap_->exists( 'issue', $oldId ) ) {
-
 					// regular renumber
 					$replacement = $linkTag . $this->itemsMap_->getNewID( 'issue', $oldId );
-				}
-				else {
-
+				} else {
 					// fallback strategy
 					if( $this->fallback_ == 'link' ) {
 						$replacement = $this->source_->get_issue_url( $oldId );

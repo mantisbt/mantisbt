@@ -64,8 +64,7 @@ function print_test_row( $p_description, $p_pass ) {
 
 	if( $p_pass ) {
 		print_test_result( GOOD );
-	}
-	else {
+	} else {
 		print_test_result( BAD );
 	}
 
@@ -81,8 +80,7 @@ function test_bug_download_threshold() {
 
 	if( $t_view_threshold > $t_download_threshold ) {
 		$t_pass = false;
-	}
-	else {
+	} else {
 		if( $t_download_threshold > $t_delete_threshold ) {
 			$t_pass = false;
 		}
@@ -103,8 +101,7 @@ function test_bug_attachments_allow_flags() {
 
 	if(( $t_own_delete == ON ) && ( $t_own_download == FALSE ) ) {
 		$t_pass = false;
-	}
-	else {
+	} else {
 		if(( $t_own_download == ON ) && ( $t_own_view == OFF ) ) {
 			$t_pass = false;
 		}
@@ -245,8 +242,7 @@ if( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 	<?php
 		if( ON != config_get_global( 'validate_email' ) ) {
 		print_test_result( GOOD );
-	}
-	else {
+	} else {
 		print_test_result( BAD );
 	}
 	?>
@@ -260,8 +256,7 @@ if( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 	<?php
 		if( ON != config_get_global( 'check_mx_record' ) ) {
 		print_test_result( GOOD );
-	}
-	else {
+	} else {
 		print_test_result( BAD );
 	}
 	?>
@@ -366,8 +361,7 @@ print_test_row( 'filters: dhtml_filters = ON requires use_javascript = ON',
 		</table>
 
 		<br /><?php
-}
-elseif( MD5 != config_get_global( 'login_method' ) ) {?>
+	} elseif( MD5 != config_get_global( 'login_method' ) ) {?>
 		<br />
 
 		<table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
@@ -383,7 +377,7 @@ elseif( MD5 != config_get_global( 'login_method' ) ) {?>
 		</table>
 
 		<br /><?php
-}
+	}
 ?>
 <br />
 
@@ -397,19 +391,19 @@ elseif( MD5 != config_get_global( 'login_method' ) ) {?>
 	?>
 				<p>File uploads are ENABLED.</p>
 				<p>File uploads will be stored <?php
-								switch( config_get_global( 'file_upload_method' ) ) {
-		case DATABASE:
-			echo 'in the DATABASE.';
-			break;
-		case DISK:
-			echo 'on DISK in the directory specified by the project.';
-			break;
-		case FTP:
-			echo 'on an FTP server (' . config_get_global( 'file_upload_ftp_server' ) . '), and cached locally.';
-			break;
-		default:
-			echo 'in an illegal place.';
-	}?>	</p>
+				switch( config_get_global( 'file_upload_method' ) ) {
+					case DATABASE:
+						echo 'in the DATABASE.';
+						break;
+					case DISK:
+						echo 'on DISK in the directory specified by the project.';
+						break;
+					case FTP:
+						echo 'on an FTP server (' . config_get_global( 'file_upload_ftp_server' ) . '), and cached locally.';
+						break;
+					default:
+						echo 'in an illegal place.';
+				}?>	</p>
 
 				<p>The following size settings are in effect.  Maximum upload size will be whichever of these is SMALLEST. </p>
 				<p>PHP variable 'upload_max_filesize': <?php echo ini_get_number( 'upload_max_filesize' )?> bytes<br />
@@ -418,21 +412,19 @@ elseif( MD5 != config_get_global( 'login_method' ) ) {?>
 
 		<?php
 				if( DATABASE == config_get_global( 'file_upload_method' ) ) {
-		echo '<p>There may also be settings in your web server and database that prevent you from  uploading files or limit the maximum file size.  See the documentation for those packages if you need more information. ';
-		if( 500 < min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get_global( 'max_file_size' ) ) ) {
-			echo '<span class="error">Your current settings will most likely need adjustments to the PHP max_execution_time or memory_limit settings, the MySQL max_allowed_packet setting, or equivalent.</span>';
-		}
-	}
-	else {
-		echo '<p>There may also be settings in your web server that prevent you from  uploading files or limit the maximum file size.  See the documentation for those packages if you need more information.';
-	}
-	echo '</p>';
-}
-else {
+					echo '<p>There may also be settings in your web server and database that prevent you from  uploading files or limit the maximum file size.  See the documentation for those packages if you need more information. ';
+					if( 500 < min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get_global( 'max_file_size' ) ) ) {
+						echo '<span class="error">Your current settings will most likely need adjustments to the PHP max_execution_time or memory_limit settings, the MySQL max_allowed_packet setting, or equivalent.</span>';
+					}
+				} else {
+					echo '<p>There may also be settings in your web server that prevent you from  uploading files or limit the maximum file size.  See the documentation for those packages if you need more information.';
+				}
+				echo '</p>';
+			} else {
 	?>
 				<p>File uploads are DISABLED.  To enable them, make sure <tt>$g_file_uploads = on</tt> is in your php.ini file and <tt>allow_file_upload = ON</tt> is in your mantis config file.</p>
 		<?php
-}
+			}
 ?>
 	</td>
 </tr>
@@ -448,29 +440,28 @@ else {
 		<p>You can test the ability for Mantis to send email notifications with this form.  Just click "Send Mail".  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings (see PHPMailer related settings in your config_inc.php, if they don't exist, copy from config_defaults_inc.php).  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a> if you are using the mail() PHPMailer sending mode.</p>
 		<?php
 		if( $f_mail_test ) {
-	echo '<b><font color="#ff0000">Testing Mail</font></b> - ';
+			echo '<b><font color="#ff0000">Testing Mail</font></b> - ';
 
-	# @@@ thraxisp - workaround to ensure a language is set without authenticating
-	#  will disappear when this is properly localized
-	lang_push( 'english' );
+			# @@@ thraxisp - workaround to ensure a language is set without authenticating
+			#  will disappear when this is properly localized
+			lang_push( 'english' );
 
-	$t_email_data = new EmailData;
-	$t_email_data->email = config_get_global( 'administrator_email' );
-	$t_email_data->subject = 'Testing PHP mail() function';
-	$t_email_data->body = 'Your PHP mail settings appear to be correctly set.';
-	$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
-	$t_email_data->metadata['charset'] = lang_get( 'charset', lang_get_current() );
-	$result = email_send( $t_email_data );
+			$t_email_data = new EmailData;
+			$t_email_data->email = config_get_global( 'administrator_email' );
+			$t_email_data->subject = 'Testing PHP mail() function';
+			$t_email_data->body = 'Your PHP mail settings appear to be correctly set.';
+			$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
+			$t_email_data->metadata['charset'] = lang_get( 'charset', lang_get_current() );
+			$result = email_send( $t_email_data );
 
-	# $result = email_send( config_get_global( 'administrator_email' ), 'Testing PHP mail() function',	'Your PHP mail settings appear to be correctly set.');
+			# $result = email_send( config_get_global( 'administrator_email' ), 'Testing PHP mail() function',	'Your PHP mail settings appear to be correctly set.');
 
-	if( !$result ) {
-		echo ' PROBLEMS SENDING MAIL TO: ' . config_get_global( 'administrator_email' ) . '. Please check your php/mail server settings.<br />';
-	}
-	else {
-		echo ' mail() send successful.<br />';
-	}
-}
+			if( !$result ) {
+				echo ' PROBLEMS SENDING MAIL TO: ' . config_get_global( 'administrator_email' ) . '. Please check your php/mail server settings.<br />';
+			} else {
+				echo ' mail() send successful.<br />';
+			}
+		}
 ?>
 		<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>#email">
 		Email Address: <?php echo config_get_global( 'administrator_email' );?><br />

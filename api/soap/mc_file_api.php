@@ -53,8 +53,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	if( 'bug' == $p_table ) {
 		$t_project_id = bug_get_field( $p_id, 'project_id' );
 		$t_issue_id = bug_format_id( $p_id );
-	}
-	else {
+	} else {
 		$t_project_id = $p_id;
 		$t_issue_id = 0;
 	}
@@ -68,8 +67,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 
 	if( $t_project_id == ALL_PROJECTS ) {
 		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
-	}
-	else {
+	} else {
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
 		if( $t_file_path == '' ) {
 			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
@@ -194,15 +192,13 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 		case DISK:
 			if( file_exists( $t_diskfile ) ) {
 				return base64_encode( mci_file_read_local( $t_diskfile ) );
-			}
-			else {
+			} else {
 				return null;
 			}
 		case FTP:
 			if( file_exists( $t_diskfile ) ) {
 				return base64_encode( mci_file_read_local( $t_diskfile ) );
-			}
-			else {
+			} else {
 				$ftp = file_ftp_connect();
 				file_ftp_get( $ftp, $t_diskfile, $t_diskfile );
 				file_ftp_disconnect( $ftp );

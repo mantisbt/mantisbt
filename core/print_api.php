@@ -59,16 +59,13 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 	if( $p_absolute ) {
 		if( $p_sanitize ) {
 			$t_url = string_sanitize_url( $p_url );
-		}
-		else {
+		} else {
 			$t_url = $p_url;
 		}
-	}
-	else {
+	} else {
 		if( $p_sanitize ) {
 			$t_url = string_sanitize_url( $p_url, true );
-		}
-		else {
+		} else {
 			$t_url = config_get( 'path' ) . $p_url;
 		}
 	}
@@ -79,12 +76,10 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 
 		if( ON == $t_use_iis ) {
 			header( "Refresh: 0;url=$t_url" );
-		}
-		else {
+		} else {
 			header( "Location: $t_url" );
 		}
-	}
-	else {
+	} else {
 		trigger_error( ERROR_PAGE_REDIRECTION, ERROR );
 		return false;
 	}
@@ -127,8 +122,7 @@ function print_successful_redirect( $p_redirect_to ) {
 		print_bracket_link( $p_redirect_to, lang_get( 'proceed' ) );
 		PRINT '</div>';
 		html_page_bottom1();
-	}
-	else {
+	} else {
 		print_header_redirect( $p_redirect_to );
 	}
 }
@@ -181,8 +175,7 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
 		$t_email = user_get_field( $p_user_id, 'email' );
 		print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
-	}
-	else {
+	} else {
 		echo '<font STYLE="text-decoration: line-through">';
 		echo $t_username;
 		echo '</font>';
@@ -198,8 +191,7 @@ function print_email_input( $p_field_name, $p_email ) {
 		# remove the domain part
 		$p_email = eregi_replace( "@$t_limit_email_domain$", '', $p_email );
 		PRINT '<input type="text" name="' . $p_field_name . '" size="20" maxlength="64" value="' . $p_email . '" />@' . $t_limit_email_domain;
-	}
-	else {
+	} else {
 		PRINT '<input type="text" name="' . $p_field_name . '" size="32" maxlength="64" value="' . $p_email . '" />';
 	}
 }
@@ -222,8 +214,7 @@ function cmp( $p_var1, $p_var2 ) {
 	}
 	if( $p_var1[0][0] < $p_var2[0][0] ) {
 		return -1;
-	}
-	else {
+	} else {
 		return 1;
 	}
 }
@@ -255,8 +246,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 			if( $t_sort_by_last_name ) {
 				$t_sort_name_bits = split( ' ', strtolower( $t_user_name ), 2 );
 				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
-			}
-			else {
+			} else {
 				$t_sort_name = strtolower( $t_user_name );
 			}
 		}
@@ -364,8 +354,7 @@ function print_news_item_option_list() {
 		$query = "SELECT id, headline, announcement, view_state
 				FROM $t_mantis_news_table
 				ORDER BY date_posted DESC";
-	}
-	else {
+	} else {
 		$query = "SELECT id, headline, announcement, view_state
 				FROM $t_mantis_news_table
 				WHERE project_id='$t_project_id'
@@ -410,8 +399,7 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 
 	if( VS_PRIVATE == $p_view_state ) {
 		$t_news_css = 'news-heading-private';
-	}
-	else {
+	} else {
 		$t_news_css = 'news-heading-public';
 	}
 
@@ -612,8 +600,7 @@ function print_extended_project_browser( $p_trace = Array(), $p_project_id = nul
 
 	if( 0 === count( $p_trace ) ) {
 		$t_top_id = ALL_PROJECTS;
-	}
-	else {
+	} else {
 		$t_top_id = $p_trace[0];
 		$t_trace_str = join( ';', $p_trace );
 	}
@@ -655,8 +642,7 @@ function print_profile_option_list( $p_user_id, $p_select_id = '', $p_profiles =
 	}
 	if( $p_profiles != null ) {
 		$t_profiles = $p_profiles;
-	}
-	else {
+	} else {
 		$t_profiles = profile_get_all_for_user( $p_user_id );
 	}
 	print_profile_option_list_from_profiles( $t_profiles, $p_select_id );
@@ -670,8 +656,7 @@ function print_profile_option_list_for_project( $p_project_id, $p_select_id = ''
 	}
 	if( $p_profiles != null ) {
 		$t_profiles = $p_profiles;
-	}
-	else {
+	} else {
 		$t_profiles = profile_get_all_for_project( $p_project_id );
 	}
 	print_profile_option_list_from_profiles( $t_profiles, $p_select_id );
@@ -705,8 +690,7 @@ function print_news_project_option_list( $p_project_id ) {
 					FROM $t_mantis_project_table
 					ORDER BY name";
 		$result = db_query_bound( $query );
-	}
-	else {
+	} else {
 		$t_user_id = auth_get_current_user_id();
 		$query = "SELECT p.id, p.name
 					FROM $t_mantis_project_table p, $t_mantis_project_user_list_table m
@@ -777,8 +761,7 @@ function print_category_filter_option_list( $p_category_name = '', $p_project_id
 
 	if( null === $p_project_id ) {
 		$c_project_id = helper_get_current_project();
-	}
-	else {
+	} else {
 		$c_project_id = db_prepare_int( $p_project_id );
 	}
 
@@ -856,8 +839,7 @@ function print_os_build_option_list( $p_os_build, $p_user_id = null ) {
 function print_version_option_list( $p_version = '', $p_project_id = null, $p_released = null, $p_leading_blank = true, $p_with_subs = false ) {
 	if( null === $p_project_id ) {
 		$c_project_id = helper_get_current_project();
-	}
-	else {
+	} else {
 		$c_project_id = db_prepare_int( $p_project_id );
 	}
 
@@ -866,8 +848,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 
 		/* obsolete */
 		null );
-	}
-	else {
+	} else {
 		$versions = version_get_all_rows( $c_project_id, $p_released,
 
 		/* obsolete */
@@ -953,18 +934,13 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 	$t_enum_workflow = config_get( 'status_enum_workflow' );
 
 	if( count( $t_enum_workflow ) < 1 ) {
-
 		# workflow not defined, use default enum
 		$t_arr = explode_enum_string( $t_config_var_value );
-	}
-	else {
-
+	} else {
 		# workflow defined - find allowed states
 		if( isset( $t_enum_workflow[$p_current_value] ) ) {
 			$t_arr = explode_enum_string( $t_enum_workflow[$p_current_value] );
-		}
-		else {
-
+		} else {
 			# workflow was not set for this status, this shouldn't happen
 			$t_arr = explode_enum_string( $t_config_var_value );
 		}
@@ -1008,8 +984,7 @@ function print_status_option_list( $p_select_label, $p_current_value = 0, $p_all
 			echo ">$val</option>";
 		}
 		echo '</select>';
-	}
-	else {
+	} else {
 		echo get_enum_to_string( 'status_enum_string', $p_current_value );
 	}
 }
@@ -1120,8 +1095,7 @@ function print_all_bug_action_option_list() {
 		# use label if provided to get the localized text, otherwise fallback to action name.
 		if( isset( $t_custom_group_action['label'] ) ) {
 			$commands[$t_custom_group_action['action']] = lang_get_defaulted( $t_custom_group_action['label'] );
-		}
-		else {
+		} else {
 			$commands[$t_custom_group_action['action']] = lang_get_defaulted( $t_custom_group_action['action'] );
 		}
 	}
@@ -1170,8 +1144,7 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 			if( $t_sort_by_last_name ) {
 				$t_sort_name_bits = split( ' ', strtolower( $t_user_name ), 2 );
 				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
-			}
-			else {
+			} else {
 				$t_sort_name = strtolower( $t_user_name );
 			}
 		}
@@ -1268,8 +1241,7 @@ function print_custom_field_projects_list( $p_field_id ) {
 		foreach( $t_linked_field_ids as $t_current_field_id ) {
 			if( $t_first ) {
 				$t_first = false;
-			}
-			else {
+			} else {
 				echo ', ';
 			}
 
@@ -1326,8 +1298,7 @@ function print_formatted_priority_string( $p_status, $p_priority ) {
 
 	if(( HIGH <= $p_priority ) && ( CLOSED != $p_status ) ) {
 		PRINT "<span class=\"bold\">$t_pri_str</span>";
-	}
-	else {
+	} else {
 		PRINT $t_pri_str;
 	}
 }
@@ -1339,8 +1310,7 @@ function print_formatted_severity_string( $p_status, $p_severity ) {
 
 	if(( MAJOR <= $p_severity ) && ( CLOSED != $p_status ) ) {
 		PRINT "<span class=\"bold\">$t_sev_str</span>";
-	}
-	else {
+	} else {
 		PRINT $t_sev_str;
 	}
 }
@@ -1364,8 +1334,7 @@ function print_project_category_string( $p_project_id ) {
 
 		if( $i + 1 < $category_count ) {
 			$t_string .= $t_name . ', ';
-		}
-		else {
+		} else {
 			$t_string .= $t_name;
 		}
 	}
@@ -1392,8 +1361,7 @@ function print_project_version_string( $p_project_id ) {
 
 		if( $i + 1 < $version_count ) {
 			$t_string .= $t_version . ', ';
-		}
-		else {
+		} else {
 			$t_string .= $t_version;
 		}
 	}
@@ -1409,17 +1377,13 @@ function print_project_version_string( $p_project_id ) {
 function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	if( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) {
 		if( $p_sort_field == $p_sort ) {
-
 			# We toggle between ASC and DESC if the user clicks the same sort order
 			if( 'ASC' == $p_dir ) {
 				$p_dir = 'DESC';
-			}
-			else {
+			} else {
 				$p_dir = 'ASC';
 			}
-		}
-		else {
-
+		} else {
 			# Otherwise always start with ASCending
 			$t_dir = 'ASC';
 		}
@@ -1432,20 +1396,16 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 			# we toggle between ASC and DESC if the user clicks the same sort order
 			if( 'ASC' == $p_dir ) {
 				$p_dir = 'DESC';
-			}
-			else {
+			} else {
 				$p_dir = 'ASC';
 			}
-		}
-		else {
-
+		} else {
 			# Otherwise always start with ASCending
 			$t_dir = 'ASC';
 		}
 
 		echo '<a href="view_all_set.php?sort=' . $p_sort_field . '&amp;dir=' . $p_dir . '&amp;type=2">' . $p_string . '</a>';
-	}
-	else {
+	} else {
 		echo $p_string;
 	}
 }
@@ -1456,13 +1416,10 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 		# If this is the selected field flip the order
 		if( 'ASC' == $p_dir || ASCENDING == $p_dir ) {
 			$t_dir = 'DESC';
-		}
-		else {
+		} else {
 			$t_dir = 'ASC';
 		}
-	}
-	else {
-
+	} else {
 		# Otherwise always start with ASCending
 		$t_dir = 'ASC';
 	}
@@ -1476,13 +1433,10 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
 		# If this is the selected field flip the order
 		if( 'ASC' == $p_dir || ASCENDING == $p_dir ) {
 			$t_dir = 'DESC';
-		}
-		else {
+		} else {
 			$t_dir = 'ASC';
 		}
-	}
-	else {
-
+	} else {
 		# Otherwise always start with ASCending
 		$t_dir = 'ASC';
 	}
@@ -1529,12 +1483,10 @@ function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' 
 	}
 	if( is_blank( $p_link ) ) {
 		PRINT "$p_url_text";
-	}
-	else {
+	} else {
 		if( $p_new_window === true ) {
 			PRINT "<a ${t_class}href=\"$p_link\" target=\"_blank\">$p_url_text</a>";
-		}
-		else {
+		} else {
 			PRINT "<a ${t_class}href=\"$p_link\">$p_url_text</a>";
 		}
 	}
@@ -1549,12 +1501,10 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 	if(( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
 		if( $p_temp_filter_id !== 0 ) {
 			PRINT " <a href=\"$p_page_url?filter=$p_temp_filter_id&amp;page_number=$p_page_no\">$p_text</a> ";
-		}
-		else {
+		} else {
 			PRINT " <a href=\"$p_page_url?page_number=$p_page_no\">$p_text</a> ";
 		}
-	}
-	else {
+	} else {
 		PRINT " $p_text ";
 	}
 }
@@ -1601,12 +1551,10 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	for( $i = $t_first_page;$i <= $t_last_page;$i++ ) {
 		if( $i == $p_current ) {
 			array_push( $t_items, $i );
-		}
-		else {
+		} else {
 			if( $p_temp_filter_id !== 0 ) {
 				array_push( $t_items, "<a href=\"$p_page?filter=$p_temp_filter_id&amp;page_number=$i\">$i</a>" );
-			}
-			else {
+			} else {
 				array_push( $t_items, "<a href=\"$p_page?page_number=$i\">$i</a>" );
 			}
 		}
@@ -1620,8 +1568,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	# Next and Last links
 	if( $p_current < $p_end ) {
 		print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_id );
-	}
-	else {
+	} else {
 		print_page_link( $p_page, $t_next, null, null, $p_temp_filter_id );
 	}
 	print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_id );
@@ -1681,14 +1628,12 @@ function print_hidden_input( $p_field_key, $p_field_val ) {
 				$t_key = string_html_entities( $t_key );
 				$t_field_key = $p_field_key . "[" . $t_key . "]";
 				print_hidden_input( $t_field_key, $t_value );
-			}
-			else {
+			} else {
 				$t_field_key = $p_field_key . "[" . $t_key . "]";
 				print_hidden_input( $t_field_key, $t_value );
 			}
 		}
-	}
-	else {
+	} else {
 		$t_key = string_html_entities( $p_field_key );
 		$t_val = string_html_entities( $p_field_val );
 		PRINT "<input type=\"hidden\" name=\"$t_key\" value=\"$t_val\" />\n";
@@ -1743,12 +1688,9 @@ function print_proceed( $p_result, $p_query, $p_link ) {
 	PRINT '<br />';
 	PRINT '<div align="center">';
 	if( $p_result ) {
-
 		# SUCCESS
 		PRINT lang_get( 'operation_successful' ) . '<br />';
-	}
-	else {
-
+	} else {
 		# FAILURE
 		print_sql_error( $p_query );
 	}
@@ -1808,8 +1750,7 @@ function print_recently_visited() {
 	foreach( $t_ids as $t_id ) {
 		if( !$t_first ) {
 			echo ', ';
-		}
-		else {
+		} else {
 			$t_first = false;
 		}
 
@@ -1824,8 +1765,7 @@ function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_
 	if( $p_multiple ) {
 		$t_size = ' SIZE="5"';
 		$t_multiple = ' MULTIPLE';
-	}
-	else {
+	} else {
 		$t_size = '';
 		$t_multiple = '';
 	}
@@ -1840,8 +1780,7 @@ function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_
 			if( in_array( $t_name, array_values( $p_match ) ) || in_array( $t_desc, array_values( $p_match ) ) ) {
 				$t_sel = " SELECTED";
 			}
-		}
-		else {
+		} else {
 			if(( $t_name === $p_match ) || ( $t_desc === $p_match ) ) {
 				$t_sel = " SELECTED";
 			}
@@ -1894,8 +1833,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 			$t_href_end = '</a>';
 
 			$t_href_clicket = " [<a href=\"file_download.php?file_id=$v_id&amp;type=bug\" target=\"_blank\">^</a>]";
-		}
-		else {
+		} else {
 			$t_href_start = '';
 			$t_href_end = '';
 
@@ -1907,8 +1845,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 		if( !$t_exists ) {
 			print_file_icon( $t_file_display_name );
 			PRINT '&nbsp;<span class="strike">' . $t_file_display_name . '</span> (attachment missing)';
-		}
-		else {
+		} else {
 			PRINT $t_href_start;
 			print_file_icon( $t_file_display_name );
 			PRINT $t_href_end . '&nbsp;' . $t_href_start . $t_file_display_name . $t_href_end . "$t_href_clicket ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
@@ -1947,8 +1884,7 @@ document.getElementById( span ).style.display = displayType;
 					case FTP:
 						if( file_exists( $t_diskfile ) ) {
 							file_get_contents( $t_diskfile );
-						}
-						else {
+						} else {
 							$ftp = file_ftp_connect();
 							file_ftp_get( $ftp, $t_diskfile, $t_diskfile );
 							file_ftp_disconnect( $ftp );

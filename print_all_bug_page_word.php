@@ -440,8 +440,8 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<?php echo lang_get( 'no_bugnotes_msg' ) ?>
 	</td>
 </tr>
-	<?php }
-		else { # print bugnotes ?>
+<?php 
+	} else { # print bugnotes ?>
 <tr>
 	<td class="form-title" colspan="2">
 			<?php echo lang_get( 'bug_notes_title' ) ?>

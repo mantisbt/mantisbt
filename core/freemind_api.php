@@ -99,14 +99,11 @@ function freemind_export_bug( $p_bug, &$p_bug_list ) {
 
 	if( $p_bug->status >= CLOSED ) {
 		echo '<icon BUILTIN="button_ok"/>', $t_nl;
-	}
-	elseif( bug_is_resolved( $t_id ) ) {
+	} elseif( bug_is_resolved( $t_id ) ) {
 		echo '<icon BUILTIN="button_ok"/>', $t_nl;
-	}
-	elseif( $p_bug->handler_id != NO_USER ) {
+	} elseif( $p_bug->handler_id != NO_USER ) {
 		echo '<icon BUILTIN="pencil"/>', $t_nl;
-	}
-	else {
+	} else {
 		echo '<icon BUILTIN="bookmark"/>', $t_nl;
 	}
 

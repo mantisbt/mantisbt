@@ -50,8 +50,7 @@ function category_exists( $p_category_id ) {
 
 	if( 0 < $count ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -79,8 +78,7 @@ function category_is_unique( $p_project_id, $p_name ) {
 
 	if( 0 < $count ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -320,8 +318,7 @@ function category_get_all_rows( $p_project_id, $p_inherit = true, $p_sort_by_pro
 	if( $p_inherit ) {
 		$t_project_ids = project_hierarchy_inheritance( $p_project_id );
 		$t_project_where = ' project_id IN ( ' . implode( ', ', $t_project_ids ) . ' ) ';
-	}
-	else {
+	} else {
 		$t_project_where = ' project_id=' . $p_project_id . ' ';
 	}
 
@@ -412,8 +409,7 @@ function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_er
 		if( $p_trigger_errors ) {
 			error_parameters( $p_category_name, $t_project_name );
 			trigger_error( ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT, ERROR );
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -428,8 +424,7 @@ function category_full_name( $p_category_id, $p_show_project = true ) {
 
 		# No Category
 		return lang_get( 'no_category' );
-	}
-	else {
+	} else {
 		$t_row = category_get_row( $p_category_id );
 		$t_project_id = $t_row['project_id'];
 

@@ -69,8 +69,7 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
 		if( OFF == current_user_get_field( 'enabled' ) ) {
 			print_header_redirect( 'logout_page.php' );
 		}
-	}
-	else {
+	} else {
 		# not logged in
 		if( is_blank( $p_return_page ) ) {
 			if( !isset( $_SERVER['REQUEST_URI'] ) ) {
@@ -115,8 +114,7 @@ function auth_prepare_username( $p_username ) {
 				if( isset( $_SERVER['PHP_AUTH_USER'] ) ) {
 					$f_username = $_SERVER['PHP_AUTH_USER'];
 				}
-			}
-			else {
+			} else {
 				auth_http_set_logout_pending( false );
 				auth_http_prompt();
 
@@ -150,8 +148,7 @@ function auth_prepare_password( $p_password ) {
 				if( isset( $_SERVER['PHP_AUTH_PW'] ) ) {
 					$f_password = $_SERVER['PHP_AUTH_PW'];
 				}
-			}
-			else {
+			} else {
 				auth_http_set_logout_pending( false );
 				auth_http_prompt();
 
@@ -189,7 +186,6 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 			$t_cookie_string = user_create( $p_username, $p_password );
 
 			if( false === $t_cookie_string ) {
-
 				# it didn't work
 				return false;
 			}
@@ -198,13 +194,11 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 			$t_user_id = user_get_id_by_name( $p_username );
 
 			if( false === $t_user_id ) {
-
 				# uh oh, something must be really wrong
 				# @@@ trigger an error here?
 				return false;
 			}
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -224,7 +218,6 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 
 	# check for anonymous login
 	if( !(( ON == $t_anon_allowed ) && ( $t_anon_account == $p_username ) ) ) {
-
 		# anonymous login didn't work, so check the password
 
 		if( !auth_does_password_match( $t_user_id, $p_password ) ) {
@@ -462,8 +455,7 @@ function auth_set_cookies( $p_user_id, $p_perm_login = false ) {
 	if( $p_perm_login ) {
 		# set permanent cookie (1 year)
 		gpc_set_cookie( $t_cookie_name, $t_cookie_string, true );
-	}
-	else {
+	} else {
 		# set temp cookie, cookie dies after browser closes
 		gpc_set_cookie( $t_cookie_name, $t_cookie_string, false );
 	}
@@ -487,8 +479,7 @@ function auth_clear_cookies() {
 
 		gpc_clear_cookie( $t_cookie_name, $t_cookie_path );
 		$t_cookies_cleared = true;
-	}
-	else {
+	} else {
 		$g_script_login_cookie = null;
 	}
 	return $t_cookies_cleared;
@@ -540,8 +531,7 @@ function auth_is_cookie_string_unique( $p_cookie_string ) {
 
 	if( $t_count > 0 ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -589,8 +579,7 @@ function auth_get_current_user_cookie() {
 						$g_cache_current_user_id = $row['id'];
 					}
 				}
-			}
-			else {
+			} else {
 				$t_cookie = $g_cache_anonymous_user_cookie_string;
 			}
 		}
@@ -608,8 +597,7 @@ function auth_set_tokens( $p_user_id ) {
 	$t_auth_token = token_get( TOKEN_AUTHENTICATED, $p_user_id );
 	if( null == $t_auth_token ) {
 		token_set( TOKEN_AUTHENTICATED, true, config_get_global( 'reauthentication_expiry' ), $p_user_id );
-	}
-	else {
+	} else {
 		token_touch( $t_auth_token['id'], config_get_global( 'reauthentication_expiry' ) );
 	}
 }
@@ -631,8 +619,7 @@ function auth_reauthenticate() {
 	if( null != $t_auth_token ) {
 		token_touch( $t_auth_token['id'], config_get_global( 'reauthentication_expiry' ) );
 		return true;
-	}
-	else {
+	} else {
 		$t_anon_account = config_get( 'anonymous_account' );
 		$t_anon_allowed = config_get( 'allow_anonymous_login' );
 
@@ -664,8 +651,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 		if( auth_attempt_login( $p_username, $f_password ) ) {
 			auth_set_tokens( $p_user_id );
 			return true;
-		}
-		else {
+		} else {
 			$t_error = true;
 		}
 	}
@@ -761,8 +747,7 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 	if( 1 == db_num_rows( $result ) ) {
 		user_cache_database_result( db_fetch_array( $result ) );
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -838,8 +823,7 @@ function auth_http_set_logout_pending( $p_pending ) {
 
 	if( $p_pending ) {
 		gpc_set_cookie( $t_cookie_name, "1", false );
-	}
-	else {
+	} else {
 		$t_cookie_path = config_get( 'cookie_path' );
 		gpc_clear_cookie( $t_cookie_name, $t_cookie_path );
 	}

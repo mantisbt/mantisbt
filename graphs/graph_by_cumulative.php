@@ -109,8 +109,7 @@ while( $row = db_fetch_array( $result ) ) {
 
 	if( $status < 80 ) {
 		$date_str = date( 'm/d/Y', db_unixtimestamp( $date_submitted ) );
-	}
-	else {
+	} else {
 		$date_str = date( 'm/d/Y', db_unixtimestamp( $last_updated ) );
 	}
 

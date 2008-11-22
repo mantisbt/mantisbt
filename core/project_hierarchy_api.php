@@ -94,8 +94,7 @@ function project_hierarchy_is_toplevel( $p_project_id ) {
 
 	if( isset( $g_cache_project_hierarchy[ALL_PROJECTS] ) ) {
 		return in_array( $p_project_id, $g_cache_project_hierarchy[ALL_PROJECTS] );
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -138,8 +137,7 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 
 		if( isset( $g_cache_project_hierarchy[$row['parent_id']] ) ) {
 			$g_cache_project_hierarchy[$row['parent_id']][] = $row['id'];
-		}
-		else {
+		} else {
 			$g_cache_project_hierarchy[$row['parent_id']] = array(
 				$row['id'],
 			);
@@ -207,8 +205,7 @@ function project_hierarchy_get_subprojects( $p_project_id, $p_show_disabled = fa
 
 	if( isset( $g_cache_project_hierarchy[$p_project_id] ) ) {
 		return $g_cache_project_hierarchy[$p_project_id];
-	}
-	else {
+	} else {
 		return array();
 	}
 }

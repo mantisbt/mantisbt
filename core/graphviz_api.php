@@ -318,15 +318,11 @@ class Graph {
 					echo base64_decode( $t_dot_output->ToBase64String() );
 					header( 'Content-Length: ' . ob_get_length() );
 					ob_end_flush();
-				}
-				else {
-
+				} else {
 					# No need for headers, send output directly.
 					echo base64_decode( $ret->ToBase64String() );
 				}
-			}
-			else {
-
+			} else {
 				# Text formats
 				$t_dot_output = $t_graphviz->ToTextGraph( $t_dot_source, $t_type );
 
@@ -338,9 +334,8 @@ class Graph {
 			}
 
 			unset( $t_graphviz );
-		}
-		else {
-
+		} else {
+		
 			# If we are not under Windows, use proc_open,
 			# since it avoids the need of temporary files.
 			# Start dot process
@@ -371,7 +366,6 @@ class Graph {
 				fclose( $t_pipes[0] );
 
 				if( $p_headers ) {
-
 					# Headers were requested, use another output buffer to
 					# retrieve the size for Content-Length.
 					ob_start();
@@ -380,9 +374,7 @@ class Graph {
 					}
 					header( 'Content-Length: ' . ob_get_length() );
 					ob_end_flush();
-				}
-				else {
-
+				} else {
 					# No need for headers, send output directly.
 					while( !feof( $t_pipes[1] ) ) {
 						print( fgets( $t_pipes[1], 1024 ) );
@@ -413,8 +405,7 @@ class Graph {
 			}
 			elseif( is_integer( $t_value ) or is_float( $t_value ) ) {
 				$t_value = (string) $t_value;
-			}
-			else {
+			} else {
 				continue;
 			}
 
@@ -436,8 +427,7 @@ class Graph {
 			}
 			elseif( is_integer( $t_value ) or is_float( $t_value ) ) {
 				$t_value = (string) $t_value;
-			}
-			else {
+			} else {
 				continue;
 			}
 

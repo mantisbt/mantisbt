@@ -50,17 +50,14 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 
 		if( !is_blank( $p_binddn ) && !is_blank( $p_password ) ) {
 			$t_br = @ldap_bind( $t_ds, $p_binddn, $p_password );
-		}
-		else {
-
+		} else {
 			# Either the Bind DN or the Password are empty, so attempt an anonymous bind.
 			$t_br = @ldap_bind( $t_ds );
 		}
 		if( !$t_br ) {
 			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
 		}
-	}
-	else {
+	} else {
 		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
 	}
 
@@ -118,8 +115,7 @@ function ldap_has_group( $p_user_id, $p_group ) {
 
 	if( $t_entries > 0 ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }

@@ -533,12 +533,9 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	$t_admin = ADMINISTRATOR;
 
 	if( $p_project_id == ALL_PROJECTS ) {
-
 		# Select all the projects that the user has access to
 		$t_projects = user_get_accessible_projects( $t_user_id );
-	}
-	else {
-
+	} else {
 		# Select the specific project
 		$t_projects = array(
 			$p_project_id,
@@ -552,12 +549,10 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	if( is_array( $t_reqd_access ) ) {
 		if( 1 == count( $t_reqd_access ) ) {
 			$t_access_clause = "= " . array_shift( $t_reqd_access ) . " ";
-		}
-		else {
+		} else {
 			$t_access_clause = "IN (" . implode( ',', $t_reqd_access ) . ")";
 		}
-	}
-	else {
+	} else {
 		$t_access_clause = ">= $t_reqd_access ";
 	}
 
@@ -768,8 +763,7 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 			if( $t_sort_by_last_name ) {
 				$t_sort_name_bits = split( ' ', strtolower( $t_user_name ), 2 );
 				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
-			}
-			else {
+			} else {
 				$t_sort_name = strtolower( $t_user_name );
 			}
 		}

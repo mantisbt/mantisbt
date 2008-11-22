@@ -32,8 +32,7 @@ function icon_get_status_icon( $p_icon ) {
 	$t_priotext = get_enum_element( 'priority', $p_icon );
 	if( isset( $t_status_icon_arr[$p_icon] ) && !is_blank( $t_status_icon_arr[$p_icon] ) ) {
 		return "<img src=\"$t_icon_path$t_status_icon_arr[$p_icon]\" alt=\"\" title=\"$t_priotext\" />";
-	}
-	else {
+	} else {
 		return "&nbsp;";
 	}
 }
@@ -60,16 +59,14 @@ function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
 
 	if(( 'DESC' == $p_dir ) || ( DESCENDING == $p_dir ) ) {
 		$t_dir = DESCENDING;
-	}
-	else {
+	} else {
 		$t_dir = ASCENDING;
 	}
 
 	$t_none = NONE;
 	if( !is_blank( $t_sort_icon_arr[$t_dir] ) ) {
 		PRINT "<img src=\"$t_icon_path$t_sort_icon_arr[$t_dir]\" alt=\"\" />";
-	}
-	else {
+	} else {
 		PRINT "<img src=\"$t_icon_path$t_status_icon_arr[$t_none]\" alt=\"\" />";
 	}
 }
@@ -83,8 +80,7 @@ function print_unread_icon( $p_unread = READ ) {
 	$t_none = NONE;
 	if( !is_blank( $t_unread_icon_arr[$p_unread] ) ) {
 		PRINT "<img src=\"$t_icon_path$t_unread_icon_arr[$p_unread]\" alt=\"\" />";
-	}
-	else {
+	} else {
 		PRINT "<img src=\"$t_icon_path$t_status_icon_arr[$t_none]\" alt=\"\" />";
 	}
 }

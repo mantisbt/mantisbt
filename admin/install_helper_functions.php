@@ -52,17 +52,14 @@ function check_database_support( $p_db_type ) {
 function check_php_version( $p_version ) {
 	if( $p_version == PHP_MIN_VERSION ) {
 		return true;
-	}
-	else {
+	} else {
 		if( function_exists( 'version_compare' ) ) {
 			if( version_compare( phpversion(), PHP_MIN_VERSION, '>=' ) ) {
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
-		}
-		else {
+		} else {
 			return false;
 		}
 	}

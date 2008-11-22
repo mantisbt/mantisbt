@@ -221,8 +221,7 @@ function filter_get_url( $p_custom_filter ) {
 	if( count( $t_query ) > 0 ) {
 		$t_query_str = implode( $t_query, '&amp;' );
 		$t_url = config_get( 'path' ) . 'search.php?' . $t_query_str;
-	}
-	else {
+	} else {
 		$t_url = '';
 	}
 
@@ -248,8 +247,7 @@ function filter_encode_field_and_value( $p_field_name, $p_field_value ) {
 		elseif( $t_count == 1 ) {
 			$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value[0] );
 		}
-	}
-	else {
+	} else {
 		$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value );
 	}
 
@@ -275,8 +273,7 @@ function filter_field_is_any( $p_field_value ) {
 				return true;
 			}
 		}
-	}
-	else {
+	} else {
 		if( is_string( $p_field_value ) && is_blank( $p_field_value ) ) {
 			return true;
 		}
@@ -306,8 +303,7 @@ function filter_field_is_none( $p_field_value ) {
 				return true;
 			}
 		}
-	}
-	else {
+	} else {
 		if( is_string( $p_field_value ) && is_blank( $p_field_value ) ) {
 			return false;
 		}
@@ -502,8 +498,7 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 		foreach( $t_custom_fields as $t_cfid ) {
 			if( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
 				$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, META_FILTER_ANY );
-			}
-			else {
+			} else {
 				$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, META_FILTER_ANY );
 				$f_custom_fields_data[$t_cfid] = array(
 					$f_custom_fields_data[$t_cfid],
@@ -530,8 +525,7 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 				if( false === custom_field_get_id_from_name( substr( $t_sort, strlen( 'custom_' ) ) ) ) {
 					$t_drop = true;
 				}
-			}
-			else {
+			} else {
 				if( !in_array( $t_sort, $t_fields ) ) {
 					$t_drop = true;
 				}
@@ -548,8 +542,7 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 	if( count( $t_sort_fields ) > 0 ) {
 		$p_filter_arr['sort'] = implode( ',', $t_sort_fields );
 		$p_filter_arr['dir'] = implode( ',', $t_dir_fields );
-	}
-	else {
+	} else {
 		$p_filter_arr['sort'] = "last_updated";
 		$p_filter_arr['dir'] = "DESC";
 	}
@@ -583,14 +576,12 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 				$p_filter_arr[$t_multi_field_name] = array(
 					$f_custom_fields_data,
 				);
-			}
-			else {
+			} else {
 				$p_filter_arr[$t_multi_field_name] = array(
 					META_FILTER_ANY,
 				);
 			}
-		}
-		else {
+		} else {
 			if( !is_array( $p_filter_arr[$t_multi_field_name] ) ) {
 				$p_filter_arr[$t_multi_field_name] = array(
 					$p_filter_arr[$t_multi_field_name],
@@ -625,8 +616,7 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 				$p_filter_arr['custom_fields'][$t_cfid] = array(
 					META_FILTER_ANY,
 				);
-			}
-			else {
+			} else {
 				if( !is_array( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
 					$p_filter_arr['custom_fields'][$t_cfid] = array(
 						$p_filter_arr['custom_fields'][$t_cfid],
@@ -726,8 +716,7 @@ function filter_deserialize( $p_serialized_filter ) {
 	$t_filter_array = array();
 	if( isset( $t_setting_arr[1] ) ) {
 		$t_filter_array = unserialize( $t_setting_arr[1] );
-	}
-	else {
+	} else {
 		return false;
 	}
 	if( $t_filter_array['_version'] != config_get( 'cookie_version' ) ) {
@@ -763,8 +752,7 @@ function filter_is_cookie_valid() {
 	$t_filter_cookie_arr = array();
 	if( isset( $t_setting_arr[1] ) ) {
 		$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
-	}
-	else {
+	} else {
 		return false;
 	}
 	if( $t_filter_cookie_arr['_version'] != config_get( 'cookie_version' ) ) {
@@ -795,8 +783,7 @@ function filter_get_field( $p_filter_id, $p_field_name ) {
 
 	if( isset( $row[$p_field_name] ) ) {
 		return $row[$p_field_name];
-	}
-	else {
+	} else {
 		error_parameters( $p_field_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 		return '';
@@ -939,8 +926,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 	if( null === $p_user_id ) {
 		$t_user_id = $t_current_user_id;
-	}
-	else {
+	} else {
 		$t_user_id = $p_user_id;
 	}
 
@@ -950,8 +936,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		# @@@ If project_id is not specified, then use the project id(s) in the filter if set, otherwise, use current project.
 		$t_project_id = helper_get_current_project();
-	}
-	else {
+	} else {
 		$t_project_id = $p_project_id;
 	}
 
@@ -961,12 +946,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		# cookies set by previous version of the code.
 		if( $t_user_id == $t_current_user_id ) {
 			$t_filter = current_user_get_bug_filter();
-		}
-		else {
+		} else {
 			$t_filter = user_get_bug_filter( $t_user_id, $t_project_id );
 		}
-	}
-	else {
+	} else {
 		$t_filter = $p_custom_filter;
 	}
 
@@ -1003,15 +986,13 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_project_id,
 		);
 		$t_include_sub_projects = true;
-	}
-	else {
+	} else {
 		log_event( LOG_FILTERING, 'Advanced Filter' );
 		if( !is_array( $t_filter[FILTER_PROPERTY_PROJECT_ID] ) ) {
 			$t_project_ids = array(
 				db_prepare_int( $t_filter[FILTER_PROPERTY_PROJECT_ID] ),
 			);
-		}
-		else {
+		} else {
 			$t_project_ids = array_map( 'db_prepare_int', $t_filter[FILTER_PROPERTY_PROJECT_ID] );
 		}
 
@@ -1049,12 +1030,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		if( user_is_administrator( $t_user_id ) ) {
 			log_event( LOG_FILTERING, 'all projects + administrator, hence no project filter.' );
 			$t_projects_query_required = false;
-		}
-		else {
+		} else {
 			$t_project_ids = user_get_accessible_projects( $t_user_id );
 		}
-	}
-	else {
+	} else {
 		$t_project_ids = $t_new_project_ids;
 	}
 
@@ -1091,8 +1070,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		foreach( $t_project_ids as $t_pid ) {
 			if( access_has_project_level( $t_access_required_to_view_private_bugs, $t_pid, $t_user_id ) ) {
 				$t_private_and_public_project_ids[] = $t_pid;
-			}
-			else {
+			} else {
 				$t_public_only_project_ids[] = $t_pid;
 			}
 		}
@@ -1106,8 +1084,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		}
 		elseif( $t_count_private_and_public_project_ids > 1 ) {
 			$t_private_and_public_query = "( $t_bug_table.project_id in (" . implode( ', ', $t_private_and_public_project_ids ) . ") )";
-		}
-		else {
+		} else {
 			$t_private_and_public_query = null;
 		}
 
@@ -1118,8 +1095,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		}
 		elseif( $t_count_public_only_project_ids > 1 ) {
 			$t_public_only_query = "( ( $t_bug_table.project_id in (" . implode( ', ', $t_public_only_project_ids ) . ") ) AND $t_public_view_state_check )";
-		}
-		else {
+		} else {
 			$t_public_only_query = null;
 		}
 
@@ -1127,11 +1103,9 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		if( $t_private_and_public_query === null ) {
 			$t_project_query = $t_public_only_query;
-		}
-		elseif( $t_public_only_query === null ) {
+		} elseif( $t_public_only_query === null ) {
 			$t_project_query = $t_private_and_public_query;
-		}
-		else {
+		} else {
 			$t_project_query = "( $t_public_only_query OR $t_private_and_public_query )";
 		}
 
@@ -1146,8 +1120,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		log_event( LOG_FILTERING, 'view_state query = ' . $t_view_state_query );
 		$t_where_params[] = $t_view_state;
 		array_push( $t_where_clauses, $t_view_state_query );
-	}
-	else {
+	} else {
 		log_event( LOG_FILTERING, 'no view_state query' );
 	}
 
@@ -1158,13 +1131,11 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		foreach( $t_filter[FILTER_PROPERTY_REPORTER_ID] as $t_filter_member ) {
 			if( filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, "0" );
-			}
-			else {
+			} else {
 				$c_reporter_id = db_prepare_int( $t_filter_member );
 				if( filter_field_is_myself( $c_reporter_id ) ) {
 					array_push( $t_clauses, $c_user_id );
-				}
-				else {
+				} else {
 					array_push( $t_clauses, $c_reporter_id );
 				}
 			}
@@ -1172,15 +1143,13 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		if( 1 < count( $t_clauses ) ) {
 			$t_reporter_query = "( $t_bug_table.reporter_id in (" . implode( ', ', $t_clauses ) . ") )";
-		}
-		else {
+		} else {
 			$t_reporter_query = "( $t_bug_table.reporter_id=$t_clauses[0] )";
 		}
 
 		log_event( LOG_FILTERING, 'reporter query = ' . $t_reporter_query );
 		array_push( $t_where_clauses, $t_reporter_query );
-	}
-	else {
+	} else {
 		log_event( LOG_FILTERING, 'no reporter query' );
 	}
 
@@ -1201,13 +1170,11 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		foreach( $t_filter[FILTER_PROPERTY_HANDLER_ID] as $t_filter_member ) {
 			if( filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, 0 );
-			}
-			else {
+			} else {
 				$c_handler_id = db_prepare_int( $t_filter_member );
 				if( filter_field_is_myself( $c_handler_id ) ) {
 					array_push( $t_clauses, $c_user_id );
-				}
-				else {
+				} else {
 					array_push( $t_clauses, $c_handler_id );
 				}
 			}
@@ -1215,15 +1182,13 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		if( 1 < count( $t_clauses ) ) {
 			$t_handler_query = "( $t_bug_table.handler_id in (" . implode( ', ', $t_clauses ) . ") )";
-		}
-		else {
+		} else {
 			$t_handler_query = "( $t_bug_table.handler_id=$t_clauses[0] )";
 		}
 
 		log_event( LOG_FILTERING, 'handler query = ' . $t_handler_query );
 		array_push( $t_where_clauses, $t_handler_query );
-	}
-	else {
+	} else {
 		log_event( LOG_FILTERING, 'no handler query' );
 	}
 
@@ -1233,8 +1198,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		foreach( $t_filter[FILTER_PROPERTY_CATEGORY] as $t_filter_member ) {
 			if( filter_field_is_none( $t_filter_member ) ) {
-			}
-			else {
+			} else {
 				array_push( $t_clauses, $t_filter_member );
 			}
 		}
@@ -1246,8 +1210,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bug_table.category_id in ( SELECT id FROM $t_category_table WHERE name in (" . implode( ', ', $t_where_tmp ) . ") ) )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.category_id in ( SELECT id FROM $t_category_table WHERE name=" . db_param() . ") )" );
 		}
@@ -1268,8 +1231,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bug_table.severity in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.severity=" . db_param() . " )" );
 		}
@@ -1299,18 +1261,14 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 					$t_desired_statuses[] = $t_this_available_status;
 				}
 			}
-		}
-		else {
+		} else {
 			$t_desired_statuses[] = $t_this_status;
 		}
-	}
-	else {
-
+	} else {
 		# advanced filtering: ignore the hide
 		if( filter_field_is_any( $t_filter[FILTER_PROPERTY_STATUS_ID] ) ) {
 			$t_desired_statuses = array();
-		}
-		else {
+		} else {
 			foreach( $t_filter[FILTER_PROPERTY_STATUS_ID] as $t_this_status ) {
 				$t_desired_statuses[] = $t_this_status;
 			}
@@ -1331,8 +1289,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bug_table.status in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.status=" . db_param() . " )" );
 		}
@@ -1353,8 +1310,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bug_table.resolution in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.resolution=" . db_param() . " )" );
 		}
@@ -1375,8 +1331,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bug_table.priority in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.priority=" . db_param() . " )" );
 		}
@@ -1390,8 +1345,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_filter_member = stripslashes( $t_filter_member );
 			if( filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, '' );
-			}
-			else {
+			} else {
 				$c_show_build = db_prepare_string( $t_filter_member );
 				array_push( $t_clauses, $c_show_build );
 			}
@@ -1403,8 +1357,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bug_table.build in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.build=" . db_param() . " )" );
 		}
@@ -1418,8 +1371,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_filter_member = stripslashes( $t_filter_member );
 			if( filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, '' );
-			}
-			else {
+			} else {
 				$c_show_version = db_prepare_string( $t_filter_member );
 				array_push( $t_clauses, $c_show_version );
 			}
@@ -1432,8 +1384,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bug_table.version in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.version=" . db_param() . " )" );
 		}
@@ -1447,8 +1398,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_filter_member = stripslashes( $t_filter_member );
 			if( filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, "0" );
-			}
-			else {
+			} else {
 				$c_show_profile = db_prepare_int( $t_filter_member );
 				array_push( $t_clauses, "$c_show_profile" );
 			}
@@ -1460,8 +1410,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bug_table.profile_id in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.profile_id=" . db_param() . " )" );
 		}
@@ -1475,8 +1424,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_filter_member = stripslashes( $t_filter_member );
 			if( filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, '' );
-			}
-			else {
+			} else {
 				$c_platform = db_prepare_string( $t_filter_member );
 				array_push( $t_clauses, $c_platform );
 			}
@@ -1489,8 +1437,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bug_table.platform in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.platform = " . db_param() . " )" );
 		}
@@ -1504,8 +1451,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_filter_member = stripslashes( $t_filter_member );
 			if( filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, '' );
-			}
-			else {
+			} else {
 				$c_os = db_prepare_string( $t_filter_member );
 				array_push( $t_clauses, $c_os );
 			}
@@ -1518,8 +1464,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bug_table.os in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.os = " . db_param() . " )" );
 		}
@@ -1533,8 +1478,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_filter_member = stripslashes( $t_filter_member );
 			if( filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, '' );
-			}
-			else {
+			} else {
 				$c_os_build = db_prepare_string( $t_filter_member );
 				array_push( $t_clauses, $c_os_build );
 			}
@@ -1547,8 +1491,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bug_table.os_build in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.os_build = " . db_param() . " )" );
 		}
@@ -1573,8 +1516,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_filter_member = stripslashes( $t_filter_member );
 			if( filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, '' );
-			}
-			else {
+			} else {
 				$c_fixed_in_version = db_prepare_string( $t_filter_member );
 				array_push( $t_clauses, $c_fixed_in_version );
 			}
@@ -1586,8 +1528,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bug_table.fixed_in_version in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.fixed_in_version=" . db_param() . " )" );
 		}
@@ -1601,8 +1542,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_filter_member = stripslashes( $t_filter_member );
 			if( filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, '' );
-			}
-			else {
+			} else {
 				$c_target_version = db_prepare_string( $t_filter_member );
 				array_push( $t_clauses, $c_target_version );
 			}
@@ -1616,8 +1556,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bug_table.target_version in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.target_version=" . db_param() . " )" );
 		}
@@ -1633,8 +1572,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$c_user_monitor = db_prepare_int( $t_filter_member );
 			if( filter_field_is_myself( $c_user_monitor ) ) {
 				array_push( $t_clauses, $c_user_id );
-			}
-			else {
+			} else {
 				array_push( $t_clauses, $c_user_monitor );
 			}
 		}
@@ -1645,8 +1583,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_table_name.user_id in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_table_name.user_id=" . db_param() . " )" );
 		}
@@ -1660,7 +1597,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		$t_any_found = true;
 	}
 	if( !$t_any_found ) {
-
 		# use the complementary type
 		$t_comp_type = relationship_get_complementary_type( $c_rel_type );
 		$t_clauses = array();
@@ -1746,8 +1682,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$c_note_user_id = db_prepare_int( $t_filter_member );
 			if( filter_field_is_myself( $c_note_user_id ) ) {
 				array_push( $t_clauses, $c_user_id );
-			}
-			else {
+			} else {
 				array_push( $t_clauses, $c_note_user_id );
 			}
 		}
@@ -1758,8 +1693,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_params[] = $t_clause;
 			}
 			array_push( $t_where_clauses, "( $t_bugnote_table_alias.reporter_id in (" . implode( ', ', $t_where_tmp ) . ") )" );
-		}
-		else {
+		} else {
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bugnote_table_alias.reporter_id=" . db_param() . " )" );
 		}
@@ -1816,8 +1750,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 							$t_custom_where_clause = '( (' . $t_table_name . '.value+0) BETWEEN ' . $t_filter['custom_fields'][$t_cfid][1] . ' AND ' . $t_filter['custom_fields'][$t_cfid][2];
 							break;
 					}
-				}
-				else {
+				} else {
 
 					array_push( $t_join_clauses, $t_cf_join_clause );
 
@@ -1946,8 +1879,7 @@ function filter_cache_result( $p_rows, $p_id_array_lastmod ) {
 	foreach( $p_rows as $t_row ) {
 		if( !isset( $t_stats[$t_row['id']] ) ) {
 			$t_rows[] = bug_cache_database_result( $t_row, false );
-		}
-		else {
+		} else {
 			$t_rows[] = bug_cache_database_result( $t_row, $t_stats[$t_row['id']] );
 		}
 	}
@@ -2095,8 +2027,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_REPORTER_ID] ) == 0 ) {
 			PRINT lang_get( 'any' );
-		}
-		else {
+		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_REPORTER_ID] as $t_current ) {
 				$t_this_name = '';
@@ -2107,29 +2038,24 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				elseif( filter_field_is_myself( $t_current ) ) {
 					if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
 						$t_this_name = '[' . lang_get( 'myself' ) . ']';
-					}
-					else {
+					} else {
 						$t_any_found = true;
 					}
-				}
-				elseif( filter_field_is_none( $t_current ) ) {
+				} elseif( filter_field_is_none( $t_current ) ) {
 					$t_this_name = lang_get( 'none' );
-				}
-				else {
+				} else {
 					$t_this_name = user_get_name( $t_current );
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
-				}
-				else {
+				} else {
 					$t_first_flag = false;
 				}
 				$t_output = $t_output . $t_this_name;
 			}
 			if( true == $t_any_found ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				PRINT $t_output;
 			}
 		}
@@ -2141,8 +2067,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] ) == 0 ) {
 			PRINT lang_get( 'any' );
-		}
-		else {
+		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] as $t_current ) {
 				echo '<input type="hidden" name="', FILTER_PROPERTY_MONITOR_USER_ID, '[]" value="', $t_current, '" />';
@@ -2153,26 +2078,22 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				elseif( filter_field_is_myself( $t_current ) ) {
 					if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 						$t_this_name = '[' . lang_get( 'myself' ) . ']';
-					}
-					else {
+					} else {
 						$t_any_found = true;
 					}
-				}
-				else {
+				} else {
 					$t_this_name = user_get_name( $t_current );
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
-				}
-				else {
+				} else {
 					$t_first_flag = false;
 				}
 				$t_output = $t_output . $t_this_name;
 			}
 			if( true == $t_any_found ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				PRINT $t_output;
 			}
 		}
@@ -2184,41 +2105,34 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_HANDLER_ID] ) == 0 ) {
 			PRINT lang_get( 'any' );
-		}
-		else {
+		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_HANDLER_ID] as $t_current ) {
 				echo '<input type="hidden" name="', FILTER_PROPERTY_HANDLER_ID, '[]" value="', $t_current, '" />';
 				$t_this_name = '';
 				if( filter_field_is_none( $t_current ) ) {
 					$t_this_name = lang_get( 'none' );
-				}
-				elseif( filter_field_is_any( $t_current ) ) {
+				} elseif( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				}
-				elseif( filter_field_is_myself( $t_current ) ) {
+				} elseif( filter_field_is_myself( $t_current ) ) {
 					if( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
 						$t_this_name = '[' . lang_get( 'myself' ) . ']';
-					}
-					else {
+					} else {
 						$t_any_found = true;
 					}
-				}
-				else {
+				} else {
 					$t_this_name = user_get_name( $t_current );
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
-				}
-				else {
+				} else {
 					$t_first_flag = false;
 				}
 				$t_output = $t_output . $t_this_name;
 			}
 			if( true == $t_any_found ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				PRINT $t_output;
 			}
 		}
@@ -2230,30 +2144,26 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_CATEGORY] ) == 0 ) {
 			PRINT lang_get( 'any' );
-		}
-		else {
+		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_CATEGORY] as $t_current ) {
 				echo '<input type="hidden" name="', FILTER_PROPERTY_CATEGORY, '[]" value="', $t_current, '" />';
 				$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				}
-				else {
+				} else {
 					$t_this_string = string_display( $t_current );
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
-				}
-				else {
+				} else {
 					$t_first_flag = false;
 				}
 				$t_output = $t_output . $t_this_string;
 			}
 			if( true == $t_any_found ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				PRINT $t_output;
 			}
 		}
@@ -2265,30 +2175,26 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_SEVERITY_ID] ) == 0 ) {
 			PRINT lang_get( 'any' );
-		}
-		else {
+		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_SEVERITY_ID] as $t_current ) {
 				echo '<input type="hidden" name="', FILTER_PROPERTY_SEVERITY_ID, '[]" value="', $t_current, '" />';
 				$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				}
-				else {
+				} else {
 					$t_this_string = get_enum_element( 'severity', $t_current );
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
-				}
-				else {
+				} else {
 					$t_first_flag = false;
 				}
 				$t_output = $t_output . $t_this_string;
 			}
 			if( true == $t_any_found ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				PRINT $t_output;
 			}
 		}
@@ -2300,8 +2206,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_RESOLUTION_ID] ) == 0 ) {
 			PRINT lang_get( 'any' );
-		}
-		else {
+		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_RESOLUTION_ID] as $t_current ) {
 				?>
@@ -2310,22 +2215,19 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 										$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				}
-				else {
+				} else {
 					$t_this_string = get_enum_element( 'resolution', $t_current );
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
-				}
-				else {
+				} else {
 					$t_first_flag = false;
 				}
 				$t_output = $t_output . $t_this_string;
 			}
 			if( true == $t_any_found ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				PRINT $t_output;
 			}
 		}
@@ -2337,8 +2239,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_any_found = false;
 		if( count( $t_filter['show_profile'] ) == 0 ) {
 			PRINT lang_get( 'any' );
-		}
-		else {
+		} else {
 			$t_first_flag = true;
 			foreach( $t_filter['show_profile'] as $t_current ) {
 				?>
@@ -2347,24 +2248,21 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 										$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				}
-				else {
+				} else {
 					$t_profile = profile_get_row_direct( $t_current );
 
 					$t_this_string = "${t_profile['platform']} ${t_profile['os']} ${t_profile['os_build']}";
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
-				}
-				else {
+				} else {
 					$t_first_flag = false;
 				}
 				$t_output = $t_output . $t_this_string;
 			}
 			if( true == $t_any_found ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				PRINT $t_output;
 			}
 		}
@@ -2396,8 +2294,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<a href="<?php PRINT $t_filters_url . FILTER_PROPERTY_FIXED_IN_VERSION . '[]';?>" id="show_fixed_in_version_filter"><?php PRINT lang_get( 'fixed_in_version' )?>:</a>
 			</td>
 			<?php
-		}
-		else {?>
+		} else {?>
 			<td colspan="2" class="small-caption" valign="top">
 				&nbsp;
 			</td>
@@ -2424,30 +2321,26 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_STATUS_ID] ) == 0 ) {
 			PRINT lang_get( 'any' );
-		}
-		else {
+		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_STATUS_ID] as $t_current ) {
 				echo '<input type="hidden" name="', FILTER_PROPERTY_STATUS_ID, '[]" value="', $t_current, '" />';
 				$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				}
-				else {
+				} else {
 					$t_this_string = get_enum_element( 'status', $t_current );
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
-				}
-				else {
+				} else {
 					$t_first_flag = false;
 				}
 				$t_output = $t_output . $t_this_string;
 			}
 			if( true == $t_any_found ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				PRINT $t_output;
 			}
 		}
@@ -2460,22 +2353,19 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			$t_none_found = false;
 			if( count( $t_filter[FILTER_PROPERTY_HIDE_STATUS_ID] ) == 0 ) {
 				PRINT lang_get( 'none' );
-			}
-			else {
+			} else {
 				$t_first_flag = true;
 				foreach( $t_filter[FILTER_PROPERTY_HIDE_STATUS_ID] as $t_current ) {
 					echo '<input type="hidden" name="', FILTER_PROPERTY_HIDE_STATUS_ID, '[]" value="', $t_current, '" />';
 					$t_this_string = '';
 					if( filter_field_is_none( $t_current ) ) {
 						$t_none_found = true;
-					}
-					else {
+					} else {
 						$t_this_string = get_enum_element( 'status', $t_current );
 					}
 					if( $t_first_flag != true ) {
 						$t_output = $t_output . '<br />';
-					}
-					else {
+					} else {
 						$t_first_flag = false;
 					}
 					$t_output = $t_output . $t_this_string;
@@ -2486,8 +2376,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				}
 				if( true == $t_none_found ) {
 					PRINT lang_get( 'none' );
-				}
-				else {
+				} else {
 					PRINT $t_output . $t_hide_status_post;
 				}
 			}
@@ -2500,8 +2389,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_PRODUCT_BUILD] ) == 0 ) {
 			PRINT lang_get( 'any' );
-		}
-		else {
+		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_PRODUCT_BUILD] as $t_current ) {
 				$t_current = stripslashes( $t_current );
@@ -2509,25 +2397,21 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				}
-				elseif( filter_field_is_none( $t_current ) ) {
+				} elseif( filter_field_is_none( $t_current ) ) {
 					$t_this_string = lang_get( 'none' );
-				}
-				else {
+				} else {
 					$t_this_string = string_display( $t_current );
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
-				}
-				else {
+				} else {
 					$t_first_flag = false;
 				}
 				$t_output = $t_output . $t_this_string;
 			}
 			if( true == $t_any_found ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				PRINT $t_output;
 			}
 		}
@@ -2540,8 +2424,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			$t_any_found = false;
 			if( count( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION] ) == 0 ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				$t_first_flag = true;
 				foreach( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION] as $t_current ) {
 					$t_current = stripslashes( $t_current );
@@ -2552,22 +2435,19 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					}
 					elseif( filter_field_is_none( $t_current ) ) {
 						$t_this_string = lang_get( 'none' );
-					}
-					else {
+					} else {
 						$t_this_string = string_display( $t_current );
 					}
 					if( $t_first_flag != true ) {
 						$t_output = $t_output . '<br />';
-					}
-					else {
+					} else {
 						$t_first_flag = false;
 					}
 					$t_output = $t_output . $t_this_string;
 				}
 				if( true == $t_any_found ) {
 					PRINT lang_get( 'any' );
-				}
-				else {
+				} else {
 					PRINT $t_output;
 				}
 			}
@@ -2579,8 +2459,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			$t_any_found = false;
 			if( count( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION] ) == 0 ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				$t_first_flag = true;
 				foreach( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION] as $t_current ) {
 					$t_current = stripslashes( $t_current );
@@ -2588,33 +2467,28 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_this_string = '';
 					if( filter_field_is_any( $t_current ) ) {
 						$t_any_found = true;
-					}
-					elseif( filter_field_is_none( $t_current ) ) {
+					} elseif( filter_field_is_none( $t_current ) ) {
 						$t_this_string = lang_get( 'none' );
-					}
-					else {
+					} else {
 						$t_this_string = string_display( $t_current );
 					}
 					if( $t_first_flag != true ) {
 						$t_output = $t_output . '<br />';
-					}
-					else {
+					} else {
 						$t_first_flag = false;
 					}
 					$t_output = $t_output . $t_this_string;
 				}
 				if( true == $t_any_found ) {
 					PRINT lang_get( 'any' );
-				}
-				else {
+				} else {
 					PRINT $t_output;
 				}
 			}
 			?>
 			</td>
 			<?php
-		}
-		else {?>
+		} else {?>
 			<td colspan="2" class="small-caption" valign="top">
 				&nbsp;
 			</td>
@@ -2629,30 +2503,26 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_PRIORITY_ID] ) == 0 ) {
 			PRINT lang_get( 'any' );
-		}
-		else {
+		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_PRIORITY_ID] as $t_current ) {
 				echo '<input type="hidden" name="', FILTER_PROPERTY_PRIORITY_ID, '[]" value="', $t_current, '" />';
 				$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				}
-				else {
+				} else {
 					$t_this_string = get_enum_element( 'priority', $t_current );
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
-				}
-				else {
+				} else {
 					$t_first_flag = false;
 				}
 				$t_output = $t_output . $t_this_string;
 			}
 			if( true == $t_any_found ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				PRINT $t_output;
 			}
 		}
@@ -2664,8 +2534,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_TARGET_VERSION] ) == 0 ) {
 			PRINT lang_get( 'any' );
-		}
-		else {
+		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_TARGET_VERSION] as $t_current ) {
 				$t_current = stripslashes( $t_current );
@@ -2673,25 +2542,21 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				}
-				elseif( filter_field_is_none( $t_current ) ) {
+				} elseif( filter_field_is_none( $t_current ) ) {
 					$t_this_string = lang_get( 'none' );
-				}
-				else {
+				} else {
 					$t_this_string = string_display( $t_current );
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
-				}
-				else {
+				} else {
 					$t_first_flag = false;
 				}
 				$t_output = $t_output . $t_this_string;
 			}
 			if( true == $t_any_found ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				PRINT $t_output;
 			}
 		}
@@ -2737,11 +2602,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<?php
 				if( VS_PUBLIC === $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) {
 			PRINT lang_get( 'public' );
-		}
-		elseif( VS_PRIVATE === $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) {
+		} elseif( VS_PRIVATE === $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) {
 			PRINT lang_get( 'private' );
-		}
-		else {
+		} else {
 			PRINT lang_get( 'any' );
 			$t_filter[FILTER_PROPERTY_VIEW_STATE_ID] = META_FILTER_ANY;
 		}
@@ -2827,8 +2690,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					PRINT date( 'Y', $t_time );
 				}
 			}
-		}
-		else {
+		} else {
 			PRINT lang_get( 'no' );
 		}
 		?>
@@ -2842,8 +2704,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$c_rel_bug = $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG];
 		if( -1 == $c_rel_type || 0 == $c_rel_bug ) {
 			PRINT lang_get( 'any' );
-		}
-		else {
+		} else {
 			PRINT relationship_get_description_for_history( $c_rel_type ) . ' ' . $c_rel_bug;
 		}
 
@@ -2933,8 +2794,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_values .= '<td class="small-caption" valign="top" id="custom_field_' . $t_accessible_custom_fields_ids[$i] . '_filter_target"> ';
 					if( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] ) ) {
 						$t_values .= lang_get( 'any' );
-					}
-					else {
+					} else {
 						if( $t_accessible_custom_fields_types[$i] == CUSTOM_FIELD_TYPE_DATE ) {
 
 							# @@@ moved embedded javascript here from print_filter_custom_field_date
@@ -3022,26 +2882,22 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 									$t_values .= $t_start;
 									break;
 							}
-						}
-						else {
+						} else {
 							$t_first_flag = true;
 							foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] as $t_current ) {
 								$t_current = stripslashes( $t_current );
 								$t_this_string = '';
 								if( filter_field_is_any( $t_current ) ) {
 									$t_any_found = true;
-								}
-								elseif( filter_field_is_none( $t_current ) ) {
+								} elseif( filter_field_is_none( $t_current ) ) {
 									$t_this_string = lang_get( 'none' );
-								}
-								else {
+								} else {
 									$t_this_string = string_display( $t_current );
 								}
 
 								if( $t_first_flag != true ) {
 									$t_output = $t_output . '<br />';
-								}
-								else {
+								} else {
 									$t_first_flag = false;
 								}
 
@@ -3052,8 +2908,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 						if( true == $t_any_found ) {
 							$t_values .= lang_get( 'any' );
-						}
-						else {
+						} else {
 							$t_values .= $t_output;
 						}
 					}
@@ -3109,41 +2964,34 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] ) == 0 ) {
 			PRINT lang_get( 'any' );
-		}
-		else {
+		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] as $t_current ) {
 				echo '<input type="hidden" name="', FILTER_PROPERTY_NOTE_USER_ID, '[]" value="', $t_current, '" />';
 				$t_this_name = '';
 				if( filter_field_is_none( $t_current ) ) {
 					$t_this_name = lang_get( 'none' );
-				}
-				elseif( filter_field_is_any( $t_current ) ) {
+				} elseif( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				}
-				elseif( filter_field_is_myself( $t_current ) ) {
+				} elseif( filter_field_is_myself( $t_current ) ) {
 					if( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
 						$t_this_name = '[' . lang_get( 'myself' ) . ']';
-					}
-					else {
+					} else {
 						$t_any_found = true;
 					}
-				}
-				else {
+				} else {
 					$t_this_name = user_get_name( $t_current );
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
-				}
-				else {
+				} else {
 					$t_first_flag = false;
 				}
 				$t_output = $t_output . $t_this_name;
 			}
 			if( true == $t_any_found ) {
 				PRINT lang_get( 'any' );
-			}
-			else {
+			} else {
 				PRINT $t_output;
 			}
 		}
@@ -3165,8 +3013,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_sort = $t_sort_fields[$i];
 				if( strpos( $t_sort, 'custom_' ) === 0 ) {
 					$t_field_name = string_display( lang_get_defaulted( substr( $t_sort, strlen( 'custom_' ) ) ) );
-				}
-				else {
+				} else {
 					$t_field_name = string_get_field_name( $t_sort );
 				}
 
@@ -3193,22 +3040,19 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			}
 			if( count( $t_filter[FILTER_PROPERTY_PROJECT_ID] ) == 0 ) {
 				PRINT lang_get( 'current' );
-			}
-			else {
+			} else {
 				$t_first_flag = true;
 				foreach( $t_filter[FILTER_PROPERTY_PROJECT_ID] as $t_current ) {
 					echo '<input type="hidden" name="', FILTER_PROPERTY_PROJECT_ID, '[]" value="', $t_current, '" />';
 					$t_this_name = '';
 					if( META_FILTER_CURRENT == $t_current ) {
 						$t_this_name = lang_get( 'current' );
-					}
-					else {
+					} else {
 						$t_this_name = project_get_name( $t_current );
 					}
 					if( $t_first_flag != true ) {
 						$t_output = $t_output . '<br />';
-					}
-					else {
+					} else {
 						$t_first_flag = false;
 					}
 					$t_output = $t_output . $t_this_name;
@@ -3221,8 +3065,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					if( $t_filter_cols > 6 ) {
 				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 5 ) . '">&nbsp;</td>';
 			}
-		}
-		else {
+		} else {
 			if( $t_filter_cols > 3 ) {
 				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 2 ) . '">&nbsp;</td>';
 			}
@@ -3249,8 +3092,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<?php
 					if( ON == config_get( 'dhtml_filters' ) ) {
 		$f_switch_view_link = 'view_all_set.php?type=6&amp;view_type=';
-	}
-	else {
+	} else {
 		$f_switch_view_link = 'view_filters_page.php?view_type=';
 	}
 
@@ -3258,8 +3100,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	if(( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
 		if( 'advanced' == $t_view_type ) {
 			print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
-		}
-		else {
+		} else {
 			print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
 		}
 	}
@@ -3284,8 +3125,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					<?php
 					if( ON == config_get( 'use_javascript' ) ) {
 			echo "<select name=\"source_query_id\" onchange=\"document.forms.list_queries$t_form_name_suffix.submit();\">";
-		}
-		else {
+		} else {
 			PRINT '<select name="source_query_id">';
 		}
 		?>
@@ -3303,8 +3143,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					<input type="submit" name="switch_to_query_button" class="button-small" value="<?php PRINT lang_get( 'open_queries' )?>" />
 					</form>
 				<?php
-	}
-	else {
+	} else {
 		?>
 					<form method="get" name="reset_query" action="view_all_set.php">
 					<input type="hidden" name="type" value="3" />
@@ -3320,8 +3159,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					<input type="submit" name="save_query_button" class="button-small" value="<?php PRINT lang_get( 'save_query' )?>" />
 					</form>
 			<?php
-	}
-	else {
+	} else {
 		?>
 			<?php
 	}
@@ -3371,8 +3209,7 @@ function print_filter_reporter_id() {
 			$t_display_name = string_attribute( $t_realname );
 		}
 		PRINT '<option value="' . $t_id . '" selected="selected">' . $t_display_name . '</option>';
-	}
-	else {
+	} else {
 		?>
 			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php
@@ -3849,12 +3686,10 @@ function print_filter_custom_field( $p_field_id ) {
 				unknown custom filter (custom <?php $p_field_id;?>)
 			</span>
 			<?php
-	}
-	elseif( isset( $t_accessible_custom_fields_names[$j] ) ) {
+	} elseif( isset( $t_accessible_custom_fields_names[$j] ) ) {
 		if( $t_accessible_custom_fields_types[$j] == CUSTOM_FIELD_TYPE_DATE ) {
 			print_filter_custom_field_date( $j, $p_field_id );
-		}
-		else {
+		} else {
 			echo '<select ' . $t_select_modifier . ' name="custom_field_' . $p_field_id . '[]">';
 			echo '<option value="' . META_FILTER_ANY . '" ';
 			check_selected( $t_filter['custom_fields'][$p_field_id], META_FILTER_ANY );
@@ -3897,8 +3732,7 @@ function print_filter_show_sort() {
 		if( !in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
 			if( strpos( $t_fields[$i], 'custom_' ) === 0 ) {
 				$t_field_name = string_display( lang_get_defaulted( substr( $t_fields[$i], strlen( 'custom_' ) ) ) );
-			}
-			else {
+			} else {
 				$t_field_name = string_get_field_name( $t_fields[$i] );
 			}
 			$t_shown_fields[$t_fields[$i]] = $t_field_name;
@@ -3953,8 +3787,7 @@ function print_filter_show_sort() {
 			echo ">$val</option>";
 		}
 		echo '</select>';
-	}
-	else {
+	} else {
 		echo lang_get_defaulted( 'last_updated' ) . lang_get( 'bugnote_order_desc' );
 		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_1" value="last_updated" />';
 		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_DIRECTION, '_1" value="DESC" />';
@@ -3992,15 +3825,13 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 
 	if( isset( $t_filter['custom_fields'][$p_field_id][1] ) ) {
 		$t_start_time = $t_filter['custom_fields'][$p_field_id][1];
-	}
-	else {
+	} else {
 		$t_start_time = 0;
 	}
 
 	if( isset( $t_filter['custom_fields'][$p_field_id][2] ) ) {
 		$t_end_time = $t_filter['custom_fields'][$p_field_id][2];
-	}
-	else {
+	} else {
 		$t_end_time = 0;
 	}
 
@@ -4102,8 +3933,7 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
 
 	if( count( $p_field_value ) == 0 ) {
 		echo lang_get( 'any' );
-	}
-	else {
+	} else {
 		$t_first_flag = true;
 
 		$t_field_value = is_array( $p_field_value ) ? $p_field_value : array( $p_field_value );
@@ -4117,15 +3947,13 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
 
 			if((( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) || ( is_blank( $t_current ) ) ) {
 				$t_any_found = true;
-			}
-			else {
+			} else {
 				$t_this_string = string_display( $t_current );
 			}
 
 			if( $t_first_flag != true ) {
 				$t_output .= '<br />';
-			}
-			else {
+			} else {
 				$t_first_flag = false;
 			}
 
@@ -4134,8 +3962,7 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
 
 		if( true == $t_any_found ) {
 			echo lang_get( 'any' );
-		}
-		else {
+		} else {
 			echo $t_output;
 		}
 	}
@@ -4183,8 +4010,7 @@ function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
 		if( $p_trigger_errors ) {
 			error_parameters( $p_filter_id );
 			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -4206,8 +4032,7 @@ function filter_clear_cache( $p_filter_id = null ) {
 
 	if( null === $p_filter_id ) {
 		$g_cache_filter = array();
-	}
-	else {
+	} else {
 		$c_filter_id = db_prepare_int( $p_filter_id );
 		unset( $g_cache_filter[$c_filter_id] );
 	}
@@ -4260,8 +4085,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 		db_query_bound( $query, Array( $c_is_public, $p_filter_string, $row['id'] ) );
 
 		return $row['id'];
-	}
-	else {
+	} else {
 		$query = "INSERT INTO $t_filters_table
 						( user_id, project_id, is_public, name, filter_string )
 					  VALUES
@@ -4308,8 +4132,7 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 
 	if( null === $p_user_id ) {
 		$t_user_id = auth_get_current_user_id();
-	}
-	else {
+	} else {
 		$t_user_id = $p_user_id;
 	}
 
@@ -4334,8 +4157,7 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 
 		$g_cache_filter_db_filters[$p_filter_id] = $row['filter_string'];
 		return $row['filter_string'];
-	}
-	else {
+	} else {
 		$g_cache_filter_db_filters[$p_filter_id] = false;
 		return false;
 	}
@@ -4353,8 +4175,7 @@ function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 
 	if( null === $p_user_id ) {
 		$c_user_id = auth_get_current_user_id();
-	}
-	else {
+	} else {
 		$c_user_id = db_prepare_int( $p_user_id );
 	}
 
@@ -4482,15 +4303,13 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
-	}
-	else {
+	} else {
 		$t_project_id = db_prepare_int( $p_project_id );
 	}
 
 	if( null === $p_user_id ) {
 		$t_user_id = auth_get_current_user_id();
-	}
-	else {
+	} else {
 		$t_user_id = db_prepare_int( $p_user_id );
 	}
 

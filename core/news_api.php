@@ -157,8 +157,7 @@ function news_get_row( $p_news_id ) {
 
 	if( 0 == db_num_rows( $result ) ) {
 		trigger_error( ERROR_NEWS_NOT_FOUND, ERROR );
-	}
-	else {
+	} else {
 		$row = db_fetch_array( $result );
 		$row['date_posted'] = db_unixtimestamp( $row['date_posted'] );
 		return $row;
@@ -206,8 +205,7 @@ function news_get_rows( $p_project_id, $p_sitewide = true ) {
 	if( 1 == count( $t_projects ) ) {
 		$c_project_id = $t_projects[0];
 		$query .= " WHERE project_id='$c_project_id'";
-	}
-	else {
+	} else {
 		$query .= ' WHERE project_id IN (' . join( $t_projects, ',' ) . ')';
 	}
 
@@ -272,8 +270,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 			if( 1 == count( $t_projects ) ) {
 				$c_project_id = $t_projects[0];
 				$query .= " WHERE project_id='$c_project_id'";
-			}
-			else {
+			} else {
 				$query .= ' WHERE project_id IN (' . join( $t_projects, ',' ) . ')';
 			}
 
@@ -295,8 +292,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 				$c_project_id = $t_projects[0];
 				$query .= " AND project_id=" . db_param();
 				$t_params[] = $c_project_id;
-			}
-			else {
+			} else {
 				$query .= ' AND project_id IN (' . join( $t_projects, ',' ) . ')';
 			}
 			$query .= " ORDER BY announcement DESC, id DESC";

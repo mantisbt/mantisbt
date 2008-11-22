@@ -69,8 +69,7 @@ function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 		if( $p_trigger_errors ) {
 			error_parameters( $p_version_id );
 			trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -128,8 +127,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 
 	if( null === $p_date_order ) {
 		$c_date_order = db_now();
-	}
-	else {
+	} else {
 		$c_date_order = db_timestamp( $p_date_order );
 	}
 
@@ -324,8 +322,7 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
 
 	if( $p_released === null ) {
 		$t_released_where = '';
-	}
-	else {
+	} else {
 		$c_released = db_prepare_int( $p_released );
 		$t_released_where = "AND ( released = " . db_param( $t_param_count++ ) . " )";
 		$t_query_params[] = $c_released;
@@ -333,8 +330,7 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
 
 	if( $p_obsolete === null ) {
 		$t_obsolete_where = '';
-	}
-	else {
+	} else {
 		$c_obsolete = db_prepare_bool( $p_obsolete );
 		$t_obsolete_where = "AND ( obsolete = " . db_param( $t_param_count++ ) . " )";
 		$t_query_params[] = $c_obsolete;
@@ -364,8 +360,7 @@ function version_get_id( $p_version, $p_project_id = null ) {
 	global $g_cache_versions;
 	if( $p_project_id === null ) {
 		$c_project_id = helper_get_current_project();
-	}
-	else {
+	} else {
 		$c_project_id = db_prepare_int( $p_project_id );
 	}
 
@@ -386,8 +381,7 @@ function version_get_id( $p_version, $p_project_id = null ) {
 
 	if( 0 == db_num_rows( $result ) ) {
 		return false;
-	}
-	else {
+	} else {
 		return db_result( $result );
 	}
 }
@@ -400,8 +394,7 @@ function version_get_field( $p_version_id, $p_field_name ) {
 
 	if( isset( $row[$p_field_name] ) ) {
 		return $row[$p_field_name];
-	}
-	else {
+	} else {
 		error_parameters( $p_field_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 		return '';

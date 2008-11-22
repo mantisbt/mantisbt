@@ -49,8 +49,7 @@ function compress_is_enabled() {
 function compress_handler( $p_buffer, $p_mode ) {
 	if( compress_is_enabled() ) {
 		return ob_gzhandler( $p_buffer, $p_mode );
-	}
-	else {
+	} else {
 		return $p_buffer;
 	}
 }

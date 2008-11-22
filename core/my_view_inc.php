@@ -426,8 +426,7 @@ echo "($v_start - $v_end / $t_bug_count)";
 
 	if( ON == config_get( 'show_priority_text' ) ) {
 		print_formatted_priority_string( $v_status, $v_priority );
-	}
-	else {
+	} else {
 		print_status_icon( $v_priority );
 	}
 
@@ -458,15 +457,13 @@ echo "($v_start - $v_end / $t_bug_count)";
 	# type project name if viewing 'all projects' or bug is in subproject
 	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $v_project_id ) {
 		echo string_display( category_full_name( $v_category_id ) );
-	}
-	else {
+	} else {
 		echo string_display( category_full_name( $v_category_id, false ) );
 	}
 
 	if( $v_last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
 		echo ' - <b>' . $t_last_updated . '</b>';
-	}
-	else {
+	} else {
 		echo ' - ' . $t_last_updated;
 	}
 	?>

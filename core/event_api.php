@@ -125,8 +125,7 @@ function event_signal( $p_name, $p_params = null, $p_params_dynamic = null, $p_t
 
 	if( is_null( $p_type ) ) {
 		$t_type = $g_event_cache[$p_name]['type'];
-	}
-	else {
+	} else {
 		$t_type = $p_type;
 	}
 	$t_callbacks = $g_event_cache[$p_name]['callbacks'];
@@ -172,8 +171,7 @@ function event_callback( $p_event, $p_callback, $p_plugin, $p_params = null ) {
 		}
 
 		plugin_pop_current();
-	}
-	else {
+	} else {
 		if( function_exists( $p_callback ) ) {
 			$t_value = call_user_func_array( $p_callback, array_merge( array( $p_event ), $p_params ) );
 		}
@@ -223,8 +221,7 @@ function event_type_output( $p_event, $p_callbacks, $p_params = null ) {
 			case 1:
 				$t_prefix = $p_params[0];
 		}
-	}
-	else {
+	} else {
 		$t_separator = $p_params;
 	}
 

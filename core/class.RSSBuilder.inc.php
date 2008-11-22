@@ -855,8 +855,7 @@ class RSSBuilder extends RSSBase {
 		if( array_key_exists( $id, $this->items ) ) {
 			unset( $this->items[$id] );
 			return (boolean) TRUE;
-		}
-		else {
+		} else {
 			return (boolean) FALSE;
 		}
 
@@ -895,8 +894,7 @@ class RSSBuilder extends RSSBase {
 	function getItem( $id = -1 ) {
 		if( array_key_exists( $id, $this->items ) ) {
 			return (object) $this->items[$id];
-		}
-		else {
+		} else {
 			return (boolean) FALSE;
 		}
 
@@ -1056,8 +1054,7 @@ class RSSBuilder extends RSSBase {
 
 		if( strlen( $this->about ) > 0 ) {
 			$this->output .= (string) '<channel rdf:about="' . $this->about . '">' . "\n";
-		}
-		else {
+		} else {
 			$this->output .= (string) '<channel>' . "\n";
 		}
 
@@ -1181,8 +1178,7 @@ class RSSBuilder extends RSSBase {
 				if( strlen( $item->getTitle() ) > 0 && strlen( $item->getLink() ) > 0 ) {
 					if( strlen( $item->getAbout() ) > 0 ) {
 						$this->output .= (string) '<item rdf:about="' . $item->getAbout() . '">' . "\n";
-					}
-					else {
+					} else {
 						$this->output .= (string) '<item>' . "\n";
 					}
 

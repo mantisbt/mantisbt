@@ -122,8 +122,7 @@ function user_clear_cache( $p_user_id = null ) {
 
 	if( null === $p_user_id ) {
 		$g_cache_user = array();
-	}
-	else {
+	} else {
 		unset( $g_cache_user[$p_user_id] );
 	}
 
@@ -135,8 +134,7 @@ function user_update_cache( $p_user_id, $p_field, $p_value ) {
 
 	if( isset( $g_cache_user[$p_user_id] ) && isset( $g_cache_user[$p_user_id][$p_field] ) ) {
 		$g_cache_user[$p_user_id][$p_field] = $p_value;
-	}
-	else {
+	} else {
 		user_clear_cache( $p_user_id );
 	}
 }
@@ -167,8 +165,7 @@ function user_exists( $p_user_id ) {
 
 	if( false === $row ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -201,8 +198,7 @@ function user_is_name_unique( $p_username ) {
 
 	if( db_num_rows( $result ) > 0 ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -331,8 +327,7 @@ function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 
 	if( 0 == db_result( $result ) ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -344,8 +339,7 @@ function user_is_administrator( $p_user_id ) {
 
 	if( $t_access_level >= ADMINISTRATOR ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -355,8 +349,7 @@ function user_is_administrator( $p_user_id ) {
 function user_is_protected( $p_user_id ) {
 	if( ON == user_get_field( $p_user_id, 'protected' ) ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -374,8 +367,7 @@ function user_ensure_unprotected( $p_user_id ) {
 function user_is_enabled( $p_user_id ) {
 	if( ON == user_get_field( $p_user_id, 'enabled' ) ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -633,8 +625,7 @@ function user_get_id_by_name( $p_username ) {
 
 	if( 0 == db_num_rows( $result ) ) {
 		return false;
-	}
-	else {
+	} else {
 		$row = db_fetch_array( $result );
 		user_cache_database_result( $row );
 		return $row['id'];
@@ -657,8 +648,7 @@ function user_get_id_by_email( $p_email ) {
 
 	if( 0 == db_num_rows( $result ) ) {
 		return false;
-	}
-	else {
+	} else {
 		$row = db_fetch_array( $result );
 		user_cache_database_result( $row );
 		return $row['id'];
@@ -681,8 +671,7 @@ function user_get_id_by_realname( $p_realname ) {
 
 	if( 0 == db_num_rows( $result ) ) {
 		return false;
-	}
-	else {
+	} else {
 		$row = db_fetch_array( $result );
 		user_cache_database_result( $row );
 		return $row['id'];
@@ -722,8 +711,7 @@ function user_get_field( $p_user_id, $p_field_name ) {
 
 	if( isset( $row[$p_field_name] ) ) {
 		return $row[$p_field_name];
-	}
-	else {
+	} else {
 		error_parameters( $p_field_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 		return '';
@@ -759,22 +747,18 @@ function user_get_name( $p_user_id ) {
 
 	if( false == $row ) {
 		return lang_get( 'prefix_for_deleted_users' ) . (int) $p_user_id;
-	}
-	else {
+	} else {
 		if( ON == config_get( 'show_realname' ) ) {
 			if( is_blank( $row['realname'] ) ) {
 				return $row['username'];
-			}
-			else {
+			} else {
 				if( isset( $row['duplicate_realname'] ) && ( ON == $row['duplicate_realname'] ) ) {
 					return $row['realname'] . ' (' . $row['username'] . ')';
-				}
-				else {
+				} else {
 					return $row['realname'];
 				}
 			}
-		}
-		else {
+		} else {
 			return $row['username'];
 		}
 	}
@@ -789,8 +773,7 @@ function user_get_avatar( $p_user_id, $p_size = 80 ) {
 	$t_email = strtolower( user_get_email( $p_user_id ) );
 	if( is_blank( $t_email ) ) {
 		$t_result = false;
-	}
-	else {
+	} else {
 		$t_default_image = config_get( 'default_avatar' );
 		$t_size = $p_size;
 
@@ -801,8 +784,7 @@ function user_get_avatar( $p_user_id, $p_size = 80 ) {
 
 		if( !$t_use_ssl ) {
 			$t_gravatar_domain = 'http://www.gravatar.com/';
-		}
-		else {
+		} else {
 			$t_gravatar_domain = 'https://secure.gravatar.com/';
 		}
 
@@ -831,8 +813,7 @@ function user_get_access_level( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 
 	if( false === $t_project_access_level ) {
 		return $t_access_level;
-	}
-	else {
+	} else {
 		return $t_project_access_level;
 	}
 }
@@ -850,9 +831,7 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 
 	if( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
 		$t_projects = project_hierarchy_get_subprojects( ALL_PROJECTS, $p_show_disabled );
-	}
-	else {
-
+	} else {
 		$t_project_table = db_get_table( 'mantis_project_table' );
 		$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 		$t_project_hierarchy_table = db_get_table( 'mantis_project_hierarchy_table' );
@@ -876,8 +855,7 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 									)
 					  ORDER BY p.name";
 			$result = db_query_bound( $query, Array( $p_user_id, $t_public, $t_private, $p_user_id ) );
-		}
-		else {
+		} else {
 			$query = "SELECT p.id, p.name, ph.parent_id
 							  FROM $t_project_table p
 							  LEFT JOIN $t_project_user_list_table u
@@ -935,8 +913,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 	if( null !== $g_user_accessible_subprojects_cache && auth_get_current_user_id() == $p_user_id && false == $p_show_disabled ) {
 		if( isset( $g_user_accessible_subprojects_cache[$p_project_id] ) ) {
 			return $g_user_accessible_subprojects_cache[$p_project_id];
-		}
-		else {
+		} else {
 			return Array();
 		}
 	}
@@ -958,8 +935,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 					  	 ph.parent_id IS NOT NULL
 					  ORDER BY p.name";
 		$result = db_query_bound( $query, ( $p_show_disabled ? null : Array( true ) ) );
-	}
-	else {
+	} else {
 		$p = 0;
 		$query = "SELECT DISTINCT p.id, p.name, ph.parent_id
 					  FROM $t_project_table p
@@ -1107,8 +1083,7 @@ function user_is_lost_password_request_allowed( $p_user_id ) {
 function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
-	}
-	else {
+	} else {
 		$t_project_id = $p_project_id;
 	}
 
@@ -1349,8 +1324,7 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 			$t_confirm_hash = auth_generate_confirm_hash( $p_user_id );
 			email_send_confirm_hash_url( $p_user_id, $t_confirm_hash );
 		}
-	}
-	else {
+	} else {
 
 		# use blank password, no emailing
 		$t_password = auth_process_plain_password( '' );

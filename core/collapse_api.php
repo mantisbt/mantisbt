@@ -138,8 +138,7 @@ function collapse_icon( $p_name, $p_section = '' ) {
 	if( $g_open_collapse_section === true ) {
 		$t_icon = 'minus.png';
 		$t_alt = '-';
-	}
-	else {
+	} else {
 		$t_icon = 'plus.png';
 		$t_alt = '+';
 	}
@@ -172,8 +171,7 @@ function collapse_end( $p_name, $p_section = '' ) {
 
 	if( ON == config_get( 'use_javascript' ) ) {
 		ob_end_flush();
-	}
-	else {
+	} else {
 		ob_end_clean();
 	}
 
@@ -217,8 +215,7 @@ function collapse_cache_token() {
 
 	if( !is_null( $t_token ) ) {
 		$t_data = unserialize( $t_token );
-	}
-	else {
+	} else {
 		$t_data = array();
 	}
 
@@ -242,8 +239,7 @@ function collapse_cache_token() {
 		if( $t_update ) {
 			$t_token = serialize( $g_collapse_cache_token );
 			token_set( TOKEN_COLLAPSE, $t_token, TOKEN_EXPIRY_COLLAPSE );
-		}
-		else {
+		} else {
 			token_touch( TOKEN_COLLAPSE );
 		}
 	}

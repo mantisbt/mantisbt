@@ -223,12 +223,10 @@ function html_title( $p_page_title = null ) {
 	echo "\t", '<title>';
 	if( 0 == strlen( $p_page_title ) ) {
 		echo string_display( $t_title );
-	}
-	else {
+	} else {
 		if( 0 == strlen( $t_title ) ) {
 			echo $p_page_title;
-		}
-		else {
+		} else {
 			echo $p_page_title . ' - ' . string_display( $t_title );
 		}
 	}
@@ -270,8 +268,7 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 	$t_url = config_get( 'path' );
 	if( $p_sanitize ) {
 		$t_url .= string_sanitize_url( $p_url );
-	}
-	else {
+	} else {
 		$t_url .= $p_url;
 	}
 
@@ -332,25 +329,21 @@ function html_top_banner() {
 
 	if( is_blank( $t_logo_image ) ) {
 		$t_show_logo = false;
-	}
-	else {
+	} else {
 		$t_show_logo = true;
 		if( is_blank( $t_logo_url ) ) {
 			$t_show_url = false;
-		}
-		else {
+		} else {
 			$t_show_url = true;
 		}
 	}
 
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 		include( $t_page );
-	}
-	elseif( $t_show_logo ) {
+	} elseif( $t_show_logo ) {
 		if( is_page_name( 'login_page' ) ) {
 			$t_align = 'center';
-		}
-		else {
+		} else {
 			$t_align = 'left';
 		}
 
@@ -391,8 +384,7 @@ function html_login_info() {
 		if( config_get_global( 'allow_signup' ) == ON ) {
 			PRINT ' | <a href="' . helper_mantis_url( 'signup_page.php' ) . '">' . lang_get( 'signup_link' ) . '</a>';
 		}
-	}
-	else {
+	} else {
 		echo lang_get( 'logged_in_as' ), ": <span class=\"italic\">", string_display( $t_username ), "</span> <span class=\"small\">";
 		echo is_blank( $t_realname ) ? "($t_access_level)" : "(" . string_display( $t_realname ) . " - $t_access_level)";
 		echo "</span>";
@@ -419,12 +411,10 @@ function html_login_info() {
 		echo lang_get( 'email_project' ), ': ';
 		if( ON == config_get( 'show_extended_project_browser' ) ) {
 			print_extended_project_browser( helper_get_current_project_trace() );
-		}
-		else {
+		} else {
 			if( ON == config_get( 'use_javascript' ) ) {
 				PRINT '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
-			}
-			else {
+			} else {
 				PRINT '<select name="project_id" class="small">';
 			}
 			print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
@@ -506,8 +496,7 @@ function html_footer( $p_file ) {
 				$t_unique_queries++;
 				$g_queries_array[$i][3] = false;
 				array_push( $t_shown_queries, $g_queries_array[$i][0] );
-			}
-			else {
+			} else {
 				$g_queries_array[$i][3] = true;
 			}
 		}
@@ -595,8 +584,7 @@ function print_menu() {
 			foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
 				if( is_array( $t_callback_menu_options ) ) {
 					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-				}
-				else {
+				} else {
 					$t_menu_options[] = $t_callback_menu_options;
 				}
 			}
@@ -644,8 +632,7 @@ function print_menu() {
 			foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
 				if( is_array( $t_callback_menu_options ) ) {
 					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-				}
-				else {
+				} else {
 					$t_menu_options[] = $t_callback_menu_options;
 				}
 			}
@@ -655,19 +642,16 @@ function print_menu() {
 		if( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
 			$t_link = helper_mantis_url( 'manage_overview_page.php' );
 			$t_menu_options[] = "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a>';
-		}
-		else {
+		} else {
 			$t_show_access = min( config_get( 'manage_user_threshold' ), config_get( 'manage_project_threshold' ), config_get( 'manage_custom_fields_threshold' ) );
 			if( access_has_global_level( $t_show_access ) || access_has_any_project( $t_show_access ) ) {
 				$t_current_project = helper_get_current_project();
 				if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
 					$t_link = helper_mantis_url( 'manage_user_page.php' );
-				}
-				else {
+				} else {
 					if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_current_project ) && ( $t_current_project <> ALL_PROJECTS ) ) {
 						$t_link = helper_mantis_url( 'manage_proj_edit_page.php?project_id=' ) . $t_current_project;
-					}
-					else {
+					} else {
 						$t_link = helper_mantis_url( 'manage_proj_page.php' );
 					}
 				}
@@ -681,8 +665,7 @@ function print_menu() {
 			# Admin can edit news for All Projects (site-wide)
 			if(( ALL_PROJECTS != helper_get_current_project() ) || ( access_has_project_level( ADMINISTRATOR ) ) ) {
 				$t_menu_options[] = '<a href="' . helper_mantis_url( 'news_menu_page.php">' ) . lang_get( 'edit_news_link' ) . '</a>';
-			}
-			else {
+			} else {
 				$t_menu_options[] = '<a href="' . helper_mantis_url( 'login_select_proj_page.php">' ) . lang_get( 'edit_news_link' ) . '</a>';
 			}
 		}
@@ -711,8 +694,7 @@ function print_menu() {
 		if( ON == config_get( 'use_javascript' ) ) {
 			$t_bug_label = lang_get( 'issue_id' );
 			PRINT "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" value=\"$t_bug_label\" onfocus=\"if (this.value == '$t_bug_label') this.value = ''\" onblur=\"if (this.value == '') this.value = '$t_bug_label'\" />&nbsp;";
-		}
-		else {
+		} else {
 			PRINT "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" />&nbsp;";
 		}
 
@@ -833,8 +815,7 @@ function print_manage_menu( $p_page = '' ) {
 		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
 			if( is_array( $t_callback_menu_options ) ) {
 				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			}
-			else {
+			} else {
 				$t_menu_options[] = $t_callback_menu_options;
 			}
 		}
@@ -1102,8 +1083,7 @@ function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = '
 
 	if( strtolower( $p_method ) == 'get' ) {
 		$t_method = 'get';
-	}
-	else {
+	} else {
 		$t_method = 'post';
 	}
 
@@ -1358,8 +1338,7 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 	if( !current_user_is_anonymous() ) {
 		if( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
 			html_button_bug_unmonitor( $p_bug_id );
-		}
-		else {
+		} else {
 			html_button_bug_monitor( $p_bug_id );
 		}
 	}

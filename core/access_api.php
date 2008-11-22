@@ -92,8 +92,7 @@ function access_denied() {
 			$t_return_page = string_url( string_sanitize_url( $t_return_page ) );
 			print_header_redirect( 'login_page.php' . '?return=' . $t_return_page );
 		}
-	}
-	else {
+	} else {
 		if( auth_get_current_user_id() == user_get_id_by_name( config_get_global( 'anonymous_account' ) ) ) {
 			if( basename( $_SERVER['SCRIPT_NAME'] ) != 'login_page.php' ) {
 				$t_return_page = $_SERVER['PHP_SELF'];
@@ -109,8 +108,7 @@ function access_denied() {
 
 				echo '</center>';
 			}
-		}
-		else {
+		} else {
 			echo '<center>';
 			echo '<p>' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
 			print_bracket_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
@@ -208,8 +206,7 @@ function access_cache_matrix_user( $p_user_id ) {
 function access_compare_level( $p_user_access_level, $p_threshold = NOBODY ) {
 	if( is_array( $p_threshold ) ) {
 		return( in_array( $p_user_access_level, $p_threshold ) );
-	}
-	else {
+	} else {
 		return( $p_user_access_level >= $p_threshold );
 	}
 }
@@ -301,8 +298,7 @@ function access_get_project_level( $p_project_id = null, $p_user_id = null ) {
 	$t_global_access_level = access_get_global_level( $p_user_id );
 	if(( ALL_PROJECTS == $p_project_id ) || ( ADMINISTRATOR == $t_global_access_level ) ) {
 		return $t_global_access_level;
-	}
-	else {
+	} else {
 		$t_project_access_level = access_get_local_level( $p_user_id, $p_project_id );
 		$t_project_view_state = project_get_field( $p_project_id, 'view_state' );
 
@@ -315,17 +311,14 @@ function access_get_project_level( $p_project_id = null, $p_user_id = null ) {
 			if( VS_PRIVATE == $t_project_view_state ) {
 				if( access_compare_level( $t_global_access_level, config_get( 'private_project_threshold', null, null, ALL_PROJECTS ) ) ) {
 					return $t_global_access_level;
-				}
-				else {
+				} else {
 					return ANYBODY;
 				}
-			}
-			else {
+			} else {
 				# project access not set, but the project is public
 				return $t_global_access_level;
 			}
-		}
-		else {
+		} else {
 			# project specific access was set
 			return $t_project_access_level;
 		}
@@ -584,8 +577,7 @@ function access_get_local_level( $p_user_id, $p_project_id ) {
 	if( in_array( $p_project_id, $g_cache_access_matrix_project_ids ) ) {
 		if( isset( $g_cache_access_matrix[$p_user_id][$p_project_id] ) ) {
 			return $g_cache_access_matrix[$p_user_id][$p_project_id];
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -594,8 +586,7 @@ function access_get_local_level( $p_user_id, $p_project_id ) {
 
 	if( isset( $t_project_level[$p_project_id] ) ) {
 		return $t_project_level[$p_project_id];
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -614,8 +605,7 @@ function access_get_status_threshold( $p_status, $p_project_id = ALL_PROJECTS ) 
 	$t_thresh_array = config_get( 'set_status_threshold' );
 	if( isset( $t_thresh_array[(int)$p_status] ) ) {
 		return $t_thresh_array[(int)$p_status];
-	}
-	else {
+	} else {
 		return config_get( 'update_bug_status_threshold' );
 	}
 }

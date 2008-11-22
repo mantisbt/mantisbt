@@ -283,8 +283,7 @@
 						$t_issue_set_levels[] = $t_issue_set_levels[$l] + 1;
 						$t_issue_set_ids = array_merge( $t_issue_set_ids, $t_issue_set_ids_end );
 						$t_issue_set_levels = array_merge( $t_issue_set_levels, $t_issue_set_levels_end );
-					}
-					else {
+					} else {
 						$t_issue_set_ids[] = $t_issue_id;
 						$t_issue_set_levels[] = 0;
 					}
@@ -292,8 +291,7 @@
 					array_splice( $t_issue_parents, $k, 1 );
 
 					$t_cycle_ids = array();
-				}
-				else {
+				} else {
 					$k++;
 				}
 				if ( count( $t_issue_ids ) <= $k ) {

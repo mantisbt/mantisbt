@@ -83,8 +83,7 @@ function excel_get_titles_row() {
 		$t_custom_field = column_get_custom_field_name( $t_column );
 		if( $t_custom_field !== null ) {
 			$t_ret .= excel_format_column_title( lang_get_defaulted( $t_custom_field ) );
-		}
-		else {
+		} else {
 			$t_column_title = column_get_title( $t_column );
 			$t_ret .= excel_format_column_title( $t_column_title );
 		}
@@ -105,8 +104,7 @@ function excel_get_default_filename() {
 
 	if( ALL_PROJECTS == $t_current_project_id ) {
 		$t_filename = user_get_name( auth_get_current_user_id() );
-	}
-	else {
+	} else {
 		$t_filename = project_get_field( $t_current_project_id, 'name' );
 	}
 
@@ -191,8 +189,7 @@ function excel_format_bugnotes_count( $p_bugnotes_count ) {
 function excel_format_handler_id( $p_handler_id ) {
 	if( $p_handler_id > 0 ) {
 		return excel_prepare_string( user_get_name( $p_handler_id ) );
-	}
-	else {
+	} else {
 		return excel_prepare_string( '' );
 	}
 }

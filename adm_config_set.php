@@ -96,14 +96,12 @@
 					$t_new_key = constant_replace( trim( $t_split[0] ) );
 					$t_new_value = constant_replace( trim( $t_split[1] ) );
 					$t_value[ $t_new_key ] = $t_new_value;
-				}
-				else {
+				} else {
 					// regular array
 					$t_value[ $key ] = constant_replace( trim( $value ) );
 				}
 			}
-		}
-		else {
+		} else {
 			// scalar value
 			$t_value = constant_replace( trim( $t_full_string ) );
 		}

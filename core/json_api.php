@@ -38,8 +38,7 @@ function json_url( $p_url, $p_member = null ) {
 
 	if( is_null( $p_member ) ) {
 		return $t_json;
-	}
-	else {
+	} else {
 		return $t_json->$p_member;
 	}
 }

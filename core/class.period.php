@@ -66,16 +66,13 @@ class Period {
 		if( '' == $this->start ) {
 			if( '' == $this->end ) {
 				$t_clause = '';
-			}
-			else {
+			} else {
 				$t_clause = " =< '" . $this->end . "'";
 			}
-		}
-		else {
+		} else {
 			if( '' == $this->end ) {
 				$t_clause = " >= '" . $this->start . "'";
-			}
-			else {
+			} else {
 				$t_clause = " BETWEEN '" . $this->start . "' AND '" . $this->end . "'";
 			}
 		}
@@ -93,18 +90,15 @@ class Period {
 		if( '' == $this->start ) {
 			if( '' == $this->end ) {
 				$t_clause = lang_get( 'all_dates' );
-			}
-			else {
+			} else {
 				list( $t_end_date, $t_end_time ) = split( ' ', $this->end );
 				$t_clause = lang_get( 'before_date' ) . ' ' . $t_end_date;
 			}
-		}
-		else {
+		} else {
 			list( $t_start_date, $t_start_time ) = split( ' ', $this->start );
 			if( '' == $this->end ) {
 				$t_clause = lang_get( 'after_date' ) . ' ' . $t_start_date;
-			}
-			else {
+			} else {
 				list( $t_end_date, $t_end_time ) = split( ' ', $this->end );
 				$t_clause = lang_get( 'from_date' ) . ' ' . $t_start_date . ' ' . lang_get( 'to_date' ) . ' ' . $t_end_date;
 			}

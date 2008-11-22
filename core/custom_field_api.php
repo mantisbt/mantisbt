@@ -99,8 +99,7 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 		if( $p_trigger_errors ) {
 			error_parameters( 'Custom ' . $p_field_id );
 			trigger_error( ERROR_CUSTOM_FIELD_NOT_FOUND, ERROR );
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -148,8 +147,7 @@ function custom_field_clear_cache( $p_field_id = null ) {
 
 	if( null === $p_field_id ) {
 		$g_cache_custom_field = array();
-	}
-	else {
+	} else {
 		$c_field_id = db_prepare_int( $p_field_id );
 		unset( $g_cache_custom_field[$c_field_id] );
 	}
@@ -188,8 +186,7 @@ function custom_field_is_linked( $p_field_id, $p_project_id ) {
 
 	if( $count > 0 ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -199,8 +196,7 @@ function custom_field_is_linked( $p_field_id, $p_project_id ) {
 function custom_field_exists( $p_field_id ) {
 	if( false == custom_field_cache_row( $p_field_id, false ) ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -210,8 +206,7 @@ function custom_field_type( $p_field_id ) {
 	$t_field = custom_field_cache_row( $p_field_id, false );
 	if( $t_field == false ) {
 		return - 1;
-	}
-	else {
+	} else {
 		return $t_field['type'];
 	}
 }
@@ -221,8 +216,7 @@ function custom_field_type( $p_field_id ) {
 function custom_field_ensure_exists( $p_field_id ) {
 	if( custom_field_exists( $p_field_id ) ) {
 		return true;
-	}
-	else {
+	} else {
 		error_parameters( 'Custom ' . $p_field_id );
 		trigger_error( ERROR_CUSTOM_FIELD_NOT_FOUND, ERROR );
 	}
@@ -248,8 +242,7 @@ function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
 
 	if( $count > 0 ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -259,8 +252,7 @@ function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
 function custom_field_ensure_name_unique( $p_name ) {
 	if( custom_field_is_name_unique( $p_name ) ) {
 		return true;
-	}
-	else {
+	} else {
 		trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
 	}
 }
@@ -399,8 +391,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'name', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "name='$c_name'";
@@ -408,8 +399,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'type', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "type='$c_type'";
@@ -417,8 +407,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'possible_values', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "possible_values='$c_possible_values'";
@@ -426,8 +415,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'default_value', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "default_value='$c_default_value'";
@@ -435,8 +423,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'valid_regexp', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "valid_regexp='$c_valid_regexp'";
@@ -444,8 +431,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'access_level_r', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "access_level_r='$c_access_level_r'";
@@ -453,8 +439,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'access_level_rw', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "access_level_rw='$c_access_level_rw'";
@@ -462,8 +447,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'length_min', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "length_min='$c_length_min'";
@@ -471,8 +455,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'length_max', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "length_max='$c_length_max'";
@@ -480,8 +463,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'filter_by', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "filter_by='$c_filter_by'";
@@ -489,8 +471,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'advanced', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "advanced='$c_advanced'";
@@ -498,8 +479,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'display_report', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "display_report='$c_display_report'";
@@ -507,8 +487,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'display_update', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "display_update='$c_display_update'";
@@ -516,8 +495,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'display_resolved', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "display_resolved='$c_display_resolved'";
@@ -525,8 +503,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'display_closed', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "display_closed='$c_display_closed'";
@@ -534,8 +511,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'require_report', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "require_report='$c_require_report'";
@@ -543,8 +519,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'require_update', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "require_update='$c_require_update'";
@@ -552,8 +527,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'require_resolved', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "require_resolved='$c_require_resolved'";
@@ -561,8 +535,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( array_key_exists( 'require_closed', $p_def_array ) ) {
 		if( !$t_update_something ) {
 			$t_update_something = true;
-		}
-		else {
+		} else {
 			$query .= ', ';
 		}
 		$query .= "require_closed='$c_require_closed'";
@@ -574,8 +547,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	if( $t_update_something ) {
 		db_query( $query );
 		custom_field_clear_cache( $p_field_id );
-	}
-	else {
+	} else {
 		return false;
 
 		# there is nothing to update...
@@ -709,9 +681,7 @@ function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = nul
 
 	if(( null === $p_truncated_length ) || ( strlen( $c_field_name ) != $p_truncated_length ) ) {
 		$query = "SELECT id FROM $t_custom_field_table WHERE name = '$c_field_name'";
-	}
-	else {
-
+	} else {
 		# @@@ This is to handle the case where we only have a truncated part of the name.  This happens in the case where
 		# we are getting the custom field name from the history logs, since history is 32 and custom field name is 64.
 		# This fix will handle entries already in the database, future entries should be handled by making the field name max lengths match.
@@ -752,12 +722,10 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 			if( is_array( $t_private_access ) ) {
 				if( 1 == count( $t_private_access ) ) {
 					$t_access_clause = "= " . array_shift( $t_private_access ) . " ";
-				}
-				else {
+				} else {
 					$t_access_clause = "IN (" . implode( ',', $t_private_access ) . ")";
 				}
-			}
-			else {
+			} else {
 				$t_access_clause = ">= $t_private_access ";
 			}
 
@@ -772,17 +740,14 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
                         ( pt.view_state = $t_pub OR
                         ( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR
                         ( pult.user_id is null and ut.access_level $t_access_clause ) )";
-		}
-		else {
+		} else {
 			if( is_array( $p_project_id ) ) {
 				if( 1 == count( $p_project_id ) ) {
 					$t_project_clause = "= " . array_shift( $p_project_id ) . " ";
-				}
-				else {
+				} else {
 					$t_project_clause = "IN (" . implode( ',', $p_project_id ) . ")";
 				}
-			}
-			else {
+			} else {
 				$t_project_clause = "= $p_project_id ";
 			}
 			$query = "SELECT cft.id
@@ -802,8 +767,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 		custom_field_cache_array_rows( $t_ids );
 
 		$g_cache_cf_linked[$p_project_id] = $t_ids;
-	}
-	else {
+	} else {
 		$t_ids = $g_cache_cf_linked[$p_project_id];
 	}
 	return $t_ids;
@@ -830,8 +794,7 @@ function custom_field_get_ids() {
 			array_push( $t_ids, $row['id'] );
 		}
 		$g_cache_cf_list = $t_ids;
-	}
-	else {
+	} else {
 		$t_ids = $g_cache_cf_list;
 	}
 	return $t_ids;
@@ -874,8 +837,7 @@ function custom_field_get_field( $p_field_id, $p_field_name ) {
 
 	if( isset( $row[$p_field_name] ) ) {
 		return $row[$p_field_name];
-	}
-	else {
+	} else {
 		error_parameters( $p_field_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 		return '';
@@ -915,8 +877,7 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 
 	if( db_num_rows( $result ) > 0 ) {
 		return custom_field_database_to_value( db_result( $result ), $row['type'] );
-	}
-	else {
+	} else {
 		return custom_field_default_to_value( $t_default_value, $row['type'] );
 	}
 }
@@ -975,8 +936,7 @@ function custom_field_get_all_linked_fields( $p_bug_id ) {
 
 			if( is_null( $row['value'] ) ) {
 				$t_value = $row['default_value'];
-			}
-			else {
+			} else {
 				$t_value = custom_field_database_to_value( $row['value'], $row['type'] );
 			}
 
@@ -1082,8 +1042,7 @@ function custom_field_distinct_values( $p_field_def, $p_project_id = ALL_PROJECT
 	# If an enumeration type, we get all possible values, not just used values
 	if( isset( $g_custom_field_type_definition[$p_field_def['type']]['#function_return_distinct_values'] ) ) {
 		return call_user_func( $g_custom_field_type_definition[$p_field_def['type']]['#function_return_distinct_values'], $p_field_def );
-	}
-	else {
+	} else {
 		$t_where = '';
 		$t_from = $t_custom_field_string_table;
 		if( ALL_PROJECTS != $p_project_id ) {
@@ -1209,9 +1168,7 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value ) {
 
 		$row = db_fetch_array( $result );
 		history_log_event_direct( $c_bug_id, $t_name, custom_field_database_to_value( $row['value'], $t_type ), $p_value );
-	}
-	else {
-
+	} else {
 		# Always store the value, even if it's the dafault value
 		# This is important, as the definitions might change but the
 		#  values stored with a bug must not change
@@ -1262,8 +1219,7 @@ function custom_field_set_sequence( $p_field_id, $p_project_id, $p_sequence ) {
 function print_custom_field_input( $p_field_def, $p_bug_id = null ) {
 	if( null === $p_bug_id ) {
 		$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
-	}
-	else {
+	} else {
 		$t_custom_field_value = custom_field_get_value( $p_field_def['id'], $p_bug_id );
 	}
 
@@ -1272,8 +1228,7 @@ function print_custom_field_input( $p_field_def, $p_bug_id = null ) {
 	global $g_custom_field_type_definition;
 	if( isset( $g_custom_field_type_definition[$p_field_def['type']]['#function_print_input'] ) ) {
 		call_user_func( $g_custom_field_type_definition[$p_field_def['type']]['#function_print_input'], $p_field_def, $t_custom_field_value );
-	}
-	else {
+	} else {
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
 	}
 }

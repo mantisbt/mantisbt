@@ -71,8 +71,7 @@
 		# Create random password
 		$t_seed = $f_email . $f_username;
 		$f_password	= auth_generate_random_password( $t_seed );
-	}
-	else {
+	} else {
 		# Password won't to be sent by email. It entered by the admin
 		# Now, if the password is empty, confirm that that is what we wanted
 		if ( is_blank( $f_password ) ) {

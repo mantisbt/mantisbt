@@ -291,8 +291,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 		case 'project_id':
 			if( project_exists( $p_old_value ) ) {
 				$p_old_value = project_get_field( $p_old_value, 'name' );
-			}
-			else {
+			} else {
 				$p_old_value = '@' . $p_old_value . '@';
 			}
 
@@ -300,8 +299,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			# current one.
 			if( project_exists( $p_new_value ) ) {
 				$p_new_value = project_get_field( $p_new_value, 'name' );
-			}
-			else {
+			} else {
 				$p_new_value = '@' . $p_new_value . '@';
 			}
 			$t_field_localized = lang_get( 'email_project' );
@@ -314,15 +312,13 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			}
 			if( 0 == $p_old_value ) {
 				$p_old_value = '';
-			}
-			else {
+			} else {
 				$p_old_value = user_get_name( $p_old_value );
 			}
 
 			if( 0 == $p_new_value ) {
 				$p_new_value = '';
-			}
-			else {
+			} else {
 				$p_new_value = user_get_name( $p_new_value );
 			}
 			break;
@@ -443,8 +439,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					# Fix for #7846: There are some cases where old value is empty, this may be due to an old bug.
 					if( !is_blank( $p_old_value ) && $p_old_value > 0 ) {
 						$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
-					}
-					else {
+					} else {
 						$t_change = bug_format_id( $p_new_value );
 					}
 					break;

@@ -142,8 +142,7 @@ function checktoken( $file ) {
 				case '.':
 					if( $last_token == T_CONSTANT_ENCAPSED_STRING ) {
 						$twopartstring = true;
-					}
-					else {
+					} else {
 						print_error( "ERROR: string concat found at unexpected location (line $line)" );
 						$pass = false;
 					}
@@ -153,9 +152,7 @@ function checktoken( $file ) {
 					$pass = false;
 					break;
 			}
-		}
-		else {
-
+		} else {
 			// token array
 			list( $id, $text, $line ) = $token;
 
@@ -203,8 +200,7 @@ function checktoken( $file ) {
 						if( !defined( $text ) ) {
 							print_error( "undefined constant: $current_var" );
 						}
-					}
-					else {
+					} else {
 						print_error( "ERROR: T_STRING found at unexpected location (line $line)" );
 						$pass = false;
 					}
@@ -215,8 +211,7 @@ function checktoken( $file ) {
 					if( $last_token == T_VARIABLE && $set_variable && $current_var != null ) {
 						if( isset( $variables[$current_var] ) ) {
 							print_error( "ERROR: duplicate language string ($current_var ) (line $line)" );
-						}
-						else {
+						} else {
 							$variables[$current_var] = $text;
 						}
 					}
@@ -224,7 +219,6 @@ function checktoken( $file ) {
 					$need_end_variable = true;
 					break;
 				default:
-
 					// if (!$in_php_code)
 					print_error( "PARSER: " . $id . token_name( $id ) . $text . $line );
 					$pass = false;

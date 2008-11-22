@@ -78,8 +78,7 @@ function sponsorship_cache_row( $p_sponsorship_id, $p_trigger_errors = true ) {
 		if( $p_trigger_errors ) {
 			error_parameters( $p_sponsorship_id );
 			trigger_error( ERROR_SPONSORSHIP_NOT_FOUND, ERROR );
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -98,8 +97,7 @@ function sponsorship_clear_cache( $p_sponsorship_id = null ) {
 
 	if( $p_sponsorship_id === null ) {
 		$g_cache_sponsorships = array();
-	}
-	else {
+	} else {
 		$c_sponsorship_id = db_prepare_int( $p_sponsorship_id );
 		unset( $g_cache_sponsorships[$c_sponsorship_id] );
 	}
@@ -118,8 +116,7 @@ function sponsorship_get_id( $p_bug_id, $p_user_id = null ) {
 
 	if( $p_user_id === null ) {
 		$c_user_id = auth_get_current_user_id();
-	}
-	else {
+	} else {
 		$c_user_id = db_prepare_int( $p_user_id );
 	}
 
@@ -187,8 +184,7 @@ function sponsorship_get_amount( $p_sponsorship_id ) {
 		}
 
 		return $t_total;
-	}
-	else {
+	} else {
 		$sponsorship = sponsorship_get( $p_sponsorship_id );
 		return $sponsorship->amount;
 	}
@@ -256,8 +252,7 @@ function sponsorship_set( $p_sponsorship ) {
 		$t_sponsorship_id = db_insert_id( $t_sponsorship_table );
 
 		history_log_event_special( $c_bug_id, BUG_ADD_SPONSORSHIP, $c_user_id, $c_amount );
-	}
-	else {
+	} else {
 		$t_old_amount = sponsorship_get_amount( $c_id );
 		$t_sponsorship_id = $c_id;
 
@@ -287,8 +282,7 @@ function sponsorship_set( $p_sponsorship ) {
 
 	if( $c_id == 0 ) {
 		email_sponsorship_added( $c_bug_id );
-	}
-	else {
+	} else {
 		email_sponsorship_updated( $c_bug_id );
 	}
 

@@ -159,12 +159,10 @@ function upgrade_move_att2disk( $p_source ) {
 #
 if( $f_move_type == 'attachment' ) {
 	$t_type = 'Attachments';
-}
-else {
+} else {
 	if( $f_move_type == 'project' ) {
 		$t_type = 'Project Files';
-	}
-	else {
+	} else {
 		echo "<p>Invalid value '$f_move_type' for parameter 'doc'.</p>";
 		exit;
 	}

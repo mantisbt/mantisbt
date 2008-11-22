@@ -83,12 +83,10 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 						$t_users[] = ALL_USERS;
 					}
 					$g_cache_config_user = $t_users;
-				}
-				else {
+				} else {
 					$t_users = $g_cache_config_user;
 				}
-			}
-			else {
+			} else {
 				$t_users[] = $p_user;
 				if( !in_array( ALL_USERS, $t_users ) ) {
 					$t_users[] = ALL_USERS;
@@ -104,12 +102,10 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 						$t_projects[] = ALL_PROJECTS;
 					}
 					$g_cache_config_project = $t_projects;
-				}
-				else {
+				} else {
 					$t_projects = $g_cache_config_project;
 				}
-			}
-			else {
+			} else {
 				$t_projects[] = $p_project;
 				if( !in_array( ALL_PROJECTS, $t_projects ) ) {
 					$t_projects[] = ALL_PROJECTS;
@@ -178,14 +174,11 @@ function config_get_global( $p_option, $p_default = null ) {
 		if( !isset( $g_cache_config_eval['g_' . $p_option] ) ) {
 			$t_value = config_eval( $GLOBALS['g_' . $p_option] );
 			$g_cache_config_eval['g_' . $p_option] = $t_value;
-		}
-		else {
+		} else {
 			$t_value = $g_cache_config_eval['g_' . $p_option];
 		}
 		return $t_value;
-	}
-	else {
-
+	} else {
 		# unless we were allowing for the option not to exist by passing
 		#  a default, trigger a WARNING
 		if( null === $p_default ) {
@@ -312,12 +305,10 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 	if( is_array( $p_value ) || is_object( $p_value ) ) {
 		$t_type = CONFIG_TYPE_COMPLEX;
 		$c_value = serialize( $p_value );
-	}
-	elseif( is_int( $p_value ) || is_numeric( $p_value ) ) {
+	} elseif( is_int( $p_value ) || is_numeric( $p_value ) ) {
 		$t_type = CONFIG_TYPE_INT;
 		$c_value = db_prepare_int( $p_value );
-	}
-	else {
+	} else {
 		$t_type = CONFIG_TYPE_STRING;
 		$c_value = $p_value;
 	}
@@ -350,8 +341,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 				$c_project,
 				$c_user,
 			);
-		}
-		else {
+		} else {
 			$t_set_query = "INSERT INTO $t_config_table
 					( value, type, access_reqd, config_id, project_id, user_id )
 					VALUES
@@ -503,8 +493,7 @@ function config_flush_cache( $p_option = '', $p_user = ALL_USERS, $p_project = A
 	if( '' !== $p_option ) {
 		unset( $GLOBALS['g_cache_config'][$p_option][$p_user][$p_project] );
 		unset( $GLOBALS['g_cache_config_access'][$p_option][$p_user][$p_project] );
-	}
-	else {
+	} else {
 		unset( $GLOBALS['g_cache_config'] );
 		unset( $GLOBALS['g_cache_config_access'] );
 		$g_cache_filled = false;

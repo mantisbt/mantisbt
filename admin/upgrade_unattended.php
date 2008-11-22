@@ -43,8 +43,7 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 		if( $p_hard_fail ) {
 			$g_failed = true;
 			echo " - ERROR: ";
-		}
-		else {
+		} else {
 			echo " - WARNING: ";
 		}
 		if( '' != $p_message ) {
@@ -112,8 +111,7 @@ while(( $i <= $lastid ) && !$g_failed ) {
 
 	if( $upgrade[$i][0] == 'InsertData' ) {
 		$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
-	}
-	else {
+	} else {
 		$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
 	}
 
@@ -121,8 +119,7 @@ while(( $i <= $lastid ) && !$g_failed ) {
 	if( $ret == 2 ) {
 		print_test_result( GOOD );
 		config_set( 'database_version', $i );
-	}
-	else {
+	} else {
 		print_test_result( BAD, true, $sqlarray[0] . '<br />' . $g_db->ErrorMsg() );
 	}
 

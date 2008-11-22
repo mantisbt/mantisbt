@@ -85,8 +85,7 @@ function twitter_issue_resolved( $p_bug_id ) {
 
 		/* include project */
 		false ), $t_bug->summary, user_get_name( $t_bug->handler_id ) );
-	}
-	else {
+	} else {
 		$t_message = sprintf( lang_get( 'twitter_resolved' ), $c_bug_id, category_full_name( $t_bug->category_id,
 
 		/* include project */

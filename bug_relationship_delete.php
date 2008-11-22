@@ -80,8 +80,7 @@
 	if ($f_bug_id == $t_bug_relationship_data->src_bug_id) {
 		$t_bug_rel_type = $t_rel_type;
 		$t_dest_bug_rel_type = relationship_get_complementary_type( $t_rel_type );
-	}
-	else {
+	} else {
 		$t_bug_rel_type = relationship_get_complementary_type( $t_rel_type );
 		$t_dest_bug_rel_type = $t_rel_type;
 	}

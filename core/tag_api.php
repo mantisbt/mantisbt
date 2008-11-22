@@ -148,12 +148,10 @@ function tag_parse_string( $p_string ) {
 		$t_tag_row = tag_get_by_name( $t_name );
 		if( $t_tag_row !== false ) {
 			$t_tags[] = $t_tag_row;
-		}
-		else {
+		} else {
 			if( tag_name_is_valid( $t_name, $t_matches ) ) {
 				$t_id = -1;
-			}
-			else {
+			} else {
 				$t_id = -2;
 			}
 			$t_tags[] = array(
@@ -192,18 +190,15 @@ function tag_parse_filters( $p_string ) {
 
 				if( "+" == $t_filter ) {
 					$t_tag_row['filter'] = 1;
-				}
-				elseif( "-" == $t_filter ) {
+				} elseif( "-" == $t_filter ) {
 					$t_tag_row['filter'] = -1;
-				}
-				else {
+				} else {
 					$t_tag_row['filter'] = 0;
 				}
 
 				$t_tags[] = $t_tag_row;
 			}
-		}
-		else {
+		} else {
 			continue;
 		}
 	}
@@ -267,8 +262,7 @@ function tag_get_field( $p_tag_id, $p_field_name ) {
 
 	if( isset( $row[$p_field_name] ) ) {
 		return $row[$p_field_name];
-	}
-	else {
+	} else {
 		error_parameters( $p_field_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 		return '';
@@ -291,8 +285,7 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 
 	if( null == $p_user_id ) {
 		$p_used_id = auth_get_current_user_id();
-	}
-	else {
+	} else {
 		user_ensure_exists( $p_user_id );
 	}
 
@@ -332,8 +325,7 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 
 	if( auth_get_current_user_id() == tag_get_field( $p_tag_id, 'user_id' ) ) {
 		$t_update_level = config_get( 'tag_edit_own_threshold' );
-	}
-	else {
+	} else {
 		$t_update_level = config_get( 'tag_edit_threshold' );
 	}
 
@@ -509,8 +501,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 
 	if( null == $p_user_id ) {
 		$p_used_id = auth_get_current_user_id();
-	}
-	else {
+	} else {
 		user_ensure_exists( $p_user_id );
 	}
 
@@ -553,15 +544,13 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id = null ) {
 	if( $p_user_id === null ) {
 		$t_user_id = auth_get_current_user_id();
-	}
-	else {
+	} else {
 		$t_user_id = $p_user_id;
 	}
 
 	if( $t_user_id == tag_get_field( $p_tag_id, 'user_id' ) ) {
 		$t_detach_level = config_get( 'tag_detach_own_threshold' );
-	}
-	else {
+	} else {
 		$t_detach_level = config_get( 'tag_detach_threshold' );
 	}
 
@@ -620,8 +609,7 @@ function tag_display_link( $p_tag_row, $p_bug_id = 0 ) {
 
 	if( auth_get_current_user_id() == $p_tag_row['user_attached'] ) {
 		$t_detach = config_get( 'tag_detach_own_threshold' );
-	}
-	else {
+	} else {
 		$t_detach = config_get( 'tag_detach_threshold' );
 	}
 
@@ -647,8 +635,7 @@ function tag_display_attached( $p_bug_id ) {
 
 	if( count( $t_tag_rows ) == 0 ) {
 		echo lang_get( 'tag_none_attached' );
-	}
-	else {
+	} else {
 		$i = 0;
 		foreach( $t_tag_rows as $t_tag ) {
 			echo( $i > 0 ? config_get( 'tag_separator' ) . " " : "" );
@@ -716,8 +703,7 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 	while( $row = db_fetch_array( $result ) ) {
 		if( !isset( $t_tag_counts[$row['tag_id']] ) ) {
 			$t_tag_counts[$row['tag_id']] = 1;
-		}
-		else {
+		} else {
 			$t_tag_counts[$row['tag_id']]++;
 		}
 	}

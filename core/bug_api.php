@@ -142,8 +142,7 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		if( $p_trigger_errors ) {
 			error_parameters( $p_bug_id );
 			trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -226,8 +225,7 @@ function bug_clear_cache( $p_bug_id = null ) {
 
 	if( null === $p_bug_id ) {
 		$g_cache_bug = array();
-	}
-	else {
+	} else {
 		unset( $g_cache_bug[(int) $p_bug_id] );
 	}
 
@@ -266,8 +264,7 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		if( $p_trigger_errors ) {
 			error_parameters( $p_bug_id );
 			trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -290,8 +287,7 @@ function bug_text_clear_cache( $p_bug_id = null ) {
 
 	if( null === $p_bug_id ) {
 		$g_cache_bug_text = array();
-	}
-	else {
+	} else {
 		unset( $g_cache_bug_text[(int) $p_bug_id] );
 	}
 
@@ -310,8 +306,7 @@ function bug_text_clear_cache( $p_bug_id = null ) {
 function bug_exists( $p_bug_id ) {
 	if( false == bug_cache_row( $p_bug_id, false ) ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -339,8 +334,7 @@ function bug_ensure_exists( $p_bug_id ) {
 function bug_is_user_reporter( $p_bug_id, $p_user_id ) {
 	if( bug_get_field( $p_bug_id, 'reporter_id' ) == $p_user_id ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -355,8 +349,7 @@ function bug_is_user_reporter( $p_bug_id, $p_user_id ) {
 function bug_is_user_handler( $p_bug_id, $p_user_id ) {
 	if( bug_get_field( $p_bug_id, 'handler_id' ) == $p_user_id ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -437,9 +430,7 @@ function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
 
 		# no change in state, allow the transition
 		return true;
-	}
-	else {
-
+	} else {
 		# workflow defined - find allowed states
 		$t_allowed_states = $t_status_enum_workflow[$p_bug_status];
 		$t_arr = explode_enum_string( $t_allowed_states );
@@ -516,16 +507,14 @@ function bug_create( $p_bug_data ) {
 	# Only set target_version if user has access to do so
 	if( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
 		$c_target_version = $p_bug_data->target_version;
-	}
-	else {
+	} else {
 		$c_target_version = '';
 	}
 
 	# check due_date format
 	if( !is_blank( $p_bug_data->due_date ) ) {
 		$c_due_date = db_bind_timestamp( $p_bug_data->due_date, true );
-	}
-	else {
+	} else {
 		$c_due_date = date_get_null();
 	}
 
@@ -980,8 +969,7 @@ function bug_update( $p_bug_id, $p_bug_data, $p_update_extended = false, $p_bypa
 
 	if( !is_blank( $p_bug_data->due_date ) ) {
 		$c_due_date = db_bind_timestamp( $p_bug_data->due_date, true );
-	}
-	else {
+	} else {
 		$c_due_date = db_null_date();
 	}
 
@@ -1187,8 +1175,7 @@ function bug_get_row( $p_bug_id ) {
 function bug_get( $p_bug_id, $p_get_extended = false ) {
 	if( $p_get_extended ) {
 		$row = bug_get_extended_row( $p_bug_id );
-	}
-	else {
+	} else {
 		$row = bug_get_row( $p_bug_id );
 	}
 
@@ -1223,8 +1210,7 @@ function bug_get_field( $p_bug_id, $p_field_name ) {
 
 	if( isset( $row[$p_field_name] ) ) {
 		return $row[$p_field_name];
-	}
-	else {
+	} else {
 		error_parameters( $p_field_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 		return '';
@@ -1244,8 +1230,7 @@ function bug_get_text_field( $p_bug_id, $p_field_name ) {
 
 	if( isset( $row[$p_field_name] ) ) {
 		return $row[$p_field_name];
-	}
-	else {
+	} else {
 		error_parameters( $p_field_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 		return '';
@@ -1279,8 +1264,7 @@ function bug_get_bugnote_count( $p_bug_id ) {
 
 	if( !access_has_project_level( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) {
 		$t_restriction = 'AND view_state=' . VS_PUBLIC;
-	}
-	else {
+	} else {
 		$t_restriction = '';
 	}
 
@@ -1315,8 +1299,7 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
 
 	if( false === $row ) {
 		return false;
-	}
-	else {
+	} else {
 		return db_unixtimestamp( $row );
 	}
 }
@@ -1337,8 +1320,7 @@ function bug_get_bugnote_stats( $p_bug_id ) {
 	if( !is_null( $g_cache_bug[$c_bug_id]['_stats'] ) ) {
 		if( $g_cache_bug[$c_bug_id]['_stats'] === false ) {
 			return false;
-		}
-		else {
+		} else {
 			$t_stats['last_modified'] = db_unixtimestamp( $g_cache_bug[$c_bug_id]['_stats']['last_modified'] );
 			$t_stats['count'] = $g_cache_bug[$c_bug_id]['_stats']['count'];
 		}
@@ -1515,8 +1497,7 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 
 	if(( ON == config_get( 'auto_set_status_to_assigned' ) ) && ( NO_USER != $p_user_id ) ) {
 		$t_ass_val = config_get( 'bug_assigned_status' );
-	}
-	else {
+	} else {
 		$t_ass_val = $h_status;
 	}
 
@@ -1605,8 +1586,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		if( $t_id_relationship == -1 ) {
 
 			# the relationship type is already set. Nothing to do
-		}
-		elseif( $t_id_relationship > 0 ) {
+		} elseif( $t_id_relationship > 0 ) {
 
 			# Update the relationship
 			relationship_update( $t_id_relationship, $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
@@ -1614,8 +1594,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 			# Add log line to the history (both bugs)
 			history_log_event_special( $p_bug_id, BUG_REPLACE_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
 			history_log_event_special( $p_duplicate_id, BUG_REPLACE_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
-		}
-		else {
+		} else {
 
 			# Add the new relationship
 			relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
@@ -1638,8 +1617,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 			$p_handler_id = auth_get_current_user_id();
 			bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
 		}
-	}
-	else {
+	} else {
 		bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
 	}
 

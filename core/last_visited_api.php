@@ -57,8 +57,7 @@ function last_visited_issue( $p_issue_id, $p_user_id = null ) {
 	$t_value = token_get_value( TOKEN_LAST_VISITED, $p_user_id );
 	if( is_null( $t_value ) ) {
 		$t_value = $c_issue_id;
-	}
-	else {
+	} else {
 		$t_ids = explode( ',', $p_issue_id . ',' . $t_value );
 		$t_ids = array_unique( $t_ids );
 		$t_ids = array_slice( $t_ids, 0, config_get( 'recently_visited_count' ) );

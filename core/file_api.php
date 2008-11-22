@@ -44,14 +44,12 @@ function file_get_display_name( $p_filename ) {
 	$t_name = preg_split( $t_doc_match, $p_filename );
 	if( isset( $t_name[1] ) ) {
 		return $t_name[1];
-	}
-	else {
+	} else {
 		$t_bug_match = '/^\d{7}-/';
 		$t_name = preg_split( $t_bug_match, $p_filename );
 		if( isset( $t_name[1] ) ) {
 			return $t_name[1];
-		}
-		else {
+		} else {
 			return $p_filename;
 		}
 	}
@@ -104,8 +102,7 @@ function file_bug_attachment_count( $p_bug_id ) {
 function file_bug_has_attachments( $p_bug_id ) {
 	if( file_bug_attachment_count( $p_bug_id ) > 0 ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -503,8 +500,7 @@ function diskfile_is_name_unique( $p_name, $p_filepath ) {
 
 	if( $t_count > 0 ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -521,8 +517,7 @@ function file_is_name_unique( $p_name, $p_bug_id ) {
 
 	if( $t_count > 0 ) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -550,8 +545,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	if( 'bug' == $p_table ) {
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		$t_bug_id = bug_format_id( $p_bug_id );
-	}
-	else {
+	} else {
 		$t_project_id = helper_get_current_project();
 		$t_bug_id = 0;
 	}
@@ -565,8 +559,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 
 	if( $t_project_id == ALL_PROJECTS ) {
 		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
-	}
-	else {
+	} else {
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
 		if( $t_file_path == '' ) {
 			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
@@ -610,8 +603,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 				chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
 				$c_content = "''";
-			}
-			else {
+			} else {
 				trigger_error( ERROR_FILE_DUPLICATE, ERROR );
 			}
 			break;
@@ -647,8 +639,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 function file_is_uploading_enabled() {
 	if( ini_get_bool( 'file_uploads' ) && ( ON == config_get( 'allow_file_upload' ) ) ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
@@ -690,8 +681,7 @@ function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
 
 		# the user must be the reporter if they're reporting a new bug
 		$t_reporter = true;
-	}
-	else {
+	} else {
 
 		# existing bug
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
@@ -771,8 +761,7 @@ function file_get_extension( $p_filename ) {
 
 	if( $dot_found ) {
 		return $ext;
-	}
-	else {
+	} else {
 		return '';
 	}
 }

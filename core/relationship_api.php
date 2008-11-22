@@ -161,8 +161,7 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type )
 		$c_src_bug_id = db_prepare_int( $p_dest_bug_id );
 		$c_dest_bug_id = db_prepare_int( $p_src_bug_id );
 		$c_relationship_type = db_prepare_int( relationship_get_complementary_type( $p_relationship_type ) );
-	}
-	else {
+	} else {
 		$c_src_bug_id = db_prepare_int( $p_src_bug_id );
 		$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
 		$c_relationship_type = db_prepare_int( $p_relationship_type );
@@ -200,8 +199,7 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 		$c_src_bug_id = db_prepare_int( $p_dest_bug_id );
 		$c_dest_bug_id = db_prepare_int( $p_src_bug_id );
 		$c_relationship_type = db_prepare_int( relationship_get_complementary_type( $p_relationship_type ) );
-	}
-	else {
+	} else {
 		$c_src_bug_id = db_prepare_int( $p_src_bug_id );
 		$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
 		$c_relationship_type = db_prepare_int( $p_relationship_type );
@@ -303,8 +301,7 @@ function relationship_get( $p_relationship_id ) {
 		$t_bug_relationship_data->src_bug_id = $t_relationship['source_bug_id'];
 		$t_bug_relationship_data->dest_bug_id = $t_relationship['destination_bug_id'];
 		$t_bug_relationship_data->type = $t_relationship['relationship_type'];
-	}
-	else {
+	} else {
 		$t_bug_relationship_data = null;
 	}
 
@@ -447,8 +444,7 @@ function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
 		# return the first id
 		$row = db_fetch_array( $result );
 		return $row['id'];
-	}
-	else {
+	} else {
 
 		# no relationship found
 		return 0;
@@ -481,8 +477,7 @@ function relationship_same_type_exists( $p_src_bug_id, $p_dest_bug_id, $p_rel_ty
 			if( $t_relationship->type == $p_rel_type ) {
 				$t_id_relationship = -1;
 			}
-		}
-		else {
+		} else {
 			if( $t_relationship->type == relationship_get_complementary_type( $p_rel_type ) ) {
 				$t_id_relationship = -1;
 			}
@@ -599,8 +594,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 		$t_related_bug_id = $p_relationship->dest_bug_id;
 		$t_related_project_name = project_get_name( $p_relationship->dest_project_id );
 		$t_relationship_descr = relationship_get_description_src_side( $p_relationship->type );
-	}
-	else {
+	} else {
 
 		# root bug is in the dest side, related bug in the src side
 		$t_related_bug_id = $p_relationship->src_bug_id;
@@ -620,8 +614,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 
 	if( $p_html_preview == false ) {
 		$t_td = '<td>';
-	}
-	else {
+	} else {
 		$t_td = '<td class="print">';
 	}
 
@@ -634,8 +627,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 	if( $p_html_preview == false ) {
 		$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . bug_format_id( $t_related_bug_id ) . '</a></td>';
 		$t_relationship_info_html .= '<td><span class="issue-status" title="' . $t_resolution . '">' . $t_status . '</span></td>';
-	}
-	else {
+	} else {
 		$t_relationship_info_html .= $t_td . bug_format_id( $t_related_bug_id ) . '</td>';
 		$t_relationship_info_html .= $t_td . $t_status . '&nbsp;</td>';
 	}
@@ -662,8 +654,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 	}
 	if( strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
 		$t_relationship_info_text .= $t_bug->summary;
-	}
-	else {
+	} else {
 		$t_relationship_info_text .= substr( $t_bug->summary, 0, $t_summary_wrap_at - 3 ) . '...';
 	}
 
@@ -679,15 +670,13 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 
 	if( $p_html_preview == false ) {
 		$t_relationship_info_html = '<tr bgcolor="' . get_status_color( $t_bug->status ) . '">' . $t_relationship_info_html . '</tr>' . "\n";
-	}
-	else {
+	} else {
 		$t_relationship_info_html = '<tr>' . $t_relationship_info_html . '</tr>';
 	}
 
 	if( $p_html == true ) {
 		return $t_relationship_info_html;
-	}
-	else {
+	} else {
 		return $t_relationship_info_text;
 	}
 }

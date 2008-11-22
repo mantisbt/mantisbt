@@ -203,8 +203,7 @@ function profile_get_all_rows( $p_user_id ) {
 function profile_get_all_for_user( $p_user_id ) {
 	if( ALL_USERS == $p_user_id ) {
 		return profile_get_all_rows( ALL_USERS );
-	}
-	else {
+	} else {
 		$t_profiles_array = array_merge( profile_get_all_rows( ALL_USERS ), profile_get_all_rows( $p_user_id ) );
 		asort( $t_profiles_array );
 		return $t_profiles_array;

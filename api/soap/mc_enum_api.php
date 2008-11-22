@@ -234,22 +234,19 @@ function mci_get_enum_value_from_label( $p_enum_string, $p_label ) {
 function mci_get_enum_id_from_objectref( $p_enum, $p_object_ref ) {
 	if( !is_null( $p_object_ref ) && isset( $p_object_ref['id'] ) && (int) $p_object_ref['id'] != 0 ) {
 		$t_id = (int) $p_object_ref['id'];
-	}
-	else {
+	} else {
 		$t_enum = config_get( $p_enum . '_enum_string' );
 		if( !is_null( $p_object_ref ) && isset( $p_object_ref['name'] ) && !is_blank( $p_object_ref['name'] ) ) {
 			$t_id = mci_get_enum_value_from_label( $t_enum, $p_object_ref['name'] );
 			if( $t_id == 0 ) {
 				$t_id = config_get( 'mc_' . $p_enum . '_enum_default_when_not_found' );
 			}
-		}
-		else {
+		} else {
 			$t_default_id = config_get( 'default_bug_' . $p_enum, 0 );
 			if( $t_default_id == 0 ) {
 				$t_array = mci_explode_to_objectref( $t_enum );
 				$t_id = (int) $t_array[0]['id'];
-			}
-			else {
+			} else {
 				$t_id = $t_default_id;
 			}
 		}
