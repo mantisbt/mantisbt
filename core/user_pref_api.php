@@ -96,16 +96,10 @@ class UserPreferences {
 
 	function Get( $t_string ) {
 		global $g_default_mapping;
-		if( is_null( $this-> {
-			$t_string
-		} ) ) {
-			$this-> {
-				$t_string
-			} = config_get( $g_default_mapping[$t_string] );
+		if( is_null( $this->{$t_string} ) ) {
+			$this->{$t_string} = config_get( $g_default_mapping[$t_string] );
 		}
-		return $this-> {
-			$t_string
-		};
+		return $this->{$t_string};
 	}
 }
 
@@ -216,18 +210,22 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 	$t_vars = get_object_vars( $p_prefs );
 	$t_values = array();
 
+	$t_params[] = db_param(); // user_id
+	$t_values[] = $c_user_id;
+	$t_params[] = db_param(); // project_id
+	$t_values[] = $c_project_id;
 	foreach( $t_vars as $var => $val ) {
-		array_push( $t_values, '\'' . db_prepare_string( $p_prefs->Get( $var ) ) . '\'' );
+		array_push( $t_params, db_param());
+		array_push( $t_values, $p_prefs->Get( $var ) );
 	}
 
 	$t_vars_string = implode( ', ', array_keys( $t_vars ) );
-	$t_values_string = implode( ', ', $t_values );
-
+	$t_params_string = implode( ',', $t_params );
+	
 	$query = "INSERT INTO $t_user_pref_table
 				    (user_id, project_id, $t_vars_string)
-				  VALUES
-				    ('$c_user_id', '$c_project_id', $t_values_string)";
-	db_query( $query );
+				  VALUES ( " . $t_params_string . ")";
+	db_query_bound( $query, $t_values  );
 
 	# db_query errors on failure so:
 	return true;
@@ -247,25 +245,21 @@ function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
 	$t_vars = get_object_vars( $p_prefs );
 
 	$t_pairs = array();
-
+	$t_values = array();
+	
 	foreach( $t_vars as $var => $val ) {
-		if( is_bool( $p_prefs->$var ) ) {
-			array_push( $t_pairs, "$var = " . db_prepare_bool( $p_prefs->Get( $var ) ) );
-		}
-		elseif( is_int( $p_prefs->$var ) ) {
-			array_push( $t_pairs, "$var = " . db_prepare_int( $p_prefs->Get( $var ) ) );
-		}
-		else {
-			array_push( $t_pairs, "$var = '" . db_prepare_string( $p_prefs->Get( $var ) ) . '\'' );
-		}
+		array_push( $t_pairs, "$var = " . db_param() ) ;
+		array_push( $t_values, $val );		
 	}
 
 	$t_pairs_string = implode( ', ', $t_pairs );
-
+	$t_values[] = $c_user_id;
+	$t_values[] = $c_project_id;
+	
 	$query = "UPDATE $t_user_pref_table
 				  SET $t_pairs_string
-				  WHERE user_id=$c_user_id AND project_id=$c_project_id";
-	db_query( $query );
+				  WHERE user_id=" . db_param() . " AND project_id=" . db_param();
+	db_query_bound( $query, $t_values );
 
 	user_pref_clear_cache( $p_user_id, $p_project_id );
 
@@ -391,7 +385,6 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 			$t_prefs->$var = $t_prefs->Get( $var );
 		}
 	}
-
 	return $t_prefs;
 }
 
@@ -439,11 +432,6 @@ function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 #  based on the prefs for ALL_PROJECTS.  If there isn't even an entry for
 #  ALL_PROJECTS, we'd get returned a default UserPreferences object to modify.
 function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project_id = ALL_PROJECTS ) {
-	$c_user_id = db_prepare_int( $p_user_id );
-	$c_pref_name = db_prepare_string( $p_pref_name );
-	$c_pref_value = db_prepare_string( $p_pref_value );
-	$c_project_id = db_prepare_int( $p_project_id );
-
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
 
 	$t_prefs->$p_pref_name = $p_pref_value;
