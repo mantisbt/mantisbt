@@ -183,6 +183,14 @@ else {
 	$t_serverinfo = $g_db->ServerInfo()?>
 <tr>
 	<td bgcolor="#ffffff">
+		Adodb Version
+	</td>
+	<td bgcolor="#ffffff">
+			<?php echo $g_db->Version() ?>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ffffff">
 		Database Type (adodb)
 	</td>
 	<td bgcolor="#ffffff">
