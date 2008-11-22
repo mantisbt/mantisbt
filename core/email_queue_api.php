@@ -88,7 +88,7 @@ function email_queue_add( $p_email_data ) {
 					)";
 	db_query_bound( $query, Array( $c_email, $c_subject, $c_body, db_now(), $c_metadata ) );
 
-	return db_insert_id( $t_email_table );
+	return db_insert_id( $t_email_table, 'email_id' );
 }
 
 function email_queue_row_to_object( $p_row ) {

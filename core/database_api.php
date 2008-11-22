@@ -462,11 +462,11 @@ function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
  * @param string $p_table a valid database table name
  * @return int last successful insert id
  */
-function db_insert_id( $p_table = null ) {
+function db_insert_id( $p_table = null, $p_field = "id" ) {
 	global $g_db;
 
 	if( isset( $p_table ) && db_is_pgsql() ) {
-		$query = "SELECT currval('" . $p_table . "_id_seq')";
+		$query = "SELECT currval('" . $p_table . "_" . $p_field . "_seq')";
 		$result = db_query_bound( $query );
 		return db_result( $result );
 	}

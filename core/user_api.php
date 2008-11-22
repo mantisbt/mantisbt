@@ -462,9 +462,9 @@ function user_create( $p_username, $p_password, $p_email = '', $p_access_level =
 				    ( username, email, password, date_created, last_visit,
 				     enabled, access_level, login_count, cookie_string, realname )
 				  VALUES
-				    ( '$c_username', '$c_email', '$c_password', '" . db_now() . "', '" . db_now() . "',
-				     $c_enabled, $c_access_level, 0, '$t_cookie_string', '$c_realname')";
-	db_query( $query );
+				    ( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param()  . ",
+				     " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ", " . db_param() . ")";
+	db_query_bound( $query, Array( $c_username, $c_email, $c_password, db_now(), db_now(), $c_enabled, $c_access_level, 0, $t_cookie_string, $c_realname ) );
 
 	# Create preferences for the user
 	$t_user_id = db_insert_id( $t_user_table );
