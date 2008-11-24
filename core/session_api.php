@@ -126,7 +126,9 @@ function session_init( $p_session_id=null ) {
 			break;
 	}
 
-	session_validate( $g_session );
+	if ( ON == config_get_global( 'session_validation' ) ) {
+		session_validate( $g_session );
+	}
 }
 
 /**

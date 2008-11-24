@@ -176,6 +176,10 @@
 	# Session save path.  If false, uses default value as set by session handler.
 	$g_session_save_path = false;
 
+	# Session validation.
+	# WARNING: Disabling this could be a potential security risk!!
+	$g_session_validation = ON;
+
 	#############################
 	# Configuration Settings
 	#############################
@@ -186,7 +190,7 @@
 	$g_global_settings = array(
 		'_table$', 'cookie', '^db_', 'hostname', 'allow_signup', 'database_name', 'show_queries_count', 'admin_checks', 'version_suffix',
 		'_path$', 'use_iis', 'language', 'use_javascript', 'display_errors', 'show_detailed_errors', 'stop_on_errors', 'login_method', '_file$',
-		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'plugins_enabled', 'session_handler',
+		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'plugins_enabled', 'session_',
 	);
 
 	#############################
