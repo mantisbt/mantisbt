@@ -200,9 +200,9 @@
 
 		if ( isset( $g_allow_browser_cache ) && ON == $g_allow_browser_cache ) {
 			switch ( $t_browser_name ) {
-			#case 'IE':
-			#	header( 'Cache-Control: private, proxy-revalidate' );
-			#	break;
+			case 'IE':
+				header( 'Cache-Control: private, proxy-revalidate' );
+				break;
 			default:
 				header( 'Cache-Control: private, must-revalidate' );
 				break;
@@ -213,6 +213,7 @@
 		}
 
 		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
+		header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 
 		# SEND USER-DEFINED HEADERS
 		foreach( config_get( 'custom_headers' ) as $t_header ) {
