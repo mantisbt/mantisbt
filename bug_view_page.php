@@ -90,15 +90,12 @@
 	?>
 		<span class="small">
 			<?php print_bracket_link( 'bug_reminder_page.php?bug_id='.$f_bug_id, lang_get( 'bug_reminder' ) ) ?>
-		</span>
 	<?php
 		}
 		
 		if ( wiki_enabled() ) {
 	?>
-		<span class="small">
 			<?php print_bracket_link( 'wiki.php?id='.$f_bug_id, lang_get( 'wiki' ) ) ?>
-		</span>
 	<?php
 		}
 
@@ -113,6 +110,7 @@
 			}
 		}
 	?>
+		</span>
 	</td>
 
 	<!-- prev/next links -->
