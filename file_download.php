@@ -91,7 +91,7 @@
 	header( 'Content-Length: ' . $v_filesize );
 	$t_filename = file_get_display_name( $v_filename );
 	$t_inline_files = explode(',', config_get('inline_file_exts', 'gif'));
-	if ( in_array( file_get_extension($t_filename), $t_inline_files ) ) {
+	if ( in_array( strtolower( file_get_extension($t_filename) ), $t_inline_files ) ) {
 		$t_disposition = ''; //'inline;';
 	} else {
 		$t_disposition = ' attachment;';
