@@ -18,7 +18,6 @@
 	 * This page displays "improved" charts on resolutions : bars, 3Dpie and a mix resolutions per status
 	 *
 	 * @package MantisBT
-	 * @version $Id$
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org

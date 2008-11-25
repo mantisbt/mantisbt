@@ -19,6 +19,7 @@
  * Handles the event system.
  * @version $Id$
  * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  * @package CoreAPI
  * @subpackage EventAPI
  * @author John Reese

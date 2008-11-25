@@ -1,6 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -13,19 +13,16 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-# freemind export API
-# see https://freemind.sourceforge.net
-# it works with freemind version 0.8.0, 0.8.1
-#
-# Copyright (C) 2006-2008 Peter Tandler - http://www.digital-moderation.com
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
+ * freemind export API
+ * see https://freemind.sourceforge.net
+ * it works with freemind version 0.8.0, 0.8.1
  * @package CoreAPI
  * @subpackage FreemindAPI
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  */
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
@@ -221,7 +218,6 @@ function freemind_prepare_export( $p_bug_data ) {
 * able to export the children as subnodes in mm
 */
 function freemind_find_descendents( &$p_rows ) {
-
 	# List of visited issues and their data.
 	$v_bug_list = array();
 

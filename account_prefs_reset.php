@@ -31,7 +31,6 @@
 	 *	- User must not be protected
 	 *
 	 * @package MantisBT
-	 * @version $Id$
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org

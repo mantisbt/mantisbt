@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
 
-
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -39,7 +38,6 @@
 	 * - The user's account must not be protected
 	 *
 	 * @package MantisBT
-	 * @version $Id$
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
