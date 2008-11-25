@@ -119,7 +119,6 @@
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
-		$t_custom_field_value = gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], null );
 
 		# Only update the field if it would have been display for editing
 		if( !( ( ! $f_update_mode && $t_def['require_' . $t_custom_status_label] ) ||
@@ -129,22 +128,22 @@
 			continue;
 		}
 
-		# Only update the field if it is posted 
-		#  ( will fail in custom_field_set_value(), if it was required )
-		if ( $t_custom_field_value === null ) {
-			continue;
-		}
-
 		# Do not set custom field value if user has no write access.
 		if( !custom_field_has_write_access( $t_id, $f_bug_id ) ) {
 			continue;
 		}
 
-		if ( $t_def['require_' . $t_custom_status_label] && ( gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], '' ) == '' ) ) {
+		if ( $t_def['require_' . $t_custom_status_label] && !gpc_isset( "custom_field_$t_id" ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
-		if ( !custom_field_set_value( $t_id, $f_bug_id, $t_custom_field_value ) ) {
+
+		# Only update the field if it is posted 
+		if ( !gpc_isset( "custom_field_$t_id" ) ) {
+			continue;
+		}
+
+		if ( !custom_field_set_value( $t_id, $f_bug_id, gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], null ) ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}
