@@ -24,7 +24,13 @@
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
+/**
+ * requires prepare_api
+ */
 require_once( $t_core_dir . 'prepare_api.php' );
+/**
+ * requires columns_api
+ */
 require_once( $t_core_dir . 'columns_api.php' );
 
 # ## Custom Function API ###

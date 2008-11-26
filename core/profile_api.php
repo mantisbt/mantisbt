@@ -22,13 +22,6 @@
  * @link http://www.mantisbt.org
  */
 
-# ===================================
-# Boolean queries and ensures
-# ===================================
-# ===================================
-# Creation / Deletion / Updating
-# ===================================
-
 # Create a new profile for the user, return the ID of the new profile
 function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) {
 	$c_user_id = db_prepare_int( $p_user_id );

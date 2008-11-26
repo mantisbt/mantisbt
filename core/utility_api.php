@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,10 +13,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
  * Utility functions are *small* functions that are used often and therefore
@@ -27,12 +22,21 @@
  * included first in order to make them available to all the APIs.
  * Miscellaneous functions that provide functionality on top of other APIS
  * are found in the helper_api.
+ *
  * @package CoreAPI
  * @subpackage UtilityAPI
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  */
 
-# converts a 1 value to X
-# converts a 0 value to a space
+/**
+ * converts a 1 value to X
+ * converts a 0 value to a space
+ * @param int $p_num boolean numeric
+ * @return string X or space
+ * @access public
+ */
 function trans_bool( $p_num ) {
 	if( 0 == $p_num ) {
 		return '&nbsp;';
@@ -41,18 +45,33 @@ function trans_bool( $p_num ) {
 	}
 }
 
-# Breaks up an enum string into num:value elements
+/**
+ * Breaks up an enum string into num:value elements
+ * @param string $p_enum_string enum string
+ * @return array array of num:value elements
+ * @access public
+ */
 function explode_enum_string( $p_enum_string ) {
 	return explode( ',', $p_enum_string );
 }
 
-# Given one num:value pair it will return both in an array
-# num will be first (element 0) value second (element 1)
+/**
+ * Given one num:value pair it will return both in an array
+ * num will be first (element 0) value second (element 1)
+ * @param string $p_enum_elem a num:value pair
+ * @return array array(num->value)
+ * @access public
+ */
 function explode_enum_arr( $p_enum_elem ) {
 	return explode( ':', $p_enum_elem );
 }
 
-# Get the string associated with the $p_enum value
+/**
+ * Get the string associated with the $p_enum value
+ * @param string $p_enum_string
+ * @return array
+ * @access public
+ */
 function get_enum_to_array( $p_enum_string ) {
 	$t_arr = explode_enum_string( $p_enum_string );
 	$enum_count = count( $t_arr );
@@ -64,7 +83,13 @@ function get_enum_to_array( $p_enum_string ) {
 	return $t_array;
 }
 
-# Get the string associated with the $p_enum value
+/**
+ * Get the string associated with the $p_enum value
+ * @param string $p_enum_string
+ * @param int $p_num
+ * @return string
+ * @access public
+ */
 function get_enum_to_string( $p_enum_string, $p_num ) {
 	$t_arr = explode_enum_string( $p_enum_string );
 	$enum_count = count( $t_arr );
@@ -77,7 +102,12 @@ function get_enum_to_string( $p_enum_string, $p_num ) {
 	return '@' . $p_num . '@';
 }
 
-# Add a trailing DIRECTORY_SEPARATOR to a string if it isn't present
+/**
+ * Add a trailing DIRECTORY_SEPARATOR to a string if it isn't present
+ * @param string $p_path
+ * @return string
+ * @access public
+ */
 function terminate_directory_path( $p_path ) {
 	$str_len = strlen( $p_path );
 	if( $p_path && $p_path[$str_len - 1] != DIRECTORY_SEPARATOR ) {
@@ -87,8 +117,13 @@ function terminate_directory_path( $p_path ) {
 	return $p_path;
 }
 
-# Return true if the parameter is an empty string or a string
-#  containing only whitespace, false otherwise
+/**
+ * Return true if the parameter is an empty string or a string
+ * containing only whitespace, false otherwise
+ * @param string $p_var string to test
+ * @return bool
+ * @access public
+ */
 function is_blank( $p_var ) {
 	$p_var = trim( $p_var );
 	$str_len = strlen( $p_var );
@@ -98,7 +133,12 @@ function is_blank( $p_var ) {
 	return false;
 }
 
-# Get the named php ini variable but return it as a bool
+/**
+ * Get the named php ini variable but return it as a bool
+ * @param string $p_name
+ * @return bool
+ * @access public
+ */
 function ini_get_bool( $p_name ) {
 	$result = ini_get( $p_name );
 
@@ -124,8 +164,13 @@ function ini_get_bool( $p_name ) {
 	}
 }
 
-# Get the named php ini variable but return it as a number after converting "K" and "M"
-function ini_get_number( $p_name ) {
+/**
+ * Get the named php ini variable but return it as a number after converting "K" and "M"
+ * @param string $p_name
+ * @return int
+ * @access public
+ */
+function ini_get_number(  ) {
 	$t_result = ini_get( $p_name );
 	$t_val = spliti( 'M', $t_result );
 	if( $t_val[0] != $t_result ) {
@@ -138,7 +183,14 @@ function ini_get_number( $p_name ) {
 	return $t_result;
 }
 
-# Sort a multi-dimensional array by one of its keys
+/**
+ * Sort a multi-dimensional array by one of its keys
+ * @param array $p_array Array to sort
+ * @param string $p_key key to sort array on
+ * @param int $p_direction sort direction
+ * @return array sorted array
+ * @access public
+ */
 function multi_sort( $p_array, $p_key, $p_direction = ASCENDING ) {
 	if( DESCENDING == $p_direction ) {
 		$t_factor = -1;
@@ -165,8 +217,12 @@ function multi_sort( $p_array, $p_key, $p_direction = ASCENDING ) {
 	return $p_array;
 }
 
-# Return GD version
-# It doesn't use gd_info() so it works with PHP < 4.3.0 as well
+/**
+ * Return GD version
+ * It doesn't use gd_info() so it works with PHP < 4.3.0 as well
+ * @return int represents gd version
+ * @access public
+ */
 function get_gd_version() {
 	$t_GDfuncList = get_extension_funcs( 'gd' );
 	if( !is_array( $t_GDfuncList ) ) {
@@ -180,7 +236,12 @@ function get_gd_version() {
 	}
 }
 
-# return true or false if string matches current page name
+/**
+ * return true or false if string matches current page name 
+ * @param string $p_string page name
+ * @return bool
+ * @access public
+ */
 function is_page_name( $p_string ) {
 	return isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], $p_string ) );
 }

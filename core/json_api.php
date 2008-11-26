@@ -23,6 +23,9 @@
  * @link http://www.mantisbt.org
  */
 
+/**
+ * requires url_api
+ */
 require_once( config_get( 'core_path' ) . 'url_api.php' );
 
 /**

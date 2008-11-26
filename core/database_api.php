@@ -31,6 +31,9 @@
  */
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
+/**
+ * requires gpc_api
+ */
 require_once( $t_core_dir . 'gpc_api.php' );
 
 # Do not explicitly include $t_core_dir to allow using system ADODB by including

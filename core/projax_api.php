@@ -23,6 +23,9 @@
  * @link http://www.mantisbt.org
  */
 
+/**
+ * requires projax.php
+ */
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'projax' . DIRECTORY_SEPARATOR . 'projax.php' );
 
 # enables the projax library for this page.

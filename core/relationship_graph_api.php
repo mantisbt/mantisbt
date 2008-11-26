@@ -41,7 +41,13 @@
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
+/**
+ * requires relationship_api
+ */
 require_once( $t_core_dir . 'relationship_api.php' );
+/**
+ * requires graphviz_api
+ */
 require_once( $t_core_dir . 'graphviz_api.php' );
 
 # Generate a relationship graph for the given issue.

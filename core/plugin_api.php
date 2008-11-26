@@ -26,6 +26,10 @@
  */
 
 $t_class_path = config_get_global( 'class_path' );
+
+/**
+ * requires MantisPlugin.class
+ */
 require_once( $t_class_path . 'MantisPlugin.class.php' );
 
 # Cache variables #####

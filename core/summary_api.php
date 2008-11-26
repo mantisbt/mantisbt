@@ -21,6 +21,10 @@
  * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
+ 
+/**
+ * requires config_filter_defaults_include
+ */
 require_once( $g_absolute_path . 'config_filter_defaults_inc.php' );
 
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {

@@ -14,13 +14,33 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
 
 $t_core_path = config_get( 'core_path' );
 
+/**
+ * requires current_user_api
+ */
 require_once( $t_core_path . 'current_user_api.php' );
-require_once( $t_core_path . 'bug_api.php' );
+/**
+ * requires bug_api
+ */
+ require_once( $t_core_path . 'bug_api.php' );
+/**
+ * requires string_api
+ */
 require_once( $t_core_path . 'string_api.php' );
+/**
+ * requires date_api
+ */
 require_once( $t_core_path . 'date_api.php' );
+/**
+ * requires icon_api
+ */
 require_once( $t_core_path . 'icon_api.php' );
 
 $t_filter = current_user_get_bug_filter();

@@ -24,6 +24,9 @@
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
+/**
+ * requires config api
+ */
 require_once( $t_core_dir . 'config_api.php' );
 
 $g_twitter_enabled = null;

@@ -26,7 +26,7 @@
  */
 
 /**
- * @todo @@@function documentation
+ * @todo function documentation
  * @param string $p_initial_string 
  * @param string $p_element_id_prefix
  * @param string $p_query_string

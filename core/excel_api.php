@@ -15,6 +15,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Excel API
  * @package CoreAPI
  * @subpackage ExcelAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -22,7 +23,6 @@
  * @link http://www.mantisbt.org
  */
 
-# ## Excel API ###
 /**
  * A method that returns the header for an Excel Xml file.
  *

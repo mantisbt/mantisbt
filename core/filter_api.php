@@ -24,17 +24,35 @@
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
+/**
+ * requires current_user_api
+ */
 require_once( $t_core_dir . 'current_user_api.php' );
+/**
+ * requires user_api
+ */
 require_once( $t_core_dir . 'user_api.php' );
+/**
+ * requires bug_api
+ */
 require_once( $t_core_dir . 'bug_api.php' );
+/**
+ * requires collapse_api
+ */
 require_once( $t_core_dir . 'collapse_api.php' );
+/**
+ * requires relationship_api
+ */
 require_once( $t_core_dir . 'relationship_api.php' );
+/**
+ * requires tag_api
+ */
 require_once( $t_core_dir . 'tag_api.php' );
+/**
+ * requires config_filter_defaults_inc
+ */
 require_once( $g_absolute_path . 'config_filter_defaults_inc.php' );
 
-# ==========================================================================
-# PERMALINK FUNCTIONS                            						  =
-# ==========================================================================
 /**
  *  Get a permalink for the current active filter.  The results of using these fields by other users
  *  can be inconsistent with the original results due to fields like "Myself", "Current Project",

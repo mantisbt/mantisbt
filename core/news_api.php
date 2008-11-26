@@ -26,7 +26,13 @@
 
 $t_core_path = config_get( 'core_path' );
 
+/**
+ * requires current_user_api
+ */
 require_once( $t_core_path . 'current_user_api.php' );
+/**
+ * requires twitter_api
+ */
 require_once( $t_core_path . 'twitter_api.php' );
 
 # --------------------

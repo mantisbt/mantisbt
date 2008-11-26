@@ -22,8 +22,6 @@
  * @link http://www.mantisbt.org
  */
 
-# Icon API
-
 # prints the staus icon
 function icon_get_status_icon( $p_icon ) {
 	$t_icon_path = config_get( 'icon_path' );

@@ -24,7 +24,13 @@
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
+/**
+ * requires history_api
+ */
 require_once( $t_core_dir . 'history_api.php' );
+/**
+ * requires bug_api
+ */
 require_once( $t_core_dir . 'bug_api.php' );
 
 $g_cache_file_count = array();

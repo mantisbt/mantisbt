@@ -16,7 +16,6 @@
 
 	/**
 	 * @package MantisBT
-	 * @version $Id$
 	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
@@ -24,7 +23,9 @@
 # Require the core API and admin authentication to run tests
 $t_authenticated_testing = true;
 
-# Load the core API
+/**
+ * requires core APIs
+ */
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
 # Check for access rights if required

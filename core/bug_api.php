@@ -15,6 +15,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Bug API
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
@@ -24,17 +25,43 @@
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
+/**
+ * requires history_api
+ */
 require_once( $t_core_dir . 'history_api.php' );
+/**
+ * requires email_api
+ */
 require_once( $t_core_dir . 'email_api.php' );
+/**
+ * requires bugnote_api
+ */
 require_once( $t_core_dir . 'bugnote_api.php' );
+/**
+ * requires file_api
+ */
 require_once( $t_core_dir . 'file_api.php' );
+/**
+ * requires string_api
+ */
 require_once( $t_core_dir . 'string_api.php' );
+/**
+ * requires sponsorship_api
+ */
 require_once( $t_core_dir . 'sponsorship_api.php' );
+/**
+ * requires twitter_api
+ */
 require_once( $t_core_dir . 'twitter_api.php' );
+/**
+ * requires tag_api
+ */
 require_once( $t_core_dir . 'tag_api.php' );
+/**
+ * requires relationship_api
+ */
 require_once( $t_core_dir . 'relationship_api.php' );
 
-# ## Bug API ###
 # ===================================
 # Bug Data Structure Definition
 # ===================================
@@ -618,7 +645,7 @@ function bug_create( $p_bug_data ) {
 /**
  * Copy a bug from one project to another. Also make copies of issue notes, attachments, history,
  * email notifications etc.
- * @@@ Not managed FTP file upload
+ * @todo Not managed FTP file upload
  * @param array p_bug_id integer representing bug id
  * @param int p_target_project_id
  * @param bool p_copy_custom_fields
@@ -655,7 +682,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 	# MASC ATTENTION: IF THE SOURCE BUG HAS TO HANDLER THE bug_create FUNCTION CAN TRY TO AUTO-ASSIGN THE BUG
 	# WE FORCE HERE TO DUPLICATE THE SAME HANDLER OF THE SOURCE BUG
-	# @@@ VB: Shouldn't we check if the handler in the source project is also a handler in the destination project?
+	# @todo VB: Shouldn't we check if the handler in the source project is also a handler in the destination project?
 	bug_set_field( $t_new_bug_id, 'handler_id', $t_bug_data->handler_id );
 
 	bug_set_field( $t_new_bug_id, 'duplicate_id', $t_bug_data->duplicate_id );
@@ -915,7 +942,7 @@ function bug_delete_all( $p_project_id ) {
 		bug_delete( $row['id'] );
 	}
 
-	# @@@ should we check the return value of each bug_delete() and
+	# @todo should we check the return value of each bug_delete() and
 	#  return false if any of them return false? Presumable bug_delete()
 	#  will eventually trigger an error on failure so it won't matter...
 
@@ -1122,7 +1149,7 @@ function bug_update( $p_bug_id, $p_bug_data, $p_update_extended = false, $p_bypa
 			return true;
 		}
 
-		# @@@ handle priority change if it requires special handling
+		# @todo handle priority change if it requires special handling
 		# generic update notification
 		email_generic( $p_bug_id, 'updated', $t_action_prefix . 'updated' );
 	}
@@ -1136,7 +1163,7 @@ function bug_update( $p_bug_id, $p_bug_data, $p_update_extended = false, $p_bypa
 /**
  * Returns the extended record of the specified bug, this includes
  * the bug text fields
- * @@@ include reporter name and handler name, the problem is that
+ * @todo include reporter name and handler name, the problem is that
  *      handler can be 0, in this case no corresponding name will be
  *      found.  Use equivalent of (+) in Oracle.
  * @param int p_bug_id integer representing bug id
@@ -1350,7 +1377,7 @@ function bug_get_bugnote_stats( $p_bug_id ) {
  * @return array array of results or null
  * @access public
  * @uses database_api.php
- * @users file_api.php
+ * @uses file_api.php
  */
 function bug_get_attachments( $p_bug_id ) {
 	if( !file_can_view_bug_attachments( $p_bug_id ) ) {

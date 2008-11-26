@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,24 +13,35 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
+ * BugNote API
  * @package CoreAPI
  * @subpackage BugnoteAPI
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  */
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
+/**
+ * requires current_user_api
+ */
 require_once( $t_core_dir . 'current_user_api.php' );
+/**
+ * requires email_api
+ */
 require_once( $t_core_dir . 'email_api.php' );
+/**
+ * requires history_api
+ */
 require_once( $t_core_dir . 'history_api.php' );
+/**
+ * requires bug_api
+ */
 require_once( $t_core_dir . 'bug_api.php' );
 
-# ## Bugnote API ###
 # ===================================
 # Bugnote Data Structure Definition
 # ===================================
@@ -48,13 +58,13 @@ class BugnoteData {
 	var $time_tracking;
 }
 
-# ===================================
-# Boolean queries and ensures
-# ===================================
-# --------------------
-# Check if a bugnote with the given ID exists
-#
-# return true if the bugnote exists, false otherwise
+/**
+ * Check if a bugnote with the given ID exists
+ * return true if the bugnote exists, false otherwise
+ * @param int $p_bugnote_id bugnote id
+ * @return bool
+ * @access public
+ */
 function bugnote_exists( $p_bugnote_id ) {
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
@@ -71,19 +81,26 @@ function bugnote_exists( $p_bugnote_id ) {
 	}
 }
 
-# --------------------
-# Check if a bugnote with the given ID exists
-#
-# return true if the bugnote exists, raise an error if not
+/**
+ * Check if a bugnote with the given ID exists
+ * return true if the bugnote exists, raise an error if not
+ * @param int $p_bugnote_id bugnote id
+ * @access public
+ */
 function bugnote_ensure_exists( $p_bugnote_id ) {
 	if( !bugnote_exists( $p_bugnote_id ) ) {
 		trigger_error( ERROR_BUGNOTE_NOT_FOUND, ERROR );
 	}
 }
 
-# --------------------
-# Check if the given user is the reporter of the bugnote
-# return true if the user is the reporter, false otherwise
+/**
+ * Check if the given user is the reporter of the bugnote
+ * return true if the user is the reporter, false otherwise
+ * @param int $p_bugnote_id bugnote id
+ * @param int $p_user_id user id
+ * @return bool
+ * @access public
+ */
 function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
 	if( bugnote_get_field( $p_bugnote_id, 'reporter_id' ) == $p_user_id ) {
 		return true;
@@ -92,13 +109,20 @@ function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
 	}
 }
 
-# ===================================
-# Creation / Deletion / Updating
-# ===================================
-# --------------------
-# Add a bugnote to a bug
-#
-# return the ID of the new bugnote
+/**
+ * Add a bugnote to a bug
+ * return the ID of the new bugnote
+ * @param int $p_bug_id bug id
+ * @param string $p_bugnote_text bugnote text
+ * @param string $p_time_tracking hh:mm string
+ * @param bool $p_private whether bugnote is private
+ * @param int $p_type bugnote type
+ * @param string $p_attr
+ * @param int $p_user_id user id
+ * @param bool $p_send_email generate email?
+ * @return false|int false or indicating bugnote id added
+ * @access public
+ */
 function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = 0, $p_attr = '', $p_user_id = null, $p_send_email = TRUE ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 	$c_time_tracking = helper_duration_to_minutes( $p_time_tracking );
@@ -170,8 +194,12 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	return $t_bugnote_id;
 }
 
-# --------------------
-# Delete a bugnote
+/**
+ * Delete a bugnote
+ * @param int $p_bugnote_id bug note id
+ * @return bool
+ * @access public
+ */
 function bugnote_delete( $p_bugnote_id ) {
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
@@ -195,8 +223,12 @@ function bugnote_delete( $p_bugnote_id ) {
 	return true;
 }
 
-# --------------------
-# delete all bugnotes associated with the given bug
+/**
+ * delete all bugnotes associated with the given bug
+ * @param int $p_bug_id bug id
+ * @return bool
+ * @access public
+ */
 function bugnote_delete_all( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
@@ -227,11 +259,12 @@ function bugnote_delete_all( $p_bug_id ) {
 	return true;
 }
 
-# ===================================
-# Data Access
-# ===================================
-# --------------------
-# Get the text associated with the bugnote
+/**
+ * Get the text associated with the bugnote
+ * @param int $p_bugnote_id bugnote id
+ * @return string bugnote text
+ * @access public
+ */
 function bugnote_get_text( $p_bugnote_id ) {
 	$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
 	$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
@@ -245,8 +278,13 @@ function bugnote_get_text( $p_bugnote_id ) {
 	return db_result( $result );
 }
 
-# --------------------
-# Get a field for the given bugnote
+/**
+ * Get a field for the given bugnote
+ * @param int $p_bugnote_id bugnote id
+ * @param string $p_field_name field name
+ * @return string field value
+ * @access public
+ */
 function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$c_field_name = db_prepare_string( $p_field_name );
@@ -260,8 +298,12 @@ function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
 	return db_result( $result );
 }
 
-# --------------------
-# Get latest bugnote id
+/**
+ * Get latest bugnote id
+ * @param int $p_bug_id bug id
+ * @return int latest bugnote id
+ * @access public
+ */
 function bugnote_get_latest_id( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
@@ -272,15 +314,21 @@ function bugnote_get_latest_id( $p_bug_id ) {
 		          	ORDER by last_modified DESC";
 	$result = db_query_bound( $query, Array( $c_bug_id ), 1 );
 
-	return db_result( $result );
+	return (int)db_result( $result );
 }
 
-# --------------------
-# Build the bugnotes array for the given bug_id filtered by specified $p_user_access_level.
-# Bugnotes are sorted by date_submitted according to 'bugnote_order' configuration setting.
-#
-# Return BugnoteData class object with raw values from the tables except the field
-# last_modified - it is UNIX_TIMESTAMP.
+/**
+ * Build the bugnotes array for the given bug_id filtered by specified $p_user_access_level.
+ * Bugnotes are sorted by date_submitted according to 'bugnote_order' configuration setting.
+ * Return BugnoteData class object with raw values from the tables except the field
+ * last_modified - it is UNIX_TIMESTAMP.
+ * @param int $p_bug_id bug id
+ * @param int $p_user_bugnote_order sort order
+ * @param int $p_user_bugnote_limit number of bugnotes to display to user
+ * @param int $p_user_id user id
+ * @return array array of bugnotes
+ * @access public
+ */
 function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit, $p_user_id = null ) {
 	if( $p_user_id === null ) {
 		$t_user_id = auth_get_current_user_id();
@@ -315,12 +363,18 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 	return $t_bugnotes;
 }
 
-# --------------------
-# Build the bugnotes array for the given bug_id. Bugnotes are sorted by date_submitted
-# according to 'bugnote_order' configuration setting.
-# Return BugnoteData class object with raw values from the tables except the field
-# last_modified - it is UNIX_TIMESTAMP.
-# The data is not filtered by VIEW_STATE !!
+/**
+ * Build the bugnotes array for the given bug_id. Bugnotes are sorted by date_submitted
+ * according to 'bugnote_order' configuration setting.
+ * Return BugnoteData class object with raw values from the tables except the field
+ * last_modified - it is UNIX_TIMESTAMP.
+ * The data is not filtered by VIEW_STATE !!
+ * @param int $p_bug_id bug id
+ * @param int $p_user_bugnote_order sort order
+ * @param int $p_user_bugnote_limit number of bugnotes to display to user
+ * @return array array of bugnotes
+ * @access public
+ */
 function bugnote_get_all_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit ) {
 	global $g_cache_bugnotes;
 
@@ -388,11 +442,13 @@ function bugnote_get_all_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bug
 	return $g_cache_bugnotes[$p_bug_id][$p_user_bugnote_order];
 }
 
-# ===================================
-# Data Modification
-# ===================================
-# --------------------
-# Update the time_tracking field of the bugnote
+/**
+ * Update the time_tracking field of the bugnote
+ * @param int $p_bugnote_id bugnote id
+ * @param string $p_time_tracking timetracking string (hh:mm format)
+ * @return bool
+ * @access public
+ */
 function bugnote_set_time_tracking( $p_bugnote_id, $p_time_tracking ) {
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$c_bugnote_time_tracking = helper_duration_to_minutes( $p_time_tracking );
@@ -407,8 +463,12 @@ function bugnote_set_time_tracking( $p_bugnote_id, $p_time_tracking ) {
 	return true;
 }
 
-# --------------------
-# Update the last_modified field of the bugnote
+/**
+ * Update the last_modified field of the bugnote
+ * @param int $p_bugnote_id bugnote id
+ * @return bool
+ * @access public
+ */
 function bugnote_date_update( $p_bugnote_id ) {
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
@@ -422,8 +482,13 @@ function bugnote_date_update( $p_bugnote_id ) {
 	return true;
 }
 
-# --------------------
-# Set the bugnote text
+/**
+ * Set the bugnote text
+ * @param int $p_bugnote_id bugnote id
+ * @param string $p_bugnote_text bugnote text
+ * @return bool
+ * @access public
+ */
 function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 	$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
@@ -442,8 +507,13 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 	return true;
 }
 
-# --------------------
-# Set the view state of the bugnote
+/**
+ * Set the view state of the bugnote
+ * @param int $p_bugnote_id bugnote id
+ * @param bool $p_private 
+ * @return bool
+ * @access public
+ */
 function bugnote_set_view_state( $p_bugnote_id, $p_private ) {
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
@@ -456,7 +526,6 @@ function bugnote_set_view_state( $p_bugnote_id, $p_private ) {
 
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 
-	# update view_state
 	$query = "UPDATE $t_bugnote_table
 		          	SET view_state=" . db_param() . "
 		          	WHERE id=" . db_param();
@@ -467,24 +536,26 @@ function bugnote_set_view_state( $p_bugnote_id, $p_private ) {
 	return true;
 }
 
-# ===================================
-# Other
-# ===================================
-# --------------------
-# Pad the bugnote id with the appropriate number of zeros for printing
+/**
+ * Pad the bugnote id with the appropriate number of zeros for printing
+ * @param int $p_bugnote_id bugnote id
+ * @return string
+ * @access public
+ */
 function bugnote_format_id( $p_bugnote_id ) {
 	$t_padding = config_get( 'display_bugnote_padding' );
 
 	return str_pad( $p_bugnote_id, $t_padding, '0', STR_PAD_LEFT );
 }
 
-# ===================================
-# Bugnote Stats
-# ===================================
-# --------------------
-# Returns an array of bugnote stats
-# $p_from - Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
-# $p_to - Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
+/**
+ * Returns an array of bugnote stats
+ * @param int $p_bug_id bug id
+ * @param string $p_from Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
+ * @param string $p_to Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
+ * @return array array of bugnote stats
+ * @access public
+ */
 function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 	$c_from = db_bind_timestamp( $p_from . ' 00:00:00' );
@@ -523,10 +594,15 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 	return $t_results;
 }
 
-# --------------------
-# Returns an array of bugnote stats
-# $p_from - Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
-# $p_to - Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
+/**
+ * Returns an array of bugnote stats
+ * @param int $p_project_id project id
+ * @param string $p_from Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
+ * @param string $p_to Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
+ * @param int $p_cost cost
+ * @return array array of bugnote stats
+ * @access public
+ */
 function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 	$c_to = db_bind_timestamp( $p_to . ' 23:59:59' );

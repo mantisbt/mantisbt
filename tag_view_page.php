@@ -26,6 +26,9 @@
 	
 	$t_core_path = config_get( 'core_path' );
 
+	/**
+	 * requires tag_api
+	 */
 	require_once( $t_core_path . 'tag_api.php' );
 
 	access_ensure_global_level( config_get( 'tag_view_threshold' ) );

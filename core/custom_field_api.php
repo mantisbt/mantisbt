@@ -24,8 +24,17 @@
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
+/**
+ * requires bug_api
+ */
 require_once( $t_core_dir . 'bug_api.php' );
+/**
+ * requires helper_api
+ */
 require_once( $t_core_dir . 'helper_api.php' );
+/**
+ * requires date_api
+ */
 require_once( $t_core_dir . 'date_api.php' );
 
 # ## Custom Fields API ###

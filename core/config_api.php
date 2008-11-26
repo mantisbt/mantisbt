@@ -22,6 +22,9 @@
  * @link http://www.mantisbt.org
  */
 
+/**
+ * requires error_api
+ */
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'error_api.php' );
 
 # cache for config variables

@@ -24,6 +24,9 @@
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
+/**
+ * requires filter_api
+ */
 require_once( $t_core_dir . 'filter_api.php' );
 
 # ## Current User API ###

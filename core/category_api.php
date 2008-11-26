@@ -304,8 +304,8 @@ function category_exists( $p_category_id ) {
 /**
  * Sort categories based on what project they're in.
  * Call beforehand with a single parameter to set a 'preferred' project.
- * @return array $p_category1 array containing category details
- * @return array $p_category2 array containing category details
+ * @param array $p_category1 array containing category details
+ * @param array $p_category2 array containing category details
  * @return int integer representing sort order
  * @access public
  */

@@ -27,6 +27,9 @@
 
 	$t_core_path = config_get( 'core_path' );
 
+	/**
+	 * requires string_api
+	 */
 	require_once( $t_core_path.'string_api.php' );
 
 	// Copy 'id' parameter into 'bug_id' so it is found by the simple/advanced view page.

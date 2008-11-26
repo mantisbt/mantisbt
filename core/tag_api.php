@@ -27,7 +27,14 @@
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
+/**
+ * requires bug api
+ */
 require_once( $t_core_dir . 'bug_api.php' );
+
+/**
+ * requires history api
+ */
 require_once( $t_core_dir . 'history_api.php' );
 
 /**
