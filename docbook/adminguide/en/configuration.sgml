@@ -1090,7 +1090,7 @@
                 <term>$g_min_refresh_delay</term>
                 <listitem>
                     <para>This is the delay between automatic refreshes of the View
-                        Issues page. Make sure refresh delay in user preferences isn't too
+                        Issues page in minutes. Make sure refresh delay in user preferences isn't too
                         short. If a users set their preferences to be lower then it is
                         bumped back up to this minimum value. The default value is 10
                         minutes.

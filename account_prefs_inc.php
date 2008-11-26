@@ -112,7 +112,7 @@
 		<?php echo lang_get( 'refresh_delay' ) ?>
 	</td>
 	<td>
-		<input type="text" name="refresh_delay" size="4" maxlength="4" value="<?php echo $t_pref->refresh_delay ?>" />
+		<input type="text" name="refresh_delay" size="4" maxlength="4" value="<?php echo $t_pref->refresh_delay ?>" /> <?php echo lang_get( 'minutes' ) ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -120,7 +120,7 @@
 		<?php echo lang_get( 'redirect_delay' ) ?>
 	</td>
 	<td>
-		<input type="text" name="redirect_delay" size="1" maxlength="1" value="<?php echo $t_pref->redirect_delay ?>" />
+		<input type="text" name="redirect_delay" size="4" maxlength="1" value="<?php echo $t_pref->redirect_delay ?>" /> <?php echo lang_get( 'seconds' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
