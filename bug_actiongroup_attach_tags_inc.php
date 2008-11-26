@@ -22,6 +22,10 @@
 	 */
  
 	$t_core_path = config_get( 'core_path' );
+
+	/**
+	 * Requires Tag API
+	 */	
 	require_once( $t_core_path . 'tag_api.php' );
 
 	/**

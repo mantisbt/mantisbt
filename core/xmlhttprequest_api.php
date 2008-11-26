@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,14 +13,13 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
  * @package CoreAPI
  * @subpackage XMLHttpRequestAPI
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  */
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
@@ -30,6 +28,11 @@ require_once( $t_core_dir . 'profile_api.php' );
 require_once( $t_core_dir . 'logging_api.php' );
 require_once( $t_core_dir . 'projax_api.php' );
 
+/**
+ * 
+ * @return null
+ * @access public
+ */
 function xmlhttprequest_issue_reporter_combobox() {
 	$f_bug_id = gpc_get_int( 'issue_id' );
 
@@ -55,8 +58,11 @@ function xmlhttprequest_user_combobox() {
 	echo '</select>';
 }
 
-# ---------------
-# Echos a serialized list of platforms starting with the prefix specified in the $_POST
+/**
+ * Echos a serialized list of platforms starting with the prefix specified in the $_POST
+ * @return null
+ * @access public
+ */
 function xmlhttprequest_platform_get_with_prefix() {
 	$f_platform = gpc_get_string( 'platform' );
 
@@ -66,9 +72,12 @@ function xmlhttprequest_platform_get_with_prefix() {
 	echo projax_array_serialize_for_autocomplete( $t_matching_entries );
 }
 
-# ---------------
-# Echos a serialized list of OSes starting with the prefix specified in the $_POST
-function xmlhttprequest_os_get_with_prefix() {
+/**
+ * Echos a serialized list of OSes starting with the prefix specified in the $_POST
+ * @return null
+ * @access public
+ */
+ function xmlhttprequest_os_get_with_prefix() {
 	$f_os = gpc_get_string( 'os' );
 
 	$t_unique_entries = profile_get_field_all_for_user( 'os' );
@@ -77,8 +86,11 @@ function xmlhttprequest_os_get_with_prefix() {
 	echo projax_array_serialize_for_autocomplete( $t_matching_entries );
 }
 
-# ---------------
-# Echos a serialized list of OS Versions starting with the prefix specified in the $_POST
+/**
+ * Echos a serialized list of OS Versions starting with the prefix specified in the $_POST
+ * @return null
+ * @access public
+ */
 function xmlhttprequest_os_build_get_with_prefix() {
 	$f_os_build = gpc_get_string( 'os_build' );
 

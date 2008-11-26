@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,14 +13,13 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
  * @package CoreAPI
  * @subpackage ColumnsAPI
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  */
 
 /**
@@ -65,6 +63,9 @@ function columns_get_standard() {
 
 /**
  * Get all accessible columns for the current project / current user..
+ * @param int $p_project_id project id
+ * @return array array of columns
+ * @access public
  */
 function columns_get_all( $p_project_id = null ) {
 	$t_columns = columns_get_standard();
@@ -94,8 +95,9 @@ function columns_get_all( $p_project_id = null ) {
 /**
  * Checks if the specified column is an extended column.  Extended columns are native columns that are
  * associated with the issue but are saved in mantis_bug_text_table.
- * @param $p_column The column name
- * @returns true for extended; false otherwise.
+ * @param string $p_column The column name
+ * @return bool true for extended; false otherwise.
+ * @access public
  */
 function column_is_extended( $p_column ) {
 	switch( $p_column ) {
@@ -113,9 +115,9 @@ function column_is_extended( $p_column ) {
  * the column is a custom column and if so returns its name.  Note that for custom fields, then
  * provided names will have the "custom_" prefix, where the returned ones won't have the prefix.
  *
- * @param $p_column Column name.
- * @returns The custom field column name or null if the specific column is not a custom field
- * or invalid column.
+ * @param string $p_column Column name.
+ * @return string The custom field column name or null if the specific column is not a custom field or invalid column.
+ * @access public
  */
 function column_get_custom_field_name( $p_column ) {
 	if( strpos( $p_column, 'custom_' ) === 0 ) {
@@ -127,8 +129,9 @@ function column_get_custom_field_name( $p_column ) {
 
 /**
  * Converts a string of comma separate column names to an array.
- * @param $p_string - Comma separate column name (not case sensitive)
- * @returns The array with all column names lower case.
+ * @param string $p_string - Comma separate column name (not case sensitive)
+ * @return array The array with all column names lower case.
+ * @access public
  */
 function columns_string_to_array( $p_string ) {
 	$t_string = str_replace( ' ', '', $p_string );
@@ -142,8 +145,9 @@ function columns_string_to_array( $p_string ) {
 /**
  * Gets the localized title for the specified column.  The column can be native or custom.
  * The custom fields must contain the 'custom_' prefix.
- * @param $p_column - The column name.
- * @returns The column localized name.
+ * @param string $p_column - The column name.
+ * @return string The column localized name.
+ * @access public
  */
 function column_get_title( $p_column ) {
 	$t_custom_field = column_get_custom_field_name( $p_column );
@@ -194,9 +198,11 @@ function column_get_title( $p_column ) {
 
 /**
  * Checks an array of columns for duplicate or invalid fields.
- * @param $p_field_name - The logic name of the array being validated.  Used when triggering errors.
- * @param $p_columns_to_validate - The array of columns to validate.
- * @param $p_columns_all - The list of all valid columns.
+ * @param string $p_field_name - The logic name of the array being validated.  Used when triggering errors.
+ * @param array $p_columns_to_validate - The array of columns to validate.
+ * @param array $p_columns_all - The list of all valid columns.
+ * @return bool
+ * @access public 
  */
 function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns_all ) {
 	$t_columns_all_lower = array_map( 'strtolower', $p_columns_all );
@@ -229,9 +235,10 @@ function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns
  * Validates an array of column names and removes ones that are not valid.  The validation
  * is not case sensitive.
  *
- * @param $p_columns - The array of column names to be validated.
- * @param $p_columns_all - The array of all valid column names.
- * @returns The array of valid column names found in $p_columns.
+ * @param array $p_columns - The array of column names to be validated.
+ * @param array $p_columns_all - The array of all valid column names.
+ * @return array The array of valid column names found in $p_columns.
+ * @access public
  */
 function columns_remove_invalid( $p_columns, $p_columns_all ) {
 	$t_columns_all_lower = array_values( array_map( 'strtolower', $p_columns_all ) );
@@ -246,18 +253,38 @@ function columns_remove_invalid( $p_columns, $p_columns_all ) {
 	return $t_columns;
 }
 
-# --------------------
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_selection( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td> &nbsp; </td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_edit( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td> &nbsp; </td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'id' ), 'id', $p_sort, $p_dir, $p_columns_target );
@@ -265,7 +292,14 @@ function print_column_title_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TAR
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_project_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'email_project' ), 'project_id', $p_sort, $p_dir, $p_columns_target );
@@ -273,7 +307,14 @@ function print_column_title_project_id( $p_sort, $p_dir, $p_columns_target = COL
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_reporter_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'reporter' ), 'reporter_id', $p_sort, $p_dir, $p_columns_target );
@@ -281,7 +322,14 @@ function print_column_title_reporter_id( $p_sort, $p_dir, $p_columns_target = CO
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_handler_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'assigned_to' ), 'handler_id', $p_sort, $p_dir, $p_columns_target );
@@ -289,7 +337,14 @@ function print_column_title_handler_id( $p_sort, $p_dir, $p_columns_target = COL
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_priority( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'priority_abbreviation' ), 'priority', $p_sort, $p_dir, $p_columns_target );
@@ -297,7 +352,14 @@ function print_column_title_priority( $p_sort, $p_dir, $p_columns_target = COLUM
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null 
+ * @access public
+ */
 function print_column_title_reproducibility( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'reproducibility' ), 'reproducibility', $p_sort, $p_dir, $p_columns_target );
@@ -305,7 +367,14 @@ function print_column_title_reproducibility( $p_sort, $p_dir, $p_columns_target 
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_projection( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'projection' ), 'projection', $p_sort, $p_dir, $p_columns_target );
@@ -313,7 +382,14 @@ function print_column_title_projection( $p_sort, $p_dir, $p_columns_target = COL
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_eta( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'eta' ), 'eta', $p_sort, $p_dir, $p_columns_target );
@@ -321,7 +397,14 @@ function print_column_title_eta( $p_sort, $p_dir, $p_columns_target = COLUMNS_TA
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_resolution( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'resolution' ), 'resolution', $p_sort, $p_dir, $p_columns_target );
@@ -329,7 +412,14 @@ function print_column_title_resolution( $p_sort, $p_dir, $p_columns_target = COL
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_fixed_in_version( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'fixed_in_version' ), 'fixed_in_version', $p_sort, $p_dir, $p_columns_target );
@@ -337,7 +427,14 @@ function print_column_title_fixed_in_version( $p_sort, $p_dir, $p_columns_target
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_target_version( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'target_version' ), 'target_version', $p_sort, $p_dir, $p_columns_target );
@@ -345,7 +442,14 @@ function print_column_title_target_version( $p_sort, $p_dir, $p_columns_target =
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_view_state( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'view_status' ), 'view_state', $p_sort, $p_dir, $p_columns_target );
@@ -353,7 +457,14 @@ function print_column_title_view_state( $p_sort, $p_dir, $p_columns_target = COL
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_os( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'os' ), 'os', $p_sort, $p_dir, $p_columns_target );
@@ -361,7 +472,14 @@ function print_column_title_os( $p_sort, $p_dir, $p_columns_target = COLUMNS_TAR
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_os_build( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'os_version' ), 'os_build', $p_sort, $p_dir, $p_columns_target );
@@ -369,7 +487,14 @@ function print_column_title_os_build( $p_sort, $p_dir, $p_columns_target = COLUM
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_build( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	if( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
 		echo '<td>';
@@ -381,7 +506,14 @@ function print_column_title_build( $p_sort, $p_dir, $p_columns_target = COLUMNS_
 	}
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_platform( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'platform' ), 'platform', $p_sort, $p_dir, $p_columns_target );
@@ -389,7 +521,14 @@ function print_column_title_platform( $p_sort, $p_dir, $p_columns_target = COLUM
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_version( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'product_version' ), 'version', $p_sort, $p_dir, $p_columns_target );
@@ -397,7 +536,14 @@ function print_column_title_version( $p_sort, $p_dir, $p_columns_target = COLUMN
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_date_submitted( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'date_submitted' ), 'date_submitted', $p_sort, $p_dir, $p_columns_target );
@@ -405,7 +551,14 @@ function print_column_title_date_submitted( $p_sort, $p_dir, $p_columns_target =
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_attachment( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
 
@@ -418,7 +571,14 @@ function print_column_title_attachment( $p_sort, $p_dir, $p_columns_target = COL
 	}
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_category( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'category' ), 'category', $p_sort, $p_dir, $p_columns_target );
@@ -426,7 +586,14 @@ function print_column_title_category( $p_sort, $p_dir, $p_columns_target = COLUM
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_sponsorship_total( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo "\t<td>";
 	print_view_bug_sort_link( sponsorship_get_currency(), 'sponsorship_total', $p_sort, $p_dir, $p_columns_target );
@@ -434,7 +601,14 @@ function print_column_title_sponsorship_total( $p_sort, $p_dir, $p_columns_targe
 	echo "</td>\n";
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_severity( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'severity' ), 'severity', $p_sort, $p_dir, $p_columns_target );
@@ -442,7 +616,14 @@ function print_column_title_severity( $p_sort, $p_dir, $p_columns_target = COLUM
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_status( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'status' ), 'status', $p_sort, $p_dir, $p_columns_target );
@@ -450,7 +631,14 @@ function print_column_title_status( $p_sort, $p_dir, $p_columns_target = COLUMNS
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_last_updated( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'updated' ), 'last_updated', $p_sort, $p_dir, $p_columns_target );
@@ -458,7 +646,14 @@ function print_column_title_last_updated( $p_sort, $p_dir, $p_columns_target = C
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_summary( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_view_bug_sort_link( lang_get( 'summary' ), 'summary', $p_sort, $p_dir, $p_columns_target );
@@ -466,33 +661,67 @@ function print_column_title_summary( $p_sort, $p_dir, $p_columns_target = COLUMN
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_bugnotes_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td> # </td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_description( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	echo lang_get( 'description' );
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_steps_to_reproduce( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	echo lang_get( 'steps_to_reproduce' );
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_additional_information( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	echo lang_get( 'additional_information' );
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_selection( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_checkboxes_exist, $t_update_bug_threshold;
 
@@ -506,7 +735,13 @@ function print_column_selection( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_edit( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path, $t_update_bug_threshold;
 	$t_is_overdue = bug_is_overdue( $p_row['id'] );
@@ -543,7 +778,13 @@ function print_column_edit( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_priority( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	if( ON == config_get( 'show_priority_text' ) ) {
@@ -554,14 +795,26 @@ function print_column_priority( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_id( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	print_bug_link( $p_row['id'], false );
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_sponsorship_total( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo "\t<td class=\"right\">";
 
@@ -573,7 +826,13 @@ function print_column_sponsorship_total( $p_row, $p_columns_target = COLUMNS_TAR
 	echo "</td>\n";
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_bugnotes_count( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_filter;
 
@@ -602,7 +861,13 @@ function print_column_bugnotes_count( $p_row, $p_columns_target = COLUMNS_TARGET
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_attachment( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
 
@@ -628,7 +893,13 @@ function print_column_attachment( $p_row, $p_columns_target = COLUMNS_TARGET_VIE
 	echo "</td>\n";
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_category_id( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_sort, $t_dir;
 
@@ -649,24 +920,48 @@ function print_column_category_id( $p_row, $p_columns_target = COLUMNS_TARGET_VI
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_severity( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="center">';
 	print_formatted_severity_string( $p_row['status'], $p_row['severity'] );
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_eta( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="center">', get_enum_element( 'eta', $p_row['eta'] ), '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_resolution( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="center">', get_enum_element( 'resolution', $p_row['resolution'] ), '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_status( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="center">';
 	printf( '<span class="issue-status" title="%s">%s</span>', get_enum_element( 'resolution', $p_row['resolution'] ), get_enum_element( 'status', $p_row['status'] ) );
@@ -678,7 +973,13 @@ function print_column_status( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PA
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_handler_id( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="center">';
 
@@ -691,14 +992,26 @@ function print_column_handler_id( $p_row, $p_columns_target = COLUMNS_TARGET_VIE
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_reporter_id( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="center">';
 	echo prepare_user_name( $p_row['reporter_id'] );
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_last_updated( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_filter;
 
@@ -713,14 +1026,26 @@ function print_column_last_updated( $p_row, $p_columns_target = COLUMNS_TARGET_V
 	echo '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_date_submitted( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_date_submitted = date( config_get( 'short_date_format' ), $p_row['date_submitted'] );
 
 	echo '<td class="center">', $t_date_submitted, '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_summary( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
 
@@ -737,8 +1062,13 @@ function print_column_summary( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_P
 	echo '</td>';
 }
 
-# --------------------
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_description( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_bug = bug_get( $p_row['id'], true );
 
@@ -747,7 +1077,13 @@ function print_column_description( $p_row, $p_columns_target = COLUMNS_TARGET_VI
 	echo '<td class="left">', $t_description, '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_steps_to_reproduce( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_bug = bug_get( $p_row['id'], true );
 
@@ -756,7 +1092,13 @@ function print_column_steps_to_reproduce( $p_row, $p_columns_target = COLUMNS_TA
 	echo '<td class="left">', $t_steps_to_reproduce, '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_additional_information( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_bug = bug_get( $p_row['id'], true );
 
@@ -765,7 +1107,13 @@ function print_column_additional_information( $p_row, $p_columns_target = COLUMN
 	echo '<td class="left">', $t_additional_information, '</td>';
 }
 
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+/**
+ * 
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_target_version( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 

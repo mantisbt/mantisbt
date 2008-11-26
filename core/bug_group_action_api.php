@@ -134,9 +134,7 @@ function bug_group_action_validate( $p_action, $p_bug_id ) {
  *
  * @param $p_action   The custom action name without the "EXT_" prefix.
  * @param $p_bug_id   The id of the bug to validate the action on.
- *
- * @returns true      Action can be applied.
- * @returns array( bug_id => reason for failure to process )
+ * @returns true|array Action can be applied., ( bug_id => reason for failure to process )
  */
 function bug_group_action_process( $p_action, $p_bug_id ) {
 	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );

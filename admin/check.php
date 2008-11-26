@@ -14,10 +14,20 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
+ 
 error_reporting( E_ALL );
 
 $g_skip_open_db = true;  # don't open the database in database_api.php
 
+/**
+ * Mantis Core API's
+ */
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
 $t_core_path = config_get_global( 'core_path' );

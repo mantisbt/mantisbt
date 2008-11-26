@@ -14,42 +14,45 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * This include file prints out the list of bugnotes attached to the bug
-	 * $f_bug_id must be set and be set to the bug id
-	 *
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
+/**
+ * This include file prints out the list of bugnotes attached to the bug
+ * $f_bug_id must be set and be set to the bug id
+ *
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
 
-	$t_core_path = config_get( 'core_path' );
+$t_core_path = config_get( 'core_path' );
 
-	require_once( $t_core_path.'current_user_api.php' );
+/**
+ * Requires bugnote API
+ */
+require_once( $t_core_path.'current_user_api.php' );
 
-	# grab the user id currently logged in
-	$t_user_id = auth_get_current_user_id();
+# grab the user id currently logged in
+$t_user_id = auth_get_current_user_id();
 
-	# get the bugnote data
-	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
-	$t_bugnotes = bugnote_get_all_visible_bugnotes( $f_bug_id, $t_bugnote_order, 0, $t_user_id );
+# get the bugnote data
+$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
+$t_bugnotes = bugnote_get_all_visible_bugnotes( $f_bug_id, $t_bugnote_order, 0, $t_user_id );
 	
-	#precache users
-	$t_bugnote_users = array();
-	foreach($t_bugnotes as $t_bugnote) {
-		$t_bugnote_users[] = $t_bugnote->reporter_id;
-	}
-	user_cache_array_rows( $t_bugnote_users );
+#precache users
+$t_bugnote_users = array();
+foreach($t_bugnotes as $t_bugnote) {
+	$t_bugnote_users[] = $t_bugnote->reporter_id;
+}
+user_cache_array_rows( $t_bugnote_users );
 	
-	#precache access levels
-	if ( isset( $g_project_override ) ) { 
-		access_cache_matrix_project( $g_project_override );
-	} else {
-		access_cache_matrix_project( helper_get_current_project() );
-	}
+#precache access levels
+if ( isset( $g_project_override ) ) { 
+	access_cache_matrix_project( $g_project_override );
+} else {
+	access_cache_matrix_project( helper_get_current_project() );
+}
 	
-	$num_notes = sizeof( $t_bugnotes );
+$num_notes = sizeof( $t_bugnotes );
 ?>
 
 <?php # Bugnotes BEGIN ?>

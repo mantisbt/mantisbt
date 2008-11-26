@@ -45,8 +45,8 @@
 	/**
 	 * Validates the action on the specified bug id.
 	 * 
-	 * @returns true    Action can be applied.
-	 * @returns array( bug_id => reason for failure )	 
+	 * @param $p_bug_id Bug ID
+	 * @return true|array  Action can be applied., bug_id => reason for failure
 	 */
 	function action_update_product_build_validate( $p_bug_id ) {
 		$t_bug_id = (int)$p_bug_id;
@@ -70,9 +70,7 @@
 	 * Executes the custom action on the specified bug id.
 	 * 
 	 * @param $p_bug_id  The bug id to execute the custom action on.
-	 * 
-	 * @returns true   Action executed successfully.
-	 * @returns array( bug_id => reason for failure )               	 
+	 * @returns true|array Action executed successfully., ( bug_id => reason for failure )               	 
 	 */
 	function action_update_product_build_process( $p_bug_id ) {
 		$f_build = gpc_get_string( 'build' );

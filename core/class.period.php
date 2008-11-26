@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,10 +13,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
  * Class for actions dealing with date periods
@@ -27,8 +22,8 @@
  *
  * @copyright Logical Outcome Ltd. 2005 - 2007
  * @author Glenn Henshaw <thraxisp@logicaloutcome.ca>
+ * @link http://www.mantisbt.org
  *
- * @version $Id$
  */
 class Period {
 
@@ -109,7 +104,8 @@ class Period {
 	/**
 	* set dates for a week
 	*
-	* @param string date string to expand to a week (Sun to Sat)
+	* @param string $p_when date string to expand to a week (Sun to Sat)
+	* @param int $p_weeks number of weeks
 	*/
 	function a_week( $p_when, $p_weeks = 1 ) {
 		list( $t_year, $t_month, $t_day ) = split( "-", $p_when );
@@ -129,6 +125,7 @@ class Period {
 	/**
 	* set dates for last week
 	*
+	* @param int $p_weeks number of weeks
 	*/
 	function last_week( $p_weeks = 1 ) {
 		$this->a_week( date( 'Y-m-d', strtotime( '-' . $p_weeks . ' week' ) ), $p_weeks );
@@ -146,7 +143,7 @@ class Period {
 	/**
 	* set dates for a month
 	*
-	* @param string date string to expand to a month
+	* @param string $p_when date string to expand to a month
 	*/
 	function a_month( $p_when ) {
 		list( $t_year, $t_month, $t_day ) = split( "-", $p_when );
@@ -183,7 +180,7 @@ class Period {
 	/**
 	* set dates for a quarter
 	*
-	* @param string date string to expand to a quarter
+	* @param string $p_when date string to expand to a quarter
 	*/
 	function a_quarter( $p_when ) {
 		list( $t_year, $t_month, $t_day ) = split( "-", $p_when );
@@ -222,7 +219,7 @@ class Period {
 	/**
 	* set dates for a year
 	*
-	* @param string date string to expand to a year
+	* @param string $p_when date string to expand to a year
 	*/
 	function a_year( $p_when ) {
 		list( $t_year, $t_month, $t_day ) = split( "-", $p_when );
@@ -299,6 +296,7 @@ class Period {
 	/**
 	* print a period selector
 	*
+	* @param string $p_control_name
 	*/
 	function period_selector( $p_control_name ) {
 		$t_periods = array(
@@ -336,6 +334,9 @@ class Period {
 	/**
 	* set date based on period selector
 	*
+	* @param string $p_control_name
+	* @param string $p_start_field
+	* @param string $p_end_field
 	*/
 	function set_period_from_selector( $p_control_name, $p_start_field = 'start_date', $p_end_field = 'end_date' ) {
 		$t_default = gpc_get_int( $p_control_name, 0 );

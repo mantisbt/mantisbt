@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,14 +13,13 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
  * @package CoreAPI
  * @subpackage CustomFieldAPI
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  */
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
@@ -38,9 +36,6 @@ require_once( $t_core_dir . 'date_api.php' );
 #	- make existing api functions use caching functions
 #	- add functions to return individual db columns for a field definition
 # *******************************************
-# ===================================
-# Custom Field Types
-# ===================================
 
 $g_custom_field_types[CUSTOM_FIELD_TYPE_STRING] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_NUMERIC] = 'standard';
@@ -64,9 +59,7 @@ function custom_field_allow_manage_display( $p_type, $p_display ) {
 	return false;
 }
 
-# ===================================
-# Caching
-# ===================================
+
 # ########################################
 # SECURITY NOTE: cache globals are initialized here to prevent them
 #   being spoofed if register_globals is turned on
@@ -75,10 +68,16 @@ $g_cache_custom_field = array();
 $g_cache_cf_list = NULL;
 $g_cache_cf_linked = array();
 
-# Cache a custom field row if necessary and return the cached copy
-#  If the second parameter is true (default), trigger an error
-#  if the field can't be found.  If the second parameter is
-#  false, return false if the field can't be found.
+/**
+ * Cache a custom field row if necessary and return the cached copy
+ * If the second parameter is true (default), trigger an error
+ * if the field can't be found.  If the second parameter is
+ * false, return false if the field can't be found.
+ * @param int $p_field_id integer representing custom field id
+ * @param bool $p_trigger_errors indicates whether to trigger an error if the field is not found
+ * @return array array representing custom field
+ * @access public
+ */
 function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 	global $g_cache_custom_field;
 
@@ -111,6 +110,12 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 	return $row;
 }
 
+/**
+ * Cache custom fields contained within an array of field id's
+ * @param array $p_cf_id_array array of custom field id's
+ * @return null
+ * @access public
+ */
 function custom_field_cache_array_rows( $p_cf_id_array ) {
 	global $g_cache_custom_field;
 	$c_cf_id_array = array();
@@ -138,8 +143,12 @@ function custom_field_cache_array_rows( $p_cf_id_array ) {
 	return;
 }
 
-# --------------------
-# Clear the custom field cache (or just the given id if specified)
+/**
+ * Clear the custom field cache (or just the given id if specified)
+ * @param int $p_field_id custom field id
+ * @return bool
+ * @access public
+ */
 function custom_field_clear_cache( $p_field_id = null ) {
 	global $g_cache_custom_field, $g_cached_custom_field_lists;
 
@@ -155,13 +164,14 @@ function custom_field_clear_cache( $p_field_id = null ) {
 	return true;
 }
 
-# ===================================
-# Boolean queries and ensures
-# ===================================
-# --------------------
-# Check to see whether the field is included in the given project
-#  return true if the field is included, false otherwise
-#
+/**
+ * Check to see whether the field is included in the given project
+ * return true if the field is included, false otherwise
+ * @param int $p_field_id custom field id
+ * @param int $p_project_id project id
+ * @return bool
+ * @access public
+ */
 function custom_field_is_linked( $p_field_id, $p_project_id ) {
 	global $g_cache_cf_linked;
 
@@ -191,8 +201,13 @@ function custom_field_is_linked( $p_field_id, $p_project_id ) {
 	}
 }
 
-# Check to see whether the field id is defined
-#  return true if the field is defined, false otherwise
+/**
+ * Check to see whether the field id is defined
+ * return true if the field is defined, false otherwise
+ * @param int $p_field_id custom field id
+ * @return bool
+ * @access public
+ */
 function custom_field_exists( $p_field_id ) {
 	if( false == custom_field_cache_row( $p_field_id, false ) ) {
 		return false;
@@ -201,7 +216,12 @@ function custom_field_exists( $p_field_id ) {
 	}
 }
 
-# Return the type of a custom field if it exists.
+/**
+ * Return the type of a custom field if it exists.
+ * @param int $p_field_id custom field id
+ * @return int custom field type
+ * @access public
+ */
 function custom_field_type( $p_field_id ) {
 	$t_field = custom_field_cache_row( $p_field_id, false );
 	if( $t_field == false ) {
@@ -211,8 +231,13 @@ function custom_field_type( $p_field_id ) {
 	}
 }
 
-# Check to see whether the field id is defined
-#  return true if the field is defined, error otherwise
+/**
+ * Check to see whether the field id is defined
+ * return true if the field is defined, error otherwise
+ * @param int $p_field_id custom field id
+ * @return bool
+ * @access public
+ */
 function custom_field_ensure_exists( $p_field_id ) {
 	if( custom_field_exists( $p_field_id ) ) {
 		return true;
@@ -222,10 +247,16 @@ function custom_field_ensure_exists( $p_field_id ) {
 	}
 }
 
-# Check to see whether the name is unique
-#  return false if a field with the name already exists, true otherwise
-#  if an id is specified, then the corresponding record is excluded from the
-#  uniqueness test.
+/**
+ * Check to see whether the name is unique
+ * return false if a field with the name already exists, true otherwise
+ * if an id is specified, then the corresponding record is excluded from the
+ * uniqueness test.
+ * @param string $p_name custom field name
+ * @param int $p_custom_field_id custom field id
+ * @return bool
+ * @access public
+ */
 function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
 	$c_name = db_prepare_string( $p_name );
 
@@ -247,8 +278,13 @@ function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
 	}
 }
 
-# Check to see whether the name is unique
-#  return true if the name has not been used, error otherwise
+/**
+ * Check to see whether the name is unique
+ * return true if the name has not been used, error otherwise
+ * @param string $p_name Custom field name
+ * @return bool
+ * @access public
+ */
 function custom_field_ensure_name_unique( $p_name ) {
 	if( custom_field_is_name_unique( $p_name ) ) {
 		return true;
@@ -257,8 +293,15 @@ function custom_field_ensure_name_unique( $p_name ) {
 	}
 }
 
-# Return true if the user can read the value of the field for the given bug,
-#  false otherwise.
+/**
+ * Return true if the user can read the value of the field for the given bug,
+ * false otherwise.
+ * @param int $p_field_id custom field id
+ * @param int $p_bug_id bug id
+ * @param int $p_user_id user id
+ * @return bool
+ * @access public
+ */
 function custom_field_has_read_access( $p_field_id, $p_bug_id, $p_user_id = null ) {
 	custom_field_ensure_exists( $p_field_id );
 
@@ -273,8 +316,15 @@ function custom_field_has_read_access( $p_field_id, $p_bug_id, $p_user_id = null
 	return access_has_project_level( $t_access_level_r, $t_project_id, $p_user_id );
 }
 
-# Return true if the user can read the value of the field for the given project,
-# false otherwise.
+/**
+ * Return true if the user can read the value of the field for the given project,
+ * false otherwise.
+ * @param int $p_field_id custom field id
+ * @param int $p_project_id bug id
+ * @param int $p_user_id user id
+ * @return bool
+ * @access public
+ */
 function custom_field_has_read_access_by_project_id( $p_field_id, $p_project_id, $p_user_id = null ) {
 	custom_field_ensure_exists( $p_field_id );
 
@@ -287,8 +337,15 @@ function custom_field_has_read_access_by_project_id( $p_field_id, $p_project_id,
 	return access_has_project_level( $t_access_level_r, $p_project_id, $p_user_id );
 }
 
-# Return true if the user can modify the value of the field for the given project,
-#  false otherwise.
+/**
+ * Return true if the user can modify the value of the field for the given project,
+ * false otherwise.
+ * @param int $p_field_id custom field id
+ * @param int $p_project_id bug id
+ * @param int $p_user_id user id
+ * @return bool
+ * @access public
+ */
 function custom_field_has_write_access_to_project( $p_field_id, $p_project_id, $p_user_id = null ) {
 	custom_field_ensure_exists( $p_field_id );
 
@@ -301,19 +358,28 @@ function custom_field_has_write_access_to_project( $p_field_id, $p_project_id, $
 	return access_has_project_level( $t_access_level_rw, $p_project_id, $p_user_id );
 }
 
-# Return true if the user can modify the value of the field for the given bug,
-#  false otherwise.
+/**
+ * Return true if the user can modify the value of the field for the given bug,
+ * false otherwise.
+ * @param int $p_field_id custom field id
+ * @param int $p_bug_id bug id
+ * @param int $p_user_id user id
+ * @return bool
+ * @access public
+ */
 function custom_field_has_write_access( $p_field_id, $p_bug_id, $p_user_id = null ) {
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 	return( custom_field_has_write_access_to_project( $p_field_id, $t_project_id, $p_user_id ) );
 }
 
-# ===================================
-# Creation / Deletion / Updating
-# ===================================
-# create a new custom field with the name $p_name
-# the definition are the default values and can be changes later
-# return the ID of the new definition
+/**
+ * create a new custom field with the name $p_name 
+ * the definition are the default values and can be changes later
+ * return the ID of the new definition
+ * @param string $p_name custom field name
+ * @return int custom field id
+ * @access public
+ */
 function custom_field_create( $p_name ) {
 	if( string_contains_scripting_chars( $p_name ) ) {
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
@@ -339,8 +405,14 @@ function custom_field_create( $p_name ) {
 	return db_insert_id( $t_custom_field_table );
 }
 
-# Update the field definition
-#  return true on success, false on failure
+/**
+ * Update the field definition
+ * return true on success, false on failure
+ * @param int $p_field_id custom field id
+ * @param array custom field definition
+ * @return bool
+ * @access public
+ */
 function custom_field_update( $p_field_id, $p_def_array ) {
 	if( string_contains_scripting_chars( $p_def_array['name'] ) ) {
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
@@ -541,7 +613,6 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 		$query .= "require_closed='$c_require_closed'";
 	}
 
-
 	$query .= " WHERE id='$c_field_id'";
 
 	if( $t_update_something ) {
@@ -557,8 +628,14 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 	return true;
 }
 
-# Add a custom field to a project
-#  return true on success, false on failure or if already added
+/**
+ * Add a custom field to a project
+ * return true on success, false on failure or if already added
+ * @param int $p_field_id custom field id
+ * @param int $p_project_id project id
+ * @return bool
+ * @access public
+ */
 function custom_field_link( $p_field_id, $p_project_id ) {
 	$c_field_id = db_prepare_int( $p_field_id );
 	$c_project_id = db_prepare_int( $p_project_id );
@@ -581,12 +658,18 @@ function custom_field_link( $p_field_id, $p_project_id ) {
 	return true;
 }
 
-# Remove a custom field from a project
-#  return true on success, false on failure
-#
-# The values for the custom fields are not deleted.  This is to allow for the
-# case where a bug is moved to another project that has the field, or the
-# field is linked again to the project.
+/**
+ * Remove a custom field from a project
+ * return true on success, false on failure
+ * 
+ * The values for the custom fields are not deleted.  This is to allow for the
+ * case where a bug is moved to another project that has the field, or the
+ * field is linked again to the project.
+ * @param int $p_field_id custom field id
+ * @param int $p_project_id project id
+ * @return bool
+ * @access public
+ */
 function custom_field_unlink( $p_field_id, $p_project_id ) {
 	$c_field_id = db_prepare_int( $p_field_id );
 	$c_project_id = db_prepare_int( $p_project_id );
@@ -601,9 +684,13 @@ function custom_field_unlink( $p_field_id, $p_project_id ) {
 	return true;
 }
 
-# Delete the field definition and all associated values and project
-#  associations
-#  return true on success, false on failure
+/**
+ * Delete the field definition and all associated values and project associations
+ * return true on success, false on failure
+ * @param int $p_field_id custom field id
+ * @return bool
+ * @access public
+ */
 function custom_field_destroy( $p_field_id ) {
 	$c_field_id = db_prepare_int( $p_field_id );
 
@@ -632,10 +719,15 @@ function custom_field_destroy( $p_field_id ) {
 	return true;
 }
 
-# Delete all associations of custom fields to the specified project
-#  return true on success, false on failure
-#
-# To be called from within project_delete().
+/**
+ * Delete all associations of custom fields to the specified project
+ * return true on success, false on failure
+ *
+ * To be called from within project_delete().
+ * @param int $p_project_id project id
+ * @return bool
+ * @access public
+ */
 function custom_field_unlink_all( $p_project_id ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
@@ -649,10 +741,15 @@ function custom_field_unlink_all( $p_project_id ) {
 	return true;
 }
 
-# Delete all custom values associated with the specified bug.
-#  return true on success, false on failure
-#
-# To be called from bug_delete().
+/**
+ * Delete all custom values associated with the specified bug.
+ * return true on success, false on failure
+ *
+ * To be called from bug_delete().
+ * @param int $p_bug_id bug id
+ * @return bool
+ * @access public
+ */
 function custom_field_delete_all_values( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
@@ -665,11 +762,14 @@ function custom_field_delete_all_values( $p_bug_id ) {
 	return true;
 }
 
-# ===================================
-# Data Access
-# ===================================
-# Get the id of the custom field with the specified name.
-# false is returned if no custom field found with the specified name.
+/**
+ * Get the id of the custom field with the specified name.
+ * false is returned if no custom field found with the specified name.
+ * @param string $p_field_name custom field name
+ * @param int $p_truncated_length
+ * @return bool|int false or custom field id
+ * @access public
+ */
 function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = null ) {
 	if( $p_field_name == '' ) {
 		return false;
@@ -699,9 +799,14 @@ function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = nul
 	return $row['id'];
 }
 
-# Return an array of ids of custom fields bound to the specified project
-#
-# The ids will be sorted based on the sequence number associated with the binding
+/**
+ * Return an array of ids of custom fields bound to the specified project
+ *
+ * The ids will be sorted based on the sequence number associated with the binding
+ * @param int $p_project_id project id
+ * @return array
+ * @access public
+ */
 function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 	global $g_cache_cf_linked, $g_cache_custom_field;
 
@@ -773,7 +878,11 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 	return $t_ids;
 }
 
-# Return an array all custom field ids sorted by name
+/**
+ * Return an array all custom field ids sorted by name
+ * @return array
+ * @access public
+ */
 function custom_field_get_ids() {
 	global $g_cache_cf_list, $g_cache_custom_field;
 
@@ -800,8 +909,13 @@ function custom_field_get_ids() {
 	return $t_ids;
 }
 
-# Return an array of ids of projects related to the specified custom field
-# (the array may be empty)
+/**
+ * Return an array of ids of projects related to the specified custom field
+ * (the array may be empty)
+ * @param int $p_field_id custom field id
+ * @return array
+ * @access public
+ */
 function custom_field_get_project_ids( $p_field_id ) {
 	$c_field_id = db_prepare_int( $p_field_id );
 
@@ -823,15 +937,24 @@ function custom_field_get_project_ids( $p_field_id ) {
 	return $t_ids;
 }
 
-# Return a field definition row for the field or error if the field does
-#  not exist
+/**
+ * Return a field definition row for the field or error if the field does not exist
+ * @param int $p_field_id custom field id
+ * @return array custom field definition
+ * @access public
+ */
 function custom_field_get_definition( $p_field_id ) {
 	return custom_field_cache_row( $p_field_id );
 }
 
-# Return a single database field from a custom field definition row
-#  for the field
-# if the database field does not exist, display a warning and return ''
+/**
+ * Return a single database field from a custom field definition row for the field
+ * if the database field does not exist, display a warning and return ''
+ * @param int $p_field_id custom field id
+ * @param int $p_field_name custom field name
+ * @return string
+ * @access public
+ */
 function custom_field_get_field( $p_field_id, $p_field_name ) {
 	$row = custom_field_get_definition( $p_field_id );
 
@@ -844,10 +967,15 @@ function custom_field_get_field( $p_field_id, $p_field_name ) {
 	}
 }
 
-# Get the value of a custom field for the given bug
-#
-# @@@ return values are unclear... should we error when access is denied
-#   and provide an api to check whether it will be?
+/**
+ * Get the value of a custom field for the given bug
+ * @todo return values are unclear... should we error when access is denied
+ * and provide an api to check whether it will be?
+ * @param int $p_field_id custom field id
+ * @param int $p_bug_id bug id
+ * @return mixed
+ * @access public
+ */
 function custom_field_get_value( $p_field_id, $p_bug_id ) {
 	$c_field_id = db_prepare_int( $p_field_id );
 	$c_bug_id = db_prepare_int( $p_bug_id );
@@ -882,10 +1010,16 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 	}
 }
 
-# Gets the custom fields array for the given bug readable by specified level.
-# Array keys are custom field names. Array is sorted by custom field sequence number;
-# Array items are arrays with the next keys:
-# 'type', 'value', 'access_level_r'
+/**
+ * Gets the custom fields array for the given bug readable by specified level.
+ * Array keys are custom field names. Array is sorted by custom field sequence number;
+ * Array items are arrays with the next keys:
+ * 'type', 'value', 'access_level_r'
+ * @param int $p_bug_id bug id
+ * @param int $p_user_access_level Access level
+ * @return  array
+ * @access public
+ */
 function custom_field_get_linked_fields( $p_bug_id, $p_user_access_level ) {
 	$t_custom_fields = custom_field_get_all_linked_fields( $p_bug_id );
 
@@ -898,9 +1032,14 @@ function custom_field_get_linked_fields( $p_bug_id, $p_user_access_level ) {
 	return $t_custom_fields;
 }
 
-# Gets the custom fields array for the given bug. Array keys are custom field names.
-# Array is sorted by custom field sequence number; Array items are arrays with the next keys:
-# 'type', 'value', 'access_level_r'
+/**
+ * Gets the custom fields array for the given bug. Array keys are custom field names.
+ * Array is sorted by custom field sequence number; Array items are arrays with the next keys:
+ * 'type', 'value', 'access_level_r'
+ * @param int $p_bug_id bug id
+ * @return  array
+ * @access public
+ */
 function custom_field_get_all_linked_fields( $p_bug_id ) {
 	global $g_cached_custom_field_lists;
 
@@ -953,8 +1092,14 @@ function custom_field_get_all_linked_fields( $p_bug_id ) {
 	return $g_cached_custom_field_lists[$p_bug_id];
 }
 
-# Gets the sequence number for the specified custom field for the specified
-# project.  Returns false in case of error.
+/**
+ * Gets the sequence number for the specified custom field for the specified
+ * project.  Returns false in case of error.
+ * @param int $p_field_id custom field id
+ * @param int $p_project_id project id
+ * @return int|bool
+ * @access public
+ */
 function custom_field_get_sequence( $p_field_id, $p_project_id ) {
 	$c_field_id = db_prepare_int( $p_field_id );
 	$c_project_id = db_prepare_int( $p_project_id );
@@ -975,8 +1120,14 @@ function custom_field_get_sequence( $p_field_id, $p_project_id ) {
 	return $t_row['sequence'];
 }
 
-# Allows the validation of a custom field value without setting it
-# or needing a bug to exist.
+/**
+ * Allows the validation of a custom field value without setting it
+ * or needing a bug to exist.
+ * @param int $p_field_id custom field id
+ * @param string $p_value custom field value
+ * @return bool
+ * @access public
+ */
 function custom_field_validate( $p_field_id, $p_value ) {
 	$c_field_id = db_prepare_int( $p_field_id );
 	$c_value = db_prepare_string( $p_value );
@@ -1017,9 +1168,13 @@ function custom_field_validate( $p_field_id, $p_value ) {
 	return true;
 }
 
-# $p_possible_values: possible values to be pre-processed.  If it has enum values,
-#                     it will be left as is.  If it has a method, it will be replaced
-#                     by the list.
+/**
+ * $p_possible_values: possible values to be pre-processed.  If it has enum values,
+ * it will be left as is.  If it has a method, it will be replaced by the list.
+ * @param string $p_possible_values
+ * @return string|array
+ * @access public
+ */               
 function custom_field_prepare_possible_values( $p_possible_values ) {
 	$t_possible_values = $p_possible_values;
 
@@ -1030,7 +1185,13 @@ function custom_field_prepare_possible_values( $p_possible_values ) {
 	return $t_possible_values;
 }
 
-# Get All Possible Values for a Field.
+/**
+ * Get All Possible Values for a Field.
+ * @param array $p_field_def custom field definition
+ * @param int $p_project_id project id
+ * @return bool|array
+ * @access public
+ */
 function custom_field_distinct_values( $p_field_def, $p_project_id = ALL_PROJECTS ) {
 	global $g_custom_field_type_definition;
 	$c_field_id = $p_field_def['id'];
@@ -1069,11 +1230,14 @@ function custom_field_distinct_values( $p_field_def, $p_project_id = ALL_PROJECT
 	return $t_return_arr;
 }
 
-# ===================================
-# Data Modification
-# ===================================
-# Convert the value to save it into the database, depending of the type
-# return value for database
+/**
+ * Convert the value to save it into the database, depending of the type
+ * return value for database
+ * @param mixed $p_value
+ * @param int $p_type
+ * @return mixed
+ * @access public
+ */
 function custom_field_value_to_database( $p_value, $p_type ) {
 	global $g_custom_field_type_definition;
 	if( isset( $g_custom_field_type_definition[$p_type]['#function_value_to_database'] ) ) {
@@ -1082,8 +1246,14 @@ function custom_field_value_to_database( $p_value, $p_type ) {
 	return $p_value;
 }
 
-# Convert the database-value to value, depending of the type
-# return value for further operation
+/**
+ * Convert the database-value to value, depending of the type
+ * return value for further operation
+ * @param mixed $p_value
+ * @param int $p_type
+ * @return mixed
+ * @access public
+ */
 function custom_field_database_to_value( $p_value, $p_type ) {
 	global $g_custom_field_type_definition;
 	if( isset( $g_custom_field_type_definition[$p_type]['#function_database_to_value'] ) ) {
@@ -1092,8 +1262,14 @@ function custom_field_database_to_value( $p_value, $p_type ) {
 	return $p_value;
 }
 
-# Convert the default-value to value depending on the type.  For example, in case of date, this
-# would translate 'tomorrow' to tomorrow's date.
+/**
+ * Convert the default-value to value depending on the type.  For example, in case of date, this
+ * would translate 'tomorrow' to tomorrow's date.
+ * @param mixed $p_value
+ * @param int $p_type
+ * @return mixed
+ * @access public
+ */
 function custom_field_default_to_value( $p_value, $p_type ) {
 	global $g_custom_field_type_definition;
 
@@ -1104,8 +1280,15 @@ function custom_field_default_to_value( $p_value, $p_type ) {
 	return $p_value;
 }
 
-# Set the value of a custom field for a given bug
-#  return true on success, false on failure
+/**
+ * Set the value of a custom field for a given bug
+ * return true on success, false on failure
+ * @param int $p_field_id custom field id
+ * @param int $p_bug_id bug id
+ * @param mixed $p_value
+ * @return bool
+ * @access public
+ */
 function custom_field_set_value( $p_field_id, $p_bug_id, $p_value ) {
 	$c_field_id = db_prepare_int( $p_field_id );
 	$c_bug_id = db_prepare_int( $p_bug_id );
@@ -1186,8 +1369,15 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value ) {
 	return true;
 }
 
-# Sets the sequence number for the specified custom field for the specified
-# project.
+/**
+ * Sets the sequence number for the specified custom field for the specified
+ * project.
+ * @param int $p_field_id custom field id
+ * @param int $p_project_id project id
+ * @param int $p_sequence
+ * @return bool
+ * @access public
+ */
 function custom_field_set_sequence( $p_field_id, $p_project_id, $p_sequence ) {
 	$c_field_id = db_prepare_int( $p_field_id );
 	$c_project_id = db_prepare_int( $p_project_id );
@@ -1206,16 +1396,16 @@ function custom_field_set_sequence( $p_field_id, $p_project_id, $p_sequence ) {
 	return true;
 }
 
-# ===================================
-# Output
-# ===================================
-# Print an input field
-# $p_field_def contains the definition of the custom field (including it's
-#              field id
-# $p_bug_id    contains the bug where this field belongs to. If it's left
-#              away, it'll default to 0 and thus belongs to a new (i.e.
-#              non-existant) bug
-# NOTE: This probably belongs in the print_api.php
+/**
+ * Print an input field
+ * $p_field_def contains the definition of the custom field (including it's field id
+ * $p_bug_id    contains the bug where this field belongs to. If it's left
+ * away, it'll default to 0 and thus belongs to a new (i.e. non-existant) bug
+ * NOTE: This probably belongs in the print_api.php
+ * @param array $p_field_def custom field definition
+ * @param int $p_bug_id bug id
+ * @access public
+ */
 function print_custom_field_input( $p_field_def, $p_bug_id = null ) {
 	if( null === $p_bug_id ) {
 		$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
@@ -1233,11 +1423,15 @@ function print_custom_field_input( $p_field_def, $p_bug_id = null ) {
 	}
 }
 
-# Prepare a string containing a custom field value for display
-# $p_def 		contains the definition of the custom field
-# $p_field_id 	contains the id of the field
-# $p_bug_id		contains the bug id to display the custom field value for
-# NOTE: This probably belongs in the string_api.php
+/**
+ * Prepare a string containing a custom field value for display
+ * @todo This probably belongs in the string_api.php
+ * @param array  $p_def contains the definition of the custom field
+ * @param int $p_field_id contains the id of the field
+ * @param int $p_bug_id contains the bug id to display the custom field value for
+ * @return string
+ * @access public
+ */
 function string_custom_field_value( $p_def, $p_field_id, $p_bug_id ) {
 	$t_custom_field_value = custom_field_get_value( $p_field_id, $p_bug_id );
 	global $g_custom_field_type_definition;
@@ -1247,19 +1441,27 @@ function string_custom_field_value( $p_def, $p_field_id, $p_bug_id ) {
 	return string_display_links( $t_custom_field_value );
 }
 
-# Print a custom field value for display
-# $p_def 		contains the definition of the custom field
-# $p_field_id 	contains the id of the field
-# $p_bug_id		contains the bug id to display the custom field value for
-# NOTE: This probably belongs in the print_api.php
+/**
+ * Print a custom field value for display
+ * NOTE: This probably belongs in the print_api.php
+ * @param array  $p_def contains the definition of the custom field
+ * @param int $p_field_id contains the id of the field
+ * @param int $p_bug_id contains the bug id to display the custom field value for
+ * @return null
+ * @access public
+ */
 function print_custom_field_value( $p_def, $p_field_id, $p_bug_id ) {
 	echo string_custom_field_value( $p_def, $p_field_id, $p_bug_id );
 }
 
-# Prepare a string containing a custom field value for email
-# $p_value		value of custom field
-# $p_type		type of custom field
-# NOTE: This probably belongs in the string_api.php
+/**
+ * Prepare a string containing a custom field value for email
+ * NOTE: This probably belongs in the string_api.php
+ * @param string $p_value value of custom field
+ * @param int $p_type	type of custom field
+ * @return string value ready for sending via email
+ * @access public
+ */
 function string_custom_field_value_for_email( $p_value, $p_type ) {
 	global $g_custom_field_type_definition;
 	if( isset( $g_custom_field_type_definition[$p_type]['#function_string_value_for_email'] ) ) {

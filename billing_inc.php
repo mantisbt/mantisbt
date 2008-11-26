@@ -14,22 +14,25 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * This include file prints out the bug bugnote_stats
-	 * $f_bug_id must already be defined
-	 *
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
+/**
+ * This include file prints out the bug bugnote_stats
+ * $f_bug_id must already be defined
+ *
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
 
-	$t_core_path = config_get( 'core_path' );
+$t_core_path = config_get( 'core_path' );
 
-	require_once( $t_core_path.'bugnote_api.php' );
+/**
+ * Requires bugnote API
+ */
+require_once( $t_core_path.'bugnote_api.php' );
 
-	if ( ! config_get('time_tracking_enabled') )
-		return;
+if ( ! config_get('time_tracking_enabled') )
+	return;
 ?>
 
 <a name="bugnotestats" id="bugnotestats" /><br />

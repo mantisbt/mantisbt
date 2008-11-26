@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,26 +13,40 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
  * @package CoreAPI
  * @subpackage WikiAPI
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  */
 
+/**
+ * Returns whether wiki functionality is enabled
+ * @return bool indicating whether wiki is enabled
+ * @access public
+ */
 function wiki_enabled() {
 	return( config_get_global( 'wiki_enable' ) == ON );
 }
 
+/**
+ * Returns whether wiki functionality is enabled, triggers error on failure
+ * @return null
+ * @access public
+ */
 function wiki_ensure_enabled() {
 	if( !wiki_enabled() ) {
 		access_denied();
 	}
 }
 
+/**
+ * 
+ * @return null
+ * @access public
+ */
 function wiki_init() {
 	if( wiki_enabled() ) {
 
@@ -63,10 +76,22 @@ function wiki_init() {
 	}
 }
 
+/**
+ * 
+ * @param int $p_bug_id Bug ID
+ * @return string url
+ * @access public
+ */
 function wiki_link_bug( $p_bug_id ) {
 	return event_signal( 'EVENT_WIKI_LINK_BUG', $p_bug_id );
 }
 
+/**
+ * 
+ * @param int $p_project_id
+ * @return string url
+ * @access public
+ */
 function wiki_link_project( $p_project_id ) {
 	return event_signal( 'EVENT_WIKI_LINK_PROJECT', $p_project_id );
 }

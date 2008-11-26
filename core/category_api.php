@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,26 +13,24 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
  * @package CoreAPI
  * @subpackage CategoryAPI
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  */
 
-# ## Category API ###
 # Category data cache (to prevent excessive db queries)
 $g_category_cache = array();
 
-# ===================================
-# Boolean queries and ensures
-# ===================================
-# --------------------
-# Check whether the category exists in the project
-# Return true if the category exists, false otherwise
+/**
+ * Check whether the category exists in the project
+ * @param int $p_category_id category id
+ * @return bool Return true if the category exists, false otherwise
+ * @access public
+ */
 function category_exists( $p_category_id ) {
 	global $g_category_cache;
 	if( isset( $g_category_cache[(int) $p_category_id] ) ) {
@@ -55,19 +52,26 @@ function category_exists( $p_category_id ) {
 	}
 }
 
-# --------------------
-# Check whether the category exists in the project
-# Trigger an error if it does not
-function category_ensure_exists( $p_category_id ) {
+/**
+ * Check whether the category exists in the project
+ * Trigger an error if it does not
+ * @param int $p_category_id category id
+ * @access public
+ */
+ function category_ensure_exists( $p_category_id ) {
 	if( !category_exists( $p_category_id ) ) {
 		trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
 	}
 }
 
-# --------------------
-# Check whether the category is unique within a project
-# Returns true if the category is unique, false otherwise
-function category_is_unique( $p_project_id, $p_name ) {
+/**
+ * Check whether the category is unique within a project
+ * @param int $p_project_id project id
+ * @param string $p_name project name
+ * @return bool Returns true if the category is unique, false otherwise
+ * @access public
+ */
+ function category_is_unique( $p_project_id, $p_name ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
 	$t_category_table = db_get_table( 'mantis_category_table' );
@@ -83,21 +87,28 @@ function category_is_unique( $p_project_id, $p_name ) {
 	}
 }
 
-# --------------------
-# Check whether the category is unique within a project
-# Trigger an error if it is not
-function category_ensure_unique( $p_project_id, $p_name ) {
+/**
+ * Check whether the category is unique within a project
+ * Trigger an error if it is not
+ * @param int $p_project_id Project id
+ * @param string $p_name Category Name
+ * @return null
+ * @access public
+ */
+ function category_ensure_unique( $p_project_id, $p_name ) {
 	if( !category_is_unique( $p_project_id, $p_name ) ) {
 		trigger_error( ERROR_CATEGORY_DUPLICATE, ERROR );
 	}
 }
 
-# ===================================
-# Creation / Deletion / Updating
-# ===================================
-# --------------------
-# Add a new category to the project
-function category_add( $p_project_id, $p_name ) {
+/**
+ * Add a new category to the project
+ * @param int $p_project_id Project id
+ * @param string $p_name Category Name
+ * @return int Category ID
+ * @access public
+ */
+ function category_add( $p_project_id, $p_name ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
 	if( is_blank( $p_name ) ) {
@@ -119,9 +130,15 @@ function category_add( $p_project_id, $p_name ) {
 	return db_insert_id( $t_category_table );
 }
 
-# --------------------
-# Update the name and user associated with the category
-function category_update( $p_category_id, $p_name, $p_assigned_to ) {
+/**
+ * Update the name and user associated with the category
+ * @param int $p_category_id Category id
+ * @param string $p_name Category Name
+ * @param int $p_assigned_to User ID that category is assigned to
+ * @return bool
+ * @access public
+ */
+ function category_update( $p_category_id, $p_name, $p_assigned_to ) {
 	if( is_blank( $p_name ) ) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -156,9 +173,14 @@ function category_update( $p_category_id, $p_name, $p_assigned_to ) {
 	return true;
 }
 
-# --------------------
-# Remove a category from the project
-function category_remove( $p_category_id, $p_new_category_id = 0 ) {
+/**
+ * Remove a category from the project
+ * @param int $p_category_id Category id
+ * @param int $p_new_category_id new category id (to replace existing category)
+ * @return bool
+ * @access public
+ */
+ function category_remove( $p_category_id, $p_new_category_id = 0 ) {
 	$t_category_row = category_get_row( $p_category_id );
 
 	$c_category_id = db_prepare_int( $p_category_id );
@@ -194,9 +216,14 @@ function category_remove( $p_category_id, $p_new_category_id = 0 ) {
 	return true;
 }
 
-# --------------------
-# Remove all categories associated with a project
-function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
+/**
+ * Remove all categories associated with a project
+ * @param int $p_project_id Project ID
+ * @param int $p_new_category_id new category id (to replace existing category)
+ * @return bool
+ * @access public
+ */
+ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 
 	project_ensure_exists( $p_project_id );
 	if( 0 != $p_new_category_id ) {
@@ -244,12 +271,13 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 	return true;
 }
 
-# ===================================
-# Data Access
-# ===================================
-# --------------------
-# Return the definition row for the category
-function category_get_row( $p_category_id ) {
+/**
+ * Return the definition row for the category
+ * @param int $p_category_id Category id
+ * @return array array containing category details
+ * @access public
+ */
+ function category_get_row( $p_category_id ) {
 	global $g_category_cache;
 	if( isset( $g_category_cache[$p_category_id] ) ) {
 		return $g_category_cache[$p_category_id];
@@ -273,10 +301,15 @@ function category_get_row( $p_category_id ) {
 	return $row;
 }
 
-# --------------------
-# Sort categories based on what project they're in.
-# Call beforehand with a single parameter to set a 'preferred' project.
-function category_sort_rows_by_project( $p_category1, $p_category2 = null ) {
+/**
+ * Sort categories based on what project they're in.
+ * Call beforehand with a single parameter to set a 'preferred' project.
+ * @return array $p_category1 array containing category details
+ * @return array $p_category2 array containing category details
+ * @return int integer representing sort order
+ * @access public
+ */
+ function category_sort_rows_by_project( $p_category1, $p_category2 = null ) {
 	static $p_project_id = null;
 	if( is_null( $p_category2 ) ) {
 
@@ -302,10 +335,16 @@ function category_sort_rows_by_project( $p_category1, $p_category2 = null ) {
 	return strcasecmp( $p_category1['name'], $p_category2['name'] );
 }
 
-# --------------------
-# Return all categories for the specified project id.
-# Obeys project hierarchies and such.
-function category_get_all_rows( $p_project_id, $p_inherit = true, $p_sort_by_project = false ) {
+/**
+ * Return all categories for the specified project id.
+ * Obeys project hierarchies and such.
+ * @param int $p_project_id Project id
+ * @param bool $p_inherit indicates whether to inherit categories from parent projects
+ * @param bool $p_sort_by_project
+ * @return array array of categories
+ * @access public
+ */
+ function category_get_all_rows( $p_project_id, $p_inherit = true, $p_sort_by_project = false ) {
 	global $g_category_cache;
 
 	project_hierarchy_cache();
@@ -346,6 +385,12 @@ function category_get_all_rows( $p_project_id, $p_inherit = true, $p_sort_by_pro
 	return $rows;
 }
 
+/**
+ * 
+ * @param array $p_cat_id_array array of category id's
+ * @return null
+ * @access public
+ */
 function category_cache_array_rows( $p_cat_id_array ) {
 	global $g_category_cache;
 	$c_cat_id_array = array();
@@ -359,7 +404,6 @@ function category_cache_array_rows( $p_cat_id_array ) {
 	if( empty( $c_cat_id_array ) ) {
 		return;
 	}
-
 
 	$t_category_table = db_get_table( 'mantis_category_table' );
 	$t_project_table = db_get_table( 'mantis_project_table' );
@@ -377,27 +421,41 @@ function category_cache_array_rows( $p_cat_id_array ) {
 	return;
 }
 
-# --------------------
-# Given a category id and a field name, this function returns the field value.
-# An error will be triggered for a non-existent category id or category id = 0.
+/**
+ * Given a category id and a field name, this function returns the field value.
+ * An error will be triggered for a non-existent category id or category id = 0.
+ * @param int $p_category_id category id
+ * @param string $p_name field name
+ * @return string field value
+ * @access public
+ */
 function category_get_field( $p_category_id, $p_field_name ) {
 	$t_row = category_get_row( $p_category_id );
 	return $t_row[$p_field_name];
 }
 
-# --------------------
-# Given a category id, this function returns the category name.
-# An error will be triggered for a non-existent category id or category id = 0.
-function category_get_name( $p_category_id ) {
+/**
+ * Given a category id, this function returns the category name.
+ * An error will be triggered for a non-existent category id or category id = 0.
+ * @param int $p_category_id category id
+ * @return string category name
+ * @access public
+ */
+ function category_get_name( $p_category_id ) {
 	return category_get_field( $p_category_id, 'name' );
 }
 
-# --------------------
-# Given a category name and project, this function returns the category id.
-# An error will be triggered if the specified project does not have a
-# category with that name.
-function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_errors = true ) {
-
+/**
+ * Given a category name and project, this function returns the category id.
+ * An error will be triggered if the specified project does not have a
+ * category with that name.
+ * @param string $p_category_name category name
+ * @param int $p_project_id project id
+ * @param bool $p_trigger_errors trigger error on failure
+ * @return bool
+ * @access public
+ */
+ function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_errors = true ) {
 	$t_category_table = db_get_table( 'mantis_category_table' );
 	$t_project_name = project_get_name( $p_project_id );
 
@@ -417,11 +475,15 @@ function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_er
 	return db_result( $t_result );
 }
 
-# Helpers
-
+/**
+ * Retrieves category name (including project name if required)
+ * @param string $p_category_id category id
+ * @param bool $p_show_project show project details
+ * @return string category full name
+ * @access public
+ */
 function category_full_name( $p_category_id, $p_show_project = true ) {
 	if( 0 == $p_category_id ) {
-
 		# No Category
 		return lang_get( 'no_category' );
 	} else {
