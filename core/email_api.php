@@ -775,15 +775,15 @@ function email_send( $p_email_data ) {
 
 	# Select the method to send mail
 	switch( config_get( 'phpMailer_method' ) ) {
-		case 0:
+		case PHPMAILER_METHOD_MAIL:
 			$mail->IsMail();
 			break;
 
-		case 1:
+		case PHPMAILER_METHOD_SENDMAIL:
 			$mail->IsSendmail();
 			break;
 
-		case 2:
+		case PHPMAILER_METHOD_SMTP:
 			$mail->IsSMTP(); {
 				# SMTP collection is always kept alive
 				#
@@ -799,6 +799,19 @@ function email_send( $p_email_data ) {
 				} else {
 					$mail->smtp = $g_phpMailer_smtp;
 				}
+
+				if ( !is_blank( config_get( 'smtp_username' ) ) ) {
+					# Use SMTP Authentication
+					$mail->SMTPAuth = true;
+					$mail->Username = config_get( 'smtp_username' );
+					$mail->Password = config_get( 'smtp_password' );
+				}
+
+				if ( !is_blank( config_get( 'smtp_connection_mode' ) ) ) {
+					$mail->SMTPSecure = config_get( 'smtp_connection_mode' );
+				}
+
+				$mail->Port = config_get( 'smtp_port' );
 			}
 			break;
 	}
@@ -811,17 +824,6 @@ function email_send( $p_email_data ) {
 	$mail->From = config_get( 'from_email' );
 	$mail->Sender = config_get( 'return_path_email' );
 	$mail->FromName = config_get( 'from_name' );
-
-	if( !is_blank( config_get( 'smtp_username' ) ) ) {
-		# Use SMTP Authentication
-		$mail->SMTPAuth = true;
-		$mail->Username = config_get( 'smtp_username' );
-		$mail->Password = config_get( 'smtp_password' );
-	}
-
-	if( !is_blank( config_get( 'smtp_connection_mode' ) ) ) {
-		$mail->SMTPSecure = config_get( 'smtp_connection_mode' );
-	}
 
 	if( OFF !== $t_debug_email ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;

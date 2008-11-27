@@ -430,17 +430,38 @@
             <varlistentry>
                 <term>$g_phpMailer_method</term>
                 <listitem>
-                    <para>Select the method to mail by: 0 - mail(), 1 - sendmail 2 -
-                        SMTP. Default is 0.
+                    <para>Select the method to mail by: PHPMAILER_METHOD_MAIL for use of mail() function,
+                    PHPMAILER_METHOD_SENDMAIL for sendmail (or postfix), PHPMAILER_METHOD_SMTP for SMTP.
+                    Default is PHPMAILER_METHOD_MAIL.
                     </para>
                 </listitem>
             </varlistentry>
             <varlistentry>
                 <term>$g_smtp_host</term>
                 <listitem>
-                    <para>This option allows you to use a remote SMTP host. Must use
-                        the phpMailer script. Name of smtp host, needed for phpMailer,
-                        taken from php.ini Default is 'localhost'
+                    <para>This option specifies the SMTP server to submit messages to.  The SMTP
+                    server (MTA) then takes on the responsibility of deliverying such messages
+                    to their final destinations.  To use the local SMTP (if available) set this
+                    to 'localhost', otherwise use the fully qualified domain name of the remote
+                    SMTP server.  Default value is 'localhost'.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_smtp_port</term>
+                <listitem>
+                    <para>
+					The smtp port to use.  The typical SMTP ports are 25 and 587.  The port to use
+					will depend on the SMTP server configuration and hence others may be used.
+					The default is 25.
+					</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_smtp_connection_mode</term>
+                <listitem>
+                    <para>This option allows you to specify the connection mode to the SMTP server.
+                    Possible values are '', 'ssl', 'tls'.  The default value is ''.
                     </para>
                 </listitem>
             </varlistentry>

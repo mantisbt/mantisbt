@@ -362,10 +362,10 @@
 	$g_mail_priority		= 3;
 
 	# select the method to mail by:
-	# 0 - mail()
-	# 1 - sendmail
-	# 2 - SMTP
-	$g_phpMailer_method		= 0;
+	# PHPMAILER_METHOD_MAIL - mail()
+	# PHPMAILER_METHOD_SENDMAIL - sendmail
+	# PHPMAILER_METHOD_SMTP - SMTP
+	$g_phpMailer_method		= PHPMAILER_METHOD_MAIL;
 
 	# This option allows you to use a remote SMTP host.  Must use the phpMailer script
 	# One or more hosts, separated by a semicolon, can be listed. 
@@ -382,6 +382,10 @@
 	
 	# This control the connection mode to SMTP server. Can be 'ssl' or 'tls'
 	$g_smtp_connection_mode = '';
+
+	# The smtp port to use.  The typical SMTP ports are 25 and 587.  The port to use
+	# will depend on the SMTP server configuration and hence others may be used.
+	$g_smtp_port = 25;
 
 	# It is recommended to use a cronjob or a scheduler task to send emails.  
 	# The cronjob should typically run every 5 minutes.  If no cronjob is used,
