@@ -197,12 +197,14 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 	if ( file_exists( $p_diskfile ) ) {
 		return $p_diskfile;
 	}
+	
+	$t_basename = basename( $p_diskfile );
 
 	$t_expected_file_path = '';
 
 	$t_path = project_get_field( $p_project_id, 'file_path' );
 	if ( !is_blank( $t_path ) ) {
-		$t_diskfile = file_path_combine( $t_path, $p_diskfile );
+		$t_diskfile = file_path_combine( $t_path, $t_basename );
 
 		if ( file_exists( $t_diskfile ) ) {
 			return $t_diskfile;
@@ -214,7 +216,7 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 
 	$t_path = config_get( 'absolute_path_default_upload_folder' );
 	if ( !is_blank( $t_path ) ) {
-		$t_diskfile = file_path_combine( $t_path, $p_diskfile );
+		$t_diskfile = file_path_combine( $t_path, $t_basename );
 
 		if ( file_exists( $t_diskfile ) ) {
 			return $t_diskfile;
