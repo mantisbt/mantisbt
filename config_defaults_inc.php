@@ -1037,8 +1037,8 @@
 
 	# Specifies the maximum size (in bytes) below which an attachment is 
 	# previewed in the bug view pages.
-	# To disable this feature, set max size to 0.
-	$g_preview_attachments_inline_max_size = 0;
+	# To disable the previewing of attachments, set max size to 0.
+	$g_preview_attachments_inline_max_size = 256 * 1024;
 
 	# Extensions for text files that can be expanded inline.
 	$g_preview_text_extensions = array( 'txt', 'diff', 'patch' );
@@ -1069,7 +1069,7 @@
 	# list of filetypes to view inline. This is a string of extentions separated by commas
 	# This is used when downloading an attachment.  Rather than downloading, the attachment
 	# is viewed in the browser.
-	$g_inline_file_exts = 'gif,png';
+	$g_inline_file_exts = 'gif,png,jpg,jpeg,bmp';
 
 	# access level needed to download bug attachments
 	$g_download_attachments_threshold	= VIEWER;

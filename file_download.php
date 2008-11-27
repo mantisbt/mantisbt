@@ -61,6 +61,12 @@
 	$result = db_query_bound( $query, Array( $c_file_id ) );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
+	
+	if ( $f_type == 'bug' ) {
+		$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
+	} else {
+		$t_project_id = $v_project_id;
+	}
 
 	# Check access rights
 	switch ( $f_type ) {
@@ -117,18 +123,22 @@
 	# dump file content to the connection.
 	switch ( config_get( 'file_upload_method' ) ) {
 		case DISK:
-			if ( file_exists( $v_diskfile ) ) {
-				readfile( $v_diskfile );
+			$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
+
+			if ( file_exists( $t_local_disk_file ) ) {
+				readfile( $t_local_disk_file );
 			}
 			break;
 		case FTP:
-			if ( file_exists( $v_diskfile ) ) {
-				readfile( $v_diskfile );
+			$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
+
+			if ( file_exists( $t_local_disk_file ) ) {
+				readfile( $t_local_disk_file );
 			} else {
 				$ftp = file_ftp_connect();
-				file_ftp_get ( $ftp, $v_diskfile, $v_diskfile );
+				file_ftp_get ( $ftp, $t_local_disk_file, $v_diskfile );
 				file_ftp_disconnect( $ftp );
-				readfile( $v_diskfile );
+				readfile( $t_local_disk_file );
 			}
 			break;
 		default:

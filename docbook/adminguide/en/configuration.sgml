@@ -1411,11 +1411,10 @@
             <varlistentry>
                 <term>$g_preview_attachments_inline_max_size</term>
                 <listitem>
-                    <para>This feature applies to bmp, jpg, gif, and png files that
-                        are attached to bugs. If the file size is smaller than the
-                        specified values, the actual image is also previewed with the bugs.
-                        This feature can be disabled by setting the max size to 0. The
-                        default value is 0.
+                    <para>This limit applies to previewing of image / text attachments.
+                        If the attachment size is smaller than the specified value, the attachment
+                        is previewed with the issue details.  The previewing can be disabled
+                        by setting this configuration to 0.  The default value is 256 * 1024 (256KB).
                     </para>
                 </listitem>
             </varlistentry>

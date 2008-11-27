@@ -162,6 +162,81 @@ function file_get_icon_url( $p_display_filename ) {
 	return array( 'url' => config_get( 'path' ) . 'images/fileicons/' . $t_name, 'alt' => $ext );
 }
 
+/**
+ * Combines a path and a file name making sure that the separator exists.
+ * 
+ * @param string $p_path       The path.
+ * @param string $p_filename   The file name.
+ * 
+ * @return The combined full path.
+ */
+function file_path_combine( $p_path, $p_filename ) {
+	$t_path = $p_path;
+	if ( substr( $t_path, -1 ) != '/' && substr( $t_path, -1 ) != '\\' ) {
+		$t_path .= DIRECTORY_SEPARATOR;
+	}
+	
+	$t_path .= $p_filename;
+
+	return $t_path;
+}
+
+/**
+ * Nomalizes the disk file path based on the following algorithm:
+ * 1. If disk file exists, then return as is.
+ * 2. If not, and a project path is available, then check with that, if exists return it.
+ * 3. If not, then use default upload path, then check with that, if exists return it.
+ * 4. If disk file doesn't include a path, then return expected path based on project path or default path.
+ * 5. Otherwise return as is.
+ * 
+ * @param string $p_diskfile  The disk file (full path or just filename).
+ * @param integer The project id - shouldn't be 0 (ALL_PROJECTS).
+ * @return The normalized full path.
+ */
+function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
+	if ( file_exists( $p_diskfile ) ) {
+		return $p_diskfile;
+	}
+
+	$t_expected_file_path = '';
+
+	$t_path = project_get_field( $p_project_id, 'file_path' );
+	if ( !is_blank( $t_path ) ) {
+		$t_diskfile = file_path_combine( $t_path, $p_diskfile );
+
+		if ( file_exists( $t_diskfile ) ) {
+			return $t_diskfile;
+		}
+
+		# if we don't find the file, then this is the path we want to return.
+		$t_expected_file_path = $t_diskfile;
+	}
+
+	$t_path = config_get( 'absolute_path_default_upload_folder' );
+	if ( !is_blank( $t_path ) ) {
+		$t_diskfile = file_path_combine( $t_path, $p_diskfile );
+
+		if ( file_exists( $t_diskfile ) ) {
+			return $t_diskfile;
+		}
+
+		# if the expected path not set to project directory, then set it to default directory.
+		if ( is_blank( $t_expected_file_path ) ) {
+			$t_expected_file_path = $t_diskfile;
+		}
+	}
+
+	# if diskfile doesn't include a path, then use the expected filename.
+	if ( ( strstr( $p_diskfile, DIRECTORY_SEPARATOR ) === false ||
+	       strstr( $p_diskfile, '\\' ) === false ) &&
+	     !is_blank( $t_expected_file_path ) ) {
+	    return $t_expected_file_path;
+	}
+
+	# otherwise return as is.
+	return $p_diskfile;
+}
+
 # --------------------
 # Gets an array of attachments that are visible to the currently logged in user.
 # Each element of the array contains the following:
@@ -200,10 +275,11 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_id = $t_row['id'];
 		$t_filename = $t_row['filename'];
 		$t_filesize = $t_row['filesize'];
-		$t_diskfile = $t_row['diskfile'];
+		$t_diskfile = file_normalize_attachment_path( $t_row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
 		$t_date_added = $t_row['date_added'];
 
 		$t_attachment = array();
+		$t_attachment['id'] = $t_id;
 		$t_attachment['display_name'] = file_get_display_name( $t_filename );
 		$t_attachment['size'] = $t_filesize;
 		$t_attachment['date_added'] = db_unixtimestamp( $t_date_added );
@@ -276,7 +352,8 @@ function file_delete_attachments( $p_bug_id ) {
 		for( $i = 0;$i < $file_count;$i++ ) {
 			$row = db_fetch_array( $result );
 
-			file_delete_local( $row['diskfile'] );
+			$t_local_diskfile = file_normalize_attachment_path( $row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
+			file_delete_local( $t_local_diskfile );
 
 			if( FTP == $t_method ) {
 				file_ftp_delete( $ftp, $row['diskfile'] );
@@ -320,7 +397,8 @@ function file_delete_project_files( $p_project_id ) {
 		for( $i = 0;$i < $file_count;$i++ ) {
 			$row = db_fetch_array( $result );
 
-			file_delete_local( $row['diskfile'] );
+			$t_local_diskfile = file_normalize_attachment_path( $row['diskfile'], $p_project_id );
+			file_delete_local( $t_local_diskfile );
 
 			if( FTP == $t_method ) {
 				file_ftp_delete( $ftp, $row['diskfile'] );
@@ -405,6 +483,13 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 	$t_filename = file_get_field( $p_file_id, 'filename', $p_table );
 	$t_diskfile = file_get_field( $p_file_id, 'diskfile', $p_table );
 
+	if ( $p_table == 'bug' ) { 
+		$t_bug_id = file_get_field( $p_file_id, 'bug_id', $p_table );
+		$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
+	} else {
+		$t_project_id = file_get_field( $p_file_id, 'project_id', $p_table );
+	}
+
 	if(( DISK == $t_upload_method ) || ( FTP == $t_upload_method ) ) {
 		if( FTP == $t_upload_method ) {
 			$ftp = file_ftp_connect();
@@ -412,16 +497,19 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 			file_ftp_disconnect( $ftp );
 		}
 
-		if( file_exists( $t_diskfile ) ) {
-			file_delete_local( $t_diskfile );
+		$t_local_disk_file = file_normalize_attachment_path( $t_diskfile, $t_project_id );
+		if ( file_exists( $t_local_disk_file ) ) {
+			file_delete_local( $t_local_disk_file );
 		}
 	}
 
 	if( 'bug' == $p_table ) {
-
 		# log file deletion
-		$t_bug_id = file_get_field( $p_file_id, 'bug_id', 'bug' );
 		history_log_event_special( $t_bug_id, FILE_DELETED, file_get_display_name( $t_filename ) );
+
+		if ( file_exists( $t_local_disk_file ) ) {
+			file_delete_local( $t_local_disk_file );
+		}
 	}
 
 	$t_file_table = db_get_table( 'mantis_' . $p_table . '_file_table' );
@@ -573,8 +661,9 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	$c_new_file_name = db_prepare_string( $t_file_name );
 
 	$t_file_hash = ( 'bug' == $p_table ) ? $t_bug_id : config_get( 'document_files_prefix' ) . '-' . $t_project_id;
-	$t_disk_file_name = $t_file_path . file_generate_unique_name( $t_file_hash . '-' . $t_file_name, $t_file_path );
-	$c_disk_file_name = db_prepare_string( $t_disk_file_name );
+	$t_unique_name = file_generate_unique_name( $t_file_hash . '-' . $t_file_name, $t_file_path );
+	$t_disk_file_name = $t_file_path . $t_unique_name;
+	$c_unique_name = db_prepare_string( $t_unique_name );
 
 	$t_file_size = filesize( $t_tmp_file );
 	if( 0 == $t_file_size ) {
@@ -624,7 +713,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	$query = "INSERT INTO $t_file_table
 						(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 					  VALUES
-						($c_id, '$c_title', '$c_desc', '$c_disk_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now() . "', $c_content)";
+						($c_id, '$c_title', '$c_desc', '$c_unique_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now() . "', $c_content)";
 	db_query( $query );
 
 	if( 'bug' == $p_table ) {

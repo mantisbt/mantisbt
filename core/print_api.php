@@ -1813,45 +1813,27 @@ function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_
 # List the attachments belonging to the specified bug.  This is used from within
 # bug_view_page.php and bug_view_advanced_page.php
 function print_bug_attachments_list( $p_bug_id ) {
-
-	# @@@ Change this to a function that wraps file_get_visible_attachments()
-	$t_attachment_rows = bug_get_attachments( $p_bug_id );
-
-	$num_files = sizeof( $t_attachment_rows );
-	if( $num_files === 0 ) {
-		return;
-	}
-
-	$t_can_download = file_can_download_bug_attachments( $p_bug_id );
-	$t_can_delete = file_can_delete_bug_attachments( $p_bug_id );
-	$t_preview_text_ext = config_get( 'preview_text_extensions' );
-	$t_preview_image_ext = config_get( 'preview_image_extensions' );
-
+	$t_attachments = file_get_visible_attachments( $p_bug_id );
+	$t_attachments_count = count( $t_attachments );
+	
+	$i = 0;
 	$image_previewed = false;
-	for( $i = 0;$i < $num_files;$i++ ) {
-		$row = $t_attachment_rows[$i];
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
-		
-		$t_filename = $row['filename'];
-		$t_date_added = $row['date_added'];
-		$t_filesize = $row['filesize'];
-		$t_diskfile = $row['diskfile'];
-		$t_id = $row['id'];
 
-		$t_file_display_name = string_display_line( file_get_display_name( $t_filename ) );
-		$t_filesize = number_format( $t_filesize );
-		$t_date_added = date( config_get( 'normal_date_format' ), db_unixtimestamp( $t_date_added ) );
+	foreach ( $t_attachments as $t_attachment ) {
+		$t_file_display_name = string_display_line( $t_attachment['display_name'] );
+		$t_filesize = number_format( $t_attachment['size'] );
+		$t_date_added = date( config_get( 'normal_date_format' ), $t_attachment['date_added'] );
 
-		if( $image_previewed ) {
+		if ( $image_previewed ) {
 			$image_previewed = false;
-			PRINT '<br />';
+			echo '<br />';
 		}
 
-		if( $t_can_download ) {
-			$t_href_start = "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\">";
+		if ( $t_attachment['can_download'] ) {
+			$t_href_start = "<a href=\"file_download.php?file_id={$t_attachment['id']}&amp;type=bug\">";
 			$t_href_end = '</a>';
 
-			$t_href_clicket = " [<a href=\"file_download.php?file_id=$v_id&amp;type=bug\" target=\"_blank\">^</a>]";
+			$t_href_clicket = " [<a href=\"file_download.php?file_id={$t_attachment['id']}&amp;type=bug\" target=\"_blank\">^</a>]";
 		} else {
 			$t_href_start = '';
 			$t_href_end = '';
@@ -1859,26 +1841,24 @@ function print_bug_attachments_list( $p_bug_id ) {
 			$t_href_clicket = '';
 		}
 
-		$t_exists = config_get( 'file_upload_method' ) != DISK || file_exists( $t_diskfile );
-
-		if( !$t_exists ) {
+		if ( !$t_attachment['exists'] ) {
 			print_file_icon( $t_file_display_name );
-			PRINT '&nbsp;<span class="strike">' . $t_file_display_name . '</span> (attachment missing)';
+			echo '&nbsp;<span class="strike">' . $t_file_display_name . '</span> (attachment missing)';
 		} else {
-			PRINT $t_href_start;
+			echo $t_href_start;
 			print_file_icon( $t_file_display_name );
-			PRINT $t_href_end . '&nbsp;' . $t_href_start . $t_file_display_name . $t_href_end . "$t_href_clicket ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
+			echo $t_href_end . '&nbsp;' . $t_href_start . $t_file_display_name . $t_href_end . "$t_href_clicket ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
 
-			if( $t_can_delete ) {
-				PRINT " [<a class=\"small\" href=\"bug_file_delete.php?file_id=$v_id\">" . lang_get( 'delete_link' ) . '</a>]';
+			if ( $t_attachment['can_delete'] ) {
+				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id={$t_attachment['id']}\">" . lang_get( 'delete_link' ) . '</a>]';
 			}
 
-			if ( ( FTP == config_get( 'file_upload_method' ) ) && file_exists( $t_diskfile ) ) {
-				PRINT ' (' . lang_get( 'cached' ) . ')';
+			if ( ( FTP == config_get( 'file_upload_method' ) ) && $t_attachment['exists'] ) {
+				echo ' (' . lang_get( 'cached' ) . ')';
 			}
 
-			if ( $t_can_download && ( $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( $t_filesize != 0 ) && ( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_text_ext, true ) ) ) {
-				 $c_id = db_prepare_int( $t_id );
+			if ( $t_attachment['preview'] && ( $t_attachment['type'] == 'text' ) ) {
+				 $c_id = db_prepare_int( $t_attachment['id'] );
 				 $t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
 
 				echo "<script type=\"text/javascript\" language=\"JavaScript\">
@@ -1890,41 +1870,42 @@ document.getElementById( span ).style.display = displayType;
 
  -->
  </script>";
-				PRINT " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content(\"hideSection_" . $c_id . "\");swap_content(\"showSection_" . $c_id . "\");return false;'>" . lang_get( 'show_content' ) . "</a>]</span>";
-				PRINT " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content(\"hideSection_" . $c_id . "\");swap_content(\"showSection_" . $c_id . "\");return false;'>" . lang_get( 'hide_content' ) . "</a>]";
+				echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content(\"hideSection_" . $c_id . "\");swap_content(\"showSection_" . $c_id . "\");return false;'>" . lang_get( 'show_content' ) . "</a>]</span>";
+				echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content(\"hideSection_" . $c_id . "\");swap_content(\"showSection_" . $c_id . "\");return false;'>" . lang_get( 'hide_content' ) . "</a>]";
 
-				PRINT "<pre>";
+				echo "<pre>";
+				
+				# @@@ Refactor into a method that gets contents for download / preview.
 				switch( config_get( 'file_upload_method' ) ) {
 					case DISK:
-						if( file_exists( $t_diskfile ) ) {
-							$v_content = file_get_contents( $t_diskfile );
+						if ( $t_attachment['exists'] ) {
+							$v_content = file_get_contents( $t_attachment['diskfile'] );
 						}
 						break;
 					case FTP:
-						if( file_exists( $t_diskfile ) ) {
-							file_get_contents( $t_diskfile );
+						if( file_exists( $t_attachment['exists'] ) ) {
+							file_get_contents( $t_attachment['diskfile'] );
 						} else {
 							$ftp = file_ftp_connect();
-							file_ftp_get( $ftp, $t_diskfile, $t_diskfile );
+							file_ftp_get( $ftp, $t_attachment['diskfile'], $t_attachment['diskfile'] );
 							file_ftp_disconnect( $ftp );
-							$v_content = file_get_contents( $t_diskfile );
+							$v_content = file_get_contents( $t_attachment['diskfile'] );
 						}
 						break;
 					default:
 						$query = "SELECT *
-	                  						FROM $t_bug_file_table
+	                  					FROM $t_bug_file_table
 				            			WHERE id=" . db_param();
 						$result = db_query_bound( $query, Array( $c_id ) );
 						$row = db_fetch_array( $result );
 						$v_content = $row['content'];
 				}
-				echo htmlspecialchars( $v_content );
 
-				PRINT "</pre></span>\n";
+				echo htmlspecialchars( $v_content );
+				echo "</pre></span>\n";
 			}
 
-
-			if ( $t_can_download && ( $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( $t_filesize != 0 ) && ( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_image_ext, true ) ) ) {
+			if ( $t_attachment['can_download'] && $t_attachment['preview'] && $t_attachment['type'] == 'image' ) {
 				$t_preview_style = 'border: 0;';
 				$t_max_width = config_get( 'preview_max_width' );
 				if( $t_max_width > 0 ) {
@@ -1937,15 +1918,16 @@ document.getElementById( span ).style.display = displayType;
 				}
 
 				$t_preview_style = 'style="' . $t_preview_style . '"';
-				$t_title = file_get_field( $t_id, 'title' );
+				$t_title = file_get_field( $t_attachment['id'], 'title' );
 
-				PRINT "\n<br />$t_href_start<img alt=\"$t_title\" $t_preview_style src=\"file_download.php?file_id=$v_id&amp;type=bug\" />$t_href_end";
+				echo "\n<br />$t_href_start<img alt=\"$t_title\" $t_preview_style src=\"file_download.php?file_id={$t_attachment['id']}&amp;type=bug\" />$t_href_end";
 				$image_previewed = true;
 			}
 		}
 
-		if( $i != ( $num_files - 1 ) ) {
-			PRINT "<br />\n";
+		if ( $i != ( $t_attachments_count - 1 ) ) {
+			echo "<br />\n";
+			$i++;
 		}
-	}
+	}	
 }
