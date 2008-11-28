@@ -419,6 +419,8 @@ $s_email_date_submitted = 'Date Submitted';
 $s_email_last_modified = 'Last Modified';
 $s_email_summary = 'Summary';
 $s_email_description = 'Description';
+$s_email_additional_information = 'Additional Information';
+$s_email_steps_to_reproduce = 'Steps to Reproduce';
 
 # account_delete.php
 $s_account_protected_msg = 'Account protected. Cannot change settings...';

@@ -1095,7 +1095,15 @@ function email_format_bug_message( $p_visible_bug_data ) {
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_summary' );
 
 	$t_message .= lang_get( 'email_description' ) . ": \n" . wordwrap( $p_visible_bug_data['email_description'] ) . "\n";
+	
+	if ( !is_blank( $p_visible_bug_data['email_steps_to_reproduce'] ) ) {
+		$t_message .= "\n" . lang_get( 'email_steps_to_reproduce' ) . ": \n" . wordwrap( $p_visible_bug_data['email_steps_to_reproduce'] ) . "\n";
+	}
 
+	if ( !is_blank( $p_visible_bug_data['email_additional_information'] ) ) {
+		$t_message .= "\n" . lang_get( 'email_additional_information' ) . ": \n" . wordwrap( $p_visible_bug_data['email_additional_information'] ) . "\n";
+	}
+	
 	if( isset( $p_visible_bug_data['relations'] ) ) {
 		$t_message .= $p_visible_bug_data['relations'];
 	}
@@ -1224,6 +1232,8 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 
 	$t_bug_data['email_summary'] = $row['summary'];
 	$t_bug_data['email_description'] = $row['description'];
+	$t_bug_data['email_additional_information'] = $row['additional_information'];
+	$t_bug_data['email_steps_to_reproduce'] = $row['steps_to_reproduce'];
 
 	$t_bug_data['set_category'] = '[' . $t_bug_data['email_project'] . '] ' . $t_category_name;
 
