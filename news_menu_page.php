@@ -57,7 +57,7 @@
 		<textarea name="body" cols="60" rows="8"></textarea>
 	</td>
 </tr>
-<tr class="row-2">
+<tr class="row-1">
 	<td class="category">
 		<?php echo lang_get( 'announcement' ) ?><br />
 		<span class="small"><?php echo lang_get( 'stays_on_top' ) ?></span>
@@ -66,7 +66,7 @@
 		<input type="checkbox" name="announcement" />
 	</td>
 </tr>
-<tr class="row-1">
+<tr class="row-2">
 	<td class="category" width="25%">
 		<?php echo lang_get( 'view_status' ) ?>
 	</td>
