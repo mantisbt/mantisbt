@@ -1393,11 +1393,15 @@ function bug_get_attachments( $p_bug_id ) {
 		                WHERE bug_id=" . db_param() . "
 		                ORDER BY date_added";
 	$db_result = db_query_bound( $query, Array( $c_bug_id ) );
-	$num_notes = db_num_rows( $db_result );
+	$num_files = db_num_rows( $db_result );
+
+	if ( $num_files == 0 ) {
+		return;
+	}
 
 	$t_result = array();
 
-	for( $i = 0;$i < $num_notes;$i++ ) {
+	for( $i = 0;$i < $num_files;$i++ ) {
 		$t_result[] = db_fetch_array( $db_result );
 	}
 

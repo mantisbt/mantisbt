@@ -199,6 +199,10 @@ function mci_issue_get_attachments( $p_issue_id ) {
 	$t_attachment_rows = bug_get_attachments( $p_issue_id );
 	$t_result = array();
 
+	if ( !is_array( $t_attachment_rows ) ) {
+		return null;
+	}
+
 	foreach( $t_attachment_rows as $t_attachment_row ) {
 		$t_attachment = array();
 		$t_attachment['id'] = $t_attachment_row['id'];
