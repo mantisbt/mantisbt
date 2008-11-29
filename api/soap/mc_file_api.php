@@ -5,10 +5,6 @@
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 # Check if the current user can download attachments for the specified bug.
 function mci_file_can_download_bug_attachments( $p_bug_id, $p_user_id ) {

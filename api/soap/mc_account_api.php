@@ -5,9 +5,6 @@
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 function mci_account_get_array_by_id( $p_user_id ) {
 	$t_result = array();

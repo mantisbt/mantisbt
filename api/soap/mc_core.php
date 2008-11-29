@@ -5,10 +5,6 @@
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 # Path to Mantis is assumed to be the grand parent directory.  If this is not
 # the case, then this variable should be set to the Mantis path.

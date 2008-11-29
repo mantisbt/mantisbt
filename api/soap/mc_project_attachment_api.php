@@ -5,10 +5,6 @@
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'mc_core.php' );
 

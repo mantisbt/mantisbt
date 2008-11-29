@@ -5,10 +5,6 @@
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 $t_current_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 $t_nusoap_dir  = $t_current_dir . 'nusoap';

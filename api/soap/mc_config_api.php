@@ -5,10 +5,6 @@
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 function mc_config_get_string( $p_username, $p_password, $p_config_var ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );

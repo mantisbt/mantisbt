@@ -5,10 +5,7 @@
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
+
 /**
  * Get the custom field id given an object ref.  The id is set based on the following algorithm:
  * - id from objectref (if not zero).

@@ -5,10 +5,6 @@
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 # Minimum global access level required to access webservice for readonly operations.
 $g_mc_readonly_access_level_threshold = REPORTER;
