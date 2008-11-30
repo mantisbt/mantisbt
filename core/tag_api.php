@@ -554,17 +554,18 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 		$t_user_id = $p_user_id;
 	}
 
-	if( $t_user_id == tag_get_field( $p_tag_id, 'user_id' ) ) {
-		$t_detach_level = config_get( 'tag_detach_own_threshold' );
+	if( !tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
+		trigger_error( TAG_NOT_ATTACHED, ERROR );
+	}
+
+	$t_tag_row = tag_bug_get_row( $p_tag_id, $p_bug_id);
+	if( $t_user_id == tag_get_field( $p_tag_id, 'user_id' ) || $t_user_id == $t_tag_row[ 'user_id' ] ) {
+		$t_detach_level = config_get( 'tag_detach_own_threshold' );		
 	} else {
 		$t_detach_level = config_get( 'tag_detach_threshold' );
 	}
 
-	access_ensure_bug_level( config_get( 'tag_detach_threshold' ), $p_bug_id, $t_user_id );
-
-	if( !tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
-		trigger_error( TAG_NOT_ATTACHED, ERROR );
-	}
+	access_ensure_bug_level( $t_detach_level, $p_bug_id, $t_user_id );
 
 	$c_tag_id = db_prepare_int( $p_tag_id );
 	$c_bug_id = db_prepare_int( $p_bug_id );
@@ -613,7 +614,7 @@ function tag_display_link( $p_tag_row, $p_bug_id = 0 ) {
 		$t_security_token = form_security_param( 'tag_detach' );
 	}
 
-	if( auth_get_current_user_id() == $p_tag_row['user_attached'] ) {
+	if( auth_get_current_user_id() == $p_tag_row['user_attached'] || auth_get_current_user_id() == $p_tag_row['user_id'] ) {
 		$t_detach = config_get( 'tag_detach_own_threshold' );
 	} else {
 		$t_detach = config_get( 'tag_detach_threshold' );
@@ -624,7 +625,7 @@ function tag_display_link( $p_tag_row, $p_bug_id = 0 ) {
 
 	echo "<a href='tag_view_page.php?tag_id=$p_tag_row[id]' title='$t_description'>$t_name</a>";
 
-	if( access_has_global_level( $t_detach ) ) {
+	if( $p_bug_id > 0 && access_has_bug_level( $t_detach, $p_bug_id ) ) {
 		$t_tooltip = sprintf( lang_get( 'tag_detach' ), $t_name );
 		echo " <a href='tag_detach.php?bug_id=$p_bug_id&tag_id=$p_tag_row[id]$t_security_token'><img src='images/delete.png' class='delete-icon' title=\"$t_tooltip\"/></a>";
 	}
