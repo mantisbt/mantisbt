@@ -53,7 +53,7 @@
 
 	foreach ( $t_rows as $t_row ) {
 		if ( version_is_unique( $t_row['version'], $t_dst_project_id ) ) {
-			version_add( $t_dst_project_id, $t_row['version'], $t_row['released'], $t_row['description'], $t_row['date_order'] );
+			version_add( $t_dst_project_id, $t_row['version'], $t_row['released'], $t_row['description'], db_date( $t_row['date_order'] ) );
 		}
 	}
 
