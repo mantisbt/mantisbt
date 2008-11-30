@@ -154,7 +154,7 @@
 			<?php } ?>
 		</td>
 		<td>
-			<input type="password" size="32" maxlength="32" name="password" />
+			<input type="password" size="32" maxlength="<?php echo PASSLEN;?>" name="password" />
 		</td>
 	</tr>
 
@@ -167,7 +167,7 @@
 			<?php } ?>
 		</td>
 		<td>
-			<input type="password" size="32" maxlength="32" name="password_confirm" />
+			<input type="password" size="32" maxlength="<?php echo PASSLEN;?>" name="password_confirm" />
 		</td>
 	</tr>
 
@@ -205,7 +205,7 @@
 			<?php echo lang_get( 'realname' ) ?>
 		</td>
 		<td>
-			<input type="text" size="32" maxlength="64" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
+			<input type="text" size="32" maxlength="<?php echo REALLEN;?>" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
 		</td>
 	</tr>
 

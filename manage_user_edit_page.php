@@ -72,7 +72,7 @@
 		<?php echo lang_get( 'username' ) ?>:
 	</td>
 	<td width="70%">
-		<input type="text" size="16" maxlength="32" name="username" value="<?php echo $t_user['username'] ?>" />
+		<input type="text" size="16" maxlength="<?php echo USERLEN;?>" name="username" value="<?php echo $t_user['username'] ?>" />
 	</td>
 </tr>
 
@@ -82,7 +82,7 @@
 		<?php echo lang_get( 'realname' ) ?>:
 	</td>
 	<td width="70%">
-		<input type="text" size="16" maxlength="100" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" />
+		<input type="text" size="16" maxlength="<?php echo REALLEN;?>" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" />
 	</td>
 </tr>
 

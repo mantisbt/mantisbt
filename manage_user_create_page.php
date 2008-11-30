@@ -49,7 +49,7 @@
 		<?php echo lang_get( 'username' ) ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="username" size="32" maxlength="32" />
+		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -57,7 +57,7 @@
 		<?php echo lang_get( 'realname' ) ?>
 	</td>
 	<td>
-		<input type="text" name="realname" size="32" maxlength="32" />
+		<input type="text" name="realname" size="32" maxlength="<?php echo REALLEN;?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -76,7 +76,7 @@
 		<?php echo lang_get( 'password' ) ?>
 	</td>
 	<td>
-		<input type="password" name="password" size="32" maxlength="32" />
+		<input type="password" name="password" size="32" maxlength="<?php echo PASSLEN;?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -84,7 +84,7 @@
 		<?php echo lang_get( 'verify_password' ) ?>
 	</td>
 	<td>
-		<input type="password" name="password_verify" size="32" maxlength="32" />
+		<input type="password" name="password_verify" size="32" maxlength="<?php echo PASSLEN;?>" />
 	</td>
 </tr>
 <?php

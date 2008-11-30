@@ -468,3 +468,8 @@ define( 'TIMELINE_FIXED', 2 );
 define( 'PHPMAILER_METHOD_MAIL',		0 );
 define( 'PHPMAILER_METHOD_SENDMAIL',	1 );
 define( 'PHPMAILER_METHOD_SMTP',		2 );
+
+# Lengths - NOTE: these may represent hard-coded values in db schema and should not be changed.
+define( 'USERLEN', 32);
+define( 'REALLEN', 64);
+define( 'PASSLEN', 32);

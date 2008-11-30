@@ -99,7 +99,7 @@
 		<?php echo lang_get( 'username' ) ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="username" size="32" maxlength="32" />
+		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -107,7 +107,7 @@
 		<?php echo lang_get( 'password' ) ?>
 	</td>
 	<td>
-		<input type="password" name="password" size="16" maxlength="32" />
+		<input type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" />
 	</td>
 </tr>
 <tr class="row-1">

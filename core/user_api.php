@@ -283,8 +283,8 @@ function user_ensure_realname_valid( $p_realname ) {
 # Return true if it is, false otherwise
 function user_is_name_valid( $p_username ) {
 
-	# The DB field is only 32 characters
-	if( strlen( $p_username ) > 32 ) {
+	# The DB field is hard-coded. USERLEN should not be modified.
+	if( strlen( $p_username ) > USERLEN ) {
 		return false;
 	}
 

@@ -380,7 +380,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
  * @param string $p_password
  * @param string $p_salt salt, defaults to null
  * @param string $p_method logon method, defaults to null (use config login method)
- * @return string processed password, maximum 32 chars in length
+ * @return string processed password, maximum PASSLEN chars in length
  * @access public
  */
  function auth_process_plain_password( $p_password, $p_salt = null, $p_method = null ) {
@@ -406,8 +406,8 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 			break;
 	}
 
-	# cut this off to 32 cahracters which the largest possible string in the database
-	return substr( $t_processed_password, 0, 32 );
+	# cut this off to PASSLEN cahracters which the largest possible string in the database
+	return substr( $t_processed_password, 0, PASSLEN );
 }
 
 /**
@@ -685,12 +685,12 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 
 <tr class="row-1">
 	<td class="category"><?php echo lang_get( 'username' );?></td>
-	<td><input type="text" disabled="disabled" size="32" maxlength="32" value="<?php echo $p_username;?>" /></td>
+	<td><input type="text" disabled="disabled" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo $p_username;?>" /></td>
 </tr>
 
 <tr class="row-2">
 	<td class="category"><?php echo lang_get( 'password' );?></td>
-	<td><input type="password" name="password" size="16" maxlength="32" /></td>
+	<td><input type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" /></td>
 </tr>
 
 <tr>
