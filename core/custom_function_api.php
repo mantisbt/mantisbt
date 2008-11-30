@@ -132,7 +132,11 @@ function custom_function_default_format_issue_summary( $p_issue_id, $p_context =
 function custom_function_default_checkin( $p_issue_id, $p_comment, $p_file, $p_new_version, $p_fixed ) {
 	if( bug_exists( $p_issue_id ) ) {
 		history_log_event_special( $p_issue_id, CHECKIN, $p_file, $p_new_version );
-		bugnote_add( $p_issue_id, $p_comment, 0, VS_PRIVATE == config_get( 'source_control_notes_view_status' ) );
+		$t_private = false;
+		if( VS_PRIVATE == config_get( 'source_control_notes_view_status' ) ) {
+			$t_private = true;
+		}
+		bugnote_add( $p_issue_id, $p_comment, 0, $t_private );
 
 		$t_status = config_get( 'source_control_set_status_to' );
 		if(( OFF != $t_status ) && $p_fixed ) {
