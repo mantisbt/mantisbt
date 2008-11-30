@@ -195,10 +195,6 @@ function mci_issue_get_attachments( $p_issue_id ) {
 	$t_attachment_rows = bug_get_attachments( $p_issue_id );
 	$t_result = array();
 
-	if ( !is_array( $t_attachment_rows ) ) {
-		return null;
-	}
-
 	foreach( $t_attachment_rows as $t_attachment_row ) {
 		$t_attachment = array();
 		$t_attachment['id'] = $t_attachment_row['id'];
@@ -210,7 +206,7 @@ function mci_issue_get_attachments( $p_issue_id ) {
 		$t_result[] = $t_attachment;
 	}
 
-	return $t_result;
+	return (sizeof( $t_result ) == 0 ? null : $t_result );
 }
 
 /**
@@ -242,7 +238,7 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 			$t_relationship = array();
 			$t_relationship['id'] = $t_relship_row->id;
 			$t_reltype = array();
-			$t_reltype['id'] = $t_relship_row->type;
+			$t_reltype['id'] = relationship_get_complementary_type( $t_relship_row->type );
 			$t_reltype['name'] = relationship_get_description_dest_side( $t_relship_row->type );
 			$t_relationship['type'] = $t_reltype;
 			$t_relationship['target_id'] = $t_relship_row->src_bug_id;
@@ -250,7 +246,7 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 		}
 	}
 
-	return $t_relationships;
+	return (sizeof( $t_relationships ) == 0 ? null : $t_relationships );
 }
 
 /**
@@ -265,7 +261,6 @@ function mci_issue_get_notes( $p_issue_id ) {
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	$t_user_bugnote_order = 'ASC'; // always get the notes in ascending order for consistency to the calling application.
 
-
 	$t_result = array();
 	foreach( bugnote_get_all_visible_bugnotes( $p_issue_id, $t_user_bugnote_order, 0 ) as $t_value ) {
 		$t_bugnote = array();
@@ -278,7 +273,7 @@ function mci_issue_get_notes( $p_issue_id ) {
 		$t_result[] = $t_bugnote;
 	}
 
-	return $t_result;
+	return (sizeof( $t_result ) == 0 ? null : $t_result );
 }
 
 /**

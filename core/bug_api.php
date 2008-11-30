@@ -1395,10 +1395,6 @@ function bug_get_attachments( $p_bug_id ) {
 	$db_result = db_query_bound( $query, Array( $c_bug_id ) );
 	$num_files = db_num_rows( $db_result );
 
-	if ( $num_files == 0 ) {
-		return;
-	}
-
 	$t_result = array();
 
 	for( $i = 0;$i < $num_files;$i++ ) {
