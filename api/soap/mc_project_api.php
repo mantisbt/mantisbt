@@ -617,39 +617,58 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 		return new soap_fault( 'Client', '', 'Access Denied', 'User does not have administrator access' );
 	}
 
-	$t_name = $p_project['name'];
-	$t_status = $p_project['status'];
-	$t_view_state = $p_project['view_state'];
-	$t_enabled = $p_project['enabled'];
-	$t_file_path = $p_project['file_path'];
-	$t_description = $p_project['description'];
-
+	if ( !isset( $p_project['name'] ) ) {
+		return new soap_fault( 'Client', '', 'Missing Field', 'Required Field Missing' );
+	} else {
+		$t_name = $p_project['name'];
+	}
+	
+	if( isset( $p_project['status'] ) ) {
+		$t_status = $p_project['status'];
+	} else {
+		$t_status = array( 'name' => 'development' ); // development
+	}
+	
+	if( isset( $p_project['view_state'] ) ) {
+		$t_view_state = $p_project['view_state'];
+	} else {
+		$t_view_state = array( 'id' => VS_PUBLIC );
+	}
+	
+	if ( isset( $p_project['enabled'] ) ) {
+		$t_enabled = $p_project['enabled'];
+	} else {
+		$t_enabled = true;
+	}
+	
+	if ( isset( $p_project['description'] ) ) {
+		$t_description = $p_project['description'];
+	} else {
+		$t_description = '';
+	}
+	
+	if ( isset( $p_project['file_path'] ) ) {	
+		$t_file_path = $p_project['file_path'];
+	} else { 
+		$t_file_path = '';
+	}
+	
+	if ( isset( $p_project['inherit_global'] ) ) { 
+		$t_inherit_global = $p_project['inherit_global'];
+	} else {
+		$t_inherit_global = true;
+	}
+	
 	// check to make sure project doesn't already exist
 	if( !project_is_name_unique( $t_name ) ) {
 		return new soap_fault( 'Client', '', 'Project name exists', 'The project name you attempted to add exists already' );
-	}
-
-	if( is_null( $t_status ) ) {
-		$t_status = array( 'name' => 'development' ); // development
-	}
-
-	if ( is_null( $t_view_state ) ) {
-		$t_view_state = array( 'id' => VS_PUBLIC );
-	}
-
-	if( is_null( $t_enabled ) ) {
-		$t_enabled = true;
-	}
-
-	if( is_null( $t_file_path ) ) {
-		$t_file_path = '';
 	}
 
 	$t_project_status = mci_get_project_status_id( $t_status );
 	$t_project_view_state = mci_get_project_view_state_id( $t_view_state );
 
 	// project_create returns the new project's id, spit that out to webservice caller
-	return project_create( $t_name, $t_description, $t_project_status, $t_project_view_state, $t_file_path, $t_enabled );
+	return project_create( $t_name, $t_description, $t_project_status, $t_project_view_state, $t_file_path, $t_enabled, $t_inherit_global );
 }
 
 /**

@@ -359,7 +359,8 @@ $l_oServer->wsdl->addComplexType(
 		'access_min'	=>	array( 'name' => 'access_min',	'type' => 'tns:ObjectRef',	'minOccurs' => '0' ),
 		'file_path'		=>	array( 'name' => 'file_path',	'type' => 'xsd:string',	'minOccurs' => '0' ),
 		'description'	=>	array( 'name' => 'description',	'type' => 'xsd:string',	'minOccurs' => '0' ),
-		'subprojects'	=>	array( 'name' => 'subprojects',	'type' => 'tns:ProjectDataArray', 'minOccurs' => '0' )
+		'subprojects'	=>	array( 'name' => 'subprojects',	'type' => 'tns:ProjectDataArray', 'minOccurs' => '0' ),
+		'inherit_global'		=>	array( 'name' => 'inherit_global',		'type' => 'xsd:boolean',	'minOccurs' => '0' )
 	)
 );
 
