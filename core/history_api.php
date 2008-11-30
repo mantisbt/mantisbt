@@ -77,23 +77,6 @@ function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_opt
 }
 
 # --------------------
-# return all bug history for a given bug id ordered by date
-function history_get_events( $p_bug_id ) {
-	$t_mantis_bug_history_table = db_get_table( 'mantis_bug_history_table' );
-	$t_mantis_user_table = db_get_table( 'mantis_user_table' );
-
-	$c_bug_id = db_prepare_int( $p_bug_id );
-
-	$query = "SELECT b.*, u.username
-				FROM $t_bug_history_table b
-				LEFT JOIN $t_mantis_user_table u
-				ON b.user_id=u.id
-				WHERE bug_id=" . db_param() . "
-				ORDER BY date_modified DESC";
-	$result = db_query_bound( $query, Array( $c_bug_id ) );
-}
-
-# --------------------
 # Retrieves the history events for the specified bug id and returns it in an array
 # The array is indexed from 0 to N-1.  The second dimension is: 'date', 'username',
 # 'note', 'change'.
