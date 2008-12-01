@@ -41,7 +41,7 @@ abstract class MantisFormattingPlugin extends MantisPlugin {
 	 * @return multi Array with formatted text and multiline paramater
 	 */
 	function text( $p_event, $p_string, $p_multiline = true ) {
-		return array( $p_string, $p_multiline );
+		return $p_string;
 	}
 
 	/**
@@ -52,7 +52,7 @@ abstract class MantisFormattingPlugin extends MantisPlugin {
 	 * @return multi Array with formatted text and multiline paramater
 	 */
 	function formatted( $p_event, $p_string, $p_multiline = true ) {
-		return array( $p_string, $p_multiline );
+		return $p_string;
 	}
 
 	/**
