@@ -41,7 +41,7 @@
             $p_test_password, $p_password ).This has a simple, non encrypted
             (yet) test of the LDAP directory for that user by asking for an
             entry with uid=username and password=test_password, if this exists,
-            it is presumed that the user should be granted access.
+            it is presumed that the user should be granted access.</para>
             <formalpara>
                 <title>Configuration basics</title>
                 <para>the LDIF format that was tested is as follows:

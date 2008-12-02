@@ -61,7 +61,8 @@
             <listitem>
                 <para>Add projects and users</para>
             </listitem>
-        </section>
+        </orderedlist>
+    </section>
 
 
         <section>
@@ -328,3 +329,4 @@
             </para>
 
         </section>
+</chapter>
