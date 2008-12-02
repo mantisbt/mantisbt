@@ -1180,12 +1180,12 @@
 			echo '<td class="center">';
 			html_button_bug_assign_to( $p_bug_id );
 			echo '</td>';
-		}
 
-		# Change State button
-		echo '<td class="center">';
-		html_button_bug_change_status( $p_bug_id );
-		echo '</td>';
+			# Change State button
+			echo '<td class="center">';
+			html_button_bug_change_status( $p_bug_id );
+			echo '</td>';
+		}
 
 		# MONITOR/UNMONITOR button
 		echo '<td class="center">';
@@ -1217,12 +1217,12 @@
 			echo '<td class="center">';
 			html_button_bug_move( $p_bug_id );
 			echo '</td>';
-		}
 
-		# DELETE button
-		echo '<td class="center">';
-		html_button_bug_delete( $p_bug_id );
-		echo '</td>';
+			# DELETE button
+			echo '<td class="center">';
+			html_button_bug_delete( $p_bug_id );
+			echo '</td>';
+		}
 
 		helper_call_custom_function( 'print_bug_view_page_custom_buttons', array( $p_bug_id ) );
 
