@@ -993,7 +993,7 @@
 	# list of filetypes to view inline. This is a string of extentions separated by commas
 	# This is used when downloading an attachment.  Rather than downloading, the attachment
 	# is viewed in the browser.
-	$g_inline_file_exts = 'gif,png';
+	$g_inline_file_exts = 'bmp,png,gif,jpg,jpeg';
 
 	# access level needed to download bug attachments
 	$g_download_attachments_threshold	= VIEWER;
