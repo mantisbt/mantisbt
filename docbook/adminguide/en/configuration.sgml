@@ -933,6 +933,13 @@
                 DEFINE("DIR_BASE","/www/mantisbt/jpgraph/");&nbsp;
             </para>
         </note>
+
+        <warning>
+            <para>Please note that JpGraph is free to use only for non-commercial,
+            open-source or educational use. All other uses are allowed with the
+            <ulink url="http://www.aditus.nu/jpgraph/proversion.php">professional 
+            version</ulink>.</para>
+        </warning>
     </section>
 
 
@@ -2404,7 +2411,7 @@
     <section>
         <title>Relationships</title>
 
-	<para />
+	<para>TODO</para>
     </section>
 
     <section>
