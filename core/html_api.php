@@ -1316,7 +1316,6 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 
 	PRINT '<table><tr class="vcenter">';
 	if( !$t_readonly ) {
-
 		# UPDATE button
 		echo '<td class="center">';
 		html_button_bug_update( $p_bug_id );
@@ -1326,12 +1325,12 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 		echo '<td class="center">';
 		html_button_bug_assign_to( $p_bug_id );
 		echo '</td>';
-	}
 
-	# Change State button
-	echo '<td class="center">';
-	html_button_bug_change_status( $p_bug_id );
-	echo '</td>';
+		# Change State button
+		echo '<td class="center">';
+		html_button_bug_change_status( $p_bug_id );
+		echo '</td>';
+	}
 
 	# MONITOR/UNMONITOR button
 	echo '<td class="center">';
@@ -1345,7 +1344,6 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 	echo '</td>';
 
 	if( !$t_readonly ) {
-
 		# CREATE CHILD button
 		echo '<td class="center">';
 		html_button_bug_create_child( $p_bug_id );
@@ -1353,7 +1351,6 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 	}
 
 	if( $t_resolved <= $t_status ) {
-
 		# resolved is not the same as readonly
 		PRINT '<td class="center">';
 
@@ -1368,12 +1365,12 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 		echo '<td class="center">';
 		html_button_bug_move( $p_bug_id );
 		echo '</td>';
-	}
 
-	# DELETE button
-	echo '<td class="center">';
-	html_button_bug_delete( $p_bug_id );
-	echo '</td>';
+		# DELETE button
+		echo '<td class="center">';
+		html_button_bug_delete( $p_bug_id );
+		echo '</td>';		
+	}
 
 	helper_call_custom_function( 'print_bug_view_page_custom_buttons', array( $p_bug_id ) );
 
