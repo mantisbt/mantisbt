@@ -31,6 +31,7 @@
  * @author Jani Reinikainen, devel@reinikainen.net
  * @author Juha, jomustaj@iki.fi
  * @author Nike
+ * @author Silvonen
  * @author Tomi Hurenius, tkh@iki.fi
  */
 
@@ -192,7 +193,6 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Yhteys FTP-palvelimelle epäonnistui.'
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Tapahtumankäsittelijällä ei ole tarpeeksi oikeuksia tapahtuman käsittelyyn tällä tilalla.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Samanniminen projekti on jo olemassa.  Palaa edelliselle sivulle ja anna toinen nimi.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Virheellinen projektinimi. Projektilla on oltava nimi, se ei voi olla tyhjä.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Käyttäjätunnusta ei löydy.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Selaimesi välittämä kirjautumistietosi on virheellinen.  Käyttäjätilisi on ehkä poistettu.';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Käyttäjän asetustietoja ei löytynyt.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Uutisartikkelia ei löydy.';
@@ -220,9 +220,9 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-autentikaatio epäonnistui';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP-palvelinyhteys epäonnistui.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP-tietueen päivittäminen epäonnistui.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-käyttäjätietoja ei löytynyt.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Tietokantayhteys epäonnistui.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Tietokantakysely epäonnistui.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Tietokantavalinta epäonnistui.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Tietokantayhteys epäonnistui. Tietokanta palautti virheen #%d: %s.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Tietokantakysely epäonnistui. Tietokanta palautti virheen #%d: %s kyselyllä: %s.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Tietokantavalinta epäonnistui. Tietokanta palautti virheen #%d: %s.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Samanniminen kategoria on jo olemassa.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Kopiointitoimea ei ole määritelty.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategoriaa ei löydy.';
