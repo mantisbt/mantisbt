@@ -102,6 +102,7 @@ $s_no_category = '(Nessuna Categoria)';
 $s_global_categories = 'Categorie Globali';
 $s_inherit = 'Eredita Categorie';
 $s_inherit_global = 'Eredita Categorie Globali';
+$s_inherit_parent = 'Eredita le Categorie dal Padre';
 $s_duplicate_of = 'duplicato di';
 $s_has_duplicate = 'duplicata da';
 $s_related_to = 'in relazione con';
