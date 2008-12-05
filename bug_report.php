@@ -84,14 +84,13 @@
 			$t_bug_data->os_build = $row['os_build'];
 		}
 	}
-
 	helper_call_custom_function( 'issue_create_validate', array( $t_bug_data ) );
 
 	# Validate the custom fields before adding the bug.
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
-		if ( $t_def['require_report'] && ( gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], '' ) == '' ) ) {
+		if ( $t_def['require_report'] && !gpc_isset( "custom_field_$t_id" ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}

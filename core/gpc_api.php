@@ -47,6 +47,16 @@
 		return $t_result;
 	}
 	# -----------------
+	# test to see if a gpc is set
+	function gpc_isset( $p_var_name ) {
+		if ( isset( $_POST[$p_var_name] ) ) {
+			return true;
+		} else if ( isset( $_GET[$p_var_name] ) ) {
+			return true;
+		}
+		return false;
+	}
+	# -----------------
 	# Retrieve a string GPC variable. Uses gpc_get().
 	#  If you pass in *no* default, an error will be triggered if
 	#  the variable does not exist
@@ -115,6 +125,10 @@
 		switch ($p_custom_field_type ) {
 			case CUSTOM_FIELD_TYPE_MULTILIST:
 			case CUSTOM_FIELD_TYPE_CHECKBOX:
+			    // ensure that the default is an array, if it is set
+			    if ( ($p_default !== NULL) && (!is_array($p_default)) ) {
+			        $p_default = array( $p_default );
+			    }
 				$t_values = gpc_get_string_array( $p_var_name, $p_default );
 				if( is_array( $t_values ) ) {
 					return implode( '|', $t_values );
