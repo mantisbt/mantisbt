@@ -80,7 +80,7 @@ $num_notes = sizeof( $t_bugnotes );
 	</td>
 </tr>
 <?php
-	event_signal( 'EVENT_VIEW_BUGNOTES_START', $f_bug_id );
+	event_signal( 'EVENT_VIEW_BUGNOTES_START', array( $f_bug_id, $t_bugnotes ) );
 
 	$t_normal_date_format = config_get( 'normal_date_format' );
 	$t_total_time = 0;
