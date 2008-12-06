@@ -526,7 +526,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 		if( $t_id != $p_filter_project_id ) {
 			PRINT "<option value=\"$t_id\"";
 			check_selected( $p_project_id, $t_id );
-			PRINT '>' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
+			PRINT '>' . string_display_line( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace );
 		}
 	}
