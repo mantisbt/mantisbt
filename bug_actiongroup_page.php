@@ -97,6 +97,7 @@
 			$t_finished 			= true;
 			$t_question_title 		= lang_get( 'close_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'close_group_bugs_button' );
+			$t_bugnote				= true;
 			break;
 
 		case 'DELETE' :
@@ -139,6 +140,7 @@
 				$t_question_title2 = lang_get( 'fixed_in_version' );
 				$t_form2 = 'fixed_in_version';
 			}
+			$t_bugnote				= true;
 			break;
 
 		case 'UP_PRIOR' :
@@ -153,6 +155,7 @@
 			$t_button_title 		= lang_get( 'status_group_bugs_button' );
 			$t_form 				= 'status';
 			$t_request 				= 'status';
+			$t_bugnote				= true;
 			break;
 
 		case 'UP_CATEGORY' :
@@ -303,6 +306,41 @@ if ( !$t_finished ) {
 }
 ?>
 
+<?php
+if( $t_bugnote ) {
+?>
+<tr class="row-1">
+	<td class="category">
+		<?php echo lang_get( 'add_bugnote_title' ); ?>
+	</td>
+	<td>
+		<textarea name="bugnote_text" cols="80" rows="10"></textarea>
+	</td>
+</tr>
+<?php if ( access_has_project_level( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) { ?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'view_status' ) ?>
+	</td>
+	<td>
+<?php
+		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
+		if ( access_has_project_level( config_get( 'set_view_status_threshold' ), $t_project_id ) ) {
+?>
+			<input type="checkbox" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
+<?php
+			echo lang_get( 'private' );
+		} else {
+			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
+		}
+?>
+	</td>
+</tr>
+<?php } ?>
+
+<?php
+}
+?>
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" class="button" value="<?php echo $t_button_title ?>" />
