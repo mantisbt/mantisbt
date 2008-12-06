@@ -970,7 +970,8 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 
 	for( $i = 0;$i < $t_enum_count;$i++ ) {
 		$t_elem = explode_enum_arr( $t_arr[$i] );
-		if(( $p_user_auth >= access_get_status_threshold( $t_elem[0] ) ) && ( !(( false == $p_show_current ) && ( $p_current_value == $t_elem[0] ) ) ) ) {
+		if( ( access_compare_level( $p_user_auth, access_get_status_threshold( $t_elem[0] ) ) ) 
+				&& ( !(( false == $p_show_current ) && ( $p_current_value == $t_elem[0] ) ) ) ) {
 			$t_enum_list[$t_elem[0]] = get_enum_element( 'status', $t_elem[0] );
 		}
 	}
@@ -979,7 +980,8 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 	if( true == $p_show_current ) {
 		$t_enum_list[$p_current_value] = get_enum_element( 'status', $p_current_value );
 	}
-	if(( true == $p_add_close ) && ( $p_current_value >= config_get( 'bug_resolved_status_threshold' ) ) ) {
+	if(( true == $p_add_close ) && 
+			( access_compare_level( $p_current_value, config_get( 'bug_resolved_status_threshold' ) ) ) ) {
 		$t_enum_list[CLOSED] = get_enum_element( 'status', CLOSED );
 	}
 	return $t_enum_list;
