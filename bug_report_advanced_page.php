@@ -36,6 +36,7 @@
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'last_visited_api.php' );
 	require_once( $t_core_path.'projax_api.php' );
+	require_once( $t_core_path.'collapse_api.php' );
 
 	$f_master_bug_id = gpc_get_int( 'm_id', 0 );
 
@@ -250,26 +251,29 @@
 
 <?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 <!-- Profile -->
+
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'select_profile' ) ?>
 	</td>
 	<td>
-		<select <?php echo helper_get_tab_index() ?> name="profile_id">
-			<?php print_profile_option_list( auth_get_current_user_id(), $f_profile_id ) ?>
-		</select>
+		<?php if (count(profile_get_all_for_user( auth_get_current_user_id() )) > 0) { ?>
+			<select <?php echo helper_get_tab_index() ?> name="profile_id">
+				<?php print_profile_option_list( auth_get_current_user_id(), $f_profile_id ) ?>
+			</select>
+		<?php } ?>
 	</td>
 </tr>
 
-
-<!-- instructions -->
-<tr>
-	<td colspan="2">
-		<?php echo lang_get( 'or_fill_in' ) ?>
-	</td>
-</tr>
-
-
+<tr <?php echo helper_alternate_class() ?>>
+	<td colspan="2" class="none">
+		<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+			<?php collapse_open( 'profile' ); collapse_icon('profile'); ?>
+			<?php echo lang_get( 'or_fill_in' ); ?>
+			<table class="width90" cellspacing="0">
+		<?php } else { ?>
+			<?php echo lang_get( 'or_fill_in' ); ?>	
+		<?php } ?>
 <!-- Platform -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -340,7 +344,13 @@
 		?>
 	</td>
 </tr>
-
+		<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+			</table>
+			<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo lang_get( 'or_fill_in' );?>
+			<?php collapse_end( 'profile' ); ?>		
+		<?php } ?>
+	</td>
+</tr>
 
 <!-- spacer -->
 <tr class="spacer">
