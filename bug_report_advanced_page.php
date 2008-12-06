@@ -248,7 +248,7 @@
 	<td colspan="2"></td>
 </tr>
 
-
+<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 <!-- Profile -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -346,7 +346,7 @@
 <tr class="spacer">
 	<td colspan="2"></td>
 </tr>
-
+<?php } ?>
 
 <?php
 	$t_show_version = ( ON == config_get( 'show_product_version' ) )

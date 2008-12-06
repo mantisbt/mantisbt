@@ -288,6 +288,7 @@
 		<?php echo get_enum_element( 'resolution', $t_bug->resolution ) ?>
 	</td>
 
+	<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 	<!-- Platform -->
 	<td class="category">
 		<?php echo lang_get( 'platform' ) ?>
@@ -295,6 +296,9 @@
 	<td>
 		<?php echo $t_bug->platform ?>
 	</td>
+	<?php } else {?>
+		<td colspan="2"></td>
+	<?php } ?>
 
 </tr>
 
@@ -311,6 +315,7 @@
 
 	<td colspan="2">&nbsp;</td>
 
+	<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 	<!-- Operating System -->
 	<td class="category">
 		<?php echo lang_get( 'os' ) ?>
@@ -318,7 +323,10 @@
 	<td>
 		<?php echo $t_bug->os ?>
 	</td>
-
+	<?php } else {?>
+		<td colspan="2"></td>
+	<?php } ?>
+	
 </tr>
 
 
@@ -335,6 +343,7 @@
 	<!-- spacer -->
 	<td colspan="2">&nbsp;</td>
 
+	<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 	<!-- OS Version -->
 	<td class="category">
 		<?php echo lang_get( 'os_version' ) ?>
@@ -342,6 +351,9 @@
 	<td>
 		<?php echo $t_bug->os_build ?>
 	</td>
+	<?php } else {?>
+		<td colspan="2"></td>
+	<?php } ?>
 
 </tr>
 

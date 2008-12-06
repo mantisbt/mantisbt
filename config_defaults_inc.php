@@ -2019,6 +2019,9 @@
 	# Profile Related Settings
 	#############################
 
+	# Enable Profiles
+	$g_enable_profiles = ON;
+
 	# Add profile threshold
 	$g_add_profile_threshold = REPORTER;
 

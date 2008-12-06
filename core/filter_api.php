@@ -2029,7 +2029,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<a href="<?php PRINT $t_filters_url . FILTER_PROPERTY_RESOLUTION_ID . '[]';?>" id="show_resolution_filter"><?php PRINT lang_get( 'resolution' )?>:</a>
 			</td>
 			<td class="small-caption" valign="top">
-				<a href="<?php PRINT $t_filters_url . 'show_profile[]';?>" id="show_profile_filter"><?php PRINT lang_get( 'profile' )?>:</a>
+				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
+					<a href="<?php PRINT $t_filters_url . 'show_profile[]';?>" id="show_profile_filter"><?php PRINT lang_get( 'profile' )?>:</a>
+				<?php } ?>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
 			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
@@ -2249,6 +2251,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		}
 		?>
 			</td>
+			<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 			<td class="small-caption" valign="top" id="show_profile_filter_target">
 							<?php
 								$t_output = '';
@@ -2284,6 +2287,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		}
 		?>
 			</td>
+			<?php } else { ?>
+				<td></td>
+			<?php } ?>
 			<?php if( $t_filter_cols > 8 ) {
 			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
 		}?>
@@ -2732,13 +2738,19 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		</tr>
 		<tr <?php PRINT "class=\"" . $t_trclass . "\"";?>>
 			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PLATFORM;?>" id="platform_filter"><?php echo lang_get( 'platform' )?>:</a>
+				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
+					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PLATFORM;?>" id="platform_filter"><?php echo lang_get( 'platform' )?>:</a>
+				<?php } ?>
 			</td>
 			<td class="small-caption" valign="top">
-				<a href="<?php PRINT $t_filters_url . FILTER_PROPERTY_OS;?>" id="os_filter"><?php echo lang_get( 'os' )?>:</a>
+				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
+					<a href="<?php PRINT $t_filters_url . FILTER_PROPERTY_OS;?>" id="os_filter"><?php echo lang_get( 'os' )?>:</a>
+				<?php } ?>
 			</td>
 			<td class="small-caption" valign="top">
-				<a href="<?php PRINT $t_filters_url . FILTER_PROPERTY_OS_BUILD;?>" id="os_build_filter"><?php echo lang_get( 'os_version' )?>:</a>
+				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
+					<a href="<?php PRINT $t_filters_url . FILTER_PROPERTY_OS_BUILD;?>" id="os_build_filter"><?php echo lang_get( 'os_version' )?>:</a>
+				<?php } ?>
 			</td>
 			<td class="small-caption" valign="top" colspan="5">
 				<?php if ( access_has_global_level( config_get( 'tag_view_threshold' ) ) ) { ?>
@@ -2750,6 +2762,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		}?>
 		</tr>
 		<tr class="row-1">
+			<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 			<td class="small-caption" valign="top" id="platform_filter_target">
 				<?php
 					print_multivalue_field( FILTER_PROPERTY_PLATFORM, $t_filter[FILTER_PROPERTY_PLATFORM] );
@@ -2765,6 +2778,10 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					print_multivalue_field( FILTER_PROPERTY_OS_BUILD, $t_filter[FILTER_PROPERTY_OS_BUILD] );
 		?>
 			</td>
+			<?php } else {?>
+				<td colspan="3">&nbsp;</td>
+			<?php } ?>
+			
 			<td class="small-caption" valign="top" id="tag_string_filter_target" colspan="5">
 				<?php
 					$t_tag_string = $t_filter[FILTER_PROPERTY_TAG_STRING];
