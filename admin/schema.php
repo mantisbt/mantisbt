@@ -365,7 +365,13 @@ $upgrade[] = Array('CreateTableSQL', Array( db_get_table( 'mantis_plugin_table' 
 	", Array( 'mysql' => 'ENGINE=MyISAM', 'pgsql' => 'WITHOUT OIDS' ) ) );
 
 $upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_user_pref_table' ), "redirect_delay 	I NOTNULL DEFAULT 0" ) );
-$upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_custom_field_table' ), "possible_values X NOTNULL DEFAULT \" '' \"" ) );
+
+/* apparently mysql now has a STRICT mode, where setting a DEFAULT value on a blob/text is now an error, instead of being silently ignored */
+if ( $f_db_type == 'mysql' || $f_db_type == 'mysqli' ) {
+	$upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_custom_field_table' ), "possible_values X NOTNULL" ) );
+} else { 
+	$upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_custom_field_table' ), "possible_values X NOTNULL DEFAULT \" '' \"" ) );
+}
 
 $upgrade[] = Array( 'CreateTableSQL', Array( db_get_table( 'mantis_category_table' ), "
 	id				I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,

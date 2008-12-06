@@ -405,11 +405,11 @@ function custom_field_create( $p_name ) {
 
 	$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 	$query = "INSERT INTO $t_custom_field_table
-					( name )
+					( name, possible_values )
 				  VALUES
-					( " . db_param() . " )";
+					( " . db_param() . "," . db_param() . ")";
 
-	db_query_bound( $query, Array( $c_name ) );
+	db_query_bound( $query, Array( $c_name, '' ) );
 
 	return db_insert_id( $t_custom_field_table );
 }
