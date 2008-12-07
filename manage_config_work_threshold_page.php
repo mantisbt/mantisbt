@@ -128,7 +128,7 @@
             } 
 
 			if ( $t_can_change ) {
-			    $t_checked = $t_project ? "CHECKED" : "";
+			    $t_checked = $t_project ? "checked=\"checked\"" : "";
 			    $t_value = "<input type=\"checkbox\" name=\"flag_thres_" . $p_threshold . "[]\" value=\"$t_access_level\" $t_checked />";
 			    $t_show_submit = true;
 			} else {
@@ -177,7 +177,7 @@
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		if ( $t_can_change ) {
-		    $t_checked = ( ON == config_get( $p_threshold ) ) ? "CHECKED" : "";
+		    $t_checked = ( ON == config_get( $p_threshold ) ) ? "checked=\"checked\"" : "";
 		    $t_value = "<input type=\"checkbox\" name=\"flag_" . $p_threshold . "\" value=\"1\" $t_checked />";
 		    $t_show_submit = true;
 		} else {

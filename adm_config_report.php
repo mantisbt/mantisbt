@@ -166,6 +166,7 @@
 ?>
 <br />
 <!-- Config Set Form -->
+<form method="post" action="adm_config_set.php">
 <table class="width100" cellspacing="1">
 
 <!-- Title -->
@@ -173,8 +174,7 @@
 	<td class="form-title" colspan="2">
 		<?php echo lang_get( 'set_configuration_option' ) ?>
 	</td>
-</tr>
-		<form method="post" action="adm_config_set.php">
+</tr>		
 <tr <?php echo helper_alternate_class() ?> valign="top">
 	<td>
 		<?php echo lang_get( 'username' ) ?>
@@ -193,7 +193,7 @@
 	<td>
 		<select name="project_id">
 			<option value="0" selected="selected"><?php echo lang_get( 'all_projects' ); ?></option>
-			<?php print_project_option_list( ALL_PROJECTS, false ) ?>" />
+			<?php print_project_option_list( ALL_PROJECTS, false ) ?>
 		</select>
 	</td>
 </tr>
@@ -230,9 +230,9 @@
 	<td colspan="2">
 			<input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option' ) ?>" />
 	</td>
-</tr>
-		</form>
+</tr>		
 </table>
+</form>
 <?php
 	} # end user can change config
 ?>

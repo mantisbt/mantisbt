@@ -98,7 +98,7 @@
 		$t_flag = get_notify_flag( $p_action, $p_flag );
 		if ( $t_can_change_flags || $t_can_change_defaults ) {
 			$t_flag_name = $p_action . ':' . $p_flag;
-			$t_set = $t_flag ? "CHECKED" : "";
+			$t_set = $t_flag ? "checked=\"checked\"" : "";
 			return "<input type=\"checkbox\" name=\"flag[]\" value=\"$t_flag_name\" $t_set />";
 		} else {
 			return ( $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&nbsp;' );
@@ -131,7 +131,7 @@
 			&& ( $p_access <= get_notify_flag( $p_action, 'threshold_max' ) );
 		if ( $t_can_change_flags  || $t_can_change_defaults ) {
 			$t_flag_name = $p_action . ':' . $p_access;
-			$t_set = $t_flag ? "CHECKED" : "";
+			$t_set = $t_flag ? "checked=\"checked\"" : "";
 			return "<input type=\"checkbox\" name=\"flag_threshold[]\" value=\"$t_flag_name\" $t_set />";
 		} else {
 			return $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&nbsp;';
