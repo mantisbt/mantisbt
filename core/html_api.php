@@ -829,7 +829,7 @@ function print_manage_menu( $p_page = '' ) {
 		PRINT '&nbsp;]</span> ';
 	}
 
-	PRINT '</div>';
+	PRINT '</p></div>';
 }
 
 # --------------------
