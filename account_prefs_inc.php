@@ -265,7 +265,7 @@
 		<?php echo lang_get( 'email_bugnote_limit' ) ?>
 	</td>
 	<td>
-		<input type="text" name="email_bugnote_limit" maxlength="2" size="2" value="<?php echo $t_pref->email_bugnote_limit ?>">
+		<input type="text" name="email_bugnote_limit" maxlength="2" size="2" value="<?php echo $t_pref->email_bugnote_limit ?>" />
 	</td>
 </tr>
 <?php } else { ?>

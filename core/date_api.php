@@ -175,12 +175,12 @@ function date_print_calendar( $p_button_name = 'trigger' ) {
 		echo "<script type=\"text/javascript\" src=\"javascript/jscalendar/calendar-setup.js\"></script>\n";
 		$t_icon_path = config_get( 'icon_path' );
 		$t_cal_icon = $t_icon_path . "calendar-img.gif";
-		echo "<input type=\"image\" class=\"button\" id=\"" . $p_button_name . "\" SRC=\"";
+		echo "<input type=\"image\" class=\"button\" id=\"" . $p_button_name . "\" src=\"";
 		echo $t_cal_icon;
 		$t_format = config_get( 'short_date_format' );
 		$t_new_format = str_replace( '-', '-%', $t_format );
 		$t_format = "%" . $t_new_format;
-		echo "\" onClick=\"return showCalendar ('sel1', '" . $t_format . "', 24, true)\" />";
+		echo "\" onclick=\"return showCalendar ('sel1', '" . $t_format . "', 24, true)\" />";
 	}
 }
 
