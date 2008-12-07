@@ -84,8 +84,8 @@
 		<input type="submit" class="button" value="<?php echo lang_get( 'post_news_button' ) ?>" />
 	</td>
 </tr>
-</form>
 </table>
+</form>
 </div>
 <?php # Add News Form END ?>
 
