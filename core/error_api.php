@@ -198,10 +198,10 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 			exit();
 		case 'inline':
 			echo '<p style="color:red">', $t_error_type, ': ', $t_error_description, '</p>';
+			$g_error_handled = true;
 			break;
-		default:
-
-			# do nothing
+		default:			
+			# do nothing - note we treat this as we've not handled an error, so any redirects go through.
 		}
 
 		if( $t_lang_pushed ) {
@@ -209,7 +209,6 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	}
 
 	$g_error_parameters = array();
-	$g_error_handled = true;
 	$g_error_proceed_url = null;
 }
 
