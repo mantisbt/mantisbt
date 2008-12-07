@@ -75,8 +75,8 @@
 		<?php print_captcha_input( 'captcha', '' ) ?>
 	</td>
 	<td>
-		<img src="make_captcha_img.php?public_key=<?php echo $t_key ?>">
-		<input type="hidden" name="public_key" value="<?php echo $t_key ?>">
+		<img src="make_captcha_img.php?public_key=<?php echo $t_key ?>" alt="visual captcha" />
+		<input type="hidden" name="public_key" value="<?php echo $t_key ?>" />
 	</td>
 </tr>
 <?php
