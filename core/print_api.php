@@ -146,18 +146,6 @@ function print_successful_redirect( $p_redirect_to ) {
 	}
 }
 
-# --------------------
-# Print a redirect header to update a bug
-function print_header_redirect_update( $p_bug_id ) {
-	print_header_redirect( string_get_bug_update_url( $p_bug_id ) );
-}
-
-# --------------------
-# Print a redirect header to update a bug
-function print_header_redirect_report() {
-	print_header_redirect( string_get_bug_report_url() );
-}
-
 # Print avatar image for the given user ID
 function print_avatar( $p_user_id, $p_size = 80 ) {
 	if( !user_exists( $p_user_id ) ) {
@@ -224,19 +212,7 @@ function print_captcha_input( $p_field_name ) {
 # ##########################################################################
 # Option List Printing API
 # ##########################################################################
-# --------------------
-# sorts the array by the first element of the array element
-# @@@ might not be used
-function cmp( $p_var1, $p_var2 ) {
-	if( $p_var1[0][0] == $p_var2[0][0] ) {
-		return 0;
-	}
-	if( $p_var1[0][0] < $p_var2[0][0] ) {
-		return -1;
-	} else {
-		return 1;
-	}
-}
+
 
 # --------------------
 # This populates an option list with the appropriate users by access level
@@ -482,24 +458,6 @@ function print_news_string_by_news_id( $p_news_id ) {
 }
 
 # --------------------
-# Used for update pages
-function print_field_option_list( $p_list, $p_item = '' ) {
-	$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
-
-	$t_category_string = get_enum_string( $t_mantis_bug_table, $p_list );
-	$t_arr = explode_enum_string( $t_category_string );
-	$entry_count = count( $t_arr );
-	for( $i = 0;$i < $entry_count;$i++ ) {
-		$t_s = str_replace( '\'', '', $t_arr[$i] );
-		PRINT "<option value=\"$t_s\"";
-		check_selected( $p_item, $t_s );
-		PRINT ">$t_s</option>";
-	}
-
-	# end for
-}
-
-# --------------------
 function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
 
 	if( null === $p_threshold ) {
@@ -699,40 +657,6 @@ function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
 }
 
 # --------------------
-function print_news_project_option_list( $p_project_id ) {
-	$t_mantis_project_table = db_get_table( 'mantis_project_table' );
-	$t_mantis_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
-
-	$result = '';
-	if( access_has_project_level( ADMINISTRATOR ) ) {
-		$query = "SELECT *
-					FROM $t_mantis_project_table
-					ORDER BY name";
-		$result = db_query_bound( $query );
-	} else {
-		$t_user_id = auth_get_current_user_id();
-		$query = "SELECT p.id, p.name
-					FROM $t_mantis_project_table p, $t_mantis_project_user_list_table m
-					WHERE 	p.id=m.project_id AND
-							m.user_id=" . db_param() . " AND
-							p.enabled=" . db_param();
-		$result = db_query_bound( $query, Array( $t_user_id, 1 ) );
-	}
-
-	$project_count = db_num_rows( $result );
-	for( $i = 0;$i < $project_count;$i++ ) {
-		$row = db_fetch_array( $result );
-		$t_id = $row['id'];
-
-		PRINT "<option value=\"$t_id\"";
-		check_selected( $t_id, $p_project_id );
-		PRINT ">$t_name</option>";
-	}
-
-	# end for
-}
-
-# --------------------
 # Since categories can be orphaned we need to grab all unique instances of category
 # We check in the project category table and in the bug table
 # We put them all in one array and make sure the entries are unique
@@ -763,13 +687,6 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 		echo "<option value=\"$t_category_id\"", check_selected( $p_category_id, $t_category_id ), '>';
 		echo category_full_name( $t_category_id, $t_category_row['project_id'] != $t_project_id ), '</option>';
 	}
-}
-
-# Since categories can be orphaned we need to grab all unique instances of category
-# We check in the project category table and in the bug table
-# We put them all in one array and make sure the entries are unique
-function print_category_complete_option_list( $p_category_id = 0, $p_project_id = null ) {
-	return print_category_option_list( $p_category_id, $p_project_id );
 }
 
 # Now that categories are identified by numerical ID, we need an old-style name
@@ -1306,12 +1223,6 @@ function print_bug_link( $p_bug_id, $p_detail_info = true ) {
 	PRINT string_get_bug_view_link( $p_bug_id, null, $p_detail_info );
 }
 
-# prints a link to UPDATE a bug given an ID
-#  account for the user preference and site override
-function print_bug_update_link( $p_bug_id ) {
-	PRINT string_get_bug_update_link( $p_bug_id );
-}
-
 # formats the priority given the status
 # shows the priority in BOLD if the bug is NOT closed and is of significant priority
 function print_formatted_priority_string( $p_status, $p_priority ) {
@@ -1334,60 +1245,6 @@ function print_formatted_severity_string( $p_status, $p_severity ) {
 	} else {
 		PRINT $t_sev_str;
 	}
-}
-
-function print_project_category_string( $p_project_id ) {
-	$t_mantis_category_table = db_get_table( 'mantis_category_table' );
-
-	$c_project_id = db_prepare_int( $p_project_id );
-
-	$query = "SELECT name
-				FROM $t_mantis_category_table
-				WHERE project_id='$c_project_id'
-				ORDER BY name";
-	$result = db_query( $query );
-	$category_count = db_num_rows( $result );
-	$t_string = '';
-
-	for( $i = 0;$i < $category_count;$i++ ) {
-		$row = db_fetch_array( $result );
-		$t_name = $row['name'];
-
-		if( $i + 1 < $category_count ) {
-			$t_string .= $t_name . ', ';
-		} else {
-			$t_string .= $t_name;
-		}
-	}
-
-	return $t_string;
-}
-
-function print_project_version_string( $p_project_id ) {
-	$t_mantis_project_version_table = db_get_table( 'mantis_project_version_table' );
-	$t_mantis_project_table = db_get_table( 'mantis_project_table' );
-
-	$c_project_id = db_prepare_int( $p_project_id );
-
-	$query = "SELECT version
-				FROM $t_mantis_project_version_table
-				WHERE project_id=" . db_param();
-	$result = db_query_bound( $query, Array( $c_project_id ) );
-	$version_count = db_num_rows( $result );
-	$t_string = '';
-
-	for( $i = 0;$i < $version_count;$i++ ) {
-		$row = db_fetch_array( $result );
-		$t_version = $row['version'];
-
-		if( $i + 1 < $version_count ) {
-			$t_string .= $t_version . ', ';
-		} else {
-			$t_string .= $t_version;
-		}
-	}
-
-	return $t_string;
 }
 
 # ##########################################################################
@@ -1703,20 +1560,6 @@ function print_lost_password_link() {
 	if(( ON == config_get( 'lost_password_feature' ) ) && ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		print_bracket_link( 'lost_pwd_page.php', lang_get( 'lost_password_link' ) );
 	}
-}
-
-function print_proceed( $p_result, $p_query, $p_link ) {
-	PRINT '<br />';
-	PRINT '<div align="center">';
-	if( $p_result ) {
-		# SUCCESS
-		PRINT lang_get( 'operation_successful' ) . '<br />';
-	} else {
-		# FAILURE
-		print_sql_error( $p_query );
-	}
-	print_bracket_link( $p_link, lang_get( 'proceed' ) );
-	PRINT '</div>';
 }
 
 # ===============================
