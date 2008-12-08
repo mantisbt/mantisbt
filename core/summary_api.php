@@ -606,7 +606,6 @@ function summary_print_by_category() {
 	$t_closed_val = CLOSED;
 
 	while( $row = db_fetch_array( $result ) ) {
-		$v_project_id = $row['project_id'];
 		$v_category_id = $row['category_id'];
 		$v_category_name = $row['category_name'];
 
@@ -651,7 +650,7 @@ function summary_print_by_category() {
 		$last_category_id = $v_category_id;
 		$last_category_name = $v_category_name;
 		if(( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
-			$last_project = $v_project_id;
+			$last_project = $row['project_id'];
 		}
 	}
 
