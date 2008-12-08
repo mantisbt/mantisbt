@@ -25,8 +25,6 @@
 # An update identifier is inferred from the ordering of this table. ONLY ADD NEW CHANGES TO THE
 #  END OF THE TABLE!!!
 
-$t_db_type = config_get_global( 'db_type' );
-
 $upgrade[] = Array('CreateTableSQL',Array(db_get_table( 'mantis_config_table' ),"
 			  config_id C(64) NOTNULL PRIMARY,
 			  project_id I DEFAULT '0' PRIMARY,
@@ -369,7 +367,7 @@ $upgrade[] = Array('CreateTableSQL', Array( db_get_table( 'mantis_plugin_table' 
 $upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_user_pref_table' ), "redirect_delay 	I NOTNULL DEFAULT 0" ) );
 
 /* apparently mysql now has a STRICT mode, where setting a DEFAULT value on a blob/text is now an error, instead of being silently ignored */
-if ( $t_db_type == 'mysql' || $t_db_type == 'mysqli' ) {
+if ( isset( $f_db_type ) && ( $f_db_type == 'mysql' || $f_db_type == 'mysqli' ) ) {
 	$upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_custom_field_table' ), "possible_values X NOTNULL" ) );
 } else { 
 	$upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_custom_field_table' ), "possible_values X NOTNULL DEFAULT \" '' \"" ) );
