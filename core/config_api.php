@@ -511,18 +511,18 @@ function config_obsolete( $p_var, $p_replace ) {
 	#     new config option names in the warning text)
 
 	if( config_is_set( $p_var ) ) {
-		PRINT '<p><b>Warning:</b> The configuration option <tt>$g_' . $p_var . '</tt> is now obsolete';
+		echo '<p><b>Warning:</b> The configuration option <tt>$g_' . $p_var . '</tt> is now obsolete';
 		if( is_array( $p_replace ) ) {
-			PRINT ', please see the following options: <ul>';
+			echo ', please see the following options: <ul>';
 			foreach( $p_replace as $t_option ) {
-				PRINT '<li>$g_' . $t_option . '</li>';
+				echo '<li>$g_' . $t_option . '</li>';
 			}
-			PRINT '</ul>';
+			echo '</ul>';
 		}
 		elseif( !is_blank( $p_replace ) ) {
-			PRINT ', please use <tt>$g_' . $p_replace . '</tt> instead.';
+			echo ', please use <tt>$g_' . $p_replace . '</tt> instead.';
 		}
-		PRINT '</p>';
+		echo '</p>';
 	}
 }
 

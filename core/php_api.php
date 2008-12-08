@@ -63,7 +63,7 @@ function php_version_at_least( $p_version_string ) {
 # Enforce our minimum requirements
 if( !php_version_at_least( PHP_MIN_VERSION ) ) {
 	@ob_end_clean();
-	PRINT '<b>FATAL ERROR: Your version of PHP is too old.  Mantis requires PHP version ' . PHP_MIN_VERSION . ' or newer</b><br />Your version of PHP is version ' . phpversion();
+	echo '<b>FATAL ERROR: Your version of PHP is too old.  Mantis requires PHP version ' . PHP_MIN_VERSION . ' or newer</b><br />Your version of PHP is version ' . phpversion();
 	die();
 }
 

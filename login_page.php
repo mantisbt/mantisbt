@@ -128,11 +128,11 @@
 </div>
 
 <?php
-	PRINT '<br /><div align="center">';
+	echo '<br /><div align="center">';
 	print_signup_link();
-	PRINT '&nbsp;';
+	echo '&nbsp;';
 	print_lost_password_link();
-	PRINT '</div>';
+	echo '</div>';
 
 	#
 	# Do some checks to warn administrators of possible security holes.

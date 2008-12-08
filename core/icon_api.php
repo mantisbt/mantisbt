@@ -35,7 +35,7 @@ function icon_get_status_icon( $p_icon ) {
 }
 
 function print_status_icon( $p_icon ) {
-	PRINT icon_get_status_icon( $p_icon );
+	echo icon_get_status_icon( $p_icon );
 }
 
 # The input $p_dir is either ASC or DESC
@@ -62,9 +62,9 @@ function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
 
 	$t_none = NONE;
 	if( !is_blank( $t_sort_icon_arr[$t_dir] ) ) {
-		PRINT "<img src=\"$t_icon_path$t_sort_icon_arr[$t_dir]\" alt=\"\" />";
+		echo "<img src=\"$t_icon_path$t_sort_icon_arr[$t_dir]\" alt=\"\" />";
 	} else {
-		PRINT "<img src=\"$t_icon_path$t_status_icon_arr[$t_none]\" alt=\"\" />";
+		echo "<img src=\"$t_icon_path$t_status_icon_arr[$t_none]\" alt=\"\" />";
 	}
 }
 
@@ -76,8 +76,8 @@ function print_unread_icon( $p_unread = READ ) {
 
 	$t_none = NONE;
 	if( !is_blank( $t_unread_icon_arr[$p_unread] ) ) {
-		PRINT "<img src=\"$t_icon_path$t_unread_icon_arr[$p_unread]\" alt=\"\" />";
+		echo "<img src=\"$t_icon_path$t_unread_icon_arr[$p_unread]\" alt=\"\" />";
 	} else {
-		PRINT "<img src=\"$t_icon_path$t_status_icon_arr[$t_none]\" alt=\"\" />";
+		echo "<img src=\"$t_icon_path$t_status_icon_arr[$t_none]\" alt=\"\" />";
 	}
 }

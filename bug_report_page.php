@@ -351,7 +351,7 @@
 	</td>
 	<td>
 		<?php relationship_list_box( /* none */ -2, "rel_type", false, true ) ?>
-		<?php PRINT '<b>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</b>' ?>
+		<?php echo '<b>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</b>' ?>
 	</td>
 </tr>
 <?php

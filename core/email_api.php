@@ -1027,7 +1027,6 @@ function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_proj
 	}
 
 	# send mail
-	# PRINT '<br />email_bug_info::Sending email to :'.$t_user_email;
 	$t_ok = email_store( $t_user_email, $t_subject, $t_message, $t_mail_headers );
 
 	return $t_ok;

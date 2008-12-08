@@ -124,24 +124,24 @@ function check_selected( $p_var, $p_val = true ) {
 			# catch the case where one entry is 0 and the other is a string.
 			if(( is_string( $t_this_var ) && !is_string( $p_val ) ) ) {
 				if( $t_this_var === $p_val ) {
-					PRINT ' selected="selected" ';
+					echo ' selected="selected" ';
 					return;
 				}
 			}
 			elseif( $t_this_var == $p_val ) {
-				PRINT ' selected="selected" ';
+				echo ' selected="selected" ';
 				return;
 			}
 		}
 	} else {
 		if( is_string( $p_var ) && is_string( $p_val ) ) {
 			if( $p_var === $p_val ) {
-				PRINT ' selected="selected" ';
+				echo ' selected="selected" ';
 				return;
 			}
 		}
 		elseif( $p_var == $p_val ) {
-			PRINT ' selected="selected" ';
+			echo ' selected="selected" ';
 			return;
 		}
 	}
@@ -156,7 +156,7 @@ function check_selected( $p_var, $p_val = true ) {
 #  to the boolean value true
 function check_checked( $p_var, $p_val = true ) {
 	if( $p_var == $p_val ) {
-		PRINT ' checked="checked" ';
+		echo ' checked="checked" ';
 	}
 }
 
@@ -282,21 +282,21 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 	#  be about 50% the width of the screen so that it doesn't become to hard
 	#  to read.
 
-	PRINT "<br />\n<div align=\"center\">\n";
+	echo "<br />\n<div align=\"center\">\n";
 	print_hr();
-	PRINT "\n$p_message\n";
+	echo "\n$p_message\n";
 
-	PRINT '<form method="post" action="' . $_SERVER['SCRIPT_NAME'] . "\">\n";
+	echo '<form method="post" action="' . $_SERVER['SCRIPT_NAME'] . "\">\n";
 
 	print_hidden_inputs( gpc_strip_slashes( $_POST ) );
 	print_hidden_inputs( gpc_strip_slashes( $_GET ) );
 
-	PRINT "<input type=\"hidden\" name=\"_confirmed\" value=\"1\" />\n";
-	PRINT '<br /><br /><input type="submit" class="button" value="' . $p_button_label . '" />';
-	PRINT "\n</form>\n";
+	echo "<input type=\"hidden\" name=\"_confirmed\" value=\"1\" />\n";
+	echo '<br /><br /><input type="submit" class="button" value="' . $p_button_label . '" />';
+	echo "\n</form>\n";
 
 	print_hr();
-	PRINT "</div>\n";
+	echo "</div>\n";
 	html_page_bottom1();
 	exit;
 }

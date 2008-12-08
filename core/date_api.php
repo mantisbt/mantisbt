@@ -35,7 +35,7 @@ function date_get_null() {
 
 # prints the date given the formating string
 function print_date( $p_format, $p_date ) {
-	PRINT date( $p_format, $p_date );
+	echo date( $p_format, $p_date );
 }
 
 function print_month_option_list( $p_month = 0 ) {

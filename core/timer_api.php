@@ -88,11 +88,11 @@ class BC_Timer {
 			for( $i = 0;$i + 1 < $timer_count;$i++ ) {
 				$time = $this->atime[$i + 1][1] - $this->atime[$i][1];
 				$time_precent = $time / $total_time * 100;
-				PRINT '<span class="italic">Time: ' . number_format( $time, 6 ) . ' seconds ( ' . number_format( $time_precent, 2 ) . '% ) for ' . $this->atime[$i][0] . ' -to- ' . $this->atime[$i + 1][0] . '</span><br />';
+				echo '<span class="italic">Time: ' . number_format( $time, 6 ) . ' seconds ( ' . number_format( $time_precent, 2 ) . '% ) for ' . $this->atime[$i][0] . ' -to- ' . $this->atime[$i + 1][0] . '</span><br />';
 			}
 		}
 
 		# display total time
-		PRINT '<span class="italic">Time: ' . number_format( $total_time, 6 ) . ' seconds.</span><br />';
+		echo '<span class="italic">Time: ' . number_format( $total_time, 6 ) . ' seconds.</span><br />';
 	}
 }

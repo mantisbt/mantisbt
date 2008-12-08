@@ -110,11 +110,11 @@
 </div>
 
 <?php
-	PRINT '<br /><div align="center">';
+	echo '<br /><div align="center">';
 	print_login_link();
-	PRINT '&nbsp;';
+	echo '&nbsp;';
 	print_lost_password_link();
-	PRINT '</div>';
+	echo '</div>';
 
 	if ( ON == config_get( 'use_javascript' ) ) {
 ?>
