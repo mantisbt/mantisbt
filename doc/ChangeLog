@@ -1,5 +1,23 @@
 Mantis ChangeLog
 
+2008.12.09 - 1.1.6
+===================================
+
+This release fixes once and for all the caching troubles from previous stable releases, some
+access permissions bugs, and a few various other issues. This release also improves the existing
+source control integration by allowing remote checkins.
+
+- 0009893: [administration] Users can change status on ViewOnly Tasks (jreese) - resolved.
+- 0009815: [bugtracker] gpc_get_string_array() sometimes returns non-arrays (thraxisp) - resolved.
+- 0009869: [bugtracker] application error 2800 still in version 1.1.5 (jreese) - resolved.
+- 0009888: [bugtracker] Issue History Problem... build, os, os_version, and platform are not looking right and are not effected by language files. (jreese) - resolved.
+- 0009890: [bugtracker] Case of extension for inline image is not ignored (jreese) - resolved.
+- 0009900: [customization] Allowing update issue status disables the function to administrator (thraxisp) - resolved.
+- 0008847: [integration] Revamp SVN and CVS integration (jreese) - resolved.
+- 0009651: [other] Version copy from parent project copies incorrect date (jreese) - resolved.
+- 0009928: [other] Inconsistent uses of file extension configuration settings. (jreese) - resolved.
+
+
 2008.11.21 - 1.1.5
 ===================================
 
