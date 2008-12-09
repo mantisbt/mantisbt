@@ -58,7 +58,7 @@ function install_category_migrate() {
 	foreach( $t_data as $t_project_id => $t_categories ) {
 		$t_inserted = array();
 		foreach( $t_categories as $t_name => $t_true ) {
-			$t_lower_name = strtolower( $t_name );
+			$t_lower_name = string_lower( $t_name );
 			if ( !isset( $t_inserted[$t_lower_name] ) ) {
 				$query = "INSERT INTO $t_category_table ( name, project_id ) VALUES ( " . db_param() . ', ' . db_param() . ' )';
 				db_query_bound( $query, array( $t_name, $t_project_id ) );
