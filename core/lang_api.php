@@ -77,7 +77,9 @@ function lang_load( $p_lang, $p_dir = null ) {
 		}
 		elseif( 'MANTIS_ERROR' == $t_var ) {
 			if( isset( $g_lang_strings[$p_lang][$t_lang_var] ) ) {
-				$g_lang_strings[$p_lang][$t_lang_var] = array_merge( $g_lang_strings[$p_lang][$t_lang_var], $$t_var );
+				foreach( $$t_var as $key => $val ) {
+					$g_lang_strings[$p_lang][$t_lang_var][$key] = $val;
+				}
 			} else {
 				$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
 			}
