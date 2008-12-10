@@ -22,7 +22,12 @@
  * @link http://www.mantisbt.org
  */
 
-# prints the staus icon
+/**
+ * gets the status icon
+ * @param string $p_icon
+ * @return string html img tag containing status icon
+ * @access public
+ */
 function icon_get_status_icon( $p_icon ) {
 	$t_icon_path = config_get( 'icon_path' );
 	$t_status_icon_arr = config_get( 'status_icon_arr' );
@@ -34,18 +39,31 @@ function icon_get_status_icon( $p_icon ) {
 	}
 }
 
+/**
+ * prints the status icon
+ * @param string $p_icon
+ * @return null
+ * @access public
+ */
 function print_status_icon( $p_icon ) {
 	echo icon_get_status_icon( $p_icon );
 }
 
-# The input $p_dir is either ASC or DESC
-# The inputs $p_sort_by and $p_field are compared to see if they match
-# If the fields match then the sort icon is printed
-# This is a convenience feature to push the comparison code into this
-#     function instead of in the page(s)
-# $p_field is a constant and $p_sort_by is whatever the page happens to
-#     be sorting by at the moment
-# Multiple sort keys are not supported
+/**
+ * The input $p_dir is either ASC or DESC
+ * The inputs $p_sort_by and $p_field are compared to see if they match
+ * If the fields match then the sort icon is printed
+ * This is a convenience feature to push the comparison code into this
+ * function instead of in the page(s)
+ * $p_field is a constant and $p_sort_by is whatever the page happens to
+ * be sorting by at the moment
+ * Multiple sort keys are not supported
+ * @param int $p_dir
+ * @param string $p_sort_by
+ * @param string $p_field
+ * @return null
+ * @access public
+ */
 function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
 	$t_icon_path = config_get( 'icon_path' );
 	$t_sort_icon_arr = config_get( 'sort_icon_arr' );
@@ -68,16 +86,3 @@ function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
 	}
 }
 
-# prints the unread icon if the parameter is UNREAD
-# @@@ UNUSED
-function print_unread_icon( $p_unread = READ ) {
-	$t_icon_path = config_get( 'icon_path' );
-	$t_unread_icon_arr = config_get( 'unread_icon_arr' );
-
-	$t_none = NONE;
-	if( !is_blank( $t_unread_icon_arr[$p_unread] ) ) {
-		echo "<img src=\"$t_icon_path$t_unread_icon_arr[$p_unread]\" alt=\"\" />";
-	} else {
-		echo "<img src=\"$t_icon_path$t_status_icon_arr[$t_none]\" alt=\"\" />";
-	}
-}
