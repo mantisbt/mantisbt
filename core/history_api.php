@@ -310,7 +310,7 @@
 			case 'os':
 				$t_field_localized = lang_get( 'os' );
 				break;
-			case 'os_version':
+			case 'os_build':
 				$t_field_localized = lang_get( 'os_version' );
 				break;
 			case 'build':
