@@ -127,8 +127,8 @@
 		<?php echo lang_get( 'bugnote_order' ) ?>
 	</td>
 	<td>
-		<input type="radio" name="bugnote_order" value="ASC" <?php check_checked( $t_pref->bugnote_order, 'ASC' ); ?> /><?php echo lang_get( 'bugnote_order_asc' ) ?>
-		<input type="radio" name="bugnote_order" value="DESC" <?php check_checked( $t_pref->bugnote_order, 'DESC' ); ?> /><?php echo lang_get( 'bugnote_order_desc' ) ?>
+		<label><input type="radio" name="bugnote_order" value="ASC" <?php check_checked( $t_pref->bugnote_order, 'ASC' ); ?> /><?php echo lang_get( 'bugnote_order_asc' ) ?></label>
+		<label><input type="radio" name="bugnote_order" value="DESC" <?php check_checked( $t_pref->bugnote_order, 'DESC' ); ?> /><?php echo lang_get( 'bugnote_order_desc' ) ?></label>
 	</td>
 </tr>
 <?php
