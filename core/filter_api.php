@@ -1256,13 +1256,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	# show / hide status
 	# take a list of all available statuses then remove the ones that we want hidden, then make sure
 	# the ones we want shown are still available
-	$t_status_arr = explode_enum_string( config_get( 'status_enum_string' ) );
-	$t_available_statuses = array();
 	$t_desired_statuses = array();
-	foreach( $t_status_arr as $t_this_status ) {
-		$t_this_status_arr = explode_enum_arr( $t_this_status );
-		$t_available_statuses[] = $t_this_status_arr[0];
-	}
+	$t_available_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
 
 	if( 'simple' == $t_filter['_view_type'] ) {
 

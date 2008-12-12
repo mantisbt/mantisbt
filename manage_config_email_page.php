@@ -140,7 +140,7 @@
 
 	function get_section_begin_for_email( $p_section_name ) {
 		global $t_project;
-		$t_access_levels = explode_enum_string( config_get( 'access_levels_enum_string' ) );
+		$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 		echo '<table class="width100">';
 		echo '<tr><td class="form-title" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'message' ) . '</td>';
@@ -149,15 +149,16 @@
 		echo '<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'users_monitoring_bug' ) . '&nbsp;</td>';
 		echo '<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'users_added_bugnote' ) . '&nbsp;</td>';
 		echo '<td class="form-title" style="text-align:center" colspan="' . count( $t_access_levels ) . '">&nbsp;' . lang_get( 'access_levels' ) . '&nbsp;</td></tr><tr>';
+
 		foreach( $t_access_levels as $t_access_level ) {
-			$t_entry_array = explode_enum_arr( $t_access_level );
-			echo '<td class="form-title" style="text-align:center">&nbsp;' . get_enum_to_string( lang_get( 'access_levels_enum_string' ), $t_entry_array[0] ) . '&nbsp;</td>';
+			echo '<td class="form-title" style="text-align:center">&nbsp;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&nbsp;</td>';
 		}
+
 		echo '</tr>' . "\n";
 	}
 
 	function get_capability_row_for_email( $p_caption, $p_message_type ) {
-		$t_access_levels = explode_enum_string( config_get( 'access_levels_enum_string' ) );
+		$t_access_levels = ManisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		echo '<td class="center"' . colour_notify_flag( $p_message_type, 'reporter' ) . '>' . show_notify_flag( $p_message_type, 'reporter' )  . '</td>';
@@ -166,9 +167,9 @@
 		echo '<td class="center"' . colour_notify_flag( $p_message_type, 'bugnotes' ) . '>' . show_notify_flag( $p_message_type, 'bugnotes' ) . '</td>';
 
 		foreach( $t_access_levels as $t_access_level ) {
-			$t_entry_array = explode_enum_arr( $t_access_level );
-			echo '<td class="center"' . colour_threshold_flag( (int)$t_entry_array[0], $p_message_type ) . '>' . show_notify_threshold( (int)$t_entry_array[0], $p_message_type ) . '</td>';
+			echo '<td class="center"' . colour_threshold_flag( $t_access_level, $p_message_type ) . '>' . show_notify_threshold( $t_access_level, $p_message_type ) . '</td>';
 		}
+
 		echo '</tr>' . "\n";
 	}
 
@@ -197,7 +198,7 @@
 
 	$t_actions[] = 'relationship';
 
-	$t_statuses = get_enum_to_array( config_get( 'status_enum_string' ) );
+	$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	foreach( $t_statuses as $t_status ) {
 		$t_actions[] =  $t_status;
 	}
@@ -267,10 +268,9 @@
 
 		get_capability_row_for_email( lang_get( 'email_on_relationship_changed' ), 'relationship' );
 
-		$t_statuses = explode_enum_string( config_get( 'status_enum_string' ) );
-		foreach( $t_statuses as $t_status ) {
-			list( $t_state, $t_label ) = explode_enum_arr( $t_status );
-			get_capability_row_for_email( lang_get( 'status_changed_to' ) . ' \'' . get_enum_element( 'status', $t_state ) . '\'', $t_label );
+		$t_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
+		foreach ( $t_statuses as $t_status ) {
+			get_capability_row_for_email( lang_get( 'status_changed_to' ) . ' \'' . get_enum_element( 'status', $t_status ) . '\'', $t_label );
 		}
 
 		get_section_end_for_email();

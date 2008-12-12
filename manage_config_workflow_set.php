@@ -66,7 +66,7 @@
 			list( $t_from, $t_to ) = split( ':', $t_transition );
 			$t_matrix[$t_from][$t_to] = '';
 		}
-		$t_statuses = get_enum_to_array( config_get( 'status_enum_string' ) );
+		$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 		foreach( $t_statuses as $t_state => $t_label) {
 			$t_workflow_row = '';
 			$t_default = gpc_get_int( 'default_' . $t_state );
@@ -103,7 +103,7 @@
 		$f_access = gpc_get( 'status_access' );
 
 		# walk through the status labels to set the status threshold
-		$t_enum_status = explode_enum_string( config_get( 'status_enum_string' ) );
+		$t_enum_status = explode( ',', config_get( 'status_enum_string' ) );
 		$t_set_status = array();
 		foreach( $t_statuses as $t_status_id => $t_status_label) {
 			$f_level = gpc_get( 'access_change_' . $t_status_id );

@@ -189,21 +189,10 @@ function mci_get_mantis_path() {
 
 # Given a enum string and num, return the appropriate localized string
 function mci_get_enum_element( $p_enum_name, $p_val, $p_lang ) {
-	$config_var = config_get( $p_enum_name . '_enum_string' );
-	$string_var = lang_get( $p_enum_name . '_enum_string', $p_lang );
+	$t_enum_string = config_get( $p_enum_name . '_enum_string' );
+	$t_localized_enum_string = lang_get( $p_enum_name . '_enum_string', $p_lang );
 
-	# use the global enum string to search
-	$t_arr = explode_enum_string( $config_var );
-	$t_arr_count = count( $t_arr );
-	for( $i = 0;$i < $t_arr_count;$i++ ) {
-		$elem_arr = explode_enum_arr( $t_arr[$i] );
-		if( $elem_arr[0] == $p_val ) {
-
-			# now get the appropriate translation
-			return get_enum_to_string( $string_var, $p_val );
-		}
-	}
-	return '@' . $p_val . '@';
+	return MantisEnum::getLocalizedLabel( $t_enum_string, $t_localized_enum_string, $p_val );
 }
 
 # Gets the sub-projects that are accessible to the specified user / project.

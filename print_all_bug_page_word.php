@@ -85,7 +85,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <?php html_body_begin() ?>
 
 <?php
-	$f_bug_arr = explode_enum_string( $f_export );
+	$f_bug_arr = explode( ',', $f_export );
 	$t_count_exported = 0;
 
 	for( $j=0; $j < $t_row_count; $j++ ) {

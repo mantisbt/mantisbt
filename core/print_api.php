@@ -846,19 +846,16 @@ function print_build_option_list( $p_build = '' ) {
 function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 	$t_config_var_name = $p_enum_name . '_enum_string';
 	$t_config_var_value = config_get( $t_config_var_name );
+	
+	$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 
-	$t_arr = explode_enum_string( $t_config_var_value );
-	$t_enum_count = count( $t_arr );
-	for( $i = 0;$i < $t_enum_count;$i++ ) {
-		$t_elem = explode_enum_arr( $t_arr[$i] );
-		$t_key = trim( $t_elem[0] );
+	foreach ( $t_enum_values as $t_key ) {
 		$t_elem2 = get_enum_element( $p_enum_name, $t_key );
+
 		echo "<option value=\"$t_key\"";
 		check_selected( $p_val, $t_key );
 		echo ">$t_elem2</option>";
 	}
-
-	# end for
 }
 
 # Select the proper enum values for status based on workflow
@@ -871,36 +868,34 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 
 	if( count( $t_enum_workflow ) < 1 ) {
 		# workflow not defined, use default enum
-		$t_arr = explode_enum_string( $t_config_var_value );
+		$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 	} else {
 		# workflow defined - find allowed states
 		if( isset( $t_enum_workflow[$p_current_value] ) ) {
-			$t_arr = explode_enum_string( $t_enum_workflow[$p_current_value] );
+			$t_enum_values = MantisEnum::getValues( $t_enum_workflow[$p_current_value] );
 		} else {
 			# workflow was not set for this status, this shouldn't happen
-			$t_arr = explode_enum_string( $t_config_var_value );
+			$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 		}
 	}
 
-	$t_enum_count = count( $t_arr );
 	$t_enum_list = array();
 
-	for( $i = 0;$i < $t_enum_count;$i++ ) {
-		$t_elem = explode_enum_arr( $t_arr[$i] );
-		if( ( access_compare_level( $p_user_auth, access_get_status_threshold( $t_elem[0] ) ) ) 
-				&& ( !(( false == $p_show_current ) && ( $p_current_value == $t_elem[0] ) ) ) ) {
-			$t_enum_list[$t_elem[0]] = get_enum_element( 'status', $t_elem[0] );
+	foreach ( $t_enum_values as $t_enum_value ) {
+		if ( ( access_compare_level( $p_user_auth, access_get_status_threshold( $t_enum_value ) ) ) 
+				&& ( !(( false == $p_show_current ) && ( $p_current_value == $t_enum_value ) ) ) ) {
+			$t_enum_list[$t_enum_value] = get_enum_element( 'status', $t_enum_value );
 		}
 	}
 
-	# end for
-	if( true == $p_show_current ) {
+	if ( $p_show_current ) {
 		$t_enum_list[$p_current_value] = get_enum_element( 'status', $p_current_value );
 	}
-	if(( true == $p_add_close ) && 
-			( access_compare_level( $p_current_value, config_get( 'bug_resolved_status_threshold' ) ) ) ) {
+
+	if ( $p_add_close && access_compare_level( $p_current_value, config_get( 'bug_resolved_status_threshold' ) ) ) {
 		$t_enum_list[CLOSED] = get_enum_element( 'status', CLOSED );
 	}
+
 	return $t_enum_list;
 }
 
@@ -923,7 +918,7 @@ function print_status_option_list( $p_select_label, $p_current_value = 0, $p_all
 		}
 		echo '</select>';
 	} else {
-		echo get_enum_to_string( 'status_enum_string', $p_current_value );
+		echo MantisEnum::getLabel( 'status_enum_string', $p_current_value );
 	}
 }
 
@@ -945,19 +940,18 @@ function print_project_access_levels_option_list( $p_val, $p_project_id = null )
 	echo "<option value=\"" . DEFAULT_ACCESS_LEVEL . "\"";
 	echo ">[" . lang_get( 'default_access_level' ) . "]</option>";
 
-	$t_arr = explode_enum_string( $t_access_levels_enum_string );
-	$enum_count = count( $t_arr );
-	for( $i = 0;$i < $enum_count;$i++ ) {
-		$t_elem = explode_enum_arr( $t_arr[$i] );
+	$t_enum_values = MantisEnum::getValues( $t_access_levels_enum_string );
 
+	foreach ( $t_enum_values as $t_enum_value ) {
 		# a user must not be able to assign another user an access level that is higher than theirs.
-		if( $t_elem[0] > $t_current_user_access_level ) {
+		if ( $t_enum_value > $t_current_user_access_level ) {
 			continue;
 		}
 
-		$t_access_level = get_enum_element( 'access_levels', $t_elem[0] );
-		echo "<option value=\"$t_elem[0]\"";
-		check_selected( $p_val, $t_elem[0] );
+		$t_access_level = get_enum_element( 'access_levels', $t_enum_value );
+
+		echo "<option value=\"$t_enum_value\"";
+		check_selected( $p_val, $t_enum_value );
 		echo ">$t_access_level</option>";
 	}
 

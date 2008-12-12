@@ -60,30 +60,12 @@ function helper_alternate_class( $p_index = null, $p_odd_class = "row-1", $p_eve
 # --------------------
 # get the color string for the given status
 function get_status_color( $p_status ) {
-	$t_status_enum_string = config_get( 'status_enum_string' );
+	$t_status_label = MantisEnum::getLabel( config_get( 'status_enum_string' ), $p_status );
 	$t_status_colors = config_get( 'status_colors' );
-
-	# This code creates the appropriate variable name
-	# then references that color variable
-	# You could replace this with a bunch of if... then... else
-	# statements
-
-	$t_color_str = 'closed';
 	$t_color = '#ffffff';
-	$t_arr = explode_enum_string( $t_status_enum_string );
-	$t_arr_count = count( $t_arr );
-	for( $i = 0;$i < $t_arr_count;$i++ ) {
-		$elem_arr = explode_enum_arr( $t_arr[$i] );
-		if( $elem_arr[0] == $p_status ) {
 
-			# now get the appropriate translation
-			$t_color_str = $elem_arr[1];
-			break;
-		}
-	}
-
-	if( isset( $t_status_colors[$t_color_str] ) ) {
-		$t_color = $t_status_colors[$t_color_str];
+	if ( isset( $t_status_colors[$t_status_label] ) ) {
+		$t_color = $t_status_colors[$t_status_label];
 	}
 
 	return $t_color;
@@ -94,19 +76,8 @@ function get_status_color( $p_status ) {
 function get_enum_element( $p_enum_name, $p_val ) {
 	$config_var = config_get( $p_enum_name . '_enum_string' );
 	$string_var = lang_get( $p_enum_name . '_enum_string' );
-
-	# use the global enum string to search
-	$t_arr = explode_enum_string( $config_var );
-	$t_arr_count = count( $t_arr );
-	for( $i = 0;$i < $t_arr_count;$i++ ) {
-		$elem_arr = explode_enum_arr( $t_arr[$i] );
-		if( $elem_arr[0] == $p_val ) {
-
-			# now get the appropriate translation
-			return get_enum_to_string( $string_var, $p_val );
-		}
-	}
-	return '@' . $p_val . '@';
+	
+	return MantisEnum::getLocalizedLabel( $config_var, $string_var, $p_val );
 }
 
 # --------------------

@@ -332,7 +332,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	#  get list of status values that are not covered specifically in the prefs
 	#  These are handled by email_on_status generically
 	#  @@@ thraxisp note that email_on_assigned was co-opted to handle change in handler
-	$t_status_change = get_enum_to_array( config_get( 'status_enum_string' ) );
+	$t_status_change = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	unset( $t_status_change[NEW_] );
 	unset( $t_status_change[FEEDBACK] );
 	unset( $t_status_change[RESOLVED] );

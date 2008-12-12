@@ -46,63 +46,6 @@ function trans_bool( $p_num ) {
 }
 
 /**
- * Breaks up an enum string into num:value elements
- * @param string $p_enum_string enum string
- * @return array array of num:value elements
- * @access public
- */
-function explode_enum_string( $p_enum_string ) {
-	return explode( ',', $p_enum_string );
-}
-
-/**
- * Given one num:value pair it will return both in an array
- * num will be first (element 0) value second (element 1)
- * @param string $p_enum_elem a num:value pair
- * @return array array(num->value)
- * @access public
- */
-function explode_enum_arr( $p_enum_elem ) {
-	return explode( ':', $p_enum_elem );
-}
-
-/**
- * Get the string associated with the $p_enum value
- * @param string $p_enum_string
- * @return array
- * @access public
- */
-function get_enum_to_array( $p_enum_string ) {
-	$t_arr = explode_enum_string( $p_enum_string );
-	$enum_count = count( $t_arr );
-	for( $i = 0;$i < $enum_count;$i++ ) {
-		$t_s = explode_enum_arr( $t_arr[$i] );
-		$t_index = (int) $t_s[0];
-		$t_array[$t_index] = $t_s[1];
-	}
-	return $t_array;
-}
-
-/**
- * Get the string associated with the $p_enum value
- * @param string $p_enum_string
- * @param int $p_num
- * @return string
- * @access public
- */
-function get_enum_to_string( $p_enum_string, $p_num ) {
-	$t_arr = explode_enum_string( $p_enum_string );
-	$enum_count = count( $t_arr );
-	for( $i = 0;$i < $enum_count;$i++ ) {
-		$t_s = explode_enum_arr( $t_arr[$i] );
-		if( $t_s[0] == $p_num ) {
-			return $t_s[1];
-		}
-	}
-	return '@' . $p_num . '@';
-}
-
-/**
  * Add a trailing DIRECTORY_SEPARATOR to a string if it isn't present
  * @param string $p_path
  * @return string

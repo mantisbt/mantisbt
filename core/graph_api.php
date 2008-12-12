@@ -421,21 +421,17 @@ function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 	$t_user_id = auth_get_current_user_id();
 	$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$t_arr = explode_enum_string( $p_enum_string );
-	$enum_count = count( $t_arr );
-	for( $i = 0;$i < $enum_count;$i++ ) {
-		$t_s = explode_enum_arr( $t_arr[$i] );
-		$c_s[0] = addslashes( $t_s[0] );
-		$t_key = get_enum_to_string( $p_enum_string, $t_s[0] );
+	$t_metrics = array();
+	$t_assoc_array = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string );
 
+	foreach ( $t_assoc_array as $t_value => $t_label  ) {
 		$query = "SELECT COUNT(*)
 					FROM $t_bug_table
-					WHERE $p_enum='$c_s[0]' $specific_where";
+					WHERE $p_enum='$t_value' $specific_where";
 		$result = db_query( $query );
-		$t_metrics[$t_key] = db_result( $result, 0 );
+		$t_metrics[$t_label] = db_result( $result, 0 );
 	}
 
-	# end for
 	return $t_metrics;
 }
 
@@ -450,36 +446,33 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 	$t_clo_val = CLOSED;
 	$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$t_arr = explode_enum_string( $p_enum_string );
-	$enum_count = count( $t_arr );
-	for( $i = 0;$i < $enum_count;$i++ ) {
-		$t_s = explode( ':', $t_arr[$i] );
-		$t_key = get_enum_to_string( $p_enum_string, $t_s[0] );
-
+	$t_array_indexed_by_enum_values = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string );
+	$enum_count = count( $t_array_indexed_by_enum_values );
+	foreach ( $t_array_indexed_by_enum_values as $t_value => $t_label ) {
 		# Calculates the number of bugs opened and puts the results in a table
 		$query = "SELECT COUNT(*)
 					FROM $t_bug_table
-					WHERE $p_enum='$t_s[0]' AND
+					WHERE $p_enum='$t_value' AND
 						status<'$t_res_val' $specific_where";
 		$result2 = db_query( $query );
-		$t_metrics['open'][$t_key] = db_result( $result2, 0, 0 );
+		$t_metrics['open'][$t_label] = db_result( $result2, 0, 0 );
 
 		# Calculates the number of bugs closed and puts the results in a table
 		$query = "SELECT COUNT(*)
 					FROM $t_bug_table
-					WHERE $p_enum='$t_s[0]' AND
+					WHERE $p_enum='$t_value' AND
 						status='$t_clo_val' $specific_where";
 		$result2 = db_query( $query );
-		$t_metrics['closed'][$t_key] = db_result( $result2, 0, 0 );
+		$t_metrics['closed'][$t_label] = db_result( $result2, 0, 0 );
 
 		# Calculates the number of bugs resolved and puts the results in a table
 		$query = "SELECT COUNT(*)
 					FROM $t_bug_table
-					WHERE $p_enum='$t_s[0]' AND
+					WHERE $p_enum='$t_value' AND
 						status>='$t_res_val'  AND
 						status<'$t_clo_val' $specific_where";
 		$result2 = db_query( $query );
-		$t_metrics['resolved'][$t_key] = db_result( $result2, 0, 0 );
+		$t_metrics['resolved'][$t_label] = db_result( $result2, 0, 0 );
 	}
 
 	# ## end for

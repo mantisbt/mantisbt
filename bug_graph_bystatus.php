@@ -74,8 +74,8 @@
 	$t_start = $t_interval->get_start_timestamp();
 	
 	// grab all status levels
-	$t_status_arr  = get_enum_to_array( config_get( 'status_enum_string' ) );
-	$t_status_labels  = get_enum_to_array( lang_get( 'status_enum_string' ) );
+	$t_status_arr  = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
+	$t_status_labels  = MantisEnum::getAssocArrayIndexedByValues( lang_get( 'status_enum_string' ) );
     
     $t_bug = array();
     $t_view_status = array();

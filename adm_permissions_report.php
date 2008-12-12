@@ -37,27 +37,27 @@
 	print_manage_config_menu( 'adm_permissions_report.php' );
 
 	function get_section_begin( $p_section_name ) {
-		$t_access_levels = explode_enum_string( config_get( 'access_levels_enum_string' ) );
+		$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
+
 		$t_output = '<table class="width100">';
 		$t_output .= '<tr><td class="form-title" colspan="' . ( count( $t_access_levels ) + 1 ) . '">' . strtoupper( $p_section_name ) . '</td></tr>' . "\n";
 		$t_output .= '<tr><td class="form-title" width="40%">' . lang_get( 'perm_rpt_capability' ) . '</td>';
+
 		foreach( $t_access_levels as $t_access_level ) {
-			$t_entry_array = explode_enum_arr( $t_access_level );
-			$t_output .= '<td class="form-title" style="text-align:center">&nbsp;' . get_enum_to_string( lang_get( 'access_levels_enum_string' ), $t_entry_array[0] ) . '&nbsp;</td>';
+			$t_output .= '<td class="form-title" style="text-align:center">&nbsp;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&nbsp;</td>';
 		}
+
 		$t_output .= '</tr>' . "\n";
 
 		return $t_output;
 	}
 
 	function get_capability_row( $p_caption, $p_access_level ) {
-		$t_access_levels = explode_enum_string( config_get( 'access_levels_enum_string' ) );
+		$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
 		$t_output = '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		foreach( $t_access_levels as $t_access_level ) {
-			$t_entry_array = explode_enum_arr( $t_access_level );
-
-			if ( (int)$t_entry_array[0] >= (int)$p_access_level ) {
+			if ( $t_access_level >= (int)$p_access_level ) {
 				$t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';
 			} else {
 				$t_value = '&nbsp;';

@@ -169,13 +169,18 @@ function mci_explode_to_objectref( $p_config_enum_string ) {
 	if( get_class( $p_config_enum_string ) == 'soap_fault' ) {
 		return $p_config_enum_string;
 	}
-	foreach( explode_enum_string( $p_config_enum_string ) as $t_enum_element ) {
-		list( $t_id, $t_name ) = explode_enum_arr( $t_enum_element );
+	
+	$t_result = array();
+
+	$t_assoc_array = MantisEnum::getAssocArrayIndexedByValues( $p_config_enum_string );
+
+	foreach ( $t_assoc_array as $t_id => $t_name ) {
 		$t_result[] = array(
 			'id' => $t_id,
 			'name' => $t_name,
 		);
-	};
+	}
+
 	return $t_result;
 }
 
@@ -203,17 +208,12 @@ function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
  * @return The id corresponding to the given label, or 0 if not found.
  */
 function mci_get_enum_value_from_label( $p_enum_string, $p_label ) {
-	$t_arr = explode_enum_string( $p_enum_string );
-	$enum_count = count( $t_arr );
-
-	for( $i = 0;$i < $enum_count;$i++ ) {
-		$t_s = explode_enum_arr( $t_arr[$i] );
-		if( $t_s[1] == $p_label ) {
-			return $t_s[0];
-		}
+	$t_value = MantisEnum::getValue( $p_enum_string, $p_label );
+	if ( $t_value === false ) {
+		return 0;
 	}
-
-	return 0;
+	
+	return $t_value;
 }
 
 /**

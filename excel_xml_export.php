@@ -67,7 +67,7 @@
 	echo excel_get_header( $t_export_title );
 	echo excel_get_titles_row();
 
-	$f_bug_arr = explode_enum_string( $f_export );
+	$f_bug_arr = explode( ',', $f_export );
 
 	$t_columns = excel_get_columns();
 
