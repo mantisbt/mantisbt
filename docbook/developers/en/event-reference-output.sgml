@@ -225,7 +225,7 @@
 			<blockquote>
 				<para>
 					This event allows plugins to output HTML code from inside the
-					<code>&lt;head&gt;</code> tag, for use with CSS, Javascript, RSS,
+					<literal>&lt;head&gt;</literal> tag, for use with CSS, Javascript, RSS,
 					or any other similary resources.  Note that this event is signaled
 					after all other CSS and Javascript resources are linked by MantisBT.
 				</para>
@@ -242,7 +242,7 @@
 			<blockquote>
 				<para>
 					This event allows plugins to output HTML code immediatly after the
-					<code>&lt;body&gt;</code> tag is opened, so that MantisBT may be
+					<literal>&lt;body&gt;</literal> tag is opened, so that MantisBT may be
 					integrated within another website's template, or other similar use.
 				</para>
 
@@ -320,7 +320,7 @@
 			<blockquote>
 				<para>
 					This event allows plugins to output HTML code immediatly before
-					the <code>&lt;/body&gt;</code> end tag, to so that MantisBT may be
+					the <literal>&lt;/body&gt;</literal> end tag, to so that MantisBT may be
 					integrated within another website's template, or other similar use.
 				</para>
 

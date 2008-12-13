@@ -77,12 +77,12 @@ $ git clone git@mantisbt.org:mantisbt.git
 		<para>
 			After performing the cloning operation, you should end up with a new
 			directory in your workspace, <filename>mantisbt/</filename>.  By default,
-			it will only track code from the primary remote branch, <code>master</code>,
+			it will only track code from the primary remote branch, <literal>master</literal>,
 			which is the latest development version of MantisBT.  For contributers
 			planning to work with stable release branches, or other development
 			branches, you will need to set up local tracking branches in your
 			repository.  The following commands will set up a tracking branch for the
-			current stable branch, <code>master-1.1.x</code>.
+			current stable branch, <literal>master-1.1.x</literal>.
 		</para>
 
 		<programlisting>
@@ -135,7 +135,7 @@ $ git checkout -b master-1.1.x origin/master-1.1.x
 
 			<para>
 				Assuming that you have an existing local branch that you've kept up to date
-				with <code>master</code> as described in
+				with <literal>master</literal> as described in
 				<link linkend="dev.contrib.branch">Maintaining Branches</link>, generating
 				a formatted patch set should be relatively straightforward, using an
 				appropriate filename as the target of the patch set:
@@ -164,22 +164,22 @@ $ git am --signoff feature_branch.patch
 
 			<para>
 				We'll assume that you've already set up a public repository, either on a
-				free repository hosting site, or using <code>git-daemon</code> on your own
+				free repository hosting site, or using <command>git-daemon</command> on your own
 				machine, and that you know both the public clone URL and the private push
 				URL for your public repository.
 			</para>
 
 			<para>
 				For the purpose of this demonstration, we'll use a public clone URL of
-				<code>git://mantisbt.org/contrib.git</code>, a private push URL of
-				<code>git@mantisbt.org:contrib.git</code>, and a hypothetical
-				topic branch named <code>feature</code>.
+				<literal>git://mantisbt.org/contrib.git</literal>, a private push URL of
+				<literal>git@mantisbt.org:contrib.git</literal>, and a hypothetical
+				topic branch named <literal>feature</literal>.
 			</para>
 
 			<para>
 				You'll need to start by registering your public repository as a 'remote' for
 				your working repository, and then push your topic branch to the public
-				repository.  We'll call the remote <code>public</code> for this; remember to
+				repository.  We'll call the remote <literal>public</literal> for this; remember to
 				replace the URL's and branch name as appropriate:
 			</para>
 

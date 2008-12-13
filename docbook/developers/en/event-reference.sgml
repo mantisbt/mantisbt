@@ -55,7 +55,7 @@
 			<blockquote>
 				<para>
 					This event is triggered by the MantisBT plugin system after all registered and enabled
-					plugins have been initialized (their <code>init()</code> functions have been called).
+					plugins have been initialized (their <function>init()</function> functions have been called).
 					This event should <emphasis>always</emphasis> be the first event triggered for any
 					page load.  No parameters are passed to hooked functions, and no return values are
 					expected.

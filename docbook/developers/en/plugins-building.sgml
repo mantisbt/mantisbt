@@ -59,7 +59,7 @@ Example/
 
 				<para>
 					Because of how <classname>MantisPlugin</classname> declares the
-					<code>register()</code>	method as <code>abstract</code>, our plugin must
+					<programlisting>register()</programlisting>	method as <programlisting>abstract</programlisting>, our plugin must
 					implement that method before PHP will find it semantically valid.  This
 					method is meant for one simple purpose, and should never be used for any
 					other task: setting the plugin's information properties, including the
@@ -67,7 +67,7 @@ Example/
 				</para>
 
 				<para>
-					Once your plugin defines its class, implements the <code>register()</code>
+					Once your plugin defines its class, implements the <programlisting>register()</programlisting>
 					method, and sets at least the name and version properties, it is then
 					considered a "complete" plugin, and can be loaded and installed within
 					MantisBT' plugin manager.  At this stage, our Example plugin, with all the
