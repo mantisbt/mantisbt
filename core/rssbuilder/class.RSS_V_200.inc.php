@@ -201,6 +201,18 @@ class RSS_V_200 extends RSS_V_abstract {
 			$$item_guid = $this->xml->createElement('guid');
 			$$item_guid->appendChild($this->xml->createTextNode($rss_item->getLink()));
 			$$item->appendChild($$item_guid);
+
+			$item_author = '$item_author_' . $id;
+			$$item_author = $this->xml->createElement('author');
+			$$item_author->appendChild($this->xml->createTextNode($rss_item->getAuthor()));
+			$$item->appendChild($$item_author);			
+
+			if ( $rss_item->getComments() != FALSE ) {
+				$item_comments = '$item_comments_' . $id;
+				$$item_comments = $this->xml->createElement('comments');
+				$$item_comments->appendChild($this->xml->createTextNode($rss_item->getComments()));
+				$$item->appendChild($$item_comments);			
+			}
 		} // end foreach
 	} // function
 } // end class
