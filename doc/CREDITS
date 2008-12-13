@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Mantis - a PHP based bugtracking system
 Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
-Copyright (C) 2002-2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+Copyright (C) 2002-2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 -------------------------------------------------------------------------------
 
 *** Please contact project administrators if you should be on this list!
@@ -16,13 +16,11 @@ Victor Boctor (vboctor)
 Developers
 ----------
 
-Alexey Chumakov (achumakov)
 Daryn Warriner (daryn, dwarrine)
 Gianluca Sforna (giallu)
 Glenn Henshaw (thraxisp)
 John Reese (jreese, nuclear_eclipse)
 Paul Richards (grangeway, paulr, minimoo, prichards)
-ryandesign
 Siebrand Mazeland (siebrand)
 
 Ex-Administrators
@@ -38,6 +36,7 @@ Contributors
 Adrian Spinei
 Alan Seiden (db2 support)
 Alexander Leschinsky (wanderer)
+Alexey Chumakov (achumakov)
 Amandeep Jawa
 André Eisenbach (int2str)
 Andrew Gregory - xmlhttprequest.js
@@ -83,6 +82,7 @@ Niels Andersen
 Ondrej Jombik
 Philip D. Turner
 Robert Foster
+ryandesign
 Sean Phelan
 Sebastien Massoutier
 Scott Hanson
