@@ -18,7 +18,7 @@ font-size: 8pt;
 </head>
 <body>
 <h3>The ADOdb Performance Monitoring Library</h3>
-<p>V5.05 11 July 2008  (c) 2000-2008 John Lim (jlim#natsoft.com)</p>
+<p>V5.06 16 Oct 2008  (c) 2000-2008 John Lim (jlim#natsoft.com)</p>
 <p><font size="1">This software is dual licensed using BSD-Style and
 LGPL. This means you can use it in compiled proprietary and commercial
 products.</font></p>
@@ -90,7 +90,7 @@ parameters and automated tuning hints.</p>
 supported. To create a new performance monitor, call NewPerfMonitor( )
 as demonstrated below: </p>
 <pre>&lt;?php<br>include_once('adodb.inc.php');<br>session_start(); <font
- color="#006600"># session variables required for monitoring</font><br>$conn = ADONewConnection($driver);<br>$conn-&gt;Connect($server,$user,$pwd,$db);<br>$perf =amp; NewPerfMonitor($conn);<br>$perf-&gt;UI($pollsecs=5);<br>?&gt;<br></pre>
+ color="#006600"># session variables required for monitoring</font><br>$conn = ADONewConnection($driver);<br>$conn-&gt;Connect($server,$user,$pwd,$db);<br>$perf =&amp; NewPerfMonitor($conn);<br>$perf-&gt;UI($pollsecs=5);<br>?&gt;<br></pre>
 <p>It is also possible to retrieve a single database parameter:</p>
 <pre>$size = $perf-&gt;DBParameter('data cache size');<br></pre>
 <p>

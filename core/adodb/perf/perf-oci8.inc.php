@@ -1,6 +1,6 @@
 <?php
 /* 
-V5.05 11 July 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+V5.06 16 Oct 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. See License.txt. 
@@ -71,6 +71,7 @@ AND    b.name = 'sorts (memory)'",
 		"select value from v\$sysstat where name='physical writes'"),
 	
 	'Data Cache',
+	
 		'data cache buffers' => array( 'DATAC',
 		"select a.value/b.value  from v\$parameter a, v\$parameter b 
 			where a.name = 'db_cache_size' and b.name= 'db_block_size'",
@@ -78,7 +79,14 @@ AND    b.name = 'sorts (memory)'",
 		'data cache blocksize' => array('DATAC',
 			"select value from v\$parameter where name='db_block_size'",
 			'' ),			
+	
 	'Memory Pools',
+		'SGA Max Size' => array( 'DATAC',
+		"select value from v\$parameter where name = 'sga_max_size'",
+			'The sga_max_size is the maximum value to which sga_target can be set.' ),
+	'SGA target' => array( 'DATAC',
+		"select value from v\$parameter where name = 'sga_target'",
+			'If sga_target is defined then data cache, shared, java and large pool size can be 0. This is because all these pools are consolidated into one sga_target.' ),
 		'data cache size' => array('DATAC',
 			"select value from v\$parameter where name = 'db_cache_size'",
 			'db_cache_size' ),
@@ -547,11 +555,12 @@ BEGIN
 	LOOP
 	  cnt := cnt + 1;
 	  DELETE FROM $perf_table WHERE ROWID=rec.rr;
-	  IF cnt = 10000 THEN
+	  IF cnt = 1000 THEN
 	  	COMMIT;
 		cnt := 0;
 	  END IF;
 	END LOOP;
+	commit;
 END;";
 
 		$ok = $this->conn->Execute($sql);

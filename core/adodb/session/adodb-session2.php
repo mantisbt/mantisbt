@@ -896,7 +896,7 @@ class ADODB_Session {
 				$arr = $conn->GetAll($sql);
 				foreach ($arr as $row) {
 					$sql2 = "DELETE FROM $table WHERE sesskey=".$conn->Param('0');
-					$conn->Execute($sql2,array($row[0]));
+					$conn->Execute($sql2,array(reset($row)));
 				}
 			} else {
 				$sql = "DELETE FROM $table WHERE expiry < $time";

@@ -10,9 +10,9 @@
  * build a database on any ADOdb-supported platform using a simple
  * XML schema.
  *
- * Last Editor: $Author$
+ * Last Editor: $Author: jlim $
  * @author Richard Tango-Lowy & Dan Cech
- * @version $Revision$
+ * @version $Revision: 1.12 $
  *
  * @package axmls
  * @tutorial getting_started.pkg
@@ -463,10 +463,12 @@ class dbTable extends dbObject {
 	* @return array Options
 	*/
 	function addTableOpt( $opt ) {
-		$this->opts[] = $opt;
-		
+		if(isset($this->currentPlatform)) {
+			$this->opts[$this->parent->db->databaseType] = $opt;
+		}
 		return $this->opts;
 	}
+	
 	
 	/**
 	* Generates the SQL that will create the table in the database
@@ -1209,7 +1211,7 @@ class dbQuerySet extends dbObject {
 * @tutorial getting_started.pkg
 *
 * @author Richard Tango-Lowy & Dan Cech
-* @version $Revision$
+* @version $Revision: 1.12 $
 *
 * @package axmls
 */

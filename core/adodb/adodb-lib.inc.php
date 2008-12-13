@@ -10,7 +10,7 @@ global $ADODB_INCLUDED_LIB;
 $ADODB_INCLUDED_LIB = 1;
 
 /* 
- @version V5.05 11 July 2008  (c) 2000-2008 John Lim (jlim\@natsoft.com.my). All rights reserved.
+ @version V5.06 16 Oct 2008  (c) 2000-2008 John Lim (jlim\@natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. See License.txt. 
@@ -1081,11 +1081,13 @@ function _adodb_debug_execute(&$zthis, $sql, $inputarr)
 }
 
 # pretty print the debug_backtrace function
-function _adodb_backtrace($printOrArr=true,$levels=9999,$skippy=0)
+function _adodb_backtrace($printOrArr=true,$levels=9999,$skippy=0,$ishtml=null)
 {
 	if (!function_exists('debug_backtrace')) return '';
 	 
-	$html =  (isset($_SERVER['HTTP_USER_AGENT']));
+	if ($ishtml === null) $html =  (isset($_SERVER['HTTP_USER_AGENT']));
+	else $html = $ishtml;
+	
 	$fmt =  ($html) ? "</font><font color=#808080 size=-1> %% line %4d, file: <a href=\"file:/%s\">%s</a></font>" : "%% line %4d, file: %s";
 
 	$MAXSTRLEN = 128;

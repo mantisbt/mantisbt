@@ -1,7 +1,7 @@
 <?php
 
 /**
-  V5.05 11 July 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+  V5.06 16 Oct 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -82,15 +82,16 @@ class ADODB2_oci8 extends ADODB_DataDict {
 			
 		case 'D': 
 		case 'T': return 'DATE';
-		case 'L': return 'DECIMAL(1)';
-		case 'I1': return 'DECIMAL(3)';
-		case 'I2': return 'DECIMAL(5)';
+		case 'L': return 'NUMBER(1)';
+		case 'I1': return 'NUMBER(3)';
+		case 'I2': return 'NUMBER(5)';
 		case 'I':
-		case 'I4': return 'DECIMAL(10)';
+		case 'I4': return 'NUMBER(10)';
 		
-		case 'I8': return 'DECIMAL(20)';
-		case 'F': return 'DECIMAL';
-		case 'N': return 'DECIMAL';
+		case 'I8': return 'NUMBER(20)';
+		case 'F': return 'NUMBER';
+		case 'N': return 'NUMBER';
+		case 'R': return 'NUMBER(20)';
 		default:
 			return $meta;
 		}	

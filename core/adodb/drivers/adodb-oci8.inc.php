@@ -1,7 +1,7 @@
 <?php
 /*
 
-  version V5.05 11 July 2008  (c) 2000-2008 John Lim. All rights reserved.
+  version V5.06 16 Oct 2008  (c) 2000-2008 John Lim. All rights reserved.
 
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
@@ -200,6 +200,11 @@ NATSOFT.DOMAIN =
 					$argHostport = empty($this->port)?  "1521" : $this->port;
 	   			}
 				
+				if (strncmp($argDatabasename,'SID=',4) == 0) {
+					$argDatabasename = substr($argDatabasename,4);
+					$this->connectSID = true;
+				}
+				
 				if ($this->connectSID) {
 					$argDatabasename="(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=".$argHostname
 					.")(PORT=$argHostport))(CONNECT_DATA=(SID=$argDatabasename)))";
@@ -272,10 +277,10 @@ NATSOFT.DOMAIN =
 	}
 	
 	// format and return date string in database date format
-	function DBDate($d)
+	function DBDate($d,$isfld=false)
 	{
 		if (empty($d) && $d !== 0) return 'null';
-		
+		if ($isfld) return 'TO_DATE('.$d.",'".$this->dateformat."')";
 		if (is_string($d)) $d = ADORecordSet::UnixDate($d);
 		return "TO_DATE(".adodb_date($this->fmtDate,$d).",'".$this->dateformat."')";
 	}
@@ -297,9 +302,10 @@ NATSOFT.DOMAIN =
 	}
 	
 	// format and return date string in database timestamp format
-	function DBTimeStamp($ts)
+	function DBTimeStamp($ts,$isfld=false)
 	{
 		if (empty($ts) && $ts !== 0) return 'null';
+		if ($isfld) return 'TO_DATE('.$ts.",'RRRR-MM-DD, HH24:MI:SS')";
 		if (is_string($ts)) $ts = ADORecordSet::UnixTimeStamp($ts);
 		return 'TO_DATE('.adodb_date("'Y-m-d H:i:s'",$ts).",'RRRR-MM-DD, HH24:MI:SS')";
 	}
@@ -616,6 +622,7 @@ NATSOFT.DOMAIN =
 							$bindarr[$k] = $v;
 						} else { 				// dynamic sql, so rebind every time
 							OCIBindByName($stmt,":$k",$inputarr[$k],$len);
+							
 						}
 					}
 				}
@@ -634,7 +641,8 @@ NATSOFT.DOMAIN =
 			
 			 OCIFreeStatement($stmt); 
 			 $fields = implode(',', $cols);
-			 $nrows += $offset;
+			 if ($nrows <= 0) $nrows = 999999999999;
+			 else $nrows += $offset;
 			 $offset += 1; // in Oracle rownum starts at 1
 			
 			if ($this->databaseType == 'oci8po') {
