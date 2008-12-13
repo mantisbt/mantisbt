@@ -1,0 +1,38 @@
+body, samp {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #333333;
+	background: #F4F4F4;
+	font-size: 1em;
+	padding: 20px;
+}
+code, var {
+	color: #0000CC;
+	font-family: "Courier New", Courier, mono;
+	font-size: 1em;
+}
+samp {
+	color: #CC0000;
+	padding: 0px
+}
+var {
+	color: #009900;
+}
+h1 {
+	border-bottom: 3px solid #333;
+}
+h2 {
+	border-bottom: 2px solid #333;
+}
+h3 {
+	border-bottom: 1px solid #333;
+}
+.current {
+	color: #339933;
+}
+.date {
+	color: #666;
+	font-weight: normal;
+}
+code > strong, samp > strong {
+	background: #fff;
+}
