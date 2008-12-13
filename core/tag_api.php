@@ -400,6 +400,38 @@ function tag_delete( $p_tag_id ) {
 	return true;
 }
 
+/**
+ * Gets the candidates for the specified bug.  These are existing tags
+ * that are not associated with the bug already.
+ * 
+ * @param int $p_bug_id  The bug id, if 0 returns all tags.
+ * @returns The array of tag rows, each with id, name, and description.
+ */
+function tag_get_candidates_for_bug( $p_bug_id ) {
+	$t_tag_table = db_get_table( 'mantis_tag_table' );
+
+	$query = 'SELECT id, name, description FROM ' . $t_tag_table;
+	$t_params = array();
+	if ( 0 != $p_bug_id ) {
+		$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
+
+		$query .= "	WHERE id NOT IN (
+						SELECT tag_id FROM $t_bug_tag_table WHERE bug_id='" . db_param() . "' ) ";
+		$t_params[] = $p_bug_id;
+	}
+
+	$query .= " ORDER BY name ASC ";
+	$result = db_query_bound( $query, $t_params );
+
+	$t_results_to_return = array();
+
+	while( $row = db_fetch_array( $result ) ) {
+		$t_results_to_return[] = $row;
+	}
+	
+	return $t_results_to_return;
+}
+
 # Associative
 /**
  * Determine if a tag is attached to a bug.

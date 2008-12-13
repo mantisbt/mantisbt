@@ -314,22 +314,10 @@ function print_tag_input( $p_bug_id = 0, $p_string = "" ) {
  * @param integer Bug ID
  */
 function print_tag_option_list( $p_bug_id = 0 ) {
-	$t_tag_table = db_get_table( 'mantis_tag_table' );
-
-	$query = "SELECT id, name, description FROM $t_tag_table ";
-	if( 0 != $p_bug_id ) {
-		$c_bug_id = db_prepare_int( $p_bug_id );
-		$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
-
-		$query .= "	WHERE id NOT IN (
-						SELECT tag_id FROM $t_bug_tag_table WHERE bug_id='$c_bug_id' ) ";
-	}
-
-	$query .= " ORDER BY name ASC ";
-	$result = db_query( $query );
+	$t_rows = tag_get_candidates_for_bug( $p_bug_id );
 
 	echo '<option value="0">', lang_get( 'tag_existing' ), '</option>';
-	while( $row = db_fetch_array( $result ) ) {
+	foreach ( $t_rows as $row ) {
 		$t_string = $row['name'];
 		if ( !empty( $row['description'] ) ) {
 			$t_string .= ' - ' . substr( $row['description'], 0, 20 );
