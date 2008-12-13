@@ -1,11 +1,89 @@
 ChangeLog
 
-Version 2.0.0 (Sun, Dec 02 2007)
+NOTE: THIS VERSION OF PHPMAILER IS DESIGNED FOR PHP5/PHP6. IT WILL NOT WORK WITH PHP4.
+
+Version 2.3 (November 06, 2008)
+
+* added Arabic language (many thanks to Bahjat Al Mostafa)
+* removed English language from language files and made it a default within
+  class.phpmailer.php - if no language is found, it will default to use
+  the english language translation
+* fixed public/private declarations
+* corrected line 1728, $basedir to $directory
+* added $sign_cert_file to avoid improper duplicate use of $sign_key_file
+* corrected $this->Hello on line 612 to $this->Helo
+* changed default of $LE to "\r\n" to comply with RFC 2822. Can be set by the user
+  if default is not acceptable
+* removed trim() from return results in EncodeQP
+* /test and three files it contained are removed from version 2.3
+* fixed phpunit.php for compliance with PHP5
+* changed $this->AltBody = $textMsg; to $this->AltBody = html_entity_decode($textMsg);
+* We have removed the /phpdoc from the downloads. All documentation is now on
+  the http://phpmailer.codeworxtech.com website.
+
+Version 2.2.1 () July 19 2008
+
+* fixed line 1092 in class.smtp.php (my apologies, error on my part)
+
+Version 2.2 () July 15 2008
+
+* Fixed redirect issue (display of UTF-8 in thank you redirect)
+* fixed error in getResponse function declaration (class.pop3.php)
+* PHPMailer now PHP6 compliant
+* fixed line 1092 in class.smtp.php (endless loop from missing = sign)
+
+Version 2.1 (Wed, June 04 2008)
+
+** NOTE: WE HAVE A NEW LANGUAGE VARIABLE FOR DIGITALLY SIGNED S/MIME EMAILS.
+   IF YOU CAN HELP WITH LANGUAGES OTHER THAN ENGLISH AND SPANISH, IT WOULD BE
+   APPRECIATED.
+
+* added S/MIME functionality (ability to digitally sign emails)
+  BIG THANKS TO "sergiocambra" for posting this patch back in November 2007.
+  The "Signed Emails" functionality adds the Sign method to pass the private key
+  filename and the password to read it, and then email will be sent with
+  content-type multipart/signed and with the digital signature attached.
+* fully compatible with E_STRICT error level
+  - Please note:
+    In about half the test environments this development version was subjected
+    to, an error was thrown for the date() functions used (line 1565 and 1569).
+    This is NOT a PHPMailer error, it is the result of an incorrectly configured
+    PHP5 installation. The fix is to modify your 'php.ini' file and include the
+    date.timezone = America/New York
+    directive, to your own server timezone
+  - If you do get this error, and are unable to access your php.ini file:
+    In your PHP script, add
+    date_default_timezone_set('America/Toronto');
+    - do not try to use
+    $myVar = date_default_timezone_get();
+    as a test, it will throw an error.
+* added ability to define path (mainly for embedded images)
+  function MsgHTML($message,$basedir='') ... where:
+  $basedir is the fully qualified path
+* fixed MsgHTML() function:
+  - Embedded Images where images are specified by <protocol>:// will not be altered or embedded
+* fixed the return value of SMTP exit code ( pclose )
+* addressed issue of multibyte characters in subject line and truncating
+* added ability to have user specified Message ID
+  (default is still that PHPMailer create a unique Message ID)
+* corrected unidentified message type to 'application/octet-stream'
+* fixed chunk_split() multibyte issue (thanks to Colin Brown, et al).
+* added check for added attachments
+* enhanced conversion of HTML to text in MsgHTML (thanks to "brunny")
+
+Version 2.1.0beta2 (Sun, Dec 02 2007)
 * implemented updated EncodeQP (thanks to coolbru, aka Marcus Bointon)
 * finished all testing, all known bugs corrected, enhancements tested
-- note: designed for PHP4, but will work with PHP5 (not compatible with
-  E_STRICT) ... full PHP5 version of PHPMailer released separately. 
-  PHP5 version will NOT work with PHP4.
+- note: will NOT work with PHP4.
+
+please note, this is BETA software
+** DO NOT USE THIS IN PRODUCTION OR LIVE PROJECTS
+INTENDED STRICTLY FOR TESTING
+
+Version 2.1.0beta1
+please note, this is BETA software
+** DO NOT USE THIS IN PRODUCTION OR LIVE PROJECTS
+INTENDED STRICTLY FOR TESTING
 
 Version 2.0.0 rc2 (Fri, Nov 16 2007), interim release
 * implements new property to control VERP in class.smtp.php
