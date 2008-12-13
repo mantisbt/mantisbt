@@ -23,7 +23,7 @@
  * @package CoreAPI
  * @subpackage DatabaseAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses config_api.php
@@ -394,9 +394,22 @@ function db_fetch_array( &$p_result ) {
 		return $t_array;
 	} else {
 		$t_row = $p_result->GetRowAssoc( false );
+		static $t_array_result;
+		static $t_array_fields;
+		
+		if ($t_array_result != $p_result) {
+			$t_array_result = $p_result;
+			$t_array_fields = null;
+		}
 
-		for( $i = 0;$i < $p_result->FieldCount();$i++ ) {
-			$t_field = $p_result->FetchField( $i );
+		$t_fieldcount = $p_result->FieldCount();
+		for( $i = 0; $i < $t_fieldcount; $i++ ) {
+			if (isset( $t_array_fields[$i] ) ) {
+				$t_field = $t_array_fields[$i];
+			} else {
+				$t_field = $p_result->FetchField( $i );
+				$t_array_fields[$i] = $t_field;
+			}
 			switch( $t_field->type ) {
 				case 'bool':
 					switch( $t_row[$t_field->name] ) {

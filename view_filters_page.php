@@ -17,7 +17,7 @@
 	/**
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 	 /**
@@ -181,7 +181,7 @@
 <br />
 <form method="post" name="filters" action="<?php echo $t_action; ?>">
 <input type="hidden" name="type" value="1" />
-<input type="hidden" name="view_type" value="<?php PRINT $f_view_type; ?>" />
+<input type="hidden" name="view_type" value="<?php echo $f_view_type; ?>" />
 <?php
 	if ( $f_for_screen == false ) {
 		print '<input type="hidden" name="print" value="1" />';
@@ -190,7 +190,7 @@
 ?>
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="right" colspan="<?php PRINT ( 8 * $t_custom_cols ); ?>">
+	<td class="right" colspan="<?php echo ( 8 * $t_custom_cols ); ?>">
 	<?php
 		$f_switch_view_link = 'view_filters_page.php?target_field=' . $t_target_field . '&amp;view_type=';
 
@@ -418,7 +418,7 @@ if ( 'simple' == $f_view_type ) {
 
 <tr class="row-1">
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>" valign="top">
-		<?php PRINT lang_get( 'sort' ) ?>:
+		<?php echo lang_get( 'sort' ) ?>:
 	</td>
 	<td valign="top" colspan="<?php echo ( ( $t_filter_cols - 1 - $t_project_cols ) * $t_custom_cols ); ?>">
 		<?php
@@ -429,7 +429,7 @@ if ( 'simple' == $f_view_type ) {
 		if ( 'advanced' == $f_view_type ) {
 	?>
 			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>" valign="top">
-				<?php PRINT lang_get( 'email_project' ) ?>:
+				<?php echo lang_get( 'email_project' ) ?>:
 			</td>
 			<td valign="top" colspan="<?php echo( 2 * $t_custom_cols ); ?>">
 				<?php

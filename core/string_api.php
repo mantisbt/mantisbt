@@ -18,7 +18,7 @@
  * @package CoreAPI
  * @subpackage StringProcessingAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -36,6 +36,22 @@ require_once( $t_core_dir . 'user_pref_api.php' );
 
 $g_cache_html_valid_tags = '';
 $g_cache_html_valid_tags_single_line = '';
+
+/**
+ * Return a string with all alphabetical characters converted to lowercase,
+ * using an appropriate multibyte implementation as available to system.
+ * @param string Input string
+ * @return string Lower cased string
+ */
+if ( function_exists( 'mb_strtolower' ) ) {
+	function string_lower( $p_string ) {
+			return mb_strtolower( $p_string );
+	}
+} else {
+	function string_lower( $p_string ) {
+			return strtolower( $p_string );
+	}
+}
 
 # ## --------------------
 # Preserve spaces at beginning of lines.

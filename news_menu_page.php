@@ -17,7 +17,7 @@
 	/**
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 	 /**
@@ -84,8 +84,8 @@
 		<input type="submit" class="button" value="<?php echo lang_get( 'post_news_button' ) ?>" />
 	</td>
 </tr>
-</form>
 </table>
+</form>
 </div>
 <?php # Add News Form END ?>
 

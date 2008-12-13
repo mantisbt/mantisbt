@@ -18,7 +18,7 @@
  * @package CoreAPI
  * @subpackage FileAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -532,7 +532,7 @@ function file_type_check( $p_file_name ) {
 	$t_extension = $t_ext_array[$last_position];
 
 	# check against disallowed files
-	$t_disallowed_arr = explode_enum_string( $t_disallowed_files );
+	$t_disallowed_arr = explode( ',', $t_disallowed_files );
 	foreach( $t_disallowed_arr as $t_val ) {
 		if( 0 == strcasecmp( $t_val, $t_extension ) ) {
 			return false;
@@ -545,7 +545,7 @@ function file_type_check( $p_file_name ) {
 	}
 
 	# check against allowed files
-	$t_allowed_arr = explode_enum_string( $t_allowed_files );
+	$t_allowed_arr = explode( ',', $t_allowed_files );
 	foreach( $t_allowed_arr as $t_val ) {
 		if( 0 == strcasecmp( $t_val, $t_extension ) ) {
 			return true;

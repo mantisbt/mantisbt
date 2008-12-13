@@ -2,7 +2,7 @@
 
 
 /*
-V5.05 11 July 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+V5.06 16 Oct 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
          Contributed by Ross Smith (adodb@netebb.com). 
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
@@ -700,7 +700,7 @@ class ADODB_Session {
 		}
 
 		if (!$clob) {	// no lobs, simply use replace()
-			$arr[$data] = $conn->qstr($val);
+			$arr[$data] = $val;
 			$rs = $conn->Replace($table, $arr, 'sesskey', $autoQuote = true);
 			
 		} else {
@@ -856,7 +856,7 @@ class ADODB_Session {
 				$arr = $conn->GetAll($sql);
 				foreach ($arr as $row) {
 					$sql2 = "DELETE FROM $table WHERE sesskey=".$conn->Param('0');
-					$conn->Execute($sql2,array($row[0]));
+					$conn->Execute($sql2,array(reset($row)));
 				}
 			} else {
 				$sql = "DELETE FROM $table WHERE expiry < $time";

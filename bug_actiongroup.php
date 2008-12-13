@@ -18,7 +18,7 @@
 	 * This page allows actions to be performed an an array of bugs
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 	 /**
@@ -36,7 +36,8 @@
 	$f_action	= gpc_get_string( 'action' );
 	$f_custom_field_id = gpc_get_int( 'custom_field_id', 0 );
 	$f_bug_arr	= gpc_get_int_array( 'bug_arr', array() );
-
+	$f_bug_notetext = gpc_get_string( 'bugnote_text', '' );
+	$f_bug_noteprivate = gpc_get_bool( 'private' );	
 	$t_form_name = 'bug_actiongroup_' . $f_action;
 	form_security_validate( $t_form_name );
 
@@ -77,7 +78,7 @@
 					bug_check_workflow($t_status, CLOSED) ) {
 
 				# @@@ we need to issue a helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_bug_data, $f_bugnote_text ) );
-				bug_close( $t_bug_id );
+				bug_close( $t_bug_id, $f_bug_notetext, $f_bug_noteprivate );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 			} else {
 				if ( ! access_can_close_bug( $t_bug_id ) ) {
@@ -132,7 +133,7 @@
 				 access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $t_bug_id ) &&
 					bug_check_workflow($t_status, $t_assign_status )	) {
 				# @@@ we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
-				bug_assign( $t_bug_id, $f_assign );
+				bug_assign( $t_bug_id, $f_assign, $f_bug_notetext, $f_bug_noteprivate );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 			} else {
 				if ( bug_check_workflow($t_status, $t_assign_status ) ) {
@@ -151,7 +152,7 @@
 				$f_resolution = gpc_get_int( 'resolution' );
 				$f_fixed_in_version = gpc_get_string( 'fixed_in_version', '' );
 				# @@@ we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
-				bug_resolve( $t_bug_id, $f_resolution, $f_fixed_in_version );
+				bug_resolve( $t_bug_id, $f_resolution, $f_fixed_in_version, $f_bug_notetext, null, null, $f_bug_noteprivate );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 			} else {
 				if ( ( $t_status < $t_resolved_status ) &&
@@ -181,6 +182,12 @@
 				if ( TRUE == bug_check_workflow($t_status, $f_status ) ) {
 					# @@@ we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 					bug_set_field( $t_bug_id, 'status', $f_status );
+					
+					# Add bugnote if supplied
+					if ( !is_blank( $f_bug_notetext ) ) {
+						bugnote_add( $t_bug_id, $f_bug_notetext, null, $f_bug_noteprivate );
+					}
+
 					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_status' );

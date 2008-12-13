@@ -20,7 +20,7 @@
  *
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -58,9 +58,7 @@ $num_notes = sizeof( $t_bugnotes );
 <?php # Bugnotes BEGIN ?>
 <a name="bugnotes" id="bugnotes" /><br />
 
-<?php 
-	event_signal( 'EVENT_VIEW_BUGNOTES_START', $f_bug_id );
-
+<?php
 	collapse_open( 'bugnotes' );
 ?>
 <table class="width100" cellspacing="1">
@@ -82,6 +80,8 @@ $num_notes = sizeof( $t_bugnotes );
 	</td>
 </tr>
 <?php
+	event_signal( 'EVENT_VIEW_BUGNOTES_START', array( $f_bug_id, $t_bugnotes ) );
+
 	$t_normal_date_format = config_get( 'normal_date_format' );
 	$t_total_time = 0;
 
@@ -206,6 +206,8 @@ $num_notes = sizeof( $t_bugnotes );
 			echo '<tr><td colspan="2">', sprintf ( lang_get( 'total_time_for_issue' ), db_minutes_to_hhmm( $t_total_time ) ), '</td></tr>';
 		}
 	} # end else
+
+	event_signal( 'EVENT_VIEW_BUGNOTES_END', $f_bug_id );
 ?>
 </table>
 
@@ -223,8 +225,6 @@ $num_notes = sizeof( $t_bugnotes );
 </table>
 <?php
 	collapse_end( 'bugnotes' );
-
-	event_signal( 'EVENT_VIEW_BUGNOTES_END', $f_bug_id );
 ?>
 
 <?php # Bugnotes END ?>

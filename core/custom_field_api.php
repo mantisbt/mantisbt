@@ -18,7 +18,7 @@
  * @package CoreAPI
  * @subpackage CustomFieldAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -405,11 +405,11 @@ function custom_field_create( $p_name ) {
 
 	$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 	$query = "INSERT INTO $t_custom_field_table
-					( name )
+					( name, possible_values )
 				  VALUES
-					( " . db_param() . " )";
+					( " . db_param() . "," . db_param() . ")";
 
-	db_query_bound( $query, Array( $c_name ) );
+	db_query_bound( $query, Array( $c_name, '' ) );
 
 	return db_insert_id( $t_custom_field_table );
 }

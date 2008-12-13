@@ -19,7 +19,7 @@
  * @package CoreAPI
  * @subpackage PHPCompatibilityAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -63,7 +63,7 @@ function php_version_at_least( $p_version_string ) {
 # Enforce our minimum requirements
 if( !php_version_at_least( PHP_MIN_VERSION ) ) {
 	@ob_end_clean();
-	PRINT '<b>FATAL ERROR: Your version of PHP is too old.  Mantis requires PHP version ' . PHP_MIN_VERSION . ' or newer</b><br />Your version of PHP is version ' . phpversion();
+	echo '<b>FATAL ERROR: Your version of PHP is too old.  Mantis requires PHP version ' . PHP_MIN_VERSION . ' or newer</b><br />Your version of PHP is version ' . phpversion();
 	die();
 }
 

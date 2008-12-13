@@ -17,7 +17,7 @@
 /**
  * Bug API
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  * @package CoreAPI
  * @subpackage BugAPI
@@ -449,30 +449,16 @@ function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
 		# workflow not defined, use default enum
 		return true;
 	}
-	elseif( $p_bug_status == $p_wanted_status ) {
 
+	if ( $p_bug_status == $p_wanted_status ) {
 		# no change in state, allow the transition
 		return true;
-	} else {
-		# workflow defined - find allowed states
-		$t_allowed_states = $t_status_enum_workflow[$p_bug_status];
-		$t_arr = explode_enum_string( $t_allowed_states );
-
-		$t_enum_count = count( $t_arr );
-
-		for( $i = 0;$i < $t_enum_count;$i++ ) {
-
-			# check if wanted status is allowed
-			$t_elem = explode_enum_arr( $t_arr[$i] );
-			if( $p_wanted_status == $t_elem[0] ) {
-				return true;
-			}
-		}
-
-		# end for
 	}
 
-	return false;
+	# workflow defined - find allowed states
+	$t_allowed_states = $t_status_enum_workflow[$p_bug_status];
+
+	return MantisEnum::hasValue( $t_allowed_states, $p_wanted_status );
 }
 
 # ===================================
@@ -1137,7 +1123,7 @@ function bug_update( $p_bug_id, $p_bug_data, $p_update_extended = false, $p_bypa
 
 		# status changed
 		if( $t_old_data->status != $p_bug_data->status ) {
-			$t_status = get_enum_to_string( config_get( 'status_enum_string' ), $p_bug_data->status );
+			$t_status = MantisEnum::getLabel( config_get( 'status_enum_string' ), $p_bug_data->status );
 			$t_status = str_replace( ' ', '_', $t_status );
 			email_generic( $p_bug_id, $t_status, $t_status_prefix . $t_status );
 			return true;

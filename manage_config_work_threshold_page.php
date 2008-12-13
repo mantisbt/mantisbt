@@ -17,7 +17,7 @@
 	/**
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 	 /**
@@ -41,7 +41,7 @@
 	$t_access = user_get_access_level( $t_user, $t_project_id );
 	$t_show_submit = false;
 
-	$t_access_levels = get_enum_to_array( config_get( 'access_levels_enum_string' ) );
+	$t_access_levels = MantisEnum::getAssocArrayIndexedByValues( config_get( 'access_levels_enum_string' ) );
 
 	$t_overrides = array();	
 	function set_overrides( $p_config ) {
@@ -60,7 +60,7 @@
 		echo '<td class="form-title"style="text-align:center"  width="40%" colspan="' . count( $t_access_levels ) . '">' . lang_get( 'access_levels' ) . '</td>';
 		echo '<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'alter_level' ) . '&nbsp;</td></tr><tr>';
 		foreach( $t_access_levels as $t_access_level => $t_access_label ) {
-			echo '<td class="form-title" style="text-align:center">&nbsp;' . get_enum_to_string( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&nbsp;</td>';
+			echo '<td class="form-title" style="text-align:center">&nbsp;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&nbsp;</td>';
 		}
 		echo '</tr>' . "\n";
 	}
@@ -128,7 +128,7 @@
             } 
 
 			if ( $t_can_change ) {
-			    $t_checked = $t_project ? "CHECKED" : "";
+			    $t_checked = $t_project ? "checked=\"checked\"" : "";
 			    $t_value = "<input type=\"checkbox\" name=\"flag_thres_" . $p_threshold . "[]\" value=\"$t_access_level\" $t_checked />";
 			    $t_show_submit = true;
 			} else {
@@ -145,7 +145,7 @@
 			print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
 			echo '</select> </td>';
 		} else {
-			echo '<td>' . get_enum_to_string( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&nbsp;</td>';
+			echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&nbsp;</td>';
 		}
 
 		echo '</tr>' . "\n";
@@ -177,7 +177,7 @@
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		if ( $t_can_change ) {
-		    $t_checked = ( ON == config_get( $p_threshold ) ) ? "CHECKED" : "";
+		    $t_checked = ( ON == config_get( $p_threshold ) ) ? "checked=\"checked\"" : "";
 		    $t_value = "<input type=\"checkbox\" name=\"flag_" . $p_threshold . "\" value=\"1\" $t_checked />";
 		    $t_show_submit = true;
 		} else {
@@ -194,7 +194,7 @@
 			print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
 			echo '</select> </td>';
 		} else {
-			echo '<td>' . get_enum_to_string( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&nbsp;</td>';
+			echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&nbsp;</td>';
 		}
 
 		echo '</tr>' . "\n";
@@ -231,7 +231,7 @@
 			echo '</select></td><td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>';
 		    $t_show_submit = true;
 		} else {
-			$t_value = get_enum_to_string( lang_get( $p_enum . '_enum_string' ), config_get( $p_threshold ) ) . '&nbsp;';
+			$t_value = MantisEnum::getLabel( lang_get( $p_enum . '_enum_string' ), config_get( $p_threshold ) ) . '&nbsp;';
 		    echo '<td class="left" colspan="3"' . $t_colour . '>' . $t_value . '</td><td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>';
         }
 
@@ -240,7 +240,7 @@
 			print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
 			echo '</select> </td>';
 		} else {
-			echo '<td>' . get_enum_to_string( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&nbsp;</td>';
+			echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&nbsp;</td>';
 		}
 
 		echo '</tr>' . "\n";

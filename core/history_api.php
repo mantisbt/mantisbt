@@ -18,7 +18,7 @@
  * @package CoreAPI
  * @subpackage HistoryAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -314,6 +314,18 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			break;
 		case 'last_updated':
 			$t_field_localized = lang_get( 'last_update' );
+			break;
+		case 'os':
+			$t_field_localized = lang_get( 'os' );
+			break;
+		case 'os_build':
+			$t_field_localized = lang_get( 'os_version' );
+			break;
+		case 'build':
+			$t_field_localized = lang_get( 'build' );
+			break;
+		case 'platform':
+			$t_field_localized = lang_get( 'platform' );
 			break;
 		case 'summary':
 			$t_field_localized = lang_get( 'summary' );

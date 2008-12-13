@@ -18,7 +18,7 @@
  * @package CoreAPI
  * @subpackage SummaryAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
  
@@ -51,8 +51,6 @@ function summary_print_by_enum( $p_enum_string, $p_enum ) {
 	}
 
 	$t_filter_prefix = config_get( 'bug_count_hyperlink_prefix' );
-	$t_arr = explode_enum_string( $p_enum_string );
-	$enum_count = count( $t_arr );
 
 	$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_status_query = ( 'status' == $p_enum ) ? '' : ' ,status ';
@@ -606,7 +604,6 @@ function summary_print_by_category() {
 	$t_closed_val = CLOSED;
 
 	while( $row = db_fetch_array( $result ) ) {
-		$v_project_id = $row['project_id'];
 		$v_category_id = $row['category_id'];
 		$v_category_name = $row['category_name'];
 
@@ -651,7 +648,7 @@ function summary_print_by_category() {
 		$last_category_id = $v_category_id;
 		$last_category_name = $v_category_name;
 		if(( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
-			$last_project = $v_project_id;
+			$last_project = $row['project_id'];
 		}
 	}
 
@@ -765,14 +762,9 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 
-	# Organise an array of resolution values to be used later
-	$t_res_arr = explode_enum_string( $p_resolution_enum_string );
-	$enum_res_count = count( $t_res_arr );
-	$c_res_s = array();
-	for( $i = 0;$i < $enum_res_count;$i++ ) {
-		$t_res_s = explode_enum_arr( $t_res_arr[$i] );
-		$c_res_s[$i] = db_prepare_string( $t_res_s[0] );
-	}
+	# Get the resolution values ot use
+	$c_res_s = MantisEnum::getValues( $p_resolution_enum_string );
+	$enum_res_count = count( $c_res_s );
 
 	$specific_where = helper_project_specific_where( $t_project_id );
 	if( ' 1<>1' == $specific_where ) {
@@ -816,11 +808,11 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 		# users that aren't actually developers...
 
 		if( $t_arr2['total'] > 0 ) {
-			PRINT '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
+			echo '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
 			$t_row_count++;
-			PRINT '<td>';
-			PRINT user_get_name( $t_handler_id );
-			PRINT '</td>';
+			echo '<td>';
+			echo user_get_name( $t_handler_id );
+			echo '</td>';
 
 			# We need to track the percentage of bugs that are considered fix, as well as
 			# those that aren't considered bugs to begin with (when looking at %age)
@@ -833,15 +825,15 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 					$res_bug_count = $t_arr2[$c_res_s[$j]];
 				}
 
-				PRINT '<td>';
+				echo '<td>';
 				if( 0 < $res_bug_count ) {
 					$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_handler_id;
 					$t_bug_link = $t_bug_link . '&amp;' . FILTER_PROPERTY_RESOLUTION_ID . '=' . $c_res_s[$j] . '">';
-					PRINT $t_bug_link . $res_bug_count . '</a>';
+					echo $t_bug_link . $res_bug_count . '</a>';
 				} else {
-					PRINT $res_bug_count;
+					echo $res_bug_count;
 				}
-				PRINT '</td>';
+				echo '</td>';
 
 				# These resolutions are considered fixed
 				if( FIXED == $c_res_s[$j] ) {
@@ -858,10 +850,10 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 			if(( $t_arr2['total'] - $t_bugs_notbugs ) > 0 ) {
 				$t_percent_fixed = ( $t_bugs_fixed / ( $t_arr2['total'] - $t_bugs_notbugs ) );
 			}
-			PRINT '<td>';
+			echo '<td>';
 			printf( '% 1.0f%%', ( $t_percent_fixed * 100 ) );
-			PRINT '</td>';
-			PRINT '</tr>';
+			echo '</td>';
+			echo '</tr>';
 		}
 	}
 }
@@ -875,14 +867,9 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 
-	# Organise an array of resolution values to be used later
-	$t_res_arr = explode_enum_string( $p_resolution_enum_string );
-	$enum_res_count = count( $t_res_arr );
-	$c_res_s = array();
-	for( $i = 0;$i < $enum_res_count;$i++ ) {
-		$t_res_s = explode_enum_arr( $t_res_arr[$i] );
-		$c_res_s[$i] = db_prepare_string( $t_res_s[0] );
-	}
+	# Get the resolution values ot use
+	$c_res_s = MantisEnum::getValues( $p_resolution_enum_string );
+	$enum_res_count = count( $c_res_s );
 
 	# Checking if it's a per project statistic or all projects
 	$specific_where = helper_project_specific_where( $t_project_id );
@@ -933,11 +920,11 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 		if( $t_total_user_bugs > 0 ) {
 			$t_arr2 = $t_reporter_res_arr[$t_reporter_id];
 
-			PRINT '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
+			echo '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
 			$t_row_count++;
-			PRINT '<td>';
-			PRINT user_get_name( $t_reporter_id );
-			PRINT '</td>';
+			echo '<td>';
+			echo user_get_name( $t_reporter_id );
+			echo '</td>';
 
 			# We need to track the percentage of bugs that are considered fix, as well as
 			# those that aren't considered bugs to begin with (when looking at %age)
@@ -950,15 +937,15 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 					$res_bug_count = $t_arr2[$c_res_s[$j]];
 				}
 
-				PRINT '<td>';
+				echo '<td>';
 				if( 0 < $res_bug_count ) {
 					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $t_reporter_id;
 					$t_bug_link = $t_bug_link . '&amp;' . FILTER_PROPERTY_RESOLUTION_ID . '=' . $c_res_s[$j] . '">';
-					PRINT $t_bug_link . $res_bug_count . '</a>';
+					echo $t_bug_link . $res_bug_count . '</a>';
 				} else {
-					PRINT $res_bug_count;
+					echo $res_bug_count;
 				}
-				PRINT '</td>';
+				echo '</td>';
 
 				# These resolutions are considered fixed
 				if( FIXED == $c_res_s[$j] ) {
@@ -975,10 +962,10 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 			if( $t_total_user_bugs > 0 ) {
 				$t_percent_errors = ( $t_bugs_notbugs / $t_total_user_bugs );
 			}
-			PRINT '<td>';
+			echo '<td>';
 			printf( '% 1.0f%%', ( $t_percent_errors * 100 ) );
-			PRINT '</td>';
-			PRINT '</tr>';
+			echo '</td>';
+			echo '</tr>';
 		}
 	}
 }
@@ -1007,21 +994,13 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 	$t_notbug_multiplier[DUPLICATE] = 3;
 	$t_notbug_multiplier[NOT_A_BUG] = 5;
 
-	$t_sev_arr = explode_enum_string( $p_severity_enum_string );
-	$enum_sev_count = count( $t_sev_arr );
-	$c_sev_s = array();
-	for( $i = 0;$i < $enum_sev_count;$i++ ) {
-		$t_sev_s = explode_enum_arr( $t_sev_arr[$i] );
-		$c_sev_s[$i] = db_prepare_string( $t_sev_s[0] );
-	}
+	# Get the severity values ot use
+	$c_sev_s = MantisEnum::getValues( $p_severity_enum_string );
+	$enum_sev_count = count( $c_sev_s );
 
-	$t_res_arr = explode_enum_string( $p_resolution_enum_string );
-	$enum_res_count = count( $t_res_arr );
-	$c_res_s = array();
-	for( $i = 0;$i < $enum_res_count;$i++ ) {
-		$t_res_s = explode_enum_arr( $t_res_arr[$i] );
-		$c_res_s[$i] = db_prepare_string( $t_res_s[0] );
-	}
+	# Get the resolution values ot use
+	$c_res_s = MantisEnum::getValues( $p_resolution_enum_string );
+	$enum_res_count = count( $c_res_s );
 
 	# Checking if it's a per project statistic or all projects
 	$specific_where = helper_project_specific_where( $t_project_id );
@@ -1078,11 +1057,11 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 		if( $t_total_user_bugs > 0 ) {
 			$t_arr2 = $t_reporter_ressev_arr[$t_reporter_id];
 
-			PRINT '<tr ' . helper_alternate_class( $t_row_count ) . '>';
+			echo '<tr ' . helper_alternate_class( $t_row_count ) . '>';
 			$t_row_count++;
-			PRINT '<td>';
-			PRINT user_get_name( $t_reporter_id );
-			PRINT '</td>';
+			echo '<td>';
+			echo user_get_name( $t_reporter_id );
+			echo '</td>';
 
 			$t_total_severity = 0;
 			$t_total_errors = 0;
@@ -1119,16 +1098,16 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 					}
 				}
 			}
-			PRINT '<td>';
-			PRINT $t_total_severity;
-			PRINT '</td>';
-			PRINT '<td>';
-			PRINT $t_total_errors;
-			PRINT '</td>';
-			PRINT '<td>';
-			PRINT( $t_total_severity - $t_total_errors );
-			PRINT '</td>';
-			PRINT '</tr>';
+			echo '<td>';
+			echo $t_total_severity;
+			echo '</td>';
+			echo '<td>';
+			echo $t_total_errors;
+			echo '</td>';
+			echo '<td>';
+			print( $t_total_severity - $t_total_errors );
+			echo '</td>';
+			echo '</tr>';
 		}
 	}
 }

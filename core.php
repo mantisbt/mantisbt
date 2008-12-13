@@ -17,7 +17,7 @@
 	/**
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 
@@ -82,8 +82,20 @@
 	$t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR;
 	if (isset($GLOBALS['g_core_path']) && !isset( $HTTP_GET_VARS['g_core_path'] ) && !isset( $HTTP_POST_VARS['g_core_path'] ) && !isset( $HTTP_COOKIE_VARS['g_core_path'] ) ) {
 		$t_core_path = $g_core_path;
-	}	
+	}
+	
+	$g_core_path = $t_core_path;
 
+	# Define an autoload function to automatically load classes when referenced.
+	function __autoload( $className ) {
+		global $g_core_path;
+
+		$t_require_path = $g_core_path . 'classes' . DIRECTORY_SEPARATOR . $className . '.class.php';
+
+		if ( file_exists( $t_require_path ) ) {
+			require_once( $t_require_path );
+		}
+	}
 
 	if ( ($t_output = ob_get_contents()) != '') {
 		echo 'Possible Whitespace/Error in Configuration File - Aborting. Output so far follows:<br />';

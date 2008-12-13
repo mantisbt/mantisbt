@@ -17,7 +17,7 @@
 	/**
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 	 /**
@@ -75,8 +75,8 @@
 		<?php print_captcha_input( 'captcha', '' ) ?>
 	</td>
 	<td>
-		<img src="make_captcha_img.php?public_key=<?php echo $t_key ?>">
-		<input type="hidden" name="public_key" value="<?php echo $t_key ?>">
+		<img src="make_captcha_img.php?public_key=<?php echo $t_key ?>" alt="visual captcha" />
+		<input type="hidden" name="public_key" value="<?php echo $t_key ?>" />
 	</td>
 </tr>
 <?php
@@ -110,11 +110,11 @@
 </div>
 
 <?php
-	PRINT '<br /><div align="center">';
+	echo '<br /><div align="center">';
 	print_login_link();
-	PRINT '&nbsp;';
+	echo '&nbsp;';
 	print_lost_password_link();
-	PRINT '</div>';
+	echo '</div>';
 
 	if ( ON == config_get( 'use_javascript' ) ) {
 ?>

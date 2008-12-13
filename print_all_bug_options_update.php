@@ -18,7 +18,7 @@
 	 * Updates printing prefs then redirect to print_all_bug_page_page.php
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 	 /**
@@ -69,7 +69,7 @@
 	html_page_top1();
 	html_meta_redirect( $f_redirect_url );
 	html_page_top2();
-	PRINT '<br /><div align="center">';
+	echo '<br /><div align="center">';
 
 	if ( $result ) {
 		print lang_get( 'operation_successful' );
@@ -77,8 +77,8 @@
 		print error_string( ERROR_GENERIC );
 	}
 
-	PRINT '<br />';
+	echo '<br />';
 	print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
-	PRINT '<br /></div>';
+	echo '<br /></div>';
 	html_page_bottom1( __FILE__ );
 ?>

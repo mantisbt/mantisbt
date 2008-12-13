@@ -16,7 +16,7 @@
 
 /**
  * @package MantisBT
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
  /**
@@ -215,13 +215,13 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 		foreach( $t_requires as $t_plugin => $t_version ) {
 			$t_dependency = plugin_dependency( $t_plugin, $t_version );
 			if ( 1 == $t_dependency ) {
-				$t_depends[] = '<span class="small dependency_met">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</font>';
+				$t_depends[] = '<span class="small dependency_met">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
 			} elseif ( -1 == $t_dependency ) {
 				$t_ready = false;
-				$t_depends[] = '<span class="small dependency_dated">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</font>';
+				$t_depends[] = '<span class="small dependency_dated">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
 			} else {
 				$t_ready = false;
-				$t_depends[] = '<span class="small dependency_unmet">'.string_display_line( $t_plugin.' '.$t_version ).'</font>';
+				$t_depends[] = '<span class="small dependency_unmet">'.string_display_line( $t_plugin.' '.$t_version ).'</span>';
 			}
 		}
 	}
@@ -229,7 +229,7 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 	if ( 0 < count( $t_depends ) ) {
 		$t_depends = implode( $t_depends, '<br/>' );
 	} else {
-		$t_depends = '<span class="small dependency_met">' . lang_get( 'plugin_no_depends' ) . '</font>';
+		$t_depends = '<span class="small dependency_met">' . lang_get( 'plugin_no_depends' ) . '</span>';
 	}
 
 	echo '<tr ',helper_alternate_class(),'>';

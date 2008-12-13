@@ -18,7 +18,7 @@
  * @package CoreAPI
  * @subpackage EmailAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -332,7 +332,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	#  get list of status values that are not covered specifically in the prefs
 	#  These are handled by email_on_status generically
 	#  @@@ thraxisp note that email_on_assigned was co-opted to handle change in handler
-	$t_status_change = get_enum_to_array( config_get( 'status_enum_string' ) );
+	$t_status_change = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	unset( $t_status_change[NEW_] );
 	unset( $t_status_change[FEEDBACK] );
 	unset( $t_status_change[RESOLVED] );
@@ -1027,7 +1027,6 @@ function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_proj
 	}
 
 	# send mail
-	# PRINT '<br />email_bug_info::Sending email to :'.$t_user_email;
 	$t_ok = email_store( $t_user_email, $t_subject, $t_message, $t_mail_headers );
 
 	return $t_ok;

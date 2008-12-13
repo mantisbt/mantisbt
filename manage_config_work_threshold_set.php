@@ -17,7 +17,7 @@
 	/**
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 	 /**
@@ -49,7 +49,7 @@
 	        $f_threshold = gpc_get_int_array( 'flag_thres_' . $p_threshold, array() );
 	        $f_access = gpc_get_int( 'access_' . $p_threshold );
             # @@debug @@ echo "<br />for $p_threshold "; var_dump($f_threshold, $f_access); echo '<br />';
-		    $t_access_levels = get_enum_to_array( config_get( 'access_levels_enum_string' ) );
+		    $t_access_levels = MantisEnum::getAssocArrayIndexedByValues( config_get( 'access_levels_enum_string' ) );
 		    ksort( $t_access_levels );
 		    reset( $t_access_levels );
 

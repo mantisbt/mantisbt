@@ -17,7 +17,7 @@
 	/**
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 	 /**
@@ -48,7 +48,7 @@
 		}
 
 		echo '<tt>';
-		echo '<br />', $t_release_title, $t_scheduled_release_date, print_bracket_link( 'view_all_set.php?type=1&amp;temporary=y&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&amp;' . FILTER_PROPERTY_TARGET_VERSION . '=' . $t_version_name, lang_get( view_bugs_link ) ), '<br />';
+		echo '<br />', $t_release_title, $t_scheduled_release_date, print_bracket_link( 'view_all_set.php?type=1&amp;temporary=y&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&amp;' . FILTER_PROPERTY_TARGET_VERSION . '=' . $t_version_name, lang_get( 'view_bugs_link' ) ), '<br />';
 
 		$t_release_title_without_hyperlinks .= $t_scheduled_release_date;
 		echo str_pad( '', strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';

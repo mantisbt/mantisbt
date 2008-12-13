@@ -19,7 +19,7 @@
  * @package CoreAPI
  * @subpackage PrintAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -136,26 +136,14 @@ function print_successful_redirect( $p_redirect_to ) {
 		html_meta_redirect( $p_redirect_to );
 		html_page_top1();
 		html_page_top2();
-		PRINT '<br /><div class="center">';
-		PRINT lang_get( 'operation_successful' ) . '<br />';
+		echo '<br /><div class="center">';
+		echo lang_get( 'operation_successful' ) . '<br />';
 		print_bracket_link( $p_redirect_to, lang_get( 'proceed' ) );
-		PRINT '</div>';
+		echo '</div>';
 		html_page_bottom1();
 	} else {
 		print_header_redirect( $p_redirect_to );
 	}
-}
-
-# --------------------
-# Print a redirect header to update a bug
-function print_header_redirect_update( $p_bug_id ) {
-	print_header_redirect( string_get_bug_update_url( $p_bug_id ) );
-}
-
-# --------------------
-# Print a redirect header to update a bug
-function print_header_redirect_report() {
-	print_header_redirect( string_get_bug_report_url() );
 }
 
 # Print avatar image for the given user ID
@@ -209,9 +197,9 @@ function print_email_input( $p_field_name, $p_email ) {
 
 		# remove the domain part
 		$p_email = eregi_replace( "@$t_limit_email_domain$", '', $p_email );
-		PRINT '<input type="text" name="' . $p_field_name . '" size="20" maxlength="64" value="' . $p_email . '" />@' . $t_limit_email_domain;
+		echo '<input type="text" name="' . $p_field_name . '" size="20" maxlength="64" value="' . $p_email . '" />@' . $t_limit_email_domain;
 	} else {
-		PRINT '<input type="text" name="' . $p_field_name . '" size="32" maxlength="64" value="' . $p_email . '" />';
+		echo '<input type="text" name="' . $p_field_name . '" size="32" maxlength="64" value="' . $p_email . '" />';
 	}
 }
 
@@ -224,19 +212,7 @@ function print_captcha_input( $p_field_name ) {
 # ##########################################################################
 # Option List Printing API
 # ##########################################################################
-# --------------------
-# sorts the array by the first element of the array element
-# @@@ might not be used
-function cmp( $p_var1, $p_var2 ) {
-	if( $p_var1[0][0] == $p_var2[0][0] ) {
-		return 0;
-	}
-	if( $p_var1[0][0] < $p_var2[0][0] ) {
-		return -1;
-	} else {
-		return 1;
-	}
-}
+
 
 # --------------------
 # This populates an option list with the appropriate users by access level
@@ -275,9 +251,9 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
 	for( $i = 0;$i < count( $t_sort );$i++ ) {
 		$t_row = $t_users[$i];
-		PRINT '<option value="' . $t_row['id'] . '" ';
+		echo '<option value="' . $t_row['id'] . '" ';
 		check_selected( $p_user_id, $t_row['id'] );
-		PRINT '>' . $t_display[$i] . '</option>';
+		echo '>' . $t_display[$i] . '</option>';
 	}
 }
 
@@ -338,22 +314,10 @@ function print_tag_input( $p_bug_id = 0, $p_string = "" ) {
  * @param integer Bug ID
  */
 function print_tag_option_list( $p_bug_id = 0 ) {
-	$t_tag_table = db_get_table( 'mantis_tag_table' );
-
-	$query = "SELECT id, name, description FROM $t_tag_table ";
-	if( 0 != $p_bug_id ) {
-		$c_bug_id = db_prepare_int( $p_bug_id );
-		$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
-
-		$query .= "	WHERE id NOT IN (
-						SELECT tag_id FROM $t_bug_tag_table WHERE bug_id='$c_bug_id' ) ";
-	}
-
-	$query .= " ORDER BY name ASC ";
-	$result = db_query( $query );
+	$t_rows = tag_get_candidates_for_bug( $p_bug_id );
 
 	echo '<option value="0">', lang_get( 'tag_existing' ), '</option>';
-	while( $row = db_fetch_array( $result ) ) {
+	foreach ( $t_rows as $row ) {
 		$t_string = $row['name'];
 		if ( !empty( $row['description'] ) ) {
 			$t_string .= ' - ' . substr( $row['description'], 0, 20 );
@@ -482,24 +446,6 @@ function print_news_string_by_news_id( $p_news_id ) {
 }
 
 # --------------------
-# Used for update pages
-function print_field_option_list( $p_list, $p_item = '' ) {
-	$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
-
-	$t_category_string = get_enum_string( $t_mantis_bug_table, $p_list );
-	$t_arr = explode_enum_string( $t_category_string );
-	$entry_count = count( $t_arr );
-	for( $i = 0;$i < $entry_count;$i++ ) {
-		$t_s = str_replace( '\'', '', $t_arr[$i] );
-		PRINT "<option value=\"$t_s\"";
-		check_selected( $p_item, $t_s );
-		PRINT ">$t_s</option>";
-	}
-
-	# end for
-}
-
-# --------------------
 function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
 
 	if( null === $p_threshold ) {
@@ -515,18 +461,18 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 	project_cache_all();
 	$t_project_ids = current_user_get_accessible_projects();
 	if( $p_include_all_projects ) {
-		PRINT '<option value="' . ALL_PROJECTS . '"';
+		echo '<option value="' . ALL_PROJECTS . '"';
 		check_selected( $p_project_id, ALL_PROJECTS );
-		PRINT '>' . lang_get( 'all_projects' ) . '</option>' . "\n";
+		echo '>' . lang_get( 'all_projects' ) . '</option>' . "\n";
 	}
 
 	$t_project_count = count( $t_project_ids );
 	for( $i = 0;$i < $t_project_count;$i++ ) {
 		$t_id = $t_project_ids[$i];
 		if( $t_id != $p_filter_project_id ) {
-			PRINT "<option value=\"$t_id\"";
+			echo "<option value=\"$t_id\"";
 			check_selected( $p_project_id, $t_id );
-			PRINT '>' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
+			echo '>' . string_display_line( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace );
 		}
 	}
@@ -541,13 +487,13 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 	for( $i = 0;$i < $t_project_count;$i++ ) {
 		$t_full_id = $t_id = $t_project_ids[$i];
 		if( $t_id != $p_filter_project_id ) {
-			PRINT "<option value=\"";
+			echo "<option value=\"";
 			if( $p_trace ) {
 				$t_full_id = join( $p_parents, ";" ) . ';' . $t_id;
 			}
-			PRINT "$t_full_id\"";
+			echo "$t_full_id\"";
 			check_selected( $p_project_id, $t_full_id );
-			PRINT '>' . str_repeat( '&nbsp;', count( $p_parents ) ) . str_repeat( '&raquo;', count( $p_parents ) ) . ' ' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
+			echo '>' . str_repeat( '&nbsp;', count( $p_parents ) ) . str_repeat( '&raquo;', count( $p_parents ) ) . ' ' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
 		}
 	}
@@ -699,40 +645,6 @@ function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
 }
 
 # --------------------
-function print_news_project_option_list( $p_project_id ) {
-	$t_mantis_project_table = db_get_table( 'mantis_project_table' );
-	$t_mantis_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
-
-	$result = '';
-	if( access_has_project_level( ADMINISTRATOR ) ) {
-		$query = "SELECT *
-					FROM $t_mantis_project_table
-					ORDER BY name";
-		$result = db_query_bound( $query );
-	} else {
-		$t_user_id = auth_get_current_user_id();
-		$query = "SELECT p.id, p.name
-					FROM $t_mantis_project_table p, $t_mantis_project_user_list_table m
-					WHERE 	p.id=m.project_id AND
-							m.user_id=" . db_param() . " AND
-							p.enabled=" . db_param();
-		$result = db_query_bound( $query, Array( $t_user_id, 1 ) );
-	}
-
-	$project_count = db_num_rows( $result );
-	for( $i = 0;$i < $project_count;$i++ ) {
-		$row = db_fetch_array( $result );
-		$t_id = $row['id'];
-
-		PRINT "<option value=\"$t_id\"";
-		check_selected( $t_id, $p_project_id );
-		PRINT ">$t_name</option>";
-	}
-
-	# end for
-}
-
-# --------------------
 # Since categories can be orphaned we need to grab all unique instances of category
 # We check in the project category table and in the bug table
 # We put them all in one array and make sure the entries are unique
@@ -763,13 +675,6 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 		echo "<option value=\"$t_category_id\"", check_selected( $p_category_id, $t_category_id ), '>';
 		echo category_full_name( $t_category_id, $t_category_row['project_id'] != $t_project_id ), '</option>';
 	}
-}
-
-# Since categories can be orphaned we need to grab all unique instances of category
-# We check in the project category table and in the bug table
-# We put them all in one array and make sure the entries are unique
-function print_category_complete_option_list( $p_category_id = 0, $p_project_id = null ) {
-	return print_category_option_list( $p_category_id, $p_project_id );
 }
 
 # Now that categories are identified by numerical ID, we need an old-style name
@@ -808,9 +713,9 @@ function print_category_filter_option_list( $p_category_name = '', $p_project_id
 	sort( $cat_arr );
 
 	foreach( $cat_arr as $t_name ) {
-		PRINT "<option value=\"$t_name\"";
+		echo "<option value=\"$t_name\"";
 		check_selected( $p_category_name, $t_name );
-		PRINT ">$t_name</option>";
+		echo ">$t_name</option>";
 	}
 }
 
@@ -917,9 +822,9 @@ function print_build_option_list( $p_build = '' ) {
 	}
 
 	foreach( $t_overall_build_arr as $t_build ) {
-		PRINT "<option value=\"$t_build\"";
+		echo "<option value=\"$t_build\"";
 		check_selected( $p_build, $t_build );
-		PRINT ">" . string_shorten( $t_build ) . "</option>";
+		echo ">" . string_shorten( $t_build ) . "</option>";
 	}
 }
 
@@ -929,19 +834,16 @@ function print_build_option_list( $p_build = '' ) {
 function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 	$t_config_var_name = $p_enum_name . '_enum_string';
 	$t_config_var_value = config_get( $t_config_var_name );
+	
+	$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 
-	$t_arr = explode_enum_string( $t_config_var_value );
-	$t_enum_count = count( $t_arr );
-	for( $i = 0;$i < $t_enum_count;$i++ ) {
-		$t_elem = explode_enum_arr( $t_arr[$i] );
-		$t_key = trim( $t_elem[0] );
+	foreach ( $t_enum_values as $t_key ) {
 		$t_elem2 = get_enum_element( $p_enum_name, $t_key );
+
 		echo "<option value=\"$t_key\"";
 		check_selected( $p_val, $t_key );
 		echo ">$t_elem2</option>";
 	}
-
-	# end for
 }
 
 # Select the proper enum values for status based on workflow
@@ -954,34 +856,34 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 
 	if( count( $t_enum_workflow ) < 1 ) {
 		# workflow not defined, use default enum
-		$t_arr = explode_enum_string( $t_config_var_value );
+		$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 	} else {
 		# workflow defined - find allowed states
 		if( isset( $t_enum_workflow[$p_current_value] ) ) {
-			$t_arr = explode_enum_string( $t_enum_workflow[$p_current_value] );
+			$t_enum_values = MantisEnum::getValues( $t_enum_workflow[$p_current_value] );
 		} else {
 			# workflow was not set for this status, this shouldn't happen
-			$t_arr = explode_enum_string( $t_config_var_value );
+			$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 		}
 	}
 
-	$t_enum_count = count( $t_arr );
 	$t_enum_list = array();
 
-	for( $i = 0;$i < $t_enum_count;$i++ ) {
-		$t_elem = explode_enum_arr( $t_arr[$i] );
-		if(( $p_user_auth >= access_get_status_threshold( $t_elem[0] ) ) && ( !(( false == $p_show_current ) && ( $p_current_value == $t_elem[0] ) ) ) ) {
-			$t_enum_list[$t_elem[0]] = get_enum_element( 'status', $t_elem[0] );
+	foreach ( $t_enum_values as $t_enum_value ) {
+		if ( ( access_compare_level( $p_user_auth, access_get_status_threshold( $t_enum_value ) ) ) 
+				&& ( !(( false == $p_show_current ) && ( $p_current_value == $t_enum_value ) ) ) ) {
+			$t_enum_list[$t_enum_value] = get_enum_element( 'status', $t_enum_value );
 		}
 	}
 
-	# end for
-	if( true == $p_show_current ) {
+	if ( $p_show_current ) {
 		$t_enum_list[$p_current_value] = get_enum_element( 'status', $p_current_value );
 	}
-	if(( true == $p_add_close ) && ( $p_current_value >= config_get( 'bug_resolved_status_threshold' ) ) ) {
+
+	if ( $p_add_close && access_compare_level( $p_current_value, config_get( 'bug_resolved_status_threshold' ) ) ) {
 		$t_enum_list[CLOSED] = get_enum_element( 'status', CLOSED );
 	}
+
 	return $t_enum_list;
 }
 
@@ -1004,7 +906,7 @@ function print_status_option_list( $p_select_label, $p_current_value = 0, $p_all
 		}
 		echo '</select>';
 	} else {
-		echo get_enum_to_string( 'status_enum_string', $p_current_value );
+		echo MantisEnum::getLabel( 'status_enum_string', $p_current_value );
 	}
 }
 
@@ -1023,23 +925,22 @@ function print_project_access_levels_option_list( $p_val, $p_project_id = null )
 
 	# Add [default access level] to add the user to a project
 	# with his default access level.
-	PRINT "<option value=\"" . DEFAULT_ACCESS_LEVEL . "\"";
-	PRINT ">[" . lang_get( 'default_access_level' ) . "]</option>";
+	echo "<option value=\"" . DEFAULT_ACCESS_LEVEL . "\"";
+	echo ">[" . lang_get( 'default_access_level' ) . "]</option>";
 
-	$t_arr = explode_enum_string( $t_access_levels_enum_string );
-	$enum_count = count( $t_arr );
-	for( $i = 0;$i < $enum_count;$i++ ) {
-		$t_elem = explode_enum_arr( $t_arr[$i] );
+	$t_enum_values = MantisEnum::getValues( $t_access_levels_enum_string );
 
+	foreach ( $t_enum_values as $t_enum_value ) {
 		# a user must not be able to assign another user an access level that is higher than theirs.
-		if( $t_elem[0] > $t_current_user_access_level ) {
+		if ( $t_enum_value > $t_current_user_access_level ) {
 			continue;
 		}
 
-		$t_access_level = get_enum_element( 'access_levels', $t_elem[0] );
-		PRINT "<option value=\"$t_elem[0]\"";
-		check_selected( $p_val, $t_elem[0] );
-		PRINT ">$t_access_level</option>";
+		$t_access_level = get_enum_element( 'access_levels', $t_enum_value );
+
+		echo "<option value=\"$t_enum_value\"";
+		check_selected( $p_val, $t_enum_value );
+		echo ">$t_access_level</option>";
 	}
 
 	# end for
@@ -1050,9 +951,9 @@ function print_language_option_list( $p_language ) {
 	$enum_count = count( $t_arr );
 	for( $i = 0;$i < $enum_count;$i++ ) {
 		$t_language = string_attribute( $t_arr[$i] );
-		PRINT "<option value=\"$t_language\"";
+		echo "<option value=\"$t_language\"";
 		check_selected( $t_language, $p_language );
-		PRINT ">$t_language</option>";
+		echo ">$t_language</option>";
 	}
 
 	# end for
@@ -1120,7 +1021,7 @@ function print_all_bug_action_option_list() {
 	}
 
 	while( list( $key, $val ) = each( $commands ) ) {
-		PRINT "<option value=\"" . $key . "\">" . $val . "</option>";
+		echo "<option value=\"" . $key . "\">" . $val . "</option>";
 	}
 }
 
@@ -1172,7 +1073,7 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 	}
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
 	for( $i = 0;$i < count( $t_sort );$i++ ) {
-		PRINT '<option value="' . $t_users[$i] . '">' . $t_display[$i] . '</option>';
+		echo '<option value="' . $t_users[$i] . '">' . $t_display[$i] . '</option>';
 	}
 }
 
@@ -1196,7 +1097,7 @@ function print_project_user_list_option_list2( $p_user_id ) {
 		$row = db_fetch_array( $result );
 		$t_project_name = string_attribute( $row['name'] );
 		$t_user_id = $row['id'];
-		PRINT "<option value=\"$t_user_id\">$t_project_name</option>";
+		echo "<option value=\"$t_user_id\">$t_project_name</option>";
 	}
 }
 
@@ -1301,13 +1202,7 @@ function print_plugin_priority_list( $p_priority ) {
 # prints a link to VIEW a bug given an ID
 #  account for the user preference and site override
 function print_bug_link( $p_bug_id, $p_detail_info = true ) {
-	PRINT string_get_bug_view_link( $p_bug_id, null, $p_detail_info );
-}
-
-# prints a link to UPDATE a bug given an ID
-#  account for the user preference and site override
-function print_bug_update_link( $p_bug_id ) {
-	PRINT string_get_bug_update_link( $p_bug_id );
+	echo string_get_bug_view_link( $p_bug_id, null, $p_detail_info );
 }
 
 # formats the priority given the status
@@ -1316,9 +1211,9 @@ function print_formatted_priority_string( $p_status, $p_priority ) {
 	$t_pri_str = get_enum_element( 'priority', $p_priority );
 
 	if(( HIGH <= $p_priority ) && ( CLOSED != $p_status ) ) {
-		PRINT "<span class=\"bold\">$t_pri_str</span>";
+		echo "<span class=\"bold\">$t_pri_str</span>";
 	} else {
-		PRINT $t_pri_str;
+		echo $t_pri_str;
 	}
 }
 
@@ -1328,64 +1223,10 @@ function print_formatted_severity_string( $p_status, $p_severity ) {
 	$t_sev_str = get_enum_element( 'severity', $p_severity );
 
 	if(( MAJOR <= $p_severity ) && ( CLOSED != $p_status ) ) {
-		PRINT "<span class=\"bold\">$t_sev_str</span>";
+		echo "<span class=\"bold\">$t_sev_str</span>";
 	} else {
-		PRINT $t_sev_str;
+		echo $t_sev_str;
 	}
-}
-
-function print_project_category_string( $p_project_id ) {
-	$t_mantis_category_table = db_get_table( 'mantis_category_table' );
-
-	$c_project_id = db_prepare_int( $p_project_id );
-
-	$query = "SELECT name
-				FROM $t_mantis_category_table
-				WHERE project_id='$c_project_id'
-				ORDER BY name";
-	$result = db_query( $query );
-	$category_count = db_num_rows( $result );
-	$t_string = '';
-
-	for( $i = 0;$i < $category_count;$i++ ) {
-		$row = db_fetch_array( $result );
-		$t_name = $row['name'];
-
-		if( $i + 1 < $category_count ) {
-			$t_string .= $t_name . ', ';
-		} else {
-			$t_string .= $t_name;
-		}
-	}
-
-	return $t_string;
-}
-
-function print_project_version_string( $p_project_id ) {
-	$t_mantis_project_version_table = db_get_table( 'mantis_project_version_table' );
-	$t_mantis_project_table = db_get_table( 'mantis_project_table' );
-
-	$c_project_id = db_prepare_int( $p_project_id );
-
-	$query = "SELECT version
-				FROM $t_mantis_project_version_table
-				WHERE project_id=" . db_param();
-	$result = db_query_bound( $query, Array( $c_project_id ) );
-	$version_count = db_num_rows( $result );
-	$t_string = '';
-
-	for( $i = 0;$i < $version_count;$i++ ) {
-		$row = db_fetch_array( $result );
-		$t_version = $row['version'];
-
-		if( $i + 1 < $version_count ) {
-			$t_string .= $t_version . ', ';
-		} else {
-			$t_string .= $t_version;
-		}
-	}
-
-	return $t_string;
 }
 
 # ##########################################################################
@@ -1443,7 +1284,7 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 		$t_dir = 'ASC';
 	}
 
-	PRINT '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '&amp;save=1&amp;hide=' . $p_hide . '&amp;filter=' . $p_filter . '">' . $p_string . '</a>';
+	echo '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '&amp;save=1&amp;hide=' . $p_hide . '&amp;filter=' . $p_filter . '">' . $p_string . '</a>';
 }
 
 function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by ) {
@@ -1460,7 +1301,7 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
 		$t_dir = 'ASC';
 	}
 
-	PRINT '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '">' . $p_string . '</a>';
+	echo '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '">' . $p_string . '</a>';
 }
 
 # print a button which presents a standalone form.
@@ -1489,9 +1330,9 @@ function print_bracket_link_prepared( $p_link ) {
 # if the $p_link is blank then the text is printed but no link is created
 # if $p_new_window is true, link will open in a new window, default false.
 function print_bracket_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
-	PRINT '<span class="bracket-link">[&nbsp;';
+	echo '<span class="bracket-link">[&nbsp;';
 	print_link( $p_link, $p_url_text, $p_new_window, $p_class = '' );
-	PRINT '&nbsp;]</span> ';
+	echo '&nbsp;]</span> ';
 }
 
 # print a HTML link
@@ -1501,12 +1342,12 @@ function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' 
 		$t_class = "class='$p_class' ";
 	}
 	if( is_blank( $p_link ) ) {
-		PRINT "$p_url_text";
+		echo "$p_url_text";
 	} else {
 		if( $p_new_window === true ) {
-			PRINT "<a ${t_class}href=\"$p_link\" target=\"_blank\">$p_url_text</a>";
+			echo "<a ${t_class}href=\"$p_link\" target=\"_blank\">$p_url_text</a>";
 		} else {
-			PRINT "<a ${t_class}href=\"$p_link\">$p_url_text</a>";
+			echo "<a ${t_class}href=\"$p_link\">$p_url_text</a>";
 		}
 	}
 }
@@ -1519,12 +1360,12 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 
 	if(( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
 		if( $p_temp_filter_id !== 0 ) {
-			PRINT " <a href=\"$p_page_url?filter=$p_temp_filter_id&amp;page_number=$p_page_no\">$p_text</a> ";
+			echo " <a href=\"$p_page_url?filter=$p_temp_filter_id&amp;page_number=$p_page_no\">$p_text</a> ";
 		} else {
-			PRINT " <a href=\"$p_page_url?page_number=$p_page_no\">$p_text</a> ";
+			echo " <a href=\"$p_page_url?page_number=$p_page_no\">$p_text</a> ";
 		}
 	} else {
-		PRINT " $p_text ";
+		echo " $p_text ";
 	}
 }
 
@@ -1578,7 +1419,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 			}
 		}
 	}
-	PRINT implode( '&nbsp;', $t_items );
+	echo implode( '&nbsp;', $t_items );
 
 	if( $t_last_page < $p_end ) {
 		print( " ... " );
@@ -1597,7 +1438,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 
 # print a mailto: href link
 function print_email_link( $p_email, $p_text ) {
-	PRINT get_email_link( $p_email, $p_text );
+	echo get_email_link( $p_email, $p_text );
 }
 
 # return the mailto: href string link instead of printing it
@@ -1608,7 +1449,7 @@ function get_email_link( $p_email, $p_text ) {
 # print a mailto: href link with subject
 function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
 	$t_subject = email_build_subject( $p_bug_id );
-	PRINT get_email_link_with_subject( $p_email, $p_text, $t_subject );
+	echo get_email_link_with_subject( $p_email, $p_text, $t_subject );
 }
 
 # return the mailto: href string link instead of printing it
@@ -1655,7 +1496,7 @@ function print_hidden_input( $p_field_key, $p_field_val ) {
 	} else {
 		$t_key = string_html_entities( $p_field_key );
 		$t_val = string_html_entities( $p_field_val );
-		PRINT "<input type=\"hidden\" name=\"$t_key\" value=\"$t_val\" />\n";
+		echo "<input type=\"hidden\" name=\"$t_key\" value=\"$t_val\" />\n";
 	}
 }
 
@@ -1668,7 +1509,7 @@ function print_hidden_input( $p_field_key, $p_field_val ) {
 function print_documentation_link( $p_a_name = '' ) {
 
 	# @@@ Disable documentation links for now.  May be re-enabled if linked to new manual.
-	# PRINT "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
+	# echo "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
 }
 
 # print the hr
@@ -1679,7 +1520,7 @@ function print_hr( $p_hr_size = null, $p_hr_width = null ) {
 	if( null === $p_hr_width ) {
 		$p_hr_width = config_get( 'hr_width' );
 	}
-	PRINT "<hr size=\"$p_hr_size\" width=\"$p_hr_width%\" />";
+	echo "<hr size=\"$p_hr_size\" width=\"$p_hr_width%\" />";
 }
 
 # prints the signup link
@@ -1703,20 +1544,6 @@ function print_lost_password_link() {
 	}
 }
 
-function print_proceed( $p_result, $p_query, $p_link ) {
-	PRINT '<br />';
-	PRINT '<div align="center">';
-	if( $p_result ) {
-		# SUCCESS
-		PRINT lang_get( 'operation_successful' ) . '<br />';
-	} else {
-		# FAILURE
-		print_sql_error( $p_query );
-	}
-	print_bracket_link( $p_link, lang_get( 'proceed' ) );
-	PRINT '</div>';
-}
-
 # ===============================
 # Deprecated Functions
 # ===============================
@@ -1727,9 +1554,9 @@ function print_proceed( $p_result, $p_query, $p_link ) {
 function print_sql_error( $p_query ) {
 	global $g_administrator_email;
 
-	PRINT error_string( ERROR_SQL );
+	echo error_string( ERROR_SQL );
 	print_email_link( $g_administrator_email, lang_get( 'administrator' ) );
-	PRINT "<br />$p_query;<br />";
+	echo "<br />$p_query;<br />";
 }
 
 # Get icon corresponding to the specified filename
@@ -1742,7 +1569,7 @@ function print_file_icon( $p_filename ) {
 	}
 
 	$t_name = $t_file_type_icons[$ext];
-	PRINT '<img src="' . config_get( 'path' ) . 'images/fileicons/' . $t_name . '" alt="' . $ext . ' file icon" width="16" height="16" border="0" />';
+	echo '<img src="' . config_get( 'path' ) . 'images/fileicons/' . $t_name . '" alt="' . $ext . ' file icon" width="16" height="16" border="0" />';
 }
 
 # Prints an RSS image that is hyperlinked to an RSS feed.

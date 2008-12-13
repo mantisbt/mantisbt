@@ -1,6 +1,6 @@
 <?php
 /* 
-  V5.05 11 July 2008   (c) 2006 John Lim (jlim#natsoft.com). All rights reserved.
+  V5.06 16 Oct 2008   (c) 2006 John Lim (jlim#natsoft.com). All rights reserved.
 
   This is a version of the ADODB driver for DB2.  It uses the 'ibm_db2' PECL extension
   for PHP (http://pecl.php.net/package/ibm_db2), which in turn requires DB2 V8.2.2 or
@@ -47,7 +47,7 @@ class ADODB_db2 extends ADOConnection {
 								// breaking backward-compat
 	var $_bindInputArray = false;	
 	var $_genIDSQL = "VALUES NEXTVAL FOR %s";
-	var $_genSeqSQL = "CREATE SEQUENCE %s START WITH 1 NO MAXVALUE NO CYCLE";
+	var $_genSeqSQL = "CREATE SEQUENCE %s START WITH %s NO MAXVALUE NO CYCLE";
 	var $_dropSeqSQL = "DROP SEQUENCE %s";
 	var $_autocommit = true;
 	var $_haserrorfunctions = true;
@@ -236,7 +236,7 @@ class ADODB_db2 extends ADOConnection {
 	function CreateSequence($seqname='adodbseq',$start=1)
 	{
 		if (empty($this->_genSeqSQL)) return false;
-		$ok = $this->Execute(sprintf($this->_genSeqSQL,$seqname));
+		$ok = $this->Execute(sprintf($this->_genSeqSQL,$seqname,$start));
 		if (!$ok) return false;
 		return true;
 	}

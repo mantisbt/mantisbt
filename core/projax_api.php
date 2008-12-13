@@ -19,7 +19,7 @@
  * @package CoreAPI
  * @subpackage ProjaxAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -37,7 +37,13 @@ $g_projax = new Projax();
 # class, size, maxlength, value, and tabindex.
 function projax_autocomplete( $p_entrypoint, $p_field_name, $p_attributes_array = null ) {
 	global $g_projax;
-	echo $g_projax->text_field_with_auto_complete( $p_field_name, $p_attributes_array, array( 'url' => 'xmlhttprequest.php?entrypoint=' . $p_entrypoint ) );
+	if ( ON == config_get( 'use_javascript' ) ) {
+		echo $g_projax->text_field_with_auto_complete( $p_field_name, $p_attributes_array, array( 'url' => 'xmlhttprequest.php?entrypoint=' . $p_entrypoint ) );
+	} else {
+		$t_tabindex = isset( $p_attributes_array['tabindex'] ) ? ( ' tabindex="' . $p_attributes_array['tabindex'] . '"' ) : '';
+		$t_maxlength = isset( $p_attributes_array['maxlength'] ) ?( ' maxlength="' . $p_attributes_array['maxlength'] . '"' ) : '';
+		echo '<input id="'.$p_field_name.'" name="'.$p_field_name.'"'. $t_tabindex . $t_maxlength . ' size="'.(isset($p_attributes_array['size'])?$p_attributes_array['size']:30).'" type="text" value="'.(isset($p_attributes_array['value'])?$p_attributes_array['value']:'').'" '.(isset($p_attributes_array['class'])?'class = "'.$p_attributes_array['class'].'" ':'').'/>';
+	}
 }
 
 # Filters the provided array of strings and only returns the ones that start with $p_prefix.

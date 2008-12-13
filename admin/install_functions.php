@@ -19,7 +19,7 @@
  * All functions must be name install_<function_name> and referenced as just <function_name>.
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -56,10 +56,17 @@ function install_category_migrate() {
 
 	# In every project, go through all the categories found, and create them and update the bug
 	foreach( $t_data as $t_project_id => $t_categories ) {
+		$t_inserted = array();
 		foreach( $t_categories as $t_name => $t_true ) {
-			$query = "INSERT INTO $t_category_table ( name, project_id ) VALUES ( " . db_param() . ', ' . db_param() . ' )';
-			db_query_bound( $query, array( $t_name, $t_project_id ) );
-			$t_category_id = db_insert_id( $t_category_table );
+			$t_lower_name = string_lower( $t_name );
+			if ( !isset( $t_inserted[$t_lower_name] ) ) {
+				$query = "INSERT INTO $t_category_table ( name, project_id ) VALUES ( " . db_param() . ', ' . db_param() . ' )';
+				db_query_bound( $query, array( $t_name, $t_project_id ) );
+				$t_category_id = db_insert_id( $t_category_table );
+				$t_inserted[$t_lower_name] = $t_category_id;
+			} else {
+				$t_category_id = $t_inserted[$t_lower_name];
+			}
 
 			$query = "UPDATE $t_bug_table SET category_id=" . db_param() . '
 						WHERE project_id=' . db_param() . ' AND category=' . db_param();

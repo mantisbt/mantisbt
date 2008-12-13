@@ -19,7 +19,7 @@
 	 *
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 	 /**
@@ -67,7 +67,7 @@
 	echo excel_get_header( $t_export_title );
 	echo excel_get_titles_row();
 
-	$f_bug_arr = explode_enum_string( $f_export );
+	$f_bug_arr = explode( ',', $f_export );
 
 	$t_columns = excel_get_columns();
 

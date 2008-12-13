@@ -18,7 +18,7 @@
  * @package CoreAPI
  * @subpackage DateAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -35,7 +35,7 @@ function date_get_null() {
 
 # prints the date given the formating string
 function print_date( $p_format, $p_date ) {
-	PRINT date( $p_format, $p_date );
+	echo date( $p_format, $p_date );
 }
 
 function print_month_option_list( $p_month = 0 ) {
@@ -175,12 +175,12 @@ function date_print_calendar( $p_button_name = 'trigger' ) {
 		echo "<script type=\"text/javascript\" src=\"javascript/jscalendar/calendar-setup.js\"></script>\n";
 		$t_icon_path = config_get( 'icon_path' );
 		$t_cal_icon = $t_icon_path . "calendar-img.gif";
-		echo "<input type=\"image\" class=\"button\" id=\"" . $p_button_name . "\" SRC=\"";
+		echo "<input type=\"image\" class=\"button\" id=\"" . $p_button_name . "\" src=\"";
 		echo $t_cal_icon;
 		$t_format = config_get( 'short_date_format' );
 		$t_new_format = str_replace( '-', '-%', $t_format );
 		$t_format = "%" . $t_new_format;
-		echo "\" onClick=\"return showCalendar ('sel1', '" . $t_format . "', 24, true)\" />";
+		echo "\" onclick=\"return showCalendar ('sel1', '" . $t_format . "', 24, true)\" />";
 	}
 }
 

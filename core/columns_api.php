@@ -18,7 +18,7 @@
  * @package CoreAPI
  * @subpackage ColumnsAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -26,7 +26,7 @@
  * Get a list of standard columns.
  */
 function columns_get_standard() {
-	return array(
+	$t_array = array(
 		'additional_information',
 		'attachment',
 		'bugnotes_count',
@@ -39,10 +39,14 @@ function columns_get_standard() {
 		'fixed_in_version',
 		'handler_id',
 		'id',
-		'last_updated',
-		'os',
-		'os_build',
-		'platform',
+		'last_updated'
+	);
+
+	if( ON == config_get( 'enable_profiles' ) ) {
+		$t_array = array_merge( $t_array, array( 'os', 'os_build', 'platform' ) );
+	}
+	
+	$t_array =array_merge( $t_array, array( 
 		'priority',
 		'project_id',
 		'projection',
@@ -58,7 +62,8 @@ function columns_get_standard() {
 		'target_version',
 		'version',
 		'view_state',
-	);
+	) );	
+	return $t_array;
 }
 
 /**

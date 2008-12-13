@@ -1,7 +1,7 @@
 <?php
 
 /**
-  V5.05 11 July 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+  V5.06 16 Oct 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -69,7 +69,7 @@ class ADODB2_mssql extends ADODB_DataDict {
 		case 'TINYINT': return  'I1';
 		case 'SMALLINT': return 'I2';
 		case 'BIGINT':  return  'I8';
-		
+		case 'SMALLDATETIME': return 'T';
 		case 'REAL':
 		case 'FLOAT': return 'F';
 		default: return parent::MetaType($t,$len,$fieldobj);

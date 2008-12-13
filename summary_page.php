@@ -17,7 +17,7 @@
 	/**
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 	 /**
@@ -360,20 +360,13 @@
 				<?php echo lang_get( 'reporter_by_resolution' ) ?>
 			</td>
 			<?php
-			$t_arr = explode_enum_string( config_get( 'resolution_enum_string' ) );
-			$enum_count = count( $t_arr );
+			$t_resolutions = MantisEnum::getValues( config_get( 'resolution_enum_string' ) );
 
-			for ($i=0;$i<$enum_count;$i++) {
-				print '<td>';
-				$t_s = explode_enum_arr( $t_arr[$i] );
-				$c_s[0] = db_prepare_string( $t_s[0] );
-				echo get_enum_element( 'resolution', $c_s[0] );
-				print '</td>';
+			foreach ( $t_resolutions as $t_resolution ) {
+				echo '<td>', get_enum_element( 'resolution', $t_resolution ), '</td>';
 			}
 
-			print '<td>';
-			print lang_get( 'percentage_errors' );
-			print '</td>';
+			echo '<td>', lang_get( 'percentage_errors' ), '</td>';
 			?>
 		</tr>
 		<?php summary_print_reporter_resolution( config_get( 'resolution_enum_string' ) ) ?>
@@ -390,20 +383,13 @@
 				<?php echo lang_get( 'developer_by_resolution' ) ?>
 			</td>
 			<?php
-			$t_arr = explode_enum_string( config_get( 'resolution_enum_string' ) );
-			$enum_count = count( $t_arr );
+			$t_resolutions = MantisEnum::getValues( config_get( 'resolution_enum_string' ) );
 
-			for ($i=0;$i<$enum_count;$i++) {
-				print '<td>';
-				$t_s = explode_enum_arr( $t_arr[$i] );
-				$c_s[0] = db_prepare_string( $t_s[0] );
-				echo get_enum_element( 'resolution', $c_s[0] );
-				print '</td>';
+			foreach ( $t_resolutions as $t_resolution ) {
+				echo '<td>', get_enum_element( 'resolution', $t_resolution ), '</td>';
 			}
 
-			print '<td>';
-			print lang_get( 'percentage_fixed' );
-			print '</td>';
+			echo '<td>', lang_get( 'percentage_fixed' ), '</td>';
 			?>
 		</tr>
 		<?php summary_print_developer_resolution( config_get( 'resolution_enum_string' ) ) ?>

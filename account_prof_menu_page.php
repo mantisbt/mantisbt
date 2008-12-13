@@ -22,7 +22,7 @@
 	 *
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 	 /**
@@ -74,7 +74,7 @@
 <div align="center">
 <form method="post" action="account_prof_update.php">
 <?php  echo form_security_field( 'profile_update' )?>
-<input type="hidden" name="action" value="add">
+<input type="hidden" name="action" value="add" />
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">

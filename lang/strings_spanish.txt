@@ -35,6 +35,7 @@
  * @author Jorge Andrés Brugger - jbrugger@gmx.net
  * @author Luis Miguel Cruz Miranda - luismi@b2bi.es
  * @author Pablo Corral - PabloCorral@ciudad.com.ar
+ * @author Sanbec
  */
 
 $s_charset = 'utf-8';
@@ -216,7 +217,6 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Imposible conectarse al servidor FTP.'
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'El gestor de incidencias no tiene los permisos suficientes para gestionar incidencias con este estado';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ya existe un proyecto con ese nombre. Por favor, regrese y seleccione un nombre diferente.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nombre de proyecto no válido. Los nombres de proyecto no pueden estar en blanco.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Usuario no encontrado.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'La información de ingreso almacenada por su navegador es incorrecta. Quizá su cuenta ha sido borrada.';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'No se encontraron preferencias para este usuario.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Nnoticia no encontrada.';
@@ -685,7 +685,7 @@ $s_plugin_key_upgrade = 'actualización requerida';
 $s_project_added_msg = 'El proyecto ha sido agregado...';
 $s_category_added_msg = 'La categoría ha sido agregada...';
 $s_category_deleted_msg = 'La categoría ha sido eliminada...';
-$s_category_delete_sure_msg = '¿Está seguro que desea eliminar la categoría?';
+$s_category_delete_sure_msg = '¿Estás seguro de que deseas eliminar la categoría?<br />La categoría «%s» contiene %d errores.';
 $s_delete_category_button = 'Eliminar Categoría';
 $s_edit_project_category_title = 'Editar la categoría del proyecto';
 $s_update_category_button = 'Actualizar Categoría';

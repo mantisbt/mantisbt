@@ -16,7 +16,7 @@ function mc_config_get_string( $p_username, $p_password, $p_config_var ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	if( mci_config_is_private( $p_config_var ) ) {
+	if( config_is_private( $p_config_var ) ) {
 		return new soap_fault( 'Client', '', "Access to '$p_config_var' is denied" );
 	}
 
@@ -27,22 +27,3 @@ function mc_config_get_string( $p_username, $p_password, $p_config_var ) {
 	return config_get( $p_config_var );
 }
 
-function mci_config_is_private( $p_config_var ) {
-	switch( $p_config_var ) {
-		case 'hostname':
-		case 'port':
-		case 'db_username':
-		case 'db_password':
-		case 'password_confirm_hash_magic_string':
-		case 'smtp_host':
-		case 'smtp_username':
-		case 'smtp_password':
-			return true;
-	}
-
-	if( !is_string( $p_config_var ) ) {
-		return true;
-	}
-
-	return false;
-}

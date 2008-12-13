@@ -17,7 +17,7 @@
 	/**
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 	 /**
@@ -52,9 +52,9 @@
 <?php # Send reminder Form BEGIN ?>
 <br />
 <div align="center">
-<table class="width75" cellspacing="1">
 <form method="post" action="bug_reminder.php">
-<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>">
+<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
+<table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
 		<?php echo lang_get( 'bug_reminder' ) ?>
@@ -85,11 +85,11 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'bug_send_button' ) ?>">
+		<input type="submit" class="button" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
 	</td>
 </tr>
-</form>
 </table>
+</form>
 <br />
 <table class="width75" cellspacing="1">
 <tr>

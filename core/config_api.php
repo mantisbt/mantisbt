@@ -18,7 +18,7 @@
  * @package CoreAPI
  * @subpackage ConfigurationAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -511,18 +511,18 @@ function config_obsolete( $p_var, $p_replace ) {
 	#     new config option names in the warning text)
 
 	if( config_is_set( $p_var ) ) {
-		PRINT '<p><b>Warning:</b> The configuration option <tt>$g_' . $p_var . '</tt> is now obsolete';
+		echo '<p><b>Warning:</b> The configuration option <tt>$g_' . $p_var . '</tt> is now obsolete';
 		if( is_array( $p_replace ) ) {
-			PRINT ', please see the following options: <ul>';
+			echo ', please see the following options: <ul>';
 			foreach( $p_replace as $t_option ) {
-				PRINT '<li>$g_' . $t_option . '</li>';
+				echo '<li>$g_' . $t_option . '</li>';
 			}
-			PRINT '</ul>';
+			echo '</ul>';
 		}
 		elseif( !is_blank( $p_replace ) ) {
-			PRINT ', please use <tt>$g_' . $p_replace . '</tt> instead.';
+			echo ', please use <tt>$g_' . $p_replace . '</tt> instead.';
 		}
-		PRINT '</p>';
+		echo '</p>';
 	}
 }
 
@@ -545,4 +545,68 @@ function config_eval( $p_value ) {
 		}
 	}
 	return $t_value;
+}
+
+# list of configuration variable which may expose webserver details and shouldn't be
+# exposed to users or webservices
+function config_is_private( $p_config_var ) {
+	switch( $p_config_var ) {
+		case 'hostname':
+		case 'db_username':
+		case 'db_password':
+		case 'database_name':
+		case 'db_schema':
+		case 'db_type':
+		case 'password_confirm_hash_magic_string':
+		case 'smtp_host':
+		case 'smtp_username':
+		case 'smtp_password':
+		case 'smtp_connection_mode':
+		case 'smtp_port':
+		case 'email_send_using_cronjob':
+		case 'jpgraph_path':
+		case 'absolute_path':
+		case 'core_path':
+		case 'class_path':
+		case 'use_iis':
+		case 'session_save_path':
+		case 'session_handler':
+		case 'session_validation':
+		case 'global_settings':
+		case 'system_font_folder':
+		case 'phpMailer_method':
+		case 'default_avatar':
+		case 'file_upload_ftp_server':
+		case 'file_upload_ftp_user':
+		case 'file_upload_ftp_pass':
+		case 'attachments_file_permissions':
+		case 'file_upload_method':
+		case 'absolute_path_default_upload_folder':
+		case 'ldap_server':
+		case 'plugin_path':
+		case 'ldap_root_dn':
+		case 'ldap_organization':
+		case 'ldap_uid_field':
+		case 'ldap_bind_dn':
+		case 'ldap_bind_passwd':
+		case 'use_ldap_email':
+		case 'ldap_protocol_version':
+		case 'login_method':
+		case 'cookie_path':
+		case 'cookie_domain':
+		case 'bottom_include_page':
+		case 'top_include_page':
+		case 'css_include_file':
+		case 'meta_include_file':
+		case 'log_level':
+		case 'log_destination':
+		case 'rss_key_seed':
+		case 'dot_tool':
+		case 'neato_tool':
+		case 'twitter_username':
+		case 'twitter_password':		
+			return true;
+	}
+
+	return false;
 }
