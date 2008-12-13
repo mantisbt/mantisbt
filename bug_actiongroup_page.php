@@ -42,6 +42,9 @@
 	# run through the issues to see if they are all from one project
 	$t_project_id = ALL_PROJECTS;
 	$t_multiple_projects = false;
+	
+	bug_cache_array_rows( $f_bug_arr );
+	
 	foreach( $f_bug_arr as $t_bug_id ) {
 		$t_bug = bug_get( $t_bug_id );
 		if ( $t_project_id != $t_bug->project_id ) {
