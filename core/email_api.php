@@ -64,7 +64,7 @@ require_once( $t_core_dir . 'disposable' . DIRECTORY_SEPARATOR . 'disposable.php
 require_once( PHPMAILER_PATH . 'class.phpmailer.php' );
 
 # reusable object of class SMTP
-$g_phpMailer_smtp = null;
+$g_phpMailer = null;
 
 # ##########################################################################
 # Email API
@@ -746,7 +746,7 @@ function email_send_all() {
 
 # This function sends an email message based on the supplied email data.
 function email_send( $p_email_data ) {
-	global $g_phpMailer_smtp;
+	global $g_phpMailer;
 
 	$t_email_data = $p_email_data;
 
@@ -755,12 +755,19 @@ function email_send( $p_email_data ) {
 	$t_message = string_email_links( trim( $t_email_data->body ) );
 
 	$t_debug_email = config_get( 'debug_email' );
-
+	$t_mailer_method = config_get( 'phpMailer_method' );
+	
 	# Visit http://phpmailer.sourceforge.net
 	# if you have problems with phpMailer
 
-	$mail = new PHPMailer;
-	$mail->PluginDir = PHPMAILER_PATH;
+	if( is_null( $g_phpMailer ) ) {
+		if ( $t_mailer_method == PHPMAILER_METHOD_SMTP )
+			register_shutdown_function( 'email_smtp_close' );
+		$mail = new PHPMailer;
+		$mail->PluginDir = PHPMAILER_PATH;
+	} else {
+		$mail = $g_phpMailer;
+	}
 
 	if( isset( $t_email_data->metadata['hostname'] ) ) {
 		$mail->Hostname = $t_email_data->metadata['hostname'];
@@ -784,35 +791,24 @@ function email_send( $p_email_data ) {
 			break;
 
 		case PHPMAILER_METHOD_SMTP:
-			$mail->IsSMTP(); {
-				# SMTP collection is always kept alive
-				#
-				$mail->SMTPKeepAlive = true;
+			$mail->IsSMTP();
 
-				# @@@ yarick123: It is said in phpMailer comments, that phpMailer::smtp has private access.
-				# but there is no common method to reset PHPMailer object, so
-				# I see the smallest evel - to initialize only one 'private'
-				# field phpMailer::smtp in order to reuse smtp connection.
+			// SMTP collection is always kept alive
+			$mail->SMTPKeepAlive = true;
 
-				if( is_null( $g_phpMailer_smtp ) ) {
-					register_shutdown_function( 'email_smtp_close' );
-				} else {
-					$mail->smtp = $g_phpMailer_smtp;
-				}
-
-				if ( !is_blank( config_get( 'smtp_username' ) ) ) {
-					# Use SMTP Authentication
-					$mail->SMTPAuth = true;
-					$mail->Username = config_get( 'smtp_username' );
-					$mail->Password = config_get( 'smtp_password' );
-				}
-
-				if ( !is_blank( config_get( 'smtp_connection_mode' ) ) ) {
-					$mail->SMTPSecure = config_get( 'smtp_connection_mode' );
-				}
-
-				$mail->Port = config_get( 'smtp_port' );
+			if ( !is_blank( config_get( 'smtp_username' ) ) ) {
+				# Use SMTP Authentication
+				$mail->SMTPAuth = true;
+				$mail->Username = config_get( 'smtp_username' );
+				$mail->Password = config_get( 'smtp_password' );
 			}
+
+			if ( !is_blank( config_get( 'smtp_connection_mode' ) ) ) {
+				$mail->SMTPSecure = config_get( 'smtp_connection_mode' );
+			}
+
+			$mail->Port = config_get( 'smtp_port' );
+			
 			break;
 	}
 
@@ -839,8 +835,6 @@ function email_send( $p_email_data ) {
 		foreach( $t_email_data->metadata['headers'] as $t_key => $t_value ) {
 			switch( $t_key ) {
 				case 'Message-ID':
-
-					// Overwrite default Message ID
 					$mail->set( 'MessageID', $t_value );
 					break;
 				case 'In-Reply-To':
@@ -863,28 +857,24 @@ function email_send( $p_email_data ) {
 		}
 	}
 
-	if( !is_null( $mail->smtp ) ) {
-
-		# @@@ yarick123: It is said in phpMailer comments, that phpMailer::smtp has private access.
-		# but there is no common method to reset PHPMailer object, so
-		# I see the smallest evel - to initialize only one 'private'
-		# field phpMailer::smtp in order to reuse smtp connection.
-		$g_phpMailer_smtp = $mail->smtp;
-	}
+	$mail->ClearAllRecipients();
+	$mail->ClearAttachments();
+	$mail->ClearReplyTos();
+	$mail->ClearCustomHeaders();
 
 	return $t_success;
 }
 
 # closes opened kept alive SMTP connection (if it was opened)
 function email_smtp_close() {
-	global $g_phpMailer_smtp;
+	global $g_phpMailer;
 
-	if( !is_null( $g_phpMailer_smtp ) ) {
-		if( $g_phpMailer_smtp->Connected() ) {
-			$g_phpMailer_smtp->Quit();
-			$g_phpMailer_smtp->Close();
+	if( !is_null( $g_phpMailer ) ) {
+		if( $g_phpMailer->smtp->Connected() ) {
+			$g_phpMailer->smtp->Quit();
+			$g_phpMailer->smtp->Close();
 		}
-		$g_phpMailer_smtp = null;
+		$g_phpMailer = null;
 	}
 }
 
