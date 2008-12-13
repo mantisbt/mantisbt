@@ -416,7 +416,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 		$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
 
 		$query .= "	WHERE id NOT IN (
-						SELECT tag_id FROM $t_bug_tag_table WHERE bug_id='" . db_param() . "' ) ";
+						SELECT tag_id FROM $t_bug_tag_table WHERE bug_id=" . db_param() . ' )';
 		$t_params[] = $p_bug_id;
 	}
 
