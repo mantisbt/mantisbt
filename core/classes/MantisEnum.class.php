@@ -188,7 +188,7 @@ class MantisEnum {
 	 * @param string $tuple a num:value pair
 	 * @return array array(value, label)
 	 */
-	private function getArrayForTuple( $tuple ) {
+	private static function getArrayForTuple( $tuple ) {
 		return explode( MantisEnum::VALUE_LABEL_SEPARATOR, $tuple );
 	}
 
