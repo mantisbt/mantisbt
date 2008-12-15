@@ -480,12 +480,11 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 
 		# looking for specific project
 		if( VS_PRIVATE == project_get_field( $p_project_id, 'view_state' ) ) {
-
-			# @@@ (thraxisp) this is probably more complex than it needs to be
-			# When a new project is created, those who meet 'private_project_threshold' are added
-			#  automatically, but don't have an entry in project_user_list_table.
-			#  if they did, you would not have to add global levels.
-
+			/** @todo (thraxisp) this is probably more complex than it needs to be
+			 * When a new project is created, those who meet 'private_project_threshold' are added
+			 *  automatically, but don't have an entry in project_user_list_table.
+			 *  if they did, you would not have to add global levels.
+			 */
 			$t_private_project_threshold = config_get( 'private_project_threshold' );
 			if( is_array( $t_private_project_threshold ) ) {
 				if( is_array( $p_access_level ) ) {
@@ -502,7 +501,7 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 				}
 			} else {
 				if( is_array( $p_access_level ) ) {
-					# private threshold is a number, but request is an array, use values in request higher than threshold
+					// private threshold is a number, but request is an array, use values in request higher than threshold
 					$t_global_access_level = array();
 					foreach( $p_access_level as $t_threshold ) {
 						if( $t_threshold >= $t_private_project_threshold ) {
@@ -510,7 +509,7 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 						}
 					}
 				} else {
-					# both private threshold and request are numbers, use maximum
+					// both private threshold and request are numbers, use maximum
 					$t_global_access_level = max( $p_access_level, $t_private_project_threshold );
 				}
 			}
@@ -545,7 +544,7 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 
 	if( $c_project_id != ALL_PROJECTS ) {
 
-		# Get the project overrides
+		// Get the project overrides
 		$query = "SELECT u.id, u.username, u.realname, l.access_level
 				FROM $t_project_user_list_table l, $t_user_table u
 				WHERE l.user_id = u.id

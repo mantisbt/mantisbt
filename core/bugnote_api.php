@@ -42,9 +42,11 @@ require_once( $t_core_dir . 'history_api.php' );
  */
 require_once( $t_core_dir . 'bug_api.php' );
 
-# ===================================
-# Bugnote Data Structure Definition
-# ===================================
+/**
+ * Bugnote Data Structure Definition
+ * @package MantisBT
+ * @subpackage classes
+ */
 class BugnoteData {
 	var $id;
 	var $bug_id;

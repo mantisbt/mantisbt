@@ -14,10 +14,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
  * @package CoreAPI
@@ -194,14 +190,16 @@ function version_update( $p_version_info ) {
 					  WHERE ( project_id=' . db_param() . ') AND ( target_version=' . db_param() . ')';
 		db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
-		# @@@ We should consider using ids instead of names for foreign keys.  The main advantage of using the names are:
-		# 		- for history the version history entries will still be valid even if the version is deleted in the future. --  we can ban deleting referenced versions.
-		#		- when an issue is copied or moved from one project to another, we can keep the last version with the issue even if it doesn't exist in the new project.  Also previous history entries remain valid.
-		# @@@ We should update the history for version, fixed_in_version, and target_version.
-		# @@@ We probably need to update the saved filters too?
+		/**
+		 * @todo We should consider using ids instead of names for foreign keys.  The main advantage of using the names are:
+		 *		- for history the version history entries will still be valid even if the version is deleted in the future. --  we can ban deleting referenced versions.
+		 *		- when an issue is copied or moved from one project to another, we can keep the last version with the issue even if it doesn't exist in the new project.  Also previous history entries remain valid.
+		 * @todo We should update the history for version, fixed_in_version, and target_version.
+		 * @todo We probably need to update the saved filters too?
+		 */
 	}
 
-	# db_query errors on failure so:
+	// db_query errors on failure so:
 	return true;
 }
 

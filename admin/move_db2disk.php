@@ -135,7 +135,7 @@ function upgrade_move_att2disk( $p_source ) {
 			if( file_put_contents( $t_file_name, $t_row['content'] ) ) {
 
 				// successful, update database
-				# @@@ do we want to check the size of data transfer matches here?
+				/** @todo do we want to check the size of data transfer matches here? */
 				$c_file_path = db_prepare_string( $t_file_path );
 				$c_new_file_name = db_prepare_string( $t_file_path . $c_filename );
 				$query2 = "UPDATE $t_file_table SET diskfile = '$c_new_file_name',

@@ -17,10 +17,6 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
-
 $g_custom_field_type_definition[ CUSTOM_FIELD_TYPE_STRING ] = array (
 	'#display_possible_values' => TRUE,
 	'#display_valid_regexp' => TRUE,

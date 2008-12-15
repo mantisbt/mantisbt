@@ -187,10 +187,11 @@ if ( ( $t_resolved > $f_new_status ) &&
 
 <!-- Custom Fields -->
 <?php
-# @@@ thraxisp - I undid part of the change for #5068 for #5527
-#  We really need to say what fields are shown in which statusses. For now,
-#  this page will show required custom fields in update mode, or 
-#  display or required fields on resolve or close
+/** @todo thraxisp - I undid part of the change for #5068 for #5527
+ * We really need to say what fields are shown in which statusses. For now,
+ * this page will show required custom fields in update mode, or 
+ *  display or required fields on resolve or close 
+ */
 $t_custom_status_label = "update"; # Don't show custom fields by default
 if ( ( $f_new_status == $t_resolved ) &&
 			( CLOSED > $f_new_status ) ) {

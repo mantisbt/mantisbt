@@ -66,7 +66,7 @@
             # in case the current project is not the same project of the bug we are viewing...
             # ... override the current project. This to avoid problems with categories and handlers lists etc.
             $g_project_override = $t_bug->project_id;
-            # @@@ (thraxisp) the next line goes away if the cache was smarter and used project
+            /** @todo (thraxisp) the next line goes away if the cache was smarter and used project */
             config_flush_cache(); # flush the config cache so that configs are refetched
         }
 
@@ -80,14 +80,14 @@
         }
     }
 
-    # process bugs that are not already failed by validation.
+    // process bugs that are not already failed by validation.
     foreach( $t_projects_bugs as $t_project_id => $t_bug_ids ) {
 		if ( $t_bug->project_id != helper_get_current_project() ) {
-			# in case the current project is not the same project of the bug we are viewing...
-			# ... override the current project. This to avoid problems with categories and handlers lists etc.
+			// in case the current project is not the same project of the bug we are viewing...
+			// ... override the current project. This to avoid problems with categories and handlers lists etc.
 			$g_project_override = $t_bug->project_id;
-			# @@@ (thraxisp) the next line goes away if the cache was smarter and used project
-			config_flush_cache(); # flush the config cache so that configs are refetched
+			/** @todo (thraxisp) the next line goes away if the cache was smarter and used project */
+			config_flush_cache(); // flush the config cache so that configs are refetched
 		}
 
         foreach( $t_bug_ids as $t_bug_id ) {

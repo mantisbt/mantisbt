@@ -20,6 +20,8 @@
  * Base class that implements basic plugin functionality
  * and integration with Mantis. See the Mantis wiki for
  * more information.
+ * @package MantisBT
+ * @subpackage classes 
  */
 abstract class MantisPlugin {
 

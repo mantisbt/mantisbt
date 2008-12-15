@@ -43,7 +43,7 @@
 
 	auth_ensure_user_authenticated();
 
-	$f_search		= gpc_get_string( FILTER_PROPERTY_FREE_TEXT, false ); # @@@ need a better default
+	$f_search		= gpc_get_string( FILTER_PROPERTY_FREE_TEXT, false ); /** @todo need a better default */
 	$f_offset		= gpc_get_int( 'offset', 0 );
 
 	$t_cookie_value_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
@@ -186,8 +186,8 @@
 </tr>
 <tr class="row-category">
 	<?php
-		$t_sort = $f_sort;	// used within the custom function called in the loop (@@@ cleanup)
-		$t_dir = $f_dir;    // used within the custom function called in the loop (@@@ cleanup)
+		$t_sort = $f_sort;	// used within the custom function called in the loop (@todo cleanup)
+		$t_dir = $f_dir;    // used within the custom function called in the loop (@todo cleanup)
 
 		foreach( $t_columns as $t_column ) {
 			$t_title_function = 'print_column_title';

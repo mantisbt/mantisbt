@@ -244,15 +244,14 @@ function lang_get( $p_string, $p_lang = null ) {
 		$t_lang = lang_get_current();
 	}
 
-	# Now we'll make sure that the requested language is loaded
-
+	// Now we'll make sure that the requested language is loaded
 	lang_ensure_loaded( $t_lang );
 
 	# note in the current implementation we always return the same value
 	#  because we don't have a concept of falling back on a language.  The
 	#  language files actually *contain* English strings if none has been
 	#  defined in the correct language
-	# @@@ thraxisp - not sure if this is still true. Strings from last language loaded
+	# @todo thraxisp - not sure if this is still true. Strings from last language loaded
 	#      may still be in memeory if a new language is loaded.
 
 	if( lang_exists( $p_string, $t_lang ) ) {

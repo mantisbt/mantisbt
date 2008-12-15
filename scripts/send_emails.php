@@ -27,7 +27,7 @@ $t_core_path = config_get( 'core_path' );
 require_once( $t_core_path . 'email_api.php' );
 
 # Make sure this script doesn't run via the webserver
-# @@@ This is a hack to detect php-cgi, there must be a better way.
+/** @todo This is a hack to detect php-cgi, there must be a better way. */
 if( isset( $_SERVER['SERVER_PORT'] ) ) {
 	echo "send_emails.php is not allowed to run through the webserver.\n";
 	exit( 1 );

@@ -80,8 +80,8 @@ foreach( $t_custom_ids as $t_id ) {
 		</SELECT> to
 		<SELECT name="dest_id">
 			<?php
-# @@@ should be expanded and configurable
-# list matches exact field name from database
+/** @todo should be expanded and configurable */
+// list matches exact field name from database
 $t_dest_ids = array(
 	'fixed_in_version',
 );

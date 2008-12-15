@@ -281,8 +281,7 @@ function access_ensure_global_level( $p_access_level, $p_user_id = null ) {
  */
 function access_get_project_level( $p_project_id = null, $p_user_id = null ) {
 	# Deal with not logged in silently in this case
-	# @@@ we may be able to remove this and just error
-	#     and once we default to anon login, we can remove it for sure
+	/** @todo we may be able to remove this and just error and once we default to anon login, we can remove it for sure */
 	if( !auth_is_user_authenticated() ) {
 		return ANYBODY;
 	}

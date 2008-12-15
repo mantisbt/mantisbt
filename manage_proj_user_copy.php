@@ -41,7 +41,7 @@
 		$t_src_project_id = $f_project_id;
 		$t_dst_project_id = $f_other_project_id;
 	} else {
-		# @@@ Should this become a separate error?
+		/** @todo Should this become a separate error? */
 		trigger_error( ERROR_CATEGORY_NO_ACTION, ERROR );
 	}
 

@@ -237,9 +237,10 @@
 	</form>
 </div>
 
-<!-- @@@ There is access checking in the ADD action page and at the top of this file.
-         We may need to add extra checks to exclude projects from the list that the user
-		 can't link/unlink fields from/to. -->
+<?php /** @todo There is access checking in the ADD action page and at the top of this file.
+           * We may need to add extra checks to exclude projects from the list that the user
+		   * can't link/unlink fields from/to. */
+?>
 <br />
 <div align="center">
 <form method="post" action="manage_custom_field_proj_add.php">

@@ -51,7 +51,7 @@
 	   }
 	}
 
-	function get_section_begin( $p_section_name ) {
+	function get_section_begin_mcwt( $p_section_name ) {
 		global $t_access_levels;
 
 		echo '<table class="width100">';
@@ -270,7 +270,7 @@
 	echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_work_threshold_set.php\">\n";
 
 	# Issues
-	get_section_begin( lang_get( 'issues' ) );
+	get_section_begin_mcwt( lang_get( 'issues' ) );
 	get_capability_row( lang_get( 'report_issue' ), 'report_bug_threshold' );
     get_capability_enum( lang_get( 'submit_status' ), 'bug_submit_status', 'status' );
 	get_capability_row( lang_get( 'update_issue' ), 'update_bug_threshold' );
@@ -299,7 +299,7 @@
 	get_section_end();
 
 	# Notes
-	get_section_begin( lang_get( 'notes' ) );
+	get_section_begin_mcwt( lang_get( 'notes' ) );
 	get_capability_row( lang_get( 'add_notes' ), 'add_bugnote_threshold' );
 	get_capability_row( lang_get( 'update_notes' ), 'update_bugnote_threshold' );
     get_capability_boolean( lang_get( 'allow_user_edit' ), 'bugnote_allow_user_edit_delete' );
@@ -308,7 +308,7 @@
 	get_section_end();
 
 	# Others
-	get_section_begin( lang_get('others' ) );
+	get_section_begin_mcwt( lang_get('others' ) );
 	get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'changelog_link' ), 'view_changelog_threshold' );
 	get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'assigned_to' ), 'view_handler_threshold' );
 	get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'bug_history' ), 'view_history_threshold' );

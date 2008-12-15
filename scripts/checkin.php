@@ -22,7 +22,7 @@ $g_bypass_headers = 1;
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
 # Make sure this script doesn't run via the webserver
-# @@@ This is a hack to detect php-cgi, there must be a better way.
+/** @todo This is a hack to detect php-cgi, there must be a better way. */
 if( isset( $_SERVER['SERVER_PORT'] ) ) {
 	echo "checkin.php is not allowed to run through the webserver.\n";
 	exit( 1 );

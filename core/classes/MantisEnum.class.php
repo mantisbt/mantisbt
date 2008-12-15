@@ -24,6 +24,9 @@
  * A class that handles Mantis Enumerations.
  * 
  * For example: 10:lablel1,20:label2
+ *
+ * @package MantisBT
+ * @subpackage classes
  */
 class MantisEnum {
 	/**

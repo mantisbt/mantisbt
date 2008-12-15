@@ -57,8 +57,7 @@
 
 	$t_project_file_table = db_get_table( 'mantis_project_file_table' );
 
-	#@@@ (thraxisp) this code should probably be integrated into file_api to share
-	#  methods used to store files
+	/** @todo (thraxisp) this code should probably be integrated into file_api to share methods used to store files */
 
 	file_ensure_uploaded( $f_file );
 
@@ -108,7 +107,7 @@
 				$c_content = db_prepare_binary_string( fread ( fopen( $v_tmp_name, 'rb' ), $v_size ) );
 				break;
 			default:
-				# @@@ Such errors should be checked in the admin checks
+				/** @todo Such errors should be checked in the admin checks */
 				trigger_error( ERROR_GENERIC, ERROR );
 		}		
 		$query = "UPDATE $t_project_file_table

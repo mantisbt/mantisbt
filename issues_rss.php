@@ -211,8 +211,7 @@
 							$author, $comments, $image );
 	}
 
-	# @@@ consider making this a configuration option.
-	# 0.91 / 1.0 / 2.0
+	/** @todo consider making this a configuration option - 0.91 / 1.0 / 2.0 */
 	$version = '2.0';
 
 	$rssfile->outputRSS( $version );

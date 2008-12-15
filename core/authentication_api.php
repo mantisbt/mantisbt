@@ -774,8 +774,7 @@ function auth_get_current_user_id() {
 
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
-	# @@@ error with an error saying they aren't logged in?
-	#     Or redirect to the login page maybe?
+	/** @todo error with an error saying they aren't logged in? Or redirect to the login page maybe? */
 	$query = "SELECT id
 				  FROM $t_user_table
 				  WHERE cookie_string=" . db_param();

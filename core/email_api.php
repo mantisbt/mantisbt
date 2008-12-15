@@ -242,9 +242,8 @@ function email_notify_flag( $action, $flag ) {
 	return OFF;
 }
 
-# @@@ yarick123: email_collect_recipients(...) will be completely rewritten to provide additional
-#     information such as language, user access,..
-# @@@ yarick123:sort recipients list by language to reduce switches between different languages
+# @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
+# @todo yarick123:sort recipients list by language to reduce switches between different languages
 function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email = array() ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
@@ -514,9 +513,8 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_head
 	if( ON === config_get( 'enable_email_notification' ) ) {
 		ignore_user_abort( true );
 
-		# @@@ yarick123: email_collect_recipients(...) will be completely rewritten to provide additional
-		#     information such as language, user access,..
-		# @@@ yarick123:sort recipients list by language to reduce switches between different languages
+		# @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
+		# @todo yarick123:sort recipients list by language to reduce switches between different languages
 		$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
@@ -718,7 +716,7 @@ function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) 
 # This function sends all the emails that are stored in the queue.  If a failure occurs, then the
 # function exists.  This function will be called after storing emails in case of synchronous
 # emails, or will be called from a cronjob in case of asynchronous emails.
-# @@@ In case of synchronous email sending, we may get a race condition where two requests send the same email.
+# @todo In case of synchronous email sending, we may get a race condition where two requests send the same email.
 function email_send_all() {
 	$t_ids = email_queue_get_ids();
 

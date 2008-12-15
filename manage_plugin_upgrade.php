@@ -20,6 +20,7 @@
 	 * @link http://www.mantisbt.org
 	 */
 
+	/** @ignore */
 	define( 'PLUGINS_DISABLED', true );
 
 	 /**

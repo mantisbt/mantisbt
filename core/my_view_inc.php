@@ -413,9 +413,6 @@ echo "($v_start - $v_end / $t_bug_count)";
 	# choose color based on status
 	$status_color = get_status_color( $v_status );
 
-	# grab the bugnote count
-	# @@@ thraxisp - not used???
-	#		$bugnote_info = bug_get_bugnote_stats( $v_id );
 	# Check for attachments
 	$t_attachment_count = 0;
 	if(( file_can_view_bug_attachments( $v_id ) ) ) {

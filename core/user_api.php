@@ -1,7 +1,6 @@
 <?php
 # Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,14 +13,13 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
+ * User API
  * @package CoreAPI
  * @subpackage UserAPI
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  */
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
@@ -400,7 +398,7 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 	}
 
 	# Generate timestamp
-	# @@@ The following code may not be portable accross DBMS.
+	/** @todo The following code may not be portable accross DBMS. */
 	$t_last_timestamp_threshold = mktime( date( "H" ), date( "i" ) - 1 * $t_session_duration_in_minutes, date( "s" ), date( "m" ), date( "d" ), date( "Y" ) );
 	$c_last_timestamp_threshold = date( "Y-m-d H:i:s", $t_last_timestamp_threshold );
 
@@ -981,9 +979,9 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 
 # --------------------
 function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
-
-	# @@@ (thraxisp) Should all top level projects be a sub-project of ALL_PROJECTS implicitly?
-	#   affects how news and some summaries are generated
+	/** @todo (thraxisp) Should all top level projects be a sub-project of ALL_PROJECTS implicitly?
+	 *  affects how news and some summaries are generated
+	 */
 	$t_todo = user_get_accessible_subprojects( $p_user_id, $p_project_id );
 	$t_subprojects = Array();
 
@@ -1274,8 +1272,7 @@ function user_set_email( $p_user_id, $p_email ) {
 # --------------------
 # Set the user's realname to the given string after checking validity
 function user_set_realname( $p_user_id, $p_realname ) {
-
-	# @@@ TODO:	ensure_realname_valid( $p_realname );
+	/** @todo ensure_realname_valid( $p_realname ); */
 
 	return user_set_field( $p_user_id, 'realname', $p_realname );
 }

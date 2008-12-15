@@ -23,6 +23,8 @@
  * @copyright Logical Outcome Ltd. 2005 - 2007
  * @author Glenn Henshaw <thraxisp@logicaloutcome.ca>
  * @link http://www.mantisbt.org
+ * @package MantisBT
+ * @subpackage classes
  *
  */
 class Period {

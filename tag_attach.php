@@ -41,9 +41,10 @@
 
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $f_bug_id, $t_user_id );
 
-	# @@@ The handling of tag strings which can include multiple tags should be moved
-	#     to the APIs.  This is to allow other clients of the API to support such
-	#     functionality.  The access level checks should also be moved to the API.
+	/** @todo The handling of tag strings which can include multiple tags should be moved
+	 *     to the APIs.  This is to allow other clients of the API to support such
+	 *     functionality.  The access level checks should also be moved to the API.
+	 */
 	$t_tags = tag_parse_string( $f_tag_string );
 	$t_can_create = access_has_global_level( config_get( 'tag_create_threshold' ) );
 

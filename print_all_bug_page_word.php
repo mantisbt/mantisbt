@@ -40,7 +40,7 @@
 <?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_type_page	= gpc_get_string( 'type_page', 'word' );
-	$f_search		= gpc_get_string( 'search', false ); # @@@ need a better default
+	$f_search		= gpc_get_string( 'search', false ); /** @todo need a better default */
 	$f_offset		= gpc_get_int( 'offset', 0 );
 	$f_export		= gpc_get_string( 'export' );
 	$f_show_flag	= gpc_get_bool( 'show_flag' );

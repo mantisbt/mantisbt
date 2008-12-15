@@ -195,11 +195,6 @@ function html_page_bottom1a( $p_file = null ) {
 # --------------------
 # (1) Print the document type and the opening <html> tag
 function html_begin() {
-
-	# @@@ NOTE make this a configurable global.
-	# echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">', "\n";
-	# echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">', "\n";
-
 	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">', "\n";
 	echo '<html>', "\n";
 }

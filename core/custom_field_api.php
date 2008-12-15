@@ -791,9 +791,10 @@ function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = nul
 	if(( null === $p_truncated_length ) || ( strlen( $c_field_name ) != $p_truncated_length ) ) {
 		$query = "SELECT id FROM $t_custom_field_table WHERE name = '$c_field_name'";
 	} else {
-		# @@@ This is to handle the case where we only have a truncated part of the name.  This happens in the case where
-		# we are getting the custom field name from the history logs, since history is 32 and custom field name is 64.
-		# This fix will handle entries already in the database, future entries should be handled by making the field name max lengths match.
+		/** @todo This is to handle the case where we only have a truncated part of the name.  This happens in the case where
+		 * we are getting the custom field name from the history logs, since history is 32 and custom field name is 64.
+		 * This fix will handle entries already in the database, future entries should be handled by making the field name max lengths match.
+		 */
 		$query = "SELECT id FROM $t_custom_field_table WHERE name LIKE '$c_field_name%'";
 	}
 

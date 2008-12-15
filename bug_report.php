@@ -63,7 +63,7 @@
 		$t_bug_data->due_date = db_unixtimestamp ( $t_bug_data->due_date, true ) + 1;
 	}	
 
-	$f_file					= gpc_get_file( 'file', null ); #@@@ (thraxisp) Note that this always returns a structure
+	$f_file					= gpc_get_file( 'file', null ); /** @todo (thraxisp) Note that this always returns a structure */
 															# size = 0, if no file
 	$f_report_stay			= gpc_get_bool( 'report_stay', false );
 	$t_bug_data->project_id			= gpc_get_int( 'project_id' );

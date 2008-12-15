@@ -190,22 +190,22 @@
 		collapse_cache_token();
 	}
 
-	# custom functions (in main directory)
-	# @@@ Move all such files to core/
+	// custom functions (in main directory)
+	/** @todo Move all such files to core/ */
 	require_once( $t_core_path . 'custom_function_api.php' );
 	$t_overrides = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'custom_functions_inc.php';
 	if ( file_exists( $t_overrides ) ) {
 		require_once( $t_overrides );
 	}
 
-	# initialize our timer
+	// initialize our timer
 	$g_timer = new BC_Timer;
 
-	# seed random number generator
+	// seed random number generator
 	list( $usec, $sec ) = explode( ' ', microtime() );
 	mt_srand( $sec*$usec );
 
-	# Basic browser detection
+	// Basic browser detection
 	$t_user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'none';
 
 	$t_browser_name = 'Normal';
@@ -213,8 +213,8 @@
 		$t_browser_name = 'IE';
 	}
 
-	# Headers to prevent caching
-	#  with option to bypass if running from script
+	// Headers to prevent caching
+	//  with option to bypass if running from script
 	global $g_bypass_headers, $g_allow_browser_cache;
 	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
 
@@ -235,21 +235,21 @@
 		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 		header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 
-		# SEND USER-DEFINED HEADERS
+		// send user-defined headers
 		foreach( config_get( 'custom_headers' ) as $t_header ) {
 			header( $t_header );
 		}
 	}
 	
 
-	# push push default language to speed calls to lang_get
+	// push push default language to speed calls to lang_get
 	lang_push( lang_get_default() );
 
 	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
 		header( 'Content-type: text/html;charset=' . lang_get( 'charset' ) );
 	}
 	
-	# every page displays project dropdown box, so cache project information very early
+	// every page displays project dropdown box, so cache project information very early
 	if ( db_is_connected() ) {
 		project_cache_all();
 	}

@@ -905,7 +905,7 @@ function filter_get_bug_count( $p_query_clauses ) {
 }
 
 /**
- * @@@ Had to make all these parameters required because we can't use
+ * @todo Had to make all these parameters required because we can't use
  *  call-time pass by reference anymore.  I really preferred not having
  *  to pass all the params in if you didn't want to, but I wanted to get
  *  rid of the errors for now.  If we can think of a better way later
@@ -2822,8 +2822,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					} else {
 						if( $t_accessible_custom_fields_types[$i] == CUSTOM_FIELD_TYPE_DATE ) {
 
-							# @@@ moved embedded javascript here from print_filter_custom_field_date
-							#  it appears not to load properly on Firefox and other browsers if loaded through the httpxmlreq
+							/** @todo moved embedded javascript here from print_filter_custom_field_date
+							 *  it appears not to load properly on Firefox and other browsers if loaded through the httpxmlreq
+							 */
 							$t_field_id = $t_accessible_custom_fields_ids[$i];
 							$t_js_toggle_func = "toggle_custom_date_field_" . $t_field_id . "_controls";
 							if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {

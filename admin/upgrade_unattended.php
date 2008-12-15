@@ -30,9 +30,6 @@ $g_skip_open_db = true;  # don't open the database in database_api.php
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
-define( 'BAD', 0 );
-define( 'GOOD', 1 );
-
 $g_failed = false;
 
 /**

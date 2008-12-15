@@ -57,7 +57,7 @@
 		echo str_pad( '', strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';
 	}
 	
-	function print_project_header ( $p_project_name ) {
+	function print_project_header_changelog ( $p_project_name ) {
 		echo '<br /><span class="pagetitle">', string_display( $p_project_name ), ' - ', lang_get( 'changelog' ), '</span><br />';
 		echo '<tt>';
 	}
@@ -220,7 +220,7 @@
 
 			if ( $t_issues_resolved > 0 ) {
 				if ( !$t_project_header_printed ) {
-					print_project_header( $t_project_name );
+					print_project_header_changelog( $t_project_name );
 					$t_project_header_printed = true;
 				}
 

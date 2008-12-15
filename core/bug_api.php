@@ -62,9 +62,11 @@ require_once( $t_core_dir . 'tag_api.php' );
  */
 require_once( $t_core_dir . 'relationship_api.php' );
 
-# ===================================
-# Bug Data Structure Definition
-# ===================================
+/** 
+ * Bug Data Structure Definition
+ * @package MantisBT
+ * @subpackage classes
+ */
 class BugData {
 	var $project_id = null;
 	var $reporter_id = 0;
@@ -139,8 +141,7 @@ function bug_cache_database_result( $p_bug_database_result, $p_stats = null ) {
  * Cache a bug row if necessary and return the cached copy
  * @param array p_bug_id id of bug to cache from mantis_bug_table
  * @param array p_trigger_errors set to true to trigger an error if the bug does not exist.
- * @return bool returns false if bug does not exist
- * @return array returns an array representing the bug row if bug exists
+ * @return bool|array returns an array representing the bug row if bug exists or false if bug does not exist
  * @access public
  * @uses database_api.php
  */
@@ -259,8 +260,7 @@ function bug_clear_cache( $p_bug_id = null ) {
  * Cache a bug text row if necessary and return the cached copy
  * @param int p_bug_id integer bug id to retrieve text for
  * @param bool p_trigger_errors If the second parameter is true (default), trigger an error if bug text not found.
- * @return array array of bug text
- * @return bool returns false if not bug text found
+ * @return bool|array returns false if not bug text found or array of bug text
  * @access public
  * @uses database_api.php
  */
@@ -1290,8 +1290,7 @@ function bug_get_bugnote_count( $p_bug_id ) {
  * return the timestamp for the most recent time at which a bugnote
  *  associated with the bug was modified
  * @param int p_bug_id integer representing bug id
- * @return int	timestamp in integer format representing newest bugnote timestamp
- * @return bool (false)
+ * @return bool|int false or timestamp in integer format representing newest bugnote timestamp
  * @access public
  * @uses database_api.php
  */

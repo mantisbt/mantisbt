@@ -229,7 +229,7 @@
 	$f_tag_string			= gpc_get_string( FILTER_PROPERTY_TAG_STRING, '' );
 	$f_tag_select			= gpc_get_int( FILTER_PROPERTY_TAG_SELECT, '0' );
 
-	$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
+	$t_custom_fields 		= custom_field_get_ids(); /** @todo (thraxisp) This should really be the linked ids, but we don't know the project */
 	$f_custom_fields_data 	= array();
 	if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {

@@ -18,6 +18,8 @@
 
 /**
  * Abstract class for any plugin that's modifying textual output.
+ * @package MantisBT
+ * @subpackage classes
  */
 abstract class MantisFormattingPlugin extends MantisPlugin {
 

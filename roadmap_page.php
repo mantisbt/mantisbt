@@ -55,7 +55,7 @@
 	}
 
 	# print project header
-	function print_project_header( $p_project_name ) {
+	function print_project_header_roadmap( $p_project_name ) {
 		echo '<br /><span class="pagetitle">', string_display( $p_project_name ), ' - ', lang_get( 'roadmap' ), '</span><br />';
 	}
 
@@ -233,7 +233,7 @@
 				$t_progress = (integer) ( $t_issues_resolved * 100 / $t_issues_planned );
 				
  				if ( !$t_project_header_printed ) {
-					print_project_header( $t_project_name );
+					print_project_header_roadmap( $t_project_name );
 					$t_project_header_printed = true;
 				}
 				

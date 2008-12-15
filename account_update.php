@@ -48,8 +48,8 @@
 
 	email_ensure_not_disposable( $f_email );
 
-	# get the user id once, so that if we decide in the future to enable this for
-	# admins / managers to change details of other users.
+	// get the user id once, so that if we decide in the future to enable this for
+	// admins / managers to change details of other users.
 	$t_user_id = auth_get_current_user_id();
 
 	$t_redirect = 'account_page.php';
@@ -58,8 +58,7 @@
 	$t_password_updated = false;
 	$t_realname_updated = false;
 
-	# @@@ Listing what fields were updated is not standard behaviour of Mantis
-	#     it also complicates the code.
+	/** @todo Listing what fields were updated is not standard behaviour of Mantis - it also complicates the code. */
 
 	if ( $f_email != user_get_email( $t_user_id ) ) {
 		user_set_email( $t_user_id, $f_email );

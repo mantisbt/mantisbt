@@ -22,6 +22,10 @@ define( 'ON', 1 );
 define( 'OFF', 0 );
 define( 'AUTO', 3 );
 
+define( 'BAD', 0 );
+define( 'GOOD', 1 );
+
+
 # installation
 define( 'CONFIGURED_PASSWORD', "______" );
 

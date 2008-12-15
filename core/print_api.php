@@ -217,7 +217,7 @@ function print_captcha_input( $p_field_name ) {
 # --------------------
 # This populates an option list with the appropriate users by access level
 #
-# @@@ from print_reporter_option_list
+# @todo from print_reporter_option_list
 function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY ) {
 	$t_users = array();
 
@@ -261,7 +261,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 # ugly functions  need to be refactored
 # This populates the reporter option list with the appropriate users
 #
-# @@@ This function really ought to print out all the users, I think.
+# @todo This function really ought to print out all the users, I think.
 #  I just encountered a situation where a project used to be public and
 #  was made private, so now I can't filter on any of the reporters who
 #  actually reported the bugs at the time. Maybe we could get all user
@@ -394,8 +394,7 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 	$output .= "<span class=\"italic-small\">$t_date_posted</span> - ";
 	echo $output;
 
-	# @@@ eventually we should replace print's with methods to construct the
-	#     strings.
+	/** @todo eventually we should replace print's with methods to construct the strings. */
 	print_user( $p_poster_id );
 	$output = '';
 
@@ -1702,7 +1701,7 @@ document.getElementById( span ).style.display = displayType;
 
 				echo "<pre>";
 				
-				# @@@ Refactor into a method that gets contents for download / preview.
+				/** @todo Refactor into a method that gets contents for download / preview. */
 				switch( config_get( 'file_upload_method' ) ) {
 					case DISK:
 						if ( $t_attachment['exists'] ) {

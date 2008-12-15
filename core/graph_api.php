@@ -186,53 +186,6 @@ function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_
 }
 
 # --------------------
-# Function that displays charts in % according to the status
-# @@@ this function is not used...
-function graph_group_pct( $p_title = '', $p_graph_width = 350, $p_graph_height = 400 ) {
-	global $enum_name, $enum_name_count;
-	global $open_bug_count, $closed_bug_count, $resolved_bug_count;
-
-	error_check( $open_bug_count + $closed_bug_count + $resolved_bug_count, $p_title );
-
-	$graph = new Graph( 250, 400 );
-	$graph->img->SetMargin( 35, 35, 35, 150 );
-	if( ON == config_get_global( 'jpgraph_antialias' ) ) {
-		$graph->img->SetAntiAliasing();
-	}
-	$graph->SetScale( 'textlin' );
-	$graph->SetMarginColor( 'white' );
-	$graph->SetFrame( false );
-	$graph->title->Set( $p_title );
-	$graph->xaxis->SetTickLabels( $enum_name );
-	$graph->xaxis->SetLabelAngle( 90 );
-
-	$graph->yaxis->scale->ticks->SetDirection( -1 );
-
-	$p1 = new BarPlot( $open_bug_count );
-	$p1->SetFillColor( 'yellow' );
-	$p1->SetWidth( 0.8 );
-	$p1->SetLegend( lang_get( 'legend_opened' ) );
-
-	$p2 = new BarPlot( $closed_bug_count );
-	$p2->SetFillColor( 'blue' );
-	$p2->SetWidth( 0.8 );
-	$p2->SetLegend( lang_get( 'legend_closed' ) );
-
-	$p3 = new BarPlot( $resolved_bug_count );
-	$p3->SetFillColor( 'red' );
-	$p3->SetWidth( 0.8 );
-	$p3->SetLegend( lang_get( 'legend_resolved' ) );
-
-	$gbplot = new GroupBarPlot( array( $p1, $p2, $p3 ) );
-
-	$graph->Add( $gbplot );
-	if( helper_show_queries() ) {
-		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique)' );
-	}
-	$graph->Stroke();
-}
-
-# --------------------
 # Function that displays pie charts
 function graph_pie( $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_height = 350, $p_center = 0.4, $p_poshorizontal = 0.10, $p_posvertical = 0.09 ) {
 

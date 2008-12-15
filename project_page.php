@@ -87,8 +87,8 @@
 
 	echo '</p>';
 	
-	# @@@ Add status, view state, versions, sub-projects, parent projects, and news.
-	# @@@ Schema change: add home page, license,
+	/** @todo Add status, view state, versions, sub-projects, parent projects, and news. */
+	/** @todo Schema change: add home page, license, */
 
 	$t_description = project_get_field( $f_project_id, 'description' );
 
@@ -105,7 +105,7 @@
 	if ( count( $t_users ) > 0 ) {
 		echo '<h2>', lang_get( 'development_team' ), '</h2>';
 
-		# @@@ sort users in DESC order by access level, then ASC by username/realname.
+		/** @todo sort users in DESC order by access level, then ASC by username/realname. */
 		foreach ( $t_users as $t_user_data ) {
 			$t_user_id = $t_user_data['id'];
 			

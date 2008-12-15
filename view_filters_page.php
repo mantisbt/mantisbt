@@ -94,7 +94,7 @@
 		<?php
 	}
 
-	# @@@ thraxisp - could this be replaced by a call to filter_draw_selection_area2
+	/** @todo thraxisp - could this be replaced by a call to filter_draw_selection_area2 */
 
 	$t_filter = current_user_get_bug_filter();
 	$t_filter = filter_ensure_valid_filter( $t_filter );

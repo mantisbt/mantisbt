@@ -116,7 +116,7 @@ function file_can_view_bug_attachments( $p_bug_id ) {
 	$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
 	$t_can_view = access_has_bug_level( config_get( 'view_attachments_threshold' ), $p_bug_id );
 
-	# @@@ Fix this to be readable
+	/** @todo Fix this to be readable */
 	$t_can_view = $t_can_view || ( $t_reported_by_me && config_get( 'allow_view_own_attachments' ) );
 
 	return $t_can_view;
@@ -127,7 +127,7 @@ function file_can_download_bug_attachments( $p_bug_id ) {
 	$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
 	$t_can_download = access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
 
-	# @@@ Fix this to be readable
+	/** @todo Fix this to be readable */
 	$t_can_download = $t_can_download || ( $t_reported_by_me && config_get( 'allow_download_own_attachments' ) );
 
 	return $t_can_download;
@@ -142,7 +142,7 @@ function file_can_delete_bug_attachments( $p_bug_id ) {
 	$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
 	$t_can_download = access_has_bug_level( config_get( 'delete_attachments_threshold' ), $p_bug_id );
 
-	# @@@ Fix this to be readable
+	/** @todo Fix this to be readable */
 	$t_can_download = $t_can_download || ( $t_reported_by_me && config_get( 'allow_delete_own_attachments' ) );
 
 	return $t_can_download;
@@ -210,7 +210,7 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 			return $t_diskfile;
 		}
 
-		# if we don't find the file, then this is the path we want to return.
+		// if we don't find the file, then this is the path we want to return.
 		$t_expected_file_path = $t_diskfile;
 	}
 
@@ -222,20 +222,20 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 			return $t_diskfile;
 		}
 
-		# if the expected path not set to project directory, then set it to default directory.
+		// if the expected path not set to project directory, then set it to default directory.
 		if ( is_blank( $t_expected_file_path ) ) {
 			$t_expected_file_path = $t_diskfile;
 		}
 	}
 
-	# if diskfile doesn't include a path, then use the expected filename.
+	// if diskfile doesn't include a path, then use the expected filename.
 	if ( ( strstr( $p_diskfile, DIRECTORY_SEPARATOR ) === false ||
 	       strstr( $p_diskfile, '\\' ) === false ) &&
 	     !is_blank( $t_expected_file_path ) ) {
 	    return $t_expected_file_path;
 	}
 
-	# otherwise return as is.
+	// otherwise return as is.
 	return $p_diskfile;
 }
 

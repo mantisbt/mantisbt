@@ -36,7 +36,7 @@
 	print_manage_menu( 'adm_permissions_report.php' );
 	print_manage_config_menu( 'adm_permissions_report.php' );
 
-	function get_section_begin( $p_section_name ) {
+	function get_section_begin_apr( $p_section_name ) {
 		$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
 		$t_output = '<table class="width100">';
@@ -79,14 +79,14 @@
 	echo '<br /><br />';
 
 	# News
-	echo get_section_begin( lang_get( 'news' ) );
+	echo get_section_begin_apr( lang_get( 'news' ) );
 	echo get_capability_row( lang_get( 'view_private_news' ), config_get( 'private_news_threshold' ) );
 	echo get_capability_row( lang_get( 'manage_news' ), config_get( 'manage_news_threshold' ) );
 	echo get_section_end();
 
 	# Attachments
 	if( config_get( 'allow_file_upload' ) == ON ) {
-		echo get_section_begin( lang_get( 'attachments' ) );
+		echo get_section_begin_apr( lang_get( 'attachments' ) );
 		echo get_capability_row( lang_get( 'view_list_of_attachments' ), config_get( 'view_attachments_threshold' ) );
 		echo get_capability_row( lang_get( 'download_attachments' ), config_get( 'download_attachments_threshold' ) );
 		echo get_capability_row( lang_get( 'delete_attachments' ), config_get( 'delete_attachments_threshold' ) );
@@ -95,14 +95,14 @@
 	}
 
 	# Filters
-	echo get_section_begin( lang_get( 'filters' ) );
+	echo get_section_begin_apr( lang_get( 'filters' ) );
 	echo get_capability_row( lang_get( 'save_filters' ), config_get( 'stored_query_create_threshold' ) );
 	echo get_capability_row( lang_get( 'save_filters_as_shared' ), config_get( 'stored_query_create_shared_threshold' ) );
 	echo get_capability_row( lang_get( 'use_saved_filters' ), config_get( 'stored_query_use_threshold' ) );
 	echo get_section_end();
 
 	# Projects
-	echo get_section_begin( lang_get( 'projects_link' ) );
+	echo get_section_begin_apr( lang_get( 'projects_link' ) );
 	echo get_capability_row( lang_get( 'create_project' ), config_get( 'create_project_threshold' ) );
 	echo get_capability_row( lang_get( 'delete_project' ), config_get( 'delete_project_threshold' ) );
 	echo get_capability_row( lang_get( 'manage_projects_link' ), config_get( 'manage_project_threshold' ) );
@@ -112,21 +112,21 @@
 
 	# Project Documents
 	if( config_get( 'enable_project_documentation' ) == ON ) {
-		echo get_section_begin( lang_get( 'project_documents' ) );
+		echo get_section_begin_apr( lang_get( 'project_documents' ) );
 		echo get_capability_row( lang_get( 'view_project_documents' ), config_get( 'view_proj_doc_threshold' ) );
 		echo get_capability_row( lang_get( 'upload_project_documents' ), config_get( 'upload_project_file_threshold' ) );
 		echo get_section_end();
 	}
 
 	# Custom Fields
-	echo get_section_begin( lang_get( 'custom_fields_setup' ) );
+	echo get_section_begin_apr( lang_get( 'custom_fields_setup' ) );
 	echo get_capability_row( lang_get( 'manage_custom_field_link' ), config_get( 'manage_custom_fields_threshold' ) );
 	echo get_capability_row( lang_get( 'link_custom_fields_to_projects' ), config_get( 'custom_field_link_threshold' ) );
 	echo get_section_end();
 
 	# Sponsorships
 	if( config_get( 'enable_sponsorship' ) == ON ) {
-		echo get_section_begin( lang_get( 'sponsorships' ) );
+		echo get_section_begin_apr( lang_get( 'sponsorships' ) );
 		echo get_capability_row( lang_get( 'view_sponsorship_details' ), config_get( 'view_sponsorship_details_threshold' ) );
 		echo get_capability_row( lang_get( 'view_sponsorship_total' ), config_get( 'view_sponsorship_total_threshold' ) );
 		echo get_capability_row( lang_get( 'sponsor_issue' ), config_get( 'sponsor_threshold' ) );
@@ -136,7 +136,7 @@
 	}
 
 	# Others
-	echo get_section_begin( lang_get('others') );
+	echo get_section_begin_apr( lang_get('others') );
 	echo get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'summary_link' ), config_get( 'view_summary_threshold' ) );
 	echo get_capability_row( lang_get( 'see_email_addresses_of_other_users' ), config_get( 'show_user_email_threshold' ) );
 	echo get_capability_row( lang_get( 'send_reminders' ), config_get( 'bug_reminder_threshold' ) );

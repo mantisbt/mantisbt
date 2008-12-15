@@ -48,7 +48,7 @@
 
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
-	# @@@ Consider moving this query to user_api.php
+	/** @todo Consider moving this query to user_api.php */
 	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = ' . db_param() . ' AND email = ' . db_param() . ' AND enabled=1';
 	$result = db_query_bound( $query, Array( $f_username, $f_email ) );
 

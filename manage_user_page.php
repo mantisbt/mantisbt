@@ -321,7 +321,7 @@
 		<td class="right" colspan="8">
 			<span class="small">
 				<?php
-					/* @@@ hack - pass in the hide inactive filter via cheating the actual filter value */
+					/* @todo hack - pass in the hide inactive filter via cheating the actual filter value */
 					print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number, $c_filter . $t_hide_filter);
 				?>
 			</span>

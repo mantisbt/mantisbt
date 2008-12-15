@@ -18,6 +18,8 @@
 
 /**
  * Base class that implements the skeleton for a wiki plugin.
+ * @package MantisBT
+ * @subpackage classes
  */
 abstract class MantisWikiPlugin extends MantisPlugin {
 

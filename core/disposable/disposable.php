@@ -1,18 +1,15 @@
 <?php
-# Disposable Email Checker - a static php based check for spam emails
-	# Copyright (C) 2007-2008 Victor Boctor
-#
-#     http://www.futureware.biz/disposable
-#     http://www.mantisbt.org/
-#
 # This program is distributed under the terms and conditions of the LGPL
 # See the README and LICENSE files for details
-#
-	# Version 1.1.0-git - Release Date: 13-Apr-2008
 
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
+/** 
+ * Disposable Email Checker - a static php based check for spam emails
+ * @copyright Copyright (C) 2007-2008 Victor Boctor
+ * @link http://www.mantisbt.org/
+ * @link http://www.futureware.biz/disposable
+ * @version 1.1.0-git - Release Date: 13-Apr-2008
+ * @package DisposableEmail
+ */
 
 /**
  * A class that checks an email address and provides some facts about whether
@@ -20,6 +17,7 @@
  * such decision is static as part of the class implementation, hence
  * avoiding a round trip to a remote service.  This makes the class much
  * more efficient in scenarios where performance is an issue.
+ * @package DisposableEmail
  */
 class DisposableEmailChecker
 {

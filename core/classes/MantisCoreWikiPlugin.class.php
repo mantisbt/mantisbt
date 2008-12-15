@@ -20,6 +20,8 @@ require_once( 'MantisWikiPlugin.class.php' );
 
 /**
  * Basic Dokuwiki support with old-style wiki integration.
+ * @package MantisBT
+ * @subpackage classes 
  */
 class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 

@@ -23,7 +23,7 @@
 
 error_reporting( E_ALL );
 
-// @@@ put this somewhere
+/** @todo put this somewhere */
 @set_time_limit( 0 );
 $g_skip_open_db = true;  # don't open the database in database_api.php
 define( 'MANTIS_INSTALLER', true );
@@ -33,8 +33,6 @@ define( 'PLUGINS_DISABLED', true );
 @require_once( 'install_helper_functions.php' );
 $g_error_send_page_header = false; # bypass page headers in error handler
 
-define( 'BAD', 0 );
-define( 'GOOD', 1 );
 $g_failed = false;
 $g_database_upgrade = false;
 
@@ -777,8 +775,8 @@ if( 3 == $t_install_state ) {
 # database installed, get any additional information
 if( 4 == $t_install_state ) {
 
-	# @@@ to be written
-	#  must post data gathered to preserve it
+	/** @todo to be written */
+	// must post data gathered to preserve it
 	?>
 		<input name="hostname" type="hidden" value="<?php echo $f_hostname?>"></input>
 		<input name="db_type" type="hidden" value="<?php echo $f_db_type?>"></input>
