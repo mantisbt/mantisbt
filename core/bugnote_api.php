@@ -495,7 +495,7 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 	$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
 
 	$query = "UPDATE $t_bugnote_text_table
-			SET note=" . db_param() . "WHERE id=" . db_param();
+			SET note=" . db_param() . " WHERE id=" . db_param();
 	db_query_bound( $query, Array( $p_bugnote_text, $t_bugnote_text_id ) );
 
 	# updated the last_updated date
