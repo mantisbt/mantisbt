@@ -1698,7 +1698,7 @@
 
 	/**
 	 * Resolution to assign to the bug when reopened.
-	 * @global int $g_bug_reopen_resolutio
+	 * @global int $g_bug_reopen_resolution
 	 */	
 	$g_bug_reopen_resolution = REOPENED;
 
@@ -2580,7 +2580,7 @@
 
 	/**
 	 * 
-	 * @global string $g_reproducibility_enum_strin
+	 * @global string $g_reproducibility_enum_string
 	 */	
 	$g_reproducibility_enum_string		= '10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A';
 
