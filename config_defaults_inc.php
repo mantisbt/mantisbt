@@ -2721,18 +2721,24 @@
 	 */	
 	$g_custom_headers				= array();
 
-	# Browser Caching Control
-	# By default, we try to prevent the browser from caching anything. These two settings
-	# will defeat this for some cases.
-	#
-	# Browser Page caching - This will allow the browser to cache all pages. The upside will
-	#  be better performance, but there may be cases where obsolete information is displayed.
-	#  Note that this will be bypassed (and caching is allowed) for the bug report pages.
-	# $g_allow_browser_cache = ON;
-	#
-	# File caching - This will allow the browser to cache downloaded files. Without this set,
-	# there may be issues with IE receiving files, and launching support programs.
-	# $g_allow_file_cache = ON;
+	/**
+	 * Browser Caching Control
+	 * By default, we try to prevent the browser from caching anything. These two settings
+	 * will defeat this for some cases.
+	 *
+	 * Browser Page caching - This will allow the browser to cache all pages. The upside will
+	 *  be better performance, but there may be cases where obsolete information is displayed.
+	 *  Note that this will be bypassed (and caching is allowed) for the bug report pages.
+	 * 
+	 * @global int $g_allow_browser_cache
+	 */
+	// $g_allow_browser_cache = ON;
+	/**
+	 * File caching - This will allow the browser to cache downloaded files. Without this set,
+	 * there may be issues with IE receiving files, and launching support programs.
+	 * @global int $g_allow_file_cache
+	 */
+	 // $g_allow_file_cache = ON;
 
 	/*************
 	 * Debugging *
