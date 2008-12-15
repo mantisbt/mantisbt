@@ -28,6 +28,9 @@
  */
 require_once( config_get( 'class_path' ) . 'MantisPlugin.class.php' );
 
+/**
+ * XmlImportExportPlugin Class
+ */
 class XmlImportExportPlugin extends MantisPlugin {
 
 	/**

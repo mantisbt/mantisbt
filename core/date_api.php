@@ -22,22 +22,42 @@
  * @link http://www.mantisbt.org
  */
 
-# ## Date API ###
-# checks if date is null
+/**
+ * checks if date is null
+ * @param int $p_date
+ * @return bool
+ * @access public 
+ */
 function date_is_null( $p_date ) {
 	return $p_date == date_get_null();
 }
 
-# gets null date
+/**
+ * gets null date
+ * @return int
+ * @access public 
+ */
 function date_get_null() {
 	return db_unixtimestamp( db_null_date() );
 }
 
-# prints the date given the formating string
+/**
+ * prints the date given the formating string
+ * @param string $p_format
+ * @param int $p_date
+ * @return null
+ * @access public 
+ */
 function print_date( $p_format, $p_date ) {
 	echo date( $p_format, $p_date );
 }
 
+/**
+ * 
+ * @param int $p_month
+ * @return null
+ * @access public 
+ */
 function print_month_option_list( $p_month = 0 ) {
 	for( $i = 1;$i <= 12;$i++ ) {
 		$month_name = date( 'F', mktime( 0, 0, 0, $i, 1, 2000 ) );
@@ -49,6 +69,13 @@ function print_month_option_list( $p_month = 0 ) {
 	}
 }
 
+/**
+ * 
+ * 
+ * @param int $p_month
+ * @return null
+ * @access public 
+ */
 function print_numeric_month_option_list( $p_month = 0 ) {
 	for( $i = 1;$i <= 12;$i++ ) {
 		if( $i == $p_month ) {
@@ -59,6 +86,12 @@ function print_numeric_month_option_list( $p_month = 0 ) {
 	}
 }
 
+/**
+ * 
+ * @param int $p_day
+ * @return null
+ * @access public 
+ */
 function print_day_option_list( $p_day = 0 ) {
 	for( $i = 1;$i <= 31;$i++ ) {
 		if( $i == $p_day ) {
@@ -69,6 +102,12 @@ function print_day_option_list( $p_day = 0 ) {
 	}
 }
 
+/**
+ * 
+ * @param int $p_year
+ * @return null
+ * @access public 
+ */
 function print_year_option_list( $p_year = 0 ) {
 	$current_year = date( "Y" );
 
@@ -81,6 +120,14 @@ function print_year_option_list( $p_year = 0 ) {
 	}
 }
 
+/**
+ * 
+ * @param int $p_year
+ * @param int $p_start
+ * @param int $p_end
+ * @return null
+ * @access public 
+ */
 function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
 	$t_current = date( 'Y' );
 	$t_forward_years = config_get( 'forward_year_count' );
@@ -112,7 +159,18 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
 	}
 }
 
-
+/**
+ * 
+ * @param string $p_name
+ * @param string $p_format
+ * @param int $p_date
+ * @param bool $p_default_disable
+ * @param bool $p_allow_blank
+ * @param int $p_year_start
+ * @param int $p_year_end
+ * @return null
+ * @access public 
+ */
 function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_disable = false, $p_allow_blank = false, $p_year_start = 0, $p_year_end = 0 ) {
 	$t_chars = preg_split( '//', $p_format, -1, PREG_SPLIT_NO_EMPTY );
 	if( $p_date != 0 ) {
@@ -162,12 +220,16 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 	}
 }
 
-# prints calendar icon and adds required javascript files.
-# button_name is name of button that will display calendar icon
-# in caste there are more than one calendar on page
+/**
+ * prints calendar icon and adds required javascript files.
+ * button_name is name of button that will display calendar icon
+ * in caste there are more than one calendar on page
+ * @param string $p_button_name
+ * @return null
+ * @todo (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...)
+ * @access public 
+ */
 function date_print_calendar( $p_button_name = 'trigger' ) {
-
-	# @@@ (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...)
 	if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
 		echo "<style type=\"text/css\">@import url(javascript/jscalendar/calendar-blue.css);</style>\n";
 		echo "<script type=\"text/javascript\" src=\"javascript/jscalendar/calendar.js\"></script>\n";
@@ -184,13 +246,18 @@ function date_print_calendar( $p_button_name = 'trigger' ) {
 	}
 }
 
-# creates javascript calendar objects, point to input element ($p_field_name) that
-# diaplays date, and connects it with calendar button ($p_button_name) created with
-# date_print_calendar.
-# should be called right after </form> tag
+/**
+ * creates javascript calendar objects, point to input element ($p_field_name) that
+ * diaplays date, and connects it with calendar button ($p_button_name) created with
+ * date_print_calendar.
+ * should be called right after </form> tag
+ * @todo (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...)
+ * @param string $p_field_name
+ * @param string $p_button_name
+ * @return null
+ * @access public 
+ */
 function date_finish_calendar( $p_field_name, $p_button_name ) {
-
-	# @@@ (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...)
 	if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
 		$t_format = config_get( 'short_date_format' );
 		$t_new_format = str_replace( '-', '-%', $t_format );
