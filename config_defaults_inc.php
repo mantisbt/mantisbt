@@ -220,6 +220,7 @@
 	/**
 	 * Session save path.  If false, uses default value as set by session handler.
 	 * @global bool $g_session_save_path
+	 */
 	$g_session_save_path = false;
 
 	/** 
