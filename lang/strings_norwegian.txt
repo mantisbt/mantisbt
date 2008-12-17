@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Norwegian (bokmål)‬ (‪Norsk (bokmål)‬)
@@ -29,8 +24,10 @@
  * @file
  *
  * @author Alf-Ivar Holm, affi@csc.no
+ * @author EivindJ
  * @author Espen Holje, eh@escio.no
  * @author Ingvald Skaug, dev@skaug.no
+ * @author Laaknor
  */
 
 $s_charset = 'utf-8';
@@ -46,13 +43,19 @@ $s_actiongroup_menu_update_view_status = 'Endre visningsstatus';
 $s_actiongroup_menu_update_category = 'Oppdatere kategori';
 $s_actiongroup_menu_set_sticky = 'Sette/nullstille fastlåst sak';
 $s_actiongroup_menu_update_field = 'Oppdatere %s';
+$s_actiongroup_menu_update_target_version = 'Oppdater målversjonen';
+$s_actiongroup_menu_update_fixed_in_version = 'Oppdater Rettet i versjon';
+$s_actiongroup_menu_add_note = 'Legg til notat';
+$s_actiongroup_menu_attach_tags = 'Legg til tagger';
 $s_actiongroup_bugs = 'Valgte saker';
+$s_actiongroup_error_issue_is_readonly = 'Saken er kun lesbar.';
 $s_all_projects = 'Alle prosjekter';
 $s_move_bugs = 'Flytte saker';
 $s_operation_successful = 'Operasjonen var vellykket.';
 $s_date_order = 'Datosortering';
 $s_print_all_bug_page_link = 'Skriv ut rapporter';
 $s_csv_export = 'CSV-eksport';
+$s_excel_export = 'Eksporter til Excel';
 $s_login_anonymously = 'Anonym innlogging';
 $s_anonymous = 'Anonym';
 $s_jump_to_bugnotes = 'Gå til notat';
@@ -67,6 +70,8 @@ $s_jump = 'Gå til sak';
 $s_copy_users = 'Kopiere brukere';
 $s_copy_categories_from = 'Kopiere kategorier fra';
 $s_copy_categories_to = 'Kopiere kategorier til';
+$s_copy_versions_from = 'Kopier versjoner fra';
+$s_copy_versions_to = 'Kopier versjoner til';
 $s_copy_users_from = 'Kopiere brukere fra';
 $s_copy_users_to = 'Kopiere brukere til';
 $s_bug_history = 'Sakshistorikk';
@@ -86,6 +91,14 @@ $s_delete_bugnote_sure_msg = 'Er du sikker på at du vil slette dette notatet?';
 $s_bug_relationships = 'Relasjoner';
 $s_empty_password_sure_msg = 'Brukeren har et blankt passord. Er du sikker på at du ønsker dette?';
 $s_empty_password_button = 'Bruk blankt passord';
+$s_reauthenticate_title = 'Autentiser';
+$s_reauthenticate_message = 'Du besøker en sikker side, og din sikre sesjon har utløpt. Vennligst autentiser deg selv for å fortsette.';
+$s_no_category = '(Ingen kategori)';
+$s_global_categories = 'Globale kategorier';
+$s_inherit = 'Arv kategorier';
+$s_inherit_global = 'Arv globale kategorier';
+$s_inherit_parent = 'Arv foreldrekategorier';
+$s_update_subproject_inheritance = 'Oppdater arv for underprosjekt';
 $s_duplicate_of = 'er duplikat av';
 $s_has_duplicate = 'har duplikat';
 $s_related_to = 'er relatert til';
@@ -106,6 +119,7 @@ $s_make_private = 'Gjør privat';
 $s_make_public = 'Gjør offentlig';
 $s_create_new_project_link = 'Lag nytt prosjekt';
 $s_login_link = 'Logge inn';
+$s_select_option = '(velg)';
 $s_bug_actiongroup_access = 'Du hadde ikke rettighet til å utføre den handlingen.';
 $s_bug_actiongroup_status = 'Status kan ikke endres til den forespurte statusen';
 $s_bug_actiongroup_category = 'Saken kan ikke endres til den forespurte kategorien';
@@ -120,6 +134,8 @@ $s_status_bugs_conf_msg = 'Velg saksstatus';
 $s_view_status_bugs_conf_msg = 'Velg sakenes visningsstatus';
 $s_category_bugs_conf_msg = 'Velg kategori for sakene';
 $s_set_sticky_bugs_conf_msg = 'Er du sikker på at du vil sette/nullstille disse sakene som fastlåste?';
+$s_fixed_in_version_bugs_conf_msg = 'Oppdater Fikset i versjon til';
+$s_target_version_bugs_conf_msg = 'Oppdater målversjon til';
 $s_close_group_bugs_button = 'Lukk saker';
 $s_delete_group_bugs_button = 'Slett saker';
 $s_move_group_bugs_button = 'Flytt saker';
@@ -174,12 +190,12 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Ulovlig filtype';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Mappen eksisterer ikke. Vennligst sjekk prosjektinnstillingene.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Filen eksisterer fra før. Vennligst slett filen først.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Det eksisterer et prosjekt med et likt navn.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'En påkrevd felt er ikke fylt ut. Vennligst sjekk feltene for manglende input.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Det påkrevde feltet «%s» var tomt. Vennligst kontroller feltene.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Denne kontoen er beskyttet. Du kan ikke bruke kontoen før beskyttelsen er fjernet.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Du har ikke tilgang.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Mislykket filopplasting. Be din administrator om å kjøre admin_check scriptet for å feilsøke problemet.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Mislykket filopplasting. Dette er sannsynligvis forårsaket av at filstørrelsen var større enn det din PHP-installasjon tillater.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'En påkrevd parameter til denne siden ble ikke funnet.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'En påkrevd parameter for denne siden (%s) ble ikke funnet.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Det brukernavnet er allerede i bruk. Vennligst gå tilbake og velg et annet.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurasjonsopsjon \'%s\' ikke funnet.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
@@ -191,14 +207,13 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Kan ikke koble til FTP-server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Saksbehandleren har ikke tilstrekkelig tilgangsnivå for å håndtere saker med denne statuskoden.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Et prosjekt med det samme navnet eksisterer fra før. Vennligst gå tilbake og angi et nytt navn.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Det ble oppgitt et ugyldig prosjektnavn. Prosjektnavnet kan ikke være blankt.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Finner ikke bruker.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Innloggingsinformasjonen som er lagret i nettleseren din er feil. Kanskje kontoen din har blitt slettet?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Finner ikke innstillingene til denne brukeren.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Finner ikke nyhetssak.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Passordet kan ikke verifiseres.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Forventet en tabell, men mottok en streng.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En streng var forventet, men mottok en array.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Finner ikke saken.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Sak %d ikke funnet.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Finner ikke filteret %d.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ugyldig epost.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Brukerprofil ble ikke funnet.';
@@ -217,14 +232,15 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-autentisering feilet';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP-tjenertilkobling feilet';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Oppdatering av LDAP-posten feilet.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-bruker ikke funnet.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Feil ved tilkobling til database.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Feil ved tilkobling til database. Feilmelding mottatt fra database var #%d: %s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Database spørring feilet.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Database uttrekk feilet.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorien eksisterer fra før.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Ingen handling for kopiering er spesifisert.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Finner ikke kategorien.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Kategori «%s» ikke funnet for prosjekt «%s».';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Versjonen eksisterer fra før.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Finner ikke versjonen.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versjon «%s» ikke funnet.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Ugyldig brukernavn.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Brukeren har ikke påkrevd tilgangsnivå';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Angitt navn er identisk med en annen brukers brukernavn. Vennligst angi nytt navn.';
@@ -248,6 +264,8 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Bekreftelsesadressen 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maks antall forsøk har blitt nådd. Vennligst kontakt systemadministrator';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Operasjonen vil medføre en uendelig løkke i hierarkiet av underprosjekter.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Du kan ikke endre tilgangsnivå for den eneste ADMINISTRATOREN i systemet.';
+$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Kunne ikke finne en tagg med det navnet.';
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Taggnavnet er ugyldig.';
 $s_login_error = 'Kontoen kan ha blitt stengt eller brukernavnet/passordet du oppga var ikke riktig.';
 $s_login_cookies_disabled = 'Nettleseren din er ikke konfigurert til å støtte \'cookies\' (informasjonskapsler).';
 $s_go_back = 'Tilbake';
@@ -255,6 +273,7 @@ $s_proceed = 'Klikk for å fortsette';
 $s_switch = 'Bytt';
 $s_logged_in_as = 'Logget inn som';
 $s_prefix_for_deleted_users = 'bruker';
+$s_administrator = 'administrator';
 $s_myself = 'Meg selv';
 $s_default_access_level = 'Standard tilgangsnivå';
 $s_access_levels_enum_string = '10:Leser,25:Rapportør,40:Oppdaterer,55:Utvikler,70:Prosjektleder,90:Administrator';
@@ -316,6 +335,7 @@ $s_email_category = 'Kategori';
 $s_email_reproducibility = 'Reproduserbarhet';
 $s_email_severity = 'Alvorlighetsgrad';
 $s_email_priority = 'Prioritet';
+$s_email_status = 'Status';
 $s_email_resolution = 'Løsningsstatus';
 $s_email_duplicate = 'Duplikat';
 $s_email_fixed_in_version = 'Fikset i versjon';
@@ -346,7 +366,9 @@ $s_advanced_report = 'Avansert rapport';
 $s_advanced_view = 'Avansert visning';
 $s_advanced_update = 'Avansert oppdatering';
 $s_refresh_delay = 'Forsinkelse på oppfriskning';
+$s_minutes = 'minutter';
 $s_redirect_delay = 'Forsinkelse på redirigering';
+$s_seconds = 'sekunder';
 $s_with_minimum_severity = 'Med minimum alvorlighetsgrad';
 $s_bugnote_order = 'Sortering av notat';
 $s_bugnote_order_asc = 'Økende';
@@ -388,6 +410,7 @@ $s_no_sponsored = 'Finner ingen sponsede saker delegert til deg.';
 $s_own_sponsored = 'Saker du har sponset:';
 $s_issues_handled = 'Sponsede saker du har blitt delegert:';
 $s_no_own_sponsored = 'Du har ikke sponset noen saker.';
+$s_sponsor = 'Sponsor';
 $s_amount = 'Beløp';
 $s_total_owing = 'Totalt utestående';
 $s_total_paid = 'Totalt betalt';
@@ -455,6 +478,7 @@ $s_reporter = 'Rapportert av';
 $s_assigned_to = 'Delegert til';
 $s_priority = 'Prioritet';
 $s_resolution = 'Løsningsstatus';
+$s_status = 'Status';
 $s_duplicate_id = 'Duplikere ID';
 $s_projection = 'Projeksjon';
 $s_os_version = 'Versjon';
@@ -485,6 +509,8 @@ $s_closed_bug_button = 'Avslutt sak';
 $s_bugnote_updated_msg = 'Notat har blitt oppdatert ...';
 $s_edited_on = 'Redigert:';
 $s_click_to_login = 'Klikk her for å logge inn';
+$s_error_database_version_out_of_date_2 = '<strong>ADVARSEL:</strong> Databasestrukturen kan være utdatert. Vennligst oppgrader <a href="admin/install.php">her</a> før du logger inn.';
+$s_error_code_version_out_of_date = '<strong>ADVARSEL:</strong> Databasestrukturen er mer ajourført enn den installerte koden. Vennligst oppgrader koden.';
 $s_login_page_info = 'Velkommen til bugtracker.';
 $s_login_title = 'Innlogging';
 $s_save_login = 'Lagre innlogging';
@@ -587,6 +613,10 @@ $s_reopen_resolution = 'Løsningsstatus for en gjenåpnet sak settes til';
 $s_config_delete_sure = 'Er du sikker på at du ønsker å slette innstillinger for';
 $s_in_project = 'i prosjekt';
 $s_delete_config_button = 'Slette innstillinger';
+$s_all_users = 'Alle brukere';
+$s_plugin_description = 'Beskrivelse';
+$s_plugin_url = 'Nettside:';
+$s_plugin_upgrade = 'Oppgradér';
 $s_project_added_msg = 'Prosjektet har blitt lagt til ...';
 $s_category_added_msg = 'Kategorien har blitt lagt til ...';
 $s_category_deleted_msg = 'Kategorien har blitt slettet ...';

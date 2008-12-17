@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Portuguese (Português)
@@ -31,6 +26,7 @@
  * @author Luís Martins, lmar@ualg.pt
  * @author Malafaya
  * @author Rui Alexandre Coelho, rac@iosoft.pt
+ * @author Waldir
  */
 
 $s_charset = 'utf-8';
@@ -329,7 +325,7 @@ $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
 $s_project_added_msg = 'O Projecto foi adicionado com sucesso...';
 $s_category_added_msg = 'A Categoria foi adicionada com sucesso...';
 $s_category_deleted_msg = 'A Categoria foi apagada com sucesso...';
-$s_category_delete_sure_msg = 'Você tem certeza que deseja Remover essa categoria ? Todos os Bugs Associados Serão Removidos.';
+$s_category_delete_sure_msg = 'Tem certeza que deseja apagar esta categoria?<br />A categoria "%s" contém %d bugs.';
 $s_delete_category_button = 'Remover Categoria';
 $s_edit_project_category_title = 'Editar Categoria de Projecto';
 $s_update_category_button = 'Actualizar Categoria';

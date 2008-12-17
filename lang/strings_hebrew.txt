@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Hebrew (עברית)
@@ -29,6 +24,7 @@
  * @file
  *
  * @author Eyal Zvi, eyal@bikoret-bona.com
+ * @author Orentet
  * @author Rotemliss
  */
 
@@ -45,13 +41,20 @@ $s_actiongroup_menu_update_view_status = 'עדכון סטטוס הצגה';
 $s_actiongroup_menu_update_category = 'עדכון קטגוריה';
 $s_actiongroup_menu_set_sticky = 'עדכון "דביקות"';
 $s_actiongroup_menu_update_field = 'עדכון "%s"';
+$s_actiongroup_menu_update_target_version = 'עדכן גרסת מטרה';
+$s_actiongroup_menu_update_fixed_in_version = 'עדכן תוקן בגרסה';
+$s_actiongroup_menu_update_product_build = 'עדכן גרסת מוצר';
+$s_actiongroup_menu_add_note = 'הוסף הערה';
+$s_actiongroup_menu_attach_tags = 'הצמד תגים';
 $s_actiongroup_bugs = 'באגים מסומנים';
+$s_actiongroup_error_issue_is_readonly = 'הבאג הוא לקריאה בלבד';
 $s_all_projects = 'כל הפרוייקטים';
 $s_move_bugs = 'העברת באגים';
 $s_operation_successful = 'הפעולה הצליחה.';
 $s_date_order = 'מיון לפי תאריך';
 $s_print_all_bug_page_link = 'הדפסת דוחו"ת';
 $s_csv_export = 'יצוא ל-CVS';
+$s_excel_export = 'יצא לאקסל';
 $s_login_anonymously = 'כניסה אנונימית';
 $s_anonymous = 'אנונימי';
 $s_jump_to_bugnotes = 'דילוג להערות';
@@ -66,6 +69,8 @@ $s_jump = 'הצגה';
 $s_copy_users = 'העתקת חשבונות';
 $s_copy_categories_from = 'העתקה מ';
 $s_copy_categories_to = 'העתקה אל';
+$s_copy_versions_from = 'העתק גרסאות מ';
+$s_copy_versions_to = 'העתק גרסאות ל';
 $s_copy_users_from = 'העתקה מ';
 $s_copy_users_to = 'העתקה אל';
 $s_bug_history = 'היסטוריית הבאג';
@@ -85,6 +90,13 @@ $s_delete_bugnote_sure_msg = 'נא לאשר שברצונך למחוק הערה �
 $s_bug_relationships = 'קשרים';
 $s_empty_password_sure_msg = 'סיסמת החשבון ריקה - האם זו אכן כוונתך?';
 $s_empty_password_button = 'סיסמה ריקה';
+$s_reauthenticate_title = 'הזדהה';
+$s_reauthenticate_message = 'הנך מבקר בדף מאובטח, ותוקף ביקורך פג, נא הזדהה מחדש.';
+$s_no_category = '(ללא קטגוריה)';
+$s_global_categories = 'קטגוריות כלליות';
+$s_inherit = 'ירושת קטגוריות';
+$s_inherit_global = 'ירושת קטגוריות כלליות';
+$s_inherit_parent = 'ירושת קטגוריות האב';
 $s_duplicate_of = 'כפיל של';
 $s_has_duplicate = 'בעל כפילים';
 $s_related_to = 'קשור ל';
@@ -105,6 +117,7 @@ $s_make_private = 'מוגבל';
 $s_make_public = 'ציבורי';
 $s_create_new_project_link = 'פרוייקט חדש';
 $s_login_link = 'כניסה';
+$s_select_option = '(בחר)';
 $s_bug_actiongroup_access = 'אין לך הרשאות מתאימות לבצע את הפעולה.';
 $s_bug_actiongroup_status = 'באג זה אינו יכול להתעדכן לסטטוס המבוקש.';
 $s_bug_actiongroup_category = 'באג זה אינו יכול להתעדכן לקטגוריה המבוקשת.';
@@ -119,6 +132,8 @@ $s_status_bugs_conf_msg = 'בחירת סטטוס';
 $s_view_status_bugs_conf_msg = 'בחירת הרשאת צפיה';
 $s_category_bugs_conf_msg = 'בחירת קטגוריה';
 $s_set_sticky_bugs_conf_msg = 'האם ברצונך לשנות את ה"דביקות" של הבאגים?';
+$s_fixed_in_version_bugs_conf_msg = 'עדכן "תוקן בגרסה" ל';
+$s_target_version_bugs_conf_msg = 'עדכן גרסת מטרה ל';
 $s_close_group_bugs_button = 'סגירה';
 $s_delete_group_bugs_button = 'מחיקה!';
 $s_move_group_bugs_button = 'העברה';
@@ -130,6 +145,22 @@ $s_status_group_bugs_button = 'עדכון סטטוס';
 $s_category_group_bugs_button = 'עדכון קטגוריה';
 $s_view_status_group_bugs_button = 'עדכון הרשאת צפיה';
 $s_set_sticky_group_bugs_button = 'עדכון "דביקות"';
+$s_fixed_in_version_group_bugs_button = 'עדכן תוקן בגרסה';
+$s_target_version_group_bugs_button = 'עדכן גרסת מטרה';
+$s_graph_imp_status_title = 'גרפים סינתטים לפי סטטוס';
+$s_graph_imp_priority_title = 'גרפים סינתטים לפי עדיפות';
+$s_graph_imp_severity_title = 'גרפים סינתטים לפי חומרה';
+$s_graph_imp_category_title = 'גרפים סינתטים לפי קטגוריה';
+$s_graph_imp_resolution_title = 'גרפים סינתטים לפי פתרון';
+$s_by_status_pct = 'גרפים סינתטים לפי אחוזים';
+$s_by_priority_pct = 'לפי אחוז עדיפות';
+$s_by_severity_pct = 'לפי אחוז חומרה';
+$s_by_category_pct = 'לפי אחוז קטגוריה';
+$s_by_resolution_pct = 'לפי אחוז פתרון';
+$s_by_severity_mix = 'לפי חומרה וסטטוס';
+$s_by_priority_mix = 'לפי עדיפות וסטטוס';
+$s_by_resolution_mix = 'לפי פתרון וסטטוס';
+$s_synthesis_link = 'סינתזה';
 $s_hide_button = 'הצגת מסומנים בלבד';
 $s_printing_preferences_title = 'בחירת שדות להדפסה';
 $s_printing_options_link = 'אפשרויות הדפסה';
@@ -161,7 +192,6 @@ $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'שדה Database \'%s\' לא נמצא.
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'נכשלו נסיונות ההתחברות לשרת FTP.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'פרוייקט בשם זה כבר קיים. נא לחזור ולבחור בשם אחר';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'שם הפרוייקט אינו תקין. השם אינו יכול להיות ריק.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'חשבון לא נמצא.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'השם והסיסמה שנשמרו בדפדפן שלך (Cookie) אינם תקינים. אולי חשבונך נמחק?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'לא נמצאו העדפות לחשבון זה.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'לא נמצאו פריטי חדשות.';

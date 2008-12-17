@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Italian (Italiano)
@@ -102,7 +97,7 @@ $s_no_category = '(Nessuna Categoria)';
 $s_global_categories = 'Categorie Globali';
 $s_inherit = 'Eredita Categorie';
 $s_inherit_global = 'Eredita Categorie Globali';
-$s_inherit_parent = 'Eredita le Categorie dal Padre';
+$s_inherit_parent = 'Eredita Categorie dal Padre';
 $s_duplicate_of = 'duplicato di';
 $s_has_duplicate = 'duplicata da';
 $s_related_to = 'in relazione con';
@@ -374,6 +369,7 @@ $s_edit_account_title = 'Modifica account';
 $s_username = 'Nome utente';
 $s_realname = 'Nominativo';
 $s_email = 'Email';
+$s_password = 'Password';
 $s_no_password_change = 'La password è gestita da un altro sistema, non può quindi essere modificata da questa applicazione.';
 $s_confirm_password = 'Conferma password';
 $s_access_level = 'Livello di accesso';
@@ -664,6 +660,12 @@ $s_plugin_priority = 'Priorità';
 $s_plugin_protected = 'Protetto';
 $s_plugin_update = 'Aggiornamento';
 $s_plugin_actions = 'Azioni';
+$s_plugin_uninstall_message = 'Sei sicuro di voler rimuovere il plugin "%s"?';
+$s_plugin_key = 'Legenda';
+$s_plugin_key_met = 'plugin pronto';
+$s_plugin_key_unmet = 'dipendenze non soddisfatte';
+$s_plugin_key_dated = 'dipendenze obsolete';
+$s_plugin_key_upgrade = 'Richiede aggiornamento';
 $s_project_added_msg = 'Il progetto è stato inserito...';
 $s_category_added_msg = 'La categoria è stata inserita...';
 $s_category_deleted_msg = 'La categoria è stata eliminata...';
@@ -947,7 +949,7 @@ $s_link_custom_field_to_project_title = 'Associa il campo personalizzato al prog
 $s_link_custom_field_to_project_button = 'Associa campo personalizzato';
 $s_linked_projects = 'Utilizzato nei progetti';
 $s_custom_field_sequence = 'Sequenza';
-$s_custom_field_type_enum_string = '0:stringa,1:numerico,2:virgola mobile,3:valori prestabiliti,4:email,5:checkbox,6:lista,7:lista a scelta multipla,8:data';
+$s_custom_field_type_enum_string = '0:Stringa,1:Numerico,2:Virgola mobile,3:Valori prestabiliti,4:E-mail,5:Checkbox,6:Lista,7:Lista a scelta multipla,8:Data,9:Radio';
 $s_confirm_used_custom_field_deletion = 'Questo campo è attualmente utilizzato da almeno un progetto.  Se continui tutti i valori associati a questo campo verranno cancellati.  Si tratta di una azione non reversibile.  Se non desideri eliminare questo campo, clicca sul pulsante \"Indietro\" del tuo browser.  Per procedere, clicca sul pulsante qui sotto';
 $s_confirm_custom_field_deletion = 'Sei sicuro di voler eliminare questo campo personalizzato e tutti i valori associati?';
 $s_field_delete_button = 'Elimina campo personalizzato';
