@@ -856,6 +856,9 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 
 				$p_query_clauses['order'][] = "$c_cf_alias $c_dir";
 			} else {
+				if ( 'last_updated' == $c_sort ) {
+					$c_sort = "$t_bug_table.last_updated";
+				}
 				$p_query_clauses['order'][] = $c_sort . " " . $c_dir;
 			}
 		}
