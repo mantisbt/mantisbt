@@ -46,7 +46,7 @@
 			}
 		}
 
-	  if ( ! user_pref_exists( $p_user_id ) ) {
+	  if ( !user_pref_exists( $p_user_id ) ) {
 			user_pref_set_default( $p_user_id );
 	  }
 

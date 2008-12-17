@@ -111,7 +111,7 @@
 		$g_action_attach_tags_create = array();
 
 		foreach( $g_action_attach_tags_attach as $t_tag_row ) {
-			if ( ! tag_bug_is_attached( $t_tag_row['id'], $p_bug_id ) ) {
+			if ( !tag_bug_is_attached( $t_tag_row['id'], $p_bug_id ) ) {
 				tag_bug_attach( $t_tag_row['id'], $p_bug_id, $t_user_id );
 			}
 		}

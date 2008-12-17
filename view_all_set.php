@@ -45,7 +45,7 @@
 	if ( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
 		$f_view_type = 'simple';
 	}
-	if ( ! in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
+	if ( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
 		$f_view_type = $f_default_view_type;
 	}	
 
@@ -372,7 +372,7 @@
 	$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
 
 	# process the cookie if it exists, it may be blank in a new install
-	if ( ! is_blank( $t_view_all_cookie ) ) {
+	if ( !is_blank( $t_view_all_cookie ) ) {
 		$t_setting_arr = filter_deserialize( $t_view_all_cookie );
 		if ( false === $t_setting_arr ) {
 			# couldn't deserialize, if we were trying to use the filter, clear it and reload

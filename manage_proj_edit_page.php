@@ -288,7 +288,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	foreach ( $t_projects as $t_project ) {
 		if ( in_array( $t_project['id'], $t_all_subprojects ) ||
             in_array( $f_project_id, project_hierarchy_get_all_subprojects( $t_project['id'] ) ) ||
-            ! access_has_project_level( $t_manage_access, $t_project['id'] ) ) {
+            !access_has_project_level( $t_manage_access, $t_project['id'] ) ) {
                 continue;
 		}
 ?>

@@ -81,7 +81,7 @@
 				bug_close( $t_bug_id, $f_bug_notetext, $f_bug_noteprivate );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 			} else {
-				if ( ! access_can_close_bug( $t_bug_id ) ) {
+				if ( !access_can_close_bug( $t_bug_id ) ) {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_status' );

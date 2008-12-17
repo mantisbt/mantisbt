@@ -44,7 +44,7 @@
 	
 	function set_overrides( $p_config ) {
 	   global $t_overrides;
-	   if ( ! in_array( $p_config, $t_overrides ) ) {
+	   if ( !in_array( $p_config, $t_overrides ) ) {
 	       $t_overrides[] = $p_config;
 	   }
 	}
@@ -91,7 +91,7 @@
     		if ( isset( $p_enum_workflow[$t_status] ) ) {
     			$t_next_arr = MantisEnum::getAssocArrayIndexedByValues( $p_enum_workflow[$t_status] );
     			foreach ( $t_next_arr as $t_next => $t_next_label) {
-                    if ( ! isset( $t_default[$t_status] ) ) {
+                    if ( !isset( $t_default[$t_status] ) ) {
     	                $t_default[$t_status] = $t_next;
     	            }
 					$t_exit[$t_status][$t_next] = '';
@@ -104,7 +104,7 @@
     			$t_exit[$t_status][$t_reopen] = $t_reopen_label;
     			$t_entry[$t_reopen][$t_status] = $t_reopen_label;
     		}
-    		if ( ! isset( $t_entry[$t_status] ) ) {
+    		if ( !isset( $t_entry[$t_status] ) ) {
     			$t_entry[$t_status] = array();
     		}
     	}
@@ -286,21 +286,21 @@
 
 		$t_file_set = config_get_global( 'set_status_threshold' );
 		foreach ( $t_enum_status as $t_status => $t_status_label) {
-		    if ( ! isset( $t_file_set[$t_status] ) ) {
+		    if ( !isset( $t_file_set[$t_status] ) ) {
 		        $t_file_set[$t_status] = config_get_global('update_bug_status_threshold');
 		    }
 		}
 
 		$t_global_set = config_get( 'set_status_threshold', null, null, ALL_PROJECTS );
 		foreach ( $t_enum_status as $t_status => $t_status_label) {
-		    if ( ! isset( $t_file_set[$t_status] ) ) {
+		    if ( !isset( $t_file_set[$t_status] ) ) {
 		        $t_file_set[$t_status] = config_get('update_bug_status_threshold', null, null, ALL_PROJECTS );
 		    }
 		}
 
 		$t_project_set = config_get( 'set_status_threshold' );
 		foreach ( $t_enum_status as $t_status => $t_status_label) {
-		    if ( ! isset( $t_file_set[$t_status] ) ) {
+		    if ( !isset( $t_file_set[$t_status] ) ) {
 		        $t_file_set[$t_status] = config_get('update_bug_status_threshold' );
 		    }
 		}
@@ -425,7 +425,7 @@
 
 	# show the settings used to derive the table
 	threshold_begin( lang_get( 'workflow_thresholds' ) );
-	if ( ! is_array( config_get( 'bug_submit_status' ) ) ) {
+	if ( !is_array( config_get( 'bug_submit_status' ) ) ) {
 		threshold_row( 'bug_submit_status' );
 	}
 	threshold_row( 'bug_resolved_status_threshold' );

@@ -42,7 +42,7 @@
 		$t_access &= access_has_project_level( config_get_access( $t_revert ), $f_project_id );
 	}
 	
-	if ( ! $t_access ) {
+	if ( !$t_access ) {
 		access_denied();
 	}
 	

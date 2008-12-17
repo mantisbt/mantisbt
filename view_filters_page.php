@@ -139,7 +139,7 @@
 		}
 	}
 
-	if ( ! in_array( $t_target_field, $t_fields ) ) {
+	if ( !in_array( $t_target_field, $t_fields ) ) {
 		$t_target_field = '';
 	}
 	
@@ -163,7 +163,7 @@
 	if ( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
 		$f_view_type = 'simple';
 	}
-	if ( ! in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
+	if ( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
 		$f_view_type = $f_default_view_type;
 	}	
 

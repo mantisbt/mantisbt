@@ -41,7 +41,7 @@
 	$f_query_id = gpc_get_int( 'source_query_id' );
 	$t_redirect_url = 'query_view_page.php';
 
-	if ( ! filter_db_can_delete_filter( $f_query_id ) ) {
+	if ( !filter_db_can_delete_filter( $f_query_id ) ) {
 		print_header_redirect( $t_redirect_url );
 	}
 	else

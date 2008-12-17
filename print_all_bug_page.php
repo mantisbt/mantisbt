@@ -58,10 +58,10 @@
 	$t_num_of_columns = sizeof( $t_columns );
 
 	# check to see if the cookie exists
-	if ( ! is_blank( $t_cookie_value ) ) {
+	if ( !is_blank( $t_cookie_value ) ) {
 
 		# check to see if new cookie is needed
-		if ( ! filter_is_cookie_valid() ) {
+		if ( !filter_is_cookie_valid() ) {
 			print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
 		}
 

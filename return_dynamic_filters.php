@@ -104,7 +104,7 @@
 	#
 	function act(){
 		if(isset($_GET['filter_target'])){
-		    if ( ! headers_sent() ) {
+		    if ( !headers_sent() ) {
 			    header( 'Content-Type: text/html; charset=' . lang_get( 'charset' ) );
 			}
 			$filter = $_GET['filter_target'];

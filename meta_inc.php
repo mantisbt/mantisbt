@@ -22,7 +22,7 @@
 	 */
 
     global $g_allow_browser_cache;
-    if ( ! isset( $g_allow_browser_cache ) ) {
+    if ( !isset( $g_allow_browser_cache ) ) {
 ?>
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Cache-Control" content="no-cache" />

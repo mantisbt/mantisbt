@@ -47,7 +47,7 @@
 	$f_new_status = gpc_get_int( 'new_status' );
 	$f_reopen_flag = gpc_get_int( 'reopen_flag', OFF );
 
-	if ( ! ( ( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
+	if ( !( ( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
 				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) &&
 						( ( ON == config_get( 'allow_reporter_reopen' ) ) ||
 								( ON == config_get( 'allow_reporter_close' ) ) ) ) ||
@@ -168,7 +168,7 @@ if ( ( $t_resolved > $f_new_status ) &&
 <!-- Due date -->
 <?php if ( $t_can_update_due_date ) {
 	$t_date_to_display = '';
-	if ( ! date_is_null( $t_bug->due_date ) ) {
+	if ( !date_is_null( $t_bug->due_date ) ) {
 			$t_date_to_display = date( config_get( 'short_date_format' ), $t_bug->due_date );
 	}
 ?>
@@ -208,10 +208,10 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_display = $t_def['display_' . $t_custom_status_label];
 	$t_require = $t_def['require_' . $t_custom_status_label];
 	
-	if ( ( "update" == $t_custom_status_label ) && ( ! $t_require ) ) {
+	if ( ( "update" == $t_custom_status_label ) && ( !$t_require ) ) {
         continue;
 	}
-	if ( in_array( $t_custom_status_label, array( "resolved", "closed" ) ) && ! ( $t_display || $t_require ) ) {
+	if ( in_array( $t_custom_status_label, array( "resolved", "closed" ) ) && !( $t_display || $t_require ) ) {
         continue;
 	}
 	if ( custom_field_has_write_access( $t_id, $f_bug_id ) ) {

@@ -46,7 +46,7 @@
 		$g_project_override = $t_bug_data->project_id;
 	}
 
-	if ( ! (
+	if ( !(
 				( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
 				( access_has_bug_level( config_get( 'update_bug_threshold' ) , $f_bug_id ) ) ||
 				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) &&
@@ -120,8 +120,8 @@
 		$t_def = custom_field_get_definition( $t_id );
 
 		# Only update the field if it would have been display for editing
-		if( !( ( ! $f_update_mode && $t_def['require_' . $t_custom_status_label] ) ||
-						( ! $f_update_mode && $t_def['display_' . $t_custom_status_label] && in_array( $t_custom_status_label, array( "resolved", "closed" ) ) ) ||
+		if( !( ( !$f_update_mode && $t_def['require_' . $t_custom_status_label] ) ||
+						( !$f_update_mode && $t_def['display_' . $t_custom_status_label] && in_array( $t_custom_status_label, array( "resolved", "closed" ) ) ) ||
 						( $f_update_mode && $t_def['display_update'] ) ||
 						( $f_update_mode && $t_def['require_update'] ) ) ) {
 			continue;

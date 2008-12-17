@@ -38,7 +38,7 @@
 	$f_tag_id = gpc_get_int( 'tag_id' );
 	$t_tag_row = tag_get( $f_tag_id );
 
-	if ( ! ( access_has_global_level( config_get( 'tag_edit_threshold' ) ) 
+	if ( !( access_has_global_level( config_get( 'tag_edit_threshold' ) ) 
 		|| ( auth_get_current_user_id() == $t_tag_row['user_id'] )
 			&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) ) 
 	{

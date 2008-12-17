@@ -121,7 +121,7 @@
 	if ( false === $t_config_inc_found ) {
 		# if not found, redirect to the admin page to install the system
 		# this needs to be long form and not replaced by is_page_name as that function isn't loaded yet
-		if ( ! ( isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], 'admin' ) ) ) ) {
+		if ( !( isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], 'admin' ) ) ) ) {
 			if ( OFF == $g_use_iis ) {
 				header( 'Status: 302' );
 			}

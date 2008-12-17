@@ -97,7 +97,7 @@
 		foreach ( $t_valid_flags as $t_flag ) {
 			$t_default_flags[$t_flag] = ON;
 			foreach ( $t_valid_actions as $t_action ) {
-				if ( ! isset( $t_flags[$t_action][$t_flag] ) ) {
+				if ( !isset( $t_flags[$t_action][$t_flag] ) ) {
 					unset( $t_default_flags[$t_flag] );
 				}
 			}
@@ -129,7 +129,7 @@
 	foreach ( $t_valid_actions as $t_action ) {
 		$t_action_printed = false;
 		foreach ( $t_valid_flags as $t_flag ) {
-			if ( ! isset( $t_default_flags[$t_flag] ) ) {
+			if ( !isset( $t_default_flags[$t_flag] ) ) {
 				$t_default_flags[$t_flag] = OFF;
 			}
 			if ( isset( $t_flags[$t_action][$t_flag] ) <> $t_default_flags[$t_flag] ) {

@@ -114,7 +114,7 @@
 	if ( ( isset( $_SERVER["HTTPS"] ) && ( "on" == strtolower( $_SERVER["HTTPS"] ) ) ) && preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
 		# Suppress "Pragma: no-cache" header.
 	} else {
-		if ( ! isset( $g_allow_file_cache ) ) {
+		if ( !isset( $g_allow_file_cache ) ) {
 		    header( 'Pragma: no-cache' );
 		}
 	}

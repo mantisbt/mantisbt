@@ -41,7 +41,7 @@
 		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
 	}
 	
-	if ( ! file_allow_bug_upload( $f_bug_id ) ) {
+	if ( !file_allow_bug_upload( $f_bug_id ) ) {
 		access_denied();
 	}
 

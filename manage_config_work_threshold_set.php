@@ -45,7 +45,7 @@
 	    global $t_access, $t_project;
 
 	    if ( ( $t_access >= config_get_access( $p_threshold ) )
-		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only ) ) {
+		          && ( ( ALL_PROJECTS == $t_project ) || !$p_all_projects_only ) ) {
 	        $f_threshold = gpc_get_int_array( 'flag_thres_' . $p_threshold, array() );
 	        $f_access = gpc_get_int( 'access_' . $p_threshold );
             # @@debug @@ echo "<br />for $p_threshold "; var_dump($f_threshold, $f_access); echo '<br />';
@@ -86,7 +86,7 @@
 	    global $t_access, $t_project;
 
 	    if ( ( $t_access >= config_get_access( $p_threshold ) )
-		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only ) ) {
+		          && ( ( ALL_PROJECTS == $t_project ) || !$p_all_projects_only ) ) {
 	        $f_flag = gpc_get( 'flag_' . $p_threshold, OFF );
 	        $f_access = gpc_get_int( 'access_' . $p_threshold );
 	        $f_flag = ( OFF == $f_flag ) ? OFF : ON;
@@ -102,7 +102,7 @@
 	    global $t_access, $t_project;
 
 	    if ( ( $t_access >= config_get_access( $p_threshold ) )
-		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only ) ) {
+		          && ( ( ALL_PROJECTS == $t_project ) || !$p_all_projects_only ) ) {
 	        $f_flag = gpc_get( 'flag_' . $p_threshold );
 	        $f_access = gpc_get_int( 'access_' . $p_threshold );
             # @@debug @@ echo "<br />for $p_threshold "; var_dump($f_flag, $f_access); echo '<br />';

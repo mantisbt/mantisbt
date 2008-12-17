@@ -31,7 +31,7 @@ $t_core_path = config_get( 'core_path' );
  */
 require_once( $t_core_path.'bugnote_api.php' );
 
-if ( ! config_get('time_tracking_enabled') )
+if ( !config_get('time_tracking_enabled') )
 	return;
 ?>
 

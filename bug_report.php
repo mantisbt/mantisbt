@@ -173,7 +173,7 @@
 	
 	html_page_top1();
 
-	if ( ! $f_report_stay ) {
+	if ( !$f_report_stay ) {
 		html_meta_redirect( 'view_all_bug_page.php' );
 	}
 
