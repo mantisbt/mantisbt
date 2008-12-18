@@ -410,14 +410,15 @@ function tag_delete( $p_tag_id ) {
 function tag_get_candidates_for_bug( $p_bug_id ) {
 	$t_tag_table = db_get_table( 'mantis_tag_table' );
 
-	$query = 'SELECT id, name, description FROM ' . $t_tag_table;
 	$t_params = array();
 	if ( 0 != $p_bug_id ) {
 		$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
-
-		$query .= "	WHERE id NOT IN (
-						SELECT tag_id FROM $t_bug_tag_table WHERE bug_id=" . db_param() . ' )';
+		$query = 'SELECT t.id, t.name, t.description FROM ' . 
+				$t_bug_tag_table .
+				 ' t2 LEFT JOIN ' . $t_tag_table . ' t ON t.id = t2.tag_id WHERE NOT bug_id = ' . db_param();			 	
 		$t_params[] = $p_bug_id;
+	} else {
+		$query = 'SELECT id, name, description FROM ' . $t_tag_table;
 	}
 
 	$query .= " ORDER BY name ASC ";
