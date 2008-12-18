@@ -1475,8 +1475,16 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 
 	# log changes except for duplicate_id which is obsolete and should be removed in
 	# Mantis 1.3.
-	if( $p_field_name != 'duplicate_id' ) {
-		history_log_event_direct( $p_bug_id, $p_field_name, $t_current_value, $c_value );
+	switch( $p_field_name ) {
+		case 'duplicate_id':
+			break;
+
+		case 'category_id':
+			history_log_event_direct( $p_bug_id, 'category', category_full_name( $t_current_value, false ), category_full_name( $c_value, false ) );
+			break;
+
+		default:
+			history_log_event_direct( $p_bug_id, $p_field_name, $t_current_value, $c_value );
 	}
 
 	bug_clear_cache( $p_bug_id );
