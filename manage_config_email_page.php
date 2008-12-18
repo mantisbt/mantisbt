@@ -158,7 +158,7 @@
 	}
 
 	function get_capability_row_for_email( $p_caption, $p_message_type ) {
-		$t_access_levels = ManisEnum::getValues( config_get( 'access_levels_enum_string' ) );
+		$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		echo '<td class="center"' . colour_notify_flag( $p_message_type, 'reporter' ) . '>' . show_notify_flag( $p_message_type, 'reporter' )  . '</td>';
@@ -268,8 +268,8 @@
 
 		get_capability_row_for_email( lang_get( 'email_on_relationship_changed' ), 'relationship' );
 
-		$t_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
-		foreach ( $t_statuses as $t_status ) {
+		$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
+		foreach ( $t_statuses as $t_status => $t_label ) {
 			get_capability_row_for_email( lang_get( 'status_changed_to' ) . ' \'' . get_enum_element( 'status', $t_status ) . '\'', $t_label );
 		}
 
