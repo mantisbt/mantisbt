@@ -67,6 +67,7 @@
 
 	$t_finished = false;
 	$t_request = '';
+	$t_bugnote = false;
 
 	$t_external_action_prefix = 'EXT_';
 	if ( strpos( $f_action, $t_external_action_prefix ) === 0 ) {
