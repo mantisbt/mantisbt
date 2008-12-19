@@ -94,12 +94,14 @@
 
 <?php # New Accounts Form BEGIN ?>
 <?php
+	//$g_db->debug=true;
 	$days_old = 7;
 	$query = "SELECT *
 		FROM $t_user_table
-		WHERE ".db_helper_compare_days(0,"date_created","<= '$days_old'")."
+		WHERE ".db_helper_compare_days("'" . db_now() . "'","date_created","<= '$days_old'")."
 		ORDER BY date_created DESC";
-	$result = db_query_bound( $query, Array( db_now() ) );
+	$result = db_query_bound( $query );
+	$g_db->debug=false;
 	$new_user_count = db_num_rows( $result);
 
 ?>
@@ -161,8 +163,7 @@
 	} else if ( $f_filter === 'UNUSED' ) {
 		$t_where = '(login_count = 0) AND ( date_created = last_visit )';
 	} else if ( $f_filter === 'NEW' ) {
-		$t_where = db_helper_compare_days(0,"date_created","<= '$days_old'");
-		$t_where_params[] = db_now();		
+		$t_where = db_helper_compare_days("'" . db_now() . "'","date_created","<= '$days_old'");
 	} else {
 		$c_prefix = db_prepare_string($f_filter);
 		$t_where = "(username like '$c_prefix%')";
@@ -186,8 +187,7 @@
 	} else {
 		$query = "SELECT count(*) as usercnt
 				FROM $t_user_table
-				WHERE $t_where AND " . db_helper_compare_days(0,"last_visit","< '$days_old'");
-		$t_where_params[] = db_now();
+				WHERE $t_where AND " . db_helper_compare_days("'" . db_now() . "'","last_visit","< '$days_old'");
 		$result = db_query_bound($query, $t_where_params);
 		$row = db_fetch_array( $result );
 		$total_user_count = $row['usercnt'];	
