@@ -475,6 +475,7 @@
 
         if ( 0 < count( $t_overrides ) ) {
             echo "<div class=\"right\"><form name=\"mail_config_action\" method=\"post\" action=\"manage_config_revert.php\">\n";
+			echo form_security_field( 'manage_config_revert' );
             echo "<input name=\"revert\" type=\"hidden\" value=\"" . implode( ',', $t_overrides ) . "\"></input>";
             echo "<input name=\"project\" type=\"hidden\" value=\"$t_project\"></input>";
             echo "<input name=\"return\" type=\"hidden\" value=\"" . string_sanitize_url( $_SERVER['PHP_SELF'] ) ."\"></input>";
