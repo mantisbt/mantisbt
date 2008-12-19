@@ -63,19 +63,11 @@ function log_event( $p_level, $p_msg ) {
 
 	switch( $t_destination ) {
 		case 'file':
-			if( 'WIN' == substr( PHP_OS, 0, 3 ) ) {
-				error_log( $t_php_event . "\r\n", 3, $t_modifiers );
-			} else {
-				error_log( $t_php_event . "\n", 3, $t_modifiers );
-			}
+				error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
 			break;
 		default:
 			# use default PHP error log settings
-			if( 'WIN' == substr( PHP_OS, 0, 3 ) ) {
-				error_log( $t_php_event . "\r\n" );
-			} else {
-				error_log( $t_php_event . "\n" );
-			}
+				error_log( $t_php_event . PHP_EOL );
 			break;
 	}
 }
