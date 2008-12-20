@@ -421,7 +421,7 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, false ) );
 <?php if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'time_tracking' ) ?>
+		<?php echo lang_get( 'time_tracking' ) ?> (HH:MM)
 	</td>
 	<td colspan="5">
 		<input type="text" name="time_tracking" size="5" value="0:00" />

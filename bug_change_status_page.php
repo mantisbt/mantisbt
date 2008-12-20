@@ -323,7 +323,7 @@ if ( ( $f_new_status >= $t_resolved ) && ( CLOSED > $f_new_status ) ) { ?>
 <?php if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'time_tracking' ) ?>
+		<?php echo lang_get( 'time_tracking' ) ?> (HH:MM)
 	</td>
 	<td>
 		<input type="text" name="time_tracking" size="5" value="0:00" />
