@@ -332,6 +332,11 @@ print_test_row( '$g_bugnote_link_tag is not empty ("' . config_get_global( 'bugn
 	'' <> config_get_global( 'bugnote_link_tag' ) );
 print_test_row( 'filters: dhtml_filters = ON requires use_javascript = ON',
 	( OFF == config_get_global( 'dhtml_filters' ) ) || ( ON == config_get_global( 'use_javascript' ) ) );
+print_test_row( 'Phpmailer sendmail configuration requires escapeshellcmd. Please use a different phpmailer method if this is blocked.',
+	( PHPMAILER_METHOD_SENDMAIL != config_get( 'phpMailer_method' ) || ( PHPMAILER_METHOD_SENDMAIL == config_get( 'phpMailer_method' ) ) && function_exists( 'escapeshellcmd' ) ) );
+print_test_row( 'Phpmailer sendmail configuration requires escapeshellarg. Please use a different phpmailer method if this is blocked.',
+	( PHPMAILER_METHOD_SENDMAIL != config_get( 'phpMailer_method' ) || ( PHPMAILER_METHOD_SENDMAIL == config_get( 'phpMailer_method' ) ) && function_exists( 'escapeshellarg' ) ) );
+
 ?>
 </table>
 
