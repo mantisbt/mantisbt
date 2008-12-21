@@ -143,7 +143,7 @@
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_new_min_severity">
 			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-			<option value="<?php echo OFF ?>"></option>
+			<option disabled="disabled">-----</option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_new_min_severity ) ?>
 		</select>
 	</td>
@@ -157,7 +157,7 @@
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_assigned_min_severity">
 			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-			<option value="<?php echo OFF ?>"></option>
+			<option disabled="disabled">-----</option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_assigned_min_severity ) ?>
 		</select>
 	</td>
@@ -171,7 +171,7 @@
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_feedback_min_severity">
 			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-			<option value="<?php echo OFF ?>"></option>
+			<option disabled="disabled">-----</option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_feedback_min_severity ) ?>
 		</select>
 	</td>
@@ -185,7 +185,7 @@
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_resolved_min_severity">
 			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-			<option value="<?php echo OFF ?>"></option>
+			<option disabled="disabled">-----</option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_resolved_min_severity ) ?>
 		</select>
 	</td>
@@ -199,7 +199,7 @@
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_closed_min_severity">
 			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-			<option value="<?php echo OFF ?>"></option>
+			<option disabled="disabled">-----</option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_closed_min_severity ) ?>
 		</select>
 	</td>
@@ -213,7 +213,7 @@
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_reopened_min_severity">
 			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-			<option value="<?php echo OFF ?>"></option>
+			<option disabled="disabled">-----</option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_reopened_min_severity ) ?>
 		</select>
 	</td>
@@ -227,7 +227,7 @@
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_bugnote_min_severity">
 			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-			<option value="<?php echo OFF ?>"></option>
+			<option disabled="disabled">-----</option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_bugnote_min_severity ) ?>
 		</select>
 	</td>
@@ -241,7 +241,7 @@
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_status_min_severity">
 			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-			<option value="<?php echo OFF ?>"></option>
+			<option disabled="disabled">-----</option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_status_min_severity ) ?>
 		</select>
 	</td>
@@ -255,7 +255,7 @@
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_priority_min_severity">
 			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-			<option value="<?php echo OFF ?>"></option>
+			<option disabled="disabled">-----</option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_priority_min_severity ) ?>
 		</select>
 	</td>
