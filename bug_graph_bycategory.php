@@ -202,6 +202,7 @@
         html_head_begin();
         html_css();
         html_content_type();
+        html_title( lang_get( 'by_category' ) );
     	html_head_end();
     	html_body_begin();
 	    echo '<table class="width100"><tr><td></td>';

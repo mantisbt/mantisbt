@@ -95,7 +95,7 @@
             } else {
                 echo '<br /><img src="bug_graph_bystatus.php?width=600&amp;interval=' . $f_interval . 
                     '&amp;start_date=' . $f_start . '&amp;end_date=' . $f_end .
-                    '&amp;summary=' . $t_summary . '&amp;show_table=0" alt="Bug Graph">';
+                    '&amp;summary=' . $t_summary . '&amp;show_table=0" alt="Bug Graph" />';
             }
         }       
         if ( ($t_body == 2 ) || ($t_body == 3) ) {
@@ -107,7 +107,7 @@
             } else {
                 echo '<br /><img src="bug_graph_bycategory.php?width=600&amp;interval=' . $f_interval . 
                     '&amp;start_date=' . $f_start . '&amp;end_date=' . $f_end .
-                    '&amp;summary=' . $t_summary . '&amp;show_table=0" alt="Bug Graph">';
+                    '&amp;summary=' . $t_summary . '&amp;show_table=0" alt="Bug Graph" />';
             }
         }
     }
