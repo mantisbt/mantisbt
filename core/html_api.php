@@ -740,12 +740,12 @@ function print_menu_graph() {
 		$t_icon_path = config_get( 'icon_path' );
 
 		echo '<br />';
-		echo '<a href="' . helper_mantis_url( 'summary_page.php' ) . '"><img src="' . $t_icon_path . 'synthese.gif" border="0" align="center" />' . lang_get( 'synthesis_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_status.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" align="center" />' . lang_get( 'status_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_priority.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" align="center" />' . lang_get( 'priority_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_severity.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" align="center" />' . lang_get( 'severity_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_category.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" align="center" />' . lang_get( 'category_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_resolution.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" align="center" />' . lang_get( 'resolution_link' ) . '</a>';
+		echo '<a href="' . helper_mantis_url( 'summary_page.php' ) . '"><img src="' . $t_icon_path . 'synthese.gif" border="0" alt="" />' . lang_get( 'synthesis_link' ) . '</a> | ';
+		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_status.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'status_link' ) . '</a> | ';
+		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_priority.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'priority_link' ) . '</a> | ';
+		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_severity.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'severity_link' ) . '</a> | ';
+		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_category.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'category_link' ) . '</a> | ';
+		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_resolution.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'resolution_link' ) . '</a>';
 	}
 }
 
