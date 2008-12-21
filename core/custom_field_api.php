@@ -719,7 +719,7 @@ function custom_field_destroy( $p_field_id ) {
 
 	# delete the definition
 	$query = "DELETE FROM $t_custom_field_table
-				  WHERE id=";
+				  WHERE id=" .  db_param();
 	db_query_bound( $query, Array( $c_field_id ) );
 
 	custom_field_clear_cache( $p_field_id );
