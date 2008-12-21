@@ -71,7 +71,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 	$t_vars = get_defined_vars();
 
 	foreach( array_keys( $t_vars ) as $t_var ) {
-		$t_lang_var = ereg_replace( '^s_', '', $t_var );
+		$t_lang_var = preg_replace( '/^s_/', '', $t_var );
 		if( $t_lang_var != $t_var ) {
 			$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
 		}

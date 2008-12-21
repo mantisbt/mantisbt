@@ -95,9 +95,9 @@ class ADODB_postgres7 extends ADODB_postgres64 {
 	  $a = array();
 	  while (!$rs->EOF) {
 	    if ($upper) {
-	      $a[strtoupper($rs->Fields('lookup_table'))][] = strtoupper(ereg_replace('"','',$rs->Fields('dep_field').'='.$rs->Fields('lookup_field')));
+	      $a[strtoupper($rs->Fields('lookup_table'))][] = strtoupper(str_replace('"','',$rs->Fields('dep_field').'='.$rs->Fields('lookup_field')));
 	    } else {
-	      $a[$rs->Fields('lookup_table')][] = ereg_replace('"','',$rs->Fields('dep_field').'='.$rs->Fields('lookup_field'));
+	      $a[$rs->Fields('lookup_table')][] = str_replace('"','',$rs->Fields('dep_field').'='.$rs->Fields('lookup_field'));
 	    }
 	    adodb_movenext($rs);
 	  }

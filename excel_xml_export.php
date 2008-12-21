@@ -44,7 +44,7 @@
 	helper_begin_long_process();
 
 	$t_export_title = excel_get_default_filename();
-	$t_export_title = ereg_replace( '[\/:*?"<>|]', '', $t_export_title );
+	$t_export_title = preg_replace( '/[\/:*?"<>|]/', '', $t_export_title );
 
 	$t_short_date_format = config_get( 'short_date_format' );
 

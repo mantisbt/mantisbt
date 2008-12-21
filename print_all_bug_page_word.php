@@ -50,7 +50,7 @@
 	# word or html export
 	if ( $f_type_page != 'html' ) {
 		$t_export_title = helper_get_default_export_filename( '' );
-		$t_export_title = ereg_replace( '[\/:*?"<>|]', '', $t_export_title );
+		$t_export_title = preg_replace( '/[\/:*?"<>|]/', '', $t_export_title );
 
 		# Make sure that IE can download the attachments under https.
 		header( 'Pragma: public' );
