@@ -37,7 +37,7 @@
 		'TTF_RANGE'      => array( $t_font_per_captcha )
 	);
 
-	$captcha =& new masc_captcha( $t_captcha_init );
+	$captcha = new masc_captcha( $t_captcha_init );
 	$captcha->make_captcha( $t_key );
 
 #
