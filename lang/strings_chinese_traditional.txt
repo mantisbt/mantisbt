@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Traditional Chinese (‪中文(繁體)‬)
@@ -189,7 +184,6 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = '無法連上 FTP 主機.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = '在目前的問題狀態, 處理者沒有適合的權限去處理這問題.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '專案名稱已經存在. 請返回上ㄧ頁輸入其他名稱.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '這專案名稱不合規定. 專案名稱不可為空白字串.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = '使用者找不到.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = '無法將登入資訊存入你的瀏覽器中. 可能你的帳號已經被刪除或是沒有開啟瀏覽器的 Cookie 功能?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '無法找到這使用者的設定值.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = '新的項目找不到.';

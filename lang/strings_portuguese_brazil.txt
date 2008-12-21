@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Brazilian Portuguese (Português do Brasil)
@@ -204,7 +199,6 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Incapaz de conectar ao servidor FTP.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'A pessoa atribuída ao caso não possui direitos de acesso suficientes para tratar o caso neste status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Um projeto com este nome já existe.  Por favor, volte e entre um nome diferente.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nome inválido de projeto especificado.  Nomes de projeto não pode ser em branco.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Usuário não encontrado.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'A informação de login armazenada pelo seu navegador é inválida.  Talvez sua conta tenha sido apagada?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'As preferências deste usuário não foram encontradas.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Notícia não encontrada.';

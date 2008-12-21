@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Korean (한국어)
@@ -194,7 +189,6 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'FTP 서버에 연결할 수 없습니�
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = '이슈 핸들러가 이 상태의 이슈를 다루기에 충분한 접근 권한을 가지고 있지 않습니다.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '이미 사용중인 프로젝트 이름입니다.  다른 이름을 사용하세요.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '올바르지 않은 프로젝트 이름입니다. 프로젝트 이름은 비워둘 수 없습니다.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = '사용자를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = '브라우저에 저장된 로그인 정보는 유효하지 않습니다. 계정이 삭제됐습니까?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '이 사용자는 설정 화면이 없습니다.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = '뉴스를 찾을 수 없습니다.';

@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Estonian (Eesti)
@@ -188,7 +183,6 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Ei õnnestu ühenduda FTP serveriga.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Probleemihaldur ei oma piisavaid õigusi antud staatusega probleemi jaoks.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Sellise nimega projekt on juba olemas.  Palun mine tagasi ja sisesta mõni teine nimi.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Lubamatu kujuga projekti nimi.  Projekti nimed ei tohi sisaldada tühikuid.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Kasutajat ei leitud.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Sinu veebilehitsaja Logini informatsioon on vigane.  Võib-olla on Su kasutajakonto kustutatud?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Selle kasutaja eelistusi ei leitud.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Uudiseid ei leitud.';

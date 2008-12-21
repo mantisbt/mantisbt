@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Serbian Cyrillic ekavian (ћирилица)
@@ -164,7 +159,6 @@ $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Polje u bazi nije pronadjeno.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Ne mogu da se konektujem na FTP server.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Projekat pod tim imenom vec postoji. Molim vratite se i unesite novo ime.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Pogresno ime projekta.  Imena projekta ne mogu biti prazni stringovi.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Korisnik nije pronadjen.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Informacija o nalogu u vašem intenet pretraživacu je pogrešna. Da li je vaš nalog izbrisan?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Parametri za korisnika nisu pronadeni.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Stavka Vesti nije pronadjena.';

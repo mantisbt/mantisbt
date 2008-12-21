@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Danish (Dansk)
@@ -186,7 +181,6 @@ $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database-felt ikke fundet.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Kunne ikke opnå forbindelse til fTP server.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Der findes allerede et projekt med dette navn. Gå venligst tilbage og vælg et andet navn.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ugyldigt projektnavn. Navnet på et projekt må ikke være tomt.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Bruger ikke fundet.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Log ind informationer gemt i din browser er ugyldige. Måske er din konto blevet slettet?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Præferencer for denne bruger kunne ikke findes.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Nye elementer ikke fundet.';

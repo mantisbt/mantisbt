@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Russian (Русский)
@@ -238,7 +233,6 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Не удается соединить
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'У обрабатывающего недостаточно прав для обработки вопроса с таким состоянием.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Проект с таким названием уже существует. Пожалуйста, вернитесь назад и введите другое название.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Недопустимое название проекта. Названия проектов не должны быть пустыми.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Пользователь не найден.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Параметры входа, сохраненные в вашем браузере, недопустимы. Может быть, ваша учетная запись удалена?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Не удается найти настройки для этого пользователя.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Новость на найдена.';

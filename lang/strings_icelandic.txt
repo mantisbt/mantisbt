@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Icelandic (Íslenska)
@@ -189,7 +184,6 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Get ekki tengst FTP þjóni.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Sá sem fer með verkbeiðnina hefur ekki nægilegan aðgang til þess að meðhöndla það á þessu stigi.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Verkefni með sama nafni er þegar til staðar. Farðu til baka og settu inn nýtt nafn.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ógilt verkefnisnafn uppgefið. Verkefnisnöfn geta ekki verið auð.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Notandi finnst ekki.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Upplýsingar um innskráningu geymdar á vafranum eru ógildar. Hugsanlega var aðgangi þínum eytt?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Stillingar fyrir þennan notanda fundust ekki.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Fréttaefni fannst ekki.';

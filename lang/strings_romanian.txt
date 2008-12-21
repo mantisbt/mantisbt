@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Romanian (Română)
@@ -186,7 +181,6 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'EROARE: Conectarea la serverul FTP nu 
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Procesorul de probleme nu are drepturi suficiente pentru a procesa problema aflată în acestă stare.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'EROARE: Există deja un proiect cu acest nume. Mergeţi înapoi şi introduceţi un nume diferit.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nume de proiect invalid. Numele de proiect nu poate fi nul.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'EROARE: Utiliztorul nu este găsit.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Informaţiile de conectare salvate de browser sunt invalide. Probabil contul dumneavoastră a fost şters?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Nu pot fi găsite preferinţele pentru acest utilizator.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'EROARE: Ştirea nu este găsită.';

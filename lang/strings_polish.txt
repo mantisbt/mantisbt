@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Polish (Polski)
@@ -211,7 +206,6 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Nie można nawiązać połączenia z s
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Operator nie ma wystarczających praw dostępu do modyfikacji zgłoszenia z tym stanem.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Projekt o tej nazwie już istnieje.  Proszę wrócić i podać inną nazwę.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Podano nieprawidłową nazwę projektu.  Nazwa projektu nie może być pusta.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Nie znaleziono użytkownika.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Informacja o logowaniu przechowywana przez Twoją przeglądarkę jest nieprawidłowa.  Być może twoje konto zostało usunięte.';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Nie można znaleźć ustawień tego użytkownika.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Nie znaleziono wiadomości.';

@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Japanese (日本語)
@@ -214,7 +209,6 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'FTPサーバに接続できません�
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = '妥当な権限を持っていないので、このステータスのチケットを取り扱うことはできません。';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'プロジェクト名は既に使用されています。戻って違うプロジェクト名を入力してください。';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'プロジェクト名が無効です。プロジェクト名はブランクではいけません。';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'ユーザーがありません。';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'ブラウザから送信されたログイン情報は無効です。おそらく、あなたのアカウントは削除されています。';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'ユーザーの選択情報がありません。';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'ニュースがありません。';

@@ -2,7 +2,7 @@
 /** Mantis - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  *
  * Mantis is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Revision$
- * $Author$
- * $Date$
- * $Id$
  */
 
 /** Egyptian Spoken Arabic (مصرى)
@@ -211,7 +206,6 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'غير قادر على الاتصال 
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'معالج القضايا لا يمتلك الصلاحية الكافية لمعالجة القضايا فى هذه الحالة.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'يوجد مشروع بهذا الاسم بالفعل. من فضلك عد وأدخل اسما مختلفا.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'اسم مشروع غير صحيح تم تحديده. أسماء المشاريع لا يمكن أن تكون فارغة.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'المستخدم لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'معلومات الدخول المخزنة بواسطة متصفحك غير صحيحة.  ربما تم حذف حسابك؟';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'التفضيلات لم يمكن العثور عليها لهذا المستخدم.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'مدخلة الأخبار لم يتم العثور عليها.';
