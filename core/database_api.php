@@ -270,7 +270,7 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 		}
 	}
 
-	if( $arr_parms != null && db_is_pgsql() ) {
+	if( $arr_parms != null && ( db_is_pgsql() || config_get_global( 'db_type' ) == 'odbc_mssql' ) ) {
 		$params = count( $arr_parms );
 		for( $i = 0;$i < $params;$i++ ) {
 			if( $arr_parms[$i] === false ) {
