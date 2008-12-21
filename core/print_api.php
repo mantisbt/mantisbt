@@ -1608,14 +1608,14 @@ function print_recently_visited() {
 function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_any = false, $p_multiple = false, $p_change_script = '' ) {
 	$t_control_array = $p_control_array;
 	if( $p_multiple ) {
-		$t_size = ' SIZE="5"';
-		$t_multiple = ' MULTIPLE';
+		$t_size = ' size="5"';
+		$t_multiple = ' multiple="multiple"';
 	} else {
 		$t_size = '';
 		$t_multiple = '';
 	}
 	$t_script = ( $p_change_script == '' ? '' : ' onchange="' . $p_change_script . '"' );
-	$t_info = sprintf( "<SELECT %s NAME=\"%s\" id=\"%s\"%s%s>", $t_multiple, $p_control_name, $p_control_name, $t_size, $t_script );
+	$t_info = sprintf( "<select %s name=\"%s\" id=\"%s\"%s%s>", $t_multiple, $p_control_name, $p_control_name, $t_size, $t_script );
 	if( $p_add_any ) {
 		array_unshift_assoc( $t_control_array, FILTER_META_ANY, lang_trans( '[any]' ) );
 	}
@@ -1623,16 +1623,16 @@ function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_
 		$t_sel = "";
 		if( is_array( $p_match ) ) {
 			if( in_array( $t_name, array_values( $p_match ) ) || in_array( $t_desc, array_values( $p_match ) ) ) {
-				$t_sel = " SELECTED";
+				$t_sel = ' selected="selected"';
 			}
 		} else {
 			if(( $t_name === $p_match ) || ( $t_desc === $p_match ) ) {
-				$t_sel = " SELECTED";
+				$t_sel = ' selected="selected"';
 			}
 		}
-		$t_info .= sprintf( "<OPTION%s VALUE=\"%s\">%s", $t_sel, $t_name, $t_desc );
+		$t_info .= sprintf( "<option%s value=\"%s\">%s</option>", $t_sel, $t_name, $t_desc );
 	}
-	$t_info .= "</SELECT>\n";
+	$t_info .= "</select>\n";
 	return $t_info;
 }
 
