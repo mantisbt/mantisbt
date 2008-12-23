@@ -83,9 +83,14 @@ $g_db_param_count = 0;
  */
 function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_db_schema = null, $p_pconnect = false ) {
 	global $g_db_connected, $g_db;
-
-	if( $p_dsn === false ) {
-		$t_db_type = config_get_global( 'db_type' );
+	$t_db_type = config_get_global( 'db_type' );
+	
+	if( !db_check_database_support( $t_db_type ) ) {
+		error_parameters( 0, 'PHP Support for database is not enabled' );
+		trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
+	}
+	
+	if( $p_dsn === false ) {		
 		$g_db = ADONewConnection( $t_db_type );
 
 		if( $p_pconnect ) {
@@ -134,6 +139,40 @@ function db_is_connected() {
 	global $g_db_connected;
 
 	return $g_db_connected;
+}
+
+/**
+ * Returns whether php supprot for a database is enabled
+ * @return bool indicating if php current supports the given database type
+ */
+function db_check_database_support( $p_db_type ) {
+	$t_support = false;
+	switch( $p_db_type ) {
+		case 'mysql':
+			$t_support = function_exists( 'mysql_connect' );
+			break;
+		case 'mysqli':
+			$t_support = function_exists( 'mysqli_connect' );
+			break;
+		case 'pgsql':
+			$t_support = function_exists( 'pg_connect' );
+			break;
+		case 'mssql':
+			$t_support = function_exists( 'mssql_connect' );
+			break;
+		case 'oci8':
+			$t_support = function_exists( 'OCILogon' );
+			break;
+		case 'db2':
+			$t_support = function_exists( 'db2_connect' );
+			break;
+		case 'odbc_mssql':
+			$t_support = function_exists( 'odbc_connect' );
+			break;
+		default:
+			$t_support = false;
+	}
+	return $t_support;
 }
 
 /**

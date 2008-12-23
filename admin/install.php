@@ -166,7 +166,7 @@ if( $t_config_exists ) {
 	if( 0 == $t_install_state ) {
 		print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
 		print_test( 'Checking Database connection settings exist', ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) ), true, 'database connection settings do not exist?' );
-		print_test( 'Checking PHP support for database type', check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
+		print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
 	}
 
 	$g_db = ADONewConnection( $f_db_type );
@@ -241,7 +241,7 @@ if( 2 == $t_install_state ) {
 <?php print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' )?>
 
 <!-- Checking DB support-->
-<?php print_test( 'Checking PHP support for database type', check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' )?>
+<?php print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' )?>
 
 <?php print_test( 'Setting Database Username', '' !== $f_db_username, true, 'database username is blank' )?>
 <?php print_test( 'Setting Database Password', '' !== $f_db_password, false, 'database password is blank' )?>
