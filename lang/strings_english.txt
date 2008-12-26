@@ -728,6 +728,7 @@ $s_archives = 'Archives';
 $s_rss = 'RSS';
 
 # manage_overview_page
+$s_site_information = 'Site Information';
 $s_mantis_version = 'Mantis Version';
 $s_schema_version = 'Schema Version';
 $s_site_path = 'Site Path';
