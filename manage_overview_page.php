@@ -40,7 +40,7 @@
 <table class="width75" align="center" cellspacing="1">
 
 <tr>
-<td class="form-title" width="30%">Site Information</td>
+<td class="form-title" width="30%"><?php echo lang_get( 'site_information' ) ?></td>
 </tr>
 
 <tr <?php echo helper_alternate_class() ?>>
