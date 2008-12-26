@@ -25,6 +25,7 @@
  *
  * @author Helix84
  * @author Lubos Magat <lubos@magat.sk>
+ * @author Rudko
  */
 
 $s_charset = 'utf-8';
@@ -91,6 +92,10 @@ $s_empty_password_sure_msg = 'Používateľ má prázdné heslo. Naozaj je to to
 $s_empty_password_button = 'Používať prázdne heslá';
 $s_reauthenticate_title = 'Overiť';
 $s_reauthenticate_message = 'Vstupujete na zabezpečenú stránku a vaša relácia vypršala. Prosím, overte sa, aby ste mohli pokračovať.';
+$s_no_category = '(Bez Kategórie)';
+$s_global_categories = 'Globálne Kategórie';
+$s_inherit = 'Zdedené Kategórie';
+$s_inherit_global = 'Zdedené Globálne Kategórie';
 $s_duplicate_of = 'duplicita %id';
 $s_has_duplicate = 'má duplicitné %id';
 $s_related_to = 'vo vzťahu s %id';
@@ -111,6 +116,7 @@ $s_make_private = 'Zmeniť na PRIVÁTNE';
 $s_make_public = 'Zmeniť na VEREJNÉ';
 $s_create_new_project_link = 'Vytvoriť nový projekt';
 $s_login_link = 'Prihlásenie';
+$s_select_option = '(zvoľ)';
 $s_bug_actiongroup_access = 'Nemáte potrebné oprávnenie k tejto činnosti.';
 $s_bug_actiongroup_status = 'Tento problém nejde previesť do požadovaného stavu';
 $s_close_bugs_conf_msg = 'Ste si istý že chcete zavrieť tieto problémy?';
@@ -150,6 +156,9 @@ $s_priority_link = 'podľa priority';
 $s_severity_link = 'podľa dôležitosti';
 $s_category_link = 'podľa kategórie';
 $s_resolution_link = 'podľa riešenia';
+$s_legend_still_open = 'Stále Otvorené';
+$s_legend_opened = 'Otvorené';
+$s_legend_closed = 'Zatvorené';
 $s_hide_button = 'Zobraziť iba označené';
 $s_printing_preferences_title = 'Ktoré polia sa budú tlačiť';
 $s_printing_options_link = 'Nastavenia tlače';
@@ -255,6 +264,7 @@ $s_new_account_greeting2 = '\'. Pre dokončenie vašej registrácie prejdite na 
 $s_new_account_username = 'Používateľské meno:';
 $s_new_account_message = 'Pokial si neprajete registráciu, ignorujte túto správu a nič sa nestane.\n\n';
 $s_new_account_do_not_reply = 'NEODPOVEDAJTE NA TÚTO SPRÁVU';
+$s_new_account_email = 'E-mail:';
 $s_new_account_IP = 'IP adresa vzdialeného počítača:';
 $s_new_account_signup_msg = 'Bol vytvorný nasledujúci účet:';
 $s_reset_request_msg = 'Niekdo (dúfam že vy) požiadal o zmenu hesla s overeným dopisom. Pokiad ste to vy nebol, ignorujte tento dopis a nič sa nestane.\n\nPokud jste si skutečnš přáli tuto změnu, navštivte Nasledujúci stránku a dokončete změnu přístupového hesla:';
@@ -314,7 +324,9 @@ $s_advanced_report = 'Rozšírený report';
 $s_advanced_view = 'Rozšírený pohľad';
 $s_advanced_update = 'Rozšírená aktualizácia';
 $s_refresh_delay = 'Interval pre refresh';
+$s_minutes = 'minúty';
 $s_redirect_delay = 'Pauza pre presmerovanie';
+$s_seconds = 'sekundy';
 $s_with_minimum_severity = 'S minimálnou dôležitosťou';
 $s_bugnote_order = 'Spôsob radenia problémov';
 $s_bugnote_order_asc = 'Vzostupne';
@@ -351,6 +363,8 @@ $s_delete_profile = 'Zmazať profil';
 $s_select_profile = 'Vybrať profil';
 $s_submit_button = 'Uložiť';
 $s_profile_updated_msg = 'Profil aktualizovaný...';
+$s_sponsor = 'Sponzor';
+$s_sponsor_verb = 'Sponzor';
 $s_account_updated_msg = 'Váš účet bol úspešne aktualizovaný...';
 $s_email_updated = 'Elektronická adresa bola úspešne aktualizovaná';
 $s_realname_duplicated = 'Skutočné meno je použité iným užívateľom';
@@ -781,3 +795,5 @@ $s_from_date = 'od';
 $s_to_date = 'komu';
 $s_on_date = 'v';
 $s_on = 'v';
+$s_graph_bug_page_link = 'Graf';
+$s_view_account_title = 'Informácie o užívateľovi';

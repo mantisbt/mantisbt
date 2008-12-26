@@ -29,6 +29,7 @@
  * @author Hermann-Josef Beckers, hjb-rheine@t-online.de
  * @author Martin Fuchs, martin-fuchs@gmx.net
  * @author Matthias Bauer, mantis-de@moeffju.de
+ * @author Melancholie
  * @author MichaelFrey
  * @author Revolus
  * @author Smeuser
@@ -214,6 +215,8 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Keine Verbindung zum FTP-Server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Der Problembearbeiter hat keine ausreichenden Rechte, um ein Problem mit diesem Status zu bearbeiten.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ein Projekt mit diesem Namen ist bereits vorhanden. Gehen Sie zurück und wählen Sie einen anderen Namen.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ungültiger Projektname. Projektnamen können nicht leer sein.';
+$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Benutzer mit Namen "%s" nicht gefunden.';
+$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Benutzer mit der ID "%d" nicht gefunden.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Die von Ihrem Browser gespeicherte Anmeldeinformation ist ungültig. Möglicherweise wurde Ihr Konto gelöscht.';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Für diesen Benutzer konnten keine Voreinstellungen gefunden werden.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Nachricht nicht gefunden.';
@@ -294,8 +297,10 @@ $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Das Feld "%s" enthält doppelte Spalte
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Das Feld "%s" enthält ungültiges Feld "%s".';
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Ungültiger Session Handler.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session Variable "%s" wurde nicht gefunden.';
+$MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Deine Sitzung ist ungültig geworden.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ungültiges Formular Sicherheits-Token. Haben Sie das Formular versehentlich zweimal abgeschickt?';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Auf diese Seite kann nicht mit dieser Methode zugegriffen werden.';
+$MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Ungültiges Sortierfeld.';
 $s_login_error = 'Ihr Konto ist deaktiviert oder gesperrt (aufgrund von zu vielen fehlgeschlagenen Anmeldeversuchen) oder der eingegebene Benutzer/das Passwort ist falsch.';
 $s_login_cookies_disabled = 'Ihr Web-Browser akzeptiert keine Cookies.';
 $s_go_back = 'Zurück';
@@ -358,6 +363,7 @@ $s_email_notification_title_for_action_dependant_on_relationship_deleted = 'Das 
 $s_email_notification_title_for_action_blocks_relationship_deleted = 'Das folgende Problem ist nicht mehr VORAUSSETZUNG FÜR Problem %s..';
 $s_email_notification_title_for_action_relationship_child_resolved = 'Das VERWANDTE Problem %s wurde ERLEDIGT.';
 $s_email_notification_title_for_action_relationship_child_closed = 'Das VERWANDTE Problem %s wurde GESCHLOSSEN.';
+$s_email_notification_title_for_action_monitor = 'Angelegenheit %s wird nun von Benutzer %s überwacht.';
 $s_email_reporter = 'Berichtet von';
 $s_email_handler = 'Zugewiesen an';
 $s_email_project = 'Projekt';
@@ -375,6 +381,8 @@ $s_email_date_submitted = 'Erstellt am';
 $s_email_last_modified = 'Letzte Aktualisierung';
 $s_email_summary = 'Zusammenfassung';
 $s_email_description = 'Beschreibung';
+$s_email_additional_information = 'Zusätzliche Informationen';
+$s_email_steps_to_reproduce = 'Schritte die zu dem Problem führen';
 $s_account_protected_msg = 'Konto geschützt. Kann keine Änderungen vornehmen...';
 $s_account_removed_msg = 'Ihr Konto wurde entfernt...';
 $s_confirm_delete_msg = 'Sind Sie sicher, dass Sie Ihr Konto löschen möchten?';
@@ -398,7 +406,9 @@ $s_advanced_report = 'Erweiterter Bericht';
 $s_advanced_view = 'Erweiterte Darstellung';
 $s_advanced_update = 'Erweitertes Update';
 $s_refresh_delay = 'Aktualisierungsverzögerung';
+$s_minutes = 'Minuten';
 $s_redirect_delay = 'Verzögerung für Weiterleitung';
+$s_seconds = 'Sekunden';
 $s_with_minimum_severity = 'mit mindestens Schweregrad';
 $s_bugnote_order = 'Problemnotiz Sortierreihenfolge';
 $s_bugnote_order_asc = 'Aufsteigend';
@@ -545,6 +555,9 @@ $s_bugnote_updated_msg = 'Notiz wurde erfolgreich geändert...';
 $s_edited_on = 'bearbeitet am:';
 $s_hide_content = 'Blende Inhalt aus';
 $s_show_content = 'Blende Inhalt ein';
+$s_total_queries_executed = 'Abfragen ausgeführt (gesamt)';
+$s_unique_queries_executed = 'einzelne Abfragen ausgeführt';
+$s_memory_usage_in_kb = 'Speicherverbrauch: %s KB';
 $s_click_to_login = 'Anmeldung: bitte hier klicken';
 $s_login_page_info = 'Willkommen beim Issue Tracker.';
 $s_login_title = 'Anmeldung';
@@ -677,6 +690,7 @@ $s_plugin_depends = 'Abhängigkeiten';
 $s_plugin_no_depends = 'keine Abhängigkeiten';
 $s_plugin_priority = 'Priorität';
 $s_plugin_protected = 'Geschützt';
+$s_plugin_update = 'Aktualisierung';
 $s_plugin_actions = 'Aktionen';
 $s_plugin_install = 'Installation';
 $s_plugin_uninstall = 'Deinstallation';

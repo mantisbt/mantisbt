@@ -586,6 +586,7 @@ $s_newer_news_link = 'Nieuwer nieuws';
 $s_older_news_link = 'Ouder nieuws';
 $s_archives = 'Archieven';
 $s_rss = 'RSS';
+$s_site_information = 'Siteinformatie';
 $s_mantis_version = 'Versie Mantis';
 $s_schema_version = 'Versie schema';
 $s_site_path = 'Sitepad';

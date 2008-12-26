@@ -27,6 +27,7 @@
  * @author Juha, jomustaj@iki.fi
  * @author Nike
  * @author Silvonen
+ * @author Str4nd
  * @author Tomi Hurenius, tkh@iki.fi
  */
 
@@ -222,7 +223,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Samanniminen kategoria on jo olemassa
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Kopiointitoimea ei ole määritelty.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategoriaa ei löydy.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Samanniminen versio on jo olemassa.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versiota ei löydy.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versiota %s ei löydy.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Virheellinen käyttäjätunnus.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Käyttäjätaso liian alhainen';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Syöttämäsi nimi on jo käytössä toisella käyttäjällä käyttäjänimenä. Ole hyvä, ja syötä uusi nimi.';
@@ -489,6 +490,9 @@ $s_bugnote_edit_link = 'Muokkaa';
 $s_closed_bug_button = 'Sulje tapahtuma';
 $s_bugnote_updated_msg = 'Muistiinpano onnistuneesti päivitetty...';
 $s_edited_on = 'muokattu:';
+$s_hide_content = 'Piilota sisältö';
+$s_show_content = 'Näytä sisältö';
+$s_memory_usage_in_kb = 'Muistin käyttö: %s KB';
 $s_click_to_login = 'Klikkaa tästä kirjautuaksesi sisään';
 $s_login_page_info = 'Tervetuloa projektitapahtumaseurantaan.';
 $s_login_title = 'Kirjaudu sisään';
@@ -511,6 +515,7 @@ $s_open_and_reported_to_me = 'Avoimia ja minun raportoimia';
 $s_newer_news_link = 'Uudempia uutisia';
 $s_older_news_link = 'Vanhempia uutisia';
 $s_archives = 'Arkistot';
+$s_rss = 'RSS';
 $s_created_user_part1 = 'Luotu käyttäjätunnus';
 $s_created_user_part2 = 'käyttöoikeustasolla';
 $s_create_new_account_title = 'Luo uusi käyttäjätunnus';
