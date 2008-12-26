@@ -53,11 +53,11 @@
 <td><?php echo config_get( 'database_version' ) ?></td>
 </tr>
 
-<?php if ( $t_is_admin ) { ?>
 <tr class="spacer">
 <td></td>
 </tr>
 
+<?php if ( $t_is_admin ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 <td class="category"><?php echo lang_get( 'site_path' ) ?></td>
 <td><?php echo config_get( 'absolute_path' ) ?></td>
@@ -72,7 +72,13 @@
 <td class="category"><?php echo lang_get( 'plugin_path' ) ?></td>
 <td><?php echo config_get( 'plugin_path' ) ?></td>
 </tr>
+
+<tr class="spacer">
+<td></td>
+</tr>
 <?php } ?>
+
+<?php event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) ) ?>
 
 </table>
 
