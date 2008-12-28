@@ -612,6 +612,10 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_description = $p_issue['description'];
 	$t_custom_fields = $p_issue['custom_fields'];
 
+	$v_fixed_in_version = $p_issue['fixed_in_version'];
+	$v_version = $p_issue['version'];
+	$v_target_version = $p_issue['target_version'];
+
 	if( $t_reporter_id == 0 ) {
 		$t_reporter_id = $t_user_id;
 	}
