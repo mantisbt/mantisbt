@@ -129,6 +129,7 @@ $s_cumulative = 'Cumulativo';
 $s_printing_options_link = 'Opcións de impresión';
 $s_bugnote_date = 'Data da nota';
 $s_bugnote_description = 'Descrición da nota';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'O proxecto "%d" non foi atopado.';
 $s_go_back = 'Voltar';
 $s_proceed = 'Prema aquí para proceder';
 $s_switch = 'Cambiar';

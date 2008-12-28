@@ -594,6 +594,7 @@ $s_newer_news_link = 'Nouvelles récentes';
 $s_older_news_link = 'Anciennes nouvelles';
 $s_archives = 'Archives';
 $s_rss = 'RSS';
+$s_site_information = 'Informations sur le site';
 $s_mantis_version = 'Version de Mantis';
 $s_schema_version = 'Version du schéma';
 $s_site_path = 'Chemin du site';

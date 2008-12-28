@@ -27,6 +27,7 @@
  * @author Dr. Jürgen Kehrel, jkehrel@kehrel.de
  * @author Heiko Gierer, gierer@rittershaus.de
  * @author Hermann-Josef Beckers, hjb-rheine@t-online.de
+ * @author Imre
  * @author Martin Fuchs, martin-fuchs@gmx.net
  * @author Matthias Bauer, mantis-de@moeffju.de
  * @author Melancholie
@@ -581,8 +582,10 @@ $s_newer_news_link = 'Neuere Nachrichten';
 $s_older_news_link = 'Ältere Nachrichten';
 $s_archives = 'Archiv';
 $s_rss = 'RSS';
+$s_site_information = 'Seiteninformationen';
 $s_mantis_version = 'Mantis Version';
 $s_schema_version = 'Schema Version';
+$s_site_path = 'Seitenpfad';
 $s_plugin_path = 'Plug-in Pfad';
 $s_created_user_part1 = 'Benutzer angelegt';
 $s_created_user_part2 = 'mit Zugriffsberechtigung';
@@ -955,6 +958,7 @@ $s_move_bug_button = 'Verschieben';
 $s_attached_files = 'Angehängte Dateien';
 $s_publish = 'Veröffentlichen';
 $s_cached = 'Zwischengespeichert';
+$s_add_user_to_monitor = 'Hinzufügen';
 $s_view_advanced_link = 'erweiterte Anzeige';
 $s_viewing_bug_simple_details_title = 'Einfache Problemansicht anzeigen';
 $s_no_users_monitoring_bug = 'Keine Benutzer beobachten dieses Problem.';
@@ -982,6 +986,7 @@ $s_custom_field_access_level_r = 'Berechtigung Lesen';
 $s_custom_field_access_level_rw = 'Berechtigung Schreiben';
 $s_custom_field_length_min = 'Mindestlänge';
 $s_custom_field_length_max = 'Maximallänge';
+$s_custom_field_filter_by = 'Zum Filter hinzufügen';
 $s_custom_field_advanced = 'Erweitert';
 $s_custom_field_display_report = 'Bei Problemeingabe anzeigen';
 $s_custom_field_display_update = 'Bei Problemaktualisierung anzeigen';

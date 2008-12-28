@@ -24,6 +24,7 @@
  * @file
  *
  * @author Meno25
+ * @author OsamaK
  */
 
 $s_charset = 'utf-8';
@@ -580,6 +581,7 @@ $s_newer_news_link = 'أخبار أجدد';
 $s_older_news_link = 'أخبار أقدم';
 $s_archives = 'أرشيفات';
 $s_rss = 'آر إس إس';
+$s_site_information = 'معلومات الموقع';
 $s_mantis_version = 'نسخة مانتيس';
 $s_schema_version = 'نسخة سكيما';
 $s_site_path = 'مسار الموقع';
