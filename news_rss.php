@@ -144,13 +144,10 @@
 		$author = string_rss_links( user_get_name( $v_poster_id ) );
 		if ( access_has_global_level( config_get( 'show_user_email_threshold' ) ) ) {
 			$t_author_email = user_get_field( $v_poster_id, 'email' );
-			if ( is_blank( $t_author_email ) ) {
-				$t_author_email = $author . '@example.com';
+			if ( ! is_blank( $t_author_email ) ) {
+				$author .= ' &lt;' . $t_author_email . '&gt;';
 			}
-		} else {
-			$t_author_email = $author . '@example.com';
 		}
-		$author .= ' &lt;' . $t_author_email . '&gt;';
 
 		# $comments = 'http://www.example.com/sometext.php?somevariable=somevalue&comments=1';	# url to comment page rss 2.0 value
 		$comments = '';
