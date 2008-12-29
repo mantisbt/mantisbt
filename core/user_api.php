@@ -739,7 +739,7 @@ function user_get_realname( $p_user_id ) {
 
 # --------------------
 # return the username or a string "user<id>" if the user does not exist
-# if show_realname is set, replace the name with a realname (if set)
+# if $g_show_realname is set and real name is not empty, return it instead
 function user_get_name( $p_user_id ) {
 	$row = user_cache_row( $p_user_id, false );
 
