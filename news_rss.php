@@ -27,7 +27,7 @@
 
 	$t_core_path = config_get( 'core_path' );
 
-	require_once( $t_core_path . 'class.RSSBuilder.inc.php' );
+	require_once( $t_core_path . 'rssbuilder/class.RSSBuilder.inc.php' );
 	require_once( $t_core_path . 'news_api.php' );
 	require_once( $t_core_path . 'project_api.php' );
 	require_once( $t_core_path . 'print_api.php' );
@@ -155,7 +155,7 @@
 		# optional mod_im value for dispaying a different pic for every item
 		$image = '';
 
-		$rssfile->addItem(	$about, $title, $link, $description, $subject, $date,
+		$rssfile->addRSSItem( $about, $title, $link, $description, $subject, $date,
 					$author, $comments, $image);
 	}
 
