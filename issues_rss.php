@@ -187,7 +187,7 @@
 		$subject = string_rss_links( category_full_name( $t_bug->category_id, false ) );
 
 		# optional DC value
-		$date = date( 'Y-m-d\TH:i:sO', $t_bug->last_updated );
+		$date = $t_bug->last_updated;
 
 		# author of item
 		$author = string_rss_links( user_get_name( $t_bug->reporter_id ) );

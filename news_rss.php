@@ -128,7 +128,6 @@
 
 		$v_headline 	= string_rss_links( $v_headline );
 		$v_body 	= string_rss_links( $v_body );
-		$v_date_posted 	= date( 'Y-m-d\TH:i:sO', $v_date_posted );
 
 		$about = $link = config_get( 'path' ) . "news_view_page.php?news_id=$v_id";
 		$title = $v_headline;
