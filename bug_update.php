@@ -132,7 +132,8 @@
 			continue;
 		}
 
-		if ( $t_def['require_' . $t_custom_status_label] && !gpc_isset( "custom_field_$t_id" ) ) {
+		$t_cf_value = gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], NULL );
+		if ( $t_def['require_' . $t_custom_status_label] && ( !gpc_isset( "custom_field_$t_id" ) || empty( $t_cf_value ) ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
@@ -142,7 +143,7 @@
 			continue;
 		}
 
-		if ( !custom_field_set_value( $t_id, $f_bug_id, gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], null ) ) ) {
+		if ( !custom_field_set_value( $t_id, $f_bug_id, $t_cf_value ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}
