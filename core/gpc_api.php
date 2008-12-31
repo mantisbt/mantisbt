@@ -120,6 +120,23 @@ function gpc_get_bool( $p_var_name, $p_default = false ) {
 # ===================================
 # Custom Field Functions
 # ===================================
+# see if a custom field variable is set.  Uses gpc_isset().
+function gpc_isset_custom_field( $p_var_name, $p_custom_field_type ) {
+	switch ($p_custom_field_type ) {
+		case CUSTOM_FIELD_TYPE_DATE:
+			// date field is three dropdowns that default to 0
+			// Dropdowns are always present, so check if they are set
+			return gpc_isset( "custom_field_" . $p_var_name . "_day" ) &&
+				gpc_get_int( "custom_field_" . $p_var_name . "_day", 0 ) != 0 &&
+				gpc_isset( "custom_field_" . $p_var_name . "_month" ) &&
+				gpc_get_int( "custom_field_" . $p_var_name . "_month", 0 ) != 0 &&
+				gpc_isset( "custom_field_" . $p_var_name . "_year" ) &&
+				gpc_get_int( "custom_field_" . $p_var_name . "_year", 0 ) != 0 ;
+		default:
+			return gpc_isset( "custom_field_" . $p_var_name);
+	}
+}
+
 # Retrieve a custom field variable.  Uses gpc_get().
 #  If you pass in *no* default, an error will be triggered if
 #  the variable does not exist
@@ -136,7 +153,6 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			if( is_array( $t_values ) ) {
 				return implode( '|', $t_values );
 			} else {
-			    echo 'not an array';
 				return '';
 			}
 			break;
