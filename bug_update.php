@@ -123,14 +123,13 @@
 			continue;
 		}
 
-		$t_cf_value = gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], NULL );
-		if ( $t_def['require_' . $t_custom_status_label] && ( !gpc_isset( "custom_field_$t_id" ) || empty( $t_cf_value ) ) ) {
+		if ( $t_def['require_' . $t_custom_status_label] && !gpc_isset_custom_field( $t_id, $t_def['type'] ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
 		# Only update the field if it is posted 
-		if ( !gpc_isset( "custom_field_$t_id" ) ) {
+		if ( !gpc_isset_custom_field( $t_id, $t_def['type'] ) ) {
 			continue;
 		}
 
