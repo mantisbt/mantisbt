@@ -92,9 +92,48 @@ $ git checkout -b master-1.1.x origin/master-1.1.x
 	</sect1>
 
 	<sect1 id="dev.contrib.branch">
-		<title>Maintaining Branches</title>
+		<title>Maintaining Tracking Branches</title>
 
-		<para></para>
+		<para>
+			In order to keep your local repository up to date with the official,
+			there are a few simple commands needed for any tracking branches that you
+			may have, including <literal>master</literal> and
+			<literal>master-1.1.x</literal>.
+		</para>
+
+		<para>
+			First, you'll need to got the latest information from the remote repo:
+		</para>
+
+		<programlisting>
+$ git fetch origin
+		</programlisting>
+
+		<para>
+			Then for each tracking branch you have, enter the following commands:
+		</para>
+
+		<programlisting>
+$ git checkout master
+$ git rebase origin/master
+		</programlisting>
+
+		<para>
+			Alternatively, you map combine the above steps into a single command
+			for each remote tracking branch:
+		</para>
+
+		<programlisting>
+$ git checkout master
+$ git pull --rebase
+		</programlisting>
+	</sect1>
+
+	<sect1 id="dev.contrib.prepare">
+		<title>Preparing Feature Branches</title>
+
+		<para>
+		</para>
 	</sect1>
 
 	<sect1 id="dev.contrib.submit">
@@ -136,9 +175,9 @@ $ git checkout -b master-1.1.x origin/master-1.1.x
 			<para>
 				Assuming that you have an existing local branch that you've kept up to date
 				with <literal>master</literal> as described in
-				<link linkend="dev.contrib.branch">Maintaining Branches</link>, generating
-				a formatted patch set should be relatively straightforward, using an
-				appropriate filename as the target of the patch set:
+				<link linkend="dev.contrib.prepare">Preparing Feature Branches</link>,
+				generating a formatted patch set should be relatively straightforward,
+				using an appropriate filename as the target of the patch set:
 			</para>
 
 			<programlisting>
