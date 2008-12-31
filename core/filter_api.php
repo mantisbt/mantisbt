@@ -1630,6 +1630,12 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 	# tags
 	$c_tag_string = trim( $t_filter[FILTER_PROPERTY_TAG_STRING] );
+	$c_tag_select = trim( $t_filter[FILTER_PROPERTY_TAG_SELECT] );
+	if( is_blank( $c_tag_string ) && !is_blank( $c_tag_select ) && $c_tag_select != 0 ) {
+		$t_tag = tag_get( $c_tag_select );
+		$c_tag_string = $t_tag['name'];
+	}
+
 	if( !is_blank( $c_tag_string ) ) {
 		$t_tags = tag_parse_filters( $c_tag_string );
 
