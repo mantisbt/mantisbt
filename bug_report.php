@@ -102,7 +102,7 @@
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
-		if ( !custom_field_validate( $t_id, $t_cf_value ) ) {
+		if ( !custom_field_validate( $t_id, gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], NULL ) ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}
