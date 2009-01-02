@@ -106,6 +106,9 @@
 
 	$f_report_stay			= gpc_get_bool( 'report_stay', false );
 
+	# don't index bug report page
+	html_robots_noindex();
+
 	html_page_top1( lang_get( 'report_bug_link' ) );
 	html_page_top2();
 

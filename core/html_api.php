@@ -70,6 +70,8 @@ require_once( $t_core_dir . 'php_api.php' );
 
 $g_rss_feed_url = null;
 
+$g_robots_meta = '';
+
 # flag for error handler to skip header menus
 $g_error_send_page_header = true;
 
@@ -85,6 +87,14 @@ function html_set_rss_link( $p_rss_feed_url ) {
 		global $g_rss_feed_url;
 		$g_rss_feed_url = $p_rss_feed_url;
 	}
+}
+
+# --------------------
+# This method must be called before the html_page_top* methods.  It marks the page as not
+# for indexing.
+function html_robots_noindex() {
+	global $g_robots_meta;
+	$g_robots_meta = 'noindex,follow';
 }
 
 # --------------------
@@ -106,6 +116,12 @@ function html_page_top1( $p_page_title = null ) {
 	html_css();
 	html_content_type();
 	include( config_get( 'meta_include_file' ) );
+
+	global $g_robots_meta;
+	if ( !is_blank( $g_robots_meta ) ) {
+		echo "\t", '<meta name="robots" content="', $g_robots_meta, '" />', "\n";
+	}
+
 	html_rss_link();
 
 	$t_favicon_image = config_get( 'favicon_image' );

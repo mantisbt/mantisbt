@@ -57,6 +57,9 @@
 
 	compress_enable();
 
+	# don't index view issues pages
+	html_robots_noindex();
+
 	html_page_top1( lang_get( 'view_bugs_link' ) );
 
 	if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {

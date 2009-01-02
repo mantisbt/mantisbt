@@ -30,6 +30,9 @@
 		print_header_redirect( 'login_page.php' );
 	}
 
+	# signup page shouldn't be indexed by search engines
+	html_robots_noindex();
+
 	html_page_top1();
 	html_page_top2a();
 

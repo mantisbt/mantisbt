@@ -40,6 +40,9 @@
 
 	compress_enable();
 
+	# don't index my view page
+	html_robots_noindex();
+
 	html_page_top1( lang_get( 'my_view_link' ) );
 
 	if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {

@@ -33,6 +33,9 @@
 		trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
 	}
 
+	# don't index lost password page
+	html_robots_noindex();
+
 	html_page_top1();
 	html_page_top2a();
 
