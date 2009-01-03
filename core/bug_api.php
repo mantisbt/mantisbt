@@ -102,7 +102,7 @@
 		}	
 		
 		if( !is_int( $p_bug_datebase_result['date_submitted'] ) )
-			$p_bug_datebase_result['date_submitted']	= db_unixtimestamp( $p_bug_datebase_result['date_submitted']['date_submitted'] );
+			$p_bug_datebase_result['date_submitted']	= db_unixtimestamp( $p_bug_datebase_result['date_submitted'] );
 		if( !is_int( $p_bug_datebase_result['last_updated'] ) )
 			$p_bug_datebase_result['last_updated']	= db_unixtimestamp( $p_bug_datebase_result['last_updated'] );
 		$g_cache_bug[ $p_bug_datebase_result['id'] ] = $p_bug_datebase_result;
