@@ -29,7 +29,7 @@ $t_plugin_path = config_get( 'plugin_path' );
 $f_page= gpc_get_string( 'page' );
 $t_matches = array();
 
-if ( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+)/', $f_page, $t_matches ) ) {
+if ( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+[\/a-zA-Z0-9_-]*)/', $f_page, $t_matches ) ) {
 	trigger_error( ERROR_GENERIC, ERROR );
 }
 

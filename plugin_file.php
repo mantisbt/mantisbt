@@ -33,7 +33,7 @@ $t_plugin_path = config_get( 'plugin_path' );
 $f_file = gpc_get_string( 'file' );
 $t_matches = array();
 
-if ( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9._-]+)/', $f_file, $t_matches ) ) {
+if ( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+[\/a-zA-Z0-9_-]*\.?[a-zA-Z0-9_-]*)/', $f_file, $t_matches ) ) {
 	trigger_error( ERROR_GENERIC, ERROR );
 }
 
