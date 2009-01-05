@@ -24,6 +24,7 @@
  * @file
  *
  * @author Claudiu Cristea <claudiu@cristea.info>
+ * @author KlaudiuMihaila
  */
 
 $s_charset = 'utf-8';
@@ -79,6 +80,7 @@ $s_delete_bugnote_sure_msg = 'Sigur doriţi ştergerea acestui comentariu?';
 $s_bug_relationships = 'Relaţionări';
 $s_empty_password_sure_msg = 'Utilizatorul are o parolă nulă. Sigur doriţi asta?';
 $s_empty_password_button = 'Utilizează parolă nulă';
+$s_global_categories = 'Categorii Globale';
 $s_duplicate_of = 'duplicat al %id';
 $s_has_duplicate = 'are duplicat %id';
 $s_related_to = 'relaţionat cu %id';
@@ -164,23 +166,24 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'ERROR: Acest tip de fişier nu este acce
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'EROARE: Calea specificată nu există. Verificaţi configuraţia proiectului.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: Acest fişier există deja. Ştergeţi vechiul fişier.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'ERROR: Există deja un proiect cu acest nume.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: A fost omis un câmp obligatoriu. Reverificaţi datele.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Un câmp necesar "%1$s" a fost vid. Reverificaţi datele de intrare.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'ERROR: Acest cont este protejat şi nu poate fi accesat până când protecţia nu este ridicată.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'ERROR: Acces interzis.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'ERROR: Fişierul nu a fost încărcat. Rugaţi-l pe administrator să verifice şi să corecteze această problemă.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ERROR: Fişierul nu a fost încărcat. Se pare că fişierul are o dimensiune mai mare decât cea permisă.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'ERROR: Un parametru obligatoriu pentru pagina aceasta nu a fost găsit.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Un parametru obligatoriu pentru pagina aceasta (%1$s) nu a fost găsit.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Acest nume de utilizator este deja folosit de altcineva. Întoarceţi-vă şi alegeţi alt nume.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Opţiunea de configurare \'%s\' nu e găsită.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Opţiunea de configurare \'%s\' nu poate fi can not be setată în baza de date. Trebuie să fie configurată în config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Şirul \'%s\' nu este găsit.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'EROARE: Comentariul nu este găsit.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'EROARE: Proiectul nu este găsit.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Proiectul "%1$d" nu este găsit.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Câmpul \'%s\' din baza de date nu este găsit.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'EROARE: Conectarea la serverul FTP nu este posibilă.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Procesorul de probleme nu are drepturi suficiente pentru a procesa problema aflată în acestă stare.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'EROARE: Există deja un proiect cu acest nume. Mergeţi înapoi şi introduceţi un nume diferit.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nume de proiect invalid. Numele de proiect nu poate fi nul.';
+$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Utilizatorul cu numele "%1$s" nu este găsit.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Informaţiile de conectare salvate de browser sunt invalide. Probabil contul dumneavoastră a fost şters?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Nu pot fi găsite preferinţele pentru acest utilizator.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'EROARE: Ştirea nu este găsită.';

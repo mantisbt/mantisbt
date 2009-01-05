@@ -512,6 +512,7 @@ $s_bugnote_edit_link = 'Alterar';
 $s_closed_bug_button = 'Fechar Caso';
 $s_bugnote_updated_msg = 'A anotação foi atualizada com sucesso...';
 $s_edited_on = 'alterado em:';
+$s_hide_content = 'Ocultar Conteúdo';
 $s_show_content = 'Mostrar Conteúdo';
 $s_click_to_login = 'Clique aqui para acessar';
 $s_login_page_info = 'Bem-vindo ao Gerenciador de Casos.';
