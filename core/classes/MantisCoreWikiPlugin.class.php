@@ -19,6 +19,18 @@
 require_once( 'MantisWikiPlugin.class.php' );
 
 /**
+ * Base that uses the old style wiki definitions from config_inc.php
+ */
+abstract class MantisCoreWikiPlugin extends MantisWikiPlugin {
+	function config() {
+		return array(
+			'root_namespace' => config_get_global( 'wiki_root_namespace' ),
+			'engine_url' => config_get_global( 'wiki_engine_url' ),
+		);
+	}
+}
+
+/**
  * Basic Dokuwiki support with old-style wiki integration.
  * @package MantisBT
  * @subpackage classes 
