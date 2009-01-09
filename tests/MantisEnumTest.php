@@ -24,8 +24,7 @@
 
 require_once 'PHPUnit/Framework.php';
 
-$t_root_path = dirname( dirname( __FILE__ ) )  . DIRECTORY_SEPARATOR;
-require_once $t_root_path . 'core/classes/MantisEnum.class.php';
+require_once 'MantisEnum.class.php';
 
 /**
  * Test cases for MantisEnum class.
