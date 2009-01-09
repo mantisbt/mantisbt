@@ -127,6 +127,9 @@
 		<textarea name="description" cols="60" rows="5"></textarea>
 	</td>
 </tr>
+
+<?php event_signal( 'EVENT_MANAGE_PROJECT_CREATE_FORM' ) ?>
+
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" class="button" value="<?php echo lang_get( 'add_project_button' ) ?>" />
