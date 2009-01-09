@@ -44,7 +44,7 @@ function log_event( $p_level, $p_msg ) {
 		return;
 	}
 
-	$t_now = date( config_get( 'complete_date_format' ) );
+	$t_now = date( config_get_global( 'complete_date_format' ) );
 	$t_level = $g_log_levels[$p_level];
 
 	$t_plugin_event = '[' . $t_level . '] ' . $p_msg;
