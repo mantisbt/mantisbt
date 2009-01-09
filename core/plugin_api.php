@@ -581,7 +581,7 @@ function plugin_upgrade( $p_plugin ) {
 
 		if( $t_schema[$i][0] == 'InsertData' ) {
 			$t_sqlarray = array(
-				'INSERT INTO ' . $t_schema[$i][0] . $t_schema[$i][1],
+				'INSERT INTO ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
 			);
 		} elseif( $t_schema[$i][0] == 'UpdateSQL' ) {
 			$t_sqlarray = array(
