@@ -142,6 +142,8 @@
 	</td>
 </tr>
 
+<?php event_signal( 'EVENT_MANAGE_PROJECT_FORM', array( $f_project_id ) ); ?>
+
 <!-- Submit Button -->
 <tr>
 	<td>&nbsp;</td>
@@ -625,6 +627,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 }
 ?>
 
+<?php event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) ); ?>
 
 <!-- PROJECT VIEW STATUS -->
 <br />

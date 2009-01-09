@@ -41,6 +41,7 @@
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
 	project_update( $f_project_id, $f_name, $f_description, $f_status, $f_view_state, $f_file_path, $f_enabled, $f_inherit_global );
+	event_signal( 'EVENT_MANAGE_PROJECT_UPDATE', array( $f_project_id ) );
 
 	form_security_purge( 'manage_proj_update' );
 
