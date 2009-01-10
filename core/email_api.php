@@ -833,7 +833,12 @@ function email_send( $p_email_data ) {
 		foreach( $t_email_data->metadata['headers'] as $t_key => $t_value ) {
 			switch( $t_key ) {
 				case 'Message-ID':
-					$mail->set( 'MessageID', $t_value );
+					/* Note: hostname can never be blank here as we set metadata['hostname']
+					   in email_store() where mail gets queued. */
+						if ( !strchr( $t_value, '@' ) && !is_blank( $mail->Hostname ) ) {
+							$t_value = $t_value . '@' . $mail->Hostname;
+						}
+					$mail->set( 'MessageID', "<$t_value>" );
 					break;
 				case 'In-Reply-To':
 					$mail->AddCustomHeader( "$t_key: <{$t_value}@{$mail->Hostname}>" );
