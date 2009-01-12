@@ -300,7 +300,7 @@ function print_tag_input( $p_bug_id = 0, $p_string = "" ) {
 	?>
 		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
 		<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo string_attribute( $p_string )?>" />
-		<select <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select" onchange="tag_string_append( this.options[ this.selectedIndex ].label );">
+		<select <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select" onchange="tag_string_append( this.options[ this.selectedIndex ].title );">
 			<?php print_tag_option_list( $p_bug_id );?>
 		</select>
 		<?php
@@ -322,7 +322,7 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 		if ( !empty( $row['description'] ) ) {
 			$t_string .= ' - ' . substr( $row['description'], 0, 20 );
 		}
-		echo '<option value="', $row['id'], '" label="', $row['name'], '">', $t_string, '</option>';
+		echo '<option value="', $row['id'], '" title="', $row['name'], '">', $t_string, '</option>';
 	}
 }
 
