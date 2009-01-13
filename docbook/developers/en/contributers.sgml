@@ -119,7 +119,7 @@ $ git rebase origin/master
 		</programlisting>
 
 		<para>
-			Alternatively, you map combine the above steps into a single command
+			Alternatively, you may combine the above steps into a single command
 			for each remote tracking branch:
 		</para>
 
@@ -133,7 +133,78 @@ $ git pull --rebase
 		<title>Preparing Feature Branches</title>
 
 		<para>
+			For each local or shared feature branch that you are working on, you will
+			need to keep it up to date with the appropriate master branch.  There are
+			multiple methods for doing this, each better suited to a different type of
+			feature branch.  <emphasis>Both methods assume that you have already
+			performed the previous step, to <link linkend="dev.contrib.branch">update
+			your local tracking branches</link>.</emphasis>
 		</para>
+
+		<sect2 id="dev.contrib.prepare.local">
+			<title>Private Branches</title>
+
+			<para>
+				If the topic branch in question is a local, private branch, that you are not
+				sharing with other developers, the simplest and easiest method to stay up to
+				date with <literal>master</literal> is to use the <literal>rebase</literal>
+				command.  This will append all of your feature branch commits into a linear
+				history after the last commit on the <literal>master</literal> branch.
+			</para>
+
+			<programlisting>
+$ git checkout feature
+$ git rebase master
+			</programlisting>
+
+			<para>
+				Do note that this changes the commit ID for each commit in your feature
+				branch, which will cause trouble for anyone sharing and/or following your
+				branch.  In this case, if you have rebased a branch that other users are
+				watching or working on, they can fix the resulting conflict by rebasing
+				their copy of your branch onto your branch:
+			</para>
+
+			<programlisting>
+$ git checkout feature
+$ git fetch remote/feature
+$ git rebase remote/feature
+			</programlisting>
+		</sect2>
+
+		<sect2 id="dev.contrib.prepare.public">
+			<title>Public Branches</title>
+
+			<para>
+				For any publicly-shared branches, where other users may be watching your
+				feature branches, or cloning them locally for development work, you'll need
+				to take a different approach to keeping it up to date with
+				<literal>master</literal>.
+			</para>
+
+			<para>
+				To bring public branch up to date, you'll need to <literal>merge</literal>
+				the current <literal>master</literal> branch, which will create a special
+				"merge commit" in the branch history, causing a logical "split" in commit
+				history where your branch started and joining at the merge.  These merge
+				commits are generally disliked, because they can crowd commit history, and
+				because the history is no longer linear.  They will be dealt with during
+				the <link linkend="dev.contrib.submit.repo">submission process</link>.
+			</para>
+
+			<programlisting>
+$ git checkout feature
+$ git merge master
+			</programlisting>
+
+			<para>
+				At this point, you can push the branch to your public repository, and
+				anyone following the branch can then pull the changes directly into their
+				local branch, either with another merge, or with a rebase, as necessitated
+				by the public or private status of their own changes.
+			</para>
+		</sect2>
+
 	</sect1>
 
 	<sect1 id="dev.contrib.submit">
@@ -249,6 +320,34 @@ $ git request-pull origin/master git://mantisbt.org/contrib.git feature
 			<programlisting>
 $ git remote add feature git://mantisbt.org/contrib.git
 $ git checkout -b feature feature/feature
+			</programlisting>
+
+			<para>
+				If a remote branch is approved for entry into <literal>master</literal>,
+				then it should first be rebased onto the latest commits, so that Git can
+				remove any unnecessary merge commits, and create a single linear history
+				for the branch.  Once that's completed, the branch can be fast-forwarded
+				onto <literal>master</literal>:
+			</para>
+
+			<programlisting>
+$ git checkout feature
+$ git rebase master
+$ git checkout master
+$ git merge --ff feature
+			</programlisting>
+
+			<para><emphasis>
+				If a feature branch contains commits by non-developers, the branch should
+				be signed off by the developer handling the merge, as a replacement for the
+				above process:
+			</emphasis></para>
+
+			<programlisting>
+$ git checkout feature
+$ git rebase master
+$ git format-patch --binary --stdout master..HEAD > feature_branch.patch
+$ git am --signoff feature_branch.patch
 			</programlisting>
 
 		</sect2>
