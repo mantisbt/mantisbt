@@ -193,6 +193,9 @@ function tag_string_append( p_string ) {
 	t_tag_separator = document.getElementById('tag_separator').value;
 	t_tag_string = document.getElementById('tag_string');
 	t_tag_select = document.getElementById('tag_select');
+
+	if ( Trim( p_string ) == '' ) { return; }
+
 	if ( t_tag_string.value != '' ) {
 		t_tag_string.value = t_tag_string.value + t_tag_separator + p_string;
 	} else {
