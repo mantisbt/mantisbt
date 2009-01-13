@@ -142,7 +142,7 @@
 	</td>
 </tr>
 
-<?php event_signal( 'EVENT_MANAGE_PROJECT_FORM', array( $f_project_id ) ); ?>
+<?php event_signal( 'EVENT_MANAGE_PROJECT_UPDATE_FORM', array( $f_project_id ) ); ?>
 
 <!-- Submit Button -->
 <tr>
