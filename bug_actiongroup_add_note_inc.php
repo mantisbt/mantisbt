@@ -47,14 +47,15 @@
 	</td>
 	<td>
 <?php
-		if ( access_has_project_level( config_get( 'change_view_status_threshold' ) ) ) { ?>
+		$t_default_state = config_get( 'default_bugnote_view_status' );
+		if ( access_has_project_level( config_get( 'set_view_status_threshold' ) ) ) { ?>
 			<select name="view_state">
-				<?php print_enum_string_option_list( 'view_state', $t_bug->view_state) ?>
+				<?php print_enum_string_option_list( 'view_state', $t_default_state ) ?>
 			</select>
 <?php
 		} else {
-			echo get_enum_element( 'view_state', $t_bug->view_state );
-			echo '<input type="hidden" name="view_state" value="', $t_bug->view_state, '" />';
+			echo get_enum_element( 'view_state', $t_default_state );
+			echo '<input type="hidden" name="view_state" value="', $t_default_state, '" />';
 		}
 ?>
 	</td>
