@@ -1,5 +1,151 @@
 Mantis ChangeLog
 
+2009.01.15 - 1.2.0a3
+===================================
+
+The next development release towards the 1.2.0 milestone. Large features of this release include
+enhanced security and browser caching, as well as a greatly improved and expanded plugin system.
+A great many bugs have also been found and fixed since the a2 release.
+
+[105 issues]
+- 0009524: [security] Mantis should use secure sessions on https connections (grangeway) - closed.
+- 0005424: [administration] user_is_name_unique(): "Real Name" and "Real Name" (first name has one space, second name two) (thraxisp) - closed.
+- 0005896: [administration] Allow developers to let other users monitor issues (vboctor) - closed.
+- 0007880: [administration] Create new user with same name is allowed. Editting the user reports an error. (thraxisp) - closed.
+- 0009548: [administration] dangerous probem with categories for issues moved from one project to another (jreese) - closed.
+- 0009676: [administration] The "Inherit Global Categories" checkbox does not work when creating a new project (jreese) - closed.
+- 0009677: [administration] SQL Error when deleting a project with no categories (jreese) - closed.
+- 0009712: [administration] Applications should be able to check for latest updates against Mantis (vboctor) - closed.
+- 0009728: [administration] Project-Manager cannot update Project-Categories (jreese) - closed.
+- 0009772: [administration] Add logging event to allow for plugins to log to custom sources (vboctor) - closed.
+- 0009847: [administration] Make it easier to manage user for installations with large number of users (vboctor) - closed.
+- 0009121: [api soap] SOAP API incorrectly exports Relationship types (grangeway) - closed.
+- 0009245: [api soap] target_version not passed through via SOAP (vboctor) - closed.
+- 0009320: [api soap] mc_filter_get broken after refactoring api/soap/mc_filter_api.php for 1.2.0a1 [patch] (vboctor) - closed.
+- 0009995: [api soap] Unable to update version, fixed_in_version and target_version (jreese) - closed.
+- 0009559: [authentication] Wrong behaviour in Session API (session_save_path error message) (jreese) - closed.
+- 0009665: [authentication] Logout without unsetting session cookie (jreese) - closed.
+- 0009200: [bugtracker] Support a threshold access level for users to show up in reminder picker (vboctor) - closed.
+- 0009518: [bugtracker] Error 203 after editing a bugnote (thraxisp) - closed.
+- 0009724: [bugtracker] Issue history is missing (vboctor) - closed.
+- 0009737: [bugtracker] bugnote_add.php contains undefined t_note_type (vboctor) - closed.
+- 0009743: [bugtracker] sorting doesn't work in the View Issues page (vboctor) - closed.
+- 0009745: [bugtracker] Making bugnote private, access check is wrong (jreese) - closed.
+- 0009746: [bugtracker] Bugnotes are messed up when some are invisible (private) (vboctor) - closed.
+- 0009762: [bugtracker] THIS INSTALLATION: All database queries seem to fail with "SYSTEM WARNING: preg_match()" (jreese) - closed.
+- 0009787: [bugtracker] Update default status colors to use a better color palette (jreese) - closed.
+- 0009831: [bugtracker] Wrong status is used for Reopen Status (jreese) - closed.
+- 0009975: [bugtracker] Setting the category using massive updates (actiongroup) results in bad history for the affected bugs. (jreese) - closed.
+- 0009988: [bugtracker] Invalid character used in text string ("/>"). adm_config_report.php line 183 (grangeway) - closed.
+- 0009921: [bugtracker] Not all the options you usually get when doing normal updates (ie resolve, close, etc) are available when doing mass updates. (grangeway) - closed.
+- 0010039: [bugtracker] config_get in log_event (grangeway) - closed.
+- 0010052: [bugtracker] System notice in "Add Note" action group (jreese) - closed.
+- 0009708: [change log] Support linking to a changelog for a specific version (vboctor) - closed.
+- 0009848: [change log] Ability to link to a changelog while specifying a project name / version name (vboctor) - closed.
+- 0009914: [change log] add link to changelog/roadmap page to display a filtered list of 'view issues' for the version selected (grangeway) - closed.
+- 0009946: [code cleanup] Refactor enumeration handling and add unit tests for it (vboctor) - closed.
+- 0009509: [custom fields] Custom fields with spaces are not handled correctly (grangeway) - closed.
+- 0010045: [customization] APPLICATION WARNING #2400: Event "EVENT_MANAGE_PROJECT_FORM" has not yet been declared. (jreese) - closed.
+- 0009792: [db mssql] SQL function DESCRIBE does not exist for MSSQL 2000 (thraxisp) - closed.
+- 0008227: [db mysql] MySQL compatibility (siebrand) - closed.
+- 0009637: [db mysql] Does not work with MySQL 6 (thraxisp) - closed.
+- 0003543: [email] Some fields are missing from email notifications (vboctor) - closed.
+- 0004195: [email] Mails do not show national characters correctly (siebrand) - closed.
+- 0009908: [email] Support SMTP servers with ports other than 25 (e.g. gmail) (vboctor) - closed.
+- 0005263: [feature] Add the ability to report issues in unreleased product versions (thraxisp) - closed.
+- 0008588: [feature] adaptable status legend (thraxisp) - closed.
+- 0009920: [feature] The 'Select Profile' and profile-related information is taking a lot of space when unused on bug report advanced page. (grangeway) - closed.
+- 0006661: [filters] Sorting on two custom fields results in SQL errors (daryn) - closed.
+- 0008821: [filters] Filtering on tags not quite working (daryn) - closed.
+- 0009501: [filters] view_filters_page.php misses target_version (daryn) - closed.
+- 0009508: [filters] Adding Filters with Apostrophe saves Backslash in the database (daryn) - closed.
+- 0009661: [filters] It should be possible to switch off short_url usage (vboctor) - closed.
+- 0009989: [html] Undefined attribute name (border) in <tr> file: account_sponsor_page.php line: 175, 277 (grangeway) - closed.
+- 0009008: [integration] Segmentation Fault in core/checkin.php (grangeway) - closed.
+- 0009749: [integration] Integrate the IE and Firefox search plugin into Mantis out-of-the-box (vboctor) - closed.
+- 0004742: [localization] [all lang] Mix languages in messages (siebrand) - closed.
+- 0005853: [localization] [CJK] In CJK languages, 'Report Issue' pages, the width of the left column is too small. (siebrand) - closed.
+- 0006155: [localization] [all lang] Using different language can cause mantis posted issues not to be viewable. (siebrand) - closed.
+- 0007727: [localization] Hungarian letters with "hungarumlaut" aren't displayed (siebrand) - closed.
+- 0008857: [localization] Typo in account registration e-mail (siebrand) - closed.
+- 0009388: [localization] Russian translation fixes and additions (siebrand) - closed.
+- 0009424: [localization] Polish translation - missing strings (siebrand) - closed.
+- 0009473: [localization] Errors reported by admin/test_langs.php (siebrand) - closed.
+- 0009546: [localization] Updated french strings for promotion (siebrand) - closed.
+- 0009596: [localization] Update of Icelandic translation (vboctor) - closed.
+- 0009610: [localization] Fixed Japanese translation (siebrand) - closed.
+- 0009613: [localization] Update of Lithuanian translation (siebrand) - closed.
+- 0009614: [localization] $g_language_auto_map for portugese localization contains spelling error in config_defaults_inc.php (siebrand) - closed.
+- 0009671: [localization] Missing field names in strings_german.txt (siebrand) - closed.
+- 0009705: [localization] [update] lang/string_swedish.txt (siebrand) - closed.
+- 0009949: [localization] Error descriptions do not display properly. (jreese) - closed.
+- 0009973: [localization] [portuguese_brazil] missing string translation (siebrand) - closed.
+- 0009532: [news] News items with paragraph breaks adds \r\n (jreese) - closed.
+- 0009563: [news] Headline field blank error / escaping errors when adding / updating News entries (vboctor) - closed.
+- 0008883: [other] error_api.php: error_handled() returns true after an 'ignored' error, like a E_NOTICE (grangeway) - closed.
+- 0009114: [other] SYSTEM WARNING: escapeshellcmd() has been disabled for security reasons (grangeway) - closed.
+- 0009475: [other] Error 403 and 401 trying to update bug catery from "View issues" page (daryn) - closed.
+- 0009476: [other] Can not update bug when using Internet Explorer 7 (IE7) (jreese) - closed.
+- 0009519: [other] disabled projects; duplicate of 5514 (jreese) - closed.
+- 0009547: [other] "Update Category" command in "View Issues" not working (jreese) - closed.
+- 0009683: [other] Redirect error on login (grangeway) - closed.
+- 0009688: [other] Issue ID in note link (vboctor) - closed.
+- 0009804: [other] history_get_events not working (grangeway) - closed.
+- 0009894: [other] Inconsistent uses of file extension configuration settings. (jreese) - closed.
+- 0009944: [other] Undefined index 'project_id' in summary page (vboctor) - closed.
+- 0009991: [other] Skip search engines indexing of login page, sign up page, and forgot password (vboctor) - closed.
+- 0009506: [plug-ins] Plugin schema option "InsertData" is not a valid callback for call_user_func_array() (jreese) - closed.
+- 0009971: [plug-ins] InsertData in plugin schema not working as the wiki describes. (jreese) - closed.
+- 0010003: [plug-ins] plugin_file.php cannot access subdirectories. (jreese) - closed.
+- 0009590: [preferences] Empty option in email preferences menu breaks XHTML compliance (grangeway) - closed.
+- 0009882: [preferences] Unknown unit for redirect and refresh delay. (vboctor) - closed.
+- 0009715: [printing] No Target Version in the word/excel/ie export (vboctor) - closed.
+- 0009709: [roadmap] Support linking to a roadmap for a specific version (vboctor) - closed.
+- 0009849: [roadmap] Ability to link to a roadmap while specifying a project name / version name (vboctor) - closed.
+- 0008914: [rss] Since the 0008908 issue I can't read the RSS Flow (grangeway) - closed.
+- 0009396: [tagging] Wrong error message for tag attach (grangeway) - closed.
+- 0009758: [tagging] Tag detach access check is wrong (grangeway) - closed.
+- 0010022: [tagging] Tag attachment lists tags multiple times (jreese) - closed.
+- 0009280: [time tracking] Display of the time tracking input format string (HH:MM) (grangeway) - closed.
+- 0009298: [upgrade] upgrade from 1.1.2 to 1.2.0a1 fails (jreese) - closed.
+- 0009747: [upgrade] upgrade_unattended.php refers to upgrade_inc.php which no longer exists (vboctor) - closed.
+- 0008076: [webpage] Wrong color order in the news_menu_page.php (grangeway) - closed.
+
+
+2008.12.09 - 1.1.6
+===================================
+
+This release fixes once and for all the caching troubles from previous stable releases, some
+access permissions bugs, and a few various other issues. This release also improves the existing
+source control integration by allowing remote checkins.
+
+- 0009893: [administration] Users can change status on ViewOnly Tasks (jreese) - resolved.
+- 0009815: [bugtracker] gpc_get_string_array() sometimes returns non-arrays (thraxisp) - resolved.
+- 0009869: [bugtracker] application error 2800 still in version 1.1.5 (jreese) - resolved.
+- 0009888: [bugtracker] Issue History Problem... build, os, os_version, and platform are not looking right and are not effected by language files. (jreese) - resolved.
+- 0009890: [bugtracker] Case of extension for inline image is not ignored (jreese) - resolved.
+- 0009900: [customization] Allowing update issue status disables the function to administrator (thraxisp) - resolved.
+- 0008847: [integration] Revamp SVN and CVS integration (jreese) - resolved.
+- 0009651: [other] Version copy from parent project copies incorrect date (jreese) - resolved.
+- 0009928: [other] Inconsistent uses of file extension configuration settings. (jreese) - resolved.
+
+
+2008.11.21 - 1.1.5
+===================================
+
+This release solves more issues relating to the security fixes introduced by 1.1.3, as well as various other minor bugs.
+
+- 0009713: [authentication] Users are unable to confirm registration (jreese) - resolved.
+- 0009017: [bugtracker] SYSTEM WARNING implode() [function.implode]: Bad arguments. (jreese) - resolved.
+- 0009738: [bugtracker] Browser caching should be enabled on bug_change_status_page.php (jreese) - resolved.
+- 0009748: [bugtracker] Port 9737: bugnote_add.php contains undefined t_note_type (vboctor) - resolved.
+- 0009754: [bugtracker] Failed to report issue (APPLICATION ERROR #2800) (jreese) - resolved.
+- 0009714: [csv] Error message/warning, if HTTP_USER_AGENT is not set (jreese) - resolved.
+- 0009808: [db mysql] Linking Sub-Projects to a project -> APPLICATION ERROR #200 (jreese) - resolved.
+- 0009760: [other] Mantis checks $g_allow_browser_caching setting incorrectly (jreese) - resolved.
+- 0009780: [tagging] Changing project in Tag Details view gives "APPLICATION ERROR #200" (jreese) - resolved.
+- 0009803: [tagging] Tags field in filter should not be shown when user has no access to tags (jreese) - resolved.
+
 2008.10.18 - 1.1.4
 ===================================
 
