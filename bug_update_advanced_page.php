@@ -392,6 +392,11 @@
 					|| ( ( AUTO == config_get( 'show_product_version' ) )
 								&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
 			if ( $t_show_version ) {
+				$t_product_version_released_mask = VERSION_RELEASED;
+
+				if (access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
+					$t_product_version_released_mask = VERSION_ALL;
+				}
 				echo lang_get( 'fixed_in_version' );
 			}
 		?>
@@ -423,7 +428,7 @@
 			if ( $t_show_version ) {
 		?>
 		<select <?php echo helper_get_tab_index() ?> name="version">
-			<?php print_version_option_list( $t_bug->version, $t_bug->project_id, VERSION_RELEASED ) ?>
+                       <?php print_version_option_list( $t_bug->version, $t_bug->project_id, $t_product_version_released_mask ); ?>
 		</select>
 		<?php
 			} else {

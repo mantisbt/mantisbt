@@ -2115,6 +2115,12 @@
 	$g_reopen_bug_threshold			= DEVELOPER;
 
 	/**
+	 * access level needed to assign bugs to unreleased product versions
+	 * @global int $g_report_issues_for_unreleased_versions_threshold
+	 */     
+	$g_report_issues_for_unreleased_versions_threshold = DEVELOPER;
+
+	/**
 	 * access level needed to set a bug sticky
 	 * @global int $g_set_bug_sticky_threshold
 	 */	
