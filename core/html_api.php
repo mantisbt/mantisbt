@@ -1274,10 +1274,11 @@ function html_button_bug_create_child( $p_bug_id ) {
 # Print a button to reopen the given bug
 function html_button_bug_reopen( $p_bug_id ) {
 	$t_status = bug_get_field( $p_bug_id, 'status' );
-	$t_reopen_status = config_get( 'bug_reopen_status' );
 	$t_project = bug_get_field( $p_bug_id, 'project_id' );
+	$t_reopen_status = config_get( 'bug_reopen_status', null, null, $t_project );
 
-	if( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $p_bug_id ) || (( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) && ( ON == config_get( 'allow_reporter_reopen' ) ) ) ) {
+	if( access_has_bug_level( config_get( 'reopen_bug_threshold', null, null, $t_project ), $p_bug_id ) ||
+			(( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) && ( ON == config_get( 'allow_reporter_reopen', null, null, $t_project ) ) ) ) {
 		html_button( 'bug_change_status_page.php', lang_get( 'reopen_bug_button' ), array( 'bug_id' => $p_bug_id, 'new_status' => $t_reopen_status, 'reopen_flag' => ON ) );
 	}
 }
