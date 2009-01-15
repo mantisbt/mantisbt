@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-define( 'MANTIS_VERSION', '1.2.0a2' );
+define( 'MANTIS_VERSION', '1.2.0a3' );
 
 # --- constants -------------------
 # magic numbers
