@@ -2339,16 +2339,16 @@
 	 ************************************/
 
 	/**
-	 * status color codes
+	 * status color codes, using the Tango color palette
 	 * @global array $g_status_colors
 	 */	
-	$g_status_colors		= array( 'new'			=> '#ffcdcd', // red
-									 'feedback'		=> '#ffcdec', // purple
-									 'acknowledged'	=> '#ffeccd', // orange
-									 'confirmed'	=> '#ffffb0', // yellow
-									 'assigned'		=> '#cde2ff', // blue
-									 'resolved'		=> '#daf5ec', // buish-green
-									 'closed'		=> '#e6e6e6'); // light gray
+	$g_status_colors		= array( 'new'			=> '#fcbdbd', // red    (scarlet red #ef2929)
+									 'feedback'		=> '#e3b7eb', // purple (plum        #75507b)
+									 'acknowledged'	=> '#ffcd85', // orange (orango      #f57900)
+									 'confirmed'	=> '#fff494', // yellow (butter      #fce94f)
+									 'assigned'		=> '#c2dfff', // blue   (sky blue    #729fcf)
+									 'resolved'		=> '#d2f5b0', // green  (chameleon   #8ae234)
+									 'closed'		=> '#c9ccc4'); // grey  (aluminum    #babdb6)
 
 	/**
 	 * The padding level when displaying project ids
