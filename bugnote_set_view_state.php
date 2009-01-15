@@ -46,7 +46,13 @@
 		$g_project_override = $t_bug->project_id;
 	}
 
-	access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
+	$t_user_id = bugnote_get_field( $f_bugnote_id, 'reporter_id' );
+
+	# allow either the bugnote author or a privileged user to change view status
+	if ( $t_user_id != auth_get_current_user_id() ) {
+		access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
+		access_ensure_bugnote_level( config_get( 'change_view_status_threshold' ), $f_bugnote_id );
+	}
 
 	# Check if the bug is readonly
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
