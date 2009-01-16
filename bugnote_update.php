@@ -57,5 +57,8 @@
 	bugnote_set_text( $f_bugnote_id, $f_bugnote_text );
 	bugnote_set_time_tracking( $f_bugnote_id, $f_time_tracking );
 
+	# Plugin integration
+	event_signal( 'EVENT_BUGNOTE_EDIT', array( $t_bug_id, $f_bugnote_id ) );
+
 	print_successful_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
 ?>

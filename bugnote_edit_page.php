@@ -112,6 +112,9 @@
 </tr>
 <?php } ?>
 <?php } ?>
+
+<?php event_signal( 'EVENT_BUGNOTE_EDIT_FORM', array( $t_bug_id, $f_bugnote_id ) ); ?>
+
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" class="button" value="<?php echo lang_get( 'update_information_button' ) ?>" />
