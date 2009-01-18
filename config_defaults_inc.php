@@ -646,9 +646,11 @@
 		'slovene',
 		'spanish',
 		'swedish',
+		'tagalog',
 		'turkish',
 		'ukrainian',
 		'urdu',
+		'volapuk',
 	);
 
 	/**
@@ -692,8 +694,10 @@
 		'sl' => 'slovene',
 		'es-mx, es-co, es-ar, es-cl, es-pr, es' => 'spanish',
 		'sv-fi, sv' => 'swedish',
+		'tl' => 'tagalog',
 		'tr' => 'turkish',
-		'uk' => 'ukrainian'
+		'uk' => 'ukrainian',
+		'vo' => 'volapuk',
 	);
 
 	/**
