@@ -850,7 +850,7 @@ $s_plugins_installed = 'Installed Plugins';
 $s_plugins_available = 'Available Plugins';
 $s_plugin_description = 'Description';
 $s_plugin_author = 'Author: %1$s';
-$s_plugin_url = 'Website: ';
+$s_plugin_url = 'Website:';
 $s_plugin_depends = 'Dependencies';
 $s_plugin_no_depends = 'No dependencies';
 $s_plugin_priority = 'Priority';
@@ -1555,3 +1555,6 @@ $s_view_account_title = 'User Information';
 
 # view_user_page.php
 $s_manage_user = 'Manage User';
+
+# separators
+$s_word_separator = '&#32;';
