@@ -207,7 +207,7 @@ $s_error_no_proceed = 'Please use the "Back" button in your web browser to retur
 
 # ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC] = 'An error occurred during this action. You may wish to report this error to your local administrator.';
-$MANTIS_ERROR[ERROR_SQL] = 'SQL error detected. Please report this to ';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL error detected.';
 $MANTIS_ERROR[ERROR_REPORT] = 'There was an error in your report.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'No file specified.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'The file type is disallowed.';
@@ -676,6 +676,9 @@ $s_show_content = 'Show Content';
 $s_total_queries_executed = 'total queries executed.'; # FIXME: the query count should be part of the message for better localisation
 $s_unique_queries_executed = 'unique queries executed.'; # FIXME: the query count should be part of the message for better localisation
 $s_memory_usage_in_kb = 'memory usage: %1$s KB';
+
+# print_api.php
+$s_please_report = 'Please report this to the %1$s.';
 
 # index.php
 $s_click_to_login = 'Click here to login';

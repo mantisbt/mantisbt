@@ -1553,9 +1553,11 @@ function print_lost_password_link() {
 function print_sql_error( $p_query ) {
 	global $g_administrator_email;
 
-	echo error_string( ERROR_SQL );
-	print_email_link( $g_administrator_email, lang_get( 'administrator' ) );
-	echo "<br />$p_query;<br />";
+	$error = error_string( ERROR_SQL );
+	$error .= lang_get( 'word_separator' );
+	$error .= sprintf( lang_get( 'please_report' ), prepare_email_link( $g_administrator_email, lang_get( 'administrator' ) ) );
+	$error .= "<br />$p_query;<br />";
+	echo $error;
 }
 
 # Get icon corresponding to the specified filename
