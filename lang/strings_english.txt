@@ -666,7 +666,7 @@ $s_closed_bug_button = 'Close Issue';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'Note has been successfully updated...';
-$s_edited_on = 'edited on: ';
+$s_edited_on = 'edited on:';
 
 # file_api.php
 $s_hide_content = 'Hide Content';

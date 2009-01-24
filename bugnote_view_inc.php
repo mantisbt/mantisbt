@@ -131,7 +131,7 @@ $num_notes = sizeof( $t_bugnotes );
 		<span class="small"><?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?></span><br />
 		<?php
 		if ( $t_bugnote_modified ) {
-			echo '<span class="small">'.lang_get( 'edited_on').' '.date( $t_normal_date_format, $t_bugnote->last_modified ).'</span><br />';
+			echo '<span class="small">' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</span><br />';
 		}
 		?>
 		<br /><div class="small">

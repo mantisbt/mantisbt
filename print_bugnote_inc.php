@@ -114,7 +114,7 @@
 			<td class="print">
 				<?php echo $v3_date_submitted ?>&nbsp;&nbsp;&nbsp;
 				<?php if ( db_unixtimestamp( $v3_date_submitted ) != db_unixtimestamp( $v3_last_modified ) ) {
-					echo '<br />(' . lang_get( 'edited_on').' '. $v3_last_modified . ')';
+					echo '<br />(' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . $v3_last_modified . ')';
 				} ?>
 			</td>
 		</tr>
