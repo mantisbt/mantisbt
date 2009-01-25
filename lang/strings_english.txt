@@ -359,7 +359,7 @@ $s_new_account_username = 'Username: ';
 $s_new_account_message = 'If you did not request any registration, ignore this message and nothing will happen.\n\n';
 $s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
 $s_new_account_email = 'E-mail: ';
-$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_IP = 'Remote IP address:';
 $s_new_account_signup_msg = 'The following account has been created:';
 
 $s_reset_request_msg = 'Someone (presumably you) requested a password change through e-mail verification. If this was not you, ignore this message and nothing will happen.\n\nIf you requested this verification, visit the following URL to change your password:';
