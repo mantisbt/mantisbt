@@ -400,6 +400,8 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 # --------------------
 # Detect URLs and email addresses in the string and replace them with href anchors
 function string_insert_hrefs( $p_string ) {
+	static $s_url_regex = null;
+
 	if( !config_get( 'html_make_links' ) ) {
 		return $p_string;
 	}
@@ -411,7 +413,17 @@ function string_insert_hrefs( $p_string ) {
 	}
 
 	# Find any URL in a string and replace it by a clickable link
-	$p_string = preg_replace( '/(([[:alpha:]][-+.[:alnum:]]*):\/\/(%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#\(\),\[\][:alnum:]])+)/se', "'<a href=\"'.rtrim('\\1','.').'\">\\1</a> [<a href=\"'.rtrim('\\1','.').'\" target=\"_blank\">^</a>]'", $p_string );
+	if ( is_null( $s_url_regex ) ) {
+		$t_url_chars = '(?:%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#\(\),\[\][:alnum:]])';
+		$t_url_chars2 = '(?:%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#,[:alnum:]])';
+
+		$t_url_part1 = "${t_url_chars}";
+		$t_url_part2 = "(?:\(${t_url_chars}*\)|\[${t_url_chars}*\]|${t_url_chars2})";
+
+		$s_url_regex = "/(([[:alpha:]][-+.[:alnum:]]*):\/\/(${t_url_part1}*?${t_url_part2}+))/se";
+	}
+
+	$p_string = preg_replace( $s_url_regex, "'<a href=\"'.rtrim('\\1','.').'\">\\1</a> [<a href=\"'.rtrim('\\1','.').'\" target=\"_blank\">^</a>]'", $p_string );
 	if( $t_change_quotes ) {
 		ini_set( 'magic_quotes_sybase', true );
 	}
