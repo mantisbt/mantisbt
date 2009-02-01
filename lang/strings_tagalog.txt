@@ -549,6 +549,7 @@ $s_show_content = 'Ipakita ang Nilalaman';
 $s_total_queries_executed = 'kabuoan ng naisakatuparang mga katanungan.';
 $s_unique_queries_executed = 'natatanging mga katanungang naisakatuparan na.';
 $s_memory_usage_in_kb = 'paggamit ng alaala: %1$s KB';
+$s_please_report = 'Pakiulat ito sa %1$s.';
 $s_click_to_login = 'Pindutin dito upang makalagda';
 $s_warning_plain_password_authentication = '<strong>BABALA:</strong> Ginagamit ang payak na pagpapatotoo ng hudyat, ilalantad nito sa mga tagapangasiwa ang iyong mga hudyat.';
 $s_warning_default_administrator_account_present = '<strong>BABALA:</strong> Dapat na huwag mong paganahin ang likas na nakatakdang akawnt ng \'tagapangasiwa\' o baguhin ang hudyat nito.';

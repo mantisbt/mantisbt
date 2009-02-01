@@ -564,6 +564,7 @@ $s_show_content = 'Afficher';
 $s_total_queries_executed = 'requêtes exécutées au total.';
 $s_unique_queries_executed = 'requêtes uniques exécutées.';
 $s_memory_usage_in_kb = 'utilisation de la mémoire : %s KB';
+$s_please_report = 'Rapporter ceci à l\'%1$, s\'il vous plait.';
 $s_click_to_login = 'Cliquer pour accéder';
 $s_warning_plain_password_authentication = '<strong>ATTENTION :</strong> l\'authentification par mot de passe en clair est utilisée, ceci exposera votre mot de passe aux administrateurs.';
 $s_warning_default_administrator_account_present = '<strong>ATTENTION :</strong> Vous devriez désactiver le compte par défaut « administrator » ou changer son mot de passe.';

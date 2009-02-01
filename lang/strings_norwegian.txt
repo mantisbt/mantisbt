@@ -26,6 +26,7 @@
  * @author Alf-Ivar Holm, affi@csc.no
  * @author EivindJ
  * @author Espen Holje, eh@escio.no
+ * @author Harald Khan
  * @author Ingvald Skaug, dev@skaug.no
  * @author Laaknor
  */
@@ -183,7 +184,7 @@ $s_bugnote_date = 'Notatdato';
 $s_bugnote_description = 'Notatbeskrivelse';
 $s_error_no_proceed = 'Vennligst bruk "TILBAKE"-knappen i nettleseren din for å gå tilbake til forrige side. Du kan da korrigere valgene dine som forårsaket denne feilen. Du kan også velge fra nedtrekksmenyen for å gå direkte til en ny seksjon.';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Det oppstod en en feil. Du kan rapportere feilen til din administrator.';
-$MANTIS_ERROR[ERROR_SQL] = 'SQL feil.';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL-feil.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Det var en feil i rapporten din.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Ingen fil spesifisert';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Ulovlig filtype';

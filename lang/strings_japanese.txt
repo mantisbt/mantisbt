@@ -555,6 +555,7 @@ $s_show_content = '表示';
 $s_total_queries_executed = '(合計クエリー実行数)';
 $s_unique_queries_executed = '(ユニーククエリー実行数)';
 $s_memory_usage_in_kb = 'メモリー使用量: %1$s KB';
+$s_please_report = 'これを%1$sに報告してください。';
 $s_click_to_login = 'ログイン→';
 $s_warning_plain_password_authentication = '<strong>警告:</strong>平文のパスワードが使用されていますので、あなたのパスワードが管理者に見えてしまいます。';
 $s_warning_default_administrator_account_present = '<strong>警告:</strong> デフォルトの\'administrator\'アカウントを無効にするかパスワードを変更してください。';
