@@ -61,10 +61,14 @@ function print_yes_no( $p_result ) {
 	}
 }
 
-function print_test_row( $p_description, $p_pass ) {
+function print_test_row( $p_description, $p_pass, $p_info = null ) {
 	echo '<tr>';
 	echo '<td bgcolor="#ffffff">';
 	echo $p_description;
+	if( $p_info != null) {
+		echo '<br />';
+		echo '<i>' . $p_info . '</i>';
+	}
 	echo '</td>';
 
 	if( $p_pass ) {
@@ -114,6 +118,59 @@ function test_bug_attachments_allow_flags() {
 
 	print_test_row( 'Bug attachments allow own flags (allow_view_own_attachments, ' .
 		'allow_download_own_attachments, allow_delete_own_attachments)', $t_pass );
+
+	return $t_pass;
+}
+
+function check_zend_optimiser_version() {
+	$t_pass = true;
+
+	ob_start();
+	phpinfo(INFO_GENERAL);
+	$t_output = ob_get_contents();
+	ob_end_clean();
+
+	$t_output = str_replace(array("&gt;", "&lt;", "&quot;", "&amp;", "&#039;", "&nbsp;"), array(">", "<", "\"", "&", "'", " "), $t_output);
+
+	define ( 'ZEND_OPTIMIZER_VERSION', '3.3');
+	define ( 'ZEND_OPTIMIZER_SUBVERSION', 3);
+
+	if (strstr($t_output, "Zend Optimizer")) {
+		$t_version = split("Zend Optimizer",$t_output);
+		$t_version = split(",",$t_version[1]);
+		$t_version = trim($t_version[0]);
+
+		if (!strstr($t_version,"v")) {
+			$t_info = 'Zend Optimizer Detected - Unknown Version.';
+			$t_pass = false;
+  		} else {
+			$t_version = str_replace("v","",$t_version);	
+			$t_version = explode(".",$t_version);
+			$t_subVersion = $t_version[2];
+			$t_dummy = array_pop($t_version);
+			$t_version = implode(".",$t_version);
+	
+			if (($t_version > ZEND_OPTIMIZER_VERSION) || ($t_version==ZEND_OPTIMIZER_VERSION && $t_subVersion>=ZEND_OPTIMIZER_SUBVERSION)) {
+      			/* pass = true */
+			} else {
+				$t_pass = false;
+				$t_info = 'Fail - Installed Version: ' . $t_version . '.' . $t_subVersion . '.';
+			}	  
+		}
+	} else {
+		$t_info = 'Zend Optimiser not detected';
+	}
+
+	if (strstr($t_output, 'has been disabled')) {
+		$t_info = 'Unable to determine Zend Optimizer version - phpinfo() is disabled.';
+		$t_pass = false;
+	}
+
+	if( $t_pass == false ) {
+		$t_info .= ' Zend Optimizer should be version be ' . ZEND_OPTIMIZER_VERSION . '.' . ZEND_OPTIMIZER_SUBVERSION  . ' or greater! Some old versions cause the view issues page not to display completely. The latest version of Zend Optimizer can be found at www.zend.com';
+	}
+
+	print_test_row( 'Checking Zend Optimiser version (if installed)...', $t_pass, $t_info );
 
 	return $t_pass;
 }
@@ -336,6 +393,9 @@ print_test_row( 'Phpmailer sendmail configuration requires escapeshellcmd. Pleas
 	( PHPMAILER_METHOD_SENDMAIL != config_get( 'phpMailer_method' ) || ( PHPMAILER_METHOD_SENDMAIL == config_get( 'phpMailer_method' ) ) && function_exists( 'escapeshellcmd' ) ) );
 print_test_row( 'Phpmailer sendmail configuration requires escapeshellarg. Please use a different phpmailer method if this is blocked.',
 	( PHPMAILER_METHOD_SENDMAIL != config_get( 'phpMailer_method' ) || ( PHPMAILER_METHOD_SENDMAIL == config_get( 'phpMailer_method' ) ) && function_exists( 'escapeshellarg' ) ) );
+
+check_zend_optimiser_version();
+
 
 ?>
 </table>
