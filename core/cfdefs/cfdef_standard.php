@@ -163,7 +163,8 @@ function cfdef_prepare_list_database_to_value($p_value) {
 }
 
 function cfdef_prepare_list_value_for_email($p_value) {
-	return str_replace( '|', ', ', $p_value );
+	// strip start and end markers before converting markers to commas
+	return str_replace( '|', ', ', substr( $p_value, 1, -1 ) );
 }
 
 function cfdef_prepare_email_value_for_email($p_value) {
@@ -209,7 +210,8 @@ function cfdef_prepare_date_default( $p_value ) {
 
 #string_custom_field_value
 function cfdef_prepare_list_value($p_value) {
-	return str_replace( '|', ', ', $p_value );
+	// strip start and end markers before converting markers to commas
+	return str_replace( '|', ', ', substr( $p_value, 1, -1 ) );
 }
 
 function cfdef_prepare_email_value($p_value) {
