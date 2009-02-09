@@ -944,22 +944,40 @@
 		$t_length_max		= $row['length_max'];
 		$t_default_value	= $row['default_value'];
 
-		# check for valid value
-		if ( !is_blank( $t_valid_regexp ) ) {
-			if ( !ereg( $t_valid_regexp, $p_value ) ) {
-				return false;
-			}
+		$t_valid = true;
+		$t_length = strlen( $p_value );
+		switch ($t_type) {
+			case CUSTOM_FIELD_TYPE_STRING:
+				// validate against regexp
+				if( !is_blank( $t_valid_regexp ) && !is_blank( $p_value ) ) {
+					$t_valid &= ereg( $t_valid_regexp, $p_value );
+				}
+				// check string length
+				$t_valid &= ( 0 == $t_length_min ) || ( $t_length > $t_length_min );
+				$t_valid &= ( 0 == $t_length_max ) || ( $t_length <= $t_length_max );
+				break;
+			case CUSTOM_FIELD_TYPE_NUMERIC:
+				$t_valid &= ( $t_length == 0 ) || is_numeric( $p_value );
+				break;
+			case CUSTOM_FIELD_TYPE_FLOAT:
+				// handle both number and number with decimal
+				$t_valid &= ( $t_length == 0 ) || is_numeric( $p_value ) || is_float( $p_value );
+				break;
+			case CUSTOM_FIELD_TYPE_DATE:
+				// gpc_get_cf for date returns the value from strftime
+				// either false (php >= 5.1)  or -1 (php < 5.1) for failure
+				$t_valid &= ( $p_value !== false ) && ( $p_value > 0 );
+				break;
+			case CUSTOM_FIELD_TYPE_ENUM:
+			case CUSTOM_FIELD_TYPE_EMAIL:
+			case CUSTOM_FIELD_TYPE_CHECKBOX:
+			case CUSTOM_FIELD_TYPE_LIST:
+			case CUSTOM_FIELD_TYPE_MULTILIST:
+			case CUSTOM_FIELD_TYPE_RADIO:
+			default:
+			break;
 		}
-
-		if ( strlen( $p_value ) < $t_length_min ) {
-			return false;
-		}
-
-		if ( ( 0 != $t_length_max ) && ( strlen( $p_value ) > $t_length_max ) ) {
-			return false;
-		}
-
-		return true;
+		return $t_valid;
 	}
 
 	# --------------------
@@ -1081,46 +1099,20 @@
 	function custom_field_set_value( $p_field_id, $p_bug_id, $p_value ) {
 		$c_field_id	= db_prepare_int( $p_field_id );
 		$c_bug_id	= db_prepare_int( $p_bug_id );
+		$c_value = db_prepare_string( $p_value );
 
 		custom_field_ensure_exists( $p_field_id );
 
-		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$query = "SELECT name, type, possible_values, valid_regexp,
-				  access_level_rw, length_min, length_max, default_value
-				  FROM $t_custom_field_table
-				  WHERE id='$c_field_id'";
-		$result = db_query( $query );
-		$row = db_fetch_array( $result );
-
-		$t_name				= $row['name'];
-		$t_type				= $row['type'];
-		$t_possible_values	= $row['possible_values'];
-		$t_valid_regexp		= $row['valid_regexp'];
-		$t_access_level_rw	= $row['access_level_rw'];
-		$t_length_min		= $row['length_min'];
-		$t_length_max		= $row['length_max'];
-		$t_default_value	= $row['default_value'];
-
-		$c_value	= db_prepare_string( custom_field_value_to_database( $p_value, $t_type ) );
-
-		# check for valid value
-		if ( !is_blank( $t_valid_regexp ) ) {
-			if ( !ereg( $t_valid_regexp, $p_value ) ) {
-				return false;
-			}
-		}
-
-		if ( strlen( $p_value ) < $t_length_min ) {
-			return false;
-		}
-
-		if ( ( 0 != $t_length_max ) && ( strlen( $p_value ) > $t_length_max ) ) {
+		if ( ! custom_field_validate( $p_field_id, $p_value ) ) {
 			return false;
 		}
 
 		if( !custom_field_has_write_access( $p_field_id, $p_bug_id, auth_get_current_user_id() ) ) {
 			return false;
 		}
+
+		$t_name = custom_field_get_field( $p_field_id, 'name' );
+		$t_type = custom_field_get_field( $p_field_id, 'type' );
 
 		$t_custom_field_string_table = config_get( 'mantis_custom_field_string_table' );
 
@@ -1280,7 +1272,8 @@
 			case CUSTOM_FIELD_TYPE_LIST:
 			case CUSTOM_FIELD_TYPE_MULTILIST:
 			case CUSTOM_FIELD_TYPE_CHECKBOX:
-				return str_replace( '|', ', ', $t_custom_field_value );
+				// strip start and end markers before converting markers to commas
+				return str_replace( '|', ', ', substr( $t_custom_field_value, 1, -1 ) );
 				break;
 			case CUSTOM_FIELD_TYPE_DATE:
 				if ($t_custom_field_value != null) {
@@ -1316,7 +1309,8 @@
 			case CUSTOM_FIELD_TYPE_LIST:
 			case CUSTOM_FIELD_TYPE_MULTILIST:
 			case CUSTOM_FIELD_TYPE_CHECKBOX:
-				return str_replace( '|', ', ', $p_value );
+				// strip start and end markers before converting markers to commas
+				return str_replace( '|', ', ', substr( str_replace( "||", "|", '|' . $p_value . '|' ), 1, -1 ) );
 				break;
 			case CUSTOM_FIELD_TYPE_DATE:
 				if ($p_value != null) {
