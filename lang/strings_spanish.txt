@@ -558,6 +558,7 @@ $s_show_content = 'Mostrar Contenido';
 $s_total_queries_executed = 'Preguntas totales ejecutadas.';
 $s_unique_queries_executed = 'Preguntas únicas ejecutadas.';
 $s_memory_usage_in_kb = 'Uso de memoria: %1$s KB';
+$s_please_report = 'Por favor reporte esto al %1$s.';
 $s_click_to_login = 'Haga click aquí para iniciar la sesión';
 $s_login_page_info = 'Bienvenido al Gestor de Incidencias.';
 $s_login_title = 'Inicio de sesión';
