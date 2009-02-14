@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -194,7 +194,7 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Esiste già un progetto con quel nome.
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Il campo obbligatorio \"%s\" era vuoto.  Ricontrolla le informazioni che hai inserito.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Questo account è protetto.  Non ti è consentito accedere finché non verrà tolta la protezione.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Accesso negato.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Il caricamento del file è fallito.  Il file non risulta leggibile da Mantis.  Controlla le impostazioni del progetto';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Il caricamento del file è fallito.  Il file non risulta leggibile da MantisBT.  Controlla le impostazioni del progetto';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Il caricamento del file è fallito.  Molto probabilmente perché la sua dimensione superava quella massima consentita da questa installazione PHP.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Un parametro obbligatorio per questa pagina (%s) non è stato specificato.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Quel nome utente è già utilizzato.  Torna indietro e scegline uno diverso.';
@@ -551,7 +551,7 @@ $s_newer_news_link = 'Notizie recenti';
 $s_older_news_link = 'Notizie precedenti';
 $s_archives = 'Archivio';
 $s_rss = 'RSS';
-$s_mantis_version = 'Versione Mantis';
+$s_mantis_version = 'Versione MantisBT';
 $s_schema_version = 'Versione Schema';
 $s_site_path = 'Percorso Sito';
 $s_core_path = 'Percorso Core';

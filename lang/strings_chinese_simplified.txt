@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -186,7 +186,7 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = '已经存在一个同名的项目。';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = '字段“%1$s”是必须填写的，不能为空白，请重新填写。';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '该帐号设置为被保护状态，解除保护前你不能使用该账号。';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '无权限存取。';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '文件上传失败，Mantis 系统无法读取文件；请检查项目设置。';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '文件上传失败，MantisBT 系统无法读取文件；请检查项目设置。';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '文件上传失败，可能是文件大小超出 PHP 的上传上限造成的。';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '本页(%1$s)的必填参数没有提供。';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '已存在同名用户，请返回前一页另外选择一个用户名。';
@@ -951,7 +951,7 @@ $s_changelog = '变更日志';
 $s_changelog_empty = '无变更日志信息';
 $s_roadmap = '路线图';
 $s_resolved_progress = '已解决 %d 个问题(共 %d 个问题)，进度(%d%%)。';
-$s_http_auth_realm = 'Mantis 缺陷跟踪系统登录';
+$s_http_auth_realm = 'MantisBT 缺陷跟踪系统登录';
 $s_bug = '问题';
 $s_add_new_relationship = '新建关联';
 $s_add_new_relationship_button = '添加';

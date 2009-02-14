@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -915,7 +915,7 @@ $s_sponsorship_deleted = 'Sponsing slettet';
 $s_sponsorship_paid = 'Sponsing betalt';
 $s_sponsorship_more_info = 'Mer informasjon om sponsing';
 $s_changelog = 'Endringslogg';
-$s_http_auth_realm = 'Mantisinnlogging';
+$s_http_auth_realm = 'MantisBTinnlogging';
 $s_bug = 'sak';
 $s_add_new_relationship = 'Ny relasjon';
 $s_add_new_relationship_button = 'Legg til';

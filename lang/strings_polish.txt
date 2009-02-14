@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -288,7 +288,7 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Ten tag nie jest powiązany z tym błę
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Ten tag już jest powiązany z tym błędem.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Token could not be found.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Zdarzenie „%1$s” nie zostało jeszcze zadeklarowane.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Wtyczka nie została zarejestrowana w Mantis.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Wtyczka nie została zarejestrowana w MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Wtyczka już jest zainstalowana.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Brak strony wtyczki.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Błąd aktualizacji schematu wtyczki w bloku #%1$s.';
@@ -591,7 +591,7 @@ $s_older_news_link = 'Starsze wiadomości';
 $s_archives = 'Archiwum';
 $s_rss = 'RSS';
 $s_site_information = 'Informacje o witrynie';
-$s_mantis_version = 'Wersja Mantisa';
+$s_mantis_version = 'Wersja MantisBTa';
 $s_schema_version = 'Wersja schematu';
 $s_site_path = 'Ścieżka na serwerze';
 $s_core_path = 'Ścieżka główna';
@@ -1041,7 +1041,7 @@ $s_changelog = 'Lista zmian';
 $s_changelog_empty = 'Lista zmian niedostępna.';
 $s_roadmap = 'Plan pracy';
 $s_resolved_progress = '%d z %d zagadnień rozwiązano (%d%%).';
-$s_http_auth_realm = 'Logowanie do Mantisa';
+$s_http_auth_realm = 'Logowanie do MantisBTa';
 $s_bug = 'zagadnienie';
 $s_bugs = 'kwestie';
 $s_add_new_relationship = 'Nowe powiązanie';

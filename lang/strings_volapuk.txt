@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -88,7 +88,7 @@ $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Atos binon ragiv petelüköl. Büo moüko
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Proyeg labü nem at ya dabinon.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Fel zesüdik: „$1$s“ ävagon. Kontrololös utosi, kelosi epenol.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Kal at pejelon. No dalol gebön ani jüs kalijel ponosükon.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Ragivilöpükam no eplöpon. Ragiv at no binon reidovik ele Mantis. Kontrololös parametemi proyega.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Ragivilöpükam no eplöpon. Ragiv at no binon reidovik ele MantisBT. Kontrololös parametemi proyega.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Ragivilöpükam no eplöpon. Atos ba ejenon bi ragivagretot pluon tefü maxum anu padälöl fa fomam-PHP at.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Paramet peflagöl pada at (%1$s) no petuvon.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Gebananem at ya pagebon. Geikolös e välolös votiki.';
@@ -264,7 +264,7 @@ $s_lost_password_done_title = 'Letavödanun pesedon';
 $s_lost_password_confirm_hash_OK = 'Fümedam olik pezepon. Votükolös letavödi olik.';
 $s_open_and_assigned_to_me = 'Maifik ä pegivülöl obe';
 $s_site_information = 'Nüns tefü Topäd';
-$s_mantis_version = 'Fomam ela Mantis';
+$s_mantis_version = 'Fomam ela MantisBT';
 $s_site_path = 'Luveg Bevüresodatopäda';
 $s_created_user_part1 = 'Geban pejäföl';
 $s_create_new_account_title = 'Jafön Kali Nulik';

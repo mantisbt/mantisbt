@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -191,7 +191,7 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Xa existe un proxecto con ese nome.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'O campo necesario "%1$s" estaba baleiro. Por favor, comprobe o texto de entrada.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protexida. Non ten permiso para acceder a ela ata que a protección da conta sexa retirada.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acceso denegado.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Fallou a carga do ficheiro. O ficheiro non pode ser lido por Mantis. Por favor, comprobe as características do proxecto.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Fallou a carga do ficheiro. O ficheiro non pode ser lido por MantisBT. Por favor, comprobe as características do proxecto.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Fallou a carga do ficheiro. Isto é porque o tamaño do ficheiro era maior que o permitido actualmente nesta instalación PHP.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Non se atopou un parámetro que se require para esta páxina (%1$s).';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ese nome de usuario xa está en uso. Por favor, volva atrás e seleccione outro.';
@@ -278,7 +278,7 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Esa etiqueta non está adxunta a ese er
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Esa etiqueta xa está adxunta a ese erro.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Non se pode atopar o token.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'O evento "%1$s" aínda non foi declarado.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'O complemento non está rexistrado no Mantis.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'O complemento non está rexistrado no MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'O complemento xa está instalado.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Non se atopou a páxina do complemento.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Fallou a actualización do esquema do complemento no bloque #%1$s.';
@@ -554,7 +554,7 @@ $s_click_to_login = 'Prema aquí para acceder';
 $s_warning_plain_password_authentication = '<strong>AVISO:</strong> a autenticación polo contrasinal é usada, isto ha expor os seus contrasinais aos administradores.';
 $s_warning_default_administrator_account_present = '<strong>AVISO:</strong> debería desactivar a conta de "administrador" por defecto ou cambiar o seu contrasinal.';
 $s_warning_admin_directory_present = '<strong>AVISO:</strong> o directorio de administradores debería ser eliminado.';
-$s_error_database_version_out_of_date_1 = '<strong>ERRO:</strong> parece que a estrutura da base de datos está desactualizada (config(databaseversion) está en 0 e existen as táboas de actualización vellas). A versión 1.x de Mantis introduciu un novo proceso de actualización. Parece estar actualizando a partir dun lanzamento 0.XX. Por favor, actualice a 1.0.8 ou 1.1.X e, a continuación, actualice á 1.2.';
+$s_error_database_version_out_of_date_1 = '<strong>ERRO:</strong> parece que a estrutura da base de datos está desactualizada (config(databaseversion) está en 0 e existen as táboas de actualización vellas). A versión 1.x de MantisBT introduciu un novo proceso de actualización. Parece estar actualizando a partir dun lanzamento 0.XX. Por favor, actualice a 1.0.8 ou 1.1.X e, a continuación, actualice á 1.2.';
 $s_error_database_no_schema_version = '<strong>ERRO:</strong> parece que a estrutura da base de datos está desactualizada (config(databaseversion) está en 0 e non existen as táboas de actualización vellas). Asegúrese de que a súa base de datos está sendo executada; non podemos recuperar a versión esquema da base de datos. A táboa "Config" non devolveu unha versión esquema da base de datos válida; por favor, pida apoio na lista de correo de axuda de Mantis, se fose necesario.';
 $s_error_database_version_out_of_date_2 = '<strong>ADVERTENCIA:</strong> a estrutura da base de datos pode estar desactualizada. Por favor, actualícea <a href="admin/install.php">aquí</a> antes de acceder ao sistema.';
 $s_error_code_version_out_of_date = '<strong>ADVERTENCIA:</strong> a estrutura da base de datos está máis actualizada que o código instalado. Por favor, actualice o código.';
@@ -581,7 +581,7 @@ $s_older_news_link = 'Novas máis antigas';
 $s_archives = 'Arquivos';
 $s_rss = 'RSS';
 $s_site_information = 'Información do sitio';
-$s_mantis_version = 'Versión do Mantis';
+$s_mantis_version = 'Versión do MantisBT';
 $s_schema_version = 'Versión do esquema';
 $s_site_path = 'Ruta do sitio';
 $s_core_path = 'Ruta do repertorio principal';
@@ -1028,7 +1028,7 @@ $s_changelog = 'Rexistro de cambios';
 $s_changelog_empty = 'Non hai dispoñible ningunha información do rexistro de cambios';
 $s_roadmap = 'Roteiro';
 $s_resolved_progress = '%1$d problema(s) de %2$d resolto(s). Progreso (%3$d%%).';
-$s_http_auth_realm = 'Rexistro Mantis';
+$s_http_auth_realm = 'Rexistro MantisBT';
 $s_bug = 'problema';
 $s_bugs = 'problemas';
 $s_add_new_relationship = 'Nova relación';

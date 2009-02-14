@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -278,7 +278,7 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Aquesta balisa es pas associada a aques
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Aquesta balisa ja es associada a aqueste bòg.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Geton introbable.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'L\'eveniment « %s » es indefinit.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Lo plugin es pas enregistat amb Mantis.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Lo plugin es pas enregistat amb MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Lo plugin ja es installat.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'La pagina del plugin es introbabla.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'La mesa a jorn del l\'esquèma pel ligicial antispam a fracassat en blôt #%1$s.';
@@ -581,7 +581,7 @@ $s_older_news_link = 'Novèlas ancianas';
 $s_archives = 'Archius';
 $s_rss = 'RSS';
 $s_site_information = 'Informacions sul sit';
-$s_mantis_version = 'Version de Mantis';
+$s_mantis_version = 'Version de MantisBT';
 $s_schema_version = 'Version de l\'esquèma';
 $s_site_path = 'Camin del sit';
 $s_core_path = 'Camin del repertòri principal';
@@ -1029,7 +1029,7 @@ $s_changelog = 'Lista dels cambiaments';
 $s_changelog_empty = 'Lista dels cambiaments indisponibla';
 $s_roadmap = 'Calendièr';
 $s_resolved_progress = '%d de %d bòg(ues) resolgut(s).  Progrès (%d%%).';
-$s_http_auth_realm = 'Brancament Mantis';
+$s_http_auth_realm = 'Brancament MantisBT';
 $s_bug = 'bòg';
 $s_bugs = 'bògues';
 $s_add_new_relationship = 'Relacion novèla';

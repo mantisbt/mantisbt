@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -177,7 +177,7 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekt s takým názvom už existuje.
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Potrebné pole „%1$s“ nebolo vyplnené. Prosím, znova skontrolujte údaje, ktoré ste zadali.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Toto konto je chránené. Nemáte povolený vstup dokiaľ nebude ochrana odstránená.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Prístup zakázaný.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Nahranie súboru sa nepodarilo. Mantis nedokáže prečítať súbor. Prosím, skontrolujte nastavenia projektu.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Nahranie súboru sa nepodarilo. MantisBT nedokáže prečítať súbor. Prosím, skontrolujte nastavenia projektu.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Zlyhalo nahrávanie súboru. Toto je pravdepodobne kvôli tomu, že veľkosť súboru bola väčšia ako je maximálna povolená veľkosť v konfigurácii PHP.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Chýba potrebný parameter pre túto stránku (%1$s).';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfiguračná voľba „%1$s“ nebola nájdená.';
@@ -772,7 +772,7 @@ $s_sponsorship_updated = 'Sponzoring aktualizovaný';
 $s_sponsorship_deleted = 'Sponzoring zrušený';
 $s_sponsorship_more_info = 'Viac inormácií o sponzoringu';
 $s_changelog = 'Protokol o zmenách';
-$s_http_auth_realm = 'Prihláasenie do Mantis';
+$s_http_auth_realm = 'Prihláasenie do MantisBT';
 $s_bug = 'problém';
 $s_add_new_relationship = 'Nový vzťah';
 $s_add_new_relationship_button = 'Pridať';

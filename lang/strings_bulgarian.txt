@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -180,7 +180,7 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Вече съществува прое
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Задължителното поле \'%s\' е празно. Моля допълнете формата.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Профилът е защитен. Нямате право на достъп докато не се премахне защитата.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Достъпът отказан.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Проблем при зареждането на файла. Каченият файл не се разпознава от Mantis. Моля, проверете проектовите настройки';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Проблем при зареждането на файла. Каченият файл не се разпознава от MantisBT. Моля, проверете проектовите настройки';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Проблем при зареждането на файла, поради опит за качване на твърде голям файл. Моля, проверете настройките на PHP инсталацията.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Задължителният параметър към тази страница (%s) не е открит.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Потребителското име е вече заето. Моля изберете друго.';
@@ -520,7 +520,7 @@ $s_newer_news_link = 'По-нови новини';
 $s_older_news_link = 'По-стари новини';
 $s_archives = 'Архиви';
 $s_rss = 'RSS';
-$s_mantis_version = 'Версия на Mantis';
+$s_mantis_version = 'Версия на MantisBT';
 $s_created_user_part1 = 'Създаден потребител';
 $s_created_user_part2 = 'с ниво на достъп';
 $s_create_new_account_title = 'Създаване на нов профил';
@@ -931,7 +931,7 @@ $s_sponsorship_paid = 'Спонсорството е платено';
 $s_sponsorship_more_info = 'Повече информация за спонсорство';
 $s_sponsorship_total = 'Общо спонсорство';
 $s_changelog = 'История на промените';
-$s_http_auth_realm = 'Вход в Mantis';
+$s_http_auth_realm = 'Вход в MantisBT';
 $s_bug = 'проблем';
 $s_add_new_relationship = 'Нова релация';
 $s_add_new_relationship_button = 'Добавяне';

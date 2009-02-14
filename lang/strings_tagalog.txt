@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -191,7 +191,7 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Umiiral na ang proyektong may ganyang 
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Walang laman ang isang kinakailangang kahanayang "%1$s". Pakisuri lamang muli ang mga ipinasok mo.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Nakasanggalang ang kuwentang ito.  Hindi ka pinapahintulutang mapuntahan ito hangga\'t hindi inaalis ang proteksyon ng akawnt.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Ipinagkait/Tinanggihan ang Pagpasok (akseso).';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Nabigo ang pagkarga ng talaksan. Hindi mabasa ng Mantis ang talaksan. Pakisuri ang mga katakdaang pamproyekto.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Nabigo ang pagkarga ng talaksan. Hindi mabasa ng MantisBT ang talaksan. Pakisuri ang mga katakdaang pamproyekto.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Nabigo ang pagkarga ng talaksan.  Maaaring dahil ito sa mas malak ang sukat ng talaksan kaysa sa pinapahintulutan ng niluklok/ininstalang PHP na ito.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Hindi natagpuan ang isang kinakailangang parametro sa pahinang (%1$s) ito.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ginagamit na ang ganyang pangalan ng tagaamit. Bumalik po lamang at pumili ng isa/iba pa.';
@@ -278,7 +278,7 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Hindi nakakabit sa depektong iyan ang g
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Nakakabit na sa depektong iyan ang ganyang tatak.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Hindi matagpuan ang tanda.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Hindi pa ipinapahayag ang kaganapang "%1$s".';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Hindi nakatala/nakarehistro sa Mantis ang pampasak (\'\'plug-in\'\').';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Hindi nakatala/nakarehistro sa MantisBT ang pampasak (\'\'plug-in\'\').';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Nakaluklok na ang pampasak.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Hindi natagpuan ang pahina ng pampasak';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Nabigo ang pagtataas ng uri/kalidad ng plano ng pampasak sa loob ng blokeng #%1$s.';
@@ -581,7 +581,7 @@ $s_older_news_link = 'Mas Lumang mga Balita';
 $s_archives = 'Mga sinupan (arkibo)';
 $s_rss = 'RSS';
 $s_site_information = 'Kabatirang ukol sa Sityo';
-$s_mantis_version = 'Bersyon ng Mantis';
+$s_mantis_version = 'Bersyon ng MantisBT';
 $s_schema_version = 'Bersyon ng Schema';
 $s_site_path = 'Daanan ng Sityo';
 $s_core_path = 'Pangunahing Daanan';
@@ -1027,7 +1027,7 @@ $s_changelog = 'Tala ng Pagbabago';
 $s_changelog_empty = 'Walang makuhang kabatiran ukol sa Tala ng Pagbabago';
 $s_roadmap = 'Mapa ng daanan';
 $s_resolved_progress = '%1$d ng %2$d (mga) labas nalutas na. Pagsulong (%3$d%%).';
-$s_http_auth_realm = 'Paglagda sa Mantis';
+$s_http_auth_realm = 'Paglagda sa MantisBT';
 $s_bug = 'labas';
 $s_bugs = 'mga labas';
 $s_add_new_relationship = 'Bagong pakikipag-ugnayan';

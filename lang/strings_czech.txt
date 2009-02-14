@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -282,7 +282,7 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Tato značka nenáleží k tomuto probl
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Tato značka už je k tomuto problému přiřazena.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Znamení nebylo nalezeno.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Událost \'%s\' nebyla dosud deklarována.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Zásuvka není pro Mantis registrována.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Zásuvka není pro MantisBT registrována.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Zásuvka je už nainstalována.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Stránka zásuvek nenalezena.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Povýšení schématu zásuvek havarovalo na bloku #%s.';
@@ -942,7 +942,7 @@ $s_sponsorship_total = 'Sponzoring celkem';
 $s_changelog = 'Protokol o změnách';
 $s_changelog_empty = 'Protokol o změnách není k dispozici';
 $s_roadmap = 'Časový plán';
-$s_http_auth_realm = 'Přihlášení do Mantis';
+$s_http_auth_realm = 'Přihlášení do MantisBT';
 $s_bug = 'problém';
 $s_bugs = 'problémy';
 $s_add_new_relationship = 'Nový vztah';

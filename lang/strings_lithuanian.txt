@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -273,7 +273,7 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Gairė nėra prikabinta prie šios klai
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Ši gairė jau prikabinta prio šios klaidos.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Token negali būti rastas.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Įvykis "%s" dar nebuvo apibrėžtas.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Įskiepis nėra užregistruotas Mantis sistemoje.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Įskiepis nėra užregistruotas MantisBT sistemoje.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Įskiepis jau įdiegtas.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Įskiepio puslapis nerastas.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Įskiepio schemos atnaujinimas nepavyko bloke #%s.';
@@ -539,7 +539,7 @@ $s_newer_news_link = 'Naujesnės naujienos';
 $s_older_news_link = 'Senesnės naujienos';
 $s_archives = 'Archyvas';
 $s_rss = 'RSS';
-$s_mantis_version = 'Mantis versija';
+$s_mantis_version = 'MantisBT versija';
 $s_schema_version = 'Schema versija';
 $s_created_user_part1 = 'Sukurti vartotoją';
 $s_created_user_part2 = 'su priėjimo lygiu';
@@ -889,7 +889,7 @@ $s_sponsorship_updated = 'Rėmimas atnaujintas';
 $s_sponsorship_deleted = 'Rėmimas ištrintas';
 $s_sponsorship_more_info = 'Daugiau informacijos apie rėmimą';
 $s_changelog = 'Pakeitimų istorija';
-$s_http_auth_realm = 'Mantis prisijungimas';
+$s_http_auth_realm = 'MantisBT prisijungimas';
 $s_bug = 'klaida';
 $s_bugs = 'klaidos';
 $s_add_new_relationship = 'Nauji ryšiai';

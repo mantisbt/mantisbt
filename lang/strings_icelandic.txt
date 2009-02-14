@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -170,7 +170,7 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Verkefni með sama nafni er til.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Nauðsynlegt svæði \'%s\' var autt. Athugaðu betur ílagsgögnin.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Þessi aðgangur er lokaður. Þú hefur ekki aðgang þar til læsingu hefur verið aflétt.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Aðgangur óheimill.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Upphlaðning skráar mistókst. Skráin er ekki samrýmanleg við Mantis. Athugaði stillingar verksins.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Upphlaðning skráar mistókst. Skráin er ekki samrýmanleg við MantisBT. Athugaði stillingar verksins.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Upphlaðning skráar mistókst. Líklega vegna þess að stærð skrár var meira enn heimilt er með þessari PHP uppsetningu.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Tilskilin breyta á þessari síðu (%s) fannst ekki.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Þetta notendanafn er þegar í notkun. Farðu til baka og veldu annað.';
@@ -865,7 +865,7 @@ $s_monitored_by = 'Vaktað af';
 $s_attachments = 'Viðhengi';
 $s_attachment_alt = 'V';
 $s_changelog = 'Breyta dagbók';
-$s_http_auth_realm = 'Mantis innskráning';
+$s_http_auth_realm = 'MantisBT innskráning';
 $s_bug = 'verkbeiðni';
 $s_add_new_relationship = 'Ný tengsl';
 $s_add_new_relationship_button = 'Viðbót';

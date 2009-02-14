@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -197,7 +197,7 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Um projeto com este nome já existe.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Um campo necessário \'%s\' estava vazio.  Por favor, verifique novamente suas entradas.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protegida.  Você não tem permissão para acessá-la até que a proteção da conta seja retirada.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acesso Negado.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'O carregamento do arquivo falhou.  O arquivo não pôde ser lido pelo Mantis. Por favor, verifique as configurações do projeto.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'O carregamento do arquivo falhou. O arquivo não pôde ser lido pelo MantisBT. Por favor, verifique as configurações do projeto.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'O carregamento do arquivo falhou.  Provavelmente é devido ao tamanho do arquivo ser maior do que o permitido atualmente por esta instalação PHP.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Um parâmetro necessário para esta página (%s) não foi encontrado.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Este nome de usuário já está sendo usado.  Por favor, volte e selecione um outro.';
@@ -284,7 +284,7 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Esse marcador não está aplicado a ess
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Esse marcador já está aplicado a esse caso.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Símbolo nõ foi encontrado.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Evento "%1$s" ainda não foi declarado.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'O Plugin não está registrado com o Mantis.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'O Plugin não está registrado com o MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'O Plugin já está instalado.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'A página do Plugin não foi encontrada.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'A atualização do schema do plugin falhou no bloco #%1$s.';
@@ -587,7 +587,7 @@ $s_older_news_link = 'Notícias Antigas';
 $s_archives = 'Arquivos';
 $s_rss = 'RSS';
 $s_site_information = 'Informação do Site';
-$s_mantis_version = 'Versão do Mantis';
+$s_mantis_version = 'Versão do MantisBT';
 $s_schema_version = 'Versão do Schema';
 $s_site_path = 'Caminho do Site';
 $s_core_path = 'Caminho do Core';
@@ -1034,7 +1034,7 @@ $s_changelog = 'Registro de Mudanças';
 $s_changelog_empty = 'Não há informações disponíveis sobre registros de mudanças';
 $s_roadmap = 'Planejamento';
 $s_resolved_progress = '%d de %d caso(s) resolvidos. Progresso (%d%%).';
-$s_http_auth_realm = 'Login do Mantis';
+$s_http_auth_realm = 'Login do MantisBT';
 $s_bug = 'caso';
 $s_bugs = 'casos';
 $s_add_new_relationship = 'Nova relação';

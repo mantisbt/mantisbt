@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -284,7 +284,7 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'そのタグはチケットに登録さ
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'そのタグは既にチケットに登録済です。';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'トークンがみつかりません。';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'イベント「%1$s」はまだ定義されていません。';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Mantisにプラグインが登録されていません。';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'MantisBTにプラグインが登録されていません。';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'プラグインはインストール済みです。';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'プラグインのページがありません。';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'ブロック #%1$s でプラグインのスキーマのアップグレードに失敗しました。';
@@ -560,7 +560,7 @@ $s_click_to_login = 'ログイン→';
 $s_warning_plain_password_authentication = '<strong>警告:</strong>平文のパスワードが使用されていますので、あなたのパスワードが管理者に見えてしまいます。';
 $s_warning_default_administrator_account_present = '<strong>警告:</strong> デフォルトの\'administrator\'アカウントを無効にするかパスワードを変更してください。';
 $s_warning_admin_directory_present = '<strong>警告:</strong> Adminディレクトリを削除してください。';
-$s_error_database_version_out_of_date_1 = '<strong>エラー:</strong> データベースの構造が古いようです(config(datavaseversion)が0で、古いアップグレード用のテーブルがあります)。Mantisのバージョン1.Xでは新しいアップデート処理が導入されています。バージョン0.XXからアップグレードするのであれば、一度1.0.8か1.1.Xにアップグレードしてから、1.2にアップグレードしてください。';
+$s_error_database_version_out_of_date_1 = '<strong>エラー:</strong> データベースの構造が古いようです(config(datavaseversion)が0で、古いアップグレード用のテーブルがあります)。MantisBTのバージョン1.Xでは新しいアップデート処理が導入されています。バージョン0.XXからアップグレードするのであれば、一度1.0.8か1.1.Xにアップグレードしてから、1.2にアップグレードしてください。';
 $s_error_database_no_schema_version = '<strong>エラー:</strong> データベースの構造が古いようです( config(databaseversion)が0で、古いアップグレード用のテーブルが存在しません )。データベースが動作しているか確認してください。- データベースの構造のバージョンを取得できません。- もし必要なら、メーリングリストにサポートを依頼してください。';
 $s_error_database_version_out_of_date_2 = '<strong>警告:</strong> データベースの構想が古いようです。ログインする前に、<a href="admin/install.php">アップグレード</a>してください。';
 $s_error_code_version_out_of_date = '<strong>警告:</strong> データベースの構造がインストールしたコードより新しいようです。コードをアップグレードしてください。';
@@ -587,7 +587,7 @@ $s_older_news_link = '過去のニュース';
 $s_archives = '履歴';
 $s_rss = 'RSS';
 $s_site_information = 'サイト情報';
-$s_mantis_version = 'Mantisバージョン';
+$s_mantis_version = 'MantisBTバージョン';
 $s_schema_version = 'スキーマバージョン';
 $s_site_path = 'サイトパス';
 $s_core_path = 'コアパス';
@@ -1035,7 +1035,7 @@ $s_changelog = '変更履歴';
 $s_changelog_empty = '変更履歴はありません。';
 $s_roadmap = 'ロードマップ';
 $s_resolved_progress = '全%2$d件中%1$d件解決済。進捗 (%3$d%%)。';
-$s_http_auth_realm = 'Mantis ログイン';
+$s_http_auth_realm = 'MantisBT ログイン';
 $s_bug = 'チケット';
 $s_bugs = 'チケット';
 $s_add_new_relationship = '新規関連';

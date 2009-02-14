@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -162,7 +162,7 @@ $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Este ficheiro é um duplicado. Por favor 
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Já existe um projeto com esse nome.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protegida. Você não tem permissão para aceder a isto até que a proteção seja removida.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acesso Negado.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Carregamento de ficheiro mal-sucedido. Ficheiro não é legível pelo Mantis. Por favor verifique as definições do projeto.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Carregamento de ficheiro mal-sucedido. Ficheiro não é legível pelo MantisBT. Por favor verifique as definições do projeto.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Carregamento de ficheiro mal-sucedido. Isto foi provavelmente causado por o tamanho do ficheiro ser superior ao limite permitido por esta instalação PHP.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Um parâmetro obrigatório a esta página (%1$s) não foi encontrado.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Esse nome de utilizador já está a ser usado. Por favor volte atrás e escolha outro.';
@@ -230,7 +230,7 @@ $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Esse nome de etiqueta é inválido.';
 $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Essa etiqueta não está associada a esse bug.';
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Essa etiqueta já está associada a esse bug.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Evento "%1$s" ainda não foi declarado.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin não está registado no Mantis.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin não está registado no MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin já está instalado.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Não foi encontrada a página de plugin.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Houve um erro desconhecido "%1$s" durante a execução do plugin "%2$s".';

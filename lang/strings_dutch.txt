@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -198,7 +198,7 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Dit project bestaat al.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Een verplicht veld ("%1$s") is niet ingevuld. Controleer alstublieft uw invoer.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Deze gebruiker is beschermd. U hebt hier geen toegang totdat de bescherming is opgeheven.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Toegang geweigerd.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Toevoegen bestand mislukt omdat het niet door Mantis gelezen kon worden. Controleer de projectinstellingen.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Toevoegen bestand mislukt omdat het niet door MantisBT gelezen kon worden. Controleer de projectinstellingen.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Toevoegen bestand mislukt.  Dit komt waarschijnlijk doordat het bestand groter is dan toegestaan door deze PHP-installatie.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Een verplichte parameter van deze pagina (%1$s) kon niet gevonden worden.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Deze gebruikersnaam bestaat al. Ga terug en kies een andere naam.';
@@ -285,7 +285,7 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Die tag heeft geen relatie met die meld
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Die tag heeft al een relatie met die melding.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Het token is niet aangetroffen.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'De gebeurtenis "%1$s" is nog niet aangemaakt.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'De uitbreiding is niet geregistreerd bij Mantis.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'De uitbreiding is niet geregistreerd bij MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'De uitbreiding is al geïnstalleerd.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'De pagina voor de uitbreiding is niet aangetroffen.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Het bijwerken van het uitbreidingsschema is mislukt in blok #%1$s.';
@@ -561,7 +561,7 @@ $s_click_to_login = 'Klik hier om aan te melden';
 $s_warning_plain_password_authentication = '<strong>WAARSCHUWING:</strong> Wachtwoorden worden als platte tekst opgeslagen. Dit maakt de wachtwoorden zichtbaar voor beheerders.';
 $s_warning_default_administrator_account_present = '<strong>WAARSCHUWING:</strong> Schakel de standaard gebruiker \'administrator\' uit of wijzig het wachtwoord.';
 $s_warning_admin_directory_present = '<strong>WAARSCHUWING:</strong> De map admin/ kan het beste verwijderd worden.';
-$s_error_database_version_out_of_date_1 = '<strong>FOUT:</strong> De databasestructuur lijkt verouderd te zijn (config(databaseversion) is 0 en er bestaan oude upgradetabellen). In versie 1.x van Mantis is een nieuwe bijwerkprocedure toegevoegd. het lijkt alsof u bijwerkt van een 0.XX Release. Werk alstublieft bij naar 1.0.8 of 1.1.x, en daarna pas naar 1.2.';
+$s_error_database_version_out_of_date_1 = '<strong>FOUT:</strong> De databasestructuur lijkt verouderd te zijn (config(databaseversion) is 0 en er bestaan oude upgradetabellen). In versie 1.x van MantisBT is een nieuwe bijwerkprocedure toegevoegd. het lijkt alsof u bijwerkt van een 0.XX Release. Werk alstublieft bij naar 1.0.8 of 1.1.x, en daarna pas naar 1.2.';
 $s_error_database_no_schema_version = '<strong>FOUT:</strong> De databasestructuur lijkt verouderd te zijn (config(databaseversion) is 0 en er bestaan geen oude upgradetabellen). Controleer alstublieft of de databaseserver actief is. De versie van het databaseschema kan niet achterhaald worden. Config Table gaf geen geldige versie van het databaseschema terug. Vraag advies op de mailinglijst mantis-help als dat nodig is.';
 $s_error_database_version_out_of_date_2 = '<strong>WAARSCHUWING:</strong> De databasestructuur is mogelijk verouderd. U moet deze <a href="admin/install.php">bijwerken</a> voordat u aanmeldt.';
 $s_error_code_version_out_of_date = '<strong>WAARSCHUWING:</strong> De databasestructuur is nieuwer dan de geïnstalleerde programmacode. Werk de code bij.';
@@ -588,7 +588,7 @@ $s_older_news_link = 'Ouder nieuws';
 $s_archives = 'Archieven';
 $s_rss = 'RSS';
 $s_site_information = 'Siteinformatie';
-$s_mantis_version = 'Versie Mantis';
+$s_mantis_version = 'Versie MantisBT';
 $s_schema_version = 'Versie schema';
 $s_site_path = 'Sitepad';
 $s_core_path = 'Corepad';
@@ -1038,7 +1038,7 @@ $s_changelog = 'Logboek';
 $s_changelog_empty = 'Er is geen informatie beschikbaar in het wijzigingenlogboek.';
 $s_roadmap = 'Productplanning';
 $s_resolved_progress = '%1$d van %2$d melding(en) opgelost. Voortgang (%3$d%%).';
-$s_http_auth_realm = 'Mantis aanmelden';
+$s_http_auth_realm = 'MantisBT aanmelden';
 $s_bug = 'melding';
 $s_bugs = 'meldingen';
 $s_add_new_relationship = 'Nieuwe relatie';

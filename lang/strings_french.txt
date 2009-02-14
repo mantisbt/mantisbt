@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -293,7 +293,7 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Cette balise n\'est pas associée à ce
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Cette balise est déjà associée à ce bogue.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Jeton introuvable.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'L\'événement « %s » est indéfini.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Le plugiciel n\'est pas enrégisté avec Mantis.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Le plugiciel n\'est pas enrégisté avec MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Le plugiciel est déjà installé.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'La page du plugiciel est introuvable.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'La mise à jour du schéma pour le plugiciel a échoué en bloc #%s.';
@@ -596,7 +596,7 @@ $s_older_news_link = 'Anciennes nouvelles';
 $s_archives = 'Archives';
 $s_rss = 'RSS';
 $s_site_information = 'Informations sur le site';
-$s_mantis_version = 'Version de Mantis';
+$s_mantis_version = 'Version de MantisBT';
 $s_schema_version = 'Version du schéma';
 $s_site_path = 'Chemin du site';
 $s_core_path = 'Chemin du répertoire principal';
@@ -1046,7 +1046,7 @@ $s_changelog = 'Liste des changements';
 $s_changelog_empty = 'Liste des changements indisponible';
 $s_roadmap = 'Calendrier';
 $s_resolved_progress = '%d de %d bogue(s) résolus.  Progrès (%d%%).';
-$s_http_auth_realm = 'Branchement Mantis';
+$s_http_auth_realm = 'Branchement MantisBT';
 $s_bug = 'bogue';
 $s_bugs = 'bogues';
 $s_add_new_relationship = 'Nouvelle relation';

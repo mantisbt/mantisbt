@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -187,7 +187,7 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Már létezik ilyen nevű projekt.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Egy kötelező \'%s\' mező üres. Ellenőrizze a megadott adatokat.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ez egy védett felhasználó. Hozzáférés a felhasználó-védelem megszüntetetéséig megtagadva.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Hozzáférés megtagadva.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Sikertelen fájlfeltöltés: a Mantis nem tudja olvasni a fájlt. Ellenőrizze a projekt beállításait';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Sikertelen fájlfeltöltés: a MantisBT nem tudja olvasni a fájlt. Ellenőrizze a projekt beállításait';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Sikertelen fájlfeltöltés: a fájl mérete valószínűleg nagyobb, mint amit a jelenlegi PHP beállítások megengednek.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Egy ezen oldalhoz (%s) szükséges paraméter hiányzik.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'A felhasználónév már foglalt. Lépjen vissza, és válasszon másikat.';
