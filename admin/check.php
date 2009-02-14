@@ -1,23 +1,23 @@
 <?php
-# Mantis - a php based bugtracking system
+# MantisBT - a php based bugtracking system
 
-# Mantis is free software: you can redistribute it and/or modify
+# MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
 # (at your option) any later version.
 #
-# Mantis is distributed in the hope that it will be useful,
+# MantisBT is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
  
@@ -26,7 +26,7 @@ error_reporting( E_ALL );
 $g_skip_open_db = true;  # don't open the database in database_api.php
 
 /**
- * Mantis Core API's
+ * MantisBT Core API's
  */
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
@@ -180,7 +180,7 @@ $version = phpversion();
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<title> Mantis Administration - Check Installation </title>
+<title> MantisBT Administration - Check Installation </title>
 <link rel="stylesheet" type="text/css" href="admin.css" />
 </head>
 <body>
@@ -211,7 +211,7 @@ $version = phpversion();
 <!-- Test PHP Version -->
 <tr>
 	<td bgcolor="#ffffff">
-		Mantis requires at least <b>PHP <?php echo PHP_MIN_VERSION?></b>. You are running <b>PHP <?php echo $version?>
+		MantisBT requires at least <b>PHP <?php echo PHP_MIN_VERSION?></b>. You are running <b>PHP <?php echo $version?>
 	</td>
 	<?php
 		$result = version_compare( phpversion(), PHP_MIN_VERSION, '>=' );
@@ -410,9 +410,9 @@ check_zend_optimiser_version();
 			<td bgcolor="#ffcc22">
 				<span class="title">WARNING - register_globals - WARNING</span><br /><br />
 
-				You have register_globals enabled in PHP, which is considered a security risk.  Since version 0.18, Mantis has no longer relied on register_globals being enabled.  PHP versions later that 4.2.0 have this option disabled by default.  For more information on the security issues associated with enabling register_globals, see <a href="http://www.php.net/manual/en/security.globals.php">this page</a>.
+				You have register_globals enabled in PHP, which is considered a security risk.  Since version 0.18, MantisBT has no longer relied on register_globals being enabled.  PHP versions later that 4.2.0 have this option disabled by default.  For more information on the security issues associated with enabling register_globals, see <a href="http://www.php.net/manual/en/security.globals.php">this page</a>.
 
-				If you have no other PHP applications that rely on register_globals, you should add the line <pre>register_globals = Off</pre> to your php.ini file;  if you do have other applications that require register_globals, you could consider disabling it for your Mantis installation by adding the line <pre>php_value register_globals off</pre> to a <tt>.htaccess</tt> file or a <tt>&lt;Directory&gt;</tt> or <tt>&lt;Location&gt;</tt> block in your apache configuration file.  See the apache documentation if you require more information.
+				If you have no other PHP applications that rely on register_globals, you should add the line <pre>register_globals = Off</pre> to your php.ini file;  if you do have other applications that require register_globals, you could consider disabling it for your MantisBT installation by adding the line <pre>php_value register_globals off</pre> to a <tt>.htaccess</tt> file or a <tt>&lt;Directory&gt;</tt> or <tt>&lt;Location&gt;</tt> block in your apache configuration file.  See the apache documentation if you require more information.
 			</td>
 		</tr>
 		</table>
@@ -433,7 +433,7 @@ check_zend_optimiser_version();
 
 				You are using CRYPT_FULL_SALT as your login method. This login method is deprecated and you should change the login method to either CRYPT (which is compatible) or MD5 (which is more secure). CRYPT_FULL_SALT will be removed in the next major release.
 
-				You can simply change the login_method in your configuration file. You don't need to do anything else, even if you migrate to MD5 (which produces incompatible hashes). This is because Mantis will automatically convert the passwords as users log in.
+				You can simply change the login_method in your configuration file. You don't need to do anything else, even if you migrate to MD5 (which produces incompatible hashes). This is because MantisBT will automatically convert the passwords as users log in.
 			</td>
 		</tr>
 		</table>
@@ -449,7 +449,7 @@ check_zend_optimiser_version();
 
 				You are not using MD5 as your login_method. The other login methods are mostly provided for backwards compatibility, but we recommend migrating to the more secure MD5.
 
-				You can simply change the login_method in your configuration file to MD5. Mantis will automatically convert the passwords as users log in.
+				You can simply change the login_method in your configuration file to MD5. MantisBT will automatically convert the passwords as users log in.
 			</td>
 		</tr>
 		</table>
@@ -486,7 +486,7 @@ check_zend_optimiser_version();
 				<p>The following size settings are in effect.  Maximum upload size will be whichever of these is SMALLEST. </p>
 				<p>PHP variable 'upload_max_filesize': <?php echo ini_get_number( 'upload_max_filesize' )?> bytes<br />
 				PHP variable 'post_max_size': <?php echo ini_get_number( 'post_max_size' )?> bytes<br />
-				Mantis variable 'max_file_size': <?php echo config_get_global( 'max_file_size' )?> bytes</p>
+				MantisBT variable 'max_file_size': <?php echo config_get_global( 'max_file_size' )?> bytes</p>
 
 		<?php
 				if( DATABASE == config_get_global( 'file_upload_method' ) ) {
@@ -500,7 +500,7 @@ check_zend_optimiser_version();
 				echo '</p>';
 			} else {
 	?>
-				<p>File uploads are DISABLED.  To enable them, make sure <tt>$g_file_uploads = on</tt> is in your php.ini file and <tt>allow_file_upload = ON</tt> is in your mantis config file.</p>
+				<p>File uploads are DISABLED.  To enable them, make sure <tt>$g_file_uploads = on</tt> is in your php.ini file and <tt>allow_file_upload = ON</tt> is in your MantisBT config file.</p>
 		<?php
 			}
 ?>
@@ -515,7 +515,7 @@ check_zend_optimiser_version();
 <tr>
 	<td bgcolor="#f4f4f4">
 		<span class="title">Testing Email</span>
-		<p>You can test the ability for Mantis to send email notifications with this form.  Just click "Send Mail".  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings (see PHPMailer related settings in your config_inc.php, if they don't exist, copy from config_defaults_inc.php).  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a> if you are using the mail() PHPMailer sending mode.</p>
+		<p>You can test the ability for MantisBT to send email notifications with this form.  Just click "Send Mail".  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings (see PHPMailer related settings in your config_inc.php, if they don't exist, copy from config_defaults_inc.php).  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a> if you are using the mail() PHPMailer sending mode.</p>
 		<?php
 		if( $f_mail_test ) {
 			echo '<b><font color="#ff0000">Testing Mail</font></b> - ';

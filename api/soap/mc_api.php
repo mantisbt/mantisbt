@@ -9,7 +9,7 @@
 # set up error_handler() as the new default error handling function
 set_error_handler( 'mc_error_handler' );
 
-# override some Mantis configurations
+# override some MantisBT configurations
 $g_show_detailed_errors = OFF;
 $g_stop_on_errors = ON;
 $g_display_errors = array(
@@ -27,7 +27,7 @@ function mc_version() {
 	return MANTIS_VERSION;
 }
 
-# Checks if Mantis installation is marked as offline by the administrator.
+# Checks if MantisBT installation is marked as offline by the administrator.
 # true: offline, false: online
 function mci_is_mantis_offline() {
 	$t_offline_file = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'mantis_offline.php';
@@ -170,11 +170,11 @@ function mci_null_if_empty( &$p_value ) {
 }
 
 /**
- * Gets the url for Mantis.  This is based on the 'path' config variable in Mantis.  However,
- * the default value for 'path' doesn't work properly when access from within MantisConnect.
+ * Gets the url for MantisBT.  This is based on the 'path' config variable in MantisBT.  However,
+ * the default value for 'path' does not work properly when access from within MantisConnect.
  * This internal function fixes this bug.
  *
- * @return Mantis URL terminated by a /.
+ * @return MantisBT URL terminated by a /.
  */
 function mci_get_mantis_path() {
 	$t_path = config_get( 'path' );

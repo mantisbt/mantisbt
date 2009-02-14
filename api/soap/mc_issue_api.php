@@ -894,7 +894,7 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
 	if( $t_old_id_relationship == 0 ) {
 		relationship_add( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
 
-		// The above function call into Mantis doesn't seem to return a valid BugRelationshipData object.
+		// The above function call into MantisBT does not seem to return a valid BugRelationshipData object.
 		// So we call db_insert_id in order to find the id of the created relationship.
 		$t_relationship_id = db_insert_id( db_get_table( 'mantis_bug_relationship_table' ) );
 

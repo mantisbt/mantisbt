@@ -1,20 +1,20 @@
 <?php
-# Mantis - a php based bugtracking system
+# MantisBT - a php based bugtracking system
 
-# Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.
+# Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.
 
-# Mantis is free software: you can redistribute it and/or modify
+# MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
 # (at your option) any later version.
 #
-# Mantis is distributed in the hope that it will be useful,
+# MantisBT is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 require_once( 'MantisWikiPlugin.class.php' );
 
@@ -38,7 +38,7 @@ abstract class MantisCoreWikiPlugin extends MantisWikiPlugin {
 class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 
 	function register() {
-		$this->name = 'Mantis Dokuwiki Integration';
+		$this->name = 'MantisBT Dokuwiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
 			'MantisCore' => '1.2.0',
@@ -74,7 +74,7 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 
 	function register() {
-		$this->name = 'Mantis MediaWiki Integration';
+		$this->name = 'MantisBT MediaWiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
 			'MantisCore' => '1.2.0',
@@ -106,7 +106,7 @@ class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 
 	function register() {
-		$this->name = 'Mantis Twiki Integration';
+		$this->name = 'MantisBT Twiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
 			'MantisCore' => '1.2.0',
@@ -142,7 +142,7 @@ class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 
 	function register() {
-		$this->name = 'Mantis WikkaWiki Integration';
+		$this->name = 'MantisBT WikkaWiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
 			'MantisCore' => '1.2.0',
@@ -178,7 +178,7 @@ class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 
 	function register() {
-		$this->name = 'Mantis Xwiki Integration';
+		$this->name = 'MantisBT Xwiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
 			'MantisCore' => '1.2.0',

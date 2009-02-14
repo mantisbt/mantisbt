@@ -13,6 +13,7 @@ docbook/*/*/install
 # IDE/Editor temporary files
 *~
 *.swp
+*.bak
 .project
 
 # IIS7 

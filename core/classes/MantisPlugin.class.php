@@ -1,24 +1,24 @@
 <?php
-# Mantis - a php based bugtracking system
+# MantisBT - a php based bugtracking system
 
-# Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.
+# Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.
 
-# Mantis is free software: you can redistribute it and/or modify
+# MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
 # (at your option) any later version.
 #
-# Mantis is distributed in the hope that it will be useful,
+# MantisBT is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Base class that implements basic plugin functionality
- * and integration with Mantis. See the Mantis wiki for
+ * and integration with MantisBT. See the Mantis wiki for
  * more information.
  * @package MantisBT
  * @subpackage classes 
@@ -89,18 +89,18 @@ abstract class MantisPlugin {
 }
 
 /**
- * Mantis Core Plugin
+ * MantisBT Core Plugin
  * Used to give other plugins a permanent core plugin to 'require' for compatibility.
  * Can/should not be used as a base class.
  */
 final class MantisCorePlugin extends MantisPlugin {
 	function register() {
-		$this->name = 'Mantis Core';
+		$this->name = 'MantisBT Core';
 		$this->description = 'Core plugin API for the Mantis Bug Tracker.';
 
 		$this->version = MANTIS_VERSION;
 
-		$this->author = 'Mantis Team';
+		$this->author = 'MantisBT Team';
 		$this->contact = 'mantisbt-dev@lists.sourceforge.net';
 		$this->url = 'http://www.mantisbt.org';
 	}

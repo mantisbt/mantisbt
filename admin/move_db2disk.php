@@ -1,28 +1,28 @@
 <?php
-# Mantis - a php based bugtracking system
+# MantisBT - a php based bugtracking system
 
-# Mantis is free software: you can redistribute it and/or modify
+# MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
 # (at your option) any later version.
 #
-# Mantis is distributed in the hope that it will be useful,
+# MantisBT is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This upgrade moves attachments from the database to the disk
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 /**
- * Mantis Core API's
+ * MantisBT Core API's
  */
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
@@ -176,7 +176,7 @@ if( $f_move_type == 'attachment' ) {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<title>Mantis Administration - Move <?php echo $t_type?> to Disk</title>
+<title>MantisBT Administration - Move <?php echo $t_type?> to Disk</title>
 <link rel="stylesheet" type="text/css" href="admin.css" />
 </head>
 <body>

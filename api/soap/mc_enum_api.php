@@ -223,7 +223,7 @@ function mci_get_enum_value_from_label( $p_enum_string, $p_label ) {
  * - default value for the specified enumeration, if exists in configuration.
  * - first id, if object ref doesn't contain an id or a name.
  *
- * @param string     $p_enum         The name of the enumeration as in the Mantis configuration file
+ * @param string     $p_enum         The name of the enumeration as in the MantisBT configuration file
  * @param ObjectRef  $p_object_ref   An associate array with "id" and "name" keys.
  * @return enum id
  */

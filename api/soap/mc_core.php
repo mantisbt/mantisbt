@@ -6,11 +6,11 @@
 # change the license of future releases.
 # See docs/ folder for more details
 
-# Path to Mantis is assumed to be the grand parent directory.  If this is not
-# the case, then this variable should be set to the Mantis path.
+# Path to MantisBT is assumed to be the grand parent directory.  If this is not
+# the case, then this variable should be set to the MantisBT path.
 # This can not be a configuration option, then MantisConnect configuration
-# needs Mantis to be included first to make use of the constants and possibly
-# configuration defined in Mantis.
+# needs MantisBT to be included first to make use of the constants and possibly
+# configuration defined in MantisBT.
 $t_mantis_dir = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
 
 # include Mantis files

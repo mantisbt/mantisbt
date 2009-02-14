@@ -1333,7 +1333,7 @@ $l_oServer->register( 'mc_issue_checkin',
 	),
 	$t_namespace,
 	false, false, false,
-	'Notifies Mantis of a check-in for the issue with the specified id.'
+	'Notifies MantisBT of a check-in for the issue with the specified id.'
 );
 
 ###
@@ -1378,7 +1378,7 @@ if ( isset( $HTTP_RAW_POST_DATA ) ) {
 	$t_input = implode( "\r\n", file( 'php://input' ) );
 }
 
-# only include the Mantis / MantisConnect related files, if the current
+# only include the MantisBT / MantisConnect related files, if the current
 # request is a webservice call (rather than webservice documentation request,
 # eg: WSDL).
 if ( mci_is_webservice_call( $l_oServer, $t_input ) ) {

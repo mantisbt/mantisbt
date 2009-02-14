@@ -3,7 +3,7 @@
 
 <html>
   <head>
-    <title>Mantis</title>
+    <title>MantisBT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Refresh" content="600" />
 
@@ -46,11 +46,11 @@
 
     <div id="box">
 
-      <h1>Mantis</h1>
+      <h1>MantisBT</h1>
 
       <p>
-        The Mantis bug tracker is currently offline for maintenance.
-        Please check back later to see if Mantis is online again
+        The MantisBT bug tracker is currently offline for maintenance.
+        Please check back later to see if MantisBT is online again
         or contact your administrator for details.
       </p>
 

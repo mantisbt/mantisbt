@@ -1,23 +1,23 @@
 <?php
-# Mantis - a php based bugtracking system
+# MantisBT - a php based bugtracking system
 
-# Mantis is free software: you can redistribute it and/or modify
+# MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
 # (at your option) any later version.
 #
-# Mantis is distributed in the hope that it will be useful,
+# MantisBT is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -25,7 +25,7 @@
 
 $g_skip_open_db = true;  # don't open the database in database_api.php
 /**
- * Mantis Core API's
+ * MantisBT Core API's
  */
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 $g_error_send_page_header = false; # suppress page headers in the error handler
@@ -75,7 +75,7 @@ if( false == $result ) {
 
 # check to see if the new installer was used
 if ( -1 == config_get( 'database_version', -1 ) ) {
-	echo "Upgrade from the current installed Mantis version is no longer supported.  If you are using Mantis version older than 1.0.0, then upgrade to v1.0.0 first.";
+	echo "Upgrade from the current installed MantisBT version is no longer supported.  If you are using MantisBT version older than 1.0.0, then upgrade to v1.0.0 first.";
 	exit( 1 );
 }
 

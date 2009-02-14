@@ -23,7 +23,7 @@ $g_mc_admin_access_level_threshold = MANAGER;
 $g_mc_specify_reporter_on_add_access_level_threshold = DEVELOPER;
 
 # The following enum ids are used when the webservices get enum labels that are not
-# defined in the associated Mantis installation.  In this case, the enum id is set
+# defined in the associated MantisBT installation.  In this case, the enum id is set
 # to the value specified by the corresponding configuration option.
 $g_mc_priority_enum_default_when_not_found = 0;
 $g_mc_severity_enum_default_when_not_found = 0;

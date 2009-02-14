@@ -1,12 +1,12 @@
 -------------------------------------------------------------------------------
-Mantis - a php based bugtracking system
+MantisBT - a php based bugtracking system
 Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
-Copyright (C) 2002-2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+Copyright (C) 2002-2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 -------------------------------------------------------------------------------
 
 CONFIGURATION
 
-This file contains information to help you customize Mantis.  A more
+This file contains information to help you customize MantisBT.  A more
 detailed doc can be found at:
 http://manual.mantisbt.org/manual.customizing.mantis.php
 
