@@ -867,6 +867,7 @@ $s_move_bug_button = 'Преместване на проблем';
 $s_attached_files = 'Прикрепени файлове';
 $s_publish = 'Публикуване';
 $s_cached = 'Кеширан';
+$s_add_user_to_monitor = 'Добавяне';
 $s_view_advanced_link = 'Разширен изглед';
 $s_viewing_bug_simple_details_title = 'Опростен изглед на проблем';
 $s_no_users_monitoring_bug = 'Няма потребители, наблюдаващи този проблем.';

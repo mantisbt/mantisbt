@@ -230,7 +230,7 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'لا يمكنك ضبط قضية كت�
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'الحقل المخصص لم يتم العثور عليه';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'هذا اسم مكرر.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'على الأقل مشروع واحد مازال يستخدم هذا الحقل.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'قيمة غير صحيحة ل%s.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'قيمة غير صحيحة للحقل "%1$s".';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'تعريف حقل مخصص غير صحيح.';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'تحقق LDAP فشل.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'الاتصال بخادم LDAP فشل.';
