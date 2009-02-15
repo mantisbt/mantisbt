@@ -42,11 +42,12 @@ else {
 	define( 'T_DOC_COMMENT', T_ML_COMMENT );
 }
 
+// check core language files
 if( function_exists( 'opendir' ) && function_exists( 'readdir' ) ) {
 	$t_lang_files = Array();
 	if( $handle = opendir( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' ) ) {
 		while( false !== ( $file = readdir( $handle ) ) ) {
-			if( $file[0] != '.' && $file != 'langreadme.txt' && $file != 'CVS' && !is_dir( $file ) ) {
+			if( $file[0] != '.' && $file != 'langreadme.txt' && !is_dir( $file ) ) {
 				$t_lang_files[] = $file;
 			}
 		}
@@ -66,21 +67,56 @@ else {
 if( sizeof( $t_lang_files ) > 0 ) {
 	echo 'Retrieved ', sizeof( $t_lang_files ), ' languages<br />';
 
-	foreach( $t_lang_files as $file ) {
-		$t_short_name = $file;
-
-		echo "Testing language file '$t_short_name' (phase 1)...<br />";
+	foreach( $t_lang_files as $t_file ) {
+		echo "Testing language file '$t_file' (phase 1)...<br />";
 		flush();
 
-		$file = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . $file;
+		checkfile( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR, $t_file );
+	}
+}
+
+// attempt to find plugin language files
+echo "Trying to find+check plugin language files...<br />";
+if( function_exists( 'opendir' ) && function_exists( 'readdir' ) ) {
+	checklangdir ( config_get( 'plugin_path' ) );
+} else {
+	echo 'php opendir/readdir are disabled - skipping<br />';
+}
+
+function checklangdir( $p_path, $p_subpath = '' ) {
+	$p_path = $p_path . DIRECTORY_SEPARATOR . $p_subpath . DIRECTORY_SEPARATOR;
+	if( $handle = opendir( $p_path ) ) {
+		while( false !== ( $file = readdir( $handle ) ) ) {
+			if ( $file[0] == '.' )
+				continue;
+			if ( $p_subpath == '' ) {
+				echo "Checking language files for plugin $file:<br />";
+			}
+			if( !is_dir( $p_path . DIRECTORY_SEPARATOR . $file ) && $p_subpath == 'lang' ) {
+				checkfile( $p_path, $file );		
+			} else {
+				if ( is_dir( $p_path . DIRECTORY_SEPARATOR . $file ) )
+					checklangdir( $p_path, $file);
+			}
+		}
+		closedir( $handle );
+	}
+}
+
+
+function checkfile( $p_path, $p_file ) {
+		echo "Testing language file '$p_file' (phase 1)...<br />";
+		flush();
+
+		$file = $p_path . $p_file;
 
 		$result = checktoken( $file );
 
 		if( !$result ) {
-			print_error( "FAILED: Language file '$t_short_name' failed at phase 1." );
+			print_error( "FAILED: Language file '$p_file' failed at phase 1." );
 		}
 
-		echo "Testing language file '$t_short_name' (phase 2)...<br />";
+		echo "Testing language file '$p_file' (phase 2)...<br />";
 		flush();
 
 		set_error_handler( 'lang_error_handler' );
@@ -91,13 +127,12 @@ if( sizeof( $t_lang_files ) > 0 ) {
 		restore_error_handler();
 
 		if( $result === false ) {
-			print_error( "FAILED: Language file '$t_short_name' failed at eval" );
+			print_error( "FAILED: Language file '$p_file' failed at eval" );
 		}
 
 		if( strlen( $data ) > 0 ) {
-			print_error( "FAILED: Language file '$t_short_name' failed at require_once (data output of length " . strlen( $data ) . ")" );
+			print_error( "FAILED: Language file '$p_file' failed at require_once (data output of length " . strlen( $data ) . ")" );
 		}
-	}
 }
 
 function checktoken( $file ) {
