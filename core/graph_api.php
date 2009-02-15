@@ -447,7 +447,7 @@ function create_developer_summary() {
 
 	$query = "SELECT handler_id, status
 				 FROM $t_bug_table
-				 WHERE handler_id != '' $specific_where";
+				 WHERE handler_id > 0 $specific_where";
 	$result = db_query( $query );
 	$t_total_handled = db_num_rows( $result );
 
@@ -506,11 +506,11 @@ function create_reporter_summary() {
 	$t_user_table = db_get_table( 'mantis_user_table' );
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_user_id = auth_get_current_user_id();
-	$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
+	$specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$query = "SELECT reporter_id
 				 FROM $t_bug_table
-				 WHERE id != '' $specific_where";
+				 WHERE $specific_where";
 	$result = db_query( $query );
 	$t_total_reported = db_num_rows( $result );
 
