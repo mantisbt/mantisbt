@@ -100,7 +100,7 @@ $db->CacheExecute($sql);
 		}
 		
 		// returns a recordset
-		function &readcache($filename, &$err, $secs2cache, $rsClass)
+		function readcache($filename, &$err, $secs2cache, $rsClass)
 		{
 			$false = false;
 			if (!$this->_connected) $this->connect($err);
@@ -121,6 +121,8 @@ $db->CacheExecute($sql);
 				$err = 'Unable to unserialize $rs';		
 				return $false;
 			}
+			if ($rs->timeCreated == 0) return $rs; // apparently have been reports that timeCreated was set to 0 somewhere
+			
 			$tdiff = intval($rs->timeCreated+$secs2cache - time());
 			if ($tdiff <= 2) {
 				switch($tdiff) {
@@ -150,7 +152,7 @@ $db->CacheExecute($sql);
 				$err = '';
 				if (!$this->connect($err) && $debug) ADOConnection::outp($err);
 			}
-			if ($this->_memcache) return false;
+			if (!$this->_memcache) return false;
 			
 			$del = $this->_memcache->flush();
 			
@@ -163,6 +165,12 @@ $db->CacheExecute($sql);
 		
 		function flushcache($filename, $debug=false)
 		{
+			if (!$this->_connected) {
+  				$err = '';
+  				if (!$this->connect($err) && $debug) ADOConnection::outp($err); 
+			} 
+			if (!$this->_memcache) return false;
+  
 			$del = $this->_memcache->delete($filename);
 			
 			if ($debug) 

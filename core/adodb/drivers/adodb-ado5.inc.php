@@ -1,6 +1,6 @@
 <?php
 /* 
-V5.06 16 Oct 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+V5.07 18 Dec 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. 
@@ -70,7 +70,8 @@ class ADODB_ado extends ADOConnection {
 		 } else {
 		 	$argDatabasename = '';
 		 	if ($argDBorProvider) $argProvider = $argDBorProvider;
-			else $argProvider = 'MSDASQL';
+			else if (stripos($argHostname,'PROVIDER') === false) /* full conn string is not in $argHostname */ 
+				$argProvider = 'MSDASQL';
 		}
 		
 		
@@ -117,6 +118,7 @@ class ADODB_ado extends ADOConnection {
 		$dbc->CursorLocation = $this->_cursor_location;
 		return  $dbc->State > 0;
 		} catch (exception $e) {
+			if ($this->debug);echo "<pre>",$argHostname,"\n",$e,"</pre>\n";
 		}
 		
 		return false;

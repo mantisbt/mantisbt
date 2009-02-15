@@ -1,7 +1,7 @@
 <?php
 
 /* 
- V5.06 16 Oct 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+ V5.07 18 Dec 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. See License.txt. 
@@ -10,6 +10,7 @@
   Latest version is available at http://adodb.sourceforge.net
   
   Thanks Diogo Toscano (diogo#scriptcase.net) for the code.
+	And also Sid Dunayer [sdunayer#interserv.com] for extensive fixes.
 */
 
 class ADODB_pdo_sqlite extends ADODB_pdo {
@@ -18,216 +19,140 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
 	var $sysTimeStamp = 'current_timestamp';
 	var $nameQuote = '`';
     var $replaceQuote = "''";
-    var $hasTransactions = true;
-    var $_bndInputArray = false;
-    var $hasInsertID = true;
     var $hasGenID = true;
-    var $_genSeqSQL = "create table %s (id integer)";
-    var $_genSeqCountSQL = 'select count(*) from %s';
-    var $_genSeq2SQL = 'insert into %s values(%s)';
-    var $_dropSeqSQL = 'drop table %s';
-    var $_stmt = false;
+	var $_genIDSQL       = "UPDATE %s SET id=id+1 WHERE id=%s";
+	var $_genSeqSQL      = "CREATE TABLE %s (id integer)";
+	var $_genSeqCountSQL = 'SELECT COUNT(*) FROM %s';
+	var $_genSeq2SQL     = 'INSERT INTO %s VALUES(%s)';
+	var $_dropSeqSQL     = 'DROP TABLE %s';
+        var $pdoDriver       = false;
     
     function _init($parentDriver)
 	{
+		$this->pdoDriver = $parentDriver;
 		$parentDriver->_bindInputArray = true;
+		$parentDriver->hasTransactions = true;
+		$parentDriver->hasInsertID = true;
 	}
 
-    function _query($sql,$inputarr=false) {
-            if(strtolower(substr($sql,0,5)) != 'alter') {
-                    return parent::_query($sql,$inputarr);
-            } else {
-                    if(!$this->sqliteDropColumn($sql))
-                            return parent::_query($sql,$inputarr);
-                    else
-                            return true;
-            }
-    }
+	function ServerInfo()
+	{
+		$parent = $this->pdoDriver;
+		@($ver = array_pop($parent->GetCol("SELECT sqlite_version()")));
+		@($end = array_pop($parent->GetCol("PRAGMA encoding")));
 
-	function _connect($argDSN, $argUsername, $argPassword, $argDatabasename, $persist=false) {
-	       return parent::_connect($argDatabasename,'','','',$persist);
+		$arr['version']     = $ver;
+		$arr['description'] = 'SQLite ';
+		$arr['encoding']    = $enc;
+
+		return $arr;
 	}
 
-        function sqliteDropColumn($sql) {
-                $queryparts = preg_split("/[\s]+/",$sql,10,PREG_SPLIT_NO_EMPTY);
-                if(count($queryparts) == 6) {
-                        $table = $queryparts[2];
-                        $temp_table = $table.'_Temp';
-                        $removeColumn = $queryparts[5];
-                        $removeColumn = str_replace(';','',$removeColumn);
-                        if(strtolower($queryparts[1]) != 'table' || 
-                                strtolower($queryparts[3]) != 'drop' || 
-                                strtolower($queryparts[4]) != 'column') {
-                                return false;
-                        } else {
-                           // RENAME TABLE to TABLE_Temp
-                           // CREATE new table without dropped column
-                           // INSERT RECORDS from old table to new
-                           // DROP Temp table
-                           $meta = $this->MetaColumns($table);
-                           $fields = Array();
-			   $fieldNames = Array();
-                           foreach($meta as $col) {
-                                if($col->name != $removeColumn) {
-                                       $colText = $col->name;
-				       if(!empty($col->type))
-				       		$colText .= ' '.$col->type;  
-				       if($col->not_null)
-						$colText .= ' NOT NULL';
-				       if(!empty($col->default_value))
-				       		$colText .= ' DEFAULT '.$col->default_value.'';
-				       
-				        $fieldNames[] = $col->name;
-				        $fields[] = $colText;
-				}           
-                           }
-                           $fieldList = implode(',',$fields);
-			   $fieldNameList = implode(',',$fieldNames);
-                           
-                           $this->BeginTrans();
-                           $sql = "SELECT sql FROM sqlite_master WHERE type = 'index' AND tbl_name = '$table'";
-                           $result = $this->Execute($sql);
-                           while(list($index) = $result->FetchRow()) {
-                                  $indexes[] = $index;
-                           }
+	function SelectLimit($sql,$nrows=-1,$offset=-1,$inputarr=false,$secs2cache=0) 
+	{
+		$parent = $this->pdoDriver;
+		$offsetStr = ($offset >= 0) ? " OFFSET $offset" : '';
+		$limitStr  = ($nrows >= 0)  ? " LIMIT $nrows" : ($offset >= 0 ? ' LIMIT 999999999' : '');
+	  	if ($secs2cache)
+	   		$rs = $parent->CacheExecute($secs2cache,$sql."$limitStr$offsetStr",$inputarr);
+	  	else
+	   		$rs = $parent->Execute($sql."$limitStr$offsetStr",$inputarr);
 
-                           $renameTempSql = 'ALTER TABLE '.$table.' RENAME TO '.$temp_table.';'; 
-                           $createTableSql = 'CREATE TABLE '.$table.'('.$fieldList.');'; 
-                           $copyTableContentsSql = 'INSERT INTO '.$table.' SELECT '.$fieldNameList.' FROM '.$temp_table.';';  
-                           $removeTableSql = 'DROP TABLE '.$temp_table.';';
-                           $vacuumSql = 'VACUUM '.$table.';'; 
-
-                           // Do the steps to drop the column by renaming and creating new table
-                           $ok = $this->Execute($renameTempSql); 
-                           if($ok) $ok = $this->Execute($createTableSql);  
-                           if($ok) $ok = $this->Execute($copyTableContentsSql);             
-                           
-                           $this->CommitTrans($ok);
-                                         
-                           if($ok) $ok = $this->Execute($removeTableSql);                                                       
-                           if($ok) $ok = $this->Execute($vacuumSql);   
-                                                      
-                           // Recreate the indexes on the new table from the old
-                           foreach($indexes as $indexSQL) {
-			       $listStart = strpos($indexSQL,'(')+1;
-			       $listEnd = strpos($indexSQL,')');
-			       $indexList = substr($indexSQL,$listStart,$listEnd-$listStart);
-			       $indexList = explode(',',$indexList);
-			       $newIndexList = Array();
-			       foreach($indexList as $listItem) {
-			           $listItem = trim($listItem);
-				   if($listItem != $removeColumn) {
-			       		$newIndexList[] = $listItem;    
-				   }
-			       }
-			       $indexSQL = substr($indexSQL,0,$listStart-1);
-			       $indexSQL .= '('.implode(',',$newIndexList).');'; 
-                               $this->Execute($indexSQL);   
-                           }
-                           return $ok; 
-                        }
-                }
-                return false;    
-        }
-
-	function &SelectLimit($sql,$nrows=-1,$offset=-1,$inputarr=false,$secs=0) {
-		$offsetStr =($offset>=0) ? "$offset," : '';
-		if ($secs)
-			$rs =& $this->CacheExecute($secs,$sql." LIMIT $offsetStr$nrows",$inputarr);
-		else
-			$rs =& $this->Execute($sql." LIMIT $offsetStr$nrows",$inputarr);
 		return $rs;
 	}
 
-	function GenID($seq='adodbseq',$start=1) {
+	function GenID($seq='adodbseq',$start=1)
+	{
+		$parent = $this->pdoDriver;
 		// if you have to modify the parameter below, your database is overloaded,
 		// or you need to implement generation of id's yourself!
 		$MAXLOOPS = 100;
-		//$this->debug=1;
 		while (--$MAXLOOPS>=0) {
-			@($num = array_pop($this->GetCol("select id from $seq")));
+			@($num = array_pop($parent->GetCol("SELECT id FROM {$seq}")));
 			if ($num === false || !is_numeric($num)) {
-				@$this->Execute(sprintf($this->_genSeqSQL ,$seq));
+				@$parent->Execute(sprintf($this->_genSeqSQL ,$seq));
 				$start -= 1;
 				$num = '0';
-				$cnt = $this->GetOne(sprintf($this->_genSeqCountSQL,$seq));
+				$cnt = $parent->GetOne(sprintf($this->_genSeqCountSQL,$seq));
 				if (!$cnt) {
-					$ok = $this->Execute(sprintf($this->_genSeq2SQL,$seq,$start));
+					$ok = $parent->Execute(sprintf($this->_genSeq2SQL,$seq,$start));
 				}
 				if (!$ok) return false;
 			}
-			$this->Execute("update $seq set id=id+1");
+			$parent->Execute(sprintf($this->_genIDSQL,$seq,$num));
 
-			if ($this->affected_rows() > 0) {
+			if ($parent->affected_rows() > 0) {
                 	        $num += 1;
-                		$this->genID = intval($num);
+                		$parent->genID = intval($num);
                 		return intval($num);
 			}
 		}
-		if ($fn = $this->raiseErrorFn) {
-			$fn($this->databaseType,'GENID',-32000,"Unable to generate unique id after $MAXLOOPS attempts",$seq,$num);
+		if ($fn = $parent->raiseErrorFn) {
+			$fn($parent->databaseType,'GENID',-32000,"Unable to generate unique id after $MAXLOOPS attempts",$seq,$num);
 		}
 		return false;
 	}
 
+	function CreateSequence($seqname='adodbseq',$start=1)
+	{
+		$parent = $this->pdoDriver;
+		$ok = $parent->Execute(sprintf($this->_genSeqSQL,$seqname));
+		if (!$ok) return false;
+		$start -= 1;
+		return $parent->Execute("insert into $seqname values($start)");
+	}
+
+	function SetTransactionMode($transaction_mode)
+	{
+		$parent = $this->pdoDriver;
+		$parent->_transmode = strtoupper($transaction_mode);
+	}
+
 	function BeginTrans()
 	{
-		if (!$this->hasTransactions) return false;
-		if ($this->transOff) return true;
-                if($this->transCnt < 1) {
-        		$this->transCnt += 1;
-        		$this->_autocommit = false;
-        		return $this->_connectionID->beginTransaction();
-                }
+		$parent = $this->pdoDriver;
+		if ($parent->transOff) return true; 
+		$parent->transCnt += 1;
+		$parent->_autocommit = false;
+		return $parent->Execute("BEGIN {$parent->_transmode}");
 	}
 	
 	function CommitTrans($ok=true)
 	{
-		if (!$this->hasTransactions) return false;
-		if ($this->transOff) return true; 
-		if (!$ok) return $this->RollbackTrans();
-		if ($this->transCnt) $this->transCnt -= 1;
-		$this->_autocommit = true;
+		$parent = $this->pdoDriver;
+		if ($parent->transOff) return true; 
+		if (!$ok) return $parent->RollbackTrans();
+		if ($parent->transCnt) $parent->transCnt -= 1;
+		$parent->_autocommit = true;
 
-                if($this->transCnt == 0)
-		        $ret = $this->_connectionID->commit();
+		$ret = $parent->Execute('COMMIT');
 		return $ret;
 	}
 	
 	function RollbackTrans()
 	{
-		if (!$this->hasTransactions) return false;
-		if ($this->transOff) return true; 
-		if ($this->transCnt) $this->transCnt -= 1;
-		$this->_autocommit = true;
+		$parent = $this->pdoDriver;
+		if ($parent->transOff) return true; 
+		if ($parent->transCnt) $parent->transCnt -= 1;
+		$parent->_autocommit = true;
 		
-		$ret = $this->_connectionID->rollback();
+		$ret = $parent->Execute('ROLLBACK');
 		return $ret;
 	}
 
-	function CreateSequence($seqname='adodbseq',$start=1) {
-		if (empty($this->_genSeqSQL)) return false;
-		$ok = $this->Execute(sprintf($this->_genSeqSQL,$seqname));
-		if (!$ok) return false;
-		$start -= 1;
-		return $this->Execute("insert into $seqname values($start)");
-	}
-
-	function DropSequence($seqname) {
-		if (empty($this->_dropSeqSQL)) return false;
-		return $this->Execute(sprintf($this->_dropSeqSQL,$seqname));
-	}
 
     // mark newnham
-	function &MetaColumns($tab)
+	function MetaColumns($tab)
 	{
 	  global $ADODB_FETCH_MODE;
+
+	  $parent = $this->pdoDriver;
 	  $false = false;
 	  $save = $ADODB_FETCH_MODE;
 	  $ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
-	  if ($this->fetchMode !== false) $savem = $this->SetFetchMode(false);
-	  $rs = $this->Execute("PRAGMA table_info('$tab')");
-	  if (isset($savem)) $this->SetFetchMode($savem);
+	  if ($parent->fetchMode !== false) $savem = $parent->SetFetchMode(false);
+	  $rs = $parent->Execute("PRAGMA table_info('$tab')");
+	  if (isset($savem)) $parent->SetFetchMode($savem);
 	  if (!$rs) {
 	    $ADODB_FETCH_MODE = $save; 
 	    return $false;
@@ -255,13 +180,10 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
 	  return $arr;
 	}
 
-    function MetaTables($ttype=false,$showSchema=false,$mask=false) {
-        return $this->GetCol($this->metaTablesSQL);
-    }
-
-    function __sleep() {
-        unset($this->_connectionID);
-        return( array_keys( get_object_vars( $this ) ) );
+	function MetaTables($ttype=false,$showSchema=false,$mask=false)
+	{
+		$parent = $this->pdoDriver;
+	        return $parent->GetCol($this->metaTablesSQL);
     }
 }
 

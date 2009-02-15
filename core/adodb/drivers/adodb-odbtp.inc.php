@@ -1,6 +1,6 @@
 <?php
 /*
-  V5.06 16 Oct 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+  V5.07 18 Dec 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence. See License.txt.
@@ -45,12 +45,14 @@ class ADODB_odbtp extends ADOConnection{
 
 	function ErrorMsg()
 	{
+		if ($this->_errorMsg !== false) return $this->_errorMsg;
 		if (empty($this->_connectionID)) return @odbtp_last_error();
 		return @odbtp_last_error($this->_connectionID);
 	}
 
 	function ErrorNo()
 	{
+		if ($this->_errorCode !== false) return $this->_errorCode;
 		if (empty($this->_connectionID)) return @odbtp_last_error_state();
 			return @odbtp_last_error_state($this->_connectionID);
 	}
@@ -437,6 +439,10 @@ class ADODB_odbtp extends ADOConnection{
 	function Prepare($sql)
 	{
 		if (! $this->_bindInputArray) return $sql; // no binding
+		
+        $this->_errorMsg = false;
+		$this->_errorCode = false;
+		
 		$stmt = @odbtp_prepare($sql,$this->_connectionID);
 		if (!$stmt) {
 		//	print "Prepare Error for ($sql) ".$this->ErrorMsg()."<br>";
@@ -449,6 +455,9 @@ class ADODB_odbtp extends ADOConnection{
 	{
 		if (!$this->_canPrepareSP) return $sql; // Can't prepare procedures
 
+        $this->_errorMsg = false;
+		$this->_errorCode = false;
+		
 		$stmt = @odbtp_prepare_proc($sql,$this->_connectionID);
 		if (!$stmt) return false;
 		return array($sql,$stmt);
@@ -576,6 +585,9 @@ class ADODB_odbtp extends ADOConnection{
 	{
 	global $php_errormsg;
 	
+        $this->_errorMsg = false;
+		$this->_errorCode = false;
+		
  		if ($inputarr) {
 			if (is_array($sql)) {
 				$stmtid = $sql[1];
@@ -587,10 +599,20 @@ class ADODB_odbtp extends ADOConnection{
 				}
 			}
 			$num_params = @odbtp_num_params( $stmtid );
+			/*
 			for( $param = 1; $param <= $num_params; $param++ ) {
 				@odbtp_input( $stmtid, $param );
 				@odbtp_set( $stmtid, $param, $inputarr[$param-1] );
+			}*/
+			
+			$param = 1;
+			foreach($inputarr as $v) {
+				@odbtp_input( $stmtid, $param );
+				@odbtp_set( $stmtid, $param, $v );
+				$param += 1;
+				if ($param > $num_params) break;
 			}
+			
 			if (!@odbtp_execute($stmtid) ) {
 				return false;
 			}

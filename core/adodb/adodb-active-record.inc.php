@@ -1,7 +1,7 @@
 <?php
 /*
 
-@version V5.06 16 Oct 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+@version V5.07 18 Dec 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
   Latest version is available at http://adodb.sourceforge.net
  
   Released under both BSD license and Lesser GPL library license. 
@@ -10,7 +10,7 @@
   
   Active Record implementation. Superset of Zend Framework's.
   
-  Version 0.90
+  Version 0.92
   
   See http://www-128.ibm.com/developerworks/java/library/j-cb03076/?ca=dgr-lnxw01ActiveRecord 
   	for info on Ruby on Rails Active Record implementation
@@ -184,9 +184,9 @@ class ADODB_Active_Record {
 		}
 	}
 
-	function hasMany($foreignRef, $foreignKey = false)
+	function hasMany($foreignRef, $foreignKey = false, $foreignClass = 'ADODB_Active_Record')
 	{
-		$ar = new ADODB_Active_Record($foreignRef);
+		$ar = new $foreignClass($foreignRef);
 		$ar->foreignName = $foreignRef;
 		$ar->UpdateActiveTable();
 		$ar->foreignKey = ($foreignKey) ? $foreignKey : $foreignRef.ADODB_Active_Record::$_foreignSuffix;
@@ -195,11 +195,36 @@ class ADODB_Active_Record {
 	#	$this->$foreignRef = $this->_hasMany[$foreignRef]; // WATCHME Removed assignment by ref. to please __get()
 	}
 
-	function belongsTo($foreignRef,$foreignKey=false, $parentKey='')
+	// use when you don't want ADOdb to auto-pluralize tablename
+	static function TableHasMany($table, $foreignRef, $foreignKey = false, $foreignClass = 'ADODB_Active_Record')
+	{
+		$ar = new ADODB_Active_Record($table);
+		$ar->hasMany($foreignRef, $foreignKey, $foreignClass);
+	}
+	
+	// use when you don't want ADOdb to auto-pluralize tablename
+	static function TableKeyHasMany($table, $tablePKey, $foreignRef, $foreignKey = false, $foreignClass = 'ADODB_Active_Record')
+	{
+		if (!is_array($tablePKey)) $tablePKey = array($tablePKey);
+		$ar = new ADODB_Active_Record($table,$tablePKey);
+		$ar->hasMany($foreignRef, $foreignKey, $foreignClass);
+	}
+	
+	
+	// use when you want ADOdb to auto-pluralize tablename for you. Note that the class must already be defined.
+	// e.g. class Person will generate relationship for table Persons
+	static function ClassHasMany($parentclass, $foreignRef, $foreignKey = false, $foreignClass = 'ADODB_Active_Record')
+	{
+		$ar = new $parentclass();
+		$ar->hasMany($foreignRef, $foreignKey, $foreignClass);
+	}
+	
+
+	function belongsTo($foreignRef,$foreignKey=false, $parentKey='', $parentClass = 'ADODB_Active_Record')
 	{
 		global $inflector;
 
-		$ar = new ADODB_Active_Record($this->_pluralize($foreignRef));
+		$ar = new $parentClass($this->_pluralize($foreignRef));
 		$ar->foreignName = $foreignRef;
 		$ar->parentKey = $parentKey;
 		$ar->UpdateActiveTable();
@@ -209,6 +234,26 @@ class ADODB_Active_Record {
 		$table->_belongsTo[$foreignRef] = $ar;
 	#	$this->$foreignRef = $this->_belongsTo[$foreignRef];
 	}
+
+	static function ClassBelongsTo($class, $foreignRef, $foreignKey=false, $parentKey='', $parentClass = 'ADODB_Active_Record')
+	{
+		$ar = new $class();
+		$ar->belongsTo($foreignRef, $foreignKey, $parentKey, $parentClass);
+	}
+	
+	static function TableBelongsTo($table, $foreignRef, $foreignKey=false, $parentKey='', $parentClass = 'ADODB_Active_Record')
+	{
+		$ar = new ADOdb_Active_Record($table);
+		$ar->belongsTo($foreignRef, $foreignKey, $parentKey, $parentClass);
+	}
+	
+	static function TableKeyBelongsTo($table, $tablePKey, $foreignRef, $foreignKey=false, $parentKey='', $parentClass = 'ADODB_Active_Record')
+	{
+		if (!is_array($tablePKey)) $tablePKey = array($tablePKey);
+		$ar = new ADOdb_Active_Record($table, $tablePKey);
+		$ar->belongsTo($foreignRef, $foreignKey, $parentKey, $parentClass);
+	}
+
 
 	/**
 	 * __get Access properties - used for lazy loading
@@ -262,7 +307,13 @@ class ADODB_Active_Record {
 		if(!empty($table->_hasMany[$name]))
 		{	
 			$obj = $table->_hasMany[$name];
-			$objs = $obj->Find($obj->foreignKey.'='.$this->id. ' '.$whereOrderBy,false,false,$extras);
+			$key = reset($table->keys);
+			$id = @$this->$key;
+			if (!is_numeric($id)) {
+				$db = $this->DB();
+				$id = $db->qstr($id);
+			}
+			$objs = $obj->Find($obj->foreignKey.'='.$id. ' '.$whereOrderBy,false,false,$extras);
 			if (!$objs) $objs = array();
 			$this->$name = $objs;
 			return $objs;
@@ -276,7 +327,7 @@ class ADODB_Active_Record {
 	function UpdateActiveTable($pkeys=false,$forceUpdate=false)
 	{
 	global $ADODB_ASSOC_CASE,$_ADODB_ACTIVE_DBS , $ADODB_CACHE_DIR, $ADODB_ACTIVE_CACHESECS;
-	global $ADODB_ACTIVE_DEFVALS;
+	global $ADODB_ACTIVE_DEFVALS,$ADODB_FETCH_MODE;
 
 		$activedb = $_ADODB_ACTIVE_DBS[$this->_dbat];
 
@@ -315,8 +366,15 @@ class ADODB_Active_Record {
 		$activetab = new ADODB_Active_Table();
 		$activetab->name = $table;
 		
+		$save = $ADODB_FETCH_MODE;
+		$ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
+		if ($db->fetchMode !== false) $savem = $db->SetFetchMode(false);
 		
 		$cols = $db->MetaColumns($table);
+		
+		if (isset($savem)) $db->SetFetchMode($savem);
+		$ADODB_FETCH_MODE = $save;
+		
 		if (!$cols) {
 			$this->Error("Invalid table name: $table",'UpdateActiveTable'); 
 			return false;
@@ -471,7 +529,6 @@ class ADODB_Active_Record {
 	function &TableInfo()
 	{
 	global $_ADODB_ACTIVE_DBS;
-	
 		$activedb = $_ADODB_ACTIVE_DBS[$this->_dbat];
 		$table = $activedb->tables[$this->_tableat];
 		return $table;
@@ -595,10 +652,15 @@ class ADODB_Active_Record {
 	
 	function Load($where=null,$bindarr=false)
 	{
+	global $ADODB_FETCH_MODE;
+	
 		$db = $this->DB(); if (!$db) return false;
 		$this->_where = $where;
 		
-		$save = $db->SetFetchMode(ADODB_FETCH_NUM);
+		$save = $ADODB_FETCH_MODE;
+		$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
+		if ($db->fetchMode !== false) $savem = $db->SetFetchMode(false);
+		
 		$qry = "select * from ".$this->_table;
 
 		if($where) {
@@ -606,8 +668,8 @@ class ADODB_Active_Record {
 		}
 		$row = $db->GetRow($qry,$bindarr);
 		
-		
-		$db->SetFetchMode($save);
+		if (isset($savem)) $db->SetFetchMode($savem);
+		$ADODB_FETCH_MODE = $save;
 		
 		return $this->Set($row);
 	}
