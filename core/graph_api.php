@@ -247,7 +247,9 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 	if( ON == config_get_global( 'jpgraph_antialias' ) ) {
 		$graph->img->SetAntiAliasing();
 	}
-	$graph->SetScale( 'linlin' );
+	$graph->SetScale( 'linlin');
+	$graph->yaxis->SetColor("red");		
+	$graph->SetY2Scale("lin");
 	$graph->SetMarginColor( 'white' );
 	$graph->SetFrame( false );
 	$graph->title->Set( lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
@@ -261,6 +263,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 
 	$graph->yaxis->scale->ticks->SetDirection( -1 );
 	$graph->yaxis->SetFont( $t_graph_font );
+	$graph->y2axis->SetFont( $t_graph_font );
 
 	if( FF_FONT2 <= $t_graph_font ) {
 		$graph->xaxis->SetLabelAngle( 60 );
@@ -276,7 +279,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 	$p1->SetColor( 'blue' );
 	$p1->SetCenter();
 	$p1->SetLegend( lang_get( 'legend_reported' ) );
-	$graph->Add( $p1 );
+	$graph->AddY2( $p1 );
 
 	$p3 = new LinePlot( $still_open_plot, $plot_date );
 	$p3->SetColor( 'red' );
@@ -288,7 +291,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 	$p2->SetColor( 'black' );
 	$p2->SetCenter();
 	$p2->SetLegend( lang_get( 'legend_resolved' ) );
-	$graph->Add( $p2 );
+	$graph->AddY2( $p2 );
 
 	if( helper_show_queries() ) {
 		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
