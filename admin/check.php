@@ -396,6 +396,12 @@ print_test_row( 'Phpmailer sendmail configuration requires escapeshellarg. Pleas
 
 check_zend_optimiser_version();
 
+print_test_row( 'check configuration: jpgraph (if used) requires php bundled gd for antialiasing support',
+	( OFF == config_get_global('use_jpgraph') 
+	|| ( ON == config_get_global('use_jpgraph') && ( config_get_global( 'jpgraph_antialias' ) == OFF || function_exists('imageantialias') ) ) ) );
+
+
+
 
 ?>
 </table>
