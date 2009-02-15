@@ -958,9 +958,7 @@
 	/**
 	 * To use the Jpgraph addon you need the JPGRAPH package from
 	 * http://www.aditus.nu/jpgraph/index.php
-	 * You can place the package whereever you want, but you have
-	 * to set the var in jpgraph.php eg.
-	 * (DEFINE('DIR_BASE','/www/mantisbt/jpgraph/');)
+	 * The default/tested configuration is to place the jpgraph files (jpgraph.php) in the core directory in a jpgraph folder
 	 * @global int $g_use_jpgraph
 	 */		 
 	$g_use_jpgraph			= OFF;
