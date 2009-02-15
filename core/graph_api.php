@@ -435,7 +435,6 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 
 # --------------------
 function create_developer_summary() {
-
 	$t_project_id = helper_get_current_project();
 	$t_user_table = db_get_table( 'mantis_user_table' );
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
@@ -452,12 +451,14 @@ function create_developer_summary() {
 	$t_total_handled = db_num_rows( $result );
 
 	$t_handler_arr = array();
+	$t_handlers = array();
 	for( $i = 0;$i < $t_total_handled;$i++ ) {
 		$row = db_fetch_array( $result );
 		if( !isset( $t_handler_arr[$row['handler_id']] ) ) {
 			$t_handler_arr[$row['handler_id']]['res'] = 0;
 			$t_handler_arr[$row['handler_id']]['open'] = 0;
 			$t_handler_arr[$row['handler_id']]['close'] = 0;
+			$t_handlers[] = $row['handler_id'];			
 		}
 		if( $row['status'] >= $t_res_val ) {
 			if( $row['status'] >= $t_clo_val ) {
@@ -474,25 +475,17 @@ function create_developer_summary() {
 		return array( 'open' => array() );
 	}
 
-	$t_imploded_handlers = implode( ',', array_keys( $t_handler_arr ) );
-	$query = "SELECT id, username
-				FROM $t_user_table
-				WHERE id IN ($t_imploded_handlers)
-				ORDER BY username";
-	$result = db_query_bound( $query );
-	$user_count = db_num_rows( $result );
+	user_cache_array_rows( $t_handlers );
 
-	for( $i = 0;$i < $user_count;$i++ ) {
-		$t_row = db_fetch_array( $result );
+	foreach( $t_handler_arr as $t_handler => $t_data ) {
+		$t_username = user_get_name( $t_handler );
 
-		$v_id = $t_row['id'];
-		$v_username = $t_row['username'];
-
-		$t_metrics['open'][$v_username] = $t_handler_arr[$v_id]['open'];
-		$t_metrics['resolved'][$v_username] = $t_handler_arr[$v_id]['res'];
-		$t_metrics['closed'][$v_username] = $t_handler_arr[$v_id]['close'];
+		$t_metrics['open'][$t_username] = $t_data['open'];
+		$t_metrics['resolved'][$t_username] = $t_data['res'];
+		$t_metrics['closed'][$t_username] = $t_data['close'];		
 	}
-
+	ksort($t_metrics);
+	
 	# end for
 	return $t_metrics;
 }
@@ -500,7 +493,6 @@ function create_developer_summary() {
 # --------------------
 function create_reporter_summary() {
 	global $reporter_name, $reporter_count;
-
 
 	$t_project_id = helper_get_current_project();
 	$t_user_table = db_get_table( 'mantis_user_table' );
@@ -515,6 +507,7 @@ function create_reporter_summary() {
 	$t_total_reported = db_num_rows( $result );
 
 	$t_reporter_arr = array();
+	$t_reporters = array();
 	for( $i = 0;$i < $t_total_reported;$i++ ) {
 		$row = db_fetch_array( $result );
 
@@ -522,6 +515,7 @@ function create_reporter_summary() {
 			$t_reporter_arr[$row['reporter_id']]++;
 		} else {
 			$t_reporter_arr[$row['reporter_id']] = 1;
+			$t_reporters[] = $row['reporter_id'];
 		}
 	}
 
@@ -529,22 +523,12 @@ function create_reporter_summary() {
 		return array();
 	}
 
-	$t_imploded_reporters = implode( ',', array_keys( $t_reporter_arr ) );
-	$query = "SELECT id, username
-				FROM $t_user_table
-				WHERE id IN ($t_imploded_reporters)
-				ORDER BY username";
-	$result = db_query_bound( $query );
-	$user_count = db_num_rows( $result );
+	user_cache_array_rows( $t_reporters );
 
-	for( $i = 0;$i < $user_count;$i++ ) {
-		$t_row = db_fetch_array( $result );
-		
-		$v_username = $t_row['username'];
-		$v_id = $t_row['id'];
-
-		$t_metrics[$v_username] = $t_reporter_arr[$v_id];
+	foreach( $t_reporter_arr as $t_reporter => $t_count ) {
+		$t_metrics[ user_get_name( $t_reporter ) ] = $t_count;
 	}
+	ksort($t_metrics);
 
 	# end for
 	return $t_metrics;
