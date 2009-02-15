@@ -396,11 +396,25 @@ print_test_row( 'Phpmailer sendmail configuration requires escapeshellarg. Pleas
 
 check_zend_optimiser_version();
 
-print_test_row( 'check configuration: jpgraph (if used) requires php bundled gd for antialiasing support',
-	( OFF == config_get_global('use_jpgraph') 
-	|| ( ON == config_get_global('use_jpgraph') && ( config_get_global( 'jpgraph_antialias' ) == OFF || function_exists('imageantialias') ) ) ) );
+if( ON == config_get_global( 'use_jpgraph' ) ) {
+	$t_jpgraph_path = config_get_global( 'jpgraph_path' );
 
+	if( !file_exists( $t_jpgraph_path ) ) {
+		$t_jpgraph_path = '..' . DIRECTORY_SEPARATOR . $t_jpgraph_path;
+	}
 
+	if( !file_exists( $t_jpgraph_path . 'jpgraph.php') ) {
+		print_test_row( 'checking we can find jpgraph class files...', false );
+	} else {
+		require_once( $t_jpgraph_path . 'jpgraph.php' );
+
+		print_test_row( 'Checking Jpgraph version (if installed)...', version_compare(JPG_VERSION, '2.3.0') ? true : false, JPG_VERSION );
+	}	
+
+	print_test_row( 'check configuration: jpgraph (if used) requires php bundled gd for antialiasing support',
+		( config_get_global( 'jpgraph_antialias' ) == OFF || function_exists('imageantialias') ) );
+
+}
 
 
 ?>
