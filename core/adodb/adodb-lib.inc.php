@@ -147,7 +147,7 @@ function _adodb_replace(&$zthis, $table, $fieldArray, $keyCol, $autoQuote, $has_
 			if ($v === null) {
 				$v = 'NULL';
 				$fieldArray[$k] = $v;
-			} else if ($autoQuote && !is_numeric($v) /*and strncmp($v,"'",1) !== 0 -- sql injection risk*/ and strcasecmp($v,$zthis->null2null)!=0) {
+			} else if ($autoQuote && /*!is_numeric($v) /*and strncmp($v,"'",1) !== 0 -- sql injection risk*/ strcasecmp($v,$zthis->null2null)!=0) {
 				$v = $zthis->qstr($v);
 				$fieldArray[$k] = $v;
 			}
@@ -1054,11 +1054,13 @@ function _adodb_debug_execute(&$zthis, $sql, $inputarr)
 			$ss = '<code>'.htmlspecialchars($ss).'</code>';
 		}
 		if ($zthis->debug === -1)
-			ADOConnection::outp( "<br />\n($dbt): ".htmlspecialchars($sqlTxt)." &nbsp; $ss\n<br />\n",false);
-		else 
-			ADOConnection::outp( "<hr />\n($dbt): ".htmlspecialchars($sqlTxt)." &nbsp; $ss\n<hr />\n",false);
+			ADOConnection::outp( "<br>\n($dbt): ".htmlspecialchars($sqlTxt)." &nbsp; $ss\n<br>\n",false);
+		else if ($zthis->debug !== -99)
+			ADOConnection::outp( "<hr>\n($dbt): ".htmlspecialchars($sqlTxt)." &nbsp; $ss\n<hr>\n",false);
 	} else {
-		ADOConnection::outp("-----\n($dbt): ".$sqlTxt."\n-----\n",false);
+		$ss = "\n   ".$ss;
+		if ($zthis->debug !== -99)
+			ADOConnection::outp("-----<hr>\n($dbt): ".$sqlTxt." $ss\n-----<hr>\n",false);
 	}
 
 	$qID = $zthis->_query($sql,$inputarr);
@@ -1069,10 +1071,21 @@ function _adodb_debug_execute(&$zthis, $sql, $inputarr)
 	*/
 	if ($zthis->databaseType == 'mssql') { 
 	// ErrorNo is a slow function call in mssql, and not reliable in PHP 4.0.6
+	
 		if($emsg = $zthis->ErrorMsg()) {
-			if ($err = $zthis->ErrorNo()) ADOConnection::outp($err.': '.$emsg);
+			if ($err = $zthis->ErrorNo()) {
+				if ($zthis->debug === -99) 
+					ADOConnection::outp( "<hr>\n($dbt): ".htmlspecialchars($sqlTxt)." &nbsp; $ss\n<hr>\n",false);
+		
+				ADOConnection::outp($err.': '.$emsg);
+			}
 		}
 	} else if (!$qID) {
+	
+		if ($zthis->debug === -99) 
+				if ($inBrowser) ADOConnection::outp( "<hr>\n($dbt): ".htmlspecialchars($sqlTxt)." &nbsp; $ss\n<hr>\n",false);
+				else ADOConnection::outp("-----<hr>\n($dbt): ".$sqlTxt."$ss\n-----<hr>\n",false);
+				
 		ADOConnection::outp($zthis->ErrorNo() .': '. $zthis->ErrorMsg());
 	}
 	
@@ -1118,7 +1131,7 @@ function _adodb_backtrace($printOrArr=true,$levels=9999,$skippy=0,$ishtml=null)
 			else if (is_bool($v)) $args[] = $v ? 'true' : 'false';
 			else {
 				$v = (string) @$v;
-				$str = htmlspecialchars(substr($v,0,$MAXSTRLEN));
+				$str = htmlspecialchars(str_replace(array("\r","\n"),' ',substr($v,0,$MAXSTRLEN)));
 				if (strlen($v) > $MAXSTRLEN) $str .= '...';
 				$args[] = $str;
 			}

@@ -305,7 +305,7 @@ NATSOFT.DOMAIN =
 	function DBTimeStamp($ts,$isfld=false)
 	{
 		if (empty($ts) && $ts !== 0) return 'null';
-		if ($isfld) return 'TO_DATE('.$ts.",'RRRR-MM-DD, HH24:MI:SS')";
+		if ($isfld) return 'TO_DATE(substr('.$ts.",1,19),'RRRR-MM-DD, HH24:MI:SS')";
 		if (is_string($ts)) $ts = ADORecordSet::UnixTimeStamp($ts);
 		return 'TO_DATE('.adodb_date("'Y-m-d H:i:s'",$ts).",'RRRR-MM-DD, HH24:MI:SS')";
 	}
@@ -405,8 +405,10 @@ NATSOFT.DOMAIN =
 		$this->autoCommit = false;
 		$this->_commit = OCI_DEFAULT;
 		
-		if ($this->_transmode) $this->Execute("SET TRANSACTION ".$this->_transmode);
-		return true;
+		if ($this->_transmode) $ok = $this->Execute("SET TRANSACTION ".$this->_transmode);
+		else $ok = true;
+		
+		return $ok ? true : false;
 	}
 	
 	function CommitTrans($ok=true) 
@@ -579,7 +581,7 @@ NATSOFT.DOMAIN =
 				$sql = preg_replace('/^[ \t\n]*select/i','SELECT /*+FIRST_ROWS*/',$sql);
 		}
 		
-		if ($offset < $this->selectOffsetAlg1 && 0 < $nrows && $nrows < 1000) {
+		if ($offset == -1 || ($offset < $this->selectOffsetAlg1 && 0 < $nrows && $nrows < 1000)) {
 			if ($nrows > 0) {	
 				if ($offset > 0) $nrows += $offset;
 				//$inputarr['adodb_rownum'] = $nrows;
@@ -718,7 +720,7 @@ NATSOFT.DOMAIN =
 	}
 	
 	/**
-	* Usage:  store file pointed to by $var in a blob
+	* Usage:  store file pointed to by $val in a blob
 	*/
 	function UpdateBlobFile($table,$column,$val,$where,$blobtype='BLOB')
 	{

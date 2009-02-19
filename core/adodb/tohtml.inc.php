@@ -95,7 +95,7 @@ GLOBAL $gSQLMaxRows,$gSQLBlockRows,$ADODB_ROUND;
 				}
 			case 'T':
 				if (empty($v)) $s .= "<TD> &nbsp; </TD>\n";
-				else $s .= "	<TD>".$rs->UserTimeStamp($v,"D d, M Y, h:i:s") ."</TD>\n";
+				else $s .= "	<TD>".$rs->UserTimeStamp($v,"D d, M Y, H:i:s") ."</TD>\n";
 			break;
 			
 			case 'N':

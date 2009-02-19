@@ -14,7 +14,7 @@
 /**
 	\mainpage 	
 	
-	 @version V5.06 16 Oct 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+	 @version V5.07 18 Dec 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
 
 	Released under both BSD license and Lesser GPL library license. You can choose which license
 	you prefer.
@@ -866,7 +866,7 @@
 	{
 		if ($this->transOff > 0) {
 			$this->transOff += 1;
-			return;
+			return true;
 		}
 		
 		$this->_oldRaiseFn = $this->raiseErrorFn;
@@ -874,8 +874,9 @@
 		$this->_transOK = true;
 		
 		if ($this->debug && $this->transCnt > 0) ADOConnection::outp("Bad Transaction: StartTrans called within BeginTrans");
-		$this->BeginTrans();
+		$ok = $this->BeginTrans();
 		$this->transOff = 1;
+		return $ok;
 	}
 	
 	
@@ -960,7 +961,7 @@
 			
 			if (!is_array($sql) && !$this->_bindInputArray) {
 				$sqlarr = explode('?',$sql);
-					
+				$nparams = sizeof($sqlarr)-1;
 				if (!$array_2d) $inputarr = array($inputarr);
 				foreach($inputarr as $arr) {
 					$sql = ''; $i = 0;
@@ -985,7 +986,9 @@
 						else
 							$sql .= $v;
 						$i += 1;
-					}
+						
+						if ($i == $nparams) break;
+					} // while
 					if (isset($sqlarr[$i])) {
 						$sql .= $sqlarr[$i];
 						if ($i+1 != sizeof($sqlarr)) $this->outp_throw( "Input Array does not match ?: ".htmlspecialchars($sql),'Execute');

@@ -1,6 +1,6 @@
 <?php
 /* 
-V5.06 16 Oct 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+V5.07 18 Dec 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. 
@@ -102,6 +102,7 @@ class ADODB_mssql extends ADOConnection {
 	var $identitySQL = 'select SCOPE_IDENTITY()'; // 'select SCOPE_IDENTITY'; # for mssql 2000
 	var $uniqueOrderBy = true;
 	var $_bindInputArray = true;
+	var $forceNewConnect = false;
 	
 	function ADODB_mssql() 
 	{		
@@ -209,6 +210,10 @@ class ADODB_mssql extends ADOConnection {
 		if ($nrows > 0 && $offset <= 0) {
 			$sql = preg_replace(
 				'/(^\s*select\s+(distinctrow|distinct)?)/i','\\1 '.$this->hasTop." $nrows ",$sql);
+				
+			if ($secs2cache)
+				$rs = $this->CacheExecute($secs2cache, $sql, $inputarr);
+			else
 			$rs = $this->Execute($sql,$inputarr);
 		} else
 			$rs = ADOConnection::SelectLimit($sql,$nrows,$offset,$inputarr,$secs2cache);
@@ -282,8 +287,8 @@ class ADODB_mssql extends ADOConnection {
 	{
 		if ($this->transOff) return true; 
 		$this->transCnt += 1;
-	   	$this->Execute('BEGIN TRAN');
-	   	return true;
+	   	$ok = $this->Execute('BEGIN TRAN');
+	   	return $ok;
 	}
 		
 	function CommitTrans($ok=true) 
@@ -291,15 +296,15 @@ class ADODB_mssql extends ADOConnection {
 		if ($this->transOff) return true; 
 		if (!$ok) return $this->RollbackTrans();
 		if ($this->transCnt) $this->transCnt -= 1;
-		$this->Execute('COMMIT TRAN');
-		return true;
+		$ok = $this->Execute('COMMIT TRAN');
+		return $ok;
 	}
 	function RollbackTrans()
 	{
 		if ($this->transOff) return true; 
 		if ($this->transCnt) $this->transCnt -= 1;
-		$this->Execute('ROLLBACK TRAN');
-		return true;
+		$ok = $this->Execute('ROLLBACK TRAN');
+		return $ok;
 	}
 	
 	function SetTransactionMode( $transaction_mode ) 
@@ -507,11 +512,11 @@ order by constraint_name, referenced_table_name, keyno";
 	   else return -1;
 	}
 	
-	// returns true or false
-	function _connect($argHostname, $argUsername, $argPassword, $argDatabasename)
+	// returns true or false, newconnect supported since php 5.1.0.
+	function _connect($argHostname, $argUsername, $argPassword, $argDatabasename,$newconnect=false)
 	{
 		if (!function_exists('mssql_pconnect')) return null;
-		$this->_connectionID = mssql_connect($argHostname,$argUsername,$argPassword);
+		$this->_connectionID = mssql_connect($argHostname,$argUsername,$argPassword,$newconnect);
 		if ($this->_connectionID === false) return false;
 		if ($argDatabasename) return $this->SelectDB($argDatabasename);
 		return true;	
@@ -534,6 +539,11 @@ order by constraint_name, referenced_table_name, keyno";
 		return true;	
 	}
 	
+	function _nconnect($argHostname, $argUsername, $argPassword, $argDatabasename)
+    {
+		return $this->_connect($argHostname, $argUsername, $argPassword, $argDatabasename, true);
+    }
+
 	function Prepare($sql)
 	{
 		$sqlarr = explode('?',$sql);
