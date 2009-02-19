@@ -323,8 +323,7 @@ $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Vartotojo registracija';
-$s_new_account_greeting = 'Aèiû, kad uþsiregistravote. Jûsø vartotojo vardas \'';
-$s_new_account_greeting2 = '\'. Norëdami baigti registracijos procedûrà, aplankykite puslapá ðiuo adresu (ásitikinkite, kad jis áraðytas vienoje eilutëje) ir áraðykite savo slaptaþodá:';
+$s_new_account_greeting = 'Aèiû, kad uþsiregistravote. Jûsø vartotojo vardas \'%1$s\'. Norëdami baigti registracijos procedûrà, aplankykite puslapá ðiuo adresu (ásitikinkite, kad jis áraðytas vienoje eilutëje) ir áraðykite savo slaptaþodá:';
 $s_new_account_username = 'Vartotojo vardas: ';
 $s_new_account_message = 'Jeigu jûs nesiregistravote, nekreipkite dëmesio á ðá laiðkà.' . "\n\n";
 $s_new_account_do_not_reply = 'NEATSAKINËKITE Á ÐÁ LAIÐKÀ';

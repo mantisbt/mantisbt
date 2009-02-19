@@ -310,8 +310,7 @@ $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'registrácia nového u¾ívateµského úètu';
-$s_new_account_greeting = 'Ïakujeme za registráciu. Máte úèet s u¾ivatelským menom \'';
-$s_new_account_greeting2 = '\'. Pre dokonèenie va¹ej registrácie prejdite na nasledujúcu adresu (uistite sa, aby bola zadana na jednom riadku) a nastavte va¹e prístupové heslo:';
+$s_new_account_greeting = 'Ïakujeme za registráciu. Máte úèet s u¾ivatelským menom \'%1$s\'. Pre dokonèenie va¹ej registrácie prejdite na nasledujúcu adresu (uistite sa, aby bola zadana na jednom riadku) a nastavte va¹e prístupové heslo:';
 $s_new_account_username = 'Pou¾ívateµské meno: ';
 $s_new_account_message = 'Pokial si neprajete registráciu, ignorujte túto správu a niè sa nestane.' . "\n\n";
 $s_new_account_do_not_reply = 'NEODPOVEDAJTE NA TÚTO SPRÁVU';

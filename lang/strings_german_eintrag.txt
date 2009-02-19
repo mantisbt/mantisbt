@@ -342,8 +342,7 @@ $s_sponsorship_enum_string = '0:unbezahlt,1:gefordert,2:bezahlt';
 
 # Email Strings
 $s_new_account_subject = 'Konto Registrierung';
-$s_new_account_greeting = 'Danke für ihre Registrierung. Ihr Konto hat den Benutzernamen \'';
-$s_new_account_greeting2 = '\'. Um die Registrierung abzuschließen, besuchen Sie die folgende URL (stellen Sie sicher, dass sie in einer einzigen Zeile eingegeben wurde) und setzen Sie ihr eigenes Zugangskennwort:';
+$s_new_account_greeting = 'Danke für ihre Registrierung. Ihr Konto hat den Benutzernamen \'%1$s\'. Um die Registrierung abzuschließen, besuchen Sie die folgende URL (stellen Sie sicher, dass sie in einer einzigen Zeile eingegeben wurde) und setzen Sie ihr eigenes Zugangskennwort:';
 $s_new_account_username = 'Benutzername: ';
 $s_new_account_message = 'Wenn Sie sich nicht registriert haben, ignorieren Sie diese Nachricht, es wird nichts passieren.' . '\n\n';
 $s_new_account_do_not_reply = 'NICHT AUF DIESE NACHRICHT ANTWORTEN';

@@ -314,8 +314,7 @@ $s_sponsorship_enum_string = '0:Niet betaald,1:Verzocht,2:Betaald';
 
 # Email Strings
 $s_new_account_subject = 'Accountregistratie';
-$s_new_account_greeting = 'Bedankt voor het aanmelden. Uw gebruikersnaam is \'';
-$s_new_account_greeting2 = '\'. Om uw registratie af te maken, bezoekt u de volgende link om uw eigen wachtwoord in te stellen:';
+$s_new_account_greeting = 'Bedankt voor het aanmelden. Uw gebruikersnaam is \'%1$s\'. Om uw registratie af te maken, bezoekt u de volgende link om uw eigen wachtwoord in te stellen:';
 $s_new_account_username = 'Gebruikersnaam: ';
 $s_new_account_message = 'Als u geen aanmelding verstuurd heeft, kunt u dit bericht negeren. Dan gebeurt er niets.' . "\n\n";
 $s_new_account_do_not_reply = 'VERSTUUR GEEN ANTWOORD OP DIT BERICHT';

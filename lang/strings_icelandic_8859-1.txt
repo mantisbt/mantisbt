@@ -310,8 +310,7 @@ $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Aðgangs skráning';
-$s_new_account_greeting = 'Þakka þér fyrir skráninguna. Þú hefur aðgang með notendanafninu \'';
-$s_new_account_greeting2 = '\'. Til þess að ljúka skráningu, farðu á eftirfarandi veffang (skráðu það í einni línu) og settu upp þitt eigið notendanafn:';
+$s_new_account_greeting = 'Þakka þér fyrir skráninguna. Þú hefur aðgang með notendanafninu \'%1$s\'. Til þess að ljúka skráningu, farðu á eftirfarandi veffang (skráðu það í einni línu) og settu upp þitt eigið notendanafn:';
 $s_new_account_username = 'Notendanafn: ';
 $s_new_account_message = 'Ef þú hefur ekki beðið um skráningu, hunsaðu þessi boð og ekkert mun gerast.' . "\n\n";
 $s_new_account_do_not_reply = 'EKKI SVARA ÞESSUM SKILABOÐUM';

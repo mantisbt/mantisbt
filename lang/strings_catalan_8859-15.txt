@@ -332,8 +332,7 @@ $s_sponsorship_enum_string = '0:Impagat,1:Requerit,2:Pagat';
 
 # Email Strings
 $s_new_account_subject = "Registre d'un nou compte";
-$s_new_account_greeting = "Gràcies por registrar-se. S'ha donat d'alta el seu compte amb el nom de l'usuari '";
-$s_new_account_greeting2 = "'. Per a completar el registre, visiti la URL (asseguri's de posar-la en una sola línia) i posi la contrasenya d'usuari que desitgi:";
+$s_new_account_greeting = "Gràcies por registrar-se. S'ha donat d'alta el seu compte amb el nom de l'usuari '%1$s'. Per a completar el registre, visiti la URL (asseguri's de posar-la en una sola línia) i posi la contrasenya d'usuari que desitgi:";
 $s_new_account_username = "Usuari: ";
 $s_new_account_message = "Si no ha sol·licitat cap registre, si us plau ignori aquest missatge." . "\n\n";
 $s_new_account_do_not_reply = "NO RESPONGUI A AQUEST MISSATGE";

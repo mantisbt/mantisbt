@@ -310,8 +310,7 @@ $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Registracija naloga';
-$s_new_account_greeting = 'Zahvaljujemo na registraciji. Vas nalog je aktivan pod imenom \'';
-$s_new_account_greeting2 = '\'. Da biste zavrsili registraciju, posetite sledecu adresu (proverite da je uneta u jednom redu) i podesite lozinku za pristup:';
+$s_new_account_greeting = 'Zahvaljujemo na registraciji. Vas nalog je aktivan pod imenom \'%1$s\'. Da biste zavrsili registraciju, posetite sledecu adresu (proverite da je uneta u jednom redu) i podesite lozinku za pristup:';
 $s_new_account_username = 'Korisnicko ime: ';
 $s_new_account_message = 'Ukoliko niste trazili nikakvu registraciju jednostavno ignorisite ovu poruku.' . "\n\n";
 $s_new_account_do_not_reply = 'NEMOJTE ODGOVARATI NA OVU PORUKU';

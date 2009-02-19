@@ -314,8 +314,7 @@ $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = '계정 등록';
-$s_new_account_greeting = '등록해 주셔서 감사합니다. 등록하신 아이디는 \'';
-$s_new_account_greeting2 = '\' 입니다. 등록을 완료하기 위해서 아래 링크를 방문하셔서 비밀번호를 설정하시기 바랍니다.';
+$s_new_account_greeting = '등록해 주셔서 감사합니다. 등록하신 아이디는 \'%1$s\' 입니다. 등록을 완료하기 위해서 아래 링크를 방문하셔서 비밀번호를 설정하시기 바랍니다.';
 $s_new_account_username = '사용자 ID: ';
 $s_new_account_message = '만일 사용자 등록을 하신적이 없으시다면, 그냥 무시하시면 됩니다.' . "\n\n";
 $s_new_account_do_not_reply = '이 메일에 대한 답장을 보내지 마세요. - DO NOT REPLY TO THIS MESSAGE';

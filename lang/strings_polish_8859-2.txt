@@ -315,8 +315,7 @@ $s_sponsorship_enum_string        = '0:Nieop³acony,1:¯±danie zap³aty,2:Op³acony'
 
 # Email Strings
 $s_new_account_subject = 'Rejestracja konta';
-$s_new_account_greeting = 'Dziêkujemy za zapisanie. Masz konto o nazwie \'';
-$s_new_account_greeting2 = '\'. Aby zakoñczyæ rejestracjê, odwied¼ podany adres (upewnij siê, ¿e jest wprowadzony w jednej linii) i ustaw swoje has³o dostêpu:';
+$s_new_account_greeting = 'Dziêkujemy za zapisanie. Masz konto o nazwie \'%1$s\'. Aby zakoñczyæ rejestracjê, odwied¼ podany adres (upewnij siê, ¿e jest wprowadzony w jednej linii) i ustaw swoje has³o dostêpu:';
 $s_new_account_username = 'Nazwa u¿ytkownika: ';
 $s_new_account_message = 'Je¶li to nie twoje zg³oszenie, zignoruj tê wiadomo¶æ. Nic siê nie stanie.' . "\n\n";
 $s_new_account_do_not_reply = 'NIE ODPOWIADAJ NA TÊ WIADOMO¦Æ';
