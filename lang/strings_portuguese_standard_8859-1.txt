@@ -64,7 +64,6 @@ $s_jump_to_bugnotes = 'Ver Bugnotes';
 $s_public_project_msg = 'Este Projecto é PÚBLICO.  TODOS os utilizadores tem acesso a este Projecto.';
 $s_private_project_msg = 'Este Projecto é PRIVATE.  Apenas os administradores e os utilizadores adicionados manualmente tem acesso.';
 $s_access_level_project = 'Project Access Level';
-$s_view_submitted_bug_link = 'View Submitted Bug';
 $s_assigned_projects = 'Projectos Atribuidos';
 $s_unassigned_projects = 'Projectos NÃO Atribuidos';
 $s_print = 'Imprimir';

@@ -183,7 +183,7 @@
 <div align="center">
 <?php
 	echo lang_get( 'operation_successful' ) . '<br />';
-	print_bracket_link( string_get_bug_view_url( $t_bug_id ), lang_get( 'view_submitted_bug_link' ) . " $t_bug_id" );
+	print_bracket_link( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );
 	print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 
 	if ( $f_report_stay ) {
