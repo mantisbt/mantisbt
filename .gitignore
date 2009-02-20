@@ -10,6 +10,9 @@ docbook/*/*/builddate
 docbook/*/*/build
 docbook/*/*/install
 
+# Untracked plugins
+plugins/*
+
 # IDE/Editor temporary files
 *~
 *.swp
