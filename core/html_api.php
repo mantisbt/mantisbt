@@ -926,6 +926,28 @@ function print_account_menu( $p_page = '' ) {
 	if(( config_get( 'enable_sponsorship' ) == ON ) && ( access_has_project_level( config_get( 'view_sponsorship_total_threshold' ) ) ) && !current_user_is_anonymous() ) {
 		print_bracket_link( helper_mantis_url( $t_account_sponsor_page ), lang_get( 'my_sponsorship' ) );
 	}
+
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_MENU_ACCOUNT' );
+	$t_menu_options = array();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				$t_menu_options[] = $t_callback_menu_options;
+			}
+		}
+	}
+
+	// Plugins menu items
+	// TODO: this would be a call to print_pracket_link but the events returns cooked links so we cant
+	foreach( $t_menu_options as $t_menu_item ) {
+		echo '<span class="bracket-link">[&nbsp;';
+		echo $t_menu_item;
+		echo '&nbsp;]</span> ';
+	}
+
 }
 
 # --------------------
