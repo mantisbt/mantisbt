@@ -211,7 +211,7 @@ function cfdef_prepare_date_default( $p_value ) {
 #string_custom_field_value
 function cfdef_prepare_list_value($p_value) {
 	// strip start and end markers before converting markers to commas
-	return str_replace( '|', ', ', substr( $p_value, 1, -1 ) );
+	return str_replace( '|', ', ', substr( str_replace( '||', '|', '|' . $p_value . '|' ), 1, -1 ) );
 }
 
 function cfdef_prepare_email_value($p_value) {
