@@ -1272,8 +1272,8 @@
 			case CUSTOM_FIELD_TYPE_LIST:
 			case CUSTOM_FIELD_TYPE_MULTILIST:
 			case CUSTOM_FIELD_TYPE_CHECKBOX:
-				// strip start and end markers before converting markers to commas
-				return str_replace( '|', ', ', substr( $t_custom_field_value, 1, -1 ) );
+				// strip possible start and end markers before converting markers to commas
+				return str_replace( '|', ', ', substr( str_replace( "||", "|", '|' . $t_custom_field_value . '|' ), 1, -1 ) );
 				break;
 			case CUSTOM_FIELD_TYPE_DATE:
 				if ($t_custom_field_value != null) {
