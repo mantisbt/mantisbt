@@ -25,6 +25,7 @@
  *
  * @author Kenzaburo Ito, kenito@300baud.org
  * @author various developers
+ * @author محبوب عالم
  */
 
 $s_charset = 'utf-8';
@@ -544,7 +545,7 @@ $s_manage_threshold_config = 'کام کا تریش ھولڈ';
 $s_manage_email_config = 'ای میل کی تصدیق';
 $s_manage_workflow_config = 'کام کی ٹرانذیشن';
 $s_create_new_account_link = 'نیا کھاتہ بناو';
-$s_projects_link = 'منصوبہ';
+$s_projects_link = 'منصوبہ‌جات';
 $s_documentation_link = 'ڈاکومینٹیشن';
 $s_new_accounts_title = 'نیا کھاتہ';
 $s_1_week_title = 'ایک ہفتہ';
@@ -741,7 +742,7 @@ $s_remove_all_users_sure_msg = ' کیا آپ واقعی اس منصوبہ کو �
 $s_remove_all_users_button = '   تمام استعمال کر نے  والوں کو خارج کرو';
 $s_add_user_title = ' استعمال کر نے  والوں کو منصوبہ میں جمع کرو';
 $s_add_user_button = 'استعمال کر نے والے کو جمع کرو';
-$s_project_selection_title = ' منصوبہ کو منتخب کرو';
+$s_project_selection_title = 'انتخابِ منصوبہ';
 $s_remove_link = 'ختم';
 $s_remove_all_link = 'تمام کو ختم کرو';
 $s_updated_user_msg = ' استعمال کر نے  والے کو کامیابی کے ساتھ نیا کر دیا گیا ھے';

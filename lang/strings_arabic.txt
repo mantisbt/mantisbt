@@ -39,7 +39,7 @@ $s_actiongroup_menu_update_status = 'تحديث الحالة';
 $s_actiongroup_menu_update_view_status = 'تحديث حالة العرض';
 $s_actiongroup_menu_update_category = 'تحديث التصنيف';
 $s_actiongroup_menu_set_sticky = 'ضبط/عدم ضبط لصق';
-$s_actiongroup_menu_update_field = 'تحديث %s';
+$s_actiongroup_menu_update_field = 'تحديث %1$s';
 $s_actiongroup_menu_update_target_version = 'تحديث النسخة الهدف';
 $s_actiongroup_menu_update_fixed_in_version = 'تحديث أصلحت في النسخة';
 $s_actiongroup_menu_update_product_build = 'تحديث نسخة المنتج';
@@ -190,34 +190,34 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'نوع الملف غير مسموح به
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'المجلد غير موجود. من فضلك تحقق من إعدادات المشروع.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'هذا ملف مكرر. من فضلك احذف الملف أولا.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'هناك مشروع بهذا الاسم بالفعل.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'حقل ضروري "%s" كان فارغا.  من فضلك تحقق مرة أخرى من مدخلاتك.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'حقل ضروري "%1$s" كان فارغا. من فضلك تحقق مرة أخرى من مدخلاتك.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'هذا الحساب محمي.  أنت غير مسموح لك بالدخول إلى هذا حتى يتم رفع حماية الحساب.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'السماح مرفوض.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'رفع الملف فشل. الملف لا يمكن قراءته بواسطة مانتيس. من فضلك تحقق من إعدادات المشروع.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'رفع الملف فشل. الملف لا يمكن قراءته بواسطة مانتيس بي تي. من فضلك تحقق من إعدادات المشروع.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'رفع الملف فشل.  هذا غالبا بسبب أن حجم الملف أكبر مما هو مسموح به حاليا بواسطة تنصيب PHP هذا.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'محدد مطلوب لهذه الصفحة (%s) لم يتم العثور عليه.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'محدد مطلوب لهذه الصفحة (%1$s) لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'اسم المستخدم هذا يتم استعماله بالفعل. من فضلك عد واختر واحدا آخر.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'خيار الضبط "%s" لم يتم العثور عليه.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'خيار الضبط "%s" لم يمكن ضبطه في قاعدة البيانات.  يجب ضبطه في config_inc.php.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'السلسلة "%s" لم يتم العثور عليها.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'خيار الضبط "%1$s" لم يتم العثور عليه.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'خيار الضبط "%1$s" لم يمكن ضبطه في قاعدة البيانات. يجب ضبطه في config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'السلسلة "%1$s" لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'الملاحظة لم يتم العثور عليها.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'المشروع "%d" لم يتم العثور عليه.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'حقل قاعدة البيانات "%s" لم يتم العثور عليه.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'المشروع "%1$d" لم يتم العثور عليه.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'حقل قاعدة البيانات "%1$s" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'غير قادر على الاتصال بخادم FTP.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'معالج القضايا لا يمتلك الصلاحية الكافية لمعالجة القضايا في هذه الحالة.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'يوجد مشروع بهذا الاسم بالفعل. من فضلك عد وأدخل اسما مختلفا.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'اسم مشروع غير صحيح تم تحديده. أسماء المشاريع لا يمكن أن تكون فارغة.';
-$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'المستخدم بالاسم "%s" لم يتم العثور عليه.';
-$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'المستخدم بالرقم "%d" لم يتم العثور عليه.';
+$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'المستخدم بالاسم "%1$s" لم يتم العثور عليه.';
+$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'المستخدم بالرقم "%1$d" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'معلومات الدخول المخزنة بواسطة متصفحك غير صحيحة.  ربما تم حذف حسابك؟';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'التفضيلات لم يمكن العثور عليها لهذا المستخدم.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'مدخلة الأخبار لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'كلمة السر لا تطابق التأكيد.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'تم توقع مصفوفة لكن تم استرجاع سلسلة ل%s.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'تم توقع سلسلة لكن تم استرجاع مصفوفة ل%s.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'تم توقع رقم ل%s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'القضية %d لم يتم العثور عليها.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'الفلتر %d لم يتم العثور عليه.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'تم توقع مصفوفة لكن تم استرجاع سلسلة ل%1$s.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'تم توقع سلسلة لكن تم استرجاع مصفوفة ل%1$s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'تم توقع رقم ل%1$s.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'القضية %1$d لم يتم العثور عليها.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'الفلتر %1$d لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'الفلتر الذي تحاول استخدامه أقدم من أن تتم ترقيته.  من فضلك أعد إنشاءه.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'عنوان بريد إلكتروني غير صحيح.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'من غير المسموح به استخدام عناوين بريد إلكتروني معروضة.';
@@ -238,30 +238,30 @@ $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'الاتصال بخادم LDA
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'تحديث سجل LDAP فشل.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'سجل مستخدم LDAP لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'امتداد LDAP لم يتم تحميله.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'الاتصال بقاعدة البيانات فشل. الخطأ الذي تم استرجاعه من قاعدة البيانات كان #%d: %s.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'استعلام قاعدة البيانات فشل.  الخطأ الذي تم استرجاعه من قاعدة البيانات كان #%d: %s للاستعلام: %s.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'اختيار قاعدة البيانات فشل.  الخطأ الذي تم استرجاعه من قاعدة البيانات كان #%d: %s.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'الاتصال بقاعدة البيانات فشل. الخطأ الذي تم استرجاعه من قاعدة البيانات كان #%1$d: %2$s.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'استعلام قاعدة البيانات فشل. الخطأ الذي تم استرجاعه من قاعدة البيانات كان #%1$d: %2$s للاستعلام: %3$s.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'اختيار قاعدة البيانات فشل. الخطأ الذي تم استرجاعه من قاعدة البيانات كان #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'يوجد تصنيف بهذا الاسم بالفعل.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'لا فعل نسخ تم تحديده.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'التصنيف لم يتم العثور عليه.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'التصنيف "%s" لم يتم العثور عليه للمشروع "%s".';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'التصنيف "%1$s" لم يتم العثور عليه للمشروع "%2$s".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'نسخة بهذا الاسم موجودة بالفعل.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'النسخة "%s" لم يتم العثور عليها.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'النسخة "%1$s" لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'اسم المستخدم غير صحيح. أسماء المستخدمين يمكن أن تحتوي فقط على حروف لاتينية، أرقام، فراغات، شرط، كشيدات.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'اسم المستخدم الحقيقي غير صحيح.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'المستخدم لا يمتلك مستوى الصلاحيات المطلوب.';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '"الاسم الحقيقي" المختار يطابق اسم الدخول لمستخدم آخر. من فضلك اختر آخر.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'دعم الرعاية ليس مفعلا.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'الرعاية %d لم يتم العثور عليها.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'الرعاية (%s) تحت الكمية الدنيا (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'الرعاية %1$d لم يتم العثور عليها.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'الرعاية (%1$s) تحت الكمية الدنيا (%2$s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'المعالج لا يمتلك مستوى الصلاحية المطلوب لمعالجة القضايا المرعية.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'السماح مرفوض: توكيل القضايا المرعية يتطلب مستوى صلاحية أعلى.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'الراعي لم يوفر عنوان بريد إلكتروني. من فضلك حدث ملفك.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'خيار الضبط "%s" له قيمة غير صحيحة "%s".';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'الفعل لا يمكن تنفيذه لأن القضية "%d" للقراءة فقط.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'خيار الضبط "%1$s" له قيمة غير صحيحة "%2$s".';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'الفعل لا يمكن تنفيذه لأن القضية "%1$d" للقراءة فقط.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'توجد علاقة بالفعل بين هاتين القضيتين.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'العلاقة لم يتم العثور عليها.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'السماح مرفوض: القضية %d تحتاج إلى مستو أعلى من الصلاحيات.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'السماح مرفوض: القضية %1$d تحتاج إلى مستو أعلى من الصلاحيات.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'القضية لا يمكن أن تكون مرتبطة بنفسها.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'هاش التأكيد لا تطابق. من فضلك حاول مرة أخرى.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'خاصية "فقدت كلمة سرك" غير متوفرة.';
@@ -279,16 +279,16 @@ $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'اسم الوسم هذا غير صحي�
 $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'هذا الوسم ليس ملحقا بهذه العلة.';
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'هذا الوسم ملحق بالفعل بهذه العلة.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'النص لم يمكن العثور عليه.';
-$MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'الحدث "%s" لم يتم إعلانه بعد.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'الإضافة غير مسجلة مع مانتيس.';
+$MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'الحدث "%1$s" لم يتم إعلانه بعد.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'الإضافة غير مسجلة مع مانتيس بي تي.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'الإضافة منصبة بالفعل.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'صفحة الإضافة لم يتم العثور عليها.';
-$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'ترقية سكيما الإضافة فشلت في القطعة #%s.';
-$MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'كان هناك خطأ غير معروف "%s" خلال تنفيذ الإضافة "%s".';
-$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'الحقل "%s" يحتوي على العامود المكرر "%s".';
-$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'الحقل "%s" يحتوي على الحقل غير الصحيح "%s".';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'ترقية سكيما الإضافة فشلت في القطعة #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'كان هناك خطأ غير معروف "%1$s" خلال تنفيذ الإضافة "%2$s".';
+$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'الحقل "%1$s" يحتوي على العامود المكرر "%2$s".';
+$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'الحقل "%1$s" يحتوي على الحقل غير الصحيح "%2$s".';
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'معالج جلسة غير صحيح.';
-$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'متغير الجلسة "%s" لم يتم العثور عليه.';
+$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'متغير الجلسة "%1$s" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'جلستك أصبحت غير صحيحة.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'نص استمارة سرية غير صحيح.  هل أرسلت الاستمارة مرتين بطريق الخطأ؟';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'هذه الصفحة لا يمكن الوصول إليها باستخدام هذه الطريقة.';
@@ -317,7 +317,7 @@ $s_projection_enum_string = '10:لا شيء,30:تعديل,50:إصلاح طفيف
 $s_eta_enum_string = '10:لا شيء,20:< 1 يوم,30:2-3 أيام,40:< 1 أسبوع,50:< 1 شهر,60:> 1 شهر';
 $s_sponsorship_enum_string = '0:غير مدفوعة,1:مطلوبة,2:مدفوعة';
 $s_new_account_subject = 'تسجيل حساب';
-$s_new_account_greeting = 'شكرا لك للتسجيل. لديك حساب باسم المتخدم "%1$s". حتى تستكمل تسجيلك، زر المسار التالي (تأكد من إدخاله كسطر وحيد) واضبط كلمة سر دخولك:';
+$s_new_account_greeting = 'شكرا لك للتسجيل. لديك حساب باسم المتخدم "%1$s". لإكمال تسجيلك، زر المسار التالي (تأكد من أنه مدخل كسطر وحيد) واضبط كلمة السر الخاصة بدخولك:';
 $s_new_account_username = 'اسم المستخدم:';
 $s_new_account_message = 'لو أنك لم تطلب أي تسجيل، تجاهل هذه الرسالة ولا شيء سيحدث.\n\n';
 $s_new_account_do_not_reply = 'لا ترد على هذه الرسالة';
@@ -342,19 +342,19 @@ $s_email_notification_title_for_action_sponsorship_added = 'القضية الت�
 $s_email_notification_title_for_action_sponsorship_updated = 'رعاية القضية التالية تم تعديلها.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'رعاية القضية التالية تم سحبها.';
 $s_email_notification_title_for_action_bugnote_submitted = 'ملاحظة تمت إضافتها إلى هذه القضية.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = 'القضية التالية تم ضبطها كتكرار للقضية %s.';
-$s_email_notification_title_for_action_has_duplicate_relationship_added = 'القضية %s تم ضبطها كتكرار للقضية التالية.';
-$s_email_notification_title_for_action_related_to_relationship_added = 'القضية التالية تم ضبطها كمرتبطة بالقضية %s.';
-$s_email_notification_title_for_action_dependant_on_relationship_added = 'القضية التالية تم ضبطها كأب للقضية %s.';
-$s_email_notification_title_for_action_blocks_relationship_added = 'القضية التالية تم ضبطها كابن للقضية %s.';
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'القضية التالية تمت إزالة ضبطها كتكرار للقضية %s.';
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'القضية %s تمت إزالتها كتكرار للقضية التالية.';
-$s_email_notification_title_for_action_related_to_relationship_deleted = 'القضية التالية تم ضبطها كغير مرتبطة بالقضية %s.';
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'القضية التالية تمت إزالتها كأب  للقضية %s.';
-$s_email_notification_title_for_action_blocks_relationship_deleted = 'القضية التالية تمت إزالتها كابن للقضية %s.';
-$s_email_notification_title_for_action_relationship_child_resolved = 'القضية المرتبطة %s تم حلها.';
-$s_email_notification_title_for_action_relationship_child_closed = 'القضية المرتبطة %s تم إغلاقها.';
-$s_email_notification_title_for_action_monitor = 'القضية %s متابعة الآن بواسطة المستخدم %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'القضية التالية تم ضبطها كتكرار للقضية %1$s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'القضية %1$s تم ضبطها كتكرار للقضية التالية.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'القضية التالية تم ضبطها كمرتبطة بالقضية %1$s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'القضية التالية تم ضبطها كأب للقضية %1$s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'القضية التالية تم ضبطها كابن للقضية %1$s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'القضية التالية تمت إزالة ضبطها كتكرار للقضية %1$s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'القضية %1$s تمت إزالتها كتكرار للقضية التالية.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'القضية التالية تم ضبطها كغير مرتبطة بالقضية %1$s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'القضية التالية تمت إزالتها كأب  للقضية %1$s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'القضية التالية تمت إزالتها كابن للقضية %1$s.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'القضية المرتبطة %1$s تم حلها.';
+$s_email_notification_title_for_action_relationship_child_closed = 'القضية المرتبطة %1$s تم إغلاقها.';
+$s_email_notification_title_for_action_monitor = 'القضية %1$s متابعة الآن بواسطة المستخدم %1$s.';
 $s_email_reporter = 'تم الإبلاغ بواسطة';
 $s_email_handler = 'تم إيكالها إلى';
 $s_email_project = 'مشروع';
@@ -498,7 +498,7 @@ $s_reminder = 'تذكرة';
 $s_reminder_explain = 'هذه الملاحظة سيتنم إرسالها إلى المتلقين المعروضين كطالبي ردود على هذه القضية.';
 $s_reminder_monitor = 'هؤلاء المتلقون سيبدءون أيضا مراقبة القضايا. يمكنهم التوقف باستخدام زر التوقف عن المراقبة.';
 $s_reminder_store = 'هذه الملاحظة سيتم تخزينها مع القضية.';
-$s_confirm_sponsorship = 'من فضلك أكد أنك تريد رعاية القضية %d ل%s.';
+$s_confirm_sponsorship = 'من فضلك أكد أنك تريد رعاية القضية %1$d ل%2$s.';
 $s_bug_updated_msg = 'القضية تم تحديثها بنجاح...';
 $s_back_to_bug_link = 'رجوع إلى القضية';
 $s_update_simple_link = 'تحديث بسيط';
@@ -549,13 +549,13 @@ $s_hide_content = 'إخفاء المحتوى';
 $s_show_content = 'إظهار المحتوى';
 $s_total_queries_executed = 'الاستعلامات الإجمالية تم إجهادها.';
 $s_unique_queries_executed = 'الاستعلامات المنفردة تم إجهادها.';
-$s_memory_usage_in_kb = 'استخدام الذاكرة: %s كيلوبايت';
+$s_memory_usage_in_kb = 'استخدام الذاكرة: %1$s كيلوبايت';
 $s_please_report = 'من فضلك أبلغ هذا إلى %1$.';
 $s_click_to_login = 'اضغط هنا لتسجيل الدخول';
 $s_warning_plain_password_authentication = '<strong>تحذير:</strong> تحقيق كلمة السر الصافي مستخدم، هذا سيكشف كلمات سرك للإداريين.';
 $s_warning_default_administrator_account_present = '<strong>تحذير:</strong> ينبغي عليك تعطيل حساب \'administrator\' الافتراضي أو تغيير كلمة سره.';
 $s_warning_admin_directory_present = '<strong>تحذير:</strong> مجلد الإدارة ينبغي إزالته.';
-$s_error_database_version_out_of_date_1 = '<strong>خطأ:</strong> هيكل قاعدة البيانات يبدو أنه قديم (config(databaseversion) هو 0 وجداول الترقية القديمة موجودة). النسخة 1.x من مانتيس استحدثت عملية ترقية جديدة. أنت يبدو أنك تقوم بالترقية من إصدار 0.XX. من فضلك قم بالترقية إلى 1.0.8 أو 1.1.X، ثم قم بالترقية إلى 1.2.';
+$s_error_database_version_out_of_date_1 = '<strong>خطأ:</strong> هيكل قاعدة البيانات يبدو أنه قديم (config(databaseversion) هو 0 وجداول الترقية القديمة موجودة). النسخة 1.x من مانتيس بي تي استحدثت عملية ترقية جديدة. أنت يبدو أنك تقوم بالترقية من إصدار 0.XX. من فضلك قم بالترقية إلى 1.0.8 أو 1.1.X، ثم قم بالترقية إلى 1.2.';
 $s_error_database_no_schema_version = '<strong>خطأ:</strong> هيكل قاعدة البيانات يبدو أنه قديم(config(databaseversion) هو 0 وجداول الترقية القديمة غير موجودة). من فضلك تحقق من أن قاعدة بياناتك تعمل - لم يمكننا استرجاع نسخة سكيما قاعدة البيانات. جدول Config لم يرجع نسخة سكيما قاعدة بيانات صحيحة - من فضلك سل عن الدعم في قائمة مساعدة مانتيس البريدية لو كان هذا مطلوبا.';
 $s_error_database_version_out_of_date_2 = '<strong>تحذير:</strong> هيكل قاعدة البيانات ربما يكون قديما. من فضلك قم بالترقية <a href="admin/install.php">هنا</a> قبل تسجيل الدخول.';
 $s_error_code_version_out_of_date = '<strong>تحذير:</strong> هيكل قاعدة البيانات أكثر حداثة من الكود المنصب.  من فضلك قم بترقية الكود.';
@@ -582,7 +582,7 @@ $s_older_news_link = 'أخبار أقدم';
 $s_archives = 'أرشيفات';
 $s_rss = 'آر إس إس';
 $s_site_information = 'معلومات الموقع';
-$s_mantis_version = 'نسخة مانتيس';
+$s_mantis_version = 'نسخة مانتيس بي تي';
 $s_schema_version = 'نسخة سكيما';
 $s_site_path = 'مسار الموقع';
 $s_core_path = 'مسار القلب';
@@ -623,7 +623,7 @@ $s_date_created = 'تاريخ الإنشاء';
 $s_last_visit = 'آخر زيارة';
 $s_edit_user_link = 'عدل المستخدم';
 $s_config_all_projects = 'ملاحظة: عمليات الضبط هذه تؤثر على كل المشاريع، إلا لو تم تجاوزها لمشروع معين.';
-$s_config_project = 'ملاحظة: عمليات الضبط هذه تؤثر فقط على المشروع %s.';
+$s_config_project = 'ملاحظة: عمليات الضبط هذه تؤثر فقط على المشروع %1$s.';
 $s_colour_coding = 'في الجدول بالأسفل، كود اللون التالي مطبق:';
 $s_colour_project = 'إعدادات المشروع تتجاوز الإعدادات الأخرى.';
 $s_colour_global = 'كل إعدادات المشروع تتجاوز الإعدادات الافتراضية.';
@@ -658,7 +658,7 @@ $s_desc_bug_reopen_status = 'الحالة التي يتم ضبط القضايا 
 $s_desc_bug_resolved_status_threshold = 'الحالة حيث يتم اعتبار قضية ما محلولة';
 $s_workflow_change_access = 'من يمكنه تغيير معدل العمل';
 $s_access_change_access = 'من يمكنه تغيير مستويات الصلاحية';
-$s_default_not_in_flow = 'الحالة الافتراضية ل%s لم يتم اختيارها في الحالات القادمة ل%s. سيتم تجاهلها.';
+$s_default_not_in_flow = 'الحالة الافتراضية ل%1$s لم يتم اختيارها في الحالات القادمة ل%2$s. سيتم تجاهلها.';
 $s_assign_issue = 'إيكال قضية';
 $s_allow_close_immediate = 'يسمح للقضايا بأن يتم إغلاقها عند الحل';
 $s_allow_reporter_close = 'يسمح للمبلغ بإغلاق القضية';
@@ -687,7 +687,7 @@ $s_plugin = 'إضافة';
 $s_plugins_installed = 'الإضافات المنصبة';
 $s_plugins_available = 'الإضافات المتوفرة';
 $s_plugin_description = 'وصف';
-$s_plugin_author = 'المؤلف: %s';
+$s_plugin_author = 'المؤلف: %1$s';
 $s_plugin_url = 'موقع ويب:';
 $s_plugin_depends = 'اعتمادات';
 $s_plugin_no_depends = 'لا اعتمادات';
@@ -698,7 +698,7 @@ $s_plugin_actions = 'أفعال';
 $s_plugin_install = 'تنصيب';
 $s_plugin_upgrade = 'ترقية';
 $s_plugin_uninstall = 'فك التنصيب';
-$s_plugin_uninstall_message = 'هل أنت متأكد أنك تريد إزالة الإضافة "%s"؟';
+$s_plugin_uninstall_message = 'هل أنت متأكد أنك تريد إزالة الإضافة "%1$s"؟';
 $s_plugin_key = 'مفتاح';
 $s_plugin_key_met = 'الإضافة جاهزة';
 $s_plugin_key_unmet = 'اعتمادات غير مقابلة';
@@ -707,7 +707,7 @@ $s_plugin_key_upgrade = 'الترقية مطلوبة';
 $s_project_added_msg = 'المشروع تمت إضافته بنجاح...';
 $s_category_added_msg = 'التصنيف تمت إضافته بنجاح...';
 $s_category_deleted_msg = 'التصنيف تم حذفه بنجاح...';
-$s_category_delete_sure_msg = 'هل أنت متأكد أنك تريد حذف هذا التصنيف؟<br />التصنيف "%s" يحتوي على %d علة.';
+$s_category_delete_sure_msg = 'هل أنت متأكد أنك تريد حذف هذا التصنيف؟<br />التصنيف "%1$s" يحتوي على %2$d علة.';
 $s_delete_category_button = 'حذف التصنيف';
 $s_edit_project_category_title = 'عدل تصنيف المشروع';
 $s_update_category_button = 'تحديث التصنيف';
@@ -970,7 +970,7 @@ $s_monitoring_user_list = 'قائمة المستخدمين';
 $s_no_users_sponsoring_bug = 'لا يوجد مستخدمون يرعون هذه القضية.';
 $s_users_sponsoring_bug = 'المستخدمون الذين يرعون هذه القضية';
 $s_sponsors_list = 'قائمة الرعاة';
-$s_total_sponsorship_amount = 'إجمالي الرعاية = %s';
+$s_total_sponsorship_amount = 'إجمالي الرعاية = %1$s';
 $s_add_custom_field_button = 'حقل مخصص جديد';
 $s_delete_custom_field_button = 'حذف الحقل المخصص';
 $s_delete_custom_field_everywhere = 'حذف الحقل المخصص في كل مكان';
@@ -1021,7 +1021,7 @@ $s_monitored_by = 'مراقبة بواسطة';
 $s_attachments = 'الملحق(ات)';
 $s_attachment_alt = 'A';
 $s_phpmailer_language = 'en';
-$s_sponsors = '%d راعي(رعاة)';
+$s_sponsors = '%1$d راعي(رعاة)';
 $s_sponsorship_added = 'الرعاية تمت إضافتها';
 $s_sponsorship_updated = 'الرعاية تم تحديثها';
 $s_sponsorship_deleted = 'الرعاية تم حذفها';
@@ -1031,8 +1031,8 @@ $s_sponsorship_total = 'إجمالي الرعاية';
 $s_changelog = 'سجل التغيير';
 $s_changelog_empty = 'لا معلومات سجل تغيير متوفرة';
 $s_roadmap = 'خريطة الطريق';
-$s_resolved_progress = '%d من %d قضية(قضايا) تم حلها.  التقدم (%d%%).';
-$s_http_auth_realm = 'تسجيل دخول مانتيس';
+$s_resolved_progress = '%1$d من %2$d قضية(قضايا) تم حلها.  التقدم (%3$d%%).';
+$s_http_auth_realm = 'تسجيل دخول مانتيس بي تي';
 $s_bug = 'قضية';
 $s_bugs = 'قضايا';
 $s_add_new_relationship = 'علاقة جديدة';
@@ -1132,7 +1132,7 @@ $s_on = 'مفعل';
 $s_off = 'معطل';
 $s_wiki = 'ويكي';
 $s_tags = 'وسوم';
-$s_tag_details = 'تفاصيل الوسم: %s';
+$s_tag_details = 'تفاصيل الوسم: %1$s';
 $s_tag_id = 'رقم الوسم';
 $s_tag_name = 'اسم';
 $s_tag_creator = 'منشئ';
@@ -1140,7 +1140,7 @@ $s_tag_created = 'تاريخ الإنشاء';
 $s_tag_updated = 'آخر تحديث';
 $s_tag_description = 'وصف الوسم';
 $s_tag_statistics = 'إحصاءات الاستخدام';
-$s_tag_update = 'تحديث الوسم: %s';
+$s_tag_update = 'تحديث الوسم: %1$s';
 $s_tag_update_return = 'رجوع إلى الوسم';
 $s_tag_update_button = 'تحديث الوسم';
 $s_tag_delete_button = 'حذف الوسم';
@@ -1150,26 +1150,26 @@ $s_tag_none_attached = 'لا وسوم تم إلحاقها.';
 $s_tag_attach = 'إلحاق';
 $s_tag_attach_long = 'إلحاق الوسوم';
 $s_tag_attach_failed = 'إلحاق الوسم فشل.';
-$s_tag_detach = 'إزالة إلحاق "%s"';
-$s_tag_separate_by = '(افصل بواسطة "%s")';
+$s_tag_detach = 'إزالة إلحاق "%1$s"';
+$s_tag_separate_by = '(افصل بواسطة "%1$s")';
 $s_tag_invalid_name = 'اسم وسم غير صحيح.';
 $s_tag_create_denied = 'سماح الإنشاء تم رفضه.';
-$s_tag_filter_default = 'القضايا الملحقة (%s)';
+$s_tag_filter_default = 'القضايا الملحقة (%1$s)';
 $s_tag_history_attached = 'الوسم تم إلحاقه';
 $s_tag_history_detached = 'الوسم تمت إزالة إلحاقه';
 $s_tag_history_renamed = 'الوسم تمت إعادة تسميته';
 $s_tag_related = 'وسوم مرتبطة';
-$s_tag_related_issues = 'القضايا المشتركة (%s)';
-$s_tag_stats_attached = 'القضايا الملحقة: %s';
+$s_tag_related_issues = 'القضايا المشتركة (%1$s)';
+$s_tag_stats_attached = 'القضايا الملحقة: %1$s';
 $s_time_tracking_billing_link = 'بيلنج';
 $s_time_tracking = 'تتبع الزمن';
 $s_time_tracking_get_info_button = 'الحصول على معلومات تتبع الوقت';
 $s_time_tracking_cost_per_hour = 'التكلفة / ساعة';
 $s_time_tracking_cost = 'تكلفة';
-$s_total_time_for_issue = 'الوقت الإجمالي للقضية = %s';
+$s_total_time_for_issue = 'الوقت الإجمالي للقضية = %1$s';
 $s_access_denied = 'السماح تم رفضه.';
-$s_twitter_resolved = '%d: [%s] %s (تم حلها بواسطة %s في %s)';
-$s_twitter_resolved_no_version = '%d: [%s] %s (تم حلها بواسطة %s)';
+$s_twitter_resolved = '%1$d: [%2$s] %3$s (تم حلها بواسطة %4$s في %5$s)';
+$s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (تم حلها بواسطة %4$s)';
 $s_development_team = 'فريق التطوير';
 $s_all_dates = 'كل التواريخ';
 $s_period_none = 'لا شيء';

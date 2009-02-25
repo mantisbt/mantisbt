@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,10 +23,12 @@
  * @ingroup Language
  * @file
  *
+ * @author Karduelis
  * @author Oktay Altunergil - oktay@bellatlantic.net
  */
 
 $s_charset = 'utf-8';
+$s_actiongroup_menu_delete = 'Sil';
 $s_all_projects = 'Bütün Projeler';
 $s_move_bugs = 'Bug Taşı';
 $s_operation_successful = 'İşlem Başarıyla Tamamlandı';

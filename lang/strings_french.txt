@@ -206,7 +206,7 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Un projet ayant ce nom existe déjà.'
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Le champ obligatoire « %s » n\'est pas renseigné.  Merci de vérifier votre saisie.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ce compte est protégé.  Vous n\'êtes pas autorisés à y accéder tant que la protection existe.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Accès interdit.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Échec du dépôt de fichier.  Demander à votre administrateur d\'exécuter le script admin_check pour deboguer ce problème.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Échec du dépôt de fichier. Le fichier n\'est pas lisible par MantisBT. Vérifiez la configuration du projet.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Échec du dépôt de fichier.  La taille du fichier était vraisemblablement trop grande pour votre configuration de PHP.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Un paramètre requis par cette page (%s) n\'a pas été trouvé.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ce nom d\'utilisateur est déjà utilisé.  Merci de recommencer et choisir un autre nom.';
@@ -568,7 +568,7 @@ $s_click_to_login = 'Cliquer pour accéder';
 $s_warning_plain_password_authentication = '<strong>ATTENTION :</strong> l\'authentification par mot de passe en clair est utilisée, ceci exposera votre mot de passe aux administrateurs.';
 $s_warning_default_administrator_account_present = '<strong>ATTENTION :</strong> Vous devriez désactiver le compte par défaut « administrator » ou changer son mot de passe.';
 $s_warning_admin_directory_present = '<strong>ATTENTION :</strong> le répertoire Admin devrait être supprimé.';
-$s_error_database_version_out_of_date_1 = '<strong>ERREUR :</strong> La structure de la base de données paraît obsolète (config(databaseversion) est 0 et les vieilles tables de mise à jour existent). La version 1.x de mantis a ajouté un nouveau processus de mise à jour. Il apparaît que vous êtes en train de mettre à jour depuis la version 0.XX. Mettez à jour vers 1.0.8 ou 1.1.X d\'abord, puis mettez à jour vers 1.2.';
+$s_error_database_version_out_of_date_1 = '<strong>ERREUR :</strong> La structure de la base de données paraît obsolète (config(databaseversion) est 0 et les vieilles tables de mise à jour existent). La version 1.x de MantisBT a ajouté un nouveau processus de mise à jour. Il apparaît que vous êtes en train de mettre à jour depuis la version 0.XX. Mettez à jour vers 1.0.8 ou 1.1.X d\'abord, puis mettez à jour vers 1.2.';
 $s_error_database_no_schema_version = '<strong>ERREUR :</strong> La structure de la base de données paraît obsolète (config(databaseversion) est 0 et les vieilles tables de mise à jour n\'existent pas). Vérifiez que votre base de données fonctionne - nous ne pouvons pas trouver la version du schéma de la base de données. La table « Config » n\'a pas renvoyé une version valide du schéma - demandez de l\'aide sur la liste de diffusion mantis-help si besoin.';
 $s_error_database_version_out_of_date_2 = '<strong>ATTENTION :</strong> La structure de la base de données peut être dépassée. Mettez à jour depuis <a href="admin/install.php">ici</a> avant de vous identifier.';
 $s_error_code_version_out_of_date = '<strong>ATTENTION :</strong> La structure base de données est plus récente que le logiciel installé. Mettez à jour le logiciel.';
