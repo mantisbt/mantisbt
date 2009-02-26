@@ -112,6 +112,66 @@
 			such as new pages or integration with other applications.
 		</para>
 
+		<blockquote id="dev.eventref.output.menu.account">
+			<title>EVENT_MENU_ACCOUNT (Default)</title>
+			<blockquote>
+				<para>
+					This event gives plugins the opportunity to add new links to the user account
+					menu available to users from the 'My Account' link on the main menu.
+				</para>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>Array: List of HTML links for the user account menu.</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.output.menu.docs">
+			<title>EVENT_MENU_DOCS (Default)</title>
+			<blockquote>
+				<para>
+					This event gives plugins the opportunity to add new links to the documents
+					menu available to users from the 'Docs' link on the main menu.
+				</para>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>Array: List of HTML links for the documents menu.</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.output.menu.filter">
+			<title>EVENT_MENU_FILTER (Default)</title>
+			<blockquote>
+				<para>
+					This event gives plugins the opportunity to add new links to the issue list
+					menu available to users from the 'View Issues' link on the main menu.
+				</para>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>Array: List of HTML links for the issue list menu.</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.output.menu.issue">
+			<title>EVENT_MENU_ISSUE (Default)</title>
+			<blockquote>
+				<para>
+					This event gives plugins the opportunity to add new links to the issue
+					menu available to users when viewing issues.
+				</para>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>Array: List of HTML links for the documents menu.</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.output.menu.main">
 			<title>EVENT_MENU_MAIN (Default)</title>
 			<blockquote>
@@ -119,6 +179,24 @@
 					This event gives plugins the opportunity to add new links to the main menu at
 					the top (or bottom) of every page in MantisBT.  New links will be added after the
 					'Docs' link, and before the 'Manage' link.  Hooked events may return multiple
+					links, in which case each link in the array will be automatically separated
+					with the '|' symbol as usual.
+				</para>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>Array: List of HTML links for the main menu.</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.output.menu.mainfront">
+			<title>EVENT_MENU_MAIN_FRONT (Default)</title>
+			<blockquote>
+				<para>
+					This event gives plugins the opportunity to add new links to the main menu at
+					the top (or bottom) of every page in MantisBT.  New links will be added after the
+					'Main' link, and before the 'My View' link.  Hooked events may return multiple
 					links, in which case each link in the array will be automatically separated
 					with the '|' symbol as usual.
 				</para>
@@ -175,36 +253,6 @@
 				<itemizedlist>
 					<title>Return Value</title>
 					<listitem><para>Array: List of HTML links for the summary menu.</para></listitem>
-				</itemizedlist>
-			</blockquote>
-		</blockquote>
-
-		<blockquote id="dev.eventref.output.menu.docs">
-			<title>EVENT_MENU_DOCS (Default)</title>
-			<blockquote>
-				<para>
-					This event gives plugins the opportunity to add new links to the documents
-					menu available to users from the 'Docs' link on the main menu.
-				</para>
-
-				<itemizedlist>
-					<title>Return Value</title>
-					<listitem><para>Array: List of HTML links for the documents menu.</para></listitem>
-				</itemizedlist>
-			</blockquote>
-		</blockquote>
-
-		<blockquote id="dev.eventref.output.menu.account">
-			<title>EVENT_MENU_ACCOUNT (Default)</title>
-			<blockquote>
-				<para>
-					This event gives plugins the opportunity to add new links to the user account
-					menu available to users from the 'My Account' link on the main menu.
-				</para>
-
-				<itemizedlist>
-					<title>Return Value</title>
-					<listitem><para>Array: List of HTML links for the user account menu.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
