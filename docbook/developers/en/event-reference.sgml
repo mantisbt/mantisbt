@@ -81,6 +81,7 @@
 
 	&eventref-output;
 	&eventref-bug;
+	&eventref-manage;
 
 	<sect1 id="dev.eventref.logging">
 		<title>Logging</title>
