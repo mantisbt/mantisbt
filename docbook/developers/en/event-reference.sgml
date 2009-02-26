@@ -79,6 +79,9 @@
 
 	</sect1>
 
+	&eventref-output;
+	&eventref-bug;
+
 	<sect1 id="dev.eventref.logging">
 		<title>Logging</title>
 
@@ -103,6 +106,4 @@
 
 	</sect1>
 
-	&eventref-output;
-	&eventref-bug;
 </chapter>
