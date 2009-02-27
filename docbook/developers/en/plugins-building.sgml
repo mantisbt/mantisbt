@@ -59,18 +59,18 @@ Example/
 
 				<para>
 					Because of how <classname>MantisPlugin</classname> declares the
-					<programlisting>register()</programlisting>	method as <programlisting>abstract</programlisting>, our plugin must
-					implement that method before PHP will find it semantically valid.  This
-					method is meant for one simple purpose, and should never be used for any
-					other task: setting the plugin's information properties, including the
-					plugin's name, description, version, and more.
+					<function>register()</function>	method as <literal>abstract</literal>, our
+					plugin must implement that method before PHP will find it semantically
+					valid.  This method is meant for one simple purpose, and should never be
+					used for any other task: setting the plugin's information properties,
+					including the plugin's name, description, version, and more.
 				</para>
 
 				<para>
-					Once your plugin defines its class, implements the <programlisting>register()</programlisting>
+					Once your plugin defines its class, implements the <function>register()</function>
 					method, and sets at least the name and version properties, it is then
 					considered a "complete" plugin, and can be loaded and installed within
-					MantisBT' plugin manager.  At this stage, our Example plugin, with all the
+					MantisBT's plugin manager.  At this stage, our Example plugin, with all the
 					possible plugin properties set at registration, looks like this:
 				</para>
 

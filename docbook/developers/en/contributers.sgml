@@ -147,7 +147,7 @@ $ git pull --rebase
 			<para>
 				If the topic branch in question is a local, private branch, that you are not
 				sharing with other developers, the simplest and easiest method to stay up to
-				date with <literal>master</literal> is to use the <literal>rebase</literal>
+				date with <literal>master</literal> is to use the <command>rebase</command>
 				command.  This will append all of your feature branch commits into a linear
 				history after the last commit on the <literal>master</literal> branch.
 			</para>
@@ -183,7 +183,7 @@ $ git rebase remote/feature
 			</para>
 
 			<para>
-				To bring public branch up to date, you'll need to <literal>merge</literal>
+				To bring public branch up to date, you'll need to <command>merge</command>
 				the current <literal>master</literal> branch, which will create a special
 				"merge commit" in the branch history, causing a logical "split" in commit
 				history where your branch started and joining at the merge.  These merge
