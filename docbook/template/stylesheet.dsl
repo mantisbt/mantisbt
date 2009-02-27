@@ -770,7 +770,35 @@
 ;(define %stylesheet-type%
 ;"text/css")
 
+(define ($classname-seq$ #!optional (sosofo (process-children)))
+  ;; fragments of computer code
+  (make element gi: "CODE"
+	attributes: (list
+		     (list "CLASS" (gi)))
+	sosofo))
+
 (define ($code-seq$ #!optional (sosofo (process-children)))
+  ;; fragments of computer code
+  (make element gi: "CODE"
+	attributes: (list
+		     (list "CLASS" (gi)))
+	sosofo))
+
+(define ($command-seq$ #!optional (sosofo (process-children)))
+  ;; fragments of computer code
+  (make element gi: "TT"
+	attributes: (list
+		     (list "CLASS" (gi)))
+	sosofo))
+
+(define ($function-seq$ #!optional (sosofo (process-children)))
+  ;; fragments of computer code
+  (make element gi: "CODE"
+	attributes: (list
+		     (list "CLASS" (gi)))
+	sosofo))
+
+(define ($literal-seq$ #!optional (sosofo (process-children)))
   ;; fragments of computer code
   (make element gi: "CODE"
 	attributes: (list
@@ -872,10 +900,11 @@
 
 ;Define my own series of fonts for various elements
 (element application ($mono-seq$))
+(element classname ($classname-seq$))
 (element code ($code-seq$))
-(element command ($bold-seq$))
+(element command ($command-seq$))
 (element filename ($mono-seq$))
-(element function ($mono-seq$))
+(element function ($function-seq$))
 (element guibutton ($bold-seq$))
 (element guiicon ($bold-seq$))
 (element guilabel ($bold-mono-seq$))
@@ -884,7 +913,7 @@
 (element guisubmenu ($bold-seq$))
 (element hardware ($bold-mono-seq$))
 (element keycap ($bold-seq$))
-(element literal ($mono-seq$))
+(element literal ($literal-seq$))
 (element parameter ($italic-mono-seq$))
 (element prompt ($mono-seq$))
 (element programlisting ($programlisting-seq$))
