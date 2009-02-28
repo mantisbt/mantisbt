@@ -1319,7 +1319,7 @@ class PHPMailer {
       if (function_exists('mb_strlen') && $this->HasMultiBytes($str)) {
      // Use a custom function which correctly encodes and wraps long
      // multibyte strings without breaking lines within a character
-        $encoded = $this->Base64EncodeWrapMB($str);
+        $encoded = $this->Base64EncodeWrapMB($str, "\n");
       } else {
       $encoded = base64_encode($str);
       $maxlen -= $maxlen % 4;
@@ -1358,9 +1358,10 @@ class PHPMailer {
    * Adapted from a function by paravoid at http://uk.php.net/manual/en/function.mb-encode-mimeheader.php
    * @access public
    * @param string $str multi-byte text to wrap encode
+   * @param string $linefeed line feed (should be \n for mail headers)
    * @return string
    */
-  public function Base64EncodeWrapMB($str) {
+  public function Base64EncodeWrapMB($str, $linefeed="\r\n") {
     $start = "=?".$this->CharSet."?B?";
     $end = "?=";
     $encoded = "";
@@ -1384,11 +1385,11 @@ class PHPMailer {
       }
       while (strlen($chunk) > $length);
 
-      $encoded .= $chunk . $this->LE;
+      $encoded .= $chunk . $linefeed;
     }
 
     // Chomp the last linefeed
-    $encoded = substr($encoded, 0, -strlen($this->LE));
+    $encoded = substr($encoded, 0, -strlen($linefeed));
     return $encoded;
   }
 
