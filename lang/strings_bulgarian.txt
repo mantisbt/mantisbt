@@ -26,6 +26,7 @@
  * @author Alex Stanev, alex <at> stanev.org
  * @author DCLXVI
  * @author Mihaela Georgieva, helicopterbg <at> gmail.com
+ * @author RealEnder
  * @author Svetlin Stefanov, desertwaste <at> gmail.com
  */
 
@@ -605,6 +606,7 @@ $s_reopen_resolution = 'Резолюция, назначена на повтор
 $s_config_delete_sure = 'Изтриване на настройките за';
 $s_in_project = 'в проект';
 $s_delete_config_button = 'Изтриване на настройките';
+$s_configuration_option = 'Конфигурационна опция';
 $s_configuration_option_type = 'Тип';
 $s_configuration_option_value = 'Стойност';
 $s_all_users = 'Всички потребители';
