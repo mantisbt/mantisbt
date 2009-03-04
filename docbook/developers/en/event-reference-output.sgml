@@ -10,6 +10,29 @@
 			bugnotes, as well as handling urls to other sites in general.
 		</para>
 
+		<blockquote id="dev.eventref.output.display.bugid">
+			<title>EVENT_DISPLAY_BUG_ID (Chained)</title>
+
+			<blockquote>
+				<para>
+					This is an event to format bug ID numbers beore being displayed, using the
+					<function>bug_format_id()</function> API call.  The result should be plain-text,
+					as the resulting string is used in various formats and locations.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>String: bug ID string to be displayed</para></listitem>
+					<listitem><para>Int: bug ID number</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>String: modified bug ID string</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.output.display.email">
 			<title>EVENT_DISPLAY_EMAIL (Chained)</title>
 

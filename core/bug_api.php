@@ -1782,7 +1782,9 @@ function bug_unmonitor( $p_bug_id, $p_user_id ) {
  */
 function bug_format_id( $p_bug_id ) {
 	$t_padding = config_get( 'display_bug_padding' );
-	return( str_pad( $p_bug_id, $t_padding, '0', STR_PAD_LEFT ) );
+	$t_string = str_pad( $p_bug_id, $t_padding, '0', STR_PAD_LEFT );
+
+	return event_signal( 'EVENT_DISPLAY_BUG_ID', array( $t_string ), array( $p_bug_id ) );
 }
 
 /**
