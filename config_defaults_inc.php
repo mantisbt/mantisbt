@@ -2150,6 +2150,18 @@
 	$g_allow_no_category = OFF;
 
 	/**
+	 * Enable or disable display of the ETA field.
+	 * @global int $g_enable_eta
+	 */
+	$g_enable_eta = ON;
+
+	/**
+	 * Enable or disable display of the Product Build field.
+	 * @global int $g_enable_product_build
+	 */
+	$g_enable_product_build = ON;
+
+	/**
 	 * login method
 	 * CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH
 	 * You can simply change this at will. MantisBT will try to figure out how the passwords were encrypted.

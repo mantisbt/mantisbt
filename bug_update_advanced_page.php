@@ -388,9 +388,20 @@
 </tr>
 
 
+<?php
+	$t_show_eta = config_get( 'enable_eta' );
+	$t_show_build = config_get( 'enable_product_build' );
+
+	$t_show_version = ( ON == config_get( 'show_product_version' ) )
+		|| ( ( AUTO == config_get( 'show_product_version' ) )
+			&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
+?>
+
+<?php if ( $t_show_eta || $t_show_version || $t_show_build ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 
 	<!-- ETA -->
+	<?php if ( $t_show_eta ) { ?>
 	<td class="category">
 	<!-- Fixed in Version -->
 		<?php echo lang_get( 'eta' ) ?>
@@ -401,11 +412,12 @@
 		</select>
 	</td>
 
+	<?php } else { ?>
+	<td colspan="2"></td>
+	<?php } ?>
+
 	<td class="category">
 		<?php
-			$t_show_version = ( ON == config_get( 'show_product_version' ) )
-					|| ( ( AUTO == config_get( 'show_product_version' ) )
-								&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
 			if ( $t_show_version ) {
 				$t_product_version_released_mask = VERSION_RELEASED;
 
@@ -429,33 +441,29 @@
 	</td>
 
 	<!-- Product Version  or Product Build, if version is suppressed -->
+	<?php if ( $t_show_version ) { ?>
 	<td class="category">
-		<?php
-			if ( $t_show_version ) {
-				echo lang_get( 'product_version' );
-			} else {
-				echo lang_get( 'build' );
-			}
-		?>
+		<?php echo lang_get( 'product_version' ); ?>
 	</td>
 	<td>
-		<?php
-			if ( $t_show_version ) {
-		?>
 		<select <?php echo helper_get_tab_index() ?> name="version">
                        <?php print_version_option_list( $t_bug->version, $t_bug->project_id, $t_product_version_released_mask ); ?>
 		</select>
-		<?php
-			} else {
-		?>
-		<input type="text" name="build" size="16" maxlength="32" value="<?php echo $t_bug->build ?>" />
-		<?php
-			}
-		?>
-
 	</td>
 
+	<?php } else if ( $t_show_build ) { ?>
+	<td class="category">
+		<?php echo lang_get( 'product_build' ); ?>
+	</td>
+	<td>
+		<input type="text" name="build" size="16" maxlength="32" value="<?php echo $t_bug->build ?>" />
+	</td>
+	<?php } else { ?>
+	<td colspan="2"></td>
+	<?php } ?>
+
 </tr>
+<?php } ?>
 
 <?php
 	if ( $t_show_version ) {
@@ -480,12 +488,8 @@
 	</select>
 	</td>
 <?php
-	} else {
-?>
-	<!-- spacer -->
-	<td colspan="4">&nbsp;</td>
-<?php
 	}
+	if ( $t_show_build ) {
 ?>
 	<!-- Build -->
 	<td class="category">
@@ -494,6 +498,15 @@
 	<td>
 		<input <?php echo helper_get_tab_index() ?> type="text" name="build" size="16" maxlength="32" value="<?php echo $t_bug->build ?>" />
 	</td>
+
+<?php
+	} else {
+?>
+	<!-- spacer -->
+	<td colspan="2"></td>
+<?php
+	}
+?>
 
 </tr>
 <?php

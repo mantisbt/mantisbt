@@ -387,6 +387,7 @@
 	}
 ?>
 
+<?php if ( config_get( 'enable_product_build' ) ) { ?>
 <!-- Product Build -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -396,6 +397,7 @@
 		<input <?php echo helper_get_tab_index() ?> type="text" name="build" size="32" maxlength="32" value="<?php echo $f_build ?>" />
 	</td>
 </tr>
+<?php } ?>
 
 
 <!-- Handler (if permissions allow) -->

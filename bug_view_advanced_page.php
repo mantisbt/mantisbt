@@ -357,22 +357,38 @@
 
 </tr>
 
+<?php
+	$t_show_eta = config_get( 'enable_eta' );
+	$t_show_build = config_get( 'enable_product_build' );
 
+	$t_show_version = ( ON == config_get( 'show_product_version' ) )
+		|| ( ( AUTO == config_get( 'show_product_version' ) )
+			&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
+?>
+
+<?php if ( $t_show_eta || $t_show_version || $t_show_build ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 
 	<!-- ETA -->
+		<?php
+			if ( $t_show_eta ) {
+		?>
 	<td class="category">
 		<?php echo lang_get( 'eta' ) ?>
 	</td>
 	<td>
 		<?php echo get_enum_element( 'eta', $t_bug->eta ) ?>
 	</td>
+		<?php
+			} else {
+		?>
+	<td colspan="2"></td>
+		<?php
+			}
+		?>
 
 	<!-- fixed in version -->
 		<?php
-			$t_show_version = ( ON == config_get( 'show_product_version' ) )
-					|| ( ( AUTO == config_get( 'show_product_version' ) )
-								&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
 			if ( $t_show_version ) {
 		?>
 	<td class="category">
@@ -384,8 +400,7 @@
 		<?php
 			} else {
 		?>
-	<td>
-	</td>
+	<td colspan="2"></td>
 	<td>
 	</td>
 		<?php
@@ -402,7 +417,7 @@
 		<?php echo $t_bug->version ?>
 	</td>
 		<?php
-			} else {
+			} else if ( $t_show_build )	{
 		?>
 	<td class="category">
 		<?php echo lang_get( 'product_build' ) ?>
@@ -410,6 +425,10 @@
 	<td>
 		<?php echo $t_bug->build ?>
 	</td>
+		<?php
+			} else {
+		?>
+	<td colspan="2"></td>
 		<?php
 			}
 		?>
@@ -444,17 +463,29 @@
 ?>
 
 	<!-- Product Build -->
+		<?php
+			if ( $t_show_build ) {
+		?>
 	<td class="category">
 		<?php echo lang_get( 'product_build' ) ?>
 	</td>
 	<td>
 		<?php echo $t_bug->build?>
 	</td>
+		<?php
+			} else {
+		?>
+	<td colspan="2"></td>
+		<?php
+			}
+		?>
 
 </tr>
 <?php
 	}
+}
 ?>
+
 
 <?php event_signal( 'EVENT_VIEW_BUG_DETAILS', array( $f_bug_id, true ) ); ?>
 
