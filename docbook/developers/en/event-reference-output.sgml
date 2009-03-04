@@ -15,7 +15,7 @@
 
 			<blockquote>
 				<para>
-					This is an event to format bug ID numbers beore being displayed, using the
+					This is an event to format bug ID numbers before being displayed, using the
 					<function>bug_format_id()</function> API call.  The result should be plain-text,
 					as the resulting string is used in various formats and locations.
 				</para>
