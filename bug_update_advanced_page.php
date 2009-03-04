@@ -249,6 +249,9 @@
 
 </tr>
 
+<?php
+	$t_show_profiles = config_get( 'enable_profiles' );
+?>
 
 <tr <?php echo helper_alternate_class() ?>>
 
@@ -272,6 +275,7 @@
 		</select>
 	</td>
 
+	<?php if ( $t_show_platform ) { ?>
 	<!-- Platform -->
 	<td class="category">
 		<?php echo lang_get( 'platform' ) ?>
@@ -292,6 +296,9 @@
 			}
 		?>
 	</td>
+	<?php } else { ?>
+	<td colspan="2"></td>
+	<?php } ?>
 
 </tr>
 
@@ -310,6 +317,7 @@
 
 	<td colspan="2">&nbsp;</td>
 
+	<?php if ( $t_show_platform ) { ?>
 	<!-- Operating System -->
 	<td class="category">
 		<?php echo lang_get( 'os' ) ?>
@@ -330,6 +338,9 @@
 			}
 		?>
 	</td>
+	<?php } else { ?>
+	<td colspan="2"></td>
+	<?php } ?>
 
 </tr>
 
@@ -349,6 +360,7 @@
 	<!-- spacer -->
 	<td colspan="2">&nbsp;</td>
 
+	<?php if ( $t_show_platform ) { ?>
 	<!-- OS Version -->
 	<td class="category">
 		<?php echo lang_get( 'os_version' ) ?>
@@ -369,6 +381,9 @@
 			}
 		?>
 	</td>
+	<?php } else { ?>
+	<td colspan="2"></td>
+	<?php } ?>
 
 </tr>
 
