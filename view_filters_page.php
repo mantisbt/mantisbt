@@ -172,6 +172,7 @@
 		$t_select_modifier = 'multiple="multiple" size="10" ';
 	}
 
+	$t_show_build = config_get( 'enable_product_build' );
 	$t_show_version = ( ON == config_get( 'show_product_version' ) )
 			|| ( ( AUTO == config_get( 'show_product_version' ) )
 						&& ( count( version_get_all_rows_with_subs( $t_project_id ) ) > 0 ) );
@@ -289,7 +290,9 @@
 	</td>
 	<!-- Build -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
- 		<?php print_filter_show_build(); ?>
+		<?php if ( $t_show_build ) {
+			print_filter_show_build();
+		} ?>
 	</td>
 	<!-- Version -->
 	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
