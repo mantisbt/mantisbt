@@ -349,8 +349,6 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 
 	$c_tag_id = trim( db_prepare_int( $p_tag_id ) );
 	$c_user_id = db_prepare_string( $p_user_id );
-	$c_name = db_prepare_string( $p_name );
-	$c_description = db_prepare_string( $p_description );
 	$c_date_updated = db_now();
 
 	$t_tag_table = db_get_table( 'mantis_tag_table' );
@@ -361,7 +359,7 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 						description=" . db_param() . ",
 						date_updated=" . db_param() . "
 					WHERE id=" . db_param();
-	db_query_bound( $query, Array( $c_user_id, $c_name, $c_description, $c_date_updated, $c_tag_id ) );
+	db_query_bound( $query, Array( $c_user_id, $p_name, $p_description, $c_date_updated, $c_tag_id ) );
 
 	if( $t_rename ) {
 		$t_bugs = tag_get_bugs_attached( $p_tag_id );
