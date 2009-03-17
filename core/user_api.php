@@ -226,7 +226,10 @@ function user_is_realname_unique( $p_username, $p_realname ) {
 	if( $p_realname <> $p_username ) {
 
 		# check realname does not match an existing username
-		if( user_get_id_by_name( $p_realname ) ) {
+		#  but allow it to match the current user
+		$t_target_user = user_get_id_by_name( $p_username );
+		$t_other_user = user_get_id_by_name( $p_realname );
+		if( ( 0 != $t_other_user ) && ( $t_target_user != $t_other_user ) ) {
 			return 0;
 		}
 
