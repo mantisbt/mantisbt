@@ -299,6 +299,7 @@
 		</select>
 	</td>
 </tr>
+<?php event_signal( 'EVENT_ACCOUNT_PREF_UPDATE_FORM', array( $p_user_id ) ); ?>
 <tr>
 	<td colspan="2" class="center">
 		<input type="submit" class="button" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />

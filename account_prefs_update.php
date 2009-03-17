@@ -97,6 +97,8 @@
 		$t_prefs->refresh_delay = config_get( 'min_refresh_delay' );
 	}
 
+	event_signal( 'EVENT_ACCOUNT_PREF_UPDATE', array( $f_user_id ) );
+
 	user_pref_set( $f_user_id, $t_prefs );
 
 	html_page_top1();
