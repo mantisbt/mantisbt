@@ -46,7 +46,7 @@ function mc_issue_attachment_add( $p_username, $p_password, $p_issue_id, $p_name
 	if( !access_has_bug_level( config_get( 'upload_bug_file_threshold' ), $p_issue_id, $t_user_id ) ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
-	return mci_file_add( $p_issue_id, $p_name, $p_content, $p_file_type, 'bug' );
+	return mci_file_add( $p_issue_id, $p_name, base64_decode( $p_content ), $p_file_type, 'bug' );
 }
 
 /**
