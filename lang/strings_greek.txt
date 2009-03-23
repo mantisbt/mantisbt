@@ -24,6 +24,7 @@
  * @file
  *
  * @author Consta
+ * @author Crazymadlover
  * @author Kostas Vorilas, math1890@yahoo.gr
  * @author Omnipaedista
  * @author ZaDiak
@@ -82,6 +83,7 @@ $s_delete_bugnote_sure_msg = 'Είστε σίγουρος πως θέλετε ν
 $s_bug_relationships = 'Σχέσεις';
 $s_empty_password_sure_msg = 'Ο χρήστης έχει κενό κωδικό. Είστε σίγουρος;';
 $s_empty_password_button = 'Χρήση Κενού Κωδικού';
+$s_reauthenticate_title = 'Επικυρώστε';
 $s_duplicate_of = 'αντίγραφο του';
 $s_has_duplicate = 'έχει αντίγραφο';
 $s_related_to = 'σε σχέση με';
@@ -102,7 +104,10 @@ $s_make_private = 'Όρισε Ιδιωτικό';
 $s_make_public = 'Όρισε Δημόσιο';
 $s_create_new_project_link = 'Δημιουργία Νέας Εφαρμογής';
 $s_login_link = 'Σύνδεση';
+$s_synthesis_link = 'Σύνθεση';
 $s_priority_link = 'Κατά προτεραιότητα';
+$s_legend_opened = 'Ανοιγμένος';
+$s_legend_closed = 'Κλειστός';
 $s_hide_button = 'Προβολή επιλεγμένων μόνο';
 $s_printing_preferences_title = 'Επιλογή πεδίων προς εκτύπωση';
 $s_printing_options_link = 'Επιλογές Εκτύπωσης';
