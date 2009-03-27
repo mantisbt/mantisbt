@@ -238,6 +238,14 @@
 	 */
 	$g_session_validation = ON;
 
+	/**
+	 * Form security validation.
+	 * This protects against Cross-Site Request Forgery, but some proxy servers may
+	 * not correctly work with this option enabled because they cache pages incorrectly.
+	 * WARNING: Disabling this IS a security risk!!
+	 */
+	$g_form_security_validation = ON;
+
 	/**************************
 	 * Configuration Settings *
 	 **************************/
@@ -251,7 +259,7 @@
 	$g_global_settings = array(
 		'_table$', 'cookie', '^db_', 'hostname', 'allow_signup', 'database_name', 'show_queries_count', 'admin_checks', 'version_suffix',
 		'_path$', 'use_iis', 'language', 'use_javascript', 'display_errors', 'show_detailed_errors', 'stop_on_errors', 'login_method', '_file$',
-		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'plugins_enabled', 'session_',
+		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'plugins_enabled', 'session_', 'form_security_',
 	);
 
 	/****************************
