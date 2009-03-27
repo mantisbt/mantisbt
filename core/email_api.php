@@ -429,7 +429,7 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash ) {
 	# Build Welcome Message
 	$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject' );
 
-	$t_message = sprintf( lang_get( 'new_account_greeting' ), $t_username ) . " \n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . " \n\n" . lang_get( 'new_account_message' ) . lang_get( 'new_account_do_not_reply' );
+	$t_message = sprintf( lang_get( 'new_account_greeting' ), $t_username ) . " \n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . " \n\n" . lang_get( 'new_account_message' ) . " \n\n" . lang_get( 'new_account_do_not_reply' );
 
 	# Send signup email regardless of mail notification pref
 	# or else users won't be able to sign up
