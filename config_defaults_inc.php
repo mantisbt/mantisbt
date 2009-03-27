@@ -156,6 +156,12 @@
 	# Session save path.  If false, uses default value as set by session handler.
 	$g_session_save_path = false;
 
+	# Form security validation.
+	# This protects against Cross-Site Request Forgery, but some proxy servers may
+	# not correctly work with this option enabled because they cache pages incorrectly.
+	# WARNING: Disabling this IS a security risk!!
+	$g_form_security_validation = ON;
+
 	#############################
 	# Configuration Settings
 	#############################
@@ -166,7 +172,7 @@
 	$g_global_settings = array(
 		'_table$', 'cookie', '^db_', 'hostname', 'database_name', 'session_handler',
 		'_path$', 'use_iis', 'language', 'use_javascript', 'display_errors', 'stop_on_errors', 'login_method', '_file$',
-		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed'
+		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'form_security_',
 	);
 
 	#############################
