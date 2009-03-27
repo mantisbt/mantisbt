@@ -2329,6 +2329,15 @@
 	$g_default_manage_user_prefix = 'ALL';
 
 	/**
+	 * Default tag prefix used to filter the list of tags in
+	 * manage_tags_page.php.  Change this to 'A' (or any other
+	 * letter) if you have a lot of tags in the system and loading
+	 * the manage tags page takes a long time.
+	 * @global string $g_default_manage_tag_prefix
+	 */
+	$g_default_manage_tag_prefix = 'ALL';
+
+	/**
 	 * CSV Export
 	 * Set the csv separator
 	 * @global string $g_csv_separator

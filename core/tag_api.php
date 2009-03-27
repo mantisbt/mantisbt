@@ -764,3 +764,4 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 
 	return $t_tags;
 }
+

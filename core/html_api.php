@@ -777,6 +777,7 @@ function print_manage_menu( $p_page = '' ) {
 	$t_manage_plugin_page = 'manage_plugin_page.php';
 	$t_manage_config_page = 'adm_config_report.php';
 	$t_manage_prof_menu_page = 'manage_prof_menu_page.php';
+	$t_manage_tags_page = 'manage_tags_page.php';
 
 	switch( $p_page ) {
 		case $t_manage_user_page:
@@ -797,6 +798,9 @@ function print_manage_menu( $p_page = '' ) {
 		case $t_manage_prof_menu_page:
 			$t_manage_prof_menu_page = '';
 			break;
+		case $t_manage_tags_page:
+			$t_manage_tags_page = '';
+			break;
 	}
 
 	echo '<div align="center"><p>';
@@ -805,6 +809,9 @@ function print_manage_menu( $p_page = '' ) {
 	}
 	if( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
 		print_bracket_link( helper_mantis_url( $t_manage_project_menu_page ), lang_get( 'manage_projects_link' ) );
+	}
+	if( access_has_project_level( config_get( 'tag_edit_threshold' ) ) ) {
+		print_bracket_link( helper_mantis_url( $t_manage_tags_page ), lang_get( 'manage_tags_link' ) );
 	}
 	if( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
 		print_bracket_link( helper_mantis_url( $t_manage_custom_field_page ), lang_get( 'manage_custom_field_link' ) );
