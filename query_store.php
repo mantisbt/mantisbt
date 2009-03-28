@@ -51,6 +51,13 @@
 		print_header_redirect( $t_query_redirect_url );
 	}
 
+	// mantis_filters_table.name has a length of 64. Not allowing longer.
+	if ( strlen( utf8_decode ( $f_query_name ) ) > 64 ) {
+		$t_query_redirect_url = $t_query_redirect_url . '?error_msg='
+			. urlencode( lang_get( 'query_name_too_long' ) );
+		print_header_redirect( $t_query_redirect_url );
+	}
+
 	# Check and make sure they don't already have a
 	# query with the same name
 	$t_query_arr = filter_db_get_available_queries();

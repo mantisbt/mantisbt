@@ -1227,6 +1227,7 @@ $s_query_name = 'Filter Name';
 $s_query_exists = 'This particular filter appears to already exist.';
 $s_query_dupe_name = 'Another filter already has this name. Please choose a different name for this filter.';
 $s_query_blank_name = 'You cannot store a filter without a name. Please give this filter a name before saving it.';
+$s_query_name_too_long = 'You cannot store a filter name with more than 64 characters. Please give this filter a shorter name.';
 $s_query_store_error = 'There was an error saving this filter.';
 $s_open_queries = 'Manage Filters';
 $s_query_delete_msg = 'Are you sure you wish to delete this filter?';
