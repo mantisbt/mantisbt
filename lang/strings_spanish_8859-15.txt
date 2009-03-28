@@ -345,7 +345,6 @@ $s_new_account_subject = 'Registro de nueva cuenta';
 $s_new_account_greeting = 'Gracias por registrarse. Se ha dado de alta su cuenta con el nombre de usuario \'';
 $s_new_account_greeting2 = '\'. Para completar el registro, visite la siguiente URL (asegúrese de ponerla en una sola línea) e ingrese la contraseña que desee:';
 $s_new_account_username = 'Usuario: ';
-$s_new_account_message = "\n\n";
 $s_new_account_do_not_reply = 'NO RESPONDA A ESTE MENSAJE';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = 'Dirección IP remota: ';
