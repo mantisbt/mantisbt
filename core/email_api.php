@@ -389,7 +389,7 @@
 		$t_message = lang_get( 'new_account_greeting' ) . $t_username .
 						lang_get( 'new_account_greeting2' ) . " \n\n" .
 						string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . " \n\n" .
-						lang_get( 'new_account_message' ) . " \n\n" .
+						lang_get( 'new_account_message' ) . "\n\n" .
 						lang_get( 'new_account_do_not_reply' );
 
 		# Send signup email regardless of mail notification pref
