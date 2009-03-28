@@ -1332,8 +1332,8 @@ class PHPMailer {
       $encoded = str_replace('='.$this->LE, "\n", trim($encoded));
     }
 
-    $encoded = preg_replace('/^(.*)$/m', " =?".$this->CharSet."?$encoding?\\1?=", $encoded);
-    $encoded = trim(str_replace("\n", $this->LE, $encoded));
+    $encoded = preg_replace('/^(.*)$/m', "=?".$this->CharSet."?$encoding?\\1?=", $encoded);
+    $encoded = trim(str_replace("\n", $this->LE." ", $encoded));	
 
     return $encoded;
   }
@@ -1385,11 +1385,11 @@ class PHPMailer {
       }
       while (strlen($chunk) > $length);
 
-      $encoded .= $chunk . $linefeed;
+      $encoded .= $chunk . "\n";
     }
 
     // Chomp the last linefeed
-    $encoded = substr($encoded, 0, -strlen($linefeed));
+    $encoded = substr($encoded, 0, -1);
     return $encoded;
   }
 
