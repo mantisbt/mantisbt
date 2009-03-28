@@ -401,8 +401,6 @@
 			} else {
 		?>
 	<td colspan="2"></td>
-	<td>
-	</td>
 		<?php
 			}
 		?>
