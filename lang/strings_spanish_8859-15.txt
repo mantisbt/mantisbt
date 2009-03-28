@@ -204,7 +204,7 @@ $s_bugnote_title = 'Título de la Nota';
 $s_bugnote_date = 'Fecha de la Nota';
 $s_bugnote_description = 'Descripción de la Nota';
 
-$s_error_no_proceed = 'Por favor, utilice el botón \"Atrás\" de su navegador web para volver a la página anterior.  Allí puede corregir los problemas que han sido identificados en esta notificación de error o seleccionar otra acción.  También puede hacer click sobre una opción de la barra de menú para ir directamente a una nueva sección.';
+$s_error_no_proceed = 'Por favor, utilice el botón "Atrás" de su navegador web para volver a la página anterior.  Allí puede corregir los problemas que han sido identificados en esta notificación de error o seleccionar otra acción.  También puede hacer click sobre una opción de la barra de menú para ir directamente a una nueva sección.';
 
 # ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC] = 'Ha ocurrido un error durante esta acción. Informe de este error a su administrador local.';
@@ -244,7 +244,7 @@ $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'No se encuentra la incidencia %d.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtro %d no encontrado.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'El filtro que Ud. está tratando de usar es obsoleto y no puede ser actualizado, por favor vuelva a crearlo';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'E-mail no válido.';
-$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'No está permitido el uso de direcciones de e-mail \"descartables\".';
+$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'No está permitido el uso de direcciones de e-mail "descartables".';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil no encontrado.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Tipo de archivo no permitido para subir.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Este archivo está duplicado.  Por favor, elimine antes el archivo original.';
@@ -273,7 +273,7 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versión \'%s\' no encontrada.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'El nombre de usuario no es válido. Los nombres de usuario sólo pueden contener caracteres estándar, números, guiones medios y guiones bajos.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'El nombre real del usuario no es válido.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'El usuario no tiene el nivel de acceso requerido';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'El \"Nombre Real\" coincide con el nombre de otro usuario. Por favor elija otro.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'El "Nombre Real" coincide con el nombre de otro usuario. Por favor elija otro.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Soporte para patrocinios no habilitado.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'No se encontró el patrocinio %d.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'El patrocinio (%s) es menor que el valor mínimo de %s.';
