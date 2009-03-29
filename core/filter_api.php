@@ -4389,7 +4389,6 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
  * @return bool true when under max_length (64) and false when over
  */
 function filter_name_valid_length( $p_name ) {
-	print strlen( utf8_decode ( $p_name ) );
 	if( strlen( utf8_decode ( $p_name ) ) > 64 ) {
 		return false;
 	} else {
