@@ -1720,10 +1720,17 @@
 
 	/**
 	 * Bug is resolved, ready to be closed or reopened.  In some custom installations a bug
-	 * maybe considered as resolved when it is moved to a custom (FIXED OR TESTED) status.
+	 * may be considered as resolved when it is moved to a custom (FIXED or TESTED) status.
 	 * @global int $g_bug_resolved_status_threshold
-	 */	
+	 */
 	$g_bug_resolved_status_threshold = RESOLVED;
+
+	/**
+	 * Bug is closed.  In some custom installations a bug may be considered as closed when
+	 * it is moved to a custom (COMPLETED or IMPLEMENTED) status.
+	 * @global int $g_bug_closed_status_threshold
+	 */
+	$g_bug_closed_status_threshold = CLOSED;
 
 	/**
 	 * Automatically set status to ASSIGNED whenever a bug is assigned to a person.

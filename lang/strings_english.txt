@@ -811,6 +811,7 @@ $s_access_change = 'Minimum Access Level to Change to this Status';
 $s_desc_bug_submit_status = 'Status to which a new issue is set';
 $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
+$s_desc_bug_closed_status_threshold = 'Status where an issue is considered closed';
 $s_workflow_change_access = 'Who can change workflow';
 $s_access_change_access = 'Who can change access levels';
 
