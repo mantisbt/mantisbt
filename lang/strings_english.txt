@@ -603,6 +603,10 @@ $s_reminder_store = 'This note will be stored with the issue.';
 # bug_set_sponsorship.php
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %1$d for %2$s.';
 
+# bug_stick.php
+$s_stick_bug_button = 'Stick';
+$s_unstick_bug_button = 'Unstick';
+
 # bug_update.php
 $s_bug_updated_msg = 'Issue has been successfully updated...';
 
