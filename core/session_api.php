@@ -240,11 +240,13 @@ function session_clean() {
 }
 
 # Initialize the session
-$t_session_id = gpc_get_string( 'session_id', '' );
+if ( PHP_CGI == php_mode() ) {
+	$t_session_id = gpc_get_string( 'session_id', '' );
 
-if ( empty( $t_session_id ) ) {
-	session_init();
-} else {
-	session_init( $t_session_id );
+	if ( empty( $t_session_id ) ) {
+		session_init();
+	} else {
+		session_init( $t_session_id );
+	}
 }
 
