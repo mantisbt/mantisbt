@@ -25,10 +25,12 @@
  *
  * @author Fievarsty
  * @author Fryed-peach
+ * @author Hosiryuhosi
  * @author Seiji
  * @author Seiji Sogabe, sogabe@alles.or.jp
  * @author Tadashi Jokagi, elf2000@users.sourceforge.net
  * @author Takeshi Hachikawa, seihachi@anet.ne.jp
+ * @author 青子守歌
  */
 
 $s_charset = 'utf-8';
@@ -613,6 +615,7 @@ $s_manage_config_link = '設定管理';
 $s_manage_threshold_config = 'ワークフロー閾値';
 $s_manage_email_config = '通知メール';
 $s_manage_workflow_config = 'ワークフロー遷移';
+$s_manage_tags_link = 'タグを管理';
 $s_create_new_account_link = 'アカウント作成';
 $s_projects_link = 'プロジェクト';
 $s_documentation_link = 'ドキュメント';
@@ -660,6 +663,7 @@ $s_access_change = 'このステータスに変更するのに必要なロール
 $s_desc_bug_submit_status = '新規チケットに設定するステータス';
 $s_desc_bug_reopen_status = '差し戻されたチケットに設定するステータス';
 $s_desc_bug_resolved_status_threshold = 'チケットを解決済みとするステータス';
+$s_desc_bug_closed_status_threshold = 'チケットを完了とするステータス';
 $s_workflow_change_access = 'ワークフローの変更が可能なユーザー';
 $s_access_change_access = 'ロールの変更が可能なユーザー';
 $s_default_not_in_flow = '%1$s のデフォルトステータスは、%2$s の次のステータスでは選択されていませんので、無視します。';
@@ -949,9 +953,10 @@ $s_query_name = 'フィルター名';
 $s_query_exists = 'このフィルターは既に存在しています。';
 $s_query_dupe_name = '別のフィルターが既にこの名前を使用しています。別の名前を選んでください。';
 $s_query_blank_name = '名前のないフィルターを保管することができません。保存する前にこのフィルターに名前をつけてください。';
+$s_query_name_too_long = '64文字を超えるフィルター名は保存できません。もっと短い名前をつけてください。';
 $s_query_store_error = 'このフィルターの保存に失敗しました。';
 $s_open_queries = 'フィルター管理';
-$s_query_delete_msg = 'このフィルターを本当に削除しますか?';
+$s_query_delete_msg = 'このフィルターを本当に削除しますか？';
 $s_view_simple_link = '簡易';
 $s_viewing_bug_advanced_details_title = 'チケットの内容(詳細)';
 $s_product_build = '製品ビルド';
@@ -1163,6 +1168,8 @@ $s_tag_history_renamed = 'タグ名称変更';
 $s_tag_related = '関連タグ';
 $s_tag_related_issues = 'このタグを共有するチケット (%1$s)';
 $s_tag_stats_attached = '設定されたチケット: %1$s';
+$s_tag_create = 'タグを作成';
+$s_show_all_tags = '全て';
 $s_time_tracking_billing_link = '作業時間集計';
 $s_time_tracking = '作業時間';
 $s_time_tracking_get_info_button = '作業時間の集計';
