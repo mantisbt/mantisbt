@@ -205,7 +205,7 @@ foreach ( $t_result as $t_tag_row ) {
 			<?php echo lang_get( 'tag_name' ) ?>
 		</td>
 		<td>
-			<input type="text" name="name" size="50" maxlength="128">
+			<input type="text" name="name" size="50" maxlength="100">
 			<?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ); ?>
 		</td>
 	</tr>
