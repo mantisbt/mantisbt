@@ -82,7 +82,9 @@
 
 	if ( isset ( $_SERVER['PHP_SELF'] ) ) {
 		$t_protocol = 'http';
-		if ( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+		if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
+			$t_protocol= $_SERVER['HTTP_X_FORWARDED_PROTO'];
+		} else if ( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
 			$t_protocol = 'https';
 		}
 
@@ -216,6 +218,12 @@
 	 * @global string $g_session_handler
 	 */
 	$g_session_handler = 'php';
+
+	/**
+	 * Session key name.  Should be unique between multiple installations to prevent conflicts.
+	 * @global string $g_session_key
+	 */
+	$g_session_key = 'MantisBT';
 
 	/**
 	 * Session save path.  If false, uses default value as set by session handler.
@@ -1718,10 +1726,17 @@
 
 	/**
 	 * Bug is resolved, ready to be closed or reopened.  In some custom installations a bug
-	 * maybe considered as resolved when it is moved to a custom (FIXED OR TESTED) status.
+	 * may be considered as resolved when it is moved to a custom (FIXED or TESTED) status.
 	 * @global int $g_bug_resolved_status_threshold
-	 */	
+	 */
 	$g_bug_resolved_status_threshold = RESOLVED;
+
+	/**
+	 * Bug is closed.  In some custom installations a bug may be considered as closed when
+	 * it is moved to a custom (COMPLETED or IMPLEMENTED) status.
+	 * @global int $g_bug_closed_status_threshold
+	 */
+	$g_bug_closed_status_threshold = CLOSED;
 
 	/**
 	 * Automatically set status to ASSIGNED whenever a bug is assigned to a person.

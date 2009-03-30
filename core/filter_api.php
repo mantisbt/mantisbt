@@ -2793,7 +2793,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<td class="small-caption" valign="top" id="tag_string_filter_target" colspan="5">
 				<?php
 					$t_tag_string = $t_filter[FILTER_PROPERTY_TAG_STRING];
-		if( $t_filter[FILTER_PROPERTY_TAG_SELECT] != 0 ) {
+		if( $t_filter[FILTER_PROPERTY_TAG_SELECT] != 0 && tag_exists( $t_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
 			$t_tag_string .= ( is_blank( $t_tag_string ) ? '' : config_get( 'tag_separator' ) );
 			$t_tag_string .= tag_get_field( $t_filter[FILTER_PROPERTY_TAG_SELECT], 'name' );
 		}
@@ -3674,7 +3674,7 @@ function print_filter_tag_string() {
 
 	global $t_filter;
 	$t_tag_string = $t_filter[FILTER_PROPERTY_TAG_STRING];
-	if( $t_filter[FILTER_PROPERTY_TAG_SELECT] != 0 ) {
+	if( $t_filter[FILTER_PROPERTY_TAG_SELECT] != 0 && tag_exists( $t_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
 		$t_tag_string .= ( is_blank( $t_tag_string ) ? '' : config_get( 'tag_separator' ) );
 		$t_tag_string .= tag_get_field( $t_filter[FILTER_PROPERTY_TAG_SELECT], 'name' );
 	}

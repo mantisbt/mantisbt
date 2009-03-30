@@ -25,6 +25,9 @@ define( 'AUTO', 3 );
 define( 'BAD', 0 );
 define( 'GOOD', 1 );
 
+# PHP-related constants
+define( 'PHP_CLI', 0 );
+define( 'PHP_CGI', 1 );
 
 # installation
 define( 'CONFIGURED_PASSWORD', "______" );
