@@ -315,13 +315,15 @@ $s_sponsorship_enum_string = '0:Não pago,1:Solicitado,2:Pago';
 $s_new_account_subject = 'Registro de conta';
 $s_new_account_greeting = 'Obrigado por se registrar. Você possui uma conta com o nome de usuário \'%1$s\'. Para completar seu registro, visite o endereço a seguir (certifique-se que ele seja digitado como uma única linha) e ajuste a sua própria senha de acesso:';
 $s_new_account_username = 'Nome de usuário: ';
-$s_new_account_message = 'Se você não solicitou nenhum registro, ignore esta mensagem e nada irá acontecer.' . "\n\n";
+$s_new_account_message = 'Se você não solicitou nenhum registro, ignore esta mensagem e nada irá acontecer.';
 $s_new_account_do_not_reply = 'NÃO RESPONDA A ESTA MENSAGEM';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = 'Endereço IP remoto: ';
 $s_new_account_signup_msg = 'A seguinte conta foi criada:';
 
-$s_reset_request_msg = 'Alguém (presumidamente você) solicitou uma troca de senha através da verificação de e-mail. Se este não foi você, ignore esta mensagem e nada irá acontecer.' . "\n\n" . 'Se você solicitou esta verificação, visite o seguinte endereço para alterar a sua senha:';
+$s_reset_request_msg = 'Alguém (presumidamente você) solicitou uma troca de senha através da verificação de e-mail. Se este não foi você, ignore esta mensagem e nada irá acontecer.
+
+Se você solicitou esta verificação, visite o seguinte endereço para alterar a sua senha:';
 $s_reset_request_in_progress_msg = 'Se você forneceu o nome de usuário e endereço de e-mail corretos para a sua conta, nós teremos enviado agora uma mensagem de confirmação para este endereço de e-mail. Assim que a mensagem for recebida, siga as instruções fornecidas para mudar a senha da sua conta.';
 
 $s_email_notification_title_for_status_bug_new = 'O seguinte caso está agora com status NOVO (novamente).';

@@ -314,13 +314,15 @@ $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 $s_new_account_subject = 'Kontoregistrering';
 $s_new_account_greeting = 'Tak for din registrering. Din konto har brugernavnet \'%1$s\'. for at færdiggøre din registrering, skal du besøge følgende URL (sørg for den er skrevet i en enkelt linje) og angiv den adgangskode du vil have:';
 $s_new_account_username = 'Brugernavn: ';
-$s_new_account_message = 'Hvis du ikke har prøvet at registrere dig skal du bare se bort fra denne meddelelse og ingenting vil ske.' . "\n\n";
+$s_new_account_message = 'Hvis du ikke har prøvet at registrere dig skal du bare se bort fra denne meddelelse og ingenting vil ske.';
 $s_new_account_do_not_reply = 'SVAR IKKE PÅ DENNE MEDDELELSE';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = 'Fjern-IP-adresse: ';
 $s_new_account_signup_msg = 'Følgende konto er blevet oprettet:';
 
-$s_reset_request_msg = 'En eller anden (formodentligt dig selv) bad om at få ændret adgangskoden genneme-mail-verifikation. Hvis det ikke var dig skal du bare se bort fra denne meddelelse, og ingenting vil ske.' . "\n\n" . 'Hvis du bad om denne verifikation, så besøg denne URL for at ændre din adgangskode:';
+$s_reset_request_msg = 'En eller anden (formodentligt dig selv) bad om at få ændret adgangskoden genneme-mail-verifikation. Hvis det ikke var dig skal du bare se bort fra denne meddelelse, og ingenting vil ske.
+
+Hvis du bad om denne verifikation, så besøg denne URL for at ændre din adgangskode:';
 $s_reset_request_in_progress_msg = 'Hvis du angav den rigtige e-mail-adresse og brugernavn for din konto, har vi nu sendt dig en e-mail med bekræftigelse. Når du modtager denne e-mail skal du følge instrukserne deri for at ændre din kontos adgangskode.';
 
 $s_email_notification_title_for_status_bug_new = 'Følgende fejl har nu statusen NY (igen)';

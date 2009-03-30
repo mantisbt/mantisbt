@@ -312,7 +312,9 @@ $s_new_account_do_not_reply = 'NON RISPONDERE A QUESTO MESSAGGIO';
 $s_new_account_email = 'Email:';
 $s_new_account_IP = 'Indirizzo IP:';
 $s_new_account_signup_msg = 'È stato creato il seguente account:';
-$s_reset_request_msg = 'Qualcuno (probabilmente te) ha richiesto di cambiare la password di accesso attraverso una procedura di verifica via email.  Se non sei stato tu a richiederlo, ignora semplicemente questo messaggio.\n\nSe invece hai effettivamente richiesto tu la modifica, visita l\'indirizzo di seguito riportato e potrai cambiare la tua password:';
+$s_reset_request_msg = 'Qualcuno (probabilmente te) ha richiesto di cambiare la password di accesso attraverso una procedura di verifica via email.  Se non sei stato tu a richiederlo, ignora semplicemente questo messaggio.
+
+Se invece hai effettivamente richiesto tu la modifica, visita l\'indirizzo di seguito riportato e potrai cambiare la tua password:';
 $s_reset_request_in_progress_msg = 'Se hai fornito il corretto nome utente e indirizzo email del tuo account, ti verrà inviata una email all\'indirizzo del tuo account con un codice di convalida.  Quando riceverai l\'email, segui le istruzioni in essa riportate.';
 $s_email_notification_title_for_status_bug_new = 'La seguente anomalia è stata ri-posta nello stato NUOVA';
 $s_email_notification_title_for_status_bug_feedback = 'La seguente anomalia è stata posta in DISCUSSIONE.';

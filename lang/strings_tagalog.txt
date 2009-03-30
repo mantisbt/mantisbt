@@ -322,7 +322,9 @@ $s_new_account_do_not_reply = 'HUWAG TUMUGON SA MENSAHENG ITO';
 $s_new_account_email = 'E-liham:';
 $s_new_account_IP = 'Malayong adres ng IP:';
 $s_new_account_signup_msg = 'Nalikha na ang sumusunod na kuwenta:';
-$s_reset_request_msg = 'Mayroong humiling (maaaring ikaw) ng isang pagbabago ng hudyat sa pamamagita ng pagpapatotoo ng e-liham. Kung hindi ikaw ito, huwag pansinin ang mensaheng ito at walang mangyayari.\n\nKung hiniling ang pagpapatotoong ito, dalawin ang sumusunod na URL upang mabago ang iyong hudyat:';
+$s_reset_request_msg = 'Mayroong humiling (maaaring ikaw) ng isang pagbabago ng hudyat sa pamamagita ng pagpapatotoo ng e-liham. Kung hindi ikaw ito, huwag pansinin ang mensaheng ito at walang mangyayari.
+
+Kung hiniling ang pagpapatotoong ito, dalawin ang sumusunod na URL upang mabago ang iyong hudyat:';
 $s_reset_request_in_progress_msg = 'Kung ibinigay mo ang tamang pangalan ng tagagamit at adres ng e-liham para sa iyong kuwenta, maaaring napadalhan ka na namin ngayon ng isang mensahe ng pagtitiyak patungo sa adres ng e-liham na iyan. Kapag natanggap na ang e-liham, sundin ang mga panuntunang ibinigay upang mabago ang hudyat na nasa akawnt mo.';
 $s_email_notification_title_for_status_bug_new = 'Ang sumusunod na labas ay nasa katayuang BAGO (uli) ngayon';
 $s_email_notification_title_for_status_bug_feedback = 'Ang sumusunod na labas ay ngangailangan ng iyong BALIK-ULAT.';

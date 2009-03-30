@@ -315,13 +315,15 @@ $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 $s_new_account_subject = 'Registrace nového u¾ivatelského úètu';
 $s_new_account_greeting = 'Dìkujeme za registraci. Máte úèet s u¾ivatelským jménem \'%1$s\'. Pro dokonèení va¹í registrace pøejdìte na následující adresu (ujistìte se, aby byla zadána na jediném øádku) a nastavte va¹e pøístupové heslo:';
 $s_new_account_username = 'U¾ivatelské jméno: ';
-$s_new_account_message = 'Pokud si nepøejete registraci, ignorujte tuto zprávu a nic se nestane.' . "\n\n";
+$s_new_account_message = 'Pokud si nepøejete registraci, ignorujte tuto zprávu a nic se nestane.';
 $s_new_account_do_not_reply = 'NEODPOVÍDEJTE NA TUTO ZPRÁVU';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = 'IP adresa vzdáleného poèítaèe: ';
 $s_new_account_signup_msg = 'Byt vytvoøen následující úèet:';
 
-$s_reset_request_msg = 'Nìkdo (doufáme ¾e vy) po¾ádal o zmìnu hesla s ovìøením dopisem. Pokud jste to vy nebyl, ignorujte tento dopis a nic se nestane.' . "\n\n" . 'Pokud jste si skuteèn¹ pøáli tuto zmìnu, nav¹tivte následující stránku a dokonèete zmìnu pøístupového hesla:';
+$s_reset_request_msg = 'Nìkdo (doufáme ¾e vy) po¾ádal o zmìnu hesla s ovìøením dopisem. Pokud jste to vy nebyl, ignorujte tento dopis a nic se nestane.
+
+Pokud jste si skuteèn¹ pøáli tuto zmìnu, nav¹tivte následující stránku a dokonèete zmìnu pøístupového hesla:';
 $s_reset_request_in_progress_msg = 'Pokud byla zadána správná kombinace u¾ivatelského jména a elektronické adresy pro vá¹ úèet, ode¹leme vám na tuto adresu potvrzovací dopis. A¾ tento dopis dostanete, øiïte se pokyny v nìm pro dokonèení zmìny pøístupového hesla.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';

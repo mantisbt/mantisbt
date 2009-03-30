@@ -329,7 +329,9 @@ $s_new_account_do_not_reply = 'VERSTUUR GEEN ANTWOORD OP DIT BERICHT';
 $s_new_account_email = 'E-mailadres:';
 $s_new_account_IP = 'IP-adres:';
 $s_new_account_signup_msg = 'De volgende gebruiker is aangemaakt:';
-$s_reset_request_msg = 'Iemand (waarschijnlijk uzelf) heeft een wachtwoordwijziging aangevraagd met e-mailbevestiging. Als u dit niet was, dan kunt u dit bericht negeren.\n\nAls u deze wijziging wilt voortzetten, bezoek dan de volgende URL om uw wachtwoord te wijzigen:';
+$s_reset_request_msg = 'Iemand (waarschijnlijk uzelf) heeft een wachtwoordwijziging aangevraagd met e-mailbevestiging. Als u dit niet was, dan kunt u dit bericht negeren.
+
+Als u deze wijziging wilt voortzetten, bezoek dan de volgende URL om uw wachtwoord te wijzigen:';
 $s_reset_request_in_progress_msg = 'Als u de gebruikersnaam en e-mailadres juist heeft opgegeven, sturen wij u een bevestigings e-mail. Dit bericht bevat instructies waarmee u uw wachtwoord kunt wijzigen.';
 $s_email_notification_title_for_status_bug_new = 'De volgende melding is NIEUW (opnieuw)';
 $s_email_notification_title_for_status_bug_feedback = 'De volgende melding wacht op uw FEEDBACK.';

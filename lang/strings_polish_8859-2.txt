@@ -317,13 +317,15 @@ $s_sponsorship_enum_string        = '0:Nieop³acony,1:¯±danie zap³aty,2:Op³acony'
 $s_new_account_subject = 'Rejestracja konta';
 $s_new_account_greeting = 'Dziêkujemy za zapisanie. Masz konto o nazwie \'%1$s\'. Aby zakoñczyæ rejestracjê, odwied¼ podany adres (upewnij siê, ¿e jest wprowadzony w jednej linii) i ustaw swoje has³o dostêpu:';
 $s_new_account_username = 'Nazwa u¿ytkownika: ';
-$s_new_account_message = 'Je¶li to nie twoje zg³oszenie, zignoruj tê wiadomo¶æ. Nic siê nie stanie.' . "\n\n";
+$s_new_account_message = 'Je¶li to nie twoje zg³oszenie, zignoruj tê wiadomo¶æ. Nic siê nie stanie.';
 $s_new_account_do_not_reply = 'NIE ODPOWIADAJ NA TÊ WIADOMO¦Æ';
 $s_new_account_email = 'Email: ';
 $s_new_account_IP = 'Zdalny adres IP: ';
 $s_new_account_signup_msg = 'Nastêpuj±ce konto zosta³o za³o¿one:';
 
-$s_reset_request_msg = 'Kto¶ (prawdopodobnie Ty) za¿±da³ zmiany has³a przez weryfikacjê emailem. Je¶li to nie Ty, zignoruj tê wiadomo¶æ.' . "\n\n" . 'Je¶li prosi³e¶ o to, odwied¼ poni¿szy adres aby zmieniæ has³o:';
+$s_reset_request_msg = 'Kto¶ (prawdopodobnie Ty) za¿±da³ zmiany has³a przez weryfikacjê emailem. Je¶li to nie Ty, zignoruj tê wiadomo¶æ.
+
+Je¶li prosi³e¶ o to, odwied¼ poni¿szy adres aby zmieniæ has³o:';
 $s_reset_request_in_progress_msg = 'Je¶li nazwa u¿ytkownika i adres email dla twojego konta s± prawid³owe to prze¶lemy teraz wiadomo¶æ potwierdzaj±c± na podany adres. Gdy otrzymasz wiadomo¶æ, postêpuj zgodnie z podanymi w niej instrukcjami i zmieñ has³o.';
 
 $s_email_notification_title_for_status_bug_new = 'Nastêpuj±ce zagadnienie ma ustawiony stan NOWE (ponownie)';

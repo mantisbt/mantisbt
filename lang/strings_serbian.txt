@@ -230,7 +230,9 @@ $s_new_account_message = 'Ukoliko niste trazili nikakvu registraciju jednostavno
 $s_new_account_do_not_reply = 'NEMOJTE ODGOVARATI NA OVU PORUKU';
 $s_new_account_IP = 'Udaljena IP adreas:';
 $s_new_account_signup_msg = 'Sledeci nalog je kreiran:';
-$s_reset_request_msg = 'Neko (najverovatnije vi) je podneo zahtev za promenu lozinke putem provere elektronske poste. Ukoliko to niste bili vi, ignorisite ovu poruku i nista se nece desiti.\n\nUkoliko ste vi zatrazili proveru, molim posetite sledecu adresu radi promene lozinke:';
+$s_reset_request_msg = 'Neko (najverovatnije vi) je podneo zahtev za promenu lozinke putem provere elektronske poste. Ukoliko to niste bili vi, ignorisite ovu poruku i nista se nece desiti.
+
+Ukoliko ste vi zatrazili proveru, molim posetite sledecu adresu radi promene lozinke:';
 $s_reset_request_in_progress_msg = 'Ukoliko ste pravilno uneli korisnicko ime i email adresu vaseg naloga, sada cemo vam poslati poruku na unetu adresu. Nakon sto ste primili poruku sledite uputstva u njoj da biste promenili lozinku vaseg naloga.';
 $s_email_notification_title_for_status_bug_feedback = 'Sledeca greška zahteva vašu POVRATNU INFORMACIJU.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Sledeca greška je PRIMLJENA.';

@@ -314,13 +314,15 @@ $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 $s_new_account_subject = 'Fiók regisztrálás';
 $s_new_account_greeting = 'Köszönjük a regisztrációt. Az ön felhasználói azonosítója: \'%1$s\'. Ahhoz, hogy sikeresen befejezze a regisztrációt, látogasson el a következõ URL-re és állítsa be a jelszavát:';
 $s_new_account_username = 'Felhasználónév: ';
-$s_new_account_message = 'Ha nem akarta regisztrálni magát, akkor hagyja figyelmen kívül ezt az üzenetet.' . "\n\n";
+$s_new_account_message = 'Ha nem akarta regisztrálni magát, akkor hagyja figyelmen kívül ezt az üzenetet.';
 $s_new_account_do_not_reply = 'NE VÁLASZOLJON ERRE A LEVÉLRE';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = 'Felhasználó IP címe: ';
 $s_new_account_signup_msg = 'A következõ fiók készítült el:';
 
-$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.
+
+If you requested this verification, visit the following URL to change your password:';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';

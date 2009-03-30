@@ -322,7 +322,9 @@ $s_new_account_do_not_reply = 'RESPONDETZ PAS A AQUESTE MESSATGE';
 $s_new_account_email = 'Adreça de corrièr electronic :';
 $s_new_account_IP = 'Adreça IP distanta :';
 $s_new_account_signup_msg = 'Lo compte seguent es estat creat :';
-$s_reset_request_msg = 'Qualqu\'un (probablament vos) a demandat un cambiament de senhal amb verificacion per corrièr electronic. S\'èra pas vos, ignoratz aqueste messatge e res serà pas fach.\n\nS\'avètz demandat aquesta verificacion, visitatz l\'URL seguenta per cambiar vòstre senhal :';
+$s_reset_request_msg = 'Qualqu\'un (probablament vos) a demandat un cambiament de senhal amb verificacion per corrièr electronic. S\'èra pas vos, ignoratz aqueste messatge e res serà pas fach.
+
+S\'avètz demandat aquesta verificacion, visitatz l\'URL seguenta per cambiar vòstre senhal :';
 $s_reset_request_in_progress_msg = 'S\'avètz provesit lo nom d\'utilizaire e l\'adreça de corrièr electronic corrèctes per vòstre compte, ara vos avèm mandat un messatge de confirmacion a aquesta adreça de corrièr electronic. Un còp lo messatge recebut, seguissètz las instruccions provesidas per cambiar lo senhal de vòstre compte.';
 $s_email_notification_title_for_status_bug_new = 'Lo bòg seguent es ara a l\'estat « novèl » (encara)';
 $s_email_notification_title_for_status_bug_feedback = 'Lo bòg seguent necessita vòstre comentari.';

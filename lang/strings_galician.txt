@@ -322,7 +322,9 @@ $s_new_account_do_not_reply = 'NON CONTESTE ESTA MENSAXE';
 $s_new_account_email = 'Correo electrónico:';
 $s_new_account_IP = 'Enderezo IP remoto:';
 $s_new_account_signup_msg = 'A seguinte conta foi creada:';
-$s_reset_request_msg = 'Alguén (probablemente vostede) solicitou unha modificación do contrasinal a través do correo electrónico de verificación. Se este non foi vostede, ignore esta mensaxe e nada ha ocorrer.\n\nSe solicitou esta verificación, visite o seguinte enderezo URL para cambiar o seu contrasinal:';
+$s_reset_request_msg = 'Alguén (probablemente vostede) solicitou unha modificación do contrasinal a través do correo electrónico de verificación. Se este non foi vostede, ignore esta mensaxe e nada ha ocorrer.
+
+Se solicitou esta verificación, visite o seguinte enderezo URL para cambiar o seu contrasinal:';
 $s_reset_request_in_progress_msg = 'Se subministra o nome de usuario e enderezo de correo electrónico correctos da súa conta, enviarémoslle decontado unha mensaxe de confirmación. Así que a mensaxe sexa recibida, siga as instrucións expostas para cambiar o contrasinal da súa conta.';
 $s_email_notification_title_for_status_bug_new = 'O seguinte problema está agora no estado NOVO (outra vez)';
 $s_email_notification_title_for_status_bug_feedback = 'O seguinte problema require a súa VALORACIÓN.';

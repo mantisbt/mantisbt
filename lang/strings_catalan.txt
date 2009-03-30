@@ -318,12 +318,14 @@ $s_sponsorship_enum_string = '0:Impagat,1:Requerit,2:Pagat';
 $s_new_account_subject = 'Registre d\'un nou compte';
 $s_new_account_greeting = 'Gràcies por registrar-se. Té un compte amb el nom d\'usuari "%1$s". Per a completar el registre, visiti la següent URL (asseguri\'s de posar-la en una sola línia) i posi la contrasenya que desitgi:';
 $s_new_account_username = 'Usuari:';
-$s_new_account_message = 'Si no ha sol·licitat cap registre, si us plau ignori aquest missatge.\n\n';
+$s_new_account_message = 'Si no ha sol·licitat cap registre, si us plau ignori aquest missatge.';
 $s_new_account_do_not_reply = 'NO RESPONGUI A AQUEST MISSATGE';
 $s_new_account_email = 'Correu:';
 $s_new_account_IP = 'Direcció IP remota:';
 $s_new_account_signup_msg = 'S\'ha creat el següent compte:';
-$s_reset_request_msg = 'Algú (suposadament vostè) ha sol·licitat el canvi de contrasenya mitjançant la verificació per email. Si no ha estat vostè, simplement ignori aquest missatge.\n\nSi va sol·licitar aquest canvi, visiti aquesta URL per a canviar la contrasenya:';
+$s_reset_request_msg = 'Algú (suposadament vostè) ha sol·licitat el canvi de contrasenya mitjançant la verificació per email. Si no ha estat vostè, simplement ignori aquest missatge.
+
+Si va sol·licitar aquest canvi, visiti aquesta URL per a canviar la contrasenya:';
 $s_reset_request_in_progress_msg = 'Si ha proporcionat un nom d\'usuari i contrasenya correctes, rebrà un missatge de confirmació al  seu email. Quan rebi aquest missatge, segueixi les instruccions per a canviar la contrasenya del seu compte.';
 $s_email_notification_title_for_status_bug_new = 'La següent comanda passa a estat de NOVA (una altra vegada)';
 $s_email_notification_title_for_status_bug_feedback = 'La següent comanda requereix MÉS INFORMACIÓ.';

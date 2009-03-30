@@ -335,7 +335,9 @@ $s_new_account_do_not_reply = 'NICHT AUF DIESE NACHRICHT ANTWORTEN';
 $s_new_account_email = 'E-Mail:';
 $s_new_account_IP = 'Von IP-Adresse:';
 $s_new_account_signup_msg = 'Das folgende Konto wurde angelegt:';
-$s_reset_request_msg = 'Jemand (vermutlich Sie) hat einen Passwortwechsel durch E-Mail-Bestätigung angefordert. Wenn Sie es nicht waren, ignorieren Sie diese Nachricht, es wird nichts passieren.\n\nWenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL, um ihr Passwort zu ändern:';
+$s_reset_request_msg = 'Jemand (vermutlich Sie) hat einen Passwortwechsel durch E-Mail-Bestätigung angefordert. Wenn Sie es nicht waren, ignorieren Sie diese Nachricht, es wird nichts passieren.
+
+Wenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL, um ihr Passwort zu ändern:';
 $s_reset_request_in_progress_msg = 'Wenn Sie Benutzernamen und E-Mail-Adresse für Ihr Konto richtig angegeben haben, senden wir Ihnen jetzt eine Bestätigungsmail an diese Adresse. Nach dem Erhalt der Meldung befolgen Sie bitte die Anweisungen, um das Passwort Ihres Kontos zu ändern.';
 $s_email_notification_title_for_status_bug_new = 'Das folgende Problem hat (erneut) den Status NEU';
 $s_email_notification_title_for_status_bug_feedback = 'Das folgende Problem benötigt Ihre Rückmeldung.';

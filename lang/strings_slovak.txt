@@ -266,7 +266,9 @@ $s_new_account_do_not_reply = 'NEODPOVEDAJTE NA TÚTO SPRÁVU';
 $s_new_account_email = 'E-mail:';
 $s_new_account_IP = 'IP adresa vzdialeného počítača:';
 $s_new_account_signup_msg = 'Bol vytvorný nasledujúci účet:';
-$s_reset_request_msg = 'Niekdo (dúfam že vy) požiadal o zmenu hesla s overeným dopisom. Pokiad ste to vy nebol, ignorujte tento dopis a nič sa nestane.\n\nPokud jste si skutečnš přáli tuto změnu, navštivte Nasledujúci stránku a dokončete změnu přístupového hesla:';
+$s_reset_request_msg = 'Niekdo (dúfam že vy) požiadal o zmenu hesla s overeným dopisom. Pokiad ste to vy nebol, ignorujte tento dopis a nič sa nestane.
+
+Pokud jste si skutečnš přáli tuto změnu, navštivte Nasledujúci stránku a dokončete změnu přístupového hesla:';
 $s_reset_request_in_progress_msg = 'Pokiad bola zadaná správna kombinácia uživateľského mena a elektronickej adresy pre Váš účet, odošleme vám na túto adresu potvrdzovací dopis. Keď tento dopis dostanete, riadte sa pokynmy v ňom pre dokončenie zmeny prístupového hesla.';
 $s_email_notification_title_for_status_bug_feedback = 'Nasledujúci problém vyžaduje vašu ODOZVU';
 $s_email_notification_title_for_status_bug_acknowledged = 'Nasledujúci problém bol PRIJATÝ.';

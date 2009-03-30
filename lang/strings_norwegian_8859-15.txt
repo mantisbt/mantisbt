@@ -314,13 +314,15 @@ $s_sponsorship_enum_string = '0:Ikke betalende,1:Forespørsel,2:Betalende';
 $s_new_account_subject = 'Kontoregistrering';
 $s_new_account_greeting = 'Takk for at du registrerte deg. Det har blitt opprettet en konto med brukernavn \'%1$s\'. For å fullføre registreringen, vennligst åpne følgende URL i nettleseren din (NB! Hele URLen skal være på en linje) og angi passordet ditt:';
 $s_new_account_username = 'Brukernavn: ';
-$s_new_account_message = 'Hvis du ikke har forsøkt å registrere deg, vennligst se bort fra denne meldingen.' . "\n\n";
+$s_new_account_message = 'Hvis du ikke har forsøkt å registrere deg, vennligst se bort fra denne meldingen.';
 $s_new_account_do_not_reply = 'IKKE SVAR PÅ DENNE MELDINGEN';
 $s_new_account_email = 'Epost: ';
 $s_new_account_IP = 'IP-adresse: ';
 $s_new_account_signup_msg = 'Følgende konto har blitt opprettet:';
 
-$s_reset_request_msg = 'Noen (antakelig du) har bedt om passordbytte med epostbekreftelse. Hvis dette ikke var deg, vennligst se bort fra denne meldingen.' . "\n\n" . 'Hvis du ba om denne bekreftelsen, gå til følgende URL for å forandre passordet:';
+$s_reset_request_msg = 'Noen (antakelig du) har bedt om passordbytte med epostbekreftelse. Hvis dette ikke var deg, vennligst se bort fra denne meldingen.
+
+Hvis du ba om denne bekreftelsen, gå til følgende URL for å forandre passordet:';
 $s_reset_request_in_progress_msg = 'Hvis du oppga korrekt brukernavn og epostadresse for kontoen din har det nå blitt sendt en bekreftelsesepost. Når eposten er mottatt, følg instruksjonene for å forandre kontopassordet ditt.';
 
 $s_email_notification_title_for_status_bug_new = 'Følgende sak har nå status NY (igjen)';
