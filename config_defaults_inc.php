@@ -150,6 +150,9 @@
 	#   'memcached' -> Memcached storage sessions
 	$g_session_handler = 'php';
 
+	# Session key name.  Should be unique between multiple installations to prevent conflicts.
+	$g_session_key = 'MantisBT';
+
 	# Session save path.  If false, uses default value as set by session handler.
 	$g_session_save_path = false;
 
