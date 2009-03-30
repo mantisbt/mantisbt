@@ -52,11 +52,15 @@ abstract class MantisSession {
  */
 class MantisPHPSession extends MantisSession {
 	function __construct( $p_session_id=null ) {
+		$this->key = config_get_global( 'session_key' );
+
+		# Save session information where specified or with PHP's default
 		$t_session_save_path = config_get_global( 'session_save_path' );
 		if( $t_session_save_path ) {
 			session_save_path( $t_session_save_path );
 		}
 
+		# Handle session cookie and caching
 		session_cache_limiter( 'private_no_expire' );
 		if ( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
 			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), true );
@@ -64,17 +68,24 @@ class MantisPHPSession extends MantisSession {
 			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), false );
 		}
 
+		# Handle existent session ID
 		if ( !is_null( $p_session_id ) ) {
 			session_id( $p_session_id );
 		}
 
+		# Initialize the session
 		session_start();
 		$this->id = session_id();
+
+		# Initialize the keyed session store
+		if ( !isset( $_SESSION[ $this->key ] ) ) {
+			$_SESSION[ $this->key ] = array();
+		}
 	}
 
-	function get( $p_name, $p_default = null ) {
-		if( isset( $_SESSION[$p_name] ) ) {
-			return unserialize( $_SESSION[$p_name] );
+	function get( $p_name, $p_default=null ) {
+		if ( isset( $_SESSION[ $this->key ][ $p_name ] ) ) {
+			return unserialize( $_SESSION[ $this->key ][ $p_name ] );
 		}
 
 		if( func_num_args() > 1 ) {
@@ -86,11 +97,11 @@ class MantisPHPSession extends MantisSession {
 	}
 
 	function set( $p_name, $p_value ) {
-		$_SESSION[$p_name] = serialize( $p_value );
+		$_SESSION[ $this->key ][ $p_name ] = serialize( $p_value );
 	}
 
 	function delete( $p_name ) {
-		unset( $_SESSION[$p_name] );
+		unset( $_SESSION[ $this->key ][ $p_name ] );
 	}
 
 	function destroy() {
@@ -98,8 +109,7 @@ class MantisPHPSession extends MantisSession {
 			gpc_set_cookie( session_name(), '', time() - 42000 );
 		}
 
-		unset( $_SESSION );
-		session_destroy();
+		unset( $_SESSION[ $this->key ] );
 	}
 }
 
