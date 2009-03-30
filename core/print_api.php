@@ -829,11 +829,17 @@
 			echo '<option value=""></option>';
 		}
 
+		$t_listed = array();
+
 		foreach( $versions as $version ) {
 			$t_version = string_attribute( $version['version'] );
-			echo "<option value=\"$t_version\"";
-			check_selected( $p_version, $t_version );
-			echo '>', string_shorten( $t_version ), '</option>';
+
+			if ( !in_array( $t_version, $t_listed ) ) {
+				$t_listed[] = $t_version;
+				echo "<option value=\"$t_version\"";
+				check_selected( $p_version, $t_version );
+				echo '>', string_shorten( $t_version ), '</option>';
+			}
 		}
 	}
 	# --------------------
