@@ -82,7 +82,9 @@
 
 	if ( isset ( $_SERVER['PHP_SELF'] ) ) {
 		$t_protocol = 'http';
-		if ( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+		if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
+			$t_protocol= $_SERVER['HTTP_X_FORWARDED_PROTO'];
+		} else if ( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
 			$t_protocol = 'https';
 		}
 
