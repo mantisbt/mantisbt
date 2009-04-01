@@ -89,6 +89,7 @@
 
 	# Handle auto-assigning
 	if ( ( NEW_ == $t_bug_data->status )
+	  && ( $t_bug_data->status == $t_old_bug_status )
 	  && ( 0 != $t_bug_data->handler_id )
 	  && ( ON == config_get( 'auto_set_status_to_assigned' ) ) ) {
 		$t_bug_data->status = config_get( 'bug_assigned_status' );
