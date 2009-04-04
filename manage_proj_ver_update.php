@@ -58,6 +58,7 @@
 	$t_version->date_order = $f_date_order;
 
 	version_update( $t_version );
+	event_signal( 'EVENT_MANAGE_VERSION_UPDATE_FORM', array( $t_version->id ) );
 
 	form_security_purge( 'manage_proj_ver_update' );
 

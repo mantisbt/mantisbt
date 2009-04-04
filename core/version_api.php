@@ -138,7 +138,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 	db_query_bound( $query, Array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released, $c_obsolete ) );
 
 	# db_query errors on failure so:
-	return true;
+	return db_insert_id( $t_project_version_table );
 }
 
 # --------------------

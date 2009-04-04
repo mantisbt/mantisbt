@@ -58,7 +58,8 @@
 
 	foreach ( $t_rows as $t_row ) {
 		if ( version_is_unique( $t_row['version'], $t_dst_project_id ) ) {
-			version_add( $t_dst_project_id, $t_row['version'], $t_row['released'], $t_row['description'], db_date( $t_row['date_order'] ) );
+			$t_version_id = version_add( $t_dst_project_id, $t_row['version'], $t_row['released'], $t_row['description'], db_date( $t_row['date_order'] ) );
+			event_signal( 'EVENT_MANAGE_VERSION_CREATE', array( $t_version_id ) );
 		}
 	}
 

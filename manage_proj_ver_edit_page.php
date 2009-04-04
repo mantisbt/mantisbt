@@ -90,6 +90,7 @@
 		<input type="checkbox" name="obsolete" <?php check_checked( $t_version->obsolete, true ); ?> />
 	</td>
 </tr>
+<?php event_signal( 'EVENT_MANAGE_VERSION_UPDATE_FORM', array( $t_version->id ) ); ?>
 <tr>
 	<td>
 		&nbsp;
