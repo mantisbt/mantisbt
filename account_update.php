@@ -89,9 +89,7 @@
 
 	form_security_purge('account_update');
 
-	html_page_top1();
-	html_meta_redirect( $t_redirect );
-	html_page_top2();
+	html_page_top( null, $t_redirect );
 
 	echo '<br /><div align="center">';
 
@@ -110,5 +108,5 @@
 	echo lang_get( 'operation_successful' ) . '<br />';
 	print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
 	echo '</div>';
-	html_page_bottom1( __FILE__ );
+	html_page_bottom( __FILE__ );
 ?>

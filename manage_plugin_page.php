@@ -27,8 +27,7 @@ require_once( 'core.php' );
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
-html_page_top1( lang_get( 'manage_plugin_link' ) );
-html_page_top2();
+html_page_top( lang_get( 'manage_plugin_link' ) );
 
 print_manage_menu( 'manage_plugin_page.php' );
 
@@ -251,5 +250,5 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 <span class='dependency_upgrade'><?php echo lang_get( 'plugin_key_upgrade' ) ?></span>.
 
 <?php
-html_page_bottom1();
+html_page_bottom();
 

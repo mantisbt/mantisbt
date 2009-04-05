@@ -246,8 +246,7 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 		return true;
 	}
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	# @@@ we need to improve this formatting.  I'd like the text to only
 	#  be about 50% the width of the screen so that it doesn't become to hard
@@ -268,7 +267,7 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 
 	print_hr();
 	echo "</div>\n";
-	html_page_bottom1();
+	html_page_bottom();
 	exit;
 }
 

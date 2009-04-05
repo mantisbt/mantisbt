@@ -44,8 +44,7 @@
 		print_header_redirect( $t_redirect_url );
 	}
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 ?>
 	<br />
 	<div align="center">
@@ -64,5 +63,4 @@
 
 <?php
 	print '</div>';
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

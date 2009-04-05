@@ -48,12 +48,9 @@
 	}
 
    	extract( $row, EXTR_PREFIX_ALL, 'v' );
-?>
 
-<?php html_page_top1() ?>
-<?php html_page_top2() ?>
+	html_page_top();
 
-<?php
 	if ( profile_is_global( $f_profile_id ) ) {
 		print_manage_menu();
 	}
@@ -121,4 +118,5 @@
 </div>
 <?php # Edit Profile Form END ?>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

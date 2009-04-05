@@ -137,8 +137,7 @@
 	# don't index bug report page
 	html_robots_noindex();
 
-	html_page_top1( lang_get( 'report_bug_link' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'report_bug_link' ) );
 
 	print_recently_visited();
 ?>
@@ -613,4 +612,4 @@ if ( $t_can_update_due_date ) {
 	date_finish_calendar( 'due_date', 'trigger' );
 }
 
-html_page_bottom1( __FILE__ ) ?>
+html_page_bottom( __FILE__ );

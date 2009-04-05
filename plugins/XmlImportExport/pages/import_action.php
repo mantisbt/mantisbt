@@ -31,8 +31,7 @@ file_ensure_uploaded( $f_file );
 
 $importer = new ImportXML( $f_file, $f_strategy, $f_fallback, $f_keepcategory, $f_defaultcategory );
 
-html_page_top1( lang_get( 'manage_import_issues_link' ) );
-html_page_top2( );
+html_page_top( lang_get( 'manage_import_issues_link' ) );
 
 print_manage_menu( 'manage_import_issues_page.php' );
 
@@ -40,4 +39,4 @@ echo "<pre>\n";
 $importer->import( );
 echo "</pre>\n";
 
-html_page_bottom1( __FILE__ );
+html_page_bottom( __FILE__ );

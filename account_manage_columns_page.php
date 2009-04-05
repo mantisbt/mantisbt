@@ -32,8 +32,7 @@
 	require_once( $t_core_path . 'custom_field_api.php' );
 	require_once( $t_core_path . 'helper_api.php' );
 
-	html_page_top1( lang_get( 'manage_columns_config' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_columns_config' ) );
 
 	# Define constant that will be checked by the include page.
 	define ( 'ACCOUNT_COLUMNS', '' );
@@ -45,5 +44,5 @@
 
 	include ( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'manage_columns_inc.php' );
 
-	html_page_bottom1( __FILE__ );
+	html_page_bottom( __FILE__ );
 ?>

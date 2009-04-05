@@ -656,8 +656,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 		}
 	}
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	?>
 <div align="center">
@@ -702,7 +701,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 </div>
 
 		<?php
-		html_page_bottom1();
+		html_page_bottom();
 
 	exit;
 }

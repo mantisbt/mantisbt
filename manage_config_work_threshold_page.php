@@ -30,8 +30,7 @@
 
 	auth_reauthenticate();
 
-	html_page_top1( lang_get( 'manage_threshold_config' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_threshold_config' ) );
 
 	print_manage_menu( 'adm_permissions_report.php' );
 	print_manage_config_menu( 'manage_config_work_threshold_page.php' );
@@ -338,5 +337,4 @@
         echo "</form></div>\n";
     }
 
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

@@ -123,8 +123,7 @@
 		array_unshift( $t_project_ids, $t_project_id );
 	}
 
-	html_page_top1( lang_get( 'roadmap' ) );  // title
-	html_page_top2();
+	html_page_top( lang_get( 'roadmap' ) );
 
 	$t_project_index = 0;
 
@@ -317,5 +316,4 @@
 		$t_project_index++;
 	}
 
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

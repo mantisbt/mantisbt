@@ -31,10 +31,9 @@
 	require_once( $t_core_path . 'print_api.php' );
 
 	$f_news_id = gpc_get_int( 'news_id', null );
-?>
-<?php html_page_top1() ?>
-<?php html_page_top2() ?>
 
+	html_page_top();
+?>
 <br />
 
 <?php
@@ -56,4 +55,5 @@
 	<?php print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) ); ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

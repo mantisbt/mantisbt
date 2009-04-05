@@ -85,10 +85,11 @@
 
 	# for export
 	$t_show_flag = gpc_get_int( 'show_flag', 0 );
+
+	html_page_top1();
+	html_head_end();
+	html_body_begin();
 ?>
-<?php html_page_top1() ?>
-<?php html_head_end() ?>
-<?php html_body_begin() ?>
 
 <table class="width100"><tr><td class="form-title">
 	<div class="center">

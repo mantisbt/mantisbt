@@ -134,13 +134,12 @@ function print_successful_redirect_to_bug( $p_bug_id ) {
 function print_successful_redirect( $p_redirect_to ) {
 	if( helper_show_queries() ) {
 		html_meta_redirect( $p_redirect_to );
-		html_page_top1();
-		html_page_top2();
+		html_page_top();
 		echo '<br /><div class="center">';
 		echo lang_get( 'operation_successful' ) . '<br />';
 		print_bracket_link( $p_redirect_to, lang_get( 'proceed' ) );
 		echo '</div>';
-		html_page_bottom1();
+		html_page_bottom();
 	} else {
 		print_header_redirect( $p_redirect_to );
 	}

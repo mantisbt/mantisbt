@@ -126,8 +126,7 @@
 		array_unshift( $t_project_ids, $t_project_id );
 	}
 
-	html_page_top1( lang_get( 'changelog' ) );  // title
-	html_page_top2();
+	html_page_top( lang_get( 'changelog' ) );
 
 	$t_project_index = 0;
 
@@ -308,5 +307,4 @@
 	if ( $t_project_index == 0 ) {
 		echo '<br /><span class="pagetitle">' . lang_get('changelog_empty') . '</span>';
 	}
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

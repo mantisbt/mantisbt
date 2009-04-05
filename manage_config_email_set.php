@@ -42,9 +42,7 @@
 	$f_thresholds		= gpc_get( 'flag_threshold', array() );
 	$f_actions_access	= gpc_get_int( 'notify_actions_access' );
 
-	html_page_top1( lang_get( 'manage_email_config' ) );
-	html_meta_redirect( $t_redirect_url );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_email_config' ), $t_redirect_url );
 
 	$t_access = current_user_get_access_level();
 	$t_can_change_flags = $t_access >= config_get_access( 'notify_flags' );
@@ -165,4 +163,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

@@ -178,8 +178,7 @@
 	}
 
 
-	html_page_top1( lang_get( 'manage_email_config' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_email_config' ) );
 
 	print_manage_menu( 'adm_permissions_report.php' );
 	print_manage_config_menu( 'manage_config_email_page.php' );
@@ -302,5 +301,4 @@
 
 	}
 
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

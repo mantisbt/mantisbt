@@ -47,8 +47,7 @@
 	$t_changelog_url = "changelog_page.php?project_id=$f_project_id";
 	$t_roadmap_url = "roadmap_page.php?project_id=$f_project_id";
 
-	html_page_top1( project_get_field( $f_project_id, 'name' ) );
-	html_page_top2();
+	html_page_top( project_get_field( $f_project_id, 'name' ) );
 
 	print_recently_visited();
 
@@ -119,5 +118,4 @@
 	 	}
  	}
 
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

@@ -39,9 +39,7 @@
 	$t_project = helper_get_current_project();
 	$t_access = current_user_get_access_level();
 
-	html_page_top1( lang_get( 'manage_workflow_config' ) );
-	html_meta_redirect( $t_redirect_url );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_workflow_config' ), $t_redirect_url );
 
 	# process the changes to threshold values
 	$t_valid_thresholds = array( 'bug_submit_status', 'bug_resolved_status_threshold', 'bug_reopen_status' );
@@ -133,4 +131,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

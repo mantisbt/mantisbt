@@ -26,15 +26,14 @@
  * Print the top part for the bug action group page.
  */
 function bug_group_action_print_top() {
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 }
 
 /**
  * Print the bottom part for the bug action group page.
  */
 function bug_group_action_print_bottom() {
-	html_page_bottom1( __FILE__ );
+	html_page_bottom( __FILE__ );
 }
 
 /**

@@ -85,8 +85,7 @@
 
 	$t_bug = bug_get( $f_bug_id );
 
-	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
-	html_page_top2();
+	html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
 	print_recently_visited();
 ?>
@@ -353,6 +352,5 @@ if ( $t_can_update_due_date ) {
 <?php
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' );
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
-?>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+	html_page_bottom( __FILE__ );

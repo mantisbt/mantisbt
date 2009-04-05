@@ -76,8 +76,7 @@
 	#  this is a mandatory password change request
 	$t_force_pw_reset = is_page_name( 'verify.php' );
 
-	html_page_top1( lang_get( 'account_link' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'account_link' ) );
 ?>
 
 <!-- # Edit Account Form BEGIN -->
@@ -272,4 +271,4 @@
 <?php } ?>
 <?php # Delete Account Form END ?>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php html_page_bottom( __FILE__ ) ?>

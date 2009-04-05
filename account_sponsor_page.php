@@ -58,8 +58,7 @@
 	$t_show_all = gpc_get_bool( 'show_all', false );
 
 	# start the page
-	html_page_top1( lang_get( 'my_sponsorship' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'my_sponsorship' ) );
 	
 	$t_project = helper_get_current_project();
 ?>
@@ -312,4 +311,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

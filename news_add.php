@@ -44,9 +44,9 @@
 	form_security_purge( 'news_add' );
 
 	$t_news_row = news_get_row( $t_news_id );
+
+	html_page_top();
 ?>
-<?php html_page_top1() ?>
-<?php html_page_top2() ?>
 
 <br />
 <div align="center">
@@ -60,4 +60,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

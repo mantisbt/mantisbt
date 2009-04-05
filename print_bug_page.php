@@ -69,9 +69,8 @@
 	$v2_description 			= string_display_links( $v2_description );
 	$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_display_links( $v2_additional_information );
-?>
-<?php html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) ) ?>
-<?php
+
+	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	html_head_end();
 	html_body_begin();
 ?>

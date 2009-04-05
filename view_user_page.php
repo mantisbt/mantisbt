@@ -41,8 +41,7 @@
 	#  that version instead of the one in the DB
 	$u_email = user_get_email( $u_id, $u_username );
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 ?>
 
 <br />
@@ -114,4 +113,5 @@
 
 <br />
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

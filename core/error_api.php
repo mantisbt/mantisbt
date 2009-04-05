@@ -187,7 +187,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 
 			if( $t_html_api ) {
 				if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
-					html_page_bottom1();
+					html_page_bottom();
 				} else {
 					html_body_end();
 					html_end();

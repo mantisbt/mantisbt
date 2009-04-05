@@ -103,12 +103,12 @@
 	}
 
 	print_header_redirect( $t_redirect_url, true, true );
-?>
-<?php html_page_top1() ?>
-<?php
+
+	html_page_top1();
 	html_meta_redirect( $t_redirect_url );
+
+	html_page_top1();
 ?>
-<?php html_page_top1() ?>
 
 <br />
 <div align="center">
@@ -119,4 +119,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

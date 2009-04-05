@@ -39,8 +39,7 @@
 		}
 	}
 
-	html_page_top1( lang_get( 'select_project_button' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'select_project_button' ) );
 ?>
 
 <!-- Project Select Form BEGIN -->
@@ -81,4 +80,5 @@
 </form>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

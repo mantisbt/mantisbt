@@ -45,8 +45,7 @@
 
 	compress_enable();
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	$t_use_query_url = 'view_all_set.php?type=3&amp;source_query_id=';
 	$t_delete_query_url = 'query_delete_page.php?source_query_id=';
@@ -99,4 +98,5 @@
 ?>
 </table>
 </div>
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

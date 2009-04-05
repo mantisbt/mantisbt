@@ -41,8 +41,7 @@
 	$t_project_id = $t_row['project_id'];
 	$t_name = $t_row['name'];
 	
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	print_manage_menu( 'manage_proj_cat_edit_page.php' );
 ?>
@@ -100,4 +99,5 @@
 	</form>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

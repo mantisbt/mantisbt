@@ -26,9 +26,9 @@
 	require_once( 'core.php' );
 
 	access_ensure_project_level( config_get( 'manage_news_threshold' ) );
+
+	html_page_top( lang_get( 'edit_news_link' ) );
 ?>
-<?php html_page_top1( lang_get( 'edit_news_link' ) ) ?>
-<?php html_page_top2() ?>
 
 <?php # Add News Form BEGIN ?>
 <br />
@@ -128,4 +128,5 @@
 </div>
 <?php } # Edit/Delete News Form END ?>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

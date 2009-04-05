@@ -80,10 +80,9 @@
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = string_get_bug_view_url( $t_bug_id );
-?>
-<?php html_page_top1( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) ) ?>
-<?php html_page_top2() ?>
 
+	html_page_top( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
+?>
 <br />
 <div align="center">
 <form method="post" action="bugnote_update.php">
@@ -124,4 +123,4 @@
 </form>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php html_page_bottom( __FILE__ );

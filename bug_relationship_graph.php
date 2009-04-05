@@ -72,8 +72,7 @@
 
 	compress_enable();
 
-	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
-	html_page_top2();
+	html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 ?>
 <br />
 
@@ -167,5 +166,5 @@
 
 <?php
 	include( 'bug_view_inc.php' );
-	html_page_bottom1( __FILE__ );
+	html_page_bottom( __FILE__ );
 ?>

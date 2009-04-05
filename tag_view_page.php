@@ -40,8 +40,7 @@
 	$t_name = string_display_line( $t_tag_row['name'] );
 	$t_description = string_display( $t_tag_row['description'] );
 
-	html_page_top1( sprintf( lang_get( 'tag_details' ), $t_tag_row['name'] ) );
-	html_page_top2();
+	html_page_top( sprintf( lang_get( 'tag_details' ), $t_tag_row['name'] ) );
 ?>
 
 <br/>
@@ -136,5 +135,4 @@
 
 </table>
 <?php
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

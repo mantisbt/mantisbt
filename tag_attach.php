@@ -72,8 +72,7 @@
 
 	// failed to attach at least one tag
 	if ( count( $t_tags_failed ) > 0 ) {
-		html_page_top1( lang_get( 'tag_attach_long' ) . ' ' . bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
-		html_page_top2();
+		html_page_top( lang_get( 'tag_attach_long' ) . ' ' . bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 ?>
 <br/>
 <table class="width75" align="center">
@@ -116,7 +115,7 @@
 	</tr>
 </table>
 <?php
-		html_page_bottom1( __FILE__ );
+		html_page_bottom( __FILE__ );
 		// end failed to attach tag
 	} else {
 		foreach( $t_tags_create as $t_tag_row ) {

@@ -59,8 +59,7 @@
 
 	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
 
-	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
-	html_page_top2();
+	html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
 	print_recently_visited();
 ?>
@@ -449,7 +448,6 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, false ) );
 
 <?php
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
-	html_page_bottom1( __FILE__ );
+	html_page_bottom( __FILE__ );
 
 	last_visited_issue( $f_bug_id );
-?>

@@ -30,8 +30,7 @@
 
 	$t_core_path = config_get( 'core_path' );
 
-	html_page_top1( lang_get( 'permissions_summary_report' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'permissions_summary_report' ) );
 
 	print_manage_menu( 'adm_permissions_report.php' );
 	print_manage_config_menu( 'adm_permissions_report.php' );
@@ -145,5 +144,5 @@
 	echo get_capability_row( lang_get( 'notify_of_new_user_created' ), config_get( 'notify_new_user_created_threshold_min' ) );
 	echo get_section_end();
 
-	html_page_bottom1( __FILE__ );
+	html_page_bottom( __FILE__ );
 ?>

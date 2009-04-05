@@ -109,8 +109,7 @@
 	# don't index bug report page
 	html_robots_noindex();
 
-	html_page_top1( lang_get( 'report_bug_link' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'report_bug_link' ) );
 
 	print_recently_visited();
 ?>
@@ -401,4 +400,4 @@
 </script>
 <?php } ?>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php html_page_bottom( __FILE__ ) ?>

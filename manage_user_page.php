@@ -86,15 +86,12 @@
 		}
 	}
 
-?>
-<?php html_page_top1( lang_get( 'manage_users_link' ) ) ?>
-<?php html_page_top2() ?>
+	html_page_top( lang_get( 'manage_users_link' ) );
 
-<?php print_manage_menu( 'manage_user_page.php' ) ?>
+	print_manage_menu( 'manage_user_page.php' );
 
-<?php # New Accounts Form BEGIN ?>
-<?php
-	//$g_db->debug=true;
+	# New Accounts Form BEGIN
+
 	$days_old = 7;
 	$query = "SELECT *
 		FROM $t_user_table
@@ -104,10 +101,8 @@
 	$g_db->debug=false;
 	$new_user_count = db_num_rows( $result);
 
-?>
+	# Never Logged In Form BEGIN
 
-<?php # Never Logged In Form BEGIN ?>
-<?php
 	$query = "SELECT *
 		FROM $t_user_table
 		WHERE ( login_count = 0 ) AND ( date_created = last_visit )
@@ -115,10 +110,8 @@
 	$result = db_query_bound( $query );
 	$unused_user_count = db_num_rows( $result );
 
-?>
+	# Manage Form BEGIN
 
-<?php # Manage Form BEGIN ?>
-<?php
 	$t_prefix_array = array( 'ALL' );
 	
 	for ( $i = 'A'; $i != 'AA'; $i++ ) {
@@ -338,5 +331,4 @@
 		<input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" />
 	</form>
 <?php
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

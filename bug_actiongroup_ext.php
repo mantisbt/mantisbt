@@ -106,8 +106,7 @@
 	$t_redirect_url = 'view_all_bug_page.php';
 
 	if ( count( $t_failed_ids ) > 0 ) {
-		html_page_top1();
-		html_page_top2();
+		html_page_top();
 
 		echo '<div align="center">';
 		foreach( $t_failed_ids as $t_id => $t_reason ) {
@@ -117,8 +116,7 @@
 		print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 		echo '</div>';
 
-		html_page_bottom1( __FILE__ );
+		html_page_bottom( __FILE__ );
 	} else {
 		print_header_redirect( $t_redirect_url );
 	}
-?>

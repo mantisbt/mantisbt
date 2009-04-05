@@ -64,9 +64,9 @@
 
    	$v_headline = string_attribute( $v_headline );
    	$v_body 	= string_textarea( $v_body );
+
+	html_page_top( lang_get( 'edit_news_title' ) );
 ?>
-<?php html_page_top1( lang_get( 'edit_news_title' ) ) ?>
-<?php html_page_top2() ?>
 
 <?php # Edit News Form BEGIN ?>
 <br />
@@ -147,4 +147,5 @@
 </div>
 <?php # Edit News Form END ?>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

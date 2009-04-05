@@ -83,8 +83,7 @@
 	$result = db_query( $query );
 	$num_files = db_num_rows( $result );
 
-	html_page_top1( lang_get( 'docs_link' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'docs_link' ) );
 ?>
 <br />
 <div align="center">
@@ -145,4 +144,5 @@
 </table>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

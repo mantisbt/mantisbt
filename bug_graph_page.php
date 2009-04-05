@@ -112,5 +112,4 @@
         }
     }
 
-    html_page_bottom1( __FILE__ );
-?>
+    html_page_bottom( __FILE__ );

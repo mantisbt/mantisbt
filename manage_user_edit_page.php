@@ -44,8 +44,7 @@
 
 	$t_user = user_get_row( $t_user_id );
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	print_manage_menu();
 ?>
@@ -236,14 +235,8 @@
 </div>
 <?php
 	} # End of PROJECT ACCESS conditional section
-?>
 
-
-
-<!-- ACCOUNT PREFERENCES -->
-<?php
 	include ( 'account_prefs_inc.php' );
 	edit_account_prefs( $t_user['id'], false, false, 'manage_user_edit_page.php?user_id=' . $t_user_id );
-?>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+	html_page_bottom( __FILE__ );

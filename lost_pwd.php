@@ -78,8 +78,7 @@
 
 	$t_redirect_url = 'login_page.php';
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 ?>
 
 <br />

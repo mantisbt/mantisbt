@@ -44,14 +44,11 @@
 	
 	$t_can_manage_users = access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
-	html_page_top1( project_get_field( $f_project_id, 'name' ) );
-	html_page_top2();
+	html_page_top( project_get_field( $f_project_id, 'name' ) );
 
 	print_manage_menu( 'manage_proj_edit_page.php' );
 ?>
 <br />
-
-
 <!-- PROJECT PROPERTIES -->
 <div align="center">
 <form method="post" action="manage_proj_update.php">
@@ -822,4 +819,5 @@ if ( $t_can_manage_users ) {
 	</table>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

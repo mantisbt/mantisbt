@@ -17,8 +17,7 @@
 auth_reauthenticate( );
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
-html_page_top1( lang_get( 'plugin_format_title' ) );
-html_page_top2( );
+html_page_top( lang_get( 'plugin_format_title' ) );
 
 print_manage_menu( );
 
@@ -100,4 +99,4 @@ print_manage_menu( );
 <form>
 
 <?php
-html_page_bottom1( __FILE__ );
+html_page_bottom( __FILE__ );

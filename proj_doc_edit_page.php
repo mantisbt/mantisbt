@@ -56,9 +56,8 @@
 
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 
+	html_page_top();
 ?>
-<?php html_page_top1() ?>
-<?php html_page_top2() ?>
 
 <br />
 <div align="center">
@@ -134,4 +133,5 @@
 
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

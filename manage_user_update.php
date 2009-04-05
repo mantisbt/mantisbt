@@ -115,14 +115,8 @@
 
 	form_security_purge('manage_user_update');
 
+	html_page_top( null, $result ? $t_redirect_url : null );
 ?>
-<?php html_page_top1() ?>
-<?php
-	if ( $result ) {
-		html_meta_redirect( $t_redirect_url );
-	}
-?>
-<?php html_page_top2() ?>
 
 <br />
 <div align="center">
@@ -139,4 +133,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

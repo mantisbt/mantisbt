@@ -57,8 +57,7 @@
 
 	compress_enable();
 
-	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
-	html_page_top2();
+	html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
 	print_recently_visited();
 
@@ -661,7 +660,7 @@
 		include( $t_mantis_dir . 'history_inc.php' );
 	}
 
-	html_page_bottom1( __FILE__ );
+	html_page_bottom( __FILE__ );
 
 	last_visited_issue( $f_bug_id );
 ?>

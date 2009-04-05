@@ -33,11 +33,9 @@
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version->project_id );
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	print_manage_menu( 'manage_proj_ver_edit_page.php' );
-
 ?>
 <br />
 <div align="center">
@@ -112,4 +110,5 @@
 	</form>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

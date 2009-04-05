@@ -48,13 +48,9 @@
 	form_security_purge( 'manage_proj_custom_field_update' );
 
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
-?>
-<?php html_page_top1() ?>
-<?php
-	html_meta_redirect( $t_redirect_url );
-?>
-<?php html_page_top2() ?>
 
+	html_page_top( null, $t_redirect_url );
+?>
 <br />
 <div align="center">
 <?php
@@ -64,4 +60,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

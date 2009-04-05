@@ -80,11 +80,11 @@
 xmlns:w="urn:schemas-microsoft-com:office:word"
 xmlns="http://www.w3.org/TR/REC-html40">
 
-<?php html_page_top1() ?>
-<?php html_head_end() ?>
-<?php html_body_begin() ?>
+<?php 
+	html_page_top1();
+	html_head_end();
+	html_body_begin();
 
-<?php
 	$f_bug_arr = explode( ',', $f_export );
 	$t_count_exported = 0;
 

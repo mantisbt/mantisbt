@@ -47,8 +47,7 @@
 		access_denied();
 	}
 	
-	html_page_top1( sprintf( lang_get( 'tag_update' ), $t_tag_row['name'] ) );
-	html_page_top2();
+	html_page_top( sprintf( lang_get( 'tag_update' ), $t_tag_row['name'] ) );
 ?>
 
 <br/>
@@ -121,5 +120,4 @@
 </form>
 
 <?php
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

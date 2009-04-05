@@ -29,8 +29,7 @@
 
 	$t_core_path = config_get( 'core_path' );
 
-	html_page_top1( lang_get( 'configuration_report' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'configuration_report' ) );
 
 	print_manage_menu( 'adm_config_report.php' );
 	print_manage_config_menu( 'adm_config_report.php' );
@@ -238,5 +237,4 @@
 ?>
 </div>
 <?php
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

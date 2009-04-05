@@ -100,9 +100,9 @@
 		$t_orcttab .= $t_orct_s;
 		$t_orcttab .= '</td>';
 	}
+
+	html_page_top( lang_get( 'summary_link' ) );
 ?>
-<?php html_page_top1( lang_get( 'summary_link' ) ) ?>
-<?php html_page_top2() ?>
 
 <br />
 <?php print_summary_menu( 'summary_page.php' ) ?>
@@ -375,4 +375,5 @@
 </tr>
 </table>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

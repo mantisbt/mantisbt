@@ -80,9 +80,7 @@
 		bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, NULL, FALSE );
 	}
 
-	html_page_top1();
-	html_meta_redirect( string_get_bug_view_url( $f_bug_id ) );
-	html_page_top2();
+	html_page_top( null, string_get_bug_view_url( $f_bug_id ) );
 ?>
 <br />
 <div align="center">
@@ -91,4 +89,5 @@
 	print_bracket_link( string_get_bug_view_url( $f_bug_id ), lang_get( 'proceed' ) );
 ?>
 </div>
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php 
+	html_page_bottom( __FILE__ );

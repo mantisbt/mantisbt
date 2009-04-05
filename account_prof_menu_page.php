@@ -39,29 +39,23 @@
 	}
 
 	require_once( $t_core_path.'current_user_api.php' );
-?>
-<?php
+
 	auth_ensure_user_authenticated();
 
 	current_user_ensure_unprotected();
-?>
-<?php
+
 	if ( $g_global_profiles ) {
 		access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 	} else {
 		access_ensure_global_level( config_get( 'add_profile_threshold' ) );
 	}
-?>
-<?php html_page_top1( lang_get( 'manage_profiles_link' ) ) ?>
-<?php html_page_top2() ?>
 
-<?php
+	html_page_top( lang_get( 'manage_profiles_link' ) );
+
 	if ( $g_global_profiles ) {
 		print_manage_menu( 'manage_prof_menu_page.php' );
 	}
-?>
 
-<?php
 	if ( $g_global_profiles ) {
 		$t_user_id = ALL_USERS;
 	} else {
@@ -183,4 +177,4 @@
 <?php } ?>
 <?php # Edit or Delete Profile Form END ?>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php html_page_bottom( __FILE__ ) ?>

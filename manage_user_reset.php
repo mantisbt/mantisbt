@@ -39,14 +39,10 @@
 
 	form_security_purge('manage_user_reset');
 
-	html_page_top1();
-	if ( $t_result ) {
-		html_meta_redirect( $t_redirect_url );
-	}
-	html_page_top2();
+	html_page_top( null, $t_result ? $t_redirect_url : null );
 
-	echo "<br />";
-	echo "<div align=\"center\">";
+	echo '<br />';
+	echo '<div align="center">';
 
 	if ( false == $t_result ) {
 		# PROTECTED
@@ -63,6 +59,5 @@
 	}
 
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-	echo "</div>";
-	html_page_bottom1( __FILE__ );
-?>
+	echo '</div>';
+	html_page_bottom( __FILE__ );

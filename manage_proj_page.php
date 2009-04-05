@@ -40,8 +40,7 @@
 		$t_direction = DESCENDING;
 	}
 
-	html_page_top1( lang_get( 'manage_projects_link' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_projects_link' ) );
 
 	print_manage_menu( 'manage_proj_page.php' );
 	
@@ -226,4 +225,5 @@
 </table>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php 
+	html_page_bottom( __FILE__ );

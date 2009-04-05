@@ -27,8 +27,7 @@
 
 	$t_core_path = config_get( 'core_path' );
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	access_ensure_project_level( config_get( 'create_permalink_threshold' ) );
 
@@ -51,5 +50,4 @@
 ?>
 </div>
 <?php
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

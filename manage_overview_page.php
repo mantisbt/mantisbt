@@ -30,8 +30,7 @@
 
 	$t_version_suffix = config_get_global( 'version_suffix' );
 
-	html_page_top1( lang_get( 'manage_link' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_link' ) );
 
 	print_manage_menu();
 ?>
@@ -83,5 +82,5 @@
 </table>
 
 <?php
-html_page_bottom1( __FILE__ );
+html_page_bottom( __FILE__ );
 

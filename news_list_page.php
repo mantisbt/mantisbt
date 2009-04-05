@@ -31,9 +31,9 @@
 	require_once( $t_core_path.'string_api.php' );
 
 	access_ensure_project_level( VIEWER );
+
+	html_page_top();
 ?>
-<?php html_page_top1() ?>
-<?php html_page_top2() ?>
 
 <br />
 <?php
@@ -78,4 +78,4 @@
 			echo '</ul>';
 	}
 
-	html_page_bottom1( __FILE__ );
+	html_page_bottom( __FILE__ );

@@ -38,8 +38,7 @@ access_ensure_global_level( config_get( 'tag_view_threshold' ) );
 
 compress_enable();
 
-html_page_top1( lang_get( 'manage_tags_link' ) );
-html_page_top2();
+html_page_top( lang_get( 'manage_tags_link' ) );
 
 print_manage_menu();
 
@@ -231,5 +230,4 @@ foreach ( $t_result as $t_tag_row ) {
 <?php
 } #End can Edit
 
-html_page_bottom1( __FILE__ );
-
+html_page_bottom( __FILE__ );

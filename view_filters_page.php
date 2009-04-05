@@ -39,8 +39,7 @@
 
 	compress_enable();
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	$t_filter = filter_get_default();
 	$t_target_field = gpc_get_string( 'target_field', '' );
@@ -464,4 +463,5 @@ if ( 'simple' == $f_view_type ) {
 </table>
 </form>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php 
+	html_page_bottom( __FILE__ );

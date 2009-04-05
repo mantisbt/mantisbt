@@ -59,9 +59,7 @@
 	# Determine which view page to redirect back to.
 	$t_redirect_url = string_get_bug_view_url( $f_bug_id );
 
-	html_page_top1();
-	html_meta_redirect( $t_redirect_url );
-	html_page_top2();
+	html_page_top( null, $t_redirect_url );
 ?>
 <br />
 <div align="center">
@@ -71,4 +69,4 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php html_page_bottom( __FILE__ ) ?>
