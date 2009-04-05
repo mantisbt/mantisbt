@@ -34,10 +34,11 @@ $data_category_arr = array();
 $data_count_arr = array();
 
 $t_project_id = helper_get_current_project();
+$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 # Grab the Projections/Releases
 $query = "SELECT DISTINCT projection
-		FROM mantis_bug_table
+		FROM $t_bug_table
 		WHERE project_id=" . db_param() . "
 		ORDER BY projection";
 $result = db_query_bound( $query, Array( $t_project_id ) );
@@ -53,11 +54,12 @@ for( $i = 0;$i < $projection_count;$i++ ) {
 $open_count_arr = array();
 $resolved_count_arr = array();
 $closed_count_arr = array();
-foreach( $projection_arr as $t_projection ) {
+$t_bug_table = db_get_table( 'mantis_bug_table' );
 
+foreach( $projection_arr as $t_projection ) {	
 	# OPEN
 	$query = "SELECT COUNT(*) as count
-			FROM mantis_bug_table
+			FROM $t_bug_table
 			WHERE project_id='$t_project_id' AND
 				projection='$t_projection' AND
 				status<80";
@@ -66,7 +68,7 @@ foreach( $projection_arr as $t_projection ) {
 
 	# RESOLVED
 	$query = "SELECT COUNT(*) as count
-			FROM mantis_bug_table
+			FROM $t_bug_table
 			WHERE project_id='$t_project_id' AND
 				projection='$t_projection' AND
 				status=80";
@@ -75,7 +77,7 @@ foreach( $projection_arr as $t_projection ) {
 
 	# CLOSED
 	$query = "SELECT COUNT(*) as count
-			FROM mantis_bug_table
+			FROM $t_bug_table
 			WHERE project_id='$t_project_id' AND
 				projection='$t_projection' AND
 				status=90";

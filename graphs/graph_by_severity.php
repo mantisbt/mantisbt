@@ -36,8 +36,10 @@ $t_project_id = helper_get_current_project();
 
 $data_category_arr = array();
 $data_count_arr = array();
+$t_bug_table = db_get_table( 'mantis_bug_table' );
+
 $query = "SELECT severity, COUNT(severity) as count
-			FROM mantis_bug_table
+			FROM $t_bug_table
 			WHERE status<80 AND
 			      project_id=" . db_param() . "
 			GROUP BY severity

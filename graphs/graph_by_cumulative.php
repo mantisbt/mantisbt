@@ -46,11 +46,12 @@ function tmpcmp( $a, $b ) {
 # get total bugs before a date
 function get_total_count_by_date( $p_date ) {
 	$t_project_id = helper_get_current_project();
+	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 	$d_arr = explode( '/', $p_date );
 	$p_date = $d_arr[2] . '-' . $d_arr[0] . '-' . $d_arr[1];
 	$query = "SELECT COUNT(*)
-			FROM mantis_bug_table
+			FROM $t_bug_table
 			WHERE date_submitted<='$p_date' AND
 				project_id='$t_project_id'";
 	$result = db_query( $query );
@@ -60,11 +61,12 @@ function get_total_count_by_date( $p_date ) {
 # get resolved bugs before a date
 function get_resolved_count_by_date( $p_date ) {
 	$t_project_id = helper_get_current_project();
+	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 	$d_arr = explode( '/', $p_date );
 	$p_date = $d_arr[2] . '-' . $d_arr[0] . '-' . $d_arr[1];
 	$query = "SELECT COUNT(*)
-			FROM mantis_bug_table
+			FROM $t_bug_table
 			WHERE last_updated<='$p_date' AND
 				status='80' AND
 				project_id='$t_project_id'";
@@ -75,11 +77,12 @@ function get_resolved_count_by_date( $p_date ) {
 # get closed bugs before a date
 function get_closed_count_by_date( $p_date ) {
 	$t_project_id = helper_get_current_project();
+	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 	$d_arr = explode( '/', $p_date );
 	$p_date = $d_arr[2] . '-' . $d_arr[0] . '-' . $d_arr[1];
 	$query = "SELECT COUNT(*)
-			FROM mantis_bug_table
+			FROM $t_bug_table
 			WHERE last_updated<='$p_date' AND
 				status='90' AND
 				project_id='$t_project_id'";
@@ -91,7 +94,7 @@ function get_closed_count_by_date( $p_date ) {
 $t_project_id = helper_get_current_project();
 
 $query = "SELECT status, date_submitted, last_updated
-		FROM mantis_bug_table
+		FROM $t_bug_table
 		WHERE project_id=" . db_param() . " AND
 				date_submitted>=" . db_param() . "
 		ORDER BY date_submitted ASC";

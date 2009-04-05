@@ -74,13 +74,14 @@ $duplicate_count_arr[2] = 0;
 
 $severity_arr = explode( ',', $g_severity_enum_string );
 $severity_count = count( $severity_arr );
+$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 # GET OPEN
 for( $i = 0;$i < $severity_count;$i++ ) {
 	$t_severity_arr = explode( ':', $severity_arr[$i] );
 	$t_severity = $t_severity_arr[0];
 	$query = "SELECT COUNT(*) as count
-			FROM mantis_bug_table
+			FROM $t_bug_table
 			WHERE project_id=" . db_param() . " AND
 					status<80 AND
 					severity=" . db_param();
@@ -113,7 +114,7 @@ for( $i = 0;$i < $severity_count;$i++ ) {
 	$t_severity_arr = explode( ':', $severity_arr[$i] );
 	$t_severity = $t_severity_arr[0];
 	$query = "SELECT COUNT(*) as count
-			FROM mantis_bug_table
+			FROM $t_bug_table
 			WHERE project_id=" . db_param() . " AND
 					status=80 AND
 					severity=" . db_param();
@@ -147,7 +148,7 @@ for( $i = 0;$i < $severity_count;$i++ ) {
 	$t_severity_arr = explode( ':', $severity_arr[$i] );
 	$t_severity = $t_severity_arr[0];
 	$query = "SELECT COUNT(*) as count
-			FROM mantis_bug_table
+			FROM $t_bug_table
 			WHERE project_id=" . db_param() . " AND
 					status=90 AND
 					severity=" . db_param();
