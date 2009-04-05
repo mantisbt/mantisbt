@@ -38,31 +38,8 @@
 
 	$t_user_id = auth_get_current_user_id();
 
-	# @@@ giallu: this block of code is duplicated from helper_project_specific_where
-	# the only diff is the commented line below: can we do better than this ?
-	if ( ALL_PROJECTS == $f_project_id ) {
-		$t_topprojects = $t_project_ids = user_get_accessible_projects( $t_user_id );
-		foreach ( $t_topprojects as $t_project ) {
-			$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $t_user_id, $t_project ) );
-		}
-
-		$t_project_ids = array_unique( $t_project_ids );
-	} else {
-		# access_ensure_project_level( VIEWER, $p_project_id );
-		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $f_project_id );
-		array_unshift( $t_project_ids, $f_project_id );
-	}
-
-	$t_project_ids = array_map( 'db_prepare_int', $t_project_ids );
-
-	if ( 0 == count( $t_project_ids ) ) {
-		$specific_where = ' 1 <> 1';
-	} elseif ( 1 == count( $t_project_ids ) ) {
-		$specific_where = ' project_id=' . $t_project_ids[0];
-	} else {
-		$specific_where = ' project_id IN (' . join( ',', $t_project_ids ) . ')';
-	}
-	# end @@@ block
+	$t_project_ids = user_get_all_accessible_projects( $t_user_id, $f_project_id);
+	$specific_where = helper_project_specific_where( $f_project_id, $t_user_id);
 
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_history_table = db_get_table( 'mantis_bug_history_table' );

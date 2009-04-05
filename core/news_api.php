@@ -196,13 +196,11 @@ function news_get_rows( $p_project_id, $p_sitewide = true ) {
 	$t_news_table = db_get_table( 'mantis_news_table' );
 
 	$t_projects = current_user_get_all_accessible_subprojects( $p_project_id );
-	$t_projects[] = $p_project_id;
+	$t_projects[] = (int)$p_project_id;
 
 	if( $p_sitewide && ALL_PROJECTS != $p_project_id ) {
 		$t_projects[] = ALL_PROJECTS;
 	}
-
-	$t_projects = array_map( 'db_prepare_int', $t_projects );
 
 	$query = "SELECT *
 				  FROM $t_news_table";
@@ -254,12 +252,10 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 	$c_offset = db_prepare_int( $p_offset );
 
 	$t_projects = current_user_get_all_accessible_subprojects( $p_project_id );
-	$t_projects[] = $p_project_id;
+	$t_projects[] = (int)$p_project_id;
 	if( ALL_PROJECTS != $p_project_id ) {
 		$t_projects[] = ALL_PROJECTS;
 	}
-
-	$t_projects = array_map( 'db_prepare_int', $t_projects );
 
 	$t_news_table = db_get_table( 'mantis_news_table' );
 	$t_news_view_limit = config_get( 'news_view_limit' );

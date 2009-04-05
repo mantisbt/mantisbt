@@ -29,7 +29,7 @@ require_once( $g_absolute_path . 'config_filter_defaults_inc.php' );
 
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 	printf( '<tr %s>', helper_alternate_class() );
-	printf( '<td width="50%%">%s</td>', string_display( $p_label ) );
+	printf( '<td width="50%%">%s</td>', string_display_line( $p_label ) );
 	printf( '<td width="12%%" class="right">%s</td>', $p_open );
 	printf( '<td width="12%%" class="right">%s</td>', $p_resolved );
 	printf( '<td width="12%%" class="right">%s</td>', $p_closed );
@@ -745,11 +745,13 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
 
 		summary_helper_print_row( $t_name, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+		
+		if ( count( project_hierarchy_get_subprojects ( $t_project ) ) > 0 ) {
+			$t_subprojects = current_user_get_accessible_subprojects( $t_project );
 
-		$t_subprojects = current_user_get_accessible_subprojects( $t_project );
-
-		if( count( $t_subprojects ) > 0 ) {
-			summary_print_by_project( $t_subprojects, $p_level + 1, $p_cache );
+			if( count( $t_subprojects ) > 0 ) {
+				summary_print_by_project( $t_subprojects, $p_level + 1, $p_cache );
+			}
 		}
 	}
 }

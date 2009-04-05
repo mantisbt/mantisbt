@@ -880,7 +880,7 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 		for( $i = 0;$i < $row_count;$i++ ) {
 			$row = db_fetch_array( $result );
 
-			$t_projects[$row['id']] = ( $row['parent_id'] === NULL ) ? 0 : $row['parent_id'];
+			$t_projects[(int)$row['id']] = ( $row['parent_id'] === NULL ) ? 0 : (int)$row['parent_id'];
 		}
 
 		# prune out children where the parents are already listed. Make the list
@@ -962,34 +962,34 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 	for( $i = 0;$i < $row_count;$i++ ) {
 		$row = db_fetch_array( $result );
 
-		if( !isset( $t_projects[$row['parent_id']] ) ) {
-			$t_projects[$row['parent_id']] = array();
+		if( !isset( $t_projects[(int)$row['parent_id']] ) ) {
+			$t_projects[(int)$row['parent_id']] = array();
 		}
 
-		array_push( $t_projects[$row['parent_id']], $row['id'] );
+		array_push( $t_projects[(int)$row['parent_id']], (int)$row['id'] );
 	}
 
 	if( auth_get_current_user_id() == $p_user_id ) {
 		$g_user_accessible_subprojects_cache = $t_projects;
 	}
-
-	if( !isset( $t_projects[$p_project_id] ) ) {
-		$t_projects[$p_project_id] = array();
+	
+	if( !isset( $t_projects[(int)$p_project_id] ) ) {
+		$t_projects[(int)$p_project_id] = array();
 	}
 
-	return $t_projects[$p_project_id];
+	return $t_projects[(int)$p_project_id];
 }
 
 # --------------------
 function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 	/** @todo (thraxisp) Should all top level projects be a sub-project of ALL_PROJECTS implicitly?
 	 *  affects how news and some summaries are generated
-	 */
+	 */	
 	$t_todo = user_get_accessible_subprojects( $p_user_id, $p_project_id );
 	$t_subprojects = Array();
 
 	while( $t_todo ) {
-		$t_elem = array_shift( $t_todo );
+		$t_elem = (int)array_shift( $t_todo );
 		if( !in_array( $t_elem, $t_subprojects ) ) {
 			array_push( $t_subprojects, $t_elem );
 			$t_todo = array_merge( $t_todo, user_get_accessible_subprojects( $p_user_id, $t_elem ) );
@@ -998,6 +998,24 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 
 	return $t_subprojects;
 }
+
+function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
+	if( ALL_PROJECTS == $p_project_id ) {
+		$t_topprojects = $t_project_ids = user_get_accessible_projects( $p_user_id );
+		foreach( $t_topprojects as $t_project ) {
+			$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $p_user_id, $t_project ) );
+		}
+
+		$t_project_ids = array_unique( $t_project_ids );
+	} else {
+		access_ensure_project_level( VIEWER, $p_project_id );
+		$t_project_ids = user_get_all_accessible_subprojects( $p_user_id, $p_project_id );
+		array_unshift( $t_project_ids, $p_project_id );
+	}
+	
+	return $t_project_ids;
+}
+		
 
 # --------------------
 # return the number of open assigned bugs to a user in a project

@@ -128,8 +128,10 @@
 
 	$t_project_index = 0;
 
+	version_cache_array_rows( $t_project_ids );
+	category_cache_array_rows_by_project( $t_project_ids );
+
 	foreach( $t_project_ids as $t_project_id ) {
-		$c_project_id   = db_prepare_int( $t_project_id );
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 		$t_can_view_private = access_has_project_level( config_get( 'private_bug_threshold' ), $t_project_id );
 
@@ -175,7 +177,7 @@
 
 			$t_first_entry = true;
 
-			$t_result = db_query_bound( $query, Array( $c_project_id, $c_version ) );
+			$t_result = db_query_bound( $query, Array( $t_project_id, $c_version ) );
 
 			$t_issue_ids = array();
 			$t_issue_parents = array();

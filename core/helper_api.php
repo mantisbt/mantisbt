@@ -294,20 +294,7 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 		$p_user_id = auth_get_current_user_id();
 	}
 
-	if( ALL_PROJECTS == $p_project_id ) {
-		$t_topprojects = $t_project_ids = user_get_accessible_projects( $p_user_id );
-		foreach( $t_topprojects as $t_project ) {
-			$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $p_user_id, $t_project ) );
-		}
-
-		$t_project_ids = array_unique( $t_project_ids );
-	} else {
-		access_ensure_project_level( VIEWER, $p_project_id );
-		$t_project_ids = user_get_all_accessible_subprojects( $p_user_id, $p_project_id );
-		array_unshift( $t_project_ids, $p_project_id );
-	}
-
-	$t_project_ids = array_map( 'db_prepare_int', $t_project_ids );
+	$t_project_ids = user_get_all_accessible_projects( $p_user_id, $p_project_id );
 
 	if( 0 == count( $t_project_ids ) ) {
 		$t_project_filter = ' 1<>1';

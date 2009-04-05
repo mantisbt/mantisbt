@@ -210,6 +210,22 @@ function db_is_pgsql() {
 }
 
 /**
+ * Checks if the database driver is MS SQL
+ * @return bool true if postgres
+ */
+function db_is_mssql() {
+	$t_db_type = config_get_global( 'db_type' );
+
+	switch( $t_db_type ) {
+		case 'mssql':
+		case 'odbc_mssql':
+			return true;
+	}
+
+	return false;
+}
+
+/**
  * Checks if the database driver is DB2
  * @return bool true if db2
  */
@@ -435,10 +451,17 @@ function db_fetch_array( &$p_result ) {
 		static $t_array_fields;
 		
 		if ($t_array_result != $p_result) {
+			// new query 
 			$t_array_result = $p_result;
 			$t_array_fields = null;
+		} else {
+			if ( $t_array_fields === null ) {
+				$p_result->MoveNext();
+				return $t_row;
+			}
 		}
-
+					
+		$t_convert = false;
 		$t_fieldcount = $p_result->FieldCount();
 		for( $i = 0; $i < $t_fieldcount; $i++ ) {
 			if (isset( $t_array_fields[$i] ) ) {
@@ -457,10 +480,15 @@ function db_fetch_array( &$p_result ) {
 							$t_row[$t_field->name] = true;
 							break;
 					}
+					$t_convert= true;
 					break;
 				default :
 					break;
 			}
+		}
+		
+		if ( $t_convert == false ) {
+			$t_array_fields = null;
 		}
 		$p_result->MoveNext();
 		return $t_row;
