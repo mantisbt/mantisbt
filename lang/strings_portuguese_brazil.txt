@@ -662,6 +662,7 @@ $s_access_change = 'Nível de Acesso Mínimo para Alterar para este Status';
 $s_desc_bug_submit_status = 'Status para o qual um novo caso é ajustado';
 $s_desc_bug_reopen_status = 'Status para o qual casos reabertos são ajustados';
 $s_desc_bug_resolved_status_threshold = 'Status o qual um caso é considerado resolvido';
+$s_desc_bug_closed_status_threshold = 'Estado em que um caso é considerado fechado.';
 $s_workflow_change_access = 'Quem pode alterar o fluxo de trabalho';
 $s_access_change_access = 'Quem pode alterar os níveis de acesso';
 $s_default_not_in_flow = 'O status padrão de %1$s não está selecionado nos próximos status de %2$s. Este será ignorado';

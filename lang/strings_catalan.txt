@@ -659,6 +659,7 @@ $s_access_change = 'Nivell mínim d\'accés per canviar a aquest estat';
 $s_desc_bug_submit_status = 'Estat en el que s\'estableix una comanda nova';
 $s_desc_bug_reopen_status = 'Estat en el que s\'estableix comandes reobertes';
 $s_desc_bug_resolved_status_threshold = 'Estat en el que una comanda es considera resolta';
+$s_desc_bug_closed_status_threshold = 'Estat en el que una comanda es considera tancada';
 $s_workflow_change_access = 'Qui pot canviar els fluxos de treball';
 $s_access_change_access = 'Qui pot canviar els nivells d\'accés';
 $s_default_not_in_flow = 'L\'estat per defecte %1$s no està seleccionat en els següents estats per %2$s. Serà ignorat';

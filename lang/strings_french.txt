@@ -672,6 +672,7 @@ $s_access_change = 'Niveau d\'accès minimal pour modifier cette phase';
 $s_desc_bug_submit_status = 'Phase pour un nouveau bogue';
 $s_desc_bug_reopen_status = 'Phase pour les bogues rouverts';
 $s_desc_bug_resolved_status_threshold = 'Phase à laquelle un bogue est considéré comme résolu';
+$s_desc_bug_closed_status_threshold = 'Statuts pour lesquels un bug est considéré comme fermé';
 $s_workflow_change_access = 'Modifier les utilisateurs qui peuvent faire des modifications au cheminement de travail à';
 $s_access_change_access = 'Modifier les utilisateurs qui peuvent faire des modifications aux niveaux d\'accès';
 $s_default_not_in_flow = 'La phase par défaut de %1$s n\'est pas définie pour %2$s dans les phases suivantes. Elle sera ignorée.';

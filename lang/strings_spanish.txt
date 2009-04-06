@@ -665,6 +665,7 @@ $s_access_change = 'Nivel de Acceso Mínimo para cambiar a ese Estado';
 $s_desc_bug_submit_status = 'Estado en el que se establece una Nueva Incidencia';
 $s_desc_bug_reopen_status = 'Estado en el que se establecen Incidencias Reabiertas';
 $s_desc_bug_resolved_status_threshold = 'Estado en el que una Incidencia se considera resuelta';
+$s_desc_bug_closed_status_threshold = 'Status donde un asunto es considerado cerrado';
 $s_workflow_change_access = 'Quien puede cambiar el flujo de trabajo';
 $s_access_change_access = 'Quien puede cambiar los niveles de acceso';
 $s_default_not_in_flow = 'El Estado por defecto de %1$s no está seleccionado en los siguientes Estados para %2$s. Será ignorado';

@@ -23,6 +23,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Crazymadlover
  * @author Luís Martins, lmar@ualg.pt
  * @author Malafaya
  * @author Rui Alexandre Coelho, rac@iosoft.pt

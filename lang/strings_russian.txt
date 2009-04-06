@@ -32,6 +32,7 @@
  * @author Mikhail Oleynik (MiTo Team), m.oleynik@gmail.com
  * @author Oleg Gashev gashev@zahav.net.il
  * @author Yuri Volokhov <volohovy@niiri.kharkov.com>
+ * @author Александр Сигачёв
  */
 
 $s_charset = 'utf-8';
@@ -952,11 +953,11 @@ $s_query_deleted = 'Фильтр удален';
 $s_save_query = 'Сохранить текущий фильтр';
 $s_reset_query = 'очистить фильтр';
 $s_query_name = 'Название фильтра';
-$s_query_exists = 'Такой фильтр уже существует.';
-$s_query_dupe_name = 'Так уже назван другой фильтр. Выберите другое название.';
+$s_query_exists = 'Подобный фильтр, по видимому, уже существует.';
+$s_query_dupe_name = 'Другому фильтру уже присвоено это название. Пожалуйста, выберите другое название для этого фильтра.';
 $s_query_blank_name = 'Фильтры нельзя сохранять без названия. Перед сохранением назовите фильтр.';
 $s_query_name_too_long = 'Вы не можете сохранить фильтр с именем больше 64 символов. Пожалуйста задайте покороче имя фильтра.';
-$s_query_store_error = 'Ошибка при сохранениии фильтра.';
+$s_query_store_error = 'При сохранении этого фильтра произошла ошибка.';
 $s_open_queries = 'Управление фильтрами';
 $s_query_delete_msg = 'Вы уверены, что хотите удалить этот фильтр?';
 $s_view_simple_link = 'Простой вид';
