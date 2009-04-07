@@ -61,6 +61,7 @@ require_once( $t_core_dir . 'tag_api.php' );
  * requires relationship_api
  */
 require_once( $t_core_dir . 'relationship_api.php' );
+require_once( $t_core_dir . 'bug_revision_api.php' );
 
 /**
  * Bug Data Structure Definition
@@ -883,6 +884,9 @@ function bug_delete( $p_bug_id ) {
 	# Delete the bug history
 	history_delete( $p_bug_id );
 
+	# Delete bug info revisions
+	bug_revision_delete( $p_bug_id );
+
 	# Delete the bugnote text
 	$t_bug_text_id = bug_get_field( $p_bug_id, 'bug_text_id' );
 
@@ -1100,14 +1104,31 @@ function bug_update( $p_bug_id, $p_bug_data, $p_update_extended = false, $p_bypa
 
 		bug_text_clear_cache( $p_bug_id );
 
+		$t_current_user = auth_get_current_user_id();
+
+		if ( bug_revision_count( $p_bug_id, REV_DESCRIPTION ) < 1 ) {
+			$t_revision_id = bug_revision_add( $p_bug_id, $t_current_user, REV_DESCRIPTION, $t_old_data->description, 0, $t_old_data->last_updated );
+		}
+
+		if ( bug_revision_count( $p_bug_id, REV_STEPS_TO_REPRODUCE ) < 1 ) {
+			$t_revision_id = bug_revision_add( $p_bug_id, $t_current_user, REV_STEPS_TO_REPRODUCE, $t_old_data->steps_to_reproduce, 0, $t_old_data->last_updated );
+		}
+
+		if ( bug_revision_count( $p_bug_id, REV_ADDITIONAL_INFO ) < 1 ) {
+			$t_revision_id = bug_revision_add( $p_bug_id, $t_current_user, REV_ADDITIONAL_INFO, $t_old_data->additional_information, 0, $t_old_data->last_updated );
+		}
+
 		if( $t_old_data->description != $p_bug_data->description ) {
-			history_log_event_special( $p_bug_id, DESCRIPTION_UPDATED );
+			$t_revision_id = bug_revision_add( $p_bug_id, $t_current_user, REV_DESCRIPTION, $c_bug_data->description );
+			history_log_event_special( $p_bug_id, DESCRIPTION_UPDATED, $t_revision_id );
 		}
 		if( $t_old_data->steps_to_reproduce != $p_bug_data->steps_to_reproduce ) {
-			history_log_event_special( $p_bug_id, STEP_TO_REPRODUCE_UPDATED );
+			$t_revision_id = bug_revision_add( $p_bug_id, $t_current_user, REV_STEPS_TO_REPRODUCE, $c_bug_data->steps_to_reproduce );
+			history_log_event_special( $p_bug_id, STEP_TO_REPRODUCE_UPDATED, $t_revision_id );
 		}
 		if( $t_old_data->additional_information != $p_bug_data->additional_information ) {
-			history_log_event_special( $p_bug_id, ADDITIONAL_INFO_UPDATED );
+			$t_revision_id = bug_revision_add( $p_bug_id, $t_current_user, REV_ADDITIONAL_INFO, $c_bug_data->additional_information );
+			history_log_event_special( $p_bug_id, ADDITIONAL_INFO_UPDATED, $t_revision_id );
 		}
 	}
 

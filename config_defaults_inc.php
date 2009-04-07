@@ -1944,6 +1944,12 @@
 	$g_bug_reminder_threshold		= DEVELOPER;
 
 	/**
+	 * Access lever required to drop bug history revisions
+	 * @global int $g_bug_revision_drop_threshold
+	 */
+	$g_bug_revision_drop_threshold = MANAGER;
+
+	/**
 	 * access level needed to upload files to the project documentation section
 	 * You can set this to NOBODY to prevent uploads to projects
 	 * See also: $g_upload_bug_file_threshold, $g_allow_file_upload
@@ -2557,6 +2563,7 @@
 	$g_db_table['mantis_bug_history_table']				= '%db_table_prefix%_bug_history%db_table_suffix%';
 	$g_db_table['mantis_bug_monitor_table']				= '%db_table_prefix%_bug_monitor%db_table_suffix%';
 	$g_db_table['mantis_bug_relationship_table']		= '%db_table_prefix%_bug_relationship%db_table_suffix%';
+	$g_db_table['mantis_bug_revision_table']			= '%db_table_prefix%_bug_revision%db_table_suffix%';
 	$g_db_table['mantis_bug_table']						= '%db_table_prefix%_bug%db_table_suffix%';
 	$g_db_table['mantis_bug_tag_table']					= '%db_table_prefix%_bug_tag%db_table_suffix%';
 	$g_db_table['mantis_bug_text_table']				= '%db_table_prefix%_bug_text%db_table_suffix%';

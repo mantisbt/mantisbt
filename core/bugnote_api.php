@@ -186,7 +186,8 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	bug_update_date( $p_bug_id );
 
 	# log new bug
-	history_log_event_special( $p_bug_id, BUGNOTE_ADDED, bugnote_format_id( $t_bugnote_id ) );
+	$t_revision_id = bug_revision_add( $c_bug_id, $c_user_id, REV_BUGNOTE, $p_bugnote_text, $t_bugnote_id );
+	history_log_event_special( $p_bug_id, BUGNOTE_ADDED, bugnote_format_id( $t_bugnote_id ), $t_revision_id );
 
 	# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
 	if( TRUE == $p_send_email && !is_blank( $p_bugnote_text ) ) {
@@ -503,8 +504,19 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 	# updated the last_updated date
 	bugnote_date_update( $p_bugnote_id );
 
+	# insert an 'original' revision if needed
+	if ( bug_revision_count( $t_bug_id, REV_BUGNOTE, $p_bugnote_id ) < 1 ) {
+		$t_user_id = bugnote_get_field( $p_bugnote_id, 'reporter_id' );
+		$t_old_text = bugnote_get_text( $p_bugnote_id );
+		bug_revision_add( $t_bug_id, $t_user_id, REV_BUGNOTE, $t_old_text, $p_bugnote_id );
+	}
+
+	# insert a new revision
+	$t_user_id = auth_get_current_user_id();
+	$t_revision_id = bug_revision_add( $t_bug_id, $t_user_id, REV_BUGNOTE, $p_bugnote_text, $p_bugnote_id );
+
 	# log new bugnote
-	history_log_event_special( $t_bug_id, BUGNOTE_UPDATED, bugnote_format_id( $p_bugnote_id ) );
+	history_log_event_special( $t_bug_id, BUGNOTE_UPDATED, bugnote_format_id( $p_bugnote_id ), $t_revision_id );
 
 	return true;
 }

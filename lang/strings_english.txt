@@ -252,6 +252,7 @@ $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path. Directory 
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'You cannot set an issue as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Bug revision not found.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
@@ -643,6 +644,15 @@ $s_profile = 'Profile';
 # bug_update_page.php
 $s_update_advanced_link = 'Update Advanced';
 $s_updating_bug_simple_title = 'Updating Issue Information';
+
+# bug_view*
+$s_view_revisions = 'View Revisions';
+$s_revision = 'Revision';
+$s_revision_by = '%s by %s';
+$s_revision_drop = 'Drop';
+$s_all_revisions = 'All Revisions';
+$s_back_to_issue = 'Back to Issue';
+$s_confirm_revision_drop = 'Are you sure you want to drop this bug revision?';
 
 # bug_vote_add.php
 $s_vote_added_msg = 'Vote has been added...';
