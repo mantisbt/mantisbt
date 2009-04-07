@@ -36,9 +36,9 @@
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 	require_once( $t_core_path.'date_api.php' );
-?>
-<?php auth_ensure_user_authenticated() ?>
-<?php
+
+	auth_ensure_user_authenticated();
+
 	$f_type_page	= gpc_get_string( 'type_page', 'word' );
 	$f_search		= gpc_get_string( 'search', false ); /** @todo need a better default */
 	$f_offset		= gpc_get_int( 'offset', 0 );
@@ -72,10 +72,8 @@
 
 	$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 	$t_row_count = count( $result );
-
 ?>
 
-<?php # Word Export ?>
 <html xmlns:o="urn:schemas-microsoft-com:office:office"
 xmlns:w="urn:schemas-microsoft-com:office:word"
 xmlns="http://www.w3.org/TR/REC-html40">
@@ -426,8 +424,6 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 
 	$t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t_user_bugnote_limit );
 ?>
-
-<?php # Bugnotes BEGIN ?>
 <br />
 <table class="width100" cellspacing="1">
 <?php

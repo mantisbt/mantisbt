@@ -501,7 +501,7 @@
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php if($t_def['require_report']) {?><span class="required">*</span><?php } ?><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
+		<?php if($t_def['require_report']) {?><span class="required">*</span><?php } echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
 	</td>
 	<td>
 		<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>

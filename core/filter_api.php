@@ -3703,10 +3703,9 @@ function print_filter_note_user_id() {
 			check_selected( $t_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_MYSELF );
 			echo '>[' . lang_get( 'myself' ) . ']</option>';
 		}
-		?>
-            <?php print_assign_to_option_list( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] )?>
-            <?php
-	}?>
+
+		print_assign_to_option_list( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] );
+	}
         </select>
         <?php
 }

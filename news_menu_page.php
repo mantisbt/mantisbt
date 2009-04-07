@@ -30,7 +30,6 @@
 	html_page_top( lang_get( 'edit_news_link' ) );
 ?>
 
-<?php # Add News Form BEGIN ?>
 <br />
 <div align="center">
 <form method="post" action="news_add.php">
@@ -87,10 +86,10 @@
 </table>
 </form>
 </div>
-<?php # Add News Form END ?>
-
-<?php # Edit/Delete News Form BEGIN
- if ( news_get_count( helper_get_current_project(), access_has_global_level( ADMINISTRATOR ) ) > 0 ) {
+<?php 
+	# Add News Form END
+	# Edit/Delete News Form BEGIN
+	if ( news_get_count( helper_get_current_project(), access_has_global_level( ADMINISTRATOR ) ) > 0 ) {
 ?>
 <br />
 <div align="center">
@@ -126,7 +125,7 @@
 </table>
 </form>
 </div>
-<?php } # Edit/Delete News Form END ?>
+<?php 
+	} # Edit/Delete News Form END 
 
-<?php
 	html_page_bottom( __FILE__ );

@@ -29,8 +29,7 @@
 
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'string_api.php' );
-?>
-<?php
+
 	$f_news_id = gpc_get_int( 'news_id' );
 	$f_action = gpc_get_string( 'action', '' );
 
@@ -66,9 +65,9 @@
    	$v_body 	= string_textarea( $v_body );
 
 	html_page_top( lang_get( 'edit_news_title' ) );
-?>
 
-<?php # Edit News Form BEGIN ?>
+	# Edit News Form BEGIN
+?>
 <br />
 <div align="center">
 <form method="post" action="news_update.php">
@@ -145,7 +144,7 @@
 </table>
 </form>
 </div>
-<?php # Edit News Form END ?>
-
 <?php
+	# Edit News Form END
+
 	html_page_bottom( __FILE__ );

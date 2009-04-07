@@ -366,7 +366,7 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, false ) );
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php if ( $t_def['require_update'] ) {?><span class="required">*</span><?php } ?><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
+		<?php if ( $t_def['require_update'] ) {?><span class="required">*</span><?php } echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
 	</td>
 	<td colspan="5">
 		<?php

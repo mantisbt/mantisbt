@@ -75,9 +75,11 @@
 <tr class="spacer">
 <td></td>
 </tr>
-<?php } ?>
+<?php
+}
 
-<?php event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) ) ?>
+event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) ) 
+?>
 
 </table>
 

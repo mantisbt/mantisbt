@@ -61,9 +61,9 @@
 	} else {
 		$t_user_id = auth_get_current_user_id();
 	}
-?>
 
-<?php # Add Profile Form BEGIN ?>
+	# Add Profile Form BEGIN
+?>
 <br />
 <div align="center">
 <form method="post" action="account_prof_update.php">
@@ -126,10 +126,10 @@
 </table>
 </form>
 </div>
-<?php # Add Profile Form END ?>
+<?php 
+	# Add Profile Form END
+	# Edit or Delete Profile Form BEGIN
 
-<?php # Edit or Delete Profile Form BEGIN ?>
-<?php
 	$t_profiles = profile_get_all_for_user( $t_user_id );
 	if( $t_profiles ) {
 ?>
@@ -174,8 +174,7 @@
 </table>
 </form>
 </div>
-<?php } ?>
-<?php # Edit or Delete Profile Form END ?>
+<?php 
+} # Edit or Delete Profile Form END
 
-<?php
-	html_page_bottom( __FILE__ );
+html_page_bottom( __FILE__ );

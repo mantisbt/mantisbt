@@ -58,8 +58,6 @@
 	auth_ensure_user_authenticated();
 
 	current_user_ensure_unprotected();
-?>
-<?php
 
 	# extracts the user information for the currently logged in user
 	# and prefixes it with u_
@@ -94,8 +92,9 @@
 <?php } ?>
 <div align="center">
 <form method="post" action="account_update.php">
-<?php  echo form_security_field( 'account_update' )?>
-<?php if ( isset( $g_session_pass_id ) ) { ?>
+<?php
+	echo form_security_field( 'account_update' );
+	if ( isset( $g_session_pass_id ) ) { ?>
 <input type="hidden" name="session_id" value="<?php echo session_id() ?>"/>
 <?php } ?>
 <table class="width75" cellspacing="1">
@@ -147,8 +146,10 @@
 	<!-- Password -->
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
-			<?php echo lang_get( 'password' ) ?>
-			<?php if ( $t_force_pw_reset ) { ?>
+			<?php 
+				echo lang_get( 'password' );
+				if ( $t_force_pw_reset ) { 
+			?>
 			<span class="required">*</span>
 			<?php } ?>
 		</td>
@@ -160,8 +161,10 @@
 	<!-- Password confirmation -->
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
-			<?php echo lang_get( 'confirm_password' ) ?>
-			<?php if ( $t_force_pw_reset ) { ?>
+			<?php 
+				echo lang_get( 'confirm_password' );
+				if ( $t_force_pw_reset ) { 
+			?>
 			<span class="required">*</span>
 			<?php } ?>
 		</td>
@@ -170,9 +173,10 @@
 		</td>
 	</tr>
 
-<?php } ?> <!-- End LDAP conditional -->
+<?php
+} <!-- End LDAP conditional -->
 
-<?php if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email-->
+if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email-->
 
 	<!-- Email -->
 	<tr <?php echo helper_alternate_class() ?>>

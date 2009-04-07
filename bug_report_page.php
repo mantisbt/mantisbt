@@ -162,7 +162,10 @@
 <!-- Reproducibility -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'reproducibility' ) ?> <?php print_documentation_link( 'reproducibility' ) ?>
+		<?php 
+			echo lang_get( 'reproducibility' );
+			print_documentation_link( 'reproducibility' );
+		?>
 	</td>
 	<td>
 		<select <?php echo helper_get_tab_index() ?> name="reproducibility">
@@ -175,7 +178,10 @@
 <!-- Severity -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'severity' ) ?> <?php print_documentation_link( 'severity' ) ?>
+		<?php 
+			echo lang_get( 'severity' );
+			print_documentation_link( 'severity' );
+		?>
 	</td>
 	<td>
 		<select <?php echo helper_get_tab_index() ?> name="severity">
@@ -189,7 +195,10 @@
 <?php if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'priority' ) ?> <?php print_documentation_link( 'priority' ) ?>
+		<?php 
+			echo lang_get( 'priority' );
+			print_documentation_link( 'priority' );
+		?>
 	</td>
 	<td>
 		<select <?php echo helper_get_tab_index() ?> name="priority">
@@ -238,7 +247,6 @@
 	<td colspan="2"></td>
 </tr>
 
-
 <!-- Summary -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -248,7 +256,6 @@
 		<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo $f_summary ?>" />
 	</td>
 </tr>
-
 
 <!-- Description -->
 <tr <?php echo helper_alternate_class() ?>>
@@ -260,7 +267,6 @@
 	</td>
 </tr>
 
-
 <!-- Additional information -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -271,12 +277,10 @@
 	</td>
 </tr>
 
-
 <!-- spacer -->
 <tr class="spacer">
 	<td colspan="2"></td>
 </tr>
-
 
 <!-- Custom Fields -->
 <?php
@@ -291,8 +295,10 @@
 	<td class="category">
 		<?php if( $t_def['require_report'] ) { ?>
 			<span class="required">*</span>
-		<?php } ?>
-		<?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
+		<?php 
+			}
+			echo string_display( lang_get_defaulted( $t_def['name'] ) );
+		?>
 	</td>
 	<td>
 		<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>
@@ -318,8 +324,10 @@
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'upload_file' ) ?>
-		<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
+		<?php 
+			echo lang_get( 'upload_file' );
+			echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>';
+		?>
 	</td>
 	<td>
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
@@ -357,8 +365,10 @@
 		<?php echo lang_get( 'relationship_with_parent' ) ?>
 	</td>
 	<td>
-		<?php relationship_list_box( /* none */ -2, "rel_type", false, true ) ?>
-		<?php echo '<b>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</b>' ?>
+		<?php 
+			relationship_list_box( /* none */ -2, "rel_type", false, true );
+			echo '<b>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</b>';
+			?>
 	</td>
 </tr>
 <?php
@@ -368,7 +378,10 @@
 <!-- Report Stay (report more bugs) -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'report_stay' ) ?> <?php print_documentation_link( 'report_stay' ) ?>
+		<?php 
+			echo lang_get( 'report_stay' );
+			print_documentation_link( 'report_stay' );
+		?>
 	</td>
 	<td>
 		<label><input <?php echo helper_get_tab_index() ?> type="checkbox" id="report_stay" name="report_stay" <?php check_checked( $f_report_stay ) ?> /> <?php echo lang_get( 'check_report_more_bugs' ) ?></label>
@@ -398,7 +411,7 @@
 	window.document.report_bug_form.category_id.focus();
 -->
 </script>
-<?php } ?>
+<?php 
+} 
 
-<?php
-	html_page_bottom( __FILE__ );
+html_page_bottom( __FILE__ );

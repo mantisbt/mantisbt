@@ -368,9 +368,8 @@
 
 <?php
 if ( ON == config_get( 'filter_by_custom_fields' ) ) {
-?>
-	<?php # -- Custom Field Searching -- ?>
-	<?php
+
+	# -- Custom Field Searching --
 	if ( count( $t_accessible_custom_fields_ids ) > 0 ) {
 		$t_per_row = config_get( 'filter_custom_fields_per_row' );
 		$t_num_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );

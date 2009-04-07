@@ -103,8 +103,9 @@
 		<input type="checkbox" name="inherit_parent" checked="checked" />
 	</td>
 </tr>
-<?php } ?>
-<?php
+<?php 
+	} 
+
 	if ( config_get( 'allow_file_upload' ) ) {
 	?>
 		<tr class="row-2">

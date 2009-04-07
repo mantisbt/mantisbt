@@ -217,7 +217,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php if ( $t_require ) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
+		<?php if ( $t_require ) {?><span class="required">*</span><?php } echo lang_get_defaulted( $t_def['name'] ) ?>
 	</td>
 	<td>
 		<?php

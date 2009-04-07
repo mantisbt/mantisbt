@@ -181,13 +181,14 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <!-- Title -->
 <tr>
 	<td class="form-title" colspan="6">
-		<?php echo lang_get( 'subprojects' ) ?>
-                <?php
-	                # Check the user's global access level before allowing project creation
-	                if ( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
-	                        print_button( 'manage_proj_create_page.php?parent_id=' . $f_project_id, lang_get( 'create_new_subproject_link' ) );
-	                }
-                ?>
+		<?php 
+			echo lang_get( 'subprojects' );
+
+			# Check the user's global access level before allowing project creation
+			if ( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
+				print_button( 'manage_proj_create_page.php?parent_id=' . $f_project_id, lang_get( 'create_new_subproject_link' ) );
+			}
+		?>
 	</td>
 </tr>
 
@@ -622,9 +623,9 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	</div>
 <?php
 }
-?>
 
-<?php event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) ); ?>
+event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) ); 
+?>
 
 <!-- PROJECT VIEW STATUS -->
 <br />
@@ -680,8 +681,10 @@ if ( $t_can_manage_users ) {
 				</td>
 				<td>
 					<select name="access_level">
-						<?php # only access levels that are less than or equal current user access level for current project ?>
-						<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ), $f_project_id ) ?>
+						<?php
+							# only access levels that are less than or equal current user access level for current project
+							print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ), $f_project_id );
+						?>
 					</select>
 				</td>
 				<td>

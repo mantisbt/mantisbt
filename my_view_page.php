@@ -80,9 +80,7 @@
 		echo '</td>';
 		echo '</tr>';
 	}
-?>
 
-<?php
 	$t_number_of_boxes = count ( $t_boxes );
 	$t_boxes_position = config_get( 'my_view_boxes_fixed_position' );
 	$t_counter = 0;
@@ -162,9 +160,6 @@
 		}
 	}
 
-?>
-
-<?php
 	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 		echo '<tr>';
 		echo '<td colspan="2">';

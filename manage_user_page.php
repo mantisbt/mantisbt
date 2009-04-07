@@ -239,36 +239,52 @@
 </tr>
 <tr class="row-category">
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'username' ), 'username', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'username' ) ?>
+		<?php
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'username' ), 'username', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'username' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'realname' ), 'realname', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'realname' ) ?>
+		<?php
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'realname' ), 'realname', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'realname' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'email' ), 'email', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'email' ) ?>
+		<?php
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'email' ), 'email', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'email' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'access_level' ), 'access_level', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'access_level' ) ?>
+		<?php 
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'access_level' ), 'access_level', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'access_level' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'enabled' ), 'enabled', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'enabled' ) ?>
+		<?php
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'enabled' ), 'enabled', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'enabled' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', $t_lock_image, 'protected', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'protected' ) ?>
+		<?php 
+			print_manage_user_sort_link(  'manage_user_page.php', $t_lock_image, 'protected', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'protected' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'date_created' ), 'date_created', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'date_created' ) ?>
+		<?php 
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'date_created' ), 'date_created', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'date_created' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'last_visit' ), 'last_visit', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'last_visit' ) ?>
+		<?php 
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'last_visit' ), 'last_visit', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'last_visit' );
+		?>
 	</td>
 </tr>
 <?php
@@ -308,8 +324,9 @@
 </tr>
 <?php
 	}  # end for
+	
+	# -- Page number links -- 
 ?>
-<?php # -- Page number links -- ?>
 	<tr>
 		<td class="right" colspan="8">
 			<span class="small">

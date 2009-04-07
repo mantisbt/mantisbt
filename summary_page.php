@@ -105,9 +105,9 @@
 ?>
 
 <br />
-<?php print_summary_menu( 'summary_page.php' ) ?>
-
-<?php print_menu_graph() ?>
+<?php 
+	print_summary_menu( 'summary_page.php' );
+	print_menu_graph(); ?>
 <br />
 <table class="width100" cellspacing="1">
 <tr>
@@ -117,8 +117,8 @@
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<?php # PROJECT # ?>
-		<?php if ( 1 < count( $t_project_ids ) ) { ?>
+		<?php # PROJECT # 
+			if ( 1 < count( $t_project_ids ) ) { ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -132,7 +132,6 @@
 		<br />
 		<?php } ?>
 
-		<?php # STATUS # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -145,7 +144,6 @@
 
 		<br />
 
-		<?php # SEVERITY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -158,7 +156,6 @@
 
 		<br />
 
-		<?php # CATEGORY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -171,7 +168,6 @@
 
 		<br />
 
-		<?php # MISCELLANEOUS # ?>
 		<table class="width100">
 		<tr>
 			<td class="form-title" colspan="5">
@@ -218,7 +214,6 @@
 
 		<br />
 
-		<?php # DEVELOPER # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -233,7 +228,6 @@
 
 
 	<td width="50%">
-		<?php # DATE # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title"><?php echo lang_get( 'by_date' ); ?></td>
@@ -246,7 +240,6 @@
 
 		<br />
 
-		<?php # ACTIVITY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" width="86%"><?php echo lang_get( 'most_active' ); ?></td>
@@ -257,7 +250,6 @@
 
 		<br />
 
-		<?php # LONGEST OPEN # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" width="86%"><?php echo lang_get( 'longest_open' ); ?></td>
@@ -268,7 +260,6 @@
 
 		<br />
 
-		<?php # RESOLUTION # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -281,7 +272,6 @@
 
 		<br />
 
-		<?php # PRIORITY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -294,7 +284,6 @@
 
 		<br />
 
-		<?php # REPORTER # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -307,7 +296,6 @@
 
 		<br />
 
-		<?php # REPORTER EFFECTIVENESS # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -330,7 +318,6 @@
 
 <tr valign="top">
 	<td colspan="2">
-		<?php # REPORTER / RESOLUTION # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -353,7 +340,6 @@
 
 <tr valign="top">
 	<td colspan="2">
-		<?php # DEVELOPER / RESOLUTION # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
