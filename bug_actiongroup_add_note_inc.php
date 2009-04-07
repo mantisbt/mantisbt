@@ -106,4 +106,3 @@
 		bugnote_add ( $p_bug_id, $f_bugnote_text, '0:00', /* $p_private = */ $f_view_state != VS_PUBLIC  );
         return true;
     }
-?>

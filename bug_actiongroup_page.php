@@ -361,4 +361,3 @@ if( $t_bugnote ) {
 
 <?php
 	bug_group_action_print_bottom();
-?>

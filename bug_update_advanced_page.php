@@ -657,15 +657,12 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, true ) );
 	</td>
 </tr>
 
-
 </table>
 </form>
 
 <?php
 
-
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
 	html_page_bottom( __FILE__ );
 
 	last_visited_issue( $f_bug_id );
-?>

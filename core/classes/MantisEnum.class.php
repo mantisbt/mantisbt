@@ -206,4 +206,3 @@ class MantisEnum {
 		return '@' . $valueAsInteger . '@';
 	}
 }
-?>

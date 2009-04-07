@@ -76,4 +76,3 @@
 
 <?php
 	collapse_end( 'upload_form' );
-?>

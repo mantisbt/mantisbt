@@ -20,7 +20,7 @@
  * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
- 
+
 error_reporting( E_ALL );
 
 $g_skip_open_db = true;  # don't open the database in database_api.php
@@ -153,7 +153,7 @@ function check_zend_optimiser_version() {
 			if (!($t_version > ZEND_OPTIMIZER_VERSION) || ($t_version==ZEND_OPTIMIZER_VERSION && $t_subVersion>=ZEND_OPTIMIZER_SUBVERSION)) {
 				$t_pass = false;
 				$t_info = 'Fail - Installed Version: ' . $t_version . '.' . $t_subVersion . '.';
-			}	  
+			}
 		}
 	} else {
 		$t_info = 'Zend Optimiser not detected';

@@ -111,4 +111,3 @@
 	print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
 	echo '<br /></div>';
 	html_page_bottom( __FILE__ );
-?>

@@ -234,4 +234,3 @@
 	    array_unshift( $t_category, '' ); // add placeholder
 	    graph_bydate( $t_metrics, $t_category, lang_get( 'by_category' ), $f_width, $f_width * $t_ar );
     }
-?>

@@ -70,4 +70,3 @@
 	}
 
 	print_successful_redirect_to_bug( $f_bug_id );
-?>

@@ -51,4 +51,3 @@
 	file_delete( $f_file_id, 'bug' );
 
 	print_header_redirect_view( $t_bug_id );
-?>

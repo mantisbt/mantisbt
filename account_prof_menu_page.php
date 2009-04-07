@@ -177,4 +177,5 @@
 <?php } ?>
 <?php # Edit or Delete Profile Form END ?>
 
-<?php html_page_bottom( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

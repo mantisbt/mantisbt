@@ -145,4 +145,3 @@
 	echo get_section_end();
 
 	html_page_bottom( __FILE__ );
-?>

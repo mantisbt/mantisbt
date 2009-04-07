@@ -106,4 +106,3 @@
 	}
 
 	print_header_redirect_view( $f_src_bug_id );
-?>

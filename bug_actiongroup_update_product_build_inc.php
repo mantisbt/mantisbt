@@ -79,4 +79,3 @@
 		bug_set_field( $p_bug_id, 'build', $t_build );
 		return true;
     }
-?>

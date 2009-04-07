@@ -111,4 +111,5 @@
 <?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' ) ?>
 <?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' ) ?>
 
-<?php html_page_bottom( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

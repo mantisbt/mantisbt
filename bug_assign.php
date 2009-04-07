@@ -68,4 +68,3 @@
 	bug_assign( $f_bug_id, $f_handler_id );
 
 	print_successful_redirect_to_bug( $f_bug_id );
-?>

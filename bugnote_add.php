@@ -65,4 +65,3 @@
 	event_signal( 'EVENT_BUGNOTE_ADD', array( $f_bug_id, $t_bugnote_id ) );
 
 	print_successful_redirect_to_bug( $f_bug_id );
-?>

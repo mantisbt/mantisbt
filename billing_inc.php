@@ -194,4 +194,3 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 </table>
 <?php
 	collapse_end( 'bugnotestats' );
-?>

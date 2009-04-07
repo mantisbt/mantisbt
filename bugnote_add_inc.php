@@ -113,4 +113,5 @@
 ?>
 
 <?php # Bugnote Add Form END ?>
-<?php } ?>
+<?php 
+}

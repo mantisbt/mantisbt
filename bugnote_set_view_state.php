@@ -64,4 +64,3 @@
 	bugnote_set_view_state( $f_bugnote_id, $f_private );
 
 	print_successful_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
-?>
