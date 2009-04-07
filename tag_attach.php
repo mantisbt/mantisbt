@@ -59,7 +59,7 @@
 			} else {
 				$t_tags_failed[] = $t_tag_row;
 			}
-		} elseif ( -2 == $t_tag_row['id'] ) {
+		} else if ( -2 == $t_tag_row['id'] ) {
 			$t_tags_failed[] = $t_tag_row;
 		} else {
 			$t_tags_attach[] = $t_tag_row;
@@ -93,7 +93,7 @@
 			echo '<tr ',helper_alternate_class(),'>';
 			if ( -1 == $t_tag_row['id'] ) {
 				echo '<td class="category">', lang_get( 'tag_create_denied' ), '</td>';
-			} elseif ( -2 == $t_tag_row['id'] ) {
+			} else if ( -2 == $t_tag_row['id'] ) {
 				echo '<td class="category">', lang_get( 'tag_invalid_name' ), '</td>';
 			}
 			echo '<td>', string_html_specialchars( $t_tag_row['name'] ), '</td></tr>';

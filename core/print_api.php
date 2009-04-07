@@ -1254,7 +1254,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 
 		echo '<a href="view_all_set.php?sort=' . $p_sort_field . '&amp;dir=' . $p_dir . '&amp;type=2&amp;print=1">' . $p_string . '</a>';
 	}
-	elseif( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
+	else if( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
 		if( $p_sort_field == $p_sort ) {
 
 			# we toggle between ASC and DESC if the user clicks the same sort order

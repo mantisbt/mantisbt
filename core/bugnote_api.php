@@ -143,7 +143,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 		$c_type = TIME_TRACKING;
-	} elseif( is_blank( $p_bugnote_text ) ) {
+	} else if( is_blank( $p_bugnote_text ) ) {
 		return false;
 	}
 

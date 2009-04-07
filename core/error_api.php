@@ -336,7 +336,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 
 		return '<Array> { ' . implode( $t_results, ', ' ) . ' }';
 	}
-	elseif( is_object( $p_param ) ) {
+	else if( is_object( $p_param ) ) {
 		$t_results = array();
 
 		$t_class_name = get_class( $p_param );

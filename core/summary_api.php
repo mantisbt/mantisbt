@@ -129,7 +129,7 @@ function summary_print_by_enum( $p_enum_string, $p_enum ) {
 		if( $t_closed_val <= $row['status'] ) {
 			$t_bugs_closed += $row['bugcount'];
 		}
-		elseif( $t_resolved_val <= $row['status'] ) {
+		else if( $t_resolved_val <= $row['status'] ) {
 			$t_bugs_resolved += $row['bugcount'];
 		} else {
 			$t_bugs_open += $row['bugcount'];
@@ -271,7 +271,7 @@ function summary_print_by_date( $p_date_array ) {
 
 			# "+" modifier added in PHP >= 4.3.0
 		}
-		elseif( $t_balance < 0 ) {
+		else if( $t_balance < 0 ) {
 			$t_style = " positive";
 			$t_balance = sprintf( '%+d', $t_balance );
 		}
@@ -458,7 +458,7 @@ function summary_print_by_developer() {
 		if( $t_closed_val <= $row['status'] ) {
 			$t_bugs_closed += $v_bugcount;
 		}
-		elseif( $t_resolved_val <= $row['status'] ) {
+		else if( $t_resolved_val <= $row['status'] ) {
 			$t_bugs_resolved += $v_bugcount;
 		} else {
 			$t_bugs_open += $v_bugcount;
@@ -538,7 +538,7 @@ function summary_print_by_reporter() {
 			if( $t_closed_val <= $row2['status'] ) {
 				$t_bugs_closed += $row2['bugcount'];
 			}
-			elseif( $t_resolved_val <= $row2['status'] ) {
+			else if( $t_resolved_val <= $row2['status'] ) {
 				$t_bugs_resolved += $row2['bugcount'];
 			} else {
 				$t_bugs_open += $row2['bugcount'];
@@ -639,7 +639,7 @@ function summary_print_by_category() {
 		if( $t_closed_val <= $row['status'] ) {
 			$t_bugs_closed += $row['bugcount'];
 		}
-		elseif( $t_resolved_val <= $row['status'] ) {
+		else if( $t_resolved_val <= $row['status'] ) {
 			$t_bugs_resolved += $row['bugcount'];
 		} else {
 			$t_bugs_open += $row['bugcount'];
@@ -718,7 +718,7 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
 				} else {
 					$p_cache[$t_project_id]['closed'] = $t_bugcount;
 				}
-			} elseif ( $t_resolved_val <= $t_status ) {
+			} else if ( $t_resolved_val <= $t_status ) {
 				if ( isset( $p_cache[$t_project_id]['resolved'] ) ) {
 					$p_cache[$t_project_id]['resolved'] += $t_bugcount;
 				} else {
@@ -843,7 +843,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 				}
 
 				# These are not counted as bugs
-				elseif(( WONT_FIX == $c_res_s[$j] ) || ( SUSPENDED == $c_res_s[$j] ) || ( DUPLICATE == $c_res_s[$j] ) || ( NOT_A_BUG == $c_res_s[$j] ) ) {
+				else if(( WONT_FIX == $c_res_s[$j] ) || ( SUSPENDED == $c_res_s[$j] ) || ( DUPLICATE == $c_res_s[$j] ) || ( NOT_A_BUG == $c_res_s[$j] ) ) {
 					$t_bugs_notbugs += $res_bug_count;
 				}
 			}
@@ -955,7 +955,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 				}
 
 				# These are not counted as bugs
-				elseif(( UNABLE_TO_DUPLICATE == $c_res_s[$j] ) || ( DUPLICATE == $c_res_s[$j] ) || ( NOT_A_BUG == $c_res_s[$j] ) ) {
+				else if(( UNABLE_TO_DUPLICATE == $c_res_s[$j] ) || ( DUPLICATE == $c_res_s[$j] ) || ( NOT_A_BUG == $c_res_s[$j] ) ) {
 					$t_bugs_notbugs += $res_bug_count;
 				}
 			}

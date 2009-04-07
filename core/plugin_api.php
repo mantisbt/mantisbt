@@ -377,14 +377,14 @@ function plugin_version_check( $p_version1, $p_version2, $p_maximum = false ) {
 			if( $t_version1 < $t_version2 ) {
 				return 1;
 			}
-			elseif( $t_version1 > $t_version2 ) {
+			else if( $t_version1 > $t_version2 ) {
 				return -1;
 			}
 		} else {
 			if( $t_version1 > $t_version2 ) {
 				return 1;
 			}
-			elseif( $t_version1 < $t_version2 ) {
+			else if( $t_version1 < $t_version2 ) {
 				return -1;
 			}
 		}
@@ -398,7 +398,7 @@ function plugin_version_check( $p_version1, $p_version2, $p_maximum = false ) {
 	} else {
 		if( count( $p_version1 ) > 0 ) {
 			return 1;
-		} elseif( count( $p_version1 ) == 0 && count( $p_version2 ) == 0 ) {
+		} else if( count( $p_version1 ) == 0 && count( $p_version2 ) == 0 ) {
 			return 1;
 		}
 	}
@@ -580,7 +580,7 @@ function plugin_upgrade( $p_plugin ) {
 			$t_sqlarray = array(
 				'INSERT INTO ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
 			);
-		} elseif( $t_schema[$i][0] == 'UpdateSQL' ) {
+		} else if( $t_schema[$i][0] == 'UpdateSQL' ) {
 			$t_sqlarray = array(
 				$t_schema[$i][1],
 			);

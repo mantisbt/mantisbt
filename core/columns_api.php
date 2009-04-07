@@ -775,7 +775,7 @@ function print_column_edit( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE
 		echo '" alt="' . lang_get( 'overdue' ) . '"';
 		echo ' title="' . lang_get( 'overdue' ) . '" /></a>';
 	}
-	elseif( !date_is_null( $p_row['due_date'] ) && $t_view_level ) {
+	else if( !date_is_null( $p_row['due_date'] ) && $t_view_level ) {
 		echo '<a href="' . string_get_bug_update_url( $p_row['id'] ) . '">';
 		echo '<img border="0" width="16" height="16" src="' . $t_icon_path . 'clock.png';
 		echo '" alt="' . lang_get( 'due_date' ) . '"';

@@ -70,7 +70,7 @@ function php_version_at_least( $p_version_string ) {
 			$g_cached_version[$p_version_string] = false;
 			return false;
 		}
-		elseif( $t_cur > $t_min ) {
+		else if( $t_cur > $t_min ) {
 			$g_cached_version[$p_version_string] = true;
 			return true;
 		}

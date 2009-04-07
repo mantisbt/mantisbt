@@ -64,7 +64,7 @@
 		$val = OFF;
 		if ( isset ( $t_notify_flags[$action][$flag] ) ) {
 			$val = $t_notify_flags[$action][$flag];
-		} elseif ( isset ( $t_default_notify_flags[$flag] ) ) {
+		} else if ( isset ( $t_default_notify_flags[$flag] ) ) {
 			$val = $t_default_notify_flags[$flag];
 		}
 		return $val;

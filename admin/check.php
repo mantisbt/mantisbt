@@ -457,7 +457,7 @@ if( ON == config_get_global( 'use_jpgraph' ) ) {
 		</table>
 
 		<br /><?php
-	} elseif( MD5 != config_get_global( 'login_method' ) ) {?>
+	} else if( MD5 != config_get_global( 'login_method' ) ) {?>
 		<br />
 
 		<table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">

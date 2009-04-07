@@ -161,7 +161,7 @@ function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 
 	if( null === $p_user_id ) {
 		$g_cache_user_pref = array();
-	} elseif( null === $p_project_id ) {
+	} else if( null === $p_project_id ) {
 		unset( $g_cache_user_pref[$c_user_id] );
 	} else {
 		unset( $g_cache_user_pref[$c_user_id][$c_project_id] );

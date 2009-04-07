@@ -39,10 +39,10 @@
 function gpc_get( $p_var_name, $p_default = null ) {
 	if( isset( $_POST[$p_var_name] ) ) {
 		$t_result = gpc_strip_slashes( $_POST[$p_var_name] );
-	} elseif( isset( $_GET[$p_var_name] ) ) {
+	} else if( isset( $_GET[$p_var_name] ) ) {
 		$t_result = gpc_strip_slashes( $_GET[$p_var_name] );
 	}
-	elseif( func_num_args() > 1 ) {
+	else if( func_num_args() > 1 ) {
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
 	} else {
@@ -63,7 +63,7 @@ function gpc_isset( $p_var_name ) {
 	if( isset( $_POST[$p_var_name] ) ) {
 		return true;
 	}
-	elseif( isset( $_GET[$p_var_name] ) ) {
+	else if( isset( $_GET[$p_var_name] ) ) {
 		return true;
 	}
 
@@ -297,7 +297,7 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
 	if( isset( $_COOKIE[$p_var_name] ) ) {
 		$t_result = gpc_strip_slashes( $_COOKIE[$p_var_name] );
 	}
-	elseif( func_num_args() > 1 ) {
+	else if( func_num_args() > 1 ) {
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
 	} else {
@@ -326,7 +326,7 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
 	if( false === $p_expire ) {
 		$p_expire = 0;
 	}
-	elseif( true === $p_expire ) {
+	else if( true === $p_expire ) {
 		$t_cookie_length = config_get( 'cookie_time_length' );
 		$p_expire = time() + $t_cookie_length;
 	}
@@ -382,7 +382,7 @@ function gpc_get_file( $p_var_name, $p_default = null ) {
 		# FILES are not escaped even if magic_quotes is ON, this applies to Windows paths.
 		$t_result = $_FILES[$p_var_name];
 	}
-	elseif( func_num_args() > 1 ) {
+	else if( func_num_args() > 1 ) {
 
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
@@ -434,7 +434,7 @@ function gpc_string_to_bool( $p_string ) {
 function gpc_strip_slashes( $p_var ) {
 	if( 0 == get_magic_quotes_gpc() ) {
 		return $p_var;
-	} elseif( !is_array( $p_var ) ) {
+	} else if( !is_array( $p_var ) ) {
 		return stripslashes( $p_var );
 	} else {
 		foreach( $p_var as $key => $value ) {

@@ -718,12 +718,12 @@ if( 3 == $t_install_state ) {
 			if( $upgrade[$i][0] == 'InsertData' ) {
 				$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
 			}
-			elseif( $upgrade[$i][0] == 'UpdateSQL' ) {
+			else if( $upgrade[$i][0] == 'UpdateSQL' ) {
 				$sqlarray = array(
 					$upgrade[$i][1],
 				);
 				$t_target = $upgrade[$i][1];
-			} elseif( $upgrade[$i][0] == 'UpdateFunction' ) {
+			} else if( $upgrade[$i][0] == 'UpdateFunction' ) {
 				$sqlarray = array(
 					$upgrade[$i][1],
 				);

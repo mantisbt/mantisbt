@@ -122,7 +122,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 				} else {
 					$t_depends[] = '<span class="small dependency_upgrade">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
 				}
-			} elseif ( -1 == $t_dependency ) {
+			} else if ( -1 == $t_dependency ) {
 				$t_depends[] = '<span class="small dependency_dated">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
 			} else {
 				$t_depends[] = '<span class="small dependency_unmet">'.string_display_line( $t_plugin.' '.$t_version ).'</span>';
@@ -215,7 +215,7 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 			$t_dependency = plugin_dependency( $t_plugin, $t_version );
 			if ( 1 == $t_dependency ) {
 				$t_depends[] = '<span class="small dependency_met">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
-			} elseif ( -1 == $t_dependency ) {
+			} else if ( -1 == $t_dependency ) {
 				$t_ready = false;
 				$t_depends[] = '<span class="small dependency_dated">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
 			} else {

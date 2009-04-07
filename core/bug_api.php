@@ -1601,7 +1601,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		if( $t_id_relationship == -1 ) {
 
 			# the relationship type is already set. Nothing to do
-		} elseif( $t_id_relationship > 0 ) {
+		} else if( $t_id_relationship > 0 ) {
 
 			# Update the relationship
 			relationship_update( $t_id_relationship, $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );

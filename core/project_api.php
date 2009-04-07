@@ -68,7 +68,7 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 	if( isset( $g_cache_project[(int) $p_project_id] ) ) {
 		return $g_cache_project[(int) $p_project_id];
 	}
-	elseif( isset( $g_cache_project_missing[(int) $p_project_id] ) ) {
+	else if( isset( $g_cache_project_missing[(int) $p_project_id] ) ) {
 		return false;
 	}
 
@@ -519,7 +519,7 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 	if( is_array( $t_global_access_level ) ) {
 		if( 0 == count( $t_global_access_level ) ) {
 			$t_global_access_clause = ">= " . NOBODY . " ";
-		} elseif( 1 == count( $t_global_access_level ) ) {
+		} else if( 1 == count( $t_global_access_level ) ) {
 			$t_global_access_clause = "= " . array_shift( $t_global_access_level ) . " ";
 		} else {
 			$t_global_access_clause = "IN (" . implode( ',', $t_global_access_level ) . ")";

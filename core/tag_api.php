@@ -196,7 +196,7 @@ function tag_parse_filters( $p_string ) {
 
 				if( "+" == $t_filter ) {
 					$t_tag_row['filter'] = 1;
-				} elseif( "-" == $t_filter ) {
+				} else if( "-" == $t_filter ) {
 					$t_tag_row['filter'] = -1;
 				} else {
 					$t_tag_row['filter'] = 0;

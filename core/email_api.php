@@ -179,7 +179,7 @@ function email_is_valid( $p_email ) {
 				return true;
 			}
 		}
-		elseif( ON == config_get( 'check_mx_record' ) ) {
+		else if( ON == config_get( 'check_mx_record' ) ) {
 			$temp = '';
 
 			# Check for valid mx records
@@ -235,7 +235,7 @@ function email_notify_flag( $action, $flag ) {
 	if( isset( $t_notify_flags[$action][$flag] ) ) {
 		return $t_notify_flags[$action][$flag];
 	}
-	elseif( isset( $t_default_notify_flags[$flag] ) ) {
+	else if( isset( $t_default_notify_flags[$flag] ) ) {
 		return $t_default_notify_flags[$flag];
 	}
 
@@ -340,7 +340,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	if( 'owner' == $p_notify_type ) {
 		$t_pref_field = 'email_on_assigned';
 	}
-	elseif( in_array( $p_notify_type, $t_status_change ) ) {
+	else if( in_array( $p_notify_type, $t_status_change ) ) {
 		$t_pref_field = 'email_on_status';
 	} else {
 		$t_pref_field = 'email_on_' . $p_notify_type;

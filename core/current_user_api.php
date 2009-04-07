@@ -209,7 +209,7 @@ function current_user_get_bug_filter( $p_project_id = null ) {
 		} else {
 			$t_filter = unserialize( $f_filter_string );
 		}
-	} elseif( !filter_is_cookie_valid() ) {
+	} else if( !filter_is_cookie_valid() ) {
 		return false;
 	} else {
 		$t_user_id = auth_get_current_user_id();

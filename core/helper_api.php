@@ -99,7 +99,7 @@ function check_selected( $p_var, $p_val = true ) {
 					return;
 				}
 			}
-			elseif( $t_this_var == $p_val ) {
+			else if( $t_this_var == $p_val ) {
 				echo ' selected="selected" ';
 				return;
 			}
@@ -111,7 +111,7 @@ function check_selected( $p_var, $p_val = true ) {
 				return;
 			}
 		}
-		elseif( $p_var == $p_val ) {
+		else if( $p_var == $p_val ) {
 			echo ' selected="selected" ';
 			return;
 		}
@@ -297,7 +297,7 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 
 	if( 0 == count( $t_project_ids ) ) {
 		$t_project_filter = ' 1<>1';
-	} elseif( 1 == count( $t_project_ids ) ) {
+	} else if( 1 == count( $t_project_ids ) ) {
 		$t_project_filter = ' project_id=' . $t_project_ids[0];
 	} else {
 		$t_project_filter = ' project_id IN (' . join( ',', $t_project_ids ) . ')';

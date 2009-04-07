@@ -76,7 +76,7 @@
 					} else {
 						$g_action_attach_tags_failed[] = $t_tag_row;
 					}
-				} elseif ( -2 == $t_tag_row['id'] ) {
+				} else if ( -2 == $t_tag_row['id'] ) {
 					$g_action_attach_tags_failed[] = $t_tag_row;
 				} else {
 					$g_action_attach_tags_attach[] = $t_tag_row;

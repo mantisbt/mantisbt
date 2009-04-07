@@ -111,7 +111,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 			if( strtolower( lang_get( 'charset' ) ) === 'utf-8' ) {
 				db_query_bound( 'SET NAMES UTF8' );
 			}
-		} elseif( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
+		} else if( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
 			$t_result2 = db_query_bound( 'set schema ' . $p_db_schema );
 			if( $t_result2 === false ) {
 				db_error();
@@ -351,13 +351,13 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 					if( is_null( $arr_parms[$i - 1] ) ) {
 						$replace = 'NULL';
 					}
-					elseif( is_string( $arr_parms[$i - 1] ) ) {
+					else if( is_string( $arr_parms[$i - 1] ) ) {
 						$replace = "'" . $arr_parms[$i - 1] . "'";
 					}
-					elseif( is_integer( $arr_parms[$i - 1] ) || is_float( $arr_parms[$i - 1] ) ) {
+					else if( is_integer( $arr_parms[$i - 1] ) || is_float( $arr_parms[$i - 1] ) ) {
 						$replace = (float) $arr_parms[$i - 1];
 					}
-					elseif( is_bool( $arr_parms[$i - 1] ) ) {
+					else if( is_bool( $arr_parms[$i - 1] ) ) {
 						switch( $t_db_type ) {
 							case 'pgsql':
 								$replace = "'" . $arr_parms[$i - 1] . "'";
