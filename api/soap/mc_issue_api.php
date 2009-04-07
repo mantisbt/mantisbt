@@ -182,7 +182,7 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 
 	# foreach
 
-	return( sizeof( $t_custom_fields ) == 0 ? null : $t_custom_fields );
+	return( count( $t_custom_fields ) == 0 ? null : $t_custom_fields );
 }
 
 /**
@@ -206,7 +206,7 @@ function mci_issue_get_attachments( $p_issue_id ) {
 		$t_result[] = $t_attachment;
 	}
 
-	return (sizeof( $t_result ) == 0 ? null : $t_result );
+	return (count( $t_result ) == 0 ? null : $t_result );
 }
 
 /**
@@ -246,7 +246,7 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 		}
 	}
 
-	return (sizeof( $t_relationships ) == 0 ? null : $t_relationships );
+	return (count( $t_relationships ) == 0 ? null : $t_relationships );
 }
 
 /**
@@ -273,7 +273,7 @@ function mci_issue_get_notes( $p_issue_id ) {
 		$t_result[] = $t_bugnote;
 	}
 
-	return (sizeof( $t_result ) == 0 ? null : $t_result );
+	return (count( $t_result ) == 0 ? null : $t_result );
 }
 
 /**

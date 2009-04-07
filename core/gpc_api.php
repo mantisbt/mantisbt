@@ -252,7 +252,7 @@ function gpc_get_int_array( $p_var_name, $p_default = null ) {
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
 
-	for( $i = 0;$i < sizeof( $t_result );$i++ ) {
+	for( $i = 0;$i < count( $t_result );$i++ ) {
 		$t_result[$i] = (int) $t_result[$i];
 	}
 
@@ -278,7 +278,7 @@ function gpc_get_bool_array( $p_var_name, $p_default = null ) {
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
 
-	for( $i = 0;$i < sizeof( $t_result );$i++ ) {
+	for( $i = 0;$i < count( $t_result );$i++ ) {
 		$t_result[$i] = gpc_string_to_bool( $t_result[$i] );
 	}
 

@@ -55,7 +55,7 @@
 	$t_project_id 			= 0;
 
 	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE );
-	$t_num_of_columns = sizeof( $t_columns );
+	$t_num_of_columns = count( $t_columns );
 
 	# check to see if the cookie exists
 	if ( !is_blank( $t_cookie_value ) ) {
@@ -81,7 +81,7 @@
 	$t_page_count = null;
 
 	$result = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
-	$row_count = sizeof( $result );
+	$row_count = count( $result );
 
 	# for export
 	$t_show_flag = gpc_get_int( 'show_flag', 0 );

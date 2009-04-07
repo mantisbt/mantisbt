@@ -364,7 +364,7 @@ function print_news_item_option_list() {
 			array_push( $t_notes, lang_get( 'private' ) );
 		}
 
-		if ( sizeof( $t_notes ) > 0 ) {
+		if ( count( $t_notes ) > 0 ) {
 			$t_note_string = ' [' . implode( ' ', $t_notes ) . ']';
 		}
 

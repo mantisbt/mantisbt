@@ -33,7 +33,7 @@
 	$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
 
 	# redirect to view issues if nothing is selected
-	if ( is_blank( $f_action ) || ( 0 == sizeof( $f_bug_arr ) ) ) {
+	if ( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
 		print_header_redirect( 'view_all_bug_page.php' );
 	}
 

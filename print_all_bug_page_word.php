@@ -71,7 +71,7 @@
 	$t_page_count = null;
 
 	$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-	$t_row_count = sizeof( $result );
+	$t_row_count = count( $result );
 
 ?>
 

@@ -64,8 +64,8 @@ else {
 	}
 }
 
-if( sizeof( $t_lang_files ) > 0 ) {
-	echo 'Retrieved ', sizeof( $t_lang_files ), ' languages<br />';
+if( count( $t_lang_files ) > 0 ) {
+	echo 'Retrieved ', count( $t_lang_files ), ' languages<br />';
 
 	foreach( $t_lang_files as $t_file ) {
 		echo "Testing language file '$t_file' (phase 1)...<br />";

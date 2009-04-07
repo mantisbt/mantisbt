@@ -105,7 +105,7 @@ echo "OK\n";
 
 $g_db_connected = true; # fake out database access routines used by config_get
 $t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
-$lastid = sizeof( $upgrade ) - 1;
+$lastid = count( $upgrade ) - 1;
 $i = $t_last_update + 1;
 
 while(( $i <= $lastid ) && !$g_failed ) {

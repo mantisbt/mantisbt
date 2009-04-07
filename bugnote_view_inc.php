@@ -52,7 +52,7 @@ if ( isset( $g_project_override ) ) {
 	access_cache_matrix_project( helper_get_current_project() );
 }
 
-$num_notes = sizeof( $t_bugnotes );
+$num_notes = count( $t_bugnotes );
 ?>
 
 <?php # Bugnotes BEGIN ?>

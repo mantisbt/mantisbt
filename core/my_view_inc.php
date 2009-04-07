@@ -384,9 +384,9 @@ echo '^';
 echo '</a>]';
 ?>
 		<?php
-			if( sizeof( $rows ) > 0 ) {
+			if( count( $rows ) > 0 ) {
 	$v_start = $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] * ( $f_page_number - 1 ) + 1;
-	$v_end = $v_start + sizeof( $rows ) - 1;
+	$v_end = $v_start + count( $rows ) - 1;
 }
 else {
 	$v_start = 0;
@@ -401,7 +401,7 @@ echo "($v_start - $v_end / $t_bug_count)";
 <?php
 # -- Loop over bug rows and create $v_* variables --?>
 <?php
-	for( $i = 0;$i < sizeof( $rows );$i++ ) {
+	for( $i = 0;$i < count( $rows );$i++ ) {
 
 	# prefix bug data with v_
 

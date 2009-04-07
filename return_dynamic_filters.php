@@ -65,9 +65,9 @@
 			}
 		}
 
-		if ( sizeof( $t_accessible_custom_fields_ids ) > 0 ) {
+		if ( count( $t_accessible_custom_fields_ids ) > 0 ) {
 			$t_per_row = config_get( 'filter_custom_fields_per_row' );
-			$t_custom_rows = ceil( sizeof( $t_accessible_custom_fields_ids ) / $t_per_row );
+			$t_custom_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
 		}
 	}
 

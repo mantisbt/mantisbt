@@ -46,7 +46,7 @@
 
 	$t_bugslist = Array();
 	$t_users_handlers = Array();
-	$t_row_count = sizeof( $rows );
+	$t_row_count = count( $rows );
 	for($i=0; $i < $t_row_count; $i++) {
 		array_push($t_bugslist, $rows[$i]["id"] );
 		$t_users_handlers[] = $rows[$i]["handler_id"];

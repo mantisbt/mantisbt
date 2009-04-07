@@ -203,7 +203,7 @@
 
 			# Check for db upgrade for versions > 1.0.0 using new installer and schema
 			require_once( 'admin/schema.php' );
-			$t_upgrades_reqd = sizeof( $upgrade ) - 1;
+			$t_upgrades_reqd = count( $upgrade ) - 1;
 
 			if ( ( 0 < $t_db_version ) &&
 					( $t_db_version != $t_upgrades_reqd ) ) {

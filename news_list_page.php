@@ -39,7 +39,7 @@
 <?php
 	# Select the news posts
 	$rows = news_get_rows( helper_get_current_project() );
-	$t_count = sizeof( $rows );
+	$t_count = count( $rows );
 
 	if ( $t_count > 0 ) {
 		echo '<ul>';
@@ -64,7 +64,7 @@
 		if ( VS_PRIVATE == $v_view_state ) {
 			array_push( $t_notes, lang_get( 'private' ) );
 		}
-		if ( sizeof( $t_notes ) > 0 ) {
+		if ( count( $t_notes ) > 0 ) {
 			$t_note_string = '['.implode( ' ', $t_notes ).']';
 		}
 

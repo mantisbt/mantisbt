@@ -35,7 +35,7 @@
 	$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
 
 	# redirects to all_bug_page if nothing is selected
-	if ( is_blank( $f_action ) || ( 0 == sizeof( $f_bug_arr ) ) ) {
+	if ( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
 		print_header_redirect( 'view_all_bug_page.php' );
 	}
 
@@ -234,7 +234,7 @@ if ( !$t_finished ) {
 
 			# if there is only one issue, use its current value as default, otherwise,
 			# use the default value specified in custom field definition.
-			if ( sizeof( $f_bug_arr ) == 1 ) {
+			if ( count( $f_bug_arr ) == 1 ) {
 				$t_bug_id = $f_bug_arr[0];
 			}
 
