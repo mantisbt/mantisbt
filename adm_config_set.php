@@ -36,7 +36,7 @@
 	$f_config_option = gpc_get_string( 'config_option' );
 	$f_type = gpc_get_string( 'type' );
 	$f_value = gpc_get_string( 'value' );
-	
+
 	if ( is_blank( $f_config_option ) ) {
 		error_parameters( 'config_option' );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -48,7 +48,7 @@
 		project_ensure_exists( $f_project_id );
 		access_ensure_project_level( config_get('set_configuration_threshold' ), $f_project_id );
 	}
-	
+
 	# make sure that configuration option specified is a valid one.
 	$t_not_found_value = '***CONFIG OPTION NOT FOUND***';
 	if ( config_get_global( $f_config_option, $t_not_found_value ) === $t_not_found_value ) {
@@ -61,7 +61,7 @@
 		error_parameters( $f_config_option );
 		trigger_error( ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB, ERROR );
 	}
-	
+
 	if ( $f_type === 'default' ) {
 		$t_config_global_value = config_get_global( $f_config_option );
 		if ( is_string( $t_config_global_value ) ) {
@@ -111,7 +111,7 @@
 	print_successful_redirect( 'adm_config_report.php' );
 
 
-	/** 
+	/**
 	 * Check if the passed string is a constant and return its value
 	 */
 	function constant_replace( $p_name ) {

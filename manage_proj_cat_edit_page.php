@@ -40,7 +40,7 @@
 	$t_assigned_to = $t_row['user_id'];
 	$t_project_id = $t_row['project_id'];
 	$t_name = $t_row['name'];
-	
+
 	html_page_top();
 
 	print_manage_menu( 'manage_proj_cat_edit_page.php' );

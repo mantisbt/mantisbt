@@ -71,7 +71,7 @@
 	# In case we're using LDAP to get the email address... this will pull out
 	#  that version instead of the one in the DB
 	$u_email = user_get_email( $u_id, $u_username );
-	
+
 	# note if we are being included by a script of a different name, if so,
 	#  this is a mandatory password change request
 	$t_force_pw_reset = is_page_name( 'verify.php' );
@@ -83,8 +83,8 @@
 <br />
 <?php if ( $t_force_pw_reset ) { ?>
 <center><div style="color:red; width:75%">
-		<?php 
-			echo lang_get( 'verify_warning' ); 
+		<?php
+			echo lang_get( 'verify_warning' );
 			if ( helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 				echo '<br />' . lang_get( 'verify_change_password' );
 			}
@@ -271,4 +271,5 @@
 <?php } ?>
 <?php # Delete Account Form END ?>
 
-<?php html_page_bottom( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

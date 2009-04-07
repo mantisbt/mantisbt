@@ -52,7 +52,7 @@
 		# ... override the current project. This to avoid problems with categories and handlers lists etc.
 		$g_project_override = $t_bug->project_id;
 	}
-	
+
 	// We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING
 	// if $f_time_tracking is not 0 and the time tracking feature is enabled.
 	$t_bugnote_id = bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private, BUGNOTE );

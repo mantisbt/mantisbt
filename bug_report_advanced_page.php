@@ -22,9 +22,9 @@
 	 * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
-	 
+
 	 $g_allow_browser_cache = 1;
-	 
+
 	 /**
 	  * MantisBT Core API's
 	  */
@@ -178,8 +178,8 @@
 			echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
 		} ?>
 		<select <?php echo helper_get_tab_index() ?> name="category_id">
-			<?php 
-				print_category_option_list( $f_category_id ); 
+			<?php
+				print_category_option_list( $f_category_id );
 			?>
 		</select>
 	</td>
@@ -226,10 +226,10 @@
 <?php } ?>
 
 <!-- Due date -->
-<?php if ( $t_can_update_due_date ) { 
+<?php if ( $t_can_update_due_date ) {
 	$t_date_to_display = '';
 	if ( !date_is_null( $f_due_date ) ) {
-			$t_date_to_display = date( config_get( 'short_date_format' ), $f_due_date );	
+			$t_date_to_display = date( config_get( 'short_date_format' ), $f_due_date );
 	}
 
 ?>
@@ -274,7 +274,7 @@
 			<?php echo lang_get( 'or_fill_in' ); ?>
 			<table class="width90" cellspacing="0">
 		<?php } else { ?>
-			<?php echo lang_get( 'or_fill_in' ); ?>	
+			<?php echo lang_get( 'or_fill_in' ); ?>
 		<?php } ?>
 <!-- Platform -->
 <tr <?php echo helper_alternate_class() ?>>
@@ -349,7 +349,7 @@
 		<?php if( ON == config_get( 'use_javascript' ) ) { ?>
 			</table>
 			<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo lang_get( 'or_fill_in' );?>
-			<?php collapse_end( 'profile' ); ?>		
+			<?php collapse_end( 'profile' ); ?>
 		<?php } ?>
 	</td>
 </tr>
@@ -608,7 +608,7 @@
 -->
 </script>
 <?php  }
-if ( $t_can_update_due_date ) { 
+if ( $t_can_update_due_date ) {
 	date_finish_calendar( 'due_date', 'trigger' );
 }
 

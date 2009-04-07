@@ -46,4 +46,3 @@
 	form_security_purge( 'manage_proj_update' );
 
 	print_header_redirect( 'manage_proj_page.php' );
-?>

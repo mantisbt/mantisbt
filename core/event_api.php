@@ -29,7 +29,7 @@
  */
 
 /**
- * 
+ *
  * @global array $g_event_cache
  */
 $g_event_cache = array();
@@ -56,7 +56,7 @@ function event_declare( $p_name, $p_type = EVENT_TYPE_DEFAULT ) {
 /**
  * Convenience function for decleare multiple events.
  * @param array Events
- * @access public 
+ * @access public
  */
 function event_declare_many( $p_events ) {
 	foreach( $p_events as $t_name => $t_type ) {
@@ -70,7 +70,7 @@ function event_declare_many( $p_events ) {
  * @param string Event name
  * @param string Callback function
  * @param string Plugin basename
- * @access public 
+ * @access public
  */
 function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
 	global $g_event_cache;
@@ -188,7 +188,7 @@ function event_callback( $p_event, $p_callback, $p_plugin, $p_params = null ) {
  * @param string Event name
  * @param array Array of callback function/plugin basename key/value pairs
  * @param array Callback parameters
- * @access public 
+ * @access public
  */
 function event_type_execute( $p_event, $p_callbacks, $p_params ) {
 	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
@@ -206,7 +206,7 @@ function event_type_execute( $p_event, $p_callbacks, $p_params ) {
  * @param string Event name
  * @param array Array of callback function/plugin basename key/value pairs
  * @param multi Output separator (if single string) or indexed array of pre, mid, and post strings
- * @access public 
+ * @access public
  */
 function event_type_output( $p_event, $p_callbacks, $p_params = null ) {
 	$t_prefix = '';

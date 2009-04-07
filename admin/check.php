@@ -144,15 +144,13 @@ function check_zend_optimiser_version() {
 			$t_info = 'Zend Optimizer Detected - Unknown Version.';
 			$t_pass = false;
   		} else {
-			$t_version = str_replace("v","",$t_version);	
+			$t_version = str_replace("v","",$t_version);
 			$t_version = explode(".",$t_version);
 			$t_subVersion = $t_version[2];
 			$t_dummy = array_pop($t_version);
 			$t_version = implode(".",$t_version);
-	
-			if (($t_version > ZEND_OPTIMIZER_VERSION) || ($t_version==ZEND_OPTIMIZER_VERSION && $t_subVersion>=ZEND_OPTIMIZER_SUBVERSION)) {
-      			/* pass = true */
-			} else {
+
+			if (!($t_version > ZEND_OPTIMIZER_VERSION) || ($t_version==ZEND_OPTIMIZER_VERSION && $t_subVersion>=ZEND_OPTIMIZER_SUBVERSION)) {
 				$t_pass = false;
 				$t_info = 'Fail - Installed Version: ' . $t_version . '.' . $t_subVersion . '.';
 			}	  
@@ -409,7 +407,7 @@ if( ON == config_get_global( 'use_jpgraph' ) ) {
 		require_once( $t_jpgraph_path . 'jpgraph.php' );
 
 		print_test_row( 'Checking Jpgraph version (if installed)...', version_compare(JPG_VERSION, '2.3.0') ? true : false, JPG_VERSION );
-	}	
+	}
 
 	print_test_row( 'check configuration: jpgraph (if used) requires php bundled gd for antialiasing support',
 		( config_get_global( 'jpgraph_antialias' ) == OFF || function_exists('imageantialias') ) );

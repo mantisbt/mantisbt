@@ -114,9 +114,10 @@
 	$rssfile->addSYdata( $period, $frequency, $base );
 
 	$news_rows = news_get_limited_rows( 0 /* offset */, $f_project_id );
+	$t_news_count = count( $news_rows );
 
 	# Loop through results
-	for ( $i = 0; $i < count( $news_rows ); $i++ ) {
+	for ( $i = 0; $i < $t_news_count; $i++ ) {
 		$row = $news_rows[$i];
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
@@ -162,4 +163,3 @@
 	$version = '2.0';
 
 	$rssfile->outputRSS( $version );
-?>

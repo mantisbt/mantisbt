@@ -44,7 +44,7 @@
 	if ( !$result ) {
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
-	
+
 	$count = db_num_rows( $result );
 
 	if ( $count > 0 ) {
@@ -60,5 +60,3 @@
 	$t_redirect_url = 'manage_user_page.php';
 
 	print_header_redirect( $t_redirect_url );
-	
-?>

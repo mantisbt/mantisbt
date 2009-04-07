@@ -80,7 +80,7 @@
 	<td colspan="2"><?php echo lang_get( 'tag_attach_failed' ) ?></td>
 	</tr>
 	<tr class="spacer"><td colspan="2"></td></tr>
-<?php		
+<?php
 		$t_tag_string = "";
 		foreach( $t_tags_attach as $t_tag_row ) {
 			if ( !is_blank( $t_tag_string ) ) {
@@ -97,7 +97,7 @@
 				echo '<td class="category">', lang_get( 'tag_invalid_name' ), '</td>';
 			}
 			echo '<td>', string_html_specialchars( $t_tag_row['name'] ), '</td></tr>';
-			
+
 			if ( !is_blank( $t_tag_string ) ) {
 				$t_tag_string .= config_get( 'tag_separator' );
 			}
@@ -110,7 +110,7 @@
 	<td>
 <?php
 		print_tag_attach_form( $f_bug_id, $t_tag_string );
-?>	
+?>
 	</td>
 	</tr>
 </table>

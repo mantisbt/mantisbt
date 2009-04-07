@@ -30,10 +30,10 @@
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	$f_username = gpc_get_string( 'username', '' );
-	
+
 	if ( is_blank( $f_username ) ) {
 		$f_user_id = gpc_get_int( 'user_id' );
-		$t_user_id = $f_user_id; 
+		$t_user_id = $f_user_id;
 	} else {
 		$t_user_id = user_get_id_by_name( $f_username );
 		if ( $t_user_id === false ) {

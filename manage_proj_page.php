@@ -43,7 +43,7 @@
 	html_page_top( lang_get( 'manage_projects_link' ) );
 
 	print_manage_menu( 'manage_proj_page.php' );
-	
+
 	project_hierarchy_cache( true );
 
 # Project Menu Form BEGIN ?>
@@ -225,5 +225,5 @@
 </table>
 </div>
 
-<?php 
+<?php
 	html_page_bottom( __FILE__ );

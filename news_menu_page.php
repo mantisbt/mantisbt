@@ -89,7 +89,7 @@
 </div>
 <?php # Add News Form END ?>
 
-<?php # Edit/Delete News Form BEGIN 
+<?php # Edit/Delete News Form BEGIN
  if ( news_get_count( helper_get_current_project(), access_has_global_level( ADMINISTRATOR ) ) > 0 ) {
 ?>
 <br />

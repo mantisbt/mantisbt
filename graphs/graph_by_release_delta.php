@@ -56,7 +56,7 @@ $resolved_count_arr = array();
 $closed_count_arr = array();
 $t_bug_table = db_get_table( 'mantis_bug_table' );
 
-foreach( $projection_arr as $t_projection ) {	
+foreach( $projection_arr as $t_projection ) {
 	# OPEN
 	$query = "SELECT COUNT(*) as count
 			FROM $t_bug_table

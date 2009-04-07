@@ -54,7 +54,7 @@
 		list( $t_sort, ) = split( ',', $t_filter['sort'] );
 		list( $t_dir, ) = split( ',', $t_filter['dir'] );
 	}
-	
+
 	$t_checkboxes_exist = false;
 
 	$t_icon_path = config_get( 'icon_path' );
@@ -119,7 +119,7 @@
 			if ( sizeof( $rows ) > 0 ) {
 				if( $t_filter )
 					$v_start = $t_filter['per_page'] * (int)($f_page_number-1) +1;
-				else 
+				else
 					$v_start = 1;
 				$v_end   = $v_start + sizeof( $rows ) -1;
 			}
@@ -191,7 +191,7 @@
 
 		# -- Loop over bug rows --
 
-		$t_rows = sizeof( $p_rows ); 
+		$t_rows = sizeof( $p_rows );
 		for( $i=0; $i < $t_rows; $i++ ) {
 			$t_row = $p_rows[$i];
 
@@ -273,4 +273,3 @@
 		filter_draw_selection_area( $f_page_number );
 	}
 	# -- ====================== end of FILTER FORM ================== --
-?>

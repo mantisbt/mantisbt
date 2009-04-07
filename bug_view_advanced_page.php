@@ -89,7 +89,7 @@
 			<?php print_bracket_link( 'bug_reminder_page.php?bug_id='.$f_bug_id, lang_get( 'bug_reminder' ) ) ?>
 	<?php
 		}
-		
+
 		if ( wiki_enabled() ) {
 	?>
 			<?php print_bracket_link( 'wiki.php?id='.$f_bug_id, lang_get( 'wiki' ) ) ?>
@@ -239,7 +239,7 @@
 		print "<td>";
 	}
 	?>
-		<?php 
+		<?php
 			if ( !date_is_null( $t_bug->due_date ) ) {
 				print_date( config_get( 'short_date_format' ), $t_bug->due_date ); }
 			?>
@@ -260,7 +260,7 @@
 		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
 	<td colspan="5">
-		<?php 
+		<?php
 			if ( access_has_bug_level( config_get( 'view_handler_threshold' ), $f_bug_id ) ) {
 				print_user_with_subject( $t_bug->handler_id, $f_bug_id );
 			}
@@ -325,7 +325,7 @@
 	<?php } else {?>
 		<td colspan="2"></td>
 	<?php } ?>
-	
+
 </tr>
 
 
@@ -663,4 +663,3 @@
 	html_page_bottom( __FILE__ );
 
 	last_visited_issue( $f_bug_id );
-?>

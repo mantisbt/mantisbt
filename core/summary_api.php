@@ -21,7 +21,7 @@
  * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
- 
+
 /**
  * requires config_filter_defaults_include
  */
@@ -745,7 +745,7 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
 
 		summary_helper_print_row( $t_name, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
-		
+
 		if ( count( project_hierarchy_get_subprojects ( $t_project ) ) > 0 ) {
 			$t_subprojects = current_user_get_accessible_subprojects( $t_project );
 

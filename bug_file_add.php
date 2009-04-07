@@ -40,7 +40,7 @@
 		# _POST/_FILES does not seem to get populated if you exceed size limit so check if bug_id is -1
 		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
 	}
-	
+
 	if ( !file_allow_bug_upload( $f_bug_id ) ) {
 		access_denied();
 	}
@@ -69,4 +69,5 @@
 ?>
 </div>
 
-<?php html_page_bottom( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

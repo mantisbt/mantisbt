@@ -101,4 +101,5 @@
 <?php print_bracket_link( 'login_page.php', lang_get( 'proceed' ) ); ?>
 </div>
 
-<?php html_page_bottom1a( __FILE__ ) ?>
+<?php
+	html_page_bottom1a( __FILE__ );

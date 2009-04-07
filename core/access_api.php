@@ -16,7 +16,7 @@
 
 /**
  * Access Api
- * 
+ *
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
@@ -31,7 +31,7 @@
  * @uses helper_api.php
  * @uses database_api.php
  */
- 
+
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 /**
@@ -60,19 +60,19 @@ require_once( $t_core_dir . 'bug_api.php' );
 require_once( $t_core_dir . 'project_api.php' );
 
 /**
- * 
+ *
  * @global array $g_cache_access_matrix
  */
 $g_cache_access_matrix = array();
 
 /**
- * 
+ *
  * @global array $g_cache_access_matrix_project_ids
  */
 $g_cache_access_matrix_project_ids = array();
 
 /**
- * 
+ *
  * @global array $g_cache_access_matrix_user_ids
  */
 $g_cache_access_matrix_user_ids = array();
@@ -201,7 +201,7 @@ function access_cache_matrix_user( $p_user_id ) {
  * @param int $p_user_access_level user access level
  * @param int|array $p_threshold access threshold, defaults to NOBODY
  * @return bool true or false depending on whether given access level matches the threshold
- * @access public 
+ * @access public
  */
 function access_compare_level( $p_user_access_level, $p_threshold = NOBODY ) {
 	if( is_array( $p_threshold ) ) {
@@ -216,7 +216,7 @@ function access_compare_level( $p_user_access_level, $p_threshold = NOBODY ) {
  * overrides they might have at a project level
  * @param int|null $p_user_id integer representing user id, defaults to null to use current user
  * @return int global access level
- * @access public 
+ * @access public
  */
 function access_get_global_level( $p_user_id = null ) {
 	if( $p_user_id === null ) {
@@ -239,7 +239,7 @@ function access_get_global_level( $p_user_id = null ) {
  * @param int $p_access_level integer representing access level
  * @param int|null $p_user_id integer representing user id, defaults to null to use current user
  * @return bool whether user has access level specified
- * @access public 
+ * @access public
  */
 function access_has_global_level( $p_access_level, $p_user_id = null ) {
 	# Short circuit the check in this case
@@ -262,7 +262,7 @@ function access_has_global_level( $p_access_level, $p_user_id = null ) {
  * @see access_has_global_level
  * @param int $p_access_level integer representing access level
  * @param int|null $p_user_id integer representing user id, defaults to null to use current user
- * @access public 
+ * @access public
  */
 function access_ensure_global_level( $p_access_level, $p_user_id = null ) {
 	if( !access_has_global_level( $p_access_level, $p_user_id ) ) {
@@ -277,7 +277,7 @@ function access_ensure_global_level( $p_access_level, $p_user_id = null ) {
  * @param int $p_project_id integer representing project id to check access against
  * @param int|null $p_user_id integer representing user id, defaults to null to use current user
  * @return int access level user has to given project
- * @access public 
+ * @access public
  */
 function access_get_project_level( $p_project_id = null, $p_user_id = null ) {
 	# Deal with not logged in silently in this case
@@ -331,7 +331,7 @@ function access_get_project_level( $p_project_id = null, $p_user_id = null ) {
  * @param int $p_project_id integer representing project id to check access against
  * @param int|null $p_user_id integer representing user id, defaults to null to use current user
  * @return bool whether user has access level specified
- * @access public 
+ * @access public
  */
 function access_has_project_level( $p_access_level, $p_project_id = null, $p_user_id = null ) {
 	# Short circuit the check in this case
@@ -358,7 +358,7 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
  * @param int $p_access_level integer representing access level
  * @param int|null $p_project_id integer representing project id to check access against, defaults to null to use current project
  * @param int|null $p_user_id integer representing user id, defaults to null to use current user
- * @access public 
+ * @access public
  */
 function access_ensure_project_level( $p_access_level, $p_project_id = null, $p_user_id = null ) {
 	if( !access_has_project_level( $p_access_level, $p_project_id, $p_user_id ) ) {
@@ -402,7 +402,7 @@ function access_has_any_project( $p_access_level, $p_user_id = null ) {
  * @param int $p_bug_id integer representing bug id to check access against
  * @param int|null $p_user_id integer representing user id, defaults to null to use current user
  * @return bool whether user has access level specified
- * @access public 
+ * @access public
  */
 function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 	# Deal with not logged in silently in this case
@@ -442,7 +442,7 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
  * @param int $p_bug_id integer representing bug id to check access against
  * @param int|null $p_user_id integer representing user id, defaults to null to use current user
  * @return bool whether user has access level specified
- * @access public 
+ * @access public
  */
 function access_ensure_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 	if( !access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id ) ) {
@@ -546,7 +546,7 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
 }
 
 /**
- * Make sure that the current user can reopen the specified bug. 
+ * Make sure that the current user can reopen the specified bug.
  * Calls access_denied if user has no access to terminate script
  * @see access_can_reopen_bug
  * @param int $p_bug_id integer representing bug id to check access against

@@ -14,13 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
+/**
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
 
-	$g_global_profiles = true;
-	include( 'account_prof_menu_page.php' );
-?>
+$g_global_profiles = true;
+include( 'account_prof_menu_page.php' );

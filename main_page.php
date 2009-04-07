@@ -39,9 +39,9 @@
 	access_ensure_project_level( VIEWER );
 
 	$f_offset = gpc_get_int( 'offset', 0 );
-	
+
 	$t_project_id = helper_get_current_project();
-	
+
 	$t_rss_enabled = config_get( 'rss_enabled' );
 
 	if ( OFF != $t_rss_enabled ) {
@@ -111,4 +111,4 @@
 	echo '</div>';
 
 	html_page_bottom( __FILE__ );
-?>
+

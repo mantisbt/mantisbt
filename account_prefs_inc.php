@@ -321,4 +321,3 @@
 
 <?php
 	} # end of edit_account_prefs()
-?>

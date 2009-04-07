@@ -91,7 +91,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 }
 
 /**
- * Determine the preferred language 
+ * Determine the preferred language
  * @return string
  */
 function lang_get_default() {
@@ -120,7 +120,7 @@ function lang_get_default() {
 }
 
 /**
- * 
+ *
  * @return string
  */
 function lang_map_auto() {

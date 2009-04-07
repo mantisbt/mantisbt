@@ -40,7 +40,7 @@
 	$t_can_change_workflow = $t_access >= config_get_access( 'status_enum_workflow' );
 	$t_can_change_flags = $t_can_change_workflow;
 	$t_overrides = array();
-	
+
 	function set_overrides( $p_config ) {
 	   global $t_overrides;
 	   if ( !in_array( $p_config, $t_overrides ) ) {

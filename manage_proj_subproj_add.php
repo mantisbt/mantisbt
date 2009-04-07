@@ -38,7 +38,7 @@
 
 	project_ensure_exists( $f_project_id );
 	project_ensure_exists( $f_subproject_id );
-	
+
 	if ( $f_project_id == $f_subproject_id ) {
 		trigger_error( ERROR_GENERIC, ERROR );
 	}

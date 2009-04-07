@@ -36,7 +36,7 @@
 
 	$t_token = token_get_value( TOKEN_GRAPH );
 	if ( $t_token == null ) {
-		$t_metrics = enum_bug_group( lang_get( 'severity_enum_string' ), 'severity' );	
+		$t_metrics = enum_bug_group( lang_get( 'severity_enum_string' ), 'severity' );
 	} else {
 		$t_metrics = unserialize( $t_token );
 	}

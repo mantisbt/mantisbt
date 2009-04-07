@@ -58,7 +58,7 @@
 	$result = db_query_bound( $query, Array( $v_bug_text_id ) );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v2' );
-	
+
 	$t_history = history_get_events_array( $f_bug_id );
 
 	$v_os 						= string_display( $v_os );
@@ -157,9 +157,9 @@
 		<?php echo lang_get( 'assigned_to' ) ?>:
 	</td>
 	<td class="print">
-		<?php 
+		<?php
 			if ( access_has_bug_level( config_get( 'view_handler_threshold' ), $f_bug_id ) ) {
-				print_user_with_subject( $v_handler_id, $f_bug_id ); 
+				print_user_with_subject( $v_handler_id, $f_bug_id );
 			}
 		?>
 	</td>
@@ -369,8 +369,8 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 		<hr size="1" />
 	</td>
 </tr>
-<?php 
-	# ISSUE HISTORY 
+<?php
+	# ISSUE HISTORY
 ?>
 <tr>
 	<td class="form-title">
@@ -409,7 +409,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	</td>
 </tr>
 <?php
-	} 
+	}
 ?>
 </table>
 
@@ -417,4 +417,3 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'print_bugnote_inc.php' ) ;
 
 	last_visited_issue( $f_bug_id );
-?>

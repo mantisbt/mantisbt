@@ -68,7 +68,7 @@
 				$t_value = config_eval( $p_value );
 				break;
 		}
-		
+
 		echo '<pre>';
 
 		if ( $t_corrupted ) {
@@ -173,7 +173,7 @@
 	<td class="form-title" colspan="2">
 		<?php echo lang_get( 'set_configuration_option' ) ?>
 	</td>
-</tr>		
+</tr>
 <tr <?php echo helper_alternate_class() ?> valign="top">
 	<td>
 		<?php echo lang_get( 'username' ) ?>
@@ -229,7 +229,7 @@
 	<td colspan="2">
 			<input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option' ) ?>" />
 	</td>
-</tr>		
+</tr>
 </table>
 </form>
 <?php

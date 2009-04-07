@@ -63,7 +63,7 @@ function csv_get_default_filename() {
 }
 
 /**
- * escape a string before writing it to csv file. 
+ * escape a string before writing it to csv file.
  * @param type $todo TODO
  * @return  TODO
  * @access public
@@ -307,7 +307,7 @@ function csv_format_summary( $p_summary ) {
 }
 
 /**
- * return the description 
+ * return the description
  * @param string $p_description description
  * @return string formatted description
  * @access public

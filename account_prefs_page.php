@@ -63,4 +63,3 @@
 	edit_account_prefs();
 
 	html_page_bottom( __FILE__ );
-?>

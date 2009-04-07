@@ -124,4 +124,3 @@
 	} while ( $t_more );
 
 	echo excel_get_footer();
-?>

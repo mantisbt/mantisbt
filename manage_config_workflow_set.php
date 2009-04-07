@@ -48,7 +48,7 @@
 		if( config_get_access( $t_threshold ) <= $t_access ) {
 			$f_value = gpc_get( 'threshold_' . $t_threshold );
 			$f_access = gpc_get( 'access_' . $t_threshold );
-			if ( ( $f_value != config_get( $t_threshold ) ) 
+			if ( ( $f_value != config_get( $t_threshold ) )
 					|| ( $f_access != config_get_access( $t_threshold ) ) ) {
 				config_set( $t_threshold, $f_value, NO_USER, $t_project, $f_access );
 			}
@@ -116,7 +116,7 @@
 			}
 		}
 
-		if ( ( $t_set_status != config_get( 'set_status_threshold' ) ) 
+		if ( ( $t_set_status != config_get( 'set_status_threshold' ) )
 				|| ( $f_access != config_get_access( 'status_enum_workflow' ) ) ) {
 			config_set( 'set_status_threshold', $t_set_status, ALL_USERS, $t_project, $f_access );
 		}

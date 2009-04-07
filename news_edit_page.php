@@ -32,26 +32,26 @@
 ?>
 <?php
 	$f_news_id = gpc_get_int( 'news_id' );
-	$f_action = gpc_get_string( 'action', '' );	
+	$f_action = gpc_get_string( 'action', '' );
 
 	# If deleting item redirect to delete script
 	if ( 'delete' == $f_action ) {
 		form_security_validate( 'news_delete' );
 
-		$row = news_get_row( $f_news_id );   
-		     
-		# This check is to allow deleting of news items that were left orphan due to bug #3723   
-		if ( project_exists( $row['project_id'] ) ) {   
-			access_ensure_project_level( config_get( 'manage_news_threshold' ), $row['project_id'] );   
+		$row = news_get_row( $f_news_id );
+
+		# This check is to allow deleting of news items that were left orphan due to bug #3723
+		if ( project_exists( $row['project_id'] ) ) {
+			access_ensure_project_level( config_get( 'manage_news_threshold' ), $row['project_id'] );
 		}
 
-		helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ), lang_get( 'delete_news_item_button' ) );   
+		helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ), lang_get( 'delete_news_item_button' ) );
 
-		news_delete( $f_news_id );   
+		news_delete( $f_news_id );
 
 		form_security_purge( 'news_delete' );
 
-		print_header_redirect( 'news_menu_page.php', true ); 
+		print_header_redirect( 'news_menu_page.php', true );
 	}
 
 	# Retrieve news item data and prefix with v_

@@ -21,9 +21,9 @@
 	 * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
-	 
+
 	 $g_allow_browser_cache = 1;
-	 
+
 	 /**
 	  * MantisBT Core API's
 	  */
@@ -151,8 +151,8 @@
 			echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
 		} ?>
 		<select <?php echo helper_get_tab_index() ?> name="category_id">
-			<?php 
-				print_category_option_list( $f_category_id ); 
+			<?php
+				print_category_option_list( $f_category_id );
 			?>
 		</select>
 	</td>
@@ -400,4 +400,5 @@
 </script>
 <?php } ?>
 
-<?php html_page_bottom( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

@@ -271,7 +271,7 @@ $g_cache_versions_project = null;
 
 function version_cache_array_rows( $p_project_id_array ) {
 	global $g_cache_versions, $g_cache_versions_project;
-	
+
 	$c_project_id_array = array();
 
 	foreach( $p_project_id_array as $t_project_id ) {
@@ -296,7 +296,7 @@ function version_cache_array_rows( $p_project_id_array ) {
 	while( $row = db_fetch_array( $result ) ) {
 		$row['date_order'] = db_unixtimestamp( $row['date_order'] );
 		$g_cache_versions[(int) $row['id']] = $row;
-		
+
 		$rows[ (int)$row[ 'project_id' ] ][] = $row['id'];
 	}
 

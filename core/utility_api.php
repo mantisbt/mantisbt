@@ -180,7 +180,7 @@ function get_gd_version() {
 }
 
 /**
- * return true or false if string matches current page name 
+ * return true or false if string matches current page name
  * @param string $p_string page name
  * @return bool
  * @access public

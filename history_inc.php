@@ -97,4 +97,3 @@
 
 <?php
 	collapse_end( 'history' );
-?>

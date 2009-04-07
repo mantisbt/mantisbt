@@ -248,7 +248,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 		$graph->img->SetAntiAliasing();
 	}
 	$graph->SetScale( 'linlin');
-	$graph->yaxis->SetColor("red");		
+	$graph->yaxis->SetColor("red");
 	$graph->SetY2Scale("lin");
 	$graph->SetMarginColor( 'white' );
 	$graph->SetFrame( false );
@@ -461,7 +461,7 @@ function create_developer_summary() {
 			$t_handler_arr[$row['handler_id']]['res'] = 0;
 			$t_handler_arr[$row['handler_id']]['open'] = 0;
 			$t_handler_arr[$row['handler_id']]['close'] = 0;
-			$t_handlers[] = $row['handler_id'];			
+			$t_handlers[] = $row['handler_id'];
 		}
 		if( $row['status'] >= $t_res_val ) {
 			if( $row['status'] >= $t_clo_val ) {
@@ -485,10 +485,10 @@ function create_developer_summary() {
 
 		$t_metrics['open'][$t_username] = $t_data['open'];
 		$t_metrics['resolved'][$t_username] = $t_data['res'];
-		$t_metrics['closed'][$t_username] = $t_data['close'];		
+		$t_metrics['closed'][$t_username] = $t_data['close'];
 	}
 	ksort($t_metrics);
-	
+
 	# end for
 	return $t_metrics;
 }

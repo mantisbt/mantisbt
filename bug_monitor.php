@@ -37,7 +37,7 @@
 	$t_bug = bug_get( $f_bug_id, true );
 	$f_username = gpc_get_string( 'username', '' );
 
-	$t_logged_in_user_id = auth_get_current_user_id(); 
+	$t_logged_in_user_id = auth_get_current_user_id();
 
 	if ( is_blank( $f_username ) ) {
 		$t_user_id = $t_logged_in_user_id;
@@ -58,7 +58,7 @@
 	$f_action	= gpc_get_string( 'action' );
 
 	if ( $t_logged_in_user_id == $t_user_id ) {
-		access_ensure_bug_level( config_get( 'monitor_bug_threshold' ), $f_bug_id );		
+		access_ensure_bug_level( config_get( 'monitor_bug_threshold' ), $f_bug_id );
 	} else {
 		access_ensure_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $f_bug_id );
 	}

@@ -61,7 +61,7 @@ function tmpcmp( $a, $b ) {
 function get_total_count_by_date( $p_date ) {
 	$t_project_id = helper_get_current_project();
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	
+
 	$d_arr = explode( '/', $p_date );
 	$p_date = $d_arr[2] . '-' . $d_arr[0] . '-' . $d_arr[1];
 	$query = "SELECT COUNT(*)
@@ -76,7 +76,7 @@ function get_total_count_by_date( $p_date ) {
 function get_resolved_count_by_date( $p_date ) {
 	$t_project_id = helper_get_current_project();
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	
+
 	$d_arr = explode( '/', $p_date );
 	$p_date = $d_arr[2] . '-' . $d_arr[0] . '-' . $d_arr[1];
 	$query = "SELECT COUNT(*)
@@ -92,7 +92,7 @@ function get_resolved_count_by_date( $p_date ) {
 function get_closed_count_by_date( $p_date ) {
 	$t_project_id = helper_get_current_project();
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	
+
 	$d_arr = explode( '/', $p_date );
 	$p_date = $d_arr[2] . '-' . $d_arr[0] . '-' . $d_arr[1];
 	$query = "SELECT COUNT(*)
@@ -136,7 +136,8 @@ foreach( $data_date_arr as $val ) {
 }
 
 $data_open_count_arr = array();
-for( $i = 1;$i < count( $data_open_count_arr_temp );$i++ ) {
+$t_count = count( $data_open_count_arr_temp );
+for( $i = 1;$i < $t_count;$i++ ) {
 	$data_open_count_arr[] = $data_open_count_arr_temp[$i] - $data_open_count_arr_temp[$i - 1];
 }
 $data_open_count_arr[] = 0;
@@ -147,7 +148,8 @@ foreach( $data_date_arr as $val ) {
 	$data_resolved_count_arr_temp[] = get_resolved_count_by_date( $val );
 }
 $data_resolved_count_arr = array();
-for( $i = 1;$i < count( $data_resolved_count_arr_temp );$i++ ) {
+$t_count = count( $data_resolved_count_arr_temp );
+for( $i = 1;$i < $t_count;$i++ ) {
 	$data_resolved_count_arr[] = $data_resolved_count_arr_temp[$i] - $data_resolved_count_arr_temp[$i - 1];
 }
 $data_resolved_count_arr[] = 0;
@@ -158,7 +160,8 @@ foreach( $data_date_arr as $val ) {
 	$data_closed_count_arr_temp[] = get_closed_count_by_date( $val );
 }
 $data_closed_count_arr = array();
-for( $i = 1;$i < count( $data_closed_count_arr_temp );$i++ ) {
+$t_count = count( $data_closed_count_arr_temp );
+for( $i = 1;$i < $t_count;$i++ ) {
 	$data_closed_count_arr[] = $data_closed_count_arr_temp[$i] - $data_closed_count_arr_temp[$i - 1];
 }
 $data_closed_count_arr[] = 0;

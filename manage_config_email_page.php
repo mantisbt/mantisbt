@@ -43,8 +43,8 @@
  * @return array
  */
     function array_merge_recursive2($p_Array1, $p_Array2) {
-        if (!is_array($p_Array1) or !is_array($p_Array2)) { 
-            return $p_Array2; 
+        if (!is_array($p_Array1) or !is_array($p_Array2)) {
+            return $p_Array2;
         }
         foreach ( $p_Array2 AS $t_Key2 => $t_Value2) {
             $p_Array1[$t_Key2] = array_merge_recursive2( @$p_Array1[$t_Key2], $t_Value2);
@@ -60,23 +60,23 @@
 	# ON or OFF.
 	function get_notify_flag( $action, $flag ) {
 		global $t_notify_flags, $t_default_notify_flags;
-        
+
 		$val = OFF;
 		if ( isset ( $t_notify_flags[$action][$flag] ) ) {
 			$val = $t_notify_flags[$action][$flag];
 		} elseif ( isset ( $t_default_notify_flags[$flag] ) ) {
 			$val = $t_default_notify_flags[$flag];
-		} 
+		}
 		return $val;
 	}
-	
+
     function colour_notify_flag ( $p_action, $p_flag ) {
         global $t_notify_flags, $t_global_notify_flags, $t_file_notify_flags, $t_colour_project, $t_colour_global;
-        
+
         $t_file = isset( $t_file_notify_flags[$p_action][$p_flag] ) ? ( $t_file_notify_flags[$p_action][$p_flag] ? 1 : 0 ): -1;
         $t_global = isset( $t_global_notify_flags[$p_action][$p_flag] ) ? ( $t_global_notify_flags[$p_action][$p_flag]  ? 1 : 0 ): -1;
         $t_project = isset( $t_notify_flags[$p_action][$p_flag] ) ? ( $t_notify_flags[$p_action][$p_flag]  ? 1 : 0 ): -1;
-           
+
         $t_colour = '';
         if ( $t_global >= 0 ) {
             if ( $t_global != $t_file ) {
@@ -87,11 +87,10 @@
             if ( $t_project != $t_global ) {
                 $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
             }
-        } 
+        }
         return $t_colour;
     }
-    
-    
+
 	# Get the value associated with the specific action and flag.
 	function show_notify_flag( $p_action, $p_flag ) {
 		global $t_can_change_flags , $t_can_change_defaults;
@@ -107,24 +106,24 @@
 
     function colour_threshold_flag ( $p_access, $p_action ) {
         global $t_notify_flags, $t_global_notify_flags, $t_file_notify_flags, $t_colour_project, $t_colour_global;
-        
+
         $t_file = ( $p_access >= $t_file_notify_flags[$p_action]['threshold_min'] )
 			             && ( $p_access <= $t_file_notify_flags[$p_action]['threshold_max'] );
         $t_global = ( $p_access >= $t_global_notify_flags[$p_action]['threshold_min'] )
 			             && ( $p_access <= $t_global_notify_flags[$p_action]['threshold_max'] );
         $t_project = ( $p_access >= $t_notify_flags[$p_action]['threshold_min'] )
 			             && ( $p_access <= $t_notify_flags[$p_action]['threshold_max'] );
-           
+
         $t_colour = '';
         if ( $t_global != $t_file ) {
             $t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
         }
         if ( $t_project != $t_global ) {
             $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
-        } 
+        }
         return $t_colour;
     }
-    
+
 	function show_notify_threshold( $p_access, $p_action ) {
 		global $t_can_change_flags , $t_can_change_defaults;
 		$t_flag = ( $p_access >= get_notify_flag( $p_action, 'threshold_min' ) )
@@ -185,10 +184,10 @@
 
 	$t_access = current_user_get_access_level();
 	$t_project = helper_get_current_project();
-	
+
 	$t_colour_project = config_get( 'colour_project');
 	$t_colour_global = config_get( 'colour_global');
-	
+
 	# build a list of all of the actions
 	$t_actions = array( 'owner', 'reopened', 'deleted', 'bugnote' );
 	if( config_get( 'enable_sponsorship' ) == ON ) {
@@ -201,7 +200,7 @@
 	foreach( $t_statuses as $t_status ) {
 		$t_actions[] =  $t_status;
 	}
-	
+
 	# build a composite of the status flags, exploding the defaults
 	$t_global_default_notify_flags = config_get( 'default_notify_flags', null, null, ALL_PROJECTS );
 	$t_global_notify_flags = array();
@@ -220,7 +219,7 @@
 	   }
 	}
 	$t_file_notify_flags = array_merge_recursive2( $t_file_notify_flags, config_get_global( 'notify_flags' ) );
-	
+
 	$t_default_notify_flags = config_get( 'default_notify_flags' );
 	$t_notify_flags = array();
 	foreach ( $t_default_notify_flags as $t_flag => $t_value ) {
@@ -283,7 +282,7 @@
 			echo "<input type=\"submit\" class=\"button\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
 
 			echo "</form>\n";
-			
+
 			echo "<div class=\"right\"><form name=\"mail_config_action\" method=\"post\" action=\"manage_config_revert.php\">\n";
 			echo form_security_field( 'manage_config_revert' );
 			echo "<input name=\"revert\" type=\"hidden\" value=\"notify_flags,default_notify_flags\"></input>";
@@ -294,7 +293,7 @@
                 echo lang_get( 'revert_to_system' );
             } else {
                 echo lang_get( 'revert_to_all_project' );
-            } 
+            }
 			echo "\" />\n";
 			echo "</form></div>\n";
 		}

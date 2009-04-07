@@ -44,7 +44,7 @@
 	$t_filter = filter_get_default();
 	$t_target_field = gpc_get_string( 'target_field', '' );
 	if ( !isset( $t_filter[ rtrim( $t_target_field, '[]' ) ] ) ) {
-		$t_target_field = '';	
+		$t_target_field = '';
 	}
 
 	if ( ON == config_get( 'use_javascript' ) ) {
@@ -141,7 +141,7 @@
 	if ( !in_array( $t_target_field, $t_fields ) ) {
 		$t_target_field = '';
 	}
-	
+
 	$f_for_screen = gpc_get_bool( 'for_screen', true );
 
 	$t_action  = "view_all_set.php?f=3";
@@ -164,7 +164,7 @@
 	}
 	if ( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
 		$f_view_type = $f_default_view_type;
-	}	
+	}
 
 	$t_select_modifier = '';
 	if ( 'advanced' == $f_view_type ) {
@@ -463,5 +463,5 @@ if ( 'simple' == $f_view_type ) {
 </table>
 </form>
 
-<?php 
+<?php
 	html_page_bottom( __FILE__ );

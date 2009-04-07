@@ -129,9 +129,9 @@
 <?php # Add Profile Form END ?>
 
 <?php # Edit or Delete Profile Form BEGIN ?>
-<?php 
+<?php
 	$t_profiles = profile_get_all_for_user( $t_user_id );
-	if( $t_profiles ) { 
+	if( $t_profiles ) {
 ?>
 <br />
 <div align="center">

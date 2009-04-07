@@ -339,7 +339,7 @@ $g_cache_category_project = null;
 
 function category_cache_array_rows_by_project( $p_project_id_array ) {
 	global $g_category_cache, $g_cache_category_project;
-	
+
 	$c_project_id_array = array();
 
 	foreach( $p_project_id_array as $t_project_id ) {
@@ -359,14 +359,14 @@ function category_cache_array_rows_by_project( $p_project_id_array ) {
 	$query = "SELECT c.*, p.name AS project_name FROM $t_category_table AS c
 				LEFT JOIN $t_project_table AS p
 					ON c.project_id=p.id
-				WHERE project_id IN ( " . implode( ', ', $c_project_id_array ) . " ) 
+				WHERE project_id IN ( " . implode( ', ', $c_project_id_array ) . " )
 				ORDER BY c.name ";
 	$result = db_query_bound( $query );
 
 	$rows = array();
 	while( $row = db_fetch_array( $result ) ) {
 		$g_category_cache[(int) $row['id']] = $row;
-		
+
 		$rows[ (int)$row[ 'project_id' ] ][] = $row['id'];
 	}
 
@@ -393,18 +393,18 @@ function category_cache_array_rows_by_project( $p_project_id_array ) {
 			foreach( $g_cache_category_project[ (int)$p_project_id ] as $t_id ) {
 				$t_categories[] = category_get_row( $t_id );
 			}
-			
+
 			if( $p_sort_by_project ) {
 				category_sort_rows_by_project( $p_project_id );
 				usort( $t_categories, 'category_sort_rows_by_project' );
 				category_sort_rows_by_project( null );
-			}			
+			}
 			return $t_categories;
 		} else {
 			return array();
 		}
 	}
-	
+
 	project_hierarchy_cache();
 
 	$c_project_id = db_prepare_int( $p_project_id );
@@ -444,7 +444,7 @@ function category_cache_array_rows_by_project( $p_project_id_array ) {
 }
 
 /**
- * 
+ *
  * @param array $p_cat_id_array array of category id's
  * @return null
  * @access public
@@ -471,7 +471,6 @@ function category_cache_array_rows( $p_cat_id_array ) {
 					ON c.project_id=p.id
 				WHERE c.id IN (" . implode( ',', $c_cat_id_array ) . ')';
 	$result = db_query_bound( $query );
-
 
 	while( $row = db_fetch_array( $result ) ) {
 		$g_category_cache[(int) $row['id']] = $row;

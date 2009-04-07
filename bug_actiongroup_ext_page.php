@@ -72,4 +72,3 @@
 <?php
 	bug_group_action_print_bug_list( $f_bug_arr );
 	bug_group_action_print_bottom();
-?>

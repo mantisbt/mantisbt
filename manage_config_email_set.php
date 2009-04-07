@@ -116,7 +116,7 @@
 
 		$t_existing_default_flags = config_get( 'default_notify_flags' );
 		$t_existing_default_access = config_get_access( 'default_notify_flags' );
-		if ( ( $t_existing_default_flags != $t_default_flags ) 
+		if ( ( $t_existing_default_flags != $t_default_flags )
 				|| ( $t_existing_default_access != $f_actions_access ) ) { # only set the flags if they are different
             config_set( 'default_notify_flags', $t_default_flags, NO_USER, $t_project, $f_actions_access );
         }
@@ -146,7 +146,7 @@
 	if ( isset( $t_notify_flags ) ) {
 		$t_existing_flags = config_get( 'notify_flags' );
 		$t_existing_access = config_get_access( 'notify_flags' );
-		if ( ( $t_existing_flags != $t_notify_flags ) 
+		if ( ( $t_existing_flags != $t_notify_flags )
 				|| ( $t_existing_access != $f_actions_access ) ) { # only set the flags if they are different
             config_set( 'notify_flags', $t_notify_flags, NO_USER, $t_project, $f_actions_access );
         }

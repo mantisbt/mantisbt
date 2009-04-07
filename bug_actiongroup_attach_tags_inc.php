@@ -20,22 +20,22 @@
 	 * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
- 
+
 	$t_core_path = config_get( 'core_path' );
 
 	/**
 	 * Requires Tag API
-	 */	
+	 */
 	require_once( $t_core_path . 'tag_api.php' );
 
 	/**
-	 * Prints the title for the custom action page.	 
+	 * Prints the title for the custom action page.
 	 */
 	function action_attach_tags_print_title() {
         echo '<tr class="form-title">';
         echo '<td colspan="2">';
         echo lang_get( 'tag_attach_long' );
-        echo '</td></tr>';		
+        echo '</td></tr>';
 	}
 
 	/**
@@ -61,7 +61,7 @@
 			$f_tag_string = gpc_get_string( 'tag_string' );
 			$f_tag_select = gpc_get_string( 'tag_select' );
 
-			global $g_action_attach_tags_attach, $g_action_attach_tags_create, $g_action_attach_tags_failed; 
+			global $g_action_attach_tags_attach, $g_action_attach_tags_create, $g_action_attach_tags_failed;
 			$g_action_attach_tags_attach = array();
 			$g_action_attach_tags_create = array();
 			$g_action_attach_tags_failed = array();
@@ -89,7 +89,7 @@
 
 		}
 
-		global $g_action_attach_tags_attach, $g_action_attach_tags_create, $g_action_attach_tags_failed; 
+		global $g_action_attach_tags_attach, $g_action_attach_tags_create, $g_action_attach_tags_failed;
 
 		return true;
 	}
@@ -100,7 +100,7 @@
 	 * @return boolean True if all tags attach properly
 	 */
 	function action_attach_tags_process( $p_bug_id ) {
-		global $g_action_attach_tags_attach, $g_action_attach_tags_create; 
+		global $g_action_attach_tags_attach, $g_action_attach_tags_create;
 
 		$t_user_id = auth_get_current_user_id();
 

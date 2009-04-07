@@ -675,7 +675,8 @@ function project_copy_users( $p_destination_id, $p_source_id ) {
 	# Copy all users from current project over to another project
 	$t_rows = project_get_local_user_rows( $p_source_id );
 
-	for ( $i = 0; $i < sizeof( $t_rows ); $i++ ) {
+	$t_count = sizeof( $t_rows );
+	for ( $i = 0; $i < $t_count; $i++ ) {
 		$t_row = $t_rows[$i];
 
 		# if there is no duplicate then add a new entry

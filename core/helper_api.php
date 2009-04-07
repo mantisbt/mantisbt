@@ -76,7 +76,7 @@ function get_status_color( $p_status ) {
 function get_enum_element( $p_enum_name, $p_val ) {
 	$config_var = config_get( $p_enum_name . '_enum_string' );
 	$string_var = lang_get( $p_enum_name . '_enum_string' );
-	
+
 	return MantisEnum::getLocalizedLabel( $config_var, $string_var, $p_val );
 }
 

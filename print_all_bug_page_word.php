@@ -80,7 +80,7 @@
 xmlns:w="urn:schemas-microsoft-com:office:word"
 xmlns="http://www.w3.org/TR/REC-html40">
 
-<?php 
+<?php
 	html_page_top1();
 	html_head_end();
 	html_body_begin();
@@ -198,7 +198,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <?php
 		}
 		if ( !date_is_null( $t_bug->due_date ) ) {
-				print_date( config_get( 'short_date_format' ), $t_bug->due_date ); 
+				print_date( config_get( 'short_date_format' ), $t_bug->due_date );
 		print "\t\t</td>\n";
 		}
 	} else {
@@ -211,9 +211,9 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo lang_get( 'assigned_to' ) ?>:
 	</td>
 	<td class="print">
-		<?php 
+		<?php
 			if ( access_has_bug_level( config_get( 'view_handler_threshold' ), $t_id ) ) {
-				print_user_with_subject( $t_bug->handler_id, $t_id ); 
+				print_user_with_subject( $t_bug->handler_id, $t_id );
 			}
 		?>
 	</td>
@@ -439,7 +439,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<?php echo lang_get( 'no_bugnotes_msg' ) ?>
 	</td>
 </tr>
-<?php 
+<?php
 	} else { # print bugnotes ?>
 <tr>
 	<td class="form-title" colspan="2">
@@ -520,4 +520,3 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 echo '<br /><br />';
 		} # end in_array
 }  # end main loop
-?>

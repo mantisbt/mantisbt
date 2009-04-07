@@ -77,7 +77,7 @@ foreach( $t_plugins as $t_basename => $t_plugin ) {
 	<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
 </tr>
 
-<?php 
+<?php
 foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	$t_description = string_display_line_links( $t_plugin->description );
 	$t_author = $t_plugin->author;
@@ -99,7 +99,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 			$t_author = implode( $t_author, ', ' );
 		}
 		if ( !is_blank( $t_contact ) ) {
-			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ), 
+			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ),
 				'<a href="mailto:' . string_attribute( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
 		} else {
 			$t_author = '<br/>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
@@ -182,7 +182,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
 </tr>
 
-<?php 
+<?php
 foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 	$t_description = string_display_line_links( $t_plugin->description );
 	$t_author = $t_plugin->author;
@@ -198,7 +198,7 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 			$t_author = implode( $t_author, ', ' );
 		}
 		if ( !is_blank( $t_contact ) ) {
-			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ), 
+			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ),
 				'<a href="mailto:' . string_display_line( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
 		} else {
 			$t_author = '<br/>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );

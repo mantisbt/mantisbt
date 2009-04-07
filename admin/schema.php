@@ -369,7 +369,7 @@ $upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_user_pref_tabl
 /* apparently mysql now has a STRICT mode, where setting a DEFAULT value on a blob/text is now an error, instead of being silently ignored */
 if ( isset( $f_db_type ) && ( $f_db_type == 'mysql' || $f_db_type == 'mysqli' ) ) {
 	$upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_custom_field_table' ), "possible_values X NOTNULL" ) );
-} else { 
+} else {
 	$upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_custom_field_table' ), "possible_values X NOTNULL DEFAULT \" '' \"" ) );
 }
 

@@ -61,6 +61,3 @@ config_set( $t_config, $t_test );
 $t_test = config_get( $t_config );
 print_r( $t_test );
 echo " ".(isset($t_test[0])?"set":"not set")." ".count($t_test)." ";
-
-
-?>

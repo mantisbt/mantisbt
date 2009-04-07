@@ -81,8 +81,8 @@
 <tr>
 	<!-- Title -->
 	<td class="form-title">
-		<?php 
-		if ( $t_graph_relation ) 
+		<?php
+		if ( $t_graph_relation )
 			echo lang_get( 'viewing_bug_relationship_graph_title' );
 		else
 			echo lang_get( 'viewing_bug_dependency_graph_title' );

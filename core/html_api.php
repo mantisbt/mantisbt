@@ -1105,7 +1105,7 @@ function print_summary_menu( $p_page = '' ) {
 
 /**
  * Print the color legend for the status colors
- * @param string 
+ * @param string
  * @return null
  */
 function html_status_legend() {
@@ -1251,7 +1251,7 @@ function html_button_bug_update( $p_bug_id ) {
  * Print Change Status to: button
  * This code is similar to print_status_option_list except
  * there is no masking, except for the current state
- * 
+ *
  * @param int $p_bug_id
  * @return null
  */
@@ -1540,7 +1540,7 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 		# DELETE button
 		echo '<td class="center">';
 		html_button_bug_delete( $p_bug_id );
-		echo '</td>';		
+		echo '</td>';
 	}
 
 	helper_call_custom_function( 'print_bug_view_page_custom_buttons', array( $p_bug_id ) );

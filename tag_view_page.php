@@ -23,7 +23,7 @@
 	  * MantisBT Core API's
 	  */
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
 
 	/**
@@ -88,10 +88,10 @@
 <!-- Statistics -->
 <?php
 	$t_tags_related = tag_stats_related( $f_tag_id );
-	if ( count( $t_tags_related ) ) { 
+	if ( count( $t_tags_related ) ) {
 		echo '<tr ',helper_alternate_class(),'>';
 		echo '<td class="category" rowspan="',count( $t_tags_related ),'">',lang_get( 'tag_related' ),'</td>';
-		
+
 		$i = 0;
 		foreach( $t_tags_related as $t_tag ) {
 			$t_name = string_display_line( $t_tag['name'] );
@@ -103,7 +103,7 @@
 			echo '<td colspan="3">';
 			print_bracket_link( 'search.php?hide_status_id=90&amp;tag_string='.urlencode("+$t_tag_row[name]".config_get('tag_separator')."+$t_name"), sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ) );
 			echo '</a></td></tr>';
-			
+
 			$i++;
 		}
 	}

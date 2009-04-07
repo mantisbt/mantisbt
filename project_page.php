@@ -54,16 +54,16 @@
 	echo '<h1>', string_display( project_get_field( $f_project_id, 'name' ) ), '</h1>';
 
 	echo '<p>';
-	
+
 	# View Issues
 	echo '<a href="', $t_view_issues_url, '">', lang_get( 'view_bugs_link' ), '</a>';
-	
+
 	# Changelog
 	echo ' | <a href="', $t_changelog_url, '">', lang_get( 'changelog_link' ), '</a>';
-	
+
 	# Roadmap
 	echo ' | <a href="', $t_roadmap_url, '">', lang_get( 'roadmap_link' ), '</a>';
-	
+
 	# Documentation
 	if ( config_get( 'enable_project_documentation' ) == ON ) {
 		echo ' | <a href="proj_doc_page.php?project_id=', $f_project_id, '">', lang_get( 'docs_link' ), '</a>';
@@ -85,7 +85,7 @@
 	}
 
 	echo '</p>';
-	
+
 	/** @todo Add status, view state, versions, sub-projects, parent projects, and news. */
 	/** @todo Schema change: add home page, license, */
 
@@ -107,7 +107,7 @@
 		/** @todo sort users in DESC order by access level, then ASC by username/realname. */
 		foreach ( $t_users as $t_user_data ) {
 			$t_user_id = $t_user_data['id'];
-			
+
 			if ( $t_show_real_names && !is_blank( $t_user_data['realname'] ) ) {
 				$t_user_name = $t_user_data['realname'];
 			} else {

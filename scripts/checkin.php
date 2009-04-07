@@ -49,13 +49,15 @@ $t_fixed_issues = array();
 while(( $t_line = fgets( STDIN, 1024 ) ) ) {
 	$t_comment .= $t_line;
 	if( preg_match_all( $t_commit_regexp, $t_line, $t_matches ) ) {
-		for( $i = 0;$i < count( $t_matches[0] );++$i ) {
+		$t_count = count( $t_matches[0] );
+		for( $i = 0;$i < $t_count;++$i ) {
 			$t_issues[] = $t_matches[1][$i];
 		}
 	}
 
 	if( preg_match_all( $t_commit_fixed_regexp, $t_line, $t_matches ) ) {
-		for( $i = 0;$i < count( $t_matches[0] );++$i ) {
+		$t_count = count( $t_matches[0] );
+		for( $i = 0;$i < $t_count;++$i ) {
 			$t_fixed_issues[] = $t_matches[1][$i];
 		}
 	}

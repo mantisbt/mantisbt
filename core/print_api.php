@@ -631,7 +631,7 @@ function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
 	echo '<option value=""></option>';
 	foreach( $p_profiles as $t_profile ) {
 		extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
-		
+
 		$t_platform = string_display( $t_profile['platform'] );
 		$t_os = string_display( $t_profile['os'] );
 		$t_os_build = string_display( $t_profile['os_build'] );
@@ -838,7 +838,7 @@ function print_build_option_list( $p_build = '' ) {
 function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 	$t_config_var_name = $p_enum_name . '_enum_string';
 	$t_config_var_value = config_get( $t_config_var_name );
-	
+
 	$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 
 	foreach ( $t_enum_values as $t_key ) {
@@ -874,7 +874,7 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 	$t_enum_list = array();
 
 	foreach ( $t_enum_values as $t_enum_value ) {
-		if ( ( access_compare_level( $p_user_auth, access_get_status_threshold( $t_enum_value ) ) ) 
+		if ( ( access_compare_level( $p_user_auth, access_get_status_threshold( $t_enum_value ) ) )
 				&& ( !(( false == $p_show_current ) && ( $p_current_value == $t_enum_value ) ) ) ) {
 			$t_enum_list[$t_enum_value] = get_enum_element( 'status', $t_enum_value );
 		}
@@ -1648,7 +1648,7 @@ function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_
 function print_bug_attachments_list( $p_bug_id ) {
 	$t_attachments = file_get_visible_attachments( $p_bug_id );
 	$t_attachments_count = count( $t_attachments );
-	
+
 	$i = 0;
 	$image_previewed = false;
 
@@ -1707,7 +1707,7 @@ document.getElementById( span ).style.display = displayType;
 				echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content(\"hideSection_" . $c_id . "\");swap_content(\"showSection_" . $c_id . "\");return false;'>" . lang_get( 'hide_content' ) . "</a>]";
 
 				echo "<pre>";
-				
+
 				/** @todo Refactor into a method that gets contents for download / preview. */
 				switch( config_get( 'file_upload_method' ) ) {
 					case DISK:
@@ -1762,5 +1762,5 @@ document.getElementById( span ).style.display = displayType;
 			echo "<br />\n";
 			$i++;
 		}
-	}	
+	}
 }

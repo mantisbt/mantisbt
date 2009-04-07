@@ -164,7 +164,7 @@ function email_is_valid( $p_email ) {
 		$t_domain = $t_check[2];
 
 		# see if we're limited to one domain
-		$t_limit_email_domain = config_get( 'limit_email_domain' ); 
+		$t_limit_email_domain = config_get( 'limit_email_domain' );
 		if( $t_limit_email_domain !== OFF  ) {
 			if( 0 != strcasecmp( $t_limit_email_domain, $t_domain ) ) {
 				return false;
@@ -754,7 +754,7 @@ function email_send( $p_email_data ) {
 
 	$t_debug_email = config_get( 'debug_email' );
 	$t_mailer_method = config_get( 'phpMailer_method' );
-	
+
 	# Visit http://phpmailer.sourceforge.net
 	# if you have problems with phpMailer
 
@@ -806,7 +806,7 @@ function email_send( $p_email_data ) {
 			}
 
 			$mail->Port = config_get( 'smtp_port' );
-			
+
 			break;
 	}
 
@@ -906,10 +906,10 @@ function make_lf_crlf( $p_string ) {
 # Check limit_email_domain option and append the domain name if it is set
 
 /**
- * Appends an email domain to the specified email address if email is 
+ * Appends an email domain to the specified email address if email is
  * not empty, it doesn't already have a domain part and if a
  * limit_email_domain is configured.
- * 
+ *
  * @param string $p_email The email address to append the domain to.
  * @returns The email address with the appended domain (if applicable).
  */
@@ -1087,7 +1087,7 @@ function email_format_bug_message( $p_visible_bug_data ) {
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_summary' );
 
 	$t_message .= lang_get( 'email_description' ) . ": \n" . wordwrap( $p_visible_bug_data['email_description'] ) . "\n";
-	
+
 	if ( !is_blank( $p_visible_bug_data['email_steps_to_reproduce'] ) ) {
 		$t_message .= "\n" . lang_get( 'email_steps_to_reproduce' ) . ": \n" . wordwrap( $p_visible_bug_data['email_steps_to_reproduce'] ) . "\n";
 	}
@@ -1095,7 +1095,7 @@ function email_format_bug_message( $p_visible_bug_data ) {
 	if ( !is_blank( $p_visible_bug_data['email_additional_information'] ) ) {
 		$t_message .= "\n" . lang_get( 'email_additional_information' ) . ": \n" . wordwrap( $p_visible_bug_data['email_additional_information'] ) . "\n";
 	}
-	
+
 	if( isset( $p_visible_bug_data['relations'] ) ) {
 		$t_message .= $p_visible_bug_data['relations'];
 	}

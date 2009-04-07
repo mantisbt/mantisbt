@@ -2789,7 +2789,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<?php } else {?>
 				<td colspan="3">&nbsp;</td>
 			<?php } ?>
-			
+
 			<td class="small-caption" valign="top" id="tag_string_filter_target" colspan="5">
 				<?php
 					$t_tag_string = $t_filter[FILTER_PROPERTY_TAG_STRING];
@@ -2974,7 +2974,6 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 						$t_row_idx++;
 					}
 				}
-
 
 				if( $t_col_idx > 0 ) {
 					if( $t_col_idx < $t_per_row ) {

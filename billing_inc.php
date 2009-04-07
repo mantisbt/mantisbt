@@ -37,7 +37,7 @@ if ( !config_get('time_tracking_enabled') )
 
 <a name="bugnotestats" id="bugnotestats" /><br />
 
-<?php 
+<?php
 	collapse_open( 'bugnotestats' );
 
 	$t_today = date( "d:m:Y" );
@@ -170,7 +170,7 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	</td>
 <?php } ?>
 </tr>
-<?php } # end for loop 
+<?php } # end for loop
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="small-caption">

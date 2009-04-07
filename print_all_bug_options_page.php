@@ -28,9 +28,9 @@
 	  * MantisBT Core API's
 	  */
 	require_once( 'core.php' );
-	
+
 	require( 'print_all_bug_options_inc.php' );
-	
+
 	auth_ensure_user_authenticated();
 
 	html_page_top();

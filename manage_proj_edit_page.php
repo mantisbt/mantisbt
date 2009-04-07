@@ -41,7 +41,7 @@
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
 	$row = project_get_row( $f_project_id );
-	
+
 	$t_can_manage_users = access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
 	html_page_top( project_get_field( $f_project_id, 'name' ) );
@@ -548,7 +548,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 				</td>
 			</tr>
 	<?php
-		$t_index = 0;	
+		$t_index = 0;
 
 		$t_custom_field_security = form_security_field( 'manage_proj_custom_field_update' );
 
@@ -567,8 +567,8 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	<input type="text" name="sequence" value="<?php echo custom_field_get_sequence( $t_field_id, $f_project_id ) ?>" size="2" />
 	<input type="submit" class="button-small" value="<?php echo lang_get( 'update' ) ?>" />
 </form>
-	<?php 
-		$t_index++; 
+	<?php
+		$t_index++;
 	?>
 				</td>
 				<td class="center">
@@ -617,7 +617,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 				<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_to' ) ?>" />
 			</form>
 		</td>
-	</tr>	
+	</tr>
 	</table>
 	</div>
 <?php

@@ -41,7 +41,7 @@ require_once( $t_core_dir . 'logging_api.php' );
 require_once( $t_core_dir . 'projax_api.php' );
 
 /**
- * 
+ *
  * @return null
  * @access public
  */

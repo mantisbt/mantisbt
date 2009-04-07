@@ -40,11 +40,11 @@
 	# Select the news posts
 	$rows = news_get_rows( helper_get_current_project() );
 	$t_count = sizeof( $rows );
-	
+
 	if ( $t_count > 0 ) {
 		echo '<ul>';
 	}
-	
+
     # Loop through results
 	for ( $i=0 ; $i < $t_count ; $i++ ) {
 		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
@@ -73,7 +73,7 @@
 		echo ' ' . $t_note_string;
 		echo "</span></li>";
 	}  # end for loop
-	
+
 	if ( $t_count > 0 ) {
 			echo '</ul>';
 	}

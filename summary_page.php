@@ -48,11 +48,11 @@
 	# the issue may have passed through the status we consider resolved
 	#  (e.g., bug is CLOSED, not RESOLVED). The linkage to the history field
 	#  will look up the most recent 'resolved' status change and return it as well
-	$query = "SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status 
-        FROM $t_bug_table b LEFT JOIN $t_history_table h 
-            ON b.id = h.bug_id  AND h.type=0 AND h.field_name='status' AND h.new_value='$t_resolved'  
+	$query = "SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status
+        FROM $t_bug_table b LEFT JOIN $t_history_table h
+            ON b.id = h.bug_id  AND h.type=0 AND h.field_name='status' AND h.new_value='$t_resolved'
             WHERE b.status >='$t_resolved' AND $specific_where
-            GROUP BY b.id, b.status, b.date_submitted, b.last_updated 
+            GROUP BY b.id, b.status, b.date_submitted, b.last_updated
             ORDER BY b.id ASC";
 	$result = db_query( $query );
 	$bug_count = db_num_rows( $result );
@@ -62,7 +62,7 @@
 	$t_total_time   = 0;
 	for ($i=0;$i<$bug_count;$i++) {
 		$row = db_fetch_array( $result );
-		$t_date_submitted = db_unixtimestamp( $row['date_submitted'] );		
+		$t_date_submitted = db_unixtimestamp( $row['date_submitted'] );
 		$t_id = $row['id'];
 		$t_status = $row['status'];
 		if ( $row['hist_update'] !== NULL ) {
@@ -70,7 +70,7 @@
         } else {
         	$t_last_updated   = db_unixtimestamp( $row['last_updated'] );
         }
-		  
+
 		if ($t_last_updated < $t_date_submitted) {
 			$t_last_updated   = 0;
 			$t_date_submitted = 0;

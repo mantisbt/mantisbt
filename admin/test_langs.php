@@ -93,7 +93,7 @@ function checklangdir( $p_path, $p_subpath = '' ) {
 				echo "Checking language files for plugin $file:<br />";
 			}
 			if( !is_dir( $p_path . DIRECTORY_SEPARATOR . $file ) && $p_subpath == 'lang' ) {
-				checkfile( $p_path, $file );		
+				checkfile( $p_path, $file );
 			} else {
 				if ( is_dir( $p_path . DIRECTORY_SEPARATOR . $file ) )
 					checklangdir( $p_path, $file);

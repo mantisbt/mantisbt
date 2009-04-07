@@ -86,7 +86,7 @@
 	} else {
 		$t_bug_data->due_date = db_unixtimestamp ( $t_bug_data->due_date, true ) + 1;
 	}
-	
+
 	$t_bug_data->description		= gpc_get_string( 'description', $t_bug_data->description );
 	$t_bug_data->steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', $t_bug_data->steps_to_reproduce );
 	$t_bug_data->additional_information	= gpc_get_string( 'additional_information', $t_bug_data->additional_information );
@@ -138,7 +138,7 @@
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
-		# Only update the field if it is posted 
+		# Only update the field if it is posted
 		if ( !gpc_isset_custom_field( $t_id, $t_def['type'] ) ) {
 			continue;
 		}
@@ -216,4 +216,3 @@
 	helper_call_custom_function( 'issue_update_notify', array( $f_bug_id ) );
 
 	print_successful_redirect_to_bug( $f_bug_id );
-?>

@@ -70,12 +70,12 @@
             $t_existing_threshold = config_get( $p_threshold );
             $t_existing_access = config_get_access( $p_threshold );
             if ( -1 == $t_lower_threshold ) {
-                if ( ( $t_existing_threshold != $t_array_threshold ) 
+                if ( ( $t_existing_threshold != $t_array_threshold )
 						|| ( $t_existing_access != $f_access ) ) {
                     config_set( $p_threshold, $t_array_threshold, NO_USER, $t_project, $f_access );
                 }
 		    } else {
-                if ( ( $t_existing_threshold != $t_lower_threshold ) 
+                if ( ( $t_existing_threshold != $t_lower_threshold )
 						|| ( $t_existing_access != $f_access ) ) {
                     config_set( $p_threshold, $t_lower_threshold, NO_USER, $t_project, $f_access );
                 }

@@ -35,7 +35,7 @@
 
 	$t_token = token_get_value( TOKEN_GRAPH );
 	if ( $t_token == null ) {
-		$t_metrics = create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'priority');	
+		$t_metrics = create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'priority');
 	} else {
 		$t_metrics = graph_total_metrics( unserialize( $t_token ) );
 	}

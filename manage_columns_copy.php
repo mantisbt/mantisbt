@@ -95,4 +95,3 @@
 
 	$t_redirect_url = $f_manage_page ? 'manage_config_columns_page.php' : 'account_manage_columns_page.php';
 	print_header_redirect( $t_redirect_url );
-?>

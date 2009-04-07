@@ -84,13 +84,13 @@ $g_db_param_count = 0;
 function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_db_schema = null, $p_pconnect = false ) {
 	global $g_db_connected, $g_db;
 	$t_db_type = config_get_global( 'db_type' );
-	
+
 	if( !db_check_database_support( $t_db_type ) ) {
 		error_parameters( 0, 'PHP Support for database is not enabled' );
 		trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
 	}
-	
-	if( $p_dsn === false ) {		
+
+	if( $p_dsn === false ) {
 		$g_db = ADONewConnection( $t_db_type );
 
 		if( $p_pconnect ) {
@@ -449,9 +449,9 @@ function db_fetch_array( &$p_result ) {
 		$t_row = $p_result->GetRowAssoc( false );
 		static $t_array_result;
 		static $t_array_fields;
-		
+
 		if ($t_array_result != $p_result) {
-			// new query 
+			// new query
 			$t_array_result = $p_result;
 			$t_array_fields = null;
 		} else {
@@ -460,7 +460,7 @@ function db_fetch_array( &$p_result ) {
 				return $t_row;
 			}
 		}
-					
+
 		$t_convert = false;
 		$t_fieldcount = $p_result->FieldCount();
 		for( $i = 0; $i < $t_fieldcount; $i++ ) {
@@ -486,7 +486,7 @@ function db_fetch_array( &$p_result ) {
 					break;
 			}
 		}
-		
+
 		if ( $t_convert == false ) {
 			$t_array_fields = null;
 		}

@@ -49,7 +49,7 @@
 
 	$t_use_query_url = 'view_all_set.php?type=3&amp;source_query_id=';
 	$t_delete_query_url = 'query_delete_page.php?source_query_id=';
-	
+
 	$t_rss_enabled = config_get( 'rss_enabled' );
 ?>
 <br />

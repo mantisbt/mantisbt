@@ -38,7 +38,7 @@ if ( ON != config_get('time_tracking_enabled') ) {
 
 <a name="bugnotestats" id="bugnotestats" /><br />
 
-<?php 
+<?php
 	collapse_open( 'bugnotestats' );
 
 	$t_bugnote_stats_from_def = date( "d:m:Y", $t_bug->date_submitted );

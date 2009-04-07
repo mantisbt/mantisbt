@@ -28,7 +28,7 @@
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'string_api.php' );
-	
+
 	$f_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
 
 	# Check if project documentation feature is enabled.
@@ -52,12 +52,12 @@
 		# Select all the projects that the user has access to
 		$t_projects = user_get_accessible_projects( $t_user_id );
 	} else {
-		# Select the specific project 
+		# Select the specific project
 		$t_projects = array( $f_project_id );
 	}
 
 	$t_projects[] = ALL_PROJECTS; # add "ALL_PROJECTS to the list of projects to fetch
-	
+
 	$t_reqd_access = config_get( 'view_proj_doc_threshold' );
 	if ( is_array( $t_reqd_access ) ) {
 		if ( 1 == count( $t_reqd_access ) ) {
@@ -67,12 +67,12 @@
 		}
 	} else {
 		$t_access_clause = ">= $t_reqd_access ";
-	}			
+	}
 
 	$query = "SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title, pft.description, pft.date_added
 				FROM $t_project_file_table pft
 					LEFT JOIN $t_project_table pt ON pft.project_id = pt.id
-					LEFT JOIN $t_project_user_list_table pult 
+					LEFT JOIN $t_project_user_list_table pult
 						ON pft.project_id = pult.project_id AND pult.user_id = $t_user_id
 					LEFT JOIN $t_user_table ut ON ut.id = $t_user_id
 				WHERE pft.project_id in (" . implode( ',', $t_projects ) . ") AND

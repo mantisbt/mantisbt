@@ -202,7 +202,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 			echo '<p style="color:red">', $t_error_type, ': ', $t_error_description, '</p>';
 			$g_error_handled = true;
 			break;
-		default:			
+		default:
 			# do nothing - note we treat this as we've not handled an error, so any redirects go through.
 		}
 
@@ -389,7 +389,7 @@ function error_handled() {
 	return( true == $g_error_handled );
 }
 
-/** 
+/**
  * Set additional info parameters to be used when displaying the next error
  * This function takes a variable number of parameters
  *
@@ -405,7 +405,7 @@ function error_parameters() {
 	$g_error_parameters = func_get_args();
 }
 
-/** 
+/**
  * Set a url to give to the user to proceed after viewing the error
  * @access public
  * @param string p_url url given to user after viewing the error
@@ -417,7 +417,7 @@ function error_proceed_url( $p_url ) {
 	$g_error_proceed_url = $p_url;
 }
 
-/** 
+/**
  * Simple version of helper_alternate_class for use by error api only.
  * @access private
  * @return string representing css class

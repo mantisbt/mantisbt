@@ -401,7 +401,7 @@ function tag_delete( $p_tag_id ) {
 /**
  * Gets the candidates for the specified bug.  These are existing tags
  * that are not associated with the bug already.
- * 
+ *
  * @param int $p_bug_id  The bug id, if 0 returns all tags.
  * @returns The array of tag rows, each with id, name, and description.
  */
@@ -418,9 +418,9 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 					LEFT JOIN $t_bug_tag_table b ON t.id=b.tag_id
 					WHERE b.bug_id IS NULL OR b.bug_id != " . db_param();
 			$result = db_query_bound( $query, $t_params );
-			
+
 			$t_subquery_results = array();
-			
+
 			while( $row = db_fetch_array( $result ) ) {
 				$t_subquery_results[] = (int)$row;
 			}
@@ -445,7 +445,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 	while( $row = db_fetch_array( $result ) ) {
 		$t_results_to_return[] = $row;
 	}
-	
+
 	return $t_results_to_return;
 }
 
@@ -609,7 +609,7 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 
 	$t_tag_row = tag_bug_get_row( $p_tag_id, $p_bug_id);
 	if( $t_user_id == tag_get_field( $p_tag_id, 'user_id' ) || $t_user_id == $t_tag_row[ 'user_id' ] ) {
-		$t_detach_level = config_get( 'tag_detach_own_threshold' );		
+		$t_detach_level = config_get( 'tag_detach_own_threshold' );
 	} else {
 		$t_detach_level = config_get( 'tag_detach_threshold' );
 	}

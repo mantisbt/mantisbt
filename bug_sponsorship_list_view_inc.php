@@ -165,4 +165,3 @@
 <?php
 	collapse_end( 'sponsorship' );
 } # If sponsorship enabled
-?>

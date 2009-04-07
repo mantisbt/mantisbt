@@ -22,32 +22,32 @@
  * @package CoreAPI
  * @subpackage AuthenticationAPI
  */
- 
+
  /**
   * requires helper_api
  */
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
 
 /**
- * 
+ *
  * @global array $g_script_login_cookie
  */
 $g_script_login_cookie = null;
 
 /**
- * 
+ *
  * @global array $g_cache_anonymous_user_cookie_string
  */
 $g_cache_anonymous_user_cookie_string = null;
 
 /**
- * 
+ *
  * @global array $g_cache_cookie_valid
  */
 $g_cache_cookie_valid = null;
 
 /**
- * 
+ *
  * @global array $g_cache_current_user_id
  */
 $g_cache_current_user_id = null;
@@ -84,7 +84,7 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
 
 /**
  * Return true if there is a currently logged in and authenticated user, false otherwise
- * 
+ *
  * @return bool
  * @access public
  */
@@ -640,7 +640,7 @@ function auth_reauthenticate() {
  * @param integer User ID
  * @param string Username
  * @return bool
- * @access public 
+ * @access public
  */
 function auth_reauthenticate_page( $p_user_id, $p_username ) {
 	$t_error = false;

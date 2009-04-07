@@ -50,7 +50,7 @@
 	}
 
 	html_page_top2();
-	
+
 	print_recently_visited();
 
 	$f_page_number		= gpc_get_int( 'page_number', 1 );
@@ -104,7 +104,7 @@
 		}
 
 		# don't display "Reported by Me" bugs to users that can't report bugs
-		else if ( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) && 
+		else if ( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) &&
 				( current_user_is_anonymous() OR !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
 			$t_number_of_boxes = $t_number_of_boxes - 1;
 		}

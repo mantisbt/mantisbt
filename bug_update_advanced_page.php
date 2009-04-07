@@ -39,7 +39,7 @@
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
 	$t_bug = bug_prepare_edit( bug_get( $f_bug_id, true ) );
-	
+
 	if( $t_bug->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...
 		# ... override the current project. This to avoid problems with categories and handlers lists etc.
@@ -52,7 +52,7 @@
 	if ( SIMPLE_ONLY == config_get( 'show_update' ) ) {
 		print_header_redirect ( 'bug_update_page.php?bug_id=' . $f_bug_id );
 	}
-	
+
 	if ( bug_is_readonly( $f_bug_id ) ) {
 		error_parameters( $f_bug_id );
 		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
@@ -199,7 +199,7 @@
 	<td class="category">
 		<?php echo lang_get( 'due_date' ) ?>
 	</td>
-	<?php 
+	<?php
 	if ( bug_is_overdue( $f_bug_id ) ) {
 		print "<td class=\"overdue\">";
 	} else {

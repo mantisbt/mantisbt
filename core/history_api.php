@@ -133,7 +133,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 
 	for( $i = 0, $j = 0;$i < $raw_history_count;++$i ) {
 		$t_row = db_fetch_array( $result );
-		
+
 		$v_type = $t_row['type'];
 		$v_field_name = $t_row['field_name'];
 		$v_user_id = $t_row['user_id'];

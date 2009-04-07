@@ -62,7 +62,7 @@ require_once( $t_core_dir . 'tag_api.php' );
  */
 require_once( $t_core_dir . 'relationship_api.php' );
 
-/** 
+/**
  * Bug Data Structure Definition
  * @package MantisBT
  * @subpackage classes
@@ -652,7 +652,6 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 	$t_bug_id = db_prepare_int( $p_bug_id );
 	$t_target_project_id = db_prepare_int( $p_target_project_id );
-
 
 	$t_bug_data = new BugData;
 	$t_bug_data = bug_get( $t_bug_id, true );

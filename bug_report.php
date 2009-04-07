@@ -61,7 +61,7 @@
 		$t_bug_data->due_date = date_get_null();
 	} else {
 		$t_bug_data->due_date = db_unixtimestamp ( $t_bug_data->due_date, true ) + 1;
-	}	
+	}
 
 	$f_file					= gpc_get_file( 'file', null ); /** @todo (thraxisp) Note that this always returns a structure */
 															# size = 0, if no file
@@ -152,11 +152,11 @@
 		if ( $f_rel_type >= 0 ) {
 			# Add the relationship
 			relationship_add( $t_bug_id, $f_master_bug_id, $f_rel_type );
-	
+
 			# Add log line to the history (both issues)
 			history_log_event_special( $f_master_bug_id, BUG_ADD_RELATIONSHIP, relationship_get_complementary_type( $f_rel_type ), $t_bug_id );
 			history_log_event_special( $t_bug_id, BUG_ADD_RELATIONSHIP, $f_rel_type, $f_master_bug_id );
-	
+
 			# Send the email notification
 			email_relationship_added( $f_master_bug_id, $t_bug_id, relationship_get_complementary_type( $f_rel_type ) );
 		}
@@ -170,7 +170,7 @@
 	event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
 
 	form_security_purge( 'bug_report' );
-	
+
 	html_page_top1();
 
 	if ( !$f_report_stay ) {
@@ -211,4 +211,5 @@
 ?>
 </div>
 
-<?php html_page_bottom( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

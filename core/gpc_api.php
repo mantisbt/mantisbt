@@ -32,7 +32,7 @@
  *  You may pass in any variable as a default (including null) but if
  *  you pass in *no* default then an error will be triggered if the field
  *  cannot be found
- * 
+ *
  * @param string
  * @return null
  */
@@ -55,7 +55,7 @@ function gpc_get( $p_var_name, $p_default = null ) {
 }
 
 /**
- * 
+ *
  * @param string $p_var_name
  * @return bool
  */
@@ -213,7 +213,7 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
  * If you pass in *no* default, an error will be triggered if
  * the variable does not exist
  * @param string $p_var_name
- * @param array $p_default 
+ * @param array $p_default
  * @return array
  */
 function gpc_get_string_array( $p_var_name, $p_default = null ) {

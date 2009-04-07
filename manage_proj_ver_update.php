@@ -76,5 +76,5 @@
 ?>
 </div>
 
-<?php 
+<?php
 	html_page_bottom( __FILE__ );

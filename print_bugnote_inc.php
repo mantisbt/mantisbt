@@ -148,4 +148,3 @@
 	} # end else
 ?>
 </table>
-<?php # Bugnotes END ?>

@@ -174,4 +174,5 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 	</form>
 </div>
 
-<?php } # end of edit_printing_prefs() ?>
+<?php
+}

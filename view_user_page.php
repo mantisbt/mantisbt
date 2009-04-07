@@ -91,7 +91,7 @@
 			<?php echo lang_get( 'realname' ) ?>
 		</td>
 		<td>
-			<?php 
+			<?php
 				if ( !access_has_project_level( config_get( 'show_user_realname_threshold' ) ) ) {
 					print error_string(ERROR_ACCESS_DENIED);
 				} else {

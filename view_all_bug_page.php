@@ -52,7 +52,7 @@
 		$t_users_handlers[] = $rows[$i]["handler_id"];
 	}
 	user_cache_array_rows( array_unique( $t_users_handlers ) );
-	
+
 	gpc_set_cookie( config_get( 'bug_list_cookie' ), implode( ',', $t_bugslist ) );
 
 	compress_enable();

@@ -43,4 +43,3 @@
 	form_security_purge('manage_user_proj_add');
 
 	print_header_redirect( 'manage_user_edit_page.php?user_id=' . $f_user_id );
-?>

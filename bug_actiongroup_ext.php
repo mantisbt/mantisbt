@@ -49,16 +49,16 @@
 	foreach( $f_bug_arr as $t_bug_id ) {
 		bug_ensure_exists( $t_bug_id );
 		$t_bug = bug_get( $t_bug_id, true );
-		
+
 		if ( isset( $t_projects_bugs[$t_bug->project_id] ) ) {
 		  $t_projects_bugs[$t_bug->project_id][] = $t_bug_id;
         } else {
 		  $t_projects_bugs[$t_bug->project_id] = array( $t_bug_id );
         }
     }
-  
+
     $t_failed_ids = array();
-    
+
     # validate all bugs before we start the processing, we may fail the whole action
     # group, or some of the bugs.
     foreach( $t_projects_bugs as $t_project_id => $t_bug_ids ) {

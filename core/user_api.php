@@ -87,7 +87,6 @@ function user_cache_array_rows( $p_user_id_array ) {
 		return;
 	}
 
-
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	$query = "SELECT *
@@ -956,7 +955,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 	if( auth_get_current_user_id() == $p_user_id ) {
 		$g_user_accessible_subprojects_cache = $t_projects;
 	}
-	
+
 	if( !isset( $t_projects[(int)$p_project_id] ) ) {
 		$t_projects[(int)$p_project_id] = array();
 	}
@@ -968,7 +967,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 	/** @todo (thraxisp) Should all top level projects be a sub-project of ALL_PROJECTS implicitly?
 	 *  affects how news and some summaries are generated
-	 */	
+	 */
 	$t_todo = user_get_accessible_subprojects( $p_user_id, $p_project_id );
 	$t_subprojects = Array();
 
@@ -996,10 +995,10 @@ function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
 		$t_project_ids = user_get_all_accessible_subprojects( $p_user_id, $p_project_id );
 		array_unshift( $t_project_ids, $p_project_id );
 	}
-	
+
 	return $t_project_ids;
 }
-		
+
 
 # --------------------
 # return the number of open assigned bugs to a user in a project

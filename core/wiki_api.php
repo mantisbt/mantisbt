@@ -43,7 +43,7 @@ function wiki_ensure_enabled() {
 }
 
 /**
- * 
+ *
  * @return null
  * @access public
  */
@@ -77,7 +77,7 @@ function wiki_init() {
 }
 
 /**
- * 
+ *
  * @param int $p_bug_id Bug ID
  * @return string url
  * @access public
@@ -87,7 +87,7 @@ function wiki_link_bug( $p_bug_id ) {
 }
 
 /**
- * 
+ *
  * @param int $p_project_id
  * @return string url
  * @access public

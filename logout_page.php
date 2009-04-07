@@ -28,4 +28,3 @@
 	auth_logout();
 
 	print_header_redirect( config_get( 'logout_redirect_page' ), /* die */ true, /* sanitize */ false );
-?>

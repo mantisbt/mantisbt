@@ -31,4 +31,3 @@
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 
 	print_header_redirect_view( $f_bug_id );
-?>

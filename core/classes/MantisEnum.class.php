@@ -22,7 +22,7 @@
 
 /**
  * A class that handles MantisBT Enumerations.
- * 
+ *
  * For example: 10:lablel1,20:label2
  *
  * @package MantisBT
@@ -33,7 +33,7 @@ class MantisEnum {
 	 * Separator that is used to separate the enum values from their labels.
 	 */
 	const VALUE_LABEL_SEPARATOR = ':';
-	
+
 	/**
 	 * Separator that is used to separate the enum tuples within an enumeration definition.
 	 */
@@ -61,24 +61,24 @@ class MantisEnum {
 	 * Gets the localized label corresponding to a value.  Note that this method
 	 * takes in the standard / localized enums so that if the value is in the localized
 	 * enum but not the standard one, then it returns not found.
-	 * 
+	 *
 	 * @param string $enumString The standard enum string.
 	 * @param string $localizedEnumString  The localized enum string.
 	 * @param integer $value  The value to lookup.
-	 * 
+	 *
 	 * @return the label or the decorated value to represent not found.
-	 */	
+	 */
 	public static function getLocalizedLabel( $enumString, $localizedEnumString, $value ) {
 		if ( !MantisEnum::hasValue( $enumString, $value ) ) {
 			return MantisEnum::getLabelForUnknownValue( $value );
 		}
-		
+
 		return MantisEnum::getLabel( $localizedEnumString, $value );
 	}
-	
+
 	/**
 	 * Gets the value associated with the specified label.
-	 * 
+	 *
 	 * @param string $enumString  The enumerated string.
 	 * @param string $label       The label to map.
 	 * @return integer value of the enum or false if not found.
@@ -103,7 +103,7 @@ class MantisEnum {
 	public static function getAssocArrayIndexedByValues( $enumString ) {
 		$tuples = MantisEnum::getArrayOfTuples( $enumString );
 		$tuplesCount = count( $tuples );
-		
+
 		$assocArray = array();
 
 		foreach ( $tuples as $tuple ) {
@@ -120,7 +120,7 @@ class MantisEnum {
 			if ( isset( $assocArray[ $value ] ) ) {
 				continue;
 			}
-			
+
 			$label = trim( $tupleTokens[1] );
 
 			$assocArray[$value] = $label;
@@ -128,7 +128,7 @@ class MantisEnum {
 
 		return $assocArray;
 	}
-	
+
 	/**
 	 * Get an associate array for the tuples of the enum where the labels
 	 * are the array indices and the values are the array values.
@@ -142,7 +142,7 @@ class MantisEnum {
 
 	/**
 	 * Gets an array with all values in the enum.
-	 * 
+	 *
 	 * @param $enumString
 	 * @return array of unique values.
 	 */
@@ -152,13 +152,13 @@ class MantisEnum {
 
 	/**
 	 * Checks if the specified enum string contains the specified value.
-	 * 
+	 *
 	 * @param string $enumString  The enumeration string.
 	 * @param integer $value      The value to chec,
 	 * @return bool true if found, false otherwise.
-	 */	
+	 */
 	public static function hasValue( $enumString, $value ) {
-		$assocArray = MantisEnum::getAssocArrayIndexedByValues( $enumString );	
+		$assocArray = MantisEnum::getAssocArrayIndexedByValues( $enumString );
 		$valueAsInteger = (int)$value;
 		return isset( $assocArray[$valueAsInteger] );
 	}
@@ -171,7 +171,7 @@ class MantisEnum {
 	 */
 	private static function getArrayOfTuples( $enumString ) {
 		if ( strlen( trim( $enumString ) ) == 0 ) {
-			return array();			
+			return array();
 		}
 
 		$rawArray = explode( MantisEnum::TUPLE_SEPARATOR, $enumString );
@@ -197,7 +197,7 @@ class MantisEnum {
 
 	/**
 	 * Given a value it decorates it and returns it as the label.
-	 * 
+	 *
 	 * @param integer The value (e.g. 50).
 	 * @return The decorated value (e.g. @50@).
 	 */

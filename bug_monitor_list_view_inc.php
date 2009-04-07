@@ -24,7 +24,7 @@
 	 * @link http://www.mantisbt.org
 	 */
 
-	if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id ) ) { 
+	if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id ) ) {
 		$c_bug_id = db_prepare_int( $f_bug_id );
 		$t_bug_monitor_table = db_get_table( 'mantis_bug_monitor_table' );
 		$t_user_table = db_get_table( 'mantis_user_table' );
@@ -66,12 +66,12 @@
 		if ( 0 == $num_users ) {
 			echo lang_get( 'no_users_monitoring_bug' );
 		} else {
-	 		for ( $i = 0; $i < $num_users; $i++ ) { 			
+	 		for ( $i = 0; $i < $num_users; $i++ ) {
 				echo ($i > 0) ? ', ' : '';
 				echo print_user( $t_users[$i] );
 	 		}
  		}
- 		
+
  		echo '<br /><br />', lang_get( 'username' );
 ?>
  		<form method="get" action="bug_monitor.php">
@@ -84,7 +84,7 @@
 </tr>
 </table>
 <?php
-	collapse_closed( 'monitoring' ); 
+	collapse_closed( 'monitoring' );
 ?>
 <table class="width100" cellspacing="1">
 <tr>
@@ -97,4 +97,5 @@
 	collapse_end( 'monitoring' );
 ?>
 
-<?php } # show monitor list ?>
+<?php 
+} # show monitor list

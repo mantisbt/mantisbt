@@ -39,9 +39,9 @@
 <br />
 <div align="center">
 <form method="post" action="manage_proj_create.php">
-<?php 
+<?php
 	echo form_security_field( 'manage_proj_create' );
-	if ( null !== $f_parent_id ) { 
+	if ( null !== $f_parent_id ) {
 		$f_parent_id = (int) $f_parent_id;
 ?>
 <input type="hidden" name="parent_id" value="<?php echo $f_parent_id ?>">

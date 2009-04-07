@@ -38,7 +38,7 @@
 	$t_wide = config_get( 'graph_summary_graphs_per_row' );
 	$t_width = config_get( 'graph_window_width' );
 	$t_graph_width = (int) ( ( $t_width - 50 ) / $t_wide );
-	
+
 	token_delete( TOKEN_GRAPH );
 
 ?>
@@ -51,7 +51,8 @@
 	</td>
 </tr>
 <?php
-	for ( $t_pos = 0; $t_pos < count($t_graphs ); $t_pos++ ) {
+	$t_graph_count = count($t_graphs );
+	for ( $t_pos = 0; $t_pos < $t_graph_count; $t_pos++ ) {
 		if ( 0 == ( $t_pos % $t_wide ) ) {
 			print( "<tr valign=\"top\">\n" );
 		}

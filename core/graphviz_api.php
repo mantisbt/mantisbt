@@ -332,7 +332,7 @@ class Graph {
 
 			unset( $t_graphviz );
 		} else {
-		
+
 			# If we are not under Windows, use proc_open,
 			# since it avoids the need of temporary files.
 			# Start dot process

@@ -14,69 +14,63 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * CALLERS
-	 *	This page is called from:
-	 *	- account_page.php
-	 *
-	 * EXPECTED BEHAVIOUR
-	 *	- Delete the currently logged in user account
-	 *	- Logout the current user
-	 *	- Redirect to the page specified in the logout_redirect_page config option
-	 *
-	 * CALLS
-	 *	This page conditionally redirects upon completion
-	 *
-	 * RESTRICTIONS & PERMISSIONS
-	 *	- User must be authenticated
-	 *	- allow_account_delete config option must be enabled
-	 *
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
-	 /**
-	  * MantisBT Core API's
-	  */
-	require_once( 'core.php' );
+/**
+ * CALLERS
+ *	This page is called from:
+ *	- account_page.php
+ *
+ * EXPECTED BEHAVIOUR
+ *	- Delete the currently logged in user account
+ *	- Logout the current user
+ *	- Redirect to the page specified in the logout_redirect_page config option
+ *
+ * CALLS
+ *	This page conditionally redirects upon completion
+ *
+ * RESTRICTIONS & PERMISSIONS
+ *	- User must be authenticated
+ *	- allow_account_delete config option must be enabled
+ * @todo review form security tokens for this page
+ * @todo should page_top1 be before meta redirect?
+ *
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
+ /**
+  * MantisBT Core API's
+  */
+require_once( 'core.php' );
 
-	#============ Parameters ============
-	# (none)
+auth_ensure_user_authenticated();
 
-	#============ Permissions ============
-	# helper_ensure_post();
+current_user_ensure_unprotected();
 
-	auth_ensure_user_authenticated();
+if ( OFF == config_get( 'allow_account_delete' ) ) {
+	print_header_redirect( 'account_page.php' );
+}
 
-	current_user_ensure_unprotected();
+helper_ensure_confirmed( lang_get( 'confirm_delete_msg' ),
+						 lang_get( 'delete_account_button' ) );
 
-	if ( OFF == config_get( 'allow_account_delete' ) ) {
-		print_header_redirect( 'account_page.php' );
-	}
-?>
-<?php
-	helper_ensure_confirmed( lang_get( 'confirm_delete_msg' ),
-							 lang_get( 'delete_account_button' ) );
+user_delete( auth_get_current_user_id() );
 
-	user_delete( auth_get_current_user_id() );
+auth_logout();
 
-	auth_logout();
+html_meta_redirect( config_get( 'logout_redirect_page' ) );
 
-	$t_redirect = config_get( 'logout_redirect_page' );
-
-	html_meta_redirect( $t_redirect );
-
-	html_page_top1();
+html_page_top1();
 
 ?>
 
 <br />
 <div align="center">
 <?php
-	echo lang_get( 'operation_successful' ) . '<br />';
-	print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
+echo lang_get( 'operation_successful' ) . '<br />';
+print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
 ?>
 </div>
 
-<?php html_page_bottom( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

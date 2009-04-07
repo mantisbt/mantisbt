@@ -39,24 +39,24 @@
 
 	$f_bug_list = gpc_get_string( 'buglist', '' );
 	$t_bug_list = explode( ',', $f_bug_list );
-	
+
 	foreach ( $t_bug_list as $t_bug ) {
 		list( $t_bug_id, $t_sponsor_id ) = explode( ':', $t_bug );
 		$c_bug_id = (int) $t_bug_id;
-		
+
 		bug_ensure_exists( $c_bug_id ); # dies if bug doesn't exist
-		
+
 		access_ensure_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $c_bug_id ); # dies if user can't handle bug
-		
+
 		$t_bug = bug_get( $c_bug_id );
 		$t_sponsor = sponsorship_get( (int) $t_sponsor_id );
-		
+
 		$t_new_payment = gpc_get_int( 'sponsor_' . $c_bug_id . '_' . $t_sponsor->id, $t_sponsor->paid );
 		if ( $t_new_payment != $t_sponsor->paid ) {
 			sponsorship_update_paid( $t_sponsor_id, $t_new_payment );
 		}
 	}
-		
+
 	$t_redirect = 'account_sponsor_page.php';
 	html_page_top( null, $t_redirect );
 

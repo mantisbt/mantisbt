@@ -16,7 +16,7 @@
 
 /**
  * Compression API
- * 
+ *
  * @package CoreAPI
  * @subpackage CompressionAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org

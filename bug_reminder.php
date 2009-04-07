@@ -89,5 +89,5 @@
 	print_bracket_link( string_get_bug_view_url( $f_bug_id ), lang_get( 'proceed' ) );
 ?>
 </div>
-<?php 
+<?php
 	html_page_bottom( __FILE__ );

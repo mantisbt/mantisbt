@@ -512,7 +512,7 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 /**
  * Set the view state of the bugnote
  * @param int $p_bugnote_id bugnote id
- * @param bool $p_private 
+ * @param bool $p_private
  * @return bool
  * @access public
  */

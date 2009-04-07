@@ -604,7 +604,7 @@ function config_is_private( $p_config_var ) {
 		case 'dot_tool':
 		case 'neato_tool':
 		case 'twitter_username':
-		case 'twitter_password':		
+		case 'twitter_password':
 			return true;
 	}
 

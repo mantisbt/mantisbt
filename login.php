@@ -31,7 +31,7 @@
 	$f_perm_login	= gpc_get_bool( 'perm_login' );
 	$f_return		= gpc_get_string( 'return', config_get( 'default_home_page' ) );
 	$f_from			= gpc_get_string( 'from', '' );
-	
+
 	$f_username = auth_prepare_username($f_username);
 	$f_password = auth_prepare_password($f_password);
 
@@ -47,4 +47,3 @@
 	}
 
 	print_header_redirect( $t_redirect_url );
-?>
