@@ -33,9 +33,12 @@ $g_lang_overrides = array();
 # To be used in custom_strings_inc.php :
 $g_active_language = '';
 
-# ------------------
-# Loads the specified language and stores it in $g_lang_strings,
-# to be used by lang_get
+/**
+ * Loads the specified language and stores it in $g_lang_strings, to be used by lang_get
+ * @param string $p_lang
+ * @param string $p_dir
+ * @return null
+ */
 function lang_load( $p_lang, $p_dir = null ) {
 	global $g_lang_strings, $g_active_language;
 
@@ -87,8 +90,10 @@ function lang_load( $p_lang, $p_dir = null ) {
 	}
 }
 
-# ------------------
-# Determine the preferred language
+/**
+ * Determine the preferred language 
+ * @return string
+ */
 function lang_get_default() {
 	global $g_active_language;
 
@@ -114,7 +119,10 @@ function lang_get_default() {
 	return $t_lang;
 }
 
-
+/**
+ * 
+ * @return string
+ */
 function lang_map_auto() {
 	$t_lang = config_get( 'fallback_language' );
 
@@ -151,7 +159,11 @@ function lang_map_auto() {
 	return $t_lang;
 }
 
-# Ensures that a language file has been loaded
+/**
+ * Ensures that a language file has been loaded
+ * @param string $p_lang the language name
+ * @return null
+ */
 function lang_ensure_loaded( $p_lang ) {
 	global $g_lang_strings;
 
@@ -163,7 +175,7 @@ function lang_ensure_loaded( $p_lang ) {
 /**
 * Check if the given language exists
 *
-* @param $p_lang string the language name
+* @param string $p_lang the language name
 * @return boolean
 */
 function lang_language_exists( $p_lang ) {
@@ -172,9 +184,12 @@ function lang_language_exists( $p_lang ) {
 	return $t_valid;
 }
 
-# language stack implementation
-#
-# push a language onto the stack
+/**
+ * language stack implementation
+ * push a language onto the stack
+ * @param string $p_lang
+ * @return null
+ */
 function lang_push( $p_lang = null ) {
 	global $g_lang_overrides;
 
@@ -204,15 +219,21 @@ function lang_push( $p_lang = null ) {
 	lang_ensure_loaded( $t_lang );
 }
 
-# pop a language onto the stack and return it
+/**
+ * pop a language onto the stack and return it
+ * @return string
+ */
 function lang_pop() {
 	global $g_lang_overrides;
 
 	return array_pop( $g_lang_overrides );
 }
 
-# return value on top of the language stack
-#  return default if stack is empty
+/**
+ * return value on top of the language stack
+ * return default if stack is empty
+ * @return string
+ */
 function lang_get_current() {
 	global $g_lang_overrides;
 
@@ -226,11 +247,15 @@ function lang_get_current() {
 	return $t_lang;
 }
 
-# ------------------
-# Retrieves an internationalized string
-#  This function will return one of (in order of preference):
-#    1. The string in the current user's preferred language (if defined)
-#    2. The string in English
+/**
+ * Retrieves an internationalized string
+ * This function will return one of (in order of preference):
+ *  1. The string in the current user's preferred language (if defined)
+ *  2. The string in English
+ * @param string $p_string
+ * @param string $p_lang
+ * @return string
+ */
 function lang_get( $p_string, $p_lang = null ) {
 	global $g_lang_strings;
 
@@ -277,18 +302,28 @@ function lang_get( $p_string, $p_lang = null ) {
 	}
 }
 
-# ------------------
-# Check the language entry, if found return true, otherwise return false.
+/**
+ * Check the language entry, if found return true, otherwise return false.
+ * @param string $p_string
+ * @param string $p_lang
+ * @return bool
+ */
 function lang_exists( $p_string, $p_lang ) {
 	global $g_lang_strings;
 
 	return( isset( $g_lang_strings[$p_lang] ) && isset( $g_lang_strings[$p_lang][$p_string] ) );
 }
 
-# Get language:
-# - If found, return the appropriate string (as lang_get()).
-# - If not found, no default supplied, return the supplied string as is.
-# - If not found, default supplied, return default.
+/**
+ * Get language:
+ * - If found, return the appropriate string (as lang_get()).
+ * - If not found, no default supplied, return the supplied string as is.
+ * - If not found, default supplied, return default.
+ * @param string $p_string
+ * @param string $p_default
+ * @param string $p_lang
+ * @return string
+ */
 function lang_get_defaulted( $p_string, $p_default = null, $p_lang = null ) {
 	$t_lang = $p_lang;
 
