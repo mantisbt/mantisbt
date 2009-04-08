@@ -174,7 +174,7 @@
 	</tr>
 
 <?php
-} <!-- End LDAP conditional -->
+} // End LDAP conditional
 
 if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email-->
 
