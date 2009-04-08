@@ -18,29 +18,31 @@ div.width {
 <h2>PHPMailer FAQ</h2>
 <ul>
 
-  <li><b style="background-color: #FFFF00">Q:</b> <b>I&#039;m using the SMTP mailer and I keep on getting a timeout message
-  well before the X seconds I set it for.  What gives?</b><br />
-  <b style="background-color: #FFFF00">A:</b> PHP versions 4.0.4pl1 and earlier have a bug in which sockets timeout
-  early.  You can fix this by re-compiling PHP 4.0.4pl1 with this fix:
-  <a href="timeoutfix.diff">timeoutfix.diff</a>. Otherwise you can wait for the new PHP release.<br /><br /></li>
+  <li><b style="background-color: #FFFF00">Q:</b> <b>I&#039;m having problems 
+	getting SMTP working properly. Can you help me fix this?</b><br />
+  <b style="background-color: #FFFF00">A:</b> Many of the problems in getting 
+	SMTP working properly are fairly basic. The issue is really trying to
+	figure out what setting or code is wrong. To help with that, you can use
+	the built-in debugger. Once you have defined that you are using SMTP with
+	the code:<br />
+	$mail->IsSMTP();<br />
+	add this next command:<br />
+    $mail->SMTPDebug  = 2;<br />
+    ... this will provide you on-screen feedback about your SMTP connection
+    settings and return codes from the SMTP server.<br /><br />
+  </li>
 
   <li><b style="background-color: #FFFF00">Q:</b> <b>I am concerned that using include files will take up too much
-  processing time on my computer.  How can I make it run faster?</b><br />
+  processing time.  How can I make it run faster?</b><br />
   <b style="background-color: #FFFF00">A:</b>  PHP by itself is very fast.  Much faster than ASP or JSP running on
   the same type of server.  This is because it has very little overhead compared
   to its competitors and it pre-compiles all of
-  its code before it runs each script (in PHP4).  However, all of
-  this compiling and re-compiling can take up a lot of valuable
-  computer resources.  However, there are programs out there that compile
-  PHP code and store it in memory (or on mmaped files) to reduce the
-  processing immensely.  Two of these: <a href="http://apc.communityconnect.com">APC
-  (Alternative PHP Cache)</a> and <a href="http://bwcache.bware.it/index.htm">Afterburner</a>
-  (<a href="http://www.mm4.de/php4win/mod_php4_win32/">Win32 download</a>)
-  are excellent free tools that do just this.  If you have the money
-  you might also try <a href="http://www.zend.com">Zend Cache</a>, it is
-  even faster than the open source varieties.  All of these tools make your
-  scripts run faster while also reducing the load on your server. I have tried
-  them myself and they are quite stable too.<br /><br /></li>
+  its code before it runs each script. To gain extra speed, there are programs available
+  that compile PHP code and store it in memory (or on mmaped files) to reduce the
+  processing immensely. One of these is our own <a href="http://quickcache.codeworxtech.com/">QuickCache</a>.
+  Another is <a href="http://pecl.php.net/package/APC">APC
+  (Alternative PHP Cache)</a>. All of these tools make your
+  scripts run faster while also reducing the load on your server.<br /><br /></li>
 
   <li><b style="background-color: #FFFF00">Q:</b> <b>What mailer gives me the best performance?</b><br />
   <b style="background-color: #FFFF00">A:</b> On a single machine the <b>sendmail (or Qmail)</b> is fastest overall.
