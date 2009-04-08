@@ -40,6 +40,12 @@ class MantisEnum {
 	const TUPLE_SEPARATOR = ',';
 
 	/**
+	 *
+	 * @var array Used to cache previous results
+	 */
+	private static $_cacheAssocArrayIndexedByValues = array();
+
+	/**
 	 * Get the string associated with the $p_enum value
 	 *
 	 * @param string $enumString
@@ -101,6 +107,12 @@ class MantisEnum {
 	 * @return associate array indexed by labels.
 	 */
 	public static function getAssocArrayIndexedByValues( $enumString ) {
+		foreach (self::$_cacheAssocArrayIndexedByValues as $cache) {
+			if ($cache['id'] == $enumString) {
+				return $cache['value'];
+			}
+        }
+
 		$tuples = MantisEnum::getArrayOfTuples( $enumString );
 		$tuplesCount = count( $tuples );
 
@@ -126,6 +138,11 @@ class MantisEnum {
 			$assocArray[$value] = $label;
 		}
 
+        $cache = array();
+        $cache['id'] = $enumString;
+        $cache['value'] = $assocArray;
+        self::$_cacheAssocArrayIndexedByValues[] = $cache;
+        
 		return $assocArray;
 	}
 
