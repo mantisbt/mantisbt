@@ -91,7 +91,7 @@
 		}
 
 		if ( wiki_enabled() ) {
-			print_bracket_link( 'wiki.php?id='.$f_bug_id, lang_get( 'wiki' ) ) 
+			print_bracket_link( 'wiki.php?id='.$f_bug_id, lang_get( 'wiki' ) );
 		}
 
 		$t_links = event_signal( 'EVENT_MENU_ISSUE', $f_bug_id );
