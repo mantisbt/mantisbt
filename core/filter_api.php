@@ -3699,13 +3699,14 @@ function print_filter_note_user_id() {
             <option value="<?php echo META_FILTER_NONE?>" <?php check_selected( $t_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
             <?php
                 if( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
-			echo '<option value="' . META_FILTER_MYSELF . '" ';
-			check_selected( $t_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_MYSELF );
-			echo '>[' . lang_get( 'myself' ) . ']</option>';
-		}
-
-		print_assign_to_option_list( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] );
-	}
+					echo '<option value="' . META_FILTER_MYSELF . '" ';
+					check_selected( $t_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_MYSELF );
+					echo '>[' . lang_get( 'myself' ) . ']</option>';
+				}
+		
+				print_assign_to_option_list( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] );
+			}
+		?>
         </select>
         <?php
 }
