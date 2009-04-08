@@ -419,7 +419,7 @@
 <?php } ?>
 
 <!-- Target Version (if permissions allow) -->
-<?php if ( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) { ?>
+<?php if ( $t_show_version && access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'target_version' ) ?>
