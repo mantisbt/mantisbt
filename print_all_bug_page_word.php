@@ -86,6 +86,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	$f_bug_arr = explode( ',', $f_export );
 	$t_count_exported = 0;	
 	$t_date_format = config_get( 'normal_date_format' );
+	$t_short_date_format = config_get( 'short_date_format' );
 
 	for( $j=0; $j < $t_row_count; $j++ ) {
 		$t_id = $result[$j]['id'];
@@ -200,7 +201,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <?php
 		}
 		if ( !date_is_null( $t_bug->due_date ) ) {
-				print_date( config_get( 'short_date_format' ), $t_bug->due_date );
+				print_date( $t_short_date_format, $t_bug->due_date );
 		print "\t\t</td>\n";
 		}
 	} else {
@@ -409,7 +410,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 				$c_filename = string_display_line( $t_attachment['display_name'] );
 				$c_download_url = $t_path . $t_attachment['download_url'];
 				$c_filesize = number_format( $t_attachment['size'] );
-				$c_date_added = date( config_get( 'normal_date_format' ), $t_attachment['date_added'] );
+				$c_date_added = date( $t_date_format, $t_attachment['date_added'] );
 				echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span><br />$c_download_url";
 
 				if ( $t_attachment['preview'] && $t_attachment['type'] == 'image' && $f_type_page == 'html' ) {
