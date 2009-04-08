@@ -299,7 +299,7 @@
 				}
 			}
 
-			$t_count_ids = count( $t_issue_set_ids )
+			$t_count_ids = count( $t_issue_set_ids );
 			for ( $j = 0; $j < $t_count_ids; $j++ ) {
 				$t_issue_set_id = $t_issue_set_ids[$j];
 				$t_issue_set_level = $t_issue_set_levels[$j];
