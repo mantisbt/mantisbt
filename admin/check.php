@@ -414,6 +414,8 @@ if( ON == config_get_global( 'use_jpgraph' ) ) {
 
 }
 
+print_test_row( 'Checking if ctype is enabled in php (required for rss feeds)....', extension_loaded('ctype') );
+
 
 ?>
 </table>
