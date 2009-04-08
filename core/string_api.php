@@ -428,7 +428,7 @@ function string_insert_hrefs( $p_string ) {
 		ini_set( 'magic_quotes_sybase', true );
 	}
 
-	$p_string = preg_replace( '/\b' . email_regex_simple() . '\b/i', '<a href="mailto:\0">\0</a>', $p_string );
+	$p_string = preg_replace( '/\s' . email_regex_simple() . '\s/i', '<a href="mailto:\0">\0</a>', $p_string );
 
 	return $p_string;
 }
