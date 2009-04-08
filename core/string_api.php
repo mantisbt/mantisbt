@@ -416,9 +416,11 @@ function string_insert_hrefs( $p_string ) {
 	if ( is_null( $s_url_regex ) ) {
 		$t_url_chars = '(?:%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#\(\),\[\][:alnum:]])';
 		$t_url_chars2 = '(?:%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#,[:alnum:]])';
+		$t_url_chars_in_brackets = '(?:%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#\(\),[:alnum:]])';
+		$t_url_chars_in_parens = '(?:%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#\[\],[:alnum:]])';
 
 		$t_url_part1 = "${t_url_chars}";
-		$t_url_part2 = "(?:\(${t_url_chars}*\)|\[${t_url_chars}*\]|${t_url_chars2})";
+		$t_url_part2 = "(?:\(${t_url_chars_in_parens}*\)|\[${t_url_chars_in_brackets}*\]|${t_url_chars2})";
 
 		$s_url_regex = "/(([[:alpha:]][-+.[:alnum:]]*):\/\/(${t_url_part1}*?${t_url_part2}+))/se";
 	}
