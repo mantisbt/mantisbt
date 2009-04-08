@@ -84,13 +84,18 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	html_body_begin();
 
 	$f_bug_arr = explode( ',', $f_export );
-	$t_count_exported = 0;
+	$t_count_exported = 0;	
+	$t_date_format = config_get( 'normal_date_format' );
 
 	for( $j=0; $j < $t_row_count; $j++ ) {
-
-		# prefix bug data with v_
-		# extract( $result[$j], EXTR_PREFIX_ALL, 'v' );
 		$t_id = $result[$j]['id'];
+
+		if ( $t_row_count % 50 == 0 ) {
+			# to save ram as report will list data once, clear cache after 50 bugs
+			bug_text_clear_cache();
+			bug_clear_cache();
+			bugnote_clear_cache();
+		}
 
 		# display the available and selected bugs
 		if ( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
@@ -99,7 +104,6 @@ xmlns="http://www.w3.org/TR/REC-html40">
 			}
 
 			$t_count_exported++;
-
 
 			$t_bug = bug_get( $t_id, true );
 			$t_bug = bug_prepare_display( $t_bug );
@@ -159,10 +163,10 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo get_enum_element( 'reproducibility', $t_bug->reproducibility ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( config_get( 'normal_date_format' ), $t_bug->date_submitted ) ?>
+		<?php print_date( $t_date_format, $t_bug->date_submitted ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( config_get( 'normal_date_format' ), $t_bug->last_updated ) ?>
+		<?php print_date( $t_date_format, $t_bug->last_updated ) ?>
 	</td>
 </tr>
 <tr>
@@ -445,8 +449,8 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 	<?php
 		foreach ( $t_bugnotes as $t_bugnote ) {
 			# prefix all bugnote data with v3_
-			$t_date_submitted = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $t_bugnote->date_submitted ) ) );
-			$t_last_modified = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $t_bugnote->last_modified ) ) );
+			$t_date_submitted = date( $t_date_format, $t_bugnote->date_submitted );
+			$t_last_modified = date( $t_date_format, $t_bugnote->last_modified );
 
 			# grab the bugnote text and id and prefix with v3_
 			$t_note = string_display_links( $t_bugnote->note );
@@ -472,7 +476,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<tr>
 			<td class="print">
 				<?php echo $t_date_submitted ?>&nbsp;&nbsp;&nbsp;
-				<?php if ( db_unixtimestamp( $t_bugnote->date_submitted ) != db_unixtimestamp( $t_bugnote->last_modified ) ) {
+				<?php if ( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
 					echo '<br />(' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . $t_last_modified . ')';
 				} ?>
 			</td>

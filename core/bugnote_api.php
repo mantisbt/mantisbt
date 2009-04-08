@@ -672,3 +672,21 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 
 	return $t_results;
 }
+
+/**
+ * Clear a bugnote from the cache or all bug notes if no bugnote id specified.
+ * @param int bugnote id to clear (optional)
+ * @return null
+ * @access public
+ */
+function bugnote_clear_cache( $p_bugnote_id = null ) {
+	global $g_cache_bugnotes;
+
+	if( null === $p_bugnote_id ) {
+		$g_cache_bugnotes = array();
+	} else {
+		unset( $g_cache_bugnotes[(int) $p_bugnote_id] );
+	}
+
+	return true;
+}
