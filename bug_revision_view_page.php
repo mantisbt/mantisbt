@@ -120,8 +120,7 @@ $t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( $t_revis
 	<?php
 }
 
-html_page_top1( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
-html_page_top2();
+html_page_top( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
 
 print_recently_visited();
 
@@ -152,5 +151,5 @@ print_bracket_link( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
 </table>
 
 <?php
-html_page_bottom1( __FILE__ );
+html_page_bottom( __FILE__ );
 
