@@ -125,7 +125,7 @@ function column_is_extended( $p_column ) {
  * @access public
  */
 function column_get_custom_field_name( $p_column ) {
-	if( strpos( $p_column, 'custom_' ) === 0 ) {
+	if( strncmp( $p_column, 'custom_', 7 ) === 0 ) {
 		return substr( $p_column, 7 );
 	}
 
