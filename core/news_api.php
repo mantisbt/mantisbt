@@ -257,7 +257,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 
 	$t_news_table = db_get_table( 'mantis_news_table' );
 	$t_news_view_limit = config_get( 'news_view_limit' );
-	$t_news_view_limit_days = config_get( 'news_view_limit_days' ) * 86400;
+	$t_news_view_limit_days = config_get( 'news_view_limit_days' ) * SECONDS_PER_DAY;
 
 	switch( config_get( 'news_limit_method' ) ) {
 		case 0:

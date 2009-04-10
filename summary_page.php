@@ -88,9 +88,9 @@
 	}
 	$t_average_time 	= $t_total_time / $bug_count;
 
-	$t_largest_diff 	= number_format( $t_largest_diff / 86400, 2 );
-	$t_total_time		= number_format( $t_total_time / 86400, 2 );
-	$t_average_time 	= number_format( $t_average_time / 86400, 2 );
+	$t_largest_diff 	= number_format( $t_largest_diff / SECONDS_PER_DAY, 2 );
+	$t_total_time		= number_format( $t_total_time / SECONDS_PER_DAY, 2 );
+	$t_average_time 	= number_format( $t_average_time / SECONDS_PER_DAY, 2 );
 
 	$t_orct_arr = preg_split( '/[\)\/\(]/', lang_get( 'orct' ), -1, PREG_SPLIT_NO_EMPTY );
 

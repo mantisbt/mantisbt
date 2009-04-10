@@ -488,3 +488,5 @@ define( 'PHPMAILER_METHOD_SMTP',		2 );
 define( 'USERLEN', 32);
 define( 'REALLEN', 64);
 define( 'PASSLEN', 32);
+
+define( 'SECONDS_PER_DAY', 86400 );

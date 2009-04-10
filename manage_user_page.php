@@ -92,7 +92,7 @@
 
 	# New Accounts Form BEGIN
 
-	$days_old = 7 * 86400;
+	$days_old = 7 * SECONDS_PER_DAY;
 	$query = "SELECT *
 		FROM $t_user_table
 		WHERE ".db_helper_compare_days("" . db_now() . "","date_created","<= $days_old")."

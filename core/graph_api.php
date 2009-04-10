@@ -616,7 +616,7 @@ function create_cumulative_bydate() {
 
 		# rationalise the timestamp to a day to reduce the amount of data
 		$t_date = $row['date_submitted'];
-		$t_date = (int)( $t_date / 86400 );
+		$t_date = (int)( $t_date / SECONDS_PER_DAY );
 
 		if( isset( $metrics[$t_date] ) ) {
 			$metrics[$t_date][0]++;
@@ -659,7 +659,7 @@ function create_cumulative_bydate() {
 			if( 0 <> $t_last_id ) {
 
 				# rationalise the timestamp to a day to reduce the amount of data
-				$t_date_index = (int)( $t_last_date / 86400 );
+				$t_date_index = (int)( $t_last_date / SECONDS_PER_DAY );
 
 				if( isset( $metrics[$t_date_index] ) ) {
 					$metrics[$t_date_index][1]++;
@@ -682,7 +682,7 @@ function create_cumulative_bydate() {
 	$t_last_opened = 0;
 	$t_last_resolved = 0;
 	foreach( $metrics as $i => $vals ) {
-		$t_date = $i * 86400;
+		$t_date = $i * SECONDS_PER_DAY;
 		$t_metrics[$t_date][0] = $t_last_opened = $metrics[$i][0] + $t_last_opened;
 		$t_metrics[$t_date][1] = $t_last_resolved = $metrics[$i][1] + $t_last_resolved;
 		$t_metrics[$t_date][2] = $t_metrics[$t_date][0] - $t_metrics[$t_date][1];

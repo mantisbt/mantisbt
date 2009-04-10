@@ -191,7 +191,7 @@ function summary_print_by_enum( $p_enum_string, $p_enum ) {
 function summary_new_bug_count_by_date( $p_time_length = 1 ) {
 	$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
 
-	$c_time_length = (int) $p_time_length * 86400;
+	$c_time_length = (int) $p_time_length * SECONDS_PER_DAY;
 
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
@@ -215,7 +215,7 @@ function summary_resolved_bug_count_by_date( $p_time_length = 1 ) {
 	$t_bug_history_table = db_get_table( 'mantis_bug_history_table' );
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
-	$c_time_length = (int) $p_time_length * 864000;
+	$c_time_length = (int) $p_time_length * SECONDS_PER_DAY;
 
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
@@ -379,7 +379,7 @@ function summary_print_by_age() {
 
 		$t_bugid = string_get_bug_view_link( $row['id'] );
 		$t_summary = $row['summary'];
-		$t_days_open = intval(( time() - strtotime( $row['date_submitted'] ) ) / 86400 );
+		$t_days_open = intval(( time() - strtotime( $row['date_submitted'] ) ) / SECONDS_PER_DAY );
 
 		print "<tr " . helper_alternate_class() . ">\n";
 		print "<td class=\"small\">$t_bugid - $t_summary</td><td class=\"right\">$t_days_open</td>\n";
