@@ -1029,6 +1029,7 @@ $s_my_view_title_resolved = 'Resolved';
 $s_my_view_title_monitored = 'Monitored by Me';
 $s_my_view_title_feedback = 'Awaiting Feedback from Me';
 $s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
+$s_my_view_title_my_comments = "Issues I've Commented On";
 
 # news_add.php
 $s_news_added_msg = 'News item added...';

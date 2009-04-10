@@ -3085,7 +3085,8 @@
 		'recent_mod'	=> '5',
 		'monitored'		=> '6',
 		'feedback'		=> '0',
-		'verify'		=> '0'
+		'verify'		=> '0',
+		'my_comments'	=> '0'
 	);
 
 	/**
