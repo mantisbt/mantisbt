@@ -346,6 +346,44 @@ $c_filter['verify'] = array(
 );
 $url_link_parameters['verify'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
 
+$c_filter['my_comments'] = array(
+	FILTER_PROPERTY_CATEGORY => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_SEVERITY_ID => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_STATUS_ID => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
+	FILTER_PROPERTY_REPORTER_ID => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HANDLER_ID => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_RESOLUTION_ID => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_PRODUCT_BUILD => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_PRODUCT_VERSION => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HIDE_STATUS_ID => Array(
+		'0' => $t_hide_status_default,
+	),
+	FILTER_PROPERTY_MONITOR_USER_ID => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_NOTE_USER_ID=> Array(
+		'0' => META_FILTER_MYSELF,
+	),
+);
+
+$url_link_parameters['my_comments'] = FILTER_PROPERTY_NOTE_USER_ID. '=' . META_FILTER_MYSELF . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 $rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title] );
 
 # Improve performance by caching category data in one pass
