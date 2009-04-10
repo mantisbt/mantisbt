@@ -144,7 +144,11 @@ class ADODB2_mssql extends ADODB_DataDict {
 				$rs = $this->connection->Execute( "select name from sys.default_constraints WHERE object_name(parent_object_id) = '" . $tabname ."' AND col_name(parent_object_id, parent_column_id) = '" . $colname . "'");
 				if ( is_object($rs) ) {
 					$row = $rs->FetchRow();
-					$constraintname = $row[0];
+					if ( $row['name'] !== null ) {
+						$constraintname = $row[ 'name' ];
+					} else {
+						$constraintname = $row[0];
+					}
 				}
 	            $v = preg_replace('/^' . preg_quote($colname) . '\s/', '', $v);
 	            $t = trim(str_replace('DEFAULT '.$default,'',$v));
@@ -189,8 +193,14 @@ class ADODB2_mssql extends ADODB_DataDict {
 			$rs = $this->connection->Execute( "select name from sys.default_constraints WHERE object_name(parent_object_id) = '" . $tabname ."' AND col_name(parent_object_id, parent_column_id) = '" . $v . "'");
 			if ( is_object($rs) ) {
 				$row = $rs->FetchRow();
-				$constraintname = $row[0];
-				$sql[] = 'ALTER TABLE '.$tabname.' DROP CONSTRAINT '. $constraintname;
+				if ( $row['name'] !== null ) {
+					$constraintname = $row[ 'name' ];
+				} else {
+					$constraintname = $row[0];
+				}
+				if ( $constraintname != false ) {
+					$sql[] = 'ALTER TABLE '.$tabname.' DROP CONSTRAINT '. $constraintname;
+				}
 			}
 		
 			$f[] = "\n$this->dropCol ".$this->NameQuote($v);
