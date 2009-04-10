@@ -430,8 +430,8 @@ function bugnote_get_all_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bug
 			$t_bugnote->note = $row['note'];
 			$t_bugnote->view_state = $row['view_state'];
 			$t_bugnote->reporter_id = $row['reporter_id'];
-			$t_bugnote->date_submitted = db_unixtimestamp( $row['date_submitted'] );
-			$t_bugnote->last_modified = db_unixtimestamp( $row['last_modified'] );
+			$t_bugnote->date_submitted = $row['date_submitted'];
+			$t_bugnote->last_modified = $row['last_modified'];
 			$t_bugnote->note_type = $row['note_type'];
 			$t_bugnote->note_attr = $row['note_attr'];
 			$t_bugnote->time_tracking = $row['time_tracking'];
@@ -577,20 +577,20 @@ function bugnote_format_id( $p_bugnote_id ) {
  */
 function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
-	$c_from = db_bind_timestamp( $p_from . ' 00:00:00' );
-	$c_to = db_bind_timestamp( $p_to . ' 23:59:59' );
+	$c_to = strtotime( $p_to, 86399); // @23:59:59
+	$c_from = strtotime( $p_from );
 
 	$t_user_table = db_get_table( 'mantis_user_table' );
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 
 	if( !is_blank( $c_from ) ) {
-		$t_from_where = " AND bn.date_submitted >= '$c_from '";
+		$t_from_where = " AND bn.date_submitted >= $c_from ";
 	} else {
 		$t_from_where = '';
 	}
 
 	if( !is_blank( $c_to ) ) {
-		$t_to_where = " AND bn.date_submitted <= '$c_to '";
+		$t_to_where = " AND bn.date_submitted <= $c_to ";
 	} else {
 		$t_to_where = '';
 	}
@@ -624,23 +624,29 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
  */
 function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost ) {
 	$c_project_id = db_prepare_int( $p_project_id );
-	$c_to = db_bind_timestamp( $p_to . ' 23:59:59' );
-	$c_from = db_bind_timestamp( $p_from . ' 00:00:00' );
+
+	$c_to = strtotime( $p_to, 86399); // @23:59:59
+	$c_from = strtotime( $p_from );
+
+	if ( $c_to === false || $c_form === false ) {
+		error_parameters( array( $p_form, $p_to ) );
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+	
 	$c_cost = db_prepare_double( $p_cost );
 
-	// MySQL
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_user_table = db_get_table( 'mantis_user_table' );
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 
 	if( !is_blank( $c_from ) ) {
-		$t_from_where = " AND bn.date_submitted >= '$c_from'";
+		$t_from_where = " AND bn.date_submitted >= $c_from";
 	} else {
 		$t_from_where = '';
 	}
 
 	if( !is_blank( $c_to ) ) {
-		$t_to_where = " AND bn.date_submitted <= '$c_to'";
+		$t_to_where = " AND bn.date_submitted <= $c_to";
 	} else {
 		$t_to_where = '';
 	}

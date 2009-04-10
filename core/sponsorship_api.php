@@ -91,8 +91,6 @@ function sponsorship_cache_row( $p_sponsorship_id, $p_trigger_errors = true ) {
 	}
 
 	$row = db_fetch_array( $result );
-	$row['date_submitted'] = db_unixtimestamp( $row['date_submitted'] );
-	$row['last_updated'] = db_unixtimestamp( $row['last_updated'] );
 	$g_cache_sponsorships[$c_sponsorship_id] = $row;
 
 	return $row;

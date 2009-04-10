@@ -212,7 +212,7 @@ function mc_project_get_released_versions( $p_username, $p_password, $p_project_
 			'id' => $t_version['id'],
 			'name' => $t_version['version'],
 			'project_id' => $p_project_id,
-			'date_order' => timestamp_to_iso8601( db_unixtimestamp( $t_version['date_order'] ) ),
+			'date_order' => timestamp_to_iso8601( $t_version['date_order'] ),
 			'description' => mci_null_if_empty( $t_version['description'] ),
 			'released' => $t_version['released'],
 		);
@@ -577,7 +577,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		$t_attachment['description'] = $row['description'];
 		$t_attachment['size'] = $row['filesize'];
 		$t_attachment['content_type'] = $row['file_type'];
-		$t_attachment['date_submitted'] = timestamp_to_iso8601( db_unixtimestamp( $row['date_added'] ) );
+		$t_attachment['date_submitted'] = timestamp_to_iso8601( $row['date_added'] );
 		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $row['id'] . '&amp;type=doc';
 		$t_result[] = $t_attachment;
 	}

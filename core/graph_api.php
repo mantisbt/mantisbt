@@ -615,7 +615,7 @@ function create_cumulative_bydate() {
 		$row = db_fetch_array( $result );
 
 		# rationalise the timestamp to a day to reduce the amount of data
-		$t_date = db_unixtimestamp( $row['date_submitted'] );
+		$t_date = $row['date_submitted'];
 		$t_date = (int)( $t_date / 86400 );
 
 		if( isset( $metrics[$t_date] ) ) {
@@ -649,10 +649,10 @@ function create_cumulative_bydate() {
 		# if h_last_updated is NULL, there were no appropriate history records
 		#  (i.e. pre 0.18 data), use last_updated from bug table instead
 		if( NULL == $row['date_modified'] ) {
-			$t_date = db_unixtimestamp( $row['last_updated'] );
+			$t_date = $row['last_updated'];
 		} else {
 			if( $t_res_val > $row['old_value'] ) {
-				$t_date = db_unixtimestamp( $row['date_modified'] );
+				$t_date = $row['date_modified'];
 			}
 		}
 		if( $t_id <> $t_last_id ) {

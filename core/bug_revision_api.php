@@ -52,7 +52,7 @@ function bug_revision_add( $p_bug_id, $p_user_id, $p_type, $p_value, $p_bugnote_
 	if ( $p_timestamp === null ) {
 		$t_timestamp = db_now();
 	} else {
-		$t_timestamp = db_bind_timestamp($p_timestamp);
+		$t_timestamp = $p_timestamp;
 	}
 
 	$t_query = "INSERT INTO $t_bug_rev_table (

@@ -92,10 +92,10 @@
 
 	# New Accounts Form BEGIN
 
-	$days_old = 7;
+	$days_old = 7 * 86400;
 	$query = "SELECT *
 		FROM $t_user_table
-		WHERE ".db_helper_compare_days("'" . db_now() . "'","date_created","<= '$days_old'")."
+		WHERE ".db_helper_compare_days("" . db_now() . "","date_created","<= $days_old")."
 		ORDER BY date_created DESC";
 	$result = db_query_bound( $query );
 	$g_db->debug=false;
@@ -156,7 +156,7 @@
 	} else if ( $f_filter === 'UNUSED' ) {
 		$t_where = '(login_count = 0) AND ( date_created = last_visit )';
 	} else if ( $f_filter === 'NEW' ) {
-		$t_where = db_helper_compare_days("'" . db_now() . "'","date_created","<= '$days_old'");
+		$t_where = db_helper_compare_days("" . db_now() . "","date_created","<= $days_old");
 	} else {
 		$c_prefix = db_prepare_string($f_filter);
 		$t_where = "(username like '$c_prefix%')";
@@ -180,7 +180,7 @@
 	} else {
 		$query = "SELECT count(*) as usercnt
 				FROM $t_user_table
-				WHERE $t_where AND " . db_helper_compare_days("'" . db_now() . "'","last_visit","< '$days_old'");
+				WHERE $t_where AND " . db_helper_compare_days("" . db_now() . "","last_visit","< $days_old");
 		$result = db_query_bound($query, $t_where_params);
 		$row = db_fetch_array( $result );
 		$total_user_count = $row['usercnt'];
@@ -212,7 +212,7 @@
 
 		$query = "SELECT *
 				FROM $t_user_table
-				WHERE $t_where AND " . db_helper_compare_days(0,"last_visit","< '$days_old'") . "
+				WHERE $t_where AND " . db_helper_compare_days(0,"last_visit","< $days_old") . "
 				ORDER BY $c_sort $c_dir";
 		/* db_now added to where params in count query above so not added here */
 		$result = db_query_bound($query, $t_where_params, $p_per_page, $t_offset );
@@ -295,8 +295,8 @@
 		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, 'u' );
 
-		$u_date_created  = date( $t_date_format, db_unixtimestamp( $u_date_created ) );
-		$u_last_visit    = date( $t_date_format, db_unixtimestamp( $u_last_visit ) );
+		$u_date_created  = date( $t_date_format, $u_date_created );
+		$u_last_visit    = date( $t_date_format, $u_last_visit );
 
 		if( !isset( $t_access_level[$u_access_level] ) ) {
 			$t_access_level[$u_access_level] = get_enum_element( 'access_levels', $u_access_level );

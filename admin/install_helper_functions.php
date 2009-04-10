@@ -36,3 +36,33 @@ function check_php_version( $p_version ) {
 		}
 	}
 }
+
+/**
+ * legacy pre-1.2 date function  used by schema.php
+ * return a DB compatible date, representing a unixtime(0) + 1 second. Internally considered a NULL date
+ * @return string Formatted Date for DB insertion e.g. 1970-01-01 00:00:00 ready for database insertion
+ */
+function db_null_date() {
+	global $g_db;
+
+	return $g_db->BindTimestamp( $g_db->UserTimeStamp( 1, 'Y-m-d H:i:s', true ) );
+}
+
+/**
+ * legacy pre-1.2 date function  used by install_functions.php
+ * generate a integer unixtimestamp of a date
+ * @param $p_date Date
+ * @param bool $p_gmt whether to use GMT or current timezone (default false)
+ * @return int unix timestamp of a date
+ * @todo review date handling
+ */
+function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
+	global $g_db;
+
+	if( null !== $p_date ) {
+		$p_timestamp = $g_db->UnixTimeStamp( $p_date, $p_gmt );
+	} else {
+		$p_timestamp = time();
+	}
+	return $p_timestamp;
+}

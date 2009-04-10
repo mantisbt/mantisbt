@@ -107,14 +107,14 @@
         ' WHERE bug_id in ('.implode(',', $t_bug).') and '.
             '( (type='.NORMAL_TYPE.' and field_name=\'category\') or '.
                 '(type='.NORMAL_TYPE.' and field_name=\'status\') or type='.NEW_BUG.' ) and '.
-                'date_modified >= \''.db_date( $t_start ).'\''.
+                'date_modified >= \''. $t_start .'\''.
             ' order by date_modified DESC';
     $t_result = db_query( $t_select );
 	$row = db_fetch_array( $t_result );
 
 	for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 	    // walk through the data points and use the data retrieved to update counts
-	    while( ( $row !== false ) && ( db_unixtimestamp($row['date_modified']) >= $t_now ) ) {
+	    while( ( $row !== false ) && ( $row['date_modified'] >= $t_now ) ) {
 	        switch ($row['type']) {
     	        case 0: // updated bug
     	            if ($row['field_name'] == 'category') {
@@ -211,7 +211,7 @@
         }
         echo '</tr>';
 	    for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
-            echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('.db_date( $t_marker[$t_ptr] ).')'.'</td>';
+            echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. $t_marker[$t_ptr] .')'.'</td>';
             foreach ( $t_category as $t_cat ) {
                 echo '<td>'.(isset($t_data[$t_ptr][$t_cat]) ? $t_data[$t_ptr][$t_cat] : 0).'</td>';
             }

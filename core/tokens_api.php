@@ -128,7 +128,7 @@ function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
 	token_ensure_exists( $p_token_id );
 
 	$c_token_id = db_prepare_int( $p_token_id );
-	$c_token_expiry = db_timestamp( db_date( time() + $p_expiry ) );
+	$c_token_expiry = time() + $p_expiry;
 	$t_tokens_table = db_get_table( 'mantis_tokens_table' );
 
 	$t_query = "UPDATE $t_tokens_table
@@ -192,7 +192,7 @@ function token_delete_by_owner( $p_user_id = null ) {
 function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id = null ) {
 	$c_type = db_prepare_int( $p_type );
 	$c_timestamp = db_now();
-	$c_expiry = db_timestamp( db_date( time() + $p_expiry ) );
+	$c_expiry = time() + $p_expiry;
 	$c_user_id = db_prepare_int( $p_user_id == null ? auth_get_current_user_id() : $p_user_id );
 
 	$t_tokens_table = db_get_table( 'mantis_tokens_table' );
@@ -214,7 +214,7 @@ function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id =
 function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
 	token_ensure_exists( $p_token_id );
 	$c_token_id = db_prepare_int( $p_token_id );
-	$c_expiry = db_timestamp( db_date( time() + $p_expiry ) );
+	$c_expiry = time() + $p_expiry;
 
 	$t_tokens_table = db_get_table( 'mantis_tokens_table' );
 

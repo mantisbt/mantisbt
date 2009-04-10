@@ -164,7 +164,6 @@ function news_get_row( $p_news_id ) {
 		trigger_error( ERROR_NEWS_NOT_FOUND, ERROR );
 	} else {
 		$row = db_fetch_array( $result );
-		$row['date_posted'] = db_unixtimestamp( $row['date_posted'] );
 		return $row;
 	}
 }
@@ -221,7 +220,6 @@ function news_get_rows( $p_project_id, $p_sitewide = true ) {
 
 	for( $i = 0;$i < $t_row_count;$i++ ) {
 		$row = db_fetch_array( $result );
-		$row['date_posted'] = db_unixtimestamp( $row['date_posted'] );
 		array_push( $t_rows, $row );
 	}
 
@@ -259,7 +257,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 
 	$t_news_table = db_get_table( 'mantis_news_table' );
 	$t_news_view_limit = config_get( 'news_view_limit' );
-	$t_news_view_limit_days = config_get( 'news_view_limit_days' );
+	$t_news_view_limit_days = config_get( 'news_view_limit_days' ) * 86400;
 
 	switch( config_get( 'news_limit_method' ) ) {
 		case 0:
@@ -308,7 +306,6 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 	$t_rows = array();
 	for( $i = 0;$i < $t_row_count;$i++ ) {
 		$row = db_fetch_array( $result );
-		$row['date_posted'] = db_unixtimestamp( $row['date_posted'] );
 		array_push( $t_rows, $row );
 	}
 

@@ -82,9 +82,9 @@
 	$t_bug_data->due_date 				= gpc_get_string( 'due_date', $t_bug_data->due_date);
 
 	if ( is_blank ( $t_bug_data->due_date ) ) {
-		$t_bug_data->due_date = date_get_null();
+		$t_bug_data->due_date = 1;
 	} else {
-		$t_bug_data->due_date = db_unixtimestamp ( $t_bug_data->due_date, true ) + 1;
+		$t_bug_data->due_date = $t_bug_data->due_date;
 	}
 
 	$t_bug_data->description		= gpc_get_string( 'description', $t_bug_data->description );

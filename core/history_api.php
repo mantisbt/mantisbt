@@ -185,7 +185,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 			}
 		}
 
-		$raw_history[$j]['date'] = db_unixtimestamp( $v_date_modified );
+		$raw_history[$j]['date'] = $v_date_modified;
 		$raw_history[$j]['userid'] = $v_user_id;
 
 		# user_get_name handles deleted users, and username vs realname

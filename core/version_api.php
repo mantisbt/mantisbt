@@ -71,7 +71,6 @@ function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 	}
 
 	$row = db_fetch_array( $result );
-	$row['date_order'] = db_unixtimestamp( $row['date_order'] );
 	$g_cache_versions[$c_version_id] = $row;
 
 	return $row;
@@ -124,7 +123,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 	if( null === $p_date_order ) {
 		$c_date_order = db_now();
 	} else {
-		$c_date_order = db_timestamp( $p_date_order );
+		$c_date_order = $p_date_order;
 	}
 
 	version_ensure_unique( $p_version, $p_project_id );
@@ -159,7 +158,7 @@ function version_update( $p_version_info ) {
 	$c_description = $p_version_info->description;
 	$c_released = db_prepare_int( $p_version_info->released );
 	$c_obsolete = db_prepare_bool( $p_version_info->obsolete );
-	$c_date_order = db_timestamp( $p_version_info->date_order );
+	$c_date_order = $p_version_info->date_order;
 	$c_project_id = db_prepare_int( $p_version_info->project_id );
 
 	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
@@ -294,7 +293,6 @@ function version_cache_array_rows( $p_project_id_array ) {
 
 	$rows = array();
 	while( $row = db_fetch_array( $result ) ) {
-		$row['date_order'] = db_unixtimestamp( $row['date_order'] );
 		$g_cache_versions[(int) $row['id']] = $row;
 
 		$rows[ (int)$row[ 'project_id' ] ][] = $row['id'];
@@ -352,7 +350,6 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 	$rows = array();
 	for( $i = 0;$i < $count;$i++ ) {
 		$row = db_fetch_array( $result );
-		$row['date_order'] = db_unixtimestamp( $row['date_order'] );
 		$g_cache_versions[(int) $row['id']] = $row;
 
 		$rows[] = $row;
@@ -395,7 +392,6 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
 	$rows = array();
 	for( $i = 0;$i < $count;$i++ ) {
 		$row = db_fetch_array( $result );
-		$row['date_order'] = db_unixtimestamp( $row['date_order'] );
 		$rows[] = $row;
 	}
 	return $rows;

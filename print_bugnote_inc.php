@@ -76,8 +76,8 @@
 		# prefix all bugnote data with v3_
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'v3' );
-		$v3_date_submitted = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_date_submitted ) ) );
-		$v3_last_modified = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_last_modified ) ) );
+		$v3_date_submitted = date( config_get( 'normal_date_format' ), $v3_date_submitted );
+		$v3_last_modified = date( config_get( 'normal_date_format' ), $v3_last_modified );
 
 		# grab the bugnote text and id and prefix with v3_
 		$query = "SELECT note, id
@@ -112,7 +112,7 @@
 		<tr>
 			<td class="print">
 				<?php echo $v3_date_submitted ?>&nbsp;&nbsp;&nbsp;
-				<?php if ( db_unixtimestamp( $v3_date_submitted ) != db_unixtimestamp( $v3_last_modified ) ) {
+				<?php if ( $v3_date_submitted != $v3_last_modified ) {
 					echo '<br />(' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . $v3_last_modified . ')';
 				} ?>
 			</td>

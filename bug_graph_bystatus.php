@@ -99,14 +99,14 @@
     $t_select = 'SELECT bug_id, type, old_value, new_value, date_modified FROM '.$t_bug_hist_table.
         ' WHERE bug_id in ('.implode(',', $t_bug).
         ') and ( (type='.NORMAL_TYPE.' and field_name=\'status\')
-            or type='.NEW_BUG.' ) and date_modified >= \''.db_date( $t_start ).'\''.
+            or type='.NEW_BUG.' ) and date_modified >= \''. $t_start .'\''.
         ' order by date_modified DESC';
     $t_result = db_query( $t_select );
 	$t_row = db_fetch_array( $t_result );
 
 	for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 	    // walk through the data points and use the data retrieved to update counts
-	    while( ( $t_row !== false ) && ( db_unixtimestamp($t_row['date_modified']) >= $t_now ) ) {
+	    while( ( $t_row !== false ) && ( $t_row['date_modified'] >= $t_now ) ) {
 	        switch ($t_row['type']) {
     	        case 0: // updated bug
         	        if ( isset( $t_data[$t_ptr][$t_row['new_value']] ) ) {
@@ -222,7 +222,7 @@
             }
         }
         if ( $f_show_as_table ) {
-            echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('.db_date( $t_metrics[0][$t_ptr] ).')'.'</td>';
+            echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. $t_metrics[0][$t_ptr] .')'.'</td>';
             for ( $i=1; $i<=$t_label_count; $i++ ) {
                 echo '<td>'.$t_metrics[$i][$t_ptr].'</td>';
             }

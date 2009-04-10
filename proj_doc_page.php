@@ -103,7 +103,7 @@
 		$v_filesize = number_format( $v_filesize );
 		$v_title = string_display( $v_title );
 		$v_description = string_display_links( $v_description );
-		$v_date_added = date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_date_added ) );
+		$v_date_added = date( config_get( 'normal_date_format' ), $v_date_added );
 
 ?>
 <tr valign="top" <?php echo helper_alternate_class( $i ) ?>>

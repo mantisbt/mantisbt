@@ -126,10 +126,10 @@
 		<?php echo get_enum_element( 'reproducibility', $v_reproducibility ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_date_submitted ) ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $v_date_submitted ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_last_updated ) ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $v_last_updated ) ?>
 	</td>
 </tr>
 <tr>

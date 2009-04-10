@@ -105,7 +105,7 @@
 
 	header( 'Content-Disposition:' . $t_disposition . ' filename="' . urlencode( $t_filename ) . '"' );
 	header( 'Content-Description: Download Data' );
-	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', db_unixtimestamp( $v_date_added ) ) );
+	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $v_date_added ) );
 
 	# To fix an IE bug which causes problems when downloading
 	# attached files via HTTPS, we disable the "Pragma: no-cache"

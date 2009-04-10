@@ -221,15 +221,6 @@ function bug_cache_array_rows( $p_bug_id_array ) {
 function bug_add_to_cache( $p_bug_row, $p_stats = null ) {
 	global $g_cache_bug;
 
-	if( !is_int( $p_bug_row['date_submitted'] ) ) {
-		$p_bug_row['date_submitted'] = db_unixtimestamp( $p_bug_row['date_submitted'] );
-	}
-	if( !is_int( $p_bug_row['last_updated'] ) ) {
-		$p_bug_row['last_updated'] = db_unixtimestamp( $p_bug_row['last_updated'] );
-	}
-	if( !is_int( $p_bug_row['due_date'] ) ) {
-		$p_bug_row['due_date'] = db_unixtimestamp( $p_bug_row['due_date'] );
-	}
 	$g_cache_bug[(int) $p_bug_row['id']] = $p_bug_row;
 
 	if( !is_null( $p_stats ) ) {
@@ -423,7 +414,7 @@ function bug_is_resolved( $p_bug_id ) {
 function bug_is_overdue( $p_bug_id ) {
 	$t_due_date = bug_get_field( $p_bug_id, 'due_date' );
 	if( !date_is_null( $t_due_date ) ) {
-		$t_now = db_unixtimestamp();
+		$t_now = db_now();
 		if( $t_now > $t_due_date ) {
 			if( !bug_is_resolved( $p_bug_id ) ) {
 				return true;
@@ -534,7 +525,7 @@ function bug_create( $p_bug_data ) {
 
 	# check due_date format
 	if( !is_blank( $p_bug_data->due_date ) ) {
-		$c_due_date = db_bind_timestamp( $p_bug_data->due_date, true );
+		$c_due_date = $p_bug_data->due_date;
 	} else {
 		$c_due_date = date_get_null();
 	}
@@ -684,8 +675,8 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	bug_set_field( $t_new_bug_id, 'status', $t_bug_data->status );
 	bug_set_field( $t_new_bug_id, 'resolution', $t_bug_data->resolution );
 	bug_set_field( $t_new_bug_id, 'projection', $t_bug_data->projection );
-	bug_set_field( $t_new_bug_id, 'date_submitted', $t_mantis_db->DBTimeStamp( $t_bug_data->date_submitted ), false );
-	bug_set_field( $t_new_bug_id, 'last_updated', $t_mantis_db->DBTimeStamp( $t_bug_data->last_updated ), false );
+	bug_set_field( $t_new_bug_id, 'date_submitted', $t_bug_data->date_submitted );
+	bug_set_field( $t_new_bug_id, 'last_updated', $t_bug_data->last_updated );
 	bug_set_field( $t_new_bug_id, 'eta', $t_bug_data->eta );
 	bug_set_field( $t_new_bug_id, 'fixed_in_version', $t_bug_data->fixed_in_version );
 	bug_set_field( $t_new_bug_id, 'target_version', $t_bug_data->target_version );
@@ -989,9 +980,9 @@ function bug_update( $p_bug_id, $p_bug_data, $p_update_extended = false, $p_bypa
 	}
 
 	if( !is_blank( $p_bug_data->due_date ) ) {
-		$c_due_date = db_bind_timestamp( $p_bug_data->due_date, true );
+		$c_due_date = $p_bug_data->due_date;
 	} else {
-		$c_due_date = db_null_date();
+		$c_due_date = date_get_null();
 	}
 
 	$t_old_data = bug_get( $p_bug_id, true );
@@ -1096,7 +1087,7 @@ function bug_update( $p_bug_id, $p_bug_data, $p_update_extended = false, $p_bypa
 	history_log_event_direct( $p_bug_id, 'sponsorship_total', $t_old_data->sponsorship_total, $p_bug_data->sponsorship_total );
 	history_log_event_direct( $p_bug_id, 'sticky', $t_old_data->sticky, $p_bug_data->sticky );
 
-	history_log_event_direct( $p_bug_id, 'due_date', ( $t_old_data->due_date != db_unixtimestamp( db_null_date() ) ) ? $t_old_data->due_date : null, ( $p_bug_data->due_date != db_unixtimestamp( db_null_date() ) ) ? $p_bug_data->due_date : null );
+	history_log_event_direct( $p_bug_id, 'due_date', ( $t_old_data->due_date != date_get_null() ) ? $t_old_data->due_date : null, ( $p_bug_data->due_date != date_get_null() ) ? $p_bug_data->due_date : null );
 
 	# Update extended info if requested
 	if( $p_update_extended ) {
@@ -1338,7 +1329,7 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
 	if( false === $row ) {
 		return false;
 	} else {
-		return db_unixtimestamp( $row );
+		return $row;
 	}
 }
 
@@ -1359,8 +1350,7 @@ function bug_get_bugnote_stats( $p_bug_id ) {
 		if( $g_cache_bug[$c_bug_id]['_stats'] === false ) {
 			return false;
 		} else {
-			$t_stats['last_modified'] = db_unixtimestamp( $g_cache_bug[$c_bug_id]['_stats']['last_modified'] );
-			$t_stats['count'] = $g_cache_bug[$c_bug_id]['_stats']['count'];
+			$t_stats = $g_cache_bug[$c_bug_id]['_stats'];
 		}
 		return $t_stats;
 	}
@@ -1378,7 +1368,7 @@ function bug_get_bugnote_stats( $p_bug_id ) {
 		return false;
 	}
 
-	$t_stats['last_modified'] = db_unixtimestamp( $row['last_modified'] );
+	$t_stats['last_modified'] = $row['last_modified'];
 	$t_stats['count'] = db_num_rows( $result );
 
 	return $t_stats;
@@ -1477,8 +1467,11 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		# dates
 		case 'last_updated':
 		case 'date_submitted':
-		case 'due_date':
-			$c_value = db_bind_timestamp( $p_value );
+		case 'due_date':			
+			if ( !is_numeric( $p_value ) ) {
+				trigger_error( ERROR_GENERIC, ERROR );
+			}
+			$c_value = $p_value;
 			break;
 
 		default:

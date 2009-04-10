@@ -191,7 +191,7 @@ function summary_print_by_enum( $p_enum_string, $p_enum ) {
 function summary_new_bug_count_by_date( $p_time_length = 1 ) {
 	$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
 
-	$c_time_length = (int) $p_time_length;
+	$c_time_length = (int) $p_time_length * 86400;
 
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
@@ -203,7 +203,7 @@ function summary_new_bug_count_by_date( $p_time_length = 1 ) {
 
 	$query = "SELECT COUNT(*)
 				FROM $t_mantis_bug_table
-				WHERE " . db_helper_compare_days( "'" . db_now() . "'", "date_submitted", "<= '$c_time_length'" ) . " AND $specific_where";
+				WHERE " . db_helper_compare_days( "" . db_now() . "", "date_submitted", "<= $c_time_length" ) . " AND $specific_where";
 	$result = db_query_bound( $query );
 	return db_result( $result, 0 );
 }
@@ -215,7 +215,7 @@ function summary_resolved_bug_count_by_date( $p_time_length = 1 ) {
 	$t_bug_history_table = db_get_table( 'mantis_bug_history_table' );
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
-	$c_time_length = (int) $p_time_length;
+	$c_time_length = (int) $p_time_length * 864000;
 
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
@@ -234,7 +234,7 @@ function summary_resolved_bug_count_by_date( $p_time_length = 1 ) {
 				WHERE b.status >= " . db_param() . "
 				AND h.old_value < " . db_param() . "
 				AND h.new_value >= " . db_param() . "
-				AND " . db_helper_compare_days( "'" . db_now() . "'", "date_modified", "<= '$c_time_length'" ) . "
+				AND " . db_helper_compare_days( "" . db_now() . "", "date_modified", "<= $c_time_length" ) . "
 				AND $specific_where";
 	$result = db_query_bound( $query, Array( $t_resolved, $t_resolved, $t_resolved ) );
 	return db_result( $result, 0 );

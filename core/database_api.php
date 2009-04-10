@@ -738,31 +738,6 @@ function db_prepare_binary_string( $p_string ) {
 }
 
 /**
- * prepare a date for binding in the format database accepts.
- * @param string|int $p_date can be a Unix integer timestamp or an ISO format Y-m-d. If null or false or '' is passed in, it will be converted to an SQL null.
- * @return string Formatted Date for DB insertion e.g. 1970-01-01 ready for database insertion
- */
-function db_bind_date( $p_date ) {
-	global $g_db;
-	return $g_db->BindDate( $p_date );
-}
-
-/**
- * prepare a date/time for binding in the format database accepts.
- * @param string|int $p_date can be a Unix integer timestamp or an ISO format Y-m-d h:m:s. If null or false or '' is passed in, it will be converted to an SQL null.
- * @param bool $p_gmt whether to use GMT or current timezone (default false)
- * @return string Formatted Date for DB insertion e.g. 1970-01-01 00:00:00 ready for database insertion
- */
-function db_bind_timestamp( $p_date, $p_gmt = false ) {
-	global $g_db;
-	if( $p_gmt ) {
-		return $g_db->BindTimestamp( $g_db->UserTimeStamp( $p_date, 'Y-m-d H:i:s', true ) );
-	} else {
-		return $g_db->BindTimeStamp( $p_date );
-	}
-}
-
-/**
  * prepare a int for database insertion.
  * @param int $p_int integer
  * @return int integer
@@ -803,71 +778,7 @@ function db_prepare_bool( $p_bool ) {
 function db_now() {
 	global $g_db;
 
-	return $g_db->BindTimeStamp( time() );
-}
-
-/**
- * generate a date/time in database format of a date
- * @param $p_date Date
- * @param bool $p_gmt whether to use GMT or current timezone (default false)
- * @return string Formatted Date for DB insertion e.g. 1970-01-01 00:00:00 ready for database insertion
- * @todo review date handling
- */
-function db_timestamp( $p_date = null, $p_gmt = false ) {
-	global $g_db;
-
-	if( null !== $p_date ) {
-		$p_timestamp = $g_db->UnixTimeStamp( $p_date, $p_gmt );
-	} else {
-		$p_timestamp = time();
-	}
-	return $g_db->BindTimeStamp( $p_timestamp );
-}
-
-/**
- * generate a integer unixtimestamp of a date
- * @param $p_date Date
- * @param bool $p_gmt whether to use GMT or current timezone (default false)
- * @return int unix timestamp of a date
- * @todo review date handling
- */
-function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
-	global $g_db;
-
-	if( null !== $p_date ) {
-		$p_timestamp = $g_db->UnixTimeStamp( $p_date, $p_gmt );
-	} else {
-		$p_timestamp = time();
-	}
-	return $p_timestamp;
-}
-
-/**
- * convert unix timestamp to db compatible date
- * @param $p_timestamp Date
- * @param bool $p_gmt whether to use GMT or current timezone (default false)
- * @return string Formatted Date
- * @todo review date handling
- */
-function db_date( $p_timestamp = null, $p_gmt = false ) {
-	global $g_db;
-
-	if( null !== $p_timestamp ) {
-		$p_date = $g_db->UserTimeStamp( $p_timestamp, 'Y-m-d H:i:s', $p_gmt );
-	} else {
-		$p_date = $g_db->UserTimeStamp( time(), 'Y-m-d H:i:s', $p_gmt );
-	}
-	return $p_date;
-}
-
-/**
- * return a DB compatible date, representing a unixtime(0) + 1 second. Internally considered a NULL date
- * @return string Formatted Date for DB insertion e.g. 1970-01-01 00:00:00 ready for database insertion
- */
-function db_null_date() {
-	global $g_db;
-
-	return $g_db->BindTimestamp( $g_db->UserTimeStamp( 1, 'Y-m-d H:i:s', true ) );
+	return time();
 }
 
 /**
@@ -918,29 +829,8 @@ function db_helper_compare_days( $p_date1_id_or_column, $p_date2_id_or_column, $
 	if( is_int( $p_date2_id_or_column ) ) {
 		$p_date2 = db_param();
 	}
-	switch( $t_db_type ) {
-		case 'mssql':
-		case 'odbc_mssql':
-		case 'ado_mssql':
-			return "(DATEDIFF(day, $p_date2, $p_date1) " . $p_limitstring . ")";
-		case 'mysql':
-		case 'mysqli':
-			return "(TO_DAYS($p_date1) - TO_DAYS($p_date2) " . $p_limitstring . ")";
-		case 'postgres':
-		case 'postgres64':
-		case 'postgres7':
-		case 'pgsql':
-			return "(date_mi($p_date1::date, $p_date2::date) " . $p_limitstring . ")";
-		case 'oci8':
-			return "(($p_date1 - $p_date2)" . $p_limitstring . ")";
-		case 'db2':
 
-			// all DB2 UDB use days function
-			return "(days($p_date1) - days($p_date2) " . $p_limitstring . ")";
-		default:
-			error_parameters( 'db_type', $t_db_type );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
-	}
+	return "(($p_date1 - $p_date2)" . $p_limitstring . ")";
 }
 
 /**

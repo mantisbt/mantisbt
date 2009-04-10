@@ -77,3 +77,34 @@ function install_category_migrate() {
 	# return 2 because that's what ADOdb/DataDict does when things happen properly
 	return 2;
 }
+
+function install_date_migrate( $p_data) {
+	// $p_data[0] = tablename, [1] id column, [2] = old column, [3] = new column
+	
+	$t_table = db_get_table( $p_data[0] );
+	$t_id_column = $p_data[1];
+	$t_old_column = $p_data[2];
+	$t_new_column = $p_data[3];
+	
+	$query = "SELECT $t_id_column, $t_old_column FROM $t_table";
+	$t_result = db_query_bound( $query );
+	
+	while( $row = db_fetch_array( $t_result ) ) {
+		$t_id = $row[$t_id_column];
+		$t_old_value = $row[$t_old_column];
+
+		$t_new_value = db_unixtimestamp($t_old_value);
+		if ($t_new_value < 100000 ) {
+			$t_new_value = 1;
+		}
+
+		$query = "UPDATE $t_table SET $t_new_column=" . db_param() . "
+					WHERE $t_id_column =" . db_param();
+					
+		db_query_bound( $query, array( $t_new_value, $t_id ) );
+	}
+
+	# return 2 because that's what ADOdb/DataDict does when things happen properly
+	return 2;	
+
+}

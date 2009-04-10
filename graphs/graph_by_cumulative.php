@@ -107,9 +107,9 @@ while( $row = db_fetch_array( $result ) ) {
 	extract( $row );
 
 	if( $status < 80 ) {
-		$date_str = date( 'm/d/Y', db_unixtimestamp( $date_submitted ) );
+		$date_str = date( 'm/d/Y', $date_submitted );
 	} else {
-		$date_str = date( 'm/d/Y', db_unixtimestamp( $last_updated ) );
+		$date_str = date( 'm/d/Y', $last_updated );
 	}
 
 	$data_date_arr[] = $date_str;

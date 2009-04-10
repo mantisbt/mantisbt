@@ -38,7 +38,7 @@ function date_is_null( $p_date ) {
  * @access public
  */
 function date_get_null() {
-	return db_unixtimestamp( db_null_date() );
+	return 1;
 }
 
 /**

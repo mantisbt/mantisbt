@@ -284,7 +284,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_attachment['id'] = $t_id;
 		$t_attachment['display_name'] = file_get_display_name( $t_filename );
 		$t_attachment['size'] = $t_filesize;
-		$t_attachment['date_added'] = db_unixtimestamp( $t_date_added );
+		$t_attachment['date_added'] = $t_date_added;
 		$t_attachment['can_download'] = $t_can_download;
 		$t_attachment['diskfile'] = $t_diskfile;
 

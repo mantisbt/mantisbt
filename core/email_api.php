@@ -289,7 +289,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	# add users who contributed bugnotes
 	$t_bugnote_id = bugnote_get_latest_id( $p_bug_id );
 	$t_bugnote_view = bugnote_get_field( $t_bugnote_id, 'view_state' );
-	$t_bugnote_date = db_unixtimestamp( bugnote_get_field( $t_bugnote_id, 'last_modified' ) );
+	$t_bugnote_date = bugnote_get_field( $t_bugnote_id, 'last_modified' );
 	$t_bug_date = bug_get_field( $p_bug_id, 'last_updated' );
 
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );

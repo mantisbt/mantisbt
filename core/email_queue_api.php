@@ -97,7 +97,6 @@ function email_queue_row_to_object( $p_row ) {
 	}
 
 	$t_row = $p_row;
-	$t_row['submitted'] = db_unixtimestamp( $t_row['submitted'] );
 	$t_row['metadata'] = unserialize( $t_row['metadata'] );
 
 	$t_email_data = new EmailData;
