@@ -27,9 +27,17 @@
  * Migrate the legacy category data to the new category_id-based schema.
  */
 function install_category_migrate() {
+	global $g_db_log_queries;
+	
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_category_table = db_get_table( 'mantis_category_table' );
 	$t_project_category_table = db_get_table( 'mantis_project_category_table' );
+
+	// disable query logging (even if it's enabled in config for this)
+	if( $g_db_log_queries !== 0) {
+		$t_log_queries = $g_db_log_queries;
+		$g_db_log_queries = 0;
+	}
 
 	$query = "SELECT project_id, category FROM $t_project_category_table ORDER BY project_id, category";
 	$t_category_result = db_query_bound( $query );
@@ -74,13 +82,25 @@ function install_category_migrate() {
 		}
 	}
 
+	// re-enabled query logging if we disabled it
+	if( $t_log_queries !== null) {
+		$g_db_log_queries = $t_log_queries;
+	}
+
 	# return 2 because that's what ADOdb/DataDict does when things happen properly
 	return 2;
 }
 
 function install_date_migrate( $p_data) {
 	// $p_data[0] = tablename, [1] id column, [2] = old column, [3] = new column
+	global $g_db_log_queries;
 	
+	// disable query logging (even if it's enabled in config for this)
+	if( $g_db_log_queries !== 0) {
+		$t_log_queries = $g_db_log_queries;
+		$g_db_log_queries = 0;
+	}
+
 	$t_table = db_get_table( $p_data[0] );
 	$t_id_column = $p_data[1];
 	$t_old_column = $p_data[2];
@@ -102,6 +122,11 @@ function install_date_migrate( $p_data) {
 					WHERE $t_id_column =" . db_param();
 					
 		db_query_bound( $query, array( $t_new_value, $t_id ) );
+	}
+
+	// re-enabled query logging if we disabled it
+	if( $t_log_queries !== null) {
+		$g_db_log_queries = $t_log_queries;
 	}
 
 	# return 2 because that's what ADOdb/DataDict does when things happen properly
