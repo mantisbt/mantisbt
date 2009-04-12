@@ -150,6 +150,7 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 
 	$g_cache_user_pref[$p_user_id][$p_project_id] = $row;
 
+	date_default_timezone_set( $row['timezone'] );
 	return $row;
 }
 
