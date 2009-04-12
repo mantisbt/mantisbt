@@ -361,6 +361,16 @@ print_test_row( 'Checking if ctype is enabled in php (required for rss feeds)...
 print_test_row( 'Checking for mysql is at least version 4.1...', !(db_is_mysql() && version_compare( $t_serverinfo['version'], '4.1.0', '<' ) ) );
 print_test_row( 'Checking for broken mysql version ( bug 10250)...', !(db_is_mysql() && $t_serverinfo['version'] == '4.1.21') );
 
+if ( !is_blank ( config_get_global( 'default_timezone' ) ) ) {
+	if ( print_test_row( 'Checking if a timezone is set in config.inc.php....', !is_blank ( config_get_global( 'default_timezone' ) ), config_get_global( 'default_timezone' ) ) ) {
+		print_test_row( 'Checking if timezone is valid from config.inc.php....', in_array( config_get_global( 'default_timezone' ), timezone_identifiers_list() ), config_get_global( 'default_timezone' ) );
+	}
+} else {
+	if( print_test_row( 'Checking if timezone is set in php.ini....', ini_get( 'date.timezone' ) !== '' ) ) {
+		print_test_row( 'Checking if timezone is valid in php.ini....', in_array( ini_get( 'date.timezone' ), timezone_identifiers_list() ), ini_get( 'date.timezone' ) );
+	}
+}
+
 test_database_utf8();
 
 print_test_row( 'Checking Register Globals is set to off', ! ini_get_bool( 'register_globals' ) );

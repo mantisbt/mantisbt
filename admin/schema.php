@@ -555,6 +555,8 @@ $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bug_revision_t
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_bug_revision_table' ), "timestamp_int", "timestamp", "timestamp_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_bug_rev_id_time', db_get_table( 'mantis_bug_revision_table' ), 'bug_id, timestamp' ) );
 
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_user_pref_table' ), "
+	 timezone C(32) NOTNULL DEFAULT '' " ) );
 
 
 

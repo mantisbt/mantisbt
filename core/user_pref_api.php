@@ -54,6 +54,7 @@ $g_default_mapping = array(
 	'email_on_priority_min_severity' => 'default_email_on_priority_minimum_severity',
 	'email_bugnote_limit' => 'default_email_bugnote_limit',
 	'language' => 'default_language',
+	'timezone' => 'default_timezone',
 );
 
 # ===================================
@@ -88,6 +89,7 @@ class UserPreferences {
 	var $email_on_priority_min_severity = NULL;
 	var $email_bugnote_limit = NULL;
 	var $language = NULL;
+	var $timezone = NULL;
 
 	function UserPreferences() {
 		$this->default_profile = 0;

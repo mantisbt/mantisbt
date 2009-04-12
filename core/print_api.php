@@ -1765,3 +1765,41 @@ document.getElementById( span ).style.display = displayType;
 		}
 	}
 }
+
+# --------------------
+# Print the option list for timezones
+function print_timezone_option_list( $p_timezone ) {
+	$t_identifiers = timezone_identifiers_list();
+
+	foreach ( $t_identifiers as $t_identifier )
+	{
+	    $t_zone = explode( '/', $t_identifier );
+
+	    // Only use "friendly" continent names - http://us.php.net/manual/en/timezones.others.php
+		if ($t_zone[0] == 'Africa' ||
+			$t_zone[0] == 'America' ||
+			$t_zone[0] == 'Antarctica' ||
+			$t_zone[0] == 'Arctic' ||
+			$t_zone[0] == 'Asia' ||
+			$t_zone[0] == 'Atlantic' ||
+			$t_zone[0] == 'Australia' ||
+			$t_zone[0] == 'Europe' ||
+			$t_zone[0] == 'Indian' ||
+			$t_zone[0] == 'Pacific' )
+		{        
+	        if ( isset( $t_zone[1] ) != '' )
+	        {
+	            $t_locations[$t_zone[0]][$t_zone[0] . '/' . $t_zone[1]] = array( str_replace( '_', ' ', $t_zone[1] ), $t_identifier );
+	        }
+		}
+	}
+
+	foreach( $t_locations as $t_continent => $t_locations ) {
+		echo '<optgroup label="'.$t_continent.'">';
+		foreach ( $t_locations as $t_location ) {
+			echo '<option value="' . $t_location[1] . '"';
+			check_selected( $p_timezone, $t_location[1] );
+			echo '>' . $t_location[0] . '</option>';
+		}
+	}
+}

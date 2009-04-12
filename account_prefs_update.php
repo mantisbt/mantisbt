@@ -97,6 +97,15 @@
 		$t_prefs->refresh_delay = config_get( 'min_refresh_delay' );
 	}
 
+	$t_timezone = gpc_get_string( 'timezone' );
+	if ( in_array( $t_timezone, timezone_identifiers_list() ) ) {
+		if ( $t_timezone == config_get_global( 'default_timezone' ) ) {
+			$t_prefs->timezone = '';			
+		} else {
+			$t_prefs->timezone = $t_timezone;
+		}
+	}
+
 	event_signal( 'EVENT_ACCOUNT_PREF_UPDATE', array( $f_user_id ) );
 
 	user_pref_set( $f_user_id, $t_prefs );

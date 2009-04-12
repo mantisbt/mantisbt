@@ -253,6 +253,14 @@ unset($mantisRoot, $mantisLibrary, $mantisCore, $path);
 		}
 	}
 
+	if ( !is_blank ( config_get_global( 'default_timezone' ) ) ) {
+		// if a default timezone is set in config, set it here, else we use php.ini's value
+		// having a timezone set avoids a php warning
+		date_default_timezone_set( config_get_global( 'default_timezone' ) );
+	} else {
+		config_set_global( 'default_timezone', date_default_timezone_get() );
+	}
+
 	// push push default language to speed calls to lang_get
 	if ( !isset( $g_skip_lang_load ) )
 		lang_push( lang_get_default() );
