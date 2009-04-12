@@ -370,8 +370,11 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 #  Does *not* persist the value between sessions. If override set to
 #  false, then the value will only be set if not already existent.
 function config_set_global( $p_option, $p_value, $p_override = true ) {
+	global $g_cache_config_eval;
+	
 	if( $p_override || !isset( $GLOBALS['g_' . $p_option] ) ) {
 		$GLOBALS['g_' . $p_option] = $p_value;
+		unset( $g_cache_config_eval['g_' . $p_option] );
 	}
 
 	return true;
