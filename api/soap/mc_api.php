@@ -124,35 +124,67 @@ function mci_get_user_lang( $p_user_id ) {
 	return $t_lang;
 }
 
-function mci_get_status_id( $p_status ) {
+function mci_get_status_id( &$p_status ) {
+	if ( !isset( $p_status ) ) {
+		return (int)config_get( 'bug_submit_status' );
+	}
+
 	return mci_get_enum_id_from_objectref( 'status', $p_status );
 }
 
-function mci_get_severity_id( $p_severity ) {
+function mci_get_severity_id( &$p_severity ) {
+	if ( !isset( $p_severity ) ) {
+		return (int)config_get( 'default_bug_severity' );
+	}
+
 	return mci_get_enum_id_from_objectref( 'severity', $p_severity );
 }
 
-function mci_get_priority_id( $p_priority ) {
+function mci_get_priority_id( &$p_priority ) {
+	if ( !isset( $p_priority ) ) {
+		return (int)config_get( 'default_bug_priority' );
+	}
+
 	return mci_get_enum_id_from_objectref( 'priority', $p_priority );
 }
 
-function mci_get_reproducibility_id( $p_reproducibility ) {
+function mci_get_reproducibility_id( &$p_reproducibility ) {
+	if ( !isset( $p_reproducibility ) ) {
+		return (int)config_get( 'default_bug_reproducibility' );
+	}
+
 	return mci_get_enum_id_from_objectref( 'reproducibility', $p_reproducibility );
 }
 
-function mci_get_resolution_id( $p_resolution ) {
+function mci_get_resolution_id( &$p_resolution ) {
+	if ( !isset( $p_resolution ) ) {
+		return (int)OPEN;
+	}
+
 	return mci_get_enum_id_from_objectref( 'resolution', $p_resolution );
 }
 
-function mci_get_projection_id( $p_projection ) {
+function mci_get_projection_id( &$p_projection ) {
+	if ( !isset( $p_projection ) ) {
+		return (int)10;
+	}
+
 	return mci_get_enum_id_from_objectref( 'projection', $p_projection );
 }
 
-function mci_get_eta_id( $p_eta ) {
+function mci_get_eta_id( &$p_eta ) {
+	if ( !isset( $p_eta ) ) {
+		return (int)10;
+	}
+
 	return mci_get_enum_id_from_objectref( 'eta', $p_eta );
 }
 
-function mci_get_view_state_id( $p_view_state ) {
+function mci_get_view_state_id( &$p_view_state ) {
+	if ( !isset( $p_view_state ) ) {
+		return (int)config_get( 'default_bug_view_status' );
+	}
+
 	return mci_get_enum_id_from_objectref( 'view_state', $p_view_state );
 }
 
@@ -222,7 +254,11 @@ function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, 
 	return $t_result;
 }
 
-function translate_category_name_to_id( $p_category_name, $p_project_id ) {
+function translate_category_name_to_id( &$p_category_name, $p_project_id ) {
+	if ( !isset( $p_category_name ) ) {
+		return 0;
+	}
+
 	$t_cat_array = category_get_all_rows( $p_project_id );
 	foreach( $t_cat_array as $t_category_row ) {
 		if( $t_category_row['name'] == $p_category_name ) {
@@ -379,9 +415,9 @@ function mc_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 
 # Get a stack trace if PHP provides the facility or xdebug is present
 function error_get_stack_trace() {
-	$t_stack = '';
+	$t_trace = '';
 
-	if( extension_loaded( 'xdebug' ) ) {
+	if ( extension_loaded( 'xdebug' ) ) {
 
 		#check for xdebug presence
 		$t_stack = xdebug_get_function_stack();
@@ -392,23 +428,22 @@ function error_get_stack_trace() {
 		array_shift( $t_stack );
 
 		#remove the call to this function from the stack trace
-
 		foreach( $t_stack as $t_frame ) {
-			$t_stack .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' ) . ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' ) . ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
+			$t_trace .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' ) . ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' ) . ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
 
 			$t_args = array();
-			if( isset( $t_frame['params'] ) ) {
-				$t_stack .= ' Params: ';
+			if ( isset( $t_frame['params'] ) && ( count( $t_frame['params'] ) > 0 ) ) {
+				$t_trace .= ' Params: ';
 				foreach( $t_frame['params'] as $t_value ) {
 					$t_args[] = error_build_parameter_string( $t_value );
 				}
 
-				$t_stack .= '(' . implode( $t_args, ', ' ) . ')';
+				$t_trace .= '(' . implode( $t_args, ', ' ) . ')';
 			} else {
-				$t_stack .= '()';
+				$t_trace .= '()';
 			}
 
-			$t_stack .= "\n";
+			$t_trace .= "\n";
 		}
 	} else {
 		$t_stack = debug_backtrace();
@@ -417,7 +452,7 @@ function error_get_stack_trace() {
 		array_shift( $t_stack ); #remove the call to the error handler from the stack trace
 
 		foreach( $t_stack as $t_frame ) {
-			$t_stack .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' ) . ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' ) . ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
+			$t_trace .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' ) . ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' ) . ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
 
 			$t_args = array();
 			if( isset( $t_frame['args'] ) ) {
@@ -425,14 +460,14 @@ function error_get_stack_trace() {
 					$t_args[] = error_build_parameter_string( $t_value );
 				}
 
-				$t_stack .= '(' . implode( $t_args, ', ' ) . ')';
+				$t_trace .= '(' . implode( $t_args, ', ' ) . ')';
 			} else {
-				$t_stack .= '()';
+				$t_trace .= '()';
 			}
 
-			$t_stack .= "\n";
+			$t_trace .= "\n";
 		}
 	}
 
-	return $t_stack;
+	return $t_trace;
 }

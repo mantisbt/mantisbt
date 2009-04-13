@@ -429,11 +429,8 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_eta_id = mci_get_eta_id( $p_issue['eta'] );
 	$t_view_state_id = mci_get_view_state_id( $p_issue['view_state'] );
 	$t_reporter_id = mci_get_user_id( $p_issue['reporter'] );
-	$t_category = $p_issue['category'];
-	$t_version = $p_issue['version'];
 	$t_summary = $p_issue['summary'];
 	$t_description = $p_issue['description'];
-	$t_custom_fields = $p_issue['custom_fields'];
 
 	if( $t_reporter_id == 0 ) {
 		$t_reporter_id = $t_user_id;
@@ -469,23 +466,25 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		return new soap_fault( 'Client', '', "User '$t_handler_id' does not exist." );
 	}
 
-	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
-	if( $t_category_id == 0 ) {
-		if ( is_blank( $t_category ) ) {
-			return new soap_fault( 'Client', '', "Category cannot be empty." );
+	$t_category_id = translate_category_name_to_id( $p_issue['category'], $t_project_id );
+	if ( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
+		if ( !isset( $p_issue['category'] ) || is_blank( $p_issue['category'] ) ) {
+			return new soap_fault( 'Client', '', "Category field must be supplied." );
 		} else {
-			return new soap_fault( 'Client', '', "Category '$t_category' does not exist in project '$t_project_id'." );
+			return new soap_fault( 'Client', '', "Category '" . $p_issue['category'] . "' not found for project '$t_project_id'." );
 		}
 	}
 
-	if ( isset( $t_version ) && !is_blank( $t_version ) && !version_get_id( $t_version, $t_project_id ) ) {
+	if ( isset( $p_issue['version'] ) && !is_blank( $p_issue['version'] ) && !version_get_id( $p_issue['version'], $t_project_id ) ) {
+		$t_version = $p_issue['version'];
+
 		$t_error_when_version_not_found = config_get( 'mc_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
-			return new soap_fault( 'Client', '', "Version '$v_version' does not exist in project '$t_project_name'." );
+			return new soap_fault( 'Client', '', "Version '$t_version' does not exist in project '$t_project_name'." );
 		} else {
 			$t_version_when_not_found = config_get( 'mc_version_when_not_found' );
-			$v_version = $t_version_when_not_found;
+			$t_version = $t_version_when_not_found;
 		}
 	}
 
@@ -495,22 +494,6 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
 	if ( is_blank( $t_description ) ) {
 		return new soap_fault( 'Client', '', "Mandatory field 'description' is missing." );
-	}
-
-	if ( $t_priority_id == 0 ) {
-		$t_priority_id = config_get( 'default_bug_priority' );
-	}
-
-	if ( $t_severity_id == 0 ) {
-		$t_severity_id = config_get( 'default_bug_severity' );
-	}
-
-	if ( $t_view_state_id == 0 ) {
-		$t_view_state_id = config_get( 'default_bug_view_status' );
-	}
-
-	if ( $t_reproducibility_id == 0 ) {
-		$t_reproducibility_id = 10;
 	}
 
 	$t_bug_data = new BugData;
@@ -524,19 +507,19 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_bug_data->resolution = $t_resolution_id;
 	$t_bug_data->projection = $t_projection_id;
 	$t_bug_data->category_id = $t_category_id;
-	$t_bug_data->date_submitted = isset( $v_date_submitted ) ? $v_date_submitted : '';
-	$t_bug_data->last_updated = isset( $v_last_updated ) ? $v_last_updated : '';
+	$t_bug_data->date_submitted = isset( $p_issue['date_submitted'] ) ? $p_issue['date_submitted'] : '';
+	$t_bug_data->last_updated = isset( $p_issue['last_updated'] ) ? $p_issue['last_updated'] : '';
 	$t_bug_data->eta = $t_eta_id;
-	$t_bug_data->os = isset( $v_os ) ? $v_os : '';
-	$t_bug_data->os_build = isset( $v_os_build ) ? $v_os_build : '';
-	$t_bug_data->platform = isset( $v_platform ) ? $v_platform : '';
-	$t_bug_data->version = isset( $v_version ) ? $v_version : '';
-	$t_bug_data->fixed_in_version = isset( $v_fixed_in_version ) ? $v_fixed_in_version : '';
-	$t_bug_data->target_version = isset( $v_target_version ) ? $v_target_version : '';
-	$t_bug_data->build = isset( $v_build ) ? $v_build : '';
+	$t_bug_data->os = isset( $p_issue['os'] ) ? $p_issue['os'] : '';
+	$t_bug_data->os_build = isset( $p_issue['os_build'] ) ? $p_issue['os_build'] : '';
+	$t_bug_data->platform = isset( $p_issue['platform'] ) ? $p_issue['platform'] : '';
+	$t_bug_data->version = isset( $p_issue['version'] ) ? $p_issue['version'] : '';
+	$t_bug_data->fixed_in_version = isset( $p_issue['fixed_in_version'] ) ? $p_issue['fixed_in_version'] : '';
+	$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
+	$t_bug_data->build = isset( $p_issue['build'] ) ? $p_issue['build'] : '';
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
-	$t_bug_data->sponsorship_total = isset( $v_sponsorship_total ) ? $v_sponsorship_total : 0;
+	$t_bug_data->sponsorship_total = isset( $p_issue['sponsorship_total'] ) ? $p_issue['sponsorship_total'] : 0;
 	$t_bug_data->due_date = date_get_null();
 
 	# omitted:
@@ -544,13 +527,13 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	# $t_bug_data->profile_id;
 	# extended info
 	$t_bug_data->description = $t_description;
-	$t_bug_data->steps_to_reproduce = isset( $v_steps_to_reproduce ) ? $v_steps_to_reproduce : '';
-	$t_bug_data->additional_information = isset( $v_additional_information ) ? $v_additional_information : '';
+	$t_bug_data->steps_to_reproduce = isset( $p_issue['steps_to_reproduce'] ) ? $p_issue['steps_to_reproduce'] : '';
+	$t_bug_data->additional_information = isset( $p_issue['additional_information'] ) ? $p_issue['additional_information'] : '';
 
 	# submit the issue
 	$t_issue_id = bug_create( $t_bug_data );
 
-	mci_issue_set_custom_fields( $t_issue_id, $t_custom_fields );
+	mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'] );
 
 	if( isset( $v_notes ) && is_array( $v_notes ) ) {
 		foreach( $v_notes as $t_note ) {
@@ -607,7 +590,6 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_view_state_id = mci_get_view_state_id( $p_issue['view_state'] );
 	$t_reporter_id = mci_get_user_id( $p_issue['reporter'] );
 	$t_project = $p_issue['project'];
-	$t_category = $p_issue['category'];
 	$t_summary = $p_issue['summary'];
 	$t_description = $p_issue['description'];
 	$t_custom_fields = $p_issue['custom_fields'];
@@ -636,13 +618,13 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		return new soap_fault( 'Client', '', "User '$t_handler_id' does not exist." );
 	}
 
-	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
-	if( $t_category_id == 0 ) {
-		if ( is_blank( $t_category ) ) {
-			return new soap_fault( 'Client', '', "Category cannot be empty." );
+	$t_category_id = translate_category_name_to_id( $p_issue['category'], $t_project_id );
+	if ( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
+		if ( isset( $p_issue['category'] ) && !is_blank( $p_issue['category'] ) ) {
+			return new soap_fault( 'Client', '', "Category field must be supplied." );
+		} else {
+			return new soap_fault( 'Client', '', "Category '" . $p_issue['category'] . "' not found for project '$t_project_name'." );
 		}
-
-		return new soap_fault( 'Client', '', "Category '$v_category' does not exist in project '$t_project_id'." );
 	}
 
 	if( isset( $v_version ) && !is_blank( $v_version ) && !version_get_id( $v_version, $t_project_id ) ) {

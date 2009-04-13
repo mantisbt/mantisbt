@@ -569,7 +569,9 @@ function bug_create( $p_bug_data ) {
 	}
 
 	# Insert the rest of the data
-	$t_resolution = OPEN;
+	$c_resolution = OPEN;
+	$c_projection = 10;
+	$c_eta = 10;
 
 	$query = "INSERT INTO $t_bug_table
 				    ( project_id,
@@ -615,7 +617,7 @@ function bug_create( $p_bug_data ) {
 				      " . db_param() . ",
 				      " . db_param() . ",
 				      " . db_param() . ")";
-	db_query_bound( $query, Array( $c_project_id, $c_reporter_id, $c_handler_id, 0, $c_priority, $c_severity, $c_reproducibility, $t_status, $t_resolution, 10, $c_category_id, db_now(), db_now(), 10, $t_text_id, $c_os, $c_os_build, $c_platform, $c_version, $c_build, $c_profile_id, $c_summary, $c_view_state, $c_sponsorship_total, $c_sticky, '', $c_target_version, $c_due_date ) );
+	db_query_bound( $query, Array( $c_project_id, $c_reporter_id, $c_handler_id, 0, $c_priority, $c_severity, $c_reproducibility, $t_status, $c_resolution, $c_projection, $c_category_id, db_now(), db_now(), $c_eta, $t_text_id, $c_os, $c_os_build, $c_platform, $c_version, $c_build, $c_profile_id, $c_summary, $c_view_state, $c_sponsorship_total, $c_sticky, '', $c_target_version, $c_due_date ) );
 
 	$t_bug_id = db_insert_id( $t_bug_table );
 

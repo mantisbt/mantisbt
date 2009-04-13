@@ -850,14 +850,21 @@ function email_send( $p_email_data ) {
 		}
 	}
 
-	if( !$mail->Send() ) {
-		$t_success = false;
-	} else {
-		$t_success = true;
-
-		if( $t_email_data->email_id > 0 ) {
-			email_queue_delete( $t_email_data->email_id );
+	try
+	{
+		if ( !$mail->Send() ) {
+			$t_success = false;
+		} else {
+			$t_success = true;
+	
+			if ( $t_email_data->email_id > 0 ) {
+				email_queue_delete( $t_email_data->email_id );
+			}
 		}
+	}
+	catch ( phpmailerException $e )
+	{
+		$t_success = false;
 	}
 
 	$mail->ClearAllRecipients();
