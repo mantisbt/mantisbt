@@ -42,6 +42,13 @@ class IssueAddTest extends SoapBase {
 			$this->password,
 			$issueToAdd);
 
+		$issueExists = $this->client->mc_issue_exists(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		$this->assertEquals( true, $issueExists );
+
 		$biggestId = $this->client->mc_issue_get_biggest_id(
 			$this->userName,
 			$this->password,

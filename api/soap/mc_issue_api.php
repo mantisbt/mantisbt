@@ -767,6 +767,10 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 		return new soap_fault( 'Client', '', "Issue '$p_issue_id' does not exist" );
 	}
 
+	if ( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
+		return new soap_fault( 'Client', '', "Issue note text must not be blank." );
+	}
+
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
