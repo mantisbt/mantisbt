@@ -125,7 +125,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	for( $j=0; $j < $t_row_count; $j++ ) {
 		$t_id = $result[$j]['id'];
 
-		if ( $t_row_count % 50 == 0 ) {
+		if ( $j % 50 == 0 ) {
 			# to save ram as report will list data once, clear cache after 50 bugs
 			bug_text_clear_cache();
 			bug_clear_cache();
