@@ -274,7 +274,7 @@
 		</select>
 	</td>
 
-	<?php if ( $t_show_platform ) { ?>
+	<?php if ( $t_show_profiles ) { ?>
 	<!-- Platform -->
 	<td class="category">
 		<?php echo lang_get( 'platform' ) ?>
@@ -316,7 +316,7 @@
 
 	<td colspan="2">&nbsp;</td>
 
-	<?php if ( $t_show_platform ) { ?>
+	<?php if ( $t_show_profiles ) { ?>
 	<!-- Operating System -->
 	<td class="category">
 		<?php echo lang_get( 'os' ) ?>
@@ -359,7 +359,7 @@
 	<!-- spacer -->
 	<td colspan="2">&nbsp;</td>
 
-	<?php if ( $t_show_platform ) { ?>
+	<?php if ( $t_show_profiles ) { ?>
 	<!-- OS Version -->
 	<td class="category">
 		<?php echo lang_get( 'os_version' ) ?>
