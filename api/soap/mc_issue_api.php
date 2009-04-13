@@ -592,11 +592,6 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_project = $p_issue['project'];
 	$t_summary = $p_issue['summary'];
 	$t_description = $p_issue['description'];
-	$t_custom_fields = $p_issue['custom_fields'];
-
-	$v_fixed_in_version = $p_issue['fixed_in_version'];
-	$v_version = $p_issue['version'];
-	$v_target_version = $p_issue['target_version'];
 
 	if( $t_reporter_id == 0 ) {
 		$t_reporter_id = $t_user_id;
@@ -627,14 +622,14 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		}
 	}
 
-	if( isset( $v_version ) && !is_blank( $v_version ) && !version_get_id( $v_version, $t_project_id ) ) {
+	if ( isset( $p_issue['version'] ) && !is_blank( $p_issue['version'] ) && !version_get_id( $p_issue['version'], $t_project_id ) ) {
 		$t_error_when_version_not_found = config_get( 'mc_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
-			return new soap_fault( 'Client', '', "Version '$v_version' does not exist in project '$t_project_name'." );
+			return new soap_fault( 'Client', '', "Version '" . $p_issue['version'] . "' does not exist in project '$t_project_name'." );
 		} else {
 			$t_version_when_not_found = config_get( 'mc_version_when_not_found' );
-			$v_version = $t_version_when_not_found;
+			$p_issue['version'] = $t_version_when_not_found;
 		}
 	}
 
@@ -679,9 +674,9 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_bug_data->os = isset( $v_os ) ? $v_os : '';
 	$t_bug_data->os_build = isset( $v_os_build ) ? $v_os_build : '';
 	$t_bug_data->platform = isset( $v_platform ) ? $v_platform : '';
-	$t_bug_data->version = isset( $v_version ) ? $v_version : '';
-	$t_bug_data->fixed_in_version = isset( $v_fixed_in_version ) ? $v_fixed_in_version : '';
-	$t_bug_data->target_version = isset( $v_target_version ) ? $v_target_version : '';
+	$t_bug_data->version = isset( $p_issue['version'] ) ? $p_issue['version'] : '';
+	$t_bug_data->fixed_in_version = isset( $p_issue['fixed_in_version'] ) ? $p_issue['fixed_in_version'] : '';
+	$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
 	$t_bug_data->build = isset( $v_build ) ? $v_build : '';
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
@@ -699,7 +694,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	# submit the issue
 	$t_is_success = bug_update( $p_issue_id, $t_bug_data, true, false );
 
-	mci_issue_set_custom_fields( $p_issue_id, $t_custom_fields );
+	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'] );
 
 	if( isset( $v_notes ) && is_array( $v_notes ) ) {
 		foreach( $v_notes as $t_note ) {
