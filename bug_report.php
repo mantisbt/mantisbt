@@ -52,10 +52,10 @@
 	$t_bug_data->reproducibility		= gpc_get_int( 'reproducibility', config_get( 'default_bug_reproducibility' ) );
 	$t_bug_data->severity				= gpc_get_int( 'severity', config_get( 'default_bug_severity' ) );
 	$t_bug_data->priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
-	$t_bug_data->projection				= gpc_get_int( 'projection', 10 );
-	$t_bug_data->eta					= gpc_get_int( 'eta', 10 );
-	$t_bug_data->resolution				= gpc_get_int( 'resolution', OPEN );
-	$t_bug_data->status					= gpc_get_int( 'status', config_get( 'bug_submit_status' ) );
+	$t_bug_data->projection				= 10;
+	$t_bug_data->eta					= 10;
+	$t_bug_data->resolution				= OPEN;
+	$t_bug_data->status					= config_get( 'bug_submit_status' );
 	$t_bug_data->summary				= gpc_get_string( 'summary' );
 	$t_bug_data->description			= gpc_get_string( 'description' );
 	$t_bug_data->steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
