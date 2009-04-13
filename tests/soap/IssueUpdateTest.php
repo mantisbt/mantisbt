@@ -159,4 +159,77 @@ class IssueUpdateTest extends SoapBase {
 			$this->password,
 			$issueId);
 	}
+
+	/**
+	 * This test case tests the following:
+	 * 1. Creation of an issue.
+	 * 2. Adding a note to the issue.
+	 * 3. Getting the issue and calling update - making sure the note is not duplicated.
+	 * 4. Getting the issue, adding a new note and making sure that the first is not duplicated, but second is added.
+	 * 5. Deleting the issue.
+	 */
+	public function testUpdateWithNewNote() {
+		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithNewNote' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$createdIssue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		$noteData = array(
+			'text' => "first note",
+		);
+
+		$this->client->mc_issue_note_add(
+			$this->userName,
+			$this->password,
+			$issueId,
+			$noteData);
+
+		$issueWithNote = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		$this->assertEquals( 1, count( $issueWithNote->notes ) );
+
+		$this->client->mc_issue_update(
+			$this->userName,
+			$this->password,
+			$issueId,
+			$issueWithNote);
+			
+		$issueWithNoteAfterUpdate = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+			
+		$this->assertEquals( 1, count( $issueWithNoteAfterUpdate->notes ) );
+
+		$issueWithOneNewNote = $issueWithNoteAfterUpdate;
+		$issueWithOneNewNote->notes[] = array( 'text' => 'second note' );
+
+		$this->client->mc_issue_update(
+			$this->userName,
+			$this->password,
+			$issueId,
+			$issueWithOneNewNote);
+
+		$issueWithTwoNotes = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		$this->assertEquals( 2, count( $issueWithTwoNotes->notes ) );
+
+		$this->client->mc_issue_delete(
+			$this->userName,
+			$this->password,
+			$issueId);
+	}
 }

@@ -696,15 +696,20 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 
 	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'] );
 
-	if( isset( $v_notes ) && is_array( $v_notes ) ) {
-		foreach( $v_notes as $t_note ) {
-			if( isset( $t_note['view_state'] ) ) {
+	if ( isset( $p_issue['notes'] ) && is_array( $p_issue['notes'] ) ) {
+		foreach ( $p_issue['notes'] as $t_note ) {
+			if ( isset( $t_note['id'] ) && ( (int)$t_note['id'] > 0 ) ) {
+				# skip issues that have an id, hence, are already added.
+				# these are the result of a previous call to mc_issue_get().
+				continue;
+			}
+
+			if ( isset( $t_note['view_state'] ) ) {
 				$t_view_state = $t_note['view_state'];
 			} else {
 				$t_view_state = config_get( 'default_bugnote_view_status' );
 			}
 
-			// TODO: consider supporting updating of bugnotes and detecting the ones that haven't changed.
 			$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
 			bugnote_add( $p_issue_id, $t_note['text'], '0:00', $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id, FALSE );
 		}
