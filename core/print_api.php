@@ -397,15 +397,17 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 	print_user( $p_poster_id );
 	$output = '';
 
-	$output .= ' <span class="small">';
 	if( 1 == $p_announcement ) {
+		$output .= ' <span class="small">';
 		$output .= '[' . lang_get( 'announcement' ) . ']';
+		$output .= '</span>';		
 	}
 	if( VS_PRIVATE == $p_view_state ) {
+		$output .= ' <span class="small">';
 		$output .= '[' . lang_get( 'private' ) . ']';
+		$output .= '</span>';
 	}
 
-	$output .= '</span>';
 	$output .= '</td>';
 	$output .= '</tr>';
 	$output .= '<tr>';
