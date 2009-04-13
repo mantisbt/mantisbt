@@ -123,4 +123,47 @@ class IssueAddTest extends SoapBase {
 			$this->password,
 			$issueId);
 	}
+
+	/**
+	 * This issue tests the following:
+	 * 1. Creating an issue with some fields that are typically not used at creation time.
+	 *    For example: projection, eta, resolution, status, fixed_in_version, and target_version.
+	 * 2. Get the issue and confirm that all fields are set as expected.
+	 * 3. Delete the issue.
+	 * 
+	 * This test case was added for bug #9132.
+	 */
+	public function testCreateIssueWithRareFields() {
+		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithRareFields' );
+
+		$issueToAdd['projection'] = array( 'id' => 90 );    // redesign
+		$issueToAdd['eta'] = array( 'id' => 60 );           // > 1 month
+		$issueToAdd['resolution'] = array( 'id' => 80 );    // suspended
+		$issueToAdd['status'] = array( 'id' => 40 );        // confirmed
+		$issueToAdd['fixed_in_version'] = 'fixed version';
+		$issueToAdd['target_version'] = 'target version';
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		// explicitly specified fields
+		$this->assertEquals( $issueToAdd['projection']['id'], $issue->projection->id );
+		$this->assertEquals( $issueToAdd['eta']['id'], $issue->eta->id );
+		$this->assertEquals( $issueToAdd['resolution']['id'], $issue->resolution->id );
+		$this->assertEquals( $issueToAdd['status']['id'], $issue->status->id );
+		$this->assertEquals( $issueToAdd['fixed_in_version'], $issue->fixed_in_version );
+		$this->assertEquals( $issueToAdd['target_version'], $issue->target_version );
+
+		$this->client->mc_issue_delete(
+			$this->userName,
+			$this->password,
+			$issueId);
+	}
 }

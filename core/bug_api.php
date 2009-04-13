@@ -483,6 +483,10 @@ function bug_create( $p_bug_data ) {
 	$c_priority = db_prepare_int( $p_bug_data->priority );
 	$c_severity = db_prepare_int( $p_bug_data->severity );
 	$c_reproducibility = db_prepare_int( $p_bug_data->reproducibility );
+	$c_projection = db_prepare_int( $p_bug_data->projection );
+	$c_eta = db_prepare_int( $p_bug_data->eta );
+	$c_resolution = db_prepare_int( $p_bug_data->resolution );
+	$c_status = db_prepare_int( $p_bug_data->status );
 	$c_category_id = db_prepare_int( $p_bug_data->category_id );
 	$c_os = $p_bug_data->os;
 	$c_os_build = $p_bug_data->os_build;
@@ -514,8 +518,15 @@ function bug_create( $p_bug_data ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
+	# Only set fixed in version if user has access to do so
+	if ( !is_blank( $p_bug_data->fixed_in_version ) && access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
+		$c_fixed_in_version = $p_bug_data->fixed_in_version;
+	} else {
+		$c_fixed_in_version = '';
+	}
+
 	# Only set target_version if user has access to do so
-	if( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
+	if ( !is_blank( $p_bug_data->target_version ) && access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
 		$c_target_version = $p_bug_data->target_version;
 	} else {
 		$c_target_version = '';
@@ -546,7 +557,8 @@ function bug_create( $p_bug_data ) {
 	$t_text_id = db_insert_id( $t_bug_text_table );
 
 	# check to see if we want to assign this right off
-	$t_status = config_get( 'bug_submit_status' );
+	$t_starting_status = config_get( 'bug_submit_status' );
+	$t_original_status = $c_status;
 
 	# if not assigned, check if it should auto-assigned.
 	if( 0 == $c_handler_id ) {
@@ -564,14 +576,9 @@ function bug_create( $p_bug_data ) {
 	}
 
 	# Check if bug was pre-assigned or auto-assigned.
-	if(( $c_handler_id != 0 ) && ( ON == config_get( 'auto_set_status_to_assigned' ) ) ) {
-		$t_status = config_get( 'bug_assigned_status' );
+	if ( ( $c_handler_id != 0 ) && ( $c_status == $t_starting_status ) && ( ON == config_get( 'auto_set_status_to_assigned' ) ) ) {
+		$c_status = config_get( 'bug_assigned_status' );
 	}
-
-	# Insert the rest of the data
-	$c_resolution = OPEN;
-	$c_projection = 10;
-	$c_eta = 10;
 
 	$query = "INSERT INTO $t_bug_table
 				    ( project_id,
@@ -617,7 +624,7 @@ function bug_create( $p_bug_data ) {
 				      " . db_param() . ",
 				      " . db_param() . ",
 				      " . db_param() . ")";
-	db_query_bound( $query, Array( $c_project_id, $c_reporter_id, $c_handler_id, 0, $c_priority, $c_severity, $c_reproducibility, $t_status, $c_resolution, $c_projection, $c_category_id, db_now(), db_now(), $c_eta, $t_text_id, $c_os, $c_os_build, $c_platform, $c_version, $c_build, $c_profile_id, $c_summary, $c_view_state, $c_sponsorship_total, $c_sticky, '', $c_target_version, $c_due_date ) );
+	db_query_bound( $query, Array( $c_project_id, $c_reporter_id, $c_handler_id, 0, $c_priority, $c_severity, $c_reproducibility, $c_status, $c_resolution, $c_projection, $c_category_id, db_now(), db_now(), $c_eta, $t_text_id, $c_os, $c_os_build, $c_platform, $c_version, $c_build, $c_profile_id, $c_summary, $c_view_state, $c_sponsorship_total, $c_sticky, $c_fixed_in_version, $c_target_version, $c_due_date ) );
 
 	$t_bug_id = db_insert_id( $t_bug_table );
 
@@ -625,7 +632,7 @@ function bug_create( $p_bug_data ) {
 	history_log_event_special( $t_bug_id, NEW_BUG );
 
 	# log changes, if any (compare happens in history_log_event_direct)
-	history_log_event_direct( $t_bug_id, 'status', config_get( 'bug_submit_status' ), $t_status );
+	history_log_event_direct( $t_bug_id, 'status', $t_original_status, $c_status );
 	history_log_event_direct( $t_bug_id, 'handler_id', 0, $c_handler_id );
 
 	return $t_bug_id;
