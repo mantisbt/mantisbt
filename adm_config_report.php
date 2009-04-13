@@ -82,7 +82,7 @@
 
 <!-- Title -->
 <tr>
-	<td class="form-title" colspan="3">
+	<td class="form-title" colspan="7">
 		<?php echo lang_get( 'database_configuration' ) ?>
 	</td>
 </tr>
