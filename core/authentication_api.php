@@ -679,7 +679,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 
 <table class="width50 center">
 <tr>
-	<td class="form-title"><?php echo lang_get( 'reauthenticate_title' );?></td>
+	<td class="form-title" colspan="2"><?php echo lang_get( 'reauthenticate_title' ); ?></td>
 </tr>
 
 <tr class="row-1">

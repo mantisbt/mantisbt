@@ -227,7 +227,7 @@
 		<?php echo lang_get( 'manage_accounts_title' ) ?> [<?php echo $total_user_count ?>]
 		<?php print_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ) ) ?>
 	</td>
-	<td class="center" colspan="2">
+	<td class="center" colspan="3">
 		<form method="post" action="manage_user_page.php">
 		<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
 		<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
