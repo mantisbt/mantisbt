@@ -52,12 +52,12 @@
 </tr>
 <tr valign="top">
 	<td>
-		 <center><img src="summary_graph_bystatus.php?width=<?php echo $t_graph_width?>" border="0" /></center>
+		 <center><img src="summary_graph_bystatus.php?width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
 	</td>
 </tr>
 <tr valign="top">
 	<td>
-		<center><img src="summary_graph_bystatus_pct.php?width=<?php echo $t_graph_width?>" border="0" /></center>
+		<center><img src="summary_graph_bystatus_pct.php?width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
 	</td>
 </tr>
 </table>

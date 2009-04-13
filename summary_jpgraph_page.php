@@ -57,7 +57,7 @@
 			print( "<tr valign=\"top\">\n" );
 		}
 		echo '<td width="50%" align="center">';
-		printf("<img src=\"%s.php?width=%d\" border=\"0\" />", $t_graphs[$t_pos], $t_graph_width );
+		printf("<img src=\"%s.php?width=%d\" border=\"0\" alt=\"\" />", $t_graphs[$t_pos], $t_graph_width );
 		echo '</td>';
 		if ( ( $t_wide - 1 ) == ( $t_pos % $t_wide ) ) {
 			print( "</tr>\n" );
