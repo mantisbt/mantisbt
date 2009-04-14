@@ -160,7 +160,7 @@
 	function section_begin( $p_section_name ) {
 		$t_enum_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan="' . ( count( $t_enum_statuses ) + 2 ) . '">'
+		echo '<tr><td class="form-title-caps" colspan="' . ( count( $t_enum_statuses ) + 2 ) . '">'
 			. $p_section_name . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'current_status' ) . '</td>';
 		echo '<td class="form-title" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'

@@ -39,7 +39,7 @@
 		$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
 		$t_output = '<table class="width100">';
-		$t_output .= '<tr><td class="form-title" colspan="' . ( count( $t_access_levels ) + 1 ) . '">' . strtoupper( $p_section_name ) . '</td></tr>' . "\n";
+		$t_output .= '<tr><td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 1 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 		$t_output .= '<tr><td class="form-title" width="40%">' . lang_get( 'perm_rpt_capability' ) . '</td>';
 
 		foreach( $t_access_levels as $t_access_level ) {
