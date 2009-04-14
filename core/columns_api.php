@@ -34,6 +34,7 @@ function columns_get_standard() {
 		'category_id',
 		'date_submitted',
 		'description',
+		'due_date',
 		'edit',
 		'eta',
 		'fixed_in_version',
