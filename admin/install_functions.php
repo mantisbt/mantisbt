@@ -103,25 +103,53 @@ function install_date_migrate( $p_data) {
 
 	$t_table = db_get_table( $p_data[0] );
 	$t_id_column = $p_data[1];
-	$t_old_column = $p_data[2];
-	$t_new_column = $p_data[3];
+
+	if ( is_array( $p_data[2] ) ) {
+		$t_old_column = implode( ',', $p_data[2] );
+		$t_date_array = true;
+		$t_cnt_fields = sizeof( $p_data[2] );
+		$t_pairs = array();
+		foreach( $p_data[3] as $var ) {
+			array_push( $t_pairs, "$var=" . db_param() ) ;
+		}		
+		$t_new_column = implode( ',', $t_pairs );
+	} else {
+		$t_old_column = $p_data[2];
+		$t_new_column = $p_data[3] . "=" . db_param();
+		$t_date_array = false;
+	}
 	
 	$query = "SELECT $t_id_column, $t_old_column FROM $t_table";
 	$t_result = db_query_bound( $query );
-	
+
 	while( $row = db_fetch_array( $t_result ) ) {
-		$t_id = $row[$t_id_column];
-		$t_old_value = $row[$t_old_column];
+		$t_id = (int)$row[$t_id_column];
 
-		$t_new_value = db_unixtimestamp($t_old_value);
-		if ($t_new_value < 100000 ) {
-			$t_new_value = 1;
+		if( $t_date_array ) {
+			for( $i=0; $i < $t_cnt_fields; $i++ ) {
+				$t_old_value = $row[$p_data[2][$i]];
+
+				$t_new_value[$i] = db_unixtimestamp($t_old_value);
+				if ($t_new_value[$i] < 100000 ) {
+					$t_new_value[$i] = 1;
+				}
+			
+			}
+			$t_values = $t_new_value;
+			$t_values[] = $t_id;
+		} else {
+			$t_old_value = $row[$t_old_column];		
+
+			$t_new_value = db_unixtimestamp($t_old_value);
+			if ($t_new_value < 100000 ) {
+				$t_new_value = 1;
+			}
+			$t_values = array( $t_new_value, $t_id);
 		}
-
-		$query = "UPDATE $t_table SET $t_new_column=" . db_param() . "
-					WHERE $t_id_column =" . db_param();
-					
-		db_query_bound( $query, array( $t_new_value, $t_id ) );
+		
+		$query = "UPDATE $t_table SET $t_new_column
+					WHERE $t_id_column=" . db_param();
+		db_query_bound( $query, $t_values );
 	}
 
 	// re-enabled query logging if we disabled it

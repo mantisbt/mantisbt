@@ -439,29 +439,35 @@ $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_bug_rev_type', db_get_table( '
 
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "
 	date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_bug_table', 'id', 'date_submitted', 'date_submitted_int' ) );
-$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "date_submitted" ) );
-$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "
 	due_date_int        			I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_bug_table', 'id', 'due_date', 'due_date_int' ) );
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "
+	last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+
+$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_bug_table', 'id', array( 'date_submitted', 'due_date', 'last_updated' ), array( 'due_date_int', 'last_updated_int', 'date_submitted_int' ) ) );
+
+$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "date_submitted" ) );
+$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "due_date" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "due_date_int", "due_date", "due_date_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "last_updated" ) );
+$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "last_updated_int", "last_updated", "last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
 $upgrade[] = Array('CreateIndexSQL',Array('idx_last_mod',db_get_table( 'mantis_bugnote_table' ),'last_modified', array('DROP')), Array( 'db_index_exists', Array( db_get_table('mantis_bugnote_table'), 'idx_last_mod')));
+
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bugnote_table' ), "
 	last_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_bugnote_table', 'id', 'last_modified', 'last_modified_int' ) );
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bugnote_table' ), "
+	date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+
+$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_bugnote_table', 'id', array( 'last_modified', 'date_submitted' ), array( 'last_modified_int', 'date_submitted_int' ) ) );
+
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bugnote_table' ), "last_modified" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_bugnote_table' ), "last_modified_int", "last_modified", "last_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 $upgrade[] = Array('CreateIndexSQL',Array('idx_last_mod',db_get_table('mantis_bugnote_table'),'last_modified'));
+$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bugnote_table' ), "date_submitted" ) );
+$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_bugnote_table' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 	
-$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "
-	last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_bug_table', 'id', 'last_updated', 'last_updated_int' ) );
-$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "last_updated" ) );
-$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "last_updated_int", "last_updated", "last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_file_table' ), "
 	date_added_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
@@ -469,11 +475,6 @@ $upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_bug_file_ta
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bug_file_table' ), "date_added" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_bug_file_table' ), "date_added_int", "date_added", "date_added_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bugnote_table' ), "
-	date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_bugnote_table', 'id', 'date_submitted', 'date_submitted_int' ) );
-$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bugnote_table' ), "date_submitted" ) );
-$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_bugnote_table' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_file_table' ), "
 	date_added_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
@@ -489,7 +490,13 @@ $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_bug_history_
 
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_user_table' ), "
 	last_visit_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_user_table', 'id', 'last_visit', 'last_visit_int' ) );
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_user_table' ), "
+	date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+
+$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_user_table', 'id', array( 'last_visit', 'date_created' ), array( 'last_visit_int', 'date_created_int' ) ) );
+
+$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_user_table' ), "date_created" ) );
+$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_user_table' ), "date_created_int", "date_created", "date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_user_table' ), "last_visit" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_user_table' ), "last_visit_int", "last_visit", "last_visit_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
@@ -499,15 +506,16 @@ $upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_email_table
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_email_table' ), "submitted" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_email_table' ), "submitted_int", "submitted", "submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_tag_table' ), "
-	date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_tag_table', 'id', 'date_created', 'date_created_int' ) );
-$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_tag_table' ), "date_created" ) );
-$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_tag_table' ), "date_created_int", "date_created", "date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_tag_table' ), "
+	date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_tag_table' ), "
 	date_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_tag_table', 'id', 'date_updated', 'date_updated_int' ) );
+
+$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_tag_table', 'id', array( 'date_created', 'date_updated' ), array( 'date_created_int', 'date_updated_int' ) ) );
+
+$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_tag_table' ), "date_created" ) );
+$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_tag_table' ), "date_created_int", "date_created", "date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_tag_table' ), "date_updated" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_tag_table' ), "date_updated_int", "date_updated", "date_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
@@ -517,33 +525,28 @@ $upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_bug_tag_tab
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bug_tag_table' ), "date_attached" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_bug_tag_table' ), "date_attached_int", "date_attached", "date_attached_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_tokens_table' ), "
-	timestamp_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_tokens_table', 'id', 'timestamp', 'timestamp_int' ) );
-$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_tokens_table' ), "timestamp" ) );
-$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_tokens_table' ), "timestamp_int", "timestamp", "timestamp_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_tokens_table' ), "
+	timestamp_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_tokens_table' ), "
 	expiry_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_tokens_table', 'id', 'expiry', 'expiry_int' ) );
+
+$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_tokens_table', 'id', array( 'timestamp', 'expiry' ), array( 'timestamp_int', 'expiry_int' ) ) );
+
+$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_tokens_table' ), "timestamp" ) );
+$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_tokens_table' ), "timestamp_int", "timestamp", "timestamp_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_tokens_table' ), "expiry" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_tokens_table' ), "expiry_int", "expiry", "expiry_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_user_table' ), "
-	date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_user_table', 'id', 'date_created', 'date_created_int' ) );
-$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_user_table' ), "date_created" ) );
-$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_user_table' ), "date_created_int", "date_created", "date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_news_table' ), "
 	last_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_news_table', 'id', 'last_modified', 'last_modified_int' ) );
-$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_news_table' ), "last_modified" ) );
-$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_news_table' ), "last_modified_int", "last_modified", "last_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_news_table' ), "
 	date_posted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_news_table', 'id', 'date_posted', 'date_posted_int' ) );
+
+$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_news_table', 'id', array( 'date_posted', 'last_modified' ), array( 'date_posted_int', 'last_modified_int' ) ) );
+
+$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_news_table' ), "last_modified" ) );
+$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_news_table' ), "last_modified_int", "last_modified", "last_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_news_table' ), "date_posted" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_news_table' ), "date_posted_int", "date_posted", "date_posted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
