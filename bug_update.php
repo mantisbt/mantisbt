@@ -129,8 +129,10 @@
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
-		# Only update the field if it is posted 
-		if ( !gpc_isset_custom_field( $t_id, $t_def['type'] ) ) {
+		# Only update the field if it is posted, 
+		#	or if it is empty, and the current value isn't the default 
+		if ( !gpc_isset_custom_field( $t_id, $t_def['type'] ) && 
+				( custom_field_get_value( $t_id, $f_bug_id ) == $t_def['default_value'] ) ) {
 			continue;
 		}
 
