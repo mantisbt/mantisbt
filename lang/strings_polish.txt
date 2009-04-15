@@ -542,6 +542,7 @@ $s_sticky_issue = 'Zgłoszenie przyklejone';
 $s_profile = 'Profil';
 $s_update_advanced_link = 'Edycja Zaawansowana';
 $s_updating_bug_simple_title = 'Aktualizacja informacji o zgłoszeniu';
+$s_revision = 'Wersja';
 $s_vote_added_msg = 'Głos został dodany..';
 $s_bugnote_added_msg = 'Komentarz został dodany...';
 $s_bugnote_deleted_msg = 'Komentarz został pomyślnie usunięty...';
