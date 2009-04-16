@@ -263,10 +263,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Adgang nægtet:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsoren har ikke angivet en e-mail-adresse. Opdater din profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfigurationsmuligheden \'%s\' har en ugyldig værdi \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Handlingen kan ikke udføres fordi fejlen \'%d\' er skrivebeskyttet';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Der er allerede en afhængighed mellem disse to fejl.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Afhængighed ikke fundet.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Adgang nægtet: fejlen %d kræver et højere adgangsniveau.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "En fejl kan ikke gøres afhængig af sig selv.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS]  = 'Der er allerede en afhængighed mellem disse to fejl.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND]  = 'Afhængighed ikke fundet.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW]  = 'Adgang nægtet: fejlen %d kræver et højere adgangsniveau.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG]  = 'En fejl kan ikke gøres afhængig af sig selv.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Bekræftigelsens hash passer ikke. Prøv igen.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Muligheden \'glemt din adgangskode\' er ikke tilgængelig.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Du skal angive en e-mail-adresse for at kunne nulstille adgangskoden';
@@ -290,7 +290,7 @@ $s_logged_in_as = 'Logget ind som';
 $s_prefix_for_deleted_users = 'bruger';
 
 $s_administrator = 'administrator';
-$s_myself = "Mig selv";
+$s_myself  = 'Mig selv';
 $s_default_access_level = 'Standardadgangsniveau';
 
 $s_issue_status_percentage = 'Fejlenes status i procent';
@@ -343,18 +343,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Et sponsorat af fø
 $s_email_notification_title_for_action_sponsorship_deleted = 'Et sponsorat af følgende fejl er blevet trukket tilbage.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'En FEJLNORE er blevet tilføjet til denne fejl.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "Fejlen er blevet angivet som en DUBLET af %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "Fejlen %s er blevet angivet som en DUBLET af følgende fejl.";
-$s_email_notification_title_for_action_related_to_relationship_added = "Fejlen er blevet angivet som SAMMENHÆNGENDE MED fejlen %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "Fejlen er blevet angivet som OVERORDNET fejlen %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "Fejlen er blevet angivet som UNDERORDNET fejlen %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Fejlen er blevet fjernet som DUBLET AF fejlen %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Fejlen %s er blevet fjernet som en DUBLET af følgende fejl.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "Fejlen er blevet fjernet som SAMMENHØRENDE MED fejlen %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Fejlen er blevet fjernet som OVERORDNET fejlen %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "Fejlen er blevet fjernet som UNDERORDNET fejlen %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "Den SAMMENHØRENDE fejl %s er blevet LØST.";
-$s_email_notification_title_for_action_relationship_child_closed = "Den SAMMENHØRENDE fejl %s er blevet LUKKET.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added  = 'Fejlen er blevet angivet som en DUBLET af %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added  = 'Fejlen %s er blevet angivet som en DUBLET af følgende fejl.';
+$s_email_notification_title_for_action_related_to_relationship_added  = 'Fejlen er blevet angivet som SAMMENHÆNGENDE MED fejlen %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added  = 'Fejlen er blevet angivet som OVERORDNET fejlen %s.';
+$s_email_notification_title_for_action_blocks_relationship_added  = 'Fejlen er blevet angivet som UNDERORDNET fejlen %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted  = 'Fejlen er blevet fjernet som DUBLET AF fejlen %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted  = 'Fejlen %s er blevet fjernet som en DUBLET af følgende fejl.';
+$s_email_notification_title_for_action_related_to_relationship_deleted  = 'Fejlen er blevet fjernet som SAMMENHØRENDE MED fejlen %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted  = 'Fejlen er blevet fjernet som OVERORDNET fejlen %s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted  = 'Fejlen er blevet fjernet som UNDERORDNET fejlen %s.';
+$s_email_notification_title_for_action_relationship_child_resolved  = 'Den SAMMENHØRENDE fejl %s er blevet LØST.';
+$s_email_notification_title_for_action_relationship_child_closed  = 'Den SAMMENHØRENDE fejl %s er blevet LUKKET.';
 
 $s_email_reporter = 'Rapportør';
 $s_email_handler = 'Behandler';
@@ -648,11 +648,11 @@ $s_redirecting = '...omadressering';
 $s_here = 'Her';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Adgangskoden nulstillet";
-$s_lost_password_done_title = "Adgangskodemeddelelse sendt";
-$s_lost_password_subject = "Adgangskoden nulstillet";
-$s_lost_password_info = "For at genindtaste din glemte adgangskode skal du angive kontoens navn og e-mail-adresse.<br /><br />Hvis dataene passer på en eksisterende konto, vil der blive sendt en speciel URL som e-mail, som indeholder en valideringskode for din konto. Føjg dette link for at ændre din adgangskode.";
-$s_lost_password_confirm_hash_OK = "Din bekræftelse er blevet accepteret. Opdater din adgangskode.";
+$s_lost_password_title  = 'Adgangskoden nulstillet';
+$s_lost_password_done_title  = 'Adgangskodemeddelelse sendt';
+$s_lost_password_subject  = 'Adgangskoden nulstillet';
+$s_lost_password_info  = 'For at genindtaste din glemte adgangskode skal du angive kontoens navn og e-mail-adresse.<br /><br />Hvis dataene passer på en eksisterende konto, vil der blive sendt en speciel URL som e-mail, som indeholder en valideringskode for din konto. Føjg dette link for at ændre din adgangskode.';
+$s_lost_password_confirm_hash_OK  = 'Din bekræftelse er blevet accepteret. Opdater din adgangskode.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Åben og tildelt mig';
@@ -714,8 +714,8 @@ $s_default_notify = 'Sætter standard for påmindelser til';
 $s_action_notify = 'Sætter handlingspåmindelser til';
 $s_notify_defaults_change_access = 'Ændre brugere der kan ændre på standardpåmindelser til';
 $s_notify_actions_change_access = 'Ændrer brugere der kan ændre påmindelser til';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_revert_to_system  = 'Delete All Projects Settings';
+$s_revert_to_all_project  = 'Delete Project Specific Settings';
 
 # manage_config_workflow_page
 $s_non_existent = 'eksisterer ikke';
@@ -1187,17 +1187,17 @@ $s_confirm_custom_field_unlinking = 'Er du sikker på at du vil fjerne (fjerne sa
 $s_field_remove_button = 'Fjern felt';
 
 $s_hide_status = 'Skjul status';
-$s_filter_closed = "Lukkede";
-$s_filter_resolved = "Løste";
-$s_hide_closed = "Skjul lukkede";
-$s_hide_resolved = "Skjul løste";
+$s_filter_closed  = 'Lukkede';
+$s_filter_resolved  = 'Løste';
+$s_hide_closed  = 'Skjul lukkede';
+$s_hide_resolved  = 'Skjul løste';
 $s_and_above = 'Og ovenfor';
 $s_advanced_filters = 'Avencerede filtre';
 $s_simple_filters = 'Simple filtre';
 $s_monitored_by = 'Overvåget af';
 
-$s_attachments = "Vedhæftede filer";
-$s_attachment_alt = "V";
+$s_attachments  = 'Vedhæftede filer';
+$s_attachment_alt  = 'V';
 
 # PHPMailer
 $s_phpmailer_language = 'dk';
@@ -1220,34 +1220,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = 'Ændringslog';
 
 # Http auth
-$s_http_auth_realm = "Mantis logind";
+$s_http_auth_realm  = 'Mantis logind';
 
-$s_bug = "issue";
-$s_add_new_relationship = "Ny afhængighed";
-$s_add_new_relationship_button = "Tilføj";
-$s_this_bug = "Nuværende fejl";
-$s_relationship_added = "Afhængighed tilføjet";
-$s_relationship_deleted = "Afhængighed fjernet";
-$s_no_relationship = "Ingen afhængighed";
-$s_relationship_replaced = "Afhængighed erstattet";
-$s_replace_relationship_button = "Erstat";
-$s_replace_relationship_sure_msg = "Der er allerede angivet afhængighed mellem disse to fejl. Er du sikker på at du vil erstatte den?";
-$s_relationship_with_parent = "Afhængighed med overordnet fejl";
-$s_delete_relationship_button = "Slet";
-$s_delete_relationship_sure_msg = "Er du sikker på at du vil fjerne denne afhængighed?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Ikke alle underordnede af denne fejl er løste eller lukkede endnu.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>BEMÆRK</b>. Ikke alle underordnede af denne fejl er løste eller lukkede endnu.<br />Før en overordnet fejl kan makeres som <b>løst/lukket</b>, skal alle underordnede fejl være lukkede eller løst.";
-$s_create_child_bug_button = "Opret klon";
-$s_bug_cloned_to = "Fejl klonet";
-$s_bug_created_from = "Fejl genereret fra";
+$s_bug  = 'issue';
+$s_add_new_relationship  = 'Ny afhængighed';
+$s_add_new_relationship_button  = 'Tilføj';
+$s_this_bug  = 'Nuværende fejl';
+$s_relationship_added  = 'Afhængighed tilføjet';
+$s_relationship_deleted  = 'Afhængighed fjernet';
+$s_no_relationship  = 'Ingen afhængighed';
+$s_relationship_replaced  = 'Afhængighed erstattet';
+$s_replace_relationship_button  = 'Erstat';
+$s_replace_relationship_sure_msg  = 'Der er allerede angivet afhængighed mellem disse to fejl. Er du sikker på at du vil erstatte den?';
+$s_relationship_with_parent  = 'Afhængighed med overordnet fejl';
+$s_delete_relationship_button  = 'Slet';
+$s_delete_relationship_sure_msg  = 'Er du sikker på at du vil fjerne denne afhængighed?';
+$s_relationship_warning_blocking_bugs_not_resolved  = 'Ikke alle underordnede af denne fejl er løste eller lukkede endnu.';
+$s_relationship_warning_blocking_bugs_not_resolved_2  = '<b>BEMÆRK</b>. Ikke alle underordnede af denne fejl er løste eller lukkede endnu.<br />Før en overordnet fejl kan makeres som <b>løst/lukket</b>, skal alle underordnede fejl være lukkede eller løst.';
+$s_create_child_bug_button  = 'Opret klon';
+$s_bug_cloned_to  = 'Fejl klonet';
+$s_bug_created_from  = 'Fejl genereret fra';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Afhængighedsgraf";
-$s_relation_graph = "Afhængighedsgraf";
-$s_dependency_graph = "Afhængighedsgraf over/underordnet";
-$s_vertical = "Lodret";
-$s_horizontal = "Vandret";
-$s_view_issue = "Vis fejl";
+$s_viewing_bug_relationship_graph_title  = 'Afhængighedsgraf';
+$s_relation_graph  = 'Afhængighedsgraf';
+$s_dependency_graph  = 'Afhængighedsgraf over/underordnet';
+$s_vertical  = 'Lodret';
+$s_horizontal  = 'Vandret';
+$s_view_issue  = 'Vis fejl';
 
 # Source Control Integration
 $s_checkin = 'Tjek ind';
@@ -1280,8 +1280,8 @@ $s_manage_news = 'Håndter nyheder';
 $s_view_list_of_attachments = 'Vis listen over vedhæftede filer';
 $s_download_attachments = 'Hent vedhæftede filer';
 $s_delete_attachments = 'Slet vedhæftede filer';
-$s_delete_attachment_button = "Slet";
-$s_delete_attachment_sure_msg = "Er du sikker på at du vil slette denne vedhæftning?";
+$s_delete_attachment_button  = 'Slet';
+$s_delete_attachment_sure_msg  = 'Er du sikker på at du vil slette denne vedhæftning?';
 $s_upload_issue_attachments = 'Overfør fejlens vedhæftede filer';
 $s_filters = 'filtre';
 $s_save_filters = 'Gem filtre';

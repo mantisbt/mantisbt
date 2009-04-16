@@ -1433,7 +1433,7 @@ $s_tag_attach = 'Zuordnen';
 $s_tag_attach_long = 'Tags zuordnen';
 $s_tag_attach_failed = 'Tag-Zuordnung misslang.';
 $s_tag_detach = 'Entferne \'%s\'';
-$s_tag_separate_by = "(Trenne durch '%s')";
+$s_tag_separate_by = '(Trenne durch \'%s\')';
 $s_tag_invalid_name = 'Ungültiger Tag-Name.';
 $s_tag_create_denied = 'Anlegen nicht gestattet.';
 $s_tag_filter_default = 'Zugeordnete Einträge (%s)';
@@ -1455,8 +1455,8 @@ $s_total_time_for_issue = 'Gesamtzeit für den Eintrag = %s';
 $s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
 
 # Twitter Integration
-$s_twitter_resolved = "%d: [%s] %s (erledigt von %s in %s)";
-$s_twitter_resolved_no_version = "%d: [%s] %s (erledigt von %s)";
+$s_twitter_resolved = '%d: [%s] %s (erledigt von %s in %s)';
+$s_twitter_resolved_no_version = '%d: [%s] %s (erledigt von %s)';
 
 # Project Page
 $s_development_team = 'Entwicklungs-Team';

@@ -262,10 +262,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Keelatud: Spon
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor pole oma e-posti aadressi andnud. Palun uuenda oma profiili.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguratsiooni parameeter \'%s\' omab invaliidset v‰‰rtust \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Tegevust ei saa sooritada, kuna kanne \'%d\' on ainult lugemiseks';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Kahe kande vahel oli juba varem seos.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Seost ei leitud.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Keelatud: Kanne %d nıuab suuremat pˆˆrdusıiguste taset.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Kanne ei saa olla sıltuv iseendast.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Kahe kande vahel oli juba varem seos.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Seost ei leitud.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Keelatud: Kanne %d nıuab suuremat pˆˆrdusıiguste taset.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Kanne ei saa olla sıltuv iseendast.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Kinnituse r‰si ei klapi. Proovi uuesti.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'Sinu kadunud parool\' omadus ei ole saadaval.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Pead n‰itama e-posti aadressi, et taastada parool';
@@ -289,7 +289,7 @@ $s_logged_in_as = 'Sisse loginud ';
 $s_prefix_for_deleted_users = 'kasutaja';
 
 $s_administrator = 'administraator';
-$s_myself = "Minule";
+$s_myself = 'Minule';
 $s_default_access_level = 'Vaikimisi ligip‰‰suıigused';
 
 $s_issue_status_percentage = 'Kande staatus protsentides';
@@ -342,18 +342,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'J‰rgmise kande spo
 $s_email_notification_title_for_action_sponsorship_deleted = 'J‰rgmise kande sponsorlus on KUSTUTATUD.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'M‰RKUS on lisatud sellele kandele.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "J‰rgmine kanne on m‰rgitud kui kande %s DUPLIKAAT.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "Kanne %s on m‰rgitud DUPLIKAADIKS j‰rgmisele kandele.";
-$s_email_notification_title_for_action_related_to_relationship_added = "J‰rgmine kanne on m‰rgitud kui kande %s SUGULANE.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "J‰rgmine kanne on m‰rgitud kui kande %s VANEM.";
-$s_email_notification_title_for_action_blocks_relationship_added = "J‰rgmine kanne on m‰rgitud kui kande %s J‰RGLANE.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "J‰rgmine kanne OLI m‰rgitud kui kande %s DUPLIKAAT.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Kanne %s OLI m‰rgitud DUPLIKAADIKS j‰rgmisele kandele.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "J‰rgmine kanne OLI m‰rgitud kui kande %s SUGULANE.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "J‰rgmine kanne OLI m‰rgitud kui kande %s VANEM.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "J‰rgmine kanne OLI m‰rgitud kui kande %s J‰RGLANE.";
-$s_email_notification_title_for_action_relationship_child_resolved = "SEOTUD kanne %s on lahendatud.";
-$s_email_notification_title_for_action_relationship_child_closed = "SEOTUD kanne %s on suletud.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'J‰rgmine kanne on m‰rgitud kui kande %s DUPLIKAAT.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'Kanne %s on m‰rgitud DUPLIKAADIKS j‰rgmisele kandele.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'J‰rgmine kanne on m‰rgitud kui kande %s SUGULANE.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'J‰rgmine kanne on m‰rgitud kui kande %s VANEM.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'J‰rgmine kanne on m‰rgitud kui kande %s J‰RGLANE.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'J‰rgmine kanne OLI m‰rgitud kui kande %s DUPLIKAAT.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'Kanne %s OLI m‰rgitud DUPLIKAADIKS j‰rgmisele kandele.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'J‰rgmine kanne OLI m‰rgitud kui kande %s SUGULANE.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'J‰rgmine kanne OLI m‰rgitud kui kande %s VANEM.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'J‰rgmine kanne OLI m‰rgitud kui kande %s J‰RGLANE.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'SEOTUD kanne %s on lahendatud.';
+$s_email_notification_title_for_action_relationship_child_closed = 'SEOTUD kanne %s on suletud.';
 
 $s_email_reporter = 'Teataja';
 $s_email_handler = 'Haldaja';
@@ -647,11 +647,11 @@ $s_redirecting = '...¸mbersuunamine';
 $s_here = 'Siin';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Parooli taastamine";
-$s_lost_password_done_title = "Parooli teade saadetud";
-$s_lost_password_subject = "Parooli taastamine";
-$s_lost_password_info = "Selleks, et taastada kadunud parool, esita oma kasutajakonto kasutajanimi ja e-posti aadress.<br /><br />Kui esitatud andmed on tıesed, saadetakse sulle e-postiga spetsiaalne URL, mis sisaldab sinu kasutajakonto taastamise koodi. Palun suundu sellele aadressile, et vahetada oma parool.";
-$s_lost_password_confirm_hash_OK = "Sinu kinnitus on vastu vıetud. Palun uuenda oma parool.";
+$s_lost_password_title = 'Parooli taastamine';
+$s_lost_password_done_title = 'Parooli teade saadetud';
+$s_lost_password_subject = 'Parooli taastamine';
+$s_lost_password_info = 'Selleks, et taastada kadunud parool, esita oma kasutajakonto kasutajanimi ja e-posti aadress.<br /><br />Kui esitatud andmed on tıesed, saadetakse sulle e-postiga spetsiaalne URL, mis sisaldab sinu kasutajakonto taastamise koodi. Palun suundu sellele aadressile, et vahetada oma parool.';
+$s_lost_password_confirm_hash_OK = 'Sinu kinnitus on vastu vıetud. Palun uuenda oma parool.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'avatud ja mulle m‰‰ratud';
@@ -713,8 +713,8 @@ $s_default_notify = 'M‰‰ra vaikimise teavitamise v‰‰rtus';
 $s_action_notify = 'M‰‰ra tegevuste teavitamise v‰‰rtus';
 $s_notify_defaults_change_access = 'M‰‰ra kasutajad, kes saavad muuta teavitamise vaikev‰‰rtusi';
 $s_notify_actions_change_access = 'M‰‰ra kasutajad, kes saavad muuta teavitamise v‰‰rtusi';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_revert_to_system = 'Delete All Projects Settings';
+$s_revert_to_all_project = 'Delete Project Specific Settings';
 
 # manage_config_workflow_page
 $s_non_existent = 'mitte-eksisteeriv';
@@ -1186,17 +1186,17 @@ $s_confirm_custom_field_unlinking = 'Oled kindel, et soovid kustutada projektilt
 $s_field_remove_button = 'Eemalda v‰li';
 
 $s_hide_status = 'Peida staatus';
-$s_filter_closed = "Suletud";
-$s_filter_resolved = "Lahendatud";
-$s_hide_closed = "Peida suletud";
-$s_hide_resolved = "Peida lahendatud";
+$s_filter_closed = 'Suletud';
+$s_filter_resolved = 'Lahendatud';
+$s_hide_closed = 'Peida suletud';
+$s_hide_resolved = 'Peida lahendatud';
 $s_and_above = 'Ja enam';
 $s_advanced_filters = 'Keerulised Filtrid';
 $s_simple_filters = 'Lihtsad Filtrid';
 $s_monitored_by = 'Tegeletud';
 
-$s_attachments = "Lisa(d)";
-$s_attachment_alt = "A";
+$s_attachments = 'Lisa(d)';
+$s_attachment_alt = 'A';
 
 # PHPMailer
 $s_phpmailer_language = 'en';
@@ -1219,34 +1219,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = 'Muudatuste logi';
 
 # Http auth
-$s_http_auth_realm = "Mantis Login";
+$s_http_auth_realm = 'Mantis Login';
 
-$s_bug = "kanne";
-$s_add_new_relationship = "Uus seos";
-$s_add_new_relationship_button = "Lisa";
-$s_this_bug = "Jooksev kanne";
-$s_relationship_added = "seos lisatud";
-$s_relationship_deleted = "seos kustutatud";
-$s_no_relationship = "sugulus puudub";
-$s_relationship_replaced = "sugulus asendatud";
-$s_replace_relationship_button = "Asenda";
-$s_replace_relationship_sure_msg = "Nende kahe kande vahel on juba seos. Oled sa kindel, et soovid seda asendada?";
-$s_relationship_with_parent = "Sugulus vanema kandega";
-$s_delete_relationship_button = "Kustuta";
-$s_delete_relationship_sure_msg = "Oled kindel, et soovid seda seost kustutada?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Mitte kıik selle kande lapsed pole lahendatud vıi suletud.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>T‰HELEPANU</b>. Mitte kıik selle kande lapsed pole lahendatud vıi suletud.<br />Enne vanema kande <b>lahendamist/sulgemist</b> peavad kıik selle kande lapsed olema lahendatud vıi suletud.";
-$s_create_child_bug_button = "Loo j‰rglane";
-$s_bug_cloned_to = "Kanne kloonitud";
-$s_bug_created_from = "Kanne genereeritud l‰htekandest";
+$s_bug = 'kanne';
+$s_add_new_relationship = 'Uus seos';
+$s_add_new_relationship_button = 'Lisa';
+$s_this_bug = 'Jooksev kanne';
+$s_relationship_added = 'seos lisatud';
+$s_relationship_deleted = 'seos kustutatud';
+$s_no_relationship = 'sugulus puudub';
+$s_relationship_replaced = 'sugulus asendatud';
+$s_replace_relationship_button = 'Asenda';
+$s_replace_relationship_sure_msg = 'Nende kahe kande vahel on juba seos. Oled sa kindel, et soovid seda asendada?';
+$s_relationship_with_parent = 'Sugulus vanema kandega';
+$s_delete_relationship_button = 'Kustuta';
+$s_delete_relationship_sure_msg = 'Oled kindel, et soovid seda seost kustutada?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Mitte kıik selle kande lapsed pole lahendatud vıi suletud.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>T‰HELEPANU</b>. Mitte kıik selle kande lapsed pole lahendatud vıi suletud.<br />Enne vanema kande <b>lahendamist/sulgemist</b> peavad kıik selle kande lapsed olema lahendatud vıi suletud.';
+$s_create_child_bug_button = 'Loo j‰rglane';
+$s_bug_cloned_to = 'Kanne kloonitud';
+$s_bug_created_from = 'Kanne genereeritud l‰htekandest';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Suguluste graafik";
-$s_relation_graph = "Suguluste graafik";
-$s_dependency_graph = "Sıltuvuste graafik";
-$s_vertical = "Vertikaal";
-$s_horizontal = "Horisontaal";
-$s_view_issue = "Vaata kannet";
+$s_viewing_bug_relationship_graph_title = 'Suguluste graafik';
+$s_relation_graph = 'Suguluste graafik';
+$s_dependency_graph = 'Sıltuvuste graafik';
+$s_vertical = 'Vertikaal';
+$s_horizontal = 'Horisontaal';
+$s_view_issue = 'Vaata kannet';
 
 # Source Control Integration
 $s_checkin = 'Sissevormistus';

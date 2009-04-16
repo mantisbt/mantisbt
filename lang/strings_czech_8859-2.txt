@@ -264,10 +264,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Nepovolený pøí
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponzor nemá elektronickou adresu. Opravte prosím vá¹ profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguraèní volba \'%s\' má nedovolenou hodnotu \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Tato akce nemù¾e být uskuteènìna, proto¾e problém \'%d\' je ve stavu JEN ÈTENÍ';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Vztah mezi tìmito dvìma problémy u¾ je.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "CHYAB: Vztah nenalezen.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "CHYAB: Pøístup zakázán. Problém %d vy¾aduje vy¹¹í pøístupovou úroveò.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Problém nemù¾e být ve vztahu sám se sebou.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS]  = 'Vztah mezi tìmito dvìma problémy u¾ je.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND]  = 'CHYAB: Vztah nenalezen.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW]  = 'CHYAB: Pøístup zakázán. Problém %d vy¾aduje vy¹¹í pøístupovou úroveò.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG]  = 'Problém nemù¾e být ve vztahu sám se sebou.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Potvrzení se nezdaøilo. Prosím opakujte.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Fukce \'ztracené heslo\' není dostupná.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Pøi objednávce zru¹ení hesla musíte uvést svou elektronickou adresu';
@@ -291,7 +291,7 @@ $s_logged_in_as = 'Pøihlá¹en';
 $s_prefix_for_deleted_users = 'u¾ivatel';
 
 $s_administrator = 'správce';
-$s_myself = "Já sám";
+$s_myself  = 'Já sám';
 $s_default_access_level = 'Default access level';
 
 $s_issue_status_percentage = 'Issue Status Percentage';
@@ -344,18 +344,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Sponzoring tohoto 
 $s_email_notification_title_for_action_sponsorship_deleted = 'Sponzoring tohoto problému byl uzavøen.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'K problému byla pøidána poznámka.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added  = 'The following issue has been set as DUPLICATE OF issue %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added  = 'The issue %s has been set as DUPLICATE OF the following issue.';
+$s_email_notification_title_for_action_related_to_relationship_added  = 'The following issue has been set as RELATED TO issue %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added  = 'The following issue has been set PARENT OF issue %s.';
+$s_email_notification_title_for_action_blocks_relationship_added  = 'The following issue has been set CHILD OF issue %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted  = 'The following issue has been UNset as DUPLICATE OF issue %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted  = 'The issue %s has been UNset as DUPLICATE OF the following issue.';
+$s_email_notification_title_for_action_related_to_relationship_deleted  = 'The following issue has been UNset as RELATED TO issue %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted  = 'The following issue has been UNset PARENT OF issue %s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted  = 'The following issue has been UNset CHILD OF issue %s.';
+$s_email_notification_title_for_action_relationship_child_resolved  = 'The RELATED issue %s has been RESOLVED.';
+$s_email_notification_title_for_action_relationship_child_closed  = 'The RELATED issue %s has been CLOSED.';
 
 $s_email_reporter = 'Autor';
 $s_email_handler = 'Operátor';
@@ -646,11 +646,11 @@ $s_redirecting = '...pøesmìrování';
 $s_here = 'zde';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Zmìna hesla";
-$s_lost_password_done_title = "Odeslán dopis o zmìnì hesla";
-$s_lost_password_subject = "Zmìna hesla";
-$s_lost_password_info = "Chcete-li obnovit va¹e ztracené heslo, zadejte prosím u¾ivatelské jméno va¹eho úètu a va¹i elektronickou adresu.<br /><br />Pokud bude tato zadaná kombinace odpovídat nìkterému úètu, za¹leme vám dopis s unikátní webovou adresou pro potvrzení zmìny hesla. Pøejdìte na tuto adresu a dokonèete zmìnu va¹eho hesla.";
-$s_lost_password_confirm_hash_OK = "Va¹e potvrzení bylo pøijato. Nyní mù¾ete zmìnit va¹e pøístupové heslo.";
+$s_lost_password_title  = 'Zmìna hesla';
+$s_lost_password_done_title  = 'Odeslán dopis o zmìnì hesla';
+$s_lost_password_subject  = 'Zmìna hesla';
+$s_lost_password_info  = 'Chcete-li obnovit va¹e ztracené heslo, zadejte prosím u¾ivatelské jméno va¹eho úètu a va¹i elektronickou adresu.<br /><br />Pokud bude tato zadaná kombinace odpovídat nìkterému úètu, za¹leme vám dopis s unikátní webovou adresou pro potvrzení zmìny hesla. Pøejdìte na tuto adresu a dokonèete zmìnu va¹eho hesla.';
+$s_lost_password_confirm_hash_OK  = 'Va¹e potvrzení bylo pøijato. Nyní mù¾ete zmìnit va¹e pøístupové heslo.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Moje otevøené a pøiøazené';
@@ -712,8 +712,8 @@ $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Who can change notification defaults';
 $s_notify_actions_change_access = 'Who can change notifications';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_revert_to_system  = 'Delete All Projects Settings';
+$s_revert_to_all_project  = 'Delete Project Specific Settings';
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
@@ -1172,17 +1172,17 @@ $s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) th
 $s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Skrýt stav';
-$s_filter_closed = "Uzavøeno";
-$s_filter_resolved = "Vyøízeno";
-$s_hide_closed = "Skrýt uzavøeno";
-$s_hide_resolved = "Skrýt vyøízeno";
+$s_filter_closed  = 'Uzavøeno';
+$s_filter_resolved  = 'Vyøízeno';
+$s_hide_closed  = 'Skrýt uzavøeno';
+$s_hide_resolved  = 'Skrýt vyøízeno';
 $s_and_above = 'a nad';
 $s_advanced_filters = 'Roz¹íøené filtry';
 $s_simple_filters = 'Jednoduché filtry';
 $s_monitored_by = 'Monitorováno';
 
-$s_attachments = "dodatky";
-$s_attachment_alt = "D";
+$s_attachments  = 'dodatky';
+$s_attachment_alt  = 'D';
 
 # PHPMailer
 $s_phpmailer_language = 'cz';
@@ -1205,34 +1205,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = 'Protokol o zmìnách';
 
 # Http auth
-$s_http_auth_realm = "Pøihlá¹ení do Mantis";
+$s_http_auth_realm  = 'Pøihlá¹ení do Mantis';
 
-$s_bug = "problém";
-$s_add_new_relationship = "Nový vztah";
-$s_add_new_relationship_button = "Pøidat";
-$s_this_bug = "Aktuání problém";
-$s_relationship_added = "Vztah pøidán";
-$s_relationship_deleted = "Vztah odebrán";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
-$s_delete_relationship_button = "Odebrat";
-$s_delete_relationship_sure_msg = "Opravdu chcete odebrat tento vztah?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Ne v¹echny potomci tohoto problému jsou vyøe¹eni nebo uzavøeni.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>P O Z O R</b>. Ne v¹echny potomci tohoto problému jsou vyøe¹eni nebo uzavøeni.<br />Pøed <b>vyøe¹ením/uzavøením</b> otcovského problému musí být vyøe¹eny nebo uzavøeny v¹echny problémy, pova¾ované za jeho potomky.";
-$s_create_child_bug_button = "Vytvoøit potomka";
-$s_bug_cloned_to = "Problém je klonován";
-$s_bug_created_from = "Problém generován z";
+$s_bug  = 'problém';
+$s_add_new_relationship  = 'Nový vztah';
+$s_add_new_relationship_button  = 'Pøidat';
+$s_this_bug  = 'Aktuání problém';
+$s_relationship_added  = 'Vztah pøidán';
+$s_relationship_deleted  = 'Vztah odebrán';
+$s_no_relationship  = 'no relationship';
+$s_relationship_replaced  = 'Relationship replaced';
+$s_replace_relationship_button  = 'Replace';
+$s_replace_relationship_sure_msg  = 'There is already a relationship between the two issues. Are you sure you want to replace it?';
+$s_relationship_with_parent  = 'Relationship with the parent issue';
+$s_delete_relationship_button  = 'Odebrat';
+$s_delete_relationship_sure_msg  = 'Opravdu chcete odebrat tento vztah?';
+$s_relationship_warning_blocking_bugs_not_resolved  = 'Ne v¹echny potomci tohoto problému jsou vyøe¹eni nebo uzavøeni.';
+$s_relationship_warning_blocking_bugs_not_resolved_2  = '<b>P O Z O R</b>. Ne v¹echny potomci tohoto problému jsou vyøe¹eni nebo uzavøeni.<br />Pøed <b>vyøe¹ením/uzavøením</b> otcovského problému musí být vyøe¹eny nebo uzavøeny v¹echny problémy, pova¾ované za jeho potomky.';
+$s_create_child_bug_button  = 'Vytvoøit potomka';
+$s_bug_cloned_to  = 'Problém je klonován';
+$s_bug_created_from  = 'Problém generován z';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relationship Graph";
-$s_relation_graph = "Relation Graph";
-$s_dependency_graph = "Dependency Graph";
-$s_vertical = "Vertical";
-$s_horizontal = "Horizontal";
-$s_view_issue = "View Issue";
+$s_viewing_bug_relationship_graph_title  = 'Relationship Graph';
+$s_relation_graph  = 'Relation Graph';
+$s_dependency_graph  = 'Dependency Graph';
+$s_vertical  = 'Vertical';
+$s_horizontal  = 'Horizontal';
+$s_view_issue  = 'View Issue';
 
 # Source Control Integration
 $s_checkin = 'Checkin';
@@ -1265,8 +1265,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
-$s_delete_attachment_button = "Delete";
-$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
+$s_delete_attachment_button  = 'Delete';
+$s_delete_attachment_sure_msg  = 'Are you sure you wish to delete this attachment?';
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
