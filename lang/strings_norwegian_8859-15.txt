@@ -290,7 +290,7 @@ $s_logged_in_as = 'Logget inn som';
 $s_prefix_for_deleted_users = 'bruker';
 
 $s_administrator = 'administrator';
-$s_myself = "Meg selv";
+$s_myself = 'Meg selv';
 $s_default_access_level = 'Standard tilgangsnivå';
 
 $s_issue_status_percentage = 'Issue Status Percentage';
@@ -343,18 +343,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Sponsingen av følg
 $s_email_notification_title_for_action_sponsorship_deleted = 'Sponsingen av følgende sak har blitt trukket tilbake.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Et NOTAT har blitt lagt til saken.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "Følgende sak har blitt satt som duplikat av sak %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "Sak %s har blitt satt som duplikat av følgende sak.";
-$s_email_notification_title_for_action_related_to_relationship_added = "Følgende sak har blitt satt som relatert til sak %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "Følgende sak har blitt satt som overordent sak for sak %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "Følgende sak har blitt satt som undersak til sak %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Følgende sak er ikke lenger duplikat av sak %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Sak %s er ikke lenger duplikat av følgende sak.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "Følgende sak er ikke lenger relatert til sak %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Følgende sak er ikke lenger overordnet sak for sak %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "Følgende sak er ikke lenger undersak til sak %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "Den relaterte saken %s har blitt LØST.";
-$s_email_notification_title_for_action_relationship_child_closed = "Den relaterte saken %s har blitt LUKKET.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'Følgende sak har blitt satt som duplikat av sak %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'Sak %s har blitt satt som duplikat av følgende sak.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'Følgende sak har blitt satt som relatert til sak %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'Følgende sak har blitt satt som overordent sak for sak %s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'Følgende sak har blitt satt som undersak til sak %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'Følgende sak er ikke lenger duplikat av sak %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'Sak %s er ikke lenger duplikat av følgende sak.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'Følgende sak er ikke lenger relatert til sak %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'Følgende sak er ikke lenger overordnet sak for sak %s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'Følgende sak er ikke lenger undersak til sak %s.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'Den relaterte saken %s har blitt LØST.';
+$s_email_notification_title_for_action_relationship_child_closed = 'Den relaterte saken %s har blitt LUKKET.';
 
 $s_email_reporter = 'Rapportert av';
 $s_email_handler = 'Ansvarlig';
@@ -648,11 +648,11 @@ $s_redirecting = '... omdirigerer';
 $s_here = 'Her';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Passord nullstilt";
-$s_lost_password_done_title = "Passordepost er sendt";
-$s_lost_password_subject = "Passord nullstilt";
-$s_lost_password_info = "For å få ditt nytt passord, vennligst angi kontoens navn og epostadresse.<br /><br />Hvis dataene stemmer med en gyldig konto vil du bli tilsendt en spesiell URL i en epost som inneholder en valideringskode for kontoen din. Vennligst følg den lenka for å endre passordet ditt.";
-$s_lost_password_confirm_hash_OK = "Bekreftelsen din har blitt godtatt. Vennligst oppdater passordet ditt.";
+$s_lost_password_title = 'Passord nullstilt';
+$s_lost_password_done_title = 'Passordepost er sendt';
+$s_lost_password_subject = 'Passord nullstilt';
+$s_lost_password_info = 'For å få ditt nytt passord, vennligst angi kontoens navn og epostadresse.<br /><br />Hvis dataene stemmer med en gyldig konto vil du bli tilsendt en spesiell URL i en epost som inneholder en valideringskode for kontoen din. Vennligst følg den lenka for å endre passordet ditt.';
+$s_lost_password_confirm_hash_OK = 'Bekreftelsen din har blitt godtatt. Vennligst oppdater passordet ditt.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Åpne og delegert til meg';
@@ -714,8 +714,8 @@ $s_default_notify = 'Oppdaterer standardverdi for påminnelsesflagg to';
 $s_action_notify = 'Oppdaterer handlingspåminnelsesflagg til';
 $s_notify_defaults_change_access = 'Endre brukere som kan endre påminnelsesflagg';
 $s_notify_actions_change_access = 'Endrer brukere som kan endre påminnelsesflagg til';
-$s_revert_to_system = "Slette alle innstillinger i prosjektet ";
-$s_revert_to_all_project = "Slette prosjektspesifikke innstillinger ";
+$s_revert_to_system = 'Slette alle innstillinger i prosjektet ';
+$s_revert_to_all_project = 'Slette prosjektspesifikke innstillinger ';
 
 # manage_config_workflow_page
 $s_non_existent = 'ikke-eksisterende';
@@ -1187,17 +1187,17 @@ $s_confirm_custom_field_unlinking = 'Er du sikker på at du ønsker å fjerne kobli
 $s_field_remove_button = 'Fjerne felt';
 
 $s_hide_status = 'Skjul status';
-$s_filter_closed = "Lukket";
-$s_filter_resolved = "Løst";
-$s_hide_closed = "Skjul lukkede";
-$s_hide_resolved = "Skjul løste";
+$s_filter_closed = 'Lukket';
+$s_filter_resolved = 'Løst';
+$s_hide_closed = 'Skjul lukkede';
+$s_hide_resolved = 'Skjul løste';
 $s_and_above = 'og over';
 $s_advanced_filters = 'Avanserte filtre';
 $s_simple_filters = 'Enkle filtre';
 $s_monitored_by = 'Overvåket av';
 
-$s_attachments = "vedlegg";
-$s_attachment_alt = "V";
+$s_attachments = 'vedlegg';
+$s_attachment_alt = 'V';
 
 # PHPMailer
 $s_phpmailer_language = 'no';
@@ -1220,34 +1220,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = 'Endringslogg';
 
 # Http auth
-$s_http_auth_realm = "Mantisinnlogging";
+$s_http_auth_realm = 'Mantisinnlogging';
 
-$s_bug = "sak";
-$s_add_new_relationship = "Ny relasjon";
-$s_add_new_relationship_button = "Legg til";
-$s_this_bug = "Denne saken";
-$s_relationship_added = "Relasjon lagt til";
-$s_relationship_deleted = "Relasjon slettet";
-$s_no_relationship = "ingen relasjon";
-$s_relationship_replaced = "Relasjonen er byttet ut";
-$s_replace_relationship_button = "Bytt ut";
-$s_replace_relationship_sure_msg = "Det er allerede en relasjon mellom disse to sakene. Er du sikker på at du vil bytte den ut?";
-$s_relationship_with_parent = "Relasjon med overordnet sak";
-$s_delete_relationship_button = "Slett";
-$s_delete_relationship_sure_msg = "Er du sikker på at du vil slette denne relasjonen?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Ikke alle undersaker til denne saken er løst eller lukket ennå.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<strong>MERK</strong>. Ikke alle undersaker til denne saken er løst eller lukket. Før <strong>løsning/lukking</strong> av overordnet sak må alle undersakene løses eller lukkes.";
-$s_create_child_bug_button = "Lag undersak";
-$s_bug_cloned_to = "Sak klonet";
-$s_bug_created_from = "Sak klonet fra";
+$s_bug = 'sak';
+$s_add_new_relationship = 'Ny relasjon';
+$s_add_new_relationship_button = 'Legg til';
+$s_this_bug = 'Denne saken';
+$s_relationship_added = 'Relasjon lagt til';
+$s_relationship_deleted = 'Relasjon slettet';
+$s_no_relationship = 'ingen relasjon';
+$s_relationship_replaced = 'Relasjonen er byttet ut';
+$s_replace_relationship_button = 'Bytt ut';
+$s_replace_relationship_sure_msg = 'Det er allerede en relasjon mellom disse to sakene. Er du sikker på at du vil bytte den ut?';
+$s_relationship_with_parent = 'Relasjon med overordnet sak';
+$s_delete_relationship_button = 'Slett';
+$s_delete_relationship_sure_msg = 'Er du sikker på at du vil slette denne relasjonen?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Ikke alle undersaker til denne saken er løst eller lukket ennå.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>MERK</strong>. Ikke alle undersaker til denne saken er løst eller lukket. Før <strong>løsning/lukking</strong> av overordnet sak må alle undersakene løses eller lukkes.';
+$s_create_child_bug_button = 'Lag undersak';
+$s_bug_cloned_to = 'Sak klonet';
+$s_bug_created_from = 'Sak klonet fra';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relasjonsgraf";
-$s_relation_graph = "Relasjonsgraf";
-$s_dependency_graph = "Avhengighetsgraf";
-$s_vertical = "Vertikal";
-$s_horizontal = "Horisontal";
-$s_view_issue = "Vis sak";
+$s_viewing_bug_relationship_graph_title = 'Relasjonsgraf';
+$s_relation_graph = 'Relasjonsgraf';
+$s_dependency_graph = 'Avhengighetsgraf';
+$s_vertical = 'Vertikal';
+$s_horizontal = 'Horisontal';
+$s_view_issue = 'Vis sak';
 
 # Source Control Integration
 $s_checkin = 'Sjekk inn';
@@ -1280,8 +1280,8 @@ $s_manage_news = 'Administrere nyheter';
 $s_view_list_of_attachments = 'Se vedleggsliste';
 $s_download_attachments = 'Laste ned vedlegg';
 $s_delete_attachments = 'Slette vedlegg';
-$s_delete_attachment_button = "Slette";
-$s_delete_attachment_sure_msg = "Er du sikker på at du ønsker å slette dette vedlegget?";
+$s_delete_attachment_button = 'Slette';
+$s_delete_attachment_sure_msg = 'Er du sikker på at du ønsker å slette dette vedlegget?';
 $s_upload_issue_attachments = 'Laste opp vedlegg til saken';
 $s_filters = 'FILTRE';
 $s_save_filters = 'Lagre filtre';

@@ -95,11 +95,11 @@ $s_bug_relationships = '관계';
 $s_empty_password_sure_msg = '비밀번호가 설정되지 않았습니다. 이대로 사용하시겠습니까?';
 $s_empty_password_button = '비밀번호 없이 사용';
 
-$s_duplicate_of = "다음 이슈와 동일함";
-$s_has_duplicate = "다음 이슈와 동일한 것으로 지정됨";
-$s_related_to = "다음 이슈와 관련됨";
-$s_dependant_on = "다음 이슈의 원인";
-$s_blocks = "다음 이슈 때문에 발생";
+$s_duplicate_of = '다음 이슈와 동일함';
+$s_has_duplicate = '다음 이슈와 동일한 것으로 지정됨';
+$s_related_to = '다음 이슈와 관련됨';
+$s_dependant_on = '다음 이슈의 원인';
+$s_blocks = '다음 이슈 때문에 발생';
 
 $s_new_bug = '새 이슈';
 $s_bugnote_added = '이슈노트 추가됨';
@@ -265,10 +265,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = '접근거부: 지정
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = '스폰서의 전자메일 주소가 없습니다. 프로파일을 갱신해 주세요.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '설정 옵션 \'%s\'이 잘못된 값 \'%s\'을 가지고 있습니다.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '해당 액션이 수행될 수 없습니다. - \'%d\'번 이슈가 읽기 전용입니다.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "두 이슈사이에 이미 관계가 설정되어 있습니다.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "관계가 설정되어 있지 않습니다.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "접근 거부: %d번 이슈가 더 높은 접근 권한을 요구합니다.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "이슈는 자기자신과 관계를 맺을 수 없습니다.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = '두 이슈사이에 이미 관계가 설정되어 있습니다.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = '관계가 설정되어 있지 않습니다.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = '접근 거부: %d번 이슈가 더 높은 접근 권한을 요구합니다.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = '이슈는 자기자신과 관계를 맺을 수 없습니다.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = '확인용 해쉬가 일치하지 않습니다. 재시도하십시요.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'비밀번호 찾기\' 기능이 사용 가능하지 않습니다.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = '비밀번호를 초기화하려면 이메일을 적어야 합니다.';
@@ -292,7 +292,7 @@ $s_logged_in_as = '로그인한 ID :';
 $s_prefix_for_deleted_users = '사용자';
 
 $s_administrator = '관리자';
-$s_myself = "나";
+$s_myself = '나';
 $s_default_access_level = '기본 접근 권한';
 
 $s_issue_status_percentage = '이슈 상태 백분율';
@@ -345,18 +345,18 @@ $s_email_notification_title_for_action_sponsorship_updated = '다음 이슈의 [후원]
 $s_email_notification_title_for_action_sponsorship_deleted = '다음 이슈의 [후원]이 취소되었습니다.';
 
 $s_email_notification_title_for_action_bugnote_submitted = '이 이슈에 노트가 추가 되었습니다.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "다음 이슈는 %s 이슈와 동일한 것으로 설정됐습니다.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "%s 이슈는 다음 이슈와 동일한 것으로 설정됐습니다.";
-$s_email_notification_title_for_action_related_to_relationship_added = "다음 이슈는 %s 이슈와 관련 있는 것으로 설정됐습니다.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "다음 이슈는 %s 이슈의 원인으로 설정됐습니다.";
-$s_email_notification_title_for_action_blocks_relationship_added = "다음 이슈는 %s 이슈 때문에 발생한 것으로 설정됐습니다.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "다음 이슈는 %s 이슈와 동일한 것으로 설정된 관계가 해제됐습니다.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "%s 이슈는 다음 이슈와 동일한 것으로 설정된 관계가 해제됐습니다.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "다음 이슈는 %s 이슈와 관련 있는 것으로 설정된 관계가 해제됐습니다.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "다음 이슈는 %s 이슈의 원인으로 설정된 관계가 해제됐습니다.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "다음 이슈는 %s 이슈 때문에 발생한 것으로 설정된 관계가 해제됐습니다.";
-$s_email_notification_title_for_action_relationship_child_resolved = "관련된 %s 이슈가 해결됐습니다.";
-$s_email_notification_title_for_action_relationship_child_closed = "관련된 %s 이슈가 폐쇄됐습니다.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = '다음 이슈는 %s 이슈와 동일한 것으로 설정됐습니다.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = '%s 이슈는 다음 이슈와 동일한 것으로 설정됐습니다.';
+$s_email_notification_title_for_action_related_to_relationship_added = '다음 이슈는 %s 이슈와 관련 있는 것으로 설정됐습니다.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = '다음 이슈는 %s 이슈의 원인으로 설정됐습니다.';
+$s_email_notification_title_for_action_blocks_relationship_added = '다음 이슈는 %s 이슈 때문에 발생한 것으로 설정됐습니다.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = '다음 이슈는 %s 이슈와 동일한 것으로 설정된 관계가 해제됐습니다.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = '%s 이슈는 다음 이슈와 동일한 것으로 설정된 관계가 해제됐습니다.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = '다음 이슈는 %s 이슈와 관련 있는 것으로 설정된 관계가 해제됐습니다.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = '다음 이슈는 %s 이슈의 원인으로 설정된 관계가 해제됐습니다.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = '다음 이슈는 %s 이슈 때문에 발생한 것으로 설정된 관계가 해제됐습니다.';
+$s_email_notification_title_for_action_relationship_child_resolved = '관련된 %s 이슈가 해결됐습니다.';
+$s_email_notification_title_for_action_relationship_child_closed = '관련된 %s 이슈가 폐쇄됐습니다.';
 
 $s_email_reporter = '보고자';
 $s_email_handler = '조작자';
@@ -650,11 +650,11 @@ $s_redirecting = '...리다이렉팅';
 $s_here = '여기';
 
 # lost_pwd_page.php
-$s_lost_password_title = "비밀번호 초기화";
-$s_lost_password_done_title = "비밀번호 변경 메일이 보내졌습니다.";
-$s_lost_password_subject = "비밀번호 변경 확인 메일입니다.";
-$s_lost_password_info = "비밀번호를 찾기 원하시면 가입할때 사용하셨던 아이디와 메일 주소를 입력하시기 바랍니다.<br /><br />메일 주소를 입력하시면 비밀번호를 변경할 수 있는 코드가 포함된 주소를 메일로 받으실 수 있습니다. ";
-$s_lost_password_confirm_hash_OK = "요청이 수락 되었습니다. 비밀번호를 변경하시기 바랍니다.";
+$s_lost_password_title = '비밀번호 초기화';
+$s_lost_password_done_title = '비밀번호 변경 메일이 보내졌습니다.';
+$s_lost_password_subject = '비밀번호 변경 확인 메일입니다.';
+$s_lost_password_info = '비밀번호를 찾기 원하시면 가입할때 사용하셨던 아이디와 메일 주소를 입력하시기 바랍니다.<br /><br />메일 주소를 입력하시면 비밀번호를 변경할 수 있는 코드가 포함된 주소를 메일로 받으실 수 있습니다. ';
+$s_lost_password_confirm_hash_OK = '요청이 수락 되었습니다. 비밀번호를 변경하시기 바랍니다.';
 
 # main_page.php
 $s_open_and_assigned_to_me = '나에게 할당되고 진행중인 이슈';
@@ -716,8 +716,8 @@ $s_default_notify = '기본 알림 플래그를 다음과 같이 설정합니다 :';
 $s_action_notify = '행동 알림 플래그를 다음과 같이 설정합니다 :';
 $s_notify_defaults_change_access = '기본 알림설정을 변경할 수 있는 사용자를 다음으로 변경합니다 :';
 $s_notify_actions_change_access = '알림설정을 변경할 수 있는 사용자를 다음으로 변경합니다 :';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_revert_to_system = 'Delete All Projects Settings';
+$s_revert_to_all_project = 'Delete Project Specific Settings';
 
 # manage_config_workflow_page
 $s_non_existent = '존재하지 않음';
@@ -1189,17 +1189,17 @@ $s_confirm_custom_field_unlinking = '프로젝트에서 이 커스텀 필드를 제거(링크해제
 $s_field_remove_button = '필드 제거';
 
 $s_hide_status = '상태 숨김';
-$s_filter_closed = "폐쇄됨";
-$s_filter_resolved = "해결됨";
-$s_hide_closed = "폐쇄된 것 숨김";
-$s_hide_resolved = "해결된 것 숨김";
+$s_filter_closed = '폐쇄됨';
+$s_filter_resolved = '해결됨';
+$s_hide_closed = '폐쇄된 것 숨김';
+$s_hide_resolved = '해결된 것 숨김';
 $s_and_above = '이상';
 $s_advanced_filters = '고급 필터';
 $s_simple_filters = '단순 필터';
 $s_monitored_by = '감시자';
 
-$s_attachments = "첨부파일";
-$s_attachment_alt = "A";
+$s_attachments = '첨부파일';
+$s_attachment_alt = 'A';
 
 # PHPMailer
 $s_phpmailer_language = 'ko';
@@ -1222,34 +1222,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = '변경 기록';
 
 # Http auth
-$s_http_auth_realm = "Mantis Login";
+$s_http_auth_realm = 'Mantis Login';
 
-$s_bug = "이슈";
-$s_add_new_relationship = "새로운 관계";
-$s_add_new_relationship_button = "추가";
-$s_this_bug = "현재 이슈";
-$s_relationship_added = "관계 추가됨";
-$s_relationship_deleted = "관계 삭제됨";
-$s_no_relationship = "관계 없음";
-$s_relationship_replaced = "관계 교체됨";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "이 두 이슈는 서로 관계가 있습니다. 이 관계를 정말 바꾸려 합니까?";
-$s_relationship_with_parent = "원인이 되는 이슈와의 관계";
-$s_delete_relationship_button = "삭제";
-$s_delete_relationship_sure_msg = "이 관계를 삭제합니까?";
-$s_relationship_warning_blocking_bugs_not_resolved = "이 이슈 때문에 발생한 이슈가 아직 모두 해결되거나 폐쇄되지 않았습니다.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>주의</b>. 이 이슈 때문에 발생한 이슈가 아직 모두 해결되거나 폐쇄되지 않았습니다.<br />원인이 되는 이슈를 <b>해결/폐쇄</b>하기 전에, 이 이슈 때문에 발생한 모든 이슈를 해결 또는 폐쇄해야 합니다.";
-$s_create_child_bug_button = "내용 복사후 관련이슈추가";
-$s_bug_cloned_to = "이슈 복사됨";
-$s_bug_created_from = "다음으로부터 생성된 이슈 :";
+$s_bug = '이슈';
+$s_add_new_relationship = '새로운 관계';
+$s_add_new_relationship_button = '추가';
+$s_this_bug = '현재 이슈';
+$s_relationship_added = '관계 추가됨';
+$s_relationship_deleted = '관계 삭제됨';
+$s_no_relationship = '관계 없음';
+$s_relationship_replaced = '관계 교체됨';
+$s_replace_relationship_button = 'Replace';
+$s_replace_relationship_sure_msg = '이 두 이슈는 서로 관계가 있습니다. 이 관계를 정말 바꾸려 합니까?';
+$s_relationship_with_parent = '원인이 되는 이슈와의 관계';
+$s_delete_relationship_button = '삭제';
+$s_delete_relationship_sure_msg = '이 관계를 삭제합니까?';
+$s_relationship_warning_blocking_bugs_not_resolved = '이 이슈 때문에 발생한 이슈가 아직 모두 해결되거나 폐쇄되지 않았습니다.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>주의</b>. 이 이슈 때문에 발생한 이슈가 아직 모두 해결되거나 폐쇄되지 않았습니다.<br />원인이 되는 이슈를 <b>해결/폐쇄</b>하기 전에, 이 이슈 때문에 발생한 모든 이슈를 해결 또는 폐쇄해야 합니다.';
+$s_create_child_bug_button = '내용 복사후 관련이슈추가';
+$s_bug_cloned_to = '이슈 복사됨';
+$s_bug_created_from = '다음으로부터 생성된 이슈 :';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "관계 그래프";
-$s_relation_graph = "관계 그래프";
-$s_dependency_graph = "의존 그래프";
-$s_vertical = "수직";
-$s_horizontal = "수평";
-$s_view_issue = "이슈 보기";
+$s_viewing_bug_relationship_graph_title = '관계 그래프';
+$s_relation_graph = '관계 그래프';
+$s_dependency_graph = '의존 그래프';
+$s_vertical = '수직';
+$s_horizontal = '수평';
+$s_view_issue = '이슈 보기';
 
 # Source Control Integration
 $s_checkin = '체크인';
@@ -1282,8 +1282,8 @@ $s_manage_news = '뉴스 관리';
 $s_view_list_of_attachments = '첨부 파일 목록 보기';
 $s_download_attachments = '첨부 파일 받기';
 $s_delete_attachments = '첨부 파일 삭제';
-$s_delete_attachment_button = "삭제";
-$s_delete_attachment_sure_msg = "이 첨부파일을 삭제하시겠습니까?";
+$s_delete_attachment_button = '삭제';
+$s_delete_attachment_sure_msg = '이 첨부파일을 삭제하시겠습니까?';
 $s_upload_issue_attachments = '첨부 파일 올리기';
 $s_filters = '필터';
 $s_save_filters = '필터 저장';
