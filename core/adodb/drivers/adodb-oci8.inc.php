@@ -1,7 +1,7 @@
 <?php
 /*
 
-  version V5.06 16 Oct 2008  (c) 2000-2008 John Lim. All rights reserved.
+  version V5.06 16 Oct 2008  (c) 2000-2009 John Lim. All rights reserved.
 
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
@@ -184,7 +184,7 @@ NATSOFT.DOMAIN =
 	function _connect($argHostname, $argUsername, $argPassword, $argDatabasename,$mode=0)
 	{
 		if (!function_exists('OCIPLogon')) return null;
-		
+		#adodb_backtrace(); 
 		
         $this->_errorMsg = false;
 		$this->_errorCode = false;
@@ -200,7 +200,7 @@ NATSOFT.DOMAIN =
 					$argHostport = empty($this->port)?  "1521" : $this->port;
 	   			}
 				
-				if (strncmp($argDatabasename,'SID=',4) == 0) {
+				if (strncasecmp($argDatabasename,'SID=',4) == 0) {
 					$argDatabasename = substr($argDatabasename,4);
 					$this->connectSID = true;
 				}
@@ -1020,7 +1020,7 @@ NATSOFT.DOMAIN =
 		  $db->bind($stmt,1); $db->bind($stmt,2); $db->bind($stmt,3); 
 		  $db->execute($stmt);
 	*/ 
-	function _query($sql,$inputarr)
+	function _query($sql,$inputarr=false)
 	{
 		if (is_array($sql)) { // is prepared sql
 			$stmt = $sql[1];
@@ -1128,6 +1128,32 @@ NATSOFT.DOMAIN =
 					// ociclose -- no because it could be used in a LOB?
                     return true;
             }
+		}
+		return false;
+	}
+	
+	// From Oracle Whitepaper: PHP Scalability and High Availability
+	function IsConnectionError($err)
+	{
+		switch($err) {
+			case 378: /* buffer pool param incorrect */
+			case 602: /* core dump */
+			case 603: /* fatal error */
+			case 609: /* attach failed */
+			case 1012: /* not logged in */
+			case 1033: /* init or shutdown in progress */
+			case 1043: /* Oracle not available */
+			case 1089: /* immediate shutdown in progress */
+			case 1090: /* shutdown in progress */
+			case 1092: /* instance terminated */
+			case 3113: /* disconnect */
+			case 3114: /* not connected */
+			case 3122: /* closing window */
+			case 3135: /* lost contact */
+			case 12153: /* TNS: not connected */
+			case 27146: /* fatal or instance terminated */
+			case 28511: /* Lost RPC */
+			return true;
 		}
 		return false;
 	}

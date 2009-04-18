@@ -1,6 +1,6 @@
 <?php
 /*
- V5.07 18 Dec 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+ V5.08 6 Apr 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -99,7 +99,7 @@ class ADODB_postgres7 extends ADODB_postgres64 {
 	    } else {
 	      $a[$rs->Fields('lookup_table')][] = str_replace('"','',$rs->Fields('dep_field').'='.$rs->Fields('lookup_field'));
 	    }
-	    adodb_movenext($rs);
+		$rs->MoveNext();
 	  }
 	
 	  return $a;
@@ -140,7 +140,7 @@ class ADODB_postgres7 extends ADODB_postgres64 {
 		return $a;
 	}
 
-	function _query($sql,$inputarr)
+	function _query($sql,$inputarr=false)
 	{
 		if (! $this->_bindInputArray) {
 			// We don't have native support for parameterized queries, so let's emulate it at the parent

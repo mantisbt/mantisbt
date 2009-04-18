@@ -1,7 +1,7 @@
 <?php
 /*
 
-@version V5.07 18 Dec 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+@version V5.08 6 Apr 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
   Latest version is available at http://adodb.sourceforge.net
  
   Released under both BSD license and Lesser GPL library license. 
@@ -41,8 +41,11 @@ class ADODB_Active_Table {
 	var $_hasMany = array();
 }
 
+// $db = database connection
+// $index = name of index - can be associative, for an example see
+//    http://phplens.com/lens/lensforum/msgs.php?id=17790 
 // returns index into $_ADODB_ACTIVE_DBS
-function ADODB_SetDatabaseAdapter(&$db)
+function ADODB_SetDatabaseAdapter(&$db, $index=false)
 {
 	global $_ADODB_ACTIVE_DBS;
 	
@@ -59,7 +62,10 @@ function ADODB_SetDatabaseAdapter(&$db)
 		$obj->db = $db;
 		$obj->tables = array();
 		
-		$_ADODB_ACTIVE_DBS[] = $obj;
+		if ($index == false) $index = sizeof($_ADODB_ACTIVE_DBS);
+
+		
+		$_ADODB_ACTIVE_DBS[$index] = $obj;
 		
 		return sizeof($_ADODB_ACTIVE_DBS)-1;
 }
@@ -86,9 +92,9 @@ class ADODB_Active_Record {
 	}
 
 	// should be static
-	static function SetDatabaseAdapter(&$db) 
+	static function SetDatabaseAdapter(&$db, $index=false) 
 	{
-		return ADODB_SetDatabaseAdapter($db);
+		return ADODB_SetDatabaseAdapter($db, $index);
 	}
 	
 	
@@ -115,11 +121,11 @@ class ADODB_Active_Record {
 		$this->foreignName = strtolower(get_class($this)); // CFR: default foreign name
 		if ($db) {
 			$this->_dbat = ADODB_Active_Record::SetDatabaseAdapter($db);
-		} else
-			$this->_dbat = sizeof($_ADODB_ACTIVE_DBS)-1;
-		
-		
-		if ($this->_dbat < 0) $this->Error("No database connection set; use ADOdb_Active_Record::SetDatabaseAdapter(\$db)",'ADODB_Active_Record::__constructor');
+		} else if (!isset($this->_dbat)) {
+			if (sizeof($_ADODB_ACTIVE_DBS) == 0) $this->Error("No database connection set; use ADOdb_Active_Record::SetDatabaseAdapter(\$db)",'ADODB_Active_Record::__constructor');
+			end($_ADODB_ACTIVE_DBS);
+			$this->_dbat = key($_ADODB_ACTIVE_DBS);
+		}
 		
 		$this->_table = $table;
 		$this->_tableat = $table; # reserved for setting the assoc value to a non-table name, eg. the sql string in future
@@ -622,7 +628,8 @@ class ADODB_Active_Record {
 		case 'X':
 			if (is_null($val)) return 'null';
 			
-			if (strncmp($val,"'",1) != 0 && substr($val,strlen($val)-1,1) != "'") { 
+			if (strlen($val)>1 && 
+				(strncmp($val,"'",1) != 0 || substr($val,strlen($val)-1,1) != "'")) { 
 				return $db->qstr($val);
 				break;
 			}
@@ -674,6 +681,24 @@ class ADODB_Active_Record {
 		return $this->Set($row);
 	}
 	
+	# useful for multiple record inserts
+	# see http://phplens.com/lens/lensforum/msgs.php?id=17795
+	function Reset()
+	{
+        $this->_where=null;
+        $this->_saved = false; 
+        $this->_lasterr = false; 
+        $this->_original = false;
+        $vars=get_object_vars($this);
+        foreach($vars as $k=>$v){
+        	if(substr($k,0,1)!=='_'){
+        		$this->{$k}=null;
+        	}
+        }
+        $this->foreignName=strtolower(get_class($this));
+        return true;
+    }
+	
 	// false on error
 	function Save()
 	{
@@ -696,7 +721,7 @@ class ADODB_Active_Record {
 
 		foreach($table->flds as $name=>$fld) {
 			$val = $this->$name;
-			if(!is_null($val) || !array_key_exists($name, $table->keys)) {
+			if(!is_array($val) || !is_null($val) || !array_key_exists($name, $table->keys)) {
 				$valarr[] = $val;
 				$names[] = $name;
 				$valstr[] = $db->Param($cnt);
@@ -779,6 +804,9 @@ class ADODB_Active_Record {
 			if (is_null($val) && !empty($fld->auto_increment)) {
             	continue;
             }
+			
+			if (is_array($val)) continue;
+			
 			$t = $db->MetaType($fld->type);
 			$arr[$name] = $this->doquote($db,$val,$t);
 			$valarr[] = $val;
@@ -838,9 +866,8 @@ class ADODB_Active_Record {
 			$val = $this->$name;
 			$neworig[] = $val;
 			
-			if (isset($table->keys[$name])) {
+			if (isset($table->keys[$name]) || is_array($val)) 
 				continue;
-			}
 			
 			if (is_null($val)) {
 				if (isset($fld->not_null) && $fld->not_null) {

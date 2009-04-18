@@ -20,7 +20,7 @@
 </head>
 <body style="background-color: rgb(255, 255, 255);">
 <h2>ADOdb Data Dictionary Library for PHP</h2>
-<p>V5.06 16 Oct 2008  (c) 2000-2008 John Lim (<a
+<p>V5.06 16 Oct 2008  (c) 2000-2009 John Lim (<a
  href="mailto:jlim#natsoft.com">jlim#natsoft.com</a>).<br>
 AXMLS (c) 2004 ars Cognita, Inc</p>
 <p><font size="1">This software is dual licensed using BSD-Style and
@@ -136,7 +136,7 @@ for postgresql:
 <pre>  $taboptarray = array('constraints' =gt; ', FOREIGN KEY (col1) REFERENCES reftable (refcol)');</pre>
 <h4>function DropTableSQL($tabname)</h4>
 <p>Returns the SQL to drop the specified table.</p>
-<h4>function ChangeTableSQL($tabname, $flds)</h4>
+<h4>function ChangeTableSQL($tabname, $flds, $tableOptions=false, $dropOldFlds=false)</h4>
 <p>Checks to see if table exists, if table does not exist, behaves like
 CreateTableSQL. If table exists, generates appropriate ALTER TABLE
 MODIFY COLUMN commands if field already exists, or ALTER TABLE ADD
@@ -144,6 +144,7 @@ $column if field does not exist.</p>
 <p>The class must be connected to the database for ChangeTableSQL to
 detect the existence of the table. Idea and code contributed by Florian
 Buzin.</p>
+<p>Old fields not defined in $flds are not dropped by default. To drop old fields, set $dropOldFlds to true.
 <h4>function RenameTableSQL($tabname,$newname)</h4>
 <p>Rename a table.  Returns the an array of strings, which is the SQL required to rename a table. Since ADOdb 4.53. Contributed by Ralf Becker.</p>
 <h4> function RenameColumnSQL($tabname,$oldcolumn,$newcolumn,$flds='')</h4>

@@ -1,6 +1,6 @@
 <?php
 /*
-  V5.07 18 Dec 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+  V5.08 6 Apr 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence. See License.txt.
@@ -56,6 +56,27 @@ class ADODB_odbtp extends ADOConnection{
 		if (empty($this->_connectionID)) return @odbtp_last_error_state();
 			return @odbtp_last_error_state($this->_connectionID);
 	}
+/*
+	function DBDate($d,$isfld=false)
+	{
+		if (empty($d) && $d !== 0) return 'null';
+		if ($isfld) return "convert(date, $d, 120)";
+		
+		if (is_string($d)) $d = ADORecordSet::UnixDate($d);
+		$d = adodb_date($this->fmtDate,$d);
+		return "convert(date, $d, 120)"; 
+	}
+	
+	function DBTimeStamp($d,$isfld=false)
+	{
+		if (empty($d) && $d !== 0) return 'null';
+		if ($isfld) return "convert(datetime, $d, 120)";
+		
+		if (is_string($d)) $d = ADORecordSet::UnixDate($d);
+		$d = adodb_date($this->fmtDate,$d);
+		return "convert(datetime, $d, 120)"; 
+	}
+*/
 
 	function _insertid()
 	{

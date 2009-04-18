@@ -1498,7 +1498,7 @@ class adoSchema {
 					$mode = XMLS_MODE_INSERT;
 					break;
 				default:
-					$mode = XMLS_EXISITNG_DATA;
+					$mode = XMLS_EXISTING_DATA;
 					break;
 			}
 			$this->existingData = $mode;
