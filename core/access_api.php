@@ -384,13 +384,14 @@ function access_has_any_project( $p_access_level, $p_user_id = null ) {
 		$p_user_id = auth_get_current_user_id();
 	}
 
-	$t_access = false;
 	$t_projects = project_get_all_rows();
 	foreach( $t_projects as $t_project ) {
-		$t_access = $t_access || access_has_project_level( $p_access_level, $t_project['id'], $p_user_id );
+		if ( access_has_project_level( $p_access_level, $t_project['id'], $p_user_id ) ) {
+			return true;
+		}
 	}
 
-	return( $t_access );
+	return false;
 }
 
 /**
