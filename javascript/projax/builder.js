@@ -1,8 +1,9 @@
-// script.aculo.us builder.js v1.6.4, Wed Sep 06 11:30:58 CEST 2006
+// script.aculo.us builder.js v1.8.2, Tue Nov 18 18:30:58 +0100 2008
 
-// Copyright (c) 2005 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
+// Copyright (c) 2005-2008 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
 //
-// See scriptaculous.js for full license.
+// script.aculo.us is freely distributable under the terms of an MIT-style license.
+// For details, see the script.aculo.us web site: http://script.aculo.us/
 
 var Builder = {
   NODEMAP: {
@@ -35,7 +36,7 @@ var Builder = {
     var element = parentElement.firstChild || null;
       
     // see if browser added wrapping tags
-    if(element && (element.tagName != elementName))
+    if(element && (element.tagName.toUpperCase() != elementName))
       element = element.getElementsByTagName(elementName)[0];
     
     // fallback to createElement approach
@@ -47,7 +48,8 @@ var Builder = {
     // attributes (or text)
     if(arguments[1])
       if(this._isStringOrNumber(arguments[1]) ||
-        (arguments[1] instanceof Array)) {
+        (arguments[1] instanceof Array) ||
+        arguments[1].tagName) {
           this._children(element, arguments[1]);
         } else {
           var attrs = this._attributes(arguments[1]);
@@ -63,7 +65,7 @@ var Builder = {
               for(attr in arguments[1]) 
                 element[attr == 'class' ? 'className' : attr] = arguments[1][attr];
             }
-            if(element.tagName != elementName)
+            if(element.tagName.toUpperCase() != elementName)
               element = parentElement.getElementsByTagName(elementName)[0];
             }
         } 
@@ -72,23 +74,33 @@ var Builder = {
     if(arguments[2])
       this._children(element, arguments[2]);
 
-     return element;
+     return $(element);
   },
   _text: function(text) {
      return document.createTextNode(text);
   },
+
+  ATTR_MAP: {
+    'className': 'class',
+    'htmlFor': 'for'
+  },
+
   _attributes: function(attributes) {
     var attrs = [];
     for(attribute in attributes)
-      attrs.push((attribute=='className' ? 'class' : attribute) +
-          '="' + attributes[attribute].toString().escapeHTML() + '"');
+      attrs.push((attribute in this.ATTR_MAP ? this.ATTR_MAP[attribute] : attribute) +
+          '="' + attributes[attribute].toString().escapeHTML().gsub(/"/,'&quot;') + '"');
     return attrs.join(" ");
   },
   _children: function(element, children) {
+    if(children.tagName) {
+      element.appendChild(children);
+      return;
+    }
     if(typeof children=='object') { // array can hold nodes and text
       children.flatten().each( function(e) {
         if(typeof e=='object')
-          element.appendChild(e)
+          element.appendChild(e);
         else
           if(Builder._isStringOrNumber(e))
             element.appendChild(Builder._text(e));
@@ -99,6 +111,11 @@ var Builder = {
   },
   _isStringOrNumber: function(param) {
     return(typeof param=='string' || typeof param=='number');
+  },
+  build: function(html) {
+    var element = this.node('div');
+    $(element).update(html.strip());
+    return element.down();
   },
   dump: function(scope) { 
     if(typeof scope != 'object' && typeof scope != 'function') scope = window; //global scope 
@@ -113,7 +130,7 @@ var Builder = {
     tags.each( function(tag){ 
       scope[tag] = function() { 
         return Builder.node.apply(Builder, [tag].concat($A(arguments)));  
-      } 
+      };
     });
   }
-}
+};

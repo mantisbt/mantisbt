@@ -1,30 +1,11 @@
-// script.aculo.us slider.js v1.6.4, Wed Sep 06 11:30:58 CEST 2006
+// script.aculo.us slider.js v1.8.2, Tue Nov 18 18:30:58 +0100 2008
 
-// Copyright (c) 2005 Marty Haught, Thomas Fuchs 
+// Copyright (c) 2005-2008 Marty Haught, Thomas Fuchs
 //
-// See http://script.aculo.us for more info
-// 
-// Permission is hereby granted, free of charge, to any person obtaining
-// a copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
-// 
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// script.aculo.us is freely distributable under the terms of an MIT-style license.
+// For details, see the script.aculo.us web site: http://script.aculo.us/
 
 if(!Control) var Control = {};
-Control.Slider = Class.create();
 
 // options:
 //  axis: 'vertical', or 'horizontal' (default)
@@ -32,11 +13,11 @@ Control.Slider = Class.create();
 // callbacks:
 //  onChange(value)
 //  onSlide(value)
-Control.Slider.prototype = {
+Control.Slider = Class.create({
   initialize: function(handle, track, options) {
     var slider = this;
     
-    if(handle instanceof Array) {
+    if (Object.isArray(handle)) {
       this.handles = handle.collect( function(e) { return $(e) });
     } else {
       this.handles = [$(handle)];
@@ -94,16 +75,15 @@ Control.Slider.prototype = {
     this.handles.each( function(h,i) {
       i = slider.handles.length-1-i;
       slider.setValue(parseFloat(
-        (slider.options.sliderValue instanceof Array ? 
+        (Object.isArray(slider.options.sliderValue) ?
           slider.options.sliderValue[i] : slider.options.sliderValue) || 
          slider.range.start), i);
-      Element.makePositioned(h); // fix IE
-      Event.observe(h, "mousedown", slider.eventMouseDown);
+      h.makePositioned().observe("mousedown", slider.eventMouseDown);
     });
     
-    Event.observe(this.track, "mousedown", this.eventMouseDown);
-    Event.observe(document, "mouseup", this.eventMouseUp);
-    Event.observe(document, "mousemove", this.eventMouseMove);
+    this.track.observe("mousedown", this.eventMouseDown);
+    document.observe("mouseup", this.eventMouseUp);
+    document.observe("mousemove", this.eventMouseMove);
     
     this.initialized = true;
   },
@@ -191,7 +171,7 @@ Control.Slider.prototype = {
       (this.track.offsetHeight != 0 ? this.track.offsetHeight :
         this.track.style.height.replace(/px$/,"")) - this.alignY : 
       (this.track.offsetWidth != 0 ? this.track.offsetWidth : 
-        this.track.style.width.replace(/px$/,"")) - this.alignY);
+        this.track.style.width.replace(/px$/,"")) - this.alignX);
   },  
   isVertical:  function(){
     return (this.axis == 'vertical');
@@ -242,6 +222,7 @@ Control.Slider.prototype = {
           while((this.handles.indexOf(handle) == -1) && handle.parentNode) 
             handle = handle.parentNode;
         
+          if (this.handles.indexOf(handle)!=-1) {
           this.activeHandle    = handle;
           this.activeHandleIdx = this.handles.indexOf(this.activeHandle);
           this.updateStyles();
@@ -251,6 +232,7 @@ Control.Slider.prototype = {
           this.offsetY = (pointer[1] - offsets[1]);
         }
       }
+      }
       Event.stop(event);
     }
   },
@@ -258,8 +240,7 @@ Control.Slider.prototype = {
    if(this.active) {
       if(!this.dragging) this.dragging = true;
       this.draw(event);
-      // fix AppleWebKit rendering
-      if(navigator.appVersion.indexOf('AppleWebKit')>0) window.scrollBy(0,0);
+      if (Prototype.Browser.WebKit) window.scrollBy(0,0);
       Event.stop(event);
    }
   },
@@ -291,4 +272,4 @@ Control.Slider.prototype = {
       this.options.onChange(this.values.length>1 ? this.values : this.value, this);
     this.event = null;
   }
-}
+});
