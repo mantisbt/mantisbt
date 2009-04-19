@@ -65,6 +65,10 @@ $g_cache_project_all = false;
 function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 	global $g_cache_project, $g_cache_project_missing;
 
+	if( $p_project_id == ALL_PROJECTS ) {
+		return false;
+	}
+	
 	if( isset( $g_cache_project[(int) $p_project_id] ) ) {
 		return $g_cache_project[(int) $p_project_id];
 	}
@@ -95,6 +99,43 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 	$g_cache_project[(int) $p_project_id] = $row;
 
 	return $row;
+}
+
+function project_cache_array_rows( $p_project_id_array ) {
+	global $g_cache_project, $g_cache_project_missing;
+
+	$c_project_id_array = array();
+
+	foreach( $p_project_id_array as $t_project_id ) {
+		if( !isset( $g_cache_project[(int) $t_project_id] ) && !isset( $g_cache_project_missing[(int) $t_project_id] ) ) {
+			$c_project_id_array[] = (int) $t_project_id;
+		}
+	}
+
+	if( empty( $c_project_id_array ) ) {
+		return;
+	}
+
+	$t_project_table = db_get_table( 'mantis_project_table' );
+
+	$query = "SELECT *
+				  FROM $t_project_table
+				  WHERE id IN (" . implode( ',', $c_project_id_array ) . ')';
+	$result = db_query_bound( $query );
+
+	$t_projects_found = array();
+	while( $row = db_fetch_array( $result ) ) {
+		$g_cache_project[(int) $row['id']] = $row;
+		$t_projects_found[(int) $row['id']] = true;
+	}
+	
+	foreach ( $c_project_id_array as $c_project_id ) {
+		if ( !isset( $t_projects_found[$c_project_id] ) ) { 
+			$g_cache_project_missing[(int) $c_project_id] = true;
+		}
+	}
+
+	return;
 }
 
 # --------------------
