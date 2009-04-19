@@ -467,20 +467,21 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 	}
 
 	$t_project_count = count( $t_project_ids );
+	$t_charset = lang_get( 'charset' );
 	for( $i = 0;$i < $t_project_count;$i++ ) {
 		$t_id = $t_project_ids[$i];
 		if( $t_id != $p_filter_project_id ) {
 			echo "<option value=\"$t_id\"";
 			check_selected( $p_project_id, $t_id );
-			echo '>' . string_display_line( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
-			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace );
+			echo '>' . string_html_specialchars( string_strip_hrefs( project_get_field( $t_id, 'name' ) ), $t_charset ) . '</option>' . "\n";
+			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, Array(), $t_charset );
 		}
 	}
 }
 
 # --------------------
 # List projects that the current user has access to
-function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_parents = Array() ) {
+function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_parents = Array(), $p_charset = null ) {
 	array_push( $p_parents, $p_parent_id );
 	$t_project_ids = current_user_get_accessible_subprojects( $p_parent_id );
 	$t_project_count = count( $t_project_ids );
@@ -493,8 +494,8 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 			}
 			echo "$t_full_id\"";
 			check_selected( $p_project_id, $t_full_id );
-			echo '>' . str_repeat( '&nbsp;', count( $p_parents ) ) . str_repeat( '&raquo;', count( $p_parents ) ) . ' ' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
-			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
+			echo '>' . str_repeat( '&nbsp;', count( $p_parents ) ) . str_repeat( '&raquo;', count( $p_parents ) ) . ' ' . string_html_specialchars( string_strip_hrefs( project_get_field( $t_id, 'name' ) ) ) . '</option>' . "\n";
+			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents, $t_charset );
 		}
 	}
 }
@@ -784,7 +785,8 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 	}
 
 	$t_listed = array();
-
+	$t_max_length = config_get( 'max_dropdown_length' );
+	
 	foreach( $versions as $version ) {
 
 		# If the current version is obsolete, and current version not equal to $p_version,
@@ -801,7 +803,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 			$t_listed[] = $t_version;
 			echo "<option value=\"$t_version\"";
 			check_selected( $p_version, $t_version );
-			echo '>', string_shorten( $t_version ), '</option>';
+			echo '>', string_shorten( $t_version, $t_max_length ), '</option>';
 		}
 	}
 }
@@ -827,10 +829,12 @@ function print_build_option_list( $p_build = '' ) {
 		$t_overall_build_arr[] = $row['build'];
 	}
 
+	$t_max_length = config_get( 'max_dropdown_length' );
+
 	foreach( $t_overall_build_arr as $t_build ) {
 		echo "<option value=\"$t_build\"";
 		check_selected( $p_build, $t_build );
-		echo ">" . string_shorten( $t_build ) . "</option>";
+		echo ">" . string_shorten( $t_build, $t_max_length ) . "</option>";
 	}
 }
 

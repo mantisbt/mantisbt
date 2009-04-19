@@ -685,9 +685,14 @@ function string_format_complete_date( $p_date ) {
 # Shorten a string for display on a dropdown to prevent the page rendering too wide
 #  ref issues #4630, #5072, #5131
 
-function string_shorten( $p_string ) {
-	$t_max = config_get( 'max_dropdown_length' );
-	if(( strlen( $p_string ) > $t_max ) && ( $t_max > 0 ) ) {
+function string_shorten( $p_string, $p_max = null ) {
+	if( $p_max === null ) {
+		$t_max = config_get( 'max_dropdown_length' );	
+	} else {
+		$t_max = (int) $p_max;
+	}
+
+	if( ( $t_max > 0 ) && ( strlen( $p_string ) > $t_max ) ) {
 		$t_pattern = '/([\s|.|,|\-|_|\/|\?]+)/';
 		$t_bits = preg_split( $t_pattern, $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
 
@@ -737,19 +742,25 @@ function string_get_field_name( $p_string ) {
 # --------------------
 # Calls htmlentities on the specified string, passing along
 # the current charset.
-function string_html_entities( $p_string ) {
-	return htmlentities( $p_string, ENT_COMPAT, lang_get( 'charset' ) );
+function string_html_entities( $p_string, $p_charset = null ) {
+	if ( $p_charset === null ) {
+		$p_charset = lang_get( 'charset' );
+	}
+	return htmlentities( $p_string, ENT_COMPAT, $p_charset );
 }
 
 # --------------------
 # Calls htmlspecialchars on the specified string, passing along
 # the current charset, if the current PHP version supports it.
-function string_html_specialchars( $p_string ) {
+function string_html_specialchars( $p_string, $p_charset = null ) {
+	if ( $p_charset === null ) {
+		$p_charset = lang_get( 'charset' );
+	}
 
 	# achumakov: @ added to avoid warning output in unsupported codepages
 	# e.g. 8859-2, windows-1257, Korean, which are treated as 8859-1.
 	# This is VERY important for Eastern European, Baltic and Korean languages
-	return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $p_string, ENT_COMPAT, lang_get( 'charset' ) ) );
+	return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $p_string, ENT_COMPAT, $p_charset ) );
 }
 
 # --------------------

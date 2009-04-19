@@ -587,6 +587,7 @@ function html_footer( $p_file ) {
 		if( ON == config_get( 'show_queries_list' ) ) {
 			echo "\t", '<table>', "\n";
 			$t_total = 0;
+			$t_lang_charset = lang_get( 'charset' );
 			for( $i = 0;$i < $t_count;$i++ ) {
 				$t_time = $g_queries_array[$i][1];
 				$t_caller = $g_queries_array[$i][2];
@@ -597,7 +598,7 @@ function html_footer( $p_file ) {
 				}
 				echo "\t", '<tr valign="top"><td', $t_style_tag, '>', ( $i + 1 ), '</td>';
 				echo '<td', $t_style_tag, '>', $t_time, '</td>';
-				echo '<td', $t_style_tag, '><span style="color: gray;">', $t_caller, '</span><br />', string_html_specialchars( $g_queries_array[$i][0] ), '</td></tr>', "\n";
+				echo '<td', $t_style_tag, '><span style="color: gray;">', $t_caller, '</span><br />', string_html_specialchars( $g_queries_array[$i][0], $t_lang_charset ), '</td></tr>', "\n";
 			}
 
 			# @@@ Note sure if we should localize them given that they are debug info.  Will add if requested by users.
