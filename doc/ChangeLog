@@ -1,5 +1,29 @@
 Mantis ChangeLog
 
+2009.04.20 - 1.1.7
+===================================
+
+Bugfix maintenance release, cleaning up most of the remaining issues with 1.1.x series.
+
+- 0006848: [administration] Bugs in manage_config_*_set.php (grangeway) - resolved.
+- 0009986: [administration] APPLICATION ERROR #2800 using "Delete Project Specific Settings" (jreese) - resolved.
+- 0010235: [api soap] mc_issue_attachment_add corrupts attachments (giallu) - resolved.
+- 0009888: [bugtracker] Issue History Problem... build, os, os_version, and platform are not looking right and are not effected by language files. (jreese) - resolved.
+- 0009999: [bugtracker] APPLICATION ERROR #2800 - While submit a new bug (jreese) - resolved.
+- 0009606: [custom fields] Custom fields not enforced. (thraxisp) - resolved.
+- 0009979: [custom fields] Function gpc_isset always return false for a custom date field (thraxisp) - resolved.
+- 0010035: [custom fields] Custom multi-selection list fields don't allow deselection (thraxisp) - resolved.
+- 0010154: [custom fields] Custom field enum values are getting the first and last characters truncated when displayed. (thraxisp) - resolved.
+- 0010011: [customization] date_submitted is not set properly in bug object (thraxisp) - resolved.
+- 0010200: [email] \n not replaced in registration e-mail (siebrand) - resolved.
+- 0010231: [feature] Assigned bug status cannot be changed to new? (jreese) - resolved.
+- 0010299: [html] Invalid HTML (jreese) - resolved.
+- 0010270: [localization] escaped double quotes in localization files (siebrand) - resolved.
+- 0010187: [security] Using dession destroy and unset for logout (jreese) - resolved.
+- 0010192: [sub-projects] Repeated Target versions (jreese) - resolved.
+- 0010038: [tagging] Problems attaching tags in Chrome (jreese) - resolved.
+- 0010050: [time tracking] All leves have access to billing reports - Access level required to run reports does not function (giallu) - resolved.
+
 2008.12.09 - 1.1.6
 ===================================
 

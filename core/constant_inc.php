@@ -17,11 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.74.2.2 2007-10-28 15:39:31 nuclear_eclipse Exp $
-	# --------------------------------------------------------
-
-	define( 'MANTIS_VERSION', '1.1.6' );
+	define( 'MANTIS_VERSION', '1.1.7' );
 
 	# --- constants -------------------
 
