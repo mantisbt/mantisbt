@@ -1787,7 +1787,7 @@
 	 * Extensions for text files that can be expanded inline.
 	 * @global array $g_preview_text_extensions
 	 */
-	$g_preview_text_extensions = array( 'txt', 'diff', 'patch' );
+	$g_preview_text_extensions = array( '', 'txt', 'diff', 'patch' );
 
 	/**
 	 * Extensions for images that can be expanded inline.
@@ -2973,6 +2973,7 @@
 	 * @global array $g_file_type_icons
 	 */
 	$g_file_type_icons = array(
+		''		=> 'text.gif',
 		'7z'	=> 'zip.gif',
 		'ace'	=> 'zip.gif',
 		'arj'	=> 'zip.gif',
@@ -2983,6 +2984,7 @@
 		'css'	=> 'css.gif',
 		'csv'	=> 'csv.gif',
 		'cxx'	=> 'cpp.gif',
+		'diff'	=> 'text.gif',
 		'doc'	=> 'doc.gif',
 		'docx'	=> 'doc.gif',
 		'dot'	=> 'doc.gif',
@@ -3002,6 +3004,7 @@
 		'mov'	=> 'mov.gif',
 		'msg'	=> 'eml.gif',
 		'one'	=> 'one.gif',
+		'patch'	=> 'text.gif',
 		'pcx'	=> 'pcx.gif',
 		'pdf'	=> 'pdf.gif',
 		'png'	=> 'png.gif',

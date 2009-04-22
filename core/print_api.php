@@ -1576,7 +1576,7 @@ function print_file_icon( $p_filename ) {
 	$t_file_type_icons = config_get( 'file_type_icons' );
 
 	$ext = strtolower( file_get_extension( $p_filename ) );
-	if( is_blank( $ext ) || !isset( $t_file_type_icons[$ext] ) ) {
+	if( !isset( $t_file_type_icons[$ext] ) ) {
 		$ext = '?';
 	}
 
