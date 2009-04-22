@@ -75,7 +75,7 @@
 		<?php echo lang_get( 'manage_columns_config' ) ?>
 	</td>
 	<td class="right">
-		<?php 
+		<?php
 			if ( $t_account_page ) {
 				print_account_menu( 'account_manage_columns_page.php' );
 			}
@@ -198,4 +198,3 @@
 </div>
 <?php
 	}
-?>

@@ -262,7 +262,9 @@ $s_new_account_message = 'Hvis du ikke har prøvet at registrere dig skal du bar
 $s_new_account_do_not_reply = 'SVAR IKKE PÅ DENNE MEDDELELSE';
 $s_new_account_IP = 'Fjern-IP-adresse:';
 $s_new_account_signup_msg = 'Følgende konto er blevet oprettet:';
-$s_reset_request_msg = 'En eller anden (formodentligt dig selv) bad om at få ændret adgangskoden genneme-mail-verifikation. Hvis det ikke var dig skal du bare se bort fra denne meddelelse, og ingenting vil ske.\n\nHvis du bad om denne verifikation, så besøg denne URL for at ændre din adgangskode:';
+$s_reset_request_msg = 'En eller anden (formodentligt dig selv) bad om at få ændret adgangskoden genneme-mail-verifikation. Hvis det ikke var dig skal du bare se bort fra denne meddelelse, og ingenting vil ske.
+
+Hvis du bad om denne verifikation, så besøg denne URL for at ændre din adgangskode:';
 $s_reset_request_in_progress_msg = 'Hvis du angav den rigtige e-mail-adresse og brugernavn for din konto, har vi nu sendt dig en e-mail med bekræftigelse. Når du modtager denne e-mail skal du følge instrukserne deri for at ændre din kontos adgangskode.';
 $s_email_notification_title_for_status_bug_new = 'Følgende fejl har nu statusen NY (igen)';
 $s_email_notification_title_for_status_bug_feedback = 'Følgende fejl kræver dit SVAR.';

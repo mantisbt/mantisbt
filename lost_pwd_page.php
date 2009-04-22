@@ -116,10 +116,8 @@
 	window.document.lost_password_form.username.focus();
 // -->
 </script>
-<?php } ?>
-
-<?php
+<?php 
 	}
+}
 
-	html_page_bottom1a( __FILE__ );
-?>
+html_page_bottom1a( __FILE__ );

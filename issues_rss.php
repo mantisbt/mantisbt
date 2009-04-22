@@ -167,20 +167,21 @@
 
 	$t_issues = filter_get_bug_rows( $t_page_number, $t_issues_per_page, $t_page_count, $t_issues_count,
 									 $t_custom_filter, $t_project_id, $t_user_id, $t_show_sticky );
+	$t_issues_count = count( $t_issues );
 
 	# Loop through results
-	for ( $i = 0; $i < count( $t_issues ); $i++ ) {
+	for ( $i = 0; $i < $t_issues_count; $i++ ) {
 		$row = $t_issues[$i];
 
 		$t_bug = bug_get( $row['id'], true );
 
 		$about = $link = $t_path . "view.php?id=" . $row['id'];
 		$title = string_rss_links( bug_format_id( $row['id'] ) . ': ' . $t_bug->summary );
-		
+
 		if ( $row['view_state'] == VS_PRIVATE ) {
 			$title .= ' [' . lang_get( 'private' ) . ']';
 		}
-                
+
 		$description = string_rss_links( $t_bug->description );
 
 		# subject is category.
@@ -215,4 +216,4 @@
 	$version = '2.0';
 
 	$rssfile->outputRSS( $version );
-?>
+

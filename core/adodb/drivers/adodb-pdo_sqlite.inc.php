@@ -1,7 +1,7 @@
 <?php
 
 /* 
- V5.07 18 Dec 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+ V5.08 6 Apr 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. See License.txt. 
@@ -25,6 +25,7 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
 	var $_genSeqCountSQL = 'SELECT COUNT(*) FROM %s';
 	var $_genSeq2SQL     = 'INSERT INTO %s VALUES(%s)';
 	var $_dropSeqSQL     = 'DROP TABLE %s';
+	var $concat_operator = '||';
         var $pdoDriver       = false;
     
     function _init($parentDriver)
@@ -142,7 +143,7 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
 
 
     // mark newnham
-	function MetaColumns($tab)
+	function MetaColumns($tab,$normalize=true))
 	{
 	  global $ADODB_FETCH_MODE;
 

@@ -66,9 +66,8 @@
 
 	$result = db_query_bound( $query, Array( $c_export, $t_user_id ) );
 
-	html_page_top1();
-	html_meta_redirect( $f_redirect_url );
-	html_page_top2();
+	html_page_top( null, $f_redirect_url );
+
 	echo '<br /><div align="center">';
 
 	if ( $result ) {
@@ -80,5 +79,4 @@
 	echo '<br />';
 	print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
 	echo '<br /></div>';
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

@@ -29,6 +29,27 @@ define( 'PHP_MIN_VERSION', '5.1.0' );
 # cache array of comparisons
 $g_cached_version = array();
 
+/**
+ * Determine if PHP is running in CLI or CGI mode and return the mode.
+ * @return int PHP mode
+ */
+function php_mode() {
+	static $s_mode = null;
+
+	if ( is_null( $s_mode ) ) {
+		# Check to see if this is CLI mode or CGI mode
+		if ( isset( $_SERVER['SERVER_ADDR'] )
+			|| isset( $_SERVER['LOCAL_ADDR'] )
+			|| isset( $_SERVER['REMOTE_ADDR'] ) ) {
+			$s_mode = PHP_CGI;
+		} else {
+			$s_mode = PHP_CLI;
+		}
+	}
+
+	return $s_mode;
+}
+
 # Returns true if the current PHP version is higher than the one
 #  specified in the given string
 function php_version_at_least( $p_version_string ) {
@@ -49,7 +70,7 @@ function php_version_at_least( $p_version_string ) {
 			$g_cached_version[$p_version_string] = false;
 			return false;
 		}
-		elseif( $t_cur > $t_min ) {
+		else if( $t_cur > $t_min ) {
 			$g_cached_version[$p_version_string] = true;
 			return true;
 		}

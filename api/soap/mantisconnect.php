@@ -1356,15 +1356,15 @@ function mci_is_webservice_call( $p_service, $p_data )
 
 	if ( isset( $_SERVER['QUERY_STRING'] ) ) {
 		$t_qs = $_SERVER['QUERY_STRING'];
-	} elseif( isset( $GLOBALS['QUERY_STRING'] ) ) {
+	} else if( isset( $GLOBALS['QUERY_STRING'] ) ) {
 		$t_qs = $GLOBALS['QUERY_STRING'];
-	} elseif( isset( $QUERY_STRING ) && $QUERY_STRING != '' ) {
+	} else if( isset( $QUERY_STRING ) && $QUERY_STRING != '' ) {
 		$t_qs = $QUERY_STRING;
 	}
 
 	if ( isset( $t_qs ) && ereg( 'wsdl', $t_qs ) ){
 		return false;
-	} elseif ( $p_data == '' && $p_service->wsdl ) {
+	} else if ( $p_data == '' && $p_service->wsdl ) {
 		return false;
 	} else {
 		return true;

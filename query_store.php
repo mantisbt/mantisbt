@@ -87,4 +87,3 @@
 	} else {
 		print_header_redirect( 'view_all_bug_page.php' );
 	}
-?>

@@ -36,9 +36,11 @@ $t_project_id = helper_get_current_project();
 
 $data_category_arr = array();
 $data_count_arr = array();
+$t_bug_table = db_get_table( 'mantis_bug_table' );
+$t_category_table = db_get_table( 'mantis_category_table' );
 $query = "SELECT c.name AS name, COUNT(name) as count
-		FROM mantis_bug_table
-		JOIN mantis_category_table AS c
+		FROM $t_bug_table
+		JOIN $t_category_table AS c
 		WHERE project_id=" . db_param() . "
 		GROUP BY name
 		ORDER BY name";

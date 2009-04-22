@@ -104,13 +104,12 @@
 <div align="center">
 <?php
 	$t_redirect_url = $f_form_page === 'account' ? 'account_manage_columns_page.php' : 'manage_config_columns_page.php';
-	html_page_top1();
-	html_meta_redirect( $t_redirect_url );
-	html_page_top2();
+	html_page_top( null, $t_redirect_url );
 	echo '<br />';
 	echo lang_get( 'operation_successful' ) . '<br />';
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

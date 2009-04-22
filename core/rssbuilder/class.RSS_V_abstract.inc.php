@@ -9,7 +9,7 @@ require_once 'class.RSSBase.inc.php';
 * @license GNU General Public License v3
 * @link http://code.google.com/p/flaimo-php/
 * @package RSS
-* @version 2.2
+* @version 2.2.1
 */
 abstract class RSS_V_abstract extends RSSBase implements RSS {
 

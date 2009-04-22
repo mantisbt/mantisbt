@@ -29,8 +29,7 @@
 
 	access_ensure_global_level( config_get( 'create_project_threshold' ) );
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	print_manage_menu( 'manage_proj_create_page.php' );
 
@@ -40,9 +39,9 @@
 <br />
 <div align="center">
 <form method="post" action="manage_proj_create.php">
-<?php 
+<?php
 	echo form_security_field( 'manage_proj_create' );
-	if ( null !== $f_parent_id ) { 
+	if ( null !== $f_parent_id ) {
 		$f_parent_id = (int) $f_parent_id;
 ?>
 <input type="hidden" name="parent_id" value="<?php echo $f_parent_id ?>">
@@ -104,8 +103,9 @@
 		<input type="checkbox" name="inherit_parent" checked="checked" />
 	</td>
 </tr>
-<?php } ?>
-<?php
+<?php 
+	} 
+
 	if ( config_get( 'allow_file_upload' ) ) {
 	?>
 		<tr class="row-2">
@@ -139,4 +139,5 @@
 </form>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

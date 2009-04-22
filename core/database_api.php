@@ -84,13 +84,13 @@ $g_db_param_count = 0;
 function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_db_schema = null, $p_pconnect = false ) {
 	global $g_db_connected, $g_db;
 	$t_db_type = config_get_global( 'db_type' );
-	
+
 	if( !db_check_database_support( $t_db_type ) ) {
 		error_parameters( 0, 'PHP Support for database is not enabled' );
 		trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
 	}
-	
-	if( $p_dsn === false ) {		
+
+	if( $p_dsn === false ) {
 		$g_db = ADONewConnection( $t_db_type );
 
 		if( $p_pconnect ) {
@@ -111,7 +111,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 			if( strtolower( lang_get( 'charset' ) ) === 'utf-8' ) {
 				db_query_bound( 'SET NAMES UTF8' );
 			}
-		} elseif( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
+		} else if( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
 			$t_result2 = db_query_bound( 'set schema ' . $p_db_schema );
 			if( $t_result2 === false ) {
 				db_error();
@@ -203,6 +203,22 @@ function db_is_pgsql() {
 		case 'postgres64':
 		case 'postgres7':
 		case 'pgsql':
+			return true;
+	}
+
+	return false;
+}
+
+/**
+ * Checks if the database driver is MS SQL
+ * @return bool true if postgres
+ */
+function db_is_mssql() {
+	$t_db_type = config_get_global( 'db_type' );
+
+	switch( $t_db_type ) {
+		case 'mssql':
+		case 'odbc_mssql':
 			return true;
 	}
 
@@ -335,13 +351,13 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 					if( is_null( $arr_parms[$i - 1] ) ) {
 						$replace = 'NULL';
 					}
-					elseif( is_string( $arr_parms[$i - 1] ) ) {
+					else if( is_string( $arr_parms[$i - 1] ) ) {
 						$replace = "'" . $arr_parms[$i - 1] . "'";
 					}
-					elseif( is_integer( $arr_parms[$i - 1] ) || is_float( $arr_parms[$i - 1] ) ) {
+					else if( is_integer( $arr_parms[$i - 1] ) || is_float( $arr_parms[$i - 1] ) ) {
 						$replace = (float) $arr_parms[$i - 1];
 					}
-					elseif( is_bool( $arr_parms[$i - 1] ) ) {
+					else if( is_bool( $arr_parms[$i - 1] ) ) {
 						switch( $t_db_type ) {
 							case 'pgsql':
 								$replace = "'" . $arr_parms[$i - 1] . "'";
@@ -433,12 +449,19 @@ function db_fetch_array( &$p_result ) {
 		$t_row = $p_result->GetRowAssoc( false );
 		static $t_array_result;
 		static $t_array_fields;
-		
+
 		if ($t_array_result != $p_result) {
+			// new query
 			$t_array_result = $p_result;
 			$t_array_fields = null;
+		} else {
+			if ( $t_array_fields === null ) {
+				$p_result->MoveNext();
+				return $t_row;
+			}
 		}
 
+		$t_convert = false;
 		$t_fieldcount = $p_result->FieldCount();
 		for( $i = 0; $i < $t_fieldcount; $i++ ) {
 			if (isset( $t_array_fields[$i] ) ) {
@@ -457,10 +480,15 @@ function db_fetch_array( &$p_result ) {
 							$t_row[$t_field->name] = true;
 							break;
 					}
+					$t_convert= true;
 					break;
 				default :
 					break;
 			}
+		}
+
+		if ( $t_convert == false ) {
+			$t_array_fields = null;
 		}
 		$p_result->MoveNext();
 		return $t_row;

@@ -39,18 +39,17 @@
 	$t_query_arr = filter_db_get_available_queries();
 
 	# Special case: if we've deleted our last query, we have nothing to show here.
-	if ( sizeof( $t_query_arr ) < 1 ) {
+	if ( count( $t_query_arr ) < 1 ) {
 		print_header_redirect( 'view_all_bug_page.php' );
 	}
 
 	compress_enable();
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	$t_use_query_url = 'view_all_set.php?type=3&amp;source_query_id=';
 	$t_delete_query_url = 'query_delete_page.php?source_query_id=';
-	
+
 	$t_rss_enabled = config_get( 'rss_enabled' );
 ?>
 <br />
@@ -99,4 +98,5 @@
 ?>
 </table>
 </div>
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

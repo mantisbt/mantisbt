@@ -102,9 +102,9 @@ function freemind_export_bug( $p_bug, &$p_bug_list ) {
 
 	if( $p_bug->status >= CLOSED ) {
 		echo '<icon BUILTIN="button_ok"/>', $t_nl;
-	} elseif( bug_is_resolved( $t_id ) ) {
+	} else if( bug_is_resolved( $t_id ) ) {
 		echo '<icon BUILTIN="button_ok"/>', $t_nl;
-	} elseif( $p_bug->handler_id != NO_USER ) {
+	} else if( $p_bug->handler_id != NO_USER ) {
 		echo '<icon BUILTIN="pencil"/>', $t_nl;
 	} else {
 		echo '<icon BUILTIN="bookmark"/>', $t_nl;
@@ -248,7 +248,7 @@ function freemind_find_descendents( &$p_rows ) {
 					array_push( $v_bug_list[$t_bug_id]->parents, $t_relationship->src_bug_id );
 				}
 			}
-			elseif( $t_relationship->type == BUG_RELATED ) {
+			else if( $t_relationship->type == BUG_RELATED ) {
 				array_push( $v_bug_list[$t_bug_id]->related_to, $t_relationship->src_bug_id );
 			}
 		}
@@ -260,7 +260,7 @@ function freemind_find_descendents( &$p_rows ) {
 					$v_bug_list[$t_bug_id]->children[] = $t_relationship->dest_bug_id;
 				}
 			}
-			elseif( $t_relationship->type == BUG_RELATED ) {
+			else if( $t_relationship->type == BUG_RELATED ) {
 				array_push( $v_bug_list[$t_bug_id]->related_to, $t_relationship->dest_bug_id );
 			}
 		}

@@ -36,6 +36,10 @@
  * @return string Security token string
  */
 function form_security_token( $p_form_name ) {
+	if ( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
+		return '';
+	}
+
 	$t_tokens = session_get( 'form_security_tokens', array() );
 
 	# Create a new array for the form name if necessary
@@ -62,6 +66,10 @@ function form_security_token( $p_form_name ) {
  * @return string Hidden form element to output
  */
 function form_security_field( $p_form_name ) {
+	if ( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
+		return '';
+	}
+
 	$t_string = form_security_token( $p_form_name );
 
 	# Create the form element HTML string for the security token
@@ -78,6 +86,10 @@ function form_security_field( $p_form_name ) {
  * @return string Hidden form element to output
  */
 function form_security_param( $p_form_name ) {
+	if ( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
+		return '';
+	}
+
 	$t_string = form_security_token( $p_form_name );
 
 	# Create the GET parameter to be used in a URL for a secure link
@@ -96,6 +108,10 @@ function form_security_param( $p_form_name ) {
  * @return boolean Form is valid
  */
 function form_security_validate( $p_form_name ) {
+	if ( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
+		return true;
+	}
+
 	$t_tokens = session_get( 'form_security_tokens', array() );
 
 	# Short-circuit if we don't have any tokens for the given form name
@@ -142,6 +158,10 @@ function form_security_validate( $p_form_name ) {
  * @param string Form name
  */
 function form_security_purge( $p_form_name ) {
+	if ( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
+		return;
+	}
+
 	$t_tokens = session_get( 'form_security_tokens', array() );
 
 	# Short-circuit if we don't have any tokens for the given form name

@@ -27,8 +27,7 @@
 
 	$t_core_path = config_get( 'core_path' );
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	access_ensure_project_level( config_get( 'create_permalink_threshold' ) );
 
@@ -43,13 +42,12 @@
 	$t_create_short_url = config_get( 'create_short_url' );
 
 	if ( !is_blank( $t_create_short_url ) ) {
-		print_bracket_link( 
-			sprintf( $t_create_short_url, $f_url ), 
-			lang_get( 'create_short_link' ), 
+		print_bracket_link(
+			sprintf( $t_create_short_url, $f_url ),
+			lang_get( 'create_short_link' ),
 			/* new window = */ true );
 	}
 ?>
 </div>
 <?php
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

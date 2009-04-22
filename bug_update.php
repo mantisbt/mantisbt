@@ -86,7 +86,7 @@
 	} else {
 		$t_bug_data->due_date = db_unixtimestamp ( $t_bug_data->due_date, true ) + 1;
 	}
-	
+
 	$t_bug_data->description		= gpc_get_string( 'description', $t_bug_data->description );
 	$t_bug_data->steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', $t_bug_data->steps_to_reproduce );
 	$t_bug_data->additional_information	= gpc_get_string( 'additional_information', $t_bug_data->additional_information );
@@ -98,6 +98,7 @@
 
 	# Handle auto-assigning
 	if ( ( NEW_ == $t_bug_data->status )
+	  && ( $t_bug_data->status == $t_old_bug_status )
 	  && ( 0 != $t_bug_data->handler_id )
 	  && ( ON == config_get( 'auto_set_status_to_assigned' ) ) ) {
 		$t_bug_data->status = config_get( 'bug_assigned_status' );
@@ -137,8 +138,10 @@
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
-		# Only update the field if it is posted 
-		if ( !gpc_isset_custom_field( $t_id, $t_def['type'] ) ) {
+		# Only update the field if it is posted, 
+		#	or if it is empty, and the current value isn't the default 
+		if ( !gpc_isset_custom_field( $t_id, $t_def['type'] ) && 
+				( custom_field_get_value( $t_id, $f_bug_id ) == $t_def['default_value'] ) ) {
 			continue;
 		}
 
@@ -215,4 +218,3 @@
 	helper_call_custom_function( 'issue_update_notify', array( $f_bug_id ) );
 
 	print_successful_redirect_to_bug( $f_bug_id );
-?>

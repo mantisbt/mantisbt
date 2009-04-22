@@ -35,16 +35,16 @@
 	$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
 
 	# redirects to all_bug_page if nothing is selected
-	if ( is_blank( $f_action ) || ( 0 == sizeof( $f_bug_arr ) ) ) {
+	if ( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
 		print_header_redirect( 'view_all_bug_page.php' );
 	}
 
 	# run through the issues to see if they are all from one project
 	$t_project_id = ALL_PROJECTS;
 	$t_multiple_projects = false;
-	
+
 	bug_cache_array_rows( $f_bug_arr );
-	
+
 	foreach( $f_bug_arr as $t_bug_id ) {
 		$t_bug = bug_get( $t_bug_id );
 		if ( $t_project_id != $t_bug->project_id ) {
@@ -77,7 +77,7 @@
 	}
 
 	$t_custom_group_actions = config_get( 'custom_group_actions' );
-	
+
 	foreach( $t_custom_group_actions as $t_custom_group_action ) {
 		if ( $f_action == $t_custom_group_action['action'] ) {
 			require_once( $t_custom_group_action['form_page'] );
@@ -173,7 +173,7 @@
 			$t_button_title			= lang_get( 'view_status_group_bugs_button' );
 			$t_form					= 'view_status';
 			break;
-		
+
 		case 'UP_FIXED_IN_VERSION':
 			$t_question_title		= lang_get( 'fixed_in_version_bugs_conf_msg' );
 			$t_button_title			= lang_get( 'fixed_in_version_group_bugs_button' );
@@ -198,7 +198,7 @@
 	}
 
 	bug_group_action_print_top();
-	
+
 	if ( $t_multiple_projects ) {
 		echo '<p class="bold">' . lang_get( 'multiple_projects' ) . '</p>';
 	}
@@ -234,7 +234,7 @@ if ( !$t_finished ) {
 
 			# if there is only one issue, use its current value as default, otherwise,
 			# use the default value specified in custom field definition.
-			if ( sizeof( $f_bug_arr ) == 1 ) {
+			if ( count( $f_bug_arr ) == 1 ) {
 				$t_bug_id = $f_bug_arr[0];
 			}
 
@@ -361,4 +361,3 @@ if( $t_bugnote ) {
 
 <?php
 	bug_group_action_print_bottom();
-?>

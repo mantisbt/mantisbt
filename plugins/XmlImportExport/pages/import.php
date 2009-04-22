@@ -16,8 +16,7 @@
 
 auth_reauthenticate( );
 
-html_page_top1( lang_get( 'manage_import_issues_link' ) );
-html_page_top2( );
+html_page_top( lang_get( 'manage_import_issues_link' ) );
 
 $t_this_page = plugin_page('import'); //FIXME with plugins this does not work...
 print_manage_menu( $t_this_page );
@@ -121,4 +120,4 @@ if( ALL_PROJECTS == $t_project_id ) {
 
 </div>
 <?php
-html_page_bottom1( __FILE__ );
+html_page_bottom( __FILE__ );

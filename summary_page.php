@@ -38,31 +38,8 @@
 
 	$t_user_id = auth_get_current_user_id();
 
-	# @@@ giallu: this block of code is duplicated from helper_project_specific_where
-	# the only diff is the commented line below: can we do better than this ?
-	if ( ALL_PROJECTS == $f_project_id ) {
-		$t_topprojects = $t_project_ids = user_get_accessible_projects( $t_user_id );
-		foreach ( $t_topprojects as $t_project ) {
-			$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $t_user_id, $t_project ) );
-		}
-
-		$t_project_ids = array_unique( $t_project_ids );
-	} else {
-		# access_ensure_project_level( VIEWER, $p_project_id );
-		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $f_project_id );
-		array_unshift( $t_project_ids, $f_project_id );
-	}
-
-	$t_project_ids = array_map( 'db_prepare_int', $t_project_ids );
-
-	if ( 0 == count( $t_project_ids ) ) {
-		$specific_where = ' 1 <> 1';
-	} elseif ( 1 == count( $t_project_ids ) ) {
-		$specific_where = ' project_id=' . $t_project_ids[0];
-	} else {
-		$specific_where = ' project_id IN (' . join( ',', $t_project_ids ) . ')';
-	}
-	# end @@@ block
+	$t_project_ids = user_get_all_accessible_projects( $t_user_id, $f_project_id);
+	$specific_where = helper_project_specific_where( $f_project_id, $t_user_id);
 
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_history_table = db_get_table( 'mantis_bug_history_table' );
@@ -71,11 +48,11 @@
 	# the issue may have passed through the status we consider resolved
 	#  (e.g., bug is CLOSED, not RESOLVED). The linkage to the history field
 	#  will look up the most recent 'resolved' status change and return it as well
-	$query = "SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status 
-        FROM $t_bug_table b LEFT JOIN $t_history_table h 
-            ON b.id = h.bug_id  AND h.type=0 AND h.field_name='status' AND h.new_value='$t_resolved'  
+	$query = "SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status
+        FROM $t_bug_table b LEFT JOIN $t_history_table h
+            ON b.id = h.bug_id  AND h.type=0 AND h.field_name='status' AND h.new_value='$t_resolved'
             WHERE b.status >='$t_resolved' AND $specific_where
-            GROUP BY b.id, b.status, b.date_submitted, b.last_updated 
+            GROUP BY b.id, b.status, b.date_submitted, b.last_updated
             ORDER BY b.id ASC";
 	$result = db_query( $query );
 	$bug_count = db_num_rows( $result );
@@ -85,7 +62,7 @@
 	$t_total_time   = 0;
 	for ($i=0;$i<$bug_count;$i++) {
 		$row = db_fetch_array( $result );
-		$t_date_submitted = db_unixtimestamp( $row['date_submitted'] );		
+		$t_date_submitted = db_unixtimestamp( $row['date_submitted'] );
 		$t_id = $row['id'];
 		$t_status = $row['status'];
 		if ( $row['hist_update'] !== NULL ) {
@@ -93,7 +70,7 @@
         } else {
         	$t_last_updated   = db_unixtimestamp( $row['last_updated'] );
         }
-		  
+
 		if ($t_last_updated < $t_date_submitted) {
 			$t_last_updated   = 0;
 			$t_date_submitted = 0;
@@ -123,14 +100,14 @@
 		$t_orcttab .= $t_orct_s;
 		$t_orcttab .= '</td>';
 	}
+
+	html_page_top( lang_get( 'summary_link' ) );
 ?>
-<?php html_page_top1( lang_get( 'summary_link' ) ) ?>
-<?php html_page_top2() ?>
 
 <br />
-<?php print_summary_menu( 'summary_page.php' ) ?>
-
-<?php print_menu_graph() ?>
+<?php 
+	print_summary_menu( 'summary_page.php' );
+	print_menu_graph(); ?>
 <br />
 <table class="width100" cellspacing="1">
 <tr>
@@ -140,8 +117,8 @@
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<?php # PROJECT # ?>
-		<?php if ( 1 < count( $t_project_ids ) ) { ?>
+		<?php # PROJECT # 
+			if ( 1 < count( $t_project_ids ) ) { ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -155,7 +132,6 @@
 		<br />
 		<?php } ?>
 
-		<?php # STATUS # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -168,7 +144,6 @@
 
 		<br />
 
-		<?php # SEVERITY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -181,7 +156,6 @@
 
 		<br />
 
-		<?php # CATEGORY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -194,7 +168,6 @@
 
 		<br />
 
-		<?php # MISCELLANEOUS # ?>
 		<table class="width100">
 		<tr>
 			<td class="form-title" colspan="5">
@@ -241,7 +214,6 @@
 
 		<br />
 
-		<?php # DEVELOPER # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -256,7 +228,6 @@
 
 
 	<td width="50%">
-		<?php # DATE # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title"><?php echo lang_get( 'by_date' ); ?></td>
@@ -269,7 +240,6 @@
 
 		<br />
 
-		<?php # ACTIVITY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" width="86%"><?php echo lang_get( 'most_active' ); ?></td>
@@ -280,7 +250,6 @@
 
 		<br />
 
-		<?php # LONGEST OPEN # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" width="86%"><?php echo lang_get( 'longest_open' ); ?></td>
@@ -291,7 +260,6 @@
 
 		<br />
 
-		<?php # RESOLUTION # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -304,7 +272,6 @@
 
 		<br />
 
-		<?php # PRIORITY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -317,7 +284,6 @@
 
 		<br />
 
-		<?php # REPORTER # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -330,7 +296,6 @@
 
 		<br />
 
-		<?php # REPORTER EFFECTIVENESS # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -353,7 +318,6 @@
 
 <tr valign="top">
 	<td colspan="2">
-		<?php # REPORTER / RESOLUTION # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -376,7 +340,6 @@
 
 <tr valign="top">
 	<td colspan="2">
-		<?php # DEVELOPER / RESOLUTION # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
@@ -398,4 +361,5 @@
 </tr>
 </table>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

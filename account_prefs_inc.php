@@ -52,8 +52,9 @@
 
 	    # prefix data with u_
 		$t_pref = user_pref_get( $p_user_id );
+
+	# Account Preferences Form BEGIN
 ?>
-<?php # Account Preferences Form BEGIN ?>
 <br />
 <div align="center">
 <form method="post" action="account_prefs_update.php">
@@ -321,4 +322,3 @@
 
 <?php
 	} # end of edit_account_prefs()
-?>

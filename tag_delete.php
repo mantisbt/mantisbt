@@ -43,5 +43,5 @@
 	tag_delete( $f_tag_id );
 
 	form_security_purge( 'tag_delete' );
-	
+
 	print_successful_redirect( config_get( 'default_home_page' ) );

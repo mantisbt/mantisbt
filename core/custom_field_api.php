@@ -382,7 +382,7 @@ function custom_field_has_write_access( $p_field_id, $p_bug_id, $p_user_id = nul
 }
 
 /**
- * create a new custom field with the name $p_name 
+ * create a new custom field with the name $p_name
  * the definition are the default values and can be changes later
  * return the ID of the new definition
  * @param string $p_name custom field name
@@ -670,7 +670,7 @@ function custom_field_link( $p_field_id, $p_project_id ) {
 /**
  * Remove a custom field from a project
  * return true on success, false on failure
- * 
+ *
  * The values for the custom fields are not deleted.  This is to allow for the
  * case where a bug is moved to another project that has the field, or the
  * field is linked again to the project.
@@ -1168,7 +1168,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
 			if( !is_blank( $t_valid_regexp ) && !is_blank( $p_value ) ) {
 				$t_valid &= ereg( $t_valid_regexp, $p_value );
 			}
-			// check string length 
+			// check string length
 			$t_valid &= ( 0 == $t_length_min ) || ( $t_length > $t_length_min );
 			$t_valid &= ( 0 == $t_length_max ) || ( $t_length <= $t_length_max );
 			break;
@@ -1180,8 +1180,8 @@ function custom_field_validate( $p_field_id, $p_value ) {
 			$t_valid &= ( $t_length == 0 ) || is_numeric( $p_value ) || is_float( $p_value );
 			break;
 		case CUSTOM_FIELD_TYPE_DATE:
-			// gpc_get_cf for date returns the value from strftime 
-			// either false (php >= 5.1)  or -1 (php < 5.1) for failure 
+			// gpc_get_cf for date returns the value from strftime
+			// either false (php >= 5.1)  or -1 (php < 5.1) for failure
 			$t_valid &= ( $p_value !== false ) && ( $p_value > 0 );
 			break;
 		case CUSTOM_FIELD_TYPE_ENUM:
@@ -1202,7 +1202,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
  * @param string $p_possible_values
  * @return string|array
  * @access public
- */               
+ */
 function custom_field_prepare_possible_values( $p_possible_values ) {
 	$t_possible_values = $p_possible_values;
 
@@ -1326,7 +1326,7 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value ) {
 
 	if (! custom_field_validate( $p_field_id, $p_value ) )
 		return false;
-		
+
 	$t_name = custom_field_get_field( $p_field_id, 'name' );
 	$t_type = custom_field_get_field( $p_field_id, 'type' );
 	$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );

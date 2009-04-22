@@ -51,24 +51,24 @@ $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Selected Issues';
 
 # new strings:
-$s_all_projects = "visi projekti";
-$s_move_bugs = "Pârvietot BUGu";
-$s_operation_successful = "Darbîba veiksmîga.";
-$s_date_order = "Datumu kârtîba";
-$s_print_all_bug_page_link = "Atskaites izdruka";
-$s_csv_export = "Eksports uz CSV";
-$s_login_anonymously = "Anonîmais lietotâjs";
+$s_all_projects = 'visi projekti';
+$s_move_bugs = 'Pârvietot BUGu';
+$s_operation_successful = 'Darbîba veiksmîga.';
+$s_date_order = 'Datumu kârtîba';
+$s_print_all_bug_page_link = 'Atskaites izdruka';
+$s_csv_export = 'Eksports uz CSV';
+$s_login_anonymously = 'Anonîmais lietotâjs';
 $s_anonymous = 'Anonymous';
-$s_jump_to_bugnotes = "Pârlekt uz komentâriem";
-$s_public_project_msg = "Ðis projekts ir PUBLISKI pieejams. Visi lietotâji piekïûst ðim projektam.";
-$s_private_project_msg = "Ðis projekts publiski nav pieejams. Tikai administrâtori un speciâli pieliktiem lietotâjiem ir pieeja.";
-$s_access_level_project = "Pieejas lîmenis projektam";
-$s_view_submitted_bug_link = "Skatît reìistrçtu íïûdu %1$s";
-$s_assigned_projects = "Pieðíirtie projekti";
-$s_unassigned_projects = "Nepieðíirtie projekti";
-$s_print = "Drukât";
-$s_jump = "Pâriet";
-$s_copy_users = "Kopçt lietotâjus";
+$s_jump_to_bugnotes = 'Pârlekt uz komentâriem';
+$s_public_project_msg = 'Ðis projekts ir PUBLISKI pieejams. Visi lietotâji piekïûst ðim projektam.';
+$s_private_project_msg = 'Ðis projekts publiski nav pieejams. Tikai administrâtori un speciâli pieliktiem lietotâjiem ir pieeja.';
+$s_access_level_project = 'Pieejas lîmenis projektam';
+$s_view_submitted_bug_link = 'Skatît reìistrçtu íïûdu %1$s';
+$s_assigned_projects = 'Pieðíirtie projekti';
+$s_unassigned_projects = 'Nepieðíirtie projekti';
+$s_print = 'Drukât';
+$s_jump = 'Pâriet';
+$s_copy_users = 'Kopçt lietotâjus';
 $s_copy_categories_from = 'Kopçt kategorijas no';
 $s_copy_categories_to = 'Kopçt kategorijas uz';
 $s_copy_users_from = 'Copy Users From';
@@ -189,16 +189,16 @@ $s_bugnote_description = 'Bugnote description';
 $s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = "darbîbas izpildes rezultâtâ notikusi kïûda.  Iespçjams, Jûs vçlaties par to ziòot savam lokâlajam administrâtoram.";
-$MANTIS_ERROR[ERROR_SQL] = "Notikusi SQL kïûda. Lûdzu ziòojiet par to ";
-$MANTIS_ERROR[ERROR_REPORT] = "Jûsu ziòojumâ konstatçtas kïûdas.";
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "Fails neeksistç";
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "Ðâdi faili ir aizliegti";
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "Katalogs neeksistç. Pârbaudiet projekta opcijas.";
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "Faila dublikâts. Vispirms izdzçsiet veco failu.";
+$MANTIS_ERROR[ERROR_GENERIC]            = 'darbîbas izpildes rezultâtâ notikusi kïûda.  Iespçjams, Jûs vçlaties par to ziòot savam lokâlajam administrâtoram.';
+$MANTIS_ERROR[ERROR_SQL] = 'Notikusi SQL kïûda. Lûdzu ziòojiet par to ';
+$MANTIS_ERROR[ERROR_REPORT] = 'Jûsu ziòojumâ konstatçtas kïûdas.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Fails neeksistç';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'Ðâdi faili ir aizliegti';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Katalogs neeksistç. Pârbaudiet projekta opcijas.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Faila dublikâts. Vispirms izdzçsiet veco failu.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'Projekts ar ðâdu nosaukumu jau eksistç.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "Nav aizpildîti visi lauki.  Pârbaudiet ievades pareizîbu.";
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "Ðis lietotâjs ir aizsargâts. Jûs nevarat labot opcijas.";
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Nav aizpildîti visi lauki.  Pârbaudiet ievades pareizîbu.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Ðis lietotâjs ir aizsargâts. Jûs nevarat labot opcijas.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Pieeja liegta.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
@@ -261,10 +261,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'ERROR: There is already a relationship between these two issues.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'ERROR: Relationship not found.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Access denied: The issue %d requires higher access level.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue can\'t be related to itself.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
@@ -279,45 +279,43 @@ $s_login_error = 'Jûsu pieeja ir atslçgta vai ievadîts nepareizs lietotâja vârds
 $s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 # General Strings
-$s_go_back = "Atpakaï";
-$s_proceed = "Nospiediet, lai turpinâtu";
+$s_go_back = 'Atpakaï';
+$s_proceed = 'Nospiediet, lai turpinâtu';
 
-$s_switch = "Pârslçgties";
-$s_logged_in_as = "Piereìistrçts kâ";
+$s_switch = 'Pârslçgties';
+$s_logged_in_as = 'Piereìistrçts kâ';
 
 $s_prefix_for_deleted_users = 'user';
 
-$s_administrator = "Administrâtors";
-$s_myself = "Myself";
+$s_administrator = 'Administrâtors';
+$s_myself = 'Myself';
 $s_default_access_level = 'Default access level';
 
 $s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
-$s_access_levels_enum_string      = "10:skatîtâjs,25:ziòotâjs,40:redaktors,55:izstrâdâtâjs,70:vadîtâjs,90:administrâtors";
-$s_project_status_enum_string     = "10:beta,30:relîze,50:stabils,70:novecojis";
-$s_project_view_state_enum_string = "10:publisks,50:privâts";
+$s_access_levels_enum_string      = '10:skatîtâjs,25:ziòotâjs,40:redaktors,55:izstrâdâtâjs,70:vadîtâjs,90:administrâtors';
+$s_project_status_enum_string     = '10:beta,30:relîze,50:stabils,70:novecojis';
+$s_project_view_state_enum_string = '10:publisks,50:privâts';
 $s_view_state_enum_string         = '10:publisks,50:privâts';
 
-$s_priority_enum_string           = "10:nav,20:zema,30:normâla,40:augsta,50:svarîgi,60:steidzama";
-$s_severity_enum_string           = "10:jauna iespçja/funkcija,20:triviâli,30:teksts/uzraksts,40:nebûtisks uzlabojums,50:uzlabojums,60:bûtisks uzlabojums,70:avârija,80:darbs nav iespçjams";
-$s_reproducibility_enum_string    = "10:vienmçr,30:daþreiz,50:kâ kuru reizi,70:nav mçìinâts,90:nevar atkârtot,100:nav datu";
-$s_status_enum_string             = "10:jauns,20:nepiecieðama papildinformâcija,30:atzîts,40:apstiprinâts,50:tiek risinâts,80:ir atrisinâts,90:aizvçrts";
-$s_resolution_enum_string         = "10:atvçrts,20:izlabots/realizçts,30:atkârtoti atvçrts,40:nevar atkârtot,50:nav labojams,60:dublikâts,70:nav kïûda,80:atlikts,90:netiks labots/realizçts";
-$s_projection_enum_string         = "10:nav,30:sîkas izmaiòas,50:izmaiòas,70:bûtiskas izmaiòas,90:pârprojektçðana";
-$s_eta_enum_string                = "10:nav,20:< 1 dienu,30:2-3 dienas,40:< 1 nedçïu,50:< 1 mçnesi,60:> 1 mçnesi";
+$s_priority_enum_string           = '10:nav,20:zema,30:normâla,40:augsta,50:svarîgi,60:steidzama';
+$s_severity_enum_string           = '10:jauna iespçja/funkcija,20:triviâli,30:teksts/uzraksts,40:nebûtisks uzlabojums,50:uzlabojums,60:bûtisks uzlabojums,70:avârija,80:darbs nav iespçjams';
+$s_reproducibility_enum_string    = '10:vienmçr,30:daþreiz,50:kâ kuru reizi,70:nav mçìinâts,90:nevar atkârtot,100:nav datu';
+$s_status_enum_string             = '10:jauns,20:nepiecieðama papildinformâcija,30:atzîts,40:apstiprinâts,50:tiek risinâts,80:ir atrisinâts,90:aizvçrts';
+$s_resolution_enum_string         = '10:atvçrts,20:izlabots/realizçts,30:atkârtoti atvçrts,40:nevar atkârtot,50:nav labojams,60:dublikâts,70:nav kïûda,80:atlikts,90:netiks labots/realizçts';
+$s_projection_enum_string         = '10:nav,30:sîkas izmaiòas,50:izmaiòas,70:bûtiskas izmaiòas,90:pârprojektçðana';
+$s_eta_enum_string                = '10:nav,20:< 1 dienu,30:2-3 dienas,40:< 1 nedçïu,50:< 1 mçnesi,60:> 1 mçnesi';
 $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Account registration';
-$s_new_account_username = "Lietotâja vârds: ";
-$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_username = 'Lietotâja vârds: ';
 $s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = 'Remote IP address: ';
 $s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
@@ -338,119 +336,119 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Buga pieteikumam pielikta piezîme.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'The following issue has been set as DUPLICATE OF issue %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'The issue %s has been set as DUPLICATE OF the following issue.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'The following issue has been set as RELATED TO issue %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'The following issue has been set PARENT OF issue %s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'The following issue has been set CHILD OF issue %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'The following issue has been UNset as DUPLICATE OF issue %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'The issue %s has been UNset as DUPLICATE OF the following issue.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'The following issue has been UNset as RELATED TO issue %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'The following issue has been UNset PARENT OF issue %s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'The following issue has been UNset CHILD OF issue %s.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'The RELATED issue %s has been RESOLVED.';
+$s_email_notification_title_for_action_relationship_child_closed = 'The RELATED issue %s has been CLOSED.';
 
-$s_email_reporter = "Lietotâjs";
-$s_email_handler = "Atbildîgais";
-$s_email_project = "Projekts";
-$s_email_bug = "kïûdas ID";
-$s_email_category = "Kategorija";
-$s_email_reproducibility = "Atkârtojamîba";
-$s_email_severity = "Kritiskums";
-$s_email_priority = "Prioritâte";
-$s_email_status = "Status";
-$s_email_resolution = "Risinâjums";
-$s_email_duplicate = "Dublikâti";
+$s_email_reporter = 'Lietotâjs';
+$s_email_handler = 'Atbildîgais';
+$s_email_project = 'Projekts';
+$s_email_bug = 'kïûdas ID';
+$s_email_category = 'Kategorija';
+$s_email_reproducibility = 'Atkârtojamîba';
+$s_email_severity = 'Kritiskums';
+$s_email_priority = 'Prioritâte';
+$s_email_status = 'Status';
+$s_email_resolution = 'Risinâjums';
+$s_email_duplicate = 'Dublikâti';
 $s_email_fixed_in_version = 'Fixed in Version';
-$s_email_date_submitted = "Izveides datums";
-$s_email_last_modified = "Pçdçjâ korekcija";
-$s_email_summary =  "Îss apraksts";
-$s_email_description = "Apraksts";
+$s_email_date_submitted = 'Izveides datums';
+$s_email_last_modified = 'Pçdçjâ korekcija';
+$s_email_summary = 'Îss apraksts';
+$s_email_description = 'Apraksts';
 
 # account_delete.php
-$s_account_protected_msg = "Lietotâja konts ir aizsargâts, nevar veikt izmaiòas...";
-$s_account_removed_msg = "Jûsu lietotâjs tika izdzçsts...";
+$s_account_protected_msg = 'Lietotâja konts ir aizsargâts, nevar veikt izmaiòas...';
+$s_account_removed_msg = 'Jûsu lietotâjs tika izdzçsts...';
 
 # account_delete_page.php
-$s_confirm_delete_msg = "Vai esat pârliecinâti, ka vçlaties sevi dzçst no sistçmas?";
-$s_delete_account_button = "Lietotâja dzçðana";
+$s_confirm_delete_msg = 'Vai esat pârliecinâti, ka vçlaties sevi dzçst no sistçmas?';
+$s_delete_account_button = 'Lietotâja dzçðana';
 
 # account_page.php
-$s_manage_profiles_link = "Profilu vadîba";
-$s_change_preferences_link = "Opcijas";
-$s_edit_account_title = "Lietotâja konta laboðana";
-$s_username = "Lietotâjs";
+$s_manage_profiles_link = 'Profilu vadîba';
+$s_change_preferences_link = 'Opcijas';
+$s_edit_account_title = 'Lietotâja konta laboðana';
+$s_username = 'Lietotâjs';
 $s_realname = 'Real Name';
-$s_email = "E-pasts";
-$s_password = "Parole";
+$s_email = 'E-pasts';
+$s_password = 'Parole';
 $s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
-$s_confirm_password  = "Apstipriniet paroli";
-$s_access_level = "Pieejas lîmenis";
-$s_update_user_button = "Saglabât izmaiòas";
+$s_confirm_password  = 'Apstipriniet paroli';
+$s_access_level = 'Pieejas lîmenis';
+$s_update_user_button = 'Saglabât izmaiòas';
 $s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = "Lietotâja opcijas";
-$s_default_project = "Noklusçtais projekts";
-$s_advanced_report = "Paplaðinâts ziòojums";
-$s_advanced_view = "Paplaðinâta apskate";
-$s_advanced_update = "Paplaðinâta laboðana";
-$s_refresh_delay = "Ekrâna atjauninâðnas aizture";
-$s_redirect_delay = "Aizture veicot noteiktas darbîbas";
+$s_default_account_preferences_title = 'Lietotâja opcijas';
+$s_default_project = 'Noklusçtais projekts';
+$s_advanced_report = 'Paplaðinâts ziòojums';
+$s_advanced_view = 'Paplaðinâta apskate';
+$s_advanced_update = 'Paplaðinâta laboðana';
+$s_refresh_delay = 'Ekrâna atjauninâðnas aizture';
+$s_redirect_delay = 'Aizture veicot noteiktas darbîbas';
 $s_with_minimum_severity = 'With Minimum Severity of';
 $s_bugnote_order = 'Bugnotes Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';
-$s_email_on_new = "Paziòot par jaunumiem";
-$s_email_on_assigned = "Paziòot par atbildîgumu";
-$s_email_on_feedback = "Paziòot par papildinâjumiem(papildinformâcija)";
-$s_email_on_resolved = "Paziòot, ja ATRISINÂTS?";
-$s_email_on_closed = "Paziòot, ja AIZVÇRTS?";
-$s_email_on_reopened = "Paziòot, ja tiek atkârtoti ATVÇRTS";
-$s_email_on_bugnote_added = "Paziòot par jaunu komentâru";
-$s_email_on_status_change = "Paziòot par statusa maiòu";
-$s_email_on_priority_change = "Paziòot par prioritâtes maiòu";
+$s_email_on_new = 'Paziòot par jaunumiem';
+$s_email_on_assigned = 'Paziòot par atbildîgumu';
+$s_email_on_feedback = 'Paziòot par papildinâjumiem(papildinformâcija)';
+$s_email_on_resolved = 'Paziòot, ja ATRISINÂTS?';
+$s_email_on_closed = 'Paziòot, ja AIZVÇRTS?';
+$s_email_on_reopened = 'Paziòot, ja tiek atkârtoti ATVÇRTS';
+$s_email_on_bugnote_added = 'Paziòot par jaunu komentâru';
+$s_email_on_status_change = 'Paziòot par statusa maiòu';
+$s_email_on_priority_change = 'Paziòot par prioritâtes maiòu';
 $s_email_bugnote_limit = 'Email Bugnotes Limit';
-$s_language = "Valoda";
-$s_update_prefs_button = "Saglabât";
-$s_reset_prefs_button = "Atcelt";
+$s_language = 'Valoda';
+$s_update_prefs_button = 'Saglabât';
+$s_reset_prefs_button = 'Atcelt';
 
 # account_prefs_reset.php
-$s_prefs_reset_msg = "Opcijas tika atgrieztas uz sâkotnçjâm...";
+$s_prefs_reset_msg = 'Opcijas tika atgrieztas uz sâkotnçjâm...';
 
 # account_prefs_update.php
-$s_prefs_updated_msg = "Opcijas saglabâtas...";
+$s_prefs_updated_msg = 'Opcijas saglabâtas...';
 
 # account_profile_add.php
-$s_profile_added_msg = "Profils pievienots...";
+$s_profile_added_msg = 'Profils pievienots...';
 
 # account_profile_delete.php
-$s_profile_deleted_msg = "Profils nodzçsts...";
+$s_profile_deleted_msg = 'Profils nodzçsts...';
 
 # account_profile_edit_page.php
-$s_edit_profile_title = "Profila laboðana";
-$s_platform = "Platforma";
-$s_operating_system = "Operçtâjsistçma";
-$s_additional_description = "Papildus apraksts";
-$s_update_profile_button = "Saglabât profilu";
+$s_edit_profile_title = 'Profila laboðana';
+$s_platform = 'Platforma';
+$s_operating_system = 'Operçtâjsistçma';
+$s_additional_description = 'Papildus apraksts';
+$s_update_profile_button = 'Saglabât profilu';
 
 # account_profile_make_default.php
-$s_profile_defaulted_msg = "Noklusçtais profils saglabâts...";
+$s_profile_defaulted_msg = 'Noklusçtais profils saglabâts...';
 
 # account_profile_manage_page.php
-$s_add_profile_title = "Profila pievienoðana";
-$s_add_profile_button = "Pievienot profilu";
-$s_edit_or_delete_profiles_title = "Profilu laboðana un dzçðana";
-$s_edit_profile = "Profila laboðana";
-$s_make_default = "Izveidot profilu";
-$s_delete_profile = "Dzçst profilu";
-$s_select_profile = "Izvçlçties profilu";
-$s_submit_button = "Nosûtît";
+$s_add_profile_title = 'Profila pievienoðana';
+$s_add_profile_button = 'Pievienot profilu';
+$s_edit_or_delete_profiles_title = 'Profilu laboðana un dzçðana';
+$s_edit_profile = 'Profila laboðana';
+$s_make_default = 'Izveidot profilu';
+$s_delete_profile = 'Dzçst profilu';
+$s_select_profile = 'Izvçlçties profilu';
+$s_submit_button = 'Nosûtît';
 
 # account_profile_update.php
-$s_profile_updated_msg = "Profils saglabâts...";
+$s_profile_updated_msg = 'Profils saglabâts...';
 
 # account_sponsor_page.php
 $s_my_sponsorship = 'My Sponsorships';
@@ -471,7 +469,7 @@ $s_sponsor_show = 'Show All';
 $s_payment_updated = 'Payment information updated.';
 
 # account_update.php
-$s_account_updated_msg = "Lietotâja konts saglabâts...";
+$s_account_updated_msg = 'Lietotâja konts saglabâts...';
 $s_email_updated = 'Email address successfully updated';
 $s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
@@ -483,7 +481,7 @@ $s_password_updated = 'Password successfully updated';
 $s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
-$s_bug_assign_msg       = "Kïûdas atbildîgais tika noteikts...";
+$s_bug_assign_msg       = 'Kïûdas atbildîgais tika noteikts...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
@@ -498,45 +496,45 @@ $s_confirmed_bug_button = 'Confirm Issue';
 $s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
-$s_bug_close_msg       = "Kïûda aizvçrta...";
-$s_close_immediately   = "Nekavçjoties aizvçrt:";
+$s_bug_close_msg       = 'Kïûda aizvçrta...';
+$s_close_immediately   = 'Nekavçjoties aizvçrt:';
 
 # bug_close_page.php
-$s_closed_bug_title = "Aizvçrt kïûdu";
+$s_closed_bug_title = 'Aizvçrt kïûdu';
 
 # bug_delete.php
-$s_bug_deleted_msg = "Kïûda izdzçsta...";
+$s_bug_deleted_msg = 'Kïûda izdzçsta...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = "Vai esat pârliecinâti, ka vçlaties dzçst kïûdu?";
-$s_delete_bug_button = "Dzçst kïûdu";
+$s_delete_bug_sure_msg = 'Vai esat pârliecinâti, ka vçlaties dzçst kïûdu?';
+$s_delete_bug_button = 'Dzçst kïûdu';
 
 # bug_monitor.php
-$s_monitor_bug_button = "Ieslçgt kïûdas monitoringu";
-$s_unmonitor_bug_button = "Izslçgt kïûdas monitoringu";
+$s_monitor_bug_button = 'Ieslçgt kïûdas monitoringu';
+$s_unmonitor_bug_button = 'Izslçgt kïûdas monitoringu';
 
 # bug_file_add.php
-$s_file_upload_msg = "Fails ielâdçts";
+$s_file_upload_msg = 'Fails ielâdçts';
 
 # bug_file_upload_inc.php
-$s_upload_file = "Faila ielâdçðana";
-$s_select_file = "Izvçlçties failu";
-$s_upload_file_button = "Ielâdçt failu";
+$s_upload_file = 'Faila ielâdçðana';
+$s_select_file = 'Izvçlçties failu';
+$s_upload_file_button = 'Ielâdçt failu';
 $s_max_file_size = 'Max lielums';
 
 # bug_reopen.php
-$s_bug_reopened_msg = "Kïûda atkârtoti atvçrta...";
-$s_reopen_add_bugnote_title = "Pievienot atkârtotas atvçrðanas iemeslu";
-$s_bugnote_add_reopen_button = "Pielikt komentâru un atkârtoti atvçrt";
+$s_bug_reopened_msg = 'Kïûda atkârtoti atvçrta...';
+$s_reopen_add_bugnote_title = 'Pievienot atkârtotas atvçrðanas iemeslu';
+$s_bugnote_add_reopen_button = 'Pielikt komentâru un atkârtoti atvçrt';
 
 # bug_resolve_page.php
-$s_resolved_bug_title = "Kïûdas atrisinâðana";
-$s_resolved_bug_button = "Kïûda atrisinâta";
+$s_resolved_bug_title = 'Kïûdas atrisinâðana';
+$s_resolved_bug_button = 'Kïûda atrisinâta';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = "Kïûda atrisinâta. Pievienojiet komentâru...";
-$s_resolve_add_bugnote_title = "Pievienojiet atrisinâjuma komentâru";
-$s_bugnote_add_resolve_button = "Pievienot komentâru";
+$s_bug_resolved_msg = 'Kïûda atrisinâta. Pievienojiet komentâru...';
+$s_resolve_add_bugnote_title = 'Pievienojiet atrisinâjuma komentâru';
+$s_bugnote_add_resolve_button = 'Pievienot komentâru';
 
 # bug_reminder_page.php
 $s_from = 'No';
@@ -554,125 +552,125 @@ $s_reminder_store = 'This note will be stored with the issue.';
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
-$s_bug_updated_msg = "Informâcija par kïûdu ir atjaunota...";
+$s_bug_updated_msg = 'Informâcija par kïûdu ir atjaunota...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = "Atpakaï pie kïûdas";
-$s_update_simple_link = "Laboðana";
-$s_updating_bug_advanced_title = "Informâcijas par kïûdu laboðana";
-$s_id = "ID";
-$s_category = "Kategorija";
-$s_severity = "Kritiskums";
-$s_reproducibility = "Atkârtojamîba";
-$s_date_submitted = "Reìistrçts";
-$s_last_update = "Atjaunots";
-$s_reporter = "Ziòotâjs";
-$s_assigned_to = "Atbildîgais";
-$s_priority = "Prioritâte";
-$s_resolution = "Risinâjums";
-$s_status = "Status";
-$s_duplicate_id = "Dublikâti";
-$s_os = "Operçtâjsistçma";
-$s_projection = "Prognoze";
-$s_os_version = "OS versija";
-$s_eta = "ETA";
-$s_product_version = "Produkta versija";
-$s_build = "Apakðversija";
+$s_back_to_bug_link = 'Atpakaï pie kïûdas';
+$s_update_simple_link = 'Laboðana';
+$s_updating_bug_advanced_title = 'Informâcijas par kïûdu laboðana';
+$s_id = 'ID';
+$s_category = 'Kategorija';
+$s_severity = 'Kritiskums';
+$s_reproducibility = 'Atkârtojamîba';
+$s_date_submitted = 'Reìistrçts';
+$s_last_update = 'Atjaunots';
+$s_reporter = 'Ziòotâjs';
+$s_assigned_to = 'Atbildîgais';
+$s_priority = 'Prioritâte';
+$s_resolution = 'Risinâjums';
+$s_status = 'Status';
+$s_duplicate_id = 'Dublikâti';
+$s_os = 'Operçtâjsistçma';
+$s_projection = 'Prognoze';
+$s_os_version = 'OS versija';
+$s_eta = 'ETA';
+$s_product_version = 'Produkta versija';
+$s_build = 'Apakðversija';
 $s_fixed_in_version = 'Fixed in Version';
-$s_votes = "Balsojumi";
-$s_summary = "Îss apraksts";
-$s_description = "Apraksts";
-$s_steps_to_reproduce = "Darbîbas, kas jâveic, lai atkârtotu kïûdu";
-$s_update_information_button = "Saglabât";
+$s_votes = 'Balsojumi';
+$s_summary = 'Îss apraksts';
+$s_description = 'Apraksts';
+$s_steps_to_reproduce = 'Darbîbas, kas jâveic, lai atkârtotu kïûdu';
+$s_update_information_button = 'Saglabât';
 $s_sticky_issue = 'Sticky Issue';
 $s_profile = 'Profile';
 
 # bug_update_page.php
-$s_update_advanced_link = "Paplaðinâtâ laboðana";
-$s_updating_bug_simple_title = "Kïûdas datu laboðana";
+$s_update_advanced_link = 'Paplaðinâtâ laboðana';
+$s_updating_bug_simple_title = 'Kïûdas datu laboðana';
 
 # bug_vote_add.php
-$s_vote_added_msg = "Balsojums pievienots...";
+$s_vote_added_msg = 'Balsojums pievienots...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = "Komentârs pievienots...";
+$s_bugnote_added_msg = 'Komentârs pievienots...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = "Komentârs dzçsts...";
-$s_bug_notes_title = "Kïûdas komentâri";
+$s_bugnote_deleted_msg = 'Komentârs dzçsts...';
+$s_bug_notes_title = 'Kïûdas komentâri';
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = "Labot komentâru";
+$s_edit_bugnote_title = 'Labot komentâru';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = "Nav komentâru";
-$s_delete_link = "Dzçst";
-$s_add_bugnote_title = "Komentâra pievienoðana";
-$s_add_bugnote_button = "Pievienot";
-$s_bugnote_edit_link = "Labot";
-$s_closed_bug_button = "AIZVÇRT kïûdu";
+$s_no_bugnotes_msg = 'Nav komentâru';
+$s_delete_link = 'Dzçst';
+$s_add_bugnote_title = 'Komentâra pievienoðana';
+$s_add_bugnote_button = 'Pievienot';
+$s_bugnote_edit_link = 'Labot';
+$s_closed_bug_button = 'AIZVÇRT kïûdu';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = "Komentârs saglabâts...";
-$s_edited_on = "labots: ";
+$s_bugnote_updated_msg = 'Komentârs saglabâts...';
+$s_edited_on = 'labots: ';
 
 # file_api.php
 $s_show_content ='Show Content';
 
 # index.php
-$s_click_to_login = "Noklikðíiniet, lai pieslçgtos";
+$s_click_to_login = 'Noklikðíiniet, lai pieslçgtos';
 
 # login.php
 
 # login_page.php
 #@@@ should the following string be related to $g_window_title?
-$s_login_page_info = "Sveicinâti problçmu, kïûdu un jaunas funkcionalitâtes pieprasîjumu uzskaites un kontroles sistçmâ(bugtrack)";
-$s_login_title = "Pieslçgðanâs";
-$s_save_login = "Iegaumçt paroli";
-$s_choose_project = "Izvçlaties projektu";
-$s_login_button = "Pieslçgties";
-$s_signup_link = "Jums nav paroles? Reìistrçties sistçmâ kâ jaunam lietotâjam.";
+$s_login_page_info = 'Sveicinâti problçmu, kïûdu un jaunas funkcionalitâtes pieprasîjumu uzskaites un kontroles sistçmâ(bugtrack)';
+$s_login_title = 'Pieslçgðanâs';
+$s_save_login = 'Iegaumçt paroli';
+$s_choose_project = 'Izvçlaties projektu';
+$s_login_button = 'Pieslçgties';
+$s_signup_link = 'Jums nav paroles? Reìistrçties sistçmâ kâ jaunam lietotâjam.';
 $s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
-$s_select_project_button = "Izvçlaties projektu";
+$s_select_project_button = 'Izvçlaties projektu';
 
 # logout_page.php
-$s_logged_out_title = "Atslçgðanâs...";
-$s_redirecting = "...pâradresâcija";
-$s_here = "ðeit";
+$s_logged_out_title = 'Atslçgðanâs...';
+$s_redirecting = '...pâradresâcija';
+$s_here = 'ðeit';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Password Reset";
-$s_lost_password_done_title = "Password Message Sent";
-$s_lost_password_subject = "Password Reset";
-$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br /><br />If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
-$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
+$s_lost_password_title = 'Password Reset';
+$s_lost_password_done_title = 'Password Message Sent';
+$s_lost_password_subject = 'Password Reset';
+$s_lost_password_info = 'To reinstate your lost password, please supply the name and email address for the account.<br /><br />If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.';
+$s_lost_password_confirm_hash_OK = 'Your confirmation has been accepted. Please update your password.';
 
 # main_page.php
-$s_open_and_assigned_to_me = "man pieðíirtâs atvçrtâs(neatrisinâtâs) kïûdas/problçmas";
-$s_open_and_reported_to_me = "manis reìistrçtie, vçl atvçrtie(neatrisinâtie) ziòojumi";
-$s_newer_news_link = "Jaunâkâs ziòas";
-$s_older_news_link = "Vecas ziòas";
-$s_archives = "Arhîvs";
+$s_open_and_assigned_to_me = 'man pieðíirtâs atvçrtâs(neatrisinâtâs) kïûdas/problçmas';
+$s_open_and_reported_to_me = 'manis reìistrçtie, vçl atvçrtie(neatrisinâtie) ziòojumi';
+$s_newer_news_link = 'Jaunâkâs ziòas';
+$s_older_news_link = 'Vecas ziòas';
+$s_archives = 'Arhîvs';
 $s_rss = 'RSS';
 
 # manage_create_new_user.php
-$s_created_user_part1 = "Izveidots lietotâjs";
-$s_created_user_part2 = "ar pieejas lîmeni";
+$s_created_user_part1 = 'Izveidots lietotâjs';
+$s_created_user_part2 = 'ar pieejas lîmeni';
 
 # manage_create_user_page.php
-$s_create_new_account_title = "Izveidot lietotâju";
-$s_verify_password = "Paroles apstiprinâðana";
-$s_enabled = "Atïauts";
-$s_protected = "Aizsargâts konts";
-$s_create_user_button = "Izveidot";
+$s_create_new_account_title = 'Izveidot lietotâju';
+$s_verify_password = 'Paroles apstiprinâðana';
+$s_enabled = 'Atïauts';
+$s_protected = 'Aizsargâts konts';
+$s_create_user_button = 'Izveidot';
 
 # manage_page.php
-$s_hide_disabled = "Slçpt bloíçtos";
-$s_filter_button = "Atlasît";
-$s_manage_users_link = "Lietotâju vadîba";
-$s_manage_projects_link = "Projektu vadîba";
+$s_hide_disabled = 'Slçpt bloíçtos';
+$s_filter_button = 'Atlasît';
+$s_manage_users_link = 'Lietotâju vadîba';
+$s_manage_projects_link = 'Projektu vadîba';
 $s_manage_custom_field_link = 'Custom lauku noteikðana';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
@@ -680,19 +678,19 @@ $s_manage_config_link = 'Manage Configuration';
 $s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
-$s_create_new_account_link = "Izveidot jaunu lietotâju";
-$s_projects_link = "Projekti";
-$s_documentation_link = "Dokumentâcija";
-$s_new_accounts_title = "Jauni lietotâji";
-$s_1_week_title = "Par nedçïu";
-$s_never_logged_in_title = "Nekad nav lietojuði sistçmu";
-$s_prune_accounts = "Dzçst lietotâjus";
-$s_hide_inactive = "Slçpt neaktîvos";
-$s_manage_accounts_title = "Lietotâju kontu vadîba";
-$s_p = "*";
-$s_date_created = "Izveidots";
-$s_last_visit = "Pçdçjâ vizîte";
-$s_edit_user_link = "Labot lietotâju";
+$s_create_new_account_link = 'Izveidot jaunu lietotâju';
+$s_projects_link = 'Projekti';
+$s_documentation_link = 'Dokumentâcija';
+$s_new_accounts_title = 'Jauni lietotâji';
+$s_1_week_title = 'Par nedçïu';
+$s_never_logged_in_title = 'Nekad nav lietojuði sistçmu';
+$s_prune_accounts = 'Dzçst lietotâjus';
+$s_hide_inactive = 'Slçpt neaktîvos';
+$s_manage_accounts_title = 'Lietotâju kontu vadîba';
+$s_p = '*';
+$s_date_created = 'Izveidots';
+$s_last_visit = 'Pçdçjâ vizîte';
+$s_edit_user_link = 'Labot lietotâju';
 
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS, unless overridden at the project level.';
@@ -709,8 +707,8 @@ $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Who can change notification defaults';
 $s_notify_actions_change_access = 'Who can change notifications';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_revert_to_system = 'Delete All Projects Settings';
+$s_revert_to_all_project = 'Delete Project Specific Settings';
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
@@ -768,50 +766,50 @@ $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
-$s_project_added_msg = "Projekts pievienots...";
+$s_project_added_msg = 'Projekts pievienots...';
 
 # manage_proj_category_add.php
-$s_category_added_msg = "Kategorija pievienota...";
+$s_category_added_msg = 'Kategorija pievienota...';
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = "Kategorija nodzçsta...";
+$s_category_deleted_msg = 'Kategorija nodzçsta...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = "Vai esat pârliecinâti par kategorijas dzçðanu? Visas atbilstoðâs kïûdas tiks dzçstas";
-$s_delete_category_button = "Dzçst kategoriju";
+$s_category_delete_sure_msg = 'Vai esat pârliecinâti par kategorijas dzçðanu? Visas atbilstoðâs kïûdas tiks dzçstas';
+$s_delete_category_button = 'Dzçst kategoriju';
 
 # manage_proj_category_edit_page.php
-$s_edit_project_category_title = "Projekta kategoriju laboðana";
-$s_update_category_button = "Saglabât kategoriju";
+$s_edit_project_category_title = 'Projekta kategoriju laboðana';
+$s_update_category_button = 'Saglabât kategoriju';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = "Kategorija saglabâta...";
+$s_category_updated_msg = 'Kategorija saglabâta...';
 
 # manage_proj_create_page.php
 $s_add_subproject_title = 'Add Subproject';
 
 # manage_proj_delete.php
-$s_project_deleted_msg = "Projekts nodzçsts...";
+$s_project_deleted_msg = 'Projekts nodzçsts...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = "Vai esat pârliecinâti, ka vçlaties nodzçst projektu ar visu saistîto informâciju?";
-$s_project_delete_button = "Nodzçst projektu";
+$s_project_delete_msg = 'Vai esat pârliecinâti, ka vçlaties nodzçst projektu ar visu saistîto informâciju?';
+$s_project_delete_button = 'Nodzçst projektu';
 
 # manage_proj_edit_page.php
-$s_edit_project_title = "Projekta laboðana";
-$s_project_name = "Projekta nosaukums";
-$s_view_status = "Pieejas status";
-$s_public = "Publisks";
-$s_private = "Privâts";
-$s_update_project_button = "Saglabât projektu";
-$s_delete_project_button = "Dzçst projektu";
-$s_categories_and_version_title = "Kategorijas un versijas";
-$s_categories = "Kategorijas";
-$s_add_category_button = "Pielikt kategoriju";
-$s_versions = "Versijas";
-$s_add_version_button = "Pielikt versiju";
+$s_edit_project_title = 'Projekta laboðana';
+$s_project_name = 'Projekta nosaukums';
+$s_view_status = 'Pieejas status';
+$s_public = 'Publisks';
+$s_private = 'Privâts';
+$s_update_project_button = 'Saglabât projektu';
+$s_delete_project_button = 'Dzçst projektu';
+$s_categories_and_version_title = 'Kategorijas un versijas';
+$s_categories = 'Kategorijas';
+$s_add_category_button = 'Pielikt kategoriju';
+$s_versions = 'Versijas';
+$s_add_version_button = 'Pielikt versiju';
 $s_add_and_edit_version_button = 'Add and Edit Version';
-$s_edit_link = "labot";
+$s_edit_link = 'labot';
 $s_actions = 'Darbîbas';
 $s_version = 'Versija';
 $s_timestamp = 'Laiks';
@@ -822,74 +820,74 @@ $s_create_new_subproject_link = 'Create New Subproject';
 $s_unlink_link = 'Unlink';
 
 # manage_proj_menu_page.php
-$s_add_project_title = "Pievienot projektu";
-$s_upload_file_path = "Ceïð ielâdçjamo failu saglabâðanai";
-$s_add_project_button = "Pievienot projektu";
-$s_projects_title = "Projekti";
-$s_name = "Nosaukums";
+$s_add_project_title = 'Pievienot projektu';
+$s_upload_file_path = 'Ceïð ielâdçjamo failu saglabâðanai';
+$s_add_project_button = 'Pievienot projektu';
+$s_projects_title = 'Projekti';
+$s_name = 'Nosaukums';
 
 # manage_proj_update.php
-$s_project_updated_msg = "Projekta izmaiòas saglabâtas...";
+$s_project_updated_msg = 'Projekta izmaiòas saglabâtas...';
 
 # manage_proj_version_add.php
-$s_version_added_msg = "Versija tika pielikta...";
+$s_version_added_msg = 'Versija tika pielikta...';
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = "Versija nodzçsta...";
+$s_version_deleted_msg = 'Versija nodzçsta...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = "Vai esat pârliecinâti, ka vçlaties dzçst ðo versiju?";
-$s_delete_version_button = "Dzçst versiju";
+$s_version_delete_sure = 'Vai esat pârliecinâti, ka vçlaties dzçst ðo versiju?';
+$s_delete_version_button = 'Dzçst versiju';
 
 # manage_proj_version_edit_page.php
-$s_edit_project_version_title = "Projekta versijas laboðana";
-$s_update_version_button = "Labot projekta versiju";
+$s_edit_project_version_title = 'Projekta versijas laboðana';
+$s_update_version_button = 'Labot projekta versiju';
 $s_released = 'Released';
 
 # manage_proj_version_update.php
-$s_version_updated_msg = "Versija saglabâta...";
+$s_version_updated_msg = 'Versija saglabâta...';
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = "Lietotâja konts ir aizsargâts. Dzçst nevar.";
-$s_account_deleted_msg = "Lietotâjs nodzçsts...";
+$s_account_delete_protected_msg = 'Lietotâja konts ir aizsargâts. Dzçst nevar.';
+$s_account_deleted_msg = 'Lietotâjs nodzçsts...';
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = "Vai esat pârliecinâti, ka vçlaties dzçst ðo lietotâju?";
+$s_delete_account_sure_msg = 'Vai esat pârliecinâti, ka vçlaties dzçst ðo lietotâju?';
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = "Visi lietotâji, kas nekad nav lietojuði sistçmu un ir reìistrçti ilgâk nekâ nedçïu atpakaï tika nodzçsti";
+$s_accounts_pruned_msg = 'Visi lietotâji, kas nekad nav lietojuði sistçmu un ir reìistrçti ilgâk nekâ nedçïu atpakaï tika nodzçsti';
 $s_prune_accounts_button = 'Prune';
 $s_confirm_account_pruning = 'Vai Jûs esat pârliecinâti, ka vçlaties dzçst lietotâjus, kas nekad nav pieslçguðies?';
 
 # manage_user_page.php
-$s_edit_user_title = "Lietotâja laboðana";
-$s_reset_password_button = "Atcelt paroli";
-$s_delete_user_button = "Dzçst lietotâju";
+$s_edit_user_title = 'Lietotâja laboðana';
+$s_reset_password_button = 'Atcelt paroli';
+$s_delete_user_button = 'Dzçst lietotâju';
 $s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
-$s_reset_password_msg2 = "ðobrîd lietotâjam nav paroles (tukða).";
+$s_reset_password_msg2 = 'ðobrîd lietotâjam nav paroles (tukða).';
 $s_show_all_users = 'Visi';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = "Lietotâja konts ir aizsargâts. Paroli nevar atcelt.";
+$s_account_reset_protected_msg = 'Lietotâja konts ir aizsargâts. Paroli nevar atcelt.';
 $s_account_reset_msg = 'Confirmation message has been sent to your email address...';
-$s_account_reset_msg2 = "Parole tagad ir tukða...";
+$s_account_reset_msg2 = 'Parole tagad ir tukða...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = "Lietotâja konts ir aizsargâts. Pieejas lîmenis ir bloíçts. Pârçjas izmaiòas saglabâtas...";
-$s_manage_user_updated_msg = "Izmaiòas lietotâja kontâ ir saglabâtas ...";
+$s_manage_user_protected_msg = 'Lietotâja konts ir aizsargâts. Pieejas lîmenis ir bloíçts. Pârçjas izmaiòas saglabâtas...';
+$s_manage_user_updated_msg = 'Izmaiòas lietotâja kontâ ir saglabâtas ...';
 
 # menu_inc.php
-$s_main_link = "Sâkumlapa";
-$s_view_bugs_link = "Skatît kïûdas";
-$s_report_bug_link = "Piereìistrçt kïûdu";
+$s_main_link = 'Sâkumlapa';
+$s_view_bugs_link = 'Skatît kïûdas';
+$s_report_bug_link = 'Piereìistrçt kïûdu';
 $s_changelog_link = 'Change Log';
-$s_summary_link = "Statistika";
-$s_account_link = "Reþîmi";
-$s_users_link = "Lietotâji";
-$s_manage_link = "Vadîba";
-$s_edit_news_link = "Jaunumi";
-$s_docs_link = "Dokumentâcija";
-$s_logout_link = "Beigt";
+$s_summary_link = 'Statistika';
+$s_account_link = 'Reþîmi';
+$s_users_link = 'Lietotâji';
+$s_manage_link = 'Vadîba';
+$s_edit_news_link = 'Jaunumi';
+$s_docs_link = 'Dokumentâcija';
+$s_logout_link = 'Beigt';
 $s_my_view_link = 'My View';
 
 # meta_inc.php
@@ -905,114 +903,114 @@ $s_my_view_title_feedback = 'Awaiting Feedback from Me';
 $s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
-$s_news_added_msg = "Ziòa tika pievienota...";
+$s_news_added_msg = 'Ziòa tika pievienota...';
 
 # news_delete.php
-$s_news_deleted_msg = "Ziòas nodzçðana...";
+$s_news_deleted_msg = 'Ziòas nodzçðana...';
 
 # news_delete_page.php
-$s_delete_news_sure_msg = "Vai pârliecinâti, ka vçlaties dzçst ziòu?";
-$s_delete_news_item_button = "Dzçst ziòu";
+$s_delete_news_sure_msg = 'Vai pârliecinâti, ka vçlaties dzçst ziòu?';
+$s_delete_news_item_button = 'Dzçst ziòu';
 
 # news_edit_page.php
-$s_edit_news_title = "Ziòu laboðana";
-$s_headline = "Virsraksts";
-$s_body = "Ziòas teksts";
-$s_update_news_button = "Saglabât ziòas izmaiòas";
+$s_edit_news_title = 'Ziòu laboðana';
+$s_headline = 'Virsraksts';
+$s_body = 'Ziòas teksts';
+$s_update_news_button = 'Saglabât ziòas izmaiòas';
 
 # news_menu_page.php
-$s_add_news_title = "Pielikt ziòas";
-$s_post_to = "Novietot ziòu iekð ";
-$s_post_news_button = "Novietot ziòu";
-$s_edit_or_delete_news_title = "Ziòu laboðana un dzçðana";
-$s_edit_post = "Labot ziòu";
-$s_delete_post = "Dzçst ziòu";
-$s_select_post = "Izvçlçties ziòu";
+$s_add_news_title = 'Pielikt ziòas';
+$s_post_to = 'Novietot ziòu iekð ';
+$s_post_news_button = 'Novietot ziòu';
+$s_edit_or_delete_news_title = 'Ziòu laboðana un dzçðana';
+$s_edit_post = 'Labot ziòu';
+$s_delete_post = 'Dzçst ziòu';
+$s_select_post = 'Izvçlçties ziòu';
 
 # news_update.php
-$s_news_updated_msg = "Ziòa saglabâta...";
+$s_news_updated_msg = 'Ziòa saglabâta...';
 
 # news_view_page.php
-$s_back_link = "Atpakaï";
+$s_back_link = 'Atpakaï';
 
 # proj_doc_add.php
-$s_file_uploaded_msg = "Fails ielâdçts";
+$s_file_uploaded_msg = 'Fails ielâdçts';
 
 # proj_doc_add_page.php
-$s_upload_file_title = "Ielâdçt failu";
-$s_title = "Nosaukums";
+$s_upload_file_title = 'Ielâdçt failu';
+$s_title = 'Nosaukums';
 
 # proj_doc_delete.php
-$s_project_file_deleted_msg = "Projekta fails tika nodzçsts";
+$s_project_file_deleted_msg = 'Projekta fails tika nodzçsts';
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = "Vai tieðâm vçlaties dzçst failu?";
+$s_confirm_file_delete_msg = 'Vai tieðâm vçlaties dzçst failu?';
 
 # proj_doc_edit_page.php
-$s_filename = "Faila nosaukums";
-$s_file_update_button = "Saglabât failu";
-$s_file_delete_button = "Dzçst failu";
+$s_filename = 'Faila nosaukums';
+$s_file_update_button = 'Saglabât failu';
+$s_file_delete_button = 'Dzçst failu';
 
 # proj_doc_page.php
-$s_project_documentation_title = "Projekta dokumentâcija";
-$s_user_documentation = "Lietotâja dokumentâcija";
-$s_project_documentation = "Projekta dokumentâcija";
-$s_add_file = "Pievienot failu";
+$s_project_documentation_title = 'Projekta dokumentâcija';
+$s_user_documentation = 'Lietotâja dokumentâcija';
+$s_project_documentation = 'Projekta dokumentâcija';
+$s_add_file = 'Pievienot failu';
 
 # proj_doc_update.php
-$s_project_document_updated = "Projekts saglabâts";
+$s_project_document_updated = 'Projekts saglabâts';
 
 # proj_user_add.php
-$s_project_user_added_msg = "Lietotâjs pievienots projektam";
+$s_project_user_added_msg = 'Lietotâjs pievienots projektam';
 
 # proj_user_delete.php
-$s_project_removed_user_msg = "Lietotâjs dzçsts no projekta";
+$s_project_removed_user_msg = 'Lietotâjs dzçsts no projekta';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = "Vai tieðâm vçlaties dzçst lietotâju?";
+$s_remove_user_sure_msg = 'Vai tieðâm vçlaties dzçst lietotâju?';
 $s_remove_user_button = 'Remove User';
 $s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
 $s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
-$s_add_user_title = "Lietotâja pievienoðana projektam";
-$s_add_user_button = "Pievienot";
-$s_project_selection_title = "Projekta izvçle";
-$s_remove_link = "dzçst";
+$s_add_user_title = 'Lietotâja pievienoðana projektam';
+$s_add_user_button = 'Pievienot';
+$s_project_selection_title = 'Projekta izvçle';
+$s_remove_link = 'dzçst';
 $s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
-$s_updated_user_msg = "Lietotâjs pievienots";
+$s_updated_user_msg = 'Lietotâjs pievienots';
 
 # report_add.php
-$s_must_enter_category = "Jums jâizvçlas kategorija";
-$s_must_enter_severity = "Jums jâizvçlas kritiskums";
-$s_must_enter_reproducibility = "Jums jânorâda kritiskums";
-$s_must_enter_summary = "Jums jânorâda îss apraksts";
-$s_must_enter_description = "Jums jânorâda problçmas apraksts";
-$s_report_more_bugs = "Vai vçlaties pievienot vçl kïûdu?";
-$s_submission_thanks_msg = "Paldies par Jûsu ziòojumu";
+$s_must_enter_category = 'Jums jâizvçlas kategorija';
+$s_must_enter_severity = 'Jums jâizvçlas kritiskums';
+$s_must_enter_reproducibility = 'Jums jânorâda kritiskums';
+$s_must_enter_summary = 'Jums jânorâda îss apraksts';
+$s_must_enter_description = 'Jums jânorâda problçmas apraksts';
+$s_report_more_bugs = 'Vai vçlaties pievienot vçl kïûdu?';
+$s_submission_thanks_msg = 'Paldies par Jûsu ziòojumu';
 
 # report_bug_advanced_page.php
-$s_simple_report_link = "Kïûdas ievades vienkârðâ forma";
-$s_enter_report_details_title = "Ievadiet informâciju par kïûdu";
-$s_required = "obligâti aizpildâms lauks";
-$s_select_category = "Norâdiet kategoriju";
-$s_select_reproducibility = "Norâdiet kïûdas periodiskumu";
-$s_select_severity = "Norâdiet kïûdas kritiskumu";
-$s_or_fill_in = "vai aizpildiet";
-$s_assign_to = "Noteikt atbildîgo";
-$s_additional_information = "Papildinformâcija";
-$s_submit_report_button = "Reìistrçt kïûdu";
-$s_check_report_more_bugs = "atzîmçjiet, ja vçlaties ievadît vairâkus ziòojumus";
+$s_simple_report_link = 'Kïûdas ievades vienkârðâ forma';
+$s_enter_report_details_title = 'Ievadiet informâciju par kïûdu';
+$s_required = 'obligâti aizpildâms lauks';
+$s_select_category = 'Norâdiet kategoriju';
+$s_select_reproducibility = 'Norâdiet kïûdas periodiskumu';
+$s_select_severity = 'Norâdiet kïûdas kritiskumu';
+$s_or_fill_in = 'vai aizpildiet';
+$s_assign_to = 'Noteikt atbildîgo';
+$s_additional_information = 'Papildinformâcija';
+$s_submit_report_button = 'Reìistrçt kïûdu';
+$s_check_report_more_bugs = 'atzîmçjiet, ja vçlaties ievadît vairâkus ziòojumus';
 
 # report_bug_page.php
-$s_advanced_report_link = "Paplaðinâtâ forma";
-$s_report_stay = "Turpinât kïûdu ievadi";
+$s_advanced_report_link = 'Paplaðinâtâ forma';
+$s_report_stay = 'Turpinât kïûdu ievadi';
 
 # set_project.php
-$s_selected_project = "Izvçlçtais projekts";
-$s_valid_project_msg = "Jums jâizvçlâs pareizs projekts";
+$s_selected_project = 'Izvçlçtais projekts';
+$s_valid_project_msg = 'Jums jâizvçlâs pareizs projekts';
 
 # signup.php
 $s_signup_done_title = 'Account registration processed';
@@ -1022,34 +1020,34 @@ $s_no_reponse_msg = 'You will have seven days to complete the account confirmati
 # signup_page.php
 $s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
 $s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br />Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br />You must specify a valid email address in order to receive the account confirmation email.';
-$s_signup_title = "Lietotâja reìistrâcija";
-$s_signup_button = "Piereìistrçties";
+$s_signup_title = 'Lietotâja reìistrâcija';
+$s_signup_button = 'Piereìistrçties';
 $s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
-$s_edit_site_settings_title = "Servera opcijas";
-$s_save_settings_button = "Saglabât opcijas";
+$s_edit_site_settings_title = 'Servera opcijas';
+$s_save_settings_button = 'Saglabât opcijas';
 
 # site_settings_page.php
-$s_site_settings_title = "Servera opcijas";
-$s_system_info_link = "Sistçminformâcija";
-$s_site_settings_link = "Servera opcijas";
+$s_site_settings_title = 'Servera opcijas';
+$s_system_info_link = 'Sistçminformâcija';
+$s_site_settings_link = 'Servera opcijas';
 
 # site_settings_update.php
-$s_site_settings_updated_msg = "Servera opcijas tika saglabâtas";
+$s_site_settings_updated_msg = 'Servera opcijas tika saglabâtas';
 
 # summary_page.php
-$s_summary_title = "Statistika";
-$s_summary_jpgraph_link = "Grafiskâ statistika";
+$s_summary_title = 'Statistika';
+$s_summary_jpgraph_link = 'Grafiskâ statistika';
 $s_by_project = 'pçc projekta';
-$s_by_status = "pçc statusa";
-$s_by_date = "pçc datuma";
-$s_by_severity = "pçc kritiskuma";
-$s_by_resolution = "pçc risinâjuma";
-$s_by_category = "pçc kategorijâm";
-$s_by_priority = "pçc prioritâtes";
-$s_by_developer = "pçc izstrâdâtâja";
-$s_by_reporter ="pçc lietotâja";
+$s_by_status = 'pçc statusa';
+$s_by_date = 'pçc datuma';
+$s_by_severity = 'pçc kritiskuma';
+$s_by_resolution = 'pçc risinâjuma';
+$s_by_category = 'pçc kategorijâm';
+$s_by_priority = 'pçc prioritâtes';
+$s_by_developer = 'pçc izstrâdâtâja';
+$s_by_reporter = 'pçc lietotâja';
 $s_reporter_by_resolution = 'Ziòotâjs pçc risinâjuma';
 $s_reporter_effectiveness = 'Ziòotâja efektivitâte';
 $s_developer_by_resolution = 'Izstrâdâtâjs pçc risinâjum';
@@ -1057,32 +1055,32 @@ $s_percentage_fixed = '% atrisinâti';
 $s_percentage_errors = '% neapstiprinâjâs';
 $s_errors = 'Kïûdas';
 $s_total = 'Kopâ';
-$s_time_stats = "Statistika par kïûdu risinâðanas ilgumu";
-$s_longest_open_bug = "viss ilgâgâ kïûda";
-$s_longest_open = "lielâkais laiks";
-$s_average_time = "vidçjais laiks";
-$s_total_time = "kopçjais laiks";
-$s_developer_stats = "izstrâdâtâja statistika";
-$s_reporter_stats = "ziòotâja statistika";
-$s_orct = "atvçrti/atrisinâti/slçgti/kopâ)";
+$s_time_stats = 'Statistika par kïûdu risinâðanas ilgumu';
+$s_longest_open_bug = 'viss ilgâgâ kïûda';
+$s_longest_open = 'lielâkais laiks';
+$s_average_time = 'vidçjais laiks';
+$s_total_time = 'kopçjais laiks';
+$s_developer_stats = 'izstrâdâtâja statistika';
+$s_reporter_stats = 'ziòotâja statistika';
+$s_orct = 'atvçrti/atrisinâti/slçgti/kopâ)';
 
 # view_all_bug_page.php
-$s_any = "visi";
-$s_show = "Parâdît";
-$s_changed = "Izmaiòas (pa stundu)";
-$s_viewing_bugs_title = "Kïûdu apskate";
-$s_updated = "Atjaunots";
+$s_any = 'visi';
+$s_show = 'Parâdît';
+$s_changed = 'Izmaiòas (pa stundu)';
+$s_viewing_bugs_title = 'Kïûdu apskate';
+$s_updated = 'Atjaunots';
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
-$s_none = "nav";
+$s_none = 'nav';
 $s_current = 'current';
-$s_search ="meklçt";
-$s_view_prev_link = "iepriekðçjos";
-$s_view_next_link = "nâkoðos";
+$s_search = 'meklçt';
+$s_view_prev_link = 'iepriekðçjos';
+$s_view_next_link = 'nâkoðos';
 $s_prev = 'iepr.';
 $s_next = 'nâkoð.';
 $s_first = 'pirmais';
@@ -1112,24 +1110,24 @@ $s_open_queries = 'Manage Filters';
 $s_query_delete_msg = 'Are you sure you wish to delete this query?';
 
 # view_bug_advanced_page.php
-$s_view_simple_link = "Apskate";
-$s_viewing_bug_advanced_details_title = "Paplaðinâtâs informâcijas apskate";
-$s_product_build = "produkta apakðversija";
-$s_system_profile = "Sistçmas (darba vides) apraksts";
-$s_update_bug_button = "Labot kïûdas informâciju";
+$s_view_simple_link = 'Apskate';
+$s_viewing_bug_advanced_details_title = 'Paplaðinâtâs informâcijas apskate';
+$s_product_build = 'produkta apakðversija';
+$s_system_profile = 'Sistçmas (darba vides) apraksts';
+$s_update_bug_button = 'Labot kïûdas informâciju';
 $s_bug_assign_to_button = 'Pieðíirts:';
 $s_bug_status_to_button = 'Change Status To:';
-$s_reopen_bug_button = "Atkârtoti atvçrt";
+$s_reopen_bug_button = 'Atkârtoti atvçrt';
 $s_move_bug_button = 'Move Issue';
-$s_attached_files = "Failu pievienoðana";
+$s_attached_files = 'Failu pievienoðana';
 $s_publish = 'Publicçt';
 $s_cached = 'Keðots';
 
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link = "Apskatît paplaðinâtâto informâciju";
-$s_viewing_bug_simple_details_title = "Apskatît informâcijau";
+$s_view_advanced_link = 'Apskatît paplaðinâtâto informâciju';
+$s_viewing_bug_simple_details_title = 'Apskatît informâcijau';
 
 # bug_monitor_list_view_inc.php
 $s_no_users_monitoring_bug = 'Neviens lietotâjs neveic ðî buga monitoringu.';
@@ -1182,17 +1180,17 @@ $s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) th
 $s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Slçpt statusu';
-$s_filter_closed = "Aizvçrtie";
-$s_filter_resolved = "Atrisinâtie";
-$s_hide_closed = "Hide Closed";
-$s_hide_resolved = "Hide Resolved";
+$s_filter_closed = 'Aizvçrtie';
+$s_filter_resolved = 'Atrisinâtie';
+$s_hide_closed = 'Hide Closed';
+$s_hide_resolved = 'Hide Resolved';
 $s_and_above = 'And Above';
 $s_advanced_filters = 'Advanced Filters';
 $s_simple_filters = 'Simple Filters';
 $s_monitored_by = 'Monitored By';
 
-$s_attachments = "pielikums(-i)";
-$s_attachment_alt = "A";
+$s_attachments = 'pielikums(-i)';
+$s_attachment_alt = 'A';
 
 # PHPMailer
 $s_phpmailer_language = 'en';
@@ -1215,34 +1213,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = 'Change Log';
 
 # Http auth
-$s_http_auth_realm = "Mantis Login";
+$s_http_auth_realm = 'Mantis Login';
 
-$s_bug = "issue";
-$s_add_new_relationship = "New relationship";
-$s_add_new_relationship_button = "Add";
-$s_this_bug = "Current issue";
-$s_relationship_added = "Relationship added";
-$s_relationship_deleted = "Relationship deleted";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
-$s_delete_relationship_button = "Delete";
-$s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br />Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
-$s_create_child_bug_button = "Create Clone";
-$s_bug_cloned_to = "Issue cloned";
-$s_bug_created_from = "Issue generated from";
+$s_bug = 'issue';
+$s_add_new_relationship = 'New relationship';
+$s_add_new_relationship_button = 'Add';
+$s_this_bug = 'Current issue';
+$s_relationship_added = 'Relationship added';
+$s_relationship_deleted = 'Relationship deleted';
+$s_no_relationship = 'no relationship';
+$s_relationship_replaced = 'Relationship replaced';
+$s_replace_relationship_button = 'Replace';
+$s_replace_relationship_sure_msg = 'There is already a relationship between the two issues. Are you sure you want to replace it?';
+$s_relationship_with_parent = 'Relationship with the parent issue';
+$s_delete_relationship_button = 'Delete';
+$s_delete_relationship_sure_msg = 'Are you sure you wish to delete this relationship?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Not all the children of this issue are yet resolved or closed.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br />Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.';
+$s_create_child_bug_button = 'Create Clone';
+$s_bug_cloned_to = 'Issue cloned';
+$s_bug_created_from = 'Issue generated from';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relationship Graph";
-$s_relation_graph = "Relation Graph";
-$s_dependency_graph = "Dependency Graph";
-$s_vertical = "Vertical";
-$s_horizontal = "Horizontal";
-$s_view_issue = "View Issue";
+$s_viewing_bug_relationship_graph_title = 'Relationship Graph';
+$s_relation_graph = 'Relation Graph';
+$s_dependency_graph = 'Dependency Graph';
+$s_vertical = 'Vertical';
+$s_horizontal = 'Horizontal';
+$s_view_issue = 'View Issue';
 
 # Source Control Integration
 $s_checkin = 'Checkin';
@@ -1275,8 +1273,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
-$s_delete_attachment_button = "Delete";
-$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
+$s_delete_attachment_button = 'Delete';
+$s_delete_attachment_sure_msg = 'Are you sure you wish to delete this attachment?';
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';

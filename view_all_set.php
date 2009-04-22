@@ -47,7 +47,7 @@
 	}
 	if ( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
 		$f_view_type = $f_default_view_type;
-	}	
+	}
 
 	# these are all possibly multiple selections for advanced filtering
 	$f_show_category = array();
@@ -161,7 +161,7 @@
 		$f_fixed_in_version = gpc_get_string( FILTER_PROPERTY_FIXED_IN_VERSION, META_FILTER_ANY );
 		$f_fixed_in_version = array( $f_fixed_in_version );
 	}
-	
+
 	$f_target_version = array();
 	if ( is_array( gpc_get( FILTER_PROPERTY_TARGET_VERSION, null ) ) ) {
 		$f_target_version = gpc_get_string_array( FILTER_PROPERTY_TARGET_VERSION, META_FILTER_ANY );
@@ -231,7 +231,7 @@
 
 	$t_custom_fields 		= custom_field_get_ids(); /** @todo (thraxisp) This should really be the linked ids, but we don't know the project */
 	$f_custom_fields_data 	= array();
-	if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
+	if ( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
 			if (custom_field_type( $t_cfid ) == CUSTOM_FIELD_TYPE_DATE) {
 				$t_control = gpc_get_string( 'custom_field_' . $t_cfid . '_control', null);
@@ -382,8 +382,8 @@
 				error_proceed_url( 'view_all_set.php?type=0' );
 				trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
 				exit; # stop here
-			} 
-		} 
+			}
+		}
 	} else {
 		# no cookie found, set it
 		$f_type = 1;
@@ -469,7 +469,7 @@
 					error_proceed_url( 'view_all_set.php?type=0' );
 					trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
 					exit; # stop here
-				} 
+				}
 				break;
 		# Generalise the filter
 		case '4':
@@ -490,7 +490,7 @@
 
 				$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
 				$t_custom_fields_data 	= array();
-				if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
+				if ( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 					foreach( $t_custom_fields as $t_cfid ) {
 						$t_custom_fields_data[$t_cfid] =  array( META_FILTER_ANY );
 					}
@@ -546,4 +546,3 @@
 	} else {
 		print_header_redirect( $t_redirect_url );
 	}
-?>

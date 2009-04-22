@@ -37,13 +37,13 @@
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$t_bug = bug_get( $f_bug_id );
-	
+
 	if( $t_bug->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...
 		# ... override the current project. This to avoid problems with categories and handlers lists etc.
 		$g_project_override = $t_bug->project_id;
 	}
-	
+
 	$f_new_status = gpc_get_int( 'new_status' );
 	$f_reopen_flag = gpc_get_int( 'reopen_flag', OFF );
 
@@ -85,8 +85,7 @@
 
 	$t_bug = bug_get( $f_bug_id );
 
-	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
-	html_page_top2();
+	html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
 	print_recently_visited();
 ?>
@@ -126,7 +125,7 @@ if ( ( $t_resolved <= $f_new_status ) && ( ( CLOSED > $f_new_status ) || ( $t_bu
 	</td>
 	<td>
 		<select name="resolution">
-			<?php 
+			<?php
                 $t_resolution = $t_bug_is_open ? FIXED : $t_current_resolution;
                 print_enum_string_option_list( "resolution", $t_resolution );
             ?>
@@ -189,8 +188,8 @@ if ( ( $t_resolved > $f_new_status ) &&
 <?php
 /** @todo thraxisp - I undid part of the change for #5068 for #5527
  * We really need to say what fields are shown in which statusses. For now,
- * this page will show required custom fields in update mode, or 
- *  display or required fields on resolve or close 
+ * this page will show required custom fields in update mode, or
+ *  display or required fields on resolve or close
  */
 $t_custom_status_label = "update"; # Don't show custom fields by default
 if ( ( $f_new_status == $t_resolved ) &&
@@ -207,7 +206,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
 	$t_display = $t_def['display_' . $t_custom_status_label];
 	$t_require = $t_def['require_' . $t_custom_status_label];
-	
+
 	if ( ( "update" == $t_custom_status_label ) && ( !$t_require ) ) {
         continue;
 	}
@@ -218,7 +217,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php if ( $t_require ) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
+		<?php if ( $t_require ) {?><span class="required">*</span><?php } echo lang_get_defaulted( $t_def['name'] ) ?>
 	</td>
 	<td>
 		<?php
@@ -353,6 +352,5 @@ if ( $t_can_update_due_date ) {
 <?php
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' );
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
-?>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+	html_page_bottom( __FILE__ );

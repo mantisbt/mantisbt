@@ -271,7 +271,9 @@ $s_new_account_message = 'Dacă nu aţi solicitat nici o înregistrare ignoraţi
 $s_new_account_do_not_reply = 'NU RĂSPUNDEŢI LA ACEST MESAJ';
 $s_new_account_IP = 'Adresă IP:';
 $s_new_account_signup_msg = 'A fost creat următorul cont:';
-$s_reset_request_msg = 'Cineva (probabil dumneavoastră) a solicitat o schimbare de parolă cu verificare prin e-mail. Dacă nu aţi fost dumneavostră acea persoană ignoraţi acest mesaj şi nu se întâmpla nimic.\n\nDacă aţi fost dumneavoastră vizitaţi adresa următoare pentru a vă modifica parola:';
+$s_reset_request_msg = 'Cineva (probabil dumneavoastră) a solicitat o schimbare de parolă cu verificare prin e-mail. Dacă nu aţi fost dumneavostră acea persoană ignoraţi acest mesaj şi nu se întâmpla nimic.
+
+Dacă aţi fost dumneavoastră vizitaţi adresa următoare pentru a vă modifica parola:';
 $s_reset_request_in_progress_msg = 'Dacă aţi furnizat corect numele de user şi adresa de e-mail pentru contul dumneavoastră vă vom trimite un mesaj de confirmare pe acestă adresă de e-mail. Odată ce aţi recepţionat mesajul urmaţi instrucţiunile trimise pentru a schimba parola contului dumneavoastră.';
 $s_email_notification_title_for_status_bug_new = 'Următoarea problemă are acum starea NOU (din nou)';
 $s_email_notification_title_for_status_bug_feedback = 'Următoarea problemă necesită o OPINIE din partea dumneavoastră.';

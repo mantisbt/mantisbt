@@ -119,10 +119,9 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 	$row = db_fetch_array( $result );
 	$t_prefs = $row['print_pref'];
 
+	# Account Preferences Form BEGIN
+	$t_index_count=0; 
 ?>
-
-<?php # Account Preferences Form BEGIN ?>
-<?php $t_index_count=0; ?>
 <br />
 <div align="center">
 <form method="post" action="print_all_bug_options_update.php">
@@ -174,4 +173,5 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 	</form>
 </div>
 
-<?php } # end of edit_printing_prefs() ?>
+<?php
+}

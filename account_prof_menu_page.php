@@ -39,37 +39,31 @@
 	}
 
 	require_once( $t_core_path.'current_user_api.php' );
-?>
-<?php
+
 	auth_ensure_user_authenticated();
 
 	current_user_ensure_unprotected();
-?>
-<?php
+
 	if ( $g_global_profiles ) {
 		access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 	} else {
 		access_ensure_global_level( config_get( 'add_profile_threshold' ) );
 	}
-?>
-<?php html_page_top1( lang_get( 'manage_profiles_link' ) ) ?>
-<?php html_page_top2() ?>
 
-<?php
+	html_page_top( lang_get( 'manage_profiles_link' ) );
+
 	if ( $g_global_profiles ) {
 		print_manage_menu( 'manage_prof_menu_page.php' );
 	}
-?>
 
-<?php
 	if ( $g_global_profiles ) {
 		$t_user_id = ALL_USERS;
 	} else {
 		$t_user_id = auth_get_current_user_id();
 	}
-?>
 
-<?php # Add Profile Form BEGIN ?>
+	# Add Profile Form BEGIN
+?>
 <br />
 <div align="center">
 <form method="post" action="account_prof_update.php">
@@ -132,12 +126,12 @@
 </table>
 </form>
 </div>
-<?php # Add Profile Form END ?>
-
-<?php # Edit or Delete Profile Form BEGIN ?>
 <?php 
+	# Add Profile Form END
+	# Edit or Delete Profile Form BEGIN
+
 	$t_profiles = profile_get_all_for_user( $t_user_id );
-	if( $t_profiles ) { 
+	if( $t_profiles ) {
 ?>
 <br />
 <div align="center">
@@ -180,7 +174,7 @@
 </table>
 </form>
 </div>
-<?php } ?>
-<?php # Edit or Delete Profile Form END ?>
+<?php 
+} # Edit or Delete Profile Form END
 
-<?php html_page_bottom1( __FILE__ ) ?>
+html_page_bottom( __FILE__ );

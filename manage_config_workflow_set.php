@@ -39,9 +39,7 @@
 	$t_project = helper_get_current_project();
 	$t_access = current_user_get_access_level();
 
-	html_page_top1( lang_get( 'manage_workflow_config' ) );
-	html_meta_redirect( $t_redirect_url );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_workflow_config' ), $t_redirect_url );
 
 	# process the changes to threshold values
 	$t_valid_thresholds = array( 'bug_submit_status', 'bug_resolved_status_threshold', 'bug_reopen_status' );
@@ -50,7 +48,7 @@
 		if( config_get_access( $t_threshold ) <= $t_access ) {
 			$f_value = gpc_get( 'threshold_' . $t_threshold );
 			$f_access = gpc_get( 'access_' . $t_threshold );
-			if ( ( $f_value != config_get( $t_threshold ) ) 
+			if ( ( $f_value != config_get( $t_threshold ) )
 					|| ( $f_access != config_get_access( $t_threshold ) ) ) {
 				config_set( $t_threshold, $f_value, NO_USER, $t_project, $f_access );
 			}
@@ -118,7 +116,7 @@
 			}
 		}
 
-		if ( ( $t_set_status != config_get( 'set_status_threshold' ) ) 
+		if ( ( $t_set_status != config_get( 'set_status_threshold' ) )
 				|| ( $f_access != config_get_access( 'status_enum_workflow' ) ) ) {
 			config_set( 'set_status_threshold', $t_set_status, ALL_USERS, $t_project, $f_access );
 		}
@@ -133,4 +131,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

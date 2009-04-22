@@ -322,13 +322,15 @@ $s_sponsorship_enum_string = '0:non payé,1:demandé,2:payé';
 $s_new_account_subject = 'Enregistrement de compte';
 $s_new_account_greeting = 'Merci de vous être enregistré. Votre code d\'utilisateur est « %1$s ». Pour compléter votre enregistrement, visiter l\'hyperlien suivant (vérifiez qu\'il est donné sur une seule ligne) et entrer votre propre mot de passe d\'accès :';
 $s_new_account_username = 'Utilisateur : ';
-$s_new_account_message = 'Si vous n\'aviez fait aucune demande d\'enregistrement, ignorez ce message et rien ne sera fait.' . '\n\n';
+$s_new_account_message = 'Si vous n\'aviez fait aucune demande d\'enregistrement, ignorez ce message et rien ne sera fait.';
 $s_new_account_do_not_reply = 'NE PAS RÉPONDRE À CE MESSAGE';
 $s_new_account_email = 'Courriel : ';
 $s_new_account_IP = 'Adresse IP distante : ';
 $s_new_account_signup_msg = 'Le compte suivant a été créé :';
 
-$s_reset_request_msg = 'Quelqu\'un (probablement vous) a demandé un changement de mot de passe avec vérification par courriel. Si ce n\'était pas vous, ignorez ce message et rien ne sera fait.' . '\n\n' . 'Si vous avez demandé cette vérification, visitez l\'URL suivante pour changer votre mot de passe :';
+$s_reset_request_msg = 'Quelqu\'un (probablement vous) a demandé un changement de mot de passe avec vérification par courriel. Si ce n\'était pas vous, ignorez ce message et rien ne sera fait.
+
+Si vous avez demandé cette vérification, visitez l\'URL suivante pour changer votre mot de passe :';
 $s_reset_request_in_progress_msg = 'Si vous avez fourni le nom d\'utilisateur et l\'adresse de courriel corrects pour votre compte, nous vous avons maintenant envoyé un message de confirmation à cette adresse de courriel. Une fois le message reçu, suivez les instructions fournies pour changer le mot de passe de votre compte.';
 
 $s_email_notification_title_for_status_bug_new = 'Le bogue suivant est maintenant à l\'état « nouveau » (encore)';

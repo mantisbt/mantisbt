@@ -30,8 +30,7 @@
 
 	auth_reauthenticate();
 
-	html_page_top1( lang_get( 'manage_threshold_config' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_threshold_config' ) );
 
 	print_manage_menu( 'adm_permissions_report.php' );
 	print_manage_config_menu( 'manage_config_work_threshold_page.php' );
@@ -43,7 +42,7 @@
 
 	$t_access_levels = MantisEnum::getAssocArrayIndexedByValues( config_get( 'access_levels_enum_string' ) );
 
-	$t_overrides = array();	
+	$t_overrides = array();
 	function set_overrides( $p_config ) {
 	   global $t_overrides;
 	   if ( !in_array( $p_config, $t_overrides ) ) {
@@ -79,7 +78,7 @@
 		} else {
 		    $t_file_exp = $t_file;
 		}
-        
+
         $t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
         if ( !is_array( $t_global ) ) {
             $t_global_exp = array();
@@ -91,7 +90,7 @@
 		} else {
 		    $t_global_exp = $t_global;
 		}
-        
+
         $t_project = config_get( $p_threshold );
         if ( !is_array( $t_project ) ) {
             $t_project_exp = array();
@@ -103,7 +102,7 @@
 		} else {
 		    $t_project_exp = $t_project;
 		}
-        
+
 		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 		          && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
@@ -125,7 +124,7 @@
                 if ( $t_can_change ) {
                     set_overrides( $p_threshold );
                 }
-            } 
+            }
 
 			if ( $t_can_change ) {
 			    $t_checked = $t_project ? "checked=\"checked\"" : "";
@@ -157,7 +156,7 @@
         $t_file = config_get_global( $p_threshold );
         $t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
         $t_project = config_get( $p_threshold );
-        
+
 		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 		          && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
@@ -173,7 +172,7 @@
             if ( $t_can_change ) {
                 set_overrides( $p_threshold );
             }
-        } 
+        }
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		if ( $t_can_change ) {
@@ -202,11 +201,11 @@
 
 	function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects_only=false ) {
 	    global $t_user, $t_project_id, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
-        
+
         $t_file = config_get_global( $p_threshold );
         $t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
         $t_project = config_get( $p_threshold );
-        
+
 		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 		          && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
@@ -222,7 +221,7 @@
             if ( $t_can_change ) {
                 set_overrides( $p_threshold );
             }
-        } 
+        }
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		if ( $t_can_change ) {
@@ -252,7 +251,7 @@
 
 	$t_colour_project = config_get( 'colour_project');
 	$t_colour_global = config_get( 'colour_global');
-	
+
     echo "<br /><br />\n";
 
 	if ( ALL_PROJECTS == $t_project_id ) {
@@ -321,7 +320,7 @@
     }
 
 	echo "</form>\n";
-	
+
 	if ( $t_show_submit && ( 0 < count( $t_overrides ) ) ) {
         echo "<div class=\"right\"><form name=\"threshold_config_action\" method=\"post\" action=\"manage_config_revert.php\">\n";
 		echo form_security_field( 'manage_config_revert' );
@@ -338,5 +337,4 @@
         echo "</form></div>\n";
     }
 
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

@@ -58,8 +58,6 @@
 	auth_ensure_user_authenticated();
 
 	current_user_ensure_unprotected();
-?>
-<?php
 
 	# extracts the user information for the currently logged in user
 	# and prefixes it with u_
@@ -71,21 +69,20 @@
 	# In case we're using LDAP to get the email address... this will pull out
 	#  that version instead of the one in the DB
 	$u_email = user_get_email( $u_id, $u_username );
-	
+
 	# note if we are being included by a script of a different name, if so,
 	#  this is a mandatory password change request
 	$t_force_pw_reset = is_page_name( 'verify.php' );
 
-	html_page_top1( lang_get( 'account_link' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'account_link' ) );
 ?>
 
 <!-- # Edit Account Form BEGIN -->
 <br />
 <?php if ( $t_force_pw_reset ) { ?>
 <center><div style="color:red; width:75%">
-		<?php 
-			echo lang_get( 'verify_warning' ); 
+		<?php
+			echo lang_get( 'verify_warning' );
 			if ( helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 				echo '<br />' . lang_get( 'verify_change_password' );
 			}
@@ -95,8 +92,9 @@
 <?php } ?>
 <div align="center">
 <form method="post" action="account_update.php">
-<?php  echo form_security_field( 'account_update' )?>
-<?php if ( isset( $g_session_pass_id ) ) { ?>
+<?php
+	echo form_security_field( 'account_update' );
+	if ( isset( $g_session_pass_id ) ) { ?>
 <input type="hidden" name="session_id" value="<?php echo session_id() ?>"/>
 <?php } ?>
 <table class="width75" cellspacing="1">
@@ -148,8 +146,10 @@
 	<!-- Password -->
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
-			<?php echo lang_get( 'password' ) ?>
-			<?php if ( $t_force_pw_reset ) { ?>
+			<?php 
+				echo lang_get( 'password' );
+				if ( $t_force_pw_reset ) { 
+			?>
 			<span class="required">*</span>
 			<?php } ?>
 		</td>
@@ -161,8 +161,10 @@
 	<!-- Password confirmation -->
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
-			<?php echo lang_get( 'confirm_password' ) ?>
-			<?php if ( $t_force_pw_reset ) { ?>
+			<?php 
+				echo lang_get( 'confirm_password' );
+				if ( $t_force_pw_reset ) { 
+			?>
 			<span class="required">*</span>
 			<?php } ?>
 		</td>
@@ -171,9 +173,10 @@
 		</td>
 	</tr>
 
-<?php } ?> <!-- End LDAP conditional -->
+<?php
+} // End LDAP conditional
 
-<?php if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email-->
+if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email-->
 
 	<!-- Email -->
 	<tr <?php echo helper_alternate_class() ?>>
@@ -272,4 +275,5 @@
 <?php } ?>
 <?php # Delete Account Form END ?>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

@@ -31,20 +31,20 @@
 	require_once( $t_core_path.'string_api.php' );
 
 	access_ensure_project_level( VIEWER );
+
+	html_page_top();
 ?>
-<?php html_page_top1() ?>
-<?php html_page_top2() ?>
 
 <br />
 <?php
 	# Select the news posts
 	$rows = news_get_rows( helper_get_current_project() );
-	$t_count = sizeof( $rows );
-	
+	$t_count = count( $rows );
+
 	if ( $t_count > 0 ) {
 		echo '<ul>';
 	}
-	
+
     # Loop through results
 	for ( $i=0 ; $i < $t_count ; $i++ ) {
 		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
@@ -64,7 +64,7 @@
 		if ( VS_PRIVATE == $v_view_state ) {
 			array_push( $t_notes, lang_get( 'private' ) );
 		}
-		if ( sizeof( $t_notes ) > 0 ) {
+		if ( count( $t_notes ) > 0 ) {
 			$t_note_string = '['.implode( ' ', $t_notes ).']';
 		}
 
@@ -73,9 +73,9 @@
 		echo ' ' . $t_note_string;
 		echo "</span></li>";
 	}  # end for loop
-	
+
 	if ( $t_count > 0 ) {
 			echo '</ul>';
 	}
 
-	html_page_bottom1( __FILE__ );
+	html_page_bottom( __FILE__ );

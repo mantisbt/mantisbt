@@ -39,9 +39,9 @@
 	access_ensure_project_level( VIEWER );
 
 	$f_offset = gpc_get_int( 'offset', 0 );
-	
+
 	$t_project_id = helper_get_current_project();
-	
+
 	$t_rss_enabled = config_get( 'rss_enabled' );
 
 	if ( OFF != $t_rss_enabled ) {
@@ -49,8 +49,7 @@
 		html_set_rss_link( $t_rss_link );
 	}
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top( lang_get( 'main_link' ) );
 
 	if ( !current_user_is_anonymous() ) {
 		echo '<div class="quick-summary-left">';
@@ -111,5 +110,5 @@
 
 	echo '</div>';
 
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );
+

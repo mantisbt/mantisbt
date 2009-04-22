@@ -32,7 +32,7 @@
 	$f_project_id	= gpc_get_string( 'project_id' );
 	$f_make_default	= gpc_get_bool  ( 'make_default' );
 	$f_ref			= gpc_get_string( 'ref', '' );
-	
+
 	$c_ref = string_prepare_header( $f_ref );
 
 	$t_project = split( ';', $f_project_id );
@@ -64,7 +64,7 @@
 		$t_path = config_get( 'path' );
 		if ( strtolower( $t_path ) == strtolower( substr( $_SERVER['HTTP_REFERER'], 0, strlen( $t_path ) ) ) ) {
 			$t_referrer_page = substr( $_SERVER['HTTP_REFERER'], strlen( $t_path ) );
-			# if view_all_bug_page, pass on filter	
+			# if view_all_bug_page, pass on filter
 			if ( eregi( 'view_all_bug_page.php', $t_referrer_page ) ) {
 				$t_source_filter_id = filter_db_get_project_current( $f_project_id );
 				$t_redirect_url = 'view_all_set.php?type=4';
@@ -79,8 +79,8 @@
 				} else {
 					$t_path = $t_referrer_page;
 					$t_param = '';
-				} 
-						
+				}
+
 				switch ($t_path ) {
 					case 'bug_view_page.php':
 					case 'bug_view_advanced_page.php':
@@ -89,7 +89,7 @@
 					case 'bug_change_status_page.php':
 						$t_path = $t_home_page;
 						break;
-					default:					
+					default:
 						$t_path = $t_referrer_page;
 						break;
 				}
@@ -103,12 +103,12 @@
 	}
 
 	print_header_redirect( $t_redirect_url, true, true );
-?>
-<?php html_page_top1() ?>
-<?php
+
+	html_page_top1();
 	html_meta_redirect( $t_redirect_url );
+
+	html_page_top1();
 ?>
-<?php html_page_top1() ?>
 
 <br />
 <div align="center">
@@ -119,4 +119,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

@@ -323,7 +323,9 @@ $s_new_account_do_not_reply = 'NEODPOVÍDEJTE NA TUTO ZPRÁVU';
 $s_new_account_email = 'E-mail:';
 $s_new_account_IP = 'IP adresa vzdáleného počítače:';
 $s_new_account_signup_msg = 'Byt vytvořen následující účet:';
-$s_reset_request_msg = 'Někdo (doufáme že vy) požádal o změnu hesla s ověřením dopisem. Pokud jste to vy nebyl, ignorujte tento dopis a nic se nestane.\n\nPokud jste si skutečnš přáli tuto změnu, navštivte následující stránku a dokončete změnu přístupového hesla:';
+$s_reset_request_msg = 'Někdo (doufáme že vy) požádal o změnu hesla s ověřením dopisem. Pokud jste to vy nebyl, ignorujte tento dopis a nic se nestane.
+
+Pokud jste si skutečnš přáli tuto změnu, navštivte následující stránku a dokončete změnu přístupového hesla:';
 $s_reset_request_in_progress_msg = 'Pokud byla zadána správná kombinace uživatelského jména a elektronické adresy pro váš účet, odešleme vám na tuto adresu potvrzovací dopis. Až tento dopis dostanete, řiďte se pokyny v něm pro dokončení změny přístupového hesla.';
 $s_email_notification_title_for_status_bug_new = 'Následující problém je označen jako NOVÝ (znovu)';
 $s_email_notification_title_for_status_bug_feedback = 'Následující problém vyžaduje vaši ODEZVU.';

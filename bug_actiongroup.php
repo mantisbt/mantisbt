@@ -37,7 +37,7 @@
 	$f_custom_field_id = gpc_get_int( 'custom_field_id', 0 );
 	$f_bug_arr	= gpc_get_int_array( 'bug_arr', array() );
 	$f_bug_notetext = gpc_get_string( 'bugnote_text', '' );
-	$f_bug_noteprivate = gpc_get_bool( 'private' );	
+	$f_bug_noteprivate = gpc_get_bool( 'private' );
 	$t_form_name = 'bug_actiongroup_' . $f_action;
 	form_security_validate( $t_form_name );
 
@@ -182,7 +182,7 @@
 				if ( TRUE == bug_check_workflow($t_status, $f_status ) ) {
 					/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
 					bug_set_field( $t_bug_id, 'status', $f_status );
-					
+
 					# Add bugnote if supplied
 					if ( !is_blank( $f_bug_notetext ) ) {
 						bugnote_add( $t_bug_id, $f_bug_notetext, null, $f_bug_noteprivate );
@@ -211,7 +211,7 @@
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
 			break;
-		
+
 		case 'UP_FIXED_IN_VERSION':
 			$f_fixed_in_version = gpc_get_string( 'fixed_in_version' );
 			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
@@ -298,8 +298,7 @@
 	$t_redirect_url = 'view_all_bug_page.php';
 
 	if ( count( $t_failed_ids ) > 0 ) {
-		html_page_top1();
-		html_page_top2();
+		html_page_top();
 
 		echo '<div align="center"><br />';
 		echo '<table class="width75">';
@@ -310,8 +309,7 @@
 		print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 		echo '</div>';
 
-		html_page_bottom1( __FILE__ );
+		html_page_bottom( __FILE__ );
 	} else {
 		print_header_redirect( $t_redirect_url );
 	}
-?>

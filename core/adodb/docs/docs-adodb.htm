@@ -615,13 +615,13 @@ ul
 </head>
 
 <body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:36.0pt'>
-	
+
 <div class=Section1>
 
-<h2>ADOdb Library for PHP</h2> 
+<h2>ADOdb Library for PHP</h2>
 
-<p>V5.06 16 Oct 2008 (c) 2000-2008 John Lim (jlim#natsoft.com)</p>
-  
+<p>V5.06 16 Oct 2008 (c) 2000-2009 John Lim (jlim#natsoft.com)</p>
+
 <p><span style='font-size:7.5pt'>This software is dual licensed using BSD-Style
 and LGPL. This means you can use it in compiled proprietary and commercial
 products.</span></p>
@@ -630,40 +630,40 @@ products.</span></p>
 &nbsp; <a href="http://adodb.sourceforge.net/#docs">Other Docs</a> </p>
 
 <p><a href="#intro"><b>Introduction</b></a><b><br>
-	<a href="#features">Unique Features</a><br>
-	<a href="#users">How People are using ADOdb</a><br>
-	<a href="#bugs">Feature Requests and Bug Reports</a><br>
+<a href="#features">Unique Features</a><br>
+<a href="#users">How People are using ADOdb</a><br>
+<a href="#bugs">Feature Requests and Bug Reports</a><br>
 <a href="#install">Installation</a><br>
-	<a href="#mininstall">Minimum Install</a><br>
-	<a href="#coding">Initializing Code and Connectioning to Databases</a><br>
+<a href="#mininstall">Minimum Install</a><br>
+<a href="#coding">Initializing Code and Connectioning to Databases</a><br>
 </b><span style='font-size:10.0pt'>&nbsp; <a href="#dsnsupport">Data Source
 Name (DSN) Support</a></span> &nbsp; <a href="#connect_ex">Connection Examples</a>
 <br>
-	<b><a href="#speed">High Speed ADOdb - tuning tips</a></b><br>
-	<b><a href="#hack">Hacking and Modifying ADOdb Safely</a><br>
-	<a href="#php5">PHP5 Features</a></b><br>
+<b><a href="#speed">High Speed ADOdb - tuning tips</a></b><br>
+<b><a href="#hack">Hacking and Modifying ADOdb Safely</a><br>
+<a href="#php5">PHP5 Features</a></b><br>
 <span style='font-size:10.0pt'><a href="#php5iterators">foreach iterators</a> <a
 href="#php5exceptions">exceptions</a></span><br>
-	<b> <a href="#drivers">Supported Databases</a></b><br>
-	<b> <a href="#quickstart">Tutorials</a></b><br>
-	<a href="#ex1">Example 1: Select</a><br>
-	<a href="#ex2">Example 2: Advanced Select</a><br>
-	<a href="#ex3">Example 3: Insert</a><br>
-	<a href="#ex4">Example 4: Debugging</a> &nbsp;<a href="#exrs2html">rs2html 
-	example</a><br>
-	<a href="#ex5">Example 5: MySQL and Menus</a><br>
-	<a href="#ex6">Example 6: Connecting to Multiple Databases at once</a> <br>
-	<a href="#ex7">Example 7: Generating Update and Insert SQL</a> <br>
-	<a href="#ex8">Example 8: Implementing Scrolling with Next and Previous</a><br>
-	<a href="#ex9">Example 9: Exporting in CSV or Tab-Delimited Format</a> <br>
-	<a href="#ex10">Example 10: Custom filters</a><br>
-	<a href="#ex11">Example 11: Smart Transactions</a><br>
-	<br>
-	<b> <a href="#errorhandling">Using Custom Error Handlers and PEAR_Error</a><br>
-	<a href="#DSN">Data Source Names</a><br>
-	<a href="#caching">Caching</a></b><br>
-	&nbsp; &nbsp;  <a href="#memcache">MemCache</a><br>
-	&nbsp; &nbsp;  <a href="#cacheapi">Caching API</a><br>
+<b><a href="#drivers">Supported Databases</a></b><br>
+<b><a href="#quickstart">Tutorials</a></b><br>
+<a href="#ex1">Example 1: Select</a><br>
+<a href="#ex2">Example 2: Advanced Select</a><br>
+<a href="#ex3">Example 3: Insert</a><br>
+<a href="#ex4">Example 4: Debugging</a> &nbsp;<a href="#exrs2html">rs2html
+example</a><br>
+<a href="#ex5">Example 5: MySQL and Menus</a><br>
+<a href="#ex6">Example 6: Connecting to Multiple Databases at once</a> <br>
+<a href="#ex7">Example 7: Generating Update and Insert SQL</a> <br>
+<a href="#ex8">Example 8: Implementing Scrolling with Next and Previous</a><br>
+<a href="#ex9">Example 9: Exporting in CSV or Tab-Delimited Format</a> <br>
+<a href="#ex10">Example 10: Custom filters</a><br>
+<a href="#ex11">Example 11: Smart Transactions</a><br>
+<br>
+<b><a href="#errorhandling">Using Custom Error Handlers and PEAR_Error</a><br>
+<a href="#DSN">Data Source Names</a><br>
+<a href="#caching">Caching</a></b><br>
+&nbsp; &nbsp; <a href="#memcache">MemCache</a><br>
+&nbsp; &nbsp; <a href="#cacheapi">Caching API</a><br>
 <b><a href="#pivot">Pivot Tables</a></b> </p>
 
 <p><a href="#ref"><b>REFERENCE</b></a> </p>
@@ -675,13 +675,13 @@ href="#adodb_cache_dir">$ADODB_CACHE_DIR</a> <br>
 href="#adodb_fetch_mode">$ADODB_FETCH_MODE</a> <a href="#adodb_lang">$ADODB_LANG</a>
 <a href="#adodb_auto_quote">ADODB_QUOTE_FIELDNAMES</a> <br>
 Constants: <a href="#adodb_assoc_case">ADODB_ASSOC_CASE</a> </span><br>
-  <a href="#ADOConnection"><b> ADOConnection</b></a><br>
+<a href="#ADOConnection"><b>ADOConnection</b></a><br>
 <span style='font-size:10.0pt'>Connections: <a href="#connect">Connect</a> <a
 href="#pconnect">PConnect</a> <a href="#nconnect">NConnect</a> <a
 href="#isconnected">IsConnected</a><br>
-  Executing SQL: <a href="#execute">Execute</a> <a href="#cacheexecute"><i>CacheExecute</i></a> 
-  <a href="#selectlimit">SelectLimit</a> <a href="#cacheSelectLimit"><i>CacheSelectLimit</i></a> 
-  <a href="#param">Param</a> <a href="#prepare">Prepare</a> <a href="#preparesp">PrepareSP</a> 
+Executing SQL: <a href="#execute">Execute</a> <a href="#cacheexecute"><i>CacheExecute</i></a>
+<a href="#selectlimit">SelectLimit</a> <a href="#cacheSelectLimit"><i>CacheSelectLimit</i></a>
+<a href="#param">Param</a> <a href="#prepare">Prepare</a> <a href="#preparesp">PrepareSP</a>
 <a href="#inparameter">InParameter</a> <a href="#outparameter">OutParameter</a>
 <a href="#autoexecute">AutoExecute</a> <br>
 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
@@ -700,14 +700,14 @@ href="#ifnull">IfNull</a> <a href="#length">length</a> <a href="#random">random<
 <a href="#OffsetDate">OffsetDate</a> <a href="#sqldate">SQLDate</a> <a
 href="#dbdate">DBDate</a> <a href="#dbtimestamp">DBTimeStamp</a> <a
 href="#binddate">BindDate</a> <a href="#bindtimestamp">BindTimeStamp</a> <br>
-  Blobs: <a href="#updateblob">UpdateBlob</a> <a href="#updateclob">UpdateClob</a> 
-  <a href="#updateblobfile">UpdateBlobFile</a> <a href="#blobencode">BlobEncode</a> 
-  <a href="#blobdecode">BlobDecode</a><br>
+Blobs: <a href="#updateblob">UpdateBlob</a> <a href="#updateclob">UpdateClob</a>
+<a href="#updateblobfile">UpdateBlobFile</a> <a href="#blobencode">BlobEncode</a>
+<a href="#blobdecode">BlobDecode</a><br>
 Paging/Scrolling: <a href="#pageexecute">PageExecute</a> <a
 href="#cachepageexecute">CachePageExecute</a><br>
-  Cleanup: <a href="#cacheflush">CacheFlush</a> <a href="#Close">Close</a><br>
-  Transactions: <a href="#starttrans">StartTrans</a> <a href="#completetrans">CompleteTrans</a> 
-  <a href="#failtrans">FailTrans</a> <a href="#hasfailedtrans">HasFailedTrans</a> 
+Cleanup: <a href="#cacheflush">CacheFlush</a> <a href="#Close">Close</a><br>
+Transactions: <a href="#starttrans">StartTrans</a> <a href="#completetrans">CompleteTrans</a>
+<a href="#failtrans">FailTrans</a> <a href="#hasfailedtrans">HasFailedTrans</a>
 <a href="#begintrans">BeginTrans</a> <a href="#committrans">CommitTrans</a> <a
 href="#rollbacktrans">RollbackTrans</a> <a href="#SetTransactionMode">SetTransactionMode</a><br>
 Fetching Data: <a href="#setfetchmode">SetFetchMode</a><br>
@@ -728,37 +728,37 @@ Data Dictionary (metadata): <a href="#metadatabases">MetaDatabases</a> <a
 href="#metatables">MetaTables</a> <a href="#metacolumns">MetaColumns</a> <a
 href="#metacolumnames">MetaColumnNames</a> <a href="#metaprimarykeys">MetaPrimaryKeys</a>
 <a href="#metaforeignkeys">MetaForeignKeys</a> <a href="#serverinfo">ServerInfo</a>
-  <br>
+<br>
 Statistics and Query-Rewriting: <a href="#logsql">LogSQL</a> <a
 href="#fnexecute">fnExecute and fnCacheExecute</a><br>
 Deprecated: <a href="#bind">Bind</a> <a href="#blankrecordset">BlankRecordSet</a>
 <a href="#parameter">Parameter</a></span> <a href="#adorecordSet"><b><br>
-  ADORecordSet</b></a><br>
+ADORecordSet</b></a><br>
 <span style='font-size:10.0pt'>Returns one field: <a href="#fields">Fields</a><br>
- Returns one row:<a href="#fetchrow">FetchRow</a> <a href="#fetchinto">FetchInto</a> 
-  <a href="#fetchobject">FetchObject</a> <a href="#fetchnextobject">FetchNextObject</a> 
+Returns one row:<a href="#fetchrow">FetchRow</a> <a href="#fetchinto">FetchInto</a>
+<a href="#fetchobject">FetchObject</a> <a href="#fetchnextobject">FetchNextObject</a>
 <a href="#fetchobj">FetchObj</a> <a href="#fetchnextobj">FetchNextObj</a> <a
 href="#getrowassoc">GetRowAssoc</a> <br>
-  Returns all rows:<a href="#getarray">GetArray</a> <a href="#getrows">GetRows</a> 
-  <a href="#getassoc">GetAssoc</a><br>
+Returns all rows:<a href="#getarray">GetArray</a> <a href="#getrows">GetRows</a>
+<a href="#getassoc">GetAssoc</a><br>
 Scrolling:<a href="#move">Move</a> <a href="#movenext">MoveNext</a> <a
 href="#movefirst">MoveFirst</a> <a href="#movelast">MoveLast</a> <a
 href="#abspos">AbsolutePosition</a> <a href="#currentrow">CurrentRow</a> <a
 href="#atfirstpage">AtFirstPage</a> <a href="#atlastpage">AtLastPage</a> <a
 href="#absolutepage">AbsolutePage</a> <br>
-  Menu generation:<a href="#getmenu">GetMenu</a> <a href="#getmenu2">GetMenu2</a><br>
-  Dates:<a href="#userdate">UserDate</a> <a href="#usertimestamp">UserTimeStamp</a> 
-  <a href="#unixdate">UnixDate</a> <a href="#unixtimestamp">UnixTimeStamp<br>
+Menu generation:<a href="#getmenu">GetMenu</a> <a href="#getmenu2">GetMenu2</a><br>
+Dates:<a href="#userdate">UserDate</a> <a href="#usertimestamp">UserTimeStamp</a>
+<a href="#unixdate">UnixDate</a> <a href="#unixtimestamp">UnixTimeStamp<br>
 </a>Recordset Info:<a href="#recordcount">RecordCount</a> <a
 href="#po_recordcount">PO_RecordCount</a> <a href="#nextrecordset">NextRecordSet</a><br>
-  Field Info:<a href="#fieldcount">FieldCount</a> <a href="#fetchfield">FetchField</a> 
-  <a href="#metatype">MetaType</a><br>
+Field Info:<a href="#fieldcount">FieldCount</a> <a href="#fetchfield">FetchField</a>
+<a href="#metatype">MetaType</a><br>
 Cleanup: <a href="#rsclose">Close</a></span> </p>
 
 <p><span style='font-size:10.0pt'><a href="#rs2html"><b>rs2html</b></a>&nbsp; <a
 href="#exrs2html">example</a></span><br>
-  <a href="#adodiff">Differences between ADOdb and ADO</a><br>
-  <a href="#driverguide"><b>Database Driver Guide<br>
+<a href="#adodiff">Differences between ADOdb and ADO</a><br>
+<a href="#driverguide"><b>Database Driver Guide<br>
 </b></a><b><a href="#changes">Change Log</a></b></p>
 
 <h2>Introduction<a name=intro></a></h2>
@@ -779,7 +779,7 @@ other databases.</p>
 using ADOdb for true portability and scalability. See adodb-session.php for
 more information.</p>
 
-<p>Also read <a href="http://phplens.com/lens/adodb/tips_portable_sql.htm">tips_portable_sql.htm</a> 
+<p>Also read <a href="http://phplens.com/lens/adodb/tips_portable_sql.htm">tips_portable_sql.htm</a>
 for tips on writing portable SQL.</p>
 
 <h2>Unique Features of ADOdb<a name=features></a></h2>
@@ -949,7 +949,7 @@ solid #DDDDDD .75pt;padding:9.0pt 18.0pt 9.0pt 18.0pt;background:#EEEEEE'><pre
 style='background:#EEEEEE'>include('/path/to/set/here/adodb.inc.php');<br>
 $conn = &amp;ADONewConnection('mysql');</pre></div>
 
-<p>Whenever you need to connect to a database, you create a Connection object 
+<p>Whenever you need to connect to a database, you create a Connection object
 using the <b>ADONewConnection</b>($driver) function. <b>NewADOConnection</b>($driver)
 is an alternative name for the same function.</p>
 
@@ -962,7 +962,7 @@ take up much fewer resources though, reducing the risk of your database and
 your web-server becoming overloaded. </p>
 
 <p>For persistent connections, use $conn-&gt;<a href="#pconnect">PConnect()</a>,
- or $conn-&gt;<a href="#connect">Connect()</a> for non-persistent connections.
+or $conn-&gt;<a href="#connect">Connect()</a> for non-persistent connections.
 Some database drivers also support <a href="#nconnect">NConnect()</a>, which
 forces the creation of a new connection. <a name="connection_gotcha"></a></p>
 
@@ -995,8 +995,16 @@ style='mso-tab-count:1'>         </span></pre><pre><span style='mso-tab-count:
 1'>         </span><span style='color:green'># no need to call connect/pconnect!</span></pre><pre><span
 style='mso-tab-count:1'>         </span>$arr = $db-&gt;GetArray(&quot;select * from table&quot;);</pre><pre><span
 style='mso-tab-count:1'>         </span></pre><pre><span style='mso-tab-count:
-1'>         </span><span style='color:green'># persistent connection</span></pre><pre><span
-style='mso-tab-count:1'>         </span>$dsn2 = 'mysql://root:pwd@localhost/mydb?persist'; </pre></div>
+1'>         </span><span style='color:green'># persistent connection</span></pre>
+<pre><span
+style='mso-tab-count:1'>         </span>$dsn2 = 'mysql://root:pwd@localhost/mydb?persist'; 
+<span
+style='mso-tab-count:1'></span></pre>
+<pre><span style='mso-tab-count:
+1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='color:green'># non-persistent connection on port 3000</span></pre>
+<pre><span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$dsn2 = 'mysqli://root:pwd@localhost/mydb?persist=0&amp;port=3000';</pre>
+</div>
 
 <p>If you have special characters such as /:?_ in your dsn, then you need to
 rawurlencode them first: </p>
@@ -1226,7 +1234,7 @@ style='background:#EEEEEE'><span style='mso-tab-count:1'>         </span>$conn =
 
 <h4>Oracle (oci8)</h4>
 
-<p>With oci8, you can connect in multiple ways. Note that oci8 works fine with 
+<p>With oci8, you can connect in multiple ways. Note that oci8 works fine with
 newer versions of the Oracle, eg. 9i and 10g.</p>
 
 <p>a. PHP and Oracle reside on the same machine, use default SID.</p>
@@ -1342,7 +1350,7 @@ style='mso-tab-count:4'>                                   </span>&quot;uid=root
 <span style='mso-tab-count:1'>         </span>$db-&gt;Connect($dsn);</pre></div>
 
 <p class=MsoNormal><b>DSN-less Connections with <st1:City w:st="on">ADO</st1:City></b><br>
-If you are using versions of PHP earlier than PHP 4.3.0, DSN-less connections 
+If you are using versions of PHP earlier than PHP 4.3.0, DSN-less connections
 only work with Microsoft's <st1:City w:st="on"><st1:place w:st="on">ADO</st1:place></st1:City>,
 which is Microsoft's COM based API. An example using the ADOdb library and
 Microsoft's <st1:City w:st="on"><st1:place w:st="on">ADO</st1:place></st1:City>:
@@ -1377,16 +1385,16 @@ innermost layer. Stick to the following functions for best performance:</p>
   <td style='padding:.75pt .75pt .75pt .75pt'>
   <p class=MsoNormal align=center style='text-align:center'><b>Innermost Layer</b></p>
   </td>
-  </tr>
+ </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes'>
   <td style='padding:.75pt .75pt .75pt .75pt'>
   <p align=center style='text-align:center'>Connect, PConnect, NConnect<br>
-        Execute, CacheExecute<br>
-        SelectLimit, CacheSelectLimit<br>
-        MoveNext, Close <br>
+  Execute, CacheExecute<br>
+  SelectLimit, CacheSelectLimit<br>
+  MoveNext, Close <br>
   qstr, Affected_Rows, Insert_ID</p>
   </td>
-  </tr>
+ </tr>
 </table>
 
 </div>
@@ -1397,14 +1405,14 @@ href="#adodb_fetch_mode">$ADODB_FETCH_MODE</a> = ADODB_FETCH_NUM, and (for
 oci8, ibase/firebird and odbc) <a href="#adodb_countrecs">$ADODB_COUNTRECS</a>
 = false before you connect to your database.</p>
 
-<p>Consider using bind parameters if your database supports it, as it improves 
-  query plan reuse. Use ADOdb's performance tuning system to identify bottlenecks 
-  quickly. At the time of writing (Dec 2003), this means oci8 and odbc drivers.</p>
+<p>Consider using bind parameters if your database supports it, as it improves
+query plan reuse. Use ADOdb's performance tuning system to identify bottlenecks
+quickly. At the time of writing (Dec 2003), this means oci8 and odbc drivers.</p>
 
 <p>Lastly make sure you have a PHP accelerator cache installed such as APC,
 Turck MMCache, Zend Accelerator or ionCube.</p>
 
- <p>Some examples:</p>
+<p>Some examples:</p>
 
 <div align=center>
 
@@ -1416,7 +1424,7 @@ Turck MMCache, Zend Accelerator or ionCube.</p>
   <td style='padding:.75pt .75pt .75pt .75pt'>
   <p class=MsoNormal><b>Fastest data retrieval using ADOdb extension</b></p>
   </td>
-        </tr>
+ </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes'>
   <td style='padding:.75pt .75pt .75pt .75pt'>
   <div style='mso-element:para-border-div;border:solid #DDDDDD 1.0pt;
@@ -1436,7 +1444,7 @@ var_dump($array);<br style='mso-special-character:line-break'>
   <![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
   <![endif]></pre></div>
   </td>
-  </tr>
+ </tr>
 </table>
 
 </div>
@@ -1510,7 +1518,7 @@ function&amp; hack_factory($driver)<br>
 <span style='mso-tab-count:1'>         </span>$obj = new $driver();<br>
 <span style='mso-tab-count:1'>         </span>return $obj;<br>
 }<br>
-	<br>
+<br>
 include_once('adodb.inc.php');</pre></div>
 
 <p>Don't forget to call the constructor of the parent class in your
@@ -1550,7 +1558,7 @@ style='mso-tab-count:1'>  </span>$ADODB_FETCH_MODE = ADODB_FETCH_NUM;<br>
      mso-list:l11 level1 lfo5;tab-stops:list 36.0pt'><a name=php5exceptions></a><b>Exceptions</b>:
      Just include <i>adodb-exceptions.inc.php</i> and you can now catch
      exceptions on errors as they occur. </li>
-</ul> 
+</ul>
 
 <div style='mso-element:para-border-div;border:solid #DDDDDD 1.0pt;mso-border-alt:
 solid #DDDDDD .75pt;padding:9.0pt 18.0pt 9.0pt 18.0pt;background:#EEEEEE;
@@ -3438,7 +3446,7 @@ Example below: </span></p>
 <div style='mso-element:para-border-div;border:solid #DDDDDD 1.0pt;mso-border-alt:
 solid #DDDDDD .75pt;padding:9.0pt 18.0pt 9.0pt 18.0pt;background:#EEEEEE'><pre><span
 style='mso-bookmark:memcache'><o:p>&nbsp;</o:p></span></pre><pre><span
-style='mso-bookmark:memcache'>$db = NewADOConnection($driver);</span></pre><pre><span
+style='mso-bookmark:memcache'>$db = NewADOConnection($driver='mysql');</span></pre><pre><span
 style='mso-bookmark:memcache'>$db-&gt;memCache = true;</span></pre><pre><span
 style='mso-bookmark:memcache'>$db-&gt;memCacheHost = array($ip1, $ip2, $ip3); /// $db-&gt;memCacheHost = $ip1; will work too</span></pre><pre><span
 style='mso-bookmark:memcache'>$db-&gt;memCachePort = 11211; /// this is default memCache port</span></pre><pre><span
@@ -6081,7 +6089,25 @@ PHP</a>. </p>
 
 <h2>Change Log<a name=changes></a><a name=changelog></a></h2>
 
-<p><a name=5.07></a><b>5.07 ? Dec 2008</b> </p>
+<p><a name=5.08></a><b>5.08 ? 2009</b> </p>
+<p>adodb-sybase.inc.php driver. Added $conn->charSet support. Thx Luis Henrique Mulinari (luis.mulinari#gmail.com)
+<p>adodb-ado5.inc.php. Fixed some bind param issues. Thx Jirka Novak. 
+<p>adodb-ado5.inc.php. Now has improved error handling.
+<p>Fixed typo in adodb-xmlschema03.inc.php. See XMLS_EXISTING_DATA, line 1501. Thx james johnson.
+<p>Made $inputarr optional for _query() in all drivers.
+<p>Fixed spelling mistake in flushall() in adodb.inc.ophp.
+<p>Fixed handling of quotes in adodb_active_record::doquote. Thx Jonathan Hohle (jhohle#godaddy.com).
+<p>Added new index parameter to adodb_active_record::setdatabaseadaptor. Thx Jonathan Hohle
+<p>Fixed & readcache() reference compat problem with php 5.3 in adodb.Thx Jonathan Hohle.
+<p>Some minor $ADODB_CACHE_CLASS definition issues in adodb.inc.php.
+<p>Added Reset() function to adodb_active_record. Thx marcus.
+<p>Minor dsn fix for pdo_sqlite in adodb.inc.php. Thx Sergey Chvalyuk.
+<p>Fixed adodb-datadict _CreateSuffix() inconsistencies. Thx Chris Miller.
+<p>Option to delete old fields $dropOldFlds in datadict ChangeTableSQL($table, $flds, $tableOptions, $dropOldFlds=false) added. Thx  Philipp Niethammer.
+<p>Memcache caching did not expire properly. Fixed.
+<p>MetaForeignKeys for postgres7 driver changed from adodb_movenext to $rs->MoveNext (also in 4.99)
+<p>Added support for ldap and ldaps url format in ldap driver.
+<p><a name=5.07></a><b>5.07 26 Dec 2008</b> </p>
 
 <p>BeginTrans/CommitTrans/RollbackTrans return true/false correctly on
 success/failure now for mssql, odbc, oci8, mysqlt, mysqli, postgres, pdo. </p>
@@ -6127,7 +6153,7 @@ default ADODB_Active_Record. Thx Arialdo Martini &amp; Chris R for idea. </p>
 <p>The rs2html function did not display hours in timestamps correctly. Now 24hr
 clock used.</p>
 
-<p>Changed ereg* functions to use preg* functions as ereg* is deprecated in PHP 5.3.</p>
+<p>Changed ereg* functions to use preg* functions as ereg* is deprecated in PHP 5.3. Modified sybase and postgresql drivers.</p>
 
 <p><a name=5.06></a><b>5.06 16 Oct 2008</b> </p>
 
@@ -7650,7 +7676,7 @@ Stéphane.</p>
 <p><strong>0.10 Sept 9 2000</strong> First release </p>
 
 <h3><strong>Old change log history moved to <a href="old-changelog.htm">old-changelog.htm</a>.
-  </strong></h3>
+</strong></h3>
 
 <p>&nbsp;</p>
 

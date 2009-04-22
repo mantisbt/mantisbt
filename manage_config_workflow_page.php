@@ -30,8 +30,7 @@
 
 	auth_reauthenticate();
 
-	html_page_top1( lang_get( 'manage_workflow_config' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_workflow_config' ) );
 
 	print_manage_menu( 'adm_permissions_report.php' );
 	print_manage_config_menu( 'manage_config_workflow_page.php' );
@@ -41,7 +40,7 @@
 	$t_can_change_workflow = $t_access >= config_get_access( 'status_enum_workflow' );
 	$t_can_change_flags = $t_can_change_workflow;
 	$t_overrides = array();
-	
+
 	function set_overrides( $p_config ) {
 	   global $t_overrides;
 	   if ( !in_array( $p_config, $t_overrides ) ) {
@@ -161,7 +160,7 @@
 	function section_begin( $p_section_name ) {
 		$t_enum_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan="' . ( count( $t_enum_statuses ) + 2 ) . '">'
+		echo '<tr><td class="form-title-caps" colspan="' . ( count( $t_enum_statuses ) + 2 ) . '">'
 			. $p_section_name . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'current_status' ) . '</td>';
 		echo '<td class="form-title" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'
@@ -493,5 +492,4 @@
         echo "</form>\n";
     }
 
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

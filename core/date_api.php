@@ -26,7 +26,7 @@
  * checks if date is null
  * @param int $p_date
  * @return bool
- * @access public 
+ * @access public
  */
 function date_is_null( $p_date ) {
 	return $p_date == date_get_null();
@@ -35,7 +35,7 @@ function date_is_null( $p_date ) {
 /**
  * gets null date
  * @return int
- * @access public 
+ * @access public
  */
 function date_get_null() {
 	return db_unixtimestamp( db_null_date() );
@@ -46,17 +46,17 @@ function date_get_null() {
  * @param string $p_format
  * @param int $p_date
  * @return null
- * @access public 
+ * @access public
  */
 function print_date( $p_format, $p_date ) {
 	echo date( $p_format, $p_date );
 }
 
 /**
- * 
+ *
  * @param int $p_month
  * @return null
- * @access public 
+ * @access public
  */
 function print_month_option_list( $p_month = 0 ) {
 	for( $i = 1;$i <= 12;$i++ ) {
@@ -70,11 +70,11 @@ function print_month_option_list( $p_month = 0 ) {
 }
 
 /**
- * 
- * 
+ *
+ *
  * @param int $p_month
  * @return null
- * @access public 
+ * @access public
  */
 function print_numeric_month_option_list( $p_month = 0 ) {
 	for( $i = 1;$i <= 12;$i++ ) {
@@ -87,10 +87,10 @@ function print_numeric_month_option_list( $p_month = 0 ) {
 }
 
 /**
- * 
+ *
  * @param int $p_day
  * @return null
- * @access public 
+ * @access public
  */
 function print_day_option_list( $p_day = 0 ) {
 	for( $i = 1;$i <= 31;$i++ ) {
@@ -103,10 +103,10 @@ function print_day_option_list( $p_day = 0 ) {
 }
 
 /**
- * 
+ *
  * @param int $p_year
  * @return null
- * @access public 
+ * @access public
  */
 function print_year_option_list( $p_year = 0 ) {
 	$current_year = date( "Y" );
@@ -121,12 +121,12 @@ function print_year_option_list( $p_year = 0 ) {
 }
 
 /**
- * 
+ *
  * @param int $p_year
  * @param int $p_start
  * @param int $p_end
  * @return null
- * @access public 
+ * @access public
  */
 function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
 	$t_current = date( 'Y' );
@@ -160,7 +160,7 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
 }
 
 /**
- * 
+ *
  * @param string $p_name
  * @param string $p_format
  * @param int $p_date
@@ -169,7 +169,7 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
  * @param int $p_year_start
  * @param int $p_year_end
  * @return null
- * @access public 
+ * @access public
  */
 function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_disable = false, $p_allow_blank = false, $p_year_start = 0, $p_year_end = 0 ) {
 	$t_chars = preg_split( '//', $p_format, -1, PREG_SPLIT_NO_EMPTY );
@@ -227,7 +227,7 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
  * @param string $p_button_name
  * @return null
  * @todo (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...)
- * @access public 
+ * @access public
  */
 function date_print_calendar( $p_button_name = 'trigger' ) {
 	if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
@@ -255,7 +255,7 @@ function date_print_calendar( $p_button_name = 'trigger' ) {
  * @param string $p_field_name
  * @param string $p_button_name
  * @return null
- * @access public 
+ * @access public
  */
 function date_finish_calendar( $p_field_name, $p_button_name ) {
 	if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {

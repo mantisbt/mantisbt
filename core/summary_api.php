@@ -21,7 +21,7 @@
  * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
- 
+
 /**
  * requires config_filter_defaults_include
  */
@@ -29,7 +29,7 @@ require_once( $g_absolute_path . 'config_filter_defaults_inc.php' );
 
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 	printf( '<tr %s>', helper_alternate_class() );
-	printf( '<td width="50%%">%s</td>', string_display( $p_label ) );
+	printf( '<td width="50%%">%s</td>', string_display_line( $p_label ) );
 	printf( '<td width="12%%" class="right">%s</td>', $p_open );
 	printf( '<td width="12%%" class="right">%s</td>', $p_resolved );
 	printf( '<td width="12%%" class="right">%s</td>', $p_closed );
@@ -68,7 +68,7 @@ function summary_print_by_enum( $p_enum_string, $p_enum ) {
 	$t_bugs_total = 0;
 
 	$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
-	$t_closed_val = CLOSED;
+	$t_closed_val = config_get( 'bug_closed_status_threshold' );
 
 	while( $row = db_fetch_array( $result ) ) {
 		if(( $row[$p_enum] != $t_last_value ) && ( -1 != $t_last_value ) ) {
@@ -92,21 +92,21 @@ function summary_print_by_enum( $p_enum_string, $p_enum ) {
 
 			if( !is_blank( $t_bug_link ) ) {
 				if( 0 < $t_bugs_open ) {
-					$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . RESOLVED . '">' . $t_bugs_open . '</a>';
+					$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_resolved_val . '">' . $t_bugs_open . '</a>';
 				} else {
 					if(( 'status' == $p_enum ) && ( $t_last_value >= $t_resolved_val ) ) {
 						$t_bugs_open = '-';
 					}
 				}
 				if( 0 < $t_bugs_resolved ) {
-					$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . RESOLVED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . CLOSED . '">' . $t_bugs_resolved . '</a>';
+					$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_resolved_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_closed_val . '">' . $t_bugs_resolved . '</a>';
 				} else {
 					if(( 'status' == $p_enum ) && (( $t_last_value < $t_resolved_val ) || ( $t_last_value >= $t_closed_val ) ) ) {
 						$t_bugs_resolved = '-';
 					}
 				}
 				if( 0 < $t_bugs_closed ) {
-					$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . CLOSED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
+					$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
 				} else {
 					if(( 'status' == $p_enum ) && ( $t_last_value < $t_closed_val ) ) {
 						$t_bugs_closed = '-';
@@ -129,7 +129,7 @@ function summary_print_by_enum( $p_enum_string, $p_enum ) {
 		if( $t_closed_val <= $row['status'] ) {
 			$t_bugs_closed += $row['bugcount'];
 		}
-		elseif( $t_resolved_val <= $row['status'] ) {
+		else if( $t_resolved_val <= $row['status'] ) {
 			$t_bugs_resolved += $row['bugcount'];
 		} else {
 			$t_bugs_open += $row['bugcount'];
@@ -157,21 +157,21 @@ function summary_print_by_enum( $p_enum_string, $p_enum ) {
 
 		if( !is_blank( $t_bug_link ) ) {
 			if( 0 < $t_bugs_open ) {
-				$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . RESOLVED . '">' . $t_bugs_open . '</a>';
+				$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_resolved_val . '">' . $t_bugs_open . '</a>';
 			} else {
 				if(( 'status' == $p_enum ) && ( $t_last_value >= $t_resolved_val ) ) {
 					$t_bugs_open = '-';
 				}
 			}
 			if( 0 < $t_bugs_resolved ) {
-				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . RESOLVED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . CLOSED . '">' . $t_bugs_resolved . '</a>';
+				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_resolved_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_closed_val . '">' . $t_bugs_resolved . '</a>';
 			} else {
 				if(( 'status' == $p_enum ) && (( $t_last_value < $t_resolved_val ) || ( $t_last_value >= $t_closed_val ) ) ) {
 					$t_bugs_resolved = '-';
 				}
 			}
 			if( 0 < $t_bugs_closed ) {
-				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . CLOSED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
+				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
 			} else {
 				if(( 'status' == $p_enum ) && ( $t_last_value < $t_closed_val ) ) {
 					$t_bugs_closed = '-';
@@ -271,7 +271,7 @@ function summary_print_by_date( $p_date_array ) {
 
 			# "+" modifier added in PHP >= 4.3.0
 		}
-		elseif( $t_balance < 0 ) {
+		else if( $t_balance < 0 ) {
 			$t_style = " positive";
 			$t_balance = sprintf( '%+d', $t_balance );
 		}
@@ -413,8 +413,8 @@ function summary_print_by_developer() {
 	$t_bugs_closed = 0;
 	$t_bugs_total = 0;
 
-	$t_resolved_val = RESOLVED;
-	$t_closed_val = CLOSED;
+	$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
+	$t_closed_val = config_get( 'bug_closed_status_threshold' );
 
 	$t_summaryusers = array();
 	$t_summarydata = array();
@@ -434,13 +434,13 @@ function summary_print_by_developer() {
 
 			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_last_handler;
 			if( 0 < $t_bugs_open ) {
-				$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . RESOLVED . '">' . $t_bugs_open . '</a>';
+				$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_resolved_val . '">' . $t_bugs_open . '</a>';
 			}
 			if( 0 < $t_bugs_resolved ) {
-				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . RESOLVED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . CLOSED . '">' . $t_bugs_resolved . '</a>';
+				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_resolved_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_closed_val . '">' . $t_bugs_resolved . '</a>';
 			}
 			if( 0 < $t_bugs_closed ) {
-				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . CLOSED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
+				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
 			}
 			if( 0 < $t_bugs_total ) {
 				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_total . '</a>';
@@ -458,7 +458,7 @@ function summary_print_by_developer() {
 		if( $t_closed_val <= $row['status'] ) {
 			$t_bugs_closed += $v_bugcount;
 		}
-		elseif( $t_resolved_val <= $row['status'] ) {
+		else if( $t_resolved_val <= $row['status'] ) {
 			$t_bugs_resolved += $v_bugcount;
 		} else {
 			$t_bugs_open += $v_bugcount;
@@ -471,13 +471,13 @@ function summary_print_by_developer() {
 
 		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_last_handler;
 		if( 0 < $t_bugs_open ) {
-			$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . RESOLVED . '">' . $t_bugs_open . '</a>';
+			$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_resolved_val . '">' . $t_bugs_open . '</a>';
 		}
 		if( 0 < $t_bugs_resolved ) {
-			$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . RESOLVED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . CLOSED . '">' . $t_bugs_resolved . '</a>';
+			$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_resolved_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_closed_val . '">' . $t_bugs_resolved . '</a>';
 		}
 		if( 0 < $t_bugs_closed ) {
-			$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . CLOSED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
+			$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
 		}
 		if( 0 < $t_bugs_total ) {
 			$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_total . '</a>';
@@ -530,15 +530,15 @@ function summary_print_by_reporter() {
 		$t_bugs_closed = 0;
 		$t_bugs_total = 0;
 
-		$t_resolved_val = RESOLVED;
-		$t_closed_val = CLOSED;
+		$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
+		$t_closed_val = config_get( 'bug_closed_status_threshold' );
 
 		while( $row2 = db_fetch_array( $result2 ) ) {
 			$t_bugs_total += $row2['bugcount'];
 			if( $t_closed_val <= $row2['status'] ) {
 				$t_bugs_closed += $row2['bugcount'];
 			}
-			elseif( $t_resolved_val <= $row2['status'] ) {
+			else if( $t_resolved_val <= $row2['status'] ) {
 				$t_bugs_resolved += $row2['bugcount'];
 			} else {
 				$t_bugs_open += $row2['bugcount'];
@@ -550,13 +550,13 @@ function summary_print_by_reporter() {
 
 			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $v_reporter_id;
 			if( 0 < $t_bugs_open ) {
-				$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . RESOLVED . '">' . $t_bugs_open . '</a>';
+				$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_resolved_val . '">' . $t_bugs_open . '</a>';
 			}
 			if( 0 < $t_bugs_resolved ) {
-				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . RESOLVED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . CLOSED . '">' . $t_bugs_resolved . '</a>';
+				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_resolved_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_closed_val . '">' . $t_bugs_resolved . '</a>';
 			}
 			if( 0 < $t_bugs_closed ) {
-				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . CLOSED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
+				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
 			}
 			if( 0 < $t_bugs_total ) {
 				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_total . '</a>';
@@ -600,8 +600,8 @@ function summary_print_by_category() {
 	$t_bugs_closed = 0;
 	$t_bugs_total = 0;
 
-	$t_resolved_val = RESOLVED;
-	$t_closed_val = CLOSED;
+	$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
+	$t_closed_val = config_get( 'bug_closed_status_threshold' );
 
 	while( $row = db_fetch_array( $result ) ) {
 		$v_category_id = $row['category_id'];
@@ -615,13 +615,13 @@ function summary_print_by_category() {
 
 			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_CATEGORY . '=' . urlencode( $last_category_name );
 			if( 0 < $t_bugs_open ) {
-				$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . RESOLVED . '">' . $t_bugs_open . '</a>';
+				$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_resolved_val . '">' . $t_bugs_open . '</a>';
 			}
 			if( 0 < $t_bugs_resolved ) {
-				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . RESOLVED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . CLOSED . '">' . $t_bugs_resolved . '</a>';
+				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_resolved_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_closed_val . '">' . $t_bugs_resolved . '</a>';
 			}
 			if( 0 < $t_bugs_closed ) {
-				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . CLOSED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
+				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
 			}
 			if( 0 < $t_bugs_total ) {
 				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_total . '</a>';
@@ -639,7 +639,7 @@ function summary_print_by_category() {
 		if( $t_closed_val <= $row['status'] ) {
 			$t_bugs_closed += $row['bugcount'];
 		}
-		elseif( $t_resolved_val <= $row['status'] ) {
+		else if( $t_resolved_val <= $row['status'] ) {
 			$t_bugs_resolved += $row['bugcount'];
 		} else {
 			$t_bugs_open += $row['bugcount'];
@@ -661,13 +661,13 @@ function summary_print_by_category() {
 		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_CATEGORY . '=' . urlencode( $last_category_name );
 		if( !is_blank( $t_bug_link ) ) {
 			if( 0 < $t_bugs_open ) {
-				$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . RESOLVED . '">' . $t_bugs_open . '</a>';
+				$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_resolved_val . '">' . $t_bugs_open . '</a>';
 			}
 			if( 0 < $t_bugs_resolved ) {
-				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . RESOLVED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . CLOSED . '">' . $t_bugs_resolved . '</a>';
+				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_resolved_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_closed_val . '">' . $t_bugs_resolved . '</a>';
 			}
 			if( 0 < $t_bugs_closed ) {
-				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . CLOSED . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
+				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_closed . '</a>';
 			}
 			if( 0 < $t_bugs_total ) {
 				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">' . $t_bugs_total . '</a>';
@@ -704,8 +704,8 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
 		$result = db_query_bound( $query );
 		$p_cache = Array();
 
-		$t_resolved_val = RESOLVED;
-		$t_closed_val = CLOSED;
+		$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
+		$t_closed_val = config_get( 'bug_closed_status_threshold' );
 
 		while( $row = db_fetch_array( $result ) ) {
 			$t_project_id = $row['project_id'];
@@ -718,7 +718,7 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
 				} else {
 					$p_cache[$t_project_id]['closed'] = $t_bugcount;
 				}
-			} elseif ( $t_resolved_val <= $t_status ) {
+			} else if ( $t_resolved_val <= $t_status ) {
 				if ( isset( $p_cache[$t_project_id]['resolved'] ) ) {
 					$p_cache[$t_project_id]['resolved'] += $t_bugcount;
 				} else {
@@ -746,10 +746,12 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
 
 		summary_helper_print_row( $t_name, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 
-		$t_subprojects = current_user_get_accessible_subprojects( $t_project );
+		if ( count( project_hierarchy_get_subprojects ( $t_project ) ) > 0 ) {
+			$t_subprojects = current_user_get_accessible_subprojects( $t_project );
 
-		if( count( $t_subprojects ) > 0 ) {
-			summary_print_by_project( $t_subprojects, $p_level + 1, $p_cache );
+			if( count( $t_subprojects ) > 0 ) {
+				summary_print_by_project( $t_subprojects, $p_level + 1, $p_cache );
+			}
 		}
 	}
 }
@@ -841,7 +843,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 				}
 
 				# These are not counted as bugs
-				elseif(( WONT_FIX == $c_res_s[$j] ) || ( SUSPENDED == $c_res_s[$j] ) || ( DUPLICATE == $c_res_s[$j] ) || ( NOT_A_BUG == $c_res_s[$j] ) ) {
+				else if(( WONT_FIX == $c_res_s[$j] ) || ( SUSPENDED == $c_res_s[$j] ) || ( DUPLICATE == $c_res_s[$j] ) || ( NOT_A_BUG == $c_res_s[$j] ) ) {
 					$t_bugs_notbugs += $res_bug_count;
 				}
 			}
@@ -953,7 +955,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 				}
 
 				# These are not counted as bugs
-				elseif(( UNABLE_TO_DUPLICATE == $c_res_s[$j] ) || ( DUPLICATE == $c_res_s[$j] ) || ( NOT_A_BUG == $c_res_s[$j] ) ) {
+				else if(( UNABLE_TO_DUPLICATE == $c_res_s[$j] ) || ( DUPLICATE == $c_res_s[$j] ) || ( NOT_A_BUG == $c_res_s[$j] ) ) {
 					$t_bugs_notbugs += $res_bug_count;
 				}
 			}

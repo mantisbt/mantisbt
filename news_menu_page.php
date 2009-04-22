@@ -26,11 +26,10 @@
 	require_once( 'core.php' );
 
 	access_ensure_project_level( config_get( 'manage_news_threshold' ) );
-?>
-<?php html_page_top1( lang_get( 'edit_news_link' ) ) ?>
-<?php html_page_top2() ?>
 
-<?php # Add News Form BEGIN ?>
+	html_page_top( lang_get( 'edit_news_link' ) );
+?>
+
 <br />
 <div align="center">
 <form method="post" action="news_add.php">
@@ -87,10 +86,10 @@
 </table>
 </form>
 </div>
-<?php # Add News Form END ?>
-
-<?php # Edit/Delete News Form BEGIN 
- if ( news_get_count( helper_get_current_project(), access_has_global_level( ADMINISTRATOR ) ) > 0 ) {
+<?php 
+	# Add News Form END
+	# Edit/Delete News Form BEGIN
+	if ( news_get_count( helper_get_current_project(), access_has_global_level( ADMINISTRATOR ) ) > 0 ) {
 ?>
 <br />
 <div align="center">
@@ -126,6 +125,7 @@
 </table>
 </form>
 </div>
-<?php } # Edit/Delete News Form END ?>
+<?php 
+	} # Edit/Delete News Form END 
 
-<?php html_page_bottom1( __FILE__ ) ?>
+	html_page_bottom( __FILE__ );

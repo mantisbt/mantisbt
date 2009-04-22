@@ -40,7 +40,7 @@
 		# _POST/_FILES does not seem to get populated if you exceed size limit so check if bug_id is -1
 		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
 	}
-	
+
 	if ( !file_allow_bug_upload( $f_bug_id ) ) {
 		access_denied();
 	}
@@ -59,9 +59,7 @@
 	# Determine which view page to redirect back to.
 	$t_redirect_url = string_get_bug_view_url( $f_bug_id );
 
-	html_page_top1();
-	html_meta_redirect( $t_redirect_url );
-	html_page_top2();
+	html_page_top( null, $t_redirect_url );
 ?>
 <br />
 <div align="center">
@@ -71,4 +69,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

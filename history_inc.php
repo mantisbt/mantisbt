@@ -76,7 +76,7 @@
 		<?php echo string_display( $t_item['note'] ) ?>
 	</td>
 	<td class="small-caption">
-		<?php echo string_display_line_links( $t_item['change'] ) ?>
+		<?php echo ( $t_item['raw'] ? string_display_line_links( $t_item['change'] ) : $t_item['change'] ) ?>
 	</td>
 </tr>
 <?php
@@ -97,4 +97,3 @@
 
 <?php
 	collapse_end( 'history' );
-?>

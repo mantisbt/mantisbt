@@ -20,7 +20,7 @@
  * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
- 
+
 error_reporting( E_ALL );
 
 $g_skip_open_db = true;  # don't open the database in database_api.php
@@ -144,18 +144,16 @@ function check_zend_optimiser_version() {
 			$t_info = 'Zend Optimizer Detected - Unknown Version.';
 			$t_pass = false;
   		} else {
-			$t_version = str_replace("v","",$t_version);	
+			$t_version = str_replace("v","",$t_version);
 			$t_version = explode(".",$t_version);
 			$t_subVersion = $t_version[2];
 			$t_dummy = array_pop($t_version);
 			$t_version = implode(".",$t_version);
-	
-			if (($t_version > ZEND_OPTIMIZER_VERSION) || ($t_version==ZEND_OPTIMIZER_VERSION && $t_subVersion>=ZEND_OPTIMIZER_SUBVERSION)) {
-      			/* pass = true */
-			} else {
+
+			if (!($t_version > ZEND_OPTIMIZER_VERSION) || ($t_version==ZEND_OPTIMIZER_VERSION && $t_subVersion>=ZEND_OPTIMIZER_SUBVERSION)) {
 				$t_pass = false;
 				$t_info = 'Fail - Installed Version: ' . $t_version . '.' . $t_subVersion . '.';
-			}	  
+			}
 		}
 	} else {
 		$t_info = 'Zend Optimiser not detected';
@@ -409,12 +407,14 @@ if( ON == config_get_global( 'use_jpgraph' ) ) {
 		require_once( $t_jpgraph_path . 'jpgraph.php' );
 
 		print_test_row( 'Checking Jpgraph version (if installed)...', version_compare(JPG_VERSION, '2.3.0') ? true : false, JPG_VERSION );
-	}	
+	}
 
 	print_test_row( 'check configuration: jpgraph (if used) requires php bundled gd for antialiasing support',
 		( config_get_global( 'jpgraph_antialias' ) == OFF || function_exists('imageantialias') ) );
 
 }
+
+print_test_row( 'Checking if ctype is enabled in php (required for rss feeds)....', extension_loaded('ctype') );
 
 
 ?>
@@ -459,7 +459,7 @@ if( ON == config_get_global( 'use_jpgraph' ) ) {
 		</table>
 
 		<br /><?php
-	} elseif( MD5 != config_get_global( 'login_method' ) ) {?>
+	} else if( MD5 != config_get_global( 'login_method' ) ) {?>
 		<br />
 
 		<table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">

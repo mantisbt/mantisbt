@@ -206,7 +206,7 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 	if(( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
 		$t_users[] = auth_get_current_user_id();
 	}
-	elseif( !in_array( $p_user, $t_users ) ) {
+	else if( !in_array( $p_user, $t_users ) ) {
 		$t_users[] = $p_user;
 	}
 	$t_users[] = ALL_USERS;
@@ -219,7 +219,7 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 			$t_projects[] = $t_selected_project;
 		}
 	}
-	elseif( !in_array( $p_project, $t_projects ) ) {
+	else if( !in_array( $p_project, $t_projects ) ) {
 		$t_projects[] = $p_project;
 	}
 
@@ -262,7 +262,7 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 	if(( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
 		$t_users[] = auth_get_current_user_id();
 	}
-	elseif( !in_array( $p_user, $t_users ) ) {
+	else if( !in_array( $p_user, $t_users ) ) {
 		$t_users[] = $p_user;
 	}
 	$t_users[] = ALL_USERS;
@@ -277,7 +277,7 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 			$t_projects[] = $t_selected_project;
 		}
 	}
-	elseif( !in_array( $p_project, $t_projects ) ) {
+	else if( !in_array( $p_project, $t_projects ) ) {
 		$t_projects[] = $p_project;
 	}
 
@@ -306,7 +306,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 	if( is_array( $p_value ) || is_object( $p_value ) ) {
 		$t_type = CONFIG_TYPE_COMPLEX;
 		$c_value = serialize( $p_value );
-	} elseif( is_int( $p_value ) || is_numeric( $p_value ) ) {
+	} else if( is_int( $p_value ) || is_numeric( $p_value ) ) {
 		$t_type = CONFIG_TYPE_INT;
 		$c_value = db_prepare_int( $p_value );
 	} else {
@@ -519,7 +519,7 @@ function config_obsolete( $p_var, $p_replace ) {
 			}
 			echo '</ul>';
 		}
-		elseif( !is_blank( $p_replace ) ) {
+		else if( !is_blank( $p_replace ) ) {
 			echo ', please use <tt>$g_' . $p_replace . '</tt> instead.';
 		}
 		echo '</p>';
@@ -604,7 +604,7 @@ function config_is_private( $p_config_var ) {
 		case 'dot_tool':
 		case 'neato_tool':
 		case 'twitter_username':
-		case 'twitter_password':		
+		case 'twitter_password':
 			return true;
 	}
 

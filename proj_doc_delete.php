@@ -39,7 +39,7 @@
 	access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
 	$t_project_file_table = db_get_table( 'mantis_project_file_table' );
-	$query = "SELECT title FROM $t_project_file_table 
+	$query = "SELECT title FROM $t_project_file_table
 				WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $f_file_id ) );
 	$t_title = db_result( $result );
@@ -53,9 +53,7 @@
 
 	$t_redirect_url = 'proj_doc_page.php';
 
-	html_page_top1();
-	html_meta_redirect( $t_redirect_url );
-	html_page_top2();
+	html_page_top( null, $t_redirect_url );
 ?>
 <br />
 <div align="center">
@@ -65,4 +63,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

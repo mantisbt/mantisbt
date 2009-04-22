@@ -1,39 +1,33 @@
 <?php
-# Mantis - a php based bugtracking system
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+/** Bulgarian
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Alex Stanev, alex <at> stanev.org
+ * @author Mihaela Georgieva, helicopterbg <at> gmail.com
+ * @author Svetlin Stefanov, desertwaste <at> gmail.com
+ */
 
-# Mantis is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# Mantis is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-	#
-	# Bulgarian: Alex Stanev, alex <at> stanev.org
-	# Bulgarian: Mihaela Georgieva, helicopterbg <at> gmail.com
-	# Bulgarian: Svetlin Stefanov, desertwaste <at> gmail.com
-	#
-	###########################################################################
-	# Bulgarian strings for Mantis
-	# Based on strings_english.txt rev. 1.???
-	# -------------------------------------------------
-	# $Revision$
-	# $Author$
-	# $Date$
-	#
-	# $Id$
-	###########################################################################
-
-?>
-<?php
 # Charset
 $s_charset = 'windows-1251';
 # Group commands menuitems
@@ -92,11 +86,11 @@ $s_bug_relationships = 'Релации';
 $s_empty_password_sure_msg = 'Потребителят има празна парола. Потвърждаване на празна парола?';
 $s_empty_password_button = 'Използване на празна парола';
 
-$s_duplicate_of = "Дубликат на";
-$s_has_duplicate = "Съществува дубликат";
-$s_related_to = "Отнася се до";
-$s_dependant_on = "Зависи от";
-$s_blocks = "Производен на";
+$s_duplicate_of = 'Дубликат на';
+$s_has_duplicate = 'Съществува дубликат';
+$s_related_to = 'Отнася се до';
+$s_dependant_on = 'Зависи от';
+$s_blocks = 'Производен на';
 
 $s_new_bug = 'Нов проблем';
 $s_bugnote_added = 'Бележката е добавена';
@@ -262,10 +256,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Достъпът отказ
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Спонсорът не е задал email адрес. Моля, обновете потребителския профил.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Конфигурационната опция \'%s\' съдържа некоректна стойност \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Действието не може да бъде извършено, защото проблем \'%d\' е забранен за редакция"';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Вече съществува  дефинирана релация между тези два проблема.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Релацията между проблемите не е открита.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Достъпът отказан: Проблемът %d изисква по-високо ниво на достъп.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Проблемът не може да бъде свързан със себе си.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Вече съществува  дефинирана релация между тези два проблема.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Релацията между проблемите не е открита.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Достъпът отказан: Проблемът %d изисква по-високо ниво на достъп.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Проблемът не може да бъде свързан със себе си.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Кодът за потвърждение не съвпада. Моля опитайте отново.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Функционалността \'забравена парола\' не е включена.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'За презаписване на паролата, трябва да бъде зададен email адрес';
@@ -289,7 +283,7 @@ $s_logged_in_as = 'Текущ потребител';
 $s_prefix_for_deleted_users = 'потребител';
 
 $s_administrator = 'администратор';
-$s_myself = "Себе си";
+$s_myself = 'Себе си';
 $s_default_access_level = 'Ниво на достъп по подразбиране';
 
 $s_issue_status_percentage = 'Статус на проблем (%)';
@@ -313,13 +307,15 @@ $s_sponsorship_enum_string = '0:Неплатен,1:Поискан,2:Платен';
 $s_new_account_subject = 'Регистрация на нов профил';
 $s_new_account_greeting = 'Благодарим Ви за регистрацията. Профилът Ви е с потребителско име \'%1$s\'. За приключване на регистрацията, посетете следния адрес (убедете се, че е въведен на един ред) и въведете своя парола за достъп:';
 $s_new_account_username = 'Потребителско име: ';
-$s_new_account_message = 'Ако не сте регистрирани, пропуснете това съобщение.' . "\n\n";
+$s_new_account_message = 'Ако не сте регистрирани, пропуснете това съобщение.';
 $s_new_account_do_not_reply = 'НЕ ОТГОВАРЯЙТЕ НА ТОВА СЪОБЩЕНИЕ';
 $s_new_account_email = 'Email: ';
 $s_new_account_IP = 'IP адрес: ';
 $s_new_account_signup_msg = 'Създаден е следният профил:';
 
-$s_reset_request_msg = 'Изискана е смяна на парола чрез email. Ако това не сте Вие, пропуснете това съобщение.' . "\n\n" . 'Ако Вие сте изискали смяната, посетете следния адрес за да промените паролата:';
+$s_reset_request_msg = 'Изискана е смяна на парола чрез email. Ако това не сте Вие, пропуснете това съобщение.
+
+Ако Вие сте изискали смяната, посетете следния адрес за да промените паролата:';
 $s_reset_request_in_progress_msg = 'Ако са въведени потребителско име и email адрес, валидни за профила, ще бъде изпратено потвърждаващо писмо на този email адрес. Следвайте инструкциите в него, за да смените паролата на вашия профил.';
 
 $s_email_notification_title_for_status_bug_new = 'Следният проблем е с променен статус НОВ (отново)';
@@ -340,18 +336,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Спонсорството на с
 $s_email_notification_title_for_action_sponsorship_deleted = 'Спонсорството на следния проблем е оттеглено.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Към този проблем е добавена БЕЛЕЖКА.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "Следният проблем е маркиран като ДУБЛИКАТ на %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "Проблемът %s е маркиран като ДУБЛИКАТ на следния проблем.";
-$s_email_notification_title_for_action_related_to_relationship_added = "Следният проблем е маркиран като СВЪРЗАН с %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "Следният проблем е маркиран като ЗАВИСИМ от %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "Следният проблем е маркиран като ПОТОМЪК на %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Следният проблем е премахнат като ДУБЛИКАТ на проблем %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Проблемът %s е премахнат като ДУБЛИКАТ на следния проблем.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "Следният проблем е маркиран като НЕСВЪРАЗАН с %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Следният проблем е премахнат като ЗАВИСИМ от %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "Следният проблем е премахнат като ПОТОМЪК на %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "СВЪРЗАНЯТ проблем %s е РЕШЕН.";
-$s_email_notification_title_for_action_relationship_child_closed = "СВЪРЗАНИЯТ проблем %s е ПРИКЛЮЧЕН.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'Следният проблем е маркиран като ДУБЛИКАТ на %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'Проблемът %s е маркиран като ДУБЛИКАТ на следния проблем.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'Следният проблем е маркиран като СВЪРЗАН с %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'Следният проблем е маркиран като ЗАВИСИМ от %s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'Следният проблем е маркиран като ПОТОМЪК на %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'Следният проблем е премахнат като ДУБЛИКАТ на проблем %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'Проблемът %s е премахнат като ДУБЛИКАТ на следния проблем.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'Следният проблем е маркиран като НЕСВЪРАЗАН с %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'Следният проблем е премахнат като ЗАВИСИМ от %s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'Следният проблем е премахнат като ПОТОМЪК на %s.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'СВЪРЗАНЯТ проблем %s е РЕШЕН.';
+$s_email_notification_title_for_action_relationship_child_closed = 'СВЪРЗАНИЯТ проблем %s е ПРИКЛЮЧЕН.';
 
 $s_email_reporter = 'Съобщен От';
 $s_email_handler = 'Определен На';
@@ -646,10 +642,10 @@ $s_here = 'Тук';
 
 # lost_pwd_page.php
 $s_lost_password_title = 'Възстановяване на парола';
-$s_lost_password_done_title = "Писмото с паролата е изпратено";
-$s_lost_password_subject = "Възстановяване на парола";
-$s_lost_password_info = "За възстановяване на загубена парола, моля въведете име и email адрес.<br /><br />Ако информацията съвпада със съществуващ профил, ще ви бъде изпратен специален линк, който съдържа удостоверяващ номер към профила ви. Моля следвайте линка, за да промените паролата си.";
-$s_lost_password_confirm_hash_OK = "Потвърждението е прието. Моля обновете паролата си.";
+$s_lost_password_done_title = 'Писмото с паролата е изпратено';
+$s_lost_password_subject = 'Възстановяване на парола';
+$s_lost_password_info = 'За възстановяване на загубена парола, моля въведете име и email адрес.<br /><br />Ако информацията съвпада със съществуващ профил, ще ви бъде изпратен специален линк, който съдържа удостоверяващ номер към профила ви. Моля следвайте линка, за да промените паролата си.';
+$s_lost_password_confirm_hash_OK = 'Потвърждението е прието. Моля обновете паролата си.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Отворени и предназначени за мен проблеми';
@@ -711,8 +707,8 @@ $s_default_notify = 'Определяне на основните Видове Известия на';
 $s_action_notify = 'Определяне на действие Видове Известия на';
 $s_notify_defaults_change_access = 'Право на редакция от';
 $s_notify_actions_change_access = 'Право на редакция от';
-$s_revert_to_system = "Изтриване на всички настройки на проекта";
-$s_revert_to_all_project = "Изтриване на специфичните настройки на проекта";
+$s_revert_to_system = 'Изтриване на всички настройки на проекта';
+$s_revert_to_all_project = 'Изтриване на специфичните настройки на проекта';
 
 # manage_config_workflow_page
 $s_non_existent = 'несъществуващ';
@@ -1184,17 +1180,17 @@ $s_confirm_custom_field_unlinking = 'Премахване на потребителското поле от проек
 $s_field_remove_button = 'Премахване на полето';
 
 $s_hide_status = 'Скриване на статус';
-$s_filter_closed = "Приключени";
-$s_filter_resolved = "Решени";
-$s_hide_closed = "Скриване на приключени";
-$s_hide_resolved = "Скриване на решени";
+$s_filter_closed = 'Приключени';
+$s_filter_resolved = 'Решени';
+$s_hide_closed = 'Скриване на приключени';
+$s_hide_resolved = 'Скриване на решени';
 $s_and_above = 'и по-висок';
 $s_advanced_filters = 'Разширени филтри';
 $s_simple_filters = 'Опростени филтри';
 $s_monitored_by = 'Наблюдаван от';
 
-$s_attachments = "Прикрепен/и Документ/и";
-$s_attachment_alt = "A";
+$s_attachments = 'Прикрепен/и Документ/и';
+$s_attachment_alt = 'A';
 
 # PHPMailer
 $s_phpmailer_language = 'en';
@@ -1217,34 +1213,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = 'История на промените';
 
 # Http auth
-$s_http_auth_realm = "Вход в Mantis";
+$s_http_auth_realm = 'Вход в Mantis';
 
-$s_bug = "проблем";
-$s_add_new_relationship = "Нова релация";
-$s_add_new_relationship_button = "Добавяне";
-$s_this_bug = "Текущ проблем";
-$s_relationship_added = "Релацията е прибавена";
-$s_relationship_deleted = "Релацията е изтрита";
-$s_no_relationship = "Няма релация";
-$s_relationship_replaced = "Релацията е заменена";
-$s_replace_relationship_button = "Замяна";
-$s_replace_relationship_sure_msg = "Вече съществува релация между двата проблема. Замяна?";
-$s_relationship_with_parent = "Връзка със зависимия проблем";
-$s_delete_relationship_button = "Изтриване";
-$s_delete_relationship_sure_msg = "Изтриване на връзката?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Не всички производни на този проблем са решени или приключени.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ВНИМАНИЕ</b>. Не всички производни на този проблем са решени или приключени.<br />Преди <b>РЕШАВАНЕ/ПРИКЛЮЧВАНЕ</b> на зависимия проблем, всички производни трябва да са решени или приключени.";
-$s_create_child_bug_button = "Създаване на дубликат";
-$s_bug_cloned_to = "Проблемът е дублиран";
-$s_bug_created_from = "Проблем създаден от";
+$s_bug = 'проблем';
+$s_add_new_relationship = 'Нова релация';
+$s_add_new_relationship_button = 'Добавяне';
+$s_this_bug = 'Текущ проблем';
+$s_relationship_added = 'Релацията е прибавена';
+$s_relationship_deleted = 'Релацията е изтрита';
+$s_no_relationship = 'Няма релация';
+$s_relationship_replaced = 'Релацията е заменена';
+$s_replace_relationship_button = 'Замяна';
+$s_replace_relationship_sure_msg = 'Вече съществува релация между двата проблема. Замяна?';
+$s_relationship_with_parent = 'Връзка със зависимия проблем';
+$s_delete_relationship_button = 'Изтриване';
+$s_delete_relationship_sure_msg = 'Изтриване на връзката?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Не всички производни на този проблем са решени или приключени.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ВНИМАНИЕ</b>. Не всички производни на този проблем са решени или приключени.<br />Преди <b>РЕШАВАНЕ/ПРИКЛЮЧВАНЕ</b> на зависимия проблем, всички производни трябва да са решени или приключени.';
+$s_create_child_bug_button = 'Създаване на дубликат';
+$s_bug_cloned_to = 'Проблемът е дублиран';
+$s_bug_created_from = 'Проблем създаден от';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Графика на релациите";
-$s_relation_graph = "Графика на релациите";
-$s_dependency_graph = "Графика на зависимост";
-$s_vertical = "Вертикален";
-$s_horizontal = "Хоризонтален";
-$s_view_issue = "Визуализация на проблем";
+$s_viewing_bug_relationship_graph_title = 'Графика на релациите';
+$s_relation_graph = 'Графика на релациите';
+$s_dependency_graph = 'Графика на зависимост';
+$s_vertical = 'Вертикален';
+$s_horizontal = 'Хоризонтален';
+$s_view_issue = 'Визуализация на проблем';
 
 # Source Control Integration
 $s_checkin = 'Регистрация';
@@ -1277,8 +1273,8 @@ $s_manage_news = 'Управление на новини';
 $s_view_list_of_attachments = 'Списък с прикрепени документи';
 $s_download_attachments = 'Запазване на прикрепените документи';
 $s_delete_attachments = 'Изтриване на прикрепените документи';
-$s_delete_attachment_button = "Изтриване";
-$s_delete_attachment_sure_msg = "Изтриване на прикрепения документ?";
+$s_delete_attachment_button = 'Изтриване';
+$s_delete_attachment_sure_msg = 'Изтриване на прикрепения документ?';
 $s_upload_issue_attachments = 'Добавяне на документи към проблема';
 $s_filters = 'филтри';
 $s_save_filters = 'Запазване на филтри';

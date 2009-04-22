@@ -65,10 +65,14 @@ $g_cache_project_all = false;
 function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 	global $g_cache_project, $g_cache_project_missing;
 
+	if( $p_project_id == ALL_PROJECTS ) {
+		return false;
+	}
+	
 	if( isset( $g_cache_project[(int) $p_project_id] ) ) {
 		return $g_cache_project[(int) $p_project_id];
 	}
-	elseif( isset( $g_cache_project_missing[(int) $p_project_id] ) ) {
+	else if( isset( $g_cache_project_missing[(int) $p_project_id] ) ) {
 		return false;
 	}
 
@@ -95,6 +99,43 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 	$g_cache_project[(int) $p_project_id] = $row;
 
 	return $row;
+}
+
+function project_cache_array_rows( $p_project_id_array ) {
+	global $g_cache_project, $g_cache_project_missing;
+
+	$c_project_id_array = array();
+
+	foreach( $p_project_id_array as $t_project_id ) {
+		if( !isset( $g_cache_project[(int) $t_project_id] ) && !isset( $g_cache_project_missing[(int) $t_project_id] ) ) {
+			$c_project_id_array[] = (int) $t_project_id;
+		}
+	}
+
+	if( empty( $c_project_id_array ) ) {
+		return;
+	}
+
+	$t_project_table = db_get_table( 'mantis_project_table' );
+
+	$query = "SELECT *
+				  FROM $t_project_table
+				  WHERE id IN (" . implode( ',', $c_project_id_array ) . ')';
+	$result = db_query_bound( $query );
+
+	$t_projects_found = array();
+	while( $row = db_fetch_array( $result ) ) {
+		$g_cache_project[(int) $row['id']] = $row;
+		$t_projects_found[(int) $row['id']] = true;
+	}
+	
+	foreach ( $c_project_id_array as $c_project_id ) {
+		if ( !isset( $t_projects_found[$c_project_id] ) ) { 
+			$g_cache_project_missing[(int) $c_project_id] = true;
+		}
+	}
+
+	return;
 }
 
 # --------------------
@@ -519,7 +560,7 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 	if( is_array( $t_global_access_level ) ) {
 		if( 0 == count( $t_global_access_level ) ) {
 			$t_global_access_clause = ">= " . NOBODY . " ";
-		} elseif( 1 == count( $t_global_access_level ) ) {
+		} else if( 1 == count( $t_global_access_level ) ) {
 			$t_global_access_clause = "= " . array_shift( $t_global_access_level ) . " ";
 		} else {
 			$t_global_access_clause = "IN (" . implode( ',', $t_global_access_level ) . ")";
@@ -675,7 +716,8 @@ function project_copy_users( $p_destination_id, $p_source_id ) {
 	# Copy all users from current project over to another project
 	$t_rows = project_get_local_user_rows( $p_source_id );
 
-	for ( $i = 0; $i < sizeof( $t_rows ); $i++ ) {
+	$t_count = count( $t_rows );
+	for ( $i = 0; $i < $t_count; $i++ ) {
 		$t_row = $t_rows[$i];
 
 		# if there is no duplicate then add a new entry

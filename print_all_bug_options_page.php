@@ -28,13 +28,11 @@
 	  * MantisBT Core API's
 	  */
 	require_once( 'core.php' );
-	
+
 	require( 'print_all_bug_options_inc.php' );
-	
+
 	auth_ensure_user_authenticated();
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 	edit_printing_prefs();
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

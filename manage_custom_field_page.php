@@ -33,8 +33,7 @@
 
 	access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
-	html_page_top1( lang_get( 'manage_custom_field_link' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_custom_field_link' ) );
 
 	print_manage_menu( 'manage_custom_field_page.php' );
 ?>
@@ -108,4 +107,5 @@
 
 <br />
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

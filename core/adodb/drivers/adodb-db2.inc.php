@@ -73,7 +73,7 @@ class ADODB_db2 extends ADOConnection {
 		global $php_errormsg;
 		
 		if (!function_exists('db2_connect')) {
-			ADOConnection::outp("Warning: The old ODBC based DB2 driver has been renamed 'odbc_db2'. This ADOdb driver calls PHP's native db2 extension.");
+			ADOConnection::outp("Warning: The old ODBC based DB2 driver has been renamed 'odbc_db2'. This ADOdb driver calls PHP's native db2 extension which is not installed.");
 			return null;
 		}
 		// This needs to be set before the connect().

@@ -8,7 +8,7 @@ require_once 'class.RSSBase.inc.php';
 * @license GNU General Public License v3
 * @link http://code.google.com/p/flaimo-php/
 * @package RSS
-* @version 2.2
+* @version 2.2.1
 */
 class RSS_V_091 extends RSS_V_abstract {
 	
@@ -32,7 +32,7 @@ class RSS_V_091 extends RSS_V_abstract {
 		} // end if
 		
 		if ($this->rssdata->getDCDate() != FALSE) {
-			$date = $this->xml->createTextNode(date('Y-m-d\TH:i:sO', $this->rssdata->getDCDate()));
+			$date = $this->xml->createTextNode(date('r', $this->rssdata->getDCDate()));
 			$pub_date = $this->xml->createElement('pubDate');
 			$lb_date = $this->xml->createElement('lastBuildDate');
 			$pub_date->appendChild($date);

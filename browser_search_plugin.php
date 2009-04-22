@@ -32,7 +32,7 @@ header( 'Content-Type: application/opensearchdescription+xml' );
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                        xmlns:moz="http://www.mozilla.org/2006/browser/search/">
 <?php
-$t_path = config_get( 'path' );	
+$t_path = config_get( 'path' );
 
 if ( strtolower( $f_type ) == 'id' ) {
 	echo '<ShortName>MantisBT IssueId</ShortName>';

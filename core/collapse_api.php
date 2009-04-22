@@ -15,14 +15,14 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Collapse API 
- * 
+ * Collapse API
+ *
  * collapse_open( 'xyz' );		# marks the start of the expanded section
  * :
  * ... collapse_icon( 'xyz' );	# this will add the '+' icon
  * :
  * collapse_closed( 'xyz' );	# marks the start of the collapsed section
- * : 
+ * :
  * ... collapse_icon( 'xyz' );	# this will add the '-' icon
  * :
  * collapse_end( 'xyz' );		# marks the end of the whole section
@@ -32,7 +32,7 @@
  * @link http://www.mantisbt.org
  * @package CoreAPI
  * @subpackage CollapseAPI
- * 
+ *
  * @uses tokens_api.php
  * @uses utility_api.php
  * @uses config_api.php
@@ -49,19 +49,19 @@ $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 require_once( $t_core_dir . 'tokens_api.php' );
 
 /**
- * 
+ *
  * @global string $g_current_collapse_section
  */
 $g_current_collapse_section = null;
 
 /**
- * 
+ *
  * @global bool $g_open_collapse_section
  */
 $g_open_collapse_section = false;
 
 /**
- * 
+ *
  * @global string $g_collapse_cache_token
  */
 $g_collapse_cache_token = null;

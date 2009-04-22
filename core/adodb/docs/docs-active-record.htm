@@ -14,7 +14,7 @@ font-family: Arial, Helvetica, sans-serif ;
 <title>ADOdb Active Record</title>
 <body>
 <h1>ADOdb Active Record</h1>
-<p> (c) 2000-2008 John Lim (jlim#natsoft.com)</p>
+<p> (c) 2000-2009 John Lim (jlim#natsoft.com)</p>
 <p><font size="1">This software is dual licensed using BSD-Style and LGPL. This 
   means you can use it in compiled proprietary and commercial products.</font></p>
 <p><hr>
@@ -299,7 +299,7 @@ When creating a new record, the retrieval of the last auto-incrementing ID is no
 
 <h3><li>Dealing with Multiple Databases</h3>
 <p>
-Sometimes we want to load  data from one database and insert it into another using ActiveRecords. This can be done using the optional parameter of the ADOdb_Active_Record constructor. In the following example, we read data from db.table1 and store it in db2.table2:
+Sometimes we want to load data from one database and insert it into another using ActiveRecords. This can be done using the optional parameter of the ADOdb_Active_Record constructor. In the following example, we read data from db.table1 and store it in db2.table2:
 <pre>
 $db = NewADOConnection(...);
 $db2 = NewADOConnection(...);
@@ -321,7 +321,19 @@ If you have to pass in a primary key called "id" and the 2nd db connection in th
 <pre>
 $rec = new ADOdb_Active_Record("table1",array("id"),$db2);
 </pre>
+<p>You can now give a named label in SetDatabaseAdapter, allowing to determine in your class definition which database to load, using var $_dbat.
+<pre>
+$db1 = NewADOConnection(...); // some ADOdb DB
+ADOdb_Active_Record::SetDatabaseAdapter($db1, 'mysql');
+$db2 = NewADOConnection(...); // some ADOdb DB
+ADOdb_Active_Record::SetDatabaseAdapter($db2, 'oracle');
 
+class FooRecord extends ADOdb_Active_Record
+{
+<b>var $_dbat = 'mysql';</b>  // uses 'mysql' connection
+...
+}
+</pre>
 <h3><li>$ADODB_ACTIVE_CACHESECS</h3>
 <p>You can cache the table metadata (field names, types, and other info such primary keys) in $ADODB_CACHE_DIR (which defaults to /tmp) by setting
 the global variable $ADODB_ACTIVE_CACHESECS to a value greater than 0. This will be the number of seconds to cache.
@@ -597,7 +609,7 @@ using LoadRelations($relation, $whereOrderBy = '', $offset = -1, $limit = -1):
 <pre>
 	# assume this has been called: 
 	#   ADODB_Active_Record::ClassHasMany('person', 'children','person_id');
-	$person = new person();
+	$person = new person(); 
 	$person->Load('id=23');  
 	# Load doesn't load children until $person->children is accessed or LoadRelations is called:
 	$person->LoadRelations('children',"gender='F' order by name");

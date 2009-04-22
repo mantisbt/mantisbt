@@ -14,14 +14,17 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-# ## Obsolete API ###
-# ##########################################################################
-# Check that obsolete configs are not used.
-# THIS FILE ASSUMES THAT THE CONFIGURATION IS INCLUDED AS WELL AS THE
-# config_api.php.
-
-# ##########################################################################
-# Check for obsolete variables
+/**
+ * Check that obsolete configs are not used.
+ * THIS FILE ASSUMES THAT THE CONFIGURATION IS INCLUDED AS WELL AS THE
+ * config_api.php.
+ *
+ * @package CoreAPI
+ * @subpackage ObsoleteAPI
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
 
 # ==== Changes after 0.18.2 ====
 config_obsolete( 'use_phpMailer', '' );

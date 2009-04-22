@@ -345,13 +345,15 @@ $s_sponsorship_enum_string = '0:unbezahlt,1:gefordert,2:bezahlt';
 $s_new_account_subject = 'Konto Registrierung';
 $s_new_account_greeting = 'Danke für ihre Registrierung. Ihr Konto hat den Benutzernamen \'%1$s\'. Um die Registrierung abzuschließen, besuchen Sie die folgende URL (stellen Sie sicher, dass sie in einer einzigen Zeile eingegeben wurde) und setzen Sie ihr eigenes Zugangskennwort:';
 $s_new_account_username = 'Benutzername: ';
-$s_new_account_message = 'Wenn Sie sich nicht registriert haben, ignorieren Sie diese Nachricht, es wird nichts passieren.' . '\n\n';
+$s_new_account_message = 'Wenn Sie sich nicht registriert haben, ignorieren Sie diese Nachricht, es wird nichts passieren.';
 $s_new_account_do_not_reply = 'NICHT AUF DIESE NACHRICHT ANTWORTEN';
 $s_new_account_email = 'E-Mail: ';
 $s_new_account_IP = 'Von IP Adresse: ';
 $s_new_account_signup_msg = 'Das folgende Konto wurde angelegt:';
 
-$s_reset_request_msg = 'Jemand (vermutlich Sie) hat einen Passwortwechsel durch E-Mail-Bestätigung angefordert. Wenn Sie es nicht waren, ignorieren Sie diese Nachricht, es wird nichts passieren.' . '\n\n' . 'Wenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL, um ihr Passwort zu ändern:';
+$s_reset_request_msg = 'Jemand (vermutlich Sie) hat einen Passwortwechsel durch E-Mail-Bestätigung angefordert. Wenn Sie es nicht waren, ignorieren Sie diese Nachricht, es wird nichts passieren.
+
+Wenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL, um ihr Passwort zu ändern:';
 $s_reset_request_in_progress_msg = 'Wenn Sie Benutzernamen und E-Mail-Adresse für Ihr Konto richtig angegeben haben, senden wir Ihnen jetzt eine Bestätigungsmail an diese Adresse. Nach dem Erhalt der Meldung befolgen Sie bitte die Anweisungen, um das Passwort Ihres Kontos zu ändern.';
 
 $s_email_notification_title_for_status_bug_new = 'Das folgende Problem hat (erneut) den Status NEU';
@@ -1432,7 +1434,7 @@ $s_tag_attach = 'Zuordnen';
 $s_tag_attach_long = 'Tags zuordnen';
 $s_tag_attach_failed = 'Tag-Zuordnung misslang.';
 $s_tag_detach = 'Entferne \'%s\'';
-$s_tag_separate_by = "(Trenne durch '%s')";
+$s_tag_separate_by = '(Trenne durch \'%s\')';
 $s_tag_invalid_name = 'Ungültiger Tag-Name.';
 $s_tag_create_denied = 'Anlegen nicht gestattet.';
 $s_tag_filter_default = 'Zugeordnete Einträge (%s)';
@@ -1454,8 +1456,8 @@ $s_total_time_for_issue = 'Gesamtzeit für den Eintrag = %s';
 $s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
 
 # Twitter Integration
-$s_twitter_resolved = "%d: [%s] %s (erledigt von %s in %s)";
-$s_twitter_resolved_no_version = "%d: [%s] %s (erledigt von %s)";
+$s_twitter_resolved = '%d: [%s] %s (erledigt von %s in %s)';
+$s_twitter_resolved_no_version = '%d: [%s] %s (erledigt von %s)';
 
 # Project Page
 $s_development_team = 'Entwicklungs-Team';

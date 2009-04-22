@@ -38,7 +38,7 @@
 	$t_interval->set_period_from_selector( 'interval' );
 	$f_show_as_table = gpc_get_bool( 'show_table', FALSE );
 	$f_summary = gpc_get_bool( 'summary', FALSE );
-	
+
 	$t_interval_days = $t_interval->get_elapsed_days();
 	if ( $t_interval_days <= 14 ) {
 	    $t_incr = 60 * 60; // less than 14 days, use hourly
@@ -63,7 +63,7 @@
 		// no data to graph
 		exit();
 	}
-	
+
 	$t_bug_table			= db_get_table( 'mantis_bug_table' );
 	$t_bug_hist_table			= db_get_table( 'mantis_bug_history_table' );
 
@@ -72,15 +72,15 @@
 	$t_ptr = 0;
 	$t_end = $t_interval->get_end_timestamp();
 	$t_start = $t_interval->get_start_timestamp();
-	
+
     $t_resolved = config_get( 'bug_resolved_status_threshold' );
     $t_closed = CLOSED;
-    
+
     $t_bug = array();
     $t_bug_cat = array(); // save categoties or bugs to look up resolved ones.
     $t_category = array();
 
-	// walk through all issues and grab their category for 'now' 
+	// walk through all issues and grab their category for 'now'
 	$t_marker[$t_ptr] = time();
 	$t_data[$t_ptr] = array();
 	foreach ($rows as $t_row) {
@@ -93,7 +93,7 @@
                 $t_data[$t_ptr][$t_cat] ++;
             } else {
                 $t_data[$t_ptr][$t_cat] = 1;
-                $t_category[] = $t_cat;              
+                $t_category[] = $t_cat;
             }
         }
         $t_bug[] = $t_row['id'];
@@ -111,7 +111,7 @@
             ' order by date_modified DESC';
     $t_result = db_query( $t_select );
 	$row = db_fetch_array( $t_result );
-    
+
 	for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 	    // walk through the data points and use the data retrieved to update counts
 	    while( ( $row !== false ) && ( db_unixtimestamp($row['date_modified']) >= $t_now ) ) {
@@ -125,7 +125,7 @@
                             $t_data[$t_ptr][$t_cat] --;
                         } else {
                             $t_data[$t_ptr][$t_cat] = 0;
-                            $t_category[] = $t_cat;              
+                            $t_category[] = $t_cat;
                         }
 	                    $t_cat = $row['old_value'];
             	        if ($t_cat == '')
@@ -134,13 +134,13 @@
                             $t_data[$t_ptr][$t_cat] ++;
                         } else {
                             $t_data[$t_ptr][$t_cat] = 1;
-                            $t_category[] = $t_cat;              
+                            $t_category[] = $t_cat;
                         }
                         // change the category associated with the bug to match in case the bug was
                         //  created during the scan
-                        $t_bug_cat[$row['bug_id']] = $t_cat; 
+                        $t_bug_cat[$row['bug_id']] = $t_cat;
                     } else { // change of status access_compare_level( $t_row['status'], $t_resolved )
-                        if ( access_compare_level( $row['new_value'], $t_resolved ) && 
+                        if ( access_compare_level( $row['new_value'], $t_resolved ) &&
                                 !access_compare_level( $row['old_value'], $t_resolved ) ) {
                             // transition from open to closed
                             $t_cat = $t_bug_cat[$row['bug_id']];
@@ -150,7 +150,7 @@
                                 $t_data[$t_ptr][$t_cat] ++;
                             } else {
                                 $t_data[$t_ptr][$t_cat] = 1;
-                                $t_category[] = $t_cat;              
+                                $t_category[] = $t_cat;
                             }
                         }
                     }
@@ -163,7 +163,7 @@
                         $t_data[$t_ptr][$t_cat] --;
                     } else {
                         $t_data[$t_ptr][$t_cat] = 0;
-                        $t_category[] = $t_cat;              
+                        $t_category[] = $t_cat;
                     }
                     break;
             }
@@ -190,7 +190,7 @@
                 $t_not_zero = true;
                 break;
             }
-        }  
+        }
         if ( !$t_not_zero ) {
             unset( $t_category[ $t ] );
         }
@@ -215,8 +215,8 @@
             foreach ( $t_category as $t_cat ) {
                 echo '<td>'.(isset($t_data[$t_ptr][$t_cat]) ? $t_data[$t_ptr][$t_cat] : 0).'</td>';
             }
-            echo '</tr>';  
-        }     
+            echo '</tr>';
+        }
 	    echo '</table>';
     	html_body_end();
     	html_end();
@@ -229,9 +229,8 @@
             $i = 0;
             foreach ( $t_category as $t_cat ) {
         	    $t_metrics[++$i][$t_ptr] = isset($t_data[$t][$t_cat]) ? $t_data[$t][$t_cat] : 0;
-            }               
+            }
 	    }
 	    array_unshift( $t_category, '' ); // add placeholder
 	    graph_bydate( $t_metrics, $t_category, lang_get( 'by_category' ), $f_width, $f_width * $t_ar );
     }
-?>

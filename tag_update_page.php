@@ -36,19 +36,18 @@
 	require_once( $t_core_path . 'tag_api.php' );
 
 	compress_enable();
-	
+
 	$f_tag_id = gpc_get_int( 'tag_id' );
 	$t_tag_row = tag_get( $f_tag_id );
 
-	if ( !( access_has_global_level( config_get( 'tag_edit_threshold' ) ) 
+	if ( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
 		|| ( auth_get_current_user_id() == $t_tag_row['user_id'] )
-			&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) ) 
+			&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) )
 	{
 		access_denied();
 	}
-	
-	html_page_top1( sprintf( lang_get( 'tag_update' ), $t_tag_row['name'] ) );
-	html_page_top2();
+
+	html_page_top( sprintf( lang_get( 'tag_update' ), $t_tag_row['name'] ) );
 ?>
 
 <br/>
@@ -121,5 +120,4 @@
 </form>
 
 <?php
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

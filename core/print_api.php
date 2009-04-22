@@ -134,13 +134,12 @@ function print_successful_redirect_to_bug( $p_bug_id ) {
 function print_successful_redirect( $p_redirect_to ) {
 	if( helper_show_queries() ) {
 		html_meta_redirect( $p_redirect_to );
-		html_page_top1();
-		html_page_top2();
+		html_page_top();
 		echo '<br /><div class="center">';
 		echo lang_get( 'operation_successful' ) . '<br />';
 		print_bracket_link( $p_redirect_to, lang_get( 'proceed' ) );
 		echo '</div>';
-		html_page_bottom1();
+		html_page_bottom();
 	} else {
 		print_header_redirect( $p_redirect_to );
 	}
@@ -365,7 +364,7 @@ function print_news_item_option_list() {
 			array_push( $t_notes, lang_get( 'private' ) );
 		}
 
-		if ( sizeof( $t_notes ) > 0 ) {
+		if ( count( $t_notes ) > 0 ) {
 			$t_note_string = ' [' . implode( ' ', $t_notes ) . ']';
 		}
 
@@ -398,15 +397,17 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 	print_user( $p_poster_id );
 	$output = '';
 
-	$output .= ' <span class="small">';
 	if( 1 == $p_announcement ) {
+		$output .= ' <span class="small">';
 		$output .= '[' . lang_get( 'announcement' ) . ']';
+		$output .= '</span>';		
 	}
 	if( VS_PRIVATE == $p_view_state ) {
+		$output .= ' <span class="small">';
 		$output .= '[' . lang_get( 'private' ) . ']';
+		$output .= '</span>';
 	}
 
-	$output .= '</span>';
 	$output .= '</td>';
 	$output .= '</tr>';
 	$output .= '<tr>';
@@ -466,20 +467,21 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 	}
 
 	$t_project_count = count( $t_project_ids );
+	$t_charset = lang_get( 'charset' );
 	for( $i = 0;$i < $t_project_count;$i++ ) {
 		$t_id = $t_project_ids[$i];
 		if( $t_id != $p_filter_project_id ) {
 			echo "<option value=\"$t_id\"";
 			check_selected( $p_project_id, $t_id );
-			echo '>' . string_display_line( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
-			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace );
+			echo '>' . string_html_specialchars( string_strip_hrefs( project_get_field( $t_id, 'name' ) ), $t_charset ) . '</option>' . "\n";
+			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, Array(), $t_charset );
 		}
 	}
 }
 
 # --------------------
 # List projects that the current user has access to
-function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_parents = Array() ) {
+function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_parents = Array(), $p_charset = null ) {
 	array_push( $p_parents, $p_parent_id );
 	$t_project_ids = current_user_get_accessible_subprojects( $p_parent_id );
 	$t_project_count = count( $t_project_ids );
@@ -492,8 +494,8 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 			}
 			echo "$t_full_id\"";
 			check_selected( $p_project_id, $t_full_id );
-			echo '>' . str_repeat( '&nbsp;', count( $p_parents ) ) . str_repeat( '&raquo;', count( $p_parents ) ) . ' ' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
-			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
+			echo '>' . str_repeat( '&nbsp;', count( $p_parents ) ) . str_repeat( '&raquo;', count( $p_parents ) ) . ' ' . string_html_specialchars( string_strip_hrefs( project_get_field( $t_id, 'name' ) ) ) . '</option>' . "\n";
+			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents, $t_charset );
 		}
 	}
 }
@@ -632,7 +634,7 @@ function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
 	echo '<option value=""></option>';
 	foreach( $p_profiles as $t_profile ) {
 		extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
-		
+
 		$t_platform = string_display( $t_profile['platform'] );
 		$t_os = string_display( $t_profile['os'] );
 		$t_os_build = string_display( $t_profile['os_build'] );
@@ -782,6 +784,9 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 		echo '<option value=""></option>';
 	}
 
+	$t_listed = array();
+	$t_max_length = config_get( 'max_dropdown_length' );
+	
 	foreach( $versions as $version ) {
 
 		# If the current version is obsolete, and current version not equal to $p_version,
@@ -793,9 +798,13 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 		}
 
 		$t_version = string_attribute( $version['version'] );
-		echo "<option value=\"$t_version\"";
-		check_selected( $p_version, $t_version );
-		echo '>', string_shorten( $t_version ), '</option>';
+
+		if ( !in_array( $t_version, $t_listed ) ) {
+			$t_listed[] = $t_version;
+			echo "<option value=\"$t_version\"";
+			check_selected( $p_version, $t_version );
+			echo '>', string_shorten( $t_version, $t_max_length ), '</option>';
+		}
 	}
 }
 
@@ -820,10 +829,12 @@ function print_build_option_list( $p_build = '' ) {
 		$t_overall_build_arr[] = $row['build'];
 	}
 
+	$t_max_length = config_get( 'max_dropdown_length' );
+
 	foreach( $t_overall_build_arr as $t_build ) {
 		echo "<option value=\"$t_build\"";
 		check_selected( $p_build, $t_build );
-		echo ">" . string_shorten( $t_build ) . "</option>";
+		echo ">" . string_shorten( $t_build, $t_max_length ) . "</option>";
 	}
 }
 
@@ -833,7 +844,7 @@ function print_build_option_list( $p_build = '' ) {
 function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 	$t_config_var_name = $p_enum_name . '_enum_string';
 	$t_config_var_value = config_get( $t_config_var_name );
-	
+
 	$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 
 	foreach ( $t_enum_values as $t_key ) {
@@ -869,7 +880,7 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 	$t_enum_list = array();
 
 	foreach ( $t_enum_values as $t_enum_value ) {
-		if ( ( access_compare_level( $p_user_auth, access_get_status_threshold( $t_enum_value ) ) ) 
+		if ( ( access_compare_level( $p_user_auth, access_get_status_threshold( $t_enum_value ) ) )
 				&& ( !(( false == $p_show_current ) && ( $p_current_value == $t_enum_value ) ) ) ) {
 			$t_enum_list[$t_enum_value] = get_enum_element( 'status', $t_enum_value );
 		}
@@ -1249,7 +1260,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 
 		echo '<a href="view_all_set.php?sort=' . $p_sort_field . '&amp;dir=' . $p_dir . '&amp;type=2&amp;print=1">' . $p_string . '</a>';
 	}
-	elseif( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
+	else if( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
 		if( $p_sort_field == $p_sort ) {
 
 			# we toggle between ASC and DESC if the user clicks the same sort order
@@ -1643,7 +1654,7 @@ function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_
 function print_bug_attachments_list( $p_bug_id ) {
 	$t_attachments = file_get_visible_attachments( $p_bug_id );
 	$t_attachments_count = count( $t_attachments );
-	
+
 	$i = 0;
 	$image_previewed = false;
 
@@ -1702,7 +1713,7 @@ document.getElementById( span ).style.display = displayType;
 				echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content(\"hideSection_" . $c_id . "\");swap_content(\"showSection_" . $c_id . "\");return false;'>" . lang_get( 'hide_content' ) . "</a>]";
 
 				echo "<pre>";
-				
+
 				/** @todo Refactor into a method that gets contents for download / preview. */
 				switch( config_get( 'file_upload_method' ) ) {
 					case DISK:
@@ -1757,5 +1768,5 @@ document.getElementById( span ).style.display = displayType;
 			echo "<br />\n";
 			$i++;
 		}
-	}	
+	}
 }

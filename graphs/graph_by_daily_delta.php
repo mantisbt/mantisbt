@@ -37,8 +37,10 @@ $t_project_id = helper_get_current_project();
 
 $g_start_date = date( 'Y-m-d', strtotime( "-1 Month" ) );
 
+$t_bug_table = db_get_table( 'mantis_bug_table' );
+
 $query = "SELECT status, date_submitted, last_updated
-		FROM mantis_bug_table
+		FROM $t_bug_table
 		WHERE project_id=" . db_param() . " AND
 				date_submitted>=" . db_param() . "
 		ORDER BY date_submitted ASC";
@@ -58,11 +60,12 @@ function tmpcmp( $a, $b ) {
 # get total bugs before a date
 function get_total_count_by_date( $p_date ) {
 	$t_project_id = helper_get_current_project();
+	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 	$d_arr = explode( '/', $p_date );
 	$p_date = $d_arr[2] . '-' . $d_arr[0] . '-' . $d_arr[1];
 	$query = "SELECT COUNT(*)
-			FROM mantis_bug_table
+			FROM $t_bug_table
 			WHERE date_submitted<='$p_date' AND
 				project_id='$t_project_id'";
 	$result = db_query( $query );
@@ -72,11 +75,12 @@ function get_total_count_by_date( $p_date ) {
 # get resolved bugs before a date
 function get_resolved_count_by_date( $p_date ) {
 	$t_project_id = helper_get_current_project();
+	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 	$d_arr = explode( '/', $p_date );
 	$p_date = $d_arr[2] . '-' . $d_arr[0] . '-' . $d_arr[1];
 	$query = "SELECT COUNT(*)
-			FROM mantis_bug_table
+			FROM $t_bug_table
 			WHERE last_updated<='$p_date' AND
 				status='80' AND
 				project_id='$t_project_id'";
@@ -87,11 +91,12 @@ function get_resolved_count_by_date( $p_date ) {
 # get closed bugs before a date
 function get_closed_count_by_date( $p_date ) {
 	$t_project_id = helper_get_current_project();
+	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 	$d_arr = explode( '/', $p_date );
 	$p_date = $d_arr[2] . '-' . $d_arr[0] . '-' . $d_arr[1];
 	$query = "SELECT COUNT(*)
-			FROM mantis_bug_table
+			FROM $t_bug_table
 			WHERE last_updated<='$p_date' AND
 				status='90' AND
 				project_id='$t_project_id'";
@@ -131,7 +136,8 @@ foreach( $data_date_arr as $val ) {
 }
 
 $data_open_count_arr = array();
-for( $i = 1;$i < count( $data_open_count_arr_temp );$i++ ) {
+$t_count = count( $data_open_count_arr_temp );
+for( $i = 1;$i < $t_count;$i++ ) {
 	$data_open_count_arr[] = $data_open_count_arr_temp[$i] - $data_open_count_arr_temp[$i - 1];
 }
 $data_open_count_arr[] = 0;
@@ -142,7 +148,8 @@ foreach( $data_date_arr as $val ) {
 	$data_resolved_count_arr_temp[] = get_resolved_count_by_date( $val );
 }
 $data_resolved_count_arr = array();
-for( $i = 1;$i < count( $data_resolved_count_arr_temp );$i++ ) {
+$t_count = count( $data_resolved_count_arr_temp );
+for( $i = 1;$i < $t_count;$i++ ) {
 	$data_resolved_count_arr[] = $data_resolved_count_arr_temp[$i] - $data_resolved_count_arr_temp[$i - 1];
 }
 $data_resolved_count_arr[] = 0;
@@ -153,7 +160,8 @@ foreach( $data_date_arr as $val ) {
 	$data_closed_count_arr_temp[] = get_closed_count_by_date( $val );
 }
 $data_closed_count_arr = array();
-for( $i = 1;$i < count( $data_closed_count_arr_temp );$i++ ) {
+$t_count = count( $data_closed_count_arr_temp );
+for( $i = 1;$i < $t_count;$i++ ) {
 	$data_closed_count_arr[] = $data_closed_count_arr_temp[$i] - $data_closed_count_arr_temp[$i - 1];
 }
 $data_closed_count_arr[] = 0;

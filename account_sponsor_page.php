@@ -19,7 +19,7 @@
 	 *	This page is called from:
 	 *	- print_menu()
 	 *	- print_account_menu()
-	 * 
+	 *
 	 * EXPECTED BEHAVIOUR
 	 *	- Display the user's current sponsorships
 	 *	- Allow the user to edit the payment flag
@@ -54,13 +54,12 @@
 	if ( current_user_is_anonymous() ) {
 		access_denied();
 	}
-	
+
 	$t_show_all = gpc_get_bool( 'show_all', false );
 
 	# start the page
-	html_page_top1( lang_get( 'my_sponsorship' ) );
-	html_page_top2();
-	
+	html_page_top( lang_get( 'my_sponsorship' ) );
+
 	$t_project = helper_get_current_project();
 ?>
 <br />
@@ -81,17 +80,17 @@
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_sponsor_table = db_get_table( 'mantis_sponsorship_table' );
 	$t_payment = config_get( 'payment_enable', 0 );
-	
+
 	$t_show_clause =  $t_show_all ? '' : 'AND ( b.status < ' . $t_resolved . ' OR s.paid < ' . SPONSORSHIP_PAID . ')';
 	$t_project_clause = helper_project_specific_where( $t_project );
-	
-	$query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status 
-		FROM $t_bug_table b, $t_sponsor_table s 
+
+	$query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
+		FROM $t_bug_table b, $t_sponsor_table s
 		WHERE s.user_id=$t_user AND s.bug_id = b.id $t_show_clause AND $t_project_clause
 		ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";
-		
+
 	$result = db_query( $query );
-		
+
 	$t_sponsors = db_num_rows( $result );
 	if ( 0 == $t_sponsors ) {
 		echo '<p>' . lang_get( 'no_own_sponsored' ) . '</p>';
@@ -120,14 +119,14 @@
 		<td class="form-title" width="7%"><?php echo lang_get( 'status' ) ?></td>
 		<td class="form-title" width="10%">&nbsp;</td>
 	</tr>
-<?php 
+<?php
 		$t_total_owing = 0;
 		$t_total_paid = 0;
 		for ( $i=0; $i < $t_sponsors; ++$i ) {
 			$row = db_fetch_array( $result );
 			$t_bug = bug_get( $row['bug'] );
 			$t_sponsor = sponsorship_get( $row['sponsor'] );
-			
+
 			# describe bug
 			$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
 			$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
@@ -153,17 +152,17 @@
 				printf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
 			}
 			echo '</td>';
-			
+
 			# describe sponsorship amount
 			echo '<td class="right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
 			echo '<td>' . get_enum_element( 'sponsorship', $t_sponsor->paid ) . '</td>';
-			
+
 			if ( SPONSORSHIP_PAID == $t_sponsor->paid ) {
 				$t_total_paid += $t_sponsor->amount;
 			} else {
 				$t_total_owing += $t_sponsor->amount;
 			}
-			
+
 			echo '<td>';
 			if ( $t_payment ) {
 				echo '(paypal button)';
@@ -191,11 +190,11 @@
 </div>
 <?php } # end sponsored issues
 
-	$query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status 
-		FROM $t_bug_table b, $t_sponsor_table s 
+	$query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
+		FROM $t_bug_table b, $t_sponsor_table s
 		WHERE b.handler_id=$t_user AND s.bug_id = b.id $t_show_clause AND $t_project_clause
 		ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";
-		
+
 	$result = db_query( $query );
 	$t_sponsors = db_num_rows( $result );
 	if ( 0 == $t_sponsors ) {
@@ -225,7 +224,7 @@
 		<td class="form-title" width="10%"><?php echo lang_get( 'amount' ) ?></td>
 		<td class="form-title" width="10%"><?php echo lang_get( 'status' ) ?></td>
 	</tr>
-<?php 
+<?php
 		$t_bug_list = array();
 		$t_total_owing = 0;
 		$t_total_paid = 0;
@@ -234,7 +233,7 @@
 			$t_bug = bug_get( $row['bug'] );
 			$t_sponsor = sponsorship_get( $row['sponsor'] );
 			$t_buglist[] = $row['bug'] . ':' . $row['sponsor'];
-			
+
 			# describe bug
 			$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
 			$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
@@ -256,7 +255,7 @@
 			if ( VS_PRIVATE == $t_bug->view_state ) {
 				printf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
 			}
-			
+
 			# describe sponsorship amount
 			echo '<td>';
 			print_user( $t_sponsor->user_id );
@@ -265,14 +264,14 @@
 			echo '<td><select name="sponsor_' . $row['bug'] . '_' . $t_sponsor->id . '">';
 			print_enum_string_option_list( 'sponsorship', $t_sponsor->paid );
 			echo '</select></td>';
-			
+
 			echo '</tr>';
 			if ( SPONSORSHIP_PAID == $t_sponsor->paid ) {
 				$t_total_paid += $t_sponsor->amount;
 			} else {
 				$t_total_owing += $t_sponsor->amount;
 			}
-			
+
 		}
 		$t_hidden_bug_list = implode( ',', $t_buglist );
 ?>
@@ -306,10 +305,11 @@
 <br />
 <div align="center">
 <?php
-	html_button ( 'account_sponsor_page.php', 
-		lang_get( ( $t_show_all ? 'sponsor_hide' : 'sponsor_show' ) ), 
+	html_button ( 'account_sponsor_page.php',
+		lang_get( ( $t_show_all ? 'sponsor_hide' : 'sponsor_show' ) ),
 		array( 'show_all' => ( $t_show_all ? 0 : 1 ) ) );
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

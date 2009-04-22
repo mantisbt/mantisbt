@@ -265,10 +265,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Toegang geweig
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor heeft geen e-mailadres. Wijzig uw instellingen om dit te corrigeren.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Instelling \'%s\' heeft foutieve waarde \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'De actie kan niet worden uitgevoerd omdat melding \'%d\' alleen-lezen is';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Er is al een relatie tussen deze twee meldingen.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relatie niet gevonden.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Toegang geweigerd: voor melding %d is een hoger toegangsniveau nodig.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Een melding kan geen relatie met zichzelf hebben.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Er is al een relatie tussen deze twee meldingen.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relatie niet gevonden.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Toegang geweigerd: voor melding %d is een hoger toegangsniveau nodig.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Een melding kan geen relatie met zichzelf hebben.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Invoer voor controle onjuist. Probeer het opnieuw.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'De optie \'Wachtwoord verloren\' is niet beschikbaar.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'U moet een e-mailadres invullen om een wachtwoord opnieuw in te stellen';
@@ -292,7 +292,7 @@ $s_logged_in_as = 'Aangemeld als';
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'beheerder';
-$s_myself = "Mijzelf";
+$s_myself = 'Mijzelf';
 $s_default_access_level = 'Standaard toegangsniveau';
 
 $s_issue_status_percentage = 'Statuspercentage melding';
@@ -316,13 +316,15 @@ $s_sponsorship_enum_string = '0:Niet betaald,1:Verzocht,2:Betaald';
 $s_new_account_subject = 'Accountregistratie';
 $s_new_account_greeting = 'Bedankt voor het aanmelden. Uw gebruikersnaam is \'%1$s\'. Om uw registratie af te maken, bezoekt u de volgende link om uw eigen wachtwoord in te stellen:';
 $s_new_account_username = 'Gebruikersnaam: ';
-$s_new_account_message = 'Als u geen aanmelding verstuurd heeft, kunt u dit bericht negeren. Dan gebeurt er niets.' . "\n\n";
+$s_new_account_message = 'Als u geen aanmelding verstuurd heeft, kunt u dit bericht negeren. Dan gebeurt er niets.';
 $s_new_account_do_not_reply = 'VERSTUUR GEEN ANTWOORD OP DIT BERICHT';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = 'IP adres: ';
 $s_new_account_signup_msg = 'Het volgende account is aangemaakt:';
 
-$s_reset_request_msg = 'Iemand (waarschijnlijk uzelf) heeft een wachtwoord wijziging aangevraagd met e-mail bevestiging. Als u dit niet was kan u dit bericht negeren.' . "\n\n" . 'Als u deze wijziging voort wil zetten, bezoekt u de volgende URL om uw wachtwoord te wijzigen:';
+$s_reset_request_msg = 'Iemand (waarschijnlijk uzelf) heeft een wachtwoord wijziging aangevraagd met e-mail bevestiging. Als u dit niet was kan u dit bericht negeren.
+
+Als u deze wijziging voort wil zetten, bezoekt u de volgende URL om uw wachtwoord te wijzigen:';
 $s_reset_request_in_progress_msg = 'Als u de gebruikersnaam en e-mailadres juist heeft opgegeven, sturen wij u een bevestigings e-mail. Dit bericht bevat instructies waarmee u uw wachtwoord kunt wijzigen.';
 
 $s_email_notification_title_for_status_bug_new = 'De volgende meldingstatus is NIEUW (opnieuw)';
@@ -343,18 +345,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Een sponsoring van
 $s_email_notification_title_for_action_sponsorship_deleted = 'Een sponsoring van de volgende melding is geannuleerd.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Aan deze melding is een OPMERKING toegevoegd.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "De volgende melding is een DUPLICAAT van melding %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "De melding %s is een DUPLICAAT van de volgende melding.";
-$s_email_notification_title_for_action_related_to_relationship_added = "De volgende melding is GERELATEERD aan melding %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "De volgende melding BEVAT melding %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "De volgende melding MAAKT DEEL UIT van melding %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "De volgende melding is GEEN DUPLICAAT meer van melding %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "De melding is %s is GEEN DUPLICAAT meer van de volgende melding.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "De volgende melding is NIET LANGER GERELATEERD aan melding %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "De volgende melding BEVAT melding %s NIET LANGER.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "De volgende melding MAAKT GEEN DEEL MEER UIT van melding %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "De GERELATEERDE melding %s is AFGEMELD.";
-$s_email_notification_title_for_action_relationship_child_closed = "De GERELATEERDE melding %s is AFGESLOTEN.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'De volgende melding is een DUPLICAAT van melding %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'De melding %s is een DUPLICAAT van de volgende melding.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'De volgende melding is GERELATEERD aan melding %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'De volgende melding BEVAT melding %s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'De volgende melding MAAKT DEEL UIT van melding %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'De volgende melding is GEEN DUPLICAAT meer van melding %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'De melding is %s is GEEN DUPLICAAT meer van de volgende melding.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'De volgende melding is NIET LANGER GERELATEERD aan melding %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'De volgende melding BEVAT melding %s NIET LANGER.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'De volgende melding MAAKT GEEN DEEL MEER UIT van melding %s.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'De GERELATEERDE melding %s is AFGEMELD.';
+$s_email_notification_title_for_action_relationship_child_closed = 'De GERELATEERDE melding %s is AFGESLOTEN.';
 
 $s_email_reporter = 'Aanmelder';
 $s_email_handler = 'Toegewezen aan:';
@@ -650,11 +652,11 @@ $s_redirecting = '...moment';
 $s_here = 'Hier';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Wachtwoord opnieuw instellen";
-$s_lost_password_done_title = "Wachtwoordbericht verstuurd";
-$s_lost_password_subject = "Wachtwoord opnieuw instellen";
-$s_lost_password_info = "Geef hier uw naam en e-mailadres in om uw verloren wachtwoord opnieuw in te stellen.<br /><br />Als de gegevens overeen komen met een geldig account, ontvangt u een link met de validatiecode via e-mail. Volg deze link om uw wachtwoord aan te passen.";
-$s_lost_password_confirm_hash_OK = "Uw bevestiging is geaccepteerd. Pas alstublieft uw wachtwoord aan.";
+$s_lost_password_title = 'Wachtwoord opnieuw instellen';
+$s_lost_password_done_title = 'Wachtwoordbericht verstuurd';
+$s_lost_password_subject = 'Wachtwoord opnieuw instellen';
+$s_lost_password_info = 'Geef hier uw naam en e-mailadres in om uw verloren wachtwoord opnieuw in te stellen.<br /><br />Als de gegevens overeen komen met een geldig account, ontvangt u een link met de validatiecode via e-mail. Volg deze link om uw wachtwoord aan te passen.';
+$s_lost_password_confirm_hash_OK = 'Uw bevestiging is geaccepteerd. Pas alstublieft uw wachtwoord aan.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Open en aan mij toegewezen';
@@ -716,8 +718,8 @@ $s_default_notify = 'Standaard meldingsvlaggen ingesteld op';
 $s_action_notify = 'Stel actiemeldingsvlaggen in op';
 $s_notify_defaults_change_access = 'Wijzig gebruikers die de standaard meldingen kunnen instellen naar';
 $s_notify_actions_change_access = 'Wijzig gebruikers die de actiemeldingen kunnen instellen naar';
-$s_revert_to_system = "Verwijder alle projectinstellingen";
-$s_revert_to_all_project = "Verwijder projectspecifieke instellingen";
+$s_revert_to_system = 'Verwijder alle projectinstellingen';
+$s_revert_to_all_project = 'Verwijder projectspecifieke instellingen';
 
 # manage_config_workflow_page
 $s_non_existent = 'bestaat niet';
@@ -1192,15 +1194,15 @@ $s_field_remove_button = 'Verwijder gebruikersveld';
 $s_hide_status = 'Status verbergen';
 $s_filter_closed = 'Gesloten';
 $s_filter_resolved = 'Afgemeld';
-$s_hide_closed = "Gesloten verbergen";
-$s_hide_resolved = "Afgemeld verbergen";
+$s_hide_closed = 'Gesloten verbergen';
+$s_hide_resolved = 'Afgemeld verbergen';
 $s_and_above = 'en hoger';
 $s_advanced_filters = 'Uitgebreide filters';
 $s_simple_filters = 'Eenvoudige filters';
 $s_monitored_by = 'Gevolgd door';
 
-$s_attachments = "bijlage(n)";
-$s_attachment_alt = "A";
+$s_attachments = 'bijlage(n)';
+$s_attachment_alt = 'A';
 
 # PHPMailer
 $s_phpmailer_language = 'nl';
@@ -1226,34 +1228,34 @@ $s_changelog = 'Logboek';
 $s_roadmap = 'Roadmap';
 
 # Http auth
-$s_http_auth_realm = "Mantis aanmelden";
+$s_http_auth_realm = 'Mantis aanmelden';
 
-$s_bug = "melding";
-$s_add_new_relationship = "Nieuwe relatie";
-$s_add_new_relationship_button = "Toevoegen";
-$s_this_bug = "Huidige melding";
-$s_relationship_added = "Relatie toegevoegd";
-$s_relationship_deleted = "Relatie verwijderd";
-$s_no_relationship = "geen relatie";
-$s_relationship_replaced = "Relatie vervangen";
-$s_replace_relationship_button = "Vervangen";
-$s_replace_relationship_sure_msg = "Er is al een relatie tussen de twee meldingen. Weet u zeker dat u deze wilt vervangen?";
-$s_relationship_with_parent = "Relatie met de hoofdmelding";
-$s_delete_relationship_button = "Verwijderen";
-$s_delete_relationship_sure_msg = "Weet u zeker dat u deze relatie wilt verwijderen?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Nog niet alle onderliggende meldingen van deze melding zijn afgemeld of gesloten.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTIE</b>. Nog niet alle onderliggende meldingen van deze melding zijn afgemeld of gesloten.<br />Voordat een bovenliggende melding afgemeld of gesloten kan worden, moeten alle onderliggende meldingen afgemeld of gesloten zijn.";
-$s_create_child_bug_button = "Klonen";
-$s_bug_cloned_to = "Melding gekloond";
-$s_bug_created_from = "Melding gegenereerd van";
+$s_bug = 'melding';
+$s_add_new_relationship = 'Nieuwe relatie';
+$s_add_new_relationship_button = 'Toevoegen';
+$s_this_bug = 'Huidige melding';
+$s_relationship_added = 'Relatie toegevoegd';
+$s_relationship_deleted = 'Relatie verwijderd';
+$s_no_relationship = 'geen relatie';
+$s_relationship_replaced = 'Relatie vervangen';
+$s_replace_relationship_button = 'Vervangen';
+$s_replace_relationship_sure_msg = 'Er is al een relatie tussen de twee meldingen. Weet u zeker dat u deze wilt vervangen?';
+$s_relationship_with_parent = 'Relatie met de hoofdmelding';
+$s_delete_relationship_button = 'Verwijderen';
+$s_delete_relationship_sure_msg = 'Weet u zeker dat u deze relatie wilt verwijderen?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Nog niet alle onderliggende meldingen van deze melding zijn afgemeld of gesloten.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ATTENTIE</b>. Nog niet alle onderliggende meldingen van deze melding zijn afgemeld of gesloten.<br />Voordat een bovenliggende melding afgemeld of gesloten kan worden, moeten alle onderliggende meldingen afgemeld of gesloten zijn.';
+$s_create_child_bug_button = 'Klonen';
+$s_bug_cloned_to = 'Melding gekloond';
+$s_bug_created_from = 'Melding gegenereerd van';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relatiediagram";
-$s_relation_graph = "Relatiediagram";
-$s_dependency_graph = "Afhankelijkheidsdiagram";
-$s_vertical = "Verticaal";
-$s_horizontal = "Horizontaal";
-$s_view_issue = "Melding bekijken";
+$s_viewing_bug_relationship_graph_title = 'Relatiediagram';
+$s_relation_graph = 'Relatiediagram';
+$s_dependency_graph = 'Afhankelijkheidsdiagram';
+$s_vertical = 'Verticaal';
+$s_horizontal = 'Horizontaal';
+$s_view_issue = 'Melding bekijken';
 
 # Source Control Integration
 $s_checkin = 'Checkin';
@@ -1286,8 +1288,8 @@ $s_manage_news = 'Nieuws beheren';
 $s_view_list_of_attachments = 'Lijst met bijlage(n) zien';
 $s_download_attachments = 'Bijlage(n) downloaden';
 $s_delete_attachments = 'Bijlage(n) verwijderen';
-$s_delete_attachment_button = "Verwijderen";
-$s_delete_attachment_sure_msg = "Weet u zeker dat u deze bijlage wilt verwijderen?";
+$s_delete_attachment_button = 'Verwijderen';
+$s_delete_attachment_sure_msg = 'Weet u zeker dat u deze bijlage wilt verwijderen?';
 $s_upload_issue_attachments = 'Bestand toevoegen';
 $s_filters = 'filters';
 $s_save_filters = 'Filters bewaren';

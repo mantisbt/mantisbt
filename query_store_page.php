@@ -37,8 +37,7 @@
 
 	compress_enable();
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 ?>
 	<br />
 	<div align="center">
@@ -80,5 +79,4 @@
 	</form>
 <?php
 	echo '</div>';
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

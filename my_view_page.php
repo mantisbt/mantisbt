@@ -50,7 +50,7 @@
 	}
 
 	html_page_top2();
-	
+
 	print_recently_visited();
 
 	$f_page_number		= gpc_get_int( 'page_number', 1 );
@@ -80,9 +80,7 @@
 		echo '</td>';
 		echo '</tr>';
 	}
-?>
 
-<?php
 	$t_number_of_boxes = count ( $t_boxes );
 	$t_boxes_position = config_get( 'my_view_boxes_fixed_position' );
 	$t_counter = 0;
@@ -104,7 +102,7 @@
 		}
 
 		# don't display "Reported by Me" bugs to users that can't report bugs
-		else if ( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) && 
+		else if ( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) &&
 				( current_user_is_anonymous() OR !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
 			$t_number_of_boxes = $t_number_of_boxes - 1;
 		}
@@ -123,7 +121,7 @@
 				}
 
 				# for odd box number only start new column
-				elseif ( 0 == $t_counter%2 ) {
+				else if ( 0 == $t_counter%2 ) {
 					echo '<td valign="top" width="50%">';
 					include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
 					echo '</td></tr>';
@@ -162,9 +160,6 @@
 		}
 	}
 
-?>
-
-<?php
 	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 		echo '<tr>';
 		echo '<td colspan="2">';
@@ -178,5 +173,4 @@
 </div>
 
 <?php
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

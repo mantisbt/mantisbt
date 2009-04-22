@@ -92,11 +92,11 @@ $s_bug_relationships = '関連';
 $s_empty_password_sure_msg = 'ユーザーのパスワードが空ですがよろしいですか。';
 $s_empty_password_button = '空のパスワードの使用';
 
-$s_duplicate_of = "重複";
-$s_has_duplicate = "重複所持";
-$s_related_to = "関連";
-$s_dependant_on = "子番号";
-$s_blocks = "親番号";
+$s_duplicate_of = '重複';
+$s_has_duplicate = '重複所持';
+$s_related_to = '関連';
+$s_dependant_on = '子番号';
+$s_blocks = '親番号';
 
 $s_new_bug = '新規改善要求';
 $s_bugnote_added = 'コメント追加';
@@ -262,10 +262,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'アクセス拒否: 
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'スポンサーはメールアドレスが設定されていません。プロフィールを更新してください。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '構成オプション \'%s\' は不正な値 \'%s\' です。';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '改善要求 \'%s\' が読取専用であるので、その操作は行なうことができません。';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "これらの2つの改善要求間に関連が既にあります。";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "投票が見つかりません。";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "アクセス拒否: 改善要求 %d はより高い権限が必要です。";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "改善要求は自分自身に関連付けできません。";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'これらの2つの改善要求間に関連が既にあります。';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = '投票が見つかりません。';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'アクセス拒否: 改善要求 %d はより高い権限が必要です。';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = '改善要求は自分自身に関連付けできません。';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'コードが一致しません。再度お願いします。';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'パスワード紛失\' 機能が有効ではありません。';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'パスワードをリセットするために，メールアドレスを入力しなければなりません。';
@@ -311,15 +311,21 @@ $s_sponsorship_enum_string = '0:未払い,1:要求中,2:支払済';
 
 # Email Strings
 $s_new_account_subject = 'アカウント登録';
-$s_new_account_greeting = '登録ありがとうございます。あなたのアカウントはユーザー名は、\'%1$s\'です。' . "\n" . '登録を完了するには、次のURL(1行になっているか確認してください)で、パスワードを設定してください:';
+$s_new_account_greeting = '登録ありがとうございます。あなたのアカウントはユーザー名は、\'%1$s\'です。
+
+登録を完了するには、次のURL(1行になっているか確認してください)で、パスワードを設定してください:';
 $s_new_account_username = 'ユーザー名:';
-$s_new_account_message =  '登録した覚えがなければ、このメッセージを無視してください。' . "\n\n";
+$s_new_account_message =  '登録した覚えがなければ、このメッセージを無視してください。';
 $s_new_account_do_not_reply = 'このメッセージに返信しないでください。';
 $s_new_account_email = 'メール: ';
 $s_new_account_IP = 'リモート IP アドレス: ';
 $s_new_account_signup_msg = '次のアカウントが作成されました:';
 
-$s_reset_request_msg = '誰か(たぶん、あなた)がメールによる認証でパスワードを変更しようとしました。' . "\n" . 'もし、覚えがない場合は、このメッセージは無視してください。そうすれば、何も起こりません。' . "\n\n" . 'この要求を確認し、あなたのパスワードを変更するには次のURLを参照してください:';
+$s_reset_request_msg = '誰か(たぶん、あなた)がメールによる認証でパスワードを変更しようとしました。
+
+もし、覚えがない場合は、このメッセージは無視してください。そうすれば、何も起こりません。
+
+この要求を確認し、あなたのパスワードを変更するには次のURLを参照してください:';
 $s_reset_request_in_progress_msg = '正しいユーザー名とメールアドレスなら、今すぐ、そのメールアドレスに確認メッセージを送ります。メッセージが受け取ったら、指示に従ってあなたのアカウントのパスワードを変更してください。';
 
 $s_email_notification_title_for_status_bug_new = '次の改善要求が再び要求されました。';
@@ -340,18 +346,18 @@ $s_email_notification_title_for_action_sponsorship_updated = '次の改善要求の投票
 $s_email_notification_title_for_action_sponsorship_deleted = '次の改善要求の投票が削除されました。';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'コメントが追加されました。';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "次の改善要求が、改善要求%sの重複改善要求に設定されました。";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "改善要求%sが、次の改善要求の重複改善要求に設定されました。";
-$s_email_notification_title_for_action_related_to_relationship_added = "次の改善要求が、改善要求%sと関連付けられました。";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "次の改善要求が、改善要求%sの親に設定されました。";
-$s_email_notification_title_for_action_blocks_relationship_added = "次の改善要求が、改善要求%sの子に設定されました。";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "次の改善要求が、改善要求%sの重複改善要求から外されました。";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "改善要求%sは、次の改善要求の重複改善要求から外されました。";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "次の改善要求が、改善要求%sの関連から外されました。";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "次の改善要求が、改善要求%sの親から外されました。";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "次の改善要求が、改善要求%sの子から外されました。";
-$s_email_notification_title_for_action_relationship_child_resolved = "関連付けられた改善要求%sが解決されました。";
-$s_email_notification_title_for_action_relationship_child_closed = "関連付けられた改善要求%sが完了しました。";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = '次の改善要求が、改善要求%sの重複改善要求に設定されました。';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = '改善要求%sが、次の改善要求の重複改善要求に設定されました。';
+$s_email_notification_title_for_action_related_to_relationship_added = '次の改善要求が、改善要求%sと関連付けられました。';
+$s_email_notification_title_for_action_dependant_on_relationship_added = '次の改善要求が、改善要求%sの親に設定されました。';
+$s_email_notification_title_for_action_blocks_relationship_added = '次の改善要求が、改善要求%sの子に設定されました。';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = '次の改善要求が、改善要求%sの重複改善要求から外されました。';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = '改善要求%sは、次の改善要求の重複改善要求から外されました。';
+$s_email_notification_title_for_action_related_to_relationship_deleted = '次の改善要求が、改善要求%sの関連から外されました。';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = '次の改善要求が、改善要求%sの親から外されました。';
+$s_email_notification_title_for_action_blocks_relationship_deleted = '次の改善要求が、改善要求%sの子から外されました。';
+$s_email_notification_title_for_action_relationship_child_resolved = '関連付けられた改善要求%sが解決されました。';
+$s_email_notification_title_for_action_relationship_child_closed = '関連付けられた改善要求%sが完了しました。';
 
 $s_email_reporter = '登録者';
 $s_email_handler = '担当者';
@@ -645,11 +651,11 @@ $s_redirecting = '...次のページ→';
 $s_here = 'ここ';
 
 # lost_pwd_page.php
-$s_lost_password_title = "パスワードリセット";
-$s_lost_password_done_title = "パスワードのメッセージを送信しました。";
-$s_lost_password_subject = "パスワードリセット";
-$s_lost_password_info = "パスワードを元に戻すために、アカウントの名前とメールアドレスを入力してください。<br /><br />有効なアカウントであれば、アカウントの妥当性を確かめるコードを含むURLをメールであなたに送ります。そのリンクに従って、パスワードを変更してください。";
-$s_lost_password_confirm_hash_OK =  "受理されました。パスワードを更新してください。";
+$s_lost_password_title = 'パスワードリセット';
+$s_lost_password_done_title = 'パスワードのメッセージを送信しました。';
+$s_lost_password_subject = 'パスワードリセット';
+$s_lost_password_info = 'パスワードを元に戻すために、アカウントの名前とメールアドレスを入力してください。<br /><br />有効なアカウントであれば、アカウントの妥当性を確かめるコードを含むURLをメールであなたに送ります。そのリンクに従って、パスワードを変更してください。';
+$s_lost_password_confirm_hash_OK = '受理されました。パスワードを更新してください。';
 
 # main_page.php
 $s_open_and_assigned_to_me = '担当する改善要求';
@@ -711,8 +717,8 @@ $s_default_notify = 'デフォルトフラグの設定';
 $s_action_notify = '通知フラグの設定';
 $s_notify_defaults_change_access = '通知メールのデフォルトを変更可能なユーザー';
 $s_notify_actions_change_access = '通知メールの設定を変更可能なユーザー';
-$s_revert_to_system = "全プロジェクトの設定を削除";
-$s_revert_to_all_project = "プロジェクト固有の設定を削除";
+$s_revert_to_system = '全プロジェクトの設定を削除';
+$s_revert_to_all_project = 'プロジェクト固有の設定を削除';
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
@@ -1217,34 +1223,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = '変更履歴';
 
 # Http auth
-$s_http_auth_realm = "Mantis ログイン";
+$s_http_auth_realm = 'Mantis ログイン';
 
-$s_bug = "改善要求";
-$s_add_new_relationship = "新規関連";
-$s_add_new_relationship_button = "追加";
-$s_this_bug = "現在の改善要求の";
-$s_relationship_added = "関連を追加しました。";
-$s_relationship_deleted = "関連を削除しました。";
-$s_no_relationship = "関連なし";
-$s_relationship_replaced = "関連を差替えました。";
-$s_replace_relationship_button = "差替え";
-$s_replace_relationship_sure_msg = "既に当該改善要求間に関連が設定されています。差し替えてもよろしいですか。?";
-$s_relationship_with_parent = "複製元は";
-$s_delete_relationship_button = "削除";
-$s_delete_relationship_sure_msg = "本当にこの関連を削除しますか?";
-$s_relationship_warning_blocking_bugs_not_resolved = "この改善要求の子番号に、解決済か完了ではない改善要求があります。";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b> この改善要求の子番号に、まだ解決済か完了ではない改善要求があります。<br />この改善要求を<b>解決済/完了</b>にする前に、子として関連した改善要求をすべて解決するか完了するべきです。";
-$s_create_child_bug_button = "複製";
-$s_bug_cloned_to = "改善要求を複製しました";
-$s_bug_created_from = "改善要求を生成しました。 対象";
+$s_bug = '改善要求';
+$s_add_new_relationship = '新規関連';
+$s_add_new_relationship_button = '追加';
+$s_this_bug = '現在の改善要求の';
+$s_relationship_added = '関連を追加しました。';
+$s_relationship_deleted = '関連を削除しました。';
+$s_no_relationship = '関連なし';
+$s_relationship_replaced = '関連を差替えました。';
+$s_replace_relationship_button = '差替え';
+$s_replace_relationship_sure_msg = '既に当該改善要求間に関連が設定されています。差し替えてもよろしいですか。?';
+$s_relationship_with_parent = '複製元は';
+$s_delete_relationship_button = '削除';
+$s_delete_relationship_sure_msg = '本当にこの関連を削除しますか?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'この改善要求の子番号に、解決済か完了ではない改善要求があります。';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>注意</b> この改善要求の子番号に、まだ解決済か完了ではない改善要求があります。<br />この改善要求を<b>解決済/完了</b>にする前に、子として関連した改善要求をすべて解決するか完了するべきです。';
+$s_create_child_bug_button = '複製';
+$s_bug_cloned_to = '改善要求を複製しました';
+$s_bug_created_from = '改善要求を生成しました。 対象';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "関連/依存グラフ";
-$s_relation_graph = "関連グラフ";
-$s_dependency_graph = "依存グラフ";
-$s_vertical = "縦";
-$s_horizontal = "横";
-$s_view_issue = "改善要求参照";
+$s_viewing_bug_relationship_graph_title = '関連/依存グラフ';
+$s_relation_graph = '関連グラフ';
+$s_dependency_graph = '依存グラフ';
+$s_vertical = '縦';
+$s_horizontal = '横';
+$s_view_issue = '改善要求参照';
 
 # Source Control Integration
 $s_checkin = 'チェックイン';
@@ -1277,8 +1283,8 @@ $s_manage_news = 'ニュースの管理';
 $s_view_list_of_attachments = '添付一覧の参照';
 $s_download_attachments = '添付のダウンロード';
 $s_delete_attachments = '添付の削除';
-$s_delete_attachment_button = "削除";
-$s_delete_attachment_sure_msg = "添付を削除してよろしいですか。";
+$s_delete_attachment_button = '削除';
+$s_delete_attachment_sure_msg = '添付を削除してよろしいですか。';
 $s_upload_issue_attachments = '添付のアップロード';
 $s_filters = 'フィルター';
 $s_save_filters = 'フィルターの保存';

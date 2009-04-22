@@ -37,8 +37,10 @@ $t_project_id = helper_get_current_project();
 $data_category_arr = array();
 $data_count_arr = array();
 $t_user_id = auth_get_current_user_id();
+$t_bug_table = db_get_table( 'mantis_bug_table' );
+
 $query = "SELECT status, COUNT( status ) as count
-		FROM mantis_bug_table
+		FROM $t_bug_table
 		WHERE project_id=" . db_param() . " AND
 			  reporter_id=" . db_param() . "
 		GROUP BY status

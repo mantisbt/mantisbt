@@ -34,25 +34,27 @@ $g_error_parameters = array();
 $g_error_handled = false;
 $g_error_proceed_url = null;
 
-# Default error handler
-#
-# This handler will not receive E_ERROR, E_PARSE, E_CORE_*, or E_COMPILE_*
-#  errors.
-#
-# E_USER_* are triggered by us and will contain an error constant in $p_error
-# The others, being system errors, will come with a string in $p_error
-#
-# @access private
-# @param int p_type contains the level of the error raised, as an integer.
-# @param string p_error contains the error message, as a string.
-# @param string p_file contains the filename that the error was raised in, as a string.
-# @param int p_line contains the line number the error was raised at, as an integer.
-# @param array p_context to the active symbol table at the point the error occurred (optional)
-# @uses lang_api.php
-# @uses config_api.php
-# @uses compress_api.php
-# @uses database_api.php (optional)
-# @uses html_api.php (optional)
+/**
+ * Default error handler
+ *
+ * This handler will not receive E_ERROR, E_PARSE, E_CORE_*, or E_COMPILE_*
+ *  errors.
+ *
+ * E_USER_* are triggered by us and will contain an error constant in $p_error
+ * The others, being system errors, will come with a string in $p_error
+ *
+ * @access private
+ * @param int p_type contains the level of the error raised, as an integer.
+ * @param string p_error contains the error message, as a string.
+ * @param string p_file contains the filename that the error was raised in, as a string.
+ * @param int p_line contains the line number the error was raised at, as an integer.
+ * @param array p_context to the active symbol table at the point the error occurred (optional)
+ * @uses lang_api.php
+ * @uses config_api.php
+ * @uses compress_api.php
+ * @uses database_api.php (optional)
+ * @uses html_api.php (optional)
+ */
 function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
 	global $g_lang_overrides;
@@ -187,7 +189,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 
 			if( $t_html_api ) {
 				if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
-					html_page_bottom1();
+					html_page_bottom();
 				} else {
 					html_body_end();
 					html_end();
@@ -200,7 +202,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 			echo '<p style="color:red">', $t_error_type, ': ', $t_error_description, '</p>';
 			$g_error_handled = true;
 			break;
-		default:			
+		default:
 			# do nothing - note we treat this as we've not handled an error, so any redirects go through.
 		}
 
@@ -212,7 +214,13 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	$g_error_proceed_url = null;
 }
 
-# Print out the error details including context
+/**
+ * Print out the error details including context
+ * @param string $p_file
+ * @param int $p_line
+ * @param string $p_context
+ * @return null
+ */
 function error_print_details( $p_file, $p_line, $p_context ) {
 	?>
 		<center>
@@ -233,7 +241,11 @@ function error_print_details( $p_file, $p_line, $p_context ) {
 <?php
 }
 
-# Print out the variable context given
+/**
+ * Print out the variable context given
+ * @param string $p_context
+ * @return null
+ */
 function error_print_context( $p_context ) {
 	if( !is_array( $p_context ) ) {
 		return;
@@ -269,7 +281,10 @@ function error_print_context( $p_context ) {
 	echo '</table>';
 }
 
-# Print out a stack trace
+/**
+ * Print out a stack trace
+ * @return null
+ */
 function error_print_stack_trace() {
 	echo '<center><table class="width75">';
 	echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>';
@@ -300,7 +315,13 @@ function error_print_stack_trace() {
 	echo '</table></center>';
 }
 
-# Build a string describing the parameters to a function
+/**
+ * Build a string describing the parameters to a function
+ * @param string $p_param
+ * @param bool $p_showtype default true
+ * @param int $p_depth default 0
+ * @return string
+ */
 function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 0 ) {
 	if( $p_depth++ > 10 ) {
 		return '<b>***Nesting Level Too Deep***</b>';
@@ -315,7 +336,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 
 		return '<Array> { ' . implode( $t_results, ', ' ) . ' }';
 	}
-	elseif( is_object( $p_param ) ) {
+	else if( is_object( $p_param ) ) {
 		$t_results = array();
 
 		$t_class_name = get_class( $p_param );
@@ -335,8 +356,12 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 	}
 }
 
-# Return an error string (in the current language) for the given error.
-# @access public
+/**
+ * Return an error string (in the current language) for the given error.
+ * @param int $p_error
+ * @return string
+ * @access public
+ */
 function error_string( $p_error ) {
 	global $g_error_parameters;
 
@@ -353,41 +378,51 @@ function error_string( $p_error ) {
 	return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $t_string, ENT_COMPAT, lang_get( 'charset' ) ) );
 }
 
-# Check if we have handled an error during this page
-# Return true if an error has been handled, false otherwise
+/**
+ * Check if we have handled an error during this page
+ * Return true if an error has been handled, false otherwise
+ * @return bool
+ */
 function error_handled() {
 	global $g_error_handled;
 
 	return( true == $g_error_handled );
 }
 
-# Set additional info parameters to be used when displaying the next error
-# This function takes a variable number of parameters
-#
-# When writing internationalized error strings, note that you can change the
-#  order of parameters in the string.  See the PHP manual page for the
-#  sprintf() function for more details.
-# @access public
+/**
+ * Set additional info parameters to be used when displaying the next error
+ * This function takes a variable number of parameters
+ *
+ * When writing internationalized error strings, note that you can change the
+ *  order of parameters in the string.  See the PHP manual page for the
+ *  sprintf() function for more details.
+ * @access public
+ * @return null
+ */
 function error_parameters() {
 	global $g_error_parameters;
 
 	$g_error_parameters = func_get_args();
 }
 
-# Set a url to give to the user to proceed after viewing the error
-# @access public
-# @param string p_url url given to user after viewing the error
-# @return null
+/**
+ * Set a url to give to the user to proceed after viewing the error
+ * @access public
+ * @param string p_url url given to user after viewing the error
+ * @return null
+ */
 function error_proceed_url( $p_url ) {
 	global $g_error_proceed_url;
 
 	$g_error_proceed_url = $p_url;
 }
 
-# Simple version of helper_alternate_class for use by error api only.
-# @access private
-# @return string representing css class
-# @usedby error_print_stack_trace
+/**
+ * Simple version of helper_alternate_class for use by error api only.
+ * @access private
+ * @return string representing css class
+ * @usedby error_print_stack_trace
+ */
 function error_alternate_class() {
 	static $t_errindex = 1;
 

@@ -35,9 +35,7 @@
 	$t_redirect_url = 'manage_config_work_threshold_page.php';
 	$t_project = helper_get_current_project();
 
-	html_page_top1( lang_get( 'manage_threshold_config' ) );
-	html_meta_redirect( $t_redirect_url );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_threshold_config' ), $t_redirect_url );
 
 	$t_access = current_user_get_access_level();
 
@@ -72,12 +70,12 @@
             $t_existing_threshold = config_get( $p_threshold );
             $t_existing_access = config_get_access( $p_threshold );
             if ( -1 == $t_lower_threshold ) {
-                if ( ( $t_existing_threshold != $t_array_threshold ) 
+                if ( ( $t_existing_threshold != $t_array_threshold )
 						|| ( $t_existing_access != $f_access ) ) {
                     config_set( $p_threshold, $t_array_threshold, NO_USER, $t_project, $f_access );
                 }
 		    } else {
-                if ( ( $t_existing_threshold != $t_lower_threshold ) 
+                if ( ( $t_existing_threshold != $t_lower_threshold )
 						|| ( $t_existing_access != $f_access ) ) {
                     config_set( $p_threshold, $t_lower_threshold, NO_USER, $t_project, $f_access );
                 }
@@ -168,4 +166,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

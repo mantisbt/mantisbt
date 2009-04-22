@@ -45,13 +45,10 @@
 	echo '<div align="center">';
 
 	$t_redirect_url = 'account_manage_columns_page.php';
-	html_page_top1( lang_get( 'manage_email_config' ) );
-	html_meta_redirect( $t_redirect_url );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_email_config' ), $t_redirect_url );
 	echo '<br />';
 	echo lang_get( 'operation_successful' ) . '<br />';
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
 
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

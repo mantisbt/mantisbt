@@ -24,6 +24,7 @@
  * @file
  *
  * @author Dragan Matic, dragan@panforma.co.yu
+ * @author Nikola Smolenski
  */
 
 $s_charset = 'utf-8';
@@ -181,7 +182,7 @@ $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP konekcija sa serverom ne
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP ažuriranje sloga nije uspelo.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP korisnicki slog nije pronadjen.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Veza sa bazom podataka nije uspostavljena. Greška primljena od baze je #%1$d: %2$s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Upit bazi nije uspešan. Greška primljena od baze je #%1$d: %2$s for the query: %3$s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Упит бази није успешан. Грешка примљена од базе је #%1$d: %2$s за упит: %3$s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Izbor baze neuspešan.  Greška primljena od baze je #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorija pod tim imenom vec postoji';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Nije odredjena akcija za kopiranje.';
@@ -193,10 +194,10 @@ $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Korisnik ne poseduje dovol
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Izabrano "Pravo Ime" odgovara korisnickom imenu. Molim izaberite drugo ime.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Podrska sponzorstvu nije ukljucena.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponzorstvo %1$d nije pronadjeno.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponzorstvo (%1$s) je ispod minimalnog iznosa od (%2$s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Спонзорство (%1$s) је испод најмањег износа (%2$s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Pristup zabranjen: Pristup sponzorisanim greskama zahteva visi nivo pristupa.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponzor nije uneo e-mail adresu. Molim izmenite profil.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguracijska opcija \'%1$s\' ima pogresnu vrednost \'%2$s\'';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Опција подешавања \'%1$s\' има погрешну вредност \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Ova akcija ne moze biti izvrsena jer je greska \'%1$d\' ukljucena samo za citanje';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'vec postoji veza izmedju ove dve greske.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Veza nije pronadjena.';
@@ -230,7 +231,9 @@ $s_new_account_message = 'Ukoliko niste trazili nikakvu registraciju jednostavno
 $s_new_account_do_not_reply = 'NEMOJTE ODGOVARATI NA OVU PORUKU';
 $s_new_account_IP = 'Udaljena IP adreas:';
 $s_new_account_signup_msg = 'Sledeci nalog je kreiran:';
-$s_reset_request_msg = 'Neko (najverovatnije vi) je podneo zahtev za promenu lozinke putem provere elektronske poste. Ukoliko to niste bili vi, ignorisite ovu poruku i nista se nece desiti.\n\nUkoliko ste vi zatrazili proveru, molim posetite sledecu adresu radi promene lozinke:';
+$s_reset_request_msg = 'Neko (najverovatnije vi) je podneo zahtev za promenu lozinke putem provere elektronske poste. Ukoliko to niste bili vi, ignorisite ovu poruku i nista se nece desiti.
+
+Ukoliko ste vi zatrazili proveru, molim posetite sledecu adresu radi promene lozinke:';
 $s_reset_request_in_progress_msg = 'Ukoliko ste pravilno uneli korisnicko ime i email adresu vaseg naloga, sada cemo vam poslati poruku na unetu adresu. Nakon sto ste primili poruku sledite uputstva u njoj da biste promenili lozinku vaseg naloga.';
 $s_email_notification_title_for_status_bug_feedback = 'Sledeca greška zahteva vašu POVRATNU INFORMACIJU.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Sledeca greška je PRIMLJENA.';

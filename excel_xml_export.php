@@ -74,7 +74,7 @@
 	do
 	{
 		$t_more = true;
-		$t_row_count = sizeof( $result );
+		$t_row_count = count( $result );
 
 		for( $i = 0; $i < $t_row_count; $i++ ) {
 			$t_row = $result[$i];
@@ -124,4 +124,3 @@
 	} while ( $t_more );
 
 	echo excel_get_footer();
-?>

@@ -55,7 +55,7 @@
 	$t_project_id 			= 0;
 
 	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE );
-	$t_num_of_columns = sizeof( $t_columns );
+	$t_num_of_columns = count( $t_columns );
 
 	# check to see if the cookie exists
 	if ( !is_blank( $t_cookie_value ) ) {
@@ -81,14 +81,15 @@
 	$t_page_count = null;
 
 	$result = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
-	$row_count = sizeof( $result );
+	$row_count = count( $result );
 
 	# for export
 	$t_show_flag = gpc_get_int( 'show_flag', 0 );
+
+	html_page_top1();
+	html_head_end();
+	html_body_begin();
 ?>
-<?php html_page_top1() ?>
-<?php html_head_end() ?>
-<?php html_body_begin() ?>
 
 <table class="width100"><tr><td class="form-title">
 	<div class="center">
@@ -166,8 +167,9 @@
 <table class="width100" cellspacing="1" cellpadding="2px">
 <tr>
 	<td class="form-title" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
-		<?php echo lang_get( 'viewing_bugs_title' ) ?>
-		<?php
+		<?php 
+			echo lang_get( 'viewing_bugs_title' );
+
 			if ( $row_count > 0 ) {
 				$v_start = $f_offset+1;
 				$v_end   = $f_offset+$row_count;
@@ -179,9 +181,11 @@
 		?>
 	</td>
 	<td class="right" colspan="<?php echo $t_num_of_columns / 2 ?>">
-		<?php # print_bracket_link( 'print_all_bug_options_page.php', lang_get( 'printing_options_link' ) ) ?>
-		<?php # print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ) ?>
-		<?php # print_bracket_link( 'summary_page.php', lang_get( 'summary' ) ) ?>
+		<?php 
+			# print_bracket_link( 'print_all_bug_options_page.php', lang_get( 'printing_options_link' ) );
+			# print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
+			# print_bracket_link( 'summary_page.php', lang_get( 'summary' ) );
+		?>
 	</td>
 </tr>
 <tr class="row-category">

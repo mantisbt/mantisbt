@@ -311,7 +311,9 @@ $s_new_account_do_not_reply = 'NEATSAKINĖKITE Į ŠĮ LAIŠKĄ';
 $s_new_account_email = 'El. pašto adresas:';
 $s_new_account_IP = 'IP adresas:';
 $s_new_account_signup_msg = 'Vartotojo vardas sukurtas su žemiau esančiais parametrais:';
-$s_reset_request_msg = 'Kažkas (greičiausiai jūs pats) paprašėte slaptažodžio pakeitimo. Jeigu tai buvote ne jūs, nekreipkite dėmesio į šį laišką.\n\nPriešingu atveju aplankykite puslapį šiuo adresu:';
+$s_reset_request_msg = 'Kažkas (greičiausiai jūs pats) paprašėte slaptažodžio pakeitimo. Jeigu tai buvote ne jūs, nekreipkite dėmesio į šį laišką.
+
+Priešingu atveju aplankykite puslapį šiuo adresu:';
 $s_reset_request_in_progress_msg = 'Jeigu įvedėte teisingą vartotojo vardą ir el. pašto adresą, mes jums išsiuntėme patvirtinimo laišką. Kai tik gausite minėtą laišką, sekite instrukcijas ekrane.';
 $s_email_notification_title_for_status_bug_feedback = 'Šiai klaidai reikia Jūsų ATSAKYMO.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Ši klaida buvo UŽREGISTRUOTA.';

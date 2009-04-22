@@ -22,7 +22,7 @@
 	 */
 
 	/**
-	 * Prints the title for the custom action page.	 
+	 * Prints the title for the custom action page.
 	 */
 	function action_update_product_build_print_title() {
         echo '<tr class="form-title">';
@@ -35,7 +35,7 @@
 	 * Prints the field within the custom action form.  This has an entry for
 	 * every field the user need to supply + the submit button.  The fields are
 	 * added as rows in a table that is already created by the calling code.
-	 * A row has two columns.         	 
+	 * A row has two columns.
 	 */
 	function action_update_product_build_print_fields() {
 		echo '<tr class="row-1" valign="top"><td class="category">', lang_get( 'product_build' ), '</td><td><input type="text" name="build" size="32" maxlength="32" /></td></tr>';
@@ -44,7 +44,7 @@
 
 	/**
 	 * Validates the action on the specified bug id.
-	 * 
+	 *
 	 * @param $p_bug_id Bug ID
 	 * @return true|array  Action can be applied., bug_id => reason for failure
 	 */
@@ -68,9 +68,9 @@
 
 	/**
 	 * Executes the custom action on the specified bug id.
-	 * 
+	 *
 	 * @param $p_bug_id  The bug id to execute the custom action on.
-	 * @returns true|array Action executed successfully., ( bug_id => reason for failure )               	 
+	 * @returns true|array Action executed successfully., ( bug_id => reason for failure )
 	 */
 	function action_update_product_build_process( $p_bug_id ) {
 		$f_build = gpc_get_string( 'build' );
@@ -79,4 +79,3 @@
 		bug_set_field( $p_bug_id, 'build', $t_build );
 		return true;
     }
-?>

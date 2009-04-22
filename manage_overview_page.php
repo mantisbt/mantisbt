@@ -30,8 +30,7 @@
 
 	$t_version_suffix = config_get_global( 'version_suffix' );
 
-	html_page_top1( lang_get( 'manage_link' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'manage_link' ) );
 
 	print_manage_menu();
 ?>
@@ -76,12 +75,14 @@
 <tr class="spacer">
 <td></td>
 </tr>
-<?php } ?>
+<?php
+}
 
-<?php event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) ) ?>
+event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) ) 
+?>
 
 </table>
 
 <?php
-html_page_bottom1( __FILE__ );
+html_page_bottom( __FILE__ );
 

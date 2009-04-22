@@ -266,10 +266,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Przypisywanie 
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor nie poda³ adresu email. Proszê zaktualizowaæ swój profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Opcja konfiguracji \'%s\' ma nieprawid³ow± warto¶æ \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Akcja nie mo¿e zostaæ wykonana poniewa¿ zg³oszenie \'%d\' jest tylko do odczytu.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Istnieje ju¿ powi±zanie pomiêdzy tymi dwoma zg³oszeniami.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Nie znaleziono powi±zania.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Zg³oszenie %d wymaga wy¿szego poziomu dostêpu.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Zg³oszenie nie mo¿e byæ powi±zane z samym sob±.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS]= 'Istnieje ju¿ powi±zanie pomiêdzy tymi dwoma zg³oszeniami.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND]= 'Nie znaleziono powi±zania.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW]= 'Zg³oszenie %d wymaga wy¿szego poziomu dostêpu.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG]= 'Zg³oszenie nie mo¿e byæ powi±zane z samym sob±.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Potwierdzenie nie pasuje. Proszê spróbowaæ ponownie.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Funkcja \'Zapomnia³em has³a\' jest niedostêpna.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Musisz podaæ adres email, aby zresetowaæ has³o.';
@@ -293,7 +293,7 @@ $s_logged_in_as = 'Zalogowano jako';
 $s_prefix_for_deleted_users = 'u¿ytkownik';
 
 $s_administrator = 'administrator';
-$s_myself = "Ja";
+$s_myself= 'Ja';
 $s_default_access_level = 'Domy¶lny poziom dostêpu';
 
 $s_issue_status_percentage = 'Stan procentowy zg³oszenia';
@@ -317,13 +317,15 @@ $s_sponsorship_enum_string        = '0:Nieop³acony,1:¯±danie zap³aty,2:Op³acony'
 $s_new_account_subject = 'Rejestracja konta';
 $s_new_account_greeting = 'Dziêkujemy za zapisanie. Masz konto o nazwie \'%1$s\'. Aby zakoñczyæ rejestracjê, odwied¼ podany adres (upewnij siê, ¿e jest wprowadzony w jednej linii) i ustaw swoje has³o dostêpu:';
 $s_new_account_username = 'Nazwa u¿ytkownika: ';
-$s_new_account_message = 'Je¶li to nie twoje zg³oszenie, zignoruj tê wiadomo¶æ. Nic siê nie stanie.' . "\n\n";
+$s_new_account_message = 'Je¶li to nie twoje zg³oszenie, zignoruj tê wiadomo¶æ. Nic siê nie stanie.';
 $s_new_account_do_not_reply = 'NIE ODPOWIADAJ NA TÊ WIADOMO¦Æ';
 $s_new_account_email = 'Email: ';
 $s_new_account_IP = 'Zdalny adres IP: ';
 $s_new_account_signup_msg = 'Nastêpuj±ce konto zosta³o za³o¿one:';
 
-$s_reset_request_msg = 'Kto¶ (prawdopodobnie Ty) za¿±da³ zmiany has³a przez weryfikacjê emailem. Je¶li to nie Ty, zignoruj tê wiadomo¶æ.' . "\n\n" . 'Je¶li prosi³e¶ o to, odwied¼ poni¿szy adres aby zmieniæ has³o:';
+$s_reset_request_msg = 'Kto¶ (prawdopodobnie Ty) za¿±da³ zmiany has³a przez weryfikacjê emailem. Je¶li to nie Ty, zignoruj tê wiadomo¶æ.
+
+Je¶li prosi³e¶ o to, odwied¼ poni¿szy adres aby zmieniæ has³o:';
 $s_reset_request_in_progress_msg = 'Je¶li nazwa u¿ytkownika i adres email dla twojego konta s± prawid³owe to prze¶lemy teraz wiadomo¶æ potwierdzaj±c± na podany adres. Gdy otrzymasz wiadomo¶æ, postêpuj zgodnie z podanymi w niej instrukcjami i zmieñ has³o.';
 
 $s_email_notification_title_for_status_bug_new = 'Nastêpuj±ce zagadnienie ma ustawiony stan NOWE (ponownie)';
@@ -344,18 +346,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Sponsorowanie nast
 $s_email_notification_title_for_action_sponsorship_deleted = 'Sponsorowanie nastêpuj±cego zagadnienia zosta³o wycofane.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Do nastêpuj±cego Zagadnienia DODANO KOMENTARZ.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "Nastêpuj±ce zagadnienie zosta³o ustawione jako DUPLIKAT zagadniena %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "Zagadnienie %s zosta³o ustawione jako DUPLIKAT nastepuj±cego zagadnienia.";
-$s_email_notification_title_for_action_related_to_relationship_added = "Nastêpuj±ce zagadnienie ustawiono jako ZWI¡ZANE z zagadnieniem %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "Nastêpuj±ce zagadnienie ustawiono jako BLOKOWANY przez zagadnienie %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "Nastêpuj±ce zagadnienie ustawiono jako BLOKUJE zagadnienie %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Nastêpuj±cemu zagadnieniu usuniêto DUPLIKAT zagadnienia %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Zagadnieniu %s usuniêto DUPLIKAT nastêpuj±cego zagadnienia.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "Nastêpuj±cemu zagadnieniu usunieto ZWI¡ZANE z zagadnieniem %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Nastêpuj±cemu zagadnieniu usunieto BLOKOWANY przez zagadnienie %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added= 'Nastêpuj±ce zagadnienie zosta³o ustawione jako DUPLIKAT zagadniena %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added= 'Zagadnienie %s zosta³o ustawione jako DUPLIKAT nastepuj±cego zagadnienia.';
+$s_email_notification_title_for_action_related_to_relationship_added= 'Nastêpuj±ce zagadnienie ustawiono jako ZWI¡ZANE z zagadnieniem %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added= 'Nastêpuj±ce zagadnienie ustawiono jako BLOKOWANY przez zagadnienie %s.';
+$s_email_notification_title_for_action_blocks_relationship_added= 'Nastêpuj±ce zagadnienie ustawiono jako BLOKUJE zagadnienie %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted= 'Nastêpuj±cemu zagadnieniu usuniêto DUPLIKAT zagadnienia %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted= 'Zagadnieniu %s usuniêto DUPLIKAT nastêpuj±cego zagadnienia.';
+$s_email_notification_title_for_action_related_to_relationship_deleted= 'Nastêpuj±cemu zagadnieniu usunieto ZWI¡ZANE z zagadnieniem %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted= 'Nastêpuj±cemu zagadnieniu usunieto BLOKOWANY przez zagadnienie %s.';
 $s_email_notification_title_for_action_blocks_relationship_deleted = 'Nastêpuj±cemu zagadnieniu usunieto BLOKUJE zagadnienie %s.';
-$s_email_notification_title_for_action_relationship_child_resolved = "BLOKUJ¡CE zagadnienie %s zosta³o ROZWI¡ZANE.";
-$s_email_notification_title_for_action_relationship_child_closed = "BLOKUJ¡CE zgadnienie %s zosta³o ZAMKNIÊTE.";
+$s_email_notification_title_for_action_relationship_child_resolved= 'BLOKUJ¡CE zagadnienie %s zosta³o ROZWI¡ZANE.';
+$s_email_notification_title_for_action_relationship_child_closed= 'BLOKUJ¡CE zgadnienie %s zosta³o ZAMKNIÊTE.';
 
 $s_email_reporter = 'Zg³aszaj±cy';
 $s_email_handler = 'Operator';
@@ -649,11 +651,11 @@ $s_redirecting = '...Przekierowujê';
 $s_here = 'Tutaj';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Resetowanie has³a";
-$s_lost_password_done_title = "Wiadomo¶æ o ha¶le wys³ana";
-$s_lost_password_subject = "Resetowanie has³a";
-$s_lost_password_info = "Aby zmieniæ zapomniane has³o, proszê podaæ nazwe u¿ytkownika i adres email dla konta.<br /><br />Je¶li podane dane odpowiadaj± poprawnemu kontu, otrzymasz w wiadomo¶ci email specjalny adres URL zawieraj±cy kod weryfikuj±cy dla twojego konta. Proszê otworzyæ podany adres aby zmieniæ has³o.";
-$s_lost_password_confirm_hash_OK = "Twoje potwierdzenie zosta³o zaakceptowane. Proszê zmieniæ has³o.";
+$s_lost_password_title= 'Resetowanie has³a';
+$s_lost_password_done_title= 'Wiadomo¶æ o ha¶le wys³ana';
+$s_lost_password_subject= 'Resetowanie has³a';
+$s_lost_password_info= 'Aby zmieniæ zapomniane has³o, proszê podaæ nazwe u¿ytkownika i adres email dla konta.<br /><br />Je¶li podane dane odpowiadaj± poprawnemu kontu, otrzymasz w wiadomo¶ci email specjalny adres URL zawieraj±cy kod weryfikuj±cy dla twojego konta. Proszê otworzyæ podany adres aby zmieniæ has³o.';
+$s_lost_password_confirm_hash_OK= 'Twoje potwierdzenie zosta³o zaakceptowane. Proszê zmieniæ has³o.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Otwarte i przypisane do mnie';
@@ -1188,17 +1190,17 @@ $s_confirm_custom_field_unlinking = 'Czy na pewno chcesz usun±æ (od³±czyæ) dodat
 $s_field_remove_button = 'Usuñ pole';
 
 $s_hide_status = 'Ukryj stan';
-$s_filter_closed = "Zamkniête";
-$s_filter_resolved = "Rozwi±zane";
-$s_hide_closed = "Ukryj Zamkniête";
-$s_hide_resolved = "Ukryj Rozwi±zane";
+$s_filter_closed= 'Zamkniête';
+$s_filter_resolved= 'Rozwi±zane';
+$s_hide_closed= 'Ukryj Zamkniête';
+$s_hide_resolved= 'Ukryj Rozwi±zane';
 $s_and_above = 'i wy¿sze';
 $s_advanced_filters = 'Zaawansowane filtry';
 $s_simple_filters = 'Proste filtry';
 $s_monitored_by = 'Monitorowane przez';
 
-$s_attachments = "ZA£¡CZNIKI";
-$s_attachment_alt = "A";
+$s_attachments= 'ZA£¡CZNIKI';
+$s_attachment_alt= 'A';
 
 # PHPMailer
 $s_phpmailer_language = 'pl';
@@ -1221,34 +1223,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = 'Lista zmian';
 
 # Http auth
-$s_http_auth_realm = "Logowanie do Mantisa";
+$s_http_auth_realm= 'Logowanie do Mantisa';
 
-$s_bug = "zagadnienie";
-$s_add_new_relationship = "Nowe powi±zanie";
-$s_add_new_relationship_button = "Dodaj";
-$s_this_bug = "Bie¿±ce zagadnienie";
-$s_relationship_added = "Powi±zanie dodane";
-$s_relationship_deleted = "Powi±zanie usuniête";
-$s_no_relationship = "brak powi±zañ";
-$s_relationship_replaced = "Powi±zanie zast±pione";
-$s_replace_relationship_button = "Zast±p";
-$s_replace_relationship_sure_msg = "Istnieje ju¿ powi±zanie miêdzy tymi zagadnieniami. Czy na pewno chcesz zast±piæ?";
-$s_relationship_with_parent = "Powi±zanie z zagadnieniem ¼ród³owym";
-$s_delete_relationship_button = "Usuñ";
-$s_delete_relationship_sure_msg = "Czy na pewno chcesz usun±æ powi±zanie?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Nie wszyskie zagadnienia blokuj±ce s± rozwi±zane lub zamkniête.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>UWAGA</b>. Nie wszystkie zagadnienia blokuj±ce s± rozwi±zane lub zamkniête.<br />Przed <b>rozwi±zaniem/zamkniêciem</b> tego zagadnienia wszystkie zagadnienia blokuj±ce powinny byæ rozwi±zane/zamkniête.";
-$s_create_child_bug_button = "Klonuj";
-$s_bug_cloned_to = "Zagadnienie sklonowane";
-$s_bug_created_from = "Zagadnienie wygenerowane z";
+$s_bug= 'zagadnienie';
+$s_add_new_relationship= 'Nowe powi±zanie';
+$s_add_new_relationship_button= 'Dodaj';
+$s_this_bug= 'Bie¿±ce zagadnienie';
+$s_relationship_added= 'Powi±zanie dodane';
+$s_relationship_deleted= 'Powi±zanie usuniête';
+$s_no_relationship= 'brak powi±zañ';
+$s_relationship_replaced= 'Powi±zanie zast±pione';
+$s_replace_relationship_button= 'Zast±p';
+$s_replace_relationship_sure_msg= 'Istnieje ju¿ powi±zanie miêdzy tymi zagadnieniami. Czy na pewno chcesz zast±piæ?';
+$s_relationship_with_parent= 'Powi±zanie z zagadnieniem ¼ród³owym';
+$s_delete_relationship_button= 'Usuñ';
+$s_delete_relationship_sure_msg= 'Czy na pewno chcesz usun±æ powi±zanie?';
+$s_relationship_warning_blocking_bugs_not_resolved= 'Nie wszyskie zagadnienia blokuj±ce s± rozwi±zane lub zamkniête.';
+$s_relationship_warning_blocking_bugs_not_resolved_2= '<b>UWAGA</b>. Nie wszystkie zagadnienia blokuj±ce s± rozwi±zane lub zamkniête.<br />Przed <b>rozwi±zaniem/zamkniêciem</b> tego zagadnienia wszystkie zagadnienia blokuj±ce powinny byæ rozwi±zane/zamkniête.';
+$s_create_child_bug_button= 'Klonuj';
+$s_bug_cloned_to= 'Zagadnienie sklonowane';
+$s_bug_created_from= 'Zagadnienie wygenerowane z';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Graf powi±zañ";
-$s_relation_graph = "Graf powi±zañ";
-$s_dependency_graph = "Graf zale¿no¶ci";
-$s_vertical = "Pionowy";
-$s_horizontal = "Poziomy";
-$s_view_issue = "Zobacz zagadnienie";
+$s_viewing_bug_relationship_graph_title= 'Graf powi±zañ';
+$s_relation_graph= 'Graf powi±zañ';
+$s_dependency_graph= 'Graf zale¿no¶ci';
+$s_vertical= 'Pionowy';
+$s_horizontal= 'Poziomy';
+$s_view_issue= 'Zobacz zagadnienie';
 
 # Source Control Integration
 $s_checkin = 'Oddanie';
@@ -1281,8 +1283,8 @@ $s_manage_news = 'Zarz±dzaj aktualno¶ciami';
 $s_view_list_of_attachments = 'Obejrzyj listê za³±czników';
 $s_download_attachments = '¦ci±gaj za³±czniki';
 $s_delete_attachments = 'Usuñ za³±czniki';
-$s_delete_attachment_button = "Usuñ";
-$s_delete_attachment_sure_msg = "Czy na pewno chcesz usun±æ ten za³±cznik?";
+$s_delete_attachment_button= 'Usuñ';
+$s_delete_attachment_sure_msg= 'Czy na pewno chcesz usun±æ ten za³±cznik?';
 $s_upload_issue_attachments = 'Za³aduj za³±cznik';
 $s_filters = 'filtry';
 $s_save_filters = 'Zapisz filtry';
@@ -1335,7 +1337,7 @@ $s_on = 'Dnia';
 # wiki related strings
 $s_wiki = 'Wiki';
 
-$s_due_date = "Termin realizacji";
-$s_overdue = "Przeterminowane";
+$s_due_date= 'Termin realizacji';
+$s_overdue= 'Przeterminowane';
 
 ?>

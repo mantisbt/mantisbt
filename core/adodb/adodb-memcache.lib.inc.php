@@ -11,7 +11,7 @@ if (empty($ADODB_INCLUDED_CSV)) include(ADODB_DIR.'/adodb-csvlib.inc.php');
 
 /* 
 
-  V5.06 16 Oct 2008  (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
+  V5.06 16 Oct 2008  (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. See License.txt. 
@@ -77,9 +77,9 @@ $db->CacheExecute($sql);
 				$err = 'Can\'t connect to any memcache server';
 				return false;
 			}
-			
+			$this->_connected = true;
 			$this->_memcache = $memcache;
-			return 0;
+			return true;
 		}
 		
 		// returns true or false. true if successful save
@@ -91,7 +91,7 @@ $db->CacheExecute($sql);
 			}
 			if (!$this->_memcache) return false;
 			
-			if (!$this->_memcache->set($filename, $contents, $this->compress, 0)) {
+			if (!$this->_memcache->set($filename, $contents, $this->compress, $secs2cache)) {
 				if ($debug) ADOConnection::outp(" Failed to save data at the memcached server!<br>\n");
 				return false;
 			}

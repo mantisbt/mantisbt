@@ -377,14 +377,14 @@ function plugin_version_check( $p_version1, $p_version2, $p_maximum = false ) {
 			if( $t_version1 < $t_version2 ) {
 				return 1;
 			}
-			elseif( $t_version1 > $t_version2 ) {
+			else if( $t_version1 > $t_version2 ) {
 				return -1;
 			}
 		} else {
 			if( $t_version1 > $t_version2 ) {
 				return 1;
 			}
-			elseif( $t_version1 < $t_version2 ) {
+			else if( $t_version1 < $t_version2 ) {
 				return -1;
 			}
 		}
@@ -398,7 +398,7 @@ function plugin_version_check( $p_version1, $p_version2, $p_maximum = false ) {
 	} else {
 		if( count( $p_version1 ) > 0 ) {
 			return 1;
-		} elseif( count( $p_version1 ) == 0 && count( $p_version2 ) == 0 ) {
+		} else if( count( $p_version1 ) == 0 && count( $p_version2 ) == 0 ) {
 			return 1;
 		}
 	}
@@ -487,10 +487,9 @@ function plugin_priority( $p_basename ) {
  */
 function plugin_is_installed( $p_basename ) {
 	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
-	$c_basename = db_prepare_string( $p_basename );
 
 	$t_query = "SELECT COUNT(*) FROM $t_plugin_table WHERE basename=" . db_param();
-	$t_result = db_query_bound( $t_query, array( $c_basename ) );
+	$t_result = db_query_bound( $t_query, array( $p_basename ) );
 	return( 0 < db_result( $t_result ) );
 }
 
@@ -515,11 +514,9 @@ function plugin_install( $p_plugin ) {
 
 	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
 
-	$c_basename = db_prepare_string( $p_plugin->basename );
-
 	$t_query = "INSERT INTO $t_plugin_table ( basename, enabled )
 				VALUES ( " . db_param() . ", '1' )";
-	db_query_bound( $t_query, array( $c_basename ) );
+	db_query_bound( $t_query, array( $p_plugin->basename ) );
 
 	if( false === ( plugin_config_get( 'schema', false ) ) ) {
 		plugin_config_set( 'schema', -1 );
@@ -583,7 +580,7 @@ function plugin_upgrade( $p_plugin ) {
 			$t_sqlarray = array(
 				'INSERT INTO ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
 			);
-		} elseif( $t_schema[$i][0] == 'UpdateSQL' ) {
+		} else if( $t_schema[$i][0] == 'UpdateSQL' ) {
 			$t_sqlarray = array(
 				$t_schema[$i][1],
 			);
@@ -621,10 +618,9 @@ function plugin_uninstall( $p_plugin ) {
 	}
 
 	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
-	$c_basename = db_prepare_string( $p_plugin->basename );
 
 	$t_query = "DELETE FROM $t_plugin_table WHERE basename=" . db_param();
-	db_query_bound( $t_query, array( $c_basename ) );
+	db_query_bound( $t_query, array( $p_plugin->basename ) );
 
 	plugin_push_current( $p_plugin->basename );
 

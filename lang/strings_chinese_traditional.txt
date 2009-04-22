@@ -272,7 +272,9 @@ $s_new_account_message = '如果你沒有在本網站註冊, 請不要理這封�
 $s_new_account_do_not_reply = '請不要直接回覆這封註冊確認信件';
 $s_new_account_IP = '遠端 IP 位址:';
 $s_new_account_signup_msg = '這個帳號已經建立完成:';
-$s_reset_request_msg = '有人 (或許是你自己) 提出更改密碼的需求. 如果你沒有提出更改密碼的需求, 請不要理這封註冊確認信件, 就當成沒發生過好了.\n\n如果這個需求確定是你提出, 請點選以下的網址來更改你的密碼:';
+$s_reset_request_msg = '有人 (或許是你自己) 提出更改密碼的需求. 如果你沒有提出更改密碼的需求, 請不要理這封註冊確認信件, 就當成沒發生過好了.
+
+如果這個需求確定是你提出, 請點選以下的網址來更改你的密碼:';
 $s_reset_request_in_progress_msg = '如果你提供正確的帳號以及 E-Mail, 系統將會自動寄發一封確認信函到你的 E-Mail 中. 當你收到這封確認信函, 依照信中的指示步驟, 將可以容易的去更改你的密碼.';
 $s_email_notification_title_for_status_bug_new = '以下的問題現在被重設為新問題狀態';
 $s_email_notification_title_for_status_bug_feedback = '以下的問題需要你的回覆.';

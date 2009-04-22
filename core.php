@@ -56,7 +56,7 @@
 
 	# Load constants and configuration files
   	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'constant_inc.php' );
-  	
+
 	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' ) ) {
 		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' );
 	}
@@ -69,7 +69,7 @@
 		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
 		$t_config_inc_found = true;
 	}
-	
+
 	# Allow an environment variable (defined in an Apache vhost for example)
 	#  to specify a config file to load to override other local settings
 	$t_local_config = getenv( 'MANTIS_CONFIG' );
@@ -77,13 +77,13 @@
 		require_once( $t_local_config );
 		$t_config_inc_found = true;
 	}
-	
+
 	# Attempt to find the location of the core files.
 	$t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR;
 	if (isset($GLOBALS['g_core_path']) && !isset( $HTTP_GET_VARS['g_core_path'] ) && !isset( $HTTP_POST_VARS['g_core_path'] ) && !isset( $HTTP_COOKIE_VARS['g_core_path'] ) ) {
 		$t_core_path = $g_core_path;
 	}
-	
+
 	$g_core_path = $t_core_path;
 
 	# Define an autoload function to automatically load classes when referenced.
@@ -111,7 +111,7 @@
 		echo var_dump($t_output);
 		die;
 	}
-	
+
 	require_once( $t_core_path.'compress_api.php' );
 
 	# Before doing anything else, start output buffering so we don't prevent
@@ -240,7 +240,6 @@
 			header( $t_header );
 		}
 	}
-	
 
 	// push push default language to speed calls to lang_get
 	lang_push( lang_get_default() );
@@ -248,7 +247,7 @@
 	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
 		header( 'Content-type: text/html;charset=' . lang_get( 'charset' ) );
 	}
-	
+
 	// every page displays project dropdown box, so cache project information very early
 	if ( db_is_connected() ) {
 		project_cache_all();

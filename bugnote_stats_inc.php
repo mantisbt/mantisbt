@@ -38,7 +38,7 @@ if ( ON != config_get('time_tracking_enabled') ) {
 
 <a name="bugnotestats" id="bugnotestats" /><br />
 
-<?php 
+<?php
 	collapse_open( 'bugnotestats' );
 
 	$t_bugnote_stats_from_def = date( "d:m:Y", $t_bug->date_submitted );
@@ -137,8 +137,9 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	</td>
 </tr>
 </table>
-<?php } # end if ?>
-<?php
+<?php 
+} # end if
+
 	collapse_closed( 'bugnotestats' );
 ?>
 <table class="width100" cellspacing="0">
@@ -152,4 +153,3 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 </table>
 <?php
 	collapse_end( 'bugnotestats' );
-?>

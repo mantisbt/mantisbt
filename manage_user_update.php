@@ -57,7 +57,7 @@
 
     # strip extra space from real name
     $t_realname = string_normalize( $f_realname );
-    
+
 	user_ensure_name_valid( $f_username );
 	user_ensure_realname_valid( $f_realname );
 	user_ensure_realname_unique( $f_username, $f_realname );
@@ -77,12 +77,12 @@
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	$t_old_protected = user_get_field( $f_user_id, 'protected' );
-	
+
 	# check that we are not downgrading the last administrator
 	$t_old_access = user_get_field( $f_user_id, 'access_level' );
 	if ( ( ADMINISTRATOR == $t_old_access ) && ( $t_old_access <> $f_access_level ) && ( 1 >= user_count_level( ADMINISTRATOR ) ) ) {
 		trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
-	}	   
+	}
 
 	# Project specific access rights override global levels, hence, for users who are changed
 	# to be administrators, we have to remove project specific rights.
@@ -107,7 +107,7 @@
 	    			access_level=" . db_param() . ", enabled=" . db_param() . ",
 	    			protected=" . db_param() . ", realname=" . db_param() . "
 	    		WHERE id=" . db_param();
-	    $query_params = Array( $c_username, $c_email, $c_access_level, $c_enabled, $c_protected, $c_realname, $c_user_id ); 
+	    $query_params = Array( $c_username, $c_email, $c_access_level, $c_enabled, $c_protected, $c_realname, $c_user_id );
 	}
 
 	$result = db_query_bound( $query, $query_params );
@@ -115,14 +115,8 @@
 
 	form_security_purge('manage_user_update');
 
+	html_page_top( null, $result ? $t_redirect_url : null );
 ?>
-<?php html_page_top1() ?>
-<?php
-	if ( $result ) {
-		html_meta_redirect( $t_redirect_url );
-	}
-?>
-<?php html_page_top2() ?>
 
 <br />
 <div align="center">
@@ -139,4 +133,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

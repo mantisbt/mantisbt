@@ -323,7 +323,9 @@ $s_new_account_do_not_reply = 'DETTA ÄR ETT AUTOGENERERAT MEDDELANDE, VAR VÄNL
 $s_new_account_email = 'E-post:';
 $s_new_account_IP = 'Din IP-adress:';
 $s_new_account_signup_msg = 'Följande användarkonto har skapats:';
-$s_reset_request_msg = 'Någon (troligtvis du) har begärt en ändring av lösenordet genom e-postverifikation. Om det inte var du, ignorera då detta meddelande så kommer inget att hända.\n\nOm du begärde denna verifikation, gå till följande webbadress för att ändra ditt lösenord:';
+$s_reset_request_msg = 'Någon (troligtvis du) har begärt en ändring av lösenordet genom e-postverifikation. Om det inte var du, ignorera då detta meddelande så kommer inget att hända.
+
+Om du begärde denna verifikation, gå till följande webbadress för att ändra ditt lösenord:';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 $s_email_notification_title_for_status_bug_new = 'Följande ärende har blivit NYTT (igen)';
 $s_email_notification_title_for_status_bug_feedback = 'Följande ärende kräver din ÅTERKOPPLING.';

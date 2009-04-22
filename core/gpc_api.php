@@ -22,22 +22,27 @@
  * @link http://www.mantisbt.org
  */
 
-# GET, POST, and Cookie API
-# ---------------
-# Retrieve a GPC variable.
-# If the variable is not set, the default is returned.
-# If magic_quotes_gpc is on, slashes will be stripped from the value before being returned.
-#
-#  You may pass in any variable as a default (including null) but if
-#  you pass in *no* default then an error will be triggered if the field
-#  cannot be found
+/**
+ * GET, POST, and Cookie API
+ * ---------------
+ * Retrieve a GPC variable.
+ * If the variable is not set, the default is returned.
+ * If magic_quotes_gpc is on, slashes will be stripped from the value before being returned.
+ *
+ *  You may pass in any variable as a default (including null) but if
+ *  you pass in *no* default then an error will be triggered if the field
+ *  cannot be found
+ *
+ * @param string
+ * @return null
+ */
 function gpc_get( $p_var_name, $p_default = null ) {
 	if( isset( $_POST[$p_var_name] ) ) {
 		$t_result = gpc_strip_slashes( $_POST[$p_var_name] );
-	} elseif( isset( $_GET[$p_var_name] ) ) {
+	} else if( isset( $_GET[$p_var_name] ) ) {
 		$t_result = gpc_strip_slashes( $_GET[$p_var_name] );
 	}
-	elseif( func_num_args() > 1 ) {
+	else if( func_num_args() > 1 ) {
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
 	} else {
@@ -49,20 +54,30 @@ function gpc_get( $p_var_name, $p_default = null ) {
 	return $t_result;
 }
 
+/**
+ *
+ * @param string $p_var_name
+ * @return bool
+ */
 function gpc_isset( $p_var_name ) {
 	if( isset( $_POST[$p_var_name] ) ) {
 		return true;
 	}
-	elseif( isset( $_GET[$p_var_name] ) ) {
+	else if( isset( $_GET[$p_var_name] ) ) {
 		return true;
 	}
 
 	return false;
 }
 
-# Retrieve a string GPC variable. Uses gpc_get().
-#  If you pass in *no* default, an error will be triggered if
-#  the variable does not exist
+/**
+ * Retrieve a string GPC variable. Uses gpc_get().
+ * If you pass in *no* default, an error will be triggered if
+ * the variable does not exist
+ * @param string $p_var_name
+ * @param string $p_default (optional)
+ * @return string|null
+ */
 function gpc_get_string( $p_var_name, $p_default = null ) {
 
 	# Don't pass along a default unless one was given to us
@@ -78,11 +93,15 @@ function gpc_get_string( $p_var_name, $p_default = null ) {
 	return $t_result;
 }
 
-# Retrieve an integer GPC variable. Uses gpc_get().
-#  If you pass in *no* default, an error will be triggered if
-#  the variable does not exist
+/**
+ * Retrieve an integer GPC variable. Uses gpc_get().
+ * If you pass in *no* default, an error will be triggered if
+ * the variable does not exist
+ * @param string $p_var_name
+ * @param int $p_default (optional)
+ * @return int|null
+ */
 function gpc_get_int( $p_var_name, $p_default = null ) {
-
 	# Don't pass along a default unless one was given to us
 	#  otherwise we prevent an error being triggered
 	$args = func_get_args();
@@ -100,8 +119,14 @@ function gpc_get_int( $p_var_name, $p_default = null ) {
 
 	return (int) $t_val;
 }
-# Retrieve a boolean GPC variable. Uses gpc_get().
-#  If you pass in *no* default, false will be used
+
+/**
+ * Retrieve a boolean GPC variable. Uses gpc_get().
+ *  If you pass in *no* default, false will be used
+ * @param string $p_var_name
+ * @param bool $p_default (optional)
+ * @return bool|null
+ */
 function gpc_get_bool( $p_var_name, $p_default = false ) {
 	$t_result = gpc_get( $p_var_name, $p_default );
 
@@ -117,10 +142,12 @@ function gpc_get_bool( $p_var_name, $p_default = false ) {
 	}
 }
 
-# ===================================
-# Custom Field Functions
-# ===================================
-# see if a custom field variable is set.  Uses gpc_isset().
+/**
+ * see if a custom field variable is set.  Uses gpc_isset().
+ * @param string $p_var_name
+ * @param int $p_custom_field_type
+ * @return bool
+ */
 function gpc_isset_custom_field( $p_var_name, $p_custom_field_type ) {
 	switch ($p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_DATE:
@@ -137,9 +164,15 @@ function gpc_isset_custom_field( $p_var_name, $p_custom_field_type ) {
 	}
 }
 
-# Retrieve a custom field variable.  Uses gpc_get().
-#  If you pass in *no* default, an error will be triggered if
-#  the variable does not exist
+/**
+ * Retrieve a custom field variable.  Uses gpc_get().
+ * If you pass in *no* default, an error will be triggered if
+ * the variable does not exist
+ * @param string $p_var_name
+ * @param int $p_custom_field_Type
+ * @param mixed $p_default
+ * @return string
+ */
 function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = null ) {
 	switch( $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_MULTILIST:
@@ -175,14 +208,15 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 	}
 }
 
-# ===================================
-# Array Functions
-# ===================================
-# Retrieve a string array GPC variable.  Uses gpc_get().
-#  If you pass in *no* default, an error will be triggered if
-#  the variable does not exist
+/**
+ * Retrieve a string array GPC variable.  Uses gpc_get().
+ * If you pass in *no* default, an error will be triggered if
+ * the variable does not exist
+ * @param string $p_var_name
+ * @param array $p_default
+ * @return array
+ */
 function gpc_get_string_array( $p_var_name, $p_default = null ) {
-
 	# Don't pass along a default unless one was given to us
 	#  otherwise we prevent an error being triggered
 	$args = func_get_args();
@@ -197,9 +231,14 @@ function gpc_get_string_array( $p_var_name, $p_default = null ) {
 	return $t_result;
 }
 
-# Retrieve an integer array GPC variable.  Uses gpc_get().
-#  If you pass in *no* default, an error will be triggered if
-#  the variable does not exist
+/**
+ * Retrieve an integer array GPC variable.  Uses gpc_get().
+ * If you pass in *no* default, an error will be triggered if
+ * the variable does not exist
+ * @param string $p_var_name
+ * @param array $p_default
+ * @return array
+ */
 function gpc_get_int_array( $p_var_name, $p_default = null ) {
 
 	# Don't pass along a default unless one was given to us
@@ -213,18 +252,21 @@ function gpc_get_int_array( $p_var_name, $p_default = null ) {
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
 
-	for( $i = 0;$i < sizeof( $t_result );$i++ ) {
+	for( $i = 0;$i < count( $t_result );$i++ ) {
 		$t_result[$i] = (int) $t_result[$i];
 	}
 
 	return $t_result;
 }
 
-# Retrieve a boolean array GPC variable.  Uses gpc_get().
-#  If you pass in *no* default, an error will be triggered if
-#  the variable does not exist
+/**
+ * Retrieve a boolean array GPC variable.  Uses gpc_get().
+ * If you pass in *no* default, an error will be triggered if the variable does not exist.
+ * @param string $p_var_name
+ * @param string $p_default
+ * @return array
+ */
 function gpc_get_bool_array( $p_var_name, $p_default = null ) {
-
 	# Don't pass along a default unless one was given to us
 	#  otherwise we prevent an error being triggered
 	$args = func_get_args();
@@ -236,26 +278,26 @@ function gpc_get_bool_array( $p_var_name, $p_default = null ) {
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
 
-	for( $i = 0;$i < sizeof( $t_result );$i++ ) {
+	for( $i = 0;$i < count( $t_result );$i++ ) {
 		$t_result[$i] = gpc_string_to_bool( $t_result[$i] );
 	}
 
 	return $t_result;
 }
 
-# ===================================
-# Cookie Functions
-# ===================================
-# Retrieve a cookie variable
-#  You may pass in any variable as a default (including null) but if
-#  you pass in *no* default then an error will be triggered if the cookie
-#  cannot be found
+/**
+ * Retrieve a cookie variable
+ * You may pass in any variable as a default (including null) but if
+ * you pass in *no* default then an error will be triggered if the cookie cannot be found
+ * @param string $p_var_name
+ * @param string $p_default
+ * @return string
+ */
 function gpc_get_cookie( $p_var_name, $p_default = null ) {
 	if( isset( $_COOKIE[$p_var_name] ) ) {
 		$t_result = gpc_strip_slashes( $_COOKIE[$p_var_name] );
 	}
-	elseif( func_num_args() > 1 ) {
-
+	else if( func_num_args() > 1 ) {
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
 	} else {
@@ -266,20 +308,25 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
 	return $t_result;
 }
 
-# ------------------
-# Set a cookie variable
-# If $p_expire is false instead of a number, the cookie will expire when
-#  the browser is closed; if it is true, the default time from the config
-#  file will be used
-# If $p_path or $p_domain are omitted, defaults are used
-#
-# @@@ this function is to be modified by Victor to add CRC... for now it
-#  just passes the parameters through to setcookie()
+/**
+ * Set a cookie variable
+ * If $p_expire is false instead of a number, the cookie will expire when
+ * the browser is closed; if it is true, the default time from the config
+ * file will be used.
+ * If $p_path or $p_domain are omitted, defaults are used
+ * @todo this function is to be modified by Victor to add CRC... for now it just passes the parameters through to setcookie()
+ * @param string $p_name
+ * @param string $p_value
+ * @param bool $p_expire default false
+ * @param string $p_path default null
+ * @param string $p_domain default null
+ * @return null
+ */
 function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $p_domain = null ) {
 	if( false === $p_expire ) {
 		$p_expire = 0;
 	}
-	elseif( true === $p_expire ) {
+	else if( true === $p_expire ) {
 		$t_cookie_length = config_get( 'cookie_time_length' );
 		$p_expire = time() + $t_cookie_length;
 	}
@@ -293,7 +340,13 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
 	return setcookie( $p_name, $p_value, $p_expire, $p_path, $p_domain );
 }
 
-# Clear a cookie variable
+/**
+ * Clear a cookie variable
+ * @param string $p_name
+ * @param string $p_path
+ * @param string $p_domain
+ * @return bool
+ */
 function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null ) {
 	if( null === $p_path ) {
 		$p_path = config_get( 'cookie_path' );
@@ -314,20 +367,22 @@ function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null ) {
 	}
 }
 
-# ===================================
-# File Functions
-# ===================================
-# Retrieve a file variable
-#  You may pass in any variable as a default (including null) but if
-#  you pass in *no* default then an error will be triggered if the file
-#  cannot be found
+/**
+ * Retrieve a file variable
+ * You may pass in any variable as a default (including null) but if
+ * you pass in *no* default then an error will be triggered if the file
+ * cannot be found
+ * @param string $p_var_name
+ * @param mixed $p_file
+ * @return mixed
+ */
 function gpc_get_file( $p_var_name, $p_default = null ) {
 	if( isset( $_FILES[$p_var_name] ) ) {
 
 		# FILES are not escaped even if magic_quotes is ON, this applies to Windows paths.
 		$t_result = $_FILES[$p_var_name];
 	}
-	elseif( func_num_args() > 1 ) {
+	else if( func_num_args() > 1 ) {
 
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
@@ -339,12 +394,11 @@ function gpc_get_file( $p_var_name, $p_default = null ) {
 	return $t_result;
 }
 
-# ===================================
-# Helper Functions
-# ===================================
-# Convert a POST/GET parameter to an array if it is not already one.
-# $p_var_name - The name of the parameter
-# no return value.  The $_POST/$_GET are updated as appropriate.
+/**
+ * Convert a POST/GET parameter to an array if it is not already one.
+ * @param string $p_var_name - The name of the parameter
+ * @return null no return value.  The $_POST/$_GET are updated as appropriate.
+ */
 function gpc_make_array( $p_var_name ) {
 	if( isset( $_POST[$p_var_name] ) && !is_array( $_POST[$p_var_name] ) ) {
 		$_POST[$p_var_name] = array(
@@ -359,7 +413,11 @@ function gpc_make_array( $p_var_name ) {
 	}
 }
 
-# Convert a string to a bool
+/**
+ * Convert a string to a bool
+ * @param string $p_string
+ * @return bool
+ */
 function gpc_string_to_bool( $p_string ) {
 	if( 0 == strcasecmp( 'off', $p_string ) || 0 == strcasecmp( 'no', $p_string ) || 0 == strcasecmp( 'false', $p_string ) || 0 == strcasecmp( '', $p_string ) || 0 == strcasecmp( '0', $p_string ) ) {
 		return false;
@@ -368,11 +426,15 @@ function gpc_string_to_bool( $p_string ) {
 	}
 }
 
-# Strip slashes if necessary (supports arrays)
+/**
+ * Strip slashes if necessary (supports arrays)
+ * @param mixed $p_var
+ * @return mixed
+ */
 function gpc_strip_slashes( $p_var ) {
 	if( 0 == get_magic_quotes_gpc() ) {
 		return $p_var;
-	} elseif( !is_array( $p_var ) ) {
+	} else if( !is_array( $p_var ) ) {
 		return stripslashes( $p_var );
 	} else {
 		foreach( $p_var as $key => $value ) {

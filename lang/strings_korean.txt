@@ -274,7 +274,9 @@ $s_new_account_message = '만일 사용자 등록을 하신적이 없으시다�
 $s_new_account_do_not_reply = '이 메일에 대한 답장을 보내지 마세요. - DO NOT REPLY TO THIS MESSAGE';
 $s_new_account_IP = '접속 IP :';
 $s_new_account_signup_msg = '다음 계정이 생성 되었습니다 :';
-$s_reset_request_msg = '비밀번호 변경을 요청하셨습니다. 만일 본인이 요청하신 적이 없다면 이 메일을 무시하시기 바랍니다.\n\n만일 본인이 요청하셨다면 아래 링크를 클릭하셔서 비밀번호를 변경하시기 바랍니다.';
+$s_reset_request_msg = '비밀번호 변경을 요청하셨습니다. 만일 본인이 요청하신 적이 없다면 이 메일을 무시하시기 바랍니다.
+
+만일 본인이 요청하셨다면 아래 링크를 클릭하셔서 비밀번호를 변경하시기 바랍니다.';
 $s_reset_request_in_progress_msg = '입력하신 메일 내용을 확인하셔서 비밀번호를 변경하시면 됩니다.';
 $s_email_notification_title_for_status_bug_new = '다음 이슈가 [(재)발생] 했습니다.';
 $s_email_notification_title_for_status_bug_feedback = '다음 이슈는 [추가 정보]가 필요합니다.';

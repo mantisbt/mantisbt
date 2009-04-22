@@ -36,9 +36,9 @@
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 	require_once( $t_core_path.'date_api.php' );
-?>
-<?php auth_ensure_user_authenticated() ?>
-<?php
+
+	auth_ensure_user_authenticated();
+
 	$f_type_page	= gpc_get_string( 'type_page', 'word' );
 	$f_search		= gpc_get_string( 'search', false ); /** @todo need a better default */
 	$f_offset		= gpc_get_int( 'offset', 0 );
@@ -71,28 +71,66 @@
 	$t_page_count = null;
 
 	$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-	$t_row_count = sizeof( $result );
-
+	$t_row_count = count( $result );
 ?>
 
-<?php # Word Export ?>
 <html xmlns:o="urn:schemas-microsoft-com:office:office"
 xmlns:w="urn:schemas-microsoft-com:office:word"
 xmlns="http://www.w3.org/TR/REC-html40">
 
-<?php html_page_top1() ?>
-<?php html_head_end() ?>
-<?php html_body_begin() ?>
-
 <?php
+	html_page_top1();
+	html_head_end();
+	html_body_begin();
+
 	$f_bug_arr = explode( ',', $f_export );
-	$t_count_exported = 0;
+	$t_count_exported = 0;	
+	$t_date_format = config_get( 'normal_date_format' );
+	$t_short_date_format = config_get( 'short_date_format' );
+
+	$t_lang_viewing_bug_advanced_details_title = lang_get( 'viewing_bug_advanced_details_title' );
+	$t_lang_id = lang_get( 'id' );
+	$t_lang_category = lang_get( 'category' );
+	$t_lang_severity = lang_get( 'severity' );
+	$t_lang_reproducibility = lang_get( 'reproducibility' );
+	$t_lang_date_submitted = lang_get( 'date_submitted' );
+	$t_lang_last_update = lang_get( 'last_update' );
+	$t_lang_reporter = lang_get( 'reporter' );
+	$t_lang_assigned_to = lang_get( 'assigned_to' );
+	$t_lang_platform = lang_get( 'platform' );
+	$t_lang_due_date = lang_get( 'due_date' );
+	$t_lang_os = lang_get( 'os' );
+	$t_lang_os_version = lang_get( 'os_version' );
+	$t_lang_fixed_in_version = lang_get( 'fixed_in_version' );
+	$t_lang_resolution = lang_get( 'resolution' );
+	$t_lang_priority = lang_get( 'priority' );
+	$t_lang_product_build = lang_get( 'product_build' );
+	$t_lang_eta = lang_get( 'eta' );
+	$t_lang_status = lang_get( 'status' );
+	$t_lang_product_version = lang_get( 'product_version' );
+	$t_lang_no_bugnotes_msg = lang_get( 'no_bugnotes_msg' );
+	$t_lang_projection = lang_get( 'projection' );
+	$t_lang_target_version = lang_get( 'target_version' );
+	$t_lang_summary = lang_get( 'summary' );
+	$t_lang_description = lang_get( 'description' );
+	$t_lang_steps_to_reproduce = lang_get( 'steps_to_reproduce' );
+	$t_lang_additional_information = lang_get( 'additional_information' );
+	$t_lang_bug_notes_title = lang_get( 'bug_notes_title' );
+	$t_lang_system_profile = lang_get( 'system_profile' );
+	$t_lang_attached_files = lang_get( 'attached_files' );
+
+	$t_current_user_id = auth_get_current_user_id();
+	$t_user_bugnote_order = user_pref_get_pref ( $t_current_user_id, 'bugnote_order' );
 
 	for( $j=0; $j < $t_row_count; $j++ ) {
-
-		# prefix bug data with v_
-		# extract( $result[$j], EXTR_PREFIX_ALL, 'v' );
 		$t_id = $result[$j]['id'];
+
+		if ( $j % 50 == 0 ) {
+			# to save ram as report will list data once, clear cache after 50 bugs
+			bug_text_clear_cache();
+			bug_clear_cache();
+			bugnote_clear_cache();
+		}
 
 		# display the available and selected bugs
 		if ( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
@@ -101,7 +139,6 @@ xmlns="http://www.w3.org/TR/REC-html40">
 			}
 
 			$t_count_exported++;
-
 
 			$t_bug = bug_get( $t_id, true );
 			$t_bug = bug_prepare_display( $t_bug );
@@ -119,7 +156,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">
-		<?php echo lang_get( 'viewing_bug_advanced_details_title' ) ?>
+		<?php echo $t_lang_viewing_bug_advanced_details_title ?>
 	</td>
 </tr>
 <tr>
@@ -129,22 +166,22 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print-category">
 	<td class="print" width="16%">
-		<?php echo lang_get( 'id' ) ?>:
+		<?php echo $t_lang_id ?>:
 	</td>
 	<td class="print" width="16%">
-		<?php echo lang_get( 'category' ) ?>:
+		<?php echo $t_lang_category ?>:
 	</td>
 	<td class="print" width="16%">
-		<?php echo lang_get( 'severity' ) ?>:
+		<?php echo $t_lang_severity ?>:
 	</td>
 	<td class="print" width="16%">
-		<?php echo lang_get( 'reproducibility' ) ?>:
+		<?php echo $t_lang_reproducibility ?>:
 	</td>
 	<td class="print" width="16%">
-		<?php echo lang_get( 'date_submitted' ) ?>:
+		<?php echo $t_lang_date_submitted ?>:
 	</td>
 	<td class="print" width="16%">
-		<?php echo lang_get( 'last_update' ) ?>:
+		<?php echo $t_lang_last_update ?>:
 	</td>
 </tr>
 <tr class="print">
@@ -161,10 +198,10 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo get_enum_element( 'reproducibility', $t_bug->reproducibility ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( config_get( 'normal_date_format' ), $t_bug->date_submitted ) ?>
+		<?php print_date( $t_date_format, $t_bug->date_submitted ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( config_get( 'normal_date_format' ), $t_bug->last_updated ) ?>
+		<?php print_date( $t_date_format, $t_bug->last_updated ) ?>
 	</td>
 </tr>
 <tr>
@@ -174,20 +211,20 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo lang_get( 'reporter' ) ?>:
+		<?php echo $t_lang_reporter ?>:
 	</td>
 	<td class="print">
 		<?php print_user_with_subject( $t_bug->reporter_id, $t_id ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo lang_get( 'platform' ) ?>:
+		<?php echo $t_lang_platform ?>:
 	</td>
 	<td class="print">
 		<?php echo $t_bug->platform ?>
 	</td>
 <?php if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_id ) ) { ?>
 	<td class="print-category">
-		<?php echo lang_get( 'due_date' ) ?>:
+		<?php echo $t_lang_due_date ?>:
 	</td>
 <?php
 		if ( bug_is_overdue( $t_id ) ) { ?>
@@ -198,7 +235,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <?php
 		}
 		if ( !date_is_null( $t_bug->due_date ) ) {
-				print_date( config_get( 'short_date_format' ), $t_bug->due_date ); 
+				print_date( $t_short_date_format, $t_bug->due_date );
 		print "\t\t</td>\n";
 		}
 	} else {
@@ -208,17 +245,17 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo lang_get( 'assigned_to' ) ?>:
+		<?php echo $t_lang_assigned_to ?>:
 	</td>
 	<td class="print">
-		<?php 
+		<?php
 			if ( access_has_bug_level( config_get( 'view_handler_threshold' ), $t_id ) ) {
-				print_user_with_subject( $t_bug->handler_id, $t_id ); 
+				print_user_with_subject( $t_bug->handler_id, $t_id );
 			}
 		?>
 	</td>
 	<td class="print-category">
-		<?php echo lang_get( 'os' ) ?>:
+		<?php echo $t_lang_os ?>:
 	</td>
 	<td class="print">
 		<?php echo $t_bug->os ?>
@@ -227,13 +264,13 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo lang_get( 'priority' ) ?>:
+		<?php echo $t_lang_priority ?>:
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'priority', $t_bug->priority ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo lang_get( 'os_version' ) ?>:
+		<?php echo $t_lang_os_version ?>:
 	</td>
 	<td class="print">
 		<?php echo $t_bug->os_build ?>
@@ -242,13 +279,13 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo lang_get( 'status' ) ?>:
+		<?php echo $t_lang_status ?>:
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'status', $t_bug->status ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo lang_get( 'product_version' ) ?>:
+		<?php echo $t_lang_product_version ?>:
 	</td>
 	<td class="print">
 		<?php echo $t_bug->version ?>
@@ -257,13 +294,13 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo lang_get( 'product_build' ) ?>:
+		<?php echo $t_lang_product_build ?>:
 	</td>
 	<td class="print">
 		<?php echo $t_bug->build?>
 	</td>
 	<td class="print-category">
-		<?php echo lang_get( 'resolution' ) ?>:
+		<?php echo $t_lang_resolution ?>:
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'resolution', $t_bug->resolution ) ?>
@@ -272,7 +309,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo lang_get( 'projection' ) ?>:
+		<?php echo $t_lang_projection ?>:
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'projection', $t_bug->projection ) ?>
@@ -287,13 +324,13 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo lang_get( 'eta' ) ?>:
+		<?php echo $t_lang_eta ?>:
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'eta', $t_bug->eta ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo lang_get( 'fixed_in_version' ) ?>:
+		<?php echo $t_lang_fixed_in_version ?>:
 	</td>
 	<td class="print">
 		<?php echo $t_bug->fixed_in_version ?>
@@ -309,7 +346,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		&nbsp;
 	</td>
 	<td class="print-category">
-		<?php echo lang_get( 'target_version' ) ?>:
+		<?php echo $t_lang_target_version ?>:
 	</td>
 	<td class="print">
 		<?php echo $t_bug->target_version ?>
@@ -339,7 +376,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo lang_get( 'summary' ) ?>:
+		<?php echo $t_lang_summary ?>:
 	</td>
 	<td class="print" colspan="5">
 		<?php echo $t_bug->summary ?>
@@ -347,7 +384,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo lang_get( 'description' ) ?>:
+		<?php echo $t_lang_description ?>:
 	</td>
 	<td class="print" colspan="5">
 		<?php echo $t_bug->description ?>
@@ -355,7 +392,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo lang_get( 'steps_to_reproduce' ) ?>:
+		<?php echo $t_lang_steps_to_reproduce ?>:
 	</td>
 	<td class="print" colspan="5">
 		<?php echo $t_bug->steps_to_reproduce ?>
@@ -363,7 +400,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo lang_get( 'additional_information' ) ?>:
+		<?php echo $t_lang_additional_information ?>:
 	</td>
 	<td class="print" colspan="5">
 		<?php echo $t_bug->additional_information ?>
@@ -378,7 +415,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 ?>
 <tr class="print">
 	<td class="print-category">
-		<?php echo lang_get( 'system_profile' ) ?>
+		<?php echo $t_lang_system_profile ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php echo $t_profile_description ?>
@@ -389,7 +426,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 ?>
 <tr class="print">
 	<td class="print-category" valign="top">
-		<?php echo lang_get( 'attached_files' ) ?>:
+		<?php echo $t_lang_attached_files ?>:
 	</td>
 	<td class="print" colspan="5">
 		<?php
@@ -407,7 +444,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 				$c_filename = string_display_line( $t_attachment['display_name'] );
 				$c_download_url = $t_path . $t_attachment['download_url'];
 				$c_filesize = number_format( $t_attachment['size'] );
-				$c_date_added = date( config_get( 'normal_date_format' ), $t_attachment['date_added'] );
+				$c_date_added = date( $t_date_format, $t_attachment['date_added'] );
 				echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span><br />$c_download_url";
 
 				if ( $t_attachment['preview'] && $t_attachment['type'] == 'image' && $f_type_page == 'html' ) {
@@ -418,16 +455,10 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 	</td>
 </tr>
 <?php
-	$t_current_user_id = auth_get_current_user_id();
-	$t_user_bugnote_order = user_pref_get_pref ( $t_current_user_id, 'bugnote_order' );
-	# @@@ Should the export honour the limit on the bug notes?
-	# $t_user_bugnote_limit = user_pref_get_pref ( $t_current_user_id, 'email_bugnote_limit' );
 	$t_user_bugnote_limit = 0;
 
 	$t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t_user_bugnote_limit );
 ?>
-
-<?php # Bugnotes BEGIN ?>
 <br />
 <table class="width100" cellspacing="1">
 <?php
@@ -436,21 +467,21 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 	?>
 <tr>
 	<td class="print" colspan="2">
-		<?php echo lang_get( 'no_bugnotes_msg' ) ?>
+		<?php echo $t_lang_no_bugnotes_msg ?>
 	</td>
 </tr>
-<?php 
+<?php
 	} else { # print bugnotes ?>
 <tr>
 	<td class="form-title" colspan="2">
-			<?php echo lang_get( 'bug_notes_title' ) ?>
+			<?php echo $t_bug_notes_title ?>
 	</td>
 </tr>
 	<?php
 		foreach ( $t_bugnotes as $t_bugnote ) {
 			# prefix all bugnote data with v3_
-			$t_date_submitted = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $t_bugnote->date_submitted ) ) );
-			$t_last_modified = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $t_bugnote->last_modified ) ) );
+			$t_date_submitted = date( $t_date_format, $t_bugnote->date_submitted );
+			$t_last_modified = date( $t_date_format, $t_bugnote->last_modified );
 
 			# grab the bugnote text and id and prefix with v3_
 			$t_note = string_display_links( $t_bugnote->note );
@@ -476,7 +507,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<tr>
 			<td class="print">
 				<?php echo $t_date_submitted ?>&nbsp;&nbsp;&nbsp;
-				<?php if ( db_unixtimestamp( $t_bugnote->date_submitted ) != db_unixtimestamp( $t_bugnote->last_modified ) ) {
+				<?php if ( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
 					echo '<br />(' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . $t_last_modified . ')';
 				} ?>
 			</td>
@@ -520,4 +551,3 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 echo '<br /><br />';
 		} # end in_array
 }  # end main loop
-?>

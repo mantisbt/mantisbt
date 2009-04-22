@@ -143,7 +143,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 		$c_type = TIME_TRACKING;
-	} elseif( is_blank( $p_bugnote_text ) ) {
+	} else if( is_blank( $p_bugnote_text ) ) {
 		return false;
 	}
 
@@ -492,9 +492,22 @@ function bugnote_date_update( $p_bugnote_id ) {
  * @access public
  */
 function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
+	$t_old_text = bugnote_get_text( $p_bugnote_id );
+
+	if ( $t_old_text == $p_bugnote_text ) {
+		return true;
+	}
+
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 	$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
 	$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
+
+	# insert an 'original' revision if needed
+	if ( bug_revision_count( $t_bug_id, REV_BUGNOTE, $p_bugnote_id ) < 1 ) {
+		$t_user_id = bugnote_get_field( $p_bugnote_id, 'reporter_id' );
+		$t_timestamp = bugnote_get_field( $p_bugnote_id, 'last_modified' );
+		bug_revision_add( $t_bug_id, $t_user_id, REV_BUGNOTE, $t_old_text, $p_bugnote_id, $t_timestamp );
+	}
 
 	$query = "UPDATE $t_bugnote_text_table
 			SET note=" . db_param() . " WHERE id=" . db_param();
@@ -503,8 +516,12 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 	# updated the last_updated date
 	bugnote_date_update( $p_bugnote_id );
 
+	# insert a new revision
+	$t_user_id = auth_get_current_user_id();
+	$t_revision_id = bug_revision_add( $t_bug_id, $t_user_id, REV_BUGNOTE, $p_bugnote_text, $p_bugnote_id );
+
 	# log new bugnote
-	history_log_event_special( $t_bug_id, BUGNOTE_UPDATED, bugnote_format_id( $p_bugnote_id ) );
+	history_log_event_special( $t_bug_id, BUGNOTE_UPDATED, bugnote_format_id( $p_bugnote_id ), $t_revision_id );
 
 	return true;
 }
@@ -512,7 +529,7 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 /**
  * Set the view state of the bugnote
  * @param int $p_bugnote_id bugnote id
- * @param bool $p_private 
+ * @param bool $p_private
  * @return bool
  * @access public
  */
@@ -654,4 +671,22 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 	}
 
 	return $t_results;
+}
+
+/**
+ * Clear a bugnote from the cache or all bug notes if no bugnote id specified.
+ * @param int bugnote id to clear (optional)
+ * @return null
+ * @access public
+ */
+function bugnote_clear_cache( $p_bugnote_id = null ) {
+	global $g_cache_bugnotes;
+
+	if( null === $p_bugnote_id ) {
+		$g_cache_bugnotes = array();
+	} else {
+		unset( $g_cache_bugnotes[(int) $p_bugnote_id] );
+	}
+
+	return true;
 }

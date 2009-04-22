@@ -63,7 +63,6 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$t_string = string_html_specialchars( $t_string );
 			$t_string = string_restore_valid_html_tags( $t_string, /* multiline = */ true );
 
-
 			if( $p_multiline ) {
 				$t_string = string_preserve_spaces_at_bol( $t_string );
 				$t_string = string_nl2br( $t_string );
@@ -87,7 +86,6 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$t_string = string_strip_hrefs( $t_string );
 			$t_string = string_html_specialchars( $t_string );
 			$t_string = string_restore_valid_html_tags( $t_string, /* multiline = */ true );
-
 
 			if( $p_multiline ) {
 				$t_string = string_preserve_spaces_at_bol( $t_string );

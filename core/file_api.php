@@ -164,10 +164,10 @@ function file_get_icon_url( $p_display_filename ) {
 
 /**
  * Combines a path and a file name making sure that the separator exists.
- * 
+ *
  * @param string $p_path       The path.
  * @param string $p_filename   The file name.
- * 
+ *
  * @return The combined full path.
  */
 function file_path_combine( $p_path, $p_filename ) {
@@ -175,7 +175,7 @@ function file_path_combine( $p_path, $p_filename ) {
 	if ( substr( $t_path, -1 ) != '/' && substr( $t_path, -1 ) != '\\' ) {
 		$t_path .= DIRECTORY_SEPARATOR;
 	}
-	
+
 	$t_path .= $p_filename;
 
 	return $t_path;
@@ -188,7 +188,7 @@ function file_path_combine( $p_path, $p_filename ) {
  * 3. If not, then use default upload path, then check with that, if exists return it.
  * 4. If disk file doesn't include a path, then return expected path based on project path or default path.
  * 5. Otherwise return as is.
- * 
+ *
  * @param string $p_diskfile  The disk file (full path or just filename).
  * @param integer The project id - shouldn't be 0 (ALL_PROJECTS).
  * @return The normalized full path.
@@ -197,7 +197,7 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 	if ( file_exists( $p_diskfile ) ) {
 		return $p_diskfile;
 	}
-	
+
 	$t_basename = basename( $p_diskfile );
 
 	$t_expected_file_path = '';
@@ -258,7 +258,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 	$t_attachment_rows = bug_get_attachments( $p_bug_id );
 	$t_visible_attachments = array();
 
-	$t_attachments_count = sizeof( $t_attachment_rows );
+	$t_attachments_count = count( $t_attachment_rows );
 	if( $t_attachments_count === 0 ) {
 		return $t_visible_attachments;
 	}
@@ -485,7 +485,7 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 	$t_filename = file_get_field( $p_file_id, 'filename', $p_table );
 	$t_diskfile = file_get_field( $p_file_id, 'diskfile', $p_table );
 
-	if ( $p_table == 'bug' ) { 
+	if ( $p_table == 'bug' ) {
 		$t_bug_id = file_get_field( $p_file_id, 'bug_id', $p_table );
 		$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
 	} else {

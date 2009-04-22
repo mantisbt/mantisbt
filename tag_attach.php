@@ -59,7 +59,7 @@
 			} else {
 				$t_tags_failed[] = $t_tag_row;
 			}
-		} elseif ( -2 == $t_tag_row['id'] ) {
+		} else if ( -2 == $t_tag_row['id'] ) {
 			$t_tags_failed[] = $t_tag_row;
 		} else {
 			$t_tags_attach[] = $t_tag_row;
@@ -72,8 +72,7 @@
 
 	// failed to attach at least one tag
 	if ( count( $t_tags_failed ) > 0 ) {
-		html_page_top1( lang_get( 'tag_attach_long' ) . ' ' . bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
-		html_page_top2();
+		html_page_top( lang_get( 'tag_attach_long' ) . ' ' . bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 ?>
 <br/>
 <table class="width75" align="center">
@@ -81,7 +80,7 @@
 	<td colspan="2"><?php echo lang_get( 'tag_attach_failed' ) ?></td>
 	</tr>
 	<tr class="spacer"><td colspan="2"></td></tr>
-<?php		
+<?php
 		$t_tag_string = "";
 		foreach( $t_tags_attach as $t_tag_row ) {
 			if ( !is_blank( $t_tag_string ) ) {
@@ -94,11 +93,11 @@
 			echo '<tr ',helper_alternate_class(),'>';
 			if ( -1 == $t_tag_row['id'] ) {
 				echo '<td class="category">', lang_get( 'tag_create_denied' ), '</td>';
-			} elseif ( -2 == $t_tag_row['id'] ) {
+			} else if ( -2 == $t_tag_row['id'] ) {
 				echo '<td class="category">', lang_get( 'tag_invalid_name' ), '</td>';
 			}
 			echo '<td>', string_html_specialchars( $t_tag_row['name'] ), '</td></tr>';
-			
+
 			if ( !is_blank( $t_tag_string ) ) {
 				$t_tag_string .= config_get( 'tag_separator' );
 			}
@@ -111,12 +110,12 @@
 	<td>
 <?php
 		print_tag_attach_form( $f_bug_id, $t_tag_string );
-?>	
+?>
 	</td>
 	</tr>
 </table>
 <?php
-		html_page_bottom1( __FILE__ );
+		html_page_bottom( __FILE__ );
 		// end failed to attach tag
 	} else {
 		foreach( $t_tags_create as $t_tag_row ) {

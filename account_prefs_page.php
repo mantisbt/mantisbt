@@ -55,14 +55,11 @@
 	auth_ensure_user_authenticated();
 
 	current_user_ensure_unprotected();
-?>
-<?php
+
 	include( 'account_prefs_inc.php' );
 
-	html_page_top1( lang_get( 'change_preferences_link' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'change_preferences_link' ) );
 
 	edit_account_prefs();
 
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

@@ -59,4 +59,3 @@
 		$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_bug, $t_graph_horizontal );
 
 	relgraph_output_image( $t_graph );
-?>

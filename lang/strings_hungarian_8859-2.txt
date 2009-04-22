@@ -263,10 +263,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'There is already a relationship between these two issues.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relationship not found.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Access denied: The issue %d requires higher access level.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue can\'t be related to itself.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
@@ -290,7 +290,7 @@ $s_logged_in_as = 'Felhasználónév';
 $s_prefix_for_deleted_users = 'felhasználó';
 
 $s_administrator = 'rendszergazda';
-$s_myself = "saját magam";
+$s_myself = 'saját magam';
 $s_default_access_level = 'Alapértelmezett szint';
 
 $s_issue_status_percentage = 'Issue Status Percentage';
@@ -314,13 +314,15 @@ $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 $s_new_account_subject = 'Fiók regisztrálás';
 $s_new_account_greeting = 'Köszönjük a regisztrációt. Az ön felhasználói azonosítója: \'%1$s\'. Ahhoz, hogy sikeresen befejezze a regisztrációt, látogasson el a következõ URL-re és állítsa be a jelszavát:';
 $s_new_account_username = 'Felhasználónév: ';
-$s_new_account_message = 'Ha nem akarta regisztrálni magát, akkor hagyja figyelmen kívül ezt az üzenetet.' . "\n\n";
+$s_new_account_message = 'Ha nem akarta regisztrálni magát, akkor hagyja figyelmen kívül ezt az üzenetet.';
 $s_new_account_do_not_reply = 'NE VÁLASZOLJON ERRE A LEVÉLRE';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = 'Felhasználó IP címe: ';
 $s_new_account_signup_msg = 'A következõ fiók készítült el:';
 
-$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.
+
+If you requested this verification, visit the following URL to change your password:';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
@@ -341,18 +343,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'A NOTE has been added to this issue.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been removed as a DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been marked as UNRELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been removed as the PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been removed as the CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'The following issue has been set as DUPLICATE OF issue %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'The issue %s has been set as DUPLICATE OF the following issue.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'The following issue has been set as RELATED TO issue %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'The following issue has been set PARENT OF issue %s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'The following issue has been set CHILD OF issue %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'The following issue has been UNset as DUPLICATE OF issue %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'The issue %s has been removed as a DUPLICATE OF the following issue.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'The following issue has been marked as UNRELATED TO issue %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'The following issue has been removed as the PARENT OF issue %s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'The following issue has been removed as the CHILD OF issue %s.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'The RELATED issue %s has been RESOLVED.';
+$s_email_notification_title_for_action_relationship_child_closed = 'The RELATED issue %s has been CLOSED.';
 
 $s_email_reporter = 'Bejelentõ';
 $s_email_handler = 'Kezelõ';
@@ -646,11 +648,11 @@ $s_redirecting = '...átirányítás';
 $s_here = 'ide';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Password Reset";
-$s_lost_password_done_title = "Password Message Sent";
-$s_lost_password_subject = "Password Reset";
-$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br /><br />If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
-$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
+$s_lost_password_title = 'Password Reset';
+$s_lost_password_done_title = 'Password Message Sent';
+$s_lost_password_subject = 'Password Reset';
+$s_lost_password_info = 'To reinstate your lost password, please supply the name and email address for the account.<br /><br />If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.';
+$s_lost_password_confirm_hash_OK = 'Your confirmation has been accepted. Please update your password.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Nyitott és hozzám tartozik';
@@ -712,8 +714,8 @@ $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Who can change notification defaults';
 $s_notify_actions_change_access = 'Who can change notifications';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_revert_to_system = 'Delete All Projects Settings';
+$s_revert_to_all_project = 'Delete Project Specific Settings';
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
@@ -1185,17 +1187,17 @@ $s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) th
 $s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Státusz Elrejtés';
-$s_filter_closed = "Zárva";
-$s_filter_resolved = "Megoldva";
-$s_hide_closed = "Zárva elrejtése";
-$s_hide_resolved = "Megoldja Elrejtése";
+$s_filter_closed = 'Zárva';
+$s_filter_resolved = 'Megoldva';
+$s_hide_closed = 'Zárva elrejtése';
+$s_hide_resolved = 'Megoldja Elrejtése';
 $s_and_above = 'és fölötte';
 $s_advanced_filters = 'Összetett szûrõ';
 $s_simple_filters = 'Egyszerû szûrõ';
 $s_monitored_by = 'Nyomonkövetve';
 
-$s_attachments = "Csatolmány(ok)";
-$s_attachment_alt = "A";
+$s_attachments = 'Csatolmány(ok)';
+$s_attachment_alt = 'A';
 
 # PHPMailer
 $s_phpmailer_language = 'hu';
@@ -1218,34 +1220,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = 'Változás nyomonkövetés';
 
 # Http auth
-$s_http_auth_realm = "Mantis bejelentkezés";
+$s_http_auth_realm = 'Mantis bejelentkezés';
 
-$s_bug = "hiba";
-$s_add_new_relationship = "Új kapcsolat";
-$s_add_new_relationship_button = "Hozzáad";
-$s_this_bug = "Jelenlegi hiba";
-$s_relationship_added = "Kapcsolat hozzáadva";
-$s_relationship_deleted = "Kapcsolat törölve";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Csere";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
-$s_delete_relationship_button = "Törlés";
-$s_delete_relationship_sure_msg = "Biztos, hogy törölni akarja ezt a kapcsolatot?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Ennek a hibának nincs megoldva, vagy lezárva az összes gyermeke.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>FIGYELEM</b>! Ennek a hibának nincs megoldva, vagy lezárva az összes gyermeke.<br />Mielõtt <b>megoldja/lezárja</b> a szülõ problémát, minden hozzá tartozõ gyermek problémát meg kell oldania, vagy le kell zárnia.";
-$s_create_child_bug_button = "Klón készítése";
-$s_bug_cloned_to = "Hiba klónozódott";
-$s_bug_created_from = "A hiba eredete";
+$s_bug = 'hiba';
+$s_add_new_relationship = 'Új kapcsolat';
+$s_add_new_relationship_button = 'Hozzáad';
+$s_this_bug = 'Jelenlegi hiba';
+$s_relationship_added = 'Kapcsolat hozzáadva';
+$s_relationship_deleted = 'Kapcsolat törölve';
+$s_no_relationship = 'no relationship';
+$s_relationship_replaced = 'Relationship replaced';
+$s_replace_relationship_button = 'Csere';
+$s_replace_relationship_sure_msg = 'There is already a relationship between the two issues. Are you sure you want to replace it?';
+$s_relationship_with_parent = 'Relationship with the parent issue';
+$s_delete_relationship_button = 'Törlés';
+$s_delete_relationship_sure_msg = 'Biztos, hogy törölni akarja ezt a kapcsolatot?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Ennek a hibának nincs megoldva, vagy lezárva az összes gyermeke.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>FIGYELEM</b>! Ennek a hibának nincs megoldva, vagy lezárva az összes gyermeke.<br />Mielõtt <b>megoldja/lezárja</b> a szülõ problémát, minden hozzá tartozõ gyermek problémát meg kell oldania, vagy le kell zárnia.';
+$s_create_child_bug_button = 'Klón készítése';
+$s_bug_cloned_to = 'Hiba klónozódott';
+$s_bug_created_from = 'A hiba eredete';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Kapcsolat gráf";
-$s_relation_graph = "Kapcsolatii gráf";
-$s_dependency_graph = "Függõségi gráf";
-$s_vertical = "Függõleges";
-$s_horizontal = "Vízszintes";
-$s_view_issue = "Hiba megtekintése";
+$s_viewing_bug_relationship_graph_title = 'Kapcsolat gráf';
+$s_relation_graph = 'Kapcsolatii gráf';
+$s_dependency_graph = 'Függõségi gráf';
+$s_vertical = 'Függõleges';
+$s_horizontal = 'Vízszintes';
+$s_view_issue = 'Hiba megtekintése';
 
 # Source Control Integration
 $s_checkin = 'Checkin';
@@ -1278,8 +1280,8 @@ $s_manage_news = 'Hírek kezelése';
 $s_view_list_of_attachments = 'Csatolmánylisták megtekintése';
 $s_download_attachments = 'Csatolmányok letöltése';
 $s_delete_attachments = 'Csatolmányok törlése';
-$s_delete_attachment_button = "Delete";
-$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
+$s_delete_attachment_button = 'Delete';
+$s_delete_attachment_sure_msg = 'Are you sure you wish to delete this attachment?';
 $s_upload_issue_attachments = 'Hibához tartozó csatolmány feltöltése';
 $s_filters = 'szûrõk';
 $s_save_filters = 'Szûrõk mentése';

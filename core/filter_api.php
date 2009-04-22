@@ -260,7 +260,7 @@ function filter_encode_field_and_value( $p_field_name, $p_field_value ) {
 				$t_query_array[] = urlencode( $p_field_name . '[]' ) . '=' . urlencode( $t_value );
 			}
 		}
-		elseif( $t_count == 1 ) {
+		else if( $t_count == 1 ) {
 			$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value[0] );
 		}
 	} else {
@@ -487,7 +487,7 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE_ID] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE_ID] = gpc_get( FILTER_PROPERTY_VIEW_STATE_ID, '' );
 	}
-	elseif( filter_field_is_any( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE_ID] ) ) {
+	else if( filter_field_is_any( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE_ID] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE_ID] = META_FILTER_ANY;
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_TYPE] ) ) {
@@ -510,7 +510,7 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 
 	# @@@ (thraxisp) This should really be the linked ids, but we don't know the project
 	$f_custom_fields_data = array();
-	if( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
+	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
 			if( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
 				$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, META_FILTER_ANY );
@@ -588,7 +588,7 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 					config_get( 'hide_status_default' ),
 				);
 			}
-			elseif( 'custom_fields' == $t_multi_field_name ) {
+			else if( 'custom_fields' == $t_multi_field_name ) {
 				$p_filter_arr[$t_multi_field_name] = array(
 					$f_custom_fields_data,
 				);
@@ -615,10 +615,10 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 				if( 'string' == $t_multi_field_type ) {
 					$t_checked_array[] = db_prepare_string( $t_filter_value );
 				}
-				elseif( 'int' == $t_multi_field_type ) {
+				else if( 'int' == $t_multi_field_type ) {
 					$t_checked_array[] = db_prepare_int( $t_filter_value );
 				}
-				elseif( 'array' == $t_multi_field_type ) {
+				else if( 'array' == $t_multi_field_type ) {
 					$t_checked_array[] = $t_filter_value;
 				}
 			}
@@ -626,7 +626,7 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 		}
 	}
 
-	if( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
+	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
 			if( !isset( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
 				$p_filter_arr['custom_fields'][$t_cfid] = array(
@@ -1101,7 +1101,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		if( $t_count_private_and_public_project_ids == 1 ) {
 			$t_private_and_public_query = "( $t_bug_table.project_id = " . $t_private_and_public_project_ids[0] . " )";
 		}
-		elseif( $t_count_private_and_public_project_ids > 1 ) {
+		else if( $t_count_private_and_public_project_ids > 1 ) {
 			$t_private_and_public_query = "( $t_bug_table.project_id in (" . implode( ', ', $t_private_and_public_project_ids ) . ") )";
 		} else {
 			$t_private_and_public_query = null;
@@ -1112,7 +1112,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		if( $t_count_public_only_project_ids == 1 ) {
 			$t_public_only_query = "( ( $t_bug_table.project_id = " . $t_public_only_project_ids[0] . " ) AND $t_public_view_state_check )";
 		}
-		elseif( $t_count_public_only_project_ids > 1 ) {
+		else if( $t_count_public_only_project_ids > 1 ) {
 			$t_public_only_query = "( ( $t_bug_table.project_id in (" . implode( ', ', $t_public_only_project_ids ) . ") ) AND $t_public_view_state_check )";
 		} else {
 			$t_public_only_query = null;
@@ -1122,7 +1122,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		if( $t_private_and_public_query === null ) {
 			$t_project_query = $t_public_only_query;
-		} elseif( $t_public_only_query === null ) {
+		} else if( $t_public_only_query === null ) {
 			$t_project_query = $t_private_and_public_query;
 		} else {
 			$t_project_query = "( $t_public_only_query OR $t_private_and_public_query )";
@@ -2055,13 +2055,13 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
 				}
-				elseif( filter_field_is_myself( $t_current ) ) {
+				else if( filter_field_is_myself( $t_current ) ) {
 					if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
 						$t_this_name = '[' . lang_get( 'myself' ) . ']';
 					} else {
 						$t_any_found = true;
 					}
-				} elseif( filter_field_is_none( $t_current ) ) {
+				} else if( filter_field_is_none( $t_current ) ) {
 					$t_this_name = lang_get( 'none' );
 				} else {
 					$t_this_name = user_get_name( $t_current );
@@ -2095,7 +2095,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
 				}
-				elseif( filter_field_is_myself( $t_current ) ) {
+				else if( filter_field_is_myself( $t_current ) ) {
 					if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 						$t_this_name = '[' . lang_get( 'myself' ) . ']';
 					} else {
@@ -2132,9 +2132,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_this_name = '';
 				if( filter_field_is_none( $t_current ) ) {
 					$t_this_name = lang_get( 'none' );
-				} elseif( filter_field_is_any( $t_current ) ) {
+				} else if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				} elseif( filter_field_is_myself( $t_current ) ) {
+				} else if( filter_field_is_myself( $t_current ) ) {
 					if( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
 						$t_this_name = '[' . lang_get( 'myself' ) . ']';
 					} else {
@@ -2424,7 +2424,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				} elseif( filter_field_is_none( $t_current ) ) {
+				} else if( filter_field_is_none( $t_current ) ) {
 					$t_this_string = lang_get( 'none' );
 				} else {
 					$t_this_string = string_display( $t_current );
@@ -2463,7 +2463,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					if( filter_field_is_any( $t_current ) ) {
 						$t_any_found = true;
 					}
-					elseif( filter_field_is_none( $t_current ) ) {
+					else if( filter_field_is_none( $t_current ) ) {
 						$t_this_string = lang_get( 'none' );
 					} else {
 						$t_this_string = string_display( $t_current );
@@ -2497,7 +2497,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_this_string = '';
 					if( filter_field_is_any( $t_current ) ) {
 						$t_any_found = true;
-					} elseif( filter_field_is_none( $t_current ) ) {
+					} else if( filter_field_is_none( $t_current ) ) {
 						$t_this_string = lang_get( 'none' );
 					} else {
 						$t_this_string = string_display( $t_current );
@@ -2572,7 +2572,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				} elseif( filter_field_is_none( $t_current ) ) {
+				} else if( filter_field_is_none( $t_current ) ) {
 					$t_this_string = lang_get( 'none' );
 				} else {
 					$t_this_string = string_display( $t_current );
@@ -2632,7 +2632,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<?php
 				if( VS_PUBLIC === $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) {
 			echo lang_get( 'public' );
-		} elseif( VS_PRIVATE === $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) {
+		} else if( VS_PRIVATE === $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) {
 			echo lang_get( 'private' );
 		} else {
 			echo lang_get( 'any' );
@@ -2789,11 +2789,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<?php } else {?>
 				<td colspan="3">&nbsp;</td>
 			<?php } ?>
-			
+
 			<td class="small-caption" valign="top" id="tag_string_filter_target" colspan="5">
 				<?php
 					$t_tag_string = $t_filter[FILTER_PROPERTY_TAG_STRING];
-		if( $t_filter[FILTER_PROPERTY_TAG_SELECT] != 0 ) {
+		if( $t_filter[FILTER_PROPERTY_TAG_SELECT] != 0 && tag_exists( $t_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
 			$t_tag_string .= ( is_blank( $t_tag_string ) ? '' : config_get( 'tag_separator' ) );
 			$t_tag_string .= tag_get_field( $t_filter[FILTER_PROPERTY_TAG_SELECT], 'name' );
 		}
@@ -2931,7 +2931,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 								$t_this_string = '';
 								if( filter_field_is_any( $t_current ) ) {
 									$t_any_found = true;
-								} elseif( filter_field_is_none( $t_current ) ) {
+								} else if( filter_field_is_none( $t_current ) ) {
 									$t_this_string = lang_get( 'none' );
 								} else {
 									$t_this_string = string_display( $t_current );
@@ -2975,7 +2975,6 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					}
 				}
 
-
 				if( $t_col_idx > 0 ) {
 					if( $t_col_idx < $t_per_row ) {
 						$t_fields .= '<td colspan="' . ( $t_per_row - $t_col_idx ) . '">&nbsp;</td> ';
@@ -3013,9 +3012,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_this_name = '';
 				if( filter_field_is_none( $t_current ) ) {
 					$t_this_name = lang_get( 'none' );
-				} elseif( filter_field_is_any( $t_current ) ) {
+				} else if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				} elseif( filter_field_is_myself( $t_current ) ) {
+				} else if( filter_field_is_myself( $t_current ) ) {
 					if( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
 						$t_this_name = '[' . lang_get( 'myself' ) . ']';
 					} else {
@@ -3674,7 +3673,7 @@ function print_filter_tag_string() {
 
 	global $t_filter;
 	$t_tag_string = $t_filter[FILTER_PROPERTY_TAG_STRING];
-	if( $t_filter[FILTER_PROPERTY_TAG_SELECT] != 0 ) {
+	if( $t_filter[FILTER_PROPERTY_TAG_SELECT] != 0 && tag_exists( $t_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
 		$t_tag_string .= ( is_blank( $t_tag_string ) ? '' : config_get( 'tag_separator' ) );
 		$t_tag_string .= tag_get_field( $t_filter[FILTER_PROPERTY_TAG_SELECT], 'name' );
 	}
@@ -3700,14 +3699,14 @@ function print_filter_note_user_id() {
             <option value="<?php echo META_FILTER_NONE?>" <?php check_selected( $t_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
             <?php
                 if( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
-			echo '<option value="' . META_FILTER_MYSELF . '" ';
-			check_selected( $t_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_MYSELF );
-			echo '>[' . lang_get( 'myself' ) . ']</option>';
-		}
+					echo '<option value="' . META_FILTER_MYSELF . '" ';
+					check_selected( $t_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_MYSELF );
+					echo '>[' . lang_get( 'myself' ) . ']</option>';
+				}
+		
+				print_assign_to_option_list( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] );
+			}
 		?>
-            <?php print_assign_to_option_list( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] )?>
-            <?php
-	}?>
         </select>
         <?php
 }
@@ -3728,7 +3727,7 @@ function print_filter_custom_field( $p_field_id ) {
 				unknown custom filter (custom <?php $p_field_id;?>)
 			</span>
 			<?php
-	} elseif( isset( $t_accessible_custom_fields_names[$j] ) ) {
+	} else if( isset( $t_accessible_custom_fields_names[$j] ) ) {
 		if( $t_accessible_custom_fields_types[$j] == CUSTOM_FIELD_TYPE_DATE ) {
 			print_filter_custom_field_date( $j, $p_field_id );
 		} else {
@@ -3744,13 +3743,14 @@ function print_filter_custom_field( $p_field_id ) {
 				echo '>[' . lang_get( 'none' ) . ']</option>';
 			}
 			if( is_array( $t_accessible_custom_fields_values[$j] ) ) {
+				$t_max_length = config_get( 'max_dropdown_length' );
 				foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
 					if(( strtolower( $t_item ) !== META_FILTER_ANY ) && ( strtolower( $t_item ) !== META_FILTER_NONE ) ) {
 						echo '<option value="' . string_html_entities( $t_item ) . '" ';
 						if( isset( $t_filter['custom_fields'][$p_field_id] ) ) {
 							check_selected( $t_filter['custom_fields'][$p_field_id], $t_item );
 						}
-						echo '>' . string_shorten( $t_item ) . '</option>' . "\n";
+						echo '>' . string_shorten( $t_item, $t_max_length ) . '</option>' . "\n";
 					}
 				}
 			}

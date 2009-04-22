@@ -46,8 +46,7 @@
 	}
 	else
 	{
-		html_page_top1();
-		html_page_top2();
+		html_page_top();
 		filter_db_delete_filter( $f_query_id );
 		?>
 		<br />
@@ -59,6 +58,5 @@
 
 		<?php
 		echo '</div>';
-		html_page_bottom1( __FILE__ );
+		html_page_bottom( __FILE__ );
 	}
-?>

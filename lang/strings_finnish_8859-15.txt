@@ -263,10 +263,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Pääsy estetty:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsori ei ole syöttänyt sähköpostiosoitetta. Ole hyvä, ja päivitä käyttäjätietosi.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguraatioasetuksessa \'%s\' on virheellinen arvo \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Haluttua toimintoa ei voida suorittaa, koska tapahtumaan \'%d\' ei ole sallittu tehdä muutoksia';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Näiden kahden tapahtuman välillä on jo relaatio.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relaatiota ei löytynyt.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Pääsy estetty: tapahtuman %d käsittely vaatii korkeamman käyttäjätason, kuin sinulla on.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Tapahtumaa ei voi kytkeä relaationa itseensä.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Näiden kahden tapahtuman välillä on jo relaatio.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relaatiota ei löytynyt.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Pääsy estetty: tapahtuman %d käsittely vaatii korkeamman käyttäjätason, kuin sinulla on.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Tapahtumaa ei voi kytkeä relaationa itseensä.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Vahvistushash-koodi on virheellinen. Yritä uudelleen.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'Unohdettu salasana\' -toiminto ei ole käytössä.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Syötä sähköpostiosoite, jotta salasanasi uudistetaan';
@@ -290,7 +290,7 @@ $s_logged_in_as = 'Olet sisäänkirjautuneena käyttäjätunnuksella';
 $s_prefix_for_deleted_users = 'käyttäjä';
 
 $s_administrator = 'pääkäyttäjä';
-$s_myself = "Minä";
+$s_myself = 'Minä';
 $s_default_access_level = 'Oletuskäyttäjätaso';
 
 $s_issue_status_percentage = 'Tapahtuman tilan prosenttiosuus';
@@ -314,13 +314,15 @@ $s_sponsorship_enum_string = '0:Maksamatta,1:Pyydetty,2:Maksettu';
 $s_new_account_subject = 'Käyttäjätilin rekisteröinti';
 $s_new_account_greeting = 'Kiitos rekisteröinnistä. Sinulle on luotu käyttäjätili nimellä \'%1$s\'. Viimeistele rekisteröinti käymällä ao. osoitteessa (varmista, että koko osoite tulee linkkiin mukaan) ja vaihda salasana halutuksi:';
 $s_new_account_username = 'Käyttäjätunnus: ';
-$s_new_account_message = 'Jos et ole yrittänyt rekisteröityä tällä sähköpostiosoitteella, sinun ei tarvitse tehdä mitään.' . "\n\n";
+$s_new_account_message = 'Jos et ole yrittänyt rekisteröityä tällä sähköpostiosoitteella, sinun ei tarvitse tehdä mitään.';
 $s_new_account_do_not_reply = 'ÄLÄ VASTAA TÄHÄN SÄHKÖPOSTIVIESTIIN';
 $s_new_account_email = 'Sähköpostiosoite: ';
 $s_new_account_IP = 'IP-osoite: ';
 $s_new_account_signup_msg = 'Käyttäjätili on luotu:';
 
-$s_reset_request_msg = 'Osoitteellasi on pyydetty salasanan vaihtoa. Jos et ole tätä tehnyt, voit jättää tämän viestin huomioimatta.' . "\n\n" . 'Vaihtaaksesi salasanansi, ole hyvä ja vieraile ao. osoitteessa:';
+$s_reset_request_msg = 'Osoitteellasi on pyydetty salasanan vaihtoa. Jos et ole tätä tehnyt, voit jättää tämän viestin huomioimatta.
+
+Vaihtaaksesi salasanansi, ole hyvä ja vieraile ao. osoitteessa:';
 $s_reset_request_in_progress_msg = 'Mikäli syötit käyttäjätilisi nimen ja sähköpostiosoitteen oikein, sähköpostiosoitteeseesi on lähetetty vahvistusviesti. Ole hyvä ja noudata viestissä olevia ohjeita vaihtaaksesi käyttäjätilisi salasanan.';
 
 $s_email_notification_title_for_status_bug_new = 'Seuraavan tapahtuman tila on jälleen UUSI';
@@ -341,18 +343,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Seuraavan tapahtum
 $s_email_notification_title_for_action_sponsorship_deleted = 'Seuraavan tapahtuman sponsorointi on peruttu.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Tähän tapahtumaan on lisätty muistiinpano.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "Seuraava tapahtuma on duplikaatti tapahtumasta %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "Tapahtuma %s on määritelty duplikaatiksi seuraavalle tapahtumalle.";
-$s_email_notification_title_for_action_related_to_relationship_added = "Seuraava tapahtuma on määritelty relaatioksi tapahtumalle %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "Seuraava tapahtuma on määritelty isätapahtumaksi tapahtumalle %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "Seuraava tapahtuma on määritelty lapsitapahtumaksi tapahtumalle %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Seuraavalta tapahtumalta on poistettu tapahtuman %s duplikaattisuus.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Tapahtumalta %s on poistettu seuraavan tapahtuman duplikaattitila.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "Seuraavalta tapahtumalta on poistettu relaatio tapahtumaan %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Seuraava tapahtuma ei ole enää tapahtuman %s isätapahtuma.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "Seuraava tapahtuma ei enää ole tapahtuman %s lapsitapahtuma.";
-$s_email_notification_title_for_action_relationship_child_resolved = "Relaatiotapahtuma %s on ratkaistu.";
-$s_email_notification_title_for_action_relationship_child_closed = "Relaatiotapahtuma %s on suljettu.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'Seuraava tapahtuma on duplikaatti tapahtumasta %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'Tapahtuma %s on määritelty duplikaatiksi seuraavalle tapahtumalle.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'Seuraava tapahtuma on määritelty relaatioksi tapahtumalle %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'Seuraava tapahtuma on määritelty isätapahtumaksi tapahtumalle %s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'Seuraava tapahtuma on määritelty lapsitapahtumaksi tapahtumalle %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'Seuraavalta tapahtumalta on poistettu tapahtuman %s duplikaattisuus.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'Tapahtumalta %s on poistettu seuraavan tapahtuman duplikaattitila.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'Seuraavalta tapahtumalta on poistettu relaatio tapahtumaan %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'Seuraava tapahtuma ei ole enää tapahtuman %s isätapahtuma.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'Seuraava tapahtuma ei enää ole tapahtuman %s lapsitapahtuma.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'Relaatiotapahtuma %s on ratkaistu.';
+$s_email_notification_title_for_action_relationship_child_closed = 'Relaatiotapahtuma %s on suljettu.';
 
 $s_email_reporter = 'Raportoija';
 $s_email_handler = 'Käsittelijä';
@@ -646,11 +648,11 @@ $s_redirecting = '... edelleenohjataan';
 $s_here = 'Tänne';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Uusi unohtunut salasana";
-$s_lost_password_done_title = "Salasanaviesti lähetetty";
-$s_lost_password_subject = "Unohtunut salasana";
-$s_lost_password_info = "Salasanasi uusimista varten syötä käyttäjätunnuksesi sekä sähköpostiosoitteesi.<br /><br />Sinulle lähetetään linkki, jonka kautta pääset uusimaan salasanasi.";
-$s_lost_password_confirm_hash_OK = "Salasanamuutoksen vahvistus hyväksytty. Päivitä salasanasi.";
+$s_lost_password_title = 'Uusi unohtunut salasana';
+$s_lost_password_done_title = 'Salasanaviesti lähetetty';
+$s_lost_password_subject = 'Unohtunut salasana';
+$s_lost_password_info = 'Salasanasi uusimista varten syötä käyttäjätunnuksesi sekä sähköpostiosoitteesi.<br /><br />Sinulle lähetetään linkki, jonka kautta pääset uusimaan salasanasi.';
+$s_lost_password_confirm_hash_OK = 'Salasanamuutoksen vahvistus hyväksytty. Päivitä salasanasi.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Avoimia ja minulle osoitettuja';
@@ -712,8 +714,8 @@ $s_default_notify = 'Oletustiedonantoasetus:';
 $s_action_notify = 'Toimenpidetiedonantoasetus:';
 $s_notify_defaults_change_access = 'Käyttäjätaso, jolla voidaan muokata oletusmuistutusten muokkaustasoa';
 $s_notify_actions_change_access = 'Käyttäjätaso, jolla voidaan muokata muistutuksia';
-$s_revert_to_system = "Poista kaikki projektien asetukset.";
-$s_revert_to_all_project = "Poista projektikohtaiset asetukset.";
+$s_revert_to_system = 'Poista kaikki projektien asetukset.';
+$s_revert_to_all_project = 'Poista projektikohtaiset asetukset.';
 
 # manage_config_workflow_page
 $s_non_existent = 'ei olemassa';
@@ -1185,17 +1187,17 @@ $s_confirm_custom_field_unlinking = 'Oletko varma, että haluat poistaa tämän muk
 $s_field_remove_button = 'Poista kenttä';
 
 $s_hide_status = 'Piilota tila';
-$s_filter_closed = "Suljettu";
-$s_filter_resolved = "Ratkaistu";
-$s_hide_closed = "Piilota suljetut";
-$s_hide_resolved = "Piilota ratkaistut";
+$s_filter_closed = 'Suljettu';
+$s_filter_resolved = 'Ratkaistu';
+$s_hide_closed = 'Piilota suljetut';
+$s_hide_resolved = 'Piilota ratkaistut';
 $s_and_above = 'ja korkeammat';
 $s_advanced_filters = 'Lisäsuotimet';
 $s_simple_filters = 'Yksinkertaiset suotimet';
 $s_monitored_by = 'Seuraaja';
 
-$s_attachments = "liitteet";
-$s_attachment_alt = "A";
+$s_attachments = 'liitteet';
+$s_attachment_alt = 'A';
 
 # PHPMailer
 $s_phpmailer_language = 'fi';
@@ -1218,34 +1220,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = 'Muutosloki';
 
 # Http auth
-$s_http_auth_realm = "Mantis kirjautuminen";
+$s_http_auth_realm = 'Mantis kirjautuminen';
 
-$s_bug = "tapahtuma";
-$s_add_new_relationship = "Uusi relaatio";
-$s_add_new_relationship_button = "Lisää";
-$s_this_bug = "Nykyinen tapahtuma";
-$s_relationship_added = "Relaatio lisätty";
-$s_relationship_deleted = "Relaatio poistettu";
-$s_no_relationship = "ei relaatiota";
-$s_relationship_replaced = "Relaatio korvattu";
-$s_replace_relationship_button = "Korvaa";
-$s_replace_relationship_sure_msg = "Näiden kahden tapahtuman välillä on jo relaatio. Oletko varma, että haluat korvata sen?";
-$s_relationship_with_parent = "Relaatio isätapahtuman kanssa";
-$s_delete_relationship_button = "Poista";
-$s_delete_relationship_sure_msg = "Oletko varma, että haluat poistaa tämän relaation?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>HUOM!</b>. Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.<br />Ennen isätapahtuman <b>ratkaisua/sulkemista</b> kaikki lapsitapahtumat tulisi merkitä ratkaistuiksi tai suljetuiksi.";
-$s_create_child_bug_button = "Luo klooni";
-$s_bug_cloned_to = "Tapahtuma kloonattu";
-$s_bug_created_from = "Tapahtuma luotu tapahtumasta";
+$s_bug = 'tapahtuma';
+$s_add_new_relationship = 'Uusi relaatio';
+$s_add_new_relationship_button = 'Lisää';
+$s_this_bug = 'Nykyinen tapahtuma';
+$s_relationship_added = 'Relaatio lisätty';
+$s_relationship_deleted = 'Relaatio poistettu';
+$s_no_relationship = 'ei relaatiota';
+$s_relationship_replaced = 'Relaatio korvattu';
+$s_replace_relationship_button = 'Korvaa';
+$s_replace_relationship_sure_msg = 'Näiden kahden tapahtuman välillä on jo relaatio. Oletko varma, että haluat korvata sen?';
+$s_relationship_with_parent = 'Relaatio isätapahtuman kanssa';
+$s_delete_relationship_button = 'Poista';
+$s_delete_relationship_sure_msg = 'Oletko varma, että haluat poistaa tämän relaation?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>HUOM!</b>. Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.<br />Ennen isätapahtuman <b>ratkaisua/sulkemista</b> kaikki lapsitapahtumat tulisi merkitä ratkaistuiksi tai suljetuiksi.';
+$s_create_child_bug_button = 'Luo klooni';
+$s_bug_cloned_to = 'Tapahtuma kloonattu';
+$s_bug_created_from = 'Tapahtuma luotu tapahtumasta';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relaatiograafi";
-$s_relation_graph = "Relaatiograafi";
-$s_dependency_graph = "Riippuvuusgraafi";
-$s_vertical = "Pysty";
-$s_horizontal = "Vaaka";
-$s_view_issue = "Näytä tapahtuma";
+$s_viewing_bug_relationship_graph_title = 'Relaatiograafi';
+$s_relation_graph = 'Relaatiograafi';
+$s_dependency_graph = 'Riippuvuusgraafi';
+$s_vertical = 'Pysty';
+$s_horizontal = 'Vaaka';
+$s_view_issue = 'Näytä tapahtuma';
 
 # Source Control Integration
 $s_checkin = 'Checkin';
@@ -1278,8 +1280,8 @@ $s_manage_news = 'Hallinnoi uutisia';
 $s_view_list_of_attachments = 'Näytä liitetiedostolistaukset';
 $s_download_attachments = 'Imuroi liitetiedostoja';
 $s_delete_attachments = 'Poista liitetiedostoja';
-$s_delete_attachment_button = "Poista";
-$s_delete_attachment_sure_msg = "Oletko varma, että haluat poistaa tämän liitetiedoston?";
+$s_delete_attachment_button = 'Poista';
+$s_delete_attachment_sure_msg = 'Oletko varma, että haluat poistaa tämän liitetiedoston?';
 $s_upload_issue_attachments = 'Päivitä tapahtuman liitetiedostoja';
 $s_filters = 'suotimet';
 $s_save_filters = 'Tallenna suotimet';

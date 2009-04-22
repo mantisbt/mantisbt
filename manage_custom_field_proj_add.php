@@ -48,4 +48,3 @@
 	form_security_purge('manage_custom_field_proj_add');
 
 	print_header_redirect( 'manage_custom_field_edit_page.php?field_id=' . $f_field_id );
-?>

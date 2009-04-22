@@ -87,7 +87,6 @@ function user_cache_array_rows( $p_user_id_array ) {
 		return;
 	}
 
-
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	$query = "SELECT *
@@ -841,37 +840,21 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 		$t_private = VS_PRIVATE;
 
 		$result = null;
-		if( $p_show_disabled ) {
-			$query = "SELECT p.id, p.name, ph.parent_id
-								  FROM $t_project_table p
-								  LEFT JOIN $t_project_user_list_table u
-								    ON p.id=u.project_id AND u.user_id=" . db_param() . "
-								  LEFT JOIN $t_project_hierarchy_table ph
-								    ON ph.child_id = p.id
-								  WHERE
-									( p.view_state=" . db_param() . "
-									    OR (p.view_state=" . db_param() . "
-										    AND
-									        u.user_id=" . db_param() . " )
-									)
-					  ORDER BY p.name";
-			$result = db_query_bound( $query, Array( $p_user_id, $t_public, $t_private, $p_user_id ) );
-		} else {
-			$query = "SELECT p.id, p.name, ph.parent_id
-							  FROM $t_project_table p
-							  LEFT JOIN $t_project_user_list_table u
-							    ON p.id=u.project_id AND u.user_id=" . db_param() . "
-							  LEFT JOIN $t_project_hierarchy_table ph
-							    ON ph.child_id = p.id
-							  WHERE p.enabled = " . db_param() . " AND
-								( p.view_state=" . db_param() . "
-								    OR (p.view_state=" . db_param() . "
-									    AND
-								        u.user_id=" . db_param() . " )
-								)
-				  ORDER BY p.name";
-			$result = db_query_bound( $query, Array( $p_user_id, true, $t_public, $t_private, $p_user_id ) );
-		}
+
+		$query = "SELECT p.id, p.name, ph.parent_id
+						  FROM $t_project_table p
+						  LEFT JOIN $t_project_user_list_table u
+						    ON p.id=u.project_id AND u.user_id=" . db_param() . "
+						  LEFT JOIN $t_project_hierarchy_table ph
+						    ON ph.child_id = p.id
+						  WHERE " . ( $p_show_disabled ? '' : ( 'p.enabled = ' . db_param() . ' AND ' ) ) . "
+							( p.view_state=" . db_param() . "
+							    OR (p.view_state=" . db_param() . "
+								    AND
+							        u.user_id=" . db_param() . " )
+							)
+			  ORDER BY p.name";
+		$result = db_query_bound( $query, ( $p_show_disabled ? Array( $p_user_id, $t_public, $t_private, $p_user_id ) : Array( $p_user_id, true, $t_public, $t_private, $p_user_id ) ) );
 
 		$row_count = db_num_rows( $result );
 
@@ -880,7 +863,7 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 		for( $i = 0;$i < $row_count;$i++ ) {
 			$row = db_fetch_array( $result );
 
-			$t_projects[$row['id']] = ( $row['parent_id'] === NULL ) ? 0 : $row['parent_id'];
+			$t_projects[(int)$row['id']] = ( $row['parent_id'] === NULL ) ? 0 : (int)$row['parent_id'];
 		}
 
 		# prune out children where the parents are already listed. Make the list
@@ -937,19 +920,18 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 					  ORDER BY p.name";
 		$result = db_query_bound( $query, ( $p_show_disabled ? null : Array( true ) ) );
 	} else {
-		$p = 0;
 		$query = "SELECT DISTINCT p.id, p.name, ph.parent_id
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
-					    ON p.id = u.project_id AND u.user_id=" . db_param( $p++ ) . "
+					    ON p.id = u.project_id AND u.user_id=" . db_param() . "
 					  LEFT JOIN $t_project_hierarchy_table ph
 					    ON ph.child_id = p.id
-					  WHERE " . ( $p_show_disabled ? '' : ( 'p.enabled = ' . db_param( $p++ ) . ' AND ' ) ) . '
+					  WHERE " . ( $p_show_disabled ? '' : ( 'p.enabled = ' . db_param() . ' AND ' ) ) . '
 					  	ph.parent_id IS NOT NULL AND
-						( p.view_state=' . db_param( $p++ ) . '
-						    OR (p.view_state=' . db_param( $p++ ) . '
+						( p.view_state=' . db_param() . '
+						    OR (p.view_state=' . db_param() . '
 							    AND
-						        u.user_id=' . db_param( $p++ ) . ' )
+						        u.user_id=' . db_param() . ' )
 						)
 					  ORDER BY p.name';
 		$result = db_query_bound( $query, ( $p_show_disabled ? Array( $p_user_id, $t_public, $t_private, $p_user_id ) : Array( $p_user_id, 1, $t_public, $t_private, $p_user_id ) ) );
@@ -962,22 +944,22 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 	for( $i = 0;$i < $row_count;$i++ ) {
 		$row = db_fetch_array( $result );
 
-		if( !isset( $t_projects[$row['parent_id']] ) ) {
-			$t_projects[$row['parent_id']] = array();
+		if( !isset( $t_projects[(int)$row['parent_id']] ) ) {
+			$t_projects[(int)$row['parent_id']] = array();
 		}
 
-		array_push( $t_projects[$row['parent_id']], $row['id'] );
+		array_push( $t_projects[(int)$row['parent_id']], (int)$row['id'] );
 	}
 
 	if( auth_get_current_user_id() == $p_user_id ) {
 		$g_user_accessible_subprojects_cache = $t_projects;
 	}
 
-	if( !isset( $t_projects[$p_project_id] ) ) {
-		$t_projects[$p_project_id] = array();
+	if( !isset( $t_projects[(int)$p_project_id] ) ) {
+		$t_projects[(int)$p_project_id] = array();
 	}
 
-	return $t_projects[$p_project_id];
+	return $t_projects[(int)$p_project_id];
 }
 
 # --------------------
@@ -989,7 +971,7 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 	$t_subprojects = Array();
 
 	while( $t_todo ) {
-		$t_elem = array_shift( $t_todo );
+		$t_elem = (int)array_shift( $t_todo );
 		if( !in_array( $t_elem, $t_subprojects ) ) {
 			array_push( $t_subprojects, $t_elem );
 			$t_todo = array_merge( $t_todo, user_get_accessible_subprojects( $p_user_id, $t_elem ) );
@@ -998,6 +980,24 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 
 	return $t_subprojects;
 }
+
+function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
+	if( ALL_PROJECTS == $p_project_id ) {
+		$t_topprojects = $t_project_ids = user_get_accessible_projects( $p_user_id );
+		foreach( $t_topprojects as $t_project ) {
+			$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $p_user_id, $t_project ) );
+		}
+
+		$t_project_ids = array_unique( $t_project_ids );
+	} else {
+		access_ensure_project_level( VIEWER, $p_project_id );
+		$t_project_ids = user_get_all_accessible_subprojects( $p_user_id, $p_project_id );
+		array_unshift( $t_project_ids, $p_project_id );
+	}
+
+	return $t_project_ids;
+}
+
 
 # --------------------
 # return the number of open assigned bugs to a user in a project

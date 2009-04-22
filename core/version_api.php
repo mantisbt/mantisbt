@@ -138,7 +138,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 	db_query_bound( $query, Array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released, $c_obsolete ) );
 
 	# db_query errors on failure so:
-	return true;
+	return db_insert_id( $t_project_version_table );
 }
 
 # --------------------
@@ -267,9 +267,59 @@ function version_remove_all( $p_project_id ) {
 # Data Access
 # ===================================
 # --------------------
+$g_cache_versions_project = null;
+
+function version_cache_array_rows( $p_project_id_array ) {
+	global $g_cache_versions, $g_cache_versions_project;
+
+	$c_project_id_array = array();
+
+	foreach( $p_project_id_array as $t_project_id ) {
+		if( !isset( $g_cache_versions_project[(int) $t_project_id] ) ) {
+			$c_project_id_array[] = (int) $t_project_id;
+			$g_cache_versions_project[(int) $t_project_id] = array();
+		}
+	}
+
+	if( empty( $c_project_id_array ) ) {
+		return;
+	}
+
+	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
+
+	$query = "SELECT *
+				  FROM $t_project_version_table
+				  WHERE project_id IN (" . implode( ',', $c_project_id_array ) . ')';
+	$result = db_query_bound( $query );
+
+	$rows = array();
+	while( $row = db_fetch_array( $result ) ) {
+		$row['date_order'] = db_unixtimestamp( $row['date_order'] );
+		$g_cache_versions[(int) $row['id']] = $row;
+
+		$rows[ (int)$row[ 'project_id' ] ][] = $row['id'];
+	}
+
+	foreach( $rows as $t_project_id => $t_row ) {
+		$g_cache_versions_project[ (int)$t_project_id ] = $t_row;
+	}
+	return;
+}
+
 # Return all versions for the specified project
 function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false ) {
-	global $g_cache_versions;
+	global $g_cache_versions, $g_cache_versions_project;
+
+	if( isset( $g_cache_versions_project[ (int)$p_project_id ] ) ) {
+		if( !empty( $g_cache_versions_project[ (int)$p_project_id ]) ) {
+			foreach( $g_cache_versions_project[ (int)$p_project_id ] as $t_id ) {
+				$t_versions[] = version_cache_row( $t_id );
+			}
+			return $t_versions;
+		} else {
+			return array();
+		}
+	}
 
 	$c_project_id = db_prepare_int( $p_project_id );
 	$t_project_version_table = db_get_table( 'mantis_project_version_table' );

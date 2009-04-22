@@ -95,4 +95,3 @@
 	}
 
 	print_header_redirect_view( $f_bug_id );
-?>

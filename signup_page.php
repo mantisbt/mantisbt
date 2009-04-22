@@ -128,9 +128,8 @@
 	window.document.signup_form.username.focus();
 // -->
 </script>
-<?php } ?>
 <?php
 	}
+}
 
-	html_page_bottom1a( __FILE__ );
-?>
+html_page_bottom1a( __FILE__ );

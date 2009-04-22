@@ -41,17 +41,14 @@
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
 	$row = project_get_row( $f_project_id );
-	
+
 	$t_can_manage_users = access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
-	html_page_top1( project_get_field( $f_project_id, 'name' ) );
-	html_page_top2();
+	html_page_top( project_get_field( $f_project_id, 'name' ) );
 
 	print_manage_menu( 'manage_proj_edit_page.php' );
 ?>
 <br />
-
-
 <!-- PROJECT PROPERTIES -->
 <div align="center">
 <form method="post" action="manage_proj_update.php">
@@ -184,13 +181,14 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <!-- Title -->
 <tr>
 	<td class="form-title" colspan="6">
-		<?php echo lang_get( 'subprojects' ) ?>
-                <?php
-	                # Check the user's global access level before allowing project creation
-	                if ( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
-	                        print_button( 'manage_proj_create_page.php?parent_id=' . $f_project_id, lang_get( 'create_new_subproject_link' ) );
-	                }
-                ?>
+		<?php 
+			echo lang_get( 'subprojects' );
+
+			# Check the user's global access level before allowing project creation
+			if ( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
+				print_button( 'manage_proj_create_page.php?parent_id=' . $f_project_id, lang_get( 'create_new_subproject_link' ) );
+			}
+		?>
 	</td>
 </tr>
 
@@ -551,7 +549,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 				</td>
 			</tr>
 	<?php
-		$t_index = 0;	
+		$t_index = 0;
 
 		$t_custom_field_security = form_security_field( 'manage_proj_custom_field_update' );
 
@@ -570,8 +568,8 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	<input type="text" name="sequence" value="<?php echo custom_field_get_sequence( $t_field_id, $f_project_id ) ?>" size="2" />
 	<input type="submit" class="button-small" value="<?php echo lang_get( 'update' ) ?>" />
 </form>
-	<?php 
-		$t_index++; 
+	<?php
+		$t_index++;
 	?>
 				</td>
 				<td class="center">
@@ -620,14 +618,14 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 				<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_to' ) ?>" />
 			</form>
 		</td>
-	</tr>	
+	</tr>
 	</table>
 	</div>
 <?php
 }
-?>
 
-<?php event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) ); ?>
+event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) ); 
+?>
 
 <!-- PROJECT VIEW STATUS -->
 <br />
@@ -683,8 +681,10 @@ if ( $t_can_manage_users ) {
 				</td>
 				<td>
 					<select name="access_level">
-						<?php # only access levels that are less than or equal current user access level for current project ?>
-						<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ), $f_project_id ) ?>
+						<?php
+							# only access levels that are less than or equal current user access level for current project
+							print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ), $f_project_id );
+						?>
 					</select>
 				</td>
 				<td>
@@ -822,4 +822,5 @@ if ( $t_can_manage_users ) {
 	</table>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

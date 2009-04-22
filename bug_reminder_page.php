@@ -45,9 +45,8 @@
 		$g_project_override = $t_bug->project_id;
 	}
 
+	html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 ?>
-<?php html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) ) ?>
-<?php html_page_top2() ?>
 
 <?php # Send reminder Form BEGIN ?>
 <br />
@@ -112,4 +111,5 @@
 <?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' ) ?>
 <?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' ) ?>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

@@ -37,22 +37,22 @@ $t_user_id = auth_get_current_user_id();
 # get the bugnote data
 $t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 $t_bugnotes = bugnote_get_all_visible_bugnotes( $f_bug_id, $t_bugnote_order, 0, $t_user_id );
-	
+
 #precache users
 $t_bugnote_users = array();
 foreach($t_bugnotes as $t_bugnote) {
 	$t_bugnote_users[] = $t_bugnote->reporter_id;
 }
 user_cache_array_rows( $t_bugnote_users );
-	
+
 #precache access levels
-if ( isset( $g_project_override ) ) { 
+if ( isset( $g_project_override ) ) {
 	access_cache_matrix_project( $g_project_override );
 } else {
 	access_cache_matrix_project( helper_get_current_project() );
 }
-	
-$num_notes = sizeof( $t_bugnotes );
+
+$num_notes = count( $t_bugnotes );
 ?>
 
 <?php # Bugnotes BEGIN ?>
@@ -92,7 +92,7 @@ $num_notes = sizeof( $t_bugnotes );
 			$t_bugnote_modified = true;
 		else
 			$t_bugnote_modified = false;
-		
+
 		$t_bugnote_id_formatted = bugnote_format_id( $t_bugnote->id );
 
 		if ( 0 != $t_bugnote->time_tracking ) {
@@ -122,7 +122,7 @@ $num_notes = sizeof( $t_bugnotes );
 			if ( user_exists( $t_bugnote->reporter_id ) ) {
 				$t_access_level = access_get_project_level( null, (int)$t_bugnote->reporter_id );
 				echo '(', get_enum_element( 'access_levels', $t_access_level ), ')';
-			} 
+			}
 		?></span>
 		<?php if ( VS_PRIVATE == $t_bugnote->view_state ) { ?>
 		<span class="small">[ <?php echo lang_get( 'private' ) ?> ]</span>
@@ -212,7 +212,7 @@ $num_notes = sizeof( $t_bugnotes );
 ?>
 </table>
 
-<?php 
+<?php
 	collapse_closed( 'bugnotes' );
 ?>
 
@@ -226,6 +226,3 @@ $num_notes = sizeof( $t_bugnotes );
 </table>
 <?php
 	collapse_end( 'bugnotes' );
-?>
-
-<?php # Bugnotes END ?>

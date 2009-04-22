@@ -49,16 +49,16 @@
 	foreach( $f_bug_arr as $t_bug_id ) {
 		bug_ensure_exists( $t_bug_id );
 		$t_bug = bug_get( $t_bug_id, true );
-		
+
 		if ( isset( $t_projects_bugs[$t_bug->project_id] ) ) {
 		  $t_projects_bugs[$t_bug->project_id][] = $t_bug_id;
         } else {
 		  $t_projects_bugs[$t_bug->project_id] = array( $t_bug_id );
         }
     }
-  
+
     $t_failed_ids = array();
-    
+
     # validate all bugs before we start the processing, we may fail the whole action
     # group, or some of the bugs.
     foreach( $t_projects_bugs as $t_project_id => $t_bug_ids ) {
@@ -106,8 +106,7 @@
 	$t_redirect_url = 'view_all_bug_page.php';
 
 	if ( count( $t_failed_ids ) > 0 ) {
-		html_page_top1();
-		html_page_top2();
+		html_page_top();
 
 		echo '<div align="center">';
 		foreach( $t_failed_ids as $t_id => $t_reason ) {
@@ -117,8 +116,7 @@
 		print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 		echo '</div>';
 
-		html_page_bottom1( __FILE__ );
+		html_page_bottom( __FILE__ );
 	} else {
 		print_header_redirect( $t_redirect_url );
 	}
-?>

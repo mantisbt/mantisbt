@@ -52,10 +52,10 @@
 
 	access_ensure_bug_level( config_get( 'sponsor_threshold' ), $f_bug_id );
 
-	helper_ensure_confirmed( 
+	helper_ensure_confirmed(
 		sprintf( lang_get( 'confirm_sponsorship' ), $f_bug_id, sponsorship_format_amount( $f_amount ) ),
 		lang_get( 'sponsor_issue' ) );
-			
+
 	if ( $f_amount == 0 ) {
 		# if amount == 0, delete sponsorship by current user (if any)
 		$t_sponsorship_id = sponsorship_get_id( $f_bug_id );
@@ -78,4 +78,3 @@
 	}
 
 	print_header_redirect_view( $f_bug_id );
-?>

@@ -108,9 +108,10 @@
 	</td>
 </tr>
 </table>
-<?php 
+<?php
 	collapse_end( 'bugnote_add' );
 ?>
 
 <?php # Bugnote Add Form END ?>
-<?php } ?>
+<?php 
+}

@@ -7,7 +7,7 @@
 * @license GNU General Public License v3
 * @link http://code.google.com/p/flaimo-php/
 * @package RSS
-* @version 2.2
+* @version 2.2.1
 */
 interface RSS {
 	public function getRSSOutput();

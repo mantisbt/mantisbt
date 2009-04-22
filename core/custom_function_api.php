@@ -219,9 +219,9 @@ function custom_function_default_get_columns_to_view( $p_columns_target = COLUMN
 
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
 		$t_columns = config_get( 'csv_columns', $t_project_id, $p_user_id );
-	} elseif( $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
+	} else if( $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
 		$t_columns = config_get( 'excel_columns', $t_project_id, $p_user_id );
-	} elseif( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
+	} else if( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
 		$t_columns = config_get( 'view_issues_page_columns', $t_project_id, $p_user_id );
 	} else {
 		$t_columns = config_get( 'print_issues_page_columns', $t_project_id, $p_user_id );

@@ -164,7 +164,7 @@ function email_is_valid( $p_email ) {
 		$t_domain = $t_check[2];
 
 		# see if we're limited to one domain
-		$t_limit_email_domain = config_get( 'limit_email_domain' ); 
+		$t_limit_email_domain = config_get( 'limit_email_domain' );
 		if( $t_limit_email_domain !== OFF  ) {
 			if( 0 != strcasecmp( $t_limit_email_domain, $t_domain ) ) {
 				return false;
@@ -179,7 +179,7 @@ function email_is_valid( $p_email ) {
 				return true;
 			}
 		}
-		elseif( ON == config_get( 'check_mx_record' ) ) {
+		else if( ON == config_get( 'check_mx_record' ) ) {
 			$temp = '';
 
 			# Check for valid mx records
@@ -235,7 +235,7 @@ function email_notify_flag( $action, $flag ) {
 	if( isset( $t_notify_flags[$action][$flag] ) ) {
 		return $t_notify_flags[$action][$flag];
 	}
-	elseif( isset( $t_default_notify_flags[$flag] ) ) {
+	else if( isset( $t_default_notify_flags[$flag] ) ) {
 		return $t_default_notify_flags[$flag];
 	}
 
@@ -340,7 +340,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	if( 'owner' == $p_notify_type ) {
 		$t_pref_field = 'email_on_assigned';
 	}
-	elseif( in_array( $p_notify_type, $t_status_change ) ) {
+	else if( in_array( $p_notify_type, $t_status_change ) ) {
 		$t_pref_field = 'email_on_status';
 	} else {
 		$t_pref_field = 'email_on_' . $p_notify_type;
@@ -754,7 +754,7 @@ function email_send( $p_email_data ) {
 
 	$t_debug_email = config_get( 'debug_email' );
 	$t_mailer_method = config_get( 'phpMailer_method' );
-	
+
 	# Visit http://phpmailer.sourceforge.net
 	# if you have problems with phpMailer
 
@@ -806,7 +806,7 @@ function email_send( $p_email_data ) {
 			}
 
 			$mail->Port = config_get( 'smtp_port' );
-			
+
 			break;
 	}
 
@@ -850,14 +850,21 @@ function email_send( $p_email_data ) {
 		}
 	}
 
-	if( !$mail->Send() ) {
-		$t_success = false;
-	} else {
-		$t_success = true;
-
-		if( $t_email_data->email_id > 0 ) {
-			email_queue_delete( $t_email_data->email_id );
+	try
+	{
+		if ( !$mail->Send() ) {
+			$t_success = false;
+		} else {
+			$t_success = true;
+	
+			if ( $t_email_data->email_id > 0 ) {
+				email_queue_delete( $t_email_data->email_id );
+			}
 		}
+	}
+	catch ( phpmailerException $e )
+	{
+		$t_success = false;
 	}
 
 	$mail->ClearAllRecipients();
@@ -906,10 +913,10 @@ function make_lf_crlf( $p_string ) {
 # Check limit_email_domain option and append the domain name if it is set
 
 /**
- * Appends an email domain to the specified email address if email is 
+ * Appends an email domain to the specified email address if email is
  * not empty, it doesn't already have a domain part and if a
  * limit_email_domain is configured.
- * 
+ *
  * @param string $p_email The email address to append the domain to.
  * @returns The email address with the appended domain (if applicable).
  */
@@ -1087,7 +1094,7 @@ function email_format_bug_message( $p_visible_bug_data ) {
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_summary' );
 
 	$t_message .= lang_get( 'email_description' ) . ": \n" . wordwrap( $p_visible_bug_data['email_description'] ) . "\n";
-	
+
 	if ( !is_blank( $p_visible_bug_data['email_steps_to_reproduce'] ) ) {
 		$t_message .= "\n" . lang_get( 'email_steps_to_reproduce' ) . ": \n" . wordwrap( $p_visible_bug_data['email_steps_to_reproduce'] ) . "\n";
 	}
@@ -1095,7 +1102,7 @@ function email_format_bug_message( $p_visible_bug_data ) {
 	if ( !is_blank( $p_visible_bug_data['email_additional_information'] ) ) {
 		$t_message .= "\n" . lang_get( 'email_additional_information' ) . ": \n" . wordwrap( $p_visible_bug_data['email_additional_information'] ) . "\n";
 	}
-	
+
 	if( isset( $p_visible_bug_data['relations'] ) ) {
 		$t_message .= $p_visible_bug_data['relations'];
 	}
@@ -1154,7 +1161,7 @@ function email_format_bug_message( $p_visible_bug_data ) {
 		$t_message .= $t_email_separator1 . " \n";
 
 		foreach( $p_visible_bug_data['history'] as $t_raw_history_item ) {
-			$t_localized_item = history_localize_item( $t_raw_history_item['field'], $t_raw_history_item['type'], $t_raw_history_item['old_value'], $t_raw_history_item['new_value'] );
+			$t_localized_item = history_localize_item( $t_raw_history_item['field'], $t_raw_history_item['type'], $t_raw_history_item['old_value'], $t_raw_history_item['new_value'], false );
 
 			$t_message .= str_pad( date( $t_normal_date_format, $t_raw_history_item['date'] ), 17 ) . str_pad( $t_raw_history_item['username'], 15 ) . str_pad( $t_localized_item['note'], 25 ) . str_pad( $t_localized_item['change'], 20 ) . "\n";
 		}

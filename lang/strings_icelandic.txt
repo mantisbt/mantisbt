@@ -265,7 +265,9 @@ $s_new_account_do_not_reply = 'EKKI SVARA ÞESSUM SKILABOÐUM';
 $s_new_account_email = 'Tölvupóstfang:';
 $s_new_account_IP = 'Fjartengd IP tala:';
 $s_new_account_signup_msg = 'Eftirfarandi aðgangur hefur verið leyfður:';
-$s_reset_request_msg = 'Einhver (líklega þú) óskaðir eftir að breyta lykilorði með staðfestum tölvupósti. Ef þetta var ekki þú, hunsaðu þessi boð og ekkert mun gerast.\n\nEf þú óskaðir eftir þessari staðfestingu, heimsóttu eftirfarandi veffang til þess að breyta lykilorðinu:';
+$s_reset_request_msg = 'Einhver (líklega þú) óskaðir eftir að breyta lykilorði með staðfestum tölvupósti. Ef þetta var ekki þú, hunsaðu þessi boð og ekkert mun gerast.
+
+Ef þú óskaðir eftir þessari staðfestingu, heimsóttu eftirfarandi veffang til þess að breyta lykilorðinu:';
 $s_reset_request_in_progress_msg = 'Ef þú hefur gefið upp rétt lykilorð og tölvupóstfang fyrir aðgang þinn, munum við nú hafa sent staðfest boð til uppgefins tölvupóstfangs. Þegar þessi boð hafa verið móttekinn, fylgdu eftir leiðbeiningunum til þess að breyta lykilorði fyrir þinn aðgang.';
 $s_email_notification_title_for_status_bug_new = 'Eftirfarandi beiðni er (aftur) í stöðu NÝTT';
 $s_email_notification_title_for_status_bug_feedback = 'Eftirfarandi beiðni krefst VIÐBRAGÐA frá þér.';

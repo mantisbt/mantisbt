@@ -63,8 +63,9 @@
 			<img src="images/dollars.gif" alt="<?php echo lang_get( 'sponsor_verb' ) ?>" border="0" />
 		</td>
 		<td class="form-title" colspan="2">
-			<?php collapse_icon( 'sponsorship' ); ?>
-		<?php
+		<?php 
+			collapse_icon( 'sponsorship' );
+
 			echo lang_get( 'users_sponsoring_bug' );
 
 			$t_details_url = lang_get( 'sponsorship_process_url' );
@@ -147,9 +148,7 @@
 				echo '&nbsp;[<a href="' . $t_details_url . '" target="_blank">'
 					. lang_get( 'sponsorship_more_info' ) . '</a>]';
 			}
-?>
 
-<?php
 	$t_total_sponsorship = bug_get_field( $f_bug_id, 'sponsorship_total' );
 	if ( $t_total_sponsorship > 0 ) {
 		echo ' <span style="font-weight: normal;">(';
@@ -165,4 +164,3 @@
 <?php
 	collapse_end( 'sponsorship' );
 } # If sponsorship enabled
-?>

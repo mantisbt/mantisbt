@@ -58,7 +58,8 @@
 
 		$t_version = trim( $t_version );
 		if ( version_is_unique( $t_version, $f_project_id ) ) {
-			version_add( $f_project_id, $t_version );
+			$t_version_id = version_add( $f_project_id, $t_version );
+			event_signal( 'EVENT_MANAGE_VERSION_CREATE', array( $t_version_id ) );
 		} else if ( 1 == $t_version_count ) {
 			# We only error out on duplicates when a single value was
 			#  given.  If multiple values were given, we just add the
@@ -72,18 +73,12 @@
 	form_security_purge( 'manage_proj_ver_add' );
 
 	if ( true == $f_add_and_edit ) {
-		$t_version_id = version_get_id( $t_version, $f_project_id );
 		$t_redirect_url = 'manage_proj_ver_edit_page.php?version_id='.$t_version_id;
 	} else {
 		$t_redirect_url = 'manage_proj_edit_page.php?project_id='  .$f_project_id;
 	}
-?>
-<?php
-	html_page_top1();
 
-	html_meta_redirect( $t_redirect_url );
-
-	html_page_top2();
+	html_page_top( null, $t_redirect_url );
 ?>
 
 <br />
@@ -95,4 +90,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

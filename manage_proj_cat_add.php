@@ -73,4 +73,3 @@
 	}
 
 	print_header_redirect( $t_redirect_url );
-?>

@@ -133,7 +133,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 
 	for( $i = 0, $j = 0;$i < $raw_history_count;++$i ) {
 		$t_row = db_fetch_array( $result );
-		
+
 		$v_type = $t_row['type'];
 		$v_field_name = $t_row['field_name'];
 		$v_user_id = $t_row['user_id'];
@@ -208,16 +208,17 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 # Localizes one raw history item specified by set the next parameters: $p_field_name, $p_type, $p_old_value, $p_new_value
 # Returns array with two elements indexed as 'note' and 'change'
 #
-function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_value ) {
+function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_value, $p_linkify=true ) {
 	$t_note = '';
 	$t_change = '';
 	$t_field_localized = $p_field_name;
+	$t_raw = true;
 
 	if( PLUGIN_HISTORY == $p_type ) {
 		$t_note = lang_get_defaulted( "plugin_$p_field_name", $p_field_name );
 		$t_change = ( $p_new_value ? "$p_old_value => $p_new_value" : $p_old_value );
 
-		return array( 'note' => $t_note, 'change' => $t_change );
+		return array( 'note' => $t_note, 'change' => $t_change, 'raw' => true );
 	}
 
 	switch( $p_field_name ) {
@@ -365,21 +366,51 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					break;
 				case BUGNOTE_ADDED:
 					$t_note = lang_get( 'bugnote_added' ) . ": " . $p_old_value;
+					if ( $p_linkify && $p_new_value ) {
+						$t_change = '<a href="bug_revision_view_page.php?bugnote_id=' . $p_old_value . '#r' . $p_new_value . '">' .
+							lang_get( 'view_revisions' ) . '</a>';
+						$t_raw = false;
+					}
 					break;
 				case BUGNOTE_UPDATED:
 					$t_note = lang_get( 'bugnote_edited' ) . ": " . $p_old_value;
+					if ( $p_linkify && $p_new_value ) {
+						$t_change = '<a href="bug_revision_view_page.php?bugnote_id=' . $p_old_value . '#r' . $p_new_value . '">' .
+							lang_get( 'view_revisions' ) . '</a>';
+						$t_raw = false;
+					}
 					break;
 				case BUGNOTE_DELETED:
 					$t_note = lang_get( 'bugnote_deleted' ) . ": " . $p_old_value;
+					if ( $p_linkify && $p_new_value ) {
+						$t_change = '<a href="bug_revision_view_page.php?bugnote_id=' . $p_old_value . '#r' . $p_new_value . '">' .
+							lang_get( 'view_revisions' ) . '</a>';
+						$t_raw = false;
+					}
 					break;
 				case DESCRIPTION_UPDATED:
 					$t_note = lang_get( 'description_updated' );
+					if ( $p_linkify && $p_old_value ) {
+						$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $p_old_value . '#r' . $p_old_value . '">' .
+							lang_get( 'view_revisions' ) . '</a>';
+						$t_raw = false;
+					}
 					break;
 				case ADDITIONAL_INFO_UPDATED:
 					$t_note = lang_get( 'additional_information_updated' );
+					if ( $p_linkify && $p_old_value ) {
+						$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $p_old_value . '#r' . $p_old_value . '">' .
+							lang_get( 'view_revisions' ) . '</a>';
+						$t_raw = false;
+					}
 					break;
 				case STEP_TO_REPRODUCE_UPDATED:
 					$t_note = lang_get( 'steps_to_reproduce_updated' );
+					if ( $p_linkify && $p_old_value ) {
+						$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $p_old_value . '#r' . $p_old_value . '">' .
+							lang_get( 'view_revisions' ) . '</a>';
+						$t_raw = false;
+					}
 					break;
 				case FILE_ADDED:
 					$t_note = lang_get( 'file_added' ) . ": " . $p_old_value;
@@ -467,7 +498,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 	}
 
 	# end if DEFAULT
-	return array( 'note' => $t_note, 'change' => $t_change );
+	return array( 'note' => $t_note, 'change' => $t_change, 'raw' => $t_raw );
 }
 
 # --------------------

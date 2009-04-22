@@ -28,8 +28,7 @@
 	require_once( 'core.php' );
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	print_summary_menu( 'summary_jpgraph_page.php' );
 
@@ -39,7 +38,7 @@
 	$t_wide = config_get( 'graph_summary_graphs_per_row' );
 	$t_width = config_get( 'graph_window_width' );
 	$t_graph_width = (int) ( ( $t_width - 50 ) / $t_wide );
-	
+
 	token_delete( TOKEN_GRAPH );
 
 ?>
@@ -52,12 +51,13 @@
 	</td>
 </tr>
 <?php
-	for ( $t_pos = 0; $t_pos < count($t_graphs ); $t_pos++ ) {
+	$t_graph_count = count($t_graphs );
+	for ( $t_pos = 0; $t_pos < $t_graph_count; $t_pos++ ) {
 		if ( 0 == ( $t_pos % $t_wide ) ) {
 			print( "<tr valign=\"top\">\n" );
 		}
 		echo '<td width="50%" align="center">';
-		printf("<img src=\"%s.php?width=%d\" border=\"0\" />", $t_graphs[$t_pos], $t_graph_width );
+		printf("<img src=\"%s.php?width=%d\" border=\"0\" alt=\"\" />", $t_graphs[$t_pos], $t_graph_width );
 		echo '</td>';
 		if ( ( $t_wide - 1 ) == ( $t_pos % $t_wide ) ) {
 			print( "</tr>\n" );
@@ -66,4 +66,5 @@
 ?>
 </table>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

@@ -346,6 +346,44 @@ $c_filter['verify'] = array(
 );
 $url_link_parameters['verify'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
 
+$c_filter['my_comments'] = array(
+	FILTER_PROPERTY_CATEGORY => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_SEVERITY_ID => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_STATUS_ID => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
+	FILTER_PROPERTY_REPORTER_ID => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HANDLER_ID => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_RESOLUTION_ID => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_PRODUCT_BUILD => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_PRODUCT_VERSION => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HIDE_STATUS_ID => Array(
+		'0' => $t_hide_status_default,
+	),
+	FILTER_PROPERTY_MONITOR_USER_ID => Array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_NOTE_USER_ID=> Array(
+		'0' => META_FILTER_MYSELF,
+	),
+);
+
+$url_link_parameters['my_comments'] = FILTER_PROPERTY_NOTE_USER_ID. '=' . META_FILTER_MYSELF . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 $rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title] );
 
 # Improve performance by caching category data in one pass
@@ -384,9 +422,9 @@ echo '^';
 echo '</a>]';
 ?>
 		<?php
-			if( sizeof( $rows ) > 0 ) {
+			if( count( $rows ) > 0 ) {
 	$v_start = $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] * ( $f_page_number - 1 ) + 1;
-	$v_end = $v_start + sizeof( $rows ) - 1;
+	$v_end = $v_start + count( $rows ) - 1;
 }
 else {
 	$v_start = 0;
@@ -401,7 +439,7 @@ echo "($v_start - $v_end / $t_bug_count)";
 <?php
 # -- Loop over bug rows and create $v_* variables --?>
 <?php
-	for( $i = 0;$i < sizeof( $rows );$i++ ) {
+	for( $i = 0;$i < count( $rows );$i++ ) {
 
 	# prefix bug data with v_
 

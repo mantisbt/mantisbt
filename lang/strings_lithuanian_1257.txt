@@ -274,10 +274,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Priëjimas uþdr
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Rëmëjas neáraðë el. paðto adreso. Atnaujinkite savo apraðymà.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfigûracijos parametre \'%s\' nustatyta neteisinga reikðmë \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Ðio veiksmo ávykdyti negalima, kadangi klaida \'%d\' yra tik skaitymui';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "KLAIDA: tarp ðiø klaidø jau egzistuoja tarpusavio ryðys.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "KLAIDA: ryðiai nerasti.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Priëjimas uþdraustas: klaida %d reikalauja aukðtesnio priëjimo lygio.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Klaida negali bûti susijusi su savimi.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'KLAIDA: tarp ðiø klaidø jau egzistuoja tarpusavio ryðys.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'KLAIDA: ryðiai nerasti.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Priëjimas uþdraustas: klaida %d reikalauja aukðtesnio priëjimo lygio.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Klaida negali bûti susijusi su savimi.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Neatitinka patvirtinimo kodas. Bandykite dar kartà.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Slaptaþodþio priminimo galimybë iðjungta.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Norëdami pakeisti slaptaþodá áveskite savo el. paðto adresà';
@@ -301,7 +301,7 @@ $s_logged_in_as = 'Prisijungæs kaip';
 $s_prefix_for_deleted_users = 'vartotojas';
 
 $s_administrator = 'administratorius';
-$s_myself = "Að pats";
+$s_myself = 'Að pats';
 $s_default_access_level = 'Default access level';
 
 $s_issue_status_percentage = 'Issue Status Percentage';
@@ -325,13 +325,15 @@ $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 $s_new_account_subject = 'Vartotojo registracija';
 $s_new_account_greeting = 'Aèiû, kad uþsiregistravote. Jûsø vartotojo vardas \'%1$s\'. Norëdami baigti registracijos procedûrà, aplankykite puslapá ðiuo adresu (ásitikinkite, kad jis áraðytas vienoje eilutëje) ir áraðykite savo slaptaþodá:';
 $s_new_account_username = 'Vartotojo vardas: ';
-$s_new_account_message = 'Jeigu jûs nesiregistravote, nekreipkite dëmesio á ðá laiðkà.' . "\n\n";
+$s_new_account_message = 'Jeigu jûs nesiregistravote, nekreipkite dëmesio á ðá laiðkà.';
 $s_new_account_do_not_reply = 'NEATSAKINËKITE Á ÐÁ LAIÐKÀ';
 $s_new_account_email = 'El. paðto adresas: ';
 $s_new_account_IP = 'IP adresas: ';
 $s_new_account_signup_msg = 'Vartotojo vardas sukurtas su þemiau esanèiais parametrais:';
 
-$s_reset_request_msg = 'Kaþkas (greièiausiai jûs pats) papraðëte slaptaþodþio pakeitimo. Jeigu tai buvote ne jûs, nekreipkite dëmesio á ðá laiðkà.' . "\n\n" . 'Prieðingu atveju aplankykite puslapá ðiuo adresu:';
+$s_reset_request_msg = 'Kaþkas (greièiausiai jûs pats) papraðëte slaptaþodþio pakeitimo. Jeigu tai buvote ne jûs, nekreipkite dëmesio á ðá laiðkà.
+
+Prieðingu atveju aplankykite puslapá ðiuo adresu:';
 $s_reset_request_in_progress_msg = 'Jeigu ávedëte teisingà vartotojo vardà ir el. paðto adresà, mes jums iðsiuntëme patvirtinimo laiðkà. Kai tik gausite minëtà laiðkà, sekite instrukcijas ekrane.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
@@ -352,18 +354,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Pasikeitë ðios kla
 $s_email_notification_title_for_action_sponsorship_deleted = 'Rëmëjas atsisakë remti ðià klaidà.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Prie klaidos pridëtas KOMENTARAS.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been removed as a DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been marked as UNRELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been removed as the PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been removed as the CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'The following issue has been set as DUPLICATE OF issue %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'The issue %s has been set as DUPLICATE OF the following issue.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'The following issue has been set as RELATED TO issue %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'The following issue has been set PARENT OF issue %s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'The following issue has been set CHILD OF issue %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'The following issue has been UNset as DUPLICATE OF issue %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'The issue %s has been removed as a DUPLICATE OF the following issue.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'The following issue has been marked as UNRELATED TO issue %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'The following issue has been removed as the PARENT OF issue %s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'The following issue has been removed as the CHILD OF issue %s.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'The RELATED issue %s has been RESOLVED.';
+$s_email_notification_title_for_action_relationship_child_closed = 'The RELATED issue %s has been CLOSED.';
 
 $s_email_reporter = 'Praneðëjas';
 $s_email_handler = 'Priskirta';
@@ -657,11 +659,11 @@ $s_redirecting = '...Nukreipiu';
 $s_here = 'Èia';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Slaptaþodþio keitimas";
-$s_lost_password_done_title = "Laiðkas apie slaptaþodþio pakeitimà iðsiøstas";
-$s_lost_password_subject = "Slaptaþodio keitimas";
-$s_lost_password_info = "Norëdami pakeisti savo slaptaþodá áraðykite savo vartotojo vardà ir el. paðto adresà. <br /><br />Jeigu duomenys sutaps su esamu vartotoju mûsø sistemoje, jûs gausite laiðkà su instrukcijomis kaip elgtis toliau.";
-$s_lost_password_confirm_hash_OK = "Jûsø patvirtinimo kodas priimtas. Dabar galite pasikeisti savo slaptaþodá.";
+$s_lost_password_title = 'Slaptaþodþio keitimas';
+$s_lost_password_done_title = 'Laiðkas apie slaptaþodþio pakeitimà iðsiøstas';
+$s_lost_password_subject = 'Slaptaþodio keitimas';
+$s_lost_password_info = 'Norëdami pakeisti savo slaptaþodá áraðykite savo vartotojo vardà ir el. paðto adresà. <br /><br />Jeigu duomenys sutaps su esamu vartotoju mûsø sistemoje, jûs gausite laiðkà su instrukcijomis kaip elgtis toliau.';
+$s_lost_password_confirm_hash_OK = 'Jûsø patvirtinimo kodas priimtas. Dabar galite pasikeisti savo slaptaþodá.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Atviros ir priskirtos man';
@@ -723,8 +725,8 @@ $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Who can change notification defaults';
 $s_notify_actions_change_access = 'Who can change notifications';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_revert_to_system = 'Delete All Projects Settings';
+$s_revert_to_all_project = 'Delete Project Specific Settings';
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
@@ -1198,15 +1200,15 @@ $s_field_remove_button = 'Remove Field';
 $s_hide_status = 'Paslëpti bûsenà';
 $s_filter_closed = 'Uþdaryta';
 $s_filter_resolved = 'Iðspræsta';
-$s_hide_closed = "Paslëpti uþdarytas";
-$s_hide_resolved = "Paslëpti iðspræstas";
+$s_hide_closed = 'Paslëpti uþdarytas';
+$s_hide_resolved = 'Paslëpti iðspræstas';
 $s_and_above = 'ir tolimesnias';
 $s_advanced_filters = 'Detalûs filtrai';
 $s_simple_filters = 'Paprasti filtrai';
 $s_monitored_by = 'Stebimos';
 
-$s_attachments = "prikabintas failas(ai)";
-$s_attachment_alt = "A";
+$s_attachments = 'prikabintas failas(ai)';
+$s_attachment_alt = 'A';
 
 # PHPMailer
 $s_phpmailer_language = 'lt';
@@ -1229,34 +1231,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = 'Pakeitimø statistika';
 
 # Http auth
-$s_http_auth_realm = "Mantis prisijungimas";
+$s_http_auth_realm = 'Mantis prisijungimas';
 
-$s_bug = "klaida";
-$s_add_new_relationship = "Nauji ryðiai";
-$s_add_new_relationship_button = "Sukurti";
-$s_this_bug = "Dabartinë klaida";
-$s_relationship_added = "Ryðys sukurtas";
-$s_relationship_deleted = "Ryðys iðtrintas";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
-$s_delete_relationship_button = "Iðtrinti";
-$s_delete_relationship_sure_msg = "Ar tikrai norite iðtrinti ðá ryðá?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Ne visos su ðia klaida susijusios klaidos buvo iðspræstos arba uþdarytos.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>DËMESIO</b>. Ne visos su ðia klaida susijusios klaidos buvo iðspræstos arba uþdarytos.<br />Prieð <b>iðsprændþiant/uþdarant</b> ðià klaidà, turite iðspræsti arba uþdaryti visas susijusias klaidas.";
-$s_create_child_bug_button = "Sukurti sàryðá";
-$s_bug_cloned_to = "Issue cloned";
-$s_bug_created_from = "Klaida sukurta ið";
+$s_bug = 'klaida';
+$s_add_new_relationship = 'Nauji ryðiai';
+$s_add_new_relationship_button = 'Sukurti';
+$s_this_bug = 'Dabartinë klaida';
+$s_relationship_added = 'Ryðys sukurtas';
+$s_relationship_deleted = 'Ryðys iðtrintas';
+$s_no_relationship = 'no relationship';
+$s_relationship_replaced = 'Relationship replaced';
+$s_replace_relationship_button = 'Replace';
+$s_replace_relationship_sure_msg = 'There is already a relationship between the two issues. Are you sure you want to replace it?';
+$s_relationship_with_parent = 'Relationship with the parent issue';
+$s_delete_relationship_button = 'Iðtrinti';
+$s_delete_relationship_sure_msg = 'Ar tikrai norite iðtrinti ðá ryðá?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Ne visos su ðia klaida susijusios klaidos buvo iðspræstos arba uþdarytos.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>DËMESIO</b>. Ne visos su ðia klaida susijusios klaidos buvo iðspræstos arba uþdarytos.<br />Prieð <b>iðsprændþiant/uþdarant</b> ðià klaidà, turite iðspræsti arba uþdaryti visas susijusias klaidas.';
+$s_create_child_bug_button = 'Sukurti sàryðá';
+$s_bug_cloned_to = 'Issue cloned';
+$s_bug_created_from = 'Klaida sukurta ið';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relationship Graph";
-$s_relation_graph = "Relation Graph";
-$s_dependency_graph = "Dependency Graph";
-$s_vertical = "Vertical";
-$s_horizontal = "Horizontal";
-$s_view_issue = "View Issue";
+$s_viewing_bug_relationship_graph_title = 'Relationship Graph';
+$s_relation_graph = 'Relation Graph';
+$s_dependency_graph = 'Dependency Graph';
+$s_vertical = 'Vertical';
+$s_horizontal = 'Horizontal';
+$s_view_issue = 'View Issue';
 
 # Source Control Integration
 $s_checkin = 'Patikrinimas';
@@ -1289,8 +1291,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
-$s_delete_attachment_button = "Delete";
-$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
+$s_delete_attachment_button = 'Delete';
+$s_delete_attachment_sure_msg = 'Are you sure you wish to delete this attachment?';
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';

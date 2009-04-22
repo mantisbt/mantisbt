@@ -27,8 +27,7 @@ require_once( 'core.php' );
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
-html_page_top1( lang_get( 'manage_plugin_link' ) );
-html_page_top2();
+html_page_top( lang_get( 'manage_plugin_link' ) );
 
 print_manage_menu( 'manage_plugin_page.php' );
 
@@ -52,9 +51,8 @@ foreach( $t_plugins as $t_basename => $t_plugin ) {
 	}
 }
 
+if ( 0 < count( $t_plugins_installed ) ) { 
 ?>
-
-<?php if ( 0 < count( $t_plugins_installed ) ) { ?>
 <br/>
 <form action="manage_plugin_update.php" method="post">
 <?php echo form_security_field( 'manage_plugin_update' ) ?>
@@ -78,7 +76,7 @@ foreach( $t_plugins as $t_basename => $t_plugin ) {
 	<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
 </tr>
 
-<?php 
+<?php
 foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	$t_description = string_display_line_links( $t_plugin->description );
 	$t_author = $t_plugin->author;
@@ -100,7 +98,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 			$t_author = implode( $t_author, ', ' );
 		}
 		if ( !is_blank( $t_contact ) ) {
-			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ), 
+			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ),
 				'<a href="mailto:' . string_attribute( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
 		} else {
 			$t_author = '<br/>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
@@ -123,7 +121,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 				} else {
 					$t_depends[] = '<span class="small dependency_upgrade">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
 				}
-			} elseif ( -1 == $t_dependency ) {
+			} else if ( -1 == $t_dependency ) {
 				$t_depends[] = '<span class="small dependency_dated">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
 			} else {
 				$t_depends[] = '<span class="small dependency_unmet">'.string_display_line( $t_plugin.' '.$t_version ).'</span>';
@@ -161,9 +159,11 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 
 </table>
 </form>
-<?php } ?>
+<?php 
+}
 
-<?php if ( 0 < count( $t_plugins_available ) ) { ?>
+if ( 0 < count( $t_plugins_available ) ) { 
+?>
 <br/>
 <table class="width100" cellspacing="1">
 
@@ -183,7 +183,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
 </tr>
 
-<?php 
+<?php
 foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 	$t_description = string_display_line_links( $t_plugin->description );
 	$t_author = $t_plugin->author;
@@ -199,7 +199,7 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 			$t_author = implode( $t_author, ', ' );
 		}
 		if ( !is_blank( $t_contact ) ) {
-			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ), 
+			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ),
 				'<a href="mailto:' . string_display_line( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
 		} else {
 			$t_author = '<br/>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
@@ -216,7 +216,7 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 			$t_dependency = plugin_dependency( $t_plugin, $t_version );
 			if ( 1 == $t_dependency ) {
 				$t_depends[] = '<span class="small dependency_met">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
-			} elseif ( -1 == $t_dependency ) {
+			} else if ( -1 == $t_dependency ) {
 				$t_ready = false;
 				$t_depends[] = '<span class="small dependency_dated">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
 			} else {
@@ -251,5 +251,5 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 <span class='dependency_upgrade'><?php echo lang_get( 'plugin_key_upgrade' ) ?></span>.
 
 <?php
-html_page_bottom1();
+html_page_bottom();
 

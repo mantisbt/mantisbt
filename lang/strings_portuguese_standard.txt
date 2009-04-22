@@ -23,6 +23,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Crazymadlover
  * @author Luís Martins, lmar@ualg.pt
  * @author Malafaya
  * @author Rui Alexandre Coelho, rac@iosoft.pt
@@ -270,7 +271,9 @@ $s_new_account_do_not_reply = 'NÃO RESPONDA A ESTA MENSAGEM';
 $s_new_account_email = 'Email:';
 $s_new_account_IP = 'Endereço IP remoto:';
 $s_new_account_signup_msg = 'A seguinte conta foi criada:';
-$s_reset_request_msg = 'Alguém (provavelmente você) pediu uma alteração de palavra-chave por verificação de email. Se não foi você, ignore esta mensagem e nada irá acontecer.\n\nCaso você tenha solicitado esta verificação, visite o seguinte URL para alterar a sua palavra-chave:';
+$s_reset_request_msg = 'Alguém (provavelmente você) pediu uma alteração de palavra-chave por verificação de email. Se não foi você, ignore esta mensagem e nada irá acontecer.
+
+Caso você tenha solicitado esta verificação, visite o seguinte URL para alterar a sua palavra-chave:';
 $s_reset_request_in_progress_msg = 'Se você forneceu o nome de utilizador e endereço de email corretos para a sua conta, teremos a esta altura enviado uma mensagem de confirmação para esse endereço de email. Assim que a mensagem for recebida, siga as instruções fornecidas para alterar a palavra-chave da sua conta.';
 $s_email_reporter = 'Notificador';
 $s_email_handler = 'Operador';

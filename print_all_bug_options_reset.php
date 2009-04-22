@@ -62,9 +62,8 @@
 
 	$t_redirect_url = 'print_all_bug_options_page.php';
 
-	html_page_top1();
-	html_meta_redirect( $t_redirect_url );
-	html_page_top2();
+	html_page_top( null, $t_redirect_url );
+
 	echo '<br /><div align="center">';
 
 	if ( $result ) {
@@ -76,6 +75,4 @@
 	echo '<br />';
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 	echo '<br /></div>';
-	html_page_bottom1( __FILE__ );
-?>
-
+	html_page_bottom( __FILE__ );

@@ -369,7 +369,7 @@ $upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_user_pref_tabl
 /* apparently mysql now has a STRICT mode, where setting a DEFAULT value on a blob/text is now an error, instead of being silently ignored */
 if ( isset( $f_db_type ) && ( $f_db_type == 'mysql' || $f_db_type == 'mysqli' ) ) {
 	$upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_custom_field_table' ), "possible_values X NOTNULL" ) );
-} else { 
+} else {
 	$upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_custom_field_table' ), "possible_values X NOTNULL DEFAULT \" '' \"" ) );
 }
 
@@ -410,4 +410,15 @@ $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "
 
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_custom_field_table' ), "
   filter_by 		L 		NOTNULL DEFAULT \" '1' \"" ) );
+$upgrade[] = Array( 'CreateTableSQL', Array( db_get_table( 'mantis_bug_revision_table' ), "
+	id			I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
+	bug_id		I		UNSIGNED NOTNULL,
+	bugnote_id	I		UNSIGNED NOTNULL DEFAULT '0',
+	user_id		I		UNSIGNED NOTNULL,
+	timestamp	T		NOTNULL DEFAULT '" . db_null_date() . "',
+	type		I		UNSIGNED NOTNULL,
+	value		XL		NOTNULL
+	", Array( 'mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS' ) ) );
+$upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_bug_rev_id_time', db_get_table( 'mantis_bug_revision_table' ), 'bug_id, timestamp' ) );
+$upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_bug_rev_type', db_get_table( 'mantis_bug_revision_table' ), 'type' ) );
 

@@ -52,7 +52,7 @@
 	if ( strtolower( $f_name ) != strtolower( $t_old_name ) ) {
 		category_ensure_unique( $t_project_id, $f_name );
 	}
-	
+
 	category_update( $f_category_id, $f_name, $f_assigned_to );
 
 	form_security_purge( 'manage_proj_cat_update' );
@@ -63,11 +63,7 @@
 		$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 	}
 
-	html_page_top1();
-
-	html_meta_redirect( $t_redirect_url );
-
-	html_page_top2();
+	html_page_top( null, $t_redirect_url );
 ?>
 <br />
 <div align="center">
@@ -78,4 +74,5 @@
 ?>
 </div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

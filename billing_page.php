@@ -24,16 +24,12 @@
 	  * MantisBT Core API's
 	  */
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
 	access_ensure_global_level( config_get( 'time_tracking_reporting_threshold' ) );
 
-/*
-	compress_enable();
-*/
+	html_page_top( lang_get( 'time_tracking_billing_link' )  );
 ?>
-<?php html_page_top1( lang_get( 'time_tracking_billing_link' )  ) ?>
-<?php html_page_top2() ?>
 
 <br />
 
@@ -44,6 +40,6 @@
 <?php
 	# Work break-down
 	include( $t_mantis_dir . 'billing_inc.php' );
-	
-	html_page_bottom1( __FILE__ );
-?>
+
+	html_page_bottom( __FILE__ );
+

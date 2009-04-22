@@ -252,6 +252,7 @@ $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path. Directory 
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'You cannot set an issue as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Bug revision not found.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
@@ -355,13 +356,15 @@ $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 $s_new_account_subject = 'Account registration';
 $s_new_account_greeting = 'Thank you for registering. You have an account with username "%1$s". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = 'Username:';
-$s_new_account_message = 'If you did not request any registration, ignore this message and nothing will happen.\n\n';
+$s_new_account_message = 'If you did not request any registration, ignore this message and nothing will happen.';
 $s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
 $s_new_account_email = 'E-mail:';
 $s_new_account_IP = 'Remote IP address:';
 $s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = 'Someone (presumably you) requested a password change through e-mail verification. If this was not you, ignore this message and nothing will happen.\n\nIf you requested this verification, visit the following URL to change your password:';
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through e-mail verification. If this was not you, ignore this message and nothing will happen.
+
+If you requested this verification, visit the following URL to change your password:';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and e-mail address for your account, we will now have sent a confirmation message to that e-mail address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
@@ -459,7 +462,7 @@ $s_email_on_feedback = 'E-mail on Feedback';
 $s_email_on_resolved = 'E-mail on Resolved';
 $s_email_on_closed = 'E-mail on Closed';
 $s_email_on_reopened = 'E-mail on Reopened';
-$s_email_on_bugnote_added = 'E-mail on note Added';
+$s_email_on_bugnote_added = 'E-mail on Note Added';
 $s_email_on_status_change = 'E-mail on Status Change';
 $s_email_on_priority_change = 'E-mail on Priority Change';
 $s_email_bugnote_limit = 'E-mail Notes Limit';
@@ -646,6 +649,15 @@ $s_profile = 'Profile';
 $s_update_advanced_link = 'Update Advanced';
 $s_updating_bug_simple_title = 'Updating Issue Information';
 
+# bug_view*
+$s_view_revisions = 'View Revisions';
+$s_revision = 'Revision';
+$s_revision_by = '%1$s by %2$s';
+$s_revision_drop = 'Drop';
+$s_all_revisions = 'All Revisions';
+$s_back_to_issue = 'Back to Issue';
+$s_confirm_revision_drop = 'Are you sure you want to drop this bug revision?';
+
 # bug_vote_add.php
 $s_vote_added_msg = 'Vote has been added...';
 
@@ -815,6 +827,7 @@ $s_access_change = 'Minimum Access Level to Change to this Status';
 $s_desc_bug_submit_status = 'Status to which a new issue is set';
 $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
+$s_desc_bug_closed_status_threshold = 'Status where an issue is considered closed';
 $s_workflow_change_access = 'Who can change workflow';
 $s_access_change_access = 'Who can change access levels';
 
@@ -1020,6 +1033,7 @@ $s_my_view_title_resolved = 'Resolved';
 $s_my_view_title_monitored = 'Monitored by Me';
 $s_my_view_title_feedback = 'Awaiting Feedback from Me';
 $s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
+$s_my_view_title_my_comments = "Issues I Have Commented On";
 
 # news_add.php
 $s_news_added_msg = 'News item added...';
@@ -1439,7 +1453,7 @@ $s_see_email_addresses_of_other_users = 'See e-mail addresses of other users';
 $s_send_reminders = 'Send reminders';
 $s_add_profiles = 'Add profiles';
 $s_notify_of_new_user_created = 'Notify of new user created';
-$s_email_notification = 'E-MAIL NOTIFICATION';
+$s_email_notification = 'E-mail notification';
 $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'E-mail on Deleted';
 $s_email_on_sponsorship_changed = 'E-mail on Sponsorship changed';

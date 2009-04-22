@@ -38,8 +38,7 @@ access_ensure_global_level( config_get( 'tag_view_threshold' ) );
 
 compress_enable();
 
-html_page_top1( lang_get( 'manage_tags_link' ) );
-html_page_top2();
+html_page_top( lang_get( 'manage_tags_link' ) );
 
 print_manage_menu();
 
@@ -134,8 +133,8 @@ $t_result = db_query_bound( $t_query, $t_where_params, $t_per_page, $t_offset );
 <br/>
 
 <!--  Tag Table Start -->
-<table class="width100" cellspacing="1">
 <input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
+<table class="width100" cellspacing="1">
 	<tr>
 		<td class="form-title" colspan="4">
 			<?php echo lang_get( 'manage_tags_link' ) ?> [<?php echo $t_total_tag_count ?>]
@@ -155,7 +154,7 @@ foreach ( $t_result as $t_tag_row ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<?php if ( $t_can_edit ) { ?>
-		<td><a href="tag_view_page.php?tag_id=<?php echo $t_tag_row['id'] ?>" ><?php echo $t_tag_name ?></td>
+		<td><a href="tag_view_page.php?tag_id=<?php echo $t_tag_row['id'] ?>" ><?php echo $t_tag_name ?></a></td>
 		<?php } else { ?>
 		<td><?php echo $t_tag_name ?></td>
 		<?php } ?>
@@ -205,7 +204,7 @@ foreach ( $t_result as $t_tag_row ) {
 			<?php echo lang_get( 'tag_name' ) ?>
 		</td>
 		<td>
-			<input type="text" name="name" size="50" maxlength="128">
+			<input type="text" name="name" size="50" maxlength="100" />
 			<?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ); ?>
 		</td>
 	</tr>
@@ -231,5 +230,4 @@ foreach ( $t_result as $t_tag_row ) {
 <?php
 } #End can Edit
 
-html_page_bottom1( __FILE__ );
-
+html_page_bottom( __FILE__ );

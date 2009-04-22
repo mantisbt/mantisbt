@@ -29,8 +29,7 @@
 
 	$t_core_path = config_get( 'core_path' );
 
-	html_page_top1( lang_get( 'configuration_report' ) );
-	html_page_top2();
+	html_page_top( lang_get( 'configuration_report' ) );
 
 	print_manage_menu( 'adm_config_report.php' );
 	print_manage_config_menu( 'adm_config_report.php' );
@@ -69,7 +68,7 @@
 				$t_value = config_eval( $p_value );
 				break;
 		}
-		
+
 		echo '<pre>';
 
 		if ( $t_corrupted ) {
@@ -95,7 +94,7 @@
 
 <!-- Title -->
 <tr>
-	<td class="form-title" colspan="3">
+	<td class="form-title" colspan="7">
 		<?php echo lang_get( 'database_configuration' ) ?>
 	</td>
 </tr>
@@ -174,7 +173,7 @@
 	<td class="form-title" colspan="2">
 		<?php echo lang_get( 'set_configuration_option' ) ?>
 	</td>
-</tr>		
+</tr>
 <tr <?php echo helper_alternate_class() ?> valign="top">
 	<td>
 		<?php echo lang_get( 'username' ) ?>
@@ -230,7 +229,7 @@
 	<td colspan="2">
 			<input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option' ) ?>" />
 	</td>
-</tr>		
+</tr>
 </table>
 </form>
 <?php
@@ -238,5 +237,4 @@
 ?>
 </div>
 <?php
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

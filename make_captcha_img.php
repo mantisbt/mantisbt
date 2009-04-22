@@ -166,7 +166,6 @@
 				if($this->debug) echo "\n<br />-Captcha-Debug: Generate ImageStream with: ($func1())";
 				if($this->debug) echo "\n<br />-Captcha-Debug: For colordefinitions we use: ($func2())";
 
-
 				// Set Backgroundcolor
 				$this->random_color(224, 255);
 				$back =  @imagecolorallocate($image, $this->r, $this->g, $this->b);
@@ -175,7 +174,6 @@
 
 				// allocates the 216 websafe color palette to the image
 				if($this->gd_version < 2 || $this->websafecolors) $this->makeWebsafeColors($image);
-
 
 				// fill with noise or grid
 				if($this->nb_noise > 0)
@@ -298,5 +296,3 @@
 			}
 
 	} // END CLASS masc_captcha
-
-?>

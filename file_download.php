@@ -61,7 +61,7 @@
 	$result = db_query_bound( $query, Array( $c_file_id ) );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
-	
+
 	if ( $f_type == 'bug' ) {
 		$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
 	} else {
@@ -145,4 +145,3 @@
 			echo $v_content;
 	}
 	exit();
-?>

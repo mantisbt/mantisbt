@@ -31,8 +31,7 @@
 
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	print_summary_menu( 'summary_page.php' );
 	echo '<br />';
@@ -55,19 +54,20 @@
 </tr>
 <tr valign="top">
 	<td>
-		<center><img src="summary_graph_byresolution.php?width=<?php echo $t_graph_width?>" border="0" /></center>
+		<center><img src="summary_graph_byresolution.php?width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
 	</td>
 </tr>
 <tr valign="top">
 	<td>
-		<center><img src="summary_graph_byresolution_pct.php?width=<?php echo $t_graph_width?>" border="0" /></center>
+		<center><img src="summary_graph_byresolution_pct.php?width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
 	</td>
 </tr>
 <tr valign="top">
 	<td>
-		<center><img src="summary_graph_byresolution_mix.php?width=<?php echo $t_graph_width?>" border="0" /></center>
+		<center><img src="summary_graph_byresolution_mix.php?width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
 	</td>
 </tr>
 </table>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+<?php
+	html_page_bottom( __FILE__ );

@@ -161,7 +161,7 @@ function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 
 	if( null === $p_user_id ) {
 		$g_cache_user_pref = array();
-	} elseif( null === $p_project_id ) {
+	} else if( null === $p_project_id ) {
 		unset( $g_cache_user_pref[$c_user_id] );
 	} else {
 		unset( $g_cache_user_pref[$c_user_id][$c_project_id] );
@@ -217,7 +217,7 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 
 	$t_vars_string = implode( ', ', array_keys( $t_vars ) );
 	$t_params_string = implode( ',', $t_params );
-	
+
 	$query = "INSERT INTO $t_user_pref_table
 				    (user_id, project_id, $t_vars_string)
 				  VALUES ( " . $t_params_string . ")";
@@ -242,16 +242,16 @@ function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
 
 	$t_pairs = array();
 	$t_values = array();
-	
+
 	foreach( $t_vars as $var => $val ) {
 		array_push( $t_pairs, "$var = " . db_param() ) ;
-		array_push( $t_values, $val );		
+		array_push( $t_values, $val );
 	}
 
 	$t_pairs_string = implode( ', ', $t_pairs );
 	$t_values[] = $c_user_id;
 	$t_values[] = $c_project_id;
-	
+
 	$query = "UPDATE $t_user_pref_table
 				  SET $t_pairs_string
 				  WHERE user_id=" . db_param() . " AND project_id=" . db_param();

@@ -30,8 +30,7 @@ $mail->Mailer   = "smtp";
 $query  = "SELECT full_name, email, photo FROM employee WHERE id=$id";
 $result = @MYSQL_QUERY($query);
 
-while ($row = mysql_fetch_array ($result))
-{
+while ($row = mysql_fetch_array ($result)) {
     // HTML body
     $body  = "Hello &lt;font size=\"4\"&gt;" . $row["full_name"] . "&lt;/font&gt;, &lt;p&gt;";
     $body .= "&lt;i&gt;Your&lt;/i&gt; personal photograph to this message.&lt;p&gt;";
@@ -49,8 +48,9 @@ while ($row = mysql_fetch_array ($result))
     $mail->AddAddress($row["email"], $row["full_name"]);
     $mail->AddStringAttachment($row["photo"], "YourPhoto.jpg");
 
-    if(!$mail->Send())
+  if(!$mail->Send()) {
         echo "There has been a mail error sending to " . $row["email"] . "&lt;br&gt;";
+  }
 
     // Clear all addresses and attachments for next loop
     $mail->ClearAddresses();
@@ -71,7 +71,7 @@ programming.  It allows you to make changes to the
 original class for your
 own personal use without hacking the original
 classes.  Plus, it is very
-easy to do. I've provided an example:
+easy to do. An example:
 
 <p>
 Here's a class that extends the phpmailer class and sets the defaults
@@ -87,18 +87,18 @@ require("class.phpmailer.php");
 
 class my_phpmailer extends phpmailer {
     // Set default variables for all new objects
-    var $From     = "from@example.com";
-    var $FromName = "Mailer";
-    var $Host     = "smtp1.example.com;smtp2.example.com";
-    var $Mailer   = "smtp";                         // Alternative to IsSMTP()
-    var $WordWrap = 75;
+  protected $From     = "from@example.com";
+  protected $FromName = "Mailer";
+  protected $Host     = "smtp1.example.com;smtp2.example.com";
+  protected $Mailer   = "smtp";                         // Alternative to IsSMTP()
+  protected $WordWrap = 75;
 
     // Replace the default error_handler
     function error_handler($msg) {
-        print("My Site Error");
-        print("Description:");
+    echo "My Site Error";
+    echo "Description:";
         printf("%s", $msg);
-        exit;
+    exit();
     }
 
     // Create an additional function
@@ -125,16 +125,15 @@ require("mail.inc.php");
 // Instantiate your new class
 $mail = new my_phpmailer;
 
-// Now you only need to add the necessary stuff
+// Now you only need to add the necessary data
 $mail->AddAddress("josh@example.com", "Josh Adams");
 $mail->Subject = "Here is the subject";
 $mail->Body    = "This is the message body";
 $mail->AddAttachment("c:/temp/11-10-00.zip", "new_name.zip");  // optional name
 
-if(!$mail->Send())
-{
+if(!$mail->Send()) {
    echo "There was an error sending the message";
-   exit;
+  exit();
 }
 
 echo "Message was sent successfully";

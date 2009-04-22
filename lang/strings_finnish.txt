@@ -282,7 +282,9 @@ $s_new_account_do_not_reply = 'ÄLÄ VASTAA TÄHÄN SÄHKÖPOSTIVIESTIIN';
 $s_new_account_email = 'Sähköpostiosoite:';
 $s_new_account_IP = 'IP-osoite:';
 $s_new_account_signup_msg = 'Käyttäjätili on luotu:';
-$s_reset_request_msg = 'Osoitteellasi on pyydetty salasanan vaihtoa. Jos et ole tätä tehnyt, voit jättää tämän viestin huomioimatta.\n\nVaihtaaksesi salasanansi, ole hyvä ja vieraile ao. osoitteessa:';
+$s_reset_request_msg = 'Osoitteellasi on pyydetty salasanan vaihtoa. Jos et ole tätä tehnyt, voit jättää tämän viestin huomioimatta.
+
+Vaihtaaksesi salasanansi, ole hyvä ja vieraile ao. osoitteessa:';
 $s_reset_request_in_progress_msg = 'Mikäli syötit käyttäjätilisi nimen ja sähköpostiosoitteen oikein, sähköpostiosoitteeseesi on lähetetty vahvistusviesti. Ole hyvä ja noudata viestissä olevia ohjeita vaihtaaksesi käyttäjätilisi salasanan.';
 $s_email_notification_title_for_status_bug_new = 'Seuraavan tapahtuman tila on jälleen UUSI';
 $s_email_notification_title_for_status_bug_feedback = 'Seuraava tapahtuma vaatii palautettasi.';

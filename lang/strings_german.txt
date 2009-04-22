@@ -23,6 +23,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Als-Holder
  * @author Andre Eisenbach, andre@eisenbach.com
  * @author Dr. Jürgen Kehrel, jkehrel@kehrel.de
  * @author Heiko Gierer, gierer@rittershaus.de
@@ -196,15 +197,15 @@ $s_error_no_proceed = 'Bitte benutzen Sie die „Zurück“-Taste Ihres Browsers
 $MANTIS_ERROR[ERROR_GENERIC] = 'Ein Fehler ist während dieser Aktion aufgetreten. Sie können dies dem Ihnen zugeordneten Administrator mitteilen.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL-Fehler entdeckt.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Während des Reports trat ein Fehler auf.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Keine Datei angegeben';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Dieser Dateityp ist nicht erlaubt';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Keine Datei angegeben.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Dieser Dateityp ist nicht erlaubt.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Das Verzeichnis existiert nicht. Überprüfen Sie die Einstellungen.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Dies ist eine doppelte Datei. Löschen Sie bitte die erste Datei.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ein Projekt mit diesem Namen ist bereits vorhanden.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Ein notwendiges Feld „%1$s“ war leer. Überprüfen Sie Ihre Eingabe.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Dieses Konto ist geschützt. Sie können nicht darauf zugreifen, bevor der Schutz aufgehoben ist.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Zugang verweigert.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Dateiübertragung fehlgeschlagen. Datei könnte nicht von MantisBT gelesen werden. Bitte prüfe die Projekteinstellungen.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Dateiübertragung fehlgeschlagen. Datei konnte nicht von MantisBT gelesen werden. Bitte prüfe die Projekteinstellungen.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Dateiübertragung fehlgeschlagen. Wahrscheinlich liegt die Dateigröße über der erlaubten für diese PHP-Installation.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Ein erforderlicher Parameter für diese Seite (%1$s) wurde nicht gefunden.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Dieser Benutzername ist schon vergeben. Gehen Sie zurück und wählen Sie einen anderen.';
@@ -335,7 +336,9 @@ $s_new_account_do_not_reply = 'NICHT AUF DIESE NACHRICHT ANTWORTEN';
 $s_new_account_email = 'E-Mail:';
 $s_new_account_IP = 'Von IP-Adresse:';
 $s_new_account_signup_msg = 'Das folgende Konto wurde angelegt:';
-$s_reset_request_msg = 'Jemand (vermutlich Sie) hat einen Passwortwechsel durch E-Mail-Bestätigung angefordert. Wenn Sie es nicht waren, ignorieren Sie diese Nachricht, es wird nichts passieren.\n\nWenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL, um ihr Passwort zu ändern:';
+$s_reset_request_msg = 'Jemand (vermutlich Sie) hat einen Passwortwechsel durch E-Mail-Bestätigung angefordert. Wenn Sie es nicht waren, ignorieren Sie diese Nachricht, es wird nichts passieren.
+
+Wenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL, um ihr Passwort zu ändern:';
 $s_reset_request_in_progress_msg = 'Wenn Sie Benutzernamen und E-Mail-Adresse für Ihr Konto richtig angegeben haben, senden wir Ihnen jetzt eine Bestätigungsmail an diese Adresse. Nach dem Erhalt der Meldung befolgen Sie bitte die Anweisungen, um das Passwort Ihres Kontos zu ändern.';
 $s_email_notification_title_for_status_bug_new = 'Das folgende Problem hat (erneut) den Status NEU';
 $s_email_notification_title_for_status_bug_feedback = 'Das folgende Problem benötigt Ihre Rückmeldung.';
@@ -620,6 +623,7 @@ $s_manage_config_link = 'Konfiguration verwalten';
 $s_manage_threshold_config = 'Arbeitsablauf-Schwellenwerte';
 $s_manage_email_config = 'E-Mail-Benachrichtigungen';
 $s_manage_workflow_config = 'Arbeitsablauf';
+$s_manage_tags_link = 'Markierungen verwalten';
 $s_create_new_account_link = 'Neues Konto erstellen';
 $s_projects_link = 'Projekte';
 $s_documentation_link = 'Dokumentation';
@@ -956,6 +960,7 @@ $s_query_name = 'Filtername';
 $s_query_exists = 'Ein Filter mit diesen Optionen existiert bereits.';
 $s_query_dupe_name = 'Ein Filter mit diesem Namen existiert bereits. Bitte geben Sie einen anderen Namen ein.';
 $s_query_blank_name = 'Bitte geben Sie einen Namen für diesen Filter ein.';
+$s_query_name_too_long = 'Es kann kein Filter mit mehr als 64 Buchstaben angelegt werden. Bitte vergeben Sie einen kürzeren Namen.';
 $s_query_store_error = 'Ein Fehler ist beim Speichern des Filters aufgetreten.';
 $s_open_queries = 'Filter verwalten';
 $s_query_delete_msg = 'Möchten Sie diesen Filter wirklich löschen?';
@@ -1171,6 +1176,8 @@ $s_tag_history_renamed = 'Tag umbenannt';
 $s_tag_related = 'Verwandte Tags';
 $s_tag_related_issues = 'Gemeinsame Einträge (%1$s)';
 $s_tag_stats_attached = 'Zugeordnete Einträge: %1$s';
+$s_tag_create = 'Markierungen erstellen';
+$s_show_all_tags = 'ALLE';
 $s_time_tracking_billing_link = 'Abrechnung';
 $s_time_tracking = 'Zeiterfassung';
 $s_time_tracking_get_info_button = 'Zeiterfassungs-Informationen abfragen';

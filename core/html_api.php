@@ -1,7 +1,6 @@
 <?php
 # MantisBT - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+
 # MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,14 +13,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
- * @package CoreAPI
- * @subpackage HTMLAPI
- *
  * These functions control the display of each page
  *
  * This is the call order of these functions, should you need to figure out
@@ -54,7 +47,15 @@
  * 	html_footer
  * 	html_body_end
  * html_end
+ *
+ * @package CoreAPI
+ * @subpackage HTMLAPI
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ * @uses lang_api.php
  */
+
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 require_once( $t_core_dir . 'current_user_api.php' );
@@ -79,9 +80,12 @@ $g_error_send_page_header = true;
 # is included.  But it must be included after html_api.php
 $g_enable_projax = false;
 
-# --------------------
-# Sets the url for the rss link associated with the current page.
-# null: means no feed (default).
+/**
+ * Sets the url for the rss link associated with the current page.
+ * null: means no feed (default).
+ * @param string $p_rss_feed_url rss feed url
+ * @return null
+ */
 function html_set_rss_link( $p_rss_feed_url ) {
 	if( OFF != config_get( 'rss_enabled' ) ) {
 		global $g_rss_feed_url;
@@ -89,16 +93,20 @@ function html_set_rss_link( $p_rss_feed_url ) {
 	}
 }
 
-# --------------------
-# This method must be called before the html_page_top* methods.  It marks the page as not
-# for indexing.
+/**
+ * This method must be called before the html_page_top* methods.  It marks the page as not
+ * for indexing.
+ * @return null
+ */
 function html_robots_noindex() {
 	global $g_robots_meta;
 	$g_robots_meta = 'noindex,follow';
 }
 
-# --------------------
-# Prints the link that allows auto-detection of the associated feed.
+/**
+ * Prints the link that allows auto-detection of the associated feed.
+ * @return null
+ */
 function html_rss_link() {
 	global $g_rss_feed_url;
 
@@ -107,9 +115,25 @@ function html_rss_link() {
 	}
 }
 
-# --------------------
-# Print the part of the page that comes before meta redirect tags should
-#  be inserted
+/**
+ * Defines the top of a HTML page
+ * @param string $p_page_title html page title
+ * @param string $p_redirect_url url to redirect to if necessary
+ * @return null
+ */
+function html_page_top( $p_page_title = null, $p_redirect_url = null ) {
+	html_page_top1( $p_page_title );
+	if ( $p_redirect_url !== null ) {
+		html_meta_redirect( $p_redirect_url );
+	}
+	html_page_top2();
+}
+
+/**
+ * Print the part of the page that comes before meta redirect tags should be inserted
+ * @param string $p_page_title page title
+ * @return null
+ */
 function html_page_top1( $p_page_title = null ) {
 	html_begin();
 	html_head_begin();
@@ -137,9 +161,10 @@ function html_page_top1( $p_page_title = null ) {
 	html_head_javascript();
 }
 
-# --------------------
-# Print the part of the page that comes after meta tags, but before the
-#  actual page content
+/**
+ * Print the part of the page that comes after meta tags, but before the actual page content
+ * @return null
+ */
 function html_page_top2() {
 	html_page_top2a();
 
@@ -160,11 +185,13 @@ function html_page_top2() {
 	event_signal( 'EVENT_LAYOUT_CONTENT_BEGIN' );
 }
 
-# --------------------
-# Print the part of the page that comes after meta tags and before the
-#  actual page content, but without login info or menus.  This is used
-#  directly during the login process and other times when the user may
-#  not be authenticated
+/**
+ * Print the part of the page that comes after meta tags and before the
+ *  actual page content, but without login info or menus.  This is used
+ *  directly during the login process and other times when the user may
+ *  not be authenticated
+ * @return null
+ */
 function html_page_top2a() {
 	global $g_error_send_page_header;
 
@@ -175,9 +202,22 @@ function html_page_top2a() {
 	html_top_banner();
 }
 
-# --------------------
-# Print the part of the page that comes below the page content
-# $p_file should always be the __FILE__ variable. This is passed to show source
+/**
+ * Print the part of the page that comes below the page content
+ * $p_file should always be the __FILE__ variable. This is passed to show source
+ * @param string $p_file should always be the __FILE__ variable. This is passed to show source
+ * @return null
+ */
+function html_page_bottom( $p_file = null ) {
+	html_page_bottom1( $p_file );
+}
+
+/**
+ * Print the part of the page that comes below the page content
+ * $p_file should always be the __FILE__ variable. This is passed to show source
+ * @param string $p_file should always be the __FILE__ variable. This is passed to show source
+ * @return null
+ */
 function html_page_bottom1( $p_file = null ) {
 	if( !db_is_connected() ) {
 		return;
@@ -193,10 +233,13 @@ function html_page_bottom1( $p_file = null ) {
 	html_page_bottom1a( $p_file );
 }
 
-# --------------------
-# Print the part of the page that comes below the page content but leave off
-#  the menu.  This is used during the login process and other times when the
-#  user may not be authenticated.
+/**
+ * Print the part of the page that comes below the page content but leave off
+ *  the menu.  This is used during the login process and other times when the
+ *  user may not be authenticated.
+ * @param string $p_file should always be the __FILE__ variable.
+ * @return null
+ */
 function html_page_bottom1a( $p_file = null ) {
 	if( null === $p_file ) {
 		$p_file = basename( $_SERVER['PHP_SELF'] );
@@ -208,27 +251,36 @@ function html_page_bottom1a( $p_file = null ) {
 	html_end();
 }
 
-# --------------------
-# (1) Print the document type and the opening <html> tag
+/**
+ * (1) Print the document type and the opening <html> tag
+ * @return null
+ */
 function html_begin() {
 	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">', "\n";
 	echo '<html>', "\n";
 }
 
-# --------------------
-# (2) Begin the <head> section
+/**
+ * (2) Begin the <head> section
+ * @return null
+ */
 function html_head_begin() {
 	echo '<head>', "\n";
 }
 
-# --------------------
-# (3) Print the content-type
+/**
+ * (3) Print the content-type
+ * @return null
+ */
 function html_content_type() {
 	echo "\t", '<meta http-equiv="Content-type" content="text/html;charset=', lang_get( 'charset' ), '" />', "\n";
 }
 
-# --------------------
-# (4) Print the window title
+/**
+ * (4) Print the window title
+ * @param string $p_page_title window title
+ * @return null
+ */
 function html_title( $p_page_title = null ) {
 	$t_title = config_get( 'window_title' );
 	echo "\t", '<title>';
@@ -244,8 +296,10 @@ function html_title( $p_page_title = null ) {
 	echo '</title>', "\n";
 }
 
-# --------------------
-# (5) Print the link to include the css file
+/**
+ * (5) Print the link to include the css file
+ * @return null
+ */
 function html_css() {
 	$t_css_url = config_get( 'css_include_file' );
 	echo "\t", '<link rel="stylesheet" type="text/css" href="', helper_mantis_url( $t_css_url ), '" />', "\n";
@@ -256,17 +310,18 @@ function html_css() {
 	echo "\t", '// --></script>', "\n";
 }
 
-# --------------------
-# (6) Print an HTML meta tag to redirect to another page
-# This function is optional and may be called by pages that need a redirect.
-# $p_time is the number of seconds to wait before redirecting.
-# If we have handled any errors on this page and the 'stop_on_errors' config
-#  option is turned on, return false and don't redirect.
-#
-# @param string The page to redirect: has to be a relative path
-# @param integer seconds to wait for before redirecting
-# @param boolean apply string_sanitize_url to passed url
-# @return boolean
+/**
+ * (6) Print an HTML meta tag to redirect to another page
+ * This function is optional and may be called by pages that need a redirect.
+ * $p_time is the number of seconds to wait before redirecting.
+ * If we have handled any errors on this page and the 'stop_on_errors' config
+ *  option is turned on, return false and don't redirect.
+ *
+ * @param string $p_url The page to redirect: has to be a relative path
+ * @param integer $p_time seconds to wait for before redirecting
+ * @param boolean $p_sanitize apply string_sanitize_url to passed url
+ * @return boolean
+ */
 function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 	if( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
 		return false;
@@ -288,8 +343,10 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 	return true;
 }
 
-# ---------------------
-# (6a) Javascript...
+/**
+ * (6a) Javascript...
+ * @return null
+ */
 function html_head_javascript() {
 	if( ON == config_get( 'use_javascript' ) ) {
 		echo "\t", '<script type="text/javascript" language="JavaScript" src="', helper_mantis_url( 'javascript/common.js' ), '">';
@@ -306,24 +363,30 @@ function html_head_javascript() {
 	}
 }
 
-# --------------------
-# (7) End the <head> section
+/**
+ * (7) End the <head> section
+ * @return null
+ */
 function html_head_end() {
 	event_signal( 'EVENT_LAYOUT_RESOURCES' );
 
 	echo '</head>', "\n";
 }
 
-# --------------------
-# (8) Begin the <body> section
+/**
+ * (8) Begin the <body> section
+ * @return null
+ */
 function html_body_begin() {
 	echo '<body>', "\n";
 
 	event_signal( 'EVENT_LAYOUT_BODY_BEGIN' );
 }
 
-# --------------------
-# (9) Print the title displayed at the top of the page
+/**
+ * (9) Print the title displayed at the top of the page
+ * @return null
+ */
 function html_header() {
 	$t_title = config_get( 'page_title' );
 	if( !is_blank( $t_title ) ) {
@@ -331,8 +394,10 @@ function html_header() {
 	}
 }
 
-# --------------------
-# (10) Print a user-defined banner at the top of the page if there is one.
+/**
+ * (10) Print a user-defined banner at the top of the page if there is one.
+ * @return null
+ */
 function html_top_banner() {
 	$t_page = config_get( 'top_include_page' );
 	$t_logo_image = config_get( 'logo_image' );
@@ -351,7 +416,7 @@ function html_top_banner() {
 
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 		include( $t_page );
-	} elseif( $t_show_logo ) {
+	} else if( $t_show_logo ) {
 		if( is_page_name( 'login_page' ) ) {
 			$t_align = 'center';
 		} else {
@@ -372,9 +437,11 @@ function html_top_banner() {
 	event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
 }
 
-# --------------------
-# (11) Print the user's account information
-# Also print the select box where users can switch projects
+/**
+ * (11) Print the user's account information
+ * Also print the select box where users can switch projects
+ * @return null
+ */
 function html_login_info() {
 	$t_username = current_user_get_field( 'username' );
 	$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
@@ -447,8 +514,10 @@ function html_login_info() {
 	echo '</table>';
 }
 
-# --------------------
-# (12) Print a user-defined banner at the bottom of the page if there is one.
+/**
+ * (12) Print a user-defined banner at the bottom of the page if there is one.
+ * @return null
+ */
 function html_bottom_banner() {
 	$t_page = config_get( 'bottom_include_page' );
 
@@ -457,8 +526,11 @@ function html_bottom_banner() {
 	}
 }
 
-# --------------------
-# (13) Print the page footer information
+/**
+ * (13) Print the page footer information
+ * @param string $p_file
+ * @return null
+ */
 function html_footer( $p_file ) {
 	global $g_timer, $g_queries_array, $g_request_time;
 
@@ -515,6 +587,7 @@ function html_footer( $p_file ) {
 		if( ON == config_get( 'show_queries_list' ) ) {
 			echo "\t", '<table>', "\n";
 			$t_total = 0;
+			$t_lang_charset = lang_get( 'charset' );
 			for( $i = 0;$i < $t_count;$i++ ) {
 				$t_time = $g_queries_array[$i][1];
 				$t_caller = $g_queries_array[$i][2];
@@ -525,7 +598,7 @@ function html_footer( $p_file ) {
 				}
 				echo "\t", '<tr valign="top"><td', $t_style_tag, '>', ( $i + 1 ), '</td>';
 				echo '<td', $t_style_tag, '>', $t_time, '</td>';
-				echo '<td', $t_style_tag, '><span style="color: gray;">', $t_caller, '</span><br />', string_html_specialchars( $g_queries_array[$i][0] ), '</td></tr>', "\n";
+				echo '<td', $t_style_tag, '><span style="color: gray;">', $t_caller, '</span><br />', string_html_specialchars( $g_queries_array[$i][0], $t_lang_charset ), '</td></tr>', "\n";
 			}
 
 			# @@@ Note sure if we should localize them given that they are debug info.  Will add if requested by users.
@@ -540,24 +613,29 @@ function html_footer( $p_file ) {
 	echo '</div>', "\n", '</td></tr></table>', "\n";
 }
 
-# --------------------
-# (14) End the <body> section
+/**
+ * (14) End the <body> section
+ * @return null
+ */
 function html_body_end() {
 	event_signal( 'EVENT_LAYOUT_BODY_END' );
 
 	echo '</body>', "\n";
 }
 
-# --------------------
-# (15) Print the closing <html> tag
+/**
+ * (15) Print the closing <html> tag
+ * @return null
+ */
 function html_end() {
 	echo '</html>', "\n";
 }
 
-# ##########################################################################
-# HTML Menu API
-# ##########################################################################
-
+/**
+ * Prepare an array of additional menu options from a config variable
+ * @param string $p_config config name
+ * @return array
+ */
 function prepare_custom_menu_options( $p_config ) {
 	$t_custom_menu_options = config_get( $p_config );
 	$t_options = array();
@@ -574,8 +652,10 @@ function prepare_custom_menu_options( $p_config ) {
 	return $t_options;
 }
 
-# --------------------
-# Print the main menu
+/**
+ * Print the main menu
+ * @return null
+ */
 function print_menu() {
 	if( auth_is_user_authenticated() ) {
 		$t_protected = current_user_get_field( 'protected' );
@@ -717,8 +797,10 @@ function print_menu() {
 	}
 }
 
-# --------------------
-# Print the menu bar with a list of projects to which the user has access
+/**
+ * Print the menu bar with a list of projects to which the user has access
+ * @return null
+ */
 function print_project_menu_bar() {
 	$t_project_ids = current_user_get_accessible_projects();
 
@@ -737,8 +819,10 @@ function print_project_menu_bar() {
 	echo '</table>';
 }
 
-# --------------------
-# Print the menu bar with a list of projects to which the user has access
+/**
+ * Print the menu bar with a list of projects to which the user has access
+ * @return null
+ */
 function print_subproject_menu_bar( $p_project_id, $p_parents = '' ) {
 	$t_subprojects = current_user_get_accessible_subprojects( $p_project_id );
 	$t_char = ':';
@@ -749,8 +833,10 @@ function print_subproject_menu_bar( $p_project_id, $p_parents = '' ) {
 	}
 }
 
-# --------------------
-# Print the menu for the graph summary section
+/**
+ * Print the menu for the graph summary section
+ * @return null
+ */
 function print_menu_graph() {
 	if( config_get( 'use_jpgraph' ) ) {
 		$t_icon_path = config_get( 'icon_path' );
@@ -769,6 +855,7 @@ function print_menu_graph() {
  * Print the menu for the manage section
  *
  * @param string $p_page specifies the current page name so it's link can be disabled
+ * @return null
  */
 function print_manage_menu( $p_page = '' ) {
 	$t_manage_user_page = 'manage_user_page.php';
@@ -850,9 +937,11 @@ function print_manage_menu( $p_page = '' ) {
 	echo '</p></div>';
 }
 
-# --------------------
-# Print the menu for the manage configuration section
-# $p_page specifies the current page name so it's link can be disabled
+/**
+ * Print the menu for the manage configuration section
+ * @param string $p_page specifies the current page name so it's link can be disabled
+ * @return null
+ */
 function print_manage_config_menu( $p_page = '' ) {
 	$t_configuration_report = 'adm_config_report.php';
 	$t_permissions_summary_report = 'adm_permissions_report.php';
@@ -894,9 +983,11 @@ function print_manage_config_menu( $p_page = '' ) {
 	echo '</div>';
 }
 
-# --------------------
-# Print the menu for the account section
-# $p_page specifies the current page name so it's link can be disabled
+/**
+ * Print the menu for the account section
+ * @param string $p_page specifies the current page name so it's link can be disabled
+ * @return null
+ */
 function print_account_menu( $p_page = '' ) {
 	$t_account_page = 'account_page.php';
 	$t_account_prefs_page = 'account_prefs_page.php';
@@ -954,12 +1045,13 @@ function print_account_menu( $p_page = '' ) {
 		echo $t_menu_item;
 		echo '&nbsp;]</span> ';
 	}
-
 }
 
-# --------------------
-# Print the menu for the docs section
-# $p_page specifies the current page name so it's link can be disabled
+/**
+ * Print the menu for the docs section
+ * @param string $p_page specifies the current page name so it's link can be disabled
+ * @return null
+ */
 function print_doc_menu( $p_page = '' ) {
 	$t_documentation_html = config_get( 'manual_url' );
 	$t_proj_doc_page = 'proj_doc_page.php';
@@ -984,9 +1076,11 @@ function print_doc_menu( $p_page = '' ) {
 	}
 }
 
-# --------------------
-# Print the menu for the summary section
-# $p_page specifies the current page name so it's link can be disabled
+/**
+ * Print the menu for the summary section
+ * @param string $p_page specifies the current page name so it's link can be disabled
+ * @return null
+ */
 function print_summary_menu( $p_page = '' ) {
 	echo '<div align="center">';
 	print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
@@ -1010,11 +1104,11 @@ function print_summary_menu( $p_page = '' ) {
 	echo '</div>';
 }
 
-# =========================
-# Candidates for moving to print_api
-# =========================
-# --------------------
-# Print the color legend for the status colors
+/**
+ * Print the color legend for the status colors
+ * @param string
+ * @return null
+ */
 function html_status_legend() {
 	echo '<br />';
 	echo '<table class="width100" cellspacing="1">';
@@ -1053,10 +1147,11 @@ function html_status_legend() {
 	}
 }
 
-# --------------------
-# Print the legend for the status percentage
+/**
+ * Print the legend for the status percentage
+ * @return null
+ */
 function html_status_percentage_legend() {
-
 	$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
@@ -1074,7 +1169,6 @@ function html_status_percentage_legend() {
 	$t_status_count_array = array();
 
 	while( $row = db_fetch_array( $result ) ) {
-
 		$t_status_count_array[$row['status']] = $row['number'];
 		$t_bug_count += $row['number'];
 	}
@@ -1109,8 +1203,14 @@ function html_status_percentage_legend() {
 	}
 }
 
-# --------------------
-# Print an html button inside a form
+/**
+ * Print an html button inside a form
+ * @param string $p_action
+ * @param string $p_buttion_text
+ * @param array $p_fields
+ * @param string $p_method
+ * @return null
+ */
 function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = 'post' ) {
 	$p_action = urlencode( $p_action );
 	$p_button_text = string_attribute( $p_button_text );
@@ -1137,18 +1237,25 @@ function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = '
 	echo "</form>\n";
 }
 
-# --------------------
-# Print a button to update the given bug
+/**
+ * Print a button to update the given bug
+ * @param int $p_bug_id
+ * @return null
+ */
 function html_button_bug_update( $p_bug_id ) {
 	if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 		html_button( string_get_bug_update_page(), lang_get( 'update_bug_button' ), array( 'bug_id' => $p_bug_id ) );
 	}
 }
 
-# --------------------
-# Print Change Status to: button
-#  This code is similar to print_status_option_list except
-#   there is no masking, except for the current state
+/**
+ * Print Change Status to: button
+ * This code is similar to print_status_option_list except
+ * there is no masking, except for the current state
+ *
+ * @param int $p_bug_id
+ * @return null
+ */
 function html_button_bug_change_status( $p_bug_id ) {
 	$t_bug_project_id = bug_get_field( $p_bug_id, 'project_id' );
 	$t_bug_current_state = bug_get_field( $p_bug_id, 'status' );
@@ -1186,8 +1293,11 @@ function html_button_bug_change_status( $p_bug_id ) {
 	}
 }
 
-# --------------------
-# Print Assign To: combo box of possible handlers
+/**
+ * Print Assign To: combo box of possible handlers
+ * @param int $p_bug_id
+ * @return null
+ */
 function html_button_bug_assign_to( $p_bug_id ) {
 
 	# make sure status is allowed of assign would cause auto-set-status
@@ -1281,8 +1391,11 @@ function html_button_bug_assign_to( $p_bug_id ) {
 	echo "</form>\n";
 }
 
-# --------------------
-# Print a button to move the given bug to a different project
+/**
+ * Print a button to move the given bug to a different project
+ * @param int $p_bug_id
+ * @return null
+ */
 function html_button_bug_move( $p_bug_id ) {
 	$t_status = bug_get_field( $p_bug_id, 'status' );
 
@@ -1291,16 +1404,22 @@ function html_button_bug_move( $p_bug_id ) {
 	}
 }
 
-# --------------------
-# Print a button to move the given bug to a different project
+/**
+ * Print a button to move the given bug to a different project
+ * @param int $p_bug_id
+ * @return null
+ */
 function html_button_bug_create_child( $p_bug_id ) {
 	if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 		html_button( string_get_bug_report_url(), lang_get( 'create_child_bug_button' ), array( 'm_id' => $p_bug_id ) );
 	}
 }
 
-# --------------------
-# Print a button to reopen the given bug
+/**
+ * Print a button to reopen the given bug
+ * @param int $p_bug_id
+ * @return null
+ */
 function html_button_bug_reopen( $p_bug_id ) {
 	$t_status = bug_get_field( $p_bug_id, 'status' );
 	$t_project = bug_get_field( $p_bug_id, 'project_id' );
@@ -1312,47 +1431,65 @@ function html_button_bug_reopen( $p_bug_id ) {
 	}
 }
 
-# --------------------
-# Print a button to monitor the given bug
+/**
+ * Print a button to monitor the given bug
+ * @param int $p_bug_id
+ * @return null
+ */
 function html_button_bug_monitor( $p_bug_id ) {
 	if( access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_bug_id ) ) {
 		html_button( 'bug_monitor.php', lang_get( 'monitor_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'add' ) );
 	}
 }
 
-# --------------------
-# Print a button to unmonitor the given bug
-#  no reason to ever disallow someone from unmonitoring a bug
+/**
+ * Print a button to unmonitor the given bug
+ * no reason to ever disallow someone from unmonitoring a bug
+ * @param int $p_bug_id
+ * @return null
+ */
 function html_button_bug_unmonitor( $p_bug_id ) {
 	html_button( 'bug_monitor.php', lang_get( 'unmonitor_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'delete' ) );
 }
 
-# --------------------
-# Print a button to stick the given bug
+/**
+ * Print a button to stick the given bug
+ * @param int $p_bug_id
+ * @return null
+ */
 function html_button_bug_stick( $p_bug_id ) {
 	if ( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
 		html_button( 'bug_stick.php', lang_get( 'stick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'stick' ) );
 	}
 }
 
-# --------------------
-# Print a button to unstick the given bug
+/**
+ * Print a button to unstick the given bug
+ * @param int $p_bug_id
+ * @return null
+ */
 function html_button_bug_unstick( $p_bug_id ) {
 	if ( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
 		html_button( 'bug_stick.php', lang_get( 'unstick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'unstick' ) );
 	}
 }
 
-# --------------------
-# Print a button to delete the given bug
+/**
+ * Print a button to delete the given bug
+ * @param int $p_bug_id
+ * @return null
+ */
 function html_button_bug_delete( $p_bug_id ) {
 	if( access_has_bug_level( config_get( 'delete_bug_threshold' ), $p_bug_id ) ) {
 		html_button( 'bug_actiongroup_page.php', lang_get( 'delete_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ) );
 	}
 }
 
-# --------------------
-# Print a button to create a wiki page
+/**
+ * Print a button to create a wiki page
+ * @param int $p_bug_id
+ * @return null
+ */
 function html_button_wiki( $p_bug_id ) {
 	if( wiki_enabled() ) {
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
@@ -1361,8 +1498,11 @@ function html_button_wiki( $p_bug_id ) {
 	}
 }
 
-# --------------------
-# Print all buttons for view bug pages
+/**
+ * Print all buttons for view bug pages
+ * @param int $p_bug_id
+ * @return null
+ */
 function html_buttons_view_bug_page( $p_bug_id ) {
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 	$t_status = bug_get_field( $p_bug_id, 'status' );
@@ -1435,7 +1575,7 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 		# DELETE button
 		echo '<td class="center">';
 		html_button_bug_delete( $p_bug_id );
-		echo '</td>';		
+		echo '</td>';
 	}
 
 	helper_call_custom_function( 'print_bug_view_page_custom_buttons', array( $p_bug_id ) );

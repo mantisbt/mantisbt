@@ -35,7 +35,7 @@
 
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$t_bug = bug_get( $f_bug_id );
-	
+
 	if( $t_bug->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...
 		# ... override the current project. This to avoid problems with categories and handlers lists etc.
@@ -68,4 +68,3 @@
 	bug_assign( $f_bug_id, $f_handler_id );
 
 	print_successful_redirect_to_bug( $f_bug_id );
-?>

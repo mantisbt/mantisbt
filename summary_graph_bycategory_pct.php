@@ -32,7 +32,7 @@
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	$f_width = gpc_get_int( 'width', 300 );
-	
+
 	$t_token = token_get_value( TOKEN_GRAPH );
 	if ( $t_token == null ) {
 		$t_metrics = create_category_summary();
@@ -41,4 +41,3 @@
 	}
 
 	graph_pie( $t_metrics, lang_get( 'by_category_pct' ), $f_width, $f_width );
-?>

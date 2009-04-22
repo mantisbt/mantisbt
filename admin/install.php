@@ -687,7 +687,7 @@ if( 3 == $t_install_state ) {
 			# fake out database access routines used by config_get
 		}
 		$t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
-		$lastid = sizeof( $upgrade ) - 1;
+		$lastid = count( $upgrade ) - 1;
 		$i = $t_last_update + 1;
 		if( $f_log_queries ) {
 			echo '<tr><td bgcolor="#ffffff" col_span="2"> Database Creation Suppressed, SQL Queries follow <pre>';
@@ -718,12 +718,12 @@ if( 3 == $t_install_state ) {
 			if( $upgrade[$i][0] == 'InsertData' ) {
 				$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
 			}
-			elseif( $upgrade[$i][0] == 'UpdateSQL' ) {
+			else if( $upgrade[$i][0] == 'UpdateSQL' ) {
 				$sqlarray = array(
 					$upgrade[$i][1],
 				);
 				$t_target = $upgrade[$i][1];
-			} elseif( $upgrade[$i][0] == 'UpdateFunction' ) {
+			} else if( $upgrade[$i][0] == 'UpdateFunction' ) {
 				$sqlarray = array(
 					$upgrade[$i][1],
 				);

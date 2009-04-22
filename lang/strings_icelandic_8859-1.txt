@@ -261,10 +261,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Stillimöguleiki \'%s\'hefur ógilt gildi \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Ekki er hægt að framkvæma aðgerðina þar sem atriði \'%d\' er aðeins lesanlegt.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Það eru þegar tengsl milli þessara atriða.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Engin tengsl fundust.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Aðgangi hafnað: Atriði %d krefst hærri aðgangs heimildar.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Atriði getur ekki tengst sjálfu sér.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Það eru þegar tengsl milli þessara atriða.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Engin tengsl fundust.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Aðgangi hafnað: Atriði %d krefst hærri aðgangs heimildar.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Atriði getur ekki tengst sjálfu sér.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Staðfestingin hefur ekki gildi. Reyndu aftur.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Möguleikinn  \'týnt lykilorð\' er ekki tiltækur.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Þú verður að gefa upp tölvupóstfang til að endurstilla lykilorðið.';
@@ -288,7 +288,7 @@ $s_logged_in_as = 'Skráður inn sem';
 $s_prefix_for_deleted_users = 'notandi';
 
 $s_administrator = 'umsjónarmaður';
-$s_myself = "Ég sjálfur";
+$s_myself = 'Ég sjálfur';
 $s_default_access_level = 'Sjálfgefið aðgangsstig';
 
 $s_issue_status_percentage = 'Prósentustaða aðgerða';
@@ -312,13 +312,15 @@ $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 $s_new_account_subject = 'Aðgangs skráning';
 $s_new_account_greeting = 'Þakka þér fyrir skráninguna. Þú hefur aðgang með notendanafninu \'%1$s\'. Til þess að ljúka skráningu, farðu á eftirfarandi veffang (skráðu það í einni línu) og settu upp þitt eigið notendanafn:';
 $s_new_account_username = 'Notendanafn: ';
-$s_new_account_message = 'Ef þú hefur ekki beðið um skráningu, hunsaðu þessi boð og ekkert mun gerast.' . "\n\n";
+$s_new_account_message = 'Ef þú hefur ekki beðið um skráningu, hunsaðu þessi boð og ekkert mun gerast.';
 $s_new_account_do_not_reply = 'EKKI SVARA ÞESSUM SKILABOÐUM';
 $s_new_account_email = 'Tölvupóstfang: ';
 $s_new_account_IP = 'Fjartengd IP tala: ';
 $s_new_account_signup_msg = 'Eftirfarandi aðgangur hefur verið leyfður:';
 
-$s_reset_request_msg = 'Einhver (líklega þú) óskaðir eftir að breyta lykilorði með staðfestum tölvupósti. Ef þetta var ekki þú, hunsaðu þessi boð og ekkert mun gerast.' . "\n\n" . 'Ef þú óskaðir eftir þessari staðfestingu, heimsóttu eftirfarandi veffang til þess að breyta lykilorðinu:';
+$s_reset_request_msg = 'Einhver (líklega þú) óskaðir eftir að breyta lykilorði með staðfestum tölvupósti. Ef þetta var ekki þú, hunsaðu þessi boð og ekkert mun gerast.
+
+Ef þú óskaðir eftir þessari staðfestingu, heimsóttu eftirfarandi veffang til þess að breyta lykilorðinu:';
 $s_reset_request_in_progress_msg = 'Ef þú hefur gefið upp rétt lykilorð og tölvupóstfang fyrir aðgang þinn, munum við nú hafa sent staðfest boð til uppgefins tölvupóstfangs. Þegar þessi boð hafa verið móttekinn, fylgdu eftir leiðbeiningunum til þess að breyta lykilorði fyrir þinn aðgang.';
 
 $s_email_notification_title_for_status_bug_new = 'Eftirfarandi atriði er (aftur) í stöðu NÝTT';
@@ -339,18 +341,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Athugasemd hefur verið bætt við þetta atriði.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "Eftirfarandi atriði hefur verið sett sem AFRIT AF atriði %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "Atriðið %s hefur verið sett sem AFRIT AF eftirfarandi atriði.";
-$s_email_notification_title_for_action_related_to_relationship_added = "Eftirfarandi atriði hefur verið sett sem TENGT VIÐ atriði %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "Eftirfarandi atriði hefur verið sett sem HÁÐUR AF atriði %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "Eftirfarandi atriði hefur verið sett sem TÁLMAÐUR AF atriði %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Eftirfarandi atriði hefur verið tekið af sem AFRIT af atriði %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Atriðið %s hefur verið fjarlægt sem AFRIT af eftirfarandi atriði.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "Eftirfarandi atriði hafa verið merkt sem ÓTENGD atriði %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Eftirfarandi atriði hefur verið fjarlægt sem TENGSL VIÐ atriði %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "Eftirfarandi atriði hefur verið fjarlægt sem TÁLMAÐUR AF atriði %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "Atriði TENGT %s hefur verið LEYST.";
-$s_email_notification_title_for_action_relationship_child_closed = "Atriði TENGT %s hefur verið LOKAÐ.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'Eftirfarandi atriði hefur verið sett sem AFRIT AF atriði %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'Atriðið %s hefur verið sett sem AFRIT AF eftirfarandi atriði.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'Eftirfarandi atriði hefur verið sett sem TENGT VIÐ atriði %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'Eftirfarandi atriði hefur verið sett sem HÁÐUR AF atriði %s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'Eftirfarandi atriði hefur verið sett sem TÁLMAÐUR AF atriði %s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'Eftirfarandi atriði hefur verið tekið af sem AFRIT af atriði %s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'Atriðið %s hefur verið fjarlægt sem AFRIT af eftirfarandi atriði.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'Eftirfarandi atriði hafa verið merkt sem ÓTENGD atriði %s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'Eftirfarandi atriði hefur verið fjarlægt sem TENGSL VIÐ atriði %s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'Eftirfarandi atriði hefur verið fjarlægt sem TÁLMAÐUR AF atriði %s.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'Atriði TENGT %s hefur verið LEYST.';
+$s_email_notification_title_for_action_relationship_child_closed = 'Atriði TENGT %s hefur verið LOKAÐ.';
 
 $s_email_reporter = 'Tilkynnt af';
 $s_email_handler = 'Úthlutað til';
@@ -644,11 +646,11 @@ $s_redirecting = '...framsending';
 $s_here = 'Hér';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Lykilorð endurstillt";
-$s_lost_password_done_title = "Skilaboð um lykilorð sent";
-$s_lost_password_subject = "Lykilorð endurstillt";
-$s_lost_password_info = "Til að endurstilla týnt lykilorð, gefðu upp nafn og tölvupóstfang fyrir aðganginn.<br /><br />Ef gögnin samsvara gildum aðgangi, verður þú sendur á sérstakt veffang með tölvupósti sem inniheldur staðfestingar kóða fyrir þinn aðgang. Fylgdu þessari slóð til að breyta lykilorðinu.";
-$s_lost_password_confirm_hash_OK = "Staðfesting þín hefur verið samþykkt. Uppfærðu lykilorðið.";
+$s_lost_password_title = 'Lykilorð endurstillt';
+$s_lost_password_done_title = 'Skilaboð um lykilorð sent';
+$s_lost_password_subject = 'Lykilorð endurstillt';
+$s_lost_password_info = 'Til að endurstilla týnt lykilorð, gefðu upp nafn og tölvupóstfang fyrir aðganginn.<br /><br />Ef gögnin samsvara gildum aðgangi, verður þú sendur á sérstakt veffang með tölvupósti sem inniheldur staðfestingar kóða fyrir þinn aðgang. Fylgdu þessari slóð til að breyta lykilorðinu.';
+$s_lost_password_confirm_hash_OK = 'Staðfesting þín hefur verið samþykkt. Uppfærðu lykilorðið.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Opið og úthlutað á mig';
@@ -710,8 +712,8 @@ $s_default_notify = 'Stilla sjálfgefin merki um athugasemdir í';
 $s_action_notify = 'Stilla merki um aðgerð við athugasemd í';
 $s_notify_defaults_change_access = 'Hver getur breytt sjálfgefnum athugasemdum';
 $s_notify_actions_change_access = 'Hver getur breytt athugasemdum';
-$s_revert_to_system = "Eyða öllum verkefna stillingum";
-$s_revert_to_all_project = "Eyða sérstökum verkefna stillingum";
+$s_revert_to_system = 'Eyða öllum verkefna stillingum';
+$s_revert_to_all_project = 'Eyða sérstökum verkefna stillingum';
 
 # manage_config_workflow_page
 $s_non_existent = 'er ekki til';
@@ -1183,17 +1185,17 @@ $s_confirm_custom_field_unlinking = 'Ertu viss um að þú viljir fjarlægja (afteng
 $s_field_remove_button = 'Fjarlægja svæði';
 
 $s_hide_status = 'Fela stöðu';
-$s_filter_closed = "Lokað";
-$s_filter_resolved = "Leyst";
-$s_hide_closed = "Fela lokað";
-$s_hide_resolved = "Fela leyst";
+$s_filter_closed = 'Lokað';
+$s_filter_resolved = 'Leyst';
+$s_hide_closed = 'Fela lokað';
+$s_hide_resolved = 'Fela leyst';
 $s_and_above = 'og fyrir ofan';
 $s_advanced_filters = 'Aukin sía';
 $s_simple_filters = 'Einföld sía';
 $s_monitored_by = 'Vaktað af';
 
-$s_attachments = "Viðhengi";
-$s_attachment_alt = "V";
+$s_attachments = 'Viðhengi';
+$s_attachment_alt = 'V';
 
 # PHPMailer
 $s_phpmailer_language = 'en';
@@ -1216,34 +1218,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = 'Breyta dagbók';
 
 # Http auth
-$s_http_auth_realm = "Mantis innskráning";
+$s_http_auth_realm = 'Mantis innskráning';
 
-$s_bug = "atriði";
-$s_add_new_relationship = "Ný tengsl";
-$s_add_new_relationship_button = "Viðbót";
-$s_this_bug = "Núverandi atriði";
-$s_relationship_added = "Tengslum bætt við";
-$s_relationship_deleted = "Tengslum eytt";
-$s_no_relationship = "enginn tengsl";
-$s_relationship_replaced = "Tengsl endurnýjuð";
-$s_replace_relationship_button = "Endurnýja";
-$s_replace_relationship_sure_msg = "Það eru þegar tengsl milli þessara tveggja atriða. Ertu viss um að þú viljir endurnýja þau?";
-$s_relationship_with_parent = "Tengsl við æðra atriði";
-$s_delete_relationship_button = "Eyða";
-$s_delete_relationship_sure_msg = "Ertu viss um að vilja eyða þessum tengslum?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Ekki er búið að leysa eða loka öllum undiratriðum þessa atriðis.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATHUGAÐU</b>. Ekki hafa öll undiratriði þessa atriðis enn verið leyst eða lokuð.<br />Áður en hægt er að <b>leysa/loka<b> æðra atriði þarf að vera búið að leysa eða loka öllum undiratriðum tengdum þessu atriði.";
-$s_create_child_bug_button = "Útbúa samrit";
-$s_bug_cloned_to = "Samrit atriðis";
-$s_bug_created_from = "Atriði myndað af";
+$s_bug = 'atriði';
+$s_add_new_relationship = 'Ný tengsl';
+$s_add_new_relationship_button = 'Viðbót';
+$s_this_bug = 'Núverandi atriði';
+$s_relationship_added = 'Tengslum bætt við';
+$s_relationship_deleted = 'Tengslum eytt';
+$s_no_relationship = 'enginn tengsl';
+$s_relationship_replaced = 'Tengsl endurnýjuð';
+$s_replace_relationship_button = 'Endurnýja';
+$s_replace_relationship_sure_msg = 'Það eru þegar tengsl milli þessara tveggja atriða. Ertu viss um að þú viljir endurnýja þau?';
+$s_relationship_with_parent = 'Tengsl við æðra atriði';
+$s_delete_relationship_button = 'Eyða';
+$s_delete_relationship_sure_msg = 'Ertu viss um að vilja eyða þessum tengslum?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Ekki er búið að leysa eða loka öllum undiratriðum þessa atriðis.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ATHUGAÐU</b>. Ekki hafa öll undiratriði þessa atriðis enn verið leyst eða lokuð.<br />Áður en hægt er að <b>leysa/loka<b> æðra atriði þarf að vera búið að leysa eða loka öllum undiratriðum tengdum þessu atriði.';
+$s_create_child_bug_button = 'Útbúa samrit';
+$s_bug_cloned_to = 'Samrit atriðis';
+$s_bug_created_from = 'Atriði myndað af';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Skyldleika graf";
-$s_relation_graph = "Tengsla graf";
-$s_dependency_graph = "Tengsla graf æðri/undir";
-$s_vertical = "Lóðrétt";
-$s_horizontal = "Lárétt";
-$s_view_issue = "Skoða atriði";
+$s_viewing_bug_relationship_graph_title = 'Skyldleika graf';
+$s_relation_graph = 'Tengsla graf';
+$s_dependency_graph = 'Tengsla graf æðri/undir';
+$s_vertical = 'Lóðrétt';
+$s_horizontal = 'Lárétt';
+$s_view_issue = 'Skoða atriði';
 
 # Source Control Integration
 $s_checkin = 'Skráning inn';
@@ -1276,8 +1278,8 @@ $s_manage_news = 'Stjórna fréttum';
 $s_view_list_of_attachments = 'Skoða lista með viðhengjum';
 $s_download_attachments = 'Niðurhala viðhengi';
 $s_delete_attachments = 'Eyða viðhengi';
-$s_delete_attachment_button = "Eyða";
-$s_delete_attachment_sure_msg = "Ertu viss um að þú viljir eyða þessu viðhengi?";
+$s_delete_attachment_button = 'Eyða';
+$s_delete_attachment_sure_msg = 'Ertu viss um að þú viljir eyða þessu viðhengi?';
 $s_upload_issue_attachments = 'Upphala viðhengi með atriðinu';
 $s_filters = 'síur';
 $s_save_filters = 'Vista síur';

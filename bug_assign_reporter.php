@@ -47,4 +47,3 @@
 	bug_assign( $f_bug_id, bug_get_field( $f_bug_id, 'reporter_id') );
 
 	print_successful_redirect_to_bug( $f_bug_id );
-?>

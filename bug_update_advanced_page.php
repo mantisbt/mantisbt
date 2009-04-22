@@ -39,7 +39,7 @@
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
 	$t_bug = bug_prepare_edit( bug_get( $f_bug_id, true ) );
-	
+
 	if( $t_bug->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...
 		# ... override the current project. This to avoid problems with categories and handlers lists etc.
@@ -52,7 +52,7 @@
 	if ( SIMPLE_ONLY == config_get( 'show_update' ) ) {
 		print_header_redirect ( 'bug_update_page.php?bug_id=' . $f_bug_id );
 	}
-	
+
 	if ( bug_is_readonly( $f_bug_id ) ) {
 		error_parameters( $f_bug_id );
 		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
@@ -60,8 +60,7 @@
 
 	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
 
-	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
-	html_page_top2();
+	html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
 	print_recently_visited();
 ?>
@@ -200,7 +199,7 @@
 	<td class="category">
 		<?php echo lang_get( 'due_date' ) ?>
 	</td>
-	<?php 
+	<?php
 	if ( bug_is_overdue( $f_bug_id ) ) {
 		print "<td class=\"overdue\">";
 	} else {
@@ -275,7 +274,7 @@
 		</select>
 	</td>
 
-	<?php if ( $t_show_platform ) { ?>
+	<?php if ( $t_show_profiles ) { ?>
 	<!-- Platform -->
 	<td class="category">
 		<?php echo lang_get( 'platform' ) ?>
@@ -317,7 +316,7 @@
 
 	<td colspan="2">&nbsp;</td>
 
-	<?php if ( $t_show_platform ) { ?>
+	<?php if ( $t_show_profiles ) { ?>
 	<!-- Operating System -->
 	<td class="category">
 		<?php echo lang_get( 'os' ) ?>
@@ -360,7 +359,7 @@
 	<!-- spacer -->
 	<td colspan="2">&nbsp;</td>
 
-	<?php if ( $t_show_platform ) { ?>
+	<?php if ( $t_show_profiles ) { ?>
 	<!-- OS Version -->
 	<td class="category">
 		<?php echo lang_get( 'os_version' ) ?>
@@ -583,7 +582,7 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, true ) );
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php if($t_def['require_update']) {?><span class="required">*</span><?php } ?><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
+		<?php if($t_def['require_update']) {?><span class="required">*</span><?php } echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
 	</td>
 	<td colspan="5">
 		<?php
@@ -658,15 +657,12 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, true ) );
 	</td>
 </tr>
 
-
 </table>
 </form>
 
 <?php
 
-
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
-	html_page_bottom1( __FILE__ );
+	html_page_bottom( __FILE__ );
 
 	last_visited_issue( $f_bug_id );
-?>

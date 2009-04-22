@@ -332,7 +332,7 @@ class Graph {
 
 			unset( $t_graphviz );
 		} else {
-		
+
 			# If we are not under Windows, use proc_open,
 			# since it avoids the need of temporary files.
 			# Start dot process
@@ -400,7 +400,7 @@ class Graph {
 			if( is_string( $t_value ) ) {
 				$t_value = '"' . addcslashes( $t_value, "\0..\37\"\\" ) . '"';
 			}
-			elseif( is_integer( $t_value ) or is_float( $t_value ) ) {
+			else if( is_integer( $t_value ) or is_float( $t_value ) ) {
 				$t_value = (string) $t_value;
 			} else {
 				continue;
@@ -422,7 +422,7 @@ class Graph {
 			if( is_string( $t_value ) ) {
 				$t_value = '"' . addcslashes( $t_value, "\0..\37\"\\" ) . '"';
 			}
-			elseif( is_integer( $t_value ) or is_float( $t_value ) ) {
+			else if( is_integer( $t_value ) or is_float( $t_value ) ) {
 				$t_value = (string) $t_value;
 			} else {
 				continue;

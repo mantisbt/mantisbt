@@ -48,7 +48,7 @@
 		}
 
 		echo '<tt>';
-		echo '<br />', $t_release_title, $t_scheduled_release_date, print_bracket_link( 'view_all_set.php?type=1&amp;temporary=y&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&amp;' . FILTER_PROPERTY_TARGET_VERSION . '=' . $t_version_name, lang_get( 'view_bugs_link' ) ), '<br />';
+		echo '<br />', $t_release_title, $t_scheduled_release_date, print_bracket_link( 'view_all_set.php?type=1&amp;temporary=y&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&amp;' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ), lang_get( 'view_bugs_link' ) ), '<br />';
 
 		$t_release_title_without_hyperlinks .= $t_scheduled_release_date;
 		echo str_pad( '', strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';
@@ -76,7 +76,7 @@
 
 	if ( is_blank( $f_version ) ) {
 		$f_version_id = gpc_get_int( 'version_id', -1 );
-	
+
 		# If both version_id and project_id parameters are supplied, then version_id take precedence.
 		if ( $f_version_id == -1 ) {
 			if ( $f_project_id == -1 ) {
@@ -85,7 +85,7 @@
 				$t_project_id = $f_project_id;
 			}
 		} else {
-			$t_project_id = version_get_field( $f_version_id, 'project_id' );		
+			$t_project_id = version_get_field( $f_version_id, 'project_id' );
 		}
 	} else {
 		if ( $f_project_id == -1 ) {
@@ -123,13 +123,14 @@
 		array_unshift( $t_project_ids, $t_project_id );
 	}
 
-	html_page_top1( lang_get( 'roadmap' ) );  // title
-	html_page_top2();
+	html_page_top( lang_get( 'roadmap' ) );
 
 	$t_project_index = 0;
 
+	version_cache_array_rows( $t_project_ids );
+	category_cache_array_rows_by_project( $t_project_ids );
+
 	foreach( $t_project_ids as $t_project_id ) {
-		$c_project_id   = db_prepare_int( $t_project_id );
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 		$t_can_view_private = access_has_project_level( config_get( 'private_bug_threshold' ), $t_project_id );
 
@@ -139,19 +140,19 @@
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
 		$t_bug_table	= db_get_table( 'mantis_bug_table' );
 		$t_relation_table = db_get_table( 'mantis_bug_relationship_table' );
-		
+
 		$t_version_rows = array_reverse( version_get_all_rows( $t_project_id ) );
 
 		# cache category info, but ignore the results for now
 		category_get_all_rows( $t_project_id );
 
 		$t_project_header_printed = false;
-		
+
 		foreach( $t_version_rows as $t_version_row ) {
 			if ( $t_version_row['released'] == 1 ) {
 				continue;
 			}
-			
+
 			# Skip all versions except the specified one (if any).
 			if ( $f_version_id != -1 && $f_version_id != $t_version_row['id'] ) {
 				continue;
@@ -175,7 +176,7 @@
 
 			$t_first_entry = true;
 
-			$t_result = db_query_bound( $query, Array( $c_project_id, $c_version ) );
+			$t_result = db_query_bound( $query, Array( $t_project_id, $c_version ) );
 
 			$t_issue_ids = array();
 			$t_issue_parents = array();
@@ -206,7 +207,7 @@
 
 				if ( !isset( $t_issues_counted[$t_issue_id] ) ) {
 					$t_issues_planned++;
-				
+
 					if ( bug_is_resolved( $t_issue_id ) ) {
 						$t_issues_resolved++;
 					}
@@ -231,12 +232,12 @@
 
 			if ( $t_issues_planned > 0 ) {
 				$t_progress = (integer) ( $t_issues_resolved * 100 / $t_issues_planned );
-				
+
  				if ( !$t_project_header_printed ) {
 					print_project_header_roadmap( $t_project_name );
 					$t_project_header_printed = true;
 				}
-				
+
 				if ( !$t_version_header_printed ) {
 					print_version_header( $t_version_row );
 					$t_version_header_printed = true;
@@ -250,7 +251,7 @@
 				echo '<div class="progress400">';
 				echo '  <span class="bar" style="width: ' . $t_progress . '%;">' . $t_progress . '%</span>';
 				echo '</div>';
-			} 
+			}
 
 			$t_issue_set_ids = array();
 			$t_issue_set_levels = array();
@@ -258,11 +259,11 @@
 
 			$t_cycle = false;
 			$t_cycle_ids = array();
-			
+
 			while ( 0 < count( $t_issue_ids ) ) {
 				$t_issue_id = $t_issue_ids[$k];
 				$t_issue_parent = $t_issue_parents[$k];
-				
+
 				if ( in_array( $t_issue_id, $t_cycle_ids ) && in_array( $t_issue_parent, $t_cycle_ids ) ) {
 					$t_cycle = true;
 				} else {
@@ -298,10 +299,11 @@
 				}
 			}
 
-			for ( $j = 0; $j < count( $t_issue_set_ids ); $j++ ) {
+			$t_count_ids = count( $t_issue_set_ids );
+			for ( $j = 0; $j < $t_count_ids; $j++ ) {
 				$t_issue_set_id = $t_issue_set_ids[$j];
 				$t_issue_set_level = $t_issue_set_levels[$j];
-				 
+
 				helper_call_custom_function( 'roadmap_print_issue', array( $t_issue_set_id, $t_issue_set_level ) );
 			}
 
@@ -311,9 +313,8 @@
 				echo '<br /></tt>';
 			}
 		}
-		
+
 		$t_project_index++;
 	}
 
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

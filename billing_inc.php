@@ -37,7 +37,7 @@ if ( !config_get('time_tracking_enabled') )
 
 <a name="bugnotestats" id="bugnotestats" /><br />
 
-<?php 
+<?php
 	collapse_open( 'bugnotestats' );
 
 	$t_today = date( "d:m:Y" );
@@ -76,7 +76,7 @@ if ( !config_get('time_tracking_enabled') )
 ?>
 <form method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
 <input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
-<table border=0 class="width100" cellspacing="0">
+<table border="0" class="width100" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
 <?php
@@ -170,7 +170,7 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	</td>
 <?php } ?>
 </tr>
-<?php } # end for loop 
+<?php } # end for loop
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="small-caption">
@@ -194,4 +194,3 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 </table>
 <?php
 	collapse_end( 'bugnotestats' );
-?>

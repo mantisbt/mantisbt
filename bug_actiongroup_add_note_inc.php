@@ -22,20 +22,20 @@
 	 */
 
 	/**
-	 * Prints the title for the custom action page.	 
+	 * Prints the title for the custom action page.
 	 */
 	function action_add_note_print_title() {
         echo '<tr class="form-title">';
         echo '<td colspan="2">';
         echo lang_get( 'add_bugnote_title' );
-        echo '</td></tr>';		
+        echo '</td></tr>';
 	}
 
 	/**
 	 * Prints the field within the custom action form.  This has an entry for
 	 * every field the user need to supply + the submit button.  The fields are
 	 * added as rows in a table that is already created by the calling code.
-	 * A row has two columns.         	 
+	 * A row has two columns.
 	 */
 	function action_add_note_print_fields() {
 		echo '<tr class="row-1" valign="top"><td class="category">', lang_get( 'add_bugnote_title' ), '</td><td><textarea name="bugnote_text" cols="80" rows="10"></textarea></td></tr>';
@@ -66,8 +66,8 @@
 
 	/**
 	 * Validates the action on the specified bug id.
-	 * 
-	 * @returns true|array Action can be applied., ( bug_id => reason for failure )	 
+	 *
+	 * @returns true|array Action can be applied., ( bug_id => reason for failure )
 	 */
 	function action_add_note_validate( $p_bug_id ) {
 		$f_bugnote_text = gpc_get_string( 'bugnote_text' );
@@ -96,9 +96,9 @@
 
 	/**
 	 * Executes the custom action on the specified bug id.
-	 * 
+	 *
 	 * @param $p_bug_id  The bug id to execute the custom action on.
-	 * @returns true|array Action executed successfully., ( bug_id => reason for failure )               	 
+	 * @returns true|array Action executed successfully., ( bug_id => reason for failure )
 	 */
 	function action_add_note_process( $p_bug_id ) {
 		$f_bugnote_text = gpc_get_string( 'bugnote_text' );
@@ -106,4 +106,3 @@
 		bugnote_add ( $p_bug_id, $f_bugnote_text, '0:00', /* $p_private = */ $f_view_state != VS_PUBLIC  );
         return true;
     }
-?>

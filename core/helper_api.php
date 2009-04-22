@@ -76,7 +76,7 @@ function get_status_color( $p_status ) {
 function get_enum_element( $p_enum_name, $p_val ) {
 	$config_var = config_get( $p_enum_name . '_enum_string' );
 	$string_var = lang_get( $p_enum_name . '_enum_string' );
-	
+
 	return MantisEnum::getLocalizedLabel( $config_var, $string_var, $p_val );
 }
 
@@ -99,7 +99,7 @@ function check_selected( $p_var, $p_val = true ) {
 					return;
 				}
 			}
-			elseif( $t_this_var == $p_val ) {
+			else if( $t_this_var == $p_val ) {
 				echo ' selected="selected" ';
 				return;
 			}
@@ -111,7 +111,7 @@ function check_selected( $p_var, $p_val = true ) {
 				return;
 			}
 		}
-		elseif( $p_var == $p_val ) {
+		else if( $p_var == $p_val ) {
 			echo ' selected="selected" ';
 			return;
 		}
@@ -246,8 +246,7 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 		return true;
 	}
 
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 
 	# @@@ we need to improve this formatting.  I'd like the text to only
 	#  be about 50% the width of the screen so that it doesn't become to hard
@@ -268,7 +267,7 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 
 	print_hr();
 	echo "</div>\n";
-	html_page_bottom1();
+	html_page_bottom();
 	exit;
 }
 
@@ -294,24 +293,11 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 		$p_user_id = auth_get_current_user_id();
 	}
 
-	if( ALL_PROJECTS == $p_project_id ) {
-		$t_topprojects = $t_project_ids = user_get_accessible_projects( $p_user_id );
-		foreach( $t_topprojects as $t_project ) {
-			$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $p_user_id, $t_project ) );
-		}
-
-		$t_project_ids = array_unique( $t_project_ids );
-	} else {
-		access_ensure_project_level( VIEWER, $p_project_id );
-		$t_project_ids = user_get_all_accessible_subprojects( $p_user_id, $p_project_id );
-		array_unshift( $t_project_ids, $p_project_id );
-	}
-
-	$t_project_ids = array_map( 'db_prepare_int', $t_project_ids );
+	$t_project_ids = user_get_all_accessible_projects( $p_user_id, $p_project_id );
 
 	if( 0 == count( $t_project_ids ) ) {
 		$t_project_filter = ' 1<>1';
-	} elseif( 1 == count( $t_project_ids ) ) {
+	} else if( 1 == count( $t_project_ids ) ) {
 		$t_project_filter = ' project_id=' . $t_project_ids[0];
 	} else {
 		$t_project_filter = ' project_id IN (' . join( ',', $t_project_ids ) . ')';

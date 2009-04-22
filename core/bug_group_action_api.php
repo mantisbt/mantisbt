@@ -26,15 +26,14 @@
  * Print the top part for the bug action group page.
  */
 function bug_group_action_print_top() {
-	html_page_top1();
-	html_page_top2();
+	html_page_top();
 }
 
 /**
  * Print the bottom part for the bug action group page.
  */
 function bug_group_action_print_bottom() {
-	html_page_bottom1( __FILE__ );
+	html_page_bottom( __FILE__ );
 }
 
 /**
@@ -113,12 +112,12 @@ function bug_group_action_print_title( $p_action ) {
 }
 
 /**
- * Validates the combination of an action and a bug.  This ends up calling 
- * action_<action>_validate() from bug_actiongroup_<action>_inc.php	 
+ * Validates the combination of an action and a bug.  This ends up calling
+ * action_<action>_validate() from bug_actiongroup_<action>_inc.php
  *
  * @param $p_action   The custom action name without the "EXT_" prefix.
  * @param $p_bug_id   The id of the bug to validate the action on.
- * 
+ *
  * @returns true|array true if action can be applied or array of ( bug_id => reason for failure to validate )
  */
 function bug_group_action_validate( $p_action, $p_bug_id ) {

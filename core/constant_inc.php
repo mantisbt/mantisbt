@@ -25,6 +25,9 @@ define( 'AUTO', 3 );
 define( 'BAD', 0 );
 define( 'GOOD', 1 );
 
+# PHP-related constants
+define( 'PHP_CLI', 0 );
+define( 'PHP_CGI', 1 );
 
 # installation
 define( 'CONFIGURED_PASSWORD', "______" );
@@ -171,6 +174,13 @@ define( 'TAG_DETACHED', 26 );
 define( 'TAG_RENAMED', 27 );
 define( 'PLUGIN_HISTORY', 100 );
 
+# bug revisions
+define( 'REV_ANY', 0 );
+define( 'REV_DESCRIPTION', 1 );
+define( 'REV_STEPS_TO_REPRODUCE', 2 );
+define( 'REV_ADDITIONAL_INFO', 3 );
+define( 'REV_BUGNOTE', 4 );
+
 # bug relationship constants
 define( 'BUG_DUPLICATE', 0 );
 define( 'BUG_RELATED', 1 );
@@ -258,6 +268,7 @@ define( 'ERROR_NEWS_NOT_FOUND', 1000 );
 define( 'ERROR_BUG_NOT_FOUND', 1100 );
 define( 'ERROR_BUG_DUPLICATE_SELF', 1101 );
 define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 );
+define( 'ERROR_BUG_REVISION_NOT_FOUND', 1150 );
 
 // @@@ obsolete, remove after lang files are sync'd
 define( 'ERROR_BUG_READ_ONLY_ACTION_DENIED', 1103 );

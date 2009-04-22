@@ -54,7 +54,6 @@
 	$num_notes = db_num_rows($result);
 ?>
 
-<?php # Bugnotes BEGIN ?>
 <br />
 <table class="width100" cellspacing="1">
 <?php
@@ -148,4 +147,3 @@
 	} # end else
 ?>
 </table>
-<?php # Bugnotes END ?>

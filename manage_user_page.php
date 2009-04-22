@@ -39,7 +39,7 @@
 	$f_save = gpc_get_bool( 'save' );
 	$f_filter = strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
 	$f_page_number		= gpc_get_int( 'page_number', 1 );
-	
+
 	$t_user_table = db_get_table( 'mantis_user_table' );
 	$t_cookie_name = config_get( 'manage_cookie' );
 	$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" border="0" alt="' . lang_get( 'protected' ) . '" />';
@@ -48,7 +48,7 @@
 	# Clean up the form variables
 	if ( !in_array( $f_sort, db_field_names( $t_user_table ) ) ) {
         $c_sort = 'username';
-    } else {	 
+    } else {
         $c_sort = addslashes($f_sort);
     }
 
@@ -64,7 +64,7 @@
 		$c_hide = 1;
 	}
 	$t_hide_filter = '&amp;hide=' . $c_hide;
-	
+
 	# set cookie values for hide, sort by, and dir
 	if ( $f_save ) {
 		$t_manage_string = $c_hide.':'.$c_sort.':'.$c_dir;
@@ -86,15 +86,12 @@
 		}
 	}
 
-?>
-<?php html_page_top1( lang_get( 'manage_users_link' ) ) ?>
-<?php html_page_top2() ?>
+	html_page_top( lang_get( 'manage_users_link' ) );
 
-<?php print_manage_menu( 'manage_user_page.php' ) ?>
+	print_manage_menu( 'manage_user_page.php' );
 
-<?php # New Accounts Form BEGIN ?>
-<?php
-	//$g_db->debug=true;
+	# New Accounts Form BEGIN
+
 	$days_old = 7;
 	$query = "SELECT *
 		FROM $t_user_table
@@ -104,10 +101,8 @@
 	$g_db->debug=false;
 	$new_user_count = db_num_rows( $result);
 
-?>
+	# Never Logged In Form BEGIN
 
-<?php # Never Logged In Form BEGIN ?>
-<?php
 	$query = "SELECT *
 		FROM $t_user_table
 		WHERE ( login_count = 0 ) AND ( date_created = last_visit )
@@ -115,12 +110,10 @@
 	$result = db_query_bound( $query );
 	$unused_user_count = db_num_rows( $result );
 
-?>
+	# Manage Form BEGIN
 
-<?php # Manage Form BEGIN ?>
-<?php
 	$t_prefix_array = array( 'ALL' );
-	
+
 	for ( $i = 'A'; $i != 'AA'; $i++ ) {
 		$t_prefix_array[] = $i;
 	}
@@ -130,7 +123,7 @@
 	}
 	$t_prefix_array[] = lang_get( 'users_unused' );
 	$t_prefix_array[] = lang_get( 'users_new' );
-	
+
 	echo '<br /><center><table class="width75"><tr>';
 	foreach ( $t_prefix_array as $t_prefix ) {
 		if ( $t_prefix === 'ALL' ) {
@@ -145,7 +138,7 @@
 		} else {
 			$t_link = '<a href="manage_user_page.php?filter=' . $t_prefix . $t_hide_filter .'">' . $t_caption . '</a>';
 		}
-		
+
 		echo '<td>' . $t_link;
 		if ($t_prefix == 'UNUSED' ) {
 			echo '[' . $unused_user_count . ']' . '<br />' . lang_get( 'never_logged_in_title' ) . '<br />';
@@ -168,13 +161,13 @@
 		$c_prefix = db_prepare_string($f_filter);
 		$t_where = "(username like '$c_prefix%')";
 	}
-	
+
 	$p_per_page = 50;
 
 	$t_offset = ( ( $f_page_number - 1 ) * $p_per_page );
 
 	$total_user_count = 0;
-	
+
 	# Get the user data in $c_sort order
 	$result = '';
 	if ( 0 == $c_hide ) {
@@ -190,14 +183,14 @@
 				WHERE $t_where AND " . db_helper_compare_days("'" . db_now() . "'","last_visit","< '$days_old'");
 		$result = db_query_bound($query, $t_where_params);
 		$row = db_fetch_array( $result );
-		$total_user_count = $row['usercnt'];	
+		$total_user_count = $row['usercnt'];
 	}
-	
+
 	$t_page_count = ceil($total_user_count / $p_per_page);
 	if ( $t_page_count < 1 ) {
 		$t_page_count = 1;
 	}
-	
+
 	# Make sure $p_page_number isn't past the last page.
 	if ( $f_page_number > $t_page_count ) {
 		$f_page_number = $t_page_count;
@@ -208,7 +201,7 @@
 		$f_page_number = 1;
 	}
 
-	
+
 	if ( 0 == $c_hide ) {
 		$query = "SELECT *
 				FROM $t_user_table
@@ -216,16 +209,16 @@
 				ORDER BY $c_sort $c_dir";
 		$result = db_query_bound($query, $t_where_params, $p_per_page, $t_offset);
 	} else {
-		
+
 		$query = "SELECT *
 				FROM $t_user_table
-				WHERE $t_where AND " . db_helper_compare_days(0,"last_visit","< '$days_old'") . " 
+				WHERE $t_where AND " . db_helper_compare_days(0,"last_visit","< '$days_old'") . "
 				ORDER BY $c_sort $c_dir";
 		/* db_now added to where params in count query above so not added here */
 		$result = db_query_bound($query, $t_where_params, $p_per_page, $t_offset );
-	}   
+	}
 	$user_count = db_num_rows( $result );
-	
+
 ?>
 <br />
 <table class="width100" cellspacing="1">
@@ -234,7 +227,7 @@
 		<?php echo lang_get( 'manage_accounts_title' ) ?> [<?php echo $total_user_count ?>]
 		<?php print_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ) ) ?>
 	</td>
-	<td class="center" colspan="2">
+	<td class="center" colspan="3">
 		<form method="post" action="manage_user_page.php">
 		<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
 		<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
@@ -246,41 +239,57 @@
 </tr>
 <tr class="row-category">
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'username' ), 'username', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'username' ) ?>
+		<?php
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'username' ), 'username', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'username' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'realname' ), 'realname', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'realname' ) ?>
+		<?php
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'realname' ), 'realname', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'realname' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'email' ), 'email', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'email' ) ?>
+		<?php
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'email' ), 'email', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'email' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'access_level' ), 'access_level', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'access_level' ) ?>
+		<?php 
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'access_level' ), 'access_level', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'access_level' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'enabled' ), 'enabled', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'enabled' ) ?>
+		<?php
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'enabled' ), 'enabled', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'enabled' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', $t_lock_image, 'protected', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'protected' ) ?>
+		<?php 
+			print_manage_user_sort_link(  'manage_user_page.php', $t_lock_image, 'protected', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'protected' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'date_created' ), 'date_created', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'date_created' ) ?>
+		<?php 
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'date_created' ), 'date_created', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'date_created' );
+		?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'last_visit' ), 'last_visit', $c_dir, $c_sort, $c_hide, $c_filter ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'last_visit' ) ?>
+		<?php 
+			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'last_visit' ), 'last_visit', $c_dir, $c_sort, $c_hide, $c_filter );
+			print_sort_icon( $c_dir, $c_sort, 'last_visit' );
+		?>
 	</td>
 </tr>
 <?php
 	$t_date_format = config_get( 'normal_date_format' );
-	$t_access_level = Array(); 
+	$t_access_level = Array();
 	for ($i=0;$i<$user_count;$i++) {
 		# prefix user data with u_
 		$row = db_fetch_array($result);
@@ -288,7 +297,7 @@
 
 		$u_date_created  = date( $t_date_format, db_unixtimestamp( $u_date_created ) );
 		$u_last_visit    = date( $t_date_format, db_unixtimestamp( $u_last_visit ) );
-		
+
 		if( !isset( $t_access_level[$u_access_level] ) ) {
 			$t_access_level[$u_access_level] = get_enum_element( 'access_levels', $u_access_level );
 		}
@@ -315,8 +324,9 @@
 </tr>
 <?php
 	}  # end for
+	
+	# -- Page number links -- 
 ?>
-<?php # -- Page number links -- ?>
 	<tr>
 		<td class="right" colspan="8">
 			<span class="small">
@@ -338,5 +348,4 @@
 		<input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" />
 	</form>
 <?php
-	html_page_bottom1( __FILE__ );
-?>
+	html_page_bottom( __FILE__ );

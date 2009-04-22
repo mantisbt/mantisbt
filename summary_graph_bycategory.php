@@ -42,4 +42,3 @@
 	}
 
 	graph_bar( $t_metrics, lang_get( 'by_category' ), $f_width, $f_width * $t_ar );
-?>
