@@ -20,6 +20,9 @@
 
 /** Polish (Polski)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
@@ -236,6 +239,7 @@ $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Błędny katalog plików. Katal
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Żaden plik nie został przesłany. Proszę wrócić i wybrać plik przed naciśnięciem klawisza Prześlij';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Przesłany plik nie został skopiowany do Katalogu dla przesyłanych plików. Katalog nie istnieje albo serwer nie ma wystarczających praw by do niego zapisywać';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Nie można wskazać jako kopii zgłoszenia tego samego zgłoszenia.';
+$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Nie znaleziono wersji z błędem.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Pole własne nie znalezione';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ta nazwa jest już używana.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Przynajmniej jeden projekt używa jeszcze tego pola.';
@@ -542,7 +546,13 @@ $s_sticky_issue = 'Zgłoszenie przyklejone';
 $s_profile = 'Profil';
 $s_update_advanced_link = 'Edycja Zaawansowana';
 $s_updating_bug_simple_title = 'Aktualizacja informacji o zgłoszeniu';
+$s_view_revisions = 'Wyświetl wersje';
 $s_revision = 'Wersja';
+$s_revision_by = '%1$s zrobiona przez %2$s';
+$s_revision_drop = 'Odrzuć';
+$s_all_revisions = 'Wszystkie wersje';
+$s_back_to_issue = 'Powrót do zgłoszenia';
+$s_confirm_revision_drop = 'Czy na pewno chcesz odrzucić tę wersję z błędem?';
 $s_vote_added_msg = 'Głos został dodany..';
 $s_bugnote_added_msg = 'Komentarz został dodany...';
 $s_bugnote_deleted_msg = 'Komentarz został pomyślnie usunięty...';
@@ -812,6 +822,7 @@ $s_my_view_title_resolved = 'Rozwiązane';
 $s_my_view_title_monitored = 'Monitorowane przeze mnie';
 $s_my_view_title_feedback = 'Oczekuje na moją odpowiedź';
 $s_my_view_title_verify = 'Oczekuje na moje potwierdzenie rozwiązania';
+$s_my_view_title_my_comments = 'Zgłoszenia które komentowałem';
 $s_news_added_msg = 'Nowa wiadomość została dodana...';
 $s_news_deleted_msg = 'Wiadomość została usunięta...';
 $s_delete_news_sure_msg = 'Czy na pewno chcesz usunąć wiadomość?';
@@ -1128,7 +1139,7 @@ $s_see_email_addresses_of_other_users = 'Pokazuj adresy email innych użytkownik
 $s_send_reminders = 'Wysyłaj przypomnienia';
 $s_add_profiles = 'Dodawaj profile';
 $s_notify_of_new_user_created = 'Informuj o nowych użytkownikach';
-$s_email_notification = 'POWIADOMIENIA EMAIL';
+$s_email_notification = 'Powiadomienia e-mail';
 $s_status_changed_to = 'Status zmieniony na';
 $s_email_on_deleted = 'Email przy usunięciu';
 $s_email_on_sponsorship_changed = 'Email przy zmianie sponsorowania';

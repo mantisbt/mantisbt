@@ -20,6 +20,9 @@
 
 /** Brazilian Portuguese (Português do Brasil)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
@@ -814,6 +817,7 @@ $s_my_view_title_resolved = 'Resolvidos';
 $s_my_view_title_monitored = 'Monitorados por Mim';
 $s_my_view_title_feedback = 'Esperando meu Retorno';
 $s_my_view_title_verify = 'Esperando minha Confirmação de Resolução';
+$s_my_view_title_my_comments = 'Casos em que eu comentei';
 $s_news_added_msg = 'Notícia adicionada...';
 $s_news_deleted_msg = 'Notícia apagada...';
 $s_delete_news_sure_msg = 'Você tem certeza que deseja apagar esta notícia?';
@@ -1128,7 +1132,7 @@ $s_see_email_addresses_of_other_users = 'Ver endereços de e-mail de outros usu�
 $s_send_reminders = 'Enviar lembretes';
 $s_add_profiles = 'Adicionar perfís';
 $s_notify_of_new_user_created = 'Notificar criação de novo usuário';
-$s_email_notification = 'NOTIFICAÇÃO de E-MAIL';
+$s_email_notification = 'Notificação via email';
 $s_status_changed_to = 'Mudança de status para';
 $s_email_on_deleted = 'Enviar e-mail para deleção de casos';
 $s_email_on_sponsorship_changed = 'Enviar e-mail para mudança de patrocínio';

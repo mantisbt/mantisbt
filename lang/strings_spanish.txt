@@ -20,6 +20,9 @@
 
 /** Spanish (Español)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
@@ -1128,7 +1131,7 @@ $s_see_email_addresses_of_other_users = 'Ver la dirección de correo de otros us
 $s_send_reminders = 'Enviar recordatorios';
 $s_add_profiles = 'Añadir perfiles';
 $s_notify_of_new_user_created = 'Notificación de creación de nuevos usuarios';
-$s_email_notification = 'NOTIFICACIÓN POR CORREO';
+$s_email_notification = 'Notificación por correo electrónico';
 $s_status_changed_to = 'Cambio de Estado a';
 $s_email_on_deleted = 'Envío de correo al producirse eliminaciones';
 $s_email_on_sponsorship_changed = 'Enviar correo en cambios de Patrocinios';

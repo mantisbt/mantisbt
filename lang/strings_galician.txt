@@ -20,6 +20,9 @@
 
 /** Galician (Galego)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
@@ -1123,7 +1126,7 @@ $s_see_email_addresses_of_other_users = 'Consulte os enderezos de correo electr�
 $s_send_reminders = 'Enviar uns recordatorios';
 $s_add_profiles = 'Engadir os perfiles';
 $s_notify_of_new_user_created = 'Notifique a creación dun novo usuario';
-$s_email_notification = 'NOTIFICACIÓN POR CORREO ELECTRÓNICO';
+$s_email_notification = 'Notificación por correo electrónico';
 $s_status_changed_to = 'O estado cambia a';
 $s_email_on_deleted = 'Enviar un correo en caso dun problema borrado';
 $s_email_on_sponsorship_changed = 'Enviar un correo en caso de cambio de patrocinador';

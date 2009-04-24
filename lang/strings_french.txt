@@ -20,6 +20,9 @@
 
 /** French (Français)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
@@ -824,7 +827,7 @@ $s_my_view_title_resolved = 'Résolu';
 $s_my_view_title_monitored = 'Surveillé par moi';
 $s_my_view_title_feedback = 'En attente de suivi de moi';
 $s_my_view_title_verify = 'En attente d\'une confirmation de résolution de moi';
-$s_my_view_title_my_comments = 'Bogues sur lesquels j\'ai ajouté un commentaire';
+$s_my_view_title_my_comments = 'Bogues sur lesquels j’ai ajouté un commentaire';
 $s_news_added_msg = 'Nouvelle ajoutée...';
 $s_news_deleted_msg = 'Nouvelle supprimée...';
 $s_delete_news_sure_msg = 'Voulez-vous vraiment supprimer cette nouvelle ?';
@@ -1141,7 +1144,7 @@ $s_see_email_addresses_of_other_users = 'Voir les adresses de courriel des autre
 $s_send_reminders = 'Envoyer des rappels';
 $s_add_profiles = 'Ajouter des profils';
 $s_notify_of_new_user_created = 'Signaler de la création d\'un nouvel utilisateur';
-$s_email_notification = 'NOTIFICATION PAR COURRIEL';
+$s_email_notification = 'Notification pour courriel';
 $s_status_changed_to = 'Changer l\'état à ';
 $s_email_on_deleted = 'Courriel à la suppression';
 $s_email_on_sponsorship_changed = 'Courriel au changement d\'un commanditaire';

@@ -20,6 +20,9 @@
 
 /** Occitan (Occitan)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
@@ -308,7 +311,7 @@ $s_project_status_enum_string = '10:desvolopament,30:liurat,50:estable,70:obsole
 $s_project_view_state_enum_string = '10:public,50:privat';
 $s_view_state_enum_string = '10:public,50:privat';
 $s_priority_enum_string = '10:cap,20:bassa,30:normala,40:elevada,50:urgenta,60:immediata';
-$s_severity_enum_string = '10:foncionalitat,20:simple,30:tèxt,40:cosmetic,50:menor,60:màger,70:critic,80:blocant';
+$s_severity_enum_string = '10:foncionalitat,20:simple,30:tèxte,40:cosmetic,50:menor,60:màger,70:critic,80:blocant';
 $s_reproducibility_enum_string = '10:totjorn,30:de còps,50:aleatòri,70:a pas ensajat,90:impossible de reproduire,100:S/O';
 $s_status_enum_string = '10:novèl,20:comentari,30:acceptat,40:confirmat,50:afectat,80:resolgut,90:tampat';
 $s_resolution_enum_string = '10:dobert,20:resolgut,30:dobert tornamai,40:impossible de reproduire,50:impossible de corregir,60:doblon,70:pas un bòg,80:suspendut,90:serà pas resolgut';
@@ -939,7 +942,7 @@ $s_prev = 'Precedent';
 $s_next = 'Seguent';
 $s_first = 'Primièr';
 $s_last = 'Darrièr';
-$s_start_date = 'Data de debuta';
+$s_start_date = 'Data de començament';
 $s_end_date = 'Data de fin';
 $s_use_date_filters = 'Utilizar los filtres de data';
 $s_yes = 'Òc';
@@ -1124,7 +1127,7 @@ $s_see_email_addresses_of_other_users = 'Veire las adreças de corrièr dels aut
 $s_send_reminders = 'Mandar de rampèls';
 $s_add_profiles = 'Apondre de perfils';
 $s_notify_of_new_user_created = 'Senhalar la creacion d\'un utilizaire novèl';
-$s_email_notification = 'NOTIFICACION PER CORRIÈR ELECTRONIC';
+$s_email_notification = 'Notificacion per corrièr electronic';
 $s_status_changed_to = 'Cambiar l\'estat a';
 $s_email_on_deleted = 'Corrièr electronic a la supression';
 $s_email_on_sponsorship_changed = 'Corrièr electronic al cambiament d\'un comanditari';

@@ -20,6 +20,9 @@
 
 /** Arabic (العربية)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
@@ -228,6 +231,7 @@ $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'مسار رفع غير صحيح
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'لا ملف تم رفعه. من فضلك عد واختر ملفا قبل ضغط رفع.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'الملف المرفوع لم يمكن نقله إلى مجلد تخزين الملفات.  المجلد إما أنه غير موجود أو غير قابل للكتابة عليه من خادم الويب.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'لا يمكنك ضبط قضية كتكرار لنفسها.';
+$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'مراجعة العلة لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'الحقل المخصص لم يتم العثور عليه';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'هذا اسم مكرر.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'على الأقل مشروع واحد مازال يستخدم هذا الحقل.';
@@ -536,7 +540,11 @@ $s_update_advanced_link = 'تحديث متقدم';
 $s_updating_bug_simple_title = 'تحديث معلومات القضية';
 $s_view_revisions = 'رؤية المراجعات';
 $s_revision = 'المراجعة';
+$s_revision_by = '%1$s بواسطة %2$s';
+$s_revision_drop = 'إسقاط';
 $s_all_revisions = 'كل المراجعات';
+$s_back_to_issue = 'رجوع إلى القضية';
+$s_confirm_revision_drop = 'هل أنت متأكد أنك تريد إسقاط مراجعة العلة هذه؟';
 $s_vote_added_msg = 'التصويت تمت إضافته...';
 $s_bugnote_added_msg = 'الملاحظة تمت إضافتها...';
 $s_bugnote_deleted_msg = 'الملاحظة تم حذفها بنجاح...';
@@ -662,6 +670,7 @@ $s_access_change = 'أقل مستوى صلاحية للتغيير إلى هذه 
 $s_desc_bug_submit_status = 'الحالة التي يتم ضبط قضية جديدة عليها';
 $s_desc_bug_reopen_status = 'الحالة التي يتم ضبط القضايا المفتوحة عليها';
 $s_desc_bug_resolved_status_threshold = 'الحالة حيث يتم اعتبار قضية ما محلولة';
+$s_desc_bug_closed_status_threshold = 'الحالة حيث قضية ما تعتبر مغلقة';
 $s_workflow_change_access = 'من يمكنه تغيير معدل العمل';
 $s_access_change_access = 'من يمكنه تغيير مستويات الصلاحية';
 $s_default_not_in_flow = 'الحالة الافتراضية ل%1$s لم يتم اختيارها في الحالات القادمة ل%2$s. سيتم تجاهلها.';
@@ -805,6 +814,7 @@ $s_my_view_title_resolved = 'تم الحل';
 $s_my_view_title_monitored = 'مراقبة بواسطتي';
 $s_my_view_title_feedback = 'بانتظار الردود مني';
 $s_my_view_title_verify = 'بانتظار تأكيد الحل مني';
+$s_my_view_title_my_comments = 'القضايا التي علقت عليها';
 $s_news_added_msg = 'مدخلة الأخبار تمت إضافتها...';
 $s_news_deleted_msg = 'تم حذف مدخلة الأخبار...';
 $s_delete_news_sure_msg = 'هل أنت متأكد أنك تريد حذف مدخلة الأخبار هذه؟';
@@ -949,12 +959,13 @@ $s_query_deleted = 'الفلتر تم حذفه';
 $s_save_query = 'حفظ الفلتر الحالي';
 $s_reset_query = 'إعادة ضبط الفلتر';
 $s_query_name = 'اسم الفلتر';
-$s_query_exists = 'هذا الاستعلام بالذات يبدو أنه موجود بالفعل.';
-$s_query_dupe_name = 'يوجد استعلام آخر بهذا الاسم بالفعل. من فضلك اختر اسما مختلفا لهذا الاستعلام.';
+$s_query_exists = 'هذا المرشح بالذات يبدو أنه موجود بالفعل.';
+$s_query_dupe_name = 'يوجد مرشح آخر بهذا الاسم بالفعل. من فضلك اختر اسما مختلفا لهذا المرشح.';
 $s_query_blank_name = 'أنت لا يمكنك تخزين فلتر بدون اسم. من فضلك أعط هذا الفلتر اسما قبل حفظه.';
-$s_query_store_error = 'كان هناك خطأ أثناء حفظ هذا الاستعلام.';
+$s_query_name_too_long = 'لا يمكنك تخزين اسم مرشح بأكثر من 64 حرف. من فضلك أعط هذا المرشح اسما أقصر.';
+$s_query_store_error = 'كان هناك خطأ أثناء حفظ هذا المرشح.';
 $s_open_queries = 'التحكم بالفلاتر';
-$s_query_delete_msg = 'هل أنت متأكد أنك تريد حذف هذا الاستعلام؟';
+$s_query_delete_msg = 'هل أنت متأكد أنك تريد حذف هذا المرشح؟';
 $s_view_simple_link = 'عرض بسيط';
 $s_viewing_bug_advanced_details_title = 'عرض تفاصيل القضية المتقدمة';
 $s_product_build = 'نسخة المنتج';

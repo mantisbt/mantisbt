@@ -20,6 +20,9 @@
 
 /** Greek (Ελληνικά)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
@@ -106,6 +109,7 @@ $s_create_new_project_link = 'Δημιουργία Νέας Εφαρμογής';
 $s_login_link = 'Σύνδεση';
 $s_synthesis_link = 'Σύνθεση';
 $s_priority_link = 'Κατά προτεραιότητα';
+$s_legend_total = 'Σύνολο';
 $s_legend_opened = 'Ανοιγμένος';
 $s_legend_closed = 'Κλειστός';
 $s_hide_button = 'Προβολή επιλεγμένων μόνο';
@@ -157,6 +161,7 @@ $s_new_account_do_not_reply = 'ΜΗΝ ΑΠΑΝΤΗΣΕΤΕ ΣΕ ΑΥΤΟ ΤΟ Μ
 $s_reset_request_in_progress_msg = 'Στην περίπτωση που συμπληρώσατε σωστά το όνομα και την email διεύθυνση του λογαριασμού σας, θα σας στείλουμε ένα μήνυμα επιβεβαίωσης. Μόλις λάβετε το μήνυμα, παρακαλούμε ακολουθήστε πιστά τις οδηγίες που περιέχει ώστε να είναι δυνατή η αλλαγή του κωδικού σας.';
 $s_email_project = 'Εφαρμογή';
 $s_email_category = 'Κατηγορία';
+$s_email_priority = 'Προτεραιότητα';
 $s_email_summary = 'Περίληψη';
 $s_account_protected_msg = 'Ο λογαριασμός είναι προστατευμένος. Δεν γίνονται αλλαγές...';
 $s_account_removed_msg = 'Ο λογαριασμός σας διαγράφηκε...';
@@ -477,6 +482,7 @@ $s_changelog_link = 'Άρχειο αλλαγών';
 $s_roadmap_link = 'Ιστορικό';
 $s_summary_link = 'Περίληψη';
 $s_account_link = 'Ο λογαριασμός μου';
+$s_users_link = 'Χρήστες';
 $s_manage_link = 'Διαχείριση';
 $s_edit_news_link = 'Επεξεργασία ανακοινώσεων';
 $s_docs_link = 'Έγγραφα';
@@ -732,7 +738,7 @@ $s_see_email_addresses_of_other_users = 'Προβολή email διευθύνσε
 $s_send_reminders = 'Αποστολή υπενθυμίσεων';
 $s_add_profiles = 'Προσθήκη προφίλ';
 $s_notify_of_new_user_created = 'Ενημέρωση στην δημιουργία νέου χρήστη';
-$s_email_notification = 'EMAIL ΕΙΔΟΠΟΙΗΣΗ';
+$s_email_notification = 'Eιδοποίηση μέσω e-mail';
 $s_status_changed_to = 'Αλλαγή κατάστασης σε';
 $s_email_on_deleted = 'Email στα Διαγραμμένα';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';

@@ -20,6 +20,9 @@
 
 /** Hebrew (עברית)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
@@ -27,6 +30,7 @@
  * @author Eyal Zvi, eyal@bikoret-bona.com
  * @author Orentet
  * @author Rotemliss
+ * @author YaronSh
  */
 
 $s_charset = 'utf-8';
@@ -1119,7 +1123,7 @@ $s_see_email_addresses_of_other_users = 'הצגת כתובות דוא"ל של מ
 $s_send_reminders = 'שליחת תזכורות';
 $s_add_profiles = 'הוספת פרופילים';
 $s_notify_of_new_user_created = 'פתיחת חשבון חדש';
-$s_email_notification = 'התראות דוא"ל';
+$s_email_notification = 'התרעת דוא"ל';
 $s_status_changed_to = 'שינוי סטטוס ל-';
 $s_email_on_deleted = 'מחיקה';
 $s_email_on_sponsorship_changed = 'כתובת דוא"ל בחסות שונתה';

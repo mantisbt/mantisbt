@@ -20,6 +20,9 @@
 
 /** Dutch (Nederlands)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
@@ -1133,7 +1136,7 @@ $s_see_email_addresses_of_other_users = 'E-mailadressen van andere gebruikers zi
 $s_send_reminders = 'Herinneringen verzenden';
 $s_add_profiles = 'Profielen toevoegen';
 $s_notify_of_new_user_created = 'Melding bij aanmaken nieuwe gebruiker';
-$s_email_notification = 'E-MAIL MELDINGEN';
+$s_email_notification = 'E-mailmeldingen';
 $s_status_changed_to = 'Status wijzigen naar';
 $s_email_on_deleted = 'E-mail bij verwijderen';
 $s_email_on_sponsorship_changed = 'E-mail bij wijziging sponsoring';
