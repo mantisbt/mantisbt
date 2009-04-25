@@ -916,7 +916,7 @@ function print_status_option_list( $p_select_label, $p_current_value = 0, $p_all
 		}
 		echo '</select>';
 	} else {
-		echo MantisEnum::getLabel( 'status_enum_string', $p_current_value );
+		echo MantisEnum::getLabel( lang_get( 'status_enum_string' ), $p_current_value );
 	}
 }
 
