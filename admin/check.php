@@ -274,41 +274,12 @@ else {
 <?php
 # Windows-only checks
 if( substr( php_uname(), 0, 7 ) == 'Windows' ) {
-	?>
-<!-- Email Validation -->
-<tr>
-	<td bgcolor="#ffffff">
-		Is validate_email set to OFF?
-	</td>
-	<?php
-		if( ON != config_get_global( 'validate_email' ) ) {
-		print_test_result( GOOD );
-	} else {
-		print_test_result( BAD );
-	}
-	?>
-</tr>
-
-<!-- MX Record Checking -->
-<tr>
-	<td bgcolor="#ffffff">
-		Is check_mx_record set to OFF?
-	</td>
-	<?php
-		if( ON != config_get_global( 'check_mx_record' ) ) {
-		print_test_result( GOOD );
-	} else {
-		print_test_result( BAD );
-	}
-	?>
-</tr>
-<?php
+	print_test_row( 'validate_email requires php 5.3 on windows...',
+		ON == config_get_global( 'validate_email' ) && version_compare( phpversion(), '5.3.0', '>=' ) );
+	print_test_row( 'check_mx_record requires php 5.3 on windows...',
+		ON == config_get_global( 'check_mx_record' ) && version_compare( phpversion(), '5.3.0', '>=' ) );
 }
 
-# windows-only check?>
-
-<!-- PHP Setup check -->
-<?php
 $t_vars = array(
 	'magic_quotes_gpc',
 	'gpc_order',
