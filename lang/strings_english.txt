@@ -1579,3 +1579,10 @@ $s_manage_user = 'Manage User';
 
 # separators
 $s_word_separator = '&#32;';
+
+
+# admin pages
+$s_install_information = 'MantisBT Installation Information';
+$s_database_information = 'MantisBT Database Information';
+$s_path_information = 'MantisBT Path Information';
+

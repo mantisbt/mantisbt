@@ -33,6 +33,8 @@ if( function_exists( 'xdebug_disable' ) ) {
 	xdebug_disable();
 }
 
+html_page_top();
+
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'constant_inc.php' );
 
 if( !defined( 'T_ML_COMMENT' ) ) {
@@ -248,6 +250,9 @@ function checktoken( $file ) {
 					$expectendarr = true;
 					break;
 				case T_CONSTANT_ENCAPSED_STRING:
+					if ( $token[1][0] != '\'' ) {
+							print_error( "ERROR: Language strings should be single-quoted (line $line)" );						
+					}
 					if( $last_token == T_VARIABLE && $set_variable && $current_var != null ) {
 						if( isset( $variables[$current_var] ) ) {
 							print_error( "ERROR: duplicate language string ($current_var ) (line $line)" );
@@ -282,3 +287,5 @@ function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 function print_error( $p_string ) {
 	echo "<font color='red'>ERROR: ", $p_string, '</font><br>';
 }
+
+html_page_bottom( __FILE__ );

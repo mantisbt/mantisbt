@@ -24,40 +24,57 @@
  * MantisBT Core API's
  */
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once( 'schema.php' );
 
 access_ensure_global_level( ADMINISTRATOR );
+
+html_page_top( 'MantisBT Administration' );
+
+function print_info_row( $p_description, $p_value ) {
+	echo '<tr ' . helper_alternate_class() . '>';
+	echo '<td class="category">' . $p_description . '</td>';
+	echo '<td>' . $p_value . '</td>';
+	echo '</tr>';
+}
+
 ?>
-<html>
-<head>
-<title> MantisBT Administration </title>
-<link rel="stylesheet" type="text/css" href="admin.css" />
-</head>
-<body>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
-	<tr class="top-bar">
-		<td class="links">
-			&nbsp;
-		</td>
-		<td class="title">
-			&nbsp;
-		</td>
-	</tr>
-</table>
-<br /><br />
+<br />
+
 <div align="center">
-	<table width="75%"><tr><td align="center">
-	<h1>MantisBT Administration</h1>
-	<p>Note: be sure to secure this area or remove it from your MantisBT installation when you are done.  Leaving the administration area unprotected after installation leaves system information and database update capabilities open to any unauthorized person.</p>
-	<p>[ <a href="check.php">Check your installation</a> ]</p>
-	<p>[ <a href="upgrade_warning.php">Upgrade your installation</a> ]</p>
-	<p>[ <a href="system_utils.php">System Utilities</a> ]</p>
-	</td></tr></table>
-	<h2>advanced tools</h2>
-	<table width="75%"><tr><td align="center">
+		<p>[ <a href="check.php">Check your installation</a> ]</p>
+	<?php if ( count($upgrade) - 1 != config_get( 'database_version' ) ) { ?>
+		<p>[ <a href="upgrade_warning.php"><b>Upgrade your installation</b></a> ]</p>
+	<?php } ?>
+		<p>[ <a href="system_utils.php">System Utilities</a> ]</p>
 		<p>[ <a href="test_icons.php">Test Icons</a> ]</p>
 		<p>[ <a href="test_langs.php">Test Langs</a> ]</p>
-
-	</td></tr></table>
+		<p>[ <a href="test_email.php">Test Email</a> ]</p>
+		<p>[ <a href="email_queue.php">Email Queue</a> ]</p>
 </div>
-</body>
-</html>
+
+<table class="width75" align="center" cellspacing="1">
+<tr>
+<td class="form-title" width="30%" colspan="2"><?php echo lang_get( 'install_information' ) ?></td>
+</tr>
+<?php 
+	print_info_row( lang_get( 'mantis_version' ), MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ) );
+	print_info_row( 'php_version', phpversion());
+?>
+<tr>
+<td class="form-title" width="30%" colspan="2"><?php echo lang_get( 'database_information' ) ?></td>
+</tr>
+<?php 
+	print_info_row( lang_get( 'schema_version' ), config_get( 'database_version' ) );
+	print_info_row( 'adodb_version', $g_db->Version() );
+?>
+<tr>
+<td class="form-title" width="30%" colspan="2"><?php echo lang_get( 'path_information' ) ?></td>
+</tr>
+<?php 
+	print_info_row( lang_get( 'site_path' ), config_get( 'absolute_path' ) );
+	print_info_row( lang_get( 'core_path' ), config_get( 'core_path' ) );
+	print_info_row( lang_get( 'plugin_path' ), config_get( 'plugin_path' ) );
+?>
+</table>
+<?php
+	html_page_bottom( __FILE__ );

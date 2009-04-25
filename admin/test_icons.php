@@ -29,6 +29,8 @@ access_ensure_global_level( ADMINISTRATOR );
 
 $t_core_path = config_get( 'core_path' );
 
+html_page_top();
+
 foreach( $g_file_type_icons as $t_ext => $t_filename ) {
 	$t_file_path = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileicons' . DIRECTORY_SEPARATOR . $t_filename;
 
@@ -43,3 +45,5 @@ foreach( $g_file_type_icons as $t_ext => $t_filename ) {
 
 	echo '<br />';
 }
+
+html_page_bottom( __FILE__ );

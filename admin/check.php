@@ -35,7 +35,6 @@ $t_core_path = config_get_global( 'core_path' );
 require_once( $t_core_path . 'email_api.php' );
 require_once( $t_core_path . 'database_api.php' );
 
-$f_mail_test = gpc_get_bool( 'mail_test' );
 $f_password = gpc_get_string( 'password', null );
 
 define( 'BAD', 0 );
@@ -173,37 +172,19 @@ function check_zend_optimiser_version() {
 	return $t_pass;
 }
 
-$version = phpversion();
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-<title> MantisBT Administration - Check Installation </title>
-<link rel="stylesheet" type="text/css" href="admin.css" />
-</head>
-<body>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
-	<tr class="top-bar">
-		<td class="links">
-			[ <a href="index.php">Back to Administration</a> ]
-		</td>
-		<td class="title">
-			Check Installation
-		</td>
-	</tr>
-</table>
-<br /><br />
+	$version = phpversion();
 
-<?php
 	require_once( $t_core_path . 'obsolete.php' );
-?>
 
-<table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+	html_page_top( 'MantisBT Administration - Check Installation' );
+
+?>
+<table class="width75" align="center" cellspacing="1">
 <tr>
-	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checking your installation</span>
-	</td>
+<td class="form-title" width="30%" colspan="2"><?php echo 'Checking your installation' ?></td>
 </tr>
+
+
 
 
 <!-- Test PHP Version -->
@@ -241,14 +222,6 @@ else {
 <!-- Test DATABASE part 2 -->
 <?php if( db_is_connected() ) {
 	$t_serverinfo = $g_db->ServerInfo()?>
-<tr>
-	<td bgcolor="#ffffff">
-		Adodb Version
-	</td>
-	<td bgcolor="#ffffff">
-			<?php echo $g_db->Version() ?>
-	</td>
-</tr>
 <tr>
 	<td bgcolor="#ffffff">
 		Database Type (adodb)
@@ -416,6 +389,8 @@ if( ON == config_get_global( 'use_jpgraph' ) ) {
 
 print_test_row( 'Checking if ctype is enabled in php (required for rss feeds)....', extension_loaded('ctype') );
 
+print_test_row( 'Checking for mysql is at least version 4.1...', !(db_is_mysql() && version_compare( $t_serverinfo['version'], '4.1.0', '<' ) ) );
+print_test_row( 'Checking for broken mysql version ( bug 10250)...', !(db_is_mysql() && $t_serverinfo['version'] == '4.1.21') );
 
 ?>
 </table>
@@ -528,69 +503,5 @@ print_test_row( 'Checking if ctype is enabled in php (required for rss feeds)...
 </tr>
 </table>
 <br />
-
-<!-- Email testing -->
-<a name="email" id="email" />
-<table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
-<tr>
-	<td bgcolor="#f4f4f4">
-		<span class="title">Testing Email</span>
-		<p>You can test the ability for MantisBT to send email notifications with this form.  Just click "Send Mail".  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings (see PHPMailer related settings in your config_inc.php, if they don't exist, copy from config_defaults_inc.php).  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a> if you are using the mail() PHPMailer sending mode.</p>
-		<?php
-		if( $f_mail_test ) {
-			echo '<b><font color="#ff0000">Testing Mail</font></b> - ';
-
-			# @@@ thraxisp - workaround to ensure a language is set without authenticating
-			#  will disappear when this is properly localized
-			lang_push( 'english' );
-
-			$t_email_data = new EmailData;
-			$t_email_data->email = config_get_global( 'administrator_email' );
-			$t_email_data->subject = 'Testing PHP mail() function';
-			$t_email_data->body = 'Your PHP mail settings appear to be correctly set.';
-			$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
-			$t_email_data->metadata['charset'] = lang_get( 'charset', lang_get_current() );
-			$result = email_send( $t_email_data );
-
-			# $result = email_send( config_get_global( 'administrator_email' ), 'Testing PHP mail() function',	'Your PHP mail settings appear to be correctly set.');
-
-			if( !$result ) {
-				echo ' PROBLEMS SENDING MAIL TO: ' . config_get_global( 'administrator_email' ) . '. Please check your php/mail server settings.<br />';
-			} else {
-				echo ' mail() send successful.<br />';
-			}
-		}
-?>
-		<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>#email">
-		Email Address: <?php echo config_get_global( 'administrator_email' );?><br />
-		<input type="submit" value="Send Mail" name="mail_test" />
-		</form>
-	</td>
-</tr>
-</table>
-<br />
-
-<!-- CRYPT CHECKS -->
-<a name="crypt" id="crypt" />
-<table width="100%" bgcolor="#aa0000" border="0" cellpadding="20" cellspacing="1">
-<tr>
-	<td bgcolor="#fff0f0">
-		<span class="title">Which types of Crypt() does your installation support:</span>
-		<p>
-		Standard DES:
-		<?php print_yes_no( CRYPT_STD_DES )?>
-		<br />
-		Extended DES:
-		<?php print_yes_no( CRYPT_EXT_DES )?>
-		<br />
-		MD5:
-		<?php print_yes_no( CRYPT_MD5 )?>
-		<br />
-		Blowfish:
-		<?php print_yes_no( CRYPT_BLOWFISH )?>
-		</p>
-	</td>
-</tr>
-</table>
 </body>
 </html>

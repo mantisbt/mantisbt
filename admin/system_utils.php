@@ -28,15 +28,9 @@ require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' 
 
 access_ensure_global_level( ADMINISTRATOR );
 
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-<title>MantisBT Administration - System Utilities</title>
-<link rel="stylesheet" type="text/css" href="admin.css" />
-</head>
-<body>
+html_page_top( 'MantisBT Administration - System Utilities' );
 
+?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
 	<tr class="top-bar">
 		<td class="links">
@@ -100,5 +94,5 @@ foreach( $t_dest_ids as $t_id ) {
 	</center></td></tr>
 
 </table>
-</body>
-</html>
+<?
+	html_page_bottom( __FILE__ );
