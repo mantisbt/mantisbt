@@ -417,15 +417,21 @@ function string_insert_hrefs( $p_string ) {
 
 	# Find any URL in a string and replace it by a clickable link
 	if ( is_null( $s_url_regex ) ) {
-		$t_url_chars = '(?:%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#\(\),\[\][:alnum:]])';
-		$t_url_chars2 = '(?:%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#,[:alnum:]])';
-		$t_url_chars_in_brackets = '(?:%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#\(\),[:alnum:]])';
-		$t_url_chars_in_parens = '(?:%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#\[\],[:alnum:]])';
+		# %2A notation in url's
+		$t_url_hex = '%[[:digit:]A-Fa-f]{2}';
+	
+		# valid set of characters that may occur in url scheme. Note: - should be first (A-F != -AF).
+		$t_url_valid_chars = '-_.,!~*\';\/?%^\\\\:@&={\|}+$#[:alnum:]\pL';
+	
+		$t_url_chars = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)\[\]])";
+		$t_url_chars2 = "(?:${t_url_hex}|[${t_url_valid_chars}])";
+		$t_url_chars_in_brackets = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)])";
+		$t_url_chars_in_parens    = "(?:${t_url_hex}|[${t_url_valid_chars}\[\]])";
 
 		$t_url_part1 = "${t_url_chars}";
 		$t_url_part2 = "(?:\(${t_url_chars_in_parens}*\)|\[${t_url_chars_in_brackets}*\]|${t_url_chars2})";
 
-		$s_url_regex = "/(([[:alpha:]][-+.[:alnum:]]*):\/\/(${t_url_part1}*?${t_url_part2}+))/se";
+		$s_url_regex = "/(([[:alpha:]][-+.[:alnum:]]*):\/\/(${t_url_part1}*?${t_url_part2}+))/sue";
 	}
 
 	$p_string = preg_replace( $s_url_regex, "'<a href=\"'.rtrim('\\1','.').'\">\\1</a> [<a href=\"'.rtrim('\\1','.').'\" target=\"_blank\">^</a>]'", $p_string );
