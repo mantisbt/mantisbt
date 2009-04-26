@@ -37,8 +37,11 @@ $g_projax = new Projax();
 # class, size, maxlength, value, and tabindex.
 function projax_autocomplete( $p_entrypoint, $p_field_name, $p_attributes_array = null ) {
 	global $g_projax;
+	static $s_projax_style_done = false;
+
 	if ( ON == config_get( 'use_javascript' ) ) {
-		echo $g_projax->text_field_with_auto_complete( $p_field_name, $p_attributes_array, array( 'url' => 'xmlhttprequest.php?entrypoint=' . $p_entrypoint ) );
+		echo $g_projax->text_field_with_auto_complete( $p_field_name, $p_attributes_array, $s_projax_style_done ? array( 'url' => 'xmlhttprequest.php?entrypoint=' . $p_entrypoint, 'skip_style' => '1' ) : array( 'url' => 'xmlhttprequest.php?entrypoint=' . $p_entrypoint ) );
+		$s_projax_style_done = true;
 	} else {
 		$t_tabindex = isset( $p_attributes_array['tabindex'] ) ? ( ' tabindex="' . $p_attributes_array['tabindex'] . '"' ) : '';
 		$t_maxlength = isset( $p_attributes_array['maxlength'] ) ?( ' maxlength="' . $p_attributes_array['maxlength'] . '"' ) : '';
