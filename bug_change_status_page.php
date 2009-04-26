@@ -173,7 +173,7 @@ if ( ( $t_resolved > $f_new_status ) &&
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'due_date' ) ?> <?php print_documentation_link( 'due_date' ) ?>
+		<?php print_documentation_link( 'due_date' ) ?>
 	</td>
 	<td>
 	<?php

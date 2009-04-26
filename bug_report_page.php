@@ -119,101 +119,71 @@
 <form name="report_bug_form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
 <?php echo form_security_field( 'bug_report' ) ?>
 <table class="width90" cellspacing="1">
-
-
-<!-- Title -->
-<tr>
-	<td class="form-title">
-		<input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
-		<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
-		<input type="hidden" name="handler_id" value="0" />
-		<?php echo lang_get( 'enter_report_details_title' ) ?>
-	</td>
-	<td class="right">
-		<?php
-			if ( BOTH == config_get( 'show_report' ) ) {
-				print_bracket_link( 'bug_report_advanced_page.php' .
-					( $f_master_bug_id > 0 ? '?m_id=' . $f_master_bug_id : '' ), lang_get( 'advanced_report_link' ) );
-			}
-		?>
-	</td>
-</tr>
-
-<?php event_signal( 'EVENT_REPORT_BUG_FORM_TOP', array( $t_project_id, false ) ); ?>
-
-<!-- Category -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category" width="30%">
-		<?php echo config_get( 'allow_no_category' ) ? '' : '<span class="required">*</span>', lang_get( 'category' ) ?> <?php print_documentation_link( 'category' ) ?>
-	</td>
-	<td width="70%">
-		<?php if ( $t_changed_project ) {
-			echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
-		} ?>
-		<select <?php echo helper_get_tab_index() ?> name="category_id">
+	<tr>
+		<td class="form-title">
+			<input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
+			<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
+			<input type="hidden" name="handler_id" value="0" />
+			<?php echo lang_get( 'enter_report_details_title' ) ?>
+		</td>
+		<td class="right">
 			<?php
-				print_category_option_list( $f_category_id );
+				if ( BOTH == config_get( 'show_report' ) ) {
+					print_bracket_link( 'bug_report_advanced_page.php' .
+						( $f_master_bug_id > 0 ? '?m_id=' . $f_master_bug_id : '' ), lang_get( 'advanced_report_link' ) );
+				}
 			?>
-		</select>
-	</td>
-</tr>
-
-
-<!-- Reproducibility -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php 
-			echo lang_get( 'reproducibility' );
-			print_documentation_link( 'reproducibility' );
-		?>
-	</td>
-	<td>
-		<select <?php echo helper_get_tab_index() ?> name="reproducibility">
-			<?php print_enum_string_option_list( 'reproducibility', $f_reproducibility ) ?>
-		</select>
-	</td>
-</tr>
-
-
-<!-- Severity -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php 
-			echo lang_get( 'severity' );
-			print_documentation_link( 'severity' );
-		?>
-	</td>
-	<td>
-		<select <?php echo helper_get_tab_index() ?> name="severity">
-			<?php print_enum_string_option_list( 'severity', $f_severity ) ?>
-		</select>
-	</td>
-</tr>
-
-
-<!-- Priority (if permissions allow) -->
+		</td>
+	</tr>
+	<?php event_signal( 'EVENT_REPORT_BUG_FORM_TOP', array( $t_project_id, false ) ); ?>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category" width="30%">
+			<?php echo config_get( 'allow_no_category' ) ? '' : '<span class="required">*</span>'; print_documentation_link( 'category' ) ?>
+		</td>
+		<td width="70%">
+			<?php if ( $t_changed_project ) {
+				echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
+			} ?>
+			<select <?php echo helper_get_tab_index() ?> name="category_id">
+				<?php print_category_option_list( $f_category_id ); ?>
+			</select>
+		</td>
+	</tr>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<?php print_documentation_link( 'reproducibility' ); ?>
+		</td>
+		<td>
+			<select <?php echo helper_get_tab_index() ?> name="reproducibility">
+				<?php print_enum_string_option_list( 'reproducibility', $f_reproducibility ) ?>
+			</select>
+		</td>
+	</tr>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<?php print_documentation_link( 'severity' ); ?>
+		</td>
+		<td>
+			<select <?php echo helper_get_tab_index() ?> name="severity">
+				<?php print_enum_string_option_list( 'severity', $f_severity ) ?>
+			</select>
+		</td>
+	</tr>
 <?php if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) { ?>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php 
-			echo lang_get( 'priority' );
-			print_documentation_link( 'priority' );
-		?>
-	</td>
-	<td>
-		<select <?php echo helper_get_tab_index() ?> name="priority">
-			<?php print_enum_string_option_list( 'priority', $f_priority ) ?>
-		</select>
-	</td>
-</tr>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<?php print_documentation_link( 'priority' ); ?>
+		</td>
+		<td>
+			<select <?php echo helper_get_tab_index() ?> name="priority">
+				<?php print_enum_string_option_list( 'priority', $f_priority ) ?>
+			</select>
+		</td>
+	</tr>
 <?php } ?>
-
-
-<!-- spacer -->
-<tr class="spacer">
-	<td colspan="2"></td>
-</tr>
-
+	<tr class="spacer">
+		<td colspan="2"></td>
+	</tr>
 <?php
 	$t_show_version = ( ON == config_get( 'show_product_version' ) )
 			|| ( ( AUTO == config_get( 'show_product_version' ) )
@@ -225,64 +195,51 @@
 			$t_product_version_released_mask = VERSION_ALL;
 		}
 ?>
-<!-- Product Version -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'product_version' ) ?>
-	</td>
-	<td>
-		<select <?php echo helper_get_tab_index() ?> name="product_version">
-                       <?php print_version_option_list( $f_product_version, $t_project_id, $t_product_version_released_mask ); ?>
-		</select>
-	</td>
-</tr>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<?php echo lang_get( 'product_version' ) ?>
+		</td>
+		<td>
+			<select <?php echo helper_get_tab_index() ?> name="product_version">
+	                       <?php print_version_option_list( $f_product_version, $t_project_id, $t_product_version_released_mask ); ?>
+			</select>
+		</td>
+	</tr>
 <?php
 	}
+
+	event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id, false ) );
 ?>
-
-<?php event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id, false ) ); ?>
-
-<!-- spacer -->
-<tr class="spacer">
-	<td colspan="2"></td>
-</tr>
-
-<!-- Summary -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<span class="required">*</span><?php echo lang_get( 'summary' ) ?> <?php print_documentation_link( 'summary' ) ?>
-	</td>
-	<td>
-		<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo $f_summary ?>" />
-	</td>
-</tr>
-
-<!-- Description -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<span class="required">*</span><?php echo lang_get( 'description' ) ?> <?php print_documentation_link( 'description' ) ?>
-	</td>
-	<td>
-		<textarea <?php echo helper_get_tab_index() ?> name="description" cols="80" rows="10"><?php echo $f_description ?></textarea>
-	</td>
-</tr>
-
-<!-- Additional information -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'additional_information' ) ?> <?php print_documentation_link( 'additional_information' ) ?>
-	</td>
-	<td>
-		<textarea <?php echo helper_get_tab_index() ?> name="additional_info" cols="80" rows="10"><?php echo $f_additional_info ?></textarea>
-	</td>
-</tr>
-
-<!-- spacer -->
-<tr class="spacer">
-	<td colspan="2"></td>
-</tr>
-
-<!-- Custom Fields -->
+	<tr class="spacer">
+		<td colspan="2"></td>
+	</tr>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<span class="required">*</span><?php echo lang_get( 'summary' ) ?> <?php print_documentation_link( 'summary' ) ?>
+		</td>
+		<td>
+			<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo $f_summary ?>" />
+		</td>
+	</tr>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<span class="required">*</span><?php print_documentation_link( 'description' ) ?>
+		</td>
+		<td>
+			<textarea <?php echo helper_get_tab_index() ?> name="description" cols="80" rows="10"><?php echo $f_description ?></textarea>
+		</td>
+	</tr>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<?php print_documentation_link( 'additional_information' ) ?>
+		</td>
+		<td>
+			<textarea <?php echo helper_get_tab_index() ?> name="additional_info" cols="80" rows="10"><?php echo $f_additional_info ?></textarea>
+		</td>
+	</tr>
+	<tr class="spacer">
+		<td colspan="2"></td>
+	</tr>
 <?php
 	$t_custom_fields_found = false;
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
@@ -291,120 +248,104 @@
 		if( ( ( $t_def['display_report'] && !$t_def['advanced'] ) || $t_def['require_report']) && custom_field_has_write_access_to_project( $t_id, $t_project_id ) ) {
 			$t_custom_fields_found = true;
 ?>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php if( $t_def['require_report'] ) { ?>
-			<span class="required">*</span>
-		<?php 
-			}
-			echo string_display( lang_get_defaulted( $t_def['name'] ) );
-		?>
-	</td>
-	<td>
-		<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>
-	</td>
-</tr>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<?php if( $t_def['require_report'] ) { ?>
+				<span class="required">*</span>
+			<?php 
+				}
+				echo string_display( lang_get_defaulted( $t_def['name'] ) );
+			?>
+		</td>
+		<td>
+			<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>
+		</td>
+	</tr>
 <?php
 		} # if (!$t_def['advanced']) && has write access
 	} # foreach( $t_related_custom_field_ids as $t_id )
+
+	if ( $t_custom_fields_found ) {
 ?>
-
-
-<?php if ( $t_custom_fields_found ) { ?>
-<!-- spacer -->
-<tr class="spacer">
-	<td colspan="2"></td>
-</tr>
-<?php } ?>
-
-
-<!-- File Upload (if enabled) -->
-<?php if ( file_allow_bug_upload() ) {
-	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+	<tr class="spacer">
+		<td colspan="2"></td>
+	</tr>
+<?php 
+	} 
+	
+	if ( file_allow_bug_upload() ) {
+		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 ?>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php 
-			echo lang_get( 'upload_file' );
-			echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>';
-		?>
-	</td>
-	<td>
-		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-		<input <?php echo helper_get_tab_index() ?> name="file" type="file" size="60" />
-	</td>
-</tr>
-<?php } ?>
-
-
-<!-- View Status -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'view_status' ) ?>
-	</td>
-	<td>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<?php 
+				echo lang_get( 'upload_file' );
+				echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>';
+			?>
+		</td>
+		<td>
+			<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+			<input <?php echo helper_get_tab_index() ?> name="file" type="file" size="60" />
+		</td>
+	</tr>
+<?php 
+	} 
+?>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<?php echo lang_get( 'view_status' ) ?>
+		</td>
+		<td>
 <?php
 	if ( access_has_project_level( config_get( 'set_view_status_threshold' ) ) ) {
 ?>
-		<label><input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PUBLIC ?>" <?php check_checked( $f_view_state, VS_PUBLIC ) ?> /> <?php echo lang_get( 'public' ) ?></label>
-		<label><input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PRIVATE ?>" <?php check_checked( $f_view_state, VS_PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?></label>
+			<label><input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PUBLIC ?>" <?php check_checked( $f_view_state, VS_PUBLIC ) ?> /> <?php echo lang_get( 'public' ) ?></label>
+			<label><input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PRIVATE ?>" <?php check_checked( $f_view_state, VS_PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?></label>
 <?php
 	} else {
 		echo get_enum_element( 'project_view_state', $f_view_state );
 	}
 ?>
-	</td>
-</tr>
-
-<!-- Relationship (in case of cloned bug creation...) -->
+		</td>
+	</tr>
 <?php
+	// Relationship (in case of cloned bug creation...) 
 	if( $f_master_bug_id > 0 ) {
 ?>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'relationship_with_parent' ) ?>
-	</td>
-	<td>
-		<?php 
-			relationship_list_box( /* none */ -2, "rel_type", false, true );
-			echo '<b>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</b>';
-			?>
-	</td>
-</tr>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<?php echo lang_get( 'relationship_with_parent' ) ?>
+		</td>
+		<td>
+			<?php 
+				relationship_list_box( /* none */ -2, "rel_type", false, true );
+				echo '<b>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</b>';
+				?>
+		</td>
+	</tr>
 <?php
 	}
 ?>
-
-<!-- Report Stay (report more bugs) -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php 
-			echo lang_get( 'report_stay' );
-			print_documentation_link( 'report_stay' );
-		?>
-	</td>
-	<td>
-		<label><input <?php echo helper_get_tab_index() ?> type="checkbox" id="report_stay" name="report_stay" <?php check_checked( $f_report_stay ) ?> /> <?php echo lang_get( 'check_report_more_bugs' ) ?></label>
-	</td>
-</tr>
-
-
-<!-- Submit Button -->
-<tr>
-	<td class="left">
-		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
-	</td>
-	<td class="center">
-		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'submit_report_button' ) ?>" />
-	</td>
-</tr>
-
-
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<?php print_documentation_link( 'report_stay' ); ?>
+		</td>
+		<td>
+			<label><input <?php echo helper_get_tab_index() ?> type="checkbox" id="report_stay" name="report_stay" <?php check_checked( $f_report_stay ) ?> /> <?php echo lang_get( 'check_report_more_bugs' ) ?></label>
+		</td>
+	</tr>
+	<tr>
+		<td class="left">
+			<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
+		</td>
+		<td class="center">
+			<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'submit_report_button' ) ?>" />
+		</td>
+	</tr>
 </table>
 </form>
 </div>
 
-<!-- Autofocus JS -->
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 <script type="text/javascript" language="JavaScript">
 <!--

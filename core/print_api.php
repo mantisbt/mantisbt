@@ -1517,7 +1517,7 @@ function print_hidden_input( $p_field_key, $p_field_val ) {
 # This prints the little [?] link for user help
 # The $p_a_name is a link into the documentation.html file
 function print_documentation_link( $p_a_name = '' ) {
-
+	echo lang_get( $p_a_name ) . "\n";
 	# @@@ Disable documentation links for now.  May be re-enabled if linked to new manual.
 	# echo "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
 }
