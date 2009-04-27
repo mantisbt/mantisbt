@@ -387,6 +387,7 @@
 	# list the choices that the users are allowed to choose
 	$g_language_choices_arr	= array(
 		'auto',
+		'arabic',
 		'bulgarian',
 		'catalan',
 		'chinese_simplified',
@@ -428,6 +429,7 @@
 
 	# Browser language mapping for 'auto' language selection
 	$g_language_auto_map = array(
+		'ar' => 'arabic',
 		'bg' => 'bulgarian',
 		'ca' => 'catalan',
 		'zh-cn, zh-sg, zh' => 'chinese_simplified',
