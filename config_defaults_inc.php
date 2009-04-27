@@ -2747,6 +2747,13 @@
 	$g_css_include_file				= 'css/default.css';
 
 	/**
+	 * RTL CSS file
+	 * @global string $g_css_rtl_include_file
+	 */
+	$g_css_rtl_include_file				= 'css/rtl.css';
+
+
+	/**
 	 * meta tags
 	 * @global string $g_meta_include_file
 	 */

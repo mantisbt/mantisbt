@@ -1491,7 +1491,7 @@
             <varlistentry>
                 <term>$g_top_include_page</term>
                 <listitem>
-                    <para>If this page eixsts it will be displayed at the top of every
+                    <para>If this page exists it will be displayed at the top of every
                         page. It makes a good company branding include page.
                     </para>
                 </listitem>
@@ -1500,6 +1500,12 @@
                 <term>$g_css_include_file</term>
                 <listitem>
                     <para>Set this to point to the CSS file of your choice.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_css_rtl_include_file</term>
+                <listitem>
+                    <para>Set this to point to the RTL CSS file of your choice.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>

@@ -597,6 +597,7 @@ function config_is_private( $p_config_var ) {
 		case 'bottom_include_page':
 		case 'top_include_page':
 		case 'css_include_file':
+		case 'css_rtl_include_file':
 		case 'meta_include_file':
 		case 'log_level':
 		case 'log_destination':

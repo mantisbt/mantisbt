@@ -304,6 +304,12 @@ function html_css() {
 	$t_css_url = config_get( 'css_include_file' );
 	echo "\t", '<link rel="stylesheet" type="text/css" href="', helper_mantis_url( $t_css_url ), '" />', "\n";
 
+	# Add right-to-left css if needed
+	if( lang_get( 'directionality' ) == 'rtl' ) {
+		$t_css_rtl_url = config_get( 'css_rtl_include_file' );
+		echo "\t", '<link rel="stylesheet" type="text/css" href="', helper_mantis_url( $t_css_rtl_url ), '" />', "\n";
+	}
+
 	# fix for NS 4.x css
 	echo "\t", '<script type="text/javascript" language="JavaScript"><!--', "\n";
 	echo "\t\t", 'if(document.layers) {document.write("<style>td{padding:0px;}<\/style>")}', "\n";

@@ -31,6 +31,7 @@
  */
 
 $s_charset = 'utf-8';
+$s_directionality = 'rtl';
 $s_actiongroup_menu_move = 'نقل';
 $s_actiongroup_menu_copy = 'نسخ';
 $s_actiongroup_menu_assign = 'توكيل';

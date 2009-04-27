@@ -29,6 +29,7 @@
 
 # Charset
 $s_charset = 'utf-8';
+$s_directionality = 'ltr';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Move';
