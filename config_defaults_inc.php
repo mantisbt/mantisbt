@@ -2599,7 +2599,6 @@
 	$g_db_table['mantis_tokens_table']					= '%db_table_prefix%_tokens%db_table_suffix%';
 	$g_db_table['mantis_project_hierarchy_table']		= '%db_table_prefix%_project_hierarchy%db_table_suffix%';
 	$g_db_table['mantis_config_table']					= '%db_table_prefix%_config%db_table_suffix%';
-	$g_db_table['mantis_database_table']				= '%db_table_prefix%_database%db_table_suffix%';
 	$g_db_table['mantis_email_table']					= '%db_table_prefix%_email%db_table_suffix%';
 
 	/*************************
