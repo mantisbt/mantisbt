@@ -172,6 +172,30 @@ function check_zend_optimiser_version() {
 	return $t_pass;
 }
 
+function test_database_utf8() {
+	if ( !db_is_mysql() ) {
+		return;
+	}
+
+	// table collation/character set check
+	$result = db_query_bound( 'SHOW TABLE STATUS' );
+	while( $row = db_fetch_array( $result ) ) {
+		print_test_row( 'Checking Table Collation is utf8 for ' . $row['Name'] . '....', substr( $row['Collation'], 0, 5 ) === 'utf8_', $row['Collation'] );
+	}
+
+	foreach( db_get_table_list() as $t_table ) {
+		if( db_table_exists( $t_table ) ) {
+			$result = db_query_bound( 'SHOW FULL FIELDS FROM ' . $t_table );
+			while( $row = db_fetch_array( $result ) ) {
+				if ( $row['Collation'] === null ) {
+					continue;
+				}
+				print_test_row( 'Checking Non-null Column Collation in ' . $t_table . ' is utf8 for ' . $row['Field'] . '....', substr( $row['Collation'], 0, 5 ) === 'utf8_', $row['Collation'] . ' ( ' . $row['Type'] . ')' );
+			}
+		}
+	}
+}
+
 	$version = phpversion();
 
 	require_once( $t_core_path . 'obsolete.php' );
@@ -362,6 +386,9 @@ print_test_row( 'Checking if ctype is enabled in php (required for rss feeds)...
 
 print_test_row( 'Checking for mysql is at least version 4.1...', !(db_is_mysql() && version_compare( $t_serverinfo['version'], '4.1.0', '<' ) ) );
 print_test_row( 'Checking for broken mysql version ( bug 10250)...', !(db_is_mysql() && $t_serverinfo['version'] == '4.1.21') );
+
+test_database_utf8();
+
 
 ?>
 </table>
