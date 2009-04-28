@@ -108,9 +108,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 		if( db_is_mysql() ) {
 			/** @todo Is there a way to translate any charset name to MySQL format? e.g. remote the dashes? */
 			/** @todo Is this needed for other databases? */
-			if( strtolower( lang_get( 'charset' ) ) === 'utf-8' ) {
-				db_query_bound( 'SET NAMES UTF8' );
-			}
+			db_query_bound( 'SET NAMES UTF8' );
 		} else if( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
 			$t_result2 = db_query_bound( 'set schema ' . $p_db_schema );
 			if( $t_result2 === false ) {
