@@ -697,7 +697,7 @@ $s_click_to_login = 'Click here to login';
 
 # login.php
 $s_warning_plain_password_authentication = '<strong>WARNING:</strong> Plain password authentication is used, this will expose your passwords to administrators.';
-$s_warning_default_administrator_account_present = "<strong>WARNING:</strong> You should disable the default 'administrator' account or change its password.";
+$s_warning_default_administrator_account_present = '<strong>WARNING:</strong> You should disable the default \'administrator\' account or change its password.';
 $s_warning_admin_directory_present = '<strong>WARNING:</strong> Admin directory should be removed.';
 $s_error_database_version_out_of_date_1 = '<strong>ERROR:</strong> The database structure appears to be out of date (config(databaseversion) is 0 and old upgrade tables exist). Version 1.x of MantisBT introduced a new upgrade process. You appear to be upgrading from a 0.XX Release. Please upgrade to 1.0.8 or 1.1.X, then upgrade to 1.2.';
 $s_error_database_no_schema_version = '<strong>ERROR:</strong> The database structure appears to be out of date (config(databaseversion) is 0 and old upgrade tables do not exist). Please check that your database is running - we can not retrieve the database schema version. Config Table did not return a valid database schema version - please ask for support on the mantis-help mailing list if required.';
@@ -1030,7 +1030,7 @@ $s_my_view_title_resolved = 'Resolved';
 $s_my_view_title_monitored = 'Monitored by Me';
 $s_my_view_title_feedback = 'Awaiting Feedback from Me';
 $s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
-$s_my_view_title_my_comments = "Issues I Have Commented On";
+$s_my_view_title_my_comments = 'Issues I Have Commented On';
 
 # news_add.php
 $s_news_added_msg = 'News item added...';
