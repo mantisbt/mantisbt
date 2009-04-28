@@ -589,7 +589,7 @@ if( 3 == $t_install_state ) {
 					$t_db_open = true;
 				}
 			} else {
-				$sqlarray = $dict->CreateDatabase( $f_database_name );
+				$sqlarray = $dict->CreateDatabase( $f_database_name, Array( 'mysql' => 'DEFAULT CHARSET=utf8' ) );
 				$ret = $dict->ExecuteSQLArray( $sqlarray );
 				if( $ret == 2 ) {
 					print_test_result( GOOD );
