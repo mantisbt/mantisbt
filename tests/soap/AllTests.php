@@ -22,22 +22,31 @@
  */
 
 /**
- * Test Configuration
+ * Test config
  */
-require_once 'TestConfig.php';
+require_once dirname(__FILE__) . '/../TestConfig.php';
 
-require_once 'Mantis/AllTests.php';
-require_once 'soap/AllTests.php';
+require_once 'EnumTest.php';
+require_once 'IssueAddTest.php';
+require_once 'IssueNoteTest.php';
+require_once 'IssueUpdateTest.php';
 
-class AllTests
+/**
+ * @package    Tests
+ * @subpackage UnitTests
+ * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
+class Soap_AllTests
 {
-
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite('Mantis Bug Tracker');
 
-        $suite->addTest(Mantis_AllTests::suite());
-        $suite->addTest(Soap_AllTests::suite());
+        $suite->addTestSuite('EnumTest');
+        $suite->addTestSuite('IssueAddTest');
+        $suite->addTestSuite('IssueNoteTest');
+        $suite->addTestSuite('IssueUpdateTest');
 
         return $suite;
     }
