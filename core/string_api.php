@@ -748,25 +748,18 @@ function string_get_field_name( $p_string ) {
 # --------------------
 # Calls htmlentities on the specified string, passing along
 # the current charset.
-function string_html_entities( $p_string, $p_charset = null ) {
-	if ( $p_charset === null ) {
-		$p_charset = lang_get( 'charset' );
-	}
-	return htmlentities( $p_string, ENT_COMPAT, $p_charset );
+function string_html_entities( $p_string ) {
+	return htmlentities( $p_string, ENT_COMPAT, 'utf-8' );
 }
 
 # --------------------
 # Calls htmlspecialchars on the specified string, passing along
 # the current charset, if the current PHP version supports it.
-function string_html_specialchars( $p_string, $p_charset = null ) {
-	if ( $p_charset === null ) {
-		$p_charset = lang_get( 'charset' );
-	}
-
+function string_html_specialchars( $p_string ) {
 	# achumakov: @ added to avoid warning output in unsupported codepages
 	# e.g. 8859-2, windows-1257, Korean, which are treated as 8859-1.
 	# This is VERY important for Eastern European, Baltic and Korean languages
-	return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $p_string, ENT_COMPAT, $p_charset ) );
+	return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $p_string, ENT_COMPAT, 'utf-8' ) );
 }
 
 # --------------------

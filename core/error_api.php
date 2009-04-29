@@ -226,7 +226,7 @@ function error_print_details( $p_file, $p_line, $p_context ) {
 		<center>
 			<table class="width75">
 				<tr>
-					<td>Full path: <?php echo htmlentities( $p_file, ENT_COMPAT, lang_get( 'charset' ) );?></td>
+					<td>Full path: <?php echo htmlentities( $p_file, ENT_COMPAT, 'UTF-8' );?></td>
 				</tr>
 				<tr>
 					<td>Line: <?php echo $p_line?></td>
@@ -257,7 +257,7 @@ function error_print_context( $p_context ) {
 	foreach( $p_context as $t_var => $t_val ) {
 		if( !is_array( $t_val ) && !is_object( $t_val ) ) {
 			$t_type = gettype( $t_val );
-			$t_val = htmlentities( (string) $t_val, ENT_COMPAT, lang_get( 'charset' ) );
+			$t_val = htmlentities( (string) $t_val, ENT_COMPAT, 'UTF-8' );
 
 			# Mask Passwords
 			if( strpos( $t_var, 'password' ) !== false ) {
@@ -300,14 +300,14 @@ function error_print_stack_trace() {
 
 	foreach( $t_stack as $t_frame ) {
 		echo '<tr ', error_alternate_class(), '>';
-		echo '<td>', ( isset( $t_frame['file'] ) ? htmlentities( $t_frame['file'], ENT_COMPAT, lang_get( 'charset' ) ) : '-' ), '</td><td>', ( isset( $t_frame['line'] ) ? $t_frame['line'] : '-' ), '</td><td>', ( isset( $t_frame['class'] ) ? $t_frame['class'] : '-' ), '</td><td>', ( isset( $t_frame['type'] ) ? $t_frame['type'] : '-' ), '</td><td>', ( isset( $t_frame['function'] ) ? $t_frame['function'] : '-' ), '</td>';
+		echo '<td>', ( isset( $t_frame['file'] ) ? htmlentities( $t_frame['file'], ENT_COMPAT, 'UTF-8' ) : '-' ), '</td><td>', ( isset( $t_frame['line'] ) ? $t_frame['line'] : '-' ), '</td><td>', ( isset( $t_frame['class'] ) ? $t_frame['class'] : '-' ), '</td><td>', ( isset( $t_frame['type'] ) ? $t_frame['type'] : '-' ), '</td><td>', ( isset( $t_frame['function'] ) ? $t_frame['function'] : '-' ), '</td>';
 
 		$t_args = array();
 		if( isset( $t_frame['args'] ) && !empty( $t_frame['args'] ) ) {
 			foreach( $t_frame['args'] as $t_value ) {
 				$t_args[] = error_build_parameter_string( $t_value );
 			}
-			echo '<td>( ', htmlentities( implode( $t_args, ', ' ), ENT_COMPAT, lang_get( 'charset' ) ), ' )</td></tr>';
+			echo '<td>( ', htmlentities( implode( $t_args, ', ' ), ENT_COMPAT, 'UTF-8' ), ' )</td></tr>';
 		} else {
 			echo '<td>-</td></tr>';
 		}
@@ -375,7 +375,7 @@ function error_string( $p_error ) {
 
 	# ripped from string_api
 	$t_string = call_user_func_array( 'sprintf', array_merge( array( $t_error ), $g_error_parameters, $t_padding ) );
-	return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $t_string, ENT_COMPAT, lang_get( 'charset' ) ) );
+	return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $t_string, ENT_COMPAT, 'UTF-8' ) );
 }
 
 /**

@@ -245,5 +245,5 @@
 	lang_push( lang_get_default() );
 
 	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
-		header( 'Content-type: text/html;charset=' . lang_get( 'charset' ) );
+		header( 'Content-type: text/html;charset=utf-8' );		
 	}

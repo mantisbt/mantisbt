@@ -78,7 +78,7 @@
 
 	# construct rss file
 
-	$encoding = lang_get( 'charset' );
+	$encoding = 'utf-8';
 	$about = $t_path;
 	$title = string_rss_links( config_get( 'window_title' ) );
 	$image_link = $t_path . 'images/mantis_logo_button.gif';

@@ -91,7 +91,7 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 
 	# don't send more headers if they have already been sent (guideweb)
 	if( !headers_sent() ) {
-		header( 'Content-Type: text/html; charset=' . lang_get( 'charset' ) );
+		header( 'Content-Type: text/html; charset=utf-8' );
 
 		if( ON == $t_use_iis ) {
 			header( "Refresh: 0;url=$t_url" );
@@ -467,13 +467,12 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 	}
 
 	$t_project_count = count( $t_project_ids );
-	$t_charset = lang_get( 'charset' );
 	for( $i = 0;$i < $t_project_count;$i++ ) {
 		$t_id = $t_project_ids[$i];
 		if( $t_id != $p_filter_project_id ) {
 			echo "<option value=\"$t_id\"";
 			check_selected( $p_project_id, $t_id );
-			echo '>' . string_html_specialchars( string_strip_hrefs( project_get_field( $t_id, 'name' ) ), $t_charset ) . '</option>' . "\n";
+			echo '>' . string_html_specialchars( string_strip_hrefs( project_get_field( $t_id, 'name' ) ) ) . '</option>' . "\n";
 			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, Array(), $t_charset );
 		}
 	}

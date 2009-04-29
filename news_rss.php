@@ -60,7 +60,7 @@
 
 	# construct rss file
 
-	$encoding = lang_get( 'charset' );
+	$encoding = 'utf-8';
 	$about = config_get( 'path' );
 	$title = string_rss_links( config_get( 'window_title' ) . ' - ' . lang_get( 'news' ) );
 
