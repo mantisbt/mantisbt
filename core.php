@@ -242,7 +242,8 @@
 	}
 
 	// push push default language to speed calls to lang_get
-	lang_push( lang_get_default() );
+	if ( !isset( $g_skip_lang_load ) )
+		lang_push( lang_get_default() );
 
 	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
 		header( 'Content-type: text/html;charset=utf-8' );		
