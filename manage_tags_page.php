@@ -85,7 +85,7 @@ if ( $f_filter === 'ALL' ) {
 	$t_where = '';
 } else {
 	$t_where_params[] = db_prepare_string( $f_filter . '%' );
-	$t_where = db_helper_like( 'name' );
+	$t_where = 'WHERE ' . db_helper_like( 'name' );
 }
 
 # Set the number of Tags per page.
