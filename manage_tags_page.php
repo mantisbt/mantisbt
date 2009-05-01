@@ -82,7 +82,7 @@ echo '</tr></table>';
 $t_where_params = array();
 
 if ( $f_filter === 'ALL' ) {
-	$t_where = '1';
+	$t_where = '';
 } else {
 	$t_where_params[] = db_prepare_string( $f_filter . '%' );
 	$t_where = db_helper_like( 'name' );
@@ -97,7 +97,7 @@ $t_total_tag_count = 0;
 $t_result = '';
 $t_query = "SELECT count(*)
 			FROM $t_tag_table
-			WHERE $t_where";
+			$t_where";
 
 $t_result = db_query_bound( $t_query, $t_where_params );
 $t_row = db_fetch_array( $t_result );
@@ -123,8 +123,7 @@ if ( $f_page_number < 1 ) {
 # Retrive Tags from tag table
 $t_query = "SELECT *
 		FROM $t_tag_table
-		WHERE " . $t_where .
-		' ORDER BY name';
+		$t_where ORDER BY name";
 
 $t_result = db_query_bound( $t_query, $t_where_params, $t_per_page, $t_offset );
 
