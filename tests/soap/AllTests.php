@@ -37,11 +37,12 @@ require_once 'IssueUpdateTest.php';
  * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
-class Soap_AllTests
+class Soap_AllTests extends PHPUnit_Framework_TestSuite
 {
+
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Mantis Bug Tracker');
+        $suite = new Soap_AllTests('SOAP Interface');
 
         $suite->addTestSuite('EnumTest');
         $suite->addTestSuite('IssueAddTest');

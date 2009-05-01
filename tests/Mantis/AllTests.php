@@ -34,11 +34,11 @@ require_once 'EnumTest.php';
  * @copyright Copyright (C) 2002 - 2009  Mantis Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
-class Mantis_AllTests
+class Mantis_AllTests extends PHPUnit_Framework_TestSuite
 {
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Mantis Bug Tracker');
+        $suite = new Mantis_AllTests('Mantis Bug Tracker');
 
         $suite->addTestSuite('MantisEnumTest');
 
