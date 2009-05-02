@@ -95,7 +95,7 @@ function graph_bar( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_he
 	$p1->SetWidth( 0.8 );
 	$graph->Add( $p1 );
 	if( helper_show_queries() ) {
-		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
+		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
 		$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 	}
 
@@ -178,7 +178,7 @@ function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_
 	$graph->Add( $gbplot );
 
 	if( helper_show_queries() ) {
-		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
+		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
 		$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 	}
 
@@ -221,7 +221,7 @@ function graph_pie( $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_he
 
 	$graph->Add( $p1 );
 	if( helper_show_queries() ) {
-		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
+		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
 		$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 	}
 	$graph->Stroke();
@@ -294,7 +294,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 	$graph->AddY2( $p2 );
 
 	if( helper_show_queries() ) {
-		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
+		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
 		$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 	}
 	$graph->Stroke();
@@ -350,7 +350,7 @@ function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p
 	}
 
 	if( helper_show_queries() ) {
-		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
+		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
 		$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 	}
 	$graph->Stroke();

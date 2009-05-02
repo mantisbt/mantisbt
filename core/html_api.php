@@ -589,8 +589,8 @@ function html_footer( $p_file ) {
 				$g_queries_array[$i][3] = true;
 			}
 		}
-		echo "\t", $t_unique_queries, ' ', lang_get( 'unique_queries_executed' ), '<br />', "\n";
 		if( ON == config_get( 'show_queries_list' ) ) {
+			echo "\t", $t_unique_queries, ' ', lang_get( 'unique_queries_executed' ), '<br />', "\n";
 			echo "\t", '<table>', "\n";
 			$t_total = 0;
 			for( $i = 0;$i < $t_count;$i++ ) {
