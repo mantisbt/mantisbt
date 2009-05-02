@@ -39,6 +39,7 @@ $f_password = gpc_get_string( 'password', null );
 
 define( 'BAD', 0 );
 define( 'GOOD', 1 );
+define( 'WARN', 2 );
 
 function print_test_result( $p_result ) {
 	if( BAD == $p_result ) {
@@ -47,6 +48,10 @@ function print_test_result( $p_result ) {
 
 	if( GOOD == $p_result ) {
 		echo '<td bgcolor="#00ff88">GOOD</td>';
+	}
+
+	if( WARN == $p_result ) {
+		echo '<td bgcolor="#E56717">WARN</td>';
 	}
 }
 
@@ -74,6 +79,25 @@ function print_test_row( $p_description, $p_pass, $p_info = null ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result( BAD );
+	}
+
+	echo '</tr>';
+}
+
+function print_test_warn_row( $p_description, $p_pass, $p_info = null ) {
+	echo '<tr>';
+	echo '<td bgcolor="#ffffff">';
+	echo $p_description;
+	if( $p_info != null) {
+		echo '<br />';
+		echo '<i>' . $p_info . '</i>';
+	}
+	echo '</td>';
+
+	if( $p_pass ) {
+		print_test_result( GOOD );
+	} else {
+		print_test_result( WARN );
 	}
 
 	echo '</tr>';
@@ -245,8 +269,9 @@ else {
 
 <!-- Test DATABASE part 2 -->
 <?php if( db_is_connected() ) {
-	print_test_row( 'Checking adodb version...', version_compare( $g_db->Version(), '5.0.0', '>=' ), $g_db->Version() );
+	print_test_warn_row( 'Checking adodb version...', version_compare( $g_db->Version(), '5.05', '>=' ), $g_db->Version() );
 
+	print_test_row('Checking using bundled adodb with some drivers...', !(db_is_pgsql() || db_is_mssql() || db_is_db2()) || strstr($ADODB_vers, 'MantisBT Version') !== false );
 	$t_serverinfo = $g_db->ServerInfo()?>
 <tr>
 	<td bgcolor="#ffffff">
