@@ -36,9 +36,14 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 
     protected function setUp()
     {
+    	if (!isset($GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED']) ||
+			!$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED']) {
+			$this->markTestSkipped( 'The Soap tests are disabled.' );
+		}
+    
 		$this->client = new
 		    SoapClient(
-		       "http://localhost/mantis12x/api/soap/mantisconnect.php?wsdl",
+		       $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
 		        array(  'trace'      => true,
 		                'exceptions' => true,
 		             )
