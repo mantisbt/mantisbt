@@ -245,6 +245,8 @@ else {
 
 <!-- Test DATABASE part 2 -->
 <?php if( db_is_connected() ) {
+	print_test_row( 'Checking adodb version...', version_compare( $g_db->Version(), '5.0.0', '>=' ), $g_db->Version() );
+
 	$t_serverinfo = $g_db->ServerInfo()?>
 <tr>
 	<td bgcolor="#ffffff">
