@@ -226,6 +226,10 @@ class ADODB_pdo extends ADOConnection {
 		else $obj->bindParam($name, $var);
 	}
 	
+	function OffsetDate($dayFraction,$date=false)
+    {   
+        return $this->_driver->OffsetDate($dayFraction,$date);
+    }
 	
 	function ErrorMsg()
 	{

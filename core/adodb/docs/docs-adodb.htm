@@ -6089,7 +6089,11 @@ PHP</a>. </p>
 
 <h2>Change Log<a name=changes></a><a name=changelog></a></h2>
 
-<p><a name=5.08></a><b>5.08 ? 2009</b> </p>
+<p><a name=5.08a></a><b>5.08a 17 Apr 2009</b> </p>
+<p>Fixes wrong version number string.
+<p>Incorrect + in adodb-datadict.inc.php removed.
+<p>Fixes missing OffsetDate() function in pdo. Thx paul#mantisforge.org. 
+<p><a name=5.08></a><b>5.08 17 Apr 2009</b> </p>
 <p>adodb-sybase.inc.php driver. Added $conn->charSet support. Thx Luis Henrique Mulinari (luis.mulinari#gmail.com)
 <p>adodb-ado5.inc.php. Fixed some bind param issues. Thx Jirka Novak. 
 <p>adodb-ado5.inc.php. Now has improved error handling.
@@ -6106,7 +6110,7 @@ PHP</a>. </p>
 <p>Option to delete old fields $dropOldFlds in datadict ChangeTableSQL($table, $flds, $tableOptions, $dropOldFlds=false) added. Thx  Philipp Niethammer.
 <p>Memcache caching did not expire properly. Fixed.
 <p>MetaForeignKeys for postgres7 driver changed from adodb_movenext to $rs->MoveNext (also in 4.99)
-<p>Added support for ldap and ldaps url format in ldap driver.
+<p>Added support for ldap and ldaps url format in ldap driver. E.g. ldap://host:port/dn?attributes?scope?filter?extensions
 <p><a name=5.07></a><b>5.07 26 Dec 2008</b> </p>
 
 <p>BeginTrans/CommitTrans/RollbackTrans return true/false correctly on
