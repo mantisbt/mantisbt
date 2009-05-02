@@ -298,10 +298,10 @@ else {
 <?php
 # Windows-only checks
 if( substr( php_uname(), 0, 7 ) == 'Windows' ) {
-	print_test_row( 'validate_email requires php 5.3 on windows...',
-		ON == config_get_global( 'validate_email' ) && version_compare( phpversion(), '5.3.0', '>=' ) );
-	print_test_row( 'check_mx_record requires php 5.3 on windows...',
-		ON == config_get_global( 'check_mx_record' ) && version_compare( phpversion(), '5.3.0', '>=' ) );
+	print_test_row( 'validate_email (if ON) requires php 5.3 on windows...',
+		OFF == config_get_global( 'validate_email' ) || ON == config_get_global( 'validate_email' ) && version_compare( phpversion(), '5.3.0', '>=' ) );
+	print_test_row( 'check_mx_record (if ON) requires php 5.3 on windows...',
+		OFF == config_get_global( 'check_mx_record' ) || ON == config_get_global( 'check_mx_record' ) && version_compare( phpversion(), '5.3.0', '>=' ) );
 }
 
 $t_vars = array(
