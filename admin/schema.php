@@ -444,7 +444,7 @@ $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "
 	last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_bug_table', 'id', array( 'date_submitted', 'due_date', 'last_updated' ), array( 'due_date_int', 'last_updated_int', 'date_submitted_int' ) ) );
+$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_bug_table', 'id', array( 'date_submitted', 'due_date', 'last_updated' ), array( 'date_submitted_int', 'due_date_int', 'last_updated_int' ) ) );
 
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "date_submitted" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
