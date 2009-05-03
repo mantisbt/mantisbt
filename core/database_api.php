@@ -27,14 +27,8 @@
  * @link http://www.mantisbt.org
  *
  * @uses config_api.php
- * @uses gpc_api.php
  */
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
-/**
- * requires gpc_api
- */
-require_once( $t_core_dir . 'gpc_api.php' );
 
 # Do not explicitly include $t_core_dir to allow using system ADODB by including
 # it in include path and removing the one distributed with MantisBT (see #7907).
