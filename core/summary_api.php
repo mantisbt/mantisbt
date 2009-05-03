@@ -379,7 +379,7 @@ function summary_print_by_age() {
 
 		$t_bugid = string_get_bug_view_link( $row['id'] );
 		$t_summary = $row['summary'];
-		$t_days_open = intval(( time() - strtotime( $row['date_submitted'] ) ) / SECONDS_PER_DAY );
+		$t_days_open = intval(( time() - $row['date_submitted'] ) / SECONDS_PER_DAY );
 
 		print "<tr " . helper_alternate_class() . ">\n";
 		print "<td class=\"small\">$t_bugid - $t_summary</td><td class=\"right\">$t_days_open</td>\n";
