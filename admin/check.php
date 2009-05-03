@@ -333,10 +333,7 @@ if( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 
 $t_vars = array(
 	'magic_quotes_gpc',
-	'gpc_order',
-	'variables_order',
 	'include_path',
-	'short_open_tag',
 	'mssql.textsize',
 	'mssql.textlimit',
 );
@@ -353,6 +350,9 @@ while( list( $t_foo, $t_var ) = each( $t_vars ) ) {
 </tr>
 <?php
 }
+
+print_test_row( 'check variables_order includes GPCS', stristr( ini_get( 'variables_order' ), 'G' ) && stristr( ini_get( 'variables_order' ), 'P' ) && stristr( ini_get( 'variables_order' ), 'C' ) && stristr( ini_get( 'variables_order' ), 'S' ), ini_get( 'variables_order' ) );
+
 
 test_bug_download_threshold();
 test_bug_attachments_allow_flags();

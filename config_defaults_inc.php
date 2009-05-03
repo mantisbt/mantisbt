@@ -146,6 +146,10 @@
 		$t_path = str_replace( $t_relative_path, '', $t_path );
 
 		$t_url	= $t_protocol . '://' . $t_host . $t_path.'/';
+	} else {
+		$t_path = '';
+		$t_host = '';
+		$t_protocol = '';
 	}
 
 	/**
