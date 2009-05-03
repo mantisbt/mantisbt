@@ -694,7 +694,7 @@ function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) 
 	$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
 
 	# Urgent = 1, Not Urgent = 5, Disable = 0
-	$t_email_data->metadata['charset'] = lang_get( 'charset', lang_get_current() );
+	$t_email_data->metadata['charset'] = 'utf-8';
 
 	$t_hostname = '';
 	$t_server = isset( $_SERVER ) ? $_SERVER : $HTTP_SERVER_VARS;
