@@ -140,7 +140,6 @@
 	# Load rest of core in separate directory.
 
 	require_once( $t_core_path.'config_api.php' );
-	require_once( $t_core_path.'timer_api.php' );
 	require_once( $t_core_path.'logging_api.php' );
 
 	# load utility functions used by everything else
@@ -197,9 +196,6 @@
 	if ( file_exists( $t_overrides ) ) {
 		require_once( $t_overrides );
 	}
-
-	// initialize our timer
-	$g_timer = new BC_Timer;
 
 	// seed random number generator
 	list( $usec, $sec ) = explode( ' ', microtime() );

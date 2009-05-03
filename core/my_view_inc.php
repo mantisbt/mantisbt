@@ -435,7 +435,6 @@ echo "($v_start - $v_end / $t_bug_count)";
 	</td>
 </tr>
 
-<?php mark_time( 'begin loop' );?>
 <?php
 # -- Loop over bug rows and create $v_* variables --?>
 <?php
@@ -535,4 +534,3 @@ echo "($v_start - $v_end / $t_bug_count)";
 // Free the memory allocated for the rows in this box since it is not longer needed.
 unset( $rows );
 
-mark_time( 'end loop' );

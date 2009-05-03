@@ -187,8 +187,6 @@
 
 		$t_in_stickies = ( $t_filter && ( 'on' == $t_filter['sticky_issues'] ) );
 
-		mark_time( 'begin loop' );
-
 		# -- Loop over bug rows --
 
 		$t_rows = count( $p_rows );
@@ -261,8 +259,6 @@
 </form>
 
 <?php
-
-	mark_time( 'end loop' );
 
 	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 		html_status_legend();

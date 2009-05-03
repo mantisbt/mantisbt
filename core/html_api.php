@@ -538,7 +538,7 @@ function html_bottom_banner() {
  * @return null
  */
 function html_footer( $p_file ) {
-	global $g_timer, $g_queries_array, $g_request_time;
+	global $g_queries_array, $g_request_time;
 
 	# If a user is logged in, update their last visit time.
 	# We do this at the end of the page so that:
@@ -570,7 +570,7 @@ function html_footer( $p_file ) {
 
 	# print timings
 	if( ON == config_get( 'show_timer' ) ) {
-		$g_timer->print_times();
+		echo '<span class="italic">Time: ' . number_format( microtime_float() - $g_request_time, 4 ) . ' seconds.</span><br />';
 		echo sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) ), '<br />';
 	}
 
