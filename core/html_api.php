@@ -570,7 +570,7 @@ function html_footer( $p_file ) {
 
 	# print timings
 	if( ON == config_get( 'show_timer' ) ) {
-		echo '<span class="italic">Time: ' . number_format( microtime_float() - $g_request_time, 4 ) . ' seconds.</span><br />';
+		echo '<span class="italic">Time: ' . number_format( microtime(true) - $g_request_time, 4 ) . ' seconds.</span><br />';
 		echo sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) ), '<br />';
 	}
 
@@ -608,7 +608,7 @@ function html_footer( $p_file ) {
 
 			# @@@ Note sure if we should localize them given that they are debug info.  Will add if requested by users.
 			echo "\t", '<tr><td></td><td>', $t_total, '</td><td>SQL Queries Total Time</td></tr>', "\n";
-			echo "\t", '<tr><td></td><td>', round( microtime_float() - $g_request_time, 4 ), '</td><td>Page Request Total Time</td></tr>', "\n";
+			echo "\t", '<tr><td></td><td>', round( microtime(true) - $g_request_time, 4 ), '</td><td>Page Request Total Time</td></tr>', "\n";
 			echo "\t", '</table>', "\n";
 		}
 	}

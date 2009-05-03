@@ -721,7 +721,7 @@ function email_send_all() {
 	$t_ids = email_queue_get_ids();
 
 	$t_emails_recipients_failed = array();
-	$t_start = microtime_float();
+	$t_start = microtime(true);
 	foreach( $t_ids as $t_id ) {
 		$t_email_data = email_queue_get( $t_id );
 
@@ -733,7 +733,7 @@ function email_send_all() {
 		# if unable to place the email in the email server queue, then the connection to the server is down,
 		# and hence no point to continue trying with the rest of the emails.
 		if( !email_send( $t_email_data ) ) {
-			if( microtime_float() - $t_start > 5 ) {
+			if( microtime(true) - $t_start > 5 ) {
 				break;
 			} else {
 				continue;

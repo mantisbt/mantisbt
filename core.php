@@ -28,11 +28,10 @@
 	# --------------------
 	# timer analysis
 	function microtime_float() {
-		list( $usec, $sec ) = explode( " ", microtime() );
-		return ( (float)$usec + (float)$sec );
+		return microtime(true);
 	}
 
-	$g_request_time = microtime_float();
+	$g_request_time = microtime(true);
 
 	ob_start();
 
