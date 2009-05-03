@@ -25,12 +25,6 @@
 	# INCLUDES
 	###########################################################################
 
-	# --------------------
-	# timer analysis
-	function microtime_float() {
-		return microtime(true);
-	}
-
 	$g_request_time = microtime(true);
 
 	ob_start();
