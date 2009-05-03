@@ -473,14 +473,14 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 			echo "<option value=\"$t_id\"";
 			check_selected( $p_project_id, $t_id );
 			echo '>' . string_html_specialchars( string_strip_hrefs( project_get_field( $t_id, 'name' ) ) ) . '</option>' . "\n";
-			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, Array(), $t_charset );
+			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, Array() );
 		}
 	}
 }
 
 # --------------------
 # List projects that the current user has access to
-function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_parents = Array(), $p_charset = null ) {
+function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_parents = Array() ) {
 	array_push( $p_parents, $p_parent_id );
 	$t_project_ids = current_user_get_accessible_subprojects( $p_parent_id );
 	$t_project_count = count( $t_project_ids );
@@ -494,7 +494,7 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 			echo "$t_full_id\"";
 			check_selected( $p_project_id, $t_full_id );
 			echo '>' . str_repeat( '&nbsp;', count( $p_parents ) ) . str_repeat( '&raquo;', count( $p_parents ) ) . ' ' . string_html_specialchars( string_strip_hrefs( project_get_field( $t_id, 'name' ) ) ) . '</option>' . "\n";
-			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents, $t_charset );
+			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
 		}
 	}
 }
