@@ -83,6 +83,15 @@
 	function __autoload( $className ) {
 		global $g_core_path;
 
+		switch ( $className ) {
+			case 'DisposableEmailChecker':
+				require_once( $g_core_path . 'disposable' . DIRECTORY_SEPARATOR . 'disposable.php' );
+				return;
+			case 'PHPMailer':
+				require_once( PHPMAILER_PATH . 'class.phpmailer.php' ); // phpmailer_path is defined in email api
+				return;
+		}
+
 		$t_require_path = $g_core_path . 'classes' . DIRECTORY_SEPARATOR . $className . '.class.php';
 
 		if ( file_exists( $t_require_path ) ) {

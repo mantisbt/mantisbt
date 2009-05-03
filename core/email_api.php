@@ -54,14 +54,6 @@ require_once( $t_core_dir . 'email_queue_api.php' );
  * requires relationship_api
  */
 require_once( $t_core_dir . 'relationship_api.php' );
-/**
- * requires disposable_api
- */
-require_once( $t_core_dir . 'disposable' . DIRECTORY_SEPARATOR . 'disposable.php' );
-/**
- * requires class.phpmailer.php
- */
-require_once( PHPMAILER_PATH . 'class.phpmailer.php' );
 
 # reusable object of class SMTP
 $g_phpMailer = null;
