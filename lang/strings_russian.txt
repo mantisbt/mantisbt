@@ -38,7 +38,6 @@
  * @author Александр Сигачёв
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'переместить';
 $s_actiongroup_menu_copy = 'копировать';
 $s_actiongroup_menu_assign = 'назначить';
@@ -819,6 +818,7 @@ $s_my_view_title_resolved = 'Отработанные';
 $s_my_view_title_monitored = 'Отслеживаемые мной';
 $s_my_view_title_feedback = 'Ожидающие отклика от меня';
 $s_my_view_title_verify = 'Ожидающие подтверждения отработки от меня';
+$s_my_view_title_my_comments = 'Задачи, которые я комментировал';
 $s_news_added_msg = 'Новость добавлена...';
 $s_news_deleted_msg = 'Удаление новости...';
 $s_delete_news_sure_msg = 'Вы уверены, что хотите удалить эту новость?';
@@ -1135,7 +1135,7 @@ $s_see_email_addresses_of_other_users = 'Просмотр адресов e-mail 
 $s_send_reminders = 'Отправка напоминаний';
 $s_add_profiles = 'Добавление профилей';
 $s_notify_of_new_user_created = 'Уведомление о создании нового пользователя';
-$s_email_notification = 'УВЕДОМЛЕНИЕ ПО ЭЛЕКТРОННОЙ ПОЧТЕ';
+$s_email_notification = 'Уведомление по электронной почте';
 $s_status_changed_to = 'При изменении состояния на';
 $s_email_on_deleted = 'Извещать при удалении';
 $s_email_on_sponsorship_changed = 'Извещать при изменении оплаты';
@@ -1232,3 +1232,6 @@ $s_due_date = 'Дата окончания';
 $s_overdue = 'Просрочено';
 $s_view_account_title = 'Информация о пользователе';
 $s_manage_user = 'Управление пользователями';
+$s_install_information = 'Инсталляция MantisBT';
+$s_database_information = 'База данных MantisBT';
+$s_path_information = 'Директории MantisBT';

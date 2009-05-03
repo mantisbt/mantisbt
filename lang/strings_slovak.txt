@@ -31,7 +31,6 @@
  * @author Rudko
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Premiestniť';
 $s_actiongroup_menu_copy = 'Kopírovať';
 $s_actiongroup_menu_assign = 'Priradiť';

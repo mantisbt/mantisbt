@@ -33,7 +33,6 @@
  * @author ZaDiak
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Μετακίνηση';
 $s_actiongroup_menu_copy = 'Αντιγραφή';
 $s_actiongroup_menu_assign = 'Ανάθεση';

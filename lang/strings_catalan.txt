@@ -30,7 +30,6 @@
  * @author Bernat Pegueroles - bpf@pegueroles.com
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Mou';
 $s_actiongroup_menu_copy = 'Copia';
 $s_actiongroup_menu_assign = 'Assigna';

@@ -35,7 +35,6 @@
  * @author Tvdm
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Verplaatsen';
 $s_actiongroup_menu_copy = 'Kopiëren';
 $s_actiongroup_menu_assign = 'Toewijzen';
@@ -1233,3 +1232,6 @@ $s_due_date = 'Plandatum';
 $s_overdue = 'Uit planning';
 $s_view_account_title = 'Gebruikersinformatie';
 $s_manage_user = 'Gebruiker beheren';
+$s_install_information = 'Installatiegegevens MantisBT';
+$s_database_information = 'Databaseinformatie MantisBT';
+$s_path_information = 'Padgegevens MantisBT';

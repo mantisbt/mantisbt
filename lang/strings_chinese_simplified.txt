@@ -36,7 +36,6 @@
  * @author zoomq@itcase.com
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = '移动';
 $s_actiongroup_menu_copy = '复制';
 $s_actiongroup_menu_assign = '分派';

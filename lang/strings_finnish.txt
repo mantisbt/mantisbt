@@ -35,7 +35,6 @@
  * @author Tomi Hurenius, tkh@iki.fi
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Siirrä';
 $s_actiongroup_menu_copy = 'Kopioi';
 $s_actiongroup_menu_assign = 'Osoita';

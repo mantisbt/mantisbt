@@ -34,7 +34,6 @@
  * @author yesdi@nate.com - (마지막 수정일: 2005/04/23)
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = '이동';
 $s_actiongroup_menu_copy = '복사';
 $s_actiongroup_menu_assign = '할당';

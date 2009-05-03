@@ -31,7 +31,6 @@
  * @author Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Perkelti';
 $s_actiongroup_menu_copy = 'Kopijuoti';
 $s_actiongroup_menu_assign = 'Paskirti';

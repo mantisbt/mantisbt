@@ -31,7 +31,6 @@
  * @author Søren Mortensen, sm@artmus.dk
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Flyt';
 $s_actiongroup_menu_copy = 'Kopier';
 $s_actiongroup_menu_assign = 'Tildel';

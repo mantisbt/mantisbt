@@ -20,13 +20,15 @@
 
 /** Latvian (Latviešu)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
  * @author Sergis Kanters, "kanters at yahoo dot com"
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Pārvietot';
 $s_actiongroup_menu_assign = 'Piešķirt';
 $s_actiongroup_menu_close = 'Aizvērt';

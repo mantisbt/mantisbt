@@ -33,7 +33,6 @@
  * @author YaronSh
  */
 
-$s_charset = 'utf-8';
 $s_directionality = 'rtl';
 $s_actiongroup_menu_move = 'העברה';
 $s_actiongroup_menu_copy = 'העתקה';

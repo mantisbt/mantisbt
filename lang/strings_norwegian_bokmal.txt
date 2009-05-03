@@ -35,7 +35,6 @@
  * @author Laaknor
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Flytt til annet prosjekt';
 $s_actiongroup_menu_copy = 'Kopier til annet prosjekt';
 $s_actiongroup_menu_assign = 'Deleger til';

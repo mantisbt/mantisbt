@@ -30,7 +30,6 @@
  * @author Matej Rizman, matej.rizman@guest.arnes.si
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Premakni';
 $s_actiongroup_menu_copy = 'Kopiraj';
 $s_actiongroup_menu_assign = 'Priredi';

@@ -34,7 +34,6 @@
  * @author Juliano F. Ravasi, dev at juliano info
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Mover';
 $s_actiongroup_menu_copy = 'Copiar';
 $s_actiongroup_menu_assign = 'Atribuir';

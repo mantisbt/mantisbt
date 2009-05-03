@@ -20,6 +20,9 @@
 
 /** Portuguese (Português)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
@@ -30,7 +33,6 @@
  * @author Waldir
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Mover';
 $s_actiongroup_menu_copy = 'Copiar';
 $s_actiongroup_menu_assign = 'Atribuir a';
@@ -43,6 +45,8 @@ $s_actiongroup_menu_update_category = 'Atualizar Categoria';
 $s_actiongroup_menu_update_field = 'Atualizar %1$s';
 $s_actiongroup_menu_add_note = 'Acrescentar Observação';
 $s_actiongroup_menu_attach_tags = 'Acrescenntar Etiquetas';
+$s_actiongroup_bugs = 'Casos Selecionados';
+$s_actiongroup_error_issue_is_readonly = 'Caso é só de leitura.';
 $s_all_projects = 'Todos os Projectos';
 $s_move_bugs = 'Mover Bugs';
 $s_operation_successful = 'OK. Operação Concluída com SUCESSO!';
@@ -117,6 +121,7 @@ $s_status_bugs_conf_msg = 'Escolha o Novo Estado para os Bugs Selecionados';
 $s_close_group_bugs_button = 'Fechar os Bugs Selecionados';
 $s_delete_group_bugs_button = 'Apagar os Bugs Selecionados';
 $s_move_group_bugs_button = 'Mover os Bugs Selecionados';
+$s_copy_group_bugs_button = 'Copiar Casos';
 $s_assign_group_bugs_button = 'Atribuir Bugs Selecionados';
 $s_resolve_group_bugs_button = 'Resolver os Bugs Selecionados';
 $s_priority_group_bugs_button = 'Actualizar Prioridade';
@@ -141,11 +146,13 @@ $s_priority_link = 'Por Prioridade';
 $s_severity_link = 'Por Importância';
 $s_category_link = 'Por Categoria';
 $s_resolution_link = 'Por Resolução';
+$s_legend_still_open = 'Ainda Aberto';
 $s_legend_resolved = 'Resolvido';
 $s_legend_assigned = 'Atribuido';
 $s_legend_total = 'Total';
 $s_legend_opened = 'Aberto';
 $s_legend_closed = 'Fechado';
+$s_legend_reported = 'Reportado';
 $s_cumulative = 'Cumulativo';
 $s_not_enough_data = 'Dados insuficientes para criar gráfico';
 $s_hide_button = 'Mostar Apenas os Selecionados';

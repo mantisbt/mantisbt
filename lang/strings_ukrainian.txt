@@ -29,7 +29,6 @@
  * @author Yuri Kirghisov, yuri@apple.com.ua
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Перенести';
 $s_actiongroup_menu_copy = 'Скопіювати';
 $s_actiongroup_menu_assign = 'Призначити';

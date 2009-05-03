@@ -38,7 +38,6 @@
  * @author Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Przenieś';
 $s_actiongroup_menu_copy = 'Kopiuj';
 $s_actiongroup_menu_assign = 'Przypisz';

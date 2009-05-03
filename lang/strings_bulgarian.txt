@@ -33,7 +33,6 @@
  * @author Svetlin Stefanov, desertwaste <at> gmail.com
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Преместване';
 $s_actiongroup_menu_copy = 'Копиране';
 $s_actiongroup_menu_assign = 'Назначаване';
@@ -111,7 +110,7 @@ $s_bug_deleted = 'Проблемът е изтрит';
 $s_make_private = 'Промени на Частен';
 $s_make_public = 'Промени на Публичен';
 $s_create_new_project_link = 'Нов проект';
-$s_login_link = 'Вход';
+$s_login_link = 'Влизане';
 $s_select_option = '(избиране)';
 $s_bug_actiongroup_access = 'Няма права за извършване на действието';
 $s_bug_actiongroup_status = 'Проблемът не може да бъде променен в искания статус';
@@ -1043,6 +1042,13 @@ $s_tag_name = 'Име';
 $s_tag_creator = 'Създател';
 $s_all_dates = 'Всички дати';
 $s_period_none = 'Няма';
+$s_period_this_week = 'Тази седмица';
+$s_period_last_week = 'Последната седмица';
+$s_period_two_weeks = 'Последните две седмици';
+$s_period_this_month = 'Този месец';
+$s_period_this_quarter = 'Това тримесечие';
+$s_period_last_quarter = 'Последното тримесечие';
+$s_period_last_year = 'Последната година';
 $s_select_bystatus = 'по статут';
 $s_select_summbystatus = 'Резюме по статут';
 $s_select_bycat = 'Резюме по категория';

@@ -31,7 +31,6 @@
  * @author Thomas Sjogren <thomas.sjogren@multicomsecurity.se>
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Flytta';
 $s_actiongroup_menu_copy = 'Kopiera';
 $s_actiongroup_menu_assign = 'Tilldela';

@@ -30,7 +30,6 @@
  * @author Villem Vannas, willu60 (at) hotmail.com (14.09.2004)
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Liiguta';
 $s_actiongroup_menu_copy = 'Kopeeri';
 $s_actiongroup_menu_assign = 'Määra';

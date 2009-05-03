@@ -20,6 +20,9 @@
 
 /** Turkish (Türkçe)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
@@ -27,7 +30,6 @@
  * @author Oktay Altunergil - oktay@bellatlantic.net
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_delete = 'Sil';
 $s_all_projects = 'Bütün Projeler';
 $s_move_bugs = 'Bug Taşı';

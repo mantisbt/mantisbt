@@ -30,7 +30,6 @@
  * @author Nikola Smolenski
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Premesti';
 $s_actiongroup_menu_copy = 'Kopiraj';
 $s_actiongroup_menu_assign = 'Dodeli';

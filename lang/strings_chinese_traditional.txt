@@ -29,7 +29,6 @@
  * @author Jonathan Tsai, tryweb@ichiayi.com
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = '搬移';
 $s_actiongroup_menu_copy = '複製';
 $s_actiongroup_menu_assign = '分派';

@@ -42,7 +42,6 @@
  * @author Umherirrender
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Verschieben';
 $s_actiongroup_menu_copy = 'Kopieren';
 $s_actiongroup_menu_assign = 'Zuordnen';

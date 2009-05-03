@@ -20,13 +20,15 @@
 
 /** Croatian (Hrvatski)
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
  * @ingroup Language
  * @file
  *
  * @author Dejan Gambin, dejan.gambin@grad-pula.hinet.hr
  */
 
-$s_charset = 'utf-8';
 $s_all_projects = 'Svi projekti';
 $s_move_bugs = 'Premjesti bugove';
 $s_operation_successful = 'Operacija uspješna.';

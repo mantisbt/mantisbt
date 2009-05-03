@@ -36,7 +36,6 @@
  * @author 青子守歌
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = '移動';
 $s_actiongroup_menu_copy = 'コピー';
 $s_actiongroup_menu_assign = '担当者決定';
@@ -626,7 +625,7 @@ $s_manage_config_link = '設定管理';
 $s_manage_threshold_config = 'ワークフロー閾値';
 $s_manage_email_config = '通知メール';
 $s_manage_workflow_config = 'ワークフロー遷移';
-$s_manage_tags_link = 'タグを管理';
+$s_manage_tags_link = 'タグ管理';
 $s_create_new_account_link = 'アカウント作成';
 $s_projects_link = 'プロジェクト';
 $s_documentation_link = 'ドキュメント';
@@ -1180,7 +1179,7 @@ $s_tag_history_renamed = 'タグ名称変更';
 $s_tag_related = '関連タグ';
 $s_tag_related_issues = 'このタグを共有するチケット (%1$s)';
 $s_tag_stats_attached = '設定されたチケット: %1$s';
-$s_tag_create = 'タグを作成';
+$s_tag_create = 'タグ作成';
 $s_show_all_tags = '全て';
 $s_time_tracking_billing_link = '作業時間集計';
 $s_time_tracking = '作業時間';
@@ -1230,3 +1229,6 @@ $s_due_date = '期限';
 $s_overdue = '期限超過';
 $s_view_account_title = 'ユーザー情報';
 $s_manage_user = '利用者管理';
+$s_install_information = 'MantisBT のインストール情報';
+$s_database_information = 'MantisBT のデータベース情報';
+$s_path_information = 'MantisBT のパス情報';

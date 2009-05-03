@@ -29,7 +29,6 @@
  * @author Gretar Einarsson, gretar@vedur.is
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Færa';
 $s_actiongroup_menu_copy = 'Afrita';
 $s_actiongroup_menu_assign = 'Úthlutað';

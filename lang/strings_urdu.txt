@@ -31,7 +31,6 @@
  * @author محبوب عالم
  */
 
-$s_charset = 'utf-8';
 $s_directionality = 'rtl';
 $s_actiongroup_menu_move = 'حرکت مين لاو';
 $s_actiongroup_menu_copy = 'نقل کرو';

@@ -1224,3 +1224,6 @@ $s_due_date = 'Data d\'escasença';
 $s_overdue = 'Passat degut';
 $s_view_account_title = 'Informacions de l\'utilizaire';
 $s_manage_user = 'Gerir l\'utilizaire';
+$s_install_information = 'Informacions de l\'installacion de MantisBT';
+$s_database_information = 'Informacions sus la banca de donadas de MantisBT';
+$s_path_information = 'Informacions suls camins de MantisBT';

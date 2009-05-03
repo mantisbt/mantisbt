@@ -30,7 +30,6 @@
  * @author KlaudiuMihaila
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Mută';
 $s_actiongroup_menu_copy = 'Copiază';
 $s_actiongroup_menu_assign = 'Atribuie';

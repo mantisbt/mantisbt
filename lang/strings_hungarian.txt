@@ -33,7 +33,6 @@
  * @author Leiric
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Mozgatás';
 $s_actiongroup_menu_copy = 'Másolás';
 $s_actiongroup_menu_assign = 'Hozzárendel';

@@ -34,7 +34,6 @@
  * @author Vít Jurásek, vit.jurasek@vegateam.cz
  */
 
-$s_charset = 'utf-8';
 $s_actiongroup_menu_move = 'Přesunout';
 $s_actiongroup_menu_copy = 'Kopírovat';
 $s_actiongroup_menu_assign = 'Přiřadit';
