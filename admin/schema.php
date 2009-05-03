@@ -561,5 +561,10 @@ $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_bug_rev_id_time', db_get_table
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_user_pref_table' ), "
 	 timezone C(32) NOTNULL DEFAULT '' " ) );
 
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_version_table' ), "
+	date_order_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_project_version_table', 'id', 'date_order', 'date_order_int' ) );
+$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_project_version_table' ), "date_order" ) );
+$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_project_version_table' ), "date_order_int", "date_order", "date_order_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
 
