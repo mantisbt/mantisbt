@@ -273,6 +273,8 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 		$t_elapsed = number_format( microtime(true) - $t_start, 4 );
 
 		array_push( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
+	} else {
+		array_push( $g_queries_array, 1 );
 	}
 
 	if( !$t_result ) {
@@ -372,6 +374,8 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 		}
 
 		array_push( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
+	} else {
+		array_push( $g_queries_array, 1 );
 	}
 
 	# We can't reset the counter because we have queries being built

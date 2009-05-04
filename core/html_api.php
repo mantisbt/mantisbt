@@ -578,18 +578,19 @@ function html_footer( $p_file ) {
 	if( helper_show_queries() ) {
 		$t_count = count( $g_queries_array );
 		echo "\t", $t_count, ' ', lang_get( 'total_queries_executed' ), '<br />', "\n";
-		$t_unique_queries = 0;
-		$t_shown_queries = array();
-		for( $i = 0;$i < $t_count;$i++ ) {
-			if( !in_array( $g_queries_array[$i][0], $t_shown_queries ) ) {
-				$t_unique_queries++;
-				$g_queries_array[$i][3] = false;
-				array_push( $t_shown_queries, $g_queries_array[$i][0] );
-			} else {
-				$g_queries_array[$i][3] = true;
-			}
-		}
 		if( ON == config_get( 'show_queries_list' ) ) {
+			$t_unique_queries = 0;
+			$t_shown_queries = array();
+			for( $i = 0;$i < $t_count;$i++ ) {
+				if( !in_array( $g_queries_array[$i][0], $t_shown_queries ) ) {
+					$t_unique_queries++;
+					$g_queries_array[$i][3] = false;
+					array_push( $t_shown_queries, $g_queries_array[$i][0] );
+				} else {
+					$g_queries_array[$i][3] = true;
+				}
+			}
+
 			echo "\t", $t_unique_queries, ' ', lang_get( 'unique_queries_executed' ), '<br />', "\n";
 			echo "\t", '<table>', "\n";
 			$t_total = 0;
