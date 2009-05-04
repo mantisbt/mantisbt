@@ -144,13 +144,6 @@
 
 	if ( config_get_global( 'admin_checks' ) == ON ) {
 
-		# Warning, if plain passwords are selected
-		if ( config_get( 'login_method' ) === PLAIN ) {
-			echo '<div class="warning" align="center">', "\n";
-			echo "\t", '<p><font color="red">', lang_get( 'warning_plain_password_authentication' ), '</font></p>', "\n";
-			echo '</div>', "\n";
-		}
-
 		# Generate a warning if administrator/root is valid.
 		$t_admin_user_id = user_get_id_by_name( 'administrator' );
 		if ( $t_admin_user_id !== false ) {
