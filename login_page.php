@@ -166,16 +166,13 @@
 			$t_db_version = config_get( 'database_version' , 0 );
 			# if db version is 0, we haven't moved to new installer.
 			if ( $t_db_version == 0 ) {
+				$t_upgrade_count = 0;
 				if ( db_table_exists( db_get_table( 'mantis_upgrade_table' ) ) ) {
 					$query = "SELECT COUNT(*) from " . db_get_table( 'mantis_upgrade_table' ) . ";";
 					$result = db_query_bound( $query );
-					if ( db_num_rows( $result ) < 1 ) {
-						$t_upgrade_count = 0;
-					} else {
+					if ( db_num_rows( $result ) > 0 ) {
 						$t_upgrade_count = (int)db_result( $result );
 					}
-				} else {
-					$t_upgrade_count = 0;
 				}
 
 				if ( $t_upgrade_count > 0 ) { # table exists, check for number of updates
