@@ -41,6 +41,7 @@ error_reporting( E_ALL | E_STRICT );
  * distribution.
  */
 $mantisRoot = dirname(__FILE__) . '/..';
+$mantisCore = "$mantisRoot/core";
 $mantisLibrary = "$mantisRoot/core/classes";
 $mantisTests = "$mantisRoot/tests";
 
@@ -50,6 +51,7 @@ $mantisTests = "$mantisRoot/tests";
  * include_path.  
  */
 $path = array(
+    $mantisCore,
     $mantisLibrary,
     $mantisTests,
     get_include_path()

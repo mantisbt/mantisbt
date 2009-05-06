@@ -27,6 +27,7 @@
 require_once dirname(__FILE__) . '/../TestConfig.php';
 
 require_once 'EnumTest.php';
+require_once 'StringTest.php';
 
 /**
  * @package    Tests
@@ -38,9 +39,10 @@ class Mantis_AllTests extends PHPUnit_Framework_TestSuite
 {
     public static function suite()
     {
-        $suite = new Mantis_AllTests('Mantis Bug Tracker');
+        $suite = new Mantis_AllTests('Main Code');
 
         $suite->addTestSuite('MantisEnumTest');
+        $suite->addTestSuite('Mantis_StringTest');
 
         return $suite;
     }
