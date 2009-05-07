@@ -53,7 +53,7 @@ $mantisTests = "$mantisRoot/tests";
 $path = array(
     $mantisCore,
     $mantisLibrary,
-    $mantisTests,
+    $mantisClasses,
     get_include_path()
     );
 set_include_path( implode( PATH_SEPARATOR, $path ) );

@@ -29,6 +29,29 @@
 
 	ob_start();
 
+/*
+ * Set include paths
+ */
+define ( 'BASE_PATH' , realpath( dirname(__FILE__) ) );
+$mantisLibrary = BASE_PATH . '/library';
+$mantisCore = BASE_PATH . '/core';
+
+/*
+ * Prepend the application/ and tests/ directories to the
+ * include_path.  
+ */
+$path = array(
+    $mantisCore,
+    $mantisLibrary,
+    get_include_path()
+    );
+set_include_path( implode( PATH_SEPARATOR, $path ) );
+
+/*
+ * Unset global variables that are no longer needed.
+ */
+unset($mantisRoot, $mantisLibrary, $mantisCore, $path);
+
 	# Include compatibility file before anything else
 	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'php_api.php' );
 

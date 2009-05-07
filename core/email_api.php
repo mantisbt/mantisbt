@@ -24,7 +24,8 @@
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
-define( 'PHPMAILER_PATH', $t_core_dir . 'phpmailer' . DIRECTORY_SEPARATOR );
+
+define( 'PHPMAILER_PATH', BASE_PATH . '/library/phpmailer/' );
 
 /**
  * requires current_user_api
