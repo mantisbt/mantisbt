@@ -40,7 +40,7 @@ compress_enable();
 
 html_page_top( lang_get( 'manage_tags_link' ) );
 
-print_manage_menu();
+print_manage_menu( 'manage_tags_page.php' );
 
 $t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
 $f_filter = strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_tag_prefix' ) ) );
