@@ -215,7 +215,7 @@
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
-			<span class="required">*</span><?php echo lang_get( 'summary' ) ?> <?php print_documentation_link( 'summary' ) ?>
+			<span class="required">*</span><?php print_documentation_link( 'summary' ) ?>
 		</td>
 		<td>
 			<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo $f_summary ?>" />
