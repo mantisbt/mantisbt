@@ -966,7 +966,7 @@
 			case CUSTOM_FIELD_TYPE_DATE:
 				// gpc_get_cf for date returns the value from strftime
 				// either false (php >= 5.1)  or -1 (php < 5.1) for failure
-				$t_valid &= ( $p_value !== false ) && ( $p_value > 0 );
+				$t_valid &= ( $p_value == null ) || ( ( $p_value !== false ) && ( $p_value > 0 ) );
 				break;
 			case CUSTOM_FIELD_TYPE_ENUM:
 			case CUSTOM_FIELD_TYPE_EMAIL:
