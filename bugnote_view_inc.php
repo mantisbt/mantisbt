@@ -62,6 +62,13 @@ $num_notes = count( $t_bugnotes );
 	collapse_open( 'bugnotes' );
 ?>
 <table class="width100" cellspacing="1">
+<tr>
+	<td class="form-title" colspan="2">
+<?php
+		collapse_icon( 'bugnotes' ); ?>
+		<?php echo lang_get( 'bug_notes_title' ) ?>
+	</td>
+</tr>
 <?php
 	# no bugnotes
 	if ( 0 == $num_notes ) {
@@ -71,15 +78,8 @@ $num_notes = count( $t_bugnotes );
 		<?php echo lang_get( 'no_bugnotes_msg' ) ?>
 	</td>
 </tr>
-<?php } else { # print bugnotes ?>
-<tr>
-	<td class="form-title" colspan="2">
-<?php
-		collapse_icon( 'bugnotes' ); ?>
-		<?php echo lang_get( 'bug_notes_title' ) ?>
-	</td>
-</tr>
-<?php
+<?php }
+
 	event_signal( 'EVENT_VIEW_BUGNOTES_START', array( $f_bug_id, $t_bugnotes ) );
 
 	$t_normal_date_format = config_get( 'normal_date_format' );
@@ -201,12 +201,11 @@ $num_notes = count( $t_bugnotes );
 	<td colspan="2"></td>
 </tr>
 <?php
-		} # end for loop
+	} # end for loop
 
-		if ( $t_total_time > 0 && access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
-			echo '<tr><td colspan="2">', sprintf ( lang_get( 'total_time_for_issue' ), db_minutes_to_hhmm( $t_total_time ) ), '</td></tr>';
-		}
-	} # end else
+	if ( $t_total_time > 0 && access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
+		echo '<tr><td colspan="2">', sprintf ( lang_get( 'total_time_for_issue' ), db_minutes_to_hhmm( $t_total_time ) ), '</td></tr>';
+	}
 
 	event_signal( 'EVENT_VIEW_BUGNOTES_END', $f_bug_id );
 ?>
