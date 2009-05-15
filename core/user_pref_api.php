@@ -1,7 +1,6 @@
 <?php
 # MantisBT - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+
 # MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -14,12 +13,12 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-#
-# --------------------------------------------------------
-# $Id$
-# --------------------------------------------------------
 
 /**
+ * User Preferences API
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  * @package CoreAPI
  * @subpackage UserPreferencesAPI
  */
@@ -57,73 +56,93 @@ $g_default_mapping = array(
 	'timezone' => 'default_timezone',
 );
 
-# ===================================
-# Preference Structure Definition
-# ===================================
+/**
+ * Preference Structure Definition
+ * @package MantisBT
+ * @subpackage classes
+ */
 class UserPreferences {
-	var $default_profile = NULL;
-	var $default_project = NULL;
-	var $advanced_report = NULL;
-	var $advanced_view = NULL;
-	var $advanced_update = NULL;
-	var $refresh_delay = NULL;
-	var $redirect_delay = NULL;
-	var $bugnote_order = NULL;
-	var $email_on_new = NULL;
-	var $email_on_assigned = NULL;
-	var $email_on_feedback = NULL;
-	var $email_on_resolved = NULL;
-	var $email_on_closed = NULL;
-	var $email_on_reopened = NULL;
-	var $email_on_bugnote = NULL;
-	var $email_on_status = NULL;
-	var $email_on_priority = NULL;
-	var $email_on_new_min_severity = NULL;
-	var $email_on_assigned_min_severity = NULL;
-	var $email_on_feedback_min_severity = NULL;
-	var $email_on_resolved_min_severity = NULL;
-	var $email_on_closed_min_severity = NULL;
-	var $email_on_reopened_min_severity = NULL;
-	var $email_on_bugnote_min_severity = NULL;
-	var $email_on_status_min_severity = NULL;
-	var $email_on_priority_min_severity = NULL;
-	var $email_bugnote_limit = NULL;
-	var $language = NULL;
-	var $timezone = NULL;
+	protected $default_profile = NULL;
+	protected $default_project = NULL;
+	protected $advanced_report = NULL;
+	protected $advanced_view = NULL;
+	protected $advanced_update = NULL;
+	protected $refresh_delay = NULL;
+	protected $redirect_delay = NULL;
+	protected $bugnote_order = NULL;
+	protected $email_on_new = NULL;
+	protected $email_on_assigned = NULL;
+	protected $email_on_feedback = NULL;
+	protected $email_on_resolved = NULL;
+	protected $email_on_closed = NULL;
+	protected $email_on_reopened = NULL;
+	protected $email_on_bugnote = NULL;
+	protected $email_on_status = NULL;
+	protected $email_on_priority = NULL;
+	protected $email_on_new_min_severity = NULL;
+	protected $email_on_assigned_min_severity = NULL;
+	protected $email_on_feedback_min_severity = NULL;
+	protected $email_on_resolved_min_severity = NULL;
+	protected $email_on_closed_min_severity = NULL;
+	protected $email_on_reopened_min_severity = NULL;
+	protected $email_on_bugnote_min_severity = NULL;
+	protected $email_on_status_min_severity = NULL;
+	protected $email_on_priority_min_severity = NULL;
+	protected $email_bugnote_limit = NULL;
+	protected $language = NULL;
+	protected $timezone = NULL;
 
-	function UserPreferences() {
+	private $pref_user_id;
+	private $pref_project_id;
+	
+	function UserPreferences( $p_user_id, $p_project_id ) {
 		$this->default_profile = 0;
 		$this->default_project = ALL_PROJECTS;
+		
+		$this->pref_user_id = (int)$p_user_id;
+		$this->pref_project_id = (int)$p_project_id;
+	}
+
+	public function __set($name, $value) {
+		$this->$name = $value;
+	}
+
+	public function __get( $t_string ) {
+		global $g_default_mapping;
+		if( is_null( $this->{$t_string} ) ) {
+			$this->{$t_string} = config_get( $g_default_mapping[$t_string], null, $this->pref_user_id, $this->pref_project_id );
+		}
+		return $this->{$t_string};
 	}
 
 	function Get( $t_string ) {
 		global $g_default_mapping;
 		if( is_null( $this->{$t_string} ) ) {
-			$this->{$t_string} = config_get( $g_default_mapping[$t_string] );
+			$this->{$t_string} = config_get( $g_default_mapping[$t_string], null, $this->pref_user_id, $this->pref_project_id );
 		}
 		return $this->{$t_string};
 	}
 }
 
-# ===================================
-# Caching
-# ===================================
 # ########################################
 # SECURITY NOTE: cache globals are initialized here to prevent them
 #   being spoofed if register_globals is turned on
 
 $g_cache_user_pref = array();
 
-# --------------------
-# Cache a user preferences row if necessary and return the cached copy
-#  If the third parameter is true (default), trigger an error
-#  if the preferences can't be found.  If the second parameter is
-#  false, return false if the preferences can't be found.
+/**
+ * Cache a user preferences row if necessary and return the cached copy
+ *  If the third parameter is true (default), trigger an error
+ *  if the preferences can't be found.  If the second parameter is
+ *  false, return false if the preferences can't be found.
+ *
+ * @return false|array
+ */
 function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigger_errors = true ) {
 	global $g_cache_user_pref;
 
-	if( isset( $g_cache_user_pref[$p_user_id][$p_project_id] ) ) {
-		return $g_cache_user_pref[$p_user_id][$p_project_id];
+	if( isset( $g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] ) ) {
+		return $g_cache_user_pref[(int)$p_user_id][(int)$p_project_id];
 	}
 
 	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
@@ -131,24 +150,24 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 	$query = "SELECT *
 				  FROM $t_user_pref_table
 				  WHERE user_id=" . db_param() . " AND project_id=" . db_param();
-	$result = db_query_bound( $query, Array( $p_user_id, $p_project_id ) );
+	$result = db_query_bound( $query, Array( (int)$p_user_id, (int)$p_project_id ) );
 
 	if( 0 == db_num_rows( $result ) ) {
 		if( $p_trigger_errors ) {
 			trigger_error( ERROR_USER_PREFS_NOT_FOUND, ERROR );
 		} else {
-			$g_cache_user_pref[$p_user_id][$p_project_id] = false;
+			$g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] = false;
 			return false;
 		}
 	}
 
 	$row = db_fetch_array( $result );
 
-	if( !isset( $g_cache_user_pref[$p_user_id] ) ) {
-		$g_cache_user_pref[$p_user_id] = array();
+	if( !isset( $g_cache_user_pref[(int)$p_user_id] ) ) {
+		$g_cache_user_pref[(int)$p_user_id] = array();
 	}
 
-	$g_cache_user_pref[$p_user_id][$p_project_id] = $row;
+	$g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] = $row;
 
 	date_default_timezone_set( $row['timezone'] );
 	return $row;
@@ -159,15 +178,12 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 	global $g_cache_user_pref;
 
-	$c_user_id = db_prepare_int( $p_user_id );
-	$c_project_id = db_prepare_int( $p_project_id );
-
 	if( null === $p_user_id ) {
 		$g_cache_user_pref = array();
 	} else if( null === $p_project_id ) {
-		unset( $g_cache_user_pref[$c_user_id] );
+		unset( $g_cache_user_pref[(int)$p_user_id] );
 	} else {
-		unset( $g_cache_user_pref[$c_user_id][$c_project_id] );
+		unset( $g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] );
 	}
 
 	return true;
@@ -179,10 +195,6 @@ function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 # --------------------
 # return true if the user has prefs assigned for the given project,
 #  false otherwise
-#
-# Trying to get the row shouldn't be any slower in the DB than getting COUNT(*)
-#  and the transfer time is negligable.  So we try to cache the row - it could save
-#  us another query later.
 function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	if( false === user_pref_cache_row( $p_user_id, $p_project_id, false ) ) {
 		return false;
@@ -194,11 +206,10 @@ function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 # ===================================
 # Creation / Deletion / Updating
 # ===================================
-# --------------------
+
 # perform an insert of a preference object into the DB
-#
-# Also see the higher level user_pref_set() and user_pref_set_default()
 function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
+	static $t_vars;
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_project_id = db_prepare_int( $p_project_id );
 
@@ -206,7 +217,10 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 
 	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
-	$t_vars = get_object_vars( $p_prefs );
+	if ($t_vars == null ) {
+		$t_vars = getClassProperties( 'UserPreferences', 'protected');
+	}
+
 	$t_values = array();
 
 	$t_params[] = db_param(); // user_id
@@ -232,23 +246,25 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 
 # --------------------
 # perform an update of a preference object into the DB
-#
-# Also see the higher level user_pref_set() and user_pref_set_default()
 function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
+	static $t_vars;
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_project_id = db_prepare_int( $p_project_id );
 
 	user_ensure_unprotected( $p_user_id );
 
 	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
-	$t_vars = get_object_vars( $p_prefs );
+
+	if ($t_vars == null ) {
+		$t_vars = getClassProperties( 'UserPreferences', 'protected');
+	}
 
 	$t_pairs = array();
 	$t_values = array();
 
 	foreach( $t_vars as $var => $val ) {
 		array_push( $t_pairs, "$var = " . db_param() ) ;
-		array_push( $t_values, $val );
+		array_push( $t_values, $p_prefs->$var );
 	}
 
 	$t_pairs_string = implode( ', ', $t_pairs );
@@ -303,8 +319,8 @@ function user_pref_delete_all( $p_user_id ) {
 	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
 	$query = "DELETE FROM $t_user_pref_table
-				  WHERE user_id='$c_user_id'";
-	db_query( $query );
+				  WHERE user_id=" . db_param();
+	db_query_bound( $query, Array( $c_user_id ) );
 
 	user_pref_clear_cache( $p_user_id );
 
@@ -332,23 +348,13 @@ function user_pref_delete_project( $p_project_id ) {
 	return true;
 }
 
-# ===================================
-# Data Access
-# ===================================
-# --------------------
-# return the user's preferences
-# @@@ (this should be a private interface as it doesn't have the benefit of applying
-#  global defaults before returning values.
-function user_pref_get_row( $p_user_id, $p_project_id = ALL_PROJECTS ) {
-	return user_pref_cache_row( $p_user_id, $p_project_id );
-}
-
 # --------------------
 # return the user's preferences in a UserPreferences object
 function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
+	static $t_vars;
 	global $g_default_mapping;
 
-	$t_prefs = new UserPreferences;
+	$t_prefs = new UserPreferences( $p_user_id, $p_project_id );
 
 	$row = user_pref_cache_row( $p_user_id, $p_project_id, false );
 
@@ -368,19 +374,18 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		}
 	}
 
+	if ($t_vars == null ) {
+		$t_vars = getClassProperties( 'UserPreferences', 'protected');
+	}
+
 	$t_row_keys = array_keys( $row );
-	$t_vars = get_object_vars( $t_prefs );
 
 	# Check each variable in the class
 	foreach( $t_vars as $var => $val ) {
-
 		# If we got a field from the DB with the same name
 		if( in_array( $var, $t_row_keys, true ) ) {
-
 			# Store that value in the object
 			$t_prefs->$var = $row[$var];
-		} else {
-			$t_prefs->$var = $t_prefs->Get( $var );
 		}
 	}
 	return $t_prefs;
@@ -391,9 +396,14 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 # If the preference can't be found try to return a defined default
 # If that fails, trigger a WARNING and return ''
 function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJECTS ) {
+	static $t_vars;
+
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
 
-	$t_vars = get_object_vars( $t_prefs );
+	if ($t_vars == null ) {
+		$t_reflection = new ReflectionClass('UserPreferences');
+		$t_vars = $t_reflection->getDefaultProperties();
+	}	
 
 	if( in_array( $p_pref_name, array_keys( $t_vars ), true ) ) {
 		return $t_prefs->Get( $p_pref_name );
@@ -448,11 +458,3 @@ function user_pref_set( $p_user_id, $p_prefs, $p_project_id = ALL_PROJECTS ) {
 	}
 }
 
-# create a set of default preferences for the project
-function user_pref_set_default( $p_user_id, $p_project_id = ALL_PROJECTS ) {
-
-	# get a default preferences object
-	$t_prefs = new UserPreferences();
-
-	return user_pref_set( $p_user_id, $t_prefs, $p_project_id );
-}

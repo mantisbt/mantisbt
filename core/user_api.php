@@ -460,7 +460,6 @@ function user_create( $p_username, $p_password, $p_email = '', $p_access_level =
 
 	# Create preferences for the user
 	$t_user_id = db_insert_id( $t_user_table );
-	user_pref_set_default( $t_user_id );
 
 	# Users are added with protected set to FALSE in order to be able to update
 	# preferences.  Now set the real value of protected.

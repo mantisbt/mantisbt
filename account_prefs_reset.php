@@ -55,6 +55,6 @@
 
 	user_ensure_unprotected( $f_user_id );
 
-	user_pref_set_default( $f_user_id );
+	user_pref_delete( $f_user_id );
 
 	print_header_redirect( $f_redirect_url, true, true );

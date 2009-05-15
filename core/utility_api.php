@@ -188,3 +188,30 @@ function get_gd_version() {
 function is_page_name( $p_string ) {
 	return isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], $p_string ) );
 }
+
+function getClassProperties($className, $types='public', $return_object = false, $include_parent = false ) {
+    $ref = new ReflectionClass($className); 
+    $props = $ref->getProperties(); 
+    $props_arr = array(); 
+    foreach($props as $prop){ 
+        $f = $prop->getName(); 
+        
+        if($prop->isPublic() and (stripos($types, 'public') === FALSE)) continue; 
+        if($prop->isPrivate() and (stripos($types, 'private') === FALSE)) continue; 
+        if($prop->isProtected() and (stripos($types, 'protected') === FALSE)) continue; 
+        if($prop->isStatic() and (stripos($types, 'static') === FALSE)) continue; 
+        
+        if ( $return_object )
+        	$props_arr[$f] = $prop;
+        else
+        	$props_arr[$f] = true;
+    } 
+	if ( $include_parent ) {
+	    if($parentClass = $ref->getParentClass()){ 
+	        $parent_props_arr = getClassProperties($parentClass->getName());//RECURSION 
+	        if(count($parent_props_arr) > 0) 
+	            $props_arr = array_merge($parent_props_arr, $props_arr); 
+	    } 
+	}
+	return $props_arr; 
+} 

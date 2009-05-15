@@ -46,10 +46,6 @@
 			}
 		}
 
-	  if ( !user_pref_exists( $p_user_id ) ) {
-			user_pref_set_default( $p_user_id );
-	  }
-
 	    # prefix data with u_
 		$t_pref = user_pref_get( $p_user_id );
 
