@@ -30,6 +30,10 @@
 
 	auth_ensure_user_authenticated();
 
+	$t_can_manage = access_has_global_level( config_get( 'manage_user_threshold' ) );
+	$t_can_see_realname = access_has_project_level( config_get( 'show_user_realname_threshold' ) );
+	$t_can_see_email = access_has_project_level( config_get( 'show_user_email_threshold' ) );
+
 	# extracts the user information for the currently logged in user
 	# and prefixes it with u_
 	$f_user_id = gpc_get_int( 'id', auth_get_current_user_id() );
@@ -72,7 +76,7 @@
 		</td>
 		<td>
 			<?php
-				if ( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
+				if ( ! ( $t_can_manage || $t_can_see_email ) ) {
 					print error_string(ERROR_ACCESS_DENIED);
 				} else {
 					if ( !is_blank( $u_email ) ) {
@@ -92,7 +96,7 @@
 		</td>
 		<td>
 			<?php
-				if ( !access_has_project_level( config_get( 'show_user_realname_threshold' ) ) ) {
+				if ( ! ( $t_can_manage || $t_can_see_realname ) ) {
 					print error_string(ERROR_ACCESS_DENIED);
 				} else {
 					echo $u_realname;
@@ -101,7 +105,7 @@
 		</td>
 	</tr>
 
-	<?php if ( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) { ?>
+	<?php if ( $t_can_manage ) { ?>
 	<tr>
 		<td colspan="2" class="center">
 			<?php print_bracket_link( 'manage_user_edit_page.php?user_id=' . $f_user_id, lang_get( 'manage_user' ) ); ?>
