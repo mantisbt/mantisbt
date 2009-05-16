@@ -26,6 +26,7 @@ $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 
 require_once('phpmailer/class.phpmailer.php');
+require_once('disposable/disposable.php');
 
 /**
  * requires current_user_api
