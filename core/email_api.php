@@ -25,7 +25,6 @@
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 
-define( 'PHPMAILER_PATH', BASE_PATH . '/library/phpmailer/' );
 require_once('phpmailer/class.phpmailer.php');
 
 /**
@@ -756,7 +755,6 @@ function email_send( $p_email_data ) {
 		if ( $t_mailer_method == PHPMAILER_METHOD_SMTP )
 			register_shutdown_function( 'email_smtp_close' );
 		$mail = new PHPMailer;
-		$mail->PluginDir = PHPMAILER_PATH;
 	} else {
 		$mail = $g_phpMailer;
 	}
@@ -770,7 +768,7 @@ function email_send( $p_email_data ) {
 	if( 'auto' == $t_lang ) {
 		$t_lang = config_get( 'fallback_language' );
 	}
-	$mail->SetLanguage( lang_get( 'phpmailer_language', $t_lang ), PHPMAILER_PATH . 'language' . DIRECTORY_SEPARATOR );
+	$mail->SetLanguage( lang_get( 'phpmailer_language', $t_lang ) );
 
 	# Select the method to send mail
 	switch( config_get( 'phpMailer_method' ) ) {
