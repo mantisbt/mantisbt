@@ -24,9 +24,6 @@
 
 $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
-
-require_once('phpmailer/class.phpmailer.php');
-
 /**
  * requires current_user_api
  */
@@ -758,6 +755,9 @@ function email_send( $p_email_data ) {
 	if( is_null( $g_phpMailer ) ) {
 		if ( $t_mailer_method == PHPMAILER_METHOD_SMTP )
 			register_shutdown_function( 'email_smtp_close' );
+		if( !class_exists( 'PHPMailer' ) ) {
+			require_once( BASE_PATH . DIRECTORY_SEPARATOR  . 'library' . DIRECTORY_SEPARATOR . 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
+		}
 		$mail = new PHPMailer;
 	} else {
 		$mail = $g_phpMailer;
