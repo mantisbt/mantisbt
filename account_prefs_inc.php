@@ -265,16 +265,6 @@
 		<input type="text" name="email_bugnote_limit" maxlength="2" size="2" value="<?php echo $t_pref->email_bugnote_limit ?>" />
 	</td>
 </tr>
-<tr class="row-2">
-	<td class="category">
-		<?php echo lang_get( 'timezone' ) ?>
-	</td>
-	<td>
-		<select name="timezone">
-			<?php print_timezone_option_list( $t_pref->timezone ?  $t_pref->timezone  : config_get_global( 'default_timezone' ) ) ?>
-		</select>
-	</td>
-</tr>
 <?php } else { ?>
 		<input type="hidden" name="email_on_new"      value="<?php echo $t_pref->email_on_new ?>" />
 		<input type="hidden" name="email_on_assigned" value="<?php echo $t_pref->email_on_assigned ?>" />
@@ -296,6 +286,16 @@
 		<input type="hidden" name="email_on_priority_min_severity" value="<?php echo $t_pref->email_on_priority_min_severity ?>" />
 		<input type="hidden" name="email_bugnote_limit" value="<?php echo $t_pref->email_bugnote_limit ?>" />
 <?php } ?>
+<tr class="row-2">
+	<td class="category">
+		<?php echo lang_get( 'timezone' ) ?>
+	</td>
+	<td>
+		<select name="timezone">
+			<?php print_timezone_option_list( $t_pref->timezone ?  $t_pref->timezone  : config_get_global( 'default_timezone' ) ) ?>
+		</select>
+	</td>
+</tr>
 <tr class="row-2">
 	<td class="category">
 		<?php echo lang_get( 'language' ) ?>
