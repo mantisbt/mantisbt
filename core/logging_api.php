@@ -32,6 +32,7 @@ $g_log_levels = array(
 	LOG_EMAIL_RECIPIENT => 'mail_recipient',
 	LOG_FILTERING => 'filtering',
 	LOG_AJAX => 'ajax',
+	LOG_LDAP => 'ldap',
 );
 
 function log_event( $p_level, $p_msg ) {

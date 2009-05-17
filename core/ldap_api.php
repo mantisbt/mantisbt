@@ -28,14 +28,18 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	$t_ldap_server = config_get( 'ldap_server' );
 
 	if( !extension_loaded( 'ldap' ) ) {
+		log_event( LOG_LDAP, "Error: LDAP extension missing in php" );
 		trigger_error( ERROR_LDAP_EXTENSION_NOT_LOADED, ERROR );
 	}
 
+	log_event( LOG_LDAP, "Attempting connection to LDAP server" );
 	$t_ds = @ldap_connect( $t_ldap_server );
 	if( $t_ds > 0 ) {
+		log_event( LOG_LDAP, "Connection accepted to LDAP server" );
 		$t_protocol_version = config_get( 'ldap_protocol_version' );
 
 		if( $t_protocol_version > 0 ) {
+			log_event( LOG_LDAP, "Setting LDAP protocol to  to ldap server to " . $t_protocol_version );
 			ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
 		}
 
@@ -47,15 +51,20 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		}
 
 		if( !is_blank( $p_binddn ) && !is_blank( $p_password ) ) {
+			log_event( LOG_LDAP, "Attempting bind to ldap server with username and password" );
 			$t_br = @ldap_bind( $t_ds, $p_binddn, $p_password );
 		} else {
 			# Either the Bind DN or the Password are empty, so attempt an anonymous bind.
+			log_event( LOG_LDAP, "Attempting anonymous bind to ldap server" );
 			$t_br = @ldap_bind( $t_ds );
 		}
 		if( !$t_br ) {
+			log_event( LOG_LDAP, "bind to ldap server  failed - authentication error?" );
 			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
 		}
+		log_event( LOG_LDAP, "bind to ldap server successful" );
 	} else {
+		log_event( LOG_LDAP, "Connection to ldap server failed" );
 		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
 	}
 
@@ -82,6 +91,7 @@ function ldap_email_from_username( $p_username ) {
 	);
 	$t_ds = ldap_connect_bind();
 
+	log_event( LOG_LDAP, "Searching for $t_search_filter" );
 	$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
 
 	$t_info = ldap_get_entries( $t_ds, $t_sr );
@@ -106,6 +116,7 @@ function ldap_has_group( $p_user_id, $p_group ) {
 	);
 	$t_ds = ldap_connect_bind();
 
+	log_event( LOG_LDAP, "Searching for $t_search_filter" );
 	$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
 	$t_entries = ldap_count_entries( $t_ds, $t_sr );
 	ldap_free_result( $t_sr );
@@ -142,6 +153,7 @@ function ldap_authenticate( $p_user_id, $p_password ) {
 	$t_ds = ldap_connect_bind();
 
 	# Search for the user id
+	log_event( LOG_LDAP, "Searching for $t_search_filter" );
 	$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
 	$t_info = ldap_get_entries( $t_ds, $t_sr );
 
