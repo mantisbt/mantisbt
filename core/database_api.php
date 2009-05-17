@@ -31,7 +31,7 @@
 
 # Do not explicitly include $t_core_dir to allow using system ADODB by including
 # it in include path and removing the one distributed with MantisBT (see #7907).
-require_once( 'adodb/adodb.inc.php' );
+require_once( 'adodb' . DIRECTORY_SEPARATOR . 'adodb.inc.php' );
 
 /**
  * An array in which all executed queries are stored.  This is used for profiling
