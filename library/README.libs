@@ -7,7 +7,7 @@ directory       | project         | version | status
 phpmailer       | PHPMailer       | 5.0.0   | unpatched
 rssbuilder      | RSSBuilder      | 2.2.1   | patched: removed __autoload function
 adodb           | adodb           | 5.0.8a  | patched: various, see git
-
+disposable      | disposable      | 1.1.0   | unpatched
 
 
 Upstream projects
@@ -15,3 +15,4 @@ Upstream projects
 phpmailer  -  http://phpmailer.codeworxtech.com/
 rssbuilder -  http://code.google.com/p/flaimo-php/
 adodb      -  http://adodb.sourceforge.net/
+disposable -  http://github.com/vboctor/disposable_email_checker/tree/master
