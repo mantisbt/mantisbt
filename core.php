@@ -113,7 +113,7 @@ unset($mantisRoot, $mantisLibrary, $mantisCore, $path);
 			return;
 		}
 
-		$t_require_path = BASE_PATH . '/library/rssbuilder/class.' . $className . '.inc.php';
+		$t_require_path = BASE_PATH . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $className . '.inc.php';
 
 		if ( file_exists( $t_require_path ) ) {
 			require_once( $t_require_path );
