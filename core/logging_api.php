@@ -66,6 +66,21 @@ function log_event( $p_level, $p_msg ) {
 		case 'file':
 				error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
 			break;
+		case 'firebug':
+				if( !class_exists( 'FirePHP' ) ) {
+					if( file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'FirePHPCore' . DIRECTORY_SEPARATOR . 'FirePHP.class.php' ) ) {
+						require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'FirePHPCore' . DIRECTORY_SEPARATOR . 'FirePHP.class.php' );
+					}
+				}
+				if( class_exists( 'FirePHP' ) ) {
+					static $firephp;
+					if( $firephp === null ) {
+						$firephp = FirePHP::getInstance(true);
+					}
+					$firephp->log( $t_php_event );
+					return;
+				}
+				// if firebug is not available, fall through
 		default:
 			# use default PHP error log settings
 				error_log( $t_php_event . PHP_EOL );
