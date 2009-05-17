@@ -169,12 +169,8 @@ function helper_get_current_project() {
 		$t_project_id = gpc_get_cookie( $t_cookie_name, null );
 
 		if( null === $t_project_id ) {
-			$t_pref_row = user_pref_cache_row( auth_get_current_user_id(), ALL_PROJECTS, false );
-			if( false === $t_pref_row ) {
-				$t_project_id = ALL_PROJECTS;
-			} else {
-				$t_project_id = $t_pref_row['default_project'];
-			}
+			$t_pref = user_pref_get( auth_get_current_user_id(), ALL_PROJECTS, false );
+			$t_project_id = $t_pref->default_project;
 		} else {
 			$t_project_id = split( ';', $t_project_id );
 			$t_project_id = $t_project_id[count( $t_project_id ) - 1];
