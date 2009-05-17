@@ -1,0 +1,16 @@
+This directory contains a copy the 3rd party libraries used by MantisBT
+
+The version and status of each is summarized below:
+
+directory       | project         | version | status
+----------------------------------------------------------------
+phpmailer       | PHPMailer       | 5.0.0   | unpatched
+rssbuilder      | RSSBuilder      | 2.2.1   | patched: removed __autoload function
+
+
+
+
+Upstream projects
+==================
+phpmailer  -  http://phpmailer.codeworxtech.com/
+rssbuilder -  http://code.google.com/p/flaimo-php/
