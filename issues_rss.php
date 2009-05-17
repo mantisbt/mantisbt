@@ -36,7 +36,7 @@
 
 	$t_core_path = config_get( 'core_path' );
 
-	require_once( $t_core_path . 'rssbuilder/class.RSSBuilder.inc.php' );
+	require_once( 'rssbuilder/class.RSSBuilder.inc.php' );
 	require_once( $t_core_path . 'user_api.php' );
 	require_once( $t_core_path . 'filter_api.php' );
 	require_once( $t_core_path . 'rss_api.php' );
