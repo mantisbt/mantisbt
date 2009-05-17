@@ -26,7 +26,6 @@ $t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 
 require_once('phpmailer/class.phpmailer.php');
-require_once('disposable/disposable.php');
 
 /**
  * requires current_user_api
@@ -208,6 +207,10 @@ function email_ensure_valid( $p_email ) {
 
 # Check if the email address is disposable
 function email_is_disposable( $p_email ) {
+	if( !class_exists( 'DisposableEmailChecker' ) ) {
+		require_once( BASE_PATH . DIRECTORY_SEPARATOR  . 'library' . DIRECTORY_SEPARATOR . 'disposable' . DIRECTORY_SEPARATOR . 'disposable.php' );
+	}
+
 	return DisposableEmailChecker::is_disposable_email( $p_email );
 }
 
