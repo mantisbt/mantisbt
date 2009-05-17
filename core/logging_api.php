@@ -68,8 +68,8 @@ function log_event( $p_level, $p_msg ) {
 			break;
 		case 'firebug':
 				if( !class_exists( 'FirePHP' ) ) {
-					if( file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'FirePHPCore' . DIRECTORY_SEPARATOR . 'FirePHP.class.php' ) ) {
-						require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'FirePHPCore' . DIRECTORY_SEPARATOR . 'FirePHP.class.php' );
+					if( file_exists( BASE_PATH . DIRECTORY_SEPARATOR  . 'library' . DIRECTORY_SEPARATOR . 'FirePHPCore' . DIRECTORY_SEPARATOR . 'FirePHP.class.php' ) ) {
+						require_once( BASE_PATH . DIRECTORY_SEPARATOR  . 'library' . DIRECTORY_SEPARATOR . 'FirePHPCore' . DIRECTORY_SEPARATOR . 'FirePHP.class.php' );
 					}
 				}
 				if( class_exists( 'FirePHP' ) ) {
