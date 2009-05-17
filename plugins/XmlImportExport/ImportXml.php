@@ -14,8 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-require_once( 'ImportXml/Mapper.php' );
-require_once( 'ImportXml/Issue.php' );
+require_once( 'ImportXml' . DIRECTORY_SEPARATOR . 'Mapper.php' );
+require_once( 'ImportXml' . DIRECTORY_SEPARATOR . 'Issue.php' );
 
 class SourceData {
 	public $version;

@@ -15,7 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 $t_plugin_path = config_get( 'plugin_path' );
-require_once( $t_plugin_path . 'XmlImportExport/ImportXml.php' );
+require_once( $t_plugin_path . 'XmlImportExport' . DIRECTORY_SEPARATOR . 'ImportXml.php' );
 
 auth_reauthenticate( );
 
