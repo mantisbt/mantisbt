@@ -568,3 +568,21 @@ $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_project_versio
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_project_version_table' ), "date_order_int", "date_order", "date_order_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
 
+
+
+
+
+
+
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_sponsorship_table' ), "
+	date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_sponsorship_table' ), "
+	last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+
+$upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_sponsorship_table', 'id', array( 'date_submitted', 'last_updated' ), array( 'date_submitted_int', 'last_updated_int' ) ) );
+
+$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_sponsorship_table' ), "last_updated" ) );
+$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_sponsorship_table' ), "last_updated_int", "last_updated", "last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_sponsorship_table' ), "date_submitted" ) );
+$upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_sponsorship_table' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+
