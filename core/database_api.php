@@ -28,7 +28,6 @@
  *
  * @uses config_api.php
  */
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 # Do not explicitly include $t_core_dir to allow using system ADODB by including
 # it in include path and removing the one distributed with MantisBT (see #7907).
