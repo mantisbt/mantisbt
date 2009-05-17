@@ -33,8 +33,8 @@
  * Set include paths
  */
 define ( 'BASE_PATH' , realpath( dirname(__FILE__) ) );
-$mantisLibrary = BASE_PATH . '/library';
-$mantisCore = BASE_PATH . '/core';
+$mantisLibrary = BASE_PATH . DIRECTORY_SEPARATOR . 'library';
+$mantisCore = BASE_PATH . DIRECTORY_SEPARATOR . 'core';
 
 /*
  * Prepend the application/ and tests/ directories to the
