@@ -469,7 +469,7 @@ $s_email_bugnote_limit = 'E-mail Notes Limit';
 $s_language = 'Language';
 $s_update_prefs_button = 'Update Prefs';
 $s_reset_prefs_button = 'Reset Prefs';
-$s_timezone = 'TimeZone';
+$s_timezone = 'Time Zone';
 
 # account_prefs_reset.php
 $s_prefs_reset_msg = 'Preferences have been reset...';
