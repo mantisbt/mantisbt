@@ -32,17 +32,6 @@ function wiki_enabled() {
 }
 
 /**
- * Returns whether wiki functionality is enabled, triggers error on failure
- * @return null
- * @access public
- */
-function wiki_ensure_enabled() {
-	if( !wiki_enabled() ) {
-		access_denied();
-	}
-}
-
-/**
  *
  * @return null
  * @access public
