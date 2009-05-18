@@ -129,6 +129,7 @@ class UserPreferences {
 #   being spoofed if register_globals is turned on
 
 $g_cache_user_pref = array();
+$g_cache_current_user_pref = array();
 
 /**
  * Cache a user preferences row if necessary and return the cached copy
@@ -353,6 +354,11 @@ function user_pref_delete_project( $p_project_id ) {
 function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	static $t_vars;
 	global $g_default_mapping;
+	global $g_cache_current_user_pref;
+
+	if ( isset( $g_cache_current_user_pref[(int)$p_project_id] ) &&  auth_get_current_user_id() == $p_user_id ) {
+		return $g_cache_current_user_pref[(int)$p_project_id];
+	}
 
 	$t_prefs = new UserPreferences( $p_user_id, $p_project_id );
 
@@ -387,6 +393,9 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 			# Store that value in the object
 			$t_prefs->$var = $row[$var];
 		}
+	}
+	if ( auth_get_current_user_id() == $p_user_id ) {
+		$g_cache_current_user_pref[ (int)$p_project_id ] = $t_prefs;
 	}
 	return $t_prefs;
 }
