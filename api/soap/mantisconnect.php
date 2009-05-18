@@ -6,13 +6,8 @@
 # change the license of future releases.
 # See docs/ folder for more details
 
-$t_current_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-$t_nusoap_dir  = $t_current_dir . 'nusoap';
-
-# includes nusoap classes
-chdir( $t_nusoap_dir );
-require_once( 'nusoap.php' );
-chdir( $t_current_dir );
+set_include_path( '../../library' );
+require_once( 'nusoap/nusoap.php' );
 
 # create server
 $l_oServer = new soap_server();
