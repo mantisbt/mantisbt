@@ -42,7 +42,8 @@ error_reporting( E_ALL | E_STRICT );
  */
 $mantisRoot = dirname(__FILE__) . '/..';
 $mantisCore = "$mantisRoot/core";
-$mantisLibrary = "$mantisRoot/core/classes";
+$mantisLibrary = "$mantisRoot/library";
+$mantisClasses = "$mantisRoot/core/classes";
 $mantisTests = "$mantisRoot/tests";
 
 
