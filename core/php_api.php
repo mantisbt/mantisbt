@@ -96,3 +96,10 @@ if ( !function_exists( 'memory_get_peak_usage') ) {
 		return memory_get_usage();
 	}
 }
+
+# If mb_* not defined, define it to map to standard methods.
+if ( !function_exists( 'mb_substr' ) ) {
+	function mb_substr( $p_text, $p_index, $p_size ) {
+		return substr( $p_text, $p_index, $p_size );
+	}
+}

@@ -656,7 +656,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 	if( strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
 		$t_relationship_info_text .= $t_bug->summary;
 	} else {
-		$t_relationship_info_text .= substr( $t_bug->summary, 0, $t_summary_wrap_at - 3 ) . '...';
+		$t_relationship_info_text .= mb_substr( $t_bug->summary, 0, $t_summary_wrap_at - 3 ) . '...';
 	}
 
 	# add delete link if bug not read only and user has access level
