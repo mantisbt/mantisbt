@@ -64,7 +64,7 @@
 
 		echo '<div class="quick-summary-left">';
 		echo lang_get( 'last_visit' ) . ': ';
-		echo print_date( config_get( 'normal_date_format' ), current_user_get_field( 'last_visit' ) );
+		echo date( config_get( 'normal_date_format' ), current_user_get_field( 'last_visit' ) );
 		echo '</div>';
 	}
 

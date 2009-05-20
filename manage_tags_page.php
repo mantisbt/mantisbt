@@ -158,8 +158,8 @@ foreach ( $t_result as $t_tag_row ) {
 		<td><?php echo $t_tag_name ?></td>
 		<?php } ?>
 		<td><?php echo user_get_name( $t_tag_row['user_id'] ) ?></td>
-		<td><?php echo print_date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
-		<td><?php echo print_date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
+		<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
+		<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
 	</tr>
 <?php } ?>
 

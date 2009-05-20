@@ -198,10 +198,10 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo get_enum_element( 'reproducibility', $t_bug->reproducibility ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( $t_date_format, $t_bug->date_submitted ) ?>
+		<?php echo date( $t_date_format, $t_bug->date_submitted ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( $t_date_format, $t_bug->last_updated ) ?>
+		<?php echo date( $t_date_format, $t_bug->last_updated ) ?>
 	</td>
 </tr>
 <tr>
@@ -235,7 +235,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <?php
 		}
 		if ( !date_is_null( $t_bug->due_date ) ) {
-				print_date( $t_short_date_format, $t_bug->due_date );
+				echo date( $t_short_date_format, $t_bug->due_date );
 		print "\t\t</td>\n";
 		}
 	} else {

@@ -89,12 +89,12 @@
 
 	<!-- Date Submitted -->
 	<td>
-		<?php print_date( config_get( 'normal_date_format' ), $t_bug->date_submitted ) ?>
+		<?php echo date( config_get( 'normal_date_format' ), $t_bug->date_submitted ) ?>
 	</td>
 
 	<!-- Date Updated -->
 	<td>
-		<?php print_date( config_get( 'normal_date_format' ), $t_bug->last_updated ) ?>
+		<?php echo date( config_get( 'normal_date_format' ), $t_bug->last_updated ) ?>
 	</td>
 
 </tr>

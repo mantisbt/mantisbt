@@ -42,17 +42,6 @@ function date_get_null() {
 }
 
 /**
- * prints the date given the formating string
- * @param string $p_format
- * @param int $p_date
- * @return null
- * @access public
- */
-function print_date( $p_format, $p_date ) {
-	echo date( $p_format, $p_date );
-}
-
-/**
  *
  * @param int $p_month
  * @return null

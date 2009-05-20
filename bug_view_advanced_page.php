@@ -190,12 +190,12 @@
 
 	<!-- Date Submitted -->
 	<td>
-		<?php print_date( config_get( 'normal_date_format' ), $t_bug->date_submitted ) ?>
+		<?php echo date( config_get( 'normal_date_format' ), $t_bug->date_submitted ) ?>
 	</td>
 
 	<!-- Date Updated -->
 	<td>
-		<?php print_date( config_get( 'normal_date_format' ), $t_bug->last_updated ) ?>
+		<?php echo date( config_get( 'normal_date_format' ), $t_bug->last_updated ) ?>
 	</td>
 
 </tr>
@@ -239,7 +239,7 @@
 	?>
 		<?php
 			if ( !date_is_null( $t_bug->due_date ) ) {
-				print_date( config_get( 'short_date_format' ), $t_bug->due_date ); }
+				echo date( config_get( 'short_date_format' ), $t_bug->due_date ); }
 			?>
 	</td>
 	<?php } else { ?>
