@@ -34,9 +34,11 @@ function install_category_migrate() {
 	$t_project_category_table = db_get_table( 'mantis_project_category_table' );
 
 	// disable query logging (even if it's enabled in config for this)
-	if( $g_db_log_queries !== 0) {
+	if ( $g_db_log_queries !== 0 ) {
 		$t_log_queries = $g_db_log_queries;
 		$g_db_log_queries = 0;
+	} else {
+		$t_log_queries = null;
 	}
 
 	$query = "SELECT project_id, category FROM $t_project_category_table ORDER BY project_id, category";
@@ -83,7 +85,7 @@ function install_category_migrate() {
 	}
 
 	// re-enabled query logging if we disabled it
-	if( $t_log_queries !== null) {
+	if ( $t_log_queries !== null ) {
 		$g_db_log_queries = $t_log_queries;
 	}
 
@@ -96,9 +98,11 @@ function install_date_migrate( $p_data) {
 	global $g_db_log_queries;
 	
 	// disable query logging (even if it's enabled in config for this)
-	if( $g_db_log_queries !== 0) {
+	if ( $g_db_log_queries !== 0 ) {
 		$t_log_queries = $g_db_log_queries;
 		$g_db_log_queries = 0;
+	} else {
+		$t_log_queries = null;
 	}
 
 	$t_table = db_get_table( $p_data[0] );
@@ -153,7 +157,7 @@ function install_date_migrate( $p_data) {
 	}
 
 	// re-enabled query logging if we disabled it
-	if( $t_log_queries !== null) {
+	if ( $t_log_queries !== null ) {
 		$g_db_log_queries = $t_log_queries;
 	}
 
