@@ -427,6 +427,7 @@ $s_email_bugnote_limit = 'E-maillimiet opmerkingen';
 $s_language = 'Taal';
 $s_update_prefs_button = 'Instellingen aanpassen';
 $s_reset_prefs_button = 'Begininstellingen';
+$s_timezone = 'Tijdzone';
 $s_prefs_reset_msg = 'Instellingen zijn teruggezet op begininstellingen.';
 $s_prefs_updated_msg = 'Instellingen zijn aangepast...';
 $s_profile_added_msg = 'Profiel toegevoegd...';

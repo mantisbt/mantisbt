@@ -435,6 +435,7 @@ $s_email_bugnote_limit = 'Nombre maximal d\'annotations de bogue envoyées par c
 $s_language = 'Langue';
 $s_update_prefs_button = 'Mettre à jour les préférences';
 $s_reset_prefs_button = 'Réinitialiser les préférences';
+$s_timezone = 'Fuseau horaire';
 $s_prefs_reset_msg = 'Les préférences ont été réinitialisées...';
 $s_prefs_updated_msg = 'Les préférences ont été mises à jour...';
 $s_profile_added_msg = 'Profil ajouté...';

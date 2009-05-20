@@ -1228,3 +1228,6 @@ $s_due_date = 'تاريخ الدفع';
 $s_overdue = 'تأخر عن الدفع';
 $s_view_account_title = 'معلومات المستخدم';
 $s_manage_user = 'التحكم بالمستخدم';
+$s_install_information = 'معلومات تنصيب مانتيس بي تي';
+$s_database_information = 'معلومات قاعدة بيانات مانتيس بي تي';
+$s_path_information = 'معلومات مسار مانتيس بي تي';

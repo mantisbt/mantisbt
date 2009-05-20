@@ -426,6 +426,7 @@ $s_email_bugnote_limit = 'コメントのメール制限';
 $s_language = '言語';
 $s_update_prefs_button = '更新';
 $s_reset_prefs_button = 'リセット';
+$s_timezone = 'タイムゾーン';
 $s_prefs_reset_msg = '設定がリセットされました。';
 $s_prefs_updated_msg = '設定が更新されました。';
 $s_profile_added_msg = 'プロフィールが追加されました。';

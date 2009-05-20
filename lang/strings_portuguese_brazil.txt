@@ -1228,3 +1228,6 @@ $s_due_date = 'Data Limite';
 $s_overdue = 'Atrasados';
 $s_view_account_title = 'Informação do Usuário';
 $s_manage_user = 'Gerenciar Usuário';
+$s_install_information = 'Informação de Instalação do MantisBT';
+$s_database_information = 'Informação de Base de Dados do MantisBT';
+$s_path_information = 'Informação de Caminho do MantisBT';

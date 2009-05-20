@@ -28,6 +28,7 @@
  *
  * @author Bernat
  * @author Bernat Pegueroles - bpf@pegueroles.com
+ * @author Solde
  */
 
 $s_actiongroup_menu_move = 'Mou';
@@ -230,6 +231,7 @@ $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ruta de càrrega no vàlida.  E
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Fitxer no penjat. Si us plau feu enrera i trieu un fitxer abans de clicar Càrrega';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'El fitxer penjat no es pot moure al directori de destí. El Directori o no existeix o no té permisos d\'escriptura pel webserver';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'No es pot establir una comanda com a duplicat d\'ella mateixa.';
+$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'No s\'ha trobat la revisió de l\'error.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Camp personalitzat no trobat';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Aquest nom està duplicat.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Al menys un projecte té aquest camp en ús.';
@@ -421,6 +423,7 @@ $s_email_bugnote_limit = 'Límit de notes per correu';
 $s_language = 'Idioma';
 $s_update_prefs_button = 'Actualitza les Preferències';
 $s_reset_prefs_button = 'Restableix les Preferències';
+$s_timezone = 'Zona horaria';
 $s_prefs_reset_msg = 'Les Preferències han estat restablertes...';
 $s_prefs_updated_msg = 'Les Preferències han estat actualitzades...';
 $s_profile_added_msg = 'Perfil agregat...';
@@ -536,6 +539,13 @@ $s_sticky_issue = 'Comanda marcada';
 $s_profile = 'Perfil';
 $s_update_advanced_link = 'Canvia a format d\'Actualització Avançada';
 $s_updating_bug_simple_title = 'Actualitzant informació de la Comanda';
+$s_view_revisions = 'Veure revisions';
+$s_revision = 'Revisió';
+$s_revision_by = '%1$s pel %2$s';
+$s_revision_drop = 'Perdre';
+$s_all_revisions = 'Totes les revisions';
+$s_back_to_issue = 'Retorna a l\'incidència';
+$s_confirm_revision_drop = 'Està segur que vol eliminar aquesta revisió de l\'error?';
 $s_vote_added_msg = 'El seu vot ha estat registrat...';
 $s_bugnote_added_msg = 'Nota agregada...';
 $s_bugnote_deleted_msg = 'La Nota ha estat eliminada...';
@@ -805,6 +815,7 @@ $s_my_view_title_resolved = 'Resolts';
 $s_my_view_title_monitored = 'Monitoritzats per Mi';
 $s_my_view_title_feedback = 'Esperant Més Informació de part Meva';
 $s_my_view_title_verify = 'Esperant Confirmació meva de la Resolució';
+$s_my_view_title_my_comments = 'Incidències que he comentat';
 $s_news_added_msg = 'Notícia Agregada...';
 $s_news_deleted_msg = 'Notícia Eliminada...';
 $s_delete_news_sure_msg = 'Està segur que desitja eliminar aquesta notícia?';
@@ -1121,7 +1132,7 @@ $s_see_email_addresses_of_other_users = 'examina les adreces de correu d\'altres
 $s_send_reminders = 'Envia recordatoris';
 $s_add_profiles = 'Afegeix perfils';
 $s_notify_of_new_user_created = 'Notifica la creació d\'un nou usuari';
-$s_email_notification = 'NOTIFICACIÓ PER CORREU';
+$s_email_notification = 'Avís per correu eletrònic';
 $s_status_changed_to = 'Estat canviat a';
 $s_email_on_deleted = 'Enviament de correu per eliminacions';
 $s_email_on_sponsorship_changed = 'Enviament de correu per canvis en Patrocinis';
@@ -1219,3 +1230,6 @@ $s_overdue = 'Endarrerit';
 $s_view_account_title = 'Informació de l\Usuari';
 $s_manage_user = 'Gestiona l\'Usuari';
 $s_word_separator = '&#32;';
+$s_install_information = 'Informació de la instal·lació de MantisBT';
+$s_database_information = 'Informació de la base de dades de MantisBT';
+$s_path_information = 'Informació de la ruta de MantisBT';

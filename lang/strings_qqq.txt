@@ -1,0 +1,47 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Message documentation (Message documentation)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Amdei
+ * @author Amire80
+ * @author Fryed-peach
+ * @author Giallu
+ * @author Minh Nguyen
+ * @author Siebrand
+ */
+
+$s_excel_export = '“Excel” is the name of a program; do not translate it unless Microsoft has translated the program’s name into your language (e.g., 엑셀 in Korean).';
+$MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'If we need to specify the number of expected parameter in string, we just need to write something like "Lalal %2$s bububu %1$d", where 1 and 2 - the index number in argument list (actually, expected in original message)';
+$s_timezone = '{{Identical|Time zone}}';
+$s_revision = '{{Identical|Revision}}';
+$s_please_report = 'Is displayed whenever an SQL error occurs.
+* $1 is a mailto: link with {{msg-mantis|s_administrator}} as link text';
+$s_plugin_key = 'This message is the title of the page section used to show the different meaning of color codes;
+Color codes are described in the s_plugin_key* messages';
+$s_on = 'Switch confition (for filter, for example)';
+$s_off = 'Switch condition (for filter, for example)';
+$s_show_all_tags = '{{Identical|All}}';
