@@ -38,7 +38,7 @@
 	if ( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 		$t_redirect_url = 'login_cookie_test.php?return=' . string_sanitize_url( $f_return );
 	} else {
-		$t_redirect_url = 'login_page.php?return=' . string_sanitize_url( $f_return ) . '&error=1';
+		$t_redirect_url = 'login_page.php?return=' . string_sanitize_url( $f_return ) . '&error=1&username=' . urlencode( $f_username );
 
 		if ( HTTP_AUTH == config_get( 'login_method' ) ) {
 			auth_http_prompt();

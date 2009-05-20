@@ -35,6 +35,7 @@
 	$f_error		= gpc_get_bool( 'error' );
 	$f_cookie_error	= gpc_get_bool( 'cookie_error' );
 	$f_return		= gpc_get_string( 'return', '' );
+	$f_username     = gpc_get_string( 'username', '' );
 
 	# Check for automatic logon methods where we want the logon to just be handled by login.php
 	if ( auth_automatic_logon_bypass_form() ) {
@@ -102,7 +103,7 @@
 		<?php echo lang_get( 'username' ) ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" />
+		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $f_username ); ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -217,7 +218,7 @@
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 <script type="text/javascript" language="JavaScript">
 <!--
-	window.document.login_form.username.focus();
+	window.document.login_form.<?php if ( is_blank( $f_username ) ) { echo 'username'; } else { echo 'password'; } ?>.focus();
 // -->
 </script>
 <?php } ?>
