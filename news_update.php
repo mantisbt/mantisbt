@@ -31,6 +31,8 @@
 	require_once( $t_core_path.'string_api.php' );
 	require_once( $t_core_path.'print_api.php' );
 
+	news_ensure_enabled();
+
 	form_security_validate( 'news_update' );
 
 	$f_news_id		= gpc_get_int( 'news_id' );

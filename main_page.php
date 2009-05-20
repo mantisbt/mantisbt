@@ -44,7 +44,7 @@
 
 	$t_rss_enabled = config_get( 'rss_enabled' );
 
-	if ( OFF != $t_rss_enabled ) {
+	if ( OFF != $t_rss_enabled && news_is_enabled() ) {
 		$t_rss_link = rss_get_news_feed_url( $t_project_id );
 		html_set_rss_link( $t_rss_link );
 	}
@@ -70,45 +70,48 @@
 
 	echo '<br />';
 	echo '<br />';
-	echo '<br />';
 
-	$t_news_rows = news_get_limited_rows( $f_offset, $t_project_id );
-	$t_news_count = count( $t_news_rows );
-
-	# Loop through results
-	for ( $i = 0; $i < $t_news_count; $i++ ) {
-		$t_row = $t_news_rows[$i];
-
-		# only show VS_PRIVATE posts to configured threshold and above
-		if ( ( VS_PRIVATE == $t_row[ 'view_state' ] ) &&
-			 !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
-			continue;
-		}
-
-		print_news_entry_from_row( $t_row );
+	if ( news_is_enabled() ) {
 		echo '<br />';
-	}  # end for loop
-
-	echo '<div align="center">';
-
-	print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) );
-	$t_news_view_limit = config_get( 'news_view_limit' );
-	$f_offset_next = $f_offset + $t_news_view_limit;
-	$f_offset_prev = $f_offset - $t_news_view_limit;
-
-	if ( $f_offset_prev >= 0) {
-		print_bracket_link( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ) );
+	
+		$t_news_rows = news_get_limited_rows( $f_offset, $t_project_id );
+		$t_news_count = count( $t_news_rows );
+	
+		# Loop through results
+		for ( $i = 0; $i < $t_news_count; $i++ ) {
+			$t_row = $t_news_rows[$i];
+	
+			# only show VS_PRIVATE posts to configured threshold and above
+			if ( ( VS_PRIVATE == $t_row[ 'view_state' ] ) &&
+				 !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
+				continue;
+			}
+	
+			print_news_entry_from_row( $t_row );
+			echo '<br />';
+		}  # end for loop
+	
+		echo '<div align="center">';
+	
+		print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) );
+		$t_news_view_limit = config_get( 'news_view_limit' );
+		$f_offset_next = $f_offset + $t_news_view_limit;
+		$f_offset_prev = $f_offset - $t_news_view_limit;
+	
+		if ( $f_offset_prev >= 0) {
+			print_bracket_link( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ) );
+		}
+	
+		if ( $t_news_count == $t_news_view_limit ) {
+			print_bracket_link( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ) );
+		}
+	
+		if ( OFF != $t_rss_enabled ) {
+			print_bracket_link( $t_rss_link, lang_get( 'rss' ) );
+		}
+	
+		echo '</div>';		
 	}
-
-	if ( $t_news_count == $t_news_view_limit ) {
-		print_bracket_link( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ) );
-	}
-
-	if ( OFF != $t_rss_enabled ) {
-		print_bracket_link( $t_rss_link, lang_get( 'rss' ) );
-	}
-
-	echo '</div>';
 
 	html_page_bottom( __FILE__ );
 

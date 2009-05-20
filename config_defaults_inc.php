@@ -1114,6 +1114,11 @@
 	 **************************/
 
 	/**
+	 * Indicates whether the news feature should be enabled or disabled.
+	 */
+	$g_news_enabled			= ON;
+
+	/**
 	 * Limit News Items
 	 * limit by entry count or date
 	 * BY_LIMIT - entry limit

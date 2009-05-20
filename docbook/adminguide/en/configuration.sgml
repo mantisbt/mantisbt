@@ -991,6 +991,14 @@
 
         <variablelist>
             <varlistentry>
+                <term>$g_news_enabled</term>
+                <listitem>
+                    <para>Indicates whether the news feature should be enabled or disabled.
+                        The default is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_news_limit_method</term>
                 <listitem>
                     <para>Limit the news entry that are displayed by number of entries

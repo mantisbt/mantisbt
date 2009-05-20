@@ -30,6 +30,8 @@
 	require_once( $t_core_path . 'news_api.php' );
 	require_once( $t_core_path . 'print_api.php' );
 
+	news_ensure_enabled();
+
 	$f_news_id = gpc_get_int( 'news_id', null );
 
 	html_page_top();

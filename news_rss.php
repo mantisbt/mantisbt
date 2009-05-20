@@ -37,6 +37,8 @@
 	$f_key = gpc_get_string( 'key', null );
 	$f_project_id = gpc_get_int( 'project_id', ALL_PROJECTS );
 
+	news_ensure_enabled();
+
 	# make sure RSS syndication is enabled.
 	if ( OFF == config_get( 'rss_enabled' ) ) {
 		access_denied();

@@ -30,6 +30,8 @@
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 
+	news_ensure_enabled();
+	
 	access_ensure_project_level( VIEWER );
 
 	html_page_top();

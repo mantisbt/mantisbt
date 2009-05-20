@@ -25,6 +25,8 @@
 	  */
 	require_once( 'core.php' );
 
+	news_ensure_enabled();
+
 	access_ensure_project_level( config_get( 'manage_news_threshold' ) );
 
 	html_page_top( lang_get( 'edit_news_link' ) );

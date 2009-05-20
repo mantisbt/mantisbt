@@ -30,6 +30,8 @@
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 
+	news_ensure_enabled();
+	
 	$f_news_id = gpc_get_int( 'news_id' );
 	$f_action = gpc_get_string( 'action', '' );
 

@@ -757,7 +757,7 @@ function print_menu() {
 		}
 
 		# News Page
-		if( access_has_project_level( config_get( 'manage_news_threshold' ) ) ) {
+		if ( news_is_enabled() && access_has_project_level( config_get( 'manage_news_threshold' ) ) ) {
 
 			# Admin can edit news for All Projects (site-wide)
 			if(( ALL_PROJECTS != helper_get_current_project() ) || ( access_has_project_level( ADMINISTRATOR ) ) ) {
