@@ -717,11 +717,6 @@ $s_lost_password_link = 'Lost your password?';
 # login_select_proj_page.php
 $s_select_project_button = 'Select Project';
 
-# logout_page.php
-$s_logged_out_title = 'Logged Out...';
-$s_redirecting = '...Redirecting';
-$s_here = 'Here';
-
 # lost_pwd_page.php
 $s_lost_password_title = 'Password Reset';
 $s_lost_password_done_title = 'Password Message Sent';
