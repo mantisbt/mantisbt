@@ -577,7 +577,10 @@ function html_footer( $p_file ) {
 	# print db queries that were run
 	if( helper_show_queries() ) {
 		$t_count = count( $g_queries_array );
-		echo "\t", $t_count, ' ', lang_get( 'total_queries_executed' ), '<br />', "\n";
+		echo "\t";
+		echo sprintf( lang_get( 'total_queries_executed' ), $t_count );
+		echo "<br />\n";
+
 		if( ON == config_get( 'show_queries_list' ) ) {
 			$t_unique_queries = 0;
 			$t_shown_queries = array();
@@ -591,7 +594,8 @@ function html_footer( $p_file ) {
 				}
 			}
 
-			echo "\t", $t_unique_queries, ' ', lang_get( 'unique_queries_executed' ), '<br />', "\n";
+			echo "\t";
+			echo sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries );
 			echo "\t", '<table>', "\n";
 			$t_total = 0;
 			for( $i = 0;$i < $t_count;$i++ ) {
