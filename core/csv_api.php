@@ -41,7 +41,10 @@ function csv_get_newline() {
  * @access public
  */
 function csv_get_separator() {
-	return config_get( 'csv_separator' );
+	static $s_seperator = null;
+	if ( $s_seperator === null )
+		$s_seperator = config_get( 'csv_separator' );
+	return $s_seperator;
 }
 
 /**
@@ -223,7 +226,10 @@ function csv_format_category_id( $p_category_id ) {
  * @access public
  */
 function csv_format_date_submitted( $p_date_submitted ) {
-	return date( config_get( 'short_date_format' ), $p_date_submitted );
+	static $s_date_format = null;
+	if ( $s_date_format === null )
+		$s_date_format = config_get( 'short_date_format' );
+	return date( $s_date_format, $p_date_submitted );
 }
 
 /**
@@ -293,7 +299,10 @@ function csv_format_view_state( $p_view_state ) {
  * @access public
  */
 function csv_format_last_updated( $p_last_updated ) {
-	return date( config_get( 'short_date_format' ), $p_last_updated );
+	static $s_date_format = null;
+	if ( $s_date_format === null )
+		$s_date_format = config_get( 'short_date_format' );
+	return date( $s_date_format, $p_last_updated );
 }
 
 /**
