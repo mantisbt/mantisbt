@@ -56,11 +56,11 @@
 	# Make sure that IE can download the attachments under https.
 	header( 'Pragma: public' );
 
-	header( 'Content-Type: text/plain; name=' . urlencode( $t_filename ) );
+	header( 'Content-Type: text/plain; name=' . urlencode( file_clean_name( $t_filename ) ) );
 	header( 'Content-Transfer-Encoding: BASE64;' );
 
 	# Added Quotes (") around file name.
-	header( 'Content-Disposition: attachment; filename="' . urlencode( $t_filename ) . '"' );
+	header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_filename ) ) . '"' );
 
 	# Get columns to be exported
 	$t_columns = csv_get_columns();

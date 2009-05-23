@@ -44,7 +44,6 @@
 	helper_begin_long_process();
 
 	$t_export_title = excel_get_default_filename();
-	$t_export_title = preg_replace( '/[\/:*?"<>|]/', '', $t_export_title );
 
 	$t_short_date_format = config_get( 'short_date_format' );
 
@@ -62,7 +61,7 @@
 	header( 'Content-Type: application/vnd.ms-excel; charset=UTF-8' );
 	header( 'Pragma: public' );
 	header( 'Content-Type: application/vnd.ms-excel' );
-	header( 'Content-Disposition: attachment; filename="' . urlencode( $t_export_title ) . '.xml"' ) ;
+	header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_export_title ) ) . '.xml"' ) ;
 
 	echo excel_get_header( $t_export_title );
 	echo excel_get_titles_row();

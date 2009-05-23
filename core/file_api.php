@@ -557,7 +557,7 @@ function file_type_check( $p_file_name ) {
 
 # clean file name by removing sensitive characters and replacing them with underscores
 function file_clean_name( $p_filename ) {
-	return preg_replace( "/[\/\\ :&]/", "_", $p_filename );
+	return preg_replace( '/[\/*?"<>|\\ :&]/', "_", $p_filename );
 }
 
 # Generate a string to use as the identifier for the file
