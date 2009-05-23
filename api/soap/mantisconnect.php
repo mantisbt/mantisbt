@@ -1377,7 +1377,7 @@ if ( isset( $HTTP_RAW_POST_DATA ) ) {
 # request is a webservice call (rather than webservice documentation request,
 # eg: WSDL).
 if ( mci_is_webservice_call( $l_oServer, $t_input ) ) {
-	require_once( $t_current_dir . 'mc_core.php' );
+	require_once( 'mc_core.php' );
 } else {
 	# if we have a documentation request, do some tidy up to prevent lame bot loops e.g. /mantisconnect.php/mc_enum_etas/mc_project_get_versions/
 	$parts = explode ( 'mantisconnect.php/', strtolower($_SERVER['PHP_SELF'] ), 2 );
