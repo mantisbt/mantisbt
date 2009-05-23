@@ -112,11 +112,7 @@
 				helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_CSV_PAGE ) );
 				$t_value = ob_get_clean();
 
-				if ( strstr( $t_value, $t_sep ) !== false ) {
-					$t_value = '"' . $t_value . '"';
-				}
-
-				echo $t_value;
+				echo csv_escape_string($t_value);
 			} else {
 				if ( column_is_extended( $t_column ) && !isset( $t_row['description'] ) ) {
 					$t_row = bug_get_extended_row( $t_row['id'] );
