@@ -33,6 +33,7 @@ $g_log_levels = array(
 	LOG_FILTERING => 'filtering',
 	LOG_AJAX => 'ajax',
 	LOG_LDAP => 'ldap',
+	LOG_DATABASE => 'database',
 );
 
 function log_event( $p_level, $p_msg ) {
@@ -50,7 +51,8 @@ function log_event( $p_level, $p_msg ) {
 
 	$t_plugin_event = '[' . $t_level . '] ' . $p_msg;
 
-	event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
+	if( function_exists( 'event_signal' ) )
+		event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
 
 	$t_php_event = $t_now . ' ' . $t_level . ' ' . $p_msg;
 
