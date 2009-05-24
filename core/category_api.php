@@ -147,7 +147,6 @@ function category_exists( $p_category_id ) {
 	$t_old_category = category_get_row( $p_category_id );
 
 	$c_category_id = db_prepare_int( $p_category_id );
-	$c_name = db_prepare_string( $p_name );
 	$c_assigned_to = db_prepare_int( $p_assigned_to );
 
 	$t_category_table = db_get_table( 'mantis_category_table' );
@@ -157,7 +156,7 @@ function category_exists( $p_category_id ) {
 				  SET name=" . db_param() . ',
 					user_id=' . db_param() . '
 				  WHERE id=' . db_param();
-	db_query_bound( $query, array( $c_name, $c_assigned_to, $c_category_id ) );
+	db_query_bound( $query, array( $p_name, $c_assigned_to, $c_category_id ) );
 
 	# Add bug history entries if we update the category's name
 	if( $t_old_category['name'] != $c_name ) {
