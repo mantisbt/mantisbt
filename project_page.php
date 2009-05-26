@@ -25,11 +25,9 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path . 'project_api.php' );
-	require_once( $t_core_path . 'last_visited_api.php' );
-	require_once( $t_core_path . 'print_api.php' );
+	require_once( 'project_api.php' );
+	require_once( 'last_visited_api.php' );
+	require_once( 'print_api.php' );
 
 	$f_project_id	= gpc_get_int( 'project_id' );
 

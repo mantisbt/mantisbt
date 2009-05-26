@@ -126,7 +126,7 @@ if ( ($t_output = ob_get_contents()) != '') {
 	die;
 }
 
-require_once( $t_core_path.'compress_api.php' );
+require_once( 'compress_api.php' );
 
 # Before doing anything else, start output buffering so we don't prevent
 #  headers from being sent if there's a blank line in an included file
@@ -153,59 +153,59 @@ if ( false === $t_config_inc_found ) {
 
 # Load rest of core in separate directory.
 
-require_once( $t_core_path.'config_api.php' );
-require_once( $t_core_path.'logging_api.php' );
+require_once( 'config_api.php' );
+require_once( 'logging_api.php' );
 
 # load utility functions used by everything else
-require_once( $t_core_path.'utility_api.php' );
+require_once( 'utility_api.php' );
 
 # Load internationalization functions (needed before database_api, in case database connection fails)
-require_once( $t_core_path.'lang_api.php' );
+require_once( 'lang_api.php' );
 
 # error functions should be loaded to allow database to print errors
-require_once( $t_core_path.'error_api.php' );
-require_once( $t_core_path.'helper_api.php' );
+require_once( 'error_api.php' );
+require_once( 'helper_api.php' );
 
 # DATABASE WILL BE OPENED HERE!!  THE DATABASE SHOULDN'T BE EXPLICITLY
 # OPENED ANYWHERE ELSE.
-require_once( $t_core_path.'database_api.php' );
+require_once( 'database_api.php' );
 
 # PHP Sessions
-require_once( $t_core_path.'session_api.php' );
+require_once( 'session_api.php' );
 
 # Initialize Event System
-require_once( $t_core_path.'event_api.php' );
-require_once( $t_core_path.'events_inc.php' );
+require_once( 'event_api.php' );
+require_once( 'events_inc.php' );
 
 # Plugin initialization
-require_once( $t_core_path.'plugin_api.php' );
+require_once( 'plugin_api.php' );
 if ( !defined( 'PLUGINS_DISABLED' ) ) {
 	plugin_init_installed();
 }
 
 # Authentication and user setup
-require_once( $t_core_path.'authentication_api.php' );
-require_once( $t_core_path.'project_api.php' );
-require_once( $t_core_path.'project_hierarchy_api.php' );
-require_once( $t_core_path.'user_api.php' );
-require_once( $t_core_path.'access_api.php' );
+require_once( 'authentication_api.php' );
+require_once( 'project_api.php' );
+require_once( 'project_hierarchy_api.php' );
+require_once( 'user_api.php' );
+require_once( 'access_api.php' );
 
 # Wiki Integration
-require_once( $t_core_path.'wiki_api.php' );
+require_once( 'wiki_api.php' );
 
 # Display API's
-require_once( $t_core_path.'html_api.php' );
-require_once( $t_core_path.'gpc_api.php' );
-require_once( $t_core_path.'form_api.php' );
-require_once( $t_core_path.'print_api.php' );
-require_once( $t_core_path.'collapse_api.php' );
+require_once( 'html_api.php' );
+require_once( 'gpc_api.php' );
+require_once( 'form_api.php' );
+require_once( 'print_api.php' );
+require_once( 'collapse_api.php' );
 if ( !defined( 'MANTIS_INSTALLER' ) ) {
 	collapse_cache_token();
 }
 
 // custom functions (in main directory)
 /** @todo Move all such files to core/ */
-require_once( $t_core_path . 'custom_function_api.php' );
+require_once( 'custom_function_api.php' );
 $t_overrides = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'custom_functions_inc.php';
 if ( file_exists( $t_overrides ) ) {
 	require_once( $t_overrides );

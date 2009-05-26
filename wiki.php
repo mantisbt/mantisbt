@@ -25,9 +25,7 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path . 'wiki_api.php' );
+	require_once( 'wiki_api.php' );
 
 	$f_id = gpc_get_int( 'id' );
 	$f_type = gpc_get_string( 'type', 'issue' );

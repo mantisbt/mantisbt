@@ -22,9 +22,7 @@ $g_bypass_headers = 1;
 
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
-$t_core_path = config_get( 'core_path' );
-
-require_once( $t_core_path . 'email_api.php' );
+require_once( 'email_api.php' );
 
 # Make sure this script doesn't run via the webserver
 /** @todo This is a hack to detect php-cgi, there must be a better way. */

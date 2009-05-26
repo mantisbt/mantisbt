@@ -27,7 +27,7 @@
 	  */
 	require_once( 'core.php' );
 
-	require_once( $t_core_path.'bug_group_action_api.php' );
+	require_once( 'bug_group_action_api.php' );
 
 	auth_ensure_user_authenticated();
 

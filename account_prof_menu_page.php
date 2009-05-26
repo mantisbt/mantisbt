@@ -30,15 +30,13 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
 	if ( isset( $g_global_profiles ) ) {
 		$g_global_profiles = true;
 	} else {
 		$g_global_profiles = false;
 	}
 
-	require_once( $t_core_path.'current_user_api.php' );
+	require_once( 'current_user_api.php' );
 
 	auth_ensure_user_authenticated();
 

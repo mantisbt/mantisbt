@@ -27,9 +27,7 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'file_api.php' );
+	require_once( 'file_api.php' );
 
 	# helper_ensure_post();
 

@@ -20,28 +20,26 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_path = config_get( 'core_path' );
-
 /**
  * requires current_user_api
  */
-require_once( $t_core_path . 'current_user_api.php' );
+require_once( 'current_user_api.php' );
 /**
  * requires bug_api
  */
- require_once( $t_core_path . 'bug_api.php' );
+ require_once( 'bug_api.php' );
 /**
  * requires string_api
  */
-require_once( $t_core_path . 'string_api.php' );
+require_once( 'string_api.php' );
 /**
  * requires date_api
  */
-require_once( $t_core_path . 'date_api.php' );
+require_once( 'date_api.php' );
 /**
  * requires icon_api
  */
-require_once( $t_core_path . 'icon_api.php' );
+require_once( 'icon_api.php' );
 
 $t_filter = current_user_get_bug_filter();
 

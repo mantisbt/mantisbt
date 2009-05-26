@@ -25,12 +25,10 @@
   */
 require_once( 'core.php' );
 
-$t_core_path = config_get( 'core_path' );
-
 /**
  * requires bug_api
  */
-require_once( $t_core_path.'bug_api.php' );
+require_once( 'bug_api.php' );
 
 /**
  * Print header for the specified project version.

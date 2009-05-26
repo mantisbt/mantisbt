@@ -30,10 +30,8 @@ $g_skip_open_db = true;  # don't open the database in database_api.php
  */
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
-$t_core_path = config_get_global( 'core_path' );
-
-require_once( $t_core_path . 'email_api.php' );
-require_once( $t_core_path . 'database_api.php' );
+require_once( 'email_api.php' );
+require_once( 'database_api.php' );
 
 define( 'BAD', 0 );
 define( 'GOOD', 1 );
@@ -238,7 +236,7 @@ function test_database_utf8() {
 }
 
 
-	require_once( $t_core_path . 'obsolete.php' );
+	require_once( 'obsolete.php' );
 
 	html_page_top( 'MantisBT Administration - Check Installation' );
 

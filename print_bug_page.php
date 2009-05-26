@@ -25,13 +25,11 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'bug_api.php' );
-	require_once( $t_core_path.'custom_field_api.php' );
-	require_once( $t_core_path.'date_api.php' );
-	require_once( $t_core_path.'string_api.php' );
-	require_once( $t_core_path.'last_visited_api.php' );
+	require_once( 'bug_api.php' );
+	require_once( 'custom_field_api.php' );
+	require_once( 'date_api.php' );
+	require_once( 'string_api.php' );
+	require_once( 'last_visited_api.php' );
 
 	$f_bug_id = gpc_get_int( 'bug_id' );
 

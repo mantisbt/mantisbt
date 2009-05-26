@@ -25,9 +25,7 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'version_api.php' );
+	require_once( 'version_api.php' );
 
 	form_security_validate( 'manage_proj_ver_update' );
 

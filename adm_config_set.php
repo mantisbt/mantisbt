@@ -27,8 +27,6 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
 	# helper_ensure_post();
 
 	$f_user_id = gpc_get_int( 'user_id' );

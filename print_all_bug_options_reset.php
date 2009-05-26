@@ -26,10 +26,8 @@
 	  * MantisBT Core API's
 	  */
 	require_once( 'core.php' );
-
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'current_user_api.php' );
+	
+	require_once( 'current_user_api.php' );
 	require( 'print_all_bug_options_inc.php' );
 
 	# helper_ensure_post();

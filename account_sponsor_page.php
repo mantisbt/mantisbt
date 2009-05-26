@@ -42,9 +42,7 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'current_user_api.php' );
+	require_once( 'current_user_api.php' );
 
 	if ( config_get( 'enable_sponsorship' ) == OFF ) {
 		trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );

@@ -25,10 +25,8 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path . 'compress_api.php' );
-	require_once( $t_core_path . 'filter_api.php' );
+	require_once( 'compress_api.php' );
+	require_once( 'filter_api.php' );
 
 	auth_ensure_user_authenticated();
 

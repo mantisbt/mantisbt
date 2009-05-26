@@ -27,11 +27,9 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'bug_api.php' );
-	require_once( $t_core_path.'bugnote_api.php' );
-	require_once( $t_core_path.'current_user_api.php' );
+	require_once( 'bug_api.php' );
+	require_once( 'bugnote_api.php' );
+	require_once( 'current_user_api.php' );
 
 	$f_bugnote_id	 = gpc_get_int( 'bugnote_id' );
 	$f_bugnote_text	 = gpc_get_string( 'bugnote_text', '' );

@@ -24,12 +24,10 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_path = config_get( 'core_path' );
-
 /**
  * Requires bugnote API
  */
-require_once( $t_core_path.'bugnote_api.php' );
+require_once( 'bugnote_api.php' );
 
 if ( !config_get('time_tracking_enabled') )
 	return;

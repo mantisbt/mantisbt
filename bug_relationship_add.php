@@ -25,8 +25,8 @@
 	  * MantisBT Core API's
 	  */
 	require_once( 'core.php' );
-	$t_core_path = config_get( 'core_path' );
-	require_once( $t_core_path . 'relationship_api.php' );
+
+	require_once( 'relationship_api.php' );
 
 	# helper_ensure_post();
 

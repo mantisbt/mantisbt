@@ -31,8 +31,7 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-	require_once( $t_core_path . 'relationship_api.php' );
+	require_once( 'relationship_api.php' );
 
 	$f_rel_id = gpc_get_int( 'rel_id' );
 	$f_bug_id = gpc_get_int( 'bug_id' );

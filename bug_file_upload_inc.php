@@ -23,8 +23,7 @@
 	 * @link http://www.mantisbt.org
 	 */
 
-	$t_core_path = config_get( 'core_path' );
-	require_once( $t_core_path.'file_api.php' );
+	require_once( 'file_api.php' );
 
 	# check if we can allow the upload... bail out if we can't
 	if ( !file_allow_bug_upload( $f_bug_id ) ) {

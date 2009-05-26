@@ -28,8 +28,6 @@
 
 	access_ensure_project_level( config_get( 'view_configuration_threshold' ) );
 
-	$t_core_path = config_get( 'core_path' );
-
 	html_page_top( lang_get( 'permissions_summary_report' ) );
 
 	print_manage_menu( 'adm_permissions_report.php' );

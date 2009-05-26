@@ -25,8 +25,6 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
 	html_page_top();
 
 	access_ensure_project_level( config_get( 'create_permalink_threshold' ) );

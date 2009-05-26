@@ -25,12 +25,10 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'bug_api.php' );
-	require_once( $t_core_path.'compress_api.php' );
-	require_once( $t_core_path.'current_user_api.php' );
-	require_once( $t_core_path.'relationship_graph_api.php' );
+	require_once( 'bug_api.php' );
+	require_once( 'compress_api.php' );
+	require_once( 'current_user_api.php' );
+	require_once( 'relationship_graph_api.php' );
 
 	# If relationship graphs were made disabled, we disallow any access to
 	# this script.

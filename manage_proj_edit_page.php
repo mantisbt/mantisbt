@@ -25,12 +25,10 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path . 'category_api.php' );
-	require_once( $t_core_path . 'version_api.php' );
-	require_once( $t_core_path . 'custom_field_api.php' );
-	require_once( $t_core_path . 'icon_api.php' );
+	require_once( 'category_api.php' );
+	require_once( 'version_api.php' );
+	require_once( 'custom_field_api.php' );
+	require_once( 'icon_api.php' );
 
 	auth_reauthenticate();
 

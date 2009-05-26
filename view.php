@@ -25,12 +25,10 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
 	/**
 	 * requires string_api
 	 */
-	require_once( $t_core_path.'string_api.php' );
+	require_once( 'string_api.php' );
 
 	// Copy 'id' parameter into 'bug_id' so it is found by the simple/advanced view page.
 	$_GET['bug_id'] = gpc_get_int( 'id' );

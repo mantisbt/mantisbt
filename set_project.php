@@ -25,9 +25,7 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'current_user_api.php' );
+	require_once( 'current_user_api.php' );
 
 	$f_project_id	= gpc_get_string( 'project_id' );
 	$f_make_default	= gpc_get_bool  ( 'make_default' );

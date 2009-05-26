@@ -27,8 +27,6 @@ require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' 
 
 access_ensure_global_level( ADMINISTRATOR );
 
-$t_core_path = config_get( 'core_path' );
-
 $f_mail_test = gpc_get_bool( 'mail_test' );
 
 html_page_top();

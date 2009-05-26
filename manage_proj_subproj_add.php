@@ -25,8 +25,6 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
 	form_security_validate( 'manage_proj_subproj_add' );
 
 	auth_reauthenticate();

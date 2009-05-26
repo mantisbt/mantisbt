@@ -26,7 +26,7 @@
 /**
  * requires url_api
  */
-require_once( config_get( 'core_path' ) . 'url_api.php' );
+require_once( 'url_api.php' );
 
 /**
  * Get a chunk of JSON from a given URL.

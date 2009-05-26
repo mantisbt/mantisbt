@@ -23,10 +23,10 @@
   * MantisBT Core API's
   */
 require_once( 'core.php' );
-$t_core_path = config_get( 'core_path' );
-require_once ( $t_core_path . 'html_api.php' );
-require_once ( $t_core_path . 'form_api.php' );
-require_once( $t_core_path . 'tag_api.php' );
+
+require_once ( 'html_api.php' );
+require_once ( 'form_api.php' );
+require_once( 'tag_api.php' );
 
 form_security_validate( 'tag_create' );
 

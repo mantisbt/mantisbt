@@ -25,7 +25,6 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
 	access_ensure_global_level( config_get( 'time_tracking_reporting_threshold' ) );
 
 	html_page_top( lang_get( 'time_tracking_billing_link' )  );

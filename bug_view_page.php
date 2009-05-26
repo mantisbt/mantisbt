@@ -25,17 +25,15 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'bug_api.php' );
-	require_once( $t_core_path.'custom_field_api.php' );
-	require_once( $t_core_path.'compress_api.php' );
-	require_once( $t_core_path.'current_user_api.php' );
-	require_once( $t_core_path.'file_api.php' );
-	require_once( $t_core_path.'date_api.php' );
-	require_once( $t_core_path.'relationship_api.php' );
-	require_once( $t_core_path.'last_visited_api.php' );
-	require_once( $t_core_path.'tag_api.php' );
+	require_once( 'bug_api.php' );
+	require_once( 'custom_field_api.php' );
+	require_once( 'compress_api.php' );
+	require_once( 'current_user_api.php' );
+	require_once( 'file_api.php' );
+	require_once( 'date_api.php' );
+	require_once( 'relationship_api.php' );
+	require_once( 'last_visited_api.php' );
+	require_once( 'tag_api.php' );
 
 	$f_bug_id	= gpc_get_int( 'bug_id' );
 	$f_history	= gpc_get_bool( 'history', config_get( 'history_default_visible' ) );

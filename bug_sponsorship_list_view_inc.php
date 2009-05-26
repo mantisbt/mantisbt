@@ -24,10 +24,8 @@
 	 * @link http://www.mantisbt.org
 	 */
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path . 'sponsorship_api.php' );
-	require_once( $t_core_path . 'collapse_api.php' );
+	require_once( 'sponsorship_api.php' );
+	require_once( 'collapse_api.php' );
 
 	#
 	# Determine whether the sponsorship section should be shown.

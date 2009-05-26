@@ -25,13 +25,11 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
 	require_once( 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.RSSBuilder.inc.php' );
-	require_once( $t_core_path . 'news_api.php' );
-	require_once( $t_core_path . 'project_api.php' );
-	require_once( $t_core_path . 'print_api.php' );
-	require_once( $t_core_path . 'rss_api.php' );
+	require_once( 'news_api.php' );
+	require_once( 'project_api.php' );
+	require_once( 'print_api.php' );
+	require_once( 'rss_api.php' );
 
 	$f_username = gpc_get_string( 'username', null );
 	$f_key = gpc_get_string( 'key', null );

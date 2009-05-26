@@ -24,12 +24,10 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
 	/**
 	 * requires tag_api
 	 */
-	require_once( $t_core_path . 'tag_api.php' );
+	require_once( 'tag_api.php' );
 
 	form_security_validate( 'tag_detach' );
 

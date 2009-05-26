@@ -25,11 +25,9 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path . 'custom_field_api.php' );
-	require_once( $t_core_path . 'helper_api.php' );
-	require_once( $t_core_path . 'columns_api.php' );
+	require_once( 'custom_field_api.php' );
+	require_once( 'helper_api.php' );
+	require_once( 'columns_api.php' );
 
 	auth_reauthenticate();
 

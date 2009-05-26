@@ -21,9 +21,7 @@
 	 * @link http://www.mantisbt.org
 	 */
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'current_user_api.php' );
+	require_once( 'current_user_api.php' );
 
 # this function only gets the field names, by appending strings
 function get_field_names()

@@ -25,9 +25,7 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'summary_api.php' );
+	require_once( 'summary_api.php' );
 
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 

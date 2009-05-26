@@ -24,16 +24,14 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
 	/**
 	 * requires ajax_api
 	 */
-	require_once( $t_core_path . 'ajax_api.php' );
+	require_once( 'ajax_api.php' );
 	/**
 	 * requires tag_api
 	 */
-	require_once( $t_core_path . 'tag_api.php' );
+	require_once( 'tag_api.php' );
 
 	compress_enable();
 

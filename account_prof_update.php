@@ -27,9 +27,7 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'profile_api.php' );
+	require_once( 'profile_api.php' );
 
 	form_security_validate('profile_update');
 

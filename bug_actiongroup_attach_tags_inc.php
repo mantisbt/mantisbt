@@ -21,12 +21,10 @@
 	 * @link http://www.mantisbt.org
 	 */
 
-	$t_core_path = config_get( 'core_path' );
-
 	/**
 	 * Requires Tag API
 	 */
-	require_once( $t_core_path . 'tag_api.php' );
+	require_once( 'tag_api.php' );
 
 	/**
 	 * Prints the title for the custom action page.

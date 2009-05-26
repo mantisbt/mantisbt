@@ -30,8 +30,8 @@
 		 * MantisBT Core API's
 		 */
 		require_once( 'core.php' );
-		$t_core_path = config_get( 'core_path' );
-		require_once( $t_core_path . 'authentication_api.php' );
+
+		require_once( 'authentication_api.php' );
 
 		access_denied();
 	}

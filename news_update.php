@@ -25,11 +25,9 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'news_api.php' );
-	require_once( $t_core_path.'string_api.php' );
-	require_once( $t_core_path.'print_api.php' );
+	require_once( 'news_api.php' );
+	require_once( 'string_api.php' );
+	require_once( 'print_api.php' );
 
 	news_ensure_enabled();
 

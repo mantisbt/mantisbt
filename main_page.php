@@ -28,13 +28,11 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'current_user_api.php' );
-	require_once( $t_core_path.'news_api.php' );
-	require_once( $t_core_path.'date_api.php' );
-	require_once( $t_core_path.'print_api.php' );
-	require_once( $t_core_path.'rss_api.php' );
+	require_once( 'current_user_api.php' );
+	require_once( 'news_api.php' );
+	require_once( 'date_api.php' );
+	require_once( 'print_api.php' );
+	require_once( 'rss_api.php' );
 
 	access_ensure_project_level( VIEWER );
 

@@ -26,9 +26,7 @@
  */
 require_once( '../core.php' );
 
-$t_core_path = config_get( 'core_path' );
-
-require_once( $t_core_path . 'graph_api.php' );
+require_once( 'graph_api.php' );
 
 $data_category_arr = array();
 $data_count_arr = array();

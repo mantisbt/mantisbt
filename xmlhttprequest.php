@@ -28,10 +28,8 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path . 'logging_api.php' );
-	require_once( $t_core_path . 'xmlhttprequest_api.php' );
+	require_once( 'logging_api.php' );
+	require_once( 'xmlhttprequest_api.php' );
 
 	auth_ensure_user_authenticated();
 

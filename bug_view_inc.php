@@ -24,10 +24,8 @@
 	 * @link http://www.mantisbt.org
 	 */
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'bug_api.php' );
-	require_once( $t_core_path.'date_api.php' );
+	require_once( 'bug_api.php' );
+	require_once( 'date_api.php' );
 
 	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
 ?>

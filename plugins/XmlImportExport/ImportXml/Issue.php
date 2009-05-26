@@ -14,9 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-$t_core_dir = config_get( 'core_path' );
-require_once( $t_core_dir . DIRECTORY_SEPARATOR . 'bug_api.php' );
-require_once( $t_core_dir . DIRECTORY_SEPARATOR . 'user_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'user_api.php' );
 require_once( 'Interface.php' );
 
 class ImportXml_Issue implements ImportXml_Interface {

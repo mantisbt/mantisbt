@@ -25,9 +25,7 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'string_api.php' );
+	require_once( 'string_api.php' );
 
 	$f_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
 

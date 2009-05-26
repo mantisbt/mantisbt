@@ -28,10 +28,8 @@
 	 */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'current_user_api.php' );
-	require_once( $t_core_path.'profile_api.php' );
+	require_once( 'current_user_api.php' );
+	require_once( 'profile_api.php' );
 
 	auth_ensure_user_authenticated();
 

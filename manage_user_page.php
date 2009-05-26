@@ -25,9 +25,7 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path . 'icon_api.php' );
+	require_once( 'icon_api.php' );
 
 	auth_reauthenticate();
 

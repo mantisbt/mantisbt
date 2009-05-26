@@ -27,12 +27,10 @@
 	$g_allow_browser_cache = 1;
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
+	require_once( 'bug_api.php' );
+	require_once( 'custom_field_api.php' );
 
-	require_once( $t_core_path.'bug_api.php' );
-	require_once( $t_core_path.'custom_field_api.php' );
-
-	require_once( $t_core_path.'relationship_api.php' );
+	require_once( 'relationship_api.php' );
 ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );

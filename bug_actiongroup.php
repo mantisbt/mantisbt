@@ -26,9 +26,7 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'bug_api.php' );
+	require_once( 'bug_api.php' );
 
 	auth_ensure_user_authenticated();
 	helper_begin_long_process();

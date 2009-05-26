@@ -31,14 +31,12 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'current_user_api.php' );
-	require_once( $t_core_path.'bug_api.php' );
-	require_once( $t_core_path.'date_api.php' );
-	require_once( $t_core_path.'icon_api.php' );
-	require_once( $t_core_path.'string_api.php' );
-	require_once( $t_core_path.'columns_api.php' );
+	require_once( 'current_user_api.php' );
+	require_once( 'bug_api.php' );
+	require_once( 'date_api.php' );
+	require_once( 'icon_api.php' );
+	require_once( 'string_api.php' );
+	require_once( 'columns_api.php' );
 	require_once( 'config_filter_defaults_inc.php' );
 
 	auth_ensure_user_authenticated();

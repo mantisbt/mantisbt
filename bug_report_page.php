@@ -29,11 +29,9 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
-	require_once( $t_core_path.'file_api.php' );
-	require_once( $t_core_path.'custom_field_api.php' );
-	require_once( $t_core_path.'last_visited_api.php' );
+	require_once( 'file_api.php' );
+	require_once( 'custom_field_api.php' );
+	require_once( 'last_visited_api.php' );
 
 	$f_master_bug_id = gpc_get_int( 'm_id', 0 );
 

@@ -24,12 +24,10 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_path = config_get( 'core_path' );
-
 /**
  * Requires bugnote API
  */
-require_once( $t_core_path.'current_user_api.php' );
+require_once( 'current_user_api.php' );
 
 # grab the user id currently logged in
 $t_user_id = auth_get_current_user_id();

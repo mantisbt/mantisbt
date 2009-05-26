@@ -34,12 +34,10 @@
 	  */
 	require_once( 'core.php' );
 
-	$t_core_path = config_get( 'core_path' );
-
 	require_once( 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.RSSBuilder.inc.php' );
-	require_once( $t_core_path . 'user_api.php' );
-	require_once( $t_core_path . 'filter_api.php' );
-	require_once( $t_core_path . 'rss_api.php' );
+	require_once( 'user_api.php' );
+	require_once( 'filter_api.php' );
+	require_once( 'rss_api.php' );
 
 	$f_project_id = gpc_get_int( 'project_id', ALL_PROJECTS );
 	$f_filter_id = gpc_get_int( 'filter_id', 0 );

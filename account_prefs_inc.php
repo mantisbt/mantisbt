@@ -23,9 +23,8 @@
 	 /**
 	  * MantisBT Core API's
 	  */
-	$t_core_path = config_get( 'core_path' );
 
-	require_once( $t_core_path.'user_pref_api.php' );
+	require_once( 'user_pref_api.php' );
 
 	function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '') {
 		if ( null === $p_user_id ) {
