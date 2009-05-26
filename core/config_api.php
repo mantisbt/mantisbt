@@ -536,16 +536,17 @@ function config_obsolete( $p_var, $p_replace ) {
 function config_eval( $p_value ) {
 	$t_value = $p_value;
 	if( is_string( $t_value ) && !is_numeric( $t_value ) ) {
-		if( 0 < preg_match_all( '/%(.*)%/U', $t_value, $t_matches ) ) {
+		if( 0 < preg_match_all( '/(?:^|[^\\\\])(%([^%]+)%)/U', $t_value, $t_matches ) ) {
 			$t_count = count( $t_matches[0] );
 			for( $i = 0;$i < $t_count;$i++ ) {
 
 				# $t_matches[0][$i] is the matched string including the delimiters
 				# $t_matches[1][$i] is the target parameter string
-				$t_repl = config_get( $t_matches[1][$i] );
-				$t_value = str_replace( $t_matches[0][$i], $t_repl, $t_value );
+				$t_repl = config_get( $t_matches[2][$i] );
+				$t_value = str_replace( $t_matches[1][$i], $t_repl, $t_value );
 			}
 		}
+		$t_value = str_replace( '\\%', '%', $t_value );
 	}
 	return $t_value;
 }
