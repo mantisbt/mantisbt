@@ -21,20 +21,72 @@
  * @link http://www.mantisbt.org
  */
 
-###########################################################################
-# INCLUDES
-###########################################################################
+/**
+ * Before doing anything... check if MantisBT is down for maintenance
+ *
+ *   To make MantisBT 'offline' simply create a file called
+ *   'mantis_offline.php' in the MantisBT root directory.
+ *   Users are redirected to that file if it exists.
+ *   If you have to test MantisBT while it's offline, add the
+ *   parameter 'mbadmin=1' to the URL.
+ */
+if ( file_exists( 'mantis_offline.php' ) && !isset( $_GET['mbadmin'] ) ) {
+	include( 'mantis_offline.php' );
+	exit;
+}
 
 $g_request_time = microtime(true);
 
 ob_start();
+
+/**
+ * Load supplied constants
+ */
+require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'constant_inc.php' );
+
+/**
+ * Load user-defined constants (if required)
+ */
+if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' ) ) {
+	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' );
+}
+
+$t_config_inc_found = false;
+
+/**
+ * Include default configuration settings
+ */
+require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_defaults_inc.php' );
+
+# config_inc may not be present if this is a new install
+if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' ) ) {
+	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
+	$t_config_inc_found = true;
+}
+
+# Allow an environment variable (defined in an Apache vhost for example)
+#  to specify a config file to load to override other local settings
+$t_local_config = getenv( 'MANTIS_CONFIG' );
+if ( $t_local_config && file_exists( $t_local_config ) ){
+	require_once( $t_local_config );
+	$t_config_inc_found = true;
+}
+
+
+# Attempt to find the location of the core files.
+$t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR;
+if (isset($GLOBALS['g_core_path']) && !isset( $HTTP_GET_VARS['g_core_path'] ) && !isset( $HTTP_POST_VARS['g_core_path'] ) && !isset( $HTTP_COOKIE_VARS['g_core_path'] ) ) {
+	$t_core_path = $g_core_path;
+}
+
+$g_core_path = $t_core_path;
 
 /*
  * Set include paths
  */
 define ( 'BASE_PATH' , realpath( dirname(__FILE__) ) );
 $mantisLibrary = BASE_PATH . DIRECTORY_SEPARATOR . 'library';
-$mantisCore = BASE_PATH . DIRECTORY_SEPARATOR . 'core';
+$mantisCore = $g_core_path;
 
 /*
  * Prepend the application/ and tests/ directories to the
@@ -53,53 +105,7 @@ set_include_path( implode( PATH_SEPARATOR, $path ) );
 unset($mantisRoot, $mantisLibrary, $mantisCore, $path);
 
 # Include compatibility file before anything else
-require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'php_api.php' );
-
-# Check if MantisBT is down for maintenance
-#
-#   To make MantisBT 'offline' simply create a file called
-#   'mantis_offline.php' in the MantisBT root directory.
-#   Users are redirected to that file if it exists.
-#   If you have to test MantisBT while it's offline, add the
-#   parameter 'mbadmin=1' to the URL.
-#
-$t_mantis_offline = 'mantis_offline.php';
-if ( file_exists( $t_mantis_offline ) && !isset( $_GET['mbadmin'] ) ) {
-	include( $t_mantis_offline );
-	exit;
-}
-
-# Load constants and configuration files
-require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'constant_inc.php' );
-
-if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' ) ) {
-	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' );
-}
-
-$t_config_inc_found = false;
-
-require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_defaults_inc.php' );
-# config_inc may not be present if this is a new install
-if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' ) ) {
-	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
-	$t_config_inc_found = true;
-}
-
-# Allow an environment variable (defined in an Apache vhost for example)
-#  to specify a config file to load to override other local settings
-$t_local_config = getenv( 'MANTIS_CONFIG' );
-if ( $t_local_config && file_exists( $t_local_config ) ){
-	require_once( $t_local_config );
-	$t_config_inc_found = true;
-}
-
-# Attempt to find the location of the core files.
-$t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR;
-if (isset($GLOBALS['g_core_path']) && !isset( $HTTP_GET_VARS['g_core_path'] ) && !isset( $HTTP_POST_VARS['g_core_path'] ) && !isset( $HTTP_COOKIE_VARS['g_core_path'] ) ) {
-	$t_core_path = $g_core_path;
-}
-
-$g_core_path = $t_core_path;
+require_once( 'php_api.php' );
 
 # Define an autoload function to automatically load classes when referenced.
 function __autoload( $className ) {
