@@ -200,6 +200,7 @@ require_once( 'access_api.php' );
 require_once( 'wiki_api.php' );
 
 # Display API's
+require_once( 'http_api.php' );
 require_once( 'html_api.php' );
 require_once( 'gpc_api.php' );
 require_once( 'form_api.php' );
@@ -221,39 +222,8 @@ if ( file_exists( $t_overrides ) ) {
 list( $usec, $sec ) = explode( ' ', microtime() );
 mt_srand( $sec*$usec );
 
-// Basic browser detection
-$t_user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'none';
-
-$t_browser_name = 'Normal';
-if ( strpos( $t_user_agent, 'MSIE' ) ) {
-	$t_browser_name = 'IE';
-}
-
-// Headers to prevent caching
-//  with option to bypass if running from script
-global $g_bypass_headers, $g_allow_browser_cache;
-if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
-	if ( isset( $g_allow_browser_cache ) && ON == $g_allow_browser_cache ) {
-		switch ( $t_browser_name ) {
-		case 'IE':
-			header( 'Cache-Control: private, proxy-revalidate' );
-			break;
-		default:
-			header( 'Cache-Control: private, must-revalidate' );
-			break;
-		}
-	} else {
-		header( 'Cache-Control: no-store, no-cache, must-revalidate' );
-	}
-
-	header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
-	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
-
-	// send user-defined headers
-	foreach( config_get( 'custom_headers' ) as $t_header ) {
-		header( $t_header );
-	}
-}
+// set HTTP response headers
+http_all_headers();
 
 if ( !is_blank ( config_get_global( 'default_timezone' ) ) ) {
 	// if a default timezone is set in config, set it here, else we use php.ini's value
@@ -266,8 +236,4 @@ if ( !is_blank ( config_get_global( 'default_timezone' ) ) ) {
 // push push default language to speed calls to lang_get
 if ( !isset( $g_skip_lang_load ) ) {
 	lang_push( lang_get_default() );
-}
-
-if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
-	header( 'Content-type: text/html;charset=utf-8' );		
 }
