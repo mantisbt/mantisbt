@@ -129,8 +129,7 @@ function print_successful_redirect_to_bug( $p_bug_id ) {
 # If the show query count is OFF, redirect right away.
 function print_successful_redirect( $p_redirect_to ) {
 	if( helper_show_queries() ) {
-		html_meta_redirect( $p_redirect_to );
-		html_page_top();
+		html_page_top( null, $p_redirect_to );
 		echo '<br /><div class="center">';
 		echo lang_get( 'operation_successful' ) . '<br />';
 		print_bracket_link( $p_redirect_to, lang_get( 'proceed' ) );
