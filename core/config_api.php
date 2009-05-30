@@ -439,7 +439,6 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 		# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes" : "no" );
 		# @@ debug @@ error_print_stack_trace();
 
-		$c_option = db_prepare_string( $p_option );
 		$c_user = db_prepare_int( $p_user );
 		$c_project = db_prepare_int( $p_project );
 		$query = "DELETE FROM $t_config_table
@@ -447,7 +446,7 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 					project_id=" . db_param() . " AND
 					user_id=" . db_param();
 
-		$result = @db_query_bound( $query, Array( $c_option, $c_project, $c_user ) );
+		$result = @db_query_bound( $query, Array( $p_option, $c_project, $c_user ) );
 	}
 
 	config_flush_cache( $p_option, $p_user, $p_project );
@@ -464,13 +463,12 @@ function config_delete_for_user( $p_option, $p_user_id ) {
 	}
 
 	$t_config_table = db_get_table( 'mantis_config_table' );
-	$c_option = db_prepare_string( $p_option );
 	$c_user_id = db_prepare_int( $p_user_id );
 
 	# Delete the corresponding bugnote texts
 	$query = "DELETE FROM $t_config_table
 					WHERE config_id=" . db_param() . " AND user_id=" . db_param();
-	db_query_bound( $query, array( $c_option, $c_user_id ) );
+	db_query_bound( $query, array( $p_option, $c_user_id ) );
 }
 
 # ------------------

@@ -432,10 +432,6 @@ function user_create( $p_username, $p_password, $p_email = '', $p_access_level =
 
 	$t_password = auth_process_plain_password( $p_password );
 
-	$c_username = db_prepare_string( $p_username );
-	$c_realname = db_prepare_string( $p_realname );
-	$c_password = db_prepare_string( $t_password );
-	$c_email = db_prepare_string( $p_email );
 	$c_access_level = db_prepare_int( $p_access_level );
 	$c_protected = db_prepare_bool( $p_protected );
 	$c_enabled = db_prepare_bool( $p_enabled );
@@ -456,7 +452,7 @@ function user_create( $p_username, $p_password, $p_email = '', $p_access_level =
 				  VALUES
 				    ( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param()  . ",
 				     " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ", " . db_param() . ")";
-	db_query_bound( $query, Array( $c_username, $c_email, $c_password, db_now(), db_now(), $c_enabled, $c_access_level, 0, $t_cookie_string, $c_realname ) );
+	db_query_bound( $query, Array( $p_username, $p_email, $p_password, db_now(), db_now(), $c_enabled, $c_access_level, 0, $t_cookie_string, $p_realname ) );
 
 	# Create preferences for the user
 	$t_user_id = db_insert_id( $t_user_table );
@@ -1208,7 +1204,6 @@ function user_increment_lost_password_in_progress_count( $p_user_id ) {
 function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_field_name = db_prepare_string( $p_field_name );
-	$c_field_value = db_prepare_string( $p_field_value );
 
 	if( $p_field_name != "protected" ) {
 		user_ensure_unprotected( $p_user_id );
@@ -1220,7 +1215,7 @@ function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 				  SET $c_field_name=" . db_param() . "
 				  WHERE id=" . db_param();
 
-	db_query_bound( $query, Array( $c_field_value, $c_user_id ) );
+	db_query_bound( $query, Array( $p_field_value, $c_user_id ) );
 
 	user_clear_cache( $p_user_id );
 

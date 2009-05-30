@@ -206,7 +206,6 @@ function version_update( $p_version_info ) {
 # Remove a version from the project
 function version_remove( $p_version_id, $p_new_version = '' ) {
 	$c_version_id = db_prepare_int( $p_version_id );
-	$c_new_version = db_prepare_string( $p_new_version );
 
 	version_ensure_exists( $p_version_id );
 
@@ -224,12 +223,12 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 	$query = "UPDATE $t_bug_table
 				  SET version=" . db_param() . "
 				  WHERE project_id=" . db_param() . " AND version=" . db_param();
-	db_query_bound( $query, Array( $c_new_version, $c_project_id, $t_old_version ) );
+	db_query_bound( $query, Array( $p_new_version, $c_project_id, $t_old_version ) );
 
 	$query = "UPDATE $t_bug_table
 				  SET fixed_in_version=" . db_param() . '
 				  WHERE ( project_id=' . db_param() . ' ) AND ( fixed_in_version=' . db_param() . ')';
-	db_query_bound( $query, Array( $c_new_version, $c_project_id, $t_old_version ) );
+	db_query_bound( $query, Array( $p_new_version, $c_project_id, $t_old_version ) );
 
 	# db_query errors on failure so:
 	return true;

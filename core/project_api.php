@@ -750,12 +750,10 @@ function project_format_id( $p_project_id ) {
 function project_file_is_name_unique( $p_name ) {
 	$t_file_table = db_get_table( 'mantis_project_file_table' );
 
-	$c_name = db_prepare_string( $p_name );
-
 	$query = "SELECT COUNT(*)
 				  FROM $t_file_table
 				  WHERE filename=" . db_param();
-	$result = db_query_bound( $query, Array( $c_name ) );
+	$result = db_query_bound( $query, Array( $p_name ) );
 	$t_count = db_result( $result );
 
 	if( $t_count > 0 ) {
