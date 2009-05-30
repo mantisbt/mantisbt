@@ -4,7 +4,7 @@ The version and status of each is summarized below:
 
 directory       | project         | version | status
 ----------------------------------------------------------------
-phpmailer       | PHPMailer       | 5.0.0   | unpatched
+phpmailer       | PHPMailer       | 5.0.2   | unpatched
 rssbuilder      | RSSBuilder      | 2.2.1   | patched: removed __autoload function
 adodb           | adodb           | 5.0.8a  | patched: various, see git
 disposable      | disposable      | 1.1.0   | unpatched

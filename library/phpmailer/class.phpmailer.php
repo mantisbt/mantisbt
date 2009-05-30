@@ -2,7 +2,7 @@
 /*~ class.phpmailer.php
 .---------------------------------------------------------------------------.
 |  Software: PHPMailer - PHP email class                                    |
-|   Version: 5.0.0                                                          |
+|   Version: 5.0.2                                                          |
 |   Contact: via sourceforge.net support pages (also www.codeworxtech.com)  |
 |      Info: http://phpmailer.sourceforge.net                               |
 |   Support: http://sourceforge.net/projects/phpmailer/                     |
@@ -34,7 +34,7 @@
  * @author Andy Prevost
  * @author Marcus Bointon
  * @copyright 2004 - 2009 Andy Prevost
- * @version $Id: class.phpmailer.php 254 2009-04-02 18:52:18Z codeworxtech $
+ * @version $Id: class.phpmailer.php 447 2009-05-25 01:36:38Z codeworxtech $
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
@@ -250,6 +250,12 @@ class PHPMailer {
    */
   public $LE              = "\n";
 
+  /**
+   * Sets the PHPMailer Version number
+   * @var string
+   */
+  public $Version         = '5.0.2';
+
   /////////////////////////////////////////////////
   // PROPERTIES, PRIVATE AND PROTECTED
   /////////////////////////////////////////////////
@@ -275,7 +281,6 @@ class PHPMailer {
   // CONSTANTS
   /////////////////////////////////////////////////
 
-  const VERSION = '5.0.0';
   const STOP_MESSAGE = 0; // message only, continue processing
   const STOP_CONTINUE = 1; // message?, likely ok to continue processing
   const STOP_CRITICAL = 2; // message, plus full stop, critical error reached
@@ -990,7 +995,7 @@ class PHPMailer {
     $result .= $this->AddrAppend('From', $from);
 
     // sendmail and mail() extract Cc from the header before sending
-    if((($this->Mailer == 'sendmail') || ($this->Mailer == 'mail')) && (count($this->cc) > 0)) {
+    if(count($this->cc) > 0) {
       $result .= $this->AddrAppend('Cc', $this->cc);
     }
 
@@ -1014,7 +1019,7 @@ class PHPMailer {
       $result .= sprintf("Message-ID: <%s@%s>%s", $uniq_id, $this->ServerHostname(), $this->LE);
     }
     $result .= $this->HeaderLine('X-Priority', $this->Priority);
-    $result .= $this->HeaderLine('X-Mailer', 'PHPMailer ' . self::VERSION . ' (phpmailer.codeworxtech.com)');
+    $result .= $this->HeaderLine('X-Mailer', 'PHPMailer '.$this->Version.' (phpmailer.codeworxtech.com)');
 
     if($this->ConfirmReadingTo != '') {
       $result .= $this->HeaderLine('Disposition-Notification-To', '<' . trim($this->ConfirmReadingTo) . '>');
@@ -1297,7 +1302,7 @@ class PHPMailer {
       $disposition = $attachment[6];
       $cid         = $attachment[7];
       $incl[]      = $attachment[0];
-      if ( isset($cidUniq[$cid]) ) { continue; }
+      if ( $disposition == 'inline' && isset($cidUniq[$cid]) ) { continue; }
       $cidUniq[$cid] = true;
 
       $mime[] = sprintf("--%s%s", $this->boundary[1], $this->LE);
