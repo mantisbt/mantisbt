@@ -2037,7 +2037,7 @@
 
 	/**
 	 * Threshold needed to manage a project: edit project
-	 * details (not to add/delete projects), upload documentation, ...etc.
+	 * details (not to add/delete projects) ...etc.
 	 * @global int $g_manage_project_threshold
 	 */
 	$g_manage_project_threshold = MANAGER;

@@ -123,7 +123,7 @@
 			echo $t_project_name . '<br/>';
 		}
 		echo '(' . $v_date_added . ')';
-		if ( access_has_project_level( config_get( 'manage_project_threshold', null, null, $v_project_id ), $v_project_id ) ) {
+		if ( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
 			echo '&nbsp;';
 			print_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
 			echo '&nbsp;';
