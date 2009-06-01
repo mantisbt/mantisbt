@@ -925,7 +925,7 @@ function print_column_category_id( $p_row, $p_columns_target = COLUMNS_TARGET_VI
 		echo ']</small><br />';
 	}
 
-	echo string_display( category_full_name( $p_row['category_id'], false ) );
+	echo string_display_line( category_full_name( $p_row['category_id'], false ) );
 
 	echo '</td>';
 }

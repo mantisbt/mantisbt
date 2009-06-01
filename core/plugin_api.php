@@ -356,6 +356,7 @@ function plugin_version_array( $p_version ) {
  * @param array Version array to check
  * @param array Version array required
  * @param boolean Minimum (false) or maximum (true) version check
+ * @return int 1 if the version dependency succeeds, -1 if it fails
  */
 function plugin_version_check( $p_version1, $p_version2, $p_maximum = false ) {
 	while( count( $p_version1 ) > 0 && count( $p_version2 ) > 0 ) {
@@ -801,9 +802,21 @@ function plugin_init( $p_basename ) {
 	if( isset( $g_plugin_cache[$p_basename] ) ) {
 		$t_plugin = $g_plugin_cache[$p_basename];
 
+		# hard dependencies; return false if the dependency is not registered,
+		# does not meet the version requirement, or is not yet initialized.
 		if( is_array( $t_plugin->requires ) ) {
 			foreach( $t_plugin->requires as $t_required => $t_version ) {
 				if( plugin_dependency( $t_required, $t_version, true ) !== 1 ) {
+					return false;
+				}
+			}
+		}
+
+		# soft dependencies; only return false if the soft dependency is
+		# registered, but not yet initialized.
+		if( is_array( $t_plugin->uses ) ) {
+			foreach( $t_plugin->uses as $t_used => $t_version ) {
+				if ( $g_plugin_cache[ $t_used ] && !$g_plugin_cache_init[ $t_used ] ) {
 					return false;
 				}
 			}
