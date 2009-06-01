@@ -546,7 +546,7 @@ function category_full_name( $p_category_id, $p_show_project = true ) {
 		$t_row = category_get_row( $p_category_id );
 		$t_project_id = $t_row['project_id'];
 
-		if( $p_show_project ) {
+		if( $p_show_project && $t_project_id != helper_get_current_project() ) {
 			return '[' . project_get_name( $t_project_id ) . '] ' . $t_row['name'];
 		}
 
