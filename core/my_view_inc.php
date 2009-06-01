@@ -498,16 +498,15 @@ echo "($v_start - $v_end / $t_bug_count)";
 	<td class="left" valign="top" width="100%">
 		<span class="small">
 		<?php
+			if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $v_project_id ) {
+				echo '[', string_display_line( project_get_name( $v_project_id ) ), '] ';
+			}
 			echo $t_summary;
 	?>
 		<br />
 		<?php
 	# type project name if viewing 'all projects' or bug is in subproject
-	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $v_project_id ) {
-		echo string_display( category_full_name( $v_category_id ) );
-	} else {
-		echo string_display( category_full_name( $v_category_id, false ) );
-	}
+	echo string_display_line( category_full_name( $v_category_id, true, $v_project_id ) );
 
 	if( $v_last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
 		echo ' - <b>' . $t_last_updated . '</b>';
