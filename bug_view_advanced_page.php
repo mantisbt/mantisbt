@@ -173,7 +173,7 @@
 
 	<!-- Category -->
 	<td>
-		<?php echo string_display( category_full_name( $t_bug->category_id ) );	?>
+		<?php echo string_display_line( category_full_name( $t_bug->category_id ) ); ?>
 	</td>
 
 	<!-- Severity -->
