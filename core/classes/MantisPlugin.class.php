@@ -31,6 +31,7 @@ abstract class MantisPlugin {
 
 	public $version		= null;
 	public $requires	= null;
+	public $uses		= null;
 
 	public $author		= null;
 	public $contact		= null;
