@@ -341,15 +341,20 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 	$t_user_access_level = user_get_access_level( $t_user_id, $t_project_id );
 
-	$t_all_bugnotes = bugnote_get_all_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit );
+	$t_all_bugnotes = bugnote_get_all_bugnotes( $p_bug_id );
 	$t_private_bugnote_threshold = config_get( 'private_bugnote_threshold' );
 
 	$t_private_bugnote_visible = access_compare_level( $t_user_access_level, config_get( 'private_bugnote_threshold' ) );
 	$t_time_tracking_visible = access_compare_level( $t_user_access_level, config_get( 'time_tracking_view_threshold' ) );
 
 	$t_bugnotes = array();
-	$t_note_index = 0;
-	foreach( $t_all_bugnotes as $t_bugnote ) {
+	$t_bugnote_count = count( $t_all_bugnotes );
+	$t_bugnote_limit = $p_user_bugnote_limit > 0 ? $p_user_bugnote_limit : $t_bugnote_count;
+
+	# build a list of the latest bugnotes that the user can see
+	for( $i = 0; $i < $t_bugnote_count && $i < $t_bugnote_limit; ) {
+		$t_bugnote = array_pop( $t_all_bugnotes );
+
 		if( $t_private_bugnote_visible || $t_bugnote->reporter_id == $t_user_id || ( VS_PUBLIC == $t_bugnote->view_state ) ) {
 
 			# If the access level specified is not enough to see time tracking information
@@ -358,26 +363,28 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 				$t_bugnote->time_tracking = 0;
 			}
 
-			$t_bugnotes[$t_note_index++] = $t_bugnote;
+			$t_bugnotes[$i++] = $t_bugnote;
 		}
+	}
+
+	# reverse the list for users with ascending view preferences
+	if ( 'ASC' == $p_user_bugnote_order ) {
+		$t_bugnotes = array_reverse( $t_bugnotes );
 	}
 
 	return $t_bugnotes;
 }
 
 /**
- * Build the bugnotes array for the given bug_id. Bugnotes are sorted by date_submitted
- * according to 'bugnote_order' configuration setting.
+ * Build the bugnotes array for the given bug_id.
  * Return BugnoteData class object with raw values from the tables except the field
  * last_modified - it is UNIX_TIMESTAMP.
  * The data is not filtered by VIEW_STATE !!
  * @param int $p_bug_id bug id
- * @param int $p_user_bugnote_order sort order
- * @param int $p_user_bugnote_limit number of bugnotes to display to user
  * @return array array of bugnotes
  * @access public
  */
-function bugnote_get_all_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit ) {
+function bugnote_get_all_bugnotes( $p_bug_id ) {
 	global $g_cache_bugnotes;
 
 	if( !isset( $g_cache_bugnotes ) ) {
@@ -385,44 +392,23 @@ function bugnote_get_all_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bug
 	}
 
 	# the cache should be aware of the sorting order
-	if( !isset( $g_cache_bugnotes[$p_bug_id][$p_user_bugnote_order] ) ) {
-		$c_bug_id = db_prepare_int( $p_bug_id );
+	if( !isset( $g_cache_bugnotes[$p_bug_id] ) ) {
 		$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 		$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
 
-		if( 0 == $p_user_bugnote_limit ) {
-			# # Show all bugnotes
-			$t_bugnote_limit = -1;
-			$t_bugnote_offset = -1;
-		} else {
-			# # Use offset only if order is ASC to get the last bugnotes
-			if( 'ASC' == $p_user_bugnote_order ) {
-				$result = db_query_bound( "SELECT COUNT(*) AS row_count FROM $t_bugnote_table WHERE bug_id= " . db_param(), array( $c_bug_id ) );
-				$row = db_fetch_array( $result );
-
-				$t_bugnote_offset = $row['row_count'] - $p_user_bugnote_limit;
-			} else {
-				$t_bugnote_offset = -1;
-			}
-
-			$t_bugnote_limit = $p_user_bugnote_limit;
-		}
-
 		# sort by bugnote id which should be more accurate than submit date, since two bugnotes
 		# may be submitted at the same time if submitted using a script (eg: MantisConnect).
-		$query = "SELECT b.*, t.note
+		$t_query = "SELECT b.*, t.note
 			          	FROM      $t_bugnote_table b
 			          	LEFT JOIN $t_bugnote_text_table t ON b.bugnote_text_id = t.id
-			          	WHERE b.bug_id = '$c_bug_id'
-			          	ORDER BY b.id $p_user_bugnote_order";
+						WHERE b.bug_id=" . db_param() . '
+						ORDER BY b.id ASC';
 		$t_bugnotes = array();
 
 		# BUILD bugnotes array
-		$result = db_query( $query, $t_bugnote_limit, $t_bugnote_offset );
-		$count = db_num_rows( $result );
-		for( $i = 0;$i < $count;$i++ ) {
-			$row = db_fetch_array( $result );
+		$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
 
+		while( $row = db_fetch_array( $t_result ) ) {
 			$t_bugnote = new BugnoteData;
 
 			$t_bugnote->id = $row['id'];
@@ -438,10 +424,11 @@ function bugnote_get_all_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bug
 
 			$t_bugnotes[] = $t_bugnote;
 		}
-		$g_cache_bugnotes[$p_bug_id][$p_user_bugnote_order] = $t_bugnotes;
+
+		$g_cache_bugnotes[$p_bug_id] = $t_bugnotes;
 	}
 
-	return $g_cache_bugnotes[$p_bug_id][$p_user_bugnote_order];
+	return $g_cache_bugnotes[$p_bug_id];
 }
 
 /**
