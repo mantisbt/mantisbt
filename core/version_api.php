@@ -287,7 +287,8 @@ function version_cache_array_rows( $p_project_id_array ) {
 
 	$query = "SELECT *
 				  FROM $t_project_version_table
-				  WHERE project_id IN (" . implode( ',', $c_project_id_array ) . ')';
+				  WHERE project_id IN (" . implode( ',', $c_project_id_array ) . ')
+				  ORDER BY date_order DESC';
 	$result = db_query_bound( $query );
 
 	$rows = array();
