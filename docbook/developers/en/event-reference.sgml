@@ -41,7 +41,7 @@
 
 	</sect1>
 
-	<sect1 id="dev.eventref.plugin">
+	<sect1 id="dev.eventref.system">
 		<title>System Events</title>
 
 		<para>
@@ -49,7 +49,7 @@
 			simplify plugin development.
 		</para>
 
-		<blockquote id="dev.eventref.plugin.init">
+		<blockquote id="dev.eventref.system.plugininit">
 			<title>EVENT_PLUGIN_INIT (Execute)</title>
 
 			<blockquote>
@@ -64,7 +64,8 @@
 				<para>
 					This event is the first point in page execution where all registered plugins are
 					guaranteed to be enabled (assuming dependencies and such are met).  At any point
-					before this event, any or all plugins may not yet be loaded.
+					before this event, any or all plugins may not yet be loaded.  Note that the core
+					system has not yet completed the bootstrap process when this event is signalled.
 				</para>
 
 				<para>
@@ -77,7 +78,25 @@
 			</blockquote>
 		</blockquote>
 
-		<blockquote id="dev.eventref.logging.log">
+		<blockquote id="dev.eventref.system.coreready">
+			<title>EVENT_CORE_READY (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event is triggered by the MantisBT bootstrap process after all core APIs have
+					been initialized, including the plugin system, but before control is relinquished
+					from the bootstrap process back to the originating page.  No parameters are passed
+					to hooked functions, and no return values are expected.
+				</para>
+
+				<para>
+					This event is the first point in page execution where the entire system is considered
+					loaded and ready.
+				</para>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.system.log">
 			<title>EVENT_LOG (Execute)</title>
 
 			<blockquote>
