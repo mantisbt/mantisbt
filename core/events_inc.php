@@ -23,6 +23,9 @@ event_declare_many( array(
 	# Events specific to plugins
 	'EVENT_PLUGIN_INIT' => EVENT_TYPE_EXECUTE,
 
+	# Events specific to the core system
+	'EVENT_CORE_READY' => EVENT_TYPE_EXECUTE,
+
 	# MantisBT Layout Events
 	'EVENT_LAYOUT_RESOURCES' => EVENT_TYPE_OUTPUT,
 	'EVENT_LAYOUT_BODY_BEGIN' => EVENT_TYPE_OUTPUT,

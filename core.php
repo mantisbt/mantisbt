@@ -237,3 +237,7 @@ if ( !is_blank ( config_get_global( 'default_timezone' ) ) ) {
 if ( !isset( $g_skip_lang_load ) ) {
 	lang_push( lang_get_default() );
 }
+
+# signal plugins that the core system is loaded
+event_signal( 'EVENT_CORE_READY' );
+
