@@ -191,7 +191,7 @@ $s_legend_reported = 'Reported';
 $s_cumulative = 'Cumulative';
 $s_not_enough_data = 'Not enough data to create graph';
 
-# print_all_bug_page.php : display selected bugs
+# print_all_bug_page.php : display selected issues
 $s_hide_button = 'Display selected only';
 
 # print_all_bug_options.php : printing preferences
@@ -252,7 +252,7 @@ $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path. Directory 
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'You cannot set an issue as a duplicate of itself.';
-$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Bug revision not found.';
+$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Issue revision not found.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
@@ -301,8 +301,8 @@ $MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Twitter integration requires PHP cUR
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Could not find a tag with that name.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'A tag already exists with that name.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'That tag name is invalid.';
-$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'That tag is not attached to that bug.';
-$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'That tag already attached to that bug.';
+$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'That tag is not attached to that issue.';
+$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'That tag already attached to that issue.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Token could not be found.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Event "%1$s" has not yet been declared.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin is not registered with MantisBT.';
@@ -653,7 +653,7 @@ $s_revision_by = '%1$s by %2$s';
 $s_revision_drop = 'Drop';
 $s_all_revisions = 'All Revisions';
 $s_back_to_issue = 'Back to Issue';
-$s_confirm_revision_drop = 'Are you sure you want to drop this bug revision?';
+$s_confirm_revision_drop = 'Are you sure you want to drop this issue revision?';
 
 # bug_vote_add.php
 $s_vote_added_msg = 'Vote has been added...';
@@ -790,7 +790,7 @@ $s_colour_project = 'Project setting overrides others.';
 $s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported issue';
 $s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users who added Bugnotes';
+$s_users_added_bugnote = 'Users who added Issue Notes';
 $s_change_configuration = 'Update Configuration';
 $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
@@ -832,7 +832,7 @@ $s_allow_close_immediate = 'Allow issue to be closed on Resolve';
 $s_allow_reporter_close = 'Allow Reporter to close Issue';
 $s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
 $s_set_status_assigned = 'Set status on assignment of Handler';
-$s_allow_user_edit = 'Allow user to edit their own bugnotes';
+$s_allow_user_edit = 'Allow user to edit their own issue notes';
 $s_limit_access = 'Limit reporter\'s access to their own issues';
 $s_submit_status = 'Status to which a new issue is set';
 $s_assigned_status = 'Status to set auto-assigned issues to';
@@ -889,7 +889,7 @@ $s_category_added_msg = 'Category has been successfully added...';
 $s_category_deleted_msg = 'Category has been successfully deleted...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = 'Are you sure you want to delete this category?<br />Category "%1$s" contains %2$d bugs.';
+$s_category_delete_sure_msg = 'Are you sure you want to delete this category?<br />Category "%1$s" contains %2$d issues.';
 $s_delete_category_button = 'Delete Category';
 
 # manage_proj_category_edit_page.php
@@ -1545,7 +1545,7 @@ $s_select_both = 'Summary by Status and Category';
 $s_show_as_graph = 'Show as Graph';
 $s_show_as_table = 'Show as Table';
 $s_show_graph = 'Show Graph';
-$s_graph_page = 'Graph Bug History';
+$s_graph_page = 'Graph Issue History';
 $s_graph_bug_page_link = 'Graph';
 
 # manage columns page
