@@ -1,8 +1,8 @@
 <sect1 id="dev.eventref.bug">
-	<title>Bug and Bugnote Actions</title>
+	<title>Bug and Bugnote Events</title>
 
 	<sect2 id="dev.eventref.bug.view">
-		<title>Bug View Events</title>
+		<title>Bug View</title>
 
 		<blockquote id="dev.eventref.bug.view.details">
 			<title>EVENT_VIEW_BUG_DETAILS (Execute)</title>
@@ -54,7 +54,7 @@
 	</sect2>
 
 	<sect2 id="dev.eventref.bug.noteview">
-		<title>Bugnote View Events</title>
+		<title>Bugnote View</title>
 
 		<blockquote id="dev.eventref.bug.noteview.start">
 			<title>EVENT_VIEW_BUGNOTES_START (Execute)</title>
