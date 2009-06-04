@@ -892,7 +892,7 @@
 	$g_show_bug_project_links	= ON;
 
 	/**
-	 * Position of the status colour legend, can be: STATUS_LEGEND_POSITION_*
+	 * Position of the status colour legend, can be: POSITION_*
 	 * see constant_inc.php. (*: TOP , BOTTOM , or BOTH)
 	 * @global int $g_status_legend_position
 	 */
@@ -907,11 +907,18 @@
 	$g_status_percentage_legend = OFF;
 
 	/**
-	 * Position of the filter box, can be: FILTER_POSITION_*
-	 * FILTER_POSITION_TOP, FILTER_POSITION_BOTTOM, or 0 for none.
+	 * Position of the filter box, can be: POSITION_*
+	 * POSITION_TOP, POSITION_BOTTOM, or POSITION_NONE for none.
 	 * @global int $g_filter_position
 	 */
 	$g_filter_position	= FILTER_POSITION_TOP;
+
+	/**
+	 * Position of action buttons when viewing issues.
+	 * Can be: POSITION_TOP, POSITION_BOTTOM, or POSITION_BOTH.
+	 * @global int $g_action_button_position
+	 */
+	$g_action_button_position = POSITION_BOTTOM;
 
 	/**
 	 * show product versions in create, view and update screens

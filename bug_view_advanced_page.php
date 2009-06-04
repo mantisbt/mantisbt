@@ -60,6 +60,7 @@
 
 	print_recently_visited();
 
+	$t_action_button_position = config_get( 'action_button_position' );
 	$t_access_level_needed = config_get( 'view_history_threshold' );
 	$t_can_view_history = access_has_bug_level( $t_access_level_needed, $f_bug_id );
 
@@ -141,6 +142,13 @@
 
 </tr>
 
+<?php if ( $t_action_button_position == POSITION_TOP || $t_action_button_position == POSITION_BOTH ) { ?>
+<tr align="center">
+	<td align="center" colspan="6">
+		<?php html_buttons_view_bug_page( $f_bug_id ) ?>
+	</td>
+</tr>
+<?php } ?>
 
 <!-- Labels -->
 <tr class="row-category">
@@ -618,14 +626,14 @@
 	}
 ?>
 
-<!-- Buttons -->
+<?php if ( $t_action_button_position == POSITION_BOTTOM || $t_action_button_position == POSITION_BOTH ) { ?>
 <tr align="center">
 	<td align="center" colspan="6">
-<?php
-	html_buttons_view_bug_page( $f_bug_id );
-?>
+		<?php html_buttons_view_bug_page( $f_bug_id ) ?>
 	</td>
 </tr>
+<?php } ?>
+
 </table>
 
 <?php
