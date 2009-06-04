@@ -239,6 +239,15 @@ function session_set( $p_name, $p_value ) {
 }
 
 /**
+ * Delete a session variable.
+ * @param string Session variable name
+ */
+function session_delete( $p_name ) {
+	global $g_session;
+	$g_session->delete( $p_name );
+}
+
+/**
  * Destroy the session entirely.
  */
 function session_clean() {
