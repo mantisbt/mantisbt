@@ -7,6 +7,7 @@
 <!ENTITY eventref SYSTEM "event-reference.sgml">
 <!ENTITY eventref-output SYSTEM "event-reference-output.sgml">
 <!ENTITY eventref-bug SYSTEM "event-reference-bug.sgml">
+<!ENTITY eventref-account SYSTEM "event-reference-account.sgml">
 <!ENTITY eventref-manage SYSTEM "event-reference-manage.sgml">
 
 <!ENTITY appendix SYSTEM "appendix.sgml">
