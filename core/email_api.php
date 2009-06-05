@@ -68,6 +68,66 @@ function email_regex_simple() {
 			"\@((?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?))";	# @domain
 }
 
+# --------------------
+# check to see that the format is valid and that the mx record exists
+function email_is_valid( $p_email ) {
+
+	# if we don't validate then just accept
+	if( OFF == config_get( 'validate_email' ) ) {
+		return true;
+	}
+
+	if( is_blank( $p_email ) && ON == config_get( 'allow_blank_email' ) ) {
+		return true;
+	}
+
+	# Use a regular expression to check to see if the email is in valid format
+	#  x-xx.xxx@yyy.zzz.abc etc.
+	if( preg_match( email_regex_simple(), $p_email, $t_check ) ) {
+		$t_local = $t_check[1];
+		$t_domain = $t_check[2];
+
+		# see if we're limited to one domain
+		$t_limit_email_domain = config_get( 'limit_email_domain' );
+		if( $t_limit_email_domain !== OFF  ) {
+			if( 0 != strcasecmp( $t_limit_email_domain, $t_domain ) ) {
+				return false;
+			}
+		}
+
+		if( ON == config_get( 'check_mx_record' ) ) {
+			$temp = '';
+
+			# Check for valid mx records
+			if( getmxrr( $t_domain, $temp ) ) {
+				return true;
+			} else {
+				$host = $t_domain . '.';
+
+				# for no mx record... try dns check
+				if( checkdnsrr( $host, 'ANY' ) ) {
+					return true;
+				}
+			}
+		} else {
+
+			# Email format was valid but did't check for valid mx records
+			return true;
+		}
+	}
+
+	# Everything failed.  The email is invalid
+	return false;
+}
+
+# Check if the email address is valid
+#  return true if it is, trigger an ERROR if it isn't
+function email_ensure_valid( $p_email ) {
+	if( !email_is_valid( $p_email ) ) {
+		trigger_error( ERROR_EMAIL_INVALID, ERROR );
+	}
+}
+
 # Check if the email address is disposable
 function email_is_disposable( $p_email ) {
 	if( !class_exists( 'DisposableEmailChecker' ) ) {
