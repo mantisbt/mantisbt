@@ -77,12 +77,14 @@
 	$t_bug_data->target_version		= gpc_get_string( 'target_version', $t_bug_data->target_version );
 	$t_bug_data->view_state			= gpc_get_int( 'view_state', $t_bug_data->view_state );
 	$t_bug_data->summary			= gpc_get_string( 'summary', $t_bug_data->summary );
-	$t_bug_data->due_date 				= gpc_get_string( 'due_date', $t_bug_data->due_date);
-
-	if ( is_blank ( $t_bug_data->due_date ) ) {
-		$t_bug_data->due_date = 1;
-	} else {
-		$t_bug_data->due_date = $t_bug_data->due_date;
+	$t_due_date = gpc_get_string( 'due_date', null );
+	
+	if( $t_due_date !== null) {
+		if ( is_blank ( $t_due_date ) ) {
+			$t_bug_data->due_date = 1;
+		} else {
+			$t_bug_data->due_date = strtotime( $t_due_date );
+		}		
 	}
 
 	$t_bug_data->description		= gpc_get_string( 'description', $t_bug_data->description );

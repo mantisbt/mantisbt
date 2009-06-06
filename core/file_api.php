@@ -622,7 +622,7 @@ function file_is_name_unique( $p_name, $p_bug_id ) {
  * @param integer $p_bug_id the bug id
  * @param array $p_file the uploaded file info, as retrieved from gpc_get_file()
  */
-function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc = '' ) {
+function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null ) {
 
 	file_ensure_uploaded( $p_file );
 	$t_file_name = $p_file['name'];
@@ -642,6 +642,12 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	} else {
 		$t_project_id = helper_get_current_project();
 		$t_bug_id = 0;
+	}
+	
+	if( $p_user_id === null ) {
+		$c_user_id = auth_get_current_user_id();
+	} else {
+		$c_user_id = (int)$p_user_id;
 	}
 
 	# prepare variables for insertion
@@ -713,9 +719,9 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	$c_id = ( 'bug' == $p_table ) ? $c_bug_id : $c_project_id;
 
 	$query = "INSERT INTO $t_file_table
-						(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
+						(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id)
 					  VALUES
-						($c_id, '$c_title', '$c_desc', '$c_unique_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now() . "', $c_content)";
+						($c_id, '$c_title', '$c_desc', '$c_unique_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now() . "', $c_content, $c_user_id)";
 	db_query( $query );
 
 	if( 'bug' == $p_table ) {

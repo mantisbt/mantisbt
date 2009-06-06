@@ -591,3 +591,7 @@ $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_sponsorship_
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_sponsorship_table' ), "date_submitted" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_sponsorship_table' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_file_table' ), "
+	user_id			I		UNSIGNED NOTNULL DEFAULT '0' " ) );
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_file_table' ), "
+	user_id		I  			UNSIGNED NOTNULL DEFAULT '0' " ) );
