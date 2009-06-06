@@ -126,6 +126,8 @@ function __autoload( $className ) {
 	}
 }
 
+spl_autoload_register( '__autoload' );
+
 if ( ($t_output = ob_get_contents()) != '') {
 	echo 'Possible Whitespace/Error in Configuration File - Aborting. Output so far follows:<br />';
 	echo var_dump($t_output);
