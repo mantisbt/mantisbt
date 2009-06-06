@@ -1100,6 +1100,22 @@
 	 */
 	$g_complete_date_format = 'Y-m-d H:i T';
 
+	/**
+	 * jscalendar date format string
+	 * go to http://www.php.net/manual/en/function.date.php
+	 * for detailed instructions on date formatting
+	 * @global string $g_calendar_js_date_format
+	 */
+	$g_calendar_js_date_format   = '\%Y-\%m-\%d \%H:\%M';
+
+	/**
+	 * jscalendar date format string
+	 * go to http://www.php.net/manual/en/function.date.php
+	 * for detailed instructions on date formatting
+	 * @global string $g_calendar_date_format
+	 */
+	$g_calendar_date_format   = 'Y-m-d H:i';
+	
 	/**************************
 	 * MantisBT TimeZone Settings *
 	 **************************/

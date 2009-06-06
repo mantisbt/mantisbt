@@ -104,6 +104,12 @@ class UserPreferences {
 	}
 
 	public function __set($name, $value) {
+		switch ($name) {
+			case 'timezone':
+				if( $value == "" ) {
+					$value = null;
+				}
+		}
 		$this->$name = $value;
 	}
 
@@ -170,7 +176,6 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 
 	$g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] = $row;
 
-	date_default_timezone_set( $row['timezone'] );
 	return $row;
 }
 

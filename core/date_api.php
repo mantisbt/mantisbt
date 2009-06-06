@@ -41,6 +41,42 @@ function date_get_null() {
 	return 1;
 }
 
+$g_cache_timezone = array();
+
+/**
+ * set new timezone
+ * @return null
+ * @access public
+ */
+function date_set_timezone( $p_timezone ) {
+	global $g_cache_timezone;
+	
+	array_push( $g_cache_timezone, date_default_timezone_get() );
+	
+	if( !date_default_timezone_set( $p_timezone ) ) {
+		// unable to set timezone
+	}
+}
+
+/**
+ * restore previous timezone
+ * @return null
+ * @access public
+ */
+function date_restore_timezone( ) {
+	global $g_cache_timezone;
+	
+	$t_timezone = array_pop( $g_cache_timezone );
+	
+	if( $t_timezone === null ) {
+		return;
+	}
+
+	if( !date_default_timezone_set( $t_timezone ) ) {
+		// unable to set timezone
+	}
+}
+
 /**
  *
  * @param int $p_month
@@ -228,9 +264,7 @@ function date_print_calendar( $p_button_name = 'trigger' ) {
 		$t_cal_icon = $t_icon_path . "calendar-img.gif";
 		echo "<input type=\"image\" class=\"button\" id=\"" . $p_button_name . "\" src=\"";
 		echo $t_cal_icon;
-		$t_format = config_get( 'short_date_format' );
-		$t_new_format = str_replace( '-', '-%', $t_format );
-		$t_format = "%" . $t_new_format;
+		$t_format = config_get( 'calendar_js_date_format' );
 		echo "\" onclick=\"return showCalendar ('sel1', '" . $t_format . "', 24, true)\" />";
 	}
 }
@@ -248,13 +282,13 @@ function date_print_calendar( $p_button_name = 'trigger' ) {
  */
 function date_finish_calendar( $p_field_name, $p_button_name ) {
 	if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
-		$t_format = config_get( 'short_date_format' );
-		$t_new_format = str_replace( '-', '-%', $t_format );
-		$t_format = "%" . $t_new_format;
+		$t_format = config_get( 'calendar_js_date_format' );
 		echo "<script type=\"text/javascript\">\n";
 		echo "Calendar.setup (\n";
 		echo "{\n";
 		echo "inputField 	: \"" . $p_field_name . "\",\n";
+		echo "timeFormat     :    \"24\",\n";
+		echo "showsTime : true,\n";
 		echo "ifFormat 	: \"" . $t_format . "\", \n";
 		echo "button		: \"" . $p_button_name . "\"\n";
 		echo "}\n";

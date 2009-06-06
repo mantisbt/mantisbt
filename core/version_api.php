@@ -24,13 +24,34 @@
 # Version Data Structure Definition
 # ===================================
 class VersionData {
-	var $id = 0;
-	var $project_id = 0;
-	var $version = '';
-	var $description = '';
-	var $released = VERSION_FUTURE;
-	var $date_order = '';
-	var $obsolete = 0;
+	protected $id = 0;
+	protected $project_id = 0;
+	protected $version = '';
+	protected $description = '';
+	protected $released = VERSION_FUTURE;
+	protected $date_order = 1;
+	protected $obsolete = 0;
+
+	public function __set($name, $value) {
+		switch ($name) {
+			case 'date_order':
+				if( !is_numeric($value) ) {
+					if( $value == '' ) {
+						$value = date_get_null();
+					}  else {
+						$value = strtotime( $value );
+						if ( $value === false ) {
+							trigger_error( ERROR_INVALID_DATE_FORMAT, ERROR );
+						}
+					}
+				}
+		}
+		$this->$name = $value;
+	}
+
+	public function __get( $t_string ) {
+		return $this->{$t_string};
+	}
 }
 
 # ===================================
@@ -448,18 +469,22 @@ function version_get_field( $p_version_id, $p_field_name ) {
 # --------------------
 # get information about a version given its id
 function version_get( $p_version_id ) {
+	static $t_vars;
+	
 	$row = version_cache_row( $p_version_id );
+
+	if ($t_vars == null ) {
+		$t_reflection = new ReflectionClass('VersionData');
+		$t_vars = $t_reflection->getDefaultProperties();
+	}	
 
 	$t_version_data = new VersionData;
 	$t_row_keys = array_keys( $row );
-	$t_vars = get_object_vars( $t_version_data );
 
 	# Check each variable in the class
 	foreach( $t_vars as $var => $val ) {
-
 		# If we got a field from the DB with the same name
 		if( in_array( $var, $t_row_keys, true ) ) {
-
 			# Store that value in the object
 			$t_version_data->$var = $row[$var];
 		}

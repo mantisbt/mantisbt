@@ -61,7 +61,11 @@
 		<?php echo lang_get( 'date_order' ) ?>
 	</td>
 	<td>
-		<input type="text" name="date_order" size="32" value="<?php echo string_attribute( date( 'Y-m-d H:i:s', $t_version->date_order ) ) ?>" />
+		<input type="text" id="date_order" name="date_order" size="32" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'calendar_date_format' ), $t_version->date_order ) ) ) ?>" />
+		<?php 
+			date_print_calendar();
+			date_finish_calendar( 'date_order', 'trigger');
+		?>
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>

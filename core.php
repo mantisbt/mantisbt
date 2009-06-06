@@ -208,6 +208,19 @@ require_once( 'gpc_api.php' );
 require_once( 'form_api.php' );
 require_once( 'print_api.php' );
 require_once( 'collapse_api.php' );
+
+if ( !is_blank ( config_get_global( 'default_timezone' ) ) ) {
+	// if a default timezone is set in config, set it here, else we use php.ini's value
+	// having a timezone set avoids a php warning
+	date_default_timezone_set( config_get_global( 'default_timezone' ) );
+} else {
+	config_set_global( 'default_timezone', date_default_timezone_get(), true );
+}
+
+if( auth_is_user_authenticated() ) {
+	date_default_timezone_set( user_pref_get_pref( auth_get_current_user_id(), 'timezone' ) );
+}
+
 if ( !defined( 'MANTIS_INSTALLER' ) ) {
 	collapse_cache_token();
 }
@@ -226,14 +239,6 @@ mt_srand( $sec*$usec );
 
 // set HTTP response headers
 http_all_headers();
-
-if ( !is_blank ( config_get_global( 'default_timezone' ) ) ) {
-	// if a default timezone is set in config, set it here, else we use php.ini's value
-	// having a timezone set avoids a php warning
-	date_default_timezone_set( config_get_global( 'default_timezone' ) );
-} else {
-	config_set_global( 'default_timezone', date_default_timezone_get() );
-}
 
 // push push default language to speed calls to lang_get
 if ( !isset( $g_skip_lang_load ) ) {

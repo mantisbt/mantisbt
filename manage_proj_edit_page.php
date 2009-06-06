@@ -448,8 +448,11 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		$t_name = $t_version['version'];
 		$t_released = $t_version['released'];
 		$t_obsolete = $t_version['obsolete'];
-		$t_date_order = $t_version['date_order'];
-		$t_date_formatted = string_format_complete_date( $t_version['date_order'] );
+		if( !date_is_null( $t_version['date_order'] ) ) {
+			$t_date_formatted = date( config_get( 'complete_date_format' ), $t_version['date_order'] );		
+		} else {
+			$t_date_formatted = ' ';
+		}
 ?>
 <!-- Repeated Info Rows -->
 		<tr <?php echo helper_alternate_class() ?>>
