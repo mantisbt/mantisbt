@@ -34,6 +34,7 @@ if( ON == config_get( 'use_jpgraph' ) ) {
 }
 
 function graph_get_font() {
+	return 'c:\\windows\\fonts\\arial.ttf';
 	$t_font_map = array(
 		'arial' => FF_ARIAL,
 		'verdana' => FF_VERDANA,
@@ -65,6 +66,30 @@ function graph_bar( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_he
 
 	error_check( is_array( $p_metrics ) ? array_sum( $p_metrics ) : 0, $p_title );
 
+	$graph = new ezcGraphBarChart();
+	$graph->title = $p_title;
+	$graph->background->color = '#FFFFFF';
+	$graph->options->font = $t_graph_font ;
+	$graph->options->font->maxFontSize = 12;
+	$graph->legend = false;
+	
+    $graph->data[0] = new ezcGraphArrayDataSet( $p_metrics );
+	$graph->data[0]->color = '#FFFF00';
+
+	$graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
+	$graph->xAxis->axisLabelRenderer->angle = 45;
+
+	$graph->driver = new ezcGraphGdDriver();
+	//$graph->driver->options->supersampling = 1;
+	$graph->driver->options->jpegQuality = 100;
+	$graph->driver->options->imageFormat = IMG_JPEG;
+	
+	$graph->renderer->options->syncAxisFonts = false;
+	
+	$graph->renderToOutput( $p_graph_width, $p_graph_height);
+	
+	die;
+	
 	$graph = new Graph( $p_graph_width, $p_graph_height );
 	$graph->img->SetMargin( 40, 40, 40, 170 );
 	if( ON == config_get_global( 'jpgraph_antialias' ) ) {
@@ -124,6 +149,34 @@ function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_
 
 	# calculate totals
 	$total = graph_total_metrics( $p_metrics );
+
+	$graph = new ezcGraphBarChart();
+	$graph->title = $p_title;
+	$graph->background->color = '#FFFFFF';
+	$graph->options->font = $t_graph_font ;
+	$graph->options->font->maxFontSize = 12;
+	$graph->legend = false;
+	
+	foreach( array( 'open', 'resolved', 'closed' ) as $t_label ) {
+	    $graph->data[$t_label] = new ezcGraphArrayDataSet( $p_metrics[$t_label] );
+	}
+	$graph->data['total'] = new ezcGraphArrayDataSet( $total );
+	//$graph->data['total']->displayType = ezcGraph::LINE;
+	//$graph->data['total']->barMargin = -20;
+	$graph->options->fillLines = 210;
+	$graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
+	$graph->xAxis->axisLabelRenderer->angle = 45;
+
+	$graph->driver = new ezcGraphGdDriver();
+	//$graph->driver->options->supersampling = 1;
+	$graph->driver->options->jpegQuality = 100;
+	$graph->driver->options->imageFormat = IMG_JPEG;
+	
+	$graph->renderer->options->syncAxisFonts = false;
+	
+	$graph->renderToOutput( $p_graph_width, $p_graph_height);
+	
+	die;
 
 	# defines margin according to height
 	$graph = new Graph( $p_graph_width, $p_graph_height );
@@ -192,6 +245,34 @@ function graph_pie( $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_he
 	$t_graph_font = graph_get_font();
 
 	error_check( is_array( $p_metrics ) ? array_sum( $p_metrics ) : 0, $p_title );
+
+	$graph = new ezcGraphPieChart();
+	$graph->title = $p_title;
+	$graph->background->color = '#FFFFFF';
+	$graph->options->font = $t_graph_font ;
+	$graph->options->font->maxFontSize = 12;
+	$graph->legend = false;
+	
+    $graph->data[0] = new ezcGraphArrayDataSet( $p_metrics );
+	$graph->data[0]->color = '#FFFF00';
+
+	$graph->renderer = new ezcGraphRenderer3d();
+	$graph->renderer->options->dataBorder = false;
+	$graph->renderer->options->pieChartShadowSize = 10;
+	$graph->renderer->options->pieChartGleam = .5;
+	$graph->renderer->options->pieChartHeight = 16;
+	$graph->renderer->options->legendSymbolGleam = .5;
+
+	$graph->driver = new ezcGraphGdDriver();
+	//$graph->driver->options->supersampling = 1;
+	$graph->driver->options->jpegQuality = 100;
+	$graph->driver->options->imageFormat = IMG_JPEG;
+	
+	$graph->renderer->options->syncAxisFonts = false;
+	
+	$graph->renderToOutput( $p_graph_width, $p_graph_height);
+	
+	die;
 
 	$graph = new PieGraph( $p_graph_width, $p_graph_height );
 	$graph->img->SetMargin( 40, 40, 40, 100 );
@@ -568,27 +649,6 @@ function create_category_summary() {
 
 	# end for
 	return $t_metrics;
-}
-
-# --------------------
-function cmp_dates( $a, $b ) {
-	if( $a[0] == $b[0] ) {
-		return 0;
-	}
-	return( $a[0] < $b[0] ) ? -1 : 1;
-}
-
-# --------------------
-function find_date_in_metrics( $aDate ) {
-	global $metrics;
-	$index = -1;
-	for( $i = 0;$i < count( $metrics );$i++ ) {
-		if( $aDate == $metrics[$i][0] ) {
-			$index = $i;
-			break;
-		}
-	}
-	return $index;
 }
 
 # --------------------

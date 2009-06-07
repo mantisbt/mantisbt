@@ -1,0 +1,38 @@
+<?php
+# Mantis - a php based bugtracking system
+
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+
+$s_plugin_graph_title = 'Mantis Graphs';
+$s_plugin_graph_description = 'Official graph plugin.';
+
+$s_plugin_MantisGraph_menu_advanced_summary = 'Advanced Summary';
+
+$s_plugin_MantisGraph_synthesis_link = 'Synthesis';
+$s_plugin_MantisGraph_status_link = 'Per state';
+$s_plugin_MantisGraph_priority_link = 'Per priority';
+$s_plugin_MantisGraph_severity_link = 'Per severity';
+$s_plugin_MantisGraph_category_link = 'Per category';
+$s_plugin_MantisGraph_resolution_link = 'Per resolution';
+
+
+$s_plugin_format_config = 'Configuration';
+$s_plugin_format_process_text = 'Text Processing';
+$s_plugin_format_process_urls = 'URL Processing';
+$s_plugin_format_process_buglinks = 'Mantis Links ( Issue/Issuenote )';
+$s_plugin_format_process_vcslinks = 'VCS Links';
+$s_plugin_format_enabled = 'On';
+$s_plugin_format_disabled = 'Off';

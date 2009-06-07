@@ -859,18 +859,31 @@ function print_subproject_menu_bar( $p_project_id, $p_parents = '' ) {
  * Print the menu for the graph summary section
  * @return null
  */
-function print_menu_graph() {
-	if( config_get( 'use_jpgraph' ) ) {
-		$t_icon_path = config_get( 'icon_path' );
+function print_summary_submenu() {
+	echo '<div align="center">';
 
-		echo '<br />';
-		echo '<a href="' . helper_mantis_url( 'summary_page.php' ) . '"><img src="' . $t_icon_path . 'synthese.gif" border="0" alt="" />' . lang_get( 'synthesis_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_status.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'status_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_priority.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'priority_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_severity.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'severity_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_category.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'category_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_resolution.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'resolution_link' ) . '</a>';
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_SUBMENU_SUMMARY' );
+	$t_menu_options = array();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				$t_menu_options[] = $t_callback_menu_options;
+			}
+		}
 	}
+
+	// Plugins menu items
+	// TODO: this would be a call to print_pracket_link but the events returns cooked links so we cant
+	foreach( $t_menu_options as $t_menu_item ) {
+		echo '<span class="bracket-link">[&nbsp;';
+		echo $t_menu_item;
+		echo '&nbsp;]</span> ';
+	}
+	echo '</div>';	
+	
 }
 
 /**
@@ -1106,22 +1119,27 @@ function print_doc_menu( $p_page = '' ) {
 function print_summary_menu( $p_page = '' ) {
 	echo '<div align="center">';
 	print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
+	print_bracket_link( helper_mantis_url( 'summary_page.php' ), lang_get( 'summary_link' ) );
 
-	if( config_get( 'use_jpgraph' ) != 0 ) {
-		$t_summary_page = 'summary_page.php';
-		$t_summary_jpgraph_page = 'summary_jpgraph_page.php';
-
-		switch( $p_page ) {
-			case $t_summary_page:
-				$t_summary_page = '';
-				break;
-			case $t_summary_jpgraph_page:
-				$t_summary_jpgraph_page = '';
-				break;
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_MENU_SUMMARY' );
+	$t_menu_options = array();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				$t_menu_options[] = $t_callback_menu_options;
+			}
 		}
+	}
 
-		print_bracket_link( helper_mantis_url( $t_summary_page ), lang_get( 'summary_link' ) );
-		print_bracket_link( helper_mantis_url( $t_summary_jpgraph_page ), lang_get( 'summary_jpgraph_link' ) );
+	// Plugins menu items
+	// TODO: this would be a call to print_pracket_link but the events returns cooked links so we cant
+	foreach( $t_menu_options as $t_menu_item ) {
+		echo '<span class="bracket-link">[&nbsp;';
+		echo $t_menu_item;
+		echo '&nbsp;]</span> ';
 	}
 	echo '</div>';
 }

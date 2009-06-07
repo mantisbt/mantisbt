@@ -105,7 +105,7 @@
 <br />
 <?php 
 	print_summary_menu( 'summary_page.php' );
-	print_menu_graph(); ?>
+	print_summary_submenu(); ?>
 <br />
 <table class="width100" cellspacing="1">
 <tr>

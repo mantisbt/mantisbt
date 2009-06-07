@@ -15,8 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 	/**
-	 * This page displays "improved" charts on categories : categories on bars and 3Dpie
-	 *
+	 * Initial code for this addon came from Duncan Lisset
+	 * Modified and "make MantisBT codeguidlines compatible" by Rufinus
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	 * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -26,43 +26,47 @@
 	  * MantisBT Core API's
 	  */
 	require_once( 'core.php' );
-
-	require_once( 'graph_api.php' );
-
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	html_page_top();
-	print_summary_menu( 'summary_page.php' );
+?>
+<br />
+<?php
 
-	echo '<br />';
-	print_menu_graph();
+	print_summary_menu( 'summary_jpgraph_page.php' );
 
+	$t_graphs = array( 'summary_graph_cumulative_bydate', 'summary_graph_bydeveloper', 'summary_graph_byreporter',
+			'summary_graph_byseverity', 'summary_graph_bystatus', 'summary_graph_byresolution',
+			'summary_graph_bycategory', 'summary_graph_bypriority' );
+	$t_wide = config_get( 'graph_summary_graphs_per_row' );
 	$t_width = config_get( 'graph_window_width' );
-	$t_graph_width = (int) ( ( $t_width - 50 ) * 0.6 );
+	$t_graph_width = (int) ( ( $t_width - 50 ) / $t_wide );
 
-	# gather the data for the graphs
-	$t_metrics = create_category_summary();
-	$t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
+	token_delete( TOKEN_GRAPH );
 
- ?>
+?>
 
 <br />
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title">
-		<?php echo lang_get( 'graph_imp_category_title' ) ?>
+	<td class="form-title" colspan="2">
+		<?php echo lang_get( 'summary_title' ) ?>
 	</td>
 </tr>
-<tr valign="top">
-	<td width='100%'>
-		<center><img src="summary_graph_bycategory.php?width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
-	</td>
-</tr>
-<tr valign="top">
-	<td align="center">
-		<center><img src="summary_graph_bycategory_pct.php?width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
-	</td>
-</tr>
+<?php
+	$t_graph_count = count($t_graphs );
+	for ( $t_pos = 0; $t_pos < $t_graph_count; $t_pos++ ) {
+		if ( 0 == ( $t_pos % $t_wide ) ) {
+			print( "<tr valign=\"top\">\n" );
+		}
+		echo '<td width="50%" align="center">';
+		printf("<img src=\"%s.php?width=%d\" border=\"0\" alt=\"\" />", plugin_page( $t_graphs[$t_pos] ), $t_graph_width );
+		echo '</td>';
+		if ( ( $t_wide - 1 ) == ( $t_pos % $t_wide ) ) {
+			print( "</tr>\n" );
+		}
+	}
+?>
 </table>
 
 <?php

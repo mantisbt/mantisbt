@@ -15,7 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 	/**
-	 * This page displays "improved" charts on status : the old one and a 3D Pie
+	 * This page displays "improved" charts on priorities : bars, 3Dpie and a mix priorities per status
+	 *
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	 * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -31,35 +32,43 @@
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	html_page_top();
+
 	print_summary_menu( 'summary_page.php' );
 	echo '<br />';
 
-	print_menu_graph();
+	print_summary_submenu();
 	$t_width = config_get( 'graph_window_width' );
 	$t_graph_width = (int) ( ( $t_width - 50 ) * 0.6 );
 
 	# gather the data for the graphs
-	$t_metrics = create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status' );
+	$t_metrics = enum_bug_group( lang_get( 'priority_enum_string' ), 'priority');
 	$t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
-?>
+
+ ?>
 
 <br />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<?php echo lang_get( 'graph_imp_status_title' ) ?>
+		<?php echo lang_get( 'graph_imp_priority_title' ) ?>
 	</td>
 </tr>
 <tr valign="top">
 	<td>
-		 <center><img src="summary_graph_bystatus.php?width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
+		<center><img src="<?php echo plugin_page( 'summary_graph_bypriority.php' ) ?>?width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
 	</td>
 </tr>
 <tr valign="top">
 	<td>
-		<center><img src="summary_graph_bystatus_pct.php?width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
+		 <center><img src="<?php echo plugin_page( 'summary_graph_bypriority_pct.php' ) ?>?width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
+	</td>
+</tr>
+<tr valign="top">
+	<td>
+		<center><img src="<?php echo plugin_page( 'summary_graph_bypriority_mix.php' ) ?>?width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
 	</td>
 </tr>
 </table>
 
-<?php html_page_bottom( __FILE__ );
+<?php
+	html_page_bottom( __FILE__ );
