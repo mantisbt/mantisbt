@@ -961,6 +961,17 @@ function print_column_eta( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE 
  * @return null
  * @access public
  */
+function print_column_reproducibility( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<td class="center">', get_enum_element( 'reproducibility', $p_row['reproducibility'] ), '</td>';
+}
+
+/**
+ *
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_resolution( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="center">', get_enum_element( 'resolution', $p_row['resolution'] ), '</td>';
 }
