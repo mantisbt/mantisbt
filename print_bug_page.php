@@ -33,10 +33,6 @@
 
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
-	if ( SIMPLE_ONLY == $g_show_view ) {
-		print_header_redirect ( 'bug_view_page.php?bug_id='.$f_bug_id );
-	}
-
 	access_ensure_bug_level( VIEWER, $f_bug_id );
 
 	$c_bug_id = (integer)$f_bug_id;
