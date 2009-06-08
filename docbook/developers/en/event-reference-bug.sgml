@@ -144,6 +144,63 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.bug.action.updatebugform">
+			<title>EVENT_UPDATE_BUG_FORM (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do processing or display form elements on
+					the Update Issue page.  It is triggered immediately before the summary
+					text field.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.action.updatebugformtop">
+			<title>EVENT_UPDATE_BUG_FORM_TOP (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do processing or display form elements on
+					the Update Issue page.  It is triggered immediately before before any
+					of the visible form elements have been created.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.action.updatebug">
+			<title>EVENT_UPDATE_BUG (Chain)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to perform both pre- and post-processing of
+					the updated bug data structure after being modified by the user, but
+					before being saved to the database.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Complex&gt;: Bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Complex&gt;: Bug data structure</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 	</sect2>
 
 	<sect2 id="dev.eventref.bug.noteview">
