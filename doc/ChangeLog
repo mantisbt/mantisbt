@@ -1,5 +1,16 @@
 Mantis ChangeLog
 
+2009.06.08 - 1.1.8
+===================================
+
+Final bugfix and translation update release for the 1.1.x series.
+
+- 0010184: [custom fields] APPLICATION ERROR 0001303 when optional custom date field is left blank (jreese) - resolved.
+- 0010445: [other] Wrong copyright (siebrand) - resolved.
+- 0010448: [localization] Syntax error in polish translation (siebrand) - resolved.
+- 0010405: [localization] Arabic language and RTL (siebrand) - resolved.
+- 0010570: [printing] Printing Bug does not work with configuration $g_show_view= SIMPLE_ONLY; (vboctor) - resolved.
+
 2009.04.20 - 1.1.7
 ===================================
 
