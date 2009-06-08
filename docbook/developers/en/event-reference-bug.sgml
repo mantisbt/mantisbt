@@ -53,6 +53,99 @@
 
 	</sect2>
 
+	<sect2 id="dev.eventref.bug.action">
+		<title>Bug Actions</title>
+
+		<blockquote id="dev.eventref.bug.action.reportbugform">
+			<title>EVENT_REPORT_BUG_FORM (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do processing or display form elements on
+					the Report Issue page.  It is triggered immediately before the summary
+					text field.
+				</para>
+
+				<para>
+					Any output here should be defining appropriate rows and columns for the
+					surrounding &lt;table&gt; elements.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Project ID</para></listitem>
+					<listitem><para>&lt;Boolean&gt;: Advanced view (false for simple view)</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.action.reportbugformtop">
+			<title>EVENT_REPORT_BUG_FORM_TOP (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do processing or display form elements at
+					the top of the Report Issue page.  It is triggered before any of the
+					visible form elements have been created.
+				</para>
+
+				<para>
+					Any output here should be defining appropriate rows and columns for the
+					surrounding &lt;table&gt; elements.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Project ID</para></listitem>
+					<listitem><para>&lt;Boolean&gt;: Advanced view (false for simple view)</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.action.reportbugdata">
+			<title>EVENT_REPORT_BUG_DATA (Chain)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to perform pre-processing of the new bug data
+					structure after being reported from the user, but before the data is
+					saved to the database.  At this point, the issue ID is not yet known, as
+					the data has not yet been persisted.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Complex&gt;: Bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Complex&gt;: Bug data structure</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.action.reportbug">
+			<title>EVENT_REPORT_BUG (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to perform post-processing of the bug data
+					structure after being reported from the user and being saved to the
+					database.  At this point, the issue ID is actually known, and is passed
+					as a second parameter.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Complex&gt;: Bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+	</sect2>
+
 	<sect2 id="dev.eventref.bug.noteview">
 		<title>Bugnote View</title>
 
