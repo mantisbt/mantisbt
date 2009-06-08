@@ -143,7 +143,7 @@ function session_init( $p_session_id=null ) {
 			break;
 	}
 
-	if ( ON == config_get_global( 'session_validation' ) ) {
+	if ( ON == config_get_global( 'session_validation' ) && session_get( 'secure_session', false ) ) {
 		session_validate( $g_session );
 	}
 }
