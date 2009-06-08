@@ -201,6 +201,41 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.bug.action.bugaction">
+			<title>EVENT_BUG_ACTION (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to perform post-processing of group actions
+					performed from the View Issues page.  The event will get called for
+					each bug ID that was part of the group action event.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;String&gt;: Action title (see <filename>bug_actiongroup.php</filename>)</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.action.bugdelete">
+			<title>EVENT_BUG_DELETED (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to perform pre-processing of bug deletion
+					actions.  The actual deletion will occur after execution of the event,
+					for compatibility reasons.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 	</sect2>
 
 	<sect2 id="dev.eventref.bug.noteview">
