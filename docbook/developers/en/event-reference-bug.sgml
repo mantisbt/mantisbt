@@ -311,4 +311,103 @@
 
 	</sect2>
 
+	<sect2 id="dev.eventref.bug.noteaction">
+		<title>Bugnote Actions</title>
+
+		<blockquote id="dev.eventref.bug.noteaction.addform">
+			<title>EVENT_BUGNOTE_ADD_FORM (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do processing or display form elements in
+					the bugnote adding form.  It is triggered immediately after the bugnote
+					text field.
+				</para>
+
+				<para>
+					Any output here should be defining appropriate rows and columns for the
+					surrounding &lt;table&gt; elements.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.noteaction.add">
+			<title>EVENT_BUGNOTE_ADD (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do post-processing of bugnotes added to an
+					issue.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Bugnote ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.noteaction.editform">
+			<title>EVENT_BUGNOTE_EDIT_FORM (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do processing or display form elements in
+					the bugnote editing form.  It is triggered immediately after the bugnote
+					text field.
+				</para>
+
+				<para>
+					Any output here should be defining appropriate rows and columns for the
+					surrounding &lt;table&gt; elements.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Bugnote ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.noteaction.edit">
+			<title>EVENT_BUGNOTE_EDIT (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do post-processing of bugnote edits.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Bugnote ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.noteaction.deleted">
+			<title>EVENT_BUGNOTE_DELETED (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do post-processing of bugnote deletions.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Bugnote ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+	</sect2>
+
 </sect1>
