@@ -115,6 +115,7 @@
 
 	&eventref-output;
 	&eventref-bug;
+	&eventref-notify;
 	&eventref-account;
 	&eventref-manage;
 

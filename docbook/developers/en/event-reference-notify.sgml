@@ -1,0 +1,58 @@
+<sect1 id="dev.eventref.notify">
+	<title>Notification Events</title>
+
+	<sect2 id="dev.eventref.notify.user">
+		<title>Recipient Selection</title>
+
+		<blockquote id="dev.eventref.notify.user.include">
+			<title>EVENT_NOTIFY_USER_INCLUDE (Default)</title>
+
+			<blockquote>
+				<para>
+					This event allows a plugin to specify a set of users to be included as
+					recipients for a notification.  The set of users returned is added to the
+					list of recipients already generated from the existing notification flags
+					and selection process.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+					<listitem><para>&lt;String&gt;: Notification type</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Array&gt;: User IDs to include as recipients</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.notify.user.exclude">
+			<title>EVENT_NOTIFY_USER_EXCLUDE (Default)</title>
+
+			<blockquote>
+				<para>
+					This event allows a plugin to selectively exclude indivdual users from
+					the recipient list for a notification.  The event is signalled for every
+					user in the final reicipient list, including recipients added by the
+					event NOTIFY_USER_INCLUDE as described above.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+					<listitem><para>&lt;String&gt;: Notification type</para></listitem>
+					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Boolean&gt;: True to exclude the user, false otherwise</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+	</sect2>
+
+</sect1>
