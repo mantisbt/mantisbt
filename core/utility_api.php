@@ -52,12 +52,7 @@ function trans_bool( $p_num ) {
  * @access public
  */
 function terminate_directory_path( $p_path ) {
-	$str_len = strlen( $p_path );
-	if( $p_path && $p_path[$str_len - 1] != DIRECTORY_SEPARATOR ) {
-		$p_path = $p_path . DIRECTORY_SEPARATOR;
-	}
-
-	return $p_path;
+	return rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR;
 }
 
 /**
