@@ -252,7 +252,9 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 			$t_clean_pairs[] = rawurlencode( $t_key ) . '=' . rawurlencode( $t_value );
 		}
 
-		$t_query = '?' . join( '&amp;', $t_clean_pairs );
+		if ( !empty( $t_clean_pairs ) ) {
+			$t_query = '?' . join( '&amp;', $t_clean_pairs );
+		}
 	}
 
 	# encode link anchor
