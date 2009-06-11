@@ -24,6 +24,7 @@ define( 'AUTO', 3 );
 
 define( 'BAD', 0 );
 define( 'GOOD', 1 );
+define( 'WARN', 2 );
 
 # PHP-related constants
 define( 'PHP_CLI', 0 );

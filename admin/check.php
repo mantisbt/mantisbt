@@ -33,10 +33,6 @@ require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' 
 require_once( 'email_api.php' );
 require_once( 'database_api.php' );
 
-define( 'BAD', 0 );
-define( 'GOOD', 1 );
-define( 'WARN', 2 );
-
 $f_showall = gpc_get_int( 'showall', false );
 
 $g_failed_test = false;
