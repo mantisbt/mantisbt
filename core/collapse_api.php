@@ -242,5 +242,7 @@ function collapse_cache_token() {
 		} else {
 			token_touch( TOKEN_COLLAPSE );
 		}
+
+		gpc_clear_cookie( 'MANTIS_collapse_settings' );
 	}
 }
