@@ -74,6 +74,7 @@
 	// grab all status levels
 	$t_status_arr  = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	$t_status_labels  = MantisEnum::getAssocArrayIndexedByValues( lang_get( 'status_enum_string' ) );
+	$t_default_bug_status = config_get( 'bug_submit_status' );
 
     $t_bug = array();
     $t_view_status = array();
@@ -124,13 +125,13 @@
                     }
                     break;
     	        case 1: // new bug
-    	            if ( isset( $t_data[$t_ptr][NEW_] ) ) {
-    	                if ( $t_data[$t_ptr][NEW_] > 0 )
-                            $t_data[$t_ptr][NEW_] --;
+    	            if ( isset( $t_data[$t_ptr][$t_default_bug_status] ) ) {
+    	                if ( $t_data[$t_ptr][$t_default_bug_status] > 0 )
+                            $t_data[$t_ptr][$t_default_bug_status] --;
     	            } else {
-                        $t_data[$t_ptr][NEW_] = 0;
-                        $t_view_status[NEW_] =
-                            isset($t_status_arr[NEW_]) ? $t_status_arr[NEW_] : '@'.NEW_.'@';
+                        $t_data[$t_ptr][$t_default_bug_status] = 0;
+                        $t_view_status[$t_default_bug_status] =
+                            isset( $t_status_arr[$t_default_bug_status] ) ? $t_status_arr[$t_default_bug_status] : '@' . $t_default_bug_status . '@';
                     }
                     break;
             }

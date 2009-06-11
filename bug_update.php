@@ -97,7 +97,7 @@
 	$f_close_now					= gpc_get_string( 'close_now', false );
 
 	# Handle auto-assigning
-	if ( ( NEW_ == $t_bug_data->status )
+	if ( ( config_get( 'bug_submit_status' ) == $t_bug_data->status )
 	  && ( $t_bug_data->status == $t_old_bug_status )
 	  && ( 0 != $t_bug_data->handler_id )
 	  && ( ON == config_get( 'auto_set_status_to_assigned' ) ) ) {
