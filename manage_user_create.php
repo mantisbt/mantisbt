@@ -32,14 +32,14 @@
 	auth_reauthenticate();
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-	$f_username			= gpc_get_string( 'username' );
-	$f_realname			= gpc_get_string( 'realname' );
-	$f_password			= gpc_get_string( 'password', '' );
-	$f_password_verify	= gpc_get_string( 'password_verify', '' );
-	$f_email			= gpc_get_string( 'email' );
-	$f_access_level		= gpc_get_string( 'access_level' );
-	$f_protected		= gpc_get_bool( 'protected' );
-	$f_enabled			= gpc_get_bool( 'enabled' );
+	$f_username        = gpc_get_string( 'username' );
+	$f_realname        = gpc_get_string( 'realname' );
+	$f_password        = gpc_get_string( 'password', '' );
+	$f_password_verify = gpc_get_string( 'password_verify', '' );
+	$f_email           = gpc_get_string( 'email' );
+	$f_access_level    = gpc_get_string( 'access_level' );
+	$f_protected       = gpc_get_bool( 'protected' );
+	$f_enabled         = gpc_get_bool( 'enabled' );
 
 	# check for empty username
 	$f_username = trim( $f_username );
@@ -50,8 +50,8 @@
 	# Check the name for validity here so we do it before promting to use a
 	#  blank password (don't want to prompt the user if the process will fail
 	#  anyway)
-    # strip extra space from real name
-    $t_realname = string_normalize( $f_realname );
+	# strip extra space from real name
+	$t_realname = string_normalize( $f_realname );
 	user_ensure_name_valid( $f_username );
 	user_ensure_realname_valid( $t_realname );
 	user_ensure_realname_unique( $f_username, $f_realname );
@@ -77,7 +77,16 @@
 		}
 	}
 
+	# Need to send the user creation mail in the tracker language, not in the creating admin's language
+	# Park the current language name until the user has been created
+	$user_language = $t_lang;
+	lang_push( config_get( 'default_language' ) );
+
+	# create the user
 	$t_cookie = user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled, $t_realname );
+
+	# set language back to user language
+	lang_push( $user_language );
 
 	form_security_purge( 'manage_user_create' );
 
