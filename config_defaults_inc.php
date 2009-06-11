@@ -469,10 +469,10 @@
 	 * set to OFF to disable email check
 	 * @global int $g_validate_email
 	 */
-	$g_validate_email		= ( substr( php_uname(), 0, 7 ) == 'Windows' ) ? OFF : ON;
+	$g_validate_email		= ON;
+
 	/**
 	 * set to OFF to disable email check
-	 * Not supported under Windows.
 	 * @global int $g_check_mx_record
 	 */
 	$g_check_mx_record		= OFF;

@@ -279,7 +279,7 @@ class Graph {
 
 		# There are three different ways to generate the output depending
 		# on the operating system and PHP version.
-		if( 'WIN' == substr( PHP_OS, 0, 3 ) ) {
+		if( is_windows_server() ) {
 
 			# If we are under Windows, we use the COM interface provided
 			# by WinGraphviz. Thanks Paul!

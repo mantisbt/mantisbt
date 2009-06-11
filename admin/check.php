@@ -272,7 +272,7 @@ print_info_row( 'Database Server Description (version)', $t_serverinfo['version'
 print_test_row( 'Checking to see if your absolute_path config option has a trailing slash: "' . config_get_global( 'absolute_path' ) . '"', ( "\\" == substr( config_get_global( 'absolute_path' ), -1, 1 ) ) || ( "/" == substr( config_get_global( 'absolute_path' ), -1, 1 ) ) );
 
 // Windows-only checks
-if( substr( php_uname(), 0, 7 ) == 'Windows' ) {
+if( is_windows_server() ) {
 	print_test_row( 'validate_email (if ON) requires php 5.3 on windows...',
 		OFF == config_get_global( 'validate_email' ) || ON == config_get_global( 'validate_email' ) && version_compare( phpversion(), '5.3.0', '>=' ) );
 	print_test_row( 'check_mx_record (if ON) requires php 5.3 on windows...',
