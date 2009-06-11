@@ -57,7 +57,7 @@
 	# get new issue handler if set, otherwise default to original handler
 	$f_handler_id = gpc_get_int( 'handler_id', bug_get_field( $f_bug_id, 'handler_id' ) );
 
-	if ( ASSIGNED == $f_new_status ) {
+	if ( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 		$t_bug_sponsored = sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
 		if ( $t_bug_sponsored ) {
 			if ( !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
