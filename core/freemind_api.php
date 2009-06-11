@@ -100,7 +100,7 @@ function freemind_export_bug( $p_bug, &$p_bug_list ) {
 			string_get_bug_view_url_with_fqdn( $t_id ), "\" ",
 			">$t_nl";
 
-	if( $p_bug->status >= CLOSED ) {
+	if( $p_bug->status >= config_get( 'bug_closed_status_threshold' ) ) {
 		echo '<icon BUILTIN="button_ok"/>', $t_nl;
 	} else if( bug_is_resolved( $t_id ) ) {
 		echo '<icon BUILTIN="button_ok"/>', $t_nl;

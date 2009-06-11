@@ -175,7 +175,7 @@
     }
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
-	$t_closed = CLOSED;
+	$t_closed = config_get( 'bug_closed_status_threshold' );
 	$t_bin_count = $t_ptr;
 	$t_labels = array();
 	$i = 0;

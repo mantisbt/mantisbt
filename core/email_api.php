@@ -255,7 +255,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	unset( $t_status_change[NEW_] );
 	unset( $t_status_change[FEEDBACK] );
 	unset( $t_status_change[RESOLVED] );
-	unset( $t_status_change[CLOSED] );
+	unset( $t_status_change[config_get( 'bug_closed_status_threshold' )] );
 
 	if( 'owner' == $p_notify_type ) {
 		$t_pref_field = 'email_on_assigned';

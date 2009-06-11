@@ -107,12 +107,13 @@
 	helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_bug_data, $f_bugnote_text ) );
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
+	$t_closed = config_get( 'bug_closed_status_threshold' );
 
 	$t_custom_status_label = "update"; # default info to check
 	if ( $t_bug_data->status == $t_resolved ) {
 		$t_custom_status_label = "resolved";
 	}
-	if ( $t_bug_data->status == CLOSED ) {
+	if ( $t_bug_data->status == $t_closed ) {
 		$t_custom_status_label = "closed";
 	}
 
@@ -166,7 +167,7 @@
 				$t_bug_note_set = true;
 
 				if ( $f_close_now ) {
-					bug_set_field( $f_bug_id, 'status', CLOSED );
+					bug_set_field( $f_bug_id, 'status', $t_closed );
 				}
 
 				// update bug data with fields that may be updated inside bug_resolve(), otherwise changes will be overwritten
@@ -175,7 +176,7 @@
 				$t_bug_data->status = bug_get_field( $f_bug_id, 'status' );
 				break;
 
-			case CLOSED:
+			case $t_closed:
 				# bug_close updates the status and bugnote and sends message
 				bug_close( $f_bug_id, $f_bugnote_text, $f_private, $f_time_tracking );
 				$t_notify = false;

@@ -885,7 +885,8 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 	}
 
 	if ( $p_add_close && access_compare_level( $p_current_value, config_get( 'bug_resolved_status_threshold' ) ) ) {
-		$t_enum_list[CLOSED] = get_enum_element( 'status', CLOSED );
+		$t_closed = config_get( 'bug_closed_status_threshold' );
+		$t_enum_list[$t_closed] = get_enum_element( 'status', $t_closed );
 	}
 
 	return $t_enum_list;
@@ -1214,7 +1215,7 @@ function print_bug_link( $p_bug_id, $p_detail_info = true ) {
 function print_formatted_priority_string( $p_status, $p_priority ) {
 	$t_pri_str = get_enum_element( 'priority', $p_priority );
 
-	if(( HIGH <= $p_priority ) && ( CLOSED != $p_status ) ) {
+	if(( HIGH <= $p_priority ) && ( config_get( 'bug_closed_status_threshold' ) != $p_status ) ) {
 		echo "<span class=\"bold\">$t_pri_str</span>";
 	} else {
 		echo $t_pri_str;
@@ -1226,7 +1227,7 @@ function print_formatted_priority_string( $p_status, $p_priority ) {
 function print_formatted_severity_string( $p_status, $p_severity ) {
 	$t_sev_str = get_enum_element( 'severity', $p_severity );
 
-	if(( MAJOR <= $p_severity ) && ( CLOSED != $p_status ) ) {
+	if(( MAJOR <= $p_severity ) && ( config_get( 'bug_closed_status_threshold' ) != $p_status ) ) {
 		echo "<span class=\"bold\">$t_sev_str</span>";
 	} else {
 		echo $t_sev_str;

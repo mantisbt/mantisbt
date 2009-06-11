@@ -1586,7 +1586,7 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
 	# Error condition stopped execution but status had already been changed
 	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
 
-	bug_set_field( $p_bug_id, 'status', CLOSED );
+	bug_set_field( $p_bug_id, 'status', config_get( 'bug_closed_status_threshold' ) );
 
 	email_close( $p_bug_id );
 	email_relationship_child_closed( $p_bug_id );

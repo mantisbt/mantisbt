@@ -72,7 +72,7 @@
 	$t_start = $t_interval->get_start_timestamp();
 
     $t_resolved = config_get( 'bug_resolved_status_threshold' );
-    $t_closed = CLOSED;
+    $t_closed = config_get( 'bug_closed_status_threshold' );
 
     $t_bug = array();
     $t_bug_cat = array(); // save categoties or bugs to look up resolved ones.
