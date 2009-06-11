@@ -1,0 +1,41 @@
+<?php
+# MantisBT - a php based bugtracking system
+
+# Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT. If not, see <http://www.gnu.org/licenses/>.
+
+$s_plugin_XmlImportExport_title = 'Import/Export задач';
+$s_plugin_XmlImportExport_description = 'Добавляет в MantisBT возможность импорта экспорта задач с использованием XML.';
+
+$s_plugin_XmlImportExport_import = 'Импорт задач';
+$s_plugin_XmlImportExport_export = 'экспорт в XML';
+
+$s_plugin_XmlImportExport_importing_in_project = 'импортировать задачи в проект:';
+$s_plugin_XmlImportExport_import_options = 'настройки импорта';
+
+$s_plugin_XmlImportExport_cross_references = 'Кросс-зависимость';
+$s_plugin_XmlImportExport_default_strategy = 'Стратегия по-умолчанию для конвертации:';
+$s_plugin_XmlImportExport_renumber = 'перенумеровать';
+$s_plugin_XmlImportExport_renumber_desc = 'попытаться конвертировать данные с новыми номерами';
+$s_plugin_XmlImportExport_link = 'ссылка';
+$s_plugin_XmlImportExport_link_desc = 'сопоставлять ссылку на оригинальную запись';
+$s_plugin_XmlImportExport_disable = 'отключено';
+$s_plugin_XmlImportExport_disable_desc = 'отключить связь';
+$s_plugin_XmlImportExport_manage_import_issues_link = 'управлять ссылками на импортированные задачи';
+
+$s_plugin_XmlImportExport_fallback = 'Запасная стратегия (когда "перенумерация" не сработала):';
+
+$s_plugin_XmlImportExport_fallback_category = 'Запасная категория:';
+$s_plugin_XmlImportExport_keep_same_category = 'Пытаться сохранить такую же категорию';
