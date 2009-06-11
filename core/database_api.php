@@ -300,7 +300,7 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
  */
 function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset = -1 ) {
 	global $g_queries_array, $g_db, $g_db_log_queries, $g_db_param_count;
-	
+
 	static $s_check_params;
 	if( $s_check_params === null ) {
 		$s_check_params = ( db_is_pgsql() || config_get_global( 'db_type' ) == 'odbc_mssql' );

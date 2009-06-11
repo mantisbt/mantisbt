@@ -421,10 +421,10 @@ function string_insert_hrefs( $p_string ) {
 	if ( is_null( $s_url_regex ) ) {
 		# %2A notation in url's
 		$t_url_hex = '%[[:digit:]A-Fa-f]{2}';
-	
+
 		# valid set of characters that may occur in url scheme. Note: - should be first (A-F != -AF).
 		$t_url_valid_chars = '-_.,!~*\';\/?%^\\\\:@&={\|}+$#[:alnum:]\pL';
-	
+
 		$t_url_chars = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)\[\]])";
 		$t_url_chars2 = "(?:${t_url_hex}|[${t_url_valid_chars}])";
 		$t_url_chars_in_brackets = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)])";
@@ -695,7 +695,7 @@ function string_format_complete_date( $p_date ) {
 
 function string_shorten( $p_string, $p_max = null ) {
 	if( $p_max === null ) {
-		$t_max = config_get( 'max_dropdown_length' );	
+		$t_max = config_get( 'max_dropdown_length' );
 	} else {
 		$t_max = (int) $p_max;
 	}

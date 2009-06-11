@@ -94,11 +94,11 @@ class UserPreferences {
 
 	private $pref_user_id;
 	private $pref_project_id;
-	
+
 	function UserPreferences( $p_user_id, $p_project_id ) {
 		$this->default_profile = 0;
 		$this->default_project = ALL_PROJECTS;
-		
+
 		$this->pref_user_id = (int)$p_user_id;
 		$this->pref_project_id = (int)$p_project_id;
 	}
@@ -417,7 +417,7 @@ function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJE
 	if ($t_vars == null ) {
 		$t_reflection = new ReflectionClass('UserPreferences');
 		$t_vars = $t_reflection->getDefaultProperties();
-	}	
+	}
 
 	if( in_array( $p_pref_name, array_keys( $t_vars ), true ) ) {
 		return $t_prefs->Get( $p_pref_name );

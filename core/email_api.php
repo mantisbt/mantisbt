@@ -477,9 +477,9 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_head
 		$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-		
+
 		bugnote_get_all_bugnotes( $p_bug_id );
-		
+
 		if( is_array( $t_recipients ) ) {
 			# send email to every recipient
 			foreach( $t_recipients as $t_user_id => $t_user_email ) {
@@ -820,7 +820,7 @@ function email_send( $p_email_data ) {
 			$t_success = false;
 		} else {
 			$t_success = true;
-	
+
 			if ( $t_email_data->email_id > 0 ) {
 				email_queue_delete( $t_email_data->email_id );
 			}

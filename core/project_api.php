@@ -68,7 +68,7 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 	if( $p_project_id == ALL_PROJECTS ) {
 		return false;
 	}
-	
+
 	if( isset( $g_cache_project[(int) $p_project_id] ) ) {
 		return $g_cache_project[(int) $p_project_id];
 	}
@@ -128,7 +128,7 @@ function project_cache_array_rows( $p_project_id_array ) {
 		$g_cache_project[(int) $row['id']] = $row;
 		$t_projects_found[(int) $row['id']] = true;
 	}
-	
+
 	foreach ( $c_project_id_array as $c_project_id ) {
 		if ( !isset( $t_projects_found[$c_project_id] ) ) { 
 			$g_cache_project_missing[(int) $c_project_id] = true;

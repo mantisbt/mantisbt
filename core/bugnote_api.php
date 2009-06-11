@@ -289,7 +289,7 @@ function bugnote_get_text( $p_bugnote_id ) {
  */
 function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
 	global $g_cache_bugnote;
-	
+
 	if( isset( $g_cache_bugnote[(int)$p_bugnote_id] ) ) {
 		return $g_cache_bugnote[(int)$p_bugnote_id]->$p_field_name;
 	}
@@ -396,7 +396,7 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 	if( !isset( $g_cache_bugnotes ) ) {
 		$g_cache_bugnotes = array();
 	}
-	
+
 	if( !isset( $g_cache_bugnote ) ) {
 		$g_cache_bugnote = array();
 	}
@@ -630,7 +630,7 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 		error_parameters( array( $p_form, $p_to ) );
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
-	
+
 	$c_cost = db_prepare_double( $p_cost );
 
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
@@ -692,6 +692,6 @@ function bugnote_clear_cache( $p_bugnote_id = null ) {
 		unset( $g_cache_bugnote[(int) $p_bugnote_id] );
 	}
 	$g_cache_bugnotes = array();
-	
+
 	return true;
 }

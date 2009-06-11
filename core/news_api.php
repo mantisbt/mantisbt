@@ -314,7 +314,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 # Checks if the news feature is enabled or not.
 # true: enabled, otherwise false.
 function news_is_enabled() {
-	return config_get( 'news_enabled' ) == ON;	
+	return config_get( 'news_enabled' ) == ON;
 }
 
 # --------------------

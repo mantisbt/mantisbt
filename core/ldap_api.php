@@ -76,14 +76,14 @@ $g_cache_ldap_email = array();
 # Return an email address from LDAP, given a userid
 function ldap_email( $p_user_id ) {
 	global $g_cache_ldap_email;
-	
+
 	if( isset( $g_cache_ldap_email[ (int)$p_user_id ] ) ) {
 		return $g_cache_ldap_email[ (int)$p_user_id ];
 	}
-	
+
 	$t_username = user_get_field( $p_user_id, 'username' );
 	$t_email = ldap_email_from_username( $t_username );
-	
+
 	$g_cache_ldap_email[ (int)$p_user_id ] = $t_email;
 	return $t_email;
 }

@@ -38,7 +38,7 @@ function columns_get_standard() {
 		unset( $t_columns['platform'] );
 	}
 
-	return array_keys($t_columns);	
+	return array_keys($t_columns);
 }
 
 /**

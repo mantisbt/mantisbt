@@ -470,13 +470,13 @@ function version_get_field( $p_version_id, $p_field_name ) {
 # get information about a version given its id
 function version_get( $p_version_id ) {
 	static $t_vars;
-	
+
 	$row = version_cache_row( $p_version_id );
 
 	if ($t_vars == null ) {
 		$t_reflection = new ReflectionClass('VersionData');
 		$t_vars = $t_reflection->getDefaultProperties();
-	}	
+	}
 
 	$t_version_data = new VersionData;
 	$t_row_keys = array_keys( $row );

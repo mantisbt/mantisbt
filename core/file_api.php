@@ -643,7 +643,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 		$t_project_id = helper_get_current_project();
 		$t_bug_id = 0;
 	}
-	
+
 	if( $p_user_id === null ) {
 		$c_user_id = auth_get_current_user_id();
 	} else {

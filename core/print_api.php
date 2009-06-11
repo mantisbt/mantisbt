@@ -395,7 +395,7 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 	if( 1 == $p_announcement ) {
 		$output .= ' <span class="small">';
 		$output .= '[' . lang_get( 'announcement' ) . ']';
-		$output .= '</span>';		
+		$output .= '</span>';
 	}
 	if( VS_PRIVATE == $p_view_state ) {
 		$output .= ' <span class="small">';
@@ -780,7 +780,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 
 	$t_listed = array();
 	$t_max_length = config_get( 'max_dropdown_length' );
-	
+
 	foreach( $versions as $version ) {
 
 		# If the current version is obsolete, and current version not equal to $p_version,

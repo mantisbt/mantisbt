@@ -94,7 +94,7 @@ class BugData {
 	protected $view_state = VS_PUBLIC;
 	protected $summary = '';
 	protected $sponsorship_total = 0;
-	protected $sticky = 0;	
+	protected $sticky = 0;
 
 	# omitted:
 	# var $bug_text_id
@@ -110,13 +110,13 @@ class BugData {
 
 	# due date
 	protected $due_date = '';
-	
+
 	public $attachment_count = null;
 	public $bugnotes_count = null;
-	
+
 	static $t_vars;
 	private $loading = false;
-	
+
 	public function get_attachment_count() {
 		if ( $this->attachment_count === null ) {
 			$this->attachment_count = file_bug_attachment_count( $this->id );
@@ -134,7 +134,7 @@ class BugData {
 			return $this->bugnotes_count;
 		}
 	}
-	
+
 	public function __set($name, $value) {
 		switch ($name) {
 			// integer types
@@ -150,7 +150,7 @@ class BugData {
 			case 'resolution':
 			case 'projection':
 			case 'category_id':
-				$value = (int)$value;			
+				$value = (int)$value;
 				break;
 
 			case 'fixed_in_version':
@@ -169,7 +169,7 @@ class BugData {
 		}
 		$this->$name = $value;
 	}
-	
+
 	public function __get($name) {
 		return $this->{$name};
 	}
@@ -182,7 +182,7 @@ class BugData {
 		}
 		$this->loading = false;
 	}
-	
+
 	/**
 	 * Returns the number of bugnotes for the given bug_id
 	 * @return int number of bugnotes
@@ -195,13 +195,13 @@ class BugData {
 		} else {
 			$t_restriction = '';
 		}
-	
+
 		$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 		$query = "SELECT COUNT(*)
 					  FROM $t_bugnote_table
 					  WHERE bug_id =" . db_param() . " $t_restriction";
 		$result = db_query_bound( $query, Array( $this->bug_id ) );
-	
+
 		return db_result( $result );
 	}
 
@@ -219,7 +219,7 @@ class BugData {
 				trigger_error( ERROR_EMPTY_FIELD, ERROR );
 			}
 		}
-		
+
 		# Make sure a category is set
 		if( 0 == $this->category_id && !config_get( 'allow_no_category' ) ) {
 			error_parameters( lang_get( 'category' ) );
@@ -231,7 +231,7 @@ class BugData {
 			# never returns
 		}
 	}
-	
+
 	/**
 	 * Insert a new bug into the database
 	 * @return int integer representing the bug id that was created
@@ -241,7 +241,7 @@ class BugData {
 	 */
 	function create() {
 		self::validate( true );
-		
+
 		# check due_date format
 		if( !is_blank( $this->due_date ) ) {
 			$c_due_date = $p_bug_data->due_date;
@@ -322,7 +322,7 @@ class BugData {
 		history_log_event_direct( $t_bug_id, 'handler_id', 0, $c_handler_id );
 
 		return $this->id;
-	}	
+	}
 
 	/**
 	 * Update a bug from the given data structure
@@ -496,7 +496,7 @@ class BugData {
 		}
 
 		return true;
-	}	
+	}
 }
 
 $g_cache_bug = array();
@@ -1186,13 +1186,13 @@ function bug_get( $p_bug_id, $p_get_extended = false ) {
 	}
 
 	$t_bug_data = new BugData;
-	$t_bug_data->loadrow( $row );	
+	$t_bug_data->loadrow( $row );
 	return $t_bug_data;
 }
 
 function bug_row_to_object( $p_row ) {
 	$t_bug_data = new BugData;
-	$t_bug_data->loadrow( $p_row );	
+	$t_bug_data->loadrow( $p_row );
 	return $t_bug_data;
 }
 
@@ -1409,7 +1409,7 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		# dates
 		case 'last_updated':
 		case 'date_submitted':
-		case 'due_date':			
+		case 'due_date':
 			if ( !is_numeric( $p_value ) ) {
 				trigger_error( ERROR_GENERIC, ERROR );
 			}

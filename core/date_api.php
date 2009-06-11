@@ -50,9 +50,9 @@ $g_cache_timezone = array();
  */
 function date_set_timezone( $p_timezone ) {
 	global $g_cache_timezone;
-	
+
 	array_push( $g_cache_timezone, date_default_timezone_get() );
-	
+
 	if( !date_default_timezone_set( $p_timezone ) ) {
 		// unable to set timezone
 	}
@@ -65,9 +65,9 @@ function date_set_timezone( $p_timezone ) {
  */
 function date_restore_timezone( ) {
 	global $g_cache_timezone;
-	
+
 	$t_timezone = array_pop( $g_cache_timezone );
-	
+
 	if( $t_timezone === null ) {
 		return;
 	}
