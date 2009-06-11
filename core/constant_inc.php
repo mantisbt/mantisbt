@@ -98,6 +98,21 @@ define( 'REPRODUCIBILITY_HAVENOTTRIED', 70 );
 define( 'REPRODUCIBILITY_UNABLETODUPLICATE', 90 );
 define( 'REPRODUCIBILITY_NOTAPPLICABLE', 100 );
 
+# projection
+define( 'PROJECTION_NONE', 10 );
+define( 'PROJECTION_TWEAK', 30 );
+define( 'PROJECTION_MINOR_FIX', 50 );
+define( 'PROJECTION_MAJOR_REWORK', 70 );
+define( 'PROJECTION_REDESIGN', 90 );
+
+# ETA
+define( 'ETA_NONE', 10 );
+define( 'ETA_UNDER_ONE_DAY', 20 );
+define( 'ETA_TWO_TO_THREE_DAYS', 30 );
+define( 'ETA_UNDER_ONE_WEEK', 40 );
+define( 'ETA_UNDER_ONE_MONTH', 50 );
+define( 'ETA_OVER_ONE_MONTH', 60 );
+
 # project view_state
 define( 'VS_PUBLIC', 10 );
 define( 'VS_PRIVATE', 50 );
