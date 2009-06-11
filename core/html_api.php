@@ -273,7 +273,7 @@ function html_head_begin() {
  * @return null
  */
 function html_content_type() {
-	echo "\t", '<meta http-equiv="Content-type" content="text/html;charset=utf-8" />', "\n";
+	echo "\t", '<meta http-equiv="Content-type" content="text/html; charset=utf-8" />', "\n";
 }
 
 /**
