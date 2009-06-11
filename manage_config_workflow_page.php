@@ -82,7 +82,7 @@
 
         # add user defined arcs and implicit reopen arcs
     	$t_reopen = config_get( 'bug_reopen_status' );
-    	$t_reopen_label = MantisEnum::getLabel( lang_get( 'resolution_enum_string' ), REOPENED );
+    	$t_reopen_label = MantisEnum::getLabel( lang_get( 'resolution_enum_string' ), config_get( 'bug_reopen_resolution' ) );
     	$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
     	$t_default = array();
     	foreach ( $t_status_arr as $t_status => $t_status_label ) {
