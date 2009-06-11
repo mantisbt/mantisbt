@@ -254,7 +254,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	$t_status_change = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	unset( $t_status_change[NEW_] );
 	unset( $t_status_change[FEEDBACK] );
-	unset( $t_status_change[RESOLVED] );
+	unset( $t_status_change[config_get( 'bug_resolved_status_threshold' )] );
 	unset( $t_status_change[config_get( 'bug_closed_status_threshold' )] );
 
 	if( 'owner' == $p_notify_type ) {
