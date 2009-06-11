@@ -55,7 +55,7 @@
 			trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 		}
 
-		$t_bug = bug_prepare_edit( bug_get( $f_master_bug_id, true ) );
+		$t_bug = bug_get( $f_master_bug_id, true );
 
 		# the user can at least update the master bug (needed to add the relationship)...
 		access_ensure_bug_level( config_get( 'update_bug_threshold', null, $t_bug->project_id ), $f_master_bug_id );
@@ -216,7 +216,7 @@
 			<span class="required">*</span><?php print_documentation_link( 'summary' ) ?>
 		</td>
 		<td>
-			<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo $f_summary ?>" />
+			<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo string_attribute( $f_summary ) ?>" />
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -224,7 +224,7 @@
 			<span class="required">*</span><?php print_documentation_link( 'description' ) ?>
 		</td>
 		<td>
-			<textarea <?php echo helper_get_tab_index() ?> name="description" cols="80" rows="10"><?php echo $f_description ?></textarea>
+			<textarea <?php echo helper_get_tab_index() ?> name="description" cols="80" rows="10"><?php echo string_textarea( $f_description ) ?></textarea>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -232,7 +232,7 @@
 			<?php print_documentation_link( 'additional_information' ) ?>
 		</td>
 		<td>
-			<textarea <?php echo helper_get_tab_index() ?> name="additional_info" cols="80" rows="10"><?php echo $f_additional_info ?></textarea>
+			<textarea <?php echo helper_get_tab_index() ?> name="additional_info" cols="80" rows="10"><?php echo string_textarea( $f_additional_info ) ?></textarea>
 		</td>
 	</tr>
 	<tr class="spacer">

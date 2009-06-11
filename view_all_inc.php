@@ -64,7 +64,7 @@
 	} else {
 		$t_categories = array();
 		foreach ($rows as $t_row) {
-			$t_categories[] = $t_row['category_id'];
+			$t_categories[] = $t_row->category_id;
 		}
 		category_cache_array_rows( array_unique( $t_categories ) );
 	}
@@ -191,10 +191,10 @@
 		for( $i=0; $i < $t_rows; $i++ ) {
 			$t_row = $p_rows[$i];
 
-			if ( ( 0 == $t_row['sticky'] ) && ( 0 == $i ) ) {
+			if ( ( 0 == $t_row->sticky ) && ( 0 == $i ) ) {
 				$t_in_stickies = false;
 			}
-			if ( ( 0 == $t_row['sticky'] ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
+			if ( ( 0 == $t_row->sticky ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
 ?>
                <tr>
                        <td class="left" colspan="<?php echo count( $t_columns ); ?>" bgcolor="#999999">&nbsp;</td>
@@ -204,7 +204,7 @@
 			}
 
 			# choose color based on status
-			$status_color = get_status_color( $t_row['status'] );
+			$status_color = get_status_color( $t_row->status );
 
 			echo '<tr bgcolor="', $status_color, '" border="1" valign="top">';
 

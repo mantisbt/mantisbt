@@ -114,7 +114,7 @@
 	$t_bug_data = event_signal( 'EVENT_REPORT_BUG_DATA', $t_bug_data );
 
 	# Create the bug
-	$t_bug_id = bug_create( $t_bug_data );
+	$t_bug_id = $t_bug_data->create();
 
 	# Mark the added issue as visited so that it appears on the last visited list.
 	last_visited_issue( $t_bug_id );

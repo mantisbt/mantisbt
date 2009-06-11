@@ -27,7 +27,7 @@
 	require_once( 'bug_api.php' );
 	require_once( 'date_api.php' );
 
-	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
+	$t_bug = bug_get( $f_bug_id, true );
 ?>
 
 <table class="width100" cellspacing="1">
@@ -203,7 +203,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $t_bug->description ?>
+		<?php echo string_display_links( $t_bug->description ) ?>
 	</td>
 </tr>
 
@@ -214,7 +214,7 @@
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $t_bug->additional_information ?>
+		<?php echo string_display_links( $t_bug->additional_information ) ?>
 	</td>
 </tr>
 

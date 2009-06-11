@@ -206,7 +206,7 @@
 
 		# alternate row colors
 		$status_color = helper_alternate_colors( $i, '#ffffff', '#dddddd' );
-		if ( isset( $t_bug_arr_sort[ $t_row['id'] ] ) || ( $t_show_flag==0 ) ) {
+		if ( isset( $t_bug_arr_sort[ $t_row->id ] ) || ( $t_show_flag==0 ) ) {
 ?>
 <tr bgcolor="<?php echo $status_color ?>" border="1" valign="top">
 <?php

@@ -531,7 +531,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_bug_data->additional_information = isset( $p_issue['additional_information'] ) ? $p_issue['additional_information'] : '';
 
 	# submit the issue
-	$t_issue_id = bug_create( $t_bug_data );
+	$t_issue_id = $t_bug_data->create();
 
 	mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'] );
 

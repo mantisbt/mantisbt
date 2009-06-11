@@ -44,7 +44,7 @@
 
 	access_ensure_bug_level( VIEWER, $f_bug_id );
 
-	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
+	$t_bug = bug_get( $f_bug_id, true );
 
 	compress_enable();
 

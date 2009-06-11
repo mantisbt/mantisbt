@@ -1898,9 +1898,9 @@ function filter_cache_result( $p_rows, $p_id_array_lastmod ) {
 	$t_rows = array();
 	foreach( $p_rows as $t_row ) {
 		if( !isset( $t_stats[$t_row['id']] ) ) {
-			$t_rows[] = bug_cache_database_result( $t_row, false );
+			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row, false ) );
 		} else {
-			$t_rows[] = bug_cache_database_result( $t_row, $t_stats[$t_row['id']] );
+			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row, $t_stats[ $t_row['id'] ] ) );
 		}
 	}
 	return $t_rows;

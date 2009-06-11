@@ -388,7 +388,7 @@ $rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_
 if( helper_get_current_project() == 0 ) {
 	$t_categories = array();
 	foreach( $rows as $t_row ) {
-		$t_categories[] = $t_row['category_id'];
+		$t_categories[] = $t_row->category_id;
 	}
 
 	category_cache_array_rows( array_unique( $t_categories ) );
@@ -437,25 +437,22 @@ echo "($v_start - $v_end / $t_bug_count)";
 # -- Loop over bug rows and create $v_* variables --?>
 <?php
 	for( $i = 0;$i < count( $rows );$i++ ) {
+		$t_bug = $rows[$i];
 
-	# prefix bug data with v_
-
-	extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
-
-	$t_summary = string_display_line_links( $v_summary );
-	$t_last_updated = date( config_get( 'normal_date_format' ), $v_last_updated );
+	$t_summary = string_display_line_links( $t_bug->summary );
+	$t_last_updated = date( config_get( 'normal_date_format' ), $t_bug->last_updated );
 
 	# choose color based on status
-	$status_color = get_status_color( $v_status );
+	$status_color = get_status_color( $t_bug->status );
 
 	# Check for attachments
 	$t_attachment_count = 0;
-	if(( file_can_view_bug_attachments( $v_id ) ) ) {
-		$t_attachment_count = file_bug_attachment_count( $v_id );
+	if(( file_can_view_bug_attachments( $t_bug->id ) ) ) {
+		$t_attachment_count = file_bug_attachment_count( $t_bug->id );
 	}
 
 	# grab the project name
-	$project_name = project_get_field( $v_project_id, 'name' );
+	$project_name = project_get_field( $t_bug->project_id, 'name' );
 	?>
 
 <tr bgcolor="<?php echo $status_color?>">
@@ -464,29 +461,29 @@ echo "($v_start - $v_end / $t_bug_count)";
 	<td class="center" valign="top" width ="0" nowrap="nowrap">
 		<span class="small">
 		<?php
-			print_bug_link( $v_id );
+			print_bug_link( $t_bug->id );
 
 	echo '<br />';
 
-	if( !bug_is_readonly( $v_id ) && access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
-		echo '<a href="' . string_get_bug_update_url( $v_id ) . '"><img border="0" src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
+	if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
+		echo '<a href="' . string_get_bug_update_url( $t_bug->id ) . '"><img border="0" src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
 	}
 
 	if( ON == config_get( 'show_priority_text' ) ) {
-		print_formatted_priority_string( $v_status, $v_priority );
+		print_formatted_priority_string( $t_bug->status, $t_bug->priority );
 	} else {
-		print_status_icon( $v_priority );
+		print_status_icon( $t_bug->priority );
 	}
 
 	if( 0 < $t_attachment_count ) {
-		echo '<a href="' . string_get_bug_view_url( $v_id ) . '#attachments">';
+		echo '<a href="' . string_get_bug_view_url( $t_bug->id ) . '#attachments">';
 		echo '<img border="0" src="' . $t_icon_path . 'attachment.png' . '"';
 		echo ' alt="' . lang_get( 'attachment_alt' ) . '"';
 		echo ' title="' . $t_attachment_count . ' ' . lang_get( 'attachments' ) . '"';
 		echo ' />';
 		echo '</a>';
 	}
-	if( VS_PRIVATE == $v_view_state ) {
+	if( VS_PRIVATE == $t_bug->view_state ) {
 		echo '<img src="' . $t_icon_path . 'protected.gif" width="8" height="15" alt="' . lang_get( 'private' ) . '" />';
 	}
 	?>
@@ -498,17 +495,17 @@ echo "($v_start - $v_end / $t_bug_count)";
 	<td class="left" valign="top" width="100%">
 		<span class="small">
 		<?php
-			if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $v_project_id ) {
-				echo '[', string_display_line( project_get_name( $v_project_id ) ), '] ';
+		 	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $t_bug->project_id ) {
+				echo '[', string_display_line( project_get_name( $t_bug->project_id ) ), '] ';
 			}
 			echo $t_summary;
 	?>
 		<br />
 		<?php
 	# type project name if viewing 'all projects' or bug is in subproject
-	echo string_display_line( category_full_name( $v_category_id, true, $v_project_id ) );
+	echo string_display_line( category_full_name( $t_bug->category_id, true, $t_bug->project_id ) );
 
-	if( $v_last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
+	if( $t_bug->last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
 		echo ' - <b>' . $t_last_updated . '</b>';
 	} else {
 		echo ' - ' . $t_last_updated;

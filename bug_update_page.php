@@ -35,7 +35,7 @@
 
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
-	$t_bug = bug_prepare_edit( bug_get( $f_bug_id, true ) );
+	$t_bug = bug_get( $f_bug_id, true );
 
 	if( $t_bug->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...
@@ -321,7 +321,7 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, false ) );
 		<?php echo lang_get( 'summary' ) ?>
 	</td>
 	<td colspan="5">
-		<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo $t_bug->summary ?>" />
+		<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo string_attribute( $t_bug->summary ) ?>" />
 	</td>
 </tr>
 
@@ -332,7 +332,7 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, false ) );
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="description"><?php echo $t_bug->description ?></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="description"><?php echo string_textarea( $t_bug->description ) ?></textarea>
 	</td>
 </tr>
 
@@ -343,7 +343,7 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, false ) );
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="additional_information"><?php echo $t_bug->additional_information ?></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="additional_information"><?php echo string_textarea( $t_bug->additional_information ) ?></textarea>
 	</td>
 </tr>
 
