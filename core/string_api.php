@@ -670,7 +670,7 @@ function string_get_bug_report_page( $p_user_id = null ) {
 # return the complete url link to checkin using the confirm_hash
 function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	$t_path = config_get( 'path' );
-	return $t_path . "verify.php?id=" . string_url( $p_user_id ) . "&amp;confirm_hash=" . string_url( $p_confirm_hash );
+	return $t_path . "verify.php?id=" . string_url( $p_user_id ) . "&confirm_hash=" . string_url( $p_confirm_hash );
 }
 
 # --------------------
