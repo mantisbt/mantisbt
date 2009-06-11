@@ -495,8 +495,7 @@ function auth_clear_cookies() {
 function auth_generate_cookie_string() {
 	$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
 	$t_val = md5( $t_val ) . md5( time() );
-
-	return substr( $t_val, 0, 64 );
+	return $t_val;
 }
 
 /**

@@ -564,9 +564,7 @@ function file_clean_name( $p_filename ) {
 # It is not guaranteed to be unique and should be checked
 # The string returned should be 32 characters in length
 function file_generate_name( $p_seed ) {
-	$t_val = md5( $p_seed . time() );
-
-	return substr( $t_val, 0, 32 );
+	return md5( $p_seed . time() );
 }
 
 # Generate a UNIQUE string to use as the identifier for the file
