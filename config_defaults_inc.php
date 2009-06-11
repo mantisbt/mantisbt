@@ -1245,6 +1245,18 @@
 	$g_default_bug_reproducibility = REPRODUCIBILITY_HAVENOTTRIED;
 
 	/**
+	 * Default bug projection when reporting a new bug
+	 * @global int $g_default_bug_projection
+	 */
+	$g_default_bug_projection = PROJECTION_NONE;
+
+	/**
+	 * Default bug ETA when reporting a new bug
+	 * @global int $g_default_bug_eta
+	 */
+	$g_default_bug_eta = ETA_NONE;
+
+	/**
 	 *
 	 * @global int $g_default_limit_view
 	 */

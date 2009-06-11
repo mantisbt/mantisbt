@@ -1126,6 +1126,32 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_default_bug_reproducibility</term>
+                <listitem>
+                    <para>The reproducibility for a newly created issue. The
+                        default is REPRODUCIBILITY_HAVENOTTRIED. Look in
+                        constant_inc.php for other values.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_bug_projection</term>
+                <listitem>
+                    <para>The projection for a newly created issue. The default
+                        is PROJECTION_NONE. Look in constant_inc.php for other
+                        values.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_bug_eta</term>
+                <listitem>
+                    <para>The ETA for a newly created issue. The default is
+                        ETA_NONE. Look in constant_inc.php for other values.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_default_limit_view</term>
                 <listitem>
                     <para>Number of bugs to show in the View Bugs page. The default
