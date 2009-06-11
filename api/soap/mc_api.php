@@ -158,7 +158,7 @@ function mci_get_reproducibility_id( &$p_reproducibility ) {
 
 function mci_get_resolution_id( &$p_resolution ) {
 	if ( !isset( $p_resolution ) ) {
-		return (int)OPEN;
+		return (int)config_get( 'default_bug_resolution' );
 	}
 
 	return mci_get_enum_id_from_objectref( 'resolution', $p_resolution );

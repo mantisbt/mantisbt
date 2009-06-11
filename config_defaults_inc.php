@@ -1206,6 +1206,12 @@
 	$g_default_bugnote_view_status = VS_PUBLIC;
 
 	/**
+	 * Default bug resolution when reporting a new bug
+	 * @global int $g_default_bug_resolution
+	 */
+	$g_default_bug_resolution = OPEN;
+
+	/**
 	 * Default bug severity when reporting a new bug
 	 * @global int $g_default_bug_severity
 	 */

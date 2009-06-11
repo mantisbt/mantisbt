@@ -115,7 +115,7 @@
 
 <?php
 $t_current_resolution = $t_bug->resolution;
-$t_bug_is_open = in_array( $t_current_resolution, array( OPEN, REOPENED ) );
+$t_bug_is_open = in_array( $t_current_resolution, array( config_get( 'default_bug_resolution' ), REOPENED ) );
 if ( ( $t_resolved <= $f_new_status ) && ( ( $t_closed > $f_new_status ) || ( $t_bug_is_open ) ) ) { ?>
 <!-- Resolution -->
 <tr <?php echo helper_alternate_class() ?>>

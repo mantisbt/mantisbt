@@ -1082,6 +1082,14 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_default_bug_resolution</term>
+                <listitem>
+                    <para>The resolution for a newly created issue. The default
+                        is OPEN. Look in constant_inc.php for other values.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_default_bug_severity</term>
                 <listitem>
                     <para>The severity for a newly created issue. The default is
