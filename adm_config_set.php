@@ -85,7 +85,7 @@
 		$t_full_string = trim( $f_value );
 		if ( preg_match('/array[\s]*\((.*)\)/', $t_full_string, $t_match ) === 1 ) {
 			// we have an array here
-			$t_values = split( ',', trim( $t_match[1] ) );
+			$t_values = explode( ',', trim( $t_match[1] ) );
 			foreach ( $t_values as $key => $value ) {
 				$t_split = split( '=>', $value, 2 );
 				if ( count( $t_split ) == 2 ) {

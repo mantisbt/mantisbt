@@ -59,7 +59,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
 	global $g_lang_overrides;
 	global $g_error_send_page_header;
-
+var_dump($p_type, $p_error, $p_file, $p_line, $p_context);
 	# check if errors were disabled with @ somewhere in this call chain
 	if( 0 == error_reporting() ) {
 		return;

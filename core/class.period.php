@@ -88,15 +88,15 @@ class Period {
 			if( '' == $this->end ) {
 				$t_clause = lang_get( 'all_dates' );
 			} else {
-				list( $t_end_date, $t_end_time ) = split( ' ', $this->end );
+				list( $t_end_date, $t_end_time ) = explode( ' ', $this->end );
 				$t_clause = lang_get( 'before_date' ) . ' ' . $t_end_date;
 			}
 		} else {
-			list( $t_start_date, $t_start_time ) = split( ' ', $this->start );
+			list( $t_start_date, $t_start_time ) = explode( ' ', $this->start );
 			if( '' == $this->end ) {
 				$t_clause = lang_get( 'after_date' ) . ' ' . $t_start_date;
 			} else {
-				list( $t_end_date, $t_end_time ) = split( ' ', $this->end );
+				list( $t_end_date, $t_end_time ) = explode( ' ', $this->end );
 				$t_clause = lang_get( 'from_date' ) . ' ' . $t_start_date . ' ' . lang_get( 'to_date' ) . ' ' . $t_end_date;
 			}
 		}
@@ -110,7 +110,7 @@ class Period {
 	* @param int $p_weeks number of weeks
 	*/
 	function a_week( $p_when, $p_weeks = 1 ) {
-		list( $t_year, $t_month, $t_day ) = split( "-", $p_when );
+		list( $t_year, $t_month, $t_day ) = explode( "-", $p_when );
 		$t_now = getdate( mktime( 0, 0, 0, $t_month, $t_day, $t_year ) );
 		$this->end = strftime( "%Y-%m-%d 23:59:59", mktime( 0, 0, 0, $t_month, $t_day - $t_now['wday'] + ( $p_weeks * 7 ) - 1, $t_year ) );
 		$this->start = strftime( "%Y-%m-%d 00:00:00", mktime( 0, 0, 0, $t_month, $t_day - $t_now['wday'], $t_year ) );
@@ -148,7 +148,7 @@ class Period {
 	* @param string $p_when date string to expand to a month
 	*/
 	function a_month( $p_when ) {
-		list( $t_year, $t_month, $t_day ) = split( "-", $p_when );
+		list( $t_year, $t_month, $t_day ) = explode( "-", $p_when );
 		$this->end = strftime( "%Y-%m-%d 23:59:59", mktime( 0, 0, 0, $t_month + 1, 0, $t_year ) );
 		$this->start = strftime( "%Y-%m-%d 00:00:00", mktime( 0, 0, 0, $t_month, 1, $t_year ) );
 	}
@@ -175,7 +175,7 @@ class Period {
 	*/
 	function month_to_date() {
 		$this->end = date( 'Y-m-d' ) . ' 23:59:59';
-		list( $t_year, $t_month, $t_day ) = split( "-", $this->end );
+		list( $t_year, $t_month, $t_day ) = explode( "-", $this->end );
 		$this->start = strftime( "%Y-%m-%d 00:00:00", mktime( 0, 0, 0, $t_month, 1, $t_year ) );
 	}
 
@@ -185,7 +185,7 @@ class Period {
 	* @param string $p_when date string to expand to a quarter
 	*/
 	function a_quarter( $p_when ) {
-		list( $t_year, $t_month, $t_day ) = split( "-", $p_when );
+		list( $t_year, $t_month, $t_day ) = explode( "-", $p_when );
 		$t_month = ( (int)(( $t_month - 1 ) / 3 ) * 3 ) + 1;
 		$this->end = strftime( "%Y-%m-%d 23:59:59", mktime( 0, 0, 0, $t_month + 3, 0, $t_year ) );
 		$this->start = strftime( "%Y-%m-%d 00:00:00", mktime( 0, 0, 0, $t_month, 1, $t_year ) );
@@ -213,7 +213,7 @@ class Period {
 	*/
 	function quarter_to_date() {
 		$this->end = date( 'Y-m-d' ) . ' 23:59:59';
-		list( $t_year, $t_month, $t_day ) = split( "-", $this->end );
+		list( $t_year, $t_month, $t_day ) = explode( "-", $this->end );
 		$t_month = ( (int)(( $t_month - 1 ) / 3 ) * 3 ) + 1;
 		$this->start = strftime( "%Y-%m-%d 00:00:00", mktime( 0, 0, 0, $t_month, 1, $t_year ) );
 	}
@@ -224,7 +224,7 @@ class Period {
 	* @param string $p_when date string to expand to a year
 	*/
 	function a_year( $p_when ) {
-		list( $t_year, $t_month, $t_day ) = split( "-", $p_when );
+		list( $t_year, $t_month, $t_day ) = explode( "-", $p_when );
 		$this->end = strftime( "%Y-%m-%d 23:59:59", mktime( 0, 0, 0, 12, 31, $t_year ) );
 		$this->start = strftime( "%Y-%m-%d 00:00:00", mktime( 0, 0, 0, 1, 1, $t_year ) );
 	}
@@ -243,7 +243,7 @@ class Period {
 	*/
 	function year_to_date() {
 		$this->end = date( 'Y-m-d' ) . ' 23:59:59';
-		list( $t_year, $t_month, $t_day ) = split( "-", $this->end );
+		list( $t_year, $t_month, $t_day ) = explode( "-", $this->end );
 		$this->start = strftime( "%Y-%m-%d 00:00:00", mktime( 0, 0, 0, 1, 1, $t_year ) );
 	}
 

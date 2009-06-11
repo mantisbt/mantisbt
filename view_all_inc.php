@@ -49,8 +49,8 @@
 	$t_filter = current_user_get_bug_filter();
 
 	if( $t_filter ) {
-		list( $t_sort, ) = split( ',', $t_filter['sort'] );
-		list( $t_dir, ) = split( ',', $t_filter['dir'] );
+		list( $t_sort, ) = explode( ',', $t_filter['sort'] );
+		list( $t_dir, ) = explode( ',', $t_filter['dir'] );
 	}
 
 	$t_checkboxes_exist = false;

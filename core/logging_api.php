@@ -61,7 +61,7 @@ function log_event( $p_level, $p_msg ) {
 	if ( is_blank( $t_log_destination ) ) {
 		$t_destination = '';
 	} else {
-		list( $t_destination, $t_modifiers ) = split( ':', $t_log_destination, 2 );
+		list( $t_destination, $t_modifiers ) = explode( ':', $t_log_destination, 2 );
 	}
 
 	switch( $t_destination ) {

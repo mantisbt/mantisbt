@@ -531,8 +531,8 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 			unset( $t_fields[$i] );
 		}
 	}
-	$t_sort_fields = split( ',', $p_filter_arr['sort'] );
-	$t_dir_fields = split( ',', $p_filter_arr['dir'] );
+	$t_sort_fields = explode( ',', $p_filter_arr['sort'] );
+	$t_dir_fields = explode( ',', $p_filter_arr['dir'] );
 	for( $i = 0;$i < 2;$i++ ) {
 		if( isset( $t_sort_fields[$i] ) ) {
 			$t_drop = false;
@@ -826,8 +826,8 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 	}
 
 	$p_query_clauses['order'] = array();
-	$t_sort_fields = split( ',', $p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
-	$t_dir_fields = split( ',', $p_filter[FILTER_PROPERTY_SORT_DIRECTION] );
+	$t_sort_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
+	$t_dir_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_DIRECTION] );
 
 	if(( 'on' == $p_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) && ( NULL !== $p_show_sticky ) ) {
 		$p_query_clauses['order'][] = "sticky DESC";
@@ -3043,8 +3043,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 			<td class="small-caption" valign="top" id="show_sort_filter_target">
 				<?php
-					$t_sort_fields = split( ',', $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
-		$t_dir_fields = split( ',', $t_filter[FILTER_PROPERTY_SORT_DIRECTION] );
+					$t_sort_fields = explode( ',', $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
+		$t_dir_fields = explode( ',', $t_filter[FILTER_PROPERTY_SORT_DIRECTION] );
 
 		for( $i = 0;$i < 2;$i++ ) {
 			if( isset( $t_sort_fields[$i] ) ) {
@@ -3785,8 +3785,8 @@ function print_filter_show_sort() {
 	$t_shown_dirs["DESC"] = lang_get( 'bugnote_order_desc' );
 
 	# get default values from filter structure
-	$t_sort_fields = split( ',', $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
-	$t_dir_fields = split( ',', $t_filter[FILTER_PROPERTY_SORT_DIRECTION] );
+	$t_sort_fields = explode( ',', $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
+	$t_dir_fields = explode( ',', $t_filter[FILTER_PROPERTY_SORT_DIRECTION] );
 	if( !isset( $t_sort_fields[1] ) ) {
 		$t_sort_fields[1] = '';
 		$t_dir_fields[1] = '';

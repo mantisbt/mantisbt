@@ -172,7 +172,7 @@ function helper_get_current_project() {
 			$t_pref = user_pref_get( auth_get_current_user_id(), ALL_PROJECTS, false );
 			$t_project_id = $t_pref->default_project;
 		} else {
-			$t_project_id = split( ';', $t_project_id );
+			$t_project_id = explode( ';', $t_project_id );
 			$t_project_id = $t_project_id[count( $t_project_id ) - 1];
 		}
 
@@ -200,7 +200,7 @@ function helper_get_current_project_trace() {
 			$t_bottom,
 		);
 	} else {
-		$t_project_id = split( ';', $t_project_id );
+		$t_project_id = explode( ';', $t_project_id );
 		$t_bottom = $t_project_id[count( $t_project_id ) - 1];
 	}
 

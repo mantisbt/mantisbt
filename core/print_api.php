@@ -233,7 +233,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		if( $t_show_realname && ( $t_user['realname'] <> "" ) ) {
 			$t_user_name = string_attribute( $t_user['realname'] );
 			if( $t_sort_by_last_name ) {
-				$t_sort_name_bits = split( ' ', strtolower( $t_user_name ), 2 );
+				$t_sort_name_bits = explode( ' ', strtolower( $t_user_name ), 2 );
 				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
 			} else {
 				$t_sort_name = strtolower( $t_user_name );
@@ -577,7 +577,7 @@ function print_extended_project_browser( $p_trace = Array(), $p_project_id = nul
 # --------------------
 # print the subproject javascript for the extended project browser
 function print_extended_project_browser_subproject_javascript( $p_trace ) {
-	$t_trace_projects = split( ';', $p_trace );
+	$t_trace_projects = explode( ';', $p_trace );
 	$t_top_id = $t_trace_projects[0];
 	$t_level = count( $t_trace_projects );
 	$t_parent_id = $t_trace_projects[$t_level - 1];
@@ -1067,7 +1067,7 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 		if(( isset( $row['realname'] ) ) && ( $row['realname'] <> "" ) && $t_show_realname ) {
 			$t_user_name = string_attribute( $row['realname'] );
 			if( $t_sort_by_last_name ) {
-				$t_sort_name_bits = split( ' ', strtolower( $t_user_name ), 2 );
+				$t_sort_name_bits = explode( ' ', strtolower( $t_user_name ), 2 );
 				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
 			} else {
 				$t_sort_name = strtolower( $t_user_name );
