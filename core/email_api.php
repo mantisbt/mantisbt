@@ -477,6 +477,9 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_head
 		$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+		
+		bugnote_get_all_bugnotes( $p_bug_id );
+		
 		if( is_array( $t_recipients ) ) {
 			# send email to every recipient
 			foreach( $t_recipients as $t_user_id => $t_user_email ) {
@@ -1065,7 +1068,9 @@ function email_format_bug_message( $p_visible_bug_data ) {
 	}
 
 	if( isset( $p_visible_bug_data['relations'] ) ) {
-		$t_message .= $p_visible_bug_data['relations'];
+		if( $p_visible_bug_data['relations'] != "" ) {
+			$t_message .= $t_email_separator1 . "\n" . str_pad( lang_get( 'bug_relationships' ), 20 ) . str_pad( lang_get( 'id' ), 8 ) . lang_get( 'summary' ) . "\n" . $t_email_separator2 . "\n" . $p_visible_bug_data['relations'];
+		}
 	}
 
 	# Sponsorship

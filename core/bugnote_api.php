@@ -288,6 +288,12 @@ function bugnote_get_text( $p_bugnote_id ) {
  * @access public
  */
 function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
+	global $g_cache_bugnote;
+	
+	if( isset( $g_cache_bugnote[(int)$p_bugnote_id] ) ) {
+		return $g_cache_bugnote[(int)$p_bugnote_id]->$p_field_name;
+	}
+
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$c_field_name = db_prepare_string( $p_field_name );
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
@@ -385,14 +391,18 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
  * @access public
  */
 function bugnote_get_all_bugnotes( $p_bug_id ) {
-	global $g_cache_bugnotes;
+	global $g_cache_bugnotes, $g_cache_bugnote;
 
 	if( !isset( $g_cache_bugnotes ) ) {
 		$g_cache_bugnotes = array();
 	}
+	
+	if( !isset( $g_cache_bugnote ) ) {
+		$g_cache_bugnote = array();
+	}
 
 	# the cache should be aware of the sorting order
-	if( !isset( $g_cache_bugnotes[$p_bug_id] ) ) {
+	if( !isset( $g_cache_bugnotes[(int)$p_bug_id] ) ) {
 		$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 		$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
 
@@ -423,12 +433,13 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 			$t_bugnote->time_tracking = $row['time_tracking'];
 
 			$t_bugnotes[] = $t_bugnote;
+			$g_cache_bugnote[(int)$t_bugnote->id] = $t_bugnote;
 		}
 
-		$g_cache_bugnotes[$p_bug_id] = $t_bugnotes;
+		$g_cache_bugnotes[(int)$p_bug_id] = true;
 	}
 
-	return $g_cache_bugnotes[$p_bug_id];
+	return $t_bugnotes;
 }
 
 /**
@@ -673,13 +684,14 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
  * @access public
  */
 function bugnote_clear_cache( $p_bugnote_id = null ) {
-	global $g_cache_bugnotes;
+	global $g_cache_bugnote, $g_cache_bugnotes;
 
 	if( null === $p_bugnote_id ) {
-		$g_cache_bugnotes = array();
+		$g_cache_bugnote = array();
 	} else {
-		unset( $g_cache_bugnotes[(int) $p_bugnote_id] );
+		unset( $g_cache_bugnote[(int) $p_bugnote_id] );
 	}
-
+	$g_cache_bugnotes = array();
+	
 	return true;
 }

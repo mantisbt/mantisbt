@@ -745,9 +745,6 @@ function relationship_get_summary_html_preview( $p_bug_id ) {
  * @return string
  */
 function relationship_get_summary_text( $p_bug_id ) {
-	$t_email_separator1 = config_get( 'email_separator1' );
-	$t_email_separator2 = config_get( 'email_separator2' );
-
 	$t_summary = "";
 	$t_show_project = false;
 
@@ -757,10 +754,6 @@ function relationship_get_summary_text( $p_bug_id ) {
 	# prepare the relationships table
 	for( $i = 0;$i < $t_relationship_all_count;$i++ ) {
 		$t_summary .= relationship_get_details( $p_bug_id, $t_relationship_all[$i], false );
-	}
-
-	if( $t_summary != "" ) {
-		$t_summary = $t_email_separator1 . "\n" . str_pad( lang_get( 'bug_relationships' ), 20 ) . str_pad( lang_get( 'id' ), 8 ) . lang_get( 'summary' ) . "\n" . $t_email_separator2 . "\n" . $t_summary;
 	}
 
 	return $t_summary;
