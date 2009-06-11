@@ -566,10 +566,10 @@ $s_bug_deleted_msg = 'Issue has been deleted...';
 
 # bug_delete_page.php
 $s_delete_bug_sure_msg = 'Are you sure you wish to delete this issue?';
-$s_delete_bug_button = 'Delete Issue';
+$s_delete_bug_button = 'Delete';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Monitor Issue';
+$s_monitor_bug_button = 'Monitor';
 $s_unmonitor_bug_button = 'End Monitoring';
 
 # bug_file_add.php
@@ -1261,11 +1261,11 @@ $s_view_simple_link = 'View Simple';
 $s_viewing_bug_advanced_details_title = 'Viewing Issue Advanced Details';
 $s_product_build = 'Product Build';
 $s_system_profile = 'System Description';
-$s_update_bug_button = 'Update Issue';
+$s_update_bug_button = 'Edit';
 $s_bug_assign_to_button = 'Assign To:';
 $s_bug_status_to_button = 'Change Status To:';
-$s_reopen_bug_button = 'Reopen Issue';
-$s_move_bug_button = 'Move Issue';
+$s_reopen_bug_button = 'Reopen';
+$s_move_bug_button = 'Move';
 $s_attached_files = 'Attached Files';
 $s_publish = 'Publish';
 $s_cached = 'Cached';
@@ -1388,7 +1388,7 @@ $s_delete_relationship_button = 'Delete';
 $s_delete_relationship_sure_msg = 'Are you sure you wish to delete this relationship?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Not all the children of this issue are yet resolved or closed.';
 $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>Attention:</b> Not all the children of this issue are yet resolved or closed.<br />Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.';
-$s_create_child_bug_button = 'Create Clone';
+$s_create_child_bug_button = 'Clone';
 $s_bug_cloned_to = 'Issue cloned';
 $s_bug_created_from = 'Issue generated from';
 
