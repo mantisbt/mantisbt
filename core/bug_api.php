@@ -1663,7 +1663,8 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 	email_resolved( $p_bug_id );
 	email_relationship_child_resolved( $p_bug_id );
 
-	if( $c_resolution == FIXED ) {
+	if( $c_resolution >= config_get( 'bug_resolution_fixed_threshold' ) &&
+		$c_resolution < config_get( 'bug_resolution_not_fixed_threshold' ) ) {
 		twitter_issue_resolved( $p_bug_id );
 	}
 

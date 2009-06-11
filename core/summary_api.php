@@ -816,7 +816,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 			echo user_get_name( $t_handler_id );
 			echo '</td>';
 
-			# We need to track the percentage of bugs that are considered fix, as well as
+			# We need to track the percentage of bugs that are considered fixed, as well as
 			# those that aren't considered bugs to begin with (when looking at %age)
 			$t_bugs_fixed = 0;
 			$t_bugs_notbugs = 0;
@@ -837,15 +837,16 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 				}
 				echo '</td>';
 
-				# These resolutions are considered fixed
-				if( FIXED == $c_res_s[$j] ) {
-					$t_bugs_fixed += $res_bug_count;
+				if( $c_res_s[$j] >= config_get( 'bug_resolution_fixed_threshold' ) ) {
+					if ( $c_res_s[$j] < config_get( 'bug_resolution_not_fixed_threshold' ) ) {
+						# Count bugs with a resolution between fixed and not fixed thresholds
+						$t_bugs_fixed += $res_bug_count;
+					} else {
+						# Count bugs with a resolution above the not fixed threshold
+						$t_bugs_notbugs += $res_bug_count;
+					}
 				}
 
-				# These are not counted as bugs
-				else if(( WONT_FIX == $c_res_s[$j] ) || ( SUSPENDED == $c_res_s[$j] ) || ( DUPLICATE == $c_res_s[$j] ) || ( NOT_A_BUG == $c_res_s[$j] ) ) {
-					$t_bugs_notbugs += $res_bug_count;
-				}
 			}
 
 			$t_percent_fixed = 0;
@@ -949,15 +950,16 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 				}
 				echo '</td>';
 
-				# These resolutions are considered fixed
-				if( FIXED == $c_res_s[$j] ) {
-					$t_bugs_fixed += $res_bug_count;
+				if( $c_res_s[$j] >= config_get( 'bug_resolution_fixed_threshold' ) ) {
+					if ( $c_res_s[$j] < config_get( 'bug_resolution_not_fixed_threshold' ) ) {
+						# Count bugs with a resolution between fixed and not fixed thresholds
+						$t_bugs_fixed += $res_bug_count;
+					} else {
+						# Count bugs with a resolution above the not fixed threshold
+						$t_bugs_notbugs += $res_bug_count;
+					}
 				}
 
-				# These are not counted as bugs
-				else if(( UNABLE_TO_DUPLICATE == $c_res_s[$j] ) || ( DUPLICATE == $c_res_s[$j] ) || ( NOT_A_BUG == $c_res_s[$j] ) ) {
-					$t_bugs_notbugs += $res_bug_count;
-				}
 			}
 
 			$t_percent_errors = 0;

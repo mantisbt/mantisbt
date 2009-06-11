@@ -40,7 +40,9 @@ require_once( $t_core_dir . 'columns_api.php' );
 function custom_function_default_changelog_include_issue( $p_issue_id ) {
 	$t_issue = bug_get( $p_issue_id );
 
-	return(( $t_issue->resolution == FIXED ) && ( $t_issue->status >= config_get( 'bug_resolved_status_threshold' ) ) );
+	return( ( $t_issue->resolution >= config_get( 'bug_resolution_fixed_threshold' ) &&
+		$t_issue->resolution < config_get( 'bug_resolution_not_fixed_threshold' ) &&
+		$t_issue->status >= config_get( 'bug_resolved_status_threshold' ) ) );
 }
 
 # Prints one entry in the changelog.

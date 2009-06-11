@@ -1798,6 +1798,23 @@
 	$g_bug_resolved_status_threshold = RESOLVED;
 
 	/**
+	 * Threshold resolution which denotes that a bug has been resolved and
+	 * successfully fixed by developers. Resolutions above this threshold
+	 * and below $g_bug_resolution_not_fixed_threshold are considered to be
+	 * resolved successfully.
+	 * @global int $g_bug_resolution_fixed_threshold
+	 */
+	$g_bug_resolution_fixed_threshold = FIXED;
+
+	/**
+	 * Threshold resolution which denotes that a bug has been resolved without
+	 * being successfully fixed by developers. Resolutions above this
+	 * threshold are considered to be resolved in an unsuccessful way.
+	 * @global int $g_bug_resolution_not_fixed_threshold
+	 */
+	$g_bug_resolution_not_fixed_threshold = UNABLE_TO_DUPLICATE;
+
+	/**
 	 * Bug is closed.  In some custom installations a bug may be considered as closed when
 	 * it is moved to a custom (COMPLETED or IMPLEMENTED) status.
 	 * @global int $g_bug_closed_status_threshold

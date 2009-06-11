@@ -1710,6 +1710,28 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_bug_resolution_fixed_threshold</term>
+                <listitem>
+                    <para>Threshold resolution which denotes that a bug has
+                        been resolved and successfully fixed by developers.
+                        Resolutions above this threshold and below
+                        $g_bug_resolution_not_fixed_threshold are considered
+                        to be resolved successfully. Default value is FIXED.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_bug_resolution_not_fixed_threshold</term>
+                <listitem>
+                    <para>Threshold resolution which denotes that a bug has
+                        been resolved without being successfully fixed by
+                        developers. Resolutions above this threshold are
+                        considered to be resolved in an unsuccessful way.
+                        Default value is UNABLE_TO_DUPLICATE.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>
                     $g_bug_readonly_status_threshold $g_update_readonly_bug_threshold
                 </term>

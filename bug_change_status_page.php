@@ -125,7 +125,7 @@ if ( ( $t_resolved <= $f_new_status ) && ( ( $t_closed > $f_new_status ) || ( $t
 	<td>
 		<select name="resolution">
 			<?php
-                $t_resolution = $t_bug_is_open ? FIXED : $t_current_resolution;
+                $t_resolution = $t_bug_is_open ? config_get( 'bug_resolution_fixed_threshold' ) : $t_current_resolution;
                 print_enum_string_option_list( "resolution", $t_resolution );
             ?>
 		</select>
