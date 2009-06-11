@@ -166,7 +166,7 @@ function mci_get_resolution_id( &$p_resolution ) {
 
 function mci_get_projection_id( &$p_projection ) {
 	if ( !isset( $p_projection ) ) {
-		return (int)10;
+		return (int)config_get( 'default_bug_projection' );
 	}
 
 	return mci_get_enum_id_from_objectref( 'projection', $p_projection );
@@ -174,7 +174,7 @@ function mci_get_projection_id( &$p_projection ) {
 
 function mci_get_eta_id( &$p_eta ) {
 	if ( !isset( $p_eta ) ) {
-		return (int)10;
+		return (int)config_get( 'default_bug_eta' );
 	}
 
 	return mci_get_enum_id_from_objectref( 'eta', $p_eta );

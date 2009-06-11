@@ -654,7 +654,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	}
 
 	if ( $t_reproducibility_id == 0 ) {
-		$t_reproducibility_id = 10;
+		$t_reproducibility_id = config_get( 'default_bug_reproducibility' );
 	}
 
 	$t_bug_data = new BugData;
