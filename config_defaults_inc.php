@@ -841,6 +841,21 @@
 	 */
 	$g_show_priority_text	= OFF;
 
+	/**
+	 * Define the priority level at which a bug becomes significant.
+	 * Significant bugs are displayed with emphasis. Set this value to -1 to
+	 * disable the feature.
+	 * @global int $g_priority_significant_threshold
+	 */
+	$g_priority_significant_threshold = HIGH;
+
+	/**
+	 * Define the severity level at which a bug becomes significant.
+	 * Significant bugs are displayed with emphasis. Set this value to -1 to
+	 * disable the feature.
+	 * @global int $g_severity_significant_threshold
+	 */
+	$g_severity_significant_threshold = MAJOR;
 
 	/**
 	 * The default columns to be included in the View Issues Page.

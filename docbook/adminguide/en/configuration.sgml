@@ -757,6 +757,26 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_priority_significant_threshold</term>
+                <listitem>
+                    <para>Define the priority level at which a bug becomes
+                        significant. Significant bugs are displayed with
+                        emphasis. Set this value to -1 to disable the feature.
+                        The default value is HIGH.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_severity_significant_threshold</term>
+                <listitem>
+                    <para>Define the severity level at which a bug becomes
+                        significant. Significant bugs are displayed with
+                        emphasis. Set this value to -1 to disable the feature.
+                        The default value is MAJOR.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_view_issues_page_columns</term>
                 <listitem>
                     <para>This configuration option is used to select the columns to be included in the View Issues page and in which order.  If one of the column is not accessible to the logged in user, or corresponds to a disabled feature, then it will be automatically removed from the list at runtime.  Hence, the same column list may show a different set of columns based on the logged in user, the currently selected project and enabled features (e.g. sponsorship_total is only shown if the sponsorship feature is enabled).</para>
