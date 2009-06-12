@@ -57,7 +57,7 @@
 	# get new issue handler if set, otherwise default to original handler
 	$f_handler_id = gpc_get_int( 'handler_id', bug_get_field( $f_bug_id, 'handler_id' ) );
 
-	if ( ASSIGNED == $f_new_status ) {
+	if ( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 		$t_bug_sponsored = sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
 		if ( $t_bug_sponsored ) {
 			if ( !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
@@ -80,6 +80,7 @@
 
 	$t_status_label = str_replace( " ", "_", MantisEnum::getLabel( config_get( 'status_enum_string' ), $f_new_status ) );
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
+	$t_closed = config_get( 'bug_closed_status_threshold' );
 
 	$t_bug = bug_get( $f_bug_id );
 
@@ -114,8 +115,8 @@
 
 <?php
 $t_current_resolution = $t_bug->resolution;
-$t_bug_is_open = in_array( $t_current_resolution, array( OPEN, REOPENED ) );
-if ( ( $t_resolved <= $f_new_status ) && ( ( CLOSED > $f_new_status ) || ( $t_bug_is_open ) ) ) { ?>
+$t_bug_is_open = in_array( $t_current_resolution, array( config_get( 'default_bug_resolution' ), config_get( 'bug_reopen_resolution' ) ) );
+if ( ( $t_resolved <= $f_new_status ) && ( ( $t_closed > $f_new_status ) || ( $t_bug_is_open ) ) ) { ?>
 <!-- Resolution -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -124,7 +125,7 @@ if ( ( $t_resolved <= $f_new_status ) && ( ( CLOSED > $f_new_status ) || ( $t_bu
 	<td>
 		<select name="resolution">
 			<?php
-                $t_resolution = $t_bug_is_open ? FIXED : $t_current_resolution;
+                $t_resolution = $t_bug_is_open ? config_get( 'bug_resolution_fixed_threshold' ) : $t_current_resolution;
                 print_enum_string_option_list( "resolution", $t_resolution );
             ?>
 		</select>
@@ -133,7 +134,7 @@ if ( ( $t_resolved <= $f_new_status ) && ( ( CLOSED > $f_new_status ) || ( $t_bu
 <?php } ?>
 
 <?php
-if ( ( $t_resolved <= $f_new_status ) && ( CLOSED > $f_new_status ) ) { ?>
+if ( ( $t_resolved <= $f_new_status ) && ( $t_closed > $f_new_status ) ) { ?>
 <!-- Duplicate ID -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -191,10 +192,10 @@ if ( ( $t_resolved > $f_new_status ) &&
  */
 $t_custom_status_label = "update"; # Don't show custom fields by default
 if ( ( $f_new_status == $t_resolved ) &&
-			( CLOSED > $f_new_status ) ) {
+			( $t_closed > $f_new_status ) ) {
 	$t_custom_status_label = "resolved";
 }
-if ( CLOSED == $f_new_status ) {
+if ( $t_closed == $f_new_status ) {
 	$t_custom_status_label = "closed";
 }
 
@@ -263,10 +264,10 @@ if ( ( $f_new_status >= $t_resolved ) && access_has_bug_level( config_get( 'hand
 	} ?>
 
 <?php
-if ( ( $f_new_status >= $t_resolved ) && ( CLOSED > $f_new_status ) ) { ?>
+if ( ( $f_new_status >= $t_resolved ) && ( $t_closed > $f_new_status ) ) { ?>
 <!-- Close Immediately (if enabled) -->
 <?php if ( ( ON == config_get( 'allow_close_immediately' ) )
-				&& ( access_has_bug_level( access_get_status_threshold( CLOSED ), $f_bug_id ) ) ) { ?>
+				&& ( access_has_bug_level( access_get_status_threshold( $t_closed ), $f_bug_id ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'close_immediately' ) ?>

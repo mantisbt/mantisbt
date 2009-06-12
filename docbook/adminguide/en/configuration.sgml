@@ -757,6 +757,26 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_priority_significant_threshold</term>
+                <listitem>
+                    <para>Define the priority level at which a bug becomes
+                        significant. Significant bugs are displayed with
+                        emphasis. Set this value to -1 to disable the feature.
+                        The default value is HIGH.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_severity_significant_threshold</term>
+                <listitem>
+                    <para>Define the severity level at which a bug becomes
+                        significant. Significant bugs are displayed with
+                        emphasis. Set this value to -1 to disable the feature.
+                        The default value is MAJOR.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_view_issues_page_columns</term>
                 <listitem>
                     <para>This configuration option is used to select the columns to be included in the View Issues page and in which order.  If one of the column is not accessible to the logged in user, or corresponds to a disabled feature, then it will be automatically removed from the list at runtime.  Hence, the same column list may show a different set of columns based on the logged in user, the currently selected project and enabled features (e.g. sponsorship_total is only shown if the sponsorship feature is enabled).</para>
@@ -1082,6 +1102,14 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_default_bug_resolution</term>
+                <listitem>
+                    <para>The resolution for a newly created issue. The default
+                        is OPEN. Look in constant_inc.php for other values.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_default_bug_severity</term>
                 <listitem>
                     <para>The severity for a newly created issue. The default is
@@ -1094,6 +1122,32 @@
                 <listitem>
                     <para>The priority for a newly created issue. The default is
                         NORMAL. Look in constant_inc.php for other values.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_bug_reproducibility</term>
+                <listitem>
+                    <para>The reproducibility for a newly created issue. The
+                        default is REPRODUCIBILITY_HAVENOTTRIED. Look in
+                        constant_inc.php for other values.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_bug_projection</term>
+                <listitem>
+                    <para>The projection for a newly created issue. The default
+                        is PROJECTION_NONE. Look in constant_inc.php for other
+                        values.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_bug_eta</term>
+                <listitem>
+                    <para>The ETA for a newly created issue. The default is
+                        ETA_NONE. Look in constant_inc.php for other values.
                     </para>
                 </listitem>
             </varlistentry>
@@ -1698,6 +1752,28 @@
                     <para>Bug is resolved, ready to be closed or reopened. In some
                         custom installations a bug maybe considered as resolved when it is
                         moved to a custom (FIXED OR TESTED) status.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_bug_resolution_fixed_threshold</term>
+                <listitem>
+                    <para>Threshold resolution which denotes that a bug has
+                        been resolved and successfully fixed by developers.
+                        Resolutions above this threshold and below
+                        $g_bug_resolution_not_fixed_threshold are considered
+                        to be resolved successfully. Default value is FIXED.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_bug_resolution_not_fixed_threshold</term>
+                <listitem>
+                    <para>Threshold resolution which denotes that a bug has
+                        been resolved without being successfully fixed by
+                        developers. Resolutions above this threshold are
+                        considered to be resolved in an unsuccessful way.
+                        Default value is UNABLE_TO_DUPLICATE.
                     </para>
                 </listitem>
             </varlistentry>

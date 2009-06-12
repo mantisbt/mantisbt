@@ -841,6 +841,21 @@
 	 */
 	$g_show_priority_text	= OFF;
 
+	/**
+	 * Define the priority level at which a bug becomes significant.
+	 * Significant bugs are displayed with emphasis. Set this value to -1 to
+	 * disable the feature.
+	 * @global int $g_priority_significant_threshold
+	 */
+	$g_priority_significant_threshold = HIGH;
+
+	/**
+	 * Define the severity level at which a bug becomes significant.
+	 * Significant bugs are displayed with emphasis. Set this value to -1 to
+	 * disable the feature.
+	 * @global int $g_severity_significant_threshold
+	 */
+	$g_severity_significant_threshold = MAJOR;
 
 	/**
 	 * The default columns to be included in the View Issues Page.
@@ -1206,6 +1221,12 @@
 	$g_default_bugnote_view_status = VS_PUBLIC;
 
 	/**
+	 * Default bug resolution when reporting a new bug
+	 * @global int $g_default_bug_resolution
+	 */
+	$g_default_bug_resolution = OPEN;
+
+	/**
 	 * Default bug severity when reporting a new bug
 	 * @global int $g_default_bug_severity
 	 */
@@ -1222,6 +1243,18 @@
 	 * @global int $g_default_bug_reproducibility
 	 */
 	$g_default_bug_reproducibility = REPRODUCIBILITY_HAVENOTTRIED;
+
+	/**
+	 * Default bug projection when reporting a new bug
+	 * @global int $g_default_bug_projection
+	 */
+	$g_default_bug_projection = PROJECTION_NONE;
+
+	/**
+	 * Default bug ETA when reporting a new bug
+	 * @global int $g_default_bug_eta
+	 */
+	$g_default_bug_eta = ETA_NONE;
 
 	/**
 	 *
@@ -1790,6 +1823,23 @@
 	 * @global int $g_bug_resolved_status_threshold
 	 */
 	$g_bug_resolved_status_threshold = RESOLVED;
+
+	/**
+	 * Threshold resolution which denotes that a bug has been resolved and
+	 * successfully fixed by developers. Resolutions above this threshold
+	 * and below $g_bug_resolution_not_fixed_threshold are considered to be
+	 * resolved successfully.
+	 * @global int $g_bug_resolution_fixed_threshold
+	 */
+	$g_bug_resolution_fixed_threshold = FIXED;
+
+	/**
+	 * Threshold resolution which denotes that a bug has been resolved without
+	 * being successfully fixed by developers. Resolutions above this
+	 * threshold are considered to be resolved in an unsuccessful way.
+	 * @global int $g_bug_resolution_not_fixed_threshold
+	 */
+	$g_bug_resolution_not_fixed_threshold = UNABLE_TO_DUPLICATE;
 
 	/**
 	 * Bug is closed.  In some custom installations a bug may be considered as closed when

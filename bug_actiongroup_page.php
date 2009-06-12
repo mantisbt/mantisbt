@@ -66,7 +66,6 @@
 	}
 
 	$t_finished = false;
-	$t_request = '';
 	$t_bugnote = false;
 
 	$t_external_action_prefix = 'EXT_';
@@ -139,7 +138,6 @@
 			$t_question_title 		= lang_get( 'resolve_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'resolve_group_bugs_button' );
 			$t_form 				= 'resolution';
-			$t_request 				= 'resolution'; # the "request" vars allow to display the adequate list
 			if ( ALL_PROJECTS != $t_project_id ) {
 				$t_question_title2 = lang_get( 'fixed_in_version' );
 				$t_form2 = 'fixed_in_version';
@@ -151,14 +149,12 @@
 			$t_question_title 		= lang_get( 'priority_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'priority_group_bugs_button' );
 			$t_form 				= 'priority';
-			$t_request 				= 'priority';
 			break;
 
 		case 'UP_STATUS' :
 			$t_question_title 		= lang_get( 'status_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'status_group_bugs_button' );
 			$t_form 				= 'status';
-			$t_request 				= 'status';
 			$t_bugnote				= true;
 			break;
 
@@ -250,21 +246,25 @@ if ( !$t_finished ) {
 				case 'ASSIGN':
 					print_assign_to_option_list( 0, $t_project_id );
 					break;
-				case 'VIEW_STATUS':
-					print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );
+				case 'RESOLVE':
+					print_enum_string_option_list( 'resolution', config_get( 'bug_resolution_fixed_threshold' ) );
+					break;
+				case 'UP_PRIOR':
+					print_enum_string_option_list( 'priority', config_get( 'default_bug_priority' ) );
+					break;
+				case 'UP_STATUS':
+					print_enum_string_option_list( 'status', config_get( 'bug_submit_status' ) );
 					break;
 				case 'UP_CATEGORY':
 					print_category_option_list();
+					break;
+				case 'VIEW_STATUS':
+					print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );
 					break;
 				case 'UP_TARGET_VERSION':
 				case 'UP_FIXED_IN_VERSION':
 					print_version_option_list( '', $t_project_id, VERSION_ALL );
 					break;
-			}
-
-			# other forms use the same function to display the list
-			if ( $t_request > '' ) {
-				print_enum_string_option_list( $t_request, FIXED );
 			}
 
 			echo '</select>';

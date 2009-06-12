@@ -510,7 +510,7 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
 		return true;
 	}
 
-	return access_has_bug_level( access_get_status_threshold( CLOSED ), $p_bug_id, $p_user_id );
+	return access_has_bug_level( access_get_status_threshold( config_get( 'bug_closed_status_threshold' ) ), $p_bug_id, $p_user_id );
 }
 
 /**

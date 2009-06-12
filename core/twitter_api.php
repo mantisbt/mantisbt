@@ -66,7 +66,8 @@ function twitter_issue_resolved( $p_bug_id ) {
 	$t_bug = bug_get( $p_bug_id, false );
 
 	# Do not twitter except fixed issues
-	if( $t_bug->resolution != FIXED ) {
+	if( $t_bug->resolution < config_get( 'bug_resolution_fixed_threshold' ) ||
+		$t_bug->resolution >= config_get( 'bug_resolution_not_fixed_threshold' ) ) {
 		return true;
 	}
 

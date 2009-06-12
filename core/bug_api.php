@@ -1586,7 +1586,7 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
 	# Error condition stopped execution but status had already been changed
 	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
 
-	bug_set_field( $p_bug_id, 'status', CLOSED );
+	bug_set_field( $p_bug_id, 'status', config_get( 'bug_closed_status_threshold' ) );
 
 	email_close( $p_bug_id );
 	email_relationship_child_closed( $p_bug_id );
@@ -1663,7 +1663,8 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 	email_resolved( $p_bug_id );
 	email_relationship_child_resolved( $p_bug_id );
 
-	if( $c_resolution == FIXED ) {
+	if( $c_resolution >= config_get( 'bug_resolution_fixed_threshold' ) &&
+		$c_resolution < config_get( 'bug_resolution_not_fixed_threshold' ) ) {
 		twitter_issue_resolved( $p_bug_id );
 	}
 

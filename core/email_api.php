@@ -266,10 +266,10 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	#  These are handled by email_on_status generically
 	#  @@@ thraxisp note that email_on_assigned was co-opted to handle change in handler
 	$t_status_change = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-	unset( $t_status_change[NEW_] );
+	unset( $t_status_change[config_get( 'bug_submit_status' )] );
 	unset( $t_status_change[FEEDBACK] );
-	unset( $t_status_change[RESOLVED] );
-	unset( $t_status_change[CLOSED] );
+	unset( $t_status_change[config_get( 'bug_resolved_status_threshold' )] );
+	unset( $t_status_change[config_get( 'bug_closed_status_threshold' )] );
 
 	if( 'owner' == $p_notify_type ) {
 		$t_pref_field = 'email_on_assigned';

@@ -106,7 +106,7 @@
 		$t_set_status = array();
 		foreach( $t_statuses as $t_status_id => $t_status_label) {
 			$f_level = gpc_get( 'access_change_' . $t_status_id );
-			if ( NEW_ == $t_status_id ) {
+			if ( config_get( 'bug_submit_status' ) == $t_status_id ) {
 				if ( (int)$f_level != config_get( 'report_bug_threshold' ) ) {
 					config_set( 'report_bug_threshold', (int)$f_level, ALL_USERS, $t_project, $f_access );
 				}

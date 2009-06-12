@@ -399,7 +399,7 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_user_id = auth_get_current_user_id();
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
-	$t_clo_val = CLOSED;
+	$t_clo_val = config_get( 'bug_closed_status_threshold' );
 	$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$t_array_indexed_by_enum_values = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string );
@@ -445,7 +445,7 @@ function create_developer_summary() {
 	$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
-	$t_clo_val = CLOSED;
+	$t_clo_val = config_get( 'bug_closed_status_threshold' );
 
 	$query = "SELECT handler_id, status
 				 FROM $t_bug_table
@@ -594,7 +594,7 @@ function find_date_in_metrics( $aDate ) {
 # --------------------
 function create_cumulative_bydate() {
 
-	$t_clo_val = CLOSED;
+	$t_clo_val = config_get( 'bug_closed_status_threshold' );
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_history_table = db_get_table( 'mantis_bug_history_table' );

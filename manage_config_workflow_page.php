@@ -67,7 +67,7 @@
 
     	# prepopulate new bug state (bugs go from nothing to here)
     	$t_submit_status_array = config_get( 'bug_submit_status' );
-    	$t_new_label = MantisEnum::getLabel( lang_get( 'status_enum_string' ), NEW_ );
+		$t_new_label = MantisEnum::getLabel( lang_get( 'status_enum_string' ), config_get( 'bug_submit_status' ) );
     	if ( is_array( $t_submit_status_array ) ) {
     		# @@@ (thraxisp) this is not implemented in bug_api.php
     		foreach ($t_submit_status_array as $t_access => $t_status ) {
@@ -82,7 +82,7 @@
 
         # add user defined arcs and implicit reopen arcs
     	$t_reopen = config_get( 'bug_reopen_status' );
-    	$t_reopen_label = MantisEnum::getLabel( lang_get( 'resolution_enum_string' ), REOPENED );
+		$t_reopen_label = MantisEnum::getLabel( lang_get( 'resolution_enum_string' ), config_get( 'bug_reopen_resolution' ) );
     	$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
     	$t_default = array();
     	foreach ( $t_status_arr as $t_status => $t_status_label ) {
@@ -305,7 +305,7 @@
 
 		foreach ( $t_enum_status as $t_status => $t_status_label) {
 			echo '<tr ' . helper_alternate_class() . '><td width="30%">' . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) ) . '</td>';
-			if ( NEW_ == $t_status ) {
+			if ( config_get( 'bug_submit_status' ) == $t_status ) {
 				$t_level = $t_project_new;
 				$t_can_change = ( $t_access >= config_get_access( 'report_bug_threshold' ) );
                 $t_colour = '';
