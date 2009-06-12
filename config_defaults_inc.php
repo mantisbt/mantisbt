@@ -377,9 +377,12 @@
 	$g_return_path_email	= 'admin@example.com';
 
 	/**
-	 * allow email notification
-	 * note that if this is disabled, sign-up and password reset messages will
-	 * not be sent.
+	 * Allow email notification.
+	 * Set to ON to enable email notifications, OFF to disable them. Note that
+	 * disabling email notifications has no effect on emails generated as part
+	 * of the user signup process. When set to OFF, the password reset feature
+	 * is disabled. Additionally, notifications of administrators updating
+	 * accounts are not sent to users.
 	 * @global int $g_enable_email_notification
 	 */
 	$g_enable_email_notification	= ON;

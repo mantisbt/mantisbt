@@ -40,12 +40,24 @@
 	$f_access_level	= gpc_get_int( 'access_level' );
 	$f_user_id		= gpc_get_int( 'user_id' );
 
+	if ( config_get( 'enable_email_notification' ) == ON ) {
+		$f_send_email_notification = gpc_get_bool( 'send_email_notification' );
+	} else {
+		$f_send_email_notification = 0;
+	}
+
 	user_ensure_exists( $f_user_id );
 
 	$f_email	= trim( $f_email );
 	$f_username	= trim( $f_username );
 
 	$t_old_username = user_get_field( $f_user_id, 'username' );
+
+	if ( $f_send_email_notification ) {
+		$t_old_realname = user_get_field( $f_user_id, 'realname' );
+		$t_old_email = user_get_email( $f_user_id );
+		$t_old_access_level = user_get_field( $f_user_id, 'access_level' );
+	}
 
 	# check that the username is unique
 	if ( 0 != strcasecmp( $t_old_username, $f_username )
@@ -109,6 +121,37 @@
 	}
 
 	$result = db_query_bound( $query, $query_params );
+
+	if ( $f_send_email_notification ) {
+		lang_push( user_pref_get_language( $f_user_id ) );
+		$t_changes = "";
+		if ( strcmp( $f_username, $t_old_username ) ) {
+			$t_changes .= lang_get( 'username' ) . ': ' . $t_old_username . ' => ' . $f_username . "\n";
+		}
+		if ( strcmp( $t_realname, $t_old_realname ) ) {
+			$t_changes .= lang_get( 'realname' ) . ': ' . $t_old_realname . ' => ' . $t_realname . "\n";
+		}
+		if ( strcmp( $f_email, $t_old_email ) ) {
+			$t_changes .= lang_get( 'email' ) . ': ' . $t_old_email . ' => ' . $f_email . "\n";
+		}
+		if ( strcmp( $f_access_level, $t_old_access_level ) ) {
+			$t_old_access_string = get_enum_element( 'access_levels', $t_old_access_level );
+			$t_new_access_string = get_enum_element( 'access_levels', $f_access_level );
+			$t_changes .= lang_get( 'access_level' ) . ': ' . $t_old_access_string . ' => ' . $t_new_access_string . "\n\n";
+		}
+		if ( !empty( $t_changes ) ) {
+			$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'email_user_updated_subject' );
+			$t_updated_msg = lang_get( 'email_user_updated_msg' );
+			$t_message = $t_updated_msg . "\n\n" . config_get( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
+			email_store( $f_email, $t_subject, $t_message );
+			log_event( LOG_EMAIL, sprintf( 'Account update notification sent to ' . $f_username . ' (' . $f_email . ')' ) );
+			if ( config_get( 'email_send_using_cronjob' ) == OFF ) {
+				email_send_all();
+			}
+		}
+		lang_pop();
+	}
+
 	$t_redirect_url = 'manage_user_edit_page.php?user_id=' . $c_user_id;
 
 	form_security_purge('manage_user_update');

@@ -130,6 +130,10 @@
 <!-- Submit Button -->
 <tr>
 	<td colspan="2" class="center">
+	<?php if ( config_get( 'enable_email_notification' ) == ON ) {
+		echo lang_get( 'notify_user' ); ?>
+		<input type="checkbox" name="send_email_notification" checked />
+	<?php } ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" />
 	</td>
 </tr>

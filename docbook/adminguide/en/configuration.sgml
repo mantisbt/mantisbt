@@ -286,9 +286,13 @@
             <varlistentry>
                 <term>$g_enable_email_notification</term>
                 <listitem>
-                    <para>Set to ON to enable e-mail notifications, OFF to disable
-                        them. Default is ON.  Note that disabling email notifications has no effect on
-			emails generated as part of the user signup process.
+                    <para>Set to ON to enable email notifications, OFF to
+                        disable them. Default is ON. Note that disabling
+                        email notifications has no effect on emails generated
+                        as part of the user signup process. When set to OFF,
+                        the password reset feature is disabled. Additionally,
+                        notifications of administrators updating accounts are
+                        not sent to users.
                     </para>
                 </listitem>
             </varlistentry>
