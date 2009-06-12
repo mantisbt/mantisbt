@@ -1,0 +1,52 @@
+/*
+* Adapted from http://resources.neolao.com/php/dokuwiki/templates
+*/
+* { 
+	font-family: Verdana, Helvetica, Arial, sans-serif; 
+	font-size: small; 
+}
+body {
+	background: white;
+}
+a { text-decoration: none; color: #5d579d; }
+a:hover { color: #827db7; }
+h1 { 
+	color: #f4a600; 
+	font-size: 1.5em; 
+}
+h1.title {
+	background-color: #fffff5;
+	font-size: 2.0em;
+}
+h2 { 
+	color: #f4a600;
+	font-size: 1.2em;
+}
+h3 { 
+	color: #817cb6; 
+	font-size: 1em;
+}
+h4 { 
+	color: #817cb6; 
+	font-size: 1em;
+}
+h5 { 
+	color: #817cb6; 
+	font-size: 1em;
+}
+table { border: solid 1px #999; }
+table th { border: solid 1px #999; background-color: #eee; }
+table td { border: solid 1px #ccc; background-color: #fff; }
+table tr:hover { background-color: #ffffe5; }
+blockquote { border-left: solid 2px #a58fbb; margin: 0; padding: 0 0 0 .5em; }
+p { margin: .5em 0 0 0; }
+pre {
+	padding: 2px;
+	border: 1px dotted #8cacbb;
+	color: #000;
+	overflow: auto;
+	background-color: #fffff5; font-size: 1em; font-family: "Courier New",Courier,monospace;
+}
+pre * { background-color: #fffff5; font-size: 1em; font-family: "Courier New",Courier,monospace; }
+code { background-color: #fffff5; border: 1px dotted #8cacbb; font-size: 1em; font-family: "Courier New",Courier,monospace; }
+

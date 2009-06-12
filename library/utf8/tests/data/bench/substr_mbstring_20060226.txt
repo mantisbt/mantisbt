@@ -1,0 +1,43 @@
+This is ApacheBench, Version 2.0.41-dev <$Revision: 1.1 $> apache-2.0
+Copyright (c) 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Copyright (c) 1998-2002 The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        Apache/2.0.54
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /~harryf/utf8/tests/bench/substr.php?engine=mbstring
+Document Length:        5 bytes
+
+Concurrency Level:      1
+Time taken for tests:   18.344252 seconds
+Complete requests:      1000
+Failed requests:        0
+Write errors:           0
+Total transferred:      228000 bytes
+HTML transferred:       5000 bytes
+Requests per second:    54.51 [#/sec] (mean)
+Time per request:       18.344 [ms] (mean)
+Time per request:       18.344 [ms] (mean, across all concurrent requests)
+Transfer rate:          12.10 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    14   17   9.8     15      53
+Waiting:        0   17   9.9     14      53
+Total:         14   17   9.8     15      53
+
+Percentage of the requests served within a certain time (ms)
+  50%     15
+  66%     15
+  75%     15
+  80%     15
+  90%     22
+  95%     48
+  98%     50
+  99%     50
+ 100%     53 (longest request)

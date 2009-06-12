@@ -1,0 +1,68 @@
+body {
+  font: 10pt "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
+  background-color: White;
+  color: Black;
+}
+table {
+  font-size: 100%;
+  padding:0;
+  margin:0;
+}
+tr,td,th {padding:0; margin:0;}
+img {border:0}
+a {
+  color:#000000;
+  text-decoration:none;
+}
+pod.page {
+  text-align: justify;
+}
+h1, h2, h3, h4, h5 {
+    color: Black;
+    background-color: transparent;
+    font-family: "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
+    font-size: 100%;
+    font-weight: normal;
+    margin-left:    0;
+    margin-right:   0;
+    margin-top:     0;
+    margin-bottom:  1em;
+    padding-left:   0;
+    padding-right:  0;
+    padding-top:    0.5em;
+    padding-bottom: 0;
+    border-bottom: 1px solid #000000;
+    clear:left;
+}
+h1 {font-size: 160%; font-weight: bold;}
+h2 {font-size: 150%; }
+h3 {font-size: 140%; border-bottom: none; }
+h4 {font-size: 120%; border-bottom: none; }
+h5 {font-size: 100%; border-bottom: none; }
+ul { 
+    line-height: 1.5em;
+    list-style-type: square;
+    margin: 0 0 1.0em 1.5em;
+    padding: 0;
+
+}
+ol {
+    line-height: 1.0em;
+    margin: 0 0 1.0em 1.0em;
+    padding: 0;
+    font-weight: normal;
+}
+
+pre {
+  font-size: 8pt;
+  padding: 0.5em;
+  border: 1px dashed #000000;
+  color: Black;
+  overflow: visible;
+  font-family: "Courier New",Courier,monospace;
+}
+code {
+  font-family: "Courier New",Courier,monospace;
+}
+.toplink {display:none}
+#nav {display:none}

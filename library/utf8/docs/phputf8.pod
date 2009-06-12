@@ -1,0 +1,515 @@
+# $Id: phputf8.pod,v 1.7 2006/09/30 23:38:19 harryf Exp $
+
+=head1 NAME
+
+phputf8 - Tools for working with UTF-8 in PHP
+
+=head1 SYNOPSIS
+
+    require_once '/path/to/utf8/utf8.php';
+    require_once UTF8 . '/utils/validation.php';
+    require_once UTF8 . '/utils/ascii.php';
+    
+    # Check the UTF-8 is well formed
+    if ( !utf8_is_valid($_POST['somecontent']) ) {
+	
+        require_once UTF8 . '/utils/bad.php';
+        trigger_error('Bad UTF-8 detected. Clearning', E_USER_NOTICE);
+	
+        # Strip out bad sequences - replace with ? character
+        $_POST['somecontent'] = utf8_bad_replace($_POST['somecontent']);
+	
+    }
+    
+    # This works fine with UTF-8
+    $_POST['somecontent'] = ltrim($_POST['somecontent']);
+    
+    # If it contains only ascii chars, use native str fns for speed...
+    if ( !utf8_is_ascii($_POST['somecontent']) ) {
+        
+        $endfirstword = strpos($_POST['somecontent'],' ');
+        $firstword = substr($_POST['somecontent'],0,$endOfFirstWord);
+        $firstword = strtoupper($firstword);
+        $therest = substr($_POST['somecontent'],$endOfFirstWord);
+        
+    } else {
+        
+        # It contains multibyte sequences - use the slower but safe
+        $endfirstword = utf8_strpos($_POST['somecontent'],' ');
+        $firstword = utf8_substr($_POST['somecontent'],0,$endOfFirstWord);
+        $firstword = utf8_strtoupper($firstword);
+        $therest = utf8_substr($_POST['somecontent'],$endOfFirstWord);
+        
+    }
+    
+    # htmlspecialchars is also safe for use with UTF-8
+    header("Content-Type: text/html; charset=utf-8");
+    echo "<pre>";
+    echo "<strong>".htmlspecialchars($firstword)."</strong>";
+    echo htmlspecialchars($therest);
+    echo "</pre>";
+    
+
+=head1 DESCRIPTION
+
+phputf8 does a few things for you;
+
+=over
+
+=item * Provides UTF-8 aware versions of PHP's string functions
+
+All of these functions are prefixed with C<utf8_>. Six of these functions
+are loaded "on the fly", depending on whether you have the mbstring
+extension available. The rest build on top of those six. 
+
+See L</"String Functions">.
+
+=item * Detection of bad UTF-8 sequences
+
+The file C<UTF8 . '/utils/validation.php'> contains functions for testing
+strings for bad UTF-8 sequences. Note that other functions in the library
+assume valid UTF-8.
+
+See L</"UTF-8 Validation and Cleaning">
+
+=item * Cleaning of bad UTF-8 sequences
+
+Functions for stripping or replacing bad sequences are available in
+C<UTF8 . '/utils/bad.php'>
+
+See L</"UTF-8 Validation and Cleaning">
+
+=item * Detecting pure ASCII & stripping non-ASCII
+
+The file C<UTF8 . '/utils/ascii.php'> contains utilities to detect
+whether a UTF-8 string contains just ASCII characters (allowing
+you to use PHP's faster, native, string functions) and also stripping
+everything non-ASCII from a string
+
+See L</"Performance and Optimization">
+
+=item * Basic transliteration
+
+The file C<UTF8 . '/utils/specials.php'> contains basic transliteration
+functionality (L<http://en.wikipedia.org/wiki/Transliteration>) - not
+much but enough to convert common European, non-ascii characters to
+a reasonable ASCII equivalent. You might use these when preparing a
+string for use as a filename, afterwhich you strip all other non-ascii
+characters using the ASCII utilities.
+
+Further transliteration is provided in the C<utf8_to_ascii> package
+at L<http://sourceforge.net/projects/phputf8>. Much more powerful
+functionality is provided by the pecl transliteration extension -
+L<http://derickrethans.nl/translit.php> and 
+L<http://pecl.php.net/package/translit>.
+
+See L</"Transliteration">
+
+=back
+
+=head1 String Functions
+
+There are seven essential functions provided by phputf8, which are
+required by many of the other functions. These are all loaded
+when you include the main C<utf8.php> script e.g.
+
+    require_once '/path/to/utf8/utf8.php';
+
+Six of these functions depend on whether the mbstring extension is
+installed (see L<http://www.php.net/mbstring>) - if it is available,
+the following functions will be wrappers around the equivalent
+mb_string functions;
+
+=over
+
+=item * C<utf8_strlen>
+
+=item * C<utf8_strpos>
+
+=item * C<utf8_strrpos>
+
+=item * C<utf8_substr>
+
+=item * C<utf8_strtolower>
+
+=item * C<utf8_strtoupper>
+
+=back
+
+B<Note:> phputf8 cannot support mbstring function overloading;
+it relies in some cases on PHP's native string functions
+counting characters as bytes.
+
+The seventh function is C<utf8_substr_replace>, which is
+implemented independent of mbstring (mbstring doesn't
+provide it).
+
+B<Important Note> - if you do not load C<utf8.php> and you wish
+to use the mbstring implementations, you need to set the mbstring
+encoding to UTF-8 yourself - see L<http://www.php.net/mb_internal_encoding>.
+
+=head2 Further string functions
+
+All other string functions must be included on demand. They are
+available directly under the C<UTF8> directory with filenames
+corresponding to the equivalent PHP string functions, but still
+with the function prefix C<utf8_>.
+
+For example, to load the strrev implementation;
+
+    # Load the main script
+    require_once '/path/to/utf8/utf8.php';
+    
+    # Load the UTF-8 aware strrev implementation
+    require_once UTF8 . '/strrev.php';
+    print utf8_strrev('Iñtërnâtiônàlizætiøn')."\n";
+
+All string implementations are found in the C<UTF8> directory.
+For documentation for each function, see the phpdocs
+L<http://phputf8.sourceforge.net/api>.
+
+B<TODO> Some of the functions, such as C<utf8_strcspn> take
+arguments like 'start' and 'length', requiring values in terms
+of I<characters> not bytes - i.e. return values from functions
+like C<utf8_strlen> and C<utf8_strpos>. Additional implementations
+would be useful which take byte indexes instead of character
+positions - this would allow further advantage to be taken of
+UTF-8's design and more use of PHP's native functions for performance.
+
+=head1 UTF-8 Validation and Cleaning
+
+It's important to understand that multi-byte UTF-8 characters can be
+badly formed. UTF-8 has rules regarding multi-byte characters and those
+rules can be broken. Some possible reasons why a sequence of bytes
+might be badly formed UTF-8;
+
+=over
+
+=item It's a different character encoding
+
+For example, 8 bit characters in ISO-8859-1 would be badly formed UTF-8.
+That said, characters declared as ISO-8859-1 but still within the ASCII-7
+range would still be valid UTF-8.
+
+=item It's a corrupted UTF-8 string
+
+Something has mangled the UTF-8 string (PHP's native strrev function,
+for example, would do this).
+
+=item Someone is injecting badly formed UTF-8 input deliberately.
+
+They might be attempting to "break" you RSS feed, for example.
+
+=back
+
+With that in mind, the functions provided in C<./utils/validation.php>
+and C<./utils/bad.php> are intend to help guard against such problems.
+
+=head2 Validation
+
+There are two functions in C<./utils/validation.php>, one "strict"
+and the other slightly more relaxed.
+
+The strict version is C<utf8_is_valid> - as well is checking each
+sequence, byte-by-byte, it also regards sequences which are not
+part of the Unicode standard as being invalid (UTF-8 allows for
+5 and 6 byte sequences but have no meaning in Unicode, and will
+result in browsers displaying "junk" characters (e.g. ? character).
+
+The second function C<utf8_compliant> relies of behaviour of
+PHP's PCRE extension, to spot invalid UTF-8 sequences. This
+function will pass 5 and 6 byte sequences but also performs
+much better than C<utf8_is_valid>.
+
+Both are simple to use;
+
+    require_once UTF8 . '/utils/validation.php';
+    if ( utf8_is_valid($str) ) {
+        print "Its valid\n";
+    }
+    if ( utf8_is_compliant($str) ) {
+        print "Its compliant\n";
+    }
+
+
+=head2 Cleaning UTF-8
+
+If you detect a UTF-8 encoded string contains badly formed
+sequences, functions in C<./utils/bad.php> can help. Be warned
+that performance on large strings will be an issue.
+
+It provides the following functitons;
+
+=over
+
+=item * C<utf8_bad_find>
+
+Locates the I<first> bad byte in a UTF-8 string, returning it's
+I<byte> (not chacacter) position in the string. You might use this
+for iterative cleaning or analysis of a UTF-8 string for example;
+
+    require_once UTF8 . '/utils/validation.php';
+    require_once UTF8 . '/utils/bad.php';
+    
+    $clean = '';
+    while ( FALSE !== ( $badIndex = utf8_bad_find($str) ) ) {
+        print "Bad byte found at $badIndex\n";
+        $clean .= substr($str,0,$badIndex);
+        $str = substr($str,$badIndex+1);
+    }
+    $clean .= $str;
+
+=item * C<utf8_bad_findall>
+
+The same as C<utf8_bad_find> but searches the complete string and
+returns the index of all bad bytes found in an array
+
+=item * C<utf8_bad_strip>
+
+Removes all bad bytes from a UTF-8 string, returning the cleaned string
+
+=item * C<utf8_bad_replace>
+
+Removes all bad bytes from a UTF-8 string and replaces them with some
+other character (default is ?)
+
+=item * C<utf8_bad_identify> and C<utf8_bad_explain>
+
+Together these two functions attempt to provide a reason why a
+particular byte is not valid UTF-8. Perhaps you might use these
+when logging errors.
+
+=back
+
+=head2 Warning on ASCII Control Characters
+
+The above functions for validating and cleaning UTF-8 strings
+all regard ASCII control characters as being valid and
+acceptable. But ASCII control chars are not acceptable in XML
+documents - use the C<utf8_strip_ascii_ctrl> function in
+C<./utils/ascii.php> (available v0.3+), which will remove
+all ASCII control characters that are illegal in XML.
+
+See L<http://hsivonen.iki.fi/producing-xml/#controlchar>.
+
+=head2 Strategy
+
+Because validation and cleaning UTF-8 strings comes with a pretty high
+cost, in terms of performance, you should be aiming to do this once
+only, at the point where you receive some input (e.g. a submitted form)
+before going on to using the rest of the string functions in this library.
+
+You should also be aware that validation and cleaning is your job -
+the utf8_* string functions I<assume> they are being given well formed
+UTF-8 to process, because the performance overhead of checking, every
+time you called C<utf8_strlen>, for example, would be very high.
+
+=head1 Performance and Optimization
+
+The first thing you I<shouldn't> be attempting to do is replace all use of PHP's
+native string functions with functions from this library. Doing so will have
+a dramatic (and bad) effect on your codes performance. It also misses opportunities
+you may have to continue using PHP's native string functions.
+
+There are two main areas to consider, when working out how to support UTF-8
+with this library and achieve optimal performance.
+
+=head2 When data is 99% ASCII
+
+First, if the majority of the data your application will be processing is 
+written in English, most of the time you will be able to use PHP's native
+string functions, only using the utf8_* string functions when you encounter
+multibyte characters. This has already been implied above in the example
+in the L</"SYNOPSIS">. Most characters used in English fall within the
+ASCII-7 range and ASCII characters in UTF-8 are no different to normal
+ASCII characters.
+
+So check whether a string is 100% ASCII first, and if so, use PHP's native
+string functions on it.
+
+    require_once '/path/to/utf8/utf8.php';
+    require_once UTF8 . '/utils/ascii.php';
+    
+    if ( utf8_is_ascii($string) ) {
+        # use native PHP string functions
+    } else {
+        # use utf8_* string functions
+    }
+
+=head2 Exploiting UTF-8's design
+
+Second, you may be able to exploit UTF-8's design to your advantage,
+depending on what I<exactly> you are doing to a string. This road
+requires more effort and a good understanding of UTF-8's design.
+
+As a starting point, you really need to examine the range table
+shown on Wikipedias page on UTF-8 L<http://en.wikipedia.org/wiki/UTF-8>.
+
+Some key points about UTF-8's design;
+
+=over
+
+=item UTF-8 is a superset of ASCII
+
+In other words ASCII-7 characters are encoded in exactly the same
+way as normal. These characters are those shown of the I<first>
+table L<http://www.lookuptables.com/> - the first 128 characters.
+
+Note that the second table shown at L<http://www.lookuptables.com/>
+"Extended ASCII characters" are not ASCII-7 characters are I<are>
+encoded differently in UTF-8 (probably using 2 bytes). Those
+characters seem to be ISO-8859-1 - occasionally you will seen
+people saying UTF-8 is backwards compatible with ISO-8859-1 - this
+is I<wrong>.
+
+One specific example which illustrates this;
+
+    $new_utf8_str = strstr('Iñtërnâtiônàlizætiøn','l');
+
+Using the "needle" character 'l' (in the ASCII-7 range), this
+example works without any problems, the variable C<$new_utf8_str>
+being assigned the value 'lizætiøn', even though the haystack
+string contains multibyte characters.
+
+Actually this example leads into the next point...
+
+=item Every character sequence is unique in UTF-8
+
+Assuming that a UTF-8 encoded string is well formed, any sequence
+in that string representing a single character (be it a single
+byte ASCII character or a multi byte character) cannot be mistaken
+is as a subsequence of a larger multi byte sequence.
+
+That means all of the following examples work;
+
+    # Pop off a piece of a string using multi-byte character
+    $new_utf8_str = strstr('Iñtërnâtiônàlizætiøn','ô');
+    
+    # Explode string using multibyte character
+    $array = explode('ô','Iñtërnâtiônàlizætiøn');
+    
+    # Using byte index instead of chacter index...
+    $haystack = 'Iñtërnâtiônàlizætiøn';
+    $needle = 'ô';
+    $pos = strpos($haystack, $needle);
+    print "Position in bytes is $pos<br>";
+    $substr = substr($haystack, 0, $pos);
+    print "Substr: $substr<br>";
+
+
+=back
+
+Put those together and often you will be able to use existing code
+with little or no modification.
+
+Often you will be able to continue working in bytes instead of
+logical characters (as the last example above shows).
+
+There are some functions which you I<will> always need to replace,
+for example C<strtoupper>. You should be able to get some idea of
+which these functions are by looking at
+L<http://www.phpwact.org/php/i18n/utf-8>.
+
+
+=head1 Transliteration
+
+Sometimes you will need to be able to remove all multi-byte
+characters from a UTF-8 string and use only ASCII. Some
+possible reasons why;
+
+=over
+
+=item Interfaces to systems with no support for UTF-8
+
+An application might be accessing data from your application
+but lack support for UTF-8. You may need to remove all non-
+ASCII-7 characters for it.
+
+=item Filenames
+
+Although most modern operating systems support Unicode, not
+all applications running under that OS may do so and you may
+be exposing yourself to security issues by allowing multi
+byte characters in filenames.
+
+=item Urls
+
+Similar issues to filenames - most modern browsers support
+the use of UTF-8 in URLs but doing so may not be a smart
+idea e.g. potential for phishing via the use of similar
+looking (to humans) characters.
+
+=item Primary Keys / Identifiers
+
+It is probably unwise to allow multi-byte UTF-8 characters into
+certain critical "fields" in your application, such as a username.
+Someone might be able to register a user with a similar looking
+name to an admin user - consider "admin" vs. "admın" < hard to
+spot the difference (note the ı character in the second example).
+
+=back
+
+=head2 Stripping multi byte characters
+
+To simply remove all multibyte characters, the C<./utils/ascii.php>
+collection of functions can help e.g.;
+
+    require_once '/path/to/utf8/utf8.php';
+    require_once UTF8 . '/utils/ascii.php';
+    $str = "admın";
+    print utf8_strip_non_ascii($str); // prints "admn"
+
+Not also the C<utf8_strip_non_ascii_ctrl> function which also -
+strips out ASCII control codes - see 
+L</"Warning on ASCII Control Characters"> for information on that
+topic.
+
+=head2 Transliteration Utilities
+
+Now simply throwing out characters is not kind to users. An
+alternative is transliteration, where you try to replace multi
+byte characters with equivalent ASCII characters that a human
+would understand. For example "Zürich" could be converted to
+"Zuerich", the multi byte "ü" character being replaced by "ue".
+
+See L<http://en.wikipedia.org/wiki/Transliteration> for a
+general introduction to transliteration.
+
+The main phputf8 package contains a single function in
+the C<./utils/ascii.php> script that does some (basic)
+replacements of accented characters common in languages
+like French. After using this function, you should still
+strip out all remaining multi-byte characters. For
+example;
+
+    require_once '/path/to/utf8/utf8.php';
+    require_once UTF8 . '/utils/ascii.php';
+    
+    $filename = utf8_accents_to_ascii($filename);
+    $filename = utf8_strip_non_ascii($filename);
+
+This will at least preserve I<some> characters in an
+ASCII form that will be understandable by users.
+
+Further an much more powerful transliteration 
+capabilities are provided in the seperate utf8_to_ascii
+package distributed at L<http://sourceforge.net/projects/phputf8>.
+Because it is a port of Perls' L<Text::Unidecode> package
+to PHP, it is distruted under the same license.
+
+A quick intro to utf8_to_ascii and be found at
+L<http://www.sitepoint.com/blogs/2006/03/03/us-ascii-transliterations-of-unicode-text/>
+
+Be warned that utf8_to_ascii does have limitations and a better
+choice, if you have rights to install it in your environemt, is
+Derick Rethans transliteration extension:
+L<http://pecl.php.net/package/translit>.
+
+
+=head1 SEE ALSO
+
+L<http://www.phpwact.org/php/i18n/charsets>,
+L<http://www.phpwact.org/php/i18n/utf-8>
+L<http://wiki.silverorange.com/UTF-8_Notes>
+L<http://svn.wikimedia.org/viewvc/mediawiki/trunk/phase3/includes/normal/> - Unicode normalization in PHP
+L<http://www.webtuesday.ch/_media/meetings/utf-8_survival.pdf>

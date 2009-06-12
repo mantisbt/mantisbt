@@ -1,0 +1,43 @@
+This is ApacheBench, Version 2.0.41-dev <$Revision: 1.1 $> apache-2.0
+Copyright (c) 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Copyright (c) 1998-2002 The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        Apache/2.0.54
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /~harryf/utf8/tests/bench/strpos.php?engine=native
+Document Length:        95 bytes
+
+Concurrency Level:      1
+Time taken for tests:   9.5046 seconds
+Complete requests:      1000
+Failed requests:        0
+Write errors:           0
+Total transferred:      319000 bytes
+HTML transferred:       95000 bytes
+Requests per second:    111.05 [#/sec] (mean)
+Time per request:       9.005 [ms] (mean)
+Time per request:       9.005 [ms] (mean, across all concurrent requests)
+Transfer rate:          34.54 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    8   5.4      6      46
+Waiting:        0    0   0.1      0       4
+Total:          6    8   5.4      6      46
+
+Percentage of the requests served within a certain time (ms)
+  50%      6
+  66%      6
+  75%      6
+  80%      6
+  90%     19
+  95%     20
+  98%     20
+  99%     22
+ 100%     46 (longest request)
