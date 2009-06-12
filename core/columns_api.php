@@ -127,7 +127,7 @@ function column_is_extended( $p_column ) {
  */
 function column_get_custom_field_name( $p_column ) {
 	if( strncmp( $p_column, 'custom_', 7 ) === 0 ) {
-		return substr( $p_column, 7 );
+		return utf8_substr( $p_column, 7 );
 	}
 
 	return null;
@@ -140,7 +140,7 @@ function column_get_custom_field_name( $p_column ) {
  * @access public
  */
 function columns_string_to_array( $p_string ) {
-	$t_string = strtolower( $p_string );
+	$t_string = utf8_strtolower( $p_string );
 
 	$t_columns = explode( ',', $t_string );
 	$t_count = count($t_columns);
@@ -219,7 +219,7 @@ function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns
 
 	# Check for invalid fields
 	foreach( $p_columns_to_validate as $t_column ) {
-		if( !in_array( strtolower( $t_column ), $t_columns_all_lower ) ) {
+		if( !in_array( utf8_strtolower( $t_column ), $t_columns_all_lower ) ) {
 			error_parameters( $p_field_name, $t_column );
 			trigger_error( ERROR_COLUMNS_INVALID, ERROR );
 			return false;
@@ -229,7 +229,7 @@ function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns
 	# Check for duplicate fields
 	$t_columns_no_duplicates = array();
 	foreach( $p_columns_to_validate as $t_column ) {
-		$t_column_lower = strtolower( $t_column );
+		$t_column_lower = utf8_strtolower( $t_column );
 		if( in_array( $t_column, $t_columns_no_duplicates ) ) {
 			error_parameters( $p_field_name, $t_column );
 			trigger_error( ERROR_COLUMNS_DUPLICATE, ERROR );
@@ -255,7 +255,7 @@ function columns_remove_invalid( $p_columns, $p_columns_all ) {
 	$t_columns = array();
 
 	foreach( $p_columns as $t_column ) {
-		if( in_array( strtolower( $t_column ), $t_columns_all_lower ) ) {
+		if( in_array( utf8_strtolower( $t_column ), $t_columns_all_lower ) ) {
 			$t_columns[] = $t_column;
 		}
 	}

@@ -742,7 +742,7 @@ function project_delete_all_files( $p_project_id ) {
 # Pads the project id with the appropriate number of zeros.
 function project_format_id( $p_project_id ) {
 	$t_padding = config_get( 'display_project_padding' );
-	return( str_pad( $p_project_id, $t_padding, '0', STR_PAD_LEFT ) );
+	return( utf8_str_pad( $p_project_id, $t_padding, '0', STR_PAD_LEFT ) );
 }
 
 

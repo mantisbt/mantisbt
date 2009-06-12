@@ -109,7 +109,7 @@
 	# add missing : in the O part of the date.  PHP 5 supports a 'c' format which will output the format
 	# exactly as we want it.
 	# // 2002-10-02T10:00:00-0500 -> // 2002-10-02T10:00:00-05:00
-	$base = substr( $base, 0, 22 ) . ':' . substr( $base, -2 );
+	$base = utf8_substr( $base, 0, 22 ) . ':' . utf8_substr( $base, -2 );
 
 	$rssfile->addSYdata( $period, $frequency, $base );
 

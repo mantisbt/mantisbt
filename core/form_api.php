@@ -137,7 +137,7 @@ function form_security_validate( $p_form_name ) {
 	# Check all stored security tokens
 	$t_valid = false;
 	foreach( $t_tokens[$p_form_name] as $t_token ) {
-		$t_token_date = substr( $t_token, 0, 8 );
+		$t_token_date = utf8_substr( $t_token, 0, 8 );
 
 		# Newer than three days, check for match
 		if( $t_date < $t_token_date && $t_token == $t_input ) {
@@ -180,7 +180,7 @@ function form_security_purge( $p_form_name ) {
 	$t_tokens_kept = array();
 	$t_valid = false;
 	foreach( $t_tokens[$p_form_name] as $t_token ) {
-		$t_token_date = substr( $t_token, 0, 8 );
+		$t_token_date = utf8_substr( $t_token, 0, 8 );
 
 		# Newer than three days, check for match, keep otherwise
 		if( $t_date < $t_token_date && $t_token != $t_input ) {

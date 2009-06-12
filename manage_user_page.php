@@ -35,7 +35,7 @@
 	$f_dir	= gpc_get_string( 'dir', 'ASC' );
 	$f_hide = gpc_get_bool( 'hide' );
 	$f_save = gpc_get_bool( 'save' );
-	$f_filter = strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
+	$f_filter = utf8_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
 	$f_page_number		= gpc_get_int( 'page_number', 1 );
 
 	$t_user_table = db_get_table( 'mantis_user_table' );

@@ -415,7 +415,7 @@ function config_can_set_in_database( $p_option ) {
 # ------------------
 # Checks if the specific configuration option can be deleted from the database.
 function config_can_delete( $p_option ) {
-	return( strtolower( $p_option ) != 'database_version' );
+	return( utf8_strtolower( $p_option ) != 'database_version' );
 }
 
 # ------------------

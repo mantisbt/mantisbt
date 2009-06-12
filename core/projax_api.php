@@ -57,7 +57,7 @@ function projax_array_filter_by_prefix( $p_array, $p_prefix ) {
 	$t_matches = array();
 
 	foreach( $p_array as $t_entry ) {
-		if( strtolower( substr( $t_entry, 0, strlen( $p_prefix ) ) ) == strtolower( $p_prefix ) ) {
+		if( utf8_strtolower( utf8_substr( $t_entry, 0, utf8_strlen( $p_prefix ) ) ) == utf8_strtolower( $p_prefix ) ) {
 			$t_matches[] = $t_entry;
 		}
 	}

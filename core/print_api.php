@@ -229,14 +229,14 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
 	foreach( $t_users as $t_user ) {
 		$t_user_name = string_attribute( $t_user['username'] );
-		$t_sort_name = strtolower( $t_user_name );
+		$t_sort_name = utf8_strtolower( $t_user_name );
 		if( $t_show_realname && ( $t_user['realname'] <> "" ) ) {
 			$t_user_name = string_attribute( $t_user['realname'] );
 			if( $t_sort_by_last_name ) {
-				$t_sort_name_bits = split( ' ', strtolower( $t_user_name ), 2 );
+				$t_sort_name_bits = split( ' ', utf8_strtolower( $t_user_name ), 2 );
 				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
 			} else {
-				$t_sort_name = strtolower( $t_user_name );
+				$t_sort_name = utf8_strtolower( $t_user_name );
 			}
 		}
 		$t_display[] = $t_user_name;
@@ -314,7 +314,7 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 	foreach ( $t_rows as $row ) {
 		$t_string = $row['name'];
 		if ( !empty( $row['description'] ) ) {
-			$t_string .= ' - ' . substr( $row['description'], 0, 20 );
+			$t_string .= ' - ' . utf8_substr( $row['description'], 0, 20 );
 		}
 		echo '<option value="', $row['id'], '" title="', $row['name'], '">', $t_string, '</option>';
 	}
@@ -1067,10 +1067,10 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 		if(( isset( $row['realname'] ) ) && ( $row['realname'] <> "" ) && $t_show_realname ) {
 			$t_user_name = string_attribute( $row['realname'] );
 			if( $t_sort_by_last_name ) {
-				$t_sort_name_bits = split( ' ', strtolower( $t_user_name ), 2 );
+				$t_sort_name_bits = split( ' ', utf8_strtolower( $t_user_name ), 2 );
 				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
 			} else {
-				$t_sort_name = strtolower( $t_user_name );
+				$t_sort_name = utf8_strtolower( $t_user_name );
 			}
 		}
 		$t_display[] = $t_user_name;
@@ -1576,7 +1576,7 @@ function print_sql_error( $p_query ) {
 function print_file_icon( $p_filename ) {
 	$t_file_type_icons = config_get( 'file_type_icons' );
 
-	$ext = strtolower( file_get_extension( $p_filename ) );
+	$ext = utf8_strtolower( file_get_extension( $p_filename ) );
 	if( !isset( $t_file_type_icons[$ext] ) ) {
 		$ext = '?';
 	}

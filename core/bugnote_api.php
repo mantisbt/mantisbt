@@ -551,7 +551,7 @@ function bugnote_set_view_state( $p_bugnote_id, $p_private ) {
 function bugnote_format_id( $p_bugnote_id ) {
 	$t_padding = config_get( 'display_bugnote_padding' );
 
-	return str_pad( $p_bugnote_id, $t_padding, '0', STR_PAD_LEFT );
+	return utf8_str_pad( $p_bugnote_id, $t_padding, '0', STR_PAD_LEFT );
 }
 
 /**

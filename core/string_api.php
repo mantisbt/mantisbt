@@ -37,22 +37,6 @@ require_once( $t_core_dir . 'user_pref_api.php' );
 $g_cache_html_valid_tags = '';
 $g_cache_html_valid_tags_single_line = '';
 
-/**
- * Return a string with all alphabetical characters converted to lowercase,
- * using an appropriate multibyte implementation as available to system.
- * @param string Input string
- * @return string Lower cased string
- */
-if ( function_exists( 'mb_strtolower' ) ) {
-	function string_lower( $p_string ) {
-			return mb_strtolower( $p_string );
-	}
-} else {
-	function string_lower( $p_string ) {
-			return strtolower( $p_string );
-	}
-}
-
 # ## --------------------
 # Preserve spaces at beginning of lines.
 # Lines must be separated by \n rather than <br />
@@ -63,7 +47,7 @@ function string_preserve_spaces_at_bol( $p_string ) {
 		$count = 0;
 		$prefix = '';
 
-		$t_char = substr( $lines[$i], $count, 1 );
+		$t_char = utf8_substr( $lines[$i], $count, 1 );
 		$spaces = 0;
 		while(( $t_char == ' ' ) || ( $t_char == "\t" ) ) {
 			if( $t_char == ' ' ) {
@@ -75,14 +59,14 @@ function string_preserve_spaces_at_bol( $p_string ) {
 			// 1 tab = 4 spaces, can be configurable.
 
 			$count++;
-			$t_char = substr( $lines[$i], $count, 1 );
+			$t_char = utf8_substr( $lines[$i], $count, 1 );
 		}
 
 		for( $j = 0;$j < $spaces;$j++ ) {
 			$prefix .= '&nbsp;';
 		}
 
-		$lines[$i] = $prefix . substr( $lines[$i], $count );
+		$lines[$i] = $prefix . utf8_substr( $lines[$i], $count );
 	}
 	return implode( "\n", $lines );
 }
@@ -680,7 +664,7 @@ function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 # $p_character - pattern to repeat
 # $p_repeats - number of times to repeat.
 function string_repeat_char( $p_character, $p_repeats ) {
-	return str_pad( '', $p_repeats, $p_character );
+	return utf8_str_pad( '', $p_repeats, $p_character );
 }
 
 # --------------------
@@ -700,16 +684,16 @@ function string_shorten( $p_string, $p_max = null ) {
 		$t_max = (int) $p_max;
 	}
 
-	if( ( $t_max > 0 ) && ( strlen( $p_string ) > $t_max ) ) {
+	if( ( $t_max > 0 ) && ( utf8_strlen( $p_string ) > $t_max ) ) {
 		$t_pattern = '/([\s|.|,|\-|_|\/|\?]+)/';
 		$t_bits = preg_split( $t_pattern, $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
 
 		$t_string = '';
 		$t_last = $t_bits[count( $t_bits ) - 1];
-		$t_last_len = strlen( $t_last );
+		$t_last_len = utf8_strlen( $t_last );
 
 		foreach( $t_bits as $t_bit ) {
-			if(( strlen( $t_string ) + strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
+			if(( utf8_strlen( $t_string ) + utf8_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
 				$t_string .= $t_bit;
 			} else {
 				break;
@@ -771,12 +755,12 @@ function string_prepare_header( $p_string ) {
 
 	$t_truncate_pos = strpos( $p_string, "\n" );
 	if( $t_truncate_pos !== false ) {
-		$t_string = substr( $t_string, 0, $t_truncate_pos );
+		$t_string = utf8_substr( $t_string, 0, $t_truncate_pos );
 	}
 
 	$t_truncate_pos = strpos( $p_string, "\r" );
 	if( $t_truncate_pos !== false ) {
-		$t_string = substr( $t_string, 0, $t_truncate_pos );
+		$t_string = utf8_substr( $t_string, 0, $t_truncate_pos );
 	}
 
 	return $t_string;

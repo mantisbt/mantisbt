@@ -28,7 +28,7 @@
 
 	$f_public_key = gpc_get_int( 'public_key' );
 
-	$t_key = strtolower( substr( md5( config_get( 'password_confirm_hash_magic_string' ) . $f_public_key ), 1, 5) );
+	$t_key = utf8_strtolower( utf8_substr( md5( config_get( 'password_confirm_hash_magic_string' ) . $f_public_key ), 1, 5) );
 	$t_system_font_folder = config_get( 'system_font_folder' );
 	$t_font_per_captcha = config_get( 'font_per_captcha' );
 
@@ -224,7 +224,7 @@
 				if($this->debug) echo "\n<br />-Captcha-Debug: Fill forground with chars and shadows: (".$this->chars.")";
 				for($i=0, $x = intval(rand($this->minsize,$this->maxsize)); $i < $this->chars; $i++)
 				{
-					$text	= strtoupper(substr($private_key, $i, 1));
+					$text	= utf8_strtoupper(substr($private_key, $i, 1));
 					srand((double)microtime()*1000000);
 					$angle	= intval(rand(($this->maxrotation * -1), $this->maxrotation));
 					srand((double)microtime()*1000000);

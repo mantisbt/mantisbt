@@ -1034,7 +1034,7 @@ function email_format_bug_message( $p_visible_bug_data ) {
 
 	# custom fields formatting
 	foreach( $p_visible_bug_data['custom_fields'] as $t_custom_field_name => $t_custom_field_data ) {
-		$t_message .= str_pad( lang_get_defaulted( $t_custom_field_name, null ) . ': ', $t_email_padding_length, ' ', STR_PAD_RIGHT );
+		$t_message .= utf8_str_pad( lang_get_defaulted( $t_custom_field_name, null ) . ': ', $t_email_padding_length, ' ', STR_PAD_RIGHT );
 		$t_message .= string_custom_field_value_for_email( $t_custom_field_data['value'], $t_custom_field_data['type'] );
 		$t_message .= " \n";
 	}
@@ -1117,14 +1117,14 @@ function email_format_bug_message( $p_visible_bug_data ) {
 	# format history
 	if( array_key_exists( 'history', $p_visible_bug_data ) ) {
 		$t_message .= lang_get( 'bug_history' ) . " \n";
-		$t_message .= str_pad( lang_get( 'date_modified' ), 17 ) . str_pad( lang_get( 'username' ), 15 ) . str_pad( lang_get( 'field' ), 25 ) . str_pad( lang_get( 'change' ), 20 ) . " \n";
+		$t_message .= utf8_str_pad( lang_get( 'date_modified' ), 17 ) . utf8_str_pad( lang_get( 'username' ), 15 ) . utf8_str_pad( lang_get( 'field' ), 25 ) . utf8_str_pad( lang_get( 'change' ), 20 ) . " \n";
 
 		$t_message .= $t_email_separator1 . " \n";
 
 		foreach( $p_visible_bug_data['history'] as $t_raw_history_item ) {
 			$t_localized_item = history_localize_item( $t_raw_history_item['field'], $t_raw_history_item['type'], $t_raw_history_item['old_value'], $t_raw_history_item['new_value'], false );
 
-			$t_message .= str_pad( date( $t_normal_date_format, $t_raw_history_item['date'] ), 17 ) . str_pad( $t_raw_history_item['username'], 15 ) . str_pad( $t_localized_item['note'], 25 ) . str_pad( $t_localized_item['change'], 20 ) . "\n";
+			$t_message .= utf8_str_pad( date( $t_normal_date_format, $t_raw_history_item['date'] ), 17 ) . utf8_str_pad( $t_raw_history_item['username'], 15 ) . utf8_str_pad( $t_localized_item['note'], 25 ) . utf8_str_pad( $t_localized_item['change'], 20 ) . "\n";
 		}
 		$t_message .= $t_email_separator1 . " \n\n";
 	}
@@ -1138,7 +1138,7 @@ function email_format_bug_message( $p_visible_bug_data ) {
 function email_format_attribute( $p_visible_bug_data, $attribute_id ) {
 
 	if( array_key_exists( $attribute_id, $p_visible_bug_data ) ) {
-		return str_pad( lang_get( $attribute_id ) . ': ', config_get( 'email_padding_length' ), ' ', STR_PAD_RIGHT ) . $p_visible_bug_data[$attribute_id] . "\n";
+		return utf8_str_pad( lang_get( $attribute_id ) . ': ', config_get( 'email_padding_length' ), ' ', STR_PAD_RIGHT ) . $p_visible_bug_data[$attribute_id] . "\n";
 	}
 	return '';
 }

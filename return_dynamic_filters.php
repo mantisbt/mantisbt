@@ -107,13 +107,13 @@
 			    header( 'Content-Type: text/html; charset=utf-8' );
 			}
 			$filter = $_GET['filter_target'];
-			$t_functionName = 'print_filter_'. substr($filter,0,-7);
+			$t_functionName = 'print_filter_'. utf8_substr($filter,0,-7);
 			echo "<!-- " . string_display_line( $filter ) . " -->";
 			if(function_exists($t_functionName)){
 				call_user_func($t_functionName);
-			}else if('custom_field' == substr($filter, 0, 12)){
+			}else if('custom_field' == utf8_substr($filter, 0, 12)){
 				# custom function
-				$t_custom_id = substr($filter, 13,-7);
+				$t_custom_id = utf8_substr($filter, 13,-7);
 				print_filter_custom_field($t_custom_id);
 			}else {
 				# error - no function to populate the target (e.g., print_filter_foo)

@@ -104,7 +104,7 @@
 	$t_custom_fields = array();
 	foreach( $_GET as $t_var_name => $t_var_value ) {
 		if ( strpos( $t_var_name, 'custom_field_' ) === 0 ) {
-			$t_custom_field_id = substr( $t_var_name, 13 );
+			$t_custom_field_id = utf8_substr( $t_var_name, 13 );
 			$t_custom_fields[$t_custom_field_id] = $t_var_value;
 		}
 	}

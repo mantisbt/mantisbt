@@ -47,7 +47,7 @@
 	$t_project_id = $t_row['project_id'];
 
 	# check for duplicate
-	if ( strtolower( $f_name ) != strtolower( $t_old_name ) ) {
+	if ( utf8_strtolower( $f_name ) != utf8_strtolower( $t_old_name ) ) {
 		category_ensure_unique( $t_project_id, $f_name );
 	}
 

@@ -279,7 +279,7 @@ class Graph {
 
 		# There are three different ways to generate the output depending
 		# on the operating system and PHP version.
-		if( 'WIN' == substr( PHP_OS, 0, 3 ) ) {
+		if( 'WIN' == utf8_substr( PHP_OS, 0, 3 ) ) {
 
 			# If we are under Windows, we use the COM interface provided
 			# by WinGraphviz. Thanks Paul!
@@ -324,7 +324,7 @@ class Graph {
 				$t_dot_output = $t_graphviz->ToTextGraph( $t_dot_source, $t_type );
 
 				if( $p_headers ) {
-					header( 'Content-Length: ' . strlen( $t_dot_output ) );
+					header( 'Content-Length: ' . utf8_strlen( $t_dot_output ) );
 				}
 
 				echo $t_dot_output;

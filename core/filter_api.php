@@ -408,8 +408,8 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 	if( !isset( $p_filter_arr['_version'] ) ) {
 		$p_filter_arr['_version'] = config_get( 'cookie_version' );
 	}
-	$t_cookie_vers = (int) substr( $p_filter_arr['_version'], 1 );
-	if( substr( config_get( 'cookie_version' ), 1 ) > $t_cookie_vers ) {
+	$t_cookie_vers = (int) utf8_substr( $p_filter_arr['_version'], 1 );
+	if( utf8_substr( config_get( 'cookie_version' ), 1 ) > $t_cookie_vers ) {
 
 		# if the version is old, update it
 		$p_filter_arr['_version'] = config_get( 'cookie_version' );
@@ -538,7 +538,7 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 			$t_drop = false;
 			$t_sort = $t_sort_fields[$i];
 			if( strpos( $t_sort, 'custom_' ) === 0 ) {
-				if( false === custom_field_get_id_from_name( substr( $t_sort, strlen( 'custom_' ) ) ) ) {
+				if( false === custom_field_get_id_from_name( utf8_substr( $t_sort, utf8_strlen( 'custom_' ) ) ) ) {
 					$t_drop = true;
 				}
 			} else {
@@ -841,7 +841,7 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 
 			# if sorting by a custom field
 			if( strpos( $c_sort, 'custom_' ) === 0 ) {
-				$t_custom_field = substr( $c_sort, strlen( 'custom_' ) );
+				$t_custom_field = utf8_substr( $c_sort, utf8_strlen( 'custom_' ) );
 				$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
 
 				$c_cf_alias = str_replace( ' ', '_', $t_custom_field );
@@ -3053,12 +3053,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				}
 				$t_sort = $t_sort_fields[$i];
 				if( strpos( $t_sort, 'custom_' ) === 0 ) {
-					$t_field_name = string_display( lang_get_defaulted( substr( $t_sort, strlen( 'custom_' ) ) ) );
+					$t_field_name = string_display( lang_get_defaulted( utf8_substr( $t_sort, utf8_strlen( 'custom_' ) ) ) );
 				} else {
 					$t_field_name = string_get_field_name( $t_sort );
 				}
 
-				echo $t_field_name . " " . lang_get( 'bugnote_order_' . strtolower( $t_dir_fields[$i] ) );
+				echo $t_field_name . " " . lang_get( 'bugnote_order_' . utf8_strtolower( $t_dir_fields[$i] ) );
 				echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_', $i, '" value="', $t_sort_fields[$i], '" />';
 				echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_DIRECTION, '_', $i, '" value="', $t_dir_fields[$i], '" />';
 			}
@@ -3745,7 +3745,7 @@ function print_filter_custom_field( $p_field_id ) {
 			if( is_array( $t_accessible_custom_fields_values[$j] ) ) {
 				$t_max_length = config_get( 'max_dropdown_length' );
 				foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
-					if(( strtolower( $t_item ) !== META_FILTER_ANY ) && ( strtolower( $t_item ) !== META_FILTER_NONE ) ) {
+					if(( utf8_strtolower( $t_item ) !== META_FILTER_ANY ) && ( utf8_strtolower( $t_item ) !== META_FILTER_NONE ) ) {
 						echo '<option value="' . string_html_entities( $t_item ) . '" ';
 						if( isset( $t_filter['custom_fields'][$p_field_id] ) ) {
 							check_selected( $t_filter['custom_fields'][$p_field_id], $t_item );
@@ -3773,7 +3773,7 @@ function print_filter_show_sort() {
 	for( $i = 0;$i < $t_n_fields;$i++ ) {
 		if( !in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
 			if( strpos( $t_fields[$i], 'custom_' ) === 0 ) {
-				$t_field_name = string_display( lang_get_defaulted( substr( $t_fields[$i], strlen( 'custom_' ) ) ) );
+				$t_field_name = string_display( lang_get_defaulted( utf8_substr( $t_fields[$i], utf8_strlen( 'custom_' ) ) ) );
 			} else {
 				$t_field_name = string_get_field_name( $t_fields[$i] );
 			}
@@ -4389,7 +4389,7 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
  * @return bool true when under max_length (64) and false when over
  */
 function filter_name_valid_length( $p_name ) {
-	if( strlen( utf8_decode ( $p_name ) ) > 64 ) {
+	if( utf8_strlen( utf8_decode ( $p_name ) ) > 64 ) {
 		return false;
 	} else {
 		return true;

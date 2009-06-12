@@ -177,7 +177,7 @@ $num_notes = count( $t_bugnotes );
 			switch ( $t_bugnote->note_type ) {
 				case REMINDER:
 					echo '<em>' . lang_get( 'reminder_sent_to' ) . ': ';
-					$t_note_attr = substr( $t_bugnote->note_attr, 1, strlen( $t_bugnote->note_attr ) - 2 );
+					$t_note_attr = utf8_substr( $t_bugnote->note_attr, 1, utf8_strlen( $t_bugnote->note_attr ) - 2 );
 					$t_to = array();
 					foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
 						$t_to[] = prepare_user_name( $t_recipient );

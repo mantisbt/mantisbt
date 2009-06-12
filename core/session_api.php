@@ -69,7 +69,7 @@ class MantisPHPSession extends MantisSession {
 
 		# Handle session cookie and caching
 		session_cache_limiter( 'private_no_expire' );
-		if ( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+		if ( isset( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
 			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), true );
 		} else {
 			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), false );
@@ -127,7 +127,7 @@ class MantisPHPSession extends MantisSession {
 function session_init( $p_session_id=null ) {
 	global $g_session, $g_session_handler;
 
-	switch( strtolower( $g_session_handler ) ) {
+	switch( utf8_strtolower( $g_session_handler ) ) {
 		case 'php':
 			$g_session = new MantisPHPSession( $p_session_id );
 			break;

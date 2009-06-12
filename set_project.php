@@ -60,8 +60,8 @@
 
 		# Check that referrer matches our address after squashing case (case insensitive compare)
 		$t_path = config_get( 'path' );
-		if ( strtolower( $t_path ) == strtolower( substr( $_SERVER['HTTP_REFERER'], 0, strlen( $t_path ) ) ) ) {
-			$t_referrer_page = substr( $_SERVER['HTTP_REFERER'], strlen( $t_path ) );
+		if ( utf8_strtolower( $t_path ) == utf8_strtolower( utf8_substr( $_SERVER['HTTP_REFERER'], 0, utf8_strlen( $t_path ) ) ) ) {
+			$t_referrer_page = utf8_substr( $_SERVER['HTTP_REFERER'], utf8_strlen( $t_path ) );
 			# if view_all_bug_page, pass on filter
 			if ( eregi( 'view_all_bug_page.php', $t_referrer_page ) ) {
 				$t_source_filter_id = filter_db_get_project_current( $f_project_id );

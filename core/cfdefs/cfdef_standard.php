@@ -164,7 +164,7 @@ function cfdef_prepare_list_database_to_value($p_value) {
 
 function cfdef_prepare_list_value_for_email($p_value) {
 	// strip start and end markers before converting markers to commas
-	return str_replace( '|', ', ', substr( str_replace( '||', '|', '|' . $p_value . '|' ), 1, -1 ) );
+	return str_replace( '|', ', ', utf8_substr( str_replace( '||', '|', '|' . $p_value . '|' ), 1, -1 ) );
 }
 
 function cfdef_prepare_email_value_for_email($p_value) {
@@ -191,12 +191,12 @@ function cfdef_prepare_date_default( $p_value ) {
 	}
 
 	$t_value = trim( $p_value );
-	$t_value_length = strlen( $t_value );
+	$t_value_length = utf8_strlen( $t_value );
 
 	# We are expanding {tomorrow}, {yesterday}, {+3 days}, {-7 days}, {next week}
 	# See strtotime() for more details about supported formats.
 	if ( $t_value_length >= 3 && $t_value[0] == '{' && $t_value[$t_value_length - 1] == '}' ) {
-		$t_value = substr( $t_value, 1, $t_value_length - 2 );
+		$t_value = utf8_substr( $t_value, 1, $t_value_length - 2 );
 		$t_value = @strtotime( $t_value );
 
 		# Different versions of PHP return different values in case of error.
@@ -211,7 +211,7 @@ function cfdef_prepare_date_default( $p_value ) {
 #string_custom_field_value
 function cfdef_prepare_list_value($p_value) {
 	// strip start and end markers before converting markers to commas
-	return str_replace( '|', ', ', substr( str_replace( '||', '|', '|' . $p_value . '|' ), 1, -1 ) );
+	return str_replace( '|', ', ', utf8_substr( str_replace( '||', '|', '|' . $p_value . '|' ), 1, -1 ) );
 }
 
 function cfdef_prepare_email_value($p_value) {

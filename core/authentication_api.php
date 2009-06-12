@@ -357,7 +357,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 
 			# Check for migration to another login method and test whether the password was encrypted
 			# with our previously insecure implemention of the CRYPT method
-			if(( $t_login_method != $t_configured_login_method ) || (( CRYPT == $t_configured_login_method ) && substr( $t_password, 0, 2 ) == substr( $p_test_password, 0, 2 ) ) ) {
+			if(( $t_login_method != $t_configured_login_method ) || (( CRYPT == $t_configured_login_method ) && utf8_substr( $t_password, 0, 2 ) == utf8_substr( $p_test_password, 0, 2 ) ) ) {
 				user_set_password( $p_user_id, $p_test_password, true );
 			}
 
@@ -407,7 +407,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 	}
 
 	# cut this off to PASSLEN cahracters which the largest possible string in the database
-	return substr( $t_processed_password, 0, PASSLEN );
+	return utf8_substr( $t_processed_password, 0, PASSLEN );
 }
 
 /**
@@ -421,7 +421,7 @@ function auth_generate_random_password( $p_email ) {
 	$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
 	$t_val = md5( $t_val );
 
-	return substr( $t_val, 0, 12 );
+	return utf8_substr( $t_val, 0, 12 );
 }
 
 /**
@@ -496,7 +496,7 @@ function auth_generate_cookie_string() {
 	$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
 	$t_val = md5( $t_val ) . md5( time() );
 
-	return substr( $t_val, 0, 64 );
+	return utf8_substr( $t_val, 0, 64 );
 }
 
 /**

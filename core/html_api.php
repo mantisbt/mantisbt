@@ -284,10 +284,10 @@ function html_content_type() {
 function html_title( $p_page_title = null ) {
 	$t_title = config_get( 'window_title' );
 	echo "\t", '<title>';
-	if( 0 == strlen( $p_page_title ) ) {
+	if( 0 == utf8_strlen( $p_page_title ) ) {
 		echo string_display( $t_title );
 	} else {
-		if( 0 == strlen( $t_title ) ) {
+		if( 0 == utf8_strlen( $t_title ) ) {
 			echo $p_page_title;
 		} else {
 			echo $p_page_title . ' - ' . string_display( $t_title );
@@ -1228,7 +1228,7 @@ function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = '
 		$p_fields = array();
 	}
 
-	if( strtolower( $p_method ) == 'get' ) {
+	if( utf8_strtolower( $p_method ) == 'get' ) {
 		$t_method = 'get';
 	} else {
 		$t_method = 'post';

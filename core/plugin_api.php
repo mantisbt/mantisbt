@@ -435,7 +435,7 @@ function plugin_dependency( $p_basename, $p_required, $p_initialized = false ) {
 		# check for a less-than version requirement
 		$t_ltpos = strpos( $t_required, '<' );
 		if( $t_ltpos !== false ) {
-			$t_required = substr( $t_required, $t_ltpos + 1 );
+			$t_required = utf8_substr( $t_required, $t_ltpos + 1 );
 			$t_maximum = true;
 		}
 

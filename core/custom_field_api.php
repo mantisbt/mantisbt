@@ -788,7 +788,7 @@ function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = nul
 
 	$c_field_name = db_prepare_string( $p_field_name );
 
-	if(( null === $p_truncated_length ) || ( strlen( $c_field_name ) != $p_truncated_length ) ) {
+	if(( null === $p_truncated_length ) || ( utf8_strlen( $c_field_name ) != $p_truncated_length ) ) {
 		$query = "SELECT id FROM $t_custom_field_table WHERE name = '$c_field_name'";
 	} else {
 		/** @todo This is to handle the case where we only have a truncated part of the name.  This happens in the case where
@@ -1161,7 +1161,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
 	$t_default_value = $row['default_value'];
 
 	$t_valid = true;
-	$t_length = strlen( $p_value );
+	$t_length = utf8_strlen( $p_value );
 	switch ($t_type) {
 		case CUSTOM_FIELD_TYPE_STRING:
 			// validate against regexp
@@ -1207,7 +1207,7 @@ function custom_field_prepare_possible_values( $p_possible_values ) {
 	$t_possible_values = $p_possible_values;
 
 	if( !is_blank( $t_possible_values ) && ( $t_possible_values[0] == '=' ) ) {
-		$t_possible_values = helper_call_custom_function( 'enum_' . substr( $t_possible_values, 1 ), array() );
+		$t_possible_values = helper_call_custom_function( 'enum_' . utf8_substr( $t_possible_values, 1 ), array() );
 	}
 
 	return $t_possible_values;

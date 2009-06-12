@@ -95,7 +95,7 @@
 	header( 'Content-Length: ' . $v_filesize );
 	$t_filename = file_get_display_name( $v_filename );
 	$t_inline_files = explode(',', config_get('inline_file_exts', 'gif'));
-	if ( in_array( strtolower( file_get_extension($t_filename) ), $t_inline_files ) ) {
+	if ( in_array( utf8_strtolower( file_get_extension($t_filename) ), $t_inline_files ) ) {
 		$t_disposition = ''; //'inline;';
 	} else {
 		$t_disposition = ' attachment;';
@@ -109,7 +109,7 @@
 	# attached files via HTTPS, we disable the "Pragma: no-cache"
 	# command when IE is used over HTTPS.
 	global $g_allow_file_cache;
-	if ( ( isset( $_SERVER["HTTPS"] ) && ( "on" == strtolower( $_SERVER["HTTPS"] ) ) ) && preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
+	if ( ( isset( $_SERVER["HTTPS"] ) && ( "on" == utf8_strtolower( $_SERVER["HTTPS"] ) ) ) && preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
 		# Suppress "Pragma: no-cache" header.
 	} else {
 		if ( !isset( $g_allow_file_cache ) ) {

@@ -284,7 +284,7 @@ function user_ensure_realname_valid( $p_realname ) {
 function user_is_name_valid( $p_username ) {
 
 	# The DB field is hard-coded. USERLEN should not be modified.
-	if( strlen( $p_username ) > USERLEN ) {
+	if( utf8_strlen( $p_username ) > USERLEN ) {
 		return false;
 	}
 
@@ -767,7 +767,7 @@ function user_get_name( $p_user_id ) {
 * @return array|bool an array( URL, width, height ) or false when the given user has no avatar
 */
 function user_get_avatar( $p_user_id, $p_size = 80 ) {
-	$t_email = strtolower( user_get_email( $p_user_id ) );
+	$t_email = utf8_strtolower( user_get_email( $p_user_id ) );
 	if( is_blank( $t_email ) ) {
 		$t_result = false;
 	} else {
@@ -775,7 +775,7 @@ function user_get_avatar( $p_user_id, $p_size = 80 ) {
 		$t_size = $p_size;
 
 		$t_use_ssl = false;
-		if( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+		if( isset( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
 			$t_use_ssl = true;
 		}
 

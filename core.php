@@ -104,6 +104,10 @@ set_include_path( implode( PATH_SEPARATOR, $path ) );
  */
 unset($mantisRoot, $mantisLibrary, $mantisCore, $path);
 
+# load UTF8-capable string functions
+require_once( 'utf8/utf8.php' );
+require_once( UTF8 . '/str_pad.php' );
+
 # Include compatibility file before anything else
 require_once( 'php_api.php' );
 

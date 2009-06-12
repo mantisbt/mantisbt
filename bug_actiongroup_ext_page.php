@@ -44,7 +44,7 @@
 		print_header_redirect( 'view_all_bug_page.php' );
   }
 
-	$t_external_action = strtolower( substr( $f_action, strlen( $t_external_action_prefix ) ) );
+	$t_external_action = utf8_strtolower( utf8_substr( $f_action, utf8_strlen( $t_external_action_prefix ) ) );
 	$t_form_fields_page = 'bug_actiongroup_' . $t_external_action . '_inc.php';
 	$t_form_name = 'bug_actiongroup_' . $t_external_action;
 
