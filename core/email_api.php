@@ -247,6 +247,20 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		}
 	}
 
+	# add users as specified by plugins
+	$t_recipients_include_data = event_signal( 'EVENT_NOTIFY_USER_INCLUDE', array( $p_bug_id, $p_notify_type ) );
+	foreach( $t_recipients_include_data as $t_plugin => $t_recipients_include_data2 ) {
+		foreach( $t_recipients_include_data2 as $t_callback => $t_recipients_included ) {
+			# only handle if we get an array from the callback
+			if ( is_array( $t_recipients_included ) ) {
+				foreach( $t_recipients_included as $t_user_id ) {
+					$t_recipients[ $t_user_id ] = true;
+					log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, %s plugin added user @U%d', $p_bug_id, $t_plugin, $t_user_id ) );
+				}
+			}
+		}
+	}
+
 	# set up to eliminate unwanted users
 	#  get list of status values that are not covered specifically in the prefs
 	#  These are handled by email_on_status generically
@@ -316,6 +330,24 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 				log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (access level)', $p_bug_id, $t_id ) );
 				continue;
 			}
+		}
+
+		# check to exclude users as specified by plugins
+		$t_recipient_exclude_data = event_signal( 'EVENT_NOTIFY_USER_EXCLUDE', array( $p_bug_id, $p_notify_type, $t_id ) );
+		$t_exclude = false;
+		foreach( $t_recipient_exclude_data as $t_plugin => $t_recipient_exclude_data2 ) {
+			foreach( $t_recipient_exclude_data2 as $t_callback => $t_recipient_excluded ) {
+				# exclude if any plugin returns true (excludes the user)
+				if ( $t_recipient_excluded ) {
+					$t_exclude = true;
+					log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, %s plugin dropped user @U%d', $p_bug_id, $t_plugin, $t_id ) );
+				}
+			}
+		}
+
+		# user was excluded by a plugin
+		if ( $t_exclude ) {
+			continue;
 		}
 
 		# Finally, let's get their emails, if they've set one

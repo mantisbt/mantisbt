@@ -36,6 +36,11 @@
 	$f_cookie_error	= gpc_get_bool( 'cookie_error' );
 	$f_return		= gpc_get_string( 'return', '' );
 	$f_username     = gpc_get_string( 'username', '' );
+	$f_perm_login	= gpc_get_bool( 'perm_login', false );
+	$f_secure_session = gpc_get_bool( 'secure_session', false );
+	$f_secure_session_cookie = gpc_get_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', null );
+
+	$t_session_validation = ( ON == config_get_global( 'session_validation' ) );
 
 	# Check for automatic logon methods where we want the logon to just be handled by login.php
 	if ( auth_automatic_logon_bypass_form() ) {
@@ -72,6 +77,18 @@
 		echo lang_get( 'login_cookies_disabled' ) . '<br />';
 	}
 
+	# Determine if secure_session should default on or off?
+	# - If no errors, and no cookies set, default to on.
+	# - If no errors, but cookie is set, use the cookie value.
+	# - If errors, use the value passed in.
+	if ( $t_session_validation ) {
+		if ( !$f_error && !$f_cookie_error ) {
+			$t_default_secure_session = ( is_null( $f_secure_session_cookie ) ? true : $f_secure_session_cookie );
+		} else {
+			$t_default_secure_session = $f_secure_session;
+		}
+	}
+
 	echo '</div>';
 ?>
 
@@ -99,11 +116,11 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category" width="25%">
+	<td class="category">
 		<?php echo lang_get( 'username' ) ?>
 	</td>
-	<td width="75%">
-		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $f_username ); ?>" />
+	<td>
+		<input type="text" name="username" size="28" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $f_username ); ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -119,9 +136,20 @@
 		<?php echo lang_get( 'save_login' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="perm_login" />
+	<input type="checkbox" name="perm_login" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?>/>
 	</td>
 </tr>
+<?php if ( $t_session_validation ) { ?>
+<tr class="row-2">
+	<td class="category">
+		<?php echo lang_get( 'secure_session' ) ?>
+	</td>
+	<td>
+	<input type="checkbox" name="secure_session" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?>/>
+	<?php echo lang_get( 'secure_session_long' ) ?>
+	</td>
+</tr>
+<?php } ?>
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" class="button" value="<?php echo lang_get( 'login_button' ) ?>" />
