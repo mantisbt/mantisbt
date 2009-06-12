@@ -785,7 +785,7 @@ function plugin_init_installed() {
 		$t_plugins = $t_plugins_retry;
 		$t_passes++;
 	}
-	while( $t_passes < count( $t_plugins ) );
+	while( $t_passes <= count( $t_plugins ) );
 
 	event_signal( 'EVENT_PLUGIN_INIT' );
 }
