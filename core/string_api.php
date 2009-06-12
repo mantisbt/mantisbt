@@ -489,9 +489,9 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
 		$tags = ( $p_multiline ? $g_cache_html_valid_tags : $g_cache_html_valid_tags_single_line );
 	}
 
-	$p_string = eregi_replace( '&lt;(' . $tags . ')[[:space:]]*&gt;', '<\\1>', $p_string );
-	$p_string = eregi_replace( '&lt;\/(' . $tags . ')[[:space:]]*&gt;', '</\\1>', $p_string );
-	$p_string = eregi_replace( '&lt;(' . $tags . ')[[:space:]]*\/&gt;', '<\\1 />', $p_string );
+	$p_string = preg_replace( '/&lt;(' . $tags . ')\s*&gt;/ui', '<\\1>', $p_string );
+	$p_string = preg_replace( '/&lt;\/(' . $tags . ')\s*&gt;/ui', '</\\1>', $p_string );
+	$p_string = preg_replace( '/&lt;(' . $tags . ')\s*\/&gt;/ui', '<\\1 />', $p_string );
 
 	return $p_string;
 }
