@@ -97,7 +97,7 @@ class ADODB_oci8 extends ADOConnection {
 	}
 	
 	/*  function MetaColumns($table) added by smondino@users.sourceforge.net*/
-	function MetaColumns($table) 
+	function MetaColumns($table, $normalize=true) 
 	{
 	global $ADODB_FETCH_MODE;
 	

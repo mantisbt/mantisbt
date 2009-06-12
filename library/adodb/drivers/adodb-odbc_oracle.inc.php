@@ -50,7 +50,7 @@ class  ADODB_odbc_oracle extends ADODB_odbc {
 		return $arr2;
 	}
 	
-	function MetaColumns($table) 
+	function MetaColumns($table, $normalize=true) 
 	{
 	global $ADODB_FETCH_MODE;
 	

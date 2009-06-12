@@ -72,7 +72,7 @@ class ADODB_csv extends ADOConnection {
 		return true;
 	}
 	
- 	function MetaColumns($table) 
+ 	function MetaColumns($table, $normalize=true) 
 	{
 		return false;
 	}

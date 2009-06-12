@@ -441,7 +441,7 @@ class ADODB_pdo_base extends ADODB_pdo {
 		return false;
 	}
 	
-	function MetaColumns()
+	function MetaColumns($table,$normalize=true)
 	{
 		return false;
 	}

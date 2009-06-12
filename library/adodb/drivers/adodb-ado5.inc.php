@@ -194,7 +194,7 @@ class ADODB_ado extends ADOConnection {
 		return $arr;
 	}
 	
-	function MetaColumns($table)
+	function MetaColumns($table, $normalize=true)
 	{
 		$table = strtoupper($table);
 		$arr= array();
