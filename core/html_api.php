@@ -284,10 +284,10 @@ function html_content_type() {
 function html_title( $p_page_title = null ) {
 	$t_title = config_get( 'window_title' );
 	echo "\t", '<title>';
-	if( 0 == strlen( $p_page_title ) ) {
+	if( empty( $p_page_title ) ) {
 		echo string_display( $t_title );
 	} else {
-		if( 0 == strlen( $t_title ) ) {
+		if( empty( $t_title ) ) {
 			echo $p_page_title;
 		} else {
 			echo $p_page_title . ' - ' . string_display( $t_title );
