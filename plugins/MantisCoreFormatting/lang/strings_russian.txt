@@ -16,7 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT. If not, see <http://www.gnu.org/licenses/>.
 
-$s_plugin_format_title = 'MantisBT Formatting';
 $s_plugin_format_description = 'Официальный плагин для обработки и форматирования текста.';
 
 $s_plugin_format_config = 'настройка';
