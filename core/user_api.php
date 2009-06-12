@@ -425,7 +425,9 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 # --------------------
 # Create a user.
 # returns false if error, the generated cookie string if ok
-function user_create( $p_username, $p_password, $p_email = '', $p_access_level = null, $p_protected = false, $p_enabled = true, $p_realname = '' ) {
+function user_create( $p_username, $p_password, $p_email = '',
+	$p_access_level = null, $p_protected = false, $p_enabled = true,
+	$p_realname = '', $p_admin_name = '' ) {
 	if( null === $p_access_level ) {
 		$p_access_level = config_get( 'default_new_account_access_level' );
 	}
@@ -466,7 +468,7 @@ function user_create( $p_username, $p_password, $p_email = '', $p_access_level =
 	# Send notification email
 	if( !is_blank( $p_email ) ) {
 		$t_confirm_hash = auth_generate_confirm_hash( $t_user_id );
-		email_signup( $t_user_id, $p_password, $t_confirm_hash );
+		email_signup( $t_user_id, $p_password, $t_confirm_hash, $p_admin_name );
 	}
 
 	return $t_cookie_string;

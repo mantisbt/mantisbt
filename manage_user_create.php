@@ -83,7 +83,8 @@
 	lang_push( config_get( 'default_language' ) );
 
 	# create the user
-	$t_cookie = user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled, $t_realname );
+	$t_admin_name = user_get_name( auth_get_current_user_id() );
+	$t_cookie = user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled, $t_realname, $t_admin_name );
 
 	# set language back to user language
 	lang_push( $user_language );
