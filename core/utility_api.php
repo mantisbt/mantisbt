@@ -110,11 +110,11 @@ function ini_get_bool( $p_name ) {
  */
 function ini_get_number( $p_name ) {
 	$t_result = ini_get( $p_name );
-	$t_val = spliti( 'M', $t_result );
+	$t_val = explode( 'm', strtolower( $t_result ) );
 	if( $t_val[0] != $t_result ) {
 		return $t_val[0] * 1000000;
 	}
-	$t_val = spliti( 'K', $t_result );
+	$t_val = explode( 'k', strtolower( $t_result ) );
 	if( $t_val[0] != $t_result ) {
 		return $t_val[0] * 1000;
 	}
