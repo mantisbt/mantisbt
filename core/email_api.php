@@ -726,7 +726,7 @@ function email_send( $p_email_data ) {
 		if( !class_exists( 'PHPMailer' ) ) {
 			require_once( BASE_PATH . DIRECTORY_SEPARATOR  . 'library' . DIRECTORY_SEPARATOR . 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
 		}
-		$mail = new PHPMailer;
+		$mail = new PHPMailer(true);
 	} else {
 		$mail = $g_phpMailer;
 	}
@@ -785,9 +785,27 @@ function email_send( $p_email_data ) {
 
 	if( OFF !== $t_debug_email ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;
-		$mail->AddAddress( $t_debug_email, '' );
+		try {
+			$mail->AddAddress( $t_debug_email, '' );
+		} catch ( phpmailerException $e ) {
+			$t_success = false;
+			$mail->ClearAllRecipients();
+			$mail->ClearAttachments();
+			$mail->ClearReplyTos();
+			$mail->ClearCustomHeaders();
+			return $t_success;
+		}
 	} else {
-		$mail->AddAddress( $t_recipient, '' );
+		try {
+			$mail->AddAddress( $t_recipient, '' );
+		} catch ( phpmailerException $e ) {
+			$t_success = false;
+			$mail->ClearAllRecipients();
+			$mail->ClearAttachments();
+			$mail->ClearReplyTos();
+			$mail->ClearCustomHeaders();
+			return $t_success;
+		}
 	}
 
 	$mail->Subject = $t_subject;
