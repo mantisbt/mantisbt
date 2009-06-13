@@ -132,8 +132,8 @@ function checkfile( $p_path, $p_file ) {
 			print_error( "FAILED: Language file '$p_file' failed at eval" );
 		}
 
-		if( strlen( $data ) > 0 ) {
-			print_error( "FAILED: Language file '$p_file' failed at require_once (data output of length " . strlen( $data ) . ")" );
+		if( !empty( $data ) ) {
+			print_error( "FAILED: Language file '$p_file' failed at require_once (data output: " . var_export( $data, true ) . ")" );
 		}
 }
 
