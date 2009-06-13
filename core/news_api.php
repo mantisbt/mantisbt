@@ -182,7 +182,7 @@ function news_get_count( $p_project_id, $p_sitewide = true ) {
 		$query .= ' OR project_id=' . ALL_PROJECTS;
 	}
 
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 
 	return db_result( $result, 0, 0 );
 }

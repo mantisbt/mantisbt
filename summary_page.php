@@ -48,11 +48,11 @@
 	#  will look up the most recent 'resolved' status change and return it as well
 	$query = "SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status
         FROM $t_bug_table b LEFT JOIN $t_history_table h
-            ON b.id = h.bug_id  AND h.type=0 AND h.field_name='status' AND h.new_value='$t_resolved'
-            WHERE b.status >='$t_resolved' AND $specific_where
+            ON b.id = h.bug_id  AND h.type=0 AND h.field_name='status' AND h.new_value=" . db_param() . "
+            WHERE b.status >=" . db_param() . " AND $specific_where
             GROUP BY b.id, b.status, b.date_submitted, b.last_updated
             ORDER BY b.id ASC";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $t_resolved, $t_resolved ) );
 	$bug_count = db_num_rows( $result );
 
 	$t_bug_id       = 0;

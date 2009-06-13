@@ -300,11 +300,11 @@ function summary_print_by_activity() {
 	$query = "SELECT COUNT(h.id) as count, b.id, b.summary, b.view_state
 				FROM $t_mantis_bug_table AS b, $t_mantis_history_table AS h
 				WHERE h.bug_id = b.id
-				AND b.status < $t_resolved
+				AND b.status < " . db_param() . "
 				AND $specific_where
 				GROUP BY h.bug_id, b.id, b.summary, b.last_updated, b.view_state
 				ORDER BY count DESC, b.last_updated DESC";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $t_resolved ) );
 
 	$t_count = 0;
 	$t_private_bug_threshold = config_get( 'private_bug_threshold' );
@@ -780,7 +780,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 				WHERE $specific_where
 				GROUP BY handler_id, resolution
 				ORDER BY handler_id, resolution";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 
 	$t_handler_res_arr = array();
 	$t_arr = db_fetch_array( $result );
@@ -884,7 +884,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 				FROM $t_mantis_bug_table
 				WHERE $specific_where
 				GROUP BY reporter_id, resolution";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 
 	$t_reporter_res_arr = array();
 	$t_reporter_bugcount_arr = array();
@@ -1016,7 +1016,7 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 				FROM $t_mantis_bug_table
 				WHERE $specific_where
 				GROUP BY reporter_id, resolution, severity";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 
 	$t_reporter_ressev_arr = array();
 	$t_reporter_bugcount_arr = array();

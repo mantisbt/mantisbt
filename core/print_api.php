@@ -818,7 +818,7 @@ function print_build_option_list( $p_build = '' ) {
 				FROM $t_bug_table
 				WHERE $t_project_where
 				ORDER BY build DESC";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 	$option_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $option_count;$i++ ) {
@@ -1055,7 +1055,7 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 					u.enabled = " . db_param() . " AND
 					p.user_id IS NULL
 				ORDER BY u.realname, u.username";
-	$result = db_query( $query, Array( $c_project_id, $t_adm, true ) );
+	$result = db_query_bound( $query, Array( $c_project_id, $t_adm, true ) );
 	$t_display = array();
 	$t_sort = array();
 	$t_users = array();

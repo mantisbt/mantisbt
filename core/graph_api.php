@@ -450,7 +450,7 @@ function create_developer_summary() {
 	$query = "SELECT handler_id, status
 				 FROM $t_bug_table
 				 WHERE handler_id > 0 $specific_where";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 	$t_total_handled = db_num_rows( $result );
 
 	$t_handler_arr = array();
@@ -506,7 +506,7 @@ function create_reporter_summary() {
 	$query = "SELECT reporter_id
 				 FROM $t_bug_table
 				 WHERE $specific_where";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 	$t_total_reported = db_num_rows( $result );
 
 	$t_reporter_arr = array();
@@ -551,7 +551,7 @@ function create_category_summary() {
 				FROM $t_cat_table
 				WHERE $specific_where
 				ORDER BY name";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 	$category_count = db_num_rows( $result );
 
 	$t_metrics = array();
@@ -561,8 +561,8 @@ function create_category_summary() {
 		$t_cat_id = $row['id'];
 		$query = "SELECT COUNT(*)
 					FROM $t_bug_table
-					WHERE category_id='$t_cat_id' AND $specific_where";
-		$result2 = db_query( $query );
+					WHERE category_id= AND $specific_where";
+		$result2 = db_query_bound( $query, Array( $t_cat_id ) );
 		$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + db_result( $result2, 0, 0 );
 	}
 
@@ -608,7 +608,7 @@ function create_cumulative_bydate() {
 				FROM $t_bug_table
 				WHERE $specific_where
 				ORDER BY date_submitted";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 	$bug_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $bug_count;$i++ ) {

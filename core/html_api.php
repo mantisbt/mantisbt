@@ -1185,7 +1185,7 @@ function html_status_percentage_legend() {
 				FROM $t_mantis_bug_table
 				WHERE $t_specific_where
 				GROUP BY status";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 
 	$t_bug_count = 0;
 	$t_status_count_array = array();

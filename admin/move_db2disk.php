@@ -138,9 +138,9 @@ function upgrade_move_att2disk( $p_source ) {
 				/** @todo do we want to check the size of data transfer matches here? */
 				$c_file_path = db_prepare_string( $t_file_path );
 				$c_new_file_name = db_prepare_string( $t_file_path . $c_filename );
-				$query2 = "UPDATE $t_file_table SET diskfile = '$c_new_file_name',
-						folder = '$c_file_path', content = '' WHERE id = " . $t_row['id'];
-				$update = @db_query( $query2 );
+				$query2 = "UPDATE $t_file_table SET diskfile = " . db_param() . ",
+						folder = " . db_param() . ", content = '' WHERE id = " . db_param();
+				$update = @db_query_bound( $query2, Array( $c_new_file_name, $c_file_path, $t_row['id'] ) );
 				if( !$update ) {
 					echo 'database update failed';
 					$t_failures++;
