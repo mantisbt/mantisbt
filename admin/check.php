@@ -232,7 +232,6 @@ function test_database_utf8() {
 }
 
 
-	require_once( 'obsolete.php' );
 
 	html_page_top( 'MantisBT Administration - Check Installation' );
 
@@ -243,6 +242,8 @@ function test_database_utf8() {
 </tr>
 
 <?php 
+
+	require_once( 'obsolete.php' );
 
 print_test_row( 'MantisBT requires at least <b>PHP ' . PHP_MIN_VERSION . '</b>. You are running <b>PHP ' . phpversion(), $result = version_compare( phpversion(), PHP_MIN_VERSION, '>=' ) );
 
@@ -330,24 +331,24 @@ print_test_row( 'Phpmailer sendmail configuration requires escapeshellarg. Pleas
 
 check_zend_optimiser_version();
 
-if( ON == config_get_global( 'use_jpgraph' ) ) {
-	$t_jpgraph_path = config_get_global( 'jpgraph_path' );
+if( plugin_is_installed( 'MantisGraph' ) ) {
+	plugin_push_current( 'MantisGraph' );
 
-	if( !file_exists( $t_jpgraph_path ) ) {
-		$t_jpgraph_path = '..' . DIRECTORY_SEPARATOR . $t_jpgraph_path;
+	print_test_row( 'checking gd is enabled, and version 2...', get_gd_version() == 2 );
+	if ( plugin_config_get( 'eczlibrary' ) == OFF ) {
+		$t_jpgraph_path = BASE_PATH . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'jpgraph' . DIRECTORY_SEPARATOR;
+
+		if( !file_exists( $t_jpgraph_path . 'jpgraph.php') ) {
+			print_test_row( 'checking we can find jpgraph class files...', false );
+		} else {
+			require_once( $t_jpgraph_path . 'jpgraph.php' );
+			print_test_row( 'Checking Jpgraph version (if installed)...', version_compare(JPG_VERSION, '2.3.0') ? true : false, JPG_VERSION );
+		}
+
+		print_test_row( 'check configuration: jpgraph (if used) requires php bundled gd for antialiasing support',
+			( plugin_config_get( 'jpgraph_antialias' ) == OFF || function_exists('imageantialias') ) );
 	}
-
-	if( !file_exists( $t_jpgraph_path . 'jpgraph.php') ) {
-		print_test_row( 'checking we can find jpgraph class files...', false );
-	} else {
-		require_once( $t_jpgraph_path . 'jpgraph.php' );
-
-		print_test_row( 'Checking Jpgraph version (if installed)...', version_compare(JPG_VERSION, '2.3.0') ? true : false, JPG_VERSION );
-	}
-
-	print_test_row( 'check configuration: jpgraph (if used) requires php bundled gd for antialiasing support',
-		( config_get_global( 'jpgraph_antialias' ) == OFF || function_exists('imageantialias') ) );
-
+	plugin_pop_current();
 }
 
 print_test_row( 'Checking if ctype is enabled in php (required for rss feeds)....', extension_loaded('ctype') );

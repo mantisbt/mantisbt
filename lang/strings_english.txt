@@ -1550,7 +1550,7 @@ $s_show_as_graph = 'Show as Graph';
 $s_show_as_table = 'Show as Table';
 $s_show_graph = 'Show Graph';
 $s_graph_page = 'Graph Issue History';
-$s_graph_bug_page_link = 'Graph';
+
 
 # manage columns page
 $s_manage_columns_config = 'Manage Columns';

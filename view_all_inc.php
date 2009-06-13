@@ -130,12 +130,6 @@
 				# -- Print and Export links --
 				print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
 				echo '&nbsp;';
-
-				if ( ON == config_get( 'use_jpgraph' ) ) {
-				    print_bracket_link( 'bug_graph_page.php', lang_get( 'graph_bug_page_link' ) );
-				    echo '&nbsp;';
-				}
-
 				print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
 				echo '&nbsp;';
 				print_bracket_link( 'excel_xml_export.php', lang_get( 'excel_export' ) );

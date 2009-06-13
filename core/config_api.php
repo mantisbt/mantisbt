@@ -512,18 +512,18 @@ function config_obsolete( $p_var, $p_replace ) {
 	#     new config option names in the warning text)
 
 	if( config_is_set( $p_var ) ) {
-		echo '<p><b>Warning:</b> The configuration option <tt>$g_' . $p_var . '</tt> is now obsolete';
+		$t_description = '<p><b>Warning:</b> The configuration option <tt>$g_' . $p_var . '</tt> is now obsolete</p>';
 		if( is_array( $p_replace ) ) {
-			echo ', please see the following options: <ul>';
+			$t_info = 'please see the following options: <ul>';
 			foreach( $p_replace as $t_option ) {
-				echo '<li>$g_' . $t_option . '</li>';
+				$t_info .= '<li>$g_' . $t_option . '</li>';
 			}
-			echo '</ul>';
+			$t_info .= '</ul>';
 		}
 		else if( !is_blank( $p_replace ) ) {
-			echo ', please use <tt>$g_' . $p_replace . '</tt> instead.';
+			$t_info .= 'please use <tt>$g_' . $p_replace . '</tt> instead.';
 		}
-		echo '</p>';
+		print_test_warn_row( $t_description, $t_info, false );
 	}
 }
 
@@ -566,7 +566,6 @@ function config_is_private( $p_config_var ) {
 		case 'smtp_connection_mode':
 		case 'smtp_port':
 		case 'email_send_using_cronjob':
-		case 'jpgraph_path':
 		case 'absolute_path':
 		case 'core_path':
 		case 'class_path':

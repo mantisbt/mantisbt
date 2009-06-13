@@ -41,6 +41,8 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function config() {
 		return array(
+			'eczlibrary'   => ON,
+			'jpgraph_antialias'   => ON,
 /*			'process_text'		=> ON,
 			'process_urls'		=> ON,
 			'process_buglinks'	=> ON,
@@ -55,8 +57,6 @@ class MantisGraphPlugin extends MantisPlugin  {
 		$t_path = config_get_global('plugin_path' ). plugin_get_current() . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR;
 
 		set_include_path(get_include_path() . PATH_SEPARATOR . $t_path);
-		
-		//require_once( 'ezc/Base/src/base.php' );
 	}
 	
 	public static function autoload( $className ) {
@@ -69,6 +69,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 		$hooks = array(
 			'EVENT_MENU_SUMMARY' => 'summary_menu',
 			'EVENT_SUBMENU_SUMMARY' => 'summary_submenu',
+			'EVENT_MENU_FILTER' => 'graph_filter_menu',
 		);
 		return $hooks;
 	}
@@ -77,6 +78,10 @@ class MantisGraphPlugin extends MantisPlugin  {
 		return array( '<a href="' . plugin_page( 'summary_jpgraph_page' ) . '">' . plugin_lang_get( 'menu_advanced_summary' ) . '</a>', );
 	}	
 
+	function graph_filter_menu( ) {
+		return array( '<a href="' . plugin_page( 'bug_graph_page.php' ) . '">' . plugin_lang_get( 'graph_bug_page_link' ) . '</a>', );
+	}		
+	
 	function summary_submenu( ) {
 		$t_icon_path = config_get( 'icon_path' );
 		return array( '<a href="' . helper_mantis_url( 'summary_page.php' ) . '"><img src="' . $t_icon_path . 'synthese.gif" border="0" alt="" />' . plugin_lang_get( 'synthesis_link' ) . '</a>',

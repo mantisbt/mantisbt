@@ -17,25 +17,16 @@
 auth_reauthenticate( );
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
-$f_process_text = gpc_get_int( 'process_text', ON );
-$f_process_urls = gpc_get_int( 'process_urls', ON );
-$f_process_buglinks = gpc_get_int( 'process_buglinks', ON );
-$f_process_vcslinks = gpc_get_int( 'process_vcslinks', ON );
+$f_library = gpc_get_int( 'eczlibrary', ON );
+$f_jpgraph_antialias = gpc_get_int( 'jpgraph_antialias', ON );
 
-if( plugin_config_get( 'process_text' ) != $f_process_text ) {
-	plugin_config_set( 'process_text', $f_process_text );
+
+if( plugin_config_get( 'eczlibrary' ) != $f_library ) {
+	plugin_config_set( 'eczlibrary', $f_library );
 }
 
-if( plugin_config_get( 'process_urls' ) != $f_process_urls ) {
-	plugin_config_set( 'process_urls', $f_process_urls );
-}
-
-if( plugin_config_get( 'process_buglinks' ) != $f_process_buglinks ) {
-	plugin_config_set( 'process_buglinks', $f_process_buglinks );
-}
-
-if( plugin_config_get( 'process_vcslinks' ) != $f_process_vcslinks ) {
-	plugin_config_set( 'process_vcslinks', $f_process_vcslinks );
+if( plugin_config_get( 'jpgraph_antialias' ) != $f_jpgraph_antialias ) {
+	plugin_config_set( 'jpgraph_antialias', $f_jpgraph_antialias );
 }
 
 print_successful_redirect( plugin_page( 'config', true ) );

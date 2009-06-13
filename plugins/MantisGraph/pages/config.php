@@ -17,7 +17,7 @@
 auth_reauthenticate( );
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
-html_page_top( lang_get( 'plugin_format_title' ) );
+html_page_top( plugin_lang_get( 'title' ) );
 
 print_manage_menu( );
 
@@ -29,65 +29,34 @@ print_manage_menu( );
 
 <tr>
 	<td class="form-title" colspan="3">
-		<?php echo lang_get( 'plugin_format_title' ) . ': ' . lang_get( 'plugin_format_config' )?>
+		<?php echo plugin_lang_get( 'title' ) . ': ' . plugin_lang_get( 'config' )?>
 	</td>
 </tr>
 
 <tr <?php echo helper_alternate_class( )?>>
 	<td class="category" width="60%">
-		<?php echo lang_get( 'plugin_format_process_text' )?>
+		<?php echo plugin_lang_get( 'library' )?>
 	</td>
 	<td class="center" width="20%">
-		<label><input type="radio" name="process_text" value="1" <?php echo( ON == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_enabled' )?></label>
+		<label><input type="radio" name="eczlibrary" value="1" <?php echo( ON == plugin_config_get( 'eczlibrary' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get('bundled')?></label>
 	</td>
 	<td class="center" width="20%">
-		<label><input type="radio" name="process_text" value="0" <?php echo( OFF == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_disabled' )?></label>
+		<label><input type="radio" name="eczlibrary" value="0" <?php echo( OFF == plugin_config_get( 'eczlibrary' ) ) ? 'checked="checked" ' : ''?>/>jpgraph</label>
 	</td>
 </tr>
 
 <tr <?php echo helper_alternate_class( )?>>
-	<td class="category">
-		<?php echo lang_get( 'plugin_format_process_urls' )?>
+	<td class="category" width="60%">
+		<?php echo plugin_lang_get( 'jpgraph_antialias' )?>
 	</td>
-	<td class="center">
-		<label><input type="radio" name="process_urls" value="1" <?php echo( ON == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_enabled' )?></label>
+	<td class="center" width="20%">
+		<label><input type="radio" name="jpgraph_antialias" value="1" <?php echo( ON == plugin_config_get( 'jpgraph_antialias' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get('enabled')?></label>
 	</td>
-	<td class="center">
-		<label><input type="radio" name="process_urls" value="0" <?php echo( OFF == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_disabled' )?></label>
+	<td class="center" width="20%">
+		<label><input type="radio" name="jpgraph_antialias" value="0" <?php echo( OFF == plugin_config_get( 'jpgraph_antialias' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get('disabled')?></label>
 	</td>
 </tr>
 
-<tr <?php echo helper_alternate_class( )?>>
-	<td class="category">
-		<?php echo lang_get( 'plugin_format_process_buglinks' )?>
-	</td>
-	<td class="center">
-		<label><input type="radio" name="process_buglinks" value="1" <?php echo( ON == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_enabled' )?></label>
-	</td>
-	<td class="center">
-		<label><input type="radio" name="process_buglinks" value="0" <?php echo( OFF == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_disabled' )?></label>
-	</td>
-</tr>
-
-<tr <?php echo helper_alternate_class( )?>>
-	<td class="category">
-		<?php echo lang_get( 'plugin_format_process_vcslinks' )?>
-	</td>
-	<td class="center">
-		<label><input type="radio" name="process_vcslinks" value="1" <?php echo( ON == plugin_config_get( 'process_vcslinks' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_enabled' )?></label>
-	</td>
-	<td class="center">
-		<label><input type="radio" name="process_vcslinks" value="0" <?php echo( OFF == plugin_config_get( 'process_vcslinks' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_disabled' )?></label>
-	</td>
-</tr>
 
 <tr>
 	<td class="center" colspan="3">

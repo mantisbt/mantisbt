@@ -1002,27 +1002,6 @@
 	 **************************/
 
 	/**
-	 * To use the Jpgraph addon you need the JPGRAPH package from
-	 * http://www.aditus.nu/jpgraph/index.php
-	 * The default/tested configuration is to place the jpgraph files (jpgraph.php) in the core directory in a jpgraph folder
-	 * @global int $g_use_jpgraph
-	 */
-	$g_use_jpgraph			= OFF;
-
-	/**
-	 * path to jpgraph installation - dont forget the ending slash!
-	 * @global string $g_jpgraph_path
-	 */
-	$g_jpgraph_path			= '.' . DIRECTORY_SEPARATOR . 'jpgraph' . DIRECTORY_SEPARATOR;
-
-	/**
-	 * use antialiasing - Enabling anti-aliasing will greatly improve the visual apperance of certain graphs.
-	 * Note: Using anti-aliasing makes line drawing roughly 8 time slower than normal lines
-	 * @global int $g_jpgraph_antialias
-	 */
-	$g_jpgraph_antialias	= ON;
-
-	/**
 	 * what truetype font will the graphs use. Allowed values are 'arial', 'verdana', 'courier', 'book', 'comic', 'times',
 	 * 'georgia', 'trebuche', 'vera', 'veramono', or 'veraserif'. Refer to the jpgraph manual for details.
 	 * NOTE: these fonts need to be installed in the TTF_DIR as specified to jpgraph

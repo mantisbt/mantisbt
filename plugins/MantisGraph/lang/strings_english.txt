@@ -19,7 +19,9 @@
 $s_plugin_graph_title = 'Mantis Graphs';
 $s_plugin_graph_description = 'Official graph plugin.';
 
+$s_plugin_MantisGraph_title = 'Mantis Graphs';
 $s_plugin_MantisGraph_menu_advanced_summary = 'Advanced Summary';
+$s_plugin_MantisGraph_config = 'Configuration';
 
 $s_plugin_MantisGraph_synthesis_link = 'Synthesis';
 $s_plugin_MantisGraph_status_link = 'Per state';
@@ -28,11 +30,13 @@ $s_plugin_MantisGraph_severity_link = 'Per severity';
 $s_plugin_MantisGraph_category_link = 'Per category';
 $s_plugin_MantisGraph_resolution_link = 'Per resolution';
 
+$s_plugin_MantisGraph_graph_bug_page_link = 'Graph';
 
-$s_plugin_format_config = 'Configuration';
-$s_plugin_format_process_text = 'Text Processing';
-$s_plugin_format_process_urls = 'URL Processing';
-$s_plugin_format_process_buglinks = 'Mantis Links ( Issue/Issuenote )';
-$s_plugin_format_process_vcslinks = 'VCS Links';
-$s_plugin_format_enabled = 'On';
-$s_plugin_format_disabled = 'Off';
+
+$s_plugin_MantisGraph_library = 'Graph Library';
+$s_plugin_MantisGraph_bundled = 'Use Bundled';
+
+$s_plugin_MantisGraph_jpgraph_antialias = 'JPGRAPH ONLY: anti-aliasing. Will improve the visual apperance of certain graphs. Note: Using anti-aliasing makes line drawing roughly 8 time slower';
+
+$s_plugin_MantisGraph_enabled = 'On';
+$s_plugin_MantisGraph_disabled = 'Off';
