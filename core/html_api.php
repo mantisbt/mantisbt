@@ -343,7 +343,7 @@ function html_css() {
  * @return boolean
  */
 function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
-	if( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
+	if( ON == config_get_global( 'stop_on_errors' ) && error_handled() ) {
 		return false;
 	}
 

@@ -66,7 +66,7 @@ require_once( $t_core_dir . 'file_api.php' );
 function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute = false ) {
 	$t_use_iis = config_get( 'use_iis' );
 
-	if( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
+	if( ON == config_get_global( 'stop_on_errors' ) && error_handled() ) {
 		return false;
 	}
 
