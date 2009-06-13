@@ -37,9 +37,9 @@
     html_page_top1( lang_get( 'graph_page' ) );
 	$t_path = config_get( 'path' );
 	echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . $t_path . "javascript/jscalendar/calendar-blue.css\" /> \n";
-	echo "<script type=\"text/javascript\" src=\"" . $t_path . "javascript/jscalendar/calendar.js\"></script> \n";
-	echo "<script type=\"text/javascript\" src=\"" . $t_path . "javascript/jscalendar/lang/calendar-en.js\"></script> \n";
-	echo "<script type=\"text/javascript\" src=\"" . $t_path . "javascript/jscalendar/calendar-setup.js\"></script> \n";
+	html_javascript_link( 'jscalendar/calendar.js');
+	html_javascript_link( 'jscalendar/lang/calendar-en.js');
+	html_javascript_link( 'jscalendar/calendar-setup.js');
     html_page_top2();
 
     $t_period = new Period();

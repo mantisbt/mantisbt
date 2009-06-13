@@ -116,6 +116,20 @@ function html_rss_link() {
 }
 
 /**
+ * Prints a <script> tag to include a javascript file.
+ * This includes either minimal or development file from /javascript depending on whether mantis is set for debug/production use
+ * @param string $p_filename
+ * @return null
+ */
+function html_javascript_link( $p_filename) {
+	if( config_get_global( 'minimal_jscss' ) ) {
+		echo '<script type="text/javascript" src="', helper_mantis_url( 'javascript/min/' . $p_filename ), '"></script>' . "\n";
+	} else {
+		echo '<script type="text/javascript" src="', helper_mantis_url( 'javascript/dev/' . $p_filename ), '"></script>' . "\n";
+	}
+}
+
+/**
  * Defines the top of a HTML page
  * @param string $p_page_title html page title
  * @param string $p_redirect_url url to redirect to if necessary
@@ -355,16 +369,14 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
  */
 function html_head_javascript() {
 	if( ON == config_get( 'use_javascript' ) ) {
-		echo "\t", '<script type="text/javascript" language="JavaScript" src="', helper_mantis_url( 'javascript/common.js' ), '">';
-		echo '</script>', "\n";
-		echo "\t", '<script type="text/JavaScript" src="', helper_mantis_url( 'javascript/ajax.js' ), '">';
-		echo '</script>', "\n";
+		html_javascript_link( 'common.js' );
+		html_javascript_link( 'ajax.js' );
 
 		global $g_enable_projax;
 
 		if( $g_enable_projax ) {
-			echo '<script type="text/javascript" src="', helper_mantis_url( 'javascript/projax/prototype.js' ), '"></script>';
-			echo '<script type="text/javascript" src="', helper_mantis_url( 'javascript/projax/scriptaculous.js' ), '"></script>';
+			html_javascript_link( 'projax/prototype.js' );
+			html_javascript_link( 'projax/scriptaculous.js' );
 		}
 	}
 }

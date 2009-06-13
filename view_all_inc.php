@@ -97,10 +97,10 @@
 			var string_loading = '<?php echo lang_get( 'loading' );?>';
 		// -->
 		</script>
-		<script type="text/javascript" language="JavaScript" src="javascript/xmlhttprequest.js"></script>
-		<script type="text/javascript" language="JavaScript" src="javascript/addLoadEvent.js"></script>
-		<script type="text/javascript" language="JavaScript" src="javascript/dynamic_filters.js"></script>
 		<?php
+			html_javascript_link( 'xmlhttprequest.js');
+			html_javascript_link( 'addLoadEvent.js');
+			html_javascript_link( 'dynamic_filters.js');
 	}
 ?>
 <br />

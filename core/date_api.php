@@ -257,9 +257,9 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 function date_print_calendar( $p_button_name = 'trigger' ) {
 	if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
 		echo "<style type=\"text/css\">@import url(javascript/jscalendar/calendar-blue.css);</style>\n";
-		echo "<script type=\"text/javascript\" src=\"javascript/jscalendar/calendar.js\"></script>\n";
-		echo "<script type=\"text/javascript\" src=\"javascript/jscalendar/lang/calendar-en.js\"></script>\n";
-		echo "<script type=\"text/javascript\" src=\"javascript/jscalendar/calendar-setup.js\"></script>\n";
+		html_javascript_link( 'jscalendar/calendar.js' );
+		html_javascript_link( 'jscalendar/lang/calendar-en.js' );
+		html_javascript_link( 'jscalendar/calendar-setup.js' );
 		$t_icon_path = config_get( 'icon_path' );
 		$t_cal_icon = $t_icon_path . "calendar-img.gif";
 		echo "<input type=\"image\" class=\"button\" id=\"" . $p_button_name . "\" src=\"";

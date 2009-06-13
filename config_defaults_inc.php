@@ -262,7 +262,7 @@
 	 */
 	$g_global_settings = array(
 		'_table$', 'cookie', '^db_', 'hostname', 'allow_signup', 'database_name', 'show_queries_count', 'admin_checks', 'version_suffix',
-		'_path$', 'use_iis', 'language', 'use_javascript', 'display_errors', 'show_detailed_errors', 'stop_on_errors', 'login_method', '_file$',
+		'_path$', 'use_iis', 'language', 'use_javascript', 'minimal_jscss', 'display_errors', 'show_detailed_errors', 'stop_on_errors', 'login_method', '_file$',
 		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'plugins_enabled', 'session_', 'form_security_',
 	);
 
@@ -2817,6 +2817,13 @@
 	 * @global int $g_compress_html
 	 */
 	$g_compress_html		= ON;
+
+	/**
+	 * if OFF, will include original javascript files
+	 * if ON, will include javascript files that have been compressed by yuicompressor if available
+	 * @global int $g_minimal_jscss
+	 */
+	$g_minimal_jscss		= ON;
 
 	/**
 	 * Use persistent database connections
