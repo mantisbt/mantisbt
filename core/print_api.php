@@ -328,17 +328,18 @@ function print_news_item_option_list() {
 
 	$t_project_id = helper_get_current_project();
 
-	if( access_has_global_level( ADMINISTRATOR ) ) {
+	$t_global = access_has_global_level( ADMINISTRATOR );
+	if( $t_global ) {
 		$query = "SELECT id, headline, announcement, view_state
 				FROM $t_mantis_news_table
 				ORDER BY date_posted DESC";
 	} else {
 		$query = "SELECT id, headline, announcement, view_state
 				FROM $t_mantis_news_table
-				WHERE project_id='$t_project_id'
+				WHERE project_id=" . db_param() . "
 				ORDER BY date_posted DESC";
 	}
-	$result = db_query( $query );
+	$result = db_query_bound( $query, ($t_global == true ? Array() : Array( $t_project_id ) ) );
 	$news_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $news_count;$i++ ) {
@@ -1048,12 +1049,12 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 	$query = "SELECT DISTINCT u.id, u.username, u.realname
 				FROM $t_mantis_user_table u
 				LEFT JOIN $t_mantis_project_user_list_table p
-				ON p.user_id=u.id AND p.project_id='$c_project_id'
-				WHERE u.access_level<$t_adm AND
-					u.enabled = '1' AND
+				ON p.user_id=u.id AND p.project_id=" . db_param() . "
+				WHERE u.access_level<" . db_param() . " AND
+					u.enabled = " . db_param() . " AND
 					p.user_id IS NULL
 				ORDER BY u.realname, u.username";
-	$result = db_query( $query );
+	$result = db_query( $query, Array( $c_project_id, $t_adm, true ) );
 	$t_display = array();
 	$t_sort = array();
 	$t_users = array();
@@ -1094,11 +1095,11 @@ function print_project_user_list_option_list2( $p_user_id ) {
 	$query = "SELECT DISTINCT p.id, p.name
 				FROM $t_mantis_project_table p
 				LEFT JOIN $t_mantis_project_user_list_table u
-				ON p.id=u.project_id AND u.user_id='$c_user_id'
-				WHERE p.enabled = '1' AND
+				ON p.id=u.project_id AND u.user_id=" . db_param() . "
+				WHERE p.enabled = " . db_param() . " AND
 					u.user_id IS NULL
 				ORDER BY p.name";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $c_user_id, true ) );
 	$category_count = db_num_rows( $result );
 	for( $i = 0;$i < $category_count;$i++ ) {
 		$row = db_fetch_array( $result );

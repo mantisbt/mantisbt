@@ -740,19 +740,19 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 
 	$subquery = "SELECT b.id FROM $t_bug_table AS b
 					LEFT JOIN $t_project_user_list_table AS p
-						ON p.project_id=b.project_id AND p.user_id=$c_user_id
+						ON p.project_id=b.project_id AND p.user_id=" . db_param() . "
 					JOIN $t_user_table AS u
-						ON u.id=$c_user_id
+						ON u.id=" . db_param() . "
 					JOIN $t_bug_tag_table AS t
 						ON t.bug_id=b.id
 					WHERE ( p.access_level>b.view_state OR u.access_level>b.view_state )
-						AND t.tag_id=$c_tag_id";
+						AND t.tag_id=" . db_param();
 
 	$query = "SELECT * FROM $t_bug_tag_table
-					WHERE tag_id != $c_tag_id
+					WHERE tag_id != " . db_param() . "
 						AND bug_id IN ( $subquery ) ";
 
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( /*query*/ $c_tag_id, /*subquery*/ $c_user_id, $c_user_id, $c_tag_id ) );
 
 	$t_tag_counts = array();
 	while( $row = db_fetch_array( $result ) ) {

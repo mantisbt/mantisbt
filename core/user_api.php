@@ -400,15 +400,13 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 	}
 
 	# Generate timestamp
-	/** @todo The following code may not be portable accross DBMS. */
 	$t_last_timestamp_threshold = mktime( date( "H" ), date( "i" ) - 1 * $t_session_duration_in_minutes, date( "s" ), date( "m" ), date( "d" ), date( "Y" ) );
-	$c_last_timestamp_threshold = date( "Y-m-d H:i:s", $t_last_timestamp_threshold );
 
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	# Execute query
-	$query = "SELECT id FROM $t_user_table WHERE last_visit > '$c_last_timestamp_threshold'";
-	$result = db_query( $query, 1 );
+	$query = "SELECT id FROM $t_user_table WHERE last_visit > " . db_param();
+	$result = db_query_bound( $query, array( $c_last_timestamp_threshold ), 1 );
 
 	# Get the list of connected users
 	$t_users_connected = array();

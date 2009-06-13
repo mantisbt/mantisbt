@@ -205,15 +205,27 @@ function profile_get_all_for_user( $p_user_id ) {
 # on private and public profiles accessible to the specified user.
 function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 	$c_user_id = ( $p_user_id === null ) ? auth_get_current_user_id() : db_prepare_int( $p_user_id );
-	$c_field = db_prepare_string( $p_field );
+
+	switch( $p_field ) {
+		case 'id':
+		case 'user_id':
+		case 'platform':
+		case 'os':
+		case 'os_build':
+		case 'description':
+			$c_field = $p_field;
+			break;
+		default:
+			trigger_error( ERROR_GENERIC, ERROR );
+	}
 
 	$t_user_profile_table = db_get_table( 'mantis_user_profile_table' );
 
 	$query = "SELECT DISTINCT $c_field
 				  FROM $t_user_profile_table
-				  WHERE ( user_id='$c_user_id' ) OR ( user_id = '0' )
+				  WHERE ( user_id=" . db_param() . " ) OR ( user_id = 0 )
 				  ORDER BY $c_field";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $c_user_id ) );
 
 	$t_rows = array();
 

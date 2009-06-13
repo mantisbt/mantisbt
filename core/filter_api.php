@@ -4364,11 +4364,11 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 	# first, we can override any query that has the same name as a private query
 	# with that private one
 	$query = "SELECT * FROM $t_filters_table
-					WHERE (project_id='$t_project_id'
-					OR project_id='0')
+					WHERE (project_id=" . db_param() . "
+					OR project_id=0)
 					AND name!=''
 					ORDER BY is_public DESC, name ASC";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $t_project_id ) );
 	$query_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $query_count;$i++ ) {
