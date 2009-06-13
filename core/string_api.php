@@ -886,7 +886,7 @@ function string_html_specialchars( $p_string ) {
  * @param string $p_string
  * @return string
  */
-function string_prepare_header2( $p_string ) {
+function string_prepare_header( $p_string ) {
 	$t_string= explode( "\n", $p_string, 2 );
 	$t_string= explode( "\r", $t_string[0], 2 );
 	return $t_string[0];
