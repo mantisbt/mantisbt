@@ -68,8 +68,7 @@ foreach ( $t_prefix_array as $t_prefix ) {
 	if ( $t_prefix == $f_filter ) {
 		$t_link = "<strong>$t_caption</strong>";
 	} else {
-		$t_link = '<a href="manage_tags_page.php?filter=' . $t_prefix .
-			$t_hide_filter .'">' . $t_caption . '</a>';
+		$t_link = '<a href="manage_tags_page.php?filter=' . $t_prefix .'">' . $t_caption . '</a>';
 	}
 
 	echo '<td>' . $t_link . '</td>';
@@ -130,7 +129,6 @@ $t_result = db_query_bound( $t_query, $t_where_params, $t_per_page, $t_offset );
 <br/>
 
 <!--  Tag Table Start -->
-<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
 <table class="width100" cellspacing="1">
 	<tr>
 		<td class="form-title" colspan="4">
@@ -166,8 +164,7 @@ foreach ( $t_result as $t_tag_row ) {
 			<span class="small">
 				<?php
 					/* @todo hack - pass in the hide inactive filter via cheating the actual filter value */
-					print_page_links( 'manage_tags_page.php', 1, $t_page_count,
-						(int)$f_page_number, $f_filter . $t_hide_filter);
+					print_page_links( 'manage_tags_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter );
 				?>
 			</span>
 		</td>
