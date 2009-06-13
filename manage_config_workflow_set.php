@@ -61,7 +61,7 @@
 		$t_matrix = array();
 
 		foreach( $f_value as $t_transition ) {
-			list( $t_from, $t_to ) = split( ':', $t_transition );
+			list( $t_from, $t_to ) = explode( ':', $t_transition );
 			$t_matrix[$t_from][$t_to] = '';
 		}
 		$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
