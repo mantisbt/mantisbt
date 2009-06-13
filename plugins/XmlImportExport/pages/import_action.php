@@ -31,7 +31,7 @@ file_ensure_uploaded( $f_file );
 
 $importer = new ImportXML( $f_file, $f_strategy, $f_fallback, $f_keepcategory, $f_defaultcategory );
 
-html_page_top( lang_get( 'manage_import_issues_link' ) );
+html_page_top( plugin_lang_get( 'import' ) );
 
 print_manage_menu( 'manage_import_issues_page.php' );
 
