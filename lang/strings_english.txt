@@ -712,7 +712,7 @@ $s_login_page_info = 'Welcome to the Issue Tracker.';
 $s_login_title = 'Login';
 $s_save_login = 'Save Login';
 $s_secure_session = 'Secure Session';
-$s_secure_session_long = '<span class="small">Only allow your session to be used from this IP.</span>';
+$s_secure_session_long = 'Only allow your session to be used from this IP address.';
 $s_choose_project = 'Choose Project';
 $s_login_button = 'Login';
 $s_signup_link = 'Signup for a new account';

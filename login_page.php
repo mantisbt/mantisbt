@@ -146,7 +146,7 @@
 	</td>
 	<td>
 	<input type="checkbox" name="secure_session" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?>/>
-	<?php echo lang_get( 'secure_session_long' ) ?>
+	<?php echo '<span class="small">' . lang_get( 'secure_session_long' ) . '</span>' ?>
 	</td>
 </tr>
 <?php } ?>
