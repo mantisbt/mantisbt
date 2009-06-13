@@ -59,6 +59,11 @@ if( function_exists( 'opendir' ) && function_exists( 'readdir' ) ) {
 	$t_lang_files = Array();
 	if( $handle = opendir( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' ) ) {
 		while( false !== ( $file = readdir( $handle ) ) ) {
+			if ($file == 'strings_english.txt' ) {
+				echo "Testing english language file '$t_file' (phase 1)...<br />";
+				flush();
+				checkfile( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR, $file );			
+			}
 			if( $file[0] != '.' && $file != 'langreadme.txt' && !is_dir( $file ) ) {
 				$t_lang_files[] = $file;
 			}
@@ -103,7 +108,14 @@ function checklangdir( $p_path, $p_subpath = '' ) {
 				continue;
 			if ( $p_subpath == '' ) {
 				echo "Checking language files for plugin $file:<br />";
+
+				if (file_exists( $p_path . DIRECTORY_SEPARATOR . $p_subpath . DIRECTORY_SEPARATOR . $file . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . 'strings_english.txt' ) ) {
+					echo "Testing english language for plugin '$file' (phase 1)...<br />";
+					flush();
+					checkfile( $p_path . DIRECTORY_SEPARATOR . $p_subpath . DIRECTORY_SEPARATOR . $file . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR,  'strings_english.txt' );			
+				}
 			}
+
 			if( !is_dir( $p_path . DIRECTORY_SEPARATOR . $file ) && $p_subpath == 'lang' ) {
 				checkfile( $p_path, $file );
 			} else {
@@ -125,7 +137,7 @@ function checkfile( $p_path, $p_file, $p_quiet = false ) {
 		$file = $p_path . $p_file;
 
 		set_error_handler( 'lang_error_handler' );
-		$result = checktoken( $file );
+		$result = checktoken( $file, ($p_file == 'strings_english.txt' ? true : false) );
 		restore_error_handler();
 
 		if( !$result ) {
@@ -165,9 +177,12 @@ function checkfile( $p_path, $p_file, $p_quiet = false ) {
 		return true;
 }
 
-function checktoken( $file ) {
+$basevariables = Array();
+
+function checktoken( $file, $base = false ) {
 	$in_php_code = false;
 	$variables = Array();
+	global $basevariables;	
 	$current_var = null;
 	$last_token = 0;
 	$set_variable = false;
@@ -293,6 +308,21 @@ function checktoken( $file ) {
 						} else {
 							$variables[$current_var] = $text;
 						}
+						
+						if ( $base ) {
+							// english
+							//if( isset( $basevariables[$current_var] ) ) {
+							//	print_error( "WARN: english string redefined - plugin? $current_var" );
+							//}
+							$basevariables[$current_var] = true;
+						} else {
+							if( !isset( $basevariables[$current_var] ) ) {
+								print_error( "WARN: String defined in non-english file that does not exist ( $current_var )" ); 
+							//} else {
+								// missing translation
+							}
+						}
+						
 					}
 					if ( strpos($current_var,"\n") !== false ) {
 						print_error( "PARSER - NEW LINE IN STRING: " . $id . token_name( $id ) . $text . $line );
