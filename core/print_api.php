@@ -455,8 +455,9 @@ function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_
 # --------------------
 # List projects that the current user has access to
 function print_project_option_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false ) {
-	project_cache_all();
 	$t_project_ids = current_user_get_accessible_projects();
+	project_cache_array_rows( $t_project_ids );
+	
 	if( $p_include_all_projects ) {
 		echo '<option value="' . ALL_PROJECTS . '"';
 		check_selected( $p_project_id, ALL_PROJECTS );
