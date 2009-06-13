@@ -659,24 +659,20 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = nu
 
 /**
  * return the name and GET parameters of a bug VIEW page for the given bug
- * account for the user preference and site override
  * @param int $p_bug_id
- * @param int $p_user_id
  * @return string
  */
-function string_get_bug_view_url( $p_bug_id, $p_user_id = null ) {
+function string_get_bug_view_url( $p_bug_id ) {
 	return 'view.php?id=' . $p_bug_id;
 }
 
 /**
  * return the name and GET parameters of a bug VIEW page for the given bug
- * account for the user preference and site override
  * @param int $p_bug_id
  * @param int $p_bugnote_id
- * @param int $p_user_id
  * @return string
  */
-function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id, $p_user_id = null ) {
+function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) {
 	return 'view.php?id=' . $p_bug_id . '#c' . $p_bugnote_id;
 }
 
@@ -834,7 +830,7 @@ function string_shorten( $p_string, $p_max = null ) {
 		return $p_string;
 	}
 }
- 
+
 /**
  * Normalize a string by removing leading, trailing and excessive internal spaces
  * note a space is used as the pattern instead of '\s' to make it work with UTF-8 strings

@@ -57,10 +57,8 @@ $t_update_bug_threshold = config_get( 'update_bug_threshold' );
 $t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
 $t_hide_status_default = config_get( 'hide_status_default' );
 $t_default_show_changed = config_get( 'default_show_changed' );
-?>
 
-<?php
-	$c_filter['assigned'] = array(
+$c_filter['assigned'] = array(
 	FILTER_PROPERTY_CATEGORY => Array(
 		'0' => META_FILTER_ANY,
 	),
@@ -397,11 +395,9 @@ if( helper_get_current_project() == 0 ) {
 $t_filter = array_merge( $c_filter[$t_box_title], $t_filter );
 
 $box_title = lang_get( 'my_view_title_' . $t_box_title );
+
+# -- ====================== BUG LIST ========================= --
 ?>
-
-
-<?php
-# -- ====================== BUG LIST ========================= --?>
 
 <table class="width100" cellspacing="1">
 <?php
@@ -418,9 +414,8 @@ echo ' [';
 echo '<a class="subtle" href="view_all_set.php?type=1&amp;temporary=y&amp;' . $url_link_parameters[$t_box_title] . '" target="_blank">';
 echo '^';
 echo '</a>]';
-?>
-		<?php
-			if( count( $rows ) > 0 ) {
+
+if( count( $rows ) > 0 ) {
 	$v_start = $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] * ( $f_page_number - 1 ) + 1;
 	$v_end = $v_start + count( $rows ) - 1;
 }
@@ -434,9 +429,9 @@ echo "($v_start - $v_end / $t_bug_count)";
 </tr>
 
 <?php
-# -- Loop over bug rows and create $v_* variables --?>
-<?php
-	for( $i = 0;$i < count( $rows );$i++ ) {
+# -- Loop over bug rows and create $v_* variables --
+	$t_count = count( $rows );
+	for( $i = 0;$i < $t_count; $i++ ) {
 		$t_bug = $rows[$i];
 
 	$t_summary = string_display_line_links( $t_bug->summary );
@@ -515,15 +510,12 @@ echo "($v_start - $v_end / $t_bug_count)";
 	</td>
 </tr>
 <?php
-	# -- end of Repeating bug row --?>
-<?php
+	# -- end of Repeating bug row --
 }
+
+# -- ====================== end of BUG LIST ========================= --
 ?>
-<?php
-# -- ====================== end of BUG LIST ========================= --?>
-
 </table>
-
 <?php
 // Free the memory allocated for the rows in this box since it is not longer needed.
 unset( $rows );

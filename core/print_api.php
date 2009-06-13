@@ -243,7 +243,8 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		$t_sort[] = $t_sort_name;
 	}
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
-	for( $i = 0;$i < count( $t_sort );$i++ ) {
+	$t_count = count( $t_sort );
+	for( $i = 0;$i < $t_count;$i++ ) {
 		$t_row = $t_users[$i];
 		echo '<option value="' . $t_row['id'] . '" ';
 		check_selected( $p_user_id, $t_row['id'] );
@@ -1077,7 +1078,8 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 		$t_sort[] = $t_sort_name;
 	}
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
-	for( $i = 0;$i < count( $t_sort );$i++ ) {
+	$t_count = count( $t_sort );
+	for( $i = 0;$i < $t_count; $i++ ) {
 		echo '<option value="' . $t_users[$i] . '">' . $t_display[$i] . '</option>';
 	}
 }
@@ -1792,7 +1794,7 @@ function print_timezone_option_list( $p_timezone ) {
 			$t_zone[0] == 'Europe' ||
 			$t_zone[0] == 'Indian' ||
 			$t_zone[0] == 'Pacific' )
-		{        
+		{
 	        if ( isset( $t_zone[1] ) != '' )
 	        {
 	            $t_locations[$t_zone[0]][$t_zone[0] . '/' . $t_zone[1]] = array( str_replace( '_', ' ', $t_zone[1] ), $t_identifier );

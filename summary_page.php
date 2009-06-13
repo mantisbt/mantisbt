@@ -137,7 +137,7 @@
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
-		<?php summary_print_by_enum( config_get( 'status_enum_string' ), 'status' ) ?>
+		<?php summary_print_by_enum( 'status' ) ?>
 		</table>
 
 		<br />
@@ -149,7 +149,7 @@
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
-		<?php summary_print_by_enum( config_get( 'severity_enum_string' ), 'severity' ) ?>
+		<?php summary_print_by_enum( 'severity' ) ?>
 		</table>
 
 		<br />
@@ -265,7 +265,7 @@
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
-		<?php summary_print_by_enum( config_get( 'resolution_enum_string' ), 'resolution' ) ?>
+		<?php summary_print_by_enum( 'resolution' ) ?>
 		</table>
 
 		<br />
@@ -277,7 +277,7 @@
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
-		<?php summary_print_by_enum( config_get( 'priority_enum_string' ), 'priority' ) ?>
+		<?php summary_print_by_enum( 'priority' ) ?>
 		</table>
 
 		<br />

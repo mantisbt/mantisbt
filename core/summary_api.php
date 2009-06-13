@@ -38,10 +38,9 @@ function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p
 }
 
 # Used in summary reports
-# Given the enum string this function prints out the summary
-# for each enum setting
+# this function prints out the summary for the given enum setting
 # The enum field name is passed in through $p_enum
-function summary_print_by_enum( $p_enum_string, $p_enum ) {
+function summary_print_by_enum( $p_enum ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 

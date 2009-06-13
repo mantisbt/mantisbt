@@ -130,7 +130,7 @@ function project_cache_array_rows( $p_project_id_array ) {
 	}
 
 	foreach ( $c_project_id_array as $c_project_id ) {
-		if ( !isset( $t_projects_found[$c_project_id] ) ) { 
+		if ( !isset( $t_projects_found[$c_project_id] ) ) {
 			$g_cache_project_missing[(int) $c_project_id] = true;
 		}
 	}

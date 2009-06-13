@@ -270,9 +270,8 @@ function token_purge_expired( $p_token_type = null ) {
 
 /**
  * Purge all expired tokens only once per session.
- * @param integer Token type
  */
-function token_purge_expired_once( $p_token_type = null ) {
+function token_purge_expired_once() {
 	global $g_tokens_purged;
 	if( !$g_tokens_purged ) {
 		token_purge_expired();
