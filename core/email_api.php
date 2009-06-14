@@ -244,7 +244,8 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	$t_bugnote_id = bugnote_get_latest_id( $p_bug_id );
 	$t_bugnote_view = bugnote_get_field( $t_bugnote_id, 'view_state' );
 	$t_bugnote_date = bugnote_get_field( $t_bugnote_id, 'last_modified' );
-	$t_bug_date = bug_get_field( $p_bug_id, 'last_updated' );
+	$t_bug = bug_get( $p_bug_id );
+	$t_bug_date = $t_bug->last_updated;
 
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 	if( ON == email_notify_flag( $p_notify_type, 'bugnotes' ) ) {
@@ -316,12 +317,14 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	#  of user ids so we could pull them all in.  We'll see if it's necessary
 	$t_final_recipients = array();
 
-	user_cache_array_rows( array_keys( $t_recipients ) );
+	$t_user_ids = array_keys( $t_recipients );
+	user_cache_array_rows( $t_user_ids );
+	user_pref_cache_array_rows( $t_user_ids );
+	user_pref_cache_array_rows( $t_user_ids, $t_bug->project_id );
 
 	# Check whether users should receive the emails
 	# and put email address to $t_recipients[user_id]
 	foreach( $t_recipients as $t_id => $t_ignore ) {
-
 		# Possibly eliminate the current user
 		if(( auth_get_current_user_id() == $t_id ) && ( OFF == config_get( 'email_receive_own' ) ) ) {
 			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (own)', $p_bug_id, $t_id ) );

@@ -179,6 +179,42 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 	return $row;
 }
 
+function user_pref_cache_array_rows( $p_user_id_array, $p_project_id = ALL_PROJECTS ) {
+	global $g_cache_user_pref;
+	$c_user_id_array = array();
+
+	foreach( $p_user_id_array as $t_user_id ) {
+		if( !isset( $g_cache_user_pref[(int) $t_user_id][(int)$p_project_id] ) ) {
+			$c_user_id_array[(int)$t_user_id] = (int)$t_user_id;
+		}
+	}
+
+	if( empty( $c_user_id_array ) ) {
+		return;
+	}
+
+	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
+
+	$query = "SELECT *
+				  FROM $t_user_pref_table
+				  WHERE id IN (" . implode( ',', $c_user_id_array ) . ') AND project_id=' . db_param();
+
+	$result = db_query_bound( $query, Array( (int)$p_project_id ) );
+
+	while( $row = db_fetch_array( $result ) ) {
+		if( !isset( $g_cache_user_pref[(int) $row['id']] ) ) {
+			$g_cache_user_pref[(int) $row['id']] = array();
+		}
+		$g_cache_user_pref[(int) $row['id']][(int)$p_project_id] = $row;
+		unset( $c_user_id_array[(int) $row['id']] );
+	}
+	
+	foreach( $c_user_id_array as $t_user_id ) {
+		$g_cache_user_pref[(int) $t_user_id][(int)$p_project_id] = false;
+	}
+	return;
+}
+
 # --------------------
 # Clear the user preferences cache (or just the given id if specified)
 function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
