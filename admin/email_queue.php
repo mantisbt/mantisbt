@@ -34,6 +34,11 @@ if ( $f_to !== null ) {
 		echo "Sending emails...<br />";
 		email_send_all();
 		echo "Done";
+	} else if ( $f_to == 'sendordelall' ) {
+		echo "Sending or deleting emails...<br />";
+		email_send_all(true);
+		echo "Done";
+		
 	} else {
 		$t_email_data = email_queue_get( (int) $f_to );
 
@@ -67,3 +72,4 @@ if( count( $t_ids ) > 0 ) {
 }
 
 html_button( 'email_queue.php', 'Send All', array( 'send' => 'all') );
+html_button( 'email_queue.php', 'Send Or Delete All', array( 'send' => 'sendordelall') );

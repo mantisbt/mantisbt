@@ -472,13 +472,13 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_head
 	if( ON === config_get( 'enable_email_notification' ) ) {
 		ignore_user_abort( true );
 
+		bugnote_get_all_bugnotes( $p_bug_id );
+
 		# @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
 		# @todo yarick123:sort recipients list by language to reduce switches between different languages
 		$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-
-		bugnote_get_all_bugnotes( $p_bug_id );
 
 		if( is_array( $t_recipients ) ) {
 			# send email to every recipient
@@ -675,11 +675,15 @@ function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) 
 	return $t_email_id;
 }
 
-# This function sends all the emails that are stored in the queue.  If a failure occurs, then the
-# function exists.  This function will be called after storing emails in case of synchronous
-# emails, or will be called from a cronjob in case of asynchronous emails.
-# @todo In case of synchronous email sending, we may get a race condition where two requests send the same email.
-function email_send_all() {
+/**
+ * This function sends all the emails that are stored in the queue.  If a failure occurs, then the
+ * function exists.  This function will be called after storing emails in case of synchronous
+ * emails, or will be called from a cronjob in case of asynchronous emails.
+ * @todo In case of synchronous email sending, we may get a race condition where two requests send the same email.
+ * @param bool $p_delete_on_failure indicates whether to remove email from queue on failure (default false)
+ * @return null
+ */
+function email_send_all($p_delete_on_failure = false) {
 	$t_ids = email_queue_get_ids();
 
 	$t_emails_recipients_failed = array();
@@ -695,6 +699,9 @@ function email_send_all() {
 		# if unable to place the email in the email server queue, then the connection to the server is down,
 		# and hence no point to continue trying with the rest of the emails.
 		if( !email_send( $t_email_data ) ) {
+			if ($p_delete_on_failure) {
+				email_queue_delete( $t_email_data->email_id );
+			}
 			if( microtime(true) - $t_start > 5 ) {
 				break;
 			} else {
