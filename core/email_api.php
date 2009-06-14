@@ -316,6 +316,8 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	#  of user ids so we could pull them all in.  We'll see if it's necessary
 	$t_final_recipients = array();
 
+	user_cache_array_rows( array_keys( $t_recipients ) );
+
 	# Check whether users should receive the emails
 	# and put email address to $t_recipients[user_id]
 	foreach( $t_recipients as $t_id => $t_ignore ) {
