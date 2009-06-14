@@ -258,7 +258,7 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
  */
 function date_print_calendar( $p_button_name = 'trigger' ) {
 	if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
-		echo "<style type=\"text/css\">@import url(javascript/jscalendar/calendar-blue.css);</style>\n";
+		echo "<style type=\"text/css\">@import url(/css/calendar-blue.css);</style>\n";
 		html_javascript_link( 'jscalendar/calendar.js' );
 		html_javascript_link( 'jscalendar/lang/calendar-en.js' );
 		html_javascript_link( 'jscalendar/calendar-setup.js' );
