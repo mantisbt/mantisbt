@@ -14,7 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-# ## GraphViz API ###
 /**
  * Wrapper classes around GraphViz utilities (dot and neato) for
  * directed and undirected graph generation. Under Windows, the COM
@@ -58,9 +57,11 @@ define( 'GRAPHVIZ_SVGZ', 26 );
 define( 'GRAPHVIZ_CANONICAL_DOT', 27 );
 define( 'GRAPHVIZ_PDF', 28 );
 
-# Base class for graph creation and manipulation. By default,
-# undirected graphs are generated. For directed graphs, use Digraph
-# class.
+/** 
+ * Base class for graph creation and manipulation. By default,
+ * undirected graphs are generated. For directed graphs, use Digraph
+ * class.
+ */
 class Graph {
 	var $name = 'G';
 	var $attributes = array();
@@ -170,7 +171,14 @@ class Graph {
 		),
 	);
 
-	# Constructor for Graph objects.
+	/** 
+	 * Constructor for Graph objects.
+	 * @param string $p_name
+	 * @param array $p_attributes
+	 * @param string $p_tool
+	 * @param string $p_com_module
+	 * @return null
+	 */
 	function Graph( $p_name = 'G', $p_attributes = array(), $p_tool = 'neato', $p_com_module = 'WinGraphviz.NEATO' ) {
 		if( is_string( $p_name ) ) {
 			$this->name = $p_name;
@@ -182,36 +190,59 @@ class Graph {
 		$this->graphviz_com_module = $p_com_module;
 	}
 
-	# Sets graph attributes.
+	/**
+	 * Sets graph attributes.
+	 * @param array $p_attributes
+	 * @return null
+	 */
 	function set_attributes( $p_attributes ) {
 		if( is_array( $p_attributes ) ) {
 			$this->attributes = $p_attributes;
 		}
 	}
 
-	# Sets default attributes for all nodes of the graph.
+	/**
+	 * Sets default attributes for all nodes of the graph.
+	 * @param array $p_attributes
+	 * @return null
+	 */
 	function set_default_node_attr( $p_attributes ) {
 		if( is_array( $p_attributes ) ) {
 			$this->default_node = $p_attributes;
 		}
 	}
 
-	# Sets default attributes for all edges of the graph.
-	function set_default_edge_attr( $p_attributes ) {
+	/**
+	 * Sets default attributes for all edges of the graph.
+	 * @param array $p_attributes
+	 * @return null
+	 */
+	 function set_default_edge_attr( $p_attributes ) {
 		if( is_array( $p_attributes ) ) {
 			$this->default_edge = $p_attributes;
 		}
 	}
 
-	# Adds a node to the graph.
-	function add_node( $p_name, $p_attributes = array() ) {
+	/**
+	 * Adds a node to the graph.
+	 * @param string $p_name
+	 * @param array $p_attributes
+	 * @return null
+	 */
+	 function add_node( $p_name, $p_attributes = array() ) {
 		if( is_array( $p_attributes ) ) {
 			$this->nodes[$p_name] = $p_attributes;
 		}
 	}
 
-	# Adds an edge to the graph.
-	function add_edge( $p_src, $p_dst, $p_attributes = array() ) {
+	/**
+	 * Adds an edge to the graph.
+	 * @param string $p_src
+	 * @param string $p_dst
+	 * @param array $p_attributes
+	 * @return null
+	 */
+	 function add_edge( $p_src, $p_dst, $p_attributes = array() ) {
 		if( is_array( $p_attributes ) ) {
 			$this->edges[] = array(
 				'src' => $p_src,
@@ -221,7 +252,12 @@ class Graph {
 		}
 	}
 
-	# Check if an edge is already present.
+	/**
+	 * Check if an edge is already present.
+	 * @param string $p_src
+	 * @param string $p_dst
+	 * @return bool
+	 */
 	function is_edge_present( $p_src, $p_dst ) {
 		foreach( $this->edges as $t_edge ) {
 			if( $t_edge['src'] == $p_src && $t_edge['dst'] == $p_dst ) {
@@ -231,7 +267,10 @@ class Graph {
 		return false;
 	}
 
-	# Generates an undirected graph representation (suitable for neato).
+	/**
+	 * Generates an undirected graph representation (suitable for neato).
+	 * @return null
+	 */
 	function generate() {
 		echo 'graph ' . $this->name . ' {' . "\n";
 
@@ -254,9 +293,13 @@ class Graph {
 		echo "};\n";
 	}
 
-	# Outputs a graph image or map in the specified format.
+	/**
+	 * Outputs a graph image or map in the specified format.
+	 * @param string $p_format
+	 * @param bool $p_headers
+	 * @return null
+	 */
 	function output( $p_format = 'dot', $p_headers = false ) {
-
 		# Check if it is a recognized format.
 		if( !isset( $this->formats[$p_format] ) ) {
 			trigger_error( ERROR_GENERIC, ERROR );
@@ -280,7 +323,6 @@ class Graph {
 		# There are three different ways to generate the output depending
 		# on the operating system and PHP version.
 		if( is_windows_server() ) {
-
 			# If we are under Windows, we use the COM interface provided
 			# by WinGraphviz. Thanks Paul!
 			# Issue #4625: Work around WinGraphviz bug that fails with
@@ -295,7 +337,6 @@ class Graph {
 
 			# Check if we managed to instantiate the COM object.
 			if( is_null( $t_graphviz ) ) {
-
 				# We can't display any message or trigger an error on
 				# failure, since we may have already sent a Content-type
 				# header potentially incompatible with the any html output.
@@ -303,12 +344,10 @@ class Graph {
 			}
 
 			if( $t_binary ) {
-
 				# Image formats
 				$t_dot_output = $t_graphviz->ToBinaryGraph( $t_dot_source, $t_type );
 
 				if( $p_headers ) {
-
 					# Headers were requested, use another output buffer
 					# to retrieve the size for Content-Length.
 					ob_start();
@@ -332,7 +371,6 @@ class Graph {
 
 			unset( $t_graphviz );
 		} else {
-
 			# If we are not under Windows, use proc_open,
 			# since it avoids the need of temporary files.
 			# Start dot process
@@ -357,7 +395,6 @@ class Graph {
 			$t_proccess = proc_open( $t_command, $t_descriptors, $t_pipes );
 
 			if( is_resource( $t_proccess ) ) {
-
 				# Filter generated output through dot
 				fwrite( $t_pipes[0], $t_dot_source );
 				fclose( $t_pipes[0] );
@@ -384,7 +421,11 @@ class Graph {
 		}
 	}
 
-	# PROTECTED function to build a node or edge attribute list.
+	/** 
+	 * PROTECTED function to build a node or edge attribute list.
+	 * @param array $p_attributes
+	 * @return string
+	 */
 	function _build_attribute_list( $p_attributes ) {
 		if( empty( $p_attributes ) ) {
 			return '';
@@ -412,7 +453,10 @@ class Graph {
 		return '[ ' . join( ', ', $t_result ) . ' ]';
 	}
 
-	# PROTECTED function to print graph attributes and defaults.
+	/**
+	 * PROTECTED function to print graph attributes and defaults.
+	 * @return null
+	 */
 	function _print_graph_defaults() {
 		foreach( $this->attributes as $t_name => $t_value ) {
 			if( !ereg( "[a-zA-Z]+", $t_name ) ) {
@@ -443,15 +487,25 @@ class Graph {
 	}
 }
 
-# Directed graph creation and manipulation.
+/**
+ * Directed graph creation and manipulation.
+ */
 class Digraph extends Graph {
-
-	# Constructor for Digraph objects.
+	/** 
+	 * Constructor for Digraph objects.
+	 * @param string $p_name
+	 * @param array $p_attributes
+	 * @param string $p_tool
+	 * @param string $p_com_module
+	 * @return null
+	 */
 	function Digraph( $p_name = 'G', $p_attributes = array(), $p_tool = 'dot', $p_com_module = 'WinGraphviz.DOT' ) {
 		parent::Graph( $p_name, $p_attributes, $p_tool, $p_com_module );
 	}
 
-	# Generates a directed graph representation (suitable for dot).
+	/** 
+	 * Generates a directed graph representation (suitable for dot).
+	 */
 	function generate() {
 		echo 'digraph ' . $this->name . ' {' . "\n";
 
