@@ -372,13 +372,11 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
-	$c_summary = db_prepare_string( $p_summary );
-
 	$query = "SELECT id
 		FROM $t_bug_table
-		WHERE summary = '$c_summary'";
+		WHERE summary = " . db_param();
 
-	$result = db_query( $query, 1 );
+	$result = db_query_bound( $query, Array( $p_summary ), 1 );
 
 	if( db_num_rows( $result ) == 0 ) {
 		return 0;

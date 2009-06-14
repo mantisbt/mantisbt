@@ -163,7 +163,6 @@
 			$t_version_header_printed = false;
 
 			$t_version = $t_version_row['version'];
-			$c_version = db_prepare_string( $t_version );
 
 			$query = "SELECT sbt.*, $t_relation_table.source_bug_id, dbt.target_version as parent_version FROM $t_bug_table AS sbt
 						LEFT JOIN $t_relation_table ON sbt.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
@@ -174,7 +173,7 @@
 
 			$t_first_entry = true;
 
-			$t_result = db_query_bound( $query, Array( $t_project_id, $c_version ) );
+			$t_result = db_query_bound( $query, Array( $t_project_id, $t_version ) );
 
 			$t_issue_ids = array();
 			$t_issue_parents = array();

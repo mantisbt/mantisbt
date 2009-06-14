@@ -81,7 +81,7 @@ $t_where_params = array();
 if ( $f_filter === 'ALL' ) {
 	$t_where = '';
 } else {
-	$t_where_params[] = db_prepare_string( $f_filter . '%' );
+	$t_where_params[] = $f_filter . '%';
 	$t_where = 'WHERE ' . db_helper_like( 'name' );
 }
 

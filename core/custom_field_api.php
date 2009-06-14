@@ -392,7 +392,7 @@ function custom_field_create( $p_name ) {
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
 	}
 
-	$c_name = db_prepare_string( trim( $p_name ) );
+	$c_name = trim( $p_name );
 
 	if( is_blank( $c_name ) ) {
 		error_parameters( 'name' );

@@ -24,30 +24,26 @@
 
 # Create a new profile for the user, return the ID of the new profile
 function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) {
-	$c_user_id = db_prepare_int( $p_user_id );
-	$c_platform = db_prepare_string( $p_platform );
-	$c_os = db_prepare_string( $p_os );
-	$c_os_build = db_prepare_string( $p_os_build );
-	$c_description = db_prepare_string( $p_description );
+	$p_user_id = (int)$p_user_id;
 
 	if( ALL_USERS != $p_user_id ) {
 		user_ensure_unprotected( $p_user_id );
 	}
 
 	# platform cannot be blank
-	if( is_blank( $c_platform ) ) {
+	if( is_blank( $p_platform ) ) {
 		error_parameters( lang_get( 'platform' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
 	# os cannot be blank
-	if( is_blank( $c_os ) ) {
+	if( is_blank( $p_os ) ) {
 		error_parameters( lang_get( 'operating_system' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
 	# os_build cannot be blank
-	if( is_blank( $c_os_build ) ) {
+	if( is_blank( $p_os_build ) ) {
 		error_parameters( lang_get( 'version' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
@@ -59,7 +55,7 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
 				    ( user_id, platform, os, os_build, description )
 				  VALUES
 				    ( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
-	db_query_bound( $query, Array( $c_user_id, $c_platform, $c_os, $c_os_build, $c_description ) );
+	db_query_bound( $query, Array( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) );
 
 	return db_insert_id( $t_user_profile_table );
 }
@@ -92,29 +88,25 @@ function profile_delete( $p_user_id, $p_profile_id ) {
 function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_build, $p_description ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_profile_id = db_prepare_int( $p_profile_id );
-	$c_platform = db_prepare_string( $p_platform );
-	$c_os = db_prepare_string( $p_os );
-	$c_os_build = db_prepare_string( $p_os_build );
-	$c_description = db_prepare_string( $p_description );
 
 	if( ALL_USERS != $p_user_id ) {
 		user_ensure_unprotected( $p_user_id );
 	}
 
 	# platform cannot be blank
-	if( is_blank( $c_platform ) ) {
+	if( is_blank( $p_platform ) ) {
 		error_parameters( lang_get( 'platform' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
 	# os cannot be blank
-	if( is_blank( $c_os ) ) {
+	if( is_blank( $p_os ) ) {
 		error_parameters( lang_get( 'operating_system' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
 	# os_build cannot be blank
-	if( is_blank( $c_os_build ) ) {
+	if( is_blank( $p_os_build ) ) {
 		error_parameters( lang_get( 'version' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
@@ -128,7 +120,7 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 					  os_build=" . db_param() . ",
 					  description=" . db_param() . "
 				  WHERE id=" . db_param() . " AND user_id=" . db_param();
-	$result = db_query_bound( $query, Array( $c_platform, $c_os, $c_os_build, $c_description, $c_profile_id, $c_user_id ) );
+	$result = db_query_bound( $query, Array( $p_platform, $p_os, $p_os_build, $p_description, $c_profile_id, $c_user_id ) );
 
 	# db_query errors on failure so:
 	return true;

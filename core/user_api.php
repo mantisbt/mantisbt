@@ -184,14 +184,12 @@ function user_ensure_exists( $p_user_id ) {
 # return true if the username is unique, false if there is already a user
 #  with that username
 function user_is_name_unique( $p_username ) {
-	$c_username = db_prepare_string( $p_username );
-
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	$query = "SELECT username
 				FROM $t_user_table
 				WHERE username=" . db_param();
-	$result = db_query_bound( $query, Array( $c_username ), 1 );
+	$result = db_query_bound( $query, Array( $p_username ), 1 );
 
 	if( db_num_rows( $result ) > 0 ) {
 		return false;
@@ -213,17 +211,16 @@ function user_ensure_name_unique( $p_username ) {
 # Return 0 if it is invalid, The number of matches + 1
 function user_is_realname_unique( $p_username, $p_realname ) {
 	if( is_blank( $p_realname ) ) {
-
 		# don't bother checking if realname is blank
 		return 1;
 	}
 
-	$c_realname = db_prepare_string( $p_realname );
+	$p_username = trim( $p_username );
+	$p_realname = trim( $p_realname );
 
 	# allow realname to match username
 	$t_count = 0;
 	if( $p_realname <> $p_username ) {
-
 		# check realname does not match an existing username
 		#  but allow it to match the current user
 		$t_target_user = user_get_id_by_name( $p_username );
@@ -237,7 +234,7 @@ function user_is_realname_unique( $p_username, $p_realname ) {
 		$query = "SELECT id
 				FROM $t_user_table
 				WHERE realname=" . db_param();
-		$result = db_query_bound( $query, Array( $c_realname ) );
+		$result = db_query_bound( $query, Array( $p_realname ) );
 		$t_count = db_num_rows( $result );
 
 		if( $t_count > 0 ) {
@@ -572,7 +569,7 @@ function user_delete( $p_user_id ) {
 
 	# unset non-unique realname flags if necessary
 	if( config_get( 'differentiate_duplicates' ) ) {
-		$c_realname = db_prepare_string( user_get_field( $p_user_id, 'realname' ) );
+		$c_realname = user_get_field( $p_user_id, 'realname' );
 		$query = "SELECT id
 					FROM $t_user_table
 					WHERE realname=" . db_param();
