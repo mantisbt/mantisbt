@@ -835,7 +835,7 @@ function db_helper_compare_days( $p_date1_id_or_column, $p_date2_id_or_column, $
 		$p_date2 = db_param();
 	}
 
-	return "(($p_date1 - $p_date2)" . $p_limitstring . ")";
+	return '((' . $p_date1 . ' - ' . $p_date2 .')' . $p_limitstring . ')';
 }
 
 /**

@@ -405,7 +405,7 @@ function custom_field_create( $p_name ) {
 	$query = "INSERT INTO $t_custom_field_table
 					( name, possible_values )
 				  VALUES
-					( " . db_param() . "," . db_param() . ")";
+					( " . db_param() . ',' . db_param() . ')';
 
 	db_query_bound( $query, Array( $c_name, '' ) );
 
@@ -658,7 +658,7 @@ function custom_field_link( $p_field_id, $p_project_id ) {
 	$query = "INSERT INTO $t_custom_field_project_table
 					( field_id, project_id )
 				  VALUES
-					( " . db_param() . ", " . db_param() . " )";
+					( " . db_param() . ', ' . db_param() . ')';
 	db_query_bound( $query, Array( $c_field_id, $c_project_id ) );
 
 	# db_query errors on failure so:
@@ -834,9 +834,9 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 			$t_private_access = config_get( 'private_project_threshold' );
 			if( is_array( $t_private_access ) ) {
 				if( 1 == count( $t_private_access ) ) {
-					$t_access_clause = "= " . array_shift( $t_private_access ) . " ";
+					$t_access_clause = '= ' . array_shift( $t_private_access ) . ' ';
 				} else {
-					$t_access_clause = "IN (" . implode( ',', $t_private_access ) . ")";
+					$t_access_clause = 'IN (' . implode( ',', $t_private_access ) . ')';
 				}
 			} else {
 				$t_access_clause = ">= $t_private_access ";
@@ -856,12 +856,12 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 		} else {
 			if( is_array( $p_project_id ) ) {
 				if( 1 == count( $p_project_id ) ) {
-					$t_project_clause = "= " . array_shift( $p_project_id ) . " ";
+					$t_project_clause = '= ' . array_shift( $p_project_id ) . ' ';
 				} else {
-					$t_project_clause = "IN (" . implode( ',', $p_project_id ) . ")";
+					$t_project_clause = 'IN (' . implode( ',', $p_project_id ) . ')';
 				}
 			} else {
-				$t_project_clause = "= $p_project_id ";
+				$t_project_clause = '= ' . $p_project_id;
 			}
 			$query = "SELECT cft.id
 					  FROM $t_custom_field_table cft, $t_custom_field_project_table cfpt
@@ -1138,7 +1138,6 @@ function custom_field_get_sequence( $p_field_id, $p_project_id ) {
  */
 function custom_field_validate( $p_field_id, $p_value ) {
 	$c_field_id = db_prepare_int( $p_field_id );
-	$c_value = db_prepare_string( $p_value );
 
 	custom_field_ensure_exists( $p_field_id );
 
@@ -1351,7 +1350,7 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value ) {
 		$query = "INSERT INTO $t_custom_field_string_table
 						( field_id, bug_id, value )
 					  VALUES
-						( " . db_param() . ", " . db_param() . ", " . db_param() . " )";
+						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
 		db_query_bound( $query, Array( $c_field_id, $c_bug_id, $p_value ) );
 		history_log_event_direct( $c_bug_id, $t_name, '', $p_value );
 	}

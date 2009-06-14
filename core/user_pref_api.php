@@ -106,7 +106,7 @@ class UserPreferences {
 	public function __set($name, $value) {
 		switch ($name) {
 			case 'timezone':
-				if( $value == "" ) {
+				if( $value == '' ) {
 					$value = null;
 				}
 		}
@@ -208,7 +208,7 @@ function user_pref_cache_array_rows( $p_user_id_array, $p_project_id = ALL_PROJE
 		$g_cache_user_pref[(int) $row['id']][(int)$p_project_id] = $row;
 		unset( $c_user_id_array[(int) $row['id']] );
 	}
-	
+
 	foreach( $c_user_id_array as $t_user_id ) {
 		$g_cache_user_pref[(int) $t_user_id][(int)$p_project_id] = false;
 	}
@@ -277,9 +277,9 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 	$t_vars_string = implode( ', ', array_keys( $t_vars ) );
 	$t_params_string = implode( ',', $t_params );
 
-	$query = "INSERT INTO $t_user_pref_table
-				    (user_id, project_id, $t_vars_string)
-				  VALUES ( " . $t_params_string . ")";
+	$query = 'INSERT INTO ' . $t_user_pref_table .
+			 ' (user_id, project_id, $t_vars_string) ' .
+			 ' VALUES ( ' . $t_params_string . ')';
 	db_query_bound( $query, $t_values  );
 
 	# db_query errors on failure so:
@@ -360,8 +360,7 @@ function user_pref_delete_all( $p_user_id ) {
 
 	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
-	$query = "DELETE FROM $t_user_pref_table
-				  WHERE user_id=" . db_param();
+	$query = 'DELETE FROM ' . $t_user_pref_table . ' WHERE user_id=' . db_param();
 	db_query_bound( $query, Array( $c_user_id ) );
 
 	user_pref_clear_cache( $p_user_id );
@@ -382,8 +381,7 @@ function user_pref_delete_project( $p_project_id ) {
 
 	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
-	$query = "DELETE FROM $t_user_pref_table
-				  WHERE project_id=" . db_param();
+	$query = 'DELETE FROM ' . $t_user_pref_table . ' WHERE project_id=' . db_param();
 	db_query_bound( $query, Array( $c_project_id ) );
 
 	# db_query errors on failure so:

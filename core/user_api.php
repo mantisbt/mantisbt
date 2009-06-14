@@ -397,12 +397,12 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 	}
 
 	# Generate timestamp
-	$t_last_timestamp_threshold = mktime( date( "H" ), date( "i" ) - 1 * $t_session_duration_in_minutes, date( "s" ), date( "m" ), date( "d" ), date( "Y" ) );
+	$t_last_timestamp_threshold = mktime( date( 'H' ), date( 'i' ) - 1 * $t_session_duration_in_minutes, date( 's' ), date( 'm' ), date( 'd' ), date( 'Y' ) );
 
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	# Execute query
-	$query = "SELECT id FROM $t_user_table WHERE last_visit > " . db_param();
+	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE last_visit > ' . db_param();
 	$result = db_query_bound( $query, array( $c_last_timestamp_threshold ), 1 );
 
 	# Get the list of connected users
@@ -447,8 +447,8 @@ function user_create( $p_username, $p_password, $p_email = '',
 				    ( username, email, password, date_created, last_visit,
 				     enabled, access_level, login_count, cookie_string, realname )
 				  VALUES
-				    ( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param()  . ",
-				     " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ", " . db_param() . ")";
+				    ( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param()  . ",
+				     " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
 	db_query_bound( $query, Array( $p_username, $p_email, $p_password, db_now(), db_now(), $c_enabled, $c_access_level, 0, $t_cookie_string, $p_realname ) );
 
 	# Create preferences for the user
@@ -696,7 +696,7 @@ function user_get_row( $p_user_id ) {
 function user_get_field( $p_user_id, $p_field_name ) {
 	if( NO_USER == $p_user_id ) {
 		trigger_error( 'user_get_field() for NO_USER', WARNING );
-		return "@null@";
+		return '@null@';
 	}
 
 	$row = user_get_row( $p_user_id );
@@ -996,7 +996,7 @@ function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
 function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
-	$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . " AND";
+	$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . ' AND';
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
@@ -1015,7 +1015,7 @@ function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
-	$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . " AND";
+	$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . ' AND';
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
@@ -1202,15 +1202,15 @@ function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_field_name = db_prepare_string( $p_field_name );
 
-	if( $p_field_name != "protected" ) {
+	if( $p_field_name != 'protected' ) {
 		user_ensure_unprotected( $p_user_id );
 	}
 
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
-	$query = "UPDATE $t_user_table
-				  SET $c_field_name=" . db_param() . "
-				  WHERE id=" . db_param();
+	$query = 'UPDATE ' . $t_user_table .
+		     ' SET ' . $c_field_name . '=' . db_param() .
+			 ' WHERE id=' . db_param();
 
 	db_query_bound( $query, Array( $p_field_value, $c_user_id ) );
 

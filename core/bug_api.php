@@ -302,13 +302,13 @@ class BugData {
 					      target_version, due_date
 					    )
 					  VALUES
-					    ( " . db_param() . ', ' . db_param() . "," . db_param() . "," . db_param() . ",
-					      " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ",
-					      " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ",
-					      " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ",
-					      " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ",
-					      " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ",
-					      " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ")";
+					    ( " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ",
+					      " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ",
+					      " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ",
+					      " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ",
+					      " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ",
+					      " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ",
+					      " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 
 		db_query_bound( $query, Array( $this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, db_now(), db_now(), $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date ) );
 
@@ -353,15 +353,15 @@ class BugData {
 		#  shouldn't get updated like this anyway.  If you really need to change
 		#  them use bug_set_field()
 		$query = "UPDATE $t_bug_table
-					SET project_id=" . db_param() . ", reporter_id=" . db_param() . ",
-						handler_id=" . db_param() . ", duplicate_id=" . db_param() . ",
-						priority=" . db_param() . ", severity=" . db_param() . ",
-						reproducibility=" . db_param() . ", status=" . db_param() . ",
-						resolution=" . db_param() . ", projection=" . db_param() . ",
-						category_id=" . db_param() . ", eta=" . db_param() . ",
-						os=" . db_param() . ", os_build=" . db_param() . ",
-						platform=" . db_param() . ", version=" . db_param() . ",
-						build=" . db_param() . ", fixed_in_version=" . db_param() . ",";
+					SET project_id=" . db_param() . ', reporter_id=' . db_param() . ",
+						handler_id=" . db_param() . ', duplicate_id=' . db_param() . ",
+						priority=" . db_param() . ', severity=' . db_param() . ",
+						reproducibility=" . db_param() . ', status=' . db_param() . ",
+						resolution=" . db_param() . ', projection=' . db_param() . ",
+						category_id=" . db_param() . ', eta=' . db_param() . ",
+						os=" . db_param() . ', os_build=' . db_param() . ",
+						platform=" . db_param() . ', version=' . db_param() . ",
+						build=" . db_param() . ', fixed_in_version=' . db_param() . ',';
 
 		$t_fields = Array(
 			$this->project_id, $this->reporter_id,
@@ -902,7 +902,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 			$query = "INSERT INTO $t_mantis_custom_field_string_table
 						   ( field_id, bug_id, value )
-						   VALUES (" . db_param() . ", " . db_param() . ", " . db_param() . ")";
+						   VALUES (" . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
 			db_query_bound( $query, Array( $c_field_id, $c_new_bug_id, $c_value ) );
 		}
 	}
@@ -936,7 +936,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 				$query2 = "INSERT INTO $t_mantis_bugnote_text_table
 							   ( note )
-							   VALUES ( " . db_param() . " );";
+							   VALUES ( " . db_param() . ' )';
 				db_query_bound( $query2, Array( $t_bugnote_text['note'] ) );
 				$t_bugnote_text_insert_id = db_insert_id( $t_mantis_bugnote_text_table );
 			}
@@ -948,16 +948,14 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 						   			" . db_param() . ",
 						   			" . db_param() . ",
 						   			" . db_param() . ",
-						   			" . db_param() . ");";
+						   			" . db_param() . ')';
 			db_query_bound( $query2, Array( $t_new_bug_id, $t_bug_note['reporter_id'], $t_bugnote_text_insert_id, $t_bug_note['view_state'], $t_bug_note['date_submitted'], $t_bug_note['last_modified'] ) );
 		}
 	}
 
 	# Copy attachments
 	if( $p_copy_attachments ) {
-		$query = "SELECT *
-					  FROM $t_mantis_bug_file_table
-					  WHERE bug_id = " . db_param();
+		$query = 'SELECT * FROM ' . $t_mantis_bug_file_table . ' WHERE bug_id = ' . db_param();
 		$result = db_query_bound( $query, Array( $t_bug_id ) );
 		$t_count = db_num_rows( $result );
 
@@ -1002,7 +1000,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 			$t_bug_monitor = db_fetch_array( $result );
 			$query = "INSERT INTO $t_mantis_bug_monitor_table
 						 ( user_id, bug_id )
-						 VALUES ( " . db_param() . ", " . db_param() . ")";
+						 VALUES ( " . db_param() . ', ' . db_param() . ')';
 			db_query_bound( $query, Array( $t_bug_monitor['user_id'], $t_new_bug_id ) );
 		}
 	}
@@ -1564,26 +1562,21 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		# check if there is other relationship between the bugs...
 		$t_id_relationship = relationship_same_type_exists( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 
-		if( $t_id_relationship == -1 ) {
-
-			# the relationship type is already set. Nothing to do
-		} else if( $t_id_relationship > 0 ) {
-
+		 if( $t_id_relationship > 0 ) {
 			# Update the relationship
 			relationship_update( $t_id_relationship, $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 
 			# Add log line to the history (both bugs)
 			history_log_event_special( $p_bug_id, BUG_REPLACE_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
 			history_log_event_special( $p_duplicate_id, BUG_REPLACE_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
-		} else {
-
+		} else if ( $t_id_relationship != -1 ) {
 			# Add the new relationship
 			relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 
 			# Add log line to the history (both bugs)
 			history_log_event_special( $p_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
 			history_log_event_special( $p_duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
-		}
+		} # else relationship is -1 - same type exists, do nothing
 
 		bug_set_field( $p_bug_id, 'duplicate_id', (int) $p_duplicate_id );
 	}
@@ -1686,7 +1679,7 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
 	$t_bug_monitor_table = db_get_table( 'mantis_bug_monitor_table' );
 
 	# Insert monitoring record
-	$query = "INSERT " . "INTO $t_bug_monitor_table " . "( user_id, bug_id ) " . "VALUES " . "(" . db_param() . ',' . db_param() . ')';
+	$query = 'INSERT INTO ' . $t_bug_monitor_table . '( user_id, bug_id ) VALUES (' . db_param() . ',' . db_param() . ')';
 	db_query_bound( $query, Array( $c_user_id, $c_bug_id ) );
 
 	# log new monitoring action
@@ -1717,7 +1710,7 @@ function bug_unmonitor( $p_bug_id, $p_user_id ) {
 	$t_bug_monitor_table = db_get_table( 'mantis_bug_monitor_table' );
 
 	# Delete monitoring record
-	$query = "DELETE " . "FROM $t_bug_monitor_table " . "WHERE bug_id = " . db_param();
+	$query = 'DELETE FROM ' . $t_bug_monitor_table . ' WHERE bug_id = ' . db_param();
 	$db_query_params[] = $c_bug_id;
 
 	if( $p_user_id !== null ) {

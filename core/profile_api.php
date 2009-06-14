@@ -54,7 +54,7 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
 	$query = "INSERT INTO $t_user_profile_table
 				    ( user_id, platform, os, os_build, description )
 				  VALUES
-				    ( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
+				    ( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	db_query_bound( $query, Array( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) );
 
 	return db_insert_id( $t_user_profile_table );

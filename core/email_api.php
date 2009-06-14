@@ -135,7 +135,7 @@ function email_ensure_valid( $p_email ) {
 		trigger_error( ERROR_EMAIL_INVALID, ERROR );
 	}
 }
- 
+
 /**
  * Check if the email address is disposable
  * @param string $p_email
@@ -1253,7 +1253,7 @@ function email_format_bug_message( $p_visible_bug_data ) {
 	}
 
 	if( isset( $p_visible_bug_data['relations'] ) ) {
-		if( $p_visible_bug_data['relations'] != "" ) {
+		if( $p_visible_bug_data['relations'] != '' ) {
 			$t_message .= $t_email_separator1 . "\n" . str_pad( lang_get( 'bug_relationships' ), 20 ) . str_pad( lang_get( 'id' ), 8 ) . lang_get( 'summary' ) . "\n" . $t_email_separator2 . "\n" . $p_visible_bug_data['relations'];
 		}
 	}

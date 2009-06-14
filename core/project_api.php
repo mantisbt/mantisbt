@@ -281,7 +281,7 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 	$query = "INSERT INTO $t_project_table
 					( name, status, enabled, view_state, file_path, description, inherit_global )
 				  VALUES
-					( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
+					( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
 
 	db_query_bound( $query, Array( $p_name, (int) $p_status, $c_enabled, (int) $p_view_state, $p_file_path, $p_description, $c_inherit_global ) );
 
@@ -559,11 +559,11 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 
 	if( is_array( $t_global_access_level ) ) {
 		if( 0 == count( $t_global_access_level ) ) {
-			$t_global_access_clause = ">= " . NOBODY . " ";
+			$t_global_access_clause = '>= ' . NOBODY . ' ';
 		} else if( 1 == count( $t_global_access_level ) ) {
-			$t_global_access_clause = "= " . array_shift( $t_global_access_level ) . " ";
+			$t_global_access_clause = '= ' . array_shift( $t_global_access_level ) . ' ';
 		} else {
-			$t_global_access_clause = "IN (" . implode( ',', $t_global_access_level ) . ")";
+			$t_global_access_clause = 'IN (' . implode( ',', $t_global_access_level ) . ')';
 		}
 	} else {
 		$t_global_access_clause = ">= $t_global_access_level ";
@@ -638,7 +638,7 @@ function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
 				  INTO $t_project_user_list_table
 				    ( project_id, user_id, access_level )
 				  VALUES
-				    ( " . db_param() . ", " . db_param() . ", " . db_param() . ")";
+				    ( " . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
 
 	db_query_bound( $query, Array( $c_project_id, $c_user_id, $c_access_level ) );
 

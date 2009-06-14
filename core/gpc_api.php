@@ -111,7 +111,7 @@ function gpc_get_int( $p_var_name, $p_default = null ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
 	}
-	$t_val = str_replace( " ", "", trim( $t_result ) );
+	$t_val = str_replace( ' ', '', trim( $t_result ) );
 	if( !preg_match( "/^-?([0-9])*$/", $t_val ) ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_NOT_NUMBER, ERROR );
@@ -153,14 +153,14 @@ function gpc_isset_custom_field( $p_var_name, $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_DATE:
 			// date field is three dropdowns that default to 0
 			// Dropdowns are always present, so check if they are set
-			return gpc_isset( "custom_field_" . $p_var_name . "_day" ) &&
-				gpc_get_int( "custom_field_" . $p_var_name . "_day", 0 ) != 0 &&
-				gpc_isset( "custom_field_" . $p_var_name . "_month" ) &&
-				gpc_get_int( "custom_field_" . $p_var_name . "_month", 0 ) != 0 &&
-				gpc_isset( "custom_field_" . $p_var_name . "_year" ) &&
-				gpc_get_int( "custom_field_" . $p_var_name . "_year", 0 ) != 0 ;
+			return gpc_isset( 'custom_field_' . $p_var_name . '_day' ) &&
+				gpc_get_int( 'custom_field_' . $p_var_name . '_day', 0 ) != 0 &&
+				gpc_isset( 'custom_field_' . $p_var_name . '_month' ) &&
+				gpc_get_int( 'custom_field_' . $p_var_name . '_month', 0 ) != 0 &&
+				gpc_isset( 'custom_field_' . $p_var_name . '_year' ) &&
+				gpc_get_int( 'custom_field_' . $p_var_name . '_year', 0 ) != 0 ;
 		default:
-			return gpc_isset( "custom_field_" . $p_var_name);
+			return gpc_isset( 'custom_field_' . $p_var_name);
 	}
 }
 
@@ -190,9 +190,9 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			}
 			break;
 		case CUSTOM_FIELD_TYPE_DATE:
-			$t_day = gpc_get_int( $p_var_name . "_day", 0 );
-			$t_month = gpc_get_int( $p_var_name . "_month", 0 );
-			$t_year = gpc_get_int( $p_var_name . "_year", 0 );
+			$t_day = gpc_get_int( $p_var_name . '_day', 0 );
+			$t_month = gpc_get_int( $p_var_name . '_month', 0 );
+			$t_year = gpc_get_int( $p_var_name . '_year', 0 );
 			if(( $t_year == 0 ) || ( $t_month == 0 ) || ( $t_day == 0 ) ) {
 				if( $p_default == null ) {
 					return '';
@@ -200,7 +200,7 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 					return $p_default;
 				}
 			} else {
-				return strtotime( $t_year . "-" . $t_month . "-" . $t_day );
+				return strtotime( $t_year . '-' . $t_month . '-' . $t_day );
 			}
 			break;
 		default:
@@ -240,7 +240,6 @@ function gpc_get_string_array( $p_var_name, $p_default = null ) {
  * @return array
  */
 function gpc_get_int_array( $p_var_name, $p_default = null ) {
-
 	# Don't pass along a default unless one was given to us
 	#  otherwise we prevent an error being triggered
 	$args = func_get_args();
@@ -252,7 +251,8 @@ function gpc_get_int_array( $p_var_name, $p_default = null ) {
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
 
-	for( $i = 0;$i < count( $t_result );$i++ ) {
+	$t_count = count( $t_result );
+	for( $i = 0;$i < $t_count;$i++ ) {
 		$t_result[$i] = (int) $t_result[$i];
 	}
 

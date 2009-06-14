@@ -148,10 +148,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	}
 
 	# insert bugnote text
-	$query = "INSERT INTO $t_bugnote_text_table
-				( note )
-			VALUES
-				( " . db_param() . " )";
+	$query = 'INSERT INTO ' . $t_bugnote_text_table . ' ( note ) VALUES ( ' . db_param() . ' )';
 	db_query_bound( $query, Array( $p_bugnote_text ) );
 
 	# retrieve bugnote text id number
@@ -176,7 +173,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	$query = "INSERT INTO $t_bugnote_table
 				(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified, note_type, note_attr, time_tracking )
 			VALUES
-				(" . db_param() . ", " . db_param() . "," . db_param() . ", " . db_param() . ", " . db_param() . "," . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
+				(" . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	db_query_bound( $query, Array( $c_bug_id, $c_user_id, $t_bugnote_text_id, $t_view_state, db_now(), db_now(), $c_type, $p_attr, $c_time_tracking ) );
 
 	# get bugnote id
@@ -210,13 +207,11 @@ function bugnote_delete( $p_bugnote_id ) {
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 
 	# Remove the bugnote
-	$query = "DELETE FROM $t_bugnote_table
-		          	WHERE id=" . db_param();
+	$query = 'DELETE FROM ' . $t_bugnote_table . ' WHERE id=' . db_param();
 	db_query_bound( $query, Array( $c_bugnote_id ) );
 
 	# Remove the bugnote text
-	$query = "DELETE FROM $t_bugnote_text_table
-		          	WHERE id=" . db_param();
+	$query = 'DELETE FROM ' . $t_bugnote_text_table . ' WHERE id=' . db_param();
 	db_query_bound( $query, Array( $t_bugnote_text_id ) );
 
 	# log deletion of bug

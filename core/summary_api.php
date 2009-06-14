@@ -261,7 +261,7 @@ function summary_print_by_date( $p_date_array ) {
 		print( "    <td class=\"right\">$t_resolved_count</td>\n" );
 
 		$t_balance = $t_new_count - $t_resolved_count;
-		$t_style = "";
+		$t_style = '';
 		if( $t_balance > 0 ) {
 
 			# we are talking about bugs: a balance > 0 is "negative" for the project...
@@ -271,7 +271,7 @@ function summary_print_by_date( $p_date_array ) {
 			# "+" modifier added in PHP >= 4.3.0
 		}
 		else if( $t_balance < 0 ) {
-			$t_style = " positive";
+			$t_style = ' positive';
 			$t_balance = sprintf( '%+d', $t_balance );
 		}
 

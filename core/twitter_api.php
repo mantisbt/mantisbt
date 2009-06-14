@@ -159,8 +159,8 @@ function twitter_update( $p_message ) {
 	curl_setopt( $t_curl, CURLOPT_CONNECTTIMEOUT, 2 );
 	curl_setopt( $t_curl, CURLOPT_RETURNTRANSFER, 1 );
 	curl_setopt( $t_curl, CURLOPT_POST, 1 );
-	curl_setopt( $t_curl, CURLOPT_POSTFIELDS, "status=$c_message" );
-	curl_setopt( $t_curl, CURLOPT_USERPWD, "$t_username:$t_password" );
+	curl_setopt( $t_curl, CURLOPT_POSTFIELDS, 'status=' . $c_message );
+	curl_setopt( $t_curl, CURLOPT_USERPWD, $t_username . ':' . $t_password );
 
 	$t_buffer = curl_exec( $t_curl );
 

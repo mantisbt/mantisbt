@@ -121,8 +121,8 @@ function excel_prepare_string( $p_value ) {
 	$t_ret = "<Cell><Data ss:Type=\"$t_type\">";
 	$t_value = $p_value;
 	$t_value = str_replace( "\n", '&#10;', $t_value );
-	$t_value = str_replace( "<", "&lt;", $t_value );
-	$t_value = str_replace( ">", "&gt;", $t_value );
+	$t_value = str_replace( '<', '&lt;', $t_value );
+	$t_value = str_replace( '>', '&gt;', $t_value );
 	$t_ret .= $t_value;
 	$t_ret .= "</Data></Cell>\n";
 

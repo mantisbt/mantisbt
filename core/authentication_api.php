@@ -798,8 +798,8 @@ function auth_get_current_user_id() {
  * @access public
  */
 function auth_http_prompt() {
-	header( "HTTP/1.0 401 Authorization Required" );
-	header( "WWW-Authenticate: Basic realm=\"" . lang_get( 'http_auth_realm' ) . "\"" );
+	header( 'HTTP/1.0 401 Authorization Required' );
+	header( 'WWW-Authenticate: Basic realm="' . lang_get( 'http_auth_realm' ) . '"' );
 	header( 'status: 401 Unauthorized' );
 
 	echo '<center>';
@@ -819,7 +819,7 @@ function auth_http_set_logout_pending( $p_pending ) {
 	$t_cookie_name = config_get( 'logout_cookie' );
 
 	if( $p_pending ) {
-		gpc_set_cookie( $t_cookie_name, "1", false );
+		gpc_set_cookie( $t_cookie_name, '1', false );
 	} else {
 		$t_cookie_path = config_get( 'cookie_path' );
 		gpc_clear_cookie( $t_cookie_name, $t_cookie_path );

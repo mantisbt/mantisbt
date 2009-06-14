@@ -833,7 +833,8 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 		$p_query_clauses['order'][] = "sticky DESC";
 	}
 
-	for( $i = 0;$i < count( $t_sort_fields );$i++ ) {
+	$t_count = count( $t_sort_fields );
+	for( $i = 0;$i < $t_count;$i++ ) {
 		$c_sort = db_prepare_string( $t_sort_fields[$i] );
 		$c_dir = 'DESC' == $t_dir_fields[$i] ? 'DESC' : 'ASC';
 
@@ -854,12 +855,12 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 					$p_query_clauses['join'][] = "LEFT JOIN $t_custom_field_string_table $t_cf_table_alias ON $t_bug_table.id  = $t_cf_table_alias.bug_id AND $t_cf_table_alias.field_id = $t_custom_field_id";
 				}
 
-				$p_query_clauses['order'][] = "$c_cf_alias $c_dir";
+				$p_query_clauses['order'][] = $c_cf_alias . ' ' . $c_dir;
 			} else {
 				if ( 'last_updated' == $c_sort ) {
 					$c_sort = "$t_bug_table.last_updated";
 				}
-				$p_query_clauses['order'][] = $c_sort . " " . $c_dir;
+				$p_query_clauses['order'][] = $c_sort . ' ' . $c_dir;
 			}
 		}
 	}
@@ -1135,7 +1136,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	# view state
 	$t_view_state = db_prepare_int( $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] );
 	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) ) {
-		$t_view_state_query = "($t_bug_table.view_state=" . db_param() . ")";
+		$t_view_state_query = "($t_bug_table.view_state=" . db_param() . ')';
 		log_event( LOG_FILTERING, 'view_state query = ' . $t_view_state_query );
 		$t_where_params[] = $t_view_state;
 		array_push( $t_where_clauses, $t_view_state_query );
@@ -1179,7 +1180,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	if(( ON === $t_limit_reporters ) && ( !access_has_project_level( REPORTER + 1, $t_project_id, $t_user_id ) ) ) {
 		$c_reporter_id = $c_user_id;
 		$t_where_params[] = $c_reporter_id;
-		array_push( $t_where_clauses, "($t_bug_table.reporter_id=" . db_param() . ")" );
+		array_push( $t_where_clauses, "($t_bug_table.reporter_id=" . db_param() . ')' );
 	}
 
 	# handler
@@ -1216,8 +1217,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		$t_clauses = array();
 
 		foreach( $t_filter[FILTER_PROPERTY_CATEGORY] as $t_filter_member ) {
-			if( filter_field_is_none( $t_filter_member ) ) {
-			} else {
+			if( !filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, $t_filter_member );
 			}
 		}
@@ -1623,8 +1623,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		$t_where_params[] = $c_rel_bug;
 		$t_where_params[] = $c_rel_type;
 		$t_where_params[] = $c_rel_bug;
-		array_push( $t_clauses, "($t_table_name.relationship_type=" . db_param() . " AND $t_table_name.source_bug_id=" . db_param() . ")" );
-		array_push( $t_clauses, "($t_table_name" . "2.relationship_type=" . db_param() . " AND $t_table_name" . "2.destination_bug_id=" . db_param() . ")" );
+		array_push( $t_clauses, "($t_table_name.relationship_type=" . db_param() . " AND $t_table_name.source_bug_id=" . db_param() . ')' );
+		array_push( $t_clauses, "($t_table_name" . "2.relationship_type=" . db_param() . " AND $t_table_name" . "2.destination_bug_id=" . db_param() . ')' );
 		array_push( $t_where_clauses, '(' . implode( ' OR ', $t_clauses ) . ')' );
 	}
 
@@ -1884,7 +1884,7 @@ function filter_cache_result( $p_rows, $p_id_array_lastmod ) {
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 
 	$t_id_array_lastmod = array_unique( $p_id_array_lastmod );
-	$t_where_string = "WHERE $t_bugnote_table.bug_id in (" . implode( ", ", $t_id_array_lastmod ) . ")";
+	$t_where_string = "WHERE $t_bugnote_table.bug_id in (" . implode( ", ", $t_id_array_lastmod ) . ')';
 	$t_query = "SELECT DISTINCT bug_id,MAX(last_modified) as last_modified, COUNT(last_modified) as count FROM $t_bugnote_table $t_where_string GROUP BY bug_id";
 
 	# perform query
@@ -2291,8 +2291,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 			<?php } else { ?>
 				<td></td>
-			<?php } ?>
-			<?php if( $t_filter_cols > 8 ) {
+			<?php }
+				  if( $t_filter_cols > 8 ) {
 			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
 		}?>
 			</tr>
@@ -2446,8 +2446,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 			<?php } else { ?>
 			<td class="small-caption" valign="top"></td>
-			<?php } ?>
-			<?php if( $t_show_version ) {?>
+			<?php }
+				if( $t_show_version ) {
+			?>
 			<td colspan="2" class="small-caption" valign="top" id="show_version_filter_target">
 							<?php
 								$t_output = '';
@@ -2814,8 +2815,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_row_idx = 0;
 				$t_col_idx = 0;
 
-				$t_fields = "";
-				$t_values = "";
+				$t_fields = '';
+				$t_values = '';
 
 				for( $i = 0;$i < $t_num_fields;$i++ ) {
 					if( $t_col_idx == 0 ) {
@@ -3049,7 +3050,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		for( $i = 0;$i < 2;$i++ ) {
 			if( isset( $t_sort_fields[$i] ) ) {
 				if( 0 < $i ) {
-					echo ", ";
+					echo ', ';
 				}
 				$t_sort = $t_sort_fields[$i];
 				if( strpos( $t_sort, 'custom_' ) === 0 ) {
@@ -3058,7 +3059,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_field_name = string_get_field_name( $t_sort );
 				}
 
-				echo $t_field_name . " " . lang_get( 'bugnote_order_' . strtolower( $t_dir_fields[$i] ) );
+				echo $t_field_name . ' ' . lang_get( 'bugnote_order_' . strtolower( $t_dir_fields[$i] ) );
 				echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_', $i, '" value="', $t_sort_fields[$i], '" />';
 				echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_DIRECTION, '_', $i, '" value="', $t_dir_fields[$i], '" />';
 			}
@@ -3200,9 +3201,6 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					<input type="submit" name="save_query_button" class="button-small" value="<?php echo lang_get( 'save_query' )?>" />
 					</form>
 			<?php
-	} else {
-		?>
-			<?php
 	}
 	?>
 			</td>
@@ -3246,22 +3244,20 @@ function print_filter_reporter_id() {
 		$t_username = user_get_field( $t_id, 'username' );
 		$t_realname = user_get_field( $t_id, 'realname' );
 		$t_display_name = string_attribute( $t_username );
-		if(( isset( $t_realname ) ) && ( $t_realname > "" ) && ( ON == config_get( 'show_realname' ) ) ) {
+		if(( isset( $t_realname ) ) && ( $t_realname > '' ) && ( ON == config_get( 'show_realname' ) ) ) {
 			$t_display_name = string_attribute( $t_realname );
 		}
 		echo '<option value="' . $t_id . '" selected="selected">' . $t_display_name . '</option>';
 	} else {
 		?>
-			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<?php
-				if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
-			echo '<option value="' . META_FILTER_MYSELF . '" ';
-			check_selected( $t_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_MYSELF );
-			echo '>[' . lang_get( 'myself' ) . ']</option>';
-		}
-		?>
-			<?php print_reporter_option_list( $t_filter[FILTER_PROPERTY_REPORTER_ID] )?>
-			<?php
+		<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+		<?php
+			if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
+				echo '<option value="' . META_FILTER_MYSELF . '" ';
+				check_selected( $t_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_MYSELF );
+				echo '>[' . lang_get( 'myself' ) . ']</option>';
+			}
+		print_reporter_option_list( $t_filter[FILTER_PROPERTY_REPORTER_ID] );
 	}?>
 		</select>
 		<?php
@@ -3310,9 +3306,8 @@ function print_filter_handler_id() {
 			check_selected( $t_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_MYSELF );
 			echo '>[' . lang_get( 'myself' ) . ']</option>';
 		}
-		?>
-			<?php print_assign_to_option_list( $t_filter[FILTER_PROPERTY_HANDLER_ID] )?>
-			<?php
+
+		print_assign_to_option_list( $t_filter[FILTER_PROPERTY_HANDLER_ID] );
 	}?>
 		</select>
 		<?php
@@ -3769,7 +3764,7 @@ function print_filter_show_sort() {
 	#  are not appropriate and translate the rest
 	$t_fields = helper_get_columns_to_view();
 	$t_n_fields = count( $t_fields );
-	$t_shown_fields[""] = "";
+	$t_shown_fields[''] = '';
 	for( $i = 0;$i < $t_n_fields;$i++ ) {
 		if( !in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
 			if( strpos( $t_fields[$i], 'custom_' ) === 0 ) {
@@ -3780,9 +3775,9 @@ function print_filter_show_sort() {
 			$t_shown_fields[$t_fields[$i]] = $t_field_name;
 		}
 	}
-	$t_shown_dirs[""] = "";
-	$t_shown_dirs["ASC"] = lang_get( 'bugnote_order_asc' );
-	$t_shown_dirs["DESC"] = lang_get( 'bugnote_order_desc' );
+	$t_shown_dirs[''] = '';
+	$t_shown_dirs['ASC'] = lang_get( 'bugnote_order_asc' );
+	$t_shown_dirs['DESC'] = lang_get( 'bugnote_order_desc' );
 
 	# get default values from filter structure
 	$t_sort_fields = explode( ',', $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
@@ -3794,21 +3789,20 @@ function print_filter_show_sort() {
 
 	# if there are fields to display, show the dropdowns
 	if( count( $t_fields ) > 0 ) {
-
 		# display a primary and secondary sort fields
 		echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_0">';
 		foreach( $t_shown_fields as $key => $val ) {
-			echo "<option value=\"$key\"";
+			echo '<option value="' . $key . '"';
 			check_selected( $key, $t_sort_fields[0] );
-			echo ">$val</option>";
+			echo '>' . $val . '</option>';
 		}
 		echo '</select>';
 
 		echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_0">';
 		foreach( $t_shown_dirs as $key => $val ) {
-			echo "<option value=\"$key\"";
+			echo '<option value="' . $key . '"';
 			check_selected( $key, $t_dir_fields[0] );
-			echo ">$val</option>";
+			echo '>' . $val . '</option>';
 		}
 		echo '</select>';
 
@@ -3817,16 +3811,16 @@ function print_filter_show_sort() {
 		# for secondary sort
 		echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_1">';
 		foreach( $t_shown_fields as $key => $val ) {
-			echo "<option value=\"$key\"";
+			echo '<option value="' . $key . '"';
 			check_selected( $key, $t_sort_fields[1] );
-			echo ">$val</option>";
+			echo '>' . $val . '</option>';
 		}
 		echo '</select>';
 		echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_1">';
 		foreach( $t_shown_dirs as $key => $val ) {
-			echo "<option value=\"$key\"";
+			echo '<option value="' . $key . '"';
 			check_selected( $key, $t_dir_fields[1] );
-			echo ">$val</option>";
+			echo '>' . $val . '</option>';
 		}
 		echo '</select>';
 	} else {
@@ -3844,7 +3838,7 @@ function print_filter_show_sort() {
 function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 	global $t_filter, $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids, $t_select_modifier;
 
-	$t_js_toggle_func = "toggle_custom_date_field_" . $p_field_id . "_controls";
+	$t_js_toggle_func = 'toggle_custom_date_field_' . $p_field_id . '_controls';
 
 	# Resort the values so there ordered numerically, they are sorted as strings otherwise which
 	# may be wrong for dates before early 2001.
@@ -3944,9 +3938,9 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 
 	echo "</td></tr>\n<tr><td>";
 
-	print_date_selection_set( "custom_field_" . $p_field_id . "_start", config_get( 'short_date_format' ), $t_start, $t_start_disable, false, $t_sel_start_year, $t_sel_end_year );
+	print_date_selection_set( 'custom_field_' . $p_field_id . '_start', config_get( 'short_date_format' ), $t_start, $t_start_disable, false, $t_sel_start_year, $t_sel_end_year );
 	print "</td></tr>\n<tr><td>";
-	print_date_selection_set( "custom_field_" . $p_field_id . "_end", config_get( 'short_date_format' ), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year );
+	print_date_selection_set( 'custom_field_' . $p_field_id . '_end', config_get( 'short_date_format' ), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year );
 	print "</td></tr>\n</table>";
 }
 
@@ -4131,7 +4125,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 		$query = "INSERT INTO $t_filters_table
 						( user_id, project_id, is_public, name, filter_string )
 					  VALUES
-						( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
+						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 		db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_is_public, $p_name, $p_filter_string ) );
 
 		# Recall the query, we want the filter ID
@@ -4178,9 +4172,7 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 		$t_user_id = $p_user_id;
 	}
 
-	$query = "SELECT *
-				  FROM $t_filters_table
-				  WHERE id=" . db_param();
+	$query = 'SELECT * FROM ' . $t_filters_table . ' WHERE id=' . db_param();
 	$result = db_query_bound( $query, Array( $c_filter_id ) );
 
 	if( db_num_rows( $result ) > 0 ) {
@@ -4246,9 +4238,7 @@ function filter_db_get_name( $p_filter_id ) {
 	$t_filters_table = db_get_table( 'mantis_filters_table' );
 	$c_filter_id = db_prepare_int( $p_filter_id );
 
-	$query = "SELECT *
-				  FROM $t_filters_table
-				  WHERE id=" . db_param();
+	$query = 'SELECT * FROM ' . $t_filters_table . ' WHERE id=' . db_param();
 	$result = db_query_bound( $query, Array( $c_filter_id ) );
 
 	if( db_num_rows( $result ) > 0 ) {
@@ -4310,8 +4300,7 @@ function filter_db_delete_filter( $p_filter_id ) {
 		return false;
 	}
 
-	$query = "DELETE FROM $t_filters_table
-				  WHERE id=" . db_param();
+	$query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
 	$result = db_query_bound( $query, Array( $c_filter_id ) );
 
 	if( db_affected_rows( $result ) > 0 ) {

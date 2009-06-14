@@ -346,7 +346,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 			$t_set_query = "INSERT INTO $t_config_table
 					( value, type, access_reqd, config_id, project_id, user_id )
 					VALUES
-					(" . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . "," . db_param() . " )";
+					(" . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ' )';
 			$t_params = Array(
 				$c_value,
 				$t_type,

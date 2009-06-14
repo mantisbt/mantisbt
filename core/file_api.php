@@ -849,7 +849,7 @@ function file_get_extension( $p_filename ) {
 			break;
 		}
 
-		# foung a directoryarker before a period.
+		# found a directory marker before a period.
 		if(( $p_filename[$i] == "/" ) || ( $p_filename[$i] == "\\" ) ) {
 			return '';
 		}

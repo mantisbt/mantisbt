@@ -195,9 +195,8 @@ function version_update( $p_version_info ) {
 	db_query_bound( $query, Array( $c_version_name, $c_description, $c_released, $c_date_order, $c_obsolete, $c_version_id ) );
 
 	if( $c_version_name != $c_old_version_name ) {
-		$query = "UPDATE $t_bug_table
-					  SET version=" . db_param() . '
-					  WHERE ( project_id=' . db_param() . ') AND ( version=' . db_param() . ')';
+		$query = 'UPDATE ' . $t_bug_table . ' SET version=' . db_param() .
+				 'WHERE ( project_id=' . db_param() . ') AND ( version=' . db_param() . ')';
 		db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 		$query = "UPDATE $t_bug_table
@@ -437,8 +436,7 @@ function version_get_id( $p_version, $p_project_id = null ) {
 
 	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
 
-	$query = "SELECT id
-					FROM $t_project_version_table
+	$query = "SELECT id FROM $t_project_version_table
 					WHERE project_id=" . db_param() . " AND
 						version=" . db_param();
 

@@ -225,7 +225,7 @@ function session_get_bool( $p_name, $p_default = null ) {
 function session_get_string( $p_name, $p_default = null ) {
 	global $g_session;
 	$t_args = func_get_args();
-	return "" . call_user_func_array( 'session_get', $t_args );
+	return '' . call_user_func_array( 'session_get', $t_args );
 }
 
 /**

@@ -409,7 +409,8 @@ function relationship_get_all( $p_bug_id, &$p_is_different_projects ) {
 	$t_all = array_merge( $t_src, $t_dest );
 
 	$p_is_different_projects = false;
-	for( $i = 0;$i < count( $t_all );$i++ ) {
+	$t_count = count( $t_all );
+	for( $i = 0;$i < $t_count;$i++ ) {
 		$p_is_different_projects |= ( $t_all[$i]->src_project_id != $t_all[$i]->dest_project_id );
 	}
 	return $t_all;
@@ -435,7 +436,7 @@ function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
 				AND destination_bug_id=" . db_param() . ")
 				OR
 				(source_bug_id=" . db_param() . "
-				AND destination_bug_id=" . db_param() . ")";
+				AND destination_bug_id=" . db_param() . ')';
 	$result = db_query_bound( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_dest_bug_id, $c_src_bug_id ), 1 );
 
 	$t_relationship_count = db_num_rows( $result );
@@ -745,7 +746,7 @@ function relationship_get_summary_html_preview( $p_bug_id ) {
  * @return string
  */
 function relationship_get_summary_text( $p_bug_id ) {
-	$t_summary = "";
+	$t_summary = '';
 	$t_show_project = false;
 
 	$t_relationship_all = relationship_get_all( $p_bug_id, $t_show_project );

@@ -72,7 +72,7 @@ function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_opt
 	$query = "INSERT INTO $t_mantis_bug_history_table
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
-					( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . "," . db_param() . ", " . db_param() . ")";
+					( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
 	$result = db_query_bound( $query, Array( $t_user_id, $c_bug_id, db_now(), $c_type, $c_optional, $c_optional2, '' ) );
 }
 
@@ -338,10 +338,10 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			$t_field_localized = lang_get( 'sponsorship_total' );
 			break;
 		case 'due_date':
-			if( $p_old_value !== "" ) {
+			if( $p_old_value !== '' ) {
 				$p_old_value = date( config_get( 'short_date_format' ), (int) $p_old_value );
 			}
-			if( $p_new_value !== "" ) {
+			if( $p_new_value !== '' ) {
 				$p_new_value = date( config_get( 'short_date_format' ), (int) $p_new_value );
 			}
 			$t_field_localized = lang_get( 'due_date' );
@@ -365,7 +365,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					$t_note = lang_get( 'new_bug' );
 					break;
 				case BUGNOTE_ADDED:
-					$t_note = lang_get( 'bugnote_added' ) . ": " . $p_old_value;
+					$t_note = lang_get( 'bugnote_added' ) . ': ' . $p_old_value;
 					if ( $p_linkify && $p_new_value ) {
 						$t_change = '<a href="bug_revision_view_page.php?bugnote_id=' . $p_old_value . '#r' . $p_new_value . '">' .
 							lang_get( 'view_revisions' ) . '</a>';
@@ -373,7 +373,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					}
 					break;
 				case BUGNOTE_UPDATED:
-					$t_note = lang_get( 'bugnote_edited' ) . ": " . $p_old_value;
+					$t_note = lang_get( 'bugnote_edited' ) . ': ' . $p_old_value;
 					if ( $p_linkify && $p_new_value ) {
 						$t_change = '<a href="bug_revision_view_page.php?bugnote_id=' . $p_old_value . '#r' . $p_new_value . '">' .
 							lang_get( 'view_revisions' ) . '</a>';
@@ -381,7 +381,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					}
 					break;
 				case BUGNOTE_DELETED:
-					$t_note = lang_get( 'bugnote_deleted' ) . ": " . $p_old_value;
+					$t_note = lang_get( 'bugnote_deleted' ) . ': ' . $p_old_value;
 					if ( $p_linkify && $p_new_value ) {
 						$t_change = '<a href="bug_revision_view_page.php?bugnote_id=' . $p_old_value . '#r' . $p_new_value . '">' .
 							lang_get( 'view_revisions' ) . '</a>';
@@ -413,25 +413,25 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					}
 					break;
 				case FILE_ADDED:
-					$t_note = lang_get( 'file_added' ) . ": " . $p_old_value;
+					$t_note = lang_get( 'file_added' ) . ': ' . $p_old_value;
 					break;
 				case FILE_DELETED:
-					$t_note = lang_get( 'file_deleted' ) . ": " . $p_old_value;
+					$t_note = lang_get( 'file_deleted' ) . ': ' . $p_old_value;
 					break;
 				case BUGNOTE_STATE_CHANGED:
 					$p_old_value = get_enum_element( 'view_state', $p_old_value );
-					$t_note = lang_get( 'bugnote_view_state' ) . ": " . $p_old_value . ": " . $p_new_value;
+					$t_note = lang_get( 'bugnote_view_state' ) . ': ' . $p_old_value . ': ' . $p_new_value;
 					break;
 				case BUG_MONITOR:
 					$p_old_value = user_get_name( $p_old_value );
-					$t_note = lang_get( 'bug_monitor' ) . ": " . $p_old_value;
+					$t_note = lang_get( 'bug_monitor' ) . ': ' . $p_old_value;
 					break;
 				case BUG_UNMONITOR:
 					$p_old_value = user_get_name( $p_old_value );
-					$t_note = lang_get( 'bug_end_monitor' ) . ": " . $p_old_value;
+					$t_note = lang_get( 'bug_end_monitor' ) . ': ' . $p_old_value;
 					break;
 				case BUG_DELETED:
-					$t_note = lang_get( 'bug_deleted' ) . ": " . $p_old_value;
+					$t_note = lang_get( 'bug_deleted' ) . ': ' . $p_old_value;
 					break;
 				case BUG_ADD_SPONSORSHIP:
 					$t_note = lang_get( 'sponsorship_added' );
@@ -508,8 +508,7 @@ function history_delete( $p_bug_id ) {
 
 	$t_bug_history_table = db_get_table( 'mantis_bug_history_table' );
 
-	$query = "DELETE FROM $t_bug_history_table
-				  WHERE bug_id=" . db_param();
+	$query = 'DELETE FROM ' . $t_bug_history_table . ' WHERE bug_id=' . db_param();
 	db_query_bound( $query, Array( $c_bug_id ) );
 
 	# db_query errors on failure so:

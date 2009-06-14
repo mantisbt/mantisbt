@@ -882,8 +882,7 @@ function print_summary_submenu() {
 		echo $t_menu_item;
 		echo '&nbsp;]</span> ';
 	}
-	echo '</div>';	
-	
+	echo '</div>';
 }
 
 /**
@@ -1404,14 +1403,14 @@ function html_button_bug_assign_to( $p_bug_id ) {
 			$t_default_assign_to = $t_id;
 		}
 
-		echo "<option value=\"$t_id\" ";
+		echo '<option value="' . $t_id . '" ';
 
 		if(( $t_id == $t_default_assign_to ) && !$t_already_selected ) {
 			check_selected( $t_id, $t_default_assign_to );
 			$t_already_selected = true;
 		}
 
-		echo ">$t_caption</option>";
+		echo '>' . $t_caption . '</option>';
 	}
 
 	# allow un-assigning if already assigned.

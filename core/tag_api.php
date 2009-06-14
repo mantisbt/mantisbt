@@ -73,7 +73,7 @@ function tag_is_unique( $p_name ) {
 	$c_name = trim( $p_name );
 	$t_tag_table = db_get_table( 'mantis_tag_table' );
 
-	$query = "SELECT id FROM $t_tag_table WHERE " . db_helper_like( 'name' );
+	$query = 'SELECT id FROM ' . $t_tag_table . ' WHERE ' . db_helper_like( 'name' );
 	$result = db_query_bound( $query, Array( $c_name ) );
 
 	return db_num_rows( $result ) == 0;
@@ -103,7 +103,7 @@ function tag_ensure_unique( $p_name ) {
  * @param string Prefix regex pattern
  * @return boolean True if the name is valid
  */
-function tag_name_is_valid( $p_name, &$p_matches, $p_prefix = "" ) {
+function tag_name_is_valid( $p_name, &$p_matches, $p_prefix = '' ) {
 	$t_separator = config_get( 'tag_separator' );
 	$t_pattern = "/^$p_prefix([^\+\-{$t_separator}]*)$/";
 	return preg_match( $t_pattern, $p_name, $p_matches );
@@ -166,7 +166,7 @@ function tag_parse_string( $p_string ) {
 			);
 		}
 	}
-	usort( $t_tags, "tag_cmp_name" );
+	usort( $t_tags, 'tag_cmp_name' );
 	return $t_tags;
 }
 
@@ -182,7 +182,7 @@ function tag_parse_string( $p_string ) {
  */
 function tag_parse_filters( $p_string ) {
 	$t_tags = array();
-	$t_prefix = "[+-]{0,1}";
+	$t_prefix = '[+-]{0,1}';
 
 	$t_strings = explode( config_get( 'tag_separator' ), $p_string );
 	foreach( $t_strings as $t_name ) {
@@ -194,9 +194,9 @@ function tag_parse_filters( $p_string ) {
 			if( $t_tag_row !== false ) {
 				$t_filter = substr( $t_name, 0, 1 );
 
-				if( "+" == $t_filter ) {
+				if( '+' == $t_filter ) {
 					$t_tag_row['filter'] = 1;
-				} else if( "-" == $t_filter ) {
+				} else if( '-' == $t_filter ) {
 					$t_tag_row['filter'] = -1;
 				} else {
 					$t_tag_row['filter'] = 0;
@@ -208,7 +208,7 @@ function tag_parse_filters( $p_string ) {
 			continue;
 		}
 	}
-	usort( $t_tags, "tag_cmp_name" );
+	usort( $t_tags, 'tag_cmp_name' );
 	return $t_tags;
 }
 
@@ -423,7 +423,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 			while( $row = db_fetch_array( $result ) ) {
 				$t_subquery_results[] = (int)$row;
 			}
-			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN ( " . implode( ', ', $t_subquery_results ) . ")";
+			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN ( " . implode( ', ', $t_subquery_results ) . ')';
 		} else {
 			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN (
 					SELECT t.id FROM $t_tag_table t
@@ -436,7 +436,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 		$query = 'SELECT id, name, description FROM ' . $t_tag_table;
 	}
 
-	$query .= " ORDER BY name ASC ";
+	$query .= ' ORDER BY name ASC ';
 	$result = db_query_bound( $query, $t_params );
 
 	$t_results_to_return = array();
@@ -512,7 +512,7 @@ function tag_bug_get_attached( $p_bug_id ) {
 		$rows[] = $row;
 	}
 
-	usort( $rows, "tag_cmp_name" );
+	usort( $rows, 'tag_cmp_name' );
 	return $rows;
 }
 
@@ -693,7 +693,7 @@ function tag_display_attached( $p_bug_id ) {
 	} else {
 		$i = 0;
 		foreach( $t_tag_rows as $t_tag ) {
-			echo( $i > 0 ? config_get( 'tag_separator' ) . " " : "" );
+			echo( $i > 0 ? config_get( 'tag_separator' ) . ' ' : '' );
 			tag_display_link( $t_tag, $p_bug_id );
 			$i++;
 		}

@@ -43,7 +43,7 @@ function helper_alternate_colors( $p_index, $p_odd_color, $p_even_color ) {
 # --------------------
 # alternate classes for table rows
 #  If no index is given, continue alternating based on the last index given
-function helper_alternate_class( $p_index = null, $p_odd_class = "row-1", $p_even_class = "row-2" ) {
+function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_even_class = 'row-2' ) {
 	static $t_index = 1;
 
 	if( null !== $p_index ) {
@@ -430,8 +430,8 @@ function helper_duration_to_minutes( $p_hhmm ) {
 		trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
 	}
 
-	for( $i = 0;$i < count( $t_a );$i++ ) {
-
+	$t_count = count( $t_a );
+	for( $i = 0;$i < $t_count;$i++ ) {
 		// all time parts should be integers and non-negative.
 		if( !is_numeric( $t_a[$i] ) || ( (integer) $t_a[$i] < 0 ) ) {
 			error_parameters( 'p_hhmm', $p_hhmm );
@@ -445,7 +445,7 @@ function helper_duration_to_minutes( $p_hhmm ) {
 		}
 	}
 
-	switch( count( $t_a ) ) {
+	switch( $t_count ) {
 		case 1:
 			$t_min = (integer) $t_a[0];
 			break;

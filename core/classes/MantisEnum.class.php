@@ -136,8 +136,8 @@ class MantisEnum {
 			$assocArray[$value] = $label;
 		}
 
-        self::$_cacheAssocArrayIndexedByValues[$enumString] = $assocArray;
-        
+		self::$_cacheAssocArrayIndexedByValues[$enumString] = $assocArray;
+
 		return $assocArray;
 	}
 
