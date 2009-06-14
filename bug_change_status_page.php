@@ -167,7 +167,7 @@ if ( ( $t_resolved > $f_new_status ) &&
 <?php if ( $t_can_update_due_date ) {
 	$t_date_to_display = '';
 	if ( !date_is_null( $t_bug->due_date ) ) {
-			$t_date_to_display = date( config_get( 'short_date_format' ), $t_bug->due_date );
+			$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
 	}
 ?>
 <tr <?php echo helper_alternate_class() ?>>

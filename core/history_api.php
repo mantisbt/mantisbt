@@ -339,10 +339,10 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			break;
 		case 'due_date':
 			if( $p_old_value !== '' ) {
-				$p_old_value = date( config_get( 'short_date_format' ), (int) $p_old_value );
+				$p_old_value = date( config_get( 'normal_date_format' ), (int) $p_old_value );
 			}
 			if( $p_new_value !== '' ) {
-				$p_new_value = date( config_get( 'short_date_format' ), (int) $p_new_value );
+				$p_new_value = date( config_get( 'normal_date_format' ), (int) $p_new_value );
 			}
 			$t_field_localized = lang_get( 'due_date' );
 			break;

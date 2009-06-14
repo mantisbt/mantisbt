@@ -251,7 +251,7 @@
 	?>
 		<?php
 			if ( !date_is_null( $t_bug->due_date ) ) {
-				echo date( config_get( 'short_date_format' ), $t_bug->due_date ); }
+				echo date( config_get( 'normal_date_format' ), $t_bug->due_date ); }
 			?>
 	</td>
 	<?php } else { ?>
@@ -643,7 +643,7 @@
 	include( $t_mantis_dir . 'bug_sponsorship_list_view_inc.php' );
 
 	# Bug Relationships
-	relationship_view_box ( $t_bug );
+	relationship_view_box ( $t_bug->id );
 
 	# File upload box
 	if ( !bug_is_readonly( $f_bug_id ) ) {

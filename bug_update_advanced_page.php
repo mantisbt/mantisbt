@@ -206,7 +206,7 @@
 	if ( access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id ) ) {
 		$t_date_to_display = '';
 		if ( !date_is_null( $t_bug->due_date ) ) {
-			$t_date_to_display = date( config_get( 'short_date_format' ), $t_bug->due_date );
+			$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
 		}
 	    print "<input ".helper_get_tab_index()." type=\"text\" id=\"due_date\" name=\"due_date\" size=\"20\" maxlength=\"16\" value=\"".$t_date_to_display."\">";
 		date_print_calendar();

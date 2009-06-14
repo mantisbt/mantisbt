@@ -119,7 +119,7 @@
 		$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 		$f_additional_info		= gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
 		$f_view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
-		$f_due_date				=gpc_get_string( 'due_date', '');
+		$f_due_date				= gpc_get_string( 'due_date', '');
 
 		if ( $f_due_date == '' ) {
 			$f_due_date = date_get_null();
@@ -213,7 +213,7 @@
 <?php if ( $t_can_update_due_date ) {
 	$t_date_to_display = '';
 	if ( !date_is_null( $f_due_date ) ) {
-			$t_date_to_display = date( config_get( 'short_date_format' ), $f_due_date );
+			$t_date_to_display = date( config_get( 'calendar_date_format' ), $f_due_date );
 	}
 ?>
 	<tr <?php echo helper_alternate_class() ?>>

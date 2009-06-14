@@ -159,6 +159,7 @@ class BugData {
 						trigger_error( ERROR_ACCESS_DENIED, ERROR );
 					}
 				}
+				break;
 			case 'target_version':
 				if ( !$this->loading ) {
 					# Only set target_version if user has access to do so
@@ -166,6 +167,12 @@ class BugData {
 						trigger_error( ERROR_ACCESS_DENIED, ERROR );
 					}
 				}
+				break;
+			case 'due_date':
+				if ( !is_numeric( $value ) ) {
+					$value = strtotime($value);
+				}
+				break;
 		}
 		$this->$name = $value;
 	}
@@ -226,7 +233,7 @@ class BugData {
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
-		if( !is_blank( $p_bug_data->duplicate_id ) && ( $p_bug_data->duplicate_id != 0 ) && ( $p_bug_id == $p_bug_data->duplicate_id ) ) {
+		if( !is_blank( $this->duplicate_id ) && ( $this->duplicate_id != 0 ) && ( $this->id == $this->duplicate_id ) ) {
 			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
 			# never returns
 		}
@@ -243,10 +250,8 @@ class BugData {
 		self::validate( true );
 
 		# check due_date format
-		if( !is_blank( $this->due_date ) ) {
-			$c_due_date = $p_bug_data->due_date;
-		} else {
-			$c_due_date = date_get_null();
+		if( is_blank( $this->due_date ) ) {
+			$this_due_date = date_get_null();
 		}
 
 		$t_bug_table = db_get_table( 'mantis_bug_table' );
@@ -335,15 +340,13 @@ class BugData {
 	function update( $p_update_extended = false, $p_bypass_mail = false ) {
 		self::validate( $p_update_extended );
 
-		$c_bug_data = $p_bug_data;
+		$c_bug_id = $this->id;
 
-		if( !is_blank( $p_bug_data->due_date ) ) {
-			$c_due_date = db_bind_timestamp( $p_bug_data->due_date, true );
-		} else {
-			$c_due_date = db_null_date();
+		if( is_blank( $this->due_date ) ) {
+			$this->due_date = date_get_null();
 		}
 
-		$t_old_data = bug_get( $p_bug_id, true );
+		$t_old_data = bug_get( $this->id, true );
 
 		$t_bug_table = db_get_table( 'mantis_bug_table' );
 
@@ -393,7 +396,7 @@ class BugData {
 		$t_fields[] = $this->view_state;
 		$t_fields[] = $this->summary;
 		$t_fields[] = $this->sponsorship_total;
-		$t_fields[] = (bool) $this->sticky;
+		$t_fields[] = (bool)$this->sticky;
 		$t_fields[] = $this->due_date;
 		$t_fields[] = $this->id;
 
@@ -402,97 +405,97 @@ class BugData {
 		bug_clear_cache( $this->id );
 
 		# log changes
-		history_log_event_direct( $p_bug_id, 'project_id', $t_old_data->project_id, $p_bug_data->project_id );
-		history_log_event_direct( $p_bug_id, 'reporter_id', $t_old_data->reporter_id, $p_bug_data->reporter_id );
-		history_log_event_direct( $p_bug_id, 'handler_id', $t_old_data->handler_id, $p_bug_data->handler_id );
-		history_log_event_direct( $p_bug_id, 'priority', $t_old_data->priority, $p_bug_data->priority );
-		history_log_event_direct( $p_bug_id, 'severity', $t_old_data->severity, $p_bug_data->severity );
-		history_log_event_direct( $p_bug_id, 'reproducibility', $t_old_data->reproducibility, $p_bug_data->reproducibility );
-		history_log_event_direct( $p_bug_id, 'status', $t_old_data->status, $p_bug_data->status );
-		history_log_event_direct( $p_bug_id, 'resolution', $t_old_data->resolution, $p_bug_data->resolution );
-		history_log_event_direct( $p_bug_id, 'projection', $t_old_data->projection, $p_bug_data->projection );
-		history_log_event_direct( $p_bug_id, 'category', category_full_name( $t_old_data->category_id, false ), category_full_name( $p_bug_data->category_id, false ) );
-		history_log_event_direct( $p_bug_id, 'eta', $t_old_data->eta, $p_bug_data->eta );
-		history_log_event_direct( $p_bug_id, 'os', $t_old_data->os, $p_bug_data->os );
-		history_log_event_direct( $p_bug_id, 'os_build', $t_old_data->os_build, $p_bug_data->os_build );
-		history_log_event_direct( $p_bug_id, 'platform', $t_old_data->platform, $p_bug_data->platform );
-		history_log_event_direct( $p_bug_id, 'version', $t_old_data->version, $p_bug_data->version );
-		history_log_event_direct( $p_bug_id, 'build', $t_old_data->build, $p_bug_data->build );
-		history_log_event_direct( $p_bug_id, 'fixed_in_version', $t_old_data->fixed_in_version, $p_bug_data->fixed_in_version );
+		history_log_event_direct( $c_bug_id, 'project_id', $t_old_data->project_id, $this->project_id );
+		history_log_event_direct( $c_bug_id, 'reporter_id', $t_old_data->reporter_id, $this->reporter_id );
+		history_log_event_direct( $c_bug_id, 'handler_id', $t_old_data->handler_id, $this->handler_id );
+		history_log_event_direct( $c_bug_id, 'priority', $t_old_data->priority, $this->priority );
+		history_log_event_direct( $c_bug_id, 'severity', $t_old_data->severity, $this->severity );
+		history_log_event_direct( $c_bug_id, 'reproducibility', $t_old_data->reproducibility, $this->reproducibility );
+		history_log_event_direct( $c_bug_id, 'status', $t_old_data->status, $this->status );
+		history_log_event_direct( $c_bug_id, 'resolution', $t_old_data->resolution, $this->resolution );
+		history_log_event_direct( $c_bug_id, 'projection', $t_old_data->projection, $this->projection );
+		history_log_event_direct( $c_bug_id, 'category', category_full_name( $t_old_data->category_id, false ), category_full_name( $this->category_id, false ) );
+		history_log_event_direct( $c_bug_id, 'eta', $t_old_data->eta, $this->eta );
+		history_log_event_direct( $c_bug_id, 'os', $t_old_data->os, $this->os );
+		history_log_event_direct( $c_bug_id, 'os_build', $t_old_data->os_build, $this->os_build );
+		history_log_event_direct( $c_bug_id, 'platform', $t_old_data->platform, $this->platform );
+		history_log_event_direct( $c_bug_id, 'version', $t_old_data->version, $this->version );
+		history_log_event_direct( $c_bug_id, 'build', $t_old_data->build, $this->build );
+		history_log_event_direct( $c_bug_id, 'fixed_in_version', $t_old_data->fixed_in_version, $this->fixed_in_version );
 		if( $t_roadmap_updated ) {
-			history_log_event_direct( $p_bug_id, 'target_version', $t_old_data->target_version, $p_bug_data->target_version );
+			history_log_event_direct( $c_bug_id, 'target_version', $t_old_data->target_version, $this->target_version );
 		}
-		history_log_event_direct( $p_bug_id, 'view_state', $t_old_data->view_state, $p_bug_data->view_state );
-		history_log_event_direct( $p_bug_id, 'summary', $t_old_data->summary, $p_bug_data->summary );
-		history_log_event_direct( $p_bug_id, 'sponsorship_total', $t_old_data->sponsorship_total, $p_bug_data->sponsorship_total );
-		history_log_event_direct( $p_bug_id, 'sticky', $t_old_data->sticky, $p_bug_data->sticky );
+		history_log_event_direct( $c_bug_id, 'view_state', $t_old_data->view_state, $this->view_state );
+		history_log_event_direct( $c_bug_id, 'summary', $t_old_data->summary, $this->summary );
+		history_log_event_direct( $c_bug_id, 'sponsorship_total', $t_old_data->sponsorship_total, $this->sponsorship_total );
+		history_log_event_direct( $c_bug_id, 'sticky', $t_old_data->sticky, $this->sticky );
 
-		history_log_event_direct( $p_bug_id, 'due_date', ( $t_old_data->due_date != date_get_null() ) ? $t_old_data->due_date : null, ( $p_bug_data->due_date != date_get_null() ) ? $p_bug_data->due_date : null );
+		history_log_event_direct( $c_bug_id, 'due_date', ( $t_old_data->due_date != date_get_null() ) ? $t_old_data->due_date : null, ( $this->due_date != date_get_null() ) ? $this->due_date : null );
 
 		# Update extended info if requested
 		if( $p_update_extended ) {
 			$t_bug_text_table = db_get_table( 'mantis_bug_text_table' );
 
-			$t_bug_text_id = bug_get_field( $p_bug_id, 'bug_text_id' );
+			$t_bug_text_id = bug_get_field( $c_bug_id, 'bug_text_id' );
 
 			$query = "UPDATE $t_bug_text_table
 							SET description=" . db_param() . ",
 								steps_to_reproduce=" . db_param() . ",
 								additional_information=" . db_param() . "
 							WHERE id=" . db_param();
-			db_query_bound( $query, Array( $c_bug_data->description, $c_bug_data->steps_to_reproduce, $c_bug_data->additional_information, $t_bug_text_id ) );
+			db_query_bound( $query, Array( $this->description, $this->steps_to_reproduce, $this->additional_information, $t_bug_text_id ) );
 
-			bug_text_clear_cache( $p_bug_id );
+			bug_text_clear_cache( $c_bug_id );
 
 			$t_current_user = auth_get_current_user_id();
 
-			if( $t_old_data->description != $p_bug_data->description ) {
-				if ( bug_revision_count( $p_bug_id, REV_DESCRIPTION ) < 1 ) {
-					$t_revision_id = bug_revision_add( $p_bug_id, $t_current_user, REV_DESCRIPTION, $t_old_data->description, 0, $t_old_data->last_updated );
+			if( $t_old_data->description != $this->description ) {
+				if ( bug_revision_count( $c_bug_id, REV_DESCRIPTION ) < 1 ) {
+					$t_revision_id = bug_revision_add( $c_bug_id, $t_current_user, REV_DESCRIPTION, $t_old_data->description, 0, $t_old_data->last_updated );
 				}
-				$t_revision_id = bug_revision_add( $p_bug_id, $t_current_user, REV_DESCRIPTION, $c_bug_data->description );
-				history_log_event_special( $p_bug_id, DESCRIPTION_UPDATED, $t_revision_id );
+				$t_revision_id = bug_revision_add( $c_bug_id, $t_current_user, REV_DESCRIPTION, $this->description );
+				history_log_event_special( $c_bug_id, DESCRIPTION_UPDATED, $t_revision_id );
 			}
 
-			if( $t_old_data->steps_to_reproduce != $p_bug_data->steps_to_reproduce ) {
-				if ( bug_revision_count( $p_bug_id, REV_STEPS_TO_REPRODUCE ) < 1 ) {
-					$t_revision_id = bug_revision_add( $p_bug_id, $t_current_user, REV_STEPS_TO_REPRODUCE, $t_old_data->steps_to_reproduce, 0, $t_old_data->last_updated );
+			if( $t_old_data->steps_to_reproduce != $this->steps_to_reproduce ) {
+				if ( bug_revision_count( $c_bug_id, REV_STEPS_TO_REPRODUCE ) < 1 ) {
+					$t_revision_id = bug_revision_add( $c_bug_id, $t_current_user, REV_STEPS_TO_REPRODUCE, $t_old_data->steps_to_reproduce, 0, $t_old_data->last_updated );
 				}
-				$t_revision_id = bug_revision_add( $p_bug_id, $t_current_user, REV_STEPS_TO_REPRODUCE, $c_bug_data->steps_to_reproduce );
-				history_log_event_special( $p_bug_id, STEP_TO_REPRODUCE_UPDATED, $t_revision_id );
+				$t_revision_id = bug_revision_add( $c_bug_id, $t_current_user, REV_STEPS_TO_REPRODUCE, $this->steps_to_reproduce );
+				history_log_event_special( $c_bug_id, STEP_TO_REPRODUCE_UPDATED, $t_revision_id );
 			}
 
-			if( $t_old_data->additional_information != $p_bug_data->additional_information ) {
-				if ( bug_revision_count( $p_bug_id, REV_ADDITIONAL_INFO ) < 1 ) {
-					$t_revision_id = bug_revision_add( $p_bug_id, $t_current_user, REV_ADDITIONAL_INFO, $t_old_data->additional_information, 0, $t_old_data->last_updated );
+			if( $t_old_data->additional_information != $this->additional_information ) {
+				if ( bug_revision_count( $c_bug_id, REV_ADDITIONAL_INFO ) < 1 ) {
+					$t_revision_id = bug_revision_add( $c_bug_id, $t_current_user, REV_ADDITIONAL_INFO, $t_old_data->additional_information, 0, $t_old_data->last_updated );
 				}
-				$t_revision_id = bug_revision_add( $p_bug_id, $t_current_user, REV_ADDITIONAL_INFO, $c_bug_data->additional_information );
-				history_log_event_special( $p_bug_id, ADDITIONAL_INFO_UPDATED, $t_revision_id );
+				$t_revision_id = bug_revision_add( $c_bug_id, $t_current_user, REV_ADDITIONAL_INFO, $this->additional_information );
+				history_log_event_special( $c_bug_id, ADDITIONAL_INFO_UPDATED, $t_revision_id );
 			}
 		}
 
 		# Update the last update date
-		bug_update_date( $p_bug_id );
+		bug_update_date( $c_bug_id );
 
 		# allow bypass if user is sending mail separately
 		if( false == $p_bypass_mail ) {
 			# status changed
-			if( $t_old_data->status != $p_bug_data->status ) {
-				$t_status = MantisEnum::getLabel( config_get( 'status_enum_string' ), $p_bug_data->status );
+			if( $t_old_data->status != $this->status ) {
+				$t_status = MantisEnum::getLabel( config_get( 'status_enum_string' ), $this->status );
 				$t_status = str_replace( ' ', '_', $t_status );
-				email_generic( $p_bug_id, $t_status, 'email_notification_title_for_status_bug_' . $t_status );
+				email_generic( $c_bug_id, $t_status, 'email_notification_title_for_status_bug_' . $t_status );
 				return true;
 			}
 
 			# bug assigned
-			if( $t_old_data->handler_id != $p_bug_data->handler_id ) {
-				email_generic( $p_bug_id, 'owner', 'email_notification_title_for_action_bug_assigned' );
+			if( $t_old_data->handler_id != $this->handler_id ) {
+				email_generic( $c_bug_id, 'owner', 'email_notification_title_for_action_bug_assigned' );
 				return true;
 			}
 
 			# @todo handle priority change if it requires special handling
 			# generic update notification
-			email_generic( $p_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
+			email_generic( $c_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 		}
 
 		return true;
