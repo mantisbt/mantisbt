@@ -22,20 +22,18 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires bug_api
  */
-require_once( $t_core_dir . 'bug_api.php' );
+require_once( 'bug_api.php' );
 /**
  * requires helper_api
  */
-require_once( $t_core_dir . 'helper_api.php' );
+require_once( 'helper_api.php' );
 /**
  * requires date_api
  */
-require_once( $t_core_dir . 'date_api.php' );
+require_once( 'date_api.php' );
 
 # ## Custom Fields API ###
 # *******************************************
@@ -57,7 +55,7 @@ $g_custom_field_types[CUSTOM_FIELD_TYPE_MULTILIST] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_DATE] = 'standard';
 
 foreach( $g_custom_field_types as $type ) {
-	require_once( $t_core_dir . 'cfdefs' . DIRECTORY_SEPARATOR . 'cfdef_' . $type . '.php' );
+	require_once( 'cfdefs' . DIRECTORY_SEPARATOR . 'cfdef_' . $type . '.php' );
 }
 
 function custom_field_allow_manage_display( $p_type, $p_display ) {

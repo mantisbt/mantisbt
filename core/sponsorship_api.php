@@ -15,6 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Sponsorship API
  * @package CoreAPI
  * @subpackage SponsorshipAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -22,24 +23,24 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires email_api
  */
-require_once( $t_core_dir . 'email_api.php' );
+require_once( 'email_api.php' );
 /**
  * requires bug_api
  */
-require_once( $t_core_dir . 'bug_api.php' );
+require_once( 'bug_api.php' );
 /**
  * requires history_api
  */
-require_once( $t_core_dir . 'history_api.php' );
+require_once( 'history_api.php' );
 
-# =========================================
-# Sponsorship Data Structure Definition
-# ===================================
+/**
+ * Sponsorship Data Structure Definition
+ * @package MantisBT
+ * @subpackage classes
+ */
 class SponsorshipData {
 	var $id = 0;
 	var $bug_id = 0;
@@ -59,11 +60,15 @@ class SponsorshipData {
 
 $g_cache_sponsorships = array();
 
-# --------------------
-# Cache a sponsorship row if necessary and return the cached copy
-#  If the second parameter is true (default), trigger an error
-#  if the sponsorship can't be found.  If the second parameter is
-#  false, return false if the sponsorship can't be found.
+/**
+ * Cache a sponsorship row if necessary and return the cached copy
+ * If the second parameter is true (default), trigger an error
+ * if the sponsorship can't be found.  If the second parameter is
+ * false, return false if the sponsorship can't be found.
+ * @param int $p_sponsorship_id
+ * @param bool $p_trigger_errors
+ * @return array
+ */
 function sponsorship_cache_row( $p_sponsorship_id, $p_trigger_errors = true ) {
 	global $g_cache_sponsorships;
 
@@ -96,7 +101,11 @@ function sponsorship_cache_row( $p_sponsorship_id, $p_trigger_errors = true ) {
 	return $row;
 }
 
-# Clear the sponsorship cache (or just the given id if specified)
+/**
+ * Clear the sponsorship cache (or just the given id if specified)
+ * @param int $p_sponsorship_id
+ * @return null
+ */
 function sponsorship_clear_cache( $p_sponsorship_id = null ) {
 	global $g_cache_sponsorships;
 
@@ -108,14 +117,23 @@ function sponsorship_clear_cache( $p_sponsorship_id = null ) {
 	}
 }
 
-# check to see if sponsorship exists by id
-# return true if it does, false otherwise
+/**
+ * check to see if sponsorship exists by id
+ * return true if it does, false otherwise
+ * @param int $p_sponsorship_id
+ * @return bool
+ */
 function sponsorship_exists( $p_sponsorship_id ) {
 	return sponsorship_cache_row( $p_sponsorship_id, false ) !== false;
 }
 
-# return false if not found
-# otherwise returns sponsorship id
+/**
+ * return false if not found
+ * otherwise returns sponsorship id
+ * @param int $p_bug_id
+ * @param int $p_user_id
+ * @return int|false
+ */
 function sponsorship_get_id( $p_bug_id, $p_user_id = null ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
@@ -139,7 +157,11 @@ function sponsorship_get_id( $p_bug_id, $p_user_id = null ) {
 	return (integer) $row['id'];
 }
 
-# get information about a sponsorship given its id
+/**
+ * get information about a sponsorship given its id
+ * @param int $p_sponsorship_id
+ * @return array
+ */
 function sponsorship_get( $p_sponsorship_id ) {
 	$row = sponsorship_cache_row( $p_sponsorship_id );
 
@@ -149,10 +171,8 @@ function sponsorship_get( $p_sponsorship_id ) {
 
 	# Check each variable in the class
 	foreach( $t_vars as $var => $val ) {
-
 		# If we got a field from the DB with the same name
 		if( in_array( $var, $t_row_keys, true ) ) {
-
 			# Store that value in the object
 			$t_sponsorship_data->$var = $row[$var];
 		}
@@ -161,7 +181,11 @@ function sponsorship_get( $p_sponsorship_id ) {
 	return $t_sponsorship_data;
 }
 
-# Return an array of Sponsorships associated with the specified bug id
+/**
+ * Return an array of Sponsorships associated with the specified bug id
+ * @param int $p_bug_id
+ * @return array
+ */
 function sponsorship_get_all_ids( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
@@ -178,8 +202,12 @@ function sponsorship_get_all_ids( $p_bug_id ) {
 	return $t_sponsorship_ids;
 }
 
-# Get the amount of sponsorships for the specified id(s)
-# handles the case where $p_sponsorship_id is an array or an id.
+/**
+ * Get the amount of sponsorships for the specified id(s)
+ * handles the case where $p_sponsorship_id is an array or an id.
+ * @param int $p_sponsorship_id
+ * @return int
+ */
 function sponsorship_get_amount( $p_sponsorship_id ) {
 	if( is_array( $p_sponsorship_id ) ) {
 		$t_total = 0;
@@ -195,30 +223,44 @@ function sponsorship_get_amount( $p_sponsorship_id ) {
 	}
 }
 
-# Return the currency used for all sponsorships
+/**
+ * Return the currency used for all sponsorships
+ * @return string
+ */
 function sponsorship_get_currency() {
 	return config_get( 'sponsorship_currency' );
 }
 
-# This function should return the string in a globalized format.
-function sponsorship_format_amount( $amount ) {
-
-	# @@@ add some currency formating in the future
+/**
+ * This function should return the string in a globalized format.
+ * @param int $p_amount
+ * @return string
+ * @todo add some currency formating in the future
+ */
+function sponsorship_format_amount( $p_amount ) {
 	$t_currency = sponsorship_get_currency();
-	return "$t_currency $amount";
+	return $t_currency . ' ' . $p_amount;
 }
 
-# Update bug to reflect sponsorship change
-# This is to be called after adding/updating/deleting sponsorships
+/**
+ * Update bug to reflect sponsorship change
+ * This is to be called after adding/updating/deleting sponsorships
+ * @param int $p_bug_id
+ * @return null
+ */
 function sponsorship_update_bug( $p_bug_id ) {
 	$t_total_amount = sponsorship_get_amount( sponsorship_get_all_ids( $p_bug_id ) );
 	bug_set_field( $p_bug_id, 'sponsorship_total', $t_total_amount );
 	bug_update_date( $p_bug_id );
 }
 
-# if sponsorship contains a non-zero id, then update the corresponding record.
-# if sponsorship contains a zero id, search for bug_id/user_id, if found, then update the entry
-# otherwise add a new entry
+/**
+ * if sponsorship contains a non-zero id, then update the corresponding record.
+ * if sponsorship contains a zero id, search for bug_id/user_id, if found, then update the entry
+ * otherwise add a new entry
+ * @param int $p_sponsorship
+ * @return int
+ */
 function sponsorship_set( $p_sponsorship ) {
 	$t_min_sponsorship = config_get( 'minimum_sponsorship_amount' );
 	if( $p_sponsorship->amount < $t_min_sponsorship ) {
@@ -246,7 +288,6 @@ function sponsorship_set( $p_sponsorship ) {
 
 	# if new sponsorship
 	if( $c_id == 0 ) {
-
 		# Insert
 		$query = "INSERT INTO $t_sponsorship_table
 				    ( bug_id, user_id, amount, logo, url, date_submitted, last_updated )
@@ -294,16 +335,18 @@ function sponsorship_set( $p_sponsorship ) {
 	return $t_sponsorship_id;
 }
 
-# delete a sponsorship given its id
-# id can be an array of ids or just an id.
+/**
+ * delete a sponsorship given its id
+ * id can be an array of ids or just an id.
+ * @param int $p_sponsorship_id
+ * @return null
+ */
 function sponsorship_delete( $p_sponsorship_id ) {
-
 	# handle the case of array of ids
 	if( is_array( $p_sponsorship_id ) ) {
 		foreach( $p_sponsorship_id as $id ) {
 			sponsorship_delete( $id );
 		}
-
 		return;
 	}
 
@@ -326,7 +369,12 @@ function sponsorship_delete( $p_sponsorship_id ) {
 	email_sponsorship_deleted( $t_sponsorship->bug_id );
 }
 
-# updates the paid field
+/**
+ * updates the paid field
+ * @param int $p_sponsorship_id
+ * @param int $p_paid
+ * @return true
+ */
 function sponsorship_update_paid( $p_sponsorship_id, $p_paid ) {
 	$c_sponsorship_id = db_prepare_int( $p_sponsorship_id );
 	$t_sponsorship = sponsorship_get( $c_sponsorship_id );
@@ -346,7 +394,11 @@ function sponsorship_update_paid( $p_sponsorship_id, $p_paid ) {
 	return true;
 }
 
-# updates the last_updated field
+/**
+ * updates the last_updated field
+ * @param int $p_sponsorship_id
+ * @return true
+ */
 function sponsorship_update_date( $p_sponsorship_id ) {
 	$c_sponsorship_id = db_prepare_int( $p_sponsorship_id );
 

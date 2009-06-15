@@ -65,13 +65,16 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires collapse_api
  */
-require_once( $t_core_dir . 'collapse_api.php' );
+require_once( 'collapse_api.php' );
 
+/**
+ * RelationshipData Structure Definition
+ * @package MantisBT
+ * @subpackage classes
+ */
 class BugRelationshipData {
 	var $id;
 	var $src_bug_id;

@@ -56,18 +56,46 @@
  * @uses lang_api.php
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
-require_once( $t_core_dir . 'current_user_api.php' );
-require_once( $t_core_dir . 'string_api.php' );
-require_once( $t_core_dir . 'bug_api.php' );
-require_once( $t_core_dir . 'project_api.php' );
-require_once( $t_core_dir . 'helper_api.php' );
-require_once( $t_core_dir . 'authentication_api.php' );
-require_once( $t_core_dir . 'user_api.php' );
-require_once( $t_core_dir . 'rss_api.php' );
-require_once( $t_core_dir . 'wiki_api.php' );
-require_once( $t_core_dir . 'php_api.php' );
+/**
+ * requires current_user_api
+ */
+require_once( 'current_user_api.php' );
+/**
+ * requires string_api
+ */
+require_once( 'string_api.php' );
+/**
+ * requires bug_api
+ */
+require_once( 'bug_api.php' );
+/**
+ * requires project_api
+ */
+require_once( 'project_api.php' );
+/**
+ * requires helper_api
+ */
+require_once( 'helper_api.php' );
+/**
+ * requires authentication_api
+ */
+require_once( 'authentication_api.php' );
+/**
+ * requires user_api
+ */
+require_once( 'user_api.php' );
+/**
+ * requires rss_api
+ */
+require_once( 'rss_api.php' );
+/**
+ * requires wiki_api
+ */
+require_once( 'wiki_api.php' );
+/**
+ * requires php_api
+ */
+require_once( 'php_api.php' );
 
 $g_rss_feed_url = null;
 

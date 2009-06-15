@@ -95,6 +95,11 @@ class UserPreferences {
 	private $pref_user_id;
 	private $pref_project_id;
 
+	/**
+	 * Constructor
+	 * @param int $p_user_id
+	 * @param int $p_project_id
+	 */
 	function UserPreferences( $p_user_id, $p_project_id ) {
 		$this->default_profile = 0;
 		$this->default_project = ALL_PROJECTS;
@@ -103,6 +108,11 @@ class UserPreferences {
 		$this->pref_project_id = (int)$p_project_id;
 	}
 
+	/**
+	 * @param string $name
+	 * @param string $value
+	 * @private
+	 */
 	public function __set($name, $value) {
 		switch ($name) {
 			case 'timezone':
@@ -113,20 +123,27 @@ class UserPreferences {
 		$this->$name = $value;
 	}
 
-	public function __get( $t_string ) {
+	/**
+	 * @param string $t_string
+	 * @private
+	 */
+	public function __get( $p_string ) {
 		global $g_default_mapping;
-		if( is_null( $this->{$t_string} ) ) {
-			$this->{$t_string} = config_get( $g_default_mapping[$t_string], null, $this->pref_user_id, $this->pref_project_id );
+		if( is_null( $this->{$p_string} ) ) {
+			$this->{$p_string} = config_get( $g_default_mapping[$p_string], null, $this->pref_user_id, $this->pref_project_id );
 		}
 		return $this->{$t_string};
 	}
 
-	function Get( $t_string ) {
+	/**
+	 * @param string $t_string
+	 */
+	function Get( $p_string ) {
 		global $g_default_mapping;
-		if( is_null( $this->{$t_string} ) ) {
-			$this->{$t_string} = config_get( $g_default_mapping[$t_string], null, $this->pref_user_id, $this->pref_project_id );
+		if( is_null( $this->{$p_string} ) ) {
+			$this->{$p_string} = config_get( $g_default_mapping[$p_string], null, $this->pref_user_id, $this->pref_project_id );
 		}
-		return $this->{$t_string};
+		return $this->{$p_string};
 	}
 }
 

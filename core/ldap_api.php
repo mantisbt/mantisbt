@@ -23,7 +23,12 @@
  * @link http://www.mantisbt.org
  */
 
-# Connect and bind to the LDAP directory
+/**
+ * Connect and bind to the LDAP directory
+ * @param string $p_binddn
+ * @param string $p_password
+ * @return resource
+ */
 function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	$t_ldap_server = config_get( 'ldap_server' );
 
@@ -73,7 +78,11 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 
 $g_cache_ldap_email = array();
 
-# Return an email address from LDAP, given a userid
+/**
+ * returns an email address from LDAP, given a userid
+ * @param int $p_user_id
+ * @return string
+ */
 function ldap_email( $p_user_id ) {
 	global $g_cache_ldap_email;
 
@@ -88,7 +97,11 @@ function ldap_email( $p_user_id ) {
 	return $t_email;
 }
 
-# Return an email address from LDAP, given a username
+/**
+ * Return an email address from LDAP, given a username
+ * @param string $p_username
+ * @return string
+ */
 function ldap_email_from_username( $p_username ) {
 	$t_ldap_organization = config_get( 'ldap_organization' );
 	$t_ldap_root_dn = config_get( 'ldap_root_dn' );
@@ -112,7 +125,12 @@ function ldap_email_from_username( $p_username ) {
 	return $t_info[0]['mail'][0];
 }
 
-# Return true if the $uid has an assigngroup=$p_group tag, false otherwise
+/**
+ * Return true if the $uid has an assigngroup=$p_group tag, false otherwise
+ * @param int $p_user_id
+ * @param string $p_group
+ * @return bool
+ */
 function ldap_has_group( $p_user_id, $p_group ) {
 	$t_ldap_organization = config_get( 'ldap_organization' );
 	$t_ldap_root_dn = config_get( 'ldap_root_dn' );
@@ -140,10 +158,14 @@ function ldap_has_group( $p_user_id, $p_group ) {
 	}
 }
 
-# Attempt to authenticate the user against the LDAP directory
-#  return true on successful authentication, false otherwise
+/**
+ * Attempt to authenticate the user against the LDAP directory
+ * return true on successful authentication, false otherwise
+ * @param int $p_user_id
+ * @param string $p_password
+ * @return bool
+ */
 function ldap_authenticate( $p_user_id, $p_password ) {
-
 	# if password is empty and ldap allows anonymous login, then
 	# the user will be able to login, hence, we need to check
 	# for this special case.
@@ -171,7 +193,6 @@ function ldap_authenticate( $p_user_id, $p_password ) {
 	$t_authenticated = false;
 
 	if( $t_info ) {
-
 		# Try to authenticate to each until we get a match
 		for( $i = 0;$i < $t_info['count'];$i++ ) {
 			$t_dn = $t_info[$i]['dn'];
@@ -180,7 +201,6 @@ function ldap_authenticate( $p_user_id, $p_password ) {
 			if( @ldap_bind( $t_ds, $t_dn, $p_password ) ) {
 				$t_authenticated = true;
 				break;
-
 				# Don't need to go any further
 			}
 		}
@@ -191,7 +211,3 @@ function ldap_authenticate( $p_user_id, $p_password ) {
 
 	return $t_authenticated;
 }
-
-# Create a new user account in the LDAP Directory.
-# Update the user's account in the LDAP Directory
-# Change the user's password in the LDAP Directory

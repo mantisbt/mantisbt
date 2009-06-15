@@ -23,32 +23,30 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires current_user_api
  */
-require_once( $t_core_dir . 'current_user_api.php' );
+require_once( 'current_user_api.php' );
 /**
  * requires string_api
  */
-require_once( $t_core_dir . 'string_api.php' );
+require_once( 'string_api.php' );
 /**
  * requires prepare_api
  */
-require_once( $t_core_dir . 'prepare_api.php' );
+require_once( 'prepare_api.php' );
 /**
  * requires profile_api
  */
-require_once( $t_core_dir . 'profile_api.php' );
+require_once( 'profile_api.php' );
 /**
  * requires last_visited_api
  */
-require_once( $t_core_dir . 'last_visited_api.php' );
+require_once( 'last_visited_api.php' );
 /**
  * requires file_api
  */
-require_once( $t_core_dir . 'file_api.php' );
+require_once( 'file_api.php' );
 
 # --------------------
 # Print the headers to cause the page to redirect to $p_url

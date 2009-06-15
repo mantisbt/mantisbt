@@ -33,22 +33,50 @@
 /**
  * requires gpc_api
  */
-require_once( $t_core_dir . 'gpc_api.php' );
+require_once( 'gpc_api.php' );
 
+/**
+ *
+ * @global MantisPHPSession $g_session
+ */
 $g_session = null;
 
 /**
  * Abstract interface for a MantisBT session handler.
+ * @package MantisBT
+ * @subpackage classes
  */
 abstract class MantisSession {
 	var $id;
 
+	/**
+	 * Constructor
+	 */
 	abstract function __construct();
 
+	/**
+	 * get session data
+	 * @param string $p_name
+	 * @param mixed $p_default
+	 */
 	abstract function get( $p_name, $p_default = null );
+	
+	/**
+	 * set session data
+	 * @param string $p_name
+	 * @param mixed $p_value
+	 */
 	abstract function set( $p_name, $p_value );
+	
+	/**
+	 * delete session data
+	 * @param string $p_name
+	 */
 	abstract function delete( $p_name );
 
+	/** 
+	 * destroy session
+	 */
 	abstract function destroy();
 }
 
@@ -56,8 +84,13 @@ abstract class MantisSession {
  * Implementation of the abstract MantisBT session interface using
  * standard PHP sessions stored on the server's filesystem according
  * to PHP's session.* settings in 'php.ini'.
+ * @package MantisBT
+ * @subpackage classes
  */
 class MantisPHPSession extends MantisSession {
+	/**
+	 * Constructor
+	 */
 	function __construct( $p_session_id=null ) {
 		$this->key = config_get_global( 'session_key' );
 
@@ -90,6 +123,11 @@ class MantisPHPSession extends MantisSession {
 		}
 	}
 
+	/**
+	 * get session data
+	 * @param string $p_name
+	 * @param mixed $p_default
+	 */	
 	function get( $p_name, $p_default=null ) {
 		if ( isset( $_SESSION[ $this->key ][ $p_name ] ) ) {
 			return unserialize( $_SESSION[ $this->key ][ $p_name ] );
@@ -103,14 +141,26 @@ class MantisPHPSession extends MantisSession {
 		trigger_error( ERROR_SESSION_VAR_NOT_FOUND, ERROR );
 	}
 
+	/**
+	 * set session data
+	 * @param string $p_name
+	 * @param mixed $p_value
+	 */
 	function set( $p_name, $p_value ) {
 		$_SESSION[ $this->key ][ $p_name ] = serialize( $p_value );
 	}
 
+	/**
+	 * delete session data
+	 * @param string $p_name
+	 */
 	function delete( $p_name ) {
 		unset( $_SESSION[ $this->key ][ $p_name ] );
 	}
 
+	/** 
+	 * destroy session
+	 */
 	function destroy() {
 		if( isset( $_COOKIE[session_name()] ) && !headers_sent() ) {
 			gpc_set_cookie( session_name(), '', time() - 42000 );

@@ -22,32 +22,33 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires bug_api
  */
-require_once( $t_core_dir . 'bug_api.php' );
+require_once( 'bug_api.php' );
 
 /**
  * requires user_pref_api
  */
-require_once( $t_core_dir . 'user_pref_api.php' );
+require_once( 'user_pref_api.php' );
 
 $g_cache_html_valid_tags = '';
 $g_cache_html_valid_tags_single_line = '';
 
-/**
- * Return a string with all alphabetical characters converted to lowercase,
- * using an appropriate multibyte implementation as available to system.
- * @param string Input string
- * @return string Lower cased string
- */
 if ( function_exists( 'mb_strtolower' ) ) {
+	/**
+	 * Return a string with all alphabetical characters converted to lowercase,
+	 * using an appropriate multibyte implementation as available to system.
+	 * @param string Input string
+	 * @return string Lower cased string
+	 */
 	function string_lower( $p_string ) {
 			return mb_strtolower( $p_string );
 	}
 } else {
+	/**
+	 * @ignore
+	 */
 	function string_lower( $p_string ) {
 			return strtolower( $p_string );
 	}
@@ -105,7 +106,7 @@ function string_no_break( $p_string ) {
 
 /**
  * Similar to nl2br, but fixes up a problem where new lines are doubled between
- * <pre> tags.
+ * html pre tags.
  * additionally, wrap the text an $p_wrap character intervals if the config is set
  * @param string $p_string
  * @param int $p_wrap
@@ -516,10 +517,10 @@ function string_strip_hrefs( $p_string ) {
 /**
  * This function looks for text with htmlentities
  * like &lt;b&gt; and converts is into corresponding
- * html <b> based on the configuration presets
+ * html < b > tag based on the configuration presets
  * @param string $p_string
  * @param bool $p_multiline
- * @return 
+ * @return string
  */
 function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
 	global $g_cache_html_valid_tags_single_line, $g_cache_html_valid_tags;

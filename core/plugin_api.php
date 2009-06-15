@@ -484,7 +484,7 @@ function plugin_priority( $p_basename ) {
 /**
  * Determine if a given plugin is installed.
  * @param string Plugin basename
- * @retrun boolean True if plugin is installed
+ * @return boolean True if plugin is installed
  */
 function plugin_is_installed( $p_basename ) {
 	$t_plugin_table = db_get_table( 'mantis_plugin_table' );

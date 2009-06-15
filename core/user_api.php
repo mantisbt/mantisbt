@@ -22,10 +22,14 @@
  * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
-require_once( $t_core_dir . 'email_api.php' );
-require_once( $t_core_dir . 'ldap_api.php' );
+/**
+ * requires email_api
+ */
+require_once( 'email_api.php' );
+/**
+ * requires ldap_api
+ */
+require_once( 'ldap_api.php' );
 
 # ===================================
 # Caching

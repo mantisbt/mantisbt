@@ -15,6 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Misc. Helper Functions
  * @package CoreAPI
  * @subpackage HelperAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -22,10 +23,14 @@
  * @link http://www.mantisbt.org
  */
 
-# These are miscellaneous functions
-# --------------------
-# alternate color function
-#  If no index is given, continue alternating based on the last index given
+/**
+ * alternate color function
+ * If no index is given, continue alternating based on the last index given
+ * @param int $p_index
+ * @param string $p_odd_color
+ * @param string $p_even_color
+ * @return string
+ */
 function helper_alternate_colors( $p_index, $p_odd_color, $p_even_color ) {
 	static $t_index = 1;
 
@@ -40,9 +45,14 @@ function helper_alternate_colors( $p_index, $p_odd_color, $p_even_color ) {
 	}
 }
 
-# --------------------
-# alternate classes for table rows
-#  If no index is given, continue alternating based on the last index given
+/**
+ * alternate classes for table rows
+ * If no index is given, continue alternating based on the last index given
+ * @param int $p_index
+ * @param string $p_odd_class default: row-1
+ * @param string $p_even_class default: row-2
+ * @return string
+ */
 function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_even_class = 'row-2' ) {
 	static $t_index = 1;
 
@@ -57,8 +67,11 @@ function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_eve
 	}
 }
 
-# --------------------
-# get the color string for the given status
+/**
+ * get the color string for the given status
+ * @param int $p_status
+ * @return string
+ */
 function get_status_color( $p_status ) {
 	$t_status_label = MantisEnum::getLabel( config_get( 'status_enum_string' ), $p_status );
 	$t_status_colors = config_get( 'status_colors' );
@@ -71,8 +84,12 @@ function get_status_color( $p_status ) {
 	return $t_color;
 }
 
-# --------------------
-# Given a enum string and num, return the appropriate string
+/**
+ * Given a enum string and num, return the appropriate string
+ * @param string $p_enum_name
+ * @param int $p_val
+ * @return string
+ */
 function get_enum_element( $p_enum_name, $p_val ) {
 	$config_var = config_get( $p_enum_name . '_enum_string' );
 	$string_var = lang_get( $p_enum_name . '_enum_string' );
@@ -80,14 +97,18 @@ function get_enum_element( $p_enum_name, $p_val ) {
 	return MantisEnum::getLocalizedLabel( $config_var, $string_var, $p_val );
 }
 
-# --------------------
-# If $p_var is not an array and is equal to $p_val then we PRINT SELECTED.
-# If $p_var is an array, then if any member is equal to $p_val we PRINT SELECTED.
-# This is used when we want to know if a variable indicated a certain
-# option element is selected
-#
-# If the second parameter is not given, the first parameter is compared
-#  to the boolean value true
+/**
+ * If $p_var is not an array and is equal to $p_val then we PRINT SELECTED.
+ * If $p_var is an array, then if any member is equal to $p_val we PRINT SELECTED.
+ * This is used when we want to know if a variable indicated a certain
+ * option element is selected
+ *
+ * If the second parameter is not given, the first parameter is compared
+ *  to the boolean value true
+ * @param mixed $p_var
+ * @param mixed $p_val
+ * @return null
+ */
 function check_selected( $p_var, $p_val = true ) {
 	if( is_array( $p_var ) ) {
 		foreach( $p_var as $t_this_var ) {
@@ -118,25 +139,31 @@ function check_selected( $p_var, $p_val = true ) {
 	}
 }
 
-# --------------------
-# If $p_var and $p_val are equal to each other then we PRINT CHECKED
-# This is used when we want to know if a variable indicated a certain
-# element is checked
-#
-# If the second parameter is not given, the first parameter is compared
-#  to the boolean value true
+/**
+ * If $p_var and $p_val are equal to each other then we PRINT CHECKED
+ * This is used when we want to know if a variable indicated a certain
+ * element is checked
+ *
+ * If the second parameter is not given, the first parameter is compared
+ * to the boolean value true
+ * @param mixed $p_var
+ * @param mixed $p_val
+ * @return null
+ */ 
 function check_checked( $p_var, $p_val = true ) {
 	if( $p_var == $p_val ) {
 		echo ' checked="checked" ';
 	}
 }
 
-# --------------------
-# Set up PHP for a long process execution
-# The script timeout is set based on the value of the
-#  long_process_timeout config option.
-# $p_ignore_abort specified whether to ignore user aborts by hitting
-#  the Stop button (the default is not to ignore user aborts)
+/**
+ * Set up PHP for a long process execution
+ * The script timeout is set based on the value of the long_process_timeout config option.
+ * $p_ignore_abort specified whether to ignore user aborts by hitting
+ * the Stop button (the default is not to ignore user aborts)
+ * @param bool $p_ignore_abort
+ * @return int
+ */
 function helper_begin_long_process( $p_ignore_abort = false ) {
 	$t_timeout = config_get( 'long_process_timeout' );
 
@@ -153,9 +180,11 @@ function helper_begin_long_process( $p_ignore_abort = false ) {
 $g_project_override = null;
 $g_cache_current_project = null;
 
-# --------------------
-# Return the current project id as stored in a cookie
-#  If no cookie exists, the user's default project is returned
+/**
+ * Return the current project id as stored in a cookie
+ *  If no cookie exists, the user's default project is returned
+ * @return int
+ */
 function helper_get_current_project() {
 	global $g_project_override, $g_cache_current_project;
 
@@ -184,11 +213,13 @@ function helper_get_current_project() {
 	return $g_cache_current_project;
 }
 
-# --------------------
-# Return the current project id as stored in a cookie, in an Array
-#  If no cookie exists, the user's default project is returned
-#  If the current project is a subproject, the return value will include
-#   any parent projects
+/**
+ * Return the current project id as stored in a cookie, in an Array
+ * If no cookie exists, the user's default project is returned
+ * If the current project is a subproject, the return value will include
+ * any parent projects
+ * @return array
+ */
 function helper_get_current_project_trace() {
 	$t_cookie_name = config_get( 'project_cookie' );
 
@@ -213,8 +244,11 @@ function helper_get_current_project_trace() {
 	return $t_project_id;
 }
 
-# --------------------
-# Set the current project id (stored in a cookie)
+/**
+ * Set the current project id (stored in a cookie)
+ * @param int $p_project_id
+ * @return bool always true
+ */
 function helper_set_current_project( $p_project_id ) {
 	$t_project_cookie_name = config_get( 'project_cookie' );
 
@@ -223,30 +257,33 @@ function helper_set_current_project( $p_project_id ) {
 	return true;
 }
 
-# --------------------
-# Clear all known user preference cookies
+/**
+ * Clear all known user preference cookies
+ * @return null
+ */
 function helper_clear_pref_cookies() {
 	gpc_clear_cookie( config_get( 'project_cookie' ) );
 	gpc_clear_cookie( config_get( 'manage_cookie' ) );
 }
 
-# --------------------
-# Check whether the user has confirmed this action.
-#
-# If the user has not confirmed the action, generate a page which asks
-#  the user to confirm and then submits a form back to the current page
-#  with all the GET and POST data and an additional field called _confirmed
-#  to indicate that confirmation has been done.
+/**
+ * Check whether the user has confirmed this action.
+ *
+ * If the user has not confirmed the action, generate a page which asks
+ * the user to confirm and then submits a form back to the current page
+ * with all the GET and POST data and an additional field called _confirmed
+ * to indicate that confirmation has been done.
+ * @param string $p_message
+ * @param string $p_button_label
+ * @return bool
+ * @todo improve this formatting - to only be about 50% of the screen width so that it doesn't become hard to read.
+ */
 function helper_ensure_confirmed( $p_message, $p_button_label ) {
 	if( true == gpc_get_bool( '_confirmed' ) ) {
 		return true;
 	}
 
 	html_page_top();
-
-	# @@@ we need to improve this formatting.  I'd like the text to only
-	#  be about 50% the width of the screen so that it doesn't become to hard
-	#  to read.
 
 	echo "<br />\n<div align=\"center\">\n";
 	print_hr();
@@ -267,12 +304,16 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 	exit;
 }
 
-# --------------------
-# Call custom function.
-#
-# $p_function - Name of function to call (eg: do_stuff).  The function will call custom_function_override_do_stuff()
-#		if found, otherwise, will call custom_function_default_do_stuff().
-# $p_args_array - Parameters to function as an array
+/**
+ * Call custom function.
+ *
+ * $p_function - Name of function to call (eg: do_stuff).  The function will call custom_function_override_do_stuff()
+ *		if found, otherwise, will call custom_function_default_do_stuff().
+ * $p_args_array - Parameters to function as an array
+ * @param string $p_function
+ * @param array $p_args_array
+ * @return mixed
+ */
 function helper_call_custom_function( $p_function, $p_args_array ) {
 	$t_function = 'custom_function_override_' . $p_function;
 
@@ -283,7 +324,12 @@ function helper_call_custom_function( $p_function, $p_args_array ) {
 	return call_user_func_array( $t_function, $p_args_array );
 }
 
-# --------------------
+/**
+ * return string to use in db queries containing projects of given user
+ * @param int $p_project_id
+ * @param int $p_user_id
+ * @return string
+ */
 function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 	if( null === $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
@@ -302,7 +348,13 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 	return $t_project_filter;
 }
 
-# --------------------
+/**
+ * 
+ * @param int $p_columns_target
+ * @param bool $p_viewable_only
+ * @param int $p_user_id
+ * @return array
+ */
 function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_viewable_only = true, $p_user_id = null ) {
 	$t_columns = helper_call_custom_function( 'get_columns_to_view', array( $p_columns_target, $p_user_id ) );
 
@@ -364,9 +416,14 @@ function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAG
 	return array_values( $t_columns );
 }
 
-# --------------------
-# if all projects selected, default to <prefix><username><suffix><extension>, otherwise default to
-# <prefix><projectname><suffix><extension>.
+/**
+ * if all projects selected, default to <prefix><username><suffix><extension>, otherwise default to
+ * <prefix><projectname><suffix><extension>.
+ * @param string $p_extension_with_dot
+ * @param string $p_prefix
+ * @param string $p_suffix
+ * @return string
+ */
 function helper_get_default_export_filename( $p_extension_with_dot, $p_prefix = '', $p_suffix = '' ) {
 	$t_filename = $p_prefix;
 
@@ -381,32 +438,39 @@ function helper_get_default_export_filename( $p_extension_with_dot, $p_prefix = 
 	return $t_filename . $p_suffix . $p_extension_with_dot;
 }
 
-# --------------------
-# returns a tab index value and increments it by one.  This is used to give sequential tab index on
-# a form.
+/**
+ * returns a tab index value and increments it by one.  This is used to give sequential tab index on a form.
+ * @return int
+ */
 function helper_get_tab_index_value() {
 	static $tab_index = 0;
 	return ++$tab_index;
 }
 
-# --------------------
-# returns a tab index and increments internal state by 1.  This is used to give sequential tab index on
-# a form.  For example, this function returns: tabindex="1"
+/**
+ * returns a tab index and increments internal state by 1.  This is used to give sequential tab index on
+ * a form.  For example, this function returns: tabindex="1"
+ * @return string
+ */
 function helper_get_tab_index() {
 	return 'tabindex="' . helper_get_tab_index_value() . '"';
 }
 
-# --------------------
-# returns a boolean indicating whether SQL queries executed should be shown
-# or not.
+/**
+ * returns a boolean indicating whether SQL queries executed should be shown or not.
+ * @return bool
+ */
 function helper_show_queries() {
-
 	# Check is authenticated before checking access level, otherwise user gets
 	# redirected to login_page.php.  See #8461.
 	return ON == config_get( 'show_queries_count' ) && auth_is_user_authenticated() && access_has_global_level( config_get( 'show_queries_threshold' ) );
 }
 
-# Return a URL relative to the web root, compatible with other applications
+/**
+ * Return a URL relative to the web root, compatible with other applications
+ * @param string $p_url
+ * @return string
+ */
 function helper_mantis_url( $p_url ) {
 	if( is_blank( $p_url ) ) {
 		return $p_url;
@@ -414,8 +478,11 @@ function helper_mantis_url( $p_url ) {
 	return config_get_global( 'short_path' ) . $p_url;
 }
 
-# --------------------
-# convert a duration string in "[h]h:mm" to an integer (minutes)
+/**
+ * convert a duration string in "[h]h:mm" to an integer (minutes)
+ * @param string $p_hhmm
+ * @return int
+ */
 function helper_duration_to_minutes( $p_hhmm ) {
 	if( is_blank( $p_hhmm ) ) {
 		return 0;
@@ -449,13 +516,10 @@ function helper_duration_to_minutes( $p_hhmm ) {
 		case 1:
 			$t_min = (integer) $t_a[0];
 			break;
-
 		case 2:
 			$t_min = (integer) $t_a[0] * 60 + (integer) $t_a[1];
 			break;
-
 		case 3:
-
 			// if seconds included, approxiate it to minutes
 			$t_min = (integer) $t_a[0] * 60 + (integer) $t_a[1];
 

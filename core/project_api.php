@@ -22,28 +22,26 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires category_api
  */
-require_once( $t_core_dir . 'category_api.php' );
+require_once( 'category_api.php' );
 /**
  * requires version_api
  */
-require_once( $t_core_dir . 'version_api.php' );
+require_once( 'version_api.php' );
 /**
  * requires bug_api
  */
-require_once( $t_core_dir . 'bug_api.php' );
+require_once( 'bug_api.php' );
 /**
  * requires file_api
  */
-require_once( $t_core_dir . 'file_api.php' );
+require_once( 'file_api.php' );
 /**
  * requires news_api
  */
-require_once( $t_core_dir . 'news_api.php' );
+require_once( 'news_api.php' );
 
 # ## Project API ###
 # ===================================

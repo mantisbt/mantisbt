@@ -22,36 +22,34 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires current_user_api
  */
-require_once( $t_core_dir . 'current_user_api.php' );
+require_once( 'current_user_api.php' );
 /**
  * requires bug_api
  */
-require_once( $t_core_dir . 'bug_api.php' );
+require_once( 'bug_api.php' );
 /**
  * requires custom_field_api
  */
-require_once( $t_core_dir . 'custom_field_api.php' );
+require_once( 'custom_field_api.php' );
 /**
  * requires string_api
  */
-require_once( $t_core_dir . 'string_api.php' );
+require_once( 'string_api.php' );
 /**
  * requires history_api
  */
-require_once( $t_core_dir . 'history_api.php' );
+require_once( 'history_api.php' );
 /**
  * requires email_queue_api
  */
-require_once( $t_core_dir . 'email_queue_api.php' );
+require_once( 'email_queue_api.php' );
 /**
  * requires relationship_api
  */
-require_once( $t_core_dir . 'relationship_api.php' );
+require_once( 'relationship_api.php' );
 
 /**
  * reusable object of class SMTP

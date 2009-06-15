@@ -32,32 +32,30 @@
  * @uses database_api.php
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * require constaint_inc.php for NOBODY etc
  */
-require_once( $t_core_dir . 'constant_inc.php' );
+require_once( 'constant_inc.php' );
 /**
  * requires helper_api
  */
-require_once( $t_core_dir . 'helper_api.php' );
+require_once( 'helper_api.php' );
 /**
  * requires authentication_api
  */
-require_once( $t_core_dir . 'authentication_api.php' );
+require_once( 'authentication_api.php' );
 /**
  * requires user_api
  */
-require_once( $t_core_dir . 'user_api.php' );
+require_once( 'user_api.php' );
 /**
  * requires bug_api
  */
-require_once( $t_core_dir . 'bug_api.php' );
+require_once( 'bug_api.php' );
 /**
  * requires project_api
  */
-require_once( $t_core_dir . 'project_api.php' );
+require_once( 'project_api.php' );
 
 /**
  *

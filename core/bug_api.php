@@ -23,45 +23,46 @@
  * @subpackage BugAPI
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires history_api
  */
-require_once( $t_core_dir . 'history_api.php' );
+require_once( 'history_api.php' );
 /**
  * requires email_api
  */
-require_once( $t_core_dir . 'email_api.php' );
+require_once( 'email_api.php' );
 /**
  * requires bugnote_api
  */
-require_once( $t_core_dir . 'bugnote_api.php' );
+require_once( 'bugnote_api.php' );
 /**
  * requires file_api
  */
-require_once( $t_core_dir . 'file_api.php' );
+require_once( 'file_api.php' );
 /**
  * requires string_api
  */
-require_once( $t_core_dir . 'string_api.php' );
+require_once( 'string_api.php' );
 /**
  * requires sponsorship_api
  */
-require_once( $t_core_dir . 'sponsorship_api.php' );
+require_once( 'sponsorship_api.php' );
 /**
  * requires twitter_api
  */
-require_once( $t_core_dir . 'twitter_api.php' );
+require_once( 'twitter_api.php' );
 /**
  * requires tag_api
  */
-require_once( $t_core_dir . 'tag_api.php' );
+require_once( 'tag_api.php' );
 /**
  * requires relationship_api
  */
-require_once( $t_core_dir . 'relationship_api.php' );
-require_once( $t_core_dir . 'bug_revision_api.php' );
+require_once( 'relationship_api.php' );
+/**
+ * requires bug_revision_api
+ */
+require_once( 'bug_revision_api.php' );
 
 /**
  * Bug Data Structure Definition
@@ -117,6 +118,10 @@ class BugData {
 	static $t_vars;
 	private $loading = false;
 
+	/**
+	 * return number of file attachment's linked to current bug
+	 * @return int
+	 */
 	public function get_attachment_count() {
 		if ( $this->attachment_count === null ) {
 			$this->attachment_count = file_bug_attachment_count( $this->id );
@@ -126,6 +131,10 @@ class BugData {
 		}
 	}
 
+	/**
+	 * return number of bugnotes's linked to current bug
+	 * @return int
+	 */
 	public function get_bugnotes_count() {
 		if ( $this->bugnotes_count === null ) {
 			$this->bugnotes_count = self::bug_get_bugnote_count();
@@ -135,6 +144,9 @@ class BugData {
 		}
 	}
 
+	/**
+	 * @private
+	 */
 	public function __set($name, $value) {
 		switch ($name) {
 			// integer types
@@ -177,10 +189,17 @@ class BugData {
 		$this->$name = $value;
 	}
 
+	/**
+	 * @private
+	 */
 	public function __get($name) {
 		return $this->{$name};
 	}
 
+	/**
+	 * fast-load database row into bugobject
+	 * @param array $p_row
+	 */
 	public function loadrow( $p_row ) {
 		$this->loading = true;
 
@@ -212,6 +231,11 @@ class BugData {
 		return db_result( $result );
 	}
 
+	/**
+	 * validate current bug object for database insert/update
+	 * triggers error on failure
+	 * @param bool $p_update_extended
+	 */
 	function validate( $p_update_extended =  true) {
 		# Summary cannot be blank
 		if( is_blank( $this->summary ) ) {

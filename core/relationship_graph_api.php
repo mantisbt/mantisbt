@@ -39,16 +39,14 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires relationship_api
  */
-require_once( $t_core_dir . 'relationship_api.php' );
+require_once( 'relationship_api.php' );
 /**
  * requires graphviz_api
  */
-require_once( $t_core_dir . 'graphviz_api.php' );
+require_once( 'graphviz_api.php' );
 
 # Generate a relationship graph for the given issue.
 function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {

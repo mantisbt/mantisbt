@@ -21,24 +21,23 @@
  * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 /**
  * requires bug_api
  */
-require_once( $t_core_dir . 'bug_api.php' );
+require_once( 'bug_api.php' );
 /**
  * requires profile_api
  */
-require_once( $t_core_dir . 'profile_api.php' );
+require_once( 'profile_api.php' );
 /**
  * requires logging_api
  */
-require_once( $t_core_dir . 'logging_api.php' );
+require_once( 'logging_api.php' );
 /**
  * requires projax_api
  */
-require_once( $t_core_dir . 'projax_api.php' );
+require_once( 'projax_api.php' );
 
 /**
  *

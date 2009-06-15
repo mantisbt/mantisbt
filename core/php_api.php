@@ -23,7 +23,9 @@
  * @link http://www.mantisbt.org
  */
 
-# Constant for our minimum required PHP version
+/**
+ * Constant for our minimum required PHP version
+ */
 define( 'PHP_MIN_VERSION', '5.1.0' );
 
 # cache array of comparisons

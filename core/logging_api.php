@@ -24,9 +24,6 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
-
 $g_log_levels = array(
 	LOG_EMAIL => 'mail',
 	LOG_EMAIL_RECIPIENT => 'mail_recipient',
@@ -36,6 +33,12 @@ $g_log_levels = array(
 	LOG_DATABASE => 'database',
 );
 
+/**
+ * Log an event
+ * @param int $p_level
+ * @param string $p_msg
+ * @return null
+ */
 function log_event( $p_level, $p_msg ) {
 	global $g_log_levels;
 

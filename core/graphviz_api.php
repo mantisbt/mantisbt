@@ -34,7 +34,9 @@
  * @link http://www.mantisbt.org
  */
 
-# These constants define the output formats supported by dot and neato.
+/** 
+ * constant(s) defining the output formats supported by dot and neato. 
+ */
 define( 'GRAPHVIZ_ATTRIBUTED_DOT', 0 );
 define( 'GRAPHVIZ_PS', 1 );
 define( 'GRAPHVIZ_HPGL', 2 );
@@ -61,6 +63,8 @@ define( 'GRAPHVIZ_PDF', 28 );
  * Base class for graph creation and manipulation. By default,
  * undirected graphs are generated. For directed graphs, use Digraph
  * class.
+ * @package MantisBT
+ * @subpackage classes
  */
 class Graph {
 	var $name = 'G';
@@ -489,6 +493,8 @@ class Graph {
 
 /**
  * Directed graph creation and manipulation.
+ * @package MantisBT
+ * @subpackage classes
  */
 class Digraph extends Graph {
 	/** 

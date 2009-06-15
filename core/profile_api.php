@@ -22,7 +22,15 @@
  * @link http://www.mantisbt.org
  */
 
-# Create a new profile for the user, return the ID of the new profile
+/**
+ * Create a new profile for the user, return the ID of the new profile
+ * @param int $p_user_id
+ * @param string $p_platform
+ * @param string $p_os
+ * @param string $p_os_build
+ * @param string $p_description
+ * @return int
+ */
 function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) {
 	$p_user_id = (int)$p_user_id;
 
@@ -60,11 +68,16 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
 	return db_insert_id( $t_user_profile_table );
 }
 
-# Delete a profile for the user
-#
-# Note that although profile IDs are currently globally unique, the existing
-#  code included the user_id in the query and I have chosen to keep that for
-#  this API as it hides the details of id implementation from users of the API
+/** 
+ * Delete a profile for the user
+ *
+ * Note that although profile IDs are currently globally unique, the existing
+ * code included the user_id in the query and I have chosen to keep that for
+ * this API as it hides the details of id implementation from users of the API
+ * @param int $p_user_id
+ * @param int $p_profile_id
+ * @return true
+ */
 function profile_delete( $p_user_id, $p_profile_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_profile_id = db_prepare_int( $p_profile_id );
@@ -84,7 +97,16 @@ function profile_delete( $p_user_id, $p_profile_id ) {
 	return true;
 }
 
-# Update a profile for the user
+/**
+ * Update a profile for the user
+ * @param int $p_user_id
+ * @param int $p_profile_id
+ * @param string $p_platform
+ * @param string $p_os
+ * @param string $p_os_build
+ * @param string $p_description
+ * @return true
+ */
 function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_build, $p_description ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_profile_id = db_prepare_int( $p_profile_id );
@@ -126,11 +148,12 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 	return true;
 }
 
-# ===================================
-# Data Access
-# ===================================
-
-# Return a profile row from the database
+/**
+ * Return a profile row from the database
+ * @param int $p_user_id
+ * @param int $p_profile_id
+ * @return array
+ */
 function profile_get_row( $p_user_id, $p_profile_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_profile_id = db_prepare_int( $p_profile_id );
@@ -145,7 +168,12 @@ function profile_get_row( $p_user_id, $p_profile_id ) {
 	return db_fetch_array( $result );
 }
 
-# Return a profile row from the database
+/**
+ * Return a profile row from the database
+ * @param int $p_profile_id
+ * @return array
+ * @todo relationship of this function to profile_get_row?
+ */
 function profile_get_row_direct( $p_profile_id ) {
 	$c_profile_id = db_prepare_int( $p_profile_id );
 
@@ -159,7 +187,11 @@ function profile_get_row_direct( $p_profile_id ) {
 	return db_fetch_array( $result );
 }
 
-# Return an array containing all rows for a given user
+/**
+ * Return an array containing all rows for a given user
+ * @param int $p_user_id
+ * @return array
+ */
 function profile_get_all_rows( $p_user_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 
@@ -181,8 +213,12 @@ function profile_get_all_rows( $p_user_id ) {
 	return $t_rows;
 }
 
-# Return an array containing all profiles for a given user,
-# including global profiles
+/**
+ * Return an array containing all profiles for a given user,
+ * including global profiles
+ * @param int $p_user_id
+ * @return array
+ */
 function profile_get_all_for_user( $p_user_id ) {
 	if( ALL_USERS == $p_user_id ) {
 		return profile_get_all_rows( ALL_USERS );
@@ -193,8 +229,13 @@ function profile_get_all_for_user( $p_user_id ) {
 	}
 }
 
-# Return an array of strings containing unique values for the specified field based
-# on private and public profiles accessible to the specified user.
+/**
+ * Return an array of strings containing unique values for the specified field based
+ * on private and public profiles accessible to the specified user.
+ * @param string $p_field
+ * @param int $p_user_id
+ * @return array
+ */
 function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 	$c_user_id = ( $p_user_id === null ) ? auth_get_current_user_id() : db_prepare_int( $p_user_id );
 
@@ -231,7 +272,11 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 	return $t_rows;
 }
 
-# Return an array containing all profiles used in a given project
+/**
+ * Return an array containing all profiles used in a given project
+ * @param int $p_project_id
+ * @return array
+ */
 function profile_get_all_for_project( $p_project_id ) {
 	$t_project_where = helper_project_specific_where( $p_project_id );
 
@@ -256,14 +301,12 @@ function profile_get_all_for_project( $p_project_id ) {
 	return $t_rows;
 }
 
-# Return an array containing all global profiles
-function profile_get_global() {
-	return profile_get_all_rows( ALL_USERS );
-}
-
-# Returns the default profile
+/**
+ * Returns the default profile
+ * @param int $p_user_id
+ * @return string
+ */
 function profile_get_default( $p_user_id ) {
-
 	$c_user_id = db_prepare_int( $p_user_id );
 	$t_mantis_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
@@ -277,12 +320,13 @@ function profile_get_default( $p_user_id ) {
 	return $t_default_profile;
 }
 
-# Returns whether the specified profile is global
+/**
+ * Returns whether the specified profile is global
+ * @param int $p_profile_id
+ * @return bool
+ */
 function profile_is_global( $p_profile_id ) {
 	$t_row = profile_get_row( ALL_USERS, $p_profile_id );
 	return( $t_row !== false );
 }
 
-# ===================================
-# Data Modification
-# ===================================
