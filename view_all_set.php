@@ -229,6 +229,35 @@
 	$f_tag_string			= gpc_get_string( FILTER_PROPERTY_TAG_STRING, '' );
 	$f_tag_select			= gpc_get_int( FILTER_PROPERTY_TAG_SELECT, '0' );
 
+	# plugin filter updates
+	$t_plugin_filters = filter_get_plugin_filters();
+	$f_filter_input = array();
+
+	foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
+		switch( $t_filter_object->type ) {
+			case FILTER_TYPE_STRING:
+				$f_filter_input[ $t_field_name ] = gpc_get_string( $t_field_name, $t_filter_object->default );
+				break;
+
+			case FILTER_TYPE_INT:
+				$f_filter_input[ $t_field_name ] = gpc_get_int( $t_field_name, $t_filter_object->default );
+				break;
+
+			case FILTER_TYPE_BOOLEAN:
+				$f_filter_input[ $t_field_name ] = gpc_get_bool( $t_field_name, OFF );
+				break;
+
+			case FILTER_TYPE_MULTI_STRING:
+				$f_filter_input[ $t_field_name ] = gpc_get_string_array( $t_field_name, $t_filter_object->default );
+				break;
+
+			case FILTER_TYPE_MULTI_INT:
+				$f_filter_input[ $t_field_name ] = gpc_get_int_array( $t_field_name, $t_filter_object->default );
+				break;
+		}
+	}
+
+	# custom field updates
 	$t_custom_fields 		= custom_field_get_ids(); /** @todo (thraxisp) This should really be the linked ids, but we don't know the project */
 	$f_custom_fields_data 	= array();
 	if ( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
@@ -443,6 +472,7 @@
 				$t_setting_arr[ FILTER_PROPERTY_TAG_STRING ] 			= $f_tag_string;
 				$t_setting_arr[ FILTER_PROPERTY_TAG_SELECT ] 			= $f_tag_select;
 				$t_setting_arr[ FILTER_PROPERTY_NOTE_USER_ID ] 			= $f_note_user_id;
+				$t_setting_arr = array_merge( $t_setting_arr, $f_filter_input );
 				break;
 		# Set the sort order and direction
 		case '2':

@@ -102,6 +102,8 @@
 	# Controller
 	#
 	function act(){
+		global $t_filter;
+
 		if(isset($_GET['filter_target'])){
 		    if ( !headers_sent() ) {
 			    header( 'Content-Type: text/html; charset=utf-8' );
@@ -116,12 +118,24 @@
 				$t_custom_id = utf8_substr($filter, 13,-7);
 				print_filter_custom_field($t_custom_id);
 			}else {
+				$t_plugin_filters = filter_get_plugin_filters();
+				$t_found = false;
+				foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
+					if ( $filter == $t_field_name . '_filter' ) {
+						print_filter_plugin_field( $t_field_name, $t_filter_object );
+						$t_found = true;
+						break;
+					}
+				}
+
+				if ( !$t_found ) {
 				# error - no function to populate the target (e.g., print_filter_foo)
 				?>
 				<span style="color:red;weight:bold;">
 					unknown filter (<?php echo string_display_line( $filter ); ?>)
 				</span>
 				<?php
+				}
 			}
 		} else {
 			# error - no filter given

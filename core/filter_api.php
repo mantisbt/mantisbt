@@ -52,6 +52,35 @@ require_once( 'tag_api.php' );
 require_once( $g_absolute_path . 'config_filter_defaults_inc.php' );
 
 /**
+ * Allow plugins to define a set of class-based filters, and register/load
+ * them here to be used by the rest of filter_api.
+ * @return array Mapping of field name to filter object
+ */
+function filter_get_plugin_filters() {
+	static $s_field_array = null;
+
+	if ( is_null( $s_field_array ) ) {
+		$s_field_array = array();
+
+		$t_all_plugin_filters = event_signal( 'EVENT_FILTER_FIELDS' );
+		foreach( $t_all_plugin_filters as $t_plugin => $t_plugin_filters ) {
+			foreach( $t_plugin_filters as $t_callback => $t_plugin_filter_array ) {
+				if ( is_array( $t_plugin_filter_array ) ) {
+					foreach( $t_plugin_filter_array as $t_filter_class ) {
+						if ( class_exists( $t_filter_class ) && is_subclass_of( $t_filter_class, 'MantisFilter' ) ) {
+							$t_filter_object = new $t_filter_class();
+							$t_field_name = $t_plugin . '_' . $t_filter_object->field;
+							$s_field_array[ $t_field_name ] = $t_filter_object;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return $s_field_array;
+}
+/**
  *  Get a permalink for the current active filter.  The results of using these fields by other users
  *  can be inconsistent with the original results due to fields like "Myself", "Current Project",
  *  and due to access level.
@@ -229,6 +258,14 @@ function filter_get_url( $p_custom_filter ) {
 			if( !filter_field_is_any( $t_custom_field_values ) ) {
 				$t_query[] = filter_encode_field_and_value( 'custom_field_' . $t_custom_field_id, $t_custom_field_values );
 			}
+		}
+	}
+
+	# Allow plugins to add filter fields
+	$t_plugin_filter_array = filter_get_plugin_filters();
+	foreach( $t_plugin_filter_array as $t_field_name => $t_filter_object ) {
+		if( !filter_field_is_any( $p_custom_filter[ $t_field_name ] ) ) {
+			$t_query[] = filter_encode_field_and_value( $t_field_name, $p_custom_filter[ $t_field_name ] );
 		}
 	}
 
@@ -502,6 +539,37 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_TAG_SELECT] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_TAG_SELECT] = gpc_get_string( FILTER_PROPERTY_TAG_SELECT, '' );
+	}
+
+	# initialize plugin filters
+	$t_plugin_filters = filter_get_plugin_filters();
+	foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
+		if( !isset( $p_filter_arr[ $t_field_name ] ) ) {
+			switch( $t_filter_object->type ) {
+				case FILTER_TYPE_STRING:
+					$p_filter_arr[ $t_field_name ] = gpc_get_string( $t_field_name, $t_filter_object->default );
+					break;
+
+				case FILTER_TYPE_INT:
+					$p_filter_arr[ $t_field_name ] = gpc_get_int( $t_field_name, (int)$t_filter_object->default );
+					break;
+
+				case FILTER_TYPE_BOOLEAN:
+					$p_filter_arr[ $t_field_name ] = gpc_get_bool( $t_field_name, (bool)$t_filter_object->default );
+					break;
+
+				case FILTER_TYPE_MULTI_STRING:
+					$p_filter_arr[ $t_field_name ] = gpc_get_string_array( $t_field_name, array( 0 => META_FILTER_ANY ) );
+					break;
+
+				case FILTER_TYPE_MULTI_INT:
+					$p_filter_arr[ $t_field_name ] = gpc_get_int_array( $t_field_name, array( 0 => META_FILTER_ANY ) );
+					break;
+
+				default:
+					$p_filter_arr[ $t_field_name ] = META_FILTER_ANY;
+			}
+		}
 	}
 
 	$t_custom_fields = custom_field_get_ids();
@@ -1717,6 +1785,25 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		}
 	}
 
+	# plugin filters
+	$t_plugin_filters = filter_get_plugin_filters();
+	foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
+		if ( !filter_field_is_any( $t_filter[ $t_field_name ] ) || $t_filter_object->type == FILTER_TYPE_BOOLEAN ) {
+			$t_filter_query = $t_filter_object->query( $t_filter[ $t_field_name ] );
+			if ( is_array( $t_filter_query ) ) {
+				if ( isset( $t_filter_query['join'] ) ) {
+					array_push( $t_join_clauses, $t_filter_query['join'] );
+				}
+				if ( isset( $t_filter_query['where'] ) ) {
+					array_push( $t_where_clauses, $t_filter_query['where'] );
+				}
+				if ( isset( $t_filter_query['params'] ) && is_array( $t_filter_query['params'] ) ) {
+					array_merge( $t_where_params, $t_filter_query['params'] );
+				}
+			}
+		}
+	}
+
 	# custom field filters
 	if( ON == config_get( 'filter_by_custom_fields' ) ) {
 
@@ -2803,6 +2890,87 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		</tr>
 		<?php
 
+		# get plugin filters
+		$t_plugin_filters = filter_get_plugin_filters();
+		$t_column = 0;
+		$t_fields = '';
+		$t_values = '';
+
+		# output a filter form element for each plugin filter
+		foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
+			$t_fields .= '<td class="small-caption" valign="top"> <a href="' . $t_filters_url . $t_field_name .
+				'" id="' . $t_field_name . '_filter">' . string_display_line( $t_filter_object->title ) . '</a> </td>';
+
+			$t_values .= '<td class="small-caption" valign="top" id="' . $t_field_name . '_filter_target"> ';
+
+			if ( !isset( $t_filter[ $t_field_name ] ) ) {
+				$t_values .= lang_get( 'any' );
+			} else {
+				switch( $t_filter_object->type ) {
+					case FILTER_TYPE_STRING:
+					case FILTER_TYPE_INT:
+						if ( filter_field_is_any( $t_filter[ $t_field_name ] ) ) {
+							$t_values .= lang_get( 'any' );
+						} else {
+							$t_values .= string_display( $t_filter[ $t_field_name ] );
+						}
+						$t_values .= '<input type="hidden" name="' . string_attribute( $t_field_name ) . '" value="' . string_attribute( $t_filter[ $t_field_name ] ) . '"/>';
+						break;
+
+					case FILTER_TYPE_BOOLEAN:
+						$t_values .= string_display( $t_filter_object->display( (bool)$t_filter[ $t_field_name ] ) );
+						$t_values .= '<input type="hidden" name="' . string_attribute( $t_field_name ) . '" value="' . (bool)$t_filter[ $t_field_name ] . '"/>';
+						break;
+
+					case FILTER_TYPE_MULTI_STRING:
+					case FILTER_TYPE_MULTI_INT:
+						$t_first = true;
+						$t_output = '';
+
+						if ( !is_array( $t_filter[ $t_field_name ] ) ) {
+							$t_filter[ $t_field_name ] = array( $t_filter[ $t_field_name ] );
+						}
+
+						foreach( $t_filter[ $t_field_name ] as $t_current ) {
+							if ( filter_field_is_any( $t_current ) ) {
+								$t_output .= lang_get( 'any' );
+							} else {
+								$t_output .= ( $t_first ? '' : '<br/>' ) . string_display( $t_filter_object->display( $t_current ) );
+								$t_first = false;
+							}
+							$t_values .= '<input type="hidden" name="' . string_attribute( $t_field_name ) . '[]" value="' . string_attribute( $t_current ) . '"/>';
+						}
+
+						$t_values .= $t_output;
+						break;
+				}
+			}
+
+			$t_values .= '</td>';
+
+			$t_column++;
+
+			# wrap at the appropriate column
+			if ( $t_column >= $t_filter_cols ) {
+				echo '<tr class="', $t_trclass, '">', $t_fields, '</tr>';
+				echo '<tr class="row-1">', $t_values, '</tr>';
+
+				$t_fields = '';
+				$t_values = '';
+			}
+		}
+
+		# output any remaining plugin filters
+		if ( $t_column > 0 ) {
+			if ( $t_column < $t_filter_cols ) {
+				$t_fields .= '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) . '">&nbsp;</td>';
+				$t_values .= '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) . '">&nbsp;</td>';
+			}
+
+			echo '<tr class="', $t_trclass, '">', $t_fields, '</tr>';
+			echo '<tr class="row-1">', $t_values, '</tr>';
+		}
+
 		if( ON == config_get( 'filter_by_custom_fields' ) ) {
 
 			# -- Custom Field Searching --
@@ -3702,6 +3870,66 @@ function print_filter_note_user_id() {
 		?>
         </select>
         <?php
+}
+
+
+/**
+ * Print plugin filter fields as defined by MantisFilter objects.
+ * @param string Field name
+ * @param object Filter object
+ */
+function print_filter_plugin_field( $p_field_name, $p_filter_object ) {
+	global $t_select_modifier, $t_filter, $f_view_type;
+
+	$t_size = (int)$p_filter_object->size;
+
+	switch( $p_filter_object->type ) {
+		case FILTER_TYPE_STRING:
+			echo '<input name="', string_attribute( $p_field_name ), '"',
+				( $t_size > 0 ? " size=\"$t_size\"" : '' ), ' value="',
+				string_attribute( $t_filter[ $p_field_name ] ), '"/>';
+			break;
+
+		case FILTER_TYPE_INT:
+			echo '<input name="', string_attribute( $p_field_name ), '"',
+				( $t_size > 0 ? " size=\"$t_size\"" : '' ), ' value="',
+				(int) $t_filter[ $p_field_name ], '"/>';
+			break;
+
+		case FILTER_TYPE_BOOLEAN:
+			echo '<input name="', string_attribute( $p_field_name ), '" type="checkbox"',
+				( $t_size > 0 ? " size=\"$t_size\"" : '' ), check_checked( (bool) $t_filter[ $p_field_name ] ) , '"/>';
+			break;
+
+		case FILTER_TYPE_MULTI_STRING:
+			echo '<select ', $t_select_modifier, ( $t_size > 0 ? " size=\"$t_size\"" : '' ), ' name="',
+				string_attribute( $p_field_name ), '[]">', '<option value="', META_FILTER_ANY, '" ',
+				check_selected( $t_filter[ $p_field_name ], META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
+
+			foreach( $p_filter_object->options() as $t_option_value => $t_option_name ) {
+				echo '<option value="', string_attribute( $t_option_value ), '" ',
+					check_selected( $t_filter[ $p_field_name ], $t_option_value ), '>',
+					string_display_line( $t_option_name ), '</option>';
+			}
+
+			echo '</select>';
+			break;
+
+		case FILTER_TYPE_MULTI_INT:
+			echo '<select ', $t_select_modifier, ( $t_size > 0 ? " size=\"$t_size\"" : '' ), ' name="',
+				string_attribute( $p_field_name ), '[]">', '<option value="', META_FILTER_ANY, '" ',
+				check_selected( $t_filter[ $p_field_name ], META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
+
+			foreach( $p_filter_object->options() as $t_option_value => $t_option_name ) {
+				echo '<option value="', (int)$t_option_value, '" ',
+					check_selected( $t_filter[ $p_field_name ], (int)$t_option_value ), '>',
+					string_display_line( $t_option_name ), '</option>';
+			}
+
+			echo '</select>';
+			break;
+
+	}
 }
 
 /**

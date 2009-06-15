@@ -419,6 +419,13 @@ define( 'META_FILTER_NONE', - 2 );
 define( 'META_FILTER_CURRENT', - 3 );
 define( 'META_FILTER_ANY', 0 );
 
+# Custom filter types
+define( 'FILTER_TYPE_STRING', 0 );
+define( 'FILTER_TYPE_INT', 1 );
+define( 'FILTER_TYPE_BOOLEAN', 2 );
+define( 'FILTER_TYPE_MULTI_STRING', 3 );
+define( 'FILTER_TYPE_MULTI_INT', 4 );
+
 # Versions
 define( 'VERSION_ALL', null );
 define( 'VERSION_FUTURE', 0 );

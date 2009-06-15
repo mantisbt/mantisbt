@@ -440,12 +440,65 @@ if ( 'simple' == $f_view_type ) {
 		}
 	?>
 </tr>
+
+<?php
+
+# get plugin filters
+$t_plugin_filters = filter_get_plugin_filters();
+$t_column = 0;
+$t_fields = '';
+$t_row_filters = array();
+
+# output a filter form element for each plugin filter
+foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
+	$t_fields .= '<td class="small-caption" valign="top" colspan="' . $t_custom_cols . '"> ' . string_display_line( $t_filter_object->title ) . ' </td>';
+	$t_row_filters[] = $t_field_name;
+
+	$t_column++;
+
+	# wrap at the appropriate column
+	if ( $t_column >= $t_filter_cols ) {
+		echo '<tr class="row-category2">', $t_fields, '</tr>';
+		echo '<tr class="row-1">';
+		foreach( $t_row_filters as $t_row_field_name ) {
+			echo '<td class="small-caption" valign="top" colspan="' . $t_custom_cols . '"> ',
+				print_filter_plugin_field( $t_row_field_name, $t_plugin_filters[ $t_row_field_name ] ), '</td>';
+		}
+		echo '</tr>';
+
+		$t_fields = '';
+		$t_row_filters = array();
+	}
+}
+
+# output any remaining plugin filters
+if ( $t_column > 0 ) {
+	if ( $t_column < $t_filter_cols ) {
+		$t_fields .= '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) * $t_custom_cols . '">&nbsp;</td>';
+	}
+
+	echo '<tr class="row-category2">', $t_fields, '</tr>';
+	echo '<tr class="row-1">';
+	foreach( $t_row_filters as $t_row_field_name ) {
+		echo '<td class="small-caption" valign="top" colspan="' . $t_custom_cols . '"> ',
+			print_filter_plugin_field( $t_row_field_name, $t_plugin_filters[ $t_row_field_name ] ), '</td>';
+	}
+
+	if ( $t_column < $t_filter_cols ) {
+		echo '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) * $t_custom_cols . '">&nbsp;</td>';
+	}
+
+	echo '</tr>';
+}
+
+?>
+
 <tr class="row-category2">
 <td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'search' ) ?></td>
 <td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php if ( $t_show_tags ) { echo lang_get( 'tags' ); } ?></td>
 <td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"></td>
 </tr>
-<tr>
+<tr class="row-1">
 	<!-- Search field -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<input type="text" size="16" name="search" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>" />
