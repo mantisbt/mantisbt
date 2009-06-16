@@ -260,9 +260,6 @@ function project_includes_user( $p_project_id, $p_user_id ) {
 # Create a new project
 function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_PUBLIC, $p_file_path = '', $p_enabled = true, $p_inherit_global = true ) {
 
-	# Make sure file path has trailing slash
-	$p_file_path = terminate_directory_path( $p_file_path );
-
 	$c_enabled = db_prepare_bool( $p_enabled );
 	$c_inherit_global = db_prepare_bool( $p_inherit_global );
 
@@ -273,6 +270,8 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 	project_ensure_name_unique( $p_name );
 
 	if( !is_blank( $p_file_path ) ) {
+		# Make sure file path has trailing slash
+		$p_file_path = terminate_directory_path( $p_file_path );
 		file_ensure_valid_upload_path( $p_file_path );
 	}
 
