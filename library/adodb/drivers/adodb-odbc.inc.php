@@ -370,7 +370,7 @@ See http://msdn.microsoft.com/library/default.asp?url=/library/en-us/odbc/htm/od
 		}
 	}
 	
-	function MetaColumns($table)
+	function MetaColumns($table, $normalize=true)
 	{
 	global $ADODB_FETCH_MODE;
 	

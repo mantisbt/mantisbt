@@ -23,32 +23,30 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires current_user_api
  */
-require_once( $t_core_dir . 'current_user_api.php' );
+require_once( 'current_user_api.php' );
 /**
  * requires string_api
  */
-require_once( $t_core_dir . 'string_api.php' );
+require_once( 'string_api.php' );
 /**
  * requires prepare_api
  */
-require_once( $t_core_dir . 'prepare_api.php' );
+require_once( 'prepare_api.php' );
 /**
  * requires profile_api
  */
-require_once( $t_core_dir . 'profile_api.php' );
+require_once( 'profile_api.php' );
 /**
  * requires last_visited_api
  */
-require_once( $t_core_dir . 'last_visited_api.php' );
+require_once( 'last_visited_api.php' );
 /**
  * requires file_api
  */
-require_once( $t_core_dir . 'file_api.php' );
+require_once( 'file_api.php' );
 
 # --------------------
 # Print the headers to cause the page to redirect to $p_url
@@ -66,7 +64,7 @@ require_once( $t_core_dir . 'file_api.php' );
 function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute = false ) {
 	$t_use_iis = config_get( 'use_iis' );
 
-	if( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
+	if( ON == config_get_global( 'stop_on_errors' ) && error_handled() ) {
 		return false;
 	}
 
@@ -152,7 +150,7 @@ function print_avatar( $p_user_id, $p_size = 80 ) {
 			$t_avatar_url = $t_avatar[0];
 			$t_width = $t_avatar[1];
 			$t_height = $t_avatar[2];
-			echo '<a rel="nofollow" href="http://site.gravatar.com">' . '<img class="avatar" src="' . $t_avatar_url . '" alt="User avatar"' . ' width="' . $t_width . '" height="' . $t_height . '" /></a>';
+			echo '<a rel="nofollow" href="http://site.gravatar.com"><img class="avatar" src="' . $t_avatar_url . '" alt="User avatar" width="' . $t_width . '" height="' . $t_height . '" /></a>';
 		}
 	}
 }
@@ -229,21 +227,22 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
 	foreach( $t_users as $t_user ) {
 		$t_user_name = string_attribute( $t_user['username'] );
-		$t_sort_name = utf8_strtolower( $t_user_name );
-		if( $t_show_realname && ( $t_user['realname'] <> "" ) ) {
+		$t_sort_name = strtolower( $t_user_name );
+		if( $t_show_realname && ( $t_user['realname'] <> '' ) ) {
 			$t_user_name = string_attribute( $t_user['realname'] );
 			if( $t_sort_by_last_name ) {
-				$t_sort_name_bits = split( ' ', utf8_strtolower( $t_user_name ), 2 );
+				$t_sort_name_bits = explode( ' ', strtolower( $t_user_name ), 2 );
 				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
 			} else {
-				$t_sort_name = utf8_strtolower( $t_user_name );
+				$t_sort_name = strtolower( $t_user_name );
 			}
 		}
 		$t_display[] = $t_user_name;
 		$t_sort[] = $t_sort_name;
 	}
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
-	for( $i = 0;$i < count( $t_sort );$i++ ) {
+	$t_count = count( $t_sort );
+	for( $i = 0;$i < $t_count;$i++ ) {
 		$t_row = $t_users[$i];
 		echo '<option value="' . $t_row['id'] . '" ';
 		check_selected( $p_user_id, $t_row['id'] );
@@ -270,7 +269,7 @@ function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
  * @param integer Bug ID
  * @param string Default contents of the input box
  */
-function print_tag_attach_form( $p_bug_id, $p_string = "" ) {
+function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
 	?>
 		<small><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></small>
 		<form method="post" action="tag_attach.php">
@@ -290,7 +289,7 @@ function print_tag_attach_form( $p_bug_id, $p_string = "" ) {
  * @param integer Bug ID
  * @param string Default contents of the input box
  */
-function print_tag_input( $p_bug_id = 0, $p_string = "" ) {
+function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
 	?>
 		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
 		<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo string_attribute( $p_string )?>" />
@@ -314,7 +313,7 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 	foreach ( $t_rows as $row ) {
 		$t_string = $row['name'];
 		if ( !empty( $row['description'] ) ) {
-			$t_string .= ' - ' . utf8_substr( $row['description'], 0, 20 );
+			$t_string .= ' - ' . substr( $row['description'], 0, 20 );
 		}
 		echo '<option value="', $row['id'], '" title="', $row['name'], '">', $t_string, '</option>';
 	}
@@ -327,17 +326,18 @@ function print_news_item_option_list() {
 
 	$t_project_id = helper_get_current_project();
 
-	if( access_has_global_level( ADMINISTRATOR ) ) {
+	$t_global = access_has_global_level( ADMINISTRATOR );
+	if( $t_global ) {
 		$query = "SELECT id, headline, announcement, view_state
 				FROM $t_mantis_news_table
 				ORDER BY date_posted DESC";
 	} else {
 		$query = "SELECT id, headline, announcement, view_state
 				FROM $t_mantis_news_table
-				WHERE project_id='$t_project_id'
+				WHERE project_id=" . db_param() . "
 				ORDER BY date_posted DESC";
 	}
-	$result = db_query( $query );
+	$result = db_query_bound( $query, ($t_global == true ? Array() : Array( $t_project_id ) ) );
 	$news_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $news_count;$i++ ) {
@@ -395,7 +395,7 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 	if( 1 == $p_announcement ) {
 		$output .= ' <span class="small">';
 		$output .= '[' . lang_get( 'announcement' ) . ']';
-		$output .= '</span>';		
+		$output .= '</span>';
 	}
 	if( VS_PRIVATE == $p_view_state ) {
 		$output .= ' <span class="small">';
@@ -453,8 +453,9 @@ function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_
 # --------------------
 # List projects that the current user has access to
 function print_project_option_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false ) {
-	project_cache_all();
 	$t_project_ids = current_user_get_accessible_projects();
+	project_cache_array_rows( $t_project_ids );
+
 	if( $p_include_all_projects ) {
 		echo '<option value="' . ALL_PROJECTS . '"';
 		check_selected( $p_project_id, ALL_PROJECTS );
@@ -465,7 +466,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 	for( $i = 0;$i < $t_project_count;$i++ ) {
 		$t_id = $t_project_ids[$i];
 		if( $t_id != $p_filter_project_id ) {
-			echo "<option value=\"$t_id\"";
+			echo '<option value="' . $t_id . '"';
 			check_selected( $p_project_id, $t_id );
 			echo '>' . string_html_specialchars( string_strip_hrefs( project_get_field( $t_id, 'name' ) ) ) . '</option>' . "\n";
 			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, Array() );
@@ -486,7 +487,7 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 			if( $p_trace ) {
 				$t_full_id = join( $p_parents, ";" ) . ';' . $t_id;
 			}
-			echo "$t_full_id\"";
+			echo $t_full_id . '"';
 			check_selected( $p_project_id, $t_full_id );
 			echo '>' . str_repeat( '&nbsp;', count( $p_parents ) ) . str_repeat( '&raquo;', count( $p_parents ) ) . ' ' . string_html_specialchars( string_strip_hrefs( project_get_field( $t_id, 'name' ) ) ) . '</option>' . "\n";
 			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
@@ -577,7 +578,7 @@ function print_extended_project_browser( $p_trace = Array(), $p_project_id = nul
 # --------------------
 # print the subproject javascript for the extended project browser
 function print_extended_project_browser_subproject_javascript( $p_trace ) {
-	$t_trace_projects = split( ';', $p_trace );
+	$t_trace_projects = explode( ';', $p_trace );
 	$t_top_id = $t_trace_projects[0];
 	$t_level = count( $t_trace_projects );
 	$t_parent_id = $t_trace_projects[$t_level - 1];
@@ -708,9 +709,9 @@ function print_category_filter_option_list( $p_category_name = '', $p_project_id
 	sort( $cat_arr );
 
 	foreach( $cat_arr as $t_name ) {
-		echo "<option value=\"$t_name\"";
+		echo '<option value="' . $t_name . '"';
 		check_selected( $p_category_name, $t_name );
-		echo ">$t_name</option>";
+		echo '>' . $t_name . '</option>';
 	}
 }
 
@@ -720,9 +721,9 @@ function print_platform_option_list( $p_platform, $p_user_id = null ) {
 	$t_platforms_array = profile_get_field_all_for_user( 'platform', $p_user_id );
 
 	foreach( $t_platforms_array as $t_platform ) {
-		echo "<option value=\"$t_platform\"";
+		echo '<option value="' . $t_platform . '"';
 		check_selected( $p_platform, $t_platform );
-		echo ">$t_platform</option>";
+		echo '>' . $t_platform . '</option>';
 	}
 }
 
@@ -732,9 +733,9 @@ function print_os_option_list( $p_os, $p_user_id = null ) {
 	$t_os_array = profile_get_field_all_for_user( 'os', $p_user_id );
 
 	foreach( $t_os_array as $t_os ) {
-		echo "<option value=\"$t_os\"";
+		echo '<option value="' . $t_os . '"';
 		check_selected( $p_os, $t_os );
-		echo ">$t_os</option>";
+		echo '>' .$t_os . '</option>';
 	}
 }
 
@@ -743,9 +744,9 @@ function print_os_build_option_list( $p_os_build, $p_user_id = null ) {
 	$t_os_build_array = profile_get_field_all_for_user( 'os_build', $p_user_id );
 
 	foreach( $t_os_build_array as $t_os_build ) {
-		echo "<option value=\"$t_os_build\"";
+		echo '<option value="' . $t_os_build . '"';
 		check_selected( $p_os_build, $t_os_build );
-		echo ">$t_os_build</option>";
+		echo '>' . $t_os_build . '</option>';
 	}
 }
 
@@ -764,12 +765,10 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 
 	if( $p_with_subs ) {
 		$versions = version_get_all_rows_with_subs( $c_project_id, $p_released,
-
 		/* obsolete */
 		null );
 	} else {
 		$versions = version_get_all_rows( $c_project_id, $p_released,
-
 		/* obsolete */
 		null );
 	}
@@ -780,9 +779,8 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 
 	$t_listed = array();
 	$t_max_length = config_get( 'max_dropdown_length' );
-	
-	foreach( $versions as $version ) {
 
+	foreach( $versions as $version ) {
 		# If the current version is obsolete, and current version not equal to $p_version,
 		# then skip it.
 		if(( (int) $version['obsolete'] ) == 1 ) {
@@ -795,7 +793,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 
 		if ( !in_array( $t_version, $t_listed ) ) {
 			$t_listed[] = $t_version;
-			echo "<option value=\"$t_version\"";
+			echo '<option value="' . $t_version . '"';
 			check_selected( $p_version, $t_version );
 			echo '>', string_shorten( $t_version, $t_max_length ), '</option>';
 		}
@@ -815,7 +813,7 @@ function print_build_option_list( $p_build = '' ) {
 				FROM $t_bug_table
 				WHERE $t_project_where
 				ORDER BY build DESC";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 	$option_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $option_count;$i++ ) {
@@ -844,9 +842,9 @@ function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 	foreach ( $t_enum_values as $t_key ) {
 		$t_elem2 = get_enum_element( $p_enum_name, $t_key );
 
-		echo "<option value=\"$t_key\"";
+		echo '<option value="' . $t_key . '"';
 		check_selected( $p_val, $t_key );
-		echo ">$t_elem2</option>";
+		echo '>' . $t_elem2 . '</option>';
 	}
 }
 
@@ -905,9 +903,9 @@ function print_status_option_list( $p_select_label, $p_current_value = 0, $p_all
 		reset( $t_enum_list );
 		echo '<select ', helper_get_tab_index(), ' name="' . $p_select_label . '">';
 		foreach( $t_enum_list as $key => $val ) {
-			echo "<option value=\"$key\"";
+			echo '<option value="' . $key . '"';
 			check_selected( $key, $p_current_value );
-			echo ">$val</option>";
+			echo '>' . $val . '</option>';
 		}
 		echo '</select>';
 	} else {
@@ -930,8 +928,8 @@ function print_project_access_levels_option_list( $p_val, $p_project_id = null )
 
 	# Add [default access level] to add the user to a project
 	# with his default access level.
-	echo "<option value=\"" . DEFAULT_ACCESS_LEVEL . "\"";
-	echo ">[" . lang_get( 'default_access_level' ) . "]</option>";
+	echo '<option value="' . DEFAULT_ACCESS_LEVEL . '"';
+	echo '>[' . lang_get( 'default_access_level' ) . ']</option>';
 
 	$t_enum_values = MantisEnum::getValues( $t_access_levels_enum_string );
 
@@ -943,12 +941,10 @@ function print_project_access_levels_option_list( $p_val, $p_project_id = null )
 
 		$t_access_level = get_enum_element( 'access_levels', $t_enum_value );
 
-		echo "<option value=\"$t_enum_value\"";
+		echo '<option value="' . $t_enum_value . '"';
 		check_selected( $p_val, $t_enum_value );
-		echo ">$t_access_level</option>";
+		echo '>' . $t_access_level . '</option>';
 	}
-
-	# end for
 }
 
 function print_language_option_list( $p_language ) {
@@ -956,12 +952,10 @@ function print_language_option_list( $p_language ) {
 	$enum_count = count( $t_arr );
 	for( $i = 0;$i < $enum_count;$i++ ) {
 		$t_language = string_attribute( $t_arr[$i] );
-		echo "<option value=\"$t_language\"";
+		echo '<option value="' . $t_language . '"';
 		check_selected( $t_language, $p_language );
-		echo ">$t_language</option>";
+		echo '>' . $t_language . '</option>';
 	}
-
-	# end for
 }
 
 # @@@ preliminary support for multiple bug actions.
@@ -999,7 +993,6 @@ function print_all_bug_action_option_list() {
 		$t_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
 
 		foreach( $t_custom_field_ids as $t_custom_field_id ) {
-
 			# if user has not access right to modify the field, then there is no
 			# point in showing it.
 			if( !custom_field_has_write_access_to_project( $t_custom_field_id, $t_project_id, $t_user_id ) ) {
@@ -1016,7 +1009,6 @@ function print_all_bug_action_option_list() {
 	$t_custom_group_actions = config_get( 'custom_group_actions' );
 
 	foreach( $t_custom_group_actions as $t_custom_group_action ) {
-
 		# use label if provided to get the localized text, otherwise fallback to action name.
 		if( isset( $t_custom_group_action['label'] ) ) {
 			$commands[$t_custom_group_action['action']] = lang_get_defaulted( $t_custom_group_action['label'] );
@@ -1026,7 +1018,7 @@ function print_all_bug_action_option_list() {
 	}
 
 	while( list( $key, $val ) = each( $commands ) ) {
-		echo "<option value=\"" . $key . "\">" . $val . "</option>";
+		echo '<option value="' . $key . '">' . $val . '</option>';
 	}
 }
 
@@ -1047,12 +1039,12 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 	$query = "SELECT DISTINCT u.id, u.username, u.realname
 				FROM $t_mantis_user_table u
 				LEFT JOIN $t_mantis_project_user_list_table p
-				ON p.user_id=u.id AND p.project_id='$c_project_id'
-				WHERE u.access_level<$t_adm AND
-					u.enabled = '1' AND
+				ON p.user_id=u.id AND p.project_id=" . db_param() . "
+				WHERE u.access_level<" . db_param() . " AND
+					u.enabled = " . db_param() . " AND
 					p.user_id IS NULL
 				ORDER BY u.realname, u.username";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $c_project_id, $t_adm, true ) );
 	$t_display = array();
 	$t_sort = array();
 	$t_users = array();
@@ -1064,20 +1056,21 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 		$t_users[] = $row['id'];
 		$t_user_name = string_attribute( $row['username'] );
 		$t_sort_name = $t_user_name;
-		if(( isset( $row['realname'] ) ) && ( $row['realname'] <> "" ) && $t_show_realname ) {
+		if(( isset( $row['realname'] ) ) && ( $row['realname'] <> '' ) && $t_show_realname ) {
 			$t_user_name = string_attribute( $row['realname'] );
 			if( $t_sort_by_last_name ) {
-				$t_sort_name_bits = split( ' ', utf8_strtolower( $t_user_name ), 2 );
+				$t_sort_name_bits = explode( ' ', strtolower( $t_user_name ), 2 );
 				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
 			} else {
-				$t_sort_name = utf8_strtolower( $t_user_name );
+				$t_sort_name = strtolower( $t_user_name );
 			}
 		}
 		$t_display[] = $t_user_name;
 		$t_sort[] = $t_sort_name;
 	}
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
-	for( $i = 0;$i < count( $t_sort );$i++ ) {
+	$t_count = count( $t_sort );
+	for( $i = 0;$i < $t_count; $i++ ) {
 		echo '<option value="' . $t_users[$i] . '">' . $t_display[$i] . '</option>';
 	}
 }
@@ -1092,11 +1085,11 @@ function print_project_user_list_option_list2( $p_user_id ) {
 	$query = "SELECT DISTINCT p.id, p.name
 				FROM $t_mantis_project_table p
 				LEFT JOIN $t_mantis_project_user_list_table u
-				ON p.id=u.project_id AND u.user_id='$c_user_id'
-				WHERE p.enabled = '1' AND
+				ON p.id=u.project_id AND u.user_id=" . db_param() . "
+				WHERE p.enabled = " . db_param() . " AND
 					u.user_id IS NULL
 				ORDER BY p.name";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $c_user_id, true ) );
 	$category_count = db_num_rows( $result );
 	for( $i = 0;$i < $category_count;$i++ ) {
 		$row = db_fetch_array( $result );
@@ -1433,7 +1426,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	echo implode( '&nbsp;', $t_items );
 
 	if( $t_last_page < $p_end ) {
-		print( " ... " );
+		print( ' ... ' );
 	}
 
 	# Next and Last links
@@ -1444,7 +1437,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	}
 	print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_id );
 
-	print( " ]" );
+	print( ' ]' );
 }
 
 # print a mailto: href link
@@ -1497,10 +1490,10 @@ function print_hidden_input( $p_field_key, $p_field_val ) {
 		foreach( $p_field_val AS $t_key => $t_value ) {
 			if( is_array( $t_value ) ) {
 				$t_key = string_html_entities( $t_key );
-				$t_field_key = $p_field_key . "[" . $t_key . "]";
+				$t_field_key = $p_field_key . '[' . $t_key . ']';
 				print_hidden_input( $t_field_key, $t_value );
 			} else {
-				$t_field_key = $p_field_key . "[" . $t_key . "]";
+				$t_field_key = $p_field_key . '[' . $t_key . ']';
 				print_hidden_input( $t_field_key, $t_value );
 			}
 		}
@@ -1576,7 +1569,7 @@ function print_sql_error( $p_query ) {
 function print_file_icon( $p_filename ) {
 	$t_file_type_icons = config_get( 'file_type_icons' );
 
-	$ext = utf8_strtolower( file_get_extension( $p_filename ) );
+	$ext = strtolower( file_get_extension( $p_filename ) );
 	if( !isset( $t_file_type_icons[$ext] ) ) {
 		$ext = '?';
 	}
@@ -1634,7 +1627,7 @@ function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_
 		array_unshift_assoc( $t_control_array, FILTER_META_ANY, lang_trans( '[any]' ) );
 	}
 	while( list( $t_name, $t_desc ) = each( $t_control_array ) ) {
-		$t_sel = "";
+		$t_sel = '';
 		if( is_array( $p_match ) ) {
 			if( in_array( $t_name, array_values( $p_match ) ) || in_array( $t_desc, array_values( $p_match ) ) ) {
 				$t_sel = ' selected="selected"';
@@ -1677,7 +1670,6 @@ function print_bug_attachments_list( $p_bug_id ) {
 		} else {
 			$t_href_start = '';
 			$t_href_end = '';
-
 			$t_href_clicket = '';
 		}
 
@@ -1792,7 +1784,7 @@ function print_timezone_option_list( $p_timezone ) {
 			$t_zone[0] == 'Europe' ||
 			$t_zone[0] == 'Indian' ||
 			$t_zone[0] == 'Pacific' )
-		{        
+		{
 	        if ( isset( $t_zone[1] ) != '' )
 	        {
 	            $t_locations[$t_zone[0]][$t_zone[0] . '/' . $t_zone[1]] = array( str_replace( '_', ' ', $t_zone[1] ), $t_identifier );

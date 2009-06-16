@@ -25,9 +25,12 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
-# return the mailto: href string link
+/**
+ * return the mailto: href string link
+ * @param string $p_email
+ * @param string $p_text
+ * @return string
+ */
 function prepare_email_link( $p_email, $p_text ) {
 	if( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
 		return string_display_line( $p_text );
@@ -36,15 +39,18 @@ function prepare_email_link( $p_email, $p_text ) {
 	# If we apply string_url() to the whole mailto: link then the @
 	#  gets turned into a %40 and you can't right click in browsers to
 	#  do Copy Email Address.
-	$t_mailto = string_attribute( "mailto:$p_email" );
+	$t_mailto = string_attribute( 'mailto:' . $p_email );
 	$p_text = string_display_line( $p_text );
 
-	return "<a href=\"$t_mailto\">$p_text</a>";
+	return '<a href="' . $t_mailto . '">' . $p_text . '</a>';
 }
 
-# prepares the name of the user given the id.  also makes it an email link.
+/**
+ * prepares the name of the user given the id.  also makes it an email link.
+ * @param int $p_user_id
+ * @return string
+ */
 function prepare_user_name( $p_user_id ) {
-
 	# Catch a user_id of NO_USER (like when a handler hasn't been assigned)
 	if( NO_USER == $p_user_id ) {
 		return '';

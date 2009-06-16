@@ -134,14 +134,14 @@ order by constraint_name, referenced_table_name, keyno";
 		return $ret;
 	}
 	
-	function MetaColumns($table)
+	function MetaColumns($table, $normalize=true)
 	{
 		$arr = ADOConnection::MetaColumns($table);
 		return $arr;
 	}
 	
 	
-	function MetaIndexes($table,$primary=false)
+	function MetaIndexes($table,$primary=false, $owner=false)
 	{
 		$table = $this->qstr($table);
 

@@ -33,10 +33,6 @@ require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' 
 require_once( 'email_api.php' );
 require_once( 'database_api.php' );
 
-define( 'BAD', 0 );
-define( 'GOOD', 1 );
-define( 'WARN', 2 );
-
 $f_showall = gpc_get_int( 'showall', false );
 
 $g_failed_test = false;
@@ -236,7 +232,6 @@ function test_database_utf8() {
 }
 
 
-	require_once( 'obsolete.php' );
 
 	html_page_top( 'MantisBT Administration - Check Installation' );
 
@@ -247,6 +242,8 @@ function test_database_utf8() {
 </tr>
 
 <?php 
+
+	require_once( 'obsolete.php' );
 
 print_test_row( 'MantisBT requires at least <b>PHP ' . PHP_MIN_VERSION . '</b>. You are running <b>PHP ' . phpversion(), $result = version_compare( phpversion(), PHP_MIN_VERSION, '>=' ) );
 
@@ -272,7 +269,7 @@ print_info_row( 'Database Server Description (version)', $t_serverinfo['version'
 print_test_row( 'Checking to see if your absolute_path config option has a trailing slash: "' . config_get_global( 'absolute_path' ) . '"', ( "\\" == substr( config_get_global( 'absolute_path' ), -1, 1 ) ) || ( "/" == substr( config_get_global( 'absolute_path' ), -1, 1 ) ) );
 
 // Windows-only checks
-if( substr( php_uname(), 0, 7 ) == 'Windows' ) {
+if( is_windows_server() ) {
 	print_test_row( 'validate_email (if ON) requires php 5.3 on windows...',
 		OFF == config_get_global( 'validate_email' ) || ON == config_get_global( 'validate_email' ) && version_compare( phpversion(), '5.3.0', '>=' ) );
 	print_test_row( 'check_mx_record (if ON) requires php 5.3 on windows...',
@@ -334,24 +331,24 @@ print_test_row( 'Phpmailer sendmail configuration requires escapeshellarg. Pleas
 
 check_zend_optimiser_version();
 
-if( ON == config_get_global( 'use_jpgraph' ) ) {
-	$t_jpgraph_path = config_get_global( 'jpgraph_path' );
+if( plugin_is_installed( 'MantisGraph' ) ) {
+	plugin_push_current( 'MantisGraph' );
 
-	if( !file_exists( $t_jpgraph_path ) ) {
-		$t_jpgraph_path = '..' . DIRECTORY_SEPARATOR . $t_jpgraph_path;
+	print_test_row( 'checking gd is enabled, and version 2...', get_gd_version() == 2 );
+	if ( plugin_config_get( 'eczlibrary' ) == OFF ) {
+		$t_jpgraph_path = BASE_PATH . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'jpgraph' . DIRECTORY_SEPARATOR;
+
+		if( !file_exists( $t_jpgraph_path . 'jpgraph.php') ) {
+			print_test_row( 'checking we can find jpgraph class files...', false );
+		} else {
+			require_once( $t_jpgraph_path . 'jpgraph.php' );
+			print_test_row( 'Checking Jpgraph version (if installed)...', version_compare(JPG_VERSION, '2.3.0') ? true : false, JPG_VERSION );
+		}
+
+		print_test_row( 'check configuration: jpgraph (if used) requires php bundled gd for antialiasing support',
+			( plugin_config_get( 'jpgraph_antialias' ) == OFF || function_exists('imageantialias') ) );
 	}
-
-	if( !file_exists( $t_jpgraph_path . 'jpgraph.php') ) {
-		print_test_row( 'checking we can find jpgraph class files...', false );
-	} else {
-		require_once( $t_jpgraph_path . 'jpgraph.php' );
-
-		print_test_row( 'Checking Jpgraph version (if installed)...', version_compare(JPG_VERSION, '2.3.0') ? true : false, JPG_VERSION );
-	}
-
-	print_test_row( 'check configuration: jpgraph (if used) requires php bundled gd for antialiasing support',
-		( config_get_global( 'jpgraph_antialias' ) == OFF || function_exists('imageantialias') ) );
-
+	plugin_pop_current();
 }
 
 print_test_row( 'Checking if ctype is enabled in php (required for rss feeds)....', extension_loaded('ctype') );

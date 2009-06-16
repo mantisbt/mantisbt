@@ -41,12 +41,10 @@
  * @uses gpc_api.php
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires tokens_api
  */
-require_once( $t_core_dir . 'tokens_api.php' );
+require_once( 'tokens_api.php' );
 
 /**
  *

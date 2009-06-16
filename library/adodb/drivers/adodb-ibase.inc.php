@@ -476,7 +476,7 @@ class ADODB_ibase extends ADOConnection {
 	}
 	//OPN STUFF end
 		// returns array of ADOFieldObjects for current table
-	function MetaColumns($table) 
+	function MetaColumns($table, $normalize=true) 
 	{
 	global $ADODB_FETCH_MODE;
 		

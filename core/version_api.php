@@ -16,13 +16,18 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  * @package CoreAPI
  * @subpackage VersionAPI
  */
 
-# =========================================
-# Version Data Structure Definition
-# ===================================
+/**
+ * Version Data Structure Definition
+ * @package MantisBT
+ * @subpackage classes
+ */
 class VersionData {
 	protected $id = 0;
 	protected $project_id = 0;
@@ -32,6 +37,11 @@ class VersionData {
 	protected $date_order = 1;
 	protected $obsolete = 0;
 
+	/**
+	 * @param string $name
+	 * @param string $value
+	 * @private
+	 */
 	public function __set($name, $value) {
 		switch ($name) {
 			case 'date_order':
@@ -49,22 +59,26 @@ class VersionData {
 		$this->$name = $value;
 	}
 
-	public function __get( $t_string ) {
-		return $this->{$t_string};
+	/**
+	 * @param string $p_string
+	 * @private
+	 */
+	public function __get( $p_name ) {
+		return $this->{$p_name};
 	}
 }
 
-# ===================================
-# Boolean queries and ensures
-# ===================================
-
 $g_cache_versions = array();
 
-# --------------------
-# Cache a version row if necessary and return the cached copy
-#  If the second parameter is true (default), trigger an error
-#  if the version can't be found.  If the second parameter is
-#  false, return false if the version can't be found.
+/**
+ * Cache a version row if necessary and return the cached copy
+ * If the second parameter is true (default), trigger an error
+ * if the version can't be found.  If the second parameter is
+ * false, return false if the version can't be found.
+ * @param int $p_version_id
+ * @param bool $p_trigger_errors
+ * @return array
+ */
 function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 	global $g_cache_versions;
 
@@ -97,24 +111,33 @@ function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 	return $row;
 }
 
-# --------------------
-# Check whether the version exists
-# $p_project_id : null will use the current project, otherwise the specified project
-# Returns true if the version exists, false otherwise
+/**
+ * Check whether the version exists
+ * $p_project_id : null will use the current project, otherwise the specified project
+ * Returns true if the version exists, false otherwise
+ * @param int $p_version_id
+ * @return bool
+ */
 function version_exists( $p_version_id ) {
 	return version_cache_row( $p_version_id, false ) !== false;
 }
 
-# --------------------
-# Check whether the version name is unique
-# Returns true if the name is unique, false otherwise
+/**
+ * Check whether the version name is unique
+ * Returns true if the name is unique, false otherwise
+ * @param string $p_version
+ * @param int $p_project_id
+ * @return bool
+ */
 function version_is_unique( $p_version, $p_project_id = null ) {
 	return version_get_id( $p_version, $p_project_id ) === false;
 }
 
-# --------------------
-# Check whether the version exists
-# Trigger an error if it does not
+/**
+ * Check whether the version exists
+ * Trigger an error if it does not
+ * @param int $p_version_id
+ */
 function version_ensure_exists( $p_version_id ) {
 	if( !version_exists( $p_version_id ) ) {
 		error_parameters( $p_version_id );
@@ -122,20 +145,28 @@ function version_ensure_exists( $p_version_id ) {
 	}
 }
 
-# --------------------
-# Check whether the version is unique within a project
-# Trigger an error if it is not
+/**
+ * Check whether the version is unique within a project
+ * Trigger an error if it is not
+ * @param string $p_version
+ * @param int $p_project_id
+ */
 function version_ensure_unique( $p_version, $p_project_id = null ) {
 	if( !version_is_unique( $p_version, $p_project_id ) ) {
 		trigger_error( ERROR_VERSION_DUPLICATE, ERROR );
 	}
 }
 
-# ===================================
-# Creation / Deletion / Updating
-# ===================================
-# --------------------
-# Add a version to the project
+/**
+ * Add a version to the project
+ * @param int $p_project_id
+ * @param string $p_version
+ * @param int $p_released
+ * @param string $p_description
+ * @param int $p_date_order
+ * @param bool $p_obsolete
+ * @return int
+ */
 function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $p_description = '', $p_date_order = null, $p_obsolete = false ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 	$c_released = db_prepare_int( $p_released );
@@ -161,8 +192,11 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 	return db_insert_id( $t_project_version_table );
 }
 
-# --------------------
-# Update the definition of a version
+/**
+ * Update the definition of a version
+ * @param VersionData @p_version_info
+ * @return true
+ */
 function version_update( $p_version_info ) {
 	version_ensure_exists( $p_version_info->id );
 
@@ -195,9 +229,8 @@ function version_update( $p_version_info ) {
 	db_query_bound( $query, Array( $c_version_name, $c_description, $c_released, $c_date_order, $c_obsolete, $c_version_id ) );
 
 	if( $c_version_name != $c_old_version_name ) {
-		$query = "UPDATE $t_bug_table
-					  SET version=" . db_param() . '
-					  WHERE ( project_id=' . db_param() . ') AND ( version=' . db_param() . ')';
+		$query = 'UPDATE ' . $t_bug_table . ' SET version=' . db_param() .
+				 'WHERE ( project_id=' . db_param() . ') AND ( version=' . db_param() . ')';
 		db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 		$query = "UPDATE $t_bug_table
@@ -223,8 +256,12 @@ function version_update( $p_version_info ) {
 	return true;
 }
 
-# --------------------
-# Remove a version from the project
+/**
+ * Remove a version from the project
+ * @param int $p_version_id
+ * @param string $p_new_version
+ * @return true
+ */
 function version_remove( $p_version_id, $p_new_version = '' ) {
 	$c_version_id = db_prepare_int( $p_version_id );
 
@@ -255,8 +292,11 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 	return true;
 }
 
-# --------------------
-# Remove all versions associated with a project
+/**
+ * Remove all versions associated with a project
+ * @param int $p_project_id
+ * @return true
+ */
 function version_remove_all( $p_project_id ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
@@ -282,12 +322,13 @@ function version_remove_all( $p_project_id ) {
 	return true;
 }
 
-# ===================================
-# Data Access
-# ===================================
-# --------------------
 $g_cache_versions_project = null;
 
+/**
+ * Cache version information for an array of project id's
+ * @param array $p_project_id_array
+ * @return null
+ */
 function version_cache_array_rows( $p_project_id_array ) {
 	global $g_cache_versions, $g_cache_versions_project;
 
@@ -325,7 +366,13 @@ function version_cache_array_rows( $p_project_id_array ) {
 	return;
 }
 
-# Return all versions for the specified project
+/**
+ * Return all versions for the specified project
+ * @param int $p_project_id
+ * @param int $p_released
+ * @param bool $p_obsolete
+ * @return array
+ */
 function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false ) {
 	global $g_cache_versions, $g_cache_versions_project;
 
@@ -378,8 +425,13 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 	return $rows;
 }
 
-# --------------------
-# Return all versions for the specified project, including subprojects
+/**
+ * Return all versions for the specified project, including subprojects
+ * @param int $p_project_id
+ * @param int $p_released
+ * @param bool $p_obsolete
+ * @return array
+ */ 
 function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_obsolete = false ) {
 	$t_project_where = helper_project_specific_where( $p_project_id );
 
@@ -418,9 +470,13 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
 	return $rows;
 }
 
-# --------------------
-# Get the version_id, given the project_id and $p_version_id
-# returns false if not found, otherwise returns the id.
+/**
+ * Get the version_id, given the project_id and $p_version_id
+ * returns false if not found, otherwise returns the id.
+ * @param string $p_version
+ * @param int $p_project_id
+ * @return int
+ */
 function version_get_id( $p_version, $p_project_id = null ) {
 	global $g_cache_versions;
 	if( $p_project_id === null ) {
@@ -437,8 +493,7 @@ function version_get_id( $p_version, $p_project_id = null ) {
 
 	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
 
-	$query = "SELECT id
-					FROM $t_project_version_table
+	$query = "SELECT id FROM $t_project_version_table
 					WHERE project_id=" . db_param() . " AND
 						version=" . db_param();
 
@@ -451,9 +506,13 @@ function version_get_id( $p_version, $p_project_id = null ) {
 	}
 }
 
-# --------------------
-# Get the specified field name for the specified version id.
-# triggers an error if version not found, otherwise returns the field value.
+/**
+ * Get the specified field name for the specified version id.
+ * triggers an error if version not found, otherwise returns the field value.
+ * @param int $p_version_id
+ * @param string $p_field_name
+ * @return string
+ */
 function version_get_field( $p_version_id, $p_field_name ) {
 	$row = version_cache_row( $p_version_id );
 
@@ -466,17 +525,20 @@ function version_get_field( $p_version_id, $p_field_name ) {
 	}
 }
 
-# --------------------
-# get information about a version given its id
+/**
+ * get information about a version given its id
+ * @param int $p_version_id
+ * @return VersionData
+ */
 function version_get( $p_version_id ) {
 	static $t_vars;
-	
+
 	$row = version_cache_row( $p_version_id );
 
 	if ($t_vars == null ) {
 		$t_reflection = new ReflectionClass('VersionData');
 		$t_vars = $t_reflection->getDefaultProperties();
-	}	
+	}
 
 	$t_version_data = new VersionData;
 	$t_row_keys = array_keys( $row );
@@ -493,8 +555,11 @@ function version_get( $p_version_id ) {
 	return $t_version_data;
 }
 
-# --------------------
-# Return a copy of the version structure with all the instvars prepared for db insertion
+/**
+ * Return a copy of the version structure with all the instvars prepared for db insertion
+ * @param VersionData $p_version_info
+ * @return VersionData
+ */ 
 function version_prepare_db( $p_version_info ) {
 	$p_version_info->id = db_prepare_int( $p_version_info->id );
 	$p_version_info->project_id = db_prepare_int( $p_version_info->project_id );

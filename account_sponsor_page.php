@@ -79,15 +79,16 @@
 	$t_sponsor_table = db_get_table( 'mantis_sponsorship_table' );
 	$t_payment = config_get( 'payment_enable', 0 );
 
-	$t_show_clause =  $t_show_all ? '' : 'AND ( b.status < ' . $t_resolved . ' OR s.paid < ' . SPONSORSHIP_PAID . ')';
 	$t_project_clause = helper_project_specific_where( $t_project );
 
 	$query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
 		FROM $t_bug_table b, $t_sponsor_table s
-		WHERE s.user_id=$t_user AND s.bug_id = b.id $t_show_clause AND $t_project_clause
+		WHERE s.user_id=" . db_param() . " AND s.bug_id = b.id " .
+		( $t_show_all ? '' : 'AND ( b.status < ' . db_param() . ' OR s.paid < ' . SPONSORSHIP_PAID . ')' ) . "
+		AND $t_project_clause
 		ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";
 
-	$result = db_query( $query );
+	$result = db_query_bound( $query, $t_show_all ? Array( $t_user ) : Array( $t_user , $t_resolved ) );
 
 	$t_sponsors = db_num_rows( $result );
 	if ( 0 == $t_sponsors ) {
@@ -190,10 +191,12 @@
 
 	$query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
 		FROM $t_bug_table b, $t_sponsor_table s
-		WHERE b.handler_id=$t_user AND s.bug_id = b.id $t_show_clause AND $t_project_clause
+		WHERE b.handler_id=" . db_param() . " AND s.bug_id = b.id " . 
+		( $t_show_all ? '' : 'AND ( b.status < ' . db_param() . ' OR s.paid < ' . SPONSORSHIP_PAID . ')' ) . "
+		AND $t_project_clause
 		ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";
 
-	$result = db_query( $query );
+	$result = db_query_bound( $query, $t_show_all ? Array( $t_user ) : Array( $t_user , $t_resolved ) );
 	$t_sponsors = db_num_rows( $result );
 	if ( 0 == $t_sponsors ) {
 		echo '<p>' . lang_get( 'no_sponsored' ) . '</p>';

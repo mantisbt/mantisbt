@@ -29,9 +29,10 @@
  * @uses config_api.php
  */
 
-# Do not explicitly include $t_core_dir to allow using system ADODB by including
-# it in include path and removing the one distributed with MantisBT (see #7907).
-require_once( 'adodb' . DIRECTORY_SEPARATOR . 'adodb.inc.php' );
+/**
+ * requires adodb library
+ */
+ require_once( 'adodb' . DIRECTORY_SEPARATOR . 'adodb.inc.php' );
 
 /**
  * An array in which all executed queries are stored.  This is used for profiling
@@ -300,7 +301,7 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
  */
 function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset = -1 ) {
 	global $g_queries_array, $g_db, $g_db_log_queries, $g_db_param_count;
-	
+
 	static $s_check_params;
 	if( $s_check_params === null ) {
 		$s_check_params = ( db_is_pgsql() || config_get_global( 'db_type' ) == 'odbc_mssql' );
@@ -835,7 +836,7 @@ function db_helper_compare_days( $p_date1_id_or_column, $p_date2_id_or_column, $
 		$p_date2 = db_param();
 	}
 
-	return "(($p_date1 - $p_date2)" . $p_limitstring . ")";
+	return '((' . $p_date1 . ' - ' . $p_date2 .')' . $p_limitstring . ')';
 }
 
 /**
@@ -917,6 +918,6 @@ if( !isset( $g_skip_open_db ) ) {
 		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ), true );
 	}
 } else {
-	if (!defined('PLUGINS_DISABLED') ) 
+	if (!defined('PLUGINS_DISABLED') )
 		define( 'PLUGINS_DISABLED', true );
 }

@@ -33,7 +33,7 @@
 
 	$c_ref = string_prepare_header( $f_ref );
 
-	$t_project = split( ';', $f_project_id );
+	$t_project = explode( ';', $f_project_id );
 	$t_top     = $t_project[0];
 	$t_bottom  = $t_project[ count( $t_project ) - 1 ];
 
@@ -59,27 +59,21 @@
 		$t_home_page = config_get( 'default_home_page' );
 
 		# Check that referrer matches our address after squashing case (case insensitive compare)
-		$t_path = config_get( 'path' );
-		if ( utf8_strtolower( $t_path ) == utf8_strtolower( utf8_substr( $_SERVER['HTTP_REFERER'], 0, utf8_strlen( $t_path ) ) ) ) {
-			$t_referrer_page = utf8_substr( $_SERVER['HTTP_REFERER'], utf8_strlen( $t_path ) );
+		$t_path = rtrim( config_get( 'path' ), '/' );
+		if ( preg_match( "@^($t_path)/(?:/*([^\?#]*))(.*)?\$@", $_SERVER['HTTP_REFERER'], $t_matches ) ) {
+			$t_referrer_page = $t_matches[2];
+			$t_param = $t_matches[3];
+
 			# if view_all_bug_page, pass on filter
-			if ( eregi( 'view_all_bug_page.php', $t_referrer_page ) ) {
+			if ( strcasecmp( 'view_all_bug_page.php', $t_referrer_page ) == 0 ) {
 				$t_source_filter_id = filter_db_get_project_current( $f_project_id );
 				$t_redirect_url = 'view_all_set.php?type=4';
 
 				if ( $t_source_filter_id !== null ) {
 					$t_redirect_url = 'view_all_set.php?type=3&amp;source_query_id=' . $t_source_filter_id;
 				}
-			} else if ( eregi( '_page.php', $t_referrer_page ) ) {
-				# get just the page component
-				if ( strpos( $t_referrer_page, '?' ) !== FALSE ) {
-					list( $t_path, $t_param ) = split( '\?', $t_referrer_page, 2 );
-				} else {
-					$t_path = $t_referrer_page;
-					$t_param = '';
-				}
-
-				switch ($t_path ) {
+			} else if ( stripos( $t_referrer_page, '_page.php' ) !== false ) {
+				switch ( $t_referrer_page ) {
 					case 'bug_view_page.php':
 					case 'bug_view_advanced_page.php':
 					case 'bug_update_page.php':
@@ -88,7 +82,7 @@
 						$t_path = $t_home_page;
 						break;
 					default:
-						$t_path = $t_referrer_page;
+						$t_path = $t_referrer_page . $t_param;
 						break;
 				}
 				$t_redirect_url = $t_path;

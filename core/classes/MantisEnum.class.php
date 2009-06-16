@@ -136,8 +136,8 @@ class MantisEnum {
 			$assocArray[$value] = $label;
 		}
 
-        self::$_cacheAssocArrayIndexedByValues[$enumString] = $assocArray;
-        
+		self::$_cacheAssocArrayIndexedByValues[$enumString] = $assocArray;
+
 		return $assocArray;
 	}
 
@@ -182,7 +182,7 @@ class MantisEnum {
 	 * @return array array of num:value elements
 	 */
 	private static function getArrayOfTuples( $enumString ) {
-		if ( utf8_strlen( trim( $enumString ) ) == 0 ) {
+		if ( is_blank( $enumString ) ) {
 			return array();
 		}
 

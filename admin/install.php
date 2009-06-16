@@ -205,7 +205,7 @@ if( $f_db_type == 'db2' ) {
 	# If schema name is supplied, then separate it from database name.
 	if( strpos( $f_database_name, '/' ) != false ) {
 		$f_db2AS400 = $f_database_name;
-		list( $f_database_name, $f_db_schema ) = split( '/', $f_db2AS400, 2 );
+		list( $f_database_name, $f_db_schema ) = explode( '/', $f_db2AS400, 2 );
 	}
 }
 

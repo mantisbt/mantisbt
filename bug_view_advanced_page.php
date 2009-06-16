@@ -41,7 +41,7 @@
 
 	access_ensure_bug_level( VIEWER, $f_bug_id );
 
-	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
+	$t_bug = bug_get( $f_bug_id, true );
 
 	$t_selected_project = helper_get_current_project();
 	if( $t_bug->project_id != $t_selected_project ) {
@@ -251,7 +251,7 @@
 	?>
 		<?php
 			if ( !date_is_null( $t_bug->due_date ) ) {
-				echo date( config_get( 'short_date_format' ), $t_bug->due_date ); }
+				echo date( config_get( 'normal_date_format' ), $t_bug->due_date ); }
 			?>
 	</td>
 	<?php } else { ?>
@@ -303,7 +303,7 @@
 		<?php echo lang_get( 'platform' ) ?>
 	</td>
 	<td>
-		<?php echo $t_bug->platform ?>
+		<?php echo string_display_line( $t_bug->platform ) ?>
 	</td>
 	<?php } else {?>
 		<td colspan="2"></td>
@@ -330,7 +330,7 @@
 		<?php echo lang_get( 'os' ) ?>
 	</td>
 	<td>
-		<?php echo $t_bug->os ?>
+		<?php echo string_display_line( $t_bug->os ) ?>
 	</td>
 	<?php } else {?>
 		<td colspan="2"></td>
@@ -358,7 +358,7 @@
 		<?php echo lang_get( 'os_version' ) ?>
 	</td>
 	<td>
-		<?php echo $t_bug->os_build ?>
+		<?php echo string_display_line( $t_bug->os_build ) ?>
 	</td>
 	<?php } else {?>
 		<td colspan="2"></td>
@@ -404,7 +404,7 @@
 		<?php echo lang_get( 'fixed_in_version' ) ?>
 	</td>
 	<td>
-		<?php echo $t_bug->fixed_in_version ?>
+		<?php echo string_display_line( $t_bug->fixed_in_version ) ?>
 	</td>
 		<?php
 			} else {
@@ -421,7 +421,7 @@
 		<?php echo lang_get( 'product_version' ) ?>
 	</td>
 	<td>
-		<?php echo $t_bug->version ?>
+		<?php echo string_display_line( $t_bug->version ) ?>
 	</td>
 		<?php
 			} else if ( $t_show_build )	{
@@ -430,7 +430,7 @@
 		<?php echo lang_get( 'product_build' ) ?>
 	</td>
 	<td>
-		<?php echo $t_bug->build ?>
+		<?php echo string_display_line( $t_bug->build ) ?>
 	</td>
 		<?php
 			} else {
@@ -458,7 +458,7 @@
 		<?php echo lang_get( 'target_version' ) ?>
 	</td>
 	<td>
-		<?php echo $t_bug->target_version ?>
+		<?php echo string_display_line( $t_bug->target_version ) ?>
 	</td>
 <?php
 	} else {
@@ -477,7 +477,7 @@
 		<?php echo lang_get( 'product_build' ) ?>
 	</td>
 	<td>
-		<?php echo $t_bug->build?>
+		<?php echo string_display_line( $t_bug->build ) ?>
 	</td>
 		<?php
 			} else {
@@ -519,7 +519,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $t_bug->description ?>
+		<?php echo string_display_links( $t_bug->description ) ?>
 	</td>
 </tr>
 
@@ -530,7 +530,7 @@
 		<?php echo lang_get( 'steps_to_reproduce' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $t_bug->steps_to_reproduce ?>
+		<?php echo string_display_links( $t_bug->steps_to_reproduce ) ?>
 	</td>
 </tr>
 
@@ -541,7 +541,7 @@
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $t_bug->additional_information ?>
+		<?php echo string_display_links( $t_bug->additional_information ) ?>
 	</td>
 </tr>
 
@@ -643,7 +643,7 @@
 	include( $t_mantis_dir . 'bug_sponsorship_list_view_inc.php' );
 
 	# Bug Relationships
-	relationship_view_box ( $f_bug_id );
+	relationship_view_box ( $t_bug->id );
 
 	# File upload box
 	if ( !bug_is_readonly( $f_bug_id ) ) {

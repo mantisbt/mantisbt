@@ -284,6 +284,7 @@ function error_print_context( $p_context ) {
 /**
  * Print out a stack trace
  * @return null
+ * @uses error_alternate_class
  */
 function error_print_stack_trace() {
 	echo '<center><table class="width75">';
@@ -421,7 +422,6 @@ function error_proceed_url( $p_url ) {
  * Simple version of helper_alternate_class for use by error api only.
  * @access private
  * @return string representing css class
- * @usedby error_print_stack_trace
  */
 function error_alternate_class() {
 	static $t_errindex = 1;

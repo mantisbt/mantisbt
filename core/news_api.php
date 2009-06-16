@@ -182,7 +182,7 @@ function news_get_count( $p_project_id, $p_sitewide = true ) {
 		$query .= ' OR project_id=' . ALL_PROJECTS;
 	}
 
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 
 	return db_result( $result, 0, 0 );
 }
@@ -314,7 +314,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 # Checks if the news feature is enabled or not.
 # true: enabled, otherwise false.
 function news_is_enabled() {
-	return config_get( 'news_enabled' ) == ON;	
+	return config_get( 'news_enabled' ) == ON;
 }
 
 # --------------------

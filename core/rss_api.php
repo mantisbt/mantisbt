@@ -23,8 +23,12 @@
  * @link http://www.mantisbt.org
  */
 
-# Calculates a key to be used for RSS authentication based on user name, cookie and password.
-# if the user changes his user name or password, then the key becomes invalid.
+/**
+ * Calculates a key to be used for RSS authentication based on user name, cookie and password.
+ * if the user changes his user name or password, then the key becomes invalid.
+ * @param int $p_user_id
+ * @return string
+ */
 function rss_calculate_key( $p_user_id = null ) {
 	if( $p_user_id === null ) {
 		$t_user_id = auth_get_current_user_id();
@@ -41,8 +45,13 @@ function rss_calculate_key( $p_user_id = null ) {
 	return md5( $t_seed . $t_username . $t_cookie . $t_password );
 }
 
-# Given the user name and the rss key, this method attempts to login the user.  If successful, it
-# return true, otherwise, returns false.
+/**
+ * Given the user name and the rss key, this method attempts to login the user.  If successful, it
+ * return true, otherwise, returns false.
+ * @param string $p_username
+ * @param string $p_key
+ * @return bool
+ */
 function rss_login( $p_username, $p_key ) {
 	if(( $p_username === null ) || ( $p_key === null ) ) {
 		return false;
@@ -66,6 +75,14 @@ function rss_login( $p_username, $p_key ) {
 	return true;
 }
 
+/**
+ * return rss issues feed url
+ * @param int $p_project_id
+ * @param string $p_username
+ * @param int $p_filter_id
+ * @param bool $p_relative
+ * @return string
+ */
 function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_filter_id = null, $p_relative = true ) {
 	if( $p_username === null ) {
 		$t_username = current_user_get_field( 'username' );
@@ -108,6 +125,13 @@ function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_f
 	return $t_url;
 }
 
+/**
+ * return rss news feed url
+ * @param int $p_project_id
+ * @param string $p_username
+ * @param bool $p_relative
+ * @return string
+ */
 function rss_get_news_feed_url( $p_project_id = null, $p_username = null, $p_relative = true ) {
 	if( $p_username === null ) {
 		$t_username = current_user_get_field( 'username' );

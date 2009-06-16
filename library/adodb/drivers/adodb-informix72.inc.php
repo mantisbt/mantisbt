@@ -147,7 +147,7 @@ class ADODB_informix72 extends ADOConnection {
 	}
 
    
-    function MetaColumns($table)
+    function MetaColumns($table, $normalize=true)
 	{
 	global $ADODB_FETCH_MODE;
 	

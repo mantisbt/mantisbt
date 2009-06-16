@@ -73,11 +73,11 @@
 
 	# parse flags and thresholds
 	foreach( $f_flags as $t_flag_value ) {
-		list( $t_action, $t_flag ) = split( ':', $t_flag_value );
+		list( $t_action, $t_flag ) = explode( ':', $t_flag_value );
 		$t_flags[$t_action][$t_flag] = ON;
 	}
 	foreach( $f_thresholds as $t_threshold_value ) {
-		list( $t_action, $t_threshold ) = split( ':', $t_threshold_value );
+		list( $t_action, $t_threshold ) = explode( ':', $t_threshold_value );
 		if ( $t_threshold < $t_thresholds_min[$t_action] ) {
 			$t_thresholds_min[$t_action] = $t_threshold;
 		}

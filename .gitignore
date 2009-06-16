@@ -25,3 +25,7 @@ plugins/*
 
 # IIS7 
 web.config
+
+#libraries
+library/jpgraph
+library/FirePHPCore

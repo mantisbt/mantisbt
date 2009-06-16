@@ -94,39 +94,56 @@ class UserPreferences {
 
 	private $pref_user_id;
 	private $pref_project_id;
-	
+
+	/**
+	 * Constructor
+	 * @param int $p_user_id
+	 * @param int $p_project_id
+	 */
 	function UserPreferences( $p_user_id, $p_project_id ) {
 		$this->default_profile = 0;
 		$this->default_project = ALL_PROJECTS;
-		
+
 		$this->pref_user_id = (int)$p_user_id;
 		$this->pref_project_id = (int)$p_project_id;
 	}
 
+	/**
+	 * @param string $name
+	 * @param string $value
+	 * @private
+	 */
 	public function __set($name, $value) {
 		switch ($name) {
 			case 'timezone':
-				if( $value == "" ) {
+				if( $value == '' ) {
 					$value = null;
 				}
 		}
 		$this->$name = $value;
 	}
 
-	public function __get( $t_string ) {
+	/**
+	 * @param string $t_string
+	 * @private
+	 */
+	public function __get( $p_string ) {
 		global $g_default_mapping;
-		if( is_null( $this->{$t_string} ) ) {
-			$this->{$t_string} = config_get( $g_default_mapping[$t_string], null, $this->pref_user_id, $this->pref_project_id );
+		if( is_null( $this->{$p_string} ) ) {
+			$this->{$p_string} = config_get( $g_default_mapping[$p_string], null, $this->pref_user_id, $this->pref_project_id );
 		}
 		return $this->{$t_string};
 	}
 
-	function Get( $t_string ) {
+	/**
+	 * @param string $t_string
+	 */
+	function Get( $p_string ) {
 		global $g_default_mapping;
-		if( is_null( $this->{$t_string} ) ) {
-			$this->{$t_string} = config_get( $g_default_mapping[$t_string], null, $this->pref_user_id, $this->pref_project_id );
+		if( is_null( $this->{$p_string} ) ) {
+			$this->{$p_string} = config_get( $g_default_mapping[$p_string], null, $this->pref_user_id, $this->pref_project_id );
 		}
-		return $this->{$t_string};
+		return $this->{$p_string};
 	}
 }
 
@@ -177,6 +194,42 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 	$g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] = $row;
 
 	return $row;
+}
+
+function user_pref_cache_array_rows( $p_user_id_array, $p_project_id = ALL_PROJECTS ) {
+	global $g_cache_user_pref;
+	$c_user_id_array = array();
+
+	foreach( $p_user_id_array as $t_user_id ) {
+		if( !isset( $g_cache_user_pref[(int) $t_user_id][(int)$p_project_id] ) ) {
+			$c_user_id_array[(int)$t_user_id] = (int)$t_user_id;
+		}
+	}
+
+	if( empty( $c_user_id_array ) ) {
+		return;
+	}
+
+	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
+
+	$query = "SELECT *
+				  FROM $t_user_pref_table
+				  WHERE id IN (" . implode( ',', $c_user_id_array ) . ') AND project_id=' . db_param();
+
+	$result = db_query_bound( $query, Array( (int)$p_project_id ) );
+
+	while( $row = db_fetch_array( $result ) ) {
+		if( !isset( $g_cache_user_pref[(int) $row['id']] ) ) {
+			$g_cache_user_pref[(int) $row['id']] = array();
+		}
+		$g_cache_user_pref[(int) $row['id']][(int)$p_project_id] = $row;
+		unset( $c_user_id_array[(int) $row['id']] );
+	}
+
+	foreach( $c_user_id_array as $t_user_id ) {
+		$g_cache_user_pref[(int) $t_user_id][(int)$p_project_id] = false;
+	}
+	return;
 }
 
 # --------------------
@@ -241,9 +294,9 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 	$t_vars_string = implode( ', ', array_keys( $t_vars ) );
 	$t_params_string = implode( ',', $t_params );
 
-	$query = "INSERT INTO $t_user_pref_table
-				    (user_id, project_id, $t_vars_string)
-				  VALUES ( " . $t_params_string . ")";
+	$query = 'INSERT INTO ' . $t_user_pref_table .
+			 ' (user_id, project_id, $t_vars_string) ' .
+			 ' VALUES ( ' . $t_params_string . ')';
 	db_query_bound( $query, $t_values  );
 
 	# db_query errors on failure so:
@@ -324,8 +377,7 @@ function user_pref_delete_all( $p_user_id ) {
 
 	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
-	$query = "DELETE FROM $t_user_pref_table
-				  WHERE user_id=" . db_param();
+	$query = 'DELETE FROM ' . $t_user_pref_table . ' WHERE user_id=' . db_param();
 	db_query_bound( $query, Array( $c_user_id ) );
 
 	user_pref_clear_cache( $p_user_id );
@@ -346,8 +398,7 @@ function user_pref_delete_project( $p_project_id ) {
 
 	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
-	$query = "DELETE FROM $t_user_pref_table
-				  WHERE project_id=" . db_param();
+	$query = 'DELETE FROM ' . $t_user_pref_table . ' WHERE project_id=' . db_param();
 	db_query_bound( $query, Array( $c_project_id ) );
 
 	# db_query errors on failure so:
@@ -417,7 +468,7 @@ function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJE
 	if ($t_vars == null ) {
 		$t_reflection = new ReflectionClass('UserPreferences');
 		$t_vars = $t_reflection->getDefaultProperties();
-	}	
+	}
 
 	if( in_array( $p_pref_name, array_keys( $t_vars ), true ) ) {
 		return $t_prefs->Get( $p_pref_name );

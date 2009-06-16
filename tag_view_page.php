@@ -100,7 +100,7 @@
 			echo "<td><a href='tag_view_page.php?tag_id=$t_tag[id]' title='$t_description'>$t_name</a></td>\n";
 			echo '<td colspan="3">';
 			print_bracket_link( 'search.php?hide_status_id=90&amp;tag_string='.urlencode("+$t_tag_row[name]".config_get('tag_separator')."+$t_name"), sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ) );
-			echo '</a></td></tr>';
+			echo '</td></tr>';
 
 			$i++;
 		}

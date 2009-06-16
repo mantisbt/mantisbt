@@ -18,6 +18,7 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ * @package MantisBT
  */
 
 /**
@@ -57,10 +58,8 @@ $t_update_bug_threshold = config_get( 'update_bug_threshold' );
 $t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
 $t_hide_status_default = config_get( 'hide_status_default' );
 $t_default_show_changed = config_get( 'default_show_changed' );
-?>
 
-<?php
-	$c_filter['assigned'] = array(
+$c_filter['assigned'] = array(
 	FILTER_PROPERTY_CATEGORY => Array(
 		'0' => META_FILTER_ANY,
 	),
@@ -388,7 +387,7 @@ $rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_
 if( helper_get_current_project() == 0 ) {
 	$t_categories = array();
 	foreach( $rows as $t_row ) {
-		$t_categories[] = $t_row['category_id'];
+		$t_categories[] = $t_row->category_id;
 	}
 
 	category_cache_array_rows( array_unique( $t_categories ) );
@@ -397,11 +396,9 @@ if( helper_get_current_project() == 0 ) {
 $t_filter = array_merge( $c_filter[$t_box_title], $t_filter );
 
 $box_title = lang_get( 'my_view_title_' . $t_box_title );
+
+# -- ====================== BUG LIST ========================= --
 ?>
-
-
-<?php
-# -- ====================== BUG LIST ========================= --?>
 
 <table class="width100" cellspacing="1">
 <?php
@@ -418,9 +415,8 @@ echo ' [';
 echo '<a class="subtle" href="view_all_set.php?type=1&amp;temporary=y&amp;' . $url_link_parameters[$t_box_title] . '" target="_blank">';
 echo '^';
 echo '</a>]';
-?>
-		<?php
-			if( count( $rows ) > 0 ) {
+
+if( count( $rows ) > 0 ) {
 	$v_start = $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] * ( $f_page_number - 1 ) + 1;
 	$v_end = $v_start + count( $rows ) - 1;
 }
@@ -434,28 +430,25 @@ echo "($v_start - $v_end / $t_bug_count)";
 </tr>
 
 <?php
-# -- Loop over bug rows and create $v_* variables --?>
-<?php
-	for( $i = 0;$i < count( $rows );$i++ ) {
+# -- Loop over bug rows and create $v_* variables --
+	$t_count = count( $rows );
+	for( $i = 0;$i < $t_count; $i++ ) {
+		$t_bug = $rows[$i];
 
-	# prefix bug data with v_
-
-	extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
-
-	$t_summary = string_display_line_links( $v_summary );
-	$t_last_updated = date( config_get( 'normal_date_format' ), $v_last_updated );
+	$t_summary = string_display_line_links( $t_bug->summary );
+	$t_last_updated = date( config_get( 'normal_date_format' ), $t_bug->last_updated );
 
 	# choose color based on status
-	$status_color = get_status_color( $v_status );
+	$status_color = get_status_color( $t_bug->status );
 
 	# Check for attachments
 	$t_attachment_count = 0;
-	if(( file_can_view_bug_attachments( $v_id ) ) ) {
-		$t_attachment_count = file_bug_attachment_count( $v_id );
+	if(( file_can_view_bug_attachments( $t_bug->id ) ) ) {
+		$t_attachment_count = file_bug_attachment_count( $t_bug->id );
 	}
 
 	# grab the project name
-	$project_name = project_get_field( $v_project_id, 'name' );
+	$project_name = project_get_field( $t_bug->project_id, 'name' );
 	?>
 
 <tr bgcolor="<?php echo $status_color?>">
@@ -464,29 +457,29 @@ echo "($v_start - $v_end / $t_bug_count)";
 	<td class="center" valign="top" width ="0" nowrap="nowrap">
 		<span class="small">
 		<?php
-			print_bug_link( $v_id );
+			print_bug_link( $t_bug->id );
 
 	echo '<br />';
 
-	if( !bug_is_readonly( $v_id ) && access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
-		echo '<a href="' . string_get_bug_update_url( $v_id ) . '"><img border="0" src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
+	if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
+		echo '<a href="' . string_get_bug_update_url( $t_bug->id ) . '"><img border="0" src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
 	}
 
 	if( ON == config_get( 'show_priority_text' ) ) {
-		print_formatted_priority_string( $v_status, $v_priority );
+		print_formatted_priority_string( $t_bug->status, $t_bug->priority );
 	} else {
-		print_status_icon( $v_priority );
+		print_status_icon( $t_bug->priority );
 	}
 
 	if( 0 < $t_attachment_count ) {
-		echo '<a href="' . string_get_bug_view_url( $v_id ) . '#attachments">';
+		echo '<a href="' . string_get_bug_view_url( $t_bug->id ) . '#attachments">';
 		echo '<img border="0" src="' . $t_icon_path . 'attachment.png' . '"';
 		echo ' alt="' . lang_get( 'attachment_alt' ) . '"';
 		echo ' title="' . $t_attachment_count . ' ' . lang_get( 'attachments' ) . '"';
 		echo ' />';
 		echo '</a>';
 	}
-	if( VS_PRIVATE == $v_view_state ) {
+	if( VS_PRIVATE == $t_bug->view_state ) {
 		echo '<img src="' . $t_icon_path . 'protected.gif" width="8" height="15" alt="' . lang_get( 'private' ) . '" />';
 	}
 	?>
@@ -498,17 +491,17 @@ echo "($v_start - $v_end / $t_bug_count)";
 	<td class="left" valign="top" width="100%">
 		<span class="small">
 		<?php
-			if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $v_project_id ) {
-				echo '[', string_display_line( project_get_name( $v_project_id ) ), '] ';
+		 	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $t_bug->project_id ) {
+				echo '[', string_display_line( project_get_name( $t_bug->project_id ) ), '] ';
 			}
 			echo $t_summary;
 	?>
 		<br />
 		<?php
 	# type project name if viewing 'all projects' or bug is in subproject
-	echo string_display_line( category_full_name( $v_category_id, true, $v_project_id ) );
+	echo string_display_line( category_full_name( $t_bug->category_id, true, $t_bug->project_id ) );
 
-	if( $v_last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
+	if( $t_bug->last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
 		echo ' - <b>' . $t_last_updated . '</b>';
 	} else {
 		echo ' - ' . $t_last_updated;
@@ -518,15 +511,12 @@ echo "($v_start - $v_end / $t_bug_count)";
 	</td>
 </tr>
 <?php
-	# -- end of Repeating bug row --?>
-<?php
+	# -- end of Repeating bug row --
 }
+
+# -- ====================== end of BUG LIST ========================= --
 ?>
-<?php
-# -- ====================== end of BUG LIST ========================= --?>
-
 </table>
-
 <?php
 // Free the memory allocated for the rows in this box since it is not longer needed.
 unset( $rows );

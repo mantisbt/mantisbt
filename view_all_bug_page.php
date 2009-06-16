@@ -47,9 +47,9 @@
 	$t_project_ids  = Array();
 	$t_row_count = count( $rows );
 	for($i=0; $i < $t_row_count; $i++) {
-		array_push($t_bugslist, $rows[$i]["id"] );
-		$t_users_handlers[] = $rows[$i]["handler_id"];
-		$t_project_ids[] = $rows[$i]["project_id"];
+		array_push($t_bugslist, $rows[$i]->id );
+		$t_users_handlers[] = $rows[$i]->handler_id;
+		$t_project_ids[] = $rows[$i]->project_id;
 	}
 	user_cache_array_rows( array_unique( $t_users_handlers ) );
 	project_cache_array_rows( array_unique( $t_project_ids ) );

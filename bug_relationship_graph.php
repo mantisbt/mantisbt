@@ -60,7 +60,7 @@
 
 	access_ensure_bug_level( VIEWER, $f_bug_id );
 
-	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
+	$t_bug = bug_get( $f_bug_id, true );
 
 	if( $t_bug->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...

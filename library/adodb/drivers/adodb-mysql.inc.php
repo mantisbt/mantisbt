@@ -395,7 +395,7 @@ class ADODB_mysql extends ADOConnection {
 		return $this->_connect($argHostname, $argUsername, $argPassword, $argDatabasename);
 	}
 	
- 	function MetaColumns($table) 
+ 	function MetaColumns($table, $normalize=true) 
 	{
 		$this->_findschema($table,$schema);
 		if ($schema) {

@@ -25,17 +25,15 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires bug api
  */
-require_once( $t_core_dir . 'bug_api.php' );
+require_once( 'bug_api.php' );
 
 /**
  * requires history api
  */
-require_once( $t_core_dir . 'history_api.php' );
+require_once( 'history_api.php' );
 
 /**
  * Determine if a tag exists with the given ID.
@@ -73,7 +71,7 @@ function tag_is_unique( $p_name ) {
 	$c_name = trim( $p_name );
 	$t_tag_table = db_get_table( 'mantis_tag_table' );
 
-	$query = "SELECT id FROM $t_tag_table WHERE " . db_helper_like( 'name' );
+	$query = 'SELECT id FROM ' . $t_tag_table . ' WHERE ' . db_helper_like( 'name' );
 	$result = db_query_bound( $query, Array( $c_name ) );
 
 	return db_num_rows( $result ) == 0;
@@ -103,7 +101,7 @@ function tag_ensure_unique( $p_name ) {
  * @param string Prefix regex pattern
  * @return boolean True if the name is valid
  */
-function tag_name_is_valid( $p_name, &$p_matches, $p_prefix = "" ) {
+function tag_name_is_valid( $p_name, &$p_matches, $p_prefix = '' ) {
 	$t_separator = config_get( 'tag_separator' );
 	$t_pattern = "/^$p_prefix([^\+\-{$t_separator}]*)$/";
 	return preg_match( $t_pattern, $p_name, $p_matches );
@@ -166,7 +164,7 @@ function tag_parse_string( $p_string ) {
 			);
 		}
 	}
-	usort( $t_tags, "tag_cmp_name" );
+	usort( $t_tags, 'tag_cmp_name' );
 	return $t_tags;
 }
 
@@ -182,7 +180,7 @@ function tag_parse_string( $p_string ) {
  */
 function tag_parse_filters( $p_string ) {
 	$t_tags = array();
-	$t_prefix = "[+-]{0,1}";
+	$t_prefix = '[+-]{0,1}';
 
 	$t_strings = explode( config_get( 'tag_separator' ), $p_string );
 	foreach( $t_strings as $t_name ) {
@@ -194,9 +192,9 @@ function tag_parse_filters( $p_string ) {
 			if( $t_tag_row !== false ) {
 				$t_filter = utf8_substr( $t_name, 0, 1 );
 
-				if( "+" == $t_filter ) {
+				if( '+' == $t_filter ) {
 					$t_tag_row['filter'] = 1;
-				} else if( "-" == $t_filter ) {
+				} else if( '-' == $t_filter ) {
 					$t_tag_row['filter'] = -1;
 				} else {
 					$t_tag_row['filter'] = 0;
@@ -208,7 +206,7 @@ function tag_parse_filters( $p_string ) {
 			continue;
 		}
 	}
-	usort( $t_tags, "tag_cmp_name" );
+	usort( $t_tags, 'tag_cmp_name' );
 	return $t_tags;
 }
 
@@ -423,7 +421,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 			while( $row = db_fetch_array( $result ) ) {
 				$t_subquery_results[] = (int)$row;
 			}
-			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN ( " . implode( ', ', $t_subquery_results ) . ")";
+			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN ( " . implode( ', ', $t_subquery_results ) . ')';
 		} else {
 			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN (
 					SELECT t.id FROM $t_tag_table t
@@ -436,7 +434,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 		$query = 'SELECT id, name, description FROM ' . $t_tag_table;
 	}
 
-	$query .= " ORDER BY name ASC ";
+	$query .= ' ORDER BY name ASC ';
 	$result = db_query_bound( $query, $t_params );
 
 	$t_results_to_return = array();
@@ -512,7 +510,7 @@ function tag_bug_get_attached( $p_bug_id ) {
 		$rows[] = $row;
 	}
 
-	usort( $rows, "tag_cmp_name" );
+	usort( $rows, 'tag_cmp_name' );
 	return $rows;
 }
 
@@ -674,8 +672,8 @@ function tag_display_link( $p_tag_row, $p_bug_id = 0 ) {
 	echo "<a href='tag_view_page.php?tag_id=$p_tag_row[id]' title='$t_description'>$t_name</a>";
 
 	if( $p_bug_id > 0 && access_has_bug_level( $t_detach, $p_bug_id ) ) {
-		$t_tooltip = sprintf( lang_get( 'tag_detach' ), $t_name );
-		echo " <a href='tag_detach.php?bug_id=$p_bug_id&tag_id=$p_tag_row[id]$t_security_token'><img src='images/delete.png' class='delete-icon' title=\"$t_tooltip\"/></a>";
+		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), $t_name ) );
+		echo " <a href='tag_detach.php?bug_id=$p_bug_id&amp;tag_id=$p_tag_row[id]$t_security_token'><img src='images/delete.png' class='delete-icon' title=\"$t_tooltip\" alt=\"X\"/></a>";
 	}
 
 	return true;
@@ -693,7 +691,7 @@ function tag_display_attached( $p_bug_id ) {
 	} else {
 		$i = 0;
 		foreach( $t_tag_rows as $t_tag ) {
-			echo( $i > 0 ? config_get( 'tag_separator' ) . " " : "" );
+			echo( $i > 0 ? config_get( 'tag_separator' ) . ' ' : '' );
 			tag_display_link( $t_tag, $p_bug_id );
 			$i++;
 		}
@@ -740,19 +738,19 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 
 	$subquery = "SELECT b.id FROM $t_bug_table AS b
 					LEFT JOIN $t_project_user_list_table AS p
-						ON p.project_id=b.project_id AND p.user_id=$c_user_id
+						ON p.project_id=b.project_id AND p.user_id=" . db_param() . "
 					JOIN $t_user_table AS u
-						ON u.id=$c_user_id
+						ON u.id=" . db_param() . "
 					JOIN $t_bug_tag_table AS t
 						ON t.bug_id=b.id
 					WHERE ( p.access_level>b.view_state OR u.access_level>b.view_state )
-						AND t.tag_id=$c_tag_id";
+						AND t.tag_id=" . db_param();
 
 	$query = "SELECT * FROM $t_bug_tag_table
-					WHERE tag_id != $c_tag_id
+					WHERE tag_id != " . db_param() . "
 						AND bug_id IN ( $subquery ) ";
 
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( /*query*/ $c_tag_id, /*subquery*/ $c_user_id, $c_user_id, $c_tag_id ) );
 
 	$t_tag_counts = array();
 	while( $row = db_fetch_array( $result ) ) {

@@ -24,6 +24,7 @@ define( 'AUTO', 3 );
 
 define( 'BAD', 0 );
 define( 'GOOD', 1 );
+define( 'WARN', 2 );
 
 # PHP-related constants
 define( 'PHP_CLI', 0 );
@@ -222,6 +223,7 @@ define( 'ERROR_PAGE_REDIRECTION', 18 );
 define( 'ERROR_INVALID_REQUEST_METHOD', 19 );
 define( 'ERROR_INVALID_SORT_FIELD', 20 );
 define( 'ERROR_INVALID_DATE_FORMAT', 21 );
+define( 'ERROR_UPDATING_TIMEZONE', 22 );
 
 # ERROR_CONFIG_*
 define( 'ERROR_CONFIG_OPT_NOT_FOUND', 100 );

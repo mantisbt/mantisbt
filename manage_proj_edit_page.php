@@ -743,14 +743,14 @@ if ( $t_can_manage_users ) {
 	$t_sort = array();
 	foreach ( $t_users as $t_user ) {
 		$t_user_name = string_attribute( $t_user['username'] );
-		$t_sort_name = utf8_strtolower( $t_user_name );
+		$t_sort_name = strtolower( $t_user_name );
 		if ( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] > "" ) && ( ON == config_get( 'show_realname' ) ) ){
 			$t_user_name = string_attribute( $t_user['realname'] ) . " (" . $t_user_name . ")";
 			if ( ON == config_get( 'sort_by_last_name') ) {
-				$t_sort_name_bits = split( ' ', utf8_strtolower( $t_user_name ), 2 );
+				$t_sort_name_bits = explode( ' ', strtolower( $t_user_name ), 2 );
 				$t_sort_name = $t_sort_name_bits[1] . ', ' . $t_sort_name_bits[1];
 			} else {
-				$t_sort_name = utf8_strtolower( $t_user_name );
+				$t_sort_name = strtolower( $t_user_name );
 			}
 		}
 		$t_display[] = $t_user_name;

@@ -16,10 +16,23 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Mantis Core Wiki Plugins
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ * @package MantisBT
+ */
+
+/**
+ * requires MantisWikiPlugin.class
+ */
 require_once( 'MantisWikiPlugin.class.php' );
 
 /**
  * Base that uses the old style wiki definitions from config_inc.php
+ * @package MantisBT
+ * @subpackage classes
  */
 abstract class MantisCoreWikiPlugin extends MantisWikiPlugin {
 	function config() {
@@ -70,6 +83,8 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 
 /**
  * Basic MediaWiki support with old-style wiki integration.
+ * @package MantisBT
+ * @subpackage classes 
  */
 class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 
@@ -102,6 +117,8 @@ class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 
 /**
  * Basic Twiki support with old-style wiki integration.
+ * @package MantisBT
+ * @subpackage classes 
  */
 class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 
@@ -138,6 +155,8 @@ class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 
 /**
  * Basic WikkaWiki support with old-style wiki integration.
+ * @package MantisBT
+ * @subpackage classes 
  */
 class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 
@@ -174,6 +193,8 @@ class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 
 /**
  * Basic Xwiki support with old-style wiki integration.
+ * @package MantisBT
+ * @subpackage classes 
  */
 class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 

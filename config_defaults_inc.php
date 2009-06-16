@@ -100,7 +100,7 @@
 		}
 
 		if ( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) { // Support ProxyPass
-			$t_hosts = split( ',', $_SERVER['HTTP_X_FORWARDED_HOST'] );
+			$t_hosts = explode( ',', $_SERVER['HTTP_X_FORWARDED_HOST'] );
 			$t_host = $t_hosts[0];
 		} else if ( isset( $_SERVER['HTTP_HOST'] ) ) {
 			$t_host = $_SERVER['HTTP_HOST'];
@@ -262,7 +262,7 @@
 	 */
 	$g_global_settings = array(
 		'_table$', 'cookie', '^db_', 'hostname', 'allow_signup', 'database_name', 'show_queries_count', 'admin_checks', 'version_suffix',
-		'_path$', 'use_iis', 'language', 'use_javascript', 'display_errors', 'show_detailed_errors', 'stop_on_errors', 'login_method', '_file$',
+		'_path$', 'use_iis', 'language', 'use_javascript', 'minimal_jscss', 'display_errors', 'show_detailed_errors', 'stop_on_errors', 'login_method', '_file$',
 		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'plugins_enabled', 'session_', 'form_security_',
 	);
 
@@ -469,10 +469,10 @@
 	 * set to OFF to disable email check
 	 * @global int $g_validate_email
 	 */
-	$g_validate_email		= ( substr( php_uname(), 0, 7 ) == 'Windows' ) ? OFF : ON;
+	$g_validate_email		= ON;
+
 	/**
 	 * set to OFF to disable email check
-	 * Not supported under Windows.
 	 * @global int $g_check_mx_record
 	 */
 	$g_check_mx_record		= OFF;
@@ -1000,27 +1000,6 @@
 	/**************************
 	 * MantisBT JPGRAPH Addon *
 	 **************************/
-
-	/**
-	 * To use the Jpgraph addon you need the JPGRAPH package from
-	 * http://www.aditus.nu/jpgraph/index.php
-	 * The default/tested configuration is to place the jpgraph files (jpgraph.php) in the core directory in a jpgraph folder
-	 * @global int $g_use_jpgraph
-	 */
-	$g_use_jpgraph			= OFF;
-
-	/**
-	 * path to jpgraph installation - dont forget the ending slash!
-	 * @global string $g_jpgraph_path
-	 */
-	$g_jpgraph_path			= '.' . DIRECTORY_SEPARATOR . 'jpgraph' . DIRECTORY_SEPARATOR;
-
-	/**
-	 * use antialiasing - Enabling anti-aliasing will greatly improve the visual apperance of certain graphs.
-	 * Note: Using anti-aliasing makes line drawing roughly 8 time slower than normal lines
-	 * @global int $g_jpgraph_antialias
-	 */
-	$g_jpgraph_antialias	= ON;
 
 	/**
 	 * what truetype font will the graphs use. Allowed values are 'arial', 'verdana', 'courier', 'book', 'comic', 'times',
@@ -2817,6 +2796,13 @@
 	 * @global int $g_compress_html
 	 */
 	$g_compress_html		= ON;
+
+	/**
+	 * if OFF, will include original javascript files
+	 * if ON, will include javascript files that have been compressed by yuicompressor if available
+	 * @global int $g_minimal_jscss
+	 */
+	$g_minimal_jscss		= ON;
 
 	/**
 	 * Use persistent database connections

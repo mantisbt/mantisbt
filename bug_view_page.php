@@ -42,7 +42,7 @@
 
 	access_ensure_bug_level( VIEWER, $f_bug_id );
 
-	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
+	$t_bug = bug_get( $f_bug_id, true );
 
 	$t_selected_project = helper_get_current_project();
 	if( $t_bug->project_id != $t_selected_project ) {
@@ -306,7 +306,7 @@
 		<?php echo lang_get( 'product_version' ) ?>
 	</td>
 	<td>
-		<?php echo $t_bug->version ?>
+		<?php echo string_display_line( $t_bug->version ) ?>
 	</td>
 	<?php
 		} else {
@@ -346,7 +346,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $t_bug->description ?>
+		<?php echo string_display_line_links( $t_bug->description ) ?>
 	</td>
 </tr>
 
@@ -357,7 +357,7 @@
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $t_bug->additional_information ?>
+		<?php echo string_display_line_links( $t_bug->additional_information ) ?>
 	</td>
 </tr>
 
@@ -458,7 +458,7 @@
 	include( $t_mantis_dir . 'bug_sponsorship_list_view_inc.php' );
 
 	# Bug Relationships
-	relationship_view_box ( $f_bug_id );
+	relationship_view_box ( $t_bug->id );
 
 	# File upload box
 	if ( !bug_is_readonly( $f_bug_id ) ) {

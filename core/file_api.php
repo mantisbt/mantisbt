@@ -22,16 +22,14 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires history_api
  */
-require_once( $t_core_dir . 'history_api.php' );
+require_once( 'history_api.php' );
 /**
  * requires bug_api
  */
-require_once( $t_core_dir . 'bug_api.php' );
+require_once( 'bug_api.php' );
 
 $g_cache_file_count = array();
 
@@ -153,7 +151,7 @@ function file_can_delete_bug_attachments( $p_bug_id ) {
 function file_get_icon_url( $p_display_filename ) {
 	$t_file_type_icons = config_get( 'file_type_icons' );
 
-	$ext = utf8_strtolower( file_get_extension( $p_display_filename ) );
+	$ext = strtolower( file_get_extension( $p_display_filename ) );
 	if( is_blank( $ext ) || !isset( $t_file_type_icons[$ext] ) ) {
 		$ext = '?';
 	}
@@ -172,7 +170,7 @@ function file_get_icon_url( $p_display_filename ) {
  */
 function file_path_combine( $p_path, $p_filename ) {
 	$t_path = $p_path;
-	if ( utf8_substr( $t_path, -1 ) != '/' && utf8_substr( $t_path, -1 ) != '\\' ) {
+	if ( substr( $t_path, -1 ) != '/' && substr( $t_path, -1 ) != '\\' ) {
 		$t_path .= DIRECTORY_SEPARATOR;
 	}
 
@@ -303,7 +301,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_attachment['preview'] = false;
 		$t_attachment['type'] = '';
 
-		$t_ext = utf8_strtolower( file_get_extension( $t_attachment['display_name'] ) );
+		$t_ext = strtolower( file_get_extension( $t_attachment['display_name'] ) );
 		$t_attachment['alt'] = $t_ext;
 
 		if( $t_attachment['exists'] ) {
@@ -312,7 +310,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 				$t_attachment['type'] = 'text';
 			}
 
-			if ( $t_can_download && ( $t_filesize != 0 ) && ( $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( in_array( utf8_strtolower( file_get_extension( $t_attachment['display_name'] ) ), $t_preview_image_ext, true ) ) ) {
+			if ( $t_can_download && ( $t_filesize != 0 ) && ( $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( in_array( strtolower( file_get_extension( $t_attachment['display_name'] ) ), $t_preview_image_ext, true ) ) ) {
 				$t_attachment['preview'] = true;
 				$t_attachment['type'] = 'image';
 			}
@@ -564,9 +562,7 @@ function file_clean_name( $p_filename ) {
 # It is not guaranteed to be unique and should be checked
 # The string returned should be 32 characters in length
 function file_generate_name( $p_seed ) {
-	$t_val = md5( $p_seed . time() );
-
-	return utf8_substr( $t_val, 0, 32 );
+	return md5( $p_seed . time() );
 }
 
 # Generate a UNIQUE string to use as the identifier for the file
@@ -643,7 +639,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 		$t_project_id = helper_get_current_project();
 		$t_bug_id = 0;
 	}
-	
+
 	if( $p_user_id === null ) {
 		$c_user_id = auth_get_current_user_id();
 	} else {
@@ -844,14 +840,14 @@ function file_ensure_uploaded( $p_file ) {
 function file_get_extension( $p_filename ) {
 	$ext = '';
 	$dot_found = false;
-	$i = utf8_strlen( $p_filename ) - 1;
+	$i = strlen( $p_filename ) - 1;
 	while( $i >= 0 ) {
 		if( '.' == $p_filename[$i] ) {
 			$dot_found = true;
 			break;
 		}
 
-		# foung a directoryarker before a period.
+		# found a directory marker before a period.
 		if(( $p_filename[$i] == "/" ) || ( $p_filename[$i] == "\\" ) ) {
 			return '';
 		}

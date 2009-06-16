@@ -49,8 +49,8 @@
 	$t_filter = current_user_get_bug_filter();
 
 	if( $t_filter ) {
-		list( $t_sort, ) = split( ',', $t_filter['sort'] );
-		list( $t_dir, ) = split( ',', $t_filter['dir'] );
+		list( $t_sort, ) = explode( ',', $t_filter['sort'] );
+		list( $t_dir, ) = explode( ',', $t_filter['dir'] );
 	}
 
 	$t_checkboxes_exist = false;
@@ -64,7 +64,7 @@
 	} else {
 		$t_categories = array();
 		foreach ($rows as $t_row) {
-			$t_categories[] = $t_row['category_id'];
+			$t_categories[] = $t_row->category_id;
 		}
 		category_cache_array_rows( array_unique( $t_categories ) );
 	}
@@ -97,10 +97,10 @@
 			var string_loading = '<?php echo lang_get( 'loading' );?>';
 		// -->
 		</script>
-		<script type="text/javascript" language="JavaScript" src="javascript/xmlhttprequest.js"></script>
-		<script type="text/javascript" language="JavaScript" src="javascript/addLoadEvent.js"></script>
-		<script type="text/javascript" language="JavaScript" src="javascript/dynamic_filters.js"></script>
 		<?php
+			html_javascript_link( 'xmlhttprequest.js');
+			html_javascript_link( 'addLoadEvent.js');
+			html_javascript_link( 'dynamic_filters.js');
 	}
 ?>
 <br />
@@ -130,12 +130,6 @@
 				# -- Print and Export links --
 				print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
 				echo '&nbsp;';
-
-				if ( ON == config_get( 'use_jpgraph' ) ) {
-				    print_bracket_link( 'bug_graph_page.php', lang_get( 'graph_bug_page_link' ) );
-				    echo '&nbsp;';
-				}
-
 				print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
 				echo '&nbsp;';
 				print_bracket_link( 'excel_xml_export.php', lang_get( 'excel_export' ) );
@@ -191,10 +185,10 @@
 		for( $i=0; $i < $t_rows; $i++ ) {
 			$t_row = $p_rows[$i];
 
-			if ( ( 0 == $t_row['sticky'] ) && ( 0 == $i ) ) {
+			if ( ( 0 == $t_row->sticky ) && ( 0 == $i ) ) {
 				$t_in_stickies = false;
 			}
-			if ( ( 0 == $t_row['sticky'] ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
+			if ( ( 0 == $t_row->sticky ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
 ?>
                <tr>
                        <td class="left" colspan="<?php echo count( $t_columns ); ?>" bgcolor="#999999">&nbsp;</td>
@@ -204,7 +198,7 @@
 			}
 
 			# choose color based on status
-			$status_color = get_status_color( $t_row['status'] );
+			$status_color = get_status_color( $t_row->status );
 
 			echo '<tr bgcolor="', $status_color, '" border="1" valign="top">';
 

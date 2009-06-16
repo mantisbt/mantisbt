@@ -64,7 +64,7 @@ function terminate_directory_path( $p_path ) {
  */
 function is_blank( $p_var ) {
 	$p_var = trim( $p_var );
-	$str_len = utf8_strlen( $p_var );
+	$str_len = strlen( $p_var );
 	if( 0 == $str_len ) {
 		return true;
 	}
@@ -110,11 +110,11 @@ function ini_get_bool( $p_name ) {
  */
 function ini_get_number( $p_name ) {
 	$t_result = ini_get( $p_name );
-	$t_val = spliti( 'M', $t_result );
+	$t_val = explode( 'm', strtolower( $t_result ) );
 	if( $t_val[0] != $t_result ) {
 		return $t_val[0] * 1000000;
 	}
-	$t_val = spliti( 'K', $t_result );
+	$t_val = explode( 'k', strtolower( $t_result ) );
 	if( $t_val[0] != $t_result ) {
 		return $t_val[0] * 1000;
 	}
@@ -184,29 +184,34 @@ function is_page_name( $p_string ) {
 	return isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], $p_string ) );
 }
 
-function getClassProperties($className, $types='public', $return_object = false, $include_parent = false ) {
-    $ref = new ReflectionClass($className); 
-    $props = $ref->getProperties(); 
-    $props_arr = array(); 
-    foreach($props as $prop){ 
-        $f = $prop->getName(); 
-        
-        if($prop->isPublic() and (stripos($types, 'public') === FALSE)) continue; 
-        if($prop->isPrivate() and (stripos($types, 'private') === FALSE)) continue; 
-        if($prop->isProtected() and (stripos($types, 'protected') === FALSE)) continue; 
-        if($prop->isStatic() and (stripos($types, 'static') === FALSE)) continue; 
-        
-        if ( $return_object )
-        	$props_arr[$f] = $prop;
-        else
-        	$props_arr[$f] = true;
-    } 
-	if ( $include_parent ) {
-	    if($parentClass = $ref->getParentClass()){ 
-	        $parent_props_arr = getClassProperties($parentClass->getName());//RECURSION 
-	        if(count($parent_props_arr) > 0) 
-	            $props_arr = array_merge($parent_props_arr, $props_arr); 
-	    } 
+function is_windows_server() {
+	if( defined( 'PHP_WINDOWS_VERSION_MAJOR' ) ) {
+		return (PHP_WINDOWS_VERSION_MAJOR > 0);
 	}
-	return $props_arr; 
+	return ('WIN' == substr( PHP_OS, 0, 3 ) );
 }
+
+function getClassProperties($className, $types='public', $return_object = false, $include_parent = false ) {
+	$ref = new ReflectionClass($className);
+	$props = $ref->getProperties();
+	$props_arr = array();
+	foreach($props as $prop){
+		$f = $prop->getName();
+		if($prop->isPublic() and (stripos($types, 'public') === FALSE)) continue;
+		if($prop->isPrivate() and (stripos($types, 'private') === FALSE)) continue;
+		if($prop->isProtected() and (stripos($types, 'protected') === FALSE)) continue;
+		if($prop->isStatic() and (stripos($types, 'static') === FALSE)) continue;
+		if ( $return_object )
+			$props_arr[$f] = $prop;
+		else
+			$props_arr[$f] = true;
+	}
+	if ( $include_parent ) {
+		if($parentClass = $ref->getParentClass()){
+			$parent_props_arr = getClassProperties($parentClass->getName());//RECURSION
+			if(count($parent_props_arr) > 0)
+				$props_arr = array_merge($parent_props_arr, $props_arr);
+		}
+	}
+	return $props_arr;
+} 

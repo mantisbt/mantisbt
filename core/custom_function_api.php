@@ -22,16 +22,14 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires prepare_api
  */
-require_once( $t_core_dir . 'prepare_api.php' );
+require_once( 'prepare_api.php' );
 /**
  * requires columns_api
  */
-require_once( $t_core_dir . 'columns_api.php' );
+require_once( 'columns_api.php' );
 
 # ## Custom Function API ###
 # Checks the provided bug and determines whether it should be included in the changelog

@@ -22,10 +22,14 @@
  * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
-require_once( $t_core_dir . 'email_api.php' );
-require_once( $t_core_dir . 'ldap_api.php' );
+/**
+ * requires email_api
+ */
+require_once( 'email_api.php' );
+/**
+ * requires ldap_api
+ */
+require_once( 'ldap_api.php' );
 
 # ===================================
 # Caching
@@ -184,14 +188,12 @@ function user_ensure_exists( $p_user_id ) {
 # return true if the username is unique, false if there is already a user
 #  with that username
 function user_is_name_unique( $p_username ) {
-	$c_username = db_prepare_string( $p_username );
-
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	$query = "SELECT username
 				FROM $t_user_table
 				WHERE username=" . db_param();
-	$result = db_query_bound( $query, Array( $c_username ), 1 );
+	$result = db_query_bound( $query, Array( $p_username ), 1 );
 
 	if( db_num_rows( $result ) > 0 ) {
 		return false;
@@ -213,17 +215,16 @@ function user_ensure_name_unique( $p_username ) {
 # Return 0 if it is invalid, The number of matches + 1
 function user_is_realname_unique( $p_username, $p_realname ) {
 	if( is_blank( $p_realname ) ) {
-
 		# don't bother checking if realname is blank
 		return 1;
 	}
 
-	$c_realname = db_prepare_string( $p_realname );
+	$p_username = trim( $p_username );
+	$p_realname = trim( $p_realname );
 
 	# allow realname to match username
 	$t_count = 0;
 	if( $p_realname <> $p_username ) {
-
 		# check realname does not match an existing username
 		#  but allow it to match the current user
 		$t_target_user = user_get_id_by_name( $p_username );
@@ -237,7 +238,7 @@ function user_is_realname_unique( $p_username, $p_realname ) {
 		$query = "SELECT id
 				FROM $t_user_table
 				WHERE realname=" . db_param();
-		$result = db_query_bound( $query, Array( $c_realname ) );
+		$result = db_query_bound( $query, Array( $p_realname ) );
 		$t_count = db_num_rows( $result );
 
 		if( $t_count > 0 ) {
@@ -400,15 +401,13 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 	}
 
 	# Generate timestamp
-	/** @todo The following code may not be portable accross DBMS. */
-	$t_last_timestamp_threshold = mktime( date( "H" ), date( "i" ) - 1 * $t_session_duration_in_minutes, date( "s" ), date( "m" ), date( "d" ), date( "Y" ) );
-	$c_last_timestamp_threshold = date( "Y-m-d H:i:s", $t_last_timestamp_threshold );
+	$t_last_timestamp_threshold = mktime( date( 'H' ), date( 'i' ) - 1 * $t_session_duration_in_minutes, date( 's' ), date( 'm' ), date( 'd' ), date( 'Y' ) );
 
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	# Execute query
-	$query = "SELECT id FROM $t_user_table WHERE last_visit > '$c_last_timestamp_threshold'";
-	$result = db_query( $query, 1 );
+	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE last_visit > ' . db_param();
+	$result = db_query_bound( $query, array( $c_last_timestamp_threshold ), 1 );
 
 	# Get the list of connected users
 	$t_users_connected = array();
@@ -452,8 +451,8 @@ function user_create( $p_username, $p_password, $p_email = '',
 				    ( username, email, password, date_created, last_visit,
 				     enabled, access_level, login_count, cookie_string, realname )
 				  VALUES
-				    ( " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param()  . ",
-				     " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ", " . db_param() . ")";
+				    ( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param()  . ",
+				     " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
 	db_query_bound( $query, Array( $p_username, $p_email, $p_password, db_now(), db_now(), $c_enabled, $c_access_level, 0, $t_cookie_string, $p_realname ) );
 
 	# Create preferences for the user
@@ -574,7 +573,7 @@ function user_delete( $p_user_id ) {
 
 	# unset non-unique realname flags if necessary
 	if( config_get( 'differentiate_duplicates' ) ) {
-		$c_realname = db_prepare_string( user_get_field( $p_user_id, 'realname' ) );
+		$c_realname = user_get_field( $p_user_id, 'realname' );
 		$query = "SELECT id
 					FROM $t_user_table
 					WHERE realname=" . db_param();
@@ -701,7 +700,7 @@ function user_get_row( $p_user_id ) {
 function user_get_field( $p_user_id, $p_field_name ) {
 	if( NO_USER == $p_user_id ) {
 		trigger_error( 'user_get_field() for NO_USER', WARNING );
-		return "@null@";
+		return '@null@';
 	}
 
 	$row = user_get_row( $p_user_id );
@@ -1001,7 +1000,7 @@ function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
 function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
-	$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . " AND";
+	$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . ' AND';
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
@@ -1020,7 +1019,7 @@ function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
-	$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . " AND";
+	$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . ' AND';
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
@@ -1207,15 +1206,15 @@ function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_field_name = db_prepare_string( $p_field_name );
 
-	if( $p_field_name != "protected" ) {
+	if( $p_field_name != 'protected' ) {
 		user_ensure_unprotected( $p_user_id );
 	}
 
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
-	$query = "UPDATE $t_user_table
-				  SET $c_field_name=" . db_param() . "
-				  WHERE id=" . db_param();
+	$query = 'UPDATE ' . $t_user_table .
+		     ' SET ' . $c_field_name . '=' . db_param() .
+			 ' WHERE id=' . db_param();
 
 	db_query_bound( $query, Array( $p_field_value, $c_user_id ) );
 

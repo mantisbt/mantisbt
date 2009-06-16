@@ -65,13 +65,16 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires collapse_api
  */
-require_once( $t_core_dir . 'collapse_api.php' );
+require_once( 'collapse_api.php' );
 
+/**
+ * RelationshipData Structure Definition
+ * @package MantisBT
+ * @subpackage classes
+ */
 class BugRelationshipData {
 	var $id;
 	var $src_bug_id;
@@ -409,7 +412,8 @@ function relationship_get_all( $p_bug_id, &$p_is_different_projects ) {
 	$t_all = array_merge( $t_src, $t_dest );
 
 	$p_is_different_projects = false;
-	for( $i = 0;$i < count( $t_all );$i++ ) {
+	$t_count = count( $t_all );
+	for( $i = 0;$i < $t_count;$i++ ) {
 		$p_is_different_projects |= ( $t_all[$i]->src_project_id != $t_all[$i]->dest_project_id );
 	}
 	return $t_all;
@@ -435,7 +439,7 @@ function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
 				AND destination_bug_id=" . db_param() . ")
 				OR
 				(source_bug_id=" . db_param() . "
-				AND destination_bug_id=" . db_param() . ")";
+				AND destination_bug_id=" . db_param() . ')';
 	$result = db_query_bound( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_dest_bug_id, $c_src_bug_id ), 1 );
 
 	$t_relationship_count = db_num_rows( $result );
@@ -586,7 +590,7 @@ function relationship_can_resolve_bug( $p_bug_id ) {
  * @return string
  */
 function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, $p_html_preview = false, $p_show_project = false ) {
-	$t_summary_wrap_at = utf8_strlen( config_get( 'email_separator2' ) ) - 28;
+	$t_summary_wrap_at = strlen( config_get( 'email_separator2' ) ) - 28;
 	$t_icon_path = config_get( 'icon_path' );
 
 	if( $p_bug_id == $p_relationship->src_bug_id ) {
@@ -620,7 +624,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 	}
 
 	# get the information from the related bug and prepare the link
-	$t_bug = bug_prepare_display( bug_get( $t_related_bug_id, false ) );
+	$t_bug = bug_get( $t_related_bug_id, false );
 	$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
 	$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
 
@@ -633,8 +637,8 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 		$t_relationship_info_html .= $t_td . $t_status . '&nbsp;</td>';
 	}
 
-	$t_relationship_info_text = utf8_str_pad( $t_relationship_descr, 20 );
-	$t_relationship_info_text .= utf8_str_pad( bug_format_id( $t_related_bug_id ), 8 );
+	$t_relationship_info_text = str_pad( $t_relationship_descr, 20 );
+	$t_relationship_info_text .= str_pad( bug_format_id( $t_related_bug_id ), 8 );
 
 	# get the handler name of the related bug
 	$t_relationship_info_html .= $t_td;
@@ -649,20 +653,23 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 	}
 
 	# add summary
-	$t_relationship_info_html .= $t_td . $t_bug->summary;
-	if( VS_PRIVATE == $t_bug->view_state ) {
-		$t_relationship_info_html .= sprintf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
-	}
-	if( utf8_strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
-		$t_relationship_info_text .= $t_bug->summary;
-	} else {
-		$t_relationship_info_text .= utf8_substr( $t_bug->summary, 0, $t_summary_wrap_at - 3 ) . '...';
+ 	if( $p_html == true ) {
+ 		$t_relationship_info_html .= $t_td . string_display_line_links( $t_bug->summary );
+ 		if( VS_PRIVATE == $t_bug->view_state ) {
+ 			$t_relationship_info_html .= sprintf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
+ 		}
+  	} else {
+ 		if( strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
+ 			$t_relationship_info_text .= string_email_links( $t_bug->summary );
+ 		} else {
+ 			$t_relationship_info_text .= mb_substr( string_email_links( $t_bug->summary ), 0, $t_summary_wrap_at - 3 ) . '...';
+ 		}
 	}
 
 	# add delete link if bug not read only and user has access level
-	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
-		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-			$t_relationship_info_html .= " [<a class=\"small\" href=\"bug_relationship_delete.php?bug_id=$p_bug_id&rel_id=$p_relationship->id\">" . lang_get( 'delete_link' ) . '</a>]';
+ 	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
+ 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+			$t_relationship_info_html .= ' [<a class="small" href="bug_relationship_delete.php?bug_id=' . $p_bug_id . '&rel_id=' . $p_relationship->id. '">' . lang_get( 'delete_link' ) . '</a>]';
 		}
 	}
 
@@ -742,10 +749,7 @@ function relationship_get_summary_html_preview( $p_bug_id ) {
  * @return string
  */
 function relationship_get_summary_text( $p_bug_id ) {
-	$t_email_separator1 = config_get( 'email_separator1' );
-	$t_email_separator2 = config_get( 'email_separator2' );
-
-	$t_summary = "";
+	$t_summary = '';
 	$t_show_project = false;
 
 	$t_relationship_all = relationship_get_all( $p_bug_id, $t_show_project );
@@ -754,10 +758,6 @@ function relationship_get_summary_text( $p_bug_id ) {
 	# prepare the relationships table
 	for( $i = 0;$i < $t_relationship_all_count;$i++ ) {
 		$t_summary .= relationship_get_details( $p_bug_id, $t_relationship_all[$i], false );
-	}
-
-	if( $t_summary != "" ) {
-		$t_summary = $t_email_separator1 . "\n" . utf8_str_pad( lang_get( 'bug_relationships' ), 20 ) . utf8_str_pad( lang_get( 'id' ), 8 ) . lang_get( 'summary' ) . "\n" . $t_email_separator2 . "\n" . $t_summary;
 	}
 
 	return $t_summary;

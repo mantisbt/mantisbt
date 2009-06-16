@@ -56,18 +56,46 @@
  * @uses lang_api.php
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
-require_once( $t_core_dir . 'current_user_api.php' );
-require_once( $t_core_dir . 'string_api.php' );
-require_once( $t_core_dir . 'bug_api.php' );
-require_once( $t_core_dir . 'project_api.php' );
-require_once( $t_core_dir . 'helper_api.php' );
-require_once( $t_core_dir . 'authentication_api.php' );
-require_once( $t_core_dir . 'user_api.php' );
-require_once( $t_core_dir . 'rss_api.php' );
-require_once( $t_core_dir . 'wiki_api.php' );
-require_once( $t_core_dir . 'php_api.php' );
+/**
+ * requires current_user_api
+ */
+require_once( 'current_user_api.php' );
+/**
+ * requires string_api
+ */
+require_once( 'string_api.php' );
+/**
+ * requires bug_api
+ */
+require_once( 'bug_api.php' );
+/**
+ * requires project_api
+ */
+require_once( 'project_api.php' );
+/**
+ * requires helper_api
+ */
+require_once( 'helper_api.php' );
+/**
+ * requires authentication_api
+ */
+require_once( 'authentication_api.php' );
+/**
+ * requires user_api
+ */
+require_once( 'user_api.php' );
+/**
+ * requires rss_api
+ */
+require_once( 'rss_api.php' );
+/**
+ * requires wiki_api
+ */
+require_once( 'wiki_api.php' );
+/**
+ * requires php_api
+ */
+require_once( 'php_api.php' );
 
 $g_rss_feed_url = null;
 
@@ -112,6 +140,20 @@ function html_rss_link() {
 
 	if( $g_rss_feed_url !== null ) {
 		echo '<link rel="alternate" type="application/rss+xml" title="RSS" href="', $g_rss_feed_url, '" />';
+	}
+}
+
+/**
+ * Prints a <script> tag to include a javascript file.
+ * This includes either minimal or development file from /javascript depending on whether mantis is set for debug/production use
+ * @param string $p_filename
+ * @return null
+ */
+function html_javascript_link( $p_filename) {
+	if( config_get_global( 'minimal_jscss' ) ) {
+		echo '<script type="text/javascript" src="', helper_mantis_url( 'javascript/min/' . $p_filename ), '"></script>' . "\n";
+	} else {
+		echo '<script type="text/javascript" src="', helper_mantis_url( 'javascript/dev/' . $p_filename ), '"></script>' . "\n";
 	}
 }
 
@@ -284,10 +326,10 @@ function html_content_type() {
 function html_title( $p_page_title = null ) {
 	$t_title = config_get( 'window_title' );
 	echo "\t", '<title>';
-	if( 0 == utf8_strlen( $p_page_title ) ) {
+	if( empty( $p_page_title ) ) {
 		echo string_display( $t_title );
 	} else {
-		if( 0 == utf8_strlen( $t_title ) ) {
+		if( empty( $t_title ) ) {
 			echo $p_page_title;
 		} else {
 			echo $p_page_title . ' - ' . string_display( $t_title );
@@ -329,7 +371,7 @@ function html_css() {
  * @return boolean
  */
 function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
-	if( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
+	if( ON == config_get_global( 'stop_on_errors' ) && error_handled() ) {
 		return false;
 	}
 
@@ -355,16 +397,14 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
  */
 function html_head_javascript() {
 	if( ON == config_get( 'use_javascript' ) ) {
-		echo "\t", '<script type="text/javascript" language="JavaScript" src="', helper_mantis_url( 'javascript/common.js' ), '">';
-		echo '</script>', "\n";
-		echo "\t", '<script type="text/JavaScript" src="', helper_mantis_url( 'javascript/ajax.js' ), '">';
-		echo '</script>', "\n";
+		html_javascript_link( 'common.js' );
+		html_javascript_link( 'ajax.js' );
 
 		global $g_enable_projax;
 
 		if( $g_enable_projax ) {
-			echo '<script type="text/javascript" src="', helper_mantis_url( 'javascript/projax/prototype.js' ), '"></script>';
-			echo '<script type="text/javascript" src="', helper_mantis_url( 'javascript/projax/scriptaculous.js' ), '"></script>';
+			html_javascript_link( 'projax/prototype.js' );
+			html_javascript_link( 'projax/scriptaculous.js' );
 		}
 	}
 }
@@ -847,18 +887,30 @@ function print_subproject_menu_bar( $p_project_id, $p_parents = '' ) {
  * Print the menu for the graph summary section
  * @return null
  */
-function print_menu_graph() {
-	if( config_get( 'use_jpgraph' ) ) {
-		$t_icon_path = config_get( 'icon_path' );
+function print_summary_submenu() {
+	echo '<div align="center">';
 
-		echo '<br />';
-		echo '<a href="' . helper_mantis_url( 'summary_page.php' ) . '"><img src="' . $t_icon_path . 'synthese.gif" border="0" alt="" />' . lang_get( 'synthesis_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_status.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'status_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_priority.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'priority_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_severity.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'severity_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_category.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'category_link' ) . '</a> | ';
-		echo '<a href="' . helper_mantis_url( 'summary_graph_imp_resolution.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . lang_get( 'resolution_link' ) . '</a>';
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_SUBMENU_SUMMARY' );
+	$t_menu_options = array();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				$t_menu_options[] = $t_callback_menu_options;
+			}
+		}
 	}
+
+	// Plugins menu items
+	// TODO: this would be a call to print_pracket_link but the events returns cooked links so we cant
+	foreach( $t_menu_options as $t_menu_item ) {
+		echo '<span class="bracket-link">[&nbsp;';
+		echo $t_menu_item;
+		echo '&nbsp;]</span> ';
+	}
+	echo '</div>';
 }
 
 /**
@@ -1094,22 +1146,27 @@ function print_doc_menu( $p_page = '' ) {
 function print_summary_menu( $p_page = '' ) {
 	echo '<div align="center">';
 	print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
+	print_bracket_link( helper_mantis_url( 'summary_page.php' ), lang_get( 'summary_link' ) );
 
-	if( config_get( 'use_jpgraph' ) != 0 ) {
-		$t_summary_page = 'summary_page.php';
-		$t_summary_jpgraph_page = 'summary_jpgraph_page.php';
-
-		switch( $p_page ) {
-			case $t_summary_page:
-				$t_summary_page = '';
-				break;
-			case $t_summary_jpgraph_page:
-				$t_summary_jpgraph_page = '';
-				break;
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_MENU_SUMMARY' );
+	$t_menu_options = array();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				$t_menu_options[] = $t_callback_menu_options;
+			}
 		}
+	}
 
-		print_bracket_link( helper_mantis_url( $t_summary_page ), lang_get( 'summary_link' ) );
-		print_bracket_link( helper_mantis_url( $t_summary_jpgraph_page ), lang_get( 'summary_jpgraph_link' ) );
+	// Plugins menu items
+	// TODO: this would be a call to print_pracket_link but the events returns cooked links so we cant
+	foreach( $t_menu_options as $t_menu_item ) {
+		echo '<span class="bracket-link">[&nbsp;';
+		echo $t_menu_item;
+		echo '&nbsp;]</span> ';
 	}
 	echo '</div>';
 }
@@ -1173,7 +1230,7 @@ function html_status_percentage_legend() {
 				FROM $t_mantis_bug_table
 				WHERE $t_specific_where
 				GROUP BY status";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 
 	$t_bug_count = 0;
 	$t_status_count_array = array();
@@ -1228,7 +1285,7 @@ function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = '
 		$p_fields = array();
 	}
 
-	if( utf8_strtolower( $p_method ) == 'get' ) {
+	if( strtolower( $p_method ) == 'get' ) {
 		$t_method = 'get';
 	} else {
 		$t_method = 'post';
@@ -1374,14 +1431,14 @@ function html_button_bug_assign_to( $p_bug_id ) {
 			$t_default_assign_to = $t_id;
 		}
 
-		echo "<option value=\"$t_id\" ";
+		echo '<option value="' . $t_id . '" ';
 
 		if(( $t_id == $t_default_assign_to ) && !$t_already_selected ) {
 			check_selected( $t_id, $t_default_assign_to );
 			$t_already_selected = true;
 		}
 
-		echo ">$t_caption</option>";
+		echo '>' . $t_caption . '</option>';
 	}
 
 	# allow un-assigning if already assigned.

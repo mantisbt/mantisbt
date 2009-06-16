@@ -20,22 +20,18 @@
  * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
+
+define( 'PLUGINS_DISABLED', true ); 
+$g_skip_lang_load = true;
+
 /**
  * MantisBT Core API's
  */
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
-access_ensure_global_level( ADMINISTRATOR );
-
-set_time_limit( 0 );
-
 if( function_exists( 'xdebug_disable' ) ) {
 	xdebug_disable();
 }
-
-html_page_top();
-
-require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'constant_inc.php' );
 
 if( !defined( 'T_ML_COMMENT' ) ) {
 	define( 'T_ML_COMMENT', T_COMMENT );
@@ -44,11 +40,30 @@ else {
 	define( 'T_DOC_COMMENT', T_ML_COMMENT );
 }
 
+if (!checkfile( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR, 'strings_english.txt', true)) {
+	print_error( "FAILED: Language file 'strings_english.txt' failed." );
+	die;
+}
+
+unset( $g_skip_lang_load ) ;
+lang_push( 'english' );
+
+access_ensure_global_level( ADMINISTRATOR );
+
+set_time_limit( 0 );
+
+html_page_top();
+
 // check core language files
 if( function_exists( 'opendir' ) && function_exists( 'readdir' ) ) {
 	$t_lang_files = Array();
 	if( $handle = opendir( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' ) ) {
 		while( false !== ( $file = readdir( $handle ) ) ) {
+			if ($file == 'strings_english.txt' ) {
+				echo "Testing english language file '$t_file' (phase 1)...<br />";
+				flush();
+				checkfile( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR, $file );			
+			}
 			if( $file[0] != '.' && $file != 'langreadme.txt' && !is_dir( $file ) ) {
 				$t_lang_files[] = $file;
 			}
@@ -93,7 +108,14 @@ function checklangdir( $p_path, $p_subpath = '' ) {
 				continue;
 			if ( $p_subpath == '' ) {
 				echo "Checking language files for plugin $file:<br />";
+
+				if (file_exists( $p_path . DIRECTORY_SEPARATOR . $p_subpath . DIRECTORY_SEPARATOR . $file . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . 'strings_english.txt' ) ) {
+					echo "Testing english language for plugin '$file' (phase 1)...<br />";
+					flush();
+					checkfile( $p_path . DIRECTORY_SEPARATOR . $p_subpath . DIRECTORY_SEPARATOR . $file . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR,  'strings_english.txt' );			
+				}
 			}
+
 			if( !is_dir( $p_path . DIRECTORY_SEPARATOR . $file ) && $p_subpath == 'lang' ) {
 				checkfile( $p_path, $file );
 			} else {
@@ -106,40 +128,61 @@ function checklangdir( $p_path, $p_subpath = '' ) {
 }
 
 
-function checkfile( $p_path, $p_file ) {
-		echo "Testing language file '$p_file' (phase 1)...<br />";
-		flush();
+function checkfile( $p_path, $p_file, $p_quiet = false ) {
+		if( !$p_quiet) {
+			echo "Testing language file '$p_file' (phase 1)...<br />";
+			flush();
+		}
 
 		$file = $p_path . $p_file;
 
-		$result = checktoken( $file );
+		set_error_handler( 'lang_error_handler' );
+		$result = checktoken( $file, ($p_file == 'strings_english.txt' ? true : false) );
+		restore_error_handler();
 
 		if( !$result ) {
 			print_error( "FAILED: Language file '$p_file' failed at phase 1." );
+			if( $p_quiet ) {
+				return false;
+			}
 		}
 
-		echo "Testing language file '$p_file' (phase 2)...<br />";
-		flush();
+		if( !$p_quiet ) {
+			echo "Testing language file '$p_file' (phase 2)...<br />";
+			flush();
+		} else {
+			return true;
+		}
 
 		set_error_handler( 'lang_error_handler' );
 		ob_start();
 		$result = eval( "require_once( '$file' );" );
-		$data = ob_get_contents();;
+		$data = ob_get_contents();
 		ob_end_clean();
 		restore_error_handler();
 
 		if( $result === false ) {
 			print_error( "FAILED: Language file '$p_file' failed at eval" );
+			if( $p_quiet ) {
+				return false;
+			}
 		}
 
-		if( strlen( $data ) > 0 ) {
-			print_error( "FAILED: Language file '$p_file' failed at require_once (data output of length " . strlen( $data ) . ")" );
+		if( !empty( $data ) ) {
+			print_error( "FAILED: Language file '$p_file' failed at require_once (data output: " . var_export( $data, true ) . ")" );
+			if( $p_quiet ) {
+				return false;
+			}
 		}
+		return true;
 }
 
-function checktoken( $file ) {
+$basevariables = Array();
+
+function checktoken( $file, $base = false ) {
 	$in_php_code = false;
 	$variables = Array();
+	global $basevariables;	
 	$current_var = null;
 	$last_token = 0;
 	$set_variable = false;
@@ -147,10 +190,11 @@ function checktoken( $file ) {
 	$twopartstring = false;
 	$need_end_variable = false;
 	$source = file_get_contents( $file );
-	$tokens = token_get_all( $source );
+	$tokens = @token_get_all( $source );
 	$expectendarr = false;
 	$settingvariable = false;
 	$pass = true;
+	$fatal = false;
 	foreach( $tokens as $token ) {
 		$last_token2 = 0;
 		if( is_string( $token ) ) {
@@ -246,6 +290,11 @@ function checktoken( $file ) {
 						print_error( "ERROR: T_STRING found at unexpected location (line $line)" );
 						$pass = false;
 					}
+					if ( strpos($current_var,"\n") !== false ) {
+						print_error( "PARSER - NEW LINE IN STRING: " . $id . token_name( $id ) . $text . $line );
+						$pass = false;
+						$fatal = true;
+					}					
 					$last_token2 = T_VARIABLE;
 					$expectendarr = true;
 					break;
@@ -259,6 +308,26 @@ function checktoken( $file ) {
 						} else {
 							$variables[$current_var] = $text;
 						}
+						
+						if ( $base ) {
+							// english
+							//if( isset( $basevariables[$current_var] ) ) {
+							//	print_error( "WARN: english string redefined - plugin? $current_var" );
+							//}
+							$basevariables[$current_var] = true;
+						} else {
+							if( !isset( $basevariables[$current_var] ) ) {
+								print_error( "WARN: String defined in non-english file that does not exist ( $current_var )" ); 
+							//} else {
+								// missing translation
+							}
+						}
+						
+					}
+					if ( strpos($current_var,"\n") !== false ) {
+						print_error( "PARSER - NEW LINE IN STRING: " . $id . token_name( $id ) . $text . $line );
+						$pass = false;
+						$fatal = true;
 					}
 					$current_var = null;
 					$need_end_variable = true;
@@ -275,13 +344,16 @@ function checktoken( $file ) {
 				$last_token = $last_token2;
 			}
 		}
+		
+		if ($fatal)
+			break;
 	}
 
 	return $pass;
 }
 
 function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-	print_error( "error handler thrown: ", $p_type, $p_error, $p_file, $p_line, $p_context );
+	print_error( "error handler thrown: " . $p_type . '<br>' . $p_error . '<br>' . $p_file . '<br>' . $p_line . '<br>' . $p_context );
 }
 
 function print_error( $p_string ) {

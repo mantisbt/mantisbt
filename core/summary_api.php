@@ -38,10 +38,9 @@ function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p
 }
 
 # Used in summary reports
-# Given the enum string this function prints out the summary
-# for each enum setting
+# this function prints out the summary for the given enum setting
 # The enum field name is passed in through $p_enum
-function summary_print_by_enum( $p_enum_string, $p_enum ) {
+function summary_print_by_enum( $p_enum ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 
@@ -262,7 +261,7 @@ function summary_print_by_date( $p_date_array ) {
 		print( "    <td class=\"right\">$t_resolved_count</td>\n" );
 
 		$t_balance = $t_new_count - $t_resolved_count;
-		$t_style = "";
+		$t_style = '';
 		if( $t_balance > 0 ) {
 
 			# we are talking about bugs: a balance > 0 is "negative" for the project...
@@ -272,7 +271,7 @@ function summary_print_by_date( $p_date_array ) {
 			# "+" modifier added in PHP >= 4.3.0
 		}
 		else if( $t_balance < 0 ) {
-			$t_style = " positive";
+			$t_style = ' positive';
 			$t_balance = sprintf( '%+d', $t_balance );
 		}
 
@@ -301,11 +300,11 @@ function summary_print_by_activity() {
 	$query = "SELECT COUNT(h.id) as count, b.id, b.summary, b.view_state
 				FROM $t_mantis_bug_table AS b, $t_mantis_history_table AS h
 				WHERE h.bug_id = b.id
-				AND b.status < $t_resolved
+				AND b.status < " . db_param() . "
 				AND $specific_where
 				GROUP BY h.bug_id, b.id, b.summary, b.last_updated, b.view_state
 				ORDER BY count DESC, b.last_updated DESC";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $t_resolved ) );
 
 	$t_count = 0;
 	$t_private_bug_threshold = config_get( 'private_bug_threshold' );
@@ -781,7 +780,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 				WHERE $specific_where
 				GROUP BY handler_id, resolution
 				ORDER BY handler_id, resolution";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 
 	$t_handler_res_arr = array();
 	$t_arr = db_fetch_array( $result );
@@ -885,7 +884,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 				FROM $t_mantis_bug_table
 				WHERE $specific_where
 				GROUP BY reporter_id, resolution";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 
 	$t_reporter_res_arr = array();
 	$t_reporter_bugcount_arr = array();
@@ -1017,7 +1016,7 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 				FROM $t_mantis_bug_table
 				WHERE $specific_where
 				GROUP BY reporter_id, resolution, severity";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 
 	$t_reporter_ressev_arr = array();
 	$t_reporter_bugcount_arr = array();

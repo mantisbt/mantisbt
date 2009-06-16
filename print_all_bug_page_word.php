@@ -121,7 +121,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	$t_user_bugnote_order = user_pref_get_pref ( $t_current_user_id, 'bugnote_order' );
 
 	for( $j=0; $j < $t_row_count; $j++ ) {
-		$t_id = $result[$j]['id'];
+		$t_bug = $result[$j];
+		$t_id = $t_bug->id;
 
 		if ( $j % 50 == 0 ) {
 			# to save ram as report will list data once, clear cache after 50 bugs
@@ -138,13 +139,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 			$t_count_exported++;
 
-			$t_bug = bug_get( $t_id, true );
-			$t_bug = bug_prepare_display( $t_bug );
-
 			$t_last_updated = date( $g_short_date_format, $t_bug->last_updated );
-
-            # grab the bugnote count
-            $t_bugnote_count = bug_get_bugnote_count( $t_id );
 
             # grab the project name
             $t_project_name = project_get_field( $t_bug->project_id, 'name' );
@@ -218,7 +213,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $t_lang_platform ?>:
 	</td>
 	<td class="print">
-		<?php echo $t_bug->platform ?>
+		<?php echo string_display_line( $t_bug->platform ) ?>
 	</td>
 <?php if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_id ) ) { ?>
 	<td class="print-category">
@@ -256,7 +251,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $t_lang_os ?>:
 	</td>
 	<td class="print">
-		<?php echo $t_bug->os ?>
+		<?php echo string_display_line( $t_bug->os ) ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;</td>
 </tr>
@@ -271,7 +266,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $t_lang_os_version ?>:
 	</td>
 	<td class="print">
-		<?php echo $t_bug->os_build ?>
+		<?php echo string_display_line( $t_bug->os_build ) ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;</td>
 </tr>
@@ -286,7 +281,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $t_lang_product_version ?>:
 	</td>
 	<td class="print">
-		<?php echo $t_bug->version ?>
+		<?php echo string_display_line( $t_bug->version ) ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;</td>
 </tr>
@@ -295,7 +290,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $t_lang_product_build ?>:
 	</td>
 	<td class="print">
-		<?php echo $t_bug->build?>
+		<?php echo string_display_line( $t_bug->build ) ?>
 	</td>
 	<td class="print-category">
 		<?php echo $t_lang_resolution ?>:
@@ -331,7 +326,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $t_lang_fixed_in_version ?>:
 	</td>
 	<td class="print">
-		<?php echo $t_bug->fixed_in_version ?>
+		<?php echo string_display_line( $t_bug->fixed_in_version ) ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;</td>
 
@@ -347,7 +342,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $t_lang_target_version ?>:
 	</td>
 	<td class="print">
-		<?php echo $t_bug->target_version ?>
+		<?php echo string_display_line( $t_bug->target_version ) ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;</td>
 </tr>
@@ -377,7 +372,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<?php echo $t_lang_summary ?>:
 	</td>
 	<td class="print" colspan="5">
-		<?php echo $t_bug->summary ?>
+		<?php echo string_display_line_links( $t_bug->summary ) ?>
 	</td>
 </tr>
 <tr class="print">
@@ -385,7 +380,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<?php echo $t_lang_description ?>:
 	</td>
 	<td class="print" colspan="5">
-		<?php echo $t_bug->description ?>
+		<?php echo string_display_line_links( $t_bug->description ) ?>
 	</td>
 </tr>
 <tr class="print">
@@ -393,7 +388,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<?php echo $t_lang_steps_to_reproduce ?>:
 	</td>
 	<td class="print" colspan="5">
-		<?php echo $t_bug->steps_to_reproduce ?>
+		<?php echo string_display_line_links( $t_bug->steps_to_reproduce ) ?>
 	</td>
 </tr>
 <tr class="print">
@@ -401,7 +396,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<?php echo $t_lang_additional_information ?>:
 	</td>
 	<td class="print" colspan="5">
-		<?php echo $t_bug->additional_information ?>
+		<?php echo string_display_line_links( $t_bug->additional_information ) ?>
 	</td>
 </tr>
 <?php

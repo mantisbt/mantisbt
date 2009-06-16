@@ -199,7 +199,7 @@ function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id =
 
 	$t_query = "INSERT INTO $t_tokens_table
 					( type, value, timestamp, expiry, owner )
-					VALUES ( " . db_param() . ", " . db_param() . ", " . db_param() . " , " . db_param() . " , " . db_param() . " )";
+					VALUES ( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	db_query_bound( $t_query, Array( $c_type, $p_value, $c_timestamp, $c_expiry, $c_user_id ) );
 	return db_insert_id( $t_tokens_table );
 }
@@ -270,9 +270,8 @@ function token_purge_expired( $p_token_type = null ) {
 
 /**
  * Purge all expired tokens only once per session.
- * @param integer Token type
  */
-function token_purge_expired_once( $p_token_type = null ) {
+function token_purge_expired_once() {
 	global $g_tokens_purged;
 	if( !$g_tokens_purged ) {
 		token_purge_expired();

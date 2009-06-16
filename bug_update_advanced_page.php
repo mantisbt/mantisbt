@@ -36,7 +36,7 @@
 
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
-	$t_bug = bug_prepare_edit( bug_get( $f_bug_id, true ) );
+	$t_bug = bug_get( $f_bug_id, true );
 
 	if( $t_bug->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...
@@ -206,7 +206,7 @@
 	if ( access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id ) ) {
 		$t_date_to_display = '';
 		if ( !date_is_null( $t_bug->due_date ) ) {
-			$t_date_to_display = date( config_get( 'short_date_format' ), $t_bug->due_date );
+			$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
 		}
 	    print "<input ".helper_get_tab_index()." type=\"text\" id=\"due_date\" name=\"due_date\" size=\"20\" maxlength=\"16\" value=\"".$t_date_to_display."\">";
 		date_print_calendar();
@@ -453,7 +453,7 @@
 		<?php echo lang_get( 'product_build' ); ?>
 	</td>
 	<td>
-		<input type="text" name="build" size="16" maxlength="32" value="<?php echo $t_bug->build ?>" />
+		<input type="text" name="build" size="16" maxlength="32" value="<?php echo string_attribute( $t_bug->build ) ?>" />
 	</td>
 	<?php } else { ?>
 	<td colspan="2"></td>
@@ -493,7 +493,7 @@
 		<?php echo lang_get( 'build' ) ?>
 	</td>
 	<td>
-		<input <?php echo helper_get_tab_index() ?> type="text" name="build" size="16" maxlength="32" value="<?php echo $t_bug->build ?>" />
+		<input <?php echo helper_get_tab_index() ?> type="text" name="build" size="16" maxlength="32" value="<?php echo string_attribute( $t_bug->build ) ?>" />
 	</td>
 
 <?php
@@ -526,7 +526,7 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, true ) );
 		<?php echo lang_get( 'summary' ) ?>
 	</td>
 	<td colspan="5">
-		<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo $t_bug->summary ?>" />
+		<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo string_attribute( $t_bug->summary ) ?>" />
 	</td>
 </tr>
 
@@ -537,7 +537,7 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, true ) );
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="description"><?php echo $t_bug->description ?></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="description"><?php echo string_textarea( $t_bug->description ) ?></textarea>
 	</td>
 </tr>
 
@@ -548,7 +548,7 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, true ) );
 		<?php echo lang_get( 'steps_to_reproduce' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="steps_to_reproduce"><?php echo $t_bug->steps_to_reproduce ?></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="steps_to_reproduce"><?php echo string_textarea( $t_bug->steps_to_reproduce ) ?></textarea>
 	</td>
 </tr>
 
@@ -559,7 +559,7 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $f_bug_id, true ) );
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="additional_information"><?php echo $t_bug->additional_information ?></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="additional_information"><?php echo string_textarea( $t_bug->additional_information ) ?></textarea>
 	</td>
 </tr>
 

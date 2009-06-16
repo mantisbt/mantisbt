@@ -212,7 +212,7 @@
 	}
 
 	# Update the bug entry, notify if we haven't done so already
-	bug_update( $f_bug_id, $t_bug_data, true, ( false == $t_notify ) );
+	$t_bug_data->update( true, ( false == $t_notify ) );
 
 	form_security_purge( 'bug_update' );
 

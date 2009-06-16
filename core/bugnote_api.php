@@ -23,24 +23,22 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires current_user_api
  */
-require_once( $t_core_dir . 'current_user_api.php' );
+require_once( 'current_user_api.php' );
 /**
  * requires email_api
  */
-require_once( $t_core_dir . 'email_api.php' );
+require_once( 'email_api.php' );
 /**
  * requires history_api
  */
-require_once( $t_core_dir . 'history_api.php' );
+require_once( 'history_api.php' );
 /**
  * requires bug_api
  */
-require_once( $t_core_dir . 'bug_api.php' );
+require_once( 'bug_api.php' );
 
 /**
  * Bugnote Data Structure Definition
@@ -148,10 +146,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	}
 
 	# insert bugnote text
-	$query = "INSERT INTO $t_bugnote_text_table
-				( note )
-			VALUES
-				( " . db_param() . " )";
+	$query = 'INSERT INTO ' . $t_bugnote_text_table . ' ( note ) VALUES ( ' . db_param() . ' )';
 	db_query_bound( $query, Array( $p_bugnote_text ) );
 
 	# retrieve bugnote text id number
@@ -176,7 +171,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	$query = "INSERT INTO $t_bugnote_table
 				(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified, note_type, note_attr, time_tracking )
 			VALUES
-				(" . db_param() . ", " . db_param() . "," . db_param() . ", " . db_param() . ", " . db_param() . "," . db_param() . ", " . db_param() . ", " . db_param() . ", " . db_param() . " )";
+				(" . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	db_query_bound( $query, Array( $c_bug_id, $c_user_id, $t_bugnote_text_id, $t_view_state, db_now(), db_now(), $c_type, $p_attr, $c_time_tracking ) );
 
 	# get bugnote id
@@ -210,13 +205,11 @@ function bugnote_delete( $p_bugnote_id ) {
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 
 	# Remove the bugnote
-	$query = "DELETE FROM $t_bugnote_table
-		          	WHERE id=" . db_param();
+	$query = 'DELETE FROM ' . $t_bugnote_table . ' WHERE id=' . db_param();
 	db_query_bound( $query, Array( $c_bugnote_id ) );
 
 	# Remove the bugnote text
-	$query = "DELETE FROM $t_bugnote_text_table
-		          	WHERE id=" . db_param();
+	$query = 'DELETE FROM ' . $t_bugnote_text_table . ' WHERE id=' . db_param();
 	db_query_bound( $query, Array( $t_bugnote_text_id ) );
 
 	# log deletion of bug
@@ -288,6 +281,12 @@ function bugnote_get_text( $p_bugnote_id ) {
  * @access public
  */
 function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
+	global $g_cache_bugnote;
+
+	if( isset( $g_cache_bugnote[(int)$p_bugnote_id] ) ) {
+		return $g_cache_bugnote[(int)$p_bugnote_id]->$p_field_name;
+	}
+
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$c_field_name = db_prepare_string( $p_field_name );
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
@@ -385,14 +384,18 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
  * @access public
  */
 function bugnote_get_all_bugnotes( $p_bug_id ) {
-	global $g_cache_bugnotes;
+	global $g_cache_bugnotes, $g_cache_bugnote;
 
 	if( !isset( $g_cache_bugnotes ) ) {
 		$g_cache_bugnotes = array();
 	}
 
+	if( !isset( $g_cache_bugnote ) ) {
+		$g_cache_bugnote = array();
+	}
+
 	# the cache should be aware of the sorting order
-	if( !isset( $g_cache_bugnotes[$p_bug_id] ) ) {
+	if( !isset( $g_cache_bugnotes[(int)$p_bug_id] ) ) {
 		$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 		$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
 
@@ -423,12 +426,13 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 			$t_bugnote->time_tracking = $row['time_tracking'];
 
 			$t_bugnotes[] = $t_bugnote;
+			$g_cache_bugnote[(int)$t_bugnote->id] = $t_bugnote;
 		}
 
-		$g_cache_bugnotes[$p_bug_id] = $t_bugnotes;
+		$g_cache_bugnotes[(int)$p_bug_id] = true;
 	}
 
-	return $g_cache_bugnotes[$p_bug_id];
+	return $t_bugnotes;
 }
 
 /**
@@ -619,7 +623,7 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 		error_parameters( array( $p_form, $p_to ) );
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
-	
+
 	$c_cost = db_prepare_double( $p_cost );
 
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
@@ -673,13 +677,14 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
  * @access public
  */
 function bugnote_clear_cache( $p_bugnote_id = null ) {
-	global $g_cache_bugnotes;
+	global $g_cache_bugnote, $g_cache_bugnotes;
 
 	if( null === $p_bugnote_id ) {
-		$g_cache_bugnotes = array();
+		$g_cache_bugnote = array();
 	} else {
-		unset( $g_cache_bugnotes[(int) $p_bugnote_id] );
+		unset( $g_cache_bugnote[(int) $p_bugnote_id] );
 	}
+	$g_cache_bugnotes = array();
 
 	return true;
 }

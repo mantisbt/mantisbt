@@ -118,3 +118,8 @@ config_obsolete( 'default_bug_category', '' );
 # changes in 1.2.0a1
 config_obsolete( 'enable_relationship', '' );
 config_obsolete( 'ldap_port', 'ldap_server' );
+
+#changes in 1.2.0rc
+config_obsolete( 'jpgraph_path', '' );
+config_obsolete( 'use_jpgraph', '' );
+config_obsolete( 'jpgraph_antialias', '' );

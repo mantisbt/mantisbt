@@ -60,7 +60,7 @@
 			trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 		}
 
-		$t_bug = bug_prepare_edit( bug_get( $f_master_bug_id, true ) );
+		$t_bug = bug_get( $f_master_bug_id, true );
 
 		# the user can at least update the master bug (needed to add the relationship)...
 		access_ensure_bug_level( config_get( 'update_bug_threshold', null, $t_bug->project_id ), $f_master_bug_id );
@@ -119,7 +119,7 @@
 		$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 		$f_additional_info		= gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
 		$f_view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
-		$f_due_date				=gpc_get_string( 'due_date', '');
+		$f_due_date				= gpc_get_string( 'due_date', '');
 
 		if ( $f_due_date == '' ) {
 			$f_due_date = date_get_null();
@@ -213,7 +213,7 @@
 <?php if ( $t_can_update_due_date ) {
 	$t_date_to_display = '';
 	if ( !date_is_null( $f_due_date ) ) {
-			$t_date_to_display = date( config_get( 'short_date_format' ), $f_due_date );
+			$t_date_to_display = date( config_get( 'calendar_date_format' ), $f_due_date );
 	}
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -347,7 +347,7 @@
 			<?php echo lang_get( 'product_build' ) ?>
 		</td>
 		<td>
-			<input <?php echo helper_get_tab_index() ?> type="text" name="build" size="32" maxlength="32" value="<?php echo $f_build ?>" />
+			<input <?php echo helper_get_tab_index() ?> type="text" name="build" size="32" maxlength="32" value="<?php echo string_attribute( $f_build ) ?>" />
 		</td>
 	</tr>
 <?php } ?>
@@ -390,7 +390,7 @@
 			<span class="required">*</span><?php print_documentation_link( 'summary' ) ?>
 		</td>
 		<td>
-			<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo $f_summary ?>" />
+			<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo string_attribute( $f_summary ) ?>" />
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -398,7 +398,7 @@
 			<span class="required">*</span><?php print_documentation_link( 'description' ) ?>
 		</td>
 		<td>
-			<textarea <?php echo helper_get_tab_index() ?> name="description" cols="80" rows="10"><?php echo $f_description ?></textarea>
+			<textarea <?php echo helper_get_tab_index() ?> name="description" cols="80" rows="10"><?php echo string_textarea( $f_description ) ?></textarea>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -406,7 +406,7 @@
 			<?php print_documentation_link( 'steps_to_reproduce' ) ?>
 		</td>
 		<td>
-			<textarea <?php echo helper_get_tab_index() ?> name="steps_to_reproduce" cols="80" rows="10"><?php echo $f_steps_to_reproduce ?></textarea>
+			<textarea <?php echo helper_get_tab_index() ?> name="steps_to_reproduce" cols="80" rows="10"><?php echo string_textarea( $f_steps_to_reproduce ) ?></textarea>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -414,7 +414,7 @@
 			<?php print_documentation_link( 'additional_information' ) ?>
 		</td>
 		<td>
-			<textarea <?php echo helper_get_tab_index() ?> name="additional_info" cols="80" rows="10"><?php echo $f_additional_info ?></textarea>
+			<textarea <?php echo helper_get_tab_index() ?> name="additional_info" cols="80" rows="10"><?php echo string_textarea( $f_additional_info ) ?></textarea>
 		</td>
 	</tr>
 	<tr class="spacer">

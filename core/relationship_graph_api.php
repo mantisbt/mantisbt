@@ -39,16 +39,14 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires relationship_api
  */
-require_once( $t_core_dir . 'relationship_api.php' );
+require_once( 'relationship_api.php' );
 /**
  * requires graphviz_api
  */
-require_once( $t_core_dir . 'graphviz_api.php' );
+require_once( 'graphviz_api.php' );
 
 # Generate a relationship graph for the given issue.
 function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
@@ -82,7 +80,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
 			continue;
 		}
 
-		$v_bug_list[$t_id] = bug_prepare_display( bug_get( $t_id, false ) );
+		$v_bug_list[$t_id] = bug_get( $t_id, false );
 
 		$t_relationships = relationship_get_all_src( $t_id );
 		foreach( $t_relationships as $t_relationship ) {
@@ -209,7 +207,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_bug = null, $p_horizontal = 
 	# will be preserved.
 	# The first issue in the list is the one we are parting from.
 	if( null === $p_bug ) {
-		$p_bug = bug_prepare_display( bug_get( $p_bug_id, true ) );
+		$p_bug = bug_get( $p_bug_id, true );
 	}
 
 	$v_bug_list[$p_bug_id] = $p_bug;
@@ -326,7 +324,7 @@ function relgraph_add_parent( &$p_bug_list, $p_bug_id ) {
 	}
 
 	# Add the issue to the list.
-	$p_bug_list[$p_bug_id] = bug_prepare_display( bug_get( $p_bug_id, false ) );
+	$p_bug_list[$p_bug_id] = bug_get( $p_bug_id, false );
 	$p_bug_list[$p_bug_id]->is_descendant = false;
 	$p_bug_list[$p_bug_id]->parents = array();
 	$p_bug_list[$p_bug_id]->children = array();
@@ -393,7 +391,7 @@ function relgraph_add_child( &$p_bug_list, $p_bug_id ) {
 		}
 
 		# Add the issue to the list.
-		$p_bug_list[$p_bug_id] = bug_prepare_display( bug_get( $p_bug_id, false ) );
+		$p_bug_list[$p_bug_id] = bug_get( $p_bug_id, false );
 		$p_bug_list[$p_bug_id]->is_descendant = true;
 		$p_bug_list[$p_bug_id]->parents = array();
 		$p_bug_list[$p_bug_id]->children = array();
@@ -460,7 +458,7 @@ function relgraph_add_bug_to_graph( &$p_graph, $p_bug_id, $p_bug, $p_url = null,
 		$t_node_attributes['URL'] = $p_url;
 	}
 
-	$t_summary = $p_bug->summary;
+	$t_summary = string_display_line_links( $p_bug->summary );
 	$t_status = get_enum_element( 'status', $p_bug->status );
 	$t_node_attributes['tooltip'] = '[' . $t_status . '] ' . $t_summary;
 

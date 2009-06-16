@@ -22,20 +22,18 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires bug_api
  */
-require_once( $t_core_dir . 'bug_api.php' );
+require_once( 'bug_api.php' );
 /**
  * requires helper_api
  */
-require_once( $t_core_dir . 'helper_api.php' );
+require_once( 'helper_api.php' );
 /**
  * requires date_api
  */
-require_once( $t_core_dir . 'date_api.php' );
+require_once( 'date_api.php' );
 
 # ## Custom Fields API ###
 # *******************************************
@@ -57,7 +55,7 @@ $g_custom_field_types[CUSTOM_FIELD_TYPE_MULTILIST] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_DATE] = 'standard';
 
 foreach( $g_custom_field_types as $type ) {
-	require_once( $t_core_dir . 'cfdefs' . DIRECTORY_SEPARATOR . 'cfdef_' . $type . '.php' );
+	require_once( 'cfdefs' . DIRECTORY_SEPARATOR . 'cfdef_' . $type . '.php' );
 }
 
 function custom_field_allow_manage_display( $p_type, $p_display ) {
@@ -267,17 +265,15 @@ function custom_field_ensure_exists( $p_field_id ) {
  * @access public
  */
 function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
-	$c_name = db_prepare_string( $p_name );
-
 	$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 	$query = "SELECT COUNT(*)
 				  FROM $t_custom_field_table
-				  WHERE name='$c_name'";
+				  WHERE name=" . db_param();
 	if( $p_custom_field_id !== null ) {
 		$c_id = db_prepare_int( $p_custom_field_id );
-		$query .= " AND (id <> $c_id)";
+		$query .= ' AND (id <> ' . db_param() . ')';
 	}
-	$result = db_query( $query );
+	$result = db_query_bound( $query, ( ($p_custom_field_id !== null) ? Array( $p_name ) : Array( $p_name, $c_id ) ) );
 	$count = db_result( $result );
 
 	if( $count > 0 ) {
@@ -394,7 +390,7 @@ function custom_field_create( $p_name ) {
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
 	}
 
-	$c_name = db_prepare_string( trim( $p_name ) );
+	$c_name = trim( $p_name );
 
 	if( is_blank( $c_name ) ) {
 		error_parameters( 'name' );
@@ -407,7 +403,7 @@ function custom_field_create( $p_name ) {
 	$query = "INSERT INTO $t_custom_field_table
 					( name, possible_values )
 				  VALUES
-					( " . db_param() . "," . db_param() . ")";
+					( " . db_param() . ',' . db_param() . ')';
 
 	db_query_bound( $query, Array( $c_name, '' ) );
 
@@ -660,7 +656,7 @@ function custom_field_link( $p_field_id, $p_project_id ) {
 	$query = "INSERT INTO $t_custom_field_project_table
 					( field_id, project_id )
 				  VALUES
-					( " . db_param() . ", " . db_param() . " )";
+					( " . db_param() . ', ' . db_param() . ')';
 	db_query_bound( $query, Array( $c_field_id, $c_project_id ) );
 
 	# db_query errors on failure so:
@@ -764,8 +760,8 @@ function custom_field_delete_all_values( $p_bug_id ) {
 
 	$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 	$query = "DELETE FROM $t_custom_field_string_table
-				  WHERE bug_id='$c_bug_id'";
-	db_query( $query );
+				  WHERE bug_id=" . db_param();
+	db_query_bound( $query, Array( $c_bug_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -836,9 +832,9 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 			$t_private_access = config_get( 'private_project_threshold' );
 			if( is_array( $t_private_access ) ) {
 				if( 1 == count( $t_private_access ) ) {
-					$t_access_clause = "= " . array_shift( $t_private_access ) . " ";
+					$t_access_clause = '= ' . array_shift( $t_private_access ) . ' ';
 				} else {
-					$t_access_clause = "IN (" . implode( ',', $t_private_access ) . ")";
+					$t_access_clause = 'IN (' . implode( ',', $t_private_access ) . ')';
 				}
 			} else {
 				$t_access_clause = ">= $t_private_access ";
@@ -858,12 +854,12 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 		} else {
 			if( is_array( $p_project_id ) ) {
 				if( 1 == count( $p_project_id ) ) {
-					$t_project_clause = "= " . array_shift( $p_project_id ) . " ";
+					$t_project_clause = '= ' . array_shift( $p_project_id ) . ' ';
 				} else {
-					$t_project_clause = "IN (" . implode( ',', $p_project_id ) . ")";
+					$t_project_clause = 'IN (' . implode( ',', $p_project_id ) . ')';
 				}
 			} else {
-				$t_project_clause = "= $p_project_id ";
+				$t_project_clause = '= ' . $p_project_id;
 			}
 			$query = "SELECT cft.id
 					  FROM $t_custom_field_table cft, $t_custom_field_project_table cfpt
@@ -1140,7 +1136,6 @@ function custom_field_get_sequence( $p_field_id, $p_project_id ) {
  */
 function custom_field_validate( $p_field_id, $p_value ) {
 	$c_field_id = db_prepare_int( $p_field_id );
-	$c_value = db_prepare_string( $p_value );
 
 	custom_field_ensure_exists( $p_field_id );
 
@@ -1320,7 +1315,6 @@ function custom_field_default_to_value( $p_value, $p_type ) {
 function custom_field_set_value( $p_field_id, $p_bug_id, $p_value ) {
 	$c_field_id = db_prepare_int( $p_field_id );
 	$c_bug_id = db_prepare_int( $p_bug_id );
-	$c_value = db_prepare_string( $p_value );
 
 	custom_field_ensure_exists( $p_field_id );
 
@@ -1334,16 +1328,16 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value ) {
 	# do I need to update or insert this value?
 	$query = "SELECT value
 				  FROM $t_custom_field_string_table
-				  WHERE field_id='$c_field_id' AND
-				  		bug_id='$c_bug_id'";
-	$result = db_query( $query );
+				  WHERE field_id=" . db_param() . " AND
+				  		bug_id=" . db_param();
+	$result = db_query_bound( $query, Array( $c_field_id, $c_bug_id ) );
 
 	if( db_num_rows( $result ) > 0 ) {
 		$query = "UPDATE $t_custom_field_string_table
-					  SET value='$c_value'
-					  WHERE field_id='$c_field_id' AND
-					  		bug_id='$c_bug_id'";
-		db_query( $query );
+					  SET value=" . db_param() . "
+					  WHERE field_id=" . db_param() . " AND
+					  		bug_id=" . db_param();
+		db_query_bound( $query, Array( $p_value, $c_field_id, $c_bug_id ) );
 
 		$row = db_fetch_array( $result );
 		history_log_event_direct( $c_bug_id, $t_name, custom_field_database_to_value( $row['value'], $t_type ), $p_value );
@@ -1354,8 +1348,8 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value ) {
 		$query = "INSERT INTO $t_custom_field_string_table
 						( field_id, bug_id, value )
 					  VALUES
-						( '$c_field_id', '$c_bug_id', '$c_value' )";
-		db_query( $query );
+						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
+		db_query_bound( $query, Array( $c_field_id, $c_bug_id, $p_value ) );
 		history_log_event_direct( $c_bug_id, $t_name, '', $p_value );
 	}
 
@@ -1382,10 +1376,10 @@ function custom_field_set_sequence( $p_field_id, $p_project_id, $p_sequence ) {
 	$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 
 	$query = "UPDATE $t_custom_field_project_table
-				  SET sequence='$c_sequence'
-				  WHERE field_id='$c_field_id' AND
-				  		project_id='$c_project_id'";
-	$result = db_query( $query );
+				  SET sequence=" . db_param() . "
+				  WHERE field_id=" . db_param() . " AND
+				  		project_id=" . db_param();
+	$result = db_query_bound( $query, Array( $c_sequence, $c_field_id, $c_project_id ) );
 
 	custom_field_clear_cache( $p_field_id );
 

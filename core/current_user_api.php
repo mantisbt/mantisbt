@@ -22,12 +22,10 @@
  * @link http://www.mantisbt.org
  */
 
-$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 /**
  * requires filter_api
  */
-require_once( $t_core_dir . 'filter_api.php' );
+require_once( 'filter_api.php' );
 
 # ## Current User API ###
 # Wrappers around the User API that pass in the logged-in user for you
