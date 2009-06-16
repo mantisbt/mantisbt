@@ -64,7 +64,7 @@ function terminate_directory_path( $p_path ) {
  */
 function is_blank( $p_var ) {
 	$p_var = trim( $p_var );
-	$str_len = strlen( $p_var );
+	$str_len = utf8_strlen( $p_var );
 	if( 0 == $str_len ) {
 		return true;
 	}

@@ -151,7 +151,7 @@ function file_can_delete_bug_attachments( $p_bug_id ) {
 function file_get_icon_url( $p_display_filename ) {
 	$t_file_type_icons = config_get( 'file_type_icons' );
 
-	$ext = strtolower( file_get_extension( $p_display_filename ) );
+	$ext = utf8_strtolower( file_get_extension( $p_display_filename ) );
 	if( is_blank( $ext ) || !isset( $t_file_type_icons[$ext] ) ) {
 		$ext = '?';
 	}
@@ -170,7 +170,7 @@ function file_get_icon_url( $p_display_filename ) {
  */
 function file_path_combine( $p_path, $p_filename ) {
 	$t_path = $p_path;
-	if ( substr( $t_path, -1 ) != '/' && substr( $t_path, -1 ) != '\\' ) {
+	if ( utf8_substr( $t_path, -1 ) != '/' && utf8_substr( $t_path, -1 ) != '\\' ) {
 		$t_path .= DIRECTORY_SEPARATOR;
 	}
 
@@ -310,7 +310,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 				$t_attachment['type'] = 'text';
 			}
 
-			if ( $t_can_download && ( $t_filesize != 0 ) && ( $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( in_array( strtolower( file_get_extension( $t_attachment['display_name'] ) ), $t_preview_image_ext, true ) ) ) {
+			if ( $t_can_download && ( $t_filesize != 0 ) && ( $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( in_array( utf8_strtolower( file_get_extension( $t_attachment['display_name'] ) ), $t_preview_image_ext, true ) ) ) {
 				$t_attachment['preview'] = true;
 				$t_attachment['type'] = 'image';
 			}
@@ -840,7 +840,7 @@ function file_ensure_uploaded( $p_file ) {
 function file_get_extension( $p_filename ) {
 	$ext = '';
 	$dot_found = false;
-	$i = strlen( $p_filename ) - 1;
+	$i = utf8_strlen( $p_filename ) - 1;
 	while( $i >= 0 ) {
 		if( '.' == $p_filename[$i] ) {
 			$dot_found = true;

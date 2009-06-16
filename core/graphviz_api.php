@@ -367,7 +367,7 @@ class Graph {
 				$t_dot_output = $t_graphviz->ToTextGraph( $t_dot_source, $t_type );
 
 				if( $p_headers ) {
-					header( 'Content-Length: ' . strlen( $t_dot_output ) );
+					header( 'Content-Length: ' . utf8_strlen( $t_dot_output ) );
 				}
 
 				echo $t_dot_output;

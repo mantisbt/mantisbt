@@ -35,25 +35,6 @@ require_once( 'user_pref_api.php' );
 $g_cache_html_valid_tags = '';
 $g_cache_html_valid_tags_single_line = '';
 
-if ( function_exists( 'mb_strtolower' ) ) {
-	/**
-	 * Return a string with all alphabetical characters converted to lowercase,
-	 * using an appropriate multibyte implementation as available to system.
-	 * @param string Input string
-	 * @return string Lower cased string
-	 */
-	function string_lower( $p_string ) {
-			return mb_strtolower( $p_string );
-	}
-} else {
-	/**
-	 * @ignore
-	 */
-	function string_lower( $p_string ) {
-			return strtolower( $p_string );
-	}
-}
-
 /**
  * Preserve spaces at beginning of lines.
  * Lines must be separated by \n rather than <br />
@@ -67,7 +48,7 @@ if ( function_exists( 'mb_strtolower' ) ) {
 		$count = 0;
 		$prefix = '';
 
-		$t_char = substr( $lines[$i], $count, 1 );
+		$t_char = utf8_substr( $lines[$i], $count, 1 );
 		$spaces = 0;
 		while(( $t_char == ' ' ) || ( $t_char == "\t" ) ) {
 			if( $t_char == ' ' ) {
@@ -79,14 +60,14 @@ if ( function_exists( 'mb_strtolower' ) ) {
 			// 1 tab = 4 spaces, can be configurable.
 
 			$count++;
-			$t_char = substr( $lines[$i], $count, 1 );
+			$t_char = utf8_substr( $lines[$i], $count, 1 );
 		}
 
 		for( $j = 0;$j < $spaces;$j++ ) {
 			$prefix .= '&nbsp;';
 		}
 
-		$lines[$i] = $prefix . substr( $lines[$i], $count );
+		$lines[$i] = $prefix . utf8_substr( $lines[$i], $count );
 	}
 	return implode( "\n", $lines );
 }
@@ -810,7 +791,7 @@ function string_shorten( $p_string, $p_max = null ) {
 		$t_max = (int) $p_max;
 	}
 
-	if( ( $t_max > 0 ) && ( strlen( $p_string ) > $t_max ) ) {
+	if( ( $t_max > 0 ) && ( utf8_strlen( $p_string ) > $t_max ) ) {
 		$t_pattern = '/([\s|.|,|\-|_|\/|\?]+)/';
 		$t_bits = preg_split( $t_pattern, $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
 
@@ -819,7 +800,7 @@ function string_shorten( $p_string, $p_max = null ) {
 		$t_last_len = strlen( $t_last );
 
 		foreach( $t_bits as $t_bit ) {
-			if(( strlen( $t_string ) + strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
+			if(( utf8_strlen( $t_string ) + utf8_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
 				$t_string .= $t_bit;
 			} else {
 				break;

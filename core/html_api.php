@@ -1285,7 +1285,7 @@ function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = '
 		$p_fields = array();
 	}
 
-	if( strtolower( $p_method ) == 'get' ) {
+	if( utf8_strtolower( $p_method ) == 'get' ) {
 		$t_method = 'get';
 	} else {
 		$t_method = 'post';

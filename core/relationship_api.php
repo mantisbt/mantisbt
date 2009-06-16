@@ -590,7 +590,7 @@ function relationship_can_resolve_bug( $p_bug_id ) {
  * @return string
  */
 function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, $p_html_preview = false, $p_show_project = false ) {
-	$t_summary_wrap_at = strlen( config_get( 'email_separator2' ) ) - 28;
+	$t_summary_wrap_at = utf8_strlen( config_get( 'email_separator2' ) ) - 28;
 	$t_icon_path = config_get( 'icon_path' );
 
 	if( $p_bug_id == $p_relationship->src_bug_id ) {
@@ -637,8 +637,8 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 		$t_relationship_info_html .= $t_td . $t_status . '&nbsp;</td>';
 	}
 
-	$t_relationship_info_text = str_pad( $t_relationship_descr, 20 );
-	$t_relationship_info_text .= str_pad( bug_format_id( $t_related_bug_id ), 8 );
+	$t_relationship_info_text = utf8_str_pad( $t_relationship_descr, 20 );
+	$t_relationship_info_text .= utf8_str_pad( bug_format_id( $t_related_bug_id ), 8 );
 
 	# get the handler name of the related bug
 	$t_relationship_info_html .= $t_td;
@@ -659,10 +659,10 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
  			$t_relationship_info_html .= sprintf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
  		}
   	} else {
- 		if( strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
+ 		if( utf8_strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
  			$t_relationship_info_text .= string_email_links( $t_bug->summary );
  		} else {
- 			$t_relationship_info_text .= mb_substr( string_email_links( $t_bug->summary ), 0, $t_summary_wrap_at - 3 ) . '...';
+ 			$t_relationship_info_text .= utf8_substr( string_email_links( $t_bug->summary ), 0, $t_summary_wrap_at - 3 ) . '...';
  		}
 	}
 
