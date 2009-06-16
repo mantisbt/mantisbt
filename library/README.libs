@@ -9,7 +9,8 @@ rssbuilder      | RSSBuilder      | 2.2.1   | patched: removed __autoload functi
 adodb           | adodb           | 5.0.8a  | patched: various, see git
 disposable      | disposable      | 1.1.0   | unpatched
 nusoap          | nusoap          | 0.7.3   | unpatched
-projax		| projax	  |         | unpatched
+projax		    | projax	      |         | unpatched
+phputf8         | phputf8         |         | unpatched
 
 Upstream projects
 ==================
@@ -19,3 +20,4 @@ adodb      -  http://adodb.sourceforge.net/
 disposable -  http://github.com/vboctor/disposable_email_checker/tree/master
 nusoap     -  http://sourceforge.net/projects/nusoap/
 projax     -  http://script.aculo.us/downloads / http://www.ngcoders.com/projax/
+phputf8    -  http://sourceforge.net/projects/phputf8
