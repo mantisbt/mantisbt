@@ -46,6 +46,13 @@
 		project_ensure_exists( $f_parent_id );
 	}
 
+	# If the provided path is the same as the default, make the path blank.
+	# This means that if the default upload path is changed, you don't have
+	# to update the upload path for every single project.
+	if ( !strcmp( $f_file_path, config_get( 'absolute_path_default_upload_folder' ) ) ) {
+		$f_file_path = '';
+	}
+
 	$t_project_id = project_create( strip_tags( $f_name ), $f_description, $f_status, $f_view_state, $f_file_path, true, $f_inherit_global );
 
 	if ( ( $f_view_state == VS_PRIVATE ) && ( false === current_user_is_administrator() ) ) {

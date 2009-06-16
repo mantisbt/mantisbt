@@ -107,13 +107,18 @@
 	} 
 
 	if ( config_get( 'allow_file_upload' ) ) {
+		$t_default_upload_path = '';
+		# Don't reveal the absolute path to non-administrators for security reasons
+		if ( current_user_is_administrator ) {
+			$t_default_upload_path = config_get( 'absolute_path_default_upload_folder' );
+		}
 	?>
 		<tr class="row-2">
 			<td class="category">
 				<?php echo lang_get( 'upload_file_path' ) ?>
 			</td>
 			<td>
-				<input type="text" name="file_path" size="70" maxlength="250" />
+				<input type="text" name="file_path" size="70" maxlength="250" value="<?php echo $t_default_upload_path ?>" />
 			</td>
 		</tr>
 		<?php
