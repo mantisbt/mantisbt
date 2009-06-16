@@ -187,18 +187,29 @@ function sponsorship_get( $p_sponsorship_id ) {
  * @return array
  */
 function sponsorship_get_all_ids( $p_bug_id ) {
+	global $g_cache_sponsorships;
+	static $s_cache_sponsorship_bug_ids = array();
+
 	$c_bug_id = db_prepare_int( $p_bug_id );
+	
+	if( isset( $s_cache_sponsorship_bug_ids[$c_bug_id] ) ) {
+		return $s_cache_sponsorship_bug_ids[$c_bug_id];
+	}
 
 	$t_sponsorship_table = db_get_table( 'mantis_sponsorship_table' );
 
-	$query = "SELECT id FROM $t_sponsorship_table
+	$query = "SELECT * FROM $t_sponsorship_table
 				WHERE bug_id = " . db_param();
 	$t_result = db_query_bound( $query, Array( $c_bug_id ) );
 
 	$t_sponsorship_ids = array();
 	while( $row = db_fetch_array( $t_result ) ) {
 		$t_sponsorship_ids[] = $row['id'];
+		$g_cache_sponsorships[(int)$row['id']] = $row;
 	}
+
+	$s_cache_sponsorship_bug_ids[$c_bug_id] = $t_sponsorship_ids;
+
 	return $t_sponsorship_ids;
 }
 
