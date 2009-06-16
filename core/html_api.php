@@ -1520,6 +1520,28 @@ function html_button_bug_unmonitor( $p_bug_id ) {
 }
 
 /**
+ * Print a button to stick the given bug
+ * @param int $p_bug_id
+ * @return null
+ */
+function html_button_bug_stick( $p_bug_id ) {
+	if ( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
+		html_button( 'bug_stick.php', lang_get( 'stick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'stick' ) );
+	}
+}
+
+/**
+ * Print a button to unstick the given bug
+ * @param int $p_bug_id
+ * @return null
+ */
+function html_button_bug_unstick( $p_bug_id ) {
+	if ( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
+		html_button( 'bug_stick.php', lang_get( 'unstick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'unstick' ) );
+	}
+}
+
+/**
  * Print a button to delete the given bug
  * @param int $p_bug_id
  * @return null
@@ -1552,6 +1574,7 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 	$t_status = bug_get_field( $p_bug_id, 'status' );
 	$t_readonly = bug_is_readonly( $p_bug_id );
+	$t_sticky = config_get( 'set_bug_sticky_threshold' );
 
 	echo '<table><tr class="vcenter">';
 	if( !$t_readonly ) {
@@ -1572,15 +1595,26 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 	}
 
 	# MONITOR/UNMONITOR button
-	echo '<td class="center">';
 	if( !current_user_is_anonymous() ) {
+		echo '<td class=center">';
 		if( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
 			html_button_bug_unmonitor( $p_bug_id );
 		} else {
 			html_button_bug_monitor( $p_bug_id );
 		}
+		echo '</td>';
 	}
-	echo '</td>';
+
+	# STICK/UNSTICK button
+	if ( access_has_bug_level( $t_sticky, $p_bug_id ) ) {
+		echo '<td class="center">';
+		if ( !bug_get_field( $p_bug_id, 'sticky' ) ) {
+			html_button_bug_stick( $p_bug_id );
+		} else {
+			html_button_bug_unstick( $p_bug_id );
+		}
+		echo '</td>';
+	}
 
 	if( !$t_readonly ) {
 		# CREATE CHILD button
