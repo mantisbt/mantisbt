@@ -242,7 +242,7 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 		}
 	}
 
-	return $t_found ? $t_access : ADMINISTRATOR;
+	return $t_found ? $t_access : config_get_global( 'admin_site_threshold' );
 }
 
 # ------------------
@@ -302,7 +302,10 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 # ------------------
 # Sets the value of the given config option to the given value
 #  If the config option does not exist, an ERROR is triggered
-function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = ADMINISTRATOR ) {
+function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = DEFAULT_ACCESS_LEVEL ) {
+	if( $p_access == DEFAULT_ACCESS_LEVEL ) {
+		$p_access = config_get_global( 'admin_site_threshold' );
+	}
 	if( is_array( $p_value ) || is_object( $p_value ) ) {
 		$t_type = CONFIG_TYPE_COMPLEX;
 		$c_value = serialize( $p_value );
@@ -383,8 +386,13 @@ function config_set_global( $p_option, $p_value, $p_override = true ) {
 # ------------------
 # Sets the value of the given config option to the given value
 #  If the config option does not exist, an ERROR is triggered
-function config_set_cache( $p_option, $p_value, $p_type, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = ADMINISTRATOR ) {
+function config_set_cache( $p_option, $p_value, $p_type, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = DEFAULT_ACCESS_LEVEL ) {
 	global $g_cache_config, $g_cache_config_access;
+
+	if( $p_access == DEFAULT_ACCESS_LEVEL ) {
+		$p_access = config_get_global( 'admin_site_threshold' );
+	}
+
 	$g_cache_config[$p_option][$p_user][$p_project] = $p_type . ';' . $p_value;
 	$g_cache_config_access[$p_option][$p_user][$p_project] = $p_access;
 

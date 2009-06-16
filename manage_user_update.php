@@ -77,15 +77,17 @@
 	$t_old_protected = user_get_field( $f_user_id, 'protected' );
 
 	# check that we are not downgrading the last administrator
-	$t_old_access = user_get_field( $f_user_id, 'access_level' );
-	if ( ( ADMINISTRATOR == $t_old_access ) && ( $t_old_access <> $f_access_level ) && ( 1 >= user_count_level( ADMINISTRATOR ) ) ) {
+	$t_admin_threshold = config_get_global( 'admin_site_threshold' );
+	if ( user_is_administrator( $f_user_id ) &&
+	     $f_access_level < $t_admin_threshold &&
+	     user_count_level( $t_admin_threshold ) <= 1 ) {
 		trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
 	}
 
 	# Project specific access rights override global levels, hence, for users who are changed
 	# to be administrators, we have to remove project specific rights.
-    if ( ( $c_access_level >= ADMINISTRATOR ) && ( !user_is_administrator( $c_user_id ) ) ) {
-		user_delete_project_specific_access_levels( $c_user_id );
+    if ( ( $f_access_level >= $t_admin_threshold ) && ( !user_is_administrator( $f_user_id ) ) ) {
+		user_delete_project_specific_access_levels( $f_user_id );
 	}
 
 	# if the user is already protected and the admin is not removing the

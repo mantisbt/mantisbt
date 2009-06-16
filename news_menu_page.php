@@ -91,7 +91,7 @@
 <?php 
 	# Add News Form END
 	# Edit/Delete News Form BEGIN
-	if ( news_get_count( helper_get_current_project(), access_has_global_level( ADMINISTRATOR ) ) > 0 ) {
+	if ( news_get_count( helper_get_current_project(), current_user_is_administrator() ) > 0 ) {
 ?>
 <br />
 <div align="center">

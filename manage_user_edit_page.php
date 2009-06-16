@@ -149,7 +149,7 @@
 	</form>
 
 <!-- Delete Button -->
-<?php if ( !( ( ADMINISTRATOR <= $t_user['access_level'] ) && ( 1 >= user_count_level( ADMINISTRATOR ) ) ) ) { ?>
+<?php if ( !( ( user_is_administrator( $t_user ) && ( user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1 ) ) ) ) { ?>
 	<form method="post" action="manage_user_delete.php">
 <?php echo form_security_field( 'manage_user_delete' ) ?>
 
@@ -172,7 +172,7 @@
 
 <!-- PROJECT ACCESS (if permissions allow) and user is not ADMINISTRATOR -->
 <?php if ( access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
-    !access_has_global_level( ADMINISTRATOR, $t_user['id'] ) ){
+    !user_is_administrator( $t_user_id ) ) {
 ?>
 <br />
 <div align="center">

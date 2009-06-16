@@ -317,7 +317,7 @@ $t_anon_user = false;
 print_test_row( 'check configuration: anonymous_account is a valid username if set',
 	( (strlen( config_get_global( 'anonymous_account') ) > 0 ) ? ( ($t_anon_user = user_get_id_by_name( config_get_global( 'anonymous_account') ) ) !== false ) : TRUE ) );
 print_test_row( 'check configuration: anonymous_account should not be an administrator',
-	( $t_anon_user ? ( !access_compare_level( user_get_field( $t_anon_user, 'access_level' ), ADMINISTRATOR) ) : TRUE ) );
+	( $t_anon_user ? ( !user_is_administrator( $t_anon_user ) ) : TRUE ) );
 print_test_row( '$g_bug_link_tag is not empty ("' . config_get_global( 'bug_link_tag' ) . '")',
 	'' <> config_get_global( 'bug_link_tag' ) );
 print_test_row( '$g_bugnote_link_tag is not empty ("' . config_get_global( 'bugnote_link_tag' ) . '")',

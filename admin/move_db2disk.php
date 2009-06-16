@@ -26,7 +26,7 @@
  */
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
-access_ensure_global_level( ADMINISTRATOR );
+access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
 // Move type should be attachment or project.
 $f_move_type = gpc_get( 'doc' );

@@ -326,7 +326,7 @@ function print_news_item_option_list() {
 
 	$t_project_id = helper_get_current_project();
 
-	$t_global = access_has_global_level( ADMINISTRATOR );
+	$t_global = access_has_global_level( config_get_global( 'admin_site_threshold' ) );
 	if( $t_global ) {
 		$query = "SELECT id, headline, announcement, view_state
 				FROM $t_mantis_news_table
@@ -1035,7 +1035,7 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 	}
 	$c_project_id = (int) $p_project_id;
 
-	$t_adm = ADMINISTRATOR;
+	$t_adm = config_get_global( 'admin_site_threshold' );
 	$query = "SELECT DISTINCT u.id, u.username, u.realname
 				FROM $t_mantis_user_table u
 				LEFT JOIN $t_mantis_project_user_list_table p

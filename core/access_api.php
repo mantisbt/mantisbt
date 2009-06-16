@@ -293,7 +293,8 @@ function access_get_project_level( $p_project_id = null, $p_user_id = null ) {
 	}
 
 	$t_global_access_level = access_get_global_level( $p_user_id );
-	if(( ALL_PROJECTS == $p_project_id ) || ( ADMINISTRATOR == $t_global_access_level ) ) {
+
+	if( ALL_PROJECTS == $p_project_id || user_is_administrator( $p_user_id ) ) {
 		return $t_global_access_level;
 	} else {
 		$t_project_access_level = access_get_local_level( $p_user_id, $p_project_id );

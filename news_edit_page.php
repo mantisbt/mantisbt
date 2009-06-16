@@ -106,7 +106,7 @@
 		<select name="project_id">
 		<?php
 			$t_sitewide = false;
-			if ( access_has_project_level( ADMINISTRATOR ) ) {
+			if ( current_user_is_administrator() ) {
 				$t_sitewide = true;
 			}
 			print_project_option_list( $v_project_id, $t_sitewide );

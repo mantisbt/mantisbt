@@ -526,7 +526,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	$t_user_table = db_get_table( 'mantis_user_table' );
 	$t_pub = VS_PUBLIC;
 	$t_priv = VS_PRIVATE;
-	$t_admin = ADMINISTRATOR;
+	$t_admin = config_get_global( 'admin_site_threshold' );
 
 	if( $p_project_id == ALL_PROJECTS ) {
 		# Select all the projects that the user has access to

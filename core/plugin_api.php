@@ -177,7 +177,11 @@ function plugin_config_get( $p_option, $p_default = null, $p_global = false ) {
  * @param int Project ID
  * @param int Access threshold
  */
-function plugin_config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = ADMINISTRATOR ) {
+function plugin_config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = DEFAULT_ACCESS_LEVEL ) {
+	if( $p_access == DEFAULT_ACCESS_LEVEL ) {
+		$p_access = config_get_global( 'admin_site_threshold' );
+	}
+
 	$t_basename = plugin_get_current();
 	$t_full_option = 'plugin_' . $t_basename . '_' . $p_option;
 

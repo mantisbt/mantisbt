@@ -86,7 +86,7 @@
 
 	# prevent users from changing other user's accounts
 	if ( $f_user_id != auth_get_current_user_id() ) {
-		access_ensure_project_level( ADMINISTRATOR );
+		access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 	}
 
 	# make sure the delay isn't too low

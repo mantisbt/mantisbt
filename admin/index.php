@@ -26,7 +26,7 @@
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 require_once( 'schema.php' );
 
-access_ensure_global_level( ADMINISTRATOR );
+access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
 html_page_top( 'MantisBT Administration' );
 

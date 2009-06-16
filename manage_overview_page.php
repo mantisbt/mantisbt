@@ -26,7 +26,6 @@
 
 	auth_reauthenticate();
 	access_ensure_global_level( config_get( 'manage_site_threshold' ) );
-	$t_is_admin = access_has_global_level( config_get( 'admin_site_threshold' ) );
 
 	$t_version_suffix = config_get_global( 'version_suffix' );
 
@@ -56,7 +55,7 @@
 <td></td>
 </tr>
 
-<?php if ( $t_is_admin ) { ?>
+<?php if ( current_user_is_administrator() ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 <td class="category"><?php echo lang_get( 'site_path' ) ?></td>
 <td><?php echo config_get( 'absolute_path' ) ?></td>

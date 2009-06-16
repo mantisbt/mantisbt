@@ -338,7 +338,7 @@ function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 function user_is_administrator( $p_user_id ) {
 	$t_access_level = user_get_field( $p_user_id, 'access_level' );
 
-	if( $t_access_level >= ADMINISTRATOR ) {
+	if( $t_access_level >= config_get_global( 'admin_site_threshold' ) ) {
 		return true;
 	} else {
 		return false;
@@ -801,7 +801,7 @@ function user_get_avatar( $p_user_id, $p_size = 80 ) {
 function user_get_access_level( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_access_level = user_get_field( $p_user_id, 'access_level' );
 
-	if( $t_access_level >= ADMINISTRATOR ) {
+	if( user_is_administrator( $p_user_id ) ) {
 		return $t_access_level;
 	}
 

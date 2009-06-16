@@ -804,7 +804,7 @@ function print_menu() {
 		if ( news_is_enabled() && access_has_project_level( config_get( 'manage_news_threshold' ) ) ) {
 
 			# Admin can edit news for All Projects (site-wide)
-			if(( ALL_PROJECTS != helper_get_current_project() ) || ( access_has_project_level( ADMINISTRATOR ) ) ) {
+			if( ALL_PROJECTS != helper_get_current_project() || current_user_is_administrator() ) {
 				$t_menu_options[] = '<a href="' . helper_mantis_url( 'news_menu_page.php">' ) . lang_get( 'edit_news_link' ) . '</a>';
 			} else {
 				$t_menu_options[] = '<a href="' . helper_mantis_url( 'login_select_proj_page.php">' ) . lang_get( 'edit_news_link' ) . '</a>';

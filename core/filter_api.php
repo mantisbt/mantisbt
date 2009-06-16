@@ -4493,7 +4493,7 @@ function filter_db_can_delete_filter( $p_filter_id ) {
 	$t_user_id = auth_get_current_user_id();
 
 	# Administrators can delete any filter
-	if( access_has_global_level( ADMINISTRATOR ) ) {
+	if( user_is_administrator( $t_user_id ) ) {
 		return true;
 	}
 

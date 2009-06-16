@@ -44,7 +44,7 @@
 	$t_user_table = db_get_table( 'mantis_user_table' );
 	$t_pub = VS_PUBLIC;
 	$t_priv = VS_PRIVATE;
-	$t_admin = ADMINISTRATOR;
+	$t_admin = config_get_global( 'admin_site_threshold' );
 
 	if ( $f_project_id == ALL_PROJECTS ) {
 		# Select all the projects that the user has access to
@@ -76,7 +76,7 @@
 				WHERE pft.project_id in (" . implode( ',', $t_projects ) . ") AND
 					( ( ( pt.view_state = $t_pub OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
 						( ( pult.user_id = $t_user_id ) AND ( pult.access_level $t_access_clause ) ) OR
-						( ut.access_level = $t_admin ) )
+						( ut.access_level >= $t_admin ) )
 				ORDER BY pt.name ASC, pft.title ASC";
 	$result = db_query( $query );
 	$num_files = db_num_rows( $result );

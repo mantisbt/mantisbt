@@ -25,7 +25,7 @@
  */
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
-access_ensure_global_level( ADMINISTRATOR );
+access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
 $f_mail_test = gpc_get_bool( 'mail_test' );
 
