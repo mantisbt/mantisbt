@@ -24,37 +24,7 @@
  */
 
 # ## User Preferences API ###
-$g_default_mapping = array(
-	'default_profile' => 'default_profile',
-	'default_project' => 'default_project',
-	'advanced_report' => 'default_advanced_report',
-	'advanced_view' => 'default_advanced_view',
-	'advanced_update' => 'default_advanced_update',
-	'refresh_delay' => 'default_refresh_delay',
-	'redirect_delay' => 'default_redirect_delay',
-	'bugnote_order' => 'default_bugnote_order',
-	'email_on_new' => 'default_email_on_new',
-	'email_on_assigned' => 'default_email_on_assigned',
-	'email_on_feedback' => 'default_email_on_feedback',
-	'email_on_resolved' => 'default_email_on_resolved',
-	'email_on_closed' => 'default_email_on_closed',
-	'email_on_reopened' => 'default_email_on_reopened',
-	'email_on_bugnote' => 'default_email_on_bugnote',
-	'email_on_status' => 'default_email_on_status',
-	'email_on_priority' => 'default_email_on_priority',
-	'email_on_new_min_severity' => 'default_email_on_new_minimum_severity',
-	'email_on_assigned_min_severity' => 'default_email_on_assigned_minimum_severity',
-	'email_on_feedback_min_severity' => 'default_email_on_feedback_minimum_severity',
-	'email_on_resolved_min_severity' => 'default_email_on_resolved_minimum_severity',
-	'email_on_closed_min_severity' => 'default_email_on_closed_minimum_severity',
-	'email_on_reopened_min_severity' => 'default_email_on_reopened_minimum_severity',
-	'email_on_bugnote_min_severity' => 'default_email_on_bugnote_minimum_severity',
-	'email_on_status_min_severity' => 'default_email_on_status_minimum_severity',
-	'email_on_priority_min_severity' => 'default_email_on_priority_minimum_severity',
-	'email_bugnote_limit' => 'default_email_bugnote_limit',
-	'language' => 'default_language',
-	'timezone' => 'default_timezone',
-);
+
 
 /**
  * Preference Structure Definition
@@ -95,6 +65,38 @@ class UserPreferences {
 	private $pref_user_id;
 	private $pref_project_id;
 
+	private static $default_mapping = array(
+	'default_profile' => 'default_profile',
+	'default_project' => 'default_project',
+	'advanced_report' => 'default_advanced_report',
+	'advanced_view' => 'default_advanced_view',
+	'advanced_update' => 'default_advanced_update',
+	'refresh_delay' => 'default_refresh_delay',
+	'redirect_delay' => 'default_redirect_delay',
+	'bugnote_order' => 'default_bugnote_order',
+	'email_on_new' => 'default_email_on_new',
+	'email_on_assigned' => 'default_email_on_assigned',
+	'email_on_feedback' => 'default_email_on_feedback',
+	'email_on_resolved' => 'default_email_on_resolved',
+	'email_on_closed' => 'default_email_on_closed',
+	'email_on_reopened' => 'default_email_on_reopened',
+	'email_on_bugnote' => 'default_email_on_bugnote',
+	'email_on_status' => 'default_email_on_status',
+	'email_on_priority' => 'default_email_on_priority',
+	'email_on_new_min_severity' => 'default_email_on_new_minimum_severity',
+	'email_on_assigned_min_severity' => 'default_email_on_assigned_minimum_severity',
+	'email_on_feedback_min_severity' => 'default_email_on_feedback_minimum_severity',
+	'email_on_resolved_min_severity' => 'default_email_on_resolved_minimum_severity',
+	'email_on_closed_min_severity' => 'default_email_on_closed_minimum_severity',
+	'email_on_reopened_min_severity' => 'default_email_on_reopened_minimum_severity',
+	'email_on_bugnote_min_severity' => 'default_email_on_bugnote_minimum_severity',
+	'email_on_status_min_severity' => 'default_email_on_status_minimum_severity',
+	'email_on_priority_min_severity' => 'default_email_on_priority_minimum_severity',
+	'email_bugnote_limit' => 'default_email_bugnote_limit',
+	'language' => 'default_language',
+	'timezone' => 'default_timezone',
+	);
+	
 	/**
 	 * Constructor
 	 * @param int $p_user_id
@@ -128,22 +130,20 @@ class UserPreferences {
 	 * @private
 	 */
 	public function __get( $p_string ) {
-		global $g_default_mapping;
-		if( is_null( $this->{$p_string} ) ) {
-			$this->{$p_string} = config_get( $g_default_mapping[$p_string], null, $this->pref_user_id, $this->pref_project_id );
+		if( is_null( $this->$p_string ) ) {
+			$this->$p_string = config_get( self::$default_mapping[$p_string], null, $this->pref_user_id, $this->pref_project_id );
 		}
-		return $this->{$t_string};
+		return $this->$p_string;
 	}
 
 	/**
 	 * @param string $t_string
 	 */
 	function Get( $p_string ) {
-		global $g_default_mapping;
-		if( is_null( $this->{$p_string} ) ) {
-			$this->{$p_string} = config_get( $g_default_mapping[$p_string], null, $this->pref_user_id, $this->pref_project_id );
+		if( is_null( $this->$p_string ) ) {
+			$this->$p_string = config_get( self::$default_mapping[$p_string], null, $this->pref_user_id, $this->pref_project_id );
 		}
-		return $this->{$p_string};
+		return $this->$p_string;
 	}
 }
 
@@ -409,7 +409,6 @@ function user_pref_delete_project( $p_project_id ) {
 # return the user's preferences in a UserPreferences object
 function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	static $t_vars;
-	global $g_default_mapping;
 	global $g_cache_current_user_pref;
 
 	if ( isset( $g_cache_current_user_pref[(int)$p_project_id] ) &&  auth_get_current_user_id() == $p_user_id ) {
