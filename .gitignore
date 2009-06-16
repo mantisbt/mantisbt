@@ -5,6 +5,9 @@ custom_strings_inc.php
 custom_functions_inc.php
 mantis_offline.php
 
+# Files to be deprecated in v1.3
+custom_constant_inc.php
+
 # Docbook builds
 docbook/*/*/builddate
 docbook/*/*/build
