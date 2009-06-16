@@ -518,7 +518,7 @@ functions section.</para>
             </para>
         </formalpara>
         <para>
-            The file <filename>custom_constant_inc.php</filename> is supported for the
+            The file <filename>custom_constants_inc.php</filename> is supported for the
             exclusive purpose of allowing administrators to define their own
             constants while maintaining a simple upgrade path for future
             releases of MantisBT. Note that this file is not distributed with
@@ -543,7 +543,7 @@ functions section.</para>
 
         <para>
             The file <filename>custom_strings_inc.php</filename> is introduced for a similar reason
-            to that of custom_constant_inc.php, which is to define custom
+            to that of custom_constants_inc.php, which is to define custom
             strings. The advantage of defining them here is to provide a simple
             upgrade path, and avoid having to re-do the changes when upgrading
             to the next MantisBT release. Note that you will need to create this
@@ -689,7 +689,7 @@ functions section.</para>
             <orderedlist>
                 <listitem>
                     <para>Define a constant to map the new status to.In a new file
-                        custom_constant_inc.php in the main mantisbt directory:
+                        custom_constants_inc.php in the main mantisbt directory:
                         <programlisting>&lt;?php define ( 'TEST', 60 ); ?&gt;</programlisting>
                     </para>
                 </listitem>
@@ -823,7 +823,7 @@ trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR );
 }
 ?>]]>
                     </programlisting>
-                    The errors will also need to be defined by adding the following to <filename>custom_constant_inc.php</filename>
+                    The errors will also need to be defined by adding the following to <filename>custom_constants_inc.php</filename>
                     <programlisting>
                         define ( 'ERROR_VALIDATE_FAILURE', 2000 );
                         To custom_strings_inc.php
