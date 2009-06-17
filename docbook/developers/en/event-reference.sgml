@@ -114,6 +114,7 @@
 	</sect1>
 
 	&eventref-output;
+	&eventref-filter;
 	&eventref-bug;
 	&eventref-notify;
 	&eventref-account;
