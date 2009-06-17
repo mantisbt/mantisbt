@@ -1208,7 +1208,6 @@ $s_show_as_graph = 'عرض كرسمة';
 $s_show_as_table = 'عرض كجدول';
 $s_show_graph = 'عرض الرسمة';
 $s_graph_page = 'تاريخ رسومات المشكلة';
-$s_graph_bug_page_link = 'رسمة';
 $s_manage_columns_config = 'التحكم بالأعمدة';
 $s_all_columns_title = 'كل الأعمدة المتوفرة';
 $s_csv_columns_title = 'أعمدة CSV';

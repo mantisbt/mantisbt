@@ -1200,7 +1200,6 @@ $s_show_as_graph = 'להציג כתרשים';
 $s_show_as_table = 'להציג כטבלה';
 $s_show_graph = 'הצג תרשים';
 $s_graph_page = 'הצג תרשים היסטוריית באג';
-$s_graph_bug_page_link = 'תרשים';
 $s_manage_columns_config = 'ניהול עמודות';
 $s_all_columns_title = 'כל העמודות הקיימות';
 $s_csv_columns_title = 'עמודות CSV';

@@ -1201,7 +1201,6 @@ $s_show_as_graph = 'Ipakita bilang Talangguhit';
 $s_show_as_table = 'Ipakita bilang Tabla';
 $s_show_graph = 'Ipakita ang Talangguhit';
 $s_graph_page = 'Italangguhit ang Kasaysayan ng Depekto (\'\'Bug\'\')';
-$s_graph_bug_page_link = 'Talangguhit';
 $s_manage_columns_config = 'Pamahalaan ang Pababang mga Hanay';
 $s_all_columns_title = 'Lahat ng Makukuhang mga Pababang Hanay';
 $s_csv_columns_title = 'Mga Pababang Hanay na CSV';

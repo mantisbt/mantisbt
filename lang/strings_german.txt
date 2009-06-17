@@ -28,6 +28,7 @@
  *
  * @author Als-Holder
  * @author Andre Eisenbach, andre@eisenbach.com
+ * @author Atrol
  * @author Dr. Jürgen Kehrel, jkehrel@kehrel.de
  * @author Heiko Gierer, gierer@rittershaus.de
  * @author Hermann-Josef Beckers, hjb-rheine@t-online.de
@@ -243,6 +244,7 @@ $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Dateiübertragung nicht erfolgr
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Keine Datei übertragen. Gehen Sie zurück und wählen Sie eine Datei aus, bevor Sie auf Datei übertragen drücken';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Übertragene Datei konnte nicht in das Speicherverzeichnis verschoben werden. Verzeichnis nicht vorhanden oder vom Webserver nicht beschreibbar.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Sie können kein Problem als Duplikat von sich selbst anlegen.';
+$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Überarbeitung des Problems nicht gefunden';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Benutzerdefiniertes Feld nicht gefunden.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Name doppelt vorhanden.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Mindestens ein Projekt benutzt noch dieses Feld.';
@@ -308,6 +310,8 @@ $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Deine Sitzung ist ungültig geworden.'
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ungültiges Formular Sicherheits-Token. Haben Sie das Formular versehentlich zweimal abgeschickt?';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Auf diese Seite kann nicht mit dieser Methode zugegriffen werden.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Ungültiges Sortierfeld.';
+$MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Ungültiges Datumsformat';
+$MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Zeitzone kann nicht aktualisiert werden';
 $s_login_error = 'Ihr Konto ist deaktiviert oder gesperrt (aufgrund von zu vielen fehlgeschlagenen Anmeldeversuchen) oder der eingegebene Benutzer/das Passwort ist falsch.';
 $s_login_cookies_disabled = 'Ihr Web-Browser akzeptiert keine Cookies.';
 $s_go_back = 'Zurück';
@@ -333,6 +337,7 @@ $s_eta_enum_string = '10:keine,20:< 1 Tag,30:2-3 Tage,40:< 1 Woche,50:< 1 Monat,
 $s_sponsorship_enum_string = '0:unbezahlt,1:gefordert,2:bezahlt';
 $s_new_account_subject = 'Konto Registrierung';
 $s_new_account_greeting = 'Danke für Ihre Registrierung. Ihr Konto hat den Benutzernamen „%1$s“. Um die Registrierung abzuschließen, besuchen Sie die folgende URL (stellen Sie sicher, dass sie in einer einzigen Zeile eingegeben wurde) und setzen Sie ihr eigenes Zugangskennwort:';
+$s_new_account_greeting_admincreated = 'Der Benutzer %1$s hat für Sie ein Konto mit dem Benutzernamen "%2$s" angelegt. Um die Registrierung abzuschließen, besuchen Sie die folgende URL (stellen Sie sicher, dass sie in einer einzigen Zeile eingegeben wurde) und setzen Sie ihr eigenes Zugangskennwort:';
 $s_new_account_username = 'Benutzername:';
 $s_new_account_message = 'Wenn Sie sich nicht registriert haben, ignorieren Sie diese Nachricht, es wird nichts passieren.';
 $s_new_account_do_not_reply = 'NICHT AUF DIESE NACHRICHT ANTWORTEN';
@@ -550,6 +555,13 @@ $s_sticky_issue = 'Fixiertes Problem';
 $s_profile = 'Profil';
 $s_update_advanced_link = 'erweiterte Aktualisierung';
 $s_updating_bug_simple_title = 'Probleminformation aktualisieren';
+$s_view_revisions = 'Überarbeitungen anzeigen';
+$s_revision = 'Überarbeitung';
+$s_revision_by = '%1$s von %2$s';
+$s_revision_drop = 'Löschen';
+$s_all_revisions = 'Alle Überarbeitungen';
+$s_back_to_issue = 'Zurück zum Problem';
+$s_confirm_revision_drop = 'Wollen Sie wirklich diese Überarbeitung löschen?';
 $s_vote_added_msg = 'Stimme hinzugefügt …';
 $s_bugnote_added_msg = 'Notiz hinzugefügt …';
 $s_bugnote_deleted_msg = 'Notiz erfolgreich gelöscht …';
@@ -580,6 +592,8 @@ $s_error_code_version_out_of_date = '<strong>WARNUNG:</strong> Die Datenbank-Str
 $s_login_page_info = 'Willkommen beim Issue Tracker.';
 $s_login_title = 'Anmeldung';
 $s_save_login = 'Anmeldung speichern';
+$s_secure_session = 'Sichere Sitzung';
+$s_secure_session_long = 'Diese Sitzung ist nur für diese IP-Adresse gültig.';
 $s_choose_project = 'Projekt wählen';
 $s_login_button = 'Anmeldung';
 $s_signup_link = 'Neues Konto anmelden';
@@ -672,6 +686,7 @@ $s_access_change = 'Minimale Zugangsberechtigung, um diesen Status zu ändern';
 $s_desc_bug_submit_status = 'Status für neu eingegebene Probleme';
 $s_desc_bug_reopen_status = 'Status, auf den wiedereröffnete Probleme gesetzt werden';
 $s_desc_bug_resolved_status_threshold = 'Status, ab dem ein Problem als erledigt angesehen wird';
+$s_desc_bug_closed_status_threshold = 'Status bei dem ein Problem als geschlossen angesehen wird';
 $s_workflow_change_access = 'Wer darf den Arbeitsablauf ändern';
 $s_access_change_access = 'Wer darf den Status ändern';
 $s_default_not_in_flow = 'Der Vorgabestatus von %1$s ist nicht in den nächsten zulässigen Statuswerten von %2$s enthalten. Er wird ignoriert.';
@@ -815,6 +830,7 @@ $s_my_view_title_resolved = 'Erledigt';
 $s_my_view_title_monitored = 'Von mir beobachtet';
 $s_my_view_title_feedback = 'Warte auf Rückmeldung von MIR';
 $s_my_view_title_verify = 'Warte auf Bestätigung der Lösung durch MICH';
+$s_my_view_title_my_comments = 'Von mir kommentierte Probleme';
 $s_news_added_msg = 'Nachricht hinzugefügt …';
 $s_news_deleted_msg = 'Gelöschte Nachrichten …';
 $s_delete_news_sure_msg = 'Wollen Sie diese Nachricht wirklich löschen?';
@@ -1210,7 +1226,6 @@ $s_show_as_graph = 'Als Grafik anzeigen';
 $s_show_as_table = 'Als Tabelle anzeigen';
 $s_show_graph = 'Grafik anzeigen';
 $s_graph_page = 'Grafische Eintrags-Historie';
-$s_graph_bug_page_link = 'Grafik';
 $s_manage_columns_config = 'Spalten verwalten';
 $s_all_columns_title = 'Alle verfügbaren Spalten';
 $s_csv_columns_title = 'CSV Spalten';

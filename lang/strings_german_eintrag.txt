@@ -37,9 +37,6 @@
  * @author Martin Fuchs, martin-fuchs@gmx.net
  */
 
-# Charset
-$s_charset = 'utf-8';
-
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Verschieben';
 $s_actiongroup_menu_copy = 'Kopieren';
@@ -232,7 +229,6 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Keine Verbindung zum FTP-Server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Der Bearbeiter hat keine ausreichenden Rechte, um einen Eintrag mit diesem Status zu bearbeiten.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ein Projekt mit diesem Namen ist bereits vorhanden. Gehen Sie zurück und wählen Sie einen anderen Namen.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ungültiger Projektname. Projektnamen können nicht leer sein.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Benutzer nicht gefunden.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Die von Ihrem Browser gespeicherte Anmeldeinformation ist ungültig. Möglicherweise wurde Ihr Konto gelöscht.';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Für diesen Benutzer konnten keine Voreinstellungen gefunden werden.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Nachricht nicht gefunden.';
@@ -674,11 +670,6 @@ $s_lost_password_link = 'Passwort vergessen?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Projekt wählen';
-
-# logout_page.php
-$s_logged_out_title = 'Abgemeldet...';
-$s_redirecting = '... Weiterleitung';
-$s_here = 'hier klicken';
 
 # lost_pwd_page.php
 $s_lost_password_title = 'Passwort zurücksetzen';
@@ -1483,4 +1474,3 @@ $s_show_as_graph = 'Als Grafik anzeigen';
 $s_show_as_table = 'Als Tabelle anzeigen';
 $s_show_graph = 'Grafik anzeigen';
 $s_graph_page = 'Grafische Eintrags-Historie';
-$s_graph_bug_page_link = 'Grafik';

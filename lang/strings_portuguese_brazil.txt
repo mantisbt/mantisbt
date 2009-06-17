@@ -31,6 +31,7 @@
  * @author Felipe Tonioli, tonioli@easyline.com.br
  * @author Fernando Machado, fm-nospam@fmachado.com
  * @author Jeferson Oliveira, jefersonfoliveira@gmail.com
+ * @author Jefersonfoliveira
  * @author Juliano F. Ravasi, dev at juliano info
  */
 
@@ -426,6 +427,7 @@ $s_email_bugnote_limit = 'Limite de Anotações por e-mail';
 $s_language = 'Idioma';
 $s_update_prefs_button = 'Atualizar Preferências';
 $s_reset_prefs_button = 'Redefinir Preferências';
+$s_timezone = 'Fuso Horário';
 $s_prefs_reset_msg = 'As preferências foram redefinidas...';
 $s_prefs_updated_msg = 'As preferências foram atualizadas...';
 $s_profile_added_msg = 'Perfil adicionado...';
@@ -563,7 +565,7 @@ $s_bugnote_updated_msg = 'A anotação foi atualizada com sucesso...';
 $s_edited_on = 'alterado em:';
 $s_hide_content = 'Ocultar Conteúdo';
 $s_show_content = 'Mostrar Conteúdo';
-$s_total_queries_executed = '%1$d total de consultas executadas.';
+$s_total_queries_executed = '1$d total de consultas executadas.';
 $s_unique_queries_executed = '%1$d consultas únicas executadas.';
 $s_memory_usage_in_kb = 'uso de memória: %1$s KB';
 $s_please_report = 'Por favor, reporte isto ao %1$s.';
@@ -1208,7 +1210,6 @@ $s_show_as_graph = 'Mostrar como Gráfico';
 $s_show_as_table = 'Mostrar como Tabela';
 $s_show_graph = 'Mostrar Gráfico';
 $s_graph_page = 'Gráfico do histórico do caso';
-$s_graph_bug_page_link = 'Gráfico';
 $s_manage_columns_config = 'Gerenciar Colunas';
 $s_all_columns_title = 'Todas as Colunas Disponíveis';
 $s_csv_columns_title = 'Colunas CSV';
