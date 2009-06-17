@@ -42,6 +42,36 @@ function columns_get_standard() {
 }
 
 /**
+ * Allow plugins to define a set of class-based columns, and register/load
+ * them here to be used by columns_api.
+ * @return array Mapping of column name to column object
+ */
+function columns_get_plugin_columns() {
+	static $s_column_array = null;
+
+	if ( is_null( $s_column_array ) ) {
+		$s_column_array = array();
+
+		$t_all_plugin_columns = event_signal( 'EVENT_FILTER_COLUMNS' );
+		foreach( $t_all_plugin_columns as $t_plugin => $t_plugin_columns ) {
+			foreach( $t_plugin_columns as $t_callback => $t_plugin_column_array ) {
+				if ( is_array( $t_plugin_column_array ) ) {
+					foreach( $t_plugin_column_array as $t_column_class ) {
+						if ( class_exists( $t_column_class ) && is_subclass_of( $t_column_class, 'MantisColumn' ) ) {
+							$t_column_object = new $t_column_class();
+							$t_column_name = utf8_strtolower( $t_plugin . '_' . $t_column_object->column );
+							$s_column_array[ $t_column_name ] = $t_column_object;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return $s_column_array;
+}
+
+/**
  * Get all accessible columns for the current project / current user..
  * @param int $p_project_id project id
  * @return array array of columns
@@ -49,6 +79,9 @@ function columns_get_standard() {
  */
 function columns_get_all( $p_project_id = null ) {
 	$t_columns = columns_get_standard();
+
+	# add plugin columns
+	$t_columns = array_merge( $t_columns, array_keys( columns_get_plugin_columns() ) );
 
 	# Add project custom fields to the array.  Only add the ones for which the current user has at least read access.
 	if( $p_project_id === null ) {
@@ -66,8 +99,6 @@ function columns_get_all( $p_project_id = null ) {
 		$t_def = custom_field_get_definition( $t_id );
 		$t_columns[] = 'custom_' . $t_def['name'];
 	}
-
-	# foreach
 
 	return $t_columns;
 }
@@ -146,6 +177,12 @@ function column_get_title( $p_column ) {
 		}
 
 		return $t_custom_field;
+	}
+
+	$t_plugin_columns = columns_get_plugin_columns();
+	if ( isset( $t_plugin_columns[ $p_column ] ) ) {
+		$t_column_object = $t_plugin_columns[ $p_column ];
+		return $t_column_object->title;
 	}
 
 	switch( $p_column ) {
@@ -717,6 +754,35 @@ function print_column_selection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW
 		echo "&nbsp;";
 	}
 	echo '</td>';
+}
+
+/**
+ * Print column title for a specific custom column.
+ * @param object Column object
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @access public
+ */
+function print_column_title_plugin( $p_column_object, $p_sort, $p_dir, $p_columns_target=COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<td>', string_display_line( $p_column_object->title ), '</td>';
+}
+
+/**
+ * Print custom column content for a specific bug.
+ * @param object Column object
+ * @param array $p_row bug row
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @access public
+ */
+function print_column_plugin( $p_column_object, $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
+		echo '<td>';
+		$p_column_object->display( $p_bug, $p_columns_target );
+		echo '</td>';
+	} else {
+		$p_column_object->display( $p_bug, $p_columns_target );
+	}
 }
 
 /**

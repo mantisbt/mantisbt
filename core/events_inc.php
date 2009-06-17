@@ -71,6 +71,7 @@ event_declare_many( array(
 
 	# Bug filter events
 	'EVENT_FILTER_FIELDS' => EVENT_TYPE_DEFAULT,
+	'EVENT_FILTER_COLUMNS' => EVENT_TYPE_DEFAULT,
 
 	# Bug report event
 	'EVENT_REPORT_BUG_FORM_TOP' => EVENT_TYPE_EXECUTE,

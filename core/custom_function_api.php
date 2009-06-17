@@ -263,9 +263,16 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 			echo '</td>';
 		}
 	} else {
+		$t_plugin_columns = columns_get_plugin_columns();
+
 		$t_function = 'print_column_title_' . $p_column;
 		if( function_exists( $t_function ) ) {
 			$t_function( $t_sort, $t_dir, $p_columns_target );
+
+		} else if ( isset( $t_plugin_columns[ $p_column ] ) ) {
+			$t_column_object = $t_plugin_columns[ $p_column ];
+			print_column_title_plugin( $t_column_object, $p_sort, $p_dir, $p_columns_target );
+
 		} else {
 			echo '<td>';
 			print_view_bug_sort_link( column_get_title( $p_column ), $p_column, $t_sort, $t_dir, $p_columns_target );
@@ -313,6 +320,8 @@ function custom_function_default_print_column_value( $p_column, $p_issue_row, $p
 		}
 		echo $t_column_end;
 	} else {
+		$t_plugin_columns = columns_get_plugin_columns();
+
 		if( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
 			$t_function = 'print_column_' . $p_column;
 		} else {
@@ -325,6 +334,11 @@ function custom_function_default_print_column_value( $p_column, $p_issue_row, $p
 			} else {
 				$t_function( $p_issue_row[$p_column] );
 			}
+
+		} else if ( isset( $t_plugin_columns[ $p_column ] ) ) {
+			$t_column_object = $t_plugin_columns[ $p_column ];
+			print_column_plugin( $t_column_object, $p_issue_row, $p_columns_target );
+
 		} else {
 			if( isset( $p_issue_row[$p_column] ) ) {
 				echo $t_column_start . $p_issue_row[$p_column] . $t_column_end;
