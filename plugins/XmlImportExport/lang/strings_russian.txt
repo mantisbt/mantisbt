@@ -33,7 +33,6 @@ $s_plugin_XmlImportExport_link = 'ссылка';
 $s_plugin_XmlImportExport_link_desc = 'сопоставлять ссылку на оригинальную запись';
 $s_plugin_XmlImportExport_disable = 'отключено';
 $s_plugin_XmlImportExport_disable_desc = 'отключить связь';
-$s_plugin_XmlImportExport_manage_import_issues_link = 'управлять ссылками на импортированные задачи';
 
 $s_plugin_XmlImportExport_fallback = 'Запасная стратегия (когда "перенумерация" не сработала):';
 
