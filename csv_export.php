@@ -112,12 +112,12 @@
 
 				echo csv_escape_string($t_value);
 			} else {
-				if ( column_is_extended( $t_column ) && !isset( $t_row['description'] ) ) {
-					$t_row = bug_get_extended_row( $t_row['id'] );
+				if ( column_is_extended( $t_column ) && $t_row->description == '' ) {
+					$t_row = bug_get_extended_row( $t_row->id );
 				}
 
 				$t_function = 'csv_format_' . $t_column;
-				echo $t_function( $t_row[ $t_column ] );
+				echo $t_function( $t_row->$t_column );
 			}
 		}
 

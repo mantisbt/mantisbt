@@ -288,7 +288,7 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 # $p_column: name of field to show in the column.
 # $p_row: the row from the bug table that belongs to the issue that we should print the values for.
 # $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
-function custom_function_default_print_column_value( $p_column, $p_issue_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function custom_function_default_print_column_value( $p_column, $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	if( COLUMNS_TARGET_CSV_PAGE == $p_columns_target ) {
 		$t_column_start = '';
 		$t_column_end = '';
@@ -307,8 +307,8 @@ function custom_function_default_print_column_value( $p_column, $p_issue_row, $p
 		if( $t_field_id === false ) {
 			echo '@', $t_custom_field, '@';
 		} else {
-			$t_issue_id = $p_issue_row['id'];
-			$t_project_id = $p_issue_row['project_id'];
+			$t_issue_id = $p_bug->id;
+			$t_project_id = $p_bug->project_id;
 
 			if( custom_field_is_linked( $t_field_id, $t_project_id ) ) {
 				$t_def = custom_field_get_definition( $t_field_id );
@@ -330,9 +330,9 @@ function custom_function_default_print_column_value( $p_column, $p_issue_row, $p
 
 		if( function_exists( $t_function ) ) {
 			if( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
-				$t_function( $p_issue_row, $p_columns_target );
+				$t_function( $p_bug, $p_columns_target );
 			} else {
-				$t_function( $p_issue_row[$p_column] );
+				$t_function( $p_bug->$p_column );
 			}
 
 		} else if ( isset( $t_plugin_columns[ $p_column ] ) ) {
@@ -340,8 +340,8 @@ function custom_function_default_print_column_value( $p_column, $p_issue_row, $p
 			print_column_plugin( $t_column_object, $p_issue_row, $p_columns_target );
 
 		} else {
-			if( isset( $p_issue_row[$p_column] ) ) {
-				echo $t_column_start . $p_issue_row[$p_column] . $t_column_end;
+			if( isset( $p_bug->$p_column ) ) {
+				echo $t_column_start . $p_bug->$p_column . $t_column_end;
 			} else {
 				echo $t_column_start . '@' . $p_column . '@' . $t_column_end;
 			}
