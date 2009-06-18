@@ -25,7 +25,7 @@
 /**
  * requires error_api
  */
-require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'error_api.php' );
+require_once( 'error_api.php' );
 
 # cache for config variables
 $g_cache_config = array();
