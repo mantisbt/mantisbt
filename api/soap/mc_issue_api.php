@@ -60,45 +60,45 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 
-	$t_bug = get_object_vars( bug_get( $p_issue_id, true ) );
+	$t_bug = bug_get( $p_issue_id, true );
 	$t_issue_data = array();
 
 	$t_issue_data['id'] = $p_issue_id;
-	$t_issue_data['view_state'] = mci_enum_get_array_by_id( $t_bug['view_state'], 'view_state', $t_lang );
-	$t_issue_data['last_updated'] = timestamp_to_iso8601( $t_bug['last_updated'] );
+	$t_issue_data['view_state'] = mci_enum_get_array_by_id( $t_bug->view_state, 'view_state', $t_lang );
+	$t_issue_data['last_updated'] = timestamp_to_iso8601( $t_bug->last_updated );
 
-	$t_issue_data['project'] = mci_project_as_array_by_id( $t_bug['project_id'] );
-	$t_issue_data['category'] = mci_null_if_empty( category_get_name( $t_bug['category_id'] ) );
-	$t_issue_data['priority'] = mci_enum_get_array_by_id( $t_bug['priority'], 'priority', $t_lang );
-	$t_issue_data['severity'] = mci_enum_get_array_by_id( $t_bug['severity'], 'severity', $t_lang );
-	$t_issue_data['status'] = mci_enum_get_array_by_id( $t_bug['status'], 'status', $t_lang );
+	$t_issue_data['project'] = mci_project_as_array_by_id( $t_bug->project_id );
+	$t_issue_data['category'] = mci_null_if_empty( category_get_name( $t_bug->category_id ) );
+	$t_issue_data['priority'] = mci_enum_get_array_by_id( $t_bug->priority, 'priority', $t_lang );
+	$t_issue_data['severity'] = mci_enum_get_array_by_id( $t_bug->severity, 'severity', $t_lang );
+	$t_issue_data['status'] = mci_enum_get_array_by_id( $t_bug->status, 'status', $t_lang );
 
-	$t_issue_data['reporter'] = mci_account_get_array_by_id( $t_bug['reporter_id'] );
-	$t_issue_data['summary'] = $t_bug['summary'];
-	$t_issue_data['version'] = mci_null_if_empty( $t_bug['version'] );
-	$t_issue_data['build'] = mci_null_if_empty( $t_bug['build'] );
-	$t_issue_data['platform'] = mci_null_if_empty( $t_bug['platform'] );
-	$t_issue_data['os'] = mci_null_if_empty( $t_bug['os'] );
-	$t_issue_data['os_build'] = mci_null_if_empty( $t_bug['os_build'] );
-	$t_issue_data['reproducibility'] = mci_enum_get_array_by_id( $t_bug['reproducibility'], 'reproducibility', $t_lang );
-	$t_issue_data['date_submitted'] = timestamp_to_iso8601( $t_bug['date_submitted'] );
+	$t_issue_data['reporter'] = mci_account_get_array_by_id( $t_bug->reporter_id );
+	$t_issue_data['summary'] = $t_bug->summary;
+	$t_issue_data['version'] = mci_null_if_empty( $t_bug->version );
+	$t_issue_data['build'] = mci_null_if_empty( $t_bug->build );
+	$t_issue_data['platform'] = mci_null_if_empty( $t_bug->platform );
+	$t_issue_data['os'] = mci_null_if_empty( $t_bug->os );
+	$t_issue_data['os_build'] = mci_null_if_empty( $t_bug->os_build );
+	$t_issue_data['reproducibility'] = mci_enum_get_array_by_id( $t_bug->reproducibility, 'reproducibility', $t_lang );
+	$t_issue_data['date_submitted'] = timestamp_to_iso8601( $t_bug->date_submitted );
 
-	$t_issue_data['sponsorship_total'] = $t_bug['sponsorship_total'];
+	$t_issue_data['sponsorship_total'] = $t_bug->sponsorship_total;
 
-	if( !empty( $t_bug['handler_id'] ) ) {
-		$t_issue_data['handler'] = mci_account_get_array_by_id( $t_bug['handler_id'] );
+	if( !empty( $t_bug->handler_id ) ) {
+		$t_issue_data['handler'] = mci_account_get_array_by_id( $t_bug->handler_id );
 	}
 
-	$t_issue_data['projection'] = mci_enum_get_array_by_id( $t_bug['projection'], 'projection', $t_lang );
-	$t_issue_data['eta'] = mci_enum_get_array_by_id( $t_bug['eta'], 'eta', $t_lang );
+	$t_issue_data['projection'] = mci_enum_get_array_by_id( $t_bug->projection, 'projection', $t_lang );
+	$t_issue_data['eta'] = mci_enum_get_array_by_id( $t_bug->eta, 'eta', $t_lang );
 
-	$t_issue_data['resolution'] = mci_enum_get_array_by_id( $t_bug['resolution'], 'resolution', $t_lang );
-	$t_issue_data['fixed_in_version'] = mci_null_if_empty( $t_bug['fixed_in_version'] );
-	$t_issue_data['target_version'] = mci_null_if_empty( $t_bug['target_version'] );
+	$t_issue_data['resolution'] = mci_enum_get_array_by_id( $t_bug->resolution, 'resolution', $t_lang );
+	$t_issue_data['fixed_in_version'] = mci_null_if_empty( $t_bug->fixed_in_version );
+	$t_issue_data['target_version'] = mci_null_if_empty( $t_bug->target_version );
 
-	$t_issue_data['description'] = $t_bug['description'];
-	$t_issue_data['steps_to_reproduce'] = mci_null_if_empty( $t_bug['steps_to_reproduce'] );
-	$t_issue_data['additional_information'] = mci_null_if_empty( $t_bug['additional_information'] );
+	$t_issue_data['description'] = $t_bug->description;
+	$t_issue_data['steps_to_reproduce'] = mci_null_if_empty( $t_bug->steps_to_reproduce );
+	$t_issue_data['additional_information'] = mci_null_if_empty( $t_bug->additional_information );
 
 	$t_issue_data['attachments'] = mci_issue_get_attachments( $p_issue_id );
 	$t_issue_data['relationships'] = mci_issue_get_relationships( $p_issue_id, $t_user_id );
@@ -115,11 +115,9 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
  * @param $p_custom_fields  The array of custom field values as described in the webservice complex types.
  */
 function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields ) {
-
 	# set custom field values on the submitted issue
 	if( isset( $p_custom_fields ) && is_array( $p_custom_fields ) ) {
 		foreach( $p_custom_fields as $t_custom_field ) {
-
 			# get custom field id from object ref
 			$t_custom_field_id = mci_get_custom_field_id_from_objectref( $t_custom_field['field'] );
 
@@ -352,7 +350,7 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	if( count( $t_rows ) == 0 ) {
 		return 0;
 	} else {
-		return $t_rows[0]['id'];
+		return $t_rows[0]->id;
 	}
 }
 
