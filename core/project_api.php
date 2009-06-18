@@ -346,9 +346,6 @@ function project_delete( $p_project_id ) {
 # Update a project
 function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_view_state, $p_file_path, $p_enabled, $p_inherit_global ) {
 
-	# Make sure file path has trailing slash
-	$p_file_path = terminate_directory_path( $p_file_path );
-
 	$p_project_id = (int) $p_project_id;
 	$c_enabled = db_prepare_bool( $p_enabled );
 	$c_inherit_global = db_prepare_bool( $p_inherit_global );
@@ -364,6 +361,8 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 	}
 
 	if( !is_blank( $p_file_path ) ) {
+		# Make sure file path has trailing slash
+		$p_file_path = terminate_directory_path( $p_file_path );
 		file_ensure_valid_upload_path( $p_file_path );
 	}
 
