@@ -23,9 +23,6 @@
  * @subpackage UserPreferencesAPI
  */
 
-# ## User Preferences API ###
-
-
 /**
  * Preference Structure Definition
  * @package MantisBT
@@ -160,6 +157,9 @@ $g_cache_current_user_pref = array();
  *  if the preferences can't be found.  If the second parameter is
  *  false, return false if the preferences can't be found.
  *
+ * @param int $p_user_id
+ * @param int $p_project_id
+ * @param bool $p_trigger_errors
  * @return false|array
  */
 function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigger_errors = true ) {
@@ -196,6 +196,12 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 	return $row;
 }
 
+/**
+ * Cache user preferences for a set of users
+ * @param array $p_user_id_array 
+ * @param int $p_project_id
+ * @return null
+ */
 function user_pref_cache_array_rows( $p_user_id_array, $p_project_id = ALL_PROJECTS ) {
 	global $g_cache_user_pref;
 	$c_user_id_array = array();
@@ -232,8 +238,12 @@ function user_pref_cache_array_rows( $p_user_id_array, $p_project_id = ALL_PROJE
 	return;
 }
 
-# --------------------
-# Clear the user preferences cache (or just the given id if specified)
+/** 
+ * Clear the user preferences cache (or just the given id if specified)
+ * @param $p_user_id
+ * @param $p_project_id
+ * @return true
+ */
 function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 	global $g_cache_user_pref;
 
@@ -248,12 +258,13 @@ function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 	return true;
 }
 
-# ===================================
-# Boolean queries and ensures
-# ===================================
-# --------------------
-# return true if the user has prefs assigned for the given project,
-#  false otherwise
+/**
+ * return true if the user has prefs assigned for the given project,
+ *  false otherwise
+ * @param int $p_user_id
+ * @param int $p_project_id
+ * @return bool
+ */
 function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	if( false === user_pref_cache_row( $p_user_id, $p_project_id, false ) ) {
 		return false;
@@ -262,11 +273,13 @@ function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	}
 }
 
-# ===================================
-# Creation / Deletion / Updating
-# ===================================
-
-# perform an insert of a preference object into the DB
+/**
+ * perform an insert of a preference object into the DB
+ * @param int $p_user_id
+ * @param int $p_project_id
+ * @param UserPreferences $p_prefs
+ * @return true
+ */
 function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 	static $t_vars;
 	$c_user_id = db_prepare_int( $p_user_id );
@@ -295,7 +308,7 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 	$t_params_string = implode( ',', $t_params );
 
 	$query = 'INSERT INTO ' . $t_user_pref_table .
-			 ' (user_id, project_id, $t_vars_string) ' .
+			 ' (user_id, project_id, ' . $t_vars_string . ') ' .
 			 ' VALUES ( ' . $t_params_string . ')';
 	db_query_bound( $query, $t_values  );
 
@@ -303,8 +316,13 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 	return true;
 }
 
-# --------------------
-# perform an update of a preference object into the DB
+/**
+ * perform an update of a preference object into the DB
+ * @param int $p_user_id
+ * @param int $p_project_id
+ * @param UserPreferences $p_prefs
+ * @return true
+ */
 function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
 	static $t_vars;
 	$c_user_id = db_prepare_int( $p_user_id );
@@ -341,9 +359,13 @@ function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
 	return true;
 }
 
-# --------------------
-# delete a preferencess row
-# returns true if the prefs were successfully deleted
+/**
+ * delete a preferencess row
+ * returns true if the prefs were successfully deleted
+ * @param int $p_user_id
+ * @param int $p_project_id
+ * @return true
+ */
 function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_project_id = db_prepare_int( $p_project_id );
@@ -363,13 +385,16 @@ function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	return true;
 }
 
-# --------------------
-# delete all preferences for a user in all projects
-# returns true if the prefs were successfully deleted
-#
-# It is far more efficient to delete them all in one query than to
-#  call user_pref_delete() for each one and the code is short so that's
-#  what we do
+/**
+ * delete all preferences for a user in all projects
+ * returns true if the prefs were successfully deleted
+ *
+ * It is far more efficient to delete them all in one query than to
+ *  call user_pref_delete() for each one and the code is short so that's
+ *  what we do
+ * @param int $p_user_id
+ * @return true
+ */
 function user_pref_delete_all( $p_user_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 
@@ -386,13 +411,16 @@ function user_pref_delete_all( $p_user_id ) {
 	return true;
 }
 
-# --------------------
-# delete all preferences for a project for all users (part of deleting the project)
-# returns true if the prefs were successfully deleted
-#
-# It is far more efficient to delete them all in one query than to
-#  call user_pref_delete() for each one and the code is short so that's
-#  what we do
+/**
+ * delete all preferences for a project for all users (part of deleting the project)
+ * returns true if the prefs were successfully deleted
+ *
+ * It is far more efficient to delete them all in one query than to
+ *  call user_pref_delete() for each one and the code is short so that's
+ *  what we do
+ * @param $p_project_id
+ * @return true
+ */
 function user_pref_delete_project( $p_project_id ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
@@ -405,8 +433,12 @@ function user_pref_delete_project( $p_project_id ) {
 	return true;
 }
 
-# --------------------
-# return the user's preferences in a UserPreferences object
+/**
+ * return the user's preferences in a UserPreferences object
+ * @param int $p_user_id
+ * @param int $p_project_id
+ * @return UserPreferences
+ */
 function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	static $t_vars;
 	global $g_cache_current_user_pref;
@@ -422,14 +454,12 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	# If the user has no preferences for the given project
 	if( false === $row ) {
 		if( ALL_PROJECTS != $p_project_id ) {
-
 			# Try to get the prefs for ALL_PROJECTS (the defaults)
 			$row = user_pref_cache_row( $p_user_id, ALL_PROJECTS, false );
 		}
 
 		# If $row is still false (the user doesn't have default preferences)
 		if( false === $row ) {
-
 			# We use an empty array
 			$row = array();
 		}
@@ -455,10 +485,15 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	return $t_prefs;
 }
 
-# --------------------
-# Return the specified preference field for the user id
-# If the preference can't be found try to return a defined default
-# If that fails, trigger a WARNING and return ''
+/**
+ * Return the specified preference field for the user id
+ * If the preference can't be found try to return a defined default
+ * If that fails, trigger a WARNING and return ''
+ * @param int $p_user_id
+ * @param string $p_pref_name
+ * @param int $p_project_id
+ * @return string
+ */
 function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJECTS ) {
 	static $t_vars;
 
@@ -478,8 +513,12 @@ function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJE
 	}
 }
 
-# --------------------
-# returns user language
+/**
+ * returns user language
+ * @param int $p_user_id
+ * @param int $p_project_id
+ * @return string
+ */
 function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
 
@@ -491,17 +530,20 @@ function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	return $t_lang;
 }
 
-# ===================================
-# Data Modification
-# ===================================
-# --------------------
-# Set a user preference
-#
-# By getting the prefs for the project first we deal fairly well with defaults.
-#  If there are currently no prefs for that project, the ALL_PROJECTS prefs will
-#  be returned so we end up storing a new set of prefs for the given project
-#  based on the prefs for ALL_PROJECTS.  If there isn't even an entry for
-#  ALL_PROJECTS, we'd get returned a default UserPreferences object to modify.
+/**
+ * Set a user preference
+ *
+ * By getting the prefs for the project first we deal fairly well with defaults.
+ *  If there are currently no prefs for that project, the ALL_PROJECTS prefs will
+ *  be returned so we end up storing a new set of prefs for the given project
+ *  based on the prefs for ALL_PROJECTS.  If there isn't even an entry for
+ *  ALL_PROJECTS, we'd get returned a default UserPreferences object to modify.
+ * @param int $p_user_id
+ * @param string $p_pref_name
+ * @param string $p_pref_value
+ * @param int $p_project_id
+ * @return true
+ */
 function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project_id = ALL_PROJECTS ) {
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
 
@@ -512,8 +554,14 @@ function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project
 	return true;
 }
 
-# set the user's preferences for the project from the given preferences object
-#  Do the work by calling user_pref_update() or user_pref_insert() as appropriate
+/**
+ * set the user's preferences for the project from the given preferences object
+ * Do the work by calling user_pref_update() or user_pref_insert() as appropriate
+ * @param int $p_user_id
+ * @param UserPreferences $p_prefs
+ * @param int $p_project_id
+ * @return true
+ */
 function user_pref_set( $p_user_id, $p_prefs, $p_project_id = ALL_PROJECTS ) {
 	if( user_pref_exists( $p_user_id, $p_project_id ) ) {
 		return user_pref_update( $p_user_id, $p_project_id, $p_prefs );
