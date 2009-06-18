@@ -73,17 +73,21 @@ $t_ignore = array(
 	'bug_text_id',
 );
 
+/* properties that we want to export are 'protected' */
+$t_columns = array_keys( getClassProperties('BugData', 'protected') );
+
 # export the rows
 foreach( $t_result as $t_row ) {
-	$t_full_data = bug_get_extended_row( $t_row['id'] );
+	$t_row->fetch_extended_info();
 
-	//var_dump($t_full_data);
 	$writer->startElement( 'issue' );
 
-	foreach( $t_full_data as $t_element => $t_value ) {
+	foreach( $t_columns as $t_element ) {
+		$t_value = $t_row->$t_element;
 		if( empty( $t_value ) ) {
 			continue;
 		}
+
 		if( in_array( $t_element, $t_ignore ) ) {
 			continue;
 		}

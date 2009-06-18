@@ -113,7 +113,7 @@
 				echo csv_escape_string($t_value);
 			} else {
 				if ( column_is_extended( $t_column ) && $t_row->description == '' ) {
-					$t_row = bug_get_extended_row( $t_row->id );
+					$t_row->fetch_extended_info();
 				}
 
 				$t_function = 'csv_format_' . $t_column;

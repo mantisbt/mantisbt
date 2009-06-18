@@ -115,7 +115,6 @@ class BugData {
 	public $attachment_count = null;
 	public $bugnotes_count = null;
 
-	static $t_vars;
 	private $loading = false;
 
 	/**
@@ -207,6 +206,20 @@ class BugData {
 			$this->__set( $var, $p_row[$var] );
 		}
 		$this->loading = false;
+	}
+	
+	/**
+	 * Retrieves extended information for bug (e.g. bug description)
+	 * @return null
+	 */
+	public function fetch_extended_info() {
+		if ( $this->description == '' ) {				
+			$t_text = bug_text_cache_row($this->id);
+
+			$this->description = $t_text['description'];
+			$this->steps_to_reproduce = $t_text['steps_to_reproduce'];
+			$this->additional_information = $t_text['additional_information'];
+		}
 	}
 
 	/**
@@ -1164,10 +1177,6 @@ function bug_delete_all( $p_project_id ) {
 	return true;
 }
 
-
-# ===================================
-# Data Access
-# ===================================
 /**
  * Returns the extended record of the specified bug, this includes
  * the bug text fields

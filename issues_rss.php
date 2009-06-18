@@ -169,12 +169,12 @@
 
 	# Loop through results
 	for ( $i = 0; $i < $t_issues_count; $i++ ) {
-		$row = $t_issues[$i];
+		$t_bug = $t_issues[$i];
+		$t_bug->fetch_extended_info();
+		
 
-		$t_bug = bug_get( $row['id'], true );
-
-		$about = $link = $t_path . "view.php?id=" . $row['id'];
-		$title = string_rss_links( bug_format_id( $row['id'] ) . ': ' . $t_bug->summary );
+		$about = $link = $t_path . "view.php?id=" . $t_bug->id;
+		$title = string_rss_links( bug_format_id( $t_bug->id ) . ': ' . $t_bug->summary );
 
 		if ( $row['view_state'] == VS_PRIVATE ) {
 			$title .= ' [' . lang_get( 'private' ) . ']';
@@ -201,7 +201,7 @@
 		$author .= ' &lt;' . $t_author_email . '&gt;';
 
 		# $comments = 'http://www.example.com/sometext.php?somevariable=somevalue&comments=1';	# url to comment page rss 2.0 value
-		$comments = $t_path . 'view.php?id=' . $row['id'] . '#bugnotes';
+		$comments = $t_path . 'view.php?id=' . $t_bug->id . '#bugnotes';
 
 		# optional mod_im value for dispaying a different pic for every item
 		$image = '';
