@@ -273,7 +273,7 @@ function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
 		$c_id = db_prepare_int( $p_custom_field_id );
 		$query .= ' AND (id <> ' . db_param() . ')';
 	}
-	$result = db_query_bound( $query, ( ($p_custom_field_id !== null) ? Array( $p_name ) : Array( $p_name, $c_id ) ) );
+	$result = db_query_bound( $query, ( ($p_custom_field_id !== null) ? Array( $p_name, $c_id ) : Array( $p_name ) ) );
 	$count = db_result( $result );
 
 	if( $count > 0 ) {
