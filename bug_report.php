@@ -74,7 +74,9 @@
 
 	$t_bug_data->summary			= trim( $t_bug_data->summary );
 
-	$t_bug_data->target_version		= access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ? gpc_get_string( 'target_version', '' ) : '';
+	if ( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ) {
+		$t_bug_data->target_version = gpc_get_string( 'target_version', '' );
+	}
 
 	# if a profile was selected then let's use that information
 	if ( 0 != $t_bug_data->profile_id ) {
