@@ -20,6 +20,8 @@ plugins/*
 *~
 *.swp
 *.bak
+.buildpath
+.cache
 .project
 .settings
 
