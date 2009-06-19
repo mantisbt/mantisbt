@@ -310,6 +310,7 @@ $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Jeton de sécurité du formulaire inv
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Impossible d\'afficher cette page avec cette fonction.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Champ de tri invalide.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Format de date invalide.';
+$MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Impossible de mettre à jour la zone horaire.';
 $s_login_error = 'Votre compte est peut être désactivé ou alors le code utilisateur et le mot de passe que vous avez saisi sont incorrects.';
 $s_login_cookies_disabled = 'Votre navigateur ne sait pas gérer les témoins ou refuse de les gérer.';
 $s_go_back = 'Retour';

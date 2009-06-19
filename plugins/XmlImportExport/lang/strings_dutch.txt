@@ -1,30 +1,40 @@
 <?php
-# MantisBT - a php based bugtracking system
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-# Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT. If not, see <http://www.gnu.org/licenses/>.
+/** Dutch (Nederlands)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Siebrand
+ */
 
 $s_plugin_XmlImportExport_title = 'Meldingen importeren/exporteren';
 $s_plugin_XmlImportExport_description = 'Voegt XML-gebaseerde import- en exportmogelijkheden toe aan MantisBT.';
-
 $s_plugin_XmlImportExport_import = 'Meldingen importeren';
 $s_plugin_XmlImportExport_export = 'XML-export';
-
 $s_plugin_XmlImportExport_importing_in_project = 'Bezig met het importeren van meldingen in het project:';
 $s_plugin_XmlImportExport_import_options = 'Importinstellingen';
-
 $s_plugin_XmlImportExport_cross_references = 'Kruisverwijzingen';
 $s_plugin_XmlImportExport_default_strategy = 'Standaard conversiestrategie:';
 $s_plugin_XmlImportExport_renumber = 'Hernummeren';
@@ -33,8 +43,6 @@ $s_plugin_XmlImportExport_link = 'Verwijzing';
 $s_plugin_XmlImportExport_link_desc = 'Converteren naar een verwijzing naar het origineel';
 $s_plugin_XmlImportExport_disable = 'Uitschakelen';
 $s_plugin_XmlImportExport_disable_desc = 'Verwijzging uitschakelen';
-
 $s_plugin_XmlImportExport_fallback = 'Terugvalstrategie (als "Hernummeren" niet werkt):';
-
 $s_plugin_XmlImportExport_fallback_category = 'Terugvalcategorie:';
 $s_plugin_XmlImportExport_keep_same_category = 'Proberen dezelfde categorie te houden';

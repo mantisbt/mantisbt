@@ -296,6 +296,7 @@ $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Geton de seguretat del formulari inva
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Impossible d\'afichar aquesta pagina amb aquesta foncion.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Camp de triada invalid.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Format de data invalid.';
+$MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Impossible de metre a jorn la zòna orària.';
 $s_login_error = 'Benlèu vòstre compte es desactivat o alara lo còde d\'utilizaire e lo senhal qu\'avètz picats son incorrèctes.';
 $s_login_cookies_disabled = 'Vòstre navigador sap pas gerir los testimònis o refusa de los gerir.';
 $s_go_back = 'Retorn';
