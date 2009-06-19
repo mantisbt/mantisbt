@@ -1,0 +1,48 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Japanese (日本語)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Fryed-peach
+ */
+
+$s_plugin_graph_title = 'Mantis グラフ';
+$s_plugin_graph_description = '公式なグラフ用プラグイン。';
+$s_plugin_MantisGraph_title = 'Mantis グラフ';
+$s_plugin_MantisGraph_menu_advanced_summary = '詳細な要約';
+$s_plugin_MantisGraph_config = '設定';
+$s_plugin_MantisGraph_synthesis_link = '合成';
+$s_plugin_MantisGraph_status_link = 'ステータスごと';
+$s_plugin_MantisGraph_priority_link = '優先度ごと';
+$s_plugin_MantisGraph_severity_link = '重要度ごと';
+$s_plugin_MantisGraph_category_link = 'カテゴリごと';
+$s_plugin_MantisGraph_resolution_link = '解決状況ごと';
+$s_plugin_MantisGraph_graph_bug_page_link = 'グラフ';
+$s_plugin_MantisGraph_library = 'グラフ・ライブラリ';
+$s_plugin_MantisGraph_bundled = 'バンドルのものを使用';
+$s_plugin_MantisGraph_jpgraph_antialias = 'JPGRAPH のみ: アンチエイリアス。一部のグラフでは見た目が向上します。注意: アンチエイリアスを使用すると描画が約8倍ほど遅くなります。';
+$s_plugin_MantisGraph_enabled = '入';
+$s_plugin_MantisGraph_disabled = '切';

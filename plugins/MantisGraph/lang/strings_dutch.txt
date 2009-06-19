@@ -1,0 +1,48 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Dutch (Nederlands)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Siebrand
+ */
+
+$s_plugin_graph_title = 'Mantis grafieken';
+$s_plugin_graph_description = 'Officiële plugin voor grafieken.';
+$s_plugin_MantisGraph_title = 'Mantis grafieken';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Geavanceerde samenvatting';
+$s_plugin_MantisGraph_config = 'Instellingen';
+$s_plugin_MantisGraph_synthesis_link = 'Synthese';
+$s_plugin_MantisGraph_status_link = 'Per status';
+$s_plugin_MantisGraph_priority_link = 'Per prioriteit';
+$s_plugin_MantisGraph_severity_link = 'Per impact';
+$s_plugin_MantisGraph_category_link = 'Per categorie';
+$s_plugin_MantisGraph_resolution_link = 'Per oplossing';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Grafieken';
+$s_plugin_MantisGraph_library = 'Grafiekenbibliotheek';
+$s_plugin_MantisGraph_bundled = 'Bijgevoegde gebruiken';
+$s_plugin_MantisGraph_jpgraph_antialias = 'ALLEEN VOOR JPGRAPH SLECHTS: anti-aliasing. Dit verbetert het visuele voorkomen van een aantal grafieken. Opmerking: Het gebruik van anti-aliasing maakt lijntekeningen ongeveer acht keer trager';
+$s_plugin_MantisGraph_enabled = 'Ingeschakeld';
+$s_plugin_MantisGraph_disabled = 'Uitgeschakeld';

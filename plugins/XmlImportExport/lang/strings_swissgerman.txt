@@ -1,0 +1,48 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Swiss German (Alemannisch)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Als-Holder
+ */
+
+$s_plugin_XmlImportExport_title = 'Import/Export';
+$s_plugin_XmlImportExport_description = 'Fiegt XML-basierti Import- un Export-Megligkeite zue MantisBT derzue.';
+$s_plugin_XmlImportExport_import = 'Probläm importiere';
+$s_plugin_XmlImportExport_export = 'XML-Export';
+$s_plugin_XmlImportExport_importing_in_project = 'Importiert Probläm in s Projäkt:';
+$s_plugin_XmlImportExport_import_options = 'Import-Optione';
+$s_plugin_XmlImportExport_cross_references = 'Zwärchverwyys';
+$s_plugin_XmlImportExport_default_strategy = 'Standard-Konvertierigsstrategii:';
+$s_plugin_XmlImportExport_renumber = 'Renummerierig';
+$s_plugin_XmlImportExport_renumber_desc = 'Versuech, Referänze mit Renummerierig z konvertiere';
+$s_plugin_XmlImportExport_link = 'Gleich (Link)';
+$s_plugin_XmlImportExport_link_desc = 'Konvertier in e Gleich (Link) zum Originalelemänt';
+$s_plugin_XmlImportExport_disable = 'Deaktiviere';
+$s_plugin_XmlImportExport_disable_desc = 'Gleich (Link) deaktiviere';
+$s_plugin_XmlImportExport_fallback = 'Fallback-Strategii (wänn ohni Renummerierig):';
+$s_plugin_XmlImportExport_fallback_category = 'Fallback-Strategii:';
+$s_plugin_XmlImportExport_keep_same_category = 'Versuech, di glych Kategorii byyzbhalte';

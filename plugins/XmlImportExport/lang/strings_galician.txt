@@ -1,0 +1,48 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Galician (Galego)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Toliño
+ */
+
+$s_plugin_XmlImportExport_title = 'Importar/Exportar os problemas';
+$s_plugin_XmlImportExport_description = 'Engádelle a MantisBT capacidades de importación e exportación baseadas en XML.';
+$s_plugin_XmlImportExport_import = 'Importar os problemas';
+$s_plugin_XmlImportExport_export = 'Exportar en XML';
+$s_plugin_XmlImportExport_importing_in_project = 'Importar os problemas no proxecto:';
+$s_plugin_XmlImportExport_import_options = 'Opcións de importación';
+$s_plugin_XmlImportExport_cross_references = 'Referencias cruzadas';
+$s_plugin_XmlImportExport_default_strategy = 'Estratexia de conversión por defecto:';
+$s_plugin_XmlImportExport_renumber = 'Renumerar';
+$s_plugin_XmlImportExport_renumber_desc = 'Intente converter as referencias á nova numeración';
+$s_plugin_XmlImportExport_link = 'Ligazón';
+$s_plugin_XmlImportExport_link_desc = 'Converter nunha ligazón cara ao elemento orixinal';
+$s_plugin_XmlImportExport_disable = 'Deshabilitar';
+$s_plugin_XmlImportExport_disable_desc = 'Deshabilitar a ligazón';
+$s_plugin_XmlImportExport_fallback = 'Estratexia do modo de emerxencia (cando "Renumerar" non é aplicable):';
+$s_plugin_XmlImportExport_fallback_category = 'Categoría do modo de emerxencia:';
+$s_plugin_XmlImportExport_keep_same_category = 'Intentar manter a mesma categoría';
