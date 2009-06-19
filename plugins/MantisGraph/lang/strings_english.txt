@@ -36,7 +36,7 @@ $s_plugin_MantisGraph_graph_bug_page_link = 'Graph';
 $s_plugin_MantisGraph_library = 'Graph Library';
 $s_plugin_MantisGraph_bundled = 'Use Bundled';
 
-$s_plugin_MantisGraph_jpgraph_antialias = 'JPGRAPH ONLY: anti-aliasing. Will improve the visual apperance of certain graphs. Note: Using anti-aliasing makes line drawing roughly 8 time slower';
+$s_plugin_MantisGraph_jpgraph_antialias = 'JPGRAPH ONLY: anti-aliasing. Will improve the visual apperance of certain graphs. Note: Using anti-aliasing makes line drawing roughly 8 times slower';
 
 $s_plugin_MantisGraph_enabled = 'On';
 $s_plugin_MantisGraph_disabled = 'Off';
