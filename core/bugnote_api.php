@@ -429,10 +429,10 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 			$g_cache_bugnote[(int)$t_bugnote->id] = $t_bugnote;
 		}
 
-		$g_cache_bugnotes[(int)$p_bug_id] = true;
+		$g_cache_bugnotes[(int)$p_bug_id] = $t_bugnotes;
 	}
 
-	return $t_bugnotes;
+	return $g_cache_bugnotes[(int)$p_bug_id];
 }
 
 /**
