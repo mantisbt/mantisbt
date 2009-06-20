@@ -982,26 +982,14 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 
-	# These are our overall "values" for severities and non-bug results
-	$t_severity_multiplier[FEATURE] = 1;
-	$t_severity_multiplier[TRIVIAL] = 2;
-	$t_severity_multiplier[TEXT] = 3;
-	$t_severity_multiplier[TWEAK] = 2;
-	$t_severity_multiplier[MINOR] = 5;
-	$t_severity_multiplier[MAJOR] = 8;
-	$t_severity_multiplier[CRASH] = 8;
-	$t_severity_multiplier[BLOCK] = 10;
-	$t_severity_multiplier['average'] = 5;
+	$t_severity_multipliers = config_get( 'severity_multipliers' );
+	$t_resolution_multipliers = config_get( 'resolution_multipliers' );
 
-	$t_notbug_multiplier[UNABLE_TO_DUPLICATE] = 2;
-	$t_notbug_multiplier[DUPLICATE] = 3;
-	$t_notbug_multiplier[NOT_A_BUG] = 5;
-
-	# Get the severity values ot use
+	# Get the severity values to use
 	$c_sev_s = MantisEnum::getValues( $p_severity_enum_string );
 	$enum_sev_count = count( $c_sev_s );
 
-	# Get the resolution values ot use
+	# Get the resolution values to use
 	$c_res_s = MantisEnum::getValues( $p_resolution_enum_string );
 	$enum_res_count = count( $c_res_s );
 
@@ -1068,36 +1056,24 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 
 			$t_total_severity = 0;
 			$t_total_errors = 0;
-			for( $j = 0;$j < $enum_sev_count;$j++ ) {
+			for( $j = 0; $j < $enum_sev_count; $j++ ) {
 				if( !isset( $t_arr2[$c_sev_s[$j]] ) ) {
 					continue;
 				}
 
 				$sev_bug_count = $t_arr2[$c_sev_s[$j]]['total'];
-				$t_sev_mult = $t_severity_multiplier['average'];
-				if( $t_severity_multiplier[$c_sev_s[$j]] ) {
-					$t_sev_mult = $t_severity_multiplier[$c_sev_s[$j]];
+				$t_sev_mult = 1;
+				if( $t_severity_multipliers[$c_sev_s[$j]] ) {
+					$t_sev_mult = $t_severity_multipliers[$c_sev_s[$j]];
 				}
 
 				if( $sev_bug_count > 0 ) {
 					$t_total_severity += ( $sev_bug_count * $t_sev_mult );
 				}
 
-				# Calculate the "error value" of bugs reported
-				$t_notbug_res_arr = array(
-					UNABLE_TO_DUPLICATE,
-					DUPLICATE,
-					NOT_A_BUG,
-				);
-
-				foreach( $t_notbug_res_arr as $t_notbug_res ) {
-					if( isset( $t_arr2[$c_sev_s[$j]][$t_notbug_res] ) ) {
-						$t_notbug_mult = 1;
-						if( $t_notbug_multiplier[$t_notbug_res] ) {
-							$t_notbug_mult = $t_notbug_multiplier[$t_notbug_res];
-						}
-
-						$t_total_errors += ( $t_sev_mult * $t_notbug_mult );
+				foreach( $t_resolution_multipliers as $t_res => $t_res_mult ) {
+					if( isset( $t_arr2[$c_sev_s[$j]][$t_res] ) ) {
+						$t_total_errors += ( $t_sev_mult * $t_res_mult );
 					}
 				}
 			}

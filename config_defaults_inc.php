@@ -1459,6 +1459,36 @@
 	 */
 	$g_view_summary_threshold	= MANAGER;
 
+	/**
+	 * Define the multipliers which are used to determine the effectiveness
+	 * of reporters based on the severity of bugs. Higher multipliers will
+	 * result in an increase in reporter effectiveness.
+	 * @global array $g_severity_multipliers
+	 */
+	$g_severity_multipliers = array( FEATURE => 1,
+	                                 TRIVIAL => 2,
+	                                 TEXT    => 3,
+	                                 TWEAK   => 2,
+	                                 MINOR   => 5,
+	                                 MAJOR   => 8,
+	                                 CRASH   => 8,
+	                                 BLOCK   => 10 );
+
+	/**
+	 * Define the resolutions which are used to determine the effectiveness
+	 * of reporters based on the resolution of bugs. Higher multipliers will
+	 * result in a decrease in reporter effectiveness. The only resolutions
+	 * that need to be defined here are those which match or exceed
+	 * $g_bug_resolution_not_fixed_threshold.
+	 * @global array $g_resolution_multipliers
+	 */
+	$g_resolution_multipliers = array( UNABLE_TO_DUPLICATE => 2,
+	                                   NOT_FIXABLE         => 1,
+	                                   DUPLICATE           => 3,
+	                                   NOT_A_BUG           => 5,
+	                                   SUSPENDED           => 1,
+	                                   WONT_FIX            => 1 );
+
 	/*****************************
 	 * MantisBT Bugnote Settings *
 	 *****************************/
