@@ -91,7 +91,7 @@
 	<?php
 		}
 
-		if ( wiki_enabled() ) {
+		if( config_get_global( 'wiki_enable' ) == ON ) {
 	?>
 			<?php print_bracket_link( 'wiki.php?id='.$f_bug_id, lang_get( 'wiki' ) ) ?>
 	<?php

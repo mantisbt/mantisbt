@@ -1554,7 +1554,7 @@ function html_button_bug_delete( $p_bug_id ) {
  * @return null
  */
 function html_button_wiki( $p_bug_id ) {
-	if( wiki_enabled() ) {
+	if( config_get_global( 'wiki_enable' ) == ON ) {
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 			html_button( 'wiki.php', lang_get_defaulted( 'Wiki' ), array( 'id' => $p_bug_id, 'type' => 'issue' ), 'get' );
 		}
