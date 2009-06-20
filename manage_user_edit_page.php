@@ -153,7 +153,7 @@
 	</form>
 
 <!-- Delete Button -->
-<?php if ( !( ( user_is_administrator( $t_user ) && ( user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1 ) ) ) ) { ?>
+<?php if ( !( ( user_is_administrator( $t_user_id ) && ( user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1 ) ) ) ) { ?>
 	<form method="post" action="manage_user_delete.php">
 <?php echo form_security_field( 'manage_user_delete' ) ?>
 
