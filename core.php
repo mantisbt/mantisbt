@@ -206,7 +206,10 @@ require_once( 'user_api.php' );
 require_once( 'access_api.php' );
 
 # Wiki Integration
-require_once( 'wiki_api.php' );
+if( config_get_global( 'wiki_enable' ) == ON ) {
+	require_once( 'wiki_api.php' );
+	wiki_init();
+}
 
 # Display API's
 require_once( 'http_api.php' );

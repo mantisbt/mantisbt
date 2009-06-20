@@ -89,10 +89,6 @@ require_once( 'user_api.php' );
  */
 require_once( 'rss_api.php' );
 /**
- * requires wiki_api
- */
-require_once( 'wiki_api.php' );
-/**
  * requires php_api
  */
 require_once( 'php_api.php' );
@@ -763,7 +759,7 @@ function print_menu() {
 		}
 
 		# Project Wiki
-		if( wiki_enabled() ) {
+		if( config_get_global( 'wiki_enable' ) == ON ) {
 			$t_menu_options[] = '<a href="' . helper_mantis_url( 'wiki.php?type=project&amp;id=' ) . $t_current_project . '">' . lang_get( 'wiki' ) . '</a>';
 		}
 

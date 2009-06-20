@@ -85,4 +85,3 @@ function wiki_link_project( $p_project_id ) {
 	return event_signal( 'EVENT_WIKI_LINK_PROJECT', $p_project_id );
 }
 
-wiki_init();
