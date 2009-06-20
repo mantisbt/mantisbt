@@ -984,6 +984,9 @@ $s_account_deleted_msg = 'Account deleted...';
 # manage_user_delete_page.php
 $s_delete_account_sure_msg = 'Are you sure you wish to delete this account?';
 
+# manage_user_edit_page.php
+$s_notify_user = 'Notify User';
+
 # manage_user_prune.php
 $s_accounts_pruned_msg = 'All accounts that have never logged in and are older than 1 week have been removed';
 $s_prune_accounts_button = 'Prune';
@@ -1007,6 +1010,8 @@ $s_account_reset_msg2 = 'Account password has been set to blank...';
 # manage_user_update.php
 $s_manage_user_protected_msg = 'Account protected. Access level and enabled protected. Otherwise, account has been updated...';
 $s_manage_user_updated_msg = 'Account successfully updated...';
+$s_email_user_updated_subject = 'Account updated';
+$s_email_user_updated_msg = 'Your account has been updated by an administrator. A list of these changes is provided below. You can update your account details and preferences at any time by visiting the following URL:';
 
 # menu_inc.php
 $s_main_link = 'Main';
