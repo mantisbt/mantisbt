@@ -171,7 +171,7 @@
 	}
 
 	$t_show_build = config_get( 'enable_product_build' );
-	$t_show_version = ( ON == config_get( 'show_product_version' ) )
+	$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
 			|| ( ( AUTO == config_get( 'show_product_version' ) )
 						&& ( count( version_get_all_rows_with_subs( $t_project_id ) ) > 0 ) );
 
@@ -257,7 +257,7 @@
 	?>
 	</td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_build' ) ?></td>
-	<?php if ( $t_show_version ) { ?>
+	<?php if ( $t_show_product_version ) { ?>
 		<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_version' ) ?></td>
 		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'fixed_in_version' ) ?></td>
 	<?php } else { ?>
@@ -265,7 +265,7 @@
 		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
 	<?php } ?>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'priority' ) ?></td>
-	<?php if ( $t_show_version ) { ?>
+	<?php if ( $t_show_product_version ) { ?>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'target_version' ) ?></td>
 	<?php } else { ?>
 	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 7 ) * $t_custom_cols ); ?>">&nbsp;</td>
@@ -294,7 +294,7 @@
 	</td>
 	<!-- Version -->
 	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
- 		<?php if ( $t_show_version ) {
+		<?php if ( $t_show_product_version ) {
  			print_filter_show_version();
  		} else {
  			echo "&nbsp;";
@@ -302,7 +302,7 @@
 	</td>
 	<!-- Fixed in Version -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
- 		<?php if ( $t_show_version ) {
+		<?php if ( $t_show_product_version ) {
  			print_filter_show_fixed_in_version();
  		} else {
  			echo "&nbsp;";
@@ -314,7 +314,7 @@
 	</td>
 	<!-- Target Version -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
- 		<?php if ( $t_show_version ) {
+		<?php if ( $t_show_product_version ) {
  			print_filter_show_target_version();
  		} else {
  			echo "&nbsp;";

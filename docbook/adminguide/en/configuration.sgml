@@ -844,6 +844,16 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_show_scheduled_release_dates</term>
+                <listitem>
+                    <para>When this value is ON, show scheduled date of release
+                        for product versions. Dates will be shown next to the
+                        product version, target version and fixed in version
+                        fields. The default value is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_show_realname</term>
                 <listitem>
                     <para>This control will replace the user's userid with their

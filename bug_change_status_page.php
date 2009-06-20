@@ -243,10 +243,10 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 
 <?php
 if ( ( $f_new_status >= $t_resolved ) && access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id ) ) {
-	$t_show_version = ( ON == config_get( 'show_product_version' ) )
+	$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
 		|| ( ( AUTO == config_get( 'show_product_version' ) )
 					&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
-	if ( $t_show_version ) {
+	if ( $t_show_product_version ) {
 ?>
 <!-- Fixed in Version -->
 <tr <?php echo helper_alternate_class() ?>>

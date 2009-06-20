@@ -2086,7 +2086,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_filters_url = $t_filters_url . '&amp;target_field=';
 
 		$t_show_build = config_get( 'enable_product_build' );
-		$t_show_version = ( ON == config_get( 'show_product_version' ) ) || (( AUTO == config_get( 'show_product_version' ) ) && ( count( version_get_all_rows_with_subs( $t_project_id ) ) > 0 ) );
+		$t_show_product_version = ( ON == config_get( 'show_product_version' ) ) || (( AUTO == config_get( 'show_product_version' ) ) && ( count( version_get_all_rows_with_subs( $t_project_id ) ) > 0 ) );
 
 		# overload handler_id setting if user isn't supposed to see them (ref #6189)
 		if( !access_has_project_level( config_get( 'view_handler_threshold' ), $t_project_id ) ) {
@@ -2397,7 +2397,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRODUCT_BUILD . '[]';?>" id="show_build_filter"><?php echo lang_get( 'product_build' )?>:</a>
 			<?php } ?>
 			</td>
-			<?php if( $t_show_version ) {?>
+			<?php if( $t_show_product_version ) {?>
 			<td colspan="2" class="small-caption" valign="top">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRODUCT_VERSION . '[]';?>" id="show_version_filter"><?php echo lang_get( 'product_version' )?>:</a>
 			</td>
@@ -2532,7 +2532,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<?php } else { ?>
 			<td class="small-caption" valign="top"></td>
 			<?php }
-				if( $t_show_version ) {
+				if( $t_show_product_version ) {
 			?>
 			<td colspan="2" class="small-caption" valign="top" id="show_version_filter_target">
 							<?php

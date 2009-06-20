@@ -947,6 +947,13 @@
 	$g_show_product_version = AUTO;
 
 	/**
+	 * Show scheduled date of release for product versions. Dates will be shown
+	 * next to the product version, target version and fixed in version fields.
+	 * @global int $g_show_scheduled_release_dates
+	 */
+	$g_show_scheduled_release_dates = OFF;
+
+	/**
 	 * show users with their real name or not
 	 * @global int $g_show_realname
 	 */

@@ -389,12 +389,12 @@
 	$t_show_eta = config_get( 'enable_eta' );
 	$t_show_build = config_get( 'enable_product_build' );
 
-	$t_show_version = ( ON == config_get( 'show_product_version' ) )
+	$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
 		|| ( ( AUTO == config_get( 'show_product_version' ) )
 			&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
 ?>
 
-<?php if ( $t_show_eta || $t_show_version || $t_show_build ) { ?>
+<?php if ( $t_show_eta || $t_show_product_version || $t_show_build ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 
 	<!-- ETA -->
@@ -415,7 +415,7 @@
 
 	<td class="category">
 		<?php
-			if ( $t_show_version ) {
+			if ( $t_show_product_version ) {
 				$t_product_version_released_mask = VERSION_RELEASED;
 
 				if (access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
@@ -427,7 +427,7 @@
 	</td>
 	<td>
 		<?php
-			if ( $t_show_version ) {
+			if ( $t_show_product_version ) {
 		?>
 		<select <?php echo helper_get_tab_index() ?> name="fixed_in_version">
 			<?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL ) ?>
@@ -438,7 +438,7 @@
 	</td>
 
 	<!-- Product Version  or Product Build, if version is suppressed -->
-	<?php if ( $t_show_version ) { ?>
+	<?php if ( $t_show_product_version ) { ?>
 	<td class="category">
 		<?php echo lang_get( 'product_version' ); ?>
 	</td>
@@ -463,7 +463,7 @@
 <?php } ?>
 
 <?php
-	if ( $t_show_version ) {
+	if ( $t_show_product_version ) {
 ?>
 
 <tr <?php echo helper_alternate_class() ?>>

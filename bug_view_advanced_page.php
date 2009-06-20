@@ -370,12 +370,37 @@
 	$t_show_eta = config_get( 'enable_eta' );
 	$t_show_build = config_get( 'enable_product_build' );
 
-	$t_show_version = ( ON == config_get( 'show_product_version' ) )
+	$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
 		|| ( ( AUTO == config_get( 'show_product_version' ) )
 			&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
+
+	$t_can_view_roadmap = access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
+
+	if ( $t_show_product_version ) {
+		$t_bug_version_string = $t_bug->version;
+		if ( $t_can_view_roadmap ) {
+			$t_bug_target_version_string = $t_bug->target_version;
+		}
+		$t_bug_fixed_in_version_string = $t_bug->fixed_in_version;
+		if ( config_get( 'show_scheduled_release_dates' ) ) {
+			$t_short_date_format = config_get( 'short_date_format' );
+			$t_version_rows = version_get_all_rows( $t_bug->project_id );
+			foreach ( $t_version_rows as $t_version_row ) {
+				if ( $t_version_row['version'] == $t_bug->version ) {
+					$t_bug_version_string .= ' (' . date( $t_short_date_format, $t_version_row['date_order'] ) . ')';
+				}
+				if ( $t_can_view_roadmap && $t_version_row['version'] == $t_bug->target_version ) {
+					$t_bug_target_version_string .= ' (' . date( $t_short_date_format, $t_version_row['date_order'] ) . ')';
+				}
+				if ( $t_version_row['version'] == $t_bug->fixed_in_version ) {
+					$t_bug_fixed_in_version_string .= ' (' . date( $t_short_date_format, $t_version_row['date_order'] ) . ')';
+				}
+			}
+		}
+	}
 ?>
 
-<?php if ( $t_show_eta || $t_show_version || $t_show_build ) { ?>
+<?php if ( $t_show_eta || $t_show_product_version || $t_show_build ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 
 	<!-- ETA -->
@@ -398,13 +423,13 @@
 
 	<!-- fixed in version -->
 		<?php
-			if ( $t_show_version ) {
+			if ( $t_show_product_version ) {
 		?>
 	<td class="category">
 		<?php echo lang_get( 'fixed_in_version' ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->fixed_in_version ) ?>
+		<?php echo string_display_line( $t_bug_fixed_in_version_string ) ?>
 	</td>
 		<?php
 			} else {
@@ -415,13 +440,13 @@
 		?>
 	<!-- Product Version or Product Build, if version is suppressed -->
 		<?php
-			if ( $t_show_version ) {
+			if ( $t_show_product_version ) {
 		?>
 	<td class="category">
 		<?php echo lang_get( 'product_version' ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->version ) ?>
+		<?php echo string_display_line( $t_bug_version_string ) ?>
 	</td>
 		<?php
 			} else if ( $t_show_build )	{
@@ -443,12 +468,12 @@
 </tr>
 
 <?php
-	if( $t_show_version ) {
+	if( $t_show_product_version ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 
 <?php
-	if ( access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id ) ) {
+	if ( $t_can_view_roadmap ) {
 ?>
 	<!-- spacer -->
 	<td colspan="2">&nbsp;</td>
@@ -458,7 +483,7 @@
 		<?php echo lang_get( 'target_version' ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->target_version ) ?>
+		<?php echo string_display_line( $t_bug_target_version_string ) ?>
 	</td>
 <?php
 	} else {

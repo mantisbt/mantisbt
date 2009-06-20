@@ -297,16 +297,26 @@
 
 	<!-- Product Version -->
 	<?php
-		$t_show_version = ( ON == config_get( 'show_product_version' ) )
+		$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
 			|| ( ( AUTO == config_get( 'show_product_version' ) )
 					&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
-		if ( $t_show_version ) {
+		if ( $t_show_product_version ) {
+			$t_bug_version_string = $t_bug->version;
+			if ( config_get( 'show_scheduled_release_dates' ) ) {
+				$t_short_date_format = config_get( 'short_date_format' );
+				$t_version_rows = version_get_all_rows( $t_bug->project_id );
+				foreach ( $t_version_rows as $t_version_row ) {
+					if ( $t_version_row['version'] == $t_bug->version ) {
+						$t_bug_version_string .= ' (' . date( $t_short_date_format, $t_version_row['date_order'] ) . ')';
+					}
+				}
+			}
 	?>
 	<td class="category">
 		<?php echo lang_get( 'product_version' ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->version ) ?>
+		<?php echo string_display_line( $t_bug_version_string ) ?>
 	</td>
 	<?php
 		} else {

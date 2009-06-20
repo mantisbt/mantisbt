@@ -276,10 +276,10 @@ if ( !$t_finished ) {
 	if ( isset( $t_question_title2 ) ) {
 		switch ( $f_action ) {
 			case 'RESOLVE':
-				$t_show_version = ( ON == config_get( 'show_product_version' ) )
+				$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
 					|| ( ( AUTO == config_get( 'show_product_version' ) )
 								&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
-				if ( $t_show_version ) {
+				if ( $t_show_product_version ) {
 	?>
 		<tr class="row-2">
 			<td class="category">

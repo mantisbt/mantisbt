@@ -318,10 +318,10 @@
 	</tr>
 <?php } ?>
 <?php
-	$t_show_version = ( ON == config_get( 'show_product_version' ) )
+	$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
 			|| ( ( AUTO == config_get( 'show_product_version' ) )
 						&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
-	if ( $t_show_version ) {
+	if ( $t_show_product_version ) {
 		$t_product_version_released_mask = VERSION_RELEASED;
 
 		if (access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
@@ -369,7 +369,7 @@
 	</tr>
 <?php } ?>
 <?php // Target Version (if permissions allow)
-	if ( $t_show_version && access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) { ?>
+	if ( $t_show_product_version && access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) { ?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php echo lang_get( 'target_version' ) ?>
