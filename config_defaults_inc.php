@@ -950,11 +950,13 @@
 	$g_show_product_version = AUTO;
 
 	/**
-	 * Show scheduled date of release for product versions. Dates will be shown
-	 * next to the product version, target version and fixed in version fields.
-	 * @global int $g_show_scheduled_release_dates
+	 * The access level threshold at which users will see the date of release
+	 * for product versions. Dates will be shown next to the product version,
+	 * target version and fixed in version fields. Set this threshold to NOBODY
+	 * to disable the feature.
+	 * @global int $g_show_version_dates_threshold
 	 */
-	$g_show_scheduled_release_dates = OFF;
+	$g_show_version_dates_threshold = NOBODY;
 
 	/**
 	 * show users with their real name or not

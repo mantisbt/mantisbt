@@ -382,7 +382,7 @@
 			$t_bug_target_version_string = $t_bug->target_version;
 		}
 		$t_bug_fixed_in_version_string = $t_bug->fixed_in_version;
-		if ( config_get( 'show_scheduled_release_dates' ) ) {
+		if ( access_has_bug_level( config_get( 'show_version_dates_threshold' ), $f_bug_id ) ) {
 			$t_short_date_format = config_get( 'short_date_format' );
 			$t_version_rows = version_get_all_rows( $t_bug->project_id );
 			foreach ( $t_version_rows as $t_version_row ) {

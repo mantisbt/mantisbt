@@ -779,7 +779,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 
 	$t_listed = array();
 	$t_max_length = config_get( 'max_dropdown_length' );
-	$t_show_scheduled_release_dates = config_get( 'show_scheduled_release_dates' );
+	$t_show_version_dates = access_has_project_level( config_get( 'show_version_dates_threshold' ) );
 	$t_short_date_format = config_get( 'short_date_format' );
 
 	foreach( $versions as $version ) {
@@ -798,7 +798,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 			echo '<option value="' . $t_version . '"';
 			check_selected( $p_version, $t_version );
 			$t_version_string = $t_version;
-			if( $t_show_scheduled_release_dates ) {
+			if( $t_show_version_dates ) {
 				$t_version_string .= ' (' . date( $t_short_date_format, $version['date_order'] ) . ')';
 			}
 			echo '>', string_shorten( $t_version_string , $t_max_length ), '</option>';
