@@ -2126,7 +2126,12 @@
 	$g_manage_site_threshold = MANAGER;
 
 	/**
-	 * Site admin
+	 * Threshold at which a user is considered to be a site administrator.
+	 * These users have "superuser" access to all aspects of Mantis including
+	 * the admin/ directory. WARNING: DO NOT CHANGE THIS VALUE UNLESS YOU
+	 * ABSOLUTELY KNOW WHAT YOU'RE DOING! Users at this access level have the
+	 * ability to damage your Mantis installation and data within the database.
+	 * It is strongly advised you leave this option alone.
 	 * @global int $g_admin_site_threshold
 	 */
 	$g_admin_site_threshold = ADMINISTRATOR;

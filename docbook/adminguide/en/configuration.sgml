@@ -2146,8 +2146,37 @@
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry>
+                <term>$g_admin_site_threshold</term>
+                <listitem>
+                    <para>Threshold at which a user is considered to be a site
+                        administrator. These users have the highest level of
+                        access to your Mantis installation. This access level
+                        is required to change key Mantis settings (such as
+                        server paths) and perform other administrative duties.
+                        You may need to change this value from the default of
+                        ADMINISTRATOR if you have defined a new access level
+                        to replace the default ADMINISTRATOR level in
+                        constant_inc.php.
+                    </para>
+                    <warning>
+                        <para>This is a potentially dangerous configuration
+                            option. Users at or above this threshold value will
+                            have permission to all aspects of Mantis including
+                            the admin/ directory. With this access level, users
+                            can damage your installation of Mantis, destroy
+                            your database or have elevated access to your
+                            server.
+                        </para>
+                        <para>DO NOT CHANGE THIS VALUE UNLESS YOU ABSOLUTELY
+                            KNOW WHAT YOU'RE DOING. BE VERY CAREFUL WITH
+                            CHANGING THIS CONFIGURATION VALUE FROM THE DEFAULT
+                            SETTING.
+                        </para>
+                    </warning>
+                </listitem>
+            </varlistentry>
         </variablelist>
-
     </section>
 
 
