@@ -182,7 +182,7 @@ class MantisEnum {
 	 * @return array array of num:value elements
 	 */
 	private static function getArrayOfTuples( $enumString ) {
-		if ( is_blank( $enumString ) ) {
+		if ( strlen( trim( $enumString ) ) == 0 ) {
 			return array();
 		}
 
