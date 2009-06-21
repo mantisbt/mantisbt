@@ -109,7 +109,7 @@
 	if ( config_get( 'allow_file_upload' ) ) {
 		$t_default_upload_path = '';
 		# Don't reveal the absolute path to non-administrators for security reasons
-		if ( current_user_is_administrator ) {
+		if ( current_user_is_administrator() ) {
 			$t_default_upload_path = config_get( 'absolute_path_default_upload_folder' );
 		}
 	?>

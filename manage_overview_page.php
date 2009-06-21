@@ -55,7 +55,10 @@
 <td></td>
 </tr>
 
-<?php if ( current_user_is_administrator() ) { ?>
+<?php
+	$t_is_admin = current_user_is_administrator(); 
+	if ( $t_is_admin ) {
+?>
 <tr <?php echo helper_alternate_class() ?>>
 <td class="category"><?php echo lang_get( 'site_path' ) ?></td>
 <td><?php echo config_get( 'absolute_path' ) ?></td>
