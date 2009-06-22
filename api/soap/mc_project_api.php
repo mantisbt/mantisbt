@@ -51,7 +51,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 		$t_issue['date_submitted'] = timestamp_to_iso8601( $t_issue_data->date_submitted );
 		$t_issue['sponsorship_total'] = $t_issue_data->sponsorship_total;
 
-		if( !empty( $t_issue_data['handler_id'] ) ) {
+		if( !empty( $t_issue_data->handler_id ) ) {
 			$t_issue['handler'] = mci_account_get_array_by_id( $t_issue_data->handler_id );
 		}
 		$t_issue['projection'] = mci_enum_get_array_by_id( $t_issue_data->projection, 'projection', $t_lang );
