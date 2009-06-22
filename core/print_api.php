@@ -1773,6 +1773,11 @@ document.getElementById( span ).style.display = displayType;
 # --------------------
 # Print the option list for timezones
 function print_timezone_option_list( $p_timezone ) {
+	if ( !function_exists( 'timezone_identifiers_list' ) ) {
+		echo '<option value="', $p_timezone, '" selected="selected">', $p_timezone, '</option>';
+		return;
+	}
+
 	$t_identifiers = timezone_identifiers_list();
 
 	foreach ( $t_identifiers as $t_identifier )
