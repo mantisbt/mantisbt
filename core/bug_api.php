@@ -327,7 +327,7 @@ class BugData {
 		}
 
 		# Check if bug was pre-assigned or auto-assigned.
-		if( ( $c_handler_id != 0 ) && ( $c_status == $t_starting_status ) && ( ON == config_get( 'auto_set_status_to_assigned' ) ) ) {
+		if( ( $this->handler_id != 0 ) && ( $this->status == $t_starting_status ) && ( ON == config_get( 'auto_set_status_to_assigned' ) ) ) {
 			$t_status = config_get( 'bug_assigned_status' );
 		} else {
 			$t_status = $this->status;
