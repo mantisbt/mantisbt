@@ -1,0 +1,70 @@
+MantisBT Release Notes
+
+1.2.0 Release Candidate 1
+-------------------------------------------------
+
+This release marks the first "stable" release in the 1.2.x series of MantisBT.
+The 1.2.x series is now officially feature complete, and this build is ready
+for official testing in non-critical installations.  This release is a good
+representation of a final 1.2.0 build.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+There are many new features added to 1.2.x, including:
+
+ - Converted the MantisBT Manual to Docbook format, and added a new Developer's
+   Guide manual, both of which are compiled and included in every release.
+
+ - Implemented a plugin system with many plugins already released [2]
+
+ - Global categories available to all projects, as well as project categories
+   inheriting from parent projects to child projects;  both are optional
+
+ - Tracked change history for textarea fields (Description, etc) and bug notes
+
+ - Customizable sets of columns for View Issues page and export formats
+
+ - Improved roadmap and changelog pages, including version release dates, and
+   permalinks to individual versions
+
+ - Marking versions as obsolete to hide them from the roadmap and changelog
+
+ - More configuration options for rebranding MantisBT installations
+
+ - Improved support for PostgreSQL databases
+
+ - Improved support for UTF-8 localizations and content
+
+ - Implemented custom search providers for Firefox and Internet Explorer
+
+ - Implemented localized timestamps using according to user-preferred timezones
+
+
+There have also been many improvements to the codebase beyond adding features:
+
+ - Migrated to parameterised database queries throughout the codebase for both
+   performance and security improvements
+
+ - Added PHPDoc compatible documentation to all internal API's
+
+ - Removed many hardcoded references to access levels and other enumerations,
+   for improved customizability.
+
+ - Migrated away from DATETIME fields to integer timestamps for timezone usage
+
+ - All 3rd party code is now contained within the library/ path, including
+   documentation on library versions and any patches applied
+
+
+[1] The changelog is split between multiple releases:
+
+    1.2.0a1    http://www.mantisbt.org/bugs/changelog_page.php?version_id=89
+    1.2.0a2    http://www.mantisbt.org/bugs/changelog_page.php?version_id=96
+    1.2.0a3    http://www.mantisbt.org/bugs/changelog_page.php?version_id=104
+    1.2.0rc1   http://www.mantisbt.org/bugs/changelog_page.php?version_id=98
+
+[2] MantisForge is now the preferred code collaboration site for MantisBT,
+    including free hosting of MantisBT-related Git repositories for development
+    of contributions to MantisBT itself or community plugins.
+
+    http://git.mantisforge.org/
