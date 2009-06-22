@@ -79,7 +79,6 @@
 
 	# Need to send the user creation mail in the tracker language, not in the creating admin's language
 	# Park the current language name until the user has been created
-	$user_language = $t_lang;
 	lang_push( config_get( 'default_language' ) );
 
 	# create the user
@@ -87,7 +86,7 @@
 	$t_cookie = user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled, $t_realname, $t_admin_name );
 
 	# set language back to user language
-	lang_push( $user_language );
+	lang_pop();
 
 	form_security_purge( 'manage_user_create' );
 
