@@ -82,11 +82,11 @@ $ git clone git@mantisbt.org:mantisbt.git
 			planning to work with stable release branches, or other development
 			branches, you will need to set up local tracking branches in your
 			repository.  The following commands will set up a tracking branch for the
-			current stable branch, <literal>master-1.1.x</literal>.
+			current stable branch, <literal>master-1.2.x</literal>.
 		</para>
 
 		<programlisting>
-$ git checkout -b master-1.1.x origin/master-1.1.x
+$ git checkout -b master-1.2.x origin/master-1.2.x
 		</programlisting>
 
 	</sect1>
@@ -98,7 +98,7 @@ $ git checkout -b master-1.1.x origin/master-1.1.x
 			In order to keep your local repository up to date with the official,
 			there are a few simple commands needed for any tracking branches that you
 			may have, including <literal>master</literal> and
-			<literal>master-1.1.x</literal>.
+			<literal>master-1.2.x</literal>.
 		</para>
 
 		<para>
