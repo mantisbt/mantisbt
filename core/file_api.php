@@ -525,9 +525,7 @@ function file_type_check( $p_file_name ) {
 	$t_disallowed_files = config_get( 'disallowed_files' );;
 
 	# grab extension
-	$t_ext_array = explode( '.', $p_file_name );
-	$last_position = count( $t_ext_array ) - 1;
-	$t_extension = $t_ext_array[$last_position];
+	$t_extension = file_get_extension( $p_file_name );
 
 	# check against disallowed files
 	$t_disallowed_arr = explode( ',', $t_disallowed_files );
@@ -838,27 +836,16 @@ function file_ensure_uploaded( $p_file ) {
 
 # Get extension given the filename or its full path.
 function file_get_extension( $p_filename ) {
-	$ext = '';
-	$dot_found = false;
-	$i = utf8_strlen( $p_filename ) - 1;
-	while( $i >= 0 ) {
-		if( '.' == $p_filename[$i] ) {
-			$dot_found = true;
-			break;
-		}
-
-		# found a directory marker before a period.
-		if(( $p_filename[$i] == "/" ) || ( $p_filename[$i] == "\\" ) ) {
-			return '';
-		}
-
-		$ext = $p_filename[$i] . $ext;
-		$i--;
+	$t_extension = '';
+	$t_basename = $p_filename;
+	if( utf8_strpos( $t_basename, '/' ) !== false ) {
+		$t_basename = end( explode( '/', $t_basename ) );
 	}
-
-	if( $dot_found ) {
-		return $ext;
-	} else {
-		return '';
+	if( utf8_strpos( $t_basename, '\\' ) !== false ) {
+		$t_basename = end( explode( '\\', $t_basename ) );
 	}
+	if( utf8_strpos( $t_basename, '.' ) !== false ) {
+		$t_extension = end( explode( '.', $t_basename ) );
+	}
+	return $t_extension;
 }
