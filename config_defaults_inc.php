@@ -2317,6 +2317,12 @@
 	$g_enable_eta = ON;
 
 	/**
+	 * Enable or disable display of the Projection field.
+	 * @global int $g_enable_projection
+	 */
+	$g_enable_projection = ON;
+
+	/**
 	 * Enable or disable display of the Product Build field.
 	 * @global int $g_enable_product_build
 	 */

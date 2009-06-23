@@ -341,9 +341,13 @@
 
 </tr>
 
-
+<?php
+	$t_show_projection = config_get( 'enable_projection' );
+	if( $t_show_projection || $t_show_profiles ) {
+?>
 <tr <?php echo helper_alternate_class() ?>>
 
+	<?php if( $t_show_projection ) { ?>
 	<!-- Projection -->
 	<td class="category">
 		<?php echo lang_get( 'projection' ) ?>
@@ -353,6 +357,9 @@
 			<?php print_enum_string_option_list( 'projection', $t_bug->projection ) ?>
 		</select>
 	</td>
+	<?php } else { ?>
+	<td colspan="2"></td>
+	<?php } ?>
 
 	<!-- spacer -->
 	<td colspan="2">&nbsp;</td>
@@ -383,6 +390,7 @@
 	<?php } ?>
 
 </tr>
+<?php } ?>
 
 
 <?php
