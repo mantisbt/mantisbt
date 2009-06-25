@@ -2379,14 +2379,22 @@
 	$g_allow_account_delete		= OFF;
 
 	/**
-	 * anonymous login
-	 * Allow anonymous login
+	 * Enable anonymous access to Mantis. You must also specify
+	 * $g_anonymous_account as the account which anonymous users will browse
+	 * Mantis with. The default setting is OFF.
 	 * @global int $g_allow_anonymous_login
 	 */
 	$g_allow_anonymous_login	= OFF;
 
 	/**
-	 *
+	 * Define the account which anonymous users will assume when using Mantis.
+	 * You only need to define this setting when $g_allow_anonymous_login is
+	 * set to ON. This account will always be treated as a protected account
+	 * and thus anonymous users will not be able to update the preferences or
+	 * settings of this account. It is suggested that the access level of this
+	 * account have read only access to your Mantis installation (VIEWER).
+	 * Please read the documentation on this topic before setting up anonymous
+	 * access to your Mantis installation.
 	 * @global string $g_anonymous_account
 	 */
 	$g_anonymous_account		= '';

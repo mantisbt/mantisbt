@@ -2077,14 +2077,36 @@
             <varlistentry>
                 <term>$g_allow_anonymous_login</term>
                 <listitem>
-                    <para>Allow easy anonymous access.</para>
+                    <para>Enable anonymous access to Mantis. You must also
+                        specify $g_anonymous_account as the account which
+                        anonymous users will browse Mantis with. The default
+                        setting is OFF.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
                 <term>$g_anonymous_account</term>
                 <listitem>
-                    <para>Set the account that users will login as. Make sure this is
-                        a viewer or reporter account.
+                    <para>Define the account which anonymous users will assume
+                        when using Mantis. This account is considered by Mantis
+                        to be protected from modification. In other words, this
+                        account can only be modified by users with an access
+                        level equal to or higher than $g_manage_user_threshold.
+                        Anonymous users will not be able to adjust preferences
+                        or change account settings like normal users can.
+                    </para>
+                    <para>You will need to create a new account to use for this
+                        $g_anonymous_account setting. When creating the account
+                        you should specify a password, email address and so
+                        forth in the same way you'd create any other account.
+                        It is suggested that the access level for this account
+                        be set to VIEWER or some other read only level.
+                    </para>
+                    <para>The anonymous user account will not receive standard
+                        notifications and can not monitor issues.
+                    </para>
+                    <para>The default setting is blank/undefined. You only need
+                        to define this setting when $g_allow_anonymous_login
+                        is set to ON.
                     </para>
                 </listitem>
             </varlistentry>

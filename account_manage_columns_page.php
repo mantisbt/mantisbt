@@ -35,10 +35,7 @@
 	# Define constant that will be checked by the include page.
 	define ( 'ACCOUNT_COLUMNS', '' );
 
-	# Anonymous / Protected users must not be able to customize the columns associated with the shared account.
-	if ( current_user_is_anonymous() || current_user_is_protected() ) {
-		access_denied();
-	}
+	current_user_ensure_unprotected();
 
 	include ( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'manage_columns_inc.php' );
 

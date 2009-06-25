@@ -91,7 +91,7 @@ function access_denied() {
 			print_header_redirect( 'login_page.php' . '?return=' . $t_return_page );
 		}
 	} else {
-		if( auth_get_current_user_id() == user_get_id_by_name( config_get_global( 'anonymous_account' ) ) ) {
+		if( current_user_is_anonymous() ) {
 			if( basename( $_SERVER['SCRIPT_NAME'] ) != 'login_page.php' ) {
 				$t_return_page = $_SERVER['PHP_SELF'];
 				if( isset( $_SERVER['QUERY_STRING'] ) ) {
