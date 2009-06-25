@@ -51,7 +51,19 @@
 
 	auth_ensure_user_authenticated();
 
-	user_ensure_unprotected( $f_user_id );
+	user_ensure_exists( $f_user_id );
+
+	# This page is currently called from the manage_* namespace and thus we
+	# have to allow authorised users to update the accounts of other users.
+	# TODO: split this functionality into manage_user_prefs_reset.php
+	if ( auth_get_current_user_id() != $f_user_id ) {
+		access_ensure_global_level( config_get( 'manage_user_threshold' ) );
+	} else {
+		# Protected users should not be able to update the preferences of their
+		# user account. The anonymous user is always considered a protected
+		# user and hence will also not be allowed to update preferences.
+		user_ensure_unprotected( $f_user_id );
+	}
 
 	user_pref_delete( $f_user_id );
 

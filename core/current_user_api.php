@@ -154,9 +154,10 @@ function current_user_is_administrator() {
 }
 
 /**
- * Returns true if the currently logged in user protected, false otherwise
+ * Returns true if the current user is a protected user, false otherwise.
+ * The $g_anonymous_account user is always considered protected.
  *
- * @return true: user protected; false: otherwise.
+ * @return true: user is protected; false: otherwise.
  * @access public
  */
 function current_user_is_protected() {
@@ -164,21 +165,18 @@ function current_user_is_protected() {
 }
 
 /**
- * Returns true if the currently user is the anonymous user
+ * Returns true if the current user is the anonymous user.
  *
- * @return true: user anonymous; false: otherwise.
+ * @return true: user is anonymous; false: otherwise.
  * @access public
  */
 function current_user_is_anonymous() {
-	if( auth_is_user_authenticated() ) {
-		return(( ON == config_get( 'allow_anonymous_login' ) ) && ( current_user_get_field( 'username' ) == config_get( 'anonymous_account' ) ) );
-	} else {
-		return false;
-	}
+	return user_is_anonymous( auth_get_current_user_id() );
 }
 
 /**
- * Triggers an ERROR if the current user account is protected
+ * Triggers an ERROR if the current user account is protected.
+ * The $g_anonymous_account user is always considered protected.
  *
  * @access public
  */

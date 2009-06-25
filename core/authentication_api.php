@@ -213,11 +213,8 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 		return false;
 	}
 
-	$t_anon_account = config_get( 'anonymous_account' );
-	$t_anon_allowed = config_get( 'allow_anonymous_login' );
-
 	# check for anonymous login
-	if( !(( ON == $t_anon_allowed ) && ( $t_anon_account == $p_username ) ) ) {
+	if( !user_is_anonymous( $t_user_id ) ) {
 		# anonymous login didn't work, so check the password
 
 		if( !auth_does_password_match( $t_user_id, $p_password ) ) {

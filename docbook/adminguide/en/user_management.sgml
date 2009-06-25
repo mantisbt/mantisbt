@@ -59,6 +59,13 @@
 	that the account is a shared account (e.g. demo account) and hence users
 	logged using such account will not be allowed to change account
 	preferences and profile information.</para>
+
+	<para>The anonymous user account specified with the $g_anonymous_account
+	option will always be treated as a protected user account. When you are
+	creating the anonymous user account, the 'Protected' flag is essentially
+	ignored because the anonymous user is always treated as a protected
+	user.</para>
+
     </section>
 
     <section>

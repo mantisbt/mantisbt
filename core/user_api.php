@@ -345,14 +345,37 @@ function user_is_administrator( $p_user_id ) {
 	}
 }
 
-# --------------------
-# return true is the user account is protected, false otherwise
+/*
+ * Check if a user has a protected user account.
+ * Protected user accounts cannot be updated without manage_user_threshold
+ * permission. If the user ID supplied is that of the anonymous user, this
+ * function will always return true. The anonymous user account is always
+ * considered to be protected.
+ *
+ * @param int $p_user_id
+ * @return true: user is protected; false: user is not protected.
+ * @access public
+ */
 function user_is_protected( $p_user_id ) {
-	if( ON == user_get_field( $p_user_id, 'protected' ) ) {
+	if( !user_is_anonymous( $p_user_id ) && ON == user_get_field( $p_user_id, 'protected' ) ) {
 		return true;
-	} else {
-		return false;
 	}
+	return false;
+}
+
+/*
+ * Check if a user is the anonymous user account.
+ * When anonymous logins are disabled this function will always return false.
+ *
+ * @param int $p_user_id
+ * @return true: user is the anonymous user; false: user is not the anonymous user.
+ * @access public
+ */
+function user_is_anonymous( $p_user_id ) {
+	if( ON == config_get( 'allow_anonymous_login' ) && user_get_field( 'username' ) == config_get( 'anonymous_account' ) ) {
+		return true;
+	}
+	return false;
 }
 
 # --------------------
