@@ -31,7 +31,7 @@
 
 	require_once( 'email_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'account_sponsor_update' );
 
 	auth_ensure_user_authenticated();
 
@@ -54,6 +54,8 @@
 			sponsorship_update_paid( $t_sponsor_id, $t_new_payment );
 		}
 	}
+
+	form_security_purge( 'account_sponsor_update' );
 
 	$t_redirect = 'account_sponsor_page.php';
 	html_page_top( null, $t_redirect );
