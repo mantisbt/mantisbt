@@ -32,11 +32,7 @@
 $s_plugin_XmlImportExport_title = 'Issues
 Empotteeere un Expoteeere';
 $s_plugin_XmlImportExport_description = 'Deiht ene Empoot un Expoot op däm Fommaat XML för Datteije en dä MantisBT dobei.';
-$s_plugin_XmlImportExport_import = 'Issues
-Empotteeere';
 $s_plugin_XmlImportExport_export = 'Expoot em XML Fommaat';
-$s_plugin_XmlImportExport_importing_in_project = 'Issues
-empotteeere en dat Projäk:';
 $s_plugin_XmlImportExport_import_options = 'Ußwahle empotteeere';
 $s_plugin_XmlImportExport_cross_references = '
 Cross references';

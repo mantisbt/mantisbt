@@ -26,6 +26,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Aotake
  * @author Fryed-peach
  */
 
@@ -34,5 +35,7 @@ $s_plugin_format_description = '公式なテキスト・プロセッシングお
 $s_plugin_format_config = '設定';
 $s_plugin_format_process_text = 'テキスト・プロセッシング';
 $s_plugin_format_process_urls = 'URLプロセッシング';
+$s_plugin_format_process_buglinks = 'MantisBTリンク ( チケット/チケットノート )';
+$s_plugin_format_process_vcslinks = 'VCSリンク';
 $s_plugin_format_enabled = '入';
 $s_plugin_format_disabled = '切';

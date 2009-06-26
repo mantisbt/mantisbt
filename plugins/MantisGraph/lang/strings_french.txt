@@ -43,5 +43,6 @@ $s_plugin_MantisGraph_resolution_link = 'Par résolution';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Graphique';
 $s_plugin_MantisGraph_library = 'Bibliothèque de graphiques';
 $s_plugin_MantisGraph_bundled = 'Utiliser la bibliothèque fournie avec le plugin';
+$s_plugin_MantisGraph_jpgraph_antialias = 'JPGRAPH SEULEMENT : anti-alias. Ceci améliorera l\'apparence visuelle de certains graphiques. Note : utiliser l\'anti-alias fera que le dessim des lignes sera environ 8 fois plus lent.';
 $s_plugin_MantisGraph_enabled = 'Activé';
 $s_plugin_MantisGraph_disabled = 'Désactivé';
