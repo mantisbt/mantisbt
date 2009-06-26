@@ -85,11 +85,6 @@
 	$t_prefs->bugnote_order = gpc_get_string( 'bugnote_order' );
 	$t_prefs->email_bugnote_limit = gpc_get_int( 'email_bugnote_limit' );
 
-	# prevent users from changing other user's accounts
-	if ( $f_user_id != auth_get_current_user_id() ) {
-		access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
-	}
-
 	# make sure the delay isn't too low
 	if (( config_get( 'min_refresh_delay' ) > $t_prefs->refresh_delay )&&
 		( $t_prefs->refresh_delay != 0 )) {
