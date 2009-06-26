@@ -49,9 +49,6 @@ require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR
  */
 if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constants_inc.php' ) ) {
 	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constants_inc.php' );
-# Check for the old name of the user-defined constants file (to be deprecated in 1.3)
-} else if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' ) ) {
-	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' );
 }
 
 $t_config_inc_found = false;
