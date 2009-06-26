@@ -320,6 +320,7 @@
 
 <div class="border center">
 	<form method="post" action="account_prefs_reset.php">
+	<?php echo form_security_field( 'account_prefs_reset' ) ?>
 	<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
 	<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
 	<input type="submit" class="button" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />

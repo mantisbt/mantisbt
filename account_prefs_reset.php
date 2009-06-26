@@ -47,7 +47,7 @@
 	$f_redirect_url	= gpc_get_string( 'redirect_url', 'account_prefs_page.php' );
 
 	#============ Permissions ============
-	# helper_ensure_post();
+	form_security_validate( 'account_prefs_reset' );
 
 	auth_ensure_user_authenticated();
 
@@ -66,5 +66,7 @@
 	}
 
 	user_pref_delete( $f_user_id );
+
+	form_security_purge( 'account_prefs_reset' );
 
 	print_header_redirect( $f_redirect_url, true, true );
