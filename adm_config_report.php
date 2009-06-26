@@ -164,6 +164,7 @@
 <br />
 <!-- Config Set Form -->
 <form method="post" action="adm_config_set.php">
+<?php echo form_security_field( 'adm_config_set' ) ?>
 <table class="width100" cellspacing="1">
 
 <!-- Title -->

@@ -27,7 +27,7 @@
 	  */
 	require_once( 'core.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'adm_config_set' );
 
 	$f_user_id = gpc_get_int( 'user_id' );
 	$f_project_id = gpc_get_int( 'project_id' );
@@ -105,6 +105,8 @@
 	}
 
 	config_set( $f_config_option, $t_value, $f_user_id, $f_project_id );
+
+	form_security_purge( 'adm_config_set' );
 
 	print_successful_redirect( 'adm_config_report.php' );
 
