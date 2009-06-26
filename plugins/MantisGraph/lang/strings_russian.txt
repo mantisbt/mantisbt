@@ -1,0 +1,48 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Russian (Русский)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Kirill
+ */
+
+$s_plugin_graph_title = 'Графики для MantisBT';
+$s_plugin_graph_description = 'Официальный плагин MantisBT для отображения графиков.';
+$s_plugin_MantisGraph_title = 'Графики MantisBT';
+$s_plugin_MantisGraph_menu_advanced_summary = 'общие графики';
+$s_plugin_MantisGraph_config = 'настройка';
+$s_plugin_MantisGraph_synthesis_link = 'Сумарно';
+$s_plugin_MantisGraph_status_link = 'По статусу';
+$s_plugin_MantisGraph_priority_link = 'По приоритету';
+$s_plugin_MantisGraph_severity_link = 'По серьезности';
+$s_plugin_MantisGraph_category_link = 'По категориям';
+$s_plugin_MantisGraph_resolution_link = 'По решению';
+$s_plugin_MantisGraph_graph_bug_page_link = 'графики';
+$s_plugin_MantisGraph_library = 'Графическая библиотека';
+$s_plugin_MantisGraph_bundled = 'Использовать встроенную (JpGraph)';
+$s_plugin_MantisGraph_jpgraph_antialias = 'ТОЛЬКО ДЛЯ JPGRAPH: сглаживание. Улучшает визуальное представление определенных графиков. Внимание: Используя сглаживание, Вы замедляете формирование графиков приблизительно в 8 раз.';
+$s_plugin_MantisGraph_enabled = 'вкл';
+$s_plugin_MantisGraph_disabled = 'выкл';

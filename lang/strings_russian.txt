@@ -31,6 +31,7 @@
  * @author Alexander Leschinsky aml@lair.pp.ru
  * @author Alexey Chumakov alex@chumakov.ru
  * @author Amdei
+ * @author Ferrer
  * @author Kirill
  * @author Mikhail Oleynik (MiTo Team), m.oleynik@gmail.com
  * @author Oleg Gashev gashev@zahav.net.il
@@ -787,6 +788,7 @@ $s_version_updated_msg = 'Версия изменена...';
 $s_account_delete_protected_msg = 'Учетная запись защищена. Удаление невозможно.';
 $s_account_deleted_msg = 'Учетная запись удалена...';
 $s_delete_account_sure_msg = 'Вы уверены, что хотите удалить эту учетную запись?';
+$s_notify_user = 'Уведомить пользователя';
 $s_accounts_pruned_msg = 'Все пользователи, ни разу не входившие в систему, чьи учетные записи заведены более недели назад, удалены';
 $s_prune_accounts_button = 'Очистить';
 $s_confirm_account_pruning = 'Вы уверены, что хотите удалить старые неиспользовавшиеся учетные записи?';
@@ -803,6 +805,8 @@ $s_account_reset_msg = 'По адресу электронной почты ук
 $s_account_reset_msg2 = 'Пароль к учетной записи установлен пустым...';
 $s_manage_user_protected_msg = 'Учетная запись защищена. Уровень доступа и признак активности заблокированы. Все остальные данные изменены...';
 $s_manage_user_updated_msg = 'Учетная запись изменена ...';
+$s_email_user_updated_subject = 'Учётная запись обновлена';
+$s_email_user_updated_msg = 'Ваша учётная запись была обновлена администратором. Список изменений находится ниже. Вы можете обновить подробности и настройки вашей учётной записи в любое время, посетив следующий URL:';
 $s_main_link = 'главная';
 $s_view_bugs_link = 'список инцидентов';
 $s_report_bug_link = 'создать инцидент';

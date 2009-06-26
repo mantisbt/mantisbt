@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Ripoarisch (Ripoarisch)
+/** Norwegian (bokmål)‬ (‪Norsk (bokmål)‬)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,15 +26,20 @@
  * @ingroup Language
  * @file
  *
- * @author Purodha
+ * @author Nghtwlkr
  */
 
-$s_plugin_format_title = 'MantisBT Fommatteeerung';
-$s_plugin_format_description = 'Dat offizjälle Zohsatzprojramm zom enshtöpselle för de Täx ze beärbeide un ze fommatteeere';
-$s_plugin_format_config = 'Enshtellunge';
-$s_plugin_format_process_text = 'Et Täx Beärrbeejde';
-$s_plugin_format_process_urls = 'Et <i lang="en">URL</i> Beärrbeejde';
-$s_plugin_format_process_buglinks = 'MantisBT Lenks ( Saach/Issuenote )';
-$s_plugin_format_process_vcslinks = '<i lang="en">VCS</i> Lengks';
-$s_plugin_format_enabled = 'Aanjeschalldt';
-$s_plugin_format_disabled = 'Ußjeschalldt';
+$s_plugin_graph_title = 'Mantis Grafer';
+$s_plugin_graph_description = 'Offisiell grafutvidelse.';
+$s_plugin_MantisGraph_title = 'Mantis Grafer';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Avansert Oppsummering';
+$s_plugin_MantisGraph_config = 'Konfigurasjon';
+$s_plugin_MantisGraph_status_link = 'Per tilstand';
+$s_plugin_MantisGraph_priority_link = 'Per prioritet';
+$s_plugin_MantisGraph_severity_link = 'Per alvorlighetsgrad';
+$s_plugin_MantisGraph_category_link = 'Per kategori';
+$s_plugin_MantisGraph_resolution_link = 'Per løsningsstatus';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Graf';
+$s_plugin_MantisGraph_library = 'Graf Bibliotek';
+$s_plugin_MantisGraph_enabled = 'På';
+$s_plugin_MantisGraph_disabled = 'Av';
