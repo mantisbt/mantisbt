@@ -372,7 +372,7 @@ function user_is_protected( $p_user_id ) {
  * @access public
  */
 function user_is_anonymous( $p_user_id ) {
-	if( ON == config_get( 'allow_anonymous_login' ) && user_get_field( 'username' ) == config_get( 'anonymous_account' ) ) {
+	if( ON == config_get( 'allow_anonymous_login' ) && user_get_field( $p_user_id, 'username' ) == config_get( 'anonymous_account' ) ) {
 		return true;
 	}
 	return false;
