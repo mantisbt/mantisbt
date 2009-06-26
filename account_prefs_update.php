@@ -28,7 +28,7 @@
 
 	require_once( 'user_pref_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'account_prefs_update' );
 
 	auth_ensure_user_authenticated();
 
@@ -105,6 +105,8 @@
 	event_signal( 'EVENT_ACCOUNT_PREF_UPDATE', array( $f_user_id ) );
 
 	user_pref_set( $f_user_id, $t_prefs );
+
+	form_security_purge( 'account_prefs_update' );
 
 	html_page_top( null, $f_redirect_url );
 
