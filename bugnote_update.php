@@ -31,6 +31,8 @@
 	require_once( 'bugnote_api.php' );
 	require_once( 'current_user_api.php' );
 
+	form_security_validate( 'bugnote_update' );
+
 	$f_bugnote_id	 = gpc_get_int( 'bugnote_id' );
 	$f_bugnote_text	 = gpc_get_string( 'bugnote_text', '' );
 	$f_time_tracking = gpc_get_string( 'time_tracking', '0:00' );
@@ -57,5 +59,7 @@
 
 	# Plugin integration
 	event_signal( 'EVENT_BUGNOTE_EDIT', array( $t_bug_id, $f_bugnote_id ) );
+
+	form_security_purge( 'bugnote_update' );
 
 	print_successful_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
