@@ -29,7 +29,7 @@
 
 	require_once( 'file_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'bug_file_add' );
 
 	$f_bug_id	= gpc_get_int( 'bug_id', -1 );
 	$f_file		= gpc_get_file( 'file', -1 );
@@ -53,6 +53,8 @@
 	}
 
 	file_add( $f_bug_id, $f_file, 'bug' );
+
+	form_security_purge( 'bug_file_add' );
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = string_get_bug_view_url( $f_bug_id );
