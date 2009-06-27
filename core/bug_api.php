@@ -194,6 +194,13 @@ class BugData {
 	public function __get($name) {
 		return $this->{$name};
 	}
+	
+	/**
+	 * @private
+	 */
+	public function __isset($name) {	
+		return isset( $this->{$name} );
+	}
 
 	/**
 	 * fast-load database row into bugobject
