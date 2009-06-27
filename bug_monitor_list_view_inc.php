@@ -75,6 +75,7 @@
  		echo '<br /><br />', lang_get( 'username' );
 ?>
  		<form method="get" action="bug_monitor.php">
+		<?php echo form_security_field( 'bug_monitor' ) ?>
  			<input type="hidden" name="bug_id" value="<?php echo (integer)$f_bug_id; ?>" />
  			<input type="hidden" name="action" value="add" />
  			<input type="text" name="username" />

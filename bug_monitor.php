@@ -29,7 +29,7 @@
 
 	require_once( 'bug_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'bug_monitor' );
 
 	$f_bug_id	= gpc_get_int( 'bug_id' );
 	$t_bug = bug_get( $f_bug_id, true );
@@ -66,5 +66,7 @@
 	} else { # should be 'add' but we have to account for other values
 		bug_monitor( $f_bug_id, $t_user_id );
 	}
+
+	form_security_purge( 'bug_monitor' );
 
 	print_successful_redirect_to_bug( $f_bug_id );
