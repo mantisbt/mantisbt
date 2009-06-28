@@ -738,7 +738,7 @@ function print_column_title_additional_information( $p_sort, $p_dir, $p_columns_
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -771,7 +771,7 @@ function print_column_title_plugin( $p_column_object, $p_sort, $p_dir, $p_column
 /**
  * Print custom column content for a specific bug.
  * @param object Column object
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @access public
  */
@@ -787,7 +787,7 @@ function print_column_plugin( $p_column_object, $p_bug, $p_columns_target = COLU
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -830,7 +830,7 @@ function print_column_edit( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -847,7 +847,7 @@ function print_column_priority( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -860,7 +860,7 @@ function print_column_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE )
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -878,7 +878,7 @@ function print_column_sponsorship_total( $p_bug, $p_columns_target = COLUMNS_TAR
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -913,7 +913,7 @@ function print_column_bugnotes_count( $p_bug, $p_columns_target = COLUMNS_TARGET
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -945,7 +945,7 @@ function print_column_attachment( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -972,7 +972,7 @@ function print_column_category_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -985,7 +985,7 @@ function print_column_severity( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -996,18 +996,18 @@ function print_column_eta( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE 
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
  */
 function print_column_reproducibility( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">', get_enum_element( 'reproducibility', $p_row['reproducibility'] ), '</td>';
+	echo '<td class="center">', get_enum_element( 'reproducibility', $p_bug->reproducibility ), '</td>';
 }
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -1018,7 +1018,7 @@ function print_column_resolution( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -1036,12 +1036,12 @@ function print_column_status( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PA
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
  */
-function print_column_handler_id( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_handler_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="center">';
 
 	# In case of a specific project, if the current user has no access to the field, then it would have been excluded from the
@@ -1055,7 +1055,7 @@ function print_column_handler_id( $p_row, $p_columns_target = COLUMNS_TARGET_VIE
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -1068,7 +1068,7 @@ function print_column_reporter_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -1089,7 +1089,7 @@ function print_column_last_updated( $p_bug, $p_columns_target = COLUMNS_TARGET_V
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -1102,7 +1102,7 @@ function print_column_date_submitted( $p_bug, $p_columns_target = COLUMNS_TARGET
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -1125,7 +1125,7 @@ function print_column_summary( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_P
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -1138,7 +1138,7 @@ function print_column_description( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -1151,7 +1151,7 @@ function print_column_steps_to_reproduce( $p_bug, $p_columns_target = COLUMNS_TA
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
@@ -1164,7 +1164,7 @@ function print_column_additional_information( $p_bug, $p_columns_target = COLUMN
 
 /**
  *
- * @param array $p_row bug row
+ * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
