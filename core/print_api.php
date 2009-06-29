@@ -1685,7 +1685,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 		} else {
 			echo $t_href_start;
 			print_file_icon( $t_file_display_name );
-			echo $t_href_end . '&nbsp;' . $t_href_start . $t_file_display_name . $t_href_end . "$t_href_clicket ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
+			echo $t_href_end . '&nbsp;' . $t_href_start . $t_file_display_name . $t_href_end . $t_href_clicket . ' (' . $t_filesize . ' ' . lang_get( 'bytes' ) . ') ' . '<span class=\"italic\">' . $t_date_added . '</span>';
 
 			if ( $t_attachment['can_delete'] ) {
 				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id={$t_attachment['id']}\">" . lang_get( 'delete_link' ) . '</a>]';

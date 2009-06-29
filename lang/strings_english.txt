@@ -1343,6 +1343,7 @@ $s_monitored_by = 'Monitored By';
 
 $s_attachments = 'attachment(s)';
 $s_attachment_alt = 'A';
+$s_bytes = 'bytes';
 
 # PHPMailer
 $s_phpmailer_language = 'en';
