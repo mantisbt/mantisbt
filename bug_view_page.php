@@ -356,7 +356,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo string_display_line_links( $t_bug->description ) ?>
+		<?php echo string_display_links( $t_bug->description ) ?>
 	</td>
 </tr>
 
@@ -367,7 +367,7 @@
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo string_display_line_links( $t_bug->additional_information ) ?>
+		<?php echo string_display_links( $t_bug->additional_information ) ?>
 	</td>
 </tr>
 
