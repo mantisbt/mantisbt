@@ -93,7 +93,7 @@
 	<td>
 		<?php
 			echo lang_get( 'reminder_explain' ) . ' ';
-			if ( ON == config_get( 'reminder_recipents_monitor_bug' ) ) {
+			if ( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
 				echo lang_get( 'reminder_monitor' ) . ' ';
 			}
 			if ( ON == config_get( 'store_reminders' ) ) {
