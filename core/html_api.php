@@ -1276,6 +1276,7 @@ function html_status_percentage_legend() {
  * @return null
  */
 function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = 'post' ) {
+	$t_form_name = explode( '.php', $p_action, 2 );
 	$p_action = urlencode( $p_action );
 	$p_button_text = string_attribute( $p_button_text );
 	if( null === $p_fields ) {
@@ -1289,6 +1290,10 @@ function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = '
 	}
 
 	echo "<form method=\"$t_method\" action=\"$p_action\">\n";
+	# Add a CSRF token only when the form is being sent via the POST method
+	if ( $t_method == 'post' ) {
+		echo form_security_field( $t_form_name[0] );
+	}
 
 	foreach( $p_fields as $key => $val ) {
 		$key = string_attribute( $key );
