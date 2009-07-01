@@ -163,14 +163,6 @@ class BugData {
 			case 'category_id':
 				$value = (int)$value;
 				break;
-
-			case 'fixed_in_version':
-				if ( !$this->loading ) {
-					if ( !access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
-						trigger_error( ERROR_ACCESS_DENIED, ERROR );
-					}
-				}
-				break;
 			case 'target_version':
 				if ( !$this->loading ) {
 					# Only set target_version if user has access to do so
