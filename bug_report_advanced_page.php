@@ -195,10 +195,6 @@
 			</select>
 		</td>
 	</tr>
-<?php
-	// Priority (if permissions allow)
-	if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
-?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php print_documentation_link( 'priority' ) ?>
@@ -209,7 +205,6 @@
 			</select>
 		</td>
 	</tr>
-<?php } ?>
 <?php if ( $t_can_update_due_date ) {
 	$t_date_to_display = '';
 	if ( !date_is_null( $f_due_date ) ) {
