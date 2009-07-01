@@ -28,7 +28,7 @@
 
 	require_once( 'relationship_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'bug_relationship_add' );
 
 	$f_rel_type = gpc_get_int( 'rel_type' );
 	$f_src_bug_id = gpc_get_int( 'src_bug_id' );
@@ -104,5 +104,7 @@
 		email_relationship_added( $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
 		email_relationship_added( $f_dest_bug_id, $f_src_bug_id, relationship_get_complementary_type( $f_rel_type ) );
 	}
+
+	form_security_purge( 'bug_relationship_add' );
 
 	print_header_redirect_view( $f_src_bug_id );
