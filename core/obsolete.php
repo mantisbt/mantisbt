@@ -119,7 +119,10 @@ config_obsolete( 'default_bug_category', '' );
 config_obsolete( 'enable_relationship', '' );
 config_obsolete( 'ldap_port', 'ldap_server' );
 
-#changes in 1.2.0rc
+# changes in 1.2.0rc1
 config_obsolete( 'jpgraph_path', '' );
 config_obsolete( 'use_jpgraph', '' );
 config_obsolete( 'jpgraph_antialias', '' );
+
+# changes after 1.2.0rc1
+config_obsolete( 'reminder_recipents_monitor_bug', 'reminder_recipients_monitor_bug' );
