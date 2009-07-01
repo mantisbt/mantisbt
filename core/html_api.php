@@ -827,6 +827,7 @@ function print_menu() {
 		echo '</td>';
 		echo '<td class="menu right nowrap">';
 		echo '<form method="post" action="' . helper_mantis_url( 'jump_to_bug.php">' );
+		# CSRF protection not required here - form does not result in modifications
 
 		if( ON == config_get( 'use_javascript' ) ) {
 			$t_bug_label = lang_get( 'issue_id' );
