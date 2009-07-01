@@ -49,11 +49,15 @@ function form_security_token( $p_form_name ) {
 
 	# Generate a random security token prefixed by date.
 	# mt_rand() returns an int between 0 and RAND_MAX as extra entropy
-	$t_date = date( 'Ymd-' );
+	$t_date = date( 'Ymd' );
 	$t_string = $t_date . sha1( time() . mt_rand() );
 
 	# Add the token to the user's session
-	$t_tokens[$p_form_name][] = $t_string;
+	if ( !isset( $t_tokens[$p_form_name][$t_date] ) ) {
+		$t_tokens[$p_form_name][$t_date] = array();
+	}
+
+	$t_tokens[$p_form_name][$t_date][$t_string] = true;
 	session_set( 'form_security_tokens', $t_tokens );
 
 	# The token string
@@ -131,25 +135,17 @@ function form_security_validate( $p_form_name ) {
 		return false;
 	}
 
-	# Generate a date string of three days ago
-	$t_date = date( 'Ymd', time() - ( 3 * 24 * 60 * 60 ) );
+	# Get the date claimed by the token
+	$t_date = utf8_substr( $t_input, 0, 8 );
 
-	# Check all stored security tokens
-	$t_valid = false;
-	foreach( $t_tokens[$p_form_name] as $t_token ) {
-		$t_token_date = utf8_substr( $t_token, 0, 8 );
-
-		# Newer than three days, check for match
-		if( $t_date < $t_token_date && $t_token == $t_input ) {
-			$t_valid = true;
-		}
+	# Check if the token exists
+	if ( isset( $t_tokens[$p_form_name][$t_date][$t_input] ) ) {
+		return true;
 	}
 
-	if( !$t_valid ) {
-		trigger_error( ERROR_FORM_TOKEN_INVALID, ERROR );
-	}
-
-	return $t_valid;
+	# Token does not exist
+	trigger_error( ERROR_FORM_TOKEN_INVALID, ERROR );
+	return false;
 }
 
 /**
@@ -173,23 +169,23 @@ function form_security_purge( $p_form_name ) {
 	$t_form_token = $p_form_name . '_token';
 	$t_input = gpc_get_string( $t_form_token, '' );
 
+	# Get the date claimed by the token
+	$t_date = utf8_substr( $t_input, 0, 8 );
+
 	# Generate a date string of three days ago
-	$t_date = date( 'Ymd', time() - ( 3 * 24 * 60 * 60 ) );
+	$t_purge_date = date( 'Ymd', time() - ( 3 * 24 * 60 * 60 ) );
 
-	# Check all stored security tokens, purging old ones as necessary
-	$t_tokens_kept = array();
-	$t_valid = false;
-	foreach( $t_tokens[$p_form_name] as $t_token ) {
-		$t_token_date = utf8_substr( $t_token, 0, 8 );
+	# Purge old token data, and the currently-used token
+	unset( $t_tokens[$p_form_name][$t_date][$t_input] );
 
-		# Newer than three days, check for match, keep otherwise
-		if( $t_date < $t_token_date && $t_token != $t_input ) {
-			$t_tokens_kept[] = $t_token;
+	foreach( $t_tokens as $t_form_name => $t_dates ) {
+		foreach( $t_dates as $t_date => $t_date_tokens ) {
+			if ( $t_date < $t_purge_date ) {
+				unset( $t_tokens[$t_form_name][$t_date] );
+			}
 		}
 	}
 
-	# Store only the unpurged tokens in the session
-	$t_tokens[$p_form_name] = $t_tokens_kept;
 	session_set( 'form_security_tokens', $t_tokens );
 
 	return;
