@@ -26,7 +26,7 @@
 	  */
 	require_once( 'core.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'lost_pwd' );
 
 	# lost password feature disabled or reset password via email disabled -> stop here!
 	if( OFF == config_get( 'lost_password_feature' ) ||
@@ -75,6 +75,8 @@
 	email_send_confirm_hash_url( $t_user_id, $t_confirm_hash );
 
 	user_increment_lost_password_in_progress_count( $t_user_id );
+
+	form_security_purge( 'lost_pwd' );
 
 	$t_redirect_url = 'login_page.php';
 
