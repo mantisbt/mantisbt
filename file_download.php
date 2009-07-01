@@ -101,7 +101,10 @@
 		$t_disposition = ' attachment;';
 	}
 
-	header( 'Content-Disposition:' . $t_disposition . ' filename="' . urlencode( $t_filename ) . '"' );
+	# The following header has undefined behaviour but needs to be used to
+	# allow a fallback for old browsers that don't support RFC2231.
+	# See http://greenbytes.de/tech/tc2231/ for more information.
+	header( 'Content-Disposition:' . $t_disposition . ' filename*=UTF-8\'\'' . urlencode( $t_filename ) . '; filename="' . urlencode( $t_filename ) . '"' );
 	header( 'Content-Description: Download Data' );
 	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $v_date_added ) );
 
