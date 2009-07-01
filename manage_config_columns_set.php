@@ -57,7 +57,7 @@
 		access_ensure_project_level( VIEWER, $f_project_id );
 	}
 
-	if ( $f_update_columns_as_my_default ) {
+	if ( $f_update_columns_as_my_default || $f_update_columns_as_global_default ) {
 		$t_project_id = ALL_PROJECTS;
 	} else {
 		$t_project_id = $f_project_id;
