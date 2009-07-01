@@ -1534,9 +1534,9 @@
 	 * Automatically add recipients of reminders to monitor list, if they are not
 	 * the handler or the reporter (since they automatically get notified, if required)
 	 * If recipients of the reminders are below the monitor threshold, they will not be added.
-	 * @global int $g_reminder_recipents_monitor_bug
+	 * @global int $g_reminder_recipients_monitor_bug
 	 */
-	$g_reminder_recipents_monitor_bug = ON;
+	$g_reminder_recipients_monitor_bug = ON;
 
 	/**
 	 * Default Reminder View Status (VS_PUBLIC or VS_PRIVATE)
