@@ -29,7 +29,7 @@
 
 	require_once( 'bug_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'bug_assign' );
 
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$t_bug = bug_get( $f_bug_id );
@@ -64,5 +64,7 @@
 	}
 
 	bug_assign( $f_bug_id, $f_handler_id );
+
+	form_security_purge( 'bug_assign' );
 
 	print_successful_redirect_to_bug( $f_bug_id );
