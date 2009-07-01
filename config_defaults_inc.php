@@ -1271,7 +1271,7 @@
 	 *
 	 * @global string $g_show_sticky_issues
 	 */
-	$g_show_sticky_issues   = 'on';
+	$g_show_sticky_issues   = ON;
 
 	/**
 	 * make sure people aren't refreshing too often
