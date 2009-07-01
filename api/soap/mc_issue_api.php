@@ -511,12 +511,15 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_bug_data->platform = isset( $p_issue['platform'] ) ? $p_issue['platform'] : '';
 	$t_bug_data->version = isset( $p_issue['version'] ) ? $p_issue['version'] : '';
 	$t_bug_data->fixed_in_version = isset( $p_issue['fixed_in_version'] ) ? $p_issue['fixed_in_version'] : '';
-	$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
 	$t_bug_data->build = isset( $p_issue['build'] ) ? $p_issue['build'] : '';
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
 	$t_bug_data->sponsorship_total = isset( $p_issue['sponsorship_total'] ) ? $p_issue['sponsorship_total'] : 0;
 	$t_bug_data->due_date = date_get_null();
+
+	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
+		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
+	}
 
 	# omitted:
 	# var $bug_text_id
@@ -672,12 +675,15 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_bug_data->platform = isset( $v_platform ) ? $v_platform : '';
 	$t_bug_data->version = isset( $p_issue['version'] ) ? $p_issue['version'] : '';
 	$t_bug_data->fixed_in_version = isset( $p_issue['fixed_in_version'] ) ? $p_issue['fixed_in_version'] : '';
-	$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
 	$t_bug_data->build = isset( $v_build ) ? $v_build : '';
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
 	$t_bug_data->sponsorship_total = isset( $v_sponsorship_total ) ? $v_sponsorship_total : 0;
 	$t_bug_data->due_date = date_get_null();
+
+	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
+		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
+	}
 
 	# omitted:
 	# var $bug_text_id
