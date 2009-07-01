@@ -243,10 +243,6 @@ if ( file_exists( $t_overrides ) ) {
 	require_once( $t_overrides );
 }
 
-// seed random number generator
-list( $usec, $sec ) = explode( ' ', microtime() );
-mt_srand( $sec*$usec );
-
 // set HTTP response headers
 http_all_headers();
 
