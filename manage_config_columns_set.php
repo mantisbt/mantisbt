@@ -28,7 +28,7 @@
 	require_once( 'columns_api.php' );
 	require_once( 'gpc_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'manage_config_columns_set' );
 
 	# @@@ access_ensure_project_level( config_get( 'manage_project_threshold' ) );
 
@@ -97,6 +97,8 @@
 	if ( serialize( config_get( 'excel_columns', '', $t_user_id, $t_project_id ) ) !== serialize( $t_excel_columns ) ) {
 		config_set( 'excel_columns', $t_excel_columns, $t_user_id, $t_project_id );
 	}
+
+	form_security_purge( 'manage_config_columns_set' );
 ?>
 <br />
 <div align="center">
