@@ -326,7 +326,7 @@ $s_login_cookies_disabled = 'Your browser either does not know how to handle coo
 
 # General Strings
 $s_go_back = 'Go Back';
-$s_proceed = 'Click here to proceed';
+$s_proceed = 'Proceed';
 
 $s_switch = 'Switch';
 $s_logged_in_as = 'Logged in as';
@@ -700,7 +700,7 @@ $s_memory_usage_in_kb = 'memory usage: %1$s KB';
 $s_please_report = 'Please report this to the %1$s.';
 
 # index.php
-$s_click_to_login = 'Click here to login';
+$s_click_to_login = 'Login';
 
 # login.php
 $s_warning_plain_password_authentication = '<strong>Warning:</strong> Plain password authentication is used, this will expose your passwords to administrators.';
