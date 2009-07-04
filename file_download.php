@@ -88,6 +88,9 @@
 		@ob_end_clean();
 	}
 
+	# readfile below doesn't like output buffering (see #10135)
+	@ob_end_flush();
+
 	# Make sure that IE can download the attachments under https.
 	header( 'Pragma: public' );
 
