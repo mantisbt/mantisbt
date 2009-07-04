@@ -349,9 +349,10 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 	$t_bugnotes = array();
 	$t_bugnote_count = count( $t_all_bugnotes );
 	$t_bugnote_limit = $p_user_bugnote_limit > 0 ? $p_user_bugnote_limit : $t_bugnote_count;
+	$t_bugnotes_found = 0;
 
 	# build a list of the latest bugnotes that the user can see
-	for( $i = 0; $i < $t_bugnote_count && $i < $t_bugnote_limit; ) {
+	for ( $i = 0; ( $i < $t_bugnote_count ) && ( $t_bugnotes_found < $t_bugnote_limit ); $i++ ) {
 		$t_bugnote = array_pop( $t_all_bugnotes );
 
 		if( $t_private_bugnote_visible || $t_bugnote->reporter_id == $t_user_id || ( VS_PUBLIC == $t_bugnote->view_state ) ) {
@@ -362,7 +363,7 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 				$t_bugnote->time_tracking = 0;
 			}
 
-			$t_bugnotes[$i++] = $t_bugnote;
+			$t_bugnotes[$t_bugnotes_found++] = $t_bugnote;
 		}
 	}
 
