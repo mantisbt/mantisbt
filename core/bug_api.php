@@ -359,8 +359,8 @@ class BugData {
 		history_log_event_special( $this->id, NEW_BUG );
 
 		# log changes, if any (compare happens in history_log_event_direct)
-		history_log_event_direct( $t_bug_id, 'status', $t_original_status, $t_status );
-		history_log_event_direct( $t_bug_id, 'handler_id', 0, $c_handler_id );
+		history_log_event_direct( $this->id, 'status', $t_original_status, $t_status );
+		history_log_event_direct( $this->id, 'handler_id', 0, $this->handler_id );
 
 		return $this->id;
 	}
