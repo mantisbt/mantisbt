@@ -58,7 +58,6 @@
 	$v_os 						= string_display( $v_os );
 	$v_os_build					= string_display( $v_os_build );
 	$v_platform					= string_display( $v_platform );
-	$v_version 					= string_display( $v_version );
 	$v_summary 					= string_display_links( $v_summary );
 	$v2_description 			= string_display_links( $v2_description );
 	$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
@@ -205,27 +204,58 @@
 		<?php echo get_enum_element( 'status', $v_status ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo lang_get( 'product_version' ) ?>:
-	</td>
-	<td class="print">
-		<?php echo $v_version ?>
-	</td>
-	<td class="print" colspan="2">&nbsp;</td>
-</tr>
-<tr class="print">
-	<td class="print-category">
-		<?php echo lang_get( 'product_build' ) ?>:
-	</td>
-	<td class="print">
-		<?php echo $v_build?>
-	</td>
-	<td class="print-category">
 		<?php echo lang_get( 'resolution' ) ?>:
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;</td>
+</tr>
+<?php if ( $t_show_product_version ) { ?>
+<tr class="print">
+	<td class="print-category">
+		<?php echo lang_get( 'product_version' ) ?>:
+	</td>
+	<td class="print">
+		<?php echo $t_product_version_string ?>
+	</td>
+	<?php if ( $t_show_build ) { ?>
+		<td class="print-category">
+			<?php echo lang_get( 'product_build' ) ?>:
+		</td>
+		<td class="print">
+			<?php echo $v_build?>
+		</td>
+		<td class="print" colspan="2">&nbsp;</td>
+	<?php } else { ?>
+		<td class="print" colspan="5">&nbsp;</td>
+	<?php } ?>
+</tr>
+<?php } ?>
+<tr>
+<?php if ( $t_show_fixed_in_version ) { ?>
+	<td class="print-category">
+		<?php echo lang_get( 'fixed_in_version' ) ?>:
+	</td>
+	<td class="print">
+		<?php echo $t_fixed_in_version_string ?>
+	</td>
+<?php } else { ?>
+	<td class="print" colspan="2">&nbsp;</td>
+<?php
+	}
+
+	if ( $t_show_target_version ) { ?>
+		<td class="print-category">
+			<?php echo lang_get( 'target_version' ) ?>:
+		</td>
+		<td class="print">
+			<?php echo $t_target_version_string ?>
+		</td>
+<td class="print" colspan="2">&nbsp;</td>
+<?php } else { ?>
+	<td class="print" colspan="4">&nbsp;</td>
+<?php } ?>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -249,13 +279,7 @@
 	<td class="print">
 		<?php echo get_enum_element( 'eta', $v_eta ) ?>
 	</td>
-	<td class="print-category">
-		<?php echo lang_get( 'fixed_in_version' ) ?>:
-	</td>
-	<td class="print">
-		<?php echo $v_fixed_in_version ?>
-	</td>
-	<td class="print" colspan="2">&nbsp;</td>
+	<td class="print" colspan="4">&nbsp;</td>
 </tr>
 
 <?php

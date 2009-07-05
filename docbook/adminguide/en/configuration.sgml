@@ -821,11 +821,12 @@
             <varlistentry>
                 <term>$g_show_product_version</term>
                 <listitem>
-                    <para>This controls display of the version dropdown menus in the
-                        report, view and update pages. Valid values are ON, OFF, and AUTO.
-                        ON forces the display of the dropdown even if no versions are
-                        defined. OFF will suppress the dropdown always. AUTO will suppress
-                        the dropdown, if no versions are defined for the project.
+                    <para>This controls display of the product version in the
+                        report, view, update and print issue pages. This flag also applies
+						to other product version related fields like product build, fixed in version,
+						and target version.  Valid values are ON, OFF, and AUTO.
+                        ON for always displayed, AUTO for displayed when project has versions defined, and OFF for
+ 						always OFF.  The default value is AUTO.
                     </para>
                 </listitem>
             </varlistentry>

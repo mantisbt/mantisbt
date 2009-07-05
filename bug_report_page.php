@@ -202,9 +202,6 @@
 
 	event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id, false ) );
 ?>
-	<tr class="spacer">
-		<td colspan="2"></td>
-	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<span class="required">*</span><?php print_documentation_link( 'summary' ) ?>

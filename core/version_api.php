@@ -649,3 +649,4 @@ function version_get_project_where_clause( $p_project_id, $p_inherit ) {
 
 	return $t_project_where;
 }
+
