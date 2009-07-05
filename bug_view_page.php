@@ -58,6 +58,8 @@
 	$t_action_button_position = config_get( 'action_button_position' );
 	$t_access_level_needed = config_get( 'view_history_threshold' );
 	$t_can_view_history = access_has_bug_level( $t_access_level_needed, $f_bug_id );
+	$t_show_product_version = version_should_show_product_version( $t_bug->project_id );
+	$t_product_version_string = $t_show_product_version ? prepare_version_string( $f_bug_id, $t_bug->project_id, $t_bug->version ) : '';
 
 	compress_enable();
 
@@ -278,8 +280,13 @@
 		<?php echo get_enum_element( 'resolution', $t_bug->resolution ) ?>
 	</td>
 
-	<!-- spacer -->
-	<td colspan="2">&nbsp;</td>
+	<!-- Product Version -->
+	<td class="category">
+		<?php echo lang_get( 'product_version' ) ?>
+	</td>
+	<td>
+		<?php echo string_display_line( $t_product_version_string ) ?>
+	</td>
 </tr>
 
 
@@ -293,41 +300,7 @@
 		<?php echo get_enum_element( 'status', $t_bug->status ) ?>
 	</td>
 
-	<td colspan="2">&nbsp;</td>
-
-	<!-- Product Version -->
-	<?php
-		$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
-			|| ( ( AUTO == config_get( 'show_product_version' ) )
-					&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
-		if ( $t_show_product_version ) {
-			$t_bug_version_string = $t_bug->version;
-			if ( access_has_bug_level( config_get( 'show_version_dates_threshold' ), $f_bug_id ) ) {
-				$t_short_date_format = config_get( 'short_date_format' );
-				$t_version_rows = version_get_all_rows( $t_bug->project_id );
-				foreach ( $t_version_rows as $t_version_row ) {
-					if ( $t_version_row['version'] == $t_bug->version ) {
-						$t_bug_version_string .= ' (' . date( $t_short_date_format, $t_version_row['date_order'] ) . ')';
-					}
-				}
-			}
-	?>
-	<td class="category">
-		<?php echo lang_get( 'product_version' ) ?>
-	</td>
-	<td>
-		<?php echo string_display_line( $t_bug_version_string ) ?>
-	</td>
-	<?php
-		} else {
-	?>
-	<td>
-	</td>
-	<td>
-	</td>
-	<?php
-		}
-	?>
+	<td colspan="4">&nbsp;</td>
 </tr>
 
 

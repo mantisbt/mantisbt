@@ -67,3 +67,36 @@ function prepare_user_name( $p_user_id ) {
 		return $t_result;
 	}
 }
+
+/**
+ * A function that prepares the version string for outputting to the user on view / print issue pages.
+ * This function would add the version date, if appropriate.
+ *
+ * @param string $p_bug_id   The bug id.
+ * @param string $p_project_id  The project id.
+ * @param string $p_version_string The version name (e.g. 1.2.0rc1)
+ * @param string $p_version_rows The version rows to be re-used or null to retrieve it within the function.
+ * @return The formatted version string.
+ */
+function prepare_version_string( $p_bug_id, $p_project_id, $p_version_string, $p_version_rows = null ) {
+	$t_version_text = $p_version_string;
+
+	if ( !is_blank( $t_version_text ) && access_has_bug_level( config_get( 'show_version_dates_threshold' ), $p_bug_id ) ) {
+		$t_short_date_format = config_get( 'short_date_format' );
+
+		if ( $p_version_rows === null ) {
+			$t_version_rows = version_get_all_rows( $p_project_id );
+		} else {
+			$t_version_rows = $p_version_rows;
+		}
+
+		foreach ( $t_version_rows as $t_version_row ) {
+			if ( $t_version_row['version'] == $p_version_string ) {
+				$t_version_text .= ' (' . date( $t_short_date_format, $t_version_row['date_order'] ) . ')';
+				break;
+			}
+		}
+	}
+
+	return $t_version_text;	
+}

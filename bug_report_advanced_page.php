@@ -313,9 +313,7 @@
 	</tr>
 <?php } ?>
 <?php
-	$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
-			|| ( ( AUTO == config_get( 'show_product_version' ) )
-						&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
+	$t_show_product_version = version_should_show_product_version( $t_project_id );
 	if ( $t_show_product_version ) {
 		$t_product_version_released_mask = VERSION_RELEASED;
 

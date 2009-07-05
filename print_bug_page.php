@@ -58,11 +58,32 @@
 	$v_os 						= string_display( $v_os );
 	$v_os_build					= string_display( $v_os_build );
 	$v_platform					= string_display( $v_platform );
-	$v_version 					= string_display( $v_version );
 	$v_summary 					= string_display_links( $v_summary );
 	$v2_description 			= string_display_links( $v2_description );
 	$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_display_links( $v2_additional_information );
+
+	$t_show_product_version = version_should_show_product_version( $v_project_id );
+	$t_show_build = $t_show_product_version && config_get( 'enable_product_build' );
+	$t_show_fixed_in_version = $t_show_product_version;
+	$t_show_target_version = $t_show_product_version && access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
+
+	if ( $t_show_product_version ) {
+		$t_version_rows = version_get_all_rows( $v_project_id );
+
+		$t_product_version_string  = prepare_version_string( $f_bug_id, $v_project_id, $v_version, $t_version_rows );
+		$t_target_version_string   = prepare_version_string( $f_bug_id, $v_project_id, $v_target_version, $t_version_rows );
+		$t_fixed_in_version_string = prepare_version_string( $f_bug_id, $v_project_id, $v_fixed_in_version, $t_version_rows );
+
+		$t_product_version_string = string_display_line( $t_product_version_string );
+		$t_target_version_string   = string_display_line( $t_target_version_string );
+		$t_fixed_in_version_string = string_display_line( $t_fixed_in_version_string );
+	} else {
+		$t_product_version_string  = '';
+		$t_target_version_string   = '';
+		$t_fixed_in_version_string = '';
+	}
+
 
 	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	html_head_end();
@@ -188,27 +209,58 @@
 		<?php echo get_enum_element( 'status', $v_status ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo lang_get( 'product_version' ) ?>:
-	</td>
-	<td class="print">
-		<?php echo $v_version ?>
-	</td>
-	<td class="print" colspan="2">&nbsp;</td>
-</tr>
-<tr class="print">
-	<td class="print-category">
-		<?php echo lang_get( 'product_build' ) ?>:
-	</td>
-	<td class="print">
-		<?php echo $v_build?>
-	</td>
-	<td class="print-category">
 		<?php echo lang_get( 'resolution' ) ?>:
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;</td>
+</tr>
+<?php if ( $t_show_product_version ) { ?>
+<tr class="print">
+	<td class="print-category">
+		<?php echo lang_get( 'product_version' ) ?>:
+	</td>
+	<td class="print">
+		<?php echo $t_product_version_string ?>
+	</td>
+	<?php if ( $t_show_build ) { ?>
+		<td class="print-category">
+			<?php echo lang_get( 'product_build' ) ?>:
+		</td>
+		<td class="print">
+			<?php echo $v_build?>
+		</td>
+		<td class="print" colspan="2">&nbsp;</td>
+	<?php } else { ?>
+		<td class="print" colspan="5">&nbsp;</td>
+	<?php } ?>
+</tr>
+<?php } ?>
+<tr>
+<?php if ( $t_show_fixed_in_version ) { ?>
+	<td class="print-category">
+		<?php echo lang_get( 'fixed_in_version' ) ?>:
+	</td>
+	<td class="print">
+		<?php echo $t_fixed_in_version_string ?>
+	</td>
+<?php } else { ?>
+	<td class="print" colspan="2">&nbsp;</td>
+<?php
+	}
+
+	if ( $t_show_target_version ) { ?>
+		<td class="print-category">
+			<?php echo lang_get( 'target_version' ) ?>:
+		</td>
+		<td class="print">
+			<?php echo $t_target_version_string ?>
+		</td>
+<td class="print" colspan="2">&nbsp;</td>
+<?php } else { ?>
+	<td class="print" colspan="4">&nbsp;</td>
+<?php } ?>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -232,13 +284,7 @@
 	<td class="print">
 		<?php echo get_enum_element( 'eta', $v_eta ) ?>
 	</td>
-	<td class="print-category">
-		<?php echo lang_get( 'fixed_in_version' ) ?>:
-	</td>
-	<td class="print">
-		<?php echo $v_fixed_in_version ?>
-	</td>
-	<td class="print" colspan="2">&nbsp;</td>
+	<td class="print" colspan="4">&nbsp;</td>
 </tr>
 
 <?php
