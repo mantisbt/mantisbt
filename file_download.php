@@ -23,15 +23,16 @@
 	 */
 
 	$g_bypass_headers = true; # suppress headers as we will send our own later
+	define( 'COMPRESSION_DISABLED', true );
 	 /**
 	  * MantisBT Core API's
 	  */
 	require_once( 'core.php' );
 
 	require_once( 'file_api.php' );
-?>
-<?php auth_ensure_user_authenticated() ?>
-<?php
+
+	auth_ensure_user_authenticated();
+
 	$f_file_id	= gpc_get_int( 'file_id' );
 	$f_type		= gpc_get_string( 'type' );
 
@@ -83,19 +84,16 @@
 			break;
 	}
 
-	# flush output buffer to protect download
-	if ( ob_get_length() ) {
-		@ob_end_clean();
-	}
-
-	# readfile below doesn't like output buffering (see #10135)
-	@ob_end_flush();
+    if (ini_get('zlib.output_compression')) {
+        ini_set('zlib.output_compression', false);
+    }
+    
+	# flush output buffers to protect download
+	while (@ob_end_clean() );
 
 	# Make sure that IE can download the attachments under https.
 	header( 'Pragma: public' );
 
-	header( 'Content-Type: ' . $v_file_type );
-	header( 'Content-Length: ' . $v_filesize );
 	$t_filename = file_get_display_name( $v_filename );
 	$t_inline_files = explode(',', config_get('inline_file_exts', 'gif'));
 	if ( in_array( utf8_strtolower( file_get_extension($t_filename) ), $t_inline_files ) ) {
@@ -108,7 +106,7 @@
 	# allow a fallback for old browsers that don't support RFC2231.
 	# See http://greenbytes.de/tech/tc2231/ for more information.
 	header( 'Content-Disposition:' . $t_disposition . ' filename*=UTF-8\'\'' . urlencode( $t_filename ) . '; filename="' . urlencode( $t_filename ) . '"' );
-	header( 'Content-Description: Download Data' );
+
 	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $v_date_added ) );
 
 	# To fix an IE bug which causes problems when downloading
@@ -130,7 +128,7 @@
 			$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
 
 			if ( file_exists( $t_local_disk_file ) ) {
-				readfile( $t_local_disk_file );
+				readfile_chunked( $t_local_disk_file, $v_file_type, $v_filesize );
 			}
 			break;
 		case FTP:
@@ -149,3 +147,41 @@
 			echo $v_content;
 	}
 	exit();
+
+
+function readfile_chunked($filename, $p_file_type, $p_filesize) {
+	header( 'Content-Type: ' . $p_file_type );
+	header( 'Content-Length: ' . $p_filesize );
+   	file_send_chunk( $filename );
+}
+
+function file_send_chunk($filename, $start = 0, $maxlength = 0 ) {
+    static $s_safe_mode = null;
+    $chunksize = 4*131072;
+    $buffer = '';
+	$offset = $start;
+	
+	if( $s_safe_mode == null ) {
+		$s_safe_mode = ini_get('safe_mode');
+	}
+	
+    while (true) {
+		if ( $s_safe_mode == false) {
+			@set_time_limit(60*60); //reset time limit to 60 min - should be enough for 1 MB chunk
+		}
+        $buffer = file_get_contents($filename, 0, null, $offset, ( ($maxlength > 0 && $maxlength < $chunksize) ? $maxlength : $chunksize ) );
+        if ( $buffer === false ) {
+			$buffer = file_get_contents($filename, 0, null, $offset, ( $maxlength > 0 ? $maxlength : -1 ) );
+			echo $buffer;
+			flush();
+        	exit(); // end of file
+        }
+        echo $buffer;
+        flush();
+        $offset += $chunksize;
+        $maxlength -= $chunksize;
+        unset($buffer);
+        $buffer = null;
+    }
+    return;
+}
