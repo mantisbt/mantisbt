@@ -140,9 +140,7 @@ if ( ($t_output = ob_get_contents()) != '') {
 
 require_once( 'compress_api.php' );
 
-# Before doing anything else, start output buffering so we don't prevent
-#  headers from being sent if there's a blank line in an included file
-ob_start( 'compress_handler' );
+compress_start_handler();
 
 if ( false === $t_config_inc_found ) {
 	# if not found, redirect to the admin page to install the system
