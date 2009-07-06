@@ -30,7 +30,7 @@
 	require_once( 'current_user_api.php' );
 	require( 'print_all_bug_options_inc.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'print_all_bug_options_reset' );
 
 	auth_ensure_user_authenticated();
 
@@ -57,6 +57,8 @@
 			WHERE user_id=" . db_param();
 
 	$result = db_query_bound( $query, Array( $t_default, $t_user_id ) );
+
+	form_security_purge( 'print_all_bug_options_reset' );
 
 	$t_redirect_url = 'print_all_bug_options_page.php';
 
