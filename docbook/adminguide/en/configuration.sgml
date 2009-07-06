@@ -1727,29 +1727,53 @@
             <varlistentry>
                 <term>$g_ldap_server</term>
                 <listitem>
-                    <para>The ldap server (eg: ldaps://ldap.example.com)
-                    </para>
+                    <para>The ldap server (eg: ldaps://ldap.example.com).</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
                 <term>$g_ldap_port</term>
                 <listitem>
-                    <para>LDAP port (default 636).</para>
+                    <para>LDAP port (default 389).  If this doesn't work, try 389.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_ldap_protocol_version</term>
+                <listitem>
+                    <para>
+                        The LDAP Protocol Version, if 0, then the protocol version is not set.  Default is 0.
+                        For Active Directory use protocol version 3.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_ldap_follow_referrals</term>
+                <listitem>
+                    <para>
+                        Determines whether the LDAP library automatically follows referrals returned by LDAP servers or not.
+                        This maps to LDAP_OPT_REFERRALS ldap library option.  For Active Directory, this should be set to OFF.
+                        Default value is ON.
+                    </para>
                 </listitem>
             </varlistentry>
             <varlistentry>
                 <term>$g_ldap_root_dn</term>
                 <listitem>
-                    <para>"dc=example, dc=com"</para>
+                    <para>The root distinguished name.  For example, "dc=example, dc=com".</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
                 <term>$g_ldap_organization</term>
                 <listitem>
-                    <para>"organizationname=*Example)"</para>
+                    <para>The organization.  For example, "organizationname=*Example)".  Default value is ''.</para>
                 </listitem>
             </varlistentry>
-            <varlistentry>
+           <varlistentry>
+                <term>$g_ldap_uid_field</term>
+                <listitem>
+                    <para>The LDAP field for user id.  The default value is 'uid'.  For Active Directory, set to 'sAMAccountName'.</para>
+                </listitem>
+            </varlistentry>
+           <varlistentry>
                 <term>$g_ldap_realname_field</term>
                 <listitem>
                     <para>The LDAP field for real name (i.e. common name).  Default value is 'cn'.</para>
@@ -1774,13 +1798,16 @@
             <varlistentry>
                 <term>$g_ldap_bind_dn</term>
                 <listitem>
-                    <para>&nbsp;"cn=Manager, dc=example, dc=com"&nbsp;</para>
+                    <para>
+                        The distinguished of the user account to use for binding to the LDAP server.
+                        For example, 'CN=ldap,OU=Administrators,DC=example,DC=com'.
+                    </para>
                 </listitem>
             </varlistentry>
             <varlistentry>
                 <term>$g_ldap_bind_passwd</term>
                 <listitem>
-                    <para></para>
+                    <para>The password for the service account to be used for connecting to the LDAP server.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
