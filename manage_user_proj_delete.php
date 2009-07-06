@@ -25,7 +25,7 @@
 	  */
 	require_once( 'core.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'manage_user_proj_delete' );
 
 	auth_reauthenticate();
 
@@ -42,6 +42,8 @@
 		lang_get( 'remove_user_button' ) );
 
 	$result = project_remove_user( $f_project_id, $f_user_id );
+
+	form_security_purge( 'manage_user_proj_delete' );
 
 	$t_redirect_url = 'manage_user_edit_page.php?user_id=' .$f_user_id;
 
