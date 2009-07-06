@@ -33,6 +33,8 @@
 
 	require_once( 'relationship_api.php' );
 
+	form_security_validate( 'bug_relationship_delete' );
+
 	$f_rel_id = gpc_get_int( 'rel_id' );
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
@@ -92,5 +94,7 @@
 		history_log_event_special( $t_dest_bug_id, BUG_DEL_RELATIONSHIP, $t_dest_bug_rel_type, $f_bug_id );
 		email_relationship_deleted( $t_dest_bug_id, $f_bug_id, $t_dest_bug_rel_type );
 	}
+
+	form_security_purge( 'bug_relationship_delete' );
 
 	print_header_redirect_view( $f_bug_id );
