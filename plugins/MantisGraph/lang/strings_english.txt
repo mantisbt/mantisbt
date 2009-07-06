@@ -37,8 +37,8 @@ $s_plugin_MantisGraph_library = 'Graph Library';
 $s_plugin_MantisGraph_bundled = 'Use Bundled';
 
 $s_plugin_MantisGraph_jpgraph_antialias = 'JPGRAPH ONLY: anti-aliasing. Will improve the visual apperance of certain graphs. Note: Using anti-aliasing makes line drawing roughly 8 times slower';
-$s_plugin_MantisGraph_window_width = 'Graph Width (pixels)';
-$s_plugin_MantisGraph_bar_aspect = 'bar graph aspect ration (height / width)';
+$s_plugin_MantisGraph_window_width = 'Graph Width (in pixels)';
+$s_plugin_MantisGraph_bar_aspect = 'bar graph aspect ratio (height/width)';
 $s_plugin_MantisGraph_summary_graphs_per_row = 'how many graphs to put in each row in the advanced summary page';
 
 $s_plugin_MantisGraph_enabled = 'On';
