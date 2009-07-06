@@ -36,27 +36,59 @@ $g_compression_started = false;
  * @return bool
  * @access public
  */
-function compress_is_enabled() {
-	global $g_compression_started;
+function compress_handler_is_enabled() {
 	global $g_compress_html, $g_use_iis;
 
-	# @@@ temporarily disable compression when using IIS because of
-	#   issue #2953
-	# Dont use config_get here so only dependency is on consantinc.php in this module
-	return( $g_compression_started && ON == $g_compress_html && OFF == $g_use_iis && ( 'ob_gzhandler' != ini_get( 'output_handler' ) ) && extension_loaded( 'zlib' ) && !ini_get( 'zlib.output_compression' ) );
+	if( defined( 'COMPRESSION_DISABLED' ) ) {
+		return false;
+	}
+
+	// Dont use config_get here so only dependency is on consant.inc.php in this module
+	if( ON == $g_compress_html ) {
+		if( !extension_loaded( 'zlib' ) ) {
+			return false;
+		}
+	
+		if ( !ini_get( 'zlib.output_compression' ) ) {
+			if( php_version_at_least( '5.2.10' ) && ini_get('output_handler') == '' ) {
+				ini_set('zlib.output_compression', true);
+				// do it transparently
+				return false;
+			}
+		
+			if ( OFF == $g_use_iis ) {
+				// disable compression when using IIS because of issue #2953. for windows compression, use zlib.output_compression in php.ini or a later version of php
+				return false;
+			}
+		}
+		return ( 'ob_gzhandler' != ini_get( 'output_handler' ) );
+	}
 }
 
+/**
+ * Start compression handler if required
+ * @return null
+ * @access public
+ */
+function compress_start_handler() {
+	if( compress_handler_is_enabled() ) {
+		# Before doing anything else, start output buffering so we don't prevent
+		#  headers from being sent if there's a blank line in an included file
+		ob_start( 'compress_handler' );
+	}
+}
 
 /**
  * Output Buffering handler that either compresses the buffer or just.
- * returns it, depending on the return value of compress_is_enabled()
+ * returns it, depending on the return value of compress_handler_is_enabled()
  * @param string $p_buffer
  * @param int $p_mode
  * @return string
  * @access public
  */
-function compress_handler( $p_buffer, $p_mode ) {
-	if( compress_is_enabled() ) {
+function compress_handler( & $p_buffer, $p_mode ) {
+	global $g_compression_started;
+	if( $g_compression_started && compress_handler_is_enabled() ) {
 		return ob_gzhandler( $p_buffer, $p_mode );
 	} else {
 		return $p_buffer;
