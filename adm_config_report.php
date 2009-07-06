@@ -36,6 +36,8 @@
 		switch( $p_type ) {
 			case CONFIG_TYPE_INT:
 				return "integer";
+			case CONFIG_TYPE_FLOAT:
+				return "float";
 			case CONFIG_TYPE_COMPLEX:
 				return "complex";
 			case CONFIG_TYPE_STRING:
@@ -48,6 +50,10 @@
 		$t_corrupted = false;
 
 		switch( $p_type ) {
+			case CONFIG_TYPE_FLOAT:
+				$t_value = (float)$p_value;
+				echo $t_value;
+				return;
 			case CONFIG_TYPE_INT:
 				$t_value = (integer)$p_value;
 				echo $t_value;
