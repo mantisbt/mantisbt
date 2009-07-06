@@ -33,7 +33,7 @@
 abstract class MantisPlugin {
 
 	/**
-	 * name - Your plugin’s full name. Required value.
+	 * name - Your plugin's full name. Required value.
 	 */
 	public $name		= null;
 	/**
@@ -45,12 +45,12 @@ abstract class MantisPlugin {
 	 */
 	public $page		= null;
 	/**
-	 * version - Your plugin’s version string. Required value.
+	 * version - Your plugin's version string. Required value.
 	 */
 	public $version		= null;
 	/**
 	 * requires - An array of key/value pairs of basename/version plugin dependencies. 
-	 * Prefixing a version with ‘<’ will allow your plugin to specify a maximum version (non-inclusive) for a dependency.
+	 * Prefixing a version with '<' will allow your plugin to specify a maximum version (non-inclusive) for a dependency.
 	 */
 	public $requires	= null;
 	/**
@@ -76,7 +76,7 @@ abstract class MantisPlugin {
 	abstract public function register();
 
 	/**
-	 * this function allows your plugin to set itself up, include any necessary API‘s, declare or hook events, etc. 
+	 * this function allows your plugin to set itself up, include any necessary API's, declare or hook events, etc. 
 	 * Alternatively, your can plugin can hook the EVENT_PLUGIN_INIT event that will be called after all plugins have be initialized.
 	 */
 	public function init() {}
