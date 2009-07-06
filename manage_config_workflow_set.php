@@ -27,7 +27,7 @@
 
 	require_once( 'email_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'manage_config_workflow_set' );
 
 	auth_reauthenticate();
 
@@ -120,6 +120,8 @@
 			config_set( 'set_status_threshold', $t_set_status, ALL_USERS, $t_project, $f_access );
 		}
 	}
+
+	form_security_purge( 'manage_config_workflow_set' );
 ?>
 
 <br />
