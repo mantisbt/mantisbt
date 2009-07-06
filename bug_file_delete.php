@@ -29,7 +29,7 @@
 
 	require_once( 'file_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'bug_file_delete' );
 
 	$f_file_id = gpc_get_int( 'file_id' );
 
@@ -47,5 +47,7 @@
 	helper_ensure_confirmed( lang_get( 'delete_attachment_sure_msg' ), lang_get( 'delete_attachment_button' ) );
 
 	file_delete( $f_file_id, 'bug' );
+
+	form_security_purge( 'bug_file_delete' );
 
 	print_header_redirect_view( $t_bug_id );
