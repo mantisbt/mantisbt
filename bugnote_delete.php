@@ -31,7 +31,7 @@
 	require_once( 'bugnote_api.php' );
 	require_once( 'current_user_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'bugnote_delete' );
 
 	$f_bugnote_id = gpc_get_int( 'bugnote_id' );
 
@@ -59,5 +59,7 @@
 
 	# Event integration
 	event_signal( 'EVENT_BUGNOTE_DELETED', array( $t_bug_id, $f_bugnote_id ) );
+
+	form_security_purge( 'bugnote_delete' );
 
 	print_successful_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
