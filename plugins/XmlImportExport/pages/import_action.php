@@ -17,6 +17,8 @@
 $t_plugin_path = config_get( 'plugin_path' );
 require_once( $t_plugin_path . 'XmlImportExport' . DIRECTORY_SEPARATOR . 'ImportXml.php' );
 
+form_security_validate( 'plugin_xml_import_action' );
+
 auth_reauthenticate( );
 
 //var_dump( $_POST );
@@ -30,6 +32,8 @@ $f_defaultcategory = gpc_get_int( 'defaultcategory' );
 file_ensure_uploaded( $f_file );
 
 $importer = new ImportXML( $f_file, $f_strategy, $f_fallback, $f_keepcategory, $f_defaultcategory );
+
+form_security_purge( 'plugin_xml_import_action' );
 
 html_page_top( plugin_lang_get( 'import' ) );
 
