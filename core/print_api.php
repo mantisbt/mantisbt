@@ -1319,7 +1319,12 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
 # $p_label - The button label
 # $p_args_to_post - An associative array with key => value to be posted, can be null.
 function print_button( $p_action_page, $p_label, $p_args_to_post = null ) {
+	$t_form_name = explode( '.php', $p_action_page, 2 );
+	# TODO: ensure all uses of print_button supply arguments via $p_args_to_post (POST)
+	# instead of via $p_action_page (GET). Then only add the CSRF form token if
+	# arguments are being sent via the POST method.
 	echo '<form method="post" action="', $p_action_page, '">';
+	echo form_security_field( $t_form_name[0] );
 	echo '<input type="submit" class="button-small" value="', $p_label, '" />';
 
 	if( $p_args_to_post !== null ) {
