@@ -266,6 +266,7 @@
 	echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
 
 	echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_work_threshold_set.php\">\n";
+	echo form_security_field( 'manage_config_work_threshold_set' );
 
 	# Issues
 	get_section_begin_mcwt( lang_get( 'issues' ) );
