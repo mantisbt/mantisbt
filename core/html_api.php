@@ -582,7 +582,7 @@ function html_footer( $p_file ) {
 	#  2) we don't invalidate the user cache immediately after fetching it
 	#  3) don't do this on the password verification or update page, as it causes the
 	#    verification comparison to fail
-	if( auth_is_user_authenticated() && !( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) ) {
+	if ( auth_is_user_authenticated() && !current_user_is_anonymous() && !( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) ) {
 		$t_user_id = auth_get_current_user_id();
 		user_update_last_visit( $t_user_id );
 	}
@@ -598,7 +598,7 @@ function html_footer( $p_file ) {
 	echo "\t", '<address>Copyright &copy; 2000 - 2009 MantisBT Group</address>', "\n";
 
 	# only display webmaster email is current user is not the anonymous user
-	if( !is_page_name( 'login_page.php' ) && !current_user_is_anonymous() ) {
+	if( !is_page_name( 'login_page.php' ) && auth_is_user_authenticated() && !current_user_is_anonymous() ) {
 		echo "\t", '<address><a href="mailto:', config_get( 'webmaster_email' ), '">', config_get( 'webmaster_email' ), '</a></address>', "\n";
 	}
 
