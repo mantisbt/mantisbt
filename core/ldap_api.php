@@ -103,6 +103,10 @@ function ldap_email( $p_user_id ) {
  * @return string
  */
 function ldap_email_from_username( $p_username ) {
+	if ( ldap_simulation_is_enabled() ) {
+		return ldap_simulation_email_from_username( $p_username );
+	}
+
 	$t_ldap_organization = config_get( 'ldap_organization' );
 	$t_ldap_root_dn = config_get( 'ldap_root_dn' );
 
@@ -173,6 +177,10 @@ function ldap_authenticate( $p_user_id, $p_password ) {
 		return false;
 	}
 
+	if ( ldap_simulation_is_enabled() ) {
+		return ldap_simulation_authenticate( $p_user_id, $p_password );
+	}
+
 	$t_ldap_organization = config_get( 'ldap_organization' );
 	$t_ldap_root_dn = config_get( 'ldap_root_dn' );
 
@@ -210,4 +218,89 @@ function ldap_authenticate( $p_user_id, $p_password ) {
 	ldap_unbind( $t_ds );
 
 	return $t_authenticated;
+}
+
+/**
+ * Checks if the LDAP simulation mode is enabled.
+ *
+ * @return bool true if enabled, false otherwise.
+ */
+function ldap_simulation_is_enabled() {
+	$t_filename = config_get( 'ldap_simulation_file_path' );
+	return !is_blank( $t_filename );
+}
+
+/**
+ * Gets a user from LDAP simulation mode given the username.
+ *
+ * @param string $p_username  The user name.
+ * @return mixed an associate array with user information or null if not found.
+ */
+function ldap_simulation_get_user( $p_username ) {
+	$t_filename = config_get( 'ldap_simulation_file_path' );
+
+	$t_lines = file( $t_filename );
+
+	foreach ( $t_lines as $t_line ) {
+		$t_line = trim( $t_line, " \t\r\n" );
+		$t_row = explode( ',', $t_line );
+
+		if ( $t_row[0] != $p_username ) {
+			continue;
+		}
+
+		$t_user = array();
+
+		$t_user['username'] = $t_row[0];
+		$t_user['realname'] = $t_row[1];
+		$t_user['email'] = $t_row[2];
+		$t_user['password'] = $t_row[3];
+
+		return $t_user;
+	}
+
+	log_event( LOG_LDAP, "ldap_simulation_get_user: user '$t_username' not found." );
+	return null;
+}
+
+/**
+ * Given a username, gets the email address or empty address if user is not found.
+ *
+ * @param string $p_username The user name.
+ * @return The email address or blank if user is not found.
+ */
+function ldap_simulation_email_from_username( $p_username ) {
+	$t_user = ldap_simulation_get_user( $p_username );
+	if ( $t_user === null ) {
+		log_event( LOG_LDAP, "ldap_simulation_email_from_username: user '$p_username' not found." );
+		return '';
+	}
+
+	log_event( LOG_LDAP, "ldap_simulation_email_from_username: user '$p_username' has email '{$t_user['email']}'." );
+	return $t_user['email'];
+}
+
+/**
+ * Authenticates the specified user id / password based on the simulation data.
+ *
+ * @param string $p_user_id   The user id.
+ * @param string $p_password  The password.
+ * @return bool true for authenticated, false otherwise.
+ */
+function ldap_simulation_authenticate( $p_user_id, $p_password ) {
+	$t_username = user_get_field( $p_user_id, 'username' );
+
+	$t_user = ldap_simulation_get_user( $t_username );
+	if ( $t_user === null ) {
+		log_event( LOG_LDAP, "ldap_simulation_authenticate: user '$t_username' not found." );
+		return false;
+	}
+
+	if ( $t_user['password'] != $p_password ) {
+		log_event( LOG_LDAP, "ldap_simulation_authenticate: expected password '{$t_user['password']}' and got '$p_password'." );
+		return false;
+	}
+
+	log_event( LOG_LDAP, "ldap_simulation_authenticate: authentication successful for user '$t_username'." );
+	return true;
 }
