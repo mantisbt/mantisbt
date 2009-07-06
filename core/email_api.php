@@ -80,6 +80,10 @@ function email_is_valid( $p_email ) {
 		return true;
 	}
 
+	if ( ON == config_get( 'use_ldap_email' ) ) {
+		return true;
+	}
+
 	if( is_blank( $p_email ) && ON == config_get( 'allow_blank_email' ) ) {
 		return true;
 	}

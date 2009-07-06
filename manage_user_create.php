@@ -36,7 +36,7 @@
 	$f_realname        = gpc_get_string( 'realname' );
 	$f_password        = gpc_get_string( 'password', '' );
 	$f_password_verify = gpc_get_string( 'password_verify', '' );
-	$f_email           = gpc_get_string( 'email' );
+	$f_email           = gpc_get_string( 'email', '' );
 	$f_access_level    = gpc_get_string( 'access_level' );
 	$f_protected       = gpc_get_bool( 'protected' );
 	$f_enabled         = gpc_get_bool( 'enabled' );
