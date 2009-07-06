@@ -2037,6 +2037,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 		<br />
 		<form method="post" name="filters<?php echo $t_form_name_suffix?>" id="filters_form<?php echo $t_form_name_suffix?>" action="<?php echo $t_action;?>">
+		<?php # CSRF protection not required here - form does not result in modifications ?>
 		<input type="hidden" name="type" value="1" />
 		<?php
 			if( $p_for_screen == false ) {
@@ -3329,6 +3330,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	if( count( $t_stored_queries_arr ) > 0 ) {
 		?>
 					<form method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
+					<?php # CSRF protection not required here - form does not result in modifications ?>
 					<input type="hidden" name="type" value="3" />
 					<?php
 					if( ON == config_get( 'use_javascript' ) ) {
@@ -3348,12 +3350,14 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					<input type="submit" name="switch_to_query_button" class="button-small" value="<?php echo lang_get( 'use_query' )?>" />
 					</form>
 					<form method="post" name="open_queries" action="query_view_page.php">
+					<?php # CSRF protection not required here - form does not result in modifications ?>
 					<input type="submit" name="switch_to_query_button" class="button-small" value="<?php echo lang_get( 'open_queries' )?>" />
 					</form>
 				<?php
 	} else {
 		?>
 					<form method="get" name="reset_query" action="view_all_set.php">
+					<?php # CSRF protection not required here - form does not result in modifications ?>
 					<input type="hidden" name="type" value="3" />
 					<input type="hidden" name="source_query_id" value="-1" />
 					<input type="submit" name="reset_query_button" class="button-small" value="<?php echo lang_get( 'reset_query' )?>" />
@@ -3364,6 +3368,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) {
 		?>
 					<form method="post" name="save_query" action="query_store_page.php">
+					<?php # CSRF protection not required here - form does not result in modifications ?>
 					<input type="submit" name="save_query_button" class="button-small" value="<?php echo lang_get( 'save_query' )?>" />
 					</form>
 			<?php
