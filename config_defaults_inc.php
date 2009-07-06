@@ -1764,6 +1764,13 @@
 	$g_ldap_server			= 'ldaps://ldap.example.com.au/';
 
 	/**
+	 * LDAP port (default 389).  If this doesn't work, try 636.
+	 *
+	 * @global integer $g_ldap_port
+	 */
+	$g_ldap_port			= 389;
+
+	/**
 	 *
 	 * @global string $g_ldap_root_dn
 	 */
@@ -1788,12 +1795,15 @@
 	$g_ldap_realname_field  = 'cn';
 
 	/**
+	 * The distinguished of the user account to use for binding to the LDAP server.
+	 * For example, 'CN=ldap,OU=Administrators,DC=example,DC=com'.
 	 *
 	 * @global string $g_ldap_bind_dn
 	 */
 	$g_ldap_bind_dn			= '';
 
 	/**
+	 * The password for the service account to be used for connecting to the LDAP server.
 	 *
 	 * @global string $g_ldap_bind_passwd
 	 */
@@ -1813,10 +1823,19 @@
 	$g_use_ldap_realname	= OFF;
 
 	/**
-	 * The LDAP Protocol Version, if 0, then the protocol version is not set.
+	 * The LDAP Protocol Version, if 0, then the protocol version is not set.  For Active Directory use version 3.
+	 *
 	 * @global int $g_ldap_protocol_version
 	 */
 	$g_ldap_protocol_version = 0;
+
+	/**
+	 * Determines whether the LDAP library automatically follows referrals returned by LDAP servers or not.
+	 * This maps to LDAP_OPT_REFERRALS ldap library option.  For Active Directory, this should be set to OFF.
+	 *
+	 * @global int $g_ldap_follow_referrals
+	 */
+	$g_ldap_follow_referrals = ON;
 
 	/**
 	 * For development purposes, this is a configuration option that allows replacing

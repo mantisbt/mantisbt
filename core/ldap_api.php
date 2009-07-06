@@ -30,15 +30,16 @@
  * @return resource
  */
 function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
-	$t_ldap_server = config_get( 'ldap_server' );
-
 	if( !extension_loaded( 'ldap' ) ) {
 		log_event( LOG_LDAP, "Error: LDAP extension missing in php" );
 		trigger_error( ERROR_LDAP_EXTENSION_NOT_LOADED, ERROR );
 	}
 
-	log_event( LOG_LDAP, "Attempting connection to LDAP server" );
-	$t_ds = @ldap_connect( $t_ldap_server );
+	$t_ldap_server = config_get( 'ldap_server' );
+	$t_ldap_port = config_get( 'ldap_port' );
+
+	log_event( LOG_LDAP, "Attempting connection to LDAP server '{$t_ldap_server}' port '{$t_ldap_port}'." );
+	$t_ds = @ldap_connect( $t_ldap_server, $t_ldap_port );
 	if( $t_ds > 0 ) {
 		log_event( LOG_LDAP, "Connection accepted to LDAP server" );
 		$t_protocol_version = config_get( 'ldap_protocol_version' );
@@ -47,6 +48,10 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 			log_event( LOG_LDAP, "Setting LDAP protocol to  to ldap server to " . $t_protocol_version );
 			ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
 		}
+
+		# Set referrals flag.
+		$t_follow_referrals = ON == config_get( 'ldap_follow_referrals' );
+		ldap_set_option( $t_ds, LDAP_OPT_REFERRALS, $t_follow_referrals );
 
 		# If no Bind DN and Password is set, attempt to login as the configured
 		#  Bind DN.
