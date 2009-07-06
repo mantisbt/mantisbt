@@ -29,7 +29,7 @@
 	require_once( 'gpc_api.php' );
 	require_once( 'helper_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'manage_columns_copy' );
 
 	auth_reauthenticate();
 
@@ -90,6 +90,8 @@
 	config_set( 'print_issues_page_columns', $t_print_issues_page_columns, $t_user_id, $t_dst_project_id );
 	config_set( 'csv_columns', $t_csv_columns, $t_user_id, $t_dst_project_id );
 	config_set( 'excel_columns', $t_excel_columns, $t_user_id, $t_dst_project_id );
+
+	form_security_purge( 'manage_columns_copy' );
 
 	$t_redirect_url = $f_manage_page ? 'manage_config_columns_page.php' : 'account_manage_columns_page.php';
 	print_header_redirect( $t_redirect_url );
