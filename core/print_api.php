@@ -172,7 +172,7 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
 
 	$t_username = user_get_name( $p_user_id );
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
-		$t_email = user_get_field( $p_user_id, 'email' );
+		$t_email = user_get_email( $p_user_id );
 		print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
 	} else {
 		echo '<font STYLE="text-decoration: line-through">';
@@ -1473,11 +1473,12 @@ function get_email_link_with_subject( $p_email, $p_text, $p_summary ) {
 	#  gets turned into a %40 and you can't right click in browsers to
 	#  do Copy Email Address.  If we don't apply string_url() to the
 	#  summary text then an ampersand (for example) will truncate the text
-	$p_summary = string_url( $p_summary );
-	$t_mailto = string_attribute( "mailto:$p_email?subject=$p_summary" );
-	$p_text = string_display( $p_text );
+	$t_summary = string_url( $p_summary );
+	$t_email = string_url( $p_email );
+	$t_mailto = string_attribute( "mailto:$t_email?subject=$t_summary" );
+	$t_text = string_display( $p_text );
 
-	return "<a href=\"$t_mailto\">$p_text</a>";
+	return "<a href=\"$t_mailto\">$t_text</a>";
 }
 
 # Print a hidden input for each name=>value pair in the array
