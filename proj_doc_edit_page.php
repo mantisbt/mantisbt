@@ -125,6 +125,7 @@
 <br />
 
 		<form method="post" action="proj_doc_delete.php">
+		<?php echo form_security_field( 'proj_doc_delete' ) ?>
 		<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
 		<input type="hidden" name="title" value="<?php echo $v_title ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'file_delete_button' ) ?>" />
