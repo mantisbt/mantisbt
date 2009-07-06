@@ -716,26 +716,26 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 	$t_result = array();
 
 	foreach( $t_rows as $t_issue_data ) {
-		$t_id = $t_issue_data['id'];
+		$t_id = $t_issue_data->id;
 
 		$t_issue = array();
 
 		$t_issue['id'] = $t_id;
-		$t_issue['view_state'] = $t_issue_data['view_state'];
-		$t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data['last_updated'] );
+		$t_issue['view_state'] = $t_issue_data->view_state;
+		$t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data->last_updated );
 
-		$t_issue['project'] = $t_issue_data['project_id'];
-		$t_issue['category'] = mci_null_if_empty( category_get_name( $t_issue_data['category_id'] ) );
-		$t_issue['priority'] = $t_issue_data['priority'];
-		$t_issue['severity'] = $t_issue_data['severity'];
-		$t_issue['status'] = $t_issue_data['status'];
+		$t_issue['project'] = $t_issue_data->project_id;
+		$t_issue['category'] = mci_null_if_empty( category_get_name( $t_issue_data->category_id ) );
+		$t_issue['priority'] = $t_issue_data->priority;
+		$t_issue['severity'] = $t_issue_data->severity;
+		$t_issue['status'] = $t_issue_data->status;
 
-		$t_issue['reporter'] = $t_issue_data['reporter_id'];
-		$t_issue['summary'] = $t_issue_data['summary'];
-		if( !empty( $t_issue_data['handler_id'] ) ) {
-			$t_issue['handler'] = $t_issue_data['handler_id'];
+		$t_issue['reporter'] = $t_issue_data->reporter_id;
+		$t_issue['summary'] = $t_issue_data->summary;
+		if( !empty( $t_issue_data->handler_id ) ) {
+			$t_issue['handler'] = $t_issue_data->handler_id;
 		}
-		$t_issue['resolution'] = $t_issue_data['resolution'];
+		$t_issue['resolution'] = $t_issue_data->resolution;
 
 		$t_issue['attachments_count'] = count( mci_issue_get_attachments( $t_issue_data['id'] ) );
 		$t_issue['notes_count'] = count( mci_issue_get_notes( $t_issue_data['id'] ) );
