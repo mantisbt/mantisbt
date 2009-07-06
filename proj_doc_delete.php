@@ -25,7 +25,7 @@
 	  */
 	require_once( 'core.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'proj_doc_delete' );
 
 	# Check if project documentation feature is enabled.
 	if ( OFF == config_get( 'enable_project_documentation' ) ) {
@@ -50,6 +50,8 @@
 		lang_get( 'file_delete_button' ) );
 
 	file_delete( $f_file_id, 'project' );
+
+	form_security_purge( 'proj_doc_delete' );
 
 	$t_redirect_url = 'proj_doc_page.php';
 
