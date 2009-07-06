@@ -149,6 +149,9 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 					list( $t_type, $t_raw_value ) = explode( ';', $t_value, 2 );
 
 					switch( $t_type ) {
+						case CONFIG_TYPE_FLOAT:
+							$t_value = (float) $t_raw_value;
+							break;
 						case CONFIG_TYPE_INT:
 							$t_value = (int) $t_raw_value;
 							break;
@@ -309,6 +312,9 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 	if( is_array( $p_value ) || is_object( $p_value ) ) {
 		$t_type = CONFIG_TYPE_COMPLEX;
 		$c_value = serialize( $p_value );
+	} else if( is_float( $p_value ) ) {
+		$t_type = CONFIG_TYPE_FLOAT;
+		$c_value = (float) $p_value;
 	} else if( is_int( $p_value ) || is_numeric( $p_value ) ) {
 		$t_type = CONFIG_TYPE_INT;
 		$c_value = db_prepare_int( $p_value );

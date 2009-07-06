@@ -462,6 +462,7 @@ define( 'TOKEN_EXPIRY_COLLAPSE', 365 * 24 * 60 * 60 );
 define( 'CONFIG_TYPE_INT', 1 );
 define( 'CONFIG_TYPE_STRING', 2 );
 define( 'CONFIG_TYPE_COMPLEX', 3 );
+define( 'CONFIG_TYPE_FLOAT', 4 );
 
 # Control types for date custom fields.
 define( 'CUSTOM_FIELD_DATE_ANY', 0 );
