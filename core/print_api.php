@@ -1694,7 +1694,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 			echo $t_href_end . '&nbsp;' . $t_href_start . $t_file_display_name . $t_href_end . $t_href_clicket . ' (' . $t_filesize . ' ' . lang_get( 'bytes' ) . ') ' . '<span class=\"italic\">' . $t_date_added . '</span>';
 
 			if ( $t_attachment['can_delete'] ) {
-				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id={$t_attachment['id']}\">" . lang_get( 'delete_link' ) . '</a>]';
+				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id={$t_attachment['id']}" . form_security_param( 'bug_file_delete' ) . "\">" . lang_get( 'delete_link' ) . '</a>]';
 			}
 
 			if ( ( FTP == config_get( 'file_upload_method' ) ) && $t_attachment['exists'] ) {
