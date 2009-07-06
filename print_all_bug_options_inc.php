@@ -168,6 +168,7 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 
 <div class="border center">
 	<form method="post" action="print_all_bug_options_reset.php">
+	<?php echo form_security_field( 'print_all_bug_options_reset' ) ?>
 	<input type="submit" class="button" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
 	</form>
 </div>
