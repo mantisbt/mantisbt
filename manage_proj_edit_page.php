@@ -552,8 +552,6 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	<?php
 		$t_index = 0;
 
-		$t_custom_field_security = form_security_field( 'manage_proj_custom_field_update' );
-
 		foreach( $t_custom_fields as $t_field_id ) {
 			$t_desc = custom_field_get_definition( $t_field_id );
 	?>
@@ -563,7 +561,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 				</td>
 				<td>
 <form method="post" action="manage_proj_custom_field_update.php">
-	<?php echo $t_custom_field_security ?>
+	<?php echo form_security_field( 'manage_proj_custom_field_update' ) ?>
 	<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 	<input type="hidden" name="field_id" value="<?php echo $t_field_id ?>" />
 	<input type="text" name="sequence" value="<?php echo custom_field_get_sequence( $t_field_id, $f_project_id ) ?>" size="2" />
