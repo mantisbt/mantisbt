@@ -227,6 +227,7 @@
 	</td>
 	<td class="center" colspan="3">
 		<form method="post" action="manage_user_page.php">
+		<?php # CSRF protection not required here - form does not result in modifications ?>
 		<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
 		<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
 		<input type="hidden" name="save" value="1" />
@@ -341,6 +342,7 @@
 ?>
 	<br />
 	<form method="get" action="manage_user_edit_page.php">
+	<?php # CSRF protection not required here - form does not result in modifications ?>
 		<?php echo lang_get( 'username' ) ?>
 		<input type="text" name="username" value="" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" />

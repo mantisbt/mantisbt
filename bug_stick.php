@@ -30,7 +30,7 @@
 
 	require_once( 'bug_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'bug_stick' );
 
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$t_bug = bug_get( $f_bug_id, true );
@@ -45,6 +45,8 @@
 	access_ensure_bug_level( config_get( 'set_bug_sticky_threshold' ), $f_bug_id );
 
 	bug_set_field( $f_bug_id, 'sticky', 'stick' == $f_action );
+
+	form_security_purge( 'bug_stick' );
 
 	print_successful_redirect_to_bug( $f_bug_id );
 ?>

@@ -27,7 +27,7 @@
 
 	require_once( 'config_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'manage_config_columns_reset' );
 
 	auth_ensure_user_authenticated();
 	auth_reauthenticate();
@@ -38,6 +38,8 @@
 	config_delete_for_user( 'print_issues_page_columns', $t_user_id );
 	config_delete_for_user( 'csv_columns', $t_user_id );
 	config_delete_for_user( 'excel_columns', $t_user_id );
+
+	form_security_purge( 'manage_config_columns_reset' );
 
 	echo '<br />';
 	echo '<div align="center">';

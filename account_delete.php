@@ -43,6 +43,8 @@
   */
 require_once( 'core.php' );
 
+form_security_validate('account_delete');
+
 auth_ensure_user_authenticated();
 
 current_user_ensure_unprotected();
@@ -53,6 +55,8 @@ if ( OFF == config_get( 'allow_account_delete' ) ) {
 
 helper_ensure_confirmed( lang_get( 'confirm_delete_msg' ),
 						 lang_get( 'delete_account_button' ) );
+
+form_security_purge('account_delete');
 
 user_delete( auth_get_current_user_id() );
 

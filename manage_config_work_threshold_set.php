@@ -27,7 +27,7 @@
 
 	require_once( 'email_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'manage_config_work_threshold_set' );
 
 	auth_reauthenticate();
 
@@ -155,6 +155,7 @@
 	set_capability_row( 'view_history_threshold' );
 	set_capability_row( 'bug_reminder_threshold' );
 
+	form_security_purge( 'manage_config_work_threshold_set' );
 ?>
 
 <br />

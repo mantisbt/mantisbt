@@ -31,7 +31,7 @@
 	require_once( 'email_api.php' );
 	require_once( 'bugnote_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'bug_reminder' );
 
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_to			= gpc_get_int_array( 'to' );
@@ -77,6 +77,8 @@
 		$t_attr = '|' . implode( '|', $f_to ) . '|';
 		bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, NULL, FALSE );
 	}
+
+	form_security_purge( 'bug_reminder' );
 
 	html_page_top( null, string_get_bug_view_url( $f_bug_id ) );
 ?>

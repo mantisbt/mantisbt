@@ -194,6 +194,7 @@
 ?>
 	<p>
 	<form method="post" action="<?php echo string_get_bug_report_url() ?>">
+	<?php # CSRF protection not required here - form does not result in modifications ?>
 		<input type="hidden" name="category_id" 	value="<?php echo $t_bug_data->category_id ?>" />
 		<input type="hidden" name="severity" 		value="<?php echo $t_bug_data->severity ?>" />
 		<input type="hidden" name="reproducibility" 	value="<?php echo $t_bug_data->reproducibility ?>" />

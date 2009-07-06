@@ -527,6 +527,7 @@ function html_login_info() {
 
 	if( $t_show_project_selector ) {
 		echo '<form method="post" name="form_set_project" action="' . helper_mantis_url( 'set_project.php' ) . '">';
+		# CSRF protection not required here - form does not result in modifications
 
 		echo lang_get( 'email_project' ), ': ';
 		if( ON == config_get( 'show_extended_project_browser' ) ) {
@@ -827,6 +828,7 @@ function print_menu() {
 		echo '</td>';
 		echo '<td class="menu right nowrap">';
 		echo '<form method="post" action="' . helper_mantis_url( 'jump_to_bug.php">' );
+		# CSRF protection not required here - form does not result in modifications
 
 		if( ON == config_get( 'use_javascript' ) ) {
 			$t_bug_label = lang_get( 'issue_id' );
@@ -1275,6 +1277,7 @@ function html_status_percentage_legend() {
  * @return null
  */
 function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = 'post' ) {
+	$t_form_name = explode( '.php', $p_action, 2 );
 	$p_action = urlencode( $p_action );
 	$p_button_text = string_attribute( $p_button_text );
 	if( null === $p_fields ) {
@@ -1288,6 +1291,10 @@ function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = '
 	}
 
 	echo "<form method=\"$t_method\" action=\"$p_action\">\n";
+	# Add a CSRF token only when the form is being sent via the POST method
+	if ( $t_method == 'post' ) {
+		echo form_security_field( $t_form_name[0] );
+	}
 
 	foreach( $p_fields as $key => $val ) {
 		$key = string_attribute( $key );
@@ -1335,6 +1342,7 @@ function html_button_bug_change_status( $p_bug_id ) {
 		reset( $t_enum_list );
 
 		echo "<form method=\"post\" action=\"bug_change_status_page.php\">";
+		# CSRF protection not required here - form does not result in modifications
 
 		$t_button_text = lang_get( 'bug_status_to_button' );
 		echo "<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />";
@@ -1407,6 +1415,7 @@ function html_button_bug_assign_to( $p_bug_id ) {
 	}
 
 	echo "<form method=\"post\" action=\"bug_assign.php\">";
+	echo form_security_field( 'bug_assign' );
 
 	$t_button_text = lang_get( 'bug_assign_to_button' );
 	echo "<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />";

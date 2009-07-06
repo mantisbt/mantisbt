@@ -408,6 +408,7 @@
 	$t_colour_global = config_get( 'colour_global');
 
 	echo "<form name=\"workflow_config_action\" method=\"post\" action=\"manage_config_workflow_set.php\">\n";
+	echo form_security_field( 'manage_config_workflow_set' );
 
 	if ( ALL_PROJECTS == $t_project ) {
 	    $t_project_title = lang_get( 'config_all_projects' );

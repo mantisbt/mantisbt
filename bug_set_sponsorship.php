@@ -27,7 +27,7 @@
 
 	require_once( 'sponsorship_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'bug_set_sponsorship' );
 
 	if ( config_get( 'enable_sponsorship' ) == OFF ) {
 		trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
@@ -74,5 +74,7 @@
 			sponsorship_set( $sponsorship );
 		}
 	}
+
+	form_security_purge( 'bug_set_sponsorship' );
 
 	print_header_redirect_view( $f_bug_id );

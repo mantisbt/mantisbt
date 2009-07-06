@@ -1319,7 +1319,12 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
 # $p_label - The button label
 # $p_args_to_post - An associative array with key => value to be posted, can be null.
 function print_button( $p_action_page, $p_label, $p_args_to_post = null ) {
+	$t_form_name = explode( '.php', $p_action_page, 2 );
+	# TODO: ensure all uses of print_button supply arguments via $p_args_to_post (POST)
+	# instead of via $p_action_page (GET). Then only add the CSRF form token if
+	# arguments are being sent via the POST method.
 	echo '<form method="post" action="', $p_action_page, '">';
+	echo form_security_field( $t_form_name[0] );
 	echo '<input type="submit" class="button-small" value="', $p_label, '" />';
 
 	if( $p_args_to_post !== null ) {
@@ -1689,7 +1694,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 			echo $t_href_end . '&nbsp;' . $t_href_start . $t_file_display_name . $t_href_end . $t_href_clicket . ' (' . $t_filesize . ' ' . lang_get( 'bytes' ) . ') ' . '<span class=\"italic\">' . $t_date_added . '</span>';
 
 			if ( $t_attachment['can_delete'] ) {
-				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id={$t_attachment['id']}\">" . lang_get( 'delete_link' ) . '</a>]';
+				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id={$t_attachment['id']}" . form_security_param( 'bug_file_delete' ) . "\">" . lang_get( 'delete_link' ) . '</a>]';
 			}
 
 			if ( ( FTP == config_get( 'file_upload_method' ) ) && $t_attachment['exists'] ) {

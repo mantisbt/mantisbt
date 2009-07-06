@@ -282,6 +282,7 @@ if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 <!-- Delete Button -->
 <div class="border center">
 	<form method="post" action="account_delete.php">
+	<?php echo form_security_field( 'account_delete' ) ?>
 	<input type="submit" class="button" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
 	</form>
 </div>

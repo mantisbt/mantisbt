@@ -30,7 +30,7 @@
 	require_once( 'bug_api.php' );
 	require_once( 'bugnote_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'bugnote_add' );
 
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_private		= gpc_get_bool( 'private' );
@@ -61,5 +61,7 @@
 
 	# Event integration
 	event_signal( 'EVENT_BUGNOTE_ADD', array( $f_bug_id, $t_bugnote_id ) );
+
+	form_security_purge( 'bugnote_add' );
 
 	print_successful_redirect_to_bug( $f_bug_id );

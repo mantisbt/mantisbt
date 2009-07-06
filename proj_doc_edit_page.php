@@ -60,6 +60,7 @@
 <br />
 <div align="center">
 <form method="post" enctype="multipart/form-data" action="proj_doc_update.php">
+<?php echo form_security_field( 'proj_doc_update' ) ?>
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
@@ -124,6 +125,7 @@
 <br />
 
 		<form method="post" action="proj_doc_delete.php">
+		<?php echo form_security_field( 'proj_doc_delete' ) ?>
 		<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
 		<input type="hidden" name="title" value="<?php echo $v_title ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'file_delete_button' ) ?>" />
