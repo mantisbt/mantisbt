@@ -185,8 +185,6 @@
 <?php
 	}
 
-	$t_category_delete_security = form_security_param( 'manage_proj_cat_delete' );
-
 	foreach ( $t_categories as $t_category ) {
 		$t_id = $t_category['id'];
 
@@ -212,7 +210,7 @@
 
 					print_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&amp;project_id=' . $t_project_id, lang_get( 'edit_link' ) );
 					echo '&nbsp;';
-					print_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&amp;project_id=' . $t_project_id . $t_category_delete_security, lang_get( 'delete_link' ) );
+					print_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&amp;project_id=' . $t_project_id, lang_get( 'delete_link' ) );
 				?>
 			</td>
 		</tr>
