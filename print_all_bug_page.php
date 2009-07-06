@@ -98,6 +98,7 @@
 <br />
 
 <form method="post" action="view_all_set.php">
+<?php # CSRF protection not required here - form does not result in modifications ?>
 <input type="hidden" name="type" value="1" />
 <input type="hidden" name="print" value="1" />
 <input type="hidden" name="offset" value="0" />
