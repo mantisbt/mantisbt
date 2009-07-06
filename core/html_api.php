@@ -527,6 +527,7 @@ function html_login_info() {
 
 	if( $t_show_project_selector ) {
 		echo '<form method="post" name="form_set_project" action="' . helper_mantis_url( 'set_project.php' ) . '">';
+		# CSRF protection not required here - form does not result in modifications
 
 		echo lang_get( 'email_project' ), ': ';
 		if( ON == config_get( 'show_extended_project_browser' ) ) {
