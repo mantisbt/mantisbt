@@ -1805,6 +1805,14 @@
 	 */
 	$g_ldap_protocol_version = 0;
 
+	/**
+	 * For development purposes, this is a configuration option that allows replacing
+	 * the ldap communication with a comma separated text file.  The text file has a line per user.
+	 * Each line includes: user name, user real name, email, password.  For production
+	 * systems this option should be set to ''.
+	 */
+	$g_ldap_simulation_file_path = '';
+
 	/*******************
 	 * Status Settings *
 	 *******************/
