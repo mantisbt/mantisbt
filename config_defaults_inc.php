@@ -250,22 +250,6 @@
 	 */
 	$g_form_security_validation = ON;
 
-	/**************************
-	 * Configuration Settings *
-	 **************************/
-
-	/**
-	 * The following list of variables should never be in the database.
-	 * These patterns will be concatenated and used as a regular expression
-	 * to bypass the database lookup and look here for appropriate global settings.
-	 * @global array $g_global_settings
-	 */
-	$g_global_settings = array(
-		'_table$', 'cookie', '^db_', 'hostname', 'allow_signup', 'database_name', 'show_queries_count', 'admin_checks', 'version_suffix',
-		'_path$', 'use_iis', 'language', 'use_javascript', 'minimal_jscss', 'display_errors', 'show_detailed_errors', 'stop_on_errors', 'login_method', '_file$',
-		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'plugins_enabled', 'session_', 'form_security_',
-	);
-
 	/****************************
 	 * Signup and Lost Password *
 	 ****************************/
@@ -2903,13 +2887,6 @@
 	$g_compress_html		= ON;
 
 	/**
-	 * if OFF, will include original javascript files
-	 * if ON, will include javascript files that have been compressed by yuicompressor if available
-	 * @global int $g_minimal_jscss
-	 */
-	$g_minimal_jscss		= ON;
-
-	/**
 	 * Use persistent database connections
 	 * @global int $g_use_persistent_connections
 	 */
@@ -3002,125 +2979,6 @@
 	 * @global int $g_allow_file_cache
 	 */
 	 // $g_allow_file_cache = ON;
-
-	/*************
-	 * Debugging *
-	 *************/
-
-	/**
-	 * Time page loads.  Shows at the bottom of the page.
-	 * @global int $g_show_timer
-	 */
-	$g_show_timer			= OFF;
-
-	/**
-	 * used for development only.  Leave OFF
-	 * @global int $g_debug_timer
-	 */
-	$g_debug_timer			= OFF;
-
-	/**
-	 * Used for debugging e-mail feature, when set to OFF the emails work as normal.
-	 * when set to e-mail address, all e-mails are sent to this address with the
-	 * original To, Cc, Bcc included in the message body.
-	 * @global int $g_debug_email
-	 */
-	$g_debug_email			= OFF;
-
-	/**
-	 * Shows the total number/unique number of queries executed to serve the page.
-	 * @global int $g_show_queries_count
-	 */
-	$g_show_queries_count	= ON;
-
-	/**
-	 * Indicates the access level required for a user to see the queries count / list.
-	 * This only has an effect if $g_show_queries_count is ON.  Note that this threshold
-	 * is compared against the user's default global access level rather than the
-	 * threshold based on the current active project.
-	 *
-	 * @global int $g_show_queries_threshold
-	 */
-	$g_show_queries_threshold = ADMINISTRATOR;
-
-	/**
-	 * Shows the list of all queries that are executed in chronological order from top
-	 * to bottom.  This option is only effective when $g_show_queries_count is ON.
-	 * WARNING: Potential security hazard.  Only turn this on when you really
-	 * need it (for debugging/profiling)
-	 * @global int $g_show_queries_list
-	 */
-	$g_show_queries_list	= OFF;
-
-	/**
-	 * --- detailed error messages -----
-	 * Shows a list of variables and their values when an error is triggered
-	 * Only applies to error types configured to 'halt' in $g_display_errors, below
-	 * WARNING: Potential security hazard.  Only turn this on when you really
-	 * need it for debugging
-	 * @global int $g_show_detailed_errors
-	 */
-	$g_show_detailed_errors	= OFF;
-
-	/**
-	 * --- error display ---
-	 * what errors are displayed and how?
-	 * The options for display are:
-	 *  'halt' - stop and display traceback
-	 *  'inline' - display 1 line error and continue
-	 *  'none' - no error displayed
-	 * A developer might set this in config_inc.php as:
-	 *	$g_display_errors = array(
-	 *		E_WARNING => 'halt',
-	 *		E_NOTICE => 'halt',
-	 *		E_USER_ERROR => 'halt',
-	 *		E_USER_WARNING => 'none',
-	 *		E_USER_NOTICE => 'none'
-	 *	);
-	 * @global array $g_display_errors
-	 */
-	$g_display_errors = array(
-		E_WARNING => 'inline',
-		E_NOTICE => 'none',
-		E_USER_ERROR => 'halt',
-		E_USER_WARNING => 'inline',
-		E_USER_NOTICE => 'none'
-	);
-
-
-	/**
-	 * --- debug messages ---
-	 * If this option is turned OFF (default) page redirects will continue to
-	 *  function even if a non-fatal error occurs.  For debugging purposes, you
-	 *  can set this to ON so that any non-fatal error will prevent page redirection,
-	 *  allowing you to see the errors.
-	 * Only turn this option on for debugging
-	 * @global int $g_stop_on_errors
-	 */
-	$g_stop_on_errors		= OFF;
-
-
-	/**
-	 * --- system logging ---
-	 * This controls the logging of information to a separate file for debug or audit
-	 * $g_log_level controls what information is logged
-	 *  see constant_inc.php for details on the log channels available
-	 *  e.g., $g_log_level = LOG_EMAIL | LOG_EMAIL_RECIPIENT | LOG_FILTERING | LOG_AJAX;
-	 *
-	 * $g_log_destination specifies the file where the data goes
-	 *   right now, only "file:<file path>" is supported
-	 *   e.g. (Linux), $g_log_destination = 'file:/tmp/mantisbt.log';
-	 *   e.g. (Windows), $g_log_destination = 'file:c:/temp/mantisbt.log';
-	 *   see http://www.php.net/error_log for details
-	 * @global int $g_log_level
-	 */
-	$g_log_level = LOG_NONE;
-
-	/**
-	 *
-	 * @global string $g_log_destination
-	 */
-	$g_log_destination = '';
 
 	/*****************
 	 * Custom Fields *
@@ -3696,3 +3554,144 @@
 	 * Sub-projects should inherit versions from parent projects.
 	 */
 	$g_subprojects_inherit_versions = ON;
+	
+	/**********************************
+	 * Debugging / Developer Settings *
+	 **********************************/
+
+	/**
+	 * Time page loads.  Shows at the bottom of the page.
+	 * @global int $g_show_timer
+	 */
+	$g_show_timer			= OFF;
+
+	/**
+	 * used for development only.  Leave OFF
+	 * @global int $g_debug_timer
+	 */
+	$g_debug_timer			= OFF;
+
+	/**
+	 * Used for debugging e-mail feature, when set to OFF the emails work as normal.
+	 * when set to e-mail address, all e-mails are sent to this address with the
+	 * original To, Cc, Bcc included in the message body.
+	 * @global int $g_debug_email
+	 */
+	$g_debug_email			= OFF;
+
+	/**
+	 * Shows the total number/unique number of queries executed to serve the page.
+	 * @global int $g_show_queries_count
+	 */
+	$g_show_queries_count	= ON;
+
+	/**
+	 * Indicates the access level required for a user to see the queries count / list.
+	 * This only has an effect if $g_show_queries_count is ON.  Note that this threshold
+	 * is compared against the user's default global access level rather than the
+	 * threshold based on the current active project.
+	 *
+	 * @global int $g_show_queries_threshold
+	 */
+	$g_show_queries_threshold = ADMINISTRATOR;
+
+	/**
+	 * Shows the list of all queries that are executed in chronological order from top
+	 * to bottom.  This option is only effective when $g_show_queries_count is ON.
+	 * WARNING: Potential security hazard.  Only turn this on when you really
+	 * need it (for debugging/profiling)
+	 * @global int $g_show_queries_list
+	 */
+	$g_show_queries_list	= OFF;
+
+	/**
+	 * --- detailed error messages -----
+	 * Shows a list of variables and their values when an error is triggered
+	 * Only applies to error types configured to 'halt' in $g_display_errors, below
+	 * WARNING: Potential security hazard.  Only turn this on when you really
+	 * need it for debugging
+	 * @global int $g_show_detailed_errors
+	 */
+	$g_show_detailed_errors	= OFF;
+
+	/**
+	 * --- error display ---
+	 * what errors are displayed and how?
+	 * The options for display are:
+	 *  'halt' - stop and display traceback
+	 *  'inline' - display 1 line error and continue
+	 *  'none' - no error displayed
+	 * A developer might set this in config_inc.php as:
+	 *	$g_display_errors = array(
+	 *		E_WARNING => 'halt',
+	 *		E_NOTICE => 'halt',
+	 *		E_USER_ERROR => 'halt',
+	 *		E_USER_WARNING => 'none',
+	 *		E_USER_NOTICE => 'none'
+	 *	);
+	 * @global array $g_display_errors
+	 */
+	$g_display_errors = array(
+		E_WARNING => 'inline',
+		E_NOTICE => 'none',
+		E_USER_ERROR => 'halt',
+		E_USER_WARNING => 'inline',
+		E_USER_NOTICE => 'none'
+	);
+
+	/**
+	 * --- debug messages ---
+	 * If this option is turned OFF (default) page redirects will continue to
+	 *  function even if a non-fatal error occurs.  For debugging purposes, you
+	 *  can set this to ON so that any non-fatal error will prevent page redirection,
+	 *  allowing you to see the errors.
+	 * Only turn this option on for debugging
+	 * @global int $g_stop_on_errors
+	 */
+	$g_stop_on_errors		= OFF;
+
+
+	/**
+	 * --- system logging ---
+	 * This controls the logging of information to a separate file for debug or audit
+	 * $g_log_level controls what information is logged
+	 *  see constant_inc.php for details on the log channels available
+	 *  e.g., $g_log_level = LOG_EMAIL | LOG_EMAIL_RECIPIENT | LOG_FILTERING | LOG_AJAX;
+	 *
+	 * $g_log_destination specifies the file where the data goes
+	 *   right now, only "file:<file path>" is supported
+	 *   e.g. (Linux), $g_log_destination = 'file:/tmp/mantisbt.log';
+	 *   e.g. (Windows), $g_log_destination = 'file:c:/temp/mantisbt.log';
+	 *   see http://www.php.net/error_log for details
+	 * @global int $g_log_level
+	 */
+	$g_log_level = LOG_NONE;
+
+	/**
+	 *
+	 * @global string $g_log_destination
+	 */
+	$g_log_destination = '';
+	
+	/**
+	 * if OFF, will include original javascript files
+	 * if ON, will include javascript files that have been compressed by yuicompressor if available
+	 * @global int $g_minimal_jscss
+	 */
+	$g_minimal_jscss		= ON;
+
+	/**************************
+	 * Configuration Settings *
+	 **************************/
+
+	/**
+	 * The following list of variables should never be in the database.
+	 * These patterns will be concatenated and used as a regular expression
+	 * to bypass the database lookup and look here for appropriate global settings.
+	 * @global array $g_global_settings
+	 */
+	$g_global_settings = array(
+		'_table$', 'cookie', '^db_', 'hostname', 'allow_signup', 'database_name', 'show_queries_count', 'admin_checks', 'version_suffix',
+		'_path$', 'use_iis', 'language', 'use_javascript', 'minimal_jscss', 'display_errors', 'show_detailed_errors', 'stop_on_errors', 'login_method', '_file$',
+		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'plugins_enabled', 'session_', 'form_security_',
+	);
