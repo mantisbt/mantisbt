@@ -32,7 +32,7 @@
 	require_once( 'string_api.php' );
 	require_once( 'date_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'query_delete' );
 
 	auth_ensure_user_authenticated();
 	compress_enable();
@@ -47,11 +47,13 @@
 	{
 		html_page_top();
 		filter_db_delete_filter( $f_query_id );
+		form_security_purge( 'query_delete' );
 		?>
 		<br />
 		<div align="center">
 		<center><b><?php print filter_db_get_name( $f_query_id ) . ' ' . lang_get( 'query_deleted' ); ?></b></center>
 		<form method="post" action="<?php print $t_redirect_url; ?>">
+		<?php # CSRF protection not required here - form does not result in modifications ?>
 		<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
 		</form>
 
