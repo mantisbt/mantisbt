@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
+form_security_validate( 'plugin_graph_config_edit' );
+
 auth_reauthenticate( );
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
@@ -28,5 +30,7 @@ if( plugin_config_get( 'eczlibrary' ) != $f_library ) {
 if( plugin_config_get( 'jpgraph_antialias' ) != $f_jpgraph_antialias ) {
 	plugin_config_set( 'jpgraph_antialias', $f_jpgraph_antialias );
 }
+
+form_security_purge( 'plugin_graph_config_edit' );
 
 print_successful_redirect( plugin_page( 'config', true ) );
