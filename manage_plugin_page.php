@@ -237,7 +237,7 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 	echo '<td class="small">',$t_description,$t_author,$t_url,'</td>';
 	echo '<td class="center">',$t_depends,'</td>';
 	echo '<td class="center">';
-	if ( $t_ready ) { print_bracket_link( 'manage_plugin_install.php?name='.$t_basename, lang_get( 'plugin_install' ) ); }
+	if ( $t_ready ) { print_bracket_link( 'manage_plugin_install.php?name=' . $t_basename . form_security_param( 'manage_plugin_install' ), lang_get( 'plugin_install' ) ); }
 	echo '</td></tr>';
 } ?>
 
