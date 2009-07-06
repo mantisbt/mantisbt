@@ -27,7 +27,7 @@
 
 	require_once( 'file_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'proj_doc_update' );
 
 	# Check if project documentation feature is enabled.
 	if ( OFF == config_get( 'enable_project_documentation' ) ||
@@ -123,6 +123,8 @@
 	if ( !$result ) {
 		trigger_error( ERROR_GENERIC, ERROR  );
 	}
+
+	form_security_purge( 'proj_doc_update' );
 
 	$t_redirect_url = 'proj_doc_page.php';
 
