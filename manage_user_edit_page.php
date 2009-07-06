@@ -91,10 +91,16 @@
 		<?php echo lang_get( 'email' ) ?>:
 	</td>
 	<td>
-		<?php print_email_input( 'email', $t_user['email'] ) ?>
+		<?php
+			if ( config_get( 'use_ldap_email' ) == OFF ) {
+				print_email_input( 'email', $t_user['email'] );
+			} else {
+				echo string_display( user_get_email( $f_user_id ) );
+			}
+		?>
 	</td>
 </tr>
-
+ 
 <!-- Access Level -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">

@@ -42,10 +42,6 @@
 	$f_password        	= gpc_get_string( 'password', '' );
 	$f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 
-	$f_email = email_append_domain( $f_email );
-
-	email_ensure_not_disposable( $f_email );
-
 	// get the user id once, so that if we decide in the future to enable this for
 	// admins / managers to change details of other users.
 	$t_user_id = auth_get_current_user_id();
@@ -58,9 +54,14 @@
 
 	/** @todo Listing what fields were updated is not standard behaviour of MantisBT - it also complicates the code. */
 
-	if ( $f_email != user_get_email( $t_user_id ) ) {
-		user_set_email( $t_user_id, $f_email );
-		$t_email_updated = true;
+	if ( OFF == config_get( 'use_ldap_email' ) ) {
+		$f_email = email_append_domain( $f_email );
+		email_ensure_not_disposable( $f_email );
+
+		if ( $f_email != user_get_email( $t_user_id ) ) {
+			user_set_email( $t_user_id, $f_email );
+			$t_email_updated = true;
+		}
 	}
 
     # strip extra spaces from real name

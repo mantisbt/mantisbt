@@ -59,6 +59,9 @@
 		<input type="text" name="realname" size="32" maxlength="<?php echo REALLEN;?>" />
 	</td>
 </tr>
+<?php
+	if ( config_get( 'use_ldap_email' ) == OFF ) {
+?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'email' ) ?>
@@ -68,6 +71,8 @@
 	</td>
 </tr>
 <?php
+	}
+
 	if ( OFF == config_get( 'send_reset_password' ) )  {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
