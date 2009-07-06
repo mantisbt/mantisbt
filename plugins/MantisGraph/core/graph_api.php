@@ -60,22 +60,21 @@ function graph_get_font() {
 			$t_font = 'arial.ttf';
 		}
 
-		if ( is_windows_server() ) {
-			$sroot = $_SERVER['SystemRoot'];
-			if( empty($sroot) ) {
-				error_text('unable to load font(s)', 'unable to load font(s)');
-			} else {
-				$ttf_dir = $sroot.'/fonts/';
-			}
-		} else {
-			$ttf_dir = '/usr/share/fonts/truetype/';
-		}		
-		$f = $ttf_dir . $t_font;
+		
+		$t_font_path = get_font_path();
+		if( empty($sroot) ) {
+			error_text('unable to load font(s)', 'unable to load font(s)');
+		}
+		$f = $t_font_path . $t_font;
 		if( file_exists($f) === false || is_readable($f) === false ) {
 			error_text('unable to read/find font', 'unable to read/find font');
 		}
 		return $f;
 	} else {
+		$t_font_path = config_get_global( 'system_font_folder' );
+		if( $t_font_path !== '' ) {
+			define( 'TTF_DIR', $t_font_path );
+		}
 		$t_font_map = array(
 			'arial' => FF_ARIAL,
 			'verdana' => FF_VERDANA,

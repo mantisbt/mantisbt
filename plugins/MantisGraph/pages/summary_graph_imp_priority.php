@@ -37,7 +37,7 @@
 	echo '<br />';
 
 	print_summary_submenu();
-	$t_width = config_get( 'graph_window_width' );
+	$t_width = plugin_config_get( 'window_width' );
 	$t_graph_width = (int) ( ( $t_width - 50 ) * 0.6 );
 
 	# gather the data for the graphs

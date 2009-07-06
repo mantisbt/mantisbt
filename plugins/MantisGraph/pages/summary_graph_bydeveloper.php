@@ -30,7 +30,7 @@
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	$f_width = gpc_get_int( 'width', 300 );
-	$t_ar = config_get( 'graph_bar_aspect' );
+	$t_ar = plugin_config_get( 'bar_aspect' );
 
 		$t_metrics = create_developer_summary();
 	graph_group( $t_metrics, lang_get( 'by_developer' ), $f_width, $f_width * $t_ar );

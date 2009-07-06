@@ -214,4 +214,21 @@ function getClassProperties($className, $types='public', $return_object = false,
 		}
 	}
 	return $props_arr;
-} 
+}
+
+function get_font_path() {
+		$t_font_path = config_get_global( 'system_font_folder' );
+		if( $t_font_path == '' ) {
+			if ( is_windows_server() ) {
+				$sroot = $_SERVER['SystemRoot'];
+				if( empty($sroot) ) {
+					return '';
+				} else {
+					$t_font_path = $sroot.'/fonts/';
+				}
+			} else {
+				$t_font_path = '/usr/share/fonts/truetype/';
+			}		
+		}
+		return $t_font_path;
+}

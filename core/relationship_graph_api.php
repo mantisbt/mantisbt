@@ -121,7 +121,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
 	$t_id_string = bug_format_id( $p_bug_id );
 	$t_graph_fontname = config_get( 'relationship_graph_fontname' );
 	$t_graph_fontsize = config_get( 'relationship_graph_fontsize' );
-	$t_graph_fontpath = config_get( 'system_font_folder' );
+	$t_graph_fontpath = get_font_path();
 	$t_view_on_click = config_get( 'relationship_graph_view_on_click' );
 	$t_neato_tool = config_get( 'neato_tool' );
 
@@ -242,7 +242,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_bug = null, $p_horizontal = 
 	$t_id_string = bug_format_id( $p_bug_id );
 	$t_graph_fontname = config_get( 'relationship_graph_fontname' );
 	$t_graph_fontsize = config_get( 'relationship_graph_fontsize' );
-	$t_graph_fontpath = config_get( 'system_font_folder' );
+	$t_graph_fontpath = get_font_path();
 	$t_view_on_click = config_get( 'relationship_graph_view_on_click' );
 	$t_dot_tool = config_get( 'dot_tool' );
 

@@ -31,7 +31,7 @@
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	$f_width = gpc_get_int( 'width', 600 );
-	$t_ar = config_get( 'graph_bar_aspect' );
+	$t_ar = plugin_config_get( 'bar_aspect' );
 	$t_interval = new Period();
 	$t_interval->set_period_from_selector( 'interval' );
 	$f_show_as_table = gpc_get_bool( 'show_table', FALSE );

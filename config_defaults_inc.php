@@ -319,7 +319,7 @@
 	 * used to create the captcha image and since 0.19.3 for the Relationship Graphs
 	 * @global string $g_system_font_folder
 	 */
-	$g_system_font_folder	= 'c:/winnt/fonts/';
+	$g_system_font_folder	= '';
 
 	/**
 	 * font name used to create the captcha image. i.e. arial.ttf
@@ -1014,24 +1014,6 @@
 	 * @global string $g_graph_font
 	 */
 	$g_graph_font = '';
-
-	/**
-	 * what width is used to scale the graphs.
-	 * @global int $g_graph_window_width
-	 */
-	$g_graph_window_width = 800;
-
-	/**
-	 * bar graph aspect ration (height / width)
-	 * @global float $g_graph_bar_aspect
-	 */
-	$g_graph_bar_aspect = 0.9;
-
-	/**
-	 * how many graphs to put in each row in the advanced summary page
-	 * @global int $g_graph_summary_graphs_per_row
-	 */
-	$g_graph_summary_graphs_per_row = 2;
 
 	/**
 	 * initial graph type selected on bug_graph_page (see that page for possible values)
