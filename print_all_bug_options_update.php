@@ -27,7 +27,7 @@
 	require_once( 'core.php' );
 	require( 'print_all_bug_options_inc.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'print_all_bug_options_update' );
 
 	auth_ensure_user_authenticated();
 
@@ -65,6 +65,8 @@
 			WHERE user_id=" . db_param();
 
 	$result = db_query_bound( $query, Array( $c_export, $t_user_id ) );
+
+	form_security_purge( 'print_all_bug_options_update' );
 
 	html_page_top( null, $f_redirect_url );
 
