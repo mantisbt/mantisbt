@@ -61,6 +61,7 @@
 	print lang_get( 'query_name' ) . ': ';
 ?>
 	<form method="post" action="query_store.php">
+	<?php echo form_security_field( 'query_store' ) ?>
 	<input type="text" name="query_name" /><br />
 	<?php
 	if ( access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
@@ -74,6 +75,7 @@
 	<input type="submit" class="button" value="<?php print lang_get( 'save_query' ); ?>" />
 	</form>
 	<form action="view_all_bug_page.php">
+	<?php # CSRF protection not required here - form does not result in modifications ?>
 	<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>" />
 	</form>
 <?php

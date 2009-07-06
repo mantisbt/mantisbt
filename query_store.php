@@ -32,7 +32,7 @@
 	require_once( 'string_api.php' );
 	require_once( 'date_api.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'query_store' );
 
 	auth_ensure_user_authenticated();
 	compress_enable();
@@ -78,6 +78,8 @@
 
 	$t_new_row_id = filter_db_set_for_current_user($t_project_id, $f_is_public,
 													$f_query_name, $t_filter_string);
+
+	form_security_purge( 'query_store' );
 
 	if ( $t_new_row_id == -1 ) {
 		$t_query_redirect_url = $t_query_redirect_url . '?error_msg='
