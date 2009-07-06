@@ -97,7 +97,7 @@ print_manage_menu( );
 </tr>
 
 </table>
-<form>
+</form>
 
 <?php
 html_page_bottom( __FILE__ );
