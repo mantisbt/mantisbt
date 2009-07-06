@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
+form_security_validate( 'plugin_format_config_edit' );
+
 auth_reauthenticate( );
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
@@ -37,5 +39,7 @@ if( plugin_config_get( 'process_buglinks' ) != $f_process_buglinks ) {
 if( plugin_config_get( 'process_vcslinks' ) != $f_process_vcslinks ) {
 	plugin_config_set( 'process_vcslinks', $f_process_vcslinks );
 }
+
+form_security_purge( 'plugin_format_config_edit' );
 
 print_successful_redirect( plugin_page( 'config', true ) );
