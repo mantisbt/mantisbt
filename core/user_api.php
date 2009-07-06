@@ -753,7 +753,15 @@ function user_get_email( $p_user_id ) {
 # --------------------
 # lookup the user's realname
 function user_get_realname( $p_user_id ) {
-	$t_realname = user_get_field( $p_user_id, 'realname' );
+	$t_realname = '';
+
+	if ( ON == config_get( 'use_ldap_realname' ) ) {
+		$t_realname = ldap_realname( $p_user_id );
+	}
+
+	if ( is_blank( $t_realname ) ) {
+		$t_realname = user_get_field( $p_user_id, 'realname' );
+	}
 
 	return $t_realname;
 }

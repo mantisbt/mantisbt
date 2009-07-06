@@ -72,6 +72,9 @@
 	#  this is a mandatory password change request
 	$t_force_pw_reset = is_page_name( 'verify.php' );
 
+	# Only show the update button if there is something to update.
+	$t_show_update_button = false;
+
 	html_page_top( lang_get( 'account_link' ) );
 ?>
 
@@ -130,6 +133,7 @@
 	</tr>
 
 <?php } else { ?> <!-- Without LDAP -->
+	$t_show_update_button = true;
 
 	<!-- Username -->
 	<tr <?php echo helper_alternate_class() ?>>
@@ -194,7 +198,10 @@ if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email
 			<?php echo lang_get( 'email' ) ?>
 		</td>
 		<td>
-			<?php print_email_input( 'email', $u_email ) ?>
+			<?php
+				$t_show_update_button = true;
+				print_email_input( 'email', $u_email );
+			?>
 		</td>
 	</tr>
 
@@ -206,7 +213,14 @@ if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email
 			<?php echo lang_get( 'realname' ) ?>
 		</td>
 		<td>
+<?php
+if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
+	echo string_display( ldap_realname_from_username( $u_username ) );
+} else {
+	$t_show_update_button = true;
+?>
 			<input type="text" size="32" maxlength="<?php echo REALLEN;?>" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
+<?php } ?>
 		</td>
 	</tr>
 
@@ -240,6 +254,7 @@ if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email
 		</td>
 	</tr>
 
+	<?php if ( $t_show_update_button ) { ?>
 	<!-- BUTTONS -->
 	<tr>
 		<td class="left">
@@ -252,6 +267,7 @@ if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email
 			<input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" />
 		</td>
 	</tr>
+	<?php } ?>
 </table>
 </form>
 </div>

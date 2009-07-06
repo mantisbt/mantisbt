@@ -33,7 +33,7 @@
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	$f_username        = gpc_get_string( 'username' );
-	$f_realname        = gpc_get_string( 'realname' );
+	$f_realname        = gpc_get_string( 'realname', '' );
 	$f_password        = gpc_get_string( 'password', '' );
 	$f_password_verify = gpc_get_string( 'password_verify', '' );
 	$f_email           = gpc_get_string( 'email', '' );
