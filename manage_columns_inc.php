@@ -195,6 +195,7 @@
 <div class="border center">
 <!-- Reset Button -->
 	<form method="post" action="manage_config_columns_reset.php">
+		<?php echo form_security_field( 'manage_config_columns_reset' ) ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'reset_columns_configuration' ) ?>" />
 	</form>
 </div>
