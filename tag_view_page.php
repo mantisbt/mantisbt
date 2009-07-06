@@ -117,6 +117,7 @@
 
 	if ( $t_can_edit_own ) { ?>
 		<form action="tag_update_page.php" method="post">
+			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>" />
 			<input type="submit" class="button" value="<?php echo lang_get( 'tag_update_button' ) ?>" />
 		</form>
