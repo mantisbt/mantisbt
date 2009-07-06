@@ -159,6 +159,7 @@
 
 <div align="center">
 <form method="post" action="manage_columns_copy.php">
+<?php echo form_security_field( 'manage_columns_copy' ) ?>
 <table class="width50" cellspacing="1">
 
 <!-- Copy Columns -->
