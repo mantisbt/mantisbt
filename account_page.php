@@ -132,8 +132,10 @@
 		</td>
 	</tr>
 
-<?php } else { ?> <!-- Without LDAP -->
+<!-- Without LDAP -->
+<?php } else {
 	$t_show_update_button = true;
+?>
 
 	<!-- Username -->
 	<tr <?php echo helper_alternate_class() ?>>
