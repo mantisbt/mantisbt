@@ -46,6 +46,7 @@
 <br />
 <div align="center">
 <form method="post" action="set_project.php">
+<?php # CSRF protection not required here - form does not result in modifications ?>
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
