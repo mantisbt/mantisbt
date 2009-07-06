@@ -29,7 +29,7 @@
 	$f_public_key = gpc_get_int( 'public_key' );
 
 	$t_key = utf8_strtolower( utf8_substr( md5( config_get( 'password_confirm_hash_magic_string' ) . $f_public_key ), 1, 5) );
-	$t_system_font_folder = config_get( 'system_font_folder' );
+	$t_system_font_folder = get_font_path();
 	$t_font_per_captcha = config_get( 'font_per_captcha' );
 
 	$t_captcha_init = array(

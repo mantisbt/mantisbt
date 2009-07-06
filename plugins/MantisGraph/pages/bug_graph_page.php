@@ -80,7 +80,7 @@
 <?php
     // build the graphs if both an interval and graph type are selected
     if ( ( 0 != $f_type ) && ( $f_interval > 0 ) && ( gpc_get( 'show', '' ) != '') ) {
-        $t_width = config_get( 'graph_window_width' );
+        $t_width = plugin_config_get( 'window_width' );
         $t_summary = ( $f_type % 2 ) != 0;
         $t_body = (int)( $f_type / 2 );
         $f_start = $t_period->get_start_formatted();

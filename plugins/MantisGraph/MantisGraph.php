@@ -43,10 +43,9 @@ class MantisGraphPlugin extends MantisPlugin  {
 		return array(
 			'eczlibrary'   => ON,
 			'jpgraph_antialias'   => ON,
-/*			'process_text'		=> ON,
-			'process_urls'		=> ON,
-			'process_buglinks'	=> ON,
-			'process_vcslinks'	=> ON, */
+			'window_width' => 800,
+			'bar_aspect' => 0.9,
+			'summary_graphs_per_row' => 2,
 		);
 	}
 	

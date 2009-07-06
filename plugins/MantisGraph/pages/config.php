@@ -58,6 +58,32 @@ print_manage_menu( );
 	</td>
 </tr>
 
+<tr <?php echo helper_alternate_class( )?>>
+	<td class="category" width="60%">
+		<?php echo plugin_lang_get( 'window_width' )?>
+	</td>
+	<td class="center" width="20%" colspan="2">
+		<input type="text" name="window_width" value="<?php echo plugin_config_get( 'window_width' )?>" />
+	</td>
+</tr>
+
+<tr <?php echo helper_alternate_class( )?>>
+	<td class="category" width="60%">
+		<?php echo plugin_lang_get( 'bar_aspect' )?>
+	</td>
+	<td class="center" width="20%" colspan="2">
+		<input type="text" name="bar_aspect" value="<?php echo plugin_config_get( 'bar_aspect' )?>" />
+	</td>
+</tr>
+
+<tr <?php echo helper_alternate_class( )?>>
+	<td class="category" width="60%">
+		<?php echo plugin_lang_get( 'summary_graphs_per_row' )?>
+	</td>
+	<td class="center" width="20%" colspan="2">
+		<input type="text" name="summary_graphs_per_row" value="<?php echo plugin_config_get( 'summary_graphs_per_row' )?>" />
+	</td>
+</tr>
 
 <tr>
 	<td class="center" colspan="3">

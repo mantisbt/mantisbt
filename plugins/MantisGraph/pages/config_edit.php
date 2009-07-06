@@ -21,7 +21,9 @@ access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
 $f_library = gpc_get_int( 'eczlibrary', ON );
 $f_jpgraph_antialias = gpc_get_int( 'jpgraph_antialias', ON );
-
+$f_window_width = gpc_get_int( 'window_width', 800 );
+$f_bar_aspect = (float) gpc_get_string( 'bar_aspect', '0.9' );
+$f_summary_graphs_per_row = gpc_get_int( 'summary_graphs_per_row', 2 );
 
 if( plugin_config_get( 'eczlibrary' ) != $f_library ) {
 	plugin_config_set( 'eczlibrary', $f_library );
@@ -29,6 +31,18 @@ if( plugin_config_get( 'eczlibrary' ) != $f_library ) {
 
 if( plugin_config_get( 'jpgraph_antialias' ) != $f_jpgraph_antialias ) {
 	plugin_config_set( 'jpgraph_antialias', $f_jpgraph_antialias );
+}
+
+if( plugin_config_get( 'window_width' ) != $f_window_width ) {
+	plugin_config_set( 'window_width', $f_window_width );
+}
+
+if( plugin_config_get( 'bar_aspect' ) != $f_bar_aspect ) {
+	plugin_config_set( 'bar_aspect', $f_bar_aspect );
+}
+
+if( plugin_config_get( 'summary_graphs_per_row' ) != $f_summary_graphs_per_row ) {
+	plugin_config_set( 'summary_graphs_per_row', $f_summary_graphs_per_row );
 }
 
 form_security_purge( 'plugin_graph_config_edit' );
