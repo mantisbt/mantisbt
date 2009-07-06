@@ -29,7 +29,7 @@
 	  */
 	require_once( 'core.php' );
 
-# helper_ensure_post();
+form_security_validate( 'manage_plugin_uninstall' );
 
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
@@ -44,5 +44,7 @@ if ( !is_null( $t_plugin ) ) {
 } else {
 	plugin_force_uninstall( $f_basename );
 }
+
+form_security_purge( 'manage_plugin_uninstall' );
 
 print_successful_redirect( 'manage_plugin_page.php' );
