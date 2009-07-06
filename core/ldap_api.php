@@ -126,39 +126,6 @@ function ldap_email_from_username( $p_username ) {
 }
 
 /**
- * Return true if the $uid has an assigngroup=$p_group tag, false otherwise
- * @param int $p_user_id
- * @param string $p_group
- * @return bool
- */
-function ldap_has_group( $p_user_id, $p_group ) {
-	$t_ldap_organization = config_get( 'ldap_organization' );
-	$t_ldap_root_dn = config_get( 'ldap_root_dn' );
-
-	$t_username = user_get_field( $p_user_id, 'username' );
-	$t_ldap_uid_field = config_get( 'ldap_uid_field', 'uid' );
-	$t_search_filter = "(&$t_ldap_organization($t_ldap_uid_field=$t_username)(assignedgroup=$p_group))";
-	$t_search_attrs = array(
-		$t_ldap_uid_field,
-		'dn',
-		'assignedgroup',
-	);
-	$t_ds = ldap_connect_bind();
-
-	log_event( LOG_LDAP, "Searching for $t_search_filter" );
-	$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
-	$t_entries = ldap_count_entries( $t_ds, $t_sr );
-	ldap_free_result( $t_sr );
-	ldap_unbind( $t_ds );
-
-	if( $t_entries > 0 ) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-/**
  * Attempt to authenticate the user against the LDAP directory
  * return true on successful authentication, false otherwise
  * @param int $p_user_id
