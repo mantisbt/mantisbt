@@ -665,11 +665,12 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 	?>
 </p>
 <form method="post" action="<?php echo string_sanitize_url( $_SERVER['PHP_SELF'] );?>">
-
 <?php
-		print_hidden_inputs( gpc_strip_slashes( $_POST ) );
+	# CSRF protection not required here - user needs to enter password
+	# (confirmation step) before the form is accepted.
+	print_hidden_inputs( gpc_strip_slashes( $_POST ) );
 	print_hidden_inputs( gpc_strip_slashes( $_GET ) );
-	?>
+?>
 
 <input type="hidden" name="_authenticate" value="1" />
 
