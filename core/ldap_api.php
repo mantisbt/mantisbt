@@ -107,26 +107,89 @@ function ldap_email_from_username( $p_username ) {
 		return ldap_simulation_email_from_username( $p_username );
 	}
 
-	$t_ldap_organization = config_get( 'ldap_organization' );
-	$t_ldap_root_dn = config_get( 'ldap_root_dn' );
+	$t_email = ldap_get_field_from_username( $p_username, 'mail' );
+	if ( $t_email === null ) {
+		return '';
+	}
 
-	$t_ldap_uid_field = config_get( 'ldap_uid_field', 'uid' );
-	$t_search_filter = "(&$t_ldap_organization($t_ldap_uid_field=$p_username))";
-	$t_search_attrs = array(
-		$t_ldap_uid_field,
-		'mail',
-		'dn',
-	);
-	$t_ds = ldap_connect_bind();
+	return $t_email;
+}
 
+/**
+ * Gets a user's real name (common name) given the id.
+ *
+ * @param int $p_user_id  The user id.
+ * @return string real name.
+ */
+function ldap_realname( $p_user_id ) {
+	$t_username = user_get_field( $p_user_id, 'username' );
+	return ldap_realname_from_username( $t_username );
+}
+
+/**
+ * Gets a user real name given their user name.
+ *
+ * @param string $p_username The user's name.
+ * @return string The user's real name.
+ */
+function ldap_realname_from_username( $p_username ) {
+	if ( ldap_simulation_is_enabled() ) {
+		return ldap_simulatiom_realname_from_username( $p_username );
+	}
+
+	$t_ldap_realname_field	= config_get( 'ldap_realname_field' );
+	$t_realname = ldap_get_field_from_username( $p_username, $t_ldap_realname_field );
+	if ( $t_realname === null ) {
+		return '';
+	}
+
+	return $t_realname;
+}
+
+/**
+ * Gets the value of a specific field from LDAP given the user name
+ * and LDAP field name.
+ *
+ * @todo Implement caching by retrieving all needed information in one query.
+ * @todo Implement logging to LDAP queries same way like DB queries.
+ *
+ * @param string $p_username The user name.
+ * @param string $p_field The LDAP field name.
+ * @return string The field value or null if not found.
+ */
+function ldap_get_field_from_username( $p_username, $p_field ) {
+	$t_ldap_organization    = config_get( 'ldap_organization' );
+	$t_ldap_root_dn         = config_get( 'ldap_root_dn' );
+	$t_ldap_uid_field		= config_get( 'ldap_uid_field' );
+
+	# Bind
+	log_event( LOG_LDAP, "Binding to LDAP server" );
+	$t_ds                   = ldap_connect_bind();
+
+	# Search
+	$t_search_filter        = "(&$t_ldap_organization($t_ldap_uid_field=$p_username))";
+	$t_search_attrs         = array( $t_ldap_uid_field, $p_field, 'dn' );
 	log_event( LOG_LDAP, "Searching for $t_search_filter" );
 	$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
 
+	# Get results
 	$t_info = ldap_get_entries( $t_ds, $t_sr );
+	
+	# Free results / unbind
+	log_event( LOG_LDAP, "Unbinding from LDAP server" );
 	ldap_free_result( $t_sr );
 	ldap_unbind( $t_ds );
 
-	return $t_info[0]['mail'][0];
+	# If no matches, return null.
+	if ( count( $t_info ) == 0 ) {
+		log_event( LOG_LDAP, "No matches found." );
+		return null;
+	}
+
+	$t_value = $t_info[0][$p_field][0];
+	log_event( LOG_LDAP, "Found value '{$t_value}' for field '{$p_field}'." );
+
+	return $t_value;
 }
 
 /**
@@ -226,7 +289,7 @@ function ldap_simulation_get_user( $p_username ) {
 		return $t_user;
 	}
 
-	log_event( LOG_LDAP, "ldap_simulation_get_user: user '$t_username' not found." );
+	log_event( LOG_LDAP, "ldap_simulation_get_user: user '$p_username' not found." );
 	return null;
 }
 
@@ -245,6 +308,23 @@ function ldap_simulation_email_from_username( $p_username ) {
 
 	log_event( LOG_LDAP, "ldap_simulation_email_from_username: user '$p_username' has email '{$t_user['email']}'." );
 	return $t_user['email'];
+}
+
+/**
+ * Given a username, this methods gets the realname or empty string if not found.
+ *
+ * @param string $p_username  The username.
+ * @return string The real name or an empty string if not found.
+ */
+function ldap_simulatiom_realname_from_username( $p_username ) {
+	$t_user = ldap_simulation_get_user( $p_username );
+	if ( $t_user === null ) {
+		log_event( LOG_LDAP, "ldap_simulatiom_realname_from_username: user '$p_username' not found." );
+		return '';
+	}
+
+	log_event( LOG_LDAP, "ldap_simulatiom_realname_from_username: user '$p_username' has email '{$t_user['realname']}'." );
+	return $t_user['realname'];
 }
 
 /**

@@ -29,6 +29,8 @@
 
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
+	$t_ldap = ( LDAP == config_get( 'login_method' ) );
+
 	html_page_top();
 
 	print_manage_menu( 'manage_user_create_page.php' );
@@ -51,6 +53,9 @@
 		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" />
 	</td>
 </tr>
+<?php
+	if ( !$t_ldap || config_get( 'use_ldap_realname' ) == OFF ) {
+?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'realname' ) ?>
@@ -60,7 +65,9 @@
 	</td>
 </tr>
 <?php
-	if ( config_get( 'use_ldap_email' ) == OFF ) {
+	}
+
+	if ( !$t_ldap || config_get( 'use_ldap_email' ) == OFF ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">

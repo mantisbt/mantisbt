@@ -1782,6 +1782,12 @@
 	$g_ldap_uid_field		= 'uid';
 
 	/**
+	 * The LDAP field for real name (i.e. common name).
+	 * @global string $g_ldap_uid_field
+	 */
+	$g_ldap_realname_field  = 'cn';
+
+	/**
 	 *
 	 * @global string $g_ldap_bind_dn
 	 */
@@ -1798,6 +1804,13 @@
 	 * @global int $g_use_ldap_email
 	 */
 	$g_use_ldap_email		= OFF;
+
+	/**
+	 * Whether or not to pull the real name from LDAP.
+	 * ON from LDAP, OFF from database.
+	 * @global int $g_use_ldap_realname
+	 */
+	$g_use_ldap_realname	= OFF;
 
 	/**
 	 * The LDAP Protocol Version, if 0, then the protocol version is not set.

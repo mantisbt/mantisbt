@@ -1745,9 +1745,15 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_ldap_organisation</term>
+                <term>$g_ldap_organization</term>
                 <listitem>
                     <para>"organizationname=*Example)"</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_ldap_realname_field</term>
+                <listitem>
+                    <para>The LDAP field for real name (i.e. common name).  Default value is 'cn'.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
@@ -1755,6 +1761,14 @@
                 <listitem>
                     <para>Use email address in LDAP rather than the email stored in
                         the database.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_use_ldap_realname</term>
+                <listitem>
+                    <para>Use realname in LDAP rather than the email stored in the database.
+                        ON for LDAP, OFF for database.  The default value is OFF.
                     </para>
                 </listitem>
             </varlistentry>
