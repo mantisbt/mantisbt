@@ -25,7 +25,7 @@
 	  */
 	require_once( 'core.php' );
 
-	# helper_ensure_post();
+	form_security_validate( 'manage_user_prune' );
 
 	auth_reauthenticate();
 
@@ -56,6 +56,8 @@
 		$row = db_fetch_array( $result );
 		user_delete($row['id']);
 	}
+
+	form_security_purge( 'manage_user_prune' );
 
 	$t_redirect_url = 'manage_user_page.php';
 
