@@ -62,7 +62,7 @@ function graph_get_font() {
 
 		
 		$t_font_path = get_font_path();
-		if( empty($sroot) ) {
+		if( empty($t_font_path) ) {
 			error_text('unable to load font(s)', 'unable to load font(s)');
 		}
 		$f = $t_font_path . $t_font;
