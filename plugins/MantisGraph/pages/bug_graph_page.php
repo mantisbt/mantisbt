@@ -36,7 +36,13 @@
 
     html_page_top1( lang_get( 'graph_page' ) );
 	$t_path = config_get( 'path' );
-	echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . $t_path . "javascript/jscalendar/calendar-blue.css\" /> \n";
+	// follows the convention in html_api::html_javascript_link 
+	if( config_get_global( 'minimal_jscss' ) ) {
+		echo '<link rel="stylesheet" type="text/css" href="', helper_mantis_url( 'javascript/min/jscalendar/calendar-blue.css' ), '">' . "\n";
+	} else {
+		echo '<link rel="stylesheet" type="text/css" href="', helper_mantis_url( 'javascript/dev/jscalendar/calendar-blue.css' ), '">' . "\n";
+	}
+	
 	html_javascript_link( 'jscalendar/calendar.js');
 	html_javascript_link( 'jscalendar/lang/calendar-en.js');
 	html_javascript_link( 'jscalendar/calendar-setup.js');
