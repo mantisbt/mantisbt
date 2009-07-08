@@ -3249,14 +3249,14 @@
 	 ********************/
 
 	/**
-	# Number of bugs shown in each box
+	 * Number of bugs shown in each box
 	 * @global int $g_my_view_bug_count
 	 */
 	$g_my_view_bug_count = 10;
 
 	/**
-	# Boxes to be shown and their order
-	# A box that is not to be shown can have its value set to 0
+	 * Boxes to be shown and their order
+	 * A box that is not to be shown can have its value set to 0
 	 * @global array $g_my_view_boxes
 	 */
 	$g_my_view_boxes = array (
@@ -3283,18 +3283,18 @@
 	 *************/
 
 	/**
-	# This flag enables or disables RSS syndication.  In the case where RSS syndication is not used,
-	# it is recommended to set it to OFF.
+	 * This flag enables or disables RSS syndication.  In the case where RSS syndication is not used,
+	 * it is recommended to set it to OFF.
 	 * @global int $g_rss_enabled
 	 */
 	$g_rss_enabled = ON;
 
 
 	/**
-	# This seed is used as part of the inputs for calculating the authentication key for the RSS feeds.
-	# If this seed changes, all the existing keys for the RSS feeds will become invalid.  This is
-	# defaulted to the database user name, but it is recommended to overwrite it with a specific value
-	# on installation.
+	 * This seed is used as part of the inputs for calculating the authentication key for the RSS feeds.
+	 * If this seed changes, all the existing keys for the RSS feeds will become invalid.  This is
+	 * defaulted to the database user name, but it is recommended to overwrite it with a specific value
+	 * on installation.
 	 * @global string $g_rss_key_seed
 	 */
 	$g_rss_key_seed = '%db_username%';
@@ -3320,10 +3320,10 @@
 	$g_relationship_graph_enable		= OFF;
 
 	/**
-	# Font name and size, as required by Graphviz. If Graphviz fails to run
-	# for you, you are probably using a font name that gd can't find. On
-	# Linux, try the name of the font file without the extension.
-	* @global string $g_relationship_graph_fontname
+	 * Font name and size, as required by Graphviz. If Graphviz fails to run
+	 * for you, you are probably using a font name that gd can't find. On
+	 * Linux, try the name of the font file without the extension.
+	 * @global string $g_relationship_graph_fontname
 	 */
 	$g_relationship_graph_fontname		= 'Arial';
 
@@ -3334,87 +3334,87 @@
 	$g_relationship_graph_fontsize		= 8;
 
 	/**
-	# Default dependency orientation. If you have issues with lots of childs
-	# or parents, leave as 'horizontal', otherwise, if you have lots of
-	# "chained" issue dependencies, change to 'vertical'.
-	* @global string $g_relationship_graph_orientation
+	 * Default dependency orientation. If you have issues with lots of childs
+	 * or parents, leave as 'horizontal', otherwise, if you have lots of
+	 * "chained" issue dependencies, change to 'vertical'.
+	 * @global string $g_relationship_graph_orientation
 	 */
 	$g_relationship_graph_orientation	= 'horizontal';
 
 	/**
-	# Max depth for relation graphs. This only affects relation graphs,
-	# dependency graphs are drawn to the full depth. A value of 3 is already
-	# enough to show issues really unrelated to the one you are currently
-	# viewing.
+	 * Max depth for relation graphs. This only affects relation graphs,
+	 * dependency graphs are drawn to the full depth. A value of 3 is already
+	 * enough to show issues really unrelated to the one you are currently
+	 * viewing.
 	 * @global int $g_relationship_graph_max_depth
 	 */
 	$g_relationship_graph_max_depth		= 2;
 
 	/**
-	# If set to ON, clicking on an issue on the relationship graph will open
-	# the bug view page for that issue, otherwise, will navigate to the
-	# relationship graph for that issue.
+	 * If set to ON, clicking on an issue on the relationship graph will open
+	 * the bug view page for that issue, otherwise, will navigate to the
+	 * relationship graph for that issue.
 	 *
 	 * @global int $g_relationship_graph_view_on_click
 	 */
 	$g_relationship_graph_view_on_click	= OFF;
 
 	/**
-	# Complete path to dot and neato tools. Your webserver must have execute
-	# permission to these programs in order to generate relationship graphs.
-	# NOTE: These are meaningless under Windows! Just ignore them!
+	 * Complete path to dot and neato tools. Your webserver must have execute
+	 * permission to these programs in order to generate relationship graphs.
+	 * NOTE: These are meaningless under Windows! Just ignore them!
 	 * @global string $g_dot_tool
 	 */
 	$g_dot_tool							= '/usr/bin/dot';
 	/**
-	# Complete path to dot and neato tools. Your webserver must have execute
-	# permission to these programs in order to generate relationship graphs.
-	# NOTE: These are meaningless under Windows! Just ignore them!
+	 * Complete path to dot and neato tools. Your webserver must have execute
+	 * permission to these programs in order to generate relationship graphs.
+	 * NOTE: These are meaningless under Windows! Just ignore them!
 	 * @global string $g_neato_tool
 	 */
 	$g_neato_tool						= '/usr/bin/neato';
 
 	/**
-	# Number of years in the past that custom date fields will display in
-	# drop down boxes.
+	 * Number of years in the past that custom date fields will display in
+	 * drop down boxes.
 	 * @global int $g_backward_year_count
 	 */
 	$g_backward_year_count 				= 4;
 
 	/**
-	# Number of years in the future that custom date fields will display in
-	# drop down boxes.
-	* @global int $g_forward_year_count
+	 * Number of years in the future that custom date fields will display in
+	 * drop down boxes.
+	 * @global int $g_forward_year_count
 	 */
 	$g_forward_year_count 				= 4;
 
 	/**
-	# Custom Group Actions
-	#
-	# This extensibility model allows developing new group custom actions.  This
-	# can be implemented with a totally custom form and action pages or with a
-	# pre-implemented form and action page and call-outs to some functions.  These
-	# functions are to be implemented in a predefined file whose name is based on
-	# the action name.  For example, for an action to add a note, the action would
-	# be EXT_ADD_NOTE and the file implementing it would be bug_actiongroup_add_note_inc.php.
-	# See implementation of this file for details.
-	#
-	# Sample:
-	#
-	# array(
-	#	array(	'action' => 'my_custom_action',
-	#			'label' => 'my_label',   // string to be passed to lang_get_defaulted()
-	#			'form_page' => 'my_custom_action_page.php',
-	#			'action_page' => 'my_custom_action.php'
-	#   )
-	#	array(	'action' => 'my_custom_action2',
-	#			'form_page' => 'my_custom_action2_page.php',
-	#			'action_page' => 'my_custom_action2.php'
-	#   )
-	#	array(	'action' => 'EXT_ADD_NOTE',  // you need to implement bug_actiongroup_<action_without_'EXT_')_inc.php
-	#		'label' => 'actiongroup_menu_add_note' // see strings_english.txt for this label
-	#   )
-	# );
+	 * Custom Group Actions
+	 *
+	 * This extensibility model allows developing new group custom actions.  This
+	 * can be implemented with a totally custom form and action pages or with a
+	 * pre-implemented form and action page and call-outs to some functions.  These
+	 * functions are to be implemented in a predefined file whose name is based on
+	 * the action name.  For example, for an action to add a note, the action would
+	 * be EXT_ADD_NOTE and the file implementing it would be bug_actiongroup_add_note_inc.php.
+	 * See implementation of this file for details.
+	 *
+	 * Sample:
+	 *
+	 * array(
+	 *	array(	'action' => 'my_custom_action',
+	 *			'label' => 'my_label',   // string to be passed to lang_get_defaulted()
+	 *			'form_page' => 'my_custom_action_page.php',
+	 *			'action_page' => 'my_custom_action.php'
+	 *  )
+	 *	array(	'action' => 'my_custom_action2',
+	 *			'form_page' => 'my_custom_action2_page.php',
+	 *			'action_page' => 'my_custom_action2.php'
+	 *  )
+	 *	array(	'action' => 'EXT_ADD_NOTE',  // you need to implement bug_actiongroup_<action_without_'EXT_')_inc.php
+	 *		'label' => 'actiongroup_menu_add_note' // see strings_english.txt for this label
+	 *   )
+	 * );
 	 * @global array $g_custom_group_actions
 	 */
 	$g_custom_group_actions = array();
