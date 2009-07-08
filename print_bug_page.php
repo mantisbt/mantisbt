@@ -63,8 +63,8 @@
 	$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_display_links( $v2_additional_information );
 
-	$t_show_product_version = version_should_show_product_version( $v_project_id );
-	$t_show_build = $t_show_product_version && config_get( 'enable_product_build' );
+	$t_show_product_version = version_should_show_product_version( $v_project_id, VIEW_PRINT_ADVANCED );
+	$t_show_build = $t_show_product_version && ( ( config_get( 'show_product_build_views' ) & VIEW_PRINT_ADVANCED ) != 0 );
 	$t_show_fixed_in_version = $t_show_product_version;
 	$t_show_target_version = $t_show_product_version && access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
 

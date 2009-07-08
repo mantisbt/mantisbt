@@ -2717,6 +2717,66 @@
     </section>
 
     <section>
+        <title>Field Visibility</title>
+
+        <para>The configuration options in this section control the visibility of specific fields.  The configuration
+        options can be set to VIEW_COMBINATION_NONE for fields that shouldn't be visible on both view/advanced pages,
+        VIEW_COMBINATION_SIMPLE for fields that should be visible on both simple/advanced pages, and VIEW_COMBINATION_ADVANCED
+        for fields that should be visible on advanced pages only.</para>
+
+        <variablelist>
+            <varlistentry>
+                <term>$g_show_eta_views</term>
+                <listitem>
+                    <para>
+                        Controls the visibility of the 'ETA' field.  Default value is VIEW_COMBINATION_ADVANCED.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_projection_views</term>
+                <listitem>
+                    <para>
+                        Controls the visibility of the 'Projection' field.  Default value is VIEW_COMBINATION_ADVANCED.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_product_version_views</term>
+                <listitem>
+                    <para>
+                        Controls the visibility of the 'Product Version' field.  Default value is VIEW_COMBINATION_SIMPLE.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_product_build_views</term>
+                <listitem>
+                    <para>
+                        Controls the visibility of the 'Product Build' field.  Default value is VIEW_COMBINATION_ADVANCED.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_target_version_views</term>
+                <listitem>
+                    <para>
+                        Controls the visibility of the 'Target Version' field.  Default value is VIEW_COMBINATION_ADVANCED.
+                   </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_fixed_in_version_views</term>
+                <listitem>
+                    <para>
+                        Controls the visibility of the 'Fixed In Version' field.  Default value is VIEW_COMBINATION_ADVANCED.
+                   </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section>
         <title>System Logging</title>
         <para>The system logging interface is used to extract detailed
             debugging information for the MantisBT system. It can also serve as

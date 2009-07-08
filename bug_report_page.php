@@ -180,7 +180,7 @@
 	</tr>
 <?php }
 
-	if ( version_should_show_product_version( $t_project_id ) ) {
+	if ( version_should_show_product_version( $t_project_id, VIEW_REPORT_SIMPLE ) ) {
 		$t_product_version_released_mask = VERSION_RELEASED;
 
 		if (access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {

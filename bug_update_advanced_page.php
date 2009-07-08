@@ -342,7 +342,7 @@
 </tr>
 
 <?php
-	$t_show_projection = config_get( 'enable_projection' );
+	$t_show_projection = ( config_get( 'show_projection_views' ) & VIEW_ADVANCED ) != 0;
 	if( $t_show_projection || $t_show_profiles ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
@@ -394,10 +394,9 @@
 
 
 <?php
-	$t_show_eta = config_get( 'enable_eta' );
-
-	$t_show_product_version = version_should_show_product_version( $t_bug->project_id );
-	$t_show_build = $t_show_product_version && config_get( 'enable_product_build' );
+	$t_show_eta = ( config_get( 'show_eta_views' ) & VIEW_UPDATE_ADVANCED ) != 0;
+	$t_show_product_version = version_should_show_product_version( $t_bug->project_id, VIEW_UPDATE_ADVANCED );
+	$t_show_build = $t_show_product_version && ( config_get( 'show_product_build_views' ) & VIEW_UPDATE_ADVANCED ) != 0;
 ?>
 
 <?php if ( $t_show_eta || $t_show_product_version || $t_show_build ) { ?>

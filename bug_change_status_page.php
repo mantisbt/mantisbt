@@ -31,10 +31,18 @@
 	require_once( 'custom_field_api.php' );
 
 	require_once( 'relationship_api.php' );
-?>
-<?php
+
+	define ( 'BUG_VIEW_INC_ALLOW', true );
+
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$t_bug = bug_get( $f_bug_id );
+
+	$tpl_advanced = true;
+	$tpl_file = __FILE__;
+	$tpl_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+	$tpl_show_page_header = false;
+	$tpl_force_readonly = true;
+	$tpl_view_id = VIEW_CHANGE_STATUS;
 
 	if( $t_bug->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...
@@ -346,10 +354,8 @@ if ( ( $f_new_status >= $t_resolved ) && ( $t_closed > $f_new_status ) ) { ?>
 <?php
 if ( $t_can_update_due_date ) {
 	date_finish_calendar( 'due_date', 'trigger');
-} ?>
-<br />
-<?php
-	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' );
-	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
+}
 
-	html_page_bottom( __FILE__ );
+echo '<br />';
+
+include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' );
