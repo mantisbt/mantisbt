@@ -147,6 +147,23 @@ define( 'ADVANCED_ONLY', 2 );
 define( 'SIMPLE_DEFAULT', 3 );
 define( 'ADVANCED_DEFAULT', 4 );
 
+# view ids (used as a bit mask to indicate where to show fields)
+define ( 'VIEW_SIMPLE',				1 );
+define ( 'VIEW_ADVANCED',			2 );
+define ( 'VIEW_CHANGE_STATUS',		4 );
+define ( 'VIEW_FILTERS',			8 );
+define ( 'VIEW_REPORT_SIMPLE',		16 );
+define ( 'VIEW_REPORT_ADVANCED',	32 );
+define ( 'VIEW_UPDATE_SIMPLE',		64 );
+define ( 'VIEW_UPDATE_ADVANCED',	128 );
+define ( 'VIEW_EMAIL',				256 );
+define ( 'VIEW_PRINT_ADVANCED',     512 );
+define ( 'VIEW_COLUMNS',			1024 );
+
+define ( 'VIEW_COMBINATION_NONE',		0 );
+define ( 'VIEW_COMBINATION_ADVANCED',	VIEW_ADVANCED | VIEW_REPORT_ADVANCED | VIEW_UPDATE_ADVANCED | VIEW_PRINT_ADVANCED | VIEW_EMAIL | VIEW_CHANGE_STATUS | VIEW_FILTERS | VIEW_COLUMNS );
+define ( 'VIEW_COMBINATION_SIMPLE', VIEW_COMBINATION_ADVANCED | VIEW_SIMPLE | VIEW_REPORT_SIMPLE | VIEW_UPDATE_SIMPLE );
+
 # news values
 define( 'BY_LIMIT', 0 );
 define( 'BY_DATE', 1 );

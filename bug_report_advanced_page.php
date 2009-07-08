@@ -313,9 +313,8 @@
 	</tr>
 <?php } ?>
 <?php
-	$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
-			|| ( ( AUTO == config_get( 'show_product_version' ) )
-						&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
+	$t_show_product_version = version_should_show_product_version( $t_project_id, VIEW_REPORT_ADVANCED );
+
 	if ( $t_show_product_version ) {
 		$t_product_version_released_mask = VERSION_RELEASED;
 
@@ -336,7 +335,7 @@
 <?php
 	}
 ?>
-<?php if ( config_get( 'enable_product_build' ) ) { ?>
+<?php if ( ( config_get( 'show_product_build_views' ) & VIEW_REPORT_ADVANCED ) != 0 ) { ?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php echo lang_get( 'product_build' ) ?>

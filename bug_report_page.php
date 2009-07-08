@@ -178,15 +178,9 @@
 			</select>
 		</td>
 	</tr>
-<?php } ?>
-	<tr class="spacer">
-		<td colspan="2"></td>
-	</tr>
-<?php
-	$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
-			|| ( ( AUTO == config_get( 'show_product_version' ) )
-						&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
-	if ( $t_show_product_version ) {
+<?php }
+
+	if ( version_should_show_product_version( $t_project_id, VIEW_REPORT_SIMPLE ) ) {
 		$t_product_version_released_mask = VERSION_RELEASED;
 
 		if (access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {

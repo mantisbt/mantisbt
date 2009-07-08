@@ -1115,7 +1115,7 @@
 	 * @global string $g_calendar_date_format
 	 */
 	$g_calendar_date_format   = 'Y-m-d H:i';
-	
+
 	/**************************
 	 * MantisBT TimeZone Settings *
 	 **************************/
@@ -2026,6 +2026,52 @@
 	 */
 	$g_allow_delete_own_attachments = OFF;
 
+	/**********************
+	 * Field Visibility
+	 **********************
+
+	/**
+	 * Determines which views should include the ETA.
+	 * Possible values are VIEW_COMBINATION_* form constant_inc.php.
+	 * @global int $g_show_eta_views
+	 */
+	$g_show_eta_views = VIEW_COMBINATION_ADVANCED;
+
+	/**
+	 * Determines which views should include the projection.
+	 * Possible values are VIEW_COMBINATION_* form constant_inc.php.
+	 * @global int $g_show_projection_views
+	 */
+	$g_show_projection_views = VIEW_COMBINATION_ADVANCED;
+
+	/**
+	 * Determines which views should include the product version.
+	 * Possible values are VIEW_COMBINATION_* form constant_inc.php.
+	 * @global int $g_show_product_version_views
+	 */
+	$g_show_product_version_views = VIEW_COMBINATION_SIMPLE;
+
+	/**
+	 * Determines which views should include the product build.
+	 * Possible values are VIEW_COMBINATION_* form constant_inc.php.
+	 * @global int $g_show_product_build_views
+	 */
+	$g_show_product_build_views = VIEW_COMBINATION_ADVANCED;
+
+	/**
+	 * Determines which views should include the target version.
+	 * Possible values are VIEW_COMBINATION_* form constant_inc.php.
+	 * @global int $g_show_target_version_views
+	 */
+	$g_show_target_version_views = VIEW_COMBINATION_ADVANCED;
+
+	/**
+	 * Determines which views should include the fixed in version.
+	 * Possible values are VIEW_COMBINATION_* form constant_inc.php.
+	 * @global int $g_show_fixed_in_version_views
+	 */
+	$g_show_fixed_in_version_views = VIEW_COMBINATION_ADVANCED;
+
 	/**************************
 	 * MantisBT Misc Settings *
 	 **************************/
@@ -2341,24 +2387,6 @@
 	 * @global int $g_allow_no_category
 	 */
 	$g_allow_no_category = OFF;
-
-	/**
-	 * Enable or disable display of the ETA field.
-	 * @global int $g_enable_eta
-	 */
-	$g_enable_eta = ON;
-
-	/**
-	 * Enable or disable display of the Projection field.
-	 * @global int $g_enable_projection
-	 */
-	$g_enable_projection = ON;
-
-	/**
-	 * Enable or disable display of the Product Build field.
-	 * @global int $g_enable_product_build
-	 */
-	$g_enable_product_build = ON;
 
 	/**
 	 * login method

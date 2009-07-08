@@ -264,10 +264,7 @@
 
 	<td colspan="2">&nbsp;</td>
 <?php
-	$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
-			|| ( ( AUTO == config_get( 'show_product_version' ) )
-						&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
-	if ( $t_show_product_version ) {
+	if ( version_should_show_product_version( $t_bug->project_id, VIEW_UPDATE_SIMPLE ) ) {
 		$t_product_version_released_mask = VERSION_RELEASED;
 
 		if (access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
