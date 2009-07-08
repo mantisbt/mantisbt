@@ -167,7 +167,7 @@
 	</td>
 </tr>
 <?php
-	$t_categories = category_get_all_rows( ALL_PROJECTS, false );
+	$t_categories = category_get_all_rows( ALL_PROJECTS );
 
 	if ( count( $t_categories ) > 0 ) {
 ?>

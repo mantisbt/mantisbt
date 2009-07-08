@@ -3621,7 +3621,7 @@ function print_filter_show_version() {
 		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PRODUCT_VERSION;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>" <?php check_selected( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION], null, VERSION_RELEASED, false, true )?>
+			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION], /* projectId */ null, /* released */ VERSION_ALL, /* leadingBlank */ false, /* withSubs */ true )?>
 		</select>
 		<?php
 }
@@ -3635,7 +3635,7 @@ function print_filter_show_fixed_in_version() {
 		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_FIXED_IN_VERSION;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>" <?php check_selected( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION], null, VERSION_ALL, false, true )?>
+			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION], /* projectId */ null, /* released */ VERSION_ALL, /* leadingBlank */ false, /* withSubs */ true )?>
 		</select>
 		<?php
 }
@@ -3649,7 +3649,7 @@ function print_filter_show_target_version() {
 		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_TARGET_VERSION;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_TARGET_VERSION], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>" <?php check_selected( $t_filter[FILTER_PROPERTY_TARGET_VERSION], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_TARGET_VERSION], null, VERSION_ALL, false, true )?>
+			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_TARGET_VERSION], /* projectId */ null, /* released */ VERSION_ALL, /* leadingBlank */ false, /* withSubs */ true )?>
 		</select>
 		<?php
 }

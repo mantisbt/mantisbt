@@ -170,10 +170,8 @@
 		$t_select_modifier = 'multiple="multiple" size="10" ';
 	}
 
-	$t_show_build = config_get( 'enable_product_build' );
-	$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
-			|| ( ( AUTO == config_get( 'show_product_version' ) )
-						&& ( count( version_get_all_rows_with_subs( $t_project_id ) ) > 0 ) );
+	$t_show_product_version = version_should_show_product_version( $t_project_id );
+	$t_show_build = $t_show_product_version && config_get( 'enable_product_build' );
 
 	$t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 ?>

@@ -450,8 +450,15 @@ function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_
 	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
 }
 
-# --------------------
-# List projects that the current user has access to
+/**
+ * List projects that the current user has access to.
+ *
+ * @param integer $p_project_id 	The current project id or null to use cookie.
+ * @param bool $p_include_all_projects  true: include "All Projects", otherwise false.
+ * @param mixed $p_filter_project_id  The id of a project to exclude or null.
+ * @param string $p_trace  The current project trace, identifies the sub-project via a path from top to bottom.
+ * @return void
+ */
 function print_project_option_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false ) {
 	$t_project_ids = current_user_get_accessible_projects();
 	project_cache_array_rows( $t_project_ids );
@@ -664,7 +671,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 		}
 	}
 
-	$cat_arr = category_get_all_rows( $t_project_id, true, true );
+	$cat_arr = category_get_all_rows( $t_project_id, /* inherit */ null, /* sortByProject */ true );
 
 	foreach( $cat_arr as $t_category_row ) {
 		$t_category_id = $t_category_row['id'];
@@ -797,10 +804,9 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 			$t_listed[] = $t_version;
 			echo '<option value="' . $t_version . '"';
 			check_selected( $p_version, $t_version );
-			$t_version_string = $t_version;
-			if( $t_show_version_dates ) {
-				$t_version_string .= ' (' . date( $t_short_date_format, $version['date_order'] ) . ')';
-			}
+
+			$t_version_string = string_attribute( prepare_version_string( $c_project_id, $version['id'] ) );
+
 			echo '>', string_shorten( $t_version_string , $t_max_length ), '</option>';
 		}
 	}

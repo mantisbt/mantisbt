@@ -371,9 +371,9 @@ function version_cache_array_rows( $p_project_id_array ) {
  * @param int $p_project_id
  * @param int $p_released
  * @param bool $p_obsolete
- * @return array
+ * @return array Array of version rows (in array format)
  */
-function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false ) {
+function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false, $p_inherit = null ) {
 	global $g_cache_versions, $g_cache_versions_project;
 
 	if( isset( $g_cache_versions_project[ (int)$p_project_id ] ) ) {
@@ -392,12 +392,13 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 
 	$t_param_count = 0;
 
+	$t_project_where = version_get_project_where_clause( $p_project_id, $p_inherit );
+
 	$query = "SELECT *
 				  FROM $t_project_version_table
-				  WHERE project_id=" . db_param( $t_param_count++ );
-	$query_params = array(
-		$c_project_id,
-	);
+				  WHERE $t_project_where";
+
+	$query_params = array();
 
 	if( $p_released !== null ) {
 		$c_released = db_prepare_int( $p_released );
@@ -475,10 +476,12 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
  * returns false if not found, otherwise returns the id.
  * @param string $p_version
  * @param int $p_project_id
+ * @param mixed $p_inherit true to look for version in parent projects, false not to, null to use default configuration.
  * @return int
  */
-function version_get_id( $p_version, $p_project_id = null ) {
+function version_get_id( $p_version, $p_project_id = null, $p_inherit = null ) {
 	global $g_cache_versions;
+
 	if( $p_project_id === null ) {
 		$c_project_id = helper_get_current_project();
 	} else {
@@ -491,13 +494,15 @@ function version_get_id( $p_version, $p_project_id = null ) {
 		}
 	}
 
+	$t_project_where = version_get_project_where_clause( $c_project_id, $p_inherit );
+
 	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
 
 	$query = "SELECT id FROM $t_project_version_table
-					WHERE project_id=" . db_param() . " AND
+					WHERE " . $t_project_where . " AND
 						version=" . db_param();
 
-	$result = db_query_bound( $query, Array( $c_project_id, $p_version ) );
+	$result = db_query_bound( $query, Array( $p_version ) );
 
 	if( 0 == db_num_rows( $result ) ) {
 		return false;
@@ -522,6 +527,38 @@ function version_get_field( $p_version_id, $p_field_name ) {
 		error_parameters( $p_field_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 		return '';
+	}
+}
+
+/**
+ * Gets the full name of a version.  This may include the project name as a prefix (e.g. '[MantisBT] 1.2.0')
+ *
+ * @param int $p_version_id  The version id.
+ * @param bool $p_show_project  Whether to include the project or not, null means include the project if different from current.
+ * @param int $p_current_project_id  The current project id or null to use the cookie.
+ * @return string The full name of the version.
+ */
+function version_full_name( $p_version_id, $p_show_project = null, $p_current_project_id = null ) {
+	if ( 0 == $p_version_id ) {
+		# No Version
+		return '';
+	} else {
+		$t_row = version_cache_row( $p_version_id );
+		$t_project_id = $t_row['project_id'];
+
+		$t_current_project_id = is_null( $p_current_project_id ) ? helper_get_current_project() : $p_current_project_id;
+
+		if ( $p_show_project === null ) {
+			$t_show_project = $t_project_id != $t_current_project_id;
+		} else {
+			$t_show_project = $p_show_project;
+		}
+
+		if ( $t_show_project && $t_project_id != $t_current_project_id ) {
+			return '[' . project_get_name( $t_project_id ) . '] ' . $t_row['version'];
+		}
+
+		return $t_row['version'];
 	}
 }
 
@@ -566,4 +603,49 @@ function version_prepare_db( $p_version_info ) {
 	$p_version_info->released = db_prepare_int( $p_version_info->released );
 
 	return $p_version_info;
+}
+
+/**
+ * Checks whether the product version should be shown
+ * (i.e. report, update, view, print).
+ * @param integer $p_project_id  The project id.
+ * @return bool true: show, false: otherwise.
+ */
+function version_should_show_product_version( $p_project_id ) {
+	return ( ON == config_get( 'show_product_version', /* default */ null, /* user_id */ null, $p_project_id ) )
+		|| ( ( AUTO == config_get( 'show_product_version', /* default */ null, /* user_id */ null, $p_project_id ) )
+				&& ( count( version_get_all_rows( $p_project_id ) ) > 0 ) );
+}
+
+/**
+ * Gets the where clause to use for retrieving versions.
+ *
+ * @param integer $p_project_id  The project id to use.
+ * @param bool    $p_inherit  Include versions from parent projects? true: yes, false: no, null: use default configuration.
+ * @return string The where clause not including WHERE.
+ */
+function version_get_project_where_clause( $p_project_id, $p_inherit ) {
+	project_hierarchy_cache();
+
+	if ( $p_project_id == ALL_PROJECTS ) {
+		$t_inherit = false;
+	} else {
+		if ( $p_inherit === null ) {
+			$t_inherit = ( ON == config_get( 'subprojects_inherit_versions' ) );
+		} else {
+			$t_inherit = $p_inherit;
+		}
+	}
+
+	$c_project_id = db_prepare_int( $p_project_id );
+
+	if ( $t_inherit ) {
+		$t_project_ids = project_hierarchy_inheritance( $p_project_id );
+
+		$t_project_where = ' project_id IN ( ' . implode( ', ', $t_project_ids ) . ' ) ';
+	} else {
+		$t_project_where = ' project_id=' . $c_project_id . ' ';
+	}
+
+	return $t_project_where;
 }

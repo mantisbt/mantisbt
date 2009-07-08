@@ -58,6 +58,9 @@
 	$t_action_button_position = config_get( 'action_button_position' );
 	$t_access_level_needed = config_get( 'view_history_threshold' );
 	$t_can_view_history = access_has_bug_level( $t_access_level_needed, $f_bug_id );
+	$t_show_product_version = version_should_show_product_version( $t_bug->project_id );
+
+	$t_product_version_string = $t_show_product_version ? prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->version, $t_bug->project_id ) ) : '';
 
 	compress_enable();
 

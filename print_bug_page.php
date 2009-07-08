@@ -64,6 +64,25 @@
 	$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_display_links( $v2_additional_information );
 
+	$t_show_product_version = version_should_show_product_version( $v_project_id );
+	$t_show_build = $t_show_product_version && config_get( 'enable_product_build' );
+	$t_show_fixed_in_version = $t_show_product_version;
+	$t_show_target_version = $t_show_product_version && access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
+
+	if ( $t_show_product_version ) {
+		$t_product_version_string  = prepare_version_string( $v_project_id, version_get_id( $v_version, $v_project_id ) );
+		$t_target_version_string   = prepare_version_string( $v_project_id, version_get_id( $v_target_version, $v_project_id ) );
+		$t_fixed_in_version_string = prepare_version_string( $v_project_id, version_get_id( $v_fixed_in_version, $v_project_id ) );
+
+		$t_product_version_string = string_display_line( $t_product_version_string );
+		$t_target_version_string   = string_display_line( $t_target_version_string );
+		$t_fixed_in_version_string = string_display_line( $t_fixed_in_version_string );
+	} else {
+		$t_product_version_string  = '';
+		$t_target_version_string   = '';
+		$t_fixed_in_version_string = '';
+	}
+
 	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	html_head_end();
 	html_body_begin();
