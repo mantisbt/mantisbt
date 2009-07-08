@@ -1642,7 +1642,7 @@ function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_
 	$t_script = ( $p_change_script == '' ? '' : ' onchange="' . $p_change_script . '"' );
 	$t_info = sprintf( "<select %s name=\"%s\" id=\"%s\"%s%s>", $t_multiple, $p_control_name, $p_control_name, $t_size, $t_script );
 	if( $p_add_any ) {
-		array_unshift_assoc( $t_control_array, FILTER_META_ANY, lang_trans( '[any]' ) );
+		array_unshift_assoc( $t_control_array, META_FILTER_ANY, lang_trans( '[any]' ) );
 	}
 	while( list( $t_name, $t_desc ) = each( $t_control_array ) ) {
 		$t_sel = '';
