@@ -72,30 +72,22 @@ function prepare_user_name( $p_user_id ) {
  * A function that prepares the version string for outputting to the user on view / print issue pages.
  * This function would add the version date, if appropriate.
  *
- * @param string $p_bug_id   The bug id.
- * @param string $p_project_id  The project id.
- * @param string $p_version_string The version name (e.g. 1.2.0rc1)
- * @param string $p_version_rows The version rows to be re-used or null to retrieve it within the function.
+ * @param integer $p_project_id  The project id.
+ * @param integer $p_version_id  The version id.  If false then this method will return an empty string.
  * @return The formatted version string.
  */
-function prepare_version_string( $p_bug_id, $p_project_id, $p_version_string, $p_version_rows = null ) {
-	$t_version_text = $p_version_string;
+function prepare_version_string( $p_project_id, $p_version_id ) {
+	if ( $p_version_id === false ) {
+		return '';
+	}
 
-	if ( !is_blank( $t_version_text ) && access_has_bug_level( config_get( 'show_version_dates_threshold' ), $p_bug_id ) ) {
+	$t_version_text = version_full_name( $p_version_id, /* showProject */ null, $p_project_id );
+
+	if ( access_has_project_level( config_get( 'show_version_dates_threshold' ), $p_project_id ) ) {
 		$t_short_date_format = config_get( 'short_date_format' );
 
-		if ( $p_version_rows === null ) {
-			$t_version_rows = version_get_all_rows( $p_project_id );
-		} else {
-			$t_version_rows = $p_version_rows;
-		}
-
-		foreach ( $t_version_rows as $t_version_row ) {
-			if ( $t_version_row['version'] == $p_version_string ) {
-				$t_version_text .= ' (' . date( $t_short_date_format, $t_version_row['date_order'] ) . ')';
-				break;
-			}
-		}
+		$t_version = version_get( $p_version_id );
+		$t_version_text .= ' (' . date( $t_short_date_format, $t_version->date_order ) . ')';
 	}
 
 	return $t_version_text;	

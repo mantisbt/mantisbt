@@ -75,9 +75,9 @@
 	if ( $t_show_product_version ) {
 		$t_version_rows = version_get_all_rows( $t_bug->project_id );
 
-		$t_product_version_string  = prepare_version_string( $f_bug_id, $t_bug->project_id, $t_bug->version, $t_version_rows );
-		$t_target_version_string   = prepare_version_string( $f_bug_id, $t_bug->project_id, $t_bug->target_version, $t_version_rows );
-		$t_fixed_in_version_string = prepare_version_string( $f_bug_id, $t_bug->project_id, $t_bug->fixed_in_version, $t_version_rows );
+		$t_product_version_string  = prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->version, $t_bug->project_id ), $t_version_rows );
+		$t_target_version_string   = prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->target_version, $t_bug->project_id) , $t_version_rows );
+		$t_fixed_in_version_string = prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->fixed_in_version, $t_bug->project_id ), $t_version_rows );
 	} else {
 		$t_product_version_string  = '';
 		$t_target_version_string   = '';

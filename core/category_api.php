@@ -379,12 +379,12 @@ function category_cache_array_rows_by_project( $p_project_id_array ) {
  * Return all categories for the specified project id.
  * Obeys project hierarchies and such.
  * @param int $p_project_id Project id
- * @param bool $p_inherit indicates whether to inherit categories from parent projects
+ * @param bool $p_inherit indicates whether to inherit categories from parent projects, or null to use configuration default.
  * @param bool $p_sort_by_project
  * @return array array of categories
  * @access public
  */
- function category_get_all_rows( $p_project_id, $p_inherit = true, $p_sort_by_project = false ) {
+ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false ) {
 	global $g_category_cache, $g_cache_category_project;
 
 	if( isset( $g_cache_category_project[ (int)$p_project_id ] ) ) {
@@ -411,7 +411,17 @@ function category_cache_array_rows_by_project( $p_project_id_array ) {
 	$t_category_table = db_get_table( 'mantis_category_table' );
 	$t_project_table = db_get_table( 'mantis_project_table' );
 
-	if( $p_inherit ) {
+	if ( $c_project_id == ALL_PROJECTS ) {
+		$t_inherit = false;
+	} else {
+		if ( $p_inherit === null ) {
+			$t_inherit = config_get( 'subprojects_inherit_categories' );
+		} else {
+			$t_inherit = $p_inherit;
+		}
+	}
+
+	if ( $t_inherit ) {
 		$t_project_ids = project_hierarchy_inheritance( $p_project_id );
 		$t_project_where = ' project_id IN ( ' . implode( ', ', $t_project_ids ) . ' ) ';
 	} else {

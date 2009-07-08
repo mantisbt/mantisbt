@@ -823,14 +823,6 @@
 	 */
 	$g_show_project_menu_bar = OFF;
 
-
-	/**
-	 * show extra dropdown for subprojects
-	 * Shows only top projects in the project dropdown and adds an extra dropdown for subprojects.
-	 * @global int $g_show_extended_project_browser
-	 */
-	$g_show_extended_project_browser = OFF;
-
 	/**
 	 * show assigned to names
 	 * This is in the view all pages
@@ -3656,3 +3648,23 @@
 	 */
 	$g_due_date_view_threshold = NOBODY;
 
+	/*****************
+	 * Sub-projects
+	 *****************
+
+	/**
+	 * show extra dropdown for subprojects
+	 * Shows only top projects in the project dropdown and adds an extra dropdown for subprojects.
+	 * @global int $g_show_extended_project_browser
+	 */
+	$g_show_extended_project_browser = OFF;
+
+	/**
+	 * Sub-projects should inherit categories from parent projects.
+	 */
+	$g_subprojects_inherit_categories = ON;
+
+	/**
+	 * Sub-projects should inherit versions from parent projects.
+	 */
+	$g_subprojects_inherit_versions = ON;

@@ -354,7 +354,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <!-- Repeated Info Row -->
 		<tr <?php echo helper_alternate_class() ?>>
 			<td>
-				<?php echo string_display( category_full_name( $t_category['id'] , $t_inherited ) )  ?>
+				<?php echo string_display( category_full_name( $t_category['id'] , /* showProject */ $t_inherited, $f_project_id ) )  ?>
 			</td>
 			<td>
 				<?php echo $t_user_name ?>
@@ -445,7 +445,14 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	}
 
 	foreach ( $t_versions as $t_version ) {
-		$t_name = $t_version['version'];
+		if ( $t_version['project_id'] != $f_project_id ) {
+			$t_inherited = true;
+		} else {
+			$t_inherited = false;
+		}
+
+		$t_name = version_full_name( $t_version['id'], /* showProject */ $t_inherited, $f_project_id );
+
 		$t_released = $t_version['released'];
 		$t_obsolete = $t_version['obsolete'];
 		if( !date_is_null( $t_version['date_order'] ) ) {
@@ -472,9 +479,11 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 				<?php
 					$t_version_id = version_get_id( $t_name, $f_project_id );
 
-					print_button( 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id, lang_get( 'edit_link' ) );
-					echo '&nbsp;';
-					print_button( 'manage_proj_ver_delete.php?version_id=' . $t_version_id, lang_get( 'delete_link' ) );
+					if ( !$t_inherited ) {
+						print_button( 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id, lang_get( 'edit_link' ) );
+						echo '&nbsp;';
+						print_button( 'manage_proj_ver_delete.php?version_id=' . $t_version_id, lang_get( 'delete_link' ) );
+					}
 				?>
 			</td>
 		</tr>
