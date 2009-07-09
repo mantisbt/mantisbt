@@ -36,7 +36,6 @@
 	require_once( 'bug_api.php' );
 	require_once( 'custom_field_api.php' );
 	require_once( 'file_api.php' );
-	require_once( 'compress_api.php' );
 	require_once( 'date_api.php' );
 	require_once( 'relationship_api.php' );
 	require_once( 'last_visited_api.php' );
