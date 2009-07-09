@@ -547,7 +547,7 @@ function config_obsolete( $p_var, $p_replace ) {
 #  the string
 function config_eval( $p_value ) {
 	$t_value = $p_value;
-	if( is_string( $t_value ) && !is_numeric( $t_value ) ) {
+	if( !empty( $t_value ) && is_string( $t_value ) && !is_numeric( $t_value ) ) {
 		if( 0 < preg_match_all( '/(?:^|[^\\\\])(%([^%]+)%)/U', $t_value, $t_matches ) ) {
 			$t_count = count( $t_matches[0] );
 			for( $i = 0;$i < $t_count;$i++ ) {
