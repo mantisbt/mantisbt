@@ -26,6 +26,7 @@
 
 $g_cache_project_hierarchy = null;
 $g_cache_project_inheritance = null;
+$g_cache_show_disabled = null;
  
 /**
  * Add project to project hierarchy
