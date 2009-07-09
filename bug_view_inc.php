@@ -246,9 +246,9 @@
 				print_bracket_link( 'bug_view_advanced_page.php?bug_id='.$t_bugslist[$t_index+1], '&gt;&gt;' );
 			}
 		}
+		echo '</span></td>';
 	}
 
-	echo '</span></td>';
 
 	# Links
 	echo '<td class="right" colspan="2">';
@@ -263,7 +263,7 @@
 	# Print Bug
 	echo '<span class="small">';
 	print_bracket_link( $tpl_print_link, lang_get( 'print' ) );
-
+	echo '</span>';
 	echo '</td>';
 	echo '</tr>';
 
