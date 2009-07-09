@@ -49,17 +49,20 @@ function compress_handler_is_enabled() {
 			return false;
 		}
 	
-		if ( !ini_get( 'zlib.output_compression' ) ) {
-			if( php_version_at_least( '5.2.10' ) && ini_get('output_handler') == '' ) {
-				ini_set('zlib.output_compression', true);
-				// do it transparently
-				return false;
-			}
+		if ( ini_get( 'zlib.output_compression' ) ) {
+			/* zlib output compression is enabled */
+			return false;
+		}
 		
-			if ( OFF == $g_use_iis ) {
-				// disable compression when using IIS because of issue #2953. for windows compression, use zlib.output_compression in php.ini or a later version of php
-				return false;
-			}
+		if( php_version_at_least( '5.2.10' ) && ini_get('output_handler') == '' ) {
+			ini_set('zlib.output_compression', true);
+			// do it transparently
+			return false;
+		}
+		
+		if ( OFF == $g_use_iis ) {
+			// disable compression when using IIS because of issue #2953. for windows compression, use zlib.output_compression in php.ini or a later version of php
+			return false;
 		}
 		return ( 'ob_gzhandler' != ini_get( 'output_handler' ) );
 	}
