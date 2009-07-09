@@ -47,7 +47,7 @@
 
 	config_delete( $f_config_option, $f_user_id, $f_project_id );
 
-	form_security_purg( 'adm_config_delete' );
+	form_security_purge( 'adm_config_delete' );
 
 	print_successful_redirect( 'adm_config_report.php' );
 
