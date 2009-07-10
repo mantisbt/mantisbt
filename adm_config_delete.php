@@ -37,12 +37,6 @@
 		access_ensure_project_level( config_get( 'set_configuration_threshold' ), $f_project_id );
 	}
 
-	# make sure that configuration option specified can be stored in the database
-	if ( !config_can_set_in_database( $f_config_option ) ) {
-		error_parameters( $f_config_option );
-		trigger_error( ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB, ERROR );
-	}
-
 	helper_ensure_confirmed( lang_get( 'delete_config_sure_msg' ), lang_get( 'delete_link' ) );
 
 	config_delete( $f_config_option, $f_user_id, $f_project_id );
