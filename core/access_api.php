@@ -83,7 +83,7 @@ $g_cache_access_matrix_user_ids = array();
 function access_denied() {
 	if( !auth_is_user_authenticated() ) {
 		if( basename( $_SERVER['SCRIPT_NAME'] ) != 'login_page.php' ) {
-			$t_return_page = $_SERVER['PHP_SELF'];
+			$t_return_page = $_SERVER['SCRIPT_NAME'];
 			if( isset( $_SERVER['QUERY_STRING'] ) ) {
 				$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 			}
@@ -93,7 +93,7 @@ function access_denied() {
 	} else {
 		if( current_user_is_anonymous() ) {
 			if( basename( $_SERVER['SCRIPT_NAME'] ) != 'login_page.php' ) {
-				$t_return_page = $_SERVER['PHP_SELF'];
+				$t_return_page = $_SERVER['SCRIPT_NAME'];
 				if( isset( $_SERVER['QUERY_STRING'] ) ) {
 					$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 				}

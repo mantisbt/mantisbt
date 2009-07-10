@@ -664,7 +664,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 	}
 	?>
 </p>
-<form method="post" action="<?php echo string_sanitize_url( $_SERVER['PHP_SELF'] );?>">
+<form method="post" action="<?php echo string_sanitize_url( $_SERVER['SCRIPT_NAME'] );?>">
 <?php
 	# CSRF protection not required here - user needs to enter password
 	# (confirmation step) before the form is accepted.

@@ -181,7 +181,7 @@ function get_gd_version() {
  * @access public
  */
 function is_page_name( $p_string ) {
-	return isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], $p_string ) );
+	return isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], $p_string ) );
 }
 
 function is_windows_server() {

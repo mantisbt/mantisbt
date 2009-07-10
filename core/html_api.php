@@ -280,7 +280,7 @@ function html_page_bottom1( $p_file = null ) {
  */
 function html_page_bottom1a( $p_file = null ) {
 	if( null === $p_file ) {
-		$p_file = basename( $_SERVER['PHP_SELF'] );
+		$p_file = basename( $_SERVER['SCRIPT_NAME'] );
 	}
 
 	html_bottom_banner();
@@ -494,7 +494,7 @@ function html_login_info() {
 	echo '<tr>';
 	echo '<td class="login-info-left">';
 	if( current_user_is_anonymous() ) {
-		$t_return_page = $_SERVER['PHP_SELF'];
+		$t_return_page = $_SERVER['SCRIPT_NAME'];
 		if( isset( $_SERVER['QUERY_STRING'] ) ) {
 			$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 		}
