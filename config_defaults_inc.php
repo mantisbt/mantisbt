@@ -80,7 +80,7 @@
 	 * MantisBT Path Settings *
 	 **************************/
 
-	if ( isset ( $_SERVER['PHP_SELF'] ) ) {
+	if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 		$t_protocol = 'http';
 		if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
 			$t_protocol= $_SERVER['HTTP_X_FORWARDED_PROTO'];
@@ -113,7 +113,6 @@
 		}
 
 		// Get server root to compare with path to this file
-		// using SCRIPT_NAME not PHP_SELF as php self can duplicate paths ( see http://bugs.php.net/bug.php?id=42699 etc )
 		if( !isset( $_SERVER['DOCUMENT_ROOT'] ) ) {
 			if( isset( $_SERVER['SCRIPT_FILENAME'] ) ) {
 				$_SERVER['DOCUMENT_ROOT'] = str_replace( '\\', '/', substr( $_SERVER['SCRIPT_FILENAME'], 0, 0 - strlen( $_SERVER['SCRIPT_NAME'] ) ) );
@@ -133,7 +132,7 @@
 		if ( preg_match( '@' . preg_quote( $t_docroot ) . '(.*)@', $t_file_path, $t_matches ) ) {
 			$t_path = dirname( strip_tags( $t_matches[1] ) );
 		} else {
-			$t_path = dirname( strip_tags( $_SERVER['PHP_SELF'] ) );
+			$t_path = dirname( strip_tags( $_SERVER['SCRIPT_NAME'] ) );
 			if ( '/' == $t_path || '\\' == $t_path ) {
 				$t_path = '';
 			}

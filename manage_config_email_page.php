@@ -286,7 +286,7 @@
 			echo form_security_field( 'manage_config_revert' );
 			echo "<input name=\"revert\" type=\"hidden\" value=\"notify_flags,default_notify_flags\"></input>";
 			echo "<input name=\"project\" type=\"hidden\" value=\"$t_project\"></input>";
-			echo "<input name=\"return\" type=\"hidden\" value=\"" . string_sanitize_url( $_SERVER['PHP_SELF'] ) ."\"></input>";
+			echo "<input name=\"return\" type=\"hidden\" value=\"" . string_sanitize_url( $_SERVER['SCRIPT_NAME'] ) ."\"></input>";
 			echo "<input type=\"submit\" class=\"button\" value=\"";
 			if ( ALL_PROJECTS == $t_project ) {
                 echo lang_get( 'revert_to_system' );

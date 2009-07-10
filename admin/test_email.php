@@ -64,7 +64,7 @@ html_page_top();
 			}
 		}
 ?>
-		<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>#email">
+		<form method="post" action="<?php echo $_SERVER['SCRIPT_NAME']?>#email">
 		Email Address: <?php echo config_get_global( 'administrator_email' );?><br />
 		<input type="submit" value="Send Mail" name="mail_test" />
 		</form>

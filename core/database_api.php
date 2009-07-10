@@ -259,7 +259,7 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
 		} else {
 			# or from a script directly?
-			$t_caller .= ' ' . $_SERVER['PHP_SELF'];
+			$t_caller .= ' ' . $_SERVER['SCRIPT_NAME'];
 		}
 	}
 
