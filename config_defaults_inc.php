@@ -3691,7 +3691,8 @@
 	 * @global array $g_global_settings
 	 */
 	$g_global_settings = array(
-		'_table$', 'cookie', '^db_', 'hostname', 'allow_signup', 'database_name', 'show_queries_count', 'admin_checks', 'version_suffix', 'global_settings',
+		'_table$', 'cookie', '^db_', 'hostname', 'allow_signup', 'database_name', 'show_queries_', 'admin_checks', 'version_suffix', 'global_settings',
 		'_path$', 'use_iis', 'language', 'use_javascript', 'minimal_jscss', 'display_errors', 'show_detailed_errors', 'stop_on_errors', 'login_method', '_file$',
-		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'plugins_enabled', 'session_', 'form_security_', 'compress_html'
+		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'plugins_enabled', 'session_', 'form_security_', 'compress_html',
+		'admin_site_threshold', 'manage_site_threshold', 'manage_user_threshold'
 	);
