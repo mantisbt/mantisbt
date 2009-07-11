@@ -609,14 +609,9 @@ function version_prepare_db( $p_version_info ) {
  * Checks whether the product version should be shown
  * (i.e. report, update, view, print).
  * @param integer $p_project_id  The project id.
- * @param integer $p_view_id e.g. VIEW_SIMPLE, VIEW_ADVANCED, VIEW_*
  * @return bool true: show, false: otherwise.
  */
-function version_should_show_product_version( $p_project_id, $p_view_id ) {
-	if ( ( config_get( 'show_product_version_views' ) & $p_view_id ) == 0 ) {
-		return false;
-	}
-
+function version_should_show_product_version( $p_project_id ) {
 	return ( ON == config_get( 'show_product_version', /* default */ null, /* user_id */ null, $p_project_id ) )
 		|| ( ( AUTO == config_get( 'show_product_version', /* default */ null, /* user_id */ null, $p_project_id ) )
 				&& ( count( version_get_all_rows( $p_project_id ) ) > 0 ) );

@@ -2086,8 +2086,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		}
 		$t_filters_url = $t_filters_url . '&amp;target_field=';
 
-		$t_show_build = ( config_get( 'show_product_build_views' ) & VIEW_FILTERS ) != 0;
-		$t_show_product_version = ( ON == config_get( 'show_product_version' ) ) || (( AUTO == config_get( 'show_product_version' ) ) && ( count( version_get_all_rows_with_subs( $t_project_id ) ) > 0 ) );
+		$t_show_product_version =  version_should_show_product_version( $t_project_id );
+		$t_show_build = $t_show_product_version && ( config_get( 'enable_product_build' ) == ON );
 
 		# overload handler_id setting if user isn't supposed to see them (ref #6189)
 		if( !access_has_project_level( config_get( 'view_handler_threshold' ), $t_project_id ) ) {

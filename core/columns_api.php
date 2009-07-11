@@ -23,6 +23,39 @@
  */
 
 /**
+ * Filters an array of columns based on configuration options.  The filtering can remove
+ * columns whose features are disabled.
+ *
+ * @param array(string) $p_columns  The columns proposed for display.
+ * @return array(string) The columns array after removing the disabled features.
+ */
+function columns_filter_disabled( $p_columns ) {
+	$t_columns = array();
+
+	$t_enable_eta = in_array( BUG_FIELD_ETA, $p_columns ) && ( config_get( 'enable_eta' ) == ON );
+	$t_enable_projection = in_array( BUG_FIELD_PROJECTION, $p_columns ) && ( config_get( 'enable_projection' ) == ON );
+	$t_enable_product_build = in_array( BUG_FIELD_PRODUCT_BUILD, $p_columns ) && ( config_get( 'enable_product_build' ) == ON );
+
+	foreach ( $p_columns as $t_column ) {
+		if ( $t_column == BUG_FIELD_ETA && !$t_enable_eta ) {
+			continue;
+		}
+
+		if ( $t_column == BUG_FIELD_PROJECTION && !$t_enable_projection ) {
+			continue;
+		}
+
+		if ( $t_column == BUG_FIELD_PRODUCT_BUILD && !$t_enable_product_build ) {
+			continue;
+		}
+
+		$t_columns[] = $t_column;
+	}
+
+	return $t_columns;
+}
+
+/**
  * Get a list of standard columns.
  */
 function columns_get_standard() {

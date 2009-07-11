@@ -42,7 +42,7 @@
 	require_once( 'last_visited_api.php' );
 	require_once( 'tag_api.php' );
 
-	$f_bug_id		= gpc_get_int( 'bug_id' );
+	$f_bug_id		= gpc_get_int( 'id' );
 	$f_history		= gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
 
 	bug_ensure_exists( $f_bug_id );
@@ -58,15 +58,8 @@
 		$g_project_override = $tpl_bug->project_id;
 	}
 
-	$t_allow_view_type = config_get( 'show_view' );
-
-	if ( $tpl_advanced && SIMPLE_ONLY == $t_allow_view_type ) {
-		print_header_redirect ( 'bug_view_page.php?bug_id=' . $f_bug_id . '&amp;a=1' );
-	}
-
-	if ( !$tpl_advanced && ADVANCED_ONLY == $t_allow_view_type ) {
-		print_header_redirect ( 'bug_view_advanced_page.php?bug_id=' . $f_bug_id );
-	}
+	$t_fields = config_get( $tpl_fields_config_option );
+	$t_fields = columns_filter_disabled( $t_fields );
 
 	compress_enable();
 
@@ -80,10 +73,11 @@
 
 	$t_bugslist = gpc_get_cookie( config_get( 'bug_list_cookie' ), false );
 
-	$tpl_show_product_version = version_should_show_product_version( $tpl_bug->project_id, $tpl_view_id );
-	$tpl_show_fixed_in_version = $tpl_show_product_version && ( ( config_get( 'show_fixed_in_version_views' ) & $tpl_view_id ) != 0 ) ;
-	$tpl_show_build = $tpl_show_product_version && ( ( config_get( 'show_product_build_views' ) & $tpl_view_id ) != 0 );
-	$tpl_show_target_version = $tpl_show_product_version && ( ( config_get( 'show_target_version_views' ) & $tpl_view_id ) != 0 ) && access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
+	$tpl_show_product_version = in_array( BUG_FIELD_PRODUCT_VERSION, $t_fields ) && version_should_show_product_version( $tpl_bug->project_id );
+	$tpl_show_fixed_in_version = $tpl_show_product_version && in_array( BUG_FIELD_FIXED_IN_VERSION, $t_fields );
+	$tpl_show_build = $tpl_show_product_version && in_array( BUG_FIELD_PRODUCT_BUILD, $t_fields );
+	$tpl_show_target_version = $tpl_show_product_version && in_array( BUG_FIELD_TARGET_VERSION, $t_fields )
+		&& access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
 	$tpl_product_version_string  = '';
 	$tpl_target_version_string   = '';
 	$tpl_fixed_in_version_string = '';
@@ -102,26 +96,12 @@
 		}
 	}
 
-	$t_page_name = $tpl_advanced ? 'bug_view_advanced_page.php' : 'bug_view_page.php';
-
 	$tpl_bug_id = $f_bug_id;
-	$tpl_form_title = $tpl_advanced ? lang_get( 'viewing_bug_advanced_details_title' ) : lang_get( 'viewing_bug_simple_details_title' );
+	$tpl_form_title = lang_get( 'bug_view_title' );
 	$tpl_wiki_link = config_get_global( 'wiki_enable' ) == ON ? 'wiki.php?id=' . $f_bug_id : '';
 
-	if ( $t_allow_view_type == BOTH ) {
-		if ( $tpl_advanced ) {
-			$tpl_alternate_view_link = 'bug_view_page.php?bug_id=' . $f_bug_id;
-			$tpl_alternate_view_label = lang_get( 'view_simple_link' );
-		} else {
-			$tpl_alternate_view_link = 'bug_view_advanced_page.php?bug_id=' . $f_bug_id;
-			$tpl_alternate_view_label = lang_get( 'view_advanced_link' );
-		}
-	} else {
-		$tpl_alternate_view_link = '';
-	}
-
 	if ( access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
-		$tpl_history_link = "{$t_page_name}?bug_id={$f_bug_id}&amp;history=1#history";
+		$tpl_history_link = "view.php?id={$f_bug_id}&amp;history=1#history";
 	} else {
 		$tpl_history_link = '';
 	}
@@ -135,16 +115,23 @@
 	$tpl_top_buttons_enabled = !$tpl_force_readonly && ( $t_action_button_position == POSITION_TOP || $t_action_button_position == POSITION_BOTH );
 	$tpl_bottom_buttons_enabled = !$tpl_force_readonly && ( $t_action_button_position == POSITION_BOTTOM || $t_action_button_position == POSITION_BOTH );
 
-	$tpl_project_name = project_get_name( $tpl_bug->project_id );
-	$tpl_formatted_bug_id = bug_format_id( $f_bug_id );
+	$tpl_show_project = in_array( BUG_FIELD_PROJECT, $t_fields );
+	$tpl_project_name = $tpl_show_project ? project_get_name( $tpl_bug->project_id ) : '';
+	$tpl_show_id = in_array( BUG_FIELD_ID, $t_fields );
+	$tpl_formatted_bug_id = $tpl_show_id ? bug_format_id( $f_bug_id ) : '';
 
-	$tpl_can_view_handler = access_has_bug_level( config_get( 'view_handler_threshold' ), $f_bug_id );
-	$tpl_can_attach_tag = !$tpl_force_readonly && access_has_bug_level( config_get( 'tag_attach_threshold' ), $f_bug_id );
-	$tpl_can_view_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
+	$tpl_show_date_submitted = in_array( BUG_FIELD_DATE_SUBMITTED, $t_fields );
+	$tpl_date_submitted = $tpl_show_date_submitted ? date( config_get( 'normal_date_format' ), $tpl_bug->date_submitted ) : '';
+
+	$tpl_show_last_updated = in_array( BUG_FIELD_LAST_UPDATED, $t_fields );
+	$tpl_last_updated = $tpl_show_last_updated ? date( config_get( 'normal_date_format' ), $tpl_bug->last_updated ) : '';
+
+	$tpl_show_tags = in_array( BUG_FIELD_TAGS, $t_fields ) && access_has_global_level( config_get( 'tag_view_threshold' ) );
 
 	$tpl_bug_overdue = bug_is_overdue( $f_bug_id );
 
-	$tpl_bug_view_state_enum = get_enum_element( 'project_view_state', $tpl_bug->view_state );
+	$tpl_show_view_state = in_array( BUG_FIELD_VIEW_STATE, $t_fields );
+	$tpl_bug_view_state_enum = $tpl_show_view_state ? get_enum_element( 'project_view_state', $tpl_bug->view_state ) : '';
 
 	$tpl_can_view_due_date = access_has_bug_level( config_get( 'due_date_view_threshold' ), $f_bug_id );
 
@@ -156,19 +143,31 @@
 		}
 	}
 
-	$tpl_show_additional_information = !is_blank( $tpl_bug->additional_information );
-	$tpl_show_steps_to_reproduce = !is_blank( $tpl_bug->steps_to_reproduce );
+	$tpl_show_reporter = in_array( BUG_FIELD_REPORTER, $t_fields );
+	$tpl_show_handler = in_array( BUG_FIELD_HANDLER, $t_fields ) && access_has_bug_level( config_get( 'view_handler_threshold' ), $f_bug_id );
+	$tpl_show_additional_information = !is_blank( $tpl_bug->additional_information ) && in_array( BUG_FIELD_ADDITIONAL_INFO, $t_fields );
+	$tpl_show_steps_to_reproduce = !is_blank( $tpl_bug->steps_to_reproduce ) && in_array( BUG_FIELD_STEPS_TO_REPRODUCE, $t_fields );
 	$tpl_show_monitor_box = !$tpl_force_readonly;
 	$tpl_show_relationships_box = !$tpl_force_readonly;
 	$tpl_show_upload_form = !$tpl_force_readonly && !bug_is_readonly( $f_bug_id );
 	$tpl_show_history = $f_history;
-	$tpl_show_profiles = $tpl_advanced && config_get( 'enable_profiles' );
-	$tpl_show_projection = ( config_get( 'show_projection_views' ) & $tpl_view_id ) != 0;
-	$tpl_show_eta = ( config_get( 'show_eta_views' ) & $tpl_view_id ) != 0;
-	$tpl_show_attachments = ( $tpl_bug->reporter_id == auth_get_current_user_id() ) || access_has_bug_level( config_get( 'view_attachments_threshold' ), $f_bug_id );
-	$tpl_show_priority = true;
-	$tpl_show_severity = $tpl_advanced;
-	$tpl_show_reproducibility = $tpl_advanced;
+	$tpl_show_profiles = config_get( 'enable_profiles' );
+	$tpl_show_platform = $tpl_show_profiles && in_array( BUG_FIELD_PLATFORM, $t_fields );
+	$tpl_show_os = $tpl_show_profiles && in_array( BUG_FIELD_OS, $t_fields );
+	$tpl_show_os_version = $tpl_show_profiles && in_array( BUG_FIELD_OS_VERSION, $t_fields );
+	$tpl_show_projection = in_array( BUG_FIELD_PROJECTION, $t_fields );
+	$tpl_show_eta = in_array( BUG_FIELD_ETA, $t_fields );
+	$tpl_show_attachments = in_array( BUG_FIELD_ATTACHMENTS, $t_fields ) && ( ( $tpl_bug->reporter_id == auth_get_current_user_id() ) || access_has_bug_level( config_get( 'view_attachments_threshold' ), $f_bug_id ) );
+	$tpl_can_attach_tag = $tpl_show_tags && !$tpl_force_readonly && access_has_bug_level( config_get( 'tag_attach_threshold' ), $f_bug_id );
+	$tpl_show_category = in_array( BUG_FIELD_CATEGORY, $t_fields );
+	$tpl_category = $tpl_show_category ? category_full_name( $tpl_bug->category_id ) : '';
+	$tpl_show_priority = in_array( BUG_FIELD_PRIORITY, $t_fields );
+	$tpl_show_severity = in_array( BUG_FIELD_SEVERITY, $t_fields );
+	$tpl_show_reproducibility = in_array( BUG_FIELD_REPRODUCIBILITY, $t_fields );
+	$tpl_show_status = in_array( BUG_FIELD_STATUS, $t_fields );
+	$tpl_show_resolution = in_array( BUG_FIELD_RESOLUTION, $t_fields );
+	$tpl_show_summary = in_array( BUG_FIELD_SUMMARY, $t_fields );
+	$tpl_show_description = in_array( BUG_FIELD_DESCRIPTION, $t_fields );
 
 	$tpl_bug_summary = bug_format_summary( $f_bug_id, SUMMARY_FIELD );
 	$tpl_links = event_signal( 'EVENT_MENU_ISSUE', $f_bug_id );
@@ -233,13 +232,6 @@
 	# Links
 	echo '<td class="right" colspan="2">';
 
-	# Simple View (if enabled)
-	if ( !is_blank( $tpl_alternate_view_link ) ) {
-		echo '<span class="small">';
-		print_bracket_link( $tpl_alternate_view_link, $tpl_alternate_view_label );
-		echo '</span>';
-	}
-
 	if ( !is_blank( $tpl_history_link ) ) {
 		# History
 		echo '<span class="small">';
@@ -262,79 +254,85 @@
 		echo '</tr>';
 	}
 
-	# Labels
-	echo '<tr>';
-	echo '<td class="category" width="15%">', lang_get( 'id' ), '</td>';
-	echo '<td class="category" width="20%">', lang_get( 'email_project' ), '</td>';
-	echo '<td class="category" width="15%">', lang_get( 'category' ), '</td>';
-	echo '<td class="category" width="15%">', lang_get( 'view_status' ), '</td>';
-	echo '<td class="category" width="15%">', lang_get( 'date_submitted' ), '</td>';
-	echo '<td class="category" width="20%">', lang_get( 'last_update' ),'</td>';
-	echo '</tr>';
+	if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_state || $tpl_show_date_submitted || $tpl_show_last_updated ) {
+		# Labels
+		echo '<tr>';
+		echo '<td class="category" width="15%">', $tpl_show_id ? lang_get( 'id' ) : '', '</td>';
+		echo '<td class="category" width="20%">', $tpl_show_project ? lang_get( 'email_project' ) : '', '</td>';
+		echo '<td class="category" width="15%">', $tpl_show_category ? lang_get( 'category' ) : '', '</td>';
+		echo '<td class="category" width="15%">', $tpl_show_view_state ? lang_get( 'view_status' ) : '', '</td>';
+		echo '<td class="category" width="15%">', $tpl_show_date_submitted ? lang_get( 'date_submitted' ) : '', '</td>';
+		echo '<td class="category" width="20%">', $tpl_show_last_updated ? lang_get( 'last_update' ) : '','</td>';
+		echo '</tr>';
 
-	echo '<tr ', helper_alternate_class(), '>';
+		echo '<tr ', helper_alternate_class(), '>';
 
-	# Bug ID
-	echo '<td>', string_display_line( $tpl_formatted_bug_id ), '</td>';
+		# Bug ID
+		echo '<td>', string_display_line( $tpl_formatted_bug_id ), '</td>';
 
-	# Project
-	echo '<td>', string_display_line( $tpl_project_name ), '</td>';
+		# Project
+		echo '<td>', string_display_line( $tpl_project_name ), '</td>';
 
-	# Category
-	echo '<td>', string_display_line( category_full_name( $tpl_bug->category_id ) ), '</td>';
+		# Category
+		echo '<td>', string_display_line( $tpl_category ), '</td>';
 
-	# View Status
-	echo '<td>', $tpl_bug_view_state_enum, '</td>';
+		# View Status
+		echo '<td>', $tpl_bug_view_state_enum, '</td>';
 
-	# Date Submitted
-	echo '<td>', date( config_get( 'normal_date_format' ), $tpl_bug->date_submitted ), '</td>';
+		# Date Submitted
+		echo '<td>', $tpl_date_submitted, '</td>';
 
-	# Date Updated
-	echo '<td>', date( config_get( 'normal_date_format' ), $tpl_bug->last_updated ), '</td>';
+		# Date Updated
+		echo '<td>', $tpl_last_updated, '</td>';
 
-	echo '<td></td>';
+		echo '</tr>';
 
-	echo '</tr>';
-
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
+		# spacer
+		echo '<tr class="spacer"><td colspan="6"></td></tr>';
+	}
 
 	#
 	# Reporter, Due Date
 	#
 
-	echo '<tr ', helper_alternate_class(), '>';
+	if ( $tpl_show_reporter || $tpl_can_view_due_date ) {
+		echo '<tr ', helper_alternate_class(), '>';
 
-	$t_spacer = 2;
+		$t_spacer = 2;
 
-	# Reporter
-	echo '<td class="category">', lang_get( 'reporter' ), '</td>';
-	echo '<td>';
-	print_user_with_subject( $tpl_bug->reporter_id, $tpl_bug_id );
-	echo '</td>';
-
-	# Due Date
-	if ( $tpl_can_view_due_date ) {
-		echo '<td class="category">', lang_get( 'due_date' ), '</td>';
-
-		if ( $tpl_bug_overdue ) {
-			echo '<td class="overdue">', $tpl_bug_due_date, '</td>';
+		# Reporter
+		if ( $tpl_show_reporter ) {
+			echo '<td class="category">', lang_get( 'reporter' ), '</td>';
+			echo '<td>';
+			print_user_with_subject( $tpl_bug->reporter_id, $tpl_bug_id );
+			echo '</td>';
 		} else {
-			echo '<td>', $tpl_bug_due_date, '</td>';
+			$t_spacer += 2;
 		}
-	} else {
-		$t_spacer += 2;
+
+		# Due Date
+		if ( $tpl_can_view_due_date ) {
+			echo '<td class="category">', lang_get( 'due_date' ), '</td>';
+
+			if ( $tpl_bug_overdue ) {
+				echo '<td class="overdue">', $tpl_bug_due_date, '</td>';
+			} else {
+				echo '<td>', $tpl_bug_due_date, '</td>';
+			}
+		} else {
+			$t_spacer += 2;
+		}
+
+		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+
+		echo '</tr>';
 	}
-
-	echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
-
-	echo '</tr>';
 
 	#
 	# Handler
 	#
 
-	if ( $tpl_can_view_handler ) {
+	if ( $tpl_show_handler ) {
 		# Handler
 		echo '<tr ', helper_alternate_class(), '>';
 		echo '<td class="category">', lang_get( 'assigned_to' ), '</td>';
@@ -348,57 +346,75 @@
 	# Priority, Severity, Reproducibility
 	#
 
-	echo '<tr ', helper_alternate_class(), '>';
+	if ( $tpl_show_priority || $tpl_show_severity || $tpl_show_reproducibility ) {
+		echo '<tr ', helper_alternate_class(), '>';
 
-	$t_spacer = 0;
+		$t_spacer = 0;
 
-	# Priority
-	if ( $tpl_show_priority ) {
-		echo '<td class="category">', lang_get( 'priority' ), '</td>';
-		echo '<td>', get_enum_element( 'priority', $tpl_bug->priority ), '</td>';
-	} else {
-		$t_spacer += 2;
+		# Priority
+		if ( $tpl_show_priority ) {
+			echo '<td class="category">', lang_get( 'priority' ), '</td>';
+			echo '<td>', get_enum_element( 'priority', $tpl_bug->priority ), '</td>';
+		} else {
+			$t_spacer += 2;
+		}
+
+		# Severity
+		if ( $tpl_show_severity ) {
+			echo '<td class="category">', lang_get( 'severity' ), '</td>';
+			echo '<td>', get_enum_element( 'severity', $tpl_bug->severity ), '</td>';
+		} else {
+			$t_spacer += 2;
+		}
+
+		# Reproducibility
+		if ( $tpl_show_reproducibility ) {
+			echo '<td class="category">', lang_get( 'reproducibility' ), '</td>';
+			echo '<td>', get_enum_element( 'reproducibility', $tpl_bug->reproducibility ), '</td>';
+		} else {
+			$t_spacer += 2;
+		}
+
+		# spacer
+		if ( $t_spacer > 0 ) {
+			echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		}
+
+		echo '</tr>';
 	}
-
-	# Severity
-	if ( $tpl_show_severity ) {
-		echo '<td class="category">', lang_get( 'severity' ), '</td>';
-		echo '<td>', get_enum_element( 'severity', $tpl_bug->severity ), '</td>';
-	} else {
-		$t_spacer += 2;
-	}
-
-	# Reproducibility
-	if ( $tpl_show_reproducibility ) {
-		echo '<td class="category">', lang_get( 'reproducibility' ), '</td>';
-		echo '<td>', get_enum_element( 'reproducibility', $tpl_bug->reproducibility ), '</td>';
-	} else {
-		$t_spacer += 2;
-	}
-
-	# spacer
-	if ( $t_spacer > 0 ) {
-		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
-	}
-
-	echo '</tr>';
 
 	#
 	# Status, Resolution
 	#
 
-	echo '<tr ', helper_alternate_class(), '>';
+	if ( $tpl_show_status || $tpl_show_resolution ) {
+		echo '<tr ', helper_alternate_class(), '>';
 
-	# Status
-	echo '<td class="category">', lang_get( 'status' ), '</td>';
-	echo '<td bgcolor="', get_status_color( $tpl_bug->status ), '">', get_enum_element( 'status', $tpl_bug->status ), '</td>';
+		$t_spacer = 2;
 
-	# Resolution
-	echo '<td class="category">', lang_get( 'resolution' ), '</td>';
-	echo '<td>', get_enum_element( 'resolution', $tpl_bug->resolution ), '</td>';
+		# Status
+		if ( $tpl_show_status ) {
+			echo '<td class="category">', lang_get( 'status' ), '</td>';
+			echo '<td bgcolor="', get_status_color( $tpl_bug->status ), '">', get_enum_element( 'status', $tpl_bug->status ), '</td>';
+		} else {
+			$t_spacer += 2;
+		}
 
-	echo '<td colspan="2"></td>';
-	echo '</tr>';
+		# Resolution
+		if ( $tpl_show_resolution ) {
+			echo '<td class="category">', lang_get( 'resolution' ), '</td>';
+			echo '<td>', get_enum_element( 'resolution', $tpl_bug->resolution ), '</td>';
+		} else {
+			$t_spacer += 2;
+		}
+
+		# spacer
+		if ( $t_spacer > 0 ) {
+			echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		}
+
+		echo '</tr>';
+	}
 
 	#
 	# Projection, ETA
@@ -433,19 +449,38 @@
 	# Platform, OS, OS Version
 	#
 
-	if ( $tpl_show_profiles ) {
+	if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) {
+		$t_spacer = 0;
+
 		echo '<tr ', helper_alternate_class(), '>';
+
 		# Platform
-		echo '<td class="category">', lang_get( 'platform' ), '</td>';
-		echo '<td>', string_display_line( $tpl_bug->platform ), '</td>';
+		if ( $tpl_show_platform ) {
+			echo '<td class="category">', lang_get( 'platform' ), '</td>';
+			echo '<td>', string_display_line( $tpl_bug->platform ), '</td>';
+		} else {
+			$t_spacer += 2;
+		}
 
 		# Operating System
-		echo '<td class="category">', lang_get( 'os' ), '</td>';
-		echo '<td>', string_display_line( $tpl_bug->os ), '</td>';
+		if ( $tpl_show_os ) {
+			echo '<td class="category">', lang_get( 'os' ), '</td>';
+			echo '<td>', string_display_line( $tpl_bug->os ), '</td>';
+		} else {
+			$t_spacer += 2;
+		}
 
 		# OS Version
-		echo '<td class="category">', lang_get( 'os_version' ), '</td>';
-		echo '<td>', string_display_line( $tpl_bug->os_build ), '</td>';
+		if ( $tpl_show_os_version ) {
+			echo '<td class="category">', lang_get( 'os_version' ), '</td>';
+			echo '<td>', string_display_line( $tpl_bug->os_build ), '</td>';
+		} else {
+			$t_spacer += 2;
+		}
+
+		if ( $t_spacer > 0 ) {
+			echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		}
 
 		echo '</tr>';
 	}
@@ -527,16 +562,20 @@
 	#
 
 	# Summary
-	echo '<tr ', helper_alternate_class(), '>';
-	echo '<td class="category">', lang_get( 'summary' ), '</td>';
-	echo '<td colspan="5">', $tpl_bug_summary, '</td>';
-	echo '</tr>';
+	if ( $tpl_show_summary ) {
+		echo '<tr ', helper_alternate_class(), '>';
+		echo '<td class="category">', lang_get( 'summary' ), '</td>';
+		echo '<td colspan="5">', $tpl_bug_summary, '</td>';
+		echo '</tr>';
+	}
 
 	# Description
-	echo '<tr ', helper_alternate_class(), '>';
-	echo '<td class="category">', lang_get( 'description' ), '</td>';
-	echo '<td colspan="5">', string_display_links( $tpl_bug->description ), '</td>';
-	echo '</tr>';
+	if ( $tpl_show_description ) {
+		echo '<tr ', helper_alternate_class(), '>';
+		echo '<td class="category">', lang_get( 'description' ), '</td>';
+		echo '<td colspan="5">', string_display_links( $tpl_bug->description ), '</td>';
+		echo '</tr>';
+	}
 
 	# Steps to Reproduce
 	if ( $tpl_show_steps_to_reproduce ) {
@@ -555,7 +594,7 @@
 	}
 
 	# Tagging
-	if ( $tpl_can_view_tags ) {
+	if ( $tpl_show_tags ) {
 		echo '<tr ', helper_alternate_class(), '>';
 		echo '<td class="category">', lang_get( 'tags' ), '</td>';
 		echo '<td colspan="5">';

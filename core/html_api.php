@@ -1358,7 +1358,7 @@ function html_button_bug_change_status( $p_bug_id ) {
 		echo '</select>';
 
 		$t_bug_id = string_attribute( $p_bug_id );
-		echo "<input type=\"hidden\" name=\"bug_id\" value=\"$t_bug_id\" />\n";
+		echo "<input type=\"hidden\" name=\"id\" value=\"$t_bug_id\" />\n";
 
 		echo "</form>\n";
 	}

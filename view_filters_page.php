@@ -171,7 +171,7 @@
 	}
 
 	$t_show_product_version = version_should_show_product_version( $t_project_id );
-	$t_show_build = $t_show_product_version && ( config_get( 'show_product_build_views' ) & VIEW_FILTERS ) != 0;
+	$t_show_build = $t_show_product_version && ( config_get( 'enable_product_build' ) == ON );
 
 	$t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 ?>

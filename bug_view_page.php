@@ -21,15 +21,12 @@
  * @link http://www.mantisbt.org
  */
 
+/**
+ * MantisBT Core API's
+ */
 require_once( 'core.php' );
 
-define ( 'BUG_VIEW_INC_ALLOW', true );
+// Copy 'bug_id' parameter into 'id' so it is found by the view page.
+$_GET['id'] = gpc_get_int( 'bug_id' );
 
-$tpl_advanced = false;
-$tpl_file = __FILE__;
-$tpl_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-$tpl_show_page_header = true;
-$tpl_force_readonly = false;
-$tpl_view_id = VIEW_SIMPLE;
-
-include ( 'bug_view_inc.php' );
+include 'view.php';
