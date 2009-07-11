@@ -23,6 +23,22 @@
  */
 
 /**
+ * Determines (once-off) whether the client is accessing this script via a
+ * secure connection. If they are, we want to use the Secure cookie flag to
+ * prevent the cookie from being transmitted to other domains.
+ * @global bool $g_cookie_secure_flag_enabled
+ */
+$g_cookie_secure_flag_enabled = isset( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' );
+
+/**
+ * Determines (once-off) whether the version of PHP executing this script has
+ * support for the HttpOnly cookie flag. If so, we will set this flag to true
+ * so that it'll be added to all cookies sent to the client.
+ * @global bool $g_cookie_httponly_flag_enabled
+ */
+$g_cookie_httponly_flag_enabled = version_compare( PHP_VERSION, '5.2.0', '>=' );
+
+/**
  * GET, POST, and Cookie API
  * ---------------
  * Retrieve a GPC variable.
@@ -313,16 +329,22 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
  * If $p_expire is false instead of a number, the cookie will expire when
  * the browser is closed; if it is true, the default time from the config
  * file will be used.
- * If $p_path or $p_domain are omitted, defaults are used
+ * If $p_path or $p_domain are omitted, defaults are used.
+ * Set $p_httponly to false if client-side Javascript needs to read/write
+ * the cookie. Otherwise it is safe to leave this value unspecified, as
+ * the default value is true.
  * @todo this function is to be modified by Victor to add CRC... for now it just passes the parameters through to setcookie()
  * @param string $p_name
  * @param string $p_value
  * @param bool $p_expire default false
  * @param string $p_path default null
  * @param string $p_domain default null
- * @return null
+ * @param bool $p_httponly default true
+ * @return bool - true on success, false on failure
  */
-function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $p_domain = null ) {
+function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $p_domain = null, $p_httponly = true ) {
+	global $g_cookie_secure_flag_enabled;
+	global $g_cookie_httponly_flag_enabled;
 	if( false === $p_expire ) {
 		$p_expire = 0;
 	}
@@ -337,7 +359,12 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
 		$p_domain = config_get( 'cookie_domain' );
 	}
 
-	return setcookie( $p_name, $p_value, $p_expire, $p_path, $p_domain );
+	if( $g_cookie_httponly_flag_enabled ) {
+		# The HttpOnly cookie flag is only supported in PHP >= 5.2.0
+		return setcookie( $p_name, $p_value, $p_expire, $p_path, $p_domain, $g_cookie_secure_flag_enabled, $g_cookie_httponly_flag_enabled );
+	}
+
+	return setcookie( $p_name, $p_value, $p_expire, $p_path, $p_domain, $g_cookie_secure_flag_enabled );
 }
 
 /**
