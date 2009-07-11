@@ -124,7 +124,7 @@ config_obsolete( 'jpgraph_path', '' );
 config_obsolete( 'use_jpgraph', '' );
 config_obsolete( 'jpgraph_antialias', '' );
 
-# changes after 1.2.0rc1
+# changes in 1.2.0rc2
 config_obsolete( 'reminder_recipents_monitor_bug', 'reminder_recipients_monitor_bug' );
 config_obsolete( 'graph_window_width', '' );
 config_obsolete( 'graph_bar_aspect', '' );
@@ -132,3 +132,5 @@ config_obsolete( 'graph_summary_graphs_per_row', '' );
 config_obsolete( 'enable_product_build', 'show_product_build_views' );
 config_obsolete( 'enable_projection', 'show_projection_views' );
 config_obsolete( 'enable_eta', 'show_eta_views' );
+
+#changes in 1.3.0dev
