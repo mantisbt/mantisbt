@@ -124,7 +124,7 @@ config_obsolete( 'jpgraph_path', '' );
 config_obsolete( 'use_jpgraph', '' );
 config_obsolete( 'jpgraph_antialias', '' );
 
-# changes after 1.2.0rc1
+# changes in 1.2.0rc2
 config_obsolete( 'reminder_recipents_monitor_bug', 'reminder_recipients_monitor_bug' );
 config_obsolete( 'graph_window_width', '' );
 config_obsolete( 'graph_bar_aspect', '' );
