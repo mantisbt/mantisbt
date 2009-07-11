@@ -92,6 +92,9 @@ class MantisPHPSession extends MantisSession {
 	 * Constructor
 	 */
 	function __construct( $p_session_id=null ) {
+		global $g_cookie_secure_flag_enabled;
+		global $g_cookie_httponly_flag_enabled;
+
 		$this->key = config_get_global( 'session_key' );
 
 		# Save session information where specified or with PHP's default
@@ -102,10 +105,11 @@ class MantisPHPSession extends MantisSession {
 
 		# Handle session cookie and caching
 		session_cache_limiter( 'private_no_expire' );
-		if ( isset( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
-			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), true );
+		if ( $g_cookie_httponly_flag_enabled ) {
+			# The HttpOnly cookie flag is only supported in PHP >= 5.2.0
+			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), $g_cookie_secure_flag_enabled, $g_cookie_httponly_flag_enabled );
 		} else {
-			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), false );
+			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), $g_cookie_secure_flag_enabled );
 		}
 
 		# Handle existent session ID
