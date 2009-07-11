@@ -1258,7 +1258,6 @@ $s_query_delete_msg = 'Are you sure you wish to delete this filter?';
 
 # bug_view_advanced_page.php
 $s_view_simple_link = 'View Simple';
-$s_viewing_bug_advanced_details_title = 'Viewing Issue Advanced Details';
 $s_product_build = 'Product Build';
 $s_system_profile = 'System Description';
 $s_update_bug_button = 'Edit';
@@ -1275,7 +1274,7 @@ $s_add_user_to_monitor = 'Add';
 
 # view_bug_page.php
 $s_view_advanced_link = 'View Advanced';
-$s_viewing_bug_simple_details_title = 'Viewing Issue Simple Details';
+$s_bug_view_title = 'View Issue Details';
 
 # bug_monitor_list_view_inc.php
 $s_no_users_monitoring_bug = 'There are no users monitoring this issue.';

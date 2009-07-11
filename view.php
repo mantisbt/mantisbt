@@ -14,23 +14,22 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
-	 /**
-	  * MantisBT Core API's
-	  */
-	require_once( 'core.php' );
+/**
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
 
-	/**
-	 * requires string_api
-	 */
-	require_once( 'string_api.php' );
+require_once( 'core.php' );
 
-	// Copy 'id' parameter into 'bug_id' so it is found by the simple/advanced view page.
-	$_GET['bug_id'] = gpc_get_int( 'id' );
+define ( 'BUG_VIEW_INC_ALLOW', true );
 
-	include string_get_bug_view_page();
+$tpl_advanced = true;
+$tpl_file = __FILE__;
+$tpl_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+$tpl_show_page_header = true;
+$tpl_force_readonly = false;
+$tpl_fields_config_option = 'bug_view_page_fields';
+
+include ( 'bug_view_inc.php' );
