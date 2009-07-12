@@ -25,7 +25,6 @@ require_once( 'core.php' );
 
 define ( 'BUG_VIEW_INC_ALLOW', true );
 
-$tpl_advanced = true;
 $tpl_file = __FILE__;
 $tpl_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 $tpl_show_page_header = true;
