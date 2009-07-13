@@ -31,42 +31,36 @@
  */
 function columns_filter_disabled( $p_columns ) {
 	$t_columns = array();
-
-	$t_enable_eta = in_array( BUG_FIELD_ETA, $p_columns ) && ( config_get( 'enable_eta' ) == ON );
-	$t_enable_projection = in_array( BUG_FIELD_PROJECTION, $p_columns ) && ( config_get( 'enable_projection' ) == ON );
-	$t_enable_product_build = in_array( BUG_FIELD_PRODUCT_BUILD, $p_columns ) && ( config_get( 'enable_product_build' ) == ON );
-	$t_enable_profiles = ( in_array( BUG_FIELD_PLATFORM, $p_columns ) ||
-							in_array( BUG_FIELD_OS, $p_columns ) ||
-							in_array( BUG_FIELD_OS_VERSION, $p_columns ) ) &&
-							( config_get( 'enable_profiles' ) == ON );
-
+	$t_enable_profiles = ( config_get( 'enable_profiles' ) == ON );
+	
 	foreach ( $p_columns as $t_column ) {
-		if ( $t_column == BUG_FIELD_ETA && !$t_enable_eta ) {
-			continue;
+		switch( $t_column ) {
+			case 'os':
+			case 'os_build':
+			case 'platform':
+				if( ! $t_enable_profiles ) {
+					continue 2;
+				}
+				/* don't filter */
+				break;
+			case 'eta':
+				if( config_get( 'enable_eta' ) == OFF ) {
+					continue 2;
+				}
+			case 'projection':
+				if( config_get( 'enable_projection' ) == OFF ) {
+					continue 2;
+				}
+			case 'build':
+				if( config_get( 'enable_product_build' ) == OFF ) {
+					continue 2;
+				}
+			default:
+				/* don't filter */
+				break;
 		}
-
-		if ( $t_column == BUG_FIELD_PROJECTION && !$t_enable_projection ) {
-			continue;
-		}
-
-		if ( $t_column == BUG_FIELD_PRODUCT_BUILD && !$t_enable_product_build ) {
-			continue;
-		}
-
-		if ( $t_column == BUG_FIELD_PLATFORM && !$t_enable_profiles ) {
-			continue;
-		}
-
-		if ( $t_column == BUG_FIELD_OS && !$t_enable_profiles ) {
-			continue;
-		}
-
-		if ( $t_column == BUG_FIELD_OS_VERSION && !$t_enable_profiles ) {
-			continue;
-		}
-
 		$t_columns[] = $t_column;
-	}
+	} /* continued 2 */
 
 	return $t_columns;
 }
@@ -87,6 +81,18 @@ function columns_get_standard() {
 		unset( $t_columns['platform'] );
 	}
 
+	if( config_get( 'enable_eta' ) == OFF ) {
+		unset( $t_columns['eta'] );
+	}
+	
+	if( config_get( 'enable_projection' ) == OFF ) { 
+		unset( $t_columns['projection'] );
+	}
+	
+	if( config_get( 'enable_product_build' ) == OFF ) {
+		unset( $t_columns['build'] );
+	}
+	
 	return array_keys($t_columns);
 }
 
