@@ -304,22 +304,6 @@
 		preference has no effect.</para>
 	     </listitem>
 	     <listitem>
-	        <para>Advanced View: If selected, then the user will get the
-		issue advanced view page by default.  This preference is only
-		applicable when the administrator configures MantisBT to support
-		both simple and advanced view pages (i.e. $g_show_view is set
-		to BOTH).  If $g_show_view is set to SIMPLE_ONLY or
-		ADVANCED_ONLY, then this preference has no effect.</para>
-	     </listitem>
-	     <listitem>
-	        <para>Advanced Update: If selected, then the user will get the
-		issue advanced update page by default.  This preference is only
-		applicable when the administrator configures MantisBT to support
-		both simple and advanced update pages (i.e. $g_show_update is
-		set to BOTH).  If $g_show_update is set to SIMPLE_ONLY or
-		ADVANCED_ONLY, then this preference has no effect.</para>
-	     </listitem>
-	     <listitem>
 	        <para>Refresh Delay: The refresh delay is used to specify the
 		number of seconds between auto-refreshes of the View Issues
 		page.</para>

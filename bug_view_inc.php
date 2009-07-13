@@ -133,9 +133,9 @@
 	$tpl_show_view_state = in_array( BUG_FIELD_VIEW_STATE, $t_fields );
 	$tpl_bug_view_state_enum = $tpl_show_view_state ? get_enum_element( 'project_view_state', $tpl_bug->view_state ) : '';
 
-	$tpl_can_view_due_date = access_has_bug_level( config_get( 'due_date_view_threshold' ), $f_bug_id );
+	$tpl_show_due_date = in_array( BUG_FIELD_DUE_DATE, $t_fields ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $f_bug_id );
 
-	if ( $tpl_can_view_due_date ) {
+	if ( $tpl_show_due_date ) {
 		if ( !date_is_null( $tpl_bug->due_date ) ) {
 			$tpl_bug_due_date = date( config_get( 'normal_date_format' ), $tpl_bug->due_date );
 		} else {
@@ -295,7 +295,7 @@
 	# Reporter, Due Date
 	#
 
-	if ( $tpl_show_reporter || $tpl_can_view_due_date ) {
+	if ( $tpl_show_reporter || $tpl_show_due_date ) {
 		echo '<tr ', helper_alternate_class(), '>';
 
 		$t_spacer = 2;
@@ -311,7 +311,7 @@
 		}
 
 		# Due Date
-		if ( $tpl_can_view_due_date ) {
+		if ( $tpl_show_due_date ) {
 			echo '<td class="category">', lang_get( 'due_date' ), '</td>';
 
 			if ( $tpl_bug_overdue ) {

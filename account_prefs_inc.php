@@ -89,22 +89,6 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo lang_get( 'advanced_view' ) ?>
-	</td>
-	<td>
-		<input type="checkbox" name="advanced_view" <?php check_checked( $t_pref->advanced_view, ON ); ?> />
-	</td>
-</tr>
-<tr class="row-2">
-	<td class="category">
-		<?php echo lang_get( 'advanced_update' ) ?>
-	</td>
-	<td>
-		<input type="checkbox" name="advanced_update" <?php check_checked( $t_pref->advanced_update, ON ); ?> />
-	</td>
-</tr>
-<tr class="row-1">
-	<td class="category">
 		<?php echo lang_get( 'refresh_delay' ) ?>
 	</td>
 	<td>

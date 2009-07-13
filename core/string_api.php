@@ -546,20 +546,30 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
  * @return string
  */
 function string_get_bug_page( $p_action, $p_user_id = null ) {
-	if( null === $p_user_id ) {
-		if( auth_is_user_authenticated() ) {
-			$p_user_id = auth_get_current_user_id();
-		}
+	if ( $p_action == 'view' ) {
+		return 'bug_view_page.php';
+	}
+
+	if ( $p_action == 'update' ) {
+		return 'bug_update_page.php';
 	}
 
 	$g_show_action = config_get( 'show_' . $p_action );
 	switch( $g_show_action ) {
 		case BOTH:
-			if(( null !== $p_user_id ) && ( ON == user_pref_get_pref( $p_user_id, 'advanced_' . $p_action ) ) ) {
-				return 'bug_' . $p_action . '_advanced_page.php';
-			} else {
-				return 'bug_' . $p_action . '_page.php';
+			$t_user_id = $p_user_id;
+
+			if ( null === $p_user_id ) {
+				if ( auth_is_user_authenticated() ) {
+					$t_user_id = auth_get_current_user_id();
+				}
 			}
+
+			if ( ( null !== $t_user_id ) && ( ON == user_pref_get_pref( $t_user_id, 'advanced_' . $p_action ) ) ) {
+				return 'bug_' . $p_action . '_advanced_page.php';
+			}
+
+			return 'bug_' . $p_action . '_page.php';
 		case SIMPLE_ONLY:
 			return 'bug_' . $p_action . '_page.php';
 		case ADVANCED_ONLY:
