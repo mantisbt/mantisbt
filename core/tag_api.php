@@ -90,8 +90,8 @@ function tag_ensure_unique( $p_name ) {
 /**
  * Determine if a given name is valid.
  *
- * Name must not contain '+' and '-' characters (they are used for
- * filters) and the configured tag separator.
+ * Name must not begin with '+' and '-' characters (they are used for
+ * filters) and must not contain the configured tag separator.
  * The matches parameter allows to also receive an array of regex matches,
  * which by default only includes the valid tag name itself.
  * The prefix parameter is optional, but allows you to prefix the regex
@@ -103,7 +103,7 @@ function tag_ensure_unique( $p_name ) {
  */
 function tag_name_is_valid( $p_name, &$p_matches, $p_prefix = '' ) {
 	$t_separator = config_get( 'tag_separator' );
-	$t_pattern = "/^$p_prefix([^\+\-{$t_separator}]*)$/";
+	$t_pattern = "/^$p_prefix([^\+\-{$t_separator}][^{$t_separator}]*)$/";
 	return preg_match( $t_pattern, $p_name, $p_matches );
 }
 
