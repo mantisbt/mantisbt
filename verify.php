@@ -40,10 +40,8 @@
 	if( auth_is_user_authenticated() ) {
 		auth_logout();
 
-		# (Re)initialize session
-		session_regenerate_id();
-		session_init();
-		$g_session_pass_id = ON;
+		# reload the page after logout
+		print_header_redirect("verify.php?id=${f_user_id}&confirm_hash=${f_confirm_hash}");
 	}
 
 	$t_calculated_confirm_hash = auth_generate_confirm_hash( $f_user_id );
