@@ -176,6 +176,7 @@ define( 'BUG_FIELD_DESCRIPTION', 'description' );
 define( 'BUG_FIELD_ADDITIONAL_INFO', 'additional_info' );
 define( 'BUG_FIELD_STEPS_TO_REPRODUCE', 'steps_to_reproduce' );
 define( 'BUG_FIELD_ATTACHMENTS', 'attachments' );
+define( 'BUG_FIELD_DUE_DATE', 'due_date' );
 
 # news values
 define( 'BY_LIMIT', 0 );

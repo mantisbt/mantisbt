@@ -129,5 +129,7 @@ config_obsolete( 'reminder_recipents_monitor_bug', 'reminder_recipients_monitor_
 config_obsolete( 'graph_window_width', '' );
 config_obsolete( 'graph_bar_aspect', '' );
 config_obsolete( 'graph_summary_graphs_per_row', '' );
+config_obsolete( 'show_view', '' );
+config_obsolete( 'show_update', '' );
 
 #changes in 1.3.0dev
