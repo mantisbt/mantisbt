@@ -84,7 +84,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 		trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
 	}
 
-	if( $p_dsn === false ) {
+	if( empty( $p_dsn ) ) {
 		$g_db = ADONewConnection( $t_db_type );
 
 		if( $p_pconnect ) {

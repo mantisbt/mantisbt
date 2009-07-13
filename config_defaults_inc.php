@@ -76,6 +76,17 @@
 	 */
 	$g_db_type				= 'mysql';
 
+	/**
+	 * adodb Data Source Name
+	 * This is an EXPERIMENTAL field. 
+	 * If the above database settings, do not provide enough flexibilty, it is possible to specify a dsn for the database connection.
+	 * For further details, currently, you need to see the adodb manual at http://phplens.com/adodb/code.initialization.html#dsnsupport
+	 * For example, if db_type is odbc_mssql. The following is an example dsn: 
+	 * "Driver={SQL Server Native Client 10.0};SERVER=.\sqlexpress;DATABASE=bugtracker2;UID=mantis;PWD=passwd;"
+	 * NOTE: the installer does not yet fully support the use of dsn's
+	 */
+	$g_dsn = '';
+	
 	/**************************
 	 * MantisBT Path Settings *
 	 **************************/
@@ -216,7 +227,7 @@
 	/**
 	 * Session handler.  Possible values:
 	 *  'php' -> Default PHP filesystem sessions
-	 *   'adodb' -> Database storage sessions
+	 *  'adodb' -> Database storage sessions
 	 *  'memcached' -> Memcached storage sessions
 	 * @global string $g_session_handler
 	 */
