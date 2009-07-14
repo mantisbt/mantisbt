@@ -292,13 +292,13 @@
 	}
 
 	#
-	# Reporter, Due Date
+	# Reporter
 	#
 
-	if ( $tpl_show_reporter || $tpl_show_due_date ) {
+	if ( $tpl_show_reporter ) {
 		echo '<tr ', helper_alternate_class(), '>';
 
-		$t_spacer = 2;
+		$t_spacer = 4;
 
 		# Reporter
 		if ( $tpl_show_reporter ) {
@@ -309,6 +309,26 @@
 		} else {
 			$t_spacer += 2;
 		}
+
+		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+
+		echo '</tr>';
+	}
+
+	#
+	# Handler, Due Date
+	#
+
+	if ( $tpl_show_handler || $tpl_show_due_date ) {
+		echo '<tr ', helper_alternate_class(), '>';
+
+		$t_spacer = 2;
+
+		# Handler
+		echo '<td class="category">', lang_get( 'assigned_to' ), '</td>';
+		echo '<td>';
+		print_user_with_subject( $tpl_bug->handler_id, $tpl_bug_id );
+		echo '</td>';
 
 		# Due Date
 		if ( $tpl_show_due_date ) {
@@ -324,21 +344,6 @@
 		}
 
 		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
-
-		echo '</tr>';
-	}
-
-	#
-	# Handler
-	#
-
-	if ( $tpl_show_handler ) {
-		# Handler
-		echo '<tr ', helper_alternate_class(), '>';
-		echo '<td class="category">', lang_get( 'assigned_to' ), '</td>';
-		echo '<td colspan="5">';
-		print_user_with_subject( $tpl_bug->handler_id, $tpl_bug_id );
-		echo '</td>';
 		echo '</tr>';
 	}
 
