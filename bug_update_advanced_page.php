@@ -181,13 +181,13 @@ if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_s
 }
 
 #
-# Reporter, Due Date
+# Reporter
 #
 
-if ( $tpl_show_reporter || $tpl_show_due_date ) {
+if ( $tpl_show_reporter ) {
 	echo '<tr ', helper_alternate_class(), '>';
 	
-	$t_spacer = 2;
+	$t_spacer = 4;
 
 	if ( $tpl_show_reporter ) {
 		# Reporter
@@ -207,6 +207,36 @@ if ( $tpl_show_reporter || $tpl_show_due_date ) {
 	} else {
 		$t_spacer += 2;
 	}
+
+	# spacer
+	echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+
+	echo '</tr>';
+}
+
+#
+# Assigned To, Due Date
+#
+
+if ( $tpl_show_handler || $tpl_show_due_date ) {
+	echo '<tr ', helper_alternate_class(), '>';
+	
+	$t_spacer = 2;
+
+	# Assigned To
+	echo '<td class="category">', lang_get( 'assigned_to' ), '</td>';
+	echo '<td>';
+
+	if ( access_has_project_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) ) ) {
+		echo '<select ', helper_get_tab_index(), ' name="handler_id">';
+		echo '<option value="0"></option>';
+		print_assign_to_option_list( $tpl_bug->handler_id, $tpl_bug->project_id );
+		echo '</select>';
+	} else {
+		echo user_get_name( $tpl_bug->handler_id );
+	}
+
+	echo '</td>';
 
 	if ( $tpl_show_due_date ) {
 		# Due Date
@@ -238,34 +268,11 @@ if ( $tpl_show_reporter || $tpl_show_due_date ) {
 	} else {
 		$t_spacer += 2;
 	}
-
+	
 	# spacer
 	echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
 
 	echo '</tr>';
-}
-
-#
-# Assigned To
-#
-
-if ( $tpl_show_handler ) {
-	echo '<tr ', helper_alternate_class(), '>';
-
-	# Assigned To
-	echo '<td class="category">', lang_get( 'assigned_to' ), '</td>';
-	echo '<td colspan="5">';
-
-	if ( access_has_project_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) ) ) {
-		echo '<select ', helper_get_tab_index(), ' name="handler_id">';
-		echo '<option value="0"></option>';
-		print_assign_to_option_list( $tpl_bug->handler_id, $tpl_bug->project_id );
-		echo '</select>';
-	} else {
-		echo user_get_name( $tpl_bug->handler_id );
-	}
-
-	echo '</td></tr>';
 }
 
 #
