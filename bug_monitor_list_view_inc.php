@@ -72,7 +72,8 @@
 	 		}
  		}
 
- 		echo '<br /><br />', lang_get( 'username' );
+		if ( access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $f_bug_id ) ) {
+			echo '<br /><br />', lang_get( 'username' );
 ?>
  		<form method="get" action="bug_monitor.php">
 		<?php echo form_security_field( 'bug_monitor' ) ?>
@@ -81,6 +82,7 @@
  			<input type="text" name="username" />
 			<input type="submit" class="button" value="<?php echo lang_get( 'add_user_to_monitor' ) ?>" />
  		</form>
+		<? } ?>
 	</td>
 </tr>
 </table>
