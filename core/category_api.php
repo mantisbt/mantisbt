@@ -159,12 +159,12 @@ function category_exists( $p_category_id ) {
 	db_query_bound( $query, array( $p_name, $c_assigned_to, $c_category_id ) );
 
 	# Add bug history entries if we update the category's name
-	if( $t_old_category['name'] != $c_name ) {
+	if( $t_old_category['name'] != $p_name ) {
 		$query = "SELECT id FROM $t_bug_table WHERE category_id=" . db_param();
 		$t_result = db_query_bound( $query, array( $c_category_id ) );
 
 		while( $t_bug_row = db_fetch_array( $t_result ) ) {
-			history_log_event_direct( $t_bug_row['id'], 'category', $t_old_category['name'], $c_name );
+			history_log_event_direct( $t_bug_row['id'], 'category', $t_old_category['name'], $p_name );
 		}
 	}
 
