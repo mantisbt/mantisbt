@@ -27,7 +27,8 @@
 	require_once( 'core.php' );
 
 	# lost password feature disabled or reset password via email disabled -> stop here!
-	if( OFF == config_get( 'lost_password_feature' ) ||
+	if ( LDAP == config_get_global( 'login_method' ) ||
+		OFF == config_get( 'lost_password_feature' ) ||
 		OFF == config_get( 'send_reset_password' )  ||
 	 	OFF == config_get( 'enable_email_notification' ) ) {
 		trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );

@@ -241,24 +241,37 @@ function ldap_authenticate( $p_user_id, $p_password ) {
 	# if password is empty and ldap allows anonymous login, then
 	# the user will be able to login, hence, we need to check
 	# for this special case.
-	if( is_blank( $p_password ) ) {
+	if ( is_blank( $p_password ) ) {
 		return false;
 	}
 
+	$t_username = user_get_field( $p_user_id, 'username' );
+
+	return ldap_authenticate_by_username( $t_username, $p_password );
+}
+
+/**
+ * Authenticates an user via LDAP given the username and password.
+ *
+ * @param string $p_username The user name.
+ * @param string $p_password The password.
+ * @return true: authenticated, false: failed to authenticate.
+ */
+function ldap_authenticate_by_username( $p_username, $p_password ) {
 	if ( ldap_simulation_is_enabled() ) {
-		return ldap_simulation_authenticate( $p_user_id, $p_password );
+		return ldap_simulation_authenticate_by_username( $p_username, $p_password );
 	}
 
 	$t_ldap_organization = config_get( 'ldap_organization' );
 	$t_ldap_root_dn = config_get( 'ldap_root_dn' );
 
-	$t_username = user_get_field( $p_user_id, 'username' );
 	$t_ldap_uid_field = config_get( 'ldap_uid_field', 'uid' );
 	$t_search_filter = "(&$t_ldap_organization($t_ldap_uid_field=$t_username))";
 	$t_search_attrs = array(
 		$t_ldap_uid_field,
 		'dn',
 	);
+
 	$t_ds = ldap_connect_bind();
 
 	# Search for the user id
@@ -368,16 +381,14 @@ function ldap_simulatiom_realname_from_username( $p_username ) {
 /**
  * Authenticates the specified user id / password based on the simulation data.
  *
- * @param string $p_user_id   The user id.
+ * @param string $p_username   The username.
  * @param string $p_password  The password.
  * @return bool true for authenticated, false otherwise.
  */
-function ldap_simulation_authenticate( $p_user_id, $p_password ) {
-	$t_username = user_get_field( $p_user_id, 'username' );
-
-	$t_user = ldap_simulation_get_user( $t_username );
+function ldap_simulation_authenticate_by_username( $p_username, $p_password ) {
+	$t_user = ldap_simulation_get_user( $p_username );
 	if ( $t_user === null ) {
-		log_event( LOG_LDAP, "ldap_simulation_authenticate: user '$t_username' not found." );
+		log_event( LOG_LDAP, "ldap_simulation_authenticate: user '$p_username' not found." );
 		return false;
 	}
 
@@ -386,6 +397,6 @@ function ldap_simulation_authenticate( $p_user_id, $p_password ) {
 		return false;
 	}
 
-	log_event( LOG_LDAP, "ldap_simulation_authenticate: authentication successful for user '$t_username'." );
+	log_event( LOG_LDAP, "ldap_simulation_authenticate: authentication successful for user '$p_username'." );
 	return true;
 }
