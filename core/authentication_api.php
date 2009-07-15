@@ -180,12 +180,20 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 
 	$t_login_method = config_get( 'login_method' );
 
-	if( false === $t_user_id ) {
-		if( BASIC_AUTH == $t_login_method ) {
-			# attempt to create the user if using BASIC_AUTH
+	if ( false === $t_user_id ) {
+		if ( BASIC_AUTH == $t_login_method ) {
+			$t_auto_create = true;
+		} else if ( LDAP == $t_login_method && ldap_authenticate_by_username( $p_username, $p_password ) ) {
+			$t_auto_create = true;
+		} else {
+			$t_auto_create = false;
+		}
+
+		if ( $t_auto_create ) {
+			# attempt to create the user
 			$t_cookie_string = user_create( $p_username, $p_password );
 
-			if( false === $t_cookie_string ) {
+			if ( false === $t_cookie_string ) {
 				# it didn't work
 				return false;
 			}
