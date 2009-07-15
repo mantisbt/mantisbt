@@ -295,15 +295,6 @@
 		associated with the active project.</para>
              </listitem>
 	     <listitem>
-	        <para>Advanced Report: If selected, then the user will use the
-		advanced report issue page by default (rather than the simple
-		one).  This preference is only applicable when the
-		administrator configures MantisBT to support both simple and
-		advanced views (i.e. $g_show_report is set to BOTH).  If
-		$g_show_report is set to SIMPLE_ONLY or ADVANCED_ONLY, then this
-		preference has no effect.</para>
-	     </listitem>
-	     <listitem>
 	        <para>Refresh Delay: The refresh delay is used to specify the
 		number of seconds between auto-refreshes of the View Issues
 		page.</para>
