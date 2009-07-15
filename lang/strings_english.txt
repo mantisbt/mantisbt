@@ -568,8 +568,10 @@ $s_bug_deleted_msg = 'Issue has been deleted...';
 $s_delete_bug_sure_msg = 'Are you sure you wish to delete this issue?';
 $s_delete_bug_button = 'Delete';
 
-# bug_monitor.php
+# bug_monitor_add.php
 $s_monitor_bug_button = 'Monitor';
+
+# bug_monitor_delete.php
 $s_unmonitor_bug_button = 'End Monitoring';
 
 # bug_file_add.php

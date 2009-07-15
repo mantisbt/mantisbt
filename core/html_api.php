@@ -1510,7 +1510,7 @@ function html_button_bug_reopen( $p_bug_id ) {
  */
 function html_button_bug_monitor( $p_bug_id ) {
 	if( access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_bug_id ) ) {
-		html_button( 'bug_monitor.php', lang_get( 'monitor_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'add' ) );
+		html_button( 'bug_monitor_add.php', lang_get( 'monitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
 	}
 }
 
@@ -1521,7 +1521,7 @@ function html_button_bug_monitor( $p_bug_id ) {
  * @return null
  */
 function html_button_bug_unmonitor( $p_bug_id ) {
-	html_button( 'bug_monitor.php', lang_get( 'unmonitor_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'delete' ) );
+	html_button( 'bug_monitor_delete.php', lang_get( 'unmonitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
 }
 
 /**

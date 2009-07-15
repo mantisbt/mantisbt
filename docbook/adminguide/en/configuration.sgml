@@ -2044,6 +2044,31 @@
         <title>Misc</title>
         <variablelist>
             <varlistentry>
+                <term>$g_monitor_bug_threshold</term>
+                <listitem>
+                    <para>Access level needed to monitor bugs. The default
+                        value is REPORTER.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_monitor_add_others_bug_threshold</term>
+                <listitem>
+                    <para>Access level needed to add other users to the list of
+                        users monitoring a bug. The default value is DEVELOPER.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_monitor_delete_others_bug_threshold</term>
+                <listitem>
+                    <para>Access level needed to delete other users from the
+                        list of users monitoring a bug. The default value is
+                        DEVELOPER.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_limit_reporters</term>
                 <listitem>
                     <para>Limit reporters to only viewing bugs that they
