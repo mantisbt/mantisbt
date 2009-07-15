@@ -24,6 +24,10 @@
 
  
 if( OFF == plugin_config_get( 'eczlibrary' ) ) {
+	$t_font_path = get_font_path();
+	if( $t_font_path !== '' && !defined('TTF_DIR') ) {
+		define( 'TTF_DIR', $t_font_path );
+	}
 	require_once( 'jpgraph/jpgraph.php' );
 	require_once( 'jpgraph/jpgraph_line.php' );
 	require_once( 'jpgraph/jpgraph_bar.php' );
@@ -71,10 +75,6 @@ function graph_get_font() {
 		}
 		return $f;
 	} else {
-		$t_font_path = config_get_global( 'system_font_folder' );
-		if( $t_font_path !== '' ) {
-			define( 'TTF_DIR', $t_font_path );
-		}
 		$t_font_map = array(
 			'arial' => FF_ARIAL,
 			'verdana' => FF_VERDANA,
@@ -759,7 +759,11 @@ function create_category_summary() {
 					FROM $t_bug_table
 					WHERE category_id=" . db_param() . " AND $specific_where";
 		$result2 = db_query_bound( $query, Array( $t_cat_id ) );
-		$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + db_result( $result2, 0, 0 );
+		if ( isset($t_metrics[$t_cat_name]) ) {
+			$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + db_result( $result2, 0, 0 );
+		} else {
+			$t_metrics[$t_cat_name] = db_result( $result2, 0, 0 );
+		}
 	}
 
 	# end for
