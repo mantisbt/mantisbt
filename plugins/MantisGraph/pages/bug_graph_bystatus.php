@@ -158,6 +158,7 @@
 
     // add headers for table
     if ($f_show_as_table) {
+		$t_date_format = config_get( 'short_date_format' );
         html_begin();
         html_head_begin();
         html_css();
@@ -224,7 +225,7 @@
             }
         }
         if ( $f_show_as_table ) {
-            echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. $t_metrics[0][$t_ptr] .')'.'</td>';
+            echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_metrics[0][$t_ptr] ) .')'.'</td>';
             for ( $i=1; $i<=$t_label_count; $i++ ) {
                 echo '<td>'.$t_metrics[$i][$t_ptr].'</td>';
             }

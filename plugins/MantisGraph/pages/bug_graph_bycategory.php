@@ -83,10 +83,10 @@
 	$t_data[$t_ptr] = array();
 	foreach ($rows as $t_row) {
 	    // the following function can treat the resolved parameter as an array to match
-        $t_cat = $t_row['category'];
+        $t_cat = category_get_name( $t_row->category_id );
         if ($t_cat == '')
             $t_cat = 'none';
-	    if ( !access_compare_level( $t_row['status'], $t_resolved ) ) {
+	    if ( !access_compare_level( $t_row->status, $t_resolved ) ) {
 	        if (in_array($t_cat, $t_category)) {
                 $t_data[$t_ptr][$t_cat] ++;
             } else {
@@ -94,8 +94,8 @@
                 $t_category[] = $t_cat;
             }
         }
-        $t_bug[] = $t_row['id'];
-        $t_bug_cat[$t_row['id']] = $t_cat;
+        $t_bug[] = $t_row->id;
+        $t_bug_cat[$t_row->id] = $t_cat;
 	}
 
     // get the history for these bugs over the interval required to offset the data
@@ -191,11 +191,12 @@
         }
         if ( !$t_not_zero ) {
             unset( $t_category[ $t ] );
-        }
+		}
     }
 // sort and display the results
     sort($t_category);
     if ($f_show_as_table) {
+		$t_date_format = config_get( 'short_date_format' );
         html_begin();
         html_head_begin();
         html_css();
@@ -209,7 +210,7 @@
         }
         echo '</tr>';
 	    for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
-            echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. $t_marker[$t_ptr] .')'.'</td>';
+            echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_marker[$t_ptr] ) .')'.'</td>';
             foreach ( $t_category as $t_cat ) {
                 echo '<td>'.(isset($t_data[$t_ptr][$t_cat]) ? $t_data[$t_ptr][$t_cat] : 0).'</td>';
             }
