@@ -3704,7 +3704,7 @@
 	 * Shows the total number/unique number of queries executed to serve the page.
 	 * @global int $g_show_queries_count
 	 */
-	$g_show_queries_count	= ON;
+	$g_show_queries_count	= OFF;
 
 	/**
 	 * Indicates the access level required for a user to see the queries count / list.
