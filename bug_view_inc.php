@@ -69,23 +69,27 @@
 	}
 
 	$t_action_button_position = config_get( 'action_button_position' );
-	$t_access_level_needed = config_get( 'view_history_threshold' );
 
 	$t_bugslist = gpc_get_cookie( config_get( 'bug_list_cookie' ), false );
 
-	$tpl_show_product_version = in_array( BUG_FIELD_PRODUCT_VERSION, $t_fields ) && version_should_show_product_version( $tpl_bug->project_id );
-	$tpl_show_fixed_in_version = $tpl_show_product_version && in_array( BUG_FIELD_FIXED_IN_VERSION, $t_fields );
-	$tpl_show_build = $tpl_show_product_version && in_array( BUG_FIELD_PRODUCT_BUILD, $t_fields );
-	$tpl_show_target_version = $tpl_show_product_version && in_array( BUG_FIELD_TARGET_VERSION, $t_fields )
+	$tpl_show_version_data = version_should_show_product_version( $tpl_bug->project_id );
+	$tpl_show_product_version = $tpl_show_version_data && in_array( BUG_FIELD_PRODUCT_VERSION, $t_fields );
+	$tpl_show_build = $tpl_show_version_data && in_array( BUG_FIELD_PRODUCT_BUILD, $t_fields );
+	$tpl_show_fixed_in_version = $tpl_show_version_data && in_array( BUG_FIELD_FIXED_IN_VERSION, $t_fields );
+	$tpl_show_target_version = $tpl_show_version_data
+		&& in_array( BUG_FIELD_TARGET_VERSION, $t_fields )
 		&& access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
-	$tpl_product_version_string  = '';
-	$tpl_target_version_string   = '';
-	$tpl_fixed_in_version_string = '';
 
-	if ( $tpl_show_product_version ) {
+	if ( $tpl_show_product_version || $tpl_show_fixed_in_version || $tpl_show_target_version ) {
+		$tpl_product_version_string  = '';
+		$tpl_target_version_string   = '';
+		$tpl_fixed_in_version_string = '';
+
 		$t_version_rows = version_get_all_rows( $tpl_bug->project_id );
 
-		$tpl_product_version_string  = prepare_version_string( $tpl_bug->project_id, version_get_id( $tpl_bug->version, $tpl_bug->project_id ), $t_version_rows );
+		if ( $tpl_show_product_version ) {
+			$tpl_product_version_string  = prepare_version_string( $tpl_bug->project_id, version_get_id( $tpl_bug->version, $tpl_bug->project_id ), $t_version_rows );
+		}
 
 		if ( $tpl_show_target_version ) {
 			$tpl_target_version_string   = prepare_version_string( $tpl_bug->project_id, version_get_id( $tpl_bug->target_version, $tpl_bug->project_id) , $t_version_rows );
@@ -100,7 +104,7 @@
 	$tpl_form_title = lang_get( 'bug_view_title' );
 	$tpl_wiki_link = config_get_global( 'wiki_enable' ) == ON ? 'wiki.php?id=' . $f_bug_id : '';
 
-	if ( access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
+	if ( access_has_bug_level( config_get( 'view_history_threshold' ), $f_bug_id ) ) {
 		$tpl_history_link = "view.php?id={$f_bug_id}&amp;history=1#history";
 	} else {
 		$tpl_history_link = '';
