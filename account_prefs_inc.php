@@ -69,7 +69,7 @@
 		?>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category" width="50%">
 		<?php echo lang_get( 'default_project' ) ?>
 	</td>
@@ -79,15 +79,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
-	<td class="category">
-		<?php echo lang_get( 'advanced_report' ) ?>
-	</td>
-	<td>
-		<input type="checkbox" name="advanced_report" <?php check_checked( $t_pref->advanced_report, ON ); ?> />
-	</td>
-</tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'refresh_delay' ) ?>
 	</td>
@@ -95,7 +87,7 @@
 		<input type="text" name="refresh_delay" size="4" maxlength="4" value="<?php echo $t_pref->refresh_delay ?>" /> <?php echo lang_get( 'minutes' ) ?>
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'redirect_delay' ) ?>
 	</td>
@@ -103,7 +95,7 @@
 		<input type="text" name="redirect_delay" size="4" maxlength="1" value="<?php echo $t_pref->redirect_delay ?>" /> <?php echo lang_get( 'seconds' ) ?>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'bugnote_order' ) ?>
 	</td>
@@ -115,7 +107,7 @@
 <?php
 	if ( ON == config_get( 'enable_email_notification' ) ) {
 ?>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'email_on_new' ) ?>
 	</td>
@@ -129,7 +121,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'email_on_assigned' ) ?>
 	</td>
@@ -143,7 +135,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'email_on_feedback' ) ?>
 	</td>
@@ -157,7 +149,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'email_on_resolved' ) ?>
 	</td>
@@ -171,7 +163,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'email_on_closed' ) ?>
 	</td>
@@ -185,7 +177,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'email_on_reopened' ) ?>
 	</td>
@@ -199,7 +191,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'email_on_bugnote_added' ) ?>
 	</td>
@@ -213,7 +205,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'email_on_status_change' ) ?>
 	</td>
@@ -227,7 +219,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'email_on_priority_change' ) ?>
 	</td>
@@ -241,7 +233,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'email_bugnote_limit' ) ?>
 	</td>
@@ -270,7 +262,7 @@
 		<input type="hidden" name="email_on_priority_min_severity" value="<?php echo $t_pref->email_on_priority_min_severity ?>" />
 		<input type="hidden" name="email_bugnote_limit" value="<?php echo $t_pref->email_bugnote_limit ?>" />
 <?php } ?>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'timezone' ) ?>
 	</td>
@@ -280,7 +272,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'language' ) ?>
 	</td>

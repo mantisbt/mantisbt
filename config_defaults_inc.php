@@ -771,12 +771,6 @@
 	$g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
 
 	/**
-	 * BOTH, SIMPLE_ONLY, ADVANCED_ONLY
-	 * @global int $g_show_report
-	 */
-	$g_show_report			= BOTH;
-
-	/**
 	 * Specifies whether to enable support for project documents or not.
 	 * @global int $g_enable_project_documentation
 	 */
@@ -2002,7 +1996,52 @@
 	$g_enable_product_build = OFF;
 
 	/**
+	 * An array of the fields to show on the bug report page.
+	 *
+	 * The following fields can not be included:
+	 * BUG_FIELD_ID, BUG_FIELD_PROJECT, BUG_FIELD_DATE_SUBMITTED, BUG_FIELD_LAST_UPDATED, BUG_FIELD_STATUS,
+	 * BUG_FIELD_RESOLUTION, BUG_FIELD_TAGS, BUG_FIELD_FIXED_IN_VERSION, BUG_FIELD_PROJECTION, BUG_FIELD_ETA,
+	 * BUG_FIELD_REPORTER.
+	 *
+	 * The following fields must be included:
+	 * BUG_FIELD_CATEGORY, BUG_FIELD_SUMMARY, BUG_FIELD_DESCRIPTION.
+	 *
+	 * To overload this setting per project, then the settings must be included in the database through
+	 * the generic configuration form.  Note that the array in the database should consistent of the values
+	 * of the constants.  For example, replace BUG_FIELD_CATEGORY with 'category_id'.  See constant_inc.php
+	 * for the values of the constants.
+	 *
+	 * @global array $g_bug_report_page_fields
+	 */
+	$g_bug_report_page_fields = array(
+		BUG_FIELD_CATEGORY,
+		BUG_FIELD_VIEW_STATE,
+		BUG_FIELD_HANDLER,
+		BUG_FIELD_PRIORITY,
+		BUG_FIELD_SEVERITY,
+		BUG_FIELD_REPRODUCIBILITY,
+		BUG_FIELD_PLATFORM,
+		BUG_FIELD_OS,
+		BUG_FIELD_OS_VERSION,
+		BUG_FIELD_PRODUCT_VERSION,
+		BUG_FIELD_PRODUCT_BUILD,
+		BUG_FIELD_TARGET_VERSION,
+		BUG_FIELD_SUMMARY,
+		BUG_FIELD_DESCRIPTION,
+		BUG_FIELD_ADDITIONAL_INFO,
+		BUG_FIELD_STEPS_TO_REPRODUCE,
+		BUG_FIELD_ATTACHMENTS,
+		BUG_FIELD_DUE_DATE,
+	);
+
+	/**
 	 * An array of the fields to show on the bug view page.
+	 *
+	 * To overload this setting per project, then the settings must be included in the database through
+	 * the generic configuration form.  Note that the array in the database should consistent of the values
+	 * of the constants.  For example, replace BUG_FIELD_CATEGORY with 'category_id'.  See constant_inc.php
+	 * for the values of the constants.
+	 *
 	 * @global array $g_bug_view_page_fields
 	 */
 	$g_bug_view_page_fields = array (
@@ -2039,6 +2078,12 @@
 
 	/**
 	 * An array of the fields to show on the bug update page.
+	 *
+	 * To overload this setting per project, then the settings must be included in the database through
+	 * the generic configuration form.  Note that the array in the database should consistent of the values
+	 * of the constants.  For example, replace BUG_FIELD_CATEGORY with 'category_id'.  See constant_inc.php
+	 * for the values of the constants.
+	 *
 	 * @global array $g_bug_update_page_fields
 	 */
 	$g_bug_update_page_fields = array (
@@ -2074,7 +2119,13 @@
 
 	/**
 	 * An array of the fields to show on the bug change status page.
-	 * @global array $g_bug_view_page_fields
+	 *
+	 * To overload this setting per project, then the settings must be included in the database through
+	 * the generic configuration form.  Note that the array in the database should consistent of the values
+	 * of the constants.  For example, replace BUG_FIELD_CATEGORY with 'category_id'.  See constant_inc.php
+	 * for the values of the constants.
+	 *
+	 * @global array $g_bug_change_status_page_fields
 	 */
 	$g_bug_change_status_page_fields = array (
 		BUG_FIELD_ID,
