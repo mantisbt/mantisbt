@@ -1696,7 +1696,7 @@ function bug_update_date( $p_bug_id ) {
  * enable monitoring of this bug for the user
  * @param int p_bug_id integer representing bug ids
  * @param int p_user_id integer representing user ids
- * @return bool (always true)
+ * @return true if successful, false if unsuccessful
  * @access public
  * @uses database_api.php
  * @uses history_api.php
@@ -1709,6 +1709,11 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
 	# Make sure we aren't already monitoring this bug
 	if( user_is_monitoring_bug( $c_user_id, $c_bug_id ) ) {
 		return true;
+	}
+
+	# Don't let the anonymous user monitor bugs
+	if ( user_is_anonymous( $c_user_id ) ) {
+		return false;
 	}
 
 	$t_bug_monitor_table = db_get_table( 'mantis_bug_monitor_table' );

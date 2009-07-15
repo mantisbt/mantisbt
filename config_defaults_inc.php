@@ -2178,18 +2178,27 @@
 	$g_update_bug_threshold			= UPDATER;
 
 	/**
-	 * access level needed to monitor bugs
-	 * Look in the constant_inc.php file if you want to set a different value
+	 * Access level needed to monitor bugs.
+	 * Look in the constant_inc.php file if you want to set a different value.
 	 * @global int $g_monitor_bug_threshold
 	 */
-	$g_monitor_bug_threshold		= REPORTER;
+	$g_monitor_bug_threshold = REPORTER;
 
 	/**
-	 * access level needed to add other users to monitor bugs
-	 * Look in the constant_inc.php file if you want to set a different value
+	 * Access level needed to add other users to the list of users monitoring
+	 * a bug.
+	 * Look in the constant_inc.php file if you want to set a different value.
 	 * @global int $g_monitor_add_others_bug_threshold
 	 */
-	$g_monitor_add_others_bug_threshold		= DEVELOPER;
+	$g_monitor_add_others_bug_threshold = DEVELOPER;
+
+	/**
+	 * Access level needed to delete other users from the list of users
+	 * monitoring a bug.
+	 * Look in the constant_inc.php file if you want to set a different value.
+	 * @global int $g_monitor_add_others_bug_threshold
+	 */
+	$g_monitor_delete_others_bug_threshold = DEVELOPER;
 
 	/**
 	 * access level needed to view private bugs
