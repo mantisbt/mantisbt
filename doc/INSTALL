@@ -13,20 +13,20 @@ Barring complications, it should take you about 10-20 minutes to install,
 configure, and be using MantisBT.
 
 These instructions are available at:
-http://manual.mantisbt.org/manual.installation.php
+http://docs.mantisbt.org/
 
 # --- Requirements ----------
 
 * MySQL 4.1.1 and higher
 * PHP 5.1.0 and higher
-* a webserver
+* a webserver (e.g. Apache or IIS)
 
 -------------------------------------------------------------------------------
 ### Upgrading ###
 -------------------------------------------------------------------------------
 
 These instructions are available at:
-http://manual.mantisbt.org/manual.installation.upgrading.php
+http://docs.mantisbt.org/
 
 -------------------------------------------------------------------------------
 ### Troubleshooting ###
@@ -34,12 +34,3 @@ http://manual.mantisbt.org/manual.installation.upgrading.php
 
 See TROUBLESHOOTING
 
--------------------------------------------------------------------------------
-### Useful links ###
--------------------------------------------------------------------------------
-
-http://www.php.net/        -  excellent documentation.
-http://www.phpwizard.net/  -  an excellent web front end to mysql.
-http://www.phpbuilder.net/ -  good help forums.
-http://www.mysql.com/      -  good documentation.
-http://www.apache.org/     -  you should be able to find what you need.
