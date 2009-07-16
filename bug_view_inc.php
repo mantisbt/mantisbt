@@ -79,11 +79,11 @@
 	$tpl_show_target_version = $tpl_show_product_version && in_array( BUG_FIELD_TARGET_VERSION, $t_fields )
 		&& access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
 
-	if ( $tpl_show_product_version || $tpl_show_fixed_in_version || $tpl_show_target_version ) {
-		$tpl_product_version_string  = '';
-		$tpl_target_version_string   = '';
-		$tpl_fixed_in_version_string = '';
+	$tpl_product_version_string  = '';
+	$tpl_target_version_string   = '';
+	$tpl_fixed_in_version_string = '';
 
+	if ( $tpl_show_product_version || $tpl_show_fixed_in_version || $tpl_show_target_version ) {
 		$t_version_rows = version_get_all_rows( $tpl_bug->project_id );
 
 		if ( $tpl_show_product_version ) {
@@ -189,7 +189,7 @@
 	$tpl_summary = $tpl_show_summary ? string_display_line_links( bug_format_summary( $f_bug_id, SUMMARY_FIELD ) ) : '';
 	$tpl_description = $tpl_show_description ? string_display_links( $tpl_bug->description ) : '';
 	$tpl_steps_to_reproduce = $tpl_show_steps_to_reproduce ? string_display_links( $tpl_bug->steps_to_reproduce ) : '';
-	$tpl_show_additional_information = $tpl_show_additional_information ? string_display_links( $tpl_bug->additional_information ) : '';
+	$tpl_additional_information = $tpl_show_additional_information ? string_display_links( $tpl_bug->additional_information ) : '';
 
 	$tpl_links = event_signal( 'EVENT_MENU_ISSUE', $f_bug_id );
 
