@@ -2861,6 +2861,16 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_bug_print_page_fields</term>
+                <listitem>
+                    <para>
+                        An array of fields to show on the issue print page.  Some of these fields may be
+                        filtered out if their features are disabled or if the user doesn't have access
+                        to view them.  See BUG_FIELD_* in constant_inc.php for all possible values.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_bug_update_page_fields</term>
                 <listitem>
                     <para>

@@ -64,6 +64,7 @@ $tpl_show_id = in_array( BUG_FIELD_ID, $t_fields );
 $tpl_show_project = in_array( BUG_FIELD_PROJECT, $t_fields );
 $tpl_show_category = in_array( BUG_FIELD_CATEGORY, $t_fields );
 $tpl_show_view_state = in_array( BUG_FIELD_VIEW_STATE, $t_fields );
+$tpl_view_state = $tpl_show_view_state ? string_display_line( get_enum_element( 'view_state', $tpl_bug->view_state ) ) : '';
 $tpl_show_date_submitted = in_array( BUG_FIELD_DATE_SUBMITTED, $t_fields );
 $tpl_show_last_updated = in_array( BUG_FIELD_LAST_UPDATED, $t_fields );
 $tpl_show_reporter = in_array( BUG_FIELD_REPORTER, $t_fields );
@@ -82,13 +83,19 @@ $tpl_show_os_version = $t_show_profiles && in_array( BUG_FIELD_OS_VERSION, $t_fi
 $t_enable_product_version = version_should_show_product_version( $tpl_bug->project_id );
 $tpl_show_product_version = $t_enable_product_version && in_array( BUG_FIELD_PRODUCT_VERSION, $t_fields );
 $tpl_show_product_build = $t_enable_product_version && in_array( BUG_FIELD_PRODUCT_BUILD, $t_fields ) && ( config_get( 'enable_product_build' ) == ON );
+$tpl_product_build_attribute = $tpl_show_product_build ? string_attribute( $tpl_bug->build ) : '';
 $tpl_show_target_version = $t_enable_product_version && in_array( BUG_FIELD_TARGET_VERSION, $t_fields ) && access_has_bug_level( config_get( 'roadmap_update_threshold' ), $tpl_bug_id );
 $tpl_show_fixed_in_version = $t_enable_product_version && in_array( BUG_FIELD_FIXED_IN_VERSION, $t_fields );
 $tpl_show_due_date = in_array( BUG_FIELD_DUE_DATE, $t_fields ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $tpl_bug_id );
 $tpl_show_summary = in_array( BUG_FIELD_SUMMARY, $t_fields );
+$tpl_summary_attribute = $tpl_show_summary ? string_attribute( $tpl_bug->summary ) : '';
 $tpl_show_description = in_array( BUG_FIELD_DESCRIPTION, $t_fields );
+$tpl_description_textarea = $tpl_show_description ? string_textarea( $tpl_bug->description ) : '';
 $tpl_show_additional_information = in_array( BUG_FIELD_ADDITIONAL_INFO, $t_fields );
+$tpl_additional_information_textarea = $tpl_show_additional_information ? string_textarea( $tpl_bug->additional_information ) : '';
 $tpl_show_steps_to_reproduce = in_array( BUG_FIELD_STEPS_TO_REPRODUCE, $t_fields );
+$tpl_steps_to_reproduce_textarea = $tpl_show_steps_to_reproduce ? string_textarea( $tpl_bug->steps_to_reproduce ) : '';
+$tpl_handler_name = string_display_line( user_get_name( $tpl_bug->handler_id ) );
 
 $tpl_can_change_view_state = $tpl_show_view_state && access_has_project_level( config_get( 'change_view_status_threshold' ) );
 
@@ -101,7 +108,7 @@ if ( $tpl_show_product_version ) {
 }
 
 $tpl_formatted_bug_id = $tpl_show_id ? bug_format_id( $f_bug_id ) : '';
-$tpl_project_name = $tpl_show_project ? project_get_name( $tpl_bug->project_id ) : '';
+$tpl_project_name = $tpl_show_project ? string_display_line( project_get_name( $tpl_bug->project_id ) ) : '';
 
 echo '<br />';
 echo '<form name="update_bug_form" method="post" action="bug_update.php">';
@@ -142,7 +149,7 @@ if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_s
 	echo '<td>', $tpl_formatted_bug_id, '</td>';
 
 	# Project Name
-	echo '<td>', string_display_line( $tpl_project_name ), '</td>';
+	echo '<td>', $tpl_project_name, '</td>';
 
 	# Category
 	echo '<td>';
@@ -163,7 +170,7 @@ if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_s
 		print_enum_string_option_list( 'view_state', $tpl_bug->view_state);
 		echo '</select>';
 	} else if ( $tpl_show_view_state ) {
-		echo get_enum_element( 'view_state', $tpl_bug->view_state );
+		echo $tpl_view_state;
 	}
 
 	echo '</td>';
@@ -233,7 +240,7 @@ if ( $tpl_show_handler || $tpl_show_due_date ) {
 		print_assign_to_option_list( $tpl_bug->handler_id, $tpl_bug->project_id );
 		echo '</select>';
 	} else {
-		echo user_get_name( $tpl_bug->handler_id );
+		echo $tpl_handler_name;
 	}
 
 	echo '</td>';
@@ -492,7 +499,7 @@ if ( $tpl_show_product_version || $tpl_show_product_build ) {
 	if ( $tpl_show_product_build ) {
 		echo '<td class="category">', lang_get( 'product_build' ), '</td>';
 		echo '<td>';
-		echo '<input type="text" name="build" size="16" maxlength="32" value="', string_attribute( $tpl_bug->build ), '" />';
+		echo '<input type="text" name="build" size="16" maxlength="32" value="', $tpl_product_build_attribute, '" />';
 		echo '</td>';
 	} else {
 		$t_spacer += 2;
@@ -553,7 +560,7 @@ echo '<tr class="spacer"><td colspan="6"></td></tr>';
 if ( $tpl_show_summary ) {
 	echo '<tr ', helper_alternate_class(), '>';
 	echo '<td class="category">', lang_get( 'summary' ), '</td>';
-	echo '<td colspan="5">', '<input ', helper_get_tab_index(), ' type="text" name="summary" size="105" maxlength="128" value="', string_attribute( $tpl_bug->summary ), '" />';
+	echo '<td colspan="5">', '<input ', helper_get_tab_index(), ' type="text" name="summary" size="105" maxlength="128" value="', $tpl_summary_attribute, '" />';
 	echo '</td></tr>';
 }
 
@@ -562,7 +569,7 @@ if ( $tpl_show_description ) {
 	echo '<tr ', helper_alternate_class(), '>';
 	echo '<td class="category">', lang_get( 'description' ), '</td>';
 	echo '<td colspan="5">';
-	echo '<textarea ', helper_get_tab_index(), ' cols="80" rows="10" name="description">', string_textarea( $tpl_bug->description ), '</textarea>';
+	echo '<textarea ', helper_get_tab_index(), ' cols="80" rows="10" name="description">', $tpl_description_textarea, '</textarea>';
 	echo '</td></tr>';
 }
 
@@ -571,7 +578,7 @@ if ( $tpl_show_steps_to_reproduce ) {
 	echo '<tr ', helper_alternate_class(), '>';
 	echo '<td class="category">', lang_get( 'steps_to_reproduce' ), '</td>';
 	echo '<td colspan="5">';
-	echo '<textarea ', helper_get_tab_index(), ' cols="80" rows="10" name="steps_to_reproduce">', string_textarea( $tpl_bug->steps_to_reproduce ), '</textarea>';
+	echo '<textarea ', helper_get_tab_index(), ' cols="80" rows="10" name="steps_to_reproduce">', $tpl_steps_to_reproduce_textarea, '</textarea>';
 	echo '</td></tr>';
 }
 
@@ -580,7 +587,7 @@ if ( $tpl_show_additional_information ) {
 	echo '<tr ', helper_alternate_class(), '>';
 	echo '<td class="category">', lang_get( 'additional_information' ), '</td>';
 	echo '<td colspan="5">';
-	echo '<textarea ', helper_get_tab_index(), ' cols="80" rows="10" name="additional_information">', string_textarea( $tpl_bug->additional_information ), '</textarea>';
+	echo '<textarea ', helper_get_tab_index(), ' cols="80" rows="10" name="additional_information">', $tpl_additional_information_textarea, '</textarea>';
 	echo '</td></tr>';
 }
 

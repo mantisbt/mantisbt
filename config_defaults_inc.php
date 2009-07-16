@@ -2077,6 +2077,42 @@
 	);
 
 	/**
+	 * An array of the fields to show on the bug print page.
+	 * @global array $g_bug_print_page_fields
+	 */
+	$g_bug_print_page_fields = array (
+		BUG_FIELD_ID,
+		BUG_FIELD_PROJECT,
+		BUG_FIELD_CATEGORY,
+		BUG_FIELD_VIEW_STATE,
+		BUG_FIELD_DATE_SUBMITTED,
+		BUG_FIELD_LAST_UPDATED,
+		BUG_FIELD_REPORTER,
+		BUG_FIELD_HANDLER,
+		BUG_FIELD_PRIORITY,
+		BUG_FIELD_SEVERITY,
+		BUG_FIELD_REPRODUCIBILITY,
+		BUG_FIELD_STATUS,
+		BUG_FIELD_RESOLUTION,
+		BUG_FIELD_PROJECTION,
+		BUG_FIELD_ETA,
+		BUG_FIELD_PLATFORM,
+		BUG_FIELD_OS,
+		BUG_FIELD_OS_VERSION,
+		BUG_FIELD_PRODUCT_VERSION,
+		BUG_FIELD_PRODUCT_BUILD,
+		BUG_FIELD_TARGET_VERSION,
+		BUG_FIELD_FIXED_IN_VERSION,
+		BUG_FIELD_SUMMARY,
+		BUG_FIELD_DESCRIPTION,
+		BUG_FIELD_ADDITIONAL_INFO,
+		BUG_FIELD_STEPS_TO_REPRODUCE,
+		BUG_FIELD_TAGS,
+		BUG_FIELD_ATTACHMENTS,
+		BUG_FIELD_DUE_DATE,
+	);
+
+	/**
 	 * An array of the fields to show on the bug update page.
 	 *
 	 * To overload this setting per project, then the settings must be included in the database through
