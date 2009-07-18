@@ -242,4 +242,4 @@
 ?>
 </div>
 <?php
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

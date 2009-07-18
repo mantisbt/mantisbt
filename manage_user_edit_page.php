@@ -259,4 +259,4 @@
 	include ( 'account_prefs_inc.php' );
 	edit_account_prefs( $t_user['id'], false, false, 'manage_user_edit_page.php?user_id=' . $t_user_id );
 
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

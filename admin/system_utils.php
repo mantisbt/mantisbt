@@ -95,4 +95,4 @@ foreach( $t_dest_ids as $t_id ) {
 
 </table>
 <?
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

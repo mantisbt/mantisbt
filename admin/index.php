@@ -77,4 +77,4 @@ function print_info_row( $p_description, $p_value ) {
 ?>
 </table>
 <?php
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

@@ -514,4 +514,4 @@ if ( $t_column > 0 ) {
 </form>
 
 <?php
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

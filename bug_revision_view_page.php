@@ -151,5 +151,5 @@ print_bracket_link( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
 </table>
 
 <?php
-html_page_bottom( __FILE__ );
+html_page_bottom();
 

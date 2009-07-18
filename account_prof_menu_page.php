@@ -175,4 +175,4 @@
 <?php 
 } # Edit or Delete Profile Form END
 
-html_page_bottom( __FILE__ );
+html_page_bottom();

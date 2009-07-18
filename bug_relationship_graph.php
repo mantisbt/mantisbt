@@ -164,4 +164,4 @@
 
 <?php
 	include( 'bug_view_inc.php' );
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

@@ -285,8 +285,8 @@ if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 	</form>
 </div>
 
-<?php } ?>
-<?php # Delete Account Form END ?>
+<?php 
+} 
+# Delete Account Form END
 
-<?php
-	html_page_bottom( __FILE__ );
+html_page_bottom();

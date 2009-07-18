@@ -114,7 +114,5 @@
 </table>
 </form>
 </div>
-<?php # Edit Profile Form END ?>
-
 <?php
-	html_page_bottom( __FILE__ );
+html_page_bottom();

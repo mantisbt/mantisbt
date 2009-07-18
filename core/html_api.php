@@ -284,7 +284,7 @@ function html_page_bottom1a( $p_file = null ) {
 	}
 
 	html_bottom_banner();
-	html_footer( $p_file );
+	html_footer();
 	html_body_end();
 	html_end();
 }
@@ -574,7 +574,7 @@ function html_bottom_banner() {
  * @param string $p_file
  * @return null
  */
-function html_footer( $p_file ) {
+function html_footer( $p_file = null ) {
 	global $g_queries_array, $g_request_time;
 
 	# If a user is logged in, update their last visit time.

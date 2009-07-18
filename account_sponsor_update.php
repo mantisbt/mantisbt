@@ -67,4 +67,4 @@
 	echo lang_get( 'operation_successful' ) . '<br />';
 	print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
 	echo '</div>';
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

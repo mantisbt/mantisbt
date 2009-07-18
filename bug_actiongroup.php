@@ -308,7 +308,7 @@
 		print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 		echo '</div>';
 
-		html_page_bottom( __FILE__ );
+		html_page_bottom();
 	} else {
 		print_header_redirect( $t_redirect_url );
 	}
