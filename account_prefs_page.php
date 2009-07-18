@@ -60,4 +60,4 @@
 
 	edit_account_prefs();
 
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

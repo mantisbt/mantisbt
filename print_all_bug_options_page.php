@@ -35,4 +35,4 @@
 
 	html_page_top();
 	edit_printing_prefs();
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

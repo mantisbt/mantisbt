@@ -33,7 +33,7 @@ function bug_group_action_print_top() {
  * Print the bottom part for the bug action group page.
  */
 function bug_group_action_print_bottom() {
-	html_page_bottom( __FILE__ );
+	html_page_bottom();
 }
 
 /**

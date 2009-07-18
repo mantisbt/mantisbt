@@ -533,4 +533,4 @@ if ( $tpl_show_due_date ) {
 	date_finish_calendar( 'due_date', 'trigger' );
 }
 
-html_page_bottom( __FILE__ );
+html_page_bottom();

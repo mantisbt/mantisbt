@@ -317,4 +317,4 @@ foreach( $t_project_ids as $t_project_id ) {
 if ( $t_project_index == 0 ) {
 	echo '<br /><span class="pagetitle">' . lang_get('changelog_empty') . '</span>';
 }
-html_page_bottom( __FILE__ );
+html_page_bottom();

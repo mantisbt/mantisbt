@@ -348,4 +348,4 @@
 		<input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" />
 	</form>
 <?php
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

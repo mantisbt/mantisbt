@@ -142,4 +142,4 @@
 	echo get_capability_row( lang_get( 'notify_of_new_user_created' ), config_get( 'notify_new_user_created_threshold_min' ) );
 	echo get_section_end();
 
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

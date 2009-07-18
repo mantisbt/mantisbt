@@ -721,6 +721,6 @@
 		include( $tpl_mantis_dir . 'history_inc.php' );
 	}
 
-	html_page_bottom( $tpl_file );
+	html_page_bottom();
 
 	last_visited_issue( $tpl_bug_id );

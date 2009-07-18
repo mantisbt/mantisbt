@@ -122,4 +122,4 @@
 </form>
 </div>
 
-<?php html_page_bottom( __FILE__ );
+<?php html_page_bottom();

@@ -77,4 +77,4 @@ print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
 </div>
 
 <?php
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

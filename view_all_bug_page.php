@@ -73,4 +73,4 @@
 
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'view_all_inc.php' );
 
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

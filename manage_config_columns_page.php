@@ -41,4 +41,4 @@
 
 	include ( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'manage_columns_inc.php' );
 
-	html_page_bottom( __FILE__ );
+	html_page_bottom();

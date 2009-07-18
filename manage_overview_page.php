@@ -86,5 +86,5 @@ event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) )
 </table>
 
 <?php
-html_page_bottom( __FILE__ );
+html_page_bottom();
 

@@ -659,6 +659,6 @@ echo '</td></tr>';
 echo '</table></form>';
 
 include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
-html_page_bottom( __FILE__ );
+html_page_bottom();
 
 last_visited_issue( $tpl_bug_id );

@@ -113,7 +113,7 @@
 	</tr>
 </table>
 <?php
-		html_page_bottom( __FILE__ );
+		html_page_bottom();
 		// end failed to attach tag
 	} else {
 		foreach( $t_tags_create as $t_tag_row ) {

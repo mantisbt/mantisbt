@@ -360,4 +360,4 @@ function print_error( $p_string ) {
 	echo "<font color='red'>ERROR: ", $p_string, '</font><br>';
 }
 
-html_page_bottom( __FILE__ );
+html_page_bottom();

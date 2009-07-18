@@ -222,4 +222,4 @@ foreach ( $t_result as $t_tag_row ) {
 <?php
 } #End can Edit
 
-html_page_bottom( __FILE__ );
+html_page_bottom();

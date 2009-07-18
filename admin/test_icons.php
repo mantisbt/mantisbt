@@ -44,4 +44,4 @@ foreach( $g_file_type_icons as $t_ext => $t_filename ) {
 	echo '<br />';
 }
 
-html_page_bottom( __FILE__ );
+html_page_bottom();
