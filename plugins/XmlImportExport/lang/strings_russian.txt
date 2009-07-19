@@ -26,9 +26,10 @@
  * @ingroup Language
  * @file
  *
+ * @author Kirill
  */
 
-$s_plugin_XmlImportExport_title = 'Import/Export задач';
+$s_plugin_XmlImportExport_title = 'Система импорта/экспорта задач в MantisBT';
 $s_plugin_XmlImportExport_description = 'Добавляет в MantisBT возможность импорта экспорта задач с использованием XML.';
 $s_plugin_XmlImportExport_import = 'Импорт задач';
 $s_plugin_XmlImportExport_export = 'экспорт в XML';

@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Ripoarisch (Ripoarisch)
+/** Spanish (Español)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,15 +26,15 @@
  * @ingroup Language
  * @file
  *
- * @author Purodha
+ * @author Locos epraix
  */
 
-$s_plugin_format_title = 'MantisBT Fommatteeerung';
-$s_plugin_format_description = 'Dat offizjälle Zohsatzprojramm zom enshtöpselle för de Täx ze beärbeide un ze fommatteeere';
-$s_plugin_format_config = 'Enshtellunge';
-$s_plugin_format_process_text = 'Et Täx Beärrbeejde';
-$s_plugin_format_process_urls = 'Et <i lang="en">URL</i> Beärrbeejde';
-$s_plugin_format_process_buglinks = 'MantisBT Lenks (Aanjelääjeheit/Notiz)';
-$s_plugin_format_process_vcslinks = '<i lang="en">VCS</i> Lengks';
-$s_plugin_format_enabled = 'Aanjeschalldt';
-$s_plugin_format_disabled = 'Ußjeschalldt';
+$s_plugin_format_title = 'Formato MantisBT';
+$s_plugin_format_description = 'Plugin oficial de procesamiento de texto y formato.';
+$s_plugin_format_config = 'Configuración';
+$s_plugin_format_process_text = 'Procesamiento de Textos';
+$s_plugin_format_process_urls = 'Procesamiento de URL';
+$s_plugin_format_process_buglinks = 'Enlaces MantisBT (Problema/Nota)';
+$s_plugin_format_process_vcslinks = 'Enlaces VCS';
+$s_plugin_format_enabled = 'Encendido';
+$s_plugin_format_disabled = 'Apagado';

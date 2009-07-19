@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Ripoarisch (Ripoarisch)
+/** Spanish (Español)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,15 +26,16 @@
  * @ingroup Language
  * @file
  *
- * @author Purodha
+ * @author Locos epraix
  */
 
-$s_plugin_format_title = 'MantisBT Fommatteeerung';
-$s_plugin_format_description = 'Dat offizjälle Zohsatzprojramm zom enshtöpselle för de Täx ze beärbeide un ze fommatteeere';
-$s_plugin_format_config = 'Enshtellunge';
-$s_plugin_format_process_text = 'Et Täx Beärrbeejde';
-$s_plugin_format_process_urls = 'Et <i lang="en">URL</i> Beärrbeejde';
-$s_plugin_format_process_buglinks = 'MantisBT Lenks (Aanjelääjeheit/Notiz)';
-$s_plugin_format_process_vcslinks = '<i lang="en">VCS</i> Lengks';
-$s_plugin_format_enabled = 'Aanjeschalldt';
-$s_plugin_format_disabled = 'Ußjeschalldt';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Resumen Avanzado';
+$s_plugin_MantisGraph_config = 'Configuración';
+$s_plugin_MantisGraph_synthesis_link = 'Síntesis';
+$s_plugin_MantisGraph_status_link = 'Por estado';
+$s_plugin_MantisGraph_priority_link = 'Por prioridad';
+$s_plugin_MantisGraph_severity_link = 'Por severidad';
+$s_plugin_MantisGraph_category_link = 'Por categoría';
+$s_plugin_MantisGraph_resolution_link = 'Por resolución';
+$s_plugin_MantisGraph_enabled = 'Encendido';
+$s_plugin_MantisGraph_disabled = 'Apagado';

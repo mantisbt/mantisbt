@@ -44,5 +44,8 @@ $s_plugin_MantisGraph_graph_bug_page_link = 'Dijajramm';
 $s_plugin_MantisGraph_library = 'Biblijoteek för Dijajramme';
 $s_plugin_MantisGraph_bundled = 'Zosammejefaß bruche';
 $s_plugin_MantisGraph_jpgraph_antialias = 'Bloß bei <i lang="en">JPGRAPH</i>: <i lang="en">anti-aliasing</i>. Määt, dat beshtemmpte Zeishnunge jet bäßer ußsinn. Opjepaß: Dat määt et öm 8 mohl langsammer, Linnije ze zeishne.';
+$s_plugin_MantisGraph_window_width = 'Däm Dijajramm sing Breid en Pixelle';
+$s_plugin_MantisGraph_bar_aspect = 'et Verhältneß vun Hühde un Breide vun däm Balke-Dijajramm';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'wi vill Dijajramme en jeede Reih vun de Övverseeschßsigg donn';
 $s_plugin_MantisGraph_enabled = 'Enjeschalldt';
 $s_plugin_MantisGraph_disabled = 'Affjeschalldt';

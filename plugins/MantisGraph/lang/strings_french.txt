@@ -26,6 +26,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Cedric31
  * @author IAlex
  */
 
@@ -44,5 +45,8 @@ $s_plugin_MantisGraph_graph_bug_page_link = 'Graphique';
 $s_plugin_MantisGraph_library = 'Bibliothèque de graphiques';
 $s_plugin_MantisGraph_bundled = 'Utiliser la bibliothèque fournie avec le plugin';
 $s_plugin_MantisGraph_jpgraph_antialias = 'JPGRAPH SEULEMENT : anti-alias. Ceci améliorera l\'apparence visuelle de certains graphiques. Note : utiliser l\'anti-alias fera que le dessim des lignes sera environ 8 fois plus lent.';
+$s_plugin_MantisGraph_window_width = 'Largeur du graphique (en pixels)';
+$s_plugin_MantisGraph_bar_aspect = 'proportion du graphique à barres (hauteur / largeur)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'nombre de graphiques à mettre par ligne dans la page de résumé avancée';
 $s_plugin_MantisGraph_enabled = 'Activé';
 $s_plugin_MantisGraph_disabled = 'Désactivé';
