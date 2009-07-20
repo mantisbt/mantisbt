@@ -152,6 +152,23 @@ function ldap_realname_from_username( $p_username ) {
 }
 
 /**
+ * Escapes the LDAP string to disallow injection.
+ *
+ * @param string $p_string The string to escape.
+ * @return string The escaped string.
+ */
+function ldap_escape_string( $p_string ) {
+	$t_string = str_replace( '\\', '\5c', $p_string );
+
+	$t_find = array( '*', '(', ')' );
+	$t_replace = array( '\2a', '\28', '\29' );
+
+	$t_string = str_replace( $t_find, $t_replace, $t_string );
+
+	return $t_string;
+}
+
+/**
  * Gets the value of a specific field from LDAP given the user name
  * and LDAP field name.
  *
@@ -167,12 +184,14 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 	$t_ldap_root_dn         = config_get( 'ldap_root_dn' );
 	$t_ldap_uid_field		= config_get( 'ldap_uid_field' );
 
+	$c_username = ldap_escape_string( $p_username );
+
 	# Bind
 	log_event( LOG_LDAP, "Binding to LDAP server" );
 	$t_ds                   = ldap_connect_bind();
 
 	# Search
-	$t_search_filter        = "(&$t_ldap_organization($t_ldap_uid_field=$p_username))";
+	$t_search_filter        = "(&$t_ldap_organization($t_ldap_uid_field=$c_username))";
 	$t_search_attrs         = array( $t_ldap_uid_field, $p_field, 'dn' );
 	log_event( LOG_LDAP, "Searching for $t_search_filter" );
 	$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
@@ -229,11 +248,13 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		return ldap_simulation_authenticate_by_username( $p_username, $p_password );
 	}
 
+	$c_username = ldap_escape_string( $p_username );
+
 	$t_ldap_organization = config_get( 'ldap_organization' );
 	$t_ldap_root_dn = config_get( 'ldap_root_dn' );
 
 	$t_ldap_uid_field = config_get( 'ldap_uid_field', 'uid' );
-	$t_search_filter = "(&$t_ldap_organization($t_ldap_uid_field=$t_username))";
+	$t_search_filter = "(&$t_ldap_organization($t_ldap_uid_field=$c_username))";
 	$t_search_attrs = array(
 		$t_ldap_uid_field,
 		'dn',
@@ -353,7 +374,9 @@ function ldap_simulatiom_realname_from_username( $p_username ) {
  * @return bool true for authenticated, false otherwise.
  */
 function ldap_simulation_authenticate_by_username( $p_username, $p_password ) {
-	$t_user = ldap_simulation_get_user( $p_username );
+	$c_username = ldap_escape_string( $p_username );
+
+	$t_user = ldap_simulation_get_user( $c_username );
 	if ( $t_user === null ) {
 		log_event( LOG_LDAP, "ldap_simulation_authenticate: user '$p_username' not found." );
 		return false;
