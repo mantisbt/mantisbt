@@ -27,7 +27,7 @@
  * Connect and bind to the LDAP directory
  * @param string $p_binddn
  * @param string $p_password
- * @return resource
+ * @return resource or false
  */
 function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	if( !extension_loaded( 'ldap' ) ) {
@@ -40,7 +40,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 
 	log_event( LOG_LDAP, "Attempting connection to LDAP server '{$t_ldap_server}' port '{$t_ldap_port}'." );
 	$t_ds = @ldap_connect( $t_ldap_server, $t_ldap_port );
-	if( $t_ds > 0 ) {
+	if ( $t_ds !== false && $t_ds > 0 ) {
 		log_event( LOG_LDAP, "Connection accepted to LDAP server" );
 		$t_protocol_version = config_get( 'ldap_protocol_version' );
 
@@ -68,11 +68,13 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 			log_event( LOG_LDAP, "Attempting anonymous bind to ldap server" );
 			$t_br = @ldap_bind( $t_ds );
 		}
-		if( !$t_br ) {
+
+		if ( !$t_br ) {
 			log_event( LOG_LDAP, "bind to ldap server  failed - authentication error?" );
 			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
+		} else {
+			log_event( LOG_LDAP, "bind to ldap server successful" );
 		}
-		log_event( LOG_LDAP, "bind to ldap server successful" );
 	} else {
 		log_event( LOG_LDAP, "Connection to ldap server failed" );
 		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
@@ -188,16 +190,30 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 
 	# Bind
 	log_event( LOG_LDAP, "Binding to LDAP server" );
-	$t_ds                   = ldap_connect_bind();
+	$t_ds = ldap_connect_bind();
+	if ( $t_ds === false ) {
+		log_event( LOG_LDAP, "ldap_connect_bind() returned false." );
+		return null;
+	}
 
 	# Search
 	$t_search_filter        = "(&$t_ldap_organization($t_ldap_uid_field=$c_username))";
 	$t_search_attrs         = array( $t_ldap_uid_field, $p_field, 'dn' );
+
 	log_event( LOG_LDAP, "Searching for $t_search_filter" );
 	$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
+	if ( $t_sr === false ) {
+		ldap_unbind( $t_ds );
+		log_event( LOG_LDAP, "ldap_search() returned false." );
+		return null;
+	}
 
 	# Get results
 	$t_info = ldap_get_entries( $t_ds, $t_sr );
+	if ( $t_info === false ) {
+		log_event( LOG_LDAP, "ldap_get_entries() returned false." );
+		return null;
+	}
 	
 	# Free results / unbind
 	log_event( LOG_LDAP, "Unbinding from LDAP server" );
@@ -260,12 +276,28 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		'dn',
 	);
 
+	# Bind
+	log_event( LOG_LDAP, "Binding to LDAP server" );
 	$t_ds = ldap_connect_bind();
+	if ( $t_ds === false ) {
+		log_event( LOG_LDAP, "ldap_connect_bind() returned false." );
+		return null;
+	}
 
 	# Search for the user id
 	log_event( LOG_LDAP, "Searching for $t_search_filter" );
 	$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
+	if ( $t_sr === false ) {
+		ldap_unbind( $t_ds );
+		log_event( LOG_LDAP, "ldap_search() returned false." );
+		return null;
+	}
+
 	$t_info = ldap_get_entries( $t_ds, $t_sr );
+	if ( $t_info === false ) {
+		log_event( LOG_LDAP, "ldap_get_entries() returned false." );
+		return null;
+	}
 
 	$t_authenticated = false;
 
@@ -275,10 +307,9 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 			$t_dn = $t_info[$i]['dn'];
 
 			# Attempt to bind with the DN and password
-			if( @ldap_bind( $t_ds, $t_dn, $p_password ) ) {
+			if ( @ldap_bind( $t_ds, $t_dn, $p_password ) ) {
 				$t_authenticated = true;
 				break;
-				# Don't need to go any further
 			}
 		}
 	}
