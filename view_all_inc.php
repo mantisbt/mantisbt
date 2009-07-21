@@ -48,10 +48,13 @@
 
 	$t_filter = current_user_get_bug_filter();
 
-	if( $t_filter ) {
-		list( $t_sort, ) = explode( ',', $t_filter['sort'] );
-		list( $t_dir, ) = explode( ',', $t_filter['dir'] );
+	# NOTE: this check might be better placed in current_user_get_bug_filter()
+	if ( !$t_filter ) {
+		$t_filter = filter_get_default();
 	}
+
+	list( $t_sort, ) = explode( ',', $t_filter['sort'] );
+	list( $t_dir, ) = explode( ',', $t_filter['dir'] );
 
 	$t_checkboxes_exist = false;
 
@@ -116,11 +119,8 @@
 			$v_end   = 0;
 
 			if ( count( $rows ) > 0 ) {
-				if( $t_filter )
-					$v_start = $t_filter['per_page'] * (int)($f_page_number-1) +1;
-				else
-					$v_start = 1;
-				$v_end   = $v_start + count( $rows ) -1;
+				$v_start = $t_filter['per_page'] * ($f_page_number - 1) + 1;
+				$v_end = $v_start + count( $rows ) - 1;
 			}
 
 			echo lang_get( 'viewing_bugs_title' );
