@@ -235,7 +235,7 @@ function column_get_title( $p_column ) {
 	}
 
 	switch( $p_column ) {
-		case 'attachment':
+		case 'attachment_count':
 			return lang_get( 'attachments' );
 		case 'bugnotes_count':
 			return '#';
@@ -629,7 +629,7 @@ function print_column_title_date_submitted( $p_sort, $p_dir, $p_columns_target =
  * @return null
  * @access public
  */
-function print_column_title_attachment( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
 
 	$t_show_attachments = config_get( 'show_attachment_indicator' );
@@ -967,7 +967,7 @@ function print_column_bugnotes_count( $p_bug, $p_columns_target = COLUMNS_TARGET
  * @return null
  * @access public
  */
-function print_column_attachment( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_attachment_count( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
 
 	# Check for attachments
