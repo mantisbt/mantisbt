@@ -145,9 +145,11 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 </tr>
 <?php
 	$t_sum_in_minutes = 0;
+	$t_user_summary = array();
 
 	foreach ( $t_bugnote_stats as $t_item ) {
 		$t_sum_in_minutes += $t_item['sum_time_tracking'];
+		$t_user_summary[$t_item['username']] += $t_item['sum_time_tracking'];
 
 		$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
 		if ( $t_item['bug_id'] != $t_prev_id) {
@@ -178,6 +180,60 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	<td class="small-caption">
 		<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
 	</td>
+	<?php if ($t_cost_col) { ?>
+	<td>
+		<?php echo string_attribute( number_format( $t_sum_in_minutes * $f_bugnote_cost / 60, 2 ) ); ?>
+	</td>
+	<?php } ?>
+</tr>
+</table>
+
+<br />
+<br />
+
+<table border="0" class="width100" cellspacing="0">
+<tr class="row-category-history">
+        <td class="small-caption">
+                <?php echo lang_get( 'username' ) ?>
+        </td>
+        <td class="small-caption">
+                <?php echo lang_get( 'time_tracking' ) ?>
+        </td>
+<?php if ( $t_cost_col) { ?>
+        <td class="small-caption">
+                <?php echo lang_get( 'time_tracking_cost' ) ?>
+        </td>
+<?php } ?>
+</tr>
+<?php
+        foreach ( $t_user_summary as $t_username => $t_total_time ) {
+?>
+<tr <?php echo helper_alternate_class() ?>>
+        <td class="small-caption">
+                <?php echo $t_username; ?>
+        </td>
+        <td class="small-caption">
+                <?php echo db_minutes_to_hhmm($t_total_time); ?>
+        </td>
+<?php if ($t_cost_col) { ?>
+        <td>
+                <?php echo string_attribute( number_format( $t_total_time * $f_bugnote_cost / 60, 2 ) ); ?>
+        </td>
+<?php } ?>
+</tr>
+<?php } ?>
+<tr <?php echo helper_alternate_class() ?>>
+        <td class="small-caption">
+                <?php echo lang_get( 'total_time' ); ?>
+        </td>
+        <td class="small-caption">
+                <?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
+        </td>
+<?php if ($t_cost_col) { ?>
+        <td>
+                <?php echo string_attribute( number_format( $t_sum_in_minutes * $f_bugnote_cost / 60, 2 ) ); ?>
+        </td>
+<?php } ?>
 </tr>
 </table>
 <?php } # end if
