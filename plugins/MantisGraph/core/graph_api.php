@@ -28,12 +28,24 @@ if( OFF == plugin_config_get( 'eczlibrary' ) ) {
 	if( $t_font_path !== '' && !defined('TTF_DIR') ) {
 		define( 'TTF_DIR', $t_font_path );
 	}
-	require_once( 'jpgraph/jpgraph.php' );
-	require_once( 'jpgraph/jpgraph_line.php' );
-	require_once( 'jpgraph/jpgraph_bar.php' );
-	require_once( 'jpgraph/jpgraph_pie.php' );
-	require_once( 'jpgraph/jpgraph_pie3d.php' );
-	require_once( 'jpgraph/jpgraph_canvas.php' );
+	$t_jpgraph_path = config_get( 'jpgraph_path', '' );
+	if( $t_jpgraph_path !== '' ) {
+		set_include_path(get_include_path() . PATH_SEPARATOR . $t_jpgraph_path );
+		$ip = get_include_path();
+		require_once( 'jpgraph.php' );
+		require_once( 'jpgraph_line.php' );
+		require_once( 'jpgraph_bar.php' );
+		require_once( 'jpgraph_pie.php' );
+		require_once( 'jpgraph_pie3d.php' );
+		require_once( 'jpgraph_canvas.php' );
+	} else {
+		require_once( 'jpgraph/jpgraph.php' );
+		require_once( 'jpgraph/jpgraph_line.php' );
+		require_once( 'jpgraph/jpgraph_bar.php' );
+		require_once( 'jpgraph/jpgraph_pie.php' );
+		require_once( 'jpgraph/jpgraph_pie3d.php' );
+		require_once( 'jpgraph/jpgraph_canvas.php' );
+	}
 } else {
 	require_once( 'ezc/Base/src/base.php' );
 }
