@@ -298,7 +298,7 @@ function summary_print_by_activity() {
 		return;
 	}
 	$query = "SELECT COUNT(h.id) as count, b.id, b.summary, b.view_state
-				FROM $t_mantis_bug_table AS b, $t_mantis_history_table AS h
+				FROM $t_mantis_bug_table b, $t_mantis_history_table h
 				WHERE h.bug_id = b.id
 				AND b.status < " . db_param() . "
 				AND $specific_where
@@ -584,7 +584,7 @@ function summary_print_by_category() {
 
 	$query = "SELECT COUNT(b.id) as bugcount, $t_project_query c.name AS category_name, category_id, b.status
 				FROM $t_mantis_bug_table b
-				JOIN $t_mantis_category_table AS c ON b.category_id=c.id
+				JOIN $t_mantis_category_table c ON b.category_id=c.id
 				WHERE b.$specific_where
 				GROUP BY $t_project_query category_id, c.name, b.status
 				ORDER BY $t_project_query category_id, c.name, b.status";

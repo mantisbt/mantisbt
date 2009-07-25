@@ -177,9 +177,9 @@ foreach( $t_project_ids as $t_project_id ) {
 			continue;
 		}
 
-		$query = "SELECT sbt.*, dbt.target_version AS parent_version, $t_relation_table.source_bug_id FROM $t_bug_table AS sbt
+		$query = "SELECT sbt.*, dbt.target_version AS parent_version, $t_relation_table.source_bug_id FROM $t_bug_table sbt
 				LEFT JOIN $t_relation_table ON sbt.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
-				LEFT JOIN $t_bug_table AS dbt ON dbt.id=$t_relation_table.source_bug_id
+				LEFT JOIN $t_bug_table dbt ON dbt.id=$t_relation_table.source_bug_id
 				WHERE sbt.project_id=" . db_param() . " AND sbt.fixed_in_version=" . db_param() . " ORDER BY sbt.status ASC, sbt.last_updated DESC";
 
 		$t_description = version_get_field( $t_version_id, 'description' );

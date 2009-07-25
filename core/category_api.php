@@ -355,8 +355,8 @@ function category_cache_array_rows_by_project( $p_project_id_array ) {
 	$t_category_table = db_get_table( 'mantis_category_table' );
 	$t_project_table = db_get_table( 'mantis_project_table' );
 
-	$query = "SELECT c.*, p.name AS project_name FROM $t_category_table AS c
-				LEFT JOIN $t_project_table AS p
+	$query = "SELECT c.*, p.name AS project_name FROM $t_category_table c
+				LEFT JOIN $t_project_table p
 					ON c.project_id=p.id
 				WHERE project_id IN ( " . implode( ', ', $c_project_id_array ) . " )
 				ORDER BY c.name ";
@@ -428,8 +428,8 @@ function category_cache_array_rows_by_project( $p_project_id_array ) {
 		$t_project_where = ' project_id=' . $p_project_id . ' ';
 	}
 
-	$query = "SELECT c.*, p.name AS project_name FROM $t_category_table AS c
-				LEFT JOIN $t_project_table AS p
+	$query = "SELECT c.*, p.name AS project_name FROM $t_category_table c
+				LEFT JOIN $t_project_table p
 					ON c.project_id=p.id
 				WHERE $t_project_where
 				ORDER BY c.name ";
@@ -475,8 +475,8 @@ function category_cache_array_rows( $p_cat_id_array ) {
 	$t_category_table = db_get_table( 'mantis_category_table' );
 	$t_project_table = db_get_table( 'mantis_project_table' );
 
-	$query = "SELECT c.*, p.name AS project_name FROM $t_category_table AS c
-				LEFT JOIN $t_project_table AS p
+	$query = "SELECT c.*, p.name AS project_name FROM $t_category_table c
+				LEFT JOIN $t_project_table p
 					ON c.project_id=p.id
 				WHERE c.id IN (" . implode( ',', $c_cat_id_array ) . ')';
 	$result = db_query_bound( $query );
