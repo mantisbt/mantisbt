@@ -3660,7 +3660,7 @@ function print_filter_show_target_version() {
 function print_filter_show_priority() {
 	global $t_select_modifier, $t_filter;
 	?><!-- Priority -->
-    <select <?php echo $t_select_modifier;?> name="<?php FILTER_PROPERTY_PRIORITY_ID;?>[]">
+    <select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PRIORITY_ID;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_PRIORITY_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php print_enum_string_option_list( 'priority', $t_filter[FILTER_PROPERTY_PRIORITY_ID] )?>
     </select>
