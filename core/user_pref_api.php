@@ -220,7 +220,7 @@ function user_pref_cache_array_rows( $p_user_id_array, $p_project_id = ALL_PROJE
 
 	$query = "SELECT *
 				  FROM $t_user_pref_table
-				  WHERE id IN (" . implode( ',', $c_user_id_array ) . ') AND project_id=' . db_param();
+				  WHERE user_id IN (" . implode( ',', $c_user_id_array ) . ') AND project_id=' . db_param();
 
 	$result = db_query_bound( $query, Array( (int)$p_project_id ) );
 
