@@ -528,10 +528,12 @@ function file_type_check( $p_file_name ) {
 	$t_extension = file_get_extension( $p_file_name );
 
 	# check against disallowed files
-	$t_disallowed_arr = explode( ',', $t_disallowed_files );
-	foreach( $t_disallowed_arr as $t_val ) {
-		if( 0 == strcasecmp( $t_val, $t_extension ) ) {
-			return false;
+	if( !is_blank( $t_disallowed_files ) ) {
+		$t_disallowed_arr = explode( ',', $t_disallowed_files );
+		foreach( $t_disallowed_arr as $t_val ) {
+			if( 0 == strcasecmp( $t_val, $t_extension ) ) {
+				return false;
+			}
 		}
 	}
 
