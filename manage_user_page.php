@@ -210,9 +210,8 @@
 
 		$query = "SELECT *
 				FROM $t_user_table
-				WHERE $t_where AND " . db_helper_compare_days(0,"last_visit","< $days_old") . "
+				WHERE $t_where AND " . db_helper_compare_days( "" . db_now() . "", "last_visit", "< $days_old" ) . "
 				ORDER BY $c_sort $c_dir";
-		/* db_now added to where params in count query above so not added here */
 		$result = db_query_bound($query, $t_where_params, $p_per_page, $t_offset );
 	}
 	$user_count = db_num_rows( $result );
