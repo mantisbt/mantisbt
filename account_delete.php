@@ -65,23 +65,24 @@ helper_ensure_confirmed( lang_get( 'confirm_delete_msg' ),
 
 form_security_purge('account_delete');
 
-user_delete( auth_get_current_user_id() );
+$t_user_id = auth_get_current_user_id();
 
 auth_logout();
 
-html_meta_redirect( config_get( 'logout_redirect_page' ) );
+user_delete( $t_user_id );
 
 html_page_top1();
+html_page_top2a();
 
 ?>
 
 <br />
 <div align="center">
 <?php
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
+echo lang_get( 'account_removed_msg' ) . '<br />';
+print_bracket_link( config_get( 'logout_redirect_page' ), lang_get( 'proceed' ) );
 ?>
 </div>
 
 <?php
-	html_page_bottom();
+	html_page_bottom1a();
