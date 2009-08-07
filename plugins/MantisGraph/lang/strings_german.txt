@@ -1,0 +1,52 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** German (Deutsch)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Floh
+ * @author Umherirrender
+ */
+
+$s_plugin_graph_title = 'Mantis-Grafiken';
+$s_plugin_graph_description = 'Offizielles Grafik-Plugin.';
+$s_plugin_MantisGraph_title = 'Mantis-Grafiken';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Erweiterte Zusammenfassung';
+$s_plugin_MantisGraph_config = 'Konfiguration';
+$s_plugin_MantisGraph_synthesis_link = 'Zusammenstellung';
+$s_plugin_MantisGraph_status_link = 'Nach Status';
+$s_plugin_MantisGraph_priority_link = 'Nach Priorität';
+$s_plugin_MantisGraph_severity_link = 'Nach Schwere';
+$s_plugin_MantisGraph_category_link = 'Nach Kategorie';
+$s_plugin_MantisGraph_resolution_link = 'Nach Lösung';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Grafik';
+$s_plugin_MantisGraph_library = 'Grafik-Bibliothek';
+$s_plugin_MantisGraph_bundled = 'Mitgelieferte nutzen';
+$s_plugin_MantisGraph_jpgraph_antialias = 'NUR JPGRAPH: Anti-Aliasing. Verbessert das Aussehen bestimmter Grafiken. Hinweis: Die Verwendung von Anti-Aliasing verlangsamt das Zeichnen von Linien etwa um den Faktor 8.';
+$s_plugin_MantisGraph_window_width = 'Grafik-Breite (in Pixeln)';
+$s_plugin_MantisGraph_bar_aspect = 'Seitenverhältnis der Grafiken (Höhe/Breite)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'wie viele Grafiken pro Zeile in der „Erweiterten Zusammenfassung“ angezeigt werden sollen';
+$s_plugin_MantisGraph_enabled = 'An';
+$s_plugin_MantisGraph_disabled = 'Aus';

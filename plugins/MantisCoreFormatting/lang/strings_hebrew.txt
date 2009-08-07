@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** German (Deutsch)
+/** Hebrew (עברית)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,15 +26,11 @@
  * @ingroup Language
  * @file
  *
- * @author Umherirrender
+ * @author YaronSh
  */
 
-$s_plugin_format_title = 'MantisBT-Formatierung';
-$s_plugin_format_description = 'Offizielle Textverarbeitungs- und Formatierungserweiterung.';
-$s_plugin_format_config = 'Konfiguration';
-$s_plugin_format_process_text = 'Textverarbeitung';
-$s_plugin_format_process_urls = 'URL-Verarbeitung';
-$s_plugin_format_process_buglinks = 'MantisBT-Links (Problem/Problemnotiz)';
-$s_plugin_format_process_vcslinks = 'VCS-Verweis';
-$s_plugin_format_enabled = 'An';
-$s_plugin_format_disabled = 'Aus';
+$s_plugin_format_title = 'תצורת MantisBT';
+$s_plugin_format_description = 'התוסף הרשמי לעיבוד ולעיצוב הטקסט.';
+$s_plugin_format_config = 'תצורה';
+$s_plugin_format_process_text = 'עיבוד טקסט';
+$s_plugin_format_process_urls = 'עיבוד כתובות';
