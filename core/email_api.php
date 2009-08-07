@@ -292,27 +292,41 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		}
 	}
 
-	# set up to eliminate unwanted users
-	#  get list of status values that are not covered specifically in the prefs
-	#  These are handled by email_on_status generically
-	#  @@@ thraxisp note that email_on_assigned was co-opted to handle change in handler
-	$t_status_change = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-	unset( $t_status_change[config_get( 'bug_submit_status' )] );
-	unset( $t_status_change[FEEDBACK] );
-	unset( $t_status_change[config_get( 'bug_resolved_status_threshold' )] );
-	unset( $t_status_change[config_get( 'bug_closed_status_threshold' )] );
-
-	if( 'owner' == $p_notify_type ) {
-		$t_pref_field = 'email_on_assigned';
-	}
-	else if( in_array( $p_notify_type, $t_status_change ) ) {
-		$t_pref_field = 'email_on_status';
-	} else {
-		$t_pref_field = 'email_on_' . $p_notify_type;
-	}
-	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
-	if( !db_field_exists( $t_pref_field, $t_user_pref_table ) ) {
-		$t_pref_field = false;
+	# FIXME: the value of $p_notify_type could at this stage be either a status
+	# or a built-in actions such as 'owner and 'sponsor'. We have absolutely no
+	# idea whether 'new' is indicating a new bug has been filed, or if the
+	# status of an existing bug has been changed to 'new'. Therefore it is best
+	# to just assume built-in actions have precedence over status changes.
+	switch( $p_notify_type) {
+		case 'new':
+		case 'feedback': # This isn't really a built-in action (delete me!)
+		case 'reopened':
+		case 'resolved':
+		case 'closed':
+		case 'bugnote':
+			$t_pref_field = 'email_on_' . $p_notify_type;
+			break;
+		case 'owner':
+			# The email_on_assigned notification type is now effectively
+			# email_on_change_of_handler.
+			$t_pref_field = 'email_on_assigned';
+			break;
+		case 'deleted':
+		case 'updated':
+		case 'sponsor':
+		case 'relation':
+		case 'monitor':
+		case 'priority': # This is never used, but exists in the database!
+			# FIXME: these notification actions are not actually implemented
+			# in the database and therefore aren't adjustable on a per-user
+			# basis! The exception is 'monitor' that makes no sense being a
+			# customisable per-user preference.
+			$t_pref_field = false;
+			break;
+		default:
+			# Anything not built-in is probably going to be a status
+			$t_pref_field = 'email_on_status';
+			break;
 	}
 
 	# @@@ we could optimize by modifiying user_cache() to take an array
