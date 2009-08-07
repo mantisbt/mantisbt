@@ -33,6 +33,7 @@
  * @author Harald Khan
  * @author Holje
  * @author Ingvald Skaug, dev@skaug.no
+ * @author Jon Harald Søby
  * @author Laaknor
  * @author Nghtwlkr
  */
@@ -308,7 +309,7 @@ $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Klarte ikke å oppdatere tidssone.';
 $s_login_error = 'Kontoen kan ha blitt stengt eller brukernavnet/passordet du oppga var ikke riktig.';
 $s_login_cookies_disabled = 'Nettleseren din er ikke konfigurert til å støtte \'cookies\' (informasjonskapsler).';
 $s_go_back = 'Tilbake';
-$s_proceed = 'Klikk for å fortsette';
+$s_proceed = 'Fortsett';
 $s_switch = 'Bytt';
 $s_logged_in_as = 'Logget inn som';
 $s_prefix_for_deleted_users = 'bruker';

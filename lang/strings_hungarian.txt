@@ -29,6 +29,7 @@
  * @author Attila Vági, avagi@v-comp.hu
  * @author CSÉCSY László, boobaa@nospam.frugalware.org (complete retranslation)
  * @author Gergő Bácskai, gergo@bacskai.hu
+ * @author Glanthor Reviol
  * @author Istvan Back, back@webmuves.hu
  * @author Leiric
  */
@@ -56,6 +57,7 @@ $s_operation_successful = 'Sikeres művelet.';
 $s_date_order = 'Dátumsorrend';
 $s_print_all_bug_page_link = 'Jelentések nyomtatása';
 $s_csv_export = 'CSV export';
+$s_excel_export = 'Excel exportálás';
 $s_login_anonymously = 'Belépés névtelenül';
 $s_anonymous = 'Névtelen';
 $s_jump_to_bugnotes = 'Ugrás a megjegyzésekhez';
@@ -93,6 +95,7 @@ $s_empty_password_sure_msg = 'A felhasználó jelszava üres. Valóban ezt akarj
 $s_empty_password_button = 'Üres jelszó használata';
 $s_reauthenticate_title = 'Azonosítás';
 $s_reauthenticate_message = 'Egy biztonságos oldalra ért, és a biztonságos munkamenete lejárt. Kérjük, azonosítsa magát a folytatáshoz.';
+$s_no_category = '(nincs kategória)';
 $s_duplicate_of = 'a következő másolata:';
 $s_has_duplicate = 'van másolata';
 $s_related_to = 'kapcsolódik a következőhöz:';
@@ -391,6 +394,7 @@ $s_email_bugnote_limit = 'Email megjegyzések limitje';
 $s_language = 'Nyelv';
 $s_update_prefs_button = 'Beállítások frissítése';
 $s_reset_prefs_button = 'Beállítások visszaállítása';
+$s_timezone = 'Időzóna';
 $s_prefs_reset_msg = 'A beállítások alaphelyzetűek...';
 $s_prefs_updated_msg = 'A beállítások frissítve...';
 $s_profile_added_msg = 'Profil hozzáadva...';
@@ -519,7 +523,7 @@ $s_bugnote_updated_msg = 'Megjegyzés sikeresen frissítve...';
 $s_edited_on = 'szerkesztve:';
 $s_hide_content = 'Tartalom elrejtése';
 $s_show_content = 'Tartalom megjelenítése';
-$s_click_to_login = 'Kattintson ide a belépéshez';
+$s_click_to_login = 'Bejelentkezés';
 $s_login_page_info = 'Üdvözöljük az ügykezelőben.';
 $s_login_title = 'Belépés';
 $s_save_login = 'Belépés megjegyzése';

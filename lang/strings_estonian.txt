@@ -27,6 +27,7 @@
  * @file
  *
  * @author Klemens Kasemaa, Elion Ettevõtted AS, klem (at) estpak.ee (27.01.2005)
+ * @author Pikne
  * @author Villem Vannas, willu60 (at) hotmail.com (14.09.2004)
  */
 
@@ -242,7 +243,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Esitatud informatsioon e
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Kinnituse URL on vigane või varem kasutatud. Palun registreeru uuesti.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maks. arv töödeldavaid päringuid saavutatud. Palun kontakteeru süsteemi administraatoriga';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'See tegevus toob kaasa alamprojektide hierarhias katkematu rekursiooni';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Sa ei saa muuta süsteemi ainukese ADMINISTRAATORI pöördusõiguste taset.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Sa ei saa eemaldada viimast ülemakontot või alandada tema õigusi. Soovitud toimingu sooritamiseks tuleb kõigepealt luua teine ülemakonto.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Lehele ümbersuunamise viga, kontrolli, et poleks tühikuid väljapool PHP plokki (&lt;?php ?&gt;) failis config_inc.php või custom_*.php.';
 $s_login_error = 'Sinu kasutajakonto võib olla blokeeritud või sisestasid vale kasutajanime/parooli.';
 $s_login_cookies_disabled = 'Su veebilehitseja kas ei oska küpsiseid kasutada või on see omadus keelatud.';

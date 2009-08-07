@@ -37,6 +37,8 @@
 $s_excel_export = '“Excel” is the name of a program; do not translate it unless Microsoft has translated the program’s name into your language (e.g., 엑셀 in Korean).';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'If we need to specify the number of expected parameter in string, we just need to write something like "Lalal %2$s bububu %1$d", where 1 and 2 - the index number in argument list (actually, expected in original message)';
 $s_timezone = '{{Identical|Time zone}}';
+$s_stick_bug_button = 'Button label to mark an issue sticky.';
+$s_unstick_bug_button = 'Button label to mark an issue unsticky.';
 $s_revision = '{{Identical|Revision}}';
 $s_please_report = 'Is displayed whenever an SQL error occurs.
 * $1 is a mailto: link with {{msg-mantis|s_administrator}} as link text';
