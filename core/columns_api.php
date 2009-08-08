@@ -1056,7 +1056,7 @@ function print_column_eta( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE 
  * @return null
  * @access public
  */
-function print_column_reproducibility( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_reproducibility( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="center">', get_enum_element( 'reproducibility', $p_bug->reproducibility ), '</td>';
 }
 
