@@ -1057,6 +1057,17 @@ function print_column_eta( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE 
 
 /**
  *
+ * @param BugData $p_bug bug object
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
+function print_column_projection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<td class="center">', get_enum_element( 'projection', $p_bug->projection ), '</td>';
+}
+
+/**
+ *
  * @param BugData $p_bug bug obect
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
