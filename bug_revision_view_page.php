@@ -43,7 +43,7 @@ if ( $f_bug_id ) {
 
 	$t_bug_revisions = array_reverse( bug_revision_list( $t_bug_id, REV_ANY, $f_bugnote_id ), true );
 
-	$t_title = lang_get( 'bugnote' ) . ' ' . $f_bug_id;
+	$t_title = lang_get( 'bugnote' ) . ' ' . $f_bugnote_id;
 
 } else if ( $f_rev_id ) {
 	$t_bug_revisions = array_reverse( bug_revision_like( $f_rev_id ), true );
