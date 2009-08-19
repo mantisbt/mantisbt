@@ -533,8 +533,11 @@ function print_column_title_target_version( $p_sort, $p_dir, $p_columns_target =
  * @access public
  */
 function print_column_title_view_state( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	global $t_icon_path;
 	echo '<td>';
-	print_view_bug_sort_link( lang_get( 'view_status' ), 'view_state', $p_sort, $p_dir, $p_columns_target );
+	$t_view_state_text = lang_get( 'view_status' );
+	$t_view_state_icon = '<img src="' . $t_icon_path . 'protected.gif" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '" />';
+	print_view_bug_sort_link( $t_view_state_icon, 'view_state', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'view_state' );
 	echo '</td>';
 }
@@ -1180,19 +1183,13 @@ function print_column_date_submitted( $p_bug, $p_columns_target = COLUMNS_TARGET
  * @access public
  */
 function print_column_summary( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
-
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
 		$t_summary = string_attribute( $p_bug->summary );
 	} else {
 		$t_summary = string_display_line_links( $p_bug->summary );
 	}
 
-	echo '<td class="left">', $t_summary;
-	if( VS_PRIVATE == $p_bug->view_state ) {
-		printf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
-	}
-	echo '</td>';
+	echo '<td class="left">' . $t_summary . '</td>';
 }
 
 /**
@@ -1248,6 +1245,28 @@ function print_column_target_version( $p_bug, $p_columns_target = COLUMNS_TARGET
 	# list of columns to view.  In case of ALL_PROJECTS, then we need to check the access per row.
 	if( helper_get_current_project() != ALL_PROJECTS || access_has_project_level( config_get( 'roadmap_view_threshold' ), $p_bug->project_id ) ) {
 		echo $p_bug->target_version;
+	}
+
+	echo '</td>';
+}
+
+/**
+ *
+ * @param BugData $p_bug bug object
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
+function print_column_view_state( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	global $t_icon_path;
+
+	echo '<td>';
+
+	if( VS_PRIVATE == $p_bug->view_state ) {
+		$t_view_state_text = lang_get( 'private' );
+		echo '<img src="' . $t_icon_path . 'protected.gif" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '" />';
+	} else {
+		echo '&nbsp;';
 	}
 
 	echo '</td>';
