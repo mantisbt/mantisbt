@@ -493,6 +493,13 @@ function plugin_priority( $p_basename ) {
 function plugin_is_installed( $p_basename ) {
 	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
 
+	$t_forced_plugins = config_get_global( 'plugins_force_installed' );
+	foreach( $t_forced_plugins as $t_basename => $t_priority ) {
+		if ( $t_basename == $p_basename ) {
+			return true;
+		}
+	}
+
 	$t_query = "SELECT COUNT(*) FROM $t_plugin_table WHERE basename=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_basename ) );
 	return( 0 < db_result( $t_result ) );
@@ -737,6 +744,15 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 function plugin_register_installed() {
 	global $g_plugin_cache_priority, $g_plugin_cache_protected;
 
+	# register plugins specified in the site configuration
+	$t_forced_plugins = config_get_global( 'plugins_force_installed' );
+	foreach( $t_forced_plugins as $t_basename => $t_priority ) {
+		plugin_register( $t_basename );
+		$g_plugin_cache_priority[$t_basename] = $t_priority;
+		$g_plugin_cache_protected[$t_basename] = true;
+	}
+
+	# register plugins installed via the interface/database
 	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
 
 	$t_query = "SELECT basename, priority, protected FROM $t_plugin_table WHERE enabled=" . db_param() . ' ORDER BY priority DESC';
