@@ -42,6 +42,7 @@ global $g_plugin_cache;
 
 $t_plugins_installed = array();
 $t_plugins_available = array();
+$t_forced_plugins = config_get_global( 'plugins_force_installed' );
 
 foreach( $t_plugins as $t_basename => $t_plugin ) {
 	if ( isset( $g_plugin_cache[$t_basename] ) ) {
@@ -85,6 +86,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	$t_url = $t_plugin->url;
 	$t_requires = $t_plugin->requires;
 	$t_depends = array();
+	$t_forced = isset( $t_forced_plugins[ $t_basename ] );
 	$t_priority = plugin_priority( $t_basename );
 	$t_protected = plugin_protected( $t_basename );
 
@@ -139,11 +141,14 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	echo '<td class="small center">',$t_name,'<input type="hidden" name="change_',$t_basename,'" value="1"/></td>';
 	echo '<td class="small">',$t_description,$t_author,$t_url,'</td>';
 	echo '<td class="small center">',$t_depends,'</td>';
-	if ( 'MantisCore' != $t_basename ) {
+	if ( 'MantisCore' == $t_basename ) {
+		echo '<td>&nbsp;</td><td>&nbsp;</td>';
+	} else if ( $t_forced ) {
+		echo '<td class="center">','<select disabled="disabled">',print_plugin_priority_list( $t_priority ),'</select>','</td>';
+		echo '<td class="center">','<input type="checkbox" checked="checked" disabled="disabled"/>','</td>';
+	} else {
 		echo '<td class="center">','<select name="priority_',$t_basename,'">',print_plugin_priority_list( $t_priority ),'</select>','</td>';
 		echo '<td class="center">','<input type="checkbox" name="protected_',$t_basename,'" '.( $t_protected ? 'checked="checked" ' : '').'/>','</td>';
-	} else {
-		echo '<td>&nbsp;</td><td>&nbsp;</td>';
 	}
 	echo '<td class="center">';
 	if ( $t_upgrade ) { print_bracket_link( 'manage_plugin_upgrade.php?name=' . $t_basename . form_security_param( 'manage_plugin_upgrade' ), lang_get( 'plugin_upgrade' ) ); }
