@@ -92,6 +92,7 @@ $s_bug_monitor = 'Issue Monitored';
 $s_bug_end_monitor = 'Issue End Monitor';
 $s_announcement = 'Announcement';
 $s_stays_on_top = 'Stays on Top';
+$s_bugnote_link_title = 'Direct link to note';
 $s_delete_bugnote_button = 'Delete Note';
 $s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this note?';
 $s_bug_relationships = 'Relationships';
