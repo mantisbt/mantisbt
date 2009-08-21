@@ -618,7 +618,7 @@ function plugin_upgrade( $p_plugin ) {
 function plugin_uninstall( $p_plugin ) {
 	access_ensure_global_level( config_get_global( 'manage_plugin_threshold' ) );
 
-	if( !plugin_is_installed( $p_plugin->basename ) ) {
+	if( !plugin_is_installed( $p_plugin->basename ) || plugin_protected( $p_plugin->basename ) ) {
 		return;
 	}
 
