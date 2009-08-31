@@ -191,9 +191,6 @@ $s_access_level = 'Pieejas līmenis';
 $s_update_user_button = 'Saglabāt izmaiņas';
 $s_default_account_preferences_title = 'Lietotāja opcijas';
 $s_default_project = 'Noklusētais projekts';
-$s_advanced_report = 'Paplašināts ziņojums';
-$s_advanced_view = 'Paplašināta apskate';
-$s_advanced_update = 'Paplašināta labošana';
 $s_refresh_delay = 'Ekrāna atjaunināšnas aizture';
 $s_redirect_delay = 'Aizture veicot noteiktas darbības';
 $s_bugnote_order = 'Bugnotes Sort Order';
@@ -283,7 +280,6 @@ $s_summary = 'Īss apraksts';
 $s_description = 'Apraksts';
 $s_steps_to_reproduce = 'Darbības, kas jāveic, lai atkārtotu kļūdu';
 $s_update_information_button = 'Saglabāt';
-$s_update_advanced_link = 'Paplašinātā labošana';
 $s_updating_bug_simple_title = 'Kļūdas datu labošana';
 $s_vote_added_msg = 'Balsojums pievienots...';
 $s_bugnote_added_msg = 'Komentārs pievienots...';
@@ -462,7 +458,6 @@ $s_assign_to = 'Noteikt atbildīgo';
 $s_additional_information = 'Papildinformācija';
 $s_submit_report_button = 'Reģistrēt kļūdu';
 $s_check_report_more_bugs = 'atzīmējiet, ja vēlaties ievadīt vairākus ziņojumus';
-$s_advanced_report_link = 'Paplašinātā forma';
 $s_report_stay = 'Turpināt kļūdu ievadi';
 $s_selected_project = 'Izvēlētais projekts';
 $s_valid_project_msg = 'Jums jāizvēlās pareizs projekts';
@@ -523,8 +518,11 @@ $s_reopen_bug_button = 'Atkārtoti atvērt';
 $s_attached_files = 'Failu pievienošana';
 $s_publish = 'Publicēt';
 $s_cached = 'Kešots';
+<<<<<<< HEAD
 $s_view_advanced_link = 'Apskatīt paplašinātāto informāciju';
 $s_viewing_bug_simple_details_title = 'Apskatīt informācijau';
+=======
+>>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'Neviens lietotājs neveic šī buga monitoringu.';
 $s_users_monitoring_bug = 'Lietotāji, kas veic monitoringu';
 $s_monitoring_user_list = 'Lietotāju saraksts';

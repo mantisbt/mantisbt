@@ -401,9 +401,6 @@ $s_verify_warning = 'פרטי החשבון נמצאו תקינים. הודעת �
 $s_verify_change_password = 'חובה לקבוע ססמה כדי להיכנס למערכת.';
 $s_default_account_preferences_title = 'העדפות';
 $s_default_project = 'פרויקט ברירת מחדל';
-$s_advanced_report = 'דו"ח מפורט';
-$s_advanced_view = 'הצגה מפורטת';
-$s_advanced_update = 'עריכה מפורטת';
 $s_refresh_delay = 'זמן לרענון';
 $s_minutes = 'דקות';
 $s_redirect_delay = 'זמן להפניה';
@@ -538,7 +535,6 @@ $s_steps_to_reproduce = 'צעדים לשחזור';
 $s_update_information_button = 'שמירה';
 $s_sticky_issue = 'באג "דביק"';
 $s_profile = 'פרופיל';
-$s_update_advanced_link = 'טופס עדכון מפורט';
 $s_updating_bug_simple_title = 'עדכון באג מקוצר';
 $s_vote_added_msg = 'הצבעה נוספה';
 $s_bugnote_added_msg = 'הערה נוספה';
@@ -865,7 +861,6 @@ $s_assign_to = 'שיוך ל';
 $s_additional_information = 'מידע נוסף';
 $s_submit_report_button = 'שמירה';
 $s_check_report_more_bugs = 'נא לסמן כדי לקלוט באג נוסף';
-$s_advanced_report_link = 'טופס מפורט';
 $s_report_stay = 'המשך קליטה';
 $s_selected_project = 'פרויקט נבחר';
 $s_valid_project_msg = 'חובה לבחור פרויקט תקין.';
@@ -968,8 +963,11 @@ $s_attached_files = 'קבצים מצורפים';
 $s_publish = 'לפרסם';
 $s_cached = 'במטמון';
 $s_add_user_to_monitor = 'להוסיף';
+<<<<<<< HEAD
 $s_view_advanced_link = 'הצגה מפורטת';
 $s_viewing_bug_simple_details_title = 'הצגת באג מקוצרת';
+=======
+>>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'אין משתמשים העוקבים אחר הבאג.';
 $s_users_monitoring_bug = 'משתמשים העוקבים אחר הבאג';
 $s_monitoring_user_list = 'רשימת משתמשים';

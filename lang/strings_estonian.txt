@@ -342,9 +342,6 @@ $s_verify_warning = 'Sinu kasutajakonto info on kontrollitud. Kasutajakonto kinn
 $s_verify_change_password = 'Sa pead vahetama siin parooli, et uuesti sisse meldida.';
 $s_default_account_preferences_title = 'Kasutajakonto eelistused';
 $s_default_project = 'Vaikimisi Projekt';
-$s_advanced_report = 'Näita detailsed teated';
-$s_advanced_view = 'Näita kannete detaile';
-$s_advanced_update = 'Näita kannete detailset uuendust';
 $s_refresh_delay = 'uuenduse viivitus';
 $s_redirect_delay = 'ümbersuunamise viivitus';
 $s_with_minimum_severity = 'Väiksem raskusaste sellest';
@@ -473,7 +470,6 @@ $s_steps_to_reproduce = 'Kordamise sammud';
 $s_update_information_button = 'Uuenda info';
 $s_sticky_issue = 'Kleepuv kanne';
 $s_profile = 'Profiil';
-$s_update_advanced_link = 'Spetsiaalne uuendus';
 $s_updating_bug_simple_title = 'Kande andmete uuendus';
 $s_vote_added_msg = 'Hääl lisatud...';
 $s_bugnote_added_msg = 'Märkus lisatud...';
@@ -742,7 +738,6 @@ $s_assign_to = 'Määra';
 $s_additional_information = 'Lisainfo';
 $s_submit_report_button = 'Saada teade';
 $s_check_report_more_bugs = 'Märgi lisakannetest teatamiseks';
-$s_advanced_report_link = 'Detailne teade';
 $s_report_stay = 'Teade jääb mällu';
 $s_selected_project = 'Valitud projekt';
 $s_valid_project_msg = 'Vali kehtiv projekt';
@@ -836,8 +831,11 @@ $s_move_bug_button = 'Liiguta kanne';
 $s_attached_files = 'Lisatud failid';
 $s_publish = 'Avalda';
 $s_cached = 'Vahemälus';
+<<<<<<< HEAD
 $s_view_advanced_link = 'Detailide vaatamine';
 $s_viewing_bug_simple_details_title = 'Kande tavaandmete vaatamine';
+=======
+>>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'ükski kasutaja ei tegele selle kandega.';
 $s_users_monitoring_bug = 'Selle kandega tegelevad kasutajad';
 $s_monitoring_user_list = 'Kasutajate loend';

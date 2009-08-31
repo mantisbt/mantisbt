@@ -351,9 +351,6 @@ $s_verify_warning = 'Käyttäjätilitietosi on vahvistettu. Sähköpostina vasta
 $s_verify_change_password = 'Sinun pitää syöttää salasana sisäänkirjautumista varten.';
 $s_default_account_preferences_title = 'Käyttäjätilin asetukset';
 $s_default_project = 'Oletusprojekti';
-$s_advanced_report = 'Näytä yksityiskohtaiset tapahtumaraportit';
-$s_advanced_view = 'Näytä tapahtumien yksityiskohdat';
-$s_advanced_update = 'Näytä yksityiskohtainen tapahtumapäivitys';
 $s_refresh_delay = 'Virkistyksen viive';
 $s_minutes = 'minuuttia';
 $s_redirect_delay = 'Edelleenohjauksen viive';
@@ -486,7 +483,6 @@ $s_steps_to_reproduce = 'Toisto-ohjeet';
 $s_update_information_button = 'Päivitä tiedot';
 $s_sticky_issue = 'Päällimmäisenä pysyvä tapahtuma';
 $s_profile = 'Profiili';
-$s_update_advanced_link = 'Päivitä yksityiskohtaiset tiedot';
 $s_updating_bug_simple_title = 'Päivitetään tapahtuman tietoja';
 $s_vote_added_msg = 'Ääni lisätty...';
 $s_bugnote_added_msg = 'Muistiinpano lisätty...';
@@ -769,7 +765,6 @@ $s_assign_to = 'Osoita käyttäjälle';
 $s_additional_information = 'Lisätietoja';
 $s_submit_report_button = 'Lähetä raportti';
 $s_check_report_more_bugs = 'rastita raportoidaksesi lisää tapahtumia';
-$s_advanced_report_link = 'Yksityiskohtainen raportti';
 $s_report_stay = 'Raportoi useita tapahtumia';
 $s_selected_project = 'Valittu projekti';
 $s_valid_project_msg = 'Sinun täytyy valita voimassaoleva projekti';
@@ -866,8 +861,11 @@ $s_attached_files = 'Liitetiedostot';
 $s_publish = 'Julkaise';
 $s_cached = 'Välimuistissa';
 $s_add_user_to_monitor = 'Lisää';
+<<<<<<< HEAD
 $s_view_advanced_link = 'Näytä yksityiskohdat';
 $s_viewing_bug_simple_details_title = 'Näytetään tapahtuman yksinkertaiset tiedot';
+=======
+>>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'Yksikään käyttäjä ei seuraa tätä tapahtumaa.';
 $s_users_monitoring_bug = 'Käyttäjät jotka seuraavat tätä tapahtumaa';
 $s_monitoring_user_list = 'Käyttäjälistaus';

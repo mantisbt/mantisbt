@@ -399,9 +399,6 @@ $s_verify_warning = 'La informació del seu compte ha estat verificada. El missa
 $s_verify_change_password = 'Ha d\'establir una contrasenya per poder entrar una altra vegada';
 $s_default_account_preferences_title = 'Preferències del compte';
 $s_default_project = 'Projecte per defecte';
-$s_advanced_report = 'Informe Avançat';
-$s_advanced_view = 'Vista Avançada';
-$s_advanced_update = 'Actualització Avançada';
 $s_refresh_delay = 'Demora de Refresc';
 $s_minutes = 'minuts';
 $s_redirect_delay = 'Demora de Redirecció';
@@ -537,7 +534,6 @@ $s_steps_to_reproduce = 'Passos per reproduir-lo';
 $s_update_information_button = 'Actualitzar Informació';
 $s_sticky_issue = 'Comanda marcada';
 $s_profile = 'Perfil';
-$s_update_advanced_link = 'Canvia a format d\'Actualització Avançada';
 $s_updating_bug_simple_title = 'Actualitzant informació de la Comanda';
 $s_view_revisions = 'Veure revisions';
 $s_revision = 'Revisió';
@@ -873,7 +869,6 @@ $s_assign_to = 'Assignar a';
 $s_additional_information = 'Informació Addicional';
 $s_submit_report_button = 'Envia comanda';
 $s_check_report_more_bugs = 'Seleccioni per a informar més comandes';
-$s_advanced_report_link = 'Comanda Avançada';
 $s_report_stay = 'Continua informant';
 $s_selected_project = 'Projecte Seleccionat';
 $s_valid_project_msg = 'Ha de seleccionar un projecte vàlid';
@@ -977,8 +972,11 @@ $s_attached_files = 'Arxius Adjunts';
 $s_publish = 'Publica';
 $s_cached = 'En Memòria Cau';
 $s_add_user_to_monitor = 'Afegeix';
+<<<<<<< HEAD
 $s_view_advanced_link = 'Vista Avançada';
 $s_viewing_bug_simple_details_title = 'Vista Simple.';
+=======
+>>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'No hi ha usuaris monitoritzant aquesta comanda.';
 $s_users_monitoring_bug = 'Usuaris monitorizant aquesta comanda.';
 $s_monitoring_user_list = 'Llista d\'Usuaris';

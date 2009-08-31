@@ -354,9 +354,6 @@ $s_verify_warning = 'آپ کے کھاتے کی معلومات کو چیک کیا
 $s_verify_change_password = 'آپ کو دوبارہ لاگن ھونے کے لیے راز والہ لفظ ضرور سیٹ کرنا پڑے گا.';
 $s_default_account_preferences_title = 'کھاتے کے پسند';
 $s_default_project = ' سسٹم کا دیا ھوا منصو بے';
-$s_advanced_report = 'اڈوانس اطلاع';
-$s_advanced_view = ' اڈوانس ویو';
-$s_advanced_update = ' اڈوانس نیا بننا';
 $s_refresh_delay = 'وقفے کو تازہ دم کرنا';
 $s_redirect_delay = 'وقفہ آگے بیجنا';
 $s_with_minimum_severity = 'تھوڈی سی شدت کے ساتھ';
@@ -489,7 +486,6 @@ $s_steps_to_reproduce = 'دوبارہ بنانے کے سٹیپ';
 $s_update_information_button = ' معلومات تبديل ھو کر ني ھو گي ھے';
 $s_sticky_issue = 'مشکل ایشوذ';
 $s_profile = 'جایزہ';
-$s_update_advanced_link = 'پہلے کو تبديل کر کے ني ھو گي ھے';
 $s_updating_bug_simple_title = ' ایشوذ کی معلومات تبديل ھو کر ني ھو گي ھے';
 $s_vote_added_msg = 'ووٹ جمہع ھو چکا ھے...';
 $s_bugnote_added_msg = ' معلومات جمہع ھو چکی ھیں ...';
@@ -764,7 +760,6 @@ $s_assign_to = 'اس کے سپرد کرو';
 $s_additional_information = 'اضافی معلومات';
 $s_submit_report_button = 'رپورٹ حوالے کرو';
 $s_check_report_more_bugs = 'رپورٹ سے اور ایشوذ چیک کرو';
-$s_advanced_report_link = 'ايڑونس';
 $s_report_stay = 'رپورٹ انتظار';
 $s_selected_project = 'منصوبہ جو منتخب کیا گیا';
 $s_valid_project_msg = 'منصوبہ  منتخب کرنا ھو گا آپ کو ضرور ٹھیک';
@@ -860,8 +855,11 @@ $s_move_bug_button = ' ایشوذ کو حرکت میں  لاو';
 $s_attached_files = 'فایلز کو باندو';
 $s_publish = 'پبلش';
 $s_cached = 'کیشڈ';
+<<<<<<< HEAD
 $s_view_advanced_link = '  ايڑونس ویو کرو';
 $s_viewing_bug_simple_details_title = 'ایشوذ کی سسادہ ڈیٹیل ویو کرو';
+=======
+>>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = '  کوی اور استعمال کر نے والہ اس ایشوذ کو نہی ھے.';
 $s_users_monitoring_bug = ' استعمال کر نے والہ اس ایشوذ کو مانیٹر کر رھا ھے';
 $s_monitoring_user_list = ' استعمال کر نے والوں کی لسٹ';

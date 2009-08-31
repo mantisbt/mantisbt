@@ -331,9 +331,6 @@ $s_verify_warning = 'Upplýsingar þínar um aðgang hafa verið staðfestar. St
 $s_verify_change_password = 'Þú verður að setja lykilorðið hér til þess að geta skráð þig inn aftur.';
 $s_default_account_preferences_title = 'Aðgangsstillingar';
 $s_default_project = 'Sjálfgefið verkefni';
-$s_advanced_report = 'Ítarleg skýrsla';
-$s_advanced_view = 'Ítarleg skoðun';
-$s_advanced_update = 'Ítarleg uppfærsla';
 $s_refresh_delay = 'Endurglæða bið';
 $s_redirect_delay = 'Framsenda bið';
 $s_with_minimum_severity = 'Með lágmarks mikilvægi';
@@ -448,7 +445,6 @@ $s_steps_to_reproduce = 'Skref til endursköpunar';
 $s_update_information_button = 'Uppfæra upplýsingar';
 $s_sticky_issue = 'Límd verkbeiðni';
 $s_profile = 'Snið';
-$s_update_advanced_link = 'Hærri uppfærsla';
 $s_updating_bug_simple_title = 'Uppfæri upplýsingar um beiðni';
 $s_vote_added_msg = 'Atkvæði hefur bæst við...';
 $s_bugnote_added_msg = 'Bætt við athugasemd...';
@@ -719,7 +715,6 @@ $s_assign_to = 'Úthlutað til';
 $s_additional_information = 'Viðbótar upplýsingar';
 $s_submit_report_button = 'Senda skýrslu';
 $s_check_report_more_bugs = 'fara yfir til að tilkynna fleiri atriði';
-$s_advanced_report_link = 'Ítarleg skýrsla';
 $s_report_stay = 'Uppsetning skýrslu';
 $s_selected_project = 'Veldu verkefni';
 $s_valid_project_msg = 'Þú verður að velja gilt verkefni';
@@ -814,8 +809,11 @@ $s_move_bug_button = 'Færa beiðni';
 $s_attached_files = 'Viðhengdar skrár';
 $s_publish = 'Útgefið';
 $s_cached = 'Falið';
+<<<<<<< HEAD
 $s_view_advanced_link = 'Ítarleg skoðun';
 $s_viewing_bug_simple_details_title = 'Einföld skoðun yfir verkbeiðnir í þessu verkefni';
+=======
+>>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'Það er enginn notandi að vakta þessa beiðni.';
 $s_users_monitoring_bug = 'Notendur sem vakta þessa beiðni';
 $s_monitoring_user_list = 'Notenda listi';

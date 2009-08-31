@@ -369,9 +369,6 @@ $s_verify_warning = 'Felhasználói információit ellenőriztük. Az elküldöt
 $s_verify_change_password = 'Meg kell adnia egy jelszót, hogy újra be tudjon lépni.';
 $s_default_account_preferences_title = 'Felhasználói beállítások';
 $s_default_project = 'Alapértelmezett projekt';
-$s_advanced_report = 'Haladó jelentés';
-$s_advanced_view = 'Haladó nézet';
-$s_advanced_update = 'Haladó frissítés';
 $s_refresh_delay = 'Frissítési időköz';
 $s_redirect_delay = 'Átirányítási időköz';
 $s_with_minimum_severity = 'Legalább a következő súlyossággal:';
@@ -502,7 +499,6 @@ $s_steps_to_reproduce = 'Reprodukálás lépései';
 $s_update_information_button = 'Információk frissítése';
 $s_sticky_issue = 'Ragadós ügy';
 $s_profile = 'Profil';
-$s_update_advanced_link = 'Haladó frissítés';
 $s_updating_bug_simple_title = 'Ügy információinak frissítése';
 $s_vote_added_msg = 'Szavazat hozzáadva...';
 $s_bugnote_added_msg = 'Megjegyzés hozzáadva...';
@@ -780,7 +776,6 @@ $s_assign_to = 'Hozzárendelés a következőhöz';
 $s_additional_information = 'További információk';
 $s_submit_report_button = 'Bejelentés elküldése';
 $s_check_report_more_bugs = 'kapcsolja be további ügyek bejelentéséhez';
-$s_advanced_report_link = 'Haladó bejelentés';
 $s_report_stay = 'További bejelentés';
 $s_selected_project = 'Kiválasztott projekt';
 $s_valid_project_msg = 'Egy érvényes projektet kell választania';
@@ -879,8 +874,11 @@ $s_move_bug_button = 'Ügy mozgatása';
 $s_attached_files = 'Csatolt fájlok';
 $s_publish = 'Publikálás';
 $s_cached = 'Gyorsítótárazva';
+<<<<<<< HEAD
 $s_view_advanced_link = 'Haladó nézet';
 $s_viewing_bug_simple_details_title = 'Ügy részletei (egyszerű nézet)';
+=======
+>>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'Senki sem ellenőrzi ezt az ügyet.';
 $s_users_monitoring_bug = 'Ezen ügy ellenőrzői';
 $s_monitoring_user_list = 'Felhasználók listája';

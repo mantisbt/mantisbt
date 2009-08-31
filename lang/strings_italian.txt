@@ -388,9 +388,6 @@ $s_verify_warning = 'Le informazioni sul tuo account sono state verificate.  Il 
 $s_verify_change_password = 'Devi impostare una password per poter accedere di nuovo.';
 $s_default_account_preferences_title = 'Preferenze utente';
 $s_default_project = 'Progetto di default';
-$s_advanced_report = 'Report dettagliato';
-$s_advanced_view = 'Scheda dettagliata';
-$s_advanced_update = 'Aggiornamento dettagliato';
 $s_refresh_delay = 'Ritardo di refresh';
 $s_minutes = 'minuti';
 $s_redirect_delay = 'Ritardo di reindirizzamento';
@@ -525,7 +522,6 @@ $s_steps_to_reproduce = 'Passaggi per riprodurre l\'anomalia';
 $s_update_information_button = 'Aggiorna informazione';
 $s_sticky_issue = 'Anomalia in primo piano';
 $s_profile = 'Profilo';
-$s_update_advanced_link = 'Aggiornamento dettagliato';
 $s_updating_bug_simple_title = 'Aggiorna le informazioni sull\'anomalia';
 $s_revision = 'Revisione';
 $s_revision_by = '%1$s di %2$s';
@@ -834,7 +830,6 @@ $s_assign_to = 'Assegna a';
 $s_additional_information = 'Informazioni addizionali';
 $s_submit_report_button = 'Invia la segnalazione';
 $s_check_report_more_bugs = 'attiva per notificare più anomalie';
-$s_advanced_report_link = 'Modulo dettagliato';
 $s_report_stay = 'Rimani sul report';
 $s_selected_project = 'Progetto selezionato';
 $s_valid_project_msg = 'Selezionare un progetto valido';
@@ -930,8 +925,11 @@ $s_reopen_bug_button = 'Riapri';
 $s_move_bug_button = 'Sposta';
 $s_attached_files = 'File allegati';
 $s_publish = 'Pubblica';
+<<<<<<< HEAD
 $s_view_advanced_link = 'Scheda dettagliata';
 $s_viewing_bug_simple_details_title = 'Scheda anomalia';
+=======
+>>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'Nessuno ha chiesto di essere notificato su questa anomalia.';
 $s_users_monitoring_bug = 'Utenti che tengono sotto controllo questa anomalia';
 $s_monitoring_user_list = 'Elenco utenti';

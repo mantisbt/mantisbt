@@ -341,9 +341,6 @@ $s_verify_warning = '你的帳號資訊已經驗證無誤. 你所收到的帳號
 $s_verify_change_password = '你必須在此設定密碼才可重新登入.';
 $s_default_account_preferences_title = '預設帳號喜好設定';
 $s_default_project = '預設專案';
-$s_advanced_report = '進階報告';
-$s_advanced_view = '進階檢視';
-$s_advanced_update = '進階更新';
 $s_refresh_delay = '等幾秒畫面自動更新';
 $s_redirect_delay = '等幾秒自動轉址';
 $s_with_minimum_severity = '當嚴重性超過';
@@ -471,7 +468,6 @@ $s_steps_to_reproduce = 'Bug 發生的步驟說明';
 $s_update_information_button = '更新資訊';
 $s_sticky_issue = '棘手問題';
 $s_profile = '個人設定';
-$s_update_advanced_link = '進階更新';
 $s_updating_bug_simple_title = '正在更新 Bug 資訊';
 $s_vote_added_msg = '投票已新增...';
 $s_bugnote_added_msg = 'Bug 筆記已新增...';
@@ -733,7 +729,6 @@ $s_assign_to = '指派給';
 $s_additional_information = '額外資訊';
 $s_submit_report_button = '送出回報';
 $s_check_report_more_bugs = '勾選可繼續回報其他的 Bug';
-$s_advanced_report_link = '進階報告';
 $s_report_stay = '回報狀態';
 $s_selected_project = '已選擇專案';
 $s_valid_project_msg = '你必須選擇一個正確的專案';
@@ -825,8 +820,11 @@ $s_move_bug_button = '搬移問題';
 $s_attached_files = '附件檔案';
 $s_publish = '發表';
 $s_cached = '快取';
+<<<<<<< HEAD
 $s_view_advanced_link = '進階檢視';
 $s_viewing_bug_simple_details_title = '檢視 Bug 詳細資料(簡式)';
+=======
+>>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = '沒有使用者監控這 bug.';
 $s_users_monitoring_bug = '使用者監控這 bug';
 $s_monitoring_user_list = '使用者清單';

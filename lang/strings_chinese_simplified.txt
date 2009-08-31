@@ -360,9 +360,6 @@ $s_verify_warning = '你的账号信息已经进行了检验，你所收到的�
 $s_verify_change_password = '你必须在这里设置密码，否则将无法登录。';
 $s_default_account_preferences_title = '缺省帐号设置';
 $s_default_project = '缺省项目';
-$s_advanced_report = '高级报告';
-$s_advanced_view = '高级查看';
-$s_advanced_update = '高级更新';
 $s_refresh_delay = '刷新延迟';
 $s_minutes = '分';
 $s_redirect_delay = '重定向延时(秒)';
@@ -497,7 +494,6 @@ $s_steps_to_reproduce = '问题重现步骤说明';
 $s_update_information_button = '更新信息';
 $s_sticky_issue = '置顶问题';
 $s_profile = '配置';
-$s_update_advanced_link = '高级更新';
 $s_updating_bug_simple_title = '正在更新问题信息';
 $s_vote_added_msg = '投票已添加...';
 $s_bugnote_added_msg = '已添加问题注释...';
@@ -785,7 +781,6 @@ $s_assign_to = '分派给';
 $s_additional_information = '附加信息';
 $s_submit_report_button = '提交报告';
 $s_check_report_more_bugs = '报告更多的问题';
-$s_advanced_report_link = '高级报告';
 $s_report_stay = '继续报告';
 $s_selected_project = '选择项目';
 $s_valid_project_msg = '必须选择一个有效的项目';
@@ -881,8 +876,11 @@ $s_move_bug_button = '移动问题';
 $s_attached_files = '附件';
 $s_publish = '发布';
 $s_cached = '已缓存';
+<<<<<<< HEAD
 $s_view_advanced_link = '高级查看';
 $s_viewing_bug_simple_details_title = '查看问题详细资料(简易)';
+=======
+>>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = '当前没有用户在监视这个问题。';
 $s_users_monitoring_bug = '正在监视这个问题的用户';
 $s_monitoring_user_list = '用户列表';

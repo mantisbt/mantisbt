@@ -40,7 +40,7 @@
 
 	# this page is invalid for the 'All Project' selection except if this is a clone
 	if ( ( ALL_PROJECTS == helper_get_current_project() ) && ( 0 == $f_master_bug_id ) ) {
-		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_advanced_page.php' );
+		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
 	}
 
 	if ( $f_master_bug_id > 0 ) {
@@ -167,7 +167,7 @@
 		</td>
 	</tr>
 <?php
-	event_signal( 'EVENT_REPORT_BUG_FORM_TOP', array( $t_project_id, true ) );
+	event_signal( 'EVENT_REPORT_BUG_FORM_TOP', array( $t_project_id ) );
 
 	if ( $tpl_show_category ) {
 ?>
@@ -395,7 +395,7 @@
 		</td>
 	</tr>
 <?php } ?>
-<?php event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id, true ) ); ?>
+<?php event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id ) ) ?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<span class="required">*</span><?php print_documentation_link( 'summary' ) ?>

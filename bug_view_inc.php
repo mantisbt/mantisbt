@@ -238,11 +238,11 @@
 		$t_index = array_search( $f_bug_id, $t_bugslist );
 		if ( false !== $t_index ) {
 			if ( isset( $t_bugslist[$t_index-1] ) ) {
-				print_bracket_link( 'bug_view_advanced_page.php?bug_id='.$t_bugslist[$t_index-1], '&lt;&lt;' );
+				print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index-1], '&lt;&lt;' );
 			}
 
 			if ( isset( $t_bugslist[$t_index+1] ) ) {
-				print_bracket_link( 'bug_view_advanced_page.php?bug_id='.$t_bugslist[$t_index+1], '&gt;&gt;' );
+				print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index+1], '&gt;&gt;' );
 			}
 		}
 		echo '</span></td>';
@@ -577,7 +577,7 @@
 	# Bug Details Event Signal
 	#
 
-	event_signal( 'EVENT_VIEW_BUG_DETAILS', array( $tpl_bug_id, true ) );
+	event_signal( 'EVENT_VIEW_BUG_DETAILS', array( $tpl_bug_id ) );
 
 	# spacer
 	echo '<tr class="spacer"><td colspan="6"></td></tr>';
