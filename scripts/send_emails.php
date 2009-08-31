@@ -25,8 +25,7 @@ require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' 
 require_once( 'email_api.php' );
 
 # Make sure this script doesn't run via the webserver
-/** @todo This is a hack to detect php-cgi, there must be a better way. */
-if( isset( $_SERVER['SERVER_PORT'] ) ) {
+if( php_sapi_name() != 'cli' ) {
 	echo "send_emails.php is not allowed to run through the webserver.\n";
 	exit( 1 );
 }
