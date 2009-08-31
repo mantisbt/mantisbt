@@ -477,7 +477,6 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
 				'access_level_rw' => $t_def['access_level_rw'],
 				'length_min' => $t_def['length_min'],
 				'length_max' => $t_def['length_max'],
-				'advanced' => $t_def['advanced'],
 				'display_report' => $t_def['display_report'],
 				'display_update' => $t_def['display_update'],
 				'display_resolved' => $t_def['display_resolved'],
