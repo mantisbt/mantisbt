@@ -34,6 +34,7 @@
  * @author Hellekin O. Wolf, hellekin@mmania.com
  * @author IAlex
  * @author Jean-Charles Trosset, jean-charles.trosset@laposte.net
+ * @author Kropotkine 113
  * @author Langis Gagnon, gagnon.langis@ic.gc.ca
  * @author Laurent LABAT, wizzz@apinc.org
  * @author Maurice A. LeBlanc, leblancma@cooptel.qc.ca
@@ -286,7 +287,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Les informations fournie
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'L\'hyperlien de confirmation n\'est pas valide ou a déjà été utilisé. Veuillez vous inscrire de nouveau.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Nombre Max. de demandes en-cours atteint. Veuillez contacter l\'administrateur du système';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Cette opération va créer une recursion dans la hiérarchie des sous projets.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Vous ne pouvez pas modifier le niveau d\'accès de l\'unique administrateur du système.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Vous ne pouvez pas supprimer ou destituer l\'unique compte administrateur du système. Pour réaliser l\'action que vous avez demandée vous devez d\'abord créer un autre compte administrateur.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Erreur de réacheminement, vérifier qu\'il n\'y a pas d\'espaces à l\'extérieur du bloc PHP block (&lt;?php ?&gt;) dans les fichiers config_inc.php ou custom_*.php.';
 $MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'L\'integration avec Twitter nécessite l\'extension PHP CURL qui n\'est pas installée.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'La balise avec ce nom est introuvable.';
@@ -314,7 +315,7 @@ $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Impossible de mettre à jour la zone h
 $s_login_error = 'Votre compte est peut être désactivé ou alors le code utilisateur et le mot de passe que vous avez saisi sont incorrects.';
 $s_login_cookies_disabled = 'Votre navigateur ne sait pas gérer les témoins ou refuse de les gérer.';
 $s_go_back = 'Retour';
-$s_proceed = 'Continuer';
+$s_proceed = 'Procéder';
 $s_switch = 'Afficher';
 $s_logged_in_as = 'Connecté en tant que ';
 $s_prefix_for_deleted_users = 'utilisateur';
@@ -414,9 +415,6 @@ $s_verify_warning = 'L\'information relative à votre compte a été vérifiée.
 $s_verify_change_password = 'Vous devez fixer un mot de passe pour vous permettre de vous brancher de nouveau.';
 $s_default_account_preferences_title = 'Préférences du compte';
 $s_default_project = 'Projet par défaut';
-$s_advanced_report = 'Rapport détaillé';
-$s_advanced_view = 'Vue détaillée';
-$s_advanced_update = 'Mise à jour avancée';
 $s_refresh_delay = 'Délai de rafraichissement';
 $s_minutes = 'minutes';
 $s_redirect_delay = 'Délai de redirection';
@@ -554,7 +552,6 @@ $s_steps_to_reproduce = 'Étapes pour reproduire';
 $s_update_information_button = 'Mettre à jour l\'information';
 $s_sticky_issue = 'Bogue récurrent';
 $s_profile = 'Profil';
-$s_update_advanced_link = 'Mise à jour détaillée';
 $s_updating_bug_simple_title = 'Mise à jour de l\'information d\'un bogue';
 $s_view_revisions = 'Voir les révisions';
 $s_revision = 'Révision';
@@ -582,7 +579,7 @@ $s_total_queries_executed = '%1$d requêtes exécutées au total.';
 $s_unique_queries_executed = '%1$d requêtes uniques exécutées.';
 $s_memory_usage_in_kb = 'utilisation de la mémoire : %1$s KB';
 $s_please_report = 'Rapporter ceci à l\'%1$, s\'il vous plait.';
-$s_click_to_login = 'Cliquer pour accéder';
+$s_click_to_login = 'Se connecter';
 $s_warning_plain_password_authentication = '<strong>ATTENTION :</strong> l\'authentification par mot de passe en clair est utilisée, ceci exposera votre mot de passe aux administrateurs.';
 $s_warning_default_administrator_account_present = '<strong>ATTENTION :</strong> Vous devriez désactiver le compte par défaut « administrator » ou changer son mot de passe.';
 $s_warning_admin_directory_present = '<strong>ATTENTION :</strong> le répertoire Admin devrait être supprimé.';
@@ -895,7 +892,6 @@ $s_assign_to = 'Assigné à';
 $s_additional_information = 'Informations complémentaires';
 $s_submit_report_button = 'Soumettre le rapport';
 $s_check_report_more_bugs = 'Cocher pour saisir d\'autres bogues';
-$s_advanced_report_link = 'Rapport détaillé';
 $s_report_stay = 'Garder le rapport';
 $s_selected_project = 'Projet en cours';
 $s_valid_project_msg = 'Vous devez choisir un projet valide';
@@ -987,7 +983,6 @@ $s_query_store_error = 'Une erreur s\'est produite durant la sauvegarde de ce fi
 $s_open_queries = 'Gérer les filtres';
 $s_query_delete_msg = 'Êtes-vous certain de vouloir supprimer ce filtre ?';
 $s_view_simple_link = 'Rapport simplifié';
-$s_viewing_bug_advanced_details_title = 'Afficher le rapport détaillé';
 $s_product_build = 'Build';
 $s_system_profile = 'Description du système';
 $s_update_bug_button = 'Modifier';
@@ -999,8 +994,7 @@ $s_attached_files = 'Pièces jointes';
 $s_publish = 'Publié';
 $s_cached = 'Mis en cache';
 $s_add_user_to_monitor = 'Ajouter';
-$s_view_advanced_link = 'Rapport détaillé';
-$s_viewing_bug_simple_details_title = 'Afficher le rapport simplifié';
+$s_bug_view_title = 'Visualiser les détails du résultat';
 $s_no_users_monitoring_bug = 'Aucun utilisateur surveillant ce bogue.';
 $s_users_monitoring_bug = 'Utilisateurs surveillant ce bogue';
 $s_monitoring_user_list = 'Liste d\'utilisateurs';
@@ -1056,6 +1050,7 @@ $s_simple_filters = 'Filtres simples';
 $s_monitored_by = 'Surveillé par';
 $s_attachments = 'pièce(s) jointe(s)';
 $s_attachment_alt = 'A';
+$s_bytes = 'octets';
 $s_phpmailer_language = 'fr';
 $s_sponsors = '%1$d commanditaire(s)';
 $s_sponsorship_added = 'Commandite ajoutée';

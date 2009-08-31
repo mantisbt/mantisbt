@@ -29,6 +29,7 @@
  * @author Attila Vági, avagi@v-comp.hu
  * @author CSÉCSY László, boobaa@nospam.frugalware.org (complete retranslation)
  * @author Gergő Bácskai, gergo@bacskai.hu
+ * @author Glanthor Reviol
  * @author Istvan Back, back@webmuves.hu
  * @author Leiric
  */
@@ -56,6 +57,7 @@ $s_operation_successful = 'Sikeres művelet.';
 $s_date_order = 'Dátumsorrend';
 $s_print_all_bug_page_link = 'Jelentések nyomtatása';
 $s_csv_export = 'CSV export';
+$s_excel_export = 'Excel exportálás';
 $s_login_anonymously = 'Belépés névtelenül';
 $s_anonymous = 'Névtelen';
 $s_jump_to_bugnotes = 'Ugrás a megjegyzésekhez';
@@ -93,6 +95,7 @@ $s_empty_password_sure_msg = 'A felhasználó jelszava üres. Valóban ezt akarj
 $s_empty_password_button = 'Üres jelszó használata';
 $s_reauthenticate_title = 'Azonosítás';
 $s_reauthenticate_message = 'Egy biztonságos oldalra ért, és a biztonságos munkamenete lejárt. Kérjük, azonosítsa magát a folytatáshoz.';
+$s_no_category = '(nincs kategória)';
 $s_duplicate_of = 'a következő másolata:';
 $s_has_duplicate = 'van másolata';
 $s_related_to = 'kapcsolódik a következőhöz:';
@@ -369,9 +372,6 @@ $s_verify_warning = 'Felhasználói információit ellenőriztük. Az elküldöt
 $s_verify_change_password = 'Meg kell adnia egy jelszót, hogy újra be tudjon lépni.';
 $s_default_account_preferences_title = 'Felhasználói beállítások';
 $s_default_project = 'Alapértelmezett projekt';
-$s_advanced_report = 'Haladó jelentés';
-$s_advanced_view = 'Haladó nézet';
-$s_advanced_update = 'Haladó frissítés';
 $s_refresh_delay = 'Frissítési időköz';
 $s_redirect_delay = 'Átirányítási időköz';
 $s_with_minimum_severity = 'Legalább a következő súlyossággal:';
@@ -391,6 +391,7 @@ $s_email_bugnote_limit = 'Email megjegyzések limitje';
 $s_language = 'Nyelv';
 $s_update_prefs_button = 'Beállítások frissítése';
 $s_reset_prefs_button = 'Beállítások visszaállítása';
+$s_timezone = 'Időzóna';
 $s_prefs_reset_msg = 'A beállítások alaphelyzetűek...';
 $s_prefs_updated_msg = 'A beállítások frissítve...';
 $s_profile_added_msg = 'Profil hozzáadva...';
@@ -502,7 +503,6 @@ $s_steps_to_reproduce = 'Reprodukálás lépései';
 $s_update_information_button = 'Információk frissítése';
 $s_sticky_issue = 'Ragadós ügy';
 $s_profile = 'Profil';
-$s_update_advanced_link = 'Haladó frissítés';
 $s_updating_bug_simple_title = 'Ügy információinak frissítése';
 $s_vote_added_msg = 'Szavazat hozzáadva...';
 $s_bugnote_added_msg = 'Megjegyzés hozzáadva...';
@@ -519,7 +519,7 @@ $s_bugnote_updated_msg = 'Megjegyzés sikeresen frissítve...';
 $s_edited_on = 'szerkesztve:';
 $s_hide_content = 'Tartalom elrejtése';
 $s_show_content = 'Tartalom megjelenítése';
-$s_click_to_login = 'Kattintson ide a belépéshez';
+$s_click_to_login = 'Bejelentkezés';
 $s_login_page_info = 'Üdvözöljük az ügykezelőben.';
 $s_login_title = 'Belépés';
 $s_save_login = 'Belépés megjegyzése';
@@ -780,7 +780,6 @@ $s_assign_to = 'Hozzárendelés a következőhöz';
 $s_additional_information = 'További információk';
 $s_submit_report_button = 'Bejelentés elküldése';
 $s_check_report_more_bugs = 'kapcsolja be további ügyek bejelentéséhez';
-$s_advanced_report_link = 'Haladó bejelentés';
 $s_report_stay = 'További bejelentés';
 $s_selected_project = 'Kiválasztott projekt';
 $s_valid_project_msg = 'Egy érvényes projektet kell választania';
@@ -868,7 +867,6 @@ $s_query_store_error = 'Hiba történt a szűrő tárolásakor.';
 $s_open_queries = 'Szűrők karbantartása';
 $s_query_delete_msg = 'Valóban törölni akarja ezt a szűrőt?';
 $s_view_simple_link = 'Egyszerű nézet';
-$s_viewing_bug_advanced_details_title = 'Ügy részletei (haladó nézet)';
 $s_product_build = 'Termék build';
 $s_system_profile = 'Rendszer leírása';
 $s_update_bug_button = 'Ügy frissítése';
@@ -879,8 +877,6 @@ $s_move_bug_button = 'Ügy mozgatása';
 $s_attached_files = 'Csatolt fájlok';
 $s_publish = 'Publikálás';
 $s_cached = 'Gyorsítótárazva';
-$s_view_advanced_link = 'Haladó nézet';
-$s_viewing_bug_simple_details_title = 'Ügy részletei (egyszerű nézet)';
 $s_no_users_monitoring_bug = 'Senki sem ellenőrzi ezt az ügyet.';
 $s_users_monitoring_bug = 'Ezen ügy ellenőrzői';
 $s_monitoring_user_list = 'Felhasználók listája';

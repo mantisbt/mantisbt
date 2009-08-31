@@ -27,6 +27,7 @@
  * @file
  *
  * @author Klemens Kasemaa, Elion Ettevõtted AS, klem (at) estpak.ee (27.01.2005)
+ * @author Pikne
  * @author Villem Vannas, willu60 (at) hotmail.com (14.09.2004)
  */
 
@@ -242,7 +243,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Esitatud informatsioon e
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Kinnituse URL on vigane või varem kasutatud. Palun registreeru uuesti.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maks. arv töödeldavaid päringuid saavutatud. Palun kontakteeru süsteemi administraatoriga';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'See tegevus toob kaasa alamprojektide hierarhias katkematu rekursiooni';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Sa ei saa muuta süsteemi ainukese ADMINISTRAATORI pöördusõiguste taset.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Sa ei saa eemaldada viimast ülemakontot või alandada tema õigusi. Soovitud toimingu sooritamiseks tuleb kõigepealt luua teine ülemakonto.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Lehele ümbersuunamise viga, kontrolli, et poleks tühikuid väljapool PHP plokki (&lt;?php ?&gt;) failis config_inc.php või custom_*.php.';
 $s_login_error = 'Sinu kasutajakonto võib olla blokeeritud või sisestasid vale kasutajanime/parooli.';
 $s_login_cookies_disabled = 'Su veebilehitseja kas ei oska küpsiseid kasutada või on see omadus keelatud.';
@@ -342,9 +343,6 @@ $s_verify_warning = 'Sinu kasutajakonto info on kontrollitud. Kasutajakonto kinn
 $s_verify_change_password = 'Sa pead vahetama siin parooli, et uuesti sisse meldida.';
 $s_default_account_preferences_title = 'Kasutajakonto eelistused';
 $s_default_project = 'Vaikimisi Projekt';
-$s_advanced_report = 'Näita detailsed teated';
-$s_advanced_view = 'Näita kannete detaile';
-$s_advanced_update = 'Näita kannete detailset uuendust';
 $s_refresh_delay = 'uuenduse viivitus';
 $s_redirect_delay = 'ümbersuunamise viivitus';
 $s_with_minimum_severity = 'Väiksem raskusaste sellest';
@@ -473,7 +471,6 @@ $s_steps_to_reproduce = 'Kordamise sammud';
 $s_update_information_button = 'Uuenda info';
 $s_sticky_issue = 'Kleepuv kanne';
 $s_profile = 'Profiil';
-$s_update_advanced_link = 'Spetsiaalne uuendus';
 $s_updating_bug_simple_title = 'Kande andmete uuendus';
 $s_vote_added_msg = 'Hääl lisatud...';
 $s_bugnote_added_msg = 'Märkus lisatud...';
@@ -742,7 +739,6 @@ $s_assign_to = 'Määra';
 $s_additional_information = 'Lisainfo';
 $s_submit_report_button = 'Saada teade';
 $s_check_report_more_bugs = 'Märgi lisakannetest teatamiseks';
-$s_advanced_report_link = 'Detailne teade';
 $s_report_stay = 'Teade jääb mällu';
 $s_selected_project = 'Valitud projekt';
 $s_valid_project_msg = 'Vali kehtiv projekt';
@@ -825,7 +821,6 @@ $s_query_store_error = 'Päringu salvestamisel tekkis viga.';
 $s_open_queries = 'Filtrite majandamine';
 $s_query_delete_msg = 'Oled kindel, et soovid selle päringu kustutada?';
 $s_view_simple_link = 'Näita tavalist';
-$s_viewing_bug_advanced_details_title = 'Kande detailsete andmete vaatamine';
 $s_product_build = 'Toote järk (Build)';
 $s_system_profile = 'Süsteemikirjeldus';
 $s_update_bug_button = 'Uuenda kanne';
@@ -836,8 +831,6 @@ $s_move_bug_button = 'Liiguta kanne';
 $s_attached_files = 'Lisatud failid';
 $s_publish = 'Avalda';
 $s_cached = 'Vahemälus';
-$s_view_advanced_link = 'Detailide vaatamine';
-$s_viewing_bug_simple_details_title = 'Kande tavaandmete vaatamine';
 $s_no_users_monitoring_bug = 'ükski kasutaja ei tegele selle kandega.';
 $s_users_monitoring_bug = 'Selle kandega tegelevad kasutajad';
 $s_monitoring_user_list = 'Kasutajate loend';

@@ -1220,24 +1220,6 @@
 	$g_min_refresh_delay	= 10;
 
 	/**
-	 *
-	 * @global int $g_default_advanced_report
-	 */
-	$g_default_advanced_report		= OFF;
-
-	/**
-	 *
-	 * @global int $g_default_advanced_view
-	 */
-	$g_default_advanced_view		= OFF;
-
-	/**
-	 *
-	 * @global int $g_default_advanced_update
-	 */
-	$g_default_advanced_update		= OFF;
-
-	/**
 	 * in minutes
 	 * @global int $g_default_refresh_delay
 	 */

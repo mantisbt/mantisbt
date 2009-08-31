@@ -23,7 +23,6 @@
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
-					<listitem><para>&lt;Boolean&gt;: Advanced view (false for simple view)</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -46,7 +45,6 @@
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
-					<listitem><para>&lt;Boolean&gt;: Advanced view (false for simple view)</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -74,7 +72,6 @@
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Integer&gt;: Project ID</para></listitem>
-					<listitem><para>&lt;Boolean&gt;: Advanced view (false for simple view)</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -97,7 +94,6 @@
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Integer&gt;: Project ID</para></listitem>
-					<listitem><para>&lt;Boolean&gt;: Advanced view (false for simple view)</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
