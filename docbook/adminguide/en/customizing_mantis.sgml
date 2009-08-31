@@ -124,11 +124,6 @@
                     </para>
                 </listitem>
                 <listitem>
-                    <para>Display only on Advanced Page? - If set, then this
-		    custom field will only show on the advanced pages.
-                    </para>
-                </listitem>
-                <listitem>
                     <para>Display when reporting issues? - If this custom
 		    field should be shown on the Report Issue page.
                     </para>

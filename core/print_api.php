@@ -1667,7 +1667,7 @@ function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_
 }
 
 # List the attachments belonging to the specified bug.  This is used from within
-# bug_view_page.php and bug_view_advanced_page.php
+# bug_view_page.php
 function print_bug_attachments_list( $p_bug_id ) {
 	$t_attachments = file_get_visible_attachments( $p_bug_id );
 	$t_attachments_count = count( $t_attachments );
