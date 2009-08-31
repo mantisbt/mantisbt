@@ -654,7 +654,6 @@ $s_custom_field_access_level_r = 'Προσπέλαση Ανάγνωσης';
 $s_custom_field_access_level_rw = 'Προσπέλαση Εγγραφής';
 $s_custom_field_length_min = 'Ελαχ. Μήκος';
 $s_custom_field_length_max = 'Μεγ. Μήκος';
-$s_custom_field_advanced = 'Προβολή Μόνο Σε Σύνθετη Σελίδα';
 $s_custom_field_display_report = 'Προβολή Μόνο Σε Αναφορά Θεμάτων';
 $s_custom_field_display_update = 'Προβολή Μόνο Σε Ενημέρωση Θεμάτων';
 $s_custom_field_display_resolved = 'Προβολή Μόνο Σε Επίλυση Θεμάτων';

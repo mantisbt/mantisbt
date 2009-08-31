@@ -1010,7 +1010,6 @@ $s_custom_field_access_level_rw = 'Berächtigung schryybe';
 $s_custom_field_length_min = 'Mindeschtlengi';
 $s_custom_field_length_max = 'Maximallengi';
 $s_custom_field_filter_by = 'Zum Filter zuefiege';
-$s_custom_field_advanced = 'Erwyteret';
 $s_custom_field_display_report = 'Bi Problämyygab aazeige';
 $s_custom_field_display_update = 'Bi Problämaktualisierig aazeige';
 $s_custom_field_display_resolved = 'Bim Erledige aazeige';

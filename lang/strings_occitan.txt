@@ -1012,7 +1012,6 @@ $s_custom_field_access_level_rw = 'Accès en escritura';
 $s_custom_field_length_min = 'Talha min.';
 $s_custom_field_length_max = 'Talha max.';
 $s_custom_field_filter_by = 'Apondre al filtre';
-$s_custom_field_advanced = 'Afichar pas que sus la pagina avançada';
 $s_custom_field_display_report = 'Afichar al moment del rapòrt de bògues';
 $s_custom_field_display_update = 'Afichar al moment de la mesa a jorn dels bògues';
 $s_custom_field_display_resolved = 'Mostrar al moment de la resolucion dels bògues';

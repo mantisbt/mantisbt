@@ -823,7 +823,6 @@ $s_custom_field_access_level_r = '읽기 권한';
 $s_custom_field_access_level_rw = '쓰기 권한';
 $s_custom_field_length_min = '최소 길이';
 $s_custom_field_length_max = '최대 길이';
-$s_custom_field_advanced = '고급';
 $s_custom_field_display_report = '이슈 보고할 때 표시';
 $s_custom_field_display_update = '이슈 갱신할 때 표시';
 $s_custom_field_display_resolved = '이슈 해결될 때 표시';

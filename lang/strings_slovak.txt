@@ -740,7 +740,6 @@ $s_custom_field_access_level_r = 'Oprávnenie ku čítaniu';
 $s_custom_field_access_level_rw = 'Orávnenie k zápisu';
 $s_custom_field_length_min = 'Min. dĺžka';
 $s_custom_field_length_max = 'Max. dĺžka';
-$s_custom_field_advanced = 'Rozšírené';
 $s_custom_field_display_report = 'Zobraziť pri hlásení problému';
 $s_custom_field_display_update = 'Zobraziť pri aktualizácií problému';
 $s_custom_field_display_resolved = 'Zobraziť pri vyriešení problému';

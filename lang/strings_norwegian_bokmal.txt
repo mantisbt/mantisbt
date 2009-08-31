@@ -1014,7 +1014,6 @@ $s_custom_field_access_level_rw = 'Skrivetilgang';
 $s_custom_field_length_min = 'Min. lengde';
 $s_custom_field_length_max = 'Maks. lengde';
 $s_custom_field_filter_by = 'Legg til i filter';
-$s_custom_field_advanced = 'Avansert';
 $s_custom_field_display_report = 'Vis ved rapportering av saker';
 $s_custom_field_display_update = 'Vis ved oppdatering av saker';
 $s_custom_field_display_resolved = 'Vis ved løsning av saker';

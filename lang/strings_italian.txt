@@ -955,7 +955,6 @@ $s_custom_field_access_level_r = 'Visibile';
 $s_custom_field_access_level_rw = 'Modificabile';
 $s_custom_field_length_min = 'Lunghezza min.';
 $s_custom_field_length_max = 'Lunghezza max.';
-$s_custom_field_advanced = 'Mostra solo nel modulo avanzato';
 $s_custom_field_display_report = 'Visualizza quando "Riporti anomalia"';
 $s_custom_field_display_update = 'Visualizza quando "Aggiorni anomalia"';
 $s_custom_field_display_resolved = 'Visualizza in "Risolvi anomalia"';

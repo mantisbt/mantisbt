@@ -1011,7 +1011,6 @@ $s_custom_field_access_level_rw = 'Skrivrättighet';
 $s_custom_field_length_min = 'Min. längd';
 $s_custom_field_length_max = 'Max. längd';
 $s_custom_field_filter_by = 'Lägg till i filter';
-$s_custom_field_advanced = 'Avancerad';
 $s_custom_field_display_report = 'Visa när ärenden rapporteras';
 $s_custom_field_display_update = 'Visa när ärenden uppdateras';
 $s_custom_field_display_resolved = 'Visa när ärenden löses';

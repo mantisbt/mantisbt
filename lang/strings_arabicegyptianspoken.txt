@@ -989,7 +989,6 @@ $s_custom_field_access_level_rw = 'صلاحية الكتابة';
 $s_custom_field_length_min = 'الحجم الأدنى';
 $s_custom_field_length_max = 'الحجم الأقصى';
 $s_custom_field_filter_by = 'إضافة إلى الفلتر';
-$s_custom_field_advanced = 'عرض فقط فى الصفحة المتقدمة';
 $s_custom_field_display_report = 'عرض عند إبلاغ القضايا';
 $s_custom_field_display_update = 'عرض عند تحديث القضايا';
 $s_custom_field_display_resolved = 'عرض عند حل القضايا';

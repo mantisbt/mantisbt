@@ -855,7 +855,6 @@ $s_custom_field_access_level_r = 'Skaitymo teisės';
 $s_custom_field_access_level_rw = 'Rašymo teisės';
 $s_custom_field_length_min = 'Min. ilgis';
 $s_custom_field_length_max = 'Maks. ilgis';
-$s_custom_field_advanced = 'Rodyti tik detaliame pranešimo puslapyje';
 $s_custom_field_display_report = 'Rodyti pranešama apie klaidą';
 $s_custom_field_display_update = 'Rodyti kai klaida redaguojama';
 $s_custom_field_display_resolved = 'Rodyti sprendžiant klaidą';

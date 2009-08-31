@@ -851,7 +851,6 @@ $s_custom_field_access_level_r = 'Acces citire';
 $s_custom_field_access_level_rw = 'Acces scriere';
 $s_custom_field_length_min = 'Lungime minimă';
 $s_custom_field_length_max = 'Lungime maximă';
-$s_custom_field_advanced = 'Afişează doar pe pagina complexă';
 $s_custom_field_display_report = 'Afişează când se raportează probleme';
 $s_custom_field_display_update = 'Afişează când se actualizează probleme';
 $s_custom_field_display_resolved = 'Afişează când se rezolvă probleme';

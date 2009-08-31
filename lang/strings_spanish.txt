@@ -1017,7 +1017,6 @@ $s_custom_field_access_level_rw = 'Acceso de escritura';
 $s_custom_field_length_min = 'Long. Mínima';
 $s_custom_field_length_max = 'Long. Máxima';
 $s_custom_field_filter_by = 'Añadir a Filtro';
-$s_custom_field_advanced = 'Mostrar sólo en Vista Avanzada';
 $s_custom_field_display_report = 'Mostrar al Reportar Incidencias';
 $s_custom_field_display_update = 'Mostrar al actualizar Incidencias';
 $s_custom_field_display_resolved = 'Mostrar al resolver Incidencias';

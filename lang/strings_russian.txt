@@ -1020,7 +1020,6 @@ $s_custom_field_access_level_rw = 'Доступ на запись';
 $s_custom_field_length_min = 'Наименьшая длина';
 $s_custom_field_length_max = 'Наибольшая длина';
 $s_custom_field_filter_by = 'Добавить в фильтр';
-$s_custom_field_advanced = 'Показывать только на расширенных страницах';
 $s_custom_field_display_report = 'Показывать при создании инцидента';
 $s_custom_field_display_update = 'Показывать при изменении инцидента';
 $s_custom_field_display_resolved = 'Показывать при отработке';

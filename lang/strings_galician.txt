@@ -1011,7 +1011,6 @@ $s_custom_field_access_level_rw = 'Acceso de escritura';
 $s_custom_field_length_min = 'Lonxitude mín.';
 $s_custom_field_length_max = 'Lonxitude máx.';
 $s_custom_field_filter_by = 'Engadir ao filtro';
-$s_custom_field_advanced = 'Mostrar só na páxina avanzada';
 $s_custom_field_display_report = 'Mostrar ao informar de problemas';
 $s_custom_field_display_update = 'Mostrar ao actualizar os problemas';
 $s_custom_field_display_resolved = 'Mostrar ao resolver os problemas';

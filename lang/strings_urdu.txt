@@ -885,7 +885,6 @@ $s_custom_field_access_level_r = 'رسای پڑو';
 $s_custom_field_access_level_rw = ' رسای لکھو';
 $s_custom_field_length_min = 'کم لمبای';
 $s_custom_field_length_max = 'ذیادہ لمبای';
-$s_custom_field_advanced = ' صرف ايڑونس صحفے پر دکھاو';
 $s_custom_field_display_report = '  صرف رپورٹنگ ایشوذ پردکھاو';
 $s_custom_field_display_update = 'ایشوذ کو دوبارہ کھولنے پر دکھاو';
 $s_custom_field_display_resolved = 'جب ایشوذ حل ھو جاے تو دکھاو';

@@ -1017,7 +1017,6 @@ $s_custom_field_access_level_rw = '読み書き';
 $s_custom_field_length_min = '項目長(最小値)';
 $s_custom_field_length_max = '項目長(最大値)';
 $s_custom_field_filter_by = 'フィルターに追加';
-$s_custom_field_advanced = '詳細画面のみ表示';
 $s_custom_field_display_report = '登録時に表示';
 $s_custom_field_display_update = '更新時に表示';
 $s_custom_field_display_resolved = '解決時に表示';

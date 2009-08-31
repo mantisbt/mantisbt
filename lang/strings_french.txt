@@ -1027,7 +1027,6 @@ $s_custom_field_access_level_rw = 'Accès en écriture';
 $s_custom_field_length_min = 'Taille min.';
 $s_custom_field_length_max = 'Taille max.';
 $s_custom_field_filter_by = 'Ajouter au filtre';
-$s_custom_field_advanced = 'N\'afficher que sur la page avancée';
 $s_custom_field_display_report = 'Afficher lors de rapport de bogues';
 $s_custom_field_display_update = 'Afficher lors de mise à jour de bogues';
 $s_custom_field_display_resolved = 'Montrer lors de résolution de bogues';

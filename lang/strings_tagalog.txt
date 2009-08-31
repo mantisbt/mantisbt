@@ -997,7 +997,6 @@ $s_custom_field_access_level_rw = 'Pagpuntang Makapagsusulat';
 $s_custom_field_length_min = 'Pinakamababang Haba';
 $s_custom_field_length_max = 'Pinakamataas na Haba';
 $s_custom_field_filter_by = 'Idagdag sa Pansala';
-$s_custom_field_advanced = 'Ipakita Lamang Sa Ibabaw ng Mas Masulong na Pahina';
 $s_custom_field_display_report = 'Ipakita Kapag Nag-uulat Ng Mga Labas';
 $s_custom_field_display_update = 'Ipakita Kapag Nagsasapanahon Ng Mga Labas';
 $s_custom_field_display_resolved = 'Ipakita Kapag Lumulutas Ng Mga Labas';

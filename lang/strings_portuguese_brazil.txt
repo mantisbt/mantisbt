@@ -1005,7 +1005,6 @@ $s_custom_field_access_level_rw = 'Acesso de Escrita';
 $s_custom_field_length_min = 'Comprimento Mínimo';
 $s_custom_field_length_max = 'Comprimento Máximo';
 $s_custom_field_filter_by = 'Adicionar ao Filtro';
-$s_custom_field_advanced = 'Mostrar somente na página avançada';
 $s_custom_field_display_report = 'Mostrar ao reportar casos';
 $s_custom_field_display_update = 'Mostrar ao atualizar casos';
 $s_custom_field_display_resolved = 'Mostrar ao resolver casos';

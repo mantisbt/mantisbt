@@ -894,7 +894,6 @@ $s_custom_field_access_level_r = 'Lukuoikeus';
 $s_custom_field_access_level_rw = 'Kirjoitusoikeus';
 $s_custom_field_length_min = 'Vähimmäispituus';
 $s_custom_field_length_max = 'Enimmäispituus';
-$s_custom_field_advanced = 'Yksityiskohdat';
 $s_custom_field_display_report = 'Näytä uusien tapahtumien kirjaamisessa';
 $s_custom_field_display_update = 'Näytä tapahtumien päivityksessä';
 $s_custom_field_display_resolved = 'Näytä tapahtumien ratkaisuissa';

@@ -60,9 +60,6 @@
 		<td class="category" width="12%">
 			<?php echo lang_get( 'custom_field_default_value' ) ?>
 		</td>
-		<td class="category" width="12%">
-			<?php echo lang_get( 'custom_field_advanced' ) ?>
-		</td>
 	</tr>
 	<?php
 		$t_custom_fields = custom_field_get_ids();
@@ -85,9 +82,6 @@
 			</td>
 			<td>
 				<?php echo string_display( $t_desc['default_value'] ) ?>
-			</td>
-			<td align="center">
-				<?php echo trans_bool( $t_desc['advanced'] ) ?>
 			</td>
 		</tr>
 	<?php
