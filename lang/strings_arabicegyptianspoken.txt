@@ -397,6 +397,9 @@ $s_verify_warning = 'معلومات حسابك تم تأكيدها. رسالة �
 $s_verify_change_password = 'يجب أن تضبط كلمة سر هنا ليسمح لك بتسجيل الدخول مرة ثانية.';
 $s_default_account_preferences_title = 'تفضيلات الحساب';
 $s_default_project = 'المشروع الافتراضي';
+$s_advanced_report = 'تقرير متقدم';
+$s_advanced_view = 'عرض متقدم';
+$s_advanced_update = 'تحديث متقدم';
 $s_refresh_delay = 'تحديث التأخير';
 $s_minutes = 'دقائق';
 $s_redirect_delay = 'تحويل التأخير';
@@ -531,6 +534,7 @@ $s_steps_to_reproduce = 'الخطوات لإعادة الإنتاج';
 $s_update_information_button = 'تحديث المعلومات';
 $s_sticky_issue = 'قضية لاصقة';
 $s_profile = 'ملف';
+$s_update_advanced_link = 'تحديث متقدم';
 $s_updating_bug_simple_title = 'تحديث معلومات القضية';
 $s_vote_added_msg = 'التصويت تمت إضافته...';
 $s_bugnote_added_msg = 'الملاحظة تمت إضافتها...';
@@ -856,6 +860,7 @@ $s_assign_to = 'موكولة إلى';
 $s_additional_information = 'معلومات إضافية';
 $s_submit_report_button = 'إرسال التقرير';
 $s_check_report_more_bugs = 'اختر للإبلاغ عن مزيد من القضايا';
+$s_advanced_report_link = 'تقرير متقدم';
 $s_report_stay = 'التقرير يبقى';
 $s_selected_project = 'المشروع المختار';
 $s_valid_project_msg = 'يجب أن تختار مشروعا صحيحا';
@@ -958,11 +963,8 @@ $s_attached_files = 'الملفات الملحقة';
 $s_publish = 'نشر';
 $s_cached = 'مخزن';
 $s_add_user_to_monitor = 'أضف';
-<<<<<<< HEAD
 $s_view_advanced_link = 'عرض متقدم';
 $s_viewing_bug_simple_details_title = 'عرض تفاصيل القضية البسيطة';
-=======
->>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'لا يوجد مستخدمون يراقبون هذه القضية.';
 $s_users_monitoring_bug = 'المستخدمون الذين يراقبون هذه القضية';
 $s_monitoring_user_list = 'قائمة المستخدمين';

@@ -71,16 +71,17 @@
             will reverse the direction of the sort. The default is to sort by
             last modification time, where the last modified issue appears at the
             top. The issue id is a link that leads to a more detailed report about
-            the issue. You can also add issue notes here. The number in the
-            issue note count column will be bold if an issue note has been
-            added in the specified time frame. The addition of an issue note
-            will make the issue note link of the issue appear in the unvisited
-            state. The text in the "Severity" column will be bold if the
-            severity is major, crash, or block and the issue not resolved. The
-            text in the "Updated" column will be bold if the issue has changed
-            in the last "Changed(hrs)" field which is specified in the viewing
-            filters. Each table row is color coded according to the issue
-            status. The colors can be customised through MantisBT
+            the issue. Depending on what you have set in your Account Preferences
+            you will be sent to the simple or advanced view. You can also add
+            issue notes here.The number in the issue note count column will be bold
+            if an issue note has been added in the specified time frame. The
+            addition of an issue note will make the issue note link of the issue appear
+            in the unvisited state.The text in the "Severity" column will be
+            bold if the severity is major, crash, or block and the issue not
+            resolved.The text in the "Updated" column will be bold if the issue
+            has changed in the last "Changed(hrs)" field which is specified in
+            the viewing filters.Each table row is color coded according to the
+            issue status. The colors can be customised through MantisBT
             <ulink url="manual.configuration.html">Configuration</ulink>
             .Severitiesblock
             - prevents further work/progress from being made

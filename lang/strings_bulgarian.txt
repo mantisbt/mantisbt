@@ -358,6 +358,9 @@ $s_verify_warning = 'Данните от профила са проверени.
 $s_verify_change_password = 'Изисква се въвеждането на парола за обратен достъп до системата.';
 $s_default_account_preferences_title = 'Настройки на профил';
 $s_default_project = 'Проект';
+$s_advanced_report = 'Разширена информация';
+$s_advanced_view = 'Разширен изглед';
+$s_advanced_update = 'Разширено обновяване';
 $s_refresh_delay = 'Автоматично опресняване';
 $s_minutes = 'минути';
 $s_redirect_delay = 'Автоматично пренасочване';
@@ -488,6 +491,7 @@ $s_steps_to_reproduce = 'Стъпки за възпроизвеждане';
 $s_update_information_button = 'Обновяване на информацията';
 $s_sticky_issue = 'Проблематичен';
 $s_profile = 'Профил';
+$s_update_advanced_link = 'Обновяване с разширен формуляр';
 $s_updating_bug_simple_title = 'Обновяване на информацията за проблем';
 $s_all_revisions = 'Всички версии';
 $s_vote_added_msg = 'Добавена е бележка...';
@@ -778,6 +782,7 @@ $s_assign_to = 'Назначаване на';
 $s_additional_information = 'Допълнителна информация';
 $s_submit_report_button = 'Изпращане';
 $s_check_report_more_bugs = 'Маркирайте, ако искате да съобщите за повече грешки';
+$s_advanced_report_link = 'Разширен формуляр';
 $s_report_stay = 'Още грешки';
 $s_selected_project = 'Избран проект';
 $s_valid_project_msg = 'Изберете валиден проект';
@@ -872,11 +877,8 @@ $s_attached_files = 'Прикрепени файлове';
 $s_publish = 'Публикуване';
 $s_cached = 'Кеширан';
 $s_add_user_to_monitor = 'Добавяне';
-<<<<<<< HEAD
 $s_view_advanced_link = 'Разширен изглед';
 $s_viewing_bug_simple_details_title = 'Опростен изглед на проблем';
-=======
->>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'Няма потребители, наблюдаващи този проблем.';
 $s_users_monitoring_bug = 'Потребители, наблюдаващи този проблем';
 $s_monitoring_user_list = 'Списък с потребители';

@@ -341,6 +341,9 @@ $s_access_level = '접근 레벨';
 $s_update_user_button = '정보 갱신';
 $s_default_account_preferences_title = '기본 계정 설정상태';
 $s_default_project = '기본 프로젝트';
+$s_advanced_report = '상세 보고';
+$s_advanced_view = '자세히 보기';
+$s_advanced_update = '상세한 업데이트';
 $s_refresh_delay = '새로 고침 간격';
 $s_redirect_delay = '리다이렉트 간격';
 $s_with_minimum_severity = '최소한 다음의 경우에 :';
@@ -454,6 +457,7 @@ $s_summary = '요약';
 $s_description = '설 명';
 $s_steps_to_reproduce = '재발생 단계';
 $s_update_information_button = '정보사항 변경';
+$s_update_advanced_link = '상세정보 갱신화면';
 $s_updating_bug_simple_title = '벌레 정보 갱신';
 $s_vote_added_msg = '투표수 추가...';
 $s_bugnote_added_msg = '이슈노트 추가...';
@@ -702,6 +706,7 @@ $s_assign_to = '할당하기';
 $s_additional_information = '추가 정보 사항';
 $s_submit_report_button = '보고서 제출';
 $s_check_report_more_bugs = '이슈 보고를 계속 하려면 선택';
+$s_advanced_report_link = '상세 보고';
 $s_report_stay = '계속 보고';
 $s_selected_project = '현재 프로젝트';
 $s_valid_project_msg = '올바른 프로젝트를 선택해야 합니다.';
@@ -793,11 +798,8 @@ $s_move_bug_button = '이슈 이동';
 $s_attached_files = '첨부 파일';
 $s_publish = '출판';
 $s_cached = '캐시됨';
-<<<<<<< HEAD
 $s_view_advanced_link = '자세히 보기';
 $s_viewing_bug_simple_details_title = '간략히 보기';
-=======
->>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = '이 이슈를 감시하는 사용자가 없습니다.';
 $s_users_monitoring_bug = '이 이슈를 감시하는 사용자들';
 $s_monitoring_user_list = '사용자 목록';

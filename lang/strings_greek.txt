@@ -181,6 +181,9 @@ $s_verify_warning = 'Οι πληροφορίες του λογαριασμού �
 $s_verify_change_password = 'Είναι απαραίτητο να ορίσετε κωδικό εδώ, για να μπορείτε να συνδεθείτε ξανά.';
 $s_default_account_preferences_title = 'Επιλογές λογαριασμού';
 $s_default_project = 'Προεπιλεγμένη Εφαρμογή';
+$s_advanced_report = 'Σύνθετη Αναφορά';
+$s_advanced_view = 'Σύνθετη Προβολή';
+$s_advanced_update = 'Σύνθετη Ενημέρωση';
 $s_refresh_delay = 'Συχνότητα Ανανέωσης';
 $s_redirect_delay = 'Συχνότητα Αναδρομολόγησης';
 $s_with_minimum_severity = 'Με Ελάχιστη Διαβάθμιση σε';
@@ -294,6 +297,7 @@ $s_steps_to_reproduce = 'Βήματα για Αναπαραγωγή';
 $s_update_information_button = 'Ενήμερωση Πληροφοριών';
 $s_sticky_issue = 'Θέμα Στο Προσκήνιο';
 $s_profile = 'Προφίλ';
+$s_update_advanced_link = 'Ανανέωση Σύνθετου';
 $s_updating_bug_simple_title = 'Ενημέρωση Πληροφοριών Θέματος';
 $s_vote_added_msg = 'Η Ψήφος προστέθηκε...';
 $s_bugnote_added_msg = 'Η Σημείωση προστέθηκε...';
@@ -532,6 +536,7 @@ $s_assign_to = 'Ανάθεση σε';
 $s_additional_information = 'Πρόσθετες Πληροφορίες';
 $s_submit_report_button = 'Αποστολή Αναφοράς';
 $s_check_report_more_bugs = 'επιλέξτε για περισσότερες αναφορές';
+$s_advanced_report_link = 'Σύνθετη Αναφορά';
 $s_report_stay = 'Παραμονή στις Αναφορές';
 $s_selected_project = 'Επιλεγμένη Εφαρμογή';
 $s_valid_project_msg = 'Πρέπει να επιλέξετε ισχύουσα εφαρμογή';
@@ -620,11 +625,8 @@ $s_reopen_bug_button = 'Επανεξέταση Θέματος';
 $s_move_bug_button = 'Μετακίνηση Θέματος';
 $s_attached_files = 'Συννημένα Αρχεία';
 $s_publish = 'Δημοσίευση';
-<<<<<<< HEAD
 $s_view_advanced_link = 'Προβολή Σύνθετης';
 $s_viewing_bug_simple_details_title = 'Προβολή Θεμάτων σε Απλή Αναφορά';
-=======
->>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'Δεν υπάρχουν χρήστες να παρακολουθούν το Θέμα.';
 $s_users_monitoring_bug = 'Χρήστες που παρακολουθούν το Θέμα';
 $s_monitoring_user_list = 'Λίστα Χρηστών';

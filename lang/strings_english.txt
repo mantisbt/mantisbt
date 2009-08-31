@@ -449,6 +449,9 @@ $s_verify_change_password = 'You must set a password here to allow you to log in
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Account Preferences';
 $s_default_project = 'Default Project';
+$s_advanced_report = 'Advanced Report';
+$s_advanced_view = 'Advanced View';
+$s_advanced_update = 'Advanced Update';
 $s_refresh_delay = 'Refresh Delay';
 $s_minutes = 'minutes';
 $s_redirect_delay = 'Redirect Delay';
@@ -650,6 +653,7 @@ $s_sticky_issue = 'Sticky Issue';
 $s_profile = 'Profile';
 
 # bug_update_page.php
+$s_update_advanced_link = 'Update Advanced';
 $s_updating_bug_simple_title = 'Updating Issue Information';
 
 # bug_view*
@@ -1143,6 +1147,7 @@ $s_submit_report_button = 'Submit Report';
 $s_check_report_more_bugs = 'check to report more issues';
 
 # report_bug_page.php
+$s_advanced_report_link = 'Advanced Report';
 $s_report_stay = 'Report Stay';
 
 # set_project.php
@@ -1271,6 +1276,7 @@ $s_add_user_to_monitor = 'Add';
 # view_bug_inc.php
 
 # view_bug_page.php
+$s_view_advanced_link = 'View Advanced';
 $s_bug_view_title = 'View Issue Details';
 
 # bug_monitor_list_view_inc.php

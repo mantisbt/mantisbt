@@ -60,6 +60,9 @@
 		$t_prefs->language = $t_lang;
 	}
 
+	$t_prefs->advanced_report	= gpc_get_bool( 'advanced_report' );
+	$t_prefs->advanced_view		= gpc_get_bool( 'advanced_view' );
+	$t_prefs->advanced_update	= gpc_get_bool( 'advanced_update' );
 	$t_prefs->email_on_new		= gpc_get_bool( 'email_on_new' );
 	$t_prefs->email_on_assigned	= gpc_get_bool( 'email_on_assigned' );
 	$t_prefs->email_on_feedback	= gpc_get_bool( 'email_on_feedback' );

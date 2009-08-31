@@ -31,6 +31,9 @@
 class UserPreferences {
 	protected $default_profile = NULL;
 	protected $default_project = NULL;
+	protected $advanced_report = NULL;
+	protected $advanced_view = NULL;
+	protected $advanced_update = NULL;
 	protected $refresh_delay = NULL;
 	protected $redirect_delay = NULL;
 	protected $bugnote_order = NULL;
@@ -62,6 +65,9 @@ class UserPreferences {
 	private static $default_mapping = array(
 	'default_profile' => 'default_profile',
 	'default_project' => 'default_project',
+	'advanced_report' => 'default_advanced_report',
+	'advanced_view' => 'default_advanced_view',
+	'advanced_update' => 'default_advanced_update',
 	'refresh_delay' => 'default_refresh_delay',
 	'redirect_delay' => 'default_redirect_delay',
 	'bugnote_order' => 'default_bugnote_order',

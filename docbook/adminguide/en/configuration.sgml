@@ -1173,6 +1173,30 @@
         </para>
         <variablelist>
             <varlistentry>
+                <term>$g_default_advanced_report</term>
+                <listitem>
+                    <para>Default user preferences to use the advanced page for
+                        reporting bugs. Default is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_advanced_view</term>
+                <listitem>
+                    <para>Default user preferences to use the advanced page for view
+                        bugs. Default value is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_advanced_update</term>
+                <listitem>
+                    <para>Default user preferences to use the advanced page for
+                        updating bugs. Default value is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_default_refresh_delay</term>
                 <listitem>
                     <para>Default page refresh delay (in minutes). This is for the bug

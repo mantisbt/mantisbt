@@ -408,6 +408,9 @@ $s_verify_warning = 'Kontoinformasjonen har blitt verifisert. Meldingen du har f
 $s_verify_change_password = 'Du må angi et passord for at du skal kunne logge deg inn igjen.';
 $s_default_account_preferences_title = 'Standard kontoinnstillinger';
 $s_default_project = 'Standardprosjekt';
+$s_advanced_report = 'Avansert rapport';
+$s_advanced_view = 'Avansert visning';
+$s_advanced_update = 'Avansert oppdatering';
 $s_refresh_delay = 'Forsinkelse på oppfriskning';
 $s_minutes = 'minutter';
 $s_redirect_delay = 'Forsinkelse på redirigering';
@@ -543,6 +546,7 @@ $s_steps_to_reproduce = 'Steg for å reprodusere';
 $s_update_information_button = 'Oppdater informasjon';
 $s_sticky_issue = 'Fastlåst sak';
 $s_profile = 'Profil';
+$s_update_advanced_link = 'Oppdater avansert';
 $s_updating_bug_simple_title = 'Oppdaterer saksinformasjon';
 $s_view_revisions = 'Vis Revisjoner';
 $s_revision = 'Revisjon';
@@ -880,6 +884,7 @@ $s_assign_to = 'Deleger til';
 $s_additional_information = 'Tilleggsinformasjon';
 $s_submit_report_button = 'Legg inn rapport';
 $s_check_report_more_bugs = 'Kryss av for å legge inn flere saker fortløpende';
+$s_advanced_report_link = 'Avansert rapport';
 $s_report_stay = 'Rapportere flere saker';
 $s_selected_project = 'Valgt prosjekt';
 $s_valid_project_msg = 'Du må velge et gyldig prosjekt';
@@ -982,11 +987,8 @@ $s_attached_files = 'Filvedlegg';
 $s_publish = 'Publisere';
 $s_cached = 'Midlertidig lagret';
 $s_add_user_to_monitor = 'Legge til';
-<<<<<<< HEAD
 $s_view_advanced_link = 'Vis avansert';
 $s_viewing_bug_simple_details_title = 'Oversikt over saker - enkel';
-=======
->>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'Ingen brukere overvåker denne saken.';
 $s_users_monitoring_bug = 'Brukere som overvåker denne saken';
 $s_monitoring_user_list = 'Brukerliste';

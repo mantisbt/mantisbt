@@ -426,6 +426,9 @@ $s_verify_change_password = 'Sie müssen hier ein Passwort vergeben, um sich wie
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Kontoeinstellungen';
 $s_default_project = 'Standard-Projekt';
+$s_advanced_report = 'Erweiterter Bericht';
+$s_advanced_view = 'Erweiterte Darstellung';
+$s_advanced_update = 'Erweitertes Update';
 $s_refresh_delay = 'Aktualisierungsverzögerung';
 $s_redirect_delay = 'Verzögerung für Weiterleitung';
 $s_with_minimum_severity = 'mit mindestens Schweregrad';
@@ -620,6 +623,7 @@ $s_sticky_issue = 'Fixierter Eintrag';
 $s_profile = 'Profil';
 
 # bug_update_page.php
+$s_update_advanced_link = 'erweiterte Aktualisierung';
 $s_updating_bug_simple_title = 'Eintragsinformation aktualisieren';
 
 # bug_vote_add.php
@@ -1063,6 +1067,7 @@ $s_submit_report_button = 'Bericht absenden';
 $s_check_report_more_bugs = 'auswählen, um weitere Einträge zu melden';
 
 # report_bug_page.php
+$s_advanced_report_link = 'Erweiterter Bericht';
 $s_report_stay = 'Im Eingabemodus bleiben';
 
 # set_project.php
@@ -1189,6 +1194,7 @@ $s_cached = 'Zwischengespeichert';
 # view_bug_inc.php
 
 # view_bug_page.php
+$s_view_advanced_link = 'erweiterte Anzeige';
 $s_viewing_bug_simple_details_title = 'einfache Eintragsansicht';
 
 # bug_monitor_list_view_inc.php

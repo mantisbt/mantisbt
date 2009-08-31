@@ -323,6 +323,9 @@ $s_access_level = 'Úroveň prístupu';
 $s_update_user_button = 'Aktualizovať používateľa';
 $s_default_account_preferences_title = 'Nastavenia účtu';
 $s_default_project = 'Defaultný projekt';
+$s_advanced_report = 'Rozšírený report';
+$s_advanced_view = 'Rozšírený pohľad';
+$s_advanced_update = 'Rozšírená aktualizácia';
 $s_refresh_delay = 'Interval pre refresh';
 $s_minutes = 'minúty';
 $s_redirect_delay = 'Pauza pre presmerovanie';
@@ -435,6 +438,7 @@ $s_summary = 'Zhrnutie';
 $s_description = 'Popis';
 $s_steps_to_reproduce = 'Kroky k vyvolaniu';
 $s_update_information_button = 'Uložit';
+$s_update_advanced_link = 'Rozšírená aktualizácia';
 $s_updating_bug_simple_title = 'Aktualizácia problému';
 $s_vote_added_msg = 'Hlas bol pridaný...';
 $s_bugnote_added_msg = 'Poznámka k problému bola pridaná...';
@@ -623,6 +627,7 @@ $s_assign_to = 'Priradený';
 $s_additional_information = 'Dalšie informácie';
 $s_submit_report_button = 'Uložiť';
 $s_check_report_more_bugs = 'zaškrtnutím vložíte viacero problémov';
+$s_advanced_report_link = 'Rozšírený report';
 $s_report_stay = 'Zostať v reporte';
 $s_selected_project = 'Vyber projekt';
 $s_valid_project_msg = 'Musíte vybrať platný projekt';
@@ -710,11 +715,8 @@ $s_move_bug_button = 'Presunúť problém';
 $s_attached_files = 'Pripojené súbory';
 $s_publish = 'Poblikovať';
 $s_cached = 'V medzipamäti';
-<<<<<<< HEAD
 $s_view_advanced_link = 'Rozšírené';
 $s_viewing_bug_simple_details_title = 'Základné podrobnosti problému';
-=======
->>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'žiadny užívateľ nesleduje tento problém.';
 $s_users_monitoring_bug = 'Uživatelia sledujú tento problém';
 $s_monitoring_user_list = 'Uživatelia';

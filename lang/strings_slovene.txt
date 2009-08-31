@@ -266,6 +266,9 @@ $s_access_level = 'Nivo dostopa';
 $s_update_user_button = 'Posodobi uporabnika';
 $s_default_account_preferences_title = 'Nastavitve računa';
 $s_default_project = 'Privzeti projekt';
+$s_advanced_report = 'Napredno poročilo';
+$s_advanced_view = 'Napredni pogled';
+$s_advanced_update = 'Napredna posodobitev';
 $s_refresh_delay = 'Osvežitev čez';
 $s_redirect_delay = 'Preusmeritev čez';
 $s_with_minimum_severity = 'z najmanjšo resnostjo';
@@ -356,6 +359,7 @@ $s_summary = 'Povzetek';
 $s_description = 'Opis';
 $s_steps_to_reproduce = 'Koraki za ponovitev';
 $s_update_information_button = 'Posodobi informacije';
+$s_update_advanced_link = 'Napredno posodabljanje';
 $s_updating_bug_simple_title = 'Posodabljam zadevo';
 $s_vote_added_msg = 'Glas je bil dodan...';
 $s_bugnote_added_msg = 'Beležka dodana...';
@@ -543,6 +547,7 @@ $s_assign_to = 'Dodeli';
 $s_additional_information = 'Dodatne informacije';
 $s_submit_report_button = 'Sporoči zadevo';
 $s_check_report_more_bugs = 'odkljukajte, če želite sporočiti še več zadev';
+$s_advanced_report_link = 'Napredno poročilo';
 $s_report_stay = 'Ostani na poročilu';
 $s_selected_project = 'Izbran projekt';
 $s_valid_project_msg = 'Izbrati morate veljaven projekt';
@@ -621,11 +626,8 @@ $s_move_bug_button = 'Premakni';
 $s_attached_files = 'Dodane datoteke';
 $s_publish = 'Objavi';
 $s_cached = 'Predpomnjen';
-<<<<<<< HEAD
 $s_view_advanced_link = 'Napreden pogled';
 $s_viewing_bug_simple_details_title = 'Podrobnosti zahteve';
-=======
->>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
 $s_no_users_monitoring_bug = 'Noben uporabnik ne opazuje te zadeve.';
 $s_users_monitoring_bug = 'To zadevo opazujejo uporabniki';
 $s_monitoring_user_list = 'Seznam uporabnikov';

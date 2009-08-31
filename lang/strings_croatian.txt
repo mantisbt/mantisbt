@@ -98,6 +98,9 @@ $s_access_level = 'Razina pristupa';
 $s_update_user_button = 'Ažuriraj korisnika';
 $s_default_account_preferences_title = 'Korisničke preference';
 $s_default_project = 'Polazni Projekt';
+$s_advanced_report = 'Napredno izvješće';
+$s_advanced_view = 'Napredni pregled';
+$s_advanced_update = 'Napredno ažuriranje';
 $s_refresh_delay = 'Vrijeme između obnavljanja';
 $s_redirect_delay = 'Vrijeme prije redirekcije';
 $s_bugnote_order = 'Bugnotes Sort Order';
@@ -179,6 +182,7 @@ $s_summary = 'Sažetak';
 $s_description = 'Opis';
 $s_steps_to_reproduce = 'Koraci za reproduciranje';
 $s_update_information_button = 'Ažuriraj informaciju';
+$s_update_advanced_link = 'Ažuriraj napredno';
 $s_updating_bug_simple_title = 'Ažuriram informacije o bugu';
 $s_vote_added_msg = 'Glas je dodan...';
 $s_bugnote_added_msg = 'Bilješka dodana...';
@@ -347,6 +351,7 @@ $s_assign_to = 'Dodijeli';
 $s_additional_information = 'Dodatna infomacija';
 $s_submit_report_button = 'Podnesi izvješće';
 $s_check_report_more_bugs = 'označi za prijavu više bugova';
+$s_advanced_report_link = 'Napredno izvješće';
 $s_report_stay = 'Izvješće ostaje';
 $s_selected_project = 'Odabrani projekt';
 $s_valid_project_msg = 'Morate odabrati valjan projekt';
@@ -393,8 +398,5 @@ $s_system_profile = 'Opis sustava';
 $s_update_bug_button = 'Ažuriraj bug';
 $s_reopen_bug_button = 'Ponovno otvori bug';
 $s_attached_files = 'Pridružene datoteke';
-<<<<<<< HEAD
 $s_view_advanced_link = 'Vidi napredno';
 $s_viewing_bug_simple_details_title = 'Pregled jednostavnih detalja buga';
-=======
->>>>>>> 7c89108... Fix #10890: Remove all references to advanced view/update/report pages
