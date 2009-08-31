@@ -357,7 +357,7 @@ function user_is_administrator( $p_user_id ) {
  * @access public
  */
 function user_is_protected( $p_user_id ) {
-	if( !user_is_anonymous( $p_user_id ) && ON == user_get_field( $p_user_id, 'protected' ) ) {
+	if( user_is_anonymous( $p_user_id ) || ON == user_get_field( $p_user_id, 'protected' ) ) {
 		return true;
 	}
 	return false;
