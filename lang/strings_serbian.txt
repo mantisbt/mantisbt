@@ -694,7 +694,6 @@ $s_custom_field_access_level_r = 'Pristup za citanje';
 $s_custom_field_access_level_rw = 'Pristup za pisanje';
 $s_custom_field_length_min = 'Min. duzina';
 $s_custom_field_length_max = 'Max. duzina';
-$s_custom_field_advanced = 'napredne opcije';
 $s_custom_field_display_report = 'Prikazi prilikom prijave greske';
 $s_custom_field_display_update = 'Prikazi prilikom izmene greske';
 $s_custom_field_display_resolved = 'Prikazi prilikom resenja greske';

@@ -906,7 +906,6 @@ $s_custom_field_access_level_r = 'Olvasási hozzáférés';
 $s_custom_field_access_level_rw = 'Írási hozzáférés';
 $s_custom_field_length_min = 'Min. hossz';
 $s_custom_field_length_max = 'Max. hossz';
-$s_custom_field_advanced = 'Megjelenítés csak haladó nézetben';
 $s_custom_field_display_report = 'Megjelenítés ügy bejelentésekor';
 $s_custom_field_display_update = 'Megjelenítés ügy frissítésekor';
 $s_custom_field_display_resolved = 'Megjelenítés ügy megoldásakor';

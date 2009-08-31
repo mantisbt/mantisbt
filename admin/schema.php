@@ -595,3 +595,4 @@ $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_file_ta
 	user_id			I		UNSIGNED NOTNULL DEFAULT '0' " ) );
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_file_table' ), "
 	user_id		I  			UNSIGNED NOTNULL DEFAULT '0' " ) );
+$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_custom_field_table'), "advanced" ) );

@@ -1012,7 +1012,6 @@ $s_custom_field_access_level_rw = 'Oprávnění k zápisu';
 $s_custom_field_length_min = 'Min. délka';
 $s_custom_field_length_max = 'Max. délka';
 $s_custom_field_filter_by = 'Přidat k filtru';
-$s_custom_field_advanced = 'Zobrazit jen na stránce Rozšířené';
 $s_custom_field_display_report = 'Zobrazit při reportování problému';
 $s_custom_field_display_update = 'Zobrazit při aktualizaci problému';
 $s_custom_field_display_resolved = 'Zobrazit při vyřešení problému';

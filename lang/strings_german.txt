@@ -1027,7 +1027,6 @@ $s_custom_field_access_level_rw = 'Berechtigung Schreiben';
 $s_custom_field_length_min = 'Mindestlänge';
 $s_custom_field_length_max = 'Maximallänge';
 $s_custom_field_filter_by = 'Zum Filter hinzufügen';
-$s_custom_field_advanced = 'Erweitert';
 $s_custom_field_display_report = 'Bei Problemeingabe anzeigen';
 $s_custom_field_display_update = 'Bei Problemaktualisierung anzeigen';
 $s_custom_field_display_resolved = 'Beim Erledigen anzeigen';

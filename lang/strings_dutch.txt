@@ -1019,7 +1019,6 @@ $s_custom_field_access_level_rw = 'Schrijftoegang';
 $s_custom_field_length_min = 'Minimale lengte';
 $s_custom_field_length_max = 'Maximale lengte';
 $s_custom_field_filter_by = 'Aan filter toevoegen';
-$s_custom_field_advanced = 'Alleen in uitgebreide weergave weergeven';
 $s_custom_field_display_report = 'Weergeven bij aanmelden';
 $s_custom_field_display_update = 'Weergeven bij aanpassen';
 $s_custom_field_display_resolved = 'Weergeven bij afmelden';

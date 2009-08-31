@@ -996,7 +996,6 @@ $s_custom_field_access_level_rw = 'הרשאת כתיבה';
 $s_custom_field_length_min = 'אורך מינמלי';
 $s_custom_field_length_max = 'אורך מקסימלי';
 $s_custom_field_filter_by = 'להוסיף למסנן';
-$s_custom_field_advanced = 'הצגה רק במצב מפורט';
 $s_custom_field_display_report = 'הצגה בדיווח באג';
 $s_custom_field_display_update = 'הצגה בעדכון באג';
 $s_custom_field_display_resolved = 'הצגה בפתרון באג';

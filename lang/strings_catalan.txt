@@ -1005,7 +1005,6 @@ $s_custom_field_access_level_rw = 'Accés d\'escriptura';
 $s_custom_field_length_min = 'Long. Mínima';
 $s_custom_field_length_max = 'Long. Màxima';
 $s_custom_field_filter_by = 'Afegeix al Filtre';
-$s_custom_field_advanced = 'Mostra Només en Vista Avançada';
 $s_custom_field_display_report = 'Mostra a l\'informar comandes';
 $s_custom_field_display_update = 'Mostra a l\'actualitzar comandes';
 $s_custom_field_display_resolved = 'Mostra al resoldre comandes';

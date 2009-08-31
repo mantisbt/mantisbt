@@ -801,7 +801,6 @@ $s_custom_field_access_level_r = 'Læse-rettighed';
 $s_custom_field_access_level_rw = 'Skrive-rettighed';
 $s_custom_field_length_min = 'Min. længde';
 $s_custom_field_length_max = 'Maks. længde';
-$s_custom_field_advanced = 'Avanceret';
 $s_custom_field_display_report = 'Vis når fejl rapporteres';
 $s_custom_field_display_update = 'Vis når fejl opdateres';
 $s_custom_field_display_resolved = 'Vis når fejl løses';

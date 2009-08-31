@@ -43,7 +43,6 @@
 	$t_values['access_level_rw']	= gpc_get_int( 'access_level_rw' );
 	$t_values['length_min']			= gpc_get_int( 'length_min' );
 	$t_values['length_max']			= gpc_get_int( 'length_max' );
-	$t_values['advanced']			= gpc_get_bool( 'advanced' );
 	$t_values['display_report']		= gpc_get_bool( 'display_report' );
 	$t_values['display_update']		= gpc_get_bool( 'display_update' );
 	$t_values['display_resolved']	= gpc_get_bool( 'display_resolved' );

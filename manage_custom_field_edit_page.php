@@ -143,14 +143,6 @@
         </tr>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td class="category">
-				<?php echo lang_get( 'custom_field_advanced' ) ?>
-			</td>
-			<td>
-				<input type="checkbox" name="advanced" value="1" <?php check_checked( $t_definition['advanced'] ) ?> />
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
 				<?php echo lang_get( 'custom_field_display_report' ) ?>
 			</td>
 			<td>

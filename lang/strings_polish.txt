@@ -1011,7 +1011,6 @@ $s_custom_field_access_level_rw = 'Prawo zapisu';
 $s_custom_field_length_min = 'Min. długość';
 $s_custom_field_length_max = 'Maks. długość';
 $s_custom_field_filter_by = 'Dodaj do filtru';
-$s_custom_field_advanced = 'Zaawansowane';
 $s_custom_field_display_report = 'Zamieść w raporcie dla zgłoszenia';
 $s_custom_field_display_update = 'Wyświetlaj przy aktualizacji zgłoszenia';
 $s_custom_field_display_resolved = 'Wyświetlaj przy rozwiązywaniu zgłoszenia';

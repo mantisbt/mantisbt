@@ -851,7 +851,6 @@ $s_custom_field_access_level_r = '可讀權限';
 $s_custom_field_access_level_rw = '可寫權限';
 $s_custom_field_length_min = '最小長度';
 $s_custom_field_length_max = '最大長度';
-$s_custom_field_advanced = '進階頁面顯示';
 $s_custom_field_display_report = '回報問題時顯示';
 $s_custom_field_display_update = '更改問題時顯示';
 $s_custom_field_display_resolved = '解決問題時顯示';

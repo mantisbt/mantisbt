@@ -749,7 +749,6 @@ $s_custom_field_access_level_r = 'Право читання';
 $s_custom_field_access_level_rw = 'Право запису';
 $s_custom_field_length_min = 'Мінімальна довжина';
 $s_custom_field_length_max = 'Максимальна довжина';
-$s_custom_field_advanced = 'Показувати тільки в детальному перегляді';
 $s_custom_field_display_report = 'Показувати у вікні нової проблеми';
 $s_custom_field_display_update = 'Показувати у вікні редагування проблеми';
 $s_custom_field_display_resolved = 'Показувати у вікні вирішення проблеми';

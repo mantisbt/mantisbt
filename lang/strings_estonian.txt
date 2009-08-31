@@ -863,7 +863,6 @@ $s_custom_field_access_level_r = 'Lugemisõigus';
 $s_custom_field_access_level_rw = 'Kirjutamisõigus';
 $s_custom_field_length_min = 'Min. pikkus';
 $s_custom_field_length_max = 'Max. pikkus';
-$s_custom_field_advanced = 'Detailne';
 $s_custom_field_display_report = 'Kuva, kui kannete registreerimine';
 $s_custom_field_display_update = 'Kuva, kui kannete uuendamine';
 $s_custom_field_display_resolved = 'Kuva, kui kannete lahendamine';

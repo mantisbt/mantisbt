@@ -908,7 +908,6 @@ $s_custom_field_access_level_r = '读权限';
 $s_custom_field_access_level_rw = '写权限';
 $s_custom_field_length_min = '最小长度';
 $s_custom_field_length_max = '最大长度';
-$s_custom_field_advanced = '高级';
 $s_custom_field_display_report = '在创建问题时显示';
 $s_custom_field_display_update = '在更新问题时显示';
 $s_custom_field_display_resolved = '解决问题时显示';

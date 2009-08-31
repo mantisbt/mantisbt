@@ -837,7 +837,6 @@ $s_custom_field_access_level_r = 'Lesaðgangur';
 $s_custom_field_access_level_rw = 'Skrifaðgangur';
 $s_custom_field_length_min = 'Lágmarks lengd';
 $s_custom_field_length_max = 'Hámarks lengd';
-$s_custom_field_advanced = 'Sýna aðeins á hærra stigi';
 $s_custom_field_display_report = 'Sýna þegar beiðni er tilkynnt';
 $s_custom_field_display_update = 'Sýna þegar beiðni er uppfærð';
 $s_custom_field_display_resolved = 'Sýna þegar beiðni er leyst';

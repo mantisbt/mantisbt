@@ -659,7 +659,6 @@ $s_custom_field_access_level_r = 'Acesso de Leitura';
 $s_custom_field_access_level_rw = 'Acesso de Escrita';
 $s_custom_field_length_min = 'Comprimento Mínimo';
 $s_custom_field_length_max = 'Comprimento Máximo';
-$s_custom_field_advanced = 'Avançado ?';
 $s_custom_field_sequence = 'Sequência';
 $s_field_delete_button = 'Apagar Field';
 $s_hide_status = 'Não Visualizar Bugs...';
