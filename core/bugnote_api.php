@@ -183,6 +183,9 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	# log new bug
 	history_log_event_special( $p_bug_id, BUGNOTE_ADDED, bugnote_format_id( $t_bugnote_id ) );
 
+	# Event integration
+	event_signal( 'EVENT_BUGNOTE_ADD', array( $p_bug_id, $t_bugnote_id ) );
+
 	# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
 	if( TRUE == $p_send_email && !is_blank( $p_bugnote_text ) ) {
 		email_bugnote_add( $p_bug_id );

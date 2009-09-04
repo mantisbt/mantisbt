@@ -59,9 +59,6 @@
         trigger_error( ERROR_EMPTY_FIELD, ERROR );
     }
 
-	# Event integration
-	event_signal( 'EVENT_BUGNOTE_ADD', array( $f_bug_id, $t_bugnote_id ) );
-
 	form_security_purge( 'bugnote_add' );
 
 	print_successful_redirect_to_bug( $f_bug_id );
