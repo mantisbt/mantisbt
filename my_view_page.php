@@ -114,14 +114,14 @@
 				# for even box number start new row and column
 				if ( 1 == $t_counter%2 ) {
 					echo '<tr><td valign="top" width="50%">';
-					include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
+					include 'my_view_inc.php';
 					echo '</td>';
 				}
 
 				# for odd box number only start new column
 				else if ( 0 == $t_counter%2 ) {
 					echo '<td valign="top" width="50%">';
-					include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
+					include 'my_view_inc.php';
 					echo '</td></tr>';
 				}
 
@@ -142,7 +142,7 @@
 				}
 
 				# display the required box
-				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
+				include 'my_view_inc.php';
 				echo '<br />';
 
 				# close the first column for first half of boxes
