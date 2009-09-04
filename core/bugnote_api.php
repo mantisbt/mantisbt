@@ -145,9 +145,14 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 		return false;
 	}
 
+	$t_bugnote_text = $p_bugnote_text;
+
+	# Event integration
+	$t_bugnote_text = event_signal( 'EVENT_BUGNOTE_DATA', $t_bugnote_text );
+
 	# insert bugnote text
 	$query = 'INSERT INTO ' . $t_bugnote_text_table . ' ( note ) VALUES ( ' . db_param() . ' )';
-	db_query_bound( $query, Array( $p_bugnote_text ) );
+	db_query_bound( $query, Array( $t_bugnote_text ) );
 
 	# retrieve bugnote text id number
 	$t_bugnote_text_id = db_insert_id( $t_bugnote_text_table );
@@ -187,7 +192,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	event_signal( 'EVENT_BUGNOTE_ADD', array( $p_bug_id, $t_bugnote_id ) );
 
 	# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
-	if( TRUE == $p_send_email && !is_blank( $p_bugnote_text ) ) {
+	if( TRUE == $p_send_email && !is_blank( $t_bugnote_text ) ) {
 		email_bugnote_add( $p_bug_id );
 	}
 
