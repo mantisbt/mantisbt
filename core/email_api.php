@@ -61,12 +61,11 @@ require_once( 'relationship_api.php' );
  * Use a simple perl regex for valid email addresses.  This is not a complete regex,
  * as it does not cover quoted addresses or domain literals, but it is simple and
  * covers the vast majority of all email addresses without being overly complex.
- * Callers must surround this with appropriate delimiters with case insentive options.
  * @return string
  */
 function email_regex_simple() {
-	return "(([a-z0-9!#*+\/=?^_{|}~-]+(?:\.[a-z0-9!#*+\/=?^_{|}~-]+)*)" . 				# recipient
-			"\@((?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?))";	# @domain
+	return "/(([a-z0-9!#*+\/=?^_{|}~-]+(?:\.[a-z0-9!#*+\/=?^_{|}~-]+)*)" . 				# recipient
+			"\@((?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?))/i";	# @domain
 }
 
 /**
