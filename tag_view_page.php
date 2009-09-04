@@ -51,7 +51,7 @@
 
 	</td>
 	<td class="right" colspan="3">
-		<?php print_bracket_link( 'search.php?hide_status_id=90&amp;tag_string='.urlencode($t_tag_row['name']), sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ) ); ?>
+		<?php print_bracket_link( 'search.php?tag_string='.urlencode($t_tag_row['name']), sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ) ); ?>
 	</td>
 </tr>
 
@@ -99,7 +99,7 @@
 			echo ( $i > 0 ? '<tr '.helper_alternate_class().'>' : '' );
 			echo "<td><a href='tag_view_page.php?tag_id=$t_tag[id]' title='$t_description'>$t_name</a></td>\n";
 			echo '<td colspan="3">';
-			print_bracket_link( 'search.php?hide_status_id=90&amp;tag_string='.urlencode("+$t_tag_row[name]".config_get('tag_separator')."+$t_name"), sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ) );
+			print_bracket_link( 'search.php?tag_string='.urlencode("+$t_tag_row[name]".config_get('tag_separator')."+$t_name"), sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ) );
 			echo '</td></tr>';
 
 			$i++;
