@@ -72,10 +72,11 @@
 	$tpl_show_resolution = in_array( BUG_FIELD_RESOLUTION, $t_fields );
 	$tpl_show_projection = in_array( BUG_FIELD_PROJECTION, $t_fields );
 	$tpl_show_eta = in_array( BUG_FIELD_ETA, $t_fields );
-	$tpl_show_product_version = in_array( BUG_FIELD_PRODUCT_VERSION, $t_fields ) && version_should_show_product_version( $tpl_bug->project_id );
-	$tpl_show_product_build = $tpl_show_product_version && in_array( BUG_FIELD_PRODUCT_BUILD, $t_fields ) && config_get( 'enable_product_build' );
-	$tpl_show_fixed_in_version = $tpl_show_product_version && in_array( BUG_FIELD_FIXED_IN_VERSION, $t_fields );
-	$tpl_show_target_version = $tpl_show_product_version && in_array( BUG_FIELD_TARGET_VERSION, $t_fields ) && access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
+	$tpl_show_versions = version_should_show_product_version( $tpl_bug->project_id );
+	$tpl_show_product_version = $tpl_show_versions && in_array( BUG_FIELD_PRODUCT_VERSION, $t_fields );
+	$tpl_show_product_build = $tpl_show_versions && in_array( BUG_FIELD_PRODUCT_BUILD, $t_fields ) && config_get( 'enable_product_build' );
+	$tpl_show_fixed_in_version = $tpl_show_versions && in_array( BUG_FIELD_FIXED_IN_VERSION, $t_fields );
+	$tpl_show_target_version = $tpl_show_versions && in_array( BUG_FIELD_TARGET_VERSION, $t_fields ) && access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
 	$tpl_show_summary = in_array( BUG_FIELD_SUMMARY, $t_fields );
 	$tpl_show_description = in_array( BUG_FIELD_DESCRIPTION, $t_fields );
 	$tpl_show_steps_to_reproduce = in_array( BUG_FIELD_STEPS_TO_REPRODUCE, $t_fields );

@@ -139,9 +139,10 @@
 	$tpl_show_os = in_array( BUG_FIELD_OS, $t_fields );
 	$tpl_show_os_version = in_array( BUG_FIELD_OS_VERSION, $t_fields );
 
-	$tpl_show_product_version = in_array( BUG_FIELD_PRODUCT_VERSION, $t_fields ) && version_should_show_product_version( $t_project_id );
-	$tpl_show_product_build = in_array( BUG_FIELD_PRODUCT_BUILD, $t_fields ) && $tpl_show_product_version && config_get( 'enable_product_build' ) == ON;
-	$tpl_show_target_version = in_array( BUG_FIELD_TARGET_VERSION, $t_fields ) && $tpl_show_product_version && access_has_project_level( config_get( 'roadmap_update_threshold' ) );
+	$tpl_show_versions = version_should_show_product_version( $t_project_id );
+	$tpl_show_product_version = $tpl_show_versions && in_array( BUG_FIELD_PRODUCT_VERSION, $t_fields );
+	$tpl_show_product_build = $tpl_show_versions && in_array( BUG_FIELD_PRODUCT_BUILD, $t_fields ) && config_get( 'enable_product_build' ) == ON;
+	$tpl_show_target_version = $tpl_show_versions && in_array( BUG_FIELD_TARGET_VERSION, $t_fields ) && access_has_project_level( config_get( 'roadmap_update_threshold' ) );
 	$tpl_show_additional_info = in_array( BUG_FIELD_ADDITIONAL_INFO, $t_fields );
 	$tpl_show_due_date = in_array( BUG_FIELD_DUE_DATE, $t_fields ) && access_has_project_level( config_get( 'due_date_update_threshold' ), helper_get_current_project(), auth_get_current_user_id() );
 	$tpl_show_attachments = in_array( BUG_FIELD_ATTACHMENTS, $t_fields ) && file_allow_bug_upload();

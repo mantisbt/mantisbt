@@ -71,11 +71,12 @@
 
 	$t_bugslist = gpc_get_cookie( config_get( 'bug_list_cookie' ), false );
 
-	$tpl_show_product_version = in_array( BUG_FIELD_PRODUCT_VERSION, $t_fields ) && version_should_show_product_version( $tpl_bug->project_id );
-	$tpl_show_fixed_in_version = $tpl_show_product_version && in_array( BUG_FIELD_FIXED_IN_VERSION, $t_fields );
-	$tpl_show_build = $tpl_show_product_version && in_array( BUG_FIELD_PRODUCT_BUILD, $t_fields );
+	$tpl_show_versions = version_should_show_product_version( $tpl_bug->project_id );
+	$tpl_show_product_version = $tpl_show_versions && in_array( BUG_FIELD_PRODUCT_VERSION, $t_fields );
+	$tpl_show_fixed_in_version = $tpl_show_versions && in_array( BUG_FIELD_FIXED_IN_VERSION, $t_fields );
+	$tpl_show_build = $tpl_show_versions && in_array( BUG_FIELD_PRODUCT_BUILD, $t_fields );
 	$tpl_product_build = $tpl_show_build ? string_display_line( $tpl_bug->build ) : '';
-	$tpl_show_target_version = $tpl_show_product_version && in_array( BUG_FIELD_TARGET_VERSION, $t_fields )
+	$tpl_show_target_version = $tpl_show_versions && in_array( BUG_FIELD_TARGET_VERSION, $t_fields )
 		&& access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
 
 	$tpl_product_version_string  = '';
