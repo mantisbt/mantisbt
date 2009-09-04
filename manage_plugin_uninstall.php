@@ -34,6 +34,9 @@ form_security_validate( 'manage_plugin_uninstall' );
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
+# register plugins and metadata without initializing
+plugin_register_installed();
+
 $f_basename = gpc_get_string( 'name' );
 $t_plugin = plugin_register( $f_basename, true );
 
