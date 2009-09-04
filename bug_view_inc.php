@@ -74,8 +74,9 @@
 	$tpl_show_versions = version_should_show_product_version( $tpl_bug->project_id );
 	$tpl_show_product_version = $tpl_show_versions && in_array( BUG_FIELD_PRODUCT_VERSION, $t_fields );
 	$tpl_show_fixed_in_version = $tpl_show_versions && in_array( BUG_FIELD_FIXED_IN_VERSION, $t_fields );
-	$tpl_show_build = $tpl_show_versions && in_array( BUG_FIELD_PRODUCT_BUILD, $t_fields );
-	$tpl_product_build = $tpl_show_build ? string_display_line( $tpl_bug->build ) : '';
+	$tpl_show_product_build = $tpl_show_versions && in_array( BUG_FIELD_PRODUCT_BUILD, $t_fields )
+		&& ( config_get( 'enable_product_build' ) == ON );
+	$tpl_product_build = $tpl_show_product_build ? string_display_line( $tpl_bug->build ) : '';
 	$tpl_show_target_version = $tpl_show_versions && in_array( BUG_FIELD_TARGET_VERSION, $t_fields )
 		&& access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
 
@@ -515,7 +516,7 @@
 	# Product Version, Product Build
 	#
 
-	if ( $tpl_show_product_version || $tpl_show_build ) {
+	if ( $tpl_show_product_version || $tpl_show_product_build ) {
 		$t_spacer = 2;
 
 		echo '<tr ', helper_alternate_class(), '>';
@@ -529,7 +530,7 @@
 		}
 
 		# Product Build
-		if ( $tpl_show_build ) {
+		if ( $tpl_show_product_build ) {
 			echo '<td class="category">', lang_get( 'product_build' ), '</td>';
 			echo '<td>', $tpl_product_build, '</td>';
 		} else {
