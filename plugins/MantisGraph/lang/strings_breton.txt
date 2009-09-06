@@ -1,0 +1,51 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Breton (Brezhoneg)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Fohanno
+ */
+
+$s_plugin_graph_title = 'Grafikoù Mantis';
+$s_plugin_graph_description = 'Lugant ofisiel evit ar grafikoù.';
+$s_plugin_MantisGraph_title = 'Grafikoù Mantis';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Diverradur araokaet';
+$s_plugin_MantisGraph_config = 'Kefluniadur';
+$s_plugin_MantisGraph_synthesis_link = 'Sintezenn';
+$s_plugin_MantisGraph_status_link = 'Dre statud';
+$s_plugin_MantisGraph_priority_link = 'Dre gentwir';
+$s_plugin_MantisGraph_severity_link = 'Dre live grevusted';
+$s_plugin_MantisGraph_category_link = 'Dre rummad';
+$s_plugin_MantisGraph_resolution_link = 'Dre ziskoulm';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Grafik';
+$s_plugin_MantisGraph_library = 'Levraoueg grafikoù';
+$s_plugin_MantisGraph_bundled = 'Implijout al levraoueg pourchaset gant al lugant';
+$s_plugin_MantisGraph_jpgraph_antialias = 'JPGRAPH HEPKEN : enep-alias. Gwellaat a ray neuz grafikoù zo. Notenn : Implijout an enep-alias a ra d\'an tresañ linennoù bezañ war-dro 8 gwech gorrekoc\'h.';
+$s_plugin_MantisGraph_window_width = 'Ledander ar grafik (e pikseloù)';
+$s_plugin_MantisGraph_bar_aspect = 'Kenfeur ar grafik dre varrennoù (uhelder / ledander)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Pet grafik lakaat e pep linenn e pajenn an diverradur araokaet';
+$s_plugin_MantisGraph_enabled = 'Gweredekaet';
+$s_plugin_MantisGraph_disabled = 'Diweredekaet';

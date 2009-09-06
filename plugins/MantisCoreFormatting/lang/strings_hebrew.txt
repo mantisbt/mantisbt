@@ -34,3 +34,7 @@ $s_plugin_format_description = 'התוסף הרשמי לעיבוד ולעיצו�
 $s_plugin_format_config = 'תצורה';
 $s_plugin_format_process_text = 'עיבוד טקסט';
 $s_plugin_format_process_urls = 'עיבוד כתובות';
+$s_plugin_format_process_buglinks = 'קישורי MantisBT ( נושא/הערה לנושא )';
+$s_plugin_format_process_vcslinks = 'קישורי VCS';
+$s_plugin_format_enabled = 'פעיל';
+$s_plugin_format_disabled = 'כבוי';

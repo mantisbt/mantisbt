@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Message documentation (Message documentation)
+/** Slovak (Slovenčina)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,9 +26,15 @@
  * @ingroup Language
  * @file
  *
- * @author Fryed-peach
+ * @author Rudko
  */
 
-$s_plugin_MantisGraph_config = '{{Identical|Configuration}}';
-$s_plugin_MantisGraph_enabled = '{{Identical|On}}';
-$s_plugin_MantisGraph_disabled = '{{Identical|Off}}';
+$s_plugin_format_title = 'Formátovanie MantisBT';
+$s_plugin_format_description = 'Oficiálne textové spracovanie a formátovacie rozšírenie.';
+$s_plugin_format_config = 'Nastavenie';
+$s_plugin_format_process_text = 'Textové Spracovanie';
+$s_plugin_format_process_urls = 'URL Spracovanie';
+$s_plugin_format_process_buglinks = 'MantisBT Odkazy (Problém/Poznámka o probléme)';
+$s_plugin_format_process_vcslinks = 'VCS Odkazy';
+$s_plugin_format_enabled = 'Zapnuté';
+$s_plugin_format_disabled = 'Vypnuté';

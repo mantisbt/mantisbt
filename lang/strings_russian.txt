@@ -95,6 +95,7 @@ $s_bug_monitor = 'Отслеживать';
 $s_bug_end_monitor = 'Не отслеживать';
 $s_announcement = 'Объявление';
 $s_stays_on_top = 'поверх всех';
+$s_bugnote_link_title = 'Ссылка на комментарий';
 $s_delete_bugnote_button = 'Удалить комментарий';
 $s_delete_bugnote_sure_msg = 'Вы уверены, что хотите удалить этот комментарий?';
 $s_bug_relationships = 'Связи';

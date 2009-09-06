@@ -31,11 +31,9 @@
 
 $s_plugin_XmlImportExport_title = 'Aanjelääjeheite empotteeere un expoteeere';
 $s_plugin_XmlImportExport_description = 'Deiht ene Empoot un Expoot op däm Fommaat XML för Datteije en dä MantisBT dobei.';
-$s_plugin_XmlImportExport_import = '!FUZZY!!Issues
-Empotteeere';
+$s_plugin_XmlImportExport_import = 'Aanjelääjeheite empotteeere';
 $s_plugin_XmlImportExport_export = 'Expoot em XML Fommaat';
-$s_plugin_XmlImportExport_importing_in_project = '!FUZZY!!Issues
-empotteeere en dat Projäk:';
+$s_plugin_XmlImportExport_importing_in_project = 'Aanjelääjeheite empotteeere en dat Projäk:';
 $s_plugin_XmlImportExport_import_options = 'Ußwahle empotteeere';
 $s_plugin_XmlImportExport_cross_references = 'Verwiese';
 $s_plugin_XmlImportExport_default_strategy = 'Shtanndatt-Shtrattejih för de Ömwandlunge:';
@@ -46,6 +44,5 @@ $s_plugin_XmlImportExport_link_desc = 'Donn dat en ene Lengk op dä ojinaale Enn
 $s_plugin_XmlImportExport_disable = 'Affschallde';
 $s_plugin_XmlImportExport_disable_desc = 'Donn dä Lengk affschallde';
 $s_plugin_XmlImportExport_fallback = 'Wat donn, wann et Ömnummereeere nit paß?';
-$s_plugin_XmlImportExport_fallback_category = 'Äsaz
- Fallback Zoot:';
+$s_plugin_XmlImportExport_fallback_category = 'Äsaz (Shtandatt) Zoot:';
 $s_plugin_XmlImportExport_keep_same_category = 'Versöhk, desellve Zoot beizebehaale';

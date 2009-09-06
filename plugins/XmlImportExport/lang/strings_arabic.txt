@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Message documentation (Message documentation)
+/** Arabic (العربية)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,9 +26,12 @@
  * @ingroup Language
  * @file
  *
- * @author Fryed-peach
+ * @author OsamaK
  */
 
-$s_plugin_MantisGraph_config = '{{Identical|Configuration}}';
-$s_plugin_MantisGraph_enabled = '{{Identical|On}}';
-$s_plugin_MantisGraph_disabled = '{{Identical|Off}}';
+$s_plugin_XmlImportExport_title = 'استورد/صدّر قضايا';
+$s_plugin_XmlImportExport_import = 'استورد قضايا';
+$s_plugin_XmlImportExport_link = 'الوصلة';
+$s_plugin_XmlImportExport_disable = 'عطّل';
+$s_plugin_XmlImportExport_disable_desc = 'عطّل الوصلة';
+$s_plugin_XmlImportExport_keep_same_category = 'حاول إبقاء نفس التصنيف';

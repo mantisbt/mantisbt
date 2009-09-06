@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Message documentation (Message documentation)
+/** Greek (Ελληνικά)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,9 +26,7 @@
  * @ingroup Language
  * @file
  *
- * @author Fryed-peach
+ * @author Omnipaedista
  */
 
-$s_plugin_MantisGraph_config = '{{Identical|Configuration}}';
-$s_plugin_MantisGraph_enabled = '{{Identical|On}}';
-$s_plugin_MantisGraph_disabled = '{{Identical|Off}}';
+$s_plugin_format_title = 'Μορφοποίηση MantisBT';

@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Message documentation (Message documentation)
+/** Brazilian Portuguese (Português do Brasil)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,9 +26,15 @@
  * @ingroup Language
  * @file
  *
- * @author Fryed-peach
+ * @author Eduardo.mps
  */
 
-$s_plugin_MantisGraph_config = '{{Identical|Configuration}}';
-$s_plugin_MantisGraph_enabled = '{{Identical|On}}';
-$s_plugin_MantisGraph_disabled = '{{Identical|Off}}';
+$s_plugin_format_title = 'Formatação do MantisBT';
+$s_plugin_format_description = 'Plugin oficial de processamento e formatação de texto';
+$s_plugin_format_config = 'Configuração';
+$s_plugin_format_process_text = 'Processamento de Texto';
+$s_plugin_format_process_urls = 'Processamento de URL';
+$s_plugin_format_process_buglinks = 'Ligações do MantisBT ( Caso/Anotação )';
+$s_plugin_format_process_vcslinks = 'Ligações VCS';
+$s_plugin_format_enabled = 'Ligado';
+$s_plugin_format_disabled = 'Desligado';

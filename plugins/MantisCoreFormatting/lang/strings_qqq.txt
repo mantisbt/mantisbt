@@ -30,3 +30,5 @@
  */
 
 $s_plugin_format_config = '{{Identical|Configuration}}';
+$s_plugin_format_enabled = '{{Identical|On}}';
+$s_plugin_format_disabled = '{{Identical|Off}}';

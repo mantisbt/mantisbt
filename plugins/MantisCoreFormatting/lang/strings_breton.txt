@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Message documentation (Message documentation)
+/** Breton (Brezhoneg)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,9 +26,15 @@
  * @ingroup Language
  * @file
  *
- * @author Fryed-peach
+ * @author Fohanno
  */
 
-$s_plugin_MantisGraph_config = '{{Identical|Configuration}}';
-$s_plugin_MantisGraph_enabled = '{{Identical|On}}';
-$s_plugin_MantisGraph_disabled = '{{Identical|Off}}';
+$s_plugin_format_title = 'Furmadiñ MantisBT';
+$s_plugin_format_description = 'Lugant ofisiel evit tretañ ha furmaozañ testennoù.';
+$s_plugin_format_config = 'Kefluniadur';
+$s_plugin_format_process_text = 'Skridtreterezh';
+$s_plugin_format_process_urls = 'Tretañ an URL';
+$s_plugin_format_process_buglinks = 'Liammoù MantisBT (draen / notenn diwar-benn un draen)';
+$s_plugin_format_process_vcslinks = 'Liammoù VCS';
+$s_plugin_format_enabled = 'Gweredekaet';
+$s_plugin_format_disabled = 'Diweredekaet';

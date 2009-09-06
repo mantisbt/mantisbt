@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Message documentation (Message documentation)
+/** Arabic (العربية)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,9 +26,15 @@
  * @ingroup Language
  * @file
  *
- * @author Fryed-peach
+ * @author OsamaK
  */
 
-$s_plugin_MantisGraph_config = '{{Identical|Configuration}}';
-$s_plugin_MantisGraph_enabled = '{{Identical|On}}';
-$s_plugin_MantisGraph_disabled = '{{Identical|Off}}';
+$s_plugin_graph_description = 'الملحق الرسومي الرسمي.';
+$s_plugin_MantisGraph_menu_advanced_summary = 'ملخّص متقدم';
+$s_plugin_MantisGraph_config = 'ضبط';
+$s_plugin_MantisGraph_status_link = 'حسب الحالة';
+$s_plugin_MantisGraph_priority_link = 'حسب الأهمية';
+$s_plugin_MantisGraph_category_link = 'حسب التصنيف';
+$s_plugin_MantisGraph_graph_bug_page_link = 'رسم';
+$s_plugin_MantisGraph_library = 'المكتبة الرسومية';
+$s_plugin_MantisGraph_window_width = 'عرض الرسم (بالبكسل)';

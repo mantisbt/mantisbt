@@ -303,6 +303,7 @@ $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neplatný zabezpečující token form
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Tato stránka není touto metodou přístupná.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Neplatné řadicí pole.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Neplatný formát data.';
+$MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Nelze aktualizovat časové pásmo.';
 $s_login_error = 'Váš účet je deaktivován nebo blokován, popř. jste zadali chybnou kombinaci uživatelské jméno/heslo.';
 $s_login_cookies_disabled = 'Váš prohlížeč neumí nebo odmítá pracovat s cookies.';
 $s_go_back = 'Zpět';

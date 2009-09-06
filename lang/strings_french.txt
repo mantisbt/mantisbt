@@ -100,6 +100,7 @@ $s_bug_monitor = 'Démarrer surveillance du bogue';
 $s_bug_end_monitor = 'Arrêter surveillance du bogue';
 $s_announcement = 'Annonce';
 $s_stays_on_top = 'Garder au dessus';
+$s_bugnote_link_title = 'Lien direct vers la note';
 $s_delete_bugnote_button = 'Supprimer la note';
 $s_delete_bugnote_sure_msg = 'Êtes vous sûr de vouloir supprimer cette note ?';
 $s_bug_relationships = 'Relations';

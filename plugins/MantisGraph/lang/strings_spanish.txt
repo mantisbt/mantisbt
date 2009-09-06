@@ -26,9 +26,14 @@
  * @ingroup Language
  * @file
  *
+ * @author Antur
+ * @author Crazymadlover
  * @author Locos epraix
  */
 
+$s_plugin_graph_title = 'Gráficos Mantis';
+$s_plugin_graph_description = 'Plugin gráfico oficial.';
+$s_plugin_MantisGraph_title = 'Gráficos Mantis';
 $s_plugin_MantisGraph_menu_advanced_summary = 'Resumen Avanzado';
 $s_plugin_MantisGraph_config = 'Configuración';
 $s_plugin_MantisGraph_synthesis_link = 'Síntesis';
@@ -37,5 +42,12 @@ $s_plugin_MantisGraph_priority_link = 'Por prioridad';
 $s_plugin_MantisGraph_severity_link = 'Por severidad';
 $s_plugin_MantisGraph_category_link = 'Por categoría';
 $s_plugin_MantisGraph_resolution_link = 'Por resolución';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Gráfico';
+$s_plugin_MantisGraph_library = 'Biblioteca gráfica';
+$s_plugin_MantisGraph_bundled = 'Usar en paquete';
+$s_plugin_MantisGraph_jpgraph_antialias = 'SOLO JPGRAPH: anti-aliasing. Mejora la apariencia visual de ciertos gráficos. Nota: El uso de anti-aliasing produce que el dibujo de líneas sea aproximadamente 8 veces más lento.';
+$s_plugin_MantisGraph_window_width = 'Ancho del gráfico (en píxeles)';
+$s_plugin_MantisGraph_bar_aspect = 'cociente de aspecto del gráfico de barras (alto/ancho)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'cuántos gráficos poner en cada línea en la página resumen avanzada';
 $s_plugin_MantisGraph_enabled = 'Encendido';
 $s_plugin_MantisGraph_disabled = 'Apagado';

@@ -93,6 +93,7 @@ $s_bug_monitor = '監視開始';
 $s_bug_end_monitor = '監視終了';
 $s_announcement = '周知';
 $s_stays_on_top = '常に先頭に表示';
+$s_bugnote_link_title = 'コメントへの直接リンク';
 $s_delete_bugnote_button = 'コメントの削除';
 $s_delete_bugnote_sure_msg = 'コメントを削除してよろしいですか。';
 $s_bug_relationships = '関連';

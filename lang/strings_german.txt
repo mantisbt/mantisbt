@@ -101,6 +101,7 @@ $s_bug_monitor = 'Problem beobachten';
 $s_bug_end_monitor = 'Problembeobachtung beendet';
 $s_announcement = 'Ankündigung';
 $s_stays_on_top = 'Im Vordergrund bleiben';
+$s_bugnote_link_title = 'Direkter Link zur Notiz';
 $s_delete_bugnote_button = 'Problemnotiz löschen';
 $s_delete_bugnote_sure_msg = 'Möchten Sie diese Notiz wirklich löschen?';
 $s_bug_relationships = 'Problem-Beziehungen';
