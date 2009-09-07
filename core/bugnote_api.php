@@ -67,7 +67,7 @@ class BugnoteData {
  */
 function bugnote_exists( $p_bugnote_id ) {
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
-	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "SELECT COUNT(*)
 		          	FROM $t_bugnote_table
@@ -129,8 +129,8 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	$c_private = db_prepare_bool( $p_private );
 	$c_type = db_prepare_int( $p_type );
 
-	$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
-	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+	$t_bugnote_text_table = db_get_table( 'bugnote_text' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
 	$t_time_tracking_without_note = config_get( 'time_tracking_without_note' );
@@ -204,8 +204,8 @@ function bugnote_delete( $p_bugnote_id ) {
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 	$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
-	$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
-	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+	$t_bugnote_text_table = db_get_table( 'bugnote_text' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	# Remove the bugnote
 	$query = 'DELETE FROM ' . $t_bugnote_table . ' WHERE id=' . db_param();
@@ -229,8 +229,8 @@ function bugnote_delete( $p_bugnote_id ) {
  */
 function bugnote_delete_all( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
-	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
-	$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
+	$t_bugnote_text_table = db_get_table( 'bugnote_text' );
 
 	# Delete the bugnote text items
 	$query = "SELECT bugnote_text_id
@@ -265,7 +265,7 @@ function bugnote_delete_all( $p_bug_id ) {
  */
 function bugnote_get_text( $p_bugnote_id ) {
 	$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
-	$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
+	$t_bugnote_text_table = db_get_table( 'bugnote_text' );
 
 	# grab the bugnote text
 	$query = "SELECT note
@@ -292,7 +292,7 @@ function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
 
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$c_field_name = db_prepare_string( $p_field_name );
-	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "SELECT $c_field_name
 		          	FROM $t_bugnote_table
@@ -310,7 +310,7 @@ function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
  */
 function bugnote_get_latest_id( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
-	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "SELECT id
 		          	FROM $t_bugnote_table
@@ -400,8 +400,8 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 
 	# the cache should be aware of the sorting order
 	if( !isset( $g_cache_bugnotes[(int)$p_bug_id] ) ) {
-		$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
-		$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
+		$t_bugnote_table = db_get_table( 'bugnote' );
+		$t_bugnote_text_table = db_get_table( 'bugnote_text' );
 
 		# sort by bugnote id which should be more accurate than submit date, since two bugnotes
 		# may be submitted at the same time if submitted using a script (eg: MantisConnect).
@@ -449,7 +449,7 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 function bugnote_set_time_tracking( $p_bugnote_id, $p_time_tracking ) {
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$c_bugnote_time_tracking = helper_duration_to_minutes( $p_time_tracking );
-	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "UPDATE $t_bugnote_table
 				SET time_tracking = " . db_param() . "
@@ -468,7 +468,7 @@ function bugnote_set_time_tracking( $p_bugnote_id, $p_time_tracking ) {
  */
 function bugnote_date_update( $p_bugnote_id ) {
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
-	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "UPDATE $t_bugnote_table
 					SET last_modified=" . db_param() . "
@@ -495,7 +495,7 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 	$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
-	$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
+	$t_bugnote_text_table = db_get_table( 'bugnote_text' );
 
 	# insert an 'original' revision if needed
 	if ( bug_revision_count( $t_bug_id, REV_BUGNOTE, $p_bugnote_id ) < 1 ) {
@@ -538,7 +538,7 @@ function bugnote_set_view_state( $p_bugnote_id, $p_private ) {
 		$t_view_state = VS_PUBLIC;
 	}
 
-	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "UPDATE $t_bugnote_table
 		          	SET view_state=" . db_param() . "
@@ -575,8 +575,8 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 	$c_to = strtotime( $p_to, SECONDS_PER_DAY - 1 ); // @23:59:59
 	$c_from = strtotime( $p_from );
 
-	$t_user_table = db_get_table( 'mantis_user_table' );
-	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+	$t_user_table = db_get_table( 'user' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	if( !is_blank( $c_from ) ) {
 		$t_from_where = " AND bn.date_submitted >= $c_from ";
@@ -630,9 +630,9 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 
 	$c_cost = db_prepare_double( $p_cost );
 
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_user_table = db_get_table( 'mantis_user_table' );
-	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+	$t_bug_table = db_get_table( 'bug' );
+	$t_user_table = db_get_table( 'user' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	if( !is_blank( $c_from ) ) {
 		$t_from_where = " AND bn.date_submitted >= $c_from";

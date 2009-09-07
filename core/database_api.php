@@ -546,18 +546,11 @@ function db_insert_id( $p_table = null, $p_field = "id" ) {
  * @return bool indicating whether the table exists
  */
 function db_table_exists( $p_table_name ) {
-	global $g_db, $g_db_schema;
-
 	if( is_blank( $p_table_name ) ) {
 		return false;
 	}
 
-	if( db_is_db2() ) {
-		// must pass schema
-		$t_tables = $g_db->MetaTables( 'TABLE', false, '', $g_db_schema );
-	} else {
-		$t_tables = $g_db->MetaTables( 'TABLE' );
-	}
+	$t_tables = db_get_table_list();
 
 	# Can't use in_array() since it is case sensitive
 	$t_table_name = utf8_strtolower( $p_table_name );
@@ -887,16 +880,16 @@ function db_time_queries() {
  * @return string containing full database table name
  */
 function db_get_table( $p_option ) {
-	if( isset( $GLOBALS['g_db_table'][$p_option] ) ) {
-		$t_value = config_eval( $GLOBALS['g_db_table'][$p_option] );
-		if( $t_value !== $GLOBALS['g_db_table'][$p_option] ) {
-			$GLOBALS['g_db_table'][$p_option] = $t_value;
-		}
-		return $t_value;
-	} else {
-		error_parameters( $p_option );
-		trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, WARNING );
+	$t_table = $p_option;
+	$t_prefix = config_get_global( 'db_table_prefix' );
+	$t_suffix = config_get_global( 'db_table_suffix' );
+	if ( $t_prefix ) {
+		$t_table = $t_prefix . '_' . $t_table;
 	}
+	if ( $t_suffix ) {
+		$t_table .= $t_suffix;
+	}
+	return $t_table;
 }
 
 /**
@@ -904,9 +897,13 @@ function db_get_table( $p_option ) {
  * @return array containing table names
  */
 function db_get_table_list() {
-	$t_tables = Array();
-	foreach( $GLOBALS['g_db_table'] as $t_table ) {
-		$t_tables[] = config_eval( $t_table );
+	global $g_db, $g_db_schema;
+
+	if( db_is_db2() ) {
+		// must pass schema
+		$t_tables = $g_db->MetaTables( 'TABLE', false, '', $g_db_schema );
+	} else {
+		$t_tables = $g_db->MetaTables( 'TABLE' );
 	}
 	return $t_tables;
 }

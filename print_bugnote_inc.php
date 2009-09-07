@@ -39,8 +39,8 @@
  		$t_restriction = '';
  	}
 
-	$t_bugnote_table		= db_get_table( 'mantis_bugnote_table' );
-	$t_bugnote_text_table	= db_get_table( 'mantis_bugnote_text_table' );
+	$t_bugnote_table		= db_get_table( 'bugnote' );
+	$t_bugnote_text_table	= db_get_table( 'bugnote_text' );
 	# get the bugnote data
 	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 

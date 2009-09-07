@@ -151,8 +151,8 @@ foreach( $t_project_ids as $t_project_id ) {
 	$t_user_access_level_is_reporter = ( REPORTER == access_get_project_level( $t_project_id ) );
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
-	$t_bug_table	= db_get_table( 'mantis_bug_table' );
-	$t_relation_table = db_get_table( 'mantis_bug_relationship_table' );
+	$t_bug_table	= db_get_table( 'bug' );
+	$t_relation_table = db_get_table( 'bug_relationship' );
 
 	# grab version info for later use
 	$t_version_rows = version_get_all_rows( $t_project_id, /* released */ null, /* obsolete */ false );

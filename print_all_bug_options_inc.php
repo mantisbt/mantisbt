@@ -72,7 +72,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 		user_ensure_unprotected( $p_user_id );
 	}
 
-	$t_user_print_pref_table = db_get_table( 'mantis_user_print_pref_table' );
+	$t_user_print_pref_table = db_get_table( 'user_print_pref' );
 
 	if ( is_blank( $p_redirect_url ) ) {
 		$p_redirect_url = 'print_all_bug_page.php';

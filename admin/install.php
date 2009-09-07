@@ -29,8 +29,7 @@ $g_skip_open_db = true;  # don't open the database in database_api.php
 define( 'MANTIS_INSTALLER', true );
 define( 'PLUGINS_DISABLED', true );
 @require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
-@require_once( 'install_functions.php' );
-@require_once( 'install_helper_functions.php' );
+require_once( 'install_helper_functions_api.php' );
 $g_error_send_page_header = false; # bypass page headers in error handler
 
 $g_failed = false;
@@ -769,7 +768,7 @@ if( 3 == $t_install_state ) {
 		}
 		if( $f_log_queries ) {
 			# add a query to set the database version
-			echo 'INSERT INTO mantis_config_table ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . "\r\n";
+			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . "\r\n";
 			echo '</pre></br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</td></tr>';
 		}
 	}
@@ -930,7 +929,7 @@ if( 6 == $t_install_state ) {
 		checking ability to SELECT records
 	</td>
 	<?php
-		$t_mantis_config_table = db_get_table( 'mantis_config_table' );
+		$t_mantis_config_table = db_get_table( 'config' );
 	$t_query = "SELECT COUNT(*) FROM $t_mantis_config_table";
 	$t_result = @$g_db->Execute( $t_query );
 

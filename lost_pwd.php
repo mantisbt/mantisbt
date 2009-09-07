@@ -46,7 +46,7 @@
 	$f_email = email_append_domain( $f_email );
 	email_ensure_valid( $f_email );
 
-	$t_user_table = db_get_table( 'mantis_user_table' );
+	$t_user_table = db_get_table( 'user' );
 
 	/** @todo Consider moving this query to user_api.php */
 	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = ' . db_param() . ' AND email = ' . db_param() . ' AND enabled=' . db_param();

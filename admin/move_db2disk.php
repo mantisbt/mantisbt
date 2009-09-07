@@ -65,11 +65,11 @@ function upgrade_move_att2disk( $p_source ) {
 
 	# $p_source is the string "attachment" or "project"
 	if( $p_source == 'attachment' ) {
-		$t_file_table = db_get_table( 'mantis_bug_file_table' );
+		$t_file_table = db_get_table( 'bug_file' );
 		$t_bug_label = "Bug";
 	}
 	if( $p_source == 'project' ) {
-		$t_file_table = db_get_table( 'mantis_project_file_table' );
+		$t_file_table = db_get_table( 'project_file' );
 		$t_bug_label = "Project";
 	}
 

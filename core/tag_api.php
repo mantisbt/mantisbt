@@ -42,7 +42,7 @@ require_once( 'history_api.php' );
  */
 function tag_exists( $p_tag_id ) {
 	$c_tag_id = db_prepare_int( $p_tag_id );
-	$t_tag_table = db_get_table( 'mantis_tag_table' );
+	$t_tag_table = db_get_table( 'tag' );
 
 	$query = "SELECT * FROM $t_tag_table WHERE id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_tag_id ) );
@@ -69,7 +69,7 @@ function tag_ensure_exists( $p_tag_id ) {
  */
 function tag_is_unique( $p_name ) {
 	$c_name = trim( $p_name );
-	$t_tag_table = db_get_table( 'mantis_tag_table' );
+	$t_tag_table = db_get_table( 'tag' );
 
 	$query = 'SELECT id FROM ' . $t_tag_table . ' WHERE ' . db_helper_like( 'name' );
 	$result = db_query_bound( $query, Array( $c_name ) );
@@ -221,7 +221,7 @@ function tag_get( $p_tag_id ) {
 
 	$c_tag_id = db_prepare_int( $p_tag_id );
 
-	$t_tag_table = db_get_table( 'mantis_tag_table' );
+	$t_tag_table = db_get_table( 'tag' );
 
 	$query = "SELECT * FROM $t_tag_table
 					WHERE id=" . db_param();
@@ -241,7 +241,7 @@ function tag_get( $p_tag_id ) {
  * @return Tag row
  */
 function tag_get_by_name( $p_name ) {
-	$t_tag_table = db_get_table( 'mantis_tag_table' );
+	$t_tag_table = db_get_table( 'tag' );
 
 	$query = "SELECT * FROM $t_tag_table
 					WHERE " . db_helper_like( 'name' );
@@ -296,7 +296,7 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_date_created = db_now();
 
-	$t_tag_table = db_get_table( 'mantis_tag_table' );
+	$t_tag_table = db_get_table( 'tag' );
 
 	$query = "INSERT INTO $t_tag_table
 				( user_id,
@@ -348,7 +348,7 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	$c_tag_id = trim( db_prepare_int( $p_tag_id ) );
 	$c_date_updated = db_now();
 
-	$t_tag_table = db_get_table( 'mantis_tag_table' );
+	$t_tag_table = db_get_table( 'tag' );
 
 	$query = "UPDATE $t_tag_table
 					SET user_id=" . db_param() . ",
@@ -385,8 +385,8 @@ function tag_delete( $p_tag_id ) {
 
 	$c_tag_id = db_prepare_int( $p_tag_id );
 
-	$t_tag_table = db_get_table( 'mantis_tag_table' );
-	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
+	$t_tag_table = db_get_table( 'tag' );
+	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
 	$query = "DELETE FROM $t_tag_table
 					WHERE id=" . db_param();
@@ -403,11 +403,11 @@ function tag_delete( $p_tag_id ) {
  * @returns The array of tag rows, each with id, name, and description.
  */
 function tag_get_candidates_for_bug( $p_bug_id ) {
-	$t_tag_table = db_get_table( 'mantis_tag_table' );
+	$t_tag_table = db_get_table( 'tag' );
 
 	$t_params = array();
 	if ( 0 != $p_bug_id ) {
-		$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
+		$t_bug_tag_table = db_get_table( 'bug_tag' );
 
 		if ( db_is_mssql() ) {
 			$t_params[] = $p_bug_id;
@@ -457,7 +457,7 @@ function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
 	$c_tag_id = db_prepare_int( $p_tag_id );
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
-	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
+	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
 	$query = "SELECT * FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
@@ -475,7 +475,7 @@ function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 	$c_tag_id = db_prepare_int( $p_tag_id );
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
-	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
+	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
 	$query = "SELECT * FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
@@ -495,8 +495,8 @@ function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 function tag_bug_get_attached( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
-	$t_tag_table = db_get_table( 'mantis_tag_table' );
-	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
+	$t_tag_table = db_get_table( 'tag' );
+	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
 	$query = "SELECT t.*, b.user_id as user_attached, b.date_attached
 					FROM $t_tag_table as t
@@ -522,7 +522,7 @@ function tag_bug_get_attached( $p_bug_id ) {
 function tag_get_bugs_attached( $p_tag_id ) {
 	$c_tag_id = db_prepare_int( $p_tag_id );
 
-	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
+	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
 	$query = "SELECT bug_id FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param();
@@ -561,7 +561,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 	$c_user_id = db_prepare_int( $p_user_id );
 
-	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
+	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
 	$query = "INSERT INTO $t_bug_tag_table
 					( tag_id,
@@ -616,7 +616,7 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 	$c_tag_id = db_prepare_int( $p_tag_id );
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
-	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
+	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
 	$query = "DELETE FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param() . ' AND bug_id=' . db_param();
@@ -708,7 +708,7 @@ function tag_display_attached( $p_bug_id ) {
  */
 function tag_stats_attached( $p_tag_id ) {
 	$c_tag_id = db_prepare_int( $p_tag_id );
-	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
+	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
 	$query = "SELECT COUNT(*) FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param();
@@ -727,11 +727,11 @@ function tag_stats_attached( $p_tag_id ) {
  * @return array Array of tag rows, with share count added
  */
 function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_tag_table = db_get_table( 'mantis_tag_table' );
-	$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
-	$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
-	$t_user_table = db_get_table( 'mantis_user_table' );
+	$t_bug_table = db_get_table( 'bug' );
+	$t_tag_table = db_get_table( 'tag' );
+	$t_bug_tag_table = db_get_table( 'bug_tag' );
+	$t_project_user_list_table = db_get_table( 'project_user_list' );
+	$t_user_table = db_get_table( 'user' );
 
 	$c_tag_id = db_prepare_int( $p_tag_id );
 	$c_user_id = auth_get_current_user_id();

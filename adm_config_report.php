@@ -88,7 +88,7 @@
 		echo '</pre>';
 	}
 
-	$t_config_table = db_get_table( 'mantis_config_table' );
+	$t_config_table = db_get_table( 'config' );
 	$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table ORDER BY user_id, project_id, config_id";
 	$result = db_query_bound( $query );
 ?>

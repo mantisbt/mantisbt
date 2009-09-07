@@ -38,10 +38,10 @@
 	$g_project_override = $f_project_id;
 
 	$t_user_id = auth_get_current_user_id();
-	$t_project_file_table = db_get_table( 'mantis_project_file_table' );
-	$t_project_table = db_get_table( 'mantis_project_table' );
-	$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
-	$t_user_table = db_get_table( 'mantis_user_table' );
+	$t_project_file_table = db_get_table( 'project_file' );
+	$t_project_table = db_get_table( 'project' );
+	$t_project_user_list_table = db_get_table( 'project_user_list' );
+	$t_user_table = db_get_table( 'user' );
 	$t_pub = VS_PUBLIC;
 	$t_priv = VS_PRIVATE;
 	$t_admin = config_get_global( 'admin_site_threshold' );

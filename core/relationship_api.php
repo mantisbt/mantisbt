@@ -158,7 +158,7 @@ function relationship_get_complementary_type( $p_relationship_type ) {
  * @return BugRelationshipData Bug Relationship
  */
 function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
-	$t_mantis_bug_relationship_table = db_get_table( 'mantis_bug_relationship_table' );
+	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
 	global $g_relationships;
 	if( $g_relationships[$p_relationship_type]['#forward'] === FALSE ) {
@@ -196,7 +196,7 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type )
  * @return BugRelationshipData Bug Relationship
  */
 function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
-	$t_mantis_bug_relationship_table = db_get_table( 'mantis_bug_relationship_table' );
+	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
 	global $g_relationships;
 	if( $g_relationships[$p_relationship_type]['#forward'] === FALSE ) {
@@ -234,7 +234,7 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 function relationship_delete( $p_relationship_id ) {
 	$c_relationship_id = db_prepare_int( $p_relationship_id );
 
-	$t_mantis_bug_relationship_table = db_get_table( 'mantis_bug_relationship_table' );
+	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
 	$query = "DELETE FROM $t_mantis_bug_relationship_table
 				WHERE id=" . db_param();
@@ -248,7 +248,7 @@ function relationship_delete( $p_relationship_id ) {
 function relationship_delete_all( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
-	$t_mantis_bug_relationship_table = db_get_table( 'mantis_bug_relationship_table' );
+	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
 	$query = "DELETE FROM $t_mantis_bug_relationship_table
 				WHERE source_bug_id=" . db_param() . " OR
@@ -265,7 +265,7 @@ function relationship_copy_all( $p_bug_id, $p_new_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 	$c_new_bug_id = db_prepare_int( $p_new_bug_id );
 
-	$t_mantis_bug_relationship_table = db_get_table( 'mantis_bug_relationship_table' );
+	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
 	$t_relationship = relationship_get_all_src( $p_bug_id );
 	$t_relationship_count = count( $t_relationship );
@@ -288,7 +288,7 @@ function relationship_copy_all( $p_bug_id, $p_new_bug_id ) {
  * @return null|BugRelationshipData BugRelationshipData object
  */
 function relationship_get( $p_relationship_id ) {
-	$t_mantis_bug_relationship_table = db_get_table( 'mantis_bug_relationship_table' );
+	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
 	$query = "SELECT *
 				FROM $t_mantis_bug_relationship_table
@@ -320,8 +320,8 @@ function relationship_get( $p_relationship_id ) {
 function relationship_get_all_src( $p_src_bug_id ) {
 	$c_src_bug_id = db_prepare_int( $p_src_bug_id );
 
-	$t_mantis_bug_relationship_table = db_get_table( 'mantis_bug_relationship_table' );
-	$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
+	$t_mantis_bug_table = db_get_table( 'bug' );
 
 	$query = "SELECT $t_mantis_bug_relationship_table.id, $t_mantis_bug_relationship_table.relationship_type,
 				$t_mantis_bug_relationship_table.source_bug_id, $t_mantis_bug_relationship_table.destination_bug_id,
@@ -364,8 +364,8 @@ function relationship_get_all_src( $p_src_bug_id ) {
 function relationship_get_all_dest( $p_dest_bug_id ) {
 	$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
 
-	$t_mantis_bug_relationship_table = db_get_table( 'mantis_bug_relationship_table' );
-	$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
+	$t_mantis_bug_table = db_get_table( 'bug' );
 
 	$query = "SELECT $t_mantis_bug_relationship_table.id, $t_mantis_bug_relationship_table.relationship_type,
 				$t_mantis_bug_relationship_table.source_bug_id, $t_mantis_bug_relationship_table.destination_bug_id,
@@ -430,7 +430,7 @@ function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
 	$c_src_bug_id = db_prepare_int( $p_src_bug_id );
 	$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
 
-	$t_mantis_bug_relationship_table = db_get_table( 'mantis_bug_relationship_table' );
+	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
 	$t_query = "SELECT *
 				FROM $t_mantis_bug_relationship_table

@@ -80,7 +80,7 @@ function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
  */
 function install_category_migrate() {
 	global $g_db_log_queries;
-	
+
 	$t_bug_table = db_get_table( 'bug' );
 	$t_category_table = db_get_table( 'category' );
 	$t_project_category_table = db_get_table( 'project_category' );
@@ -148,7 +148,7 @@ function install_category_migrate() {
 function install_date_migrate( $p_data) {
 	// $p_data[0] = tablename, [1] id column, [2] = old column, [3] = new column
 	global $g_db_log_queries;
-	
+
 	// disable query logging (even if it's enabled in config for this)
 	if ( $g_db_log_queries !== 0 ) {
 		$t_log_queries = $g_db_log_queries;
@@ -167,14 +167,14 @@ function install_date_migrate( $p_data) {
 		$t_pairs = array();
 		foreach( $p_data[3] as $var ) {
 			array_push( $t_pairs, "$var=" . db_param() ) ;
-		}		
+		}
 		$t_new_column = implode( ',', $t_pairs );
 	} else {
 		$t_old_column = $p_data[2];
 		$t_new_column = $p_data[3] . "=" . db_param();
 		$t_date_array = false;
 	}
-	
+
 	$query = "SELECT $t_id_column, $t_old_column FROM $t_table";
 	$t_result = db_query_bound( $query );
 
@@ -189,12 +189,12 @@ function install_date_migrate( $p_data) {
 				if ($t_new_value[$i] < 100000 ) {
 					$t_new_value[$i] = 1;
 				}
-			
+
 			}
 			$t_values = $t_new_value;
 			$t_values[] = $t_id;
 		} else {
-			$t_old_value = $row[$t_old_column];		
+			$t_old_value = $row[$t_old_column];
 
 			$t_new_value = db_unixtimestamp($t_old_value);
 			if ($t_new_value < 100000 ) {
@@ -202,7 +202,7 @@ function install_date_migrate( $p_data) {
 			}
 			$t_values = array( $t_new_value, $t_id);
 		}
-		
+
 		$query = "UPDATE $t_table SET $t_new_column
 					WHERE $t_id_column=" . db_param();
 		db_query_bound( $query, $t_values );
@@ -214,6 +214,6 @@ function install_date_migrate( $p_data) {
 	}
 
 	# return 2 because that's what ADOdb/DataDict does when things happen properly
-	return 2;	
+	return 2;
 
 }

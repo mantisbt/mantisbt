@@ -234,7 +234,7 @@ class BugData {
 			$t_restriction = '';
 		}
 
-		$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+		$t_bugnote_table = db_get_table( 'bugnote' );
 		$query = "SELECT COUNT(*)
 					  FROM $t_bugnote_table
 					  WHERE bug_id =" . db_param() . " $t_restriction";
@@ -290,9 +290,9 @@ class BugData {
 			$this_due_date = date_get_null();
 		}
 
-		$t_bug_table = db_get_table( 'mantis_bug_table' );
-		$t_bug_text_table = db_get_table( 'mantis_bug_text_table' );
-		$t_category_table = db_get_table( 'mantis_category_table' );
+		$t_bug_table = db_get_table( 'bug' );
+		$t_bug_text_table = db_get_table( 'bug_text' );
+		$t_category_table = db_get_table( 'category' );
 
 		# Insert text information
 		$query = "INSERT INTO $t_bug_text_table
@@ -384,7 +384,7 @@ class BugData {
 
 		$t_old_data = bug_get( $this->id, true );
 
-		$t_bug_table = db_get_table( 'mantis_bug_table' );
+		$t_bug_table = db_get_table( 'bug' );
 
 		# Update all fields
 		# Ignore date_submitted and last_updated since they are pulled out
@@ -470,7 +470,7 @@ class BugData {
 
 		# Update extended info if requested
 		if( $p_update_extended ) {
-			$t_bug_text_table = db_get_table( 'mantis_bug_text_table' );
+			$t_bug_text_table = db_get_table( 'bug_text' );
 
 			$t_bug_text_id = bug_get_field( $c_bug_id, 'bug_text_id' );
 
@@ -574,7 +574,7 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 	}
 
 	$c_bug_id = (int) $p_bug_id;
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_bug_table = db_get_table( 'bug' );
 
 	$query = "SELECT *
 				  FROM $t_bug_table
@@ -618,7 +618,7 @@ function bug_cache_array_rows( $p_bug_id_array ) {
 		return;
 	}
 
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_bug_table = db_get_table( 'bug' );
 
 	$query = "SELECT *
 				  FROM $t_bug_table
@@ -680,8 +680,8 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 	global $g_cache_bug_text;
 
 	$c_bug_id = (int) $p_bug_id;
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_bug_text_table = db_get_table( 'mantis_bug_text_table' );
+	$t_bug_table = db_get_table( 'bug' );
+	$t_bug_text_table = db_get_table( 'bug_text' );
 
 	if( isset( $g_cache_bug_text[$c_bug_id] ) ) {
 		return $g_cache_bug_text[$c_bug_id];
@@ -884,12 +884,12 @@ function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
 function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields = false, $p_copy_relationships = false, $p_copy_history = false, $p_copy_attachments = false, $p_copy_bugnotes = false, $p_copy_monitoring_users = false ) {
 	global $g_db;
 
-	$t_mantis_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
-	$t_mantis_bug_file_table = db_get_table( 'mantis_bug_file_table' );
-	$t_mantis_bugnote_table = db_get_table( 'mantis_bugnote_table' );
-	$t_mantis_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
-	$t_mantis_bug_monitor_table = db_get_table( 'mantis_bug_monitor_table' );
-	$t_mantis_bug_history_table = db_get_table( 'mantis_bug_history_table' );
+	$t_mantis_custom_field_string_table = db_get_table( 'custom_field_string' );
+	$t_mantis_bug_file_table = db_get_table( 'bug_file' );
+	$t_mantis_bugnote_table = db_get_table( 'bugnote' );
+	$t_mantis_bugnote_text_table = db_get_table( 'bugnote_text' );
+	$t_mantis_bug_monitor_table = db_get_table( 'bug_monitor' );
+	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
 	$t_mantis_db = $g_db;
 
 	$t_bug_id = db_prepare_int( $p_bug_id );
@@ -1080,8 +1080,8 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
  */
 function bug_delete( $p_bug_id ) {
 	$c_bug_id = (int) $p_bug_id;
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_bug_text_table = db_get_table( 'mantis_bug_text_table' );
+	$t_bug_table = db_get_table( 'bug' );
+	$t_bug_text_table = db_get_table( 'bug_text' );
 
 	# call pre-deletion custom function
 	helper_call_custom_function( 'issue_delete_validate', array( $p_bug_id ) );
@@ -1154,7 +1154,7 @@ function bug_delete( $p_bug_id ) {
 function bug_delete_all( $p_project_id ) {
 	$c_project_id = (int) $p_project_id;
 
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_bug_table = db_get_table( 'bug' );
 
 	$query = "SELECT id
 				  FROM $t_bug_table
@@ -1292,7 +1292,7 @@ function bug_format_summary( $p_bug_id, $p_context ) {
  */
 function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
-	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "SELECT last_modified
 				  FROM $t_bugnote_table
@@ -1330,7 +1330,7 @@ function bug_get_bugnote_stats( $p_bug_id ) {
 		return $t_stats;
 	}
 
-	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "SELECT last_modified
 				  FROM $t_bugnote_table
@@ -1366,7 +1366,7 @@ function bug_get_attachments( $p_bug_id ) {
 
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
-	$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
+	$t_bug_file_table = db_get_table( 'bug_file' );
 
 	$query = "SELECT id, title, diskfile, filename, filesize, file_type, date_added
 		                FROM $t_bug_file_table
@@ -1460,7 +1460,7 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 	if( $c_value == $t_current_value ) {
 		return true;
 	}
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_bug_table = db_get_table( 'bug' );
 
 	# Update fields
 	$query = "UPDATE $t_bug_table
@@ -1515,7 +1515,7 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		$t_ass_val = $h_status;
 	}
 
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_bug_table = db_get_table( 'bug' );
 
 	if(( $t_ass_val != $h_status ) || ( $p_user_id != $h_handler_id ) ) {
 
@@ -1680,7 +1680,7 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
 function bug_update_date( $p_bug_id ) {
 	$c_bug_id = (int) $p_bug_id;
 
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_bug_table = db_get_table( 'bug' );
 
 	$query = "UPDATE $t_bug_table
 				  SET last_updated= " . db_param() . "
@@ -1716,7 +1716,7 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
 		return false;
 	}
 
-	$t_bug_monitor_table = db_get_table( 'mantis_bug_monitor_table' );
+	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
 
 	# Insert monitoring record
 	$query = 'INSERT INTO ' . $t_bug_monitor_table . '( user_id, bug_id ) VALUES (' . db_param() . ',' . db_param() . ')';
@@ -1747,7 +1747,7 @@ function bug_unmonitor( $p_bug_id, $p_user_id ) {
 	$c_bug_id = (int) $p_bug_id;
 	$c_user_id = (int) $p_user_id;
 
-	$t_bug_monitor_table = db_get_table( 'mantis_bug_monitor_table' );
+	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
 
 	# Delete monitoring record
 	$query = 'DELETE FROM ' . $t_bug_monitor_table . ' WHERE bug_id = ' . db_param();

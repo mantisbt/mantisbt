@@ -65,8 +65,8 @@ if( !in_array( $f_dest_field, $t_valid_fields ) ) {
 
 # @@@ check that source and destination are compatible
 
-$t_string_table = db_get_table( 'mantis_custom_field_string_table' );
-$t_bug_table = db_get_table( 'mantis_bug_table' );
+$t_string_table = db_get_table( 'custom_field_string' );
+$t_bug_table = db_get_table( 'bug' );
 $query = 'SELECT * FROM ' . $t_string_table . ' WHERE field_id = ' . db_param() . ' and value <> ' . db_param();
 
 $result = @db_query_bound( $query, Array( $f_source_field_id, '' ) );

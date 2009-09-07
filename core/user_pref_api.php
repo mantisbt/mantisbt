@@ -163,7 +163,7 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 		return $g_cache_user_pref[(int)$p_user_id][(int)$p_project_id];
 	}
 
-	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
+	$t_user_pref_table = db_get_table( 'user_pref' );
 
 	$query = "SELECT *
 				  FROM $t_user_pref_table
@@ -210,7 +210,7 @@ function user_pref_cache_array_rows( $p_user_id_array, $p_project_id = ALL_PROJE
 		return;
 	}
 
-	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
+	$t_user_pref_table = db_get_table( 'user_pref' );
 
 	$query = "SELECT *
 				  FROM $t_user_pref_table
@@ -281,7 +281,7 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 
 	user_ensure_unprotected( $p_user_id );
 
-	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
+	$t_user_pref_table = db_get_table( 'user_pref' );
 
 	if ($t_vars == null ) {
 		$t_vars = getClassProperties( 'UserPreferences', 'protected');
@@ -324,7 +324,7 @@ function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
 
 	user_ensure_unprotected( $p_user_id );
 
-	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
+	$t_user_pref_table = db_get_table( 'user_pref' );
 
 	if ($t_vars == null ) {
 		$t_vars = getClassProperties( 'UserPreferences', 'protected');
@@ -366,7 +366,7 @@ function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 
 	user_ensure_unprotected( $p_user_id );
 
-	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
+	$t_user_pref_table = db_get_table( 'user_pref' );
 
 	$query = "DELETE FROM $t_user_pref_table
 				  WHERE user_id=" . db_param() . " AND
@@ -394,7 +394,7 @@ function user_pref_delete_all( $p_user_id ) {
 
 	user_ensure_unprotected( $p_user_id );
 
-	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
+	$t_user_pref_table = db_get_table( 'user_pref' );
 
 	$query = 'DELETE FROM ' . $t_user_pref_table . ' WHERE user_id=' . db_param();
 	db_query_bound( $query, Array( $c_user_id ) );
@@ -418,7 +418,7 @@ function user_pref_delete_all( $p_user_id ) {
 function user_pref_delete_project( $p_project_id ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
-	$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
+	$t_user_pref_table = db_get_table( 'user_pref' );
 
 	$query = 'DELETE FROM ' . $t_user_pref_table . ' WHERE project_id=' . db_param();
 	db_query_bound( $query, Array( $c_project_id ) );

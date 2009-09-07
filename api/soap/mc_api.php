@@ -274,7 +274,7 @@ function translate_category_name_to_id( $p_category_name, $p_project_id ) {
  * names but an array of filter structures.
  */
 function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
-	$t_filters_table = db_get_table( 'mantis_filters_table' );
+	$t_filters_table = db_get_table( 'filters' );
 	$t_overall_query_arr = array();
 
 	if( null === $p_project_id ) {

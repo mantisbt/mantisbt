@@ -111,7 +111,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 			break;
 	}
 
-	$t_file_table = db_get_table( 'mantis_' . $p_table . '_file_table' );
+	$t_file_table = db_get_table( $p_table . '_file' );
 	$c_id = ( 'bug' == $p_table ) ? $c_issue_id : $c_project_id;
 	$query = "INSERT INTO $t_file_table
 			(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
@@ -141,13 +141,13 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	$query = '';
 	switch( $p_type ) {
 		case 'bug':
-			$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
+			$t_bug_file_table = db_get_table( 'bug_file' );
 			$query = "SELECT *
 				FROM $t_bug_file_table
 				WHERE id='$p_file_id'";
 			break;
 		case 'doc':
-			$t_project_file_table = db_get_table( 'mantis_project_file_table' );
+			$t_project_file_table = db_get_table( 'project_file' );
 			$query = "SELECT *
 				FROM $t_project_file_table
 				WHERE id='$p_file_id'";

@@ -73,7 +73,7 @@ function sponsorship_cache_row( $p_sponsorship_id, $p_trigger_errors = true ) {
 	global $g_cache_sponsorships;
 
 	$c_sponsorship_id = db_prepare_int( $p_sponsorship_id );
-	$t_sponsorship_table = db_get_table( 'mantis_sponsorship_table' );
+	$t_sponsorship_table = db_get_table( 'sponsorship' );
 
 	if( isset( $g_cache_sponsorships[$c_sponsorship_id] ) ) {
 		return $g_cache_sponsorships[$c_sponsorship_id];
@@ -143,7 +143,7 @@ function sponsorship_get_id( $p_bug_id, $p_user_id = null ) {
 		$c_user_id = db_prepare_int( $p_user_id );
 	}
 
-	$t_sponsorship_table = db_get_table( 'mantis_sponsorship_table' );
+	$t_sponsorship_table = db_get_table( 'sponsorship' );
 
 	$query = "SELECT id FROM $t_sponsorship_table WHERE bug_id = " . db_param() . " AND user_id = " . db_param();
 	$t_result = db_query_bound( $query, Array( $c_bug_id, $c_user_id ), 1 );
@@ -196,7 +196,7 @@ function sponsorship_get_all_ids( $p_bug_id ) {
 		return $s_cache_sponsorship_bug_ids[$c_bug_id];
 	}
 
-	$t_sponsorship_table = db_get_table( 'mantis_sponsorship_table' );
+	$t_sponsorship_table = db_get_table( 'sponsorship' );
 
 	$query = "SELECT * FROM $t_sponsorship_table
 				WHERE bug_id = " . db_param();
@@ -287,7 +287,7 @@ function sponsorship_set( $p_sponsorship ) {
 		}
 	}
 
-	$t_sponsorship_table = db_get_table( 'mantis_sponsorship_table' );
+	$t_sponsorship_table = db_get_table( 'sponsorship' );
 
 	$c_id = db_prepare_int( $p_sponsorship->id );
 	$c_bug_id = db_prepare_int( $p_sponsorship->bug_id );
@@ -365,7 +365,7 @@ function sponsorship_delete( $p_sponsorship_id ) {
 
 	$t_sponsorship = sponsorship_get( $c_sponsorship_id );
 
-	$t_sponsorship_table = db_get_table( 'mantis_sponsorship_table' );
+	$t_sponsorship_table = db_get_table( 'sponsorship' );
 
 	# Delete the bug entry
 	$query = "DELETE FROM $t_sponsorship_table
@@ -392,7 +392,7 @@ function sponsorship_update_paid( $p_sponsorship_id, $p_paid ) {
 
 	$c_paid = db_prepare_int( $p_paid );
 
-	$t_sponsorship_table = db_get_table( 'mantis_sponsorship_table' );
+	$t_sponsorship_table = db_get_table( 'sponsorship' );
 
 	$query = "UPDATE $t_sponsorship_table
 				  SET last_updated= " . db_param() . ", paid=" . db_param() . "
@@ -413,7 +413,7 @@ function sponsorship_update_paid( $p_sponsorship_id, $p_paid ) {
 function sponsorship_update_date( $p_sponsorship_id ) {
 	$c_sponsorship_id = db_prepare_int( $p_sponsorship_id );
 
-	$t_sponsorship_table = db_get_table( 'mantis_sponsorship_table' );
+	$t_sponsorship_table = db_get_table( 'sponsorship' );
 
 	$query = "UPDATE $t_sponsorship_table
 				  SET last_updated= " . db_param() . "

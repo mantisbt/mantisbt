@@ -83,7 +83,7 @@ function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 	global $g_cache_versions;
 
 	$c_version_id = db_prepare_int( $p_version_id );
-	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
+	$t_project_version_table = db_get_table( 'project_version' );
 
 	if( isset( $g_cache_versions[$c_version_id] ) ) {
 		return $g_cache_versions[$c_version_id];
@@ -180,7 +180,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 
 	version_ensure_unique( $p_version, $p_project_id );
 
-	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
+	$t_project_version_table = db_get_table( 'project_version' );
 
 	$query = "INSERT INTO $t_project_version_table
 					( project_id, version, date_order, description, released, obsolete )
@@ -216,8 +216,8 @@ function version_update( $p_version_info ) {
 	$c_date_order = $p_version_info->date_order;
 	$c_project_id = db_prepare_int( $p_version_info->project_id );
 
-	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_project_version_table = db_get_table( 'project_version' );
+	$t_bug_table = db_get_table( 'bug' );
 
 	$query = "UPDATE $t_project_version_table
 				  SET version=" . db_param() . ",
@@ -271,8 +271,8 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 	$t_project_id = version_get_field( $p_version_id, 'project_id' );
 	$c_project_id = db_prepare_int( $t_project_id );
 
-	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_project_version_table = db_get_table( 'project_version' );
+	$t_bug_table = db_get_table( 'bug' );
 
 	$query = "DELETE FROM $t_project_version_table
 				  WHERE id=" . db_param();
@@ -300,8 +300,8 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 function version_remove_all( $p_project_id ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
-	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_project_version_table = db_get_table( 'project_version' );
+	$t_bug_table = db_get_table( 'bug' );
 
 	$query = "DELETE FROM $t_project_version_table
 	  			  WHERE project_id=" . db_param();
@@ -345,7 +345,7 @@ function version_cache_array_rows( $p_project_id_array ) {
 		return;
 	}
 
-	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
+	$t_project_version_table = db_get_table( 'project_version' );
 
 	$query = "SELECT *
 				  FROM $t_project_version_table
@@ -388,7 +388,7 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 	}
 
 	$c_project_id = db_prepare_int( $p_project_id );
-	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
+	$t_project_version_table = db_get_table( 'project_version' );
 
 	$t_param_count = 0;
 
@@ -455,7 +455,7 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
 		$t_query_params[] = $c_obsolete;
 	}
 
-	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
+	$t_project_version_table = db_get_table( 'project_version' );
 
 	$query = "SELECT *
 				  FROM $t_project_version_table
@@ -496,7 +496,7 @@ function version_get_id( $p_version, $p_project_id = null, $p_inherit = null ) {
 
 	$t_project_where = version_get_project_where_clause( $c_project_id, $p_inherit );
 
-	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
+	$t_project_version_table = db_get_table( 'project_version' );
 
 	$query = "SELECT id FROM $t_project_version_table
 					WHERE " . $t_project_where . " AND

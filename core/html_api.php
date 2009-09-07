@@ -1217,7 +1217,7 @@ function html_status_legend() {
  * @return null
  */
 function html_status_percentage_legend() {
-	$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 

@@ -75,8 +75,8 @@
 	# get issues user has sponsored
 	$t_user = auth_get_current_user_id();
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_sponsor_table = db_get_table( 'mantis_sponsorship_table' );
+	$t_bug_table = db_get_table( 'bug' );
+	$t_sponsor_table = db_get_table( 'sponsorship' );
 	$t_payment = config_get( 'payment_enable', 0 );
 
 	$t_project_clause = helper_project_specific_where( $t_project );

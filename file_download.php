@@ -43,13 +43,13 @@
 	$query = '';
 	switch ( $f_type ) {
 		case 'bug':
-			$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
+			$t_bug_file_table = db_get_table( 'bug_file' );
 			$query = "SELECT *
 				FROM $t_bug_file_table
 				WHERE id=" . db_param();
 			break;
 		case 'doc':
-			$t_project_file_table = db_get_table( 'mantis_project_file_table' );
+			$t_project_file_table = db_get_table( 'project_file' );
 			$query = "SELECT *
 				FROM $t_project_file_table
 				WHERE id=" . db_param();

@@ -151,8 +151,8 @@ function create_cumulative_bydate2() {
 
 	$t_clo_val = CLOSED;
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_history_table = db_get_table( 'mantis_bug_history_table' );
+	$t_bug_table = db_get_table( 'bug' );
+	$t_history_table = db_get_table( 'bug_history' );
 
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();

@@ -150,7 +150,7 @@ function plugin_table( $p_name, $p_basename = null ) {
 	} else {
 		$t_current = $p_basename;
 	}
-	return config_get_global( 'db_table_prefix' ) . '_plugin_' . $t_current . '_' . $p_name . config_get_global( 'db_table_suffix' );
+	return db_get_table( 'plugin_' . $t_current . '_' . $p_name );
 }
 
 /**
@@ -491,7 +491,7 @@ function plugin_priority( $p_basename ) {
  * @return boolean True if plugin is installed
  */
 function plugin_is_installed( $p_basename ) {
-	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
+	$t_plugin_table = db_get_table( 'plugin' );
 
 	$t_forced_plugins = config_get_global( 'plugins_force_installed' );
 	foreach( $t_forced_plugins as $t_basename => $t_priority ) {
@@ -524,7 +524,7 @@ function plugin_install( $p_plugin ) {
 		return null;
 	}
 
-	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
+	$t_plugin_table = db_get_table( 'plugin' );
 
 	$t_query = "INSERT INTO $t_plugin_table ( basename, enabled )
 				VALUES ( " . db_param() . ", '1' )";
@@ -571,6 +571,8 @@ function plugin_upgrade( $p_plugin ) {
 		return;
 	}
 
+	require_once( 'install_helper_functions_api.php' );
+
 	plugin_push_current( $p_plugin->basename );
 
 	$t_schema_version = plugin_config_get( 'schema', -1 );
@@ -597,10 +599,20 @@ function plugin_upgrade( $p_plugin ) {
 				$t_schema[$i][1],
 			);
 			$t_target = $t_schema[$i][1];
+		} else if( $t_schema[$i][0] == 'UpdateFunction' ) {
+			$t_sqlarray = false;
+			if( isset( $t_schema[$i][2] ) ) {
+				$t_status = call_user_func( 'install_' . $t_schema[$i][1], $t_schema[$i][2] );
+			} else {
+				$t_status = call_user_func( 'install_' . $t_schema[$i][1] );
+			}
 		} else {
 			$t_sqlarray = call_user_func_array( Array( $t_dict, $t_schema[$i][0] ), $t_schema[$i][1] );
 		}
-		$t_status = $t_dict->ExecuteSQLArray( $t_sqlarray );
+
+		if( $t_sqlarray ) {
+			$t_status = $t_dict->ExecuteSQLArray( $t_sqlarray );
+		}
 
 		if( 2 == $t_status ) {
 			plugin_config_set( 'schema', $i );
@@ -629,7 +641,7 @@ function plugin_uninstall( $p_plugin ) {
 		return;
 	}
 
-	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
+	$t_plugin_table = db_get_table( 'plugin' );
 
 	$t_query = "DELETE FROM $t_plugin_table WHERE basename=" . db_param();
 	db_query_bound( $t_query, array( $p_plugin->basename ) );
@@ -753,7 +765,7 @@ function plugin_register_installed() {
 	}
 
 	# register plugins installed via the interface/database
-	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
+	$t_plugin_table = db_get_table( 'plugin' );
 
 	$t_query = "SELECT basename, priority, protected FROM $t_plugin_table WHERE enabled=" . db_param() . ' ORDER BY priority DESC';
 	$t_result = db_query_bound( $t_query, Array( 1 ) );
@@ -771,7 +783,7 @@ function plugin_register_installed() {
  * Post-signals EVENT_PLUGIN_INIT.
  */
 function plugin_init_installed() {
-	if( OFF == config_get_global( 'plugins_enabled' ) || !db_table_exists( db_get_table( 'mantis_plugin_table' ) ) ) {
+	if( OFF == config_get_global( 'plugins_enabled' ) || !db_table_exists( db_get_table( 'plugin' ) ) ) {
 		return;
 	}
 

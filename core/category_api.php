@@ -39,7 +39,7 @@ function category_exists( $p_category_id ) {
 
 	$c_category_id = db_prepare_int( $p_category_id );
 
-	$t_category_table = db_get_table( 'mantis_category_table' );
+	$t_category_table = db_get_table( 'category' );
 
 	$query = "SELECT COUNT(*) FROM $t_category_table
 					WHERE id=" . db_param();
@@ -74,7 +74,7 @@ function category_exists( $p_category_id ) {
  function category_is_unique( $p_project_id, $p_name ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
-	$t_category_table = db_get_table( 'mantis_category_table' );
+	$t_category_table = db_get_table( 'category' );
 
 	$query = "SELECT COUNT(*) FROM $t_category_table
 					WHERE project_id=" . db_param() . " AND " . db_helper_like( 'name' );
@@ -118,7 +118,7 @@ function category_exists( $p_category_id ) {
 
 	category_ensure_unique( $p_project_id, $p_name );
 
-	$t_category_table = db_get_table( 'mantis_category_table' );
+	$t_category_table = db_get_table( 'category' );
 
 	$query = "INSERT INTO $t_category_table
 					( project_id, name )
@@ -149,8 +149,8 @@ function category_exists( $p_category_id ) {
 	$c_category_id = db_prepare_int( $p_category_id );
 	$c_assigned_to = db_prepare_int( $p_assigned_to );
 
-	$t_category_table = db_get_table( 'mantis_category_table' );
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_category_table = db_get_table( 'category' );
+	$t_bug_table = db_get_table( 'bug' );
 
 	$query = "UPDATE $t_category_table
 				  SET name=" . db_param() . ',
@@ -190,8 +190,8 @@ function category_exists( $p_category_id ) {
 		category_ensure_exists( $p_new_category_id );
 	}
 
-	$t_category_table = db_get_table( 'mantis_category_table' );
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_category_table = db_get_table( 'category' );
+	$t_bug_table = db_get_table( 'bug' );
 
 	$query = "DELETE FROM $t_category_table
 				  WHERE id=" . db_param();
@@ -232,8 +232,8 @@ function category_exists( $p_category_id ) {
 	# cache category names
 	category_get_all_rows( $p_project_id );
 
-	$t_category_table = db_get_table( 'mantis_category_table' );
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_category_table = db_get_table( 'category' );
+	$t_bug_table = db_get_table( 'bug' );
 
 	# get a list of affected categories
 	$t_query = "SELECT id FROM $t_category_table WHERE project_id=" . db_param();
@@ -284,8 +284,8 @@ function category_exists( $p_category_id ) {
 
 	$c_category_id = db_prepare_int( $p_category_id );
 
-	$t_category_table = db_get_table( 'mantis_category_table' );
-	$t_project_table = db_get_table( 'mantis_project_table' );
+	$t_category_table = db_get_table( 'category' );
+	$t_project_table = db_get_table( 'project' );
 
 	$query = "SELECT * FROM $t_category_table
 				WHERE id=" . db_param();
@@ -352,8 +352,8 @@ function category_cache_array_rows_by_project( $p_project_id_array ) {
 		return;
 	}
 
-	$t_category_table = db_get_table( 'mantis_category_table' );
-	$t_project_table = db_get_table( 'mantis_project_table' );
+	$t_category_table = db_get_table( 'category' );
+	$t_project_table = db_get_table( 'project' );
 
 	$query = "SELECT c.*, p.name AS project_name FROM $t_category_table c
 				LEFT JOIN $t_project_table p
@@ -408,8 +408,8 @@ function category_cache_array_rows_by_project( $p_project_id_array ) {
 
 	$c_project_id = db_prepare_int( $p_project_id );
 
-	$t_category_table = db_get_table( 'mantis_category_table' );
-	$t_project_table = db_get_table( 'mantis_project_table' );
+	$t_category_table = db_get_table( 'category' );
+	$t_project_table = db_get_table( 'project' );
 
 	if ( $c_project_id == ALL_PROJECTS ) {
 		$t_inherit = false;
@@ -472,8 +472,8 @@ function category_cache_array_rows( $p_cat_id_array ) {
 		return;
 	}
 
-	$t_category_table = db_get_table( 'mantis_category_table' );
-	$t_project_table = db_get_table( 'mantis_project_table' );
+	$t_category_table = db_get_table( 'category' );
+	$t_project_table = db_get_table( 'project' );
 
 	$query = "SELECT c.*, p.name AS project_name FROM $t_category_table c
 				LEFT JOIN $t_project_table p
@@ -522,7 +522,7 @@ function category_get_field( $p_category_id, $p_field_name ) {
  * @access public
  */
  function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_errors = true ) {
-	$t_category_table = db_get_table( 'mantis_category_table' );
+	$t_category_table = db_get_table( 'category' );
 	$t_project_name = project_get_name( $p_project_id );
 
 	$t_query = "SELECT id FROM $t_category_table

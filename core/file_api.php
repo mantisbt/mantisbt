@@ -62,7 +62,7 @@ function file_bug_attachment_count( $p_bug_id ) {
 	global $g_cache_file_count;
 
 	$c_bug_id = db_prepare_int( $p_bug_id );
-	$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
+	$t_bug_file_table = db_get_table( 'bug_file' );
 
 	# First check if we have a cache hit
 	if( isset( $g_cache_file_count[$p_bug_id] ) ) {
@@ -326,7 +326,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 function file_delete_attachments( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
-	$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
+	$t_bug_file_table = db_get_table( 'bug_file' );
 
 	$t_method = config_get( 'file_upload_method' );
 
@@ -375,7 +375,7 @@ function file_delete_attachments( $p_bug_id ) {
 }
 
 function file_delete_project_files( $p_project_id ) {
-	$t_project_file_table = db_get_table( 'mantis_project_file_table' );
+	$t_project_file_table = db_get_table( 'project_file' );
 	$t_method = config_get( 'file_upload_method' );
 
 	# Delete the file physically (if stored via DISK or FTP)
@@ -465,7 +465,7 @@ function file_delete_local( $p_filename ) {
 # Return the specified field value
 function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
 	$c_field_name = db_prepare_string( $p_field_name );
-	$t_bug_file_table = db_get_table( 'mantis_' . $p_table . '_file_table' );
+	$t_bug_file_table = db_get_table( $p_table . '_file' );
 
 	# get info
 	$query = "SELECT $c_field_name
@@ -512,7 +512,7 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 		}
 	}
 
-	$t_file_table = db_get_table( 'mantis_' . $p_table . '_file_table' );
+	$t_file_table = db_get_table( $p_table . '_file' );
 	$query = "DELETE FROM $t_file_table
 				WHERE id=" . db_param();
 	db_query_bound( $query, Array( $c_file_id ) );
@@ -576,7 +576,7 @@ function file_generate_unique_name( $p_seed, $p_filepath ) {
 
 # Return true if the diskfile name identifier is unique, false otherwise
 function diskfile_is_name_unique( $p_name, $p_filepath ) {
-	$t_file_table = db_get_table( 'mantis_bug_file_table' );
+	$t_file_table = db_get_table( 'bug_file' );
 
 	$c_name = $p_filepath . $p_name;
 
@@ -595,7 +595,7 @@ function diskfile_is_name_unique( $p_name, $p_filepath ) {
 
 # Return true if the file name identifier is unique, false otherwise
 function file_is_name_unique( $p_name, $p_bug_id ) {
-	$t_file_table = db_get_table( 'mantis_bug_file_table' );
+	$t_file_table = db_get_table( 'bug_file' );
 
 	$query = "SELECT COUNT(*)
 				  FROM $t_file_table
@@ -709,7 +709,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
 
-	$t_file_table = db_get_table( 'mantis_' . $p_table . '_file_table' );
+	$t_file_table = db_get_table( $p_table . '_file' );
 	$c_id = ( 'bug' == $p_table ) ? $c_bug_id : $c_project_id;
 
 	$query = "INSERT INTO $t_file_table

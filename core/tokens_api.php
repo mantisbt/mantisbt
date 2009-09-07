@@ -35,7 +35,7 @@ $g_tokens_purged = false;
  */
 function token_exists( $p_token_id ) {
 	$c_token_id = db_prepare_int( $p_token_id );
-	$t_tokens_table = db_get_table( 'mantis_tokens_table' );
+	$t_tokens_table = db_get_table( 'tokens' );
 
 	$t_query = "SELECT id
 		          	FROM $t_tokens_table
@@ -71,7 +71,7 @@ function token_get( $p_type, $p_user_id = null ) {
 	$c_type = db_prepare_int( $p_type );
 	$c_user_id = db_prepare_int( $p_user_id == null ? auth_get_current_user_id() : $p_user_id );
 
-	$t_tokens_table = db_get_table( 'mantis_tokens_table' );
+	$t_tokens_table = db_get_table( 'tokens' );
 
 	$t_query = "SELECT * FROM $t_tokens_table
 					WHERE type=" . db_param() . " AND owner=" . db_param();
@@ -129,7 +129,7 @@ function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
 
 	$c_token_id = db_prepare_int( $p_token_id );
 	$c_token_expiry = time() + $p_expiry;
-	$t_tokens_table = db_get_table( 'mantis_tokens_table' );
+	$t_tokens_table = db_get_table( 'tokens' );
 
 	$t_query = "UPDATE $t_tokens_table
 					SET expiry=" . db_param() . "
@@ -149,7 +149,7 @@ function token_delete( $p_type, $p_user_id = null ) {
 	$c_type = db_prepare_int( $p_type );
 	$c_user_id = db_prepare_int( $p_user_id == null ? auth_get_current_user_id() : $p_user_id );
 
-	$t_tokens_table = db_get_table( 'mantis_tokens_table' );
+	$t_tokens_table = db_get_table( 'tokens' );
 
 	$t_query = "DELETE FROM $t_tokens_table
 					WHERE type=" . db_param() . " AND owner=" . db_param();
@@ -170,7 +170,7 @@ function token_delete_by_owner( $p_user_id = null ) {
 		$c_user_id = db_prepare_int( $p_user_id );
 	}
 
-	$t_tokens_table = db_get_table( 'mantis_tokens_table' );
+	$t_tokens_table = db_get_table( 'tokens' );
 
 	# Remove
 	$t_query = "DELETE FROM $t_tokens_table
@@ -195,7 +195,7 @@ function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id =
 	$c_expiry = time() + $p_expiry;
 	$c_user_id = db_prepare_int( $p_user_id == null ? auth_get_current_user_id() : $p_user_id );
 
-	$t_tokens_table = db_get_table( 'mantis_tokens_table' );
+	$t_tokens_table = db_get_table( 'tokens' );
 
 	$t_query = "INSERT INTO $t_tokens_table
 					( type, value, timestamp, expiry, owner )
@@ -216,7 +216,7 @@ function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
 	$c_token_id = db_prepare_int( $p_token_id );
 	$c_expiry = time() + $p_expiry;
 
-	$t_tokens_table = db_get_table( 'mantis_tokens_table' );
+	$t_tokens_table = db_get_table( 'tokens' );
 
 	$t_query = "UPDATE $t_tokens_table
 					SET value=" . db_param() . ", expiry=" . db_param() . "
@@ -234,7 +234,7 @@ function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
 function token_delete_by_type( $p_token_type ) {
 	$c_token_type = db_prepare_int( $p_token_type );
 
-	$t_tokens_table = db_get_table( 'mantis_tokens_table' );
+	$t_tokens_table = db_get_table( 'tokens' );
 
 	# Remove
 	$t_query = "DELETE FROM $t_tokens_table
@@ -252,7 +252,7 @@ function token_delete_by_type( $p_token_type ) {
 function token_purge_expired( $p_token_type = null ) {
 	global $g_tokens_purged;
 
-	$t_tokens_table = db_get_table( 'mantis_tokens_table' );
+	$t_tokens_table = db_get_table( 'tokens' );
 
 	$t_query = "DELETE FROM $t_tokens_table WHERE " . db_param() . " > expiry";
 	if( !is_null( $p_token_type ) ) {

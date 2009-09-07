@@ -46,7 +46,7 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 		$c_user_id = db_prepare_int( $p_user_id );
 		$c_type = db_prepare_int( $p_type );
 
-		$t_mantis_bug_history_table = db_get_table( 'mantis_bug_history_table' );
+		$t_mantis_bug_history_table = db_get_table( 'bug_history' );
 
 		$query = "INSERT INTO $t_mantis_bug_history_table
 						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
@@ -85,7 +85,7 @@ function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_opt
 	$c_optional2 = ( $p_optional2 );
 	$t_user_id = auth_get_current_user_id();
 
-	$t_mantis_bug_history_table = db_get_table( 'mantis_bug_history_table' );
+	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
 
 	$query = "INSERT INTO $t_mantis_bug_history_table
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
@@ -128,8 +128,8 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
  * @return array
  */
 function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
-	$t_mantis_bug_history_table = db_get_table( 'mantis_bug_history_table' );
-	$t_mantis_user_table = db_get_table( 'mantis_user_table' );
+	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
+	$t_mantis_user_table = db_get_table( 'user' );
 	$t_history_order = config_get( 'history_order' );
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
@@ -540,7 +540,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 function history_delete( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
-	$t_bug_history_table = db_get_table( 'mantis_bug_history_table' );
+	$t_bug_history_table = db_get_table( 'bug_history' );
 
 	$query = 'DELETE FROM ' . $t_bug_history_table . ' WHERE bug_id=' . db_param();
 	db_query_bound( $query, Array( $c_bug_id ) );

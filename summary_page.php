@@ -39,8 +39,8 @@
 	$t_project_ids = user_get_all_accessible_projects( $t_user_id, $f_project_id);
 	$specific_where = helper_project_specific_where( $f_project_id, $t_user_id);
 
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_history_table = db_get_table( 'mantis_bug_history_table' );
+	$t_bug_table = db_get_table( 'bug' );
+	$t_history_table = db_get_table( 'bug_history' );
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 	# the issue may have passed through the status we consider resolved

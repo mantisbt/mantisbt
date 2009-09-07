@@ -34,7 +34,7 @@ form_security_validate( 'manage_plugin_update' );
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
-$t_plugin_table	= db_get_table( 'mantis_plugin_table' );
+$t_plugin_table	= db_get_table( 'plugin' );
 
 $t_query = "SELECT basename FROM $t_plugin_table";
 $t_result = db_query_bound( $t_query );

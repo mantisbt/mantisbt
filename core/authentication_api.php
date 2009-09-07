@@ -525,7 +525,7 @@ function auth_generate_unique_cookie_string() {
  * @access public
  */
 function auth_is_cookie_string_unique( $p_cookie_string ) {
-	$t_user_table = db_get_table( 'mantis_user_table' );
+	$t_user_table = db_get_table( 'user' );
 
 	$query = "SELECT COUNT(*)
 				  FROM $t_user_table
@@ -572,7 +572,7 @@ function auth_get_current_user_cookie() {
 				if( function_exists( 'db_is_connected' ) && db_is_connected() ) {
 
 					# get anonymous information if database is available
-					$query = 'SELECT id, cookie_string FROM ' . db_get_table( 'mantis_user_table' ) . ' WHERE username = ' . db_param();
+					$query = 'SELECT id, cookie_string FROM ' . db_get_table( 'user' ) . ' WHERE username = ' . db_param();
 					$result = db_query_bound( $query, Array( config_get( 'anonymous_account' ) ) );
 
 					if( 1 == db_num_rows( $result ) ) {
@@ -740,7 +740,7 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 	}
 
 	# look up cookie in the database to see if it is valid
-	$t_user_table = db_get_table( 'mantis_user_table' );
+	$t_user_table = db_get_table( 'user' );
 
 	$query = "SELECT *
 				  FROM $t_user_table
@@ -776,7 +776,7 @@ function auth_get_current_user_id() {
 		return $t_user_id;
 	}
 
-	$t_user_table = db_get_table( 'mantis_user_table' );
+	$t_user_table = db_get_table( 'user' );
 
 	/** @todo error with an error saying they aren't logged in? Or redirect to the login page maybe? */
 	$query = "SELECT id

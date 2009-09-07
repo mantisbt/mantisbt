@@ -38,7 +38,7 @@ function bug_revision_add( $p_bug_id, $p_user_id, $p_type, $p_value, $p_bugnote_
 		return null;
 	}
 
-	$t_bug_rev_table = db_get_table( 'mantis_bug_revision_table' );
+	$t_bug_rev_table = db_get_table( 'bug_revision' );
 
 	$t_last = bug_revision_last( $p_bug_id, $p_type );
 
@@ -88,7 +88,7 @@ function bug_revision_add( $p_bug_id, $p_user_id, $p_type, $p_value, $p_bugnote_
  * @return array Revision data row
  */
 function bug_revision_get( $p_revision_id ) {
-	$t_bug_rev_table = db_get_table( 'mantis_bug_revision_table' );
+	$t_bug_rev_table = db_get_table( 'bug_revision' );
 
 	$t_query = "SELECT * FROM $t_bug_rev_table WHERE id=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_revision_id ) );
@@ -106,7 +106,7 @@ function bug_revision_get( $p_revision_id ) {
  * @return null
  */
 function bug_revision_drop( $p_revision_id ) {
-	$t_bug_rev_table = db_get_table( 'mantis_bug_revision_table' );
+	$t_bug_rev_table = db_get_table( 'bug_revision' );
 
 	if ( is_array( $p_revision_id ) ) {
 		$t_first = true;
@@ -133,7 +133,7 @@ function bug_revision_drop( $p_revision_id ) {
  * @return array|null Array of Revision rows
  */
 function bug_revision_count( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
-	$t_bug_rev_table = db_get_table( 'mantis_bug_revision_table' );
+	$t_bug_rev_table = db_get_table( 'bug_revision' );
 
 	$t_params = array( $p_bug_id );
 	$t_query = "SELECT COUNT(id) FROM $t_bug_rev_table
@@ -163,7 +163,7 @@ function bug_revision_count( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
  * @return null
  */
 function bug_revision_delete( $p_bug_id, $p_bugnote_id=0 ) {
-	$t_bug_rev_table = db_get_table( 'mantis_bug_revision_table' );
+	$t_bug_rev_table = db_get_table( 'bug_revision' );
 
 	if ( $p_bugnote_id < 1 ) {
 		$t_query = "DELETE FROM $t_bug_rev_table WHERE bug_id=" . db_param();
@@ -182,7 +182,7 @@ function bug_revision_delete( $p_bug_id, $p_bugnote_id=0 ) {
  * @return null|array Revision row
  */
 function bug_revision_last( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
-	$t_bug_rev_table = db_get_table( 'mantis_bug_revision_table' );
+	$t_bug_rev_table = db_get_table( 'bug_revision' );
 
 	$t_params = array( $p_bug_id );
 	$t_query = "SELECT * FROM $t_bug_rev_table
@@ -218,7 +218,7 @@ function bug_revision_last( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
  * @return array/null Array of Revision rows
  */
 function bug_revision_list( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
-	$t_bug_rev_table = db_get_table( 'mantis_bug_revision_table' );
+	$t_bug_rev_table = db_get_table( 'bug_revision' );
 
 	$t_params = array( $p_bug_id );
 	$t_query = "SELECT * FROM $t_bug_rev_table
@@ -254,7 +254,7 @@ function bug_revision_list( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
  * @return array|null Array of Revision rows
  */
 function bug_revision_like( $p_rev_id ) {
-	$t_bug_rev_table = db_get_table( 'mantis_bug_revision_table' );
+	$t_bug_rev_table = db_get_table( 'bug_revision' );
 
 	$t_query = "SELECT bug_id, bugnote_id, type FROM $t_bug_rev_table WHERE id=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_rev_id ) );

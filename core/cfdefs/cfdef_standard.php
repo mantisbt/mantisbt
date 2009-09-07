@@ -314,7 +314,7 @@ function cfdef_prepare_list_value_to_database($p_value) {
 }
 
 function cfdef_prepare_list_distinct_values($p_field_def) {
-	$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
+	$t_custom_field_table = db_get_table( 'custom_field' );
 
 	$query = "SELECT possible_values
 			  FROM $t_custom_field_table

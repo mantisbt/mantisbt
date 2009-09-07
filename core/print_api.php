@@ -322,7 +322,7 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 # --------------------
 # Get current headlines and id  prefix with v_
 function print_news_item_option_list() {
-	$t_mantis_news_table = db_get_table( 'mantis_news_table' );
+	$t_mantis_news_table = db_get_table( 'news' );
 
 	$t_project_id = helper_get_current_project();
 
@@ -652,8 +652,8 @@ function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
 # We check in the project category table and in the bug table
 # We put them all in one array and make sure the entries are unique
 function print_category_option_list( $p_category_id = 0, $p_project_id = null ) {
-	$t_category_table = db_get_table( 'mantis_category_table' );
-	$t_project_table = db_get_table( 'mantis_project_table' );
+	$t_category_table = db_get_table( 'category' );
+	$t_project_table = db_get_table( 'project' );
 
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
@@ -683,8 +683,8 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 # Now that categories are identified by numerical ID, we need an old-style name
 # based option list to keep existing filter functionality.
 function print_category_filter_option_list( $p_category_name = '', $p_project_id = null ) {
-	$t_category_table = db_get_table( 'mantis_category_table' );
-	$t_project_table = db_get_table( 'mantis_project_table' );
+	$t_category_table = db_get_table( 'category' );
+	$t_project_table = db_get_table( 'project' );
 
 	if( null === $p_project_id ) {
 		$c_project_id = helper_get_current_project();
@@ -813,7 +813,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 }
 
 function print_build_option_list( $p_build = '' ) {
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_bug_table = db_get_table( 'bug' );
 	$t_overall_build_arr = array();
 
 	$t_project_id = helper_get_current_project();
@@ -1039,8 +1039,8 @@ function print_all_bug_action_option_list() {
 # if no project is specified use the current project
 # also exclude any administrators
 function print_project_user_list_option_list( $p_project_id = null ) {
-	$t_mantis_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
-	$t_mantis_user_table = db_get_table( 'mantis_user_table' );
+	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
+	$t_mantis_user_table = db_get_table( 'user' );
 
 	if( null === $p_project_id ) {
 		$p_project_id = helper_get_current_project();
@@ -1089,8 +1089,8 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 
 # list of projects that a user is NOT in
 function print_project_user_list_option_list2( $p_user_id ) {
-	$t_mantis_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
-	$t_mantis_project_table = db_get_table( 'mantis_project_table' );
+	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
+	$t_mantis_project_table = db_get_table( 'project' );
 
 	$c_user_id = db_prepare_int( $p_user_id );
 
@@ -1113,8 +1113,8 @@ function print_project_user_list_option_list2( $p_user_id ) {
 
 # list of projects that a user is in
 function print_project_user_list( $p_user_id, $p_include_remove_link = true ) {
-	$t_mantis_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
-	$t_mantis_project_table = db_get_table( 'mantis_project_table' );
+	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
+	$t_mantis_project_table = db_get_table( 'project' );
 
 	$c_user_id = db_prepare_int( $p_user_id );
 
@@ -1714,7 +1714,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 
 			if ( $t_attachment['preview'] && ( $t_attachment['type'] == 'text' ) ) {
 				 $c_id = db_prepare_int( $t_attachment['id'] );
-				 $t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
+				 $t_bug_file_table = db_get_table( 'bug_file' );
 
 				echo "<script type=\"text/javascript\" language=\"JavaScript\">
 <!--

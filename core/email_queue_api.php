@@ -78,7 +78,7 @@ function email_queue_add( $p_email_data ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$t_email_table = db_get_table( 'mantis_email_table' );
+	$t_email_table = db_get_table( 'email' );
 
 	$c_email = $t_email_data->email;
 	$c_subject = $t_email_data->subject;
@@ -142,7 +142,7 @@ function email_queue_row_to_object( $p_row ) {
  */
 function email_queue_get( $p_email_id ) {
 	$c_email_id = db_prepare_int( $p_email_id );
-	$t_email_table = db_get_table( 'mantis_email_table' );
+	$t_email_table = db_get_table( 'email' );
 
 	$query = 'SELECT * FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
 	$result = db_query_bound( $query, Array( $c_email_id ) );
@@ -159,7 +159,7 @@ function email_queue_get( $p_email_id ) {
  */
 function email_queue_delete( $p_email_id ) {
 	$c_email_id = db_prepare_int( $p_email_id );
-	$t_email_table = db_get_table( 'mantis_email_table' );
+	$t_email_table = db_get_table( 'email' );
 
 	$query = 'DELETE FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
 	db_query_bound( $query, Array( $c_email_id ) );
@@ -170,7 +170,7 @@ function email_queue_delete( $p_email_id ) {
  * @return array
  */
 function email_queue_get_ids() {
-	$t_email_table = db_get_table( 'mantis_email_table' );
+	$t_email_table = db_get_table( 'email' );
 
 	$query = 'SELECT email_id FROM ' . $t_email_table . ' ORDER BY email_id DESC';
 	$result = db_query_bound( $query );

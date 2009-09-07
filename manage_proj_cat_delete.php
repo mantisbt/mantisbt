@@ -41,7 +41,7 @@
 	$t_project_id = $t_row['project_id'];
 
 	# Get a bug count
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_bug_table = db_get_table( 'bug' );
 	$t_query = "SELECT COUNT(id) FROM $t_bug_table WHERE category_id=" . db_param();
 	$t_bug_count = db_result( db_query_bound( $t_query, array( $f_category_id ) ) );
 

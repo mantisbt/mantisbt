@@ -62,8 +62,8 @@
 		exit();
 	}
 
-	$t_bug_table			= db_get_table( 'mantis_bug_table' );
-	$t_bug_hist_table			= db_get_table( 'mantis_bug_history_table' );
+	$t_bug_table			= db_get_table( 'bug' );
+	$t_bug_hist_table			= db_get_table( 'bug_history' );
 
 	$t_marker = array();
 	$t_data = array();

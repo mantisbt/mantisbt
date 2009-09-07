@@ -56,7 +56,7 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$t_user_profile_table = db_get_table( 'mantis_user_profile_table' );
+	$t_user_profile_table = db_get_table( 'user_profile' );
 
 	# Add profile
 	$query = "INSERT INTO $t_user_profile_table
@@ -86,7 +86,7 @@ function profile_delete( $p_user_id, $p_profile_id ) {
 		user_ensure_unprotected( $p_user_id );
 	}
 
-	$t_user_profile_table = db_get_table( 'mantis_user_profile_table' );
+	$t_user_profile_table = db_get_table( 'user_profile' );
 
 	# Delete the profile
 	$query = "DELETE FROM $t_user_profile_table
@@ -133,7 +133,7 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$t_user_profile_table = db_get_table( 'mantis_user_profile_table' );
+	$t_user_profile_table = db_get_table( 'user_profile' );
 
 	# Add item
 	$query = "UPDATE $t_user_profile_table
@@ -158,7 +158,7 @@ function profile_get_row( $p_user_id, $p_profile_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_profile_id = db_prepare_int( $p_profile_id );
 
-	$t_user_profile_table = db_get_table( 'mantis_user_profile_table' );
+	$t_user_profile_table = db_get_table( 'user_profile' );
 
 	$query = "SELECT *
 				  FROM $t_user_profile_table
@@ -177,7 +177,7 @@ function profile_get_row( $p_user_id, $p_profile_id ) {
 function profile_get_row_direct( $p_profile_id ) {
 	$c_profile_id = db_prepare_int( $p_profile_id );
 
-	$t_user_profile_table = db_get_table( 'mantis_user_profile_table' );
+	$t_user_profile_table = db_get_table( 'user_profile' );
 
 	$query = "SELECT *
 				  FROM $t_user_profile_table
@@ -195,7 +195,7 @@ function profile_get_row_direct( $p_profile_id ) {
 function profile_get_all_rows( $p_user_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 
-	$t_user_profile_table = db_get_table( 'mantis_user_profile_table' );
+	$t_user_profile_table = db_get_table( 'user_profile' );
 
 	$query = "SELECT *
 				  FROM $t_user_profile_table
@@ -252,7 +252,7 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
 
-	$t_user_profile_table = db_get_table( 'mantis_user_profile_table' );
+	$t_user_profile_table = db_get_table( 'user_profile' );
 
 	$query = "SELECT DISTINCT $c_field
 				  FROM $t_user_profile_table
@@ -280,8 +280,8 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 function profile_get_all_for_project( $p_project_id ) {
 	$t_project_where = helper_project_specific_where( $p_project_id );
 
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_user_profile_table = db_get_table( 'mantis_user_profile_table' );
+	$t_bug_table = db_get_table( 'bug' );
+	$t_user_profile_table = db_get_table( 'user_profile' );
 
 	# using up.* causes an SQL error on MS SQL since up.description is of type text
 	$query = "SELECT DISTINCT(up.id), up.user_id, up.platform, up.os, up.os_build
@@ -308,7 +308,7 @@ function profile_get_all_for_project( $p_project_id ) {
  */
 function profile_get_default( $p_user_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
-	$t_mantis_user_pref_table = db_get_table( 'mantis_user_pref_table' );
+	$t_mantis_user_pref_table = db_get_table( 'user_pref' );
 
 	$query = "SELECT default_profile
 			FROM $t_mantis_user_pref_table
