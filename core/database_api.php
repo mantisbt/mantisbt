@@ -605,7 +605,8 @@ function db_index_exists( $p_table_name, $p_index_name ) {
  */
 function db_field_exists( $p_field_name, $p_table_name ) {
 	global $g_db;
-	return in_array( $p_field_name, $g_db->MetaColumnNames( $p_table_name ) );
+	$columns = $g_db->MetaColumnNames( $p_table_name );
+	return is_array( $columns ) ? in_array( $p_field_name, $columns ) : false;
 }
 
 /**
