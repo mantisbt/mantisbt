@@ -15,13 +15,65 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Update functions for the installation schema's 'UpdateFunction' option.
- * All functions must be name install_<function_name> and referenced as just <function_name>.
- * @package MantisBT
+ * @package CoreAPI
+ * @subpackage InstallHelperFunctionsAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
+
+/**
+ * Checks a PHP version number against the version of PHP currently in use
+ * @param string $p_version Version string to compare
+ * @return bool true if the PHP version in use is equal to or greater than the supplied version string
+ */
+function check_php_version( $p_version ) {
+	if( $p_version == PHP_MIN_VERSION ) {
+		return true;
+	} else {
+		if( function_exists( 'version_compare' ) ) {
+			if( version_compare( phpversion(), PHP_MIN_VERSION, '>=' ) ) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+}
+
+/**
+ * Legacy pre-1.2 date function used for upgrading from datetime to integer
+ * representation of dates in the database.
+ * @return string Formatted date representing unixtime(0) + 1 second, ready for database insertion
+ */
+function db_null_date() {
+	global $g_db;
+
+	return $g_db->BindTimestamp( $g_db->UserTimeStamp( 1, 'Y-m-d H:i:s', true ) );
+}
+
+/**
+ * Legacy pre-1.2 date function used for upgrading from datetime to integer
+ * representation of dates in the database. This function converts a formatted
+ * datetime string to an that represents the number of seconds elapsed since
+ * the Unix epoch.
+ * @param string $p_date Formatted datetime string from a database
+ * @param bool $p_gmt Whether to use UTC (true) or server timezone (false, default)
+ * @return int Unix timestamp representation of a datetime string
+ * @todo Review date handling
+ */
+function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
+	global $g_db;
+
+	if( null !== $p_date ) {
+		$p_timestamp = $g_db->UnixTimeStamp( $p_date, $p_gmt );
+	} else {
+		$p_timestamp = time();
+	}
+	return $p_timestamp;
+}
 
 /**
  * Migrate the legacy category data to the new category_id-based schema.
@@ -29,9 +81,9 @@
 function install_category_migrate() {
 	global $g_db_log_queries;
 	
-	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$t_category_table = db_get_table( 'mantis_category_table' );
-	$t_project_category_table = db_get_table( 'mantis_project_category_table' );
+	$t_bug_table = db_get_table( 'bug' );
+	$t_category_table = db_get_table( 'category' );
+	$t_project_category_table = db_get_table( 'project_category' );
 
 	// disable query logging (even if it's enabled in config for this)
 	if ( $g_db_log_queries !== 0 ) {
@@ -105,7 +157,7 @@ function install_date_migrate( $p_data) {
 		$t_log_queries = null;
 	}
 
-	$t_table = db_get_table( $p_data[0] );
+	$t_table = $p_data[0];
 	$t_id_column = $p_data[1];
 
 	if ( is_array( $p_data[2] ) ) {
@@ -164,9 +216,4 @@ function install_date_migrate( $p_data) {
 	# return 2 because that's what ADOdb/DataDict does when things happen properly
 	return 2;	
 
-}
-
-function install_do_nothing() {
-	# return 2 because that's what ADOdb/DataDict does when things happen properly
-	return 2;
 }
