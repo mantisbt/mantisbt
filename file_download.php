@@ -122,13 +122,28 @@
 	}
 	header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 
+	# If finfo is available (always true for PHP >= 5.3.0) we can use it to determine the MIME type of files
+	$finfo_available = false;
+	if ( class_exists( 'finfo' ) ) {
+		$finfo_available = true;
+		$finfo = new finfo(FILEINFO_MIME);
+		if ( !$finfo ) {
+			$finfo_available = false;
+		}
+	}
+
 	# dump file content to the connection.
 	switch ( config_get( 'file_upload_method' ) ) {
 		case DISK:
 			$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
 
 			if ( file_exists( $t_local_disk_file ) ) {
-				readfile_chunked( $t_local_disk_file, $v_file_type, $v_filesize );
+				if ( $finfo_available ) {
+					if ( $content_type = $finfo->file( $t_local_disk_file ) ) {
+						header( 'Content-Type: ' . $content_type );
+					}
+				}
+				file_send_chunk( $t_local_disk_file );
 			}
 			break;
 		case FTP:
@@ -142,18 +157,22 @@
 				file_ftp_disconnect( $ftp );
 				readfile( $t_local_disk_file );
 			}
+			if ( $finfo_available ) {
+				if ( $content_type = $finfo->file( $t_local_disk_file ) ) {
+					header( 'Content-Type: ' . $content_type );
+				}
+			}
 			break;
 		default:
+			if ( $finfo_available ) {
+				if ( $content_type = $finfo->buffer( $v_content ) ) {
+					header( 'Content-Type: ' . $content_type );
+				}
+			}
 			echo $v_content;
 	}
+	header( 'Content-Length: ' . $v_filesize );
 	exit();
-
-
-function readfile_chunked($filename, $p_file_type, $p_filesize) {
-	header( 'Content-Type: ' . $p_file_type );
-	header( 'Content-Length: ' . $p_filesize );
-   	file_send_chunk( $filename );
-}
 
 function file_send_chunk($filename, $start = 0, $maxlength = 0 ) {
     static $s_safe_mode = null;
