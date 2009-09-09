@@ -266,7 +266,7 @@ if ( $tpl_show_handler || $tpl_show_due_date ) {
 			date_print_calendar();
 			date_finish_calendar( 'due_date', 'trigger');
 		} else {
-			if ( $tpl_bug->due_date != $t_null_date  ) {
+			if ( !date_is_null( $tpl_bug->due_date ) ) {
 				echo date( config_get( 'short_date_format' ), $tpl_bug->due_date  );
 			}
 		}
