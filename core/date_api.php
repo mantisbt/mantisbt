@@ -258,16 +258,13 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
  */
 function date_print_calendar( $p_button_name = 'trigger' ) {
 	if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
-		echo "<style type=\"text/css\">@import url(/css/calendar-blue.css);</style>\n";
+		echo "<style type=\"text/css\">@import url(" . config_get( 'short_path' ) . "css/calendar-blue.css);</style>\n";
 		html_javascript_link( 'jscalendar/calendar.js' );
 		html_javascript_link( 'jscalendar/lang/calendar-en.js' );
 		html_javascript_link( 'jscalendar/calendar-setup.js' );
 		$t_icon_path = config_get( 'icon_path' );
 		$t_cal_icon = $t_icon_path . "calendar-img.gif";
-		echo "<input type=\"image\" class=\"button\" id=\"" . $p_button_name . "\" src=\"";
-		echo $t_cal_icon;
-		$t_format = config_get( 'calendar_js_date_format' );
-		echo "\" onclick=\"return showCalendar ('sel1', '" . $t_format . "', 24, true)\" />";
+		echo "<input type=\"image\" class=\"button\" id=\"" . $p_button_name . "\" src=\"" . $t_cal_icon . "\" />";
 	}
 }
 
