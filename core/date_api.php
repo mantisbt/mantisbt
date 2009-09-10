@@ -23,6 +23,14 @@
  */
 
 /**
+ * Keeps track of whether the external files required for jscalendar to work
+ * have already been included in the output sent to the client. jscalendar
+ * will not work correctly if it is included multiple times on the same page.
+ * @global bool $g_jscalendar_included_already
+ */
+$g_calendar_already_imported = false;
+
+/**
  * checks if date is null
  * @param int $p_date
  * @return bool
@@ -248,7 +256,8 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 }
 
 /**
- * prints calendar icon and adds required javascript files.
+ * prints calendar icon and adds required javascript and css files if they
+ * haven't already been imported.
  * button_name is name of button that will display calendar icon
  * in caste there are more than one calendar on page
  * @param string $p_button_name
@@ -257,11 +266,15 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
  * @access public
  */
 function date_print_calendar( $p_button_name = 'trigger' ) {
+	global $g_calendar_already_imported;
 	if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
-		echo "<style type=\"text/css\">@import url(" . config_get( 'short_path' ) . "css/calendar-blue.css);</style>\n";
-		html_javascript_link( 'jscalendar/calendar.js' );
-		html_javascript_link( 'jscalendar/lang/calendar-en.js' );
-		html_javascript_link( 'jscalendar/calendar-setup.js' );
+		if ( !$g_calendar_already_imported ) {
+			echo "<style type=\"text/css\">@import url(" . config_get( 'short_path' ) . "css/calendar-blue.css);</style>\n";
+			html_javascript_link( 'jscalendar/calendar.js' );
+			html_javascript_link( 'jscalendar/lang/calendar-en.js' );
+			html_javascript_link( 'jscalendar/calendar-setup.js' );
+			$g_calendar_already_imported = true;
+		}
 		$t_icon_path = config_get( 'icon_path' );
 		$t_cal_icon = $t_icon_path . "calendar-img.gif";
 		echo "<input type=\"image\" class=\"button\" id=\"" . $p_button_name . "\" src=\"" . $t_cal_icon . "\" />";
@@ -272,7 +285,6 @@ function date_print_calendar( $p_button_name = 'trigger' ) {
  * creates javascript calendar objects, point to input element ($p_field_name) that
  * diaplays date, and connects it with calendar button ($p_button_name) created with
  * date_print_calendar.
- * should be called right after </form> tag
  * @todo (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...)
  * @param string $p_field_name
  * @param string $p_button_name
