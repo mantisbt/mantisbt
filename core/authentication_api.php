@@ -93,7 +93,7 @@ function auth_is_user_authenticated() {
 	if( $g_cache_cookie_valid == true ) {
 		return $g_cache_cookie_valid;
 	}
-	$g_cache_cookie_valid = auth_is_cookie_valid( auth_get_current_user_cookie() );
+	$g_cache_cookie_valid = auth_is_cookie_valid( auth_get_current_user_cookie( false ) );
 	return $g_cache_cookie_valid;
 }
 
@@ -550,10 +550,11 @@ function auth_is_cookie_string_unique( $p_cookie_string ) {
  * if no user is logged in and anonymous login is enabled, returns cookie for anonymous user
  * otherwise returns '' (an empty string)
  *
+ * @param boolean auto-login anonymous user
  * @return string current user login cookie string
  * @access public
  */
-function auth_get_current_user_cookie() {
+function auth_get_current_user_cookie( $p_login_anonymous=true ) {
 	global $g_script_login_cookie, $g_cache_anonymous_user_cookie_string;
 
 	# if logging in via a script, return that cookie
@@ -567,7 +568,7 @@ function auth_get_current_user_cookie() {
 
 	# if cookie not found, and anonymous login enabled, use cookie of anonymous account.
 	if( is_blank( $t_cookie ) ) {
-		if( ON == config_get( 'allow_anonymous_login' ) ) {
+		if( $p_login_anonymous && ON == config_get( 'allow_anonymous_login' ) ) {
 			if( $g_cache_anonymous_user_cookie_string === null ) {
 				if( function_exists( 'db_is_connected' ) && db_is_connected() ) {
 
