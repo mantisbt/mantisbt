@@ -132,3 +132,6 @@ config_obsolete( 'graph_summary_graphs_per_row', '' );
 config_obsolete( 'show_report', '' );
 config_obsolete( 'show_view', '' );
 config_obsolete( 'show_update', '' );
+config_obsolete( 'default_advanced_report', '' );
+config_obsolete( 'default_advanced_view', '' );
+config_obsolete( 'default_advanced_update', '' );
