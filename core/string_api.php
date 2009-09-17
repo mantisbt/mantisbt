@@ -105,7 +105,7 @@ function string_nl2br( $p_string, $p_wrap = 100 ) {
 				#     if other encoded characters are a problem
 				$piece = preg_replace( '/&nbsp;/', ' ', $piece );
 				if( ON == config_get( 'wrap_in_preformatted_text' ) ) {
-					$output .= preg_replace( '/([^\n]{' . $p_wrap . '})(?!<\/pre>)/', "$1\n", $piece );
+					$output .= preg_replace( '/([^\n]{' . $p_wrap . ',}?[\s]+)(?!<\/pre>)/', "$1\n", $piece );
 				} else {
 					$output .= $piece;
 				}
