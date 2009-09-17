@@ -362,7 +362,7 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 		$t_bugs = tag_get_bugs_attached( $p_tag_id );
 
 		foreach( $t_bugs as $t_bug_id ) {
-			history_log_event_special( $t_bug_id, TAG_RENAMED, $t_tag_name, $c_name );
+			history_log_event_special( $t_bug_id, TAG_RENAMED, $t_tag_name, $p_name );
 		}
 	}
 
