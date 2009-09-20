@@ -1539,3 +1539,16 @@ $s_install_information = 'MantisBT Installation Information';
 $s_database_information = 'MantisBT Database Information';
 $s_path_information = 'MantisBT Path Information';
 
+# months
+$s_month_january = 'January';
+$s_month_february = 'February';
+$s_month_march = 'March';
+$s_month_april = 'April';
+$s_month_may = 'May';
+$s_month_june = 'June';
+$s_month_july = 'July';
+$s_month_august = 'August';
+$s_month_september = 'September';
+$s_month_october = 'October';
+$s_month_november = 'November';
+$s_month_dezember = 'Dezember';
