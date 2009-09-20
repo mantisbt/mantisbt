@@ -84,10 +84,10 @@
 			break;
 	}
 
-    if (ini_get('zlib.output_compression')) {
-        ini_set('zlib.output_compression', false);
-    }
-    
+	if ( ini_get( 'zlib.output_compression' ) && function_exists( 'ini_set' ) ) {
+		ini_set( 'zlib.output_compression', false );
+	}
+
 	# flush output buffers to protect download
 	while (@ob_end_clean() );
 
