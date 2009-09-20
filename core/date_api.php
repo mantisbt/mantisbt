@@ -97,9 +97,9 @@ function print_month_option_list( $p_month = 0 ) {
 	for( $i = 1;$i <= 12;$i++ ) {
 		$month_name = date( 'F', mktime( 0, 0, 0, $i, 1, 2000 ) );
 		if( $i == $p_month ) {
-			echo "<option value=\"$i\" selected=\"selected\">$month_name</option>";
+			echo "<option value=\"$i\" selected=\"selected\">" . lang_get( 'month_' . utf8_strtolower($month_name)) . "</option>";
 		} else {
-			echo "<option value=\"$i\">$month_name</option>";
+			echo "<option value=\"$i\">" . lang_get( 'month_' . utf8_strtolower($month_name)) . "</option>";
 		}
 	}
 }
