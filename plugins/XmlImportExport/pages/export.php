@@ -78,7 +78,6 @@ $t_columns = array_keys( getClassProperties('BugData', 'protected') );
 
 # export the rows
 foreach( $t_result as $t_row ) {
-	$t_row->fetch_extended_info();
 
 	$writer->startElement( 'issue' );
 

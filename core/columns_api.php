@@ -1213,7 +1213,7 @@ function print_column_description( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
  * @access public
  */
 function print_column_steps_to_reproduce( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	$t_steps_to_reproduce = string_display_links( $p_bug->additional_information );
+	$t_steps_to_reproduce = string_display_links( $p_bug->steps_to_reproduce );
 
 	echo '<td class="left">', $t_steps_to_reproduce, '</td>';
 }
