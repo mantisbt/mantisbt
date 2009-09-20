@@ -170,8 +170,6 @@
 	# Loop through results
 	for ( $i = 0; $i < $t_issues_count; $i++ ) {
 		$t_bug = $t_issues[$i];
-		$t_bug->fetch_extended_info();
-		
 
 		$about = $link = $t_path . "view.php?id=" . $t_bug->id;
 		$title = string_rss_links( bug_format_id( $t_bug->id ) . ': ' . $t_bug->summary );

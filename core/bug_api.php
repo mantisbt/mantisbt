@@ -184,6 +184,8 @@ class BugData {
 	 * @private
 	 */
 	public function __get($name) {
+		if( $this->is_extended_field($name) )
+			$this->fetch_extended_info();
 		return $this->{$name};
 	}
 	
@@ -211,13 +213,28 @@ class BugData {
 	 * Retrieves extended information for bug (e.g. bug description)
 	 * @return null
 	 */
-	public function fetch_extended_info() {
+	private function fetch_extended_info() {
 		if ( $this->description == '' ) {				
 			$t_text = bug_text_cache_row($this->id);
 
 			$this->description = $t_text['description'];
 			$this->steps_to_reproduce = $t_text['steps_to_reproduce'];
 			$this->additional_information = $t_text['additional_information'];
+		}
+	}
+
+	/**
+	 * Returns if the field is an extended field which needs fetch_extended_info()
+	 * @return boolean
+	 */
+	private function is_extended_field( $p_field_name ) {
+		switch( $p_field_name ) {
+			case 'description':
+			case 'steps_to_reproduce':
+			case 'additional_information':
+				return true;
+			default:
+				return false;
 		}
 	}
 

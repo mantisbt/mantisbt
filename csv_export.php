@@ -112,10 +112,6 @@
 
 				echo csv_escape_string($t_value);
 			} else {
-				if ( column_is_extended( $t_column ) && $t_row->description == '' ) {
-					$t_row->fetch_extended_info();
-				}
-
 				$t_function = 'csv_format_' . $t_column;
 				echo $t_function( $t_row->$t_column );
 			}
