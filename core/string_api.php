@@ -452,7 +452,7 @@ function string_insert_hrefs( $p_string ) {
 	}
 
 	$t_change_quotes = false;
-	if( ini_get_bool( 'magic_quotes_sybase' ) ) {
+	if( ini_get_bool( 'magic_quotes_sybase' ) && function_exists( 'ini_set' ) ) {
 		$t_change_quotes = true;
 		ini_set( 'magic_quotes_sybase', false );
 	}

@@ -90,7 +90,10 @@ if( !php_version_at_least( PHP_MIN_VERSION ) ) {
 	die();
 }
 
-ini_set( 'magic_quotes_runtime', 0 );
+# Check for function because it is deprecated in PHP 5.3 and removed in PHP 6
+if ( function_exists( 'set_magic_quotes_runtime' ) ) {
+	@set_magic_quotes_runtime( false );
+}
 
 # Added in PHP 5.2.0
 if ( !function_exists( 'memory_get_peak_usage') ) {
