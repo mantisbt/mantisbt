@@ -1,0 +1,52 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Korean (한국어)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ */
+
+$s_plugin_MantisGraph_graph_imp_status_title = '상태 종합 그래프';
+$s_plugin_MantisGraph_graph_imp_priority_title = '우선순위 종합 그래프';
+$s_plugin_MantisGraph_graph_imp_severity_title = '심각성 종합 그래프';
+$s_plugin_MantisGraph_graph_imp_category_title = '카테고리 종합 그래프';
+$s_plugin_MantisGraph_graph_imp_resolution_title = '해결도 종합 그래프';
+$s_plugin_MantisGraph_by_status_pct = '상태 백분율';
+$s_plugin_MantisGraph_by_priority_pct = '우선 순위 백분율';
+$s_plugin_MantisGraph_by_severity_pct = '심각성 백분율';
+$s_plugin_MantisGraph_by_category_pct = '카테고리 백분율';
+$s_plugin_MantisGraph_by_resolution_pct = '해결도 백분율';
+$s_plugin_MantisGraph_by_severity_mix = '심각성 및 상태 백분율';
+$s_plugin_MantisGraph_by_priority_mix = '우선 순위 및 상태 백분율';
+$s_plugin_MantisGraph_by_resolution_mix = '해결도 및 상태 백분율';
+$s_plugin_MantisGraph_legend_still_open = '진행중';
+$s_plugin_MantisGraph_legend_resolved = '해결됨';
+$s_plugin_MantisGraph_legend_assigned = '할당됨';
+$s_plugin_MantisGraph_legend_total = '총계';
+$s_plugin_MantisGraph_legend_opened = '미해결';
+$s_plugin_MantisGraph_legend_closed = '폐쇄됨';
+$s_plugin_MantisGraph_legend_reported = '보고됨';
+$s_plugin_MantisGraph_cumulative = '누적';
+$s_plugin_MantisGraph_not_enough_data = '그래프를 생성하는데 정보가 부족합니다';

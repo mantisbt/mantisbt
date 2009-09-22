@@ -1,0 +1,72 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Italian (Italiano)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ */
+
+$s_plugin_MantisGraph_graph_imp_status_title = 'Grafico di sintesi per stato';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Grafico di sintesi per priorità';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Grafico di sintesi per severità';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Grafico di sintesi per categoria';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafico di sintesi per motivazione';
+$s_plugin_MantisGraph_by_status_pct = 'Per stato (%)';
+$s_plugin_MantisGraph_by_priority_pct = 'Per priorità (%)';
+$s_plugin_MantisGraph_by_severity_pct = 'Per severità (%)';
+$s_plugin_MantisGraph_by_category_pct = 'Per categoria (%)';
+$s_plugin_MantisGraph_by_resolution_pct = 'Per motivazione (%)';
+$s_plugin_MantisGraph_by_severity_mix = 'Per severità e stato';
+$s_plugin_MantisGraph_by_priority_mix = 'Per priorità e stato';
+$s_plugin_MantisGraph_by_resolution_mix = 'Per motivazione e stato';
+$s_plugin_MantisGraph_legend_still_open = 'Ancora aperte';
+$s_plugin_MantisGraph_legend_resolved = 'Risolte';
+$s_plugin_MantisGraph_legend_assigned = 'Assegnate';
+$s_plugin_MantisGraph_legend_total = 'Totale';
+$s_plugin_MantisGraph_legend_opened = 'Aperte';
+$s_plugin_MantisGraph_legend_closed = 'Chiuse';
+$s_plugin_MantisGraph_legend_reported = 'Segnalate';
+$s_plugin_MantisGraph_cumulative = 'Cumulativo';
+$s_plugin_MantisGraph_not_enough_data = 'Non ci sono abbastanza dati per creare un grafico';
+$s_plugin_MantisGraph_period_none = 'Nessuno';
+$s_plugin_MantisGraph_period_this_week = 'Questa settimana';
+$s_plugin_MantisGraph_period_last_week = 'Ultima settimana';
+$s_plugin_MantisGraph_period_two_weeks = 'Ultime due settimane';
+$s_plugin_MantisGraph_period_this_month = 'Questo mese';
+$s_plugin_MantisGraph_period_last_month = 'Ultimo mese';
+$s_plugin_MantisGraph_period_this_quarter = 'Questo trimestre';
+$s_plugin_MantisGraph_period_last_quarter = 'Ultimo trimestre';
+$s_plugin_MantisGraph_period_year_to_date = 'Quest\'anno';
+$s_plugin_MantisGraph_period_select = 'Date arbitrarie';
+$s_plugin_MantisGraph_period_last_year = 'Ultimo anno';
+$s_plugin_MantisGraph_select = 'Seleziona';
+$s_plugin_MantisGraph_select_bystatus = 'Per stato';
+$s_plugin_MantisGraph_select_summbystatus = 'Sommario per stato';
+$s_plugin_MantisGraph_select_bycat = 'Sommario per categoria';
+$s_plugin_MantisGraph_select_both = 'Sommario per stato e categoria';
+$s_plugin_MantisGraph_show_as_graph = 'Mostra come grafico';
+$s_plugin_MantisGraph_show_as_table = 'Mostra come tabella';
+$s_plugin_MantisGraph_show_graph = 'Mostra il grafico';
+$s_plugin_MantisGraph_graph_page = 'Grafico della storia delle anomalie';

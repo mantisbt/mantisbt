@@ -1,0 +1,72 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Hebrew (עברית)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ */
+
+$s_plugin_MantisGraph_graph_imp_status_title = 'גרפים סינתטיים לפי סטטוס';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'גרפים סינתטיים לפי עדיפות';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'גרפים סינתטיים לפי חומרה';
+$s_plugin_MantisGraph_graph_imp_category_title = 'גרפים סינתטיים לפי קטגוריה';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'גרפים סינתטיים לפי פתרון';
+$s_plugin_MantisGraph_by_status_pct = 'גרפים סינתטיים לפי אחוזים';
+$s_plugin_MantisGraph_by_priority_pct = 'לפי אחוז עדיפות';
+$s_plugin_MantisGraph_by_severity_pct = 'לפי אחוז חומרה';
+$s_plugin_MantisGraph_by_category_pct = 'לפי אחוז קטגוריה';
+$s_plugin_MantisGraph_by_resolution_pct = 'לפי אחוז פתרון';
+$s_plugin_MantisGraph_by_severity_mix = 'לפי חומרה וסטטוס';
+$s_plugin_MantisGraph_by_priority_mix = 'לפי עדיפות וסטטוס';
+$s_plugin_MantisGraph_by_resolution_mix = 'לפי פתרון וסטטוס';
+$s_plugin_MantisGraph_legend_still_open = 'עדיין פתוח';
+$s_plugin_MantisGraph_legend_resolved = 'פתור';
+$s_plugin_MantisGraph_legend_assigned = 'משויך';
+$s_plugin_MantisGraph_legend_total = 'סה"כ';
+$s_plugin_MantisGraph_legend_opened = 'נפתח';
+$s_plugin_MantisGraph_legend_closed = 'נסגר';
+$s_plugin_MantisGraph_legend_reported = 'מדווח';
+$s_plugin_MantisGraph_cumulative = 'מצטבר';
+$s_plugin_MantisGraph_not_enough_data = 'אין מספיק מידע ליצירת תרשים';
+$s_plugin_MantisGraph_period_none = 'כלום';
+$s_plugin_MantisGraph_period_this_week = 'השבוע';
+$s_plugin_MantisGraph_period_last_week = 'השבוע האחרון';
+$s_plugin_MantisGraph_period_two_weeks = 'השבועיים האחרונים';
+$s_plugin_MantisGraph_period_this_month = 'החודש';
+$s_plugin_MantisGraph_period_last_month = 'החודש האחרון';
+$s_plugin_MantisGraph_period_this_quarter = 'הרבעון הנוכחי';
+$s_plugin_MantisGraph_period_last_quarter = 'הרבעון הקודם';
+$s_plugin_MantisGraph_period_year_to_date = 'השנה האחרונה';
+$s_plugin_MantisGraph_period_select = 'בחירת תאריכים';
+$s_plugin_MantisGraph_period_last_year = 'השנה הקודמת';
+$s_plugin_MantisGraph_select = 'נא לבחור';
+$s_plugin_MantisGraph_select_bystatus = 'לפי סטטוס';
+$s_plugin_MantisGraph_select_summbystatus = 'תקציר לפי סטטוס';
+$s_plugin_MantisGraph_select_bycat = 'תקציר לפי קטגוריה';
+$s_plugin_MantisGraph_select_both = 'תקציר לפי סטטוס וקטגוריה';
+$s_plugin_MantisGraph_show_as_graph = 'להציג כתרשים';
+$s_plugin_MantisGraph_show_as_table = 'להציג כטבלה';
+$s_plugin_MantisGraph_show_graph = 'הצג תרשים';
+$s_plugin_MantisGraph_graph_page = 'הצג תרשים היסטוריית באג';

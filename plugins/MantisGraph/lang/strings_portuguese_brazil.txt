@@ -1,0 +1,81 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Brazilian Portuguese (Português do Brasil)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Luckas Blade
+ */
+
+$s_plugin_MantisGraph_config = 'Configuração';
+$s_plugin_MantisGraph_synthesis_link = 'Síntese';
+$s_plugin_MantisGraph_priority_link = 'Por prioridade';
+$s_plugin_MantisGraph_severity_link = 'Por seriedade';
+$s_plugin_MantisGraph_category_link = 'Por categoria';
+$s_plugin_MantisGraph_resolution_link = 'Por resolução';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Gráfico';
+$s_plugin_MantisGraph_window_width = 'Largura do gráfico (em pixels)';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Gráfico de síntese por status';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Gráfico de síntese por prioridade';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Gráfico de síntese por gravidade';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Gráfico de síntese por categoria';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Gráfico de síntese por resolução';
+$s_plugin_MantisGraph_by_status_pct = 'porcentagem por status';
+$s_plugin_MantisGraph_by_priority_pct = 'porcentagem por prioridade';
+$s_plugin_MantisGraph_by_severity_pct = 'porcentagem por gravidade';
+$s_plugin_MantisGraph_by_category_pct = 'porcentagem por categoria';
+$s_plugin_MantisGraph_by_resolution_pct = 'porcentagem por resolução';
+$s_plugin_MantisGraph_by_severity_mix = 'por gravidade e status';
+$s_plugin_MantisGraph_by_priority_mix = 'por prioridade e status';
+$s_plugin_MantisGraph_by_resolution_mix = 'por resolução e status';
+$s_plugin_MantisGraph_legend_still_open = 'Ainda aberto';
+$s_plugin_MantisGraph_legend_resolved = 'Resolvido';
+$s_plugin_MantisGraph_legend_assigned = 'Atribuído';
+$s_plugin_MantisGraph_legend_total = 'Total';
+$s_plugin_MantisGraph_legend_opened = 'Aberto';
+$s_plugin_MantisGraph_legend_closed = 'Fechado';
+$s_plugin_MantisGraph_legend_reported = 'Reportado';
+$s_plugin_MantisGraph_cumulative = 'Cumulativo';
+$s_plugin_MantisGraph_not_enough_data = 'Não há dados suficientes para criar o gráfico';
+$s_plugin_MantisGraph_period_none = 'Nenhum';
+$s_plugin_MantisGraph_period_this_week = 'Esta Semana';
+$s_plugin_MantisGraph_period_last_week = 'Semana Passada';
+$s_plugin_MantisGraph_period_two_weeks = 'Últimas Duas Semanas';
+$s_plugin_MantisGraph_period_this_month = 'Este Mês';
+$s_plugin_MantisGraph_period_last_month = 'Mês Passado';
+$s_plugin_MantisGraph_period_this_quarter = 'Esta Quinzena';
+$s_plugin_MantisGraph_period_last_quarter = 'Última Quinzena';
+$s_plugin_MantisGraph_period_year_to_date = 'Este ano';
+$s_plugin_MantisGraph_period_select = 'Especificar período';
+$s_plugin_MantisGraph_period_last_year = 'Ano Passado';
+$s_plugin_MantisGraph_select = 'Por favor Selecione';
+$s_plugin_MantisGraph_select_bystatus = 'por Status';
+$s_plugin_MantisGraph_select_summbystatus = 'Resumo por Status';
+$s_plugin_MantisGraph_select_bycat = 'Resumo por Categoria';
+$s_plugin_MantisGraph_select_both = 'Resumo por Status e Categoria';
+$s_plugin_MantisGraph_show_as_graph = 'Mostrar como Gráfico';
+$s_plugin_MantisGraph_show_as_table = 'Mostrar como Tabela';
+$s_plugin_MantisGraph_show_graph = 'Mostrar Gráfico';
+$s_plugin_MantisGraph_graph_page = 'Gráfico do histórico do caso';

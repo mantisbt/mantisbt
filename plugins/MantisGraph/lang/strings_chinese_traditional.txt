@@ -1,0 +1,52 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Traditional Chinese (‪中文(繁體)‬)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ */
+
+$s_plugin_MantisGraph_graph_imp_status_title = '狀態合成圖';
+$s_plugin_MantisGraph_graph_imp_priority_title = '優先度合成圖';
+$s_plugin_MantisGraph_graph_imp_severity_title = '嚴重性合成圖';
+$s_plugin_MantisGraph_graph_imp_category_title = '類別合成圖';
+$s_plugin_MantisGraph_graph_imp_resolution_title = '分析合成圖';
+$s_plugin_MantisGraph_by_status_pct = '狀態百分比';
+$s_plugin_MantisGraph_by_priority_pct = '優先度百分比';
+$s_plugin_MantisGraph_by_severity_pct = '嚴重性百分比';
+$s_plugin_MantisGraph_by_category_pct = '類別百分比';
+$s_plugin_MantisGraph_by_resolution_pct = '分析百分比';
+$s_plugin_MantisGraph_by_severity_mix = '嚴重性和狀態';
+$s_plugin_MantisGraph_by_priority_mix = '優先度和狀態';
+$s_plugin_MantisGraph_by_resolution_mix = '分析和狀態';
+$s_plugin_MantisGraph_legend_still_open = '仍未結案';
+$s_plugin_MantisGraph_legend_resolved = '已解決';
+$s_plugin_MantisGraph_legend_assigned = '已分派';
+$s_plugin_MantisGraph_legend_total = '總數';
+$s_plugin_MantisGraph_legend_opened = '未結案';
+$s_plugin_MantisGraph_legend_closed = '已結案';
+$s_plugin_MantisGraph_legend_reported = '已回報';
+$s_plugin_MantisGraph_cumulative = '累積';
+$s_plugin_MantisGraph_not_enough_data = '資料不足無法建立圖形';

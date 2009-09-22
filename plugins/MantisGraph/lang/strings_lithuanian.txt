@@ -1,0 +1,62 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Lithuanian (Lietuvių)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ */
+
+$s_plugin_MantisGraph_graph_imp_status_title = 'Sukurti grafiką pagal būseną';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Sukurti grafiką pagal prioritetą';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Sukurti grafiką pagal svarbą';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Sukurti grafiką pagal kategoriją';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Sukurti grafiką pagal sprendimą';
+$s_plugin_MantisGraph_by_status_pct = 'pagal būseną santykinai';
+$s_plugin_MantisGraph_by_priority_pct = 'pagal prioritetą santykinai';
+$s_plugin_MantisGraph_by_severity_pct = 'pagal svarbą santykinai';
+$s_plugin_MantisGraph_by_category_pct = 'pagal kategoriją santykinai';
+$s_plugin_MantisGraph_by_resolution_pct = 'pagal sprendimą santykinai';
+$s_plugin_MantisGraph_by_severity_mix = 'pagal svarbą ir būseną';
+$s_plugin_MantisGraph_by_priority_mix = 'pagal prioritetą ir būseną';
+$s_plugin_MantisGraph_by_resolution_mix = 'pagal sprendimą ir būseną';
+$s_plugin_MantisGraph_legend_still_open = 'Vis dar atviros';
+$s_plugin_MantisGraph_legend_resolved = 'Išspręstų';
+$s_plugin_MantisGraph_legend_assigned = 'Priskirtos';
+$s_plugin_MantisGraph_legend_total = 'Iš viso';
+$s_plugin_MantisGraph_legend_opened = 'Atvirų';
+$s_plugin_MantisGraph_legend_closed = 'Uždarytų';
+$s_plugin_MantisGraph_legend_reported = 'Praštų';
+$s_plugin_MantisGraph_cumulative = 'Bendras';
+$s_plugin_MantisGraph_not_enough_data = 'Neužtenka duomenų';
+$s_plugin_MantisGraph_period_this_week = 'Šią savaitę';
+$s_plugin_MantisGraph_period_last_week = 'Praeitą savaitę';
+$s_plugin_MantisGraph_period_two_weeks = 'Paskutines 2 sav.';
+$s_plugin_MantisGraph_period_this_month = 'Šį mėnesį';
+$s_plugin_MantisGraph_period_last_month = 'Praeitą mėnesį';
+$s_plugin_MantisGraph_period_this_quarter = 'Šį ketvirtį';
+$s_plugin_MantisGraph_period_last_quarter = 'Praeitą ketvirtį';
+$s_plugin_MantisGraph_period_last_year = 'Praeitais metais';
+$s_plugin_MantisGraph_select = 'Prašome pasirinkti';
+$s_plugin_MantisGraph_select_bystatus = 'pagal Statusą';

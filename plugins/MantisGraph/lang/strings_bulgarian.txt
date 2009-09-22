@@ -1,0 +1,67 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Bulgarian (Български)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ */
+
+$s_plugin_MantisGraph_graph_imp_status_title = 'Синтетична диаграма по Статус';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Синтетична диаграма по Приоритет';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Синтетична диаграма по Значимост';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Синтетична диаграма по Категория';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Синтетична диаграма по Резолюция';
+$s_plugin_MantisGraph_by_status_pct = 'По Статус (%)';
+$s_plugin_MantisGraph_by_priority_pct = 'По Приоритет (%)';
+$s_plugin_MantisGraph_by_severity_pct = 'По Значимост (%)';
+$s_plugin_MantisGraph_by_category_pct = 'По Категория (%)';
+$s_plugin_MantisGraph_by_resolution_pct = 'По Резолюция (%)';
+$s_plugin_MantisGraph_by_severity_mix = 'По Значимост и Статус';
+$s_plugin_MantisGraph_by_priority_mix = 'По Приоритет и Статус';
+$s_plugin_MantisGraph_by_resolution_mix = 'По Резолюция и Статус';
+$s_plugin_MantisGraph_legend_still_open = 'Все още отворен';
+$s_plugin_MantisGraph_legend_resolved = 'Решен';
+$s_plugin_MantisGraph_legend_assigned = 'Назначен';
+$s_plugin_MantisGraph_legend_total = 'Общо';
+$s_plugin_MantisGraph_legend_opened = 'Отворен';
+$s_plugin_MantisGraph_legend_closed = 'Приключен';
+$s_plugin_MantisGraph_legend_reported = 'Съобщен';
+$s_plugin_MantisGraph_cumulative = 'С натрупване';
+$s_plugin_MantisGraph_not_enough_data = 'Няма достатъчно данни';
+$s_plugin_MantisGraph_period_none = 'Няма';
+$s_plugin_MantisGraph_period_this_week = 'Тази седмица';
+$s_plugin_MantisGraph_period_last_week = 'Последната седмица';
+$s_plugin_MantisGraph_period_two_weeks = 'Последните две седмици';
+$s_plugin_MantisGraph_period_this_month = 'Този месец';
+$s_plugin_MantisGraph_period_this_quarter = 'Това тримесечие';
+$s_plugin_MantisGraph_period_last_quarter = 'Последното тримесечие';
+$s_plugin_MantisGraph_period_last_year = 'Последната година';
+$s_plugin_MantisGraph_select_bystatus = 'по статут';
+$s_plugin_MantisGraph_select_summbystatus = 'Резюме по статут';
+$s_plugin_MantisGraph_select_bycat = 'Резюме по категория';
+$s_plugin_MantisGraph_select_both = 'Резюме по статут и категория';
+$s_plugin_MantisGraph_show_as_graph = 'Показване като графика';
+$s_plugin_MantisGraph_show_as_table = 'Показване като таблица';
+$s_plugin_MantisGraph_show_graph = 'Показване на графиката';

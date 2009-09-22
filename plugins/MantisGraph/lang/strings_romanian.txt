@@ -1,0 +1,50 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Romanian (Română)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ */
+
+$s_plugin_MantisGraph_graph_imp_status_title = 'Grafic sinteză după stare';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Grafic sinteză după prioritate';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Grafic sinteză după gradul de severitate';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Grafic sinteză după categorie';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafic sinteză după rezoluţie';
+$s_plugin_MantisGraph_by_status_pct = 'după procentul stării';
+$s_plugin_MantisGraph_by_priority_pct = 'după procentul priorităţii';
+$s_plugin_MantisGraph_by_severity_pct = 'după procentul severităţii';
+$s_plugin_MantisGraph_by_category_pct = 'după procentul categoriei';
+$s_plugin_MantisGraph_by_resolution_pct = 'după procentul rezoluţiei';
+$s_plugin_MantisGraph_by_severity_mix = 'după severitate şi stare';
+$s_plugin_MantisGraph_by_priority_mix = 'după prioritate şi stare';
+$s_plugin_MantisGraph_by_resolution_mix = 'după rezoluţie şi stare';
+$s_plugin_MantisGraph_legend_still_open = 'Deschise încă';
+$s_plugin_MantisGraph_legend_resolved = 'Rezovate';
+$s_plugin_MantisGraph_legend_assigned = 'Atribuite';
+$s_plugin_MantisGraph_legend_opened = 'Deschise';
+$s_plugin_MantisGraph_legend_closed = 'Închise';
+$s_plugin_MantisGraph_legend_reported = 'Raportate';
+$s_plugin_MantisGraph_not_enough_data = 'Nu exită destul informaţii pentru crearea graficului';

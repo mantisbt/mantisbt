@@ -1,0 +1,72 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Czech (Česky)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ */
+
+$s_plugin_MantisGraph_graph_imp_status_title = 'Graf podle stavu';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Graf podle priority';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Graf podle důležitosti';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Graf podle kategorie';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Graf podle řešení';
+$s_plugin_MantisGraph_by_status_pct = '% podle stavu';
+$s_plugin_MantisGraph_by_priority_pct = '% podle priority';
+$s_plugin_MantisGraph_by_severity_pct = '% podle závažnosti';
+$s_plugin_MantisGraph_by_category_pct = '% podle kategorie';
+$s_plugin_MantisGraph_by_resolution_pct = '% podle řešení';
+$s_plugin_MantisGraph_by_severity_mix = 'podle závažnosti a stavu';
+$s_plugin_MantisGraph_by_priority_mix = 'podle priority a stavu';
+$s_plugin_MantisGraph_by_resolution_mix = 'podle řešení a stavu';
+$s_plugin_MantisGraph_legend_still_open = 'Stále otevřeno';
+$s_plugin_MantisGraph_legend_resolved = 'Vyřešeno';
+$s_plugin_MantisGraph_legend_assigned = 'Přiřazeno';
+$s_plugin_MantisGraph_legend_total = 'Celkem';
+$s_plugin_MantisGraph_legend_opened = 'Otevřeno';
+$s_plugin_MantisGraph_legend_closed = 'Uzavřeno';
+$s_plugin_MantisGraph_legend_reported = 'Reportováno';
+$s_plugin_MantisGraph_cumulative = 'Kumulovaně';
+$s_plugin_MantisGraph_not_enough_data = 'Pro vytvoření grafu není dostatek údajů';
+$s_plugin_MantisGraph_period_none = 'Žádné';
+$s_plugin_MantisGraph_period_this_week = 'Tento týden';
+$s_plugin_MantisGraph_period_last_week = 'Poslední týden';
+$s_plugin_MantisGraph_period_two_weeks = 'Poslední dva týdny';
+$s_plugin_MantisGraph_period_this_month = 'Tento měsíc';
+$s_plugin_MantisGraph_period_last_month = 'Poslední měsíc';
+$s_plugin_MantisGraph_period_this_quarter = 'Toto čtvrtletí';
+$s_plugin_MantisGraph_period_last_quarter = 'Poslední čtvrtletí';
+$s_plugin_MantisGraph_period_year_to_date = 'Rok od data';
+$s_plugin_MantisGraph_period_select = 'Kdykoliv';
+$s_plugin_MantisGraph_period_last_year = 'Poslední rok';
+$s_plugin_MantisGraph_select = 'Prosím vybrat';
+$s_plugin_MantisGraph_select_bystatus = 'podle stavu';
+$s_plugin_MantisGraph_select_summbystatus = 'Přehled podle stavu';
+$s_plugin_MantisGraph_select_bycat = 'Přehled podle kategorie';
+$s_plugin_MantisGraph_select_both = 'Přehled podle stavu a kategorie';
+$s_plugin_MantisGraph_show_as_graph = 'Zobrazit jako graf';
+$s_plugin_MantisGraph_show_as_table = 'Zobrazit jako tabulku';
+$s_plugin_MantisGraph_show_graph = 'Zobrazit graf';
+$s_plugin_MantisGraph_graph_page = 'Graf historie problémů';
