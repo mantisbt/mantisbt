@@ -897,49 +897,6 @@
 
     </section>
 
-
-    <section>
-        <title>JpGraph</title>
-        <para>Jpgraph is a package that is used to render graphs. It is
-            used by MantisBT to provide the users with graphs that capture the
-            state of the bugs database. Following are the configuration options
-            that are related to configuring it:
-        </para>
-        <variablelist>
-            <varlistentry>
-                <term>$g_use_jpgraph</term>
-                <listitem>
-                    <para>Enable the use of jpgraph. Default is OFF.</para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_jpgraph_path</term>
-                <listitem>
-                    <para>Path to jpgraph base directory. Don't forget to add the
-                        trailing '/'.
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-
-        <note>
-            <para>To use the Jpgraph addon you need the
-                <ulink url="http://www.aditus.nu/jpgraph/index.php">JpGraph</ulink>
-                package. You can place the package whereever you want, but you have
-                to set the var in jpgraph.php&nbsp;eg.
-                DEFINE("DIR_BASE","/www/mantisbt/jpgraph/");&nbsp;
-            </para>
-        </note>
-
-        <warning>
-            <para>Please note that JpGraph is free to use only for non-commercial,
-            open-source or educational use. All other uses are allowed with the
-            <ulink url="http://www.aditus.nu/jpgraph/proversion.php">professional 
-            version</ulink>.</para>
-        </warning>
-    </section>
-
-
     <section>
         <title>Date</title>
         <para>These variables control how the date is displayed (default

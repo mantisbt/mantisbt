@@ -25,7 +25,7 @@
 	  */
 	require_once( 'core.php' );
 
-	require_once( 'class.period.php' );
+	require_once( 'Period.php' );
 	require_once( 'graph_api.php' );
 
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );

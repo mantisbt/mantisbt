@@ -20,29 +20,57 @@ auth_reauthenticate( );
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
 $f_library = gpc_get_int( 'eczlibrary', ON );
-$f_jpgraph_antialias = gpc_get_int( 'jpgraph_antialias', ON );
+
 $f_window_width = gpc_get_int( 'window_width', 800 );
 $f_bar_aspect = (float) gpc_get_string( 'bar_aspect', '0.9' );
 $f_summary_graphs_per_row = gpc_get_int( 'summary_graphs_per_row', 2 );
 
-if( plugin_config_get( 'eczlibrary' ) != $f_library ) {
+$f_jpgraph_antialias = gpc_get_int( 'jpgraph_antialias', ON );
+$f_font = gpc_get_string( 'font', '' );
+
+if ( plugin_config_get( 'eczlibrary' ) != $f_library ) {
 	plugin_config_set( 'eczlibrary', $f_library );
 }
 
-if( plugin_config_get( 'jpgraph_antialias' ) != $f_jpgraph_antialias ) {
-	plugin_config_set( 'jpgraph_antialias', $f_jpgraph_antialias );
-}
-
-if( plugin_config_get( 'window_width' ) != $f_window_width ) {
+if ( plugin_config_get( 'window_width' ) != $f_window_width ) {
 	plugin_config_set( 'window_width', $f_window_width );
 }
 
-if( plugin_config_get( 'bar_aspect' ) != $f_bar_aspect ) {
+if ( plugin_config_get( 'bar_aspect' ) != $f_bar_aspect ) {
 	plugin_config_set( 'bar_aspect', $f_bar_aspect );
 }
 
-if( plugin_config_get( 'summary_graphs_per_row' ) != $f_summary_graphs_per_row ) {
+if ( plugin_config_get( 'summary_graphs_per_row' ) != $f_summary_graphs_per_row ) {
 	plugin_config_set( 'summary_graphs_per_row', $f_summary_graphs_per_row );
+}
+
+if ( plugin_config_get( 'font' ) != $f_font ) {
+	switch ( $f_font ) {
+		case 'arial':
+		case 'verdana':
+		case 'trebuchet':
+		case 'verasans':
+		case 'times':
+		case 'georgia':
+		case 'veraserif':
+		case 'courier':
+		case 'veramono':
+			plugin_config_set( 'font', $f_font );
+			break;
+		default:
+			plugin_config_set( 'font', 'arial' );
+	}
+}
+
+if ( current_user_is_administrator() ) {
+	$f_jpgraph_path = gpc_get_string( 'jpgraph_path', '' );
+	if ( plugin_config_get( 'jpgraph_path' ) != $f_jpgraph_path ) {
+		plugin_config_set( 'jpgraph_path', $f_jpgraph_path );
+	}
+}
+
+if ( plugin_config_get( 'jpgraph_antialias' ) != $f_jpgraph_antialias ) {
+	plugin_config_set( 'jpgraph_antialias', $f_jpgraph_antialias );
 }
 
 form_security_purge( 'plugin_graph_config_edit' );

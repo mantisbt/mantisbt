@@ -38,4 +38,4 @@
 		$t_metrics = graph_total_metrics( unserialize( $t_token ) );
 	}
 
-	graph_pie( $t_metrics, lang_get( 'by_priority_pct' ), $f_width, $f_width );
+	graph_pie( $t_metrics, plugin_lang_get( 'by_priority_pct' ), $f_width, $f_width );

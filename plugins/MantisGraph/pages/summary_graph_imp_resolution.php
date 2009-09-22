@@ -49,7 +49,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<?php echo lang_get( 'graph_imp_resolution_title' ) ?>
+		<?php echo plugin_lang_get( 'graph_imp_resolution_title' ) ?>
 	</td>
 </tr>
 <tr valign="top">
