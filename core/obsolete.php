@@ -135,3 +135,6 @@ config_obsolete( 'show_update', '' );
 config_obsolete( 'default_advanced_report', '' );
 config_obsolete( 'default_advanced_view', '' );
 config_obsolete( 'default_advanced_update', '' );
+config_obsolete( 'default_graph_type', '' );
+config_obsolete( 'graph_font', '' );
+config_obsolete( 'graph_colors', '' );

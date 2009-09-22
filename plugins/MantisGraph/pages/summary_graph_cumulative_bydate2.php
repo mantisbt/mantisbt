@@ -45,7 +45,7 @@ function graph_cumulative_bydate2( $p_metrics, $p_graph_width = 300, $p_graph_he
 
 	$t_graph_font = 'c:\\windows\\fonts\\arial.ttf' ;//graph_get_font();
 
-	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
+	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
 
 	$graph = new ezcGraphLineChart();
 
@@ -53,15 +53,15 @@ function graph_cumulative_bydate2( $p_metrics, $p_graph_width = 300, $p_graph_he
 
 
 	$graph->data[0] = new ezcGraphArrayDataSet( $p_metrics[0] );
-	$graph->data[0]->label = lang_get( 'legend_reported' );
+	$graph->data[0]->label = plugin_lang_get( 'legend_reported' );
 	$graph->data[0]->color = '#FF0000';
 
 	$graph->data[1] = new ezcGraphArrayDataSet( $p_metrics[1] );
-	$graph->data[1]->label = lang_get( 'legend_resolved' );
+	$graph->data[1]->label = plugin_lang_get( 'legend_resolved' );
 	$graph->data[1]->color = '#0000FF';
 
 	$graph->data[2] = new ezcGraphArrayDataSet( $p_metrics[2] );
-	$graph->data[2]->label = lang_get( 'legend_still_open' );
+	$graph->data[2]->label = plugin_lang_get( 'legend_still_open' );
 	$graph->data[2]->color = '#000000';
 
 	$graph->additionalAxis[2] = $nAxis = new ezcGraphChartElementNumericAxis();
@@ -94,7 +94,7 @@ $graph->driver->options->imageFormat = IMG_JPEG;
 //	$graph->SetMarginColor( 'white' );
 //	$graph->SetFrame( false );
 
-	$graph->title = lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' );
+	$graph->title = plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' );
 	$graph->options->font = $t_graph_font ;
 
 //	$graph->title->SetFont( $t_graph_font, FS_BOLD );

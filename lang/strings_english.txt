@@ -162,36 +162,6 @@ $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 $s_fixed_in_version_group_bugs_button = 'Update Fixed in Version';
 $s_target_version_group_bugs_button = 'Update Target Version';
 
-# improved JPgraphs strings
-$s_graph_imp_status_title = 'Synthesis graphs by status';
-$s_graph_imp_priority_title = 'Synthesis graphs by priority';
-$s_graph_imp_severity_title = 'Synthesis graphs by severity';
-$s_graph_imp_category_title = 'Synthesis graphs by category';
-$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
-$s_by_status_pct = 'by status percentage';
-$s_by_priority_pct = 'by priority percentage';
-$s_by_severity_pct = 'by severity percentage';
-$s_by_category_pct = 'by category percentage';
-$s_by_resolution_pct = 'by resolution percentage';
-$s_by_severity_mix = 'by severity and status';
-$s_by_priority_mix = 'by priority and status';
-$s_by_resolution_mix = 'by resolution and status';
-$s_synthesis_link = 'Synthesis';
-$s_status_link = 'Per state';
-$s_priority_link = 'Per priority';
-$s_severity_link = 'Per severity';
-$s_category_link = 'Per category';
-$s_resolution_link = 'Per resolution';
-$s_legend_still_open = 'Still Open';
-$s_legend_resolved = 'Resolved';
-$s_legend_assigned = 'Assigned';
-$s_legend_total = 'Total';
-$s_legend_opened = 'Opened';
-$s_legend_closed = 'Closed';
-$s_legend_reported = 'Reported';
-$s_cumulative = 'Cumulative';
-$s_not_enough_data = 'Not enough data to create graph';
-
 # print_all_bug_page.php : display selected issues
 $s_hide_button = 'Display selected only';
 
@@ -1175,7 +1145,7 @@ $s_site_settings_updated_msg = 'Site settings have been updated';
 
 # summary_page.php
 $s_summary_title = 'Summary';
-$s_summary_jpgraph_link = 'Advanced summary';
+$s_summary_advanced_link = 'Advanced summary';
 $s_by_project = 'By Project';
 $s_by_status = 'By Status';
 $s_by_date = 'By Date (days)';
@@ -1191,6 +1161,8 @@ $s_developer_by_resolution = 'Developer By Resolution';
 $s_percentage_fixed = '% Fixed';
 $s_percentage_errors = '% False';
 $s_errors = 'False';
+$s_opened = 'Opened';
+$s_resolved = 'Resolved';
 $s_total = 'Total';
 $s_balance = 'Balance';
 $s_most_active = 'Most Active';
@@ -1533,30 +1505,6 @@ $s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (resolved by %4$s)';
 
 # Project Page
 $s_development_team = 'Development Team';
-
-# bug_graph pages
-$s_all_dates = 'All Dates';
-$s_period_none = 'None';
-$s_period_this_week = 'This Week';
-$s_period_last_week = 'Last Week';
-$s_period_two_weeks = 'Last Two Weeks';
-$s_period_this_month = 'This Month';
-$s_period_last_month = 'Last Month';
-$s_period_this_quarter = 'This Quarter';
-$s_period_last_quarter = 'Last Quarter';
-$s_period_year_to_date = 'Year to Date';
-$s_period_select = 'Arbitrary Dates';
-$s_period_last_year = 'Last Year';
-$s_select = 'Please Select';
-$s_select_bystatus = 'by Status';
-$s_select_summbystatus = 'Summary by Status';
-$s_select_bycat = 'Summary by Category';
-$s_select_both = 'Summary by Status and Category';
-$s_show_as_graph = 'Show as Graph';
-$s_show_as_table = 'Show as Table';
-$s_show_graph = 'Show Graph';
-$s_graph_page = 'Graph Issue History';
-
 
 # manage columns page
 $s_manage_columns_config = 'Manage Columns';

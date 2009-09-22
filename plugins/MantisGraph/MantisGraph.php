@@ -41,11 +41,15 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function config() {
 		return array(
-			'eczlibrary'   => ON,
-			'jpgraph_antialias'   => ON,
+			'eczlibrary' => ON,
+
 			'window_width' => 800,
 			'bar_aspect' => 0.9,
 			'summary_graphs_per_row' => 2,
+			'font' => 'arial',
+
+			'jpgraph_path' => '',
+			'jpgraph_antialias' => ON,
 		);
 	}
 	

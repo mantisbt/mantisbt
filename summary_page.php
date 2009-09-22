@@ -229,8 +229,8 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title"><?php echo lang_get( 'by_date' ); ?></td>
-			<td class="right"><?php echo lang_get( 'legend_opened' ); ?></td>
-			<td class="right"><?php echo lang_get( 'legend_resolved' ); ?></td>
+			<td class="right"><?php echo lang_get( 'opened' ); ?></td>
+			<td class="right"><?php echo lang_get( 'resolved' ); ?></td>
 			<td class="right"><?php echo lang_get( 'balance' ); ?></td>
 		</tr>
 		<?php summary_print_by_date( config_get( 'date_partitions' ) ) ?>

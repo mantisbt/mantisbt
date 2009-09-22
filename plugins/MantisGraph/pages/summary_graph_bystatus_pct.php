@@ -38,4 +38,4 @@
 		$t_metrics = unserialize( $t_token );
 	}
 
-	graph_pie( $t_metrics, lang_get( 'by_status_pct' ), $f_width, $f_width );
+	graph_pie( $t_metrics, plugin_lang_get( 'by_status_pct' ), $f_width, $f_width );

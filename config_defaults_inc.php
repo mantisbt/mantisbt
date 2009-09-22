@@ -969,32 +969,6 @@
 	$g_show_roadmap_dates = ON;
 
 	/**************************
-	 * MantisBT JPGRAPH Addon *
-	 **************************/
-
-	/**
-	 * what truetype font will the graphs use. Allowed values are 'arial', 'verdana', 'courier', 'book', 'comic', 'times',
-	 * 'georgia', 'trebuche', 'vera', 'veramono', or 'veraserif'. Refer to the jpgraph manual for details.
-	 * NOTE: these fonts need to be installed in the TTF_DIR as specified to jpgraph
-	 * @global string $g_graph_font
-	 */
-	$g_graph_font = '';
-
-	/**
-	 * initial graph type selected on bug_graph_page (see that page for possible values)
-	 * 0 asks user to select
-	 * @global int $g_default_graph_type
-	 */
-	$g_default_graph_type = 0;
-
-	/**
-	 * graph colours, once the list is exhausted it will repeat
-	 * @global array $g_graph_colors
-	 */
-	$g_graph_colors = array('coral', 'red', 'blue', 'black', 'green', 'orange', 'pink', 'brown', 'gray',
-	        'blueviolet','chartreuse','magenta','purple3','teal','tan','olivedrab','magenta');
-
-	/**************************
 	 * MantisBT Time Settings *
 	 **************************/
 

@@ -251,17 +251,17 @@ class Period {
 	*/
 	function period_selector( $p_control_name ) {
 		$t_periods = array(
-			0 => lang_get( 'period_none' ),
-			7 => lang_get( 'period_this_week' ),
-			8 => lang_get( 'period_last_week' ),
-			9 => lang_get( 'period_two_weeks' ),
-			1 => lang_get( 'period_this_month' ),
-			2 => lang_get( 'period_last_month' ),
-			3 => lang_get( 'period_this_quarter' ),
-			4 => lang_get( 'period_last_quarter' ),
-			5 => lang_get( 'period_year_to_date' ),
-			6 => lang_get( 'period_last_year' ),
-			10 => lang_get( 'period_select' ),
+			0 => plugin_lang_get( 'period_none' ),
+			7 => plugin_lang_get( 'period_this_week' ),
+			8 => plugin_lang_get( 'period_last_week' ),
+			9 => plugin_lang_get( 'period_two_weeks' ),
+			1 => plugin_lang_get( 'period_this_month' ),
+			2 => plugin_lang_get( 'period_last_month' ),
+			3 => plugin_lang_get( 'period_this_quarter' ),
+			4 => plugin_lang_get( 'period_last_quarter' ),
+			5 => plugin_lang_get( 'period_year_to_date' ),
+			6 => plugin_lang_get( 'period_last_year' ),
+			10 => plugin_lang_get( 'period_select' ),
 		);
 		$t_default = gpc_get_int( $p_control_name, 0 );
 		$t_formatted_start = $this->get_start_formatted();

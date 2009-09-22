@@ -28,7 +28,7 @@ if( OFF == plugin_config_get( 'eczlibrary' ) ) {
 	if( $t_font_path !== '' && !defined('TTF_DIR') ) {
 		define( 'TTF_DIR', $t_font_path );
 	}
-	$t_jpgraph_path = config_get( 'jpgraph_path', '' );
+	$t_jpgraph_path = plugin_config_get( 'jpgraph_path', '' );
 	if( $t_jpgraph_path !== '' ) {
 		set_include_path(get_include_path() . PATH_SEPARATOR . $t_jpgraph_path );
 		$ip = get_include_path();
@@ -51,7 +51,7 @@ if( OFF == plugin_config_get( 'eczlibrary' ) ) {
 }
 
 function graph_get_font() {
-	$t_font = config_get( 'graph_font', '' );
+	$t_font = plugin_config_get( 'font', '' );
 
 	if ( plugin_config_get( 'eczlibrary' ) == ON ) {
 		$ttf_dir = '';
@@ -60,14 +60,13 @@ function graph_get_font() {
 		$t_font_map = array(
 			'arial' => 'arial.ttf',
 			'verdana' => 'verdana.ttf',
-			'courier' => 'cour.ttf',
-			'comic' => 'comic.ttf',
+			'trebuchet' => 'trebuc.ttf',
+			'verasans' => 'Vera.ttf',
 			'times' => 'times.ttf',
 			'georgia' => 'georgia.ttf',
-			'trebuche' => 'trebuc.ttf',
-			'vera' => 'Vera.ttf',
-			'veramono' => 'VeraMono.ttf',
 			'veraserif' => 'VeraSe.ttf',
+			'courier' => 'cour.ttf',
+			'veramono' => 'VeraMono.ttf',
 		);
 
 		if( isset( $t_font_map[$t_font] ) ) {
@@ -90,14 +89,13 @@ function graph_get_font() {
 		$t_font_map = array(
 			'arial' => FF_ARIAL,
 			'verdana' => FF_VERDANA,
-			'courier' => FF_COURIER,
-			'comic' => FF_COMIC,
+			'trebuchet' => FF_TREBUCHE,
+			'verasans' => FF_VERA,
 			'times' => FF_TIMES,
 			'georgia' => FF_GEORGIA,
-			'trebuche' => FF_TREBUCHE,
-			'vera' => FF_VERA,
-			'veramono' => FF_VERAMONO,
 			'veraserif' => FF_VERASERIF,
+			'courier' => FF_COURIER,
+			'veramono' => FF_VERAMONO,
 		);
 
 		if( isset( $t_font_map[$t_font] ) ) {
@@ -257,23 +255,23 @@ function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_
 		$tot = new BarPlot( array_values( $total ) );
 		$tot->SetFillColor( 'lightblue' );
 		$tot->SetWidth( 0.7 );
-		$tot->SetLegend( lang_get( 'legend_total' ) );
+		$tot->SetLegend( plugin_lang_get( 'legend_total' ) );
 		$graph->Add( $tot );
 
 		$p1 = new BarPlot( array_values( $p_metrics['open'] ) );
 		$p1->SetFillColor( 'yellow' );
 		$p1->SetWidth( 1 );
-		$p1->SetLegend( lang_get( 'legend_opened' ) );
+		$p1->SetLegend( plugin_lang_get( 'legend_opened' ) );
 
 		$p2 = new BarPlot( array_values( $p_metrics['closed'] ) );
 		$p2->SetFillColor( 'blue' );
 		$p2->SetWidth( 1 );
-		$p2->SetLegend( lang_get( 'legend_closed' ) );
+		$p2->SetLegend( plugin_lang_get( 'legend_closed' ) );
 
 		$p3 = new BarPlot( array_values( $p_metrics['resolved'] ) );
 		$p3->SetFillColor( 'red' );
 		$p3->SetWidth( 1 );
-		$p3->SetLegend( lang_get( 'legend_resolved' ) );
+		$p3->SetLegend( plugin_lang_get( 'legend_resolved' ) );
 
 		$gbplot = new GroupBarPlot( array( $p1, $p3, $p2 ) );
 		$graph->Add( $gbplot );
@@ -359,7 +357,7 @@ function graph_pie( $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_he
 function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_height = 380 ) {
 
 	$t_graph_font = graph_get_font();
-	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
+	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
 
 	if ( plugin_config_get( 'eczlibrary' ) == ON ) {
 		$graph = new ezcGraphLineChart();
@@ -369,15 +367,15 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 		$graph->xAxis = new ezcGraphChartElementNumericAxis();
 
 		$graph->data[0] = new ezcGraphArrayDataSet( $p_metrics[0] );
-		$graph->data[0]->label = lang_get( 'legend_reported' );
+		$graph->data[0]->label = plugin_lang_get( 'legend_reported' );
 		$graph->data[0]->color = '#FF0000';
 
 		$graph->data[1] = new ezcGraphArrayDataSet( $p_metrics[1] );
-		$graph->data[1]->label = lang_get( 'legend_resolved' );
+		$graph->data[1]->label = plugin_lang_get( 'legend_resolved' );
 		$graph->data[1]->color = '#0000FF';
 
 		$graph->data[2] = new ezcGraphArrayDataSet( $p_metrics[2] );
-		$graph->data[2]->label = lang_get( 'legend_still_open' );
+		$graph->data[2]->label = plugin_lang_get( 'legend_still_open' );
 		$graph->data[2]->color = '#000000';
 
 		$graph->additionalAxis[2] = $nAxis = new ezcGraphChartElementNumericAxis();
@@ -399,7 +397,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 		$graph->driver->options->jpegQuality = 100;
 		$graph->driver->options->imageFormat = IMG_JPEG;
 
-		$graph->title = lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' );
+		$graph->title = plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' );
 		$graph->options->font = $t_graph_font ;
 
 		$graph->renderToOutput( $p_graph_width, $p_graph_height);
@@ -423,7 +421,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 		$graph->SetY2Scale("lin");
 		$graph->SetMarginColor( 'white' );
 		$graph->SetFrame( false );
-		$graph->title->Set( lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
+		$graph->title->Set( plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
 		$graph->title->SetFont( $t_graph_font, FS_BOLD );
 
 		$graph->legend->Pos( 0.05, 0.9, 'right', 'bottom' );
@@ -448,19 +446,19 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 		$p1 = new LinePlot( $reported_plot, $plot_date );
 		$p1->SetColor( 'blue' );
 		$p1->SetCenter();
-		$p1->SetLegend( lang_get( 'legend_reported' ) );
+		$p1->SetLegend( plugin_lang_get( 'legend_reported' ) );
 		$graph->AddY2( $p1 );
 
 		$p3 = new LinePlot( $still_open_plot, $plot_date );
 		$p3->SetColor( 'red' );
 		$p3->SetCenter();
-		$p3->SetLegend( lang_get( 'legend_still_open' ) );
+		$p3->SetLegend( plugin_lang_get( 'legend_still_open' ) );
 		$graph->Add( $p3 );
 
 		$p2 = new LinePlot( $resolved_plot, $plot_date );
 		$p2->SetColor( 'black' );
 		$p2->SetCenter();
-		$p2->SetLegend( lang_get( 'legend_resolved' ) );
+		$p2->SetLegend( plugin_lang_get( 'legend_resolved' ) );
 		$graph->AddY2( $p2 );
 
 		if( helper_show_queries() ) {
@@ -544,13 +542,13 @@ function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p
 		$graph->xaxis->SetLabelFormatCallback( 'graph_date_format' );
 		$graph->xaxis->SetFont( $t_graph_font );
 
-		$t_line_colours = config_get( 'graph_colors' );
-		$t_count_colours = count( $t_line_colours );
+/*		$t_line_colours = plugin_config_get( 'jpgraph_colors' );
+		$t_count_colours = count( $t_line_colours );*/
 		$t_lines = count( $p_metrics ) - 1;
 		$t_line = array();
 		for( $i = 1;$i <= $t_lines;$i++ ) {
 			$t_line[$i] = new LinePlot( $p_metrics[$i], $p_metrics[0] );
-			$t_line[$i]->SetColor( $t_line_colours[$i % $t_count_colours] );
+			//$t_line[$i]->SetColor( $t_line_colours[$i % $t_count_colours] );
 			$t_line[$i]->SetCenter();
 			$t_line[$i]->SetLegend( $p_labels[$i] );
 			$graph->Add( $t_line[$i] );
@@ -892,7 +890,7 @@ function error_check( $bug_count, $title ) {
 	if( 0 == $bug_count ) {
 		$t_graph_font = graph_get_font();
 
-		error_text( $title, lang_get( 'not_enough_data' ) );
+		error_text( $title, plugin_lang_get( 'not_enough_data' ) );
 	}
 }
 
