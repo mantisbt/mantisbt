@@ -75,6 +75,9 @@ function columns_get_standard() {
 	$t_columns['selection'] = null;
 	$t_columns['edit'] = null;
 
+	# Overdue icon column (icons appears if an issue is beyond due_date)
+	$t_columns['overdue'] = null;
+
 	if( OFF == config_get( 'enable_profiles' ) ) {
 		unset( $t_columns['os'] );
 		unset( $t_columns['os_build'] );
@@ -800,6 +803,16 @@ function print_column_title_additional_information( $p_sort, $p_dir, $p_columns_
 	echo '</td>';
 }
 
+function print_column_title_overdue( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	global $t_icon_path;
+	echo '<td>';
+	$t_overdue_text = lang_get( 'overdue' );
+	$t_overdue_icon = '<img src="' . $t_icon_path . 'overdue.png" alt="' . $t_overdue_text . '" title="' . $t_overdue_text . '" />';
+	print_view_bug_sort_link( $t_overdue_icon, 'due_date', $p_sort, $p_dir, $p_columns_target );
+	print_sort_icon( $p_dir, $p_sort, 'due_date' );
+	echo '</td>';
+}
+
 /**
  *
  * @param BugData $p_bug bug obect
@@ -858,33 +871,14 @@ function print_column_plugin( $p_column_object, $p_bug, $p_columns_target = COLU
  */
 function print_column_edit( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path, $t_update_bug_threshold;
-	$t_is_overdue = bug_is_overdue( $p_bug->id );
-	$t_view_level = access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id );
 
-	if( $t_is_overdue && $t_view_level ) {
-		print "<td class=\"overdue\">";
-	} else {
-		echo '<td>';
-	}
+	echo '<td>';
+
 	if( !bug_is_readonly( $p_bug->id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug->id ) ) {
 		echo '<a href="' . string_get_bug_update_url( $p_bug->id ) . '">';
 		echo '<img border="0" width="16" height="16" src="' . $t_icon_path . 'update.png';
 		echo '" alt="' . lang_get( 'update_bug_button' ) . '"';
 		echo ' title="' . lang_get( 'update_bug_button' ) . '" /></a>';
-	} else {
-		echo '&nbsp;';
-	}
-	if( $t_is_overdue && $t_view_level ) {
-		echo '<a href="' . string_get_bug_update_url( $p_bug->id ) . '">';
-		echo '<img border="0" width="16" height="16" src="' . $t_icon_path . 'overdue.png';
-		echo '" alt="' . lang_get( 'overdue' ) . '"';
-		echo ' title="' . lang_get( 'overdue' ) . '" /></a>';
-	}
-	else if( !date_is_null( $p_bug->due_date ) && $t_view_level ) {
-		echo '<a href="' . string_get_bug_update_url( $p_bug->id ) . '">';
-		echo '<img border="0" width="16" height="16" src="' . $t_icon_path . 'clock.png';
-		echo '" alt="' . lang_get( 'due_date' ) . '"';
-		echo ' title="' . lang_get( 'due_date' ) . '" /></a>';
 	} else {
 		echo '&nbsp;';
 	}
@@ -1265,6 +1259,56 @@ function print_column_view_state( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 	if( VS_PRIVATE == $p_bug->view_state ) {
 		$t_view_state_text = lang_get( 'private' );
 		echo '<img src="' . $t_icon_path . 'protected.gif" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '" />';
+	} else {
+		echo '&nbsp;';
+	}
+
+	echo '</td>';
+}
+
+/**
+ *
+ * @param BugData $p_bug bug object
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
+function print_column_due_date( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	if ( !access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ||
+		date_is_null( $p_bug->due_date ) ) {
+		echo '<td>&nbsp;</td>';
+		return;
+	}
+
+	if ( bug_is_overdue( $p_bug->id ) ) {
+		echo '<td class="overdue">';
+	} else {
+		echo '<td>';
+	}
+
+	echo date( config_get( 'short_date_format' ), $p_bug->due_date );
+
+	echo '</td>';
+}
+
+/**
+ *
+ * @param BugData $p_bug bug object
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
+function print_column_overdue( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	global $t_icon_path;
+
+	echo '<td>';
+
+	if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) &&
+		!date_is_null( $p_bug->due_date ) &&
+		bug_is_overdue( $p_bug->id ) ) {
+		$t_overdue_text = lang_get( 'overdue' );
+		$t_overdue_text_hover = $t_overdue_text . '. Due date was: ' . date( config_get( 'short_date_format' ), $p_bug->due_date );
+		echo '<img src="' . $t_icon_path . 'overdue.png" alt="' . $t_overdue_text . '" title="' . $t_overdue_text_hover . '" />';
 	} else {
 		echo '&nbsp;';
 	}
