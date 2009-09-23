@@ -86,7 +86,6 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	$t_date_format = config_get( 'normal_date_format' );
 	$t_short_date_format = config_get( 'short_date_format' );
 
-	$t_lang_viewing_bug_advanced_details_title = lang_get( 'viewing_bug_advanced_details_title' );
 	$t_lang_id = lang_get( 'id' );
 	$t_lang_category = lang_get( 'category' );
 	$t_lang_severity = lang_get( 'severity' );
@@ -149,7 +148,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">
-		<?php echo $t_lang_viewing_bug_advanced_details_title ?>
+		<?php echo lang_get( 'bug_view_title' ) ?>
 	</td>
 </tr>
 <tr>
@@ -467,7 +466,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 	} else { # print bugnotes ?>
 <tr>
 	<td class="form-title" colspan="2">
-			<?php echo $t_bug_notes_title ?>
+			<?php echo $t_lang_bug_notes_title ?>
 	</td>
 </tr>
 	<?php
