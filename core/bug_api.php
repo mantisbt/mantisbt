@@ -96,6 +96,7 @@ class BugData {
 	protected $summary = '';
 	protected $sponsorship_total = 0;
 	protected $sticky = 0;
+	protected $due_date = 0;
 
 	# omitted:
 	# var $bug_text_id
@@ -108,9 +109,6 @@ class BugData {
 
 	# internal helper objects
 	private $_stats = null;
-
-	# due date
-	protected $due_date = '';
 
 	public $attachment_count = null;
 	public $bugnotes_count = null;
