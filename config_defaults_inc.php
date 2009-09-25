@@ -1836,6 +1836,16 @@
 	 ****************************/
 
 	/**
+	 * Specify the filename of the magic database file. This is used by
+	 * PHP 5.3.0 (or earlier versions with the fileinfo PECL extension) to
+	 * guess what the MIME type of a file is. Usually it is safe to leave this
+	 * setting as the default (blank) as PHP is usually able to find this file
+	 * by itself.
+	 * @global string $g_fileinfo_magic_db_file
+	 */
+	$g_fileinfo_magic_db_file = '';
+
+	/**
 	 * Specifies the maximum size (in bytes) below which an attachment is
 	 * previewed in the bug view pages.
 	 * To disable the previewing of attachments, set max size to 0.

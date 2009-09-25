@@ -225,6 +225,16 @@
                 <listitem>
                     <para>GD - if the graphs feature is required.</para>
                 </listitem>
+                <listitem>
+                    <param>fileinfo - Guesses the MIME type of attachments.
+                    This extension is included by default from version 5.3.x
+                    of PHP. For older versions of PHP you will need to install
+                    the fileinfo PECL extension (this requires root access to
+                    the server you're using). Without this extension, file
+                    attachment previews and downloads may not work correctly as
+                    MantisBT won't be able to send the Content-Type header to a
+                    browser requesting an attachment.</para>
+                </listitem>
             </itemizedlist>
 
         </section>

@@ -126,7 +126,7 @@
 	$finfo_available = false;
 	if ( class_exists( 'finfo' ) ) {
 		$finfo_available = true;
-		$finfo = new finfo(FILEINFO_MIME);
+		$finfo = new finfo( FILEINFO_MIME, config_get( 'fileinfo_magic_db_file' ) );
 		if ( !$finfo ) {
 			$finfo_available = false;
 		}
