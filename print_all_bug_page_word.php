@@ -86,6 +86,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	$t_date_format = config_get( 'normal_date_format' );
 	$t_short_date_format = config_get( 'short_date_format' );
 
+	$t_lang_bug_view_title = lang_get( 'bug_view_title' );
 	$t_lang_id = lang_get( 'id' );
 	$t_lang_category = lang_get( 'category' );
 	$t_lang_severity = lang_get( 'severity' );
@@ -148,7 +149,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">
-		<?php echo lang_get( 'bug_view_title' ) ?>
+		<?php echo $t_lang_bug_view_title ?>
 	</td>
 </tr>
 <tr>
