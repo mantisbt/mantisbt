@@ -63,7 +63,7 @@
 				echo string_nl2br( string_html_specialchars( "'$t_value'" ) );
 				return;
 			case CONFIG_TYPE_COMPLEX:
-				$t_value = @unserialize( utf8_decode( $p_value ) );
+				$t_value = @unserialize( $p_value );
 				if ( $t_value === false ) {
 					$t_corrupted = true;
 				}
