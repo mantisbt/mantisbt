@@ -338,6 +338,8 @@ if ( ( $f_new_status >= $t_resolved ) && ( $t_closed > $f_new_status ) ) { ?>
 <?php } ?>
 <?php } ?>
 
+<?php event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) ); ?>
+
 <!-- Submit Button -->
 <tr>
 	<td class="center" colspan="2">
