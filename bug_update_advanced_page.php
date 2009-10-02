@@ -651,6 +651,8 @@ if ( config_get('time_tracking_enabled') ) {
 	}
 }
 
+event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $tpl_bug_id ) );
+
 # Submit Button
 echo '<tr><td class="center" colspan="6">';
 echo '<input ', helper_get_tab_index(), ' type="submit" class="button" value="', lang_get( 'update_information_button' ), '" />';
