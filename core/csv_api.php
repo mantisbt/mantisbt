@@ -384,3 +384,16 @@ function csv_format_duplicate_id( $p_duplicate_id ) {
 function csv_format_selection( $p_duplicate_id ) {
 	return csv_escape_string( '' );
 }
+
+/**
+ * return the due date column
+ * @param int $p_due_date
+ * @return string
+ * @access public
+ */
+function csv_format_due_date( $p_due_date ) {
+	static $s_date_format = null;
+	if ( $s_date_format === null )
+		$s_date_format = config_get( 'short_date_format' );
+	return csv_escape_string( date( $s_date_format, $p_due_date ) );
+}
