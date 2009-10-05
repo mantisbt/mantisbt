@@ -381,6 +381,7 @@ function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAG
 		$t_keys_to_remove[] = 'selection';
 		$t_keys_to_remove[] = 'edit';
 		$t_keys_to_remove[] = 'bugnotes_count';
+		$t_keys_to_remove[] = 'attachment_count';
 		$t_keys_to_remove[] = 'overdue';
 	}
 
