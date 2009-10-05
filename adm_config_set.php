@@ -87,7 +87,7 @@
 			// we have an array here
 			$t_values = explode( ',', trim( $t_match[1] ) );
 			foreach ( $t_values as $key => $value ) {
-				$t_split = split( '=>', $value, 2 );
+				$t_split = explode( '=>', $value, 2 );
 				if ( count( $t_split ) == 2 ) {
 					// associative array
 					$t_new_key = constant_replace( trim( $t_split[0] ) );

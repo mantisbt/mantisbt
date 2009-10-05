@@ -170,8 +170,8 @@ function check_zend_optimiser_version() {
 	define ( 'ZEND_OPTIMIZER_SUBVERSION', 3);
 
 	if (strstr($t_output, "Zend Optimizer")) {
-		$t_version = split("Zend Optimizer",$t_output);
-		$t_version = split(",",$t_version[1]);
+		$t_version = explode( 'Zend Optimizer', $t_output );
+		$t_version = explode( ',', $t_version[1] );
 		$t_version = trim($t_version[0]);
 
 		if (!strstr($t_version,"v")) {
