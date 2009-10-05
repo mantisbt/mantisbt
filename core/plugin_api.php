@@ -328,6 +328,19 @@ function plugin_child( $p_child ) {
 }
 
 # ## Plugin Management Helpers
+
+/**
+ * Checks if a given plugin has been registered and initialized,
+ * and returns a boolean value representing the "loaded" state.
+ * @param string Plugin basename
+ * @return boolean Plugin loaded
+ */
+function plugin_is_loaded( $p_basename ) {
+	global $g_plugin_cache_init;
+
+	return ( isset( $g_plugin_cache_init[ $p_basename ] ) && $g_plugin_cache_init[ $p_basename ] );
+}
+
 /**
  * Converts a version string to an array, using some punctuation and
  * number/lettor boundaries as splitting points.
