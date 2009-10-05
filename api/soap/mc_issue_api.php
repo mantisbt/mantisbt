@@ -593,6 +593,8 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_project = $p_issue['project'];
 	$t_summary = $p_issue['summary'];
 	$t_description = $p_issue['description'];
+	$t_additional_information = $p_issue['additional_information'];
+	$t_steps_to_reproduce = $p_issue['steps_to_reproduce'];
 
 	if( $t_reporter_id == 0 ) {
 		$t_reporter_id = $t_user_id;
@@ -693,8 +695,8 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	# $t_bug_data->profile_id;
 	# extended info
 	$t_bug_data->description = $t_description;
-	$t_bug_data->steps_to_reproduce = isset( $v_steps_to_reproduce ) ? $v_steps_to_reproduce : '';
-	$t_bug_data->additional_information = isset( $v_additional_information ) ? $v_additional_information : '';
+	$t_bug_data->steps_to_reproduce = isset( $t_steps_to_reproduce ) ? $t_steps_to_reproduce : '';
+	$t_bug_data->additional_information = isset( $t_additional_information ) ? $t_additional_information : '';
 
 	# submit the issue
 	$t_is_success = $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
