@@ -427,6 +427,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_reporter_id = mci_get_user_id( $p_issue['reporter'] );
 	$t_summary = $p_issue['summary'];
 	$t_description = $p_issue['description'];
+	$t_notes = $p_issue['notes'];
 
 	if( $t_reporter_id == 0 ) {
 		$t_reporter_id = $t_user_id;
@@ -493,6 +494,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	}
 
 	$t_bug_data = new BugData;
+	$t_bug_data->profile_id = 0;
 	$t_bug_data->project_id = $t_project_id;
 	$t_bug_data->reporter_id = $t_reporter_id;
 	$t_bug_data->handler_id = $t_handler_id;
@@ -534,8 +536,8 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
 	mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'] );
 
-	if( isset( $v_notes ) && is_array( $v_notes ) ) {
-		foreach( $v_notes as $t_note ) {
+	if( isset( $t_notes ) && is_array( $t_notes ) ) {
+		foreach( $t_notes as $t_note ) {
 			if( isset( $t_note['view_state'] ) ) {
 				$t_view_state = $t_note['view_state'];
 			} else {
@@ -578,7 +580,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	}
 
 	$t_project_id = mci_get_project_id( $p_issue['project'] );
-	$t_handler_id = mci_get_user_id( $p_issue['handler'] );
+	$t_handler_id = isset( $p_issue['handler'] ) ? mci_get_user_id( $p_issue['handler'] ) : 0;
 	$t_priority_id = mci_get_priority_id( $p_issue['priority'] );
 	$t_severity_id = mci_get_severity_id( $p_issue['severity'] );
 	$t_status_id = mci_get_status_id( $p_issue['status'] );
@@ -657,6 +659,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	}
 
 	$t_bug_data = new BugData;
+	$t_bug_data->id = $p_issue_id;
 	$t_bug_data->project_id = $t_project_id;
 	$t_bug_data->reporter_id = $t_reporter_id;
 	$t_bug_data->handler_id = $t_handler_id;
@@ -694,7 +697,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_bug_data->additional_information = isset( $v_additional_information ) ? $v_additional_information : '';
 
 	# submit the issue
-	$t_is_success = bug_update( $p_issue_id, $t_bug_data, true, false );
+	$t_is_success = $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
 
 	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'] );
 
