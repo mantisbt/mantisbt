@@ -127,6 +127,8 @@
 			}
 		}
 
+		event_signal( 'EVENT_TAG_ATTACHED', array( $f_bug_id, $t_tags_attach ) );
+
 		form_security_purge( 'tag_attach' );
 
 		print_successful_redirect_to_bug( $f_bug_id );

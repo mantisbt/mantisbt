@@ -404,6 +404,38 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.bug.action.tagattached">
+			<title>EVENT_TAG_ATTACHED (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do post-processing of attached tags.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+					<listitem><para>&lt;Array of Integers&gt;: Tag IDs</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+				<blockquote id="dev.eventref.bug.action.tagdetached">
+			<title>EVENT_TAG_DETACHED (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do post-processing of detached tags.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+					<listitem><para>&lt;Array of Integers&gt;: Tag IDs</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 	</sect2>
 
 </sect1>
