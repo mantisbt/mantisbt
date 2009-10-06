@@ -506,10 +506,6 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 	if( 'bug' == $p_table ) {
 		# log file deletion
 		history_log_event_special( $t_bug_id, FILE_DELETED, file_get_display_name( $t_filename ) );
-
-		if ( file_exists( $t_local_disk_file ) ) {
-			file_delete_local( $t_local_disk_file );
-		}
 	}
 
 	$t_file_table = db_get_table( 'mantis_' . $p_table . '_file_table' );
