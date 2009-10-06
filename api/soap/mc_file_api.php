@@ -160,9 +160,13 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	$row = db_fetch_array( $result );
 
 	$t_bug_id = $row['bug_id'];
-	$t_project_id = $row['project_id'];
+
+	if ( $p_type == 'doc' ) {
+		$t_project_id = $row['project_id'];
+	}
+
 	$t_diskfile = $row['diskfile'];
-	$t_content = base64_encode( $row['content'] );
+	$t_content = $row['content'];
 
 	# Check access rights
 	switch( $p_type ) {
@@ -172,7 +176,6 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 			}
 			break;
 		case 'doc':
-
 			# Check if project documentation feature is enabled.
 			if( OFF == config_get( 'enable_project_documentation' ) ) {
 				return new soap_fault( 'Client', '', 'Access Denied' );
@@ -201,6 +204,6 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 				return base64_encode( mci_file_read_local( $t_diskfile ) );
 			}
 		default:
-			return $t_content;
+			return base64_encode( $t_content );
 	}
 }
