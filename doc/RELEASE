@@ -24,6 +24,9 @@ There are many new features added to 1.2.x, including:
 
  - Customizable sets of columns for View Issues page and export formats
 
+ - Combined simple and advanced views into a single, configurable view that
+   allows selecting exactly what fields to show or hide
+
  - Improved roadmap and changelog pages, including version release dates, and
    permalinks to individual versions
 
@@ -54,6 +57,8 @@ There have also been many improvements to the codebase beyond adding features:
 
  - All 3rd party code is now contained within the library/ path, including
    documentation on library versions and any patches applied
+
+ - Initial support for MySQL 6 and PHP 5.3
 
 
 [1] The changelog is split between multiple releases:
