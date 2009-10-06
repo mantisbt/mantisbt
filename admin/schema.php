@@ -599,3 +599,5 @@ $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'custom_field'), "adva
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'user_pref'), "advanced_report" ) );
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'user_pref'), "advanced_view" ) );
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'user_pref'), "advanced_update" ) );
+$upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_project_hierarchy_child_id', db_get_table( 'project_hierarchy' ), 'child_id' ) );
+$upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_project_hierarchy_parent_id', db_get_table( 'project_hierarchy' ), 'parent_id' ) );
