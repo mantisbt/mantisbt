@@ -36,6 +36,8 @@
 
 	tag_bug_detach( $f_tag_id, $f_bug_id );
 
+	event_signal( 'EVENT_TAG_DETACHED', array( $f_bug_id, array( $f_tag_id ) ) );
+
 	form_security_purge( 'tag_detach' );
 
 	print_successful_redirect_to_bug( $f_bug_id );
