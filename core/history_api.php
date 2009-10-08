@@ -247,7 +247,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 
 	if( PLUGIN_HISTORY == $p_type ) {
 		$t_note = lang_get_defaulted( "plugin_$p_field_name", $p_field_name );
-		$t_change = ( $p_new_value ? "$p_old_value => $p_new_value" : $p_old_value );
+		$t_change = ( isset( $p_new_value ) ? "$p_old_value => $p_new_value" : $p_old_value );
 
 		return array( 'note' => $t_note, 'change' => $t_change, 'raw' => true );
 	}
