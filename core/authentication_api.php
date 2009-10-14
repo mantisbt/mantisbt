@@ -191,7 +191,7 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 
 		if ( $t_auto_create ) {
 			# attempt to create the user
-			$t_cookie_string = user_create( $p_username, $p_password );
+			$t_cookie_string = user_create( $p_username, md5( $p_password ) );
 
 			if ( false === $t_cookie_string ) {
 				# it didn't work
