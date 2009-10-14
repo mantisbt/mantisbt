@@ -1148,7 +1148,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
 		case CUSTOM_FIELD_TYPE_STRING:
 			// validate against regexp
 			if( !is_blank( $t_valid_regexp ) && !is_blank( $p_value ) ) {
-				$t_valid &= ereg( $t_valid_regexp, $p_value );
+				$t_valid &= preg_match( "/$t_valid_regexp/", $p_value );
 			}
 			// check string length
 			$t_valid &= ( 0 == $t_length_min ) || ( $t_length > $t_length_min );

@@ -1356,7 +1356,7 @@ function mci_is_webservice_call( $p_service, $p_data )
 		$t_qs = $QUERY_STRING;
 	}
 
-	if ( isset( $t_qs ) && ereg( 'wsdl', $t_qs ) ){
+	if ( isset( $t_qs ) && preg_match( '/wsdl/', $t_qs ) ){
 		return false;
 	} else if ( $p_data == '' && $p_service->wsdl ) {
 		return false;

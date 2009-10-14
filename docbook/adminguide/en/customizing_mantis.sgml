@@ -110,7 +110,7 @@
                     </para>
                 </listitem>
                 <listitem>
-                    <para>Regular expression to use for validating user input (use <ulink url="http://www.php.net/ereg">ereg()</ulink> syntax).
+                    <para>Regular expression to use for validating user input (use <ulink url="http://www.php.net/manual/en/reference.pcre.pattern.syntax.php">PCRE syntax</ulink>).
                     </para>
                 </listitem>
                 <listitem>
