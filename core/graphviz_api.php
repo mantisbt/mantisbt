@@ -438,7 +438,7 @@ class Graph {
 		$t_result = array();
 
 		foreach( $p_attributes as $t_name => $t_value ) {
-			if( !ereg( "[a-zA-Z]+", $t_name ) ) {
+			if( !preg_match( "/[a-zA-Z]+/", $t_name ) ) {
 				continue;
 			}
 
@@ -463,7 +463,7 @@ class Graph {
 	 */
 	function _print_graph_defaults() {
 		foreach( $this->attributes as $t_name => $t_value ) {
-			if( !ereg( "[a-zA-Z]+", $t_name ) ) {
+			if( !preg_match( "/[a-zA-Z]+/", $t_name ) ) {
 				continue;
 			}
 
