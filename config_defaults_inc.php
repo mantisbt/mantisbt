@@ -1776,6 +1776,14 @@
 	$g_bug_reopen_status = FEEDBACK;
 
 	/**
+	 * Status to assign to the bug when feedback is required from the issue reporter.
+	 * Once the reporter adds a note the status moves back from feedback to $g_bug_assigned_status
+	 * or $g_bug_submit_status.
+	 * @global int $g_bug_feedback_status
+	 */
+	$g_bug_feedback_status = FEEDBACK;
+
+	/**
 	 * Resolution to assign to the bug when reopened.
 	 * @global int $g_bug_reopen_resolution
 	 */
