@@ -281,7 +281,7 @@ $c_filter['feedback'] = array(
 		'0' => META_FILTER_ANY,
 	),
 	FILTER_PROPERTY_STATUS_ID => Array(
-		'0' => FEEDBACK,
+		'0' => config_get( 'bug_feedback_status' ),
 	),
 	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
 	FILTER_PROPERTY_REPORTER_ID => Array(
@@ -306,7 +306,7 @@ $c_filter['feedback'] = array(
 		'0' => META_FILTER_ANY,
 	),
 );
-$url_link_parameters['feedback'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . FEEDBACK . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
+$url_link_parameters['feedback'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . config_get( 'bug_feedback_status' ) . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 
 $c_filter['verify'] = array(
 	FILTER_PROPERTY_CATEGORY => Array(
