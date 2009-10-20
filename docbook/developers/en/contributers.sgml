@@ -207,6 +207,35 @@ $ git merge master
 
 	</sect1>
 
+	<sect1 id="dev.contrib.test">
+		<title>Running PHPUnit tests</title>
+
+		<para>
+			MantisBT has a suite of PHPUnit tests found in the <literal>tests</literal>
+			directory. You are encouraged to add your own tests for the patches you
+			are submitting, but please remember that your changes must not break
+			existing tests.
+		</para>
+
+		<para>
+			In order to run the tests, you will need to have the PHP Soap extension
+			and <ulink url="http://www.phpunit.de">PHPUnit</ulink> installed. The tests
+			are configured using a <literal>bootstrap.php</literal> file. The 
+			<literal>boostrap.php.sample</literal> file contains the settings you will
+			need to adjust to run all the tests. 
+		</para>
+
+		<para>
+			Running the unit tests is done from the <literal>tests</literal> directory
+			using the following command:
+		</para>
+
+		<programlisting>
+$ phpunit --bootstrap bootstrap.php AllTests.php
+		</programlisting>
+
+	</sect1>
+
 	<sect1 id="dev.contrib.submit">
 		<title>Submitting Changes</title>
 
