@@ -230,7 +230,7 @@ function version_update( $p_version_info ) {
 
 	if( $c_version_name != $c_old_version_name ) {
 		$query = 'UPDATE ' . $t_bug_table . ' SET version=' . db_param() .
-				 'WHERE ( project_id=' . db_param() . ') AND ( version=' . db_param() . ')';
+				 ' WHERE ( project_id=' . db_param() . ') AND ( version=' . db_param() . ')';
 		db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 		$query = "UPDATE $t_bug_table
