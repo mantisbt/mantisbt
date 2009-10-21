@@ -294,6 +294,25 @@ function mci_category_as_array_by_id( $p_category_id ) {
 }
 
 /**
+ * Returns time tracking information from a bug note.
+ * 
+ * @param int $p_issue_id The id of the issue
+ * @param Array $p_note A note as passed to the soap api methods
+ * 
+ * @return String the string time entry to be added to the bugnote, in 'HH:mm' format
+ */
+function mci_get_time_tracking_from_note( $p_issue_id, $p_note) {
+	
+	if ( !access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_issue_id ) )
+		return '00:00';
+
+	if ( !isset( $p_note['time_tracking'] ))
+		return '00:00';
+		
+	return db_minutes_to_hhmm($p_note['time_tracking']);
+}
+
+/**
  * SECURITY NOTE: these globals are initialized here to prevent them
  * being spoofed if register_globals is turned on
  */

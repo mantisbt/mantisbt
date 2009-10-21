@@ -292,7 +292,8 @@ function mci_issue_get_notes( $p_issue_id ) {
 	$t_lang = mci_get_user_lang( $t_user_id );
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	$t_user_bugnote_order = 'ASC'; // always get the notes in ascending order for consistency to the calling application.
-
+	$t_has_time_tracking_access = access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_issue_id );
+	
 	$t_result = array();
 	foreach( bugnote_get_all_visible_bugnotes( $p_issue_id, $t_user_bugnote_order, 0 ) as $t_value ) {
 		$t_bugnote = array();
@@ -302,6 +303,8 @@ function mci_issue_get_notes( $p_issue_id ) {
 		$t_bugnote['last_modified'] = timestamp_to_iso8601( $t_value->last_modified );
 		$t_bugnote['text'] = $t_value->note;
 		$t_bugnote['view_state'] = mci_enum_get_array_by_id( $t_value->view_state, 'view_state', $t_lang );
+		$t_bugnote['time_tracking'] = $t_has_time_tracking_access ? $t_value->time_tracking : 0;
+		
 		$t_result[] = $t_bugnote;
 	}
 
@@ -586,7 +589,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 			}
 
 			$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-			bugnote_add( $t_issue_id, $t_note['text'], '0:00', $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id, FALSE );
+			bugnote_add( $t_issue_id, $t_note['text'], mci_get_time_tracking_from_note( $t_issue_id, $t_note ), $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id, FALSE );
 		}
 	}
 
@@ -747,7 +750,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 
 	# submit the issue
 	$t_is_success = $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
-
+	
 	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'], true );
 
 	if ( isset( $p_issue['notes'] ) && is_array( $p_issue['notes'] ) ) {
@@ -765,10 +768,13 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 					bugnote_set_text( $t_bugnote_id, $t_note['text'] );
 					bugnote_set_view_state( $t_bugnote_id, $t_view_state_id == VS_PRIVATE );
 					bugnote_date_update( $t_bugnote_id );
+					if ( isset( $t_note['time_tracking'] ) )
+						bugnote_set_time_tracking( $t_bugnote_id, mci_get_time_tracking_from_note( $p_issue_id, $t_note ) );
 				}
 			} else {
 				$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-				bugnote_add( $p_issue_id, $t_note['text'], '0:00', $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id, FALSE );
+				
+				bugnote_add( $p_issue_id, $t_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $t_note ), $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id, FALSE );
 			}
 		}
 	}
@@ -849,9 +855,9 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 			'id' => config_get( 'default_bug_view_status' ),
 		);
 	}
-
+	
 	$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-	return bugnote_add( $p_issue_id, $p_note['text'], '0:00', $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id );
+	return bugnote_add( $p_issue_id, $p_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $p_note ), $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id );
 }
 
 /**
