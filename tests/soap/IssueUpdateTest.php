@@ -328,11 +328,11 @@ class IssueUpdateTest extends SoapBase {
 		
 		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateBugWithNoCategory' );
 		
-		$issueId = $this->client->mc_issue_add(
+        $issueId = $this->client->mc_issue_add(
 			$this->userName,
-			$this->password,
-			$issueToAdd);
-			
+            $this->password,
+            $issueToAdd);
+		
 		$this->deleteAfterRun( $issueId );	
 		
 		$issueToUpdate = $this->client->mc_issue_get(
@@ -347,13 +347,60 @@ class IssueUpdateTest extends SoapBase {
 			$this->password,
 			$issueId,
 			$issueToUpdate);
-
+			
 		$issue = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
 			$issueId);
 			
 		$this->assertEquals( '', $issue->category, 'category' );
+	}
+	
+	/*		
+	 * This test case tests the following:
+	 * 1. Creation of an issue.
+	 * 2. Updating the issue with a time tracking note
+	 * 3. Verifying that the time tracking note on the issue is preseved
+	 * 4. Deleting the issue.
+	 */
+	public function testUpdateWithTimeTrackingNote() {
 		
-	}	
+		$this->skipIfTimeTrackingIsNotEnabled();
+		
+		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithTimeTrackingNote' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+			
+		$issue->notes = array(
+			array (	
+				'text' => "first note",
+				'time_tracking' => "30"
+			)
+		);
+		
+ 		$this->client->mc_issue_update(
+			$this->userName,
+			$this->password,
+			$issueId,
+			$issue);		
+
+		$issueWithNote = $this->client->mc_issue_get(	
+			$this->userName,
+			$this->password,
+			$issueId);
+		
+		$this->assertEquals( 1, count( $issueWithNote->notes ) );
+		
+		$this->assertEquals( 30, $issueWithNote->notes[0]->time_tracking);
+	}
 }

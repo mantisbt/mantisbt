@@ -55,9 +55,9 @@ class IssueNoteTest extends SoapBase {
 			$issueId);
 
 		$noteData = array(
-			'text' => "first note",
+			'text' => "first note"
 		);
-
+		
 		$issueNoteId = $this->client->mc_issue_note_add(
 			$this->userName,
 			$this->password,
@@ -87,6 +87,55 @@ class IssueNoteTest extends SoapBase {
 
 		$this->assertEquals( $t_today_date, $t_submited_date );
 		*/
+	}
+
+	/**
+	 * A test case that tests the following:
+	 * 1. Create an issue.
+	 * 2. Add a note to the issue by specifying the text and time_tracking.
+	 * 3. Get the issue.
+	 * 4. Verify the note id against the one returned when adding the note.
+	 * 5. Verify the time_tracking entry
+	 * 6. Delete the issue.
+	 */
+	public function testAddNoteWithTimeTracking() {
+
+		$this->skipIfTimeTrackingIsNotEnabled();
+
+		$issueToAdd = $this->getIssueToAdd( 'IssueNoteTest.testAddNoteWithTimeTracking' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$noteData = array(
+			'text' => "first note",
+			'time_tracking' => "30"
+		);
+		
+		$issueNoteId = $this->client->mc_issue_note_add(
+			$this->userName,
+			$this->password,
+			$issueId,
+			$noteData);
+
+		$issueWithNote = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		$this->assertEquals( 1, count( $issueWithNote->notes ) );
+
+		$note = $issueWithNote->notes[0];
+		
+		$this->assertEquals( 30, $note->time_tracking );
+
+		$this->client->mc_issue_delete(
+			$this->userName,
+			$this->password,
+			$issueId);
+
 	}
 
 	/**
