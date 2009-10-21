@@ -126,7 +126,7 @@ class IssueAddTest extends SoapBase {
 		$this->assertEquals( $issueToAdd['description'], $issue->description );
 
 	}
-
+	
 	/**
 	 * This issue tests the following:
 	 * 1. Creating an issue with some fields that are typically not used at creation time.
@@ -315,5 +315,44 @@ class IssueAddTest extends SoapBase {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * A test cases that tests the creation of issues 
+	 * with a note passed in which contains time tracking data.
+	 */
+	public function testCreateIssueWithTimeTrackingNote() {
+		
+		$this->skipIfTimeTrackingIsNotEnabled();
+		
+		$issueToAdd = $this->getIssueToAdd( 'testCreateIssueWithNote' );
+		$issueToAdd['notes'] = array(
+			array(
+				'text' => "first note",
+				'time_tracking' => "30"
+			)
+		);
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		// verify note existence and time tracking data
+		$this->assertEquals( 1, count( $issue->notes ) );
+
+		$note = $issue->notes[0];
+		
+		$this->assertEquals( 30, $note->time_tracking );
+		
+		$this->client->mc_issue_delete(
+			$this->userName,
+			$this->password,
+			$issueId);
 	}
 }
