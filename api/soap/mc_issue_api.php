@@ -418,16 +418,16 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_handler_id = isset( $p_issue['handler'] ) ? mci_get_user_id( $p_issue['handler'] ) : 0;
 	$t_priority_id = isset( $p_issue['priority'] ) ? mci_get_priority_id( $p_issue['priority'] ) : config_get( 'default_bug_priority' );
 	$t_severity_id = isset( $p_issue['severity'] ) ?  mci_get_severity_id( $p_issue['severity'] ) : config_get( 'default_bug_severity' );
-	$t_status_id = isset ( $p_issue['status'] ) ? mci_get_status_id( $p_issue['status'] ) : config_get( 'bug_submit_status' );
-	$t_reproducibility_id = isset ( $p_issue['reproducibility'] ) ?  mci_get_reproducibility_id( $p_issue['reproducibility'] ) : config_get( 'default_bug_reproducibility' );
-	$t_resolution_id =  isset ( $p_issue['resolution'] ) ? mci_get_resolution_id( $p_issue['resolution'] ) : config_get('default_bug_resolution');
-	$t_projection_id = isset ( $p_issue['projection'] ) ? mci_get_projection_id( $p_issue['projection'] ) : config_get('default_bug_resolution');
-	$t_eta_id = isset ( $p_issue['eta'] ) ? mci_get_eta_id( $p_issue['eta'] ) : config_get('default_bug_eta');
-	$t_view_state_id = isset ( $p_issue['view_state'] ) ?  mci_get_view_state_id( $p_issue['view_state'] ) : config_get( 'default_bug_view_status' );
-	$t_reporter_id = isset ( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : 0;
+	$t_status_id = isset( $p_issue['status'] ) ? mci_get_status_id( $p_issue['status'] ) : config_get( 'bug_submit_status' );
+	$t_reproducibility_id = isset( $p_issue['reproducibility'] ) ?  mci_get_reproducibility_id( $p_issue['reproducibility'] ) : config_get( 'default_bug_reproducibility' );
+	$t_resolution_id =  isset( $p_issue['resolution'] ) ? mci_get_resolution_id( $p_issue['resolution'] ) : config_get('default_bug_resolution');
+	$t_projection_id = isset( $p_issue['projection'] ) ? mci_get_projection_id( $p_issue['projection'] ) : config_get('default_bug_resolution');
+	$t_eta_id = isset( $p_issue['eta'] ) ? mci_get_eta_id( $p_issue['eta'] ) : config_get('default_bug_eta');
+	$t_view_state_id = isset( $p_issue['view_state'] ) ?  mci_get_view_state_id( $p_issue['view_state'] ) : config_get( 'default_bug_view_status' );
+	$t_reporter_id = isset( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : 0;
 	$t_summary = $p_issue['summary'];
 	$t_description = $p_issue['description'];
-	$t_notes = isset ( $p_issue['notes'] ) ? $p_issue['notes'] : array();
+	$t_notes = isset( $p_issue['notes'] ) ? $p_issue['notes'] : array();
 
 	if( $t_reporter_id == 0 ) {
 		$t_reporter_id = $t_user_id;
@@ -583,18 +583,18 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_handler_id = isset( $p_issue['handler'] ) ? mci_get_user_id( $p_issue['handler'] ) : 0;
 	$t_priority_id = isset( $p_issue['priority'] ) ? mci_get_priority_id( $p_issue['priority'] ) : config_get( 'default_bug_priority' );
 	$t_severity_id = isset( $p_issue['severity'] ) ?  mci_get_severity_id( $p_issue['severity'] ) : config_get( 'default_bug_severity' );
-	$t_status_id = isset ( $p_issue['status'] ) ? mci_get_status_id( $p_issue['status'] ) : config_get( 'bug_submit_status' );
-	$t_reproducibility_id = isset ( $p_issue['reproducibility'] ) ?  mci_get_reproducibility_id( $p_issue['reproducibility'] ) : config_get( 'default_bug_reproducibility' );
-	$t_resolution_id =  isset ( $p_issue['resolution'] ) ? mci_get_resolution_id( $p_issue['resolution'] ) : config_get('default_bug_resolution');
-	$t_projection_id = isset ( $p_issue['projection'] ) ? mci_get_projection_id( $p_issue['projection'] ) : config_get('default_bug_resolution');
-	$t_eta_id = isset ( $p_issue['eta'] ) ? mci_get_eta_id( $p_issue['eta'] ) : config_get('default_bug_eta');
-	$t_view_state_id = isset ( $p_issue['view_state'] ) ?  mci_get_view_state_id( $p_issue['view_state'] ) : config_get( 'default_bug_view_status' );
-	$t_reporter_id = isset ( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : 0;
+	$t_status_id = isset( $p_issue['status'] ) ? mci_get_status_id( $p_issue['status'] ) : config_get( 'bug_submit_status' );
+	$t_reproducibility_id = isset( $p_issue['reproducibility'] ) ?  mci_get_reproducibility_id( $p_issue['reproducibility'] ) : config_get( 'default_bug_reproducibility' );
+	$t_resolution_id =  isset( $p_issue['resolution'] ) ? mci_get_resolution_id( $p_issue['resolution'] ) : config_get('default_bug_resolution');
+	$t_projection_id = isset( $p_issue['projection'] ) ? mci_get_projection_id( $p_issue['projection'] ) : config_get('default_bug_resolution');
+	$t_eta_id = isset( $p_issue['eta'] ) ? mci_get_eta_id( $p_issue['eta'] ) : config_get('default_bug_eta');
+	$t_view_state_id = isset( $p_issue['view_state'] ) ?  mci_get_view_state_id( $p_issue['view_state'] ) : config_get( 'default_bug_view_status' );
+	$t_reporter_id = isset( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : 0;
 	$t_project = $p_issue['project'];
-	$t_summary = isset ( $p_issue['summary'] ) ? $p_issue['summary'] : '';
-	$t_description = isset ( $p_issue['description'] ) ? $p_issue['description'] : '';
-	$t_additional_information = isset ( $p_issue['additional_information'] ) ? $p_issue['additional_information'] : '';
-	$t_steps_to_reproduce = isset ( $p_issue['steps_to_reproduce'] ) ? $p_issue['steps_to_reproduce'] : '';
+	$t_summary = isset( $p_issue['summary'] ) ? $p_issue['summary'] : '';
+	$t_description = isset( $p_issue['description'] ) ? $p_issue['description'] : '';
+	$t_additional_information = isset( $p_issue['additional_information'] ) ? $p_issue['additional_information'] : '';
+	$t_steps_to_reproduce = isset( $p_issue['steps_to_reproduce'] ) ? $p_issue['steps_to_reproduce'] : '';
 
 	if( $t_reporter_id == 0 ) {
 		$t_reporter_id = $t_user_id;

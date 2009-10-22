@@ -99,10 +99,6 @@ function mci_get_project_view_state_id( $p_view_state ) {
 }
 
 function mci_get_user_id( $p_user ) {
-	if( !isset( $p_user ) ) {
-		return 0;
-	}
-
 	$t_user_id = 0;
 
 	if( (int) $p_user['id'] != 0 ) {
@@ -125,66 +121,35 @@ function mci_get_user_lang( $p_user_id ) {
 }
 
 function mci_get_status_id( $p_status ) {
-	if ( !isset( $p_status ) ) {
-		return (int)config_get( 'bug_submit_status' );
-	}
-
 	return mci_get_enum_id_from_objectref( 'status', $p_status );
 }
 
 function mci_get_severity_id( $p_severity ) {
-	if ( !isset( $p_severity ) ) {
-		return (int)config_get( 'default_bug_severity' );
-	}
-
 	return mci_get_enum_id_from_objectref( 'severity', $p_severity );
 }
 
 function mci_get_priority_id( $p_priority ) {
-	if ( !isset( $p_priority ) ) {
-		return (int)config_get( 'default_bug_priority' );
-	}
 
 	return mci_get_enum_id_from_objectref( 'priority', $p_priority );
 }
 
 function mci_get_reproducibility_id( $p_reproducibility ) {
-	if ( !isset( $p_reproducibility ) ) {
-		return (int)config_get( 'default_bug_reproducibility' );
-	}
-
 	return mci_get_enum_id_from_objectref( 'reproducibility', $p_reproducibility );
 }
 
 function mci_get_resolution_id( $p_resolution ) {
-	if ( !isset( $p_resolution ) ) {
-		return (int)config_get( 'default_bug_resolution' );
-	}
-
 	return mci_get_enum_id_from_objectref( 'resolution', $p_resolution );
 }
 
 function mci_get_projection_id( $p_projection ) {
-	if ( !isset( $p_projection ) ) {
-		return (int)config_get( 'default_bug_projection' );
-	}
-
 	return mci_get_enum_id_from_objectref( 'projection', $p_projection );
 }
 
 function mci_get_eta_id( $p_eta ) {
-	if ( !isset( $p_eta ) ) {
-		return (int)config_get( 'default_bug_eta' );
-	}
-
 	return mci_get_enum_id_from_objectref( 'eta', $p_eta );
 }
 
 function mci_get_view_state_id( $p_view_state ) {
-	if ( !isset( $p_view_state ) ) {
-		return (int)config_get( 'default_bug_view_status' );
-	}
-
 	return mci_get_enum_id_from_objectref( 'view_state', $p_view_state );
 }
 
