@@ -232,4 +232,54 @@ class IssueUpdateTest extends SoapBase {
 			$this->password,
 			$issueId);
 	}
+	
+	/**
+	 * This issue tests the following:
+	 * 1. Retrieving all the administrator users, and verifying only one is present
+	 * 2. Creating an issue
+	 * 3. Retrieving the issue after it is created
+	 * 4. Updating the issue to add a handler
+	 * 5. Verifying that the correct handler is passed
+	 * 6. Deleting the issue
+	 */
+	public function testUpdateIssueWithHandler() {
+
+		$adminUsers = $this->client->mc_project_get_users($this->userName, $this->password, $this->getProjectId(), 90); 
+
+		$this->assertTrue(count($adminUsers) >= 1 , "count(adminUsers) >= 1");
+
+		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateIssueWithHandler' );
+
+		$adminUser = $adminUsers[0];
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		$issue->handler = $adminUser;
+		
+		$this->client->mc_issue_update(
+			$this->userName,
+			$this->password,
+			$issueId,
+			$issue);
+		
+		$updatedIssue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		$this->assertEquals( $adminUser->id, $updatedIssue->handler->id, 'handler.id' );
+
+		$this->client->mc_issue_delete(
+			$this->userName,
+			$this->password,
+			$issueId);
+	}
 }
