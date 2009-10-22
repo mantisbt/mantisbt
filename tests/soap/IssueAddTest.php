@@ -173,4 +173,42 @@ class IssueAddTest extends SoapBase {
 			$this->password,
 			$issueId);
 	}
+
+	/**
+	 * This issue tests the following:
+	 * 1. Retrieving all the administrator users, and verifying at least one is present
+	 * 2. Creating an issue with the first admin user as a handler
+	 * 3. Retrieving the issue after it is created
+	 * 4. Verifying that the correct handler is passed
+	 * 5. Deleting the issue
+	 */
+	public function testCreateIssueWithHandler() {
+
+		$adminUsers = $this->client->mc_project_get_users($this->userName, $this->password, $this->getProjectId(), 90); 
+
+		$this->assertTrue(count($adminUsers) >= 1 , "count(adminUsers) >= 1");
+
+		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithHandler' );
+
+		$adminUser = $adminUsers[0];
+
+		$issueToAdd['handler'] = $adminUser;
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		$this->assertEquals( $adminUser->id, $issue->handler->id, 'handler.id' );
+
+		$this->client->mc_issue_delete(
+			$this->userName,
+			$this->password,
+			$issueId);
+	}
 }
