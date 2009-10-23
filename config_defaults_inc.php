@@ -2663,13 +2663,15 @@
 
 	/**
 	 * The regular expression to use when validating new user login names
-	 * The default regular expression allows a-z, A-z, 0-9, as well as space and
-	 *  underscore.  If you change this, you may want to update the
-	 *  ERROR_USER_NAME_INVALID string in the language files to explain
-	 *  the rules you are using on your site
+	 * The default regular expression allows a-z, A-Z, 0-9, +, -, dot, space and
+	 * underscore.  If you change this, you may want to update the
+	 * ERROR_USER_NAME_INVALID string in the language files to explain
+	 * the rules you are using on your site
+	 * See http://en.wikipedia.org/wiki/Regular_Expression for more details about regular expressions.
+	 * For testing regular expressions, use http://rubular.com/.
 	 * @global string $g_user_login_valid_regex
 	 */
-	$g_user_login_valid_regex = '/^[\w \-]+$/';
+	$g_user_login_valid_regex = '/^([a-z\d\-.+_ ]+(@[a-z\d\-.]+\.[a-z]{2,4})?)$/i';
 
 	/**
 	 * Default user name prefix used to filter the list of users in

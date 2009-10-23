@@ -1999,6 +1999,23 @@
         <title>Misc</title>
         <variablelist>
             <varlistentry>
+                <term>$g_user_login_valid_regex</term>
+                <listitem>
+                    <para>
+                        The regular expression to use when validating new user login names.
+                        The default regular expression allows a-z, A-Z, 0-9, +, -, dot, space and
+                        underscore.  If you change this, you may want to update the
+                        ERROR_USER_NAME_INVALID string in the language files to explain
+                        the rules you are using on your site.
+                    </para>
+                    <para>
+                        See <ulink url="http://en.wikipedia.org/wiki/Regular_Expression">Wikipedia</ulink> for more
+                        details about regular expressions.  For testing regular expressions, use
+                        <ulink url="http://rubular.com/">Rubular</ulink>.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_monitor_bug_threshold</term>
                 <listitem>
                     <para>Access level needed to monitor bugs. The default
