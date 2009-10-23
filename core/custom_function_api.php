@@ -337,8 +337,7 @@ function custom_function_default_print_column_value( $p_column, $p_bug, $p_colum
 
 		} else if ( isset( $t_plugin_columns[ $p_column ] ) ) {
 			$t_column_object = $t_plugin_columns[ $p_column ];
-			print_column_plugin( $t_column_object, $p_issue_row, $p_columns_target );
-
+			print_column_plugin( $t_column_object, $p_bug, $p_columns_target );
 		} else {
 			if( isset( $p_bug->$p_column ) ) {
 				echo $t_column_start . $p_bug->$p_column . $t_column_end;
