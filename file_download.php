@@ -125,12 +125,20 @@
 	# If finfo is available (always true for PHP >= 5.3.0) we can use it to determine the MIME type of files
 	$finfo_available = false;
 	if ( class_exists( 'finfo' ) ) {
-		$finfo_available = true;
-		$finfo = new finfo( FILEINFO_MIME, config_get( 'fileinfo_magic_db_file' ) );
-		if ( !$finfo ) {
-			$finfo_available = false;
+		$t_info_file = config_get( 'fileinfo_magic_db_file' );
+
+		if ( is_blank( $t_info_file ) ) {
+			$finfo = new finfo( FILEINFO_MIME );
+		} else {
+			$finfo = new finfo( FILEINFO_MIME, $t_info_file );
+		}
+
+		if ( $finfo ) {
+			$finfo_available = true;
 		}
 	}
+
+	$t_content_type = $v_file_type;
 
 	# dump file content to the connection.
 	switch ( config_get( 'file_upload_method' ) ) {
@@ -139,36 +147,47 @@
 
 			if ( file_exists( $t_local_disk_file ) ) {
 				if ( $finfo_available ) {
-					if ( $content_type = $finfo->file( $t_local_disk_file ) ) {
-						header( 'Content-Type: ' . $content_type );
+					$t_file_info_type = $finfo->file( $t_local_disk_file );
+
+					if ( $t_file_info_type !== false ) {
+						$t_content_type = $t_file_info_type;
 					}
 				}
+
+				header( 'Content-Type: ' . $t_content_type );
 				file_send_chunk( $t_local_disk_file );
 			}
 			break;
 		case FTP:
 			$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
 
-			if ( file_exists( $t_local_disk_file ) ) {
-				readfile( $t_local_disk_file );
-			} else {
+			if ( !file_exists( $t_local_disk_file ) ) {
 				$ftp = file_ftp_connect();
 				file_ftp_get ( $ftp, $t_local_disk_file, $v_diskfile );
 				file_ftp_disconnect( $ftp );
-				readfile( $t_local_disk_file );
 			}
+
 			if ( $finfo_available ) {
-				if ( $content_type = $finfo->file( $t_local_disk_file ) ) {
-					header( 'Content-Type: ' . $content_type );
+				$t_file_info_type = $finfo->file( $t_local_disk_file );
+
+				if ( $t_file_info_type !== false ) {
+					$t_content_type = $t_file_info_type;
 				}
 			}
+
+			header( 'Content-Type: ' . $t_content_type );
+			readfile( $t_local_disk_file );
 			break;
 		default:
 			if ( $finfo_available ) {
-				if ( $content_type = $finfo->buffer( $v_content ) ) {
-					header( 'Content-Type: ' . $content_type );
+				$t_file_info_type = $finfo->buffer( $v_content );
+
+				if ( $t_file_info_type !== false ) {
+					$t_content_type = $t_file_info_type;
 				}
 			}
+
+			header( 'Content-Type: ' . $t_content_type );
 			echo $v_content;
 	}
 	header( 'Content-Length: ' . $v_filesize );
