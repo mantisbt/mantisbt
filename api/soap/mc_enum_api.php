@@ -166,7 +166,7 @@ function mc_enum_get( $p_username, $p_password, $p_enumeration ) {
  * @return Array  The converted enumeration
  */
 function mci_explode_to_objectref( $p_config_enum_string ) {
-	if( get_class( $p_config_enum_string ) == 'soap_fault' ) {
+	if( get_class( (object) $p_config_enum_string ) == 'soap_fault' ) {
 		return $p_config_enum_string;
 	}
 	
