@@ -261,61 +261,83 @@ function ldap_authenticate( $p_user_id, $p_password ) {
  */
 function ldap_authenticate_by_username( $p_username, $p_password ) {
 	if ( ldap_simulation_is_enabled() ) {
-		return ldap_simulation_authenticate_by_username( $p_username, $p_password );
-	}
+		log_event( LOG_LDAP, "Authenticating via LDAP simulation" );
+		$t_authenticated = ldap_simulation_authenticate_by_username( $p_username, $p_password );
+	} else {
+		$c_username = ldap_escape_string( $p_username );
 
-	$c_username = ldap_escape_string( $p_username );
+		$t_ldap_organization = config_get( 'ldap_organization' );
+		$t_ldap_root_dn = config_get( 'ldap_root_dn' );
 
-	$t_ldap_organization = config_get( 'ldap_organization' );
-	$t_ldap_root_dn = config_get( 'ldap_root_dn' );
+		$t_ldap_uid_field = config_get( 'ldap_uid_field', 'uid' );
+		$t_search_filter = "(&$t_ldap_organization($t_ldap_uid_field=$c_username))";
+		$t_search_attrs = array(
+			$t_ldap_uid_field,
+			'dn',
+		);
 
-	$t_ldap_uid_field = config_get( 'ldap_uid_field', 'uid' );
-	$t_search_filter = "(&$t_ldap_organization($t_ldap_uid_field=$c_username))";
-	$t_search_attrs = array(
-		$t_ldap_uid_field,
-		'dn',
-	);
+		# Bind
+		log_event( LOG_LDAP, "Binding to LDAP server" );
+		$t_ds = ldap_connect_bind();
+		if ( $t_ds === false ) {
+			log_event( LOG_LDAP, "ldap_connect_bind() returned false." );
+			return null;
+		}
 
-	# Bind
-	log_event( LOG_LDAP, "Binding to LDAP server" );
-	$t_ds = ldap_connect_bind();
-	if ( $t_ds === false ) {
-		log_event( LOG_LDAP, "ldap_connect_bind() returned false." );
-		return null;
-	}
+		# Search for the user id
+		log_event( LOG_LDAP, "Searching for $t_search_filter" );
+		$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
+		if ( $t_sr === false ) {
+			ldap_unbind( $t_ds );
+			log_event( LOG_LDAP, "ldap_search() returned false." );
+			return null;
+		}
 
-	# Search for the user id
-	log_event( LOG_LDAP, "Searching for $t_search_filter" );
-	$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
-	if ( $t_sr === false ) {
+		$t_info = ldap_get_entries( $t_ds, $t_sr );
+		if ( $t_info === false ) {
+			log_event( LOG_LDAP, "ldap_get_entries() returned false." );
+			return null;
+		}
+
+		$t_authenticated = false;
+
+		if ( $t_info ) {
+			# Try to authenticate to each until we get a match
+			for ( $i = 0; $i < $t_info['count']; $i++ ) {
+				$t_dn = $t_info[$i]['dn'];
+
+				# Attempt to bind with the DN and password
+				if ( @ldap_bind( $t_ds, $t_dn, $p_password ) ) {
+					$t_authenticated = true;
+					break;
+				}
+			}
+		}
+
+		ldap_free_result( $t_sr );
 		ldap_unbind( $t_ds );
-		log_event( LOG_LDAP, "ldap_search() returned false." );
-		return null;
 	}
 
-	$t_info = ldap_get_entries( $t_ds, $t_sr );
-	if ( $t_info === false ) {
-		log_event( LOG_LDAP, "ldap_get_entries() returned false." );
-		return null;
-	}
+	# If user authenticated successfully then update the local DB with information
+	# from LDAP.  This will allow us to use the local data after login without
+	# having to go back to LDAP.  This will also allow fallback to DB if LDAP is down.
+	if ( $t_authenticated ) {
+		$t_user_id = user_get_id_by_name( $p_username );
 
-	$t_authenticated = false;
+		if ( false !== $t_user_id ) {
+			user_set_field( $t_user_id, 'password', md5( $p_password ) );
 
-	if( $t_info ) {
-		# Try to authenticate to each until we get a match
-		for( $i = 0;$i < $t_info['count'];$i++ ) {
-			$t_dn = $t_info[$i]['dn'];
+			if ( ON == config_get( 'use_ldap_realname' ) ) {
+				$t_realname = ldap_realname( $t_user_id );
+				user_set_field( $t_user_id, 'realname', $t_realname );
+			}
 
-			# Attempt to bind with the DN and password
-			if ( @ldap_bind( $t_ds, $t_dn, $p_password ) ) {
-				$t_authenticated = true;
-				break;
+			if ( ON == config_get( 'use_ldap_email' ) ) {
+				$t_email = ldap_simulation_email_from_username( $p_username );
+				user_set_field( $t_user_id, 'email', $t_email );
 			}
 		}
 	}
-
-	ldap_free_result( $t_sr );
-	ldap_unbind( $t_ds );
 
 	return $t_authenticated;
 }
