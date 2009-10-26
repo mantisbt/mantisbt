@@ -77,13 +77,13 @@
 			$t_row = $result[$i];
 			$t_bug = null;
 
-			if ( is_blank( $f_export ) || in_array( $t_row['id'], $f_bug_arr ) ) {
+			if ( is_blank( $f_export ) || in_array( $t_row->id, $f_bug_arr ) ) {
 				echo excel_get_start_row();
 
 				foreach ( $t_columns as $t_column ) {
 					if ( column_is_extended( $t_column ) ) {
 						if ( $t_bug === null ) {
-							$t_bug = bug_get( $t_row['id'], /* extended = */ true );
+							$t_bug = bug_get( $t_row->id, /* extended = */ true );
 						}
 
 						$t_function = 'excel_format_' . $t_column;
@@ -91,10 +91,10 @@
 					} else {
 						$t_custom_field = column_get_custom_field_name( $t_column );
 						if ( $t_custom_field !== null ) {
-							echo excel_format_custom_field( $t_row['id'], $t_row['project_id'], $t_custom_field );
+							echo excel_format_custom_field( $t_row->id, $t_row->project_id, $t_custom_field );
 						} else {
 							$t_function = 'excel_format_' . $t_column;
-							echo $t_function( $t_row[$t_column] );
+							echo $t_function( $t_row->$t_column );
 						}
 					}
 				}
