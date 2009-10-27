@@ -1142,6 +1142,19 @@ function print_column_reporter_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
  * @return null
  * @access public
  */
+function print_column_project_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<td class="center">';
+	echo string_display_line( project_get_name( $p_bug->project_id ) );
+	echo '</td>';
+}
+
+/**
+ *
+ * @param BugData $p_bug bug obect
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_last_updated( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_filter;
 
