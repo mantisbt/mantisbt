@@ -846,7 +846,7 @@ function file_get_extension( $p_filename ) {
 		$t_basename = end( $t_components );
 	}
 	if( utf8_strpos( $t_basename, '.' ) !== false ) {
-		$t_components = explode( '\\', $t_basename );
+		$t_components = explode( '.', $t_basename );
 		$t_extension = end( $t_components );
 	}
 	return $t_extension;
