@@ -95,17 +95,13 @@
 	header( 'Pragma: public' );
 
 	$t_filename = file_get_display_name( $v_filename );
+	$t_show_inline = false;
 	$t_inline_files = explode(',', config_get('inline_file_exts', 'gif'));
 	if ( in_array( utf8_strtolower( file_get_extension($t_filename) ), $t_inline_files ) ) {
-		$t_disposition = ''; //'inline;';
-	} else {
-		$t_disposition = ' attachment;';
+		$t_show_inline = true;
 	}
 
-	# The following header has undefined behaviour but needs to be used to
-	# allow a fallback for old browsers that don't support RFC2231.
-	# See http://greenbytes.de/tech/tc2231/ for more information.
-	header( 'Content-Disposition:' . $t_disposition . ' filename*=UTF-8\'\'' . urlencode( $t_filename ) . '; filename="' . urlencode( $t_filename ) . '"' );
+	http_content_disposition_header( $t_filename, $t_show_inline );
 
 	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $v_date_added ) );
 
@@ -113,7 +109,7 @@
 	# attached files via HTTPS, we disable the "Pragma: no-cache"
 	# command when IE is used over HTTPS.
 	global $g_allow_file_cache;
-	if ( ( isset( $_SERVER["HTTPS"] ) && ( "on" == utf8_strtolower( $_SERVER["HTTPS"] ) ) ) && preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
+	if ( ( isset( $_SERVER["HTTPS"] ) && ( "on" == utf8_strtolower( $_SERVER["HTTPS"] ) ) ) && is_browser_internet_explorer() ) {
 		# Suppress "Pragma: no-cache" header.
 	} else {
 		if ( !isset( $g_allow_file_cache ) ) {

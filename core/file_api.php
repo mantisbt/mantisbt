@@ -835,13 +835,19 @@ function file_get_extension( $p_filename ) {
 	$t_extension = '';
 	$t_basename = $p_filename;
 	if( utf8_strpos( $t_basename, '/' ) !== false ) {
-		$t_basename = end( explode( '/', $t_basename ) );
+		// Note that we can't use end(explode(...)) on a single line because
+		// end() expects a reference to a variable and thus we first need to
+		// copy the result of explode() into a variable that end() can modify.
+		$t_components = explode( '/', $t_basename );
+		$t_basename = end( $t_components );
 	}
 	if( utf8_strpos( $t_basename, '\\' ) !== false ) {
-		$t_basename = end( explode( '\\', $t_basename ) );
+		$t_components = explode( '\\', $t_basename );
+		$t_basename = end( $t_components );
 	}
 	if( utf8_strpos( $t_basename, '.' ) !== false ) {
-		$t_extension = end( explode( '.', $t_basename ) );
+		$t_components = explode( '\\', $t_basename );
+		$t_extension = end( $t_components );
 	}
 	return $t_extension;
 }
