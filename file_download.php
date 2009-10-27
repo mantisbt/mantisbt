@@ -88,22 +88,8 @@
 		ini_set( 'zlib.output_compression', false );
 	}
 
-	# flush output buffers to protect download
-	while (@ob_end_clean() );
-
 	# Make sure that IE can download the attachments under https.
 	header( 'Pragma: public' );
-
-	$t_filename = file_get_display_name( $v_filename );
-	$t_show_inline = false;
-	$t_inline_files = explode(',', config_get('inline_file_exts', 'gif'));
-	if ( in_array( utf8_strtolower( file_get_extension($t_filename) ), $t_inline_files ) ) {
-		$t_show_inline = true;
-	}
-
-	http_content_disposition_header( $t_filename, $t_show_inline );
-
-	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $v_date_added ) );
 
 	# To fix an IE bug which causes problems when downloading
 	# attached files via HTTPS, we disable the "Pragma: no-cache"
@@ -117,6 +103,21 @@
 		}
 	}
 	header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
+
+	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $v_date_added ) );
+
+	$t_filename = file_get_display_name( $v_filename );
+	$t_show_inline = false;
+	$t_inline_files = explode( ',', config_get( 'inline_file_exts' ) );
+	if ( $t_inline_files !== false && !is_blank( $t_inline_files[0] ) ) {
+		if ( in_array( utf8_strtolower( file_get_extension( $t_filename ) ), $t_inline_files ) ) {
+			$t_show_inline = true;
+		}
+	}
+
+	http_content_disposition_header( $t_filename, $t_show_inline );
+
+	header( 'Content-Length: ' . $v_filesize );
 
 	# If finfo is available (always true for PHP >= 5.3.0) we can use it to determine the MIME type of files
 	$finfo_available = false;
@@ -151,6 +152,8 @@
 				}
 
 				header( 'Content-Type: ' . $t_content_type );
+				# flush output buffer (and disable it) to protect download
+				while ( @ob_end_clean() );
 				file_send_chunk( $t_local_disk_file );
 			}
 			break;
@@ -172,6 +175,8 @@
 			}
 
 			header( 'Content-Type: ' . $t_content_type );
+			# flush output buffer (and disable it) to protect download
+			while ( @ob_end_clean() );
 			readfile( $t_local_disk_file );
 			break;
 		default:
@@ -184,9 +189,10 @@
 			}
 
 			header( 'Content-Type: ' . $t_content_type );
+			# flush output buffer (and disable it) to protect download
+			while ( @ob_end_clean() );
 			echo $v_content;
 	}
-	header( 'Content-Length: ' . $v_filesize );
 	exit();
 
 function file_send_chunk($filename, $start = 0, $maxlength = 0 ) {
