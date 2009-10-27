@@ -14,7 +14,11 @@
  * @return Array  The requested enumeration
  */
 function mc_enum_status( $p_username, $p_password ) {
-	return mci_explode_to_objectref( mc_enum_get( $p_username, $p_password, 'status' ) );
+	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
+		return new soap_fault( 'Client', '', 'Access Denied' );
+	}
+	
+	return mci_explode_to_objectref( 'status' );
 }
 
 /**
@@ -25,7 +29,11 @@ function mc_enum_status( $p_username, $p_password ) {
  * @return Array  The requested enumeration
  */
 function mc_enum_priorities( $p_username, $p_password ) {
-	return mci_explode_to_objectref( mc_enum_get( $p_username, $p_password, 'priority' ) );
+	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
+		return new soap_fault( 'Client', '', 'Access Denied' );
+	}
+	
+	return mci_explode_to_objectref( 'priority' );
 }
 
 /**
@@ -36,7 +44,11 @@ function mc_enum_priorities( $p_username, $p_password ) {
  * @return Array  The requested enumeration
  */
 function mc_enum_severities( $p_username, $p_password ) {
-	return mci_explode_to_objectref( mc_enum_get( $p_username, $p_password, 'severity' ) );
+	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
+		return new soap_fault( 'Client', '', 'Access Denied' );
+	}
+	
+	return mci_explode_to_objectref( 'severity' );
 }
 
 /**
@@ -47,7 +59,11 @@ function mc_enum_severities( $p_username, $p_password ) {
  * @return Array  The requested enumeration
  */
 function mc_enum_reproducibilities( $p_username, $p_password ) {
-	return mci_explode_to_objectref( mc_enum_get( $p_username, $p_password, 'reproducibility' ) );
+	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
+		return new soap_fault( 'Client', '', 'Access Denied' );
+	}
+	
+	return mci_explode_to_objectref( 'reproducibility' );
 }
 
 /**
@@ -58,7 +74,11 @@ function mc_enum_reproducibilities( $p_username, $p_password ) {
  * @return Array  The requested enumeration
  */
 function mc_enum_projections( $p_username, $p_password ) {
-	return mci_explode_to_objectref( mc_enum_get( $p_username, $p_password, 'projection' ) );
+	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
+		return new soap_fault( 'Client', '', 'Access Denied' );
+	}
+	
+	return mci_explode_to_objectref( 'projection' );
 }
 
 /**
@@ -69,7 +89,11 @@ function mc_enum_projections( $p_username, $p_password ) {
  * @return Array  The requested enumeration
  */
 function mc_enum_etas( $p_username, $p_password ) {
-	return mci_explode_to_objectref( mc_enum_get( $p_username, $p_password, 'eta' ) );
+	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
+		return new soap_fault( 'Client', '', 'Access Denied' );
+	}
+	
+	return mci_explode_to_objectref( 'eta' );
 }
 
 /**
@@ -80,7 +104,11 @@ function mc_enum_etas( $p_username, $p_password ) {
  * @return Array  The requested enumeration
  */
 function mc_enum_resolutions( $p_username, $p_password ) {
-	return mci_explode_to_objectref( mc_enum_get( $p_username, $p_password, 'resolution' ) );
+	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
+		return new soap_fault( 'Client', '', 'Access Denied' );
+	}
+	
+	return mci_explode_to_objectref( 'resolution' );
 }
 
 /**
@@ -91,7 +119,11 @@ function mc_enum_resolutions( $p_username, $p_password ) {
  * @return Array  The requested enumeration
  */
 function mc_enum_access_levels( $p_username, $p_password ) {
-	return mci_explode_to_objectref( mc_enum_get( $p_username, $p_password, 'access_levels' ) );
+	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
+		return new soap_fault( 'Client', '', 'Access Denied' );
+	}
+	
+	return mci_explode_to_objectref( 'access_levels' );
 }
 
 /**
@@ -102,7 +134,11 @@ function mc_enum_access_levels( $p_username, $p_password ) {
  * @return Array  The requested enumeration
  */
 function mc_enum_project_status( $p_username, $p_password ) {
-	return mci_explode_to_objectref( mc_enum_get( $p_username, $p_password, 'project_status' ) );
+	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
+		return new soap_fault( 'Client', '', 'Access Denied' );
+	}
+	
+	return mci_explode_to_objectref( 'project_status' );
 }
 
 /**
@@ -113,7 +149,11 @@ function mc_enum_project_status( $p_username, $p_password ) {
  * @return Array  The requested enumeration
  */
 function mc_enum_project_view_states( $p_username, $p_password ) {
-	return mci_explode_to_objectref( mc_enum_get( $p_username, $p_password, 'project_view_state' ) );
+	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
+		return new soap_fault( 'Client', '', 'Access Denied' );
+	}
+	
+	return mci_explode_to_objectref( 'project_view_state' );
 }
 
 /**
@@ -124,7 +164,11 @@ function mc_enum_project_view_states( $p_username, $p_password ) {
  * @return Array  The requested enumeration
  */
 function mc_enum_view_states( $p_username, $p_password ) {
-	return mci_explode_to_objectref( mc_enum_get( $p_username, $p_password, 'view_state' ) );
+	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
+		return new soap_fault( 'Client', '', 'Access Denied' );
+	}
+	
+	return mci_explode_to_objectref( 'view_state' );
 }
 
 /**
@@ -135,7 +179,11 @@ function mc_enum_view_states( $p_username, $p_password ) {
  * @return Array  The requested enumeration
  */
 function mc_enum_custom_field_types( $p_username, $p_password ) {
-	return mci_explode_to_objectref( mc_enum_get( $p_username, $p_password, 'custom_field_type' ) );
+	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
+		return new soap_fault( 'Client', '', 'Access Denied' );
+	}
+	
+	return mci_explode_to_objectref( 'custom_field_type' );
 }
 
 /**
@@ -147,11 +195,7 @@ function mc_enum_custom_field_types( $p_username, $p_password ) {
  * @return string  The requested enumeration.
  */
 function mc_enum_get( $p_username, $p_password, $p_enumeration ) {
-	$t_user_id = mci_check_login( $p_username, $p_password );
-	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
-	}
-	if( !mci_has_readonly_access( $t_user_id ) ) {
+	if ( ! mci_validate_enum_access($p_username, $p_password)) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
 	$t_lang = mci_get_user_lang( $t_user_id );
@@ -159,29 +203,51 @@ function mc_enum_get( $p_username, $p_password, $p_enumeration ) {
 }
 
 /**
- * Explode a configuration enumeration string into an array structure that can
+ * Explode a configuration enumeration name into an array structure that can
  * be safely converted into an ObjectRef structure.
- *
- * @param string $p_config_enum_string  The string to convert
+ * 
+ * @param string $p_enumeration_name  The name of the enumeration to convert
  * @return Array  The converted enumeration
  */
-function mci_explode_to_objectref( $p_config_enum_string ) {
-	if( get_class( (object) $p_config_enum_string ) == 'soap_fault' ) {
-		return $p_config_enum_string;
-	}
+function mci_explode_to_objectref( $p_enumeration_name ) {
+	
+	$t_config_var_name = $p_enumeration_name . '_enum_string';
+	$t_config_var_value = config_get( $t_config_var_name );
+	$t_translated_values = lang_get( $t_config_var_name );
+
+	$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 	
 	$t_result = array();
-
-	$t_assoc_array = MantisEnum::getAssocArrayIndexedByValues( $p_config_enum_string );
-
-	foreach ( $t_assoc_array as $t_id => $t_name ) {
+	
+	foreach ( $t_enum_values as $t_key ) {
+		$t_translated = MantisEnum::getLocalizedLabel( $t_config_var_value, $t_translated_values, $t_key );
+		
 		$t_result[] = array(
-			'id' => $t_id,
-			'name' => $t_name,
+			'id' => $t_key,
+			'name' => $t_translated,
 		);
 	}
-
 	return $t_result;
+}
+
+/**
+ * Validates that the user has access to the enumeration values
+ * 
+ * @param string $p_username
+ * @param string $p_password
+ * @return boolean true if the user has access, false otherwise
+ */
+function mci_validate_enum_access($p_username, $p_password) {
+	
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if( $t_user_id === false ) {
+		return false;
+	}
+	if( !mci_has_readonly_access( $t_user_id ) ) {
+		return false;
+	}
+	
+	return true;
 }
 
 /**
@@ -240,7 +306,7 @@ function mci_get_enum_id_from_objectref( $p_enum, $p_object_ref ) {
 		} else {
 			$t_default_id = config_get( 'default_bug_' . $p_enum, 0 );
 			if( $t_default_id == 0 ) {
-				$t_array = mci_explode_to_objectref( $t_enum );
+				$t_array = mci_explode_to_objectref( $p_enum );
 				$t_id = (int) $t_array[0]['id'];
 			} else {
 				$t_id = $t_default_id;
