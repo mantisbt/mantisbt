@@ -37,6 +37,7 @@ print_manage_menu( );
 <tr <?php echo helper_alternate_class( )?>>
 	<td class="category" width="60%">
 		<?php echo lang_get( 'plugin_format_process_text' )?>
+		<br /><span class="small"><?php echo lang_get( 'plugin_format_process_text_warning_notice' )?></span>
 	</td>
 	<td class="center" width="20%">
 		<label><input type="radio" name="process_text" value="1" <?php echo( ON == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
