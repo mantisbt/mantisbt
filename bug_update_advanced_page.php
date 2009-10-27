@@ -60,6 +60,11 @@ $t_fields = columns_filter_disabled( $t_fields );
 
 $tpl_bug_id = $f_bug_id;
 
+$t_action_button_position = config_get( 'action_button_position' );
+
+$tpl_top_buttons_enabled = $t_action_button_position == POSITION_TOP || $t_action_button_position == POSITION_BOTH;
+$tpl_bottom_buttons_enabled = $t_action_button_position == POSITION_BOTTOM || $t_action_button_position == POSITION_BOTH;
+
 $tpl_show_id = in_array( BUG_FIELD_ID, $t_fields );
 $tpl_show_project = in_array( BUG_FIELD_PROJECT, $t_fields );
 $tpl_show_category = in_array( BUG_FIELD_CATEGORY, $t_fields );
@@ -122,6 +127,14 @@ echo lang_get( 'updating_bug_advanced_title' );
 echo '</td><td class="right" colspan="3">';
 print_bracket_link( string_get_bug_view_url( $tpl_bug_id ), lang_get( 'back_to_bug_link' ) );
 echo '</td></tr>';
+
+# Submit Button
+if ( $tpl_top_buttons_enabled ) {
+        echo '<tr><td class="center" colspan="6">';
+        echo '<input ', helper_get_tab_index(), ' type="submit" class="button" value="', lang_get( 'update_information_button' ), '" />';
+        echo '</td></tr>';
+}
+
 
 event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', array( $tpl_bug_id, true ) );
 
@@ -654,9 +667,11 @@ if ( config_get('time_tracking_enabled') ) {
 event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $tpl_bug_id ) );
 
 # Submit Button
-echo '<tr><td class="center" colspan="6">';
-echo '<input ', helper_get_tab_index(), ' type="submit" class="button" value="', lang_get( 'update_information_button' ), '" />';
-echo '</td></tr>';
+if ( $tpl_bottom_buttons_enabled ) {
+       echo '<tr><td class="center" colspan="6">';
+       echo '<input ', helper_get_tab_index(), ' type="submit" class="button" value="', lang_get( 'update_information_button' ), '" />';
+       echo '</td></tr>';
+}
 
 echo '</table></form>';
 
