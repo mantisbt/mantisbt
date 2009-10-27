@@ -49,17 +49,14 @@
 	if ( $f_type_page != 'html' ) {
 		$t_export_title = helper_get_default_export_filename( '' );
 		$t_export_title = preg_replace( '/[\/:*?"<>|]/', '', $t_export_title );
+		$t_export_title .= '.doc';
 
 		# Make sure that IE can download the attachments under https.
 		header( 'Pragma: public' );
 
 		header( 'Content-Type: application/msword' );
 
-		if ( preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
-                        header( 'Content-Disposition: attachment; filename="' . urlencode( $t_export_title ) . '.doc"' );
-                } else {
-                        header( 'Content-Disposition: attachment; filename="' . $t_export_title . '.doc"' );
-                }
+		http_content_disposition_header( $t_export_title );
 	}
 
 	# This is where we used to do the entire actual filter ourselves
