@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Spanish (Español)
+/** Hungarian (Magyar)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,16 +26,15 @@
  * @ingroup Language
  * @file
  *
- * @author Bithunter
- * @author Locos epraix
+ * @author Glanthor Reviol
  */
 
-$s_plugin_format_title = 'Formateado MantisBT';
-$s_plugin_format_description = 'Plugin oficial de procesamiento y formateo de texto.';
-$s_plugin_format_config = 'Configuración';
-$s_plugin_format_process_text = 'Procesamiento de Textos';
-$s_plugin_format_process_urls = 'Procesamiento de URL';
-$s_plugin_format_process_buglinks = 'Enlaces MantisBT (Incidencia/Nota)';
-$s_plugin_format_process_vcslinks = 'Enlaces VCS';
-$s_plugin_format_enabled = 'Habilitado';
-$s_plugin_format_disabled = 'Deshabilitado';
+$s_plugin_format_title = 'MantisBT formázás';
+$s_plugin_format_description = 'Hivatalos szövegfeldolgozó és formázó plugin.';
+$s_plugin_format_config = 'Beállítás';
+$s_plugin_format_process_text = 'Szövegfeldolgozás';
+$s_plugin_format_process_urls = 'URL-feldolgozás';
+$s_plugin_format_process_buglinks = 'MantisBT hivatkozások (ügy/ügyfeljegyzés)';
+$s_plugin_format_process_vcslinks = 'VCS hivatkozások';
+$s_plugin_format_enabled = 'Be';
+$s_plugin_format_disabled = 'Ki';

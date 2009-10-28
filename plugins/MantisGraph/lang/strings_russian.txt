@@ -28,6 +28,7 @@
  *
  * @author Kirill
  * @author Lockal
+ * @author Александр Сигачёв
  */
 
 $s_plugin_graph_title = 'Система отображения графиков в MantisBT';
@@ -42,12 +43,16 @@ $s_plugin_MantisGraph_severity_link = 'По серьезности';
 $s_plugin_MantisGraph_category_link = 'По категориям';
 $s_plugin_MantisGraph_resolution_link = 'По решению';
 $s_plugin_MantisGraph_graph_bug_page_link = 'графики';
-$s_plugin_MantisGraph_library = 'Графическая библиотека';
+$s_plugin_MantisGraph_library = 'Использовать графическую библиотеку';
 $s_plugin_MantisGraph_bundled = 'Использовать встроенную (ecz)';
 $s_plugin_MantisGraph_window_width = 'Ширина графика (в пикселях)';
 $s_plugin_MantisGraph_bar_aspect = 'соотношение сторон столбиковой диаграммы (высота/ширина)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'сколько графиков помещать в строку на странице общих графиков';
-$s_plugin_MantisGraph_jpgraph_antialias = 'ТОЛЬКО ДЛЯ JPGRAPH: сглаживание. Улучшает визуальное представление определенных графиков. Внимание: Используя сглаживание, Вы замедляете формирование графиков приблизительно в 8 раз.';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Сколько графиков помещать в строку на расширенной странице описания';
+$s_plugin_MantisGraph_font = 'Шрифт';
+$s_plugin_MantisGraph_jpgraph_path = 'Системный путь к библиотеке JpGraph';
+$s_plugin_MantisGraph_jpgraph_path_default = 'Оставьте пустым для значения по умолчанию: {mantisroot}/library/jpgraph';
+$s_plugin_MantisGraph_jpgraph_antialias = 'Сглаживание JpGraph';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'Сглаживание улучшает внешний вид некоторых графиков за счёт производительности (до 8 раз медленнее)';
 $s_plugin_MantisGraph_enabled = 'вкл';
 $s_plugin_MantisGraph_disabled = 'выкл';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Суммарный график по состоянию';

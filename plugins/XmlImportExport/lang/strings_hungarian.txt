@@ -1,0 +1,48 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Hungarian (Magyar)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Glanthor Reviol
+ */
+
+$s_plugin_XmlImportExport_title = 'Ügyek importálása/exportálása';
+$s_plugin_XmlImportExport_description = 'XML alapú importálási és exportálási képességek a MantisBT-hez.';
+$s_plugin_XmlImportExport_import = 'Ügyek importálása';
+$s_plugin_XmlImportExport_export = 'XML exportálás';
+$s_plugin_XmlImportExport_importing_in_project = 'Ügyek importálása projektbe:';
+$s_plugin_XmlImportExport_import_options = 'Import-beállítások';
+$s_plugin_XmlImportExport_cross_references = 'Kereszthivatkozások';
+$s_plugin_XmlImportExport_default_strategy = 'Alapértelmezett konvertálási stratégia:';
+$s_plugin_XmlImportExport_renumber = 'Újraszámozás';
+$s_plugin_XmlImportExport_renumber_desc = 'Próbáld meg frissíteni a hivatkozásokat az új számozás szerint';
+$s_plugin_XmlImportExport_link = 'Hivatkozás';
+$s_plugin_XmlImportExport_link_desc = 'Hivatkozássá konvertálás az eredeti elemre';
+$s_plugin_XmlImportExport_disable = 'Letiltás';
+$s_plugin_XmlImportExport_disable_desc = 'Hivatkozás letiltása';
+$s_plugin_XmlImportExport_fallback = 'Fallback stratégia (ha az „újraszámozás” nem alkalmazható):';
+$s_plugin_XmlImportExport_fallback_category = 'Fallback kategória:';
+$s_plugin_XmlImportExport_keep_same_category = 'Próbáld ugyanazon kategóriában tartani';

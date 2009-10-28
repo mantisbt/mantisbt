@@ -30,6 +30,7 @@
  * @author DCLXVI
  * @author Mihaela Georgieva, helicopterbg <at> gmail.com
  * @author RealEnder
+ * @author Spiritia
  * @author Svetlin Stefanov, desertwaste <at> gmail.com
  */
 
@@ -314,6 +315,8 @@ $s_email_date_submitted = 'Дата на съобщаване';
 $s_email_last_modified = 'Последна промяна';
 $s_email_summary = 'Кратко описание';
 $s_email_description = 'Описание';
+$s_email_additional_information = 'Допълнителна информация';
+$s_email_steps_to_reproduce = 'Стъпки за възпроизвеждане';
 $s_account_protected_msg = 'Профилът е защитен. Забрана за промяна на настройки...';
 $s_account_removed_msg = 'Профилът е премахнат...';
 $s_confirm_delete_msg = 'Изтриване на профил?';
@@ -817,8 +820,8 @@ $s_prev = 'Предишна';
 $s_next = 'Следваща';
 $s_first = 'Първа';
 $s_last = 'Последна';
-$s_start_date = 'Начална Дата';
-$s_end_date = 'Крайна Дата';
+$s_start_date = 'Начална дата';
+$s_end_date = 'Крайна дата';
 $s_use_date_filters = 'Времеви филтри';
 $s_yes = 'Да';
 $s_no = 'Не';
@@ -901,6 +904,7 @@ $s_advanced_filters = 'Разширени филтри';
 $s_simple_filters = 'Опростени филтри';
 $s_monitored_by = 'Наблюдаван от';
 $s_attachments = 'Прикрепен/и Документ/и';
+$s_bytes = 'байта';
 $s_sponsors = '%1$d спонсор/и';
 $s_sponsorship_added = 'Спонсорството е прибавено';
 $s_sponsorship_updated = 'Спонсорството е обновено';
@@ -1028,3 +1032,15 @@ $s_all_columns_title = 'Всички налични колони';
 $s_copy_columns_from = 'Копиране на колоните от';
 $s_copy_columns_to = 'Копиране на колоните в';
 $s_view_account_title = 'Потребителска информация';
+$s_month_january = 'януари';
+$s_month_february = 'февруари';
+$s_month_march = 'март';
+$s_month_april = 'април';
+$s_month_may = 'май';
+$s_month_june = 'юни';
+$s_month_july = 'юли';
+$s_month_august = 'август';
+$s_month_september = 'септември';
+$s_month_october = 'октомври';
+$s_month_november = 'ноември';
+$s_month_december = 'декември';

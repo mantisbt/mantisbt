@@ -28,6 +28,7 @@
  *
  * @author Cedric31
  * @author IAlex
+ * @author Peter17
  */
 
 $s_plugin_graph_title = 'Graphiques Mantis';
@@ -42,12 +43,16 @@ $s_plugin_MantisGraph_severity_link = 'Par sévérité';
 $s_plugin_MantisGraph_category_link = 'Par catégorie';
 $s_plugin_MantisGraph_resolution_link = 'Par résolution';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Graphique';
-$s_plugin_MantisGraph_library = 'Bibliothèque de graphiques';
+$s_plugin_MantisGraph_library = 'Bibliothèque de graphiques à utiliser';
 $s_plugin_MantisGraph_bundled = 'Utiliser la bibliothèque fournie avec le plugin';
 $s_plugin_MantisGraph_window_width = 'Largeur du graphique (en pixels)';
 $s_plugin_MantisGraph_bar_aspect = 'proportion du graphique à barres (hauteur / largeur)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'nombre de graphiques à mettre par ligne dans la page de résumé avancée';
-$s_plugin_MantisGraph_jpgraph_antialias = 'JPGRAPH SEULEMENT : anti-alias. Ceci améliorera l\'apparence visuelle de certains graphiques. Note : utiliser l\'anti-alias fera que le dessim des lignes sera environ 8 fois plus lent.';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Nombre de graphiques à afficher par ligne dans la page de résumé avancée';
+$s_plugin_MantisGraph_font = 'Police';
+$s_plugin_MantisGraph_jpgraph_path = 'Chemin d\'accès système de la bibliothèque JpGraph';
+$s_plugin_MantisGraph_jpgraph_path_default = 'Laisser vide pour le réglage par défaut : {mantisroot}/library/jpgraph';
+$s_plugin_MantisGraph_jpgraph_antialias = 'Anti-alias JpGraph';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'L\'anti-alias améliore l\'apparence visuelle de certains graphiques, au détriment de la performance (jusqu\'à 8x plus lent)';
 $s_plugin_MantisGraph_enabled = 'Activé';
 $s_plugin_MantisGraph_disabled = 'Désactivé';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Graphiques de synthèse par état';
