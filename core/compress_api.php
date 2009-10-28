@@ -45,13 +45,13 @@ function compress_handler_is_enabled() {
 
 	// indicates compression should be disabled for a page. Note: php.ini may still enable zlib.output_compression.
 	// it may be possible to turn this off through the use of ini_set within that specific page.
-	if ( defined( 'COMPRESSION_DISABLED' ) ) {
+	if( defined( 'COMPRESSION_DISABLED' ) ) {
 		return false;
 	}
 
 	// Dont use config_get here so only dependency is on consant.inc.php in this module
 	// We only actively compress html if global configuration compress_html is set.
-	if ( ON == $g_compress_html ) {
+	if( ON == $g_compress_html ) {
 		// both compression handlers require zlib module to be loaded
 		if( !extension_loaded( 'zlib' ) ) {
 			return false;
@@ -64,13 +64,13 @@ function compress_handler_is_enabled() {
 		
 		// Since php 5.2.10, it's possible to set zlib.output_compression via ini_set.
 		// This method is preferred over ob_gzhandler
-		if ( php_version_at_least( '5.2.10' ) && ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) ) {
+		if( php_version_at_least( '5.2.10' ) && ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) ) {
 			ini_set( 'zlib.output_compression', true );
 			// do it transparently
 			return false;
 		}
 		
-		if ( OFF == $g_use_iis ) {
+		if( OFF == $g_use_iis ) {
 			// disable compression when using IIS because of issue #2953. 
 			// For windows compression, use zlib.output_compression in php.ini or a later version of php
 			return false;
