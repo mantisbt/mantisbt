@@ -288,6 +288,11 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 				  WHERE ( project_id=' . db_param() . ' ) AND ( fixed_in_version=' . db_param() . ')';
 	db_query_bound( $query, Array( $p_new_version, $c_project_id, $t_old_version ) );
 
+	$query = "UPDATE $t_bug_table
+				  SET target_version=" . db_param() . '
+				  WHERE ( project_id=' . db_param() . ' ) AND ( target_version=' . db_param() . ')';
+	db_query_bound( $query, array( $p_new_version, $c_project_id, $t_old_version ) );
+
 	# db_query errors on failure so:
 	return true;
 }
@@ -303,20 +308,16 @@ function version_remove_all( $p_project_id ) {
 	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
+	# remove all references to versions from verison, fixed in version and target version.
+	$query = "UPDATE $t_bug_table
+				  SET version='', fixed_in_version='', target_version=''
+				  WHERE project_id=" . db_param();
+	db_query_bound( $query, array( $c_project_id ) );
+
+	# remove the actual versions associated with the project.
 	$query = "DELETE FROM $t_project_version_table
-	  			  WHERE project_id=" . db_param();
-
-	db_query_bound( $query, Array( $c_project_id ) );
-
-	$query = "UPDATE $t_bug_table
-				  SET version=''
 				  WHERE project_id=" . db_param();
-	db_query_bound( $query, Array( $c_project_id ) );
-
-	$query = "UPDATE $t_bug_table
-				  SET fixed_in_version=''
-				  WHERE project_id=" . db_param();
-	db_query_bound( $query, Array( $c_project_id ) );
+	db_query_bound( $query, array( $c_project_id ) );
 
 	# db_query errors on failure so:
 	return true;
