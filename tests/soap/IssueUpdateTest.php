@@ -248,7 +248,6 @@ class IssueUpdateTest extends SoapBase {
 			$this->password,
 			$issueToAdd);
 			
-			
 		$this->deleteAfterRun( $issueId );
 
 		$issue = $this->client->mc_issue_get(
@@ -270,5 +269,50 @@ class IssueUpdateTest extends SoapBase {
 			$issueId);
 
 		$this->assertEquals( $adminUser->id, $updatedIssue->handler->id, 'handler.id' );
+	}
+	
+	/**
+	 * This issue tests the following
+	 * 
+	 * 1. Creating an issue
+	 * 2. Retrieving the issue
+	 * 3. Updating the issue with a new date
+	 * 4. Re-retrieving the issue
+	 * 5. Validating the value of the due date
+	 */
+	public function testUpdateIssueDueDate() {
+		
+		$date = '2015-10-29T12:59:14Z';
+		
+		$this->skipIfDueDateIsNotEnabled();
+
+		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateIssueDueDate' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+			
+		$issue->due_date = $date;
+		
+		$this->client->mc_issue_update(
+			$this->userName,
+			$this->password,
+			$issueId,
+			$issue);
+		
+		$updatedIssue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		$this->assertEquals( $date, $updatedIssue->due_date, "due_date");
 	}
 }

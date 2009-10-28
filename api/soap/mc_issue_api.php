@@ -104,7 +104,12 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['relationships'] = mci_issue_get_relationships( $p_issue_id, $t_user_id );
 	$t_issue_data['notes'] = mci_issue_get_notes( $p_issue_id );
 	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
-
+	
+	if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_issue_id )  && !date_is_null( $t_bug->due_date ) ) {
+		$t_issue_data['due_date'] = timestamp_to_iso8601( $t_bug->due_date );
+	} else {
+		$t_issue_data['due_date'] = '';
+	}
 	return $t_issue_data;
 }
 
@@ -518,7 +523,12 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
 	$t_bug_data->sponsorship_total = isset( $p_issue['sponsorship_total'] ) ? $p_issue['sponsorship_total'] : 0;
-	$t_bug_data->due_date = date_get_null();
+	
+	if ( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
+		$t_bug_data->due_date = mci_iso8601_to_timestamp( $p_issue['due_date'] );
+	} else {
+		$t_bug_data->due_date = date_get_null();
+	}
 
 	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
 		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
@@ -685,7 +695,12 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
 	$t_bug_data->sponsorship_total = isset( $v_sponsorship_total ) ? $v_sponsorship_total : 0;
-	$t_bug_data->due_date = date_get_null();
+
+	if ( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
+		$t_bug_data->due_date = mci_iso8601_to_timestamp( $p_issue['due_date'] );
+	} else {
+		$t_bug_data->due_date = date_get_null();
+	}
 
 	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
 		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
@@ -1014,4 +1029,23 @@ function mc_issue_checkin( $p_username, $p_password, $p_issue_id, $p_comment, $p
 	helper_call_custom_function( 'checkin', array( $p_issue_id, $p_comment, '', '', $p_fixed ) );
 
 	return true;
+}
+
+/**
+ * Returns the date in iso8601 format, with proper timezone offset applied
+ * 
+ * @param string $p_date the date in iso8601 format
+ * @return int the timestamp
+ */
+function mci_iso8601_to_timestamp( $p_date ) {
+	
+	// retrieve the offset, seems to be lost by nusoap
+	$t_utc_date = new DateTime( $p_date, new DateTimeZone( 'UTC' ) );
+	$t_timezone = new DateTimeZone( date_default_timezone_get() );
+	$t_offset = $t_timezone->getOffset( $t_utc_date ); 
+	
+	$t_raw_timestamp = iso8601_to_timestamp( $p_date );
+	
+	return $t_raw_timestamp - $t_offset;
+	
 }

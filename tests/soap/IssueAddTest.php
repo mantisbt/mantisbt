@@ -201,4 +201,37 @@ class IssueAddTest extends SoapBase {
 
 		$this->assertEquals( $adminUser->id, $issue->handler->id, 'handler.id' );
 	}
+	
+	/**
+	 * This issue tests the following
+	 * 
+	 * 1. Creating an issue with a due date
+	 * 2. Retrieving the issue
+	 * 3. Validating that the due date is properly set
+	 */
+	public function testCreateIssueWithDueDate() {
+		
+		$this->skipIfDueDateIsNotEnabled();
+		
+		$date = '2015-10-29T12:59:14Z';
+		
+		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithDueDate' );
+		
+		$issueToAdd['due_date'] = $date;
+		
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );			
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+			
+			
+		$this->assertEquals( $date, $issue->due_date, "due_date");
+	}
 }
