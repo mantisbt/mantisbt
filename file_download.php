@@ -84,6 +84,9 @@
 			break;
 	}
 
+	# throw away output buffer contents (and disable it) to protect download
+	while ( @ob_end_clean() );
+
 	if ( ini_get( 'zlib.output_compression' ) && function_exists( 'ini_set' ) ) {
 		ini_set( 'zlib.output_compression', false );
 	}
@@ -152,8 +155,6 @@
 				}
 
 				header( 'Content-Type: ' . $t_content_type );
-				# flush output buffer (and disable it) to protect download
-				while ( @ob_end_clean() );
 				file_send_chunk( $t_local_disk_file );
 			}
 			break;
@@ -175,8 +176,6 @@
 			}
 
 			header( 'Content-Type: ' . $t_content_type );
-			# flush output buffer (and disable it) to protect download
-			while ( @ob_end_clean() );
 			readfile( $t_local_disk_file );
 			break;
 		default:
@@ -189,8 +188,6 @@
 			}
 
 			header( 'Content-Type: ' . $t_content_type );
-			# flush output buffer (and disable it) to protect download
-			while ( @ob_end_clean() );
 			echo $v_content;
 	}
 	exit();
