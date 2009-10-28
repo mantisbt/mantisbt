@@ -90,4 +90,11 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 		$this->issueIdsToDelete[] = $issueId;
 	}
 	
+	protected function skipIfDueDateIsNotEnabled() {
+
+		if ( $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_view_threshold' ) > 90  ||
+			 $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_update_threshold' ) > 90 ) {
+			 	$this->markTestSkipped('Due date thresholds are too high.');
+			 }
+	}
 }
