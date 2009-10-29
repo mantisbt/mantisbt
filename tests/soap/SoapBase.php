@@ -33,6 +33,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	protected $client;
 	protected $userName = 'administrator';
 	protected $password = 'root';
+	private   $issueIdsToDelete = array();
 
     protected function setUp()
     {
@@ -51,6 +52,16 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 		     
 		    );
     }
+    
+    protected function tearDown() {
+    	
+    	foreach ( $this->issueIdsToDelete as $issueIdToDelete ) {
+    		$this->client->mc_issue_delete(
+    			$this->userName,
+    			$this->password,
+    			$issueIdToDelete);
+    	}
+    }
 
     protected function getProjectId() {
     	return 1;	
@@ -67,4 +78,16 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 				'project' => array( 'id' => $this->getProjectId() ),
 				'category' => $this->getCategory() );
 	}
+	
+	/**
+	 * Registers an issue for deletion after the test method has run
+	 * 
+	 * @param int $issueId
+	 * @return void
+	 */
+	protected function deleteAfterRun( $issueId ) {
+		
+		$this->issueIdsToDelete[] = $issueId;
+	}
+	
 }
