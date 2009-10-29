@@ -45,16 +45,13 @@ class FilterTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$projectIssues = $this->getProjectIssues();
 
 		$this->assertEquals( 1, count( $projectIssues ) - count( $initialIssues ), "count(projectIssues) - count(initialIssues)");
 		$this->assertEquals( $issueId, $projectIssues[0]->id, "issueId");
-		
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 
 	/**
@@ -76,15 +73,12 @@ class FilterTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$projectIssues = $this->getProjectIssues();
 
 		$this->assertEquals( 1, count( $projectIssues ) - count( $initialIssues ), "count(projectIssues) - count(initialIssues)");
-		
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 
 	/**
