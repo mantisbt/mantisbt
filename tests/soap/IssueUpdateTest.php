@@ -41,6 +41,8 @@ class IssueUpdateTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$createdIssue = $this->client->mc_issue_get(
 			$this->userName,
@@ -91,11 +93,6 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 'none', $issue->eta->name );
 		$this->assertEquals( 10, $issue->resolution->id );
 		$this->assertEquals( 'open', $issue->resolution->name );
-
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 
 	/**
@@ -111,6 +108,8 @@ class IssueUpdateTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$issueToUpdate = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateSummaryBasedOnMandatoryFields' );
 
@@ -153,11 +152,6 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 'none', $issue->eta->name );
 		$this->assertEquals( 10, $issue->resolution->id );
 		$this->assertEquals( 'open', $issue->resolution->name );
-
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 
 	/**
@@ -175,6 +169,8 @@ class IssueUpdateTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$createdIssue = $this->client->mc_issue_get(
 			$this->userName,
@@ -226,11 +222,6 @@ class IssueUpdateTest extends SoapBase {
 			$issueId);
 
 		$this->assertEquals( 2, count( $issueWithTwoNotes->notes ) );
-
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 	
 	/**
@@ -256,6 +247,9 @@ class IssueUpdateTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+			
+		$this->deleteAfterRun( $issueId );
 
 		$issue = $this->client->mc_issue_get(
 			$this->userName,
@@ -276,10 +270,5 @@ class IssueUpdateTest extends SoapBase {
 			$issueId);
 
 		$this->assertEquals( $adminUser->id, $updatedIssue->handler->id, 'handler.id' );
-
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 }
