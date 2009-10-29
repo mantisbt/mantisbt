@@ -1296,10 +1296,11 @@ function custom_field_default_to_value( $p_value, $p_type ) {
  * @param int $p_field_id custom field id
  * @param int $p_bug_id bug id
  * @param mixed $p_value
+ * @param boolean $p_log create history logs for new values
  * @return bool
  * @access public
  */
-function custom_field_set_value( $p_field_id, $p_bug_id, $p_value ) {
+function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert=true ) {
 	$c_field_id = db_prepare_int( $p_field_id );
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
@@ -1337,7 +1338,9 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value ) {
 					  VALUES
 						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
 		db_query_bound( $query, Array( $c_field_id, $c_bug_id, $p_value ) );
-		history_log_event_direct( $c_bug_id, $t_name, '', $p_value );
+		if ( $p_log_insert ) {
+			history_log_event_direct( $c_bug_id, $t_name, '', $p_value );
+		}
 	}
 
 	custom_field_clear_cache( $p_field_id );
