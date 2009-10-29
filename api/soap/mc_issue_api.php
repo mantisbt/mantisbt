@@ -113,8 +113,9 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
  *
  * @param $p_issue_id   Issue id to apply custom field values to.
  * @param $p_custom_fields  The array of custom field values as described in the webservice complex types.
+ * @param boolean $p_log_insert create history logs for new values
  */
-function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields ) {
+function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields, $p_log_insert ) {
 	# set custom field values on the submitted issue
 	if( isset( $p_custom_fields ) && is_array( $p_custom_fields ) ) {
 		foreach( $p_custom_fields as $t_custom_field ) {
@@ -136,7 +137,7 @@ function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields ) {
 				return new soap_fault( 'Client', '', 'Invalid custom field value for field id ' . $t_custom_field_id );
 			}
 
-			if( !custom_field_set_value( $t_custom_field_id, $p_issue_id, $t_value ) ) {
+			if( !custom_field_set_value( $t_custom_field_id, $p_issue_id, $t_value, $p_log_insert  ) ) {
 				return new soap_fault( 'Server', '', 'Unable to set custom field value for field id ' . $t_custom_field_id . ' to issue ' . $p_issue_id );
 			}
 		}
@@ -534,7 +535,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	# submit the issue
 	$t_issue_id = $t_bug_data->create();
 
-	mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'] );
+	mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'], false );
 
 	if( isset( $t_notes ) && is_array( $t_notes ) ) {
 		foreach( $t_notes as $t_note ) {
@@ -701,7 +702,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	# submit the issue
 	$t_is_success = $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
 
-	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'] );
+	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'], true );
 
 	if ( isset( $p_issue['notes'] ) && is_array( $p_issue['notes'] ) ) {
 		foreach ( $p_issue['notes'] as $t_note ) {
