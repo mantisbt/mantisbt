@@ -99,7 +99,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<span class="required">*</span><?php echo lang_get( 'version' ) ?>
+		<span class="required">*</span><?php echo lang_get( 'os_version' ) ?>
 	</td>
 	<td>
 		<input type="text" name="os_build" size="16" maxlength="16" />
