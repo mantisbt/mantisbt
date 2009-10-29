@@ -92,7 +92,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<span class="required">*</span><?php echo lang_get( 'version' ) ?>
+		<span class="required">*</span><?php echo lang_get( 'os_version' ) ?>
 	</td>
 	<td>
 		<input type="text" name="os_build" size="16" maxlength="16" value="<?php echo string_attribute( $v_os_build ) ?>" />
