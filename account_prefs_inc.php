@@ -92,7 +92,7 @@
 		<?php echo lang_get( 'redirect_delay' ) ?>
 	</td>
 	<td>
-		<input type="text" name="redirect_delay" size="4" maxlength="1" value="<?php echo $t_pref->redirect_delay ?>" /> <?php echo lang_get( 'seconds' ) ?>
+		<input type="text" name="redirect_delay" size="4" maxlength="3" value="<?php echo $t_pref->redirect_delay ?>" /> <?php echo lang_get( 'seconds' ) ?>
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
