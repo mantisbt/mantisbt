@@ -31,6 +31,7 @@ require_once 'IssueAddTest.php';
 require_once 'IssueNoteTest.php';
 require_once 'IssueUpdateTest.php';
 require_once 'FilterTest.php';
+require_once 'AttachmentTest.php';
 
 /**
  * @package    Tests
@@ -59,6 +60,7 @@ class Soap_AllTests extends PHPUnit_Framework_TestSuite
         $suite->addTestSuite('IssueNoteTest');
         $suite->addTestSuite('IssueUpdateTest');
         $suite->addTestSuite('FilterTest');
+        $suite->addTestSuite('AttachmentTest');
 
         return $suite;
     }
