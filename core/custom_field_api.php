@@ -1151,7 +1151,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
 				$t_valid &= preg_match( "/$t_valid_regexp/", $p_value );
 			}
 			// check string length
-			$t_valid &= ( 0 == $t_length_min ) || ( $t_length > $t_length_min );
+			$t_valid &= ( 0 == $t_length_min ) || ( $t_length >= $t_length_min );
 			$t_valid &= ( 0 == $t_length_max ) || ( $t_length <= $t_length_max );
 			break;
 		case CUSTOM_FIELD_TYPE_NUMERIC:
