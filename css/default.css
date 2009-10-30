@@ -137,6 +137,8 @@ div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; float: ri
 .center					{ text-align: center; }
 .left					{ text-align: left; }
 .right					{ text-align: right; }
+.floatright				{ float: right; }
+.floatleft				{ float: left; }
 .small					{ font-size: 8pt; }
 .small-normal 			{ font-size: 8pt; font-weight: normal; }
 .small-subprojects		{ font-size: 8pt; width: 200px; }
