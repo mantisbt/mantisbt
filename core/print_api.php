@@ -258,7 +258,7 @@ function print_captcha_input( $p_field_name ) {
  * @param integer       $p_access     An access level.
  * @return void
  */
-function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY ) {
+function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY, $p_show_disabled_users = false ) {
 	$t_current_user = auth_get_current_user_id();
 
 	if( null === $p_project_id ) {
@@ -271,7 +271,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		# Get list of users having access level for all accessible projects
 		$t_users = array();
 		foreach( $t_projects as $t_project_id ) {
-			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
+			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access, true, $p_show_disabled_users );
 			# Do a 'smart' merge of the project's user list, into an
 			# associative array (to remove duplicates)
 			foreach( $t_project_users_list as $t_id => $t_user ) {
@@ -282,7 +282,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		}
 		unset( $t_projects );
 	} else {
-		$t_users = project_get_all_user_rows( $p_project_id, $p_access );
+		$t_users = project_get_all_user_rows( $p_project_id, $p_access, true, $p_show_disabled_users );
 	}
 
 	# Add the specified user ID to the list
@@ -339,8 +339,8 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
  * @param integer $p_project_id A project identifier.
  * @return void
  */
-function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
-	print_user_option_list( $p_user_id, $p_project_id, config_get( 'report_bug_threshold' ) );
+function print_reporter_option_list( $p_user_id, $p_project_id = null, $p_show_disabled_users = false ) {
+	print_user_option_list( $p_user_id, $p_project_id, config_get( 'report_bug_threshold' ), $p_show_disabled_users );
 }
 
 /**
@@ -563,12 +563,13 @@ function print_news_string_by_news_id( $p_news_id ) {
  * @param integer        $p_threshold  An access level.
  * @return void
  */
-function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
+function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null, $p_show_disabled_users = false ) {
+
 	if( null === $p_threshold ) {
 		$p_threshold = config_get( 'handle_bug_threshold' );
 	}
 
-	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
+	print_user_option_list( $p_user_id, $p_project_id, $p_threshold, $p_show_disabled_users );
 }
 
 /**
@@ -578,12 +579,13 @@ function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_
  * @param integer        $p_threshold  An access level.
  * @return void
  */
-function print_note_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
+function print_note_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null, $p_show_disabled_users = false ) {
+
 	if( null === $p_threshold ) {
 		$p_threshold = config_get( 'add_bugnote_threshold' );
 	}
 
-	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
+	print_user_option_list( $p_user_id, $p_project_id, $p_threshold, $p_show_disabled_users );
 }
 
 /**

@@ -612,7 +612,7 @@ function project_get_local_user_rows( $p_project_id ) {
  * @param boolean $p_include_global_users Whether to include global users.
  * @return array List of users, array key is user ID
  */
-function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_level = ANYBODY, $p_include_global_users = true ) {
+function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_level = ANYBODY, $p_include_global_users = true, $p_include_disabled_users = false ) {
 	$c_project_id = (int)$p_project_id;
 
 	# Optimization when access_level is NOBODY
@@ -679,9 +679,14 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 		db_param_push();
 		$t_query = 'SELECT id, username, realname, access_level
 				FROM {user}
-				WHERE enabled = ' . db_param() . '
-					AND access_level ' . $t_global_access_clause;
-		$t_result = db_query( $t_query, array( $t_on ) );
+				WHERE access_level ' . $t_global_access_clause;
+
+		if ( !$p_include_disabled_users ) {
+			$t_query .= ' AND enabled = ' . db_param();
+			$t_result = db_query( $t_query, Array( $t_on ) );
+		} else {
+			$t_result = db_query( $t_query );
+		}
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_users[(int)$t_row['id']] = $t_row;
@@ -694,9 +699,14 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 		$t_query = 'SELECT u.id, u.username, u.realname, l.access_level
 				FROM {project_user_list} l, {user} u
 				WHERE l.user_id = u.id
-				AND u.enabled = ' . db_param() . '
 				AND l.project_id = ' . db_param();
-		$t_result = db_query( $t_query, array( $t_on, $c_project_id ) );
+
+		if ( !$p_include_disabled_users ) {
+			$t_query .= ' AND u.enabled = ' . db_param();
+			$t_result = db_query( $t_query, Array( $c_project_id, $t_on ) );
+		} else {
+			$t_result = db_query( $t_query, Array( $c_project_id ) );
+		}
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			if( is_array( $p_access_level ) ) {

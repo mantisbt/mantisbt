@@ -74,5 +74,11 @@
 				<para>The service to use to create a short URL.  The %s will be replaced by the long URL.  By default http://www.tinyurl service is used to shorten URLs.</para>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_show_disabled_users</term>
+			<listitem>
+				<para>This switch specifies whether disabled users should show in the user option lists on the view issues page. The default value of 'ON' will include disabled users in these lists, while setting the value to 'OFF' will remove disabled users from these lists.</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 </section>
