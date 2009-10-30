@@ -133,7 +133,14 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 
 	return $t_attachment_id;
 }
-
+/**
+ * Returns the attachment contents
+ *  
+ * @param int $p_file_id 
+ * @param string $p_type The file type, bug or doc
+ * @param int $p_user_id 
+ * @return mixed the string contents, null if the file was not found or a soap_fault
+ */
 function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 
 	# we handle the case where the file is attached to a bug
@@ -190,20 +197,20 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	switch( config_get( 'file_upload_method' ) ) {
 		case DISK:
 			if( file_exists( $t_diskfile ) ) {
-				return base64_encode( mci_file_read_local( $t_diskfile ) );
+				return mci_file_read_local( $t_diskfile ) ;
 			} else {
 				return null;
 			}
 		case FTP:
 			if( file_exists( $t_diskfile ) ) {
-				return base64_encode( mci_file_read_local( $t_diskfile ) );
+				return mci_file_read_local( $t_diskfile );
 			} else {
 				$ftp = file_ftp_connect();
 				file_ftp_get( $ftp, $t_diskfile, $t_diskfile );
 				file_ftp_disconnect( $ftp );
-				return base64_encode( mci_file_read_local( $t_diskfile ) );
+				return mci_file_read_local( $t_diskfile );
 			}
 		default:
-			return base64_encode( $t_content );
+			return $t_content;
 	}
 }
