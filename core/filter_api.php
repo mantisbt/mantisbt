@@ -570,6 +570,10 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 					$p_filter_arr[ $t_field_name ] = META_FILTER_ANY;
 			}
 		}
+
+		if ( ! $t_filter_object->validate( $p_filter_arr[ $t_field_name ] ) ) {
+			$p_filter_arr[ $t_field_name ] = $t_filter_object->default;
+		}
 	}
 
 	$t_custom_fields = custom_field_get_ids();
