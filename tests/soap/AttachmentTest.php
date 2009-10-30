@@ -27,6 +27,10 @@ require_once 'SoapBase.php';
  * Test fixture for attachment methods
  */
 class AttachmentTest extends SoapBase {
+	
+	
+	private $projectAttachmentsToDelete = array();
+	
 	/**
 	 * A test case that tests the following:
 	 * 1. Create an issue.
@@ -70,4 +74,51 @@ class AttachmentTest extends SoapBase {
 		$this->assertEquals( 1, count( $issue->attachments ), 'count($issue->attachments)' );
 		$this->assertEquals( $attachmentContents, $attachment, '$attachmentContents' );
 	}
+	
+	/**
+	 * A test case that tests the following:
+	 * 1. Create an issue.
+	 * 2. Adds at attachemnt
+	 * 3. Get the issue.
+	 * 4. Verify that the attachment is present in the issue data
+	 * 5. Verify that the attachment contents is correct
+	 */
+	public function testProjectAttachmentIsAdded() {
+		$issueToAdd = $this->getIssueToAdd( 'AttachmentTest.testProjectAttachmentIsAdded' );
+		
+		$attachmentContents = 'Attachment contents.';
+
+		$attachmentId = $this->client->mc_project_attachment_add(
+			$this->userName,
+			$this->password,
+			$this->getProjectId(),
+			'sample.txt',
+			'title',
+			'description',
+			'txt',
+			base64_encode( $attachmentContents )
+		);
+		
+		$this->projectAttachmentsToDelete[] = $attachmentId;
+
+		$attachment = $this->client->mc_project_attachment_get(
+			$this->userName, 
+			$this->password, 
+			$attachmentId);
+		
+		$this->assertEquals( $attachmentContents, $attachment, '$attachmentContents' );
+	}
+	
+	protected function tearDown() {
+		SoapBase::tearDown();
+		
+		foreach ( $this->projectAttachmentsToDelete as $projectAttachmentId) {
+			$this->client->mc_project_attachment_delete(
+				$this->userName,
+				$this->password,
+				$projectAttachmentId);
+		}
+	}
+	
+	
 }
