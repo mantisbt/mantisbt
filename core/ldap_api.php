@@ -362,6 +362,10 @@ function ldap_simulation_get_user( $p_username ) {
 	$t_filename = config_get( 'ldap_simulation_file_path' );
 
 	$t_lines = file( $t_filename );
+	if ( $t_lines === false ) {
+		log_event( LOG_LDAP, "ldap_simulation_get_user: could not read simulation data from $t_filename." );
+		return null;
+	}
 
 	foreach ( $t_lines as $t_line ) {
 		$t_line = trim( $t_line, " \t\r\n" );
