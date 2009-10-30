@@ -21,7 +21,13 @@ function mc_project_attachment_get( $p_username, $p_password, $p_project_attachm
 	if( $t_user_id === false ) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
-	return mci_file_get( $p_project_attachment_id, 'doc', $t_user_id );
+	
+	$t_file = mci_file_get( $p_project_attachment_id, 'doc', $t_user_id );
+	if ( $t_file ) {
+		return base64_encode( $t_file );
+	}
+	
+	return '';
 }
 
 /**
