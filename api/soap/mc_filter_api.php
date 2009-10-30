@@ -17,10 +17,10 @@
 function mc_filter_get( $p_username, $p_password, $p_project_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 	$t_result = array();
 	foreach( mci_filter_db_get_available_queries( $p_project_id, $t_user_id ) as $t_filter_row ) {
@@ -50,10 +50,10 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	$t_lang = mci_get_user_lang( $t_user_id );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_page_count = 0;
@@ -136,10 +136,10 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_page_count = 0;

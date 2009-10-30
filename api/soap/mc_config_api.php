@@ -9,11 +9,11 @@
 function mc_config_get_string( $p_username, $p_password, $p_config_var ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( !mci_has_readonly_access( $t_user_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	if( config_is_private( $p_config_var ) ) {

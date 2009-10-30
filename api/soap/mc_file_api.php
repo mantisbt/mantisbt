@@ -160,7 +160,7 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 				WHERE id='$p_file_id'";
 			break;
 		default:
-			return new soap_fault( 'Client', '', 'Access Denied' );
+			return new soap_fault( 'Server', '', 'Invalid file type '.$p_type. ' .' );
 	}
 
 	$result = db_query( $query );
@@ -184,16 +184,16 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	switch( $p_type ) {
 		case 'bug':
 			if( !mci_file_can_download_bug_attachments( $t_bug_id, $p_user_id ) ) {
-				return new soap_fault( 'Client', '', 'Access Denied' );
+				return mci_soap_fault_access_denied( $t_user_id );
 			}
 			break;
 		case 'doc':
 			# Check if project documentation feature is enabled.
 			if( OFF == config_get( 'enable_project_documentation' ) ) {
-				return new soap_fault( 'Client', '', 'Access Denied' );
+				return mci_soap_fault_access_denied( $t_user_id );
 			}
 			if( !access_has_project_level( config_get( 'view_proj_doc_threshold' ), $t_project_id, $p_user_id ) ) {
-				return new soap_fault( 'Client', '', 'Access Denied' );
+				return mci_soap_fault_access_denied( $t_user_id );
 			}
 			break;
 	}
