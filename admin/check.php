@@ -169,6 +169,8 @@ function check_zend_optimiser_version() {
 	define ( 'ZEND_OPTIMIZER_VERSION', '3.3');
 	define ( 'ZEND_OPTIMIZER_SUBVERSION', 3);
 
+	$t_info = '';
+
 	if (strstr($t_output, "Zend Optimizer")) {
 		$t_version = explode( 'Zend Optimizer', $t_output );
 		$t_version = explode( ',', $t_version[1] );
@@ -184,7 +186,8 @@ function check_zend_optimiser_version() {
 			$t_dummy = array_pop($t_version);
 			$t_version = implode(".",$t_version);
 
-			if (!($t_version > ZEND_OPTIMIZER_VERSION) || ($t_version==ZEND_OPTIMIZER_VERSION && $t_subVersion>=ZEND_OPTIMIZER_SUBVERSION)) {
+			if ( ( $t_version < ZEND_OPTIMIZER_VERSION ) ||
+				 ( $t_version == ZEND_OPTIMIZER_VERSION && $t_subVersion < ZEND_OPTIMIZER_SUBVERSION ) ) {
 				$t_pass = false;
 				$t_info = 'Fail - Installed Version: ' . $t_version . '.' . $t_subVersion . '.';
 			}
@@ -335,7 +338,7 @@ if( plugin_is_installed( 'MantisGraph' ) ) {
 	plugin_push_current( 'MantisGraph' );
 
 	print_test_row( 'checking gd is enabled, and version 2...', get_gd_version() == 2 );
-	if ( plugin_config_get( 'eczlibrary' ) == OFF ) {
+	if ( plugin_config_get( 'eczlibrary', OFF ) == OFF ) {
 		$t_jpgraph_path = BASE_PATH . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'jpgraph' . DIRECTORY_SEPARATOR;
 
 		if( !file_exists( $t_jpgraph_path . 'jpgraph.php') ) {
@@ -346,7 +349,7 @@ if( plugin_is_installed( 'MantisGraph' ) ) {
 		}
 
 		print_test_row( 'check configuration: jpgraph (if used) requires php bundled gd for antialiasing support',
-			( plugin_config_get( 'jpgraph_antialias' ) == OFF || function_exists('imageantialias') ) );
+			( plugin_config_get( 'jpgraph_antialias', OFF ) == OFF || function_exists('imageantialias') ) );
 	}
 	plugin_pop_current();
 }
