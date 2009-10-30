@@ -50,6 +50,17 @@ abstract class MantisFilter {
 	public $size = null;
 
 	/**
+	 * Validate the filter input, returning true if input is
+	 * valid, or returning false if invalid.  Invalid inputs will
+	 * be replaced with the filter's default value.
+	 * @param multi Filter field input
+	 * @return boolean Input valid (true) or invalid (false)
+	 */
+	public function validate( $p_filter_input ) {
+		return true;
+	}
+
+	/**
 	 * Build the SQL query elements 'join', 'where', and 'params'
 	 * as used by core/filter_api.php to create the primary filter
 	 * query.
