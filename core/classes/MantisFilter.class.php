@@ -70,6 +70,6 @@ abstract class MantisFilter {
 	 * filter options, not including an 'any' value.
 	 * @return array Filter options keyed by value=>display
 	 */
-	function options() {}
+	public function options() {}
 }
 
