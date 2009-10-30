@@ -75,6 +75,25 @@ class AttachmentTest extends SoapBase {
 		$this->assertEquals( $attachmentContents, $attachment, '$attachmentContents' );
 	}
 	
+	
+	/**
+	 * A test case that tests the following:
+	 * 1. Gets a non-existing issue attachment
+	 * 2. Verifies that that an error is thrown
+	 */
+	public function testIssueAttachmentNotFound() {
+		
+		try {
+			$this->client->mc_issue_attachment_get(
+				$this->userName, 
+				$this->password, 
+				-1);
+			$this->fail("Should have failed.");
+		} catch ( SoapFault $e) {
+			$this->assertRegexp('/Unable to find an attachment/', $e->getMessage());
+		}
+	}	
+	
 	/**
 	 * A test case that tests the following:
 	 * 1. Create an issue.
@@ -84,8 +103,6 @@ class AttachmentTest extends SoapBase {
 	 * 5. Verify that the attachment contents is correct
 	 */
 	public function testProjectAttachmentIsAdded() {
-		$issueToAdd = $this->getIssueToAdd( 'AttachmentTest.testProjectAttachmentIsAdded' );
-		
 		$attachmentContents = 'Attachment contents.';
 
 		$attachmentId = $this->client->mc_project_attachment_add(
@@ -108,11 +125,29 @@ class AttachmentTest extends SoapBase {
 		
 		$this->assertEquals( $attachmentContents, $attachment, '$attachmentContents' );
 	}
-	
+
+	/**
+	 * A test case that tests the following:
+	 * 1. Gets a non-existing project attachment
+	 * 2. Verifies that an error is thrown
+	 */
+	public function testProjectAttachmentNotFound() {
+		
+		try {
+			$this->client->mc_project_attachment_get(
+				$this->userName, 
+				$this->password, 
+				-1);
+			$this->fail("Should have failed.");
+		} catch ( SoapFault $e) {
+			$this->assertRegexp('/Unable to find an attachment/', $e->getMessage());
+		}
+	}
+		
 	protected function tearDown() {
 		SoapBase::tearDown();
 		
-		foreach ( $this->projectAttachmentsToDelete as $projectAttachmentId) {
+		foreach ( $this->projectAttachmentsToDelete as $projectAttachmentId ) {
 			$this->client->mc_project_attachment_delete(
 				$this->userName,
 				$this->password,
