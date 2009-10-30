@@ -535,8 +535,11 @@ function config_obsolete( $p_var, $p_replace ) {
 			$t_info .= '</ul>';
 		}
 		else if( !is_blank( $p_replace ) ) {
-			$t_info .= 'please use <tt>$g_' . $p_replace . '</tt> instead.';
+			$t_info = 'please use <tt>$g_' . $p_replace . '</tt> instead.';
+		} else {
+			$t_info = '';
 		}
+
 		print_test_warn_row( $t_description, $t_info, false );
 	}
 }
