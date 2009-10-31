@@ -141,11 +141,17 @@
 		$date = $v_date_posted;
 
 		# author of item
-		$author = string_rss_links( user_get_name( $v_poster_id ) );
+		$author = '';
 		if ( access_has_global_level( config_get( 'show_user_email_threshold' ) ) ) {
+			$t_author_name = string_rss_links( user_get_name( $v_poster_id ) );
 			$t_author_email = user_get_field( $v_poster_id, 'email' );
-			if ( ! is_blank( $t_author_email ) ) {
-				$author .= ' &lt;' . $t_author_email . '&gt;';
+
+			if ( !is_blank( $t_author_email ) ) {
+				if ( !is_blank( $t_author_name ) ) {
+					$author = $t_author_name . ' &lt;' . $t_author_email . '&gt;';
+				} else {
+					$author = $t_author_email;
+				}
 			}
 		}
 

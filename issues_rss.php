@@ -174,7 +174,7 @@
 		$about = $link = $t_path . "view.php?id=" . $t_bug->id;
 		$title = string_rss_links( bug_format_id( $t_bug->id ) . ': ' . $t_bug->summary );
 
-		if ( $row['view_state'] == VS_PRIVATE ) {
+		if ( $t_bug->view_state == VS_PRIVATE ) {
 			$title .= ' [' . lang_get( 'private' ) . ']';
 		}
 
@@ -187,16 +187,19 @@
 		$date = $t_bug->last_updated;
 
 		# author of item
-		$author = string_rss_links( user_get_name( $t_bug->reporter_id ) );
+		$author = '';
 		if ( access_has_global_level( config_get( 'show_user_email_threshold' ) ) ) {
+			$t_author_name = string_rss_links( user_get_name( $t_bug->reporter_id ) );
 			$t_author_email = user_get_field( $t_bug->reporter_id, 'email' );
-			if ( is_blank( $t_author_email ) ) {
-				$t_author_email = $author . '@example.com';
+
+			if ( !is_blank( $t_author_email ) ) {
+				if ( !is_blank( $t_author_name ) ) {
+					$author = $t_author_name . ' &lt;' . $t_author_email . '&gt;';
+				} else {
+					$author = $t_author_email;
+				}
 			}
-		} else {
-			$t_author_email = $author . '@example.com';
 		}
-		$author .= ' &lt;' . $t_author_email . '&gt;';
 
 		# $comments = 'http://www.example.com/sometext.php?somevariable=somevalue&comments=1';	# url to comment page rss 2.0 value
 		$comments = $t_path . 'view.php?id=' . $t_bug->id . '#bugnotes';
