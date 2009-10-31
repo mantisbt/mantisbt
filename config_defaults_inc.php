@@ -785,9 +785,11 @@
 
 	/**
 	 * Specifies whether to enable support for project documents or not.
+	 * This feature is deprecated and is expected to be moved to a plugin
+	 * in the future.
 	 * @global int $g_enable_project_documentation
 	 */
-	$g_enable_project_documentation	= ON;
+	$g_enable_project_documentation	= OFF;
 
 	/**
 	 * Display another instance of the menu at the bottom.  The top menu will still remain.
@@ -1074,6 +1076,8 @@
 
 	/**
 	 * Indicates whether the news feature should be enabled or disabled.
+	 * This feature is deprecated and is expected to be moved to a plugin
+	 * in the future.
 	 */
 	$g_news_enabled			= OFF;
 
