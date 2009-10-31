@@ -948,7 +948,8 @@
                 <term>$g_news_enabled</term>
                 <listitem>
                     <para>Indicates whether the news feature should be enabled or disabled.
-                        The default is ON.
+                        The default is OFF.  The news feature is deprecated in favor of
+                        being moved to a plugin.
                     </para>
                 </listitem>
             </varlistentry>

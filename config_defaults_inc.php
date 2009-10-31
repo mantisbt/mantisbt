@@ -1075,7 +1075,7 @@
 	/**
 	 * Indicates whether the news feature should be enabled or disabled.
 	 */
-	$g_news_enabled			= ON;
+	$g_news_enabled			= OFF;
 
 	/**
 	 * Limit News Items
