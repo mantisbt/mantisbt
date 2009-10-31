@@ -24,7 +24,7 @@
 	 * In general a value of OFF means the feature is disabled and ON means the
 	 * feature is enabled.  Any other cases will have an explanation.
 	 *
-	 * For more details see http://manual.mantisbt.org/
+	 * For more details see http://www.mantisbt.org/docs/master-1.2.x/
 	 *
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -206,7 +206,7 @@
 	 * Used to link to manual for User Documentation.
 	 * @global string $g_manual_url
 	 */
-	$g_manual_url = 'http://manual.mantisbt.org/';
+	$g_manual_url = 'http://www.mantisbt.org/docs/master-1.2.x/';
 
 	/**************
 	 * Web Server *
