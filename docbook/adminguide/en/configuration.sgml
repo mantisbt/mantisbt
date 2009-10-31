@@ -2175,7 +2175,8 @@
                 <term>$g_enable_project_documentation</term>
                 <listitem>
                     <para>Specifies whether to enable support for project documents or
-                        not. Default is ON.
+                        not. Default is OFF.  This feature is deprecated and is expected
+                        to be moved to a plugin in the future.
                     </para>
                 </listitem>
             </varlistentry>
