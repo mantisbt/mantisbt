@@ -226,7 +226,7 @@
                     <para>GD - if the graphs feature is required.</para>
                 </listitem>
                 <listitem>
-                    <param>fileinfo - Guesses the MIME type of attachments.
+                    <para>fileinfo - Guesses the MIME type of attachments.
                     This extension is included by default from version 5.3.x
                     of PHP. For older versions of PHP you will need to install
                     the fileinfo PECL extension (this requires root access to

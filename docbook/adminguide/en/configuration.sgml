@@ -1487,7 +1487,7 @@
 	                by itself.
 		    </para>
                 </listitem>
-            <varlisentry>
+            </varlistentry>
         </variablelist>
 
     </section>
