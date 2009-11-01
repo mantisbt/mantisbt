@@ -393,6 +393,9 @@ function ldap_simulation_is_enabled() {
  */
 function ldap_simulation_get_user( $p_username ) {
 	$t_filename = config_get( 'ldap_simulation_file_path' );
+	if ( !is_blank( $t_filename ) ) {
+		return null;
+	}
 
 	$t_lines = file( $t_filename );
 	if ( $t_lines === false ) {
