@@ -46,10 +46,11 @@ function mc_issue_exists( $p_username, $p_password, $p_issue_id ) {
  */
 function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
-	$t_lang = mci_get_user_lang( $t_user_id );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
+	
+	$t_lang = mci_get_user_lang( $t_user_id );
 
 	if( !bug_exists( $p_issue_id ) ) {
 		return new soap_fault( 'Client', '', 'Issue does not exist.' );
