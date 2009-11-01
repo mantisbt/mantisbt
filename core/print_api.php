@@ -981,6 +981,7 @@ function print_all_bug_action_option_list() {
 		'RESOLVE' => lang_get( 'actiongroup_menu_resolve' ),
 		'SET_STICKY' => lang_get( 'actiongroup_menu_set_sticky' ),
 		'UP_PRIOR' => lang_get( 'actiongroup_menu_update_priority' ),
+		'EXT_UPDATE_SEVERITY' => lang_get( 'actiongroup_menu_update_severity' ),
 		'UP_STATUS' => lang_get( 'actiongroup_menu_update_status' ),
 		'UP_CATEGORY' => lang_get( 'actiongroup_menu_update_category' ),
 		'VIEW_STATUS' => lang_get( 'actiongroup_menu_update_view_status' ),
