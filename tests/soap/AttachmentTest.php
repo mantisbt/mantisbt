@@ -103,6 +103,8 @@ class AttachmentTest extends SoapBase {
 	 * 5. Verify that the attachment contents is correct
 	 */
 	public function testProjectAttachmentIsAdded() {
+		$this->skipIfProjectDocumentationIsNotEnabled();
+		
 		$attachmentContents = 'Attachment contents.';
 
 		$attachmentId = $this->client->mc_project_attachment_add(
@@ -133,6 +135,8 @@ class AttachmentTest extends SoapBase {
 	 */
 	public function testProjectAttachmentNotFound() {
 		
+		$this->skipIfProjectDocumentationIsNotEnabled();
+		
 		try {
 			$this->client->mc_project_attachment_get(
 				$this->userName, 
@@ -141,6 +145,15 @@ class AttachmentTest extends SoapBase {
 			$this->fail("Should have failed.");
 		} catch ( SoapFault $e) {
 			$this->assertRegexp('/Unable to find an attachment/', $e->getMessage());
+		}
+	}
+	
+	private function skipIfProjectDocumentationIsNotEnabled() {
+		
+		$configEnabled = $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_project_documentation' );
+		
+		if ( ! $configEnabled  ) {
+			$this->markTestSkipped('Project documentation is not enabled.');
 		}
 	}
 		
