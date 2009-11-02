@@ -37,7 +37,7 @@
 	require_once( 'icon_api.php' );
 	require_once( 'string_api.php' );
 	require_once( 'columns_api.php' );
-	require_once( 'config_filter_defaults_inc.php' );
+	require_once( 'filter_constants_inc.php' );
 
 	auth_ensure_user_authenticated();
 

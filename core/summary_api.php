@@ -25,7 +25,7 @@
 /**
  * requires config_filter_defaults_include
  */
-require_once( $g_absolute_path . 'config_filter_defaults_inc.php' );
+require_once( 'filter_constants_inc.php' );
 
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 	printf( '<tr %s>', helper_alternate_class() );

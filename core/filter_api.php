@@ -49,7 +49,7 @@ require_once( 'tag_api.php' );
 /**
  * requires config_filter_defaults_inc
  */
-require_once( $g_absolute_path . 'config_filter_defaults_inc.php' );
+require_once( 'filter_constants_inc.php' );
 
 /**
  * Allow plugins to define a set of class-based filters, and register/load
