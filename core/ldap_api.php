@@ -333,7 +333,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 			}
 
 			if ( ON == config_get( 'use_ldap_email' ) ) {
-				$t_email = ldap_simulation_email_from_username( $p_username );
+				$t_email = ldap_email_from_username( $p_username );
 				user_set_field( $t_user_id, 'email', $t_email );
 			}
 		}
@@ -360,14 +360,10 @@ function ldap_simulation_is_enabled() {
  */
 function ldap_simulation_get_user( $p_username ) {
 	$t_filename = config_get( 'ldap_simulation_file_path' );
-	if ( !is_blank( $t_filename ) ) {
-		return null;
-	}
-
 	$t_lines = file( $t_filename );
 	if ( $t_lines === false ) {
 		log_event( LOG_LDAP, "ldap_simulation_get_user: could not read simulation data from $t_filename." );
-		return null;
+		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
 	}
 
 	foreach ( $t_lines as $t_line ) {
