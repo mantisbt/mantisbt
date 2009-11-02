@@ -35,6 +35,15 @@ abstract class MantisColumn {
 	public $column = null;
 
 	/**
+	 * Allow plugin columns to pre-cache data for all issues
+	 * that will be shown in a given view.  This is preferable to
+	 * the alternative option of querying the database for each
+	 * issue as the display() method is called.
+	 * @param array Bug objects
+	 */
+	public function cache( $p_bugs ) {}
+
+	/**
 	 * Function to display column data for a given bug row.
 	 * @param object Bug object
 	 * @param int Column display target

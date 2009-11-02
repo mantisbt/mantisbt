@@ -179,6 +179,9 @@
 
 		$t_in_stickies = ( $t_filter && ( 'on' == $t_filter['sticky_issues'] ) );
 
+		# pre-cache custom column data
+		columns_plugin_cache_issue_data( $p_rows );
+
 		# -- Loop over bug rows --
 
 		$t_rows = count( $p_rows );
