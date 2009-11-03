@@ -265,7 +265,7 @@ function filter_get_url( $p_custom_filter ) {
 	$t_plugin_filter_array = filter_get_plugin_filters();
 	foreach( $t_plugin_filter_array as $t_field_name => $t_filter_object ) {
 		if( !filter_field_is_any( $p_custom_filter[ $t_field_name ] ) ) {
-			$t_query[] = filter_encode_field_and_value( $t_field_name, $p_custom_filter[ $t_field_name ] );
+			$t_query[] = filter_encode_field_and_value( $t_field_name, $p_custom_filter[ $t_field_name ], $t_filter_object->type );
 		}
 	}
 
@@ -286,11 +286,11 @@ function filter_get_url( $p_custom_filter ) {
  * @param string $p_field_value The field value (can be an array)
  * @return string url encoded string
  */
-function filter_encode_field_and_value( $p_field_name, $p_field_value ) {
+function filter_encode_field_and_value( $p_field_name, $p_field_value, $p_field_type=null ) {
 	$t_query_array = array();
 	if( is_array( $p_field_value ) ) {
 		$t_count = count( $p_field_value );
-		if( $t_count > 1 ) {
+		if( $t_count > 1 || $p_field_type == FILTER_TYPE_MULTI_STRING || $p_field_type == FILTER_TYPE_MULTI_INT ) {
 			foreach( $p_field_value as $t_value ) {
 				$t_query_array[] = urlencode( $p_field_name . '[]' ) . '=' . urlencode( $t_value );
 			}
