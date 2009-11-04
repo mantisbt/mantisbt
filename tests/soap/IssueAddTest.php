@@ -234,4 +234,56 @@ class IssueAddTest extends SoapBase {
 			
 		$this->assertEquals( $date, $issue->due_date, "due_date");
 	}
+	
+	/**
+	 * This issue tests the following
+	 * 
+	 * 1. Creating an issue without a due date
+	 * 2. Retrieving the issue
+	 * 3. Validating that the due date is properly encoded as null
+	 * 
+	 * This stricter verification originates in some SOAP frameworks, notably
+	 * Axis, not accepting the empty tag format sent by nusoap by default, which
+	 * is accepted by the PHP5 SOAP extension nevertheless.
+	 */
+	public function testCreateIssueWithNullDueDate() {
+		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithNullDueDate' );
+		
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );			
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+		
+		$this->assertNull( $issue->due_date , 'due_date is not null' );
+		$this->assertEquals( 'true', $this->readDueDate( $this->client->__getLastResponse() ) , 'xsi:nil not set to true' );
+	}
+	
+	/**
+	 * 
+	 * @param string $issueDataXml
+	 * @return string the xsi:null value
+	 */
+	private function readDueDate( $issueDataXml ) {
+		$reader = new XMLReader(); 
+		$reader->XML( $this->client->__getLastResponse());
+		
+		while ( $reader->read() ) {
+			switch ( $reader->nodeType ) {
+				
+				case XMLReader::ELEMENT:
+					if ( $reader->name == 'due_date') {
+						return $reader->getAttribute( 'xsi:nil' );
+					}
+					break;
+			}
+		}
+		return null;
+	}
 }
