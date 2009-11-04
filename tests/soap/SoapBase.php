@@ -47,7 +47,8 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 		       $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
 		        array(  'trace'      => true,
 		                'exceptions' => true,
-		        		'cache_wsdl' => WSDL_CACHE_NONE
+		        		'cache_wsdl' => WSDL_CACHE_NONE,
+		        		'trace'      => true
 		             )
 		     
 		    );
