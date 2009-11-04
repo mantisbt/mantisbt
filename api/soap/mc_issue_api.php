@@ -96,6 +96,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['resolution'] = mci_enum_get_array_by_id( $t_bug->resolution, 'resolution', $t_lang );
 	$t_issue_data['fixed_in_version'] = mci_null_if_empty( $t_bug->fixed_in_version );
 	$t_issue_data['target_version'] = mci_null_if_empty( $t_bug->target_version );
+	$t_issue_data['due_date'] = mci_issue_get_due_date( $t_bug );
 
 	$t_issue_data['description'] = $t_bug->description;
 	$t_issue_data['steps_to_reproduce'] = mci_null_if_empty( $t_bug->steps_to_reproduce );
@@ -106,12 +107,21 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['notes'] = mci_issue_get_notes( $p_issue_id );
 	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
 	
-	if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_issue_id )  && !date_is_null( $t_bug->due_date ) ) {
-		$t_issue_data['due_date'] = timestamp_to_iso8601( $t_bug->due_date );
-	} else {
-		$t_issue_data['due_date'] = '';
-	}
 	return $t_issue_data;
+}
+
+/**
+ * 
+ * @param BugData $bug
+ * @return soapval the value to be encoded as the due date
+ */
+function mci_issue_get_due_date( $p_bug ) {
+	if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id )  && !date_is_null( $p_bug->due_date ) ) {
+		return new soapval( 'due_date', 'xsd:dateTime', timestamp_to_iso8601( $p_bug->due_date ) );
+	} else {
+		return new soapval( 'due_date','xsd:dateTime', null );
+	}
+	
 }
 
 /**

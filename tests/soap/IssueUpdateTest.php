@@ -281,10 +281,9 @@ class IssueUpdateTest extends SoapBase {
 	 * 5. Validating the value of the due date
 	 */
 	public function testUpdateIssueDueDate() {
+		$this->skipIfDueDateIsNotEnabled();
 		
 		$date = '2015-10-29T12:59:14Z';
-		
-		$this->skipIfDueDateIsNotEnabled();
 
 		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateIssueDueDate' );
 
