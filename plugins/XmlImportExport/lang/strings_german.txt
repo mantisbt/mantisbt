@@ -26,14 +26,15 @@
  * @ingroup Language
  * @file
  *
+ * @author Atrol
  * @author Umherirrender
  */
 
 $s_plugin_XmlImportExport_title = 'Import/Export';
 $s_plugin_XmlImportExport_description = 'Ergänzt MantisBT um eine XML-basierende Import- und Export-Funktion.';
-$s_plugin_XmlImportExport_import = 'Probleme importieren';
+$s_plugin_XmlImportExport_import = 'Einträge importieren';
 $s_plugin_XmlImportExport_export = 'XML-Export';
-$s_plugin_XmlImportExport_importing_in_project = 'Importiere Probleme in Projekt:';
+$s_plugin_XmlImportExport_importing_in_project = 'Importiere Einträge in Projekt:';
 $s_plugin_XmlImportExport_import_options = 'Import-Optionen';
 $s_plugin_XmlImportExport_cross_references = 'Querverweise';
 $s_plugin_XmlImportExport_default_strategy = 'Standard-Konvertierungsstrategie:';

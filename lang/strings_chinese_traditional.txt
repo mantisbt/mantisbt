@@ -26,6 +26,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Firesueprtom
  * @author Jonathan Tsai, tryweb@ichiayi.com
  */
 
@@ -37,6 +38,7 @@ $s_actiongroup_menu_delete = '刪除';
 $s_actiongroup_menu_resolve = '解決';
 $s_actiongroup_menu_update_priority = '更改優先度';
 $s_actiongroup_menu_update_status = '更改狀態';
+$s_actiongroup_menu_update_severity = '更新嚴重度';
 $s_actiongroup_menu_update_view_status = '更新檢視狀態';
 $s_actiongroup_menu_update_category = '更改類別';
 $s_actiongroup_menu_set_sticky = '設定/取消難題';
@@ -939,5 +941,23 @@ $s_on_or_before_date = '於此或之前';
 $s_before_date = '之前';
 $s_after_date = '之後';
 $s_on_or_after_date = '於此或之後';
+$s_from_date = '從';
 $s_on_date = '在';
 $s_on = '在';
+$s_view_account_title = '使用者資訊';
+$s_manage_user = '管理使用者';
+$s_install_information = 'MantisBT 安裝資訊';
+$s_database_information = 'MantisBT 資料庫';
+$s_path_information = 'MantisBT 路徑資料';
+$s_month_january = '1月';
+$s_month_february = '2月';
+$s_month_march = '3月';
+$s_month_april = '4月';
+$s_month_may = '5月';
+$s_month_june = '6月';
+$s_month_july = '7月';
+$s_month_august = '8月';
+$s_month_september = '9月';
+$s_month_october = '10月';
+$s_month_november = '11月';
+$s_month_december = '12月';
