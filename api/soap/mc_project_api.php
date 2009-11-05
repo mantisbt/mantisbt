@@ -8,16 +8,18 @@
 
 function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
-	$t_lang = mci_get_user_lang( $t_user_id );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
+	
+	$t_lang = mci_get_user_lang( $t_user_id );
+	
 	if( !project_exists( $p_project_id ) ) {
 		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_page_count = 0;
@@ -85,11 +87,11 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 function mc_projects_get_user_accessible( $p_username, $p_password ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( !mci_has_readonly_access( $t_user_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_lang = mci_get_user_lang( $t_user_id );
@@ -125,7 +127,7 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -133,7 +135,7 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_result = array();
@@ -156,7 +158,7 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -164,7 +166,7 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_result = array();
@@ -194,7 +196,7 @@ function mc_project_get_released_versions( $p_username, $p_password, $p_project_
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -202,7 +204,7 @@ function mc_project_get_released_versions( $p_username, $p_password, $p_project_
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_result = array();
@@ -233,7 +235,7 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -241,7 +243,7 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_result = array();
@@ -272,7 +274,7 @@ function mc_project_version_add( $p_username, $p_password, $p_version ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied', 'Username/password combination was incorrect' );
+		return mci_soap_fault_login_failed();
 	}
 
 	$t_project_id = $p_version['project_id'];
@@ -290,11 +292,11 @@ function mc_project_version_add( $p_username, $p_password, $p_version ) {
 	}
 
 	if ( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	if ( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	if ( is_blank( $t_name ) ) {
@@ -339,7 +341,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied', 'Username/password combination was incorrect' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( is_blank( $p_version_id ) ) {
@@ -365,11 +367,11 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_
 	}
 
 	if ( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	if ( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	if ( is_blank( $t_name ) ) {
@@ -411,7 +413,7 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied', 'Username/password combination was incorrect' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( is_blank( $p_version_id ) ) {
@@ -425,11 +427,11 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
 	$t_project_id = version_get_field( $p_version_id, 'project_id' );
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	return version_remove( $p_version_id );
@@ -447,7 +449,7 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -455,7 +457,7 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_result = array();
@@ -503,12 +505,12 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
 function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	# Check if project documentation feature is enabled.
 	if( OFF == config_get( 'enable_project_documentation' ) || !file_is_uploading_enabled() ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -516,7 +518,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_project_file_table = db_get_table( 'mantis_project_file_table' );
@@ -609,11 +611,11 @@ function mci_project_as_array_by_id( $p_project_id ) {
 function mc_project_add( $p_username, $p_password, $p_project ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied', 'Username/password combination was incorrect' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( !mci_has_administrator_access( $t_user_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied', 'User does not have administrator access' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	if ( !isset( $p_project['name'] ) ) {
@@ -681,7 +683,7 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied', 'Username/password combination was incorrect' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -689,7 +691,7 @@ function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !mci_has_administrator_access( $t_user_id, $p_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied', 'User does not have administrator access' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	return project_delete( $p_project_id );
@@ -698,14 +700,14 @@ function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 	if( !project_exists( $p_project_id ) ) {
 		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_page_count = 0;
@@ -758,7 +760,7 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	$t_users = array();

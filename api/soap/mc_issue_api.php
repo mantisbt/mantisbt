@@ -19,7 +19,7 @@ require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'mc_core.php' );
 function mc_issue_exists( $p_username, $p_password, $p_issue_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
@@ -46,18 +46,19 @@ function mc_issue_exists( $p_username, $p_password, $p_issue_id ) {
  */
 function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
-	$t_lang = mci_get_user_lang( $t_user_id );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
+	
+	$t_lang = mci_get_user_lang( $t_user_id );
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return new soap_fault( 'Server', '', 'Issue does not exist' );
+		return new soap_fault( 'Client', '', 'Issue does not exist.' );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_bug = bug_get( $p_issue_id, true );
@@ -95,6 +96,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['resolution'] = mci_enum_get_array_by_id( $t_bug->resolution, 'resolution', $t_lang );
 	$t_issue_data['fixed_in_version'] = mci_null_if_empty( $t_bug->fixed_in_version );
 	$t_issue_data['target_version'] = mci_null_if_empty( $t_bug->target_version );
+	$t_issue_data['due_date'] = mci_issue_get_due_date( $t_bug );
 
 	$t_issue_data['description'] = $t_bug->description;
 	$t_issue_data['steps_to_reproduce'] = mci_null_if_empty( $t_bug->steps_to_reproduce );
@@ -104,8 +106,22 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['relationships'] = mci_issue_get_relationships( $p_issue_id, $t_user_id );
 	$t_issue_data['notes'] = mci_issue_get_notes( $p_issue_id );
 	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
-
+	
 	return $t_issue_data;
+}
+
+/**
+ * 
+ * @param BugData $bug
+ * @return soapval the value to be encoded as the due date
+ */
+function mci_issue_get_due_date( $p_bug ) {
+	if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id )  && !date_is_null( $p_bug->due_date ) ) {
+		return new soapval( 'due_date', 'xsd:dateTime', timestamp_to_iso8601( $p_bug->due_date ) );
+	} else {
+		return new soapval( 'due_date','xsd:dateTime', null );
+	}
+	
 }
 
 /**
@@ -113,8 +129,9 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
  *
  * @param $p_issue_id   Issue id to apply custom field values to.
  * @param $p_custom_fields  The array of custom field values as described in the webservice complex types.
+ * @param boolean $p_log_insert create history logs for new values
  */
-function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields ) {
+function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields, $p_log_insert ) {
 	# set custom field values on the submitted issue
 	if( isset( $p_custom_fields ) && is_array( $p_custom_fields ) ) {
 		foreach( $p_custom_fields as $t_custom_field ) {
@@ -122,7 +139,7 @@ function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields ) {
 			$t_custom_field_id = mci_get_custom_field_id_from_objectref( $t_custom_field['field'] );
 
 			if( $t_custom_field_id == 0 ) {
-				return new soap_fault( 'Client', '', 'Custom field ' . $t_custom_field['field']['name'] . ' not found' );
+				return new soap_fault( 'Client', '', 'Custom field ' . $t_custom_field['field']['name'] . ' not found.' );
 			}
 
 			# skip if current user doesn't have login access.
@@ -133,11 +150,11 @@ function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields ) {
 			$t_value = $t_custom_field['value'];
 
 			if( !custom_field_validate( $t_custom_field_id, $t_value ) ) {
-				return new soap_fault( 'Client', '', 'Invalid custom field value for field id ' . $t_custom_field_id );
+				return new soap_fault( 'Client', '', 'Invalid custom field value for field id ' . $t_custom_field_id . ' .');
 			}
 
-			if( !custom_field_set_value( $t_custom_field_id, $p_issue_id, $t_value ) ) {
-				return new soap_fault( 'Server', '', 'Unable to set custom field value for field id ' . $t_custom_field_id . ' to issue ' . $p_issue_id );
+			if( !custom_field_set_value( $t_custom_field_id, $p_issue_id, $t_value, $p_log_insert  ) ) {
+				return new soap_fault( 'Server', '', 'Unable to set custom field value for field id ' . $t_custom_field_id . ' to issue ' . $p_issue_id. ' .' );
 			}
 		}
 	}
@@ -285,7 +302,7 @@ function mci_issue_get_notes( $p_issue_id ) {
 function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	$t_any = defined( 'META_FILTER_ANY' ) ? META_FILTER_ANY : 'any';
@@ -343,7 +360,7 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, $t_project_id, $t_user_id );
@@ -365,7 +382,7 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
@@ -404,7 +421,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	$t_project = $p_issue['project'];
@@ -412,7 +429,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_project_id = mci_get_project_id( $t_project );
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_handler_id = isset( $p_issue['handler'] ) ? mci_get_user_id( $p_issue['handler'] ) : 0;
@@ -437,7 +454,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 			# Make sure that active user has access level required to specify a different reporter.
 			$t_specify_reporter_access_level = config_get( 'mc_specify_reporter_on_add_access_level_threshold' );
 			if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $t_user_id ) ) {
-				return new soap_fault( 'Client', '', "Active user does not have access level required to specify a different issue reporter." );
+				return mci_soap_fault_access_denied( $t_user_id, "Active user does not have access level required to specify a different issue reporter" );
 			}
 		}
 	}
@@ -446,12 +463,12 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		if( $t_project_id == 0 ) {
 			return new soap_fault( 'Client', '', "Project '" . $t_project['name'] . "' does not exist." );
 		} else {
-			return new soap_fault( 'Client', '', "Project '$t_project_id' does not exist." );
+			return new soap_fault( 'Client', '', "Project with id '" . $t_project_id . "' does not exist." );
 		}
 	}
 
 	if( !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_user_id ) ) {
-		return new soap_fault( 'Client', '', "User '$t_user_id' does not have access right to report issues." );
+		return mci_soap_fault_access_denied( "User '$t_user_id' does not have access right to report issues" );
 	}
 
 	#if ( !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id ) ||
@@ -517,7 +534,12 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
 	$t_bug_data->sponsorship_total = isset( $p_issue['sponsorship_total'] ) ? $p_issue['sponsorship_total'] : 0;
-	$t_bug_data->due_date = date_get_null();
+	
+	if ( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
+		$t_bug_data->due_date = mci_iso8601_to_timestamp( $p_issue['due_date'] );
+	} else {
+		$t_bug_data->due_date = date_get_null();
+	}
 
 	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
 		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
@@ -534,7 +556,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	# submit the issue
 	$t_issue_id = $t_bug_data->create();
 
-	mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'] );
+	mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'], false );
 
 	if( isset( $t_notes ) && is_array( $t_notes ) ) {
 		foreach( $t_notes as $t_note ) {
@@ -566,17 +588,17 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return new soap_fault( 'Server', '', "Issue '$p_issue_id' does not exist." );
+		return new soap_fault( 'Client', '', "Issue '$p_issue_id' does not exist." );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_project_id = mci_get_project_id( $p_issue['project'] );
@@ -604,12 +626,11 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		if( $t_project_id == 0 ) {
 			return new soap_fault( 'Client', '', "Project '" . $t_project['name'] . "' does not exist." );
 		}
-
 		return new soap_fault( 'Client', '', "Project '$t_project_id' does not exist." );
 	}
 
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return new soap_fault( 'Client', '', "User '$t_user_id' does not have access right to report issues." );
+		return mci_soap_fault_access_denied( $t_user_id,  "Not enough rights to update issues" );
 	}
 
 	if(( $t_handler_id != 0 ) && !user_exists( $t_handler_id ) ) {
@@ -684,7 +705,12 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
 	$t_bug_data->sponsorship_total = isset( $v_sponsorship_total ) ? $v_sponsorship_total : 0;
-	$t_bug_data->due_date = date_get_null();
+
+	if ( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
+		$t_bug_data->due_date = mci_iso8601_to_timestamp( $p_issue['due_date'] );
+	} else {
+		$t_bug_data->due_date = date_get_null();
+	}
 
 	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
 		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
@@ -701,7 +727,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	# submit the issue
 	$t_is_success = $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
 
-	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'] );
+	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'], true );
 
 	if ( isset( $p_issue['notes'] ) && is_array( $p_issue['notes'] ) ) {
 		foreach ( $p_issue['notes'] as $t_note ) {
@@ -740,16 +766,16 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return new soap_fault( 'Server', '', "Issue '$p_issue_id' does not exist." );
+		return new soap_fault( 'Client', '', "Issue '$p_issue_id' does not exist.");
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	return bug_delete( $p_issue_id );
@@ -767,15 +793,15 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( (integer) $p_issue_id < 1 ) {
-		return new soap_fault( 'Client', '', "Invalid issue id '$p_issue_id'." );
+		return new soap_fault( 'Client', '', "Invalid issue id '$p_issue_id'" );
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return new soap_fault( 'Client', '', "Issue '$p_issue_id' does not exist" );
+		return new soap_fault( 'Client', '', "Issue '$p_issue_id' does not exist." );
 	}
 
 	if ( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
@@ -784,15 +810,15 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	if( !access_has_bug_level( config_get( 'add_bugnote_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return new soap_fault( 'Client', '', "User '$t_user_id' does not have access right to add notes to this issue." );
+		return mci_soap_fault_access_denied( $t_user_id, "You do not have access rights to add notes to this issue" );
 	}
 
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return new soap_fault( 'Client', '', "Issue '$p_issue_id' is readonly." );
+		return mci_soap_fault_access_denied( $t_user_id, "Issue '$p_issue_id' is readonly" );
 	}
 
 	if( isset( $p_note['view_state'] ) ) {
@@ -818,21 +844,21 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( (integer) $p_issue_note_id < 1 ) {
-		return new soap_fault( 'Client', '', "Invalid issue note id '$p_issue_note_id'." );
+		return new soap_fault( 'Client', '', "Invalid issue note id '$p_issue_note_id'.");
 	}
 
 	if( !bugnote_exists( $p_issue_note_id ) ) {
-		return new soap_fault( 'Server', '', "Issue note '$p_issue_note_id' does not exist." );
+		return new soap_fault( 'Client', '', "Issue note '$p_issue_note_id' does not exist.");
 	}
 
 	$t_issue_id = bugnote_get_field( $p_issue_note_id, 'bug_id' );
 	$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	return bugnote_delete( $p_issue_note_id );
@@ -853,17 +879,17 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
 	$t_rel_type = $p_relationship['type'];
 
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	# user has access to update the bug...
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return new soap_fault( 'Client', '', "Active user does not have access level required to add a relationship to this issue." );
+		return mci_soap_fault_access_denied( $t_user_id, "Active user does not have access level required to add a relationship to this issue" );
 	}
 
 	# source and destination bugs are the same bug...
@@ -878,12 +904,12 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
 
 	# bug is not read-only...
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return new soap_fault( 'Client', '', "Issue '$p_issue_id' is readonly." );
+		return new mci_soap_fault_access_denied( $t_user_id, "Issue '$p_issue_id' is readonly" );
 	}
 
 	# user can access to the related bug at least as viewer...
 	if( !access_has_bug_level( VIEWER, $t_dest_issue_id, $t_user_id ) ) {
-		return new soap_fault( 'Client', '', "The issue '$t_dest_issue_id' requires higher access level." );
+		return mci_soap_fault_access_denied( $t_user_id, "The issue '$t_dest_issue_id' requires higher access level" );
 	}
 
 	$t_old_id_relationship = relationship_same_type_exists( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
@@ -925,22 +951,22 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	# user has access to update the bug...
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return new soap_fault( 'Client', '', "Active user does not have access level required to remove a relationship from this issue." );
+		return mci_soap_fault_access_denied( $t_user_id , "Active user does not have access level required to remove a relationship from this issue." );
 	}
 
 	# bug is not read-only...
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return new soap_fault( 'Client', '', "Issue '$p_issue_id' is readonly." );
+		return mci_soap_fault_access_denied( $t_user_id , "Issue '$p_issue_id' is readonly." );
 	}
 
 	# retrieve the destination bug of the relationship
@@ -949,7 +975,7 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 	# user can access to the related bug at least as viewer, if it's exist...
 	if( bug_exists( $t_dest_issue_id ) ) {
 		if( !access_has_bug_level( VIEWER, $t_dest_issue_id, $t_user_id ) ) {
-			return new soap_fault( 'Client', '', "The issue '$t_dest_issue_id' requires higher access level." );
+			return mci_soap_fault_access_denied( $t_user_id , "The issue '$t_dest_issue_id' requires higher access level." );
 		}
 	}
 
@@ -998,7 +1024,7 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 function mc_issue_checkin( $p_username, $p_password, $p_issue_id, $p_comment, $p_fixed ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
@@ -1007,10 +1033,29 @@ function mc_issue_checkin( $p_username, $p_password, $p_issue_id, $p_comment, $p
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	helper_call_custom_function( 'checkin', array( $p_issue_id, $p_comment, '', '', $p_fixed ) );
 
 	return true;
+}
+
+/**
+ * Returns the date in iso8601 format, with proper timezone offset applied
+ * 
+ * @param string $p_date the date in iso8601 format
+ * @return int the timestamp
+ */
+function mci_iso8601_to_timestamp( $p_date ) {
+	
+	// retrieve the offset, seems to be lost by nusoap
+	$t_utc_date = new DateTime( $p_date, new DateTimeZone( 'UTC' ) );
+	$t_timezone = new DateTimeZone( date_default_timezone_get() );
+	$t_offset = $t_timezone->getOffset( $t_utc_date ); 
+	
+	$t_raw_timestamp = iso8601_to_timestamp( $p_date );
+	
+	return $t_raw_timestamp - $t_offset;
+	
 }

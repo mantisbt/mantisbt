@@ -46,6 +46,8 @@ class IssueNoteTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$createdIssue = $this->client->mc_issue_get(
 			$this->userName,
@@ -85,11 +87,6 @@ class IssueNoteTest extends SoapBase {
 
 		$this->assertEquals( $t_today_date, $t_submited_date );
 		*/
-
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 
 	/**
@@ -110,6 +107,8 @@ class IssueNoteTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$createdIssue = $this->client->mc_issue_get(
 			$this->userName,
@@ -144,11 +143,6 @@ class IssueNoteTest extends SoapBase {
 			$issueId);
 
 		$this->assertFalse( isset( $issueWithNote->notes ) );
-
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 
 	/**
@@ -165,6 +159,8 @@ class IssueNoteTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );			
 
 		$createdIssue = $this->client->mc_issue_get(
 			$this->userName,
@@ -184,10 +180,5 @@ class IssueNoteTest extends SoapBase {
 			$this->assertTrue(false);
 		} catch ( SoapFault $e ) {
 		}
-
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 }

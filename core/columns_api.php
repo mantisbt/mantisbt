@@ -136,6 +136,19 @@ function columns_get_plugin_columns() {
 }
 
 /**
+ * Allow plugin columns to pre-cache data for a set of issues
+ * rather than requiring repeated queries for each issue.
+ * @param array Bug objects
+ */
+function columns_plugin_cache_issue_data( $p_bugs ) {
+	$t_columns = columns_get_plugin_columns();
+
+	foreach( $t_columns as $t_column_object ) {
+		$t_column_object->cache( $p_bugs );
+	}
+}
+
+/**
  * Get all accessible columns for the current project / current user..
  * @param int $p_project_id project id
  * @return array array of columns

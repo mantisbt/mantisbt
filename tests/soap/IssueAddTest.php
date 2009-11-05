@@ -41,6 +41,8 @@ class IssueAddTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$issueExists = $this->client->mc_issue_exists(
 			$this->userName,
@@ -95,10 +97,6 @@ class IssueAddTest extends SoapBase {
 		$this->assertEquals( 10, $issue->resolution->id );
 		$this->assertEquals( 'open', $issue->resolution->name );
 
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 
 	/**
@@ -115,6 +113,8 @@ class IssueAddTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$issue = $this->client->mc_issue_get(
 			$this->userName,
@@ -125,10 +125,6 @@ class IssueAddTest extends SoapBase {
 		$this->assertEquals( $issueToAdd['summary'], $issue->summary );
 		$this->assertEquals( $issueToAdd['description'], $issue->description );
 
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 
 	/**
@@ -154,6 +150,8 @@ class IssueAddTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$issue = $this->client->mc_issue_get(
 			$this->userName,
@@ -167,11 +165,6 @@ class IssueAddTest extends SoapBase {
 		$this->assertEquals( $issueToAdd['status']['id'], $issue->status->id );
 		$this->assertEquals( $issueToAdd['fixed_in_version'], $issue->fixed_in_version );
 		$this->assertEquals( $issueToAdd['target_version'], $issue->target_version );
-
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 
 	/**
@@ -198,6 +191,8 @@ class IssueAddTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$issue = $this->client->mc_issue_get(
 			$this->userName,
@@ -205,10 +200,90 @@ class IssueAddTest extends SoapBase {
 			$issueId);
 
 		$this->assertEquals( $adminUser->id, $issue->handler->id, 'handler.id' );
+	}
+	
+	/**
+	 * This issue tests the following
+	 * 
+	 * 1. Creating an issue with a due date
+	 * 2. Retrieving the issue
+	 * 3. Validating that the due date is properly set
+	 */
+	public function testCreateIssueWithDueDate() {
+		
+		$this->skipIfDueDateIsNotEnabled();
+		
+		$date = '2015-10-29T12:59:14Z';
+		
+		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithDueDate' );
+		
+		$issueToAdd['due_date'] = $date;
+		
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );			
 
-		$this->client->mc_issue_delete(
+		$issue = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
 			$issueId);
+			
+			
+		$this->assertEquals( $date, $issue->due_date, "due_date");
+	}
+	
+	/**
+	 * This issue tests the following
+	 * 
+	 * 1. Creating an issue without a due date
+	 * 2. Retrieving the issue
+	 * 3. Validating that the due date is properly encoded as null
+	 * 
+	 * This stricter verification originates in some SOAP frameworks, notably
+	 * Axis, not accepting the empty tag format sent by nusoap by default, which
+	 * is accepted by the PHP5 SOAP extension nevertheless.
+	 */
+	public function testCreateIssueWithNullDueDate() {
+		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithNullDueDate' );
+		
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );			
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+		
+		$this->assertNull( $issue->due_date , 'due_date is not null' );
+		$this->assertEquals( 'true', $this->readDueDate( $this->client->__getLastResponse() ) , 'xsi:nil not set to true' );
+	}
+	
+	/**
+	 * 
+	 * @param string $issueDataXml
+	 * @return string the xsi:null value
+	 */
+	private function readDueDate( $issueDataXml ) {
+		$reader = new XMLReader(); 
+		$reader->XML( $this->client->__getLastResponse());
+		
+		while ( $reader->read() ) {
+			switch ( $reader->nodeType ) {
+				
+				case XMLReader::ELEMENT:
+					if ( $reader->name == 'due_date') {
+						return $reader->getAttribute( 'xsi:nil' );
+					}
+					break;
+			}
+		}
+		return null;
 	}
 }

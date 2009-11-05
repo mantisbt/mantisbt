@@ -948,7 +948,8 @@
                 <term>$g_news_enabled</term>
                 <listitem>
                     <para>Indicates whether the news feature should be enabled or disabled.
-                        The default is ON.
+                        The default is OFF.  The news feature is deprecated in favor of
+                        being moved to a plugin.
                     </para>
                 </listitem>
             </varlistentry>
@@ -1486,7 +1487,7 @@
 	                by itself.
 		    </para>
                 </listitem>
-            <varlisentry>
+            </varlistentry>
         </variablelist>
 
     </section>
@@ -2174,7 +2175,8 @@
                 <term>$g_enable_project_documentation</term>
                 <listitem>
                     <para>Specifies whether to enable support for project documents or
-                        not. Default is ON.
+                        not. Default is OFF.  This feature is deprecated and is expected
+                        to be moved to a plugin in the future.
                     </para>
                 </listitem>
             </varlistentry>

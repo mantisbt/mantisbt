@@ -111,7 +111,8 @@
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <table id="buglist" class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="<?php echo $col_count - 2; ?>">
+	<td class="form-title" colspan="<?php echo $col_count; ?>">
+		<span class="floatleft">
 		<?php
 			# -- Viewing range info --
 
@@ -125,9 +126,9 @@
 
 			echo lang_get( 'viewing_bugs_title' );
 			echo " ($v_start - $v_end / $t_bug_count)";
-		?>
+		?> </span>
 
-		<span class="small"> <?php
+		<span class="floatleft small"> <?php
 				# -- Print and Export links --
 				print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
 				echo '&nbsp;';
@@ -149,10 +150,8 @@
 					}
 				}
 		?> </span>
-	</td>
 
-	<td class="right" colspan="2">
-		<span class="small"> <?php
+		<span class="floatright small"><?php
 			# -- Page number links --
 			$f_filter	= gpc_get_int( 'filter', 0);
 			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter );
@@ -179,6 +178,9 @@
 		global $t_columns, $t_filter;
 
 		$t_in_stickies = ( $t_filter && ( 'on' == $t_filter['sticky_issues'] ) );
+
+		# pre-cache custom column data
+		columns_plugin_cache_issue_data( $p_rows );
 
 		# -- Loop over bug rows --
 
@@ -219,7 +221,8 @@
 	# -- ====================== MASS BUG MANIPULATION =================== --
 ?>
 	<tr>
-		<td class="left" colspan="<?php echo $col_count-2; ?>">
+		<td class="left" colspan="<?php echo $col_count; ?>">
+			<span class="floatleft">
 <?php
 		if ( $t_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
 			echo "<input type=\"checkbox\" name=\"all_bugs\" value=\"all\" onclick=\"checkall('bug_action', this.form.all_bugs.checked)\" /><span class=\"small\">" . lang_get( 'select_all' ) . '</span>';
@@ -235,11 +238,8 @@
 		} else {
 			echo '&nbsp;';
 		}
-?>
-		</td>
-		<?php # -- Page number links -- ?>
-		<td class="right" colspan="2">
-			<span class="small">
+?>			</span>
+			<span class="floatright small">
 				<?php
 					$f_filter	= gpc_get_int( 'filter', 0);
 					print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter );

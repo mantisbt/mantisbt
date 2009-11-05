@@ -33,6 +33,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	protected $client;
 	protected $userName = 'administrator';
 	protected $password = 'root';
+	private   $issueIdsToDelete = array();
 
     protected function setUp()
     {
@@ -46,10 +47,21 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 		       $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
 		        array(  'trace'      => true,
 		                'exceptions' => true,
-		        		'cache_wsdl' => WSDL_CACHE_NONE
+		        		'cache_wsdl' => WSDL_CACHE_NONE,
+		        		'trace'      => true
 		             )
 		     
 		    );
+    }
+    
+    protected function tearDown() {
+    	
+    	foreach ( $this->issueIdsToDelete as $issueIdToDelete ) {
+    		$this->client->mc_issue_delete(
+    			$this->userName,
+    			$this->password,
+    			$issueIdToDelete);
+    	}
     }
 
     protected function getProjectId() {
@@ -66,5 +78,24 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 				'description' => 'description of test issue.',
 				'project' => array( 'id' => $this->getProjectId() ),
 				'category' => $this->getCategory() );
+	}
+	
+	/**
+	 * Registers an issue for deletion after the test method has run
+	 * 
+	 * @param int $issueId
+	 * @return void
+	 */
+	protected function deleteAfterRun( $issueId ) {
+		
+		$this->issueIdsToDelete[] = $issueId;
+	}
+	
+	protected function skipIfDueDateIsNotEnabled() {
+
+		if ( $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_view_threshold' ) > 90  ||
+			 $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_update_threshold' ) > 90 ) {
+			 	$this->markTestSkipped('Due date thresholds are too high.');
+			 }
 	}
 }

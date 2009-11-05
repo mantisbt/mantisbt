@@ -275,7 +275,8 @@ $l_oServer->wsdl->addComplexType(
 		'attachments'				=>	array( 'name' => 'attachments', 			'type' => 'tns:AttachmentDataArray', 	'minOccurs' => '0' ),
 		'relationships'				=>	array( 'name' => 'relationships',			'type' => 'tns:RelationshipDataArray', 	'minOccurs' => '0' ),
 		'notes'						=>	array( 'name' => 'notes',					'type' => 'tns:IssueNoteDataArray', 	'minOccurs' => '0' ),
-		'custom_fields'				=>  array( 'name' => 'custom_fields',			'type' => 'tns:CustomFieldValueForIssueDataArray', 	'minOccurs' => '0' )
+		'custom_fields'				=>  array( 'name' => 'custom_fields',			'type' => 'tns:CustomFieldValueForIssueDataArray', 	'minOccurs' => '0' ),
+		'due_date'					=>  array( 'name' => 'due_date',				'type' => 'xsd:dateTime', 	'minOccurs' => '0' )
 	)
 );
 

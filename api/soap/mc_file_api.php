@@ -133,7 +133,14 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 
 	return $t_attachment_id;
 }
-
+/**
+ * Returns the attachment contents
+ *  
+ * @param int $p_file_id 
+ * @param string $p_type The file type, bug or doc
+ * @param int $p_user_id 
+ * @return string|soap_fault the string contents, or a soap_fault
+ */
 function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 
 	# we handle the case where the file is attached to a bug
@@ -153,16 +160,21 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 				WHERE id='$p_file_id'";
 			break;
 		default:
-			return new soap_fault( 'Client', '', 'Access Denied' );
+			return new soap_fault( 'Server', '', 'Invalid file type '.$p_type. ' .' );
 	}
 
 	$result = db_query( $query );
+	
+	if ( $result->EOF ) {
+		return new soap_fault( 'Client', '', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
+	}
+	
 	$row = db_fetch_array( $result );
-
-	$t_bug_id = $row['bug_id'];
 
 	if ( $p_type == 'doc' ) {
 		$t_project_id = $row['project_id'];
+	} else if ( $p_type == 'bug' ) {
+		$t_bug_id = $row['bug_id'];
 	}
 
 	$t_diskfile = $row['diskfile'];
@@ -172,16 +184,16 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	switch( $p_type ) {
 		case 'bug':
 			if( !mci_file_can_download_bug_attachments( $t_bug_id, $p_user_id ) ) {
-				return new soap_fault( 'Client', '', 'Access Denied' );
+				return mci_soap_fault_access_denied( $t_user_id );
 			}
 			break;
 		case 'doc':
 			# Check if project documentation feature is enabled.
 			if( OFF == config_get( 'enable_project_documentation' ) ) {
-				return new soap_fault( 'Client', '', 'Access Denied' );
+				return mci_soap_fault_access_denied( $t_user_id );
 			}
 			if( !access_has_project_level( config_get( 'view_proj_doc_threshold' ), $t_project_id, $p_user_id ) ) {
-				return new soap_fault( 'Client', '', 'Access Denied' );
+				return mci_soap_fault_access_denied( $t_user_id );
 			}
 			break;
 	}
@@ -190,20 +202,20 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	switch( config_get( 'file_upload_method' ) ) {
 		case DISK:
 			if( file_exists( $t_diskfile ) ) {
-				return base64_encode( mci_file_read_local( $t_diskfile ) );
+				return mci_file_read_local( $t_diskfile ) ;
 			} else {
-				return null;
+				return new soap_fault(  'Client', '', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
 			}
 		case FTP:
 			if( file_exists( $t_diskfile ) ) {
-				return base64_encode( mci_file_read_local( $t_diskfile ) );
+				return mci_file_read_local( $t_diskfile );
 			} else {
 				$ftp = file_ftp_connect();
 				file_ftp_get( $ftp, $t_diskfile, $t_diskfile );
 				file_ftp_disconnect( $ftp );
-				return base64_encode( mci_file_read_local( $t_diskfile ) );
+				return mci_file_read_local( $t_diskfile );
 			}
 		default:
-			return base64_encode( $t_content );
+			return $t_content;
 	}
 }

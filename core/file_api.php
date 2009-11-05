@@ -200,16 +200,18 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 
 	$t_expected_file_path = '';
 
-	$t_path = project_get_field( $p_project_id, 'file_path' );
-	if ( !is_blank( $t_path ) ) {
-		$t_diskfile = file_path_combine( $t_path, $t_basename );
+	if ( $p_project_id != ALL_PROJECTS ) {
+		$t_path = project_get_field( $p_project_id, 'file_path' );
+		if ( !is_blank( $t_path ) ) {
+			$t_diskfile = file_path_combine( $t_path, $t_basename );
 
-		if ( file_exists( $t_diskfile ) ) {
-			return $t_diskfile;
+			if ( file_exists( $t_diskfile ) ) {
+				return $t_diskfile;
+			}
+
+			// if we don't find the file, then this is the path we want to return.
+			$t_expected_file_path = $t_diskfile;
 		}
-
-		// if we don't find the file, then this is the path we want to return.
-		$t_expected_file_path = $t_diskfile;
 	}
 
 	$t_path = config_get( 'absolute_path_default_upload_folder' );

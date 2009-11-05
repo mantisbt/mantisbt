@@ -41,6 +41,8 @@ class IssueUpdateTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$createdIssue = $this->client->mc_issue_get(
 			$this->userName,
@@ -91,11 +93,6 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 'none', $issue->eta->name );
 		$this->assertEquals( 10, $issue->resolution->id );
 		$this->assertEquals( 'open', $issue->resolution->name );
-
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 
 	/**
@@ -111,6 +108,8 @@ class IssueUpdateTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$issueToUpdate = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateSummaryBasedOnMandatoryFields' );
 
@@ -153,11 +152,6 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 'none', $issue->eta->name );
 		$this->assertEquals( 10, $issue->resolution->id );
 		$this->assertEquals( 'open', $issue->resolution->name );
-
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 
 	/**
@@ -175,6 +169,8 @@ class IssueUpdateTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$createdIssue = $this->client->mc_issue_get(
 			$this->userName,
@@ -226,11 +222,6 @@ class IssueUpdateTest extends SoapBase {
 			$issueId);
 
 		$this->assertEquals( 2, count( $issueWithTwoNotes->notes ) );
-
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
 	}
 	
 	/**
@@ -256,6 +247,8 @@ class IssueUpdateTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$issue = $this->client->mc_issue_get(
 			$this->userName,
@@ -276,10 +269,49 @@ class IssueUpdateTest extends SoapBase {
 			$issueId);
 
 		$this->assertEquals( $adminUser->id, $updatedIssue->handler->id, 'handler.id' );
+	}
+	
+	/**
+	 * This issue tests the following
+	 * 
+	 * 1. Creating an issue
+	 * 2. Retrieving the issue
+	 * 3. Updating the issue with a new date
+	 * 4. Re-retrieving the issue
+	 * 5. Validating the value of the due date
+	 */
+	public function testUpdateIssueDueDate() {
+		$this->skipIfDueDateIsNotEnabled();
+		
+		$date = '2015-10-29T12:59:14Z';
 
-		$this->client->mc_issue_delete(
+		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateIssueDueDate' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
+
+		$issue = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
 			$issueId);
+			
+		$issue->due_date = $date;
+		
+		$this->client->mc_issue_update(
+			$this->userName,
+			$this->password,
+			$issueId,
+			$issue);
+		
+		$updatedIssue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		$this->assertEquals( $date, $updatedIssue->due_date, "due_date");
 	}
 }
