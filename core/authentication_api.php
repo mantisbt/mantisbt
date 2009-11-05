@@ -673,7 +673,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 	}
 	?>
 </p>
-<form method="post" action="<?php echo string_sanitize_url( $_SERVER['SCRIPT_NAME'] );?>">
+<form name="reauth_form" method="post" action="<?php echo string_sanitize_url( $_SERVER['SCRIPT_NAME'] );?>">
 <?php
 	# CSRF protection not required here - user needs to enter password
 	# (confirmation step) before the form is accepted.
@@ -705,6 +705,15 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 
 </form>
 </div>
+
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+<!-- Autofocus JS -->
+<script type="text/javascript" language="JavaScript">
+<!--
+	window.document.reauth_form.password.focus();
+// -->
+</script>
+<?php } ?>
 
 		<?php
 		html_page_bottom();
