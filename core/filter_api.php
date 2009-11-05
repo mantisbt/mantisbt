@@ -459,7 +459,7 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 		$p_filter_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED] = config_get( 'default_show_changed' );
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_SHOW_STICKY_ISSUES] = config_get( 'show_sticky_issues' );
+		$p_filter_arr[FILTER_PROPERTY_SHOW_STICKY_ISSUES] = gpc_string_to_bool( config_get( 'show_sticky_issues' ) );
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = "last_updated";
@@ -899,7 +899,7 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 	$t_sort_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
 	$t_dir_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_DIRECTION] );
 
-	if(( 'on' == $p_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) && ( NULL !== $p_show_sticky ) ) {
+	if ( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) && ( NULL !== $p_show_sticky ) ) {
 		$p_query_clauses['order'][] = "sticky DESC";
 	}
 
@@ -3722,7 +3722,7 @@ function print_filter_view_state() {
 function print_filter_sticky_issues() {
 	global $t_filter;
 	?><!-- Show or hide sticky bugs -->
-			<input type="checkbox" name="<?php echo FILTER_PROPERTY_SHOW_STICKY_ISSUES;?>" <?php check_checked( gpc_string_to_bool( $t_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ), 'on' );?> />
+			<input type="checkbox" name="<?php echo FILTER_PROPERTY_SHOW_STICKY_ISSUES;?>" <?php check_checked( gpc_string_to_bool( $t_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ), true );?> />
 		<?php
 }
 
