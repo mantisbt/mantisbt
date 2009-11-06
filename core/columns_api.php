@@ -854,8 +854,15 @@ function print_column_selection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @access public
  */
-function print_column_title_plugin( $p_column_object, $p_sort, $p_dir, $p_columns_target=COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td>', string_display_line( $p_column_object->title ), '</td>';
+function print_column_title_plugin( $p_column, $p_column_object, $p_sort, $p_dir, $p_columns_target=COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<td>';
+	if ( $p_column_object->sortable ) {
+		print_view_bug_sort_link( string_display_line( $p_column_object->title ), $p_column, $p_sort, $p_dir, $p_columns_target );
+		print_sort_icon( $p_dir, $p_sort, $p_column );
+	} else {
+		echo string_display_line( $p_column_object->title );
+	}
+	echo '</td>';
 }
 
 /**
