@@ -62,8 +62,7 @@ abstract class MantisFilter {
 
 	/**
 	 * Build the SQL query elements 'join', 'where', and 'params'
-	 * as used by core/filter_api.php to create the primary filter
-	 * query.
+	 * as used by core/filter_api.php to create the filter query.
 	 * @param multi Filter field input
 	 * @return array Keyed-array with query elements; see developer guide
 	 */

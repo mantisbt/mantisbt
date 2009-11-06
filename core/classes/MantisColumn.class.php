@@ -35,6 +35,20 @@ abstract class MantisColumn {
 	public $column = null;
 
 	/**
+	 * Column is sortable by the user.  Setting this to true implies that
+	 * the column will properly implement the sortquery() method.
+	 */
+	public $sortable = false;
+
+	/**
+	 * Build the SQL query elements 'join' and 'order' as used by
+	 * core/filter_api.php to create the filter sorting query.
+	 * @param string Sorting order ('ASC' or 'DESC')
+	 * @return array Keyed-array with query elements; see developer guide
+	 */
+	public function sortquery( $p_dir ) {}
+
+	/**
 	 * Allow plugin columns to pre-cache data for all issues
 	 * that will be shown in a given view.  This is preferable to
 	 * the alternative option of querying the database for each
@@ -48,6 +62,6 @@ abstract class MantisColumn {
 	 * @param object Bug object
 	 * @param int Column display target
 	 */
-	abstract function display( $p_bug, $p_columns_target );
+	abstract public function display( $p_bug, $p_columns_target );
 }
 
