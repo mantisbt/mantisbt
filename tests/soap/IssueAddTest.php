@@ -266,6 +266,36 @@ class IssueAddTest extends SoapBase {
 	}
 	
 	/**
+	 * This issue tests the following
+	 * 
+	 * 1. Creating an issue with no category
+	 * 2. Retrieving the issue
+	 * 3. Verifying that the category is empty.
+	 * 
+	 */
+	public function testCreateBugWithNoCategory() {
+		$this->skipIfAllowNoCategoryIsDisabled();
+		
+		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateBugWithNoCategory' );
+		unset ( $issueToAdd['category'] );
+		
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );	
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+			
+		$this->assertEquals( '', $issue->category, 'category' );
+		
+	}
+	
+	/**
 	 * 
 	 * @param string $issueDataXml
 	 * @return string the xsi:null value
