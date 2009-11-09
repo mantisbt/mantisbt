@@ -53,6 +53,80 @@ class FilterTest extends SoapBase {
 		$this->assertEquals( 1, count( $projectIssues ) - count( $initialIssues ), "count(projectIssues) - count(initialIssues)");
 		$this->assertEquals( $issueId, $projectIssues[0]->id, "issueId");
 	}
+	
+	/**
+	 * A test case that tests the following:
+	 * 1. Retrieving all the project's issue headers
+	 * 2. Creating an issue
+	 * 3. Retrieving all the project's issue headers
+	 * 4. Verifying that one extra issue is found in the results
+	 * 5. Verifying that the first returned issue is the one we have submitted
+	 */
+	public function testGetProjectIssueHeaders() {
+
+		$initialIssues = $this->getProjectIssueHeaders();
+
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.getProjectIssues' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
+
+		$projectIssues = $this->getProjectIssueHeaders();
+
+		$this->assertEquals( 1, count( $projectIssues ) - count( $initialIssues ), "count(projectIssues) - count(initialIssues)" );
+		$this->assertEquals( $issueId, $projectIssues[0]->id, "issueId" );
+	}
+	
+	/**
+	 * A test case that tests the following:
+	 * 1. Retrieving all the project's issue headers
+	 * 2. Creating an issue
+	 * 3. Retrieving the issue
+	 * 4. Creating 3 notes for that issue
+	 * 5. Retrieving all the project's issue headers
+	 * 7. Verifying that the first returned issue has 3 notes
+	 */
+	public function testGetProjectIssueHeadersCountNotes() {
+
+		$initialIssues = $this->getProjectIssueHeaders();
+
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.getProjectIssues' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
+		
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+		
+		$note = array(
+			'text' => 'Note text.'
+		);
+		
+		$noteCount = 3;
+		
+		for ( $i = 0 ; $i < $noteCount ; $i++) {
+			$this->client->mc_issue_note_add(
+				$this->userName,
+				$this->password,
+				$issueId,
+				$note);
+		}
+		
+		$projectIssues = $this->getProjectIssueHeaders();
+
+		$this->assertEquals( 3, $projectIssues[0]->notes_count, "notes_count" );
+	}
+	
 
 	/**
 	 * A test case that tests the following:
@@ -88,6 +162,20 @@ class FilterTest extends SoapBase {
 	private function getProjectIssues() {
 
 		return $this->client->mc_project_get_issues(
+			$this->userName,
+			$this->password,
+			$this->getProjectId(),
+			0,
+			50);
+	}
+	
+	/**
+	 *
+	 * @return Array the project issues
+	 */
+	private function getProjectIssueHeaders() {
+
+		return $this->client->mc_project_get_issue_headers(
 			$this->userName,
 			$this->password,
 			$this->getProjectId(),

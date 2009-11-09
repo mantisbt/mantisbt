@@ -738,8 +738,8 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 		}
 		$t_issue['resolution'] = $t_issue_data->resolution;
 
-		$t_issue['attachments_count'] = count( mci_issue_get_attachments( $t_issue_data['id'] ) );
-		$t_issue['notes_count'] = count( mci_issue_get_notes( $t_issue_data['id'] ) );
+		$t_issue['attachments_count'] = count( mci_issue_get_attachments( $t_issue_data->id ) );
+		$t_issue['notes_count'] = count( mci_issue_get_notes( $t_issue_data->id ) );
 
 		$t_result[] = $t_issue;
 	}
