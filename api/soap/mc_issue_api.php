@@ -69,7 +69,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['last_updated'] = timestamp_to_iso8601( $t_bug->last_updated );
 
 	$t_issue_data['project'] = mci_project_as_array_by_id( $t_bug->project_id );
-	$t_issue_data['category'] = mci_null_if_empty( category_get_name( $t_bug->category_id ) );
+	$t_issue_data['category'] = mci_get_category( $t_bug->category_id );
 	$t_issue_data['priority'] = mci_enum_get_array_by_id( $t_bug->priority, 'priority', $t_lang );
 	$t_issue_data['severity'] = mci_enum_get_array_by_id( $t_bug->severity, 'severity', $t_lang );
 	$t_issue_data['status'] = mci_enum_get_array_by_id( $t_bug->status, 'status', $t_lang );
@@ -108,6 +108,19 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
 	
 	return $t_issue_data;
+}
+
+/**
+ * Returns the category name, possibly null if no category is assigned
+ * 
+ * @param int $p_category_id
+ * @return string 
+ */
+function mci_get_category( $p_category_id ) {
+	if ( $p_category_id == 0 )
+		return '';
+		
+	return mci_null_if_empty( category_get_name( $p_category_id ) );
 }
 
 /**
@@ -480,7 +493,9 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		return new soap_fault( 'Client', '', "User '$t_handler_id' does not exist." );
 	}
 
-	$t_category_id = translate_category_name_to_id( $p_issue['category'], $t_project_id );
+	$t_category = isset ( $p_issue['category'] ) ? $p_issue['category'] : null;
+	
+	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if ( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if ( !isset( $p_issue['category'] ) || is_blank( $p_issue['category'] ) ) {
 			return new soap_fault( 'Client', '', "Category field must be supplied." );
@@ -637,7 +652,9 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		return new soap_fault( 'Client', '', "User '$t_handler_id' does not exist." );
 	}
 
-	$t_category_id = translate_category_name_to_id( $p_issue['category'], $t_project_id );
+	$t_category = isset ( $p_issue['category'] ) ? $p_issue['category'] : null;
+	
+	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if ( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if ( isset( $p_issue['category'] ) && !is_blank( $p_issue['category'] ) ) {
 			return new soap_fault( 'Client', '', "Category field must be supplied." );

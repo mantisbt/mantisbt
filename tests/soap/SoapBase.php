@@ -98,4 +98,10 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 			 	$this->markTestSkipped('Due date thresholds are too high.');
 			 }
 	}
+	
+	protected function skipIfAllowNoCategoryIsDisabled() {
+		if ( $this->client->mc_config_get_string($this->userName, $this->password, 'allow_no_category' ) != true ) {
+			$this->markTestSkipped( 'g_allow_no_category is not ON.' );
+		}
+	}
 }
