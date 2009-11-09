@@ -1305,7 +1305,7 @@ function email_format_bug_message( $p_visible_bug_data ) {
 		}
 
 		if( user_exists( $t_bugnote->reporter_id ) ) {
-			$t_access_level = access_get_project_level( null, $t_bugnote->reporter_id );
+			$t_access_level = access_get_project_level( $p_visible_bug_data['email_project_id'] , $t_bugnote->reporter_id );
 			$t_access_level_string = ' (' . get_enum_element( 'access_levels', $t_access_level ) . ') - ';
 		} else {
 			$t_access_level_string = '';
@@ -1385,6 +1385,7 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 	}
 
 	$t_bug_data['email_reporter'] = user_get_name( $row['reporter_id'] );
+	$t_bug_data['email_project_id'] = $row['project_id'];
 	$t_bug_data['email_project'] = project_get_field( $row['project_id'], 'name' );
 
 	$t_category_name = category_full_name( $row['category_id'], false );
