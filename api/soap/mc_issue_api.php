@@ -222,13 +222,11 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 function mci_issue_get_attachments( $p_issue_id ) {
 	$t_attachment_rows = bug_get_attachments( $p_issue_id );
 	
-	if ( $t_attachment_rows === false) {
-		return null;
+	if ( $t_attachment_rows == null) {
+		return array();
 	}
 	
-	
 	$t_result = array();
-
 	foreach( $t_attachment_rows as $t_attachment_row ) {
 		$t_attachment = array();
 		$t_attachment['id'] = $t_attachment_row['id'];
@@ -240,7 +238,7 @@ function mci_issue_get_attachments( $p_issue_id ) {
 		$t_result[] = $t_attachment;
 	}
 
-	return (count( $t_result ) == 0 ? null : $t_result );
+	return $t_result;
 }
 
 /**
