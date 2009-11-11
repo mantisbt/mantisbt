@@ -271,7 +271,7 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 
 		} else if ( isset( $t_plugin_columns[ $p_column ] ) ) {
 			$t_column_object = $t_plugin_columns[ $p_column ];
-			print_column_title_plugin( $t_column_object, $t_sort, $t_dir, $p_columns_target );
+			print_column_title_plugin( $p_column, $t_column_object, $t_sort, $t_dir, $p_columns_target );
 
 		} else {
 			echo '<td>';

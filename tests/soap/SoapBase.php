@@ -47,7 +47,8 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 		       $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
 		        array(  'trace'      => true,
 		                'exceptions' => true,
-		        		'cache_wsdl' => WSDL_CACHE_NONE
+		        		'cache_wsdl' => WSDL_CACHE_NONE,
+		        		'trace'      => true
 		             )
 		     
 		    );
@@ -96,5 +97,11 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 			 $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_update_threshold' ) > 90 ) {
 			 	$this->markTestSkipped('Due date thresholds are too high.');
 			 }
+	}
+	
+	protected function skipIfAllowNoCategoryIsDisabled() {
+		if ( $this->client->mc_config_get_string($this->userName, $this->password, 'allow_no_category' ) != true ) {
+			$this->markTestSkipped( 'g_allow_no_category is not ON.' );
+		}
 	}
 }

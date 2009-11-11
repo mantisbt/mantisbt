@@ -69,7 +69,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['last_updated'] = timestamp_to_iso8601( $t_bug->last_updated );
 
 	$t_issue_data['project'] = mci_project_as_array_by_id( $t_bug->project_id );
-	$t_issue_data['category'] = mci_null_if_empty( category_get_name( $t_bug->category_id ) );
+	$t_issue_data['category'] = mci_get_category( $t_bug->category_id );
 	$t_issue_data['priority'] = mci_enum_get_array_by_id( $t_bug->priority, 'priority', $t_lang );
 	$t_issue_data['severity'] = mci_enum_get_array_by_id( $t_bug->severity, 'severity', $t_lang );
 	$t_issue_data['status'] = mci_enum_get_array_by_id( $t_bug->status, 'status', $t_lang );
@@ -96,6 +96,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['resolution'] = mci_enum_get_array_by_id( $t_bug->resolution, 'resolution', $t_lang );
 	$t_issue_data['fixed_in_version'] = mci_null_if_empty( $t_bug->fixed_in_version );
 	$t_issue_data['target_version'] = mci_null_if_empty( $t_bug->target_version );
+	$t_issue_data['due_date'] = mci_issue_get_due_date( $t_bug );
 
 	$t_issue_data['description'] = $t_bug->description;
 	$t_issue_data['steps_to_reproduce'] = mci_null_if_empty( $t_bug->steps_to_reproduce );
@@ -106,12 +107,34 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['notes'] = mci_issue_get_notes( $p_issue_id );
 	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
 	
-	if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_issue_id )  && !date_is_null( $t_bug->due_date ) ) {
-		$t_issue_data['due_date'] = timestamp_to_iso8601( $t_bug->due_date );
-	} else {
-		$t_issue_data['due_date'] = '';
-	}
 	return $t_issue_data;
+}
+
+/**
+ * Returns the category name, possibly null if no category is assigned
+ * 
+ * @param int $p_category_id
+ * @return string 
+ */
+function mci_get_category( $p_category_id ) {
+	if ( $p_category_id == 0 )
+		return '';
+		
+	return mci_null_if_empty( category_get_name( $p_category_id ) );
+}
+
+/**
+ * 
+ * @param BugData $bug
+ * @return soapval the value to be encoded as the due date
+ */
+function mci_issue_get_due_date( $p_bug ) {
+	if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id )  && !date_is_null( $p_bug->due_date ) ) {
+		return new soapval( 'due_date', 'xsd:dateTime', timestamp_to_iso8601( $p_bug->due_date ) );
+	} else {
+		return new soapval( 'due_date','xsd:dateTime', null );
+	}
+	
 }
 
 /**
@@ -198,8 +221,12 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
  */
 function mci_issue_get_attachments( $p_issue_id ) {
 	$t_attachment_rows = bug_get_attachments( $p_issue_id );
+	
+	if ( $t_attachment_rows == null) {
+		return array();
+	}
+	
 	$t_result = array();
-
 	foreach( $t_attachment_rows as $t_attachment_row ) {
 		$t_attachment = array();
 		$t_attachment['id'] = $t_attachment_row['id'];
@@ -211,7 +238,7 @@ function mci_issue_get_attachments( $p_issue_id ) {
 		$t_result[] = $t_attachment;
 	}
 
-	return (count( $t_result ) == 0 ? null : $t_result );
+	return $t_result;
 }
 
 /**
@@ -470,7 +497,9 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		return new soap_fault( 'Client', '', "User '$t_handler_id' does not exist." );
 	}
 
-	$t_category_id = translate_category_name_to_id( $p_issue['category'], $t_project_id );
+	$t_category = isset ( $p_issue['category'] ) ? $p_issue['category'] : null;
+	
+	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if ( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if ( !isset( $p_issue['category'] ) || is_blank( $p_issue['category'] ) ) {
 			return new soap_fault( 'Client', '', "Category field must be supplied." );
@@ -627,7 +656,9 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		return new soap_fault( 'Client', '', "User '$t_handler_id' does not exist." );
 	}
 
-	$t_category_id = translate_category_name_to_id( $p_issue['category'], $t_project_id );
+	$t_category = isset ( $p_issue['category'] ) ? $p_issue['category'] : null;
+	
+	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if ( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if ( isset( $p_issue['category'] ) && !is_blank( $p_issue['category'] ) ) {
 			return new soap_fault( 'Client', '', "Category field must be supplied." );

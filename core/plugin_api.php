@@ -861,7 +861,7 @@ function plugin_init( $p_basename ) {
 		# registered, but not yet initialized.
 		if( is_array( $t_plugin->uses ) ) {
 			foreach( $t_plugin->uses as $t_used => $t_version ) {
-				if ( $g_plugin_cache[ $t_used ] && !$g_plugin_cache_init[ $t_used ] ) {
+				if ( isset( $g_plugin_cache[ $t_used ] ) && !isset( $g_plugin_cache_init[ $t_used ] ) ) {
 					return false;
 				}
 			}

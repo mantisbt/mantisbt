@@ -459,7 +459,7 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 		$p_filter_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED] = config_get( 'default_show_changed' );
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_SHOW_STICKY_ISSUES] = config_get( 'show_sticky_issues' );
+		$p_filter_arr[FILTER_PROPERTY_SHOW_STICKY_ISSUES] = gpc_string_to_bool( config_get( 'show_sticky_issues' ) );
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = "last_updated";
@@ -899,7 +899,9 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 	$t_sort_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
 	$t_dir_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_DIRECTION] );
 
-	if(( 'on' == $p_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) && ( NULL !== $p_show_sticky ) ) {
+	$t_plugin_columns = columns_get_plugin_columns();
+
+	if ( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) && ( NULL !== $p_show_sticky ) ) {
 		$p_query_clauses['order'][] = "sticky DESC";
 	}
 
@@ -926,6 +928,25 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 				}
 
 				$p_query_clauses['order'][] = $c_cf_alias . ' ' . $c_dir;
+
+			# if sorting by plugin columns
+			} else if ( isset( $t_plugin_columns[ $t_sort_fields[$i] ] ) ) {
+				$t_column_object = $t_plugin_columns[ $t_sort_fields[$i] ];
+
+				if ( $t_column_object->sortable ) {
+					$t_clauses = $t_column_object->sortquery( $c_dir );
+
+					if ( is_array( $t_clauses ) ) {
+						if ( isset( $t_clauses['join'] ) ) {
+							$p_query_clauses['join'][] = $t_clauses['join'];
+						}
+						if ( isset( $t_clauses['order'] ) ) {
+							$p_query_clauses['order'][] = $t_clauses['order'];
+						}
+					}
+				}
+
+			# standard column
 			} else {
 				if ( 'last_updated' == $c_sort ) {
 					$c_sort = "$t_bug_table.last_updated";
@@ -3722,7 +3743,7 @@ function print_filter_view_state() {
 function print_filter_sticky_issues() {
 	global $t_filter;
 	?><!-- Show or hide sticky bugs -->
-			<input type="checkbox" name="<?php echo FILTER_PROPERTY_SHOW_STICKY_ISSUES;?>" <?php check_checked( gpc_string_to_bool( $t_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ), 'on' );?> />
+			<input type="checkbox" name="<?php echo FILTER_PROPERTY_SHOW_STICKY_ISSUES;?>" <?php check_checked( gpc_string_to_bool( $t_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ), true );?> />
 		<?php
 }
 

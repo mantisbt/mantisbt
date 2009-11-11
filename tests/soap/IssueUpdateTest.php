@@ -281,10 +281,9 @@ class IssueUpdateTest extends SoapBase {
 	 * 5. Validating the value of the due date
 	 */
 	public function testUpdateIssueDueDate() {
+		$this->skipIfDueDateIsNotEnabled();
 		
 		$date = '2015-10-29T12:59:14Z';
-		
-		$this->skipIfDueDateIsNotEnabled();
 
 		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateIssueDueDate' );
 
@@ -315,4 +314,46 @@ class IssueUpdateTest extends SoapBase {
 
 		$this->assertEquals( $date, $updatedIssue->due_date, "due_date");
 	}
+	
+	/**
+	 * This issue tests the following
+	 * 
+	 * 1. Creating an issue with no category
+	 * 2. Updating the issue to unset the category
+	 * 3. Retrieving the issue
+	 * 4. Verifying that the category is empty.
+	 */
+	public function testUpdateBugWithNoCategory() {
+		$this->skipIfAllowNoCategoryIsDisabled();
+		
+		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateBugWithNoCategory' );
+		
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );	
+		
+		$issueToUpdate = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+			
+		unset ( $issueToUpdate->category );
+		
+		$this->client->mc_issue_update(
+			$this->userName,
+			$this->password,
+			$issueId,
+			$issueToUpdate);
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+			
+		$this->assertEquals( '', $issue->category, 'category' );
+		
+	}	
 }
