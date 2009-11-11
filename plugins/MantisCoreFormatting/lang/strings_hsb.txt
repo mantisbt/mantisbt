@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Ripoarisch (Ripoarisch)
+/** Upper Sorbian (Hornjoserbsce)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,17 +26,16 @@
  * @ingroup Language
  * @file
  *
- * @author Purodha
+ * @author Michawiki
  */
 
-$s_plugin_format_title = 'MantisBT Fommatteeerung';
-$s_plugin_format_description = 'Dat offizjälle Zohsatzprojramm zom enshtöpselle för de Täx ze beärbeide un ze fommatteeere';
-$s_plugin_format_config = 'Enshtellunge';
-$s_plugin_format_process_text = 'Et Täx Beärrbeejde';
-$s_plugin_format_process_text_warning_notice = 'Donn dat nit affschallde, ußer De weijß jenou, wat De määß.
-Wann dat ußjeschalldt es, wääde och Anjreffe met XSS (<i lang="en">cross site scripting</i> müjjelesch, di mer nommaal op keijne Fall han well.';
-$s_plugin_format_process_urls = 'Et <i lang="en">URL</i> Beärrbeejde';
-$s_plugin_format_process_buglinks = 'MantisBT Lenks (Aanjelääjeheit/Notiz)';
-$s_plugin_format_process_vcslinks = '<i lang="en">VCS</i> Lengks';
-$s_plugin_format_enabled = 'Aanjeschalldt';
-$s_plugin_format_disabled = 'Ußjeschalldt';
+$s_plugin_format_title = 'MantisBT formatowanje';
+$s_plugin_format_description = 'Oficielny tykač za tekstowe předźěłowanje a formatowanje.';
+$s_plugin_format_config = 'Konfiguracija';
+$s_plugin_format_process_text = 'Tekstowe předźěłowanje';
+$s_plugin_format_process_text_warning_notice = 'Njewupiń, chibazo woprawdźe wěš, štož činiš. We wupinjenym stawje su nadpady cross site scripting (XSS) móžne.';
+$s_plugin_format_process_urls = 'Předźěłowanje URL';
+$s_plugin_format_process_buglinks = 'Wotkazy MantisBT (Problem/Problemowa zdźělenka)';
+$s_plugin_format_process_vcslinks = 'Wotkazy VCS';
+$s_plugin_format_enabled = 'Zapinjeny';
+$s_plugin_format_disabled = 'Wupinjeny';

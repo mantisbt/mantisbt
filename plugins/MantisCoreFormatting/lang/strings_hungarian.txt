@@ -26,6 +26,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Dani
  * @author Glanthor Reviol
  */
 
@@ -33,6 +34,7 @@ $s_plugin_format_title = 'MantisBT formázás';
 $s_plugin_format_description = 'Hivatalos szövegfeldolgozó és formázó plugin.';
 $s_plugin_format_config = 'Beállítás';
 $s_plugin_format_process_text = 'Szövegfeldolgozás';
+$s_plugin_format_process_text_warning_notice = 'Ne kapcsold ki, hacsak tényleg nem tudod, mit is csinálsz. Kikapcsolt állapotban lehetségesek webhelyközi (cross site scripting, XSS) támadások.';
 $s_plugin_format_process_urls = 'URL-feldolgozás';
 $s_plugin_format_process_buglinks = 'MantisBT hivatkozások (ügy/ügyfeljegyzés)';
 $s_plugin_format_process_vcslinks = 'VCS hivatkozások';

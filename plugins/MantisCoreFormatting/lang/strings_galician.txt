@@ -33,6 +33,7 @@ $s_plugin_format_title = 'Formato de MantisBT';
 $s_plugin_format_description = 'Texto oficial do complemento de procesamento e formato.';
 $s_plugin_format_config = 'Configuración';
 $s_plugin_format_process_text = 'Procesamento de texto';
+$s_plugin_format_process_text_warning_notice = 'Non desactive isto a menos que realmente saiba o que está a facer. No estado desactivado, é posible que haxa ataques á escritura (XSS) da páxina.';
 $s_plugin_format_process_urls = 'Procesamento de URL';
 $s_plugin_format_process_buglinks = 'Ligazóns de MantisBT (problema/notas do problema)';
 $s_plugin_format_process_vcslinks = 'Ligazóns VCS';

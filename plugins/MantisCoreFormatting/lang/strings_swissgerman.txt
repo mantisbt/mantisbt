@@ -33,6 +33,7 @@ $s_plugin_format_title = 'MantisBT Formatierig';
 $s_plugin_format_description = 'Offiziäll Tekschtverarbeitigs- un formatierigs-Plugin.';
 $s_plugin_format_config = 'Konfigurierig';
 $s_plugin_format_process_text = 'Tekschtverarbeitig';
+$s_plugin_format_process_text_warning_notice = 'Deinschtallier nume, wänn du gnau weisch, was Du machsch. Im deinschtallierte Zuestand sin Aagriff megli mit Cross-Site Scripting (XSS).';
 $s_plugin_format_process_urls = 'URL-Verarbeitig';
 $s_plugin_format_process_buglinks = 'MantisBt-Links (Probläm/Problämnotiz)';
 $s_plugin_format_process_vcslinks = 'VCS-Links';
