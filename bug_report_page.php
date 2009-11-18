@@ -89,6 +89,7 @@
 		$f_steps_to_reproduce	= $t_bug->steps_to_reproduce;
 		$f_additional_info		= $t_bug->additional_information;
 		$f_view_state			= $t_bug->view_state;
+		$f_due_date				= $t_bug->due_date;
 
 		$t_project_id			= $t_bug->project_id;
 	} else {
