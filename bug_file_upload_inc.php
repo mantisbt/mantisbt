@@ -51,7 +51,9 @@
 <tr class="row-1">
 	<td class="category" width="15%">
 		<?php echo lang_get( 'select_file' ) ?><br />
-		<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
+		<?php
+			// FIXME: hard coded "k" in here.
+			echo '<span class="small">(' . lang_get( 'max_file_size_label' ) . lang_get( 'word_separator' ) . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
 	</td>
 	<td width="85%">
 		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />

@@ -301,8 +301,10 @@
 
 		echo '<div align="center"><br />';
 		echo '<table class="width75">';
+		$separator = lang_get( 'word_separator' );
 		foreach( $t_failed_ids as $t_id => $t_reason ) {
-			printf( "<tr><td width=\"50%%\">%s: %s</td><td>%s</td></tr>\n", string_get_bug_view_link( $t_id ), bug_get_field( $t_id, 'summary' ), $t_reason );
+			$label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $separator;
+			printf( "<tr><td width=\"50%%\">%s%s</td><td>%s</td></tr>\n", $label, bug_get_field( $t_id, 'summary' ), $t_reason );
 		}
 		echo '</table><br />';
 		print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );

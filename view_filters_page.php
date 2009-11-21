@@ -417,7 +417,7 @@ if ( 'simple' == $f_view_type ) {
 
 <tr class="row-1">
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>" valign="top">
-		<?php echo lang_get( 'sort' ) ?>:
+		<?php echo lang_get( 'sort_label' ) ?>
 	</td>
 	<td valign="top" colspan="<?php echo ( ( $t_filter_cols - 1 - $t_project_cols ) * $t_custom_cols ); ?>">
 		<?php
@@ -428,7 +428,7 @@ if ( 'simple' == $f_view_type ) {
 		if ( 'advanced' == $f_view_type ) {
 	?>
 			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>" valign="top">
-				<?php echo lang_get( 'email_project' ) ?>:
+				<?php echo lang_get( 'email_project_label' ) ?>
 			</td>
 			<td valign="top" colspan="<?php echo( 2 * $t_custom_cols ); ?>">
 				<?php

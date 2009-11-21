@@ -102,7 +102,7 @@ if ( !config_get('time_tracking_enabled') )
 <?php if ( $t_cost_col ) { ?>
 <tr class="row-1">
 	<td>
-		<?php echo lang_get( 'time_tracking_cost' ) ?>:
+		<?php echo lang_get( 'time_tracking_cost_label' ) ?>
 		<input type="text" name="bugnote_cost" value="<?php echo $f_bugnote_cost ?>" />
 	</td>
 </tr>
@@ -153,7 +153,7 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 
 		$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
 		if ( $t_item['bug_id'] != $t_prev_id) {
-			$t_link = string_get_bug_view_link( $t_item['bug_id'] ) . ": " . string_display( $t_item['summary'] );
+			$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_item['bug_id'] ) ) . lang_get( 'word_separator' ) . string_display( $t_item['summary'] );
 			echo '<tr class="row-category-history"><td colspan="4">' . $t_link . "</td></tr>";
 			$t_prev_id = $t_item['bug_id'];
 		}

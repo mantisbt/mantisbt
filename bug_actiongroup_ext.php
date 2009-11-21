@@ -107,8 +107,11 @@
 		html_page_top();
 
 		echo '<div align="center">';
+
+		$separator = lang_get( 'word_separator' );
 		foreach( $t_failed_ids as $t_id => $t_reason ) {
-			printf("<p>%s: %s</p>\n", string_get_bug_view_link( $t_id ), $t_reason );
+			$label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $sepatator;
+			printf("<p>%s%s</p>\n", $label, $t_reason );
 		}
 
 		print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );

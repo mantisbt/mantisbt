@@ -73,7 +73,8 @@
 <tr class="row-1">
 	<td class="category">
 		<span class="required">*</span><?php echo lang_get( 'select_file' );
-			echo '<br /><span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
+			// FIXME: hard coded "k" in here.
+			echo '<br /><span class="small">(' . lang_get( 'max_file_size_label' ) . lang_get( 'word_separator' ) . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
 	</td>
 	<td>
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />

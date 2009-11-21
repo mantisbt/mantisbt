@@ -383,6 +383,7 @@ $s_email_notification_title_for_action_monitor = 'Issue %1$s is now monitored by
 $s_email_reporter = 'Reported By';
 $s_email_handler = 'Assigned To';
 $s_email_project = 'Project';
+$s_email_project_label = 'Project:';
 $s_email_bug = 'Issue ID';
 $s_email_category = 'Category';
 $s_email_reproducibility = 'Reproducibility';
@@ -464,6 +465,7 @@ $s_profile_deleted_msg = 'Deleted profile...';
 # account_profile_edit_page.php
 $s_edit_profile_title = 'Edit Profile';
 $s_platform = 'Platform';
+$s_platform_label = 'Platform:';
 $s_operating_system = 'Operating System';
 $s_additional_description = 'Additional Description';
 $s_update_profile_button = 'Update Profile';
@@ -600,24 +602,36 @@ $s_update_simple_link = 'Update Simple';
 $s_updating_bug_advanced_title = 'Updating Issue Information';
 $s_id = 'ID';
 $s_category = 'Category';
+$s_category_label = 'Category:';
 $s_severity = 'Severity';
+$s_severity_label = 'Severity:';
 $s_reproducibility = 'Reproducibility';
 $s_date_submitted = 'Date Submitted';
 $s_last_update = 'Last Update';
 $s_reporter = 'Reporter';
+$s_reporter_label = 'Reporter:';
 $s_assigned_to = 'Assigned To';
+$s_assigned_to_label = 'Assigned To:';
 $s_priority = 'Priority';
+$s_priority_label = 'Priority:';
 $s_resolution = 'Resolution';
+$s_resolution_label = 'Resolution:';
 $s_status = 'Status';
+$s_status_label = 'Status';
 $s_duplicate_id = 'Duplicate ID';
 $s_os = 'OS';
+$s_os_label = 'OS:';
 $s_projection = 'Projection';
 $s_os_version = 'OS Version';
+$s_os_version_label = 'OS Version:';
 $s_eta = 'ETA';
 $s_product_version = 'Product Version';
+$s_product_version_label = 'Product Version:';
 $s_build = 'Build';
 $s_fixed_in_version = 'Fixed in Version';
+$s_fixed_in_version_label = 'Fixed in Version:';
 $s_target_version = 'Target Version';
+$s_target_version_label = 'Target Version:';
 $s_votes = 'Votes';
 $s_summary = 'Summary';
 $s_description = 'Description';
@@ -625,6 +639,7 @@ $s_steps_to_reproduce = 'Steps To Reproduce';
 $s_update_information_button = 'Update Information';
 $s_sticky_issue = 'Sticky Issue';
 $s_profile = 'Profile';
+$s_profile_label = 'Profile:';
 
 # bug_update_page.php
 $s_updating_bug_simple_title = 'Updating Issue Information';
@@ -899,6 +914,7 @@ $s_project_delete_button = 'Delete Project';
 $s_edit_project_title = 'Edit Project';
 $s_project_name = 'Project Name';
 $s_view_status = 'View Status';
+$s_view_status_label = 'View Status:';
 $s_public = 'public';
 $s_private = 'private';
 $s_update_project_button = 'Update Project';
@@ -1189,15 +1205,18 @@ $s_orct = '(open/resolved/closed/total)';
 $s_any = 'any';
 $s_all = 'all';
 $s_show = 'Show';
+$s_show_label = 'Show:';
 $s_changed = 'Changed(hrs)';
+$s_changed_label = 'Changed(hrs):';
 $s_viewing_bugs_title = 'Viewing Issues';
 $s_updated = 'Updated';
 $s_sticky = 'Show Sticky Issues';
-$s_sort = 'Sort by';
+$s_sticky_label = 'Show Sticky Issues:';
+$s_sort_label = 'Sort by:';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
 $s_priority_abbreviation = 'P';
-$s_note_user_id = 'Note By';
+$s_note_user_id_label = 'Note By:';
 
 # view_all_inc.php
 $s_none = 'none';
@@ -1209,9 +1228,10 @@ $s_prev = 'Prev';
 $s_next = 'Next';
 $s_first = 'First';
 $s_last = 'Last';
-$s_start_date = 'Start Date';
-$s_end_date = 'End Date';
+$s_start_date_label = 'Start Date:';
+$s_end_date_label = 'End Date:';
 $s_use_date_filters = 'Use Date Filters';
+$s_use_date_filters_label = 'Use Date Filters:';
 $s_yes = 'Yes';
 $s_no = 'No';
 $s_open_filters = 'Change Filter';
@@ -1237,6 +1257,7 @@ $s_query_delete_msg = 'Are you sure you wish to delete this filter?';
 # bug_view_advanced_page.php
 $s_view_simple_link = 'View Simple';
 $s_product_build = 'Product Build';
+$s_product_build_label = 'Product Build:';
 $s_system_profile = 'System Description';
 $s_update_bug_button = 'Edit';
 $s_bug_assign_to_button = 'Assign To:';
@@ -1308,6 +1329,7 @@ $s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) th
 $s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Hide Status';
+$s_hide_status_label = 'Hide Status:';
 $s_filter_closed = 'Closed';
 $s_filter_resolved = 'Resolved';
 $s_hide_closed = 'Hide Closed';
@@ -1316,6 +1338,7 @@ $s_and_above = 'And Above';
 $s_advanced_filters = 'Advanced Filters';
 $s_simple_filters = 'Simple Filters';
 $s_monitored_by = 'Monitored By';
+$s_monitored_by_label = 'Monitored By:';
 
 $s_attachments = 'attachment(s)';
 $s_attachment_alt = 'A';
@@ -1466,6 +1489,7 @@ $s_wiki = 'Wiki';
 
 # Tagging
 $s_tags = 'Tags';
+$s_tags_label = 'Tags:';
 $s_tag_details = 'Tag Details: %1$s';
 $s_tag_id = 'Tag ID';
 $s_tag_name = 'Name';
@@ -1504,6 +1528,7 @@ $s_time_tracking = 'Time tracking';
 $s_time_tracking_get_info_button = 'Get Time Tracking Information';
 $s_time_tracking_cost_per_hour = 'Cost / Hour';
 $s_time_tracking_cost = 'Cost';
+$s_time_tracking_cost_label = 'Cost:';
 $s_total_time_for_issue = 'Total time for issue = %1$s';
 
 $s_access_denied = 'Access Denied.';
@@ -1541,6 +1566,7 @@ $s_manage_user = 'Manage User';
 
 # separators
 $s_word_separator = '&#32;';
+$s_label = '%1$s:'
 
 # admin pages
 $s_install_information = 'MantisBT Installation Information';

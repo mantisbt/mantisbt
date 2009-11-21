@@ -115,7 +115,7 @@
 					echo ($i > 0) ? '<br />' : '';
 					$i++;
 
-					echo $t_date_added . ': ';
+					echo sprintf( lang_get( 'label' ), $t_date_added ) . lang_get( 'word_separator' );
 					print_user( $t_sponsorship->user_id );
 					echo ' (' . sponsorship_format_amount( $t_sponsorship->amount ) . ')';
 					if ( access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id ) ) {
