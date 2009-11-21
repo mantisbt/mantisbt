@@ -1581,7 +1581,7 @@ $s_manage_user = 'Manage User';
 
 # separators
 $s_word_separator = '&#32;';
-$s_label = '%1$s:'
+$s_label = '%1$s:';
 
 # admin pages
 $s_install_information = 'MantisBT Installation Information';
