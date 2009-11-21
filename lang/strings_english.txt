@@ -725,8 +725,8 @@ $s_lost_password_info = 'To reinstate your lost password, please supply the name
 $s_lost_password_confirm_hash_OK = 'Your confirmation has been accepted. Please update your password.';
 
 # main_page.php
-$s_open_and_assigned_to_me = 'Open and assigned to me';
-$s_open_and_reported_to_me = 'Open and reported by me';
+$s_open_and_assigned_to_me_label = 'Open and assigned to me:';
+$s_open_and_reported_to_me_label = 'Open and reported by me:';
 $s_newer_news_link = 'Newer News';
 $s_older_news_link = 'Older News';
 $s_archives = 'Archives';
@@ -780,6 +780,7 @@ $s_manage_accounts_title = 'Manage Accounts';
 $s_p = 'p';
 $s_date_created = 'Date Created';
 $s_last_visit = 'Last Visit';
+$s_last_visit_label = 'Last Visit:';
 $s_edit_user_link = 'Edit User';
 
 # manage_config_email_page
@@ -796,7 +797,7 @@ $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Who can change notification defaults';
-$s_notify_actions_change_access = 'Who can change notifications';
+$s_notify_actions_change_access = 'Who can change notifications:';
 $s_revert_to_system = 'Delete All Projects Settings';
 $s_revert_to_all_project = 'Delete Project Specific Settings';
 
@@ -820,8 +821,8 @@ $s_desc_bug_submit_status = 'Status to which a new issue is set';
 $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
 $s_desc_bug_closed_status_threshold = 'Status where an issue is considered closed';
-$s_workflow_change_access = 'Who can change workflow';
-$s_access_change_access = 'Who can change access levels';
+$s_workflow_change_access_label = 'Who can change workflow:';
+$s_access_change_access_label = 'Who can change access levels:';
 
 # manage_config_workflow_set
 $s_default_not_in_flow = 'The default status of %1$s is not selected in the next statuses for %2$s. It will be ignored.';
@@ -842,7 +843,7 @@ $s_reopen_status = 'Status to which a reopened issue is set';
 $s_reopen_resolution = 'Resolution to which a reopened issue is set';
 
 # manage_config_revert_page
-$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_config_delete_sure = 'Are you sure you want to delete the settings for:';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
 
@@ -874,7 +875,7 @@ $s_plugin_install = 'Install';
 $s_plugin_upgrade = 'Upgrade';
 $s_plugin_uninstall = 'Uninstall';
 $s_plugin_uninstall_message = 'Are you sure you want to uninstall the "%1$s" plugin?';
-$s_plugin_key = 'Key';
+$s_plugin_key_label = 'Key:';
 $s_plugin_key_met = 'plugin ready';
 $s_plugin_key_unmet = 'unmet dependencies';
 $s_plugin_key_dated = 'outdated dependencies';
@@ -944,6 +945,7 @@ $s_add_project_title = 'Add Project';
 $s_upload_file_path = 'Upload File Path';
 $s_add_project_button = 'Add Project';
 $s_projects_title = 'Projects';
+$s_projects_title_label = 'Projects:';
 $s_name = 'Name';
 
 # manage_proj_update.php
@@ -1294,6 +1296,7 @@ $s_update_custom_field_button = 'Update Custom Field';
 $s_add_existing_custom_field = 'Add This Existing Custom Field';
 $s_edit_custom_field_title = 'Edit custom field';
 $s_custom_field = 'Field';
+$s_custom_field_label = 'Field:';
 $s_custom_fields_setup = 'Custom Fields';
 $s_custom_field_name = 'Name';
 $s_custom_field_project_count = 'Project Count';
@@ -1316,9 +1319,10 @@ $s_custom_field_require_resolved = 'Required On Resolve';
 $s_custom_field_require_closed = 'Required On Close';
 $s_link_custom_field_to_project_title = 'Link custom field to project';
 $s_link_custom_field_to_project_button = 'Link Custom Field';
-$s_linked_projects = 'Linked Projects';
+$s_linked_projects_label = 'Linked Projects:';
 
 $s_custom_field_sequence = 'Sequence';
+$s_custom_field_sequence_label = 'Sequence:';
 $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:E-mail,5:Checkbox,6:List,7:Multiselection list,8:Date,9:Radio';
 
 $s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project. If you continue all values for this field will be permanently deleted. This action cannot be undone. If you do not want to delete this field, hit the Back button in your browser. To proceed, click the button below';

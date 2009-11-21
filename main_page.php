@@ -51,17 +51,17 @@
 
 	if ( !current_user_is_anonymous() ) {
 		echo '<div class="quick-summary-left">';
-		echo lang_get( 'open_and_assigned_to_me' ) . ': ';
+		echo lang_get( 'open_and_assigned_to_me_label' ) . lang_get( 'word_separator' );
 		echo '<a class="subtle" href="view_all_set.php?type=1&amp;handler_id=' .  auth_get_current_user_id() . '&amp;hide_status=' . config_get( 'bug_resolved_status_threshold' ) . '">' . current_user_get_assigned_open_bug_count() . '</a>';
 		echo '</div>';
 
 		echo '<div class="quick-summary-right">';
-		echo lang_get( 'open_and_reported_to_me' ) . ': ';
+		echo lang_get( 'open_and_reported_to_me_label' ) . lang_get( 'word_separator' );
 		echo '<a class="subtle" href="view_all_set.php?type=1&amp;reporter_id=' . auth_get_current_user_id() . '&amp;hide_status=' . config_get( 'bug_resolved_status_threshold' ) . '">' . current_user_get_reported_open_bug_count() . '</a>';
 		echo '</div>';
 
 		echo '<div class="quick-summary-left">';
-		echo lang_get( 'last_visit' ) . ': ';
+		echo lang_get( 'last_visit_label' ) . lang_get( 'word_separator' );
 		echo date( config_get( 'normal_date_format' ), current_user_get_field( 'last_visit' ) );
 		echo '</div>';
 	}

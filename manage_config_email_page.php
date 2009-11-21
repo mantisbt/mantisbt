@@ -249,7 +249,7 @@
 	    echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 	    echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 	    if ( ALL_PROJECTS <> $t_project ) {
-	        echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
+	        echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) . '</span><br />';
 	    }
 	    echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
 
@@ -273,7 +273,7 @@
 		get_section_end_for_email();
 
 		if ( $t_can_change_flags  || $t_can_change_defaults ) {
-			echo '<p>' . lang_get( 'notify_actions_change_access' ) . ':';
+			echo '<p>' . lang_get( 'notify_actions_change_access' );
 			echo '<select name="notify_actions_access">';
 			print_enum_string_option_list( 'access_levels', config_get_access( 'notify_flags' ) );
 			echo '</select> </p>';

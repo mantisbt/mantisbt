@@ -246,7 +246,7 @@
 <!-- Assigned Projects -->
 <tr <?php echo helper_alternate_class( 1 ) ?> valign="top">
 	<td class="category" width="30%">
-		<?php echo lang_get( 'linked_projects' ) ?>:
+		<?php echo lang_get( 'linked_projects_label' ) ?>
 	</td>
 	<td width="70%">
 		<?php print_custom_field_projects_list( $f_field_id ) ?>
@@ -256,7 +256,7 @@
 <!-- Unassigend Project Selection -->
 <tr <?php echo helper_alternate_class() ?> valign="top">
 	<td class="category">
-		<?php echo lang_get( 'projects_title' ) ?>:
+		<?php echo lang_get( 'projects_title_label' ) ?>
 	</td>
 	<td>
 		<select name="project_id[]" multiple="multiple" size="5">
@@ -268,7 +268,7 @@
 <!-- Sequence Number -->
 <tr <?php echo helper_alternate_class() ?> valign="top">
 	<td class="category">
-		<?php echo lang_get( 'custom_field_sequence' ) ?>:
+		<?php echo lang_get( 'custom_field_sequence_label' ) ?>
 	</td>
 	<td>
 		<input type="text" name="sequence" value="0" />

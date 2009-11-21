@@ -249,7 +249,7 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 </table>
 <?php } ?>
 
-<br/><?php echo lang_get( 'plugin_key' ) ?>:
+<br/><?php echo lang_get( 'plugin_key_label' ) ?>
 <span class='dependency_met'><?php echo lang_get( 'plugin_key_met' ) ?></span>,
 <span class='dependency_unmet'><?php echo lang_get( 'plugin_key_unmet' ) ?></span>,
 <span class='dependency_dated'><?php echo lang_get( 'plugin_key_dated' ) ?></span>,

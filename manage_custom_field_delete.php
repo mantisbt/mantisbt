@@ -39,11 +39,11 @@
 
 	if( 0 < count( custom_field_get_project_ids( $f_field_id ) ) ) {
 		helper_ensure_confirmed( lang_get( 'confirm_used_custom_field_deletion' ) .
-			'<br/>' . lang_get( 'custom_field' ) . ': ' . string_attribute( $t_definition['name'] ),
+			'<br/>' . lang_get( 'custom_field_label' ) . lang_get( 'word_separator' ) . string_attribute( $t_definition['name'] ),
 			lang_get( 'field_delete_button' ) );
 	} else {
 		helper_ensure_confirmed( lang_get( 'confirm_custom_field_deletion' ) .
-			'<br/>' . lang_get( 'custom_field' ) . ': ' . string_attribute( $t_definition['name'] ),
+			'<br/>' . lang_get( 'custom_field_label' ) . lang_get( 'word_separator' ) . string_attribute( $t_definition['name'] ),
 			lang_get( 'field_delete_button' ) );
 	}
 
