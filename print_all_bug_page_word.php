@@ -156,22 +156,22 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print-category">
 	<td class="print" width="16%">
-		<?php echo $t_lang_id ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_id ) ?>
 	</td>
 	<td class="print" width="16%">
-		<?php echo $t_lang_category ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_category ) ?>
 	</td>
 	<td class="print" width="16%">
-		<?php echo $t_lang_severity ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_severity ) ?>
 	</td>
 	<td class="print" width="16%">
-		<?php echo $t_lang_reproducibility ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_reproducibility ) ?>
 	</td>
 	<td class="print" width="16%">
-		<?php echo $t_lang_date_submitted ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_date_submitted ) ?>
 	</td>
 	<td class="print" width="16%">
-		<?php echo $t_lang_last_update ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_last_update ) ?>
 	</td>
 </tr>
 <tr class="print">
@@ -201,20 +201,20 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $t_lang_reporter ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_reporter ) ?>
 	</td>
 	<td class="print">
 		<?php print_user_with_subject( $t_bug->reporter_id, $t_id ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo $t_lang_platform ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_platform ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->platform ) ?>
 	</td>
 <?php if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_id ) ) { ?>
 	<td class="print-category">
-		<?php echo $t_lang_due_date ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_due_date ) ?>
 	</td>
 <?php
 		if ( bug_is_overdue( $t_id ) ) { ?>
@@ -235,7 +235,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $t_lang_assigned_to ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_assigned_to ) ?>
 	</td>
 	<td class="print">
 		<?php
@@ -245,7 +245,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		?>
 	</td>
 	<td class="print-category">
-		<?php echo $t_lang_os ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_os ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->os ) ?>
@@ -254,13 +254,13 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $t_lang_priority ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_priority ) ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'priority', $t_bug->priority ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo $t_lang_os_version ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_os_version ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->os_build ) ?>
@@ -269,13 +269,13 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $t_lang_status ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_status ) ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'status', $t_bug->status ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo $t_lang_product_version ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_product_version ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->version ) ?>
@@ -284,13 +284,13 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $t_lang_product_build ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_product_build ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->build ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo $t_lang_resolution ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_resolution ) ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'resolution', $t_bug->resolution ) ?>
@@ -299,7 +299,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $t_lang_projection ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_projection ) ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'projection', $t_bug->projection ) ?>
@@ -314,13 +314,13 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $t_lang_eta ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_eta ) ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'eta', $t_bug->eta ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo $t_lang_fixed_in_version ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_fixed_in_version ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->fixed_in_version ) ?>
@@ -336,7 +336,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		&nbsp;
 	</td>
 	<td class="print-category">
-		<?php echo $t_lang_target_version ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_target_version ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->target_version ) ?>
@@ -350,7 +350,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 ?>
 <tr class="print">
 	<td class="print-category">
-		<?php echo lang_get_defaulted( $t_def['name'] ) ?>:
+		<?php echo sprintf( lang_get( 'label' ), lang_get_defaulted( $t_def['name'] ) ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php print_custom_field_value( $t_def, $t_custom_field_id, $t_id ); ?>
@@ -366,7 +366,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $t_lang_summary ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_summary ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php echo string_display_line_links( $t_bug->summary ) ?>
@@ -374,7 +374,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $t_lang_description ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_description ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php echo string_display_line_links( $t_bug->description ) ?>
@@ -382,7 +382,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $t_lang_steps_to_reproduce ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_steps_to_reproduce ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php echo string_display_line_links( $t_bug->steps_to_reproduce ) ?>
@@ -390,7 +390,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $t_lang_additional_information ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_additional_information ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php echo string_display_line_links( $t_bug->additional_information ) ?>
@@ -416,7 +416,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 ?>
 <tr class="print">
 	<td class="print-category" valign="top">
-		<?php echo $t_lang_attached_files ?>:
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_attached_files ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php

@@ -46,7 +46,7 @@
 
 	# Confirm with the user
 	helper_ensure_confirmed( lang_get( 'confirm_file_delete_msg' ) .
-		'<br/>' . lang_get( 'filename' ) . ': ' . string_display( $t_title ),
+		'<br/>' . lang_get( 'filename_label' ) . lang_get( 'word_separator' ) . string_display( $t_title ),
 		lang_get( 'file_delete_button' ) );
 
 	file_delete( $f_file_id, 'project' );

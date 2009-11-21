@@ -71,7 +71,8 @@ $s_private_project_msg = 'This project is private. Only administrators and manua
 $s_access_level_project = 'Project Access Level';
 $s_view_submitted_bug_link = 'View Submitted Issue %1$s';
 $s_assigned_projects = 'Assigned Projects';
-$s_unassigned_projects = 'Unassigned Projects';
+$s_assigned_projects_label = 'Assigned Projects:';
+$s_unassigned_projects_label = 'Unassigned Projects:';
 $s_print = 'Print';
 $s_jump = 'Jump';
 $s_copy_users = 'Copy Users';
@@ -414,12 +415,16 @@ $s_manage_profiles_link = 'Profiles';
 $s_change_preferences_link = 'Preferences';
 $s_edit_account_title = 'Edit Account';
 $s_username = 'Username';
+$s_username_label = 'Username:';
 $s_realname = 'Real Name';
+$s_realname_label = 'Real Name:';
 $s_email = 'E-mail';
+$s_email_label = 'E-mail:';
 $s_password = 'Password';
 $s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password = 'Confirm Password';
 $s_access_level = 'Access Level';
+$s_access_level_label = 'Access Level:';
 $s_update_user_button = 'Update User';
 $s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
@@ -748,7 +753,9 @@ $s_created_user_part2 = 'with an access level of';
 $s_create_new_account_title = 'Create New Account';
 $s_verify_password = 'Verify Password';
 $s_enabled = 'Enabled';
+$s_enabled_label = 'Enabled:';
 $s_protected = 'Protected';
+$s_protected_label = 'Protected:';
 $s_create_user_button = 'Create User';
 
 # manage_page.php
@@ -914,6 +921,7 @@ $s_project_delete_button = 'Delete Project';
 # manage_proj_edit_page.php
 $s_edit_project_title = 'Edit Project';
 $s_project_name = 'Project Name';
+$s_project_name_label = 'Project Name:';
 $s_view_status = 'View Status';
 $s_view_status_label = 'View Status:';
 $s_public = 'public';
@@ -931,6 +939,7 @@ $s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Edit';
 $s_actions = 'Actions';
 $s_version = 'Version';
+$s_version_label = 'Version:';
 $s_timestamp = 'Timestamp';
 $s_update = 'Update';
 $s_subprojects = 'Subprojects';
@@ -1082,6 +1091,7 @@ $s_confirm_file_delete_msg = 'Are you sure you wish to delete this file?';
 
 # proj_doc_edit_page.php
 $s_filename = 'Filename';
+$s_filename_label = 'Filename:';
 $s_file_update_button = 'Update File';
 $s_file_delete_button = 'Delete File';
 
@@ -1151,7 +1161,7 @@ $s_password_emailed_msg = 'Congratulations. You have registered successfully. Yo
 $s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
-$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right.';
+$s_signup_captcha_request_label = 'Enter the code as it is shown in the box on the right:';
 $s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation e-mail to the e-mail address you specified.<br />Using the confirmation e-mail, you will be able to activate your account. If you fail to activate your account within seven days, it will be purged.<br />You must specify a valid e-mail address in order to receive the account confirmation e-mail.';
 $s_signup_title = 'Signup';
 $s_signup_button = 'Signup';
@@ -1248,6 +1258,7 @@ $s_query_deleted = 'Filter Deleted';
 $s_save_query = 'Save Current Filter';
 $s_reset_query = 'Reset Filter';
 $s_query_name = 'Filter Name';
+$s_query_name_label = 'Filter Name:';
 $s_query_exists = 'This particular filter appears to already exist.';
 $s_query_dupe_name = 'Another filter already has this name. Please choose a different name for this filter.';
 $s_query_blank_name = 'You cannot store a filter without a name. Please give this filter a name before saving it.';

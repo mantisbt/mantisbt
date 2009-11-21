@@ -128,18 +128,18 @@
 		lang_push( user_pref_get_language( $f_user_id ) );
 		$t_changes = "";
 		if ( strcmp( $f_username, $t_old_username ) ) {
-			$t_changes .= lang_get( 'username' ) . ': ' . $t_old_username . ' => ' . $f_username . "\n";
+			$t_changes .= lang_get( 'username_label' ) . lang_get( 'word_separator' ) . $t_old_username . ' => ' . $f_username . "\n";
 		}
 		if ( strcmp( $t_realname, $t_old_realname ) ) {
-			$t_changes .= lang_get( 'realname' ) . ': ' . $t_old_realname . ' => ' . $t_realname . "\n";
+			$t_changes .= lang_get( 'realname_label' ) . lang_get( 'word_separator' ) . $t_old_realname . ' => ' . $t_realname . "\n";
 		}
 		if ( strcmp( $f_email, $t_old_email ) ) {
-			$t_changes .= lang_get( 'email' ) . ': ' . $t_old_email . ' => ' . $f_email . "\n";
+			$t_changes .= lang_get( 'email_label' ) . lang_get( 'word_separator' ) . $t_old_email . ' => ' . $f_email . "\n";
 		}
 		if ( strcmp( $f_access_level, $t_old_access_level ) ) {
 			$t_old_access_string = get_enum_element( 'access_levels', $t_old_access_level );
 			$t_new_access_string = get_enum_element( 'access_levels', $f_access_level );
-			$t_changes .= lang_get( 'access_level' ) . ': ' . $t_old_access_string . ' => ' . $t_new_access_string . "\n\n";
+			$t_changes .= lang_get( 'access_level_label' ) . lang_get( 'word_separator' ) . $t_old_access_string . ' => ' . $t_new_access_string . "\n\n";
 		}
 		if ( !empty( $t_changes ) ) {
 			$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'email_user_updated_subject' );

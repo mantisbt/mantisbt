@@ -51,7 +51,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="30%">
-		<?php echo lang_get( 'username' ) ?>:
+		<?php echo lang_get( 'username_label' ) ?>
 	</td>
 	<td width="70%" colspan="2">
 		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" />
@@ -59,7 +59,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo lang_get( 'email' ) ?>:
+		<?php echo lang_get( 'email_label' ) ?>
 	</td>
 	<td colspan="2">
 		<?php print_email_input( 'email', '' ) ?>
@@ -72,7 +72,7 @@
 ?>
 <tr class="row-1">
 	<td class="category">
-		<?php echo lang_get( 'signup_captcha_request' ) ?>:
+		<?php echo lang_get( 'signup_captcha_request_label' ) ?>
 	</td>
 	<td>
 		<?php print_captcha_input( 'captcha', '' ) ?>

@@ -58,7 +58,7 @@
 		print "<br />$t_error_msg<br /><br />";
 	}
 
-	print lang_get( 'query_name' ) . ': ';
+	print lang_get( 'query_name_label' ) . lang_get( 'word_separator' );
 ?>
 	<form method="post" action="query_store.php">
 	<?php echo form_security_field( 'query_store' ) ?>
