@@ -28,6 +28,7 @@
  *
  * @author Crazymadlover
  * @author Giro720
+ * @author Hamilton Abreu
  * @author Luís Martins, lmar@ualg.pt
  * @author Malafaya
  * @author Rui Alexandre Coelho, rac@iosoft.pt
@@ -60,7 +61,6 @@ $s_public_project_msg = 'Este Projecto é PÚBLICO.  TODOS os utilizadores tem a
 $s_private_project_msg = 'Este Projecto é PRIVATE.  Apenas os administradores e os utilizadores adicionados manualmente tem acesso.';
 $s_view_submitted_bug_link = 'Ver Problema Submetido %1$s';
 $s_assigned_projects = 'Projectos Atribuidos';
-$s_unassigned_projects = 'Projectos NÃO Atribuidos';
 $s_print = 'Imprimir';
 $s_jump = 'Ver Bug Nº';
 $s_copy_users = 'Copiar Utilizadores';
@@ -189,7 +189,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria não encontrada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Categoria "%1$s" não encontrada para o projeto "%2$s".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Já existe uma versão com esse nome.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versão "%1$s" não encontrada.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'O nome de utilizador é inválido. Nomes de utilizador apenas podem conter letras, números, espaços, hífens e underscores.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'O nome de utilizador é inválido. Nomes de utilizador só podem conter caracteres latinos, números, espaços, hífens (-), pontos (.), sinais de mais (+) e sublinhados (_).';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'O nome verdadeiro do utilizador é inválido.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'O utilizador não tem o nível de acesso exigido.';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'O "Name Real" escolhido coincide com o nome de login de outro usuário. Por favor escolha outro.';
@@ -360,7 +360,7 @@ $s_from = 'De';
 $s_to = 'Para';
 $s_sent_you_this_reminder_about = 'enviou-lhe este Aviso acerca de';
 $s_bug_reminder = 'Enviar um e-mail de Aviso';
-$s_reminder_sent_to = 'Aviso enviado a';
+$s_reminder_sent_to = 'Aviso enviado a:';
 $s_bug_send_button = 'Enviar';
 $s_reminder = 'Aviso';
 $s_bug_updated_msg = 'O Bug foi actualizado com sucesso...';
@@ -409,8 +409,6 @@ $s_choose_project = 'Escolha um Projecto';
 $s_login_button = 'Entrar';
 $s_signup_link = 'Se é a 1ª vez que nos visita, crie uma nova Conta aqui';
 $s_select_project_button = 'Seleccionar projecto';
-$s_open_and_assigned_to_me = 'Abrir e Atribuir a Mim';
-$s_open_and_reported_to_me = 'Aberto e Informado por Mim';
 $s_newer_news_link = 'Novas Notícias';
 $s_older_news_link = 'Notícias Antigas';
 $s_archives = 'Arquivos';

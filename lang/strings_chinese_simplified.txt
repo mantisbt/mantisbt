@@ -30,6 +30,7 @@
  * @author Hacked by justin schnell_18@yahoo.com
  * @author Kai-Zheng Cheng, neek@sina.com
  * @author NetCobra, netcobra@gmail.com
+ * @author PhiLiP
  * @author Riceball LEE riceballl@hotmail.com
  * @author Singoo, singoo@163.com
  * @author liaobin@jite.net
@@ -67,7 +68,6 @@ $s_private_project_msg = '这个项目是私有的，只有管理员和授权用
 $s_access_level_project = '项目访问级别';
 $s_view_submitted_bug_link = '查看提交的问题 %1$s';
 $s_assigned_projects = '已分配的项目';
-$s_unassigned_projects = '未分配的项目';
 $s_print = '打印';
 $s_jump = '跳转到该问题编号';
 $s_copy_users = '复制用户';
@@ -428,7 +428,7 @@ $s_from = '从';
 $s_to = '到';
 $s_sent_you_this_reminder_about = '向您发送这个提醒，关于';
 $s_bug_reminder = '问题提醒';
-$s_reminder_sent_to = '发送提醒';
+$s_reminder_sent_to = '发送提醒:';
 $s_bug_send_button = '发送';
 $s_reminder = '提醒';
 $s_reminder_explain = '该注释将被发送给要求接收该问题反馈的所有收件人。';
@@ -496,8 +496,6 @@ $s_lost_password_done_title = '密码邮件已发出';
 $s_lost_password_subject = '密码重置';
 $s_lost_password_info = '如果你想重置忘记的密码, 请填写你的用户名和邮件地址。<br /><br />如果你填写的信息是有效的, 你将通过电子邮件收到一个含有特殊验证码的网页链接，点击该链接即可修改你的密码。';
 $s_lost_password_confirm_hash_OK = '系统已经接受了你的确认，请更新密码。';
-$s_open_and_assigned_to_me = '分派给我且未解决的问题';
-$s_open_and_reported_to_me = '由我报告且未解决的问题';
 $s_newer_news_link = '更新的公告';
 $s_older_news_link = '稍早的公告';
 $s_archives = '归档公告';
@@ -570,8 +568,6 @@ $s_access_change = '修改该状态的最低权限';
 $s_desc_bug_submit_status = '新建立的问题的状态';
 $s_desc_bug_reopen_status = '重新打开的问题的状态';
 $s_desc_bug_resolved_status_threshold = '被设置为已解决的问题的状态';
-$s_workflow_change_access = '谁可以修改工作流';
-$s_access_change_access = '谁可以修改存取权限级别';
 $s_default_not_in_flow = '%1$s 的默认状态没有被选定为 %2$s 的下一个状态，它将被忽略';
 $s_assign_issue = '分派问题';
 $s_allow_close_immediate = '允许关闭解决状态问题';
@@ -602,7 +598,7 @@ $s_plugins_installed = '安装插件';
 $s_plugin_description = '描述';
 $s_plugin_author = '作者： %1$s';
 $s_plugin_url = '网址：';
-$s_plugin_update = '升级';
+$s_plugin_update = '更新';
 $s_plugin_install = '安装';
 $s_plugin_upgrade = '升级';
 $s_plugin_uninstall = '卸载';
@@ -759,7 +755,6 @@ $s_valid_project_msg = '必须选择一个有效的项目';
 $s_signup_done_title = '账号注册已处理';
 $s_password_emailed_msg = '恭喜你，你的注册已成功。为证实你的邮件地址的有效性，系统将发出确认信，请你在收到该信后访问链接以激活你的账号。';
 $s_no_reponse_msg = '你必须在7天之内激活你的账号，否则逾期该账号将被自动清除';
-$s_signup_captcha_request = '请输入右边的字符串';
 $s_signup_info = '填完此表单后，你将在你填写的邮箱里收到一封确认信。<br />通过确认信，你可以激活你的账号。如果你在7天之内不激活你的账号，系统将自动清除此账号。<br />为了你能够收到这封确认信，请务必确保你输入的邮件地址是有效的。';
 $s_signup_title = '注册';
 $s_signup_button = '注册';
@@ -803,7 +798,6 @@ $s_changed = '已变更(小时)';
 $s_viewing_bugs_title = '查看问题';
 $s_updated = '最后更新';
 $s_sticky = '显示置顶问题';
-$s_sort = '排序字段';
 $s_issue_id = '问题 #';
 $s_recently_visited = '最近浏览的';
 $s_none = '无';
@@ -815,8 +809,6 @@ $s_prev = '上一页';
 $s_next = '下一页';
 $s_first = '首页';
 $s_last = '末页';
-$s_start_date = '开始日期';
-$s_end_date = '完成日期';
 $s_use_date_filters = '使用时间过滤';
 $s_yes = '是';
 $s_no = '否';
@@ -882,7 +874,6 @@ $s_custom_field_require_resolved = '解决问题时必需';
 $s_custom_field_require_closed = '关闭问题时必需';
 $s_link_custom_field_to_project_title = '关联自定义字段到项目';
 $s_link_custom_field_to_project_button = '关联自定义字段';
-$s_linked_projects = '关联项目';
 $s_custom_field_sequence = '顺序';
 $s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类型,4:电子邮件,5:选择框,6:列表,7:多选列表,8:日期,9:单选框';
 $s_confirm_used_custom_field_deletion = '当前有至少一个项目链接到了这个字段，如果继续，这个字段的所有值都将被永久删除；删除操作无法恢复。如果你不想删除这个字段，请点击浏览器的“后退”按钮；点击下面的按钮继续删除。';
