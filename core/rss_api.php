@@ -111,15 +111,15 @@ function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_f
 			$t_url .= 'project_id=' . $t_project_id;
 		}
 	} else {
-		$t_url .= 'issues_rss.php?username=' . $t_username . '&amp;key=' . rss_calculate_key( $t_user_id );
+		$t_url .= 'issues_rss.php?username=' . $t_username . '&key=' . rss_calculate_key( $t_user_id );
 
 		if( $t_project_id != ALL_PROJECTS ) {
-			$t_url .= '&amp;project_id=' . $t_project_id;
+			$t_url .= '&project_id=' . $t_project_id;
 		}
 	}
 
 	if( $p_filter_id !== null ) {
-		$t_url .= '&amp;filter_id=' . $p_filter_id;
+		$t_url .= '&filter_id=' . $p_filter_id;
 	}
 
 	return $t_url;
@@ -155,16 +155,16 @@ function rss_get_news_feed_url( $p_project_id = null, $p_username = null, $p_rel
 
 	// If we have a logged in user then they can be given a 'proper' feed, complete with auth string.
 	if( user_is_anonymous( $t_user_id ) ) {
-		$t_rss_link .= "news_rss.php?";
+		$t_rss_link .= "news_rss.php";
 
 		if( $t_project_id != ALL_PROJECTS ) {
-			$t_rss_link .= "news_rss.php?project_id=" . $t_project_id;
+			$t_rss_link .= "?project_id=$t_project_id";
 		}
 	} else {
-		$t_rss_link .= "news_rss.php?username=" . $t_username . "&amp;key=" . rss_calculate_key( $t_user_id );
+		$t_rss_link .= "news_rss.php?username=$t_username&key=" . rss_calculate_key( $t_user_id );
 
 		if( $t_project_id != ALL_PROJECTS ) {
-			$t_rss_link .= "&amp;project_id=" . $t_project_id;
+			$t_rss_link .= "&project_id=$t_project_id";
 		}
 	}
 

@@ -270,7 +270,7 @@ function filter_get_url( $p_custom_filter ) {
 	}
 
 	if( count( $t_query ) > 0 ) {
-		$t_query_str = implode( $t_query, '&amp;' );
+		$t_query_str = implode( $t_query, '&' );
 		$t_url = config_get( 'path' ) . 'search.php?' . $t_query_str;
 	} else {
 		$t_url = '';
@@ -302,7 +302,7 @@ function filter_encode_field_and_value( $p_field_name, $p_field_value, $p_field_
 		$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value );
 	}
 
-	return implode( $t_query_array, '&amp;' );
+	return implode( $t_query_array, '&' );
 }
 
 # ==========================================================================
@@ -3325,7 +3325,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<td class="center" colspan="<?php echo( $t_filter_cols - 6 )?>"> <!-- use this label for padding -->
 				<?php
 					if( ON == config_get( 'dhtml_filters' ) ) {
-		$f_switch_view_link = 'view_all_set.php?type=6&amp;view_type=';
+		$f_switch_view_link = 'view_all_set.php?type=6&view_type=';
 	} else {
 		$f_switch_view_link = 'view_filters_page.php?view_type=';
 	}

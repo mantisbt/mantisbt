@@ -92,7 +92,7 @@ $c_filter['assigned'] = array(
 		'0' => META_FILTER_ANY,
 	),
 );
-$url_link_parameters['assigned'] = FILTER_PROPERTY_HANDLER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
+$url_link_parameters['assigned'] = FILTER_PROPERTY_HANDLER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
 
 $c_filter['recent_mod'] = array(
 	FILTER_PROPERTY_CATEGORY => Array(
@@ -163,7 +163,7 @@ $c_filter['reported'] = array(
 		'0' => META_FILTER_ANY,
 	),
 );
-$url_link_parameters['reported'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
+$url_link_parameters['reported'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 
 $c_filter['resolved'] = array(
 	FILTER_PROPERTY_CATEGORY => Array(
@@ -198,7 +198,7 @@ $c_filter['resolved'] = array(
 		'0' => META_FILTER_ANY,
 	),
 );
-$url_link_parameters['resolved'] = FILTER_PROPERTY_STATUS_ID . '=' . $t_bug_resolved_status_threshold . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
+$url_link_parameters['resolved'] = FILTER_PROPERTY_STATUS_ID . '=' . $t_bug_resolved_status_threshold . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
 
 $c_filter['unassigned'] = array(
 	FILTER_PROPERTY_CATEGORY => Array(
@@ -233,7 +233,7 @@ $c_filter['unassigned'] = array(
 		'0' => META_FILTER_ANY,
 	),
 );
-$url_link_parameters['unassigned'] = FILTER_PROPERTY_HANDLER_ID . '=[none]' . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
+$url_link_parameters['unassigned'] = FILTER_PROPERTY_HANDLER_ID . '=[none]' . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 
 # TODO: check. handler value looks wrong
 
@@ -270,7 +270,7 @@ $c_filter['monitored'] = array(
 		'0' => $t_current_user_id,
 	),
 );
-$url_link_parameters['monitored'] = FILTER_PROPERTY_MONITOR_USER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
+$url_link_parameters['monitored'] = FILTER_PROPERTY_MONITOR_USER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 
 
 $c_filter['feedback'] = array(
@@ -306,7 +306,7 @@ $c_filter['feedback'] = array(
 		'0' => META_FILTER_ANY,
 	),
 );
-$url_link_parameters['feedback'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . config_get( 'bug_feedback_status' ) . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
+$url_link_parameters['feedback'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_STATUS_ID . '=' . config_get( 'bug_feedback_status' ) . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 
 $c_filter['verify'] = array(
 	FILTER_PROPERTY_CATEGORY => Array(
@@ -341,7 +341,7 @@ $c_filter['verify'] = array(
 		'0' => META_FILTER_ANY,
 	),
 );
-$url_link_parameters['verify'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&amp;' . FILTER_PROPERTY_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
+$url_link_parameters['verify'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
 
 $c_filter['my_comments'] = array(
 	FILTER_PROPERTY_CATEGORY => Array(
@@ -380,7 +380,7 @@ $c_filter['my_comments'] = array(
 	),
 );
 
-$url_link_parameters['my_comments'] = FILTER_PROPERTY_NOTE_USER_ID. '=' . META_FILTER_MYSELF . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
+$url_link_parameters['my_comments'] = FILTER_PROPERTY_NOTE_USER_ID. '=' . META_FILTER_MYSELF . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 $rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title] );
 
 # Improve performance by caching category data in one pass
@@ -404,17 +404,13 @@ $box_title = lang_get( 'my_view_title_' . $t_box_title );
 <?php
 # -- Navigation header row --?>
 <tr>
-	<?php
+<?php
 # -- Viewing range info --?>
 	<td class="form-title" colspan="2">
-		<?php
-			echo '<a class="subtle" href="view_all_set.php?type=1&amp;temporary=y&amp;' . $url_link_parameters[$t_box_title] . '">';
-echo $box_title;
-echo '</a>';
-echo ' [';
-echo '<a class="subtle" href="view_all_set.php?type=1&amp;temporary=y&amp;' . $url_link_parameters[$t_box_title] . '" target="_blank">';
-echo '^';
-echo '</a>]';
+<?php
+print_link( 'view_all_set.php?type=1&temporary=y&' . $url_link_parameters[$t_box_title], $box_title, false, 'subtle' );
+echo '&nbsp;';
+print_bracket_link( 'view_all_set.php?type=1&temporary=y&' . $url_link_parameters[$t_box_title], '^', true, 'subtle' );
 
 if( count( $rows ) > 0 ) {
 	$v_start = $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] * ( $f_page_number - 1 ) + 1;

@@ -109,7 +109,7 @@
 	$tpl_wiki_link = config_get_global( 'wiki_enable' ) == ON ? 'wiki.php?id=' . $f_bug_id : '';
 
 	if ( access_has_bug_level( config_get( 'view_history_threshold' ), $f_bug_id ) ) {
-		$tpl_history_link = "view.php?id={$f_bug_id}&amp;history=1#history";
+		$tpl_history_link = "view.php?id=$f_bug_id&history=1#history";
 	} else {
 		$tpl_history_link = '';
 	}
@@ -207,7 +207,7 @@
 
 	echo $tpl_form_title;
 
-	echo '<span class="small">';
+	echo '&nbsp;<span class="small">';
 
 	# Jump to Bugnotes
 	print_bracket_link( "#bugnotes", lang_get( 'jump_to_bugnotes' ) );

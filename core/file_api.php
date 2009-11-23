@@ -289,7 +289,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_attachment['diskfile'] = $t_diskfile;
 
 		if( $t_can_download ) {
-			$t_attachment['download_url'] = "file_download.php?file_id=$t_id&amp;type=bug";
+			$t_attachment['download_url'] = "file_download.php?file_id=$t_id&type=bug";
 		}
 
 		if( $image_previewed ) {

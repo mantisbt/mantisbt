@@ -669,7 +669,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 	# add delete link if bug not read only and user has access level
  	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
  		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-			$t_relationship_info_html .= ' [<a class="small" href="bug_relationship_delete.php?bug_id=' . $p_bug_id . '&rel_id=' . $p_relationship->id . form_security_param( 'bug_relationship_delete' ) . '">' . lang_get( 'delete_link' ) . '</a>]';
+			$t_relationship_info_html .= ' [<a class="small" href="bug_relationship_delete.php?bug_id=' . $p_bug_id . '&amp;rel_id=' . $p_relationship->id . htmlspecialchars( form_security_param( 'bug_relationship_delete' ) ) . '">' . lang_get( 'delete_link' ) . '</a>]';
 		}
 	}
 
@@ -813,8 +813,8 @@ function relationship_view_box( $p_bug_id ) {
 	echo lang_get( 'bug_relationships' );
 	if( ON == config_get( 'relationship_graph_enable' ) ) {
 		?>
-		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&amp;graph=relation', lang_get( 'relation_graph' ) )?></span>
-		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&amp;graph=dependency', lang_get( 'dependency_graph' ) )?></span>
+		<span class="small"><?php print_bracket_link( "bug_relationship_graph.php?bug_id=$p_bug_id&graph=relation", lang_get( 'relation_graph' ) )?></span>
+		<span class="small"><?php print_bracket_link( "bug_relationship_graph.php?bug_id=$p_bug_id&graph=dependency", lang_get( 'dependency_graph' ) )?></span>
 		<?php
 	}
 	?>

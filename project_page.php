@@ -34,16 +34,12 @@
 	$t_view_issues_url = "set_project.php?project_id=$f_project_id&ref=view_all_bug_page.php";
 
 	if ( $f_project_id == ALL_PROJECTS ) {
-		$t_redirect_url = $t_view_issues_url;
-		print_header_redirect( $t_redirect_url );
+		print_header_redirect( $t_view_issues_url );
 		exit;
 	}
 
 	# Override the current page to make sure we get the appropriate project-specific configuration
 	$g_project_override = $f_project_id;
-
-	$t_changelog_url = "changelog_page.php?project_id=$f_project_id";
-	$t_roadmap_url = "roadmap_page.php?project_id=$f_project_id";
 
 	html_page_top( project_get_field( $f_project_id, 'name' ) );
 
@@ -54,32 +50,32 @@
 	echo '<p>';
 
 	# View Issues
-	echo '<a href="', $t_view_issues_url, '">', lang_get( 'view_bugs_link' ), '</a>';
+	print_bracket_link( $t_view_issues_url, lang_get( 'view_bugs_link' ) );
 
 	# Changelog
-	echo ' | <a href="', $t_changelog_url, '">', lang_get( 'changelog_link' ), '</a>';
+	print_bracket_link( "changelog_page.php?project_id=$f_project_id", lang_get( 'changelog_link' ) );
 
 	# Roadmap
-	echo ' | <a href="', $t_roadmap_url, '">', lang_get( 'roadmap_link' ), '</a>';
+	print_bracket_link( "roadmap_page.php?project_id=$f_project_id", lang_get( 'roadmap_link' ) );
 
 	# Documentation
 	if ( config_get( 'enable_project_documentation' ) == ON ) {
-		echo ' | <a href="proj_doc_page.php?project_id=', $f_project_id, '">', lang_get( 'docs_link' ), '</a>';
+		print_bracket_link( "proj_doc_page.php?project_id=$f_project_id", lang_get( 'docs_link' ) );
 	}
 
 	# Wiki
 	if ( config_get( 'wiki_enable' ) == ON ) {
-		echo ' | <a href="wiki.php?type=project&amp;id=', $f_project_id, '">', lang_get( 'wiki' ), '</a>';
+		print_bracket_link( "wiki.php?type=project&id=$f_project_id", lang_get( 'wiki' ) );
 	}
 
 	# Summary Page for Project
 	if ( access_has_project_level( config_get( 'view_summary_threshold' ), $f_project_id ) ) {
-		echo ' | <a href="summary_page.php?project_id=', $f_project_id, '">', lang_get( 'summary_link' ), '</a>';
+		print_bracket_link( "summary_page.php?project_id=$f_project_id", lang_get( 'summary_link' ) );
 	}
 
 	# Manage Project Page
 	if ( access_has_project_level( config_get( 'manage_project_threshold' ), $f_project_id ) ) {
-		echo ' | <a href="manage_proj_edit_page.php?project_id=', $f_project_id, '">', lang_get( 'manage_link' ), '</a>';
+		print_bracket_link( "manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'manage_link' ) );
 	}
 
 	echo '</p>';

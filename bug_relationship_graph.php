@@ -95,9 +95,9 @@
 		<span class="small">
 <?php
 		if ( $t_graph_relation )
-			print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&amp;graph=dependency', lang_get( 'dependency_graph' ) );
+			print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency", lang_get( 'dependency_graph' ) );
 		else
-			print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&amp;graph=relation', lang_get( 'relation_graph' ) );
+			print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=relation", lang_get( 'relation_graph' ) );
 ?>
 		</span>
 <?php
@@ -107,9 +107,9 @@
 		<span class="small">
 <?php
 			if ( $t_graph_horizontal )
-				print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&amp;graph=dependency&orientation=vertical', lang_get( 'vertical' ) );
+				print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency&orientation=vertical", lang_get( 'vertical' ) );
 			else
-				print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&amp;graph=dependency&orientation=horizontal', lang_get( 'horizontal' ) );
+				print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency&orientation=horizontal", lang_get( 'horizontal' ) );
 ?>
 		</span>
 <?php

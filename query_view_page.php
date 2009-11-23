@@ -46,9 +46,6 @@
 
 	html_page_top();
 
-	$t_use_query_url = 'view_all_set.php?type=3&amp;source_query_id=';
-	$t_delete_query_url = 'query_delete_page.php?source_query_id=';
-
 	$t_rss_enabled = config_get( 'rss_enabled' );
 ?>
 <br />
@@ -71,11 +68,12 @@
 			echo ' ';
 		}
 
-		print '<a href="' . $t_use_query_url . db_prepare_int( $t_id ) . '">' . string_display( $t_name ) . '</a>';
+		$t_query_id = db_prepare_int( $t_id );
+		print_link( "view_all_set.php?type=3&source_query_id=$t_query_id", $t_name );
 
 		if ( filter_db_can_delete_filter( $t_id ) ) {
 			echo ' ';
-			print_button( $t_delete_query_url . db_prepare_int( $t_id ), lang_get( 'delete_query' ) );
+			print_button( "query_delete_page.php?source_query_id=$t_query_id", lang_get( 'delete_query' ) );
 		}
 
 		print '</td>';

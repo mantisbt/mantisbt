@@ -44,7 +44,7 @@
 
 	#============ Parameters ============
 	$f_user_id = gpc_get_int( 'user_id' );
-	$f_redirect_url	= gpc_get_string( 'redirect_url', 'account_prefs_page.php' );
+	$f_redirect_url	= string_sanitize_url( gpc_get_string( 'redirect_url', 'account_prefs_page.php' ) );
 
 	#============ Permissions ============
 	form_security_validate( 'account_prefs_reset' );

@@ -156,7 +156,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
 		if( $t_view_on_click ) {
 			$t_url = string_get_bug_view_url( $t_id );
 		} else {
-			$t_url = 'bug_relationship_graph.php?bug_id=' . $t_id . '&amp;graph=relation';
+			$t_url = "bug_relationship_graph.php?bug_id=$t_id&graph=relation";
 		}
 
 		relgraph_add_bug_to_graph( $t_graph, $t_id_string, $t_bug, $t_url, $t_id == $p_bug_id );
@@ -283,7 +283,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_bug = null, $p_horizontal = 
 		if( $t_view_on_click ) {
 			$t_url = string_get_bug_view_url( $t_related_bug_id );
 		} else {
-			$t_url = 'bug_relationship_graph.php?bug_id=' . $t_related_bug_id . '&amp;graph=dependency&orientation=' . $t_graph_orientation;
+			$t_url = "bug_relationship_graph.php?bug_id=$t_related_bug_id&graph=dependency&orientation=$t_graph_orientation";
 		}
 
 		relgraph_add_bug_to_graph( $t_graph, $t_id_string, $t_related_bug, $t_url, $t_related_bug_id == $p_bug_id );

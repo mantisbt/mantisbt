@@ -975,12 +975,13 @@ function print_column_bugnotes_count( $p_bug, $p_columns_target = COLUMNS_TARGET
 
 	echo '<td class="center">';
 	if( $bugnote_count > 0 ) {
-		$t_bugnote_link = '<a href="' . string_get_bug_view_url( $p_bug->id ) . '&amp;nbn=' . $bugnote_count . '#bugnotes">' . $bugnote_count . '</a>';
-
-		if( $v_bugnote_updated > strtotime( '-' . $t_filter['highlight_changed'] . ' hours' ) ) {
-			printf( '<span class="bold">%s</span>', $t_bugnote_link );
-		} else {
-			echo $t_bugnote_link;
+		$t_show_in_bold = $v_bugnote_updated > strtotime( '-' . $t_filter['highlight_changed'] . ' hours' );
+		if( $t_show_in_bold ) {
+			echo '<span class="bold">';
+		}
+		print_link( string_get_bug_view_url( $p_bug->id ) . "&nbn=$bugnote_count#bugnotes", $bugnote_count );
+		if( $t_show_in_bold ) {
+			echo '</span>';
 		}
 	} else {
 		echo '&nbsp;';

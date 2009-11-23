@@ -34,7 +34,7 @@
 
 	$f_error		= gpc_get_bool( 'error' );
 	$f_cookie_error	= gpc_get_bool( 'cookie_error' );
-	$f_return		= gpc_get_string( 'return', '' );
+	$f_return		= string_sanitize_url( gpc_get_string( 'return', '' ) );
 	$f_username     = gpc_get_string( 'username', '' );
 	$f_perm_login	= gpc_get_bool( 'perm_login', false );
 	$f_secure_session = gpc_get_bool( 'secure_session', false );
@@ -46,12 +46,12 @@
 	if ( auth_automatic_logon_bypass_form() ) {
 		$t_uri = "login.php";
 
-		if ( !$f_return && ON == config_get( 'allow_anonymous_login' ) ) {
+		if ( ON == config_get( 'allow_anonymous_login' ) ) {
 			$t_uri = "login_anon.php";
 		}
 
-		if ( $f_return ) {
-			$t_uri .= "?return=" . urlencode( $f_return );
+		if ( !is_blank( $f_return ) ) {
+			$t_uri .= "?return=" . string_url( $f_return );
 		}
 
 		print_header_redirect( $t_uri );
@@ -111,7 +111,7 @@
 	<td class="right">
 	<?php
 		if ( ON == config_get( 'allow_anonymous_login' ) ) {
-			print_bracket_link( 'login_anon.php', lang_get( 'login_anonymously' ) );
+			print_bracket_link( 'login_anon.php?return=' . string_url( $f_return ), lang_get( 'login_anonymously' ) );
 		}
 	?>
 	</td>

@@ -56,7 +56,7 @@ function print_version_header( $p_version_id ) {
 		$t_release_date = '';
 	}
 
-	echo '<br />', $t_release_title, $t_release_date, lang_get( 'word_separator' ), print_bracket_link( 'view_all_set.php?type=1&amp;temporary=y&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&amp;' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ), lang_get( 'view_bugs_link' ) ), '<br />';
+	echo '<br />', $t_release_title, $t_release_date, lang_get( 'word_separator' ), print_bracket_link( 'view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ), lang_get( 'view_bugs_link' ) ), '<br />';
 
 	$t_release_title_without_hyperlinks .= $t_release_date;
 	echo utf8_str_pad( '', utf8_strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';

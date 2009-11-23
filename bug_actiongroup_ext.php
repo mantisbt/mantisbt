@@ -101,8 +101,6 @@
 
 	form_security_purge( $t_form_name );
 
-	$t_redirect_url = 'view_all_bug_page.php';
-
 	if ( count( $t_failed_ids ) > 0 ) {
 		html_page_top();
 
@@ -114,10 +112,10 @@
 			printf("<p>%s%s</p>\n", $label, $t_reason );
 		}
 
-		print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+		print_bracket_link( 'view_all_bug_page.php', lang_get( 'proceed' ) );
 		echo '</div>';
 
 		html_page_bottom();
 	} else {
-		print_header_redirect( $t_redirect_url );
+		print_header_redirect( 'view_all_bug_page.php' );
 	}

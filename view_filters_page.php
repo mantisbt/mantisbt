@@ -190,7 +190,7 @@
 <tr>
 	<td class="right" colspan="<?php echo ( 8 * $t_custom_cols ); ?>">
 	<?php
-		$f_switch_view_link = 'view_filters_page.php?target_field=' . $t_target_field . '&amp;view_type=';
+		$f_switch_view_link = 'view_filters_page.php?target_field=' . $t_target_field . '&view_type=';
 
 		if ( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
 			if ( 'advanced' == $f_view_type ) {

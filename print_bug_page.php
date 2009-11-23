@@ -476,7 +476,7 @@
 			}
 
 			$c_filename = string_display_line( $t_attachment['display_name'] );
-			$c_download_url = $t_path . $t_attachment['download_url'];
+			$c_download_url = $t_path . htmlspecialchars( $t_attachment['download_url'] );
 			$c_filesize = number_format( $t_attachment['size'] );
 			$c_date_added = date( config_get( 'normal_date_format' ), $t_attachment['date_added'] );
 			if ( isset( $t_attachment['icon'] ) ) {

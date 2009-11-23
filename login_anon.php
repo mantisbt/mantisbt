@@ -35,4 +35,13 @@
 	  */
 	require_once( 'core.php' );
 
-	print_header_redirect( 'login.php?username=' . config_get( 'anonymous_account' ) . '&amp;perm_login=false' );
+	$f_return = gpc_get_string( 'return', '' );
+
+	$t_anonymous_account = config_get( 'anonymous_account' );
+
+	if ( $f_return !== '' ) {
+		$t_return = string_url( string_sanitize_url( $f_return ) );
+		print_header_redirect( "login.php?username=$t_anonymous_account&perm_login=false&return=$t_return" );
+	} else {
+		print_header_redirect( "login.php?username=$t_anonymous_account&perm_login=false" );
+	}

@@ -432,7 +432,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 				}
 
 				$c_filename = string_display_line( $t_attachment['display_name'] );
-				$c_download_url = $t_path . $t_attachment['download_url'];
+				$c_download_url = $t_path . htmlspecialchars( $t_attachment['download_url'] );
 				$c_filesize = number_format( $t_attachment['size'] );
 				$c_date_added = date( $t_date_format, $t_attachment['date_added'] );
 				echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span><br />$c_download_url";

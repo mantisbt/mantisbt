@@ -57,7 +57,7 @@
 <div align="center">
 	<?php echo lang_get( 'operation_successful' ) ?><br />
 <?php
-	print_bracket_link( 'news_edit_page.php?news_id='.$f_news_id.'&amp;action=edit', lang_get( 'edit_link' ) );
+	print_bracket_link( "news_edit_page.php?news_id=$f_news_id&action=edit", lang_get( 'edit_link' ) );
 	print_bracket_link( 'news_menu_page.php', lang_get( 'proceed' ) );
 
 	echo '<br /><br />';

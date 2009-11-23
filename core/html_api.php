@@ -382,6 +382,8 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 		$t_url .= $p_url;
 	}
 
+	$t_url = htmlspecialchars( $t_url );
+
 	echo "\t<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$t_url\" />\n";
 
 	return true;
@@ -547,7 +549,7 @@ function html_login_info() {
 	if( OFF != config_get( 'rss_enabled' ) ) {
 
 		# Link to RSS issues feed for the selected project, including authentication details.
-		echo '<a href="' . rss_get_issues_feed_url() . '">';
+		echo '<a href="' . htmlspecialchars( rss_get_issues_feed_url() ) . '">';
 		echo '<img src="' . helper_mantis_url( 'images/rss.png' ) . '" alt="' . lang_get( 'rss' ) . '" style="border-style: none; margin: 5px; vertical-align: middle;" />';
 		echo '</a>';
 	}

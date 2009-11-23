@@ -70,7 +70,7 @@
 				$t_redirect_url = 'view_all_set.php?type=4';
 
 				if ( $t_source_filter_id !== null ) {
-					$t_redirect_url = 'view_all_set.php?type=3&amp;source_query_id=' . $t_source_filter_id;
+					$t_redirect_url = 'view_all_set.php?type=3&source_query_id=' . $t_source_filter_id;
 				}
 			} else if ( stripos( $t_referrer_page, '_page.php' ) !== false ) {
 				switch ( $t_referrer_page ) {
