@@ -59,6 +59,4 @@
 
 	form_security_purge( 'manage_user_prune' );
 
-	$t_redirect_url = 'manage_user_page.php';
-
-	print_header_redirect( $t_redirect_url );
+	print_header_redirect( 'manage_user_page.php' );

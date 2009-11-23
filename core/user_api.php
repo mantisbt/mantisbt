@@ -815,7 +815,7 @@ function user_get_avatar( $p_user_id, $p_size = 80 ) {
 			$t_gravatar_domain = 'https://secure.gravatar.com/';
 		}
 
-		$t_avatar_url = $t_gravatar_domain . 'avatar.php?gravatar_id=' . md5( $t_email ) . '&amp;default=' . urlencode( $t_default_image ) . '&amp;size=' . $t_size . '&amp;rating=G';
+		$t_avatar_url = $t_gravatar_domain . 'avatar.php?gravatar_id=' . md5( $t_email ) . '&default=' . urlencode( $t_default_image ) . '&size=' . $t_size . '&rating=G';
 		$t_result = array(
 			$t_avatar_url,
 			$t_size,

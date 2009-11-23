@@ -57,16 +57,14 @@
 
 	form_security_purge('manage_user_delete');
 
-	$t_redirect_url = 'manage_user_page.php';
-
-	html_page_top( null, $t_redirect_url );
+	html_page_top( null, 'manage_user_page.php' );
 ?>
 
 <br />
 <div align="center">
 <?php
 	echo lang_get( 'operation_successful' ) . '<br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	print_bracket_link( 'manage_user_page.php', lang_get( 'proceed' ) );
 ?>
 </div>
 

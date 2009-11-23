@@ -153,7 +153,7 @@
 			<td class="center">
 				<?php
 					if ( config_can_delete( $v_config_id ) ) {
-						print_button( 'adm_config_delete.php?user_id=' . $v_user_id . '&amp;project_id=' . $v_project_id . '&amp;config_option=' . $v_config_id, lang_get( 'delete_link' ) );
+						print_button( "adm_config_delete.php?user_id=$v_user_id&project_id=$v_project_id&config_option=$v_config_id", lang_get( 'delete_link' ) );
 					} else {
 						echo '&nbsp;';
 					}

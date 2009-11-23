@@ -657,7 +657,7 @@ function tag_bug_detach_all( $p_bug_id, $p_add_history = true, $p_user_id = null
 function tag_display_link( $p_tag_row, $p_bug_id = 0 ) {
 	static $t_security_token = null;
 	if( is_null( $t_security_token ) ) {
-		$t_security_token = form_security_param( 'tag_detach' );
+		$t_security_token = htmlspecialchars( form_security_param( 'tag_detach' ) );
 	}
 
 	if( auth_get_current_user_id() == $p_tag_row['user_attached'] || auth_get_current_user_id() == $p_tag_row['user_id'] ) {

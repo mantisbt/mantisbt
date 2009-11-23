@@ -49,5 +49,4 @@
 		helper_set_current_project( ALL_PROJECTS );
 	}
 
-    $t_redirect_url = 'manage_proj_page.php';
-	print_header_redirect( $t_redirect_url );
+	print_header_redirect( 'manage_proj_page.php' );

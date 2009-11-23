@@ -60,7 +60,7 @@
 
 		# check to see if new cookie is needed
 		if ( !filter_is_cookie_valid() ) {
-			print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
+			print_header_redirect( 'view_all_set.php?type=0&print=1' );
 		}
 
 		$t_setting_arr = explode( '#', $t_cookie_value, 2 );

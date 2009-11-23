@@ -61,7 +61,7 @@
 	} else {            # anything else (including 'on') will turn it on
 		$c_hide = 1;
 	}
-	$t_hide_filter = '&amp;hide=' . $c_hide;
+	$t_hide_filter = '&hide=' . $c_hide;
 
 	# set cookie values for hide, sort by, and dir
 	if ( $f_save ) {
@@ -130,14 +130,14 @@
 			$t_caption = $t_prefix;
 		}
 
+		echo '<td>';
 		if ( $t_prefix == $f_filter ) {
 			$c_filter = $f_filter;
-			$t_link = "<strong>$t_caption</strong>";
+			echo "<strong>$t_caption</strong>";
 		} else {
-			$t_link = '<a href="manage_user_page.php?filter=' . $t_prefix . $t_hide_filter .'">' . $t_caption . '</a>';
+			print_link( "manage_user_page.php?filter=$t_prefix$t_hide_filter", $t_caption );
 		}
 
-		echo '<td>' . $t_link;
 		if ($t_prefix == 'UNUSED' ) {
 			echo '[' . $unused_user_count . ']' . '<br />' . lang_get( 'never_logged_in_title' ) . '<br />';
 			echo print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) );

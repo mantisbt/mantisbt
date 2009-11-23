@@ -83,6 +83,8 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 		}
 	}
 
+	$t_url = string_prepare_header( $t_url );
+
 	# don't send more headers if they have already been sent (guideweb)
 	if( !headers_sent() ) {
 		header( 'Content-Type: text/html; charset=utf-8' );
@@ -147,7 +149,7 @@ function print_avatar( $p_user_id, $p_size = 80 ) {
 	if( access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
 		$t_avatar = user_get_avatar( $p_user_id, $p_size );
 		if( false !== $t_avatar ) {
-			$t_avatar_url = $t_avatar[0];
+			$t_avatar_url = htmlspecialchars( $t_avatar[0] );
 			$t_width = $t_avatar[1];
 			$t_height = $t_avatar[2];
 			echo '<a rel="nofollow" href="http://site.gravatar.com"><img class="avatar" src="' . $t_avatar_url . '" alt="User avatar" width="' . $t_width . '" height="' . $t_height . '" /></a>';
@@ -1161,7 +1163,7 @@ function print_custom_field_projects_list( $p_field_id ) {
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 		$t_sequence = custom_field_get_sequence( $p_field_id, $t_project_id );
 		echo '<b>', $t_project_name, '</b>: ';
-		print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$c_field_id&amp;project_id=$t_project_id&amp;return=custom_field$t_security_token", lang_get( 'remove_link' ) );
+		print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$c_field_id&project_id=$t_project_id&return=custom_field$t_security_token", lang_get( 'remove_link' ) );
 		echo '<br />- ';
 
 		$t_linked_field_ids = custom_field_get_linked_ids( $t_project_id );
@@ -1265,7 +1267,8 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 			$t_dir = 'ASC';
 		}
 
-		echo '<a href="view_all_set.php?sort=' . rawurlencode( $p_sort_field ) . '&amp;dir=' . $p_dir . '&amp;type=2&amp;print=1">' . $p_string . '</a>';
+		$t_sort_field = rawurlencode( $p_sort_field );
+		print_link( "view_all_set.php?sort=$t_sort_field&dir=$p_dir&type=2&print=1", $p_string );
 	}
 	else if( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
 		if( $p_sort_field == $p_sort ) {
@@ -1281,7 +1284,8 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 			$t_dir = 'ASC';
 		}
 
-		echo '<a href="view_all_set.php?sort=' . rawurlencode( $p_sort_field ) . '&amp;dir=' . $p_dir . '&amp;type=2">' . $p_string . '</a>';
+		$t_sort_field = rawurlencode( $p_sort_field );
+		print_link( "view_all_set.php?sort=$t_sort_field&dir=$p_dir&type=2", $p_string );
 	} else {
 		echo $p_string;
 	}
@@ -1301,7 +1305,8 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 		$t_dir = 'ASC';
 	}
 
-	echo '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '&amp;save=1&amp;hide=' . $p_hide . '&amp;filter=' . $p_filter . '">' . $p_string . '</a>';
+	$t_field = rawurlencode( $p_field );
+	print_link( "$p_page?sort=$t_field&dir=$t_dir&save=1&hide=$p_hide&filter=$p_filter", $p_string );
 }
 
 function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by ) {
@@ -1318,7 +1323,8 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
 		$t_dir = 'ASC';
 	}
 
-	echo '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '">' . $p_string . '</a>';
+	$t_field = rawurlencode( $p_field );
+	print_link( "$p_page?sort=$t_field&dir=$t_dir", $p_string );
 }
 
 # print a button which presents a standalone form.
@@ -1330,7 +1336,7 @@ function print_button( $p_action_page, $p_label, $p_args_to_post = null ) {
 	# TODO: ensure all uses of print_button supply arguments via $p_args_to_post (POST)
 	# instead of via $p_action_page (GET). Then only add the CSRF form token if
 	# arguments are being sent via the POST method.
-	echo '<form method="post" action="', $p_action_page, '">';
+	echo '<form method="post" action="', htmlspecialchars( $p_action_page ), '">';
 	echo form_security_field( $t_form_name[0] );
 	echo '<input type="submit" class="button-small" value="', $p_label, '" />';
 
@@ -1353,23 +1359,28 @@ function print_bracket_link_prepared( $p_link ) {
 # if $p_new_window is true, link will open in a new window, default false.
 function print_bracket_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
 	echo '<span class="bracket-link">[&nbsp;';
-	print_link( $p_link, $p_url_text, $p_new_window, $p_class = '' );
+	print_link( $p_link, $p_url_text, $p_new_window, $p_class );
 	echo '&nbsp;]</span> ';
 }
 
 # print a HTML link
 function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
-	$t_class = $p_class;
-	if( $p_class !== '' ) {
-		$t_class = "class='$p_class' ";
-	}
 	if( is_blank( $p_link ) ) {
-		echo "$p_url_text";
+		echo $p_url_text;
 	} else {
+		$t_link = htmlspecialchars( $p_link );
 		if( $p_new_window === true ) {
-			echo "<a ${t_class}href=\"$p_link\" target=\"_blank\">$p_url_text</a>";
+			if( $p_class !== '') {
+				echo "<a class=\"$p_class\" href=\"$t_link\" target=\"_blank\">$p_url_text</a>";
+			} else {
+				echo "<a href=\"$t_link\" target=\"_blank\">$p_url_text</a>";
+			}
 		} else {
-			echo "<a ${t_class}href=\"$p_link\">$p_url_text</a>";
+			if( $p_class !== '') {
+				echo "<a class=\"$p_class\" href=\"$t_link\">$p_url_text</a>";
+			} else {
+				echo "<a href=\"$t_link\">$p_url_text</a>";
+			}
 		}
 	}
 }
@@ -1382,9 +1393,9 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 
 	if(( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
 		if( $p_temp_filter_id !== 0 ) {
-			echo " <a href=\"$p_page_url?filter=$p_temp_filter_id&amp;page_number=$p_page_no\">$p_text</a> ";
+			print_link( "$p_page_url?filter=$p_temp_filter_id&page_number=$p_page_no", $p_text );
 		} else {
-			echo " <a href=\"$p_page_url?page_number=$p_page_no\">$p_text</a> ";
+			print_link( "$p_page_url?page_number=$p_page_no", $p_text );
 		}
 	} else {
 		echo " $p_text ";
@@ -1435,7 +1446,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 			array_push( $t_items, $i );
 		} else {
 			if( $p_temp_filter_id !== 0 ) {
-				array_push( $t_items, "<a href=\"$p_page?filter=$p_temp_filter_id&amp;page_number=$i\">$i</a>" );
+				array_push( $t_items, "<a href=\"$p_page?filter=$p_temp_filter_id&page_number=$i\">$i</a>" );
 			} else {
 				array_push( $t_items, "<a href=\"$p_page?page_number=$i\">$i</a>" );
 			}
@@ -1605,7 +1616,7 @@ function print_file_icon( $p_filename ) {
 # Prints an RSS image that is hyperlinked to an RSS feed.
 function print_rss( $p_feed_url, $p_title = '' ) {
 	$t_path = config_get( 'path' );
-	echo '<a href="', $p_feed_url, '" title="', $p_title, '"><img src="', $t_path, '/images/', 'rss.png" width="16" height="16" border="0" alt="', $p_title, '" /></a>';
+	echo '<a href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><img src="', $t_path, '/images/', 'rss.png" width="16" height="16" border="0" alt="', $p_title, '" /></a>';
 }
 
 # Prints the recently visited issues.
@@ -1706,7 +1717,9 @@ function print_bug_attachments_list( $p_bug_id ) {
 			echo $t_href_end . '&nbsp;' . $t_href_start . $t_file_display_name . $t_href_end . $t_href_clicket . ' (' . $t_filesize . ' ' . lang_get( 'bytes' ) . ') ' . '<span class=\"italic\">' . $t_date_added . '</span>';
 
 			if ( $t_attachment['can_delete'] ) {
-				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id={$t_attachment['id']}" . form_security_param( 'bug_file_delete' ) . "\">" . lang_get( 'delete_link' ) . '</a>]';
+				echo '&nbsp;[';
+				print_link( 'bug_file_delete.php?file_id=' . $t_attachment['id'] . form_security_param( 'bug_file_delete' ), lang_get( 'delete_link' ), false, 'small' );
+				echo ']';
 			}
 
 			if ( ( FTP == config_get( 'file_upload_method' ) ) && $t_attachment['exists'] ) {

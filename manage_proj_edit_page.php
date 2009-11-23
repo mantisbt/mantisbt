@@ -251,7 +251,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	<td class="center">
 		<?php
 				print_bracket_link( 'manage_proj_edit_page.php?project_id=' . $t_subproject['id'], lang_get( 'edit_link' ) );
-				print_bracket_link( 'manage_proj_subproj_delete.php?project_id=' . $f_project_id . '&amp;subproject_id=' . $t_subproject['id'] . form_security_param( 'manage_proj_subproj_delete' ), lang_get( 'unlink_link' ) );
+				print_bracket_link( "manage_proj_subproj_delete.php?project_id=$f_project_id&subproject_id=" . $t_subproject['id'] . form_security_param( 'manage_proj_subproj_delete' ), lang_get( 'unlink_link' ) );
 		?>
 	</td>
 </tr>
@@ -583,7 +583,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 				<td class="center">
 				<?php
 					# You need global permissions to edit custom field defs
-					print_button( "manage_proj_custom_field_remove.php?field_id={$t_field_id}&amp;project_id={$f_project_id}", lang_get( 'remove_link' ) );
+					print_button( "manage_proj_custom_field_remove.php?field_id=$t_field_id&project_id=$f_project_id", lang_get( 'remove_link' ) );
 				?>
 				</td>
 			</tr>
@@ -793,7 +793,7 @@ if ( $t_can_manage_users ) {
 				#  from this project
 				if ( $t_can_manage_users ) {
 					if ( project_includes_user( $f_project_id, $t_user['id'] )  ) {
-						print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id . '&amp;user_id=' . $t_user['id'], lang_get( 'remove_link' ) );
+						print_button( "manage_proj_user_remove.php?project_id=$f_project_id&user_id=" . $t_user['id'], lang_get( 'remove_link' ) );
 						$t_removable_users_exist = true;
 					}
 				}
@@ -812,14 +812,14 @@ if ( $t_can_manage_users ) {
 		# You need global or project-specific permissions to remove users
 		#  from this project
 		if ( !$f_show_global_users ) {
-			print_button( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '&amp;show_global_users=true', lang_get( 'show_global_users' ) );
+			print_button( "manage_proj_edit_page.php?project_id=$f_project_id&show_global_users=true", lang_get( 'show_global_users' ) );
 		} else {
-			print_button( 'manage_proj_edit_page.php?project_id=' . $f_project_id, lang_get( 'hide_global_users' ) );
+			print_button( "manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'hide_global_users' ) );
 		}
 
 		if ( $t_removable_users_exist ) {
 			echo '&nbsp;';
-			print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id, lang_get( 'remove_all_link' ) );
+			print_button( "manage_proj_user_remove.php?project_id=$f_project_id", lang_get( 'remove_all_link' ) );
 		}
 	?>
 	</td>

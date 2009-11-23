@@ -39,7 +39,7 @@ function ajax_click_to_edit( $p_initial_string, $p_element_id_prefix, $p_query_s
 
 	$t_return = '<a id="' . $t_element_id_target . '">' . $p_initial_string . '</a> ';
 	$t_return .= '<a id="' . $t_element_id_edit . '" onclick="';
-	$t_return .= "AjaxLoad('" . $t_element_id_target . "', '" . $p_query_string . "', '" . $t_element_id_edit . "' )";
+	$t_return .= "AjaxLoad('" . $t_element_id_target . "', '" . htmlspecialchars( $p_query_string ) . "', '" . $t_element_id_edit . "' )";
 	$t_return .= '"><small>[' . $t_edit . ']</small></a>';
 
 	return $t_return;

@@ -53,7 +53,7 @@
 
 	$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 	if ( $result === false ) {
-		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
+		print_header_redirect( 'view_all_set.php?type=0&print=1' );
 	}
 
 	header( 'Content-Type: application/vnd.ms-excel; charset=UTF-8' );
