@@ -457,6 +457,7 @@ $l_oServer->wsdl->addComplexType(
 		'access_level_rw'	=>	array( 'name' => 'access_level_rw',	'type' => 'xsd:integer', 	'minOccurs' => '0'),
 		'length_min'		=>	array( 'name' => 'length_min',		'type' => 'xsd:integer', 	'minOccurs' => '0'),
 		'length_max'		=>	array( 'name' => 'length_max',		'type' => 'xsd:integer', 	'minOccurs' => '0'),
+		'advanced'              =>      array( 'name' => 'advanced',            'type' => 'xsd:boolean',        'minOccurs' => '0'),
 		'display_report'	=>	array( 'name' => 'display_report',	'type' => 'xsd:boolean', 	'minOccurs' => '0'),
 		'display_update'	=>	array( 'name' => 'display_update',	'type' => 'xsd:boolean', 	'minOccurs' => '0'),
 		'display_resolved'	=>	array( 'name' => 'display_resolved','type' => 'xsd:boolean', 	'minOccurs' => '0'),
