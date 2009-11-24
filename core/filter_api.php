@@ -3190,7 +3190,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 		<tr class="row-1">
 			<td class="small-caption category2" valign="top">
-                <a href="<?php echo $t_filters_url . FILTER_PROPERTY_NOTE_USER_ID;?>" id="note_user_id_filter"><?php echo lang_get( 'note_user_id' )?></a>
+                <a href="<?php echo $t_filters_url . FILTER_PROPERTY_NOTE_USER_ID;?>" id="note_user_id_filter"><?php echo lang_get( 'note_user_id_label' )?></a>
             </td>
             <td class="small-caption" valign="top" id="note_user_id_filter_target">
                 <?php

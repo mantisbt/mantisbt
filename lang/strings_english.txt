@@ -98,6 +98,7 @@ $s_bugnote_link_title = 'Direct link to note';
 $s_delete_bugnote_button = 'Delete Note';
 $s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this note?';
 $s_bug_relationships = 'Relationships';
+$s_bug_relationships_label = 'Relationships:';
 $s_empty_password_sure_msg = 'The user has an empty password. Are you sure that is what you want?';
 $s_empty_password_button = 'Use Empty Password';
 $s_reauthenticate_title = 'Authenticate';
@@ -564,6 +565,7 @@ $s_upload_file = 'Upload File';
 $s_select_file = 'Select File';
 $s_upload_file_button = 'Upload File';
 $s_max_file_size = 'Max. size';
+$s_max_file_size_label = 'Max. size:';
 
 # bug_reopen.php
 $s_bug_reopened_msg = 'Issue has been reopened...';
