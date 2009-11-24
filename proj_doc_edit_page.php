@@ -102,9 +102,9 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo lang_get( 'select_file' );
-				  // FIXME: hard coded "k" in here.
-				  echo '<br /><span class="small">(' . lang_get( 'max_file_size_label' ) . lang_get( 'word_separator' ) . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
+		<?php echo lang_get( 'select_file' ); ?><br />
+		<?php // FIXME: hard coded "k" in here. ?>
+		<span class="small"><?php echo lang_get( 'max_file_size_label' ) . lang_get( 'word_separator' ) . number_format( $t_max_file_size/1000 ) ?>k</span>
 	</td>
 	<td>
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
