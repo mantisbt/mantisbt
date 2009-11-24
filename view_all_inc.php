@@ -130,6 +130,7 @@
 
 		<span class="floatleft small"> <?php
 				# -- Print and Export links --
+				echo '&nbsp;';
 				print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
 				echo '&nbsp;';
 				print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
