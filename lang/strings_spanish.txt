@@ -37,6 +37,7 @@
  * @author Luis Miguel Cruz Miranda - luismi@b2bi.es
  * @author Pablo Corral - PabloCorral@ciudad.com.ar
  * @author Sanbec
+ * @author Translationista
  */
 
 $s_actiongroup_menu_move = 'Mover';
@@ -74,6 +75,7 @@ $s_private_project_msg = 'Este proyecto es PRIVADO. Solo los administradores y u
 $s_access_level_project = 'Nivel de Acceso de Proyecto';
 $s_view_submitted_bug_link = 'Ver Incidencia Reportada %1$s';
 $s_assigned_projects = 'Proyectos Asignados';
+$s_unassigned_projects_label = 'Proyectos sin asignar:';
 $s_print = 'Imprimir';
 $s_jump = 'Ir a Incidencia';
 $s_copy_users = 'Copiar Usuarios';

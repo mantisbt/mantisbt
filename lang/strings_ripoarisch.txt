@@ -621,6 +621,7 @@ $s_copy_columns_from = 'Shpallde kopeere vun';
 $s_copy_columns_to = 'Shpallde kopeere noh';
 $s_view_account_title = 'Metmaacher-Daate';
 $s_manage_user = 'De Metmaacher verwallde';
+$s_label = '%1$s:';
 $s_install_information = 'MantisBT sing Enshtellunge';
 $s_database_information = 'MantisBT sing Datebangk-Enshtellunge';
 $s_path_information = 'MantisBT sing Pahde';
