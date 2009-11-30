@@ -1917,23 +1917,53 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 	# Text search
 	if( !is_blank( $t_filter[FILTER_PROPERTY_FREE_TEXT] ) ) {
-		$c_search = '%' . $t_filter[FILTER_PROPERTY_FREE_TEXT] . '%';
-		$t_textsearch_where_clause = '(' . db_helper_like( 'summary' ) . ' OR ' . db_helper_like( "$t_bug_text_table.description" ) . ' OR ' . db_helper_like( "$t_bug_text_table.steps_to_reproduce" ) . ' OR ' . db_helper_like( "$t_bug_text_table.additional_information" ) . ' OR ' . db_helper_like( "$t_bugnote_text_table.note" );
 
-		$t_where_params[] = $c_search;
-		$t_where_params[] = $c_search;
-		$t_where_params[] = $c_search;
-		$t_where_params[] = $c_search;
-		$t_where_params[] = $c_search;
+		# break up search terms by spacing or quoting
+		preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $t_filter[FILTER_PROPERTY_FREE_TEXT], $t_matches, PREG_SET_ORDER );
 
-		if( is_numeric( $t_filter[FILTER_PROPERTY_FREE_TEXT] ) ) {
-			$c_search_int = (int) $t_filter[FILTER_PROPERTY_FREE_TEXT];
-			$t_textsearch_where_clause .= " OR $t_bug_table.id = " . db_param();
-			$t_textsearch_where_clause .= " OR $t_bugnote_table.id = " . db_param();
-			$t_where_params[] = $c_search_int;
-			$t_where_params[] = $c_search_int;
+		# organize terms without quoting, paying attention to negation
+		$t_search_terms = array();
+		foreach( $t_matches as $t_match ) {
+			$t_search_terms[ trim( $t_match[1], "\'\"" ) ] = ( $t_match[0][0] == '-' );
 		}
-		$t_textsearch_where_clause .= " )";
+
+		# build a big where-clause and param list for all search terms, including negations
+		$t_first = true;
+		$t_textsearch_where_clause = "( ";
+		foreach( $t_search_terms as $t_search_term => $t_negate ) {
+			if ( !$t_first ) {
+				$t_textsearch_where_clause .= ' AND ';
+			}
+
+			if ( $t_negate ) {
+				$t_textsearch_where_clause .= 'NOT ';
+			}
+
+			$c_search = '%' . $t_search_term . '%';
+			$t_textsearch_where_clause .= '( ' . db_helper_like( 'summary' ) .
+				' OR ' . db_helper_like( "$t_bug_text_table.description" ) .
+				' OR ' . db_helper_like( "$t_bug_text_table.steps_to_reproduce" ) .
+				' OR ' . db_helper_like( "$t_bug_text_table.additional_information" ) .
+				' OR ' . db_helper_like( "$t_bugnote_text_table.note" );
+
+			$t_where_params[] = $c_search;
+			$t_where_params[] = $c_search;
+			$t_where_params[] = $c_search;
+			$t_where_params[] = $c_search;
+			$t_where_params[] = $c_search;
+
+			if( is_numeric( $t_search_term ) ) {
+				$c_search_int = (int) $t_search_term;
+				$t_textsearch_where_clause .= " OR $t_bug_table.id = " . db_param();
+				$t_textsearch_where_clause .= " OR $t_bugnote_table.id = " . db_param();
+				$t_where_params[] = $c_search_int;
+				$t_where_params[] = $c_search_int;
+			}
+
+			$t_textsearch_where_clause .= ' )';
+			$t_first = false;
+		}
+		$t_textsearch_where_clause .= ' )';
 
 		# add text query elements to arrays
 		$t_from_clauses[] = "$t_bug_text_table";
