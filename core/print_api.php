@@ -334,7 +334,7 @@
 
 		echo '<option value="0">',lang_get( 'tag_existing' ),'</option>';
 		while ( $row = db_fetch_array( $result ) ) {
-			echo '<option value="',$row['id'],'">',$row['name'],'</option>';
+			echo '<option value="',$row['id'],'">',string_html_entities( $row['name'] ),'</option>';
 		}
 	}
 

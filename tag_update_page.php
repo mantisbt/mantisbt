@@ -33,6 +33,9 @@
 	$f_tag_id = gpc_get_int( 'tag_id' );
 	$t_tag_row = tag_get( $f_tag_id );
 
+	$t_name = string_display_line( $t_tag_row['name'] );
+	$t_description = string_display( $t_tag_row['description'] );
+
 	if ( ! ( access_has_global_level( config_get( 'tag_edit_threshold' ) ) 
 		|| ( auth_get_current_user_id() == $t_tag_row['user_id'] )
 			&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) ) 
@@ -40,7 +43,7 @@
 		access_denied();
 	}
 	
-	html_page_top1( sprintf( lang_get( 'tag_update' ), $t_tag_row['name'] ) );
+	html_page_top1( sprintf( lang_get( 'tag_update' ), $t_name ) );
 	html_page_top2();
 ?>
 
@@ -52,7 +55,7 @@
 <!-- Title -->
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo sprintf( lang_get( 'tag_update' ), $t_tag_row['name'] ) ?>
+		<?php echo sprintf( lang_get( 'tag_update' ), $t_name ) ?>
 		<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>"/>
 	</td>
 	<td class="right" colspan="3">
@@ -71,7 +74,7 @@
 
 <tr <?php echo helper_alternate_class() ?>>
 	<td><?php echo $t_tag_row['id'] ?></td>
-	<td><input type="text" <?php echo helper_get_tab_index() ?> name="name" value="<?php echo $t_tag_row['name'] ?>"/></td>
+	<td><input type="text" <?php echo helper_get_tab_index() ?> name="name" value="<?php echo $t_name ?>"/></td>
 	<td><?php
 			if ( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
 				if ( ON == config_get( 'use_javascript' ) ) {
@@ -99,7 +102,7 @@
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category"><?php echo lang_get( 'tag_description' ) ?></td>
 	<td colspan="4">
-		<textarea name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo string_textarea( $t_tag_row['description'] ) ?></textarea>
+		<textarea name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo string_textarea( $t_description ) ?></textarea>
 	</td>
 </tr>
 

@@ -36,7 +36,7 @@
 	$t_name = string_display_line( $t_tag_row['name'] );
 	$t_description = string_display( $t_tag_row['description'] );
 
-	html_page_top1( sprintf( lang_get( 'tag_details' ), $t_tag_row['name'] ) );
+	html_page_top1( sprintf( lang_get( 'tag_details' ), $t_name ) );
 	html_page_top2();
 ?>
 
@@ -46,7 +46,7 @@
 <!-- Title -->
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo sprintf( lang_get( 'tag_details' ), $t_tag_row['name'] ) ?>
+		<?php echo sprintf( lang_get( 'tag_details' ), $t_name ) ?>
 
 	</td>
 	<td class="right" colspan="3">

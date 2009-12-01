@@ -2404,9 +2404,9 @@
 						$t_tag_string .= ( is_blank( $t_tag_string ) ? '' : config_get( 'tag_separator' ) );
 						$t_tag_string .= tag_get_field( $t_filter['tag_select'], 'name' );
 					}
-					PRINT $t_tag_string 
+					echo string_html_entities( $t_tag_string );
 				?>
-				<input type="hidden" name="tag_string" value="<?php echo $t_tag_string ?>"/>
+				<input type="hidden" name="tag_string" value="<?php echo string_attribute( $t_tag_string ) ?>"/>
 			</td>
 		</tr>
 		<?php
@@ -3649,7 +3649,7 @@
 		}
 		?>
 		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' ) ?>" />
-		<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo $t_tag_string ?>" />
+		<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo string_attribute( $t_tag_string ) ?>" />
 		<select <?php echo helper_get_tab_index() ?> name="tag_select" id="tag_select">
 			<?php print_tag_option_list(); ?>
 		</select>
