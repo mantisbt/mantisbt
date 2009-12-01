@@ -90,7 +90,7 @@
 					echo '</select>';
 				}
 			} else {
-				echo user_get_name($t_tag_row['user_id']);
+				echo string_display_line( user_get_name($t_tag_row['user_id']) );
 			}
 		?></td>
 	<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?> </td>
