@@ -64,7 +64,7 @@
 			<?php echo lang_get( 'username' ) ?>
 		</td>
 		<td width="75%">
-			<?php echo $u_username ?>
+			<?php echo string_display_line( $u_username ) ?>
 		</td>
 	</tr>
 
@@ -98,7 +98,7 @@
 				if ( ! ( $t_can_manage || $t_can_see_realname ) ) {
 					print error_string(ERROR_ACCESS_DENIED);
 				} else {
-					echo $u_realname;
+					echo string_display_line( $u_realname );
 				}
 			?>
 		</td>
