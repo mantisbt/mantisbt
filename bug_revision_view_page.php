@@ -98,7 +98,7 @@ function show_revision( $t_revision ) {
 		$t_label = '';
 	}
 
-$t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( config_get( 'normal_date_format' ), $t_revision['timestamp'] ) ), user_get_name( $t_revision['user_id'] ) );
+$t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( config_get( 'normal_date_format' ), $t_revision['timestamp'] ) ), string_display_line( user_get_name( $t_revision['user_id'] ) ) );
 
 ?>
 <tr class="spacer"><td><a name="r<?php echo $t_revision['id'] ?>"></a></td></tr>
