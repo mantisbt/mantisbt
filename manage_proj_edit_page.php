@@ -357,7 +357,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 				<?php echo string_display( category_full_name( $t_category['id'] , /* showProject */ $t_inherited, $f_project_id ) )  ?>
 			</td>
 			<td>
-				<?php echo $t_user_name ?>
+				<?php echo string_display_line( $t_user_name ) ?>
 			</td>
 			<td class="center">
 				<?php if ( !$t_inherited ) {
