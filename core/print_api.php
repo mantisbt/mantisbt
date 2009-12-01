@@ -678,7 +678,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 	foreach( $cat_arr as $t_category_row ) {
 		$t_category_id = $t_category_row['id'];
 		echo "<option value=\"$t_category_id\"", check_selected( $p_category_id, $t_category_id ), '>';
-		echo category_full_name( $t_category_id, $t_category_row['project_id'] != $t_project_id ), '</option>';
+		echo string_display_line( category_full_name( $t_category_id, $t_category_row['project_id'] != $t_project_id ) ), '</option>';
 	}
 }
 
