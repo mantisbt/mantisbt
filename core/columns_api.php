@@ -1179,7 +1179,7 @@ function print_column_project_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 function print_column_last_updated( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_filter;
 
-	$t_last_updated = date( config_get( 'short_date_format' ), $p_bug->last_updated );
+	$t_last_updated = string_display_line( date( config_get( 'short_date_format' ), $p_bug->last_updated ) );
 
 	echo '<td class="center">';
 	if( $p_bug->last_updated > strtotime( '-' . $t_filter['highlight_changed'] . ' hours' ) ) {
@@ -1198,7 +1198,7 @@ function print_column_last_updated( $p_bug, $p_columns_target = COLUMNS_TARGET_V
  * @access public
  */
 function print_column_date_submitted( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	$t_date_submitted = date( config_get( 'short_date_format' ), $p_bug->date_submitted );
+	$t_date_submitted = string_display_line( date( config_get( 'short_date_format' ), $p_bug->date_submitted ) );
 
 	echo '<td class="center">', $t_date_submitted, '</td>';
 }
@@ -1272,7 +1272,7 @@ function print_column_target_version( $p_bug, $p_columns_target = COLUMNS_TARGET
 	# In case of a specific project, if the current user has no access to the field, then it would have been excluded from the
 	# list of columns to view.  In case of ALL_PROJECTS, then we need to check the access per row.
 	if( helper_get_current_project() != ALL_PROJECTS || access_has_project_level( config_get( 'roadmap_view_threshold' ), $p_bug->project_id ) ) {
-		echo $p_bug->target_version;
+		echo string_display_line( $p_bug->target_version );
 	}
 
 	echo '</td>';
@@ -1320,7 +1320,7 @@ function print_column_due_date( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_
 		echo '<td>';
 	}
 
-	echo date( config_get( 'short_date_format' ), $p_bug->due_date );
+	echo string_display_line( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
 
 	echo '</td>';
 }
@@ -1341,7 +1341,7 @@ function print_column_overdue( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_P
 		!date_is_null( $p_bug->due_date ) &&
 		bug_is_overdue( $p_bug->id ) ) {
 		$t_overdue_text = lang_get( 'overdue' );
-		$t_overdue_text_hover = $t_overdue_text . '. Due date was: ' . date( config_get( 'short_date_format' ), $p_bug->due_date );
+		$t_overdue_text_hover = $t_overdue_text . '. Due date was: ' . string_display_line( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
 		echo '<img src="' . $t_icon_path . 'overdue.png" alt="' . $t_overdue_text . '" title="' . $t_overdue_text_hover . '" />';
 	} else {
 		echo '&nbsp;';

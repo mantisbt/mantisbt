@@ -341,7 +341,7 @@ function custom_function_default_print_column_value( $p_column, $p_bug, $p_colum
 
 		} else {
 			if( isset( $p_bug->$p_column ) ) {
-				echo $t_column_start . $p_bug->$p_column . $t_column_end;
+				echo $t_column_start . string_display_line( $p_bug->$p_column ) . $t_column_end;
 			} else {
 				echo $t_column_start . '@' . $p_column . '@' . $t_column_end;
 			}
