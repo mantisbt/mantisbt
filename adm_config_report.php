@@ -133,7 +133,7 @@
 <!-- Repeated Info Rows -->
 		<tr <?php echo helper_alternate_class() ?> valign="top">
 			<td class="center">
-				<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : user_get_name( $v_user_id ) ?>
+				<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
 			</td>
 			<td class="center">
 				<?php echo project_get_name( $v_project_id ) ?>
