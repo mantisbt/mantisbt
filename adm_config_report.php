@@ -136,13 +136,13 @@
 				<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
 			</td>
 			<td class="center">
-				<?php echo project_get_name( $v_project_id ) ?>
+				<?php echo string_display_line( project_get_name( $v_project_id ) ) ?>
 			</td>
 			<td>
-				<?php echo string_display( $v_config_id ) ?>
+				<?php echo string_display_line( $v_config_id ) ?>
 			</td>
 			<td class="center">
-				<?php echo string_display( get_config_type( $v_type ) ) ?>
+				<?php echo string_display_line( get_config_type( $v_type ) ) ?>
 			</td>
 			<td class="left">
 				<?php print_config_value_as_string( $v_type, $v_value ) ?>
