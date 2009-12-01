@@ -1040,7 +1040,7 @@ function print_column_category_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
 	# type project name if viewing 'all projects' or if issue is in a subproject
  	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $p_bug->project_id ) {
 		echo '<small>[';
-		print_view_bug_sort_link( $t_project_name, 'project_id', $t_sort, $t_dir, $p_columns_target );
+		print_view_bug_sort_link( string_display_line( $t_project_name ), 'project_id', $t_sort, $t_dir, $p_columns_target );
 		echo ']</small><br />';
 	}
 
