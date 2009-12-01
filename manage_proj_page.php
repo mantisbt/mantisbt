@@ -201,7 +201,7 @@
 				<?php echo string_display( category_full_name( $t_category['id'], false ) )  ?>
 			</td>
 			<td>
-				<?php echo $t_user_name ?>
+				<?php echo string_display_line( $t_user_name ) ?>
 			</td>
 			<td class="center">
 				<?php
