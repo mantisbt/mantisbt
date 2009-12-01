@@ -317,7 +317,7 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 		if ( !empty( $row['description'] ) ) {
 			$t_string .= ' - ' . utf8_substr( $row['description'], 0, 20 );
 		}
-		echo '<option value="', $row['id'], '" title="', $row['name'], '">', $t_string, '</option>';
+		echo '<option value="', $row['id'], '" title="', string_html_entities( $row['name'] ), '">', string_html_entities( $t_string ), '</option>';
 	}
 }
 

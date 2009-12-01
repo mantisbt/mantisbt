@@ -2939,8 +2939,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			$t_tag_string .= ( is_blank( $t_tag_string ) ? '' : config_get( 'tag_separator' ) );
 			$t_tag_string .= tag_get_field( $t_filter[FILTER_PROPERTY_TAG_SELECT], 'name' );
 		}
-		echo $t_tag_string;
-		echo '<input type="hidden" name="', FILTER_PROPERTY_TAG_STRING, '" value="', $t_tag_string, '" />';
+		echo string_html_entities( $t_tag_string );
+		echo '<input type="hidden" name="', FILTER_PROPERTY_TAG_STRING, '" value="', string_attribute( $t_tag_string ), '" />';
 		?>
 			</td>
 		</tr>
@@ -3900,7 +3900,7 @@ function print_filter_tag_string() {
 	}
 	?>
 		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
-		<input type="text" name="<?php echo FILTER_PROPERTY_TAG_STRING;?>" id="<?php echo FILTER_PROPERTY_TAG_STRING;?>" size="40" value="<?php echo $t_tag_string?>" />
+		<input type="text" name="<?php echo FILTER_PROPERTY_TAG_STRING;?>" id="<?php echo FILTER_PROPERTY_TAG_STRING;?>" size="40" value="<?php echo string_attribute( $t_tag_string )?>" />
 		<select <?php echo helper_get_tab_index()?> name="<?php echo FILTER_PROPERTY_TAG_SELECT;?>" id="<?php echo FILTER_PROPERTY_TAG_SELECT;?>">
 			<?php print_tag_option_list();?>
 		</select>
