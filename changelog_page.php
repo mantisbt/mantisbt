@@ -40,15 +40,15 @@ function print_version_header( $p_version_id ) {
 	$t_version_name = version_get_field( $p_version_id, 'version' );
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 
-	$t_release_title_without_hyperlinks = string_display( $t_project_name ) . ' - ' . string_display( $t_version_name );
-	$t_release_title = '<a href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display( $t_project_name ) . '</a> - <a href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display( $t_version_name ) . '</a>';
+	$t_release_title_without_hyperlinks = string_display_line( $t_project_name ) . ' - ' . string_display_line( $t_version_name );
+	$t_release_title = '<a href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a> - <a href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
 
 	if ( config_get( 'show_changelog_dates' ) ) {
 		$t_version_released = version_get_field( $p_version_id, 'released' );
 		$t_release_timestamp = version_get_field( $p_version_id, 'date_order' );
 
 		if ( (bool) $t_version_released ) {
-			$t_release_date = ' (' . lang_get('released') . ' ' . date( config_get( 'short_date_format' ), $t_release_timestamp ) . ')';
+			$t_release_date = ' (' . lang_get('released') . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_release_timestamp ) ) . ')';
 		} else {
 			$t_release_date = ' (' . lang_get( 'not_released' ) . ')';
 		}
@@ -68,7 +68,7 @@ function print_version_header( $p_version_id ) {
  * @return null
  */
 function print_project_header_changelog ( $p_project_name ) {
-	echo '<br /><span class="pagetitle">', string_display( $p_project_name ), ' - ', lang_get( 'changelog' ), '</span><br />';
+	echo '<br /><span class="pagetitle">', string_display_line( $p_project_name ), ' - ', lang_get( 'changelog' ), '</span><br />';
 	echo '<tt>';
 }
 
