@@ -429,7 +429,7 @@ function summary_print_by_developer() {
 		$v_bugcount = $row['bugcount'];
 
 		if(( $v_handler_id != $t_last_handler ) && ( -1 != $t_last_handler ) ) {
-			$t_user = user_get_name( $t_last_handler );
+			$t_user = string_display_line( user_get_name( $t_last_handler ) );
 
 			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_last_handler;
 			if( 0 < $t_bugs_open ) {
@@ -466,7 +466,7 @@ function summary_print_by_developer() {
 	}
 
 	if( 0 < $t_bugs_total ) {
-		$t_user = user_get_name( $t_last_handler );
+		$t_user = string_display_line( user_get_name( $t_last_handler ) );
 
 		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_last_handler;
 		if( 0 < $t_bugs_open ) {
@@ -545,7 +545,7 @@ function summary_print_by_reporter() {
 		}
 
 		if( 0 < $t_bugs_total ) {
-			$t_user = user_get_name( $v_reporter_id );
+			$t_user = string_display_line( user_get_name( $v_reporter_id ) );
 
 			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $v_reporter_id;
 			if( 0 < $t_bugs_open ) {
@@ -812,7 +812,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 			echo '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
 			$t_row_count++;
 			echo '<td>';
-			echo user_get_name( $t_handler_id );
+			echo string_display_line( user_get_name( $t_handler_id ) );
 			echo '</td>';
 
 			# We need to track the percentage of bugs that are considered fixed, as well as
@@ -925,7 +925,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 			echo '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
 			$t_row_count++;
 			echo '<td>';
-			echo user_get_name( $t_reporter_id );
+			echo string_display_line( user_get_name( $t_reporter_id ) );
 			echo '</td>';
 
 			# We need to track the percentage of bugs that are considered fix, as well as
@@ -1051,7 +1051,7 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 			echo '<tr ' . helper_alternate_class( $t_row_count ) . '>';
 			$t_row_count++;
 			echo '<td>';
-			echo user_get_name( $t_reporter_id );
+			echo string_display_line( user_get_name( $t_reporter_id ) );
 			echo '</td>';
 
 			$t_total_severity = 0;
