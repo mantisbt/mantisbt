@@ -477,7 +477,7 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 
 	$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'lost_password_subject' );
 
-	$t_message = lang_get( 'reset_request_msg' ) . " \n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . " \n\n" . lang_get( 'new_account_username' ) . lang_get( 'word_separator' ) . $t_username . " \n" . lang_get( 'new_account_IP' ) . lang_get( 'word_separator' ) . $_SERVER["REMOTE_ADDR"] . " \n\n" . lang_get( 'new_account_do_not_reply' );
+	$t_message = lang_get( 'reset_request_msg' ) . " \n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . " \n\n" . lang_get( 'new_account_username' ) . ' ' . $t_username . " \n" . lang_get( 'new_account_IP' ) . ' ' . $_SERVER["REMOTE_ADDR"] . " \n\n" . lang_get( 'new_account_do_not_reply' );
 
 	# Send password reset regardless of mail notification prefs
 	# or else users won't be able to receive their reset pws
@@ -511,7 +511,7 @@ function email_notify_new_account( $p_username, $p_email ) {
 		$t_recipient_email = user_get_email( $t_user['id'] );
 		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject' );
 
-		$t_message = lang_get( 'new_account_signup_msg' ) . "\n\n" . lang_get( 'new_account_username' ) . lang_get( 'word_separator' ) . $p_username . "\n" . lang_get( 'new_account_email' ) . lang_get( 'word_separator' ) . $p_email . "\n" . lang_get( 'new_account_IP' ) . lang_get( 'word_separator' ) . $_SERVER["REMOTE_ADDR"] . "\n" . $g_path . "\n\n" . lang_get( 'new_account_do_not_reply' );
+		$t_message = lang_get( 'new_account_signup_msg' ) . "\n\n" . lang_get( 'new_account_username' ) . ' ' . $p_username . "\n" . lang_get( 'new_account_email' ) . ' ' . $p_email . "\n" . lang_get( 'new_account_IP' ) . ' ' . $_SERVER["REMOTE_ADDR"] . "\n" . $g_path . "\n\n" . lang_get( 'new_account_do_not_reply' );
 
 		if( !is_blank( $t_recipient_email ) ) {
 			email_store( $t_recipient_email, $t_subject, $t_message );
