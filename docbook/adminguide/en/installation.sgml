@@ -1,4 +1,4 @@
-<chapter>
+<chapter id="admin.install">
     <title>Installation</title>
 
     <para>Following are the steps for a new MantisBT installation:</para>
@@ -36,7 +36,7 @@
         10-20 minutes to install,configure, and be using MantisBT.
     </para>
 
-    <section>
+    <section id="admin.install.summary">
         <title>Summary</title>
 
         <orderedlist>
@@ -65,7 +65,7 @@
     </section>
 
 
-        <section>
+        <section id="admin.install.new">
             <title>New Installations</title>
 
             <orderedlist>
@@ -174,7 +174,7 @@
 
         </section>
 
-        <section>
+        <section id="admin.install.requirements">
 
             <title>Requirements</title>
 
@@ -239,7 +239,7 @@
 
         </section>
 
-        <section>
+        <section id="admin.install.backups">
 
             <title>Backups</title>
 
@@ -269,42 +269,7 @@
 
         </section>
 
-        <section>
-
-            <title>CVS Integration</title>
-
-
-            <para>CVS integration allows MantisBT to register commits to the CVS
-                source control system into corresponding issue notes in the issue
-                tracker.  The setup requires that the MantisBT installation be
-                accessible on the computer running the CVS server. A copy of the
-                MantisBT config_inc.php file must be present.Note that the mysql
-                database also needs to be accessible from the cvs machine. That is,
-                "localhost" for $g_hostname won't work unless CVS and MantisBT are
-                hosted on the same machine.To activate the integration, the
-                following line to the cvs "commitinfo" file. (Instructions to edit
-                this file are in any number of CVS primers).
-                ALL /usr/bin/php /path_to_mantis/core/checkin.php
-                This will pass the commit message to checkin.php for all commits.
-                If the stringissue #nnnn is found in the commit message, the MantisBT
-                corresponding to "nnnn" will have the CVS commit message added as an
-                issue note to the issue. Multiple issues can be listed.This feature
-                is configured through config_inc.php and through custom
-                functions.
-            </para>
-
-            <para>See also:
-                <ulink url="manual.configuration.source.control.integration.html">Source
-                    Control Integration
-                </ulink>
-                for configuration, and
-                <ulink url="manual.customizing.mantis.custom.functions.html">Custom
-                    Functions
-                </ulink>
-            </para>
-        </section>
-
-        <section>
+        <section id="admin.install.uninstall">
 
             <title>Uninstall</title>
 

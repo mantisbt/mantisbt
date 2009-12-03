@@ -1,7 +1,7 @@
-<chapter>
+<chapter id="admin.contributing">
     <title>Contributing to MantisBT</title>
 
-    <section>
+    <section id="admin.contributing.develop">
         <title>Talent and Time</title>
 	<para>
 	     One of the greatest ways to contribute to MantisBT is to contribute
@@ -16,7 +16,7 @@
 
     </section>
 
-    <section>
+    <section id="admin.contributing.share">
         <title>Recommend MantisBT to Others</title>
 
         <para>
@@ -30,7 +30,7 @@
 	</para>
     </section>
 
-    <section>
+    <section id="admin.contributing.blog">
          <title>Blog about MantisBT</title>
 
          <para>
@@ -41,7 +41,7 @@
 	 </para>
     </section>
 
-    <section>
+    <section id="admin.contributing.integrate">
         <title>Integrate with MantisBT</title>
 
         <para>
@@ -59,7 +59,7 @@
 	</para>
     </section>
 
-    <section>
+    <section id="admin.contributing.register">
         <title>Registered in MantisBT Users Directory</title>
 
         <para>
@@ -72,7 +72,7 @@
 	</para>
     </section>
 
-    <section>
+    <section id="admin.contributing.donate">
         <title>Donate Money</title>
 
         <para>
@@ -85,7 +85,7 @@
 	</para>
     </section>
 
-    <section>
+    <section id="admin.contributing.sponsor">
         <title>Sponsor MantisBT</title>
 
         <para>

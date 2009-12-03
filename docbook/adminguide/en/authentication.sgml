@@ -1,11 +1,11 @@
-<chapter>
+<chapter id="admin.auth">
     <title>Authentication</title>
 
     <para>MantisBT supports several authentication techniques out of the box.  In addition, there is work in progress relating to supporting authentication plug-ins.  Once authentication plug-ins are implemented, then authentication against any protocol or repository of user names and passwords can be done without having to touch MantisBT core code.</para>
 
     <para>Although MantisBT supports multiple authentication techniques, it is important to note that MantisBT doesn't yet support hybrid authentication scenarios.  For example, internal staff authentications against LDAP where customer authentications against MantisBT database.</para>
 
-    <section>
+    <section id="admin.auth.standard">
         <title>Standard Authentication</title>
 
         <para>Standard, or native, authentication is where MantisBT users are authenticated against user records in the MantisBT database.  The passwords are stored in the database in one of several formats:
@@ -20,19 +20,19 @@
         <para>See $g_login_methods for more details about how to configure MantisBT to use one of the above authentication techniques.</para>
     </section>
 
-    <section>
+    <section id="admin.auth.http">
         <title>HTTP_AUTH</title>
 
         <para>When MantisBT is configured to use basic auth, it automatically detects the logged in user and checks if they are already registered in MantisBT, if not, then a new account is automatically created for the username.</para>
     </section>
 
-    <section>
+    <section id="admin.auth.basic">
         <title>BASIC_AUTH</title>
 
         <para>TODO</para>
     </section>
 
-    <section>
+    <section id="admin.auth.ldap">
         <title>LDAP</title>
 
         <para>Functionality is provided by using the php-ldap module
@@ -86,7 +86,7 @@
 
         </section>
 
-        <section>
+        <section id="admin.auth.msad">
             <title>Microsoft Active Directory</title>
 
             <para>TODO</para>

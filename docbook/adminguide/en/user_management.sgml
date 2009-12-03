@@ -1,7 +1,7 @@
-<chapter>
+<chapter id="admin.user">
     <title>User Management</title>
 
-    <section>
+    <section id="admin.user.create">
         <title>Creating User Accounts</title>
 
         <para>In MantisBT, there is no limit on the number of user
@@ -68,7 +68,7 @@
 
     </section>
 
-    <section>
+    <section id="admin.user.enable">
         <title>Enabling/Disabling User Accounts</title>
 
 	<para>The recommended way of retiring user accounts is to disable them.
@@ -100,7 +100,7 @@
 	them, monitored by them, etc.</para>
     </section>
 
-    <section>
+    <section id="admin.user.delete">
         <title>Deleting User Accounts</title>
 
 	<para>Another way to retire user accounts is by deleting them.  This
@@ -128,7 +128,7 @@
 	recommended or supported.</para>
     </section>
 
-    <section>
+    <section id="admin.user.signup">
         <title>User Signup</title>
 
 	<para>For open source and freeware projects, it is very common to setup
@@ -146,7 +146,7 @@
 	the email notification.</para>
     </section>
 
-    <section>
+    <section id="admin.user.passwordreset">
         <title>Forgot Password and Reset Password</title>
 
 	<para>It is pretty common for users to forget their password.  MantisBT
@@ -171,7 +171,7 @@
 	resetting password will set the password to an empty string.</para>
     </section>
 
-    <section>
+    <section id="admin.user.passwordchange">
         <title>Changing Password</title>
 
 	<para>Users are able to change their own passwords (unless their account
@@ -186,7 +186,7 @@
 	invalidated.</para>
     </section>
 
-    <section>
+    <section id="admin.user.pruning">
         <title>Pruning User Accounts</title>
 
 	<para>The pruning function allows deleting of user accounts for accounts
@@ -199,7 +199,7 @@
 	inside the "Never Logged In" box.</para>
     </section>
 
-    <section>
+    <section id="admin.user.access">
         <title>Authorization and Access Levels</title>
 
 	<para>MantisBT uses access levels to define what a user can do.  Each
@@ -255,7 +255,7 @@
 	the list of access levels will be covered in the customization section.</para>
     </section>
 
-    <section>
+    <section id="admin.user.autocreate">
         <title>Auto Creation of Accounts on Login</title>
 
 	<para>In some cases MantisBT is setup in a way, where it allows users
@@ -272,7 +272,7 @@
 	main users repository.</para>
     </section>
 
-    <section>
+    <section id="admin.user.prefs">
         <title>User Preferences</title>
 
 	<para>Users can fine tune they way MantisBT interacts with them via
@@ -362,7 +362,7 @@
 	 </para>
     </section>
 
-    <section>
+    <section id="admin.user.profiles">
         <title>User Profiles</title>
 
 	<para>A user profile describes an environment that the user uses to run

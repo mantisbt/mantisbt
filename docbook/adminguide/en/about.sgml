@@ -1,7 +1,7 @@
-<chapter>
+<chapter id="admin.about">
     <title>About MantisBT</title>
 
-    <section>
+    <section id="admin.about.what">
         <title>What is MantisBT?</title>
 
         <para>
@@ -21,7 +21,7 @@
         </para>
     </section>
 
-    <section>
+    <section id="admin.about.who">
         <title>Who should read this manual?</title>
 
         <para>
@@ -31,7 +31,7 @@
         </para>
     </section>
 
-    <section>
+    <section id="admin.about.license">
         <title>License</title>
 
         <para>
@@ -43,7 +43,7 @@
         </para>
     </section>
 
-    <section>
+    <section id="admin.about.requirments">
         <title>Minimum Requirements</title>
 
         <para>
@@ -99,7 +99,7 @@
         </itemizedList>
     </section>
 
-    <section>
+    <section id="admin.about.download">
         <title>How to get it?</title>
 
         <para>
@@ -131,7 +131,7 @@
         </para>
     </section>
 
-    <section>
+    <section id="admin.about.name">
         <title>About the Name</title>
 
         <para>
@@ -158,7 +158,7 @@
         </para>
     </section>
 
-    <section>
+    <section id="admin.about.history">
         <title>History</title>
 
         <para>
@@ -175,7 +175,7 @@
         </para>
     </section>
 
-    <section>
+    <section id="admin.about.support">
         <title>Support</title>
 
         <para>
@@ -245,7 +245,7 @@
         </para>
     </section>
 
-    <section>
+    <section id="admin.about.news">
         <title>MantisBT News</title>
 
         <para>
@@ -283,7 +283,7 @@
         </itemizedlist>
     </section>
 
-    <section>
+    <section id="admin.about.versioning">
        <title>Versioning</title>
 
        <para>
