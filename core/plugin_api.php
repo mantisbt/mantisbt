@@ -349,7 +349,7 @@ function plugin_is_loaded( $p_basename ) {
  */
 function plugin_version_array( $p_version ) {
 	$t_version = preg_replace( '/([a-zA-Z]+)([0-9]+)/', '\1.\2', $p_version );
-	$t_version = preg_replace( '/([0-9]+)([a-zA-Z]+)/', '\1.\2', $p_version );
+	$t_version = preg_replace( '/([0-9]+)([a-zA-Z]+)/', '\1.\2', $t_version );
 
 	$t_search = array(
 		',',
@@ -408,15 +408,18 @@ function plugin_version_check( $p_version1, $p_version2, $p_maximum = false ) {
 		}
 	}
 
+	# Versions matched exactly
+	if ( count( $p_version1 ) == 0 && count( $p_version2 ) == 0 ) {
+		return 1;
+	}
+
 	# Handle unmatched version bits
 	if( $p_maximum ) {
-		if( count( $p_version2 ) > 0 ) {
+		if ( count( $p_version2 ) > 0 ) {
 			return 1;
 		}
 	} else {
-		if( count( $p_version1 ) > 0 ) {
-			return 1;
-		} else if( count( $p_version1 ) == 0 && count( $p_version2 ) == 0 ) {
+		if ( count( $p_version1 ) > 0 ) {
 			return 1;
 		}
 	}
@@ -446,20 +449,36 @@ function plugin_dependency( $p_basename, $p_required, $p_initialized = false ) {
 			return 0;
 		}
 
-		$t_required = trim( $p_required );
-		$t_maximum = false;
+		$t_required_array = explode( ',', $p_required );
 
-		# check for a less-than version requirement
-		$t_ltpos = strpos( $t_required, '<' );
-		if( $t_ltpos !== false ) {
-			$t_required = utf8_substr( $t_required, $t_ltpos + 1 );
-			$t_maximum = true;
+		foreach( $t_required_array as $t_required ) {
+			$t_required = trim( $t_required );
+			$t_maximum = false;
+
+			# check for a less-than-or-equal version requirement
+			$t_ltpos = strpos( $t_required, '<=' );
+			if( $t_ltpos !== false ) {
+				$t_required = trim( utf8_substr( $t_required, $t_ltpos + 2 ) );
+				$t_maximum = true;
+			} else {
+				$t_ltpos = strpos( $t_required, '<' );
+				if( $t_ltpos !== false ) {
+					$t_required = trim( utf8_substr( $t_required, $t_ltpos + 1 ) );
+					$t_maximum = true;
+				}
+			}
+
+			$t_version1 = plugin_version_array( $g_plugin_cache[$p_basename]->version );
+			$t_version2 = plugin_version_array( $t_required );
+
+			$t_check = plugin_version_check( $t_version1, $t_version2, $t_maximum );
+
+			if ( $t_check < 1 ) {
+				return $t_check;
+			}
 		}
 
-		$t_version1 = plugin_version_array( $g_plugin_cache[$p_basename]->version );
-		$t_version2 = plugin_version_array( $t_required );
-
-		return plugin_version_check( $t_version1, $t_version2, $t_maximum );
+		return 1;
 	} else {
 		return 0;
 	}
