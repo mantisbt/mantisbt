@@ -149,6 +149,7 @@ p.foo {
 			<programlisting><filename>Example/pages/foo.php</filename>
 
 &lt;?php
+echo '&lt;p&gt;Here is a link to &lt;a href="', plugin_page( 'foo' ), '">page foo&lt;/a&gt;.&lt;/p&gt;';
 echo '&lt;link rel="stylesheet" type="text/css" href="', plugin_file( 'foo.css' ), '"/&gt;',
      '&lt;p class="foo"&gt;This is red text.&lt;/p&gt;';
 			</programlisting>
@@ -162,9 +163,132 @@ echo '&lt;link rel="stylesheet" type="text/css" href="', plugin_file( 'foo.css' 
 		</sect2>
 
 		<sect2 id="dev.plugins.building.events">
-			<title>Using Events and Pages</title>
+			<title>Events</title>
 
 			<para>
+				Plugins have an integrated method for both declaring and hooking events, without
+				needing to directly call the event API functions.  These take the form of class
+				methods on your plugin.
+			</para>
+
+			<para>
+				To declare a new event, or a set of events, that your plugin will trigger, override
+				the <function>events()</function> method of your plugin class, and return an
+				associative array with event names as the key, and the event type as the value.
+				Let's add an event "foo" to our Example plugin that does not expect a return value
+				(an "execute" event type), and another event 'bar' that expects a single value that
+				gets modified by each hooked function (a "chain" event type):
+			</para>
+
+			<programlisting><filename>Example/Example.php</filename>
+
+&lt;?php
+class ExamplePlugin extends MantisPlugin {
+    ...
+
+    function events() {
+        return array(
+            'EVENT_EXAMPLE_FOO' => EVENT_TYPE_EXECUTE,
+            'EVENT_EXAMPLE_BAR' => EVENT_TYPE_CHAIN,
+        );
+    }
+}
+			</programlisting>
+
+			<para>
+				When the Example plugin is loaded, the event system in MantisBT will add these two
+				events to its list of events, and will then allow other plugins or functions to hook
+				them.  Naming the events "EVENT_PLUGINNAME_EVENTNAME" is not necessary, but is considered
+				best practice to avoid conflicts between plugins.
+			</para>
+
+			<para>
+				Hooking other events (or events from your own plugin) is almost identical to declaring
+				them.  Instead of passing an event type as the value, your plugin must pass the name
+				of a class method on your plugin that will be called when the event is triggered. For
+				our Example plugin, we'll create a <function>foo()</function> and
+				<function>bar()</function> method on our plugin class, and hook them to the events we
+				declared earlier.
+			</para>
+
+			<programlisting><filename>Example/Example.php</filename>
+
+&lt;?php
+class ExamplePlugin extends MantisPlugin {
+    ...
+
+    function hooks() {
+        return array(
+            'EVENT_EXAMPLE_FOO' => 'foo',
+            'EVENT_EXAMPLE_BAR' => 'bar',
+        );
+    }
+
+    function foo( $p_event ) {
+        ...
+    }
+
+    function bar( $p_event, $p_chained_param ) {
+        ...
+        return $p_chained_param;
+    }
+}
+			</programlisting>
+
+			<para>
+				Note that both hooked methods need to accept the <parameter>$p_event</parameter>
+				parameter, as that contains the event name triggering the method (for cases where
+				you may want a method hooked to multiple events).  The <function>bar()</function>
+				method also accepts and returns the chained parameter in order to match the
+				expectations of the "bar" event.
+			</para>
+
+			<para>
+				Now that we have our plugin's events declared and hooked, let's modify our earlier
+				page so that triggers the events, and add some real processing to the hooked
+				methods:
+			</para>
+
+			<programlisting><filename>Example/Example.php</filename>
+
+&lt;?php
+class ExamplePlugin extends MantisPlugin {
+    ...
+
+    function foo( $p_event ) {
+        echo 'In method foo(). ';
+    }
+
+    function bar( $p_event, $p_chained_param ) {
+        return str_replace( 'foo', 'bar', $p_chained_param );
+    }
+}
+			</programlisting>
+
+			<programlisting><filename>Example/pages/foo.php</filename>
+
+&lt;?php
+echo '&lt;p&gt;Here is a link to &lt;a href="', plugin_page( 'foo' ), '">page foo&lt;/a&gt;.&lt;/p&gt;';
+echo '&lt;link rel="stylesheet" type="text/css" href="', plugin_file( 'foo.css' ), '"/&gt;',
+     '&lt;p class="foo"&gt;';
+
+event_signal( 'EVENT_EXAMPLE_FOO' );
+
+$t_string = 'A sentence with the word "foo" in it.';
+$t_new_string = event_signal( 'EVENT_EXAMPLE_BAR', array( $t_string ) );
+
+echo $t_new_string, '&lt;/p&gt;';
+			</programlisting>
+
+			<para>
+				When the first event "foo" is signaled, the Example plugin's
+				<function>foo()</function> method will execute and echo a string.  After that,
+				the second event "bar" is signaled, and the page passes a string parameter; the
+				plugin's <function>bar()</function> gets the string and replaces any instance of
+				"foo" with "bar", and returns the resulting string.  If any other plugin had
+				hooked the event, that plugin could have further modified the new string from the
+				Example plugin, or vice versa, depending on the loading order of plugins.  The
+				page then echos the modified string that was returned from the event.
 			</para>
 		</sect2>
 
