@@ -43,18 +43,25 @@ function columns_filter_disabled( $p_columns ) {
 				}
 				/* don't filter */
 				break;
+
 			case 'eta':
 				if( config_get( 'enable_eta' ) == OFF ) {
 					continue 2;
 				}
+				break;
+
 			case 'projection':
 				if( config_get( 'enable_projection' ) == OFF ) {
 					continue 2;
 				}
+				break;
+
 			case 'build':
 				if( config_get( 'enable_product_build' ) == OFF ) {
 					continue 2;
 				}
+				break;
+
 			default:
 				/* don't filter */
 				break;
