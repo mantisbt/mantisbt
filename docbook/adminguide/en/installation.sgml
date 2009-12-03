@@ -5,13 +5,13 @@
     <itemizedlist>
         <listitem>
             <para>
-                <ulink url="manual.about.mantis.download.html">Download</ulink>
+                <link linkend="admin.about.download">Download</link>
                 Mantis
             </para>
         </listitem>
         <listitem>
             <para>
-                Go through MantisBT <ulink url="manual.configuration.html">Configuration</ulink>
+                Go through MantisBT <link linkend="admin.config">Configuration</link>
                 and set the database options + whatever options where you need to
                 override the default values.
             </para>
@@ -27,14 +27,6 @@
             </para>
         </listitem>
     </itemizedlist>
-
-    <para>Following are the steps to upgrade a MantisBT installation:See
-        <ulink url="manual.installation.upgrading.html">Upgrading</ulink>.The
-        following details the basic steps for installation on any system.
-        Theinstructions may seem unix-centric but should work fine on
-        Windows systems.Barring complications, it should take you about
-        10-20 minutes to install,configure, and be using MantisBT.
-    </para>
 
     <section id="admin.install.summary">
         <title>Summary</title>
@@ -140,7 +132,7 @@
                         work with yourspecific setup.Open the file in an editor and add
                         anyother values that are required. There aremany more that you can
                         use to customize your MantisBT installation.
-                        See<ulink url="manual.configuration.html">Configuration</ulink> for
+                        See <link linkend="admin.config">Configuration</link> for
                         in depth explanations.The file will overwrite the default values
                         with those necessary for setup.You can load up admin/check.php to
                         see if you set things up correctly.
@@ -277,7 +269,7 @@
             <para>
                 It is recommended that you make an backup in case you wish to use
                 your data in the future. See the
-                <ulink url="manual.installation.backups.html">Backups</ulink>
+                <link linkend="admin.install.backups">Backups</link>
                 page for details.
                 To uninstall MantisBT:
                 <itemizedlist>
