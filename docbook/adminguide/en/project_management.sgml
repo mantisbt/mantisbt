@@ -1,9 +1,9 @@
-<chapter>
+<chapter id="admin.project">
     <title>Project Management</title>
 
     <para>This section covers the project management features of MantisBT.  This includes features like change log, roadmap, time tracking, reporting and others.</para>
 
-    <section>
+    <section id="admin.project.changelog">
         <title>Change Log</title>
 
         <para>MantisBT doesn't just track the status of issues, it also relates issues to versions.  Each project can have several versions, which are marked with attributes like released and obsolete.  Users typically report issues against released issues and developers typically fix issues in not released versions.  With every new release comes question like: what's new?  what has been fixed?  Customers wonder if the new release is of interest to them and whether they should take an upgrade.  Well, the change log is specifically tailored to answer these kind of questions.</para>
@@ -98,7 +98,7 @@ http://www.example.com/mantisbt/project_page.php?project_id=1
         <para>It is possible to customize the access level required for viewing the change log page.  This can be done using the $g_view_changelog_threshold configuration option.</para>
     </section>
 
-    <section>
+    <section id="admin.project.roadmap">
         <title>Roadmap</title>
 
         <para>
@@ -204,13 +204,13 @@ http://www.example.com/mantisbt/project_page.php?project_id=1
         </para>
     </section>
 
-    <section>
+    <section id="admin.project.timetracking">
         <title>Time Tracking</title>
 
         <para></para>
     </section>
 
-    <section>
+    <section id="admin.project.graphs">
         <title>Graphs</title>
 
         <para>Assigned to me: TODO</para>
@@ -222,7 +222,7 @@ http://www.example.com/mantisbt/project_page.php?project_id=1
         <para>Reported by Me: TODO</para>
     </section>
 
-    <section>
+    <section id="admin.project.summary">
         <title>Summary Page</title>
 
         <para>By Status: TODO</para>

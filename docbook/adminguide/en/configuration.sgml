@@ -1,6 +1,6 @@
-<chapter>
+<chapter id="admin.config">
     <title>Configuration</title>
-    <section>
+    <section id="admin.config.database">
         <title>Database</title>
         <para>The database settings must be set in order for the package
             to work properly. These settings should be provided to you by your
@@ -59,7 +59,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.path">
         <title>Path</title>
         <para>These path settings are important for proper linking within
             MantisBT. In most scenarios the default values should work fine, and
@@ -134,7 +134,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.webserver">
         <title>Webserver</title>
 
         <variablelist>
@@ -148,7 +148,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.settings">
         <title>Configuration Settings</title>
 
         <variablelist>
@@ -161,7 +161,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.signup">
         <title>Signup and Lost Password</title>
 
         <variablelist>
@@ -246,7 +246,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.email">
         <title>Email</title>
 
         <variablelist>
@@ -586,7 +586,7 @@
         </para>
     </section>
 
-    <section>
+    <section id="admin.config.version">
         <title>Version</title>
 
         <variablelist>
@@ -601,7 +601,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.language">
         <title>Language</title>
         <variablelist>
             <varlistentry>
@@ -650,7 +650,7 @@
     </section>
     <!-- Stopped here -->
 
-    <section>
+    <section id="admin.config.display">
         <title>Display</title>
 
         <variablelist>
@@ -853,7 +853,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.time">
         <title>Time</title>
 
         <variablelist>
@@ -897,7 +897,7 @@
 
     </section>
 
-    <section>
+    <section id="admin.config.date">
         <title>Date</title>
         <para>These variables control how the date is displayed (default
             is 'US' formatting). Go to the
@@ -937,7 +937,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.news">
         <title>News</title>
         <para>These options are used to control the query that selects the
             news entries to be displayed.
@@ -991,7 +991,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.defaults">
         <title>Default Preferences</title>
         <variablelist>
             <varlistentry>
@@ -1228,7 +1228,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.summary">
         <title>Summary</title>
         <para>These are the settings that are used to configuration
             options related to the Summary page. This page contains statistics
@@ -1334,7 +1334,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.bugnote">
         <title>Bugnote</title>
         <variablelist>
 
@@ -1352,7 +1352,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.uploads">
         <title>File Upload</title>
 
         <para>MantisBT allows users to upload file attachements and
@@ -1493,7 +1493,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.html">
         <title>HTML</title>
 
         <variablelist>
@@ -1577,7 +1577,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.auth">
         <title>Authentication</title>
         <variablelist>
             <varlistentry>
@@ -1731,7 +1731,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.status">
         <title>Status Settings</title>
 
 
@@ -1921,7 +1921,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.filters">
         <title>Filters</title>
 
 
@@ -1996,7 +1996,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.misc">
         <title>Misc</title>
         <variablelist>
             <varlistentry>
@@ -2214,7 +2214,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.cookies">
         <title>Cookies</title>
         <para>The configuration variables $g_string_cookie,
             $g_project_cookie, $g_view_all_cookie, $g_manage_cookie are
@@ -2267,7 +2267,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.tables">
         <title>Database Tables</title>
 
         <para>MantisBT enables users to configure a table prefix for all its
@@ -2306,7 +2306,7 @@
 
     </section>
 
-    <section>
+    <section id="admin.config.speed">
         <title>Speed Optimisation</title>
 
 
@@ -2354,7 +2354,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.reminders">
         <title>Reminders</title>
 
         <para>Sending reminders is a feature where a user can notify /
@@ -2393,7 +2393,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.bughistory">
         <title>Bug History</title>
 
 
@@ -2429,7 +2429,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.sponsorship">
         <title>Sponsorship</title>
 
 
@@ -2508,7 +2508,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.sourcecontrol">
         <title>Source Control Integration</title>
 
 
@@ -2558,7 +2558,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.customfields">
         <title>Custom Fields</title>
 
         <variablelist>
@@ -2592,7 +2592,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.config.myview">
         <title>My View Settings</title>
 
 
@@ -2634,7 +2634,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.relationship">
         <title>Relationship Graphs</title>
 
         <variablelist>
@@ -2728,7 +2728,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.subprojects">
         <title>Sub-Projects</title>
 
         <variablelist>
@@ -2764,7 +2764,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.fields">
         <title>Field Visibility</title>
 
         <variablelist>
@@ -2879,7 +2879,7 @@
         </variablelist>
     </section>
 
-    <section>
+    <section id="admin.config.logging">
         <title>System Logging</title>
         <para>The system logging interface is used to extract detailed
             debugging information for the MantisBT system. It can also serve as

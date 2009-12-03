@@ -1,10 +1,10 @@
-<chapter>
+<chapter id="admin.customize.">
     <title>Customizing MantisBT</title>
 
-    <section>
+    <section id="admin.customize.customfields">
         <title>Custom Fields</title>
 
-	<section>
+	<section id="admin.customize.customfields.overview">
 	<title>Overview</title>
 
         <para>Different teams typically like to capture different information
@@ -61,7 +61,7 @@
         </para>
         </section>
 
-	<section>
+	<section id="admin.customize.customfields.definitions">
 	    <title>Custom Field Definition</title>
 
         <para>
@@ -179,7 +179,7 @@
         </para>
     </section>
 
-    <section>
+    <section id="admin.customize.customfields.editing">
         <title>Adding/Editing Custom Fields</title>
 
             <para>
@@ -215,7 +215,7 @@
 	    projects.</para></note>
 	</section>
 
-	<section>
+	<section id="admin.customize.customfields.linking">
 		<title>Linking/Unlinking/Ordering Existing Custom Fields in Projects</title>
 
             <para>
@@ -276,7 +276,7 @@
         </formalpara>
 	</section>
 
- 	<section>
+ 	<section id="admin.customize.customfields.localize">
 	    <title>Localizing Custom Field Names</title>
 
 	    <para>It is possible to localize the label for the custom fields.
@@ -311,17 +311,17 @@ if ( lang_get_current() == 'german' ) {
 	    lang/strings_english.txt.</para></note>
 	</section>
 
-        <section>
+        <section id="admin.customize.customfields.defaults">
             <title>Dynamic default values</title>
 
-            <section>
+            <section id="admin.customize.customfields.defaults.date">
                 <title>Dynamic defaults for Date fields</title>
 
                 <para>Custom fields of type date can be defaulted to a specific dates or to relative dates.  Typically relative dates is the scenario that makes sense in most of the cases.  The format for specific dates is an integer which indicates the number of seconds since the Unix Epoch (January 1 1970 00:00:00 GMT), which is the format consumed by the PHP <ulink url="http://www.php.net/date">date()</ulink> method.  The relative scenario expects default values like {tomorrow}, {yesterday}, {+2 days}, {-3 days}, {next week}, etc.  The curly brackets indicate that this is a logical value which is then evaluated using the PHP <ulink url="http://www.php.net/strtotime">strtotime()</ulink> function.</para>
             </section>
         </section>
 
-	<section>
+	<section id="admin.customize.customfields.dynamic">
 	    <title>Dynamic values for Enumeration Custom Fields</title>
 
 	    <para>As discussed earlier, one of the possible types of a custom
@@ -334,7 +334,7 @@ if ( lang_get_current() == 'german' ) {
 	    ability to construct the list of possible values dynamically.</para>
 
 
-            <section>
+            <section id="admin.customize.customfields.dynamic.default">
 	       <title>Dynamic possible values included by default</title>
 
 	    <para>MantisBT ships with some dynamic possible values, these
@@ -362,7 +362,7 @@ if ( lang_get_current() == 'german' ) {
 
 	    </section>
 
-	    <section>
+	    <section id="admin.customize.customfields.dynamic.custom">
 	        <title>Defining Custom Dynamic Possible Values</title>
 
 		<para>If the user selects =versions, the actual custom function
@@ -444,7 +444,7 @@ functions section.</para>
         </section>
 
     </section>
-    <section>
+    <section id="admin.customize.enums">
         <title>Enumerations</title>
 
 
@@ -568,7 +568,7 @@ functions section.</para>
     </section>
 
 
-    <section>
+    <section id="admin.customize.email">
         <title>Email Notifications</title>
 
         <para>See Email in the Configuration section.</para>
@@ -657,7 +657,7 @@ functions section.</para>
         </para>
     </section>
 
-    <section>
+    <section id="admin.customize.status">
         <title>Customizing Status Values</title>
         <para>The default is no workflow, where all states
             are accessible from any others. The following example can be
@@ -738,7 +738,7 @@ functions section.</para>
         </para>
     </section>
 
-        <section>
+        <section id="admin.customize.customfuncs">
             <title>Custom Functions</title>
 
             <para>Custom functions are used to extend the functionality of
@@ -765,7 +765,7 @@ functions section.</para>
                     function.
             </para>
 
-            <section>
+            <section id="admin.customize.customfuncs.defined">
                 <title>Defined Functions</title>
 
                 <para>custom_function_default_changelog_include_issue( $p_issue_id
@@ -792,7 +792,7 @@ functions section.</para>
                 </para>
             </section>
 
-            <section>
+            <section id="admin.customize.customfuncs.example">
                 <title>Example Custom Function</title>
 
                 <para>The following function is used to validate an issue before

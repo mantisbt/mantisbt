@@ -1,7 +1,7 @@
-<chapter>
+<chapter id="admin.lifecycle">
     <title>Issue Lifecycle and Workflow</title>
 
-    <section>
+    <section id="admin.lifecycle.create">
         <title>Issue Creation</title>
 
 	<para>The life cycle of an issue starts with its creation.  An issue can
@@ -27,7 +27,7 @@
 	</para>
     </section>
 
-    <section>
+    <section id="admin.lifecycle.status">
         <title>Issue Statuses</title>
 
 	<para>An important part of issue tracking is to classify issues as
@@ -78,7 +78,7 @@
 	</para>
     </section>
 
-    <section>
+    <section id="admin.lifecycle.workflow">
         <title>Workflow</title>
 
 	<para>Now that we have covered how an issue gets created, and what are
@@ -90,7 +90,7 @@
 	dictates the valid transitions between statuses and the user access
 	level required of the user who triggers such transition.</para>
 
-        <section>
+        <section id="admin.lifecycle.workflow.transitions">
 	    <title>Workflow Transitions</title>
 
 	    <para>This "Manage &gt; Manage Configuration &gt; Workflow
@@ -124,7 +124,7 @@
 	    top right corner of the screen.</para>
         </section>
 
-	<section>
+	<section id="admin.lifecycle.workflow.thresholds">
 	    <title>Workflow Thresholds</title>
 
 	    <para>This "Manage &gt; Manage Configuration &gt; Workflow

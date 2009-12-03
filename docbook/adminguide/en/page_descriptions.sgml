@@ -1,6 +1,6 @@
-<chapter>
+<chapter id="admin.pages">
     <title>Page descriptions</title>
-    <section>
+    <section id="admin.pages.login">
 
         <title>Login page</title>
 
@@ -27,7 +27,7 @@
 
     </section>
 
-    <section>
+    <section id="admin.pages.main">
         <title>Main page</title>
 
         <para>This is the first page you see upon logging in. It shows you
@@ -49,7 +49,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.pages.filter">
         <title>View Issues page</title>
 
         <para>Here we can view the issue listings. The page has a set of
@@ -107,9 +107,9 @@
 
     </section>
 
-    <section>
+    <section id="admin.pages.issueview">
 
-        <title>Issue View Simple page</title>
+        <title>Issue View page</title>
 
 
         <para>Here is the simple listing of the issue report. Most of the
@@ -184,19 +184,7 @@
         </para>
     </section>
 
-    <section>
-        <title>Issue View Advanced page</title>
-
-        <para>The advanced view is much the same as the simple view with a
-            few additional fields. Here you can see Projection, ETA, Platform,
-            OS, OSBuild, Product Version, Product Build, and Steps to
-            Reproduce.
-        </para>
-        <para>See also: Issue View Simple page.</para>
-
-    </section>
-
-    <section>
+    <section id="admin.pages.issuestatus">
         <title>Issue Change Status page</title>
 
         <para>This page is used to change the status of an issue. A user
@@ -230,9 +218,9 @@
     </section>
 
 
-    <section>
+    <section id="admin.pages.issueedit">
 
-        <title>Issue Update Simple page</title>
+        <title>Issue Edit page</title>
 
         <para>The layout of this page resemples the Simple Issue View
             page, but here you can update various issue fields. The Reporter,
@@ -246,19 +234,7 @@
     </section>
 
 
-    <section>
-        <title>Issue Update Advanced page</title>
-
-        <para>Similar to Issue Update Simple page but has the extra advanced
-            fields. The difference between the simple/advanced update pages
-            should be consistent with the difference between the
-            simple/advanced view pages.
-        </para>
-
-    </section>
-
-
-    <section>
+    <section id="admin.pages.account">
         <title>My Account Page</title>
 
         <para>This page changes user alterable parameters for the system.
@@ -268,7 +244,7 @@
             projects.
         </para>
 
-        <section>
+        <section id="admin.pages.account.prefs">
             <title>Preferences</title>
             <para>
                 This sets the following information:
@@ -314,7 +290,7 @@
             </para>
 
         </section>
-        <section>
+        <section id="admin.pages.account.profiles">
             <title>Profiles</title>
             <para>
                 Profiles are shortcuts to define the values for Platform,
@@ -325,7 +301,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.pages.manage">
         <title>System Management Pages</title>
 
 
@@ -334,7 +310,7 @@
             level.
         </para>
 
-        <section>
+        <section id="admin.pages.manage.users">
             <title>Manage Users</title>
 
 
@@ -352,7 +328,7 @@
             </para>
         </section>
 
-        <section>
+        <section id="admin.pages.manage.projects">
             <title>Manage Projects Page</title>
 
 
@@ -417,7 +393,7 @@
             </para>
         </section>
 
-        <section>
+        <section id="admin.pages.manage.customfields">
             <title>Manage Custom Fields</title>
 
             <para>This page is the base point for managing custom fields. It
@@ -620,7 +596,7 @@
         </section>
 
 
-        <section>
+        <section id="admin.pages.manage.profiles">
             <title>Manage Global Profiles</title>
 
             <para>This page allows the definition of global profiles
@@ -631,7 +607,7 @@
         </section>
 
 
-        <section>
+        <section id="admin.pages.manage.config">
             <title>Manage Configuration</title>
 
 
@@ -646,7 +622,7 @@
                 some of these settings to managers.
             </para>
 
-            <section>
+            <section id="admin.pages.manage.config.thresholds">
 
                 <title>Workflow Thresholds</title>
 
@@ -877,7 +853,7 @@
 
             </section>
 
-            <section>
+            <section id="admin.pages.manage.config.transitions">
                 <title>Workflow Transitions</title>
 
                 <para>This page covers the status workflow. For most of these, the
@@ -927,7 +903,7 @@
             </section>
 
 
-            <section>
+            <section id="admin.pages.manage.config.email">
                 <title>Email Notifications</title>
 
                 <para>This page sets the system defaults for sending emails on
@@ -985,7 +961,7 @@
         </section>
     </section>
 
-    <section>
+    <section id="admin.pages.monitor">
         <title>Monitor Issue</title>
 
         <para>The monitor issues feature allows users to subscribe to
@@ -1001,7 +977,7 @@
         </para>
     </section>
 
-    <section>
+    <section id="admin.pages.reopen">
         <title>Reopen Issue</title>
 
         <para>Re-open issue button is visible in the issue view pages if the
@@ -1013,7 +989,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.pages.delete">
         <title>Delete Issue</title>
 
 
@@ -1028,7 +1004,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.pages.close">
         <title>Close Issue</title>
 
         <para>This is a button that appears on the issue view pages for
@@ -1041,7 +1017,7 @@
     </section>
 
 
-    <section>
+    <section id="admin.pages.assigntome">
         <title>Assign to Me</title>
 
         <para>This button appears in the issue view pages in case of users
@@ -1051,7 +1027,7 @@
         </para>
     </section>
 
-    <section>
+    <section id="admin.pages.resolve">
         <title>Resolve Issue</title>
 
 
@@ -1064,7 +1040,7 @@
         </para>
     </section>
 
-    <section>
+    <section id="admin.pages.news">
 
         <title>News Syndication</title>
 
