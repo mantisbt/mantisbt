@@ -98,9 +98,67 @@ class ExamplePlugin extends MantisPlugin {
 				<para>
 					This alone will allow the Example plugin to be installed with MantisBT, and
 					is the foundation of any plugin.  More of the plugin development process
-					will be continued in the next section.
+					will be continued in the next sections.
 				</para>
 			</sect3>
+		</sect2>
+
+		<sect2 id="dev.plugins.building.pages">
+			<title>Pages and Files</title>
+
+			<para>
+				The plugin API provides a standard hierarchy and process for adding new pages and
+				files to your plugin.  For strict definitions, pages are PHP files that will be
+				executed within the MantisBT core system, while files are defined as a separate
+				set of raw data that will be passed to the client's browser exactly as it appears
+				in the filesystem.
+			</para>
+
+			<para>
+				New pages for your plugin should be placed in your plugin's
+				<filename>pages/</filename> directory, and should be named using only letters and
+				numbers, and must have a ".php" file extension.  To generate a URI to the new page
+				in MantisBT, the API function <function>plugin_page()</function> should be used.
+				Our Example plugin will create a page named <filename>foo.php</filename>, which
+				can then be accessed via <literal>plugin_page.php?page=Example/foo</literal>, the
+				same URI that <function>plugin_page()</function> would have generated:
+			</para>
+
+			<programlisting><filename>Example/pages/foo.php</filename>
+
+&lt;?php
+echo '&lt;p&gt;Here is a link to &lt;a href="', plugin_page( 'foo' ), '">page foo&lt;/a&gt;.&lt;/p&gt;';
+			</programlisting>
+
+			<para>
+				Adding non-PHP files, such as images or CSS stylesheets, follows a very similar
+				pattern as pages.  Files should be placed in the plugin's
+				<filename>files/</filename> directory, and can only contain a single period in
+				the name.  The file's URI is generated with the <function>plugin_file()</function>
+				function.  For our Example plugin, we'll create a basic CSS stylesheet, and modify
+				the previously shown page to include the stylesheet:
+			</para>
+
+			<programlisting><filename>Example/files/foo.css</filename>
+
+p.foo {
+    color: red;
+}
+			</programlisting>
+
+			<programlisting><filename>Example/pages/foo.php</filename>
+
+&lt;?php
+echo '&lt;link rel="stylesheet" type="text/css" href="', plugin_file( 'foo.css' ), '"/&gt;',
+     '&lt;p class="foo"&gt;This is red text.&lt;/p&gt;';
+			</programlisting>
+
+			<para>
+				Note that while <function>plugin_page()</function> expects on the page's name,
+				without the extension, <function>plugin_file()</function> requires the entire
+				filename so that it can distinguish between <filename>foo.css</filename> and
+				a potential file <filename>foo.png</filename>.
+			</para>
 		</sect2>
 
 		<sect2 id="dev.plugins.building.events">
