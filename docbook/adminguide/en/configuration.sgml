@@ -1221,9 +1221,7 @@
             </varlistentry>
         </variablelist>
         <para>See also:
-            <ulink url="manual.customizing.mantis.email.notifications.html">Email
-                Notifications
-            </ulink>
+            <link linkend="admin.customize.email">Email Notifications</link>
         </para>
     </section>
 
@@ -1914,9 +1912,7 @@
         </variablelist>
 
         <para>See also:
-            <ulink url="manual.customizing.mantis.customizing.status.values.html">Customizing
-                Status Values
-            </ulink>
+            <link linkend="admin.customize.status">Customizing Status Values</link>
         </para>
     </section>
 

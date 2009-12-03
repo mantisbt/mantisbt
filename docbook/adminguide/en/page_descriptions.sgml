@@ -81,7 +81,7 @@
             in the last "Changed(hrs)" field which is specified in the viewing
             filters. Each table row is color coded according to the issue
             status. The colors can be customised through MantisBT
-            <ulink url="manual.configuration.html">Configuration</ulink>
+            <link linkend="admin.config">Configuration</link>
             .Severitiesblock
             - prevents further work/progress from being made
             crash - crashes the application or blocking,

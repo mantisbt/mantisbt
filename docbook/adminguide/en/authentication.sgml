@@ -69,7 +69,7 @@
             </formalpara>
 
             <para>Also setup the LDAP parameters explained in the
-                <ulink url="manual.configuration.authentication.html">Authentication</ulink>
+                <link linkend="admin.config.auth">Authentication</link>
                 section. Don't forget to change your $g_login_method to
                 LDAP.
             </para>
