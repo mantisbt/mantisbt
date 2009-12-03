@@ -37,7 +37,7 @@
 	$f_confirm_hash = gpc_get_string('confirm_hash');
 
 	# force logout on the current user if already authenticated
-	if( auth_is_user_authenticated() ) {
+	if( auth_is_user_authenticated( false ) ) {
 		auth_logout();
 
 		# reload the page after logout

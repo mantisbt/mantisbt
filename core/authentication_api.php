@@ -85,15 +85,16 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
 /**
  * Return true if there is a currently logged in and authenticated user, false otherwise
  *
+ * @param boolean auto-login anonymous user
  * @return bool
  * @access public
  */
-function auth_is_user_authenticated() {
+function auth_is_user_authenticated( $p_login_anonymous=true ) {
 	global $g_cache_cookie_valid;
 	if( $g_cache_cookie_valid == true ) {
 		return $g_cache_cookie_valid;
 	}
-	$g_cache_cookie_valid = auth_is_cookie_valid( auth_get_current_user_cookie( false ) );
+	$g_cache_cookie_valid = auth_is_cookie_valid( auth_get_current_user_cookie( $p_login_anonymous ) );
 	return $g_cache_cookie_valid;
 }
 
