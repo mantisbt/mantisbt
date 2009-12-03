@@ -160,6 +160,20 @@ echo '&lt;link rel="stylesheet" type="text/css" href="', plugin_file( 'foo.css' 
 				filename so that it can distinguish between <filename>foo.css</filename> and
 				a potential file <filename>foo.png</filename>.
 			</para>
+
+			<para>
+				The plugin's filesystem structure at this point looks like this:
+			</para>
+
+			<programlisting>
+Example/
+	Example.php
+	pages/
+		foo.php
+	files/
+		foo.css
+			</programlisting>
+
 		</sect2>
 
 		<sect2 id="dev.plugins.building.events">
@@ -293,7 +307,87 @@ echo $t_new_string, '&lt;/p&gt;';
 		</sect2>
 
 		<sect2 id="dev.plugins.building.config">
-			<title>Configuration and Languages</title>
+			<title>Configuration</title>
+
+			<para>
+				Similar to events, plugins have a simplified method for declaring configuration
+				options, as well as API functions for retrieving or setting those values at runtime.
+			</para>
+
+			<para>
+				Declaring a new configuration option is achieved just like declaring events.  By
+				overriding the <function>config()</function> method on your plugin class, your
+				plugin can return an associative array of configuration options, with the option
+				name as the key, and the default option as the array value.  Our Example plugin
+				will declare an option "foo_or_bar", with a default value of "foo":
+			</para>
+
+			<programlisting><filename>Example/Example.php</filename>
+
+&lt;?php
+class ExamplePlugin extends MantisPlugin {
+    ...
+
+    function config() {
+        return array(
+            'foo_or_bar' => 'foo',
+        );
+    }
+}
+			</programlisting>
+
+			<para>
+				Retrieving the current value of a plugin's configuration option is achieved by
+				using the plugin API's <function>plugin_config_get()</function> function, and can
+				be set to a modified value in the database using
+				<function>plugin_config_set()</function>.  With these functions, the config option
+				is prefixed with the plugin's name, in attempt to automatically avoid conflicts in
+				naming.  Our Example plugin will demonstrate this by adding a secure form to the
+				"foo" page, and handling the form on a separate page "bar" that will modify the
+				value in the database, and redirect back to page "foo", just like any other form
+				and action page in MantisBT:
+			</para>
+
+			<programlisting><filename>Example/pages/foo.php</filename>
+
+&lt;?php
+...
+
+echo '&lt;form action="', plugin_page( 'bar' ), '" method="post"&gt;',
+    form_security_field( 'plugin_Example_bar' ),
+    '&lt;input name="foo_or_bar" value="', string_attribute( plugin_config_get( 'foo_or_bar' ) ), '"/&gt;',
+    '&lt;label&gt;&lt;input type="checkbox" name="reset"/&gt; Reset&lt;/label&gt;',
+    '&lt;input type="submit"/&gt;';
+			</programlisting>
+
+			<programlisting><filename>Example/pages/foo.php</filename>
+
+&lt;?php
+form_security_validate( 'plugin_Example_bar' );
+
+$f_foo_or_bar = gpc_get_string( 'foo_or_bar' );
+$f_reset = gpc_get_bool( 'reset', false );
+
+if ( $f_reset ) {
+    plugin_config_delete( 'foo_or_bar' );
+} else {
+    if ( $f_foo_or_bar == 'foo' || $f_foo_or_bar == 'bar' ) {
+        plugin_config_set( 'foo_or_bar', $f_foo_or_bar );
+    }
+}
+
+form_security_purge( 'plugin_Example_bar' );
+print_successful_redirect( plugin_page( 'foo', true ) );
+			</programlisting>
+
+			<para>
+				Note that the <function>form_security_*()</function> functions are part of the
+				form API, and prevent CSRF attacks against forms that make changes to the system.
+			</para>
+		</sect2>
+
+		<sect2 id="dev.plugins.building.language">
+			<title>Language and Localization</title>
 
 			<para>
 			</para>
