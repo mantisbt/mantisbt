@@ -587,6 +587,7 @@ $upgrade[] = Array( 'UpdateFunction', "date_migrate", array( 'mantis_sponsorship
 
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_sponsorship_table' ), "last_updated" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_sponsorship_table' ), "last_updated_int", "last_updated", "last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+
 /* 170 */
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_sponsorship_table' ), "date_submitted" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'mantis_sponsorship_table' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
@@ -601,3 +602,7 @@ $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_user_pref_tabl
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_user_pref_table'), "advanced_update" ) );
 $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_project_hierarchy_child_id', db_get_table( 'mantis_project_hierarchy_table' ), 'child_id' ) );
 $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_project_hierarchy_parent_id', db_get_table( 'mantis_project_hierarchy_table' ), 'parent_id' ) );
+
+/* 180 */
+$upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_tag_name', db_get_table( 'mantis_tag_table' ), 'name' ) );
+$upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_bug_tag_tag_id', db_get_table( 'mantis_bug_tag_table' ), 'tag_id' ) );
