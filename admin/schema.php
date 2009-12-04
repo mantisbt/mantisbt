@@ -587,6 +587,7 @@ $upgrade[] = Array( 'UpdateFunction', "date_migrate", array( db_get_table( 'spon
 
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'sponsorship' ), "last_updated" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'sponsorship' ), "last_updated_int", "last_updated", "last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+
 /* 170 */
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'sponsorship' ), "date_submitted" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'sponsorship' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
@@ -601,3 +602,7 @@ $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'user_pref'), "advance
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'user_pref'), "advanced_update" ) );
 $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_project_hierarchy_child_id', db_get_table( 'project_hierarchy' ), 'child_id' ) );
 $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_project_hierarchy_parent_id', db_get_table( 'project_hierarchy' ), 'parent_id' ) );
+
+/* 180 */
+$upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_tag_name', db_get_table( 'tag' ), 'name' ) );
+$upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_bug_tag_tag_id', db_get_table( 'bug_tag' ), 'tag_id' ) );
