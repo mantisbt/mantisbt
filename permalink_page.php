@@ -35,7 +35,8 @@
 	<p>
 <?php
 	echo lang_get( 'filter_permalink' ), '<br />';
-	echo "<a href=\"$f_url\">$f_url</a></p>";
+	$t_safe_url = string_display_line( $f_url );
+	echo "<a href=\"$t_safe_url\">$t_safe_url</a></p>";
 
 	$t_create_short_url = config_get( 'create_short_url' );
 
