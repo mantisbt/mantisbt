@@ -28,6 +28,7 @@
  *
  * @author Adam Zivner
  * @author Jirí Kuchta, kuchta@feec.vutbr.cz
+ * @author Kuvaly
  * @author Matěj Grabovský
  * @author Milan Cizek, cizek.milan@seznam.cz
  * @author Pavel Loupal, Pavel.Loupal@seznam.cz
@@ -343,6 +344,7 @@ $s_email_notification_title_for_action_monitor = 'Problém %1$s je od teď sledo
 $s_email_reporter = 'Reportér';
 $s_email_handler = 'Operátor';
 $s_email_project = 'Projekt';
+$s_email_project_label = 'Projekt:';
 $s_email_bug = 'ID problému';
 $s_email_category = 'Kategorie';
 $s_email_reproducibility = 'Reprodukovatelnost';
@@ -367,8 +369,11 @@ $s_manage_profiles_link = 'Profily';
 $s_change_preferences_link = 'Nastavení';
 $s_edit_account_title = 'Upravit účet';
 $s_username = 'Uživatelské jméno';
+$s_username_label = 'Uživatelské jméno:';
 $s_realname = 'Skutečné jméno';
+$s_realname_label = 'Opravdové jméno:';
 $s_email = 'E-mail';
+$s_email_label = 'E-mail:';
 $s_password = 'Heslo';
 $s_no_password_change = 'Heslo je spravováno jiným systémem, zde jej tedy nelze modifikovat.';
 $s_confirm_password = 'Potvrďte heslo';
@@ -685,6 +690,7 @@ $s_plugin_install = 'Instalovat';
 $s_plugin_upgrade = 'Upgradovat';
 $s_plugin_uninstall = 'Odinstalovat';
 $s_plugin_uninstall_message = 'Opravdu chcete odinstalovat zásuvku \'%1$s\'?';
+$s_plugin_key_label = 'Klíč:';
 $s_plugin_key_met = 'zásuvka připravena';
 $s_plugin_key_unmet = 'Nesplněné závislosti';
 $s_plugin_key_dated = 'Zastaralé závislosti';
@@ -939,7 +945,7 @@ $s_update_bug_button = 'Aktualizovat';
 $s_bug_assign_to_button = 'Přiřadit k:';
 $s_bug_status_to_button = 'Změnit stav na:';
 $s_reopen_bug_button = 'Znovuotevřít';
-$s_move_bug_button = 'Přesunout problém';
+$s_move_bug_button = 'Přesunout';
 $s_attached_files = 'Přiložené soubory';
 $s_publish = 'Publikovat';
 $s_cached = 'V mezipaměti';
@@ -1111,6 +1117,7 @@ $s_on = 'zap.';
 $s_off = 'vyp.';
 $s_wiki = 'Wiki';
 $s_tags = 'Značky';
+$s_tags_label = 'Značky:';
 $s_tag_details = 'Detaily značky: %1$s';
 $s_tag_id = 'Název značky';
 $s_tag_name = 'Název';

@@ -26,8 +26,12 @@
  * @ingroup Language
  * @file
  *
+ * @author Kuvaly
  */
 
+$s_plugin_MantisGraph_graph_bug_page_link = 'Graf';
+$s_plugin_MantisGraph_enabled = 'Zapnuto';
+$s_plugin_MantisGraph_disabled = 'Vypnuto';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Graf podle stavu';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Graf podle priority';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Graf podle důležitosti';

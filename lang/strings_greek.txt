@@ -84,6 +84,7 @@ $s_stays_on_top = 'Παραμονή στο Προσκήνιο';
 $s_delete_bugnote_button = 'Διαγραφή Σημείωσης';
 $s_delete_bugnote_sure_msg = 'Είστε σίγουρος πως θέλετε να διαγράψετε το θέμα;';
 $s_bug_relationships = 'Σχέσεις';
+$s_bug_relationships_label = 'Σχέσεις:';
 $s_empty_password_sure_msg = 'Ο χρήστης έχει κενό κωδικό. Είστε σίγουρος;';
 $s_empty_password_button = 'Χρήση Κενού Κωδικού';
 $s_reauthenticate_title = 'Επικυρώστε';
