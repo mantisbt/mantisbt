@@ -98,53 +98,40 @@
 		$t_select_modifier = 'multiple="multiple" size="10" ';
 	}
 
-	#
-	# Controller
-	#
-	function act(){
-		global $t_filter;
-
-		if(isset($_GET['filter_target'])){
-		    if ( !headers_sent() ) {
-			    header( 'Content-Type: text/html; charset=utf-8' );
-			}
-			$filter = $_GET['filter_target'];
-			$t_functionName = 'print_filter_'. utf8_substr($filter,0,-7);
-			echo "<!-- " . string_display_line( $filter ) . " -->";
-			if(function_exists($t_functionName)){
-				call_user_func($t_functionName);
-			}else if('custom_field' == utf8_substr($filter, 0, 12)){
-				# custom function
-				$t_custom_id = utf8_substr($filter, 13,-7);
-				print_filter_custom_field($t_custom_id);
-			}else {
-				$t_plugin_filters = filter_get_plugin_filters();
-				$t_found = false;
-				foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
-					if ( $filter == $t_field_name . '_filter' ) {
-						print_filter_plugin_field( $t_field_name, $t_filter_object );
-						$t_found = true;
-						break;
-					}
-				}
-
-				if ( !$t_found ) {
-				# error - no function to populate the target (e.g., print_filter_foo)
-				?>
-				<span style="color:red;weight:bold;">
-					unknown filter (<?php echo string_display_line( $filter ); ?>)
-				</span>
-				<?php
-				}
-			}
-		} else {
-			# error - no filter given
-			?>
-			<span style="color:red;weight:bold;">
-				no filter selected
-			</span>
-			<?php
+	/**
+	 * Prepend headers to the dynamic filter forms that are sent as the response from this page.
+	 */
+	function return_dynamic_filters_prepend_headers() {
+		if ( !headers_sent() ) {
+			header( 'Content-Type: text/html; charset=utf-8' );
 		}
 	}
 
-act();
+	$t_filter_target = gpc_get_string( 'filter_target' );
+	$t_functionName = 'print_filter_' . utf8_substr( $t_filter_target, 0, -7 );
+	if ( function_exists( $t_functionName ) ) {
+		return_dynamic_filters_prepend_headers();
+		call_user_func( $t_functionName );
+	} else if ( 'custom_field' == utf8_substr( $t_filter_target, 0, 12 ) ) {
+		# custom function
+		$t_custom_id = utf8_substr( $t_filter_target, 13, -7 );
+		return_dynamic_filters_prepend_headers();
+		print_filter_custom_field( $t_custom_id );
+	} else {
+		$t_plugin_filters = filter_get_plugin_filters();
+		$t_found = false;
+		foreach ( $t_plugin_filters as $t_field_name => $t_filter_object ) {
+			if ( $filter == $t_field_name . '_filter' ) {
+				return_dynamic_filters_prepend_headers();
+				print_filter_plugin_field( $t_field_name, $t_filter_object );
+				$t_found = true;
+				break;
+			}
+		}
+
+		if ( !$t_found ) {
+			# error - no function to populate the target (e.g., print_filter_foo)
+			error_parameters( $t_filter_target );
+			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+		}
+	}
