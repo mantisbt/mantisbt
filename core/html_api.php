@@ -320,15 +320,16 @@ function html_content_type() {
  * @return null
  */
 function html_title( $p_page_title = null ) {
-	$t_title = config_get( 'window_title' );
+	$t_page_title = string_html_specialchars( $p_page_title );
+	$t_title = string_html_specialchars( config_get( 'window_title' ) );
 	echo "\t", '<title>';
-	if( empty( $p_page_title ) ) {
-		echo string_display( $t_title );
+	if( empty( $t_page_title ) ) {
+		echo $t_title;
 	} else {
 		if( empty( $t_title ) ) {
-			echo $p_page_title;
+			echo $t_page_title;
 		} else {
-			echo $p_page_title . ' - ' . string_html_specialchars( $t_title );
+			echo $t_page_title . ' - ' . $t_title;
 		}
 	}
 	echo '</title>', "\n";
