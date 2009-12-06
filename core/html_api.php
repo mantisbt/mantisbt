@@ -328,7 +328,7 @@ function html_title( $p_page_title = null ) {
 		if( empty( $t_title ) ) {
 			echo $p_page_title;
 		} else {
-			echo $p_page_title . ' - ' . string_display( $t_title );
+			echo $p_page_title . ' - ' . string_html_specialchars( $t_title );
 		}
 	}
 	echo '</title>', "\n";
@@ -507,8 +507,8 @@ function html_login_info() {
 			echo ' | <a href="' . helper_mantis_url( 'signup_page.php' ) . '">' . lang_get( 'signup_link' ) . '</a>';
 		}
 	} else {
-		echo lang_get( 'logged_in_as' ), ": <span class=\"italic\">", string_display( $t_username ), "</span> <span class=\"small\">";
-		echo is_blank( $t_realname ) ? "($t_access_level)" : "(" . string_display( $t_realname ) . " - $t_access_level)";
+		echo lang_get( 'logged_in_as' ), ": <span class=\"italic\">", string_html_specialchars( $t_username ), "</span> <span class=\"small\">";
+		echo is_blank( $t_realname ) ? "($t_access_level)" : "(" . string_html_specialchars( $t_realname ) . " - $t_access_level)";
 		echo "</span>";
 	}
 	echo '</td>';
@@ -860,7 +860,7 @@ function print_project_menu_bar() {
 	echo '<a href="' . helper_mantis_url( 'set_project.php?project_id=' . ALL_PROJECTS ) . '">' . lang_get( 'all_projects' ) . '</a>';
 
 	foreach( $t_project_ids as $t_id ) {
-		echo ' | <a href="' . helper_mantis_url( 'set_project.php?project_id=' . $t_id ) . ' ">' . string_display( project_get_field( $t_id, 'name' ) ) . '</a>';
+		echo ' | <a href="' . helper_mantis_url( 'set_project.php?project_id=' . $t_id ) . '">' . string_html_specialchars( project_get_field( $t_id, 'name' ) ) . '</a>';
 		print_subproject_menu_bar( $t_id, $t_id . ';' );
 	}
 
@@ -877,7 +877,7 @@ function print_subproject_menu_bar( $p_project_id, $p_parents = '' ) {
 	$t_subprojects = current_user_get_accessible_subprojects( $p_project_id );
 	$t_char = ':';
 	foreach( $t_subprojects as $t_subproject ) {
-		echo $t_char . ' <a href="' . helper_mantis_url( 'set_project.php?project_id=' . $p_parents . $t_subproject ) . ' ">' . string_display( project_get_field( $t_subproject, 'name' ) ) . '</a>';
+		echo $t_char . ' <a href="' . helper_mantis_url( 'set_project.php?project_id=' . $p_parents . $t_subproject ) . '">' . string_html_specialchars( project_get_field( $t_subproject, 'name' ) ) . '</a>';
 		print_subproject_menu_bar( $t_subproject, $p_parents . $t_subproject . ';' );
 		$t_char = ',';
 	}
