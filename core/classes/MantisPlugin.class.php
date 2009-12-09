@@ -76,8 +76,10 @@ abstract class MantisPlugin {
 	abstract public function register();
 
 	/**
-	 * this function allows your plugin to set itself up, include any necessary API's, declare or hook events, etc.
-	 * Alternatively, your can plugin can hook the EVENT_PLUGIN_INIT event that will be called after all plugins have be initialized.
+	 * this function allows your plugin to set itself up, include any 
+	 * necessary API's, declare or hook events, etc.
+	 * Alternatively, your plugin can hook the EVENT_PLUGIN_INIT event
+	 * that will be called after all plugins have been initialized.
 	 */
 	public function init() {}
 
@@ -109,6 +111,14 @@ abstract class MantisPlugin {
 		return array();
 	}
 
+	/**
+	  * Perform pre-installation operations
+	  * 
+	  * This method is called before installing the given plugin.
+	  * It can be used to add pre-install checks on external requirements
+	  * 
+	  * @returns bool true if install can proceed
+	  */
 	public function install() {
 		return true;
 	}
