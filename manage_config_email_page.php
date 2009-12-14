@@ -273,7 +273,7 @@
 		get_section_end_for_email();
 
 		if ( $t_can_change_flags  || $t_can_change_defaults ) {
-			echo '<p>' . lang_get( 'notify_actions_change_access' ) . ':';
+			echo '<p>' . lang_get( 'notify_actions_change_access' );
 			echo '<select name="notify_actions_access">';
 			print_enum_string_option_list( 'access_levels', config_get_access( 'notify_flags' ) );
 			echo '</select> </p>';

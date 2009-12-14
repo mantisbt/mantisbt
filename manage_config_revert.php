@@ -46,7 +46,7 @@
 
 	if ( '' != $f_revert ) {
 		# Confirm with the user
-		helper_ensure_confirmed( lang_get( 'config_delete_sure' ) . ': ' .
+		helper_ensure_confirmed( lang_get( 'config_delete_sure' ) . lang_get( 'word_separator' ) . 
 			string_html_specialchars( implode( ', ', $t_revert_vars ) ) . ' ' . lang_get( 'in_project' ) . ' ' . project_get_name( $f_project_id ),
 			lang_get( 'delete_config_button' ) );
 

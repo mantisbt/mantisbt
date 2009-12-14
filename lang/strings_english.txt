@@ -301,7 +301,7 @@ $s_login_cookies_disabled = 'Your browser either does not know how to handle coo
 
 # General Strings
 $s_go_back = 'Go Back';
-$s_proceed = 'Click here to proceed';
+$s_proceed = 'Proceed';
 
 $s_switch = 'Switch';
 $s_logged_in_as = 'Logged in as';
@@ -553,7 +553,7 @@ $s_file_upload_msg = 'File upload successful.';
 $s_upload_file = 'Upload File';
 $s_select_file = 'Select File';
 $s_upload_file_button = 'Upload File';
-$s_max_file_size = 'Max. size';
+$s_max_file_size = 'Maximum size';
 
 # bug_reopen.php
 $s_bug_reopened_msg = 'Issue has been reopened...';
@@ -574,7 +574,7 @@ $s_from = 'From';
 $s_to = 'To';
 $s_sent_you_this_reminder_about = 'sent you this reminder about';
 $s_bug_reminder = 'Send a reminder';
-$s_reminder_sent_to = 'Reminder sent to';
+$s_reminder_sent_to = 'Reminder sent to:';
 $s_bug_send_button = 'Send';
 $s_reminder = 'Reminder';
 $s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
@@ -673,7 +673,7 @@ $s_memory_usage_in_kb = 'memory usage: %1$s KB';
 $s_please_report = 'Please report this to the %1$s.';
 
 # index.php
-$s_click_to_login = 'Click here to login';
+$s_click_to_login = 'Login';
 
 # login.php
 $s_warning_plain_password_authentication = '<strong>Warning:</strong> Plain password authentication is used, this will expose your passwords to administrators.';
@@ -778,7 +778,7 @@ $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Who can change notification defaults';
-$s_notify_actions_change_access = 'Who can change notifications';
+$s_notify_actions_change_access = 'Who can change notifications:';
 $s_revert_to_system = 'Delete All Projects Settings';
 $s_revert_to_all_project = 'Delete Project Specific Settings';
 
@@ -824,7 +824,7 @@ $s_reopen_status = 'Status to which a reopened issue is set';
 $s_reopen_resolution = 'Resolution to which a reopened issue is set';
 
 # manage_config_revert_page
-$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_config_delete_sure = 'Are you sure you want to delete the settings for:';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
 
