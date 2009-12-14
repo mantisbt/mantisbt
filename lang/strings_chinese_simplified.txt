@@ -30,6 +30,7 @@
  * @author Hacked by justin schnell_18@yahoo.com
  * @author Kai-Zheng Cheng, neek@sina.com
  * @author NetCobra, netcobra@gmail.com
+ * @author PhiLiP
  * @author Riceball LEE riceballl@hotmail.com
  * @author Singoo, singoo@163.com
  * @author liaobin@jite.net
@@ -456,7 +457,7 @@ $s_from = '从';
 $s_to = '到';
 $s_sent_you_this_reminder_about = '向您发送这个提醒，关于';
 $s_bug_reminder = '问题提醒';
-$s_reminder_sent_to = '发送提醒';
+$s_reminder_sent_to = '发送提醒:';
 $s_bug_send_button = '发送';
 $s_reminder = '提醒';
 $s_reminder_explain = '该注释将被发送给要求接收该问题反馈的所有收件人。';
@@ -630,7 +631,7 @@ $s_plugins_installed = '安装插件';
 $s_plugin_description = '描述';
 $s_plugin_author = '作者： %1$s';
 $s_plugin_url = '网址：';
-$s_plugin_update = '升级';
+$s_plugin_update = '更新';
 $s_plugin_install = '安装';
 $s_plugin_upgrade = '升级';
 $s_plugin_uninstall = '卸载';
@@ -799,7 +800,7 @@ $s_system_info_link = '系统信息';
 $s_site_settings_link = '站点设置';
 $s_site_settings_updated_msg = '站点设置已经被更新。';
 $s_summary_title = '统计报表';
-$s_summary_jpgraph_link = '图形报表';
+$s_summary_advanced_link = '图形报表';
 $s_by_project = '按项目';
 $s_by_status = '按问题状态';
 $s_by_date = '按日期';

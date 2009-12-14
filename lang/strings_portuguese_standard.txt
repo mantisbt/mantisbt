@@ -27,6 +27,8 @@
  * @file
  *
  * @author Crazymadlover
+ * @author Giro720
+ * @author Hamilton Abreu
  * @author Luís Martins, lmar@ualg.pt
  * @author Malafaya
  * @author Rui Alexandre Coelho, rac@iosoft.pt
@@ -216,7 +218,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria não encontrada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Categoria "%1$s" não encontrada para o projeto "%2$s".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Já existe uma versão com esse nome.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versão "%1$s" não encontrada.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'O nome de utilizador é inválido. Nomes de utilizador apenas podem conter letras, números, espaços, hífens e underscores.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'O nome de utilizador é inválido. Nomes de utilizador só podem conter caracteres latinos, números, espaços, hífens (-), pontos (.), sinais de mais (+) e sublinhados (_).';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'O nome verdadeiro do utilizador é inválido.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'O utilizador não tem o nível de acesso exigido.';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'O "Name Real" escolhido coincide com o nome de login de outro usuário. Por favor escolha outro.';
@@ -229,7 +231,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'A informação fornecida
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'O URL de confirmação é inválido ou já foi utilizado. Por favor registre-se novamente.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Máx. número de pedidos em andamento atingido. Por favor entre em contato com o administrador do sistema.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Essa operação iria criar um ciclo na hierarquia de subprojetos.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Você não pode alterar o nível de acesso do único ADMINISTRADOR do sistema.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Você não pode alterar ou rebaixar a última conta de administrador. Para executar a ação que você pediu, você primeiro precisa criar uma outra conta de administrador.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Erro de redireção de página, certifique-se que não haja espaços fora do bloco PHP (&lt;?php ?&gt;) nos ficheiros config_inc.php ou custom_*.php.';
 $MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Integraçáo Twitter requer a extensão CURL do PHP, que não está instalada.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Não foi possível encontrar uma etiqueta com esse nome.';
@@ -387,7 +389,7 @@ $s_from = 'De';
 $s_to = 'Para';
 $s_sent_you_this_reminder_about = 'enviou-lhe este Aviso acerca de';
 $s_bug_reminder = 'Enviar um e-mail de Aviso';
-$s_reminder_sent_to = 'Aviso enviado a';
+$s_reminder_sent_to = 'Aviso enviado a:';
 $s_bug_send_button = 'Enviar';
 $s_reminder = 'Aviso';
 $s_bug_updated_msg = 'O Bug foi actualizado com sucesso...';
@@ -600,7 +602,7 @@ $s_system_info_link = 'Informações do Sistema';
 $s_site_settings_link = 'Configurações do Site';
 $s_site_settings_updated_msg = 'As Configurações Foram Actualizadas';
 $s_summary_title = 'Sumário';
-$s_summary_jpgraph_link = 'Sumário Avançado';
+$s_summary_advanced_link = 'Sumário Avançado';
 $s_by_project = 'por Projecto';
 $s_by_status = 'por Estado';
 $s_by_date = 'por Data de Entrada (nº de dias)';
@@ -661,3 +663,4 @@ $s_from_date = 'De';
 $s_to_date = 'Para';
 $s_on_date = 'Em';
 $s_on = 'Em';
+$s_show_all_tags = 'Todas';

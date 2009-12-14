@@ -28,6 +28,7 @@
  *
  * @author Najami
  * @author Sannab
+ * @author Skalman
  * @author Thomas Sjogren <thomas.sjogren@multicomsecurity.se>
  * @author Thosjo
  */
@@ -303,7 +304,7 @@ $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Klarar inte att uppdatera tidszon.';
 $s_login_error = 'Ditt användarkonto kan vara avstängt eller så har du angivit ett felaktigt användarnamn eller lösenord.';
 $s_login_cookies_disabled = 'Din webbläsare kan inte eller vägrar att hantera kakor.';
 $s_go_back = 'Gå tillbaks';
-$s_proceed = 'Klicka här för att fortsätta';
+$s_proceed = 'Fortsätt';
 $s_switch = 'Byt';
 $s_logged_in_as = 'Inloggad som';
 $s_prefix_for_deleted_users = 'användare';
@@ -500,7 +501,7 @@ $s_from = 'Från';
 $s_to = 'Till';
 $s_sent_you_this_reminder_about = 'har skickat denna påminnelse till dig angående';
 $s_bug_reminder = 'Skicka en påminnelse';
-$s_reminder_sent_to = 'Påminnelse skickad till';
+$s_reminder_sent_to = 'Påminnelse skickad till:';
 $s_bug_send_button = 'Skicka';
 $s_reminder = 'Påminnelse';
 $s_reminder_explain = 'Meddelandet kommer att skickas till mottagare som begärt återkoppling till detta ärende.';
@@ -565,7 +566,7 @@ $s_total_queries_executed = '%1$d antal förfrågningar utförda.';
 $s_unique_queries_executed = '%1$d unika förfrågningar utförda.';
 $s_memory_usage_in_kb = 'minnesanvändning: %1$s KB';
 $s_please_report = 'Vänligen rapportera detta till %1$s.';
-$s_click_to_login = 'Klicka här för att logga in';
+$s_click_to_login = 'Logga in';
 $s_warning_plain_password_authentication = '<strong>VARNING:</strong> Klartextautentisering används, detta exponerar dina lösenord för administratörerna.';
 $s_warning_default_administrator_account_present = '<strong>VARNING:</strong> Du bör inaktivera standardkontot för \'administrator\' eller ändra dess lösenord.';
 $s_warning_admin_directory_present = '<strong>VARNING:</strong> Admin-katalogen ska tas bort .';
@@ -895,7 +896,7 @@ $s_system_info_link = 'Systeminfo';
 $s_site_settings_link = 'Globala inställningar';
 $s_site_settings_updated_msg = 'Uppdaterade globala inställningar';
 $s_summary_title = 'Sammanfattning';
-$s_summary_jpgraph_link = 'Avancerad sammanfattning';
+$s_summary_advanced_link = 'Avancerad sammanfattning';
 $s_by_project = 'projekt';
 $s_by_status = 'status';
 $s_by_date = 'datum (dagar)';

@@ -33,6 +33,7 @@ $s_plugin_format_title = 'Formatatge de MantisBT';
 $s_plugin_format_description = 'Plugin oficial de tractament e de formatatge del tèxte.';
 $s_plugin_format_config = 'Configuracion';
 $s_plugin_format_process_text = 'Tractament del tèxte';
+$s_plugin_format_process_text_warning_notice = 'Desactivetz pas sens saber çò que fasètz vertadièrament. Dins l\'estat desactivat, los atacs « cross-site scripting » (XSS) son possibles.';
 $s_plugin_format_process_urls = 'Tractament de las URL';
 $s_plugin_format_process_buglinks = 'Ligams MantisBT (bug / nòta sus un bug)';
 $s_plugin_format_process_vcslinks = 'Ligams VCS';

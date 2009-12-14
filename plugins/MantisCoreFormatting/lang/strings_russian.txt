@@ -26,15 +26,17 @@
  * @ingroup Language
  * @file
  *
+ * @author Kirill
  * @author Александр Сигачёв
  */
 
 $s_plugin_format_title = 'Форматирование MantisBT';
 $s_plugin_format_description = 'Официальный плагин для обработки и форматирования текста.';
 $s_plugin_format_config = 'настройка';
-$s_plugin_format_process_text = 'обработка текста';
-$s_plugin_format_process_urls = 'обработка URL';
-$s_plugin_format_process_buglinks = 'обработка ссылок MantisBT ( задачи/комментарии )';
-$s_plugin_format_process_vcslinks = 'ссылки VCS';
+$s_plugin_format_process_text = 'обрабатывать текст';
+$s_plugin_format_process_text_warning_notice = 'Не выключайте, если не уверены в том, что делаете. В выключенном состоянии возможна XSS атака на сайт.';
+$s_plugin_format_process_urls = 'обрабатывать URL';
+$s_plugin_format_process_buglinks = 'обрабатывать ссылки MantisBT ( задачи/комментарии )';
+$s_plugin_format_process_vcslinks = 'обрабатывать ссылки VCS';
 $s_plugin_format_enabled = 'вкл';
 $s_plugin_format_disabled = 'выкл';

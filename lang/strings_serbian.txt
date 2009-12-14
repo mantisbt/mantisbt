@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Serbian Cyrillic ekavian (ћирилица)
+/** Serbian Cyrillic ekavian (Српски (ћирилица))
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -360,7 +360,7 @@ $s_resolve_add_bugnote_title = 'Dodajte komentar za rešenje greške';
 $s_bugnote_add_resolve_button = 'Dodaj komentar uz grešku';
 $s_sent_you_this_reminder_about = 'Vam je poslao podsetnik o';
 $s_bug_reminder = 'Posalji podsetnik';
-$s_reminder_sent_to = 'Podsetnik poslat';
+$s_reminder_sent_to = 'Podsetnik poslat:';
 $s_bug_send_button = 'Slanje';
 $s_reminder = 'Podsetnik';
 $s_bug_updated_msg = 'Greška je uspesno ažurirana...';
@@ -594,7 +594,7 @@ $s_system_info_link = 'Sistem Info';
 $s_site_settings_link = 'Podešavanja sajta';
 $s_site_settings_updated_msg = 'Podešavanja sajta su ažurirana';
 $s_summary_title = 'Sažetak';
-$s_summary_jpgraph_link = 'Prošireni sazetak';
+$s_summary_advanced_link = 'Prošireni sazetak';
 $s_by_project = 'po projektu';
 $s_by_status = 'po statusu';
 $s_by_date = 'po datumu (dani)';

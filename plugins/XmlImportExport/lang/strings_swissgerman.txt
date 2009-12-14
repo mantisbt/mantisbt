@@ -27,6 +27,7 @@
  * @file
  *
  * @author Als-Holder
+ * @author Purodha
  */
 
 $s_plugin_XmlImportExport_title = 'Import/Export';
@@ -44,5 +45,5 @@ $s_plugin_XmlImportExport_link_desc = 'Konvertier in e Gleich (Link) zum Origina
 $s_plugin_XmlImportExport_disable = 'Deaktiviere';
 $s_plugin_XmlImportExport_disable_desc = 'Gleich (Link) deaktiviere';
 $s_plugin_XmlImportExport_fallback = 'Fallback-Strategii (wänn ohni Renummerierig):';
-$s_plugin_XmlImportExport_fallback_category = 'Fallback-Strategii:';
+$s_plugin_XmlImportExport_fallback_category = '!!Fuzzy!!Fallback-Strategii:';
 $s_plugin_XmlImportExport_keep_same_category = 'Versuech, di glych Kategorii byyzbhalte';

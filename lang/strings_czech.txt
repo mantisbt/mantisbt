@@ -28,6 +28,7 @@
  *
  * @author Adam Zivner
  * @author Jirí Kuchta, kuchta@feec.vutbr.cz
+ * @author Kuvaly
  * @author Matěj Grabovský
  * @author Milan Cizek, cizek.milan@seznam.cz
  * @author Pavel Loupal, Pavel.Loupal@seznam.cz
@@ -303,6 +304,7 @@ $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neplatný zabezpečující token form
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Tato stránka není touto metodou přístupná.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Neplatné řadicí pole.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Neplatný formát data.';
+$MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Nelze aktualizovat časové pásmo.';
 $s_login_error = 'Váš účet je deaktivován nebo blokován, popř. jste zadali chybnou kombinaci uživatelské jméno/heslo.';
 $s_login_cookies_disabled = 'Váš prohlížeč neumí nebo odmítá pracovat s cookies.';
 $s_go_back = 'Zpět';
@@ -503,7 +505,7 @@ $s_from = 'Od:';
 $s_to = 'Komu:';
 $s_sent_you_this_reminder_about = 'vám poslal toto upozornění na';
 $s_bug_reminder = 'Odeslat upozornění';
-$s_reminder_sent_to = 'Odesláno upozornění';
+$s_reminder_sent_to = 'Odesláno upozornění:';
 $s_bug_send_button = 'Odeslat';
 $s_reminder = 'Upozornění';
 $s_reminder_explain = 'Toto upozornění je odesláno příjemci, který byl uveden jako žadatel o odezvu ohledně tohoto problému.';
@@ -899,7 +901,7 @@ $s_system_info_link = 'Informace o systému';
 $s_site_settings_link = 'Nastavení stránky';
 $s_site_settings_updated_msg = 'Nastavení stránky bylo aktualizováno';
 $s_summary_title = 'Shrnutí';
-$s_summary_jpgraph_link = 'Rozšířené shrnutí';
+$s_summary_advanced_link = 'Rozšířené shrnutí';
 $s_by_project = 'podle projektu';
 $s_by_status = 'podle stavu';
 $s_by_date = 'podle data(dny)';
@@ -977,7 +979,7 @@ $s_update_bug_button = 'Aktualizovat';
 $s_bug_assign_to_button = 'Přiřadit k:';
 $s_bug_status_to_button = 'Změnit stav na:';
 $s_reopen_bug_button = 'Znovuotevřít';
-$s_move_bug_button = 'Přesunout problém';
+$s_move_bug_button = 'Přesunout';
 $s_attached_files = 'Přiložené soubory';
 $s_publish = 'Publikovat';
 $s_cached = 'V mezipaměti';
