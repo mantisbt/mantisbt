@@ -148,7 +148,7 @@ if ( ( $t_resolved <= $f_new_status ) && ( $t_closed > $f_new_status ) ) { ?>
 		<?php echo lang_get( 'duplicate_id' ) ?>
 	</td>
 	<td>
-		<input type="text" name="duplicate_id" maxlength="7" />
+		<input type="text" name="duplicate_id" maxlength="10" />
 	</td>
 </tr>
 <?php } ?>
