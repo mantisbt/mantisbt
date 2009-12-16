@@ -200,13 +200,15 @@ function user_pref_cache_array_rows( $p_user_id_array, $p_project_id = ALL_PROJE
 	global $g_cache_user_pref;
 	$c_user_id_array = array();
 
+	# identify the user ids that are not cached already.
 	foreach( $p_user_id_array as $t_user_id ) {
 		if( !isset( $g_cache_user_pref[(int) $t_user_id][(int)$p_project_id] ) ) {
 			$c_user_id_array[(int)$t_user_id] = (int)$t_user_id;
 		}
 	}
 
-	if( empty( $c_user_id_array ) ) {
+	# if all users are already cached, then return
+	if ( empty( $c_user_id_array ) ) {
 		return;
 	}
 
@@ -219,17 +221,20 @@ function user_pref_cache_array_rows( $p_user_id_array, $p_project_id = ALL_PROJE
 	$result = db_query_bound( $query, Array( (int)$p_project_id ) );
 
 	while( $row = db_fetch_array( $result ) ) {
-		if( !isset( $g_cache_user_pref[(int) $row['id']] ) ) {
-			$g_cache_user_pref[(int) $row['id']] = array();
+		if ( !isset( $g_cache_user_pref[(int) $row['user_id']] ) ) {
+			$g_cache_user_pref[(int) $row['user_id']] = array();
 		}
-		$g_cache_user_pref[(int) $row['id']][(int)$p_project_id] = $row;
-		unset( $c_user_id_array[(int) $row['id']] );
+
+		$g_cache_user_pref[(int) $row['user_id']][(int)$p_project_id] = $row;
+
+		# remove found users from required set.
+		unset( $c_user_id_array[(int) $row['user_id']] );
 	}
 
+	# cache users that are not found as false (i.e. negative cache)
 	foreach( $c_user_id_array as $t_user_id ) {
 		$g_cache_user_pref[(int) $t_user_id][(int)$p_project_id] = false;
 	}
-	return;
 }
 
 /** 
