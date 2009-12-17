@@ -21,6 +21,10 @@
 	 * @author Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
 	 * @link http://www.mantisbt.org
 	 */
+
+	# don't auto-login when trying to verify new user
+	$g_login_anonymous = false;
+
 	 /**
 	  * MantisBT Core API's
 	  */
@@ -37,7 +41,7 @@
 	$f_confirm_hash = gpc_get_string('confirm_hash');
 
 	# force logout on the current user if already authenticated
-	if( auth_is_user_authenticated( false ) ) {
+	if( auth_is_user_authenticated() ) {
 		auth_logout();
 
 		# reload the page after logout

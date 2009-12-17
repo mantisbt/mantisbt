@@ -222,6 +222,10 @@ if ( !is_blank ( config_get_global( 'default_timezone' ) ) ) {
 	config_set_global( 'default_timezone', date_default_timezone_get(), true );
 }
 
+if ( !isset( $g_login_anonymous ) ) {
+	$g_login_anonymous = true;
+}
+
 if( auth_is_user_authenticated() ) {
 	date_default_timezone_set( user_pref_get_pref( auth_get_current_user_id(), 'timezone' ) );
 }
