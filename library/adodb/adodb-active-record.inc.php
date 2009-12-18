@@ -1,7 +1,7 @@
 <?php
 /*
 
-@version V5.10 10 Nov 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+@version V5.09 25 June 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
   Latest version is available at http://adodb.sourceforge.net
  
   Released under both BSD license and Lesser GPL library license. 
@@ -26,7 +26,6 @@ global $ADODB_ACTIVE_DEFVALS; // use default values of table definition when cre
 $_ADODB_ACTIVE_DBS = array();
 $ACTIVE_RECORD_SAFETY = true;
 $ADODB_ACTIVE_DEFVALS = false;
-$ADODB_ACTIVE_CACHESECS = 0;
 
 class ADODB_Active_DB {
 	var $db; // ADOConnection
@@ -84,7 +83,7 @@ class ADODB_Active_Record {
 	var $_saved = false; // indicates whether data is already inserted.
 	var $_lasterr = false; // last error message
 	var $_original = false; // the original values loaded or inserted, refreshed on update
-
+	
 	var $foreignName; // CFR: class name when in a relationship
 
 	static function UseDefaultValues($bool=null)
@@ -129,7 +128,7 @@ class ADODB_Active_Record {
 			end($_ADODB_ACTIVE_DBS);
 			$this->_dbat = key($_ADODB_ACTIVE_DBS);
 		}
-
+		
 		$this->_table = $table;
 		$this->_tableat = $table; # reserved for setting the assoc value to a non-table name, eg. the sql string in future
 
@@ -203,7 +202,7 @@ class ADODB_Active_Record {
 		$table->_hasMany[$foreignRef] = $ar;
 	#	$this->$foreignRef = $this->_hasMany[$foreignRef]; // WATCHME Removed assignment by ref. to please __get()
 	}
-	
+
 	// use when you don't want ADOdb to auto-pluralize tablename
 	static function TableHasMany($table, $foreignRef, $foreignKey = false, $foreignClass = 'ADODB_Active_Record')
 	{
@@ -243,7 +242,7 @@ class ADODB_Active_Record {
 		$table->_belongsTo[$foreignRef] = $ar;
 	#	$this->$foreignRef = $this->_belongsTo[$foreignRef];
 	}
-	
+
 	static function ClassBelongsTo($class, $foreignRef, $foreignKey=false, $parentKey='', $parentClass = 'ADODB_Active_Record')
 	{
 		$ar = new $class();
@@ -586,7 +585,7 @@ class ADODB_Active_Record {
             # </AP>
 		}
         else
-			$keys = array_keys($row);
+		$keys = array_keys($row);
 			
         # <AP>
         reset($keys);
@@ -624,7 +623,7 @@ class ADODB_Active_Record {
 		case 'D':
 		case 'T':
 			if (empty($val)) return 'null';
-		
+			
 		case 'B':
 		case 'N':
 		case 'C':

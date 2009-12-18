@@ -1,0 +1,837 @@
+2007-08-12 03:20  tag RELEASE_0_5
+
+2007-08-12 03:20  harryf
+
+	* str_ireplace.php, tests/cases/utf8_str_ireplace.test.php: Fix
+	  1599859 at last -
+	  http://sourceforge.net/tracker/index.php?func=detail&aid=1599859&group_id=142846&atid=753842
+
+2007-08-12 03:11  harryf
+
+	* native/core.php: Limit the number parts to two when exploding
+	  which may give a small performance gain and reduce memory use -
+	  thanks to Geert De Deckere for tip
+
+2006-10-25 16:57  tag RELEASE_0_4
+
+2006-10-25 16:57  harryf
+
+	* docs/examples/tables.php: Add sample for lookup tables
+
+2006-10-17 11:58  harryf
+
+	* tests/cases/utf8_unicode.test.php: Add basic sanity checks
+
+2006-10-17 11:48  harryf
+
+	* native/core.php: Move lookup tables to local statics instead of
+	  globals
+
+2006-10-17 11:22  harryf
+
+	* tests/cases/: utf8_strtoupper.test.php,
+	  utf8_substr_replace.test.php: Fix class names when run tests
+	  individually
+
+2006-10-17 11:09  harryf
+
+	* tests/cases/utf8_specials.test.php: Add tests for
+	  utf8_is_word_chars
+
+2006-10-17 10:53  harryf
+
+	* tests/cases/utf8_ascii.test.php: Add test for empty string
+
+2006-10-17 10:53  harryf
+
+	* tests/cases/utf8_specials.test.php: Add utf8_strip_specials tests
+
+2006-10-16 23:13  harryf
+
+	* utils/specials.php: Eliminate the global
+
+2006-10-16 22:39  harryf
+
+	* tests/cases/utf8_ascii.test.php: Add basic tests for
+	  utf8_accents_to_ascii
+
+2006-10-16 22:38  harryf
+
+	* utils/ascii.php: Fix bug 1568924 plus make this function actually
+	  do something - used correct lookup tables, s/$string/$str - guess
+	  no one using it yet, so no complaints ;)
+
+2006-10-01 02:01  tag RELEASE_0_3
+
+2006-10-01 02:01  harryf
+
+	* utils/position.php: Add Chris Smiths implementation - given str
+	  and UTF-8 chr pos, returns corresponding byte index
+
+2006-10-01 01:53  harryf
+
+	* tests/cases/utf8_ascii.test.php: Update to reflect change to
+	  is_ascii - returning TRUE on empty strings
+
+2006-10-01 01:51  harryf
+
+	* utils/ascii.php: Change is_ascii test - returns true on empty
+	  strings - also changed regex so it doesnt capture matches in
+	  memory
+
+2006-10-01 01:38  harryf
+
+	* docs/phputf8.pod: Few extra links
+
+2006-10-01 01:16  harryf
+
+	* TODO.tsk: Task update
+
+2006-10-01 01:16  harryf
+
+	* README: Update note on license re Dokuwiki
+
+2006-10-01 01:16  harryf
+
+	* DEPENDENCIES: Redundant
+
+2006-10-01 01:02  harryf
+
+	* tests/data/bench/: strlen_mbstring_20061001.txt,
+	  strlen_native_20061001.txt, strpos_mbstring_20061001.txt,
+	  strpos_native_20061001.txt, strrpos_mbstring_20061001.txt,
+	  strrpos_native_20061001.txt, substr_mbstring_20061001.txt,
+	  substr_native_20061001.txt: Latest benchmarks
+
+2006-10-01 00:51  harryf
+
+	* tests/cases/utf8_substr.test.php: Test overlong length
+
+2006-10-01 00:49  harryf
+
+	* tests/cases/utf8_position.test.php: Tests for charpos to bytepos
+	  fns
+
+2006-09-30 15:17  harryf
+
+	* native/core.php: Another implementation thanks to Chris Smith /
+	  dokuwiki, solving 65535 bug while preserving performance, plus
+	  handling negative offset, lengths
+
+2006-09-27 23:34  harryf
+
+	* native/core.php: Tentatively checking in a bugfixed version of
+	  utf8_substr, now able to cope with 65535 - bug 1547780.
+
+2006-09-11 17:22  harryf
+
+	* ord.php: Fix error reporting - zero index
+
+2006-09-11 17:14  harryf
+
+	* utf8.php: Add runtime check to confirm PCRE is compiled with
+	  UTF-8 support
+
+2006-09-03 11:25  harryf
+
+	* str_pad.php, tests/cases/utf8_str_pad.test.php: Adding Oliver
+	  Saunders str_pad implementation
+
+2006-04-09 23:22  harryf
+
+	* ord.php: Add sequence length checks
+
+2006-03-27 23:02  harryf
+
+	* tests/cases/utf8_ascii.test.php: Add sanity tests
+
+2006-03-27 23:02  harryf
+
+	* utils/ascii.php: Add note on use of utf8_strip_ascii_ctrl
+
+2006-03-27 00:26  harryf
+
+	* tests/cases/utf8_ord.test.php: Add some tests for utf8_ord
+
+2006-03-27 00:25  harryf
+
+	* ord.php: Further reduce num calls to ord
+
+2006-03-21 01:50  harryf
+
+	* docs/: makeDocs.pl, print.css, screen.css: Supporting doc stuff
+
+2006-03-19 00:30  harryf
+
+	* docs/phputf8.pod: First pass on docs complete
+
+2006-03-18 14:32  harryf
+
+	* docs/phputf8.pod: More of handling bad bytes
+
+2006-03-18 13:47  tag RELEASE_0_2
+
+2006-03-18 13:47  harryf
+
+	* utils/ascii.php: Initial implementation of ctrl codes stripper -
+	  better done with preg_replace?
+
+2006-03-18 00:55  harryf
+
+	* docs/phputf8.pod: fix pod syntax
+
+2006-03-18 00:37  harryf
+
+	* docs/phputf8.pod: A little more on validation - poorly written
+	  but anyway
+
+2006-03-18 00:36  harryf
+
+	* README, TODO.tsk: Stay up to date
+
+2006-03-18 00:36  harryf
+
+	* ord.php: Adding ord for utf-8
+
+2006-03-17 00:04  harryf
+
+	* docs/phputf8.pod: Adding place holders
+
+2006-03-16 23:57  harryf
+
+	* docs/phputf8.pod: Getting started on docs
+
+2006-02-28 23:12  harryf
+
+	* utf8.php, mbstring/case.php, mbstring/core.php,
+	  mbstring/strlen.php, native/case.php, native/core.php,
+	  native/strlen.php, tests/benchconfig.php, tests/config.php:
+	  Reduce the number of includes
+
+2006-02-27 11:01  harryf
+
+	* tests/: benchconfig.php, config.php: Remove superflous defines
+
+2006-02-27 01:00  harryf
+
+	* ascii.php, bad.php, unicode.php, validation.php: Remove outdated
+	  files
+
+2006-02-27 00:59  tag RELEASE_0_1
+
+2006-02-27 00:59  harryf
+
+	* native/strlen.php: Add newline at end
+
+2006-02-27 00:58  harryf
+
+	* docs/examples/1.php: Add example of validation
+
+2006-02-27 00:56  harryf
+
+	* docs/examples/1.php: Add simple example
+
+2006-02-27 00:46  harryf
+
+	* TODO.tsk: Update TODO list
+
+2006-02-27 00:38  harryf
+
+	* tests/benchconfig.php, tests/config.php, tests/index.php,
+	  utf8.php: Eliminate iconv
+
+2006-02-27 00:37  harryf
+
+	* tests/data/bench/: strlen_mbstring_20060226.txt,
+	  strlen_native_20060226.txt, strpos_mbstring_20060226.txt,
+	  strpos_native_20060226.txt, strrpos_mbstring_20060226.txt,
+	  strrpos_native_20060226.txt, substr_mbstring_20060226.txt,
+	  substr_native_20060226.txt: Add benchmark results
+
+2006-02-27 00:37  harryf
+
+	* tests/bench/substr.php: Add substr bench
+
+2006-02-27 00:17  harryf
+
+	* tests/bench/: strpos.php, strrpos.php: Add benchmark scripts for
+	  strpos and strrpos
+
+2006-02-26 23:15  harryf
+
+	* tests/: benchconfig.php, config.php, bench/strlen.php: Rejigging
+	  around mb_strlen and starting benchmarks
+
+2006-02-26 23:13  harryf
+
+	* utf8.php: Place higher priority on mbstring
+
+2006-02-26 23:13  harryf
+
+	* mbstring/: README, strlen.php: Adding mb_strlen implementation
+
+2006-02-26 22:47  harryf
+
+	* tests/config.php: Make sure encoding is set correctly
+
+2006-02-26 15:07  harryf
+
+	* tests/: config.php, index.php, runtests.php: Allow any test to
+	  run against a particular engine
+
+2006-02-26 14:56  harryf
+
+	* README: More README notes
+
+2006-02-26 14:39  harryf
+
+	* tests/cases/: utf8_ascii.test.php, utf8_bad.test.php,
+	  utf8_validation.test.php: New file locations
+
+2006-02-26 14:39  harryf
+
+	* tests/: index.php, runtests.php: Add option to run against
+	  specific engine
+
+2006-02-26 14:20  harryf
+
+	* utils/: bad.php, unicode.php, validation.php: PHP @version doc
+	  tags
+
+2006-02-26 14:17  harryf
+
+	* utils/: ascii.php, bad.php, specials.php, unicode.php, utils.php,
+	  validation.php: More moving files around
+
+2006-02-26 14:07  harryf
+
+	* tests/cases/: utf8_ucfirst.test.php, utf8_ucwords.test.php: test
+	  for one char only
+
+2006-02-25 15:52  harryf
+
+	* tests/cases/: utf8_ascii.test.php, utf8_bad.test.php,
+	  utf8_str_ireplace.test.php, utf8_str_split.test.php,
+	  utf8_strcasecmp.test.php, utf8_strcspn.test.php,
+	  utf8_stristr.test.php, utf8_strrev.test.php,
+	  utf8_strspn.test.php, utf8_substr_replace.test.php,
+	  utf8_trim.test.php, utf8_ucfirst.test.php, utf8_ucwords.test.php,
+	  utf8_validation.test.php: Modify to reflect file / constant
+	  renaming
+
+2006-02-25 15:28  harryf
+
+	* tests/cases/: utf8_native_str_ireplace.test.php,
+	  utf8_native_str_split.test.php, utf8_native_strcasecmp.test.php,
+	  utf8_native_strcspn.test.php, utf8_native_stristr.test.php,
+	  utf8_native_strrev.test.php, utf8_native_strspn.test.php,
+	  utf8_native_substr_replace.test.php, utf8_native_trim.test.php,
+	  utf8_native_ucfirst.test.php, utf8_native_ucwords.test.php,
+	  utf8_str_ireplace.test.php, utf8_str_split.test.php,
+	  utf8_strcasecmp.test.php, utf8_strcspn.test.php,
+	  utf8_stristr.test.php, utf8_strrev.test.php,
+	  utf8_strspn.test.php, utf8_substr_replace.test.php,
+	  utf8_trim.test.php, utf8_ucfirst.test.php, utf8_ucwords.test.php:
+	  Renaming test files
+
+2006-02-25 15:22  harryf
+
+	* tests/config.php: Use correct constant, remove set encodings
+
+2006-02-25 15:20  harryf
+
+	* ascii.php, bad.php, unicode.php, utf8_ascii.php, utf8_bad.php,
+	  utf8_patterns.php, utf8_unicode.php, utf8_utils.php,
+	  utf8_validation.php, validation.php, utils/patterns.php,
+	  utils/utils.php: File renaming
+
+2006-02-25 15:14  harryf
+
+	* utf8.php: Rename directory constant and use control constants
+
+2006-02-25 15:07  harryf
+
+	* mbstring/: core.php, case.php: Add docs / control constant
+
+2006-02-25 15:05  harryf
+
+	* mbstring/README: Add note for the picky
+
+2006-02-25 14:54  harryf
+
+	* native/: case.php, core.php, strlen.php: Add control constants
+
+2006-02-25 14:50  harryf
+
+	* native/: utf8_str_ireplace.php, utf8_str_split.php,
+	  utf8_strcasecmp.php, utf8_strcspn.php, utf8_stristr.php,
+	  utf8_strrev.php, utf8_strspn.php, utf8_substr_replace.php,
+	  utf8_trim.php, utf8_ucfirst.php, utf8_ucwords.php: Moved to
+	  parent directory
+
+2006-02-25 14:50  harryf
+
+	* str_ireplace.php, str_split.php, strcasecmp.php, strcspn.php,
+	  stristr.php, strrev.php, strspn.php, substr_replace.php,
+	  trim.php, ucfirst.php, ucwords.php: Renaming / moving from native
+	  subdir
+
+2006-02-25 14:28  harryf
+
+	* native/strlen.php: Add constant to control loading
+
+2006-02-25 14:26  harryf
+
+	* native/: strlen.php, utf8_strlen.php: Begin file renaming
+
+2006-02-25 14:21  harryf
+
+	* native/utf8_ucfirst.php: Bug fixes so tests pass
+
+2006-02-25 00:43  harryf
+
+	* utf8.php: Modify to reflect native/core.php and native/case.php
+
+2006-02-25 00:42  harryf
+
+	* tests/config.php: Make sure HTMLReporter is producing UTF-8
+
+2006-02-25 00:39  harryf
+
+	* tests/index.php: Add simple browser for tests
+
+2006-02-25 00:33  harryf
+
+	* tests/cases/: utf8_ascii.test.php,
+	  utf8_native_str_ireplace.test.php,
+	  utf8_native_str_split.test.php, utf8_native_strcasecmp.test.php,
+	  utf8_native_strcspn.test.php, utf8_native_stristr.test.php,
+	  utf8_native_strrev.test.php, utf8_native_strspn.test.php,
+	  utf8_native_substr_replace.test.php, utf8_native_trim.test.php,
+	  utf8_native_ucfirst.test.php, utf8_native_ucwords.test.php,
+	  utf8_strlen.test.php, utf8_strpos.test.php,
+	  utf8_strrpos.test.php, utf8_strtolower.test.php,
+	  utf8_strtoupper.test.php, utf8_substr.test.php,
+	  utf8_validation.test.php: Fix copy and paste gotchas
+
+2006-02-25 00:32  harryf
+
+	* tests/runtests.php: Add runner for all tests
+
+2006-02-25 00:08  harryf
+
+	* tests/cases/utf8_bad.test.php: Fix constant, modify way
+	  config.php is loaded
+
+2006-02-25 00:06  harryf
+
+	* tests/cases/utf8_ascii.test.php: Correct constant and test name
+
+2006-02-25 00:04  harryf
+
+	* tests/cases/: utf8_strtolower.test.php, utf8_strtoupper.test.php:
+	  Correct test names
+
+2006-02-25 00:02  harryf
+
+	* native/: case.php, utf8_strtolower.php, utf8_strtoupper.php: Move
+	  utf8_strtoupper and utf8_strtolower into case.php
+
+2006-02-24 23:59  harryf
+
+	* native/: utf8_strpos.php, utf8_strrpos.php, utf8_substr.php:
+	  Remove files now merged into native/core.php
+
+2006-02-24 23:57  harryf
+
+	* native/core.php: Moving utf8_strpos, utf8_strrpos and utf8_substr
+	  to single file
+
+2006-02-24 23:51  harryf
+
+	* TODO.tsk: Add todo list
+
+2006-02-24 23:36  harryf
+
+	* native/utf8_substr.php: Handle lengths beyond end of string in
+	  same way as substr
+
+2006-02-24 23:35  harryf
+
+	* tests/cases/utf8_substr.test.php: Adjusts tests to expect same
+	  behaviour as substr
+
+2006-02-24 23:12  harryf
+
+	* utf8.php: Replace variable containing directory with constant
+
+2006-02-24 23:06  harryf
+
+	* tests/cases/: utf8_strrpos.test.php, utf8_substr.test.php: Remove
+	  requires
+
+2006-02-24 22:56  harryf
+
+	* tests/config.php: Load core functions via utf8.php
+
+2006-02-24 22:55  harryf
+
+	* tests/cases/: utf8_native_strlen.test.php,
+	  utf8_native_strpos.test.php, utf8_native_strrpos.test.php,
+	  utf8_native_strtolower.test.php, utf8_native_strtoupper.test.php,
+	  utf8_native_substr.test.php, utf8_strlen.test.php,
+	  utf8_strpos.test.php, utf8_strrpos.test.php,
+	  utf8_strtolower.test.php, utf8_strtoupper.test.php,
+	  utf8_substr.test.php: Begin test reorganisation
+
+2006-02-24 22:53  harryf
+
+	* utf8_patterns.php: Add note that not used by rest of lib
+
+2006-02-24 22:52  harryf
+
+	* utf8_bad.php: Embed bad regex in functions to eliminate include
+
+2006-02-24 16:13  harryf
+
+	* DEPENDENCIES: Starting on dependency documentation
+
+2006-02-24 16:06  harryf
+
+	* native/utf8_substr_replace.php: Document dependency on
+	  utf8_strlen
+
+2006-02-24 16:03  harryf
+
+	* native/utf8_substr.php: Fix error reporting
+
+2006-02-24 15:58  harryf
+
+	* README: Add note on bug reporting and well formed utf8
+
+2006-02-24 15:45  harryf
+
+	* native/utf8_strrpos.php: Document dependency on utf8_strlen,
+	  utf8_substr
+
+2006-02-24 15:28  harryf
+
+	* native/utf8_strpos.php: Document dependency on utf8_strlen,
+	  utf8_substr
+
+2006-02-24 15:25  harryf
+
+	* native/utf8_stristr.php: Document dependency on utf8_strlen
+
+2006-02-24 15:22  harryf
+
+	* native/utf8_strcasecmp.php: Document dependency on
+	  utf8_strtolower
+
+2006-02-24 15:21  harryf
+
+	* native/: utf8_str_split.php, utf8_strcspn.php: Document
+	  dependency on utf8_strlen
+
+2006-02-24 15:18  harryf
+
+	* native/: case.php, core.php: Remove unneeded files
+
+2006-02-24 15:16  harryf
+
+	* README: Add a tiny bit of documentation
+
+2006-02-24 15:12  harryf
+
+	* utf8.php: Add further notes on loading code
+
+2006-02-24 15:11  harryf
+
+	* LICENSE, README: Add license and notes on license
+
+2006-02-24 15:02  harryf
+
+	* utf8_unicode.php, utf8_validation.php, utf8_bad.php: Add better
+	  attribution to license blocks
+
+2006-02-24 14:52  harryf
+
+	* mbstring/core.php: Add support for offset to utf8_strrpos
+
+2006-02-24 14:52  harryf
+
+	* native/utf8_strrpos.php: Change E_USER_ERROR to E_USER_WARNING to
+	  match strrpos behaviour
+
+2005-12-09 22:32  harryf
+
+	* mbstring/core.php: Switch to assume correct internal encoding
+
+2005-12-09 22:31  harryf
+
+	* utf8_validation.php: Add further comments on 5 / 6 byte sequence
+	  risks
+
+2005-12-09 22:29  harryf
+
+	* mbstring/case.php: Add strtolower / upper wrappers
+
+2005-12-09 22:23  harryf
+
+	* README: Fix linefeed issues with README
+
+2005-12-08 17:17  harryf
+
+	* exp/regexunicode.php: Update so its actually working
+
+2005-12-08 17:00  harryf
+
+	* utf8.php: Get this to a semi-working condition
+
+2005-12-08 16:44  harryf
+
+	* common.php: Remove outdated common.php code
+
+2005-12-08 16:24  harryf
+
+	* native/utf8_ucwords.php: Switch to use of preg_replace_callback
+
+2005-12-08 13:13  harryf
+
+	* utf8_bad.php: Modified to load the patterns file
+
+2005-12-08 13:08  harryf
+
+	* README: Add some notes to README
+
+2005-12-08 12:53  harryf
+
+	* utf8_ascii.php: Add seperate implementations with or without
+	  ASCII device control codes
+
+2005-12-08 12:49  harryf
+
+	* utf8_utils.php: Adding utils from andreas gohr / dokuwiki
+
+2005-07-16 13:53  harryf
+
+	* utf8_unicode.php: Fix phpdoc issue
+
+2005-07-16 13:53  harryf
+
+	* utf8_bad.php: Fix bug when for incomplete sequence at end of
+	  string and add a bunch of phpdoc comments
+
+2005-07-16 13:36  harryf
+
+	* tests/cases/utf8_bad.test.php: Add some tests for
+	  utf8_bad_identify - two failing
+
+2005-07-16 13:20  harryf
+
+	* tests/cases/utf8_validation.test.php: Add tests for
+	  utf8_compliant function
+
+2005-07-16 13:12  harryf
+
+	* utf8_validation.php: Add alternative, faster but less strict
+	  mechanism to validate a UTF-8 string
+
+2005-07-16 00:03  harryf
+
+	* utf8_bad.php: Add routine to identify how the UTF-8 is bad
+
+2005-07-16 00:01  harryf
+
+	* utf8_validation.php: Minor cleaning
+
+2005-07-15 22:49  harryf
+
+	* utf8_patterns.php: Add api doc note to all patterns that ASCII
+	  range has changed from original version
+
+2005-07-15 22:47  harryf
+
+	* tests/cases/utf8_bad.test.php: Add a whole load more tests for
+	  specific badly formed UTF-8
+
+2005-07-15 22:46  harryf
+
+	* utf8_patterns.php: Modify patterns to contain full ASCII range
+
+2005-07-15 17:16  harryf
+
+	* tests/cases/utf8_validation.test.php: Add a bunch more tests for
+	  specific invalid UTF-8 sequences and code points
+
+2005-07-15 17:15  harryf
+
+	* utf8_validation.php: Dropping regex based implementation and
+	  switching to implementation based on that from
+	  http://hsivonen.iki.fi/php-utf8/
+
+2005-07-15 14:27  harryf
+
+	* native/utf8_ucwords.php: Add a little documentation of the regex
+
+2005-07-15 14:20  harryf
+
+	* tests/cases/: utf8_native_ucfirst.test.php,
+	  utf8_native_ucwords.test.php: Add linefeed tests
+
+2005-07-15 14:12  harryf
+
+	* tests/cases/utf8_native_trim.test.php: Add linefeed tests
+
+2005-07-15 14:03  harryf
+
+	* native/utf8_substr_replace.php: Handle linefeeds correctly
+
+2005-07-15 14:02  harryf
+
+	* tests/cases/utf8_native_substr_replace.test.php: Add linefeed
+	  test
+
+2005-07-15 13:58  harryf
+
+	* tests/cases/utf8_native_substr.test.php: Add test of length
+	  beyond string length
+
+2005-07-15 13:21  harryf
+
+	* tests/cases/utf8_native_substr.test.php: Add linefeed test
+
+2005-07-15 13:14  harryf
+
+	* tests/config.php: Update for PHP 4.4.0 and new error notice
+
+2005-07-12 09:44  harryf
+
+	* tests/cases/utf8_native_strrpos.test.php: Add linefeed tests
+
+2005-07-12 09:44  harryf
+
+	* native/utf8_strrpos.php: Remove commented print_r statement
+
+2005-07-12 09:40  harryf
+
+	* native/utf8_strrev.php: Modify regex to handle linefeeds
+
+2005-07-12 09:39  harryf
+
+	* tests/cases/utf8_native_strrev.test.php: Add linefeed test
+
+2005-07-12 09:36  harryf
+
+	* tests/cases/: utf8_native_strcspn.test.php,
+	  utf8_native_strspn.test.php: Add linefeed tests
+
+2005-07-12 09:32  harryf
+
+	* native/utf8_str_split.php: Modify regex to handle linefeeds and
+	  avoid adding null chars to end of string
+
+2005-07-12 09:26  harryf
+
+	* tests/cases/utf8_native_str_split.test.php: Add test with
+	  linefeeds
+
+2005-07-11 14:33  harryf
+
+	* tests/cases/utf8_native_str_ireplace.test.php: Add linefeed tests
+
+2005-07-11 14:32  harryf
+
+	* native/utf8_str_ireplace.php: Make regex . meta match new lines
+
+2005-07-11 14:17  harryf
+
+	* native/: utf8_strcasecmp.php, utf8_stristr.php: utf-8
+	  implementations of stristr and strcasecmp
+
+2005-07-11 14:16  harryf
+
+	* tests/cases/: utf8_native_strcasecmp.test.php,
+	  utf8_native_stristr.test.php: Add tests
+
+2005-07-11 12:48  harryf
+
+	* tests/cases/utf8_native_strcspn.test.php: Add further ascii test
+
+2005-07-11 12:47  harryf
+
+	* tests/cases/: utf8_native_strcspn.test.php,
+	  utf8_native_strspn.test.php: Adding tests for utf8_strcspn and
+	  correction to utf8_strspn
+
+2005-07-11 12:46  harryf
+
+	* native/: utf8_strcspn.php, utf8_strspn.php: Add missing /u
+	  modifier to PCRE patterns
+
+2005-07-05 00:30  tag start
+
+2005-07-05 00:30  harryf
+
+	* README, common.php, utf8.php, utf8_ascii.php, utf8_bad.php,
+	  utf8_patterns.php, utf8_unicode.php, utf8_validation.php,
+	  exp/regexunicode.php, mbstring/core.php, native/case.php,
+	  native/core.php, native/utf8_str_ireplace.php,
+	  native/utf8_str_split.php, native/utf8_strcspn.php,
+	  native/utf8_strlen.php, native/utf8_strpos.php,
+	  native/utf8_strrev.php, native/utf8_strrpos.php,
+	  native/utf8_strspn.php, native/utf8_strtolower.php,
+	  native/utf8_strtoupper.php, native/utf8_substr.php,
+	  native/utf8_substr_replace.php, native/utf8_trim.php,
+	  native/utf8_ucfirst.php, native/utf8_ucwords.php,
+	  tests/cli_reporter.php, tests/config.php,
+	  tests/cases/utf8_ascii.test.php, tests/cases/utf8_bad.test.php,
+	  tests/cases/utf8_native_str_ireplace.test.php,
+	  tests/cases/utf8_native_str_split.test.php,
+	  tests/cases/utf8_native_strlen.test.php,
+	  tests/cases/utf8_native_strpos.test.php,
+	  tests/cases/utf8_native_strrev.test.php,
+	  tests/cases/utf8_native_strrpos.test.php,
+	  tests/cases/utf8_native_strspn.test.php,
+	  tests/cases/utf8_native_strtolower.test.php,
+	  tests/cases/utf8_native_strtoupper.test.php,
+	  tests/cases/utf8_native_substr.test.php,
+	  tests/cases/utf8_native_substr_replace.test.php,
+	  tests/cases/utf8_native_trim.test.php,
+	  tests/cases/utf8_native_ucfirst.test.php,
+	  tests/cases/utf8_native_ucwords.test.php,
+	  tests/cases/utf8_validation.test.php, tests/data/utf8.html:
+	  Initial import
+
+2005-07-05 00:30  harryf
+
+	* README, common.php, utf8.php, utf8_ascii.php, utf8_bad.php,
+	  utf8_patterns.php, utf8_unicode.php, utf8_validation.php,
+	  exp/regexunicode.php, mbstring/core.php, native/case.php,
+	  native/core.php, native/utf8_str_ireplace.php,
+	  native/utf8_str_split.php, native/utf8_strcspn.php,
+	  native/utf8_strlen.php, native/utf8_strpos.php,
+	  native/utf8_strrev.php, native/utf8_strrpos.php,
+	  native/utf8_strspn.php, native/utf8_strtolower.php,
+	  native/utf8_strtoupper.php, native/utf8_substr.php,
+	  native/utf8_substr_replace.php, native/utf8_trim.php,
+	  native/utf8_ucfirst.php, native/utf8_ucwords.php,
+	  tests/cli_reporter.php, tests/config.php,
+	  tests/cases/utf8_ascii.test.php, tests/cases/utf8_bad.test.php,
+	  tests/cases/utf8_native_str_ireplace.test.php,
+	  tests/cases/utf8_native_str_split.test.php,
+	  tests/cases/utf8_native_strlen.test.php,
+	  tests/cases/utf8_native_strpos.test.php,
+	  tests/cases/utf8_native_strrev.test.php,
+	  tests/cases/utf8_native_strrpos.test.php,
+	  tests/cases/utf8_native_strspn.test.php,
+	  tests/cases/utf8_native_strtolower.test.php,
+	  tests/cases/utf8_native_strtoupper.test.php,
+	  tests/cases/utf8_native_substr.test.php,
+	  tests/cases/utf8_native_substr_replace.test.php,
+	  tests/cases/utf8_native_trim.test.php,
+	  tests/cases/utf8_native_ucfirst.test.php,
+	  tests/cases/utf8_native_ucwords.test.php,
+	  tests/cases/utf8_validation.test.php, tests/data/utf8.html:
+	  Initial revision
+

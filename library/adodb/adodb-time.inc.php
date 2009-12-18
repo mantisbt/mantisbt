@@ -432,7 +432,7 @@ function adodb_date_test_strftime($fmt)
 
 /**
 	 Test Suite
-*/	
+*/
 function adodb_date_test()
 {
 	
