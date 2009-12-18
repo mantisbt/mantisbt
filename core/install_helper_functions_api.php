@@ -217,3 +217,8 @@ function install_date_migrate( $p_data) {
 	return 2;
 
 }
+
+function install_do_nothing() {
+	# return 2 because that's what ADOdb/DataDict does when things happen properly
+	return 2;
+}
