@@ -308,7 +308,7 @@ class ADODB_mysqli extends ADOConnection {
 	}
 
 	  
-	function MetaIndexes ($table, $primary = FALSE)
+	function MetaIndexes ($table, $primary = FALSE, $owner=false)
 	{
 		// save old fetch mode
 		global $ADODB_FETCH_MODE;
