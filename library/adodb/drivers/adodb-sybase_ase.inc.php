@@ -71,7 +71,7 @@ class ADODB_sybase_ase extends ADODB_sybase {
 	}
 
 	// fix a bug which prevent the metaColumns query to be executed for Sybase ASE
-	function MetaColumns($table,$normalize=false) 
+	function MetaColumns($table,$upper=false) 
 	{
 		$false = false;
 		if (!empty($this->metaColumnsSQL)) {

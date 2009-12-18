@@ -318,13 +318,13 @@ class ADODB_odbtp extends ADOConnection{
 		return $arr2;
 	}
 	
-	function MetaColumns($table,$normalize=true)
+	function MetaColumns($table,$upper=true)
 	{
 	global $ADODB_FETCH_MODE;
 
 		$schema = false;
 		$this->_findschema($table,$schema);
-		if ($normalize) $table = strtoupper($table);
+		if ($upper) $table = strtoupper($table);
 
 		$savem = $ADODB_FETCH_MODE;
 		$ADODB_FETCH_MODE = ADODB_FETCH_NUM;

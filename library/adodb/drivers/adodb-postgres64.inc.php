@@ -584,7 +584,7 @@ select viewname,'V' from pg_views where viewname like $mask";
 		
 	}
 
-	  function MetaIndexes ($table, $primary = FALSE, $owner=false)
+	  function MetaIndexes ($table, $primary = FALSE)
       {
          global $ADODB_FETCH_MODE;
                 
