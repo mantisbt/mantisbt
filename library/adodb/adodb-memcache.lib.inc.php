@@ -65,7 +65,7 @@ $db->CacheExecute($sql);
 
 			$memcache = new MemCache;
 			
-			if (!is_array($this->hosts)) $this->hosts = array($hosts);
+			if (!is_array($this->hosts)) $this->hosts = array($this->hosts);
 		
 			$failcnt = 0;
 			foreach($this->hosts as $host) {
@@ -83,7 +83,7 @@ $db->CacheExecute($sql);
 		}
 		
 		// returns true or false. true if successful save
-		function writecache($filename, $contents,$debug, $secs2cache)
+		function writecache($filename, $contents, $debug, $secs2cache)
 		{
 			if (!$this->_connected) {
 				$err = '';
@@ -111,7 +111,7 @@ $db->CacheExecute($sql);
 				$err = 'Item with such key doesn\'t exists on the memcached server.';
 				return $false;
 			}
-	
+			
 			// hack, should actually use _csv2rs
 			$rs = explode("\n", $rs);
             unset($rs[0]);

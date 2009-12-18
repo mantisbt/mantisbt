@@ -4,14 +4,14 @@ The version and status of each is summarized below:
 
 directory       | project         | version  | status
 -----------------------------------------------------------------
-adodb           | adodb           | 5.0.9a   | patched: various, see git
-disposable      | disposable      | 1.1.0    | unpatched
+adodb           | ADOdb           | 5.10     | patched: PHP 5.3 compatibility
+disposable      | Disposable      | 1.1.0    | unpatched
 ezc             | ez Components   | 2009.1.2 | unpatched
-nusoap          | nusoap          | 0.7.3    | patched: php 5.3 compatibility
-phpmailer       | PHPMailer       | 5.0.2    | unpatched
-projax          | projax          |          | unpatched
+nusoap          | NuSOAP          | 0.7.3    | patched: PHP 5.3 compatibility
+phpmailer       | PHPMailer       | 5.1      | unpatched
+projax          | Projax          |          | patched: removed sound.js
 rssbuilder      | RSSBuilder      | 2.2.1    | patched: removed __autoload function
-utf8            | phputf8         | 0.5      | unpatched
+utf8            | PHP UTF-8       | 0.5      | unpatched
 
 Upstream projects
 ==================

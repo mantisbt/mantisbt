@@ -1,6 +1,6 @@
 <?php
 /*
-V5.09 25 June 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+V5.10 10 Nov 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -50,7 +50,8 @@ class ADODB_mysqli extends ADOConnection {
 	var $_bindInputArray = false;
 	var $nameQuote = '`';		/// string to use to quote identifiers and names
 	var $optionFlags = array(array(MYSQLI_READ_DEFAULT_GROUP,0));
-  var $arrayClass = 'ADORecordSet_array_mysqli';
+  	var $arrayClass = 'ADORecordSet_array_mysqli';
+  	var $multiQuery = false;
 	
 	function ADODB_mysqli() 
 	{			
@@ -194,11 +195,11 @@ class ADODB_mysqli extends ADOConnection {
 		return true;
 	}
 	
-	function RowLock($tables,$where='',$flds='1 as adodb_ignore') 
+	function RowLock($tables,$where='',$col='1 as adodb_ignore') 
 	{
 		if ($this->transCnt==0) $this->BeginTrans();
 		if ($where) $where = ' where '.$where;
-		$rs = $this->Execute("select $flds from $tables $where for update");
+		$rs = $this->Execute("select $col from $tables $where for update");
 		return !empty($rs); 
 	}
 	
@@ -308,7 +309,7 @@ class ADODB_mysqli extends ADOConnection {
 	}
 
 	  
-	function MetaIndexes ($table, $primary = FALSE, $owner=false)
+	function MetaIndexes ($table, $primary = FALSE)
 	{
 		// save old fetch mode
 		global $ADODB_FETCH_MODE;
@@ -511,9 +512,9 @@ class ADODB_mysqli extends ADOConnection {
 	
 	        // see https://sourceforge.net/tracker/index.php?func=detail&aid=2287278&group_id=42718&atid=433976
 			if (!isset($foreign_keys[$ref_table])) {
-	        $foreign_keys[$ref_table] = array();
+				$foreign_keys[$ref_table] = array();
 			}
-	        $num_fields               = count($my_field);
+	        $num_fields = count($my_field);
 	        for ( $j = 0;  $j < $num_fields;  $j ++ ) {
 	            if ( $associative ) {
 	                $foreign_keys[$ref_table][$ref_field[$j]] = $my_field[$j];
@@ -655,7 +656,7 @@ class ADODB_mysqli extends ADOConnection {
 		// return value of the stored proc (ie the number of rows affected).
 		// Commented out for reasons of performance. You should retrieve every recordset yourself.
 		//	if (!mysqli_next_result($this->connection->_connectionID))	return false;
-		
+	
 		if (is_array($sql)) {
 		
 			// Prepare() not supported because mysqli_stmt_execute does not return a recordset, but
@@ -671,7 +672,6 @@ class ADODB_mysqli extends ADOConnection {
 			
 			$fnarr = array_merge( array($stmt,$a) , $inputarr);
 			$ret = call_user_func_array('mysqli_stmt_bind_param',$fnarr);
-
 			$ret = mysqli_stmt_execute($stmt);
 			return $ret;
 		}
@@ -685,15 +685,23 @@ class ADODB_mysqli extends ADOConnection {
 		return $mysql_res;
 		*/
 		
-		if( $rs = mysqli_multi_query($this->_connectionID, $sql.';') )//Contributed by "Geisel Sierote" <geisel#4up.com.br>
-		{
-			$rs = ($ADODB_COUNTRECS) ? @mysqli_store_result( $this->_connectionID ) : @mysqli_use_result( $this->_connectionID );
-			return $rs ? $rs : true; // mysqli_more_results( $this->_connectionID )
+		if ($this->multiQuery) {
+			$rs = mysqli_multi_query($this->_connectionID, $sql.';');
+			if ($rs) {
+				$rs = ($ADODB_COUNTRECS) ? @mysqli_store_result( $this->_connectionID ) : @mysqli_use_result( $this->_connectionID );
+				return $rs ? $rs : true; // mysqli_more_results( $this->_connectionID )
+			}
 		} else {
-			if($this->debug)
-			ADOConnection::outp("Query: " . $sql . " failed. " . $this->ErrorMsg());
-			return false;
+			$rs = mysqli_query($this->_connectionID, $sql, $ADODB_COUNTRECS ? MYSQLI_STORE_RESULT : MYSQLI_USE_RESULT);
+		
+			if ($rs) return $rs;
 		}
+
+		if($this->debug)
+			ADOConnection::outp("Query: " . $sql . " failed. " . $this->ErrorMsg());
+		
+		return false;
+		
 	}
 
 	/*	Returns: the last error message from previous database operation	*/	
@@ -948,6 +956,19 @@ class ADORecordSet_mysqli extends ADORecordSet{
 	
 	function _close() 
 	{
+	    //if results are attached to this pointer from Stored Proceedure calls, the next standard query will die 2014
+        //only a problem with persistant connections
+
+        //mysqli_next_result($this->connection->_connectionID); trashes the DB side attached results.
+
+        while(mysqli_more_results($this->connection->_connectionID)){
+           @mysqli_next_result($this->connection->_connectionID);
+        }
+
+        //Because you can have one attached result, without tripping mysqli_more_results
+        @mysqli_next_result($this->connection->_connectionID);
+
+
 		mysqli_free_result($this->_queryID); 
 	  	$this->_queryID = false;	
 	}
@@ -1088,7 +1109,6 @@ class ADORecordSet_array_mysqli extends ADORecordSet_array {
     $this->ADORecordSet_array($id,$mode);
   }
   
-
 	function MetaType($t, $len = -1, $fieldobj = false)
 	{
 		if (is_object($t)) {
