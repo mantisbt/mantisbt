@@ -509,7 +509,7 @@ class dbTable extends dbObject {
 		}
 		return $this->opts;
 	}
-	
+
 	
 	/**
 	* Generates the SQL that will create the table in the database
