@@ -3,7 +3,7 @@
  * File containing the ezcGraphTransformation class
  *
  * @package Graph
- * @version //autogentag//
+ * @version 1.4.3
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  * @access private
@@ -23,7 +23,7 @@
  * - ezcGraphRotation (rotations of objects)
  * - ezcGraphTranslation (moving of objects)
  *
- * @version //autogentag//
+ * @version 1.4.3
  * @package Graph
  * @access private
  */

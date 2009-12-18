@@ -3,7 +3,7 @@
  * File containing the ezcGraphChartElementLogarithmicalAxis class
  *
  * @package Graph
- * @version //autogentag//
+ * @version 1.4.3
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -68,7 +68,7 @@
  * @property-read float $maxValue
  *                Maximum value to display on this axis.
  *           
- * @version //autogentag//
+ * @version 1.4.3
  * @package Graph
  * @mainclass
  */

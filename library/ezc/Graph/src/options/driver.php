@@ -3,7 +3,7 @@
  * File containing the ezcGraphDriverOption class
  *
  * @package Graph
- * @version //autogentag//
+ * @version 1.4.3
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -60,7 +60,7 @@
  *           String to append to shortened strings, if there is enough space
  *           left for the postfix.
  *
- * @version //autogentag//
+ * @version 1.4.3
  * @package Graph
  */
 abstract class ezcGraphDriverOptions extends ezcBaseOptions

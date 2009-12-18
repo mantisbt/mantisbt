@@ -3,7 +3,7 @@
  * File containing the ezcBase class.
  *
  * @package Base
- * @version //autogentag//
+ * @version 1.7
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -11,7 +11,7 @@
  * Base class implements the methods needed to use the eZ components.
  *
  * @package Base
- * @version //autogentag//
+ * @version 1.7
  * @mainclass
  */
 class ezcBase
@@ -41,7 +41,7 @@ class ezcBase
      *
      * @var string
      */
-    private static $libraryMode = "devel";
+    private static $libraryMode = "tarball";
 
     /**
      * Contains the current working directory, which is used when the

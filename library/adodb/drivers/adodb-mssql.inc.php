@@ -1,6 +1,6 @@
 <?php
 /* 
-V5.08 6 Apr 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+V5.10 10 Nov 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. 
@@ -13,6 +13,7 @@ Set tabs to 4 for best viewing.
    	http://phpbuilder.com/columns/alberto20000919.php3
 	
 */
+
 
 // security - hide paths
 if (!defined('ADODB_DIR')) die();
@@ -156,8 +157,43 @@ class ADODB_mssql extends ADOConnection {
             return $this->lastInsID; // InsID from sp_executesql call
         } else {
 			return $this->GetOne($this->identitySQL);
+		}
 	}
+
+
+
+	/**
+	* Correctly quotes a string so that all strings are escaped. We prefix and append
+	* to the string single-quotes.
+	* An example is  $db->qstr("Don't bother",magic_quotes_runtime());
+	* 
+	* @param s         the string to quote
+	* @param [magic_quotes]    if $s is GET/POST var, set to get_magic_quotes_gpc().
+	*              This undoes the stupidity of magic quotes for GPC.
+	*
+	* @return  quoted string to be sent back to database
+	*/
+	function qstr($s,$magic_quotes=false)
+	{
+ 		if (!$magic_quotes) {
+ 			return  "'".str_replace("'",$this->replaceQuote,$s)."'";
+		}
+
+ 		// undo magic quotes for " unless sybase is on
+ 		$sybase = ini_get('magic_quotes_sybase');
+ 		if (!$sybase) {
+ 			$s = str_replace('\\"','"',$s);
+ 			if ($this->replaceQuote == "\\'")  // ' already quoted, no need to change anything
+ 				return "'$s'";
+ 			else {// change \' to '' for sybase/mssql
+ 				$s = str_replace('\\\\','\\',$s);
+ 				return "'".str_replace("\\'",$this->replaceQuote,$s)."'";
+ 			}
+ 		} else {
+ 			return "'".$s."'";
+		}
 	}
+// moodle change end - see readme_moodle.txt
 
 	function _affectedrows()
 	{
@@ -214,7 +250,7 @@ class ADODB_mssql extends ADOConnection {
 			if ($secs2cache)
 				$rs = $this->CacheExecute($secs2cache, $sql, $inputarr);
 			else
-			$rs = $this->Execute($sql,$inputarr);
+				$rs = $this->Execute($sql,$inputarr);
 		} else
 			$rs = ADOConnection::SelectLimit($sql,$nrows,$offset,$inputarr,$secs2cache);
 	
@@ -330,10 +366,10 @@ class ADODB_mssql extends ADOConnection {
 		
 		See http://www.swynk.com/friends/achigrik/SQL70Locks.asp
 	*/
-	function RowLock($tables,$where,$flds='top 1 null as ignore') 
+	function RowLock($tables,$where,$col='top 1 null as ignore') 
 	{
 		if (!$this->transCnt) $this->BeginTrans();
-		return $this->GetOne("select $flds from $tables with (ROWLOCK,HOLDLOCK) where $where");
+		return $this->GetOne("select $col from $tables with (ROWLOCK,HOLDLOCK) where $where");
 	}
 	
 	

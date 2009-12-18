@@ -1,7 +1,7 @@
 <?php
 /*
 
-@version V5.08 6 Apr 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+@version V5.10 10 Nov 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
   Latest version is available at http://adodb.sourceforge.net
  
   Released under both BSD license and Lesser GPL library license. 
@@ -26,6 +26,7 @@ global $ADODB_ACTIVE_DEFVALS; // use default values of table definition when cre
 $_ADODB_ACTIVE_DBS = array();
 $ACTIVE_RECORD_SAFETY = true;
 $ADODB_ACTIVE_DEFVALS = false;
+$ADODB_ACTIVE_CACHESECS = 0;
 
 class ADODB_Active_DB {
 	var $db; // ADOConnection
@@ -73,6 +74,8 @@ function ADODB_SetDatabaseAdapter(&$db, $index=false)
 
 class ADODB_Active_Record {
 	static $_changeNames = true; // dynamically pluralize table names
+	static $_quoteNames = false;
+	
 	static $_foreignSuffix = '_id'; // 
 	var $_dbat; // associative index pointing to ADODB_Active_DB eg. $ADODB_Active_DBS[_dbat]
 	var $_table; // tablename, if set in class definition then use it as table name
@@ -81,7 +84,7 @@ class ADODB_Active_Record {
 	var $_saved = false; // indicates whether data is already inserted.
 	var $_lasterr = false; // last error message
 	var $_original = false; // the original values loaded or inserted, refreshed on update
-	
+
 	var $foreignName; // CFR: class name when in a relationship
 
 	static function UseDefaultValues($bool=null)
@@ -126,7 +129,7 @@ class ADODB_Active_Record {
 			end($_ADODB_ACTIVE_DBS);
 			$this->_dbat = key($_ADODB_ACTIVE_DBS);
 		}
-		
+
 		$this->_table = $table;
 		$this->_tableat = $table; # reserved for setting the assoc value to a non-table name, eg. the sql string in future
 
@@ -200,7 +203,7 @@ class ADODB_Active_Record {
 		$table->_hasMany[$foreignRef] = $ar;
 	#	$this->$foreignRef = $this->_hasMany[$foreignRef]; // WATCHME Removed assignment by ref. to please __get()
 	}
-
+	
 	// use when you don't want ADOdb to auto-pluralize tablename
 	static function TableHasMany($table, $foreignRef, $foreignKey = false, $foreignClass = 'ADODB_Active_Record')
 	{
@@ -240,7 +243,7 @@ class ADODB_Active_Record {
 		$table->_belongsTo[$foreignRef] = $ar;
 	#	$this->$foreignRef = $this->_belongsTo[$foreignRef];
 	}
-
+	
 	static function ClassBelongsTo($class, $foreignRef, $foreignKey=false, $parentKey='', $parentClass = 'ADODB_Active_Record')
 	{
 		$ar = new $class();
@@ -583,7 +586,7 @@ class ADODB_Active_Record {
             # </AP>
 		}
         else
-		$keys = array_keys($row);
+			$keys = array_keys($row);
 			
         # <AP>
         reset($keys);
@@ -621,7 +624,7 @@ class ADODB_Active_Record {
 		case 'D':
 		case 'T':
 			if (empty($val)) return 'null';
-			
+		
 		case 'B':
 		case 'N':
 		case 'C':
@@ -654,6 +657,13 @@ class ADODB_Active_Record {
 		return implode(' and ', $parr);
 	}
 	
+	
+	function _QName($n,$db=false)
+	{
+		if (!ADODB_Active_Record::$_quoteNames) return $n;
+		if (!$db) $db = $this->DB(); if (!$db) return false;
+		return $db->nameQuote.$n.$db->nameQuote;
+	}
 	
 	//------------------------------------------------------------ Public functions below
 	
@@ -708,6 +718,7 @@ class ADODB_Active_Record {
 		return $ok;
 	}
 	
+	
 	// false on error
 	function Insert()
 	{
@@ -723,7 +734,7 @@ class ADODB_Active_Record {
 			$val = $this->$name;
 			if(!is_array($val) || !is_null($val) || !array_key_exists($name, $table->keys)) {
 				$valarr[] = $val;
-				$names[] = $name;
+				$names[] = $this->_QName($name,$db);
 				$valstr[] = $db->Param($cnt);
 				$cnt += 1;
 			}
@@ -883,7 +894,7 @@ class ADODB_Active_Record {
 				continue;
 			}			
 			$valarr[] = $val;
-			$pairs[] = $name.'='.$db->Param($cnt);
+			$pairs[] = $this->_QName($name,$db).'='.$db->Param($cnt);
 			$cnt += 1;
 		}
 		
@@ -922,9 +933,9 @@ global $_ADODB_ACTIVE_DBS;
 	{
 		$rows = false;
 		if(isset($extra['offset'])) {
-			$rs = $db->SelectLimit($qry, $extra['limit'], $extra['offset']);
+			$rs = $db->SelectLimit($qry, $extra['limit'], $extra['offset'],$bindarr);
 		} else {
-			$rs = $db->SelectLimit($qry, $extra['limit']);
+			$rs = $db->SelectLimit($qry, $extra['limit'],-1,$bindarr);
 		}
 		if ($rs) {
 			while (!$rs->EOF) {

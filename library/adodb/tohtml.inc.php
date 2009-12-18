@@ -7,7 +7,7 @@
   
   Some pretty-printing by Chris Oxenreider <oxenreid@state.net>
 */ 
-  
+
 // specific code for tohtml
 GLOBAL $gSQLMaxRows,$gSQLBlockRows,$ADODB_ROUND;
 
@@ -90,8 +90,8 @@ GLOBAL $gSQLMaxRows,$gSQLBlockRows,$ADODB_ROUND;
 					$s .= "<TD> &nbsp; </TD>\n";
 					} else {
 						$s .= "	<TD>".$rs->UserDate($v,"D d, M Y") ."</TD>\n";				
-				}
-				break;
+					}
+					break;
 				}
 			case 'T':
 				if (empty($v)) $s .= "<TD> &nbsp; </TD>\n";
