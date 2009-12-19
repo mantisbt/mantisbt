@@ -51,3 +51,5 @@ $s_plugin_XmlImportExport_fallback = 'Fallback strategy (when "Renumber" does no
 
 $s_plugin_XmlImportExport_fallback_category = 'Fallback category:';
 $s_plugin_XmlImportExport_keep_same_category = 'Try keeping same category';
+
+$s_plugin_XmlImportExport_error_no_xml = 'can not find xmlreader and xmlwriter extensions';
