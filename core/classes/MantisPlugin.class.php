@@ -81,6 +81,11 @@ abstract class MantisPlugin {
 	 */
 	public function init() {}
 
+	/**
+	 * This function allows plugins to add new error messages for Mantis usage
+	 * 
+	 * @returns array The error_name=>error_message list to add
+	 */ 
 	public function errors() {
 		return array();
 	}
@@ -142,3 +147,6 @@ abstract class MantisPlugin {
 		$this->init();
 	}
 }
+
+
+/* vim: set noexpandtab tabstop=4 shiftwidth=4: */
