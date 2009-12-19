@@ -259,7 +259,7 @@ if( !db_is_connected() ) {
 	print_info_row( 'Database is not connected - Can not continue checks' );
 }
 
-print_test_warn_row( 'Checking adodb version...', version_compare( $g_db->Version(), '5.05', '>=' ), $g_db->Version() );
+print_test_warn_row( 'Checking adodb version...', version_compare( $g_db->Version(), '5.1', '>=' ), $g_db->Version() );
 
 print_test_row('Checking using bundled adodb with some drivers...', !(db_is_pgsql() || db_is_mssql() || db_is_db2()) || strstr($ADODB_vers, 'MantisBT Version') !== false );
 $t_serverinfo = $g_db->ServerInfo();
