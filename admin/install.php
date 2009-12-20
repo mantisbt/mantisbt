@@ -839,7 +839,7 @@ if( 5 == $t_install_state ) {
 		$t_config .= "\t\$g_db_schema = '$f_db_schema';\r\n";
 	}
 
-	$t_config .= '?>' . "\r\n";
+	$t_config .= "\r\n";
 	$t_write_failed = true;
 
 	if( !$t_config_exists ) {
