@@ -1,6 +1,6 @@
 <?php
 /*
-  V5.08 6 Apr 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+  V5.10 10 Nov 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence. See License.txt.
@@ -318,13 +318,13 @@ class ADODB_odbtp extends ADOConnection{
 		return $arr2;
 	}
 	
-	function MetaColumns($table,$normalize=true)
+	function MetaColumns($table,$upper=true)
 	{
 	global $ADODB_FETCH_MODE;
 
 		$schema = false;
 		$this->_findschema($table,$schema);
-		if ($normalize) $table = strtoupper($table);
+		if ($upper) $table = strtoupper($table);
 
 		$savem = $ADODB_FETCH_MODE;
 		$ADODB_FETCH_MODE = ADODB_FETCH_NUM;

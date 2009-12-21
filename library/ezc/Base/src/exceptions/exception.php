@@ -3,7 +3,7 @@
  * File containing the ezcBaseException class.
  *
  * @package Base
- * @version //autogen//
+ * @version 1.7
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -12,7 +12,7 @@
  * components library descent.
  *
  * @package Base
- * @version //autogen//
+ * @version 1.7
  */
 abstract class ezcBaseException extends Exception
 {

@@ -3,7 +3,7 @@
  * File containing the abstract ezcGraphChartElementAxis class
  *
  * @package Graph
- * @version //autogentag//
+ * @version 1.4.3
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -121,7 +121,7 @@
  *           Property indicating if some values were associated with axis, or a
  *           scaling has been set manually.
  *
- * @version //autogentag//
+ * @version 1.4.3
  * @package Graph
  */
 abstract class ezcGraphChartElementAxis extends ezcGraphChartElement

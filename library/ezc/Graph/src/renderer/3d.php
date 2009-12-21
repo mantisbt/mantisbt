@@ -3,7 +3,7 @@
  * File containing the three dimensional renderer
  *
  * @package Graph
- * @version //autogentag//
+ * @version 1.4.3
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -53,7 +53,7 @@
  *   $graph->render( 400, 150, 'tutorial_pie_chart_3d.svg' );
  * </code>
  *
- * @version //autogentag//
+ * @version 1.4.3
  * @package Graph
  * @mainclass
  */

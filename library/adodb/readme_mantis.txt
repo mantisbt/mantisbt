@@ -15,5 +15,11 @@ Added:
 	index.html - prevent directory browsing on misconfigured servers
 
 Changes:
-	none
+	adodb.inc.php
+	adodb-datadict.inc.php
+	datadict\datadict-mssql.inc.php
+	datadict\datadict-mssqlnative.inc.php
+	datadict\datadict-postgres.inc.php
+	odbc/postgres/mssql/db2 drivers/datadict
+	
 

@@ -55,6 +55,7 @@ class ADODB_db2 extends ADOConnection {
 	var $uCaseTables = true; // for meta* functions, uppercase table names
 	var $hasInsertID = true;
 	
+	
     function _insertid()
     {
         // See #8385 for more details.
@@ -80,10 +81,14 @@ class ADODB_db2 extends ADOConnection {
 		// Replaces the odbc_binmode() call that was in Execute()
 		ini_set('ibm_db2.binmode', $this->binmode);
 
-		if ($argDatabasename) {
-			$this->_connectionID = db2_connect($argDatabasename,$argUsername,$argPassword);
+		if ($argDatabasename && empty($argDSN)) {
+		
+			if (stripos($argDatabasename,'UID=') && stripos($argDatabasename,'PWD=')) $this->_connectionID = db2_connect($argDatabasename,null,null);
+			else $this->_connectionID = db2_connect($argDatabasename,$argUsername,$argPassword);
 		} else {
-			$this->_connectionID = db2_connect($argDSN,$argUsername,$argPassword);
+			if ($argDatabasename) $schema = $argDatabasename;
+			if (stripos($argDSN,'UID=') && stripos($argDSN,'PWD=')) $this->_connectionID = db2_connect($argDSN,null,null);
+			else $this->_connectionID = db2_connect($argDSN,$argUsername,$argPassword);
 		}
 		if (isset($php_errormsg)) $php_errormsg = '';
 
@@ -91,9 +96,9 @@ class ADODB_db2 extends ADOConnection {
 		// an array of valid options.  So far, we don't use them.
 
 		$this->_errorMsg = @db2_conn_errormsg();
- 
 		if (isset($this->connectStmt)) $this->Execute($this->connectStmt);
 		
+		if ($this->_connectionID && isset($schema)) $this->Execute("SET SCHEMA=$schema");
 		return $this->_connectionID != false;
 	}
 	
@@ -111,10 +116,14 @@ class ADODB_db2 extends ADOConnection {
 		if (isset($php_errormsg)) $php_errormsg = '';
 		$this->_errorMsg = isset($php_errormsg) ? $php_errormsg : '';
 		
-		if ($argDatabasename) {
-			$this->_connectionID = db2_pconnect($argDatabasename,$argUsername,$argPassword);
+		if ($argDatabasename && empty($argDSN)) {
+		
+			if (stripos($argDatabasename,'UID=') && stripos($argDatabasename,'PWD=')) $this->_connectionID = db2_pconnect($argDatabasename,null,null);
+			else $this->_connectionID = db2_pconnect($argDatabasename,$argUsername,$argPassword);
 		} else {
-			$this->_connectionID = db2_pconnect($argDSN,$argUsername,$argPassword);
+			if ($argDatabasename) $schema = $argDatabasename;
+			if (stripos($argDSN,'UID=') && stripos($argDSN,'PWD=')) $this->_connectionID = db2_pconnect($argDSN,null,null);
+			else $this->_connectionID = db2_pconnect($argDSN,$argUsername,$argPassword);
 		}
 		if (isset($php_errormsg)) $php_errormsg = '';
 
@@ -122,6 +131,7 @@ class ADODB_db2 extends ADOConnection {
 		if ($this->_connectionID && $this->autoRollback) @db2_rollback($this->_connectionID);
 		if (isset($this->connectStmt)) $this->Execute($this->connectStmt);
 		
+		if ($this->_connectionID && isset($schema)) $this->Execute("SET SCHEMA=$schema");
 		return $this->_connectionID != false;
 	}
 
@@ -232,7 +242,6 @@ class ADODB_db2 extends ADOConnection {
 		}
 	}
 
-	
 	function CreateSequence($seqname='adodbseq',$start=1)
 	{
 		if (empty($this->_genSeqSQL)) return false;
@@ -245,6 +254,25 @@ class ADODB_db2 extends ADOConnection {
 	{
 		if (empty($this->_dropSeqSQL)) return false;
 		return $this->Execute(sprintf($this->_dropSeqSQL,$seqname));
+	}
+	
+	function SelectLimit($sql,$nrows=-1,$offset=-1,$inputArr=false)
+	{
+		$nrows = (integer) $nrows;
+		if ($offset <= 0) {
+		// could also use " OPTIMIZE FOR $nrows ROWS "
+			if ($nrows >= 0) $sql .=  " FETCH FIRST $nrows ROWS ONLY ";
+			$rs = $this->Execute($sql,$inputArr);
+		} else {
+			if ($offset > 0 && $nrows < 0);
+			else {
+				$nrows += $offset;
+				$sql .=  " FETCH FIRST $nrows ROWS ONLY ";
+			}
+			$rs = ADOConnection::SelectLimit($sql,-1,$offset,$inputArr);
+		}
+		
+		return $rs;
 	}
 	
 	/*
@@ -420,7 +448,6 @@ class ADODB_db2 extends ADOConnection {
 		}
 		
 		$arr = $rs->GetArray();
-		
 		$rs->Close();
 		$arr2 = array();
 		
@@ -606,6 +633,7 @@ See http://msdn.microsoft.com/library/default.asp?url=/library/en-us/db2/htm/db2
 		return $retarr;
 	}
 	
+		
 	function Prepare($sql)
 	{
 		if (! $this->_bindInputArray) return $sql; // no binding

@@ -3,7 +3,7 @@
  * File containing the ezcBaseMetaData class.
  *
  * @package Base
- * @version //autogentag//
+ * @version 1.7
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -13,7 +13,7 @@
  * file, depending on how eZ Components is installed.
  *
  * @package Base
- * @version //autogentag//
+ * @version 1.7
  * @mainclass
  */
 class ezcBaseMetaData
@@ -107,7 +107,14 @@ class ezcBaseMetaData
      */
     public function getComponentDependencies( $componentName = null )
     {
-        return call_user_func_array( array( $this->reader, 'getComponentDependencies' ), $componentName !== null ? array( $componentName ) : array() );
+        if ( $componentName === null )
+        {
+            return $this->reader->getComponentDependencies();
+        }
+        else
+        {
+            return $this->reader->getComponentDependencies( $componentName );
+        }
     }
 }
 ?>

@@ -3,7 +3,7 @@
  * File containing the abstract ezcGraphChartDataContainer class
  *
  * @package Graph
- * @version //autogentag//
+ * @version 1.4.3
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -11,7 +11,7 @@
  * Container class for datasets used by the chart classes. Implements usefull
  * interfaces for convenient access to the datasets.
  *
- * @version //autogentag//
+ * @version 1.4.3
  * @package Graph
  */
 

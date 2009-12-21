@@ -2,7 +2,7 @@
 /**
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
- * @version //autogentag//
+ * @version 1.7
  * @filesource
  * @package Base
  */
@@ -34,7 +34,7 @@
  * </code>
  *
  * @package Base
- * @version //autogentag//
+ * @version 1.7
  * @mainclass
  */
 class ezcBaseFile
