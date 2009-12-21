@@ -163,7 +163,7 @@ function ldap_escape_string( $p_string ) {
 	$t_find = array( '\\', '*', '(', ')', '/', "\x00" );
 	$t_replace = array( '\5c', '\2a', '\28', '\29', '\2f', '\00' );
 
-	$t_string = str_replace( $t_find, $t_replace, $t_string );
+	$t_string = str_replace( $t_find, $t_replace, $p_string );
 
 	return $t_string;
 }
