@@ -713,7 +713,7 @@ $s_error_code_version_out_of_date = '<strong>Warning:</strong> The database stru
 #@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Welcome to the Issue Tracker.';
 $s_login_title = 'Login';
-$s_save_login = 'Save Login';
+$s_save_login = 'Remember my login on this computer';
 $s_secure_session = 'Secure Session';
 $s_secure_session_long = 'Only allow your session to be used from this IP address.';
 $s_choose_project = 'Choose Project';
