@@ -3,7 +3,7 @@
  * File containing the ezcGraphVector class
  *
  * @package Graph
- * @version 1.4.3
+ * @version //autogentag//
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  * @access private
@@ -18,7 +18,7 @@
  * calculate the length of a vector, perform various operations on angles, like
  * rotations and the calculation of angles between two vectors.
  *
- * @version 1.4.3
+ * @version //autogentag//
  * @package Graph
  * @access private
  */

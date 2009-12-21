@@ -3,7 +3,7 @@
  * File containing the ezcGraphRenderer3dOptions class
  *
  * @package Graph
- * @version 1.4.3
+ * @version //autogentag//
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -80,7 +80,7 @@
  * @property float $barChartGleam
  *           Transparancy for gleam on bar charts
  * 
- * @version 1.4.3
+ * @version //autogentag//
  * @package Graph
  */
 class ezcGraphRenderer3dOptions extends ezcGraphRendererOptions

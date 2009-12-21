@@ -3,7 +3,7 @@
  * File containing the abstract ezcGraphChartElement class
  *
  * @package Graph
- * @version 1.4.3
+ * @version //autogentag//
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -102,7 +102,7 @@
  * @property-read ezcGraphBoundings $boundings
  *                Boundings of this elements.
  *
- * @version 1.4.3
+ * @version //autogentag//
  * @package Graph
  */
 abstract class ezcGraphChartElement extends ezcBaseOptions

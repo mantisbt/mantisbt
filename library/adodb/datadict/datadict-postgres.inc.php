@@ -1,7 +1,7 @@
 <?php
 
 /**
-  V5.10 10 Nov 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+  V5.08 6 Apr 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -100,7 +100,6 @@ class ADODB2_postgres extends ADODB_DataDict {
 		case 'B': return 'BYTEA';
 			
 		case 'D': return 'DATE';
-		case 'TS':
 		case 'T': return 'TIMESTAMP';
 		
 		case 'L': return 'BOOLEAN';
@@ -136,7 +135,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 			if (($not_null = preg_match('/NOT NULL/i',$v))) {
 				$v = preg_replace('/NOT NULL/i','',$v);
 			}
-			if (preg_match('/^([^ ]+) .*DEFAULT ([^ ]+)/',$v,$matches)) {
+			if (preg_match('/^([^ ]+) .*DEFAULT (\'[^\']+\'|\"[^\"]+\"|[^ ]+)/',$v,$matches)) {
 				list(,$colname,$default) = $matches;
 				$sql[] = $alter . str_replace('DEFAULT '.$default,'',$v);
 				$sql[] = 'UPDATE '.$tabname.' SET '.$colname.'='.$default;
@@ -188,6 +187,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 	      $tabname = $this->TableName($tabname);
 	      $sql = array();
 	      list($lines,$pkey) = $this->_GenFields($flds);
+	      $set_null = false;
 	      $alter = 'ALTER TABLE ' . $tabname . $this->alterCol . ' ';
 	      foreach($lines as $v) {
 	         if ($not_null = preg_match('/NOT NULL/i',$v)) {
@@ -200,11 +200,19 @@ class ADODB2_postgres extends ADODB_DataDict {
 	            $v = preg_replace('/\sNULL/i','',$v);
 	         }
 	         
-	         if (preg_match('/^([^ ]+) .*DEFAULT ([^ ]+)/',$v,$matches)) {
+	         if (preg_match('/^([^ ]+) .*DEFAULT (\'[^\']+\'|\"[^\"]+\"|[^ ]+)/',$v,$matches)) {
+	            $existing = $this->MetaColumns($tabname);
 	            list(,$colname,$default) = $matches;
 	            $v = preg_replace('/^' . preg_quote($colname) . '\s/', '', $v);
-	            $sql[] = $alter . $colname . ' TYPE ' . str_replace('DEFAULT '.$default,'',$v);
-	            $sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' SET DEFAULT ' . $default;
+	            $t = trim(str_replace('DEFAULT '.$default,'',$v));
+	            if ( $existing[strtoupper($colname)]->type == 'bool' && $t == 'INTEGER') {
+		            $sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' DROP DEFAULT';
+		            $sql[] = $alter . $colname . ' TYPE ' . $t . ' USING (redirect_delay::BOOL)::INT ';
+		            $sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' SET DEFAULT ' . $default;
+	            } else {
+	            	$sql[] = $alter . $colname . ' TYPE ' . $t;
+	            	$sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' SET DEFAULT ' . $default;
+	            }	
 	         } 
 	         else {
 	            // drop default?
@@ -213,7 +221,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 	            $sql[] = $alter . $colname . ' TYPE ' . $rest;
 	         }
 	
-	         list($colname) = explode(' ',$v);
+			//list($colname) = explode(' ',$v);
 	         if ($not_null) {
 	            // this does not error out if the column is already not null
 	            $sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' SET NOT NULL';
@@ -223,6 +231,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 	            $sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' DROP NOT NULL';
 	         }
 	      }
+
 	      return $sql;
 	   }
 	

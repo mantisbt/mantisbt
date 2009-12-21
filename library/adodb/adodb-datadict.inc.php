@@ -1,7 +1,7 @@
 <?php
 
 /**
-  V5.10 10 Nov 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+  V5.08 6 Apr 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -519,7 +519,7 @@ class ADODB_DataDict {
 			// genfields can return FALSE at times
 			if ($lines == null) $lines = array();
 			list(,$first) = each($lines);
-			list(,$column_def) = preg_split("/[\t ]+/",$first,2);
+			list(,$column_def) = split("[\t ]+",$first,2);
 		}
 		return array(sprintf($this->renameColumn,$tabname,$this->NameQuote($oldcolumn),$this->NameQuote($newcolumn),$column_def));
 	}
@@ -715,12 +715,12 @@ class ADODB_DataDict {
 			
 			$ftype = $this->_GetSize($ftype, $ty, $fsize, $fprec);
 			
-			if ($ty == 'X' || $ty == 'X2' || $ty == 'B') $fnotnull = false; // some blob types do not accept nulls
+			//if ($ty == 'X' || $ty == 'X2' || $ty == 'B') $fnotnull = false; // some blob types do not accept nulls
 			
 			if ($fprimary) $pkey[] = $fname;
 			
 			// some databases do not allow blobs to have defaults
-			if ($ty == 'X') $fdefault = false;
+			//if ($ty == 'X') $fdefault = false;
 			
 			// build list of indexes
 			if ($findex != '') {

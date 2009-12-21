@@ -159,7 +159,7 @@ function _adodb_replace(&$zthis, $table, $fieldArray, $keyCol, $autoQuote, $has_
 			} else
 				$uSet .= ",$k=$v";
 		}
-		
+		 
 		$where = false;
 		foreach ($keyCol as $v) {
 			if (isset($fieldArray[$v])) {
@@ -1011,6 +1011,7 @@ function _adodb_column_sql(&$zthis, $action, $type, $fname, $fnameq, $arrFields,
 		    $val = $arrFields[$fname];
 			if (!is_numeric($val)) $val = (integer) $val;
 		    break;
+
 
 		default:
 			$val = str_replace(array("'"," ","("),"",$arrFields[$fname]); // basic sql injection defence

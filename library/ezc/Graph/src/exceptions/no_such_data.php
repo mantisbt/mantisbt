@@ -3,7 +3,7 @@
  * File containing the ezcGraphNoSuchDataException class
  *
  * @package Graph
- * @version 1.4.3
+ * @version //autogentag//
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -11,7 +11,7 @@
  * Exception shown, when trying to access not existing data in datasets.
  *
  * @package Graph
- * @version 1.4.3
+ * @version //autogentag//
  */
 class ezcGraphNoSuchDataException extends ezcGraphException
 {

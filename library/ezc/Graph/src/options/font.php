@@ -3,7 +3,7 @@
  * File containing the ezcGraphFontOption class
  *
  * @package Graph
- * @version 1.4.3
+ * @version //autogentag//
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -32,10 +32,6 @@
  *
  *  // The following only affects all elements except the // title element,
  *  // which now has its own font configuration.
- *  //
- *  // Keep in mind that the specified font is driver specific. A pure name
- *  // works for the SVG driver, used here. The GD driver for example
- *  // requires a path to a TTF file.
  *  $graph->options->font->name = 'serif';
  *
  *  $graph->data['Access statistics'] = new ezcGraphArrayDataSet( array(
@@ -94,7 +90,7 @@
  *           Color of text shadow. If left at the default value "false""
  *           the inverse color of the text color will be used.
  *
- * @version 1.4.3
+ * @version //autogentag//
  * @package Graph
  */
 class ezcGraphFontOptions extends ezcBaseOptions

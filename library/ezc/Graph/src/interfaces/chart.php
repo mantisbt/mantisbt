@@ -3,7 +3,7 @@
  * File containing the abstract ezcGraphChart class
  *
  * @package Graph
- * @version 1.4.3
+ * @version //autogentag//
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -20,7 +20,7 @@
  *           Contains the filename of the rendered file, if rendered.
  *
  * @package Graph
- * @version 1.4.3
+ * @version //autogentag//
  */
 abstract class ezcGraphChart
 {

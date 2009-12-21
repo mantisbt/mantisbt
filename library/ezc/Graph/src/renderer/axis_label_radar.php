@@ -3,7 +3,7 @@
  * File containing the ezcGraphAxisRadarLabelRenderer class
  *
  * @package Graph
- * @version 1.4.3
+ * @version //autogentag//
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -18,7 +18,7 @@
  * @property float $lastStep
  *           Position of last step on the axis to calculate the grid.
  *
- * @version 1.4.3
+ * @version //autogentag//
  * @package Graph
  * @mainclass
  */

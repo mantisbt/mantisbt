@@ -2,7 +2,7 @@
 /*~ class.smtp.php
 .---------------------------------------------------------------------------.
 |  Software: PHPMailer - PHP email class                                    |
-|   Version: 5.1                                                            |
+|   Version: 5.0.0                                                          |
 |   Contact: via sourceforge.net support pages (also www.codeworxtech.com)  |
 |      Info: http://phpmailer.sourceforge.net                               |
 |   Support: http://sourceforge.net/projects/phpmailer/                     |
@@ -75,9 +75,9 @@ class SMTP {
   // PROPERTIES, PRIVATE AND PROTECTED
   /////////////////////////////////////////////////
 
-  private $smtp_conn; // the socket to the server
-  private $error;     // error if any on the last call
-  private $helo_rply; // the reply the server sent to us for HELO
+  private $smtp_conn;      // the socket to the server
+  private $error;          // error if any on the last call
+  private $helo_rply;      // the reply the server sent to us for HELO
 
   /**
    * Initialize the class so that the data is in a known state.
@@ -109,7 +109,7 @@ class SMTP {
    * @access public
    * @return bool
    */
-  public function Connect($host, $port = 0, $tval = 30) {
+  public function Connect($host,$port=0,$tval=30) {
     // set the error val to null so there is no confusion
     $this->error = null;
 
@@ -193,7 +193,7 @@ class SMTP {
       return false;
     }
 
-    // Begin encrypted connection
+    //Begin encrypted connection
     if(!stream_socket_enable_crypto($this->smtp_conn, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
       return false;
     }
@@ -376,7 +376,6 @@ class SMTP {
      * and we can process all lines before a blank "" line as
      * headers.
      */
-
     $field = substr($lines[0],0,strpos($lines[0],":"));
     $in_headers = false;
     if(!empty($field) && !strstr($field," ")) {
@@ -478,8 +477,8 @@ class SMTP {
     // Send extended hello first (RFC 2821)
     if(!$this->SendHello("EHLO", $host)) {
       if(!$this->SendHello("HELO", $host)) {
-        return false;
-      }
+          return false;
+    }
     }
 
     return true;
@@ -573,7 +572,7 @@ class SMTP {
    * @access public
    * @return bool
    */
-  public function Quit($close_on_error = true) {
+  public function Quit($close_on_error=true) {
     $this->error = null; // so there is no confusion
 
     if(!$this->connected()) {
@@ -772,12 +771,12 @@ class SMTP {
 
   /**
   * Get the current error
-  * @access public
+   * @access public
   * @return array
-  */
+   */
   public function getError() {
     return $this->error;
-  }
+    }
 
   /////////////////////////////////////////////////
   // INTERNAL FUNCTIONS
@@ -811,4 +810,5 @@ class SMTP {
 
 }
 
-?>
+
+ ?>

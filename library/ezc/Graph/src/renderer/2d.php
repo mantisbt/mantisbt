@@ -3,7 +3,7 @@
  * File containing the two dimensional renderer
  *
  * @package Graph
- * @version 1.4.3
+ * @version //autogentag//
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -51,7 +51,7 @@
  *   $graph->render( 400, 150, 'tutorial_pie_chart_pimped.svg' );
  * </code>
  *
- * @version 1.4.3
+ * @version //autogentag//
  * @package Graph
  * @mainclass
  */

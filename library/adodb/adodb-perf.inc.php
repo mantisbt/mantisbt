@@ -1,6 +1,6 @@
 <?php
 /* 
-V5.10 10 Nov 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+V5.08 6 Apr 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. See License.txt. 
@@ -57,10 +57,12 @@ function adodb_round($n,$prec)
 	return number_format($n, $prec, '.', '');
 }
 
-/* obsolete: return microtime value as a float. Retained for backward compat */
+/* return microtime value as a float */
 function adodb_microtime()
 {
-	return microtime(true);
+	$t = microtime();
+	$t = explode(' ',$t);
+	return (float)$t[1]+ (float)$t[0];
 }
 
 /* sql code timing */
@@ -276,10 +278,10 @@ processes 69293
 					$FAIL = true;
 					return false;
 				}
-		
+			
 				$info[0] = -1;
-				$info[1] = 0;
-				$info[2] = 0;
+			$info[1] = 0;
+			$info[2] = 0;
 				$info[3] = 0;
 				foreach($objWMIService->ExecQuery($myQuery) as $objItem)  {
 						$info[0] = $objItem->PercentProcessorTime();
@@ -353,26 +355,26 @@ Committed_AS:   348732 kB
 	{
 		$info = $this->_CPULoad();
 		if (!$info) return false;
-		
+			
 		if (strncmp(PHP_OS,'WIN',3)==0) {
 			return (integer) $info[0];
 		}else {
-			if (empty($this->_lastLoad)) {
-				sleep(1);
-				$this->_lastLoad = $info;
-				$info = $this->_CPULoad();
-			}
-			
-			$last = $this->_lastLoad;
+		if (empty($this->_lastLoad)) {
+			sleep(1);
 			$this->_lastLoad = $info;
-			
-			$d_user = $info[0] - $last[0];
-			$d_nice = $info[1] - $last[1];
-			$d_system = $info[2] - $last[2];
-			$d_idle = $info[3] - $last[3];
-			
-			//printf("Delta - User: %f  Nice: %f  System: %f  Idle: %f<br>",$d_user,$d_nice,$d_system,$d_idle);
+			$info = $this->_CPULoad();
+		}
 		
+		$last = $this->_lastLoad;
+		$this->_lastLoad = $info;
+		
+		$d_user = $info[0] - $last[0];
+		$d_nice = $info[1] - $last[1];
+		$d_system = $info[2] - $last[2];
+		$d_idle = $info[3] - $last[3];
+		
+		//printf("Delta - User: %f  Nice: %f  System: %f  Idle: %f<br>",$d_user,$d_nice,$d_system,$d_idle);
+
 			$total=$d_user+$d_nice+$d_system+$d_idle;
 			if ($total<1) $total=1;
 			return 100*($d_user+$d_nice+$d_system)/$total; 

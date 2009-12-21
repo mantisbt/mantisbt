@@ -3,7 +3,7 @@
  * File containing the abstract ezcGraphMatrix class
  *
  * @package Graph
- * @version 1.4.3
+ * @version //autogentag//
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  * @access private
@@ -20,7 +20,7 @@
  * Cholesky-Crout algorithm. These algorithms are required by the average
  * polynom calculation in the ezcGraphDataSetAveragePolynom class.
  *
- * @version 1.4.3
+ * @version //autogentag//
  * @package Graph
  * @access private
  */

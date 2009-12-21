@@ -3,7 +3,7 @@
  * File containing the ezcGraphInvalidStepSizeException class
  *
  * @package Graph
- * @version 1.4.3
+ * @version //autogentag//
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -12,7 +12,7 @@
  * the value span it should be used for.
  *
  * @package Graph
- * @version 1.4.3
+ * @version //autogentag//
  */
 class ezcGraphInvalidStepSizeException extends ezcGraphException
 {

@@ -3,7 +3,7 @@
  * File containing the ezcBaseRepositoryDirectory.
  *
  * @package Base
- * @version 1.7
+ * @version //autogentag//
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -12,7 +12,7 @@
  * Struct which defines a repository directory.
  *
  * @package Base
- * @version 1.7
+ * @version //autogentag//
  */
 class ezcBaseRepositoryDirectory extends ezcBaseStruct
 {

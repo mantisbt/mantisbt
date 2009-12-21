@@ -58,7 +58,7 @@ class ADODB_oci8 extends ADOConnection {
 	var $replaceQuote = "''"; // string to use to replace quotes
 	var $concat_operator='||';
 	var $sysDate = "TRUNC(SYSDATE)";
-	var $sysTimeStamp = 'SYSDATE'; // requires oracle 9 or later, otherwise use SYSDATE
+	var $sysTimeStamp = 'SYSDATE';
 	var $metaDatabasesSQL = "SELECT USERNAME FROM ALL_USERS WHERE USERNAME NOT IN ('SYS','SYSTEM','DBSNMP','OUTLN') ORDER BY 1";
 	var $_stmt;
 	var $_commit = OCI_COMMIT_ON_SUCCESS;
@@ -81,7 +81,7 @@ class ADODB_oci8 extends ADOConnection {
 	var $leftOuter = '';  // oracle wierdness, $col = $value (+) for LEFT OUTER, $col (+)= $value for RIGHT OUTER
 	var $session_sharing_force_blob = false; // alter session on updateblob if set to true 
 	var $firstrows = true; // enable first rows optimization on SelectLimit()
-	var $selectOffsetAlg1 = 1000; // when to use 1st algorithm of selectlimit.
+	var $selectOffsetAlg1 = 100; // when to use 1st algorithm of selectlimit.
 	var $NLS_DATE_FORMAT = 'YYYY-MM-DD';  // To include time, use 'RRRR-MM-DD HH24:MI:SS'
 	var $dateformat = 'YYYY-MM-DD'; // DBDate format
  	var $useDBDateFormatForTextInput=false;
@@ -96,7 +96,7 @@ class ADODB_oci8 extends ADOConnection {
 		if (defined('ADODB_EXTENSION')) $this->rsPrefix .= 'ext_';
 	}
 	
-	/*  function MetaColumns($table, $normalize=true) added by smondino@users.sourceforge.net*/
+	/*  function MetaColumns($table) added by smondino@users.sourceforge.net*/
 	function MetaColumns($table, $normalize=true) 
 	{
 	global $ADODB_FETCH_MODE;
@@ -281,13 +281,8 @@ NATSOFT.DOMAIN =
 	{
 		if (empty($d) && $d !== 0) return 'null';
 		if ($isfld) return 'TO_DATE('.$d.",'".$this->dateformat."')";
-		
 		if (is_string($d)) $d = ADORecordSet::UnixDate($d);
-		
-		if (is_object($d)) $ds = $d->format($this->fmtDate);
-		else $ds = adodb_date($this->fmtDate,$d);
-		
-		return "TO_DATE(".$ds.",'".$this->dateformat."')";
+		return "TO_DATE(".adodb_date($this->fmtDate,$d).",'".$this->dateformat."')";
 	}
 
 	function BindDate($d)
@@ -298,15 +293,12 @@ NATSOFT.DOMAIN =
 		return substr($d,1,strlen($d)-2);
 	}
 	
-	function BindTimeStamp($ts)
+	function BindTimeStamp($d)
 	{
-		if (empty($ts) && $ts !== 0) return 'null';
-		if (is_string($ts)) $ts = ADORecordSet::UnixTimeStamp($ts);
+		$d = ADOConnection::DBTimeStamp($d);
+		if (strncmp($d,"'",1)) return $d;
 		
-		if (is_object($ts)) $tss = $ts->format("'Y-m-d H:i:s'");
-		else $tss = adodb_date("'Y-m-d H:i:s'",$ts);
-		
-		return $tss;
+		return substr($d,1,strlen($d)-2);
 	}
 	
 	// format and return date string in database timestamp format
@@ -315,17 +307,13 @@ NATSOFT.DOMAIN =
 		if (empty($ts) && $ts !== 0) return 'null';
 		if ($isfld) return 'TO_DATE(substr('.$ts.",1,19),'RRRR-MM-DD, HH24:MI:SS')";
 		if (is_string($ts)) $ts = ADORecordSet::UnixTimeStamp($ts);
-		
-		if (is_object($ts)) $tss = $ts->format("'Y-m-d H:i:s'");
-		else $tss = adodb_date("'Y-m-d H:i:s'",$ts);
-		
-		return 'TO_DATE('.$tss.",'RRRR-MM-DD, HH24:MI:SS')";
+		return 'TO_DATE('.adodb_date("'Y-m-d H:i:s'",$ts).",'RRRR-MM-DD, HH24:MI:SS')";
 	}
 	
-	function RowLock($tables,$where,$col='1 as ignore') 
+	function RowLock($tables,$where,$flds='1 as ignore') 
 	{
 		if ($this->autoCommit) $this->BeginTrans();
-		return $this->GetOne("select $col from $tables where $where for update");
+		return $this->GetOne("select $flds from $tables where $where for update");
 	}
 	
 	function MetaTables($ttype=false,$showSchema=false,$mask=false) 
@@ -615,14 +603,14 @@ NATSOFT.DOMAIN =
 			
 			 // Let Oracle return the name of the columns
 			$q_fields = "SELECT * FROM (".$sql.") WHERE NULL = NULL";
-		
+			 
 			$false = false;
 			if (! $stmt_arr = $this->Prepare($q_fields)) {
 				return $false;
 			}
 			$stmt = $stmt_arr[1];
 			 
-			if (is_array($inputarr)) {
+			 if (is_array($inputarr)) {
 			 	foreach($inputarr as $k => $v) {
 					if (is_array($v)) {
 						if (sizeof($v) == 2) // suggested by g.giunta@libero.
@@ -660,12 +648,12 @@ NATSOFT.DOMAIN =
 			 $offset += 1; // in Oracle rownum starts at 1
 			
 			if ($this->databaseType == 'oci8po') {
-					 $sql = "SELECT /*+ FIRST_ROWS */ $fields FROM".
+					 $sql = "SELECT $fields FROM".
 					  "(SELECT rownum as adodb_rownum, $fields FROM".
 					  " ($sql) WHERE rownum <= ?".
 					  ") WHERE adodb_rownum >= ?";
 				} else {
-					 $sql = "SELECT /*+ FIRST_ROWS */ $fields FROM".
+					 $sql = "SELECT $fields FROM".
 					  "(SELECT rownum as adodb_rownum, $fields FROM".
 					  " ($sql) WHERE rownum <= :adodb_nrows".
 					  ") WHERE adodb_rownum >= :adodb_offset";
@@ -1295,14 +1283,12 @@ SELECT /*+ RULE */ distinct b.column_name
 			return  "'".str_replace("'",$this->replaceQuote,$s)."'";
 		}
 		
-		// undo magic quotes for " unless sybase is on
-		if (!ini_get('magic_quotes_sybase')) {
-			$s = str_replace('\\"','"',$s);
-			$s = str_replace('\\\\','\\',$s);
-			return "'".str_replace("\\'",$this->replaceQuote,$s)."'";
-		} else {
-			return "'".$s."'";
-		}
+		// undo magic quotes for "
+		$s = str_replace('\\"','"',$s);
+		
+		$s = str_replace('\\\\','\\',$s);
+		return "'".str_replace("\\'",$this->replaceQuote,$s)."'";
+		
 	}
 	
 }
@@ -1560,7 +1546,7 @@ class ADORecordset_oci8 extends ADORecordSet {
 		case 'NCHAR':
 		case 'NVARCHAR':
 		case 'NVARCHAR2':
-				 if ($len <= $this->blobSize) return 'C';
+				 if (isset($this) && $len <= $this->blobSize) return 'C';
 		
 		case 'NCLOB':
 		case 'LONG':
