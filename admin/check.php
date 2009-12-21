@@ -250,7 +250,7 @@ function test_database_utf8() {
 
 print_test_row( 'MantisBT requires at least <b>PHP ' . PHP_MIN_VERSION . '</b>. You are running <b>PHP ' . phpversion(), $result = version_compare( phpversion(), PHP_MIN_VERSION, '>=' ) );
 
-if ( !print_test_row( 'Checking Config File Exists', file_exists( $g_absolute_path . 'config_inc.php' ), array( false => 'Please use install.php to perform initial installation <a href="install.php">Click here</a>' ) ) ) {
+if ( !print_test_row( 'Checking Config File Exists', file_exists( $g_absolute_path . 'config_inc.php' ), array( false => 'Please use install.php to perform initial installation <a href="install.php">Click here</a>', true => '' ) ) ) {
 	die;
 }
 
