@@ -28,6 +28,7 @@
  *
  * @author Fejl
  * @author Gunner Poulsen, gp@lyngbjerggaardskolen.dk
+ * @author Piivaat
  * @author Søren Mortensen, sm@artmus.dk
  */
 

@@ -186,7 +186,7 @@ $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Enshtällunge för hee dä Metmaach
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Di Neujeschkeijt kunnt mer nit fenge.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'De aanjejovve Paßwööter sin nit ejaal.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Aanjelääjeheit %1$d nit jefonge.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Ene Felter %1$d ham_mer nit jefonge.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Ene Felter %1$s ham_mer nit jefonge.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Dä Felter, dä De bruche wells, es täschnesch övverhollt un kann nit mieh op ene neue Shtand jebraat wääde. Bes esu joot, un donn dä eijfaach neu aanlääje.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Kapodde Addräß för de <i lang="en">e-mail</i>.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Adräße för <i lang="en">e-mail</i>, di mer jlish widder fottshmiiß, udder su udder esu nur eijmohl bruche kann, sin nit johjelohße';

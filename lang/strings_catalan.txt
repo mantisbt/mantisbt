@@ -29,6 +29,7 @@
  * @author Bernat
  * @author Bernat Pegueroles - bpf@pegueroles.com
  * @author Solde
+ * @author Ssola
  */
 
 $s_actiongroup_menu_move = 'Mou';
@@ -196,7 +197,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'S\'esperava un array i s\'ha rebut un
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'S\'esperava una cadena i s\'ha rebut un array per %1$s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'S\'esperava un número per %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'No es troba la incidència %1$d.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtre %1$d no trobat.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtre %1$s no trobat.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'El filtre que està intentant usar és massa vell per a ser modificat, si us plau torna\'l a crear';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Email incorrecte.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'No es poden usar direccions de correu disponibles.';
@@ -532,7 +533,7 @@ $s_no_bugnotes_msg = 'No hi ha notes associades a aquesta incidència.';
 $s_delete_link = 'Elimina';
 $s_add_bugnote_title = 'Afegeix una Nota';
 $s_add_bugnote_button = 'Afegeix Nota';
-$s_bugnote_edit_link = 'Edita';
+$s_bugnote_edit_link = 'Modifica';
 $s_closed_bug_button = 'Tanca Incidència';
 $s_bugnote_updated_msg = 'La nota ha estat actualitzada...';
 $s_edited_on = 'editada a:';
@@ -719,7 +720,7 @@ $s_add_category_button = 'Afegeix Categoria';
 $s_versions = 'Versions';
 $s_add_version_button = 'Afegeix Versions';
 $s_add_and_edit_version_button = 'Afegeix i edita Versió';
-$s_edit_link = 'Edita';
+$s_edit_link = 'Modifica';
 $s_actions = 'Accions';
 $s_version = 'Versió';
 $s_timestamp = 'Marca Horària';
@@ -941,7 +942,7 @@ $s_query_delete_msg = 'Està segur que vol eliminar aquest filtre?';
 $s_view_simple_link = 'Canvia a Vista Simple';
 $s_product_build = 'Muntatge del Producte';
 $s_system_profile = 'Descripció del Sistema';
-$s_update_bug_button = 'Edita';
+$s_update_bug_button = 'Modifica';
 $s_bug_assign_to_button = 'Assigna A:';
 $s_bug_status_to_button = 'Canvia estat a:';
 $s_reopen_bug_button = 'Reobre';
