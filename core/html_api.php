@@ -353,12 +353,12 @@ function html_title( $p_page_title = null ) {
  */
 function html_css() {
 	$t_css_url = config_get( 'css_include_file' );
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', helper_mantis_url( $t_css_url ), '" />', "\n";
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( $t_css_url ), true ), '" />', "\n";
 
 	# Add right-to-left css if needed
 	if( lang_get( 'directionality' ) == 'rtl' ) {
 		$t_css_rtl_url = config_get( 'css_rtl_include_file' );
-		echo "\t", '<link rel="stylesheet" type="text/css" href="', helper_mantis_url( $t_css_rtl_url ), '" />', "\n";
+		echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( $t_css_rtl_url ), true ), '" />', "\n";
 	}
 
 	# fix for NS 4.x css
