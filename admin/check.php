@@ -96,7 +96,9 @@ function print_test_warn_row( $p_description, $p_pass, $p_info = null ) {
 	echo '<tr><td bgcolor="#ffffff">' . $p_description;
 	if( $p_info != null) {
 		if( is_array( $p_info ) ) {
-			echo '<br /><i>' . $p_info[$p_pass] . '</i>';
+			if( isset( $p_info[$p_pass] ) ) {
+				echo '<br /><i>' . $p_info[$p_pass] . '</i>';
+			}
 		} else {
 			echo '<br /><i>' . $p_info . '</i>';
 		}
@@ -250,7 +252,7 @@ function test_database_utf8() {
 
 print_test_row( 'MantisBT requires at least <b>PHP ' . PHP_MIN_VERSION . '</b>. You are running <b>PHP ' . phpversion(), $result = version_compare( phpversion(), PHP_MIN_VERSION, '>=' ) );
 
-if ( !print_test_row( 'Checking Config File Exists', file_exists( $g_absolute_path . 'config_inc.php' ), array( false => 'Please use install.php to perform initial installation <a href="install.php">Click here</a>', true => '' ) ) ) {
+if ( !print_test_row( 'Checking Config File Exists', file_exists( $g_absolute_path . 'config_inc.php' ), array( false => 'Please use install.php to perform initial installation <a href="install.php">Click here</a>' ) ) ) {
 	die;
 }
 
