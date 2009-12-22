@@ -540,7 +540,7 @@ function config_obsolete( $p_var, $p_replace ) {
 			$t_info = '';
 		}
 
-		print_test_warn_row( $t_description, $t_info, false );
+		print_test_warn_row( $t_description, false, $t_info );
 	}
 }
 
