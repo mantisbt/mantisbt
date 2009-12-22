@@ -36,10 +36,9 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	}
 
 	$t_ldap_server = config_get( 'ldap_server' );
-	$t_ldap_port = config_get( 'ldap_port' );
 
-	log_event( LOG_LDAP, "Attempting connection to LDAP server '{$t_ldap_server}' port '{$t_ldap_port}'." );
-	$t_ds = @ldap_connect( $t_ldap_server, $t_ldap_port );
+	log_event( LOG_LDAP, "Attempting connection to LDAP server '{$t_ldap_server}'." );
+	$t_ds = @ldap_connect( $t_ldap_server );
 	if ( $t_ds !== false && $t_ds > 0 ) {
 		log_event( LOG_LDAP, "Connection accepted to LDAP server" );
 		$t_protocol_version = config_get( 'ldap_protocol_version' );

@@ -1676,13 +1676,6 @@
 	$g_ldap_server			= 'ldaps://ldap.example.com.au/';
 
 	/**
-	 * LDAP port (default 389).  If this doesn't work, try 636.
-	 *
-	 * @global integer $g_ldap_port
-	 */
-	$g_ldap_port			= 389;
-
-	/**
 	 *
 	 * @global string $g_ldap_root_dn
 	 */
