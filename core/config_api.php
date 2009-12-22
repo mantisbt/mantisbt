@@ -64,7 +64,6 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 
 	if( !$t_bypass_lookup ) {
 		if( $g_project_override != null ) {
-			* check default value *
 			$p_project = $g_project_override;
 		}
 		# @@ debug @@ if ( ! db_is_connected() ) { echo "no db "; }
