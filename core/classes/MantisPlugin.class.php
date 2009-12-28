@@ -142,23 +142,3 @@ abstract class MantisPlugin {
 		$this->init();
 	}
 }
-
-/**
- * MantisBT Core Plugin
- * Used to give other plugins a permanent core plugin to 'require' for compatibility.
- * Can/should not be used as a base class.
- * @package MantisBT
- * @subpackage classes 
- */
-final class MantisCorePlugin extends MantisPlugin {
-	function register() {
-		$this->name = 'MantisBT Core';
-		$this->description = 'Core plugin API for the Mantis Bug Tracker.';
-
-		$this->version = MANTIS_VERSION;
-
-		$this->author = 'MantisBT Team';
-		$this->contact = 'mantisbt-dev@lists.sourceforge.net';
-		$this->url = 'http://www.mantisbt.org';
-	}
-}
