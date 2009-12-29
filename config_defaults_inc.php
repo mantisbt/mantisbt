@@ -660,7 +660,6 @@ $g_language_choices_arr	= array(
 	'french',
 	'galician',
 	'german',
-	'german_eintrag',
 	'greek',
 	'hebrew',
 	'hungarian',
