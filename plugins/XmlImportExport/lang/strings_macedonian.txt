@@ -1,0 +1,48 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Macedonian (Македонски)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Bjankuloski06
+ */
+
+$s_plugin_XmlImportExport_title = 'Увозни/Извозни работи';
+$s_plugin_XmlImportExport_description = 'Додава во MantisBT можности за увоз и извоз во XML.';
+$s_plugin_XmlImportExport_import = 'Увези задачи';
+$s_plugin_XmlImportExport_export = 'XML извоз';
+$s_plugin_XmlImportExport_importing_in_project = 'Увези задачи во проектот:';
+$s_plugin_XmlImportExport_import_options = 'Прилагодувања за увоз';
+$s_plugin_XmlImportExport_cross_references = 'Упатување';
+$s_plugin_XmlImportExport_default_strategy = 'Основно зададена стратегија на претворање:';
+$s_plugin_XmlImportExport_renumber = 'Пренумерирај';
+$s_plugin_XmlImportExport_renumber_desc = 'Обиди се да ги претвориш наводите во нови броеви';
+$s_plugin_XmlImportExport_link = 'Врска';
+$s_plugin_XmlImportExport_link_desc = 'Претвори во врска до изворниот елемент';
+$s_plugin_XmlImportExport_disable = 'Оневозможи';
+$s_plugin_XmlImportExport_disable_desc = 'Оневозможи ја врската';
+$s_plugin_XmlImportExport_fallback = 'Резервна стратегија (кога „Пренумерирај“ не важи):';
+$s_plugin_XmlImportExport_fallback_category = 'Резервна категорија:';
+$s_plugin_XmlImportExport_keep_same_category = 'Обиди се да ја задржиш истата категорија';

@@ -26,18 +26,24 @@
  * @ingroup Language
  * @file
  *
+ * @author Meno25
  * @author OsamaK
  */
 
+$s_plugin_graph_title = 'رسومات مانتيس';
 $s_plugin_graph_description = 'الملحق الرسومي الرسمي.';
+$s_plugin_MantisGraph_title = 'رسومات مانتيس';
 $s_plugin_MantisGraph_menu_advanced_summary = 'ملخّص متقدم';
 $s_plugin_MantisGraph_config = 'ضبط';
 $s_plugin_MantisGraph_status_link = 'حسب الحالة';
 $s_plugin_MantisGraph_priority_link = 'حسب الأهمية';
 $s_plugin_MantisGraph_category_link = 'حسب التصنيف';
 $s_plugin_MantisGraph_graph_bug_page_link = 'رسم';
-$s_plugin_MantisGraph_library = 'المكتبة الرسومية';
+$s_plugin_MantisGraph_library = 'المكتبة الرسومية للاستخدام';
 $s_plugin_MantisGraph_window_width = 'عرض الرسم (بالبكسل)';
+$s_plugin_MantisGraph_font = 'خط';
+$s_plugin_MantisGraph_enabled = 'مفعل';
+$s_plugin_MantisGraph_disabled = 'معطل';
 $s_plugin_MantisGraph_graph_imp_status_title = 'صناعة الرسومات حسب الحالة';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'صناعة الرسومات حسب الأولوية';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'صناعة الرسومات حسب الشدة';

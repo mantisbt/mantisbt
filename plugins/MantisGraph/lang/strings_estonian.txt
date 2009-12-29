@@ -26,6 +26,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Avjoska
  */
 
 $s_plugin_MantisGraph_graph_imp_status_title = 'Graafikute süntees oleku järgi';
@@ -50,3 +51,13 @@ $s_plugin_MantisGraph_legend_closed = 'Suletud';
 $s_plugin_MantisGraph_legend_reported = 'Raporteeritud';
 $s_plugin_MantisGraph_cumulative = 'Kumulatiivne';
 $s_plugin_MantisGraph_not_enough_data = 'Graafiku loomiseks pole piisavalt andmeid';
+$s_plugin_MantisGraph_period_this_week = 'See nädal';
+$s_plugin_MantisGraph_period_last_week = 'Eelmine nädal';
+$s_plugin_MantisGraph_period_two_weeks = 'Kaks viimast nädalat';
+$s_plugin_MantisGraph_period_this_month = 'See kuu';
+$s_plugin_MantisGraph_period_last_month = 'Eelmine kuu';
+$s_plugin_MantisGraph_period_this_quarter = 'See kvartal';
+$s_plugin_MantisGraph_period_last_quarter = 'Eelmine kvartal';
+$s_plugin_MantisGraph_period_last_year = 'Eelmine aasta';
+$s_plugin_MantisGraph_show_as_graph = 'Näita graafikuna';
+$s_plugin_MantisGraph_show_as_table = 'Näita tabelina';

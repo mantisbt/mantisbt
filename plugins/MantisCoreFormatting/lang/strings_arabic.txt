@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Catalan (Català)
+/** Arabic (العربية)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,17 +26,11 @@
  * @ingroup Language
  * @file
  *
- * @author Bernat
- * @author Paucabot
+ * @author Meno25
  */
 
-$s_plugin_format_title = 'Formatació de MantisBT';
-$s_plugin_format_description = 'Processament de text i formatació de plugins oficials.';
-$s_plugin_format_config = 'Configuració';
-$s_plugin_format_process_text = 'Processament de Text';
-$s_plugin_format_process_text_warning_notice = 'No ho deshabiliti si no està realment segur del què està fent. En estat deshabilitat hi poden haver atacs cross site scripting (XSS).';
-$s_plugin_format_process_urls = 'Processament de la URL';
-$s_plugin_format_process_buglinks = 'Enllaços MantisBT (Incidències/Notes d\'Incidències)';
-$s_plugin_format_process_vcslinks = 'Enllaços VCS';
-$s_plugin_format_enabled = 'Habilitat';
-$s_plugin_format_disabled = 'Deshabilitat';
+$s_plugin_format_config = 'ضبط';
+$s_plugin_format_process_text = 'معالجة النص';
+$s_plugin_format_process_urls = 'معالجة المسار';
+$s_plugin_format_enabled = 'مفعل';
+$s_plugin_format_disabled = 'معطل';

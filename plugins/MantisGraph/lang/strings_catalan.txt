@@ -26,16 +26,34 @@
  * @ingroup Language
  * @file
  *
+ * @author Bernat
  * @author Paucabot
  */
 
+$s_plugin_graph_title = 'Gràfics de Mantis';
+$s_plugin_graph_description = 'Plugin de gràfics oficial.';
+$s_plugin_MantisGraph_title = 'Gràfics de Mantis';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Sumari Avançat';
 $s_plugin_MantisGraph_config = 'Configuració';
+$s_plugin_MantisGraph_synthesis_link = 'Síntesi';
 $s_plugin_MantisGraph_status_link = 'Per estat';
 $s_plugin_MantisGraph_priority_link = 'Per prioritat';
+$s_plugin_MantisGraph_severity_link = 'Per severitat';
 $s_plugin_MantisGraph_category_link = 'Per categoria';
-$s_plugin_MantisGraph_resolution_link = 'per resolució';
+$s_plugin_MantisGraph_resolution_link = 'Per resolució';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Gràfic';
+$s_plugin_MantisGraph_library = 'Llibreria gràfica per usar';
+$s_plugin_MantisGraph_bundled = 'Inclòs';
 $s_plugin_MantisGraph_window_width = 'Amplada del gràfic (en píxels)';
+$s_plugin_MantisGraph_bar_aspect = 'Relació d\'aspecte dels gràfics de barres (altura/amplada)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Gràfics exposats per fila en el sumari avançat';
+$s_plugin_MantisGraph_font = 'Font';
+$s_plugin_MantisGraph_jpgraph_path = 'Path de sistema de la llibreria JpGraph';
+$s_plugin_MantisGraph_jpgraph_path_default = 'Deixi en blanc per defecte: {mantisroot}/library/jpgraph';
+$s_plugin_MantisGraph_jpgraph_antialias = 'Anti-aliasing JpGraph';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'L\'anti-aliasing millora l\'aparença visual d\'alguns gràfics a costa de rendiment (fins x8 més lent).';
+$s_plugin_MantisGraph_enabled = 'Habilitat';
+$s_plugin_MantisGraph_disabled = 'Deshabilitat';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Gràfics per l\'estat';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Gràfics per prioritat';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Gràfics per gravetat';

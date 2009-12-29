@@ -45,4 +45,6 @@ $s_plugin_XmlImportExport_link = 'Enlace';
 $s_plugin_XmlImportExport_link_desc = 'Convertir en un enlace al item original';
 $s_plugin_XmlImportExport_disable = 'Deshabilitar';
 $s_plugin_XmlImportExport_disable_desc = 'Desactivar el enlace';
+$s_plugin_XmlImportExport_fallback = 'Estrategia alternativa (cuando no se aplique "renumerar"):';
+$s_plugin_XmlImportExport_fallback_category = 'Categoría alternativa:';
 $s_plugin_XmlImportExport_keep_same_category = 'Tratar de mantener la misma categoría';

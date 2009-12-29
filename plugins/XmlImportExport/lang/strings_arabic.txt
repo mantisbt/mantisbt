@@ -26,11 +26,13 @@
  * @ingroup Language
  * @file
  *
+ * @author Meno25
  * @author OsamaK
  */
 
 $s_plugin_XmlImportExport_title = 'استورد/صدّر قضايا';
 $s_plugin_XmlImportExport_import = 'استورد قضايا';
+$s_plugin_XmlImportExport_import_options = 'خيارات الاستيراد';
 $s_plugin_XmlImportExport_link = 'الوصلة';
 $s_plugin_XmlImportExport_disable = 'عطّل';
 $s_plugin_XmlImportExport_disable_desc = 'عطّل الوصلة';

@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Catalan (Català)
+/** Afrikaans (Afrikaans)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,17 +26,14 @@
  * @ingroup Language
  * @file
  *
- * @author Bernat
- * @author Paucabot
+ * @author Naudefj
  */
 
-$s_plugin_format_title = 'Formatació de MantisBT';
-$s_plugin_format_description = 'Processament de text i formatació de plugins oficials.';
-$s_plugin_format_config = 'Configuració';
-$s_plugin_format_process_text = 'Processament de Text';
-$s_plugin_format_process_text_warning_notice = 'No ho deshabiliti si no està realment segur del què està fent. En estat deshabilitat hi poden haver atacs cross site scripting (XSS).';
-$s_plugin_format_process_urls = 'Processament de la URL';
-$s_plugin_format_process_buglinks = 'Enllaços MantisBT (Incidències/Notes d\'Incidències)';
-$s_plugin_format_process_vcslinks = 'Enllaços VCS';
-$s_plugin_format_enabled = 'Habilitat';
-$s_plugin_format_disabled = 'Deshabilitat';
+$s_plugin_format_title = 'MantisBT-formatering';
+$s_plugin_format_description = 'Amptelike teksverwerkings- en formaterings-plugin.';
+$s_plugin_format_config = 'Voorkeure';
+$s_plugin_format_process_text = 'Teksverwerking';
+$s_plugin_format_process_urls = 'URL-verwerking';
+$s_plugin_format_process_vcslinks = 'VCS-skakels';
+$s_plugin_format_enabled = 'Aan';
+$s_plugin_format_disabled = 'Af';

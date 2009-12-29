@@ -29,6 +29,7 @@
  * @author Als-Holder
  * @author Andre Eisenbach, andre@eisenbach.com
  * @author Atrol
+ * @author Campmaster
  * @author Dr. Jürgen Kehrel, jkehrel@kehrel.de
  * @author Heiko Gierer, gierer@rittershaus.de
  * @author Hermann-Josef Beckers, hjb-rheine@t-online.de
@@ -589,7 +590,7 @@ $s_error_database_version_out_of_date_2 = '<strong>WARNUNG:</strong> Die Datenba
 $s_error_code_version_out_of_date = '<strong>WARNUNG:</strong> Die Datenbank-Struktur ist neuer als die installierte Version. Bitte aktualisieren Sie das Programm.';
 $s_login_page_info = 'Willkommen beim Issue Tracker.';
 $s_login_title = 'Anmeldung';
-$s_save_login = 'Anmeldung speichern';
+$s_save_login = 'Anmeldung auf diesem Computer merken';
 $s_secure_session = 'Sichere Sitzung';
 $s_secure_session_long = 'Diese Sitzung ist nur für diese IP-Adresse gültig.';
 $s_choose_project = 'Projekt wählen';
@@ -891,7 +892,7 @@ $s_must_enter_description = 'Sie müssen eine Beschreibung eingeben';
 $s_report_more_bugs = 'Weitere Einträge erfassen';
 $s_submission_thanks_msg = 'Vielen Dank für den Eintrag.';
 $s_simple_report_link = 'Einfacher Bericht';
-$s_enter_report_details_title = 'Berichtdetails eingeben';
+$s_enter_report_details_title = 'Eintragdetails eingeben';
 $s_required = 'erforderlich';
 $s_select_category = 'Kategorie wählen';
 $s_select_reproducibility = 'Reproduzierbarkeit wählen';
