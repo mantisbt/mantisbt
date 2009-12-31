@@ -58,8 +58,6 @@
 		$t_graph_horizontal = false;
 	}
 
-	access_ensure_bug_level( VIEWER, $f_bug_id );
-
 	$t_bug = bug_get( $f_bug_id, true );
 
 	if( $t_bug->project_id != helper_get_current_project() ) {
@@ -67,6 +65,8 @@
 		# ... override the current project. This to avoid problems with categories and handlers lists etc.
 		$g_project_override = $t_bug->project_id;
 	}
+
+	access_ensure_bug_level( VIEWER, $f_bug_id );
 
 	compress_enable();
 

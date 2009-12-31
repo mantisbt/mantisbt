@@ -37,19 +37,19 @@
 	$f_to			= gpc_get_int_array( 'to' );
 	$f_body			= gpc_get_string( 'body' );
 
-	if ( bug_is_readonly( $f_bug_id ) ) {
-		error_parameters( $f_bug_id );
-		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
-	}
-
-	access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
-
 	$t_bug = bug_get( $f_bug_id, true );
 	if( $t_bug->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...
 		# ... override the current project. This to avoid problems with categories and handlers lists etc.
 		$g_project_override = $t_bug->project_id;
 	}
+
+	if ( bug_is_readonly( $f_bug_id ) ) {
+		error_parameters( $f_bug_id );
+		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	}
+
+	access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
 
 	# Automically add recipients to monitor list if they are above the monitor
 	# threshold, option is enabled, and not reporter or handler.

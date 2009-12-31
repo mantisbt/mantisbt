@@ -29,10 +29,6 @@
 
 	form_security_validate( 'bug_set_sponsorship' );
 
-	if ( config_get( 'enable_sponsorship' ) == OFF ) {
-		trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
-	}
-
 	# anonymous users are not allowed to sponsor issues
 	if ( current_user_is_anonymous() ) {
 		access_denied();
@@ -46,6 +42,10 @@
 		# in case the current project is not the same project of the bug we are viewing...
 		# ... override the current project. This to avoid problems with categories and handlers lists etc.
 		$g_project_override = $t_bug->project_id;
+	}
+
+	if ( config_get( 'enable_sponsorship' ) == OFF ) {
+		trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
 	}
 
 	access_ensure_bug_level( config_get( 'sponsor_threshold' ), $f_bug_id );
