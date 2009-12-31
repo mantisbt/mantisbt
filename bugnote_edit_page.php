@@ -40,8 +40,7 @@
 	require_once( 'bugnote_api.php' );
 	require_once( 'string_api.php' );
 	require_once( 'current_user_api.php' );
-?>
-<?php
+
 	$f_bugnote_id = gpc_get_int( 'bugnote_id' );
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 
