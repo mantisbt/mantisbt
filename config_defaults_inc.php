@@ -643,6 +643,7 @@ $g_default_language = 'english';
 $g_language_choices_arr	= array(
 	'auto',
 	'afrikaans',
+	'amharic',
 	'arabic',
 	'arabicegyptianspoken',
 	'breton',
@@ -698,6 +699,7 @@ $g_language_choices_arr	= array(
  */
 $g_language_auto_map = array(
 	'af' => 'afrikaans',
+	'am' => 'amharic',
 	'ar' => 'arabic',
 	'arz' => 'arabicegyptianspoken',
 	'bg' => 'bulgarian',

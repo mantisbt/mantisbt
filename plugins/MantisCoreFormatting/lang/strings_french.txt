@@ -26,6 +26,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Dolmen
  * @author IAlex
  */
 
@@ -33,7 +34,7 @@ $s_plugin_format_title = 'Formatage de MantisBT';
 $s_plugin_format_description = 'Plugin officiel de traitement et de formatage du texte.';
 $s_plugin_format_config = 'Configuration';
 $s_plugin_format_process_text = 'Traitement du texte';
-$s_plugin_format_process_text_warning_notice = 'Ne pas désactiver sans savoir ce que vous faites réellement. Dans l\'état désactivé, les attaques « cross-site scripting » (XSS) sont possibles.';
+$s_plugin_format_process_text_warning_notice = 'Ne désactivez pas sans savoir ce que vous faites. Dans l\'état désactivé, des attaques de type « cross-site scripting » (XSS) sont possibles.';
 $s_plugin_format_process_urls = 'Traitement des URL';
 $s_plugin_format_process_buglinks = 'Liens MantisBT (bug / note sur un bug)';
 $s_plugin_format_process_vcslinks = 'Liens VCS';
