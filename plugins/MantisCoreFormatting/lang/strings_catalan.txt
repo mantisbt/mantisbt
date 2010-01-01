@@ -1,0 +1,42 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Catalan (Català)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Bernat
+ * @author Paucabot
+ */
+
+$s_plugin_format_title = 'Formatació de MantisBT';
+$s_plugin_format_description = 'Processament de text i formatació de plugins oficials.';
+$s_plugin_format_config = 'Configuració';
+$s_plugin_format_process_text = 'Processament de Text';
+$s_plugin_format_process_text_warning_notice = 'No ho deshabiliti si no està realment segur del què està fent. En estat deshabilitat hi poden haver atacs cross site scripting (XSS).';
+$s_plugin_format_process_urls = 'Processament de la URL';
+$s_plugin_format_process_buglinks = 'Enllaços MantisBT (Incidències/Notes d\'Incidències)';
+$s_plugin_format_process_vcslinks = 'Enllaços VCS';
+$s_plugin_format_enabled = 'Habilitat';
+$s_plugin_format_disabled = 'Deshabilitat';

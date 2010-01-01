@@ -1,0 +1,68 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Simplified Chinese (‪中文(简体)‬)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ */
+
+$s_plugin_MantisGraph_graph_imp_status_title = '综合报表（按问题状态）';
+$s_plugin_MantisGraph_graph_imp_priority_title = '综合报表（按问题优先级别）';
+$s_plugin_MantisGraph_graph_imp_severity_title = '综合报表（按问题严重性）';
+$s_plugin_MantisGraph_graph_imp_category_title = '综合报表（按项目分类）';
+$s_plugin_MantisGraph_graph_imp_resolution_title = '综合报表（按解决状况）';
+$s_plugin_MantisGraph_by_status_pct = '按问题状态百分比';
+$s_plugin_MantisGraph_by_priority_pct = '按问题优先级别百分比';
+$s_plugin_MantisGraph_by_severity_pct = '按问题严重性百分比';
+$s_plugin_MantisGraph_by_category_pct = '按项目分类百分比';
+$s_plugin_MantisGraph_by_resolution_pct = '按解决状况百分比';
+$s_plugin_MantisGraph_by_severity_mix = '按问题严重性和状态';
+$s_plugin_MantisGraph_by_priority_mix = '按问题优先级别和状态';
+$s_plugin_MantisGraph_by_resolution_mix = '按问题解决状况和状态';
+$s_plugin_MantisGraph_legend_still_open = '仍然打开';
+$s_plugin_MantisGraph_legend_resolved = '已解决';
+$s_plugin_MantisGraph_legend_assigned = '已分派';
+$s_plugin_MantisGraph_legend_total = '合计';
+$s_plugin_MantisGraph_legend_opened = '已打开';
+$s_plugin_MantisGraph_legend_closed = '已关闭';
+$s_plugin_MantisGraph_legend_reported = '已报告';
+$s_plugin_MantisGraph_cumulative = '累计';
+$s_plugin_MantisGraph_not_enough_data = '没有足够的数据，无法创建图形报表。';
+$s_plugin_MantisGraph_period_this_week = '本周';
+$s_plugin_MantisGraph_period_last_week = '上周';
+$s_plugin_MantisGraph_period_two_weeks = '前两周';
+$s_plugin_MantisGraph_period_this_month = '本月';
+$s_plugin_MantisGraph_period_last_month = '上月';
+$s_plugin_MantisGraph_period_this_quarter = '本季度';
+$s_plugin_MantisGraph_period_last_quarter = '上季度';
+$s_plugin_MantisGraph_period_last_year = '去年';
+$s_plugin_MantisGraph_select = '请选择';
+$s_plugin_MantisGraph_select_bystatus = '按状态';
+$s_plugin_MantisGraph_select_summbystatus = '按状态总计';
+$s_plugin_MantisGraph_select_bycat = '按分类总计';
+$s_plugin_MantisGraph_select_both = '按状态和分类总计';
+$s_plugin_MantisGraph_show_as_graph = '用图形显示';
+$s_plugin_MantisGraph_show_as_table = '用表格显示';
+$s_plugin_MantisGraph_show_graph = '显示图形';

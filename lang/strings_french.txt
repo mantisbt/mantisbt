@@ -34,10 +34,12 @@
  * @author Hellekin O. Wolf, hellekin@mmania.com
  * @author IAlex
  * @author Jean-Charles Trosset, jean-charles.trosset@laposte.net
+ * @author Jean-Frédéric
  * @author Kropotkine 113
  * @author Langis Gagnon, gagnon.langis@ic.gc.ca
  * @author Laurent LABAT, wizzz@apinc.org
  * @author Maurice A. LeBlanc, leblancma@cooptel.qc.ca
+ * @author Peter17
  * @author Quentin Delance, quentin.delance@insalien.org
  * @author Roland Meyer, Daniel Coquette
  * @author Réda Bourebaba, bzctoons@free.fr
@@ -58,7 +60,7 @@ $s_actiongroup_menu_update_category = 'Mettre à jour la Catégorie';
 $s_actiongroup_menu_set_sticky = 'Activer / désactiver la récurrence';
 $s_actiongroup_menu_update_field = 'Mettre à jour %1$s';
 $s_actiongroup_menu_update_target_version = 'Mettre à jour la version cible';
-$s_actiongroup_menu_update_fixed_in_version = 'Mettre à jour la version résolu';
+$s_actiongroup_menu_update_fixed_in_version = 'Mettre à jour la version résolue';
 $s_actiongroup_menu_update_product_build = 'Mettre à jour la compilation';
 $s_actiongroup_menu_add_note = 'Ajouter une note';
 $s_actiongroup_menu_attach_tags = 'Ajouter des balises';
@@ -74,8 +76,8 @@ $s_excel_export = 'Export Excel';
 $s_login_anonymously = 'Accès anonyme';
 $s_anonymous = 'Anonyme';
 $s_jump_to_bugnotes = 'Aller aux notes';
-$s_public_project_msg = 'Ce projet est PUBLIC.  Tous les utilisateurs y ont accès.';
-$s_private_project_msg = 'Ce projet est PRIVÉ.  Seuls les administrateurs et les utilisateurs ajoutés manuellement au projet y ont accès';
+$s_public_project_msg = 'Ce projet est public. Tous les utilisateurs y ont accès.';
+$s_private_project_msg = 'Ce projet est privé. Seuls les administrateurs et les utilisateurs ajoutés manuellement y ont accès.';
 $s_access_level_project = 'Niveau d\'accès du projet';
 $s_view_submitted_bug_link = 'Voir le bogue soumis %1$s';
 $s_assigned_projects = 'Projets assignés';
@@ -105,10 +107,10 @@ $s_bugnote_link_title = 'Lien direct vers la note';
 $s_delete_bugnote_button = 'Supprimer la note';
 $s_delete_bugnote_sure_msg = 'Êtes vous sûr de vouloir supprimer cette note ?';
 $s_bug_relationships = 'Relations';
-$s_empty_password_sure_msg = 'L\'utilisateur a un mot de passe vide.  Est-ce bien ce que vous voulez ?';
+$s_empty_password_sure_msg = 'L’utilisateur a un mot de passe vide. Est-ce bien ce que vous voulez ?';
 $s_empty_password_button = 'Utiliser un mot de passe vide';
 $s_reauthenticate_title = 'Identification';
-$s_reauthenticate_message = 'Vous vistez un site sécurisé, et votre session sécurisée est expirée.  Veuillez vous identifier à nouveau pour poursuivre.';
+$s_reauthenticate_message = 'Vous visitez une page sécurisée, et votre session sécurisée est expirée. Veuillez vous identifier à nouveau pour poursuivre.';
 $s_no_category = '(Aucune catégorie)';
 $s_global_categories = 'Catégories globales';
 $s_inherit = 'Hériter les catégories';
@@ -128,8 +130,8 @@ $s_summary_updated = 'Résumé mis à jour';
 $s_description_updated = 'Description mise à jour';
 $s_additional_information_updated = 'Information complémentaire mise à jour';
 $s_steps_to_reproduce_updated = 'Étapes pour reproduire mises à jour';
-$s_file_added = 'Fichier ajouté :';
-$s_file_deleted = 'Fichier supprimé :';
+$s_file_added = 'Fichier ajouté';
+$s_file_deleted = 'Fichier supprimé';
 $s_bug_deleted = 'Bogue supprimé';
 $s_make_private = 'Rendre privé';
 $s_make_public = 'Rendre public';
@@ -238,7 +240,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Tableau attendu mais chaîne reçue p
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Chaîne attendue mais tableau reçu pour %1$s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%1$s doit être un nombre.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Bogue %1$d introuvable.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtre %1$d introuvable.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtre %1$s introuvable.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Le filtre utilisé est trop ancien pour être mis à jour, Veuillez créer un nouveau filtre.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Courriel non valide.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Utiliser une adresse de courriel jetable est interdit.';
@@ -594,7 +596,7 @@ $s_error_database_version_out_of_date_2 = '<strong>ATTENTION :</strong> La struc
 $s_error_code_version_out_of_date = '<strong>ATTENTION :</strong> La structure base de données est plus récente que le logiciel installé. Mettez à jour le logiciel.';
 $s_login_page_info = 'Bienvenue au système de gestion des bogues.';
 $s_login_title = 'Utilisateur';
-$s_save_login = 'Mémoriser l\'utilisateur';
+$s_save_login = 'Se souvenir de mon identifiant sur cet ordinateur.';
 $s_secure_session = 'Session sécurisée';
 $s_secure_session_long = 'Restreint la session à cette adresse IP.';
 $s_choose_project = 'Choisir un projet';

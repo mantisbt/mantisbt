@@ -29,6 +29,7 @@
  * @author Als-Holder
  * @author Andre Eisenbach, andre@eisenbach.com
  * @author Atrol
+ * @author Campmaster
  * @author Dr. Jürgen Kehrel, jkehrel@kehrel.de
  * @author Heiko Gierer, gierer@rittershaus.de
  * @author Hermann-Josef Beckers, hjb-rheine@t-online.de
@@ -239,7 +240,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Ein Feld wurde für %1$s erwartet, ab
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Eine Zeichenkette wurde erwartet, aber ein Feld wurde für %1$s übergeben.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Eine Zahl wurde für %1$s erwartet.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Problem %1$d nicht gefunden.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$d nicht gefunden.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s nicht gefunden.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Der Filter, den Sie verwenden wollen, ist zu alt für eine Überarbeitung. Bitte neu erstellen.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ungültige E-Mail-Adresse.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Es ist nicht erlaubt, Einweg-E-Mail-Adressen zu verwenden.';
@@ -595,7 +596,7 @@ $s_error_database_version_out_of_date_2 = '<strong>WARNUNG:</strong> Die Datenba
 $s_error_code_version_out_of_date = '<strong>WARNUNG:</strong> Die Datenbank-Struktur ist neuer als die installierte Version. Bitte aktualisieren Sie das Programm.';
 $s_login_page_info = 'Willkommen beim Issue Tracker.';
 $s_login_title = 'Anmeldung';
-$s_save_login = 'Anmeldung speichern';
+$s_save_login = 'Anmeldung auf diesem Computer merken';
 $s_secure_session = 'Sichere Sitzung';
 $s_secure_session_long = 'Diese Sitzung ist nur für diese IP-Adresse gültig.';
 $s_choose_project = 'Projekt wählen';
@@ -889,7 +890,7 @@ $s_must_enter_description = 'Sie müssen eine Beschreibung eingeben';
 $s_report_more_bugs = 'Weitere Einträge erfassen';
 $s_submission_thanks_msg = 'Vielen Dank für den Eintrag.';
 $s_simple_report_link = 'Einfacher Bericht';
-$s_enter_report_details_title = 'Berichtdetails eingeben';
+$s_enter_report_details_title = 'Eintragdetails eingeben';
 $s_required = 'erforderlich';
 $s_select_category = 'Kategorie wählen';
 $s_select_reproducibility = 'Reproduzierbarkeit wählen';

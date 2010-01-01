@@ -1,0 +1,63 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/** Estonian (Eesti)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Avjoska
+ */
+
+$s_plugin_MantisGraph_graph_imp_status_title = 'Graafikute süntees oleku järgi';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Graafikute süntees prioriteedi järgi';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Graafikute süntees raskusastme järgi';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Graafikute süntees kategooria järgi';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Graafikute süntees lahenduse järgi';
+$s_plugin_MantisGraph_by_status_pct = 'oleku protsendi järgi';
+$s_plugin_MantisGraph_by_priority_pct = 'prioriteedi protsendi järgi';
+$s_plugin_MantisGraph_by_severity_pct = 'raskusastme protsendi järgi';
+$s_plugin_MantisGraph_by_category_pct = 'kategooria protsendi järgi';
+$s_plugin_MantisGraph_by_resolution_pct = 'lahenduse protsendi järgi';
+$s_plugin_MantisGraph_by_severity_mix = 'raskusastme ja oleku järgi';
+$s_plugin_MantisGraph_by_priority_mix = 'prioriteedi ja oleku järgi';
+$s_plugin_MantisGraph_by_resolution_mix = 'lahenduse ja oleku järgi';
+$s_plugin_MantisGraph_legend_still_open = 'Jätkuvalt avatud';
+$s_plugin_MantisGraph_legend_resolved = 'Lahendatud';
+$s_plugin_MantisGraph_legend_assigned = 'Määratud';
+$s_plugin_MantisGraph_legend_total = 'Kokku';
+$s_plugin_MantisGraph_legend_opened = 'Avatud';
+$s_plugin_MantisGraph_legend_closed = 'Suletud';
+$s_plugin_MantisGraph_legend_reported = 'Raporteeritud';
+$s_plugin_MantisGraph_cumulative = 'Kumulatiivne';
+$s_plugin_MantisGraph_not_enough_data = 'Graafiku loomiseks pole piisavalt andmeid';
+$s_plugin_MantisGraph_period_this_week = 'See nädal';
+$s_plugin_MantisGraph_period_last_week = 'Eelmine nädal';
+$s_plugin_MantisGraph_period_two_weeks = 'Kaks viimast nädalat';
+$s_plugin_MantisGraph_period_this_month = 'See kuu';
+$s_plugin_MantisGraph_period_last_month = 'Eelmine kuu';
+$s_plugin_MantisGraph_period_this_quarter = 'See kvartal';
+$s_plugin_MantisGraph_period_last_quarter = 'Eelmine kvartal';
+$s_plugin_MantisGraph_period_last_year = 'Eelmine aasta';
+$s_plugin_MantisGraph_show_as_graph = 'Näita graafikuna';
+$s_plugin_MantisGraph_show_as_table = 'Näita tabelina';

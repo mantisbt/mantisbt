@@ -28,6 +28,7 @@
  *
  * @author Fohanno
  * @author Fulup
+ * @author Y-M D
  */
 
 $s_actiongroup_menu_move = 'Dilec\'hiañ';
@@ -38,6 +39,7 @@ $s_actiongroup_menu_delete = 'Dilemel';
 $s_actiongroup_menu_resolve = 'Diskoulmañ';
 $s_actiongroup_menu_update_priority = 'Hizivaat ar c\'hentwir';
 $s_actiongroup_menu_update_status = 'Hizivaat ar statud';
+$s_actiongroup_menu_update_severity = 'Hizivaat ar c\'hrevusted';
 $s_actiongroup_menu_update_view_status = 'Hizivaat Gwelet ar statud';
 $s_actiongroup_menu_update_category = 'Hizivaat ar Rummad';
 $s_actiongroup_menu_set_sticky = 'Gweredekaat / diweredekaat an elfennoù pegus';
@@ -150,6 +152,9 @@ $s_view_status_group_bugs_button = 'Hizivaat diskwel ar statud';
 $s_set_sticky_group_bugs_button = 'Gweredekaat / diweredekaat an elfennoù pegus';
 $s_fixed_in_version_group_bugs_button = 'Hizivaat ar stumm diskoulmet';
 $s_target_version_group_bugs_button = 'Hizivaat ar stumm pal';
+$s_update_severity_title = 'Hizivaat ar c\'hrevusted';
+$s_update_severity_msg = 'Dibab grevusted an draen';
+$s_update_severity_button = 'Hizivaat ar c\'hrevusted';
 $s_hide_button = 'Diskwel ar re ziuzet hepken';
 $s_printing_preferences_title = 'Dibab ar maeziennoù da voullañ';
 $s_printing_options_link = 'Dibarzhioù moullañ';
@@ -192,7 +197,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Un daolenn a oa gortozet met un neude
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Un neudenn a oa gortozet met un daolenn zo bet resevet evit %1$s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'En gortoz eus un niver e oad evit %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'An draen %1$d n\'eo ket bet kavet.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Ar sil %1$d n\'eo ket bet kavet.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Ar sil %1$s n\'eo ket bet kavet.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Re gozh eo ar sil emaoc\'h o klask implijout evit bezañ lakaet a-live. Adkrouit-eñ, mar plij.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Chomlec\'h postel direizh.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'N\'eo ket aotreet implijout chomlec\'hioù postel dibad.';
@@ -548,7 +553,7 @@ $s_error_database_version_out_of_date_2 = '<strong>Evezh :</strong> Diamzeret eo
 $s_error_code_version_out_of_date = '<strong>Evezh :</strong> Nevesoc\'h eo framm an diaz roadennoù eget ar c\'hod staliet. Lakait ar c\'hod a-live, mar plij.';
 $s_login_page_info = 'Degemer mat er reizhiad da verañ drein.';
 $s_login_title = 'Anv implijer';
-$s_save_login = 'Enrollañ an anv implijer';
+$s_save_login = 'Derc\'hel soñj eus va ger tremen war an urzhiataer-mañ';
 $s_secure_session = 'Dalc\'h suraet';
 $s_secure_session_long = 'Aotren ho talc\'h da vezañ implijet diwar ar chomlec\'h IP-mañ hepken.';
 $s_choose_project = 'Dibab ur raktres';
@@ -621,7 +626,7 @@ $s_message = 'Kemennadenn';
 $s_default_notify = 'Lakaat ar bannieloù kemenn dre ziouer da';
 $s_action_notify = 'Lakaat ar bannieloù da gemenn an oberoù da';
 $s_notify_defaults_change_access = 'Piv a c\'hall cheñch ar c\'hemenn dre ziouer';
-$s_notify_actions_change_access = 'Piv a c\'hall cheñch ar c\'hemennoù';
+$s_notify_actions_change_access = 'Piv a c\'hall cheñch arventennoù ar c\'hemennoù :';
 $s_revert_to_system = 'Dilemel holl arventennoù ar raktresoù';
 $s_revert_to_all_project = 'Dilemel arventennoù difer ar raktres';
 $s_non_existent = 'n\'eus ket anezhañ';
@@ -659,7 +664,7 @@ $s_resolved_status = 'Statud pa vez kontet an draen da vezañ diskoulmet';
 $s_readonly_status = 'Statud ma teu un draen da vezañ da lenn hepken';
 $s_reopen_status = 'Statud a vez lakaet d\'un draen addigoret';
 $s_reopen_resolution = 'Diskoulm a vez lakaet d\'un draen addigoret';
-$s_config_delete_sure = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel an arventennoù evit';
+$s_config_delete_sure = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel an arventennoù evit :';
 $s_in_project = 'er raktres';
 $s_delete_config_button = 'Dilemel an arventennoù';
 $s_configuration_report = 'Danevell kefluniadur';
@@ -670,6 +675,7 @@ $s_configuration_option_value = 'Talvoud';
 $s_all_users = 'An holl implijerien';
 $s_set_configuration_option = 'Lakaat an dibarzh kefluniañ';
 $s_delete_config_sure_msg = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel an dibarzh kefluniañ-mañ ?';
+$s_configuration_corrupted = 'Brein eo kefluniadur an diaz roadennoù.';
 $s_plugin = 'Lugant';
 $s_plugins_installed = 'Lugantoù staliet';
 $s_plugins_available = 'Lugantoù da gaout';
