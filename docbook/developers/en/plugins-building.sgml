@@ -392,6 +392,88 @@ print_successful_redirect( plugin_page( 'foo', true ) );
 			<title>Language and Localization</title>
 
 			<para>
+				MantisBT has a very advanced set of localization tools, which allow all parts of of
+				the application to be localized to the user's preferred language.  This feature has
+				been extended for use by plugins as well, so that a plugin can be localized in much
+				the same method as used for the core system.  Localizing a plugin involves creating
+				a language file for each localization available, and using a special API call to
+				retrieve the appropriate string for the user's language.
+			</para>
+
+			<para>
+				All language files for plugins follow the same format used in the core of MantisBT,
+				should be placed in the plugin's <filename>lang/</filename> directory, and named
+				the same as the core language files. Strings specific to the plugin should be
+				"namespaced" in a way that will minimize any risk of collision.  Translating the
+				plugin to other languages already supported by MantisBT is then as simple as
+				creating a new strings file with the localized content; the MantisBT core will find
+				and use the new language strings automatically.
+			</para>
+
+			<para>
+				We'll use the "configuration" pages from the previous examples, and dress them up
+				with localized language strings, and add a few more flourishes to make the page act
+				like a standard MantisBT page.  First we need to create a language file for English,
+				the default language of MantisBT and the default fallback language in the case that
+				some strings have not yet been localized to the user's language:
+			</para>
+
+			<programlisting><filename>Example/lang/strings_english.txt</filename>
+
+&lt;?php
+
+$s_plugin_Example_configuration = "Configuration";
+$s_plugin_Example_foo_or_bar = "Foo or Bar?";
+$s_plugin_Example_reset = "Reset Value";
+			</programlisting>
+
+			<programlisting><filename>Example/pages/config_page.php</filename>
+&lt;?php
+
+html_page_top( plugin_lang_get( 'configuration' ) );
+$t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
+
+?&gt;
+
+&lt;br/&gt;
+
+&lt;form action="&lt;?php echo plugin_page( 'config_update' ) ?&gt;" method="post"&gt;
+&lt;?php echo form_security_field( 'plugin_Example_config_update' ) ?&gt;
+&lt;table class="width60" align="center"&gt;
+
+&lt;tr&gt;
+    &lt;td class="form-title" rowspan="2"&gt;&lt;?php echo plugin_lang_get( 'configuration' ) ?&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr &lt;?php echo helper_alternate_class() ?&gt;&gt;
+    &lt;td class="category"&gt;&lt;php echo plugin_lang_get( 'foo_or_bar' ) ?&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;input name="foo_or_bar" value="&lt;?php echo string_attribute( $t_foo_or_bar ) ?&gt;"/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr &lt;?php echo helper_alternate_class() ?&gt;&gt;
+    &lt;td class="category"&gt;&lt;php echo plugin_lang_get( 'reset' ) ?&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;input type="checkbox" name="reset"/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td class="center" rowspan="2"&gt;&lt;input type="submit"/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/table&gt;
+&lt;/form&gt;
+
+&lt;?php
+
+html_page_bottom();
+			</programlisting>
+
+			<para>
+				The two calls to <function>html_page_top()</function> and
+				<function>html_page_bottom()</function> trigger the standard MantisBT header and
+				footer portions, respectively, which also displays things such as the menus and
+				triggers other layout-related events.  <function>helper_alternate_class()</function>
+				generates the CSS classes for alternating row colors in the table.  The rest of the
+				HTML and CSS follows the "standard" MantisBT markup styles for content and layout.
 			</para>
 		</sect2>
 
