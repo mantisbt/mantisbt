@@ -630,7 +630,6 @@
 		'french',
 		'galician',
 		'german',
-		'german_eintrag',
 		'greek',
 		'hebrew',
 		'hungarian',
