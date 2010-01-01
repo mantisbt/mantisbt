@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2009  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,6 +19,9 @@
  */
 
 /** English (English)
+ *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -216,7 +219,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'An array was expected but a string wa
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received for %1$s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Issue %1$d not found.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$d not found.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s not found.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded. Please re-create it.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Invalid e-mail address.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'It is not allowed to use disposable e-mail addresses.';
@@ -688,7 +691,7 @@ $s_error_code_version_out_of_date = '<strong>Warning:</strong> The database stru
 #@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Welcome to the Issue Tracker.';
 $s_login_title = 'Login';
-$s_save_login = 'Save Login';
+$s_save_login = 'Remember my login on this computer';
 $s_secure_session = 'Secure Session';
 $s_secure_session_long = 'Only allow your session to be used from this IP address.';
 $s_choose_project = 'Choose Project';
