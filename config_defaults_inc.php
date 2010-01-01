@@ -614,8 +614,11 @@
 	 */
 	$g_language_choices_arr	= array(
 		'auto',
+		'afrikaans',
+		'amharic',
 		'arabic',
 		'arabicegyptianspoken',
+		'breton',
 		'bulgarian',
 		'catalan',
 		'chinese_simplified',
@@ -639,6 +642,7 @@
 		'korean',
 		'latvian',
 		'lithuanian',
+		'macedonian',
 		'norwegian_bokmal',
 		'norwegian_nynorsk',
 		'occitan',
@@ -666,9 +670,12 @@
 	 * @global array $g_language_auto_map
 	 */
 	$g_language_auto_map = array(
+		'af' => 'afrikaans',
+		'am' => 'amharic',
 		'ar' => 'arabic',
 		'arz' => 'arabicegyptianspoken',
 		'bg' => 'bulgarian',
+		'br' => 'breton',
 		'ca' => 'catalan',
 		'zh-cn, zh-sg, zh' => 'chinese_simplified',
 		'zh-hk, zh-tw' => 'chinese_traditional',
@@ -692,6 +699,7 @@
 		'ksh' => 'ripoarisch',
 		'lt' => 'lithuanian',
 		'lv' => 'latvian',
+		'mk' => 'macedonian',
 		'no' => 'norwegian_bokmal',
 		'nn' => 'norwegian_nynorsk',
 		'oc' => 'occitan',
