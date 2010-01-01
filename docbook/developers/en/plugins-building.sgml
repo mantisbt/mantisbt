@@ -343,27 +343,29 @@ class ExamplePlugin extends MantisPlugin {
 				<function>plugin_config_set()</function>.  With these functions, the config option
 				is prefixed with the plugin's name, in attempt to automatically avoid conflicts in
 				naming.  Our Example plugin will demonstrate this by adding a secure form to the
-				"foo" page, and handling the form on a separate page "bar" that will modify the
-				value in the database, and redirect back to page "foo", just like any other form
-				and action page in MantisBT:
+				"config_page", and handling the form on a separate page "config_update" that will
+				modify the value in the database, and redirect back to page "config_page", just
+				like any other form and action page in MantisBT:
 			</para>
 
-			<programlisting><filename>Example/pages/foo.php</filename>
+			<programlisting><filename>Example/pages/config_page.php</filename>
 
-&lt;?php
-...
+&lt;form action="&lt;?php echo plugin_page( 'config_update' ) ?&gt;" method="post"&gt;
+&lt;?php echo form_security_field( 'plugin_Example_config_update' ) ?&gt;
 
-echo '&lt;form action="', plugin_page( 'bar' ), '" method="post"&gt;',
-    form_security_field( 'plugin_Example_bar' ),
-    '&lt;input name="foo_or_bar" value="', string_attribute( plugin_config_get( 'foo_or_bar' ) ), '"/&gt;',
-    '&lt;label&gt;&lt;input type="checkbox" name="reset"/&gt; Reset&lt;/label&gt;',
-    '&lt;input type="submit"/&gt;';
+&lt;label&gt;Foo or Bar?&lt;br/&gt;&lt;input name="foo_or_bar" value="&lt;?php echo string_attribute( $t_foo_or_bar ) ?&gt;"/&gt;&lt;/label&gt;
+&lt;br/&gt;
+&lt;label&gt;&lt;input type="checkbox" name="reset"/&gt; Reset&lt;/label&gt;
+&lt;br/&gt;
+&lt;input type="submit"/&gt;
+
+&lt;/form&gt;
 			</programlisting>
 
-			<programlisting><filename>Example/pages/foo.php</filename>
+			<programlisting><filename>Example/pages/config_update.php</filename>
 
 &lt;?php
-form_security_validate( 'plugin_Example_bar' );
+form_security_validate( 'plugin_Example_config_update' );
 
 $f_foo_or_bar = gpc_get_string( 'foo_or_bar' );
 $f_reset = gpc_get_bool( 'reset', false );
@@ -376,7 +378,7 @@ if ( $f_reset ) {
     }
 }
 
-form_security_purge( 'plugin_Example_bar' );
+form_security_purge( 'plugin_Example_config_update' );
 print_successful_redirect( plugin_page( 'foo', true ) );
 			</programlisting>
 
