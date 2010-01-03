@@ -232,7 +232,11 @@ function file_send_chunk($filename, $start = 0, $maxlength = 0 ) {
 		}
         $buffer = file_get_contents($filename, 0, null, $offset, ( ($maxlength > 0 && $maxlength < $chunksize) ? $maxlength : $chunksize ) );
         if ( $buffer === false ) {
-			$buffer = file_get_contents($filename, 0, null, $offset, ( $maxlength > 0 ? $maxlength : -1 ) );
+			if( $maxlength > 0 ) {
+				$buffer = file_get_contents($filename, 0, null, $offset, $maxlength );
+			} else {
+				$buffer = file_get_contents($filename, 0, null, $offset );			
+			}
 			echo $buffer;
 			flush();
         	exit(); // end of file
