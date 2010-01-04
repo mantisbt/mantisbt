@@ -2206,6 +2206,32 @@
                     </warning>
                 </listitem>
             </varlistentry>
+            <varlistentry>
+                <term>$g_manage_configuration_threshold</term>
+                <listitem>
+                    <para>The threshold required for users to be able to manage configuration of a project.
+                        This includes workflow, email notifications, columns to view, and others.  Default is MANAGER.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_view_configuration_threshold</term>
+                <listitem>
+                    <para>Threshold for users to view the raw system configurations as stored in the database.
+                        Default is DEVELOPER.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_set_configuration_threshold</term>
+                <listitem>
+                    <para>Threshold for users to set the system configurations generically via MantisBT web interface.
+                        WARNING: Users who have access to set configuration via the interface MUST be trusted.  This is due
+                        to the fact that such users can set configurations to PHP code and hence there can be a security
+                        risk if such users are not trusted.
+                    </para>
+                </listitem>
+            </varlistentry>
         </variablelist>
     </section>
 

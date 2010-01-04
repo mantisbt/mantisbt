@@ -25,7 +25,9 @@
 	  */
 	require_once( 'core.php' );
 
-	access_ensure_project_level( config_get( 'view_configuration_threshold' ) );
+	access_ensure_global_level( config_get( 'view_configuration_threshold' ) );
+
+	$t_read_write_access = access_has_global_level( config_get('set_configuration_threshold' ) );
 
 	html_page_top( lang_get( 'configuration_report' ) );
 
@@ -121,9 +123,11 @@
 			<td class="center">
 				<?php echo lang_get( 'access_level' ) ?>
 			</td>
+<?php if ( $t_read_write_access ): ?>
 			<td class="center">
 				<?php echo lang_get( 'actions' ) ?>
 			</td>
+<?php endif; ?>
 		</tr>
 <?php
 	while ( $row = db_fetch_array( $result ) ) {
@@ -150,6 +154,7 @@
 			<td class="center">
 				<?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?>
 			</td>
+			<?php if ( $t_read_write_access ): ?>
 			<td class="center">
 				<?php
 					if ( config_can_delete( $v_config_id ) ) {
@@ -159,13 +164,14 @@
 					}
 				?>
 			</td>
+			<?php endif; ?>
 		</tr>
 <?php
 	} # end for loop
 ?>
 </table>
 <?php
-    if ( access_has_global_level( config_get('set_configuration_threshold' ) ) ) {
+    if ( $t_read_write_access ) {
 ?>
 <br />
 <!-- Config Set Form -->

@@ -40,11 +40,10 @@
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	if ( $f_project_id == ALL_PROJECTS ) {
-		access_ensure_global_level( config_get('set_configuration_threshold' ) );
-	} else {
+	access_ensure_global_level( config_get( 'set_configuration_threshold' ) );
+
+	if ( $f_project_id != ALL_PROJECTS ) {
 		project_ensure_exists( $f_project_id );
-		access_ensure_project_level( config_get('set_configuration_threshold' ), $f_project_id );
 	}
 
 	# make sure that configuration option specified is a valid one.

@@ -2763,6 +2763,12 @@ $g_default_manage_tag_prefix = 'ALL';
 $g_csv_separator = ',';
 
 /**
+ * The threshold required for users to be able to manage configuration of a project.
+ * This includes workflow, email notifications, columns to view, and others.
+ */
+$g_manage_configuration_threshold = MANAGER;
+
+/**
  * threshold for users to view the system configurations
  * @global int $g_view_configuration_threshold
  */

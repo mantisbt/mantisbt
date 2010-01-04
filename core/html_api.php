@@ -926,6 +926,7 @@ function print_manage_menu( $p_page = '' ) {
 	$t_manage_custom_field_page = 'manage_custom_field_page.php';
 	$t_manage_plugin_page = 'manage_plugin_page.php';
 	$t_manage_config_page = 'adm_config_report.php';
+	$t_permissions_summary_report = 'adm_permissions_report.php';
 	$t_manage_prof_menu_page = 'manage_prof_menu_page.php';
 	$t_manage_tags_page = 'manage_tags_page.php';
 
@@ -941,6 +942,9 @@ function print_manage_menu( $p_page = '' ) {
 			break;
 		case $t_manage_config_page:
 			$t_manage_config_page = '';
+			break;
+		case $t_permissions_summary_report:
+			$t_permissions_summary_report = '';
 			break;
 		case $t_manage_plugin_page:
 			$t_manage_plugin_page = '';
@@ -972,8 +976,15 @@ function print_manage_menu( $p_page = '' ) {
 	if( access_has_global_level( config_get( 'manage_plugin_threshold' ) ) ) {
 		print_bracket_link( helper_mantis_url( $t_manage_plugin_page ), lang_get( 'manage_plugin_link' ) );
 	}
-	if( access_has_project_level( config_get( 'view_configuration_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_config_page ), lang_get( 'manage_config_link' ) );
+
+	if ( access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
+		if ( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
+			$t_config_page = $t_manage_config_page;
+		} else {
+			$t_config_page = $t_permissions_summary_report;
+		}
+
+		print_bracket_link( helper_mantis_url( $t_config_page ), lang_get( 'manage_config_link' ) );
 	}
 
 	# Plugin / Event added options
@@ -1034,16 +1045,21 @@ function print_manage_config_menu( $p_page = '' ) {
 			break;
 	}
 
-	echo '<br /><div align="center">';
-	if( access_has_project_level( config_get( 'view_configuration_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_configuration_report ), lang_get_defaulted( 'configuration_report' ) );
+	if ( access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
+		echo '<br /><div align="center">';
+
+		if ( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
+			print_bracket_link( helper_mantis_url( $t_configuration_report ), lang_get_defaulted( 'configuration_report' ) );
+		}
+
 		print_bracket_link( helper_mantis_url( $t_permissions_summary_report ), lang_get( 'permissions_summary_report' ) );
 		print_bracket_link( helper_mantis_url( $t_manage_work_threshold ), lang_get( 'manage_threshold_config' ) );
 		print_bracket_link( helper_mantis_url( $t_manage_workflow ), lang_get( 'manage_workflow_config' ) );
 		print_bracket_link( helper_mantis_url( $t_manage_email ), lang_get( 'manage_email_config' ) );
 		print_bracket_link( $t_manage_columns, lang_get( 'manage_columns_config' ) );
+
+		echo '</div>';
 	}
-	echo '</div>';
 }
 
 /**

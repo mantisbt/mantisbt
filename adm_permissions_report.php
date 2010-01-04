@@ -26,7 +26,7 @@
 	  */
 	require_once( 'core.php' );
 
-	access_ensure_project_level( config_get( 'view_configuration_threshold' ) );
+	access_ensure_project_level( config_get( 'manage_configuration_threshold' ) );
 
 	html_page_top( lang_get( 'permissions_summary_report' ) );
 
