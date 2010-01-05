@@ -29,8 +29,6 @@
 
 	require_once( 'file_api.php' );
 
-	form_security_validate( 'bug_file_add' );
-
 	$f_bug_id	= gpc_get_int( 'bug_id', -1 );
 	$f_file		= gpc_get_file( 'file', -1 );
 
@@ -38,6 +36,8 @@
 		# _POST/_FILES does not seem to get populated if you exceed size limit so check if bug_id is -1
 		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
 	}
+
+	form_security_validate( 'bug_file_add' );
 
 	$t_bug = bug_get( $f_bug_id, true );
 	if( $t_bug->project_id != helper_get_current_project() ) {
