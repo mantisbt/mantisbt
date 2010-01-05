@@ -155,7 +155,12 @@
 				}
 
 				header( 'Content-Type: ' . $t_content_type );
-				file_send_chunk( $t_local_disk_file );
+				if ( config_get( 'file_download_xsendfile_enabled' ) ) {
+					$t_xsendfile_header_name = config_get( 'file_download_xsendfile_header_name' );
+					header( $t_xsendfile_header_name . ': ' . $t_local_disk_file );
+				} else {
+					file_send_chunk( $t_local_disk_file );
+				}
 			}
 			break;
 		case FTP:

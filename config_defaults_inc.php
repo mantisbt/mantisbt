@@ -1655,6 +1655,26 @@ $g_document_files_prefix = 'doc';
  */
 $g_absolute_path_default_upload_folder = '';
 
+/**
+ * Enable support for sending files to users via a more efficient X-Sendfile
+ * method. HTTP server software supporting this technique includes Lighttpd,
+ * Cherokee, Apache with mod_xsendfile and nginx. You may need to set the
+ * proceeding file_download_xsendfile_header_name option to suit the server you
+ * are using.
+ * @global int $g_file_download_method
+ */
+$g_file_download_xsendfile_enabled = OFF;
+
+/**
+ * The name of the X-Sendfile header to use. Each server tends to implement
+ * this functionality in a slightly different way and thus the naming
+ * conventions for the header differ between each server. Lighttpd from v1.5,
+ * Apache with mod_xsendfile and Cherokee web servers use X-Sendfile. nginx
+ * uses X-Accel-Redirect and Lighttpd v1.4 uses X-LIGHTTPD-send-file.
+ * @global string $g_file_download_xsendfile_header_name
+ */
+$g_file_download_xsendfile_header_name = 'X-Sendfile';
+
 /**************************
  * MantisBT HTML Settings *
  **************************/
