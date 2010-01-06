@@ -3668,8 +3668,10 @@ class nusoap_server extends nusoap_base {
                 fpassthru($fp);
               }
 			} elseif ($this->wsdl) {
-				header("Content-Type: text/xml; charset=ISO-8859-1\r\n");
-				print $this->wsdl->serialize($this->debug_flag);
+				header("Content-Type: text/xml; charset=ISO-8859-1");
+				$output = $this->wsdl->serialize($this->debug_flag);
+				header("Content-Length: " . strlen($output) . "\r\n");
+				print $output;
 				if ($this->debug_flag) {
 					$this->debug('wsdl:');
 					$this->appendDebug($this->varDump($this->wsdl));
