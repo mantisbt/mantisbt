@@ -15,9 +15,11 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Form API for handling tasks necessary to form security and validation.
- * Security methods are targetted to work with both GET and POST form types,
- * and should allow multiple simultaneous edits of the form to be submitted.
+ * Form API
+ *
+ * Handles form security and validation. Security methods are targeted to
+ * work with both GET and POST form types and should allow multiple
+ * simultaneous edits of the form to be submitted out-of-order.
  *
  * @package CoreAPI
  * @subpackage FormAPI
@@ -25,8 +27,18 @@
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses gpc_api.php
+ * @uses php_api.php
  * @uses session_api.php
  */
+
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'gpc_api.php' );
+require_once( 'php_api.php' );
+require_once( 'session_api.php' );
 
 /**
  * Generate a random security token, prefixed by date, store it in the

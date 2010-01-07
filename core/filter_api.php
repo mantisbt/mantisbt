@@ -15,41 +15,70 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Filter API
+ *
  * @package CoreAPI
  * @subpackage FilterAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses bug_api.php
+ * @uses collapse_api.php
+ * @uses columns_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses current_user_api.php
+ * @uses custom_field_api.php
+ * @uses database_api.php
+ * @uses date_api.php
+ * @uses error_api.php
+ * @uses event_api.php
+ * @uses filter_constants_inc.php
+ * @uses gpc_api.php
+ * @uses helper_api.php
+ * @uses lang_api.php
+ * @uses logging_api.php
+ * @uses print_api.php
+ * @uses profile_api.php
+ * @uses project_api.php
+ * @uses relationship_api.php
+ * @uses string_api.php
+ * @uses tag_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
+ * @uses version_api.php
  */
 
-/**
- * requires current_user_api
- */
-require_once( 'current_user_api.php' );
-/**
- * requires user_api
- */
-require_once( 'user_api.php' );
-/**
- * requires bug_api
- */
+require_once( 'access_api.php' );
+require_once( 'authentication_api.php' );
 require_once( 'bug_api.php' );
-/**
- * requires collapse_api
- */
 require_once( 'collapse_api.php' );
-/**
- * requires relationship_api
- */
-require_once( 'relationship_api.php' );
-/**
- * requires tag_api
- */
-require_once( 'tag_api.php' );
-/**
- * requires config_filter_defaults_inc
- */
+require_once( 'columns_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'current_user_api.php' );
+require_once( 'custom_field_api.php' );
+require_once( 'database_api.php' );
+require_once( 'date_api.php' );
+require_once( 'error_api.php' );
+require_once( 'event_api.php' );
 require_once( 'filter_constants_inc.php' );
+require_once( 'gpc_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'logging_api.php' );
+require_once( 'print_api.php' );
+require_once( 'profile_api.php' );
+require_once( 'project_api.php' );
+require_once( 'relationship_api.php' );
+require_once( 'string_api.php' );
+require_once( 'tag_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
+require_once( 'version_api.php' );
 
 /**
  * Allow plugins to define a set of class-based filters, and register/load

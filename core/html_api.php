@@ -15,10 +15,12 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * These functions control the display of each page
+ * HTML API
+ *
+ * These functions control the HTML output of each page.
  *
  * This is the call order of these functions, should you need to figure out
- * which to modify or which to leave out.
+ * which to modify or which to leave out:
  *
  * html_page_top1
  * 	html_begin
@@ -53,45 +55,51 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses bug_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses current_user_api.php
+ * @uses database_api.php
+ * @uses error_api.php
+ * @uses event_api.php
+ * @uses file_api.php
+ * @uses form_api.php
+ * @uses helper_api.php
  * @uses lang_api.php
+ * @uses news_api.php
+ * @uses php_api.php
+ * @uses print_api.php
+ * @uses project_api.php
+ * @uses rss_api.php
+ * @uses string_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
  */
 
-/**
- * requires current_user_api
- */
-require_once( 'current_user_api.php' );
-/**
- * requires string_api
- */
-require_once( 'string_api.php' );
-/**
- * requires bug_api
- */
-require_once( 'bug_api.php' );
-/**
- * requires project_api
- */
-require_once( 'project_api.php' );
-/**
- * requires helper_api
- */
-require_once( 'helper_api.php' );
-/**
- * requires authentication_api
- */
+require_once( 'access_api.php' );
 require_once( 'authentication_api.php' );
-/**
- * requires user_api
- */
-require_once( 'user_api.php' );
-/**
- * requires rss_api
- */
-require_once( 'rss_api.php' );
-/**
- * requires php_api
- */
+require_once( 'bug_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'current_user_api.php' );
+require_once( 'database_api.php' );
+require_once( 'error_api.php' );
+require_once( 'event_api.php' );
+require_once( 'file_api.php' );
+require_once( 'form_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'news_api.php' );
 require_once( 'php_api.php' );
+require_once( 'print_api.php' );
+require_once( 'project_api.php' );
+require_once( 'rss_api.php' );
+require_once( 'string_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
 
 $g_rss_feed_url = null;
 

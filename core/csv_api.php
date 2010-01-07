@@ -16,15 +16,31 @@
 
 /**
  * CSV API
- * Names for formatting functions are csv_format_*, where * corresponds to the
- * field name as return get csv_get_columns() and by the filter api.
  *
  * @package CoreAPI
  * @subpackage CSVAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses authentication_api.php
+ * @uses bug_api.php
+ * @uses category_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses helper_api.php
+ * @uses project_api.php
+ * @uses user_api.php
  */
+
+require_once( 'authentication_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'category_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'helper_api.php' );
+require_once( 'project_api.php' );
+require_once( 'user_api.php' );
 
 /**
  * get the csv file new line, can be moved to config in the future

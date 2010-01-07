@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * GraphViz API
+ *
  * Wrapper classes around GraphViz utilities (dot and neato) for
  * directed and undirected graph generation. Under Windows, the COM
  * API provided by WinGraphviz is used. These wrappers are enhanced
@@ -27,12 +29,19 @@
  * 	- http://home.so-net.net.tw/oodtsen/wingraphviz/
  * Additional documentation can be found at:
  * 	- http://www.graphviz.org/Documentation.html
+ *
  * @package CoreAPI
  * @subpackage GraphVizAPI
  * @author Juliano Ravasi Ferraz <jferraz at users sourceforge net>
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses constant_inc.php
+ * @uses utility_api.php
  */
+
+require_once( 'constant_inc.php' );
+require_once( 'utility_api.php' );
 
 /** 
  * constant(s) defining the output formats supported by dot and neato. 

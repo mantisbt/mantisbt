@@ -17,21 +17,35 @@
 
 /**
  * News API
+ *
  * @package CoreAPI
  * @subpackage NewsAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses current_user_api.php
+ * @uses database_api.php
+ * @uses error_api.php
+ * @uses helper_api.php
+ * @uses lang_api.php
+ * @uses twitter_api.php
+ * @uses utility_api.php
  */
 
-/**
- * requires current_user_api
- */
+require_once( 'access_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
 require_once( 'current_user_api.php' );
-/**
- * requires twitter_api
- */
+require_once( 'database_api.php' );
+require_once( 'error_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'lang_api.php' );
 require_once( 'twitter_api.php' );
+require_once( 'utility_api.php' );
 
 # --------------------
 # Add a news item

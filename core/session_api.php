@@ -16,10 +16,12 @@
 
 
 /**
- * Session API for handling user/browser sessions in an extendable manner.
- * New session handlers can be added and configured without affecting how
- * the API is used.  Calls to session_*() are appropriately directed at the
- * session handler class as chosen in config_inc.php.
+ * Session API
+ *
+ * Handles user/browser sessions in an extendable manner. New session handlers
+ * can be added and configured without affecting how the API is used. Calls to
+ * session_*() are appropriately directed at the session handler class as
+ * chosen in config_inc.php.
  *
  * @package CoreAPI
  * @subpackage SessionAPI
@@ -27,13 +29,18 @@
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses error_api.php
  * @uses gpc_api.php
+ * @uses php_api.php
  */
 
-/**
- * requires gpc_api
- */
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'error_api.php' );
 require_once( 'gpc_api.php' );
+require_once( 'php_api.php' );
 
 /**
  *

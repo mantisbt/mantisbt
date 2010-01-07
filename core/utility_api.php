@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Utility API
+ *
  * Utility functions are *small* functions that are used often and therefore
  * have *no* prefix, to keep their names short.
  *
@@ -28,7 +30,15 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses error_api.php
  */
+
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'error_api.php' );
 
 /**
  * converts a 1 value to X

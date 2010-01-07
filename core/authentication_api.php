@@ -16,17 +16,49 @@
 
 /**
  * Authentication API
+ *
+ * @package CoreAPI
+ * @subpackage AuthenticationAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- * @package CoreAPI
- * @subpackage AuthenticationAPI
+ *
+ * @uses access_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses current_user_api.php
+ * @uses database_api.php
+ * @uses error_api.php
+ * @uses gpc_api.php
+ * @uses helper_api.php
+ * @uses html_api.php
+ * @uses lang_api.php
+ * @uses ldap_api.php
+ * @uses print_api.php
+ * @uses session_api.php
+ * @uses string_api.php
+ * @uses tokens_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
  */
 
- /**
-  * requires helper_api
- */
-require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
+require_once( 'access_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'current_user_api.php' );
+require_once( 'database_api.php' );
+require_once( 'error_api.php' );
+require_once( 'gpc_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'html_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'ldap_api.php' );
+require_once( 'print_api.php' );
+require_once( 'session_api.php' );
+require_once( 'string_api.php' );
+require_once( 'tokens_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
 
 /**
  *

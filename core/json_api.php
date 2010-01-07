@@ -15,17 +15,17 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * API for simplifying some JSON interactions.
+ * JSON API
+ *
  * @package CoreAPI
  * @subpackage JSONAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses url_api.php
  */
 
-/**
- * requires url_api
- */
 require_once( 'url_api.php' );
 
 /**

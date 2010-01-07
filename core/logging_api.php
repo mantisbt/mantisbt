@@ -15,14 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Logging api
- * This is used to log system events other than bug related history
+ * Logging API
+ *
+ * Provides functionality to log system events other than bug related history.
+ *
  * @package CoreAPI
  * @subpackage LoggingAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses event_api.php
+ * @uses utility_api.php
  */
+
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'event_api.php' );
+require_once( 'utility_api.php' );
 
 $g_log_levels = array(
 	LOG_EMAIL => 'mail',

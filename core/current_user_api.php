@@ -15,17 +15,34 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Current User API
+ *
  * @package CoreAPI
  * @subpackage CurrentUserAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses authentication_api.php
+ * @uses constant_inc.php
+ * @uses filter_api.php
+ * @uses gpc_api.php
+ * @uses helper_api.php
+ * @uses tokens_api.php
+ * @uses user_api.php
+ * @uses user_pref_api.php
+ * @uses utility_api.php
  */
 
-/**
- * requires filter_api
- */
+require_once( 'authentication_api.php' );
+require_once( 'constant_inc.php' );
 require_once( 'filter_api.php' );
+require_once( 'gpc_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'tokens_api.php' );
+require_once( 'user_api.php' );
+require_once( 'user_pref_api.php' );
+require_once( 'utility_api.php' );
 
 # ## Current User API ###
 # Wrappers around the User API that pass in the logged-in user for you

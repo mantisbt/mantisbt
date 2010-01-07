@@ -15,22 +15,40 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * String Processing API
+ *
  * @package CoreAPI
  * @subpackage StringProcessingAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses bug_api.php
+ * @uses bugnote_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses email_api.php
+ * @uses event_api.php
+ * @uses helper_api.php
+ * @uses lang_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
  */
 
-/**
- * requires bug_api
- */
+require_once( 'access_api.php' );
+require_once( 'authentication_api.php' );
 require_once( 'bug_api.php' );
-
-/**
- * requires user_pref_api
- */
-require_once( 'user_pref_api.php' );
+require_once( 'bugnote_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'email_api.php' );
+require_once( 'event_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
 
 $g_cache_html_valid_tags = '';
 $g_cache_html_valid_tags_single_line = '';

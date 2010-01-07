@@ -17,14 +17,18 @@
 /**
  * Compression API
  *
- * This API handles the ob_gzhandler in php.
- *
  * @package CoreAPI
  * @subpackage CompressionAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses constant_inc.php
+ * @uses php_api.php
  */
+
+require_once( 'constant_inc.php' );
+require_once( 'php_api.php' );
 
 /**
  * Starts the buffering/compression (only if the compression option is ON)

@@ -17,13 +17,35 @@
 
 /**
  * Plugin API
+ *
  * Handles the initialisation, management, and execution of plugins.
+ *
  * @package CoreAPI
  * @subpackage PluginAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses database_api.php
+ * @uses error_api.php
+ * @uses event_api.php
+ * @uses helper_api.php
+ * @uses history_api.php
+ * @uses lang_api.php
  */
+
+require_once( 'access_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
+require_once( 'error_api.php' );
+require_once( 'event_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'history_api.php' );
+require_once( 'lang_api.php' );
 
 # Cache variables #####
 

@@ -15,12 +15,32 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Profile API
+ *
  * @package CoreAPI
  * @subpackage ProfileAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses authentication_api.php
+ * @uses constant_inc.php
+ * @uses database_api.php
+ * @uses error_api.php
+ * @uses helper_api.php
+ * @uses lang_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
  */
+
+require_once( 'authentication_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
+require_once( 'error_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
 
 /**
  * Create a new profile for the user, return the ID of the new profile

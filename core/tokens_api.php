@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Tokens API
+ *
  * This implements temporary storage of strings.
  * DB schema: id, type, owner, timestamp, value
  *
@@ -23,7 +25,15 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses authentication_api.php
+ * @uses constant_inc.php
+ * @uses database_api.php
  */
+
+require_once( 'authentication_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
 
 # Set up global for token_purge_expired_once()
 $g_tokens_purged = false;

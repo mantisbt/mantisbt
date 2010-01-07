@@ -15,28 +15,31 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * XMLHttpRequest API
+ *
  * @package CoreAPI
  * @subpackage XMLHttpRequestAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses bug_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses gpc_api.php
+ * @uses print_api.php
+ * @uses profile_api.php
+ * @uses projax_api.php
  */
 
-/**
- * requires bug_api
- */
+require_once( 'access_api.php' );
 require_once( 'bug_api.php' );
-/**
- * requires profile_api
- */
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'gpc_api.php' );
+require_once( 'print_api.php' );
 require_once( 'profile_api.php' );
-/**
- * requires logging_api
- */
-require_once( 'logging_api.php' );
-/**
- * requires projax_api
- */
 require_once( 'projax_api.php' );
 
 /**

@@ -63,12 +63,39 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses bug_api.php
+ * @uses collapse_api.php
+ * @uses config_api.php
+ * @uses constant_api.php
+ * @uses current_user_api.php
+ * @uses database_api.php
+ * @uses form_api.php
+ * @uses helper_api.php
+ * @uses lang_api.php
+ * @uses prepare_api.php
+ * @uses print_api.php
+ * @uses project_api.php
+ * @uses string_api.php
+ * @uses utility_api.php
  */
 
-/**
- * requires collapse_api
- */
+require_once( 'access_api.php' );
+require_once( 'bug_api.php' );
 require_once( 'collapse_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'current_user_api.php' );
+require_once( 'database_api.php' );
+require_once( 'form_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'prepare_api.php' );
+require_once( 'print_api.php' );
+require_once( 'project_api.php' );
+require_once( 'string_api.php' );
+require_once( 'utility_api.php' );
 
 /**
  * RelationshipData Structure Definition

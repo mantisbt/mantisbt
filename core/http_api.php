@@ -15,12 +15,19 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * API for managing HTTP response headers and transactions.
+ * HTTP API
+ *
+ * Provides functions to manage HTTP response headers.
+ *
  * @package CoreAPI
  * @subpackage HTTPAPI
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses config_api.php
  */
+
+require_once( 'config_api.php' );
 
 /**
  * Check to see if the client is using Microsoft Internet Explorer so we can

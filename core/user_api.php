@@ -16,20 +16,47 @@
 
 /**
  * User API
+ *
  * @package CoreAPI
  * @subpackage UserAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses database_api.php
+ * @uses email_api.php
+ * @uses error_api.php
+ * @uses filter_api.php
+ * @uses helper_api.php
+ * @uses lang_api.php
+ * @uses ldap_api.php
+ * @uses project_api.php
+ * @uses project_hierarchy_api.php
+ * @uses string_api.php
+ * @uses user_pref_api.php
+ * @uses utility_api.php
  */
 
-/**
- * requires email_api
- */
+require_once( 'access_api.php' );
+require_once( 'authentication_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
 require_once( 'email_api.php' );
-/**
- * requires ldap_api
- */
+require_once( 'error_api.php' );
+require_once( 'filter_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'lang_api.php' );
 require_once( 'ldap_api.php' );
+require_once( 'project_api.php' );
+require_once( 'project_hierarchy_api.php' );
+require_once( 'string_api.php' );
+require_once( 'user_pref_api.php' );
+require_once( 'utility_api.php' );
 
 # ===================================
 # Caching

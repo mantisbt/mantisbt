@@ -15,13 +15,19 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This API allows bugs to keep a read-only history of changes to longtext boxes.
+ * Bug Revision API
  *
  * @package CoreAPI
  * @subpackage BugRevisionAPI
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses constant_inc.php
+ * @uses database_api.php
  */
+
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
 
 /**
  * Add a new revision to a bug history.

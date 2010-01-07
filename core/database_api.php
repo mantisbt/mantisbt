@@ -15,10 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Database
- *
- * This is the general interface for all database calls.
- * Modifications required for database support, outside of adodb support should occur here.
+ * Database API
  *
  * @package CoreAPI
  * @subpackage DatabaseAPI
@@ -27,7 +24,17 @@
  * @link http://www.mantisbt.org
  *
  * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses error_api.php
+ * @uses logging_api.php
+ * @uses utility_api.php
  */
+
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'error_api.php' );
+require_once( 'logging_api.php' );
+require_once( 'utility_api.php' );
 
 /**
  * requires adodb library

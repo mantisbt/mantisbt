@@ -17,34 +17,28 @@
 /**
  * Collapse API
  *
- * collapse_open( 'xyz' );		# marks the start of the expanded section
- * :
- * ... collapse_icon( 'xyz' );	# this will add the '+' icon
- * :
- * collapse_closed( 'xyz' );	# marks the start of the collapsed section
- * :
- * ... collapse_icon( 'xyz' );	# this will add the '-' icon
- * :
- * collapse_end( 'xyz' );		# marks the end of the whole section
- *
+ * @package CoreAPI
+ * @subpackage CollapseAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- * @package CoreAPI
- * @subpackage CollapseAPI
  *
- * @uses tokens_api.php
- * @uses utility_api.php
+ * @uses authentication_api.php
  * @uses config_api.php
- * @uses authentiction_api.php
+ * @uses constant_inc.php
  * @uses current_user_api.php
  * @uses gpc_api.php
+ * @uses tokens_api.php
+ * @uses utility_api.php
  */
 
-/**
- * requires tokens_api
- */
+require_once( 'authentication_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'current_user_api.php' );
+require_once( 'gpc_api.php' );
 require_once( 'tokens_api.php' );
+require_once( 'utility_api.php' );
 
 /**
  *

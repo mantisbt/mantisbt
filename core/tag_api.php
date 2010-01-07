@@ -23,17 +23,35 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses bug_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses database_api.php
+ * @uses error_api.php
+ * @uses form_api.php
+ * @uses history_api.php
+ * @uses lang_api.php
+ * @uses string_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
  */
 
-/**
- * requires bug api
- */
+require_once( 'access_api.php' );
+require_once( 'authentication_api.php' );
 require_once( 'bug_api.php' );
-
-/**
- * requires history api
- */
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
+require_once( 'error_api.php' );
+require_once( 'form_api.php' );
 require_once( 'history_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'string_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
 
 /**
  * Determine if a tag exists with the given ID.

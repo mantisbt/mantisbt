@@ -16,17 +16,20 @@
 
 
 /**
+ * Projax API
+ *
  * @package CoreAPI
  * @subpackage ProjaxAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses ../library/projax/projax.php
+ * @uses config_api.php
  */
 
-/**
- * requires projax.php
- */
 require_once( 'projax' . DIRECTORY_SEPARATOR . 'projax.php' );
+require_once( 'config_api.php' );
 
 # enables the projax library for this page.
 $g_enable_projax = true;

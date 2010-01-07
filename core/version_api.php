@@ -16,12 +16,32 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Version API
+ *
+ * @package CoreAPI
+ * @subpackage VersionAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- * @package CoreAPI
- * @subpackage VersionAPI
+ *
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses database_api.php
+ * @uses date_api.php
+ * @uses error_api.php
+ * @uses helper_api.php
+ * @uses project_api.php
+ * @uses project_hierarchy_api.php
  */
+
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
+require_once( 'date_api.php' );
+require_once( 'error_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'project_api.php' );
+require_once( 'project_hierarchy_api.php' );
 
 /**
  * Version Data Structure Definition

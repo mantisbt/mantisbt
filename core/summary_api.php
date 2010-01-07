@@ -15,17 +15,42 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Summary API
+ *
  * @package CoreAPI
  * @subpackage SummaryAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses bug_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses current_user_api.php
+ * @uses database_api.php
+ * @uses filter_constants_inc.php
+ * @uses helper_api.php
+ * @uses project_api.php
+ * @uses string_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
  */
 
-/**
- * requires config_filter_defaults_include
- */
+require_once( 'access_api.php' );
+require_once( 'authentication_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'current_user_api.php' );
+require_once( 'database_api.php' );
 require_once( 'filter_constants_inc.php' );
+require_once( 'helper_api.php' );
+require_once( 'project_api.php' );
+require_once( 'string_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
 
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 	printf( '<tr %s>', helper_alternate_class() );

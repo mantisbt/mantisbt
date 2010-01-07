@@ -15,7 +15,11 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Functions to help in backwards compatibility of PHP versions, etc.
+ * PHP Compatibility API
+ *
+ * Provides functions to assist with backwards compatibility between PHP
+ * versions.
+ *
  * @package CoreAPI
  * @subpackage PHPCompatibilityAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org

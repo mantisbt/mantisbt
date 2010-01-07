@@ -15,38 +15,68 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * this file handles printing functions
+ * Print API
+ *
  * @package CoreAPI
  * @subpackage PrintAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses category_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses current_user_api.php
+ * @uses custom_field_api.php
+ * @uses database_api.php
+ * @uses email_api.php
+ * @uses error_api.php
+ * @uses file_api.php
+ * @uses form_api.php
+ * @uses helper_api.php
+ * @uses html_api.php
+ * @uses lang_api.php
+ * @uses last_visited_api.php
+ * @uses news_api.php
+ * @uses prepare_api.php
+ * @uses profile_api.php
+ * @uses project_api.php
+ * @uses project_hierarchy_api.php
+ * @uses string_api.php
+ * @uses tag_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
+ * @uses version_api.php
  */
 
-/**
- * requires current_user_api
- */
+require_once( 'access_api.php' );
+require_once( 'authentication_api.php' );
+require_once( 'category_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
 require_once( 'current_user_api.php' );
-/**
- * requires string_api
- */
-require_once( 'string_api.php' );
-/**
- * requires prepare_api
- */
-require_once( 'prepare_api.php' );
-/**
- * requires profile_api
- */
-require_once( 'profile_api.php' );
-/**
- * requires last_visited_api
- */
-require_once( 'last_visited_api.php' );
-/**
- * requires file_api
- */
+require_once( 'custom_field_api.php' );
+require_once( 'database_api.php' );
+require_once( 'email_api.php' );
+require_once( 'error_api.php' );
 require_once( 'file_api.php' );
+require_once( 'form_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'html_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'last_visited_api.php' );
+require_once( 'news_api.php' );
+require_once( 'prepare_api.php' );
+require_once( 'profile_api.php' );
+require_once( 'project_api.php' );
+require_once( 'project_hierarchy_api.php' );
+require_once( 'string_api.php' );
+require_once( 'tag_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
+require_once( 'version_api.php' );
 
 # --------------------
 # Print the headers to cause the page to redirect to $p_url

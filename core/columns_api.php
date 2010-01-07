@@ -15,12 +15,53 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Columns API
+ *
  * @package CoreAPI
  * @subpackage ColumnsAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses bug_api.php
+ * @uses category_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses custom_field_api.php
+ * @uses date_api.php
+ * @uses error_api.php
+ * @uses event_api.php
+ * @uses file_api.php
+ * @uses helper_api.php
+ * @uses icon_api.php
+ * @uses lang_api.php
+ * @uses prepare_api.php
+ * @uses print_api.php
+ * @uses project_api.php
+ * @uses sponsorship_api.php
+ * @uses string_api.php
  */
+
+require_once( 'access_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'category_api.php' );
+require_once( 'columns_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'custom_field_api.php' );
+require_once( 'date_api.php' );
+require_once( 'error_api.php' );
+require_once( 'event_api.php' );
+require_once( 'file_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'icon_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'prepare_api.php' );
+require_once( 'print_api.php' );
+require_once( 'project_api.php' );
+require_once( 'sponsorship_api.php' );
+require_once( 'string_api.php' );
 
 /**
  * Filters an array of columns based on configuration options.  The filtering can remove

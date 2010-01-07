@@ -15,21 +15,50 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Custom Function API
+ *
  * @package CoreAPI
  * @subpackage CustomFunctionAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses bug_api.php
+ * @uses bugnote_api.php
+ * @uses category_api.php
+ * @uses columns_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses custom_field_api.php
+ * @uses helper_api.php
+ * @uses history_api.php
+ * @uses html_api.php
+ * @uses icon_api.php
+ * @uses lang_api.php
+ * @uses prepare_api.php
+ * @uses print_api.php
+ * @uses string_api.php
+ * @uses utility_api.php
+ * @uses version_api.php
  */
 
-/**
- * requires prepare_api
- */
-require_once( 'prepare_api.php' );
-/**
- * requires columns_api
- */
+require_once( 'bug_api.php' );
+require_once( 'bugnote_api.php' );
+require_once( 'category_api.php' );
 require_once( 'columns_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'custom_field_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'history_api.php' );
+require_once( 'html_api.php' );
+require_once( 'icon_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'prepare_api.php' );
+require_once( 'print_api.php' );
+require_once( 'string_api.php' );
+require_once( 'utility_api.php' );
+require_once( 'version_api.php' );
 
 # ## Custom Function API ###
 # Checks the provided bug and determines whether it should be included in the changelog

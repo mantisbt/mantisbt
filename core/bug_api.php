@@ -16,53 +16,61 @@
 
 /**
  * Bug API
+ *
+ * @package CoreAPI
+ * @subpackage BugAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- * @package CoreAPI
- * @subpackage BugAPI
+ *
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses bugnote_api.php
+ * @uses bug_revision_api.php
+ * @uses category_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses custom_field_api.php
+ * @uses database_api.php
+ * @uses date_api.php
+ * @uses email_api.php
+ * @uses error_api.php
+ * @uses event_api.php
+ * @uses file_api.php
+ * @uses helper_api.php
+ * @uses history_api.php
+ * @uses lang_api.php
+ * @uses relationship_api.php
+ * @uses sponsorship_api.php
+ * @uses tag_api.php
+ * @uses twitter_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
  */
 
-/**
- * requires history_api
- */
-require_once( 'history_api.php' );
-/**
- * requires email_api
- */
-require_once( 'email_api.php' );
-/**
- * requires bugnote_api
- */
+require_once( 'access_api.php' );
+require_once( 'authentication_api.php' );
 require_once( 'bugnote_api.php' );
-/**
- * requires file_api
- */
-require_once( 'file_api.php' );
-/**
- * requires string_api
- */
-require_once( 'string_api.php' );
-/**
- * requires sponsorship_api
- */
-require_once( 'sponsorship_api.php' );
-/**
- * requires twitter_api
- */
-require_once( 'twitter_api.php' );
-/**
- * requires tag_api
- */
-require_once( 'tag_api.php' );
-/**
- * requires relationship_api
- */
-require_once( 'relationship_api.php' );
-/**
- * requires bug_revision_api
- */
 require_once( 'bug_revision_api.php' );
+require_once( 'category_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'custom_field_api.php' );
+require_once( 'database_api.php' );
+require_once( 'date_api.php' );
+require_once( 'email_api.php' );
+require_once( 'error_api.php' );
+require_once( 'event_api.php' );
+require_once( 'file_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'history_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'relationship_api.php' );
+require_once( 'sponsorship_api.php' );
+require_once( 'tag_api.php' );
+require_once( 'twitter_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
 
 /**
  * Bug Data Structure Definition

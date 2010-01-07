@@ -15,7 +15,9 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * API for simplifying remote URL operations
+ * URL API
+ *
+ * Provides means for simplifying remote URL operations.
  *
  * @package CoreAPI
  * @subpackage URLAPI

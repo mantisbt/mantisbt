@@ -15,15 +15,30 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * this file handles preparing of strings like to be printed
- * or stored.  print_api.php will gradually be replaced by
- * think calls to echo the results of functions implemented here.
+ * Prepare API
+ *
+ * Handles preparation of strings prior to be printed or stored.
+ *
  * @package CoreAPI
  * @subpackage PrepareAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses string_api.php
+ * @uses user_api.php
+ * @uses version_api.php
  */
+
+require_once( 'access_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'string_api.php' );
+require_once( 'user_api.php' );
+require_once( 'version_api.php' );
 
 /**
  * return the mailto: href string link

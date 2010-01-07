@@ -15,17 +15,36 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Twitter API
+ *
  * @package CoreAPI
  * @subpackage TwitterAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses bug_api.php
+ * @uses category_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses database_api.php
+ * @uses lang_api.php
+ * @uses news_api.php
+ * @uses project_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
  */
 
-/**
- * requires config api
- */
+require_once( 'bug_api.php' );
+require_once( 'category_api.php' );
 require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'news_api.php' );
+require_once( 'project_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
 
 $g_twitter_enabled = null;
 

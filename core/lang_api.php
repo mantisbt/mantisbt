@@ -16,12 +16,27 @@
 
 /**
  * Language (Internationalization) API
+ *
  * @package CoreAPI
  * @subpackage LanguageAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses authentication_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses error_api.php
+ * @uses plugin_api.php
+ * @uses user_pref_api.php
  */
+
+require_once( 'authentication_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'error_api.php' );
+require_once( 'plugin_api.php' );
+require_once( 'user_pref_api.php' );
 
 # Cache of localization strings in the language specified by the last
 # lang_load call

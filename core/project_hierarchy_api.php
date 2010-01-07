@@ -17,12 +17,19 @@
 
 /**
  * Project Hierarchy API
+ *
  * @package CoreAPI
  * @subpackage ProjectHierarchyAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses constant_inc.php
+ * @uses database_api.php
  */
+
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
 
 $g_cache_project_hierarchy = null;
 $g_cache_project_inheritance = null;

@@ -16,17 +16,21 @@
 
 /**
  * Event API
- * Handles the event system.
- * @version $Id$
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
+ *
  * @package CoreAPI
  * @subpackage EventAPI
  * @author John Reese
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  *
+ * @uses constant_inc.php
  * @uses error_api.php
- * @uses pluging_api.php
+ * @uses plugin_api.php
  */
+
+require_once( 'constant_inc.php' );
+require_once( 'error_api.php' );
+require_once( 'plugin_api.php' );
 
 /**
  *

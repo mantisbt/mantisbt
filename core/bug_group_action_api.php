@@ -15,12 +15,30 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Bug Group Action API
+ *
+ * @package CoreAPI
+ * @subpackage BugGroupActionAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- *	@package CoreAPI
- *	@subpackage BugGroupActionAPI
+ *
+ * @uses bug_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses helper_api.php
+ * @uses html_api.php
+ * @uses lang_api.php
+ * @uses string_api.php
  */
+
+require_once( 'bug_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'helper_api.php' );
+require_once( 'html_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'string_api.php' );
 
 /**
  * Print the top part for the bug action group page.

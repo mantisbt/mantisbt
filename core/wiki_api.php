@@ -15,12 +15,24 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Wiki API
+ *
  * @package CoreAPI
  * @subpackage WikiAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses event_api.php
+ * @uses plugin_api.php
  */
+
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'event_api.php' );
+require_once( 'plugin_api.php' );
 
 /**
  * Returns whether wiki functionality is enabled

@@ -15,47 +15,44 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Access Api
+ * Access API
  *
+ * @package CoreAPI
+ * @subpackage AccessAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- * @package CoreAPI
- * @subpackage AccessAPI
  *
- * @uses config_api.php
- * @uses auth_api.php
+ * @uses authentication_api.php
  * @uses bug_api.php
  * @uses bugnote_api.php
- * @uses project_api.php
- * @uses helper_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses current_user_api.php
  * @uses database_api.php
+ * @uses error_api.php
+ * @uses helper_api.php
+ * @uses lang_api.php
+ * @uses print_api.php
+ * @uses project_api.php
+ * @uses string_api.php
+ * @uses user_api.php
  */
 
-/**
- * require constaint_inc.php for NOBODY etc
- */
-require_once( 'constant_inc.php' );
-/**
- * requires helper_api
- */
-require_once( 'helper_api.php' );
-/**
- * requires authentication_api
- */
 require_once( 'authentication_api.php' );
-/**
- * requires user_api
- */
-require_once( 'user_api.php' );
-/**
- * requires bug_api
- */
 require_once( 'bug_api.php' );
-/**
- * requires project_api
- */
+require_once( 'bugnote_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'current_user_api.php' );
+require_once( 'database_api.php' );
+require_once( 'error_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'print_api.php' );
 require_once( 'project_api.php' );
+require_once( 'string_api.php' );
+require_once( 'user_api.php' );
 
 /**
  *
