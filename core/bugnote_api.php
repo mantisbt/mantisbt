@@ -40,21 +40,21 @@
  * @uses utility_api.php
  */
 
-require_api( 'access_api.php' );
-require_api( 'authentication_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'bug_revision_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'database_api.php' );
-require_api( 'email_api.php' );
-require_api( 'error_api.php' );
-require_api( 'event_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'history_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'user_api.php' );
-require_api( 'utility_api.php' );
+require_once( 'access_api.php' );
+require_once( 'authentication_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'bug_revision_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
+require_once( 'email_api.php' );
+require_once( 'error_api.php' );
+require_once( 'event_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'history_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
 
 /**
  * Bugnote Data Structure Definition

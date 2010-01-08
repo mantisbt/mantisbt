@@ -48,29 +48,29 @@
  * @uses utility_api.php
  */
 
-require_api( 'access_api.php' );
-require_api( 'authentication_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'bugnote_api.php' );
-require_api( 'category_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'current_user_api.php' );
-require_api( 'custom_field_api.php' );
-require_api( 'database_api.php' );
-require_api( 'email_queue_api.php' );
-require_api( 'event_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'history_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'logging_api.php' );
-require_api( 'project_api.php' );
-require_api( 'relationship_api.php' );
-require_api( 'sponsorship_api.php' );
-require_api( 'string_api.php' );
-require_api( 'user_api.php' );
-require_api( 'user_pref_api.php' );
-require_api( 'utility_api.php' );
+require_once( 'access_api.php' );
+require_once( 'authentication_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'bugnote_api.php' );
+require_once( 'category_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'current_user_api.php' );
+require_once( 'custom_field_api.php' );
+require_once( 'database_api.php' );
+require_once( 'email_queue_api.php' );
+require_once( 'event_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'history_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'logging_api.php' );
+require_once( 'project_api.php' );
+require_once( 'relationship_api.php' );
+require_once( 'sponsorship_api.php' );
+require_once( 'string_api.php' );
+require_once( 'user_api.php' );
+require_once( 'user_pref_api.php' );
+require_once( 'utility_api.php' );
 
 /**
  * reusable object of class SMTP
@@ -165,7 +165,7 @@ function email_ensure_valid( $p_email ) {
  */
 function email_is_disposable( $p_email ) {
 	if( !class_exists( 'DisposableEmailChecker' ) ) {
-		require_lib( 'disposable' . DIRECTORY_SEPARATOR . 'disposable.php' );
+		require_once( BASE_PATH . DIRECTORY_SEPARATOR  . 'library' . DIRECTORY_SEPARATOR . 'disposable' . DIRECTORY_SEPARATOR . 'disposable.php' );
 	}
 
 	return DisposableEmailChecker::is_disposable_email( $p_email );
@@ -900,7 +900,7 @@ function email_send( $p_email_data ) {
 		if ( $t_mailer_method == PHPMAILER_METHOD_SMTP )
 			register_shutdown_function( 'email_smtp_close' );
 		if( !class_exists( 'PHPMailer' ) ) {
-			require_lib( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
+			require_once( BASE_PATH . DIRECTORY_SEPARATOR  . 'library' . DIRECTORY_SEPARATOR . 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
 		}
 		$mail = new PHPMailer(true);
 	} else {

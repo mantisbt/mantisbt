@@ -36,9 +36,9 @@
  * @uses error_api.php
  */
 
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'error_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'error_api.php' );
 
 /**
  * converts a 1 value to X

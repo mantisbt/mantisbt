@@ -31,12 +31,12 @@
  * @uses lang_api.php
  */
 
-require_api( 'compress_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'database_api.php' );
-require_api( 'html_api.php' );
-require_api( 'lang_api.php' );
+require_once( 'compress_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
+require_once( 'html_api.php' );
+require_once( 'lang_api.php' );
 
 # Error API
 # set up error_handler() as the new default error handling function

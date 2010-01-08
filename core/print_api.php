@@ -51,32 +51,32 @@
  * @uses version_api.php
  */
 
-require_api( 'access_api.php' );
-require_api( 'authentication_api.php' );
-require_api( 'category_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'current_user_api.php' );
-require_api( 'custom_field_api.php' );
-require_api( 'database_api.php' );
-require_api( 'email_api.php' );
-require_api( 'error_api.php' );
-require_api( 'file_api.php' );
-require_api( 'form_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'html_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'last_visited_api.php' );
-require_api( 'news_api.php' );
-require_api( 'prepare_api.php' );
-require_api( 'profile_api.php' );
-require_api( 'project_api.php' );
-require_api( 'project_hierarchy_api.php' );
-require_api( 'string_api.php' );
-require_api( 'tag_api.php' );
-require_api( 'user_api.php' );
-require_api( 'utility_api.php' );
-require_api( 'version_api.php' );
+require_once( 'access_api.php' );
+require_once( 'authentication_api.php' );
+require_once( 'category_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'current_user_api.php' );
+require_once( 'custom_field_api.php' );
+require_once( 'database_api.php' );
+require_once( 'email_api.php' );
+require_once( 'error_api.php' );
+require_once( 'file_api.php' );
+require_once( 'form_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'html_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'last_visited_api.php' );
+require_once( 'news_api.php' );
+require_once( 'prepare_api.php' );
+require_once( 'profile_api.php' );
+require_once( 'project_api.php' );
+require_once( 'project_hierarchy_api.php' );
+require_once( 'string_api.php' );
+require_once( 'tag_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
+require_once( 'version_api.php' );
 
 # --------------------
 # Print the headers to cause the page to redirect to $p_url

@@ -22,41 +22,12 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- *
- * @uses access_api.php
- * @uses authentication_api.php
- * @uses bug_api.php
- * @uses bugnote_api.php
- * @uses collapse_api.php
- * @uses config_api.php
- * @uses constant_inc.php
- * @uses current_user_api.php
- * @uses database_api.php
- * @uses event_api.php
- * @uses helper_api.php
- * @uses lang_api.php
- * @uses prepare_api.php
- * @uses print_api.php
- * @uses string_api.php
- * @uses user_api.php
  */
 
-require_api( 'access_api.php' );
-require_api( 'authentication_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'bugnote_api.php' );
-require_api( 'collapse_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'current_user_api.php' );
-require_api( 'database_api.php' );
-require_api( 'event_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'prepare_api.php' );
-require_api( 'print_api.php' );
-require_api( 'string_api.php' );
-require_api( 'user_api.php' );
+/**
+ * Requires bugnote API
+ */
+require_once( 'current_user_api.php' );
 
 # grab the user id currently logged in
 $t_user_id = auth_get_current_user_id();

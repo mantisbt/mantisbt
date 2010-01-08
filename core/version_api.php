@@ -34,14 +34,14 @@
  * @uses project_hierarchy_api.php
  */
 
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'database_api.php' );
-require_api( 'date_api.php' );
-require_api( 'error_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'project_api.php' );
-require_api( 'project_hierarchy_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
+require_once( 'date_api.php' );
+require_once( 'error_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'project_api.php' );
+require_once( 'project_hierarchy_api.php' );
 
 /**
  * Version Data Structure Definition

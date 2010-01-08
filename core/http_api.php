@@ -27,7 +27,7 @@
  * @uses config_api.php
  */
 
-require_api( 'config_api.php' );
+require_once( 'config_api.php' );
 
 /**
  * Check to see if the client is using Microsoft Internet Explorer so we can

@@ -33,14 +33,14 @@
  * @uses history_api.php
  */
 
-require_api( 'authentication_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'database_api.php' );
-require_api( 'email_api.php' );
-require_api( 'error_api.php' );
-require_api( 'history_api.php' );
+require_once( 'authentication_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
+require_once( 'email_api.php' );
+require_once( 'error_api.php' );
+require_once( 'history_api.php' );
 
 /**
  * Sponsorship Data Structure Definition

@@ -29,10 +29,10 @@
  * @uses utility_api.php
  */
 
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'helper_api.php' );
-require_api( 'utility_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'helper_api.php' );
+require_once( 'utility_api.php' );
 
 /**
  * gets the status icon

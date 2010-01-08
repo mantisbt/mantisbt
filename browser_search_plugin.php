@@ -19,15 +19,11 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- *
- * @uses core.php
- * @uses config_api.php
- * @uses gpc_api.php
  */
-
+/**
+ * MantisBT Core API's
+ */
 require_once( 'core.php' );
-require_api( 'config_api.php' );
-require_api( 'gpc_api.php' );
 
 $f_type = gpc_get_string( 'type', 'text' );
 
@@ -36,7 +32,7 @@ header( 'Content-Type: application/opensearchdescription+xml' );
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                        xmlns:moz="http://www.mozilla.org/2006/browser/search/">
 <?php
-$t_path = config_get_global( 'path' );
+$t_path = config_get( 'path' );
 
 if ( utf8_strtolower( $f_type ) == 'id' ) {
 	echo '<ShortName>MantisBT IssueId</ShortName>';

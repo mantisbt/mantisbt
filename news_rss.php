@@ -14,40 +14,22 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * @package MantisBT
- * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
- *
- * @uses core.php
- * @uses access_api.php
- * @uses config_api.php
- * @uses constant_inc.php
- * @uses gpc_api.php
- * @uses lang_api.php
- * @uses news_api.php
- * @uses project_api.php
- * @uses rss_api.php
- * @uses string_api.php
- * @uses user_api.php
- * @uses utility_api.php
- * @uses rssbuilder/class.RSSBuilder.inc.php
- */
+	/**
+	 * @package MantisBT
+	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+	 * @link http://www.mantisbt.org
+	 */
+	 /**
+	  * MantisBT Core API's
+	  */
+	require_once( 'core.php' );
 
-require_once( 'core.php' );
-require_api( 'access_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'gpc_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'news_api.php' );
-require_api( 'project_api.php' );
-require_api( 'rss_api.php' );
-require_api( 'string_api.php' );
-require_api( 'user_api.php' );
-require_api( 'utility_api.php' );
-require_lib( 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.RSSBuilder.inc.php' );
+	require_once( 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.RSSBuilder.inc.php' );
+	require_once( 'news_api.php' );
+	require_once( 'project_api.php' );
+	require_once( 'print_api.php' );
+	require_once( 'rss_api.php' );
 
 	$f_username = gpc_get_string( 'username', null );
 	$f_key = gpc_get_string( 'key', null );

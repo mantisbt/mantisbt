@@ -30,11 +30,11 @@
  * @uses utility_api.php
  */
 
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'logging_api.php' );
-require_api( 'user_api.php' );
-require_api( 'utility_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'logging_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
 
 /**
  * Connect and bind to the LDAP directory

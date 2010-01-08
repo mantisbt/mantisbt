@@ -33,14 +33,14 @@
  * @uses projax_api.php
  */
 
-require_api( 'access_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'gpc_api.php' );
-require_api( 'print_api.php' );
-require_api( 'profile_api.php' );
-require_api( 'projax_api.php' );
+require_once( 'access_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'gpc_api.php' );
+require_once( 'print_api.php' );
+require_once( 'profile_api.php' );
+require_once( 'projax_api.php' );
 
 /**
  *

@@ -37,15 +37,15 @@
  * @uses lang_api.php
  */
 
-require_api( 'access_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'database_api.php' );
-require_api( 'error_api.php' );
-require_api( 'event_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'history_api.php' );
-require_api( 'lang_api.php' );
+require_once( 'access_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
+require_once( 'error_api.php' );
+require_once( 'event_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'history_api.php' );
+require_once( 'lang_api.php' );
 
 # Cache variables #####
 
@@ -618,7 +618,7 @@ function plugin_upgrade( $p_plugin ) {
 		return;
 	}
 
-	require_api( 'install_helper_functions_api.php' );
+	require_once( 'install_helper_functions_api.php' );
 
 	plugin_push_current( $p_plugin->basename );
 

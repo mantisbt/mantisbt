@@ -28,8 +28,8 @@
  * @uses config_api.php
  */
 
-require_lib( 'projax' . DIRECTORY_SEPARATOR . 'projax.php' );
-require_api( 'config_api.php' );
+require_once( 'projax' . DIRECTORY_SEPARATOR . 'projax.php' );
+require_once( 'config_api.php' );
 
 # enables the projax library for this page.
 $g_enable_projax = true;

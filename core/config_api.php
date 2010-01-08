@@ -31,12 +31,12 @@
  * @uses utility_api.php
  */
 
-require_api( 'authentication_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'database_api.php' );
-require_api( 'error_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'utility_api.php' );
+require_once( 'authentication_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
+require_once( 'error_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'utility_api.php' );
 
 # cache for config variables
 $g_cache_config = array();

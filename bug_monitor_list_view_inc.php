@@ -22,27 +22,7 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- *
- * @uses access_api.php
- * @uses collapse_api.php
- * @uses config_api.php
- * @uses database_api.php
- * @uses form_api.php
- * @uses helper_api.php
- * @uses lang_api.php
- * @uses print_api.php
- * @uses user_api.php
  */
-
-require_api( 'access_api.php' );
-require_api( 'collapse_api.php' );
-require_api( 'config_api.php' );
-require_api( 'database_api.php' );
-require_api( 'form_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'print_api.php' );
-require_api( 'user_api.php' );
 
 if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id ) ) {
 	$c_bug_id = db_prepare_int( $f_bug_id );

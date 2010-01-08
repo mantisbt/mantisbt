@@ -26,8 +26,8 @@
  * @uses database_api.php
  */
 
-require_api( 'constant_inc.php' );
-require_api( 'database_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
 
 /**
  * Add a new revision to a bug history.

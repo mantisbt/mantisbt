@@ -30,11 +30,11 @@
  * @uses lang_api.php
  */
 
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'helper_api.php' );
-require_api( 'html_api.php' );
-require_api( 'lang_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'helper_api.php' );
+require_once( 'html_api.php' );
+require_once( 'lang_api.php' );
 
 /**
  * Keeps track of whether the external files required for jscalendar to work

@@ -14,38 +14,37 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * @package MantisBT
- * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
- *
- * @uses category_api.php
- * @uses columns_api.php
- * @uses config_api.php
- * @uses constant_inc.php
- * @uses current_user_api.php
- * @uses event_api.php
- * @uses filter_api.php
- * @uses gpc_api.php
- * @uses helper_api.php
- * @uses html_api.php
- * @uses lang_api.php
- * @uses print_api.php
- */
+	/**
+	 * @package MantisBT
+	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+	 * @link http://www.mantisbt.org
+	 */
 
-require_api( 'category_api.php' );
-require_api( 'columns_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'current_user_api.php' );
-require_api( 'event_api.php' );
-require_api( 'filter_api.php' );
-require_api( 'gpc_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'html_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'print_api.php' );
+	/**
+	 * requires current_user_api
+	 */
+	require_once( 'current_user_api.php' );
+	/**
+	 * requires bug_api
+	 */
+	require_once( 'bug_api.php' );
+	/**
+	 * requires string_api
+	 */
+	require_once( 'string_api.php' );
+	/**
+	 * requires date_api
+	 */
+	require_once( 'date_api.php' );
+	/**
+	 * requires icon_api
+	 */
+	require_once( 'icon_api.php' );
+	/**
+	 * requires columns_api
+	 */
+	require_once( 'columns_api.php' );
 
 	$t_filter = current_user_get_bug_filter();
 

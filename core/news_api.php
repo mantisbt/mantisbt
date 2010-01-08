@@ -36,16 +36,16 @@
  * @uses utility_api.php
  */
 
-require_api( 'access_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'current_user_api.php' );
-require_api( 'database_api.php' );
-require_api( 'error_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'twitter_api.php' );
-require_api( 'utility_api.php' );
+require_once( 'access_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'current_user_api.php' );
+require_once( 'database_api.php' );
+require_once( 'error_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'twitter_api.php' );
+require_once( 'utility_api.php' );
 
 # --------------------
 # Add a news item

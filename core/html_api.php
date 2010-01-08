@@ -79,27 +79,27 @@
  * @uses utility_api.php
  */
 
-require_api( 'access_api.php' );
-require_api( 'authentication_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'current_user_api.php' );
-require_api( 'database_api.php' );
-require_api( 'error_api.php' );
-require_api( 'event_api.php' );
-require_api( 'file_api.php' );
-require_api( 'form_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'news_api.php' );
-require_api( 'php_api.php' );
-require_api( 'print_api.php' );
-require_api( 'project_api.php' );
-require_api( 'rss_api.php' );
-require_api( 'string_api.php' );
-require_api( 'user_api.php' );
-require_api( 'utility_api.php' );
+require_once( 'access_api.php' );
+require_once( 'authentication_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'current_user_api.php' );
+require_once( 'database_api.php' );
+require_once( 'error_api.php' );
+require_once( 'event_api.php' );
+require_once( 'file_api.php' );
+require_once( 'form_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'news_api.php' );
+require_once( 'php_api.php' );
+require_once( 'print_api.php' );
+require_once( 'project_api.php' );
+require_once( 'rss_api.php' );
+require_once( 'string_api.php' );
+require_once( 'user_api.php' );
+require_once( 'utility_api.php' );
 
 $g_rss_feed_url = null;
 

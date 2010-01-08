@@ -14,38 +14,23 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * @package MantisBT
- * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
- *
- * @uses core.php
- * @uses authentication_api.php
- * @uses compress_api.php
- * @uses config_api.php
- * @uses constant_inc.php
- * @uses current_user_api.php
- * @uses custom_field_api.php
- * @uses error_api.php
- * @uses filter_api.php
- * @uses filter_constants_inc.php
- * @uses gpc_api.php
- * @uses helper_api.php
- */
+	/**
+	 * @package MantisBT
+	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+	 * @link http://www.mantisbt.org
+	 */
+	 /**
+	  * MantisBT Core API's
+	  */
+	require_once( 'core.php' );
 
-require_once( 'core.php' );
-require_api( 'authentication_api.php' );
-require_api( 'compress_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'current_user_api.php' );
-require_api( 'custom_field_api.php' );
-require_api( 'error_api.php' );
-require_api( 'filter_api.php' );
-require_api( 'filter_constants_inc.php' );
-require_api( 'gpc_api.php' );
-require_api( 'helper_api.php' );
+	require_once( 'compress_api.php' );
+	require_once( 'filter_api.php' );
+	require_once( 'current_user_api.php' );
+	require_once( 'bug_api.php' );
+	require_once( 'string_api.php' );
+	require_once( 'date_api.php' );
 
 	auth_ensure_user_authenticated();
 

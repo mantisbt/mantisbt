@@ -31,9 +31,9 @@
  * @uses error_api.php
  */
 
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'error_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'error_api.php' );
 
 /**
  * Determines (once-off) whether the client is accessing this script via a

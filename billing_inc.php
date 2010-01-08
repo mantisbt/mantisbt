@@ -22,29 +22,12 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- *
- * @uses bugnote_api.php
- * @uses collapse_api.php
- * @uses config_api.php
- * @uses database_api.php
- * @uses filter_api.php
- * @uses gpc_api.php
- * @uses helper_api.php
- * @uses lang_api.php
- * @uses string_api.php
- * @uses utility_api.php
  */
 
-require_api( 'bugnote_api.php' );
-require_api( 'collapse_api.php' );
-require_api( 'config_api.php' );
-require_api( 'database_api.php' );
-require_api( 'filter_api.php' );
-require_api( 'gpc_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'string_api.php' );
-require_api( 'utility_api.php' );
+/**
+ * Requires bugnote API
+ */
+require_once( 'bugnote_api.php' );
 
 if ( !config_get('time_tracking_enabled') )
 	return;

@@ -26,7 +26,7 @@
  * @uses lang_api.php
  */
 
-require_api( 'lang_api.php' );
+require_once( 'lang_api.php' );
 
 /**
  * @todo function documentation

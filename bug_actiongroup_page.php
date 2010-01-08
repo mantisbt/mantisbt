@@ -14,48 +14,20 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * This page allows actions to be performed on an array of bugs
- *
- * @package MantisBT
- * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
- *
- * @uses core.php
- * @uses access_api.php
- * @uses authentication_api.php
- * @uses bug_api.php
- * @uses bug_group_action_api.php
- * @uses config_api.php
- * @uses constant_inc.php
- * @uses custom_field_api.php
- * @uses form_api.php
- * @uses gpc_api.php
- * @uses helper_api.php
- * @uses lang_api.php
- * @uses print_api.php
- * @uses string_api.php
- * @uses utility_api.php
- * @uses version_api.php
- */
+	/**
+	 * This page allows actions to be performed on an array of bugs
+	 *
+	 * @package MantisBT
+	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+	 * @link http://www.mantisbt.org
+	 */
+	 /**
+	  * MantisBT Core API's
+	  */
+	require_once( 'core.php' );
 
-require_once( 'core.php' );
-require_api( 'access_api.php' );
-require_api( 'authentication_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'bug_group_action_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'custom_field_api.php' );
-require_api( 'form_api.php' );
-require_api( 'gpc_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'print_api.php' );
-require_api( 'string_api.php' );
-require_api( 'utility_api.php' );
-require_api( 'version_api.php' );
+	require_once( 'bug_group_action_api.php' );
 
 	auth_ensure_user_authenticated();
 

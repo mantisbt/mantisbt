@@ -36,17 +36,17 @@
  * @uses user_api.php
  */
 
-require_api( 'authentication_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'category_api.php' );
-require_api( 'columns_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'custom_field_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'project_api.php' );
-require_api( 'user_api.php' );
+require_once( 'authentication_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'category_api.php' );
+require_once( 'columns_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'custom_field_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'project_api.php' );
+require_once( 'user_api.php' );
 
 /**
  * A method that returns the header for an Excel Xml file.

@@ -19,21 +19,7 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- *
- * @uses access_api.php
- * @uses bug_api.php
- * @uses config_api.php
- * @uses gpc_api.php
- * @uses lang_api.php
- * @uses print_api.php
  */
-
-require_api( 'access_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'config_api.php' );
-require_api( 'gpc_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'print_api.php' );
 
 /**
  * Prints the title for the custom action page.

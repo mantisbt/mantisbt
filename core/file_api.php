@@ -36,17 +36,17 @@
  * @uses utility_api.php
  */
 
-require_api( 'access_api.php' );
-require_api( 'authentication_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'database_api.php' );
-require_api( 'gpc_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'history_api.php' );
-require_api( 'project_api.php' );
-require_api( 'utility_api.php' );
+require_once( 'access_api.php' );
+require_once( 'authentication_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
+require_once( 'gpc_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'history_api.php' );
+require_once( 'project_api.php' );
+require_once( 'utility_api.php' );
 
 $g_cache_file_count = array();
 

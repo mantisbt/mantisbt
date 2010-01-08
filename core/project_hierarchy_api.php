@@ -28,8 +28,8 @@
  * @uses database_api.php
  */
 
-require_api( 'constant_inc.php' );
-require_api( 'database_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'database_api.php' );
 
 $g_cache_project_hierarchy = null;
 $g_cache_project_inheritance = null;

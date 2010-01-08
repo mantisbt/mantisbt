@@ -31,12 +31,12 @@
  * @uses tokens_api.php
  */
 
-require_api( 'bug_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'current_user_api.php' );
-require_api( 'database_api.php' );
-require_api( 'tokens_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'current_user_api.php' );
+require_once( 'database_api.php' );
+require_once( 'tokens_api.php' );
 
 /**
  * Determine if last visited feature is enabled

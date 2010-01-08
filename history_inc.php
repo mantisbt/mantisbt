@@ -14,33 +14,17 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * This include file prints out the bug history
- * $f_bug_id must already be defined
- *
- * @package MantisBT
- * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
- *
- * @uses access_api.php
- * @uses collapse_api.php
- * @uses config_api.php
- * @uses helper_api.php
- * @uses history_api.php
- * @uses lang_api.php
- * @uses print_api.php
- * @uses string_api.php
- */
+	/**
+	 * This include file prints out the bug history
+	 * $f_bug_id must already be defined
+	 *
+	 * @package MantisBT
+	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+	 * @link http://www.mantisbt.org
+	 */
 
-require_api( 'access_api.php' );
-require_api( 'collapse_api.php' );
-require_api( 'config_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'history_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'print_api.php' );
-require_api( 'string_api.php' );
+	require_once( 'history_api.php' );
 
 	$t_access_level_needed = config_get( 'view_history_threshold' );
 	if ( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {

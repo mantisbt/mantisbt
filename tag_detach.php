@@ -14,25 +14,20 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * @package MantisBT
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
- *
- * @uses core.php
- * @uses event_api.php
- * @uses form_api.php
- * @uses gpc_api.php
- * @uses print_api.php
- * @uses tag_api.php
- */
+	/**
+	 * @package MantisBT
+	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+	 * @link http://www.mantisbt.org
+	 */
+	 /**
+	  * MantisBT Core API's
+	  */
+	require_once( 'core.php' );
 
-require_once( 'core.php' );
-require_api( 'event_api.php' );
-require_api( 'form_api.php' );
-require_api( 'gpc_api.php' );
-require_api( 'print_api.php' );
-require_api( 'tag_api.php' );
+	/**
+	 * requires tag_api
+	 */
+	require_once( 'tag_api.php' );
 
 	form_security_validate( 'tag_detach' );
 

@@ -14,41 +14,17 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * @package MantisBT
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
- *
- * @uses core.php
- * @uses access_api.php
- * @uses authentication_api.php
- * @uses config_api.php
- * @uses constant_inc.php
- * @uses error_api.php
- * @uses gpc_api.php
- * @uses helper_api.php
- * @uses html_api.php
- * @uses lang_api.php
- * @uses print_api.php
- * @uses string_api.php
- * @uses user_api.php
- * @uses utility_api.php
- */
+	/**
+	 * @package MantisBT
+	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+	 * @link http://www.mantisbt.org
+	 */
+	 /**
+	  * MantisBT Core API's
+	  */
+	require_once( 'core.php' );
 
-require_once( 'core.php' );
-require_api( 'access_api.php' );
-require_api( 'authentication_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'error_api.php' );
-require_api( 'gpc_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'html_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'print_api.php' );
-require_api( 'string_api.php' );
-require_api( 'user_api.php' );
-require_api( 'utility_api.php' );
+	require_once( 'current_user_api.php' );
 
 	auth_ensure_user_authenticated();
 

@@ -42,23 +42,23 @@
  * @uses version_api.php
  */
 
-require_api( 'bug_api.php' );
-require_api( 'bugnote_api.php' );
-require_api( 'category_api.php' );
-require_api( 'columns_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'custom_field_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'history_api.php' );
-require_api( 'html_api.php' );
-require_api( 'icon_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'prepare_api.php' );
-require_api( 'print_api.php' );
-require_api( 'string_api.php' );
-require_api( 'utility_api.php' );
-require_api( 'version_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'bugnote_api.php' );
+require_once( 'category_api.php' );
+require_once( 'columns_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'custom_field_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'history_api.php' );
+require_once( 'html_api.php' );
+require_once( 'icon_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'prepare_api.php' );
+require_once( 'print_api.php' );
+require_once( 'string_api.php' );
+require_once( 'utility_api.php' );
+require_once( 'version_api.php' );
 
 # ## Custom Function API ###
 # Checks the provided bug and determines whether it should be included in the changelog

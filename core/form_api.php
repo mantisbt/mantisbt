@@ -34,11 +34,11 @@
  * @uses session_api.php
  */
 
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'gpc_api.php' );
-require_api( 'php_api.php' );
-require_api( 'session_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'gpc_api.php' );
+require_once( 'php_api.php' );
+require_once( 'session_api.php' );
 
 /**
  * Generate a random security token, prefixed by date, store it in the

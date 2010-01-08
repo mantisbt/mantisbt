@@ -43,25 +43,25 @@
  * @uses string_api.php
  */
 
-require_api( 'access_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'category_api.php' );
-require_api( 'columns_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'custom_field_api.php' );
-require_api( 'date_api.php' );
-require_api( 'error_api.php' );
-require_api( 'event_api.php' );
-require_api( 'file_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'icon_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'prepare_api.php' );
-require_api( 'print_api.php' );
-require_api( 'project_api.php' );
-require_api( 'sponsorship_api.php' );
-require_api( 'string_api.php' );
+require_once( 'access_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'category_api.php' );
+require_once( 'columns_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'custom_field_api.php' );
+require_once( 'date_api.php' );
+require_once( 'error_api.php' );
+require_once( 'event_api.php' );
+require_once( 'file_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'icon_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'prepare_api.php' );
+require_once( 'print_api.php' );
+require_once( 'project_api.php' );
+require_once( 'sponsorship_api.php' );
+require_once( 'string_api.php' );
 
 /**
  * Filters an array of columns based on configuration options.  The filtering can remove

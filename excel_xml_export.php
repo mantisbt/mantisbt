@@ -14,40 +14,24 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Excel (2003 SP2 and above) export page
- *
- * @package MantisBT
- * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
- *
- * @uses core.php
- * @uses authentication_api.php
- * @uses bug_api.php
- * @uses columns_api.php
- * @uses config_api.php
- * @uses excel_api.php
- * @uses file_api.php
- * @uses filter_api.php
- * @uses gpc_api.php
- * @uses helper_api.php
- * @uses print_api.php
- * @uses utility_api.php
- */
+	/**
+	 * Excel (2003 SP2 and above) export page
+	 *
+	 * @package MantisBT
+	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+	 * @link http://www.mantisbt.org
+	 */
+	 /**
+	  * MantisBT Core API's
+	  */
+	require_once( 'core.php' );
 
-require_once( 'core.php' );
-require_api( 'authentication_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'columns_api.php' );
-require_api( 'config_api.php' );
-require_api( 'excel_api.php' );
-require_api( 'file_api.php' );
-require_api( 'filter_api.php' );
-require_api( 'gpc_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'print_api.php' );
-require_api( 'utility_api.php' );
+	require_once( 'current_user_api.php' );
+	require_once( 'bug_api.php' );
+	require_once( 'string_api.php' );
+	require_once( 'columns_api.php' );
+	require_once( 'excel_api.php' );
 
 	require( 'print_all_bug_options_inc.php' );
 

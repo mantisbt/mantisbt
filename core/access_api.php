@@ -39,20 +39,20 @@
  * @uses user_api.php
  */
 
-require_api( 'authentication_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'bugnote_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'current_user_api.php' );
-require_api( 'database_api.php' );
-require_api( 'error_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'print_api.php' );
-require_api( 'project_api.php' );
-require_api( 'string_api.php' );
-require_api( 'user_api.php' );
+require_once( 'authentication_api.php' );
+require_once( 'bug_api.php' );
+require_once( 'bugnote_api.php' );
+require_once( 'config_api.php' );
+require_once( 'constant_inc.php' );
+require_once( 'current_user_api.php' );
+require_once( 'database_api.php' );
+require_once( 'error_api.php' );
+require_once( 'helper_api.php' );
+require_once( 'lang_api.php' );
+require_once( 'print_api.php' );
+require_once( 'project_api.php' );
+require_once( 'string_api.php' );
+require_once( 'user_api.php' );
 
 /**
  *

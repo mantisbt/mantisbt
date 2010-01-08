@@ -19,39 +19,28 @@
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  * @package MantisBT
- *
- * @uses access_api.php
- * @uses bug_api.php
- * @uses category_api.php
- * @uses config_api.php
- * @uses constant_inc.php
- * @uses current_user_api.php
- * @uses file_api.php
- * @uses filter_api.php
- * @uses filter_constants_inc.php
- * @uses helper_api.php
- * @uses icon_api.php
- * @uses lang_api.php
- * @uses print_api.php
- * @uses project_api.php
- * @uses string_api.php
  */
 
-require_api( 'access_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'category_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'current_user_api.php' );
-require_api( 'file_api.php' );
-require_api( 'filter_api.php' );
-require_api( 'filter_constants_inc.php' );
-require_api( 'helper_api.php' );
-require_api( 'icon_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'print_api.php' );
-require_api( 'project_api.php' );
-require_api( 'string_api.php' );
+/**
+ * requires current_user_api
+ */
+require_once( 'current_user_api.php' );
+/**
+ * requires bug_api
+ */
+ require_once( 'bug_api.php' );
+/**
+ * requires string_api
+ */
+require_once( 'string_api.php' );
+/**
+ * requires date_api
+ */
+require_once( 'date_api.php' );
+/**
+ * requires icon_api
+ */
+require_once( 'icon_api.php' );
 
 $t_filter = current_user_get_bug_filter();
 

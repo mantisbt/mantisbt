@@ -19,13 +19,12 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- *
- * @uses core.php
- * @uses gpc_api.php
  */
 
+/**
+ * MantisBT Core API's
+ */
 require_once( 'core.php' );
-require_api( 'gpc_api.php' );
 
 // Copy 'bug_id' parameter into 'id' so it is found by the view page.
 $_GET['id'] = gpc_get_int( 'bug_id' );
