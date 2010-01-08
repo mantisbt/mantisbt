@@ -110,7 +110,7 @@
 		$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';
 		echo $t_href;
 		print_file_icon( $v_filename );
-		echo '</a>&nbsp;' . $t_href . $v_title . '</a> ('.$v_filesize.' bytes)';
+		echo '</a>&nbsp;' . $t_href . $v_title . '</a> (' . $v_filesize . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
 ?>
 	<br />
 	<span class="small">
