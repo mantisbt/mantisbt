@@ -1,5 +1,5 @@
 <?php
-# MantisBT - a php based bugtracking system
+# MantisBT - A PHP based bugtracking system
 
 # Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.
 

@@ -1,5 +1,5 @@
 <?php
-# MantisBT - a php based bugtracking system
+# MantisBT - A PHP based bugtracking system
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
