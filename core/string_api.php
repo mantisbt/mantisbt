@@ -830,8 +830,14 @@ function string_normalize( $p_string ) {
  */
 function string_get_field_name( $p_string ) {
 	$t_map = array(
-		'last_updated' => 'last_update',
+		'attachment_count' => 'attachments',
+		'category_id' => 'category',
+		'handler_id' => 'assigned_to',
 		'id' => 'email_bug',
+		'last_updated' => 'updated',
+		'project_id' => 'email_project',
+		'reporter_id' => 'reporter',
+		'view_state' => 'view_status',
 	);
 
 	$t_string = $p_string;
