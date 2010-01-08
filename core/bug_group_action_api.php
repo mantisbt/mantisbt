@@ -32,13 +32,13 @@
  * @uses string_api.php
  */
 
-require_once( 'bug_api.php' );
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'helper_api.php' );
-require_once( 'html_api.php' );
-require_once( 'lang_api.php' );
-require_once( 'string_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'helper_api.php' );
+require_api( 'html_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'string_api.php' );
 
 /**
  * Print the top part for the bug action group page.

@@ -14,20 +14,24 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * This page allows the user to set the fields of the bugs he wants to print
-	 * Update is POSTed to acount_prefs_update.php
-	 * Reset is POSTed to acount_prefs_reset.php
-	 *
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
-	 /**
-	  * MantisBT Core API's
-	  */
-	require_once( 'core.php' );
+/**
+ * This page allows the user to set the fields of the bugs he wants to print
+ * Update is POSTed to acount_prefs_update.php
+ * Reset is POSTed to acount_prefs_reset.php
+ *
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses core.php
+ * @uses authentication_api.php
+ * @uses html_api.php
+ */
+
+require_once( 'core.php' );
+require_api( 'authentication_api.php' );
+require_api( 'html_api.php' );
 
 	require( 'print_all_bug_options_inc.php' );
 

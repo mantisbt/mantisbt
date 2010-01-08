@@ -16,13 +16,42 @@
 
 /**
  * @package MantisBT
- * @version $Id$
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses core.php
+ * @uses access_api.php
+ * @uses bug_api.php
+ * @uses bugnote_api.php
+ * @uses bug_revision_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses form_api.php
+ * @uses gpc_api.php
+ * @uses helper_api.php
+ * @uses html_api.php
+ * @uses lang_api.php
+ * @uses print_api.php
+ * @uses string_api.php
+ * @uses user_api.php
  */
 
 require_once( 'core.php' );
+require_api( 'access_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'bugnote_api.php' );
+require_api( 'bug_revision_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'form_api.php' );
+require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'html_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'print_api.php' );
+require_api( 'string_api.php' );
+require_api( 'user_api.php' );
 
 $f_bug_id = gpc_get_int( 'bug_id', 0 );
 $f_bugnote_id = gpc_get_int( 'bugnote_id', 0 );

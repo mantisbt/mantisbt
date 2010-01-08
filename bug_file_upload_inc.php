@@ -14,16 +14,29 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * This include file prints out the bug file upload form
-	 * It POSTs to bug_file_add.php
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
+/**
+ * This include file prints out the bug file upload form
+ * It POSTs to bug_file_add.php
+ *
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses collapse_api.php
+ * @uses config_api.php
+ * @uses file_api.php
+ * @uses form_api.php
+ * @uses lang_api.php
+ * @uses utility_api.php
+ */
 
-	require_once( 'file_api.php' );
+require_api( 'collapse_api.php' );
+require_api( 'config_api.php' );
+require_api( 'file_api.php' );
+require_api( 'form_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'utility_api.php' );
 
 	# check if we can allow the upload... bail out if we can't
 	if ( !file_allow_bug_upload( $f_bug_id ) ) {

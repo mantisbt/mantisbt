@@ -38,19 +38,19 @@
  * @uses utility_api.php
  */
 
-require_once( 'access_api.php' );
-require_once( 'authentication_api.php' );
-require_once( 'bug_api.php' );
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'current_user_api.php' );
-require_once( 'database_api.php' );
-require_once( 'filter_constants_inc.php' );
-require_once( 'helper_api.php' );
-require_once( 'project_api.php' );
-require_once( 'string_api.php' );
-require_once( 'user_api.php' );
-require_once( 'utility_api.php' );
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'current_user_api.php' );
+require_api( 'database_api.php' );
+require_api( 'filter_constants_inc.php' );
+require_api( 'helper_api.php' );
+require_api( 'project_api.php' );
+require_api( 'string_api.php' );
+require_api( 'user_api.php' );
+require_api( 'utility_api.php' );
 
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 	printf( '<tr %s>', helper_alternate_class() );

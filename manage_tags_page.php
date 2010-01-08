@@ -18,19 +18,35 @@
  * @package MantisBT
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses core.php
+ * @uses access_api.php
+ * @uses compress_api.php
+ * @uses config_api.php
+ * @uses database_api.php
+ * @uses form_api.php
+ * @uses gpc_api.php
+ * @uses helper_api.php
+ * @uses html_api.php
+ * @uses lang_api.php
+ * @uses print_api.php
+ * @uses string_api.php
+ * @uses user_api.php
  */
- /**
-  * MantisBT Core API's
-  */
 
 require_once( 'core.php' );
-
-/**
- * requires tag_api
- */
-require_once( 'tag_api.php' );
-require_once( 'user_pref_api.php' );
-require_once( 'form_api.php' );
+require_api( 'access_api.php' );
+require_api( 'compress_api.php' );
+require_api( 'config_api.php' );
+require_api( 'database_api.php' );
+require_api( 'form_api.php' );
+require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'html_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'print_api.php' );
+require_api( 'string_api.php' );
+require_api( 'user_api.php' );
 
 access_ensure_global_level( config_get( 'tag_view_threshold' ) );
 

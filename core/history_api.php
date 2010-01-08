@@ -42,23 +42,23 @@
  * @uses utility_api.php
  */
 
-require_once( 'access_api.php' );
-require_once( 'authentication_api.php' );
-require_once( 'bug_api.php' );
-require_once( 'bugnote_api.php' );
-require_once( 'columns_api.php' );
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'custom_field_api.php' );
-require_once( 'database_api.php' );
-require_once( 'gpc_api.php' );
-require_once( 'helper_api.php' );
-require_once( 'lang_api.php' );
-require_once( 'project_api.php' );
-require_once( 'relationship_api.php' );
-require_once( 'sponsorship_api.php' );
-require_once( 'user_api.php' );
-require_once( 'utility_api.php' );
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'bugnote_api.php' );
+require_api( 'columns_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'custom_field_api.php' );
+require_api( 'database_api.php' );
+require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'project_api.php' );
+require_api( 'relationship_api.php' );
+require_api( 'sponsorship_api.php' );
+require_api( 'user_api.php' );
+require_api( 'utility_api.php' );
 
 /**
  * log the changes (old / new value are supplied to reduce db access)

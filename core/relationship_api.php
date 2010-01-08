@@ -81,21 +81,21 @@
  * @uses utility_api.php
  */
 
-require_once( 'access_api.php' );
-require_once( 'bug_api.php' );
-require_once( 'collapse_api.php' );
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'current_user_api.php' );
-require_once( 'database_api.php' );
-require_once( 'form_api.php' );
-require_once( 'helper_api.php' );
-require_once( 'lang_api.php' );
-require_once( 'prepare_api.php' );
-require_once( 'print_api.php' );
-require_once( 'project_api.php' );
-require_once( 'string_api.php' );
-require_once( 'utility_api.php' );
+require_api( 'access_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'collapse_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'current_user_api.php' );
+require_api( 'database_api.php' );
+require_api( 'form_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'prepare_api.php' );
+require_api( 'print_api.php' );
+require_api( 'project_api.php' );
+require_api( 'string_api.php' );
+require_api( 'utility_api.php' );
 
 /**
  * RelationshipData Structure Definition

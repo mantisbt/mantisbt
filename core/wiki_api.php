@@ -29,10 +29,10 @@
  * @uses plugin_api.php
  */
 
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'event_api.php' );
-require_once( 'plugin_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'event_api.php' );
+require_api( 'plugin_api.php' );
 
 /**
  * Returns whether wiki functionality is enabled

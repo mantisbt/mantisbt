@@ -39,20 +39,20 @@
  * @uses utility_api.php
  */
 
-require_once( 'access_api.php' );
-require_once( 'authentication_api.php' );
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'current_user_api.php' );
-require_once( 'error_api.php' );
-require_once( 'gpc_api.php' );
-require_once( 'html_api.php' );
-require_once( 'lang_api.php' );
-require_once( 'print_api.php' );
-require_once( 'project_api.php' );
-require_once( 'user_api.php' );
-require_once( 'user_pref_api.php' );
-require_once( 'utility_api.php' );
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'current_user_api.php' );
+require_api( 'error_api.php' );
+require_api( 'gpc_api.php' );
+require_api( 'html_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'print_api.php' );
+require_api( 'project_api.php' );
+require_api( 'user_api.php' );
+require_api( 'user_pref_api.php' );
+require_api( 'utility_api.php' );
 
 /**
  * alternate color function

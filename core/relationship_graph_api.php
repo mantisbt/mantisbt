@@ -52,15 +52,15 @@
  * @uses utility_api.php
  */
 
-require_once( 'access_api.php' );
-require_once( 'bug_api.php' );
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'graphviz_api.php' );
-require_once( 'helper_api.php' );
-require_once( 'relationship_api.php' );
-require_once( 'string_api.php' );
-require_once( 'utility_api.php' );
+require_api( 'access_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'graphviz_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'relationship_api.php' );
+require_api( 'string_api.php' );
+require_api( 'utility_api.php' );
 
 # Generate a relationship graph for the given issue.
 function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {

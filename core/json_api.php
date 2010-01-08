@@ -26,7 +26,7 @@
  * @uses url_api.php
  */
 
-require_once( 'url_api.php' );
+require_api( 'url_api.php' );
 
 /**
  * Get a chunk of JSON from a given URL.

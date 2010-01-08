@@ -14,25 +14,42 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
+/**
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses columns_api.php
+ * @uses constant_inc.php
+ * @uses current_user_api.php
+ * @uses file_api.php
+ * @uses form_api.php
+ * @uses helper_api.php
+ * @uses html_api.php
+ * @uses lang_api.php
+ * @uses print_api.php
+ */
+
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'columns_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'current_user_api.php' );
+require_api( 'file_api.php' );
+require_api( 'form_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'html_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'print_api.php' );
 
 	$t_manage_page = defined( 'MANAGE_COLUMNS' );
 	$t_account_page = defined( 'ACCOUNT_COLUMNS' );
 
 	# Protect against direct access to this script.
 	if ( !$t_manage_page && !$t_account_page ) {
-		/**
-		 * MantisBT Core API's
-		 */
-		require_once( 'core.php' );
-
-		require_once( 'authentication_api.php' );
-
 		access_denied();
 	}
 

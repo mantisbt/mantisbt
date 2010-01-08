@@ -41,22 +41,22 @@
  * @uses utility_api.php
  */
 
-require_once( 'access_api.php' );
-require_once( 'authentication_api.php' );
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'database_api.php' );
-require_once( 'email_api.php' );
-require_once( 'error_api.php' );
-require_once( 'filter_api.php' );
-require_once( 'helper_api.php' );
-require_once( 'lang_api.php' );
-require_once( 'ldap_api.php' );
-require_once( 'project_api.php' );
-require_once( 'project_hierarchy_api.php' );
-require_once( 'string_api.php' );
-require_once( 'user_pref_api.php' );
-require_once( 'utility_api.php' );
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'database_api.php' );
+require_api( 'email_api.php' );
+require_api( 'error_api.php' );
+require_api( 'filter_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'ldap_api.php' );
+require_api( 'project_api.php' );
+require_api( 'project_hierarchy_api.php' );
+require_api( 'string_api.php' );
+require_api( 'user_pref_api.php' );
+require_api( 'utility_api.php' );
 
 # ===================================
 # Caching

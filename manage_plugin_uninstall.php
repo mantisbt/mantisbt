@@ -14,20 +14,36 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * @package MantisBT
-	 * @version $Id$
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
+/**
+ * @package MantisBT
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses core.php
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses config_api.php
+ * @uses form_api.php
+ * @uses gpc_api.php
+ * @uses helper_api.php
+ * @uses lang_api.php
+ * @uses plugin_api.php
+ * @uses print_api.php
+ */
 
-	/** @ignore */
-	define( 'PLUGINS_DISABLED', true );
+/** @ignore */
+define( 'PLUGINS_DISABLED', true );
 
-	 /**
-	  * MantisBT Core API's
-	  */
-	require_once( 'core.php' );
+require_once( 'core.php' );
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'config_api.php' );
+require_api( 'form_api.php' );
+require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'plugin_api.php' );
+require_api( 'print_api.php' );
 
 form_security_validate( 'manage_plugin_uninstall' );
 

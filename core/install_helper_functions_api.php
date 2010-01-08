@@ -26,7 +26,7 @@
  * @uses database_api.php
  */
 
-require_once( 'database_api.php' );
+require_api( 'database_api.php' );
 
 /**
  * Checks a PHP version number against the version of PHP currently in use

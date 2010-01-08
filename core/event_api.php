@@ -25,12 +25,14 @@
  *
  * @uses constant_inc.php
  * @uses error_api.php
+ * @uses events_inc.php
  * @uses plugin_api.php
  */
 
-require_once( 'constant_inc.php' );
-require_once( 'error_api.php' );
-require_once( 'plugin_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'error_api.php' );
+require_api( 'events_inc.php' );
+require_api( 'plugin_api.php' );
 
 /**
  *
