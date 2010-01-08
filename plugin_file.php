@@ -14,19 +14,26 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
+/**
+ * @package MantisBT
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses core.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses gpc_api.php
+ * @uses plugin_api.php
+ */
 
-	$g_bypass_headers = true;
-	header( 'Content-type: ' );
+$g_bypass_headers = true;
+header( 'Content-type: ' );
 
-	 /**
-	  * MantisBT Core API's
-	  */
-	require_once( 'core.php' );
+require_once( 'core.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'gpc_api.php' );
+require_api( 'plugin_api.php' );
 
 $t_plugin_path = config_get( 'plugin_path' );
 

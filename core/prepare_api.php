@@ -33,12 +33,12 @@
  * @uses version_api.php
  */
 
-require_once( 'access_api.php' );
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'string_api.php' );
-require_once( 'user_api.php' );
-require_once( 'version_api.php' );
+require_api( 'access_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'string_api.php' );
+require_api( 'user_api.php' );
+require_api( 'version_api.php' );
 
 /**
  * return the mailto: href string link

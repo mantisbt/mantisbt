@@ -87,13 +87,6 @@ function php_version_at_least( $p_version_string ) {
 	return true;
 }
 
-# Enforce our minimum requirements
-if( !php_version_at_least( PHP_MIN_VERSION ) ) {
-	@ob_end_clean();
-	echo '<b>FATAL ERROR: Your version of PHP is too old.  MantisBT requires PHP version ' . PHP_MIN_VERSION . ' or newer</b><br />Your version of PHP is version ' . phpversion();
-	die();
-}
-
 # Check for function because it is deprecated in PHP 5.3 and removed in PHP 6
 if ( function_exists( 'set_magic_quotes_runtime' ) ) {
 	@set_magic_quotes_runtime( false );

@@ -31,12 +31,12 @@
  * @uses user_pref_api.php
  */
 
-require_once( 'authentication_api.php' );
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'error_api.php' );
-require_once( 'plugin_api.php' );
-require_once( 'user_pref_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'error_api.php' );
+require_api( 'plugin_api.php' );
+require_api( 'user_pref_api.php' );
 
 # Cache of localization strings in the language specified by the last
 # lang_load call
@@ -70,7 +70,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 
 	if( is_null( $t_lang_dir ) ) {
 		$t_lang_dir = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
-		require_once( $t_lang_dir . 'strings_' . $p_lang . '.txt' );
+		include_once( $t_lang_dir . 'strings_' . $p_lang . '.txt' );
 	} else {
 		if( is_file( $t_lang_dir . 'strings_' . $p_lang . '.txt' ) ) {
 			include_once( $t_lang_dir . 'strings_' . $p_lang . '.txt' );

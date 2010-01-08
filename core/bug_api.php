@@ -48,29 +48,29 @@
  * @uses utility_api.php
  */
 
-require_once( 'access_api.php' );
-require_once( 'authentication_api.php' );
-require_once( 'bugnote_api.php' );
-require_once( 'bug_revision_api.php' );
-require_once( 'category_api.php' );
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'custom_field_api.php' );
-require_once( 'database_api.php' );
-require_once( 'date_api.php' );
-require_once( 'email_api.php' );
-require_once( 'error_api.php' );
-require_once( 'event_api.php' );
-require_once( 'file_api.php' );
-require_once( 'helper_api.php' );
-require_once( 'history_api.php' );
-require_once( 'lang_api.php' );
-require_once( 'relationship_api.php' );
-require_once( 'sponsorship_api.php' );
-require_once( 'tag_api.php' );
-require_once( 'twitter_api.php' );
-require_once( 'user_api.php' );
-require_once( 'utility_api.php' );
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'bugnote_api.php' );
+require_api( 'bug_revision_api.php' );
+require_api( 'category_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'custom_field_api.php' );
+require_api( 'database_api.php' );
+require_api( 'date_api.php' );
+require_api( 'email_api.php' );
+require_api( 'error_api.php' );
+require_api( 'event_api.php' );
+require_api( 'file_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'history_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'relationship_api.php' );
+require_api( 'sponsorship_api.php' );
+require_api( 'tag_api.php' );
+require_api( 'twitter_api.php' );
+require_api( 'user_api.php' );
+require_api( 'utility_api.php' );
 
 /**
  * Bug Data Structure Definition

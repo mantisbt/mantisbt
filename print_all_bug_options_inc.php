@@ -14,14 +14,30 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
+/**
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses authentication_api.php
+ * @uses database_api.php
+ * @uses form_api.php
+ * @uses helper_api.php
+ * @uses lang_api.php
+ * @uses string_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
+ */
 
-	require_once( 'current_user_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'database_api.php' );
+require_api( 'form_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'string_api.php' );
+require_api( 'user_api.php' );
+require_api( 'utility_api.php' );
 
 # this function only gets the field names, by appending strings
 function get_field_names()

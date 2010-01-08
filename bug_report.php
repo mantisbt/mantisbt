@@ -14,23 +14,66 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * This page stores the reported bug
-	 *
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
-	 /**
-	  * MantisBT Core API's
-	  */
-	require_once( 'core.php' );
+/**
+ * This page stores the reported bug
+ *
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses core.php
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses bug_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses custom_field_api.php
+ * @uses date_api.php
+ * @uses email_api.php
+ * @uses error_api.php
+ * @uses event_api.php
+ * @uses file_api.php
+ * @uses form_api.php
+ * @uses gpc_api.php
+ * @uses helper_api.php
+ * @uses history_api.php
+ * @uses html_api.php
+ * @uses lang_api.php
+ * @uses last_visited_api.php
+ * @uses print_api.php
+ * @uses profile_api.php
+ * @uses relationship_api.php
+ * @uses string_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
+ */
 
-	require_once( 'string_api.php' );
-	require_once( 'file_api.php' );
-	require_once( 'bug_api.php' );
-	require_once( 'custom_field_api.php' );
+require_once( 'core.php' );
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'custom_field_api.php' );
+require_api( 'date_api.php' );
+require_api( 'email_api.php' );
+require_api( 'error_api.php' );
+require_api( 'event_api.php' );
+require_api( 'file_api.php' );
+require_api( 'form_api.php' );
+require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'history_api.php' );
+require_api( 'html_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'last_visited_api.php' );
+require_api( 'print_api.php' );
+require_api( 'profile_api.php' );
+require_api( 'relationship_api.php' );
+require_api( 'string_api.php' );
+require_api( 'user_api.php' );
+require_api( 'utility_api.php' );
 
 	form_security_validate( 'bug_report' );
 

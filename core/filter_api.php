@@ -52,33 +52,33 @@
  * @uses version_api.php
  */
 
-require_once( 'access_api.php' );
-require_once( 'authentication_api.php' );
-require_once( 'bug_api.php' );
-require_once( 'collapse_api.php' );
-require_once( 'columns_api.php' );
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'current_user_api.php' );
-require_once( 'custom_field_api.php' );
-require_once( 'database_api.php' );
-require_once( 'date_api.php' );
-require_once( 'error_api.php' );
-require_once( 'event_api.php' );
-require_once( 'filter_constants_inc.php' );
-require_once( 'gpc_api.php' );
-require_once( 'helper_api.php' );
-require_once( 'lang_api.php' );
-require_once( 'logging_api.php' );
-require_once( 'print_api.php' );
-require_once( 'profile_api.php' );
-require_once( 'project_api.php' );
-require_once( 'relationship_api.php' );
-require_once( 'string_api.php' );
-require_once( 'tag_api.php' );
-require_once( 'user_api.php' );
-require_once( 'utility_api.php' );
-require_once( 'version_api.php' );
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'collapse_api.php' );
+require_api( 'columns_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'current_user_api.php' );
+require_api( 'custom_field_api.php' );
+require_api( 'database_api.php' );
+require_api( 'date_api.php' );
+require_api( 'error_api.php' );
+require_api( 'event_api.php' );
+require_api( 'filter_constants_inc.php' );
+require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'logging_api.php' );
+require_api( 'print_api.php' );
+require_api( 'profile_api.php' );
+require_api( 'project_api.php' );
+require_api( 'relationship_api.php' );
+require_api( 'string_api.php' );
+require_api( 'tag_api.php' );
+require_api( 'user_api.php' );
+require_api( 'utility_api.php' );
+require_api( 'version_api.php' );
 
 /**
  * Allow plugins to define a set of class-based filters, and register/load

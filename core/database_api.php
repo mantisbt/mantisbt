@@ -28,41 +28,38 @@
  * @uses error_api.php
  * @uses logging_api.php
  * @uses utility_api.php
+ * @uses adodb/adodb.inc.php
  */
 
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'error_api.php' );
-require_once( 'logging_api.php' );
-require_once( 'utility_api.php' );
-
-/**
- * requires adodb library
- */
- require_once( 'adodb' . DIRECTORY_SEPARATOR . 'adodb.inc.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'error_api.php' );
+require_api( 'logging_api.php' );
+require_api( 'utility_api.php' );
+require_lib( 'adodb' . DIRECTORY_SEPARATOR . 'adodb.inc.php' );
 
 /**
  * An array in which all executed queries are stored.  This is used for profiling
  * @global array $g_queries_array
- 	 */
+ */
 $g_queries_array = array();
 
 /**
  * Stores whether a database connection was succesfully opened.
  * @global bool $g_db_connected
- 	 */
+ */
 $g_db_connected = false;
 
 /**
  * Store whether to log queries ( used for show_queries_count/query list)
  * @global bool $g_db_log_queries
- 	 */
+ */
 $g_db_log_queries = config_get_global( 'show_queries_list' );
 
 /**
  * set adodb fetch mode
  * @global bool $ADODB_FETCH_MODE
- 	 */
+ */
 $ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
 
 /**

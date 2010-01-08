@@ -14,12 +14,34 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
+/**
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses bug_api.php
+ * @uses collapse_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses event_api.php
+ * @uses form_api.php
+ * @uses helper_api.php
+ * @uses html_api.php
+ * @uses lang_api.php
+ */
+
+require_api( 'access_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'collapse_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'event_api.php' );
+require_api( 'form_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'html_api.php' );
+require_api( 'lang_api.php' );
 
 ?>
 <?php if ( ( !bug_is_readonly( $f_bug_id ) ) &&
@@ -77,7 +99,7 @@
 		<?php echo lang_get( 'time_tracking' ) ?> (HH:MM)
 	</td>
 	<td>
-		<?php if ( config_get('time_tracking_stopwatch') && ON == config_get( 'use_javascript' )) { 
+		<?php if ( config_get( 'time_tracking_stopwatch' ) && config_get( 'use_javascript' ) ) { 
 			html_javascript_link( 'time_tracking_stopwatch.js' );
 		?>
 		<input type="text" name="time_tracking" size="5" value="00:00" />

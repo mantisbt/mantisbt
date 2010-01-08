@@ -206,6 +206,12 @@ $g_core_path			= $g_absolute_path . 'core' . DIRECTORY_SEPARATOR;
 $g_class_path			= $g_core_path . 'classes' . DIRECTORY_SEPARATOR;
 
 /**
+ * absolute path to library files. Requires trailing / or \
+ * @global string $g_library_path
+ */
+$g_library_path			= $g_absolute_path . 'library' . DIRECTORY_SEPARATOR;
+
+/**
  * Used to link to manual for User Documentation.
  * @global string $g_manual_url
  */

@@ -27,8 +27,8 @@
  * @uses php_api.php
  */
 
-require_once( 'constant_inc.php' );
-require_once( 'php_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'php_api.php' );
 
 /**
  * Starts the buffering/compression (only if the compression option is ON)

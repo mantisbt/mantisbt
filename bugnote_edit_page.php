@@ -14,32 +14,59 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * CALLERS
-	 *	This page is submitted to by the following pages:
-	 *	- bugnote_inc.php
-	 *
-	 * EXPECTED BEHAVIOUR
-	 *	Allow the user to modify the text of a bugnote, then submit to
-	 *	bugnote_update.php with the new text
-	 *
-	 * RESTRICTIONS & PERMISSIONS
-	 *	- none beyond API restrictions
-	 *
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
-	 /**
-	  * MantisBT Core API's
-	  */
-	require_once( 'core.php' );
+/**
+ * CALLERS
+ *	This page is submitted to by the following pages:
+ *	- bugnote_inc.php
+ *
+ * EXPECTED BEHAVIOUR
+ *	Allow the user to modify the text of a bugnote, then submit to
+ *	bugnote_update.php with the new text
+ *
+ * RESTRICTIONS & PERMISSIONS
+ *	- none beyond API restrictions
+ *
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses core.php
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses bug_api.php
+ * @uses bugnote_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses database_api.php
+ * @uses error_api.php
+ * @uses event_api.php
+ * @uses form_api.php
+ * @uses gpc_api.php
+ * @uses helper_api.php
+ * @uses html_api.php
+ * @uses lang_api.php
+ * @uses print_api.php
+ * @uses string_api.php
+ */
 
-	require_once( 'bug_api.php' );
-	require_once( 'bugnote_api.php' );
-	require_once( 'string_api.php' );
-	require_once( 'current_user_api.php' );
+require_once( 'core.php' );
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'bugnote_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'database_api.php' );
+require_api( 'error_api.php' );
+require_api( 'event_api.php' );
+require_api( 'form_api.php' );
+require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'html_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'print_api.php' );
+require_api( 'string_api.php' );
 
 	$f_bugnote_id = gpc_get_int( 'bugnote_id' );
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );

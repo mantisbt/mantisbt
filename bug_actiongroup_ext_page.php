@@ -14,18 +14,30 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
-	 /**
-	  * MantisBT Core API's
-	  */
-	require_once( 'core.php' );
+/**
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses core.php
+ * @uses authentication_api.php
+ * @uses bug_group_action_api.php
+ * @uses form_api.php
+ * @uses gpc_api.php
+ * @uses print_api.php
+ * @uses string_api.php
+ * @uses utility_api.php
+ */
 
-	require_once( 'bug_group_action_api.php' );
+require_once( 'core.php' );
+require_api( 'authentication_api.php' );
+require_api( 'bug_group_action_api.php' );
+require_api( 'form_api.php' );
+require_api( 'gpc_api.php' );
+require_api( 'print_api.php' );
+require_api( 'string_api.php' );
+require_api( 'utility_api.php' );
 
 	auth_ensure_user_authenticated();
 

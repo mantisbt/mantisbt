@@ -14,32 +14,69 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * This include file prints out the bug information
-	 * $f_bug_id MUST be specified before the file is included
-	 *
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
+/**
+ * This include file prints out the bug information
+ * $f_bug_id MUST be specified before the file is included
+ *
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses bug_api.php
+ * @uses category_api.php
+ * @uses columns_api.php
+ * @uses compress_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses current_user_api.php
+ * @uses custom_field_api.php
+ * @uses date_api.php
+ * @uses event_api.php
+ * @uses gpc_api.php
+ * @uses helper_api.php
+ * @uses html_api.php
+ * @uses lang_api.php
+ * @uses last_visited_api.php
+ * @uses prepare_api.php
+ * @uses print_api.php
+ * @uses project_api.php
+ * @uses string_api.php
+ * @uses tag_api.php
+ * @uses utility_api.php
+ * @uses version_api.php
+ */
 
-	if ( !defined( 'BUG_VIEW_INC_ALLOW' ) ) {
-		access_denied();
-	}
+if ( !defined( 'BUG_VIEW_INC_ALLOW' ) ) {
+	access_denied();
+}
 
-	 /**
-	  * MantisBT Core API's
-	  */
-	require_once( 'core.php' );
-
-	require_once( 'bug_api.php' );
-	require_once( 'custom_field_api.php' );
-	require_once( 'file_api.php' );
-	require_once( 'date_api.php' );
-	require_once( 'relationship_api.php' );
-	require_once( 'last_visited_api.php' );
-	require_once( 'tag_api.php' );
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'category_api.php' );
+require_api( 'columns_api.php' );
+require_api( 'compress_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'current_user_api.php' );
+require_api( 'custom_field_api.php' );
+require_api( 'date_api.php' );
+require_api( 'event_api.php' );
+require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'html_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'last_visited_api.php' );
+require_api( 'prepare_api.php' );
+require_api( 'print_api.php' );
+require_api( 'project_api.php' );
+require_api( 'string_api.php' );
+require_api( 'tag_api.php' );
+require_api( 'utility_api.php' );
+require_api( 'version_api.php' );
 
 	$f_bug_id		= gpc_get_int( 'id' );
 	$f_history		= gpc_get_bool( 'history', config_get( 'history_default_visible' ) );

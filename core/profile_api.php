@@ -33,14 +33,14 @@
  * @uses utility_api.php
  */
 
-require_once( 'authentication_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'database_api.php' );
-require_once( 'error_api.php' );
-require_once( 'helper_api.php' );
-require_once( 'lang_api.php' );
-require_once( 'user_api.php' );
-require_once( 'utility_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'database_api.php' );
+require_api( 'error_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'user_api.php' );
+require_api( 'utility_api.php' );
 
 /**
  * Create a new profile for the user, return the ID of the new profile

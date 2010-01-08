@@ -14,22 +14,29 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * This is the first page a user sees when they login to the bugtracker
-	 * News is displayed which can notify users of any important changes
-	 *
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
-	 /**
-	  * MantisBT Core API's
-	  */
-	require_once( 'core.php' );
+/**
+ * This is the first page a user sees when they login to the bugtracker
+ * News is displayed which can notify users of any important changes
+ *
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses core.php
+ * @uses authentication_api.php
+ * @uses constant_inc.php
+ * @uses gpc_api.php
+ * @uses logging_api.php
+ * @uses xhtmlrequest_api.php
+ */
 
-	require_once( 'logging_api.php' );
-	require_once( 'xmlhttprequest_api.php' );
+require_once( 'core.php' );
+require_api( 'authentication_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'gpc_api.php' );
+require_api( 'logging_api.php' );
+require_api( 'xhtmlrequest_api.php' );
 
 	auth_ensure_user_authenticated();
 

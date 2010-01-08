@@ -31,10 +31,10 @@
  * @uses utility_api.php
  */
 
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'event_api.php' );
-require_once( 'utility_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'event_api.php' );
+require_api( 'utility_api.php' );
 
 $g_log_levels = array(
 	LOG_EMAIL => 'mail',
@@ -85,8 +85,8 @@ function log_event( $p_level, $p_msg ) {
 			break;
 		case 'firebug':
 				if( !class_exists( 'FirePHP' ) ) {
-					if( file_exists( BASE_PATH . DIRECTORY_SEPARATOR  . 'library' . DIRECTORY_SEPARATOR . 'FirePHPCore' . DIRECTORY_SEPARATOR . 'FirePHP.class.php' ) ) {
-						require_once( BASE_PATH . DIRECTORY_SEPARATOR  . 'library' . DIRECTORY_SEPARATOR . 'FirePHPCore' . DIRECTORY_SEPARATOR . 'FirePHP.class.php' );
+					if( file_exists( config_get_global( 'library_path' ) . 'FirePHPCore' . DIRECTORY_SEPARATOR . 'FirePHP.class.php' ) ) {
+						require_lib( 'FirePHPCore' . DIRECTORY_SEPARATOR . 'FirePHP.class.php' );
 					}
 				}
 				if( class_exists( 'FirePHP' ) ) {

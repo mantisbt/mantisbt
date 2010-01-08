@@ -31,9 +31,9 @@
  * @uses database_api.php
  */
 
-require_once( 'authentication_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'database_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'database_api.php' );
 
 # Set up global for token_purge_expired_once()
 $g_tokens_purged = false;

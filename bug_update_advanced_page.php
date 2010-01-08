@@ -19,17 +19,61 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses core.php
+ * @uses access_api.php
+ * @uses ajax_api.php
+ * @uses authentication_api.php
+ * @uses bug_api.php
+ * @uses columns_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses custom_field_api.php
+ * @uses date_api.php
+ * @uses error_api.php
+ * @uses event_api.php
+ * @uses form_api.php
+ * @uses gpc_api.php
+ * @uses helper_api.php
+ * @uses html_api.php
+ * @uses lang_api.php
+ * @uses last_visited_api.php
+ * @uses prepare_api.php
+ * @uses print_api.php
+ * @uses projax_api.php
+ * @uses project_api.php
+ * @uses string_api.php
+ * @uses user_api.php
+ * @uses version_api.php
  */
 
-$g_allow_browser_cache = 1;
 require_once( 'core.php' );
+require_api( 'access_api.php' );
+require_api( 'ajax_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'columns_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'custom_field_api.php' );
+require_api( 'date_api.php' );
+require_api( 'error_api.php' );
+require_api( 'event_api.php' );
+require_api( 'form_api.php' );
+require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'html_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'last_visited_api.php' );
+require_api( 'prepare_api.php' );
+require_api( 'print_api.php' );
+require_api( 'projax_api.php' );
+require_api( 'project_api.php' );
+require_api( 'string_api.php' );
+require_api( 'user_api.php' );
+require_api( 'version_api.php' );
 
-require_once( 'ajax_api.php' );
-require_once( 'bug_api.php' );
-require_once( 'custom_field_api.php' );
-require_once( 'date_api.php' );
-require_once( 'last_visited_api.php' );
-require_once( 'projax_api.php' );
+$g_allow_browser_cache = 1;
 
 $f_bug_id = gpc_get_int( 'bug_id' );
 

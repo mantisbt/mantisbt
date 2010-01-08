@@ -33,14 +33,14 @@
  * @uses user_api.php
  */
 
-require_once( 'authentication_api.php' );
-require_once( 'bug_api.php' );
-require_once( 'category_api.php' );
-require_once( 'config_api.php' );
-require_once( 'constant_inc.php' );
-require_once( 'helper_api.php' );
-require_once( 'project_api.php' );
-require_once( 'user_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'category_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'helper_api.php' );
+require_api( 'project_api.php' );
+require_api( 'user_api.php' );
 
 /**
  * get the csv file new line, can be moved to config in the future

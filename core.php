@@ -15,10 +15,37 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * MantisBT Core
+ *
+ * Initialises the MantisBT core, connects to the database, starts plugins and
+ * performs other global operations that either help initialise MantisBT or
+ * are required to be executed on every page load.
+ *
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses authentication_api.php
+ * @uses collapse_api.php
+ * @uses compress_api.php
+ * @uses config_api.php
+ * @uses config_defaults_inc.php
+ * @uses config_inc.php
+ * @uses constant_inc.php
+ * @uses custom_constants_inc.php
+ * @uses custom_functions_inc.php
+ * @uses database_api.php
+ * @uses event_api.php
+ * @uses http_api.php
+ * @uses lang_api.php
+ * @uses mantis_offline.php
+ * @uses plugin_api.php
+ * @uses php_api.php
+ * @uses user_pref_api.php
+ * @uses wiki_api.php
+ * @uses utf8/utf8.php
+ * @uses utf8/str_pad.php
  */
 
 /**
@@ -35,94 +62,88 @@ if ( file_exists( 'mantis_offline.php' ) && !isset( $_GET['mbadmin'] ) ) {
 	exit;
 }
 
-$g_request_time = microtime(true);
+$g_request_time = microtime( true );
 
 ob_start();
 
-/**
- * Load supplied constants
- */
-require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'constant_inc.php' );
+# Load supplied constants
+require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'constant_inc.php' );
 
-/**
- * Load user-defined constants (if required)
- */
-if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constants_inc.php' ) ) {
-	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constants_inc.php' );
+# Load user-defined constants (if required)
+if ( file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'custom_constants_inc.php' ) ) {
+	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'custom_constants_inc.php' );
 }
 
 $t_config_inc_found = false;
 
-/**
- * Include default configuration settings
- */
-require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_defaults_inc.php' );
+# Include default configuration settings
+require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_defaults_inc.php' );
 
 # config_inc may not be present if this is a new install
-if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' ) ) {
-	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
+if ( file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_inc.php' ) ) {
+	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_inc.php' );
 	$t_config_inc_found = true;
 }
 
 # Allow an environment variable (defined in an Apache vhost for example)
-#  to specify a config file to load to override other local settings
+# to specify a config file to load to override other local settings
 $t_local_config = getenv( 'MANTIS_CONFIG' );
 if ( $t_local_config && file_exists( $t_local_config ) ){
 	require_once( $t_local_config );
 	$t_config_inc_found = true;
 }
 
+# Remember (globally) which API files have already been loaded
+$g_api_included = array();
 
-# Attempt to find the location of the core files.
-$t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR;
-if (isset($GLOBALS['g_core_path']) && !isset( $HTTP_GET_VARS['g_core_path'] ) && !isset( $HTTP_POST_VARS['g_core_path'] ) && !isset( $HTTP_COOKIE_VARS['g_core_path'] ) ) {
-	$t_core_path = $g_core_path;
-}
-
-$g_core_path = $t_core_path;
-
-/*
- * Set include paths
- */
-define ( 'BASE_PATH' , realpath( dirname(__FILE__) ) );
-$mantisLibrary = BASE_PATH . DIRECTORY_SEPARATOR . 'library';
-$mantisCore = $g_core_path;
-
-/*
- * Prepend the application/ and tests/ directories to the
- * include_path.  
- */
-$path = array(
-    $mantisCore,
-    $mantisLibrary,
-    get_include_path()
-    );
-set_include_path( implode( PATH_SEPARATOR, $path ) );
-
-/*
- * Unset global variables that are no longer needed.
- */
-unset($mantisRoot, $mantisLibrary, $mantisCore, $path);
-
-# load UTF8-capable string functions
-require_once( 'utf8/utf8.php' );
-require_once( UTF8 . '/str_pad.php' );
-
-# Include compatibility file before anything else
-require_once( 'php_api.php' );
-
-# Define an autoload function to automatically load classes when referenced.
-function __autoload( $className ) {
+# Define an API inclusion function to replace require_once
+function require_api( $p_api_name ) {
+	global $g_api_included;
 	global $g_core_path;
+	if ( !array_key_exists( $p_api_name, $g_api_included ) ) {
+		$t_existing_globals = get_defined_vars();
+		require_once( $g_core_path . $p_api_name );
+		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_existing_globals' => 0, 't_new_globals' => 0 ) );
+		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
+			global $$t_global_name;
+		}
+		extract( $t_new_globals );
+		$g_api_included[$p_api_name] = 1;
+	}
+}
 
-	$t_require_path = $g_core_path . 'classes' . DIRECTORY_SEPARATOR . $className . '.class.php';
+# Remember (globally) which library files have already been loaded
+$g_libraries_included = array();
+
+# Define an API inclusion function to replace require_once
+function require_lib( $p_library_name ) {
+	global $g_libraries_included;
+	global $g_library_path;
+	if ( !array_key_exists( $p_library_name, $g_libraries_included ) ) {
+		$t_existing_globals = get_defined_vars();
+		require_once( $g_library_path . $p_library_name );
+		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_existing_globals' => 0, 't_new_globals' => 0 ) );
+		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
+			global $$t_global_name;
+		}
+		extract( $t_new_globals );
+		$g_libraries_included[$p_library_name] = 1;
+	}
+}
+
+# Define an autoload function to automatically load classes when referenced
+function __autoload( $className ) {
+	global $g_class_path;
+	global $g_library_path;
+
+	$t_require_path = $g_class_path . $className . '.class.php';
 
 	if ( file_exists( $t_require_path ) ) {
 		require_once( $t_require_path );
 		return;
 	}
 
-	$t_require_path = BASE_PATH . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $className . '.inc.php';
+	$t_require_path = $g_library_path . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $className . '.inc.php';
 
 	if ( file_exists( $t_require_path ) ) {
 		require_once( $t_require_path );
@@ -130,21 +151,38 @@ function __autoload( $className ) {
 	}
 }
 
+# Register the autoload function to make it effective immediately
 spl_autoload_register( '__autoload' );
 
-if ( ($t_output = ob_get_contents()) != '') {
+# Load UTF8-capable string functions
+require_lib( 'utf8/utf8.php' );
+require_lib( 'utf8/str_pad.php' );
+
+# Include PHP compatibility file
+require_api( 'php_api.php' );
+
+# Enforce our minimum PHP requirements
+if( !php_version_at_least( PHP_MIN_VERSION ) ) {
+	@ob_end_clean();
+	echo '<b>FATAL ERROR: Your version of PHP is too old. MantisBT requires PHP version ' . PHP_MIN_VERSION . ' or newer</b><br />Your version of PHP is version ' . phpversion();
+	die();
+}
+
+# Ensure that output is blank so far (output at this stage generally denotes
+# that an error has occurred)
+if ( ( $t_output = ob_get_contents() ) != '' ) {
 	echo 'Possible Whitespace/Error in Configuration File - Aborting. Output so far follows:<br />';
-	echo var_dump($t_output);
+	echo var_dump( $t_output );
 	die;
 }
 
-require_once( 'compress_api.php' );
-
+# Start HTML compression handler (if enabled)
+require_api( 'compress_api.php' );
 compress_start_handler();
 
+# If no configuration file exists, redirect the user to the admin page so
+# they can complete installation and configuration of MantisBT
 if ( false === $t_config_inc_found ) {
-	# if not found, redirect to the admin page to install the system
-	# this needs to be long form and not replaced by is_page_name as that function isn't loaded yet
 	if ( !( isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], 'admin' ) ) ) ) {
 		if ( OFF == $g_use_iis ) {
 			header( 'Status: 302' );
@@ -157,29 +195,13 @@ if ( false === $t_config_inc_found ) {
 			header( "Location: admin/install.php" );
 		}
 
-		exit; # additional output can cause problems so let's just stop output here
+		exit;
 	}
 }
 
-# Load rest of core in separate directory.
-
-require_once( 'config_api.php' );
-require_once( 'logging_api.php' );
-
-# load utility functions used by everything else
-require_once( 'utility_api.php' );
-
-# Load internationalization functions (needed before database_api, in case database connection fails)
-require_once( 'lang_api.php' );
-
-# error functions should be loaded to allow database to print errors
-require_once( 'error_api.php' );
-require_once( 'helper_api.php' );
-
-# DATABASE WILL BE OPENED HERE!!  THE DATABASE SHOULDN'T BE EXPLICITLY
-# OPENED ANYWHERE ELSE.
-require_once( 'database_api.php' );
-
+# Connect to the database
+require_api( 'database_api.php' );
+require_api( 'config_api.php' );
 if( !isset( $g_skip_open_db ) ) {
 	if( OFF == $g_use_persistent_connections ) {
 		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ) );
@@ -191,39 +213,17 @@ if( !isset( $g_skip_open_db ) ) {
 		define( 'PLUGINS_DISABLED', true );
 }
 
-# PHP Sessions
-require_once( 'session_api.php' );
-
-# Initialize Event System
-require_once( 'event_api.php' );
-require_once( 'events_inc.php' );
-
-# Plugin initialization
-require_once( 'plugin_api.php' );
+# Initialise plugins
+require_api( 'plugin_api.php' );
 if ( !defined( 'PLUGINS_DISABLED' ) ) {
 	plugin_init_installed();
 }
 
-# Authentication and user setup
-require_once( 'authentication_api.php' );
-require_once( 'project_api.php' );
-require_once( 'project_hierarchy_api.php' );
-require_once( 'user_api.php' );
-require_once( 'access_api.php' );
-
-# Wiki Integration
+# Initialise Wiki integration
 if( config_get_global( 'wiki_enable' ) == ON ) {
-	require_once( 'wiki_api.php' );
+	require_api( 'wiki_api.php' );
 	wiki_init();
 }
-
-# Display API's
-require_once( 'http_api.php' );
-require_once( 'html_api.php' );
-require_once( 'gpc_api.php' );
-require_once( 'form_api.php' );
-require_once( 'print_api.php' );
-require_once( 'collapse_api.php' );
 
 if ( !is_blank ( config_get_global( 'default_timezone' ) ) ) {
 	// if a default timezone is set in config, set it here, else we use php.ini's value
@@ -237,30 +237,33 @@ if ( !isset( $g_login_anonymous ) ) {
 	$g_login_anonymous = true;
 }
 
+require_api( 'authentication_api.php' );
+require_api( 'user_pref_api.php' );
 if( auth_is_user_authenticated() ) {
 	date_default_timezone_set( user_pref_get_pref( auth_get_current_user_id(), 'timezone' ) );
 }
 
+require_api( 'collapse_api.php' );
 if ( !defined( 'MANTIS_INSTALLER' ) ) {
 	collapse_cache_token();
 }
 
-// custom functions (in main directory)
-/** @todo Move all such files to core/ */
-require_once( 'custom_function_api.php' );
-$t_overrides = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'custom_functions_inc.php';
-if ( file_exists( $t_overrides ) ) {
-	require_once( $t_overrides );
+# Load custom functions
+require_api( 'custom_function_api.php' );
+if ( file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'custom_functions_inc.php' ) ) {
+	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'custom_functions_inc.php' );
 }
 
-// set HTTP response headers
+# Set HTTP response headers
+require_api( 'http_api.php' );
 http_all_headers();
 
-// push push default language to speed calls to lang_get
+# Push default language to speed calls to lang_get
+require_api( 'lang_api.php' );
 if ( !isset( $g_skip_lang_load ) ) {
 	lang_push( lang_get_default() );
 }
 
-# signal plugins that the core system is loaded
+# Signal plugins that the core system is loaded
+require_api( 'event_api.php' );
 event_signal( 'EVENT_CORE_READY' );
-

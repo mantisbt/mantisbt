@@ -14,30 +14,53 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 *
-	 * GET PARAMETERS FOR THIS PAGE
-	 *
-	 * project_id: 0 - all projects, otherwise project id.
-	 * filter_id: The filter id to use for generating the rss.
-	 * sort: This parameter is ignore if filter_id is supplied and is not equal to 0.
-	 *		"update": issues ordered descending by last updated date.
-	 *       "submit": issues ordered descending by submit date (default).
-	 *
-	 * @package MantisBT
-	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
-	 /**
-	  * MantisBT Core API's
-	  */
-	require_once( 'core.php' );
+/**
+ *
+ * GET PARAMETERS FOR THIS PAGE
+ *
+ * project_id: 0 - all projects, otherwise project id.
+ * filter_id: The filter id to use for generating the rss.
+ * sort: This parameter is ignore if filter_id is supplied and is not equal to 0.
+ *		"update": issues ordered descending by last updated date.
+ *       "submit": issues ordered descending by submit date (default).
+ *
+ * @package MantisBT
+ * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses core.php
+ * @uses access_api.php
+ * @uses bug_api.php
+ * @uses category_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses filter_api.php
+ * @uses gpc_api.php
+ * @uses lang_api.php
+ * @uses project_api.php
+ * @uses rss_api.php
+ * @uses string_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
+ * @uses rssbuilder/class.RSSBuilder.inc.php
+ */
 
-	require_once( 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.RSSBuilder.inc.php' );
-	require_once( 'user_api.php' );
-	require_once( 'filter_api.php' );
-	require_once( 'rss_api.php' );
+require_once( 'core.php' );
+require_api( 'access_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'category_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'filter_api.php' );
+require_api( 'gpc_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'project_api.php' );
+require_api( 'rss_api.php' );
+require_api( 'string_api.php' );
+require_api( 'user_api.php' );
+require_api( 'utility_api.php' );
+require_lib( 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.RSSBuilder.inc.php' );
 
 	$f_project_id = gpc_get_int( 'project_id', ALL_PROJECTS );
 	$f_filter_id = gpc_get_int( 'filter_id', 0 );
