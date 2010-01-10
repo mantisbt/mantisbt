@@ -141,6 +141,7 @@ if ( ($t_output = ob_get_contents()) != '') {
 	die;
 }
 
+require_once( 'utility_api.php' );
 require_once( 'compress_api.php' );
 
 compress_start_handler();
@@ -168,9 +169,6 @@ if ( false === $t_config_inc_found ) {
 
 require_once( 'config_api.php' );
 require_once( 'logging_api.php' );
-
-# load utility functions used by everything else
-require_once( 'utility_api.php' );
 
 # Load internationalization functions (needed before database_api, in case database connection fails)
 require_once( 'lang_api.php' );
