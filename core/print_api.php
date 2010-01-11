@@ -1642,15 +1642,8 @@ function print_sql_error( $p_query ) {
 
 # Get icon corresponding to the specified filename
 function print_file_icon( $p_filename ) {
-	$t_file_type_icons = config_get( 'file_type_icons' );
-
-	$ext = utf8_strtolower( file_get_extension( $p_filename ) );
-	if( !isset( $t_file_type_icons[$ext] ) ) {
-		$ext = '?';
-	}
-
-	$t_name = $t_file_type_icons[$ext];
-	echo '<img src="' . config_get( 'path' ) . 'images/fileicons/' . $t_name . '" alt="' . $ext . ' file icon" width="16" height="16" border="0" />';
+	$t_icon = file_get_icon_url( $p_filename );
+	echo '<img src="' . $t_icon['url'] . '" alt="' . $t_icon['alt'] . ' file icon" width="16" height="16" border="0" />';
 }
 
 # Prints an RSS image that is hyperlinked to an RSS feed.

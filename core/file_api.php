@@ -174,7 +174,7 @@ function file_get_icon_url( $p_display_filename ) {
 	}
 
 	$t_name = $t_file_type_icons[$ext];
-	return array( 'url' => config_get( 'path' ) . 'images/fileicons/' . $t_name, 'alt' => $ext );
+	return array( 'url' => config_get( 'icon_path' ) . 'fileicons/' . $t_name, 'alt' => $ext );
 }
 
 /**
