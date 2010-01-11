@@ -1434,7 +1434,7 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 			print_link( "$p_page_url?page_number=$p_page_no", $p_text );
 		}
 	} else {
-		echo " $p_text ";
+		echo $p_text;
 	}
 }
 
@@ -1462,7 +1462,9 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 
 	# First and previous links
 	print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_id );
+	echo '&nbsp;';
 	print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_id );
+	echo '&nbsp;';
 
 	# Page numbers ...
 
@@ -1495,11 +1497,13 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	}
 
 	# Next and Last links
+	echo '&nbsp;';
 	if( $p_current < $p_end ) {
 		print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_id );
 	} else {
 		print_page_link( $p_page, $t_next, null, null, $p_temp_filter_id );
 	}
+	echo '&nbsp;';
 	print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_id );
 
 	print( ' ]' );
