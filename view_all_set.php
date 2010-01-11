@@ -44,7 +44,7 @@ require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'error_api.php' );
 require_api( 'filter_api.php' );
-reuqire_api( 'filter_constants_inc.php' );
+require_api( 'filter_constants_inc.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
