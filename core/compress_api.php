@@ -25,10 +25,12 @@
  *
  * @uses constant_inc.php
  * @uses php_api.php
+ * @uses utility_api.php
  */
 
 require_api( 'constant_inc.php' );
 require_api( 'php_api.php' );
+require_api( 'utility_api.php' );
 
 /**
  * Starts the buffering/compression (only if the compression option is ON)
