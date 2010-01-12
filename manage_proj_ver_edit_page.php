@@ -51,17 +51,17 @@ require_api( 'lang_api.php' );
 require_api( 'string_api.php' );
 require_api( 'version_api.php' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	$f_version_id = gpc_get_int( 'version_id' );
+$f_version_id = gpc_get_int( 'version_id' );
 
-	$t_version = version_get( $f_version_id );
+$t_version = version_get( $f_version_id );
 
-	access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version->project_id );
+access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version->project_id );
 
-	html_page_top();
+html_page_top();
 
-	print_manage_menu( 'manage_proj_ver_edit_page.php' );
+print_manage_menu( 'manage_proj_ver_edit_page.php' );
 ?>
 <br />
 <div align="center">
@@ -142,4 +142,4 @@ require_api( 'version_api.php' );
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

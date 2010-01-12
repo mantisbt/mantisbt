@@ -47,49 +47,49 @@ require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-	form_security_validate( 'signup' );
+form_security_validate( 'signup' );
 
-	$f_username		= strip_tags( gpc_get_string( 'username' ) );
-	$f_email		= strip_tags( gpc_get_string( 'email' ) );
-	$f_captcha		= gpc_get_string( 'captcha', '' );
-	$f_public_key	= gpc_get_int( 'public_key', '' );
+$f_username		= strip_tags( gpc_get_string( 'username' ) );
+$f_email		= strip_tags( gpc_get_string( 'email' ) );
+$f_captcha		= gpc_get_string( 'captcha', '' );
+$f_public_key	= gpc_get_int( 'public_key', '' );
 
-	$f_username = trim( $f_username );
-	$f_email = email_append_domain( trim( $f_email ) );
-	$f_captcha = utf8_strtolower( trim( $f_captcha ) );
+$f_username = trim( $f_username );
+$f_email = email_append_domain( trim( $f_email ) );
+$f_captcha = utf8_strtolower( trim( $f_captcha ) );
 
-	# force logout on the current user if already authenticated
-	if( auth_is_user_authenticated() ) {
-		auth_logout();
+# force logout on the current user if already authenticated
+if( auth_is_user_authenticated() ) {
+	auth_logout();
+}
+
+# Check to see if signup is allowed
+if ( OFF == config_get_global( 'allow_signup' ) ) {
+	print_header_redirect( 'login_page.php' );
+	exit;
+}
+
+if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 	&&
+			helper_call_custom_function( 'auth_can_change_password', array() ) ) {
+	# captcha image requires GD library and related option to ON
+	$t_key = utf8_strtolower( utf8_substr( md5( config_get( 'password_confirm_hash_magic_string' ) . $f_public_key ), 1, 5) );
+
+	if ( $t_key != $f_captcha ) {
+		trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
 	}
+}
 
-	# Check to see if signup is allowed
-	if ( OFF == config_get_global( 'allow_signup' ) ) {
-		print_header_redirect( 'login_page.php' );
-		exit;
-	}
+email_ensure_not_disposable( $f_email );
 
-	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 	&&
-				helper_call_custom_function( 'auth_can_change_password', array() ) ) {
-		# captcha image requires GD library and related option to ON
-		$t_key = utf8_strtolower( utf8_substr( md5( config_get( 'password_confirm_hash_magic_string' ) . $f_public_key ), 1, 5) );
+# notify the selected group a new user has signed-up
+if( user_signup( $f_username, $f_email ) ) {
+	email_notify_new_account( $f_username, $f_email );
+}
 
-		if ( $t_key != $f_captcha ) {
-			trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
-		}
-	}
+form_security_purge( 'signup' );
 
-	email_ensure_not_disposable( $f_email );
-
-	# notify the selected group a new user has signed-up
-	if( user_signup( $f_username, $f_email ) ) {
-		email_notify_new_account( $f_username, $f_email );
-	}
-
-	form_security_purge( 'signup' );
-
-	html_page_top1();
-	html_page_top2a();
+html_page_top1();
+html_page_top2a();
 ?>
 
 <br />
@@ -116,4 +116,4 @@ require_api( 'utility_api.php' );
 </div>
 
 <?php
-	html_page_bottom1a( __FILE__ );
+html_page_bottom1a( __FILE__ );

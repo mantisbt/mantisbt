@@ -31,13 +31,13 @@ require_api( 'current_user_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-	html_page_top( lang_get( 'manage_columns_config' ) );
+html_page_top( lang_get( 'manage_columns_config' ) );
 
-	# Define constant that will be checked by the include page.
-	define ( 'ACCOUNT_COLUMNS', '' );
+# Define constant that will be checked by the include page.
+define ( 'ACCOUNT_COLUMNS', '' );
 
-	current_user_ensure_unprotected();
+current_user_ensure_unprotected();
 
-	include ( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'manage_columns_inc.php' );
+include ( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'manage_columns_inc.php' );
 
-	html_page_bottom();
+html_page_bottom();

@@ -47,45 +47,45 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
-	form_security_validate( 'proj_doc_delete' );
+form_security_validate( 'proj_doc_delete' );
 
-	# Check if project documentation feature is enabled.
-	if ( OFF == config_get( 'enable_project_documentation' ) ) {
-		access_denied();
-	}
+# Check if project documentation feature is enabled.
+if ( OFF == config_get( 'enable_project_documentation' ) ) {
+	access_denied();
+}
 
-	$f_file_id = gpc_get_int( 'file_id' );
+$f_file_id = gpc_get_int( 'file_id' );
 
-	$t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
+$t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
 
-	access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
+access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
-	$t_project_file_table = db_get_table( 'project_file' );
-	$query = "SELECT title FROM $t_project_file_table
-				WHERE id=" . db_param();
-	$result = db_query_bound( $query, Array( $f_file_id ) );
-	$t_title = db_result( $result );
+$t_project_file_table = db_get_table( 'project_file' );
+$query = "SELECT title FROM $t_project_file_table
+			WHERE id=" . db_param();
+$result = db_query_bound( $query, Array( $f_file_id ) );
+$t_title = db_result( $result );
 
-	# Confirm with the user
-	helper_ensure_confirmed( lang_get( 'confirm_file_delete_msg' ) .
-		'<br/>' . lang_get( 'filename_label' ) . lang_get( 'word_separator' ) . string_display( $t_title ),
-		lang_get( 'file_delete_button' ) );
+# Confirm with the user
+helper_ensure_confirmed( lang_get( 'confirm_file_delete_msg' ) .
+	'<br/>' . lang_get( 'filename_label' ) . lang_get( 'word_separator' ) . string_display( $t_title ),
+	lang_get( 'file_delete_button' ) );
 
-	file_delete( $f_file_id, 'project' );
+file_delete( $f_file_id, 'project' );
 
-	form_security_purge( 'proj_doc_delete' );
+form_security_purge( 'proj_doc_delete' );
 
-	$t_redirect_url = 'proj_doc_page.php';
+$t_redirect_url = 'proj_doc_page.php';
 
-	html_page_top( null, $t_redirect_url );
+html_page_top( null, $t_redirect_url );
 ?>
 <br />
 <div align="center">
 <?php
-	echo lang_get( 'operation_successful' ).'<br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo lang_get( 'operation_successful' ).'<br />';
+print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

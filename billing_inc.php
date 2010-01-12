@@ -53,40 +53,40 @@ if ( !config_get('time_tracking_enabled') )
 <a name="bugnotestats" id="bugnotestats" /><br />
 
 <?php
-	collapse_open( 'bugnotestats' );
+collapse_open( 'bugnotestats' );
 
-	$t_today = date( "d:m:Y" );
-	$t_date_submitted = isset( $t_bug ) ? date( "d:m:Y", $t_bug->date_submitted ) : $t_today;
+$t_today = date( "d:m:Y" );
+$t_date_submitted = isset( $t_bug ) ? date( "d:m:Y", $t_bug->date_submitted ) : $t_today;
 
-	$t_bugnote_stats_from_def = $t_date_submitted;
-	$t_bugnote_stats_from_def_ar = explode ( ":", $t_bugnote_stats_from_def );
-	$t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
-	$t_bugnote_stats_from_def_m = $t_bugnote_stats_from_def_ar[1];
-	$t_bugnote_stats_from_def_y = $t_bugnote_stats_from_def_ar[2];
+$t_bugnote_stats_from_def = $t_date_submitted;
+$t_bugnote_stats_from_def_ar = explode ( ":", $t_bugnote_stats_from_def );
+$t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
+$t_bugnote_stats_from_def_m = $t_bugnote_stats_from_def_ar[1];
+$t_bugnote_stats_from_def_y = $t_bugnote_stats_from_def_ar[2];
 
-	$t_bugnote_stats_from_d = gpc_get_int('start_day', $t_bugnote_stats_from_def_d);
-	$t_bugnote_stats_from_m = gpc_get_int('start_month', $t_bugnote_stats_from_def_m);
-	$t_bugnote_stats_from_y = gpc_get_int('start_year', $t_bugnote_stats_from_def_y);
+$t_bugnote_stats_from_d = gpc_get_int('start_day', $t_bugnote_stats_from_def_d);
+$t_bugnote_stats_from_m = gpc_get_int('start_month', $t_bugnote_stats_from_def_m);
+$t_bugnote_stats_from_y = gpc_get_int('start_year', $t_bugnote_stats_from_def_y);
 
-	$t_bugnote_stats_to_def = $t_today;
-	$t_bugnote_stats_to_def_ar = explode ( ":", $t_bugnote_stats_to_def );
-	$t_bugnote_stats_to_def_d = $t_bugnote_stats_to_def_ar[0];
-	$t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
-	$t_bugnote_stats_to_def_y = $t_bugnote_stats_to_def_ar[2];
+$t_bugnote_stats_to_def = $t_today;
+$t_bugnote_stats_to_def_ar = explode ( ":", $t_bugnote_stats_to_def );
+$t_bugnote_stats_to_def_d = $t_bugnote_stats_to_def_ar[0];
+$t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
+$t_bugnote_stats_to_def_y = $t_bugnote_stats_to_def_ar[2];
 
-	$t_bugnote_stats_to_d = gpc_get_int('end_day', $t_bugnote_stats_to_def_d);
-	$t_bugnote_stats_to_m = gpc_get_int('end_month', $t_bugnote_stats_to_def_m);
-	$t_bugnote_stats_to_y = gpc_get_int('end_year', $t_bugnote_stats_to_def_y);
+$t_bugnote_stats_to_d = gpc_get_int('end_day', $t_bugnote_stats_to_def_d);
+$t_bugnote_stats_to_m = gpc_get_int('end_month', $t_bugnote_stats_to_def_m);
+$t_bugnote_stats_to_y = gpc_get_int('end_year', $t_bugnote_stats_to_def_y);
 
-	$f_get_bugnote_stats_button = gpc_get_string('get_bugnote_stats_button', '');
-	$f_bugnote_cost = gpc_get_int( 'bugnote_cost', '' );
-	$f_project_id = helper_get_current_project();
+$f_get_bugnote_stats_button = gpc_get_string('get_bugnote_stats_button', '');
+$f_bugnote_cost = gpc_get_int( 'bugnote_cost', '' );
+$f_project_id = helper_get_current_project();
 
-	if ( ON == config_get( 'time_tracking_with_billing' ) ) {
-		$t_cost_col = true;
-	} else {
-		$t_cost_col = false;
-	}
+if ( ON == config_get( 'time_tracking_with_billing' ) ) {
+	$t_cost_col = true;
+} else {
+	$t_cost_col = false;
+}
 
 ?>
 <form method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
@@ -102,19 +102,19 @@ if ( !config_get('time_tracking_enabled') )
 	</td>
 </tr>
 <tr class="row-2">
-        <td class="category" width="25%">
-                <?php
-		$t_filter = array();
-		$t_filter['do_filter_by_date'] = 'on';
-		$t_filter['start_day'] = $t_bugnote_stats_from_d;
-		$t_filter['start_month'] = $t_bugnote_stats_from_m;
-		$t_filter['start_year'] = $t_bugnote_stats_from_y;
-		$t_filter['end_day'] = $t_bugnote_stats_to_d;
-		$t_filter['end_month'] = $t_bugnote_stats_to_m;
-		$t_filter['end_year'] = $t_bugnote_stats_to_y;
-		print_filter_do_filter_by_date(true);
-		?>
-        </td>
+	<td class="category" width="25%">
+			<?php
+	$t_filter = array();
+	$t_filter['do_filter_by_date'] = 'on';
+	$t_filter['start_day'] = $t_bugnote_stats_from_d;
+	$t_filter['start_month'] = $t_bugnote_stats_from_m;
+	$t_filter['start_year'] = $t_bugnote_stats_from_y;
+	$t_filter['end_day'] = $t_bugnote_stats_to_d;
+	$t_filter['end_month'] = $t_bugnote_stats_to_m;
+	$t_filter['end_year'] = $t_bugnote_stats_to_y;
+	print_filter_do_filter_by_date(true);
+	?>
+	</td>
 </tr>
 <?php if ( $t_cost_col ) { ?>
 <tr class="row-1">

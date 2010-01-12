@@ -33,20 +33,18 @@ require_api( 'config_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-	access_ensure_global_level( config_get( 'time_tracking_reporting_threshold' ) );
+access_ensure_global_level( config_get( 'time_tracking_reporting_threshold' ) );
 
-	html_page_top( lang_get( 'time_tracking_billing_link' )  );
+html_page_top( lang_get( 'time_tracking_billing_link' )  );
 ?>
 
 <br />
 
 <?php
-	$t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-?>
-	<!-- Jump to Bugnote add form -->
-<?php
-	# Work break-down
-	include( $t_mantis_dir . 'billing_inc.php' );
+$t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
-	html_page_bottom();
+# Work break-down
+include( $t_mantis_dir . 'billing_inc.php' );
+
+html_page_bottom();
 

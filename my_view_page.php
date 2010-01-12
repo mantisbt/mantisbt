@@ -51,146 +51,146 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	$t_current_user_id = auth_get_current_user_id();
+$t_current_user_id = auth_get_current_user_id();
 
-	# Improve performance by caching category data in one pass
-	category_get_all_rows( helper_get_current_project() );
+# Improve performance by caching category data in one pass
+category_get_all_rows( helper_get_current_project() );
 
-	compress_enable();
+compress_enable();
 
-	# don't index my view page
-	html_robots_noindex();
+# don't index my view page
+html_robots_noindex();
 
-	html_page_top1( lang_get( 'my_view_link' ) );
+html_page_top1( lang_get( 'my_view_link' ) );
 
-	if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {
-		html_meta_redirect( 'my_view_page.php', current_user_get_pref( 'refresh_delay' )*60 );
-	}
+if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {
+	html_meta_redirect( 'my_view_page.php', current_user_get_pref( 'refresh_delay' )*60 );
+}
 
-	html_page_top2();
+html_page_top2();
 
-	print_recently_visited();
+print_recently_visited();
 
-	$f_page_number		= gpc_get_int( 'page_number', 1 );
+$f_page_number		= gpc_get_int( 'page_number', 1 );
 
-	$t_per_page = config_get( 'my_view_bug_count' );
-	$t_bug_count = null;
-	$t_page_count = null;
+$t_per_page = config_get( 'my_view_bug_count' );
+$t_bug_count = null;
+$t_page_count = null;
 
-	$t_boxes = config_get( 'my_view_boxes' );
-	asort ($t_boxes);
-	reset ($t_boxes);
-	#print_r ($t_boxes);
+$t_boxes = config_get( 'my_view_boxes' );
+asort ($t_boxes);
+reset ($t_boxes);
+#print_r ($t_boxes);
 
-	$t_project_id = helper_get_current_project();
+$t_project_id = helper_get_current_project();
 ?>
 
 <div align="center">
 <table class="hide" border="0" cellspacing="3" cellpadding="0">
 
 <?php
-	$t_status_legend_position = config_get( 'status_legend_position' );
+$t_status_legend_position = config_get( 'status_legend_position' );
 
-	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
-		echo '<tr>';
-		echo '<td colspan="2">';
-		html_status_legend();
-		echo '</td>';
-		echo '</tr>';
+if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
+	echo '<tr>';
+	echo '<td colspan="2">';
+	html_status_legend();
+	echo '</td>';
+	echo '</tr>';
+}
+
+$t_number_of_boxes = count ( $t_boxes );
+$t_boxes_position = config_get( 'my_view_boxes_fixed_position' );
+$t_counter = 0;
+
+while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
+	# don't display bugs that are set as 0
+	if ($t_box_display == 0) {
+		$t_number_of_boxes = $t_number_of_boxes - 1;
 	}
 
-	$t_number_of_boxes = count ( $t_boxes );
-	$t_boxes_position = config_get( 'my_view_boxes_fixed_position' );
-	$t_counter = 0;
+	# don't display "Assigned to Me" bugs to users that bugs can't be assigned to
+	else if ( $t_box_title == 'assigned' && ( current_user_is_anonymous() OR user_get_assigned_open_bug_count( $t_current_user_id, $t_project_id ) == 0 ) ) {
+		$t_number_of_boxes = $t_number_of_boxes - 1;
+	}
 
-	while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
-		# don't display bugs that are set as 0
-		if ($t_box_display == 0) {
-			$t_number_of_boxes = $t_number_of_boxes - 1;
-		}
+	# don't display "Monitored by Me" bugs to users that can't monitor bugs
+	else if ( $t_box_title == 'monitored' && ( current_user_is_anonymous() OR !access_has_project_level( config_get( 'monitor_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
+		$t_number_of_boxes = $t_number_of_boxes - 1;
+	}
 
-		# don't display "Assigned to Me" bugs to users that bugs can't be assigned to
-		else if ( $t_box_title == 'assigned' && ( current_user_is_anonymous() OR user_get_assigned_open_bug_count( $t_current_user_id, $t_project_id ) == 0 ) ) {
-			$t_number_of_boxes = $t_number_of_boxes - 1;
-		}
+	# don't display "Reported by Me" bugs to users that can't report bugs
+	else if ( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) &&
+			( current_user_is_anonymous() OR !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
+		$t_number_of_boxes = $t_number_of_boxes - 1;
+	}
 
-		# don't display "Monitored by Me" bugs to users that can't monitor bugs
-		else if ( $t_box_title == 'monitored' && ( current_user_is_anonymous() OR !access_has_project_level( config_get( 'monitor_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
-			$t_number_of_boxes = $t_number_of_boxes - 1;
-		}
+	# display the box
+	else {
+		$t_counter++;
 
-		# don't display "Reported by Me" bugs to users that can't report bugs
-		else if ( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) &&
-				( current_user_is_anonymous() OR !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
-			$t_number_of_boxes = $t_number_of_boxes - 1;
-		}
-
-		# display the box
-		else {
-			$t_counter++;
-
-			# check the style of displaying boxes - fixed (ie. each box in a separate table cell) or not
-			if ( ON == $t_boxes_position ) {
-				# for even box number start new row and column
-				if ( 1 == $t_counter%2 ) {
-					echo '<tr><td valign="top" width="50%">';
-					include 'my_view_inc.php';
-					echo '</td>';
-				}
-
-				# for odd box number only start new column
-				else if ( 0 == $t_counter%2 ) {
-					echo '<td valign="top" width="50%">';
-					include 'my_view_inc.php';
-					echo '</td></tr>';
-				}
-
-				# for odd number of box display one empty table cell in second column
-				if ( ( $t_counter == $t_number_of_boxes ) && 1 == $t_counter%2 ) {
-					echo '<td valign="top" width="50%"></td></tr>';
-				}
-			}
-			else if ( OFF == $t_boxes_position ) {
-				# start new table row and column for first box
-				if ( 1 == $t_counter ) {
-					echo '<tr><td valign="top" width="50%">';
-				}
-
-				# start new table column for the second half of boxes
-				if ( $t_counter == ceil ($t_number_of_boxes/2) + 1 ) {
-					echo '<td valign="top" width="50%">';
-				}
-
-				# display the required box
+		# check the style of displaying boxes - fixed (ie. each box in a separate table cell) or not
+		if ( ON == $t_boxes_position ) {
+			# for even box number start new row and column
+			if ( 1 == $t_counter%2 ) {
+				echo '<tr><td valign="top" width="50%">';
 				include 'my_view_inc.php';
-				echo '<br />';
+				echo '</td>';
+			}
 
-				# close the first column for first half of boxes
-				if ( $t_counter == ceil ($t_number_of_boxes/2) ) {
-					echo '</td>';
-				}
+			# for odd box number only start new column
+			else if ( 0 == $t_counter%2 ) {
+				echo '<td valign="top" width="50%">';
+				include 'my_view_inc.php';
+				echo '</td></tr>';
+			}
 
-				# close the table row after all of the boxes
-				if ( $t_counter == $t_number_of_boxes ) {
-					echo '</td></tr>';
-				}
+			# for odd number of box display one empty table cell in second column
+			if ( ( $t_counter == $t_number_of_boxes ) && 1 == $t_counter%2 ) {
+				echo '<td valign="top" width="50%"></td></tr>';
+			}
+		}
+		else if ( OFF == $t_boxes_position ) {
+			# start new table row and column for first box
+			if ( 1 == $t_counter ) {
+				echo '<tr><td valign="top" width="50%">';
+			}
+
+			# start new table column for the second half of boxes
+			if ( $t_counter == ceil ($t_number_of_boxes/2) + 1 ) {
+				echo '<td valign="top" width="50%">';
+			}
+
+			# display the required box
+			include 'my_view_inc.php';
+			echo '<br />';
+
+			# close the first column for first half of boxes
+			if ( $t_counter == ceil ($t_number_of_boxes/2) ) {
+				echo '</td>';
+			}
+
+			# close the table row after all of the boxes
+			if ( $t_counter == $t_number_of_boxes ) {
+				echo '</td></tr>';
 			}
 		}
 	}
+}
 
-	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
-		echo '<tr>';
-		echo '<td colspan="2">';
-		html_status_legend();
-		echo '</td>';
-		echo '</tr>';
-	}
+if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
+	echo '<tr>';
+	echo '<td colspan="2">';
+	html_status_legend();
+	echo '</td>';
+	echo '</tr>';
+}
 ?>
 
 </table>
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

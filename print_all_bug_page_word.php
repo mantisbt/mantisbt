@@ -71,38 +71,38 @@ require_api( 'profile_api.php' );
 require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	$f_type_page	= gpc_get_string( 'type_page', 'word' );
-	$f_search		= gpc_get_string( 'search', false ); /** @todo need a better default */
-	$f_offset		= gpc_get_int( 'offset', 0 );
-	$f_export		= gpc_get_string( 'export' );
-	$f_show_flag	= gpc_get_bool( 'show_flag' );
+$f_type_page	= gpc_get_string( 'type_page', 'word' );
+$f_search		= gpc_get_string( 'search', false ); /** @todo need a better default */
+$f_offset		= gpc_get_int( 'offset', 0 );
+$f_export		= gpc_get_string( 'export' );
+$f_show_flag	= gpc_get_bool( 'show_flag' );
 
-	helper_begin_long_process();
+helper_begin_long_process();
 
-	# word or html export
-	if ( $f_type_page != 'html' ) {
-		$t_export_title = helper_get_default_export_filename( '' );
-		$t_export_title = preg_replace( '/[\/:*?"<>|]/', '', $t_export_title );
-		$t_export_title .= '.doc';
+# word or html export
+if ( $f_type_page != 'html' ) {
+	$t_export_title = helper_get_default_export_filename( '' );
+	$t_export_title = preg_replace( '/[\/:*?"<>|]/', '', $t_export_title );
+	$t_export_title .= '.doc';
 
-		# Make sure that IE can download the attachments under https.
-		header( 'Pragma: public' );
+	# Make sure that IE can download the attachments under https.
+	header( 'Pragma: public' );
 
-		header( 'Content-Type: application/msword' );
+	header( 'Content-Type: application/msword' );
 
-		http_content_disposition_header( $t_export_title );
-	}
+	http_content_disposition_header( $t_export_title );
+}
 
-	# This is where we used to do the entire actual filter ourselves
-	$t_page_number = gpc_get_int( 'page_number', 1 );
-	$t_per_page = -1;
-	$t_bug_count = null;
-	$t_page_count = null;
+# This is where we used to do the entire actual filter ourselves
+$t_page_number = gpc_get_int( 'page_number', 1 );
+$t_per_page = -1;
+$t_bug_count = null;
+$t_page_count = null;
 
-	$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-	$t_row_count = count( $result );
+$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+$t_row_count = count( $result );
 ?>
 
 <html xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -110,73 +110,73 @@ xmlns:w="urn:schemas-microsoft-com:office:word"
 xmlns="http://www.w3.org/TR/REC-html40">
 
 <?php
-	html_page_top1();
-	html_head_end();
-	html_body_begin();
+html_page_top1();
+html_head_end();
+html_body_begin();
 
-	$f_bug_arr = explode( ',', $f_export );
-	$t_count_exported = 0;	
-	$t_date_format = config_get( 'normal_date_format' );
-	$t_short_date_format = config_get( 'short_date_format' );
+$f_bug_arr = explode( ',', $f_export );
+$t_count_exported = 0;	
+$t_date_format = config_get( 'normal_date_format' );
+$t_short_date_format = config_get( 'short_date_format' );
 
-	$t_lang_bug_view_title = lang_get( 'bug_view_title' );
-	$t_lang_id = lang_get( 'id' );
-	$t_lang_category = lang_get( 'category' );
-	$t_lang_severity = lang_get( 'severity' );
-	$t_lang_reproducibility = lang_get( 'reproducibility' );
-	$t_lang_date_submitted = lang_get( 'date_submitted' );
-	$t_lang_last_update = lang_get( 'last_update' );
-	$t_lang_reporter = lang_get( 'reporter' );
-	$t_lang_assigned_to = lang_get( 'assigned_to' );
-	$t_lang_platform = lang_get( 'platform' );
-	$t_lang_due_date = lang_get( 'due_date' );
-	$t_lang_os = lang_get( 'os' );
-	$t_lang_os_version = lang_get( 'os_version' );
-	$t_lang_fixed_in_version = lang_get( 'fixed_in_version' );
-	$t_lang_resolution = lang_get( 'resolution' );
-	$t_lang_priority = lang_get( 'priority' );
-	$t_lang_product_build = lang_get( 'product_build' );
-	$t_lang_eta = lang_get( 'eta' );
-	$t_lang_status = lang_get( 'status' );
-	$t_lang_product_version = lang_get( 'product_version' );
-	$t_lang_no_bugnotes_msg = lang_get( 'no_bugnotes_msg' );
-	$t_lang_projection = lang_get( 'projection' );
-	$t_lang_target_version = lang_get( 'target_version' );
-	$t_lang_summary = lang_get( 'summary' );
-	$t_lang_description = lang_get( 'description' );
-	$t_lang_steps_to_reproduce = lang_get( 'steps_to_reproduce' );
-	$t_lang_additional_information = lang_get( 'additional_information' );
-	$t_lang_bug_notes_title = lang_get( 'bug_notes_title' );
-	$t_lang_system_profile = lang_get( 'system_profile' );
-	$t_lang_attached_files = lang_get( 'attached_files' );
+$t_lang_bug_view_title = lang_get( 'bug_view_title' );
+$t_lang_id = lang_get( 'id' );
+$t_lang_category = lang_get( 'category' );
+$t_lang_severity = lang_get( 'severity' );
+$t_lang_reproducibility = lang_get( 'reproducibility' );
+$t_lang_date_submitted = lang_get( 'date_submitted' );
+$t_lang_last_update = lang_get( 'last_update' );
+$t_lang_reporter = lang_get( 'reporter' );
+$t_lang_assigned_to = lang_get( 'assigned_to' );
+$t_lang_platform = lang_get( 'platform' );
+$t_lang_due_date = lang_get( 'due_date' );
+$t_lang_os = lang_get( 'os' );
+$t_lang_os_version = lang_get( 'os_version' );
+$t_lang_fixed_in_version = lang_get( 'fixed_in_version' );
+$t_lang_resolution = lang_get( 'resolution' );
+$t_lang_priority = lang_get( 'priority' );
+$t_lang_product_build = lang_get( 'product_build' );
+$t_lang_eta = lang_get( 'eta' );
+$t_lang_status = lang_get( 'status' );
+$t_lang_product_version = lang_get( 'product_version' );
+$t_lang_no_bugnotes_msg = lang_get( 'no_bugnotes_msg' );
+$t_lang_projection = lang_get( 'projection' );
+$t_lang_target_version = lang_get( 'target_version' );
+$t_lang_summary = lang_get( 'summary' );
+$t_lang_description = lang_get( 'description' );
+$t_lang_steps_to_reproduce = lang_get( 'steps_to_reproduce' );
+$t_lang_additional_information = lang_get( 'additional_information' );
+$t_lang_bug_notes_title = lang_get( 'bug_notes_title' );
+$t_lang_system_profile = lang_get( 'system_profile' );
+$t_lang_attached_files = lang_get( 'attached_files' );
 
-	$t_current_user_id = auth_get_current_user_id();
-	$t_user_bugnote_order = user_pref_get_pref ( $t_current_user_id, 'bugnote_order' );
+$t_current_user_id = auth_get_current_user_id();
+$t_user_bugnote_order = user_pref_get_pref ( $t_current_user_id, 'bugnote_order' );
 
-	for( $j=0; $j < $t_row_count; $j++ ) {
-		$t_bug = $result[$j];
-		$t_id = $t_bug->id;
+for( $j=0; $j < $t_row_count; $j++ ) {
+	$t_bug = $result[$j];
+	$t_id = $t_bug->id;
 
-		if ( $j % 50 == 0 ) {
-			# to save ram as report will list data once, clear cache after 50 bugs
-			bug_text_clear_cache();
-			bug_clear_cache();
-			bugnote_clear_cache();
+	if ( $j % 50 == 0 ) {
+		# to save ram as report will list data once, clear cache after 50 bugs
+		bug_text_clear_cache();
+		bug_clear_cache();
+		bugnote_clear_cache();
+	}
+
+	# display the available and selected bugs
+	if ( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
+		if ( $t_count_exported > 0 ) {
+			echo "<br clear=all style='mso-special-character:line-break; page-break-before:always'>";
 		}
 
-		# display the available and selected bugs
-		if ( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
-			if ( $t_count_exported > 0 ) {
-				echo "<br clear=all style='mso-special-character:line-break; page-break-before:always'>";
-			}
+		$t_count_exported++;
 
-			$t_count_exported++;
+		$t_last_updated = date( $g_short_date_format, $t_bug->last_updated );
 
-			$t_last_updated = date( $g_short_date_format, $t_bug->last_updated );
-
-            # grab the project name
-            $t_project_name = project_get_field( $t_bug->project_id, 'name' );
-			$t_category_name = category_full_name( $t_bug->category_id, false );
+		# grab the project name
+		$t_project_name = project_get_field( $t_bug->project_id, 'name' );
+		$t_category_name = category_full_name( $t_bug->category_id, false );
 ?>
 <br />
 <table class="width100" cellspacing="1">
@@ -575,5 +575,5 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 
 <?php
 echo '<br /><br />';
-		} # end in_array
+	} # end in_array
 }  # end main loop

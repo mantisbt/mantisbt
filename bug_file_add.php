@@ -51,45 +51,45 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
-	$f_bug_id	= gpc_get_int( 'bug_id', -1 );
-	$f_file		= gpc_get_file( 'file', -1 );
+$f_bug_id	= gpc_get_int( 'bug_id', -1 );
+$f_file		= gpc_get_file( 'file', -1 );
 
-	if ( $f_bug_id == -1 && $f_file	== -1 ) {
-		# _POST/_FILES does not seem to get populated if you exceed size limit so check if bug_id is -1
-		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
-	}
+if ( $f_bug_id == -1 && $f_file	== -1 ) {
+	# _POST/_FILES does not seem to get populated if you exceed size limit so check if bug_id is -1
+	trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+}
 
-	form_security_validate( 'bug_file_add' );
+form_security_validate( 'bug_file_add' );
 
-	$t_bug = bug_get( $f_bug_id, true );
-	if( $t_bug->project_id != helper_get_current_project() ) {
-		# in case the current project is not the same project of the bug we are viewing...
-		# ... override the current project. This to avoid problems with categories and handlers lists etc.
-		$g_project_override = $t_bug->project_id;
-	}
+$t_bug = bug_get( $f_bug_id, true );
+if( $t_bug->project_id != helper_get_current_project() ) {
+	# in case the current project is not the same project of the bug we are viewing...
+	# ... override the current project. This to avoid problems with categories and handlers lists etc.
+	$g_project_override = $t_bug->project_id;
+}
 
-	if ( !file_allow_bug_upload( $f_bug_id ) ) {
-		access_denied();
-	}
+if ( !file_allow_bug_upload( $f_bug_id ) ) {
+	access_denied();
+}
 
-	access_ensure_bug_level( config_get( 'upload_bug_file_threshold' ), $f_bug_id );
+access_ensure_bug_level( config_get( 'upload_bug_file_threshold' ), $f_bug_id );
 
-	file_add( $f_bug_id, $f_file, 'bug' );
+file_add( $f_bug_id, $f_file, 'bug' );
 
-	form_security_purge( 'bug_file_add' );
+form_security_purge( 'bug_file_add' );
 
-	# Determine which view page to redirect back to.
-	$t_redirect_url = string_get_bug_view_url( $f_bug_id );
+# Determine which view page to redirect back to.
+$t_redirect_url = string_get_bug_view_url( $f_bug_id );
 
-	html_page_top( null, $t_redirect_url );
+html_page_top( null, $t_redirect_url );
 ?>
 <br />
 <div align="center">
 <?php
-	echo lang_get( 'operation_successful' ) . '<br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo lang_get( 'operation_successful' ) . '<br />';
+print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

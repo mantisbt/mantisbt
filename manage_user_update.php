@@ -57,154 +57,154 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 
-	form_security_validate('manage_user_update');
+form_security_validate('manage_user_update');
 
-	auth_reauthenticate();
-	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
+auth_reauthenticate();
+access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-	$f_protected	= gpc_get_bool( 'protected' );
-	$f_enabled		= gpc_get_bool( 'enabled' );
-	$f_email		= gpc_get_string( 'email', '' );
-	$f_username		= gpc_get_string( 'username', '' );
-	$f_realname		= gpc_get_string( 'realname', '' );
-	$f_access_level	= gpc_get_int( 'access_level' );
-	$f_user_id		= gpc_get_int( 'user_id' );
+$f_protected	= gpc_get_bool( 'protected' );
+$f_enabled		= gpc_get_bool( 'enabled' );
+$f_email		= gpc_get_string( 'email', '' );
+$f_username		= gpc_get_string( 'username', '' );
+$f_realname		= gpc_get_string( 'realname', '' );
+$f_access_level	= gpc_get_int( 'access_level' );
+$f_user_id		= gpc_get_int( 'user_id' );
 
-	if ( config_get( 'enable_email_notification' ) == ON ) {
-		$f_send_email_notification = gpc_get_bool( 'send_email_notification' );
-	} else {
-		$f_send_email_notification = 0;
+if ( config_get( 'enable_email_notification' ) == ON ) {
+	$f_send_email_notification = gpc_get_bool( 'send_email_notification' );
+} else {
+	$f_send_email_notification = 0;
+}
+
+user_ensure_exists( $f_user_id );
+
+$f_email	= trim( $f_email );
+$f_username	= trim( $f_username );
+
+$t_old_username = user_get_field( $f_user_id, 'username' );
+
+if ( $f_send_email_notification ) {
+	$t_old_realname = user_get_field( $f_user_id, 'realname' );
+	$t_old_email = user_get_email( $f_user_id );
+	$t_old_access_level = user_get_field( $f_user_id, 'access_level' );
+}
+
+# check that the username is unique
+if ( 0 != strcasecmp( $t_old_username, $f_username )
+	&& false == user_is_name_unique( $f_username ) ) {
+	trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
+}
+
+# strip extra space from real name
+$t_realname = string_normalize( $f_realname );
+
+user_ensure_name_valid( $f_username );
+user_ensure_realname_valid( $f_realname );
+user_ensure_realname_unique( $f_username, $f_realname );
+
+$f_email = email_append_domain( $f_email );
+email_ensure_valid( $f_email );
+email_ensure_not_disposable( $f_email );
+
+$c_email		= $f_email;
+$c_username		= $f_username;
+$c_realname		= $t_realname;
+$c_protected	= db_prepare_bool( $f_protected );
+$c_enabled		= db_prepare_bool( $f_enabled );
+$c_user_id		= db_prepare_int( $f_user_id );
+$c_access_level	= db_prepare_int( $f_access_level );
+
+$t_user_table = db_get_table( 'user' );
+
+$t_old_protected = user_get_field( $f_user_id, 'protected' );
+
+# check that we are not downgrading the last administrator
+$t_admin_threshold = config_get_global( 'admin_site_threshold' );
+if ( user_is_administrator( $f_user_id ) &&
+	 $f_access_level < $t_admin_threshold &&
+	 user_count_level( $t_admin_threshold ) <= 1 ) {
+	trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
+}
+
+# Project specific access rights override global levels, hence, for users who are changed
+# to be administrators, we have to remove project specific rights.
+if ( ( $f_access_level >= $t_admin_threshold ) && ( !user_is_administrator( $f_user_id ) ) ) {
+	user_delete_project_specific_access_levels( $f_user_id );
+}
+
+# if the user is already protected and the admin is not removing the
+#  protected flag then don't update the access level and enabled flag.
+#  If the user was unprotected or the protected flag is being turned off
+#  then proceed with a full update.
+$query_params = Array();
+if ( $f_protected && $t_old_protected ) {
+	$query = "UPDATE $t_user_table
+			SET username=" . db_param() . ", email=" . db_param() . ",
+				protected=" . db_param() . ", realname=" . db_param() . "
+			WHERE id=" . db_param();
+	$query_params = Array( $c_username, $c_email, $c_protected, $c_realname, $c_user_id );
+} else {
+	$query = "UPDATE $t_user_table
+			SET username=" . db_param() . ", email=" . db_param() . ",
+				access_level=" . db_param() . ", enabled=" . db_param() . ",
+				protected=" . db_param() . ", realname=" . db_param() . "
+			WHERE id=" . db_param();
+	$query_params = Array( $c_username, $c_email, $c_access_level, $c_enabled, $c_protected, $c_realname, $c_user_id );
+}
+
+$result = db_query_bound( $query, $query_params );
+
+if ( $f_send_email_notification ) {
+	lang_push( user_pref_get_language( $f_user_id ) );
+	$t_changes = "";
+	if ( strcmp( $f_username, $t_old_username ) ) {
+		$t_changes .= lang_get( 'username_label' ) . lang_get( 'word_separator' ) . $t_old_username . ' => ' . $f_username . "\n";
 	}
-
-	user_ensure_exists( $f_user_id );
-
-	$f_email	= trim( $f_email );
-	$f_username	= trim( $f_username );
-
-	$t_old_username = user_get_field( $f_user_id, 'username' );
-
-	if ( $f_send_email_notification ) {
-		$t_old_realname = user_get_field( $f_user_id, 'realname' );
-		$t_old_email = user_get_email( $f_user_id );
-		$t_old_access_level = user_get_field( $f_user_id, 'access_level' );
+	if ( strcmp( $t_realname, $t_old_realname ) ) {
+		$t_changes .= lang_get( 'realname_label' ) . lang_get( 'word_separator' ) . $t_old_realname . ' => ' . $t_realname . "\n";
 	}
-
-	# check that the username is unique
-	if ( 0 != strcasecmp( $t_old_username, $f_username )
-        && false == user_is_name_unique( $f_username ) ) {
-		trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
+	if ( strcmp( $f_email, $t_old_email ) ) {
+		$t_changes .= lang_get( 'email_label' ) . lang_get( 'word_separator' ) . $t_old_email . ' => ' . $f_email . "\n";
 	}
-
-    # strip extra space from real name
-    $t_realname = string_normalize( $f_realname );
-
-	user_ensure_name_valid( $f_username );
-	user_ensure_realname_valid( $f_realname );
-	user_ensure_realname_unique( $f_username, $f_realname );
-
-	$f_email = email_append_domain( $f_email );
-	email_ensure_valid( $f_email );
-	email_ensure_not_disposable( $f_email );
-
-	$c_email		= $f_email;
-	$c_username		= $f_username;
-	$c_realname		= $t_realname;
-	$c_protected	= db_prepare_bool( $f_protected );
-	$c_enabled		= db_prepare_bool( $f_enabled );
-	$c_user_id		= db_prepare_int( $f_user_id );
-	$c_access_level	= db_prepare_int( $f_access_level );
-
-	$t_user_table = db_get_table( 'user' );
-
-	$t_old_protected = user_get_field( $f_user_id, 'protected' );
-
-	# check that we are not downgrading the last administrator
-	$t_admin_threshold = config_get_global( 'admin_site_threshold' );
-	if ( user_is_administrator( $f_user_id ) &&
-	     $f_access_level < $t_admin_threshold &&
-	     user_count_level( $t_admin_threshold ) <= 1 ) {
-		trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
+	if ( strcmp( $f_access_level, $t_old_access_level ) ) {
+		$t_old_access_string = get_enum_element( 'access_levels', $t_old_access_level );
+		$t_new_access_string = get_enum_element( 'access_levels', $f_access_level );
+		$t_changes .= lang_get( 'access_level_label' ) . lang_get( 'word_separator' ) . $t_old_access_string . ' => ' . $t_new_access_string . "\n\n";
 	}
-
-	# Project specific access rights override global levels, hence, for users who are changed
-	# to be administrators, we have to remove project specific rights.
-    if ( ( $f_access_level >= $t_admin_threshold ) && ( !user_is_administrator( $f_user_id ) ) ) {
-		user_delete_project_specific_access_levels( $f_user_id );
-	}
-
-	# if the user is already protected and the admin is not removing the
-	#  protected flag then don't update the access level and enabled flag.
-	#  If the user was unprotected or the protected flag is being turned off
-	#  then proceed with a full update.
-	$query_params = Array();
-	if ( $f_protected && $t_old_protected ) {
-	    $query = "UPDATE $t_user_table
-	    		SET username=" . db_param() . ", email=" . db_param() . ",
-	    			protected=" . db_param() . ", realname=" . db_param() . "
-	    		WHERE id=" . db_param();
-	    $query_params = Array( $c_username, $c_email, $c_protected, $c_realname, $c_user_id );
-	} else {
-	    $query = "UPDATE $t_user_table
-	    		SET username=" . db_param() . ", email=" . db_param() . ",
-	    			access_level=" . db_param() . ", enabled=" . db_param() . ",
-	    			protected=" . db_param() . ", realname=" . db_param() . "
-	    		WHERE id=" . db_param();
-	    $query_params = Array( $c_username, $c_email, $c_access_level, $c_enabled, $c_protected, $c_realname, $c_user_id );
-	}
-
-	$result = db_query_bound( $query, $query_params );
-
-	if ( $f_send_email_notification ) {
-		lang_push( user_pref_get_language( $f_user_id ) );
-		$t_changes = "";
-		if ( strcmp( $f_username, $t_old_username ) ) {
-			$t_changes .= lang_get( 'username_label' ) . lang_get( 'word_separator' ) . $t_old_username . ' => ' . $f_username . "\n";
+	if ( !empty( $t_changes ) ) {
+		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'email_user_updated_subject' );
+		$t_updated_msg = lang_get( 'email_user_updated_msg' );
+		$t_message = $t_updated_msg . "\n\n" . config_get( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
+		email_store( $f_email, $t_subject, $t_message );
+		log_event( LOG_EMAIL, sprintf( 'Account update notification sent to ' . $f_username . ' (' . $f_email . ')' ) );
+		if ( config_get( 'email_send_using_cronjob' ) == OFF ) {
+			email_send_all();
 		}
-		if ( strcmp( $t_realname, $t_old_realname ) ) {
-			$t_changes .= lang_get( 'realname_label' ) . lang_get( 'word_separator' ) . $t_old_realname . ' => ' . $t_realname . "\n";
-		}
-		if ( strcmp( $f_email, $t_old_email ) ) {
-			$t_changes .= lang_get( 'email_label' ) . lang_get( 'word_separator' ) . $t_old_email . ' => ' . $f_email . "\n";
-		}
-		if ( strcmp( $f_access_level, $t_old_access_level ) ) {
-			$t_old_access_string = get_enum_element( 'access_levels', $t_old_access_level );
-			$t_new_access_string = get_enum_element( 'access_levels', $f_access_level );
-			$t_changes .= lang_get( 'access_level_label' ) . lang_get( 'word_separator' ) . $t_old_access_string . ' => ' . $t_new_access_string . "\n\n";
-		}
-		if ( !empty( $t_changes ) ) {
-			$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'email_user_updated_subject' );
-			$t_updated_msg = lang_get( 'email_user_updated_msg' );
-			$t_message = $t_updated_msg . "\n\n" . config_get( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
-			email_store( $f_email, $t_subject, $t_message );
-			log_event( LOG_EMAIL, sprintf( 'Account update notification sent to ' . $f_username . ' (' . $f_email . ')' ) );
-			if ( config_get( 'email_send_using_cronjob' ) == OFF ) {
-				email_send_all();
-			}
-		}
-		lang_pop();
 	}
+	lang_pop();
+}
 
-	$t_redirect_url = 'manage_user_edit_page.php?user_id=' . $c_user_id;
+$t_redirect_url = 'manage_user_edit_page.php?user_id=' . $c_user_id;
 
-	form_security_purge('manage_user_update');
+form_security_purge('manage_user_update');
 
-	html_page_top( null, $result ? $t_redirect_url : null );
+html_page_top( null, $result ? $t_redirect_url : null );
 ?>
 
 <br />
 <div align="center">
 <?php
-	if ( $f_protected && $t_old_protected ) {				# PROTECTED
-		echo lang_get( 'manage_user_protected_msg' ) . '<br />';
-	} else if ( $result ) {					# SUCCESS
-		echo lang_get( 'operation_successful' ) . '<br />';
-	} else {								# FAILURE
-		print_sql_error( $query );
-	}
+if ( $f_protected && $t_old_protected ) {				# PROTECTED
+	echo lang_get( 'manage_user_protected_msg' ) . '<br />';
+} else if ( $result ) {					# SUCCESS
+	echo lang_get( 'operation_successful' ) . '<br />';
+} else {								# FAILURE
+	print_sql_error( $query );
+}
 
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

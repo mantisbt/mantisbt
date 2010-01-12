@@ -59,70 +59,70 @@ require_api( 'relationship_api.php' );
 require_api( 'sponsorship_api.php' );
 require_api( 'version_api.php' );
 
-	$g_allow_browser_cache = 1;
+$g_allow_browser_cache = 1;
 
-	define ( 'BUG_VIEW_INC_ALLOW', true );
+define ( 'BUG_VIEW_INC_ALLOW', true );
 
-	$f_bug_id = gpc_get_int( 'id' );
-	$t_bug = bug_get( $f_bug_id );
+$f_bug_id = gpc_get_int( 'id' );
+$t_bug = bug_get( $f_bug_id );
 
-	$tpl_file = __FILE__;
-	$tpl_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-	$tpl_show_page_header = false;
-	$tpl_force_readonly = true;
-	$tpl_fields_config_option = 'bug_change_status_page_fields';
+$tpl_file = __FILE__;
+$tpl_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+$tpl_show_page_header = false;
+$tpl_force_readonly = true;
+$tpl_fields_config_option = 'bug_change_status_page_fields';
 
-	if( $t_bug->project_id != helper_get_current_project() ) {
-		# in case the current project is not the same project of the bug we are viewing...
-		# ... override the current project. This to avoid problems with categories and handlers lists etc.
-		$g_project_override = $t_bug->project_id;
+if( $t_bug->project_id != helper_get_current_project() ) {
+	# in case the current project is not the same project of the bug we are viewing...
+	# ... override the current project. This to avoid problems with categories and handlers lists etc.
+	$g_project_override = $t_bug->project_id;
+}
+
+$f_new_status = gpc_get_int( 'new_status' );
+$f_reopen_flag = gpc_get_int( 'reopen_flag', OFF );
+
+if ( !( ( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
+			( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) &&
+					( ( ON == config_get( 'allow_reporter_reopen' ) ) ||
+							( ON == config_get( 'allow_reporter_close' ) ) ) ) ||
+			( ( ON == $f_reopen_flag ) && ( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $f_bug_id ) ) )
+		) ) {
+	access_denied();
+}
+$t_can_update_due_date = access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id );
+# get new issue handler if set, otherwise default to original handler
+$f_handler_id = gpc_get_int( 'handler_id', bug_get_field( $f_bug_id, 'handler_id' ) );
+
+if ( config_get( 'bug_assigned_status' ) == $f_new_status ) {
+	$t_bug_sponsored = sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
+	if ( $t_bug_sponsored ) {
+		if ( !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
+			trigger_error( ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW, ERROR );
+		}
 	}
 
-	$f_new_status = gpc_get_int( 'new_status' );
-	$f_reopen_flag = gpc_get_int( 'reopen_flag', OFF );
+	if ( $f_handler_id != NO_USER ) {
+		if ( !access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id ) ) {
+			trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
+		}
 
-	if ( !( ( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
-				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) &&
-						( ( ON == config_get( 'allow_reporter_reopen' ) ) ||
-								( ON == config_get( 'allow_reporter_close' ) ) ) ) ||
-				( ( ON == $f_reopen_flag ) && ( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $f_bug_id ) ) )
-			) ) {
-		access_denied();
-	}
-	$t_can_update_due_date = access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id );
-	# get new issue handler if set, otherwise default to original handler
-	$f_handler_id = gpc_get_int( 'handler_id', bug_get_field( $f_bug_id, 'handler_id' ) );
-
-	if ( config_get( 'bug_assigned_status' ) == $f_new_status ) {
-		$t_bug_sponsored = sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
 		if ( $t_bug_sponsored ) {
-			if ( !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
-				trigger_error( ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW, ERROR );
-			}
-		}
-
-		if ( $f_handler_id != NO_USER ) {
-            if ( !access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id ) ) {
-				trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
-			}
-
-			if ( $t_bug_sponsored ) {
-				if ( !access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id, $f_handler_id ) ) {
-					trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
-				}
+			if ( !access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id, $f_handler_id ) ) {
+				trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
 			}
 		}
 	}
+}
 
-	$t_status_label = str_replace( " ", "_", MantisEnum::getLabel( config_get( 'status_enum_string' ), $f_new_status ) );
-	$t_resolved = config_get( 'bug_resolved_status_threshold' );
-	$t_closed = config_get( 'bug_closed_status_threshold' );
+$t_status_label = str_replace( " ", "_", MantisEnum::getLabel( config_get( 'status_enum_string' ), $f_new_status ) );
+$t_resolved = config_get( 'bug_resolved_status_threshold' );
+$t_closed = config_get( 'bug_closed_status_threshold' );
 
-	$t_bug = bug_get( $f_bug_id );
+$t_bug = bug_get( $f_bug_id );
 
-	html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
-	print_recently_visited();
+print_recently_visited();
 ?>
 
 <br />
@@ -130,7 +130,6 @@ require_api( 'version_api.php' );
 <form method="post" action="bug_update.php">
 <?php echo form_security_field( 'bug_update' ) ?>
 <table class="width75" cellspacing="1">
-
 
 <!-- Title -->
 <tr>

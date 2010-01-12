@@ -43,36 +43,36 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
-	auth_ensure_user_authenticated();
-	compress_enable();
+auth_ensure_user_authenticated();
+compress_enable();
 
-	$f_query_id = gpc_get_int( 'source_query_id' );
-	$t_redirect_url = 'query_view_page.php';
-	$t_delete_url = 'query_delete.php';
+$f_query_id = gpc_get_int( 'source_query_id' );
+$t_redirect_url = 'query_view_page.php';
+$t_delete_url = 'query_delete.php';
 
-	if ( !filter_db_can_delete_filter( $f_query_id ) ) {
-		print_header_redirect( $t_redirect_url );
-	}
+if ( !filter_db_can_delete_filter( $f_query_id ) ) {
+	print_header_redirect( $t_redirect_url );
+}
 
-	html_page_top();
+html_page_top();
 ?>
-	<br />
-	<div align="center">
-	<center><b><?php print string_display( filter_db_get_name( $f_query_id ) ); ?></b></center>
-	<?php echo lang_get( 'query_delete_msg' ); ?>
+<br />
+<div align="center">
+<center><b><?php print string_display( filter_db_get_name( $f_query_id ) ); ?></b></center>
+<?php echo lang_get( 'query_delete_msg' ); ?>
 
-	<form method="post" action="<?php print $t_delete_url; ?>">
-	<?php echo form_security_field( 'query_delete' ) ?>
-	<br /><br />
-	<input type="hidden" name="source_query_id" value="<?php print $f_query_id; ?>"/>
-	<input type="submit" class="button" value="<?php print lang_get( 'delete_query' ); ?>"/>
-	</form>
+<form method="post" action="<?php print $t_delete_url; ?>">
+<?php echo form_security_field( 'query_delete' ) ?>
+<br /><br />
+<input type="hidden" name="source_query_id" value="<?php print $f_query_id; ?>"/>
+<input type="submit" class="button" value="<?php print lang_get( 'delete_query' ); ?>"/>
+</form>
 
-	<form method="post" action="<?php print $t_redirect_url; ?>">
-	<?php # CSRF protection not required here - form does not result in modifications ?>
-	<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
-	</form>
+<form method="post" action="<?php print $t_redirect_url; ?>">
+<?php # CSRF protection not required here - form does not result in modifications ?>
+<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
+</form>
 
 <?php
-	print '</div>';
-	html_page_bottom();
+print '</div>';
+html_page_bottom();

@@ -38,12 +38,12 @@ require_api( 'form_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'utility_api.php' );
 
-	# check if we can allow the upload... bail out if we can't
-	if ( !file_allow_bug_upload( $f_bug_id ) ) {
-		return false;
-	}
+# check if we can allow the upload... bail out if we can't
+if ( !file_allow_bug_upload( $f_bug_id ) ) {
+	return false;
+}
 
-	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 ?>
 <br />
 
@@ -77,7 +77,7 @@ require_api( 'utility_api.php' );
 </table>
 </form>
 <?php
-	collapse_closed( 'upload_form' );
+collapse_closed( 'upload_form' );
 ?>
 <table class="width100" cellspacing="1">
 <tr>
@@ -90,4 +90,4 @@ require_api( 'utility_api.php' );
 </table>
 
 <?php
-	collapse_end( 'upload_form' );
+collapse_end( 'upload_form' );

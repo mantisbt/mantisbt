@@ -39,21 +39,21 @@ require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
 require_api( 'project_api.php' );
 
-	form_security_validate('manage_user_proj_add');
+form_security_validate('manage_user_proj_add');
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	$f_user_id		= gpc_get_int( 'user_id' );
-	$f_access_level	= gpc_get_int( 'access_level' );
-	$f_project_id	= gpc_get_int_array( 'project_id', array() );
-	$t_manage_user_threshold = config_get( 'manage_user_threshold' );
+$f_user_id		= gpc_get_int( 'user_id' );
+$f_access_level	= gpc_get_int( 'access_level' );
+$f_project_id	= gpc_get_int_array( 'project_id', array() );
+$t_manage_user_threshold = config_get( 'manage_user_threshold' );
 
-	foreach ( $f_project_id as $t_proj_id ) {
-		if ( access_has_project_level( $t_manage_user_threshold, $t_proj_id ) ) {
-			project_add_user( $t_proj_id, $f_user_id, $f_access_level );
-		}
+foreach ( $f_project_id as $t_proj_id ) {
+	if ( access_has_project_level( $t_manage_user_threshold, $t_proj_id ) ) {
+		project_add_user( $t_proj_id, $f_user_id, $f_access_level );
 	}
+}
 
-	form_security_purge('manage_user_proj_add');
+form_security_purge('manage_user_proj_add');
 
-	print_header_redirect( 'manage_user_edit_page.php?user_id=' . $f_user_id );
+print_header_redirect( 'manage_user_edit_page.php?user_id=' . $f_user_id );

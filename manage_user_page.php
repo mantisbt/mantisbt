@@ -51,195 +51,194 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
+access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-	$f_sort	= gpc_get_string( 'sort', 'username' );
-	$f_dir	= gpc_get_string( 'dir', 'ASC' );
-	$f_hide = gpc_get_bool( 'hide' );
-	$f_save = gpc_get_bool( 'save' );
-	$f_filter = utf8_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
-	$f_page_number		= gpc_get_int( 'page_number', 1 );
+$f_sort	= gpc_get_string( 'sort', 'username' );
+$f_dir	= gpc_get_string( 'dir', 'ASC' );
+$f_hide = gpc_get_bool( 'hide' );
+$f_save = gpc_get_bool( 'save' );
+$f_filter = utf8_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
+$f_page_number		= gpc_get_int( 'page_number', 1 );
 
-	$t_user_table = db_get_table( 'user' );
-	$t_cookie_name = config_get( 'manage_cookie' );
-	$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" border="0" alt="' . lang_get( 'protected' ) . '" />';
-	$c_filter = '';
+$t_user_table = db_get_table( 'user' );
+$t_cookie_name = config_get( 'manage_cookie' );
+$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" border="0" alt="' . lang_get( 'protected' ) . '" />';
+$c_filter = '';
 
-	# Clean up the form variables
-	if ( !in_array( $f_sort, db_field_names( $t_user_table ) ) ) {
-        $c_sort = 'username';
-    } else {
-        $c_sort = addslashes($f_sort);
-    }
+# Clean up the form variables
+if ( !in_array( $f_sort, db_field_names( $t_user_table ) ) ) {
+	$c_sort = 'username';
+} else {
+	$c_sort = addslashes($f_sort);
+}
 
-	if ($f_dir == 'ASC') {
-		$c_dir = 'ASC';
+if ($f_dir == 'ASC') {
+	$c_dir = 'ASC';
+} else {
+	$c_dir = 'DESC';
+}
+
+if ($f_hide == 0) { # a 0 will turn it off
+	$c_hide = 0;
+} else {            # anything else (including 'on') will turn it on
+	$c_hide = 1;
+}
+$t_hide_filter = '&hide=' . $c_hide;
+
+# set cookie values for hide, sort by, and dir
+if ( $f_save ) {
+	$t_manage_string = $c_hide.':'.$c_sort.':'.$c_dir;
+	gpc_set_cookie( $t_cookie_name, $t_manage_string, true );
+} else if ( !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
+	$t_manage_arr = explode( ':', gpc_get_cookie( $t_cookie_name ) );
+	$f_hide = $t_manage_arr[0];
+
+	if ( isset( $t_manage_arr[1] ) ) {
+		$f_sort = $t_manage_arr[1];
 	} else {
-		$c_dir = 'DESC';
+		$f_sort = 'username';
 	}
 
-	if ($f_hide == 0) { # a 0 will turn it off
-		$c_hide = 0;
-	} else {            # anything else (including 'on') will turn it on
-		$c_hide = 1;
+	if ( isset( $t_manage_arr[2] ) ) {
+		$f_dir  = $t_manage_arr[2];
+	} else {
+		$f_dir = 'DESC';
 	}
-	$t_hide_filter = '&hide=' . $c_hide;
+}
 
-	# set cookie values for hide, sort by, and dir
-	if ( $f_save ) {
-		$t_manage_string = $c_hide.':'.$c_sort.':'.$c_dir;
-		gpc_set_cookie( $t_cookie_name, $t_manage_string, true );
-	} else if ( !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
-		$t_manage_arr = explode( ':', gpc_get_cookie( $t_cookie_name ) );
-		$f_hide = $t_manage_arr[0];
+html_page_top( lang_get( 'manage_users_link' ) );
 
-		if ( isset( $t_manage_arr[1] ) ) {
-			$f_sort = $t_manage_arr[1];
-		} else {
-			$f_sort = 'username';
-		}
+print_manage_menu( 'manage_user_page.php' );
 
-		if ( isset( $t_manage_arr[2] ) ) {
-			$f_dir  = $t_manage_arr[2];
-		} else {
-			$f_dir = 'DESC';
-		}
+# New Accounts Form BEGIN
+
+$days_old = 7 * SECONDS_PER_DAY;
+$query = "SELECT *
+	FROM $t_user_table
+	WHERE ".db_helper_compare_days("" . db_now() . "","date_created","<= $days_old")."
+	ORDER BY date_created DESC";
+$result = db_query_bound( $query );
+$g_db->debug=false;
+$new_user_count = db_num_rows( $result);
+
+# Never Logged In Form BEGIN
+
+$query = "SELECT *
+	FROM $t_user_table
+	WHERE ( login_count = 0 ) AND ( date_created = last_visit )
+	ORDER BY date_created DESC";
+$result = db_query_bound( $query );
+$unused_user_count = db_num_rows( $result );
+
+# Manage Form BEGIN
+
+$t_prefix_array = array( 'ALL' );
+
+for ( $i = 'A'; $i != 'AA'; $i++ ) {
+	$t_prefix_array[] = $i;
+}
+
+for ( $i = 0; $i <= 9; $i++ ) {
+	$t_prefix_array[] = "$i";
+}
+$t_prefix_array[] = lang_get( 'users_unused' );
+$t_prefix_array[] = lang_get( 'users_new' );
+
+echo '<br /><center><table class="width75"><tr>';
+foreach ( $t_prefix_array as $t_prefix ) {
+	if ( $t_prefix === 'ALL' ) {
+		$t_caption = lang_get( 'show_all_users' );
+	} else {
+		$t_caption = $t_prefix;
 	}
 
-	html_page_top( lang_get( 'manage_users_link' ) );
+	echo '<td>';
+	if ( $t_prefix == $f_filter ) {
+		$c_filter = $f_filter;
+		echo "<strong>$t_caption</strong>";
+	} else {
+		print_link( "manage_user_page.php?filter=$t_prefix$t_hide_filter", $t_caption );
+	}
 
-	print_manage_menu( 'manage_user_page.php' );
+	if ($t_prefix == 'UNUSED' ) {
+		echo '[' . $unused_user_count . ']' . '<br />' . lang_get( 'never_logged_in_title' ) . '<br />';
+		echo print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) );
+	} else if ($t_prefix == 'NEW' ) {
+		echo '[' . $new_user_count . ']<br />' . '(' . lang_get( '1_week_title' ) . ')';
+	}
+	echo '</td>';
+}
+echo '</tr></table></center>';
 
-	# New Accounts Form BEGIN
+$t_where_params = null;
+if ( $f_filter === 'ALL' ) {
+	$t_where = '(1 = 1)';
+} else if ( $f_filter === 'UNUSED' ) {
+	$t_where = '(login_count = 0) AND ( date_created = last_visit )';
+} else if ( $f_filter === 'NEW' ) {
+	$t_where = db_helper_compare_days("" . db_now() . "","date_created","<= $days_old");
+} else {
+	$c_prefix = db_prepare_string($f_filter);
+	$t_where = "(username like '$c_prefix%')";
+}
 
-	$days_old = 7 * SECONDS_PER_DAY;
+$p_per_page = 50;
+
+$t_offset = ( ( $f_page_number - 1 ) * $p_per_page );
+
+$total_user_count = 0;
+
+# Get the user data in $c_sort order
+$result = '';
+if ( 0 == $c_hide ) {
+	$query = "SELECT count(*) as usercnt
+			FROM $t_user_table
+			WHERE $t_where";
+	$result = db_query_bound($query, $t_where_params);
+	$row = db_fetch_array( $result );
+	$total_user_count = $row['usercnt'];
+} else {
+	$query = "SELECT count(*) as usercnt
+			FROM $t_user_table
+			WHERE $t_where AND " . db_helper_compare_days("" . db_now() . "","last_visit","< $days_old");
+	$result = db_query_bound($query, $t_where_params);
+	$row = db_fetch_array( $result );
+	$total_user_count = $row['usercnt'];
+}
+
+$t_page_count = ceil($total_user_count / $p_per_page);
+if ( $t_page_count < 1 ) {
+	$t_page_count = 1;
+}
+
+# Make sure $p_page_number isn't past the last page.
+if ( $f_page_number > $t_page_count ) {
+	$f_page_number = $t_page_count;
+}
+
+# Make sure $p_page_number isn't before the first page
+if ( $f_page_number < 1 ) {
+	$f_page_number = 1;
+}
+
+
+if ( 0 == $c_hide ) {
 	$query = "SELECT *
-		FROM $t_user_table
-		WHERE ".db_helper_compare_days("" . db_now() . "","date_created","<= $days_old")."
-		ORDER BY date_created DESC";
-	$result = db_query_bound( $query );
-	$g_db->debug=false;
-	$new_user_count = db_num_rows( $result);
-
-	# Never Logged In Form BEGIN
+			FROM $t_user_table
+			WHERE $t_where
+			ORDER BY $c_sort $c_dir";
+	$result = db_query_bound($query, $t_where_params, $p_per_page, $t_offset);
+} else {
 
 	$query = "SELECT *
-		FROM $t_user_table
-		WHERE ( login_count = 0 ) AND ( date_created = last_visit )
-		ORDER BY date_created DESC";
-	$result = db_query_bound( $query );
-	$unused_user_count = db_num_rows( $result );
-
-	# Manage Form BEGIN
-
-	$t_prefix_array = array( 'ALL' );
-
-	for ( $i = 'A'; $i != 'AA'; $i++ ) {
-		$t_prefix_array[] = $i;
-	}
-
-	for ( $i = 0; $i <= 9; $i++ ) {
-		$t_prefix_array[] = "$i";
-	}
-	$t_prefix_array[] = lang_get( 'users_unused' );
-	$t_prefix_array[] = lang_get( 'users_new' );
-
-	echo '<br /><center><table class="width75"><tr>';
-	foreach ( $t_prefix_array as $t_prefix ) {
-		if ( $t_prefix === 'ALL' ) {
-			$t_caption = lang_get( 'show_all_users' );
-		} else {
-			$t_caption = $t_prefix;
-		}
-
-		echo '<td>';
-		if ( $t_prefix == $f_filter ) {
-			$c_filter = $f_filter;
-			echo "<strong>$t_caption</strong>";
-		} else {
-			print_link( "manage_user_page.php?filter=$t_prefix$t_hide_filter", $t_caption );
-		}
-
-		if ($t_prefix == 'UNUSED' ) {
-			echo '[' . $unused_user_count . ']' . '<br />' . lang_get( 'never_logged_in_title' ) . '<br />';
-			echo print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) );
-		} else if ($t_prefix == 'NEW' ) {
-			echo '[' . $new_user_count . ']<br />' . '(' . lang_get( '1_week_title' ) . ')';
-		}
-		echo '</td>';
-	}
-	echo '</tr></table></center>';
-
-	$t_where_params = null;
-	if ( $f_filter === 'ALL' ) {
-		$t_where = '(1 = 1)';
-	} else if ( $f_filter === 'UNUSED' ) {
-		$t_where = '(login_count = 0) AND ( date_created = last_visit )';
-	} else if ( $f_filter === 'NEW' ) {
-		$t_where = db_helper_compare_days("" . db_now() . "","date_created","<= $days_old");
-	} else {
-		$c_prefix = db_prepare_string($f_filter);
-		$t_where = "(username like '$c_prefix%')";
-	}
-
-	$p_per_page = 50;
-
-	$t_offset = ( ( $f_page_number - 1 ) * $p_per_page );
-
-	$total_user_count = 0;
-
-	# Get the user data in $c_sort order
-	$result = '';
-	if ( 0 == $c_hide ) {
-		$query = "SELECT count(*) as usercnt
-				FROM $t_user_table
-				WHERE $t_where";
-		$result = db_query_bound($query, $t_where_params);
-		$row = db_fetch_array( $result );
-		$total_user_count = $row['usercnt'];
-	} else {
-		$query = "SELECT count(*) as usercnt
-				FROM $t_user_table
-				WHERE $t_where AND " . db_helper_compare_days("" . db_now() . "","last_visit","< $days_old");
-		$result = db_query_bound($query, $t_where_params);
-		$row = db_fetch_array( $result );
-		$total_user_count = $row['usercnt'];
-	}
-
-	$t_page_count = ceil($total_user_count / $p_per_page);
-	if ( $t_page_count < 1 ) {
-		$t_page_count = 1;
-	}
-
-	# Make sure $p_page_number isn't past the last page.
-	if ( $f_page_number > $t_page_count ) {
-		$f_page_number = $t_page_count;
-	}
-
-	# Make sure $p_page_number isn't before the first page
-	if ( $f_page_number < 1 ) {
-		$f_page_number = 1;
-	}
-
-
-	if ( 0 == $c_hide ) {
-		$query = "SELECT *
-				FROM $t_user_table
-				WHERE $t_where
-				ORDER BY $c_sort $c_dir";
-		$result = db_query_bound($query, $t_where_params, $p_per_page, $t_offset);
-	} else {
-
-		$query = "SELECT *
-				FROM $t_user_table
-				WHERE $t_where AND " . db_helper_compare_days( "" . db_now() . "", "last_visit", "< $days_old" ) . "
-				ORDER BY $c_sort $c_dir";
-		$result = db_query_bound($query, $t_where_params, $p_per_page, $t_offset );
-	}
-	$user_count = db_num_rows( $result );
-
+			FROM $t_user_table
+			WHERE $t_where AND " . db_helper_compare_days( "" . db_now() . "", "last_visit", "< $days_old" ) . "
+			ORDER BY $c_sort $c_dir";
+	$result = db_query_bound($query, $t_where_params, $p_per_page, $t_offset );
+}
+$user_count = db_num_rows( $result );
 ?>
 <br />
 <table class="width100" cellspacing="1">
@@ -310,19 +309,19 @@ require_api( 'utility_api.php' );
 	</td>
 </tr>
 <?php
-	$t_date_format = config_get( 'normal_date_format' );
-	$t_access_level = Array();
-	for ($i=0;$i<$user_count;$i++) {
-		# prefix user data with u_
-		$row = db_fetch_array($result);
-		extract( $row, EXTR_PREFIX_ALL, 'u' );
+$t_date_format = config_get( 'normal_date_format' );
+$t_access_level = Array();
+for ($i=0;$i<$user_count;$i++) {
+	# prefix user data with u_
+	$row = db_fetch_array($result);
+	extract( $row, EXTR_PREFIX_ALL, 'u' );
 
-		$u_date_created  = date( $t_date_format, $u_date_created );
-		$u_last_visit    = date( $t_date_format, $u_last_visit );
+	$u_date_created  = date( $t_date_format, $u_date_created );
+	$u_last_visit    = date( $t_date_format, $u_last_visit );
 
-		if( !isset( $t_access_level[$u_access_level] ) ) {
-			$t_access_level[$u_access_level] = get_enum_element( 'access_levels', $u_access_level );
-		}
+	if( !isset( $t_access_level[$u_access_level] ) ) {
+		$t_access_level[$u_access_level] = get_enum_element( 'access_levels', $u_access_level );
+	}
 ?>
 <tr <?php echo helper_alternate_class( $i ) ?>>
 	<td>
@@ -364,11 +363,10 @@ require_api( 'utility_api.php' );
 	# Manage Form END
 ?>
 	<br />
-	<form method="get" action="manage_user_edit_page.php">
-	<?php # CSRF protection not required here - form does not result in modifications ?>
+	<form method="get" action="manage_user_edit_page.php"<?php # CSRF protection not required here - form does not result in modifications ?>>	
 		<?php echo lang_get( 'username' ) ?>
 		<input type="text" name="username" value="" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" />
 	</form>
 <?php
-	html_page_bottom();
+html_page_bottom();

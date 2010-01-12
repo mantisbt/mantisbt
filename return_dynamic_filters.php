@@ -47,106 +47,106 @@ require_api( 'filter_constants_inc.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	compress_enable();
+compress_enable();
 
-	global $t_filter;
-	global $t_select_modifier;
-	$t_filter = current_user_get_bug_filter();
-	$t_filter = filter_ensure_valid_filter( $t_filter );
-	$t_project_id = helper_get_current_project();
-	$t_current_user_access_level = current_user_get_access_level();
-	$t_accessible_custom_fields_ids = array();
-	$t_accessible_custom_fields_names = array();
-	$t_accessible_custom_fields_types = array();
-	$t_accessible_custom_fields_values = array();
-	$t_filter_cols = 7;
-	$t_custom_cols = 1;
-	$t_custom_rows = 0;
+global $t_filter;
+global $t_select_modifier;
+$t_filter = current_user_get_bug_filter();
+$t_filter = filter_ensure_valid_filter( $t_filter );
+$t_project_id = helper_get_current_project();
+$t_current_user_access_level = current_user_get_access_level();
+$t_accessible_custom_fields_ids = array();
+$t_accessible_custom_fields_names = array();
+$t_accessible_custom_fields_types = array();
+$t_accessible_custom_fields_values = array();
+$t_filter_cols = 7;
+$t_custom_cols = 1;
+$t_custom_rows = 0;
 
-	if ( ON == config_get( 'filter_by_custom_fields' ) ) {
-		$t_custom_cols = config_get( 'filter_custom_fields_per_row' );
-		$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
+if ( ON == config_get( 'filter_by_custom_fields' ) ) {
+	$t_custom_cols = config_get( 'filter_custom_fields_per_row' );
+	$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
 
-		foreach ( $t_custom_fields as $t_cfid ) {
-			$t_field_info = custom_field_cache_row( $t_cfid, true );
-			if ( $t_field_info['access_level_r'] <= $t_current_user_access_level ) {
-				$t_accessible_custom_fields_ids[] = $t_cfid;
-				$t_accessible_custom_fields_names[] = $t_field_info['name'];
-				$t_accessible_custom_fields_types[] = $t_field_info['type'];
-				$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_field_info, $t_project_id );
-			}
-		}
-
-		if ( count( $t_accessible_custom_fields_ids ) > 0 ) {
-			$t_per_row = config_get( 'filter_custom_fields_per_row' );
-			$t_custom_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
+	foreach ( $t_custom_fields as $t_cfid ) {
+		$t_field_info = custom_field_cache_row( $t_cfid, true );
+		if ( $t_field_info['access_level_r'] <= $t_current_user_access_level ) {
+			$t_accessible_custom_fields_ids[] = $t_cfid;
+			$t_accessible_custom_fields_names[] = $t_field_info['name'];
+			$t_accessible_custom_fields_types[] = $t_field_info['type'];
+			$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_field_info, $t_project_id );
 		}
 	}
 
-	$f_for_screen = gpc_get_bool( 'for_screen', true );
-
-	$t_sort = $t_filter[ FILTER_PROPERTY_SORT_FIELD_NAME ];
-	$t_dir = $t_filter[ FILTER_PROPERTY_SORT_DIRECTION ];
-	$t_action  = "view_all_set.php?f=3";
-
-	if ( $f_for_screen == false ) {
-		$t_action  = "view_all_set.php";
+	if ( count( $t_accessible_custom_fields_ids ) > 0 ) {
+		$t_per_row = config_get( 'filter_custom_fields_per_row' );
+		$t_custom_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
 	}
+}
 
-	$f_default_view_type = 'simple';
-	if ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
-		$f_default_view_type = 'advanced';
-	}
+$f_for_screen = gpc_get_bool( 'for_screen', true );
 
-	$f_view_type = gpc_get_string( 'view_type', $f_default_view_type );
-	if ( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
-		$f_view_type = 'advanced';
-	}
-	if ( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
-		$f_view_type = 'simple';
-	}
+$t_sort = $t_filter[ FILTER_PROPERTY_SORT_FIELD_NAME ];
+$t_dir = $t_filter[ FILTER_PROPERTY_SORT_DIRECTION ];
+$t_action  = "view_all_set.php?f=3";
 
-	$t_select_modifier = '';
-	if ( 'advanced' == $f_view_type ) {
-		$t_select_modifier = 'multiple="multiple" size="10" ';
-	}
+if ( $f_for_screen == false ) {
+	$t_action  = "view_all_set.php";
+}
 
-	/**
-	 * Prepend headers to the dynamic filter forms that are sent as the response from this page.
-	 */
-	function return_dynamic_filters_prepend_headers() {
-		if ( !headers_sent() ) {
-			header( 'Content-Type: text/html; charset=utf-8' );
+$f_default_view_type = 'simple';
+if ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
+	$f_default_view_type = 'advanced';
+}
+
+$f_view_type = gpc_get_string( 'view_type', $f_default_view_type );
+if ( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
+	$f_view_type = 'advanced';
+}
+if ( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
+	$f_view_type = 'simple';
+}
+
+$t_select_modifier = '';
+if ( 'advanced' == $f_view_type ) {
+	$t_select_modifier = 'multiple="multiple" size="10" ';
+}
+
+/**
+ * Prepend headers to the dynamic filter forms that are sent as the response from this page.
+ */
+function return_dynamic_filters_prepend_headers() {
+	if ( !headers_sent() ) {
+		header( 'Content-Type: text/html; charset=utf-8' );
+	}
+}
+
+$t_filter_target = gpc_get_string( 'filter_target' );
+$t_functionName = 'print_filter_' . utf8_substr( $t_filter_target, 0, -7 );
+if ( function_exists( $t_functionName ) ) {
+	return_dynamic_filters_prepend_headers();
+	call_user_func( $t_functionName );
+} else if ( 'custom_field' == utf8_substr( $t_filter_target, 0, 12 ) ) {
+	# custom function
+	$t_custom_id = utf8_substr( $t_filter_target, 13, -7 );
+	return_dynamic_filters_prepend_headers();
+	print_filter_custom_field( $t_custom_id );
+} else {
+	$t_plugin_filters = filter_get_plugin_filters();
+	$t_found = false;
+	foreach ( $t_plugin_filters as $t_field_name => $t_filter_object ) {
+		if ( $filter == $t_field_name . '_filter' ) {
+			return_dynamic_filters_prepend_headers();
+			print_filter_plugin_field( $t_field_name, $t_filter_object );
+			$t_found = true;
+			break;
 		}
 	}
 
-	$t_filter_target = gpc_get_string( 'filter_target' );
-	$t_functionName = 'print_filter_' . utf8_substr( $t_filter_target, 0, -7 );
-	if ( function_exists( $t_functionName ) ) {
-		return_dynamic_filters_prepend_headers();
-		call_user_func( $t_functionName );
-	} else if ( 'custom_field' == utf8_substr( $t_filter_target, 0, 12 ) ) {
-		# custom function
-		$t_custom_id = utf8_substr( $t_filter_target, 13, -7 );
-		return_dynamic_filters_prepend_headers();
-		print_filter_custom_field( $t_custom_id );
-	} else {
-		$t_plugin_filters = filter_get_plugin_filters();
-		$t_found = false;
-		foreach ( $t_plugin_filters as $t_field_name => $t_filter_object ) {
-			if ( $filter == $t_field_name . '_filter' ) {
-				return_dynamic_filters_prepend_headers();
-				print_filter_plugin_field( $t_field_name, $t_filter_object );
-				$t_found = true;
-				break;
-			}
-		}
-
-		if ( !$t_found ) {
-			# error - no function to populate the target (e.g., print_filter_foo)
-			error_parameters( $t_filter_target );
-			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
-		}
+	if ( !$t_found ) {
+		# error - no function to populate the target (e.g., print_filter_foo)
+		error_parameters( $t_filter_target );
+		trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
 	}
+}

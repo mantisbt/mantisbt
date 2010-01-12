@@ -45,38 +45,38 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 
-	form_security_validate( 'manage_user_prune' );
+form_security_validate( 'manage_user_prune' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
+access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-	$t_user_table = db_get_table( 'user' );
+$t_user_table = db_get_table( 'user' );
 
-	# Delete the users who have never logged in and are older than 1 week
-	$days_old = (int)7 * SECONDS_PER_DAY;
+# Delete the users who have never logged in and are older than 1 week
+$days_old = (int)7 * SECONDS_PER_DAY;
 
-	$query = "SELECT id
-			FROM $t_user_table
-			WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND " . db_helper_compare_days( 0, "date_created", "> $days_old" );
-	$result = db_query_bound($query, Array( db_now() ) );
+$query = "SELECT id
+		FROM $t_user_table
+		WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND " . db_helper_compare_days( 0, "date_created", "> $days_old" );
+$result = db_query_bound($query, Array( db_now() ) );
 
-	if ( !$result ) {
-		trigger_error( ERROR_GENERIC, ERROR );
-	}
+if ( !$result ) {
+	trigger_error( ERROR_GENERIC, ERROR );
+}
 
-	$count = db_num_rows( $result );
+$count = db_num_rows( $result );
 
-	if ( $count > 0 ) {
-		helper_ensure_confirmed( lang_get( 'confirm_account_pruning' ),
-								 lang_get( 'prune_accounts_button' ) );
-	}
+if ( $count > 0 ) {
+	helper_ensure_confirmed( lang_get( 'confirm_account_pruning' ),
+							 lang_get( 'prune_accounts_button' ) );
+}
 
-	for ($i=0; $i < $count; $i++) {
-		$row = db_fetch_array( $result );
-		user_delete($row['id']);
-	}
+for ($i=0; $i < $count; $i++) {
+	$row = db_fetch_array( $result );
+	user_delete($row['id']);
+}
 
-	form_security_purge( 'manage_user_prune' );
+form_security_purge( 'manage_user_prune' );
 
-	print_header_redirect( 'manage_user_page.php' );
+print_header_redirect( 'manage_user_page.php' );

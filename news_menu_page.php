@@ -43,11 +43,11 @@ require_api( 'lang_api.php' );
 require_api( 'news_api.php' );
 require_api( 'print_api.php' );
 
-	news_ensure_enabled();
+news_ensure_enabled();
 
-	access_ensure_project_level( config_get( 'manage_news_threshold' ) );
+access_ensure_project_level( config_get( 'manage_news_threshold' ) );
 
-	html_page_top( lang_get( 'edit_news_link' ) );
+html_page_top( lang_get( 'edit_news_link' ) );
 ?>
 
 <br />
@@ -107,9 +107,9 @@ require_api( 'print_api.php' );
 </form>
 </div>
 <?php 
-	# Add News Form END
-	# Edit/Delete News Form BEGIN
-	if ( news_get_count( helper_get_current_project(), current_user_is_administrator() ) > 0 ) {
+# Add News Form END
+# Edit/Delete News Form BEGIN
+if ( news_get_count( helper_get_current_project(), current_user_is_administrator() ) > 0 ) {
 ?>
 <br />
 <div align="center">
@@ -146,6 +146,6 @@ require_api( 'print_api.php' );
 </form>
 </div>
 <?php 
-	} # Edit/Delete News Form END 
+} # Edit/Delete News Form END 
 
-	html_page_bottom();
+html_page_bottom();

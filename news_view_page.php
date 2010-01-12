@@ -41,26 +41,26 @@ require_api( 'lang_api.php' );
 require_api( 'news_api.php' );
 require_api( 'print_api.php' );
 
-	news_ensure_enabled();
+news_ensure_enabled();
 
-	$f_news_id = gpc_get_int( 'news_id', null );
+$f_news_id = gpc_get_int( 'news_id', null );
 
-	html_page_top();
+html_page_top();
 ?>
 <br />
 
 <?php
-	if ( $f_news_id !== null ) {
-		$t_project_id = news_get_field( $f_news_id, 'project_id' );
-		if ( news_is_private( $f_news_id ) ) {
-			access_ensure_project_level(	config_get( 'private_news_threshold' ),
-							$t_project_id );
-		} else {
-			access_ensure_project_level( VIEWER, $t_project_id );
-		}
-
-		print_news_string_by_news_id( $f_news_id );
+if ( $f_news_id !== null ) {
+	$t_project_id = news_get_field( $f_news_id, 'project_id' );
+	if ( news_is_private( $f_news_id ) ) {
+		access_ensure_project_level(	config_get( 'private_news_threshold' ),
+						$t_project_id );
+	} else {
+		access_ensure_project_level( VIEWER, $t_project_id );
 	}
+
+	print_news_string_by_news_id( $f_news_id );
+}
 ?>
 
 <br />
@@ -69,4 +69,4 @@ require_api( 'print_api.php' );
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

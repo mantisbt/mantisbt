@@ -56,22 +56,22 @@ require_api( 'string_api.php' );
 require_api( 'tag_api.php' );
 require_api( 'user_api.php' );
 
-	compress_enable();
+compress_enable();
 
-	$f_tag_id = gpc_get_int( 'tag_id' );
-	$t_tag_row = tag_get( $f_tag_id );
+$f_tag_id = gpc_get_int( 'tag_id' );
+$t_tag_row = tag_get( $f_tag_id );
 
-	$t_name = string_display_line( $t_tag_row['name'] );
-	$t_description = string_display( $t_tag_row['description'] );
+$t_name = string_display_line( $t_tag_row['name'] );
+$t_description = string_display( $t_tag_row['description'] );
 
-	if ( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
-		|| ( auth_get_current_user_id() == $t_tag_row['user_id'] )
-			&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) )
-	{
-		access_denied();
-	}
+if ( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
+	|| ( auth_get_current_user_id() == $t_tag_row['user_id'] )
+		&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) )
+{
+	access_denied();
+}
 
-	html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
+html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
 ?>
 
 <br/>
@@ -144,4 +144,4 @@ require_api( 'user_api.php' );
 </form>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

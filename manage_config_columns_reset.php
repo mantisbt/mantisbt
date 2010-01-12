@@ -37,28 +37,28 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-	form_security_validate( 'manage_config_columns_reset' );
+form_security_validate( 'manage_config_columns_reset' );
 
-	auth_ensure_user_authenticated();
-	auth_reauthenticate();
+auth_ensure_user_authenticated();
+auth_reauthenticate();
 
-	$t_user_id = auth_get_current_user_id();
+$t_user_id = auth_get_current_user_id();
 
-	config_delete_for_user( 'view_issues_page_columns', $t_user_id );
-	config_delete_for_user( 'print_issues_page_columns', $t_user_id );
-	config_delete_for_user( 'csv_columns', $t_user_id );
-	config_delete_for_user( 'excel_columns', $t_user_id );
+config_delete_for_user( 'view_issues_page_columns', $t_user_id );
+config_delete_for_user( 'print_issues_page_columns', $t_user_id );
+config_delete_for_user( 'csv_columns', $t_user_id );
+config_delete_for_user( 'excel_columns', $t_user_id );
 
-	form_security_purge( 'manage_config_columns_reset' );
+form_security_purge( 'manage_config_columns_reset' );
 
-	echo '<br />';
-	echo '<div align="center">';
+echo '<br />';
+echo '<div align="center">';
 
-	$t_redirect_url = 'account_manage_columns_page.php';
-	html_page_top( lang_get( 'manage_email_config' ), $t_redirect_url );
-	echo '<br />';
-	echo lang_get( 'operation_successful' ) . '<br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-	echo '</div>';
+$t_redirect_url = 'account_manage_columns_page.php';
+html_page_top( lang_get( 'manage_email_config' ), $t_redirect_url );
+echo '<br />';
+echo lang_get( 'operation_successful' ) . '<br />';
+print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo '</div>';
 
-	html_page_bottom();
+html_page_bottom();

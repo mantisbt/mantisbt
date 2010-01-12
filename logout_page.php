@@ -31,6 +31,6 @@ require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'print_api.php' );
 
-	auth_logout();
+auth_logout();
 
-	print_header_redirect( config_get( 'logout_redirect_page' ), /* die */ true, /* sanitize */ false );
+print_header_redirect( config_get( 'logout_redirect_page' ), /* die */ true, /* sanitize */ false );

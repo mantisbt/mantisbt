@@ -55,82 +55,82 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-	form_security_validate('account_update');
+form_security_validate('account_update');
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	current_user_ensure_unprotected();
+current_user_ensure_unprotected();
 
-	$f_email           	= gpc_get_string( 'email', '' );
-	$f_realname        	= gpc_get_string( 'realname', '' );
-	$f_password        	= gpc_get_string( 'password', '' );
-	$f_password_confirm	= gpc_get_string( 'password_confirm', '' );
+$f_email           	= gpc_get_string( 'email', '' );
+$f_realname        	= gpc_get_string( 'realname', '' );
+$f_password        	= gpc_get_string( 'password', '' );
+$f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 
-	// get the user id once, so that if we decide in the future to enable this for
-	// admins / managers to change details of other users.
-	$t_user_id = auth_get_current_user_id();
+// get the user id once, so that if we decide in the future to enable this for
+// admins / managers to change details of other users.
+$t_user_id = auth_get_current_user_id();
 
-	$t_redirect = 'account_page.php';
+$t_redirect = 'account_page.php';
 
-	$t_email_updated = false;
-	$t_password_updated = false;
-	$t_realname_updated = false;
+$t_email_updated = false;
+$t_password_updated = false;
+$t_realname_updated = false;
 
-	/** @todo Listing what fields were updated is not standard behaviour of MantisBT - it also complicates the code. */
+/** @todo Listing what fields were updated is not standard behaviour of MantisBT - it also complicates the code. */
 
-	if ( OFF == config_get( 'use_ldap_email' ) ) {
-		$f_email = email_append_domain( $f_email );
-		email_ensure_valid( $f_email );
-		email_ensure_not_disposable( $f_email );
+if ( OFF == config_get( 'use_ldap_email' ) ) {
+	$f_email = email_append_domain( $f_email );
+	email_ensure_valid( $f_email );
+	email_ensure_not_disposable( $f_email );
 
-		if ( $f_email != user_get_email( $t_user_id ) ) {
-			user_set_email( $t_user_id, $f_email );
-			$t_email_updated = true;
+	if ( $f_email != user_get_email( $t_user_id ) ) {
+		user_set_email( $t_user_id, $f_email );
+		$t_email_updated = true;
+	}
+}
+
+# strip extra spaces from real name
+$t_realname = string_normalize( $f_realname );
+if ( $t_realname != user_get_field( $t_user_id, 'realname' ) ) {
+	# checks for problems with realnames
+	user_ensure_realname_valid( $t_realname );
+	$t_username = user_get_field( $t_user_id, 'username' );
+	user_ensure_realname_unique( $t_username, $t_realname );
+	user_set_realname( $t_user_id, $t_realname );
+	$t_realname_updated = true;
+}
+
+# Update password if the two match and are not empty
+if ( !is_blank( $f_password ) ) {
+	if ( $f_password != $f_password_confirm ) {
+		trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
+	} else {
+		if ( !auth_does_password_match( $t_user_id, $f_password ) ) {
+			user_set_password( $t_user_id, $f_password );
+			$t_password_updated = true;
 		}
 	}
+}
 
-    # strip extra spaces from real name
-    $t_realname = string_normalize( $f_realname );
-	if ( $t_realname != user_get_field( $t_user_id, 'realname' ) ) {
-		# checks for problems with realnames
-		user_ensure_realname_valid( $t_realname );
-		$t_username = user_get_field( $t_user_id, 'username' );
-		user_ensure_realname_unique( $t_username, $t_realname );
-		user_set_realname( $t_user_id, $t_realname );
-		$t_realname_updated = true;
-	}
+form_security_purge('account_update');
 
-	# Update password if the two match and are not empty
-	if ( !is_blank( $f_password ) ) {
-		if ( $f_password != $f_password_confirm ) {
-			trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
-		} else {
-			if ( !auth_does_password_match( $t_user_id, $f_password ) ) {
-				user_set_password( $t_user_id, $f_password );
-				$t_password_updated = true;
-			}
-		}
-	}
+html_page_top( null, $t_redirect );
 
-	form_security_purge('account_update');
+echo '<br /><div align="center">';
 
-	html_page_top( null, $t_redirect );
+if ( $t_email_updated ) {
+	echo lang_get( 'email_updated' ) . '<br />';
+}
 
-	echo '<br /><div align="center">';
+if ( $t_password_updated ) {
+	echo lang_get( 'password_updated' ) . '<br />';
+}
 
-	if ( $t_email_updated ) {
-		echo lang_get( 'email_updated' ) . '<br />';
-	}
+if ( $t_realname_updated ) {
+	echo lang_get( 'realname_updated' ) . '<br />';
+}
 
-	if ( $t_password_updated ) {
-		echo lang_get( 'password_updated' ) . '<br />';
-	}
-
-	if ( $t_realname_updated ) {
-		echo lang_get( 'realname_updated' ) . '<br />';
-	}
-
-	echo lang_get( 'operation_successful' ) . '<br />';
-	print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
-	echo '</div>';
-	html_page_bottom();
+echo lang_get( 'operation_successful' ) . '<br />';
+print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
+echo '</div>';
+html_page_bottom();

@@ -41,44 +41,73 @@ require_api( 'filter_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'print_api.php' );
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	helper_begin_long_process();
+helper_begin_long_process();
 
-	$t_page_number = 1;
-	$t_per_page = -1;
-	$t_bug_count = null;
-	$t_page_count = null;
+$t_page_number = 1;
+$t_per_page = -1;
+$t_bug_count = null;
+$t_page_count = null;
 
-	$t_nl = csv_get_newline();
- 	$t_sep = csv_get_separator();
+$t_nl = csv_get_newline();
+$t_sep = csv_get_separator();
 
-	# Get bug rows according to the current filter
-	$t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-	if ( $t_rows === false ) {
-		print_header_redirect( 'view_all_set.php?type=0' );
+# Get bug rows according to the current filter
+$t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+if ( $t_rows === false ) {
+	print_header_redirect( 'view_all_set.php?type=0' );
+}
+
+$t_filename = csv_get_default_filename();
+
+# Send headers to browser to activate mime loading
+
+# Make sure that IE can download the attachments under https.
+header( 'Pragma: public' );
+
+header( 'Content-Type: text/plain; name=' . urlencode( file_clean_name( $t_filename ) ) );
+header( 'Content-Transfer-Encoding: BASE64;' );
+
+# Added Quotes (") around file name.
+header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_filename ) ) . '"' );
+
+# Get columns to be exported
+$t_columns = csv_get_columns();
+
+# export the titles
+$t_first_column = true;
+ob_start();
+$t_titles = array();
+foreach ( $t_columns as $t_column ) {
+	if ( !$t_first_column ) {
+		echo $t_sep;
+	} else {
+		$t_first_column = false;
 	}
 
-	$t_filename = csv_get_default_filename();
+	echo column_get_title( $t_column );
+}
 
-	# Send headers to browser to activate mime loading
+echo $t_nl;
 
-	# Make sure that IE can download the attachments under https.
-	header( 'Pragma: public' );
+$t_header = ob_get_clean();
 
-	header( 'Content-Type: text/plain; name=' . urlencode( file_clean_name( $t_filename ) ) );
-	header( 'Content-Transfer-Encoding: BASE64;' );
+# Fixed for a problem in Excel where it prompts error message "SYLK: File Format Is Not Valid"
+# See Microsoft Knowledge Base Article - 323626
+# http://support.microsoft.com/default.aspx?scid=kb;en-us;323626&Product=xlw
+$t_first_three_chars = utf8_substr( $t_header, 0, 3 );
+if ( strcmp( $t_first_three_chars, 'ID' . $t_sep ) == 0 ) {
+	$t_header = str_replace( 'ID' . $t_sep, 'Id' . $t_sep, $t_header );
+}
+# end of fix
 
-	# Added Quotes (") around file name.
-	header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_filename ) ) . '"' );
+echo $t_header;
 
-	# Get columns to be exported
-	$t_columns = csv_get_columns();
-
-	# export the titles
+# export the rows
+foreach ( $t_rows as $t_row ) {
 	$t_first_column = true;
-	ob_start();
-	$t_titles = array();
+
 	foreach ( $t_columns as $t_column ) {
 		if ( !$t_first_column ) {
 			echo $t_sep;
@@ -86,48 +115,19 @@ require_api( 'print_api.php' );
 			$t_first_column = false;
 		}
 
-		echo column_get_title( $t_column );
+		$t_custom_field = column_get_custom_field_name( $t_column );
+		if ( $t_custom_field !== null ) {
+			ob_start();
+			$t_column_value_function = 'print_column_value';
+			helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_CSV_PAGE ) );
+			$t_value = ob_get_clean();
+
+			echo csv_escape_string($t_value);
+		} else {
+			$t_function = 'csv_format_' . $t_column;
+			echo $t_function( $t_row->$t_column );
+		}
 	}
 
 	echo $t_nl;
-
-	$t_header = ob_get_clean();
-
-	# Fixed for a problem in Excel where it prompts error message "SYLK: File Format Is Not Valid"
-	# See Microsoft Knowledge Base Article - 323626
-	# http://support.microsoft.com/default.aspx?scid=kb;en-us;323626&Product=xlw
-	$t_first_three_chars = utf8_substr( $t_header, 0, 3 );
-	if ( strcmp( $t_first_three_chars, 'ID' . $t_sep ) == 0 ) {
-		$t_header = str_replace( 'ID' . $t_sep, 'Id' . $t_sep, $t_header );
-	}
-	# end of fix
-
-	echo $t_header;
-
-	# export the rows
-	foreach ( $t_rows as $t_row ) {
-		$t_first_column = true;
-
-		foreach ( $t_columns as $t_column ) {
-			if ( !$t_first_column ) {
-				echo $t_sep;
-			} else {
-				$t_first_column = false;
-			}
-
-			$t_custom_field = column_get_custom_field_name( $t_column );
-			if ( $t_custom_field !== null ) {
-				ob_start();
-				$t_column_value_function = 'print_column_value';
-				helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_CSV_PAGE ) );
-				$t_value = ob_get_clean();
-
-				echo csv_escape_string($t_value);
-			} else {
-				$t_function = 'csv_format_' . $t_column;
-				echo $t_function( $t_row->$t_column );
-			}
-		}
-
-		echo $t_nl;
-	}
+}

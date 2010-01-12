@@ -41,39 +41,39 @@ require_api( 'lang_api.php' );
 require_api( 'news_api.php' );
 require_api( 'print_api.php' );
 
-	news_ensure_enabled();
+news_ensure_enabled();
 
-	form_security_validate( 'news_update' );
+form_security_validate( 'news_update' );
 
-	$f_news_id		= gpc_get_int( 'news_id' );
-	$f_project_id	= gpc_get_int( 'project_id' );
-	$f_view_state	= gpc_get_int( 'view_state' );
-	$f_headline		= gpc_get_string( 'headline' );
-	$f_announcement	= gpc_get_string( 'announcement', '' );
-	$f_body			= gpc_get_string( 'body', '' );
+$f_news_id		= gpc_get_int( 'news_id' );
+$f_project_id	= gpc_get_int( 'project_id' );
+$f_view_state	= gpc_get_int( 'view_state' );
+$f_headline		= gpc_get_string( 'headline' );
+$f_announcement	= gpc_get_string( 'announcement', '' );
+$f_body			= gpc_get_string( 'body', '' );
 
-	$row = news_get_row( $f_news_id );
+$row = news_get_row( $f_news_id );
 
-	# Check both the old project and the new project
-	access_ensure_project_level( config_get( 'manage_news_threshold' ), $row['project_id'] );
-	access_ensure_project_level( config_get( 'manage_news_threshold' ), $f_project_id );
+# Check both the old project and the new project
+access_ensure_project_level( config_get( 'manage_news_threshold' ), $row['project_id'] );
+access_ensure_project_level( config_get( 'manage_news_threshold' ), $f_project_id );
 
-	news_update( $f_news_id, $f_project_id, $f_view_state, $f_announcement, $f_headline, $f_body );
+news_update( $f_news_id, $f_project_id, $f_view_state, $f_announcement, $f_headline, $f_body );
 
-	form_security_purge( 'news_update' );
+form_security_purge( 'news_update' );
 
-	html_page_top();
+html_page_top();
 ?>
 
 <br />
 <div align="center">
 	<?php echo lang_get( 'operation_successful' ) ?><br />
 <?php
-	print_bracket_link( "news_edit_page.php?news_id=$f_news_id&action=edit", lang_get( 'edit_link' ) );
-	print_bracket_link( 'news_menu_page.php', lang_get( 'proceed' ) );
+print_bracket_link( "news_edit_page.php?news_id=$f_news_id&action=edit", lang_get( 'edit_link' ) );
+print_bracket_link( 'news_menu_page.php', lang_get( 'proceed' ) );
 
-	echo '<br /><br />';
-	print_news_entry( $f_headline, $f_body, $row['poster_id'], $f_view_state, $f_announcement, $row['date_posted'] );
+echo '<br /><br />';
+print_news_entry( $f_headline, $f_body, $row['poster_id'], $f_view_state, $f_announcement, $row['date_posted'] );
 ?>
 </div>
 

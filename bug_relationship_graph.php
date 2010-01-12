@@ -49,47 +49,47 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'relationship_graph_api.php' );
 
-	# If relationship graphs were made disabled, we disallow any access to
-	# this script.
+# If relationship graphs were made disabled, we disallow any access to
+# this script.
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	if ( ON != config_get( 'relationship_graph_enable' ) )
-		access_denied();
+if ( ON != config_get( 'relationship_graph_enable' ) )
+	access_denied();
 
-	$f_bug_id		= gpc_get_int( 'bug_id' );
-	$f_type			= gpc_get_string( 'graph', 'relation' );
-	$f_orientation	= gpc_get_string( 'orientation', config_get( 'relationship_graph_orientation' ) );
+$f_bug_id		= gpc_get_int( 'bug_id' );
+$f_type			= gpc_get_string( 'graph', 'relation' );
+$f_orientation	= gpc_get_string( 'orientation', config_get( 'relationship_graph_orientation' ) );
 
-	if ( 'relation' == $f_type ) {
-		$t_graph_type = 'relation';
-		$t_graph_relation = true;
-	} else {
-		$t_graph_type = 'dependency';
-		$t_graph_relation = false;
-	}
+if ( 'relation' == $f_type ) {
+	$t_graph_type = 'relation';
+	$t_graph_relation = true;
+} else {
+	$t_graph_type = 'dependency';
+	$t_graph_relation = false;
+}
 
-	if ( 'horizontal' == $f_orientation ) {
-		$t_graph_orientation = 'horizontal';
-		$t_graph_horizontal = true;
-	} else {
-		$t_graph_orientation = 'vertical';
-		$t_graph_horizontal = false;
-	}
+if ( 'horizontal' == $f_orientation ) {
+	$t_graph_orientation = 'horizontal';
+	$t_graph_horizontal = true;
+} else {
+	$t_graph_orientation = 'vertical';
+	$t_graph_horizontal = false;
+}
 
-	$t_bug = bug_get( $f_bug_id, true );
+$t_bug = bug_get( $f_bug_id, true );
 
-	if( $t_bug->project_id != helper_get_current_project() ) {
-		# in case the current project is not the same project of the bug we are viewing...
-		# ... override the current project. This to avoid problems with categories and handlers lists etc.
-		$g_project_override = $t_bug->project_id;
-	}
+if( $t_bug->project_id != helper_get_current_project() ) {
+	# in case the current project is not the same project of the bug we are viewing...
+	# ... override the current project. This to avoid problems with categories and handlers lists etc.
+	$g_project_override = $t_bug->project_id;
+}
 
-	access_ensure_bug_level( VIEWER, $f_bug_id );
+access_ensure_bug_level( VIEWER, $f_bug_id );
 
-	compress_enable();
+compress_enable();
 
-	html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 ?>
 <br />
 
@@ -182,13 +182,13 @@ require_api( 'relationship_graph_api.php' );
 <br />
 
 <?php
-	define ( 'BUG_VIEW_INC_ALLOW', true );
-	$_GET['id'] = $f_bug_id;
-	$tpl_fields_config_option = 'bug_view_page_fields';
-	$tpl_show_page_header = false;
-	$tpl_force_readonly = true;
-	$tpl_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-	$tpl_file = __FILE__;
-	
-	include( 'bug_view_inc.php' );
-	html_page_bottom();
+define ( 'BUG_VIEW_INC_ALLOW', true );
+$_GET['id'] = $f_bug_id;
+$tpl_fields_config_option = 'bug_view_page_fields';
+$tpl_show_page_header = false;
+$tpl_force_readonly = true;
+$tpl_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+$tpl_file = __FILE__;
+
+include( 'bug_view_inc.php' );
+html_page_bottom();

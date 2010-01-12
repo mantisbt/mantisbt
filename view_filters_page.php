@@ -57,146 +57,146 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'version_api.php' );
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	compress_enable();
+compress_enable();
 
-	html_page_top();
+html_page_top();
 
-	$t_filter = filter_get_default();
-	$t_target_field = rtrim( gpc_get_string( 'target_field', '' ), '[]');
-	if ( !isset( $t_filter[ $t_target_field ] ) ) {
-		$t_target_field = '';
-	}
+$t_filter = filter_get_default();
+$t_target_field = rtrim( gpc_get_string( 'target_field', '' ), '[]');
+if ( !isset( $t_filter[ $t_target_field ] ) ) {
+	$t_target_field = '';
+}
 
-	if ( ON == config_get( 'use_javascript' ) ) {
-		?>
-		<body onload="SetInitialFocus();">
+if ( ON == config_get( 'use_javascript' ) ) {
+	?>
+	<body onload="SetInitialFocus();">
 
-		<script type="text/javascript" language="JavaScript">
-		<!--
-		function SetInitialFocus() {
-			<?php
-			global $t_target_field;
-			if ( $t_target_field ) {
-				$f_view_type = gpc_get_string( 'view_type', '' );
-				if ( ( FILTER_PROPERTY_HIDE_STATUS_ID . '[]' == $t_target_field ) && ( 'advanced' == $f_view_type ) ) {
-					echo 'field_to_focus = "', FILTER_PROPERTY_STATUS_ID, '[]";';
-				} else {
-					echo 'field_to_focus = "', $t_target_field, '";';
-				}
-			} else {
-				print "field_to_focus = null;";
-			}
-			?>
-			if ( field_to_focus ) {
-				eval( "document.filters['" + field_to_focus + "'].focus()" );
-			}
-
-			SwitchDateFields();
-		}
-
-		function SwitchDateFields() {
-		    // All fields need to be enabled to go back to the script
-			<?php
-			echo 'document.filters.', FILTER_PROPERTY_START_MONTH, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
-			echo 'document.filters.', FILTER_PROPERTY_START_DAY, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
-			echo 'document.filters.', FILTER_PROPERTY_START_YEAR, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
-			echo 'document.filters.', FILTER_PROPERTY_END_MONTH, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
-			echo 'document.filters.', FILTER_PROPERTY_END_DAY, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
-			echo 'document.filters.', FILTER_PROPERTY_END_YEAR, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
-			?>
-
-		    return true;
-		}
-		// -->
-		</script>
-
+	<script type="text/javascript" language="JavaScript">
+	<!--
+	function SetInitialFocus() {
 		<?php
-	}
-
-	/** @todo thraxisp - could this be replaced by a call to filter_draw_selection_area2 */
-
-	$t_filter = current_user_get_bug_filter();
-	$t_filter = filter_ensure_valid_filter( $t_filter );
-	$t_project_id = helper_get_current_project();
-
-	$t_current_user_access_level = current_user_get_access_level();
-	$t_accessible_custom_fields_ids = array();
-	$t_accessible_custom_fields_names = array();
-	$t_accessible_custom_fields_type = array() ;
-	$t_accessible_custom_fields_values = array();
-	$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
-	$t_custom_cols = 1;
-	$t_custom_rows = 0;
-
-	#get valid target fields
-	$t_fields = helper_get_columns_to_view();
-	$t_n_fields = count( $t_fields );
-	for ( $i=0; $i < $t_n_fields; $i++ ) {
-		if ( in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
-			unset( $t_fields[$i] );
-		}
-	}
-
-	if ( ON == config_get( 'filter_by_custom_fields' ) ) {
-		$t_custom_cols = $t_filter_cols;
-		$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
-
-		foreach ( $t_custom_fields as $t_cfid ) {
-			$t_field_info = custom_field_cache_row( $t_cfid, true );
-			if ( $t_field_info['access_level_r'] <= $t_current_user_access_level && $t_field_info['filter_by']) {
-				$t_accessible_custom_fields_ids[] = $t_cfid;
-				$t_accessible_custom_fields_names[] = $t_field_info['name'];
-				$t_accessible_custom_fields_types[] = $t_field_info['type'];
-				$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_field_info, $t_project_id );
-				$t_fields[] = "custom_" . $t_field_info['name'];
+		global $t_target_field;
+		if ( $t_target_field ) {
+			$f_view_type = gpc_get_string( 'view_type', '' );
+			if ( ( FILTER_PROPERTY_HIDE_STATUS_ID . '[]' == $t_target_field ) && ( 'advanced' == $f_view_type ) ) {
+				echo 'field_to_focus = "', FILTER_PROPERTY_STATUS_ID, '[]";';
+			} else {
+				echo 'field_to_focus = "', $t_target_field, '";';
 			}
+		} else {
+			print "field_to_focus = null;";
+		}
+		?>
+		if ( field_to_focus ) {
+			eval( "document.filters['" + field_to_focus + "'].focus()" );
 		}
 
-		if ( count( $t_accessible_custom_fields_ids ) > 0 ) {
-			$t_per_row = config_get( 'filter_custom_fields_per_row' );
-			$t_custom_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
+		SwitchDateFields();
+	}
+
+	function SwitchDateFields() {
+		// All fields need to be enabled to go back to the script
+		<?php
+		echo 'document.filters.', FILTER_PROPERTY_START_MONTH, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
+		echo 'document.filters.', FILTER_PROPERTY_START_DAY, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
+		echo 'document.filters.', FILTER_PROPERTY_START_YEAR, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
+		echo 'document.filters.', FILTER_PROPERTY_END_MONTH, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
+		echo 'document.filters.', FILTER_PROPERTY_END_DAY, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
+		echo 'document.filters.', FILTER_PROPERTY_END_YEAR, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
+		?>
+
+		return true;
+	}
+	// -->
+	</script>
+
+	<?php
+}
+
+/** @todo thraxisp - could this be replaced by a call to filter_draw_selection_area2 */
+
+$t_filter = current_user_get_bug_filter();
+$t_filter = filter_ensure_valid_filter( $t_filter );
+$t_project_id = helper_get_current_project();
+
+$t_current_user_access_level = current_user_get_access_level();
+$t_accessible_custom_fields_ids = array();
+$t_accessible_custom_fields_names = array();
+$t_accessible_custom_fields_type = array() ;
+$t_accessible_custom_fields_values = array();
+$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
+$t_custom_cols = 1;
+$t_custom_rows = 0;
+
+#get valid target fields
+$t_fields = helper_get_columns_to_view();
+$t_n_fields = count( $t_fields );
+for ( $i=0; $i < $t_n_fields; $i++ ) {
+	if ( in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
+		unset( $t_fields[$i] );
+	}
+}
+
+if ( ON == config_get( 'filter_by_custom_fields' ) ) {
+	$t_custom_cols = $t_filter_cols;
+	$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
+
+	foreach ( $t_custom_fields as $t_cfid ) {
+		$t_field_info = custom_field_cache_row( $t_cfid, true );
+		if ( $t_field_info['access_level_r'] <= $t_current_user_access_level && $t_field_info['filter_by']) {
+			$t_accessible_custom_fields_ids[] = $t_cfid;
+			$t_accessible_custom_fields_names[] = $t_field_info['name'];
+			$t_accessible_custom_fields_types[] = $t_field_info['type'];
+			$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_field_info, $t_project_id );
+			$t_fields[] = "custom_" . $t_field_info['name'];
 		}
 	}
 
-	if ( !in_array( $t_target_field, $t_fields ) ) {
-		$t_target_field = '';
+	if ( count( $t_accessible_custom_fields_ids ) > 0 ) {
+		$t_per_row = config_get( 'filter_custom_fields_per_row' );
+		$t_custom_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
 	}
+}
 
-	$f_for_screen = gpc_get_bool( 'for_screen', true );
+if ( !in_array( $t_target_field, $t_fields ) ) {
+	$t_target_field = '';
+}
 
-	$t_action  = "view_all_set.php?f=3";
+$f_for_screen = gpc_get_bool( 'for_screen', true );
 
-	if ( $f_for_screen == false ) {
-		$t_action  = "view_all_set.php";
-	}
+$t_action  = "view_all_set.php?f=3";
 
-	$f_default_view_type = 'simple';
-	if ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
-		$f_default_view_type = 'advanced';
-	}
+if ( $f_for_screen == false ) {
+	$t_action  = "view_all_set.php";
+}
 
-	$f_view_type = gpc_get_string( 'view_type', $f_default_view_type );
-	if ( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
-		$f_view_type = 'advanced';
-	}
-	if ( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
-		$f_view_type = 'simple';
-	}
-	if ( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
-		$f_view_type = $f_default_view_type;
-	}
+$f_default_view_type = 'simple';
+if ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
+	$f_default_view_type = 'advanced';
+}
 
-	$t_select_modifier = '';
-	if ( 'advanced' == $f_view_type ) {
-		$t_select_modifier = 'multiple="multiple" size="10" ';
-	}
+$f_view_type = gpc_get_string( 'view_type', $f_default_view_type );
+if ( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
+	$f_view_type = 'advanced';
+}
+if ( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
+	$f_view_type = 'simple';
+}
+if ( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
+	$f_view_type = $f_default_view_type;
+}
 
-	$t_show_product_version = version_should_show_product_version( $t_project_id );
-	$t_show_build = $t_show_product_version && ( config_get( 'enable_product_build' ) == ON );
+$t_select_modifier = '';
+if ( 'advanced' == $f_view_type ) {
+	$t_select_modifier = 'multiple="multiple" size="10" ';
+}
 
-	$t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
+$t_show_product_version = version_should_show_product_version( $t_project_id );
+$t_show_build = $t_show_product_version && ( config_get( 'enable_product_build' ) == ON );
+
+$t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 ?>
 <br />
 <form method="post" name="filters" action="<?php echo $t_action; ?>">
@@ -537,4 +537,4 @@ if ( $t_column > 0 ) {
 </form>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

@@ -45,15 +45,15 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	access_ensure_global_level( config_get( 'create_project_threshold' ) );
+access_ensure_global_level( config_get( 'create_project_threshold' ) );
 
-	html_page_top();
+html_page_top();
 
-	print_manage_menu( 'manage_proj_create_page.php' );
+print_manage_menu( 'manage_proj_create_page.php' );
 
-	$f_parent_id = gpc_get( 'parent_id', null );
+$f_parent_id = gpc_get( 'parent_id', null );
 ?>
 
 <br />
@@ -165,4 +165,4 @@ require_api( 'print_api.php' );
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

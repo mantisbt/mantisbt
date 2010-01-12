@@ -52,29 +52,29 @@ if ( OFF == config_get('time_tracking_enabled') ) {
 <a name="bugnotestats" id="bugnotestats" /><br />
 
 <?php
-	collapse_open( 'bugnotestats' );
+collapse_open( 'bugnotestats' );
 
-	$t_bugnote_stats_from_def = date( "d:m:Y", $t_bug->date_submitted );
-	$t_bugnote_stats_from_def_ar = explode ( ":", $t_bugnote_stats_from_def );
-	$t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
-	$t_bugnote_stats_from_def_m = $t_bugnote_stats_from_def_ar[1];
-	$t_bugnote_stats_from_def_y = $t_bugnote_stats_from_def_ar[2];
+$t_bugnote_stats_from_def = date( "d:m:Y", $t_bug->date_submitted );
+$t_bugnote_stats_from_def_ar = explode ( ":", $t_bugnote_stats_from_def );
+$t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
+$t_bugnote_stats_from_def_m = $t_bugnote_stats_from_def_ar[1];
+$t_bugnote_stats_from_def_y = $t_bugnote_stats_from_def_ar[2];
 
-	$t_bugnote_stats_from_d = gpc_get_string('start_day', $t_bugnote_stats_from_def_d);
-	$t_bugnote_stats_from_m = gpc_get_string('start_month', $t_bugnote_stats_from_def_m);
-	$t_bugnote_stats_from_y = gpc_get_string('start_year', $t_bugnote_stats_from_def_y);
+$t_bugnote_stats_from_d = gpc_get_string('start_day', $t_bugnote_stats_from_def_d);
+$t_bugnote_stats_from_m = gpc_get_string('start_month', $t_bugnote_stats_from_def_m);
+$t_bugnote_stats_from_y = gpc_get_string('start_year', $t_bugnote_stats_from_def_y);
 
-	$t_bugnote_stats_to_def = date( "d:m:Y" );
-	$t_bugnote_stats_to_def_ar = explode ( ":", $t_bugnote_stats_to_def );
-	$t_bugnote_stats_to_def_d = $t_bugnote_stats_to_def_ar[0];
-	$t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
-	$t_bugnote_stats_to_def_y = $t_bugnote_stats_to_def_ar[2];
+$t_bugnote_stats_to_def = date( "d:m:Y" );
+$t_bugnote_stats_to_def_ar = explode ( ":", $t_bugnote_stats_to_def );
+$t_bugnote_stats_to_def_d = $t_bugnote_stats_to_def_ar[0];
+$t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
+$t_bugnote_stats_to_def_y = $t_bugnote_stats_to_def_ar[2];
 
-	$t_bugnote_stats_to_d = gpc_get_string('end_day', $t_bugnote_stats_to_def_d);
-	$t_bugnote_stats_to_m = gpc_get_string('end_month', $t_bugnote_stats_to_def_m);
-	$t_bugnote_stats_to_y = gpc_get_string('end_year', $t_bugnote_stats_to_def_y);
+$t_bugnote_stats_to_d = gpc_get_string('end_day', $t_bugnote_stats_to_def_d);
+$t_bugnote_stats_to_m = gpc_get_string('end_month', $t_bugnote_stats_to_def_m);
+$t_bugnote_stats_to_y = gpc_get_string('end_year', $t_bugnote_stats_to_def_y);
 
-	$f_get_bugnote_stats_button = gpc_get_string('get_bugnote_stats_button', '');
+$f_get_bugnote_stats_button = gpc_get_string('get_bugnote_stats_button', '');
 ?>
 <form method="post" action="<?php echo $_SERVER['SCRIPT_NAME'] ?>">
 <?php # CSRF protection not required here - form does not result in modifications ?>
@@ -83,8 +83,8 @@ if ( OFF == config_get('time_tracking_enabled') ) {
 <tr>
 	<td class="form-title" colspan="4">
 <?php
-		collapse_icon( 'bugnotestats' );
-		echo lang_get( 'time_tracking' ) ?>
+	collapse_icon( 'bugnotestats' );
+	echo lang_get( 'time_tracking' ) ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -166,4 +166,4 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 </tr>
 </table>
 <?php
-	collapse_end( 'bugnotestats' );
+collapse_end( 'bugnotestats' );

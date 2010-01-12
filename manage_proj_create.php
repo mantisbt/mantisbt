@@ -51,61 +51,61 @@ require_api( 'print_api.php' );
 require_api( 'project_api.php' );
 require_api( 'project_hierarchy_api.php' );
 
-	form_security_validate( 'manage_proj_create' );
+form_security_validate( 'manage_proj_create' );
 
-	auth_reauthenticate();
-	access_ensure_global_level( config_get( 'create_project_threshold' ) );
+auth_reauthenticate();
+access_ensure_global_level( config_get( 'create_project_threshold' ) );
 
-	$f_name 		= gpc_get_string( 'name' );
-	$f_description 	= gpc_get_string( 'description' );
-	$f_view_state	= gpc_get_int( 'view_state' );
-	$f_status		= gpc_get_int( 'status' );
-	$f_file_path	= gpc_get_string( 'file_path', '' );
-	$f_inherit_global = gpc_get_bool( 'inherit_global', 0 );
-	$f_inherit_parent = gpc_get_bool( 'inherit_parent', 0 );
+$f_name 		= gpc_get_string( 'name' );
+$f_description 	= gpc_get_string( 'description' );
+$f_view_state	= gpc_get_int( 'view_state' );
+$f_status		= gpc_get_int( 'status' );
+$f_file_path	= gpc_get_string( 'file_path', '' );
+$f_inherit_global = gpc_get_bool( 'inherit_global', 0 );
+$f_inherit_parent = gpc_get_bool( 'inherit_parent', 0 );
 
-	$f_parent_id	= gpc_get_int( 'parent_id', 0 );
+$f_parent_id	= gpc_get_int( 'parent_id', 0 );
 
-	if ( 0 != $f_parent_id ) {
-		project_ensure_exists( $f_parent_id );
-	}
+if ( 0 != $f_parent_id ) {
+	project_ensure_exists( $f_parent_id );
+}
 
-	# If the provided path is the same as the default, make the path blank.
-	# This means that if the default upload path is changed, you don't have
-	# to update the upload path for every single project.
-	if ( !strcmp( $f_file_path, config_get( 'absolute_path_default_upload_folder' ) ) ) {
-		$f_file_path = '';
-	}
+# If the provided path is the same as the default, make the path blank.
+# This means that if the default upload path is changed, you don't have
+# to update the upload path for every single project.
+if ( !strcmp( $f_file_path, config_get( 'absolute_path_default_upload_folder' ) ) ) {
+	$f_file_path = '';
+}
 
-	$t_project_id = project_create( strip_tags( $f_name ), $f_description, $f_status, $f_view_state, $f_file_path, true, $f_inherit_global );
+$t_project_id = project_create( strip_tags( $f_name ), $f_description, $f_status, $f_view_state, $f_file_path, true, $f_inherit_global );
 
-	if ( ( $f_view_state == VS_PRIVATE ) && ( false === current_user_is_administrator() ) ) {
-		$t_access_level = access_get_global_level();
-		$t_current_user_id = auth_get_current_user_id();
-		project_add_user( $t_project_id, $t_current_user_id, $t_access_level );
-	}
+if ( ( $f_view_state == VS_PRIVATE ) && ( false === current_user_is_administrator() ) ) {
+	$t_access_level = access_get_global_level();
+	$t_current_user_id = auth_get_current_user_id();
+	project_add_user( $t_project_id, $t_current_user_id, $t_access_level );
+}
 
-	if ( 0 != $f_parent_id ) {
-		project_hierarchy_add( $t_project_id, $f_parent_id, $f_inherit_parent );
-	}
+if ( 0 != $f_parent_id ) {
+	project_hierarchy_add( $t_project_id, $f_parent_id, $f_inherit_parent );
+}
 
-	event_signal( 'EVENT_MANAGE_PROJECT_CREATE', array( $t_project_id ) );
+event_signal( 'EVENT_MANAGE_PROJECT_CREATE', array( $t_project_id ) );
 
-	form_security_purge( 'manage_proj_create' );
+form_security_purge( 'manage_proj_create' );
 
-	$t_redirect_url = 'manage_proj_page.php';
+$t_redirect_url = 'manage_proj_page.php';
 
-	html_page_top( null, $t_redirect_url );
+html_page_top( null, $t_redirect_url );
 ?>
 
 <br />
 <div align="center">
 <?php
-	echo lang_get( 'operation_successful' ) . '<br />';
+echo lang_get( 'operation_successful' ) . '<br />';
 
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

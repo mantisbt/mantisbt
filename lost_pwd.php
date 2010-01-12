@@ -50,61 +50,61 @@ require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-	form_security_validate( 'lost_pwd' );
+form_security_validate( 'lost_pwd' );
 
-	# lost password feature disabled or reset password via email disabled -> stop here!
-	if( OFF == config_get( 'lost_password_feature' ) ||
-		OFF == config_get( 'send_reset_password' ) ||
-		OFF == config_get( 'enable_email_notification' ) ) {
-		trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
-	}
+# lost password feature disabled or reset password via email disabled -> stop here!
+if( OFF == config_get( 'lost_password_feature' ) ||
+	OFF == config_get( 'send_reset_password' ) ||
+	OFF == config_get( 'enable_email_notification' ) ) {
+	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
+}
 
-	# force logout on the current user if already authenticated
-	if( auth_is_user_authenticated() ) {
-		auth_logout();
-	}
+# force logout on the current user if already authenticated
+if( auth_is_user_authenticated() ) {
+	auth_logout();
+}
 
-	$f_username = gpc_get_string('username');
-	$f_email = gpc_get_string('email');
+$f_username = gpc_get_string('username');
+$f_email = gpc_get_string('email');
 
-	$f_email = email_append_domain( $f_email );
-	email_ensure_valid( $f_email );
+$f_email = email_append_domain( $f_email );
+email_ensure_valid( $f_email );
 
-	$t_user_table = db_get_table( 'user' );
+$t_user_table = db_get_table( 'user' );
 
-	/** @todo Consider moving this query to user_api.php */
-	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = ' . db_param() . ' AND email = ' . db_param() . ' AND enabled=' . db_param();
-	$result = db_query_bound( $query, Array( $f_username, $f_email, true ) );
+/** @todo Consider moving this query to user_api.php */
+$query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = ' . db_param() . ' AND email = ' . db_param() . ' AND enabled=' . db_param();
+$result = db_query_bound( $query, Array( $f_username, $f_email, true ) );
 
-	if ( 0 == db_num_rows( $result ) ) {
-		trigger_error( ERROR_LOST_PASSWORD_NOT_MATCHING_DATA, ERROR );
-	}
+if ( 0 == db_num_rows( $result ) ) {
+	trigger_error( ERROR_LOST_PASSWORD_NOT_MATCHING_DATA, ERROR );
+}
 
-	if( is_blank( $f_email ) ) {
-		trigger_error( ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED, ERROR );
-	}
+if( is_blank( $f_email ) ) {
+	trigger_error( ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED, ERROR );
+}
 
-	$row = db_fetch_array( $result );
-	$t_user_id = $row['id'];
+$row = db_fetch_array( $result );
+$t_user_id = $row['id'];
 
-	if( user_is_protected( $t_user_id ) ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
-	}
+if( user_is_protected( $t_user_id ) ) {
+	trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
+}
 
-	if( !user_is_lost_password_request_allowed( $t_user_id ) ) {
-		trigger_error( ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED, ERROR );
-	}
+if( !user_is_lost_password_request_allowed( $t_user_id ) ) {
+	trigger_error( ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED, ERROR );
+}
 
-	$t_confirm_hash = auth_generate_confirm_hash( $t_user_id );
-	email_send_confirm_hash_url( $t_user_id, $t_confirm_hash );
+$t_confirm_hash = auth_generate_confirm_hash( $t_user_id );
+email_send_confirm_hash_url( $t_user_id, $t_confirm_hash );
 
-	user_increment_lost_password_in_progress_count( $t_user_id );
+user_increment_lost_password_in_progress_count( $t_user_id );
 
-	form_security_purge( 'lost_pwd' );
+form_security_purge( 'lost_pwd' );
 
-	$t_redirect_url = 'login_page.php';
+$t_redirect_url = 'login_page.php';
 
-	html_page_top();
+html_page_top();
 ?>
 
 <br />
@@ -128,4 +128,4 @@ require_api( 'utility_api.php' );
 </div>
 
 <?php
-	html_page_bottom1a( __FILE__ );
+html_page_bottom1a( __FILE__ );

@@ -39,18 +39,18 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'utility_api.php' );
 
-	# Check if project documentation feature is enabled.
-	if ( OFF == config_get( 'enable_project_documentation' ) ||
-		!file_is_uploading_enabled() ||
-		!file_allow_project_upload() ) {
-		access_denied();
-	}
+# Check if project documentation feature is enabled.
+if ( OFF == config_get( 'enable_project_documentation' ) ||
+	!file_is_uploading_enabled() ||
+	!file_allow_project_upload() ) {
+	access_denied();
+}
 
-	access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
+access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
 
-	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 
-	html_page_top();
+html_page_top();
 ?>
 
 <br />
@@ -106,4 +106,4 @@ require_api( 'utility_api.php' );
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

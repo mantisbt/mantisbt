@@ -43,54 +43,54 @@ require_api( 'news_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
-	news_ensure_enabled();
-	
-	access_ensure_project_level( VIEWER );
+news_ensure_enabled();
 
-	html_page_top();
+access_ensure_project_level( VIEWER );
+
+html_page_top();
 ?>
 
 <br />
 <?php
-	# Select the news posts
-	$rows = news_get_rows( helper_get_current_project() );
-	$t_count = count( $rows );
+# Select the news posts
+$rows = news_get_rows( helper_get_current_project() );
+$t_count = count( $rows );
 
-	if ( $t_count > 0 ) {
-		echo '<ul>';
+if ( $t_count > 0 ) {
+	echo '<ul>';
+}
+
+# Loop through results
+for ( $i=0 ; $i < $t_count ; $i++ ) {
+	extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
+	if ( VS_PRIVATE == $v_view_state &&
+		 ! access_has_project_level( config_get( 'private_news_threshold' ), $v_project_id ) ) 		{
+		continue;
 	}
 
-    # Loop through results
-	for ( $i=0 ; $i < $t_count ; $i++ ) {
-		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
-		if ( VS_PRIVATE == $v_view_state &&
-			 ! access_has_project_level( config_get( 'private_news_threshold' ), $v_project_id ) ) 		{
-			continue;
-		}
+	$v_headline 	= string_display( $v_headline );
+	$v_date_posted 	= date( config_get( 'complete_date_format' ), $v_date_posted );
 
-		$v_headline 	= string_display( $v_headline );
-		$v_date_posted 	= date( config_get( 'complete_date_format' ), $v_date_posted );
-
-		$t_notes = array();
-		$t_note_string = '';
-		if ( 1 == $v_announcement ) {
-			array_push( $t_notes, lang_get( 'announcement' ) );
-		}
-		if ( VS_PRIVATE == $v_view_state ) {
-			array_push( $t_notes, lang_get( 'private' ) );
-		}
-		if ( count( $t_notes ) > 0 ) {
-			$t_note_string = '['.implode( ' ', $t_notes ).']';
-		}
-
-		echo "<li><span class=\"italic-small\">$v_date_posted</span> - <span class=\"bold\"><a href=\"news_view_page.php?news_id=$v_id\">$v_headline</a></span> <span class=\"small\"> ";
-		print_user( $v_poster_id );
-		echo ' ' . $t_note_string;
-		echo "</span></li>";
-	}  # end for loop
-
-	if ( $t_count > 0 ) {
-			echo '</ul>';
+	$t_notes = array();
+	$t_note_string = '';
+	if ( 1 == $v_announcement ) {
+		array_push( $t_notes, lang_get( 'announcement' ) );
+	}
+	if ( VS_PRIVATE == $v_view_state ) {
+		array_push( $t_notes, lang_get( 'private' ) );
+	}
+	if ( count( $t_notes ) > 0 ) {
+		$t_note_string = '['.implode( ' ', $t_notes ).']';
 	}
 
-	html_page_bottom();
+	echo "<li><span class=\"italic-small\">$v_date_posted</span> - <span class=\"bold\"><a href=\"news_view_page.php?news_id=$v_id\">$v_headline</a></span> <span class=\"small\"> ";
+	print_user( $v_poster_id );
+	echo ' ' . $t_note_string;
+	echo "</span></li>";
+}  # end for loop
+
+if ( $t_count > 0 ) {
+		echo '</ul>';
+}
+
+html_page_bottom();

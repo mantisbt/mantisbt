@@ -43,13 +43,13 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'string_api.php' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
+access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
-	html_page_top( lang_get( 'manage_custom_field_link' ) );
+html_page_top( lang_get( 'manage_custom_field_link' ) );
 
-	print_manage_menu( 'manage_custom_field_page.php' );
+print_manage_menu( 'manage_custom_field_page.php' );
 ?>
 	<br />
 
@@ -116,4 +116,4 @@ require_api( 'string_api.php' );
 <br />
 
 <?php
-	html_page_bottom();
+html_page_bottom();

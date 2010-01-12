@@ -41,23 +41,23 @@ require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'print_api.php' );
 
-	form_security_validate( 'bug_stick' );
+form_security_validate( 'bug_stick' );
 
-	$f_bug_id = gpc_get_int( 'bug_id' );
-	$t_bug = bug_get( $f_bug_id, true );
-	$f_action = gpc_get_string( 'action' );
+$f_bug_id = gpc_get_int( 'bug_id' );
+$t_bug = bug_get( $f_bug_id, true );
+$f_action = gpc_get_string( 'action' );
 
-	if( $t_bug->project_id != helper_get_current_project() ) {
-		# in case the current project is not the same project of the bug we are viewing...
-		# ... override the current project. This to avoid problems with categories and handlers lists etc.
-		$g_project_override = $t_bug->project_id;
-	}
+if( $t_bug->project_id != helper_get_current_project() ) {
+	# in case the current project is not the same project of the bug we are viewing...
+	# ... override the current project. This to avoid problems with categories and handlers lists etc.
+	$g_project_override = $t_bug->project_id;
+}
 
-	access_ensure_bug_level( config_get( 'set_bug_sticky_threshold' ), $f_bug_id );
+access_ensure_bug_level( config_get( 'set_bug_sticky_threshold' ), $f_bug_id );
 
-	bug_set_field( $f_bug_id, 'sticky', 'stick' == $f_action );
+bug_set_field( $f_bug_id, 'sticky', 'stick' == $f_action );
 
-	form_security_purge( 'bug_stick' );
+form_security_purge( 'bug_stick' );
 
-	print_successful_redirect_to_bug( $f_bug_id );
+print_successful_redirect_to_bug( $f_bug_id );
 ?>

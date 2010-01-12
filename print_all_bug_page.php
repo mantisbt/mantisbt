@@ -57,54 +57,54 @@ require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	$f_search		= gpc_get_string( FILTER_PROPERTY_FREE_TEXT, false ); /** @todo need a better default */
-	$f_offset		= gpc_get_int( 'offset', 0 );
+$f_search		= gpc_get_string( FILTER_PROPERTY_FREE_TEXT, false ); /** @todo need a better default */
+$f_offset		= gpc_get_int( 'offset', 0 );
 
-	$t_cookie_value_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
-	$t_cookie_value = filter_db_get_filter( $t_cookie_value_id );
+$t_cookie_value_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+$t_cookie_value = filter_db_get_filter( $t_cookie_value_id );
 
-	$f_highlight_changed 	= 0;
-	$f_sort 				= null;
-	$f_dir		 			= null;
-	$t_project_id 			= 0;
+$f_highlight_changed 	= 0;
+$f_sort 				= null;
+$f_dir		 			= null;
+$t_project_id 			= 0;
 
-	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE );
-	$t_num_of_columns = count( $t_columns );
+$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE );
+$t_num_of_columns = count( $t_columns );
 
-	# check to see if the cookie exists
-	if ( !is_blank( $t_cookie_value ) ) {
+# check to see if the cookie exists
+if ( !is_blank( $t_cookie_value ) ) {
 
-		# check to see if new cookie is needed
-		if ( !filter_is_cookie_valid() ) {
-			print_header_redirect( 'view_all_set.php?type=0&print=1' );
-		}
-
-		$t_setting_arr = explode( '#', $t_cookie_value, 2 );
-		$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
-
-		$f_highlight_changed 	= $t_filter_cookie_arr[ FILTER_PROPERTY_HIGHLIGHT_CHANGED ];
-		$f_sort 				= $t_filter_cookie_arr[ FILTER_PROPERTY_SORT_FIELD_NAME ];
-		$f_dir		 			= $t_filter_cookie_arr[ FILTER_PROPERTY_SORT_DIRECTION ];
-		$t_project_id 			= helper_get_current_project();
+	# check to see if new cookie is needed
+	if ( !filter_is_cookie_valid() ) {
+		print_header_redirect( 'view_all_set.php?type=0&print=1' );
 	}
 
-	# This replaces the actual search that used to be here
-	$f_page_number = gpc_get_int( 'page_number', 1 );
-	$t_per_page = -1;
-	$t_bug_count = null;
-	$t_page_count = null;
+	$t_setting_arr = explode( '#', $t_cookie_value, 2 );
+	$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
 
-	$result = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
-	$row_count = count( $result );
+	$f_highlight_changed 	= $t_filter_cookie_arr[ FILTER_PROPERTY_HIGHLIGHT_CHANGED ];
+	$f_sort 				= $t_filter_cookie_arr[ FILTER_PROPERTY_SORT_FIELD_NAME ];
+	$f_dir		 			= $t_filter_cookie_arr[ FILTER_PROPERTY_SORT_DIRECTION ];
+	$t_project_id 			= helper_get_current_project();
+}
 
-	# for export
-	$t_show_flag = gpc_get_int( 'show_flag', 0 );
+# This replaces the actual search that used to be here
+$f_page_number = gpc_get_int( 'page_number', 1 );
+$t_per_page = -1;
+$t_bug_count = null;
+$t_page_count = null;
 
-	html_page_top1();
-	html_head_end();
-	html_body_begin();
+$result = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
+$row_count = count( $result );
+
+# for export
+$t_show_flag = gpc_get_int( 'show_flag', 0 );
+
+html_page_top1();
+html_head_end();
+html_body_begin();
 ?>
 
 <table class="width100"><tr><td class="form-title">
@@ -125,51 +125,51 @@ require_api( 'utility_api.php' );
 
 <table class="width100" cellpadding="2px">
 <?php
-	#<SQLI> Excel & Print export
-	#$f_bug_array stores the number of the selected rows
-	#$t_bug_arr_sort is used for displaying
-	#$f_export is a string for the word and excel pages
+#<SQLI> Excel & Print export
+#$f_bug_array stores the number of the selected rows
+#$t_bug_arr_sort is used for displaying
+#$f_export is a string for the word and excel pages
 
-	$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
-	$f_bug_arr[$row_count]=-1;
+$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
+$f_bug_arr[$row_count]=-1;
 
-	for( $i=0; $i < $row_count; $i++ ) {
-		if ( isset( $f_bug_arr[$i] ) ) {
-			$index = $f_bug_arr[$i];
-			$t_bug_arr_sort[$index]=1;
-		}
+for( $i=0; $i < $row_count; $i++ ) {
+	if ( isset( $f_bug_arr[$i] ) ) {
+		$index = $f_bug_arr[$i];
+		$t_bug_arr_sort[$index]=1;
 	}
-	$f_export = implode( ',', $f_bug_arr );
+}
+$f_export = implode( ',', $f_bug_arr );
 
-	$t_icon_path = config_get( 'icon_path' );
+$t_icon_path = config_get( 'icon_path' );
 ?>
 
 <tr>
 	<td colspan="<?php echo $t_num_of_columns ?>">
 <?php
-		if ( 'DESC' == $f_dir ) {
-			$t_new_dir = 'ASC';
-		} else {
-			$t_new_dir = 'DESC';
-		}
+	if ( 'DESC' == $f_dir ) {
+		$t_new_dir = 'ASC';
+	} else {
+		$t_new_dir = 'DESC';
+	}
 
-		$t_search = urlencode( $f_search );
+	$t_search = urlencode( $f_search );
 
-		$t_icons = array(
-			array( 'print_all_bug_page_word', 'word', '', 'fileicons/doc.gif', 'Word 2000' ),
-			array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'ie.gif', 'Word View' ) );
+	$t_icons = array(
+		array( 'print_all_bug_page_word', 'word', '', 'fileicons/doc.gif', 'Word 2000' ),
+		array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'ie.gif', 'Word View' ) );
 
-		foreach ( $t_icons as $t_icon ) {
-			echo '<a href="' . $t_icon[0] . '.php' .
-				'?' . FILTER_PROPERTY_FREE_TEXT . "=$t_search" .
-				'&amp;' . FILTER_PROPERTY_SORT_FIELD_NAME . "=$f_sort" .
-				'&amp;' . FILTER_PROPERTY_SORT_DIRECTION . "=$t_new_dir" .
-				'&amp;type_page=' . $t_icon[1] .
-				"&amp;export=$f_export" .
-				"&amp;show_flag=$t_show_flag" .
-				'" ' . $t_icon[2] . '>' .
-				'<img src="' . $t_icon_path . $t_icon[3] . '" border="0" align="absmiddle" alt="' . $t_icon[4] . '" /></a> ';
-		}
+	foreach ( $t_icons as $t_icon ) {
+		echo '<a href="' . $t_icon[0] . '.php' .
+			'?' . FILTER_PROPERTY_FREE_TEXT . "=$t_search" .
+			'&amp;' . FILTER_PROPERTY_SORT_FIELD_NAME . "=$f_sort" .
+			'&amp;' . FILTER_PROPERTY_SORT_DIRECTION . "=$t_new_dir" .
+			'&amp;type_page=' . $t_icon[1] .
+			"&amp;export=$f_export" .
+			"&amp;show_flag=$t_show_flag" .
+			'" ' . $t_icon[2] . '>' .
+			'<img src="' . $t_icon_path . $t_icon[3] . '" border="0" align="absmiddle" alt="' . $t_icon[4] . '" /></a> ';
+	}
 ?>
 	</td>
 </tr>

@@ -52,18 +52,18 @@ require_api( 'current_user_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-	#============ Parameters ============
-	# (none)
+#============ Parameters ============
+# (none)
 
-	#============ Permissions ============
-	auth_ensure_user_authenticated();
+#============ Permissions ============
+auth_ensure_user_authenticated();
 
-	current_user_ensure_unprotected();
+current_user_ensure_unprotected();
 
-	include( 'account_prefs_inc.php' );
+include( 'account_prefs_inc.php' );
 
-	html_page_top( lang_get( 'change_preferences_link' ) );
+html_page_top( lang_get( 'change_preferences_link' ) );
 
-	edit_account_prefs();
+edit_account_prefs();
 
-	html_page_bottom();
+html_page_bottom();

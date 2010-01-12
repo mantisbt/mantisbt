@@ -43,36 +43,36 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-	form_security_validate( 'manage_proj_custom_field_add_existing' );
+form_security_validate( 'manage_proj_custom_field_add_existing' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	$f_field_id		= gpc_get_int( 'field_id' );
-	$f_project_id	= gpc_get_int( 'project_id' );
+$f_field_id		= gpc_get_int( 'field_id' );
+$f_project_id	= gpc_get_int( 'project_id' );
 
-	# We should check both since we are in the project section and an
-	#  admin might raise the first threshold and not realize they need
-	#  to raise the second
-	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
-	access_ensure_project_level( config_get( 'custom_field_link_threshold' ), $f_project_id );
+# We should check both since we are in the project section and an
+#  admin might raise the first threshold and not realize they need
+#  to raise the second
+access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
+access_ensure_project_level( config_get( 'custom_field_link_threshold' ), $f_project_id );
 
-	custom_field_link( $f_field_id, $f_project_id );
+custom_field_link( $f_field_id, $f_project_id );
 
-	form_security_purge( 'manage_proj_custom_field_add_existing' );
+form_security_purge( 'manage_proj_custom_field_add_existing' );
 
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 
-	html_page_top( null, $t_redirect_url );
+html_page_top( null, $t_redirect_url );
 ?>
 
 <br />
 <div align="center">
 <?php
-	echo lang_get( 'operation_successful' ).'<br />';
+echo lang_get( 'operation_successful' ).'<br />';
 
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

@@ -47,39 +47,39 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'utility_api.php' );
 
-	form_security_validate( 'proj_doc_add' );
+form_security_validate( 'proj_doc_add' );
 
-	# Check if project documentation feature is enabled.
-	if ( OFF == config_get( 'enable_project_documentation' ) ) {
-		access_denied();
-	}
+# Check if project documentation feature is enabled.
+if ( OFF == config_get( 'enable_project_documentation' ) ) {
+	access_denied();
+}
 
-	access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
+access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
 
-	$f_title = gpc_get_string( 'title' );
-	$f_description = gpc_get_string( 'description' );
-	$f_file = gpc_get_file( 'file' );
+$f_title = gpc_get_string( 'title' );
+$f_description = gpc_get_string( 'description' );
+$f_file = gpc_get_file( 'file' );
 
-	if ( is_blank( $f_title ) ) {
-		error_parameters( lang_get( 'title' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
-	}
+if ( is_blank( $f_title ) ) {
+	error_parameters( lang_get( 'title' ) );
+	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+}
 
-	file_add( 0, $f_file, 'project', $f_title, $f_description );
+file_add( 0, $f_file, 'project', $f_title, $f_description );
 
-	form_security_purge( 'proj_doc_add' );
+form_security_purge( 'proj_doc_add' );
 
-	$t_redirect_url = 'proj_doc_page.php';
+$t_redirect_url = 'proj_doc_page.php';
 
-	html_page_top( null, $t_redirect_url );
+html_page_top( null, $t_redirect_url );
 ?>
 <br />
 <div align="center">
 <?php
-	echo lang_get( 'operation_successful' ).'<br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo lang_get( 'operation_successful' ).'<br />';
+print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

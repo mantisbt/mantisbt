@@ -47,44 +47,44 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
-	form_security_validate( 'manage_proj_custom_field_remove' );
+form_security_validate( 'manage_proj_custom_field_remove' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	$f_field_id = gpc_get_int( 'field_id' );
-	$f_project_id = gpc_get_int( 'project_id' );
-	$f_return = gpc_get_string( 'return', '' );
+$f_field_id = gpc_get_int( 'field_id' );
+$f_project_id = gpc_get_int( 'project_id' );
+$f_return = gpc_get_string( 'return', '' );
 
-	# We should check both since we are in the project section and an
-	# admin might raise the first threshold and not realize they need
-	# to raise the second
-	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
-	access_ensure_project_level( config_get( 'custom_field_link_threshold' ), $f_project_id );
+# We should check both since we are in the project section and an
+# admin might raise the first threshold and not realize they need
+# to raise the second
+access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
+access_ensure_project_level( config_get( 'custom_field_link_threshold' ), $f_project_id );
 
-	$t_definition = custom_field_get_definition( $f_field_id );
+$t_definition = custom_field_get_definition( $f_field_id );
 
-	# Confirm with the user
-	helper_ensure_confirmed( lang_get( 'confirm_custom_field_unlinking' ) .
-		'<br/>' . lang_get( 'custom_field_label' ) . lang_get( 'word_separator' ) . string_attribute( $t_definition['name'] ),
-		lang_get( 'field_remove_button' ) );
+# Confirm with the user
+helper_ensure_confirmed( lang_get( 'confirm_custom_field_unlinking' ) .
+	'<br/>' . lang_get( 'custom_field_label' ) . lang_get( 'word_separator' ) . string_attribute( $t_definition['name'] ),
+	lang_get( 'field_remove_button' ) );
 
-	if ( $f_return == 'custom_field' ) {
-		$t_redirect_url = 'manage_custom_field_edit_page.php?field_id=' . $f_field_id;
-	} else {
-		$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
-	}
+if ( $f_return == 'custom_field' ) {
+	$t_redirect_url = 'manage_custom_field_edit_page.php?field_id=' . $f_field_id;
+} else {
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+}
 
-	custom_field_unlink( $f_field_id, $f_project_id );
+custom_field_unlink( $f_field_id, $f_project_id );
 
-	form_security_purge( 'manage_proj_custom_field_remove' );
+form_security_purge( 'manage_proj_custom_field_remove' );
 
-	html_page_top( null, $t_redirect_url );
+html_page_top( null, $t_redirect_url );
 ?>
 <br />
 <div align="center">
 <?php
-	echo lang_get( 'operation_successful' ).'<br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo lang_get( 'operation_successful' ).'<br />';
+print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 

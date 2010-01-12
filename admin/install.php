@@ -29,7 +29,7 @@ $g_skip_open_db = true;  # don't open the database in database_api.php
 define( 'MANTIS_INSTALLER', true );
 define( 'PLUGINS_DISABLED', true );
 @require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
-require_once( 'install_helper_functions_api.php' );
+require_api( 'install_helper_functions_api.php' );
 $g_error_send_page_header = false; # bypass page headers in error handler
 
 $g_failed = false;

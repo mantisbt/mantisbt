@@ -41,18 +41,18 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'utility_api.php' );
 
-	# Check for invalid access to signup page
-	if ( OFF == config_get_global( 'allow_signup' ) || LDAP == config_get_global( 'login_method' ) ) {
-		print_header_redirect( 'login_page.php' );
-	}
+# Check for invalid access to signup page
+if ( OFF == config_get_global( 'allow_signup' ) || LDAP == config_get_global( 'login_method' ) ) {
+	print_header_redirect( 'login_page.php' );
+}
 
-	# signup page shouldn't be indexed by search engines
-	html_robots_noindex();
+# signup page shouldn't be indexed by search engines
+html_robots_noindex();
 
-	html_page_top1();
-	html_page_top2a();
+html_page_top1();
+html_page_top2a();
 
-	$t_key = mt_rand( 0,99999 );
+$t_key = mt_rand( 0,99999 );
 ?>
 
 <br />
@@ -129,13 +129,13 @@ require_api( 'utility_api.php' );
 </div>
 
 <?php
-	echo '<br /><div align="center">';
-	print_login_link();
-	echo '&nbsp;';
-	print_lost_password_link();
-	echo '</div>';
+echo '<br /><div align="center">';
+print_login_link();
+echo '&nbsp;';
+print_lost_password_link();
+echo '</div>';
 
-	if ( ON == config_get( 'use_javascript' ) ) {
+if ( ON == config_get( 'use_javascript' ) ) {
 ?>
 <!-- Autofocus JS -->
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>

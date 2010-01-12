@@ -42,14 +42,14 @@ require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-	auth_reauthenticate();
-	access_ensure_global_level( config_get( 'manage_site_threshold' ) );
+auth_reauthenticate();
+access_ensure_global_level( config_get( 'manage_site_threshold' ) );
 
-	$t_version_suffix = config_get_global( 'version_suffix' );
+$t_version_suffix = config_get_global( 'version_suffix' );
 
-	html_page_top( lang_get( 'manage_link' ) );
+html_page_top( lang_get( 'manage_link' ) );
 
-	print_manage_menu();
+print_manage_menu();
 ?>
 
 <br/>
@@ -74,8 +74,8 @@ require_api( 'lang_api.php' );
 </tr>
 
 <?php
-	$t_is_admin = current_user_is_administrator(); 
-	if ( $t_is_admin ) {
+$t_is_admin = current_user_is_administrator(); 
+if ( $t_is_admin ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 <td class="category"><?php echo lang_get( 'site_path' ) ?></td>

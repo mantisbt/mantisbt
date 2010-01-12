@@ -49,47 +49,47 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-	form_security_validate( 'manage_proj_cat_delete' );
+form_security_validate( 'manage_proj_cat_delete' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	$f_category_id = gpc_get_string( 'id' );
-	$f_project_id = gpc_get_int( 'project_id' );
+$f_category_id = gpc_get_string( 'id' );
+$f_project_id = gpc_get_int( 'project_id' );
 
-	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
+access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
-	$t_row = category_get_row( $f_category_id );
-	$t_name = category_full_name( $f_category_id );
-	$t_project_id = $t_row['project_id'];
+$t_row = category_get_row( $f_category_id );
+$t_name = category_full_name( $f_category_id );
+$t_project_id = $t_row['project_id'];
 
-	# Get a bug count
-	$t_bug_table = db_get_table( 'bug' );
-	$t_query = "SELECT COUNT(id) FROM $t_bug_table WHERE category_id=" . db_param();
-	$t_bug_count = db_result( db_query_bound( $t_query, array( $f_category_id ) ) );
+# Get a bug count
+$t_bug_table = db_get_table( 'bug' );
+$t_query = "SELECT COUNT(id) FROM $t_bug_table WHERE category_id=" . db_param();
+$t_bug_count = db_result( db_query_bound( $t_query, array( $f_category_id ) ) );
 
-	# Confirm with the user
-	helper_ensure_confirmed( sprintf( lang_get( 'category_delete_sure_msg' ), $t_name, $t_bug_count ),
-		lang_get( 'delete_category_button' ) );
+# Confirm with the user
+helper_ensure_confirmed( sprintf( lang_get( 'category_delete_sure_msg' ), $t_name, $t_bug_count ),
+	lang_get( 'delete_category_button' ) );
 
-	category_remove( $f_category_id );
+category_remove( $f_category_id );
 
-	form_security_purge( 'manage_proj_cat_delete' );
+form_security_purge( 'manage_proj_cat_delete' );
 
-	if ( $f_project_id == ALL_PROJECTS ) {
-		$t_redirect_url = 'manage_proj_page.php';
-	} else {
-		$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
-	}
+if ( $f_project_id == ALL_PROJECTS ) {
+	$t_redirect_url = 'manage_proj_page.php';
+} else {
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+}
 
-	html_page_top( null, $t_redirect_url );
+html_page_top( null, $t_redirect_url );
 ?>
 <br />
 <div align="center">
 <?php
-	echo lang_get( 'operation_successful' ).'<br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo lang_get( 'operation_successful' ).'<br />';
+print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

@@ -33,10 +33,10 @@ require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'html_api.php' );
 
-	require( 'print_all_bug_options_inc.php' );
+require( 'print_all_bug_options_inc.php' );
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	html_page_top();
-	edit_printing_prefs();
-	html_page_bottom();
+html_page_top();
+edit_printing_prefs();
+html_page_bottom();

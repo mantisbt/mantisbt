@@ -51,74 +51,74 @@ require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
-	access_ensure_global_level( config_get( 'view_configuration_threshold' ) );
+access_ensure_global_level( config_get( 'view_configuration_threshold' ) );
 
-	$t_read_write_access = access_has_global_level( config_get('set_configuration_threshold' ) );
+$t_read_write_access = access_has_global_level( config_get('set_configuration_threshold' ) );
 
-	html_page_top( lang_get( 'configuration_report' ) );
+html_page_top( lang_get( 'configuration_report' ) );
 
-	print_manage_menu( 'adm_config_report.php' );
-	print_manage_config_menu( 'adm_config_report.php' );
+print_manage_menu( 'adm_config_report.php' );
+print_manage_config_menu( 'adm_config_report.php' );
 
-	function get_config_type( $p_type ) {
-		switch( $p_type ) {
-			case CONFIG_TYPE_INT:
-				return "integer";
-			case CONFIG_TYPE_FLOAT:
-				return "float";
-			case CONFIG_TYPE_COMPLEX:
-				return "complex";
-			case CONFIG_TYPE_STRING:
-			default:
-				return "string";
-		}
+function get_config_type( $p_type ) {
+	switch( $p_type ) {
+		case CONFIG_TYPE_INT:
+			return "integer";
+		case CONFIG_TYPE_FLOAT:
+			return "float";
+		case CONFIG_TYPE_COMPLEX:
+			return "complex";
+		case CONFIG_TYPE_STRING:
+		default:
+			return "string";
 	}
+}
 
-	function print_config_value_as_string( $p_type, $p_value ) {
-		$t_corrupted = false;
+function print_config_value_as_string( $p_type, $p_value ) {
+	$t_corrupted = false;
 
-		switch( $p_type ) {
-			case CONFIG_TYPE_FLOAT:
-				$t_value = (float)$p_value;
-				echo $t_value;
-				return;
-			case CONFIG_TYPE_INT:
-				$t_value = (integer)$p_value;
-				echo $t_value;
-				return;
-			case CONFIG_TYPE_STRING:
-				$t_value = config_eval( $p_value );
-				echo string_nl2br( string_html_specialchars( "'$t_value'" ) );
-				return;
-			case CONFIG_TYPE_COMPLEX:
-				$t_value = @unserialize( $p_value );
-				if ( $t_value === false ) {
-					$t_corrupted = true;
-				}
-				break;
-			default:
-				$t_value = config_eval( $p_value );
-				break;
-		}
-
-		echo '<pre>';
-
-		if ( $t_corrupted ) {
-			echo lang_get( 'configuration_corrupted' );
-		} else {
-			if ( function_exists( 'var_export' ) ) {
-				var_export( $t_value );
-			} else {
-				print_r( $t_value );
+	switch( $p_type ) {
+		case CONFIG_TYPE_FLOAT:
+			$t_value = (float)$p_value;
+			echo $t_value;
+			return;
+		case CONFIG_TYPE_INT:
+			$t_value = (integer)$p_value;
+			echo $t_value;
+			return;
+		case CONFIG_TYPE_STRING:
+			$t_value = config_eval( $p_value );
+			echo string_nl2br( string_html_specialchars( "'$t_value'" ) );
+			return;
+		case CONFIG_TYPE_COMPLEX:
+			$t_value = @unserialize( $p_value );
+			if ( $t_value === false ) {
+				$t_corrupted = true;
 			}
-		}
-
-		echo '</pre>';
+			break;
+		default:
+			$t_value = config_eval( $p_value );
+			break;
 	}
 
-	$t_config_table = db_get_table( 'config' );
-	$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table ORDER BY user_id, project_id, config_id";
-	$result = db_query_bound( $query );
+	echo '<pre>';
+
+	if ( $t_corrupted ) {
+		echo lang_get( 'configuration_corrupted' );
+	} else {
+		if ( function_exists( 'var_export' ) ) {
+			var_export( $t_value );
+		} else {
+			print_r( $t_value );
+		}
+	}
+
+	echo '</pre>';
+}
+
+$t_config_table = db_get_table( 'config' );
+$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table ORDER BY user_id, project_id, config_id";
+$result = db_query_bound( $query );
 ?>
 <br />
 <div align="center">
@@ -274,4 +274,4 @@ require_api( 'user_api.php' );
 ?>
 </div>
 <?php
-	html_page_bottom();
+html_page_bottom();

@@ -59,24 +59,24 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	$f_sort	= gpc_get_string( 'sort', 'name' );
-	$f_dir	= gpc_get_string( 'dir', 'ASC' );
+$f_sort	= gpc_get_string( 'sort', 'name' );
+$f_dir	= gpc_get_string( 'dir', 'ASC' );
 
-	if ( 'ASC' == $f_dir ) {
-		$t_direction = ASCENDING;
-	} else {
-		$t_direction = DESCENDING;
-	}
+if ( 'ASC' == $f_dir ) {
+	$t_direction = ASCENDING;
+} else {
+	$t_direction = DESCENDING;
+}
 
-	html_page_top( lang_get( 'manage_projects_link' ) );
+html_page_top( lang_get( 'manage_projects_link' ) );
 
-	print_manage_menu( 'manage_proj_page.php' );
+print_manage_menu( 'manage_proj_page.php' );
 
-	project_hierarchy_cache( true );
+project_hierarchy_cache( true );
 
-	# Project Menu Form BEGIN 
+# Project Menu Form BEGIN 
 ?>
 <br />
 <table class="width100" cellspacing="1">
@@ -266,4 +266,4 @@ require_api( 'utility_api.php' );
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

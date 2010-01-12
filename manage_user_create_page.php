@@ -43,15 +43,15 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
+access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-	$t_ldap = ( LDAP == config_get( 'login_method' ) );
+$t_ldap = ( LDAP == config_get( 'login_method' ) );
 
-	html_page_top();
+html_page_top();
 
-	print_manage_menu( 'manage_user_create_page.php' );
+print_manage_menu( 'manage_user_create_page.php' );
 ?>
 <br />
 <div align="center">
@@ -155,4 +155,4 @@ require_api( 'print_api.php' );
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

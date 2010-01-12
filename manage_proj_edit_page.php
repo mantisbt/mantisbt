@@ -69,21 +69,21 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	$f_project_id = gpc_get_int( 'project_id' );
-	$f_show_global_users = gpc_get_bool( 'show_global_users' );
+$f_project_id = gpc_get_int( 'project_id' );
+$f_show_global_users = gpc_get_bool( 'show_global_users' );
 
-	project_ensure_exists( $f_project_id );
-	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
+project_ensure_exists( $f_project_id );
+access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
-	$row = project_get_row( $f_project_id );
+$row = project_get_row( $f_project_id );
 
-	$t_can_manage_users = access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id );
+$t_can_manage_users = access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
-	html_page_top( project_get_field( $f_project_id, 'name' ) );
+html_page_top( project_get_field( $f_project_id, 'name' ) );
 
-	print_manage_menu( 'manage_proj_edit_page.php' );
+print_manage_menu( 'manage_proj_edit_page.php' );
 ?>
 <br />
 <!-- PROJECT PROPERTIES -->
@@ -867,4 +867,4 @@ if ( $t_can_manage_users ) {
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

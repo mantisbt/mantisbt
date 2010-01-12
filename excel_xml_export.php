@@ -49,91 +49,91 @@ require_api( 'helper_api.php' );
 require_api( 'print_api.php' );
 require_api( 'utility_api.php' );
 
-	require( 'print_all_bug_options_inc.php' );
+require( 'print_all_bug_options_inc.php' );
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	$f_export = gpc_get_string( 'export', '' );
+$f_export = gpc_get_string( 'export', '' );
 
-	helper_begin_long_process();
+helper_begin_long_process();
 
-	$t_export_title = excel_get_default_filename();
+$t_export_title = excel_get_default_filename();
 
-	$t_short_date_format = config_get( 'short_date_format' );
+$t_short_date_format = config_get( 'short_date_format' );
 
-	# This is where we used to do the entire actual filter ourselves
-	$t_page_number = gpc_get_int( 'page_number', 1 );
-	$t_per_page = 100;
-	$t_bug_count = null;
-	$t_page_count = null;
+# This is where we used to do the entire actual filter ourselves
+$t_page_number = gpc_get_int( 'page_number', 1 );
+$t_per_page = 100;
+$t_bug_count = null;
+$t_page_count = null;
 
-	$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-	if ( $result === false ) {
-		print_header_redirect( 'view_all_set.php?type=0&print=1' );
-	}
+$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+if ( $result === false ) {
+	print_header_redirect( 'view_all_set.php?type=0&print=1' );
+}
 
-	header( 'Content-Type: application/vnd.ms-excel; charset=UTF-8' );
-	header( 'Pragma: public' );
-	header( 'Content-Type: application/vnd.ms-excel' );
-	header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_export_title ) ) . '.xml"' ) ;
+header( 'Content-Type: application/vnd.ms-excel; charset=UTF-8' );
+header( 'Pragma: public' );
+header( 'Content-Type: application/vnd.ms-excel' );
+header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_export_title ) ) . '.xml"' ) ;
 
-	echo excel_get_header( $t_export_title );
-	echo excel_get_titles_row();
+echo excel_get_header( $t_export_title );
+echo excel_get_titles_row();
 
-	$f_bug_arr = explode( ',', $f_export );
+$f_bug_arr = explode( ',', $f_export );
 
-	$t_columns = excel_get_columns();
+$t_columns = excel_get_columns();
 
-	do
-	{
-		$t_more = true;
-		$t_row_count = count( $result );
+do
+{
+	$t_more = true;
+	$t_row_count = count( $result );
 
-		for( $i = 0; $i < $t_row_count; $i++ ) {
-			$t_row = $result[$i];
-			$t_bug = null;
+	for( $i = 0; $i < $t_row_count; $i++ ) {
+		$t_row = $result[$i];
+		$t_bug = null;
 
-			if ( is_blank( $f_export ) || in_array( $t_row->id, $f_bug_arr ) ) {
-				echo excel_get_start_row();
+		if ( is_blank( $f_export ) || in_array( $t_row->id, $f_bug_arr ) ) {
+			echo excel_get_start_row();
 
-				foreach ( $t_columns as $t_column ) {
-					if ( column_is_extended( $t_column ) ) {
-						if ( $t_bug === null ) {
-							$t_bug = bug_get( $t_row->id, /* extended = */ true );
-						}
+			foreach ( $t_columns as $t_column ) {
+				if ( column_is_extended( $t_column ) ) {
+					if ( $t_bug === null ) {
+						$t_bug = bug_get( $t_row->id, /* extended = */ true );
+					}
 
-						$t_function = 'excel_format_' . $t_column;
-						echo $t_function( $t_bug->$t_column );
+					$t_function = 'excel_format_' . $t_column;
+					echo $t_function( $t_bug->$t_column );
+				} else {
+					$t_custom_field = column_get_custom_field_name( $t_column );
+					if ( $t_custom_field !== null ) {
+						echo excel_format_custom_field( $t_row->id, $t_row->project_id, $t_custom_field );
 					} else {
-						$t_custom_field = column_get_custom_field_name( $t_column );
-						if ( $t_custom_field !== null ) {
-							echo excel_format_custom_field( $t_row->id, $t_row->project_id, $t_custom_field );
-						} else {
-							$t_function = 'excel_format_' . $t_column;
-							echo $t_function( $t_row->$t_column );
-						}
+						$t_function = 'excel_format_' . $t_column;
+						echo $t_function( $t_row->$t_column );
 					}
 				}
-
-				echo excel_get_end_row();
-			} #in_array
-		} #for loop
-
-		// If got a full page, then attempt for the next one.
-		// @@@ Note that since we are not using a transaction, there is a risk that we get a duplicate record or we miss
-		// one due to a submit or update that happens in parallel.
-		if ( $t_row_count == $t_per_page ) {
-			$t_page_number++;
-			$t_bug_count = null;
-			$t_page_count = null;
-
-			$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-			if ( $result === false ) {
-				$t_more = false;
 			}
-		} else {
+
+			echo excel_get_end_row();
+		} #in_array
+	} #for loop
+
+	// If got a full page, then attempt for the next one.
+	// @@@ Note that since we are not using a transaction, there is a risk that we get a duplicate record or we miss
+	// one due to a submit or update that happens in parallel.
+	if ( $t_row_count == $t_per_page ) {
+		$t_page_number++;
+		$t_bug_count = null;
+		$t_page_count = null;
+
+		$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+		if ( $result === false ) {
 			$t_more = false;
 		}
-	} while ( $t_more );
+	} else {
+		$t_more = false;
+	}
+} while ( $t_more );
 
-	echo excel_get_footer();
+echo excel_get_footer();

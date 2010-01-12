@@ -45,39 +45,39 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-	$t_manage_page = defined( 'MANAGE_COLUMNS' );
-	$t_account_page = defined( 'ACCOUNT_COLUMNS' );
+$t_manage_page = defined( 'MANAGE_COLUMNS' );
+$t_account_page = defined( 'ACCOUNT_COLUMNS' );
 
-	# Protect against direct access to this script.
-	if ( !$t_manage_page && !$t_account_page ) {
-		access_denied();
-	}
+# Protect against direct access to this script.
+if ( !$t_manage_page && !$t_account_page ) {
+	access_denied();
+}
 
-	$t_project_id = helper_get_current_project();
+$t_project_id = helper_get_current_project();
 
-	# Calculate the user id to set the configuration for.
-	if ( $t_manage_page ) {
-		$t_user_id = NO_USER;
-	} else {
-		$t_user_id = auth_get_current_user_id();
-	}
+# Calculate the user id to set the configuration for.
+if ( $t_manage_page ) {
+	$t_user_id = NO_USER;
+} else {
+	$t_user_id = auth_get_current_user_id();
+}
 
-	$t_columns = columns_get_all( $t_project_id );
-	$t_all = implode( ', ', $t_columns );
+$t_columns = columns_get_all( $t_project_id );
+$t_all = implode( ', ', $t_columns );
 
-	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_CSV_PAGE, /* $p_viewable_only */ false, $t_user_id );
-	$t_csv = implode( ', ', $t_columns );
+$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_CSV_PAGE, /* $p_viewable_only */ false, $t_user_id );
+$t_csv = implode( ', ', $t_columns );
 
-	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE, /* $p_viewable_only */ false, $t_user_id );
-	$t_view_issues = implode( ', ', $t_columns );
+$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE, /* $p_viewable_only */ false, $t_user_id );
+$t_view_issues = implode( ', ', $t_columns );
 
-	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE, /* $p_viewable_only */ false, $t_user_id );
-	$t_print_issues = implode( ', ', $t_columns );
+$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE, /* $p_viewable_only */ false, $t_user_id );
+$t_print_issues = implode( ', ', $t_columns );
 
-	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_EXCEL_PAGE, /* $p_viewable_only */ false, $t_user_id );
-	$t_excel = implode( ', ', $t_columns );
+$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_EXCEL_PAGE, /* $p_viewable_only */ false, $t_user_id );
+$t_excel = implode( ', ', $t_columns );
 
-	echo '<br />';
+echo '<br />';
 ?>
 
 <div align="center">
@@ -206,7 +206,7 @@ require_api( 'print_api.php' );
 <br />
 
 <?php
-	if ( $t_account_page ) {
+if ( $t_account_page ) {
 ?>
 <!-- RESET CONFIGURATION -->
 <div class="border center">
@@ -217,4 +217,4 @@ require_api( 'print_api.php' );
 	</form>
 </div>
 <?php
-	}
+}

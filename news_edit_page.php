@@ -49,45 +49,45 @@ require_api( 'print_api.php' );
 require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 
-	news_ensure_enabled();
-	
-	$f_news_id = gpc_get_int( 'news_id' );
-	$f_action = gpc_get_string( 'action', '' );
+news_ensure_enabled();
 
-	# If deleting item redirect to delete script
-	if ( 'delete' == $f_action ) {
-		form_security_validate( 'news_delete' );
+$f_news_id = gpc_get_int( 'news_id' );
+$f_action = gpc_get_string( 'action', '' );
 
-		$row = news_get_row( $f_news_id );
+# If deleting item redirect to delete script
+if ( 'delete' == $f_action ) {
+	form_security_validate( 'news_delete' );
 
-		# This check is to allow deleting of news items that were left orphan due to bug #3723
-		if ( project_exists( $row['project_id'] ) ) {
-			access_ensure_project_level( config_get( 'manage_news_threshold' ), $row['project_id'] );
-		}
+	$row = news_get_row( $f_news_id );
 
-		helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ), lang_get( 'delete_news_item_button' ) );
-
-		news_delete( $f_news_id );
-
-		form_security_purge( 'news_delete' );
-
-		print_header_redirect( 'news_menu_page.php', true );
+	# This check is to allow deleting of news items that were left orphan due to bug #3723
+	if ( project_exists( $row['project_id'] ) ) {
+		access_ensure_project_level( config_get( 'manage_news_threshold' ), $row['project_id'] );
 	}
 
-	# Retrieve news item data and prefix with v_
-	$row = news_get_row( $f_news_id );
-	if ( $row ) {
-    	extract( $row, EXTR_PREFIX_ALL, 'v' );
-    }
+	helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ), lang_get( 'delete_news_item_button' ) );
 
-	access_ensure_project_level( config_get( 'manage_news_threshold' ), $v_project_id );
+	news_delete( $f_news_id );
 
-   	$v_headline = string_attribute( $v_headline );
-   	$v_body 	= string_textarea( $v_body );
+	form_security_purge( 'news_delete' );
 
-	html_page_top( lang_get( 'edit_news_title' ) );
+	print_header_redirect( 'news_menu_page.php', true );
+}
 
-	# Edit News Form BEGIN
+# Retrieve news item data and prefix with v_
+$row = news_get_row( $f_news_id );
+if ( $row ) {
+	extract( $row, EXTR_PREFIX_ALL, 'v' );
+}
+
+access_ensure_project_level( config_get( 'manage_news_threshold' ), $v_project_id );
+
+$v_headline = string_attribute( $v_headline );
+$v_body 	= string_textarea( $v_body );
+
+html_page_top( lang_get( 'edit_news_title' ) );
+
+# Edit News Form BEGIN
 ?>
 <br />
 <div align="center">
@@ -166,6 +166,6 @@ require_api( 'string_api.php' );
 </form>
 </div>
 <?php
-	# Edit News Form END
+# Edit News Form END
 
-	html_page_bottom();
+html_page_bottom();

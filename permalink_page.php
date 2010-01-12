@@ -41,28 +41,28 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
-	html_page_top();
+html_page_top();
 
-	access_ensure_project_level( config_get( 'create_permalink_threshold' ) );
+access_ensure_project_level( config_get( 'create_permalink_threshold' ) );
 
-	$f_url = string_sanitize_url( gpc_get_string( 'url' ) );
+$f_url = string_sanitize_url( gpc_get_string( 'url' ) );
 ?>
 <div align="center">
 	<p>
 <?php
-	echo lang_get( 'filter_permalink' ), '<br />';
-	$t_safe_url = string_display_line( $f_url );
-	echo "<a href=\"$t_safe_url\">$t_safe_url</a></p>";
+echo lang_get( 'filter_permalink' ), '<br />';
+$t_safe_url = string_display_line( $f_url );
+echo "<a href=\"$t_safe_url\">$t_safe_url</a></p>";
 
-	$t_create_short_url = config_get( 'create_short_url' );
+$t_create_short_url = config_get( 'create_short_url' );
 
-	if ( !is_blank( $t_create_short_url ) ) {
-		print_bracket_link(
-			sprintf( $t_create_short_url, $f_url ),
-			lang_get( 'create_short_link' ),
-			/* new window = */ true );
-	}
+if ( !is_blank( $t_create_short_url ) ) {
+	print_bracket_link(
+		sprintf( $t_create_short_url, $f_url ),
+		lang_get( 'create_short_link' ),
+		/* new window = */ true );
+}
 ?>
 </div>
 <?php
-	html_page_bottom();
+html_page_bottom();

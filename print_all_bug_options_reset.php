@@ -45,51 +45,51 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-	require( 'print_all_bug_options_inc.php' );
+require( 'print_all_bug_options_inc.php' );
 
-	form_security_validate( 'print_all_bug_options_reset' );
+form_security_validate( 'print_all_bug_options_reset' );
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	# protected account check
-	current_user_ensure_unprotected();
+# protected account check
+current_user_ensure_unprotected();
 
-	# get user id
-	$t_user_id = auth_get_current_user_id();
+# get user id
+$t_user_id = auth_get_current_user_id();
 
-	# get the fields list
-	$t_field_name_arr = get_field_names();
-	$field_name_count = count($t_field_name_arr);
+# get the fields list
+$t_field_name_arr = get_field_names();
+$field_name_count = count($t_field_name_arr);
 
-	# create a default array, same size than $t_field_name
-	for ($i=0 ; $i<$field_name_count ; $i++) {
-		$t_default_arr[$i] = 0 ;
-	}
-	$t_default = implode('',$t_default_arr) ;
+# create a default array, same size than $t_field_name
+for ($i=0 ; $i<$field_name_count ; $i++) {
+	$t_default_arr[$i] = 0 ;
+}
+$t_default = implode('',$t_default_arr) ;
 
-	# reset to defaults
-	$t_user_print_pref_table = db_get_table( 'user_print_pref' );
-	$query = "UPDATE $t_user_print_pref_table
-			SET print_pref=" . db_param() . "
-			WHERE user_id=" . db_param();
+# reset to defaults
+$t_user_print_pref_table = db_get_table( 'user_print_pref' );
+$query = "UPDATE $t_user_print_pref_table
+		SET print_pref=" . db_param() . "
+		WHERE user_id=" . db_param();
 
-	$result = db_query_bound( $query, Array( $t_default, $t_user_id ) );
+$result = db_query_bound( $query, Array( $t_default, $t_user_id ) );
 
-	form_security_purge( 'print_all_bug_options_reset' );
+form_security_purge( 'print_all_bug_options_reset' );
 
-	$t_redirect_url = 'print_all_bug_options_page.php';
+$t_redirect_url = 'print_all_bug_options_page.php';
 
-	html_page_top( null, $t_redirect_url );
+html_page_top( null, $t_redirect_url );
 
-	echo '<br /><div align="center">';
+echo '<br /><div align="center">';
 
-	if ( $result ) {
-		print lang_get( 'operation_successful' );
-	} else {
-		print error_string( ERROR_GENERIC );
-	}
+if ( $result ) {
+	print lang_get( 'operation_successful' );
+} else {
+	print error_string( ERROR_GENERIC );
+}
 
-	echo '<br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-	echo '<br /></div>';
-	html_page_bottom();
+echo '<br />';
+print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo '<br /></div>';
+html_page_bottom();

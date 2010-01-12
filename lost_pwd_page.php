@@ -40,21 +40,21 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-	# lost password feature disabled or reset password via email disabled -> stop here!
-	if ( LDAP == config_get_global( 'login_method' ) ||
-		OFF == config_get( 'lost_password_feature' ) ||
-		OFF == config_get( 'send_reset_password' )  ||
-	 	OFF == config_get( 'enable_email_notification' ) ) {
-		trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
-	}
+# lost password feature disabled or reset password via email disabled -> stop here!
+if ( LDAP == config_get_global( 'login_method' ) ||
+	OFF == config_get( 'lost_password_feature' ) ||
+	OFF == config_get( 'send_reset_password' )  ||
+	OFF == config_get( 'enable_email_notification' ) ) {
+	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
+}
 
-	# don't index lost password page
-	html_robots_noindex();
+# don't index lost password page
+html_robots_noindex();
 
-	html_page_top1();
-	html_page_top2a();
+html_page_top1();
+html_page_top2a();
 
-	echo "<br />";
+echo "<br />";
 ?>
 <br />
 <div align="center">
@@ -67,8 +67,8 @@ require_api( 'print_api.php' );
 	</td>
 </tr>
 <?php
-		$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
-  if ( $t_allow_passwd ) {
+$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
+if ( $t_allow_passwd ) {
 ?>
 <tr class="row-1">
 	<td class="category" width="25%">
@@ -99,7 +99,7 @@ require_api( 'print_api.php' );
 	</td>
 </tr>
 <?php
-  } else {
+} else {
 ?>
 <tr>
 	<td colspan="2">
@@ -109,7 +109,7 @@ require_api( 'print_api.php' );
 	</td>
 </tr>
 <?php
-  }
+}
 ?>
 
 </table>
@@ -117,13 +117,13 @@ require_api( 'print_api.php' );
 </div>
 
 <?php
-	echo '<br /><div align="center">';
-	print_login_link();
-	echo '&nbsp;';
-	print_signup_link();
-	echo '</div>';
+echo '<br /><div align="center">';
+print_login_link();
+echo '&nbsp;';
+print_signup_link();
+echo '</div>';
 
-	if ( ON == config_get( 'use_javascript' ) ) {
+if ( ON == config_get( 'use_javascript' ) ) {
 ?>
 <!-- Autofocus JS -->
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>

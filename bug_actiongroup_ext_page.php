@@ -39,28 +39,28 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	$f_action = gpc_get_string( 'action' );
-	$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
+$f_action = gpc_get_string( 'action' );
+$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
 
-	# redirect to view issues if nothing is selected
-	if ( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
-		print_header_redirect( 'view_all_bug_page.php' );
-	}
+# redirect to view issues if nothing is selected
+if ( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
+	print_header_redirect( 'view_all_bug_page.php' );
+}
 
-  # redirect to view issues page if action doesn't have ext_* prefix.
-  # This should only occur if this page is called directly.
-	$t_external_action_prefix = 'EXT_';
-	if ( strpos( $f_action, $t_external_action_prefix ) !== 0 ) {
-		print_header_redirect( 'view_all_bug_page.php' );
-  }
+# redirect to view issues page if action doesn't have ext_* prefix.
+# This should only occur if this page is called directly.
+$t_external_action_prefix = 'EXT_';
+if ( strpos( $f_action, $t_external_action_prefix ) !== 0 ) {
+	print_header_redirect( 'view_all_bug_page.php' );
+}
 
-	$t_external_action = utf8_strtolower( utf8_substr( $f_action, utf8_strlen( $t_external_action_prefix ) ) );
-	$t_form_fields_page = 'bug_actiongroup_' . $t_external_action . '_inc.php';
-	$t_form_name = 'bug_actiongroup_' . $t_external_action;
+$t_external_action = utf8_strtolower( utf8_substr( $f_action, utf8_strlen( $t_external_action_prefix ) ) );
+$t_form_fields_page = 'bug_actiongroup_' . $t_external_action . '_inc.php';
+$t_form_name = 'bug_actiongroup_' . $t_external_action;
 
-	bug_group_action_print_top();
+bug_group_action_print_top();
 ?>
 
 	<br />
@@ -71,9 +71,9 @@ require_api( 'utility_api.php' );
 		<input type="hidden" name="action" value="<?php echo string_attribute( $t_external_action ) ?>" />
 <table class="width75" cellspacing="1">
 	<?php
-		bug_group_action_print_title( $t_external_action );
-		bug_group_action_print_hidden_fields( $f_bug_arr );
-		bug_group_action_print_action_fields( $t_external_action );
+	bug_group_action_print_title( $t_external_action );
+	bug_group_action_print_hidden_fields( $f_bug_arr );
+	bug_group_action_print_action_fields( $t_external_action );
 	?>
 </table>
 	</form>
@@ -82,5 +82,5 @@ require_api( 'utility_api.php' );
 	<br />
 
 <?php
-	bug_group_action_print_bug_list( $f_bug_arr );
-	bug_group_action_print_bottom();
+bug_group_action_print_bug_list( $f_bug_arr );
+bug_group_action_print_bottom();

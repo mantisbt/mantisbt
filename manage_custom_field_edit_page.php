@@ -47,20 +47,20 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
+access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
-	$f_field_id	= gpc_get_int( 'field_id' );
-	$f_return	= strip_tags( gpc_get_string( 'return', 'manage_custom_field_page.php' ) );
+$f_field_id	= gpc_get_int( 'field_id' );
+$f_return	= strip_tags( gpc_get_string( 'return', 'manage_custom_field_page.php' ) );
 
-	custom_field_ensure_exists( $f_field_id );
+custom_field_ensure_exists( $f_field_id );
 
-	html_page_top();
+html_page_top();
 
-	print_manage_menu( 'manage_custom_field_edit_page.php' );
+print_manage_menu( 'manage_custom_field_edit_page.php' );
 
-	$t_definition = custom_field_get_definition( $f_field_id );
+$t_definition = custom_field_get_definition( $f_field_id );
 ?>
 <br />
 <div align="center">
@@ -306,4 +306,4 @@ require_api( 'string_api.php' );
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

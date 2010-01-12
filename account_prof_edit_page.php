@@ -50,27 +50,27 @@ require_api( 'lang_api.php' );
 require_api( 'profile_api.php' );
 require_api( 'string_api.php' );
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	current_user_ensure_unprotected();
+current_user_ensure_unprotected();
 
-	$f_profile_id	= gpc_get_int( 'profile_id' );
+$f_profile_id	= gpc_get_int( 'profile_id' );
 
-	if ( profile_is_global( $f_profile_id ) ) {
-		access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
+if ( profile_is_global( $f_profile_id ) ) {
+	access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 
-		$row = profile_get_row( ALL_USERS, $f_profile_id );
-	} else {
-		$row = profile_get_row( auth_get_current_user_id(), $f_profile_id );
-	}
+	$row = profile_get_row( ALL_USERS, $f_profile_id );
+} else {
+	$row = profile_get_row( auth_get_current_user_id(), $f_profile_id );
+}
 
-   	extract( $row, EXTR_PREFIX_ALL, 'v' );
+extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-	html_page_top();
+html_page_top();
 
-	if ( profile_is_global( $f_profile_id ) ) {
-		print_manage_menu();
-	}
+if ( profile_is_global( $f_profile_id ) ) {
+	print_manage_menu();
+}
 ?>
 
 <?php # Edit Profile Form BEGIN ?>

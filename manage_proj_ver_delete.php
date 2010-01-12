@@ -45,35 +45,35 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'version_api.php' );
 
-	form_security_validate( 'manage_proj_ver_delete' );
+form_security_validate( 'manage_proj_ver_delete' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	$f_version_id = gpc_get_int( 'version_id' );
+$f_version_id = gpc_get_int( 'version_id' );
 
-	$t_version_info = version_get( $f_version_id );
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_version_info->project_id;
+$t_version_info = version_get( $f_version_id );
+$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_version_info->project_id;
 
-	access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version_info->project_id );
+access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version_info->project_id );
 
-	# Confirm with the user
-	helper_ensure_confirmed( lang_get( 'version_delete_sure' ) .
-		'<br/>' . lang_get( 'version_label' ) . lang_get( 'word_separator' ) . $t_version_info->version,
-		lang_get( 'delete_version_button' ) );
+# Confirm with the user
+helper_ensure_confirmed( lang_get( 'version_delete_sure' ) .
+	'<br/>' . lang_get( 'version_label' ) . lang_get( 'word_separator' ) . $t_version_info->version,
+	lang_get( 'delete_version_button' ) );
 
-	version_remove( $f_version_id );
+version_remove( $f_version_id );
 
-	form_security_purge( 'manage_proj_ver_delete' );
+form_security_purge( 'manage_proj_ver_delete' );
 
-	html_page_top( null, $t_redirect_url );
+html_page_top( null, $t_redirect_url );
 ?>
 <br />
 <div align="center">
 <?php
-	echo lang_get( 'operation_successful' ).'<br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo lang_get( 'operation_successful' ).'<br />';
+print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

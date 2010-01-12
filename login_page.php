@@ -52,68 +52,68 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-	if ( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
-		print_header_redirect( config_get( 'default_home_page' ) );
+if ( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
+	print_header_redirect( config_get( 'default_home_page' ) );
+}
+
+$f_error		= gpc_get_bool( 'error' );
+$f_cookie_error	= gpc_get_bool( 'cookie_error' );
+$f_return		= string_sanitize_url( gpc_get_string( 'return', '' ) );
+$f_username     = gpc_get_string( 'username', '' );
+$f_perm_login	= gpc_get_bool( 'perm_login', false );
+$f_secure_session = gpc_get_bool( 'secure_session', false );
+$f_secure_session_cookie = gpc_get_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', null );
+
+$t_session_validation = ( ON == config_get_global( 'session_validation' ) );
+
+# Check for automatic logon methods where we want the logon to just be handled by login.php
+if ( auth_automatic_logon_bypass_form() ) {
+	$t_uri = "login.php";
+
+	if ( ON == config_get( 'allow_anonymous_login' ) ) {
+		$t_uri = "login_anon.php";
 	}
 
-	$f_error		= gpc_get_bool( 'error' );
-	$f_cookie_error	= gpc_get_bool( 'cookie_error' );
-	$f_return		= string_sanitize_url( gpc_get_string( 'return', '' ) );
-	$f_username     = gpc_get_string( 'username', '' );
-	$f_perm_login	= gpc_get_bool( 'perm_login', false );
-	$f_secure_session = gpc_get_bool( 'secure_session', false );
-	$f_secure_session_cookie = gpc_get_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', null );
-
-	$t_session_validation = ( ON == config_get_global( 'session_validation' ) );
-
-	# Check for automatic logon methods where we want the logon to just be handled by login.php
-	if ( auth_automatic_logon_bypass_form() ) {
-		$t_uri = "login.php";
-
-		if ( ON == config_get( 'allow_anonymous_login' ) ) {
-			$t_uri = "login_anon.php";
-		}
-
-		if ( !is_blank( $f_return ) ) {
-			$t_uri .= "?return=" . string_url( $f_return );
-		}
-
-		print_header_redirect( $t_uri );
-		exit;
+	if ( !is_blank( $f_return ) ) {
+		$t_uri .= "?return=" . string_url( $f_return );
 	}
 
-	# Login page shouldn't be indexed by search engines
-	html_robots_noindex();
+	print_header_redirect( $t_uri );
+	exit;
+}
 
-	html_page_top1();
-	html_page_top2a();
+# Login page shouldn't be indexed by search engines
+html_robots_noindex();
 
-	echo '<br /><div align="center">';
+html_page_top1();
+html_page_top2a();
 
-	# Display short greeting message
-	# echo lang_get( 'login_page_info' ) . '<br />';
+echo '<br /><div align="center">';
 
-	# Only echo error message if error variable is set
-	if ( $f_error ) {
-		echo '<font color="red">' . lang_get( 'login_error' ) . '</font>';
+# Display short greeting message
+# echo lang_get( 'login_page_info' ) . '<br />';
+
+# Only echo error message if error variable is set
+if ( $f_error ) {
+	echo '<font color="red">' . lang_get( 'login_error' ) . '</font>';
+}
+if ( $f_cookie_error ) {
+	echo lang_get( 'login_cookies_disabled' ) . '<br />';
+}
+
+# Determine if secure_session should default on or off?
+# - If no errors, and no cookies set, default to on.
+# - If no errors, but cookie is set, use the cookie value.
+# - If errors, use the value passed in.
+if ( $t_session_validation ) {
+	if ( !$f_error && !$f_cookie_error ) {
+		$t_default_secure_session = ( is_null( $f_secure_session_cookie ) ? true : $f_secure_session_cookie );
+	} else {
+		$t_default_secure_session = $f_secure_session;
 	}
-	if ( $f_cookie_error ) {
-		echo lang_get( 'login_cookies_disabled' ) . '<br />';
-	}
+}
 
-	# Determine if secure_session should default on or off?
-	# - If no errors, and no cookies set, default to on.
-	# - If no errors, but cookie is set, use the cookie value.
-	# - If errors, use the value passed in.
-	if ( $t_session_validation ) {
-		if ( !$f_error && !$f_cookie_error ) {
-			$t_default_secure_session = ( is_null( $f_secure_session_cookie ) ? true : $f_secure_session_cookie );
-		} else {
-			$t_default_secure_session = $f_secure_session;
-		}
-	}
-
-	echo '</div>';
+echo '</div>';
 ?>
 
 <!-- Login Form BEGIN -->
@@ -185,86 +185,86 @@ require_api( 'utility_api.php' );
 </div>
 
 <?php
-	echo '<br /><div align="center">';
-	print_signup_link();
-	echo '&nbsp;';
-	print_lost_password_link();
-	echo '</div>';
+echo '<br /><div align="center">';
+print_signup_link();
+echo '&nbsp;';
+print_lost_password_link();
+echo '</div>';
 
-	#
-	# Do some checks to warn administrators of possible security holes.
-	# Since this is considered part of the admin-checks, the strings are not translated.
-	#
+#
+# Do some checks to warn administrators of possible security holes.
+# Since this is considered part of the admin-checks, the strings are not translated.
+#
 
-	if ( config_get_global( 'admin_checks' ) == ON ) {
+if ( config_get_global( 'admin_checks' ) == ON ) {
 
-		# Generate a warning if administrator/root is valid.
-		$t_admin_user_id = user_get_id_by_name( 'administrator' );
-		if ( $t_admin_user_id !== false ) {
-			if ( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
-				echo '<div class="warning" align="center">', "\n";
-				echo "\t", '<p><font color="red">', lang_get( 'warning_default_administrator_account_present' ), '</font></p>', "\n";
-				echo '</div>', "\n";
-			}
-		}
-
-		# Check if the admin directory is available and is readable.
-		$t_admin_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
-		if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) ) {
+	# Generate a warning if administrator/root is valid.
+	$t_admin_user_id = user_get_id_by_name( 'administrator' );
+	if ( $t_admin_user_id !== false ) {
+		if ( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
 			echo '<div class="warning" align="center">', "\n";
-			echo '<p><font color="red">', lang_get( 'warning_admin_directory_present' ), '</font></p>', "\n";
+			echo "\t", '<p><font color="red">', lang_get( 'warning_default_administrator_account_present' ), '</font></p>', "\n";
 			echo '</div>', "\n";
+		}
+	}
 
-			# since admin directory and db_upgrade lists are available check for missing db upgrades
-			# Check for db upgrade for versions < 1.0.0 using old upgrader
-			$t_db_version = config_get( 'database_version' , 0 );
-			# if db version is 0, we haven't moved to new installer.
-			if ( $t_db_version == 0 ) {
-				$t_upgrade_count = 0;
-				if ( db_table_exists( db_get_table( 'upgrade' ) ) ) {
-					$query = "SELECT COUNT(*) from " . db_get_table( 'upgrade' ) . ";";
-					$result = db_query_bound( $query );
-					if ( db_num_rows( $result ) > 0 ) {
-						$t_upgrade_count = (int)db_result( $result );
-					}
-				}
+	# Check if the admin directory is available and is readable.
+	$t_admin_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
+	if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) ) {
+		echo '<div class="warning" align="center">', "\n";
+		echo '<p><font color="red">', lang_get( 'warning_admin_directory_present' ), '</font></p>', "\n";
+		echo '</div>', "\n";
 
-				if ( $t_upgrade_count > 0 ) { # table exists, check for number of updates
-
-					# new config table database version is 0.
-					# old upgrade tables exist.
-					# assume user is upgrading from <1.0 and therefore needs to update to 1.x before upgrading to 1.2
-					echo '<div class="warning" align="center">';
-					echo '<p><font color="red">', lang_get( 'error_database_version_out_of_date_1' ), '</font></p>';
-					echo '</div>';
-				} else {
-					# old upgrade tables do not exist, yet config database_version is 0
-					echo '<div class="warning" align="center">';
-					echo '<p><font color="red">', lang_get( 'error_database_no_schema_version' ), '</font></p>';
-					echo '</div>';
+		# since admin directory and db_upgrade lists are available check for missing db upgrades
+		# Check for db upgrade for versions < 1.0.0 using old upgrader
+		$t_db_version = config_get( 'database_version' , 0 );
+		# if db version is 0, we haven't moved to new installer.
+		if ( $t_db_version == 0 ) {
+			$t_upgrade_count = 0;
+			if ( db_table_exists( db_get_table( 'upgrade' ) ) ) {
+				$query = "SELECT COUNT(*) from " . db_get_table( 'upgrade' ) . ";";
+				$result = db_query_bound( $query );
+				if ( db_num_rows( $result ) > 0 ) {
+					$t_upgrade_count = (int)db_result( $result );
 				}
 			}
 
-			# Check for db upgrade for versions > 1.0.0 using new installer and schema
-			require_once( 'admin' . DIRECTORY_SEPARATOR . 'schema.php' );
-			$t_upgrades_reqd = count( $upgrade ) - 1;
+			if ( $t_upgrade_count > 0 ) { # table exists, check for number of updates
 
-			if ( ( 0 < $t_db_version ) &&
-					( $t_db_version != $t_upgrades_reqd ) ) {
-
-				if ( $t_db_version < $t_upgrades_reqd ) {
-					echo '<div class="warning" align="center">';
-					echo '<p><font color="red">', lang_get( 'error_database_version_out_of_date_2' ), '</font></p>';
-					echo '</div>';
-				} else {
-					echo '<div class="warning" align="center">';
-					echo '<p><font color="red">', lang_get( 'error_code_version_out_of_date' ), '</font></p>';
-					echo '</div>';
-				}
+				# new config table database version is 0.
+				# old upgrade tables exist.
+				# assume user is upgrading from <1.0 and therefore needs to update to 1.x before upgrading to 1.2
+				echo '<div class="warning" align="center">';
+				echo '<p><font color="red">', lang_get( 'error_database_version_out_of_date_1' ), '</font></p>';
+				echo '</div>';
+			} else {
+				# old upgrade tables do not exist, yet config database_version is 0
+				echo '<div class="warning" align="center">';
+				echo '<p><font color="red">', lang_get( 'error_database_no_schema_version' ), '</font></p>';
+				echo '</div>';
 			}
 		}
 
-	} # if 'admin_checks'
+		# Check for db upgrade for versions > 1.0.0 using new installer and schema
+		require_once( 'admin' . DIRECTORY_SEPARATOR . 'schema.php' );
+		$t_upgrades_reqd = count( $upgrade ) - 1;
+
+		if ( ( 0 < $t_db_version ) &&
+				( $t_db_version != $t_upgrades_reqd ) ) {
+
+			if ( $t_db_version < $t_upgrades_reqd ) {
+				echo '<div class="warning" align="center">';
+				echo '<p><font color="red">', lang_get( 'error_database_version_out_of_date_2' ), '</font></p>';
+				echo '</div>';
+			} else {
+				echo '<div class="warning" align="center">';
+				echo '<p><font color="red">', lang_get( 'error_code_version_out_of_date' ), '</font></p>';
+				echo '</div>';
+			}
+		}
+	}
+
+} # if 'admin_checks'
 ?>
 
 <!-- Autofocus JS -->
@@ -274,7 +274,7 @@ require_api( 'utility_api.php' );
 	window.document.login_form.<?php if ( is_blank( $f_username ) ) { echo 'username'; } else { echo 'password'; } ?>.focus();
 // -->
 </script>
-<?php } ?>
-
 <?php
-	html_page_bottom1a( __FILE__ );
+} 
+
+html_page_bottom1a( __FILE__ );

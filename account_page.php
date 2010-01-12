@@ -73,45 +73,45 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-	#============ Parameters ============
-	# (none)
+#============ Parameters ============
+# (none)
 
-	#============ Permissions ============
-	auth_ensure_user_authenticated();
+#============ Permissions ============
+auth_ensure_user_authenticated();
 
-	current_user_ensure_unprotected();
+current_user_ensure_unprotected();
 
-	# extracts the user information for the currently logged in user
-	# and prefixes it with u_
-	$row = user_get_row( auth_get_current_user_id() );
-	extract( $row, EXTR_PREFIX_ALL, 'u' );
+# extracts the user information for the currently logged in user
+# and prefixes it with u_
+$row = user_get_row( auth_get_current_user_id() );
+extract( $row, EXTR_PREFIX_ALL, 'u' );
 
-	$t_ldap = ( LDAP == config_get( 'login_method' ) );
+$t_ldap = ( LDAP == config_get( 'login_method' ) );
 
-	# In case we're using LDAP to get the email address... this will pull out
-	#  that version instead of the one in the DB
-	$u_email = user_get_email( $u_id, $u_username );
+# In case we're using LDAP to get the email address... this will pull out
+#  that version instead of the one in the DB
+$u_email = user_get_email( $u_id, $u_username );
 
-	# note if we are being included by a script of a different name, if so,
-	#  this is a mandatory password change request
-	$t_force_pw_reset = is_page_name( 'verify.php' );
+# note if we are being included by a script of a different name, if so,
+#  this is a mandatory password change request
+$t_force_pw_reset = is_page_name( 'verify.php' );
 
-	# Only show the update button if there is something to update.
-	$t_show_update_button = false;
+# Only show the update button if there is something to update.
+$t_show_update_button = false;
 
-	html_page_top( lang_get( 'account_link' ) );
+html_page_top( lang_get( 'account_link' ) );
 ?>
 
 <!-- # Edit Account Form BEGIN -->
 <br />
 <?php if ( $t_force_pw_reset ) { ?>
 <center><div style="color:red; width:75%">
-		<?php
-			echo lang_get( 'verify_warning' );
-			if ( helper_call_custom_function( 'auth_can_change_password', array() ) ) {
-				echo '<br />' . lang_get( 'verify_change_password' );
-			}
-		?>
+	<?php
+		echo lang_get( 'verify_warning' );
+		if ( helper_call_custom_function( 'auth_can_change_password', array() ) ) {
+			echo '<br />' . lang_get( 'verify_change_password' );
+		}
+	?>
 </div></center>
 <br />
 <?php } ?>
@@ -119,7 +119,6 @@ require_api( 'utility_api.php' );
 <form method="post" action="account_update.php">
 <?php echo form_security_field( 'account_update' ); ?>
 <table class="width75" cellspacing="1">
-
 	<!-- Headings -->
 	<tr>
 		<td class="form-title">

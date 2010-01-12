@@ -53,34 +53,33 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
+access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-	$f_username = gpc_get_string( 'username', '' );
+$f_username = gpc_get_string( 'username', '' );
 
-	if ( is_blank( $f_username ) ) {
-		$f_user_id = gpc_get_int( 'user_id' );
-		$t_user_id = $f_user_id;
-	} else {
-		$t_user_id = user_get_id_by_name( $f_username );
-		if ( $t_user_id === false ) {
-			error_parameters( $f_username );
-			trigger_error( ERROR_USER_BY_NAME_NOT_FOUND, ERROR );
-		}
+if ( is_blank( $f_username ) ) {
+	$f_user_id = gpc_get_int( 'user_id' );
+	$t_user_id = $f_user_id;
+} else {
+	$t_user_id = user_get_id_by_name( $f_username );
+	if ( $t_user_id === false ) {
+		error_parameters( $f_username );
+		trigger_error( ERROR_USER_BY_NAME_NOT_FOUND, ERROR );
 	}
+}
 
-	$t_user = user_get_row( $t_user_id );
+$t_user = user_get_row( $t_user_id );
 
-	$t_ldap = ( LDAP == config_get( 'login_method' ) );
+$t_ldap = ( LDAP == config_get( 'login_method' ) );
 
-	html_page_top();
+html_page_top();
 
-	print_manage_menu();
+print_manage_menu();
 ?>
 
 <br />
-
 
 <!-- USER INFO -->
 <div align="center">
@@ -282,9 +281,9 @@ require_api( 'utility_api.php' );
 </table>
 </div>
 <?php
-	} # End of PROJECT ACCESS conditional section
+} # End of PROJECT ACCESS conditional section
 
-	include ( 'account_prefs_inc.php' );
-	edit_account_prefs( $t_user['id'], false, false, 'manage_user_edit_page.php?user_id=' . $t_user_id );
+include ( 'account_prefs_inc.php' );
+edit_account_prefs( $t_user['id'], false, false, 'manage_user_edit_page.php?user_id=' . $t_user_id );
 
-	html_page_bottom();
+html_page_bottom();

@@ -47,21 +47,21 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
-	auth_reauthenticate();
+auth_reauthenticate();
 
-	$f_category_id		= gpc_get_int( 'id' );
-	$f_project_id		= gpc_get_int( 'project_id' );
+$f_category_id		= gpc_get_int( 'id' );
+$f_project_id		= gpc_get_int( 'project_id' );
 
-	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
+access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
-	$t_row = category_get_row( $f_category_id );
-	$t_assigned_to = $t_row['user_id'];
-	$t_project_id = $t_row['project_id'];
-	$t_name = $t_row['name'];
+$t_row = category_get_row( $f_category_id );
+$t_assigned_to = $t_row['user_id'];
+$t_project_id = $t_row['project_id'];
+$t_name = $t_row['name'];
 
-	html_page_top();
+html_page_top();
 
-	print_manage_menu( 'manage_proj_cat_edit_page.php' );
+print_manage_menu( 'manage_proj_cat_edit_page.php' );
 ?>
 
 <br />
@@ -118,4 +118,4 @@ require_api( 'string_api.php' );
 </div>
 
 <?php
-	html_page_bottom();
+html_page_bottom();

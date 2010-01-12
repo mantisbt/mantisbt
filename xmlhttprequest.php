@@ -38,15 +38,15 @@ require_api( 'gpc_api.php' );
 require_api( 'logging_api.php' );
 require_api( 'xhtmlrequest_api.php' );
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	$f_entrypoint = gpc_get_string( 'entrypoint' );
+$f_entrypoint = gpc_get_string( 'entrypoint' );
 
-	$t_function = 'xmlhttprequest_' . $f_entrypoint;
-	if ( function_exists( $t_function ) ) {
-		log_event( LOG_AJAX, "Calling {$t_function}..." );
-		call_user_func( $t_function );
-	} else {
-		log_event( LOG_AJAX, "Unknown function for entry point = " . $t_function );
-		echo 'unknown entry point';
-	}
+$t_function = 'xmlhttprequest_' . $f_entrypoint;
+if ( function_exists( $t_function ) ) {
+	log_event( LOG_AJAX, "Calling {$t_function}..." );
+	call_user_func( $t_function );
+} else {
+	log_event( LOG_AJAX, "Unknown function for entry point = " . $t_function );
+	echo 'unknown entry point';
+}

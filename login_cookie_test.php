@@ -37,14 +37,14 @@ require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
-	$f_return = gpc_get_string( 'return', config_get( 'default_home_page' ) );
+$f_return = gpc_get_string( 'return', config_get( 'default_home_page' ) );
 
-	$c_return = string_prepare_header( $f_return );
+$c_return = string_prepare_header( $f_return );
 
-	if ( auth_is_user_authenticated() ) {
-		$t_redirect_url = $c_return;
-	} else {
-		$t_redirect_url = 'login_page.php?cookie_error=1';
-	}
+if ( auth_is_user_authenticated() ) {
+	$t_redirect_url = $c_return;
+} else {
+	$t_redirect_url = 'login_page.php?cookie_error=1';
+}
 
-	print_header_redirect( $t_redirect_url, true, true );
+print_header_redirect( $t_redirect_url, true, true );

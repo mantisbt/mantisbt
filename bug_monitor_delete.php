@@ -47,41 +47,41 @@ require_api( 'helper_api.php' );
 require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 
-	form_security_validate( 'bug_monitor_delete' );
+form_security_validate( 'bug_monitor_delete' );
 
-	$f_bug_id = gpc_get_int( 'bug_id' );
-	$t_bug = bug_get( $f_bug_id, true );
-	$f_user_id = gpc_get_int( 'user_id', NO_USER );
+$f_bug_id = gpc_get_int( 'bug_id' );
+$t_bug = bug_get( $f_bug_id, true );
+$f_user_id = gpc_get_int( 'user_id', NO_USER );
 
-	$t_logged_in_user_id = auth_get_current_user_id();
+$t_logged_in_user_id = auth_get_current_user_id();
 
-	if ( $f_user_id === NO_USER ) {
-		$t_user_id = $t_logged_in_user_id;
-	} else {
-		user_ensure_exists( $f_user_id );
-		$t_user_id = $f_user_id;
-	}
+if ( $f_user_id === NO_USER ) {
+	$t_user_id = $t_logged_in_user_id;
+} else {
+	user_ensure_exists( $f_user_id );
+	$t_user_id = $f_user_id;
+}
 
-	if ( user_is_anonymous( $t_user_id ) ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, E_USER_ERROR );
-	}
+if ( user_is_anonymous( $t_user_id ) ) {
+	trigger_error( ERROR_PROTECTED_ACCOUNT, E_USER_ERROR );
+}
 
-	bug_ensure_exists( $f_bug_id );
+bug_ensure_exists( $f_bug_id );
 
-	if( $t_bug->project_id != helper_get_current_project() ) {
-		# in case the current project is not the same project of the bug we are viewing...
-		# ... override the current project. This to avoid problems with categories and handlers lists etc.
-		$g_project_override = $t_bug->project_id;
-	}
+if( $t_bug->project_id != helper_get_current_project() ) {
+	# in case the current project is not the same project of the bug we are viewing...
+	# ... override the current project. This to avoid problems with categories and handlers lists etc.
+	$g_project_override = $t_bug->project_id;
+}
 
-	if ( $t_logged_in_user_id == $t_user_id ) {
-		access_ensure_bug_level( config_get( 'monitor_bug_threshold' ), $f_bug_id );
-	} else {
-		access_ensure_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $f_bug_id );
-	}
+if ( $t_logged_in_user_id == $t_user_id ) {
+	access_ensure_bug_level( config_get( 'monitor_bug_threshold' ), $f_bug_id );
+} else {
+	access_ensure_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $f_bug_id );
+}
 
-	bug_unmonitor( $f_bug_id, $t_user_id );
+bug_unmonitor( $f_bug_id, $t_user_id );
 
-	form_security_purge( 'bug_monitor_delete' );
+form_security_purge( 'bug_monitor_delete' );
 
-	print_successful_redirect_to_bug( $f_bug_id );
+print_successful_redirect_to_bug( $f_bug_id );

@@ -50,35 +50,35 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 
-	if ( isset( $g_global_profiles ) ) {
-		$g_global_profiles = true;
-	} else {
-		$g_global_profiles = false;
-	}
+if ( isset( $g_global_profiles ) ) {
+	$g_global_profiles = true;
+} else {
+	$g_global_profiles = false;
+}
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	current_user_ensure_unprotected();
+current_user_ensure_unprotected();
 
-	if ( $g_global_profiles ) {
-		access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
-	} else {
-		access_ensure_global_level( config_get( 'add_profile_threshold' ) );
-	}
+if ( $g_global_profiles ) {
+	access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
+} else {
+	access_ensure_global_level( config_get( 'add_profile_threshold' ) );
+}
 
-	html_page_top( lang_get( 'manage_profiles_link' ) );
+html_page_top( lang_get( 'manage_profiles_link' ) );
 
-	if ( $g_global_profiles ) {
-		print_manage_menu( 'manage_prof_menu_page.php' );
-	}
+if ( $g_global_profiles ) {
+	print_manage_menu( 'manage_prof_menu_page.php' );
+}
 
-	if ( $g_global_profiles ) {
-		$t_user_id = ALL_USERS;
-	} else {
-		$t_user_id = auth_get_current_user_id();
-	}
+if ( $g_global_profiles ) {
+	$t_user_id = ALL_USERS;
+} else {
+	$t_user_id = auth_get_current_user_id();
+}
 
-	# Add Profile Form BEGIN
+# Add Profile Form BEGIN
 ?>
 <br />
 <div align="center">
@@ -93,9 +93,9 @@ require_api( 'profile_api.php' );
 	</td>
 	<td class="right">
 	<?php
-		if ( !$g_global_profiles ) {
-			print_account_menu( 'account_prof_menu_page.php' );
-		}
+	if ( !$g_global_profiles ) {
+		print_account_menu( 'account_prof_menu_page.php' );
+	}
 	?>
 	</td>
 </tr>

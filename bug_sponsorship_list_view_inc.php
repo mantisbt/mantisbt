@@ -50,26 +50,26 @@ require_api( 'print_api.php' );
 require_api( 'sponsorship_api.php' );
 require_api( 'utility_api.php' );
 
-	#
-	# Determine whether the sponsorship section should be shown.
-	#
+#
+# Determine whether the sponsorship section should be shown.
+#
 
-	if ( ( config_get( 'enable_sponsorship' ) == ON ) && ( access_has_bug_level( config_get( 'view_sponsorship_total_threshold' ), $f_bug_id ) ) ) {
-		$t_sponsorship_ids = sponsorship_get_all_ids( $f_bug_id );
+if ( ( config_get( 'enable_sponsorship' ) == ON ) && ( access_has_bug_level( config_get( 'view_sponsorship_total_threshold' ), $f_bug_id ) ) ) {
+	$t_sponsorship_ids = sponsorship_get_all_ids( $f_bug_id );
 
-		$t_sponsorships_exist = count( $t_sponsorship_ids ) > 0;
-		$t_can_sponsor = !bug_is_readonly( $f_bug_id ) && !current_user_is_anonymous();
+	$t_sponsorships_exist = count( $t_sponsorship_ids ) > 0;
+	$t_can_sponsor = !bug_is_readonly( $f_bug_id ) && !current_user_is_anonymous();
 
-		$t_show_sponsorships = $t_sponsorships_exist || $t_can_sponsor;
-	} else {
-		$t_show_sponsorships = false;
-	}
+	$t_show_sponsorships = $t_sponsorships_exist || $t_can_sponsor;
+} else {
+	$t_show_sponsorships = false;
+}
 
-	#
-	# Sponsorship Box
-	#
+#
+# Sponsorship Box
+#
 
-	if ( $t_show_sponsorships ) {
+if ( $t_show_sponsorships ) {
 ?>
 
 <a name="sponsorships" id="sponsorships"></a> <br />

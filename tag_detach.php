@@ -34,15 +34,15 @@ require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
 require_api( 'tag_api.php' );
 
-	form_security_validate( 'tag_detach' );
+form_security_validate( 'tag_detach' );
 
-	$f_tag_id = gpc_get_int( 'tag_id' );
-	$f_bug_id = gpc_get_int( 'bug_id' );
+$f_tag_id = gpc_get_int( 'tag_id' );
+$f_bug_id = gpc_get_int( 'bug_id' );
 
-	tag_bug_detach( $f_tag_id, $f_bug_id );
+tag_bug_detach( $f_tag_id, $f_bug_id );
 
-	event_signal( 'EVENT_TAG_DETACHED', array( $f_bug_id, array( $f_tag_id ) ) );
+event_signal( 'EVENT_TAG_DETACHED', array( $f_bug_id, array( $f_tag_id ) ) );
 
-	form_security_purge( 'tag_detach' );
+form_security_purge( 'tag_detach' );
 
-	print_successful_redirect_to_bug( $f_bug_id );
+print_successful_redirect_to_bug( $f_bug_id );

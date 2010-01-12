@@ -30,8 +30,8 @@ $g_skip_open_db = true;  # don't open the database in database_api.php
  */
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
-require_once( 'email_api.php' );
-require_once( 'database_api.php' );
+require_api( 'email_api.php' );
+require_api( 'database_api.php' );
 
 $f_showall = gpc_get_int( 'showall', false );
 
@@ -248,7 +248,7 @@ function test_database_utf8() {
 
 <?php 
 
-	require_once( 'obsolete.php' );
+	require_api( 'obsolete.php' );
 
 print_test_row( 'MantisBT requires at least <b>PHP ' . PHP_MIN_VERSION . '</b>. You are running <b>PHP ' . phpversion(), $result = version_compare( phpversion(), PHP_MIN_VERSION, '>=' ) );
 

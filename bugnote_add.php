@@ -49,35 +49,35 @@ require_api( 'helper_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-	form_security_validate( 'bugnote_add' );
+form_security_validate( 'bugnote_add' );
 
-	$f_bug_id		= gpc_get_int( 'bug_id' );
-	$f_private		= gpc_get_bool( 'private' );
-	$f_time_tracking	= gpc_get_string( 'time_tracking', '0:00' );
-	$f_bugnote_text	= trim( gpc_get_string( 'bugnote_text', '' ) );
+$f_bug_id		= gpc_get_int( 'bug_id' );
+$f_private		= gpc_get_bool( 'private' );
+$f_time_tracking	= gpc_get_string( 'time_tracking', '0:00' );
+$f_bugnote_text	= trim( gpc_get_string( 'bugnote_text', '' ) );
 
-	$t_bug = bug_get( $f_bug_id, true );
-	if( $t_bug->project_id != helper_get_current_project() ) {
-		# in case the current project is not the same project of the bug we are viewing...
-		# ... override the current project. This to avoid problems with categories and handlers lists etc.
-		$g_project_override = $t_bug->project_id;
-	}
+$t_bug = bug_get( $f_bug_id, true );
+if( $t_bug->project_id != helper_get_current_project() ) {
+	# in case the current project is not the same project of the bug we are viewing...
+	# ... override the current project. This to avoid problems with categories and handlers lists etc.
+	$g_project_override = $t_bug->project_id;
+}
 
-	if ( bug_is_readonly( $f_bug_id ) ) {
-		error_parameters( $f_bug_id );
-		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
-	}
+if ( bug_is_readonly( $f_bug_id ) ) {
+	error_parameters( $f_bug_id );
+	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+}
 
-	access_ensure_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id );
+access_ensure_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id );
 
-	// We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING
-	// if $f_time_tracking is not 0 and the time tracking feature is enabled.
-	$t_bugnote_id = bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private, BUGNOTE );
-    if ( !$t_bugnote_id ) {
-        error_parameters( lang_get( 'bugnote' ) );
-        trigger_error( ERROR_EMPTY_FIELD, ERROR );
-    }
+// We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING
+// if $f_time_tracking is not 0 and the time tracking feature is enabled.
+$t_bugnote_id = bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private, BUGNOTE );
+if ( !$t_bugnote_id ) {
+	error_parameters( lang_get( 'bugnote' ) );
+	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+}
 
-	form_security_purge( 'bugnote_add' );
+form_security_purge( 'bugnote_add' );
 
-	print_successful_redirect_to_bug( $f_bug_id );
+print_successful_redirect_to_bug( $f_bug_id );

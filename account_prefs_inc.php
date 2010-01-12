@@ -47,29 +47,29 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
-	function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '') {
-		if ( null === $p_user_id ) {
-			$p_user_id = auth_get_current_user_id();
+function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '') {
+	if ( null === $p_user_id ) {
+		$p_user_id = auth_get_current_user_id();
+	}
+
+	$t_redirect_url = $p_redirect_url;
+	if ( is_blank( $t_redirect_url ) ) {
+		$t_redirect_url = 'account_prefs_page.php';
+	}
+
+	# protected account check
+	if ( user_is_protected( $p_user_id ) ) {
+		if ( $p_error_if_protected ) {
+			trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
+		} else {
+			return;
 		}
+	}
 
-		$t_redirect_url = $p_redirect_url;
-		if ( is_blank( $t_redirect_url ) ) {
-			$t_redirect_url = 'account_prefs_page.php';
-		}
+	# prefix data with u_
+	$t_pref = user_pref_get( $p_user_id );
 
-		# protected account check
-		if ( user_is_protected( $p_user_id ) ) {
-			if ( $p_error_if_protected ) {
-				trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
-			} else {
-				return;
-			}
-		}
-
-	    # prefix data with u_
-		$t_pref = user_pref_get( $p_user_id );
-
-	# Account Preferences Form BEGIN
+# Account Preferences Form BEGIN
 ?>
 <br />
 <div align="center">
@@ -325,4 +325,4 @@ require_api( 'utility_api.php' );
 </div>
 
 <?php
-	} # end of edit_account_prefs()
+} # end of edit_account_prefs()

@@ -50,39 +50,35 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-	auth_ensure_user_authenticated();
+auth_ensure_user_authenticated();
 
-	$t_can_manage = access_has_global_level( config_get( 'manage_user_threshold' ) );
-	$t_can_see_realname = access_has_project_level( config_get( 'show_user_realname_threshold' ) );
-	$t_can_see_email = access_has_project_level( config_get( 'show_user_email_threshold' ) );
+$t_can_manage = access_has_global_level( config_get( 'manage_user_threshold' ) );
+$t_can_see_realname = access_has_project_level( config_get( 'show_user_realname_threshold' ) );
+$t_can_see_email = access_has_project_level( config_get( 'show_user_email_threshold' ) );
 
-	# extracts the user information for the currently logged in user
-	# and prefixes it with u_
-	$f_user_id = gpc_get_int( 'id', auth_get_current_user_id() );
-	$row = user_get_row( $f_user_id );
+# extracts the user information for the currently logged in user
+# and prefixes it with u_
+$f_user_id = gpc_get_int( 'id', auth_get_current_user_id() );
+$row = user_get_row( $f_user_id );
 
-	extract( $row, EXTR_PREFIX_ALL, 'u' );
+extract( $row, EXTR_PREFIX_ALL, 'u' );
 
-	# In case we're using LDAP to get the email address... this will pull out
-	#  that version instead of the one in the DB
-	$u_email = user_get_email( $u_id );
-	$u_realname = user_get_realname( $u_id );
+# In case we're using LDAP to get the email address... this will pull out
+#  that version instead of the one in the DB
+$u_email = user_get_email( $u_id );
+$u_realname = user_get_realname( $u_id );
 
-	html_page_top();
+html_page_top();
 ?>
 
 <br />
 <div align="center">
 <table class="width75" cellspacing="1">
-
-	<!-- Headings -->
 	<tr>
 		<td class="form-title">
 			<?php echo lang_get( 'view_account_title' ) ?>
 		</td>
 	</tr>
-
-	<!-- Username -->
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category" width="25%">
 			<?php echo lang_get( 'username' ) ?>
@@ -91,8 +87,6 @@ require_api( 'utility_api.php' );
 			<?php echo string_display_line( $u_username ) ?>
 		</td>
 	</tr>
-
-	<!-- Email -->
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php echo lang_get( 'email' ) ?>
@@ -111,8 +105,6 @@ require_api( 'utility_api.php' );
 			?>
 		</td>
 	</tr>
-
-	<!-- Realname -->
 	<tr <?php echo helper_alternate_class() ?> valign="top">
 		<td class="category">
 			<?php echo lang_get( 'realname' ) ?>
@@ -127,7 +119,6 @@ require_api( 'utility_api.php' );
 			?>
 		</td>
 	</tr>
-
 	<?php if ( $t_can_manage ) { ?>
 	<tr>
 		<td colspan="2" class="center">
@@ -141,4 +132,4 @@ require_api( 'utility_api.php' );
 <br />
 
 <?php
-	html_page_bottom();
+html_page_bottom();

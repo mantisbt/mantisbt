@@ -47,34 +47,34 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
-	# Check if project documentation feature is enabled.
-	if ( OFF == config_get( 'enable_project_documentation' ) ||
-		!file_is_uploading_enabled() ||
-		!file_allow_project_upload() ) {
-		access_denied();
-	}
+# Check if project documentation feature is enabled.
+if ( OFF == config_get( 'enable_project_documentation' ) ||
+	!file_is_uploading_enabled() ||
+	!file_allow_project_upload() ) {
+	access_denied();
+}
 
-	$f_file_id = gpc_get_int( 'file_id' );
+$f_file_id = gpc_get_int( 'file_id' );
 
-	$c_file_id = db_prepare_int( $f_file_id );
-	$t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
+$c_file_id = db_prepare_int( $f_file_id );
+$t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
 
-	access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
+access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
-	$t_proj_file_table = db_get_table( 'project_file' );
-	$query = "SELECT *
-			FROM $t_proj_file_table
-			WHERE id=" . db_param();
-	$result = db_query_bound( $query, Array( $c_file_id ) );
-	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
+$t_proj_file_table = db_get_table( 'project_file' );
+$query = "SELECT *
+		FROM $t_proj_file_table
+		WHERE id=" . db_param();
+$result = db_query_bound( $query, Array( $c_file_id ) );
+$row = db_fetch_array( $result );
+extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-	$v_title = string_attribute( $v_title );
-	$v_description = string_textarea( $v_description );
+$v_title = string_attribute( $v_title );
+$v_description = string_textarea( $v_description );
 
-	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 
-	html_page_top();
+html_page_top();
 ?>
 
 <br />
@@ -130,7 +130,6 @@ require_api( 'utility_api.php' );
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 		<input name="file" type="file" size="70" />
 	</td>
-
 <tr>
 <tr>
 	<td class="left">
@@ -144,14 +143,12 @@ require_api( 'utility_api.php' );
 </form>
 
 <br />
-
-		<form method="post" action="proj_doc_delete.php">
-		<?php echo form_security_field( 'proj_doc_delete' ) ?>
-		<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
-		<input type="hidden" name="title" value="<?php echo $v_title ?>" />
-		<input type="submit" class="button" value="<?php echo lang_get( 'file_delete_button' ) ?>" />
-		</form>
-
+	<form method="post" action="proj_doc_delete.php">
+	<?php echo form_security_field( 'proj_doc_delete' ) ?>
+	<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
+	<input type="hidden" name="title" value="<?php echo $v_title ?>" />
+	<input type="submit" class="button" value="<?php echo lang_get( 'file_delete_button' ) ?>" />
+	</form>
 </div>
 
 <?php
