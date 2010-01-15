@@ -911,7 +911,6 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	$t_mantis_bug_file_table = db_get_table( 'bug_file' );
 	$t_mantis_bugnote_table = db_get_table( 'bugnote' );
 	$t_mantis_bugnote_text_table = db_get_table( 'bugnote_text' );
-	$t_mantis_bug_monitor_table = db_get_table( 'bug_monitor' );
 	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
 	$t_mantis_db = $g_db;
 
@@ -1052,19 +1051,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 	# Copy users monitoring bug
 	if( $p_copy_monitoring_users ) {
-		$query = "SELECT *
-					  FROM $t_mantis_bug_monitor_table
-					  WHERE bug_id = " . db_param();
-		$result = db_query_bound( $query, Array( $t_bug_id ) );
-		$t_count = db_num_rows( $result );
-
-		for( $i = 0;$i < $t_count;$i++ ) {
-			$t_bug_monitor = db_fetch_array( $result );
-			$query = "INSERT INTO $t_mantis_bug_monitor_table
-						 ( user_id, bug_id )
-						 VALUES ( " . db_param() . ', ' . db_param() . ')';
-			db_query_bound( $query, Array( $t_bug_monitor['user_id'], $t_new_bug_id ) );
-		}
+		bug_monitor_copy( $t_bug_id, $t_new_bug_id );
 	}
 
 	# COPY HISTORY
@@ -1636,6 +1623,9 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 			history_log_event_special( $p_duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
 		} # else relationship is -1 - same type exists, do nothing
 
+		# Copy list of users monitoring the duplicate bug to the original bug
+		bug_monitor_copy( $p_bug_id, $p_duplicate_id );
+
 		bug_set_field( $p_bug_id, 'duplicate_id', (int) $p_duplicate_id );
 	}
 
@@ -1754,6 +1744,39 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
 	email_monitor_added( $p_bug_id, $p_user_id );
 
 	return true;
+}
+
+/**
+ * Copy list of users monitoring a bug to the monitor list of a second bug
+ * @param int p_source_bug_id integer representing the bug ID of the source bug
+ * @param int p_dest_bug_id integer representing the bug ID of the destination bug
+ * @return bool (always true)
+ * @access public
+ * @uses database_api.php
+ * @uses history_api.php
+ * @uses user_api.php
+ */
+function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
+	$c_source_bug_id = (int)$p_source_bug_id;
+	$c_dest_bug_id = (int)$p_dest_bug_id;
+
+	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
+
+	$query = 'SELECT *
+		FROM ' . $t_bug_monitor_table . '
+		WHERE bug_id = ' . db_param();
+	$result = db_query_bound( $query, Array( $c_source_bug_id ) );
+	$t_count = db_num_rows( $result );
+
+	for( $i = 0; $i < $t_count; $i++ ) {
+		$t_bug_monitor = db_fetch_array( $result );
+		if ( !user_is_monitoring_bug( $t_bug_monitor['user_id'], $c_dest_bug_id ) ) {
+			$query = 'INSERT INTO ' . $t_bug_monitor_table . ' ( user_id, bug_id )
+				VALUES ( ' . db_param() . ', ' . db_param() . ' )';
+			db_query_bound( $query, Array( $t_bug_monitor['user_id'], $c_dest_bug_id ) );
+			history_log_event_special( $c_dest_bug_id, BUG_MONITOR, $t_bug_monitor['user_id'] );
+		}
+	}
 }
 
 /**
