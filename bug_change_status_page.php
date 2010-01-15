@@ -81,8 +81,10 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 $f_new_status = gpc_get_int( 'new_status' );
 $f_reopen_flag = gpc_get_int( 'reopen_flag', OFF );
 
+$t_current_user_id = auth_get_current_user_id();
+
 if ( !( ( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
-			( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) &&
+			( ( bug_get_field( $f_bug_id, 'reporter_id' ) == $t_current_user_id ) &&
 					( ( ON == config_get( 'allow_reporter_reopen' ) ) ||
 							( ON == config_get( 'allow_reporter_close' ) ) ) ) ||
 			( ( ON == $f_reopen_flag ) && ( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $f_bug_id ) ) )
@@ -141,7 +143,7 @@ print_recently_visited();
 </tr>
 
 <?php
-	if ( $t_resolved <= $f_new_status ) {
+	if ( $f_new_status >= $t_resolved ) {
 		if ( relationship_can_resolve_bug( $f_bug_id ) == false ) {
 			echo "<tr><td colspan=\"2\">" . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . "</td></tr>";
 		}
@@ -151,7 +153,7 @@ print_recently_visited();
 <?php
 $t_current_resolution = $t_bug->resolution;
 $t_bug_is_open = in_array( $t_current_resolution, array( config_get( 'default_bug_resolution' ), config_get( 'bug_reopen_resolution' ) ) );
-if ( ( $t_resolved <= $f_new_status ) && ( ( $t_closed > $f_new_status ) || ( $t_bug_is_open ) ) ) { ?>
+if ( ( $f_new_status >= $t_resolved ) && ( ( $f_new_status < $t_closed ) || ( $t_bug_is_open ) ) ) { ?>
 <!-- Resolution -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -169,7 +171,7 @@ if ( ( $t_resolved <= $f_new_status ) && ( ( $t_closed > $f_new_status ) || ( $t
 <?php } ?>
 
 <?php
-if ( ( $t_resolved <= $f_new_status ) && ( $t_closed > $f_new_status ) ) { ?>
+if ( ( $f_new_status >= $t_resolved ) && ( $f_new_status < $t_closed ) ) { ?>
 <!-- Duplicate ID -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -182,8 +184,13 @@ if ( ( $t_resolved <= $f_new_status ) && ( $t_closed > $f_new_status ) ) { ?>
 <?php } ?>
 
 <?php
-if ( ( $t_resolved > $f_new_status ) &&
-		access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold')), $f_bug_id) ) { ?>
+if ( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $f_bug_id ) ) {
+	$t_suggested_handler_id = $t_bug->handler_id;
+
+	if ( $t_suggested_handler_id == NO_USER && access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id ) ) {
+		$t_suggested_handler_id = $t_current_user_id;
+	}
+?>
 <!-- Assigned To -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -192,7 +199,7 @@ if ( ( $t_resolved > $f_new_status ) &&
 	<td>
 		<select name="handler_id">
 			<option value="0"></option>
-			<?php print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id ) ?>
+			<?php print_assign_to_option_list( $t_suggested_handler_id, $t_bug->project_id ) ?>
 		</select>
 	</td>
 </tr>
@@ -227,7 +234,7 @@ if ( ( $t_resolved > $f_new_status ) &&
  */
 $t_custom_status_label = "update"; # Don't show custom fields by default
 if ( ( $f_new_status == $t_resolved ) &&
-			( $t_closed > $f_new_status ) ) {
+			( $f_new_status < $t_closed ) ) {
 	$t_custom_status_label = "resolved";
 }
 if ( $t_closed == $f_new_status ) {
@@ -277,7 +284,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 ?>
 
 <?php
-if ( ( $f_new_status >= $t_resolved ) ) {
+if ( ( $t_resolved <= $f_new_status ) ) {
 	$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
 		|| ( ( AUTO == config_get( 'show_product_version' ) )
 					&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
@@ -299,7 +306,7 @@ if ( ( $f_new_status >= $t_resolved ) ) {
 	} ?>
 
 <?php
-if ( ( $f_new_status >= $t_resolved ) && ( $t_closed > $f_new_status ) ) { ?>
+if ( ( $t_resolved <= $f_new_status ) && ( $f_new_status < $t_closed ) ) { ?>
 <!-- Close Immediately (if enabled) -->
 <?php if ( ( ON == config_get( 'allow_close_immediately' ) )
 				&& ( access_has_bug_level( access_get_status_threshold( $t_closed ), $f_bug_id ) ) ) { ?>
