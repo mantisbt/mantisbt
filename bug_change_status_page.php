@@ -52,8 +52,10 @@
 	$f_new_status = gpc_get_int( 'new_status' );
 	$f_reopen_flag = gpc_get_int( 'reopen_flag', OFF );
 
+	$t_current_user_id = auth_get_current_user_id();
+
 	if ( !( ( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
-				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) &&
+				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == $t_current_user_id ) &&
 						( ( ON == config_get( 'allow_reporter_reopen' ) ) ||
 								( ON == config_get( 'allow_reporter_close' ) ) ) ) ||
 				( ( ON == $f_reopen_flag ) && ( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $f_bug_id ) ) )
@@ -154,8 +156,13 @@ if ( ( $t_resolved <= $f_new_status ) && ( $t_closed > $f_new_status ) ) { ?>
 <?php } ?>
 
 <?php
-if ( ( $t_resolved > $f_new_status ) &&
-		access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold')), $f_bug_id) ) { ?>
+if ( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $f_bug_id ) ) {
+	$t_suggested_handler_id = $t_bug->handler_id;
+
+	if ( $t_suggested_handler_id == NO_USER && access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id ) ) {
+		$t_suggested_handler_id = $t_current_user_id;
+	}
+?>
 <!-- Assigned To -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -164,7 +171,7 @@ if ( ( $t_resolved > $f_new_status ) &&
 	<td>
 		<select name="handler_id">
 			<option value="0"></option>
-			<?php print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id ) ?>
+			<?php print_assign_to_option_list( $t_suggested_handler_id, $t_bug->project_id ) ?>
 		</select>
 	</td>
 </tr>
