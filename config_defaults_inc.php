@@ -3963,7 +3963,7 @@ $g_global_settings = array(
 	'rss_key_seed',
 	'session_',
 	'show_detailed_errors',
-	'show_queries_count',
+	'show_queries_',
 	'stop_on_errors',
 	'use_iis',
 	'use_javascript',
