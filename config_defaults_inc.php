@@ -2798,7 +2798,7 @@ $g_manage_configuration_threshold = MANAGER;
  * threshold for users to view the system configurations
  * @global int $g_view_configuration_threshold
  */
-$g_view_configuration_threshold = DEVELOPER;
+$g_view_configuration_threshold = ADMINISTRATOR;
 
 /**
  * threshold for users to set the system configurations generically via
