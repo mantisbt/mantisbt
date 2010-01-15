@@ -160,46 +160,42 @@
 	if ( ( $t_old_bug_status != $t_bug_data->status ) && ( FALSE == $f_update_mode ) ) {
 		# handle status transitions that come from pages other than bug_*update_page.php
 		# this does the minimum to act on the bug and sends a specific message
-		switch ( $t_bug_data->status ) {
-			case $t_resolved:
-				# bug_resolve updates the status, fixed_in_version, resolution, handler_id and bugnote and sends message
-				bug_resolve( $f_bug_id, $t_bug_data->resolution, $t_bug_data->fixed_in_version,
-						$f_bugnote_text, $t_bug_data->duplicate_id, $t_bug_data->handler_id,
-						$f_private, $f_time_tracking );
-				$t_notify = false;
-				$t_bug_note_set = true;
+		if ( $t_bug_data->status >= $t_resolved
+			&& $t_bug_data->status < $t_closed
+			&& $t_old_bug_status < $t_resolved ) {
+			# bug_resolve updates the status, fixed_in_version, resolution, handler_id and bugnote and sends message
+			bug_resolve( $f_bug_id, $t_bug_data->resolution, $t_bug_data->fixed_in_version,
+				$f_bugnote_text, $t_bug_data->duplicate_id, $t_bug_data->handler_id,
+				$f_private, $f_time_tracking );
+			$t_notify = false;
+			$t_bug_note_set = true;
 
-				if ( $f_close_now ) {
-					bug_set_field( $f_bug_id, 'status', $t_closed );
-				}
+			if ( $f_close_now ) {
+				bug_set_field( $f_bug_id, 'status', $t_closed );
+			}
 
-				// update bug data with fields that may be updated inside bug_resolve(), otherwise changes will be overwritten
-				// in bug_update() call below.
-				$t_bug_data->handler_id = bug_get_field( $f_bug_id, 'handler_id' );
-				$t_bug_data->status = bug_get_field( $f_bug_id, 'status' );
-				break;
+			// update bug data with fields that may be updated inside bug_resolve(), otherwise changes will be overwritten
+			// in bug_update() call below.
+			$t_bug_data->handler_id = bug_get_field( $f_bug_id, 'handler_id' );
+			$t_bug_data->status = bug_get_field( $f_bug_id, 'status' );
+		} else if ( $t_bug_data->status >= $t_closed
+			&& $t_old_bug_status < $t_closed ) {
+			# bug_close updates the status and bugnote and sends message
+			bug_close( $f_bug_id, $f_bugnote_text, $f_private, $f_time_tracking );
+			$t_notify = false;
+			$t_bug_note_set = true;
+		} else if ( $t_bug_data->status == config_get( 'bug_reopen_status' )
+			&& $t_old_bug_status >= $t_resolved ) {
+			bug_set_field( $f_bug_id, 'handler_id', $t_bug_data->handler_id ); # fix: update handler_id before calling bug_reopen
+			# bug_reopen updates the status and bugnote and sends message
+			bug_reopen( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private );
+			$t_notify = false;
+			$t_bug_note_set = true;
 
-			case $t_closed:
-				# bug_close updates the status and bugnote and sends message
-				bug_close( $f_bug_id, $f_bugnote_text, $f_private, $f_time_tracking );
-				$t_notify = false;
-				$t_bug_note_set = true;
-				break;
-
-			case config_get( 'bug_reopen_status' ):
-				if ( $t_old_bug_status >= $t_resolved ) {
-					bug_set_field( $f_bug_id, 'handler_id', $t_bug_data->handler_id ); # fix: update handler_id before calling bug_reopen
-					# bug_reopen updates the status and bugnote and sends message
-					bug_reopen( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private );
-					$t_notify = false;
-					$t_bug_note_set = true;
-
-					// update bug data with fields that may be updated inside bug_resolve(), otherwise changes will be overwritten
-					// in bug_update() call below.
-					$t_bug_data->status = bug_get_field( $f_bug_id, 'status' );
-					$t_bug_data->resolution = bug_get_field( $f_bug_id, 'resolution' );
-					break;
-				} # else fall through to default
+			// update bug data with fields that may be updated inside bug_resolve(), otherwise changes will be overwritten
+			// in bug_update() call below.
+			$t_bug_data->status = bug_get_field( $f_bug_id, 'status' );
+			$t_bug_data->resolution = bug_get_field( $f_bug_id, 'resolution' );
 		}
 	}
 
