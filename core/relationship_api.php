@@ -676,7 +676,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 
 	# add project name
 	if( $p_show_project ) {
-		$t_relationship_info_html .= $t_td . $t_related_project_name . '&nbsp;</td>';
+		$t_relationship_info_html .= $t_td . string_display_line( $t_related_project_name ) . '&nbsp;</td>';
 	}
 
 	# add summary
