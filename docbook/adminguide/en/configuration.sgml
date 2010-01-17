@@ -2206,6 +2206,24 @@
                     </warning>
                 </listitem>
             </varlistentry>
+            <varlistentry>
+                <term>$g_view_configuration_threshold</term>
+                <listitem>
+                    <para>Threshold for users to view the raw system configurations as stored in the database.
+                        The default value is ADMINISTRATOR.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_set_configuration_threshold</term>
+                <listitem>
+                    <para>Threshold for users to set the system configurations generically via MantisBT web interface.
+                        WARNING: Users who have access to set configuration via the interface MUST be trusted.  This is due
+                        to the fact that such users can set configurations to PHP code and hence there can be a security
+                        risk if such users are not trusted. The default value is ADMINISTRATOR.
+                    </para>
+                </listitem>
+            </varlistentry>
         </variablelist>
     </section>
 
