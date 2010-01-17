@@ -2471,7 +2471,7 @@ $g_delete_bug_threshold = DEVELOPER;
  * $g_delete_bug_threshold.
  * @global string $g_delete_bugnote_threshold
  */
-$g_delete_bugnote_threshold = $g_delete_bug_threshold;
+$g_delete_bugnote_threshold = '%delete_bug_threshold%';
 
 /**
  * Move bug threshold
@@ -2591,7 +2591,7 @@ $g_set_status_threshold = array();
  * $g_update_bugnote_threshold.
  * @global int $g_bugnote_user_edit_threshold
  */
-$g_bugnote_user_edit_threshold = $g_update_bugnote_threshold;
+$g_bugnote_user_edit_threshold = '%update_bugnote_threshold%';
 
 /**
  * Threshold at which a user can delete his/her own bugnotes.
@@ -2599,7 +2599,7 @@ $g_bugnote_user_edit_threshold = $g_update_bugnote_threshold;
  * $g_delete_bugnote_threshold.
  * @global int $g_bugnote_user_delete_threshold
  */
-$g_bugnote_user_delete_threshold = $g_delete_bugnote_threshold;
+$g_bugnote_user_delete_threshold = '%delete_bugnote_threshold%';
 
 /**
  * Threshold at which a user can change the view state of his/her own bugnotes.
@@ -2607,7 +2607,7 @@ $g_bugnote_user_delete_threshold = $g_delete_bugnote_threshold;
  * $g_change_view_status_threshold.
  * @global int $g_bugnote_user_change_view_state_threshold
  */
-$g_bugnote_user_change_view_state_threshold = $g_change_view_status_threshold;
+$g_bugnote_user_change_view_state_threshold = '%change_view_status_threshold%';
 
 /**
  * Allow a bug to have no category
