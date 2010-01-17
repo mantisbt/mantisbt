@@ -725,7 +725,6 @@ function print_category_filter_option_list( $p_category_name = '', $p_project_id
 		$c_project_id = db_prepare_int( $p_project_id );
 	}
 
-	project_hierarchy_cache();
 	$t_project_ids = project_hierarchy_inheritance( $c_project_id );
 
 	$t_subproject_ids = array();
