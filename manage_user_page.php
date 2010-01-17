@@ -135,7 +135,7 @@
 			$c_filter = $f_filter;
 			echo "<strong>$t_caption</strong>";
 		} else {
-			print_link( "manage_user_page.php?filter=$t_prefix$t_hide_filter", $t_caption );
+			print_link( "manage_user_page.php?sort=$c_sort&dir=$c_dir&save=1$t_hide_filter&filter=$t_prefix", $t_caption );
 		}
 
 		if ($t_prefix == 'UNUSED' ) {
@@ -230,6 +230,7 @@
 		<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
 		<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
 		<input type="hidden" name="save" value="1" />
+		<input type="hidden" name="filter" value="<?php echo $c_filter ?>" />
 		<input type="checkbox" name="hide" value="1" <?php check_checked( $c_hide, 1 ); ?> /> <?php echo lang_get( 'hide_inactive' ) ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'filter_button' ) ?>" />
 		</form>
