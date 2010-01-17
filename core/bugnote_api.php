@@ -559,7 +559,7 @@ function bugnote_set_view_state( $p_bugnote_id, $p_private ) {
 		          	WHERE id=" . db_param();
 	db_query_bound( $query, Array( $t_view_state, $c_bugnote_id ) );
 
-	history_log_event_special( $t_bug_id, BUGNOTE_STATE_CHANGED, bugnote_format_id( $t_view_state ), $p_bugnote_id );
+	history_log_event_special( $t_bug_id, BUGNOTE_STATE_CHANGED, $t_view_state, bugnote_format_id( $p_bugnote_id ) );
 
 	return true;
 }
