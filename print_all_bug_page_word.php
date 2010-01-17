@@ -534,7 +534,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 			<td class="print">
 				<?php echo $t_date_submitted ?>&nbsp;&nbsp;&nbsp;
 				<?php if ( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
-					echo '<br />(' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . $t_last_modified . ')';
+					echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $t_last_modified . ')';
 				} ?>
 			</td>
 		</tr>

@@ -653,6 +653,7 @@ $s_updating_bug_simple_title = 'Updating Issue Information';
 
 # bug_view*
 $s_view_revisions = 'View Revisions';
+$s_view_num_revisions = 'View %1$d revisions';
 $s_revision = 'Revision';
 $s_revision_by = '%1$s by %2$s';
 $s_revision_drop = 'Drop';
@@ -683,7 +684,7 @@ $s_closed_bug_button = 'Close Issue';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'Note has been successfully updated...';
-$s_edited_on = 'edited on:';
+$s_last_edited = 'Last edited:';
 
 # file_api.php
 $s_hide_content = 'Hide Content';

@@ -134,7 +134,7 @@ require_api( 'user_api.php' );
 			<td class="print">
 				<?php echo $v3_date_submitted ?>&nbsp;&nbsp;&nbsp;
 				<?php if ( $v3_date_submitted != $v3_last_modified ) {
-					echo '<br />(' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . $v3_last_modified . ')';
+					echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $v3_last_modified . ')';
 				} ?>
 			</td>
 		</tr>

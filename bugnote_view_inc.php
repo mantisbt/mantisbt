@@ -26,6 +26,7 @@
  * @uses access_api.php
  * @uses authentication_api.php
  * @uses bug_api.php
+ * @uses bug_revision_api.php
  * @uses bugnote_api.php
  * @uses collapse_api.php
  * @uses config_api.php
@@ -44,6 +45,7 @@
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
+require_api( 'bug_revision_api.php' );
 require_api( 'bugnote_api.php' );
 require_api( 'collapse_api.php' );
 require_api( 'config_api.php' );
@@ -165,7 +167,12 @@ $num_notes = count( $t_bugnotes );
 		<span class="small"><?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?></span><br />
 		<?php
 		if ( $t_bugnote_modified ) {
-			echo '<span class="small">' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</span><br />';
+			echo '<span class="small">' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</span><br />';
+			$t_revision_count = bug_revision_count( $f_bug_id, REV_BUGNOTE, $t_bugnote->id );
+			if ( $t_revision_count >= 1) {
+				$t_view_num_revisions_text = sprintf( lang_get( 'view_num_revisions' ), $t_revision_count );
+				echo '<span class="small"><a href="bug_revision_view_page.php?bugnote_id=' . $t_bugnote->id . '">' . $t_view_num_revisions_text . '</a></span><br />';
+			}
 		}
 		?>
 		<br /><div class="small">
