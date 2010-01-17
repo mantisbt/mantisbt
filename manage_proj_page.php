@@ -42,8 +42,6 @@
 
 	print_manage_menu( 'manage_proj_page.php' );
 
-	project_hierarchy_cache( true );
-
 	# Project Menu Form BEGIN 
 ?>
 <br />

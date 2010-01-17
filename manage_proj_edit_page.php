@@ -195,7 +195,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <?php echo form_security_field( 'manage_proj_update_children' ) ?>
 <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 <?php
-	project_hierarchy_cache( true );
 	$t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, /* show_disabled */ true );
 
 	if ( Array() != $t_subproject_ids ) {

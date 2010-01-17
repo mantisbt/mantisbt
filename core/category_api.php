@@ -404,8 +404,6 @@ function category_cache_array_rows_by_project( $p_project_id_array ) {
 		}
 	}
 
-	project_hierarchy_cache();
-
 	$c_project_id = db_prepare_int( $p_project_id );
 
 	$t_category_table = db_get_table( 'mantis_category_table' );

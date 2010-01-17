@@ -626,8 +626,6 @@ function version_should_show_product_version( $p_project_id ) {
  * @return string The where clause not including WHERE.
  */
 function version_get_project_where_clause( $p_project_id, $p_inherit ) {
-	project_hierarchy_cache();
-
 	if ( $p_project_id == ALL_PROJECTS ) {
 		$t_inherit = false;
 	} else {
