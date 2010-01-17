@@ -120,9 +120,7 @@ function project_hierarchy_remove_all( $p_project_id ) {
 function project_hierarchy_is_toplevel( $p_project_id, $p_show_disabled = false ) {
 	global $g_cache_project_hierarchy;
 
-	if( ( null === $g_cache_project_hierarchy ) || ( $p_show_disabled ) ) {
-		project_hierarchy_cache( $p_show_disabled );
-	}
+	project_hierarchy_cache( $p_show_disabled );
 
 	if( isset( $g_cache_project_hierarchy[ALL_PROJECTS] ) ) {
 		return in_array( $p_project_id, $g_cache_project_hierarchy[ALL_PROJECTS] );
@@ -200,9 +198,7 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 function project_hierarchy_inherit_parent( $p_child_id, $p_parent_id, $p_show_disabled = false ) {
 	global $g_cache_project_inheritance;
 
-	if( ( null === $g_cache_project_inheritance ) || ( $p_show_disabled ) ) {
-		project_hierarchy_cache( $p_show_disabled );
-	}
+	project_hierarchy_cache( $p_show_disabled );
 
 	return in_array( $p_parent_id, $g_cache_project_inheritance[$p_child_id] );
 }
@@ -217,9 +213,7 @@ function project_hierarchy_inherit_parent( $p_child_id, $p_parent_id, $p_show_di
 function project_hierarchy_inheritance( $p_project_id, $p_show_disabled = false ) {
 	global $g_cache_project_inheritance;
 
-	if( ( null === $g_cache_project_inheritance ) || ( $p_show_disabled ) ) {
-		project_hierarchy_cache( $p_show_disabled );
-	}
+	project_hierarchy_cache( $p_show_disabled );
 
 	$t_project_ids = array(
 		(int) $p_project_id,
@@ -258,9 +252,7 @@ function project_hierarchy_inheritance( $p_project_id, $p_show_disabled = false 
 function project_hierarchy_get_subprojects( $p_project_id, $p_show_disabled = false ) {
 	global $g_cache_project_hierarchy;
 
-	if( ( null === $g_cache_project_hierarchy ) || ( $p_show_disabled ) ) {
-		project_hierarchy_cache( $p_show_disabled );
-	}
+	project_hierarchy_cache( $p_show_disabled );
 
 	if( isset( $g_cache_project_hierarchy[$p_project_id] ) ) {
 		return $g_cache_project_hierarchy[$p_project_id];
