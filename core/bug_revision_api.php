@@ -89,6 +89,24 @@ function bug_revision_add( $p_bug_id, $p_user_id, $p_type, $p_value, $p_bugnote_
 }
 
 /**
+ * Check if a bug revision exists
+ * @param int $p_revision_id Revision ID
+ * @return bool Whether or not the bug revision exists
+ */
+function bug_revision_exists( $p_revision_id ) {
+	$t_bug_rev_table = db_get_table( 'bug_revision' );
+
+	$t_query = "SELECT * FROM $t_bug_rev_table WHERE id=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_revision_id ) );
+
+	if ( db_num_rows( $t_result ) < 1 ) {
+		return false;
+	}
+
+	return true;
+}
+
+/**
  * Get a row of data for a given revision ID.
  * @param int $p_revision_id Revision ID
  * @return array Revision data row
@@ -107,6 +125,30 @@ function bug_revision_get( $p_revision_id ) {
 }
 
 /**
+ * Get the name of the type of a bug revision.
+ * @param int $p_revision_id Revision type ID (see constant_inc.php for possible values)
+ * @return string Name of the type of the bug revision
+ */
+function bug_revision_get_type_name( $p_revision_type_id ) {
+	$t_type_name = '';
+	switch( $p_revision_type_id ) {
+		case REV_DESCRIPTION:
+			$t_type_name = lang_get( 'description' );
+			break;
+		case REV_STEPS_TO_REPRODUCE:
+			$t_type_name = lang_get( 'steps_to_reproduce' );
+			break;
+		case REV_ADDITIONAL_INFO:
+			$t_type_name = lang_get( 'additional_information' );
+			break;
+		case REV_BUGNOTE:
+			$t_type_name = lang_get( 'bugnote' );
+			break;
+	}
+	return $t_type_name;
+}
+
+/**
  * Remove one or more bug revisions from the bug history.
  * @param int $p_revision_id Revision ID, or array of revision IDs
  * @return null
@@ -115,19 +157,34 @@ function bug_revision_drop( $p_revision_id ) {
 	$t_bug_rev_table = db_get_table( 'bug_revision' );
 
 	if ( is_array( $p_revision_id ) ) {
+		$t_revisions = array();
 		$t_first = true;
 		$t_query = "DELETE FROM $t_bug_rev_table WHERE id IN ( ";
 
+		# TODO: Fetch bug revisions in one query (and cache them)
 		foreach( $p_revision_id as $t_rev_id ) {
 			$t_query .= ( $t_first ? db_param() : ', ' . db_param() );
+			$t_revisions[$t_rev_id] = bug_revision_get( $t_rev_id );
 		}
 
 		$t_query .= ' )';
 		db_query_bound( $t_query, $p_revision_id );
-
+		foreach( $p_revision_id as $t_rev_id ) {
+			if ( $t_revisions[$t_rev_id]['type'] == REV_BUGNOTE ) {
+				history_log_event_special( $t_revisions[$t_rev_id]['bug_id'], BUGNOTE_REVISION_DROPPED, bugnote_format_id( $t_rev_id ), $t_revisions[$t_rev_id]['bugnote_id'] );
+			} else {
+				history_log_event_special( $t_revisions[$t_rev_id]['bug_id'], BUG_REVISION_DROPPED, bugnote_format_id( $t_rev_id ), $t_revisions[$t_rev_id]['type'] );
+			}
+		}
 	} else {
+		$t_revision = bug_revision_get( $p_revision_id );
 		$t_query = "DELETE FROM $t_bug_rev_table WHERE id=" . db_param();
 		db_query_bound( $t_query, array( $p_revision_id ) );
+		if ( $t_revision['type'] == REV_BUGNOTE ) {
+			history_log_event_special( $t_revision['bug_id'], BUGNOTE_REVISION_DROPPED, bugnote_format_id( $p_revision_id ), $t_revision['bugnote_id'] );
+		} else {
+			history_log_event_special( $t_revision['bug_id'], BUG_REVISION_DROPPED, bugnote_format_id( $p_revision_id ), $t_revision['type'] );
+		}
 	}
 }
 
