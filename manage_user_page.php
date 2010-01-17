@@ -68,7 +68,7 @@ $t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width
 $c_filter = '';
 
 # Clean up the form variables
-if ( !in_array( $f_sort, db_field_names( $t_user_table ) ) ) {
+if ( !db_field_exists( $f_sort, $t_user_table ) ) {
 	$c_sort = 'username';
 } else {
 	$c_sort = addslashes($f_sort);
