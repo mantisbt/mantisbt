@@ -71,7 +71,7 @@ require_api( 'lang_api.php' );
 		<textarea name="bugnote_text" cols="80" rows="10"></textarea>
 	</td>
 </tr>
-<?php if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
+<?php if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) { ?>
 <tr class="row-1">
 	<td class="category">
 		<?php echo lang_get( 'view_status' ) ?>

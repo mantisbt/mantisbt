@@ -82,8 +82,9 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 $t_user_id = auth_get_current_user_id();
 $t_reporter_id = bugnote_get_field( $f_bugnote_id, 'reporter_id' );
 
-if ( ( $t_user_id != $t_reporter_id ) ||
-	( OFF == config_get( 'bugnote_allow_user_edit_delete' ) ) ) {
+if ( $t_user_id == $t_reporter_id ) {
+	access_ensure_bugnote_level( config_get( 'bugnote_user_edit_threshold' ), $f_bugnote_id );
+} else {
 	access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
 }
 

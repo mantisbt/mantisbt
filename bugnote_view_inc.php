@@ -112,6 +112,13 @@ $num_notes = count( $t_bugnotes );
 	$t_normal_date_format = config_get( 'normal_date_format' );
 	$t_total_time = 0;
 
+	$t_bugnote_user_edit_threshold = config_get( 'bugnote_user_edit_threshold' );
+	$t_bugnote_user_delete_threshold = config_get( 'bugnote_user_delete_threshold' );
+	$t_bugnote_user_change_view_state_threshold = config_get( 'bugnote_user_change_view_state_threshold' );
+	$t_can_edit_all_bugnotes = access_has_bug_level( config_get( 'update_bugnote_threshold' ), $f_bug_id );
+	$t_can_delete_all_bugnotes = access_has_bug_level( config_get( 'delete_bugnote_threshold' ), $f_bug_id );
+	$t_can_change_view_state_all_bugnotes = $t_can_edit_all_bugnotes && access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id );
+
 	for ( $i=0; $i < $num_notes; $i++ ) {
 		$t_bugnote = $t_bugnotes[$i];
 
@@ -165,35 +172,43 @@ $num_notes = count( $t_bugnotes );
 		<?php
 			# bug must be open to be editable
 			if ( !bug_is_readonly( $f_bug_id ) ) {
-				$t_can_edit_note = false;
-				$t_can_delete_note = false;
 
-				# admins and the bugnote creator can edit/delete this bugnote
-				if ( ( access_has_bug_level( config_get( 'manage_project_threshold' ), $f_bug_id ) ) ||
-					( ( $t_bugnote->reporter_id == $t_user_id ) && ( ON == config_get( 'bugnote_allow_user_edit_delete' ) ) ) ) {
-					$t_can_edit_note = true;
-					$t_can_delete_note = true;
+				# check if the user can edit this bugnote
+				if ( $t_user_id == $t_bugnote->reporter_id ) {
+					$t_can_edit_bugnote = access_has_bugnote_level( $t_bugnote_user_edit_threshold, $t_bugnote->id );
+				} else {
+					$t_can_edit_bugnote = $t_can_edit_all_bugnotes;
 				}
 
-				# users above update_bugnote_threshold should be able to edit this bugnote
-				if ( $t_can_edit_note || access_has_bug_level( config_get( 'update_bugnote_threshold' ), $f_bug_id ) ) {
+				# check if the user can delete this bugnote
+				if ( $t_user_id == $t_bugnote->reporter_id ) {
+					$t_can_delete_bugnote = access_has_bugnote_level( $t_bugnote_user_delete_threshold, $t_bugnote->id );
+				} else {
+					$t_can_delete_bugnote = $t_can_delete_all_bugnotes;
+				}
+
+				# check if the user can make this bugnote private
+				if ( $t_user_id == $t_bugnote->reporter_id ) {
+					$t_can_change_view_state = access_has_bugnote_level( $t_bugnote_user_change_view_state_threshold, $t_bugnote->id );
+				} else {
+					$t_can_change_view_state = $t_can_change_view_state_all_bugnotes;
+				}
+
+				# show edit button if the user is allowed to edit this bugnote
+				if ( $t_can_edit_bugnote ) {
 					print_button( 'bugnote_edit_page.php?bugnote_id='.$t_bugnote->id, lang_get( 'bugnote_edit_link' ) );
 				}
 
-				# users above delete_bugnote_threshold should be able to delete this bugnote
-				if ( $t_can_delete_note || access_has_bug_level( config_get( 'delete_bugnote_threshold' ), $f_bug_id ) ) {
-					echo " ";
+				# show delete button if the user is allowed to delete this bugnote
+				if ( $t_can_delete_bugnote ) {
 					print_button( 'bugnote_delete.php?bugnote_id='.$t_bugnote->id, lang_get( 'delete_link' ) );
 				}
 
-				# users with access to both update and change view status (or the bugnote author) can change public/private status
-				if ( $t_can_edit_note || ( access_has_bug_level( config_get( 'update_bugnote_threshold' ), $f_bug_id ) &&
-					access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id ) ) ) {
+				# show make public or make private button if the user is allowed to change the view state of this bugnote
+				if ( $t_can_change_view_state ) {
 					if ( VS_PRIVATE == $t_bugnote->view_state ) {
-						echo " ";
 						print_button( 'bugnote_set_view_state.php?private=0&bugnote_id=' . $t_bugnote->id, lang_get( 'make_public' ) );
 					} else {
-						echo " ";
 						print_button( 'bugnote_set_view_state.php?private=1&bugnote_id=' . $t_bugnote->id, lang_get( 'make_private' ) );
 					}
 				}

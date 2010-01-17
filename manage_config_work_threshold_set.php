@@ -162,10 +162,11 @@ set_capability_boolean( 'limit_reporters', true );
 # Notes
 set_capability_row( 'add_bugnote_threshold' );
 set_capability_row( 'update_bugnote_threshold' );
-set_capability_boolean( 'bugnote_allow_user_edit_delete' );
+set_capability_row( 'bugnote_user_edit_threshold' );
 set_capability_row( 'delete_bugnote_threshold' );
+set_capability_row( 'bugnote_user_delete_threshold' );
 set_capability_row( 'private_bugnote_threshold' );
-
+set_capability_row( 'bugnote_user_change_view_state_threshold' );
 
 # Others
 set_capability_row( 'view_changelog_threshold' );

@@ -797,24 +797,34 @@
                                 <entry>threshold to add an issue note</entry>
                             </row>
                             <row>
-                                <entry>Update Notes</entry>
+                                <entry>Update Others' Notes</entry>
                                 <entry>$g_update_bugnote_threshold</entry>
-                                <entry>threshold to edit an issue note</entry>
+                                <entry>threshold at which a user can edit issue notes created by other users</entry>
                             </row>
                             <row>
-                                <entry>Allow users to edit their own bugnotes</entry>
-                                <entry>$g_bugnote_allow_user_edit_delete</entry>
-                                <entry>can a user edit/delete their own issue notes</entry>
+                                <entry>Update Own Notes</entry>
+                                <entry>$g_bugnote_user_edit_threshold</entry>
+                                <entry>threshold at which a user can edit issue notes created by themselves</entry>
                             </row>
                             <row>
-                                <entry>Delete Note</entry>
+                                <entry>Delete Others' Notes</entry>
                                 <entry>$g_delete_bugnote_threshold</entry>
-                                <entry>threshold to delete an issue note</entry>
+                                <entry>threshold at which a user can delete issue notes created by other users</entry>
+                            </row>
+                            <row>
+                                <entry>Delete Own Notes</entry>
+                                <entry>$g_bugnote_user_delete_threshold</entry>
+                                <entry>threshold at which a user can delete issue notes created by themselves</entry>
                             </row>
                             <row>
                                 <entry>View private notes</entry>
                                 <entry>$g_private_bugnote_threshold</entry>
                                 <entry>threshold to view a private issue note</entry>
+                            </row>
+                            <row>
+                                <entry>Change view state of own notes</entry>
+                                <entry>$g_bugnote_user_change_view_state_threshold</entry>
+                                <entry>threshold at which a user can change the view state of issue notes created by themselves</entry>
                             </row>
                         </tbody>
                     </tgroup>

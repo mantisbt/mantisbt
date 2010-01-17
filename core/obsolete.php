@@ -140,3 +140,4 @@ config_obsolete( 'graph_font', '' );
 config_obsolete( 'graph_colors', '' );
 
 #changes in 1.3.0dev
+config_obsolete( 'bugnote_allow_user_edit_delete', '' );

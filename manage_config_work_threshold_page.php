@@ -322,10 +322,12 @@ get_section_end();
 # Notes
 get_section_begin_mcwt( lang_get( 'notes' ) );
 get_capability_row( lang_get( 'add_notes' ), 'add_bugnote_threshold' );
-get_capability_row( lang_get( 'update_notes' ), 'update_bugnote_threshold' );
-get_capability_boolean( lang_get( 'allow_user_edit' ), 'bugnote_allow_user_edit_delete' );
-get_capability_row( lang_get( 'delete_note' ), 'delete_bugnote_threshold' );
+get_capability_row( lang_get( 'edit_others_bugnotes' ), 'update_bugnote_threshold' );
+get_capability_row( lang_get( 'edit_own_bugnotes' ), 'bugnote_user_edit_threshold' );
+get_capability_row( lang_get( 'delete_others_bugnotes' ), 'delete_bugnote_threshold' );
+get_capability_row( lang_get( 'delete_own_bugnotes' ), 'bugnote_user_delete_threshold' );
 get_capability_row( lang_get( 'view_private_notes' ), 'private_bugnote_threshold' );
+get_capability_row( lang_get( 'change_view_state_own_bugnotes' ), 'bugnote_user_change_view_state_threshold' );
 get_section_end();
 
 # Others

@@ -70,6 +70,10 @@ if ( bug_is_readonly( $f_bug_id ) ) {
 
 access_ensure_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id );
 
+if ( $f_private ) {
+	access_ensure_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id );
+}
+
 // We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING
 // if $f_time_tracking is not 0 and the time tracking feature is enabled.
 $t_bugnote_id = bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private, BUGNOTE );
