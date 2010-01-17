@@ -486,7 +486,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					break;
 				case BUGNOTE_STATE_CHANGED:
 					$p_old_value = get_enum_element( 'view_state', $p_old_value );
-					$t_note = lang_get( 'bugnote_view_state' ) . ': ' . $p_old_value . ': ' . $p_new_value;
+					$t_note = lang_get( 'bugnote_view_state' ) . ': ' . $p_new_value . ': ' . $p_old_value;
 					break;
 				case BUG_MONITOR:
 					$p_old_value = user_get_name( $p_old_value );
