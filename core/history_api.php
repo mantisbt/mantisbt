@@ -335,6 +335,9 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 				$p_new_value = user_get_name( $p_new_value );
 			}
 			break;
+		case 'version':
+			$t_field_localized = lang_get( 'product_version' );
+			break;
 		case 'fixed_in_version':
 			$t_field_localized = lang_get( 'fixed_in_version' );
 			break;
