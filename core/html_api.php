@@ -727,7 +727,9 @@ function print_menu() {
 				if( is_array( $t_callback_menu_options ) ) {
 					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 				} else {
-					$t_menu_options[] = $t_callback_menu_options;
+					if ( !is_null( $t_callback_menu_options ) ) {
+						$t_menu_options[] = $t_callback_menu_options;
+					}
 				}
 			}
 		}
@@ -775,7 +777,9 @@ function print_menu() {
 				if( is_array( $t_callback_menu_options ) ) {
 					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 				} else {
-					$t_menu_options[] = $t_callback_menu_options;
+					if ( !is_null( $t_callback_menu_options ) ) {
+						$t_menu_options[] = $t_callback_menu_options;
+					}
 				}
 			}
 		}
@@ -900,7 +904,9 @@ function print_summary_submenu() {
 			if( is_array( $t_callback_menu_options ) ) {
 				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 			} else {
-				$t_menu_options[] = $t_callback_menu_options;
+				if ( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
 			}
 		}
 	}
@@ -985,7 +991,9 @@ function print_manage_menu( $p_page = '' ) {
 			if( is_array( $t_callback_menu_options ) ) {
 				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 			} else {
-				$t_menu_options[] = $t_callback_menu_options;
+				if ( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
 			}
 		}
 	}
@@ -1097,7 +1105,9 @@ function print_account_menu( $p_page = '' ) {
 			if( is_array( $t_callback_menu_options ) ) {
 				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 			} else {
-				$t_menu_options[] = $t_callback_menu_options;
+				if ( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
 			}
 		}
 	}
@@ -1158,7 +1168,9 @@ function print_summary_menu( $p_page = '' ) {
 			if( is_array( $t_callback_menu_options ) ) {
 				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 			} else {
-				$t_menu_options[] = $t_callback_menu_options;
+				if ( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
 			}
 		}
 	}
