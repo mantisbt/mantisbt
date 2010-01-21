@@ -401,7 +401,6 @@ $s_add_bugnote_title = 'Adicionar nota';
 $s_add_bugnote_button = 'Adicionar nota';
 $s_closed_bug_button = 'Close Bug';
 $s_bugnote_updated_msg = 'A nota referente ao Bug foi actualizada com sucesso...';
-$s_edited_on = 'Editada em:';
 $s_click_to_login = 'Autenticar-se';
 $s_login_page_info = 'Bem-vindo ao BugTracker.';
 $s_save_login = 'Guardar Registo de utilizador ?';

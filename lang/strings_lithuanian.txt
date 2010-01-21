@@ -483,7 +483,6 @@ $s_add_bugnote_button = 'Pridėti komentarą';
 $s_bugnote_edit_link = 'Redaguoti';
 $s_closed_bug_button = 'Uždaryti klaidą';
 $s_bugnote_updated_msg = 'Komentaras sėkmingai atnaujintas...';
-$s_edited_on = 'redaguotas:';
 $s_hide_content = 'Slėpti turinį';
 $s_show_content = 'Rodyti turinį';
 $s_click_to_login = 'Norėdami prisijungti spauskite čia';

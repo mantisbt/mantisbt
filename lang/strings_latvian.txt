@@ -292,7 +292,6 @@ $s_add_bugnote_button = 'Pievienot';
 $s_bugnote_edit_link = 'Labot';
 $s_closed_bug_button = 'AIZVĒRT kļūdu';
 $s_bugnote_updated_msg = 'Komentārs saglabāts...';
-$s_edited_on = 'labots:';
 $s_click_to_login = 'Noklikšķiniet, lai pieslēgtos';
 $s_login_page_info = 'Sveicināti problēmu, kļūdu un jaunas funkcionalitātes pieprasījumu uzskaites un kontroles sistēmā(bugtrack)';
 $s_login_title = 'Pieslēgšanās';

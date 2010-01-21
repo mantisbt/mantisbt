@@ -29,6 +29,7 @@
  * @author Fejl
  * @author Gunner Poulsen, gp@lyngbjerggaardskolen.dk
  * @author Piivaat
+ * @author Qaqqalik
  * @author Søren Mortensen, sm@artmus.dk
  */
 
@@ -421,7 +422,6 @@ $s_add_bugnote_button = 'Tilføj fejlnote';
 $s_bugnote_edit_link = 'Rediger';
 $s_closed_bug_button = 'Luk fejl';
 $s_bugnote_updated_msg = 'Fejlnoten er blevet opdateret ...';
-$s_edited_on = 'rettet den:';
 $s_click_to_login = 'Klik her for at logge ind';
 $s_login_page_info = 'Velkommen til fejlmeldingssystemet.';
 $s_login_title = 'Log ind';
@@ -501,7 +501,6 @@ $s_allow_close_immediate = 'Tillad at fejlen markeres som lukket eller løst';
 $s_allow_reporter_close = 'Tillad at raportøren lukker fejlen';
 $s_allow_reporter_reopen = 'Tillad at raportøren genåbner fejlen';
 $s_set_status_assigned = 'Sæt status på tildeling af behandler';
-$s_allow_user_edit = 'Tillad brugerne at rette i deres egne fejlnoter';
 $s_limit_access = 'Begræns raportørernes adgang til de fejl de har raporteret';
 $s_submit_status = 'Status som nye fejl får';
 $s_assigned_status = 'Status som autotildelte fejl skal have';
@@ -833,8 +832,6 @@ $s_update_view_status = 'Opdaterv visningsstatus (offentlig el. privat)';
 $s_show_list_of_users_monitoring_issue = 'Vis liste over brugere der overvåger denne fejl';
 $s_notes = 'NOTER';
 $s_add_notes = 'Tilføj noter';
-$s_update_notes = 'Opdater noter';
-$s_delete_note = 'Slet note';
 $s_view_private_notes = 'Vis private noter';
 $s_news = 'NYHEDER';
 $s_view_private_news = 'Vis private nyheder';

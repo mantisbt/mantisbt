@@ -382,7 +382,6 @@ $s_add_bugnote_button = 'Dodaj komentar uz grešku';
 $s_bugnote_edit_link = 'Izmena';
 $s_closed_bug_button = 'Zatvaranje greške';
 $s_bugnote_updated_msg = 'Komentar uz grešku je uspesno ažuriran...';
-$s_edited_on = 'izmenjeno:';
 $s_click_to_login = 'Kliknite ovde za prijavljivanje';
 $s_login_page_info = 'Dobrodosli u sistem za pracenje i prijavu grešaka.';
 $s_login_title = 'Operater';
