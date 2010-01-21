@@ -271,7 +271,13 @@ function cfdef_input_checkbox($p_field_def, $t_custom_field_value) {
 
 function cfdef_input_radio( $p_field_def, $p_custom_field_value ) {
 	$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
-	$t_checked_value = $p_custom_field_value;
+
+	$t_len = strlen( $p_custom_field_value );
+	if ( $t_len >= 2 && ( $p_custom_field_value[0] == '|' ) && ( $p_custom_field_value[$t_len-1] == '|' ) ) {
+		$t_checked_value = substr( $p_custom_field_value, 1, $t_len - 2 );
+	} else {
+		$t_checked_value = $p_custom_field_value;
+	}
 
 	foreach ( $t_values as $t_option ) {
 		echo '<input ', helper_get_tab_index(), ' type="radio" name="custom_field_' . $p_field_def['id'] . '[]"';

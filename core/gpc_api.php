@@ -165,18 +165,26 @@ function gpc_get_bool( $p_var_name, $p_default = false ) {
  * @return bool
  */
 function gpc_isset_custom_field( $p_var_name, $p_custom_field_type ) {
+	$t_field_name = 'custom_field_' . $p_var_name;
+
 	switch ($p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_DATE:
 			// date field is three dropdowns that default to 0
 			// Dropdowns are always present, so check if they are set
-			return gpc_isset( 'custom_field_' . $p_var_name . '_day' ) &&
-				gpc_get_int( 'custom_field_' . $p_var_name . '_day', 0 ) != 0 &&
-				gpc_isset( 'custom_field_' . $p_var_name . '_month' ) &&
-				gpc_get_int( 'custom_field_' . $p_var_name . '_month', 0 ) != 0 &&
-				gpc_isset( 'custom_field_' . $p_var_name . '_year' ) &&
-				gpc_get_int( 'custom_field_' . $p_var_name . '_year', 0 ) != 0 ;
+			return gpc_isset( $t_field_name . '_day' ) &&
+				gpc_get_int( $t_field_name . '_day', 0 ) != 0 &&
+				gpc_isset( $t_field_name . '_month' ) &&
+				gpc_get_int( $t_field_name . '_month', 0 ) != 0 &&
+				gpc_isset( $t_field_name . '_year' ) &&
+				gpc_get_int( $t_field_name . '_year', 0 ) != 0 ;
+		case CUSTOM_FIELD_TYPE_STRING:
+		case CUSTOM_FIELD_TYPE_NUMERIC:
+		case CUSTOM_FIELD_TYPE_FLOAT:
+		case CUSTOM_FIELD_TYPE_ENUM:
+		case CUSTOM_FIELD_TYPE_EMAIL:
+			return gpc_isset( $t_field_name ) && !is_blank( gpc_get_string( $t_field_name ) );
 		default:
-			return gpc_isset( 'custom_field_' . $p_var_name);
+			return gpc_isset( $t_field_name );
 	}
 }
 
