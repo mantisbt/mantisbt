@@ -49,7 +49,7 @@ function AjaxLoad( targetElementId, queryString, elementIdToHide ) {
 	liveReq.open("GET", processURI + "?" + queryString);
 
 	// show "Loading..." while waiting
-	document.getElementById( targetElementId ).innerHTML = "Loading...";
+	document.getElementById( targetElementId ).innerHTML = loading_lang;
 
 	liveReq.send(null);
 
