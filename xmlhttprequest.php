@@ -36,7 +36,7 @@ require_api( 'authentication_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'gpc_api.php' );
 require_api( 'logging_api.php' );
-require_api( 'xhtmlrequest_api.php' );
+require_api( 'xmlhttprequest_api.php' );
 
 auth_ensure_user_authenticated();
 
