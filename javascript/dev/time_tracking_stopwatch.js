@@ -6,19 +6,19 @@ function time_tracking_swstartstop() {
 		time_tracking_running = 1;
 		time_tracking_then = new Date();
 		time_tracking_then.setTime(time_tracking_then.getTime() - time_tracking_ms);
-		document.bugnoteadd.time_tracking_ssbutton.value = "Stop";
+		document.bugnoteadd.time_tracking_ssbutton.value = time_tracking_stopwatch_lang_stop;
 	} else {
 		time_tracking_running = 0;
 		time_tracking_now = new Date();
 		time_tracking_ms = time_tracking_now.getTime() - time_tracking_then.getTime();
-		document.bugnoteadd.time_tracking_ssbutton.value = "Start";
+		document.bugnoteadd.time_tracking_ssbutton.value = time_tracking_stopwatch_lang_start;
 	}
 }
 function time_tracking_swreset() {
 	time_tracking_running = 0;
 	time_tracking_ms = 0;
 	document.bugnoteadd.time_tracking.value = "0:00:00";
-	document.bugnoteadd.time_tracking_ssbutton.value = "Start";
+	document.bugnoteadd.time_tracking_ssbutton.value = time_tracking_stopwatch_lang_start;
 }
 
 function time_tracking_display() {
