@@ -77,12 +77,17 @@
 		<?php echo lang_get( 'time_tracking' ) ?> (HH:MM)
 	</td>
 	<td>
-		<?php if ( config_get('time_tracking_stopwatch') && ON == config_get( 'use_javascript' )) { 
+		<?php if ( config_get( 'time_tracking_stopwatch' ) && config_get( 'use_javascript' ) ) { ?>
+		<script language="javascript">
+			var time_tracking_stopwatch_lang_start = "<?php echo lang_get( 'time_tracking_stopwatch_start' ) ?>";
+			var time_tracking_stopwatch_lang_stop = "<?php echo lang_get( 'time_tracking_stopwatch_stop' ) ?>";
+		</script>
+		<?php
 			html_javascript_link( 'time_tracking_stopwatch.js' );
 		?>
 		<input type="text" name="time_tracking" size="5" value="00:00" />
-		<input type="button" name="time_tracking_ssbutton" value="Start" onclick="time_tracking_swstartstop()" />
-		<input type="button" name="time_tracking_reset" value="R" onclick="time_tracking_swreset()" />
+		<input type="button" name="time_tracking_ssbutton" value="<?php echo lang_get( 'time_tracking_stopwatch_start' ) ?>" onclick="time_tracking_swstartstop()" />
+		<input type="button" name="time_tracking_reset" value="<?php echo lang_get( 'time_tracking_stopwatch_reset' ) ?>" onclick="time_tracking_swreset()" />
 		<?php } else { ?>
 		<input type="text" name="time_tracking" size="5" value="00:00" />
 		<?php } ?>
