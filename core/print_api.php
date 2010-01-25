@@ -1742,7 +1742,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 
 		if ( !$t_attachment['exists'] ) {
 			print_file_icon( $t_file_display_name );
-			echo '&nbsp;<span class="strike">' . $t_file_display_name . '</span> (attachment missing)';
+			echo '&nbsp;<span class="strike">' . $t_file_display_name . '</span>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
 		} else {
 			echo $t_href_start;
 			print_file_icon( $t_file_display_name );

@@ -1367,6 +1367,7 @@ $s_monitored_by_label = 'Monitored By:';
 $s_attachments = 'attachment(s)';
 $s_attachment_alt = 'A';
 $s_bytes = 'bytes';
+$s_attachment_missing = 'Attachment missing';
 
 # PHPMailer
 $s_phpmailer_language = 'en';
