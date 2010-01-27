@@ -309,7 +309,7 @@ if ( ( $t_resolved <= $f_new_status ) ) {
 if ( ( $t_resolved <= $f_new_status ) && ( $f_new_status < $t_closed ) ) { ?>
 <!-- Close Immediately (if enabled) -->
 <?php if ( ( ON == config_get( 'allow_close_immediately' ) )
-				&& ( access_has_bug_level( access_get_status_threshold( $t_closed ), $f_bug_id ) ) ) { ?>
+				&& ( access_has_bug_level( access_get_status_threshold( $t_closed, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'close_immediately' ) ?>
