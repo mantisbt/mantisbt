@@ -1347,7 +1347,7 @@ function html_button_bug_change_status( $p_bug_id ) {
 	$t_bug_current_state = bug_get_field( $p_bug_id, 'status' );
 	$t_current_access = access_get_project_level( $t_bug_project_id );
 
-	$t_enum_list = get_status_option_list( $t_current_access, $t_bug_current_state, false, ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() && ( ON == config_get( 'allow_reporter_close' ) ) ) );
+	$t_enum_list = get_status_option_list( $t_current_access, $t_bug_current_state, false, ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() && ( ON == config_get( 'allow_reporter_close' ) ) ), $t_bug_project_id );
 
 	if( count( $t_enum_list ) > 0 ) {
 

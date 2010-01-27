@@ -509,7 +509,11 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
 		return true;
 	}
 
-	return access_has_bug_level( access_get_status_threshold( config_get( 'bug_closed_status_threshold' ) ), $p_bug_id, $p_user_id );
+	$t_bug = bug_get( $p_bug_id );
+
+	$t_closed_status_threshold = access_get_status_threshold( config_get( 'bug_closed_status_threshold' ), $t_bug->project_id );
+
+	return access_has_bug_level( $t_closed_status_threshold, $p_bug_id, $p_user_id );
 }
 
 /**
@@ -594,17 +598,16 @@ function access_get_local_level( $p_user_id, $p_project_id ) {
  * get the access level required to change the issue to the new status
  * If there is no specific differentiated access level, use the
  * generic update_bug_status_threshold.
- * @todo p_project_id is unused
  * @param int $p_status
  * @param int $p_project_id Default value ALL_PROJECTS
  * @return int integer representing user level e.g. DEVELOPER
  * @access public
  */
 function access_get_status_threshold( $p_status, $p_project_id = ALL_PROJECTS ) {
-	$t_thresh_array = config_get( 'set_status_threshold' );
+	$t_thresh_array = config_get( 'set_status_threshold', null, null, $p_project_id );
 	if( isset( $t_thresh_array[(int)$p_status] ) ) {
-		return $t_thresh_array[(int)$p_status];
+		return (int)$t_thresh_array[(int)$p_status];
 	} else {
-		return config_get( 'update_bug_status_threshold' );
+		return config_get( 'update_bug_status_threshold', null, null, $p_project_id );
 	}
 }

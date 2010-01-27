@@ -871,9 +871,9 @@ function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 # or the input parameter if workflows are not used
 # $p_enum_name : name of enumeration (eg: status)
 # $p_current_value : current value
-function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show_current = true, $p_add_close = false ) {
-	$t_config_var_value = config_get( 'status_enum_string' );
-	$t_enum_workflow = config_get( 'status_enum_workflow' );
+function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show_current = true, $p_add_close = false, $p_project_id = ALL_PROJECTS ) {
+	$t_config_var_value = config_get( 'status_enum_string', null, null, $p_project_id );
+	$t_enum_workflow = config_get( 'status_enum_workflow', null, null, $p_project_id );
 
 	if( count( $t_enum_workflow ) < 1 ) {
 		# workflow not defined, use default enum
@@ -891,7 +891,7 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 	$t_enum_list = array();
 
 	foreach ( $t_enum_values as $t_enum_value ) {
-		if ( ( access_compare_level( $p_user_auth, access_get_status_threshold( $t_enum_value ) ) )
+		if ( ( access_compare_level( $p_user_auth, access_get_status_threshold( $t_enum_value, $p_project_id ) ) )
 				&& ( !(( false == $p_show_current ) && ( $p_current_value == $t_enum_value ) ) ) ) {
 			$t_enum_list[$t_enum_value] = get_enum_element( 'status', $t_enum_value );
 		}
@@ -901,8 +901,8 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 		$t_enum_list[$p_current_value] = get_enum_element( 'status', $p_current_value );
 	}
 
-	if ( $p_add_close && access_compare_level( $p_current_value, config_get( 'bug_resolved_status_threshold' ) ) ) {
-		$t_closed = config_get( 'bug_closed_status_threshold' );
+	if ( $p_add_close && access_compare_level( $p_current_value, config_get( 'bug_resolved_status_threshold', null, null, $p_project_id ) ) ) {
+		$t_closed = config_get( 'bug_closed_status_threshold', null, null, $p_project_id );
 		$t_enum_list[$t_closed] = get_enum_element( 'status', $t_closed );
 	}
 
@@ -910,12 +910,12 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 }
 
 # print the status option list for the bug_update pages
-function print_status_option_list( $p_select_label, $p_current_value = 0, $p_allow_close = false, $p_project_id = null ) {
+function print_status_option_list( $p_select_label, $p_current_value = 0, $p_allow_close = false, $p_project_id = ALL_PROJECTS ) {
 	$t_current_auth = access_get_project_level( $p_project_id );
 
-	$t_enum_list = get_status_option_list( $t_current_auth, $p_current_value, true, $p_allow_close );
+	$t_enum_list = get_status_option_list( $t_current_auth, $p_current_value, true, $p_allow_close, $p_project_id );
 
-	if( count( $t_enum_list ) > 0 ) {
+	if( count( $t_enum_list ) > 1 ) {
 
 		# resort the list into ascending order
 		ksort( $t_enum_list );
@@ -927,6 +927,8 @@ function print_status_option_list( $p_select_label, $p_current_value = 0, $p_all
 			echo '>' . $val . '</option>';
 		}
 		echo '</select>';
+	} else if ( count( $t_enum_list ) == 1 ) {
+		echo array_pop( $t_enum_list );
 	} else {
 		echo MantisEnum::getLabel( lang_get( 'status_enum_string' ), $p_current_value );
 	}
