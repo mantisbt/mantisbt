@@ -74,6 +74,7 @@ function custom_field_allow_manage_display( $p_type, $p_display ) {
 $g_cache_custom_field = array();
 $g_cache_cf_list = NULL;
 $g_cache_cf_linked = array();
+$g_cache_name_to_id_map = array();
 
 /**
  * Cache a custom field row if necessary and return the cached copy
@@ -86,7 +87,7 @@ $g_cache_cf_linked = array();
  * @access public
  */
 function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
-	global $g_cache_custom_field;
+	global $g_cache_custom_field, $g_cache_name_to_id_map;
 
 	$c_field_id = db_prepare_int( $p_field_id );
 
@@ -113,6 +114,7 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 	$row = db_fetch_array( $result );
 
 	$g_cache_custom_field[$c_field_id] = $row;
+	$g_cache_name_to_id_map[$row['name']] = $c_field_id;
 
 	return $row;
 }
@@ -763,8 +765,14 @@ function custom_field_delete_all_values( $p_bug_id ) {
  * @access public
  */
 function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = null ) {
-	if( $p_field_name == '' ) {
+	global $g_cache_name_to_id_map;
+
+	if ( is_blank( $p_field_name ) ) {
 		return false;
+	}
+
+	if ( isset( $g_cache_name_to_id_map[$p_field_name] ) ) {
+		return $g_cache_name_to_id_map[$p_field_name];
 	}
 
 	$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
@@ -788,6 +796,7 @@ function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = nul
 	}
 
 	$row = db_fetch_array( $t_result );
+	$g_cache_name_to_id_map[$p_field_name] = $row['id'];
 
 	return $row['id'];
 }
@@ -973,14 +982,7 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 	$c_field_id = db_prepare_int( $p_field_id );
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
-	custom_field_ensure_exists( $p_field_id );
-
-	$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
-	$query = "SELECT access_level_r, default_value, type
-				  FROM $t_custom_field_table
-				  WHERE id=" . db_param();
-	$result = db_query_bound( $query, Array( $c_field_id ) );
-	$row = db_fetch_array( $result );
+	$row = custom_field_cache_row( $p_field_id );
 
 	$t_access_level_r = $row['access_level_r'];
 	$t_default_value = $row['default_value'];
