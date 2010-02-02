@@ -1113,11 +1113,11 @@ function print_account_menu( $p_page = '' ) {
 	print_bracket_link( $t_account_prefs_page, lang_get( 'change_preferences_link' ) );
 	print_bracket_link( $t_account_manage_columns_page, lang_get( 'manage_columns_config' ) );
 
-	if( access_has_project_level( config_get( 'add_profile_threshold' ) ) ) {
+	if( config_get ( 'enable_profiles' ) == ON && access_has_project_level( config_get( 'add_profile_threshold' ) ) ) {
 		print_bracket_link( helper_mantis_url( $t_account_profile_menu_page ), lang_get( 'manage_profiles_link' ) );
 	}
 
-	if(( config_get( 'enable_sponsorship' ) == ON ) && ( access_has_project_level( config_get( 'view_sponsorship_total_threshold' ) ) ) && !current_user_is_anonymous() ) {
+	if( config_get( 'enable_sponsorship' ) == ON && access_has_project_level( config_get( 'view_sponsorship_total_threshold' ) ) && !current_user_is_anonymous() ) {
 		print_bracket_link( helper_mantis_url( $t_account_sponsor_page ), lang_get( 'my_sponsorship' ) );
 	}
 
