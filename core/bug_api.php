@@ -1752,7 +1752,7 @@ function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
 	$c_source_bug_id = (int)$p_source_bug_id;
 	$c_dest_bug_id = (int)$p_dest_bug_id;
 
-	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
+	$t_bug_monitor_table = db_get_table( 'mantis_bug_monitor_table' );
 
 	$query = 'SELECT user_id
 		FROM ' . $t_bug_monitor_table . '
