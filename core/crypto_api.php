@@ -143,3 +143,27 @@ function crypto_generate_strong_random_string( $p_bytes ) {
 	}
 	return $t_random_string;
 }
+
+/**
+ * Generate a nonce encoded using the base64 with URI safe alphabet approach
+ * described in RFC4648. Note that the minimum length is rounded up to the next
+ * number with a factor of 4 so that padding is never added to the end of the
+ * base64 output. This means the '=' padding character is never present in the
+ * output. Due to the reduced character set of base64 encoding, the actual
+ * amount of entropy produced by this function for a given output string length
+ * is 3/4 (0.75) that of raw unencoded output produced with the
+ * crypto_generate_strong_random_string( $p_bytes ) function.
+ * @param int $p_minimum_length Minimum number of characters required for the nonce
+ * @return string Nonce encoded according to the base64 with URI safe alphabet approach described in RFC4648
+ */
+function crypto_generate_uri_safe_nonce( $p_minimum_length ) {
+	$t_length_mod4 = $p_minimum_length % 4;
+	$t_adjusted_length = $p_minimum_length + 4 - ($t_length_mod4 ? $t_length_mod4 : 4);
+	$t_raw_bytes_required = ( $t_adjusted_length / 4 ) * 3;
+	$t_random_bytes = crypto_generate_strong_random_string( $t_raw_bytes_required );
+	$t_base64_encoded = base64_encode( $t_random_bytes );
+	# Note: no need to translate trailing = padding characters because our
+	# length rounding ensures that padding is never required.
+	$t_random_nonce = strtr( $t_base64_encoded, '+/', '-_' );
+	return $t_random_nonce;
+}

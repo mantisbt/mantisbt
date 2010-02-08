@@ -23,6 +23,7 @@
  * @uses core.php
  * @uses config_api.php
  * @uses constant_inc.php
+ * @uses crypto_api.php
  * @uses form_api.php
  * @uses helper_api.php
  * @uses html_api.php
@@ -34,6 +35,7 @@
 require_once( 'core.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'crypto_api.php' );
 require_api( 'form_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
@@ -52,7 +54,7 @@ html_robots_noindex();
 html_page_top1();
 html_page_top2a();
 
-$t_key = mt_rand( 0,99999 );
+$t_public_key = crypto_generate_uri_safe_nonce( 64 );
 ?>
 
 <br />
@@ -94,8 +96,8 @@ $t_key = mt_rand( 0,99999 );
 		<?php print_captcha_input( 'captcha', '' ) ?>
 	</td>
 	<td>
-		<img src="make_captcha_img.php?public_key=<?php echo $t_key ?>" alt="visual captcha" />
-		<input type="hidden" name="public_key" value="<?php echo $t_key ?>" />
+		<img src="make_captcha_img.php?public_key=<?php echo $t_public_key ?>" alt="visual captcha" />
+		<input type="hidden" name="public_key" value="<?php echo $t_public_key ?>" />
 	</td>
 </tr>
 <?php

@@ -23,18 +23,20 @@
  *
  * @uses core.php
  * @uses config_api.php
+ * @uses crypto_api.php
  * @uses gpc_api.php
  * @uses utility_api.php
  */
 
 require_once( 'core.php' );
 require_api( 'config_api.php' );
+require_api( 'crypto_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'utility_api.php' );
 
-$f_public_key = gpc_get_int( 'public_key' );
+$f_public_key = gpc_get_string( 'public_key' );
 
-$t_key = utf8_strtolower( utf8_substr( md5( config_get( 'password_confirm_hash_magic_string' ) . $f_public_key ), 1, 5) );
+$t_private_key = substr( hash( 'whirlpool', 'captcha' . config_get_global( 'crypto_master_salt' ) . $f_public_key, false ), 0, 5 );
 $t_system_font_folder = get_font_path();
 $t_font_per_captcha = config_get( 'font_per_captcha' );
 
@@ -44,7 +46,7 @@ $t_captcha_init = array(
 );
 
 $captcha = new masc_captcha( $t_captcha_init );
-$captcha->make_captcha( $t_key );
+$captcha->make_captcha( $t_private_key );
 
 #
 # The class below was derived from

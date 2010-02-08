@@ -27,6 +27,7 @@
  * @uses authentication_api.php
  * @uses config_api.php
  * @uses constant_inc.php
+ * @uses crypto_api.php
  * @uses current_user_api.php
  * @uses helper_api.php
  * @uses user_api.php
@@ -35,15 +36,17 @@
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'crypto_api.php' );
 require_api( 'current_user_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'user_api.php' );
 
 /**
- * Calculates a key to be used for RSS authentication based on user name, cookie and password.
- * if the user changes his user name or password, then the key becomes invalid.
- * @param int $p_user_id
- * @return string
+ * Calculates a key to be used for RSS authentication based on user name,
+ * cookie and password. If the user changes their user name or password, this
+ * RSS authentication key will become invalidated.
+ * @param int $p_user_id User ID for the user which the key is being calculated for
+ * @return string RSS authentication key (384bit) encoded according to the base64 with URI safe alphabet approach described in RFC4648
  */
 function rss_calculate_key( $p_user_id = null ) {
 	if( $p_user_id === null ) {
@@ -52,13 +55,17 @@ function rss_calculate_key( $p_user_id = null ) {
 		$t_user_id = $p_user_id;
 	}
 
-	$t_seed = config_get_global( 'rss_key_seed' );
-
 	$t_username = user_get_field( $t_user_id, 'username' );
 	$t_password = user_get_field( $t_user_id, 'password' );
 	$t_cookie = user_get_field( $t_user_id, 'cookie_string' );
 
-	return md5( $t_seed . $t_username . $t_cookie . $t_password );
+	$t_key_raw = hash( 'whirlpool', 'rss_key' . config_get_global( 'crypto_master_salt' ) . $t_username . $t_password . $t_cookie, true );
+	# Note: We truncate the last 8 bits from the hash output so that base64
+	# encoding can be performed without any trailing padding.
+	$t_key_base64_encoded = base64_encode( substr( $t_key_raw, 0, 63 ) );
+	$t_key = strtr( $t_key_base64_encoded, '+/', '-_' );
+
+	return $t_key;
 }
 
 /**

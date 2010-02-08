@@ -589,7 +589,7 @@ function config_is_private( $p_config_var ) {
 		case 'database_name':
 		case 'db_schema':
 		case 'db_type':
-		case 'password_confirm_hash_magic_string':
+		case 'master_crypto_salt':
 		case 'smtp_host':
 		case 'smtp_username':
 		case 'smtp_password':
@@ -632,7 +632,6 @@ function config_is_private( $p_config_var ) {
 		case 'meta_include_file':
 		case 'log_level':
 		case 'log_destination':
-		case 'rss_key_seed':
 		case 'dot_tool':
 		case 'neato_tool':
 		case 'twitter_username':

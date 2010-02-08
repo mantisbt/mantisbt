@@ -251,13 +251,6 @@
             </varlistentry>
 
             <varlistentry>
-                <term>$g_password_confirm_hash_magic_string</term>
-                <listitem>
-                    <para>TODO</para>
-                </listitem>
-            </varlistentry>
-
-            <varlistentry>
                 <term>$g_signup_use_captcha</term>
                 <listitem>
                     <para>TODO</para>

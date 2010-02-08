@@ -26,6 +26,7 @@
  * @uses access_api.php
  * @uses config_api.php
  * @uses constant_inc.php
+ * @uses crypto_api.php
  * @uses current_user_api.php
  * @uses database_api.php
  * @uses error_api.php
@@ -45,6 +46,7 @@
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'crypto_api.php' );
 require_api( 'current_user_api.php' );
 require_api( 'database_api.php' );
 require_api( 'error_api.php' );
@@ -449,31 +451,32 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 }
 
 /**
- * Generate a random 12 character password
+ * Generate a random 16 character password.
  * @todo Review use of $p_email within mantis
  * @param string $p_email unused
- * @return string 12 character random password
+ * @return string 16 character random password
  * @access public
  */
 function auth_generate_random_password( $p_email ) {
-	$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
-	$t_val = md5( $t_val );
-
-	return utf8_substr( $t_val, 0, 12 );
+	# !TODO: create memorable passwords?
+	return crypto_generate_uri_safe_nonce( 16 );
 }
 
 /**
- * Generate a confirm_hash 12 character to valide the password reset request
- * @param int $p_user_id user id
- * @return string representing MD5 hash
+ * Generate a confirmation code to validate password reset requests.
+ * @param int $p_user_id User ID to generate a confirmation code for
+ * @return string Confirmation code (384bit) encoded according to the base64 with URI safe alphabet approach described in RFC4648
  * @access public
  */
 function auth_generate_confirm_hash( $p_user_id ) {
-	$t_confirm_hash_generator = config_get( 'password_confirm_hash_magic_string' );
 	$t_password = user_get_field( $p_user_id, 'password' );
 	$t_last_visit = user_get_field( $p_user_id, 'last_visit' );
 
-	$t_confirm_hash = md5( $t_confirm_hash_generator . $t_password . $t_last_visit );
+	$t_confirm_hash_raw = hash( 'whirlpool', 'confirm_hash' . config_get_global( 'crypto_master_salt' ) . $t_password . $t_last_visit, true );
+	# Note: We truncate the last 8 bits from the hash output so that base64
+	# encoding can be performed without any trailing padding.
+	$t_confirm_hash_base64_encoded = base64_encode( substr( $t_confirm_hash_raw, 0, 63 ) );
+	$t_confirm_hash = strtr( $t_confirm_hash_base64_encoded, '+/', '-_' );
 
 	return $t_confirm_hash;
 }
@@ -524,27 +527,14 @@ function auth_clear_cookies() {
 }
 
 /**
- * Generate a string to use as the identifier for the login cookie
- * It is not guaranteed to be unique and should be checked
- * The string returned should be 64 characters in length
- * @return string 64 character cookie string
- * @access public
- */
-function auth_generate_cookie_string() {
-	$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
-	$t_val = md5( $t_val ) . md5( time() );
-	return $t_val;
-}
-
-/**
- * Generate a UNIQUE string to use as the identifier for the login cookie
- * The string returned should be 64 characters in length
- * @return string 64 character cookie string
+ * Generate a random and unique string to use as the identifier for the login
+ * cookie.
+ * @return string Random and unique 384bit cookie string of encoded according to the base64 with URI safe alphabet approach described in RFC4648
  * @access public
  */
 function auth_generate_unique_cookie_string() {
 	do {
-		$t_cookie_string = auth_generate_cookie_string();
+		$t_cookie_string = crypto_generate_uri_safe_nonce( 64 );
 	}
 	while( !auth_is_cookie_string_unique( $t_cookie_string ) );
 

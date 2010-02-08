@@ -24,6 +24,7 @@
  * @uses authentication_api.php
  * @uses config_api.php
  * @uses constant_inc.php
+ * @uses crypto_api.php
  * @uses email_api.php
  * @uses form_api.php
  * @uses gpc_api.php
@@ -38,6 +39,7 @@ require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'crypto_api.php' );
 require_api( 'email_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
@@ -52,7 +54,7 @@ form_security_validate( 'signup' );
 $f_username		= strip_tags( gpc_get_string( 'username' ) );
 $f_email		= strip_tags( gpc_get_string( 'email' ) );
 $f_captcha		= gpc_get_string( 'captcha', '' );
-$f_public_key	= gpc_get_int( 'public_key', '' );
+$f_public_key	= gpc_get_string( 'public_key', '' );
 
 $f_username = trim( $f_username );
 $f_email = email_append_domain( trim( $f_email ) );
@@ -72,9 +74,9 @@ if ( OFF == config_get_global( 'allow_signup' ) ) {
 if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 	&&
 			helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 	# captcha image requires GD library and related option to ON
-	$t_key = utf8_strtolower( utf8_substr( md5( config_get( 'password_confirm_hash_magic_string' ) . $f_public_key ), 1, 5) );
+	$t_private_key = substr( hash( 'whirlpool', 'captcha' . config_get_global( 'crypto_master_salt' ) . $f_public_key, false ), 0, 5 );
 
-	if ( $t_key != $f_captcha ) {
+	if ( $t_private_key != $f_captcha ) {
 		trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
 	}
 }

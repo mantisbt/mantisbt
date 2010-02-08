@@ -341,15 +341,6 @@ $g_notify_new_user_created_threshold_min = ADMINISTRATOR;
 $g_send_reset_password	= ON;
 
 /**
- * String used to generate the confirm_hash for the 'lost password' feature and
- * captcha code for 'signup'
- * ATTENTION: CHANGE IT TO WHATEVER VALUE YOU PREFER
- * @global int $g_password_confirm_hash_magic_string
- * @todo randomize + admin check
- */
-$g_password_confirm_hash_magic_string = 'blowfish';
-
-/**
  * use captcha image to validate subscription it requires GD library installed
  * @global int $g_signup_use_captcha
  */
@@ -3459,15 +3450,6 @@ $g_my_view_boxes_fixed_position = ON;
 $g_rss_enabled = ON;
 
 
-/**
- * This seed is used as part of the inputs for calculating the authentication
- * key for the RSS feeds. If this seed changes, all the existing keys for the
- * RSS feeds will become invalid.  This is defaulted to the database user name,
- * but it is recommended to overwrite it with a specific value on installation.
- * @global string $g_rss_key_seed
- */
-$g_rss_key_seed = '%db_username%';
-
 /*********************
  * Bug Relationships *
  *********************/
@@ -4021,7 +4003,6 @@ $g_global_settings = array(
 	'minimal_jscss',
 	'plugins_enabled',
 	'plugins_installed',
-	'rss_key_seed',
 	'session_',
 	'show_detailed_errors',
 	'show_queries_',

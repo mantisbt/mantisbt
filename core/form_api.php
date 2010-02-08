@@ -29,6 +29,7 @@
  *
  * @uses config_api.php
  * @uses constant_inc.php
+ * @uses crypto_api.php
  * @uses gpc_api.php
  * @uses php_api.php
  * @uses session_api.php
@@ -36,6 +37,7 @@
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'crypto_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'php_api.php' );
 require_api( 'session_api.php' );
@@ -59,10 +61,11 @@ function form_security_token( $p_form_name ) {
 		$t_tokens[$p_form_name] = array();
 	}
 
-	# Generate a random security token prefixed by date.
-	# mt_rand() returns an int between 0 and RAND_MAX as extra entropy
+	# Generate a nonce prefixed by date.
+	# With a base64 output encoded nonce length of 32 characters, we are
+	# generating a 192bit nonce.
 	$t_date = date( 'Ymd' );
-	$t_string = $t_date . sha1( time() . mt_rand() );
+	$t_string = $t_date . crypto_generate_uri_safe_nonce( 32 );
 
 	# Add the token to the user's session
 	if ( !isset( $t_tokens[$p_form_name][$t_date] ) ) {
