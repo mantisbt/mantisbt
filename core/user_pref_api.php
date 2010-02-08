@@ -516,7 +516,7 @@ function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJE
  * returns user language
  * @param int $p_user_id
  * @param int $p_project_id
- * @return string
+ * @return string language name or null if invalid language specified
  */
 function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
@@ -524,7 +524,7 @@ function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	// ensure the language is a valid one
 	$t_lang = $t_prefs->language;
 	if( !lang_language_exists( $t_lang ) ) {
-		$t_lang = false;
+		$t_lang = null;
 	}
 	return $t_lang;
 }
