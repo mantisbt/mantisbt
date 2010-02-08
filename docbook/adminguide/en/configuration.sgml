@@ -1794,6 +1794,15 @@
             <varlistentry>
                 <term>$g_bug_reopen_resolution</term>
                 <listitem>
+                    <para>Default resolution to assign to a bug when it is
+                        resolved as being a duplicate of another issue.
+                        Default value is DUPLICATE.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_bug_duplicate_resolution</term>
+                <listitem>
                     <para>Resolution to assign to the bug when reopened. Default value
                         is REOPENED.
                     </para>

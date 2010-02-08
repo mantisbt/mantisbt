@@ -152,7 +152,7 @@ print_recently_visited();
 
 <?php
 $t_current_resolution = $t_bug->resolution;
-$t_bug_is_open = in_array( $t_current_resolution, array( config_get( 'default_bug_resolution' ), config_get( 'bug_reopen_resolution' ) ) );
+$t_bug_is_open = $t_current_resolution < $t_resolved;
 if ( ( $f_new_status >= $t_resolved ) && ( ( $f_new_status < $t_closed ) || ( $t_bug_is_open ) ) ) { ?>
 <!-- Resolution -->
 <tr <?php echo helper_alternate_class() ?>>
@@ -162,16 +162,27 @@ if ( ( $f_new_status >= $t_resolved ) && ( ( $f_new_status < $t_closed ) || ( $t
 	<td>
 		<select name="resolution">
 			<?php
-                $t_resolution = $t_bug_is_open ? config_get( 'bug_resolution_fixed_threshold' ) : $t_current_resolution;
-                print_enum_string_option_list( "resolution", $t_resolution );
-            ?>
+				$t_resolution = $t_bug_is_open ? config_get( 'bug_resolution_fixed_threshold' ) : $t_current_resolution;
+
+				$t_relationships = relationship_get_all_src( $f_bug_id );
+				foreach( $t_relationships as $t_relationship ) {
+					if ( $t_relationship->type == BUG_DUPLICATE ) {
+						$t_resolution = config_get( 'bug_duplicate_resolution' );
+						break;
+					}
+				}
+
+				print_enum_string_option_list( 'resolution', $t_resolution );
+			?>
 		</select>
 	</td>
 </tr>
 <?php } ?>
 
 <?php
-if ( ( $f_new_status >= $t_resolved ) && ( $f_new_status < $t_closed ) ) { ?>
+if ( $f_new_status >= $t_resolved
+	&& $f_new_status < $t_closed
+	&& $t_resolution != config_get( 'bug_duplicate_resolution' ) ) { ?>
 <!-- Duplicate ID -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">

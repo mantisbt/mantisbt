@@ -1864,6 +1864,13 @@ $g_bug_feedback_status = FEEDBACK;
 $g_bug_reopen_resolution = REOPENED;
 
 /**
+ * Default resolution to assign to a bug when it is resolved as being a
+ * duplicate of another issue.
+ * @global int $g_bug_duplicate_resolution
+ */
+$g_bug_duplicate_resolution = DUPLICATE;
+
+/**
  * Bug becomes readonly if its status is >= this status.  The bug becomes
  * read/write again if re-opened and its status becomes less than this
  * threshold.
