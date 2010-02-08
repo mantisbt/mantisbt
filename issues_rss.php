@@ -99,11 +99,11 @@ $t_path = config_get( 'path' );
 
 $encoding = 'utf-8';
 $about = $t_path;
-$title = string_rss_links( config_get( 'window_title' ) );
+$title = config_get( 'window_title' );
 $image_link = $t_path . 'images/mantis_logo_button.gif';
 
 # only rss 2.0
-$category = string_rss_links( project_get_name( $f_project_id ) );
+$category = project_get_name( $f_project_id );
 if ( $f_project_id !== 0 ) {
 	$title .= ' - ' . $category;
 }
@@ -193,7 +193,7 @@ for ( $i = 0; $i < $t_issues_count; $i++ ) {
 	$t_bug = $t_issues[$i];
 
 	$about = $link = $t_path . "view.php?id=" . $t_bug->id;
-	$title = string_rss_links( bug_format_id( $t_bug->id ) . ': ' . $t_bug->summary );
+	$title = bug_format_id( $t_bug->id ) . ': ' . $t_bug->summary;
 
 	if ( $t_bug->view_state == VS_PRIVATE ) {
 		$title .= ' [' . lang_get( 'private' ) . ']';
@@ -202,7 +202,7 @@ for ( $i = 0; $i < $t_issues_count; $i++ ) {
 	$description = string_rss_links( $t_bug->description );
 
 	# subject is category.
-	$subject = string_rss_links( category_full_name( $t_bug->category_id, false ) );
+	$subject = category_full_name( $t_bug->category_id, false );
 
 	# optional DC value
 	$date = $t_bug->last_updated;
@@ -210,12 +210,12 @@ for ( $i = 0; $i < $t_issues_count; $i++ ) {
 	# author of item
 	$author = '';
 	if ( access_has_global_level( config_get( 'show_user_email_threshold' ) ) ) {
-		$t_author_name = string_rss_links( user_get_name( $t_bug->reporter_id ) );
+		$t_author_name = user_get_name( $t_bug->reporter_id );
 		$t_author_email = user_get_field( $t_bug->reporter_id, 'email' );
 
 		if ( !is_blank( $t_author_email ) ) {
 			if ( !is_blank( $t_author_name ) ) {
-				$author = $t_author_name . ' &lt;' . $t_author_email . '&gt;';
+				$author = $t_author_name . ' <' . $t_author_email . '>';
 			} else {
 				$author = $t_author_email;
 			}
