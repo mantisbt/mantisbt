@@ -33,6 +33,7 @@
  * @uses config_defaults_inc.php
  * @uses config_inc.php
  * @uses constant_inc.php
+ * @uses crypto_api.php
  * @uses custom_constants_inc.php
  * @uses custom_functions_inc.php
  * @uses database_api.php
@@ -199,24 +200,25 @@ if ( false === $t_config_inc_found ) {
 	}
 }
 
+# Initialise cryptographic keys
+require_api( 'crypto_api.php' );
+crypto_init();
+
 # Connect to the database
 require_api( 'database_api.php' );
 require_api( 'config_api.php' );
 
-if( !isset( $g_skip_open_db ) ) {
+if ( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	if( OFF == $g_use_persistent_connections ) {
 		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ) );
 	} else {
 		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ), true );
 	}
-} else {
-	if (!defined('PLUGINS_DISABLED') )
-		define( 'PLUGINS_DISABLED', true );
 }
 
 # Initialise plugins
-require_api( 'plugin_api.php' );
-if ( !defined( 'PLUGINS_DISABLED' ) ) {
+if ( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
+	require_api( 'plugin_api.php' );
 	plugin_init_installed();
 }
 
@@ -239,13 +241,13 @@ if ( !isset( $g_login_anonymous ) ) {
 }
 
 require_api( 'authentication_api.php' );
-require_api( 'user_pref_api.php' );
 if( auth_is_user_authenticated() ) {
+	require_api( 'user_pref_api.php' );
 	date_default_timezone_set( user_pref_get_pref( auth_get_current_user_id(), 'timezone' ) );
 }
 
-require_api( 'collapse_api.php' );
-if ( !defined( 'MANTIS_INSTALLER' ) ) {
+if ( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
+	require_api( 'collapse_api.php' );
 	collapse_cache_token();
 }
 
@@ -260,11 +262,13 @@ require_api( 'http_api.php' );
 http_all_headers();
 
 # Push default language to speed calls to lang_get
-require_api( 'lang_api.php' );
-if ( !isset( $g_skip_lang_load ) ) {
+if ( !defined( 'LANG_LOAD_DISABLED' ) ) {
+	require_api( 'lang_api.php' );
 	lang_push( lang_get_default() );
 }
 
 # Signal plugins that the core system is loaded
-require_api( 'event_api.php' );
-event_signal( 'EVENT_CORE_READY' );
+if ( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
+	require_api( 'event_api.php' );
+	event_signal( 'EVENT_CORE_READY' );
+}

@@ -22,7 +22,7 @@
  */
 
 define( 'PLUGINS_DISABLED', true ); 
-$g_skip_lang_load = true;
+define( 'LANG_LOAD_DISABLED', true );
 
 /**
  * MantisBT Core API's
@@ -45,7 +45,6 @@ if (!checkfile( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . 
 	die;
 }
 
-unset( $g_skip_lang_load ) ;
 lang_push( 'english' );
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );

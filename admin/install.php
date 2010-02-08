@@ -25,9 +25,12 @@ error_reporting( E_ALL );
 
 /** @todo put this somewhere */
 @set_time_limit( 0 );
-$g_skip_open_db = true;  # don't open the database in database_api.php
-define( 'MANTIS_INSTALLER', true );
-define( 'PLUGINS_DISABLED', true );
+
+# Load the MantisDB core in maintenance mode. This mode will assume that
+# config_inc.php hasn't been specified. Thus the database will not be opened
+# and plugins will not be loaded.
+define( 'MANTIS_MAINTENANCE_MODE', true );
+
 @require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 require_api( 'install_helper_functions_api.php' );
 $g_error_send_page_header = false; # bypass page headers in error handler

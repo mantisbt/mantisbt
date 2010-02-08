@@ -272,6 +272,39 @@ $g_session_validation = ON;
  */
 $g_form_security_validation = ON;
 
+/*****************************
+ * Security and Cryptography *
+ *****************************/
+
+/**
+ * Master salt value used for cryptographic hashing throughout MantisBT. This
+ * value must be kept secret at all costs. You must generate a unique and
+ * random salt value for each installation of MantisBT you control. The
+ * minimum length of this string must be at least 16 characters.
+ *
+ * The value you select for this salt should be a long string generated using
+ * a secure random number generator. An example for Linux systems is:
+ *    cat /dev/urandom | head -c 64 | base64
+ * Note that the number of bits of entropy per byte of output from /dev/urandom
+ * is not 8. If you're particularly paranoid and don't mind waiting a long
+ * time, you could use /dev/random to get much closer to 8 bits of entropy per
+ * byte. Moving the mouse (if possible) while generating entropy via
+ * /dev/random will greatly improve the speed at which /dev/random produces
+ * entropy.
+ *
+ * WARNING: This configuration option has a profound impact on the security of
+ * your MantisBT installation. Failure to set this configuration option
+ * correctly could lead to your MantisBT installation being compromised. Ensure
+ * that this value remains secret. Treat it with the same security that you'd
+ * treat the password to your MantisDB database.
+ *
+ * This setting is blank by default. MantisBT will not operate in this state.
+ * Hence you are forced to change the value of this configuration option.
+ *
+ * @global string $g_crypto_master_salt
+ */
+$g_crypto_master_salt = '';
+
 /****************************
  * Signup and Lost Password *
  ****************************/
@@ -3975,6 +4008,7 @@ $g_global_settings = array(
 	'compress_html',
 	'content_expire',
 	'cookie',
+	'crypto_master_salt',
 	'custom_headers',
 	'database_name',
 	'^db_',
