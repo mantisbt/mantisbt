@@ -120,7 +120,7 @@ function lang_get_default() {
 	}
 
 	# Otherwise fall back to default
-	if( false === $t_lang ) {
+	if( null === $t_lang ) {
 		$t_lang = config_get_global( 'default_language' );
 	}
 
