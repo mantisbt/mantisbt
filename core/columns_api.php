@@ -836,11 +836,24 @@ function print_column_title_overdue( $p_sort, $p_dir, $p_columns_target = COLUMN
  * @access public
  */
 function print_column_selection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_checkboxes_exist, $t_update_bug_threshold;
+	global $g_checkboxes_exist;
 
 	echo '<td>';
-	if( access_has_bug_level( $t_update_bug_threshold, $p_bug->id ) ) {
-		$t_checkboxes_exist = true;
+	if( access_has_any_project( config_get( 'report_bug_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
+		# !TODO: check if any other projects actually exist for the bug to be moved to
+		access_has_project_level( config_get( 'move_bug_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
+		# !TODO: factor in $g_auto_set_status_to_assigned == ON
+		access_has_project_level( config_get( 'update_bug_assign_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
+		access_has_project_level( config_get( 'update_bug_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
+		access_has_project_level( config_get( 'delete_bug_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
+		# !TODO: check to see if the bug actually has any different selectable workflow states
+		access_has_project_level( config_get( 'update_bug_status_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
+		access_has_project_level( config_get( 'set_bug_sticky_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
+		access_has_project_level( config_get( 'change_view_status_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
+		access_has_project_level( config_get( 'add_bugnote_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
+		access_has_project_level( config_get( 'tag_attach_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
+		access_has_project_level( config_get( 'roadmap_update_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ) {
+		$g_checkboxes_exist = true;
 		printf( "<input type=\"checkbox\" name=\"bug_arr[]\" value=\"%d\" />", $p_bug->id );
 	} else {
 		echo "&#160;";
