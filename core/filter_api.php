@@ -4029,11 +4029,11 @@ function print_filter_custom_field( $p_field_id ) {
 				$t_max_length = config_get( 'max_dropdown_length' );
 				foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
 					if(( utf8_strtolower( $t_item ) !== META_FILTER_ANY ) && ( utf8_strtolower( $t_item ) !== META_FILTER_NONE ) ) {
-						echo '<option value="' . string_html_entities( $t_item ) . '" ';
+						echo '<option value="' . string_attribute( $t_item ) . '" ';
 						if( isset( $t_filter['custom_fields'][$p_field_id] ) ) {
 							check_selected( $t_filter['custom_fields'][$p_field_id], $t_item );
 						}
-						echo '>' . string_shorten( $t_item, $t_max_length ) . '</option>' . "\n";
+						echo '>' . string_attribute( string_shorten( $t_item, $t_max_length ) ) . '</option>' . "\n";
 					}
 				}
 			}
