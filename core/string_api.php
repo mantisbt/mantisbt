@@ -817,14 +817,19 @@ function string_shorten( $p_string, $p_max = null ) {
 		$t_last = $t_bits[count( $t_bits ) - 1];
 		$t_last_len = strlen( $t_last );
 
-		foreach( $t_bits as $t_bit ) {
-			if(( utf8_strlen( $t_string ) + utf8_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
-				$t_string .= $t_bit;
-			} else {
-				break;
+		if( count( $t_bits ) == 1 ) {
+			$t_string .= utf8_substr( $t_last, 0, $t_max - 3 );
+			$t_string .= '...';
+		} else {
+			foreach( $t_bits as $t_bit ) {
+				if(( utf8_strlen( $t_string ) + utf8_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
+					$t_string .= $t_bit;
+				} else {
+					break;
+				}
 			}
+			$t_string .= '...' . $t_last;
 		}
-		$t_string .= '...' . $t_last;
 		return $t_string;
 	} else {
 		return $p_string;
