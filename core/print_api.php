@@ -1398,11 +1398,12 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 		$p_text = $p_page_no;
 	}
 
-	if(( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
+	if( ( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
+		$t_delimiter = ( strpos( $p_page_url, "?" ) ? "&" : "?" );
 		if( $p_temp_filter_id !== 0 ) {
-			print_link( "$p_page_url?filter=$p_temp_filter_id&page_number=$p_page_no", $p_text );
+			print_link( "$p_page_url${t_delimiter}filter=$p_temp_filter_id&page_number=$p_page_no", $p_text );
 		} else {
-			print_link( "$p_page_url?page_number=$p_page_no", $p_text );
+			print_link( "$p_page_url${t_delimiter}page_number=$p_page_no", $p_text );
 		}
 	} else {
 		echo $p_text;
@@ -1454,10 +1455,11 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 		if( $i == $p_current ) {
 			array_push( $t_items, $i );
 		} else {
+			$t_delimiter = ( strpos( $p_page, "?" ) ? "&" : "?" ) ;
 			if( $p_temp_filter_id !== 0 ) {
-				array_push( $t_items, "<a href=\"$p_page?filter=$p_temp_filter_id&page_number=$i\">$i</a>" );
+				array_push( $t_items, "<a href=\"$p_page${t_delimiter}filter=$p_emp_filter_id&page_number=$i\">$i</a>" );
 			} else {
-				array_push( $t_items, "<a href=\"$p_page?page_number=$i\">$i</a>" );
+				array_push( $t_items, "<a href=\"$p_page${t_delimiter}page_number=$i\">$i</a>" );
 			}
 		}
 	}
