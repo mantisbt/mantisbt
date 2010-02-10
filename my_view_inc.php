@@ -62,8 +62,6 @@ if( $t_filter === false ) {
 $t_sort = $t_filter['sort'];
 $t_dir = $t_filter['dir'];
 
-$t_checkboxes_exist = false;
-
 $t_icon_path = config_get( 'icon_path' );
 $t_update_bug_threshold = config_get( 'update_bug_threshold' );
 $t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );

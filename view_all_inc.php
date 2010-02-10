@@ -57,10 +57,9 @@ if ( !$t_filter ) {
 list( $t_sort, ) = explode( ',', $t_filter['sort'] );
 list( $t_dir, ) = explode( ',', $t_filter['dir'] );
 
-$t_checkboxes_exist = false;
+$g_checkboxes_exist = false;
 
 $t_icon_path = config_get( 'icon_path' );
-$t_update_bug_threshold = config_get( 'update_bug_threshold' );
 
 # Improve performance by caching category data in one pass
 if ( helper_get_current_project() > 0 ) {
@@ -227,14 +226,14 @@ write_bug_rows($rows);
 		<td class="left" colspan="<?php echo $col_count; ?>">
 			<span class="floatleft">
 <?php
-		if ( $t_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
+		if ( $g_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
 			echo "<input type=\"checkbox\" name=\"all_bugs\" value=\"all\" onclick=\"checkall('bug_action', this.form.all_bugs.checked)\" /><span class=\"small\">" . lang_get( 'select_all' ) . '</span>';
 		}
 
-		if ( $t_checkboxes_exist ) {
+		if ( $g_checkboxes_exist ) {
 ?>
 			<select name="action">
-				<?php print_all_bug_action_option_list() ?>
+				<?php print_all_bug_action_option_list( $t_unique_project_ids ) ?>
 			</select>
 			<input type="submit" class="button" value="<?php echo lang_get( 'ok' ); ?>" />
 <?php
