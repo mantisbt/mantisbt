@@ -70,7 +70,9 @@ function print_test_row( $p_description, $p_pass, $p_info = null ) {
 	echo '<tr><td bgcolor="#ffffff">' .$p_description;
 	if( $p_info != null) {
 		if( is_array( $p_info ) ) {
-			echo '<br /><i>' . $p_info[$p_pass] . '</i>';
+			if( isset( $p_info[$p_pass] ) ) {
+				echo '<br /><i>' . $p_info[$p_pass] . '</i>';
+			}
 		} else {
 			echo '<br /><i>' . $p_info . '</i>';
 		}
