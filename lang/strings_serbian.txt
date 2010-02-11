@@ -28,6 +28,7 @@
  *
  * @author Dragan Matic, dragan@panforma.co.yu
  * @author Nikola Smolenski
+ * @author Милан Јелисавчић
  */
 
 $s_actiongroup_menu_move = 'Premesti';
@@ -292,7 +293,7 @@ $s_prefs_updated_msg = 'Podesavanja su ažurirana...';
 $s_profile_added_msg = 'Profil je dodat...';
 $s_profile_deleted_msg = 'Profil je izbrisan...';
 $s_edit_profile_title = 'Izmene profila';
-$s_platform = 'Platforma';
+$s_platform = 'Платформа';
 $s_operating_system = 'Operativni Sistem';
 $s_additional_description = 'Dodatni opis';
 $s_update_profile_button = 'ažuriranje profila';
@@ -519,7 +520,7 @@ $s_edit_post = 'Izmena clanka';
 $s_delete_post = 'Brisanje clanka';
 $s_select_post = 'Izbor clanka';
 $s_news_updated_msg = 'Stavka vesti ažurirana...';
-$s_back_link = 'Nazad';
+$s_back_link = 'Назад';
 $s_file_uploaded_msg = 'Fajl uspešno poslat';
 $s_upload_file_title = 'Slanje fajla';
 $s_title = 'Naziv';
