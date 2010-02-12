@@ -70,7 +70,7 @@ $g_custom_field_types[CUSTOM_FIELD_TYPE_MULTILIST] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_DATE] = 'standard';
 
 foreach( $g_custom_field_types as $type ) {
-	require_once( 'cfdefs' . DIRECTORY_SEPARATOR . 'cfdef_' . $type . '.php' );
+	require_once( config_get_global( 'core_path' ) . 'cfdefs' . DIRECTORY_SEPARATOR . 'cfdef_' . $type . '.php' );
 }
 
 function custom_field_allow_manage_display( $p_type, $p_display ) {

@@ -599,6 +599,8 @@ function config_is_private( $p_config_var ) {
 		case 'absolute_path':
 		case 'core_path':
 		case 'class_path':
+		case 'library_path':
+		case 'language_path':
 		case 'use_iis':
 		case 'session_save_path':
 		case 'session_handler':

@@ -160,8 +160,8 @@ $g_relationships[BUG_RELATED] = array(
 	'#notify_deleted' => 'email_notification_title_for_action_related_to_relationship_deleted',
 );
 
-if( file_exists( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'custom_relationships_inc.php' ) ) {
-	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'custom_relationships_inc.php' );
+if( file_exists( config_get_global( 'absolute_path' ) . 'custom_relationships_inc.php' ) ) {
+	require_once( config_get_global( 'absolute_path' ) . 'custom_relationships_inc.php' );
 }
 
 /**

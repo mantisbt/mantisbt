@@ -156,6 +156,7 @@ function __autoload( $className ) {
 spl_autoload_register( '__autoload' );
 
 # Load UTF8-capable string functions
+define( 'UTF8', $g_library_path . 'utf8' );
 require_lib( 'utf8/utf8.php' );
 require_lib( 'utf8/str_pad.php' );
 

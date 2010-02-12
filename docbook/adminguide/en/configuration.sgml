@@ -109,9 +109,9 @@
                 <term>$g_core_path</term>
                 <listitem>
                     <para>This is the path to the core directory of your installation.
-                        The default value is usually OK, unless you move the 'core'
-                        directory out of your webroot. Requires trailing DIRECTORY_SEPARATOR.
-                        character.
+                        The default value is usually OK but it is recommended
+                        that you move the 'core' directory out of your webroot.
+                        Requires trailing DIRECTORY_SEPARATOR character.
                     </para>
                 </listitem>
             </varlistentry>
@@ -121,6 +121,26 @@
                     <para>This is the path to the classes directory which is a sub-directory of core by default.
                         The default value is typically OK.  Requires trailing DIRECTORY_SEPARATOR.
                         character.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_library_path</term>
+                <listitem>
+                    <para>This is the path to the library directory of your installation.
+                        The default value is usually OK but it is recommended
+                        that you move the 'library' directory out of your webroot.
+                        Requires trailing DIRECTORY_SEPARATOR character.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_language_path</term>
+                <listitem>
+                    <para>This is the path to the language directory of your installation.
+                        The default value is usually OK but it is recommended
+                        that you move the 'language' directory out of your webroot.
+                        Requires trailing DIRECTORY_SEPARATOR character.
                     </para>
                 </listitem>
             </varlistentry>

@@ -66,20 +66,17 @@ function lang_load( $p_lang, $p_dir = null ) {
 		return;
 	}
 
-	$t_lang_dir = $p_dir;
-
-	if( is_null( $t_lang_dir ) ) {
-		$t_lang_dir = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
-		include_once( $t_lang_dir . 'strings_' . $p_lang . '.txt' );
+	if( $p_dir === null ) {
+		include_once( config_get( 'language_path' ) . 'strings_' . $p_lang . '.txt' );
 	} else {
-		if( is_file( $t_lang_dir . 'strings_' . $p_lang . '.txt' ) ) {
-			include_once( $t_lang_dir . 'strings_' . $p_lang . '.txt' );
+		if( is_file( $p_dir . 'strings_' . $p_lang . '.txt' ) ) {
+			include_once( $p_dir . 'strings_' . $p_lang . '.txt' );
 		}
 	}
 
 	# Allow overriding strings declared in the language file.
 	# custom_strings_inc.php can use $g_active_language
-	$t_custom_strings = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'custom_strings_inc.php';
+	$t_custom_strings = config_get( 'absolute_path' ) . 'custom_strings_inc.php';
 	if( file_exists( $t_custom_strings ) ) {
 		require( $t_custom_strings );
 

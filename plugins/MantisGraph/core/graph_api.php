@@ -39,15 +39,15 @@ if( OFF == plugin_config_get( 'eczlibrary' ) ) {
 		require_once( 'jpgraph_pie3d.php' );
 		require_once( 'jpgraph_canvas.php' );
 	} else {
-		require_once( 'jpgraph/jpgraph.php' );
-		require_once( 'jpgraph/jpgraph_line.php' );
-		require_once( 'jpgraph/jpgraph_bar.php' );
-		require_once( 'jpgraph/jpgraph_pie.php' );
-		require_once( 'jpgraph/jpgraph_pie3d.php' );
-		require_once( 'jpgraph/jpgraph_canvas.php' );
+		require_lib( 'jpgraph/jpgraph.php' );
+		require_lib( 'jpgraph/jpgraph_line.php' );
+		require_lib( 'jpgraph/jpgraph_bar.php' );
+		require_lib( 'jpgraph/jpgraph_pie.php' );
+		require_lib( 'jpgraph/jpgraph_pie3d.php' );
+		require_lib( 'jpgraph/jpgraph_canvas.php' );
 	}
 } else {
-	require_once( 'ezc/Base/src/base.php' );
+	require_lib( 'ezc/Base/src/base.php' );
 }
 
 function graph_get_font() {
