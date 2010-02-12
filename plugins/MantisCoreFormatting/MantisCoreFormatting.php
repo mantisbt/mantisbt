@@ -14,8 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-require_once( config_get( 'class_path' ) . 'MantisFormattingPlugin.class.php' );
-
 class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 	/**
