@@ -46,6 +46,10 @@ require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 
+if ( !config_get( 'enable_profiles' ) ) {
+	trigger_error( ERROR_ACCESS_DENIED, ERROR );
+}
+
 form_security_validate('profile_update');
 
 auth_ensure_user_authenticated();

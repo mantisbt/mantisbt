@@ -45,7 +45,8 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-require( 'print_all_bug_options_inc.php' );
+define( 'PRINT_ALL_BUG_OPTIONS_INC_ALLOW', true );
+include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'print_all_bug_options_inc.php' );
 
 form_security_validate( 'print_all_bug_options_update' );
 

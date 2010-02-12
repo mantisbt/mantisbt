@@ -32,6 +32,10 @@
  * @uses utility_api.php
  */
 
+if ( !defined( 'BUG_ACTIONGROUP_ADD_NOTE_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );

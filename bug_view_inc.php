@@ -50,7 +50,7 @@
  */
 
 if ( !defined( 'BUG_VIEW_INC_ALLOW' ) ) {
-	access_denied();
+	return;
 }
 
 require_api( 'access_api.php' );
@@ -194,6 +194,7 @@ $tpl_show_additional_information = !is_blank( $tpl_bug->additional_information )
 $tpl_show_steps_to_reproduce = !is_blank( $tpl_bug->steps_to_reproduce ) && in_array( BUG_FIELD_STEPS_TO_REPRODUCE, $t_fields );
 $tpl_show_monitor_box = !$tpl_force_readonly;
 $tpl_show_relationships_box = !$tpl_force_readonly;
+$tpl_show_sponsorships_box = config_get( 'enable_sponsorship' ) && access_has_bug_level( config_get( 'view_sponsorship_total_threshold' ), $f_bug_id );
 $tpl_show_upload_form = !$tpl_force_readonly && !bug_is_readonly( $f_bug_id );
 $tpl_show_history = $f_history;
 $tpl_show_profiles = config_get( 'enable_profiles' );
@@ -720,7 +721,10 @@ if ( $tpl_bottom_buttons_enabled ) {
 echo '</table>';
 
 # User list sponsoring the bug
-include( $tpl_mantis_dir . 'bug_sponsorship_list_view_inc.php' );
+if ( $tpl_show_sponsorships_box ) {
+	define( 'BUG_SPONSORSHIP_LIST_VIEW_INC_ALLOW', true );
+	include( $tpl_mantis_dir . 'bug_sponsorship_list_view_inc.php' );
+}
 
 # Bug Relationships
 if ( $tpl_show_relationships_box ) {
@@ -729,26 +733,32 @@ if ( $tpl_show_relationships_box ) {
 
 # File upload box
 if ( $tpl_show_upload_form ) {
+	define( 'BUG_FILE_UPLOAD_INC_ALLOW', true );
 	include( $tpl_mantis_dir . 'bug_file_upload_inc.php' );
 }
 
 # User list monitoring the bug
 if ( $tpl_show_monitor_box ) {
+	define( 'BUG_MONITOR_LIST_VIEW_INC_ALLOW', true );
 	include( $tpl_mantis_dir . 'bug_monitor_list_view_inc.php' );
 }
 
 # Bugnotes and "Add Note" box
 if ( 'ASC' == current_user_get_pref( 'bugnote_order' ) ) {
+	define( 'BUGNOTE_VIEW_INC_ALLOW', true );
 	include( $tpl_mantis_dir . 'bugnote_view_inc.php' );
 
 	if ( !$tpl_force_readonly ) {
+		define( 'BUGNOTE_ADD_INC_ALLOW', true );
 		include( $tpl_mantis_dir . 'bugnote_add_inc.php' );
 	}
 } else {
 	if ( !$tpl_force_readonly ) {
+		define( 'BUGNOTE_ADD_INC_ALLOW', true );
 		include( $tpl_mantis_dir . 'bugnote_add_inc.php' );
 	}
 
+	define( 'BUGNOTE_VIEW_INC_ALLOW', true );
 	include( $tpl_mantis_dir . 'bugnote_view_inc.php' );
 }
 
@@ -757,6 +767,7 @@ event_signal( 'EVENT_VIEW_BUG_EXTRA', array( $f_bug_id ) );
 
 # History
 if ( $tpl_show_history ) {
+	define( 'HISTORY_INC_ALLOW', true );
 	include( $tpl_mantis_dir . 'history_inc.php' );
 }
 

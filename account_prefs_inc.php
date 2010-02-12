@@ -34,6 +34,10 @@
  * @uses utility_api.php
  */
 
+if ( !defined( 'ACCOUNT_PREFS_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );

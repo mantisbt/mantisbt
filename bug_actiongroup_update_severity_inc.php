@@ -28,6 +28,10 @@
  * @uses print_api.php
  */
 
+if ( !defined( 'BUG_ACTIONGROUP_UPDATE_SEVERITY_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );

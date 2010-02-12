@@ -91,6 +91,7 @@ html_page_top2();
 
 print_recently_visited();
 
+define( 'VIEW_ALL_INC_ALLOW', true );
 include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'view_all_inc.php' );
 
 html_page_bottom();

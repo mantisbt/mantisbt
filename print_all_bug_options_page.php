@@ -33,7 +33,8 @@ require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'html_api.php' );
 
-require( 'print_all_bug_options_inc.php' );
+define( 'PRINT_ALL_BUG_OPTIONS_INC_ALLOW', true );
+include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'print_all_bug_options_inc.php' );
 
 auth_ensure_user_authenticated();
 

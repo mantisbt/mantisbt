@@ -112,7 +112,11 @@ function bug_group_action_print_hidden_fields( $p_bug_ids_array ) {
  * @param $p_action   The custom action name without the "EXT_" prefix.
  */
 function bug_group_action_print_action_fields( $p_action ) {
-	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
+	$t_include_definition = strtoupper( 'bug_actiongroup_' . $p_action . '_inc_allow' );
+	if( !defined( $t_include_definition ) ) {
+		define( $t_include_definition, true );
+	}
+	require_once( config_get_global( 'absolute_path' ) . 'bug_actiongroup_' . $p_action . '_inc.php' );
 	$t_function_name = 'action_' . $p_action . '_print_fields';
 	$t_function_name();
 }
@@ -124,7 +128,11 @@ function bug_group_action_print_action_fields( $p_action ) {
  * @param $p_action   The custom action name without the "EXT_" prefix.
  */
 function bug_group_action_print_title( $p_action ) {
-	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
+	$t_include_definition = strtoupper( 'bug_actiongroup_' . $p_action . '_inc_allow' );
+	if( !defined( $t_include_definition ) ) {
+		define( $t_include_definition, true );
+	}
+	require_once( config_get_global( 'absolute_path' ) . 'bug_actiongroup_' . $p_action . '_inc.php' );
 	$t_function_name = 'action_' . $p_action . '_print_title';
 	$t_function_name();
 }
@@ -139,7 +147,11 @@ function bug_group_action_print_title( $p_action ) {
  * @returns true|array true if action can be applied or array of ( bug_id => reason for failure to validate )
  */
 function bug_group_action_validate( $p_action, $p_bug_id ) {
-	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
+	$t_include_definition = strtoupper( 'bug_actiongroup_' . $p_action . '_inc_allow' );
+	if( !defined( $t_include_definition ) ) {
+		define( $t_include_definition, true );
+	}
+	require_once( config_get_global( 'absolute_path' ) . 'bug_actiongroup_' . $p_action . '_inc.php' );
 	$t_function_name = 'action_' . $p_action . '_validate';
 	return $t_function_name( $p_bug_id );
 }
@@ -154,7 +166,11 @@ function bug_group_action_validate( $p_action, $p_bug_id ) {
  * @returns true|array Action can be applied., ( bug_id => reason for failure to process )
  */
 function bug_group_action_process( $p_action, $p_bug_id ) {
-	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
+	$t_include_definition = strtoupper( 'bug_actiongroup_' . $p_action . '_inc_allow' );
+	if( !defined( $t_include_definition ) ) {
+		define( $t_include_definition, true );
+	}
+	require_once( config_get_global( 'absolute_path' ) . 'bug_actiongroup_' . $p_action . '_inc.php' );
 	$t_function_name = 'action_' . $p_action . '_process';
 	return $t_function_name( $p_bug_id );
 }

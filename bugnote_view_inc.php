@@ -42,6 +42,10 @@
  * @uses user_api.php
  */
 
+if ( !defined( 'BUGNOTE_VIEW_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );

@@ -50,6 +50,10 @@ require_api( 'lang_api.php' );
 require_api( 'profile_api.php' );
 require_api( 'string_api.php' );
 
+if ( !config_get( 'enable_profiles' ) ) {
+	trigger_error( ERROR_ACCESS_DENIED, ERROR );
+}
+
 auth_ensure_user_authenticated();
 
 current_user_ensure_unprotected();

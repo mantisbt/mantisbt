@@ -23,6 +23,7 @@
  * @uses core.php
  * @uses access_api.php
  * @uses config_api.php
+ * @uses constant_inc.php
  * @uses html_api.php
  * @uses lang_api.php
  */
@@ -30,8 +31,13 @@
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
+
+if ( !config_get( 'time_tracking_enabled' ) )
+	trigger_error( ERROR_ACCESS_DENIED, ERROR );
+?>
 
 access_ensure_global_level( config_get( 'time_tracking_reporting_threshold' ) );
 
@@ -41,10 +47,9 @@ html_page_top( lang_get( 'time_tracking_billing_link' )  );
 <br />
 
 <?php
-$t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
 # Work break-down
-include( $t_mantis_dir . 'billing_inc.php' );
+define( 'BILLING_INC_ALLOW', true );
+include( $dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'billing_inc.php' );
 
 html_page_bottom();
 

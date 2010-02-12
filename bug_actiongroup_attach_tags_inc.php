@@ -30,6 +30,10 @@
  * @uses tag_api.php
  */
 
+if ( !defined( 'BUG_ACTIONGROUP_ATTACH_TAGS_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );

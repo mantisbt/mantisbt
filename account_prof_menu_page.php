@@ -50,6 +50,10 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 
+if ( !config_get( 'enable_profiles' ) ) {
+	trigger_error( ERROR_ACCESS_DENIED, ERROR );
+}
+
 if ( isset( $g_global_profiles ) ) {
 	$g_global_profiles = true;
 } else {

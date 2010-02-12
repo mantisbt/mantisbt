@@ -76,7 +76,7 @@ require_api( 'sponsorship_api.php' );
 require_api( 'string_api.php' );
 require_api( 'version_api.php' );
 
-if ( config_get( 'enable_sponsorship' ) == OFF ) {
+if ( !config_get( 'enable_sponsorship' ) ) {
 	trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
 }
 

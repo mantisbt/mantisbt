@@ -35,6 +35,10 @@
  * @uses utility_api.php
  */
 
+if ( !defined( 'BUG_VIEW_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'bugnote_api.php' );
 require_api( 'collapse_api.php' );
 require_api( 'config_api.php' );
@@ -46,12 +50,8 @@ require_api( 'lang_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
-if ( !config_get('time_tracking_enabled') )
-	return;
 ?>
-
 <a name="bugnotestats" id="bugnotestats" /><br />
-
 <?php
 collapse_open( 'bugnotestats' );
 

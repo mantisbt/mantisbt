@@ -719,6 +719,7 @@ if ( $tpl_bottom_buttons_enabled ) {
 
 echo '</table></form>';
 
+define( 'BUGNOTE_VIEW_INC_ALLOW', true );
 include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
 html_page_bottom();
 

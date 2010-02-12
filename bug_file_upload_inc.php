@@ -31,6 +31,10 @@
  * @uses utility_api.php
  */
 
+if ( !defined( 'BUG_FILE_UPLOAD_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'collapse_api.php' );
 require_api( 'config_api.php' );
 require_api( 'file_api.php' );

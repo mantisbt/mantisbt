@@ -33,11 +33,12 @@ require_api( 'lang_api.php' );
 
 html_page_top( lang_get( 'manage_columns_config' ) );
 
-# Define constant that will be checked by the include page.
-define ( 'ACCOUNT_COLUMNS', '' );
-
 current_user_ensure_unprotected();
 
+# Define constant that will be checked by the include page.
+define ( 'ACCOUNT_COLUMNS', true );
+
+define( 'MANAGE_COLUMNS_INC_ALLOW', true );
 include ( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'manage_columns_inc.php' );
 
 html_page_bottom();

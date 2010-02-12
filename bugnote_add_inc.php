@@ -32,6 +32,10 @@
  * @uses lang_api.php
  */
 
+if ( !defined( 'BUGNOTE_ADD_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'collapse_api.php' );

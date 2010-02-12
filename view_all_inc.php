@@ -34,6 +34,10 @@
  * @uses print_api.php
  */
 
+if ( !defined( 'VIEW_ALL_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'category_api.php' );
 require_api( 'columns_api.php' );
 require_api( 'config_api.php' );

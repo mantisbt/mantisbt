@@ -182,7 +182,6 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 <br />
 
 <?php
-define ( 'BUG_VIEW_INC_ALLOW', true );
 $_GET['id'] = $f_bug_id;
 $tpl_fields_config_option = 'bug_view_page_fields';
 $tpl_show_page_header = false;
@@ -190,5 +189,6 @@ $tpl_force_readonly = true;
 $tpl_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 $tpl_file = __FILE__;
 
-include( 'bug_view_inc.php' );
+define ( 'BUG_VIEW_INC_ALLOW', true );
+include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' );
 html_page_bottom();

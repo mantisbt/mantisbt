@@ -33,6 +33,10 @@
  * @uses string_api.php
  */
 
+if ( !defined( 'HISTORY_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'access_api.php' );
 require_api( 'collapse_api.php' );
 require_api( 'config_api.php' );

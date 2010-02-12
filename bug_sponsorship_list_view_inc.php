@@ -37,6 +37,10 @@
  * @uses utility_api.php
  */
 
+if ( !defined( 'BUG_SPONSORSHIP_LIST_VIEW_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'collapse_api.php' );

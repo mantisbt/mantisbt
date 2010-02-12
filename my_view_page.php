@@ -105,6 +105,8 @@ $t_number_of_boxes = count ( $t_boxes );
 $t_boxes_position = config_get( 'my_view_boxes_fixed_position' );
 $t_counter = 0;
 
+define( 'MY_VIEW_INC_ALLOW', true );
+
 while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 	# don't display bugs that are set as 0
 	if ($t_box_display == 0) {
@@ -136,14 +138,14 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 			# for even box number start new row and column
 			if ( 1 == $t_counter%2 ) {
 				echo '<tr><td valign="top" width="50%">';
-				include 'my_view_inc.php';
+				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
 				echo '</td>';
 			}
 
 			# for odd box number only start new column
 			else if ( 0 == $t_counter%2 ) {
 				echo '<td valign="top" width="50%">';
-				include 'my_view_inc.php';
+				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
 				echo '</td></tr>';
 			}
 
@@ -164,7 +166,7 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 			}
 
 			# display the required box
-			include 'my_view_inc.php';
+			include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
 			echo '<br />';
 
 			# close the first column for first half of boxes

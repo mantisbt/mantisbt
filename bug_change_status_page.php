@@ -61,8 +61,6 @@ require_api( 'version_api.php' );
 
 $g_allow_browser_cache = 1;
 
-define ( 'BUG_VIEW_INC_ALLOW', true );
-
 $f_bug_id = gpc_get_int( 'id' );
 $t_bug = bug_get( $f_bug_id );
 
@@ -405,4 +403,5 @@ if ( $t_can_update_due_date ) {
 
 echo '<br />';
 
+define( 'BUG_VIEW_INC_ALLOW', true );
 include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' );

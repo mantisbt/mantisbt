@@ -34,6 +34,10 @@
  * @uses utility_api.php
  */
 
+if ( !defined( 'BUGNOTE_STATS_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'bugnote_api.php' );
 require_api( 'collapse_api.php' );
 require_api( 'config_api.php' );

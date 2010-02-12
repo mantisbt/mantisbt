@@ -37,6 +37,10 @@
  * @uses string_api.php
  */
 
+if ( !defined( 'MY_VIEW_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'category_api.php' );

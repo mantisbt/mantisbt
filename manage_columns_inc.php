@@ -33,6 +33,10 @@
  * @uses print_api.php
  */
 
+if ( !defined( 'MANAGE_COLUMNS_INC_ALLOW' ) ) {
+	return;
+}
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'columns_api.php' );
@@ -47,11 +51,6 @@ require_api( 'print_api.php' );
 
 $t_manage_page = defined( 'MANAGE_COLUMNS' );
 $t_account_page = defined( 'ACCOUNT_COLUMNS' );
-
-# Protect against direct access to this script.
-if ( !$t_manage_page && !$t_account_page ) {
-	access_denied();
-}
 
 $t_project_id = helper_get_current_project();
 
