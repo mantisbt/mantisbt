@@ -198,7 +198,6 @@ function db_is_pgsql() {
 
 	switch( $t_db_type ) {
 		case 'postgres':
-		case 'postgres64':
 		case 'postgres7':
 		case 'pgsql':
 			return true;

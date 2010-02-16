@@ -229,12 +229,10 @@ if( config_get_global( 'wiki_enable' ) == ON ) {
 	wiki_init();
 }
 
-if ( !is_blank ( config_get_global( 'default_timezone' ) ) ) {
+if ( in_array ( config_get_global( 'default_timezone' ), timezone_identifiers_list() ) ) {
 	// if a default timezone is set in config, set it here, else we use php.ini's value
 	// having a timezone set avoids a php warning
 	date_default_timezone_set( config_get_global( 'default_timezone' ) );
-} else {
-	config_set_global( 'default_timezone', date_default_timezone_get(), true );
 }
 
 if ( !isset( $g_login_anonymous ) ) {

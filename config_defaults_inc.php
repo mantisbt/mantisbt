@@ -670,7 +670,7 @@ $g_version_suffix = '';
  * user agent (web browser) language preference.
  * @global string $g_default_language
  */
-$g_default_language = 'english';
+$g_default_language = 'auto';
 
 /**
  * list the choices that the users are allowed to choose
