@@ -606,3 +606,4 @@ $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_project_hierarchy_parent_id', 
 /* 180 */
 $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_tag_name', db_get_table( 'tag' ), 'name' ) );
 $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_bug_tag_tag_id', db_get_table( 'bug_tag' ), 'tag_id' ) );
+$upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_email_id', db_get_table( 'email' ), 'email_id', array( 'DROP' ) ), Array( 'db_index_exists', Array( db_get_table( 'email' ), 'idx_email_id') ) );
