@@ -1,8 +1,9 @@
 # Config files
 config_inc.php
 custom_constants_inc.php
-custom_strings_inc.php
 custom_functions_inc.php
+custom_relationships_inc.php
+custom_strings_inc.php
 mantis_offline.php
 
 # Files to be deprecated in v1.3
