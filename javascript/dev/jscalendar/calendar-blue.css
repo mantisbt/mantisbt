@@ -19,7 +19,7 @@ div.calendar { position: relative; }
 }
 
 .calendar .nav {
-  background: #778 url(menuarrow.gif) no-repeat 100% 100%;
+  background-color: #778;
 }
 
 .calendar thead .title { /* This holds the current "month, year" */
