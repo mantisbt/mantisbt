@@ -105,11 +105,11 @@ function lang_get_default() {
 	}
 
 	# Otherwise fall back to default
-	if( null === $t_lang ) {
+	if( !$t_lang ) {
 		$t_lang = config_get_global( 'default_language' );
 	}
 
-	if( 'auto' == $t_lang ) {
+	if( $t_lang == 'auto' ) {
 		$t_lang = lang_map_auto();
 	}
 
