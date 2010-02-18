@@ -436,7 +436,6 @@ class BugData {
 			$this->platform, $this->version,
 			$this->build, $this->fixed_in_version,
 		);
-		$t_field_count = 18;
 		$t_roadmap_updated = false;
 		if( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
 			$query .= "
