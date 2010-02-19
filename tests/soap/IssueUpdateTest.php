@@ -403,4 +403,52 @@ class IssueUpdateTest extends SoapBase {
 		
 		$this->assertEquals( 30, $issueWithNote->notes[0]->time_tracking);
 	}
+	
+	/*		
+	 * This test case tests the following:
+	 * 1. Creation of an issue.
+	 * 2. Updating the issue with rare fields
+	 * 3. Getting the issue
+	 * 4. Verifying that the rare field values are preserved
+	 * 5. Deleting the issue.
+	 */
+	public function testUpdateWithRareFields() {
+		
+		$this->skipIfTimeTrackingIsNotEnabled();
+		
+		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithRareFields' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+			
+		$issue->build = 'build';
+		$issue->platform = 'platform';
+		$issue->os_build = 'os_build';
+		$issue->os = 'os';
+		
+ 		$this->client->mc_issue_update(
+			$this->userName,
+			$this->password,
+			$issueId,
+			$issue);		
+
+		$retrievedIssue = $this->client->mc_issue_get(	
+			$this->userName,
+			$this->password,
+			$issueId);
+		
+		$this->assertEquals( 'build', $retrievedIssue->build );
+		$this->assertEquals( 'platform', $retrievedIssue->platform );
+		$this->assertEquals( 'os', $retrievedIssue->os );
+		$this->assertEquals( 'os_build', $retrievedIssue->os_build);
+	}	
 }
