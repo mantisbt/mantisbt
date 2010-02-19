@@ -639,6 +639,11 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_description = isset( $p_issue['description'] ) ? $p_issue['description'] : '';
 	$t_additional_information = isset( $p_issue['additional_information'] ) ? $p_issue['additional_information'] : '';
 	$t_steps_to_reproduce = isset( $p_issue['steps_to_reproduce'] ) ? $p_issue['steps_to_reproduce'] : '';
+	$t_build = isset( $p_issue['build'] ) ? $p_issue['build'] : '';
+	$t_platform = isset( $p_issue['platform'] ) ? $p_issue['platform'] : '';
+	$t_os = isset( $p_issue['os'] ) ? $p_issue['os'] : '';
+	$t_os_build = isset( $p_issue['os_build'] ) ? $p_issue['os_build'] : '';
+	$t_sponsorship_total = isset( $p_issue['sponsorship_total'] ) ? $p_issue['sponsorship_total'] : '';
 
 	if( $t_reporter_id == 0 ) {
 		$t_reporter_id = $t_user_id;
@@ -720,15 +725,15 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_bug_data->date_submitted = isset( $v_date_submitted ) ? $v_date_submitted : '';
 	$t_bug_data->last_updated = isset( $v_last_updated ) ? $v_last_updated : '';
 	$t_bug_data->eta = $t_eta_id;
-	$t_bug_data->os = isset( $v_os ) ? $v_os : '';
-	$t_bug_data->os_build = isset( $v_os_build ) ? $v_os_build : '';
-	$t_bug_data->platform = isset( $v_platform ) ? $v_platform : '';
+	$t_bug_data->os = $t_os;
+	$t_bug_data->os_build = $t_os_build;
+	$t_bug_data->platform = $t_platform;
 	$t_bug_data->version = isset( $p_issue['version'] ) ? $p_issue['version'] : '';
 	$t_bug_data->fixed_in_version = isset( $p_issue['fixed_in_version'] ) ? $p_issue['fixed_in_version'] : '';
-	$t_bug_data->build = isset( $v_build ) ? $v_build : '';
+	$t_bug_data->build = $t_build;
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
-	$t_bug_data->sponsorship_total = isset( $v_sponsorship_total ) ? $v_sponsorship_total : 0;
+	$t_bug_data->sponsorship_total = $t_sponsorship_total;
 
 	if ( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
 		$t_bug_data->due_date = mci_iso8601_to_timestamp( $p_issue['due_date'] );
