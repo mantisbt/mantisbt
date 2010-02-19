@@ -71,54 +71,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
 
 	foreach( $t_rows as $t_issue_data ) {
-		$t_id = $t_issue_data->id;
-
-		$t_issue = array();
-		$t_issue['id'] = $t_id;
-		$t_issue['view_state'] = mci_enum_get_array_by_id( $t_issue_data->view_state, 'view_state', $t_lang );
-		$t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data->last_updated );
-
-		$t_issue['project'] = mci_project_as_array_by_id( $t_issue_data->project_id );
-		$t_issue['category'] = mci_get_category( $t_issue_data->category_id );
-		$t_issue['priority'] = mci_enum_get_array_by_id( $t_issue_data->priority, 'priority', $t_lang );
-		$t_issue['severity'] = mci_enum_get_array_by_id( $t_issue_data->severity, 'severity', $t_lang );
-		$t_issue['status'] = mci_enum_get_array_by_id( $t_issue_data->status, 'status', $t_lang );
-
-		$t_issue['reporter'] = mci_account_get_array_by_id( $t_issue_data->reporter_id );
-		$t_issue['summary'] = $t_issue_data->summary;
-		$t_issue['version'] = mci_null_if_empty( $t_issue_data->version );
-		$t_issue['build'] = mci_null_if_empty( $t_issue_data->build );
-		$t_issue['platform'] = mci_null_if_empty( $t_issue_data->platform );
-		$t_issue['os'] = mci_null_if_empty( $t_issue_data->os );
-		$t_issue['os_build'] = mci_null_if_empty( $t_issue_data->os_build );
-		$t_issue['reproducibility'] = mci_enum_get_array_by_id( $t_issue_data->reproducibility, 'reproducibility', $t_lang );
-		$t_issue['date_submitted'] = timestamp_to_iso8601( $t_issue_data->date_submitted );
-		$t_issue['sponsorship_total'] = $t_issue_data->sponsorship_total;
-
-		if( !empty( $t_issue_data->handler_id ) ) {
-			$t_issue['handler'] = mci_account_get_array_by_id( $t_issue_data->handler_id );
-		}
-		$t_issue['projection'] = mci_enum_get_array_by_id( $t_issue_data->projection, 'projection', $t_lang );
-		$t_issue['eta'] = mci_enum_get_array_by_id( $t_issue_data->eta, 'eta', $t_lang );
-
-		$t_issue['resolution'] = mci_enum_get_array_by_id( $t_issue_data->resolution, 'resolution', $t_lang );
-		$t_issue['fixed_in_version'] = mci_null_if_empty( $t_issue_data->fixed_in_version );
-		$t_issue['target_version'] = mci_null_if_empty( $t_issue_data->target_version );
-
-		$t_issue['description'] = bug_get_text_field( $t_id, 'description' );
-
-		$t_steps_to_reproduce = bug_get_text_field( $t_id, 'steps_to_reproduce' );
-		$t_issue['steps_to_reproduce'] = mci_null_if_empty( $t_steps_to_reproduce );
-
-		$t_additional_information = bug_get_text_field( $t_id, 'additional_information' );
-		$t_issue['additional_information'] = mci_null_if_empty( $t_additional_information );
-
-		$t_issue['attachments'] = mci_issue_get_attachments( $t_issue_data->id );
-		$t_issue['relationships'] = mci_issue_get_relationships( $t_issue_data->id, $t_user_id );
-		$t_issue['notes'] = mci_issue_get_notes( $t_issue_data->id );
-		$t_issue['custom_fields'] = mci_issue_get_custom_fields( $t_issue_data->id );
-
-		$t_result[] = $t_issue;
+		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
 	}
 
 	return $t_result;
