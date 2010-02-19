@@ -1165,7 +1165,7 @@ $l_oServer->register( 'mc_project_get_unreleased_versions',
 	'Get the unreleased version that belong to the specified project.'
 );
 
-### mc_project_get_unreleased_versions
+### mc_project_get_attachments
 $l_oServer->register( 'mc_project_get_attachments',
 	array(
 		'username'		=>	'xsd:string',
