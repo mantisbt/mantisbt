@@ -1086,3 +1086,64 @@ function mci_iso8601_to_timestamp( $p_date ) {
 	return $t_raw_timestamp - $t_offset;
 	
 }
+
+
+/**
+ * Returns an array for SOAP encoding from a BugData object
+ * 
+ * @param BugData $p_issue_data
+ * @param int $p_user_id
+ * @param string $p_lang
+ * @return array The issue as an array
+ */
+function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
+	
+		$t_id = $p_issue_data->id;
+
+		$t_issue = array();
+		$t_issue['id'] = $t_id;
+		$t_issue['view_state'] = mci_enum_get_array_by_id( $p_issue_data->view_state, 'view_state', $p_lang );
+		$t_issue['last_updated'] = timestamp_to_iso8601( $p_issue_data->last_updated );
+
+		$t_issue['project'] = mci_project_as_array_by_id( $p_issue_data->project_id );
+		$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
+		$t_issue['priority'] = mci_enum_get_array_by_id( $p_issue_data->priority, 'priority', $p_lang );
+		$t_issue['severity'] = mci_enum_get_array_by_id( $p_issue_data->severity, 'severity', $p_lang );
+		$t_issue['status'] = mci_enum_get_array_by_id( $p_issue_data->status, 'status', $p_lang );
+
+		$t_issue['reporter'] = mci_account_get_array_by_id( $p_issue_data->reporter_id );
+		$t_issue['summary'] = $p_issue_data->summary;
+		$t_issue['version'] = mci_null_if_empty( $p_issue_data->version );
+		$t_issue['build'] = mci_null_if_empty( $p_issue_data->build );
+		$t_issue['platform'] = mci_null_if_empty( $p_issue_data->platform );
+		$t_issue['os'] = mci_null_if_empty( $p_issue_data->os );
+		$t_issue['os_build'] = mci_null_if_empty( $p_issue_data->os_build );
+		$t_issue['reproducibility'] = mci_enum_get_array_by_id( $p_issue_data->reproducibility, 'reproducibility', $p_lang );
+		$t_issue['date_submitted'] = timestamp_to_iso8601( $p_issue_data->date_submitted );
+		$t_issue['sponsorship_total'] = $p_issue_data->sponsorship_total;
+
+		if( !empty( $p_issue_data->handler_id ) ) {
+			$t_issue['handler'] = mci_account_get_array_by_id( $p_issue_data->handler_id );
+		}
+		$t_issue['projection'] = mci_enum_get_array_by_id( $p_issue_data->projection, 'projection', $p_lang );
+		$t_issue['eta'] = mci_enum_get_array_by_id( $p_issue_data->eta, 'eta', $p_lang );
+
+		$t_issue['resolution'] = mci_enum_get_array_by_id( $p_issue_data->resolution, 'resolution', $p_lang );
+		$t_issue['fixed_in_version'] = mci_null_if_empty( $p_issue_data->fixed_in_version );
+		$t_issue['target_version'] = mci_null_if_empty( $p_issue_data->target_version );
+
+		$t_issue['description'] = bug_get_text_field( $t_id, 'description' );
+
+		$t_steps_to_reproduce = bug_get_text_field( $t_id, 'steps_to_reproduce' );
+		$t_issue['steps_to_reproduce'] = mci_null_if_empty( $t_steps_to_reproduce );
+
+		$t_additional_information = bug_get_text_field( $t_id, 'additional_information' );
+		$t_issue['additional_information'] = mci_null_if_empty( $t_additional_information );
+
+		$t_issue['attachments'] = mci_issue_get_attachments( $p_issue_data->id );
+		$t_issue['relationships'] = mci_issue_get_relationships( $p_issue_data->id, $p_user_id );
+		$t_issue['notes'] = mci_issue_get_notes( $p_issue_data->id );
+		$t_issue['custom_fields'] = mci_issue_get_custom_fields( $p_issue_data->id );
+		
+		return $t_issue;
+}
