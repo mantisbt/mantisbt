@@ -41,21 +41,20 @@
 	require_once( 'last_visited_api.php' );
 	require_once( 'tag_api.php' );
 
-	$f_bug_id		= gpc_get_int( 'id' );
-	$f_history		= gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
+	$f_bug_id = gpc_get_int( 'id' );
 
 	bug_ensure_exists( $f_bug_id );
 
 	$tpl_bug = bug_get( $f_bug_id, true );
 
-	$t_selected_project = helper_get_current_project();
-	if( $tpl_bug->project_id != $t_selected_project ) {
-		# in case the current project is not the same project of the bug we are viewing...
-		# ... override the current project. This to avoid problems with categories and handlers lists etc.
-		$g_project_override = $tpl_bug->project_id;
-	}
+	# In case the current project is not the same project of the bug we are
+	# viewing, override the current project. This ensures all config_get and other
+	# per-project function calls use the project ID of this bug.
+	$g_project_override = $tpl_bug->project_id;
 
 	access_ensure_bug_level( VIEWER, $f_bug_id );
+
+	$f_history = gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
 
 	$t_fields = config_get( $tpl_fields_config_option );
 	$t_fields = columns_filter_disabled( $t_fields );
