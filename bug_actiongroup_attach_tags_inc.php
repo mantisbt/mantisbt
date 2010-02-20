@@ -65,24 +65,31 @@
 			$g_action_attach_tags_failed = array();
 
 			$t_tags = tag_parse_string( $f_tag_string );
+			$t_can_attach = access_has_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id );
 			$t_can_create = access_has_global_level( config_get( 'tag_create_threshold' ) );
 
 			foreach ( $t_tags as $t_tag_row ) {
 				if ( -1 == $t_tag_row['id'] ) {
-					if ( $t_can_create ) {
+					if ( $t_can_create && $t_can_attach ) {
 						$g_action_attach_tags_create[] = $t_tag_row;
 					} else {
 						$g_action_attach_tags_failed[] = $t_tag_row;
 					}
 				} else if ( -2 == $t_tag_row['id'] ) {
 					$g_action_attach_tags_failed[] = $t_tag_row;
-				} else {
+				} else if ( $t_can_attach ) {
 					$g_action_attach_tags_attach[] = $t_tag_row;
+				} else {
+					$g_action_attach_tags_failed[] = $t_tag_row;
 				}
 			}
 
 			if ( 0 < $f_tag_select && tag_exists( $f_tag_select ) ) {
-				$g_action_attach_tags_attach[] = tag_get( $f_tag_select );
+				if ( $t_can_attach ) {
+					$g_action_attach_tags_attach[] = tag_get( $f_tag_select );
+				} else {
+					$g_action_attach_tags_failed[] = tag_get( $f_tag_select );
+				}
 			}
 
 		}
