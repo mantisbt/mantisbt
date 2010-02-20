@@ -55,49 +55,27 @@
         }
     }
 
-    $t_failed_ids = array();
+	$t_failed_ids = array();
 
-    # validate all bugs before we start the processing, we may fail the whole action
-    # group, or some of the bugs.
-    foreach( $t_projects_bugs as $t_project_id => $t_bug_ids ) {
-        if ( $t_bug->project_id != helper_get_current_project() ) {
-            # in case the current project is not the same project of the bug we are viewing...
-            # ... override the current project. This to avoid problems with categories and handlers lists etc.
-            $g_project_override = $t_bug->project_id;
-            /** @todo (thraxisp) the next line goes away if the cache was smarter and used project */
-            config_flush_cache(); # flush the config cache so that configs are refetched
-        }
-
-        foreach( $t_bug_ids as $t_bug_id ) {
-            $t_result = bug_group_action_validate( $f_action, $t_bug_id );
-            if ( $t_result !== true ) {
-                foreach( $t_result as $t_key => $t_value ) {
-                    $t_failed_ids[$t_key] = $t_value;
-                }
-            }
-        }
-    }
-
-    // process bugs that are not already failed by validation.
-    foreach( $t_projects_bugs as $t_project_id => $t_bug_ids ) {
-		if ( $t_bug->project_id != helper_get_current_project() ) {
-			// in case the current project is not the same project of the bug we are viewing...
-			// ... override the current project. This to avoid problems with categories and handlers lists etc.
-			$g_project_override = $t_bug->project_id;
-			/** @todo (thraxisp) the next line goes away if the cache was smarter and used project */
-			config_flush_cache(); // flush the config cache so that configs are refetched
+	foreach( $t_projects_bugs as $t_project_id => $t_bugs ) {
+		$g_project_override = $t_project_id;
+		foreach( $t_bugs as $t_bug_id ) {
+			$t_result = bug_group_action_validate( $f_action, $t_bug_id );
+			if( $t_result !== true ) {
+				foreach( $t_result as $t_key => $t_value ) {
+					$t_failed_ids[$t_key] = $t_value;
+				}
+			}
+			if( !isset( $t_failed_ids[$t_bug_id] ) ) {
+				$t_result = bug_group_action_process( $f_action, $t_bug_id );
+				if( $t_result !== true ) {
+					$t_failed_ids[] = $t_result;
+				}
+			}
 		}
+	}
 
-        foreach( $t_bug_ids as $t_bug_id ) {
-            # do not process this bug if validation failed for it.
-            if ( !isset( $t_failed_ids[$t_bug_id] ) ) {
-                $t_result = bug_group_action_process( $f_action, $t_bug_id );
-                if ( $t_result !== true ) {
-                    $t_failed_ids[] = $t_result;
-                }
-            }
-        }
-    }
+	$g_project_override = null;
 
 	form_security_purge( $t_form_name );
 
