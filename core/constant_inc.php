@@ -147,37 +147,6 @@ define( 'ADVANCED_ONLY', 2 );
 define( 'SIMPLE_DEFAULT', 3 );
 define( 'ADVANCED_DEFAULT', 4 );
 
-# Bug Fields
-define( 'BUG_FIELD_ID', 'id' );
-define( 'BUG_FIELD_PROJECT', 'project_id' );
-define( 'BUG_FIELD_REPORTER', 'reporter_id' );
-define( 'BUG_FIELD_HANDLER', 'handler_id' );
-define( 'BUG_FIELD_PRIORITY', 'priority' );
-define( 'BUG_FIELD_SEVERITY', 'severity' );
-define( 'BUG_FIELD_REPRODUCIBILITY', 'reproducibility' );
-define( 'BUG_FIELD_PRODUCT_VERSION', 'version' );
-define( 'BUG_FIELD_PRODUCT_BUILD', 'build' );
-define( 'BUG_FIELD_PROJECTION', 'projection' );
-define( 'BUG_FIELD_CATEGORY', 'category_id' );
-define( 'BUG_FIELD_DATE_SUBMITTED', 'date_submitted' );
-define( 'BUG_FIELD_ETA', 'eta' );
-define( 'BUG_FIELD_OS', 'os' );
-define( 'BUG_FIELD_OS_VERSION', 'os_build' );
-define( 'BUG_FIELD_PLATFORM', 'platform' );
-define( 'BUG_FIELD_VIEW_STATE', 'view_state' );
-define( 'BUG_FIELD_LAST_UPDATED', 'last_updated' );
-define( 'BUG_FIELD_STATUS', 'status' );
-define( 'BUG_FIELD_RESOLUTION', 'resolution' );
-define( 'BUG_FIELD_FIXED_IN_VERSION', 'fixed_in_version' );
-define( 'BUG_FIELD_TARGET_VERSION', 'target_version' );
-define( 'BUG_FIELD_TAGS', 'tags' );
-define( 'BUG_FIELD_SUMMARY', 'summary' );
-define( 'BUG_FIELD_DESCRIPTION', 'description' );
-define( 'BUG_FIELD_ADDITIONAL_INFO', 'additional_info' );
-define( 'BUG_FIELD_STEPS_TO_REPRODUCE', 'steps_to_reproduce' );
-define( 'BUG_FIELD_ATTACHMENTS', 'attachments' );
-define( 'BUG_FIELD_DUE_DATE', 'due_date' );
-
 # news values
 define( 'BY_LIMIT', 0 );
 define( 'BY_DATE', 1 );
