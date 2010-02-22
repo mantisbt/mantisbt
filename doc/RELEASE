@@ -1,19 +1,19 @@
 MantisBT Release Notes
 
-1.2.0 Release Candidate 2
+1.2.0 Stable Release
 -------------------------------------------------
 
-This release marks the second "stable" release in the 1.2.x series of MantisBT.
-The 1.2.x series is now officially feature complete, and this build is ready
-for official testing in non-critical installations.  This release is a good
-representation of a final 1.2.0 build.
+This release marks the first official release in the 1.2.x series of MantisBT.
+1.2.0 is a major feature release for MantisBT, and includes many bugfixes and
+enhancements over the 1.1.x stable branch.  All users of 1.1.x are highly
+encouraged to upgrade as soon as possible.
 
 A full changelog for the 1.2.x series can be found on the official site. [1]
 
-There are many new features added to 1.2.x, including:
+There are many new features added to 1.2.0, including:
 
  - Converted the MantisBT Manual to Docbook format, and added a new Developer's
-   Guide manual, both of which are compiled and included in every release.
+   Guide manual, both of which are compiled and included in every release
 
  - Implemented a plugin system with many plugins already released [2]
 
@@ -68,6 +68,7 @@ There have also been many improvements to the codebase beyond adding features:
     1.2.0a3    http://www.mantisbt.org/bugs/changelog_page.php?version_id=104
     1.2.0rc1   http://www.mantisbt.org/bugs/changelog_page.php?version_id=98
     1.2.0rc2   http://www.mantisbt.org/bugs/changelog_page.php?version_id=106
+	1.2.0      http://www.mantisbt.org/bugs/changelog_page.php?version_id=108
 
 [2] MantisForge is now the preferred code collaboration site for MantisBT,
     including free hosting of MantisBT-related Git repositories for development
