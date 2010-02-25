@@ -95,7 +95,9 @@
 	/** @todo thraxisp - could this be replaced by a call to filter_draw_selection_area2 */
 
 	$t_filter = current_user_get_bug_filter();
-	$t_filter = filter_ensure_valid_filter( $t_filter );
+	if( $t_filter === false ) {
+		$t_filter = filter_get_default();
+	}
 	$t_project_id = helper_get_current_project();
 
 	$t_current_user_access_level = current_user_get_access_level();

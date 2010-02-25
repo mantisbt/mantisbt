@@ -43,7 +43,6 @@ require_once( 'date_api.php' );
 require_once( 'icon_api.php' );
 
 $t_filter = current_user_get_bug_filter();
-
 if( $t_filter === false ) {
 	$t_filter = filter_get_default();
 }
