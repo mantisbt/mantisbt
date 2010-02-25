@@ -885,7 +885,7 @@ function print_column_selection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW
 	global $g_checkboxes_exist;
 
 	echo '<td>';
-	if( access_has_any_project( config_get( 'report_bug_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
+	if( access_has_any_project( config_get( 'report_bug_threshold', null, null, $p_bug->project_id ) ) ||
 		# !TODO: check if any other projects actually exist for the bug to be moved to
 		access_has_project_level( config_get( 'move_bug_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
 		# !TODO: factor in $g_auto_set_status_to_assigned == ON
