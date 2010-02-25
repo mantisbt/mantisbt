@@ -52,9 +52,8 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
 $t_filter = current_user_get_bug_filter();
-
 # NOTE: this check might be better placed in current_user_get_bug_filter()
-if ( !$t_filter ) {
+if ( $t_filter === false ) {
 	$t_filter = filter_get_default();
 }
 

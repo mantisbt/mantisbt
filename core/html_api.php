@@ -1225,6 +1225,9 @@ function html_status_legend() {
 
 	# Don't show the legend if only one status is selected by the current filter
 	$t_current_filter = current_user_get_bug_filter();
+	if ( $t_current_filter === false ) {
+		$t_current_filter = filter_get_default();
+	}
 	$t_simple_filter = $t_current_filter['_view_type'] == 'simple';
 	if( $t_simple_filter ) {
 		if( !filter_field_is_any( $t_current_filter[FILTER_PROPERTY_STATUS_ID][0] ) ) {

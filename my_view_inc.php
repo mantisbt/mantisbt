@@ -58,7 +58,6 @@ require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 
 $t_filter = current_user_get_bug_filter();
-
 if( $t_filter === false ) {
 	$t_filter = filter_get_default();
 }
