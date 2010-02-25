@@ -66,6 +66,8 @@
  * @uses error_api.php
  * @uses event_api.php
  * @uses file_api.php
+ * @uses filter_api.php
+ * @uses filter_constants_inc.php
  * @uses form_api.php
  * @uses helper_api.php
  * @uses lang_api.php
@@ -89,6 +91,8 @@ require_api( 'database_api.php' );
 require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'file_api.php' );
+require_api( 'filter_api.php' );
+require_api( 'filter_constants_inc.php' );
 require_api( 'form_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'lang_api.php' );
@@ -1219,6 +1223,15 @@ function html_status_legend() {
 	echo '<table class="width100" cellspacing="1">';
 	echo '<tr>';
 
+	# Don't show the legend if only one status is selected by the current filter
+	$t_current_filter = current_user_get_bug_filter();
+	$t_simple_filter = $t_current_filter['_view_type'] == 'simple';
+	if( $t_simple_filter ) {
+		if( !filter_field_is_any( $t_current_filter[FILTER_PROPERTY_STATUS_ID][0] ) ) {
+			return null;
+		}
+	}
+
 	$t_status_array = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	$t_status_names = MantisEnum::getAssocArrayIndexedByValues( lang_get( 'status_enum_string' ) );
 	$enum_count = count( $t_status_array );
@@ -1234,6 +1247,27 @@ function html_status_legend() {
 				unset( $t_status_array[$t_status] );
 			}
 		}
+	}
+
+	# Remove status values that won't appear as a result of the current filter
+	foreach( $t_status_array as $t_status => $t_name ) {
+		if( $t_simple_filter ) {
+			if( !filter_field_is_none( $t_current_filter[FILTER_PROPERTY_HIDE_STATUS_ID][0] ) &&
+				$t_status >= $t_current_filter[FILTER_PROPERTY_HIDE_STATUS_ID][0] ) {
+				unset( $t_status_array[$t_status] );
+			}
+		} else {
+			if( !in_array( META_FILTER_ANY, $t_current_filter[FILTER_PROPERTY_STATUS_ID] ) &&
+				!in_array( $t_status, $t_current_filter[FILTER_PROPERTY_STATUS_ID] ) ) {
+				unset( $t_status_array[$t_status] );
+			}
+		}
+	}
+
+	# If there aren't at least two statuses showable by the current filter,
+	# don't draw the status bar
+	if( count( $t_status_array ) <= 1 ) {
+		return null;
 	}
 
 	# draw the status bar
