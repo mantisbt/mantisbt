@@ -67,28 +67,23 @@ function action_update_severity_print_fields() {
 /**
  * Validates the action on the specified bug id.
  *
- * @returns true    Action can be applied.
- * @returns array( bug_id => reason for failure )
+ * @return string|null On failure: the reason why the action could not be validated. On success: null.
  */
 function action_update_severity_validate( $p_bug_id ) {
 	$f_severity = gpc_get_string( 'severity' );
-
-	$t_failed_validation_ids = array();
 
 	$t_update_severity_threshold = config_get( 'update_bug_threshold' );
 	$t_bug_id = $p_bug_id;
 
 	if ( bug_is_readonly( $t_bug_id ) ) {
-		$t_failed_validation_ids[$t_bug_id] = lang_get( 'actiongroup_error_issue_is_readonly' );
-		return $t_failed_validation_ids;
+		return lang_get( 'actiongroup_error_issue_is_readonly' );
 	}
 
 	if ( !access_has_bug_level( $t_update_severity_threshold, $t_bug_id ) ) {
-		$t_failed_validation_ids[$t_bug_id] = lang_get( 'access_denied' );
-		return $t_failed_validation_ids;
+		return lang_get( 'access_denied' );
 	}
 
-	return true;
+	return null;
 }
 
 /**
@@ -96,11 +91,10 @@ function action_update_severity_validate( $p_bug_id ) {
  *
  * @param $p_bug_id  The bug id to execute the custom action on.
  *
- * @returns true   Action executed successfully.
- * @returns array( bug_id => reason for failure )
+ * @return null Previous validation ensures that this function doesn't fail. Therefore we can always return null to indicate no errors occurred.
  */
 function action_update_severity_process( $p_bug_id ) {
 	$f_severity = gpc_get_string( 'severity' );
 	bug_set_field( $p_bug_id, 'severity', $f_severity );
-	return true;
+	return null;
 }

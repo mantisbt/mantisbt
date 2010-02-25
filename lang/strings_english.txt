@@ -1537,6 +1537,7 @@ $s_tag_detach = 'Detach "%1$s"';
 $s_tag_separate_by = '(Separate by "%1$s")';
 $s_tag_invalid_name = 'Invalid tag name.';
 $s_tag_create_denied = 'Create permission denied.';
+$s_tag_attach_denied = 'Attach permission denied.';
 $s_tag_filter_default = 'Attached Issues (%1$s)';
 $s_tag_history_attached = 'Tag Attached';
 $s_tag_history_detached = 'Tag Detached';

@@ -62,36 +62,32 @@ function action_update_product_build_print_fields() {
  * Validates the action on the specified bug id.
  *
  * @param $p_bug_id Bug ID
- * @return true|array  Action can be applied., bug_id => reason for failure
+ * @return string|null On failure: the reason why the action could not be validated. On success: null.
  */
 function action_update_product_build_validate( $p_bug_id ) {
 	$t_bug_id = (int)$p_bug_id;
 
 	if ( bug_is_readonly( $t_bug_id ) ) {
-		$t_failed_validation_ids = array();
-		$t_failed_validation_ids[$t_bug_id] = lang_get( 'actiongroup_error_issue_is_readonly' );
-		return $t_failed_validation_ids;
+		return lang_get( 'actiongroup_error_issue_is_readonly' );
 	}
 
 	if ( !access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
-		$t_failed_validation_ids = array();
-		$t_failed_validation_ids[$t_bug_id] = lang_get( 'access_denied' );
-		return $t_failed_validation_ids;
+		return lang_get( 'access_denied' );
 	}
 
-	return true;
+	return null;
 }
 
 /**
  * Executes the custom action on the specified bug id.
  *
  * @param $p_bug_id  The bug id to execute the custom action on.
- * @returns true|array Action executed successfully., ( bug_id => reason for failure )
+ * @return null Previous validation ensures that this function doesn't fail. Therefore we can always return null to indicate no errors occurred.
  */
 function action_update_product_build_process( $p_bug_id ) {
 	$f_build = gpc_get_string( 'build' );
 	$t_build = trim( $f_build );
 
 	bug_set_field( $p_bug_id, 'build', $t_build );
-	return true;
+	return null;
 }

@@ -79,16 +79,14 @@ $t_failed_ids = array();
 foreach( $t_projects_bugs as $t_project_id => $t_bugs ) {
 	$g_project_override = $t_project_id;
 	foreach( $t_bugs as $t_bug_id ) {
-		$t_result = bug_group_action_validate( $f_action, $t_bug_id );
-		if( $t_result !== true ) {
-			foreach( $t_result as $t_key => $t_value ) {
-				$t_failed_ids[$t_key] = $t_value;
-			}
+		$t_fail_reason = bug_group_action_validate( $f_action, $t_bug_id );
+		if( $t_fail_reason !== null ) {
+			$t_failed_ids[$t_bug_id] = $t_fail_reason;
 		}
 		if( !isset( $t_failed_ids[$t_bug_id] ) ) {
-			$t_result = bug_group_action_process( $f_action, $t_bug_id );
-			if( $t_result !== true ) {
-				$t_failed_ids[] = $t_result;
+			$t_fail_reason = bug_group_action_process( $f_action, $t_bug_id );
+			if( $t_fail_reason !== null ) {
+				$t_failed_ids[$t_bug_id] = $t_fail_reason;
 			}
 		}
 	}
@@ -103,9 +101,9 @@ if ( count( $t_failed_ids ) > 0 ) {
 
 	echo '<div align="center">';
 
-	$separator = lang_get( 'word_separator' );
+	$t_word_separator = lang_get( 'word_separator' );
 	foreach( $t_failed_ids as $t_id => $t_reason ) {
-		$label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $sepatator;
+		$label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $t_word_separator;
 		printf("<p>%s%s</p>\n", $label, $t_reason );
 	}
 

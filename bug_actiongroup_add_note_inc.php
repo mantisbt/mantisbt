@@ -93,7 +93,7 @@ function action_add_note_print_fields() {
 /**
  * Validates the action on the specified bug id.
  *
- * @returns true|array Action can be applied., ( bug_id => reason for failure )
+ * @return string|null On failure: the reason why the action could not be validated. On success: null.
  */
 function action_add_note_validate( $p_bug_id ) {
 	$f_bugnote_text = gpc_get_string( 'bugnote_text' );
@@ -103,32 +103,29 @@ function action_add_note_validate( $p_bug_id ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$t_failed_validation_ids = array();
 	$t_add_bugnote_threshold = config_get( 'add_bugnote_threshold' );
 	$t_bug_id = $p_bug_id;
 
 	if ( bug_is_readonly( $t_bug_id ) ) {
-		$t_failed_validation_ids[$t_bug_id] = lang_get( 'actiongroup_error_issue_is_readonly' );
-		return $t_failed_validation_ids;
+		return lang_get( 'actiongroup_error_issue_is_readonly' );
 	}
 
 	if ( !access_has_bug_level( $t_add_bugnote_threshold, $t_bug_id ) ) {
-		$t_failed_validation_ids[$t_bug_id] = lang_get( 'access_denied' );
-		return $t_failed_validation_ids;
+		return lang_get( 'access_denied' );
 	}
 
-	return true;
+	return null;
 }
 
 /**
  * Executes the custom action on the specified bug id.
  *
  * @param $p_bug_id  The bug id to execute the custom action on.
- * @returns true|array Action executed successfully., ( bug_id => reason for failure )
+ * @return null Previous validation ensures that this function doesn't fail. Therefore we can always return null to indicate no errors occurred.
  */
 function action_add_note_process( $p_bug_id ) {
 	$f_bugnote_text = gpc_get_string( 'bugnote_text' );
 	$f_view_state = gpc_get_int( 'view_state' );
 	bugnote_add ( $p_bug_id, $f_bugnote_text, '0:00', /* $p_private = */ $f_view_state != VS_PUBLIC  );
-	return true;
+	return null;
 }

@@ -64,62 +64,52 @@ function action_attach_tags_print_fields() {
 
 /**
  * Validates the Attach Tags group action.
- * Gets called for every bug, but performs the real tag validation only
- * the first time.  Any invalid tags will be skipped, as there is no simple
- * or clean method of presenting these errors to the user.
+ * Checks if a user can attach the requested tags to a given bug.
  * @param integer Bug ID
- * @return boolean True
+ * @return string|null On failure: the reason for tags failing validation for the given bug. On success: null.
  */
 function action_attach_tags_validate( $p_bug_id ) {
-	global $g_action_attach_tags_valid;
-	if ( !isset( $g_action_attach_tags_valid ) ) {
-		$f_tag_string = gpc_get_string( 'tag_string' );
-		$f_tag_select = gpc_get_string( 'tag_select' );
+	global $g_action_attach_tags_tags;
+	global $g_action_attach_tags_attach;
+	global $g_action_attach_tags_create;
 
-		global $g_action_attach_tags_attach, $g_action_attach_tags_create, $g_action_attach_tags_failed;
-		$g_action_attach_tags_attach = array();
-		$g_action_attach_tags_create = array();
-		$g_action_attach_tags_failed = array();
-
-		$t_tags = tag_parse_string( $f_tag_string );
-		$t_can_attach = access_has_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id );
-		$t_can_create = access_has_global_level( config_get( 'tag_create_threshold' ) );
-
-		foreach ( $t_tags as $t_tag_row ) {
-			if ( -1 == $t_tag_row['id'] ) {
-				if ( $t_can_create && $t_can_attach ) {
-					$g_action_attach_tags_create[] = $t_tag_row;
-				} else {
-					$g_action_attach_tags_failed[] = $t_tag_row;
-				}
-			} else if ( -2 == $t_tag_row['id'] ) {
-				$g_action_attach_tags_failed[] = $t_tag_row;
-			} else if ( $t_can_attach ) {
-				$g_action_attach_tags_attach[] = $t_tag_row;
-			} else {
-				$g_action_attach_tags_failed[] = $t_tag_row;
-			}
-		}
-
-		if ( 0 < $f_tag_select && tag_exists( $f_tag_select ) ) {
-			if ( $t_can_attach ) {
-				$g_action_attach_tags_attach[] = tag_get( $f_tag_select );
-			} else {
-				$g_action_attach_tags_failed[] = tag_get( $f_tag_select );
-			}
-		}
-
+	$t_can_attach = access_has_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id );
+	if( !$t_can_attach ) {
+		return lang_get( 'tag_attach_denied' );
 	}
 
-	global $g_action_attach_tags_attach, $g_action_attach_tags_create, $g_action_attach_tags_failed;
+	if( !isset( $g_action_attach_tags_tags ) ) {
+		if( !isset( $g_action_attach_tags_attach ) ) {
+			$g_action_attach_tags_attach = array();
+			$g_action_attach_tags_create = array();
+		}
+		$g_action_attach_tags_tags = tag_parse_string( gpc_get_string( 'tag_string' ) );
+		foreach ( $g_action_attach_tags_tags as $t_tag_row ) {
+			if ( $t_tag_row['id'] == -1 ) {
+				$g_action_attach_tags_create[$t_tag_row['name']] = $t_tag_row;
+			} else if( $t_tag_row['id'] >= 0 ) {
+				$g_action_attach_tags_attach[$t_tag_row['name']] = $t_tag_row;
+			}
+		}
+	}
 
-	return true;
+	$t_can_create = access_has_bug_level( config_get( 'tag_create_threshold' ), $p_bug_id );
+	if( count( $g_action_attach_tags_create ) > 0 && !$t_can_create ) {
+		return lang_get( 'tag_create_denied' );
+	}
+
+	if( count( $g_action_attach_tags_create ) == 0 &&
+		count( $g_action_attach_tags_attach ) == 0 ) {
+		return lang_get( 'tag_none_attached' );
+	}
+
+	return null;
 }
 
 /**
  * Attaches all the tags to each bug in the group action.
  * @param integer Bug ID
- * @return boolean True if all tags attach properly
+ * @return null Previous validation ensures that this function doesn't fail. Therefore we can always return null to indicate no errors occurred.
  */
 function action_attach_tags_process( $p_bug_id ) {
 	global $g_action_attach_tags_attach, $g_action_attach_tags_create;
@@ -138,5 +128,5 @@ function action_attach_tags_process( $p_bug_id ) {
 		}
 	}
 
-	return true;
+	return null;
 }
