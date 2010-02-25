@@ -1204,7 +1204,7 @@ function html_status_legend() {
 	$t_workflow = config_get( 'status_enum_workflow' );
 	if( !empty( $t_workflow ) ) {
 		foreach( $t_status_array as $t_status => $t_name ) {
-			if( !isset( $t_workflow[$t_status] ) || ( $t_workflow[$t_status] == '' ) ) {
+			if( !isset( $t_workflow[$t_status] ) ) {
 
 				# drop elements that are not in the workflow
 				unset( $t_status_array[$t_status] );
