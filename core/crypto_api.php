@@ -26,11 +26,13 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses error_api.php
+ * @uses utility_api.php
  */
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'error_api.php' );
+require_api( 'utility_api.php' );
 
 /**
  * Initialise the CryptoAPI subsystem. This function checks whether the master
@@ -55,6 +57,11 @@ function crypto_init() {
  * randomness if less security is needed or a strong source of randomness isn't
  * available. The use of weak randomness for cryptographic purposes is strongly
  * discouraged because it contains low entropy and is predictable.
+ *
+ * Note that openssl_random_pseudo_bytes seems to perform very poorly on
+ * Windows servers. Therefore we don't event attempt to use this PRNG source
+ * if the server is running Windows.
+ *
  * @param int $p_bytes Number of bytes of randomness required
  * @param bool $p_require_strong_generator Whether or not a weak source of randomness can be used by this function
  * @return string|null Raw binary string containing the requested number of bytes of random output or null if the output couldn't be created
@@ -62,7 +69,7 @@ function crypto_init() {
 function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = true ) {
 
 	# First we attempt to use the secure PRNG provided by OpenSSL in PHP 5.3
-	if ( function_exists( 'openssl_random_pseudo_bytes' ) ) {
+	if ( !is_windows_server() && function_exists( 'openssl_random_pseudo_bytes' ) ) {
 		$t_random_bytes = openssl_random_pseudo_bytes( $p_bytes, $t_strong );
 		if ( $t_random_bytes !== false ) {
 			if ( $p_require_strong_generator && $t_strong === true ) {
@@ -77,13 +84,15 @@ function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = 
 	# is nowhere near as secure as /dev/random but it is still satisfactory for
 	# the needs of MantisBT, especially given the fact that we don't want this
 	# function to block while waiting for the system to generate more entropy.
-	$t_urandom_fp = @fopen( '/dev/urandom', 'rb' );
-	if ( $t_urandom_fp !== false ) {
-		$t_random_bytes = @fread( $t_urandom_fp, $p_bytes );
-		if ( $t_random_bytes !== false ) {
-			$t_random_string = $t_random_bytes;
+	if ( !is_windows_server() ) {
+		$t_urandom_fp = @fopen( '/dev/urandom', 'rb' );
+		if ( $t_urandom_fp !== false ) {
+			$t_random_bytes = @fread( $t_urandom_fp, $p_bytes );
+			if ( $t_random_bytes !== false ) {
+				$t_random_string = $t_random_bytes;
+			}
+			@fclose( $t_urandom_fp );
 		}
-		@fclose( $t_urandom_fp );
 	}
 
 	# For Windows systems, we can try using Microsoft CryptoAPI to retrieve
