@@ -135,10 +135,10 @@
 	$tpl_show_priority = in_array( 'priority', $t_fields );
 	$tpl_show_steps_to_reproduce = in_array( 'steps_to_reproduce', $t_fields );
 	$tpl_show_handler = in_array( 'handler', $t_fields ) && access_has_project_level( config_get( 'update_bug_assign_threshold' ) );
-	$tpl_show_profiles = ON == config_get( 'enable_profiles' );
-	$tpl_show_platform = in_array( 'platform', $t_fields );
-	$tpl_show_os = in_array( 'os', $t_fields );
-	$tpl_show_os_version = in_array( 'os_version', $t_fields );
+	$tpl_show_profiles = config_get( 'enable_profiles' );
+	$tpl_show_platform = $tpl_show_profiles && in_array( 'platform', $t_fields );
+	$tpl_show_os = $tpl_show_profiles && in_array( 'os', $t_fields );
+	$tpl_show_os_version = $tpl_show_profiles && in_array( 'os_version', $t_fields );
 
 	$tpl_show_versions = version_should_show_product_version( $t_project_id );
 	$tpl_show_product_version = $tpl_show_versions && in_array( 'product_version', $t_fields );
