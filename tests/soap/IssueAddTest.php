@@ -355,4 +355,31 @@ class IssueAddTest extends SoapBase {
 			$this->password,
 			$issueId);
 	}
+	
+	/**
+	 * This issue tests the following
+	 * 
+	 * 1. Creating an issue where the handler is given by name
+	 * 2. Retrieving the issue
+	 * 3. Verifying that the handler name is correctly set
+	 */
+	public function testCreateIssueWithHandlerByName() {
+		
+		$issueToAdd = $this->getIssueToAdd( 'testCreateIssueWithHandlerByName' );
+		$issueToAdd['handler'] = array(
+			'name' => $this->userName
+		);
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		$this->assertEquals( $this->userName,  $issue->handler->name );
+	}
 }
