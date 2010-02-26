@@ -101,12 +101,10 @@ function mci_get_project_view_state_id( $p_view_state ) {
 function mci_get_user_id( $p_user ) {
 	$t_user_id = 0;
 
-	if( (int) $p_user['id'] != 0 ) {
+	if ( isset( $p_user['id'] ) && (int) $p_user['id'] != 0 ) {
 		$t_user_id = (int) $p_user['id'];
-	} else {
-		if( isset( $p_user['name'] ) ) {
-			$t_user_id = user_get_id_by_name( $p_user['name'] );
-		}
+	} elseif ( isset( $p_user['name'] ) ) {
+		$t_user_id = user_get_id_by_name( $p_user['name'] );
 	}
 
 	return $t_user_id;
