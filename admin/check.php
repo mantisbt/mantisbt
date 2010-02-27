@@ -266,7 +266,15 @@ if( !db_is_connected() ) {
 	print_info_row( 'Database is not connected - Can not continue checks' );
 }
 
-print_test_warn_row( 'Checking adodb version...', version_compare( $g_db->Version(), '5.1', '>=' ), $g_db->Version() );
+if( isset( $ADODB_vers ) ) {
+	# ADOConnection::Version() is broken as it treats v5.1 the same as v5.10
+	# Therefore we must extract the correct version ourselves
+	# Upstream bug report: http://phplens.com/lens/lensforum/msgs.php?id=18320
+	if( preg_match( '/^[Vv]([0-9\.]+)/', $ADODB_vers, $t_matches ) == 1 ) {
+		$t_adodb_version_check_ok = version_compare( $t_matches[1], '5.10', '>=' );
+	}
+}
+print_test_warn_row( 'Checking adodb version...', $t_adodb_version_check_ok, $ADODB_vers );
 
 print_test_row('Checking using bundled adodb with some drivers...', !(db_is_pgsql() || db_is_mssql() || db_is_db2()) || strstr($ADODB_vers, 'MantisBT Version') !== false );
 $t_serverinfo = $g_db->ServerInfo();
