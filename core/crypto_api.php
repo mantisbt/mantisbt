@@ -57,18 +57,16 @@ function crypto_init() {
  * randomness if less security is needed or a strong source of randomness isn't
  * available. The use of weak randomness for cryptographic purposes is strongly
  * discouraged because it contains low entropy and is predictable.
- *
- * Note that openssl_random_pseudo_bytes seems to perform very poorly on
- * Windows servers. Therefore we don't event attempt to use this PRNG source
- * if the server is running Windows.
- *
  * @param int $p_bytes Number of bytes of randomness required
  * @param bool $p_require_strong_generator Whether or not a weak source of randomness can be used by this function
  * @return string|null Raw binary string containing the requested number of bytes of random output or null if the output couldn't be created
  */
 function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = true ) {
 
-	# First we attempt to use the secure PRNG provided by OpenSSL in PHP 5.3
+	# First we attempt to use the secure PRNG provided by OpenSSL in PHP 5.3.
+	# Note that openssl_random_pseudo_bytes seems to perform very poorly on
+	# Windows servers. Therefore we don't even attempt to use this PRNG source
+	# if the server is running Windows.
 	if ( !is_windows_server() && function_exists( 'openssl_random_pseudo_bytes' ) ) {
 		$t_random_bytes = openssl_random_pseudo_bytes( $p_bytes, $t_strong );
 		if ( $t_random_bytes !== false ) {
@@ -95,9 +93,18 @@ function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = 
 		}
 	}
 
-	# For Windows systems, we can try using Microsoft CryptoAPI to retrieve
-	# more reliable PRNG output than what PHP can provide by itself.
-	# !TODO
+	# For Windows systems we can try using Microsoft CryptoAPI as a secure source of
+	# randomness.
+	if ( is_windows_server() ) {
+		if ( class_exists( 'COM' ) ) {
+			try {
+				$CAPICOM_utility = new COM( 'CAPICOM.Utilities.1' );
+				# Second argument to GetRandom is CAPICOM_ENCODE_BINARY (=1)
+				# as per http://msdn.microsoft.com/en-us/library/aa388182%28VS.85%29.aspx
+				$t_random_string = $CAPICOM_Utility->GetRandom( $p_bytes, 1 );
+			} catch (Exception $e) {}
+		}
+	}
 
 	# At this point we've run out of possibilities for generating randomness
 	# from a strong source. Unless weak output is specifically allowed by the
