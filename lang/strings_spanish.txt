@@ -36,6 +36,7 @@
  * @author Locos epraix
  * @author Luis Miguel Cruz Miranda - luismi@b2bi.es
  * @author Pablo Corral - PabloCorral@ciudad.com.ar
+ * @author Peter17
  * @author Sanbec
  * @author Translationista
  */
@@ -63,7 +64,7 @@ $s_actiongroup_error_issue_is_readonly = 'Incidencia es sólo-lectura.';
 $s_all_projects = 'Todos los Proyectos';
 $s_move_bugs = 'Mover Incidencias';
 $s_operation_successful = 'Operación exitosa.';
-$s_date_order = 'Ordenar por Fecha';
+$s_date_order = 'Marca de tiempo';
 $s_print_all_bug_page_link = 'Imprimir Informes';
 $s_csv_export = 'Exportar a CSV';
 $s_excel_export = 'Exportar a Excel';
@@ -565,6 +566,7 @@ $s_add_bugnote_button = 'Agregar Nota';
 $s_bugnote_edit_link = 'Editar';
 $s_closed_bug_button = 'Cerrar Incidencia';
 $s_bugnote_updated_msg = 'La nota ha sido actualizada...';
+$s_last_edited = 'Ultimo editado:';
 $s_hide_content = 'Ocultar Contenido';
 $s_show_content = 'Mostrar Contenido';
 $s_total_queries_executed = '%1$d consultas ejecutadas en total.';
@@ -688,6 +690,11 @@ $s_allow_close_immediate = 'Permitir que la incidencia sea cerrada al resolverla
 $s_allow_reporter_close = 'Permitir al Informador Cerrar la Incidencia';
 $s_allow_reporter_reopen = 'Permitir al Informador Reabrir la Incidencia';
 $s_set_status_assigned = 'Definir Estado al realizar la asignación';
+$s_edit_others_bugnotes = 'Editar notas de otros';
+$s_edit_own_bugnotes = 'Editar notas propias';
+$s_delete_others_bugnotes = 'Eliminar notas de otros';
+$s_delete_own_bugnotes = 'Eliminar notas propias';
+$s_change_view_state_own_bugnotes = 'Cambiar visibilidad de las notas propias';
 $s_limit_access = 'Limitar el acceso de los informadores el acceso únicamente a sus propias Incidencias';
 $s_submit_status = 'Estado en el que se establece una nueva incidencia';
 $s_assigned_status = 'Estado en el que se establece una Incidencia auto-asignada';
@@ -1063,6 +1070,7 @@ $s_monitored_by_label = 'Monitorizado por:';
 $s_attachments = 'adjunto(s)';
 $s_attachment_alt = 'A';
 $s_bytes = 'bytes';
+$s_attachment_missing = 'Adjunto no existente';
 $s_phpmailer_language = 'es';
 $s_sponsors = '%1$d patrocinador(es)';
 $s_sponsorship_added = 'Patrocinador añadido';
@@ -1116,12 +1124,12 @@ $s_reopen_issue = 'Reabrir Incidencia';
 $s_view_private_issues = 'Ver Incidencias privadas';
 $s_update_readonly_issues = 'Actualizar incidencias sólo lectura';
 $s_update_issue_status = 'Actualizar estado de incidencia';
-$s_set_view_status = 'Definir visibilidad (pública/privada)';
-$s_update_view_status = 'Actualizar visibilidad (pública/privada)';
+$s_set_view_status = 'Definir visibilidad al añadir una nueva incidencia o nota';
+$s_update_view_status = 'Actualizar visibilidad de una incidencia o nota existente';
 $s_show_list_of_users_monitoring_issue = 'Ver lista de usuarios que monitorizan la incidencia';
 $s_notes = 'NOTAS';
 $s_add_notes = 'Añadir notas';
-$s_view_private_notes = 'Ver notas privadas';
+$s_view_private_notes = 'Ver notas privadas de los demás';
 $s_news = 'NOTICIAS';
 $s_view_private_news = 'Ver noticias privadas';
 $s_manage_news = 'Administrar noticias';
@@ -1212,6 +1220,9 @@ $s_time_tracking_cost_per_hour = 'Costo/Hora';
 $s_time_tracking_cost = 'Costo';
 $s_time_tracking_cost_label = 'Costo:';
 $s_total_time_for_issue = 'Tiempo total para la incidencia = %1$s';
+$s_time_tracking_stopwatch_start = 'Inicio';
+$s_time_tracking_stopwatch_stop = 'Detener';
+$s_time_tracking_stopwatch_reset = 'Reestablecer';
 $s_access_denied = 'Acceso Denegado.';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (resuelto por %4$s en %5$s)';
 $s_twitter_resolved_no_version = '%1$s: [%2$s] %3$s (resuelto por %4$s)';

@@ -26,26 +26,27 @@
  * @ingroup Language
  * @file
  *
+ * @author Dudi
  * @author Meno25
  */
 
 $s_directionality = 'rtl';
-$s_actiongroup_menu_move = 'نقل';
-$s_actiongroup_menu_copy = 'نسخ';
-$s_actiongroup_menu_assign = 'توكيل';
-$s_actiongroup_menu_close = 'إغلاق';
-$s_actiongroup_menu_delete = 'حذف';
+$s_actiongroup_menu_move = 'انقل';
+$s_actiongroup_menu_copy = 'انسخ';
+$s_actiongroup_menu_assign = 'تعيين';
+$s_actiongroup_menu_close = 'اقفل';
+$s_actiongroup_menu_delete = 'امسح';
 $s_actiongroup_menu_resolve = 'حل';
-$s_actiongroup_menu_update_priority = 'تحديث الأولوية';
-$s_actiongroup_menu_update_status = 'تحديث الحالة';
-$s_actiongroup_menu_update_severity = 'حدث الشدة';
-$s_actiongroup_menu_update_view_status = 'تحديث حاله العرض';
-$s_actiongroup_menu_update_category = 'تحديث التصنيف';
-$s_actiongroup_menu_set_sticky = 'ضبط/عدم ضبط لصق';
+$s_actiongroup_menu_update_priority = 'حدّث الاولويّه';
+$s_actiongroup_menu_update_status = 'حدّث الحاله';
+$s_actiongroup_menu_update_severity = 'حدّث التشديد';
+$s_actiongroup_menu_update_view_status = 'حدّت حالة العرض';
+$s_actiongroup_menu_update_category = 'حدّث التصنيف';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'تحديث %1$s';
-$s_actiongroup_menu_update_target_version = 'تحديث النسخه الهدف';
-$s_actiongroup_menu_update_fixed_in_version = 'تحديث أصلحت فى النسخة';
-$s_actiongroup_menu_update_product_build = 'تحديث نسخه المنتج';
+$s_actiongroup_menu_update_target_version = 'حدّث النسخه الهدف';
+$s_actiongroup_menu_update_fixed_in_version = 'حدّث النسخه المتصلحه فى';
+$s_actiongroup_menu_update_product_build = 'حدّث منتَج البُنا';
 $s_actiongroup_menu_add_note = 'إضافه ملاحظة';
 $s_actiongroup_menu_attach_tags = 'لصق وسوم';
 $s_actiongroup_bugs = 'قضايا مختارة';
@@ -1021,7 +1022,7 @@ $s_field_delete_button = 'حذف الحقل';
 $s_confirm_custom_field_unlinking = 'هل أنت متأكد من أنك تريد إزاله (وصلات) الحقل المخصص هذا من المشروع وحذف كل القيم المرتبطة؟';
 $s_field_remove_button = 'إزاله الحقل';
 $s_hide_status = 'إخفاء الحالة';
-$s_hide_status_label = 'أخف الحالة:';
+$s_hide_status_label = 'خبّى الحاله:';
 $s_filter_closed = 'مغلق';
 $s_filter_resolved = 'محلول';
 $s_hide_closed = 'إخفاء المغلق';
@@ -1030,7 +1031,7 @@ $s_and_above = 'و الأعلى';
 $s_advanced_filters = 'فلاتر متقدمة';
 $s_simple_filters = 'فلاتر بسيطة';
 $s_monitored_by = 'مراقبه بواسطة';
-$s_monitored_by_label = 'يراقبها:';
+$s_monitored_by_label = 'متراقبه من:';
 $s_attachments = 'الملحق(ات)';
 $s_attachment_alt = 'A';
 $s_bytes = 'بايت';
@@ -1087,12 +1088,12 @@ $s_reopen_issue = 'إعاده فتح قضية';
 $s_view_private_issues = 'عرض القضايا الخاصة';
 $s_update_readonly_issues = 'تحديث قضايا القراءه فقط';
 $s_update_issue_status = 'تحديث حاله القضية';
-$s_set_view_status = 'اضبط حالة الرؤية عند الإبلاغ عن قضية أو ملاحظة جديدة';
-$s_update_view_status = 'غير حالة الرؤية للقضايا أو الملاحظات الموجودة';
+$s_set_view_status = 'اظبط الحاله اللى ح تشوف بيها لما تبلّغ عن مشكله جديده او ملاحظه';
+$s_update_view_status = 'غيّر الحاله اللى ح تشوف بيها المشكله او الملاحظه الموجوده';
 $s_show_list_of_users_monitoring_issue = 'عرض قائمه بالمستخدمين الذين يراقبون القضية';
 $s_notes = 'ملاحظات';
 $s_add_notes = 'إضافه ملاحظات';
-$s_view_private_notes = 'رؤية ملاحظات الآخرين الخاصة';
+$s_view_private_notes = 'شوف الملاحظات الخاصه بتاعة التانيين';
 $s_news = 'أخبار';
 $s_view_private_news = 'عرض الأخبار الخاصة';
 $s_manage_news = 'التحكم بالأخبار';
@@ -1181,7 +1182,7 @@ $s_time_tracking = 'تتبع الزمن';
 $s_time_tracking_get_info_button = 'الحصول على معلومات تتبع الوقت';
 $s_time_tracking_cost_per_hour = 'التكلفه / ساعة';
 $s_time_tracking_cost = 'تكلفة';
-$s_time_tracking_cost_label = 'تكلفة:';
+$s_time_tracking_cost_label = 'تمَن:';
 $s_total_time_for_issue = 'الوقت الإجمالى للقضيه = %1$s';
 $s_access_denied = 'السماح تم رفضه.';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (تم حلها بواسطه %4$s فى %5$s)';
