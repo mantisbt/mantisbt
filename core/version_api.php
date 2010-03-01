@@ -510,7 +510,7 @@ function version_get_id( $p_version, $p_project_id = null, $p_inherit = null ) {
 	}
 
 	foreach( $g_cache_versions as $t_version ) {
-		if(( $t_version['version'] == $p_version ) && ( $t_version['project_id'] == $c_project_id ) ) {
+		if(( $t_version['version'] === $p_version ) && ( $t_version['project_id'] == $c_project_id ) ) {
 			return $t_version['id'];
 		}
 	}
