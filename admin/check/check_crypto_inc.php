@@ -47,8 +47,10 @@ check_print_test_row(
 	array( false => 'Login method CRYPT_FULL_SALT has been deprecated and should not be used.' )
 );
 
-check_print_test_warn_row(
-	'login_method is set to MD5',
-	config_get_global( 'login_method' ) == MD5,
-	'MD5 password encryption is currently the strongest password storage method supported by MantisBT.'
-);
+if( config_get_global( 'login_method' ) != LDAP ) {
+	check_print_test_warn_row(
+		'login_method is set to MD5',
+		config_get_global( 'login_method' ) == MD5,
+		'MD5 password encryption is currently the strongest password storage method supported by MantisBT.'
+	);
+}
