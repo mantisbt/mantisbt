@@ -40,7 +40,7 @@ function print_info_row( $p_description, $p_value ) {
 <br />
 
 <div align="center">
-		<p>[ <a href="check.php">Check your installation</a> ]</p>
+		<p>[ <a href="check/index.php">Check your installation</a> ]</p>
 	<?php if ( count($upgrade) - 1 != config_get( 'database_version' ) ) { ?>
 		<p>[ <a href="upgrade_warning.php"><b>Upgrade your installation</b></a> ]</p>
 	<?php } ?>
