@@ -280,7 +280,7 @@ function cfdef_input_radio( $p_field_def, $p_custom_field_value ) {
 	}
 
 	foreach ( $t_values as $t_option ) {
-		echo '<input ', helper_get_tab_index(), ' type="radio" name="custom_field_' . $p_field_def['id'] . '[]"';
+		echo '<input ', helper_get_tab_index(), ' type="radio" name="custom_field_' . $p_field_def['id'] . '"';
 
 		if ( $t_option == $t_checked_value ) {
 			echo ' value="' . $t_option . '" checked="checked">&nbsp;' . $t_option . '&nbsp;&nbsp;';
