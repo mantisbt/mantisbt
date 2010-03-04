@@ -800,7 +800,6 @@ function db_minutes_to_hhmm( $p_min = 0 ) {
  * A helper function that generates a case-sensitive or case-insensitive like phrase based on the current db type.
  * The field name and value are assumed to be safe to insert in a query (i.e. already cleaned).
  * @param string $p_field_name The name of the field to filter on.
- * @param int $p_param_id An integer pointing to use for a query_bound value that will represent the value that includes the pattern (can include % for wild cards) - not including the quotations.
  * @param bool $p_case_sensitive true: case sensitive, false: case insensitive
  * @return string returns (field LIKE 'value') OR (field ILIKE 'value')
  */
