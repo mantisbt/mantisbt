@@ -57,18 +57,18 @@ html_page_top();
 // check core language files
 if( function_exists( 'opendir' ) && function_exists( 'readdir' ) ) {
 	$t_lang_files = Array();
-	if( $handle = opendir( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' ) ) {
-		while( false !== ( $file = readdir( $handle ) ) ) {
-			if ($file == 'strings_english.txt' ) {
+	if( $t_handle = opendir( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' ) ) {
+		while( false !== ( $t_file = readdir( $t_handle ) ) ) {
+			if ($t_file == 'strings_english.txt' ) {
 				echo "Testing english language file '$t_file' (phase 1)...<br />";
 				flush();
-				checkfile( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR, $file );			
+				checkfile( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR, $t_file );
 			}
-			if( $file[0] != '.' && $file != 'langreadme.txt' && !is_dir( $file ) ) {
-				$t_lang_files[] = $file;
+			if( $t_file[0] != '.' && $t_file != 'langreadme.txt' && !is_dir( $t_file ) ) {
+				$t_lang_files[] = $t_file;
 			}
 		}
-		closedir( $handle );
+		closedir( $t_handle );
 	}
 }
 else {
