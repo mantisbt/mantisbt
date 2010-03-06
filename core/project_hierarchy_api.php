@@ -271,17 +271,18 @@ function project_hierarchy_get_subprojects( $p_project_id, $p_show_disabled = fa
 /**
  * Get complete subproject hierarchy for a project
  * @param int $p_project_id Project ID
+ * @param bool $p_show_disabled Whether or not to consider projects which are disabled
  * @return array
  */
-function project_hierarchy_get_all_subprojects( $p_project_id ) {
-	$t_todo = project_hierarchy_get_subprojects( $p_project_id );
+function project_hierarchy_get_all_subprojects( $p_project_id, $p_show_disabled = false ) {
+	$t_todo = project_hierarchy_get_subprojects( $p_project_id, $p_show_disabled );
 	$t_subprojects = Array();
 
 	while( $t_todo ) {
 		$t_elem = array_shift( $t_todo );
 		if( !in_array( $t_elem, $t_subprojects ) ) {
 			array_push( $t_subprojects, $t_elem );
-			$t_todo = array_merge( $t_todo, project_hierarchy_get_subprojects( $t_elem ) );
+			$t_todo = array_merge( $t_todo, project_hierarchy_get_subprojects( $t_elem, $p_show_disabled ) );
 		}
 	}
 

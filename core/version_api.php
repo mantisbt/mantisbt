@@ -249,19 +249,25 @@ function version_update( $p_version_info ) {
 	db_query_bound( $query, Array( $c_version_name, $c_description, $c_released, $c_date_order, $c_obsolete, $c_version_id ) );
 
 	if( $c_version_name != $c_old_version_name ) {
+		$t_project_list = array( $c_project_id );
+		if ( config_get( 'subprojects_inherit_versions' ) ) {
+			$t_project_list = array_merge( $t_project_list, project_hierarchy_get_all_subprojects( $c_project_id, true ) );
+		}
+		$t_project_list = implode( ',', $t_project_list );
+
 		$query = 'UPDATE ' . $t_bug_table . ' SET version=' . db_param() .
-				 ' WHERE ( project_id=' . db_param() . ') AND ( version=' . db_param() . ')';
-		db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
+				 " WHERE ( project_id IN ( $t_project_list ) ) AND ( version=" . db_param() . ')';
+		db_query_bound( $query, Array( $c_version_name, $c_old_version_name ) );
 
 		$query = "UPDATE $t_bug_table
-					  SET fixed_in_version=" . db_param() . '
-					  WHERE ( project_id=' . db_param() . ') AND ( fixed_in_version=' . db_param() . ')';
-		db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
+					  SET fixed_in_version=" . db_param() . "
+					  WHERE ( project_id IN ( $t_project_list ) ) AND ( fixed_in_version=" . db_param() . ')';
+		db_query_bound( $query, Array( $c_version_name, $c_old_version_name ) );
 
 		$query = "UPDATE $t_bug_table
-					  SET target_version=" . db_param() . '
-					  WHERE ( project_id=' . db_param() . ') AND ( target_version=' . db_param() . ')';
-		db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
+					  SET target_version=" . db_param() . "
+					  WHERE ( project_id IN ( $t_project_list ) ) AND ( target_version=" . db_param() . ')';
+		db_query_bound( $query, Array( $c_version_name, $c_old_version_name ) );
 
 		/**
 		 * @todo We should consider using ids instead of names for foreign keys.  The main advantage of using the names are:
@@ -298,20 +304,26 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 				  WHERE id=" . db_param();
 	db_query_bound( $query, Array( $c_version_id ) );
 
+	$t_project_list = array( $c_project_id );
+	if ( config_get( 'subprojects_inherit_versions' ) ) {
+		$t_project_list = array_merge( $t_project_list, project_hierarchy_get_all_subprojects( $c_project_id, true ) );
+	}
+	$t_project_list = implode( ',', $t_project_list );
+
 	$query = "UPDATE $t_bug_table
 				  SET version=" . db_param() . "
-				  WHERE project_id=" . db_param() . " AND version=" . db_param();
-	db_query_bound( $query, Array( $p_new_version, $c_project_id, $t_old_version ) );
+				  WHERE project_id IN ( $t_project_list ) AND version=" . db_param();
+	db_query_bound( $query, Array( $p_new_version, $t_old_version ) );
 
 	$query = "UPDATE $t_bug_table
-				  SET fixed_in_version=" . db_param() . '
-				  WHERE ( project_id=' . db_param() . ' ) AND ( fixed_in_version=' . db_param() . ')';
-	db_query_bound( $query, Array( $p_new_version, $c_project_id, $t_old_version ) );
+				  SET fixed_in_version=" . db_param() . "
+				  WHERE ( project_id IN ( $t_project_list ) ) AND ( fixed_in_version=" . db_param() . ')';
+	db_query_bound( $query, Array( $p_new_version, $t_old_version ) );
 
 	$query = "UPDATE $t_bug_table
-				  SET target_version=" . db_param() . '
-				  WHERE ( project_id=' . db_param() . ' ) AND ( target_version=' . db_param() . ')';
-	db_query_bound( $query, array( $p_new_version, $c_project_id, $t_old_version ) );
+				  SET target_version=" . db_param() . "
+				  WHERE ( project_id IN ( $t_project_list ) ) AND ( target_version=" . db_param() . ')';
+	db_query_bound( $query, array( $p_new_version, $t_old_version ) );
 
 	# db_query errors on failure so:
 	return true;
