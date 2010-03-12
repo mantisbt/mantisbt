@@ -86,6 +86,8 @@
 						break;
 				}
 				$t_redirect_url = $t_path;
+			} else if ( $t_referrer_page == 'plugin.php' ) {
+				$t_redirect_url = $t_referrer_page . $t_param; # redirect to same plugin page
 			} else {
 				$t_redirect_url = $t_home_page;
 			}
