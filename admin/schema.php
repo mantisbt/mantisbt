@@ -607,3 +607,4 @@ $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_project_hierarchy_parent_id', 
 $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_tag_name', db_get_table( 'mantis_tag_table' ), 'name' ) );
 $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_bug_tag_tag_id', db_get_table( 'mantis_bug_tag_table' ), 'tag_id' ) );
 $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_email_id', db_get_table( 'mantis_email_table' ), 'email_id', array( 'DROP' ) ), Array( 'db_index_exists', Array( db_get_table( 'mantis_email_table' ), 'idx_email_id') ) );
+$upgrade[] = Array( 'UpdateFunction', 'correct_multiselect_custom_fields_db_format' );

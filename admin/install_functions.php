@@ -165,3 +165,75 @@ function install_date_migrate( $p_data) {
 	return 2;	
 
 }
+
+/**
+ * Once upon a time multi-select custom field types (checkbox and multiselect)
+ * were stored in the database in the format of "option1|option2|option3" where
+ * they should have been stored in a format of "|option1|option2|option3|".
+ * Additionally, radio custom field types were being stored in the database
+ * with an unnecessary vertical pipe prefix and suffix when there is only ever
+ * one possible value that can be assigned to a radio field.
+ */
+function install_correct_multiselect_custom_fields_db_format() {
+	global $g_db_log_queries;
+
+	# Disable query logging due to possibility of mass spam.
+	if ( $g_db_log_queries !== 0 ) {
+		$t_log_queries = $g_db_log_queries;
+		$g_db_log_queries = 0;
+	} else {
+		$t_log_queries = null;
+	}
+
+	$t_value_table = db_get_table( 'mantis_custom_field_string_table' );
+	$t_field_table = db_get_table( 'mantis_custom_field_table' );
+
+	# Ensure multilist and checkbox custom field values have a vertical pipe |
+	# as a prefix and suffix.
+	$t_query = "SELECT v.field_id, v.bug_id, v.value from $t_value_table v
+		LEFT JOIN $t_field_table c
+		ON v.field_id = c.id
+		WHERE (c.type = " . CUSTOM_FIELD_TYPE_MULTILIST . " OR c.type = " . CUSTOM_FIELD_TYPE_CHECKBOX . ")
+			AND v.value != ''
+			AND v.value NOT LIKE '|%|'";
+	$t_result = db_query_bound( $t_query );
+
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$c_field_id = (int)$t_row['field_id'];
+		$c_bug_id = (int)$t_row['bug_id'];
+		$c_value = '|' . rtrim( ltrim( $t_row['value'], '|' ), '|' ) . '|';
+		$t_update_query = "UPDATE $t_value_table
+			SET value = '$c_value'
+			WHERE field_id = $c_field_id
+				AND bug_id = $c_bug_id";
+		$t_update_result = db_query_bound( $t_update_query );
+	}
+
+	# Remove vertical pipe | prefix and suffix from radio custom field values.
+	$t_query = "SELECT v.field_id, v.bug_id, v.value from $t_value_table v
+		LEFT JOIN $t_field_table c
+		ON v.field_id = c.id
+		WHERE c.type = " . CUSTOM_FIELD_TYPE_RADIO . "
+			AND v.value != ''
+			AND v.value LIKE '|%|'";
+	$t_result = db_query_bound( $t_query );
+
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$c_field_id = (int)$t_row['field_id'];
+		$c_bug_id = (int)$t_row['bug_id'];
+		$c_value = rtrim( ltrim( $t_row['value'], '|' ), '|' );
+		$t_update_query = "UPDATE $t_value_table
+			SET value = '$c_value'
+			WHERE field_id = $c_field_id
+				AND bug_id = $c_bug_id";
+		$t_update_result = db_query_bound( $t_update_query );
+	}
+
+	# Re-enable query logging if we disabled it.
+	if ( $t_log_queries !== null ) {
+		$g_db_log_queries = $t_log_queries;
+	}
+
+	# Return 2 because that's what ADOdb/DataDict does when things happen properly
+	return 2;
+}
