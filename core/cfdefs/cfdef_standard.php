@@ -108,8 +108,8 @@ $g_custom_field_type_definition[ CUSTOM_FIELD_TYPE_RADIO ] = array (
 	'#display_length_max' => FALSE,
 	'#display_default_value' => TRUE,
 	'#function_return_distinct_values' => 'cfdef_prepare_list_distinct_values',
-	'#function_value_to_database' => 'cfdef_prepare_list_value_to_database',
-	'#function_database_to_value' => 'cfdef_prepare_list_database_to_value',
+	'#function_value_to_database' => null,
+	'#function_database_to_value' => null,
 	'#function_print_input' => 'cfdef_input_radio',
 	'#function_string_value' => 'cfdef_prepare_list_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
@@ -159,7 +159,7 @@ $g_custom_field_type_definition[ CUSTOM_FIELD_TYPE_DATE ] = array (
 );
 
 function cfdef_prepare_list_database_to_value($p_value) {
-	return str_replace( '||', '', '|' . $p_value . '|' );
+	return rtrim( ltrim( $p_value, '|' ), '|' );
 }
 
 function cfdef_prepare_list_value_for_email($p_value) {

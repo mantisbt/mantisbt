@@ -137,19 +137,29 @@
 			continue;
 		}
 
-		if ( $t_def['require_' . $t_custom_status_label] && !gpc_isset_custom_field( $t_id, $t_def['type'] ) ) {
+		# Produce an error if the field is required but wasn't posted
+		if ( !gpc_isset_custom_field( $t_id, $t_def['type'] ) &&
+			( $t_def['require_' . $t_custom_status_label] ||
+				$t_def['type'] == CUSTOM_FIELD_TYPE_ENUM ||
+				$t_def['type'] == CUSTOM_FIELD_TYPE_LIST ||
+				$t_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ||
+				$t_def['type'] == CUSTOM_FIELD_TYPE_RADIO ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
-		# Only update the field if it is posted, 
-		#	or if it is empty, and the current value isn't the default 
-		if ( !gpc_isset_custom_field( $t_id, $t_def['type'] ) && 
-				( custom_field_get_value( $t_id, $f_bug_id ) == $t_def['default_value'] ) ) {
+		$t_new_custom_field_value = gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], '' );
+		$t_old_custom_field_value = custom_field_get_value( $t_id, $f_bug_id );
+
+		# Don't update the custom field if the new value both matches the old value and is valid
+		# This ensures that changes to custom field validation will force the update of old invalid custom field values
+		if( $t_new_custom_field_value === $t_old_custom_field_value &&
+			custom_field_validate( $t_id, $t_new_custom_field_value ) ) {
 			continue;
 		}
 
-		if ( !custom_field_set_value( $t_id, $f_bug_id, gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], NULL ) ) ) {
+		# Attempt to set the new custom field value
+		if ( !custom_field_set_value( $t_id, $f_bug_id, $t_new_custom_field_value ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}

@@ -198,6 +198,11 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 				continue;
 			}
 
+			# return a blank string if the custom field value is undefined
+			if( $t_value === null ) {
+				$t_value = '';
+			}
+
 			$t_custom_field_value = array();
 			$t_custom_field_value['field'] = array();
 			$t_custom_field_value['field']['id'] = $t_id;

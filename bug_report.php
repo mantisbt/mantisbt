@@ -102,7 +102,14 @@
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
-		if ( $t_def['require_report'] && !gpc_isset_custom_field( $t_id, $t_def['type'] ) ) {
+
+		# Produce an error if the field is required but wasn't posted
+		if ( !gpc_isset_custom_field( $t_id, $t_def['type'] ) &&
+			( $t_def['require_report'] ||
+				$t_def['type'] == CUSTOM_FIELD_TYPE_ENUM ||
+				$t_def['type'] == CUSTOM_FIELD_TYPE_LIST ||
+				$t_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ||
+				$t_def['type'] == CUSTOM_FIELD_TYPE_RADIO ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
@@ -134,7 +141,7 @@
 		}
 
 		$t_def = custom_field_get_definition( $t_id );
-		if( !custom_field_set_value( $t_id, $t_bug_id, gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], $t_def['default_value'] ), false ) ) {
+		if( !custom_field_set_value( $t_id, $t_bug_id, gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], '' ), false ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}

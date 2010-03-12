@@ -975,7 +975,7 @@ function custom_field_get_field( $p_field_id, $p_field_name ) {
  * and provide an api to check whether it will be?
  * @param int $p_field_id custom field id
  * @param int $p_bug_id bug id
- * @return mixed
+ * @return mixed: value is defined, null: no value is defined, false: read access is denied
  * @access public
  */
 function custom_field_get_value( $p_field_id, $p_bug_id ) {
@@ -1001,7 +1001,7 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 	if( db_num_rows( $result ) > 0 ) {
 		return custom_field_database_to_value( db_result( $result ), $row['type'] );
 	} else {
-		return custom_field_default_to_value( $t_default_value, $row['type'] );
+		return null;
 	}
 }
 
@@ -1148,11 +1148,11 @@ function custom_field_validate( $p_field_id, $p_value ) {
 	$t_length = utf8_strlen( $p_value );
 	switch ($t_type) {
 		case CUSTOM_FIELD_TYPE_STRING:
-			// validate against regexp
+			# Regular expression string validation
 			if( !is_blank( $t_valid_regexp ) && !is_blank( $p_value ) ) {
 				$t_valid &= preg_match( "/$t_valid_regexp/", $p_value );
 			}
-			// check string length
+			# Check the length of the string
 			$t_valid &= ( 0 == $t_length_min ) || ( $t_length >= $t_length_min );
 			$t_valid &= ( 0 == $t_length_max ) || ( $t_length <= $t_length_max );
 			break;
@@ -1160,16 +1160,21 @@ function custom_field_validate( $p_field_id, $p_value ) {
 			$t_valid &= ( $t_length == 0 ) || is_numeric( $p_value );
 			break;
 		case CUSTOM_FIELD_TYPE_FLOAT:
-			// handle both number and number with decimal
+			# Allow both integer and float numbers
 			$t_valid &= ( $t_length == 0 ) || is_numeric( $p_value ) || is_float( $p_value );
 			break;
 		case CUSTOM_FIELD_TYPE_DATE:
-			// gpc_get_cf for date returns the value from strftime
-			// either false (php >= 5.1)  or -1 (php < 5.1) for failure
+			# gpc_get_cf for date returns the value from strftime
+			# Either false (php >= 5.1) or -1 (php < 5.1) for failure
 			$t_valid &= ( $p_value == null ) || ( ( $p_value !== false ) && ( $p_value > 0 ) );
 			break;
-		case CUSTOM_FIELD_TYPE_MULTILIST:
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
+			# Checkbox fields can hold a null value (when no checkboxes are ticked)
+			if( $p_value === '' ) {
+				break;
+			}
+			# If checkbox field value is not null then we need to validate it... (note: no "break" statement here!)
+		case CUSTOM_FIELD_TYPE_MULTILIST:
 			$t_values = explode( '|', $p_value );
 			$t_possible_values = custom_field_prepare_possible_values( $row['possible_values'] );
 			$t_possible_values = explode( '|', $t_possible_values );
@@ -1187,6 +1192,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
 			if ( $p_value !== '' ) {
 				$t_valid &= email_is_valid( $p_value );
 			}
+			break;
 		default:
 			break;
 	}
@@ -1321,14 +1327,14 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 
 	custom_field_ensure_exists( $p_field_id );
 
-	if (! custom_field_validate( $p_field_id, $p_value ) )
+	if ( !custom_field_validate( $p_field_id, $p_value ) )
 		return false;
 
 	$t_name = custom_field_get_field( $p_field_id, 'name' );
 	$t_type = custom_field_get_field( $p_field_id, 'type' );
 	$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 
-	# do I need to update or insert this value?
+	# Determine whether an existing value needs to be updated or a new value inserted
 	$query = "SELECT value
 				  FROM $t_custom_field_string_table
 				  WHERE field_id=" . db_param() . " AND
@@ -1340,19 +1346,17 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 					  SET value=" . db_param() . "
 					  WHERE field_id=" . db_param() . " AND
 					  		bug_id=" . db_param();
-		db_query_bound( $query, Array( $p_value, $c_field_id, $c_bug_id ) );
+		db_query_bound( $query, Array( custom_field_value_to_database( $p_value, $t_type ), $c_field_id, $c_bug_id ) );
 
 		$row = db_fetch_array( $result );
 		history_log_event_direct( $c_bug_id, $t_name, custom_field_database_to_value( $row['value'], $t_type ), $p_value );
 	} else {
-		# Always store the value, even if it's the dafault value
-		# This is important, as the definitions might change but the
-		#  values stored with a bug must not change
 		$query = "INSERT INTO $t_custom_field_string_table
 						( field_id, bug_id, value )
 					  VALUES
 						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
-		db_query_bound( $query, Array( $c_field_id, $c_bug_id, $p_value ) );
+		db_query_bound( $query, Array( $c_field_id, $c_bug_id, custom_field_value_to_database( $p_value, $t_type ) ) );
+		# Don't log history events for new bug reports or on other special occasions
 		if ( $p_log_insert ) {
 			history_log_event_direct( $c_bug_id, $t_name, '', $p_value );
 		}
@@ -1406,6 +1410,14 @@ function print_custom_field_input( $p_field_def, $p_bug_id = null ) {
 		$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
 	} else {
 		$t_custom_field_value = custom_field_get_value( $p_field_def['id'], $p_bug_id );
+		# If the custom field value is undefined and the field cannot hold a null value, use the default value instead
+		if( $t_custom_field_value === null &&
+			( $p_field_def['type'] == CUSTOM_FIELD_TYPE_ENUM ||
+				$p_field_def['type'] == CUSTOM_FIELD_TYPE_LIST ||
+				$p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ||
+				$p_field_def['type'] == CUSTOM_FIELD_TYPE_RADIO ) ) {
+			$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
+		}
 	}
 
 	$t_custom_field_value = string_attribute( $t_custom_field_value );
@@ -1429,6 +1441,9 @@ function print_custom_field_input( $p_field_def, $p_bug_id = null ) {
  */
 function string_custom_field_value( $p_def, $p_field_id, $p_bug_id ) {
 	$t_custom_field_value = custom_field_get_value( $p_field_id, $p_bug_id );
+	if( $t_custom_field_value === null ) {
+		return '';
+	}
 	global $g_custom_field_type_definition;
 	if( isset( $g_custom_field_type_definition[$p_def['type']]['#function_string_value'] ) ) {
 		return call_user_func( $g_custom_field_type_definition[$p_def['type']]['#function_string_value'], $t_custom_field_value );
