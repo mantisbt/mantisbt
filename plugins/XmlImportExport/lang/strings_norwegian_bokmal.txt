@@ -29,4 +29,13 @@
  * @author Nghtwlkr
  */
 
+$s_plugin_XmlImportExport_description = 'Legger til XML-baserte importerings- og eksporteringsevner til MantisBT.';
+$s_plugin_XmlImportExport_export = 'XML-eksport';
+$s_plugin_XmlImportExport_import_options = 'Importer valg';
+$s_plugin_XmlImportExport_cross_references = 'Kryssreferanser';
+$s_plugin_XmlImportExport_default_strategy = 'Standard konverteringsstrategi:';
+$s_plugin_XmlImportExport_link = 'Lenke';
+$s_plugin_XmlImportExport_link_desc = 'Konverter til en lenke til det opprinnelige elementet';
+$s_plugin_XmlImportExport_disable = 'Deaktiver';
+$s_plugin_XmlImportExport_disable_desc = 'Deaktiver lenken';
 $s_plugin_XmlImportExport_keep_same_category = 'Forsøk å beholde samme kategori';

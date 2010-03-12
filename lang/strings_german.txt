@@ -1215,6 +1215,7 @@ $s_tag_detach = 'Entferne „%1$s“';
 $s_tag_separate_by = '(Trenne durch „%1$s“)';
 $s_tag_invalid_name = 'Ungültiger Tag-Name.';
 $s_tag_create_denied = 'Anlegen nicht gestattet.';
+$s_tag_attach_denied = 'Anlagen Zugriff verweigert.';
 $s_tag_filter_default = 'Zugeordnete Einträge (%1$s)';
 $s_tag_history_attached = 'Tag zugeordnet';
 $s_tag_history_detached = 'Tag entfernt';

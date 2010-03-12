@@ -1209,6 +1209,7 @@ $s_tag_detach = 'Открепить \'%1$s\'';
 $s_tag_separate_by = '(Разделять \'%1$s\')';
 $s_tag_invalid_name = 'Недопустимое имя метки.';
 $s_tag_create_denied = 'В доступе на создание метки отказано.';
+$s_tag_attach_denied = 'Нет разрешения прикреплять объекты.';
 $s_tag_filter_default = 'Прикрепленные инциденты (%1$s)';
 $s_tag_history_attached = 'Метка прикреплена';
 $s_tag_history_detached = 'Метка откреплена';
