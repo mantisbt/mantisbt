@@ -41,7 +41,7 @@ function install_category_migrate() {
 		$t_log_queries = null;
 	}
 
-	$query = "SELECT project_id, category FROM $t_project_category_table ORDER BY project_id, category";
+	$query = "SELECT project_id, category, user_id FROM $t_project_category_table ORDER BY project_id, category";
 	$t_category_result = db_query_bound( $query );
 
 	$query = "SELECT project_id, category FROM $t_bug_table ORDER BY project_id, category";
@@ -53,7 +53,7 @@ function install_category_migrate() {
 	while( $row = db_fetch_array( $t_category_result ) ) {
 		$t_project_id = $row['project_id'];
 		$t_name = $row['category'];
-		$t_data[$t_project_id][$t_name] = true;
+		$t_data[$t_project_id][$t_name] = $row['user_id'];
 	}
 
 	# Find orphaned categories from bugs
@@ -61,17 +61,20 @@ function install_category_migrate() {
 		$t_project_id = $row['project_id'];
 		$t_name = $row['category'];
 
-		$t_data[$t_project_id][$t_name] = true;
+		if ( !isset( $t_data[$t_project_id][$t_name] ) ) {
+			$t_data[$t_project_id][$t_name] = 0;
+		}
 	}
 
 	# In every project, go through all the categories found, and create them and update the bug
 	foreach( $t_data as $t_project_id => $t_categories ) {
 		$t_inserted = array();
-		foreach( $t_categories as $t_name => $t_true ) {
+		foreach( $t_categories as $t_name => $t_user_id ) {
 			$t_lower_name = utf8_strtolower( trim( $t_name ) );
 			if ( !isset( $t_inserted[$t_lower_name] ) ) {
-				$query = "INSERT INTO $t_category_table ( name, project_id ) VALUES ( " . db_param() . ', ' . db_param() . ' )';
-				db_query_bound( $query, array( $t_name, $t_project_id ) );
+				$query = "INSERT INTO $t_category_table ( name, project_id, user_id ) VALUES ( " .
+					db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+				db_query_bound( $query, array( $t_name, $t_project_id, $t_user_id ) );
 				$t_category_id = db_insert_id( $t_category_table );
 				$t_inserted[$t_lower_name] = $t_category_id;
 			} else {
