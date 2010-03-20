@@ -984,6 +984,7 @@ $s_attached_files = 'Přiložené soubory';
 $s_publish = 'Publikovat';
 $s_cached = 'V mezipaměti';
 $s_add_user_to_monitor = 'Přidat';
+$s_bug_view_title = 'Detaily problému';
 $s_no_users_monitoring_bug = 'Žádný uživatel nesleduje tento problém.';
 $s_users_monitoring_bug = 'Uživatelé sledující tento problém';
 $s_monitoring_user_list = 'Uživatelé';
