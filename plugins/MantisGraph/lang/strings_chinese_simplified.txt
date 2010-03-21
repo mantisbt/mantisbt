@@ -28,11 +28,14 @@
  *
  */
 
+$s_plugin_graph_title = 'Mantis图表';
+$s_plugin_graph_description = '官方图表插件.';
+$s_plugin_MantisGraph_title = 'Mantis图表';
 $s_plugin_MantisGraph_graph_imp_status_title = '综合报表（按问题状态）';
 $s_plugin_MantisGraph_graph_imp_priority_title = '综合报表（按问题优先级别）';
 $s_plugin_MantisGraph_graph_imp_severity_title = '综合报表（按问题严重性）';
 $s_plugin_MantisGraph_graph_imp_category_title = '综合报表（按项目分类）';
-$s_plugin_MantisGraph_graph_imp_resolution_title = '综合报表（按解决状况）';
+$s_plugin_MantisGraph_graph_imp_resolution_title = '综合报表（按处理状况）';
 $s_plugin_MantisGraph_by_status_pct = '按问题状态百分比';
 $s_plugin_MantisGraph_by_priority_pct = '按问题优先级别百分比';
 $s_plugin_MantisGraph_by_severity_pct = '按问题严重性百分比';
