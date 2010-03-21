@@ -30,7 +30,7 @@
  * @author Umherirrender
  */
 
-$s_plugin_XmlImportExport_title = 'Import/Export';
+$s_plugin_XmlImportExport_title = 'Import/Export Einträge';
 $s_plugin_XmlImportExport_description = 'Ergänzt MantisBT um eine XML-basierende Import- und Export-Funktion.';
 $s_plugin_XmlImportExport_import = 'Einträge importieren';
 $s_plugin_XmlImportExport_export = 'XML-Export';

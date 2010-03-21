@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Norwegian (bokmål)‬ (‪Norsk (bokmål)‬)
+/** Finnish (Suomi)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -26,15 +26,15 @@
  * @ingroup Language
  * @file
  *
- * @author Nghtwlkr
+ * @author Centerlink
  */
 
-$s_plugin_format_title = 'MantisBT-formatering';
-$s_plugin_format_description = 'Offisiell tekstbehandling og formateringsplugin.';
-$s_plugin_format_config = 'Konfigurasjon';
-$s_plugin_format_process_text = 'Tekstbehandling';
-$s_plugin_format_process_text_warning_notice = 'Ikke slå av med mindre du virkelig vet hva du gjør. I avslått tilstand er det mulighet for angrep gjennom «cross site scripting» (XSS).';
-$s_plugin_format_process_urls = 'URL-behandling';
-$s_plugin_format_process_vcslinks = 'VCS-lenker';
-$s_plugin_format_enabled = 'På';
-$s_plugin_format_disabled = 'Av';
+$s_plugin_XmlImportExport_export = 'XML-vienti';
+$s_plugin_XmlImportExport_import_options = 'Tuontivalitsimet';
+$s_plugin_XmlImportExport_cross_references = 'Ristiviitteet';
+$s_plugin_XmlImportExport_default_strategy = 'Oletusmuunnosstrategia:';
+$s_plugin_XmlImportExport_renumber = 'Numeroi uudelleen';
+$s_plugin_XmlImportExport_renumber_desc = 'Yritä muuttaa viitteet uudeksi numeroinniksi';
+$s_plugin_XmlImportExport_link = 'Linkki';
+$s_plugin_XmlImportExport_disable = 'Pois käytöstä';
+$s_plugin_XmlImportExport_disable_desc = 'Poista linkki';

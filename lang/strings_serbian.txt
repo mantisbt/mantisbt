@@ -28,6 +28,7 @@
  *
  * @author Dragan Matic, dragan@panforma.co.yu
  * @author Nikola Smolenski
+ * @author Милан Јелисавчић
  */
 
 $s_actiongroup_menu_move = 'Premesti';
@@ -117,20 +118,6 @@ $s_resolve_group_bugs_button = 'Razlucivanje grešaka';
 $s_priority_group_bugs_button = 'Prioritet ažuriranja';
 $s_status_group_bugs_button = 'Status ažuriranja';
 $s_view_status_group_bugs_button = 'Izmena statusa pregleda';
-$s_by_status_pct = 'po procentu statusa';
-$s_by_priority_pct = 'po procentu prioriteta';
-$s_by_severity_pct = 'po procentu jacine';
-$s_by_category_pct = 'po procentu kategorije';
-$s_by_resolution_pct = 'po procentu rešenja';
-$s_by_severity_mix = 'po tezini i statusu';
-$s_by_priority_mix = 'po prioritetu i statusu';
-$s_by_resolution_mix = 'po rešenju i statusu';
-$s_synthesis_link = 'Sinteza';
-$s_status_link = 'Po stanju';
-$s_priority_link = 'Po prioritetu';
-$s_severity_link = 'po težini';
-$s_category_link = 'Po kategoriji';
-$s_resolution_link = 'Po rešenju';
 $s_hide_button = 'Prikaz samo izabranih';
 $s_printing_preferences_title = 'Izbor polja za štampu';
 $s_printing_options_link = 'Opcije štampe';
@@ -307,7 +294,7 @@ $s_prefs_updated_msg = 'Podesavanja su ažurirana...';
 $s_profile_added_msg = 'Profil je dodat...';
 $s_profile_deleted_msg = 'Profil je izbrisan...';
 $s_edit_profile_title = 'Izmene profila';
-$s_platform = 'Platforma';
+$s_platform = 'Платформа';
 $s_operating_system = 'Operativni Sistem';
 $s_additional_description = 'Dodatni opis';
 $s_update_profile_button = 'ažuriranje profila';
@@ -513,7 +500,7 @@ $s_users_link = 'Korisnici';
 $s_manage_link = 'Upravljanje';
 $s_edit_news_link = 'Izmena vesti';
 $s_docs_link = 'Dokumenti';
-$s_logout_link = 'Odjava';
+$s_logout_link = 'Одјава';
 $s_my_view_link = 'Moj pregled';
 $s_my_view_title_unassigned = 'Nedodeljeno';
 $s_my_view_title_recent_mod = 'Nedavno izmenjeno';
@@ -537,7 +524,7 @@ $s_edit_post = 'Izmena clanka';
 $s_delete_post = 'Brisanje clanka';
 $s_select_post = 'Izbor clanka';
 $s_news_updated_msg = 'Stavka vesti ažurirana...';
-$s_back_link = 'Nazad';
+$s_back_link = 'Назад';
 $s_file_uploaded_msg = 'Fajl uspešno poslat';
 $s_upload_file_title = 'Slanje fajla';
 $s_title = 'Naziv';

@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
+/** Simplified Chinese (‪中文(简体)‬)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -31,7 +31,8 @@
 $s_plugin_format_title = 'MantisBT格式化';
 $s_plugin_format_description = '官方文本处理和格式化工具.';
 $s_plugin_format_config = '设置';
-$s_plugin_format_process_text = '文本处理';$s_plugin_format_process_urls = 'URL处理';
+$s_plugin_format_process_text = '文本处理';
+$s_plugin_format_process_urls = 'URL处理';
 $s_plugin_format_process_buglinks = 'MantisBT链接( 问题/问题注释 )';
 $s_plugin_format_process_vcslinks = 'VCS链接';
 $s_plugin_format_enabled = '开';

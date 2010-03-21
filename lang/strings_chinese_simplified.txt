@@ -34,8 +34,8 @@
  * @author Riceball LEE riceballl@hotmail.com
  * @author Singoo, singoo@163.com
  * @author liaobin@jite.net
- * @author zoomq@itcase.com
  * @author rerbin@lonmo.com
+ * @author zoomq@itcase.com
  */
 
 $s_actiongroup_menu_move = '移动';
@@ -161,29 +161,6 @@ $s_target_version_group_bugs_button = '更改目标版本';
 $s_update_severity_title = '更新严重性';
 $s_update_severity_msg = '选择问题严重性';
 $s_update_severity_button = '更新严重性';
-$s_by_status_pct = '按问题状态百分比';
-$s_by_priority_pct = '按问题优先级别百分比';
-$s_by_severity_pct = '按问题严重性百分比';
-$s_by_category_pct = '按项目分类百分比';
-$s_by_resolution_pct = '按处理状况百分比';
-$s_by_severity_mix = '按问题严重性和状态';
-$s_by_priority_mix = '按问题优先级别和状态';
-$s_by_resolution_mix = '按问题处理状况和状态';
-$s_synthesis_link = '综合报表';
-$s_status_link = '按状态统计';
-$s_priority_link = '按优先级别统计';
-$s_severity_link = '按严重性统计';
-$s_category_link = '按分类统计';
-$s_resolution_link = '按处理状况统计';
-$s_legend_still_open = '仍然打开';
-$s_legend_resolved = '已解决';
-$s_legend_assigned = '已分派';
-$s_legend_total = '合计';
-$s_legend_opened = '已打开';
-$s_legend_closed = '已关闭';
-$s_legend_reported = '已报告';
-$s_cumulative = '累计';
-$s_not_enough_data = '没有足够的数据，无法创建图形报表。';
 $s_hide_button = '只显示选中内容';
 $s_printing_preferences_title = '选择要打印的字段';
 $s_printing_options_link = '打印选项';
@@ -470,7 +447,7 @@ $s_from = '从';
 $s_to = '到';
 $s_sent_you_this_reminder_about = '向您发送这个提醒，关于';
 $s_bug_reminder = '问题提醒';
-$s_reminder_sent_to = '发送提醒';
+$s_reminder_sent_to = '发送提醒:';
 $s_bug_send_button = '发送';
 $s_reminder = '提醒';
 $s_reminder_explain = '该提醒将发送给被要求接收该问题反馈的所有收件人。';

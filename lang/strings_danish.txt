@@ -28,7 +28,7 @@
  *
  * @author Fejl
  * @author Gunner Poulsen, gp@lyngbjerggaardskolen.dk
- * @author Piivaat
+ * @author Qaqqalik
  * @author Søren Mortensen, sm@artmus.dk
  */
 
@@ -126,33 +126,6 @@ $s_priority_group_bugs_button = 'Opdater prioritering';
 $s_status_group_bugs_button = 'Opdater status';
 $s_category_group_bugs_button = 'Opdater kategori';
 $s_view_status_group_bugs_button = 'Opdater visningsstatus';
-$s_graph_imp_status_title = 'Sammenfattende grafik efter status';
-$s_graph_imp_priority_title = 'Sammenfattende grafik efter prioritering';
-$s_graph_imp_severity_title = 'Sammenfattende grafik efter alvorlighed';
-$s_graph_imp_category_title = 'Sammenfattende grafik efter kategori';
-$s_graph_imp_resolution_title = 'Sammenfattende grafik efter løsning';
-$s_by_status_pct = 'efter status i procent';
-$s_by_priority_pct = 'efter prioritering i procent';
-$s_by_severity_pct = 'efter alvorlighed i procent';
-$s_by_category_pct = 'efter kategori i procent';
-$s_by_resolution_pct = 'efter løsning i procent';
-$s_by_severity_mix = 'efter alvorlighed og status';
-$s_by_priority_mix = 'efter prioritering og status';
-$s_by_resolution_mix = 'efter løsning og status';
-$s_synthesis_link = 'Sammenfatning';
-$s_status_link = 'efter status';
-$s_priority_link = 'efter prioritering';
-$s_severity_link = 'efter alvorlighed';
-$s_category_link = 'efter kategori';
-$s_resolution_link = 'efter løsning';
-$s_legend_still_open = 'Stadig åben';
-$s_legend_resolved = 'Løst';
-$s_legend_assigned = 'Tildelt';
-$s_legend_opened = 'Åben';
-$s_legend_closed = 'Lukket';
-$s_legend_reported = 'Raporteret';
-$s_cumulative = 'Kumulativ';
-$s_not_enough_data = 'Ikke data nok til at lave graf';
 $s_hide_button = 'Vis kun valgte';
 $s_printing_preferences_title = 'Vælg felter der skal udskrives';
 $s_printing_options_link = 'Udskriftmuligheder';

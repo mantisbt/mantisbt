@@ -1015,6 +1015,7 @@ $s_simple_filters = 'Siloù eeun';
 $s_monitored_by = 'Evezhiet gant';
 $s_attachments = 'pezh stag';
 $s_bytes = 'okted';
+$s_attachment_missing = 'Mankout a ra ar restr stag';
 $s_sponsors = '%1$d sponsor';
 $s_sponsorship_added = 'Sponsoradur ouzhpennet';
 $s_sponsorship_updated = 'Sponsoradur hizivaet';
@@ -1163,6 +1164,9 @@ $s_time_tracking_get_info_button = 'Tapout titouroù diwar-benn mererezh an amze
 $s_time_tracking_cost_per_hour = 'Koust dre eurvezh';
 $s_time_tracking_cost = 'Koust';
 $s_total_time_for_issue = 'Amzer evit an draen en holl = %1$s';
+$s_time_tracking_stopwatch_start = 'Deroù';
+$s_time_tracking_stopwatch_stop = 'Paouez';
+$s_time_tracking_stopwatch_reset = 'Adderaouiñ';
 $s_access_denied = 'Moned nac\'het.';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (diskoulmet gant %4$s e-barzh %5$s)';
 $s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (diskoulmet gant %4$s)';

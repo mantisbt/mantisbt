@@ -18,7 +18,7 @@
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Ripoarisch (Ripoarisch)
+/** Colognian (Ripoarisch)
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -145,34 +145,6 @@ $s_category_group_bugs_button = 'De Saachjropp ändere';
 $s_view_status_group_bugs_button = 'De Seeshbakeit ändere';
 $s_fixed_in_version_group_bugs_button = 'De Version ändere, wo et jedonn wohr';
 $s_target_version_group_bugs_button = 'De aanjepeilte Version ändere';
-$s_graph_imp_status_title = 'Zosammejefaß als Zeijshnung noh em Shatattus';
-$s_graph_imp_priority_title = 'Zosammejefaß als Zeijshnung noh de Weschteschkeit';
-$s_graph_imp_severity_title = 'Zosammejefaß als Zeijshnung noh em Jeweesch';
-$s_graph_imp_category_title = 'Zosammejefaß als Zeijshnung noh de Saachjroppe';
-$s_graph_imp_resolution_title = 'Zosammejefaß als Zeijshnung noh de Lösunge';
-$s_by_status_pct = 'noh Shtattuß_Prozänt_Aandeil';
-$s_by_priority_pct = 'noh Weeschteschkeitß_Prozänt_Aandeil';
-$s_by_severity_pct = 'noh Jeweeschs_Prozänt_Aandeil';
-$s_by_category_pct = 'noh Saachjroppe_Prozänt_Aandeil';
-$s_by_resolution_pct = 'noh Lösungs_Prozänt_Aandeil';
-$s_by_severity_mix = 'noh Jeweesch un Shtattus';
-$s_by_priority_mix = 'noh Weeschteschkeit un Shtattus';
-$s_by_resolution_mix = 'noh Lösung un Shtattus';
-$s_synthesis_link = 'Zosammejedonn';
-$s_status_link = 'Pä Shtattus';
-$s_priority_link = 'Pä Weeschteschkeit';
-$s_severity_link = 'Pä Jeweesch';
-$s_category_link = 'Pä Saachjrupp';
-$s_resolution_link = 'Pä Lösung';
-$s_legend_still_open = 'Noch unjedonn';
-$s_legend_resolved = 'Jelöhß';
-$s_legend_assigned = 'Zohjedeilt';
-$s_legend_total = 'Jesamp';
-$s_legend_opened = 'Opjemaat';
-$s_legend_closed = 'Zohjemaat';
-$s_legend_reported = 'Jemeldt';
-$s_cumulative = 'Zosammejenumme';
-$s_not_enough_data = 'Mer han nit jenooch Date för e Beldsche druß ze maache';
 $s_update_severity_msg = 'Donn dä Aanjelääjeheit ier Jeweesch ußwähle';
 $s_update_severity_button = 'Jeweesch ändere';
 $s_hide_button = 'Donn bloß de ußjesohte aanzeije';
@@ -642,26 +614,6 @@ $s_total_time_for_issue = 'De jesampte Zick för di Saach = %1$s';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (äleedesch vum %4$s en %5$s)';
 $s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (äleedesch vum %4$s)';
 $s_development_team = 'Dä Entweckler-Schmolz';
-$s_all_dates = 'Jeedes Dattum';
-$s_period_none = 'Kei';
-$s_period_this_week = 'Diß Woch';
-$s_period_last_week = 'Letz Woch';
-$s_period_two_weeks = 'De letz zweij Woche';
-$s_period_this_month = 'Diß Mohnd';
-$s_period_last_month = 'Letz Mohnd';
-$s_period_this_quarter = 'Diß Quattaal';
-$s_period_last_quarter = 'Letz Quattaal';
-$s_period_year_to_date = 'Johr op Dattum';
-$s_period_select = 'Öhntß e Dattum';
-$s_period_last_year = 'Letz Johr';
-$s_select = 'Donn jät ußsöhke';
-$s_select_bystatus = 'noh Shtattuß';
-$s_select_summbystatus = 'Zosammefassung noh Shtattuß';
-$s_select_bycat = 'Zosammefassung noh Saachjropp';
-$s_select_both = 'Övverseesch noh Shtattus un Saachjropp';
-$s_show_as_graph = 'Als e Beld aanzeije';
-$s_show_as_table = 'Als en Tabäll aanzeije';
-$s_show_graph = 'Beld zeije';
 $s_manage_columns_config = 'Shpallde verwallde';
 $s_all_columns_title = 'All de Shpallde, di mer han';
 $s_csv_columns_title = '<i lang="en">CSV</i> Shpallde';
