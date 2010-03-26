@@ -145,7 +145,7 @@ function check_selected( $p_var, $p_val = true ) {
 		foreach( $p_var as $t_this_var ) {
 
 			# catch the case where one entry is 0 and the other is a string.
-			if(( is_string( $t_this_var ) && !is_string( $p_val ) ) ) {
+			if( is_string( $t_this_var ) && is_string( $p_val ) ) {
 				if( $t_this_var === $p_val ) {
 					echo ' selected="selected" ';
 					return;
