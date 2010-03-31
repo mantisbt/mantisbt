@@ -41,9 +41,13 @@
 		# Confirm with the user
 		helper_ensure_confirmed( lang_get( 'remove_all_users_sure_msg' ), lang_get( 'remove_all_users_button' ) );
 
-		project_remove_all_users( $f_project_id );
+		project_remove_all_users( $f_project_id, access_get_project_level( $f_project_id ) );
 	} else {
+		# Don't allow removal of users from the project who have a higher access level than the current user
+		access_ensure_project_level( access_get_project_level( $f_project_id, $f_user_id ), $f_project_id );
+
 		$t_user = user_get_row( $f_user_id );
+
 		# Confirm with the user
 		helper_ensure_confirmed( lang_get( 'remove_user_sure_msg' ) .
 			'<br/>' . lang_get( 'username' ) . ': ' . $t_user['username'],

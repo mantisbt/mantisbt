@@ -107,7 +107,7 @@
 	</td>
 	<td>
 		<select name="access_level">
-			<?php print_enum_string_option_list( 'access_levels', config_get( 'default_new_account_access_level' ) ) ?>
+			<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
 		</select>
 	</td>
 </tr>

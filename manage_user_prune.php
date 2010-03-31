@@ -36,7 +36,7 @@
 	# Delete the users who have never logged in and are older than 1 week
 	$days_old = (int)7 * SECONDS_PER_DAY;
 
-	$query = "SELECT id
+	$query = "SELECT id, access_level
 			FROM $t_user_table
 			WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND " . db_helper_compare_days( 0, "date_created", "> $days_old" );
 	$result = db_query_bound($query, Array( db_now() ) );
@@ -54,7 +54,10 @@
 
 	for ($i=0; $i < $count; $i++) {
 		$row = db_fetch_array( $result );
-		user_delete($row['id']);
+		# Don't prune accounts with a higher global access level than the current user
+		if ( access_has_global_level( $row['access_level'] ) ) {
+			user_delete($row['id']);
+		}
 	}
 
 	form_security_purge( 'manage_user_prune' );

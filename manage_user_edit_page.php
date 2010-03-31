@@ -44,6 +44,10 @@
 
 	$t_user = user_get_row( $t_user_id );
 
+	# Ensure that the account to be updated is of equal or lower access to the
+	# current user.
+	access_ensure_global_level( $t_user['access_level'] );
+
 	$t_ldap = ( LDAP == config_get( 'login_method' ) );
 
 	html_page_top();
@@ -118,7 +122,7 @@
 	</td>
 	<td>
 		<select name="access_level">
-			<?php print_enum_string_option_list( 'access_levels', $t_user['access_level'] ) ?>
+			<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
 		</select>
 	</td>
 </tr>
@@ -236,10 +240,7 @@
 	</td>
 	<td>
 		<select name="access_level">
-		<?php
-			# No administrator choice
-			print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) )
-		?>
+			<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
 		</select>
 	</td>
 </tr>

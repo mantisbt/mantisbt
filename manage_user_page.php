@@ -303,7 +303,15 @@
 ?>
 <tr <?php echo helper_alternate_class( $i ) ?>>
 	<td>
+	<?php
+		if ( access_has_global_level( $u_access_level ) ) {
+	?>
 		<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display_line( $u_username ) ?></a>
+	<?
+		} else {
+			echo string_display_line( $u_username );
+		}
+	?>
 	</td>
 	<td><?php echo string_display_line( $u_realname ) ?></td>
 	<td><?php print_email_link( $u_email, $u_email ) ?></td>

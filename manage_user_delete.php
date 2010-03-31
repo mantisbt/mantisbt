@@ -34,6 +34,10 @@
 
 	$t_user = user_get_row( $f_user_id );
 
+	# Ensure that the account to be deleted is of equal or lower access to the
+	# current user.
+	access_ensure_global_level( $t_user['access_level'] );
+
 	# check that we are not deleting the last administrator account
 	$t_admin_threshold = config_get_global( 'admin_site_threshold' );
 	if ( user_is_administrator( $f_user_id ) &&

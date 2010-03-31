@@ -690,25 +690,47 @@ function project_remove_user( $p_project_id, $p_user_id ) {
 	return true;
 }
 
-# delete all users from the project user list for a given project
-# this is useful when deleting or closing a project
-function project_remove_all_users( $p_project_id ) {
+/**
+ * Delete all users from the project user list for a given project. This is
+ * useful when deleting or closing a project. The $p_access_level_limit
+ * parameter can be used to only remove users from a project if their access
+ * level is below or equal to the limit.
+ * @param int Project ID
+ * @param int Access level limit (null = no limit)
+ * @return true
+ */
+function project_remove_all_users( $p_project_id, $p_access_level_limit = null ) {
 	$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 
 	$c_project_id = db_prepare_int( $p_project_id );
 
 	$query = "DELETE FROM $t_project_user_list_table
-				WHERE project_id=" . db_param();
+			WHERE project_id=" . db_param();
 
-	db_query_bound( $query, Array( $c_project_id ) );
+	if ( $p_access_level_limit !== null ) {
+		$c_access_level_limit = db_prepare_int( $p_access_level_limit );
+		$query .= " AND access_level <= " . db_param();
+		db_query_bound( $query, Array( $c_project_id, $c_access_level_limit ) );
+	} else {
+		db_query_bound( $query, Array( $c_project_id ) );
+	}
 
 	# db_query errors on failure so:
 	return true;
 }
 
-# Copy all users and their permissions from the source project to the
-#  destination project
-function project_copy_users( $p_destination_id, $p_source_id ) {
+/**
+ * Copy all users and their permissions from the source project to the
+ * destination project. The $p_access_level_limit parameter can be used to
+ * limit the access level for users as they're copied to the destination
+ * project (the highest access level they'll receieve in the destination
+ * project will be equal to $p_access_level_limit).
+ * @param int Destination project ID
+ * @param int Source project ID
+ * @param int Access level limit (null = no limit)
+ * @return null
+ */
+function project_copy_users( $p_destination_id, $p_source_id, $p_access_level_limit = null ) {
 	# Copy all users from current project over to another project
 	$t_rows = project_get_local_user_rows( $p_source_id );
 
@@ -716,12 +738,19 @@ function project_copy_users( $p_destination_id, $p_source_id ) {
 	for ( $i = 0; $i < $t_count; $i++ ) {
 		$t_row = $t_rows[$i];
 
+		if ( $p_access_level_limit !== null &&
+			$t_row['access_level'] > $p_access_level_limit ) {
+			$t_destination_access_level = $p_access_level_limit;
+		} else {
+			$t_destination_access_level = $t_row['access_level'];
+		}
+
 		# if there is no duplicate then add a new entry
 		# otherwise just update the access level for the existing entry
 		if ( project_includes_user( $p_destination_id, $t_row['user_id'] ) ) {
-			project_update_user_access( $p_destination_id, $t_row['user_id'], $t_row['access_level'] );
+			project_update_user_access( $p_destination_id, $t_row['user_id'], $t_destination_access_level );
 		} else {
-			project_add_user( $p_destination_id, $t_row['user_id'], $t_row['access_level'] );
+			project_add_user( $p_destination_id, $t_row['user_id'], $t_destination_access_level );
 		}
 	}
 }

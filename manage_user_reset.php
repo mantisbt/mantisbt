@@ -34,6 +34,12 @@
 
 	user_ensure_exists( $f_user_id );
 
+	$t_user = user_get_row( $f_user_id );
+
+	# Ensure that the account to be reset is of equal or lower access to the
+	# current user.
+	access_ensure_global_level( $t_user['access_level'] );
+
 	$t_result = user_reset_password( $f_user_id );
 	$t_redirect_url = 'manage_user_page.php';
 
