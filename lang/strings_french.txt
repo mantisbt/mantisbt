@@ -1122,7 +1122,6 @@ $s_dependency_graph = 'Graphique des dépendances';
 $s_vertical = 'Vertical';
 $s_horizontal = 'Horizontal';
 $s_view_issue = 'Afficher le bogue';
-$s_checkin = 'Control';
 $s_perm_rpt_capability = 'Possibilité';
 $s_view = 'Voir';
 $s_issues = 'BOGUES';

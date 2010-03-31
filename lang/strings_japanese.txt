@@ -1099,7 +1099,6 @@ $s_dependency_graph = '依存グラフ';
 $s_vertical = '縦';
 $s_horizontal = '横';
 $s_view_issue = 'チケット参照';
-$s_checkin = 'チェックイン';
 $s_perm_rpt_capability = '機能';
 $s_view = '参照';
 $s_issues = 'チケット';

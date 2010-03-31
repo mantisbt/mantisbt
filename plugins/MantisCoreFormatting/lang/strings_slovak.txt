@@ -35,6 +35,5 @@ $s_plugin_format_config = 'Nastavenie';
 $s_plugin_format_process_text = 'Textové Spracovanie';
 $s_plugin_format_process_urls = 'URL Spracovanie';
 $s_plugin_format_process_buglinks = 'MantisBT Odkazy (Problém/Poznámka o probléme)';
-$s_plugin_format_process_vcslinks = 'VCS Odkazy';
 $s_plugin_format_enabled = 'Zapnuté';
 $s_plugin_format_disabled = 'Vypnuté';

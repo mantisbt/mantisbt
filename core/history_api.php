@@ -544,9 +544,6 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					$t_note = lang_get( 'bug_created_from' );
 					$t_change = bug_format_id( $p_new_value );
 					break;
-				case CHECKIN:
-					$t_note = lang_get( 'checkin' );
-					break;
 				case TAG_ATTACHED:
 					$t_note = lang_get( 'tag_history_attached' ) . ': ' . $p_old_value;
 					break;

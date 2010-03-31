@@ -1098,7 +1098,6 @@ $s_dependency_graph = 'Gráfico de Dependências';
 $s_vertical = 'Vertical';
 $s_horizontal = 'Horizontal';
 $s_view_issue = 'Ver Caso';
-$s_checkin = 'Checkin';
 $s_perm_rpt_capability = 'Capacidade';
 $s_view = 'Visualizar';
 $s_issues = 'CASOS';

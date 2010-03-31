@@ -1014,7 +1014,6 @@ $s_dependency_graph = 'תלויות';
 $s_vertical = 'אנכי';
 $s_horizontal = 'אופקי';
 $s_view_issue = 'הצגת באג';
-$s_checkin = 'להכניס';
 $s_perm_rpt_capability = 'יכולת';
 $s_view = 'הצגת';
 $s_issues = 'באגים';

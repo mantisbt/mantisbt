@@ -34,6 +34,5 @@ $s_plugin_format_description = 'Amptelike teksverwerkings- en formaterings-plugi
 $s_plugin_format_config = 'Voorkeure';
 $s_plugin_format_process_text = 'Teksverwerking';
 $s_plugin_format_process_urls = 'URL-verwerking';
-$s_plugin_format_process_vcslinks = 'VCS-skakels';
 $s_plugin_format_enabled = 'Aan';
 $s_plugin_format_disabled = 'Af';

@@ -36,6 +36,5 @@ $s_plugin_format_process_text = 'Skridtreterezh';
 $s_plugin_format_process_text_warning_notice = 'Arabat diweredekaat hep gouzout ar pezh emaoc\'h oc\'h ober. Pa vez diweredekaet e c\'hall bezañ tagadennoù « cross-site scripting » (XSS).';
 $s_plugin_format_process_urls = 'Tretañ an URL';
 $s_plugin_format_process_buglinks = 'Liammoù MantisBT (draen / notenn diwar-benn un draen)';
-$s_plugin_format_process_vcslinks = 'Liammoù VCS';
 $s_plugin_format_enabled = 'Gweredekaet';
 $s_plugin_format_disabled = 'Diweredekaet';

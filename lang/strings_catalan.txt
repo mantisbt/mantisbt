@@ -1097,7 +1097,6 @@ $s_dependency_graph = 'Gràfic de Dependències';
 $s_vertical = 'Vertical';
 $s_horizontal = 'Horitzontal';
 $s_view_issue = 'Vista de la incidència';
-$s_checkin = 'Control';
 $s_perm_rpt_capability = 'Capacitat';
 $s_view = 'Examina';
 $s_issues = 'Incidències';

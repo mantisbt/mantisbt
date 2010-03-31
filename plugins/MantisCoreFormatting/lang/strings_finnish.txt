@@ -32,6 +32,5 @@
 $s_plugin_format_description = 'Virallinen tekstinkäsittely- ja muotoiluliitännäinen.';
 $s_plugin_format_process_text = 'Tekstinkäsittely';
 $s_plugin_format_process_urls = 'Verkko-osoitteen käsittely';
-$s_plugin_format_process_vcslinks = 'VCS-linkit';
 $s_plugin_format_enabled = 'Käytössä';
 $s_plugin_format_disabled = 'Pois käytöstä';

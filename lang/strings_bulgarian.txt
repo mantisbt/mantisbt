@@ -936,7 +936,6 @@ $s_dependency_graph = 'Графика на зависимост';
 $s_vertical = 'Вертикален';
 $s_horizontal = 'Хоризонтален';
 $s_view_issue = 'Визуализация на проблем';
-$s_checkin = 'Регистрация';
 $s_perm_rpt_capability = 'Дейности';
 $s_view = 'Визуализация';
 $s_issues = 'ПРОБЛЕМИ';

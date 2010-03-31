@@ -1074,7 +1074,6 @@ $s_dependency_graph = 'رسمة الاعتماد';
 $s_vertical = 'رأسي';
 $s_horizontal = 'أفقي';
 $s_view_issue = 'عرض قضية';
-$s_checkin = 'تسجيل';
 $s_perm_rpt_capability = 'القدرة';
 $s_view = 'عرض';
 $s_issues = 'قضايا';

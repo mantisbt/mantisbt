@@ -35,6 +35,5 @@ $s_plugin_format_process_text = 'Text Processing';
 $s_plugin_format_process_text_warning_notice = 'Do not turn off unless you really know what you\'re doing. In the off state, cross site scripting (XSS) attacks are possible.';
 $s_plugin_format_process_urls = 'URL Processing';
 $s_plugin_format_process_buglinks = 'MantisBT Links ( Issue/Issuenote )';
-$s_plugin_format_process_vcslinks = 'VCS Links';
 $s_plugin_format_enabled = 'On';
 $s_plugin_format_disabled = 'Off';

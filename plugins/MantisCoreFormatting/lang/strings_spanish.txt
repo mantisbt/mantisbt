@@ -37,6 +37,5 @@ $s_plugin_format_process_text = 'Procesamiento de Textos';
 $s_plugin_format_process_text_warning_notice = 'No lo desactive a menos que sepas lo que estás haciendo. Estando desactivado los ataques "Cross Site Scripting" (XSS) son posibles.';
 $s_plugin_format_process_urls = 'Procesamiento de URL';
 $s_plugin_format_process_buglinks = 'Enlaces MantisBT (Incidencia/Nota)';
-$s_plugin_format_process_vcslinks = 'Enlaces VCS';
 $s_plugin_format_enabled = 'Habilitado';
 $s_plugin_format_disabled = 'Deshabilitado';

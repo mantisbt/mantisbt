@@ -37,6 +37,5 @@ $s_plugin_format_process_text_warning_notice = 'Donn dat nit affschallde, ußer 
 Wann dat ußjeschalldt es, wääde och Anjreffe met <i lang="en" title="cross site scripting - Skrepte vun främbe Rääschner ungerschiebe">XSS</i> müjjelesch, di mer nommaal op keijne Fall hann well.';
 $s_plugin_format_process_urls = 'Et <i lang="en">URL</i> Beärrbeejde';
 $s_plugin_format_process_buglinks = 'MantisBT Lenks (Aanjelääjeheit/Notiz)';
-$s_plugin_format_process_vcslinks = '<i lang="en">VCS</i> Lengks';
 $s_plugin_format_enabled = 'Aanjeschalldt';
 $s_plugin_format_disabled = 'Ußjeschalldt';

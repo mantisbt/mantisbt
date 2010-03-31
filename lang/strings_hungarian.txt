@@ -1056,7 +1056,6 @@ $s_dependency_graph = 'Függőségi grafikon';
 $s_vertical = 'Függőleges';
 $s_horizontal = 'Vízszintes';
 $s_view_issue = 'Ügy megtekintése';
-$s_checkin = 'Ellenőrzés';
 $s_perm_rpt_capability = 'Lehetőség';
 $s_view = 'Megtekintés';
 $s_issues = 'ÜGYEK';

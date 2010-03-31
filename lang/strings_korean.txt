@@ -833,7 +833,6 @@ $s_dependency_graph = '의존 그래프';
 $s_vertical = '수직';
 $s_horizontal = '수평';
 $s_view_issue = '이슈 보기';
-$s_checkin = '체크인';
 $s_perm_rpt_capability = '자격';
 $s_view = '보기';
 $s_issues = '이슈';

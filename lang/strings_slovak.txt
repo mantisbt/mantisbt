@@ -1035,7 +1035,6 @@ $s_dependency_graph = 'Graf Závislostí';
 $s_vertical = 'Vertikálne';
 $s_horizontal = 'Horizontálne';
 $s_view_issue = 'Zobraziť Problém';
-$s_checkin = 'Kontrolujem';
 $s_perm_rpt_capability = 'Schopnosť';
 $s_view = 'Zobraziť';
 $s_issues = 'Problémy';

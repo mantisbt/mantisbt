@@ -1074,7 +1074,6 @@ $s_dependency_graph = 'Riippuvuusgraafi';
 $s_vertical = 'Pysty';
 $s_horizontal = 'Vaaka';
 $s_view_issue = 'Näytä tapahtuma';
-$s_checkin = 'Kuittaa sisään';
 $s_perm_rpt_capability = 'Oikeus';
 $s_view = 'Näytä';
 $s_issues = 'Tapahtumat';

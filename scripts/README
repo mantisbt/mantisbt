@@ -4,8 +4,5 @@ documentation about their purpose and usage.
 
 Included scripts:
 
-checkin.php
-    Provides source control (SCM) integration for closing bugs upon commits
-
 send_emails.php
     Allows sending bug mails asynchronously

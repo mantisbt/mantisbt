@@ -36,6 +36,5 @@ $s_plugin_format_process_text = 'Обработка на текст';
 $s_plugin_format_process_text_warning_notice = 'Не исклучувајте доколку не сте уверени дека навистина знаете што правите. Во исклучена состојна, можни се XSS напади на веб-страницата.';
 $s_plugin_format_process_urls = 'Обработка на URL';
 $s_plugin_format_process_buglinks = 'MantisBT врски ( задачи/коментари )';
-$s_plugin_format_process_vcslinks = 'VCS врски';
 $s_plugin_format_enabled = 'Вкл.';
 $s_plugin_format_disabled = 'Искл.';

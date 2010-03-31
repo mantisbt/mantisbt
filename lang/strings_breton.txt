@@ -1091,7 +1091,6 @@ $s_dependency_graph = 'Grafik sujidigezhioù';
 $s_vertical = 'A-hed';
 $s_horizontal = 'A-led';
 $s_view_issue = 'Gwelet an draen';
-$s_checkin = 'Kontroll';
 $s_perm_rpt_capability = 'Gouestoni';
 $s_view = 'Gwelet';
 $s_issues = 'Drein';

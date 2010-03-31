@@ -858,7 +858,6 @@ $s_relationship_warning_blocking_bugs_not_resolved = 'Ne visos su šia klaida su
 $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>DĖMESIO</b>. Ne visos su šia klaida susijusios klaidos buvo išspręstos arba uždarytos.<br />Prieš <b>išspręndžiant/uždarant</b> šią klaidą, turite išspręsti arba uždaryti visas susijusias klaidas.';
 $s_create_child_bug_button = 'Sukurti sąryšį';
 $s_bug_created_from = 'Klaida sukurta iš';
-$s_checkin = 'Patikrinimas';
 $s_see_email_addresses_of_other_users = 'See email addresses of other users';
 $s_email_notification = 'EMAIL NOTIFICATION';
 $s_email_on_deleted = 'Email on Deleted';

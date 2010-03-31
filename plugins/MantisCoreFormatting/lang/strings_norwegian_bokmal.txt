@@ -35,6 +35,5 @@ $s_plugin_format_config = 'Konfigurasjon';
 $s_plugin_format_process_text = 'Tekstbehandling';
 $s_plugin_format_process_text_warning_notice = 'Ikke slå av med mindre du virkelig vet hva du gjør. I avslått tilstand er det mulighet for angrep gjennom «cross site scripting» (XSS).';
 $s_plugin_format_process_urls = 'URL-behandling';
-$s_plugin_format_process_vcslinks = 'VCS-lenker';
 $s_plugin_format_enabled = 'På';
 $s_plugin_format_disabled = 'Av';

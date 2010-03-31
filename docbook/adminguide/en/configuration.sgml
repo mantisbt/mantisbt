@@ -2238,14 +2238,6 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_cvs_web</term>
-                <listitem>
-                    <para>This allows for quick linking to CVS files via CVSweb or
-                        ViewCVS.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
                 <term>$g_bug_link_tag</term>
                 <listitem>
                     <para>If a number follows this tag it will create a link to a
@@ -2642,56 +2634,6 @@
                     <para>The access level required to be able to assign a sponsored
                         issue to a user with access level greater or equal to
                         'handle_sponsored_bugs_threshold'. The default is MANAGER.
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-
-    </section>
-
-
-    <section id="admin.config.sourcecontrol">
-        <title>Source Control Integration</title>
-
-
-        <variablelist>
-            <varlistentry>
-                <term>$g_source_control_account</term>
-                <listitem>
-                    <para>Account to be used by the source control script. The account
-                        must be enabled and must have the appropriate access level to add
-                        notes to all issues even private ones (DEVELOPER access
-                        recommended). The default is '' (not set).
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_source_control_notes_view_status</term>
-                <listitem>
-                    <para>This sets whether the note added will be public or private
-                        (VS_PUBLIC or VS_PRIVATE). For open source projects it is expected
-                        that the notes be public, however, for non-open source it will
-                        probably be VS_PRIVATE. The default is VS_PRIVATE.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_source_control_set_status_to</term>
-                <listitem>
-                    <para>If set to a status, then after a checkin, the issue status
-                        is set to the specified status, otherwise if set to OFF, the issue
-                        status is not affected. The default is OFF.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_source_control_regexp</term>
-                <listitem>
-                    <para>Regular expression used to detect issue ids within checkin
-                        comments. See
-                        <ulink url="http://www.php.net/manual/en/function.preg-match-all.php">preg_match_all()</ulink>
-                        documentation for more details on setting a pattern. The default is
-                        "/\bissue [#]{0,1}(\d+)\b/i" (e.g., issue #745).
                     </para>
                 </listitem>
             </varlistentry>

@@ -1108,7 +1108,6 @@ $s_dependency_graph = 'Avhengighetsgraf';
 $s_vertical = 'Vertikal';
 $s_horizontal = 'Horisontal';
 $s_view_issue = 'Vis sak';
-$s_checkin = 'Sjekk inn';
 $s_perm_rpt_capability = 'Rettighet';
 $s_view = 'Se';
 $s_issues = 'SAKER';

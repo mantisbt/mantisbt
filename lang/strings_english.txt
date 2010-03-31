@@ -1428,9 +1428,6 @@ $s_vertical = 'Vertical';
 $s_horizontal = 'Horizontal';
 $s_view_issue = 'View Issue';
 
-# Source Control Integration
-$s_checkin = 'Checkin';
-
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';

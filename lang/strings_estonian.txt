@@ -1093,7 +1093,6 @@ $s_dependency_graph = 'Sõltuvuste graafik';
 $s_vertical = 'Vertikaal';
 $s_horizontal = 'Horisontaal';
 $s_view_issue = 'Vaata kannet';
-$s_checkin = 'Sissevormistus';
 $s_perm_rpt_capability = 'Võimalused';
 $s_view = 'Vaata';
 $s_issues = 'KANDED';

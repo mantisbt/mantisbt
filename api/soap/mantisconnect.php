@@ -1316,23 +1316,6 @@ $l_oServer->register( 'mc_config_get_string',
 	'Get the value for the specified configuration variable.'
 );
 
-### mc_issue_checkin
-$l_oServer->register( 'mc_issue_checkin',
-	array(
-		'username'	=>	'xsd:string',
-		'password'	=>	'xsd:string',
-		'issue_id'	=>	'xsd:integer',
-		'comment'	=>	'xsd:string',
-		'fixed'		=>	'xsd:boolean'
-	),
-	array(
-		'return'	=>	'xsd:boolean'
-	),
-	$t_namespace,
-	false, false, false,
-	'Notifies MantisBT of a check-in for the issue with the specified id.'
-);
-
 ###
 ###  IMPLEMENTATION
 ###

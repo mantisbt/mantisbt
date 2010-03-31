@@ -842,7 +842,6 @@ $s_dependency_graph = 'Tengsla graf æðri/undir';
 $s_vertical = 'Lóðrétt';
 $s_horizontal = 'Lárétt';
 $s_view_issue = 'Skoða beiðni';
-$s_checkin = 'Skráning inn';
 $s_perm_rpt_capability = 'Möguleikar';
 $s_view = 'Skoða';
 $s_issues = 'VERKBEIÐNI';

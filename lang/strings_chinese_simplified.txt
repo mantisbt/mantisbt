@@ -926,7 +926,6 @@ $s_dependency_graph = '依赖图表';
 $s_vertical = '垂直';
 $s_horizontal = '水平';
 $s_view_issue = '查看问题';
-$s_checkin = '签入';
 $s_perm_rpt_capability = '权限';
 $s_view = '视图';
 $s_issues = '问题';

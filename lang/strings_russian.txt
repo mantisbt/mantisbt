@@ -1115,7 +1115,6 @@ $s_dependency_graph = 'Граф зависимостей';
 $s_vertical = 'Вертикальный';
 $s_horizontal = 'Горизонтальный';
 $s_view_issue = 'Просмотр инцидента';
-$s_checkin = 'Фиксация';
 $s_perm_rpt_capability = 'Возможность';
 $s_view = 'Просмотр:';
 $s_issues = 'ИНЦИДЕНТЫ';

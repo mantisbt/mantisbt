@@ -22,7 +22,6 @@ access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 $f_process_text = gpc_get_int( 'process_text', ON );
 $f_process_urls = gpc_get_int( 'process_urls', ON );
 $f_process_buglinks = gpc_get_int( 'process_buglinks', ON );
-$f_process_vcslinks = gpc_get_int( 'process_vcslinks', ON );
 
 if( plugin_config_get( 'process_text' ) != $f_process_text ) {
 	plugin_config_set( 'process_text', $f_process_text );
@@ -34,10 +33,6 @@ if( plugin_config_get( 'process_urls' ) != $f_process_urls ) {
 
 if( plugin_config_get( 'process_buglinks' ) != $f_process_buglinks ) {
 	plugin_config_set( 'process_buglinks', $f_process_buglinks );
-}
-
-if( plugin_config_get( 'process_vcslinks' ) != $f_process_vcslinks ) {
-	plugin_config_set( 'process_vcslinks', $f_process_vcslinks );
 }
 
 form_security_purge( 'plugin_format_config_edit' );

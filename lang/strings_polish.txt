@@ -1044,7 +1044,6 @@ $s_dependency_graph = 'Graf zależności';
 $s_vertical = 'Pionowy';
 $s_horizontal = 'Poziomy';
 $s_view_issue = 'Zobacz zgłoszenie';
-$s_checkin = 'Oddanie';
 $s_perm_rpt_capability = 'Uprawnienie';
 $s_view = 'Zobacz';
 $s_issues = 'ZGŁOSZENIA';

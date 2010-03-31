@@ -1111,7 +1111,6 @@ $s_dependency_graph = 'Afhankelijkheidsdiagram';
 $s_vertical = 'Verticaal';
 $s_horizontal = 'Horizontaal';
 $s_view_issue = 'Melding bekijken';
-$s_checkin = 'Checkin';
 $s_perm_rpt_capability = 'Instelling';
 $s_view = 'Bekijken';
 $s_issues = 'Meldingen';

@@ -182,7 +182,6 @@ define( 'BUG_ADD_RELATIONSHIP', 18 );
 define( 'BUG_DEL_RELATIONSHIP', 19 );
 define( 'BUG_CLONED_TO', 20 );
 define( 'BUG_CREATED_FROM', 21 );
-define( 'CHECKIN', 22 );
 define( 'BUG_REPLACE_RELATIONSHIP', 23 );
 define( 'BUG_PAID_SPONSORSHIP', 24 );
 define( 'TAG_ATTACHED', 25 );

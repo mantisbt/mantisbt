@@ -1049,36 +1049,6 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 }
 
 /**
- * Log a checkin event on the issue
- *
- * @param string $p_username  The name of the user trying to access the issue.
- * @param string $p_password  The password of the user.
- * @param integer $p_issue_id The id of the issue to log a checkin.
- * @param string $p_comment   The comment to add
- * @param boolean $p_fixed    True if the issue is to be set to fixed
- * @return boolean  true success, false otherwise.
- */
-function mc_issue_checkin( $p_username, $p_password, $p_issue_id, $p_comment, $p_fixed ) {
-	$t_user_id = mci_check_login( $p_username, $p_password );
-	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
-	}
-
-	if( !bug_exists( $p_issue_id ) ) {
-		return new soap_fault( 'Client', '', "Issue '$p_issue_id' not found." );
-	}
-
-	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
-	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
-	}
-
-	helper_call_custom_function( 'checkin', array( $p_issue_id, $p_comment, '', '', $p_fixed ) );
-
-	return true;
-}
-
-/**
  * Returns the date in iso8601 format, with proper timezone offset applied
  * 
  * @param string $p_date the date in iso8601 format

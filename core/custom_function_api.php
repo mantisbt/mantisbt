@@ -155,26 +155,6 @@ function custom_function_default_format_issue_summary( $p_issue_id, $p_context =
 	return $t_string;
 }
 
-# Register a checkin in source control by adding a history entry and a note
-# This can be overriden to do extra work.
-# The issue status/resolution would only be set if the issue is fixed, and hence $p_fixed is passed as true.
-function custom_function_default_checkin( $p_issue_id, $p_comment, $p_file, $p_new_version, $p_fixed ) {
-	if( bug_exists( $p_issue_id ) ) {
-		history_log_event_special( $p_issue_id, CHECKIN, $p_file, $p_new_version );
-		$t_private = false;
-		if( VS_PRIVATE == config_get( 'source_control_notes_view_status' ) ) {
-			$t_private = true;
-		}
-		bugnote_add( $p_issue_id, $p_comment, 0, $t_private );
-
-		$t_status = config_get( 'source_control_set_status_to' );
-		if(( OFF != $t_status ) && $p_fixed ) {
-			bug_set_field( $p_issue_id, 'status', $t_status );
-			bug_set_field( $p_issue_id, 'resolution', config_get( 'source_control_set_resolution_to' ) );
-		}
-	}
-}
-
 # Hook to validate field issue data before updating
 # Verify that the proper fields are set with the appropriate values before proceeding
 # to change the status.

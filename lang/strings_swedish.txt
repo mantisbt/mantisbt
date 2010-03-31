@@ -1032,7 +1032,6 @@ $s_dependency_graph = 'Graf över beroenden';
 $s_vertical = 'Vertikal';
 $s_horizontal = 'Horisontell';
 $s_view_issue = 'Visa ärende';
-$s_checkin = 'Incheckning';
 $s_perm_rpt_capability = 'Tillgång';
 $s_view = 'Visa';
 $s_issues = 'ÄRENDEN';

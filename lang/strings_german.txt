@@ -1121,7 +1121,6 @@ $s_dependency_graph = 'Grafik der Abhängigkeiten';
 $s_vertical = 'Vertikal';
 $s_horizontal = 'Horizontal';
 $s_view_issue = 'Eintrag ansehen';
-$s_checkin = 'Einchecken';
 $s_perm_rpt_capability = 'Fähigkeiten';
 $s_view = 'Ansehen';
 $s_issues = 'Einträge';

@@ -1039,7 +1039,6 @@ $s_dependency_graph = 'Grafic de las dependéncias';
 $s_vertical = 'Vertical';
 $s_horizontal = 'Orizontal';
 $s_view_issue = 'Afichar lo bòg';
-$s_checkin = 'Contraròtle';
 $s_perm_rpt_capability = 'Possibilitat';
 $s_view = 'Veire';
 $s_issues = 'BÒGUES';

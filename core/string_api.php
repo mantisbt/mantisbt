@@ -158,8 +158,8 @@ function string_display_line( $p_string ) {
 }
 
 /**
- * Prepare a string for display to HTML and add href anchors for URLs, emails,
- * bug references, and cvs references
+ * Prepare a string for display to HTML and add href anchors for URLs, emails
+ * and bug references
  * @param string $p_string
  * @return string
  */
@@ -170,7 +170,7 @@ function string_display_links( $p_string ) {
 
 /**
  * Prepare a single line string for display to HTML and add href anchors for
- * URLs, emails, bug references, and cvs references
+ * URLs, emails and bug references
  * @param string $p_string
  * @return string
  */
@@ -205,7 +205,7 @@ function string_email( $p_string ) {
 
 /**
  * Prepare a string for plain text display in email and add URLs for bug
- * links and cvs links
+ * links
  * @param string 
  * @return string
  */
@@ -311,27 +311,6 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	} else {
 		return ( !empty( $t_script_path ) ? $t_script_path . '/' : '' ) . $t_script . $t_query . $t_anchor;
 	}
-}
-
-/**
- * process the $p_string and convert filenames in the format
- *  cvs:filename.ext or cvs:filename.ext:n.nn to a html link
- * if $p_include_anchor is true, include an <a href="..."> tag,
- *  otherwise, just insert the URL as text
- * @param string $p_string
- * @param bool $p_include_anchor
- * @return string
- */
-function string_process_cvs_link( $p_string, $p_include_anchor = true ) {
-	$t_cvs_web = config_get( 'cvs_web' );
-
-	if( $p_include_anchor ) {
-		$t_replace_with = '[CVS] <a href="' . $t_cvs_web . '\\1?rev=\\4" target="_new">\\1</a>\\5';
-	} else {
-		$t_replace_with = '[CVS] ' . $t_cvs_web . '\\1?rev=\\4\\5';
-	}
-
-	return preg_replace( '/cvs:([^\.\s:,\?!<]+(\.[^\.\s:,\?!<]+)*)(:)?(\d\.[\d\.]+)?([\W\s])?/i', $t_replace_with, $p_string );
 }
 
 $string_process_bug_link_callback = array();

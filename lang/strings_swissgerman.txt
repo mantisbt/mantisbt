@@ -1101,7 +1101,6 @@ $s_dependency_graph = 'Grafik vu dr Abhängigkeite';
 $s_vertical = 'Sänkrächt';
 $s_horizontal = 'Woogrächt';
 $s_view_issue = 'Probläm aaluege';
-$s_checkin = 'Yychecke';
 $s_perm_rpt_capability = 'Fähigkeite';
 $s_view = 'Aaluege';
 $s_issues = 'PROBLÄM';

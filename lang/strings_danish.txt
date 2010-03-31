@@ -812,7 +812,6 @@ $s_dependency_graph = 'Afhængighedsgraf over/underordnet';
 $s_vertical = 'Lodret';
 $s_horizontal = 'Vandret';
 $s_view_issue = 'Vis fejl';
-$s_checkin = 'Tjek ind';
 $s_perm_rpt_capability = 'Tilladelser';
 $s_view = 'Vis';
 $s_issues = 'FEJL';

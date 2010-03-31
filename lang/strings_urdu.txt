@@ -906,7 +906,6 @@ $s_dependency_graph = 'دارو مدار کا گراف';
 $s_vertical = 'ویرٹیکل';
 $s_horizontal = 'ھوریذینٹل';
 $s_view_issue = 'ایشوذ دکھاو';
-$s_checkin = 'چیک ان';
 $s_perm_rpt_capability = 'صلاحیت';
 $s_view = 'دکھاو';
 $s_issues = 'ایشوذ';

@@ -36,6 +36,5 @@ $s_plugin_format_process_text = 'Tractament del tèxte';
 $s_plugin_format_process_text_warning_notice = 'Desactivetz pas sens saber çò que fasètz vertadièrament. Dins l\'estat desactivat, los atacs « cross-site scripting » (XSS) son possibles.';
 $s_plugin_format_process_urls = 'Tractament de las URL';
 $s_plugin_format_process_buglinks = 'Ligams MantisBT (bug / nòta sus un bug)';
-$s_plugin_format_process_vcslinks = 'Ligams VCS';
 $s_plugin_format_enabled = 'Activat';
 $s_plugin_format_disabled = 'Desactivat';

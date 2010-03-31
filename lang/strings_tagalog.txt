@@ -1015,7 +1015,6 @@ $s_dependency_graph = 'Talangguhin ng Umaasa';
 $s_vertical = 'Patayo';
 $s_horizontal = 'Pahalang';
 $s_view_issue = 'Tingnan ang Labas';
-$s_checkin = 'Magpatala at pumasok';
 $s_perm_rpt_capability = 'Kakayahan';
 $s_view = 'Tingnan';
 $s_issues = 'MGA LABAS';

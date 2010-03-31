@@ -1101,7 +1101,6 @@ $s_dependency_graph = 'Графикон на зависност';
 $s_vertical = 'Вертикален';
 $s_horizontal = 'Хоризонтален';
 $s_view_issue = 'Види проблем';
-$s_checkin = 'Влез';
 $s_perm_rpt_capability = 'Способност';
 $s_view = 'Преглед';
 $s_issues = 'Проблеми';

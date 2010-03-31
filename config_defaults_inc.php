@@ -2712,61 +2712,6 @@ $g_allow_anonymous_login = OFF;
 $g_anonymous_account = '';
 
 /**
- * CVS linking
- * insert the URL to your CVSweb or ViewCVS
- * eg: http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/mantisbt/mantisbt/
- * @global string $g_cvs_web
- */
-$g_cvs_web = '';
-
-/**
- * For open source projects it is expected that the notes be public, however,
- * for non-open source it will probably be VS_PRIVATE.
- * @global int $g_source_control_notes_view_status
- */
-$g_source_control_notes_view_status = VS_PRIVATE;
-
-/**
- * Account to be used by the source control script. The account must be enabled
- * and must have the appropriate access level to add notes to all issues even
- * private ones (DEVELOPER access recommended).
- * @global string $g_source_control_account
- */
-$g_source_control_account = '';
-
-/**
- * If set to a status, then after a checkin with a log message that matches the
- * regular expression in $g_source_control_fixed_regexp, the issue status is
- * set to the specified status.  If set to OFF, the issue status is not changed.
- * @global int $g_source_control_set_status_to
- */
-$g_source_control_set_status_to = OFF;
-
-/**
- * Whenever an issue status is set to $g_source_control_set_status_to, the
- * issue resolution is set to the value specified for this configuration.
- * @global int $g_source_control_set_resolution_to
- */
-$g_source_control_set_resolution_to = FIXED;
-
-/**
- * Regular expression used to detect issue ids within checkin comments.
- * see preg_match_all() documentation at
- * http://www.php.net/manual/en/function.preg-match-all.php
- * @global string $g_source_control_regexp
- */
-$g_source_control_regexp = "/\bissue [#]{0,1}(\d+)\b/i";
-
-/**
- * Regular expression used to detect the fact that an issue is fixed and
- * extracts its issue id.  If there is a match to this regular expression, then
- * the issue will be marked as resolved and the resolution will be set to
- * fixed.
- * @global string $g_source_control_fixed_regexp
- */
-$g_source_control_fixed_regexp = "%source_control_regexp%";
-
-/**
  * Bug Linking
  * if a number follows this tag it will create a link to a bug.
  * eg. for # a link would be #45

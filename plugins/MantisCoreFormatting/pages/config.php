@@ -77,20 +77,6 @@ print_manage_menu( );
 	</td>
 </tr>
 
-<tr <?php echo helper_alternate_class( )?>>
-	<td class="category">
-		<?php echo lang_get( 'plugin_format_process_vcslinks' )?>
-	</td>
-	<td class="center">
-		<label><input type="radio" name="process_vcslinks" value="1" <?php echo( ON == plugin_config_get( 'process_vcslinks' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_enabled' )?></label>
-	</td>
-	<td class="center">
-		<label><input type="radio" name="process_vcslinks" value="0" <?php echo( OFF == plugin_config_get( 'process_vcslinks' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_disabled' )?></label>
-	</td>
-</tr>
-
 <tr>
 	<td class="center" colspan="3">
 		<input type="submit" class="button" value="<?php echo lang_get( 'change_configuration' )?>" />

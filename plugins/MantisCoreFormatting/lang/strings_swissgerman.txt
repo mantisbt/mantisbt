@@ -36,6 +36,5 @@ $s_plugin_format_process_text = 'Tekschtverarbeitig';
 $s_plugin_format_process_text_warning_notice = 'Deinschtallier nume, wänn du gnau weisch, was Du machsch. Im deinschtallierte Zuestand sin Aagriff megli mit Cross-Site Scripting (XSS).';
 $s_plugin_format_process_urls = 'URL-Verarbeitig';
 $s_plugin_format_process_buglinks = 'MantisBt-Links (Probläm/Problämnotiz)';
-$s_plugin_format_process_vcslinks = 'VCS-Links';
 $s_plugin_format_enabled = 'Aa';
 $s_plugin_format_disabled = 'Uus';

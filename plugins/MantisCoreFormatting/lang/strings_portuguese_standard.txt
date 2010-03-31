@@ -36,6 +36,5 @@ $s_plugin_format_process_text = 'Processamento de Texto';
 $s_plugin_format_process_text_warning_notice = 'Não desligue, a menos que estejo certo do que faz. Quando desligado, tornam-se possíveis ataques de \'\'cross site scripting\'\' (XSS).';
 $s_plugin_format_process_urls = 'Processamento de URL';
 $s_plugin_format_process_buglinks = 'Ligações do MantisBT ( Caso/Anotação )';
-$s_plugin_format_process_vcslinks = 'Ligações VCS';
 $s_plugin_format_enabled = 'Ligado';
 $s_plugin_format_disabled = 'Desligado';

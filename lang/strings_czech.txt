@@ -1043,7 +1043,6 @@ $s_dependency_graph = 'Graf závislostí';
 $s_vertical = 'Vertikální';
 $s_horizontal = 'Horizontální';
 $s_view_issue = 'Zobrazit problém';
-$s_checkin = 'Kontroluji';
 $s_perm_rpt_capability = 'Schopnost';
 $s_view = 'Zobrazit';
 $s_issues = 'Problémy';
