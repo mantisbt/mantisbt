@@ -188,6 +188,8 @@ define( 'BUG_PAID_SPONSORSHIP', 24 );
 define( 'TAG_ATTACHED', 25 );
 define( 'TAG_DETACHED', 26 );
 define( 'TAG_RENAMED', 27 );
+define( 'BUG_REVISION_DROPPED', 28 );
+define( 'BUGNOTE_REVISION_DROPPED', 29 );
 define( 'PLUGIN_HISTORY', 100 );
 
 # bug revisions
