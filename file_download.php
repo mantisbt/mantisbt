@@ -178,7 +178,7 @@ switch ( config_get( 'file_upload_method' ) ) {
 				$t_xsendfile_header_name = config_get( 'file_download_xsendfile_header_name' );
 				header( $t_xsendfile_header_name . ': ' . $t_local_disk_file );
 			} else {
-				file_send_chunk( $t_local_disk_file );
+				readfile( $t_local_disk_file );
 			}
 		}
 		break;
@@ -213,40 +213,4 @@ switch ( config_get( 'file_upload_method' ) ) {
 
 		header( 'Content-Type: ' . $t_content_type );
 		echo $v_content;
-}
-exit();
-
-function file_send_chunk($filename, $start = 0, $maxlength = 0 ) {
-    static $s_safe_mode = null;
-    $chunksize = 4*131072;
-    $buffer = '';
-	$offset = $start;
-	
-	if( $s_safe_mode == null ) {
-		$s_safe_mode = ini_get('safe_mode');
-	}
-	
-    while (true) {
-		if ( $s_safe_mode == false) {
-			@set_time_limit(60*60); //reset time limit to 60 min - should be enough for 1 MB chunk
-		}
-        $buffer = file_get_contents($filename, 0, null, $offset, ( ($maxlength > 0 && $maxlength < $chunksize) ? $maxlength : $chunksize ) );
-        if ( $buffer === false ) {
-			if( $maxlength > 0 ) {
-				$buffer = file_get_contents($filename, 0, null, $offset, $maxlength );
-			} else {
-				$buffer = file_get_contents($filename, 0, null, $offset );			
-			}
-			echo $buffer;
-			flush();
-        	exit(); // end of file
-        }
-        echo $buffer;
-        flush();
-        $offset += $chunksize;
-        $maxlength -= $chunksize;
-        unset($buffer);
-        $buffer = null;
-    }
-    return;
 }
