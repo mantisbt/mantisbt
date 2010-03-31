@@ -829,7 +829,7 @@ if ( $t_can_manage_users ) {
 			<?php
 				# You need global or project-specific permissions to remove users
 				#  from this project
-				if ( $t_can_manage_users ) {
+				if ( $t_can_manage_users && access_has_project_level( $t_user['access_level'], $f_project_id ) ) {
 					if ( project_includes_user( $f_project_id, $t_user['id'] )  ) {
 						print_button( "manage_proj_user_remove.php?project_id=$f_project_id&user_id=" . $t_user['id'], lang_get( 'remove_link' ) );
 						$t_removable_users_exist = true;

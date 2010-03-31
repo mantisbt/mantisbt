@@ -52,7 +52,12 @@ auth_reauthenticate();
 $f_project_id = gpc_get_int( 'project_id' );
 $f_user_id = gpc_get_int( 'user_id' );
 
+user_ensure_exists( $f_user_id );
+
+$t_user = user_get_row( $f_user_id );
+
 access_ensure_project_level( config_get( 'project_user_threshold' ), $f_project_id );
+access_ensure_project_level( $t_user['access_level'], $f_project_id );
 
 $t_project_name = project_get_name( $f_project_id );
 

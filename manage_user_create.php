@@ -103,6 +103,10 @@ if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enabl
 	}
 }
 
+# Don't allow the creation of accounts with access levels higher than that of
+# the user creating the account.
+access_ensure_global_level( $f_access_level );
+
 # Need to send the user creation mail in the tracker language, not in the creating admin's language
 # Park the current language name until the user has been created
 lang_push( config_get( 'default_language' ) );
