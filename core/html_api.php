@@ -1412,11 +1412,20 @@ function html_button_bug_change_status( $p_bug_id ) {
 
 	if( count( $t_enum_list ) > 0 ) {
 
-		# resort the list into ascending order after noting the key from the first element (the default)
-		$t_default_arr = each( $t_enum_list );
-		$t_default = $t_default_arr['key'];
+		# resort the list into ascending order
 		ksort( $t_enum_list );
+
+		# Get the default selected option as the next highest available status
+		# Otherwise fall back to using the last element in the array
+		end( $t_enum_list );
+		$t_default = key( $t_enum_list );
 		reset( $t_enum_list );
+		foreach( $t_enum_list as $key => $val ) {
+			if( $key > $t_bug_current_state ) {
+				$t_default = $key;
+				break;
+			}
+		}
 
 		echo "<form method=\"post\" action=\"bug_change_status_page.php\">";
 		# CSRF protection not required here - form does not result in modifications
