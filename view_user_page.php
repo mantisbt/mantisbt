@@ -28,16 +28,17 @@
 
 	auth_ensure_user_authenticated();
 
-	$t_can_manage = access_has_global_level( config_get( 'manage_user_threshold' ) );
-	$t_can_see_realname = access_has_project_level( config_get( 'show_user_realname_threshold' ) );
-	$t_can_see_email = access_has_project_level( config_get( 'show_user_email_threshold' ) );
-
 	# extracts the user information for the currently logged in user
 	# and prefixes it with u_
 	$f_user_id = gpc_get_int( 'id', auth_get_current_user_id() );
 	$row = user_get_row( $f_user_id );
 
 	extract( $row, EXTR_PREFIX_ALL, 'u' );
+
+	$t_can_manage = access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
+		access_has_global_level( $u_access_level );
+	$t_can_see_realname = access_has_project_level( config_get( 'show_user_realname_threshold' ) );
+	$t_can_see_email = access_has_project_level( config_get( 'show_user_email_threshold' ) );
 
 	# In case we're using LDAP to get the email address... this will pull out
 	#  that version instead of the one in the DB
