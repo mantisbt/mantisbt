@@ -215,20 +215,24 @@ require_once( 'form_api.php' );
 require_once( 'print_api.php' );
 require_once( 'collapse_api.php' );
 
-if ( !is_blank ( config_get_global( 'default_timezone' ) ) ) {
-	// if a default timezone is set in config, set it here, else we use php.ini's value
-	// having a timezone set avoids a php warning
-	date_default_timezone_set( config_get_global( 'default_timezone' ) );
-} else {
-	config_set_global( 'default_timezone', date_default_timezone_get(), true );
-}
-
 if ( !isset( $g_login_anonymous ) ) {
 	$g_login_anonymous = true;
 }
 
-if( auth_is_user_authenticated() ) {
-	date_default_timezone_set( user_pref_get_pref( auth_get_current_user_id(), 'timezone' ) );
+# Attempt to set the current timezone to the user's desired value
+# Note that PHP 5.1 on RHEL/CentOS doesn't support the timezone functions
+# used here so we just skip this action on RHEL/CentOS platforms.
+if ( function_exists( 'timezone_identifiers_list' ) ) {
+	if ( !is_blank ( config_get_global( 'default_timezone' ) ) ) {
+		// if a default timezone is set in config, set it here, else we use php.ini's value
+		// having a timezone set avoids a php warning
+		date_default_timezone_set( config_get_global( 'default_timezone' ) );
+	} else {
+		config_set_global( 'default_timezone', date_default_timezone_get(), true );
+	}
+	if ( auth_is_user_authenticated() ) {
+		date_default_timezone_set( user_pref_get_pref( auth_get_current_user_id(), 'timezone' ) );
+	}
 }
 
 if ( !defined( 'MANTIS_INSTALLER' ) ) {
