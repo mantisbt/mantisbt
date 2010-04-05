@@ -154,6 +154,34 @@ class FilterTest extends SoapBase {
 
 		$this->assertEquals( 1, count( $projectIssues ) - count( $initialIssues ), "count(projectIssues) - count(initialIssues)");
 	}
+	
+	/**
+	 * A test case that tests the following:
+	 * 
+	 * 1. Creating an issue with a category
+	 * 2. Retrieving all the project's issues
+	 * 3. Verifying that the created issue is present in the retrieved issues
+	 * 
+	 * Test created to verify issue #11609
+	 */
+	public function testGetProjectIssuesWithoutCategory() {
+		
+		$this->skipIfAllowNoCategoryIsDisabled();
+		
+		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateBugWithNoCategory' );
+		unset ( $issueToAdd['category'] );
+		
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );			
+			
+		$projectIssues = $this->getProjectIssues();
+		
+		$this->assertEquals( $issueId, $projectIssues[0]->id, "id" );
+	}
 
 	/**
 	 *
