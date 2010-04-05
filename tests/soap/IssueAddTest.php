@@ -374,6 +374,8 @@ class IssueAddTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
 
 		$issue = $this->client->mc_issue_get(
 			$this->userName,
