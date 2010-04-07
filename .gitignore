@@ -14,6 +14,9 @@ docbook/*/*/builddate
 docbook/*/*/build
 docbook/*/*/install
 
+# Build output
+build/
+
 # Untracked plugins
 plugins/*
 
