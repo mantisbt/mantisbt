@@ -182,7 +182,7 @@
                         <row>
                             <entry>MySQL</entry>
                             <entry>4.1.x</entry>
-                            <entry>5.0.x</entry>
+                            <entry>5.0.x, 6.0.x</entry>
                         </row>
                         <row>
                             <entry>PostgreSQL (experimental)</entry>
@@ -191,7 +191,7 @@
                         </row>
                         <row>
                             <entry>PHP</entry>
-                            <entry>5.2.x</entry>
+                            <entry>5.1.2</entry>
                             <entry>5.2.x</entry>
                         </row>
                         <row>
@@ -205,20 +205,28 @@
 
             <para>MantisBT is designed in a way to work in as many environments as possible.
             Hence the required extensions are minimal and many of them are optional affecting
-            only one feature.  The following PHP extensions are the ones used:</para>
+            only one feature. The following PHP extensions are used:</para>
 
             <itemizedlist>
                 <listitem>
-                    <para>mysqli (or the extension for the DBMS being used) - mandatory.</para>
+                    <para>Mysqli or PostgreSQL or another vendor specific
+                    database extension that matches the type of database you
+                    are using with MantisBT - mandatory.</para>
+                </listitem>
+                <listitem>
+                    <para>Hash - mandatory. This extension is available and
+                    enabled by default in PHP >= 5.1.2. For earlier versions of
+                    PHP you will need to install the PECL Hash extension
+                    manually.</para>
                 </listitem>
                 <listitem>
                     <para>Curl - if the Twitter integration feature is required.</para>
                 </listitem>
                 <listitem>
-                    <para>GD - if the graphs feature is required.</para>
+                    <para>GD - if the captcha and/or graphing features are required.</para>
                 </listitem>
                 <listitem>
-                    <para>fileinfo - Guesses the MIME type of attachments.
+                    <para>Fileinfo - Guesses the MIME type of attachments.
                     This extension is included by default from version 5.3.x
                     of PHP. For older versions of PHP you will need to install
                     the fileinfo PECL extension (this requires root access to
