@@ -46,7 +46,7 @@ class IssueNoteTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$createdIssue = $this->client->mc_issue_get(
@@ -57,7 +57,7 @@ class IssueNoteTest extends SoapBase {
 		$noteData = array(
 			'text' => "first note"
 		);
-		
+
 		$issueNoteId = $this->client->mc_issue_note_add(
 			$this->userName,
 			$this->password,
@@ -113,7 +113,7 @@ class IssueNoteTest extends SoapBase {
 			'text' => "first note",
 			'time_tracking' => "30"
 		);
-		
+
 		$issueNoteId = $this->client->mc_issue_note_add(
 			$this->userName,
 			$this->password,
@@ -128,7 +128,7 @@ class IssueNoteTest extends SoapBase {
 		$this->assertEquals( 1, count( $issueWithNote->notes ) );
 
 		$note = $issueWithNote->notes[0];
-		
+
 		$this->assertEquals( 30, $note->time_tracking );
 
 		$this->client->mc_issue_delete(
@@ -156,7 +156,7 @@ class IssueNoteTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$createdIssue = $this->client->mc_issue_get(
@@ -180,7 +180,7 @@ class IssueNoteTest extends SoapBase {
 			$issueId);
 
 		$this->assertEquals( 1, count( $issueWithNote->notes ) );
-		
+
 		$this->client->mc_issue_note_delete(
 			$this->userName,
 			$this->password,
@@ -208,8 +208,8 @@ class IssueNoteTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
-		$this->deleteAfterRun( $issueId );			
+
+		$this->deleteAfterRun( $issueId );
 
 		$createdIssue = $this->client->mc_issue_get(
 			$this->userName,

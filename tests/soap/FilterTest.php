@@ -45,7 +45,7 @@ class FilterTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$projectIssues = $this->getProjectIssues();
@@ -53,7 +53,7 @@ class FilterTest extends SoapBase {
 		$this->assertEquals( 1, count( $projectIssues ) - count( $initialIssues ), "count(projectIssues) - count(initialIssues)");
 		$this->assertEquals( $issueId, $projectIssues[0]->id, "issueId");
 	}
-	
+
 	/**
 	 * A test case that tests the following:
 	 * 1. Retrieving all the project's issue headers
@@ -72,7 +72,7 @@ class FilterTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$projectIssues = $this->getProjectIssueHeaders();
@@ -80,7 +80,7 @@ class FilterTest extends SoapBase {
 		$this->assertEquals( 1, count( $projectIssues ) - count( $initialIssues ), "count(projectIssues) - count(initialIssues)" );
 		$this->assertEquals( $issueId, $projectIssues[0]->id, "issueId" );
 	}
-	
+
 	/**
 	 * A test case that tests the following:
 	 * 1. Retrieving all the project's issue headers
@@ -100,20 +100,20 @@ class FilterTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
-		
+
 		$issue = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
 			$issueId);
-		
+
 		$note = array(
 			'text' => 'Note text.'
 		);
-		
+
 		$noteCount = 3;
-		
+
 		for ( $i = 0 ; $i < $noteCount ; $i++) {
 			$this->client->mc_issue_note_add(
 				$this->userName,
@@ -121,12 +121,12 @@ class FilterTest extends SoapBase {
 				$issueId,
 				$note);
 		}
-		
+
 		$projectIssues = $this->getProjectIssueHeaders();
 
 		$this->assertEquals( 3, $projectIssues[0]->notes_count, "notes_count" );
 	}
-	
+
 
 	/**
 	 * A test case that tests the following:
@@ -147,39 +147,39 @@ class FilterTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$projectIssues = $this->getProjectIssues();
 
 		$this->assertEquals( 1, count( $projectIssues ) - count( $initialIssues ), "count(projectIssues) - count(initialIssues)");
 	}
-	
+
 	/**
 	 * A test case that tests the following:
-	 * 
+	 *
 	 * 1. Creating an issue with a category
 	 * 2. Retrieving all the project's issues
 	 * 3. Verifying that the created issue is present in the retrieved issues
-	 * 
+	 *
 	 * Test created to verify issue #11609
 	 */
 	public function testGetProjectIssuesWithoutCategory() {
-		
+
 		$this->skipIfAllowNoCategoryIsDisabled();
-		
+
 		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateBugWithNoCategory' );
 		unset ( $issueToAdd['category'] );
-		
+
 		$issueId = $this->client->mc_issue_add(
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
-		$this->deleteAfterRun( $issueId );			
-			
+
+		$this->deleteAfterRun( $issueId );
+
 		$projectIssues = $this->getProjectIssues();
-		
+
 		$this->assertEquals( $issueId, $projectIssues[0]->id, "id" );
 	}
 
@@ -196,7 +196,7 @@ class FilterTest extends SoapBase {
 			0,
 			50);
 	}
-	
+
 	/**
 	 *
 	 * @return Array the project issues

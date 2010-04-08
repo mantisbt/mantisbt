@@ -74,13 +74,13 @@ html_page_top( lang_get( 'manage_projects_link' ) );
 
 print_manage_menu( 'manage_proj_page.php' );
 
-# Project Menu Form BEGIN 
+# Project Menu Form BEGIN
 ?>
 <br />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="5">
-		<?php 
+		<?php
 			echo lang_get( 'projects_title' );
 
 			# Check the user's global access level before allowing project creation
@@ -92,31 +92,31 @@ print_manage_menu( 'manage_proj_page.php' );
 </tr>
 <tr class="row-category">
 	<td width="20%">
-		<?php 
+		<?php
 			print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'name' ), 'name', $t_direction, $f_sort );
 			print_sort_icon( $t_direction, $f_sort, 'name' );
 		?>
 	</td>
 	<td width="10%">
-		<?php 
+		<?php
 			print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'status' ), 'status', $t_direction, $f_sort );
 			print_sort_icon( $t_direction, $f_sort, 'status' );
 		?>
 	</td>
 	<td width="10%">
-		<?php 
+		<?php
 			print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'enabled' ), 'enabled', $t_direction, $f_sort );
 			print_sort_icon( $t_direction, $f_sort, 'enabled' );
 		?>
 	</td>
 	<td width="10%">
-		<?php 
+		<?php
 			print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'view_status' ), 'view_state', $t_direction, $f_sort );
 			print_sort_icon( $t_direction, $f_sort, 'view_state' );
 		?>
 	</td>
 	<td width="40%">
-		<?php 
+		<?php
 			print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'description' ), 'description', $t_direction, $f_sort );
 			print_sort_icon( $t_direction, $f_sort, 'description' );
 		?>

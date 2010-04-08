@@ -49,7 +49,7 @@ $mantisTests = "$mantisRoot/tests";
 
 /*
  * Prepend the application/ and tests/ directories to the
- * include_path.  
+ * include_path.
  */
 $path = array(
     $mantisCore,

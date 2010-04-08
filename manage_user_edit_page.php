@@ -141,7 +141,7 @@ print_manage_menu();
 		?>
 	</td>
 </tr>
- 
+
 <!-- Access Level -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">

@@ -22,7 +22,7 @@
  * @link http://www.mantisbt.org
  */
 
- 
+
 if( OFF == plugin_config_get( 'eczlibrary' ) ) {
 	$t_font_path = get_font_path();
 	if( $t_font_path !== '' && !defined('TTF_DIR') ) {
@@ -56,7 +56,7 @@ function graph_get_font() {
 	if ( plugin_config_get( 'eczlibrary' ) == ON ) {
 		$ttf_dir = '';
 		$t_font = '';
-		
+
 		$t_font_map = array(
 			'arial' => 'arial.ttf',
 			'verdana' => 'verdana.ttf',
@@ -75,7 +75,7 @@ function graph_get_font() {
 			$t_font = 'arial.ttf';
 		}
 
-		
+
 		$t_font_path = get_font_path();
 		if( empty($t_font_path) ) {
 			error_text('unable to load font(s)', 'unable to load font(s)');
@@ -122,7 +122,7 @@ function graph_bar( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_he
 		$graph->options->font = $t_graph_font ;
 		$graph->options->font->maxFontSize = 12;
 		$graph->legend = false;
-	
+
 		$graph->data[0] = new ezcGraphArrayDataSet( $p_metrics );
 		$graph->data[0]->color = '#FFFF00';
 
@@ -133,9 +133,9 @@ function graph_bar( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_he
 		//$graph->driver->options->supersampling = 1;
 		$graph->driver->options->jpegQuality = 100;
 		$graph->driver->options->imageFormat = IMG_JPEG;
-	
+
 		$graph->renderer->options->syncAxisFonts = false;
-	
+
 		$graph->renderToOutput( $p_graph_width, $p_graph_height);
 	} else {
 		$graph = new Graph( $p_graph_width, $p_graph_height );
@@ -205,7 +205,7 @@ function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_
 		$graph->options->font = $t_graph_font ;
 		$graph->options->font->maxFontSize = 12;
 		$graph->legend = false;
-	
+
 		foreach( array( 'open', 'resolved', 'closed' ) as $t_label ) {
 			$graph->data[$t_label] = new ezcGraphArrayDataSet( $p_metrics[$t_label] );
 		}
@@ -220,9 +220,9 @@ function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_
 		//$graph->driver->options->supersampling = 1;
 		$graph->driver->options->jpegQuality = 100;
 		$graph->driver->options->imageFormat = IMG_JPEG;
-	
+
 		$graph->renderer->options->syncAxisFonts = false;
-	
+
 		$graph->renderToOutput( $p_graph_width, $p_graph_height);
 	} else {
 		# defines margin according to height
@@ -298,7 +298,7 @@ function graph_pie( $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_he
 		$graph->options->font = $t_graph_font ;
 		$graph->options->font->maxFontSize = 12;
 		$graph->legend = false;
-	
+
 		$graph->data[0] = new ezcGraphArrayDataSet( $p_metrics );
 		$graph->data[0]->color = '#FFFF00';
 
@@ -313,9 +313,9 @@ function graph_pie( $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_he
 		//$graph->driver->options->supersampling = 1;
 		$graph->driver->options->jpegQuality = 100;
 		$graph->driver->options->imageFormat = IMG_JPEG;
-	
+
 		$graph->renderer->options->syncAxisFonts = false;
-	
+
 		$graph->renderToOutput( $p_graph_width, $p_graph_height);
 	} else {
 		$graph = new PieGraph( $p_graph_width, $p_graph_height );
@@ -363,7 +363,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 		$graph = new ezcGraphLineChart();
 
 		$graph->background->color = '#FFFFFF';
-		
+
 		$graph->xAxis = new ezcGraphChartElementNumericAxis();
 
 		$graph->data[0] = new ezcGraphArrayDataSet( $p_metrics[0] );
@@ -401,7 +401,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 		$graph->options->font = $t_graph_font ;
 
 		$graph->renderToOutput( $p_graph_width, $p_graph_height);
-	} else {	
+	} else {
 		foreach( $p_metrics[0] as $i => $vals ) {
 			if( $i > 0 ) {
 				$plot_date[] = $i;
@@ -480,15 +480,15 @@ function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p
 		$t_cnt = count($p_metrics);
 
 		foreach( $t_dates as $i => $val ) {
-				//$t_metrics[$val] 
+				//$t_metrics[$val]
 				for($j = 0; $j < $t_cnt; $j++ ) {
 					$t_metrics[$j][$val] = $p_metrics[$j][$i];
 				}
 		}
-				
+
 		$graph = new ezcGraphLineChart();
 		$graph->background->color = '#FFFFFF';
-		
+
 		$graph->xAxis = new ezcGraphChartElementNumericAxis();
 		for($k = 0; $k < $t_cnt; $k++ ) {
 			$graph->data[$k] = new ezcGraphArrayDataSet( $t_metrics[$k] );
@@ -511,7 +511,7 @@ function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p
 		$graph->options->font = $t_graph_font ;
 
 		$graph->renderToOutput( $p_graph_width, $p_graph_height);
-	} else {		
+	} else {
 		$graph = new Graph( $p_graph_width, $p_graph_height );
 		$graph->img->SetMargin( 40, 140, 40, 100 );
 		if( ON == plugin_config_get( 'jpgraph_antialias' ) ) {
@@ -894,7 +894,7 @@ function error_check( $bug_count, $title ) {
 	}
 }
 
-function error_text( $title, $text ) { 
+function error_text( $title, $text ) {
 		if( OFF == plugin_config_get( 'eczlibrary' ) ) {
 			$graph = new CanvasGraph( 300, 380 );
 

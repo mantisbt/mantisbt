@@ -41,7 +41,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 			!$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED']) {
 			$this->markTestSkipped( 'The Soap tests are disabled.' );
 		}
-    
+
 		$this->client = new
 		    SoapClient(
 		       $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
@@ -50,12 +50,12 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 		        		'cache_wsdl' => WSDL_CACHE_NONE,
 		        		'trace'      => true
 		             )
-		     
+
 		    );
     }
-    
+
     protected function tearDown() {
-    	
+
     	foreach ( $this->issueIdsToDelete as $issueIdToDelete ) {
     		$this->client->mc_issue_delete(
     			$this->userName,
@@ -65,15 +65,15 @@ class SoapBase extends PHPUnit_Framework_TestCase {
     }
 
     protected function getProjectId() {
-    	return 1;	
+    	return 1;
     }
 
     protected function getCategory() {
- 		return 'General';   	
+ 		return 'General';
     }
-    
+
     protected function skipIfTimeTrackingIsNotEnabled() {
-    	
+
     	$timeTrackingEnabled = $this->client->mc_config_get_string($this->userName, $this->password, 'time_tracking_enabled');
 		if ( !$timeTrackingEnabled ) {
 			$this->markTestSkipped('Time tracking is not enabled');
@@ -87,18 +87,18 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 				'project' => array( 'id' => $this->getProjectId() ),
 				'category' => $this->getCategory() );
 	}
-	
+
 	/**
 	 * Registers an issue for deletion after the test method has run
-	 * 
+	 *
 	 * @param int $issueId
 	 * @return void
 	 */
 	protected function deleteAfterRun( $issueId ) {
-		
+
 		$this->issueIdsToDelete[] = $issueId;
 	}
-	
+
 	protected function skipIfDueDateIsNotEnabled() {
 
 		if ( $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_view_threshold' ) > 90  ||
@@ -106,7 +106,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 			 	$this->markTestSkipped('Due date thresholds are too high.');
 			 }
 	}
-	
+
 	protected function skipIfAllowNoCategoryIsDisabled() {
 		if ( $this->client->mc_config_get_string($this->userName, $this->password, 'allow_no_category' ) != true ) {
 			$this->markTestSkipped( 'g_allow_no_category is not ON.' );

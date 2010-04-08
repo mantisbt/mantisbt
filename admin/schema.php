@@ -34,7 +34,7 @@ if ( !function_exists( 'db_null_date' ) ) {
 
 function installer_db_now() {
         global $g_db;
- 
+
        return $g_db->BindTimeStamp( time() );
 }
 
@@ -475,7 +475,7 @@ $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'bugnote' ), "last_m
 $upgrade[] = Array('CreateIndexSQL',Array('idx_last_mod',db_get_table('bugnote'),'last_modified'));
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'bugnote' ), "date_submitted" ) );
 $upgrade[] = Array( 'RenameColumnSQL', Array( db_get_table( 'bugnote' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-	
+
 
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'bug_file' ), "
 	date_added_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );

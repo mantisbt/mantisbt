@@ -106,7 +106,7 @@ html_page_top( lang_get( 'edit_news_link' ) );
 </table>
 </form>
 </div>
-<?php 
+<?php
 # Add News Form END
 # Edit/Delete News Form BEGIN
 if ( news_get_count( helper_get_current_project(), current_user_is_administrator() ) > 0 ) {
@@ -145,7 +145,7 @@ if ( news_get_count( helper_get_current_project(), current_user_is_administrator
 </table>
 </form>
 </div>
-<?php 
-} # Edit/Delete News Form END 
+<?php
+} # Edit/Delete News Form END
 
 html_page_bottom();

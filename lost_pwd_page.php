@@ -132,7 +132,7 @@ if ( ON == config_get( 'use_javascript' ) ) {
 	window.document.lost_password_form.username.focus();
 // -->
 </script>
-<?php 
+<?php
 	}
 }
 

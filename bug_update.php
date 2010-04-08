@@ -111,7 +111,7 @@ if( $t_due_date !== null) {
 		$t_bug_data->due_date = 1;
 	} else {
 		$t_bug_data->due_date = strtotime( $t_due_date );
-	}		
+	}
 }
 
 $t_bug_data->description		= gpc_get_string( 'description', $t_bug_data->description );

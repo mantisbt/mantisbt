@@ -23,9 +23,9 @@
 	  * MantisBT Unit Test
 	  */
 	 /**
-	  * test config_get and config_set 
+	  * test config_get and config_set
 	  *
-	  * run from command line using: php -q test_config_get_set.php 
+	  * run from command line using: php -q test_config_get_set.php
 	  *  inspect results manually
 	  * Notes:
 	  *  data set from the test may need to be removed from the database manually

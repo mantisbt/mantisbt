@@ -21,7 +21,7 @@ function mc_issue_attachment_get( $p_username, $p_password, $p_issue_attachment_
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
-	
+
 	$t_file = mci_file_get( $p_issue_attachment_id, 'bug', $t_user_id );
 	if ( get_class( (object) $t_file ) == 'soap_fault' ) {
 		return $t_file;

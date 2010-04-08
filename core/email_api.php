@@ -78,7 +78,7 @@ require_api( 'utility_api.php' );
  $g_phpMailer = null;
 
 /**
- * 
+ *
  * Use a simple perl regex for valid email addresses.  This is not a complete regex,
  * as it does not cover quoted addresses or domain literals, but it is simple and
  * covers the vast majority of all email addresses without being overly complex.
@@ -438,7 +438,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
  * @param int $p_user_id
  * @param string $p_password
  * @param string $p_confirm_hash
- * @param string $p_admin_name 
+ * @param string $p_admin_name
  * @return null
  */
 function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name = '' ) {
@@ -554,7 +554,7 @@ function email_notify_new_account( $p_username, $p_email ) {
  * send a generic email
  * $p_notify_type: use check who she get notified of such event.
  * $p_message_id: message id to be translated and included at the top of the email message.
- * Return false if it were problems sending email * @param string 
+ * Return false if it were problems sending email * @param string
  * @param int $p_bug_id
  * @param string $p_notify_type
  * @param int $p_message_id
@@ -675,9 +675,9 @@ function email_relationship_child_closed( $p_bug_id ) {
 
 /**
  * send notices to all the handlers of the parent bugs still open when a child bug is resolved/closed
- * 
+ *
  * @param int $p_bug_id
- * @param int $p_message_id 
+ * @param int $p_message_id
  * @return null
  */
 function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
@@ -706,7 +706,7 @@ function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
 
 /**
  * send notices when a bug is sponsored
- * @param int $p_bug_id 
+ * @param int $p_bug_id
  * @return null
  */
 function email_sponsorship_added( $p_bug_id ) {
@@ -715,7 +715,7 @@ function email_sponsorship_added( $p_bug_id ) {
 
 /**
  * send notices when a sponsorship is modified
- * @param int $p_bug_id 
+ * @param int $p_bug_id
  * @return null
  */
 function email_sponsorship_updated( $p_bug_id ) {
@@ -724,7 +724,7 @@ function email_sponsorship_updated( $p_bug_id ) {
 
 /**
  * send notices when a sponsorship is deleted
- * @param int $p_bug_id 
+ * @param int $p_bug_id
  * @return null
  */
 function email_sponsorship_deleted( $p_bug_id ) {
@@ -733,7 +733,7 @@ function email_sponsorship_deleted( $p_bug_id ) {
 
 /**
  * send notices when a new bug is added
- * @param int $p_bug_id 
+ * @param int $p_bug_id
  * @return null
  */
 function email_new_bug( $p_bug_id ) {
@@ -742,7 +742,7 @@ function email_new_bug( $p_bug_id ) {
 
 /**
  * send notices when a new bugnote
- * @param int $p_bug_id 
+ * @param int $p_bug_id
  * @return null
  */
 function email_bugnote_add( $p_bug_id ) {
@@ -751,7 +751,7 @@ function email_bugnote_add( $p_bug_id ) {
 
 /**
  * send notices when a bug is RESOLVED
- * @param int $p_bug_id 
+ * @param int $p_bug_id
  * @return null
  */
 function email_resolved( $p_bug_id ) {
@@ -760,7 +760,7 @@ function email_resolved( $p_bug_id ) {
 
 /**
  * send notices when a bug is CLOSED
- * @param int $p_bug_id 
+ * @param int $p_bug_id
  * @return null
  */
  function email_close( $p_bug_id ) {
@@ -769,7 +769,7 @@ function email_resolved( $p_bug_id ) {
 
 /**
  * send notices when a bug is REOPENED
- * @param int $p_bug_id 
+ * @param int $p_bug_id
  * @return null
  */
 function email_reopen( $p_bug_id ) {
@@ -778,7 +778,7 @@ function email_reopen( $p_bug_id ) {
 
 /**
  * send notices when a bug is ASSIGNED
- * @param int $p_bug_id 
+ * @param int $p_bug_id
  * @return null
  */
 function email_assign( $p_bug_id ) {
@@ -796,7 +796,7 @@ function email_bug_deleted( $p_bug_id ) {
 
 /**
  * Store email in queue for sending
- * 
+ *
  * @param string $p_recipient
  * @param string $p_subject
  * @param string $p_message
@@ -882,7 +882,7 @@ function email_send_all($p_delete_on_failure = false) {
 
 /**
  * This function sends an email message based on the supplied email data.
- * 
+ *
  * @param EmailData $p_email_data
  * @return bool
  */
@@ -1037,8 +1037,8 @@ function email_send( $p_email_data ) {
 
 /**
  * closes opened kept alive SMTP connection (if it was opened)
- * 
- * @param string 
+ *
+ * @param string
  * @return null
  */
 function email_smtp_close() {
@@ -1056,7 +1056,7 @@ function email_smtp_close() {
 /**
  * formats the subject correctly
  * we include the project name, bug id, and summary.
- * 
+ *
  * @param int $p_bug_id
  * @return null
  */
@@ -1075,7 +1075,7 @@ function email_build_subject( $p_bug_id ) {
 
 /**
  * clean up LF to CRLF
- * 
+ *
  * @param string $p_string
  * @return null
  */
@@ -1218,7 +1218,7 @@ function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_proj
 
 /**
  * Build the bug info part of the message
- * @param array $p_visible_bug_data 
+ * @param array $p_visible_bug_data
  * @return string
  */
 function email_format_bug_message( $p_visible_bug_data ) {
@@ -1381,7 +1381,7 @@ function email_format_attribute( $p_visible_bug_data, $attribute_id ) {
  * return array with bug data. See usage in email_format_bug_message(...)
  * @param int $p_user_id
  * @param int $p_bug_id
- * @param string $p_message_id 
+ * @param string $p_message_id
  * @return array
  */
 function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {

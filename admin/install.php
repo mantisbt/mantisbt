@@ -725,7 +725,7 @@ if( 3 == $t_install_state ) {
 				$t_target = $upgrade[$i][1];
 			} else if( $upgrade[$i][0] == 'UpdateFunction' ) {
 				$sqlarray = array(
-					$upgrade[$i][1],					
+					$upgrade[$i][1],
 				);
 				if( isset( $upgrade[$i][2] ) ) {
 					$sqlarray[] = $upgrade[$i][2];

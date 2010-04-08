@@ -62,22 +62,22 @@ function compress_handler_is_enabled() {
 		if( !extension_loaded( 'zlib' ) ) {
 			return false;
 		}
-	
+
 		if ( ini_get( 'zlib.output_compression' ) ) {
 			/* zlib output compression is already enabled - we can't load the gzip output handler */
 			return false;
 		}
-		
+
 		// Since php 5.2.10, it's possible to set zlib.output_compression via ini_set.
 		// This method is preferred over ob_gzhandler
 		if( php_version_at_least( '5.2.10' ) && ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) ) {
-			ini_set( 'zlib.output_compression', true );			
+			ini_set( 'zlib.output_compression', true );
 			// do it transparently
 			return false;
 		}
-		
+
 		if( OFF == $g_use_iis ) {
-			// disable compression when using IIS because of issue #2953. 
+			// disable compression when using IIS because of issue #2953.
 			// For windows compression, use zlib.output_compression in php.ini or a later version of php
 			return false;
 		}

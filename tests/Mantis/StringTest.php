@@ -57,7 +57,7 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 			array( 'plugin.php?page=Source/list&id=1','plugin.php?page=Source%2Flist&amp;id=1'),
 			array( 'plugin.php?page=Source/list&id=1#abc','plugin.php?page=Source%2Flist&amp;id=1#abc'),
            );
-           
+
 		/*
 		   FIXME
 			array( $my_path.'abc.php',

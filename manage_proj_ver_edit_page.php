@@ -88,7 +88,7 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 	</td>
 	<td>
 		<input type="text" id="date_order" name="date_order" size="32" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'calendar_date_format' ), $t_version->date_order ) ) ) ?>" />
-		<?php 
+		<?php
 			date_print_calendar();
 			date_finish_calendar( 'date_order', 'trigger');
 		?>

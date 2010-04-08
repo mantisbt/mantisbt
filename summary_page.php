@@ -125,7 +125,7 @@ html_page_top( lang_get( 'summary_link' ) );
 ?>
 
 <br />
-<?php 
+<?php
 print_summary_menu( 'summary_page.php' );
 print_summary_submenu(); ?>
 <br />
@@ -137,7 +137,7 @@ print_summary_submenu(); ?>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<?php # PROJECT # 
+		<?php # PROJECT #
 			if ( 1 < count( $t_project_ids ) ) { ?>
 		<table class="width100" cellspacing="1">
 		<tr>

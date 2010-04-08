@@ -21,7 +21,7 @@
  * @link http://www.mantisbt.org
  */
 
-define( 'PLUGINS_DISABLED', true ); 
+define( 'PLUGINS_DISABLED', true );
 define( 'LANG_LOAD_DISABLED', true );
 
 /**
@@ -111,7 +111,7 @@ function checklangdir( $p_path, $p_subpath = '' ) {
 				if (file_exists( $p_path . DIRECTORY_SEPARATOR . $p_subpath . DIRECTORY_SEPARATOR . $file . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . 'strings_english.txt' ) ) {
 					echo "Testing english language for plugin '$file' (phase 1)...<br />";
 					flush();
-					checkfile( $p_path . DIRECTORY_SEPARATOR . $p_subpath . DIRECTORY_SEPARATOR . $file . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR,  'strings_english.txt' );			
+					checkfile( $p_path . DIRECTORY_SEPARATOR . $p_subpath . DIRECTORY_SEPARATOR . $file . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR,  'strings_english.txt' );
 				}
 			}
 
@@ -181,7 +181,7 @@ $basevariables = Array();
 function checktoken( $file, $base = false ) {
 	$in_php_code = false;
 	$variables = Array();
-	global $basevariables;	
+	global $basevariables;
 	$current_var = null;
 	$last_token = 0;
 	$set_variable = false;
@@ -293,13 +293,13 @@ function checktoken( $file, $base = false ) {
 						print_error( "PARSER - NEW LINE IN STRING: " . $id . token_name( $id ) . $text . $line );
 						$pass = false;
 						$fatal = true;
-					}					
+					}
 					$last_token2 = T_VARIABLE;
 					$expectendarr = true;
 					break;
 				case T_CONSTANT_ENCAPSED_STRING:
 					if ( $token[1][0] != '\'' ) {
-							print_error( "ERROR: Language strings should be single-quoted (line $line)" );						
+							print_error( "ERROR: Language strings should be single-quoted (line $line)" );
 					}
 					if( $last_token == T_VARIABLE && $set_variable && $current_var != null ) {
 						if( isset( $variables[$current_var] ) ) {
@@ -307,7 +307,7 @@ function checktoken( $file, $base = false ) {
 						} else {
 							$variables[$current_var] = $text;
 						}
-						
+
 						if ( $base ) {
 							// english
 							//if( isset( $basevariables[$current_var] ) ) {
@@ -316,12 +316,12 @@ function checktoken( $file, $base = false ) {
 							$basevariables[$current_var] = true;
 						} else {
 							if( !isset( $basevariables[$current_var] ) ) {
-								print_error( "WARN: String defined in non-english file that does not exist ( $current_var )" ); 
+								print_error( "WARN: String defined in non-english file that does not exist ( $current_var )" );
 							//} else {
 								// missing translation
 							}
 						}
-						
+
 					}
 					if ( strpos($current_var,"\n") !== false ) {
 						print_error( "PARSER - NEW LINE IN STRING: " . $id . token_name( $id ) . $text . $line );
@@ -343,7 +343,7 @@ function checktoken( $file, $base = false ) {
 				$last_token = $last_token2;
 			}
 		}
-		
+
 		if ($fatal)
 			break;
 	}

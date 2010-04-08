@@ -279,7 +279,7 @@ $user_count = db_num_rows( $result );
 		?>
 	</td>
 	<td>
-		<?php 
+		<?php
 			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'access_level' ), 'access_level', $c_dir, $c_sort, $c_hide, $c_filter );
 			print_sort_icon( $c_dir, $c_sort, 'access_level' );
 		?>
@@ -291,19 +291,19 @@ $user_count = db_num_rows( $result );
 		?>
 	</td>
 	<td>
-		<?php 
+		<?php
 			print_manage_user_sort_link(  'manage_user_page.php', $t_lock_image, 'protected', $c_dir, $c_sort, $c_hide, $c_filter );
 			print_sort_icon( $c_dir, $c_sort, 'protected' );
 		?>
 	</td>
 	<td>
-		<?php 
+		<?php
 			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'date_created' ), 'date_created', $c_dir, $c_sort, $c_hide, $c_filter );
 			print_sort_icon( $c_dir, $c_sort, 'date_created' );
 		?>
 	</td>
 	<td>
-		<?php 
+		<?php
 			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'last_visit' ), 'last_visit', $c_dir, $c_sort, $c_hide, $c_filter );
 			print_sort_icon( $c_dir, $c_sort, 'last_visit' );
 		?>
@@ -354,8 +354,8 @@ for ($i=0;$i<$user_count;$i++) {
 </tr>
 <?php
 	}  # end for
-	
-	# -- Page number links -- 
+
+	# -- Page number links --
 ?>
 	<tr>
 		<td class="right" colspan="8">
@@ -372,7 +372,7 @@ for ($i=0;$i<$user_count;$i++) {
 	# Manage Form END
 ?>
 	<br />
-	<form method="get" action="manage_user_edit_page.php"<?php # CSRF protection not required here - form does not result in modifications ?>>	
+	<form method="get" action="manage_user_edit_page.php"<?php # CSRF protection not required here - form does not result in modifications ?>>
 		<?php echo lang_get( 'username' ) ?>
 		<input type="text" name="username" value="" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" />

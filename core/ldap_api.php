@@ -224,7 +224,7 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 		log_event( LOG_LDAP, "ldap_get_entries() returned false." );
 		return null;
 	}
-	
+
 	# Free results / unbind
 	log_event( LOG_LDAP, "Unbinding from LDAP server" );
 	ldap_free_result( $t_sr );

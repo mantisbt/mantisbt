@@ -128,7 +128,7 @@ if ( news_is_enabled() ) {
 		print_bracket_link( $t_rss_link, lang_get( 'rss' ) );
 	}
 
-	echo '</div>';		
+	echo '</div>';
 }
 
 html_page_bottom();

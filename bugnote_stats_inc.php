@@ -155,7 +155,7 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	</td>
 </tr>
 </table>
-<?php 
+<?php
 } # end if
 
 	collapse_closed( 'bugnotestats' );

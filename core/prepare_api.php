@@ -105,5 +105,5 @@ function prepare_version_string( $p_project_id, $p_version_id ) {
 		$t_version_text .= ' (' . date( $t_short_date_format, $t_version->date_order ) . ')';
 	}
 
-	return $t_version_text;	
+	return $t_version_text;
 }

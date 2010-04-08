@@ -38,7 +38,7 @@ $g_failed = false;
 
 /**
  * Print the result of an upgrade step.
- * 
+ *
  * @param integer $result       GOOD or BAD.
  * @param bool    $p_hard_fail  If result is BAD, sets the global failure flag.
  * @param string  $p_message    The message describing the upgrade step.

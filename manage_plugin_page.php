@@ -74,7 +74,7 @@ foreach( $t_plugins as $t_basename => $t_plugin ) {
 	}
 }
 
-if ( 0 < count( $t_plugins_installed ) ) { 
+if ( 0 < count( $t_plugins_installed ) ) {
 ?>
 <br/>
 <form action="manage_plugin_update.php" method="post">
@@ -186,10 +186,10 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 
 </table>
 </form>
-<?php 
+<?php
 }
 
-if ( 0 < count( $t_plugins_available ) ) { 
+if ( 0 < count( $t_plugins_available ) ) {
 ?>
 <br/>
 <table class="width100" cellspacing="1">

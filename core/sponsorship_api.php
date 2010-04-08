@@ -197,7 +197,7 @@ function sponsorship_get_all_ids( $p_bug_id ) {
 	static $s_cache_sponsorship_bug_ids = array();
 
 	$c_bug_id = db_prepare_int( $p_bug_id );
-	
+
 	if( isset( $s_cache_sponsorship_bug_ids[$c_bug_id] ) ) {
 		return $s_cache_sponsorship_bug_ids[$c_bug_id];
 	}

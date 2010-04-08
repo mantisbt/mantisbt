@@ -22,7 +22,7 @@
  * @link http://www.mantisbt.org
  * @package MantisBT
  */
- 
+
 /**
  * Abstract class for any plugin that's modifying textual output.
  * @package MantisBT

@@ -194,11 +194,11 @@ class BugData {
 			$this->fetch_extended_info();
 		return $this->{$name};
 	}
-	
+
 	/**
 	 * @private
 	 */
-	public function __isset($name) {	
+	public function __isset($name) {
 		return isset( $this->{$name} );
 	}
 
@@ -214,13 +214,13 @@ class BugData {
 		}
 		$this->loading = false;
 	}
-	
+
 	/**
 	 * Retrieves extended information for bug (e.g. bug description)
 	 * @return null
 	 */
 	private function fetch_extended_info() {
-		if ( $this->description == '' ) {				
+		if ( $this->description == '' ) {
 			$t_text = bug_text_cache_row($this->id);
 
 			$this->description = $t_text['description'];

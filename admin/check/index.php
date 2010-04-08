@@ -72,7 +72,7 @@ $t_show_errors_mode_link = '<a href="index.php?show_all=' . ($g_show_all ? '1' :
 	<thead>
 		<td colspan="2" class="thead1"><strong>Checking your MantisBT installation...</strong></td>
 	</thead>
-<?php 
+<?php
 
 define( 'CHECK_PHP_INC_ALLOW', true );
 include( 'check_php_inc.php' );

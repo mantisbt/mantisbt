@@ -50,22 +50,22 @@ class MantisGraphPlugin extends MantisPlugin  {
 			'jpgraph_antialias' => ON,
 		);
 	}
-	
+
 	function init() {
 		//mantisgraph_autoload();
 		spl_autoload_register( array( 'MantisGraphPlugin', 'autoload' ) );
-		
+
 		$t_path = config_get_global('plugin_path' ). plugin_get_current() . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR;
 
 		set_include_path(get_include_path() . PATH_SEPARATOR . $t_path);
 	}
-	
+
 	public static function autoload( $className ) {
 		if (class_exists( 'ezcBase' ) ) {
 			ezcBase::autoload( $className );
 		}
 	}
-	
+
 	function hooks( ) {
 		$hooks = array(
 			'EVENT_MENU_SUMMARY' => 'summary_menu',
@@ -77,12 +77,12 @@ class MantisGraphPlugin extends MantisPlugin  {
 
 	function summary_menu( ) {
 		return array( '<a href="' . plugin_page( 'summary_jpgraph_page' ) . '">' . plugin_lang_get( 'menu_advanced_summary' ) . '</a>', );
-	}	
+	}
 
 	function graph_filter_menu( ) {
 		return array( '<a href="' . plugin_page( 'bug_graph_page.php' ) . '">' . plugin_lang_get( 'graph_bug_page_link' ) . '</a>', );
-	}		
-	
+	}
+
 	function summary_submenu( ) {
 		$t_icon_path = config_get( 'icon_path' );
 		return array( '<a href="' . helper_mantis_url( 'summary_page.php' ) . '"><img src="' . $t_icon_path . 'synthese.gif" border="0" alt="" />' . plugin_lang_get( 'synthesis_link' ) . '</a>',
@@ -92,7 +92,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 			'<a href="' . plugin_page( 'summary_graph_imp_category.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . plugin_lang_get( 'category_link' ) . '</a>',
 			'<a href="' . plugin_page( 'summary_graph_imp_resolution.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" alt="" />' . plugin_lang_get( 'resolution_link' ) . '</a>',
  		);
-	}	
+	}
 
 }
 

@@ -67,21 +67,21 @@ abstract class MantisSession {
 	 * @param mixed $p_default
 	 */
 	abstract function get( $p_name, $p_default = null );
-	
+
 	/**
 	 * set session data
 	 * @param string $p_name
 	 * @param mixed $p_value
 	 */
 	abstract function set( $p_name, $p_value );
-	
+
 	/**
 	 * delete session data
 	 * @param string $p_name
 	 */
 	abstract function delete( $p_name );
 
-	/** 
+	/**
 	 * destroy session
 	 */
 	abstract function destroy();
@@ -138,7 +138,7 @@ class MantisPHPSession extends MantisSession {
 	 * get session data
 	 * @param string $p_name
 	 * @param mixed $p_default
-	 */	
+	 */
 	function get( $p_name, $p_default=null ) {
 		if ( isset( $_SESSION[ $this->key ][ $p_name ] ) ) {
 			return unserialize( $_SESSION[ $this->key ][ $p_name ] );
@@ -169,7 +169,7 @@ class MantisPHPSession extends MantisSession {
 		unset( $_SESSION[ $this->key ][ $p_name ] );
 	}
 
-	/** 
+	/**
 	 * destroy session
 	 */
 	function destroy() {

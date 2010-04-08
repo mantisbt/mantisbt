@@ -43,8 +43,8 @@
 require_api( 'constant_inc.php' );
 require_api( 'utility_api.php' );
 
-/** 
- * constant(s) defining the output formats supported by dot and neato. 
+/**
+ * constant(s) defining the output formats supported by dot and neato.
  */
 define( 'GRAPHVIZ_ATTRIBUTED_DOT', 0 );
 define( 'GRAPHVIZ_PS', 1 );
@@ -68,7 +68,7 @@ define( 'GRAPHVIZ_SVGZ', 26 );
 define( 'GRAPHVIZ_CANONICAL_DOT', 27 );
 define( 'GRAPHVIZ_PDF', 28 );
 
-/** 
+/**
  * Base class for graph creation and manipulation. By default,
  * undirected graphs are generated. For directed graphs, use Digraph
  * class.
@@ -184,7 +184,7 @@ class Graph {
 		),
 	);
 
-	/** 
+	/**
 	 * Constructor for Graph objects.
 	 * @param string $p_name
 	 * @param array $p_attributes
@@ -434,7 +434,7 @@ class Graph {
 		}
 	}
 
-	/** 
+	/**
 	 * PROTECTED function to build a node or edge attribute list.
 	 * @param array $p_attributes
 	 * @return string
@@ -506,7 +506,7 @@ class Graph {
  * @subpackage classes
  */
 class Digraph extends Graph {
-	/** 
+	/**
 	 * Constructor for Digraph objects.
 	 * @param string $p_name
 	 * @param array $p_attributes
@@ -518,7 +518,7 @@ class Digraph extends Graph {
 		parent::Graph( $p_name, $p_attributes, $p_tool, $p_com_module );
 	}
 
-	/** 
+	/**
 	 * Generates a directed graph representation (suitable for dot).
 	 */
 	function generate() {

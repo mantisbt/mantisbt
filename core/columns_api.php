@@ -73,7 +73,7 @@ require_api( 'string_api.php' );
 function columns_filter_disabled( $p_columns ) {
 	$t_columns = array();
 	$t_enable_profiles = ( config_get( 'enable_profiles' ) == ON );
-	
+
 	foreach ( $p_columns as $t_column ) {
 		switch( $t_column ) {
 			case 'os':
@@ -135,11 +135,11 @@ function columns_get_standard() {
 	if( config_get( 'enable_eta' ) == OFF ) {
 		unset( $t_columns['eta'] );
 	}
-	
-	if( config_get( 'enable_projection' ) == OFF ) { 
+
+	if( config_get( 'enable_projection' ) == OFF ) {
 		unset( $t_columns['projection'] );
 	}
-	
+
 	if( config_get( 'enable_product_build' ) == OFF ) {
 		unset( $t_columns['build'] );
 	}

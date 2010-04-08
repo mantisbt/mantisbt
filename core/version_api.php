@@ -465,7 +465,7 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
  * @param int $p_released
  * @param bool $p_obsolete
  * @return array
- */ 
+ */
 function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_obsolete = false ) {
 	$t_project_where = helper_project_specific_where( $p_project_id );
 
@@ -629,7 +629,7 @@ function version_get( $p_version_id ) {
  * Return a copy of the version structure with all the instvars prepared for db insertion
  * @param VersionData $p_version_info
  * @return VersionData
- */ 
+ */
 function version_prepare_db( $p_version_info ) {
 	$p_version_info->id = db_prepare_int( $p_version_info->id );
 	$p_version_info->project_id = db_prepare_int( $p_version_info->project_id );

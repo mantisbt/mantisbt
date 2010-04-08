@@ -115,7 +115,7 @@ html_head_end();
 html_body_begin();
 
 $f_bug_arr = explode( ',', $f_export );
-$t_count_exported = 0;	
+$t_count_exported = 0;
 $t_date_format = config_get( 'normal_date_format' );
 $t_short_date_format = config_get( 'short_date_format' );
 

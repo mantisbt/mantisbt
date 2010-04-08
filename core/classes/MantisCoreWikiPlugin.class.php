@@ -46,7 +46,7 @@ abstract class MantisCoreWikiPlugin extends MantisWikiPlugin {
 /**
  * Basic Dokuwiki support with old-style wiki integration.
  * @package MantisBT
- * @subpackage classes 
+ * @subpackage classes
  */
 class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 
@@ -84,7 +84,7 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 /**
  * Basic MediaWiki support with old-style wiki integration.
  * @package MantisBT
- * @subpackage classes 
+ * @subpackage classes
  */
 class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 
@@ -118,7 +118,7 @@ class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 /**
  * Basic Twiki support with old-style wiki integration.
  * @package MantisBT
- * @subpackage classes 
+ * @subpackage classes
  */
 class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 
@@ -156,7 +156,7 @@ class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 /**
  * Basic WikkaWiki support with old-style wiki integration.
  * @package MantisBT
- * @subpackage classes 
+ * @subpackage classes
  */
 class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 
@@ -194,7 +194,7 @@ class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 /**
  * Basic Xwiki support with old-style wiki integration.
  * @package MantisBT
- * @subpackage classes 
+ * @subpackage classes
  */
 class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 

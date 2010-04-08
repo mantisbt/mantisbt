@@ -146,7 +146,7 @@ if ( $g_global_profiles ) {
 </table>
 </form>
 </div>
-<?php 
+<?php
 	# Add Profile Form END
 	# Edit or Delete Profile Form BEGIN
 
@@ -194,7 +194,7 @@ if ( $g_global_profiles ) {
 </table>
 </form>
 </div>
-<?php 
+<?php
 } # Edit or Delete Profile Form END
 
 html_page_bottom();

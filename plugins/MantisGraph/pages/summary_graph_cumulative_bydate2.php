@@ -37,7 +37,7 @@
 	error_check(0,'foo');
 
 	$t_metrics = create_cumulative_bydate2();
-	
+
 	graph_cumulative_bydate2( $t_metrics, $f_width, $f_width * $t_ar );
 
 
@@ -141,7 +141,7 @@ $graph->driver->options->imageFormat = IMG_JPEG;
 		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
 		$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 	}*/
-	
+
 	$graph->renderToOutput( $p_graph_width, $p_graph_height);
 }
 

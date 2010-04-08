@@ -185,7 +185,7 @@ $t_icon_path = config_get( 'icon_path' );
 <table class="width100" cellspacing="1" cellpadding="2px">
 <tr>
 	<td class="form-title" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
-		<?php 
+		<?php
 			echo lang_get( 'viewing_bugs_title' );
 
 			if ( $row_count > 0 ) {
@@ -199,7 +199,7 @@ $t_icon_path = config_get( 'icon_path' );
 		?>
 	</td>
 	<td class="right" colspan="<?php echo $t_num_of_columns / 2 ?>">
-		<?php 
+		<?php
 			# print_bracket_link( 'print_all_bug_options_page.php', lang_get( 'printing_options_link' ) );
 			# print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 			# print_bracket_link( 'summary_page.php', lang_get( 'summary' ) );

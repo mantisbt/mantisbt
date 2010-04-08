@@ -32,7 +32,7 @@ class EnumTest extends SoapBase {
 	 */
 	public function testAccessLevel() {
 		$accessLevelsObjectRefs = $this->client->mc_enum_access_levels( $this->userName, $this->password);
-		
+
 		$accessLevels = EnumTest::ObjectRefsToAssoc( $accessLevelsObjectRefs );
 
 		// '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator'
@@ -48,7 +48,7 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests the mc_enum_access_levels with invalid credentials.
-	 * 
+	 *
 	 * @expectedException SoapFault
 	 */
 	public function testAccessLevelAccessDenied() {
@@ -60,7 +60,7 @@ class EnumTest extends SoapBase {
 	 */
 	public function testStatus() {
 		$statusesObjectRefs = $this->client->mc_enum_status($this->userName, $this->password);
-		
+
 		$statuses = EnumTest::ObjectRefsToAssoc( $statusesObjectRefs );
 
 		// '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed'
@@ -77,7 +77,7 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests mc_enum_status method with invalid credentials.
-	 * 
+	 *
 	 * @expectedException SoapFault
 	 */
 	public function testStatusAccessDenied() {
@@ -89,7 +89,7 @@ class EnumTest extends SoapBase {
 	 */
 	public function testPriority() {
 		$prioritiesObjectRefs = $this->client->mc_enum_priorities($this->userName, $this->password);
-		
+
 		$priorities = EnumTest::ObjectRefsToAssoc( $prioritiesObjectRefs );
 
 		// '10:none,20:low,30:normal,40:high,50:urgent,60:immediate'
@@ -105,19 +105,19 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests mc_enum_priorities method with invalid credentials.
-	 * 
+	 *
 	 * @expectedException SoapFault
 	 */
 	public function testPriorityAccessDenied() {
 		$this->client->mc_enum_priorities( 'administrator', '' );
 	}
-	
+
 	/**
 	 * Tests mc_enum_reproducibilities method.
 	 */
 	public function testReproducibility() {
 		$reproducibilityObjectRefs = $this->client->mc_enum_reproducibilities($this->userName, $this->password);
-		
+
 		$reproducibilities = EnumTest::ObjectRefsToAssoc( $reproducibilityObjectRefs );
 
 		// '10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A'
@@ -133,19 +133,19 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests mc_enum_reproducibilities method with invalid credentials.
-	 * 
+	 *
 	 * @expectedException SoapFault
 	 */
 	public function testReproducibilityAccessDenied() {
 		$this->client->mc_enum_reproducibilities( 'administrator', '' );
 	}
-	
+
 	/**
 	 * Tests mc_enum_severities method.
 	 */
 	public function testSeverity() {
 		$severityObjectRefs = $this->client->mc_enum_severities($this->userName, $this->password);
-		
+
 		$severities = EnumTest::ObjectRefsToAssoc( $severityObjectRefs );
 
 		// '10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block'
@@ -163,7 +163,7 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests mc_enum_severities method with invalid credentials.
-	 * 
+	 *
 	 * @expectedException SoapFault
 	 */
 	public function testSeverityAccessDenied() {
@@ -175,7 +175,7 @@ class EnumTest extends SoapBase {
 	 */
 	public function testProjection() {
 		$projectionObjectRefs = $this->client->mc_enum_projections($this->userName, $this->password);
-		
+
 		$projections = EnumTest::ObjectRefsToAssoc( $projectionObjectRefs );
 
 		// '10:none,30:tweak,50:minor fix,70:major rework,90:redesign'
@@ -190,7 +190,7 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests mc_enum_projections method with invalid credentials.
-	 * 
+	 *
 	 * @expectedException SoapFault
 	 */
 	public function testProjectionAccessDenied() {
@@ -218,7 +218,7 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests mc_enum_etas method with invalid credentials.
-	 * 
+	 *
 	 * @expectedException SoapFault
 	 */
 	public function testEtaAccessDenied() {
@@ -227,10 +227,10 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests mc_enum_resolutions method.
-	 */ 
+	 */
 	public function testResolution() {
 		$resolutionObjectRefs = $this->client->mc_enum_resolutions($this->userName, $this->password);
-		
+
 		$resolutions = EnumTest::ObjectRefsToAssoc( $resolutionObjectRefs );
 
 		// '10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:wont fix'
@@ -249,7 +249,7 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests mc_enum_resolutions method with invalid credentials.
-	 * 
+	 *
 	 * @expectedException SoapFault
 	 */
 	public function testResolutionAccessDenied() {
@@ -268,11 +268,11 @@ class EnumTest extends SoapBase {
 	 */
 	private static function ObjectRefsToAssoc( $objectRefs ) {
 		$assocArray = array();
-		
+
 		foreach ( $objectRefs as $objectRef ) {
 			$assocArray[$objectRef->id] = $objectRef->name;
 		}
-		
+
 		return $assocArray;
 	}
 }

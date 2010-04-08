@@ -123,8 +123,8 @@ $f_parent_id = gpc_get( 'parent_id', null );
 		<input type="checkbox" name="inherit_parent" checked="checked" />
 	</td>
 </tr>
-<?php 
-	} 
+<?php
+	}
 
 	if ( config_get( 'allow_file_upload' ) ) {
 		$t_default_upload_path = '';

@@ -11,9 +11,9 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
-	
+
 	$t_lang = mci_get_user_lang( $t_user_id );
-	
+
 	if( !project_exists( $p_project_id ) ) {
 		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
 	}
@@ -581,43 +581,43 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 	} else {
 		$t_name = $p_project['name'];
 	}
-	
+
 	if( isset( $p_project['status'] ) ) {
 		$t_status = $p_project['status'];
 	} else {
 		$t_status = array( 'name' => 'development' ); // development
 	}
-	
+
 	if( isset( $p_project['view_state'] ) ) {
 		$t_view_state = $p_project['view_state'];
 	} else {
 		$t_view_state = array( 'id' => VS_PUBLIC );
 	}
-	
+
 	if ( isset( $p_project['enabled'] ) ) {
 		$t_enabled = $p_project['enabled'];
 	} else {
 		$t_enabled = true;
 	}
-	
+
 	if ( isset( $p_project['description'] ) ) {
 		$t_description = $p_project['description'];
 	} else {
 		$t_description = '';
 	}
-	
-	if ( isset( $p_project['file_path'] ) ) {	
+
+	if ( isset( $p_project['file_path'] ) ) {
 		$t_file_path = $p_project['file_path'];
-	} else { 
+	} else {
 		$t_file_path = '';
 	}
-	
-	if ( isset( $p_project['inherit_global'] ) ) { 
+
+	if ( isset( $p_project['inherit_global'] ) ) {
 		$t_inherit_global = $p_project['inherit_global'];
 	} else {
 		$t_inherit_global = true;
 	}
-	
+
 	// check to make sure project doesn't already exist
 	if( !project_is_name_unique( $t_name ) ) {
 		return new soap_fault( 'Client', '', 'Project name exists', 'The project name you attempted to add exists already' );

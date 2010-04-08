@@ -52,7 +52,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 		return mci_soap_fault_login_failed();
 	}
 	$t_lang = mci_get_user_lang( $t_user_id );
-	
+
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}

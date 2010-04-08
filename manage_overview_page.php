@@ -74,7 +74,7 @@ print_manage_menu();
 </tr>
 
 <?php
-$t_is_admin = current_user_is_administrator(); 
+$t_is_admin = current_user_is_administrator();
 if ( $t_is_admin ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
@@ -98,7 +98,7 @@ if ( $t_is_admin ) {
 <?php
 }
 
-event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) ) 
+event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) )
 ?>
 
 </table>

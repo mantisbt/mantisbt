@@ -49,7 +49,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
-	
+
 	$t_lang = mci_get_user_lang( $t_user_id );
 
 	if( !bug_exists( $p_issue_id ) ) {
@@ -106,25 +106,25 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['relationships'] = mci_issue_get_relationships( $p_issue_id, $t_user_id );
 	$t_issue_data['notes'] = mci_issue_get_notes( $p_issue_id );
 	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
-	
+
 	return $t_issue_data;
 }
 
 /**
  * Returns the category name, possibly null if no category is assigned
- * 
+ *
  * @param int $p_category_id
- * @return string 
+ * @return string
  */
 function mci_get_category( $p_category_id ) {
 	if ( $p_category_id == 0 )
 		return '';
-		
+
 	return mci_null_if_empty( category_get_name( $p_category_id ) );
 }
 
 /**
- * 
+ *
  * @param BugData $bug
  * @return soapval the value to be encoded as the due date
  */
@@ -134,7 +134,7 @@ function mci_issue_get_due_date( $p_bug ) {
 	} else {
 		return new soapval( 'due_date','xsd:dateTime', null );
 	}
-	
+
 }
 
 /**
@@ -226,11 +226,11 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
  */
 function mci_issue_get_attachments( $p_issue_id ) {
 	$t_attachment_rows = bug_get_attachments( $p_issue_id );
-	
+
 	if ( $t_attachment_rows == null) {
 		return array();
 	}
-	
+
 	$t_result = array();
 	foreach( $t_attachment_rows as $t_attachment_row ) {
 		$t_attachment = array();
@@ -298,7 +298,7 @@ function mci_issue_get_notes( $p_issue_id ) {
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	$t_user_bugnote_order = 'ASC'; // always get the notes in ascending order for consistency to the calling application.
 	$t_has_time_tracking_access = access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_issue_id );
-	
+
 	$t_result = array();
 	foreach( bugnote_get_all_visible_bugnotes( $p_issue_id, $t_user_bugnote_order, 0 ) as $t_value ) {
 		$t_bugnote = array();
@@ -309,7 +309,7 @@ function mci_issue_get_notes( $p_issue_id ) {
 		$t_bugnote['text'] = $t_value->note;
 		$t_bugnote['view_state'] = mci_enum_get_array_by_id( $t_value->view_state, 'view_state', $t_lang );
 		$t_bugnote['time_tracking'] = $t_has_time_tracking_access ? $t_value->time_tracking : 0;
-		
+
 		$t_result[] = $t_bugnote;
 	}
 
@@ -506,7 +506,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	}
 
 	$t_category = isset ( $p_issue['category'] ) ? $p_issue['category'] : null;
-	
+
 	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if ( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if ( !isset( $p_issue['category'] ) || is_blank( $p_issue['category'] ) ) {
@@ -561,7 +561,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
 	$t_bug_data->sponsorship_total = isset( $p_issue['sponsorship_total'] ) ? $p_issue['sponsorship_total'] : 0;
-	
+
 	if ( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
 		$t_bug_data->due_date = mci_iso8601_to_timestamp( $p_issue['due_date'] );
 	} else {
@@ -670,7 +670,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	}
 
 	$t_category = isset ( $p_issue['category'] ) ? $p_issue['category'] : null;
-	
+
 	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if ( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if ( isset( $p_issue['category'] ) && !is_blank( $p_issue['category'] ) ) {
@@ -760,7 +760,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 
 	# submit the issue
 	$t_is_success = $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
-	
+
 	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'], true );
 
 	if ( isset( $p_issue['notes'] ) && is_array( $p_issue['notes'] ) ) {
@@ -783,7 +783,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 				}
 			} else {
 				$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-				
+
 				bugnote_add( $p_issue_id, $t_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $t_note ), $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id, FALSE );
 			}
 		}
@@ -865,7 +865,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 			'id' => config_get( 'default_bug_view_status' ),
 		);
 	}
-	
+
 	$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
 	return bugnote_add( $p_issue_id, $p_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $p_note ), $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id );
 }
@@ -1050,34 +1050,34 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 
 /**
  * Returns the date in iso8601 format, with proper timezone offset applied
- * 
+ *
  * @param string $p_date the date in iso8601 format
  * @return int the timestamp
  */
 function mci_iso8601_to_timestamp( $p_date ) {
-	
+
 	// retrieve the offset, seems to be lost by nusoap
 	$t_utc_date = new DateTime( $p_date, new DateTimeZone( 'UTC' ) );
 	$t_timezone = new DateTimeZone( date_default_timezone_get() );
-	$t_offset = $t_timezone->getOffset( $t_utc_date ); 
-	
+	$t_offset = $t_timezone->getOffset( $t_utc_date );
+
 	$t_raw_timestamp = iso8601_to_timestamp( $p_date );
-	
+
 	return $t_raw_timestamp - $t_offset;
-	
+
 }
 
 
 /**
  * Returns an array for SOAP encoding from a BugData object
- * 
+ *
  * @param BugData $p_issue_data
  * @param int $p_user_id
  * @param string $p_lang
  * @return array The issue as an array
  */
 function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
-	
+
 		$t_id = $p_issue_data->id;
 
 		$t_issue = array();
@@ -1124,6 +1124,6 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['relationships'] = mci_issue_get_relationships( $p_issue_data->id, $p_user_id );
 		$t_issue['notes'] = mci_issue_get_notes( $p_issue_data->id );
 		$t_issue['custom_fields'] = mci_issue_get_custom_fields( $p_issue_data->id );
-		
+
 		return $t_issue;
 }

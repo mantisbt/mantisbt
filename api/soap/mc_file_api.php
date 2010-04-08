@@ -135,10 +135,10 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 }
 /**
  * Returns the attachment contents
- *  
- * @param int $p_file_id 
+ *
+ * @param int $p_file_id
  * @param string $p_type The file type, bug or doc
- * @param int $p_user_id 
+ * @param int $p_user_id
  * @return string|soap_fault the string contents, or a soap_fault
  */
 function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
@@ -164,11 +164,11 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	}
 
 	$result = db_query( $query );
-	
+
 	if ( $result->EOF ) {
 		return new soap_fault( 'Client', '', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
 	}
-	
+
 	$row = db_fetch_array( $result );
 
 	if ( $p_type == 'doc' ) {

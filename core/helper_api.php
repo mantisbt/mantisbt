@@ -180,7 +180,7 @@ function check_selected( $p_var, $p_val = true ) {
  * @param mixed $p_var
  * @param mixed $p_val
  * @return null
- */ 
+ */
 function check_checked( $p_var, $p_val = true ) {
 	if( $p_var == $p_val ) {
 		echo ' checked="checked" ';
@@ -381,7 +381,7 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 }
 
 /**
- * 
+ *
  * @param int $p_columns_target
  * @param bool $p_viewable_only
  * @param int $p_user_id

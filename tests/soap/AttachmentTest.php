@@ -27,10 +27,10 @@ require_once 'SoapBase.php';
  * Test fixture for attachment methods
  */
 class AttachmentTest extends SoapBase {
-	
-	
+
+
 	private $projectAttachmentsToDelete = array();
-	
+
 	/**
 	 * A test case that tests the following:
 	 * 1. Create an issue.
@@ -41,14 +41,14 @@ class AttachmentTest extends SoapBase {
 	 */
 	public function testAttachmentIsAdded() {
 		$issueToAdd = $this->getIssueToAdd( 'AttachmentTest.testAttachmentIsAdded' );
-		
+
 		$attachmentContents = 'Attachment contents.';
 
 		$issueId = $this->client->mc_issue_add(
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$attachmentId = $this->client->mc_issue_attachment_add(
@@ -59,7 +59,7 @@ class AttachmentTest extends SoapBase {
 			'txt',
 			base64_encode( $attachmentContents )
 		);
-		
+
 		$issue = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
@@ -67,33 +67,33 @@ class AttachmentTest extends SoapBase {
 		);
 
 		$attachment = $this->client->mc_issue_attachment_get(
-			$this->userName, 
-			$this->password, 
+			$this->userName,
+			$this->password,
 			$attachmentId);
-		
+
 		$this->assertEquals( 1, count( $issue->attachments ), 'count($issue->attachments)' );
 		$this->assertEquals( $attachmentContents, $attachment, '$attachmentContents' );
 	}
-	
-	
+
+
 	/**
 	 * A test case that tests the following:
 	 * 1. Gets a non-existing issue attachment
 	 * 2. Verifies that that an error is thrown
 	 */
 	public function testIssueAttachmentNotFound() {
-		
+
 		try {
 			$this->client->mc_issue_attachment_get(
-				$this->userName, 
-				$this->password, 
+				$this->userName,
+				$this->password,
 				-1);
 			$this->fail("Should have failed.");
 		} catch ( SoapFault $e) {
 			$this->assertRegexp('/Unable to find an attachment/', $e->getMessage());
 		}
-	}	
-	
+	}
+
 	/**
 	 * A test case that tests the following:
 	 * 1. Create an issue.
@@ -104,7 +104,7 @@ class AttachmentTest extends SoapBase {
 	 */
 	public function testProjectAttachmentIsAdded() {
 		$this->skipIfProjectDocumentationIsNotEnabled();
-		
+
 		$attachmentContents = 'Attachment contents.';
 
 		$attachmentId = $this->client->mc_project_attachment_add(
@@ -117,14 +117,14 @@ class AttachmentTest extends SoapBase {
 			'txt',
 			base64_encode( $attachmentContents )
 		);
-		
+
 		$this->projectAttachmentsToDelete[] = $attachmentId;
 
 		$attachment = $this->client->mc_project_attachment_get(
-			$this->userName, 
-			$this->password, 
+			$this->userName,
+			$this->password,
 			$attachmentId);
-		
+
 		$this->assertEquals( $attachmentContents, $attachment, '$attachmentContents' );
 	}
 
@@ -134,32 +134,32 @@ class AttachmentTest extends SoapBase {
 	 * 2. Verifies that an error is thrown
 	 */
 	public function testProjectAttachmentNotFound() {
-		
+
 		$this->skipIfProjectDocumentationIsNotEnabled();
-		
+
 		try {
 			$this->client->mc_project_attachment_get(
-				$this->userName, 
-				$this->password, 
+				$this->userName,
+				$this->password,
 				-1);
 			$this->fail("Should have failed.");
 		} catch ( SoapFault $e) {
 			$this->assertRegexp('/Unable to find an attachment/', $e->getMessage());
 		}
 	}
-	
+
 	private function skipIfProjectDocumentationIsNotEnabled() {
-		
+
 		$configEnabled = $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_project_documentation' );
-		
+
 		if ( ! $configEnabled  ) {
 			$this->markTestSkipped('Project documentation is not enabled.');
 		}
 	}
-		
+
 	protected function tearDown() {
 		SoapBase::tearDown();
-		
+
 		foreach ( $this->projectAttachmentsToDelete as $projectAttachmentId ) {
 			$this->client->mc_project_attachment_delete(
 				$this->userName,
@@ -167,6 +167,6 @@ class AttachmentTest extends SoapBase {
 				$projectAttachmentId);
 		}
 	}
-	
-	
+
+
 }

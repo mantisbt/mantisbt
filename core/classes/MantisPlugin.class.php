@@ -28,7 +28,7 @@
  * and integration with MantisBT. See the Mantis wiki for
  * more information.
  * @package MantisBT
- * @subpackage classes 
+ * @subpackage classes
  */
 abstract class MantisPlugin {
 
@@ -49,7 +49,7 @@ abstract class MantisPlugin {
 	 */
 	public $version		= null;
 	/**
-	 * requires - An array of key/value pairs of basename/version plugin dependencies. 
+	 * requires - An array of key/value pairs of basename/version plugin dependencies.
 	 * Prefixing a version with '<' will allow your plugin to specify a maximum version (non-inclusive) for a dependency.
 	 */
 	public $requires	= null;
@@ -76,7 +76,7 @@ abstract class MantisPlugin {
 	abstract public function register();
 
 	/**
-	 * this function allows your plugin to set itself up, include any necessary API's, declare or hook events, etc. 
+	 * this function allows your plugin to set itself up, include any necessary API's, declare or hook events, etc.
 	 * Alternatively, your can plugin can hook the EVENT_PLUGIN_INIT event that will be called after all plugins have be initialized.
 	 */
 	public function init() {}
@@ -109,7 +109,7 @@ abstract class MantisPlugin {
 	}
 
 	/**
-	 * This callback is executed after the normal schema upgrade process has executed. 
+	 * This callback is executed after the normal schema upgrade process has executed.
 	 * This gives your plugin the chance to convert or normalize data after an upgrade
 	 */
 	public function upgrade( $p_schema ) {
@@ -117,10 +117,10 @@ abstract class MantisPlugin {
 	}
 
 	/**
-	 * This callback is executed after the normal uninstallation process, and should 
-	 * handle such operations as reverting database schemas, removing unnecessary data, 
-	 * etc. This callback should be used only if Mantis would break when this plugin 
-	 * is uninstalled without any other actions taken, as users may not want to lose 
+	 * This callback is executed after the normal uninstallation process, and should
+	 * handle such operations as reverting database schemas, removing unnecessary data,
+	 * etc. This callback should be used only if Mantis would break when this plugin
+	 * is uninstalled without any other actions taken, as users may not want to lose
 	 * data, or be able to re-install the plugin later.
 	 */
 	public function uninstall() {

@@ -181,7 +181,7 @@ function string_display_line_links( $p_string ) {
 
 /**
  * Prepare a string for display in rss
- * @param string 
+ * @param string
  * @return string
  */
 function string_rss_links( $p_string ) {
@@ -206,7 +206,7 @@ function string_email( $p_string ) {
 /**
  * Prepare a string for plain text display in email and add URLs for bug
  * links
- * @param string 
+ * @param string
  * @return string
  */
 function string_email_links( $p_string ) {
@@ -217,7 +217,7 @@ function string_email_links( $p_string ) {
 # Process a string for display in a textarea box
 /**
  * @todo function documentation
- * @param string 
+ * @param string
  * @return string
  */
 function string_textarea( $p_string ) {
@@ -226,7 +226,7 @@ function string_textarea( $p_string ) {
 
 /**
  * Process a string for display in a text box
- * @param string 
+ * @param string
  * @return string
  */
 function string_attribute( $p_string ) {

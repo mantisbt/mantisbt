@@ -146,5 +146,5 @@ require_api( 'lang_api.php' );
 ?>
 
 <?php # Bugnote Add Form END ?>
-<?php 
+<?php
 }

@@ -38,7 +38,7 @@ if ( $f_to !== null ) {
 		echo "Sending or deleting emails...<br />";
 		email_send_all(true);
 		echo "Done";
-		
+
 	} else {
 		$t_email_data = email_queue_get( (int) $f_to );
 

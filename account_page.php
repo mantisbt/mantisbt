@@ -169,9 +169,9 @@ html_page_top( lang_get( 'account_link' ) );
 	<!-- Password -->
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
-			<?php 
+			<?php
 				echo lang_get( 'password' );
-				if ( $t_force_pw_reset ) { 
+				if ( $t_force_pw_reset ) {
 			?>
 			<span class="required">*</span>
 			<?php } ?>
@@ -184,9 +184,9 @@ html_page_top( lang_get( 'account_link' ) );
 	<!-- Password confirmation -->
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
-			<?php 
+			<?php
 				echo lang_get( 'confirm_password' );
-				if ( $t_force_pw_reset ) { 
+				if ( $t_force_pw_reset ) {
 			?>
 			<span class="required">*</span>
 			<?php } ?>
@@ -308,8 +308,8 @@ if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 	</form>
 </div>
 
-<?php 
-} 
+<?php
+}
 # Delete Account Form END
 
 html_page_bottom();

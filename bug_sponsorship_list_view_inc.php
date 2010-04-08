@@ -88,7 +88,7 @@ if ( $t_show_sponsorships ) {
 			<img src="images/dollars.gif" alt="<?php echo lang_get( 'sponsor_verb' ) ?>" border="0" />
 		</td>
 		<td class="form-title" colspan="2">
-		<?php 
+		<?php
 			collapse_icon( 'sponsorship' );
 
 			echo lang_get( 'users_sponsoring_bug' );
