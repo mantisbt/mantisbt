@@ -844,27 +844,25 @@ function plugin_init_installed() {
 	plugin_register( 'MantisCore' );
 	plugin_register_installed();
 
-	$t_plugins = array();
-	foreach( $g_plugin_cache as $t_basename => $t_plugin ) {
-		$t_plugins[] = $t_basename;
-	}
+	$t_plugins = array_keys( $g_plugin_cache );
 
-	$t_passes = 0;
 	do {
+		$t_continue = false;
 		$t_plugins_retry = array();
 
 		foreach( $t_plugins as $t_basename ) {
-			if( !plugin_init( $t_basename ) ) {
+			if( plugin_init( $t_basename ) ) {
+				$t_continue = true;
 
+			} else {
 				# Dependent plugin
 				$t_plugins_retry[] = $t_basename;
 			}
 		}
 
 		$t_plugins = $t_plugins_retry;
-		$t_passes++;
 	}
-	while( $t_passes <= count( $t_plugins ) );
+	while( $t_continue );
 
 	event_signal( 'EVENT_PLUGIN_INIT' );
 }
