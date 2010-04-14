@@ -570,16 +570,13 @@ function plugin_install( $p_plugin ) {
  * @return boolean True if plugin needs schema ugrades.
  */
 function plugin_needs_upgrade( $p_plugin ) {
-	plugin_push_current( $p_plugin->basename );
-
 	$t_plugin_schema = $p_plugin->schema();
 	if( is_null( $t_plugin_schema ) ) {
 		return false;
 	}
 
-	$t_plugin_schema_version = plugin_config_get( 'schema', -1 );
-
-	plugin_pop_current();
+	$t_config_option = 'plugin_' . $p_plugin->basename . '_schema';
+	$t_plugin_schema_version = config_get( $t_config_option, -1, ALL_USERS, ALL_PROJECTS );
 
 	return( $t_plugin_schema_version < count( $t_plugin_schema ) - 1 );
 }
@@ -853,6 +850,11 @@ function plugin_init( $p_basename ) {
 					return false;
 				}
 			}
+		}
+
+		# if plugin schema needs an upgrade, do not initialize
+		if ( plugin_needs_upgrade( $t_plugin ) ) {
+			return false;
 		}
 
 		plugin_push_current( $p_basename );
