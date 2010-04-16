@@ -330,7 +330,7 @@ for ($i=0;$i<$user_count;$i++) {
 		if ( access_has_global_level( $u_access_level ) ) {
 	?>
 		<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display_line( $u_username ) ?></a>
-	<?
+	<?php
 		} else {
 			echo string_display_line( $u_username );
 		}
