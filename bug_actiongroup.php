@@ -217,6 +217,23 @@
 			}
 			break;
 
+		case 'UP_PRODUCT_VERSION':
+			$f_product_version = gpc_get_string( 'product_version' );
+			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
+
+			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
+				if ( $f_product_version === '' || version_get_id( $f_product_version, $t_project_id ) !== false ) {
+					/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
+					bug_set_field( $t_bug_id, 'version', $f_product_version );
+					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
+				} else {
+					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_version' );
+				}
+			} else {
+				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
+			}
+			break;
+
 		case 'UP_FIXED_IN_VERSION':
 			$f_fixed_in_version = gpc_get_string( 'fixed_in_version' );
 			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
