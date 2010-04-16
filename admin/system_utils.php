@@ -94,5 +94,5 @@ foreach( $t_dest_ids as $t_id ) {
 	</center></td></tr>
 
 </table>
-<?
+<?php
 	html_page_bottom();
