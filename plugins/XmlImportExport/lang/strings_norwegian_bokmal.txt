@@ -29,13 +29,20 @@
  * @author Nghtwlkr
  */
 
+$s_plugin_XmlImportExport_title = 'Importer/eksporter problemer';
 $s_plugin_XmlImportExport_description = 'Legger til XML-baserte importerings- og eksporteringsevner til MantisBT.';
+$s_plugin_XmlImportExport_import = 'Importer problemer';
 $s_plugin_XmlImportExport_export = 'XML-eksport';
+$s_plugin_XmlImportExport_importing_in_project = 'Importerer problemer i prosjektet:';
 $s_plugin_XmlImportExport_import_options = 'Importer valg';
 $s_plugin_XmlImportExport_cross_references = 'Kryssreferanser';
 $s_plugin_XmlImportExport_default_strategy = 'Standard konverteringsstrategi:';
+$s_plugin_XmlImportExport_renumber = 'Omnummerer';
+$s_plugin_XmlImportExport_renumber_desc = 'Prøv å konvertere referanser til ny nummerering';
 $s_plugin_XmlImportExport_link = 'Lenke';
 $s_plugin_XmlImportExport_link_desc = 'Konverter til en lenke til det opprinnelige elementet';
 $s_plugin_XmlImportExport_disable = 'Deaktiver';
 $s_plugin_XmlImportExport_disable_desc = 'Deaktiver lenken';
+$s_plugin_XmlImportExport_fallback = 'Tilbakefallsstrategi (når «Omnummerer» ikke passer):';
+$s_plugin_XmlImportExport_fallback_category = 'Tilbakefallskategori:';
 $s_plugin_XmlImportExport_keep_same_category = 'Forsøk å beholde samme kategori';

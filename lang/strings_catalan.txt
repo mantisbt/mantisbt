@@ -28,6 +28,7 @@
  *
  * @author Bernat
  * @author Bernat Pegueroles - bpf@pegueroles.com
+ * @author Paucabot
  * @author Solde
  * @author Ssola
  */
@@ -1073,14 +1074,14 @@ $s_reopen_issue = 'Reobre una incidència';
 $s_view_private_issues = 'Mostra incidències privades';
 $s_update_readonly_issues = 'Actualitza incidències de només lectura';
 $s_update_issue_status = 'Actualitza estat de la incidència';
-$s_set_view_status = 'Defineix visibilitat (públic vs privat)';
-$s_update_view_status = 'Actualitza visibilitat (públic vs privat)';
+$s_set_view_status = 'Defineix l\'estat (públic o privat)';
+$s_update_view_status = 'Actualitza l\'estat (públic o privat)';
 $s_show_list_of_users_monitoring_issue = 'Mostra la llista d\'usuaris que monitoritzen una incidència';
 $s_notes = 'NOTES';
 $s_add_notes = 'Afegeix notes';
 $s_update_notes = 'Actualitza notes';
 $s_delete_note = 'Elimina nota';
-$s_view_private_notes = 'Mostra privada de notes';
+$s_view_private_notes = 'Mostra les notes privades';
 $s_news = 'NOTÍCIES';
 $s_view_private_news = 'Mostra notícies privades';
 $s_manage_news = 'AdminisGlobalstra notícies';

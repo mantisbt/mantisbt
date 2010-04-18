@@ -36,6 +36,7 @@
  * @author Locos epraix
  * @author Luis Miguel Cruz Miranda - luismi@b2bi.es
  * @author Pablo Corral - PabloCorral@ciudad.com.ar
+ * @author Pertile
  * @author Peter17
  * @author Sanbec
  */
@@ -44,7 +45,7 @@ $s_actiongroup_menu_move = 'Mover';
 $s_actiongroup_menu_copy = 'Copiar';
 $s_actiongroup_menu_assign = 'Asignar';
 $s_actiongroup_menu_close = 'Cerrar';
-$s_actiongroup_menu_delete = 'Eliminar';
+$s_actiongroup_menu_delete = 'Borrar';
 $s_actiongroup_menu_resolve = 'Resolver';
 $s_actiongroup_menu_update_priority = 'Cambiar Prioridad';
 $s_actiongroup_menu_update_status = 'Cambiar Estado';
@@ -463,7 +464,7 @@ $s_close_immediately = 'Cerrar inmediatamente:';
 $s_closed_bug_title = 'Cerrar Incidencia';
 $s_bug_deleted_msg = 'La incidencia ha sido eliminada...';
 $s_delete_bug_sure_msg = '¿Está seguro que desea eliminar esta incidencia?';
-$s_delete_bug_button = 'Eliminar Incidencia';
+$s_delete_bug_button = 'Borrar';
 $s_monitor_bug_button = 'Monitorizar';
 $s_unmonitor_bug_button = 'Concluir Monitorización';
 $s_file_upload_msg = 'Archivo subido';
@@ -528,6 +529,8 @@ $s_view_revisions = 'Ver revisiones';
 $s_revision = 'Revisión';
 $s_revision_by = '%1$s por %2$s';
 $s_revision_drop = 'Suprimir';
+$s_bug_revision_dropped_history = 'Historial de revisión descartado';
+$s_bugnote_revision_dropped_history = 'Nota de revisión descartada';
 $s_all_revisions = 'Todas las revisiones';
 $s_back_to_issue = 'Volver a la Incidencia';
 $s_confirm_revision_drop = '¿Está seguro que desea suprimir esta revisión de la incidencia?';
@@ -537,7 +540,7 @@ $s_bugnote_deleted_msg = 'La Nota fue eliminada...';
 $s_bug_notes_title = 'Notas';
 $s_edit_bugnote_title = 'Editar Nota';
 $s_no_bugnotes_msg = 'No hay notas asociadas a esta incidencia.';
-$s_delete_link = 'Eliminar';
+$s_delete_link = 'Borrar';
 $s_add_bugnote_title = 'Agregar Nota';
 $s_add_bugnote_button = 'Agregar Nota';
 $s_bugnote_edit_link = 'Editar';
@@ -1051,7 +1054,7 @@ $s_relationship_replaced = 'relación reemplazada';
 $s_replace_relationship_button = 'reemplazar';
 $s_replace_relationship_sure_msg = 'Existe una relación entre las dos Incidencias. ¿Está seguro que desea reemplazarla?';
 $s_relationship_with_parent = 'relación con la incidencia de la que depende';
-$s_delete_relationship_button = 'Eliminar';
+$s_delete_relationship_button = 'Borrar';
 $s_delete_relationship_sure_msg = '¿Está seguro que desea borrar esta relación?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'No todas las incidencias que bloquean ésta están resueltas o cerradas.';
 $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ATENCIÓN</b>. No todos los elementos que bloquean esta incidencia están resueltos o cerrados.<br />Antes de <b>cerrar/resolver</b> una incidencia, todos sus elementos subordinados deben estar resueltos o cerrados.';

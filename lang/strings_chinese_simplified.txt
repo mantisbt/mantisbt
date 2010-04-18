@@ -33,6 +33,7 @@
  * @author PhiLiP
  * @author Riceball LEE riceballl@hotmail.com
  * @author Singoo, singoo@163.com
+ * @author XanaduNWH
  * @author liaobin@jite.net
  * @author rerbin@lonmo.com
  * @author zoomq@itcase.com
@@ -57,6 +58,7 @@ $s_actiongroup_menu_update_product_build = '更新产品Build';
 $s_actiongroup_menu_add_note = '添加注释';
 $s_actiongroup_menu_attach_tags = '添加标签';
 $s_actiongroup_bugs = '选择问题';
+$s_actiongroup_error_issue_is_readonly = '问题是只读的';
 $s_all_projects = '所有项目';
 $s_move_bugs = '移动问题';
 $s_operation_successful = '操作成功。';
@@ -222,6 +224,7 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP 验证失败';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = '连接至 LDAP 服务器失败';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = '更新 LDAP 记录失败。';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = '没有找到 LDAP 帐号记录。';
+$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP扩展未被加载';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = '数据库连接失败。数据库返回的错误信息是：#%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = '数据库查询失败。数据库返回的错误信息是：#%1$d: %2$s 查询语句：%3$s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = '数据库选择失败。数据库返回的错误信息是：#%1$d: %2$s。';
@@ -230,7 +233,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '没有指定的复制操作。';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '没有找到类别。';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '已存在同名版本。';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = '没有找到版本“%1$s” 。';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = '帐号名称无效；帐号名称只能由字串、数字、空格、“-”或“_”组成。';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = '用户名无效。用户名只能包含字母、数字、空格、连字符、点、加号和下划线。';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = '用户姓名无效。';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = '用户没有足够的操作权限';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '选定的“姓名”与另一个帐号的登录帐号名称相同；请重新选择。';
@@ -255,10 +258,12 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '已达到
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '此操作将造成项目从属结构发生错误的循环结构。';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '你不能更改系统中唯一一个系统管理员的操作权限。';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = '页面重定向错误，请确定在 config_inc.php 或 custom_*.php 文件的 PHP 代码块 (&lt;?php ?&gt;部分)中没有多余的空格。';
+$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Twitter集成所需要的PHP cURL扩展未安装。';
+$MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = '无效日期格式';
 $s_login_error = '很遗憾，你无法登陆，请确认是否正确地输入了用户名和密码；如果仍无法登录，请咨询管理员是否你的账号被锁定。';
 $s_login_cookies_disabled = '你的浏览器禁用了 Cookies 功能，或者你可能使用了不支持 Cookie 的旧版浏览器；请启用 Cookie，或者升级你的浏览器。';
 $s_go_back = '返回';
-$s_proceed = '按这里继续';
+$s_proceed = '已处理';
 $s_switch = '切换';
 $s_logged_in_as = '您好';
 $s_administrator = '管理员';
@@ -372,6 +377,7 @@ $s_email_bugnote_limit = '发送问题注释 Email 发送限制';
 $s_language = '界面语言';
 $s_update_prefs_button = '更新设置';
 $s_reset_prefs_button = '重置为默认设置';
+$s_timezone = '时区';
 $s_prefs_reset_msg = '个人设置已经更改...';
 $s_prefs_updated_msg = '个人设置已经更改...';
 $s_profile_added_msg = '平台配置已添加...';
@@ -509,10 +515,10 @@ $s_bugnote_updated_msg = '已经被成功更新问题注释...';
 $s_edited_on = '编辑于：';
 $s_show_content = '显示内容';
 $s_memory_usage_in_kb = '内存使用： %1$s KB';
-$s_click_to_login = '点击这里登录';
+$s_click_to_login = '登录';
 $s_login_page_info = '欢迎访问问题跟踪管理系统';
 $s_login_title = '登录';
-$s_save_login = '记住此次登录';
+$s_save_login = '在此计算机上保留登陆信息';
 $s_secure_session = '安全Session';
 $s_secure_session_long = '仅允许通过本IP使用你的session.';
 $s_choose_project = '选择项目';
@@ -962,6 +968,7 @@ $s_simple_filters = '简易过滤器';
 $s_monitored_by = '监视人';
 $s_attachments = '附件';
 $s_bytes = '字节';
+$s_attachment_missing = '附件丢失';
 $s_phpmailer_language = 'zh';
 $s_sponsors = '%1$d 项资助';
 $s_sponsorship_added = '已添加资助';
