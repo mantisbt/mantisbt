@@ -123,42 +123,12 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 	} else if ( isset( $_SERVER['SERVER_ADDR'] ) ) {
 		$t_host = $_SERVER['SERVER_ADDR'] . $t_port;
 	} else {
-		$t_host = 'www.example.com';
+		$t_host = 'localhost';
 	}
 
-	// Get server root to compare with path to this file
-	if( !isset( $_SERVER['DOCUMENT_ROOT'] ) ) {
-		if( isset( $_SERVER['SCRIPT_FILENAME'] ) ) {
-			$_SERVER['DOCUMENT_ROOT'] = str_replace( '\\', '/', substr( $_SERVER['SCRIPT_FILENAME'], 0, 0 - strlen( $_SERVER['SCRIPT_NAME'] ) ) );
-		}
-	}
+	$t_path = str_replace( basename( $_SERVER['PHP_SELF'] ), '', $_SERVER['PHP_SELF'] );
+	$t_url	= $t_protocol . '://' . $t_host . $t_path;
 
-	if( !isset( $_SERVER['DOCUMENT_ROOT'] ) ) {
-		if( isset( $_SERVER['PATH_TRANSLATED'] ) ) {
-			$_SERVER['DOCUMENT_ROOT'] = str_replace( '\\', '/', substr( str_replace( '\\\\', '\\', $_SERVER['PATH_TRANSLATED'] ), 0, 0 - strlen( $_SERVER['SCRIPT_NAME'] ) ) );
-		}
-	}
-
-	$t_docroot = rtrim( $_SERVER['DOCUMENT_ROOT'], '/' );
-	$t_file_path = str_replace( DIRECTORY_SEPARATOR, '/', __FILE__ );
-
-	// Extract the unique directory path of this file relative to the server's documunt root
-	if ( preg_match( '@' . preg_quote( $t_docroot ) . '(.*)@', $t_file_path, $t_matches ) ) {
-		$t_path = dirname( strip_tags( $t_matches[1] ) );
-	} else {
-		$t_path = dirname( strip_tags( $_SERVER['SCRIPT_NAME'] ) );
-		if ( '/' == $t_path || '\\' == $t_path ) {
-			$t_path = '';
-		}
-	}
-	$t_path = rtrim($t_path, '/');
-
-	$inc_files = get_included_files();
-
-	$t_relative_path = str_replace( dirname($t_file_path), '', str_replace( DIRECTORY_SEPARATOR, '/', dirname($inc_files[0])));
-	$t_path = str_replace( $t_relative_path, '', $t_path );
-
-	$t_url	= $t_protocol . '://' . $t_host . $t_path.'/';
 } else {
 	$t_path = '';
 	$t_host = '';
@@ -170,7 +140,7 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
  * requires trailing /
  * @global string $g_path
  */
-$g_path	= isset( $t_url ) ? $t_url : 'http://www.example.com/mantisbt/';
+$g_path	= isset( $t_url ) ? $t_url : 'http://localhost/mantisbt/';
 
 /**
  * path to your images directory (for icons)
@@ -184,7 +154,7 @@ $g_icon_path = '%path%images/';
  * requires trailing /
  * @global string $g_short_path
  */
-$g_short_path = $t_path . '/';
+$g_short_path = $t_path;
 
 /**
  * absolute path to your installation.  Requires trailing / or \
