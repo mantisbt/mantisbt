@@ -416,8 +416,8 @@ function project_get_id_by_name( $p_project_name ) {
 }
 
 # Return the row describing the given project
-function project_get_row( $p_project_id ) {
-	return project_cache_row( $p_project_id );
+function project_get_row( $p_project_id, $p_trigger_errors = true ) {
+	return project_cache_row( $p_project_id, $p_trigger_errors );
 }
 
 # Return all rows describing all projects
