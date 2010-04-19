@@ -136,7 +136,7 @@
 				<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
 			</td>
 			<td class="center">
-				<?php echo string_display_line( project_get_name( $v_project_id ) ) ?>
+				<?php echo string_display_line( project_get_name( $v_project_id, false ) ) ?>
 			</td>
 			<td>
 				<?php echo string_display_line( $v_config_id ) ?>
