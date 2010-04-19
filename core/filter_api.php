@@ -3314,7 +3314,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					if( META_FILTER_CURRENT == $t_current ) {
 						$t_this_name = lang_get( 'current' );
 					} else {
-						$t_this_name = project_get_name( $t_current );
+						$t_this_name = project_get_name( $t_current, false );
 					}
 					if( $t_first_flag != true ) {
 						$t_output = $t_output . '<br />';
