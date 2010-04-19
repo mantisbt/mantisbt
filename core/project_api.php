@@ -99,6 +99,7 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 		$g_cache_project_missing[(int) $p_project_id] = true;
 
 		if( $p_trigger_errors ) {
+			error_parameters( $p_project_id );
 			trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
 		} else {
 			return false;
@@ -438,25 +439,26 @@ function project_get_all_rows() {
 }
 
 # Return the specified field of the specified project
-function project_get_field( $p_project_id, $p_field_name ) {
-	$row = project_get_row( $p_project_id );
+function project_get_field( $p_project_id, $p_field_name, $p_trigger_errors = true ) {
+	$row = project_get_row( $p_project_id, $p_trigger_errors );
 
 	if( isset( $row[$p_field_name] ) ) {
 		return $row[$p_field_name];
-	} else {
+	} else if ( $p_trigger_errors ) {
 		error_parameters( $p_field_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
-		return '';
 	}
+
+	return '';
 }
 
 # Return the name of the project
 # Handles ALL_PROJECTS by returning the internationalized string for All Projects
-function project_get_name( $p_project_id ) {
+function project_get_name( $p_project_id, $p_trigger_errors = true ) {
 	if( ALL_PROJECTS == $p_project_id ) {
 		return lang_get( 'all_projects' );
 	} else {
-		return project_get_field( $p_project_id, 'name' );
+		return project_get_field( $p_project_id, 'name', $p_trigger_errors );
 	}
 }
 
