@@ -131,6 +131,9 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 
 	switch( $t_method ) {
 		case 'halt':
+			# disable any further event callbacks
+			event_clear_callbacks();
+
 			$t_oblen = ob_get_length();
 			if( error_handled() && $t_oblen > 0 ) {
 				$t_old_contents = ob_get_contents();

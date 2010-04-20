@@ -108,6 +108,19 @@ function event_hook_many( $p_hooks, $p_plugin = 0 ) {
 }
 
 /**
+ * In the case of errors that halt execution, it is useful to
+ * clear the list of event callbacks so that no other callbacks
+ * are executed while the error message is being displayed.
+ */
+function event_clear_callbacks() {
+	global $g_event_cache;
+
+	foreach( $g_event_cache as $t_name => $t_event_info ) {
+		$g_event_cache[$t_name]['callbacks'] = array();
+	}
+}
+
+/**
  * Signal an event to execute and handle callbacks as necessary.
  * @param string Event name
  * @param multi Event parameters
