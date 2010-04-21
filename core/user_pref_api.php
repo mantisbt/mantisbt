@@ -461,7 +461,9 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	static $t_vars;
 	global $g_cache_current_user_pref;
 
-	if ( isset( $g_cache_current_user_pref[(int)$p_project_id] ) &&  auth_get_current_user_id() == $p_user_id ) {
+	if ( isset( $g_cache_current_user_pref[(int)$p_project_id] ) &&
+		auth_is_user_authenticated() &&
+		auth_get_current_user_id() == $p_user_id ) {
 		return $g_cache_current_user_pref[(int)$p_project_id];
 	}
 
@@ -497,7 +499,7 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 			$t_prefs->$var = $row[$var];
 		}
 	}
-	if ( auth_get_current_user_id() == $p_user_id ) {
+	if ( auth_is_user_authenticated() && auth_get_current_user_id() == $p_user_id ) {
 		$g_cache_current_user_pref[ (int)$p_project_id ] = $t_prefs;
 	}
 	return $t_prefs;
