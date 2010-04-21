@@ -648,7 +648,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_platform = isset( $p_issue['platform'] ) ? $p_issue['platform'] : '';
 	$t_os = isset( $p_issue['os'] ) ? $p_issue['os'] : '';
 	$t_os_build = isset( $p_issue['os_build'] ) ? $p_issue['os_build'] : '';
-	$t_sponsorship_total = isset( $p_issue['sponsorship_total'] ) ? $p_issue['sponsorship_total'] : '';
+	$t_sponsorship_total = isset( $p_issue['sponsorship_total'] ) ? $p_issue['sponsorship_total'] : 0;
 
 	if( $t_reporter_id == 0 ) {
 		$t_reporter_id = $t_user_id;
