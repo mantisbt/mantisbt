@@ -222,9 +222,16 @@
 
 	foreach ( $tpl_links as $t_plugin => $t_hooks ) {
 		foreach( $t_hooks as $t_hook ) {
-			foreach( $t_hook as $t_label => $t_href ) {
-				echo '&nbsp;';
-				print_bracket_link( $t_href, $t_label );
+			if ( is_array( $t_hook ) ) {
+				foreach( $t_hook as $t_label => $t_href ) {
+					if ( is_numeric( $t_label ) ) {
+						print_bracket_link_prepared( $t_href );
+					} else {
+						print_bracket_link( $t_href, $t_label );
+					}
+				}
+			} else {
+				print_bracket_link_prepared( $t_hook );
 			}
 		}
 	}
