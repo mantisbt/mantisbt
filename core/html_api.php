@@ -999,11 +999,8 @@ function print_manage_menu( $p_page = '' ) {
 	}
 
 	// Plugins menu items
-	// TODO: this would be a call to print_pracket_link but the events returns cooked links so we cant
 	foreach( $t_menu_options as $t_menu_item ) {
-		echo '<span class="bracket-link">[&nbsp;';
-		echo $t_menu_item;
-		echo '&nbsp;]</span> ';
+		print_bracket_link_prepared( $t_menu_item );
 	}
 
 	echo '</p></div>';
