@@ -189,7 +189,10 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	history_log_event_special( $p_bug_id, BUGNOTE_ADDED, bugnote_format_id( $t_bugnote_id ) );
 
 	# if it was FEEDBACK its NEW_ now
-	if ( bug_get_field( $p_bug_id, 'status' ) == config_get( 'bug_feedback_status' ) && bug_get_field( $p_bug_id, 'reporter_id' ) == $c_user_id ) {
+	if ( config_get( 'reassign_on_feedback' ) &&
+		bug_get_field( $p_bug_id, 'status' ) == config_get( 'bug_feedback_status' ) &&
+		bug_get_field( $p_bug_id, 'reporter_id' ) == $c_user_id ) {
+
 		if ( bug_get_field( $p_bug_id, 'handler_id') == 0 ) {
 			bug_set_field( $p_bug_id, 'status', config_get( 'bug_submit_status' ) );
 		} else {
