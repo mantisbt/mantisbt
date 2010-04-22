@@ -1076,6 +1076,26 @@ function print_manage_config_menu( $p_page = '' ) {
 		print_bracket_link( helper_mantis_url( $t_manage_email ), lang_get( 'manage_email_config' ) );
 		print_bracket_link( $t_manage_columns, lang_get( 'manage_columns_config' ) );
 
+		# Plugin / Event added options
+		$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );
+		$t_menu_options = array();
+		foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+			foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+				if( is_array( $t_callback_menu_options ) ) {
+					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+				} else {
+					if ( !is_null( $t_callback_menu_options ) ) {
+						$t_menu_options[] = $t_callback_menu_options;
+					}
+				}
+			}
+		}
+
+		// Plugins menu items
+		foreach( $t_menu_options as $t_menu_item ) {
+			print_bracket_link_prepared( $t_menu_item );
+		}
+
 		echo '</div>';
 	}
 }
