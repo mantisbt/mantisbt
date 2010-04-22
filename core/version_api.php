@@ -218,6 +218,7 @@ function version_update( $p_version_info ) {
 
 	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
+	$t_history_table = db_get_table( 'mantis_bug_history_table' );
 
 	$query = "UPDATE $t_project_version_table
 				  SET version=" . db_param() . ",
@@ -249,11 +250,24 @@ function version_update( $p_version_info ) {
 					  WHERE ( project_id IN ( $t_project_list ) ) AND ( target_version=" . db_param() . ')';
 		db_query_bound( $query, Array( $c_version_name, $c_old_version_name ) );
 
+		$query = "UPDATE $t_history_table
+			SET old_value=".db_param()."
+			WHERE field_name IN ('version','fixed_in_version','target_version')
+				AND old_value=".db_param()."
+				AND bug_id IN (SELECT id FROM $t_bug_table WHERE project_id IN ( $t_project_list ))";
+		db_query_bound( $query, Array( $c_version_name, $c_old_version_name ) );
+
+		$query = "UPDATE $t_history_table
+			SET new_value=".db_param()."
+			WHERE field_name IN ('version','fixed_in_version','target_version')
+				AND new_value=".db_param()."
+				AND bug_id IN (SELECT id FROM $t_bug_table WHERE project_id IN ( $t_project_list ))";
+		db_query_bound( $query, Array( $c_version_name, $c_old_version_name ) );
+
 		/**
 		 * @todo We should consider using ids instead of names for foreign keys.  The main advantage of using the names are:
 		 *		- for history the version history entries will still be valid even if the version is deleted in the future. --  we can ban deleting referenced versions.
 		 *		- when an issue is copied or moved from one project to another, we can keep the last version with the issue even if it doesn't exist in the new project.  Also previous history entries remain valid.
-		 * @todo We should update the history for version, fixed_in_version, and target_version.
 		 * @todo We probably need to update the saved filters too?
 		 */
 	}
