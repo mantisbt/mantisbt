@@ -125,6 +125,15 @@ function http_content_headers() {
 }
 
 /**
+ * Set security headers (frame busting, clickjacking/XSS/CSRF protection).
+ */
+function http_security_headers() {
+	if ( !headers_sent() ) {
+		header( 'X-Frame-Options: DENY' );
+	}
+}
+
+/**
  * Load and set any custom headers defined by the site configuration.
  */
 function http_custom_headers() {
@@ -145,6 +154,7 @@ function http_all_headers() {
 	if ( !$g_bypass_headers && !headers_sent() ) {
 		http_content_headers();
 		http_caching_headers();
+		http_security_headers();
 		http_custom_headers();
 	}
 }
