@@ -1858,6 +1858,13 @@ $g_bug_reopen_status = FEEDBACK;
 $g_bug_feedback_status = FEEDBACK;
 
 /**
+ * Reassign (or set back to submit_status) an issue when a note is added
+ * by the issue reporter and the issue is in a feedback status.
+ * @global boolean $g_reassign_on_feedback
+ */
+$g_reassign_on_feedback = ON;
+
+/**
  * Resolution to assign to the bug when reopened.
  * @global int $g_bug_reopen_resolution
  */
