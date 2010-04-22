@@ -81,7 +81,20 @@ if ( $f_handler_id != NO_USER ) {
 	}
 }
 
-bug_assign( $f_bug_id, $f_handler_id );
+# Update handler and status
+$t_bug->handler_id = $f_handler_id;
+if( ( ON == config_get( 'auto_set_status_to_assigned' ) ) && ( NO_USER != $f_handler_id ) ) {
+	$t_bug->status = config_get( 'bug_assigned_status' );
+}
+
+# Plugin support
+$t_new_bug = event_signal( 'EVENT_UPDATE_BUG', $t_bug, $f_bug_id );
+if ( !is_null( $t_new_bug ) ) {
+	$t_bug = $t_new_bug;
+}
+
+# Update bug and send notifications
+$t_bug->update();
 
 form_security_purge( 'bug_assign' );
 
