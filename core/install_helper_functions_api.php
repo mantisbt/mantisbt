@@ -299,6 +299,70 @@ function install_correct_multiselect_custom_fields_db_format() {
 	return 2;
 }
 
+/**
+ *	The filters have been changed so the field names are the same as the database
+ *	field names.  This updates any filters stored in the database to use the correct
+ *	keys. The 'and_not_assigned' field is no longer used as it is replaced by the meta
+ *	filter None.  This removes it from all filters.
+ */
+function install_stored_filter_migrate() {
+	global $g_db_log_queries;
+
+	# Disable query logging due to possibility of mass spam.
+	if ( $g_db_log_queries !== 0 ) {
+		$t_log_queries = $g_db_log_queries;
+		$g_db_log_queries = 0;
+	} else {
+		$t_log_queries = null;
+	}
+
+	require_api( 'filter_api.php' );
+
+	$t_cookie_version = config_get( 'cookie_version' );
+
+	# convert filters to use the same value for the filter key and the form field
+	$t_filter_fields['show_category'] = 'category_id';
+	$t_filter_fields['show_severity'] = 'severity';
+	$t_filter_fields['show_status'] = 'status';
+	$t_filter_fields['show_priority'] = 'priority';
+	$t_filter_fields['show_resolution'] = 'resolution';
+	$t_filter_fields['show_build'] = 'build';
+	$t_filter_fields['show_version'] = 'version';
+	$t_filter_fields['user_monitor'] = 'monitor_user_id';
+	$t_filter_fields['show_profile'] = 'profile_id';
+	$t_filter_fields['do_filter_by_date'] = 'filter_by_date';
+	$t_filter_fields['and_not_assigned'] = null;
+	$t_filter_fields['sticky_issues'] = 'sticky';
+
+	$t_filters_table = db_get_table( 'filters' );
+	$t_query = "SELECT * FROM $t_filters_table";
+	$t_result = db_query_bound( $t_query );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_filter_arr = filter_deserialize( $t_row['filter_string'] );
+		foreach( $t_filter_fields AS $t_old=>$t_new ) {
+			$t_value = $t_filter_arr[$t_old];
+			unset( $t_filter_arr[$t_old] );
+			if( !is_null( $t_new ) ) {
+				$t_filter_arr[$t_new] = $t_value;
+			}
+		}
+
+		$t_filter_serialized = serialize( $t_filter_arr );
+		$t_filter_string = $t_cookie_version . '#' . $t_filter_serialized;
+
+		$t_update_query = "UPDATE $t_filters_table SET filter_string=" . db_param() . ' WHERE id=' . db_param();
+		$t_update_result = db_query_bound( $t_update_query, array( $t_filter_string, $t_row['id'] ) );
+	}
+
+	# Re-enable query logging if we disabled it.
+	if ( $t_log_queries !== null ) {
+		$g_db_log_queries = $t_log_queries;
+	}
+
+	# Return 2 because that's what ADOdb/DataDict does when things happen properly
+	return 2;
+}
+
 function install_do_nothing() {
 	# return 2 because that's what ADOdb/DataDict does when things happen properly
 	return 2;

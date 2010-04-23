@@ -1279,7 +1279,7 @@ function html_status_legend() {
 	}
 	$t_simple_filter = $t_current_filter['_view_type'] == 'simple';
 	if( $t_simple_filter ) {
-		if( !filter_field_is_any( $t_current_filter[FILTER_PROPERTY_STATUS_ID][0] ) ) {
+		if( !filter_field_is_any( $t_current_filter[FILTER_PROPERTY_STATUS][0] ) ) {
 			return null;
 		}
 	}
@@ -1304,13 +1304,13 @@ function html_status_legend() {
 	# Remove status values that won't appear as a result of the current filter
 	foreach( $t_status_array as $t_status => $t_name ) {
 		if( $t_simple_filter ) {
-			if( !filter_field_is_none( $t_current_filter[FILTER_PROPERTY_HIDE_STATUS_ID][0] ) &&
-				$t_status >= $t_current_filter[FILTER_PROPERTY_HIDE_STATUS_ID][0] ) {
+			if( !filter_field_is_none( $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) &&
+				$t_status >= $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) {
 				unset( $t_status_array[$t_status] );
 			}
 		} else {
-			if( !in_array( META_FILTER_ANY, $t_current_filter[FILTER_PROPERTY_STATUS_ID] ) &&
-				!in_array( $t_status, $t_current_filter[FILTER_PROPERTY_STATUS_ID] ) ) {
+			if( !in_array( META_FILTER_ANY, $t_current_filter[FILTER_PROPERTY_STATUS] ) &&
+				!in_array( $t_status, $t_current_filter[FILTER_PROPERTY_STATUS] ) ) {
 				unset( $t_status_array[$t_status] );
 			}
 		}

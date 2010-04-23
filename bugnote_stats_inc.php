@@ -95,14 +95,14 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
         <td class="category" width="25%">
                 <?php
 		$t_filter = array();
-		$t_filter['do_filter_by_date'] = 'on';
-		$t_filter['start_day'] = $t_bugnote_stats_from_d;
-		$t_filter['start_month'] = $t_bugnote_stats_from_m;
-		$t_filter['start_year'] = $t_bugnote_stats_from_y;
-		$t_filter['end_day'] = $t_bugnote_stats_to_d;
-		$t_filter['end_month'] = $t_bugnote_stats_to_m;
-		$t_filter['end_year'] = $t_bugnote_stats_to_y;
-		print_filter_do_filter_by_date( true );
+		$t_filter[FILTER_PROPERTY_FILTER_BY_DATE] = 'on';
+		$t_filter[FILTER_PROPERTY_START_DAY] = $t_bugnote_stats_from_d;
+		$t_filter[FILTER_PROPERTY_START_MONTH] = $t_bugnote_stats_from_m;
+		$t_filter[FILTER_PROPERTY_START_YEAR] = $t_bugnote_stats_from_y;
+		$t_filter[FILTER_PROPERTY_END_DAY] = $t_bugnote_stats_to_d;
+		$t_filter[FILTER_PROPERTY_END_MONTH] = $t_bugnote_stats_to_m;
+		$t_filter[FILTER_PROPERTY_END_YEAR] = $t_bugnote_stats_to_y;
+		print_filter_do_filter_by_date(true);
 		?>
         </td>
 </tr>

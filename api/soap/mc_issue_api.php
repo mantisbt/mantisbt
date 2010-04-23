@@ -334,13 +334,13 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	$t_none = defined( 'META_FILTER_NONE' ) ? META_FILTER_NONE : 'none';
 
 	$t_filter = array(
-		'show_category' => Array(
+		'category_id' => Array(
 			'0' => $t_any,
 		),
-		'show_severity' => Array(
+		'severity' => Array(
 			'0' => $t_any,
 		),
-		'show_status' => Array(
+		'status' => Array(
 			'0' => $t_any,
 		),
 		'highlight_changed' => 0,
@@ -350,19 +350,19 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 		'handler_id' => Array(
 			'0' => $t_any,
 		),
-		'show_resolution' => Array(
+		'resolution' => Array(
 			'0' => $t_any,
 		),
-		'show_build' => Array(
+		'build' => Array(
 			'0' => $t_any,
 		),
-		'show_version' => Array(
+		'version' => Array(
 			'0' => $t_any,
 		),
 		'hide_status' => Array(
 			'0' => $t_none,
 		),
-		'user_monitor' => Array(
+		'monitor_user_id' => Array(
 			'0' => $t_any,
 		),
 		'dir' => 'DESC',

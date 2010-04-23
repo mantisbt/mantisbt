@@ -1031,7 +1031,7 @@ function print_column_bugnotes_count( $p_bug, $p_columns_target = COLUMNS_TARGET
 
 	echo '<td class="center">';
 	if( $bugnote_count > 0 ) {
-		$t_show_in_bold = $v_bugnote_updated > strtotime( '-' . $t_filter['highlight_changed'] . ' hours' );
+		$t_show_in_bold = $v_bugnote_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' );
 		if( $t_show_in_bold ) {
 			echo '<span class="bold">';
 		}
@@ -1240,7 +1240,7 @@ function print_column_last_updated( $p_bug, $p_columns_target = COLUMNS_TARGET_V
 	$t_last_updated = string_display_line( date( config_get( 'short_date_format' ), $p_bug->last_updated ) );
 
 	echo '<td class="center">';
-	if( $p_bug->last_updated > strtotime( '-' . $t_filter['highlight_changed'] . ' hours' ) ) {
+	if( $p_bug->last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
 		printf( '<span class="bold">%s</span>', $t_last_updated );
 	} else {
 		echo $t_last_updated;

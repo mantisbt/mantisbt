@@ -185,7 +185,7 @@ function write_bug_rows ( $p_rows )
 {
 	global $t_columns, $t_filter;
 
-	$t_in_stickies = ( $t_filter && ( 'on' == $t_filter['sticky_issues'] ) );
+	$t_in_stickies = ( $t_filter && ( 'on' == $t_filter[FILTER_PROPERTY_STICKY] ) );
 
 	# pre-cache custom column data
 	columns_plugin_cache_issue_data( $p_rows );

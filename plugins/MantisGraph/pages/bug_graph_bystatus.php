@@ -54,8 +54,8 @@
 
 	$t_filter = current_user_get_bug_filter();
     $t_filter['_view_type']	= 'advanced';
-    $t_filter['show_status'] = array(META_FILTER_ANY);
-	$t_filter['sort'] = '';
+    $t_filter[FILTER_PROPERTY_STATUS] = array(META_FILTER_ANY);
+	$t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] = '';
 	$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
 	if ( count($rows) == 0 ) {
 		// no data to graph

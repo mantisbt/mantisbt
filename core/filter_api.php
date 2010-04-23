@@ -128,158 +128,154 @@ function filter_get_url( $p_custom_filter ) {
 			);
 		}
 
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PROJECT_ID, $t_project_id );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_PROJECT_ID, $t_project_id );
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FREE_TEXT] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_FREE_TEXT, $p_custom_filter[FILTER_PROPERTY_FREE_TEXT] );
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_SEARCH] ) ) {
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_SEARCH, $p_custom_filter[FILTER_PROPERTY_SEARCH] );
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_CATEGORY] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_CATEGORY, $p_custom_filter[FILTER_PROPERTY_CATEGORY] );
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_CATEGORY_ID] ) ) {
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_CATEGORY_ID, $p_custom_filter[FILTER_PROPERTY_CATEGORY_ID] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_REPORTER_ID] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_REPORTER_ID, $p_custom_filter[FILTER_PROPERTY_REPORTER_ID] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_REPORTER_ID, $p_custom_filter[FILTER_PROPERTY_REPORTER_ID] );
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_STATUS_ID] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_STATUS_ID, $p_custom_filter[FILTER_PROPERTY_STATUS_ID] );
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_STATUS] ) ) {
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_STATUS, $p_custom_filter[FILTER_PROPERTY_STATUS] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_MONITOR_USER_ID] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_MONITOR_USER_ID, $p_custom_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_MONITOR_USER_ID, $p_custom_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_HANDLER_ID] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_HANDLER_ID, $p_custom_filter[FILTER_PROPERTY_HANDLER_ID] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_HANDLER_ID, $p_custom_filter[FILTER_PROPERTY_HANDLER_ID] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_NOTE_USER_ID] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_NOTE_USER_ID, $p_custom_filter[FILTER_PROPERTY_NOTE_USER_ID] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_NOTE_USER_ID, $p_custom_filter[FILTER_PROPERTY_NOTE_USER_ID] );
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_SEVERITY_ID] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_SEVERITY_ID, $p_custom_filter[FILTER_PROPERTY_SEVERITY_ID] );
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_SEVERITY] ) ) {
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_SEVERITY, $p_custom_filter[FILTER_PROPERTY_SEVERITY] );
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_RESOLUTION_ID] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_RESOLUTION_ID, $p_custom_filter[FILTER_PROPERTY_RESOLUTION_ID] );
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_RESOLUTION] ) ) {
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_RESOLUTION, $p_custom_filter[FILTER_PROPERTY_RESOLUTION] );
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PRIORITY_ID] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PRIORITY_ID, $p_custom_filter[FILTER_PROPERTY_PRIORITY_ID] );
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PRIORITY] ) ) {
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_PRIORITY, $p_custom_filter[FILTER_PROPERTY_PRIORITY] );
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_VIEW_STATE_ID, $p_custom_filter[FILTER_PROPERTY_VIEW_STATE_ID] );
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_VIEW_STATE] ) ) {
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_VIEW_STATE, $p_custom_filter[FILTER_PROPERTY_VIEW_STATE] );
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_SHOW_STICKY_ISSUES, $p_custom_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] );
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_STICKY] ) ) {
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_STICKY, $p_custom_filter[FILTER_PROPERTY_STICKY] );
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PRODUCT_VERSION] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PRODUCT_VERSION, $p_custom_filter[FILTER_PROPERTY_PRODUCT_VERSION] );
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_VERSION] ) ) {
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_VERSION, $p_custom_filter[FILTER_PROPERTY_VERSION] );
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PRODUCT_BUILD] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PRODUCT_BUILD, $p_custom_filter[FILTER_PROPERTY_PRODUCT_BUILD] );
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_BUILD] ) ) {
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_BUILD, $p_custom_filter[FILTER_PROPERTY_BUILD] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FIXED_IN_VERSION] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_FIXED_IN_VERSION, $p_custom_filter[FILTER_PROPERTY_FIXED_IN_VERSION] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $p_custom_filter[FILTER_PROPERTY_FIXED_IN_VERSION] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_TARGET_VERSION] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_TARGET_VERSION, $p_custom_filter[FILTER_PROPERTY_TARGET_VERSION] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $p_custom_filter[FILTER_PROPERTY_TARGET_VERSION] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_SORT_FIELD_NAME] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_SORT_FIELD_NAME, $p_custom_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_SORT_FIELD_NAME, $p_custom_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_SORT_DIRECTION] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_SORT_DIRECTION, $p_custom_filter[FILTER_PROPERTY_SORT_DIRECTION] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_SORT_DIRECTION, $p_custom_filter[FILTER_PROPERTY_SORT_DIRECTION] );
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_SEARCH_ISSUES_PER_PAGE] ) ) {
-		if( $p_custom_filter[FILTER_SEARCH_ISSUES_PER_PAGE] != config_get( 'default_limit_view' ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_ISSUES_PER_PAGE, $p_custom_filter[FILTER_SEARCH_ISSUES_PER_PAGE] );
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] ) ) {
+		if( $p_custom_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] != config_get( 'default_limit_view' ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_ISSUES_PER_PAGE, $p_custom_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
 		}
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] ) ) {
 		if( $p_custom_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] != config_get( 'default_show_changed' ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_HIGHLIGHT_CHANGED, $p_custom_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] );
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_HIGHLIGHT_CHANGED, $p_custom_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] );
 		}
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_HIDE_STATUS_ID] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_HIDE_STATUS_ID, $p_custom_filter[FILTER_PROPERTY_HIDE_STATUS_ID] );
-	}
-
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_NOT_ASSIGNED] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_NOT_ASSIGNED, $p_custom_filter[FILTER_PROPERTY_NOT_ASSIGNED] );
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_HIDE_STATUS] ) ) {
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_HIDE_STATUS, $p_custom_filter[FILTER_PROPERTY_HIDE_STATUS] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_FILTER_BY_DATE, $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_FILTER_BY_DATE, $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] );
 
 		# The start and end dates are only applicable if filter by date is set.
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_DAY] ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_START_DAY, $p_custom_filter[FILTER_PROPERTY_START_DAY] );
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_START_DAY, $p_custom_filter[FILTER_PROPERTY_START_DAY] );
 		}
 
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_DAY] ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_END_DAY, $p_custom_filter[FILTER_PROPERTY_END_DAY] );
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_END_DAY, $p_custom_filter[FILTER_PROPERTY_END_DAY] );
 		}
 
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_MONTH] ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_START_MONTH, $p_custom_filter[FILTER_PROPERTY_START_MONTH] );
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_START_MONTH, $p_custom_filter[FILTER_PROPERTY_START_MONTH] );
 		}
 
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_MONTH] ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_END_MONTH, $p_custom_filter[FILTER_PROPERTY_END_MONTH] );
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_END_MONTH, $p_custom_filter[FILTER_PROPERTY_END_MONTH] );
 		}
 
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_YEAR] ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_START_YEAR, $p_custom_filter[FILTER_PROPERTY_START_YEAR] );
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_START_YEAR, $p_custom_filter[FILTER_PROPERTY_START_YEAR] );
 		}
 
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_YEAR] ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_END_YEAR, $p_custom_filter[FILTER_PROPERTY_END_YEAR] );
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_END_YEAR, $p_custom_filter[FILTER_PROPERTY_END_YEAR] );
 		}
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] ) ) {
 		if( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] != -1 ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_RELATIONSHIP_TYPE, $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_RELATIONSHIP_TYPE, $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
 		}
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_RELATIONSHIP_BUG, $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_RELATIONSHIP_BUG, $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PLATFORM] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PLATFORM, $p_custom_filter[FILTER_PROPERTY_PLATFORM] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_PLATFORM, $p_custom_filter[FILTER_PROPERTY_PLATFORM] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_OS] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_OS, $p_custom_filter[FILTER_PROPERTY_OS] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_OS, $p_custom_filter[FILTER_PROPERTY_OS] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_OS_BUILD] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_OS_BUILD, $p_custom_filter[FILTER_PROPERTY_OS_BUILD] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_OS_BUILD, $p_custom_filter[FILTER_PROPERTY_OS_BUILD] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_TAG_STRING] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_TAG_STRING, $p_custom_filter[FILTER_PROPERTY_TAG_STRING] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_TAG_STRING, $p_custom_filter[FILTER_PROPERTY_TAG_STRING] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_TAG_SELECT, $p_custom_filter[FILTER_PROPERTY_TAG_SELECT] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_TAG_SELECT, $p_custom_filter[FILTER_PROPERTY_TAG_SELECT] );
 	}
 
 	if( isset( $p_custom_filter['custom_fields'] ) ) {
@@ -487,8 +483,8 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED] = config_get( 'default_show_changed' );
 	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_SHOW_STICKY_ISSUES] = gpc_string_to_bool( config_get( 'show_sticky_issues' ) );
+	if( !isset( $p_filter_arr[FILTER_PROPERTY_STICKY] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_STICKY] = gpc_string_to_bool( config_get( 'show_sticky_issues' ) );
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = "last_updated";
@@ -539,20 +535,17 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_END_YEAR] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_END_YEAR] = gpc_get_string( FILTER_PROPERTY_END_YEAR, date( 'Y' ) );
 	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_FREE_TEXT] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_FREE_TEXT] = '';
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_NOT_ASSIGNED] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_NOT_ASSIGNED] = gpc_get_bool( FILTER_PROPERTY_NOT_ASSIGNED, false );
+	if( !isset( $p_filter_arr[FILTER_PROPERTY_SEARCH] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_SEARCH] = '';
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_FILTER_BY_DATE] = gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE, false );
 	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE_ID] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE_ID] = gpc_get( FILTER_PROPERTY_VIEW_STATE_ID, '' );
+	if( !isset( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE] = gpc_get( FILTER_PROPERTY_VIEW_STATE, '' );
 	}
-	else if( filter_field_is_any( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE_ID] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE_ID] = META_FILTER_ANY;
+	else if( filter_field_is_any( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE] = META_FILTER_ANY;
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_TYPE] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_TYPE] = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_TYPE, -1 );
@@ -664,25 +657,25 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 
 	# validate or filter junk from other fields
 	$t_multi_select_list = array(
-		FILTER_PROPERTY_CATEGORY => 'string',
-		FILTER_PROPERTY_SEVERITY_ID => 'int',
-		FILTER_PROPERTY_STATUS_ID => 'int',
+		FILTER_PROPERTY_CATEGORY_ID => 'string',
+		FILTER_PROPERTY_SEVERITY => 'int',
+		FILTER_PROPERTY_STATUS => 'int',
 		FILTER_PROPERTY_REPORTER_ID => 'int',
 		FILTER_PROPERTY_HANDLER_ID => 'int',
 		FILTER_PROPERTY_NOTE_USER_ID => 'int',
-		FILTER_PROPERTY_RESOLUTION_ID => 'int',
-		FILTER_PROPERTY_PRIORITY_ID => 'int',
-		FILTER_PROPERTY_PRODUCT_BUILD => 'string',
-		FILTER_PROPERTY_PRODUCT_VERSION => 'string',
-		FILTER_PROPERTY_HIDE_STATUS_ID => 'int',
+		FILTER_PROPERTY_RESOLUTION => 'int',
+		FILTER_PROPERTY_PRIORITY => 'int',
+		FILTER_PROPERTY_BUILD => 'string',
+		FILTER_PROPERTY_VERSION => 'string',
+		FILTER_PROPERTY_HIDE_STATUS => 'int',
 		FILTER_PROPERTY_FIXED_IN_VERSION => 'string',
 		FILTER_PROPERTY_TARGET_VERSION => 'string',
 		FILTER_PROPERTY_MONITOR_USER_ID => 'int',
-		'show_profile' => 'int',
+		FILTER_PROPERTY_PROFILE_ID => 'int',
 	);
 	foreach( $t_multi_select_list as $t_multi_field_name => $t_multi_field_type ) {
 		if( !isset( $p_filter_arr[$t_multi_field_name] ) ) {
-			if( FILTER_PROPERTY_HIDE_STATUS_ID == $t_multi_field_name ) {
+			if( FILTER_PROPERTY_HIDE_STATUS == $t_multi_field_name ) {
 				$p_filter_arr[$t_multi_field_name] = array(
 					config_get( 'hide_status_default' ),
 				);
@@ -765,13 +758,13 @@ function filter_get_default() {
 	$t_default_show_changed = config_get( 'default_show_changed' );
 
 	$t_filter = array(
-		FILTER_PROPERTY_CATEGORY => Array(
+		FILTER_PROPERTY_CATEGORY_ID => Array(
 			'0' => META_FILTER_ANY,
 		),
-		FILTER_PROPERTY_SEVERITY_ID => Array(
+		FILTER_PROPERTY_SEVERITY => Array(
 			'0' => META_FILTER_ANY,
 		),
-		FILTER_PROPERTY_STATUS_ID => Array(
+		FILTER_PROPERTY_STATUS => Array(
 			'0' => META_FILTER_ANY,
 		),
 		FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
@@ -784,16 +777,16 @@ function filter_get_default() {
 		FILTER_PROPERTY_PROJECT_ID => Array(
 			'0' => META_FILTER_CURRENT,
 		),
-		FILTER_PROPERTY_RESOLUTION_ID => Array(
+		FILTER_PROPERTY_RESOLUTION => Array(
 			'0' => META_FILTER_ANY,
 		),
-		FILTER_PROPERTY_PRODUCT_BUILD => Array(
+		FILTER_PROPERTY_BUILD => Array(
 			'0' => META_FILTER_ANY,
 		),
-		FILTER_PROPERTY_PRODUCT_VERSION => Array(
+		FILTER_PROPERTY_VERSION => Array(
 			'0' => META_FILTER_ANY,
 		),
-		FILTER_PROPERTY_HIDE_STATUS_ID => Array(
+		FILTER_PROPERTY_HIDE_STATUS => Array(
 			'0' => $t_hide_status_default,
 		),
 		FILTER_PROPERTY_MONITOR_USER_ID => Array(
@@ -930,7 +923,7 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 
 	$t_plugin_columns = columns_get_plugin_columns();
 
-	if ( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) && ( NULL !== $p_show_sticky ) ) {
+	if ( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_STICKY] ) && ( NULL !== $p_show_sticky ) ) {
 		$p_query_clauses['order'][] = "$t_bug_table.sticky DESC";
 	}
 
@@ -1254,8 +1247,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	# view state
-	$t_view_state = db_prepare_int( $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] );
-	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) ) {
+	$t_view_state = db_prepare_int( $t_filter[FILTER_PROPERTY_VIEW_STATE] );
+	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_VIEW_STATE] ) ) {
 		$t_view_state_query = "($t_bug_table.view_state=" . db_param() . ')';
 		log_event( LOG_FILTERING, 'view_state query = ' . $t_view_state_query );
 		$t_where_params[] = $t_view_state;
@@ -1333,10 +1326,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	# category
-	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_CATEGORY] ) ) {
+	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_CATEGORY_ID] ) ) {
 		$t_clauses = array();
 
-		foreach( $t_filter[FILTER_PROPERTY_CATEGORY] as $t_filter_member ) {
+		foreach( $t_filter[FILTER_PROPERTY_CATEGORY_ID] as $t_filter_member ) {
 			if( !filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, $t_filter_member );
 			}
@@ -1356,10 +1349,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	# severity
-	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_SEVERITY_ID] ) ) {
+	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_SEVERITY] ) ) {
 		$t_clauses = array();
 
-		foreach( $t_filter[FILTER_PROPERTY_SEVERITY_ID] as $t_filter_member ) {
+		foreach( $t_filter[FILTER_PROPERTY_SEVERITY] as $t_filter_member ) {
 			$c_show_severity = db_prepare_int( $t_filter_member );
 			array_push( $t_clauses, $c_show_severity );
 		}
@@ -1386,8 +1379,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		# simple filtering: if showing any, restrict by the hide status value, otherwise ignore the hide
 		$t_any_found = false;
-		$t_this_status = $t_filter[FILTER_PROPERTY_STATUS_ID][0];
-		$t_this_hide_status = $t_filter[FILTER_PROPERTY_HIDE_STATUS_ID][0];
+		$t_this_status = $t_filter[FILTER_PROPERTY_STATUS][0];
+		$t_this_hide_status = $t_filter[FILTER_PROPERTY_HIDE_STATUS][0];
 
 		if( filter_field_is_any( $t_this_status ) ) {
 			foreach( $t_available_statuses as $t_this_available_status ) {
@@ -1400,10 +1393,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		}
 	} else {
 		# advanced filtering: ignore the hide
-		if( filter_field_is_any( $t_filter[FILTER_PROPERTY_STATUS_ID] ) ) {
+		if( filter_field_is_any( $t_filter[FILTER_PROPERTY_STATUS] ) ) {
 			$t_desired_statuses = array();
 		} else {
-			foreach( $t_filter[FILTER_PROPERTY_STATUS_ID] as $t_this_status ) {
+			foreach( $t_filter[FILTER_PROPERTY_STATUS] as $t_this_status ) {
 				$t_desired_statuses[] = $t_this_status;
 			}
 		}
@@ -1430,10 +1423,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	# resolution
-	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_RESOLUTION_ID] ) ) {
+	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_RESOLUTION] ) ) {
 		$t_clauses = array();
 
-		foreach( $t_filter[FILTER_PROPERTY_RESOLUTION_ID] as $t_filter_member ) {
+		foreach( $t_filter[FILTER_PROPERTY_RESOLUTION] as $t_filter_member ) {
 			$c_show_resolution = db_prepare_int( $t_filter_member );
 			array_push( $t_clauses, $c_show_resolution );
 		}
@@ -1451,10 +1444,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	# priority
-	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_PRIORITY_ID] ) ) {
+	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_PRIORITY] ) ) {
 		$t_clauses = array();
 
-		foreach( $t_filter[FILTER_PROPERTY_PRIORITY_ID] as $t_filter_member ) {
+		foreach( $t_filter[FILTER_PROPERTY_PRIORITY] as $t_filter_member ) {
 			$c_show_priority = db_prepare_int( $t_filter_member );
 			array_push( $t_clauses, $c_show_priority );
 		}
@@ -1472,10 +1465,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	# product build
-	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_PRODUCT_BUILD] ) ) {
+	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_BUILD] ) ) {
 		$t_clauses = array();
 
-		foreach( $t_filter[FILTER_PROPERTY_PRODUCT_BUILD] as $t_filter_member ) {
+		foreach( $t_filter[FILTER_PROPERTY_BUILD] as $t_filter_member ) {
 			$t_filter_member = stripslashes( $t_filter_member );
 			if( filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, '' );
@@ -1498,10 +1491,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	# product version
-	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION] ) ) {
+	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_VERSION] ) ) {
 		$t_clauses = array();
 
-		foreach( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION] as $t_filter_member ) {
+		foreach( $t_filter[FILTER_PROPERTY_VERSION] as $t_filter_member ) {
 			$t_filter_member = stripslashes( $t_filter_member );
 			if( filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, '' );
@@ -1525,10 +1518,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	# profile
-	if( !filter_field_is_any( $t_filter['show_profile'] ) ) {
+	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_PROFILE_ID] ) ) {
 		$t_clauses = array();
 
-		foreach( $t_filter['show_profile'] as $t_filter_member ) {
+		foreach( $t_filter[FILTER_PROPERTY_PROFILE_ID] as $t_filter_member ) {
 			$t_filter_member = stripslashes( $t_filter_member );
 			if( filter_field_is_none( $t_filter_member ) ) {
 				array_push( $t_clauses, "0" );
@@ -1945,10 +1938,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	# Text search
-	if( !is_blank( $t_filter[FILTER_PROPERTY_FREE_TEXT] ) ) {
+	if( !is_blank( $t_filter[FILTER_PROPERTY_SEARCH] ) ) {
 
 		# break up search terms by spacing or quoting
-		preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $t_filter[FILTER_PROPERTY_FREE_TEXT], $t_matches, PREG_SET_ORDER );
+		preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $t_filter[FILTER_PROPERTY_SEARCH], $t_matches, PREG_SET_ORDER );
 
 		# organize terms without quoting, paying attention to negation
 		$t_search_terms = array();
@@ -2194,17 +2187,17 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HANDLER_ID . '[]';?>" id="handler_id_filter"><?php echo lang_get( 'assigned_to_label' )?></a>
 			</td>
 			<td colspan="2" class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_CATEGORY . '[]';?>" id="show_category_filter"><?php echo lang_get( 'category_label' )?></a>
+				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_CATEGORY_ID . '[]';?>" id="show_category_filter"><?php echo lang_get( 'category_label' )?></a>
 			</td>
 			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_SEVERITY_ID . '[]';?>" id="show_severity_filter"><?php echo lang_get( 'severity_label' )?></a>
+				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_SEVERITY . '[]';?>" id="show_severity_filter"><?php echo lang_get( 'severity_label' )?></a>
 			</td>
 			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_RESOLUTION_ID . '[]';?>" id="show_resolution_filter"><?php echo lang_get( 'resolution_label' )?></a>
+				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_RESOLUTION . '[]';?>" id="show_resolution_filter"><?php echo lang_get( 'resolution_label' )?></a>
 			</td>
 			<td class="small-caption" valign="top">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-					<a href="<?php echo $t_filters_url . 'show_profile[]';?>" id="show_profile_filter"><?php echo lang_get( 'profile_label' )?></a>
+					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PROFILE_ID . '[]';?>" id="show_profile_filter"><?php echo lang_get( 'profile_label' )?></a>
 				<?php } ?>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
@@ -2334,12 +2327,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							<?php
 								$t_output = '';
 		$t_any_found = false;
-		if( count( $t_filter[FILTER_PROPERTY_CATEGORY] ) == 0 ) {
+		if( count( $t_filter[FILTER_PROPERTY_CATEGORY_ID] ) == 0 ) {
 			echo lang_get( 'any' );
 		} else {
 			$t_first_flag = true;
-			foreach( $t_filter[FILTER_PROPERTY_CATEGORY] as $t_current ) {
-				echo '<input type="hidden" name="', FILTER_PROPERTY_CATEGORY, '[]" value="', $t_current, '" />';
+			foreach( $t_filter[FILTER_PROPERTY_CATEGORY_ID] as $t_current ) {
+				echo '<input type="hidden" name="', FILTER_PROPERTY_CATEGORY_ID, '[]" value="', $t_current, '" />';
 				$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
@@ -2365,12 +2358,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							<?php
 								$t_output = '';
 		$t_any_found = false;
-		if( count( $t_filter[FILTER_PROPERTY_SEVERITY_ID] ) == 0 ) {
+		if( count( $t_filter[FILTER_PROPERTY_SEVERITY] ) == 0 ) {
 			echo lang_get( 'any' );
 		} else {
 			$t_first_flag = true;
-			foreach( $t_filter[FILTER_PROPERTY_SEVERITY_ID] as $t_current ) {
-				echo '<input type="hidden" name="', FILTER_PROPERTY_SEVERITY_ID, '[]" value="', $t_current, '" />';
+			foreach( $t_filter[FILTER_PROPERTY_SEVERITY] as $t_current ) {
+				echo '<input type="hidden" name="', FILTER_PROPERTY_SEVERITY, '[]" value="', $t_current, '" />';
 				$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
@@ -2396,14 +2389,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							<?php
 								$t_output = '';
 		$t_any_found = false;
-		if( count( $t_filter[FILTER_PROPERTY_RESOLUTION_ID] ) == 0 ) {
+		if( count( $t_filter[FILTER_PROPERTY_RESOLUTION] ) == 0 ) {
 			echo lang_get( 'any' );
 		} else {
 			$t_first_flag = true;
-			foreach( $t_filter[FILTER_PROPERTY_RESOLUTION_ID] as $t_current ) {
-				?>
-										<input type="hidden" name="show_resolution[]" value="<?php echo $t_current;?>" />
-										<?php
+			foreach( $t_filter[FILTER_PROPERTY_RESOLUTION] as $t_current ) {
+				echo '<input type="hidden" name="', FILTER_PROPERTY_RESOLUTION, '[]" value="', $t_current, '" />';
 										$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
@@ -2430,14 +2421,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							<?php
 								$t_output = '';
 		$t_any_found = false;
-		if( count( $t_filter['show_profile'] ) == 0 ) {
+		if( count( $t_filter[FILTER_PROPERTY_PROFILE_ID] ) == 0 ) {
 			echo lang_get( 'any' );
 		} else {
 			$t_first_flag = true;
-			foreach( $t_filter['show_profile'] as $t_current ) {
-				?>
-										<input type="hidden" name="show_profile[]" value="<?php echo $t_current;?>" />
-										<?php
+			foreach( $t_filter[FILTER_PROPERTY_PROFILE_ID] as $t_current ) {
+				echo '<input type="hidden" name="', FILTER_PROPERTY_PROFILE_ID, '[]" value="', $t_current, '" />';
 										$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
@@ -2471,22 +2460,22 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
 			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_STATUS_ID . '[]';?>" id="show_status_filter"><?php echo lang_get( 'status_label' )?></a>
+				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_STATUS . '[]';?>" id="show_status_filter"><?php echo lang_get( 'status_label' )?></a>
 			</td>
 			<td class="small-caption" valign="top">
 				<?php if( 'simple' == $t_view_type ) {?>
-					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HIDE_STATUS_ID . '[]';?>" id="hide_status_filter"><?php echo lang_get( 'hide_status_label' )?></a>
+					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HIDE_STATUS . '[]';?>" id="hide_status_filter"><?php echo lang_get( 'hide_status_label' )?></a>
 				<?php
 		}?>
 			</td>
 			<td class="small-caption" valign="top">
 			<?php if ( $t_show_build ) { ?>
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRODUCT_BUILD . '[]';?>" id="show_build_filter"><?php echo lang_get( 'product_build_label' )?></a>
+				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_BUILD . '[]';?>" id="show_build_filter"><?php echo lang_get( 'product_build_label' )?></a>
 			<?php } ?>
 			</td>
 			<?php if( $t_show_product_version ) {?>
 			<td colspan="2" class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRODUCT_VERSION . '[]';?>" id="show_version_filter"><?php echo lang_get( 'product_version_label' )?></a>
+				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_VERSION . '[]';?>" id="show_version_filter"><?php echo lang_get( 'product_version_label' )?></a>
 			</td>
 			<td colspan="1" class="small-caption" valign="top">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_FIXED_IN_VERSION . '[]';?>" id="show_fixed_in_version_filter"><?php echo lang_get( 'fixed_in_version_label' )?></a>
@@ -2502,7 +2491,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<?php
 		}?>
 			<td colspan="1" class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRIORITY_ID . '[]';?>" id="show_priority_filter"><?php echo lang_get( 'priority_label' )?></a>
+				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRIORITY . '[]';?>" id="show_priority_filter"><?php echo lang_get( 'priority_label' )?></a>
 			</td>
 			<td colspan="1" class="small-caption" valign="top">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_TARGET_VERSION . '[]';?>" id="show_target_version_filter"><?php echo lang_get( 'target_version_label' )?></a>
@@ -2517,12 +2506,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							<?php
 								$t_output = '';
 		$t_any_found = false;
-		if( count( $t_filter[FILTER_PROPERTY_STATUS_ID] ) == 0 ) {
+		if( count( $t_filter[FILTER_PROPERTY_STATUS] ) == 0 ) {
 			echo lang_get( 'any' );
 		} else {
 			$t_first_flag = true;
-			foreach( $t_filter[FILTER_PROPERTY_STATUS_ID] as $t_current ) {
-				echo '<input type="hidden" name="', FILTER_PROPERTY_STATUS_ID, '[]" value="', $t_current, '" />';
+			foreach( $t_filter[FILTER_PROPERTY_STATUS] as $t_current ) {
+				echo '<input type="hidden" name="', FILTER_PROPERTY_STATUS, '[]" value="', $t_current, '" />';
 				$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
@@ -2549,12 +2538,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 								if( 'simple' == $t_view_type ) {
 			$t_output = '';
 			$t_none_found = false;
-			if( count( $t_filter[FILTER_PROPERTY_HIDE_STATUS_ID] ) == 0 ) {
+			if( count( $t_filter[FILTER_PROPERTY_HIDE_STATUS] ) == 0 ) {
 				echo lang_get( 'none' );
 			} else {
 				$t_first_flag = true;
-				foreach( $t_filter[FILTER_PROPERTY_HIDE_STATUS_ID] as $t_current ) {
-					echo '<input type="hidden" name="', FILTER_PROPERTY_HIDE_STATUS_ID, '[]" value="', $t_current, '" />';
+				foreach( $t_filter[FILTER_PROPERTY_HIDE_STATUS] as $t_current ) {
+					echo '<input type="hidden" name="', FILTER_PROPERTY_HIDE_STATUS, '[]" value="', $t_current, '" />';
 					$t_this_string = '';
 					if( filter_field_is_none( $t_current ) ) {
 						$t_none_found = true;
@@ -2569,7 +2558,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_output = $t_output . $t_this_string;
 				}
 				$t_hide_status_post = '';
-				if( count( $t_filter[FILTER_PROPERTY_HIDE_STATUS_ID] ) == 1 ) {
+				if( count( $t_filter[FILTER_PROPERTY_HIDE_STATUS] ) == 1 ) {
 					$t_hide_status_post = ' (' . lang_get( 'and_above' ) . ')';
 				}
 				if( true == $t_none_found ) {
@@ -2586,13 +2575,13 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							<?php
 								$t_output = '';
 		$t_any_found = false;
-		if( count( $t_filter[FILTER_PROPERTY_PRODUCT_BUILD] ) == 0 ) {
+		if( count( $t_filter[FILTER_PROPERTY_BUILD] ) == 0 ) {
 			echo lang_get( 'any' );
 		} else {
 			$t_first_flag = true;
-			foreach( $t_filter[FILTER_PROPERTY_PRODUCT_BUILD] as $t_current ) {
+			foreach( $t_filter[FILTER_PROPERTY_BUILD] as $t_current ) {
 				$t_current = stripslashes( $t_current );
-				echo '<input type="hidden" name="', FILTER_PROPERTY_PRODUCT_BUILD, '[]" value="', string_display( $t_current ), '" />';
+				echo '<input type="hidden" name="', FILTER_PROPERTY_BUILD, '[]" value="', string_display( $t_current ), '" />';
 				$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
@@ -2625,13 +2614,13 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							<?php
 								$t_output = '';
 			$t_any_found = false;
-			if( count( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION] ) == 0 ) {
+			if( count( $t_filter[FILTER_PROPERTY_VERSION] ) == 0 ) {
 				echo lang_get( 'any' );
 			} else {
 				$t_first_flag = true;
-				foreach( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION] as $t_current ) {
+				foreach( $t_filter[FILTER_PROPERTY_VERSION] as $t_current ) {
 					$t_current = stripslashes( $t_current );
-					echo '<input type="hidden" name="', FILTER_PROPERTY_PRODUCT_VERSION, '[]" value="', string_display( $t_current ), '" />';
+					echo '<input type="hidden" name="', FILTER_PROPERTY_VERSION, '[]" value="', string_display( $t_current ), '" />';
 					$t_this_string = '';
 					if( filter_field_is_any( $t_current ) ) {
 						$t_any_found = true;
@@ -2704,12 +2693,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
               <?php
 							  $t_output = '';
 		$t_any_found = false;
-		if( count( $t_filter[FILTER_PROPERTY_PRIORITY_ID] ) == 0 ) {
+		if( count( $t_filter[FILTER_PROPERTY_PRIORITY] ) == 0 ) {
 			echo lang_get( 'any' );
 		} else {
 			$t_first_flag = true;
-			foreach( $t_filter[FILTER_PROPERTY_PRIORITY_ID] as $t_current ) {
-				echo '<input type="hidden" name="', FILTER_PROPERTY_PRIORITY_ID, '[]" value="', $t_current, '" />';
+			foreach( $t_filter[FILTER_PROPERTY_PRIORITY] as $t_current ) {
+				echo '<input type="hidden" name="', FILTER_PROPERTY_PRIORITY, '[]" value="', $t_current, '" />';
 				$t_this_string = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
@@ -2776,10 +2765,10 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_ISSUES_PER_PAGE;?>" id="per_page_filter"><?php echo lang_get( 'show_label' )?></a>
 			</td>
 			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_VIEW_STATE_ID;?>" id="view_state_filter"><?php echo lang_get( 'view_status_label' )?></a>
+				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_VIEW_STATE;?>" id="view_state_filter"><?php echo lang_get( 'view_status_label' )?></a>
 			</td>
 			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_SHOW_STICKY_ISSUES;?>" id="sticky_issues_filter"><?php echo lang_get( 'sticky_label' )?></a>
+				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_STICKY;?>" id="sticky_issues_filter"><?php echo lang_get( 'sticky_label' )?></a>
 			</td>
 			<td class="small-caption" valign="top" colspan="2">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HIGHLIGHT_CHANGED;?>" id="highlight_changed_filter"><?php echo lang_get( 'changed_label' )?></a>
@@ -2803,20 +2792,20 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 			<td class="small-caption" valign="top" id="view_state_filter_target">
 				<?php
-				if( VS_PUBLIC === $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) {
+				if( VS_PUBLIC === $t_filter[FILTER_PROPERTY_VIEW_STATE] ) {
 			echo lang_get( 'public' );
-		} else if( VS_PRIVATE === $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) {
+		} else if( VS_PRIVATE === $t_filter[FILTER_PROPERTY_VIEW_STATE] ) {
 			echo lang_get( 'private' );
 		} else {
 			echo lang_get( 'any' );
-			$t_filter[FILTER_PROPERTY_VIEW_STATE_ID] = META_FILTER_ANY;
+			$t_filter[FILTER_PROPERTY_VIEW_STATE] = META_FILTER_ANY;
 		}
-		echo '<input type="hidden" name="', FILTER_PROPERTY_VIEW_STATE_ID, '" value="', $t_filter[FILTER_PROPERTY_VIEW_STATE_ID], '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_VIEW_STATE, '" value="', $t_filter[FILTER_PROPERTY_VIEW_STATE], '" />';
 		?>
 			</td>
 			<td class="small-caption" valign="top" id="sticky_issues_filter_target">
 				<?php
-					$t_sticky_filter_state = gpc_string_to_bool( $t_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] );
+					$t_sticky_filter_state = gpc_string_to_bool( $t_filter[FILTER_PROPERTY_STICKY] );
 		print( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
 		?>
 				<input type="hidden" name="sticky_issues" value="<?php echo $t_sticky_filter_state ? 'on' : 'off';?>" />
@@ -2835,12 +2824,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		<!--
 			function SwitchDateFields() {
 		    	// All fields need to be enabled to go back to the script
-				document.filters_open.start_month.disabled = ! document.filters_open.do_filter_by_date.checked;
-				document.filters_open.start_day.disabled = ! document.filters_open.do_filter_by_date.checked;
-				document.filters_open.start_year.disabled = ! document.filters_open.do_filter_by_date.checked;
-				document.filters_open.end_month.disabled = ! document.filters_open.do_filter_by_date.checked;
-				document.filters_open.end_day.disabled = ! document.filters_open.do_filter_by_date.checked;
-				document.filters_open.end_year.disabled = ! document.filters_open.do_filter_by_date.checked;
+				document.filters_open.start_month.disabled = ! document.filters_open.filter_by_date.checked;
+				document.filters_open.start_day.disabled = ! document.filters_open.filter_by_date.checked;
+				document.filters_open.start_year.disabled = ! document.filters_open.filter_by_date.checked;
+				document.filters_open.end_month.disabled = ! document.filters_open.filter_by_date.checked;
+				document.filters_open.end_day.disabled = ! document.filters_open.filter_by_date.checked;
+				document.filters_open.end_year.disabled = ! document.filters_open.filter_by_date.checked;
 
 		   		return true;
 			}
@@ -3377,7 +3366,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<?php
 					collapse_icon( 'filter' );
 	echo lang_get( 'search' ) . '&nbsp;';
-	echo '<input type="text" size="16" name="', FILTER_PROPERTY_FREE_TEXT, '" value="', string_html_specialchars( $t_filter[FILTER_PROPERTY_FREE_TEXT] ), '" />';
+	echo '<input type="text" size="16" name="', FILTER_PROPERTY_SEARCH, '" value="', string_html_specialchars( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
 	?>
 
 				<input type="submit" name="filter" class="button-small" value="<?php echo lang_get( 'filter_button' )?>" />
@@ -3490,7 +3479,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 function print_filter_reporter_id() {
 	global $t_select_modifier, $t_filter;
 	?>
-		<select <?php echo $t_select_modifier;?> name="reporter_id[]">
+		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_REPORTER_ID;?>[]">
 		<?php
 	# if current user is a reporter, and limited reports set to ON, only display that name
 	# @@@ thraxisp - access_has_project_level checks greater than or equal to,
@@ -3527,7 +3516,7 @@ function print_filter_user_monitor() {
 	global $t_select_modifier, $t_filter;
 	?>
 	<!-- Monitored by -->
-		<select <?php echo $t_select_modifier;?> name="user_monitor[]">
+		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_MONITOR_USER_ID;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php
 				if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
@@ -3553,7 +3542,7 @@ function print_filter_handler_id() {
 	global $t_select_modifier, $t_filter, $f_view_type;
 	?>
 		<!-- Handler -->
-		<select <?php echo $t_select_modifier;?> name="handler_id[]">
+		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_HANDLER_ID;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php if( access_has_project_level( config_get( 'view_handler_threshold' ) ) ) {?>
 			<option value="<?php echo META_FILTER_NONE?>" <?php check_selected( $t_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
@@ -3577,9 +3566,9 @@ function print_filter_show_category() {
 	global $t_select_modifier, $t_filter;
 	?>
 		<!-- Category -->
-		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_CATEGORY;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_CATEGORY], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<?php print_category_filter_option_list( $t_filter[FILTER_PROPERTY_CATEGORY] )?>
+		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_CATEGORY_ID;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_CATEGORY_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<?php print_category_filter_option_list( $t_filter[FILTER_PROPERTY_CATEGORY_ID] )?>
 		</select>
 		<?php
 }
@@ -3638,9 +3627,9 @@ function print_filter_os_build() {
 function print_filter_show_severity() {
 	global $t_select_modifier, $t_filter;
 	?><!-- Severity -->
-			<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_SEVERITY_ID;?>[]">
-				<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_SEVERITY_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-				<?php print_enum_string_option_list( 'severity', $t_filter[FILTER_PROPERTY_SEVERITY_ID] )?>
+			<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_SEVERITY;?>[]">
+				<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_SEVERITY], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+				<?php print_enum_string_option_list( 'severity', $t_filter[FILTER_PROPERTY_SEVERITY] )?>
 			</select>
 		<?php
 }
@@ -3651,9 +3640,9 @@ function print_filter_show_severity() {
 function print_filter_show_resolution() {
 	global $t_select_modifier, $t_filter;
 	?><!-- Resolution -->
-			<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_RESOLUTION_ID;?>[]">
-				<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_RESOLUTION_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-				<?php print_enum_string_option_list( 'resolution', $t_filter[FILTER_PROPERTY_RESOLUTION_ID] )?>
+			<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_RESOLUTION;?>[]">
+				<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_RESOLUTION], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+				<?php print_enum_string_option_list( 'resolution', $t_filter[FILTER_PROPERTY_RESOLUTION] )?>
 			</select>
 		<?php
 }
@@ -3664,9 +3653,9 @@ function print_filter_show_resolution() {
 function print_filter_show_status() {
 	global $t_select_modifier, $t_filter;
 	?>	<!-- Status -->
-			<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_STATUS_ID;?>[]">
-				<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_STATUS_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-				<?php print_enum_string_option_list( 'status', $t_filter[FILTER_PROPERTY_STATUS_ID] )?>
+			<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_STATUS;?>[]">
+				<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_STATUS], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+				<?php print_enum_string_option_list( 'status', $t_filter[FILTER_PROPERTY_STATUS] )?>
 			</select>
 		<?php
 }
@@ -3677,9 +3666,9 @@ function print_filter_show_status() {
 function print_filter_hide_status() {
 	global $t_select_modifier, $t_filter;
 	?><!-- Hide Status -->
-			<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_HIDE_STATUS_ID;?>[]">
+			<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_HIDE_STATUS;?>[]">
 				<option value="<?php echo META_FILTER_NONE?>">[<?php echo lang_get( 'none' )?>]</option>
-				<?php print_enum_string_option_list( 'status', $t_filter[FILTER_PROPERTY_HIDE_STATUS_ID] )?>
+				<?php print_enum_string_option_list( 'status', $t_filter[FILTER_PROPERTY_HIDE_STATUS] )?>
 			</select>
 		<?php
 }
@@ -3690,10 +3679,10 @@ function print_filter_hide_status() {
 function print_filter_show_build() {
 	global $t_select_modifier, $t_filter;
 	?><!-- Build -->
-		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PRODUCT_BUILD;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_PRODUCT_BUILD], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<option value="<?php echo META_FILTER_NONE?>" <?php check_selected( $t_filter[FILTER_PROPERTY_PRODUCT_BUILD], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_build_option_list( $t_filter[FILTER_PROPERTY_PRODUCT_BUILD] )?>
+		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_BUILD;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_BUILD], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_NONE?>" <?php check_selected( $t_filter[FILTER_PROPERTY_BUILD], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
+			<?php print_build_option_list( $t_filter[FILTER_PROPERTY_BUILD] )?>
 		</select>
 		<?php
 }
@@ -3704,10 +3693,10 @@ function print_filter_show_build() {
 function print_filter_show_version() {
 	global $t_select_modifier, $t_filter;
 	?><!-- Version -->
-		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PRODUCT_VERSION;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<option value="<?php echo META_FILTER_NONE?>" <?php check_selected( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION], /* projectId */ null, /* released */ VERSION_ALL, /* leadingBlank */ false, /* withSubs */ true )?>
+		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_VERSION;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_VERSION], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_NONE?>" <?php check_selected( $t_filter[FILTER_PROPERTY_VERSION], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
+			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_VERSION], /* projectId */ null, /* released */ VERSION_ALL, /* leadingBlank */ false, /* withSubs */ true )?>
 		</select>
 		<?php
 }
@@ -3746,9 +3735,9 @@ function print_filter_show_target_version() {
 function print_filter_show_priority() {
 	global $t_select_modifier, $t_filter;
 	?><!-- Priority -->
-    <select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PRIORITY_ID;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_PRIORITY_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<?php print_enum_string_option_list( 'priority', $t_filter[FILTER_PROPERTY_PRIORITY_ID] )?>
+    <select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PRIORITY;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_PRIORITY], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<?php print_enum_string_option_list( 'priority', $t_filter[FILTER_PROPERTY_PRIORITY] )?>
     </select>
 		<?php
 }
@@ -3759,9 +3748,9 @@ function print_filter_show_priority() {
 function print_filter_show_profile() {
 	global $t_select_modifier, $t_filter;
 	?><!-- Profile -->
-		<select <?php echo $t_select_modifier;?> name="show_profile[]">
-			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter['show_profile'], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<?php print_profile_option_list_for_project( helper_get_current_project(), $t_filter['show_profile'] );?>
+		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PROFILE_ID;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_PROFILE_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<?php print_profile_option_list_for_project( helper_get_current_project(), $t_filter[FILTER_PROPERTY_PROFILE_ID] );?>
 		</select>
 		<?php
 }
@@ -3782,16 +3771,16 @@ function print_filter_per_page() {
 function print_filter_view_state() {
 	global $t_select_modifier, $t_filter;
 	?><!-- View Status -->
-		<select name="<?php echo FILTER_PROPERTY_VIEW_STATE_ID;?>">
+		<select name="<?php echo FILTER_PROPERTY_VIEW_STATE;?>">
 			<?php
 			echo '<option value="' . META_FILTER_ANY . '" ';
-	check_selected( $t_filter[FILTER_PROPERTY_VIEW_STATE_ID], META_FILTER_ANY );
+	check_selected( $t_filter[FILTER_PROPERTY_VIEW_STATE], META_FILTER_ANY );
 	echo '>[' . lang_get( 'any' ) . ']</option>';
 	echo '<option value="' . VS_PUBLIC . '" ';
-	check_selected( $t_filter[FILTER_PROPERTY_VIEW_STATE_ID], VS_PUBLIC );
+	check_selected( $t_filter[FILTER_PROPERTY_VIEW_STATE], VS_PUBLIC );
 	echo '>' . lang_get( 'public' ) . '</option>';
 	echo '<option value="' . VS_PRIVATE . '" ';
-	check_selected( $t_filter[FILTER_PROPERTY_VIEW_STATE_ID], VS_PRIVATE );
+	check_selected( $t_filter[FILTER_PROPERTY_VIEW_STATE], VS_PRIVATE );
 	echo '>' . lang_get( 'private' ) . '</option>';
 	?>
 		</select>
@@ -3804,7 +3793,7 @@ function print_filter_view_state() {
 function print_filter_sticky_issues() {
 	global $t_filter;
 	?><!-- Show or hide sticky bugs -->
-			<input type="checkbox" name="<?php echo FILTER_PROPERTY_SHOW_STICKY_ISSUES;?>" <?php check_checked( gpc_string_to_bool( $t_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ), true );?> />
+			<input type="checkbox" name="<?php echo FILTER_PROPERTY_STICKY;?>" <?php check_checked( gpc_string_to_bool( $t_filter[FILTER_PROPERTY_STICKY] ), true );?> />
 		<?php
 }
 

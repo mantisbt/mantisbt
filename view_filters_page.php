@@ -80,8 +80,8 @@ if ( ON == config_get( 'use_javascript' ) ) {
 		global $t_target_field;
 		if ( $t_target_field ) {
 			$f_view_type = gpc_get_string( 'view_type', '' );
-			if ( ( FILTER_PROPERTY_HIDE_STATUS_ID . '[]' == $t_target_field ) && ( 'advanced' == $f_view_type ) ) {
-				echo 'field_to_focus = "', FILTER_PROPERTY_STATUS_ID, '[]";';
+			if ( ( FILTER_PROPERTY_HIDE_STATUS . '[]' == $t_target_field ) && ( 'advanced' == $f_view_type ) ) {
+				echo 'field_to_focus = "', FILTER_PROPERTY_STATUS, '[]";';
 			} else {
 				echo 'field_to_focus = "', $t_target_field, '";';
 			}
