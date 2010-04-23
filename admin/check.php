@@ -159,7 +159,7 @@ function test_bug_attachments_allow_flags() {
 }
 
 function check_zend_optimiser_version() {
-	$t_pass = true;
+	$t_pass = false;
 
 	ob_start();
 	phpinfo(INFO_GENERAL);
@@ -168,46 +168,22 @@ function check_zend_optimiser_version() {
 
 	$t_output = str_replace(array("&gt;", "&lt;", "&quot;", "&amp;", "&#039;", "&nbsp;"), array(">", "<", "\"", "&", "'", " "), $t_output);
 
-	define ( 'ZEND_OPTIMIZER_VERSION', '3.3');
-	define ( 'ZEND_OPTIMIZER_SUBVERSION', 3);
+	$t_zend_optimizer_min_version = '3.3.3';
 
 	$t_info = '';
 
-	if (strstr($t_output, "Zend Optimizer")) {
-		$t_version = explode( 'Zend Optimizer', $t_output );
-		$t_version = explode( ',', $t_version[1] );
-		$t_version = trim($t_version[0]);
-
-		if (!strstr($t_version,"v")) {
-			$t_info = 'Zend Optimizer Detected - Unknown Version.';
-			$t_pass = false;
-  		} else {
-			$t_version = str_replace("v","",$t_version);
-			$t_version = explode(".",$t_version);
-			$t_subVersion = $t_version[2];
-			$t_dummy = array_pop($t_version);
-			$t_version = implode(".",$t_version);
-
-			if ( ( $t_version < ZEND_OPTIMIZER_VERSION ) ||
-				 ( $t_version == ZEND_OPTIMIZER_VERSION && $t_subVersion < ZEND_OPTIMIZER_SUBVERSION ) ) {
-				$t_pass = false;
-				$t_info = 'Fail - Installed Version: ' . $t_version . '.' . $t_subVersion . '.';
-			}
+	if ( preg_match( '/with Zend Optimizer\+? v([\d\.]*)/', $t_output, $t_matches ) === 1 ) {
+		if ( version_compare( $t_matches[1], $t_zend_optimizer_min_version, '>=' ) ) {
+			$t_pass = true;
+		} else {
+			$t_info = 'Fail - Installed Version: ' . $t_matches[1] . '. Zend Optimizer should be version be version ' . $t_zend_optimizer_min_version . ' or greater! Some old versions cause the view issues page not to display completely. The latest version of Zend Optimizer can be found at www.zend.com';
 		}
 	} else {
-		$t_info = 'Zend Optimiser not detected';
+		$t_pass = true;
+		$t_info = 'Zend Optimizer not detected.';
 	}
 
-	if (strstr($t_output, 'has been disabled')) {
-		$t_info = 'Unable to determine Zend Optimizer version - phpinfo() is disabled.';
-		$t_pass = false;
-	}
-
-	if( $t_pass == false ) {
-		$t_info .= ' Zend Optimizer should be version be ' . ZEND_OPTIMIZER_VERSION . '.' . ZEND_OPTIMIZER_SUBVERSION  . ' or greater! Some old versions cause the view issues page not to display completely. The latest version of Zend Optimizer can be found at www.zend.com';
-	}
-
-	print_test_row( 'Checking Zend Optimiser version (if installed)...', $t_pass, $t_info );
+	print_test_row( 'Checking Zend Optimizer version (if installed)...', $t_pass, $t_info );
 
 	return $t_pass;
 }
