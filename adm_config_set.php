@@ -82,20 +82,24 @@
 		# 1. constant values (like the ON/OFF switches): they are defined as constants mapping to numeric values
 		# 2. simple arrays with the form: array( a, b, c, d )
 		# 3. associative arrays with the form: array( a=>1, b=>2, c=>3, d=>4 )
+		# TODO: allow multi-dimensional arrays, allow commas and => within strings
 		$t_full_string = trim( $f_value );
-		if ( preg_match('/array[\s]*\((.*)\)/', $t_full_string, $t_match ) === 1 ) {
+		if ( preg_match('/array[\s]*\((.*)\)/s', $t_full_string, $t_match ) === 1 ) {
 			// we have an array here
 			$t_values = explode( ',', trim( $t_match[1] ) );
 			foreach ( $t_values as $key => $value ) {
+				if ( !trim( $value ) ) {
+					continue;
+				}
 				$t_split = explode( '=>', $value, 2 );
 				if ( count( $t_split ) == 2 ) {
 					// associative array
-					$t_new_key = constant_replace( trim( $t_split[0] ) );
-					$t_new_value = constant_replace( trim( $t_split[1] ) );
+					$t_new_key = constant_replace( trim( $t_split[0], " \t\n\r\0\x0B\"'" ) );
+					$t_new_value = constant_replace( trim( $t_split[1], " \t\n\r\0\x0B\"'" ) );
 					$t_value[ $t_new_key ] = $t_new_value;
 				} else {
 					// regular array
-					$t_value[ $key ] = constant_replace( trim( $value ) );
+					$t_value[ $key ] = constant_replace( trim( $value, " \t\n\r\0\x0B\"'" ) );
 				}
 			}
 		} else {
