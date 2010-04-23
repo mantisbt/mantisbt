@@ -1752,8 +1752,10 @@
 	$g_bug_feedback_status = FEEDBACK;
 
 	/**
-	 * Reassign (or set back to submit_status) an issue when a note is added
-	 * by the issue reporter and the issue is in a feedback status.
+	 * When a note is added to a bug currently in $g_bug_feedback_status, and the note
+	 * author is the bug's reporter, this option will automatically set the bug status
+	 * to $g_bug_submit_status or $g_bug_assigned_status if the bug is assigned to a
+	 * developer.  Defaults to enabled.
 	 * @global boolean $g_reassign_on_feedback
 	 */
 	$g_reassign_on_feedback = ON;
