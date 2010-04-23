@@ -1,5 +1,20 @@
 MantisBT Release Notes
 
+1.2.1 Maintenance Release
+-------------------------------------------------
+
+MantisBT 1.2.1 is a maintenance update for the stable 1.2.x branch. All
+installations that are currently running any 1.1.x or 1.2.0 version are
+advised to upgrade to this release.
+
+Included with 1.2.1 are a range of bug fixes, translation updates, and general
+improvements over the initial 1.2.0 release.  Highlights include an improved
+installation, a fixed upgrade path from 1.1.x, fixes to the URL and path
+detection, and updates to the plugin event system.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
 1.2.0 Stable Release
 -------------------------------------------------
 
@@ -7,8 +22,6 @@ This release marks the first official release in the 1.2.x series of MantisBT.
 1.2.0 is a major feature release for MantisBT, and includes many bugfixes and
 enhancements over the 1.1.x stable branch.  All users of 1.1.x are highly
 encouraged to upgrade as soon as possible.
-
-A full changelog for the 1.2.x series can be found on the official site. [1]
 
 There are many new features added to 1.2.0, including:
 
@@ -63,12 +76,13 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
-    1.2.0a1    http://www.mantisbt.org/bugs/changelog_page.php?version_id=89
-    1.2.0a2    http://www.mantisbt.org/bugs/changelog_page.php?version_id=96
-    1.2.0a3    http://www.mantisbt.org/bugs/changelog_page.php?version_id=104
-    1.2.0rc1   http://www.mantisbt.org/bugs/changelog_page.php?version_id=98
-    1.2.0rc2   http://www.mantisbt.org/bugs/changelog_page.php?version_id=106
+	1.2.1      http://www.mantisbt.org/bugs/changelog_page.php?version_id=109
 	1.2.0      http://www.mantisbt.org/bugs/changelog_page.php?version_id=108
+    1.2.0rc2   http://www.mantisbt.org/bugs/changelog_page.php?version_id=106
+    1.2.0rc1   http://www.mantisbt.org/bugs/changelog_page.php?version_id=98
+    1.2.0a3    http://www.mantisbt.org/bugs/changelog_page.php?version_id=104
+    1.2.0a2    http://www.mantisbt.org/bugs/changelog_page.php?version_id=96
+    1.2.0a1    http://www.mantisbt.org/bugs/changelog_page.php?version_id=89
 
 [2] MantisForge is now the preferred code collaboration site for MantisBT,
     including free hosting of MantisBT-related Git repositories for development
