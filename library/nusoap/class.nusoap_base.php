@@ -1,7 +1,7 @@
 <?php
 
 /*
-$Id$
+$Id: class.nusoap_base.php,v 1.56 2010/04/26 20:15:08 snichol Exp $
 
 NuSOAP - Web Services Toolkit for PHP
 
@@ -24,8 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 The NuSOAP project home is:
 http://sourceforge.net/projects/nusoap/
 
-The primary support for NuSOAP is the mailing list:
-nusoap-general@lists.sourceforge.net
+The primary support for NuSOAP is the Help forum on the project home page.
 
 If you have any questions or comments, please email:
 
@@ -72,7 +71,7 @@ require_once('class.soap_server.php');*/
 
 // class variable emulation
 // cf. http://www.webkreator.com/php/techniques/php-static-class-variables.html
-$GLOBALS['_transient']['static']['nusoap_base']->globalDebugLevel = 9;
+$GLOBALS['_transient']['static']['nusoap_base']['globalDebugLevel'] = 9;
 
 /**
 *
@@ -80,7 +79,7 @@ $GLOBALS['_transient']['static']['nusoap_base']->globalDebugLevel = 9;
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
 * @author   Scott Nichol <snichol@users.sourceforge.net>
-* @version  $Id$
+* @version  $Id: class.nusoap_base.php,v 1.56 2010/04/26 20:15:08 snichol Exp $
 * @access   public
 */
 class nusoap_base {
@@ -97,14 +96,14 @@ class nusoap_base {
 	 * @var string
 	 * @access private
 	 */
-	var $version = '0.7.3';
+	var $version = '0.9.5';
 	/**
 	 * CVS revision for HTTP headers.
 	 *
 	 * @var string
 	 * @access private
 	 */
-	var $revision = '$Revision: X.XX $';
+	var $revision = '$Revision: 1.56 $';
     /**
      * Current error string (manipulated by getError/setError)
 	 *
@@ -224,7 +223,7 @@ class nusoap_base {
 	* @access	public
 	*/
 	function nusoap_base() {
-		$this->debugLevel = $GLOBALS['_transient']['static']['nusoap_base']->globalDebugLevel;
+		$this->debugLevel = $GLOBALS['_transient']['static']['nusoap_base']['globalDebugLevel'];
 	}
 
 	/**
@@ -234,7 +233,7 @@ class nusoap_base {
 	* @access	public
 	*/
 	function getGlobalDebugLevel() {
-		return $GLOBALS['_transient']['static']['nusoap_base']->globalDebugLevel;
+		return $GLOBALS['_transient']['static']['nusoap_base']['globalDebugLevel'];
 	}
 
 	/**
@@ -244,7 +243,7 @@ class nusoap_base {
 	* @access	public
 	*/
 	function setGlobalDebugLevel($level) {
-		$GLOBALS['_transient']['static']['nusoap_base']->globalDebugLevel = $level;
+		$GLOBALS['_transient']['static']['nusoap_base']['globalDebugLevel'] = $level;
 	}
 
 	/**
@@ -897,12 +896,22 @@ class nusoap_base {
 /**
 * convert unix timestamp to ISO 8601 compliant date string
 *
-* @param    string $timestamp Unix time stamp
+* @param    int $timestamp Unix time stamp
 * @param	boolean $utc Whether the time stamp is UTC or local
+* @return	mixed ISO 8601 date string or false
 * @access   public
 */
 function timestamp_to_iso8601($timestamp,$utc=true){
 	$datestr = date('Y-m-d\TH:i:sO',$timestamp);
+	$pos = strrpos($datestr, "+");
+	if ($pos === FALSE) {
+		$pos = strrpos($datestr, "-");
+	}
+	if ($pos !== FALSE) {
+		if (strlen($datestr) == $pos + 5) {
+			$datestr = substr($datestr, 0, $pos + 3) . ':' . substr($datestr, -2);
+		}
+	}
 	if($utc){
 		$pattern = '/'.
 		'([0-9]{4})-'.	// centuries & years CCYY-
@@ -928,6 +937,7 @@ function timestamp_to_iso8601($timestamp,$utc=true){
 * convert ISO 8601 compliant date string to unix timestamp
 *
 * @param    string $datestr ISO 8601 compliant date string
+* @return	mixed Unix timestamp (int) or false
 * @access   public
 */
 function iso8601_to_timestamp($datestr){
