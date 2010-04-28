@@ -72,7 +72,7 @@ class AttachmentTest extends SoapBase {
 			$attachmentId);
 		
 		$this->assertEquals( 1, count( $issue->attachments ), 'count($issue->attachments)' );
-		$this->assertEquals( $attachmentContents, $attachment, '$attachmentContents' );
+		$this->assertEquals( $attachmentContents, base64_decode( $attachment ), '$attachmentContents' );
 	}
 	
 	
@@ -125,7 +125,7 @@ class AttachmentTest extends SoapBase {
 			$this->password, 
 			$attachmentId);
 		
-		$this->assertEquals( $attachmentContents, $attachment, '$attachmentContents' );
+		$this->assertEquals( $attachmentContents, base64_decode( $attachment ), '$attachmentContents' );
 	}
 
 	/**
