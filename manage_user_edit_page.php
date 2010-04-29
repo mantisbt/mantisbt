@@ -122,7 +122,13 @@
 	</td>
 	<td>
 		<select name="access_level">
-			<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
+			<?php
+				$t_access_level = $t_user['access_level'];
+				if ( !MantisEnum::hasValue( config_get( 'access_levels_enum_string' ), $t_access_level ) ) {
+					$t_access_level = config_get( 'default_new_account_access_level' );
+				}
+				print_project_access_levels_option_list( $t_access_level )
+			?>
 		</select>
 	</td>
 </tr>
