@@ -902,7 +902,7 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 	$t_plugin_columns = columns_get_plugin_columns();
 
 	if ( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) && ( NULL !== $p_show_sticky ) ) {
-		$p_query_clauses['order'][] = "sticky DESC";
+		$p_query_clauses['order'][] = "$t_bug_table.sticky DESC";
 	}
 
 	$t_count = count( $t_sort_fields );
@@ -927,7 +927,7 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 					$p_query_clauses['join'][] = "LEFT JOIN $t_custom_field_string_table $t_cf_table_alias ON $t_bug_table.id  = $t_cf_table_alias.bug_id AND $t_cf_table_alias.field_id = $t_custom_field_id";
 				}
 
-				$p_query_clauses['order'][] = $c_cf_alias . ' ' . $c_dir;
+				$p_query_clauses['order'][] = "$c_cf_alias $c_dir";
 
 			# if sorting by plugin columns
 			} else if ( isset( $t_plugin_columns[ $t_sort_fields[$i] ] ) ) {
@@ -949,9 +949,9 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 			# standard column
 			} else {
 				if ( 'last_updated' == $c_sort ) {
-					$c_sort = "$t_bug_table.last_updated";
+					$c_sort = "last_updated";
 				}
-				$p_query_clauses['order'][] = $c_sort . ' ' . $c_dir;
+				$p_query_clauses['order'][] = "$t_bug_table.$c_sort $c_dir";
 			}
 		}
 	}
@@ -961,7 +961,7 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 		$p_query_clauses['order'][] = "$t_bug_table.last_updated DESC";
 	}
 	if( !in_array( 'date_submitted', $t_sort_fields ) ) {
-		$p_query_clauses['order'][] = $t_bug_table . '.date_submitted DESC';
+		$p_query_clauses['order'][] = "$t_bug_table.date_submitted DESC";
 	}
 
 	return $p_query_clauses;
