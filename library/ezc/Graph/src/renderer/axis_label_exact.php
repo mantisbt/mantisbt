@@ -3,7 +3,7 @@
  * File containing the ezcGraphAxisExactLabelRenderer class
  *
  * @package Graph
- * @version 1.4.3
+ * @version 1.5
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -23,7 +23,7 @@
  *           next to the chart boundings. This may interfere with axis labels
  *           or cause small font size with a low axisSpace.
  *
- * @version 1.4.3
+ * @version 1.5
  * @package Graph
  * @mainclass
  */

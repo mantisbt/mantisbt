@@ -3,7 +3,7 @@
  * File containing the ezcGraphPieChartOption class
  *
  * @package Graph
- * @version 1.4.3
+ * @version 1.5
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -59,7 +59,7 @@
  *           Caption for values summarized because they are lower then the
  *           configured tresh hold.
  *
- * @version 1.4.3
+ * @version 1.5
  * @package Graph
  */
 class ezcGraphPieChartOptions extends ezcGraphChartOptions

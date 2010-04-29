@@ -3,7 +3,7 @@
  * File containing the ezcBaseInitCallbackConfiguredException class
  *
  * @package Base
- * @version 1.7
+ * @version 1.8
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -13,7 +13,7 @@
  * configured for this identifier.
  *
  * @package Base
- * @version 1.7
+ * @version 1.8
  */
 class ezcBaseInitCallbackConfiguredException extends ezcBaseException
 {

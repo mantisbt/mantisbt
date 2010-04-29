@@ -3,7 +3,7 @@
  * File containing the ezcGraphFontOption class
  *
  * @package Graph
- * @version 1.4.3
+ * @version 1.5
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -94,7 +94,7 @@
  *           Color of text shadow. If left at the default value "false""
  *           the inverse color of the text color will be used.
  *
- * @version 1.4.3
+ * @version 1.5
  * @package Graph
  */
 class ezcGraphFontOptions extends ezcBaseOptions
