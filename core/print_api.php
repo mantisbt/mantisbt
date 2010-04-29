@@ -976,24 +976,14 @@ function print_project_user_option_list( $p_project_id = null ) {
 # logged in user.  This is used when adding users to projects
 function print_project_access_levels_option_list( $p_val, $p_project_id = null ) {
 	$t_current_user_access_level = access_get_project_level( $p_project_id );
-
 	$t_access_levels_enum_string = config_get( 'access_levels_enum_string' );
-
-	# Add [default access level] to add the user to a project
-	# with his default access level.
-	echo '<option value="' . DEFAULT_ACCESS_LEVEL . '"';
-	echo '>[' . lang_get( 'default_access_level' ) . ']</option>';
-
 	$t_enum_values = MantisEnum::getValues( $t_access_levels_enum_string );
-
 	foreach ( $t_enum_values as $t_enum_value ) {
 		# a user must not be able to assign another user an access level that is higher than theirs.
 		if ( $t_enum_value > $t_current_user_access_level ) {
 			continue;
 		}
-
 		$t_access_level = get_enum_element( 'access_levels', $t_enum_value );
-
 		echo '<option value="' . $t_enum_value . '"';
 		check_selected( $p_val, $t_enum_value );
 		echo '>' . $t_access_level . '</option>';
