@@ -58,15 +58,15 @@ if ( OFF == config_get('time_tracking_enabled') ) {
 <?php
 collapse_open( 'bugnotestats' );
 
-$t_bugnote_stats_from_def = date( "d:m:Y", $t_bug->date_submitted );
+$t_bugnote_stats_from_def = date( "d:m:Y", $tpl_bug->date_submitted );
 $t_bugnote_stats_from_def_ar = explode ( ":", $t_bugnote_stats_from_def );
 $t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
 $t_bugnote_stats_from_def_m = $t_bugnote_stats_from_def_ar[1];
 $t_bugnote_stats_from_def_y = $t_bugnote_stats_from_def_ar[2];
 
-$t_bugnote_stats_from_d = gpc_get_string('start_day', $t_bugnote_stats_from_def_d);
-$t_bugnote_stats_from_m = gpc_get_string('start_month', $t_bugnote_stats_from_def_m);
-$t_bugnote_stats_from_y = gpc_get_string('start_year', $t_bugnote_stats_from_def_y);
+$t_bugnote_stats_from_d = gpc_get_string( 'start_day', $t_bugnote_stats_from_def_d );
+$t_bugnote_stats_from_m = gpc_get_string( 'start_month', $t_bugnote_stats_from_def_m );
+$t_bugnote_stats_from_y = gpc_get_string( 'start_year', $t_bugnote_stats_from_def_y );
 
 $t_bugnote_stats_to_def = date( "d:m:Y" );
 $t_bugnote_stats_to_def_ar = explode ( ":", $t_bugnote_stats_to_def );
@@ -74,15 +74,15 @@ $t_bugnote_stats_to_def_d = $t_bugnote_stats_to_def_ar[0];
 $t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
 $t_bugnote_stats_to_def_y = $t_bugnote_stats_to_def_ar[2];
 
-$t_bugnote_stats_to_d = gpc_get_string('end_day', $t_bugnote_stats_to_def_d);
-$t_bugnote_stats_to_m = gpc_get_string('end_month', $t_bugnote_stats_to_def_m);
-$t_bugnote_stats_to_y = gpc_get_string('end_year', $t_bugnote_stats_to_def_y);
+$t_bugnote_stats_to_d = gpc_get_string( 'end_day', $t_bugnote_stats_to_def_d );
+$t_bugnote_stats_to_m = gpc_get_string( 'end_month', $t_bugnote_stats_to_def_m );
+$t_bugnote_stats_to_y = gpc_get_string( 'end_year', $t_bugnote_stats_to_def_y );
 
-$f_get_bugnote_stats_button = gpc_get_string('get_bugnote_stats_button', '');
+$f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 ?>
 <form method="post" action="<?php echo $_SERVER['SCRIPT_NAME'] ?>">
 <?php # CSRF protection not required here - form does not result in modifications ?>
-<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
+<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
 <table border=0 class="width100" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
@@ -102,7 +102,7 @@ $f_get_bugnote_stats_button = gpc_get_string('get_bugnote_stats_button', '');
 		$t_filter['end_day'] = $t_bugnote_stats_to_d;
 		$t_filter['end_month'] = $t_bugnote_stats_to_m;
 		$t_filter['end_year'] = $t_bugnote_stats_to_y;
-		print_filter_do_filter_by_date(true);
+		print_filter_do_filter_by_date( true );
 		?>
         </td>
 </tr>
@@ -139,7 +139,7 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="small-caption">
-		<?php echo $t_item['username'] ?>
+		<?php echo string_display_line( $t_item['username'] ) ?>
 	</td>
 	<td class="small-caption">
 		<?php echo $t_item['sum_time_tracking'] ?>
