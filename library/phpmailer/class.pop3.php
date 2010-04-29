@@ -128,10 +128,10 @@ class POP3 {
    * @return POP3
    */
   public function __construct() {
-      $this->pop_conn = 0;
-      $this->connected = false;
-      $this->error = null;
-    }
+    $this->pop_conn  = 0;
+    $this->connected = false;
+    $this->error     = null;
+  }
 
   /**
    * Combination of public events - connect, login, disconnect
@@ -164,9 +164,9 @@ class POP3 {
     $this->password = $password;
 
     //  Refresh the error log
-      $this->error = null;
+    $this->error = null;
 
-      //  Connect
+    //  Connect
     $result = $this->Connect($this->host, $this->port, $this->tval);
 
     if ($result) {
@@ -201,8 +201,8 @@ class POP3 {
     }
 
     /*
-      On Windows this will raise a PHP Warning error if the hostname doesn't exist.
-      Rather than supress it with @fsockopen, let's capture it cleanly instead
+    On Windows this will raise a PHP Warning error if the hostname doesn't exist.
+    Rather than supress it with @fsockopen, let's capture it cleanly instead
     */
 
     set_error_handler(array(&$this, 'catchWarning'));
@@ -219,173 +219,172 @@ class POP3 {
 
     //  Does the Error Log now contain anything?
     if ($this->error && $this->do_debug >= 1) {
-        $this->displayErrors();
+      $this->displayErrors();
     }
 
     //  Did we connect?
     if ($this->pop_conn == false) {
-        //  It would appear not...
-        $this->error = array(
-          'error' => "Failed to connect to server $host on port $port",
-          'errno' => $errno,
-          'errstr' => $errstr
-        );
+      //  It would appear not...
+      $this->error = array(
+        'error' => "Failed to connect to server $host on port $port",
+        'errno' => $errno,
+        'errstr' => $errstr
+      );
 
       if ($this->do_debug >= 1) {
-          $this->displayErrors();
-        }
-
-        return false;
+        $this->displayErrors();
       }
 
-      //  Increase the stream time-out
-
-      //  Check for PHP 4.3.0 or later
-    if (version_compare(phpversion(), '5.0.0', 'ge')) {
-        stream_set_timeout($this->pop_conn, $tval, 0);
-    } else {
-        //  Does not work on Windows
-      if (substr(PHP_OS, 0, 3) !== 'WIN') {
-          socket_set_timeout($this->pop_conn, $tval, 0);
-        }
-      }
-
-    //  Get the POP3 server response
-      $pop3_response = $this->getResponse();
-
-      //  Check for the +OK
-    if ($this->checkResponse($pop3_response)) {
-      //  The connection is established and the POP3 server is talking
-      $this->connected = true;
-        return true;
-      }
-
+      return false;
     }
 
-    /**
-     * Login to the POP3 server (does not support APOP yet)
+    //  Increase the stream time-out
+
+    //  Check for PHP 4.3.0 or later
+    if (version_compare(phpversion(), '5.0.0', 'ge')) {
+      stream_set_timeout($this->pop_conn, $tval, 0);
+    } else {
+      //  Does not work on Windows
+      if (substr(PHP_OS, 0, 3) !== 'WIN') {
+        socket_set_timeout($this->pop_conn, $tval, 0);
+      }
+    }
+
+    //  Get the POP3 server response
+    $pop3_response = $this->getResponse();
+
+    //  Check for the +OK
+    if ($this->checkResponse($pop3_response)) {
+    //  The connection is established and the POP3 server is talking
+    $this->connected = true;
+      return true;
+    }
+
+  }
+
+  /**
+   * Login to the POP3 server (does not support APOP yet)
    * @access public
-     * @param string $username
-     * @param string $password
-     * @return boolean
-     */
+   * @param string $username
+   * @param string $password
+   * @return boolean
+   */
   public function Login ($username = '', $password = '') {
     if ($this->connected == false) {
-        $this->error = 'Not connected to POP3 server';
+      $this->error = 'Not connected to POP3 server';
 
       if ($this->do_debug >= 1) {
-          $this->displayErrors();
-        }
+        $this->displayErrors();
       }
+    }
 
     if (empty($username)) {
-        $username = $this->username;
-      }
+      $username = $this->username;
+    }
 
     if (empty($password)) {
-        $password = $this->password;
-      }
+      $password = $this->password;
+    }
 
     $pop_username = "USER $username" . $this->CRLF;
     $pop_password = "PASS $password" . $this->CRLF;
 
-      //  Send the Username
-      $this->sendString($pop_username);
-      $pop3_response = $this->getResponse();
+    //  Send the Username
+    $this->sendString($pop_username);
+    $pop3_response = $this->getResponse();
 
     if ($this->checkResponse($pop3_response)) {
-        //  Send the Password
-        $this->sendString($pop_password);
-        $pop3_response = $this->getResponse();
+      //  Send the Password
+      $this->sendString($pop_password);
+      $pop3_response = $this->getResponse();
 
       if ($this->checkResponse($pop3_response)) {
-          return true;
+        return true;
       } else {
-          return false;
-        }
-    } else {
         return false;
       }
+    } else {
+      return false;
     }
+  }
 
-    /**
-     * Disconnect from the POP3 server
+  /**
+   * Disconnect from the POP3 server
    * @access public
-     */
+   */
   public function Disconnect () {
-      $this->sendString('QUIT');
+    $this->sendString('QUIT');
 
-      fclose($this->pop_conn);
-    }
+    fclose($this->pop_conn);
+  }
 
   /////////////////////////////////////////////////
   //  Private Methods
   /////////////////////////////////////////////////
 
-    /**
-     * Get the socket response back.
-     * $size is the maximum number of bytes to retrieve
+  /**
+   * Get the socket response back.
+   * $size is the maximum number of bytes to retrieve
    * @access private
-     * @param integer $size
-     * @return string
-     */
+   * @param integer $size
+   * @return string
+   */
   private function getResponse ($size = 128) {
-      $pop3_response = fgets($this->pop_conn, $size);
+    $pop3_response = fgets($this->pop_conn, $size);
 
-      return $pop3_response;
-    }
+    return $pop3_response;
+  }
 
-    /**
-     * Send a string down the open socket connection to the POP3 server
+  /**
+   * Send a string down the open socket connection to the POP3 server
    * @access private
-     * @param string $string
-     * @return integer
-     */
+   * @param string $string
+   * @return integer
+   */
   private function sendString ($string) {
-      $bytes_sent = fwrite($this->pop_conn, $string, strlen($string));
+    $bytes_sent = fwrite($this->pop_conn, $string, strlen($string));
 
-      return $bytes_sent;
+    return $bytes_sent;
+  }
 
-    }
-
-    /**
-     * Checks the POP3 server response for +OK or -ERR
+  /**
+   * Checks the POP3 server response for +OK or -ERR
    * @access private
-     * @param string $string
-     * @return boolean
-     */
+   * @param string $string
+   * @return boolean
+   */
   private function checkResponse ($string) {
     if (substr($string, 0, 3) !== '+OK') {
-        $this->error = array(
-          'error' => "Server reported an error: $string",
-          'errno' => 0,
-          'errstr' => ''
-        );
+      $this->error = array(
+        'error' => "Server reported an error: $string",
+        'errno' => 0,
+        'errstr' => ''
+      );
 
       if ($this->do_debug >= 1) {
-          $this->displayErrors();
-        }
-
-        return false;
-    } else {
-        return true;
+        $this->displayErrors();
       }
 
+      return false;
+    } else {
+      return true;
     }
 
-    /**
-     * If debug is enabled, display the error message array
+  }
+
+  /**
+   * If debug is enabled, display the error message array
    * @access private
-     */
+   */
   private function displayErrors () {
-      echo '<pre>';
+    echo '<pre>';
 
     foreach ($this->error as $single_error) {
-        print_r($single_error);
+      print_r($single_error);
     }
 
-      echo '</pre>';
-    }
+    echo '</pre>';
+  }
 
   /**
    * Takes over from PHP for the socket warning handler

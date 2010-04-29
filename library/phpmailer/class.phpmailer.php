@@ -244,7 +244,7 @@ class PHPMailer {
    */
   public $SingleTo      = false;
 
-  /**
+   /**
    * If SingleTo is true, this provides the array to hold the email addresses
    * @var bool
    */
@@ -327,7 +327,7 @@ class PHPMailer {
   // CONSTANTS
   /////////////////////////////////////////////////
 
-  const STOP_MESSAGE = 0; // message only, continue processing
+  const STOP_MESSAGE  = 0; // message only, continue processing
   const STOP_CONTINUE = 1; // message?, likely ok to continue processing
   const STOP_CRITICAL = 2; // message, plus full stop, critical error reached
 
@@ -464,20 +464,20 @@ class PHPMailer {
       echo $this->Lang('invalid_address').': '.$address;
       return false;
     }
-  if ($kind != 'ReplyTo') {
-    if (!isset($this->all_recipients[strtolower($address)])) {
+    if ($kind != 'ReplyTo') {
+      if (!isset($this->all_recipients[strtolower($address)])) {
         array_push($this->$kind, array($address, $name));
         $this->all_recipients[strtolower($address)] = true;
-    return true;
+        return true;
       }
-  } else {
-    if (!array_key_exists(strtolower($address), $this->ReplyTo)) {
+    } else {
+      if (!array_key_exists(strtolower($address), $this->ReplyTo)) {
         $this->ReplyTo[strtolower($address)] = array($address, $name);
-    return true;
+      return true;
     }
   }
-    return false;
-  }
+  return false;
+}
 
 /**
  * Set the From and FromName properties
@@ -496,8 +496,8 @@ class PHPMailer {
       echo $this->Lang('invalid_address').': '.$address;
       return false;
     }
-  $this->From = $address;
-  $this->FromName = $name;
+    $this->From = $address;
+    $this->FromName = $name;
     if ($auto) {
       if (empty($this->ReplyTo)) {
         $this->AddAnAddress('ReplyTo', $address, $name);
@@ -506,7 +506,7 @@ class PHPMailer {
         $this->Sender = $address;
       }
     }
-  return true;
+    return true;
   }
 
   /**
@@ -603,20 +603,19 @@ class PHPMailer {
     }
     if ($this->SingleTo === true) {
       foreach ($this->SingleToArray as $key => $val) {
-    if(!@$mail = popen($sendmail, 'w')) {
-      throw new phpmailerException($this->Lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
-    }
+        if(!@$mail = popen($sendmail, 'w')) {
+          throw new phpmailerException($this->Lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
+        }
         fputs($mail, "To: " . $val . "\n");
-    fputs($mail, $header);
-    fputs($mail, $body);
-
-    $result = pclose($mail);
+        fputs($mail, $header);
+        fputs($mail, $body);
+        $result = pclose($mail);
         // implement call back function if it exists
         $isSent = ($result == 0) ? 1 : 0;
         $this->doCallback($isSent,$val,$this->cc,$this->bcc,$this->Subject,$body);
-    if($result != 0) {
-      throw new phpmailerException($this->Lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
-    }
+        if($result != 0) {
+          throw new phpmailerException($this->Lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
+        }
       }
     } else {
       if(!@$mail = popen($sendmail, 'w')) {
@@ -681,15 +680,12 @@ class PHPMailer {
         $this->doCallback($isSent,$to,$this->cc,$this->bcc,$this->Subject,$body);
       }
     }
-
     if (isset($old_from)) {
       ini_set('sendmail_from', $old_from);
     }
-
     if(!$rt) {
       throw new phpmailerException($this->Lang('instantiate'), self::STOP_CRITICAL);
     }
-
     return true;
   }
 
@@ -709,7 +705,6 @@ class PHPMailer {
     if(!$this->SmtpConnect()) {
       throw new phpmailerException($this->Lang('smtp_connect_failed'), self::STOP_CRITICAL);
     }
-
     $smtp_from = ($this->Sender == '') ? $this->From : $this->Sender;
     if(!$this->smtp->Mail($smtp_from)) {
       throw new phpmailerException($this->Lang('from_failed') . $smtp_from, self::STOP_CRITICAL);
@@ -752,18 +747,18 @@ class PHPMailer {
         $this->doCallback($isSent,'','',$bcc[0],$this->Subject,$body);
       }
     }
+
+
     if (count($bad_rcpt) > 0 ) { //Create error message for any bad addresses
       $badaddresses = implode(', ', $bad_rcpt);
       throw new phpmailerException($this->Lang('recipients_failed') . $badaddresses);
     }
-
     if(!$this->smtp->Data($header . $body)) {
       throw new phpmailerException($this->Lang('data_not_accepted'), self::STOP_CRITICAL);
     }
     if($this->SMTPKeepAlive == true) {
       $this->smtp->Reset();
     }
-
     return true;
   }
 
@@ -1097,12 +1092,12 @@ class PHPMailer {
           $this->SingleToArray[] = $this->AddrFormat($t);
         }
       } else {
-      if(count($this->to) > 0) {
-        $result .= $this->AddrAppend('To', $this->to);
-      } elseif (count($this->cc) == 0) {
-        $result .= $this->HeaderLine('To', 'undisclosed-recipients:;');
+        if(count($this->to) > 0) {
+          $result .= $this->AddrAppend('To', $this->to);
+        } elseif (count($this->cc) == 0) {
+          $result .= $this->HeaderLine('To', 'undisclosed-recipients:;');
+        }
       }
-    }
     }
 
     $from = array();
