@@ -3,7 +3,7 @@
  * File containing the ezcGraphLineChartOption class
  *
  * @package Graph
- * @version 1.4.3
+ * @version 1.5
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -52,10 +52,16 @@
  * @property bool $highlightLines
  *           If true, it adds lines to highlight the values position on the 
  *           axis.
+ * @property float $highlightXOffset
+ *           Horizontal offset for highlight strings, applied to all chart 
+ *           highlight strings
+ * @property float $highlightYOffset
+ *           Vertical offset for highlight strings, applied to all chart 
+ *           highlight strings
  * @property true $stackBars
  *           Stack bars
  *
- * @version 1.4.3
+ * @version 1.5
  * @package Graph
  */
 class ezcGraphLineChartOptions extends ezcGraphChartOptions

@@ -3,7 +3,7 @@
  * File containing the abstract ezcGraphRenderer class
  *
  * @package Graph
- * @version 1.4.3
+ * @version 1.5
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -11,7 +11,7 @@
  * Abstract class to transform the basic chart components. To be extended by
  * three- and twodimensional renderers.
  *
- * @version 1.4.3
+ * @version 1.5
  * @package Graph
  */
 abstract class ezcGraphRenderer
@@ -507,7 +507,7 @@ abstract class ezcGraphRenderer
                 // Draw optional gleam
                 if ( $this->options->legendSymbolGleam !== false )
                 {
-                    $this->driver->drawPolygon(
+                    $return = $this->driver->drawPolygon(
                         array(
                             $topLeft = new ezcGraphCoordinate( 
                                 $boundings->x0 + ( $boundings->x1 - $boundings->x0 ) * $this->options->legendSymbolGleamSize, 
@@ -575,7 +575,7 @@ abstract class ezcGraphRenderer
                 // Draw optional gleam
                 if ( $this->options->legendSymbolGleam !== false )
                 {
-                    $this->driver->drawPolygon(
+                    $return = $this->driver->drawPolygon(
                         array(
                             new ezcGraphCoordinate( 
                                 $boundings->x0 + ( $boundings->x1 - $boundings->x0 ) / 2, 
@@ -625,7 +625,7 @@ abstract class ezcGraphRenderer
                 // Draw optional gleam
                 if ( $this->options->legendSymbolGleam !== false )
                 {
-                    $this->driver->drawCircle(
+                    $return = $this->driver->drawCircle(
                         new ezcGraphCoordinate( 
                             $boundings->x0 + ( $boundings->x1 - $boundings->x0 ) / 2, 
                             $boundings->y0 + ( $boundings->y1 - $boundings->y0 ) / 2

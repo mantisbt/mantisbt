@@ -3,7 +3,7 @@
  * File containing the ezcGraphContext struct
  *
  * @package Graph
- * @version 1.4.3
+ * @version 1.5
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -26,7 +26,7 @@
  * image primitive is associated with. If the dataset or datapoint has an
  * URL associated, this URL is also available in the context struct.
  *
- * @version 1.4.3
+ * @version 1.5
  * @package Graph
  */
 class ezcGraphContext extends ezcBaseStruct

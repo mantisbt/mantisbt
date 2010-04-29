@@ -2,9 +2,9 @@
 /**
  * Autoloader definition for the Base component.
  *
- * @copyright Copyright (C) 2005-2009 eZ systems as. All rights reserved.
+ * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
- * @version 1.7
+ * @version 1.8
  * @filesource
  * @package Base
  */
@@ -33,6 +33,7 @@ return array(
     'ezcBase'                                     => 'Base/base.php',
     'ezcBaseAutoloadOptions'                      => 'Base/options/autoload.php',
     'ezcBaseConfigurationInitializer'             => 'Base/interfaces/configuration_initializer.php',
+    'ezcBaseExportable'                           => 'Base/interfaces/exportable.php',
     'ezcBaseFeatures'                             => 'Base/features.php',
     'ezcBaseFile'                                 => 'Base/file.php',
     'ezcBaseFileFindContext'                      => 'Base/structs/file_find_context.php',

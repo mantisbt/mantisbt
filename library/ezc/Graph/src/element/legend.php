@@ -3,7 +3,7 @@
  * File containing the abstract ezcGraphChartElementLegend class
  *
  * @package Graph
- * @version 1.4.3
+ * @version 1.5
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -65,7 +65,7 @@
  * @property int $spacing
  *           Space between labels elements in pixel.
  *
- * @version 1.4.3
+ * @version 1.5
  * @package Graph
  * @mainclass
  */

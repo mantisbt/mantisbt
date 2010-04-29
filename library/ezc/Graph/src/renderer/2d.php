@@ -3,7 +3,7 @@
  * File containing the two dimensional renderer
  *
  * @package Graph
- * @version 1.4.3
+ * @version 1.5
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -51,7 +51,7 @@
  *   $graph->render( 400, 150, 'tutorial_pie_chart_pimped.svg' );
  * </code>
  *
- * @version 1.4.3
+ * @version 1.5
  * @package Graph
  * @mainclass
  */
@@ -1425,7 +1425,11 @@ class ezcGraphRenderer2d
                     ),
                     $width * ( 1 - $axis->axisSpace * 2 ) - $axis->labelMargin,
                     $axis->labelSize,
-                    ezcGraph::TOP | ezcGraph::RIGHT
+                    ezcGraph::TOP | ezcGraph::RIGHT,
+                    new ezcGraphRotation( $axis->labelRotation, new ezcGraphCoordinate(
+                        $position->x + $axis->labelSize / 2,
+                        $position->y - $axis->labelSize / 2
+                    ) )
                 );
                 break;
             case ezcGraph::BOTTOM:
@@ -1437,7 +1441,11 @@ class ezcGraphRenderer2d
                     ),
                     $width * ( 1 - $axis->axisSpace * 2 ) - $axis->labelMargin,
                     $axis->labelSize,
-                    ezcGraph::TOP | ezcGraph::LEFT
+                    ezcGraph::TOP | ezcGraph::LEFT,
+                    new ezcGraphRotation( $axis->labelRotation, new ezcGraphCoordinate(
+                        $position->x + $axis->labelSize / 2,
+                        $position->y + $axis->labelSize / 2
+                    ) )
                 );
                 break;
             case ezcGraph::LEFT:
@@ -1449,7 +1457,11 @@ class ezcGraphRenderer2d
                     ),
                     $width - $axis->labelMargin,
                     $axis->labelSize,
-                    ezcGraph::BOTTOM | ezcGraph::RIGHT
+                    ezcGraph::BOTTOM | ezcGraph::RIGHT,
+                    new ezcGraphRotation( $axis->labelRotation, new ezcGraphCoordinate(
+                        $position->x - $axis->labelSize / 2,
+                        $position->y - $axis->labelSize / 2
+                    ) )
                 );
                 break;
             case ezcGraph::RIGHT:
@@ -1461,7 +1473,11 @@ class ezcGraphRenderer2d
                     ),
                     $width - $axis->labelMargin,
                     $axis->labelSize,
-                    ezcGraph::BOTTOM | ezcGraph::LEFT
+                    ezcGraph::BOTTOM | ezcGraph::LEFT,
+                    new ezcGraphRotation( $axis->labelRotation, new ezcGraphCoordinate(
+                        $position->x + $axis->labelSize / 2,
+                        $position->y - $axis->labelSize / 2
+                    ) )
                 );
                 break;
         }

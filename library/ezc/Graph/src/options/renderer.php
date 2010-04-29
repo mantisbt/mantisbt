@@ -3,7 +3,7 @@
  * File containing the ezcGraphRenderer2dOptions class
  *
  * @package Graph
- * @version 1.4.3
+ * @version 1.5
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -109,7 +109,7 @@
  *           Defines wheather to render the axis extending the chart boundings
  *           or stop them at the chart boundings. Deafults to false.
  * 
- * @version 1.4.3
+ * @version 1.5
  * @package Graph
  */
 class ezcGraphRendererOptions extends ezcGraphChartOptions

@@ -3,7 +3,7 @@
  * File containing the abstract ezcGraphChartElementAxis class
  *
  * @package Graph
- * @version 1.4.3
+ * @version 1.5
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -120,8 +120,10 @@
  * @property-read bool $initialized
  *           Property indicating if some values were associated with axis, or a
  *           scaling has been set manually.
+ * @property float $labelRotation
+ *           Rotation of the axis label in degree
  *
- * @version 1.4.3
+ * @version 1.5
  * @package Graph
  */
 abstract class ezcGraphChartElementAxis extends ezcGraphChartElement
@@ -166,6 +168,7 @@ abstract class ezcGraphChartElementAxis extends ezcGraphChartElement
         $this->properties['labelCallback'] = null;
         $this->properties['chartPosition'] = null;
         $this->properties['initialized'] = false;
+        $this->properties['labelRotation'] = 0.;
 
         parent::__construct( $options );
 
@@ -218,7 +221,6 @@ abstract class ezcGraphChartElementAxis extends ezcGraphChartElement
 
                 $this->properties['axisSpace'] = (float) $propertyValue;
                 break;
-            /* Do not yet allow to modify this value, this need further testing.
             case 'outerAxisSpace':
                 if ( !is_null( $propertyValue ) &&
                      ( !is_numeric( $propertyValue ) ||
@@ -230,7 +232,6 @@ abstract class ezcGraphChartElementAxis extends ezcGraphChartElement
 
                 $this->properties['outerAxisSpace'] = $propertyValue;
                 break;
-            */
             case 'majorGrid':
                 $this->properties['majorGrid'] = ezcGraphColor::create( $propertyValue );
                 break;
@@ -326,6 +327,14 @@ abstract class ezcGraphChartElementAxis extends ezcGraphChartElement
                 }
 
                 $this->properties['chartPosition'] = (float) $propertyValue;
+                break;
+            case 'labelRotation':
+                if ( !is_numeric( $propertyValue ) )
+                {
+                    throw new ezcBaseValueException( $propertyName, $propertyValue, 'float' );
+                }
+                
+                $this->properties['labelRotation'] = fmod( (float) $propertyValue, 360. );
                 break;
             default:
                 parent::__set( $propertyName, $propertyValue );
@@ -471,50 +480,50 @@ abstract class ezcGraphChartElementAxis extends ezcGraphChartElement
         {
             case ezcGraph::TOP:
                 $start = new ezcGraphCoordinate(
-                    ( $boundings->x1 - $boundings->x0 ) * $startSpace +
-                        $this->nullPosition * ( $boundings->x1 - $boundings->x0 ) * ( 1 - 2 * $startSpace ),
+                    $boundings->width * $startSpace +
+                        $this->nullPosition * $boundings->width * ( 1 - ( $startSpace + $endSpace ) ),
                     0
                 );
                 $end = new ezcGraphCoordinate(
-                    ( $boundings->x1 - $boundings->x0 ) * $endSpace +
-                        $this->nullPosition * ( $boundings->x1 - $boundings->x0 ) * ( 1 - 2 * $endSpace ),
-                    $boundings->y1 - $boundings->y0
+                    $boundings->width * $startSpace +
+                        $this->nullPosition * $boundings->width * ( 1 - ( $startSpace + $endSpace ) ),
+                    $boundings->height
                 );
                 break;
             case ezcGraph::BOTTOM:
                 $start = new ezcGraphCoordinate(
-                    ( $boundings->x1 - $boundings->x0 ) * $startSpace +
-                        $this->nullPosition * ( $boundings->x1 - $boundings->x0 ) * ( 1 - 2 * $startSpace ),
-                    $boundings->y1 - $boundings->y0
+                    $boundings->width * $startSpace +
+                        $this->nullPosition * $boundings->width * ( 1 - ( $startSpace + $endSpace ) ),
+                    $boundings->height
                 );
                 $end = new ezcGraphCoordinate(
-                    ( $boundings->x1 - $boundings->x0 ) * $endSpace +
-                        $this->nullPosition * ( $boundings->x1 - $boundings->x0 ) * ( 1 - 2 * $endSpace ),
+                    $boundings->width * $startSpace +
+                        $this->nullPosition * $boundings->width * ( 1 - ( $startSpace + $endSpace ) ),
                     0
                 );
                 break;
             case ezcGraph::LEFT:
                 $start = new ezcGraphCoordinate(
                     0,
-                    ( $boundings->y1 - $boundings->y0 ) * $startSpace +
-                        $this->nullPosition * ( $boundings->y1 - $boundings->y0 ) * ( 1 - 2 * $startSpace )
+                    $boundings->height * $endSpace +
+                        $this->nullPosition * $boundings->height * ( 1 - ( $startSpace + $endSpace ) )
                 );
                 $end = new ezcGraphCoordinate(
-                    $boundings->x1 - $boundings->x0,
-                    ( $boundings->y1 - $boundings->y0 ) * $endSpace +
-                        $this->nullPosition * ( $boundings->y1 - $boundings->y0 ) * ( 1 - 2 * $endSpace )
+                    $boundings->width,
+                    $boundings->height * $endSpace +
+                        $this->nullPosition * $boundings->height * ( 1 - ( $startSpace + $endSpace ) )
                 );
                 break;
             case ezcGraph::RIGHT:
                 $start = new ezcGraphCoordinate(
-                    $boundings->x1 - $boundings->x0,
-                    ( $boundings->y1 - $boundings->y0 ) * $startSpace +
-                        $this->nullPosition * ( $boundings->y1 - $boundings->y0 ) * ( 1 - 2 * $startSpace )
+                    $boundings->width,
+                    $boundings->height * $endSpace +
+                        $this->nullPosition * $boundings->height * ( 1 - ( $startSpace + $endSpace ) )
                 );
                 $end = new ezcGraphCoordinate(
                     0,
-                    ( $boundings->y1 - $boundings->y0 ) * $endSpace +
-                        $this->nullPosition * ( $boundings->y1 - $boundings->y0 ) * ( 1 - 2 * $endSpace )
+                    $boundings->height * $endSpace +
+                        $this->nullPosition * $boundings->height * ( 1 - ( $startSpace + $endSpace ) )
                 );
                 break;
         }

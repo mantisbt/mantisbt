@@ -3,7 +3,7 @@
  * File containing the ezcPropertyReadOnlyException class
  *
  * @package Base
- * @version 1.7
+ * @version 1.8
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -12,7 +12,7 @@
  * is tried to be changed, or when a write-only property was accessed for reading.
  *
  * @package Base
- * @version 1.7
+ * @version 1.8
  */
 class ezcBasePropertyPermissionException extends ezcBaseException
 {

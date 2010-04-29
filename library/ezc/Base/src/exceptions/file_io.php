@@ -3,7 +3,7 @@
  * File containing the ezcBaseFileIoException class
  *
  * @package Base
- * @version 1.7
+ * @version 1.8
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -12,7 +12,7 @@
  * and reading to/from an open file.
  *
  * @package Base
- * @version 1.7
+ * @version 1.8
  */
 class ezcBaseFileIoException extends ezcBaseFileException
 {

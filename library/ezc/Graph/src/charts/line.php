@@ -3,7 +3,7 @@
  * File containing the ezcGraphLineChart class
  *
  * @package Graph
- * @version 1.4.3
+ * @version 1.5
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
  * @license http://ez.no/licenses/new_bsd New BSD License
  */
@@ -59,7 +59,7 @@
  * @property ezcGraphLineChartOptions $options
  *           Chart options class
  *
- * @version 1.4.3
+ * @version 1.5
  * @package Graph
  * @mainclass
  */
@@ -174,6 +174,47 @@ class ezcGraphLineChart extends ezcGraphChart
     }
 
     /**
+     * Calculate bar chart step width
+     * 
+     * @return void
+     */
+    protected function calculateStepWidth( ezcGraphChartElementAxis $mainAxis, ezcGraphChartElementAxis $secondAxis, $width )
+    {
+        $steps = $mainAxis->getSteps();
+
+        $stepWidth = null;
+        foreach ( $steps as $step )
+        {
+            if ( $stepWidth === null )
+            {
+                $stepWidth = $step->width;
+            } 
+            elseif ( $step->width !== $stepWidth )
+            {
+                throw new ezcGraphUnregularStepsException();
+            }
+        }
+
+        $step = reset( $steps );
+        if ( count( $step->childs ) )
+        {
+            // Keep this for BC reasons
+            $barCount = ( $mainAxis->getMajorStepCount() + 1 ) * ( $mainAxis->getMinorStepCount() - 1 );
+            $stepWidth = 1 / $barCount;
+        }
+
+        $checkedRegularSteps = true;
+        return $mainAxis->axisLabelRenderer->modifyChartDataPosition( 
+            $secondAxis->axisLabelRenderer->modifyChartDataPosition(
+                new ezcGraphCoordinate(
+                    $width * $stepWidth,
+                    $width * $stepWidth
+                )
+            )
+        );
+    }
+
+    /**
      * Render the assigned data
      *
      * Will renderer all charts data in the remaining boundings after drawing 
@@ -236,38 +277,7 @@ class ezcGraphLineChart extends ezcGraphChart
             if ( ( $checkedRegularSteps === false ) &&
                  ( $data->displayType->default === ezcGraph::BAR ) )
             {
-                $steps = $xAxis->getSteps();
-
-                $stepWidth = null;
-                foreach ( $steps as $step )
-                {
-                    if ( $stepWidth === null )
-                    {
-                        $stepWidth = $step->width;
-                    } 
-                    elseif ( $step->width !== $stepWidth )
-                    {
-                        throw new ezcGraphUnregularStepsException();
-                    }
-                }
-
-                $step = reset( $steps );
-                if ( count( $step->childs ) )
-                {
-                    // Keep this for BC reasons
-                    $barCount = ( $xAxis->getMajorStepCount() + 1 ) * ( $xAxis->getMinorStepCount() - 1 );
-                    $stepWidth = 1 / $barCount;
-                }
-
-                $checkedRegularSteps = true;
-                $width = $xAxis->axisLabelRenderer->modifyChartDataPosition( 
-                    $yAxis->axisLabelRenderer->modifyChartDataPosition(
-                        new ezcGraphCoordinate(
-                            ( $boundings->x1 - $boundings->x0 ) * $stepWidth,
-                            0 
-                        )
-                    )
-                )->x;
+                $width = $this->calculateStepWidth( $xAxis, $yAxis, $boundings->width )->x;
             }
 
             // Draw lines for dataset
@@ -617,25 +627,17 @@ class ezcGraphLineChart extends ezcGraphChart
         // Calculate inner data boundings of chart
         $innerBoundings = new ezcGraphBoundings(
             $boundings->x0 + $boundings->width *
-                ( ( ( $this->elements['yAxis']->outerAxisSpace === null ) || 
-                    ( $this->elements['xAxis']->position === ezcGraph::LEFT ) ) ?
-                    $this->elements['yAxis']->axisSpace :
-                    $this->elements['yAxis']->outerAxisSpace ),
+                    $this->elements['yAxis']->axisSpace,
             $boundings->y0 + $boundings->height *
-                ( ( ( $this->elements['xAxis']->outerAxisSpace === null ) || 
-                    ( $this->elements['yAxis']->position === ezcGraph::TOP ) ) ?
+                ( ( $this->elements['xAxis']->outerAxisSpace === null ) ?
                     $this->elements['xAxis']->axisSpace :
-                    $this->elements['yAxis']->outerAxisSpace ),
+                    $this->elements['xAxis']->outerAxisSpace ),
             $boundings->x1 - $boundings->width *
-                ( ( ( $this->elements['yAxis']->outerAxisSpace === null ) || 
-                    ( $this->elements['xAxis']->position === ezcGraph::RIGHT ) ) ?
+                ( ( $this->elements['yAxis']->outerAxisSpace === null ) ?
                     $this->elements['yAxis']->axisSpace :
                     $this->elements['yAxis']->outerAxisSpace ),
             $boundings->y1 - $boundings->height *
-                ( ( ( $this->elements['xAxis']->outerAxisSpace === null ) || 
-                    ( $this->elements['yAxis']->position === ezcGraph::BOTTOM ) ) ?
-                    $this->elements['xAxis']->axisSpace :
-                    $this->elements['yAxis']->outerAxisSpace )
+                    $this->elements['xAxis']->axisSpace
         );
 
         // Render axis
