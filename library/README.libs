@@ -8,7 +8,7 @@ adodb           | adodb           | 5.0.9a   | patched: various, see git
 disposable      | disposable      | 1.1.0    | unpatched
 ezc             | ez Components   | 2009.1.2 | unpatched
 nusoap          | nusoap          | 0.9.5    | unpatched
-phpmailer       | PHPMailer       | 5.0.2    | unpatched
+phpmailer       | PHPMailer       | 5.1      | unpatched
 projax          | projax          |          | unpatched
 rssbuilder      | RSSBuilder      | 2.2.1    | patched: removed __autoload function
 utf8            | phputf8         | 0.5      | unpatched
