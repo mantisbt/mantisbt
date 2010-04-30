@@ -660,8 +660,6 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
-	$c_cost = db_prepare_double( $p_cost );
-
 	$t_bug_table = db_get_table( 'bug' );
 	$t_user_table = db_get_table( 'user' );
 	$t_bugnote_table = db_get_table( 'bugnote' );
@@ -695,7 +693,7 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 
 	$result = db_query( $query );
 
-	$t_cost_min = $c_cost / 60;
+	$t_cost_min = $p_cost / 60.0;
 
 	while( $row = db_fetch_array( $result ) ) {
 		$t_total_cost = $t_cost_min * $row['sum_time_tracking'];
