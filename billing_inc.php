@@ -35,7 +35,7 @@
  * @uses utility_api.php
  */
 
-if ( !defined( 'BUG_VIEW_INC_ALLOW' ) ) {
+if ( !defined( 'BILLING_INC_ALLOW' ) ) {
 	return;
 }
 

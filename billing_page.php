@@ -37,7 +37,6 @@ require_api( 'lang_api.php' );
 
 if ( !config_get( 'time_tracking_enabled' ) )
 	trigger_error( ERROR_ACCESS_DENIED, ERROR );
-?>
 
 access_ensure_global_level( config_get( 'time_tracking_reporting_threshold' ) );
 
@@ -49,7 +48,7 @@ html_page_top( lang_get( 'time_tracking_billing_link' )  );
 <?php
 # Work break-down
 define( 'BILLING_INC_ALLOW', true );
-include( $dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'billing_inc.php' );
+include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'billing_inc.php' );
 
 html_page_bottom();
 
