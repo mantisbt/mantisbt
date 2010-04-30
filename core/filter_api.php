@@ -2831,7 +2831,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							<?php
 							if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
 			?>
-		<script type="text/javascript" language="JavaScript">
+		<script type="text/javascript">
 		<!--
 			function SwitchDateFields() {
 		    	// All fields need to be enabled to go back to the script
@@ -3099,7 +3099,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							$t_js_toggle_func = "toggle_custom_date_field_" . $t_field_id . "_controls";
 							if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
 								?>
-	<script type="text/javascript" language="JavaScript">
+	<script type="text/javascript">
 	<!--
 	function <?php echo $t_js_toggle_func . "_start";?>(disable) {
 			document.filters_open.custom_field_<?php echo $t_field_id;?>_start_year.disabled = disable ;

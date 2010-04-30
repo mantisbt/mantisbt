@@ -104,7 +104,7 @@ require_api( 'lang_api.php' );
 	</td>
 	<td>
 		<?php if ( config_get( 'time_tracking_stopwatch' ) && config_get( 'use_javascript' ) ) { ?>
-		<script language="javascript">
+		<script type="text/javascript">
 			var time_tracking_stopwatch_lang_start = "<?php echo lang_get( 'time_tracking_stopwatch_start' ) ?>";
 			var time_tracking_stopwatch_lang_stop = "<?php echo lang_get( 'time_tracking_stopwatch_stop' ) ?>";
 		</script>

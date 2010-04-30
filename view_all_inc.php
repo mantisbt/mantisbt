@@ -98,7 +98,7 @@ if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend
 /** @todo (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...) */
 if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ){
 	?>
-	<script type="text/javascript" language="JavaScript">
+	<script type="text/javascript">
 	<!--
 		var string_loading = '<?php echo lang_get( 'loading' );?>';
 	// -->

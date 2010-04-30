@@ -731,7 +731,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 <!-- Autofocus JS -->
-<script type="text/javascript" language="JavaScript">
+<script type="text/javascript">
 <!--
 	window.document.reauth_form.password.focus();
 // -->

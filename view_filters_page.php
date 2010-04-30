@@ -73,7 +73,7 @@ if ( ON == config_get( 'use_javascript' ) ) {
 	?>
 	<body onload="SetInitialFocus();">
 
-	<script type="text/javascript" language="JavaScript">
+	<script type="text/javascript">
 	<!--
 	function SetInitialFocus() {
 		<?php

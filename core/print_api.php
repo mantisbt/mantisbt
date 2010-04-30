@@ -542,7 +542,7 @@ function print_extended_project_browser( $p_trace = Array(), $p_project_id = nul
 	project_cache_all();
 	$t_project_ids = current_user_get_accessible_projects();
 
-	echo '<script type="text/javascript" language="JavaScript">' . "\n";
+	echo '<script type="text/javascript">' . "\n";
 	echo "<!--\n";
 	echo "var subprojects = new Object();\n";
 
@@ -608,7 +608,7 @@ function print_extended_project_browser( $p_trace = Array(), $p_project_id = nul
 	}
 
 	echo '<select name="project_id" onChange="document.form_set_project.submit()" class="small-subprojects"></select>' . "\n";
-	echo '<script type="text/javascript" language="JavaScript">' . "\n";
+	echo '<script type="text/javascript">' . "\n";
 	echo '<!--' . "\n";
 	echo 'document.form_set_project.top_id.value = \'' . $t_top_id . '\';' . "\n";
 	echo 'setProject(' . $t_top_id . ');' . "\n";
@@ -1706,7 +1706,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 				 $c_id = db_prepare_int( $t_attachment['id'] );
 				 $t_bug_file_table = db_get_table( 'bug_file' );
 
-				echo "<script type=\"text/javascript\" language=\"JavaScript\">
+				echo "<script type=\"text/javascript\">
 <!--
 function swap_content( span ) {
 displayType = ( document.getElementById( span ).style.display == 'none' ) ? '' : 'none';

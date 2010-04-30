@@ -141,7 +141,7 @@ if ( ON == config_get( 'use_javascript' ) ) {
 ?>
 <!-- Autofocus JS -->
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/javascript" language="JavaScript">
+<script type="text/javascript">
 <!--
 	window.document.signup_form.username.focus();
 // -->

@@ -269,7 +269,7 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 
 <!-- Autofocus JS -->
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/javascript" language="JavaScript">
+<script type="text/javascript">
 <!--
 	window.document.login_form.<?php if ( is_blank( $f_username ) ) { echo 'username'; } else { echo 'password'; } ?>.focus();
 // -->
