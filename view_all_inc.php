@@ -113,7 +113,8 @@ if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascr
 <form name="bug_action" method="get" action="bug_actiongroup_page.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <table id="buglist" class="width100" cellspacing="1">
-<tr>
+<thead>
+<tr class="buglist-nav">
 	<td class="form-title" colspan="<?php echo $col_count; ?>">
 		<span class="floatleft">
 		<?php
@@ -164,7 +165,7 @@ if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascr
 	</td>
 </tr>
 <?php # -- Bug list column header row -- ?>
-<tr class="row-category">
+<tr class="buglist-headers row-category">
 <?php
 	foreach( $t_columns as $t_column ) {
 		$t_title_function = 'print_column_title';
@@ -177,6 +178,8 @@ if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascr
 <tr class="spacer">
 	<td colspan="<?php echo $col_count; ?>"></td>
 </tr>
+</thead><tbody>
+
 <?php
 function write_bug_rows ( $p_rows )
 {
@@ -224,8 +227,9 @@ write_bug_rows($rows);
 # -- ====================== end of BUG LIST ========================= --
 
 # -- ====================== MASS BUG MANIPULATION =================== --
+# @@@ ideally buglist-footer would be in <tfoot>, but that's not possible due to global g_checkboxes_exist set via write_bug_rows()
 ?>
-	<tr>
+	<tr class="buglist-footer">
 		<td class="left" colspan="<?php echo $col_count; ?>">
 			<span class="floatleft">
 <?php
@@ -253,6 +257,7 @@ write_bug_rows($rows);
 		</td>
 	</tr>
 <?php # -- ====================== end of MASS BUG MANIPULATION ========================= -- ?>
+</tbody>
 </table>
 </form>
 
