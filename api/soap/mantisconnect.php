@@ -1074,6 +1074,58 @@ $l_oServer->register( 'mc_project_get_categories',
 	'Get the categories belonging to the specified project.'
 );
 
+### mc_project_add_category
+$l_oServer->register( 'mc_project_add_category',
+        array(
+                'username'              =>      'xsd:string',
+                'password'              =>      'xsd:string',
+                'project_id'            =>      'xsd:integer',
+                'p_category_name'       =>      'xsd:string',
+        ),
+        array(
+                'return'                =>      'xsd:integer'
+        ),
+        $t_namespace,
+        false, false, false,
+        'Add a category of specific project.'
+);
+
+
+### mc_project_delete_category
+$l_oServer->register( 'mc_project_delete_category',
+        array(
+                'username'              =>      'xsd:string',
+                'password'              =>      'xsd:string',
+                'project_id'            =>      'xsd:integer',
+                'p_category_name'       =>      'xsd:string',
+        ),
+        array(
+                'return'                =>      'xsd:integer'
+        ),
+        $t_namespace,
+        false, false, false,
+        'Delete a category of specific project.'
+);
+
+
+### mc_project_rename_category_by_name
+$l_oServer->register( 'mc_project_rename_category_by_name',
+        array(
+                'username'              =>      'xsd:string',
+                'password'              =>      'xsd:string',
+                'project_id'            =>      'xsd:integer',
+                'p_category_name'       =>      'xsd:string',
+                'p_category_name_new'   =>      'xsd:string',
+                'p_assigned_to'         =>      'xsd:integer',
+        ),
+        array(
+                'return'                =>      'xsd:integer'
+        ),
+        $t_namespace,
+        false, false, false,
+        'Rename a category of specific project.'
+);
+
 ### mc_project_get_versions
 $l_oServer->register( 'mc_project_get_versions',
 	array(
