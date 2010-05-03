@@ -7,6 +7,7 @@
 	<target name="test" depends="init">
 		<mkdir dir="build/test"/>
 		<phpunit printsummary="true" bootstrap="tests/bootstrap.php">
+			<formatter usefile="false" type="plain"/>
 			<formatter todir="build/test" type="xml"/>
 			<batchtest classpath="tests:core:core/classes:library">
 				<fileset dir="tests">
