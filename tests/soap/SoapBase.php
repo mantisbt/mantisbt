@@ -71,7 +71,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
     protected function getCategory() {
  		return 'General';   	
     }
-    
+   
     protected function skipIfTimeTrackingIsNotEnabled() {
     	
     	$timeTrackingEnabled = $this->client->mc_config_get_string($this->userName, $this->password, 'time_tracking_enabled');
