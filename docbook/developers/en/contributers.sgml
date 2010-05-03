@@ -219,20 +219,42 @@ $ git merge master
 
 		<para>
 			In order to run the tests, you will need to have the PHP Soap extension
-			and <ulink url="http://www.phpunit.de">PHPUnit</ulink> installed. The tests
-			are configured using a <literal>bootstrap.php</literal> file. The 
+			, <ulink url="http://www.phpunit.de">PHPUnit 3.4 or newer</ulink> and 
+			<ulink url="http://phing.info">Phing 2.4 or newer</ulink> installed.
+			The tests are configured using a <literal>bootstrap.php</literal> file. The 
 			<literal>boostrap.php.sample</literal> file contains the settings you will
 			need to adjust to run all the tests. 
 		</para>
 
 		<para>
-			Running the unit tests is done from the <literal>tests</literal> directory
-			using the following command:
+			Running the unit tests is done from root directory using the following 
+			command:
 		</para>
 
 		<programlisting>
-$ phpunit --bootstrap bootstrap.php AllTests.php
+$ phing test
 		</programlisting>
+
+		<sect2 id="dev.contrib.test.soap">
+			<title>Running the SOAP tests</title>
+
+			<para>
+				MantisBT ships with a suite of SOAP tests which require an initial
+				set up to be executed. The required steps are:
+			</para>
+
+			<itemizedlist>
+        	                <listitem><para>Install MantisBT locally and configure a project
+				and a category.</para></listitem>
+				<listitem><para>Adjust the <literal>bootstrap.php</literal> file 
+				to point to your local installation.</para></listitem>
+				<listitem><para>Customize the <literal>config_inc.php</literal>
+				to enable all the features tested using the SOAP tests. The
+				simplest way to do that is to run all the tests once and ajust it
+				based on the skipped tests.</para></listitem>
+			</itemizedlist>
+
+		</sect2>
 
 	</sect1>
 
