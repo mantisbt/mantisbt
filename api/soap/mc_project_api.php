@@ -105,6 +105,101 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 }
 
 /**
+ * Add a new category to a project
+ * @param string $p_username  The name of the user trying to access the categories.
+ * @param string $p_password  The password of the user.
+ * @param integer $p_project_id  The id of the project to retrieve the categories for.
+ * @param string $p_category_name The name of the new category to add
+ * @return integer id of the new category
+ */
+
+function mc_project_add_category($p_username, $p_password, $p_project_id, $p_category_name ) {
+        $t_user_id = mci_check_login( $p_username, $p_password );
+
+        if( $t_user_id === false ) {
+                return new soap_fault( 'Client', '', 'Access Denied' );
+        }
+
+        if( !project_exists( $p_project_id ) ) {
+                return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+        }
+
+        if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
+                return new soap_fault( 'Client', '', 'Access Denied' );
+        }
+
+        return category_add( $p_project_id, $p_category_name );
+}
+
+/**
+ * Delete a category of a project
+ * @param string $p_username  The name of the user trying to access the categories.
+ * @param string $p_password  The password of the user.
+ * @param integer $p_project_id  The id of the project to retrieve the categories for.
+ * @param string $p_category_name The name of the category to delete
+ * @return bool returns true or false depending on the success of the delete action
+ */
+
+function mc_project_delete_category ($p_username, $p_password, $p_project_id, $p_category_name) {
+        $t_user_id = mci_check_login( $p_username, $p_password );
+
+        if( $t_user_id === false ) {
+                return new soap_fault( 'Client', '', 'Access Denied' );
+        }
+
+        if( !project_exists( $p_project_id ) ) {
+                return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+        }
+
+        if( !mci_has_access( config_get( 'manage_project_threshold' ), $p_project_id ) ) {
+                return new soap_fault( 'Client', '', 'Access Denied' );
+        }
+
+        // find the id of the category
+        $p_category_id = category_get_id_by_name( $p_category_name, $p_project_id );
+
+        // delete the category and link all the issue to the general category by default
+        return category_remove( $p_category_id, 1 );
+}
+
+/**
+ * Update a category of a project
+ * @param string $p_username  The name of the user trying to access the categories.
+ * @param string $p_password  The password of the user.
+ * @param integer $p_project_id  The id of the project to retrieve the categories for.
+ * @param string $p_category_name The name of the category to rename
+ * @param string $p_category_name_new The new name of the category to rename
+ * @param int $p_assigned_to User ID that category is assigned to
+ * @return bool returns true or false depending on the success of the update action
+ */
+
+function mc_project_rename_category_by_name ($p_username, $p_password, $p_project_id, $p_category_name, $p_category_name_new, $p_assigned_to) {
+        $t_user_id = mci_check_login( $p_username, $p_password );
+
+        if ( null === $p_assigned_to ) {
+                return new soap_fault( 'Client', '', 'p_assigned_to needed' );
+        }
+
+        if( $t_user_id === false ) {
+                return new soap_fault( 'Client', '', 'Access Denied' );
+        }
+
+        if( !project_exists( $p_project_id ) ) {
+                return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+        }
+
+        if( !mci_has_access( config_get( 'manage_project_threshold' ), $p_project_id ) ) {
+                return new soap_fault( 'Client', '', 'Access Denied' );
+        }
+
+        // find the id of the category
+        $p_category_id = category_get_id_by_name( $p_category_name, $p_project_id );
+
+        // update the category
+        return category_update( $p_category_id, $p_category_name_new, $p_assigned_to );
+}
+
+/**
  * Get all versions of a project.
  *
  * @param string $p_username  The name of the user trying to access the versions.
