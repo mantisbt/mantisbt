@@ -247,15 +247,15 @@ echo $tpl_form_title;
 echo '&nbsp;<span class="small">';
 
 # Jump to Bugnotes
-print_bracket_link( "#bugnotes", lang_get( 'jump_to_bugnotes' ) );
+print_bracket_link( "#bugnotes", lang_get( 'jump_to_bugnotes' ), false, 'jump-to-bugnotes' );
 
 # Send Bug Reminder
 if ( $tpl_show_reminder_link ) {
-	print_bracket_link( $tpl_bug_reminder_link, lang_get( 'bug_reminder' ) );
+	print_bracket_link( $tpl_bug_reminder_link, lang_get( 'bug_reminder' ), false, 'bug-reminder' );
 }
 
 if ( !is_blank( $tpl_wiki_link ) ) {
-	print_bracket_link( $tpl_wiki_link, lang_get( 'wiki' ) );
+	print_bracket_link( $tpl_wiki_link, lang_get( 'wiki' ), false, 'wiki' );
 }
 
 foreach ( $tpl_links as $t_plugin => $t_hooks ) {
@@ -284,11 +284,11 @@ if ( $t_bugslist ) {
 	$t_index = array_search( $f_bug_id, $t_bugslist );
 	if ( false !== $t_index ) {
 		if ( isset( $t_bugslist[$t_index-1] ) ) {
-			print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index-1], '&lt;&lt;' );
+			print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index-1], '&lt;&lt;', false, 'previous-bug' );
 		}
 
 		if ( isset( $t_bugslist[$t_index+1] ) ) {
-			print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index+1], '&gt;&gt;' );
+			print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index+1], '&gt;&gt;', false, 'next-bug' );
 		}
 	}
 	echo '</span></td>';
@@ -301,13 +301,13 @@ echo '<td class="right" colspan="2">';
 if ( !is_blank( $tpl_history_link ) ) {
 	# History
 	echo '<span class="small">';
-	print_bracket_link( $tpl_history_link, lang_get( 'bug_history' ) );
+	print_bracket_link( $tpl_history_link, lang_get( 'bug_history' ), false , 'bug-history' );
 	echo '</span>';
 }
 
 # Print Bug
 echo '<span class="small">';
-print_bracket_link( $tpl_print_link, lang_get( 'print' ) );
+print_bracket_link( $tpl_print_link, lang_get( 'print' ), false, 'print' );
 echo '</span>';
 echo '</td>';
 echo '</tr>';

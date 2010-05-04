@@ -1335,7 +1335,11 @@ function print_bracket_link_prepared( $p_link ) {
 # if the $p_link is blank then the text is printed but no link is created
 # if $p_new_window is true, link will open in a new window, default false.
 function print_bracket_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
-	echo '<span class="bracket-link">[&nbsp;';
+	echo '<span class="bracket-link';
+	if ($p_class !== '') {
+	    echo ' bracket-link-',$p_class; # prefix on a container allows styling of whole link, including brackets
+    }
+	echo '">[&nbsp;';
 	print_link( $p_link, $p_url_text, $p_new_window, $p_class );
 	echo '&nbsp;]</span> ';
 }
