@@ -433,7 +433,7 @@ else {
 	$v_start = 0;
 	$v_end = 0;
 }
-echo "($v_start - $v_end / $t_bug_count)";
+echo "<span class=\"my-buglist-count\">($v_start - $v_end / $t_bug_count)</span>";
 ?>
 	</td>
 </tr>
