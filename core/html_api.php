@@ -599,8 +599,8 @@ function html_footer( $p_file = null ) {
 		user_update_last_visit( $t_user_id );
 	}
 
-	echo "\t", '<br />', "\n";
-	echo "\t", '<hr size="1" />', "\n";
+	echo "\t<div class=\"footer\"><br />\n";
+	echo "\t<hr size=\"1\" />\n";
 
 	echo '<table border="0" width="100%" cellspacing="0" cellpadding="0"><tr valign="top"><td>';
 	if( ON == config_get( 'show_version' ) ) {
@@ -668,7 +668,7 @@ function html_footer( $p_file = null ) {
 
 	echo '</td><td>', "\n\t", '<div align="right">';
 	echo '<a href="http://www.mantisbt.org" title="Free Web Based Bug Tracker"><img src="' . helper_mantis_url( 'images/mantis_logo_button.gif' ) . '" width="88" height="35" alt="Powered by Mantis Bugtracker" border="0" /></a>';
-	echo '</div>', "\n", '</td></tr></table>', "\n";
+	echo "</div>\n</td></tr></table></div>\n";
 }
 
 /**
