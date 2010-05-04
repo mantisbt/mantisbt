@@ -53,7 +53,7 @@ if ( OFF == config_get('time_tracking_enabled') ) {
 }
 ?>
 
-<a name="bugnotestats" id="bugnotestats" /><br />
+<a name="bugnotestats" id="bugnotestats"></a><br />
 
 <?php
 collapse_open( 'bugnotestats' );

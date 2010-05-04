@@ -33,7 +33,7 @@ html_page_top();
 
 ?>
 
-<a name="email" id="email" />
+<a name="email" id="email"></a>
 <table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
 <tr>
 	<td bgcolor="#f4f4f4">

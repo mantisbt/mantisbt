@@ -89,7 +89,7 @@ $num_notes = count( $t_bugnotes );
 ?>
 
 <?php # Bugnotes BEGIN ?>
-<a name="bugnotes" id="bugnotes" /><br />
+<a name="bugnotes" id="bugnotes"></a><br />
 
 <?php
 	collapse_open( 'bugnotes' );

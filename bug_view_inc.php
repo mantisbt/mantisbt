@@ -711,8 +711,8 @@ if ( $t_custom_fields_found ) {
 
 # Attachments
 if ( $tpl_show_attachments ) {
-	echo '<tr ', helper_alternate_class(), '>';
-	echo '<td class="category"><a name="attachments" id="attachments" />', lang_get( 'attached_files' ), '</td>';
+	echo '<tr id="attachments" ', helper_alternate_class(), '>';
+	echo '<td class="category">', lang_get( 'attached_files' ), '</td>';
 	echo '<td colspan="5">';
 	print_bug_attachments_list( $tpl_bug_id );
 	echo '</td></tr>';

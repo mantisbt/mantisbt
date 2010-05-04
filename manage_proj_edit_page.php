@@ -344,8 +344,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <br />
 
 <!-- PROJECT CATEGORIES -->
-<a name="categories" />
-<div align="center">
+<div align="center" id="categories">
 <table class="width75" cellspacing="1">
 
 <!-- Title -->
@@ -448,8 +447,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 ?>
 
 <!-- PROJECT VERSIONS -->
-<a name="versions" />
-<table class="width75" cellspacing="1">
+<table id="versions" class="width75" cellspacing="1">
 
 <!-- Title -->
 <tr>
@@ -564,8 +562,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 ?>
 
 <!-- PROJECT CUSTOM FIELD -->
-<a name="customfields" />
-
 <?php
 # You need either global permissions or project-specific permissions to link
 #  custom fields
@@ -573,7 +569,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	( count( custom_field_get_ids() ) > 0 ) ) {
 ?>
 	<br />
-	<div align="center">
+	<div id="customfields" align="center">
 	<table class="width75" cellspacing="1">
 	<tr>
 		<td class="form-title" colspan="3">

@@ -51,7 +51,7 @@ require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
 ?>
-<a name="bugnotestats" id="bugnotestats" /><br />
+<a name="bugnotestats" id="bugnotestats"></a><br />
 <?php
 collapse_open( 'bugnotestats' );
 

@@ -52,7 +52,7 @@ if ( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
 }
 ?>
 
-<a name="history" id="history" /><br />
+<a name="history" id="history"></a><br />
 
 <?php
 	collapse_open( 'history' );
