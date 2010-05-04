@@ -321,6 +321,15 @@ if ( $tpl_top_buttons_enabled ) {
 }
 
 echo '</thead>';
+
+if ( $tpl_bottom_buttons_enabled ) {
+	echo '<tfoot>';
+	echo '<tr align="center" class="bottom-buttons"><td align="center" colspan="6">';
+	html_buttons_view_bug_page( $tpl_bug_id );
+	echo '</td></tr>';
+	echo '</tfoot>';
+}
+
 echo '<tbody>';
 
 if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_state || $tpl_show_date_submitted || $tpl_show_last_updated ) {
@@ -718,12 +727,6 @@ if ( $tpl_show_attachments ) {
 	echo '<td class="category">', lang_get( 'attached_files' ), '</td>';
 	echo '<td colspan="5">';
 	print_bug_attachments_list( $tpl_bug_id );
-	echo '</td></tr>';
-}
-
-if ( $tpl_bottom_buttons_enabled ) {
-	echo '<tr align="center"><td align="center" colspan="6">';
-	html_buttons_view_bug_page( $tpl_bug_id );
 	echo '</td></tr>';
 }
 
