@@ -1232,7 +1232,7 @@ function print_summary_menu( $p_page = '' ) {
  */
 function html_status_legend() {
 	echo '<br />';
-	echo '<table class="width100" cellspacing="1">';
+	echo '<table class="status-legend width100" cellspacing="1">';
 	echo '<tr>';
 
 	# Don't show the legend if only one status is selected by the current filter

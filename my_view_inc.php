@@ -412,10 +412,11 @@ $box_title = lang_get( 'my_view_title_' . $t_box_title );
 # -- ====================== BUG LIST ========================= --
 ?>
 
-<table class="width100" cellspacing="1">
+<table class="width100 my-buglist" cellspacing="1">
 <?php
 # -- Navigation header row --?>
-<tr>
+<thead>
+    <tr class="my-buglist-nav">
 <?php
 # -- Viewing range info --?>
 	<td class="form-title" colspan="2">
@@ -436,7 +437,7 @@ echo "($v_start - $v_end / $t_bug_count)";
 ?>
 	</td>
 </tr>
-
+</thead><tbody>
 <?php
 # -- Loop over bug rows and create $v_* variables --
 	$t_count = count( $rows );
@@ -457,12 +458,18 @@ echo "($v_start - $v_end / $t_bug_count)";
 
 	# grab the project name
 	$project_name = project_get_field( $t_bug->project_id, 'name' );
+
+	if ( VS_PRIVATE == $t_bug->view_state ) {
+	    $t_bug_class = 'my-buglist-private';
+    } else {
+        $t_bug_class = '';
+    }
 	?>
 
-<tr bgcolor="<?php echo $status_color?>">
+<tr class="my-buglist-bug <?php echo $t_bug_class?>" bgcolor="<?php echo $status_color?>">
 	<?php
 	# -- Bug ID and details link + Pencil shortcut --?>
-	<td class="center" valign="top" width ="0" nowrap="nowrap">
+	<td class="center my-buglist-id" valign="top" width ="0" nowrap="nowrap">
 		<span class="small">
 		<?php
 			print_bug_link( $t_bug->id );
@@ -470,7 +477,7 @@ echo "($v_start - $v_end / $t_bug_count)";
 	echo '<br />';
 
 	if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
-		echo '<a href="' . string_get_bug_update_url( $t_bug->id ) . '"><img border="0" src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
+		echo '<a class="edit" href="' . string_get_bug_update_url( $t_bug->id ) . '"><img border="0" src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
 	}
 
 	if( ON == config_get( 'show_priority_text' ) ) {
@@ -480,7 +487,7 @@ echo "($v_start - $v_end / $t_bug_count)";
 	}
 
 	if( 0 < $t_attachment_count ) {
-		echo '<a href="' . string_get_bug_view_url( $t_bug->id ) . '#attachments">';
+		echo '<a class="attachments" href="' . string_get_bug_view_url( $t_bug->id ) . '#attachments">';
 		echo '<img border="0" src="' . $t_icon_path . 'attachment.png' . '"';
 		echo ' alt="' . lang_get( 'attachment_alt' ) . '"';
 		echo ' title="' . $t_attachment_count . ' ' . lang_get( 'attachments' ) . '"';
@@ -496,26 +503,25 @@ echo "($v_start - $v_end / $t_bug_count)";
 
 	<?php
 	# -- Summary --?>
-	<td class="left" valign="top" width="100%">
-		<span class="small">
+	<td class="left my-buglist-description" valign="top" width="100%">
 		<?php
 		 	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $t_bug->project_id ) {
-				echo '[', string_display_line( project_get_name( $t_bug->project_id ) ), '] ';
+				echo '<span class="small project">[', string_display_line( project_get_name( $t_bug->project_id ) ), '] </span>';
 			}
-			echo $t_summary;
+			echo '<span class="small summary">', $t_summary, '<br /></span>';
 	?>
-		<br />
 		<?php
 	# type project name if viewing 'all projects' or bug is in subproject
-	echo string_display_line( category_full_name( $t_bug->category_id, true, $t_bug->project_id ) );
+	echo '<span class="small category">', string_display_line( category_full_name( $t_bug->category_id, true, $t_bug->project_id ) ), '</span>';
 
+    echo '<span class="small last-modified"> - ';
 	if( $t_bug->last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
-		echo ' - <b>' . $t_last_updated . '</b>';
+		echo '<b>' . $t_last_updated . '</b>';
 	} else {
-		echo ' - ' . $t_last_updated;
+		echo $t_last_updated;
 	}
+	echo '</span>';
 	?>
-		</span>
 	</td>
 </tr>
 <?php
@@ -524,6 +530,7 @@ echo "($v_start - $v_end / $t_bug_count)";
 
 # -- ====================== end of BUG LIST ========================= --
 ?>
+</tbody>
 </table>
 <?php
 // Free the memory allocated for the rows in this box since it is not longer needed.
