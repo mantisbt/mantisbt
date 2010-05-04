@@ -150,6 +150,10 @@ $num_notes = count( $t_bugnotes );
 			$t_bugnote_css		= 'bugnote-public';
 			$t_bugnote_note_css	= 'bugnote-note-public';
 		}
+
+		if (TIME_TRACKING == $t_bugnote->note_type) {
+		    $t_bugnote_css    .= ' bugnote-time-tracking';
+	    }
 ?>
 <tr class="bugnote" id="c<?php echo $t_bugnote->id ?>">
         <td class="<?php echo $t_bugnote_css ?>">
@@ -240,7 +244,7 @@ $num_notes = count( $t_bugnotes );
 					echo implode( ', ', $t_to ) . '</em><br /><br />';
 				case TIME_TRACKING:
 					if ( access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
-						echo '<b><big>', $t_time_tracking_hhmm, '</big></b><br /><br />';
+						echo '<div class="time-tracked">', $t_time_tracking_hhmm, '</div>';
 					}
 					break;
 			}
