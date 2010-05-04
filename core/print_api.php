@@ -1351,11 +1351,7 @@ function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' 
 	} else {
 		$t_link = htmlspecialchars( $p_link );
 		if( $p_new_window === true ) {
-			if( $p_class !== '') {
-				echo "<a class=\"$p_class\" href=\"$t_link\" target=\"_blank\">$p_url_text</a>";
-			} else {
-				echo "<a href=\"$t_link\" target=\"_blank\">$p_url_text</a>";
-			}
+			echo "<a class=\"new-window $p_class\" href=\"$t_link\" target=\"_blank\">$p_url_text</a>";
 		} else {
 			if( $p_class !== '') {
 				echo "<a class=\"$p_class\" href=\"$t_link\">$p_url_text</a>";
@@ -1681,7 +1677,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 			$t_href_start = "<a href=\"file_download.php?file_id={$t_attachment['id']}&amp;type=bug\">";
 			$t_href_end = '</a>';
 
-			$t_href_clicket = " [<a href=\"file_download.php?file_id={$t_attachment['id']}&amp;type=bug\" target=\"_blank\">^</a>]";
+			$t_href_clicket = " <span class=\"bracket-link bracket-link-new-window\">[<a class=\"new-window\" href=\"file_download.php?file_id={$t_attachment['id']}&amp;type=bug\" target=\"_blank\">^</a>]</span>";
 		} else {
 			$t_href_start = '';
 			$t_href_end = '';

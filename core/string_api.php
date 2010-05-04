@@ -473,7 +473,7 @@ function string_insert_hrefs( $p_string ) {
 		$s_url_regex = "/(([[:alpha:]][-+.[:alnum:]]*):\/\/(${t_url_part1}*?${t_url_part2}+))/sue";
 	}
 
-	$p_string = preg_replace( $s_url_regex, "'<a href=\"'.rtrim('\\1','.').'\">\\1</a> [<a href=\"'.rtrim('\\1','.').'\" target=\"_blank\">^</a>]'", $p_string );
+	$p_string = preg_replace( $s_url_regex, "'<a href=\"'.rtrim('\\1','.').'\">\\1</a> <span class=\"bracket-link bracket-link-new-window\">[<a class=\"new-window\" href=\"'.rtrim('\\1','.').'\" target=\"_blank\">^</a>]</span>'", $p_string );
 	if( $t_change_quotes ) {
 		ini_set( 'magic_quotes_sybase', true );
 	}
