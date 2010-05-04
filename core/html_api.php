@@ -1704,7 +1704,7 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 
 	# MONITOR/UNMONITOR button
 	if( !current_user_is_anonymous() ) {
-		echo '<td class=center">';
+		echo '<td class="center">';
 		if( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
 			html_button_bug_unmonitor( $p_bug_id );
 		} else {
