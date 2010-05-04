@@ -85,7 +85,9 @@ tr.print-category	{ color: #000000; font-weight: bold; }
 
 tr.bugnote .bugnote-meta { background-color: #c8c8e8; color: #000000; font-weight: bold; width: 25%; line-height: 1.4; vertical-align: top; }
 tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%; vertical-align: top; }
-tr.bugnote .time-tracked { font-size:bigger; font-weight:bold; margin: 0 0 1em; padding:0; }
+tr.bugnote .time-tracked,
+.time-tracking-total .time-tracked { font-size:bigger; font-weight:bold; margin: 0 0 1em; padding:0; }
+.time-tracking-total { text-align:right; }
 
 td.login-info-left		{ width: 33%; padding: 0px; text-align: left; }
 td.login-info-middle	{ width: 33%; padding: 0px; text-align: center; }

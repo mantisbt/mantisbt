@@ -264,15 +264,14 @@ $num_notes = count( $t_bugnotes );
 <?php
 	} # end for loop
 
-	if ( $t_total_time > 0 && access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
-		echo '<tr><td colspan="2">', sprintf ( lang_get( 'total_time_for_issue' ), db_minutes_to_hhmm( $t_total_time ) ), '</td></tr>';
-	}
-
 	event_signal( 'EVENT_VIEW_BUGNOTES_END', $f_bug_id );
 ?>
 </table>
-
 <?php
+
+if ( $t_total_time > 0 && access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
+	echo '<p class="time-tracking-total">', sprintf ( lang_get( 'total_time_for_issue' ), '<span class="time-tracked">' . db_minutes_to_hhmm( $t_total_time ) . '</span>' ), '</p>';
+}
 	collapse_closed( 'bugnotes' );
 ?>
 
