@@ -237,7 +237,7 @@ $tpl_links = event_signal( 'EVENT_MENU_ISSUE', $f_bug_id );
 
 echo '<br />';
 echo '<table class="width100" cellspacing="1">';
-echo '<tr>';
+echo '<thead><tr class="bug-nav">';
 
 # Form Title
 echo '<td class="form-title" colspan="', $t_bugslist ? '3' : '4', '">';
@@ -278,7 +278,7 @@ echo '</span></td>';
 
 # prev/next links
 if ( $t_bugslist ) {
-	echo '<td class="center"><span class="small">';
+	echo '<td class="center prev-next-links"><span class="small">';
 
 	$t_bugslist = explode( ',', $t_bugslist );
 	$t_index = array_search( $f_bug_id, $t_bugslist );
@@ -296,7 +296,7 @@ if ( $t_bugslist ) {
 
 
 # Links
-echo '<td class="right" colspan="2">';
+echo '<td class="right alternate-views-links" colspan="2">';
 
 if ( !is_blank( $tpl_history_link ) ) {
 	# History
@@ -313,12 +313,15 @@ echo '</td>';
 echo '</tr>';
 
 if ( $tpl_top_buttons_enabled ) {
-	echo '<tr align="center">';
+	echo '<tr align="center" class="top-buttons">';
 	echo '<td align="center" colspan="6">';
 	html_buttons_view_bug_page( $tpl_bug_id );
 	echo '</td>';
 	echo '</tr>';
 }
+
+echo '</thead>';
+echo '<tbody>';
 
 if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_state || $tpl_show_date_submitted || $tpl_show_last_updated ) {
 	# Labels
@@ -724,7 +727,7 @@ if ( $tpl_bottom_buttons_enabled ) {
 	echo '</td></tr>';
 }
 
-echo '</table>';
+echo '</tbody></table>';
 
 # User list sponsoring the bug
 if ( $tpl_show_sponsorships_box ) {

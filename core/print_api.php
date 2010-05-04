@@ -1596,7 +1596,7 @@ function print_file_icon( $p_filename ) {
 # Prints an RSS image that is hyperlinked to an RSS feed.
 function print_rss( $p_feed_url, $p_title = '' ) {
 	$t_path = config_get( 'path' );
-	echo '<a href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><img src="', $t_path, '/images/', 'rss.png" width="16" height="16" border="0" alt="', $p_title, '" /></a>';
+	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><img src="', $t_path, '/images/', 'rss.png" width="16" height="16" border="0" alt="', $p_title, '" /></a>';
 }
 
 # Prints the recently visited issues.
@@ -1611,7 +1611,7 @@ function print_recently_visited() {
 		return;
 	}
 
-	echo '<div align="right"><small>' . lang_get( 'recently_visited' ) . ': ';
+	echo '<div align="right" class="recently-visited"><small>' . lang_get( 'recently_visited' ) . ': ';
 	$t_first = true;
 
 	foreach( $t_ids as $t_id ) {
