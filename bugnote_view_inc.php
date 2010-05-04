@@ -94,7 +94,7 @@ $num_notes = count( $t_bugnotes );
 <?php
 	collapse_open( 'bugnotes' );
 ?>
-<table class="width100" cellspacing="1">
+<table class="bugnotes width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
 <?php
@@ -106,7 +106,7 @@ $num_notes = count( $t_bugnotes );
 	# no bugnotes
 	if ( 0 == $num_notes ) {
 ?>
-<tr>
+<tr class="bugnotes-empty">
 	<td class="center" colspan="2">
 		<?php echo lang_get( 'no_bugnotes_msg' ) ?>
 	</td>
@@ -145,18 +145,18 @@ $num_notes = count( $t_bugnotes );
 
 		if ( VS_PRIVATE == $t_bugnote->view_state ) {
 			$t_bugnote_css		= 'bugnote-private';
-			$t_bugnote_note_css	= 'bugnote-note-private';
 		} else {
 			$t_bugnote_css		= 'bugnote-public';
-			$t_bugnote_note_css	= 'bugnote-note-public';
 		}
 
-		if (TIME_TRACKING == $t_bugnote->note_type) {
+		if ( TIME_TRACKING == $t_bugnote->note_type ) {
 		    $t_bugnote_css    .= ' bugnote-time-tracking';
-	    }
+	    } else if ( REMINDER == $t_bugnote->note_type ) {
+	        $t_bugnote_css    .= ' bugnote-reminder';
+        }
 ?>
-<tr class="bugnote" id="c<?php echo $t_bugnote->id ?>">
-        <td class="<?php echo $t_bugnote_css ?>">
+<tr class="bugnote <?php echo $t_bugnote_css ?>" id="c<?php echo $t_bugnote->id ?>">
+        <td class="bugnote-meta">
 		<?php if ( ON  == config_get("show_avatar") ) print_avatar( $t_bugnote->reporter_id ); ?>
 		<span class="small"><a href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" title="<?php echo lang_get( 'bugnote_link_title' ) ?>"><?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_bugnote_id_formatted ?></a></span><br />
 		<?php
@@ -231,7 +231,7 @@ $num_notes = count( $t_bugnotes );
 		?>
 		</div>
 	</td>
-	<td class="<?php echo $t_bugnote_note_css ?>">
+	<td class="bugnote-note">
 		<?php
 			switch ( $t_bugnote->note_type ) {
 				case REMINDER:

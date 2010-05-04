@@ -83,10 +83,8 @@ tr.print-category	{ color: #000000; font-weight: bold; }
 
 #buglist tr			{ text-align: center; }
 
-td.bugnote-public		{ background-color: #c8c8e8; color: #000000; font-weight: bold; width: 25%; line-height: 1.4; vertical-align: top; }
-td.bugnote-private		{ background-color: #e8e8e8; color: #000000; font-weight: bold; width: 25%; line-height: 1.4; vertical-align: top; }
-td.bugnote-note-public	{ background-color: #e8e8e8; color: #000000; width: 75%; vertical-align: top; }
-td.bugnote-note-private	{ background-color: #e8e8e8; color: #000000; width: 75%; vertical-align: top; }
+tr.bugnote .bugnote-meta { background-color: #c8c8e8; color: #000000; font-weight: bold; width: 25%; line-height: 1.4; vertical-align: top; }
+tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%; vertical-align: top; }
 tr.bugnote .time-tracked { font-size:bigger; font-weight:bold; margin: 0 0 1em; padding:0; }
 
 td.login-info-left		{ width: 33%; padding: 0px; text-align: left; }
