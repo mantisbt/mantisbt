@@ -360,11 +360,6 @@ function html_css() {
 		$t_css_rtl_url = config_get( 'css_rtl_include_file' );
 		echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( $t_css_rtl_url ), true ), '" />', "\n";
 	}
-
-	# fix for NS 4.x css
-	echo "\t", '<script type="text/javascript"><!--', "\n";
-	echo "\t\t", 'if(document.layers) {document.write("<style>td{padding:0px;}<\/style>")}', "\n";
-	echo "\t", '// --></script>', "\n";
 }
 
 /**
