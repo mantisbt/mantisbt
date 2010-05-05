@@ -75,17 +75,17 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'version' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" name="new_version" size="32" maxlength="64" value="<?php echo string_attribute( $t_version->version ) ?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'date_order' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" id="date_order" name="date_order" size="32" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'calendar_date_format' ), $t_version->date_order ) ) ) ?>" />
 		<?php
@@ -95,25 +95,25 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'description' ) ?>
-	</td>
+	</th>
 	<td>
 		<textarea name="description" cols="60" rows="5"><?php echo string_attribute( $t_version->description ) ?></textarea>
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'released' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="released" <?php check_checked( $t_version->released, VERSION_RELEASED ); ?> />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'obsolete' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="obsolete" <?php check_checked( $t_version->obsolete, true ); ?> />
 	</td>

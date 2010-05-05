@@ -64,9 +64,9 @@ print_manage_menu( 'manage_user_create_page.php' );
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category" width="25%">
+	<th class="category" width="25%">
 		<?php echo lang_get( 'username' ) ?>
-	</td>
+	</th>
 	<td width="75%">
 		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" />
 	</td>
@@ -75,9 +75,9 @@ print_manage_menu( 'manage_user_create_page.php' );
 	if ( !$t_ldap || config_get( 'use_ldap_realname' ) == OFF ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'realname' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" name="realname" size="32" maxlength="<?php echo REALLEN;?>" />
 	</td>
@@ -88,9 +88,9 @@ print_manage_menu( 'manage_user_create_page.php' );
 	if ( !$t_ldap || config_get( 'use_ldap_email' ) == OFF ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'email' ) ?>
-	</td>
+	</th>
 	<td>
 		<?php print_email_input( 'email', '' ) ?>
 	</td>
@@ -101,17 +101,17 @@ print_manage_menu( 'manage_user_create_page.php' );
 	if ( OFF == config_get( 'send_reset_password' ) )  {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'password' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="password" name="password" size="32" maxlength="<?php echo PASSLEN;?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'verify_password' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="password" name="password_verify" size="32" maxlength="<?php echo PASSLEN;?>" />
 	</td>
@@ -120,9 +120,9 @@ print_manage_menu( 'manage_user_create_page.php' );
 	}
 ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'access_level' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="access_level">
 			<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
@@ -130,17 +130,17 @@ print_manage_menu( 'manage_user_create_page.php' );
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'enabled' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="enabled" checked="checked" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'protected' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="protected" />
 	</td>

@@ -141,34 +141,34 @@ echo '</div>';
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'username' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" name="username" size="28" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $f_username ); ?>" />
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'password' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" />
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'save_login' ) ?>
-	</td>
+	</th>
 	<td>
 	<input type="checkbox" name="perm_login" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?>/>
 	</td>
 </tr>
 <?php if ( $t_session_validation ) { ?>
 <tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'secure_session' ) ?>
-	</td>
+	</th>
 	<td>
 	<input type="checkbox" name="secure_session" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?>/>
 	<?php echo '<span class="small">' . lang_get( 'secure_session_long' ) . '</span>' ?>

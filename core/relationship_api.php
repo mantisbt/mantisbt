@@ -855,7 +855,7 @@ function relationship_view_box( $p_bug_id ) {
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 			?>
 <tr class="row-1">
-	<td class="category"><?php echo lang_get( 'add_new_relationship' )?></td>
+	<th class="category"><?php echo lang_get( 'add_new_relationship' )?></th>
 	<td><?php echo lang_get( 'this_bug' )?>
 		<form method="post" action="bug_relationship_add.php">
 		<?php echo form_security_field( 'bug_relationship_add' ) ?>

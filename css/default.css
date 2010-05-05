@@ -49,11 +49,11 @@ table.width75		{ width: 75%;  border: solid 1px #000000; }
 table.width60		{ width: 60%;  border: solid 1px #000000; }
 table.width50		{ width: 50%;  border: solid 1px #000000; }
 
-td 					{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; padding: 4px; text-align: left; }
+td,th 				{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; padding: 4px; text-align: left; }
 td.center			{ text-align: center; }
 td.left				{ text-align: left; }
 td.right			{ text-align: right; }
-td.category			{ background-color: #c8c8e8; color: #000000; font-weight: bold; vertical-align : top; }
+td.category, th.category		{ background-color: #c8c8e8; color: #000000; font-weight: bold; vertical-align : top; }
 td.overdue			{ background-color: #ff0000; color: #000000; font-weight: bold; }
 
 td.col-1			{ background-color: #d8d8d8; color: #000000; }
@@ -61,9 +61,9 @@ td.col-2			{ background-color: #e8e8e8; color: #000000; }
 td.form-title		{ background-color: #ffffff; color: #000000; font-weight: bold; text-align: left; }
 td.form-title-caps	{ background-color: #ffffff; color: #000000; font-weight: bold; text-align: left; text-transform: uppercase; }
 td.nopad			{ padding: 0px; }
-td.small-caption	{ font-size: 8pt; }
+td.small-caption, th.small-caption	{ font-size: 8pt; }
 td.print			{ font-size: 8pt; text-align: left; padding: 2px; }
-td.print-category	{ font-size: 8pt; color: #000000; font-weight: bold; text-align: right; padding: 2px; }
+td.print-category, th.print-category	{ font-size: 8pt; color: #000000; font-weight: bold; text-align: right; padding: 2px; }
 td.print-overdue	{ font-size: 8pt; color: #000000; font-weight: bold; padding: 2px; }
 td.print-bottom		{ border-bottom: 1px solid #000000; }
 td.print-spacer		{ background-color: #ffffff; color: #000000; font-size: 1pt; line-height: 0.1; padding: 0px;}

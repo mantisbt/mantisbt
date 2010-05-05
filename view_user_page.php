@@ -81,17 +81,17 @@ html_page_top();
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category" width="25%">
+		<th class="category" width="25%">
 			<?php echo lang_get( 'username' ) ?>
-		</td>
+		</th>
 		<td width="75%">
 			<?php echo string_display_line( $u_username ) ?>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'email' ) ?>
-		</td>
+		</th>
 		<td>
 			<?php
 				if ( ! ( $t_can_manage || $t_can_see_email ) ) {
@@ -107,9 +107,9 @@ html_page_top();
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?> valign="top">
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'realname' ) ?>
-		</td>
+		</th>
 		<td>
 			<?php
 				if ( ! ( $t_can_manage || $t_can_see_realname ) ) {

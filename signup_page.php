@@ -68,17 +68,17 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category" width="30%">
+	<th class="category" width="30%">
 		<?php echo lang_get( 'username_label' ) ?>
-	</td>
+	</th>
 	<td width="70%" colspan="2">
 		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" />
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'email_label' ) ?>
-	</td>
+	</th>
 	<td colspan="2">
 		<?php print_email_input( 'email', '' ) ?>
 	</td>
@@ -89,9 +89,9 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 		# captcha image requires GD library and related option to ON
 ?>
 <tr class="row-1">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'signup_captcha_request_label' ) ?>
-	</td>
+	</th>
 	<td>
 		<?php print_captcha_input( 'captcha', '' ) ?>
 	</td>

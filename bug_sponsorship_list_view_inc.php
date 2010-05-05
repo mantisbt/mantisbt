@@ -106,7 +106,7 @@ if ( $t_show_sponsorships ) {
 	if ( $t_can_sponsor ) {
 ?>
 	<tr class="row-1">
-		<td class="category" width="15%"><?php echo lang_get( 'sponsor_issue' ) ?></td>
+		<th class="category" width="15%"><?php echo lang_get( 'sponsor_issue' ) ?></th>
 		<td>
 			<form method="post" action="bug_set_sponsorship.php">
 				<?php echo form_security_field( 'bug_set_sponsorship' ) ?>
@@ -124,7 +124,7 @@ if ( $t_show_sponsorships ) {
 	if ( $t_total_sponsorship > 0 ) {
 ?>
 	<tr class="row-2">
-		<td class="category" width="15%"><?php echo lang_get( 'sponsors_list' ) ?></td>
+		<th class="category" width="15%"><?php echo lang_get( 'sponsors_list' ) ?></th>
 		<td>
 		<?php
 			echo sprintf( lang_get( 'total_sponsorship_amount' ),

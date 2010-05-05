@@ -102,9 +102,9 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 
 <!-- Name -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category" width="25%">
+	<th class="category" width="25%">
 		<?php echo lang_get( 'project_name' ) ?>
-	</td>
+	</th>
 	<td width="75%">
 		<input type="text" name="name" size="50" maxlength="128" value="<?php echo string_attribute( $row['name'] ) ?>" />
 	</td>
@@ -112,9 +112,9 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 
 <!-- Status -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'status' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="status">
 		<?php print_enum_string_option_list( 'project_status', $row['status'] ) ?>
@@ -124,9 +124,9 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 
 <!-- Enabled -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'enabled' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="enabled" <?php check_checked( $row['enabled'], ON ); ?> />
 	</td>
@@ -134,9 +134,9 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 
 <!-- Category Inheritance -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'inherit_global' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="inherit_global" <?php check_checked( $row['inherit_global'], ON ); ?> />
 	</td>
@@ -144,9 +144,9 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 
 <!-- View Status (public/private) -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'view_status' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="view_state">
 			<?php print_enum_string_option_list( 'view_state', $row['view_state']) ?>
@@ -157,9 +157,9 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 <!-- File upload path (if uploading is enabled) -->
 <?php if ( file_is_uploading_enabled() ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'upload_file_path' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" name="file_path" size="50" maxlength="250" value="<?php echo string_attribute( $row['file_path'] ) ?>" />
 	</td>
@@ -168,9 +168,9 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 
 <!-- Description -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'description' ) ?>
-	</td>
+	</th>
 	<td>
 		<textarea name="description" cols="60" rows="5"><?php echo string_textarea( $row['description'] ) ?></textarea>
 	</td>
@@ -706,12 +706,12 @@ if ( $t_can_manage_users ) {
 				</td>
 			</tr>
 			<tr class="row-1" valign="top">
-				<td class="category">
+				<th class="category">
 					<?php echo lang_get( 'username' ) ?>
-				</td>
-				<td class="category">
+				</th>
+				<th class="category">
 					<?php echo lang_get( 'access_level' ) ?>
-				</td>
+				</th>
 				<td class="category">&nbsp;  </td>
 			</tr>
 			<tr class="row-1" valign="top">

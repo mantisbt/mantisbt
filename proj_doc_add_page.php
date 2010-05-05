@@ -67,17 +67,17 @@ html_page_top();
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category" width="25%">
+	<th class="category" width="25%">
 		<span class="required">*</span><?php echo lang_get( 'title' ) ?>
-	</td>
+	</th>
 	<td width="75%">
 		<input type="text" name="title" size="70" maxlength="250" />
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'description' ) ?>
-	</td>
+	</th>
 	<td>
 		<textarea name="description" cols="60" rows="7"></textarea>
 	</td>

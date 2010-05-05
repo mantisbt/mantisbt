@@ -64,13 +64,13 @@ function action_add_note_print_title() {
  * A row has two columns.
  */
 function action_add_note_print_fields() {
-	echo '<tr class="row-1" valign="top"><td class="category">', lang_get( 'add_bugnote_title' ), '</td><td><textarea name="bugnote_text" cols="80" rows="10"></textarea></td></tr>';
+	echo '<tr class="row-1" valign="top"><th class="category">', lang_get( 'add_bugnote_title' ), '</th><td><textarea name="bugnote_text" cols="80" rows="10"></textarea></td></tr>';
 ?>
 	<!-- View Status -->
 	<tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'view_status' ) ?>
-	</td>
+	</th>
 	<td>
 <?php
 	$t_default_state = config_get( 'default_bugnote_view_status' );

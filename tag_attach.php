@@ -115,9 +115,9 @@ if ( count( $t_tags_failed ) > 0 ) {
 	foreach( $t_tags_failed as $t_tag_row ) {
 		echo '<tr ',helper_alternate_class(),'>';
 		if ( -1 == $t_tag_row['id'] ) {
-			echo '<td class="category">', lang_get( 'tag_create_denied' ), '</td>';
+			echo '<th class="category">', lang_get( 'tag_create_denied' ), '</th>';
 		} else if ( -2 == $t_tag_row['id'] ) {
-			echo '<td class="category">', lang_get( 'tag_invalid_name' ), '</td>';
+			echo '<th class="category">', lang_get( 'tag_invalid_name' ), '</th>';
 		}
 		echo '<td>', string_html_specialchars( $t_tag_row['name'] ), '</td></tr>';
 
@@ -129,7 +129,7 @@ if ( count( $t_tags_failed ) > 0 ) {
 ?>
 	<tr class="spacer"><td colspan="2"></td></tr>
 	<tr <?php echo helper_alternate_class() ?>>
-	<td class="category"><?php echo lang_get( 'tag_attach_long' ) ?></td>
+	<th class="category"><?php echo lang_get( 'tag_attach_long' ) ?></th>
 	<td>
 <?php
 	print_tag_attach_form( $f_bug_id, $t_tag_string );

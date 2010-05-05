@@ -100,7 +100,7 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) );
 
 <!-- Description -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category"><?php echo lang_get( 'tag_description' ) ?></td>
+	<th class="category"><?php echo lang_get( 'tag_description' ) ?></th>
 	<td colspan="4"><?php echo $t_description ?></td>
 </tr>
 
@@ -109,7 +109,7 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) );
 	$t_tags_related = tag_stats_related( $f_tag_id );
 	if ( count( $t_tags_related ) ) {
 		echo '<tr ',helper_alternate_class(),'>';
-		echo '<td class="category" rowspan="',count( $t_tags_related ),'">',lang_get( 'tag_related' ),'</td>';
+		echo '<th class="category" rowspan="',count( $t_tags_related ),'">',lang_get( 'tag_related' ),'</th>';
 
 		$i = 0;
 		foreach( $t_tags_related as $t_tag ) {

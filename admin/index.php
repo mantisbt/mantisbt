@@ -32,7 +32,7 @@ html_page_top( 'MantisBT Administration' );
 
 function print_info_row( $p_description, $p_value ) {
 	echo '<tr ' . helper_alternate_class() . '>';
-	echo '<td class="category">' . $p_description . '</td>';
+	echo '<th class="category">' . $p_description . '</th>';
 	echo '<td>' . $p_value . '</td>';
 	echo '</tr>';
 }

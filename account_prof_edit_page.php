@@ -98,33 +98,33 @@ if ( profile_is_global( $f_profile_id ) ) {
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category" width="25%">
+	<th class="category" width="25%">
 		<span class="required">*</span><?php echo lang_get( 'platform' ) ?>
-	</td>
+	</th>
 	<td width="75%">
 		<input type="text" name="platform" size="32" maxlength="32" value="<?php echo string_attribute( $v_platform ) ?>" />
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<span class="required">*</span><?php echo lang_get( 'operating_system' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" name="os" size="32" maxlength="32" value="<?php echo string_attribute( $v_os ) ?>" />
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category">
+	<th class="category">
 		<span class="required">*</span><?php echo lang_get( 'os_version' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" name="os_build" size="16" maxlength="16" value="<?php echo string_attribute( $v_os_build ) ?>" />
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'additional_description' ) ?>
-	</td>
+	</th>
 	<td>
 		<textarea name="description" cols="60" rows="8"><?php echo string_textarea( $v_description ) ?></textarea>
 	</td>

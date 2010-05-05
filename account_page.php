@@ -133,9 +133,9 @@ html_page_top( lang_get( 'account_link' ) );
 
 	<!-- Username -->
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category" width="25%">
+		<th class="category" width="25%">
 			<?php echo lang_get( 'username' ) ?>
-		</td>
+		</th>
 		<td width="75%">
 			<?php echo $u_username ?>
 		</td>
@@ -143,9 +143,9 @@ html_page_top( lang_get( 'account_link' ) );
 
 	<!-- Password -->
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'password' ) ?>
-		</td>
+		</th>
 		<td>
 			<?php echo lang_get( 'no_password_change' ) ?>
 		</td>
@@ -158,9 +158,9 @@ html_page_top( lang_get( 'account_link' ) );
 
 	<!-- Username -->
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category" width="25%">
+		<th class="category" width="25%">
 			<?php echo lang_get( 'username' ) ?>
-		</td>
+		</th>
 		<td width="75%">
 			<?php echo $u_username ?>
 		</td>
@@ -168,14 +168,14 @@ html_page_top( lang_get( 'account_link' ) );
 
 	<!-- Password -->
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php
 				echo lang_get( 'password' );
 				if ( $t_force_pw_reset ) {
 			?>
 			<span class="required">*</span>
 			<?php } ?>
-		</td>
+		</th>
 		<td>
 			<input type="password" size="32" maxlength="<?php echo PASSLEN;?>" name="password" />
 		</td>
@@ -183,14 +183,14 @@ html_page_top( lang_get( 'account_link' ) );
 
 	<!-- Password confirmation -->
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php
 				echo lang_get( 'confirm_password' );
 				if ( $t_force_pw_reset ) {
 			?>
 			<span class="required">*</span>
 			<?php } ?>
-		</td>
+		</th>
 		<td>
 			<input type="password" size="32" maxlength="<?php echo PASSLEN;?>" name="password_confirm" />
 		</td>
@@ -203,9 +203,9 @@ if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email
 
 	<!-- Email -->
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'email' ) ?>
-		</td>
+		</th>
 		<td>
 			<?php echo $u_email ?>
 		</td>
@@ -215,9 +215,9 @@ if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email
 
 	<!-- Email -->
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'email' ) ?>
-		</td>
+		</th>
 		<td>
 			<?php
 				$t_show_update_button = true;
@@ -230,9 +230,9 @@ if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email
 
 	<!-- Realname -->
 	<tr <?php echo helper_alternate_class() ?> valign="top">
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'realname' ) ?>
-		</td>
+		</th>
 		<td>
 <?php
 if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
@@ -247,9 +247,9 @@ if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 
 	<!-- Access level -->
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'access_level' ) ?>
-		</td>
+		</th>
 		<td>
 			<?php echo get_enum_element( 'access_levels', $u_access_level ) ?>
 		</td>
@@ -257,9 +257,9 @@ if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 
 	<!-- Project access level -->
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'access_level_project' ) ?>
-		</td>
+		</th>
 		<td>
 			<?php echo get_enum_element( 'access_levels', current_user_get_access_level() ) ?>
 		</td>
@@ -267,9 +267,9 @@ if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 
 	<!-- Assigned project list -->
 	<tr <?php echo helper_alternate_class() ?> valign="top">
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'assigned_projects' ) ?>
-		</td>
+		</th>
 		<td>
 			<?php print_project_user_list( auth_get_current_user_id(), false ) ?>
 		</td>

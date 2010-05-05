@@ -100,9 +100,9 @@ print_manage_menu();
 
 <!-- Username -->
 <tr <?php echo helper_alternate_class( 1 ) ?>>
-	<td class="category" width="30%">
+	<th class="category" width="30%">
 		<?php echo lang_get( 'username_label' ) ?>
-	</td>
+	</th>
 	<td width="70%">
 		<input type="text" size="16" maxlength="<?php echo USERLEN;?>" name="username" value="<?php echo $t_user['username'] ?>" />
 	</td>
@@ -110,9 +110,9 @@ print_manage_menu();
 
 <!-- Realname -->
 <tr <?php echo helper_alternate_class( 1 ) ?>>
-	<td class="category" width="30%">
+	<th class="category" width="30%">
 		<?php echo lang_get( 'realname_label' ) ?>
-	</td>
+	</th>
 	<td width="70%">
 		<?php
 			if ( !$t_ldap || config_get( 'use_ldap_realname' ) == OFF ) {
@@ -128,9 +128,9 @@ print_manage_menu();
 
 <!-- Email -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'email_label' ) ?>
-	</td>
+	</th>
 	<td>
 		<?php
 			if ( !$t_ldap || config_get( 'use_ldap_email' ) == OFF ) {
@@ -144,9 +144,9 @@ print_manage_menu();
 
 <!-- Access Level -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'access_level_label' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="access_level">
 			<?php
@@ -162,9 +162,9 @@ print_manage_menu();
 
 <!-- Enabled Checkbox -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'enabled_label' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="enabled" <?php check_checked( $t_user['enabled'], ON ); ?> />
 	</td>
@@ -172,9 +172,9 @@ print_manage_menu();
 
 <!-- Protected Checkbox -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'protected_label' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="protected" <?php check_checked( $t_user['protected'], ON ); ?> />
 	</td>
@@ -243,9 +243,9 @@ print_manage_menu();
 
 <!-- Assigned Projects -->
 <tr <?php echo helper_alternate_class( 1 ) ?> valign="top">
-	<td class="category" width="30%">
+	<th class="category" width="30%">
 		<?php echo lang_get( 'assigned_projects_label' ) ?>
-	</td>
+	</th>
 	<td width="70%">
 		<?php print_project_user_list( $t_user['id'] ) ?>
 	</td>
@@ -256,9 +256,9 @@ print_manage_menu();
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 <!-- Unassigend Project Selection -->
 <tr <?php echo helper_alternate_class() ?> valign="top">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'unassigned_projects_label' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="project_id[]" multiple="multiple" size="5">
 			<?php print_project_user_list_option_list2( $t_user['id'] ) ?>
@@ -268,9 +268,9 @@ print_manage_menu();
 
 <!-- New Access Level -->
 <tr <?php echo helper_alternate_class() ?> valign="top">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'access_level_label' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="access_level">
 			<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>

@@ -246,9 +246,9 @@ if ( $t_multiple_projects ) {
 if ( !$t_finished ) {
 ?>
 <tr class="row-1">
-	<td class="category">
+	<th class="category">
 		<?php echo $t_question_title ?>
-	</td>
+	</th>
 	<td>
 	<?php
 		if ( $f_action === 'CUSTOM' ) {
@@ -310,9 +310,9 @@ if ( !$t_finished ) {
 				if ( $t_show_product_version ) {
 	?>
 		<tr class="row-2">
-			<td class="category">
+			<th class="category">
 				<?php echo $t_question_title2 ?>
-			</td>
+			</th>
 			<td>
 				<select name="<?php echo $t_form2 ?>">
 					<?php print_version_option_list( '', null, VERSION_ALL );?>
@@ -330,9 +330,9 @@ if ( !$t_finished ) {
 ?>
 
 <tr class="row-1">
-	<td class="category" colspan="2">
+	<th class="category" colspan="2">
 		<?php echo $t_question_title; ?>
-	</td>
+	</th>
 </tr>
 <?php
 }
@@ -342,18 +342,18 @@ if ( !$t_finished ) {
 if( $t_bugnote ) {
 ?>
 <tr class="row-1">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'add_bugnote_title' ); ?>
-	</td>
+	</th>
 	<td>
 		<textarea name="bugnote_text" cols="80" rows="10"></textarea>
 	</td>
 </tr>
 <?php if ( access_has_project_level( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'view_status' ) ?>
-	</td>
+	</th>
 	<td>
 <?php
 		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );

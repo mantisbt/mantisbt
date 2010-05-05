@@ -223,7 +223,7 @@ if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_s
 
 if ( $tpl_show_reporter ) {
 	echo '<tr class="print">';
-	echo '<td class="print-category">', lang_get( 'reporter' ), '</td>';
+	echo '<th class="print-category">', lang_get( 'reporter' ), '</th>';
 	echo '<td class="print">';
 	print_user_with_subject( $tpl_bug->reporter_id, $f_bug_id );
 	echo '</td>';
@@ -241,7 +241,7 @@ if ( $tpl_show_handler || $tpl_show_due_date ) {
 	echo '<tr class="print">';
 
 	if ( $tpl_show_handler ) {
-		echo '<td class="print-category">', lang_get( 'assigned_to' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'assigned_to' ), '</th>';
 		echo '<td class="print">';
 		print_user_with_subject( $tpl_bug->handler_id, $f_bug_id );
 		echo '</td>';
@@ -250,7 +250,7 @@ if ( $tpl_show_handler || $tpl_show_due_date ) {
 	}
 
 	if ( $tpl_show_due_date ) {
-		echo '<td class="print-category">', lang_get( 'due_date' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'due_date' ), '</th>';
 		echo '<td class="print">', $tpl_due_date, '</td>';
 	} else {
 		$t_spacer += 2;
@@ -270,21 +270,21 @@ if ( $tpl_show_priority || $tpl_show_severity || $tpl_show_reproducibility ) {
 	$t_spacer = 0;
 
 	if ( $tpl_show_priority ) {
-		echo '<td class="print-category">', lang_get( 'priority' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'priority' ), '</th>';
 		echo '<td class="print">', $tpl_priority, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
 	if ( $tpl_show_severity ) {
-		echo '<td class="print-category">', lang_get( 'severity' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'severity' ), '</th>';
 		echo '<td class="print">', $tpl_severity, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
 	if ( $tpl_show_reproducibility ) {
-		echo '<td class="print-category">', lang_get( 'reproducibility' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'reproducibility' ), '</th>';
 		echo '<td class="print">', $tpl_reproducibility, '</td>';
 	} else {
 		$t_spacer += 2;
@@ -307,14 +307,14 @@ if ( $tpl_show_status || $tpl_show_resolution ) {
 	$t_spacer = 2;
 
 	if ( $tpl_show_status ) {
-		echo '<td class="print-category">', lang_get( 'status' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'status' ), '</th>';
 		echo '<td class="print">', $tpl_status, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
 	if ( $tpl_show_resolution ) {
-		echo '<td class="print-category">', lang_get( 'resolution' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'resolution' ), '</th>';
 		echo '<td class="print">', $tpl_resolution, '</td>';
 	} else {
 		$t_spacer += 2;
@@ -334,14 +334,14 @@ if ( $tpl_show_projection || $tpl_show_eta ) {
 	echo '<tr class="print">';
 
 	if ( $tpl_show_projection ) {
-		echo '<td class="print-category">', lang_get( 'projection' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'projection' ), '</th>';
 		echo '<td class="print">', $tpl_projection, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
 	if ( $tpl_show_eta ) {
-		echo '<td class="print-category">', lang_get( 'eta' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'eta' ), '</th>';
 		echo '<td class="print">', $tpl_eta, '</td>';
 	} else {
 		$t_spacer += 2;
@@ -361,21 +361,21 @@ if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) {
 	$t_spacer = 0;
 
 	if ( $tpl_show_platform ) {
-		echo '<td class="print-category">', lang_get( 'platform' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'platform' ), '</th>';
 		echo '<td class="print">', $tpl_platform, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
 	if ( $tpl_show_os ) {
-		echo '<td class="print-category">', lang_get( 'os' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'os' ), '</th>';
 		echo '<td class="print">', $tpl_os, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
 	if ( $tpl_show_os_version ) {
-		echo '<td class="print-category">', lang_get( 'os_version' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'os_version' ), '</th>';
 		echo '<td class="print">', $tpl_os_version, '</td>';
 	} else {
 		$t_spacer += 2;
@@ -398,14 +398,14 @@ if ( $tpl_show_product_version || $tpl_show_product_build ) {
 	$t_spacer = 2;
 
 	if ( $tpl_show_product_version ) {
-		echo '<td class="print-category">', lang_get( 'product_version' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'product_version' ), '</th>';
 		echo '<td class="print">', $tpl_product_version, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
 	if ( $tpl_show_product_build ) {
-		echo '<td class="print-category">', lang_get( 'product_build' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'product_build' ), '</th>';
 		echo '<td class="print">', $tpl_product_build, '</td>';
 	} else {
 		$t_spacer += 2;
@@ -425,14 +425,14 @@ if ( $tpl_show_target_version || $tpl_show_fixed_in_version ) {
 	$t_spacer = 2;
 
 	if ( $tpl_show_target_version ) {
-		echo '<td class="print-category">', lang_get( 'target_version' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'target_version' ), '</th>';
 		echo '<td class="print">', $tpl_target_version, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
 	if ( $tpl_show_fixed_in_version ) {
-		echo '<td class="print-category">', lang_get( 'fixed_in_version' ), '</td>';
+		echo '<th class="print-category">', lang_get( 'fixed_in_version' ), '</th>';
 		echo '<td class="print">', $tpl_fixed_in_version, '</td>';
 	} else {
 		$t_spacer += 2;
@@ -451,7 +451,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
 
 	echo '<tr class="print">';
-	echo '<td class="print-category">', string_display_line( lang_get_defaulted( $t_def['name'] ) ), '</td>';
+	echo '<th class="print-category">', string_display_line( lang_get_defaulted( $t_def['name'] ) ), '</th>';
 	echo '<td class="print" colspan="4">';
 	print_custom_field_value( $t_def, $t_id, $f_bug_id );
 	echo '</td>';
@@ -462,28 +462,28 @@ echo '<tr><td class="print-spacer" colspan="6"><hr size="1" /></td></tr>';
 
 if ( $tpl_show_summary ) {
 	echo '<tr class="print">';
-	echo '<td class="print-category">', lang_get( 'summary' ), '</td>';
+	echo '<th class="print-category">', lang_get( 'summary' ), '</th>';
 	echo '<td class="print" colspan="5">', $tpl_summary, '</td>';
 	echo '</tr>';
 }
 
 if ( $tpl_show_description ) {
 	echo '<tr class="print">';
-	echo '<td class="print-category">', lang_get( 'description' ), '</td>';
+	echo '<th class="print-category">', lang_get( 'description' ), '</th>';
 	echo '<td class="print" colspan="5">', $tpl_description, '</td>';
 	echo '</tr>';
 }
 
 if ( $tpl_show_steps_to_reproduce ) {
 	echo '<tr class="print">';
-	echo '<td class="print-category">', lang_get( 'steps_to_reproduce' ), '</td>';
+	echo '<th class="print-category">', lang_get( 'steps_to_reproduce' ), '</th>';
 	echo '<td class="print" colspan="5">', $tpl_steps_to_reproduce, '</td>';
 	echo '</tr>';
 }
 
 if ( $tpl_show_additional_information ) {
 	echo '<tr class="print">';
-	echo '<td class="print-category">', lang_get( 'additional_information' ), '</td>';
+	echo '<th class="print-category">', lang_get( 'additional_information' ), '</th>';
 	echo '<td class="print" colspan="5">', $tpl_additional_information, '</td>';
 	echo '</tr>';
 }
@@ -491,7 +491,7 @@ if ( $tpl_show_additional_information ) {
 # Tagging
 if ( $tpl_show_tags ) {
 	echo "<tr class=\"print\">";
-	echo '<td class="print-category">', lang_get( 'tags' ), '</td>';
+	echo '<th class="print-category">', lang_get( 'tags' ), '</th>';
 	echo '<td class="print" colspan="5">';
 	tag_display_attached( $f_bug_id );
 	echo '</td></tr>';
@@ -503,7 +503,7 @@ echo "<td class=\"print\" colspan=\"5\">" . relationship_get_summary_html_previe
 
 if ( $tpl_show_attachments ) {
 	echo '<tr class="print">';
-	echo '<td class="print-category">', lang_get( 'attached_files' ), '</td>';
+	echo '<th class="print-category">', lang_get( 'attached_files' ), '</th>';
 	echo '<td class="print" colspan="5">';
 
 	$t_attachments = file_get_visible_attachments( $f_bug_id );
@@ -538,13 +538,13 @@ if ( $tpl_show_attachments ) {
 echo '<tr><td class="print-spacer" colspan="6"><hr size="1" /></td></tr>';
 
 # ISSUE HISTORY
-echo '<tr><td class="form-title">', lang_get( 'bug_history' ), '</td></tr>';
+echo '<tr><th class="form-title">', lang_get( 'bug_history' ), '</th></tr>';
 
 echo '<tr class="print-category">';
-echo '<td class="row-category-history">', lang_get( 'date_modified' ), '</td>';
-echo '<td class="row-category-history">', lang_get( 'username' ), '</td>';
-echo '<td class="row-category-history">', lang_get( 'field' ), '</td>';
-echo '<td class="row-category-history">', lang_get( 'change' ), '</td>';
+echo '<th class="row-category-history">', lang_get( 'date_modified' ), '</th>';
+echo '<th class="row-category-history">', lang_get( 'username' ), '</th>';
+echo '<th class="row-category-history">', lang_get( 'field' ), '</th>';
+echo '<th class="row-category-history">', lang_get( 'change' ), '</th>';
 echo '</tr>';
 
 foreach ( $t_history as $t_item ) {

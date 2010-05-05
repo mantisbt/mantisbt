@@ -127,7 +127,7 @@ html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
 
 <!-- Description -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category"><?php echo lang_get( 'tag_description' ) ?></td>
+	<th class="category"><?php echo lang_get( 'tag_description' ) ?></th>
 	<td colspan="4">
 		<textarea name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo string_textarea( $t_description ) ?></textarea>
 	</td>

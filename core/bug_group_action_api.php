@@ -70,9 +70,9 @@ function bug_group_action_print_bug_list( $p_bug_ids_array ) {
 	echo '<div align="center">';
 	echo '<table class="width75" cellspacing="1">';
 	echo '<tr class="row-1">';
-	echo '<td class="category" colspan="2">';
+	echo '<th class="category" colspan="2">';
 	echo lang_get( 'actiongroup_bugs' );
-	echo '</td>';
+	echo '</th>';
 	echo '</tr>';
 
 	$t_i = 1;

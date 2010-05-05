@@ -102,9 +102,9 @@ echo '<br />';
 
 <!-- view issues columns -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'all_columns_title' )?>
-	</td>
+	</th>
 	<td>
 		<textarea <?php echo helper_get_tab_index() ?> name="all_columns" readonly="readonly" cols="80" rows="5"><?php echo $t_all ?></textarea>
 	</td>
@@ -112,9 +112,9 @@ echo '<br />';
 
 <!-- view issues columns -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'view_issues_columns_title' ), '<span class="required">*</span>' ?>
-	</td>
+	</th>
 	<td>
 		<textarea <?php echo helper_get_tab_index() ?> name="view_issues_columns" cols="80" rows="5"><?php echo $t_view_issues ?></textarea>
 	</td>
@@ -122,9 +122,9 @@ echo '<br />';
 
 <!-- print issues columns -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'print_issues_columns_title' ), '<span class="required">*</span>' ?>
-	</td>
+	</th>
 	<td>
 		<textarea <?php echo helper_get_tab_index() ?> name="print_issues_columns" cols="80" rows="5"><?php echo $t_print_issues ?></textarea>
 	</td>
@@ -132,9 +132,9 @@ echo '<br />';
 
 <!-- csv columns -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'csv_columns_title' ), '<span class="required">*</span>' ?>
-	</td>
+	</th>
 	<td>
 		<textarea <?php echo helper_get_tab_index() ?> name="csv_columns" cols="80" rows="5"><?php echo $t_csv ?></textarea>
 	</td>
@@ -142,9 +142,9 @@ echo '<br />';
 
 <!-- csv columns -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'excel_columns_title' ), '<span class="required">*</span>' ?>
-	</td>
+	</th>
 	<td>
 		<textarea <?php echo helper_get_tab_index() ?> name="excel_columns" cols="80" rows="5"><?php echo $t_excel ?></textarea>
 	</td>

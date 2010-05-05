@@ -162,9 +162,9 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 	printf ( '<tr %s>', helper_alternate_class( $i ) );
 ?>
 
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( $t_field_name_arr[$i] ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="<?php echo 'print_' . $t_field_name_arr[$i]; ?>"
 		<?php if ( isset( $t_prefs[$i] ) && ( $t_prefs[$i]==1 ) ) echo 'checked="checked"' ?> />

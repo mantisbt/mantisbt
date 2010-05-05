@@ -61,21 +61,21 @@ print_manage_menu( 'manage_custom_field_page.php' );
 		</td>
 	</tr>
 	<tr>
-		<td class="category" width="12%">
+		<th class="category" width="12%">
 			<?php echo lang_get( 'custom_field_name' ) ?>
-		</td>
-		<td class="category" width="12%">
+		</th>
+		<th class="category" width="12%">
 			<?php echo lang_get( 'custom_field_project_count' ) ?>
-		</td>
-		<td class="category" width="12%">
+		</th>
+		<th class="category" width="12%">
 			<?php echo lang_get( 'custom_field_type' ) ?>
-		</td>
-		<td class="category" width="40%">
+		</th>
+		<th class="category" width="40%">
 			<?php echo lang_get( 'custom_field_possible_values' ) ?>
-		</td>
-		<td class="category" width="12%">
+		</th>
+		<th class="category" width="12%">
 			<?php echo lang_get( 'custom_field_default_value' ) ?>
-		</td>
+		</th>
 	</tr>
 	<?php
 		$t_custom_fields = custom_field_get_ids();

@@ -68,18 +68,18 @@ require_api( 'lang_api.php' );
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category" width="25%">
+	<th class="category" width="25%">
 		<?php echo lang_get( 'bugnote' ) ?>
-	</td>
+	</th>
 	<td width="75%">
 		<textarea name="bugnote_text" cols="80" rows="10"></textarea>
 	</td>
 </tr>
 <?php if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) { ?>
 <tr class="row-1">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'view_status' ) ?>
-	</td>
+	</th>
 	<td>
 <?php
 		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
@@ -99,9 +99,9 @@ require_api( 'lang_api.php' );
 <?php if ( config_get('time_tracking_enabled') ) { ?>
 <?php if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'time_tracking' ) ?> (HH:MM)
-	</td>
+	</th>
 	<td>
 		<?php if ( config_get( 'time_tracking_stopwatch' ) && config_get( 'use_javascript' ) ) { ?>
 		<script type="text/javascript">

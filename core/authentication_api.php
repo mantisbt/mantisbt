@@ -712,12 +712,12 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 </tr>
 
 <tr class="row-1">
-	<td class="category"><?php echo lang_get( 'username' );?></td>
+	<th class="category"><?php echo lang_get( 'username' );?></th>
 	<td><input type="text" disabled="disabled" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo $p_username;?>" /></td>
 </tr>
 
 <tr class="row-2">
-	<td class="category"><?php echo lang_get( 'password' );?></td>
+	<th class="category"><?php echo lang_get( 'password' );?></th>
 	<td><input type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" /></td>
 </tr>
 

@@ -72,9 +72,9 @@ function print_font_checked( $p_font_name ) {
 </tr>
 
 <tr <?php echo helper_alternate_class( )?>>
-	<td class="category">
+	<th class="category">
 		<?php echo plugin_lang_get( 'library' )?>
-	</td>
+	</th>
 	<td class="center">
 		<label><input type="radio" name="eczlibrary" value="1" <?php echo( ON == plugin_config_get( 'eczlibrary' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get('bundled')?></label>
 	</td>
@@ -86,36 +86,36 @@ function print_font_checked( $p_font_name ) {
 <tr class="spacer"><td></td></tr>
 
 <tr <?php echo helper_alternate_class( )?>>
-	<td class="category">
+	<th class="category">
 		<?php echo plugin_lang_get( 'window_width' )?>
-	</td>
+	</th>
 	<td class="center" colspan="2">
 		<input type="text" name="window_width" value="<?php echo plugin_config_get( 'window_width' )?>" />
 	</td>
 </tr>
 
 <tr <?php echo helper_alternate_class( )?>>
-	<td class="category">
+	<th class="category">
 		<?php echo plugin_lang_get( 'bar_aspect' )?>
-	</td>
+	</th>
 	<td class="center" colspan="2">
 		<input type="text" name="bar_aspect" value="<?php echo plugin_config_get( 'bar_aspect' )?>" />
 	</td>
 </tr>
 
 <tr <?php echo helper_alternate_class( )?>>
-	<td class="category">
+	<th class="category">
 		<?php echo plugin_lang_get( 'summary_graphs_per_row' )?>
-	</td>
+	</th>
 	<td class="center" colspan="2">
 		<input type="text" name="summary_graphs_per_row" value="<?php echo plugin_config_get( 'summary_graphs_per_row' )?>" />
 	</td>
 </tr>
 
 <tr <?php echo helper_alternate_class( )?>>
-	<td class="category">
+	<th class="category">
 		<?php echo plugin_lang_get( 'font' )?>
-	</td>
+	</th>
 	<td style="vertical-align: top">
 		Sans-serif:<br />
 		<label><input type="radio" name="font" value="arial"<?php echo print_font_checked( 'arial' )?>/>Arial</label><br />

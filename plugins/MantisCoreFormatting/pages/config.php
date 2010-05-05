@@ -50,9 +50,9 @@ print_manage_menu( );
 </tr>
 
 <tr <?php echo helper_alternate_class( )?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'plugin_format_process_urls' )?>
-	</td>
+	</th>
 	<td class="center">
 		<label><input type="radio" name="process_urls" value="1" <?php echo( ON == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
 			<?php echo lang_get( 'plugin_format_enabled' )?></label>
@@ -64,9 +64,9 @@ print_manage_menu( );
 </tr>
 
 <tr <?php echo helper_alternate_class( )?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'plugin_format_process_buglinks' )?>
-	</td>
+	</th>
 	<td class="center">
 		<label><input type="radio" name="process_buglinks" value="1" <?php echo( ON == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
 			<?php echo lang_get( 'plugin_format_enabled' )?></label>

@@ -217,9 +217,9 @@ foreach ( $t_result as $t_tag_row ) {
 		</td>
 	</tr>
 	<tr class="row-2">
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'tag_description' ) ?>
-		</td>
+		</th>
 		<td><textarea name="description" cols="80" rows="6"></textarea>
 		</td>
 	</tr>

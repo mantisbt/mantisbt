@@ -95,9 +95,9 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category" width="50%">
+	<th class="category" width="50%">
 		<?php echo lang_get( 'default_project' ) ?>
-	</td>
+	</th>
 	<td width="50%">
 		<select name="default_project">
 			<?php print_project_option_list( $t_pref->default_project ) ?>
@@ -105,25 +105,25 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'refresh_delay' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" name="refresh_delay" size="4" maxlength="4" value="<?php echo $t_pref->refresh_delay ?>" /> <?php echo lang_get( 'minutes' ) ?>
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'redirect_delay' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" name="redirect_delay" size="4" maxlength="3" value="<?php echo $t_pref->redirect_delay ?>" /> <?php echo lang_get( 'seconds' ) ?>
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'bugnote_order' ) ?>
-	</td>
+	</th>
 	<td>
 		<label><input type="radio" name="bugnote_order" value="ASC" <?php check_checked( $t_pref->bugnote_order, 'ASC' ); ?> /><?php echo lang_get( 'bugnote_order_asc' ) ?></label>
 		<label><input type="radio" name="bugnote_order" value="DESC" <?php check_checked( $t_pref->bugnote_order, 'DESC' ); ?> /><?php echo lang_get( 'bugnote_order_desc' ) ?></label>
@@ -133,9 +133,9 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	if ( ON == config_get( 'enable_email_notification' ) ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'email_on_new' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="email_on_new" <?php check_checked( $t_pref->email_on_new, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
@@ -147,9 +147,9 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'email_on_assigned' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="email_on_assigned" <?php check_checked( $t_pref->email_on_assigned, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
@@ -161,9 +161,9 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'email_on_feedback' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="email_on_feedback" <?php check_checked( $t_pref->email_on_feedback, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
@@ -175,9 +175,9 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'email_on_resolved' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="email_on_resolved" <?php check_checked( $t_pref->email_on_resolved, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
@@ -189,9 +189,9 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'email_on_closed' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="email_on_closed" <?php check_checked( $t_pref->email_on_closed, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
@@ -203,9 +203,9 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'email_on_reopened' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="email_on_reopened" <?php check_checked( $t_pref->email_on_reopened, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
@@ -217,9 +217,9 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'email_on_bugnote_added' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="email_on_bugnote" <?php check_checked( $t_pref->email_on_bugnote, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
@@ -231,9 +231,9 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'email_on_status_change' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="email_on_status" <?php check_checked( $t_pref->email_on_status, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
@@ -245,9 +245,9 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'email_on_priority_change' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="email_on_priority" <?php check_checked( $t_pref->email_on_priority , ON); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
@@ -259,9 +259,9 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'email_bugnote_limit' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" name="email_bugnote_limit" maxlength="2" size="2" value="<?php echo $t_pref->email_bugnote_limit ?>" />
 	</td>
@@ -288,9 +288,9 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 		<input type="hidden" name="email_bugnote_limit" value="<?php echo $t_pref->email_bugnote_limit ?>" />
 <?php } ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'timezone' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="timezone">
 			<?php print_timezone_option_list( $t_pref->timezone ?  $t_pref->timezone  : config_get_global( 'default_timezone' ) ) ?>
@@ -298,9 +298,9 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'language' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="language">
 			<?php print_language_option_list( $t_pref->language ) ?>

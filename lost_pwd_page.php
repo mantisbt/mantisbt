@@ -71,17 +71,17 @@ $t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array
 if ( $t_allow_passwd ) {
 ?>
 <tr class="row-1">
-	<td class="category" width="25%">
+	<th class="category" width="25%">
 		<?php echo lang_get( 'username' ) ?>
-	</td>
+	</th>
 	<td width="75%">
 		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" />
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category" width="25%">
+	<th class="category" width="25%">
 		<?php echo lang_get( 'email' ) ?>
-	</td>
+	</th>
 	<td width="75%">
 		<?php print_email_input( 'email', '' ) ?>
 	</td>

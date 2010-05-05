@@ -79,12 +79,12 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	</td>
 </tr>
 <tr>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'to' ) ?>
-	</td>
-	<td class="category">
+	</th>
+	<th class="category">
 		<?php echo lang_get( 'reminder' ) ?>
-	</td>
+	</th>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
 	<td>

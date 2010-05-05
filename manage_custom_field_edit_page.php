@@ -76,17 +76,17 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_name' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="text" name="name" size="32" maxlength="64" value="<?php echo string_attribute( $t_definition['name'] ) ?>" />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_type' ) ?>
-			</td>
+			</th>
 			<td>
 				<select name="type">
 					<?php print_enum_string_option_list( 'custom_field_type', $t_definition['type'] ) ?>
@@ -94,33 +94,33 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_possible_values' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="text" name="possible_values" size="32" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_default_value' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="text" name="default_value" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['default_value'] ) ?>" />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_valid_regexp' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="text" name="valid_regexp" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['valid_regexp'] ) ?>" />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_access_level_r' ) ?>
-			</td>
+			</th>
 			<td>
 				<select name="access_level_r">
 					<?php print_enum_string_option_list( 'access_levels', $t_definition['access_level_r'] ) ?>
@@ -128,9 +128,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_access_level_rw' ) ?>
-			</td>
+			</th>
 			<td>
 				<select name="access_level_rw">
 					<?php print_enum_string_option_list( 'access_levels', $t_definition['access_level_rw'] ) ?>
@@ -138,89 +138,89 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_length_min' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="text" name="length_min" size="32" maxlength="64" value="<?php echo $t_definition['length_min'] ?>" />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_length_max' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="text" name="length_max" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" />
 			</td>
 		</tr>
         <tr <?php echo helper_alternate_class() ?>>
-            <td class="category">
+            <th class="category">
                 <?php echo lang_get( 'custom_field_filter_by' ) ?>
-            </td>
+            </th>
             <td>
                 <input type="checkbox" name="filter_by" <?php if ( $t_definition['filter_by'] ) { ?>checked="checked"<?php } ?>  />
             </td>
         </tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_display_report' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="checkbox" name="display_report" value="1" <?php check_checked( $t_definition['display_report'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_display_update' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="checkbox" name="display_update" value="1" <?php check_checked( $t_definition['display_update'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_display_resolved' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="checkbox" name="display_resolved" value="1" <?php check_checked( $t_definition['display_resolved'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_display_closed' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="checkbox" name="display_closed" value="1" <?php check_checked( $t_definition['display_closed'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_require_report' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="checkbox" name="require_report" value="1" <?php check_checked( $t_definition['require_report'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_require_update' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="checkbox" name="require_update" value="1" <?php check_checked( $t_definition['require_update'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_require_resolved' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="checkbox" name="require_resolved" value="1" <?php check_checked( $t_definition['require_resolved'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'custom_field_require_closed' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="checkbox" name="require_closed" value="1" <?php check_checked( $t_definition['require_closed'] ) ?> />
 			</td>
@@ -265,9 +265,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 
 <!-- Assigned Projects -->
 <tr <?php echo helper_alternate_class( 1 ) ?> valign="top">
-	<td class="category" width="30%">
+	<th class="category" width="30%">
 		<?php echo lang_get( 'linked_projects_label' ) ?>
-	</td>
+	</th>
 	<td width="70%">
 		<?php print_custom_field_projects_list( $f_field_id ) ?>
 	</td>
@@ -275,9 +275,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 
 <!-- Unassigend Project Selection -->
 <tr <?php echo helper_alternate_class() ?> valign="top">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'projects_title_label' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="project_id[]" multiple="multiple" size="5">
 			<?php print_project_option_list( null, false ); ?>
@@ -287,9 +287,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 
 <!-- Sequence Number -->
 <tr <?php echo helper_alternate_class() ?> valign="top">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'custom_field_sequence_label' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" name="sequence" value="0" />
 	</td>

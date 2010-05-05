@@ -154,9 +154,9 @@ $t_bug_is_open = $t_current_resolution < $t_resolved;
 if ( ( $f_new_status >= $t_resolved ) && ( ( $f_new_status < $t_closed ) || ( $t_bug_is_open ) ) ) { ?>
 <!-- Resolution -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'resolution' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="resolution">
 			<?php
@@ -183,9 +183,9 @@ if ( $f_new_status >= $t_resolved
 	&& $t_resolution != config_get( 'bug_duplicate_resolution' ) ) { ?>
 <!-- Duplicate ID -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'duplicate_id' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" name="duplicate_id" maxlength="10" />
 	</td>
@@ -202,9 +202,9 @@ if ( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get
 ?>
 <!-- Assigned To -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'assigned_to' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="handler_id">
 			<option value="0"></option>
@@ -222,9 +222,9 @@ if ( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get
 	}
 ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php print_documentation_link( 'due_date' ) ?>
-	</td>
+	</th>
 	<td>
 	<?php
 	    print "<input ".helper_get_tab_index()." type=\"text\" id=\"due_date\" name=\"due_date\" size=\"20\" maxlength=\"10\" value=\"".$t_date_to_display."\" />";
@@ -266,9 +266,9 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	if ( custom_field_has_write_access( $t_id, $f_bug_id ) ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php if ( $t_require ) {?><span class="required">*</span><?php } echo lang_get_defaulted( $t_def['name'] ) ?>
-	</td>
+	</th>
 	<td>
 		<?php
 			print_custom_field_input( $t_def, $f_bug_id );
@@ -280,9 +280,9 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	else if ( custom_field_has_read_access( $t_id, $f_bug_id ) ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get_defaulted( $t_def['name'] ) ?>
-		</td>
+		</th>
 		<td>
 			<?php print_custom_field_value( $t_def, $t_id, $f_bug_id );			?>
 		</td>
@@ -301,9 +301,9 @@ if ( ( $t_resolved <= $f_new_status ) ) {
 ?>
 <!-- Fixed in Version -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'fixed_in_version' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="fixed_in_version">
 			<?php print_version_option_list( bug_get_field( $f_bug_id, 'fixed_in_version' ),
@@ -320,9 +320,9 @@ if ( ( $t_resolved <= $f_new_status ) && ( $f_new_status < $t_closed ) ) { ?>
 <?php if ( ( ON == config_get( 'allow_close_immediately' ) )
 				&& ( access_has_bug_level( access_get_status_threshold( $t_closed, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'close_immediately' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="close_now" />
 	</td>
@@ -339,18 +339,18 @@ if ( ( $t_resolved <= $f_new_status ) && ( $f_new_status < $t_closed ) ) { ?>
 
 <!-- Bugnote -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
-	</td>
+	</th>
 	<td class="center">
 		<textarea name="bugnote_text" cols="80" rows="10"></textarea>
 	</td>
 </tr>
 <?php if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'view_status' ) ?>
-	</td>
+	</th>
 	<td>
 <?php
 		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
@@ -371,9 +371,9 @@ if ( ( $t_resolved <= $f_new_status ) && ( $f_new_status < $t_closed ) ) { ?>
 <?php if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
 <?php if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'time_tracking' ) ?> (HH:MM)
-	</td>
+	</th>
 	<td>
 		<input type="text" name="time_tracking" size="5" value="0:00" />
 	</td>

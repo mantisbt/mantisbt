@@ -61,17 +61,17 @@ html_page_top( lang_get( 'edit_news_link' ) );
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category" width="25%">
+	<th class="category" width="25%">
 		<span class="required">*</span><?php echo lang_get( 'headline' ) ?>
-	</td>
+	</th>
 	<td width="75%">
 		<input type="text" name="headline" size="64" maxlength="64" />
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<span class="required">*</span><?php echo lang_get( 'body' ) ?>
-	</td>
+	</th>
 	<td>
 		<textarea name="body" cols="60" rows="8"></textarea>
 	</td>
@@ -86,9 +86,9 @@ html_page_top( lang_get( 'edit_news_link' ) );
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category" width="25%">
+	<th class="category" width="25%">
 		<?php echo lang_get( 'view_status' ) ?>
-	</td>
+	</th>
 	<td width="75%">
 		<select name="view_state">
 			<?php print_enum_string_option_list( 'view_state' ) ?>
@@ -128,9 +128,9 @@ if ( news_get_count( helper_get_current_project(), current_user_is_administrator
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category" width="25%">
+	<th class="category" width="25%">
 		<?php echo lang_get( 'select_post' ) ?>
-	</td>
+	</th>
 	<td width="75%">
 		<select name="news_id">
 			<?php print_news_item_option_list() ?>

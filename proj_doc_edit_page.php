@@ -92,25 +92,25 @@ html_page_top();
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category" width="20%">
+	<th class="category" width="20%">
 		<span class="required">*</span><?php echo lang_get( 'title' ) ?>
-	</td>
+	</th>
 	<td width="80%">
 		<input type="text" name="title" size="70" maxlength="250" value="<?php echo $v_title ?>" />
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'description' ) ?>
-	</td>
+	</th>
 	<td>
 		<textarea name="description" cols="60" rows="7"><?php echo $v_description ?></textarea>
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'filename' ) ?>
-	</td>
+	</th>
 	<td>
 		<?php
 			$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';

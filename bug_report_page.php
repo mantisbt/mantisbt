@@ -217,9 +217,9 @@ print_recently_visited();
 	if ( $tpl_show_category ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category" width="30%">
+		<th class="category" width="30%">
 			<?php echo config_get( 'allow_no_category' ) ? '' : '<span class="required">*</span>'; print_documentation_link( 'category' ) ?>
-		</td>
+		</th>
 		<td width="70%">
 			<?php if ( $t_changed_project ) {
 				echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
@@ -237,9 +237,9 @@ print_recently_visited();
 ?>
 
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php print_documentation_link( 'reproducibility' ) ?>
-		</td>
+		</th>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="reproducibility">
 				<?php print_enum_string_option_list( 'reproducibility', $f_reproducibility ) ?>
@@ -252,9 +252,9 @@ print_recently_visited();
 	if ( $tpl_show_severity ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php print_documentation_link( 'severity' ) ?>
-		</td>
+		</th>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="severity">
 				<?php print_enum_string_option_list( 'severity', $f_severity ) ?>
@@ -267,9 +267,9 @@ print_recently_visited();
 	if ( $tpl_show_priority ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php print_documentation_link( 'priority' ) ?>
-		</td>
+		</th>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="priority">
 				<?php print_enum_string_option_list( 'priority', $f_priority ) ?>
@@ -287,9 +287,9 @@ print_recently_visited();
 		}
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php print_documentation_link( 'due_date' ) ?>
-		</td>
+		</th>
 		<td>
 		<?php
 		    print "<input ".helper_get_tab_index()." type=\"text\" id=\"due_date\" name=\"due_date\" size=\"20\" maxlength=\"10\" value=\"".$t_date_to_display."\" />";
@@ -300,9 +300,9 @@ print_recently_visited();
 <?php } ?>
 <?php if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) { ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'select_profile' ) ?>
-		</td>
+		</th>
 		<td>
 			<?php if (count(profile_get_all_for_user( auth_get_current_user_id() )) > 0) { ?>
 				<select <?php echo helper_get_tab_index() ?> name="profile_id">
@@ -321,9 +321,9 @@ print_recently_visited();
 						<?php echo lang_get( 'or_fill_in' ); ?>
 					<?php } ?>
 					<tr <?php echo helper_alternate_class() ?>>
-						<td class="category">
+						<th class="category">
 							<?php echo lang_get( 'platform' ) ?>
-						</td>
+						</th>
 						<td>
 							<?php if ( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
 							<select name="platform">
@@ -338,9 +338,9 @@ print_recently_visited();
 						</td>
 					</tr>
 					<tr <?php echo helper_alternate_class() ?>>
-						<td class="category">
+						<th class="category">
 							<?php echo lang_get( 'os' ) ?>
-						</td>
+						</th>
 						<td>
 							<?php if ( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
 							<select name="os">
@@ -355,9 +355,9 @@ print_recently_visited();
 						</td>
 					</tr>
 					<tr <?php echo helper_alternate_class() ?>>
-						<td class="category">
+						<th class="category">
 							<?php echo lang_get( 'os_version' ) ?>
-						</td>
+						</th>
 						<td>
 							<?php
 								if ( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
@@ -390,9 +390,9 @@ print_recently_visited();
 		}
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'product_version' ) ?>
-		</td>
+		</th>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="product_version">
 				<?php print_version_option_list( $f_product_version, $t_project_id, $t_product_version_released_mask ) ?>
@@ -404,9 +404,9 @@ print_recently_visited();
 ?>
 <?php if ( $tpl_show_product_build ) { ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'product_build' ) ?>
-		</td>
+		</th>
 		<td>
 			<input <?php echo helper_get_tab_index() ?> type="text" name="build" size="32" maxlength="32" value="<?php echo string_attribute( $f_build ) ?>" />
 		</td>
@@ -415,9 +415,9 @@ print_recently_visited();
 
 <?php if ( $tpl_show_handler ) { ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'assign_to' ) ?>
-		</td>
+		</th>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="handler_id">
 				<option value="0" selected="selected"></option>
@@ -430,9 +430,9 @@ print_recently_visited();
 <?php // Target Version (if permissions allow)
 	if ( $tpl_show_target_version ) { ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'target_version' ) ?>
-		</td>
+		</th>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="target_version">
 				<?php print_version_option_list() ?>
@@ -442,17 +442,17 @@ print_recently_visited();
 <?php } ?>
 <?php event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id ) ) ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<span class="required">*</span><?php print_documentation_link( 'summary' ) ?>
-		</td>
+		</th>
 		<td>
 			<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo string_attribute( $f_summary ) ?>" />
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<span class="required">*</span><?php print_documentation_link( 'description' ) ?>
-		</td>
+		</th>
 		<td>
 			<textarea <?php echo helper_get_tab_index() ?> name="description" cols="80" rows="10"><?php echo string_textarea( $f_description ) ?></textarea>
 		</td>
@@ -460,9 +460,9 @@ print_recently_visited();
 
 <?php if ( $tpl_show_steps_to_reproduce ) { ?>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">
+			<th class="category">
 				<?php print_documentation_link( 'steps_to_reproduce' ) ?>
-			</td>
+			</th>
 			<td>
 				<textarea <?php echo helper_get_tab_index() ?> name="steps_to_reproduce" cols="80" rows="10"><?php echo string_textarea( $f_steps_to_reproduce ) ?></textarea>
 			</td>
@@ -471,9 +471,9 @@ print_recently_visited();
 
 <?php if ( $tpl_show_additional_info ) { ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php print_documentation_link( 'additional_information' ) ?>
-		</td>
+		</th>
 		<td>
 			<textarea <?php echo helper_get_tab_index() ?> name="additional_info" cols="80" rows="10"><?php echo string_textarea( $f_additional_info ) ?></textarea>
 		</td>
@@ -490,9 +490,9 @@ print_recently_visited();
 			$t_custom_fields_found = true;
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php if($t_def['require_report']) {?><span class="required">*</span><?php } echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
-		</td>
+		</th>
 		<td>
 			<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>
 		</td>
@@ -520,9 +520,9 @@ print_recently_visited();
 	if ( $tpl_show_view_state ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'view_status' ) ?>
-		</td>
+		</th>
 		<td>
 			<label><input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PUBLIC ?>" <?php check_checked( $f_view_state, VS_PUBLIC ) ?> /> <?php echo lang_get( 'public' ) ?></label>
 			<label><input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PRIVATE ?>" <?php check_checked( $f_view_state, VS_PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?></label>
@@ -535,9 +535,9 @@ print_recently_visited();
 	if( $f_master_bug_id > 0 ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php echo lang_get( 'relationship_with_parent' ) ?>
-		</td>
+		</th>
 		<td>
 			<?php relationship_list_box( /* none */ -2, "rel_type", false, true ) ?>
 			<?php echo '<b>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</b>' ?>
@@ -547,9 +547,9 @@ print_recently_visited();
 	}
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+		<th class="category">
 			<?php print_documentation_link( 'report_stay' ) ?>
-		</td>
+		</th>
 		<td>
 			<label><input <?php echo helper_get_tab_index() ?> type="checkbox" id="report_stay" name="report_stay" <?php check_checked( $f_report_stay ) ?> /> <?php echo lang_get( 'check_report_more_bugs' ) ?></label>
 		</td>

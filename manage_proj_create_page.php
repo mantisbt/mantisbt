@@ -79,17 +79,17 @@ $f_parent_id = gpc_get( 'parent_id', null );
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category" width="25%">
+	<th class="category" width="25%">
 		<span class="required">*</span><?php echo lang_get( 'project_name' )?>
-	</td>
+	</th>
 	<td width="75%">
 		<input type="text" name="name" size="64" maxlength="128" />
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'status' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="status">
 		<?php print_enum_string_option_list( 'project_status' ) ?>
@@ -97,9 +97,9 @@ $f_parent_id = gpc_get( 'parent_id', null );
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'view_status' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="view_state">
 			<?php print_enum_string_option_list( 'view_state' ) ?>
@@ -107,18 +107,18 @@ $f_parent_id = gpc_get( 'parent_id', null );
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'inherit_global' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="inherit_global" checked="checked" />
 	</td>
 </tr>
 <?php if ( !is_null( $f_parent_id ) ) { ?>
 <tr class="row-1">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'inherit_parent' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="inherit_parent" checked="checked" />
 	</td>
@@ -134,9 +134,9 @@ $f_parent_id = gpc_get( 'parent_id', null );
 		}
 	?>
 		<tr class="row-2">
-			<td class="category">
+			<th class="category">
 				<?php echo lang_get( 'upload_file_path' ) ?>
-			</td>
+			</th>
 			<td>
 				<input type="text" name="file_path" size="70" maxlength="250" value="<?php echo $t_default_upload_path ?>" />
 			</td>
@@ -145,9 +145,9 @@ $f_parent_id = gpc_get( 'parent_id', null );
 	}
 ?>
 <tr class="row-1">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'description' ) ?>
-	</td>
+	</th>
 	<td>
 		<textarea name="description" cols="60" rows="5"></textarea>
 	</td>

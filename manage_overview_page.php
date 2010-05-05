@@ -60,12 +60,12 @@ print_manage_menu();
 </tr>
 
 <tr <?php echo helper_alternate_class() ?>>
-<td class="category"><?php echo lang_get( 'mantis_version' ) ?></td>
+<th class="category"><?php echo lang_get( 'mantis_version' ) ?></th>
 <td><?php echo MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ) ?></td>
 </tr>
 
 <tr <?php echo helper_alternate_class() ?>>
-<td class="category"><?php echo lang_get( 'schema_version' ) ?></td>
+<th class="category"><?php echo lang_get( 'schema_version' ) ?></th>
 <td><?php echo config_get( 'database_version' ) ?></td>
 </tr>
 
@@ -78,17 +78,17 @@ $t_is_admin = current_user_is_administrator();
 if ( $t_is_admin ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
-<td class="category"><?php echo lang_get( 'site_path' ) ?></td>
+<th class="category"><?php echo lang_get( 'site_path' ) ?></th>
 <td><?php echo config_get( 'absolute_path' ) ?></td>
 </tr>
 
 <tr <?php echo helper_alternate_class() ?>>
-<td class="category"><?php echo lang_get( 'core_path' ) ?></td>
+<th class="category"><?php echo lang_get( 'core_path' ) ?></th>
 <td><?php echo config_get( 'core_path' ) ?></td>
 </tr>
 
 <tr <?php echo helper_alternate_class() ?>>
-<td class="category"><?php echo lang_get( 'plugin_path' ) ?></td>
+<th class="category"><?php echo lang_get( 'plugin_path' ) ?></th>
 <td><?php echo config_get( 'plugin_path' ) ?></td>
 </tr>
 

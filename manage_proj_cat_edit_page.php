@@ -85,9 +85,9 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'assigned_to' ) ?>
-	</td>
+	</th>
 	<td>
 		<select name="assigned_to">
 			<option value="0"></option>

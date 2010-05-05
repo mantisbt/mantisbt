@@ -104,33 +104,33 @@ if ( $g_global_profiles ) {
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category" width="25%">
+	<th class="category" width="25%">
 		<span class="required">*</span><?php echo lang_get( 'platform' ) ?>
-	</td>
+	</th>
 	<td width="75%">
 		<input type="text" name="platform" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<span class="required">*</span><?php echo lang_get( 'operating_system' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" name="os" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category">
+	<th class="category">
 		<span class="required">*</span><?php echo lang_get( 'os_version' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="text" name="os_build" size="16" maxlength="16" />
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'additional_description' ) ?>
-	</td>
+	</th>
 	<td>
 		<textarea name="description" cols="60" rows="8"></textarea>
 	</td>
@@ -177,9 +177,9 @@ if ( $g_global_profiles ) {
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category" width="25%">
+	<th class="category" width="25%">
 		<?php echo lang_get( 'select_profile' ) ?>
-	</td>
+	</th>
 	<td width="75%">
 		<select name="profile_id">
 			<?php print_profile_option_list( $t_user_id, '', $t_profiles ) ?>

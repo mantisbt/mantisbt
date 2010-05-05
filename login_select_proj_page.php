@@ -73,9 +73,9 @@ html_page_top( lang_get( 'select_project_button' ) );
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category" width="40%">
+	<th class="category" width="40%">
 		<?php echo lang_get( 'choose_project' ) ?>
-	</td>
+	</th>
 	<td width="60%">
 		<select name="project_id">
 		<?php print_project_option_list( ALL_PROJECTS, false, null, true ) ?>
@@ -83,9 +83,9 @@ html_page_top( lang_get( 'select_project_button' ) );
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category">
+	<th class="category">
 		<?php echo lang_get( 'make_default' ) ?>
-	</td>
+	</th>
 	<td>
 		<input type="checkbox" name="make_default" />
 	</td>
