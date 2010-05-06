@@ -72,14 +72,11 @@ function prepare_user_name( $p_user_id ) {
 	}
 
 	$t_username = user_get_name( $p_user_id );
+	$t_username = string_display_line( $t_username );
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
-		$t_username = string_display_line( $t_username );
-		return '<a href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_username . '</a>';
+		return '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_username . '</a>';
 	} else {
-		$t_result = '<font STYLE="text-decoration: line-through">';
-		$t_result .= string_display_line( $t_username );
-		$t_result .= '</font>';
-		return $t_result;
+		return '<del class="user">' . $t_username . '</del>';
 	}
 }
 
