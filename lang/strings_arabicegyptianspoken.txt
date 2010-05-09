@@ -1009,7 +1009,6 @@ $s_advanced_filters = 'فلاتر متقدمة';
 $s_simple_filters = 'فلاتر بسيطة';
 $s_monitored_by = 'مراقبه بواسطة';
 $s_attachments = 'الملحق(ات)';
-$s_attachment_alt = 'A';
 $s_bytes = 'بايت';
 $s_phpmailer_language = 'en';
 $s_sponsors = '%1$d راعي(رعاة)';

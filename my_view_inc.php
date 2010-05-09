@@ -466,14 +466,13 @@ echo "($v_start - $v_end / $t_bug_count)";
 		print_status_icon( $t_bug->priority );
 	}
 
-	if( 0 < $t_attachment_count ) {
-		echo '<a href="' . string_get_bug_view_url( $t_bug->id ) . '#attachments">';
-		echo '<img border="0" src="' . $t_icon_path . 'attachment.png' . '"';
-		echo ' alt="' . lang_get( 'attachment_alt' ) . '"';
-		echo ' title="' . $t_attachment_count . ' ' . lang_get( 'attachments' ) . '"';
-		echo ' />';
-		echo '</a>';
+	if ( $t_attachment_count > 0 ) {
+		$t_href = string_get_bug_view_url( $t_bug->id ) . '#attachments';
+		$t_href_title = sprintf( lang_get( 'view_attachments_for_issue' ), $t_attachment_count, $t_bug->id );
+		$t_alt_text = $t_attachment_count . lang_get( 'word_separator' ) . lang_get( 'attachments' );
+		echo "<a href=\"$t_href\" title=\"$t_href_title\"><img src=\"${t_icon_path}attachment.png\" alt=\"$t_alt_text\" title=\"$t_alt_text\" /></a>";
 	}
+
 	if( VS_PRIVATE == $t_bug->view_state ) {
 		echo '<img src="' . $t_icon_path . 'protected.gif" width="8" height="15" alt="' . lang_get( 'private' ) . '" />';
 	}

@@ -1023,7 +1023,6 @@ $s_advanced_filters = 'Avanserte filtre';
 $s_simple_filters = 'Enkle filtre';
 $s_monitored_by = 'Overvåket av';
 $s_attachments = 'vedlegg';
-$s_attachment_alt = 'V';
 $s_bytes = 'bytes';
 $s_attachment_missing = 'Vedlegg mangler';
 $s_phpmailer_language = 'no';

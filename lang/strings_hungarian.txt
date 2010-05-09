@@ -1019,7 +1019,6 @@ $s_advanced_filters = 'Haladó szűrők';
 $s_simple_filters = 'Egyszerű szűrők';
 $s_monitored_by = 'Ellenőrzi';
 $s_attachments = 'csatolmány';
-$s_attachment_alt = 'Cs';
 $s_bytes = 'bájt';
 $s_attachment_missing = 'Hiányzó csatolmány';
 $s_phpmailer_language = 'hu';

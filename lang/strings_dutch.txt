@@ -1022,7 +1022,6 @@ $s_advanced_filters = 'Uitgebreide filters';
 $s_simple_filters = 'Eenvoudige filters';
 $s_monitored_by = 'Gevolgd door';
 $s_attachments = 'bijlage(n)';
-$s_attachment_alt = 'A';
 $s_bytes = 'bytes';
 $s_attachment_missing = 'De bijlage mist';
 $s_phpmailer_language = 'nl';

@@ -741,7 +741,6 @@ $s_advanced_filters = 'Розширені фільтри';
 $s_simple_filters = 'Прості фільтри';
 $s_monitored_by = 'Хто стежить';
 $s_attachments = 'прикріплення';
-$s_attachment_alt = 'П';
 $s_phpmailer_language = 'uk';
 $s_sponsors = 'Спонсорів: %1$d';
 $s_sponsorship_added = 'Спонсорство додане';

@@ -1018,7 +1018,6 @@ $s_advanced_filters = 'Filtres avançats';
 $s_simple_filters = 'Filtres simples';
 $s_monitored_by = 'Monitoritzat per';
 $s_attachments = 'adjunt(s)';
-$s_attachment_alt = 'A';
 $s_bytes = 'bytes';
 $s_phpmailer_language = 'ca';
 $s_sponsors = '%1$d patrocinador(s)';

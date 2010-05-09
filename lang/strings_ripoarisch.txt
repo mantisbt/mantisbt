@@ -511,7 +511,6 @@ $s_advanced_filters = 'Opjemoz Feltere';
 $s_simple_filters = 'Eijfach Feltere';
 $s_monitored_by = 'Op dä Oppaßleß vum';
 $s_attachments = 'aanjehange Dattei(je)';
-$s_attachment_alt = 'A';
 $s_phpmailer_language = 'ksh';
 $s_sponsors = '%1$d Shponser(e)';
 $s_sponsorship_added = 'Shponserschaff dobei jedonn';

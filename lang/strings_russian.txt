@@ -1026,7 +1026,6 @@ $s_advanced_filters = 'Расширенные фильтры';
 $s_simple_filters = 'Простые фильтры';
 $s_monitored_by = 'Отслеживают';
 $s_attachments = 'вложения';
-$s_attachment_alt = 'В';
 $s_bytes = 'байт';
 $s_attachment_missing = 'Вложение отсутствует';
 $s_phpmailer_language = 'ru';

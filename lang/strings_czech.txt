@@ -1011,7 +1011,6 @@ $s_advanced_filters = 'Rozšířené filtry';
 $s_simple_filters = 'Jednoduché filtry';
 $s_monitored_by = 'Sledováno';
 $s_attachments = 'přílohy';
-$s_attachment_alt = 'D';
 $s_bytes = 'bajtů';
 $s_phpmailer_language = 'cs';
 $s_sponsors = '%1$d sponzor(-ři)';

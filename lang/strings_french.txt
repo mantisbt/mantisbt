@@ -1033,7 +1033,6 @@ $s_advanced_filters = 'Filtres avancés';
 $s_simple_filters = 'Filtres simples';
 $s_monitored_by = 'Surveillé par';
 $s_attachments = 'pièce(s) jointe(s)';
-$s_attachment_alt = 'A';
 $s_bytes = 'octets';
 $s_attachment_missing = 'Pièce jointe manquante';
 $s_phpmailer_language = 'fr';
