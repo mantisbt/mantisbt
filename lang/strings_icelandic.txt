@@ -815,7 +815,6 @@ $s_advanced_filters = 'Aukin sía';
 $s_simple_filters = 'Einföld sía';
 $s_monitored_by = 'Vaktað af';
 $s_attachments = 'Viðhengi';
-$s_attachment_alt = 'V';
 $s_changelog = 'Breyta dagbók';
 $s_http_auth_realm = 'MantisBT innskráning';
 $s_bug = 'verkbeiðni';

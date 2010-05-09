@@ -836,7 +836,6 @@ $s_advanced_filters = 'Detalūs filtrai';
 $s_simple_filters = 'Paprasti filtrai';
 $s_monitored_by = 'Stebimos';
 $s_attachments = 'prikabintas failas(ai)';
-$s_attachment_alt = 'A';
 $s_phpmailer_language = 'lt';
 $s_sponsors = '%1$d rėmėjas(ai)';
 $s_sponsorship_added = 'Rėmimas pridėtas';

@@ -1003,7 +1003,6 @@ $s_advanced_filters = 'Zaawansowane filtry';
 $s_simple_filters = 'Proste filtry';
 $s_monitored_by = 'Monitorowane przez';
 $s_attachments = 'ZAŁĄCZNIKI';
-$s_attachment_alt = 'A';
 $s_bytes = 'bajtów';
 $s_phpmailer_language = 'pl';
 $s_sponsors = '%1$d sponsor(ów)';

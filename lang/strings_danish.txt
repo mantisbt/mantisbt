@@ -781,7 +781,6 @@ $s_advanced_filters = 'Avencerede filtre';
 $s_simple_filters = 'Simple filtre';
 $s_monitored_by = 'Overvåget af';
 $s_attachments = 'Vedhæftede filer';
-$s_attachment_alt = 'V';
 $s_phpmailer_language = 'dk';
 $s_sponsorship_added = 'Sponsorat tilføjet';
 $s_sponsorship_updated = 'Sponsorat opdateret';

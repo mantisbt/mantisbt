@@ -1079,7 +1079,6 @@ $s_simple_filters = 'Einfache Filter';
 $s_monitored_by = 'Beobachtet von';
 $s_monitored_by_label = 'Beobachtet von:';
 $s_attachments = 'Angehängte Datei(en)';
-$s_attachment_alt = 'D';
 $s_bytes = 'Bytes';
 $s_attachment_missing = 'Dateianhang fehlt';
 $s_phpmailer_language = 'de';

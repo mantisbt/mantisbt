@@ -710,14 +710,9 @@ function print_column_title_date_submitted( $p_sort, $p_dir, $p_columns_target =
  */
 function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
-
-	$t_show_attachments = config_get( 'show_attachment_indicator' );
-
-	if( ON == $t_show_attachments ) {
-		echo "\t<td>";
-		echo '<img src="' . $t_icon_path . 'attachment.png' . '" alt="" />';
-		echo "</td>\n";
-	}
+	$t_attachment_count_text = lang_get( 'attachment_count' );
+	$t_attachment_count_icon = "<img src=\"${t_icon_path}attachment.png\" alt=\"$t_attachment_count_text\" title=\"$t_attachment_count_text\" />";
+	echo "\t<td>$t_attachment_count_icon</td>\n";
 }
 
 /**
@@ -1067,15 +1062,17 @@ function print_column_attachment_count( $p_bug, $p_columns_target = COLUMNS_TARG
 		$t_attachment_count = file_bug_attachment_count( $p_bug->id );
 	}
 
-	echo "\t<td>";
+	echo '<td class="center">';
 
-	if( 0 < $t_attachment_count ) {
-		echo '<a href="' . string_get_bug_view_url( $p_bug->id ) . '#attachments">';
-		echo '<img border="0" src="' . $t_icon_path . 'attachment.png' . '"';
-		echo ' alt="' . lang_get( 'attachment_alt' ) . '"';
-		echo ' title="' . $t_attachment_count . ' ' . lang_get( 'attachments' ) . '"';
-		echo ' />';
-		echo '</a>';
+	if ( $t_attachment_count > 0 ) {
+		$t_href = string_get_bug_view_url( $p_bug->id ) . '#attachments';
+		$t_href_title = sprintf( lang_get( 'view_attachments_for_issue' ), $t_attachment_count, $p_bug->id );
+		if ( config_get( 'show_attachment_indicator' ) ) {
+			$t_alt_text = $t_attachment_count . lang_get( 'word_separator' ) . lang_get( 'attachments' );
+			echo "<a href=\"$t_href\" title=\"$t_href_title\"><img src=\"${t_icon_path}attachment.png\" alt=\"$t_alt_text\" title=\"$t_alt_text\" /></a>";
+		} else {
+			echo "<a href=\"$t_href\" title=\"$t_href_title\">$t_attachment_count</a>";
+		}
 	} else {
 		echo ' &nbsp; ';
 	}

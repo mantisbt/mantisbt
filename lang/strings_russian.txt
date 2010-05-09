@@ -1073,7 +1073,6 @@ $s_simple_filters = 'Простые фильтры';
 $s_monitored_by = 'Отслеживают';
 $s_monitored_by_label = 'Отслеживают:';
 $s_attachments = 'вложения';
-$s_attachment_alt = 'В';
 $s_bytes = 'байт';
 $s_attachment_missing = 'Вложение отсутствует';
 $s_phpmailer_language = 'ru';

@@ -1375,9 +1375,10 @@ $s_monitored_by = 'Monitored By';
 $s_monitored_by_label = 'Monitored By:';
 
 $s_attachments = 'attachment(s)';
-$s_attachment_alt = 'A';
 $s_bytes = 'bytes';
 $s_attachment_missing = 'Attachment missing';
+$s_attachment_count = 'Attachment count';
+$s_view_attachments_for_issue = 'View %1$d attachment(s) for issue #%2$d';
 
 # PHPMailer
 $s_phpmailer_language = 'en';
