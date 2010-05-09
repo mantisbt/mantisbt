@@ -880,7 +880,7 @@ $g_severity_significant_threshold = MAJOR;
  * they conflict with other configuration. Or if the current user doesn't have
  * the necessary access level to view them. For example, sponsorship_total will
  * be removed if sponsorships are disabled. To include custom field 'xyz',
- include the column name as 'custom_xyz'.
+ * include the column name as 'custom_xyz'.
  *
  * Standard Column Names (i.e. names to choose from):
  * selection, edit, id, project_id, reporter_id, handler_id, priority,
