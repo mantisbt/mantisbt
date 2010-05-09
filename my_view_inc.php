@@ -422,8 +422,6 @@ $box_title = lang_get( 'my_view_title_' . $t_box_title );
 	<td class="form-title" colspan="2">
 <?php
 print_link( 'view_all_set.php?type=1&temporary=y&' . $url_link_parameters[$t_box_title], $box_title, false, 'subtle' );
-echo '&nbsp;';
-print_bracket_link( 'view_all_set.php?type=1&temporary=y&' . $url_link_parameters[$t_box_title], '^', true, 'subtle' );
 
 if( count( $rows ) > 0 ) {
 	$v_start = $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] * ( $f_page_number - 1 ) + 1;
