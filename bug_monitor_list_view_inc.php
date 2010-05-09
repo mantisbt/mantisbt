@@ -68,7 +68,7 @@ if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_i
 	}
 	user_cache_array_rows( $t_users );
 
-	echo '<a name="monitors" id="monitors"></a><br />';
+	echo '<a id="monitors"></a><br />';
 
 	collapse_open( 'monitoring' );
 ?>

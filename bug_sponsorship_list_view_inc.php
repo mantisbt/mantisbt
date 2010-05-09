@@ -76,7 +76,7 @@ if ( ( config_get( 'enable_sponsorship' ) == ON ) && ( access_has_bug_level( con
 if ( $t_show_sponsorships ) {
 ?>
 
-<a name="sponsorships" id="sponsorships"></a> <br />
+<a id="sponsorships"></a> <br />
 
 <?php
 	collapse_open( 'sponsorship' );
