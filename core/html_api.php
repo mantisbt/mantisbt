@@ -599,76 +599,113 @@ function html_footer( $p_file = null ) {
 		user_update_last_visit( $t_user_id );
 	}
 
-	echo "\t<div class=\"footer\"><br />\n";
-	echo "\t<hr size=\"1\" />\n";
+	echo "<div id=\"footer\">\n";
+	echo "\t<hr />\n";
+	echo "\t<div id=\"powered-by-mantisbt-logo\">\n";
+	$t_mantisbt_logo_url = helper_mantis_url( 'images/mantis_logo_button.gif' );
+	echo "\t\t<a href=\"http://www.mantisbt.org\" title=\"Mantis Bug Tracker: a free and open source web based bug tracking system.\"><img src=\"$t_mantisbt_logo_url\" width=\"88\" height=\"35\" alt=\"Powered by Mantis Bug Tracker: a free and open source web based bug tracking system.\" /></a>\n";
+	echo "\t</div>\n";
 
-	echo '<table border="0" width="100%" cellspacing="0" cellpadding="0"><tr valign="top"><td>';
-	if( ON == config_get( 'show_version' ) ) {
-		$t_version_suffix = config_get_global( 'version_suffix' );
-		echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/" title="Free Web Based Bug Tracker">MantisBT ', MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ), "</a></span>\n";
+	# Show optional user-specificed custom copyright statement
+	$t_copyright_statement = config_get( 'copyright_statement' );
+	if ( $t_copyright_statement ) {
+		echo "\t<address id=\"user-copyright\">$t_copyright_statement</address>\n";
 	}
-	echo "\t", '<address>Copyright &copy; 2000 - 2010 MantisBT Group</address>', "\n";
 
-	# only display webmaster email is current user is not the anonymous user
-	if( !is_page_name( 'login_page.php' ) && auth_is_user_authenticated() && !current_user_is_anonymous() ) {
-		echo "\t", '<address><a href="mailto:', config_get( 'webmaster_email' ), '">', config_get( 'webmaster_email' ), '</a></address>', "\n";
+	# Show MantisBT version and copyright statement
+	$t_version_suffix = '';
+	$t_copyright_years = '';
+	if ( config_get( 'show_version' ) ) {
+		$t_version_suffix = htmlentities( ' ' . MANTIS_VERSION . config_get_global( 'version_suffix' ) );
+		$t_copyright_years = ' 2000 - 2010';
 	}
+	echo "\t<address id=\"mantisbt-copyright\">Powered by <a href=\"http://www.mantisbt.org\" title=\"Mantis Bug Tracker: a free and open source web based bug tracking system.\">Mantis Bug Tracker</a> (MantisBT)$t_version_suffix. Copyright &copy;$t_copyright_years MantisBT contributors. Licensed under the terms of the <a href=\"http://www.gnu.org/licenses/old-licenses/gpl-2.0.html\" title=\"GNU General Public License (GPL) version 2\">GNU General Public License (GPL) version 2</a> or a later version.</address>\n";
+
+	# Show contact information
+	$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( config_get( 'webmaster_email' ) ) );
+	echo "\t<address id=\"webmaster-contact-information\">$t_webmaster_contact_information</address>\n";
 
 	event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
 
-	# print timings
-	if( ON == config_get( 'show_timer' ) ) {
-		echo '<span class="italic">Time: ' . number_format( microtime(true) - $g_request_time, 4 ) . ' seconds.</span><br />';
-		echo sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) ), '<br />';
+	# Print horizontal rule if any debugging stats follow
+	if ( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get( 'show_queries_count' ) ) {
+		echo "\t<hr />\n";
 	}
 
-	# print db queries that were run
-	if( helper_show_queries() ) {
-		$t_count = count( $g_queries_array );
-		echo "\t";
-		echo sprintf( lang_get( 'total_queries_executed' ), $t_count );
-		echo "<br />\n";
+	# Print the page execution time
+	if ( config_get( 'show_timer' ) ) {
+		$t_page_execution_time = sprintf( lang_get( 'page_execution_time' ), number_format( microtime( true ) - $g_request_time, 4 ) );
+		echo "\t<p id=\"page-execution-time\">$t_page_execution_time</p>\n";
+	}
 
-		if( ON == config_get( 'show_queries_list' ) ) {
-			$t_unique_queries = 0;
-			$t_shown_queries = array();
-			for( $i = 0;$i < $t_count;$i++ ) {
-				if( !in_array( $g_queries_array[$i][0], $t_shown_queries ) ) {
-					$t_unique_queries++;
-					$g_queries_array[$i][3] = false;
-					array_push( $t_shown_queries, $g_queries_array[$i][0] );
-				} else {
-					$g_queries_array[$i][3] = true;
-				}
+	# Print the page memory usage
+	if ( config_get( 'show_memory_usage' ) ) {
+		$t_page_memory_usage = sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) );
+		echo "\t<p id=\"page-memory-usage\">$t_page_memory_usage</p>\n";
+	}
+
+	# Determine number of unique queries executed
+	if ( config_get( 'show_queries_count' ) || helper_show_queries() ) {
+		$t_total_queries_count = count( $g_queries_array );
+		$t_unique_queries_count = 0;
+		$t_total_query_execution_time = 0;
+		$t_unique_queries = array();
+		for ( $i = 0; $i < $t_total_queries_count; $i++ ) {
+			if ( !in_array( $g_queries_array[$i][0], $t_unique_queries ) ) {
+				$t_unique_queries_count++;
+				$g_queries_array[$i][3] = false;
+				array_push( $t_unique_queries, $g_queries_array[$i][0] );
+			} else {
+				$g_queries_array[$i][3] = true;
 			}
-
-			echo "\t";
-			echo sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries );
-			echo "\t", '<table>', "\n";
-			$t_total = 0;
-			for( $i = 0;$i < $t_count;$i++ ) {
-				$t_time = $g_queries_array[$i][1];
-				$t_caller = $g_queries_array[$i][2];
-				$t_total += $t_time;
-				$t_style_tag = '';
-				if( true == $g_queries_array[$i][3] ) {
-					$t_style_tag = ' style="color: red;"';
-				}
-				echo "\t", '<tr valign="top"><td', $t_style_tag, '>', ( $i + 1 ), '</td>';
-				echo '<td', $t_style_tag, '>', $t_time, '</td>';
-				echo '<td', $t_style_tag, '><span style="color: gray;">', $t_caller, '</span><br />', string_html_specialchars( $g_queries_array[$i][0] ), '</td></tr>', "\n";
-			}
-
-			# @@@ Note sure if we should localize them given that they are debug info.  Will add if requested by users.
-			echo "\t", '<tr><td></td><td>', $t_total, '</td><td>SQL Queries Total Time</td></tr>', "\n";
-			echo "\t", '<tr><td></td><td>', round( microtime(true) - $g_request_time, 4 ), '</td><td>Page Request Total Time</td></tr>', "\n";
-			echo "\t", '</table>', "\n";
+			$t_total_query_execution_time += $g_queries_array[$i][1];
 		}
 	}
 
-	echo '</td><td>', "\n\t", '<div align="right">';
-	echo '<a href="http://www.mantisbt.org" title="Free Web Based Bug Tracker"><img src="' . helper_mantis_url( 'images/mantis_logo_button.gif' ) . '" width="88" height="35" alt="Powered by Mantis Bugtracker" border="0" /></a>';
-	echo "</div>\n</td></tr></table></div>\n";
+	# Print query counts
+	if ( config_get( 'show_queries_count' ) ) {
+		$t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
+		echo "\t<p id=\"total-queries-count\">$t_total_queries_executed</p>\n";
+		$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
+		echo "\t<p id=\"unique-queries-count\">$t_unique_queries_executed</p>\n";
+		$t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
+		echo "\t<p id=\"total-query-execution-time\">$t_total_query_time</p>\n";
+	}
+
+	# Print table of database queries executed
+	if ( helper_show_queries() ) {
+		echo "\t<hr />\n";
+		echo "\t<table id=\"query-list\">\n";
+		echo "\t\t<caption>" . lang_get( 'sql_queries_list_caption' ) . "</caption>\n";
+		echo "\t\t<thead>\n";
+		echo "\t\t\t<tr>\n";
+		echo "\t\t\t\t<th>" . lang_get( 'sql_query_number' ) . "</th>\n";
+		echo "\t\t\t\t<th>" . lang_get( 'sql_query_time' ) . "</th>\n";
+		echo "\t\t\t\t<th>" . lang_get( 'sql_query_caller' ) . "</th>\n";
+		echo "\t\t\t\t<th>" . lang_get( 'sql_query' ) . "</th>\n";
+		echo "\t\t\t</tr>\n";
+		echo "\t\t</thead>\n";
+		echo "\t\t<tbody>\n";
+		for ( $t_query_number = 1; $t_query_number <= $t_total_queries_count; $t_query_number++ ) {
+			$t_query_time = $g_queries_array[$t_query_number - 1][1];
+			$t_query_caller = string_html_specialchars( $g_queries_array[$t_query_number - 1][2] );
+			$t_query = string_html_specialchars( $g_queries_array[$t_query_number - 1][0] );
+			$t_query_duplicate_class = '';
+			if ( $g_queries_array[$t_query_number - 1][3] ) {
+				$t_query_duplicate_class = ' class="duplicate-query"';
+			}
+			echo "\t\t\t<tr$t_query_duplicate_class>\n";
+			echo "\t\t\t\t<td>$t_query_number</td>\n";
+			echo "\t\t\t\t<td>$t_query_time</td>\n";
+			echo "\t\t\t\t<td>$t_query_caller</td>\n";
+			echo "\t\t\t\t<td>$t_query</td>\n";
+			echo "\t\t\t</tr>\n";
+		}
+		echo "\t\t</tbody>\n";
+		echo "\t</table>\n";
+	}
+
+	echo "</div>\n";
 }
 
 /**

@@ -695,9 +695,17 @@ $s_hide_content = 'Hide Content';
 $s_show_content = 'Show Content';
 
 # html_api.php
-$s_total_queries_executed = '%1$d total queries executed.';
-$s_unique_queries_executed = '%1$d unique queries executed.';
-$s_memory_usage_in_kb = 'memory usage: %1$s KB';
+$s_webmaster_contact_information = 'If you encounter problems accessing this bug tracker please <a href="mailto:%1$s" title="Contact the webmaster via e-mail.">contact us via e-mail</a> for assistance.';
+$s_total_queries_executed = 'Total queries executed: %1$d';
+$s_unique_queries_executed = 'Unique queries executed: %1$d';
+$s_total_query_execution_time = 'Total query execution time: %1$s seconds';
+$s_page_execution_time = 'Page execution time: %1$s seconds';
+$s_memory_usage_in_kb = 'Memory usage: %1$s KiB';
+$s_sql_queries_list_caption = 'List of SQL queries executed in the process of loading this page.';
+$s_sql_query_number = 'Number';
+$s_sql_query_time = 'Execution time';
+$s_sql_query_caller = 'Caller';
+$s_sql_query = 'Query';
 
 # print_api.php
 $s_please_report = 'Please report this to the %1$s.';

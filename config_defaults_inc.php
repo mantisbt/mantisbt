@@ -356,13 +356,14 @@ $g_max_lost_password_in_progress_count = 3;
  ***************************/
 
 /**
- * Administrator Email address
+ * Administrator email address
  * @global string $g_administrator_email
  */
 $g_administrator_email	= 'administrator@example.com';
 
 /**
- * Webmaster email
+ * Webmaster email address. This is shown publicly at the bottom of each page
+ * and thus may be suspectible to being detected by spam email harvesters.
  * @global string $g_webmaster_email
  */
 $g_webmaster_email		= 'webmaster@example.com';
@@ -630,6 +631,14 @@ $g_show_version = OFF;
  * @global string $g_version_suffix
  */
 $g_version_suffix = '';
+
+/**
+ * Custom copyright and licensing statement shown at the footer of each page.
+ * Can contain HTML elements that are valid children of the <address> element.
+ * This string is treated as raw HTML and thus you must use &amp; instead of &.
+ * @global string $g_copyright_statement
+ */
+$g_copyright_statement = '';
 
 /******************************
  * MantisBT Language Settings *
@@ -3770,10 +3779,16 @@ $g_subprojects_inherit_versions = ON;
  **********************************/
 
 /**
- * Time page loads.  Shows at the bottom of the page.
+ * Time page loads. The page execution timer shows at the bottom of each page.
  * @global int $g_show_timer
  */
 $g_show_timer = OFF;
+
+/**
+ * Show memory usage for each page load in the footer.
+ * @global int $g_show_memory_usage
+ */
+$g_show_memory_usage = OFF;
 
 /**
  * used for development only.  Leave OFF

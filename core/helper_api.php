@@ -497,7 +497,7 @@ function helper_get_tab_index() {
 function helper_show_queries() {
 	# Check is authenticated before checking access level, otherwise user gets
 	# redirected to login_page.php.  See #8461.
-	return ON == config_get( 'show_queries_count' ) && auth_is_user_authenticated() && access_has_global_level( config_get( 'show_queries_threshold' ) );
+	return ON == config_get( 'show_queries_list' ) && auth_is_user_authenticated() && access_has_global_level( config_get( 'show_queries_threshold' ) );
 }
 
 /**

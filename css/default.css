@@ -8,8 +8,6 @@ body {
 
 p 					{ font-family: Verdana, Arial, Helvetica, sans-serif; }
 
-address 			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8pt }
-
 pre				{ margin-top: 0px; margin-bottom: 0px; }
 
 a					{}
@@ -181,3 +179,27 @@ div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; float: ri
 
 .progress400				{ position: relative; width: 400px; border: 1px solid #d7d7d7; margin-top: 1em; margin-bottom: 1em; padding: 1px; }
 .progress400 .bar			{ display: block; position: relative; background: #6bba70; text-align: center; font-weight: normal; color: #333; height: 2em; line-height: 2em; }
+
+#footer {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	margin-top: 2em;
+}
+
+#footer #powered-by-mantisbt-logo {
+	float: right;
+}
+
+#footer address {
+	font-style: normal;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+#footer #user-copyright {
+	font-size: 9pt;
+}
+
+#footer #query-list .duplicate-query {
+	color: red;
+}
