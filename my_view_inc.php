@@ -506,7 +506,9 @@ echo "<span class=\"my-buglist-count\">($v_start - $v_end / $t_bug_count)</span>
 		 	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $t_bug->project_id ) {
 				echo '<span class="small project">[', string_display_line( project_get_name( $t_bug->project_id ) ), '] </span>';
 			}
-			echo '<span class="small summary">', $t_summary, '<br /></span>';
+			$t_bug_url = string_get_bug_view_url( $t_bug->id, null );
+			$t_bug_url_title = string_html_specialchars( sprintf( lang_get( 'label' ), lang_get( 'issue_id' ) . $t_bug->id ) . lang_get( 'word_separator' ) . $t_bug->summary );
+			echo "<span class=\"small summary\"><a href=\"$t_bug_url\" title=\"$t_bug_url_title\">$t_summary</a></span><br />";
 	?>
 		<?php
 	# type project name if viewing 'all projects' or bug is in subproject
