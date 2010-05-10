@@ -879,7 +879,7 @@ function print_column_title_overdue( $p_sort, $p_dir, $p_columns_target = COLUMN
 function print_column_selection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $g_checkboxes_exist;
 
-	echo '<td>';
+	echo '<td class="column-selection">';
 	if( access_has_any_project( config_get( 'report_bug_threshold', null, null, $p_bug->project_id ) ) ||
 		# !TODO: check if any other projects actually exist for the bug to be moved to
 		access_has_project_level( config_get( 'move_bug_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
@@ -930,7 +930,7 @@ function print_column_title_plugin( $p_column, $p_column_object, $p_sort, $p_dir
  */
 function print_column_plugin( $p_column_object, $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
-		echo '<td>';
+		echo '<td class="column-plugin">';
 		$p_column_object->display( $p_bug, $p_columns_target );
 		echo '</td>';
 	} else {
@@ -948,7 +948,7 @@ function print_column_plugin( $p_column_object, $p_bug, $p_columns_target = COLU
 function print_column_edit( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path, $t_update_bug_threshold;
 
-	echo '<td>';
+	echo '<td class="column-edit">';
 
 	if( !bug_is_readonly( $p_bug->id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug->id ) ) {
 		echo '<a href="' . string_get_bug_update_url( $p_bug->id ) . '">';
@@ -970,7 +970,7 @@ function print_column_edit( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE
  * @access public
  */
 function print_column_priority( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td>';
+	echo '<td class="column-priority">';
 	if( ON == config_get( 'show_priority_text' ) ) {
 		print_formatted_priority_string( $p_bug->status, $p_bug->priority );
 	} else {
@@ -987,7 +987,7 @@ function print_column_priority( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_
  * @access public
  */
 function print_column_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td>';
+	echo '<td class="column-id">';
 	print_bug_link( $p_bug->id, false );
 	echo '</td>';
 }
@@ -1000,7 +1000,7 @@ function print_column_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE )
  * @access public
  */
 function print_column_sponsorship_total( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo "\t<td class=\"right\">";
+	echo "\t<td class=\"right column-sponsorship\">";
 
 	if( $p_bug->sponsorship_total > 0 ) {
 		$t_sponsorship_amount = sponsorship_format_amount( $p_bug->sponsorship_total );
@@ -1029,7 +1029,7 @@ function print_column_bugnotes_count( $p_bug, $p_columns_target = COLUMNS_TARGET
 		$bugnote_count = 0;
 	}
 
-	echo '<td class="center">';
+	echo '<td class="center column-bugnotes-count">';
 	if( $bugnote_count > 0 ) {
 		$t_show_in_bold = $v_bugnote_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' );
 		if( $t_show_in_bold ) {
@@ -1062,7 +1062,7 @@ function print_column_attachment_count( $p_bug, $p_columns_target = COLUMNS_TARG
 		$t_attachment_count = file_bug_attachment_count( $p_bug->id );
 	}
 
-	echo '<td class="center">';
+	echo '<td class="center column-attachments">';
 
 	if ( $t_attachment_count > 0 ) {
 		$t_href = string_get_bug_view_url( $p_bug->id ) . '#attachments';
@@ -1093,11 +1093,11 @@ function print_column_category_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
 	# grab the project name
 	$t_project_name = project_get_field( $p_bug->project_id, 'name' );
 
-	echo '<td class="center">';
+	echo '<td class="center column-category">';
 
 	# type project name if viewing 'all projects' or if issue is in a subproject
  	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $p_bug->project_id ) {
-		echo '<small>[';
+		echo '<small class="project">[';
 		print_view_bug_sort_link( string_display_line( $t_project_name ), 'project_id', $t_sort, $t_dir, $p_columns_target );
 		echo ']</small><br />';
 	}
@@ -1115,7 +1115,7 @@ function print_column_category_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
  * @access public
  */
 function print_column_severity( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">';
+	echo '<td class="center column-severity">';
 	print_formatted_severity_string( $p_bug->status, $p_bug->severity );
 	echo '</td>';
 }
@@ -1128,7 +1128,7 @@ function print_column_severity( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_
  * @access public
  */
 function print_column_eta( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">', get_enum_element( 'eta', $p_bug->eta ), '</td>';
+	echo '<td class="center column-eta">', get_enum_element( 'eta', $p_bug->eta ), '</td>';
 }
 
 /**
@@ -1139,7 +1139,7 @@ function print_column_eta( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE 
  * @access public
  */
 function print_column_projection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">', get_enum_element( 'projection', $p_bug->projection ), '</td>';
+	echo '<td class="center column-projection">', get_enum_element( 'projection', $p_bug->projection ), '</td>';
 }
 
 /**
@@ -1150,7 +1150,7 @@ function print_column_projection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
  * @access public
  */
 function print_column_reproducibility( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">', get_enum_element( 'reproducibility', $p_bug->reproducibility ), '</td>';
+	echo '<td class="center column-reproducibility">', get_enum_element( 'reproducibility', $p_bug->reproducibility ), '</td>';
 }
 
 /**
@@ -1161,7 +1161,7 @@ function print_column_reproducibility( $p_bug, $p_columns_target = COLUMNS_TARGE
  * @access public
  */
 function print_column_resolution( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">', get_enum_element( 'resolution', $p_bug->resolution ), '</td>';
+	echo '<td class="center column-resolution">', get_enum_element( 'resolution', $p_bug->resolution ), '</td>';
 }
 
 /**
@@ -1172,7 +1172,7 @@ function print_column_resolution( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
  * @access public
  */
 function print_column_status( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">';
+	echo '<td class="center column-status">';
 	printf( '<span class="issue-status" title="%s">%s</span>', get_enum_element( 'resolution', $p_bug->resolution ), get_enum_element( 'status', $p_bug->status ) );
 
 	# print username instead of status
@@ -1190,7 +1190,7 @@ function print_column_status( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PA
  * @access public
  */
 function print_column_handler_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">';
+	echo '<td class="center column-assigned-to">';
 
 	# In case of a specific project, if the current user has no access to the field, then it would have been excluded from the
 	# list of columns to view.  In case of ALL_PROJECTS, then we need to check the access per row.
@@ -1209,7 +1209,7 @@ function print_column_handler_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
  * @access public
  */
 function print_column_reporter_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">';
+	echo '<td class="center column-reporter">';
 	echo prepare_user_name( $p_bug->reporter_id );
 	echo '</td>';
 }
@@ -1222,7 +1222,7 @@ function print_column_reporter_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
  * @access public
  */
 function print_column_project_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">';
+	echo '<td class="center column-project-id">';
 	echo string_display_line( project_get_name( $p_bug->project_id ) );
 	echo '</td>';
 }
@@ -1239,7 +1239,7 @@ function print_column_last_updated( $p_bug, $p_columns_target = COLUMNS_TARGET_V
 
 	$t_last_updated = string_display_line( date( config_get( 'short_date_format' ), $p_bug->last_updated ) );
 
-	echo '<td class="center">';
+	echo '<td class="center column-last-modified">';
 	if( $p_bug->last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
 		printf( '<span class="bold">%s</span>', $t_last_updated );
 	} else {
@@ -1258,7 +1258,7 @@ function print_column_last_updated( $p_bug, $p_columns_target = COLUMNS_TARGET_V
 function print_column_date_submitted( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_date_submitted = string_display_line( date( config_get( 'short_date_format' ), $p_bug->date_submitted ) );
 
-	echo '<td class="center">', $t_date_submitted, '</td>';
+	echo '<td class="center column-date-submitted">', $t_date_submitted, '</td>';
 }
 
 /**
@@ -1275,7 +1275,7 @@ function print_column_summary( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_P
 		$t_summary = string_display_line_links( $p_bug->summary );
 	}
 
-	echo '<td class="left">' . $t_summary . '</td>';
+	echo '<td class="left column-summary">' . $t_summary . '</td>';
 }
 
 /**
@@ -1288,7 +1288,7 @@ function print_column_summary( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_P
 function print_column_description( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_description = string_display_links( $p_bug->description );
 
-	echo '<td class="left">', $t_description, '</td>';
+	echo '<td class="left column-description">', $t_description, '</td>';
 }
 
 /**
@@ -1301,7 +1301,7 @@ function print_column_description( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
 function print_column_steps_to_reproduce( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_steps_to_reproduce = string_display_links( $p_bug->steps_to_reproduce );
 
-	echo '<td class="left">', $t_steps_to_reproduce, '</td>';
+	echo '<td class="left column-steps-to-reproduce">', $t_steps_to_reproduce, '</td>';
 }
 
 /**
@@ -1314,7 +1314,7 @@ function print_column_steps_to_reproduce( $p_bug, $p_columns_target = COLUMNS_TA
 function print_column_additional_information( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_additional_information = string_display_links( $p_bug->additional_information );
 
-	echo '<td class="left">', $t_additional_information, '</td>';
+	echo '<td class="left column-additional-information">', $t_additional_information, '</td>';
 }
 
 /**
@@ -1325,7 +1325,7 @@ function print_column_additional_information( $p_bug, $p_columns_target = COLUMN
  * @access public
  */
 function print_column_target_version( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td>';
+	echo '<td class="column-target-version">';
 
 	# In case of a specific project, if the current user has no access to the field, then it would have been excluded from the
 	# list of columns to view.  In case of ALL_PROJECTS, then we need to check the access per row.
@@ -1346,7 +1346,7 @@ function print_column_target_version( $p_bug, $p_columns_target = COLUMNS_TARGET
 function print_column_view_state( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
 
-	echo '<td>';
+	echo '<td class="column-view-state">';
 
 	if( VS_PRIVATE == $p_bug->view_state ) {
 		$t_view_state_text = lang_get( 'private' );
@@ -1368,12 +1368,12 @@ function print_column_view_state( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 function print_column_due_date( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	if ( !access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ||
 		date_is_null( $p_bug->due_date ) ) {
-		echo '<td>&nbsp;</td>';
+		echo '<td class="column-due-date">&nbsp;</td>';
 		return;
 	}
 
 	if ( bug_is_overdue( $p_bug->id ) ) {
-		echo '<td class="overdue">';
+		echo '<td class="column-due-date overdue">';
 	} else {
 		echo '<td>';
 	}
@@ -1393,7 +1393,7 @@ function print_column_due_date( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_
 function print_column_overdue( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
 
-	echo '<td>';
+	echo '<td class="column-overdue">';
 
 	if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) &&
 		!date_is_null( $p_bug->due_date ) &&
