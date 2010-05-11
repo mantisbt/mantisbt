@@ -573,6 +573,32 @@ switch ( $f_type ) {
 
 $tc_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 
+/**
+ *  Remove any statuses that should be excluded by the hide_status field
+ */
+if( $f_view_type == "advanced" ) {
+    if( $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] > 0 ) {
+        $t_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
+        foreach( $t_statuses as $t_key=>$t_val ) {
+            if( $t_val < $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] ) {
+                $t_keep_statuses[$t_key] = $t_val;
+            }
+        }
+        $tc_setting_arr[FILTER_PROPERTY_STATUS] = $t_keep_statuses;
+    }
+}
+/**
+ *  If a status is selected in the status and the hide status field, remove it from
+ *  hide status
+ */
+if( $f_view_type == "simple" && $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] > 0 ) {
+    foreach( $tc_setting_arr[FILTER_PROPERTY_STATUS] as $t_key => $t_val ) {
+        if( $tc_setting_arr[FILTER_PROPERTY_STATUS][$t_key] == $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] ) {
+            unset( $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] );
+        }
+    }
+}
+
 $t_settings_serialized = serialize( $tc_setting_arr );
 $t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
 
