@@ -203,3 +203,6 @@ div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; float: ri
 #footer #query-list .duplicate-query {
 	color: red;
 }
+td.tainted { color: red; }
+td.tainted input[type="text"], td.tainted select { background-color: #ffffff; color: red; border: 1px solid red; }
+select.tainted { background-color: #ffffff; color: red; }

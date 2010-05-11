@@ -443,6 +443,8 @@ if ( !is_blank( $t_view_all_cookie ) ) {
 $t_cookie_version = config_get( 'cookie_version' );
 $t_default_show_changed = config_get( 'default_show_changed' );
 
+# Clear the source query id.  Since we have entered new filter criteria.
+$t_setting_arr['_source_query_id'] = '';
 switch ( $f_type ) {
 	# New cookie
 	case '0':
@@ -521,6 +523,8 @@ switch ( $f_type ) {
 				trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
 				exit; # stop here
 			}
+			# Store the source query id to select the correct filter in the drop down.
+			$t_setting_arr['_source_query_id'] = $f_source_query_id;
 			break;
 	# Generalise the filter
 	case '4':
