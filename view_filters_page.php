@@ -280,7 +280,11 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	}
 	?>
 	</td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_build' ) ?></td>
+	<?php if ( $t_show_build ) { ?>
+		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_build' ) ?></td>
+	<?php } else { ?>
+		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
+	<?php } ?>
 	<?php if ( $t_show_product_version ) { ?>
 		<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_version' ) ?></td>
 		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'fixed_in_version' ) ?></td>

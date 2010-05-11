@@ -2493,9 +2493,17 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<td colspan="1" class="small-caption" valign="top">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRIORITY . '[]';?>" id="show_priority_filter"><?php echo lang_get( 'priority_label' )?></a>
 			</td>
+			<?php if( $t_show_product_version ) {?>
 			<td colspan="1" class="small-caption" valign="top">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_TARGET_VERSION . '[]';?>" id="show_target_version_filter"><?php echo lang_get( 'target_version_label' )?></a>
 			</td>
+			<?php
+			} else {?>
+			<td colspan="1" class="small-caption" valign="top">
+				&nbsp;
+			</td>
+			<?php
+			}?>
 			<?php if( $t_filter_cols > 8 ) {
 			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&nbsp;</td>';
 		}?>
@@ -2719,8 +2727,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			}
 		}
 		?>
-	    	</td>
-			<td colspan="1" class="small-caption" valign="top" id="show_target_version_filter_target">
+		</td>
+		<?php if( $t_show_product_version ) { ?>
+		<td colspan="1" class="small-caption" valign="top" id="show_target_version_filter_target">
 							<?php
 								$t_output = '';
 		$t_any_found = false;
@@ -2754,7 +2763,13 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		}
 		?>
 			</td>
-			<?php if( $t_filter_cols > 8 ) {
+		<?php } else { ?>
+			<td colspan="1" class="small-caption" valign="top">
+				&nbsp;
+			</td>
+		<?php }
+
+		if( $t_filter_cols > 8 ) {
 			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&nbsp;</td>';
 		}?>
 
