@@ -18,22 +18,6 @@ $j(document).ready(function(){
 		serialized_form_fields[value] = $j('[name=filters_open]').find('[name='+value+']').serialize();
 	});
 
-	/* Change the action for managing stored queries */
-	$j('[name=open_queries]').attr('action', 'plugin.php?page=StoredQuery/manage');
-	$j('[name=save_query]').attr('action', 'plugin.php?page=StoredQuery/edit');
-
-	$j('[name=save_query]').submit(function( event ) {
-		/* Stop submitting this and submit the filter form to this action with the stored query id */
-		event.preventDefault();
-		$j('#filters_form_open').attr('action', $j(this).attr('action'));
-
-		/* Add the source query id */
-		var source_query_id = $j('[name=source_query_id] option:selected').val();
-		$j('#filters_form_open').prepend( '<input type="hidden" name="source_query_id" value="' + source_query_id +' " />' );
-		// submit the filter changes to the save query page
-		$j('#filters_form_open').submit();
-	});
-
 	/* Set up events to modify the form css to show when a stored query has been modified */
 	begin_form = $j('[name=filters_open]').serialize();
 
