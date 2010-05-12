@@ -151,7 +151,7 @@ function mc_project_delete_category ($p_username, $p_password, $p_project_id, $p
                 return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
         }
 
-        if( !mci_has_access( config_get( 'manage_project_threshold' ), $p_project_id ) ) {
+        if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
                 return new soap_fault( 'Client', '', 'Access Denied' );
         }
 
@@ -188,7 +188,7 @@ function mc_project_rename_category_by_name ($p_username, $p_password, $p_projec
                 return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
         }
 
-        if( !mci_has_access( config_get( 'manage_project_threshold' ), $p_project_id ) ) {
+        if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
                 return new soap_fault( 'Client', '', 'Access Denied' );
         }
 
