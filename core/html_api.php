@@ -1273,10 +1273,6 @@ function print_summary_menu( $p_page = '' ) {
  * @return null
  */
 function html_status_legend() {
-	echo '<br />';
-	echo '<table class="status-legend width100" cellspacing="1">';
-	echo '<tr>';
-
 	# Don't show the legend if only one status is selected by the current filter
 	$t_current_filter = current_user_get_bug_filter();
 	if ( $t_current_filter === false ) {
@@ -1326,6 +1322,10 @@ function html_status_legend() {
 	if( count( $t_status_array ) <= 1 ) {
 		return null;
 	}
+
+	echo '<br />';
+	echo '<table class="status-legend width100" cellspacing="1">';
+	echo '<tr>';
 
 	# draw the status bar
 	$width = (int)( 100 / count( $t_status_array ) );
