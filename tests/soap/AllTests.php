@@ -34,6 +34,7 @@ require_once 'FilterTest.php';
 require_once 'AttachmentTest.php';
 require_once 'LoginTest.php';
 require_once 'CategoryTest.php';
+require_once 'CompressionTest.php';
 
 /**
  * @package    Tests
@@ -65,6 +66,7 @@ class Soap_AllTests extends PHPUnit_Framework_TestSuite
         $suite->addTestSuite('AttachmentTest');
         $suite->addTestSuite('LoginTest');
         $suite->addTestSuite('CategoryTest');
+        $suite->addTestSuite('CompressionTest');
 
         return $suite;
     }
