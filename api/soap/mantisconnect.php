@@ -6,6 +6,12 @@
 # change the license of future releases.
 # See docs/ folder for more details
 
+// NuSOAP already performs compression,
+// so we prevent a double-compression.
+// See issue #11868 for details
+define( 'COMPRESSION_DISABLED', true);
+ini_set( 'zlib.output_compression', false );
+
 set_include_path( '../../library' );
 require_once( 'nusoap/nusoap.php' );
 
