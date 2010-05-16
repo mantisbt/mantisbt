@@ -34,6 +34,11 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	protected $userName = 'administrator';
 	protected $password = 'root';
 	private   $issueIdsToDelete = array();
+	private   $defaultSoapClientOptions = array(  'trace'      => true,
+								                  'exceptions' => true,
+								        		  'cache_wsdl' => WSDL_CACHE_NONE,
+								        		  'trace'      => true
+								               );
 
     protected function setUp()
     {
@@ -41,19 +46,22 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 			!$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED']) {
 			$this->markTestSkipped( 'The Soap tests are disabled.' );
 		}
-
+    
 		$this->client = new
 		    SoapClient(
 		       $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
-		        array(  'trace'      => true,
-		                'exceptions' => true,
-		        		'cache_wsdl' => WSDL_CACHE_NONE,
-		        		'trace'      => true
-		             )
-
+				array_merge($this->defaultSoapClientOptions, $this->extraSoapClientFlags())		     
 		    );
     }
-
+    
+    /**
+     * @return an array of extra options to be passed to the SoapClient constructor
+     */
+    protected function extraSoapClientFlags() {
+    	
+    	return array();
+    }
+    
     protected function tearDown() {
 
     	foreach ( $this->issueIdsToDelete as $issueIdToDelete ) {
