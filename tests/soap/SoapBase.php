@@ -46,13 +46,12 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 			!$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED']) {
 			$this->markTestSkipped( 'The Soap tests are disabled.' );
 		}
-		
-		
-    
+   
 		$this->client = new
 		    SoapClient(
 		       $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
-				array_merge($this->defaultSoapClientOptions, $this->extraSoapClientFlags())		     
+		       	array_merge($this->defaultSoapClientOptions, $this->extraSoapClientFlags()
+				)		     
 		    );
     }
     
@@ -121,5 +120,11 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 		if ( $this->client->mc_config_get_string($this->userName, $this->password, 'allow_no_category' ) != true ) {
 			$this->markTestSkipped( 'g_allow_no_category is not ON.' );
 		}
+	}
+	
+	protected function skipIsZlibIsNotAvailable() {
+		if( !extension_loaded( 'zlib' ) ) {
+			$this->markTestSkipped('zlib extension not found.');	
+		}	
 	}
 }
