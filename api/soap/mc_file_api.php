@@ -107,7 +107,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 			}
 			break;
 		case DATABASE:
-			$c_content = db_prepare_string( $p_content );
+			$c_content = db_prepare_binary_string( $p_content );
 			break;
 	}
 
@@ -116,7 +116,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	$query = "INSERT INTO $t_file_table
 			(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 		VALUES
-			($c_id, '$c_title', '$c_desc', '$c_disk_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now() . "', '$c_content')";
+			($c_id, '$c_title', '$c_desc', '$c_disk_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now() . "', $c_content)";
 	db_query( $query );
 
 	# get attachment id
