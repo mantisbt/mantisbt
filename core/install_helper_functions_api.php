@@ -340,10 +340,12 @@ function install_stored_filter_migrate() {
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_filter_arr = filter_deserialize( $t_row['filter_string'] );
 		foreach( $t_filter_fields AS $t_old=>$t_new ) {
-			$t_value = $t_filter_arr[$t_old];
-			unset( $t_filter_arr[$t_old] );
-			if( !is_null( $t_new ) ) {
-				$t_filter_arr[$t_new] = $t_value;
+			if ( isset( $t_filter_arr[$t_old] ) ) {
+				$t_value = $t_filter_arr[$t_old];
+				unset( $t_filter_arr[$t_old] );
+				if( !is_null( $t_new ) ) {
+					$t_filter_arr[$t_new] = $t_value;
+				}
 			}
 		}
 
