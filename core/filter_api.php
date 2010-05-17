@@ -3415,55 +3415,56 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<td class="right" colspan="4">
 			<?php
 			$t_stored_queries_arr = array();
-	$t_stored_queries_arr = filter_db_get_available_queries();
+			$t_stored_queries_arr = filter_db_get_available_queries();
 
-	if( count( $t_stored_queries_arr ) > 0 ) {
-		?>
-					<form method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
+			if( count( $t_stored_queries_arr ) > 0 ) {
+			?>
+				<form method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
 					<?php # CSRF protection not required here - form does not result in modifications ?>
 					<input type="hidden" name="type" value="3" />
 					<?php
 					if( ON == config_get( 'use_javascript' ) ) {
-			echo "<select name=\"source_query_id\" onchange=\"document.forms.list_queries$t_form_name_suffix.submit();\">";
-		} else {
-			echo '<select name="source_query_id">';
-		}
-		?>
+						echo "<select name=\"source_query_id\" onchange=\"document.forms.list_queries$t_form_name_suffix.submit();\">";
+					} else {
+						echo '<select name="source_query_id">';
+					}
+					?>
 					<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
 					<option value="-1"></option>
 					<?php
+					$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? $t_filter['_source_query_id'] : -1;
 					foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
-			echo '<option value="' . $t_query_id . '" ';
-			check_selected( $t_query_id, $t_filter['_source_query_id'] );
-			echo '>' . $t_query_name . '</option>';
-		}
-		?>
+						echo '<option value="' . $t_query_id . '" ';
+						check_selected( $t_query_id, $t_filter['_source_query_id'] );
+						echo '>' . string_display_line( $t_query_name ) . '</option>';
+					}
+					?>
 					</select>
 					<input type="submit" name="switch_to_query_button" class="button-small" value="<?php echo lang_get( 'use_query' )?>" />
-					</form>
-					<form method="post" name="open_queries" action="query_view_page.php">
+				</form>
+				<form method="post" name="open_queries" action="query_view_page.php">
 					<?php # CSRF protection not required here - form does not result in modifications ?>
 					<input type="submit" name="switch_to_query_button" class="button-small" value="<?php echo lang_get( 'open_queries' )?>" />
-					</form>
-				<?php
+				</form>
+	<?php
 	} else {
-		?>
-					<form method="get" name="reset_query" action="view_all_set.php">
+	?>
+				<form method="get" name="reset_query" action="view_all_set.php">
 					<?php # CSRF protection not required here - form does not result in modifications ?>
 					<input type="hidden" name="type" value="3" />
 					<input type="hidden" name="source_query_id" value="-1" />
 					<input type="submit" name="reset_query_button" class="button-small" value="<?php echo lang_get( 'reset_query' )?>" />
-					</form>
-				<?php
+				</form>
+	<?php
 	}
 
 	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) {
-		?>
-					<form method="post" name="save_query" action="query_store_page.php">
+	?>
+				<form method="post" name="save_query" action="query_store_page.php">
 					<?php # CSRF protection not required here - form does not result in modifications ?>
 					<input type="submit" name="save_query_button" class="button-small" value="<?php echo lang_get( 'save_query' )?>" />
-					</form>
-			<?php
+				</form>
+	<?php
 	}
 	?>
 			</td>
