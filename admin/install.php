@@ -761,7 +761,10 @@ if( 3 == $t_install_state ) {
 					print_test_result( GOOD );
 					config_set( 'database_version', $i );
 				} else {
-					print_test_result( BAD, true, $sqlarray[0] . '<br />' . $g_db->ErrorMsg() );
+					$all_sql = '';
+					foreach ( $sqlarray as $single_sql )
+						$all_sql .= $single_sql . '<br>';
+					print_test_result( BAD, true, $all_sql  . $g_db->ErrorMsg() );
 				}
 				echo '</tr>';
 			}
