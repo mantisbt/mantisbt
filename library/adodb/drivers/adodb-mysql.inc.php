@@ -1,6 +1,6 @@
 <?php
 /*
-V5.10 10 Nov 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+V5.11 5 May 2010   (c) 2000-2010 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -133,7 +133,6 @@ class ADODB_mysql extends ADOConnection {
 	function qstr($s,$magic_quotes=false)
 	{
 		if (is_null($s)) return 'NULL';
-
 		if (!$magic_quotes) {
 		
 			if (ADODB_PHPVER >= 0x4300) {
@@ -159,11 +158,12 @@ class ADODB_mysql extends ADOConnection {
 	
 	function GetOne($sql,$inputarr=false)
 	{
+	global $ADODB_GETONE_EOF;
 		if ($this->compat323 == false && strncasecmp($sql,'sele',4) == 0) {
 			$rs = $this->SelectLimit($sql,1,-1,$inputarr);
 			if ($rs) {
 				$rs->Close();
-				if ($rs->EOF) return false;
+				if ($rs->EOF) return $ADODB_GETONE_EOF;
 				return reset($rs->fields);
 			}
 		} else {
@@ -580,10 +580,10 @@ class ADODB_mysql extends ADOConnection {
 
 			// see https://sourceforge.net/tracker/index.php?func=detail&aid=2287278&group_id=42718&atid=433976
 			if (!isset($foreign_keys[$ref_table])) {
-             $foreign_keys[$ref_table] = array();
+				$foreign_keys[$ref_table] = array();
 			}
-             $num_fields = count($my_field);
-             for ( $j = 0;  $j < $num_fields;  $j ++ ) {
+            $num_fields = count($my_field);
+            for ( $j = 0;  $j < $num_fields;  $j ++ ) {
                  if ( $associative ) {
                      $foreign_keys[$ref_table][$ref_field[$j]] = $my_field[$j];
                  } else {

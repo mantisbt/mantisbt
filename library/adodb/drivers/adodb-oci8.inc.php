@@ -1,7 +1,7 @@
 <?php
 /*
 
-  version V5.06 16 Oct 2008  (c) 2000-2009 John Lim. All rights reserved.
+  version V5.11 5 May 2010  (c) 2000-2010 John Lim. All rights reserved.
 
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
@@ -65,6 +65,11 @@ class ADODB_oci8 extends ADOConnection {
 	var $_initdate = true; // init date to YYYY-MM-DD
 	var $metaTablesSQL = "select table_name,table_type from cat where table_type in ('TABLE','VIEW') and table_name not like 'BIN\$%'"; // bin$ tables are recycle bin tables
 	var $metaColumnsSQL = "select cname,coltype,width, SCALE, PRECISION, NULLS, DEFAULTVAL from col where tname='%s' order by colno"; //changed by smondino@users.sourceforge. net
+	var $metaColumnsSQL2 = "select column_name,data_type,data_length, data_scale, data_precision, 
+    case when nullable = 'Y' then 'NULL'
+    else 'NOT NULL' end as nulls,
+    data_default from all_tab_cols 
+  where owner='%s' and table_name='%s' order by column_id"; // when there is a schema
 	var $_bindInputArray = true;
 	var $hasGenID = true;
 	var $_genIDSQL = "SELECT (%s.nextval) FROM DUAL";
@@ -100,13 +105,19 @@ class ADODB_oci8 extends ADOConnection {
 	function MetaColumns($table, $normalize=true) 
 	{
 	global $ADODB_FETCH_MODE;
-	
+		
+		$schema = '';
+		$this->_findschema($table, $schema);
+		
 		$false = false;
 		$save = $ADODB_FETCH_MODE;
 		$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
 		if ($this->fetchMode !== false) $savem = $this->SetFetchMode(false);
-		
-		$rs = $this->Execute(sprintf($this->metaColumnsSQL,strtoupper($table)));
+
+		if ($schema)
+			$rs = $this->Execute(sprintf($this->metaColumnsSQL2, strtoupper($schema), strtoupper($table)));
+		else
+			$rs = $this->Execute(sprintf($this->metaColumnsSQL,strtoupper($table)));
 		
 		if (isset($savem)) $this->SetFetchMode($savem);
 		$ADODB_FETCH_MODE = $save;
@@ -114,7 +125,7 @@ class ADODB_oci8 extends ADOConnection {
 			return $false;
 		}
 		$retarr = array();
-		while (!$rs->EOF) { //print_r($rs->fields);
+		while (!$rs->EOF) {
 			$fld = new ADOFieldObject();
 	   		$fld->name = $rs->fields[0];
 	   		$fld->type = $rs->fields[1];
@@ -322,7 +333,7 @@ NATSOFT.DOMAIN =
 		return 'TO_DATE('.$tss.",'RRRR-MM-DD, HH24:MI:SS')";
 	}
 	
-	function RowLock($tables,$where,$col='1 as ignore') 
+	function RowLock($tables,$where,$col='1 as adodbignore') 
 	{
 		if ($this->autoCommit) $this->BeginTrans();
 		return $this->GetOne("select $col from $tables where $where for update");
@@ -615,14 +626,14 @@ NATSOFT.DOMAIN =
 			
 			 // Let Oracle return the name of the columns
 			$q_fields = "SELECT * FROM (".$sql.") WHERE NULL = NULL";
-			 
+		
 			$false = false;
 			if (! $stmt_arr = $this->Prepare($q_fields)) {
 				return $false;
 			}
 			$stmt = $stmt_arr[1];
 			 
-			 if (is_array($inputarr)) {
+			if (is_array($inputarr)) {
 			 	foreach($inputarr as $k => $v) {
 					if (is_array($v)) {
 						if (sizeof($v) == 2) // suggested by g.giunta@libero.
@@ -972,7 +983,7 @@ NATSOFT.DOMAIN =
 					ADOConnection::outp("<b>Bind</b>: LOB has been written to temp");
 				}
 			} else {
-				$this->_refLOBs[$numlob]['VAR'] = $var;
+				$this->_refLOBs[$numlob]['VAR'] = &$var;
 			}
 			$rez = $tmp;
 		} else {
@@ -1297,9 +1308,9 @@ SELECT /*+ RULE */ distinct b.column_name
 		
 		// undo magic quotes for " unless sybase is on
 		if (!ini_get('magic_quotes_sybase')) {
-		$s = str_replace('\\"','"',$s);
-		$s = str_replace('\\\\','\\',$s);
-		return "'".str_replace("\\'",$this->replaceQuote,$s)."'";
+			$s = str_replace('\\"','"',$s);
+			$s = str_replace('\\\\','\\',$s);
+			return "'".str_replace("\\'",$this->replaceQuote,$s)."'";
 		} else {
 			return "'".$s."'";
 		}
@@ -1398,6 +1409,7 @@ class ADORecordset_oci8 extends ADORecordSet {
 	 		$p = OCIColumnPrecision($this->_queryID, $fieldOffset);
 			$sc = OCIColumnScale($this->_queryID, $fieldOffset);
 			if ($p != 0 && $sc == 0) $fld->type = 'INT';
+			$fld->scale = $p;
 			break;
 		
 	 	case 'CLOB':

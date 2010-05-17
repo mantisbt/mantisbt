@@ -1,7 +1,7 @@
 <?php
 
 /* 
- V5.10 10 Nov 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+ V5.11 5 May 2010   (c) 2000-2010 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. See License.txt. 
@@ -14,22 +14,22 @@
 */
 
 class ADODB_pdo_sqlite extends ADODB_pdo {
-	var $metaTablesSQL = "SELECT name FROM sqlite_master WHERE type='table'";
-	var $sysDate = 'current_date';
-	var $sysTimeStamp = 'current_timestamp';
-	var $nameQuote = '`';
-    var $replaceQuote = "''";
-    var $hasGenID = true;
+	var $metaTablesSQL   = "SELECT name FROM sqlite_master WHERE type='table'";
+	var $sysDate         = 'current_date';
+	var $sysTimeStamp    = 'current_timestamp';
+	var $nameQuote       = '`';
+	var $replaceQuote    = "''";
+	var $hasGenID        = true;
 	var $_genIDSQL       = "UPDATE %s SET id=id+1 WHERE id=%s";
 	var $_genSeqSQL      = "CREATE TABLE %s (id integer)";
 	var $_genSeqCountSQL = 'SELECT COUNT(*) FROM %s';
 	var $_genSeq2SQL     = 'INSERT INTO %s VALUES(%s)';
 	var $_dropSeqSQL     = 'DROP TABLE %s';
 	var $concat_operator = '||';
-        var $pdoDriver       = false;
+    var $pdoDriver       = false;
 	var $random='abs(random())';
     
-    function _init($parentDriver)
+	function _init($parentDriver)
 	{
 		$this->pdoDriver = $parentDriver;
 		$parentDriver->_bindInputArray = true;
@@ -49,7 +49,7 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
 
 		return $arr;
 	}
-
+	
 	function SelectLimit($sql,$nrows=-1,$offset=-1,$inputarr=false,$secs2cache=0) 
 	{
 		$parent = $this->pdoDriver;
@@ -111,7 +111,7 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
 	}
 
 	function BeginTrans()
-	{
+	{	
 		$parent = $this->pdoDriver;
 		if ($parent->transOff) return true; 
 		$parent->transCnt += 1;
@@ -119,14 +119,14 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
 		return $parent->Execute("BEGIN {$parent->_transmode}");
 	}
 	
-	function CommitTrans($ok=true)
-	{
+	function CommitTrans($ok=true) 
+	{ 
 		$parent = $this->pdoDriver;
 		if ($parent->transOff) return true; 
 		if (!$ok) return $parent->RollbackTrans();
 		if ($parent->transCnt) $parent->transCnt -= 1;
 		$parent->_autocommit = true;
-
+		
 		$ret = $parent->Execute('COMMIT');
 		return $ret;
 	}
@@ -161,7 +161,7 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
 	  }
 	  $arr = array();
 	  while ($r = $rs->FetchRow()) {
-	  	$type = explode('(',$r['type']);
+	    $type = explode('(',$r['type']);
 	    $size = '';
 	    if (sizeof($type)==2)
 	    $size = trim($type[1],')');
@@ -190,8 +190,8 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
 			$save = $this->metaTablesSQL;
 			$mask = $this->qstr(strtoupper($mask));
 			$this->metaTablesSQL .= " AND name LIKE $mask";
-}
-
+		}
+		
 		$ret = $parent->GetCol($this->metaTablesSQL);
 		
 		if ($mask) {

@@ -1,6 +1,6 @@
 <?php
 /*
- V5.10 10 Nov 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+ V5.11 5 May 2010   (c) 2000-2010 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -104,7 +104,7 @@ WHERE relkind in ('r','v') AND (c.relname='%s' or c.relname = lower('%s'))
 	var $random = 'random()';		/// random function
 	var $autoRollback = true; // apparently pgsql does not autorollback properly before php 4.3.4
 							// http://bugs.php.net/bug.php?id=25404
-							
+	
 	var $uniqueIisR = true;
 	var $_bindInputArray = false; // requires postgresql 7.3+ and ability to modify database
 	var $disableBlobs = false; // set to true to disable blob checking, resulting in 2-5% improvement in performance.
@@ -178,7 +178,7 @@ a different OID if a database must be reloaded. */
 		return @pg_Exec($this->_connectionID, "begin ".$this->_transmode);
 	}
 	
-	function RowLock($tables,$where,$col='1 as ignore') 
+	function RowLock($tables,$where,$col='1 as adodbignore') 
 	{
 		if (!$this->transCnt) $this->BeginTrans();
 		return $this->GetOne("select $col from $tables where $where for update");
@@ -584,7 +584,7 @@ select viewname,'V' from pg_views where viewname like $mask";
 		
 	}
 
-	  function MetaIndexes ($table, $primary = FALSE, $owner=false)
+	  function MetaIndexes ($table, $primary = FALSE, $owner = false)
       {
          global $ADODB_FETCH_MODE;
                 

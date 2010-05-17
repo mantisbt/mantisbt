@@ -11,7 +11,7 @@ if (empty($ADODB_INCLUDED_CSV)) include(ADODB_DIR.'/adodb-csvlib.inc.php');
 
 /* 
 
-  V5.06 16 Oct 2008  (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+  V5.06 16 Oct 2008  (c) 2000-2010 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. See License.txt. 
@@ -83,7 +83,7 @@ $db->CacheExecute($sql);
 		}
 		
 		// returns true or false. true if successful save
-		function writecache($filename, $contents,$debug, $secs2cache)
+		function writecache($filename, $contents, $debug, $secs2cache)
 		{
 			if (!$this->_connected) {
 				$err = '';
@@ -111,7 +111,7 @@ $db->CacheExecute($sql);
 				$err = 'Item with such key doesn\'t exists on the memcached server.';
 				return $false;
 			}
-	
+			
 			// hack, should actually use _csv2rs
 			$rs = explode("\n", $rs);
             unset($rs[0]);

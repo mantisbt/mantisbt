@@ -2,7 +2,7 @@
 
 
 /*
-V5.10 10 Nov 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+V5.11 5 May 2010   (c) 2000-2010 John Lim (jlim#natsoft.com). All rights reserved.
          Contributed by Ross Smith (adodb@netebb.com). 
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
@@ -570,15 +570,17 @@ class ADODB_Session {
 			ADOConnection::outp( " driver=$driver user=$user db=$database ");
 		}
 		
-		if ($persist) {
-			switch($persist) {
-			default:
-			case 'P': $ok = $conn->PConnect($host, $user, $password, $database); break;
-			case 'C': $ok = $conn->Connect($host, $user, $password, $database); break;
-			case 'N': $ok = $conn->NConnect($host, $user, $password, $database); break;
+		if (empty($conn->_connectionID)) { // not dsn
+			if ($persist) {
+				switch($persist) {
+				default:
+				case 'P': $ok = $conn->PConnect($host, $user, $password, $database); break;
+				case 'C': $ok = $conn->Connect($host, $user, $password, $database); break;
+				case 'N': $ok = $conn->NConnect($host, $user, $password, $database); break;
+				}
+			} else {
+				$ok = $conn->Connect($host, $user, $password, $database);
 			}
-		} else {
-			$ok = $conn->Connect($host, $user, $password, $database);
 		}
 
 		if ($ok) $GLOBALS['ADODB_SESS_CONN'] = $conn;
@@ -755,7 +757,6 @@ class ADODB_Session {
 			$conn->StartTrans();
 			
 			$rs = $conn->Execute("SELECT COUNT(*) AS cnt FROM $table WHERE $binary sesskey = ".$conn->Param(0),array($key));
-			if ($rs) $rs->Close();
 					
 			if ($rs && reset($rs->fields) > 0) {
 				$sql = "UPDATE $table SET expiry=$expiry, sessdata=$lob_value, expireref= ".$conn->Param(0).",modified=$sysTimeStamp WHERE sesskey = ".$conn->Param('1');

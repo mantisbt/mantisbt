@@ -1,6 +1,6 @@
 <?php
 /* 
-V5.10 10 Nov 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+V5.11 5 May 2010   (c) 2000-2010 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. 
@@ -25,6 +25,7 @@ class  ADODB_odbc_mssql extends ADODB_odbc {
 	var $fmtDate = "'Y-m-d'";
 	var $fmtTimeStamp = "'Y-m-d H:i:s'";
 	var $_bindInputArray = true;
+	var $metaDatabasesSQL = "select name from sysdatabases where name <> 'master'";
 	var $metaTablesSQL="select name,case when type='U' then 'T' else 'V' end from sysobjects where (type='U' or type='V') and (name not in ('sysallocations','syscolumns','syscomments','sysdepends','sysfilegroups','sysfiles','sysfiles1','sysforeignkeys','sysfulltextcatalogs','sysindexes','sysindexkeys','sysmembers','sysobjects','syspermissions','sysprotects','sysreferences','systypes','sysusers','sysalternates','sysconstraints','syssegments','REFERENTIAL_CONSTRAINTS','CHECK_CONSTRAINTS','CONSTRAINT_TABLE_USAGE','CONSTRAINT_COLUMN_USAGE','VIEWS','VIEW_TABLE_USAGE','VIEW_COLUMN_USAGE','SCHEMATA','TABLES','TABLE_CONSTRAINTS','TABLE_PRIVILEGES','COLUMNS','COLUMN_DOMAIN_USAGE','COLUMN_PRIVILEGES','DOMAINS','DOMAIN_CONSTRAINTS','KEY_COLUMN_USAGE'))";
 	var $metaColumnsSQL = "select c.name,t.name,c.length from syscolumns c join systypes t on t.xusertype=c.xusertype join sysobjects o on o.id=c.id where o.name='%s'";
 	var $hasTop = 'top';		// support mssql/interbase SELECT TOP 10 * FROM TABLE
@@ -72,11 +73,7 @@ class  ADODB_odbc_mssql extends ADODB_odbc {
 	// the same scope. A scope is a module -- a stored procedure, trigger, 
 	// function, or batch. Thus, two statements are in the same scope if 
 	// they are in the same stored procedure, function, or batch.
-		if ($this->lastInsID !== false) {
-			return $this->lastInsID; // InsID from sp_executesql call
-		} else {
 			return $this->GetOne($this->identitySQL);
-		}
 	}
 	
 	
@@ -184,20 +181,7 @@ order by constraint_name, referenced_table_name, keyno";
 	function _query($sql,$inputarr=false)
 	{
 		if (is_string($sql)) $sql = str_replace('||','+',$sql);
-		$getIdentity = false;
-		if (!is_array($sql) && preg_match('/^\\s*insert/i', $sql)) {
-			$getIdentity = true;
-			$sql .= (preg_match('/;\\s*$/i', $sql) ? ' ' : '; ') . $this->identitySQL . ' as insertid';
-        }
-                	
-		if ($getIdentity) {
-			$res = ADODB_odbc::_query($sql,$inputarr);
-			$row = odbc_fetch_array($res);
-			$this->lastInsID = isset($row['insertid']) ? (int)$row['insertid'] : false;			
-         } else {
-         	$this->lastInsID = false;
-         	return ADODB_odbc::_query($sql,$inputarr);
-		}
+		return ADODB_odbc::_query($sql,$inputarr);
 	}
 	
 	function SetTransactionMode( $transaction_mode ) 

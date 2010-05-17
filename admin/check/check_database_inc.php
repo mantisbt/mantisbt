@@ -43,13 +43,15 @@ if( isset( $ADODB_vers ) ) {
 	# ADOConnection::Version() is broken as it treats v5.1 the same as v5.10
 	# Therefore we must extract the correct version ourselves
 	# Upstream bug report: http://phplens.com/lens/lensforum/msgs.php?id=18320
+	# This bug has been fixed in ADOdb 5.11 (May 5, 2010) but we still
+	# need to use the backwards compatible approach to detect ADOdb <5.11.
 	if( preg_match( '/^[Vv]([0-9\.]+)/', $ADODB_vers, $t_matches ) == 1 ) {
 		$t_adodb_version_check_ok = version_compare( $t_matches[1], '5.10', '>=' );
 		$t_adodb_version_info = 'ADOdb version ' . htmlentities( $t_matches[1] ) . ' was found.';
 	}
 }
 check_print_test_row(
-	'Version of <a href="http://en.wikipedia.org/wiki/ADOdb">ADOdb</a> available is at least 5.10',
+	'Version of <a href="http://en.wikipedia.org/wiki/ADOdb">ADOdb</a> available is at least 5.11',
 	$t_adodb_version_check_ok,
 	$t_adodb_version_info
 );
@@ -57,12 +59,6 @@ check_print_test_row(
 if( !$t_adodb_version_check_ok ) {
 	return;
 }
-
-check_print_test_warn_row(
-	'Version of ADOdb in use was bundled with MantisBT',
-	strstr( $ADODB_vers, 'MantisBT Version' ),
-	array( false => 'MantisBT bundles a modified version of ADOdb. Failure to use this version may cause MantisBT to behave incorrectly.' )
-);
 
 $t_database_dsn = config_get_global( 'dsn' );
 check_print_info_row(

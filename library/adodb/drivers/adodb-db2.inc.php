@@ -1,6 +1,6 @@
 <?php
 /* 
-  V5.06 16 Oct 2008   (c) 2006 John Lim (jlim#natsoft.com). All rights reserved.
+  V5.11 5 May 2010   (c) 2000-2010 (jlim#natsoft.com). All rights reserved.
 
   This is a version of the ADODB driver for DB2.  It uses the 'ibm_db2' PECL extension
   for PHP (http://pecl.php.net/package/ibm_db2), which in turn requires DB2 V8.2.2 or
@@ -24,6 +24,9 @@ if (!defined('ADODB_DIR')) die();
 --------------------------------------------------------------------------------------*/
 
 
+
+
+
 class ADODB_db2 extends ADOConnection {
 	var $databaseType = "db2";	
 	var $fmtDate = "'Y-m-d'";
@@ -33,10 +36,7 @@ class ADODB_db2 extends ADOConnection {
 	var $sysDate = 'CURRENT DATE';
 	var $sysTimeStamp = 'CURRENT TIMESTAMP';
 	
-        // See #8386 for more details
-	// original: var $fmtTimeStamp = "'Y-m-d-H:i:s'";
-	// DB2 valid formats: Y-m-d-H.i.s (IBM SQL format, center dash and dots) or Y-m-d H:i:s (ISO format, center space and colons). Since i5/OS v5r3 supports only IBM SQL format, we'll use it: Y-m-d-H.i.s  
-	var $fmtTimeStamp = "'Y-m-d-H.i.s'";
+	var $fmtTimeStamp = "'Y-m-d H:i:s'";
 	var $replaceQuote = "''"; // string to use to replace quotes
 	var $dataProvider = "db2";
 	var $hasAffectedRows = true;
@@ -58,9 +58,7 @@ class ADODB_db2 extends ADOConnection {
 	
     function _insertid()
     {
-        // See #8385 for more details.
-        // original: return ADOConnection::GetOne('VALUES IDENTITY_VAL_LOCAL()');
-        return ADOConnection::GetOne('SELECT IDENTITY_VAL_LOCAL() FROM SYSIBM.SYSDUMMY1');
+        return ADOConnection::GetOne('VALUES IDENTITY_VAL_LOCAL()');
     }
 	
 	function ADODB_db2() 
@@ -140,10 +138,7 @@ class ADODB_db2 extends ADOConnection {
 	{
 		if (empty($ts) && $ts !== 0) return 'null';
 		if (is_string($ts)) $ts = ADORecordSet::UnixTimeStamp($ts);
-
-                // See #8387 for more details
-                // original: return 'TO_DATE('.adodb_date($this->fmtTimeStamp,$ts).",'YYYY-MM-DD HH24:MI:SS')";
-		return adodb_date($this->fmtTimeStamp,$ts);
+		return 'TO_DATE('.adodb_date($this->fmtTimeStamp,$ts).",'YYYY-MM-DD HH24:MI:SS')";
 	}
 	
 	// Format date column in sql string given an input format that understands Y M D
@@ -215,33 +210,21 @@ class ADODB_db2 extends ADOConnection {
 	
 	function ServerInfo()
 	{
-	
-		if (!empty($this->host) && ADODB_PHPVER >= 0x4300) {
-			$dsn = strtoupper($this->host);
-			$first = true;
-			$found = false;
-			
-			if (!function_exists('db2_data_source')) return false;
-			
-			while(true) {
-				
-				$rez = @db2_data_source($this->_connectionID,
-					$first ? SQL_FETCH_FIRST : SQL_FETCH_NEXT);
-				$first = false;
-				if (!is_array($rez)) break;
-				if (strtoupper($rez['server']) == $dsn) {
-					$found = true;
-					break;
-				}
-			} 
-			if (!$found) return ADOConnection::ServerInfo();
-			if (!isset($rez['version'])) $rez['version'] = '';
-			return $rez;
+		$row = $this->GetRow("SELECT service_level, fixpack_num FROM TABLE(sysproc.env_get_inst_info()) 
+			as INSTANCEINFO");
+
+		
+		if ($row) {		
+			$info['version'] = $row[0].':'.$row[1];
+			$info['fixpack'] = $row[1];
+			$info['description'] = '';
 		} else {
 			return ADOConnection::ServerInfo();
 		}
+		
+		return $info;
 	}
-
+	
 	function CreateSequence($seqname='adodbseq',$start=1)
 	{
 		if (empty($this->_genSeqSQL)) return false;
@@ -285,9 +268,9 @@ class ADODB_db2 extends ADOConnection {
 	{	
 		// if you have to modify the parameter below, your database is overloaded,
 		// or you need to implement generation of id's yourself!
-		$num = $this->GetOne("VALUES NEXTVAL FOR $seq");
+				$num = $this->GetOne("VALUES NEXTVAL FOR $seq");
 				return $num;
-			}
+	}
 
 
 	function ErrorMsg()
@@ -426,18 +409,13 @@ class ADODB_db2 extends ADOConnection {
 	}
 	
 	
-        // See #8384 for more details
-        // @@@ original: function MetaTables($ttype=false,$schema=false)
-        // DB2/400 Allow table and schema as optional parameters. 
-	function MetaTables($ttype=false,$showSchema=false, $qtable="%", $qschema="%")
+	function MetaTables($ttype=false,$schema=false)
 	{
 	global $ADODB_FETCH_MODE;
 	
 		$savem = $ADODB_FETCH_MODE;
 		$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-
-                // @@@ original: $qid = db2_tables($this->_connectionID);
-		$qid = db2_tables($this->_connectionID, null, $qschema, $qtable);		
+		$qid = db2_tables($this->_connectionID);
 		
 		$rs = new ADORecordSet_db2($qid);
 		
@@ -457,14 +435,13 @@ class ADODB_db2 extends ADOConnection {
 		for ($i=0; $i < sizeof($arr); $i++) {
 			if (!$arr[$i][2]) continue;
 			$type = $arr[$i][3];
-                        // @@@ original: DB2/400 $schemaval = ($schema) ? $arr[$i][1].'.' : '';
-                        // use $showSchema instead of $schema, for consistency with odbc_db2.inc.php
-			$schemaval = ($showSchema) ? $arr[$i][1].'.' : '';
+			$owner = $arr[$i][1];
+			$schemaval = ($schema) ? $arr[$i][1].'.' : '';
 			if ($ttype) { 
 				if ($isview) {
 					if (strncmp($type,'V',1) === 0) $arr2[] = $schemaval.$arr[$i][2];
-				} else if (strncmp($type,'SYS',3) !== 0) $arr2[] = $schemaval.$arr[$i][2];
-			} else if (strncmp($type,'SYS',3) !== 0) $arr2[] = $schemaval.$arr[$i][2];
+				} else if (strncmp($owner,'SYS',3) !== 0) $arr2[] = $schemaval.$arr[$i][2];
+			} else if (strncmp($owner,'SYS',3) !== 0) $arr2[] = $schemaval.$arr[$i][2];
 		}
 		return $arr2;
 	}
