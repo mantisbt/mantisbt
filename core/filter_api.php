@@ -3321,7 +3321,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					} else {
 						$t_first_flag = false;
 					}
-					$t_output = $t_output . $t_this_name;
+					$t_output = $t_output . string_display_line( $t_this_name );
 				}
 				echo $t_output;
 			}
