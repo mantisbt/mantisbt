@@ -129,6 +129,8 @@ if ( ini_get( 'zlib.output_compression' ) && function_exists( 'ini_set' ) ) {
 	ini_set( 'zlib.output_compression', false );
 }
 
+http_security_headers();
+
 # Make sure that IE can download the attachments under https.
 header( 'Pragma: public' );
 
