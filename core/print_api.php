@@ -1674,7 +1674,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 		}
 
 		if ( $t_attachment['can_download'] ) {
-			$t_href_start = "<a href=\"file_download.php?file_id={$t_attachment['id']}&amp;type=bug\">";
+			$t_href_start = "<a href=\"${t_attachment['download_url']}\">";
 			$t_href_end = '</a>';
 		} else {
 			$t_href_start = '';
@@ -1762,7 +1762,9 @@ document.getElementById( span ).style.display = displayType;
 				$t_preview_style = 'style="' . $t_preview_style . '"';
 				$t_title = file_get_field( $t_attachment['id'], 'title' );
 
-				echo "\n<br />$t_href_start<img alt=\"$t_title\" $t_preview_style src=\"file_download.php?file_id={$t_attachment['id']}&amp;type=bug\" />$t_href_end";
+				$t_image_url = $t_attachment['download_url'] . '&amp;show_inline=1' . form_security_param( 'file_show_inline' );
+
+				echo "\n<br />$t_href_start<img alt=\"$t_title\" $t_preview_style src=\"$t_image_url\" />$t_href_end";
 				$image_previewed = true;
 			}
 		}

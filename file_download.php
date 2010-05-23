@@ -52,8 +52,27 @@ require_api( 'utility_api.php' );
 
 auth_ensure_user_authenticated();
 
-$f_file_id	= gpc_get_int( 'file_id' );
-$f_type		= gpc_get_string( 'type' );
+$f_show_inline = gpc_get_bool( 'show_inline', false );
+
+# To prevent cross-domain inline hotlinking to attachments we require a CSRF
+# token from the user to show any attachment inline within the browser.
+# Without this security in place a malicious user could upload a HTML file
+# attachment and direct a user to file_download.php?file_id=X&type=bug&show_inline=1
+# and the malicious HTML content would be rendered in the user's browser,
+# violating cross-domain security.
+if ( $f_show_inline ) {
+	# Disable errors for form_security_validate as we need to first need to
+	# send HTTP headers prior to raising an error (the error handler within
+	# error_api.php doesn't check that headers have been sent, it just
+	# makes the assumption that they've been sent already).
+	if ( !@form_security_validate( 'file_show_inline' ) ) {
+		http_all_headers();
+		trigger_error( ERROR_FORM_TOKEN_INVALID, ERROR );
+	}
+}
+
+$f_file_id = gpc_get_int( 'file_id' );
+$f_type	= gpc_get_string( 'type' );
 
 $c_file_id = (integer)$f_file_id;
 
@@ -129,15 +148,12 @@ header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $v_date_added ) );
 
 $t_filename = file_get_display_name( $v_filename );
-$t_show_inline = false;
-$t_inline_files = explode( ',', config_get( 'inline_file_exts' ) );
-if ( $t_inline_files !== false && !is_blank( $t_inline_files[0] ) ) {
-	if ( in_array( utf8_strtolower( file_get_extension( $t_filename ) ), $t_inline_files ) ) {
-		$t_show_inline = true;
-	}
-}
 
-http_content_disposition_header( $t_filename, $t_show_inline );
+# For Internet Explorer 8 as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
+# Don't let IE second guess our content-type!
+header( 'X-Content-Type-Options: nosniff' );
+
+http_content_disposition_header( $t_filename, $f_show_inline );
 
 header( 'Content-Length: ' . $v_filesize );
 
