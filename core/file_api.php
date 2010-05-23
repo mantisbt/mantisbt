@@ -306,13 +306,11 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_ext = strtolower( file_get_extension( $t_attachment['display_name'] ) );
 		$t_attachment['alt'] = $t_ext;
 
-		if( $t_attachment['exists'] ) {
-			if ( $t_can_download && ( $t_filesize != 0 ) && ( $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( in_array( $t_ext, $t_preview_text_ext, true ) ) ) {
+		if ( $t_attachment['exists'] && $t_can_download && $t_filesize != 0 && $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) {
+			if ( in_array( $t_ext, $t_preview_text_ext, true ) ) {
 				$t_attachment['preview'] = true;
 				$t_attachment['type'] = 'text';
-			}
-
-			if ( $t_can_download && ( $t_filesize != 0 ) && ( $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) && ( in_array( utf8_strtolower( file_get_extension( $t_attachment['display_name'] ) ), $t_preview_image_ext, true ) ) ) {
+			} else if ( in_array( $t_ext, $t_preview_image_ext, true ) ) {
 				$t_attachment['preview'] = true;
 				$t_attachment['type'] = 'image';
 			}
