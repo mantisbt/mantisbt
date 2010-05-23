@@ -110,6 +110,8 @@
 		ini_set( 'zlib.output_compression', false );
 	}
 
+	http_security_headers();
+
 	# Make sure that IE can download the attachments under https.
 	header( 'Pragma: public' );
 
