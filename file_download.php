@@ -42,8 +42,8 @@
 	# and the malicious HTML content would be rendered in the user's browser,
 	# violating cross-domain security.
 	if ( $f_show_inline ) {
-		# Disable errors for form_security_validate as we need to first need to
-		# send HTTP headers prior to raising an error (the error handler within
+		# Disable errors for form_security_validate as we need to send HTTP
+		# headers prior to raising an error (the error handler within
 		# error_api.php doesn't check that headers have been sent, it just
 		# makes the assumption that they've been sent already).
 		if ( !@form_security_validate( 'file_show_inline' ) ) {
