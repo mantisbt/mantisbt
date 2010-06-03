@@ -1001,6 +1001,22 @@ $l_oServer->register( 'mc_project_delete',
 	'Add a new project to the tracker (must have admin privileges)'
 );
 
+### mc_project_update
+$l_oServer->register( 'mc_project_update',
+        array(
+                'username' => 'xsd:string',
+                'password' => 'xsd:string',
+                'project_id' => 'xsd:integer',
+                'project' => 'tns:ProjectData'
+        ),
+        array(
+                'return' => 'xsd:boolean'
+        ),
+        $t_namespace,
+        false, false, false,
+        'Update a specific project to the tracker (must have admin privileges)'
+);
+
 ### mc_project_get_issues
 $l_oServer->register( 'mc_project_get_issues',
 	array(
