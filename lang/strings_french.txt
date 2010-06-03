@@ -27,6 +27,7 @@
  * @file
  *
  * @author Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
+ * @author Atrol
  * @author Cedric31
  * @author Crochet.david
  * @author Eric Hartmann, eric@rhinfo.com
@@ -929,7 +930,7 @@ $s_show = 'Afficher';
 $s_changed = 'Modifiés (heures)';
 $s_viewing_bugs_title = 'Liste des bogues';
 $s_updated = 'Mis à jour';
-$s_sticky = 'Afficher les bogues récurrants';
+$s_sticky = 'Afficher les bogues récurrents';
 $s_sort = 'Trier par';
 $s_issue_id = 'Bogue #';
 $s_recently_visited = 'Visité récemment';
@@ -1168,7 +1169,7 @@ $s_tag_attach = 'Associer';
 $s_tag_attach_long = 'Associer balises';
 $s_tag_attach_failed = 'Échec de l\'association de la balise.';
 $s_tag_detach = 'Dissocier « %1$s »';
-$s_tag_separate_by = '(Séparer by \'%1$s\')';
+$s_tag_separate_by = '(Séparer par \'%1$s\')';
 $s_tag_invalid_name = 'Nom de balise non valide.';
 $s_tag_create_denied = 'La création de la balise est refusée.';
 $s_tag_filter_default = 'Bogues associés (%1$s)';

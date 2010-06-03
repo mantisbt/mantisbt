@@ -30,6 +30,7 @@
  * @author Eduardo.mps
  * @author Felipe Tonioli, tonioli@easyline.com.br
  * @author Fernando Machado, fm-nospam@fmachado.com
+ * @author Giro720
  * @author Jeferson Oliveira, jefersonfoliveira@gmail.com
  * @author Jefersonfoliveira
  * @author Juliano F. Ravasi, dev at juliano info
@@ -1132,7 +1133,7 @@ $s_on_date = 'Em';
 $s_on = 'Em';
 $s_off = 'Desligar';
 $s_wiki = 'Wiki';
-$s_tags = 'Marcadores';
+$s_tags = 'Etiquetas';
 $s_tag_details = 'Detalhes do marcador: %1$s';
 $s_tag_id = 'ID do Marcador';
 $s_tag_name = 'Nome';
