@@ -653,6 +653,7 @@ function mci_project_as_array_by_id( $p_project_id ) {
 }
 
 ### MantisConnect Administrative Webservices ###
+
 /**
  * Add a new project.
  *
@@ -723,6 +724,84 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 
 	// project_create returns the new project's id, spit that out to webservice caller
 	return project_create( $t_name, $t_description, $t_project_status, $t_project_view_state, $t_file_path, $t_enabled, $t_inherit_global );
+}
+
+/**
+ * Update a project
+ *
+ * @param string $p_username  The name of the user
+ * @param string $p_password  The password of the user
+ * @param integer $p_project_id A project's id
+ * @param Array $p_project A new ProjectData structure
+ * @return bool returns true or false depending on the success of the update action
+ */
+function mc_project_update( $p_username, $p_password, $p_project_id, $p_project ) {
+    $t_user_id = mci_check_login( $p_username, $p_password );
+    if( $t_user_id === false ) {
+        return new soap_fault( 'Client', '', 'Access Denied', 'Username/password combination was incorrect' );
+    }
+
+    if( !mci_has_administrator_access( $t_user_id, $p_project_id ) ) {
+        return new soap_fault( 'Client', '', 'Access Denied', 'User does not have administrator access' );
+    }
+
+    if( !project_exists( $p_project_id ) ) {
+        return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+    }
+
+    if ( !isset( $p_project['name'] ) ) {
+        return new soap_fault( 'Client', '', 'Missing Field', 'Required Field Missing' );
+    } else {
+        $t_name = $p_project['name'];
+    }
+
+    // check to make sure project doesn't already exist
+    if ( $t_name != project_get_name( $p_project_id ) ) {
+        if( !project_is_name_unique( $t_name ) ) {
+            return new soap_fault( 'Client', '', 'Project name exists', 'The project name you attempted to add exists already' );
+        }
+    }
+
+    if ( !isset( $p_project['description'] ) ) {
+        $t_description = project_get_field( $p_project_id, 'description' );
+    } else {
+        $t_description = $p_project['description'];
+    }
+
+    if ( !isset( $p_project['status'] ) ) {
+        $t_status = project_get_field( $p_project_id, 'status' );
+    } else {
+        $t_status = $p_project['status'];
+    }
+
+    if ( !isset( $p_project['view_state'] ) ) {
+        $t_view_state = project_get_field( $p_project_id, 'view_state' );
+    } else {
+        $t_view_state = $p_project['view_state'];
+    }
+
+    if ( !isset( $p_project['file_path'] ) ) {
+        $t_file_path = project_get_field( $p_project_id, 'file_path' );
+    } else {
+        $t_file_path = $p_project['file_path'];
+    }
+
+    if ( !isset( $p_project['enabled'] ) ) {
+        $t_enabled = project_get_field( $p_project_id, 'enabled' );
+    } else {
+        $t_enabled = $p_project['enabled'];
+    }
+
+    if ( !isset( $p_project['inherit_global'] ) ) {
+        $t_inherit_global = project_get_field( $p_project_id, 'inherit_global' );
+    } else {
+        $t_inherit_global = $p_project['inherit_global'];
+    }
+
+    $t_project_status = mci_get_project_status_id( $t_status );
+    $t_project_view_state = mci_get_project_view_state_id( $t_view_state );
+
+    return project_update( $p_project_id, $t_name, $t_description, $t_project_status, $t_project_view_state, $t_file_path, $t_enabled, $t_inherit_global );
 }
 
 /**
