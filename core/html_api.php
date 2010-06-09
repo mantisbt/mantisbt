@@ -403,10 +403,9 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
  */
 function html_head_javascript() {
 	if( ON == config_get( 'use_javascript' ) ) {
-		html_javascript_link( 'common.js' );
 		echo '<script type="text/javascript">var loading_lang = "' . lang_get( 'loading' ) . '";</script>';
 		html_javascript_link( 'ajax.js' );
-		html_javascript_link( 'jquery-min.js' );
+		html_javascript_link( 'jquery.js' );
 
 		global $g_enable_projax;
 
@@ -414,10 +413,11 @@ function html_head_javascript() {
 			html_javascript_link( 'projax/prototype.js' );
 			html_javascript_link( 'projax/scriptaculous.js' );
 		}
-		echo '<script type="text/javascript" tal:condition="use_javascript">';
+		echo '<script type="text/javascript">';
 		echo '/* Prevent jQuery from conflicting with projax...for now */';
 		echo 'var $j = jQuery.noConflict();';
 		echo '</script>';
+		html_javascript_link( 'common.js' );
 	}
 }
 
