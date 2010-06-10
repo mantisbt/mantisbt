@@ -23,6 +23,43 @@
  */
 
 /*
+ * Collapsible element functions
+ */
+var g_collapse_clear = 1;
+
+// global code to determine how to set visibility
+var a = navigator.userAgent.indexOf("MSIE");
+var style_display;
+
+if (a!= -1) {
+	style_display = 'block';
+} else {
+	style_display = 'table-row';
+}
+style_display = 'block';
+
+$j(document).ready( function() {
+	/* Global Tag change event added only if #tag_select exists */
+	$j('#tag_select').live('change', function() {
+		var selected_tag = $j('#tag_select option:selected').text();
+		tag_string_append( selected_tag );
+	});
+
+	$j('.collapse-open').show();
+	$j('.collapse-closed').hide();
+	$j('.collapse-link').click( function(event) {
+		event.preventDefault();
+		var id = $j(this).attr('id');
+		var t_pos = id.indexOf('_closed_link' );
+		if( t_pos == -1 ) {
+			t_pos = id.indexOf('_open_link' );
+		}
+		var t_div = id.substring(0, t_pos );
+		ToggleDiv( t_div );
+	});
+});
+
+/*
  * String manipulation
  */
 function Trim( p_string ) {
@@ -85,28 +122,25 @@ function SetCookie( p_cookie, p_value ) {
 	document.cookie = t_cookie_name + "=" + p_value + "; expires=" + t_expires.toUTCString() + ";";
 }
 
-/*
- * Collapsible element functions
- */
-var g_collapse_clear = 1;
-
 function ToggleDiv( p_div ) {
-	t_open_div = document.getElementById( p_div + "_open" );
-	t_closed_div = document.getElementById( p_div + "_closed" );
+	t_open_div = '#' + p_div + "_open";
+	t_closed_div = '#' + p_div + "_closed";
 
 	t_cookie = GetCookie( "collapse_settings" );
 	if ( 1 == g_collapse_clear ) {
 		t_cookie = "";
 		g_collapse_clear = 0;
 	}
+	var t_open_display = $j(t_open_div).css('display');
+	$j(t_open_div).toggle();
 
-	if ( t_open_div.className == "hidden" ) {
-		t_open_div.className = "";
-		t_closed_div.className = "hidden";
+	if( $j(t_closed_div).length ) {
+		$j(t_closed_div).toggle();
+	}
+
+	if ( t_open_display == "none" ) {
 		t_cookie = t_cookie + "|" + p_div + ",1";
 	} else {
-		t_closed_div.className = "";
-		t_open_div.className = "hidden";
 		t_cookie = t_cookie + "|" + p_div + ",0";
 	}
 
@@ -123,17 +157,6 @@ function checkall( p_formname, p_state) {
 		}
 	}
 }
-
-// global code to determine how to set visibility
-var a = navigator.userAgent.indexOf("MSIE");
-var style_display;
-
-if (a!= -1) {
-	style_display = 'block';
-} else {
-	style_display = 'table-row';
-}
-style_display = 'block';
 
 function setDisplay(idTag, state)
 {
@@ -153,16 +176,16 @@ function toggleDisplay(idTag)
 
 /* Append a tag name to the tag input box, with repect for tag separators, etc */
 function tag_string_append( p_string ) {
-	t_tag_separator = document.getElementById('tag_separator').value;
-	t_tag_string = document.getElementById('tag_string');
-	t_tag_select = document.getElementById('tag_select');
+	t_tag_separator = $j('#tag_separator').val();
+	t_tag_string = $j('#tag_string');
+	t_tag_select = $j('#tag_select');
 
 	if ( Trim( p_string ) == '' ) { return; }
 
-	if ( t_tag_string.value != '' ) {
-		t_tag_string.value = t_tag_string.value + t_tag_separator + p_string;
+	if ( t_tag_string.val() != '' ) {
+		t_tag_string.val( t_tag_string.val() + t_tag_separator + p_string );
 	} else {
-		t_tag_string.value = t_tag_string.value + p_string;
+		t_tag_string.val( t_tag_string.val() + p_string );
 	}
-	t_tag_select.selectedIndex=0;
+	t_tag_select.val(0);
 }
