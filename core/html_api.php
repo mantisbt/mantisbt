@@ -352,15 +352,23 @@ function html_title( $p_page_title = null ) {
  * @return null
  */
 function html_css() {
-	$t_css_url = config_get( 'css_include_file' );
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( $t_css_url ), true ), '" />', "\n";
+	html_css_link( config_get( 'css_include_file' ) );
+	html_css_link( 'jquery-ui.css' );
 
 	# Add right-to-left css if needed
 	if( lang_get( 'directionality' ) == 'rtl' ) {
-		$t_css_rtl_url = config_get( 'css_rtl_include_file' );
-		echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( $t_css_rtl_url ), true ), '" />', "\n";
+		html_css_link( config_get( 'css_rtl_include_file' ) );
 	}
 }
+
+/**
+ * Prints a css link
+ * @return null
+ */
+function html_css_link( $p_filename ) {
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( 'css/' . $p_filename ), true ), '" >' . "\n";
+}
+
 
 /**
  * (6) Print an HTML meta tag to redirect to another page
@@ -406,6 +414,7 @@ function html_head_javascript() {
 		echo '<script type="text/javascript">var loading_lang = "' . lang_get( 'loading' ) . '";</script>';
 		html_javascript_link( 'ajax.js' );
 		html_javascript_link( 'jquery.js' );
+		html_javascript_link( 'jquery-ui.js' );
 
 		global $g_enable_projax;
 
