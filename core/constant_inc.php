@@ -286,11 +286,10 @@ define( 'ERROR_NEWS_NOT_FOUND', 1000 );
 # ERROR_BUG_*
 define( 'ERROR_BUG_NOT_FOUND', 1100 );
 define( 'ERROR_BUG_DUPLICATE_SELF', 1101 );
-define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 );
-define( 'ERROR_BUG_REVISION_NOT_FOUND', 1150 );
-
-// @@@ obsolete, remove after lang files are sync'd
+# Obsoleted
+#define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 );
 define( 'ERROR_BUG_READ_ONLY_ACTION_DENIED', 1103 );
+define( 'ERROR_BUG_REVISION_NOT_FOUND', 1150 );
 
 # ERROR_EMAIL_*
 define( 'ERROR_EMAIL_INVALID', 1200 );
