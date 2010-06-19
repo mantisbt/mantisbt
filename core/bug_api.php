@@ -1623,6 +1623,14 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		} # else relationship is -1 - same type exists, do nothing
 
 		# Copy list of users monitoring the duplicate bug to the original bug
+		$t_old_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
+		$t_old_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
+		if ( user_exists( $t_old_reporter_id ) ) {
+			bug_monitor( $p_duplicate_id, $t_old_reporter_id );
+		}
+		if ( user_exists ( $t_old_handler_id ) ) {
+			bug_monitor( $p_duplicate_id, $t_old_handler_id );
+		}
 		bug_monitor_copy( $p_bug_id, $p_duplicate_id );
 
 		bug_set_field( $p_bug_id, 'duplicate_id', (int) $p_duplicate_id );
