@@ -1769,7 +1769,8 @@ function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
 
 	for( $i = 0; $i < $t_count; $i++ ) {
 		$t_bug_monitor = db_fetch_array( $result );
-		if ( !user_is_monitoring_bug( $t_bug_monitor['user_id'], $c_dest_bug_id ) ) {
+		if ( user_exists( $t_bug_monitor['user_id'] ) &&
+			!user_is_monitoring_bug( $t_bug_monitor['user_id'], $c_dest_bug_id ) ) {
 			$query = 'INSERT INTO ' . $t_bug_monitor_table . ' ( user_id, bug_id )
 				VALUES ( ' . db_param() . ', ' . db_param() . ' )';
 			db_query_bound( $query, Array( $t_bug_monitor['user_id'], $c_dest_bug_id ) );
