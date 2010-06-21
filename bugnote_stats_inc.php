@@ -61,7 +61,7 @@ if ( ON != config_get('time_tracking_enabled') ) {
 
 	$f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 ?>
-<form method="post" action="<?php echo $_SERVER['SCRIPT_NAME'] ?>">
+<form method="post" action="<?php echo form_action_self() ?>">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
 <table border=0 class="width100" cellspacing="0">
