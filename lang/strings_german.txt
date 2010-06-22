@@ -34,6 +34,7 @@
  * @author Heiko Gierer, gierer@rittershaus.de
  * @author Hermann-Josef Beckers, hjb-rheine@t-online.de
  * @author Imre
+ * @author KarlReichert
  * @author Martin Fuchs, martin-fuchs@gmx.net
  * @author Matthias Bauer, mantis-de@moeffju.de
  * @author Melancholie
@@ -515,7 +516,7 @@ $s_assigned_to = 'Bearbeitung durch';
 $s_priority = 'Priorität';
 $s_resolution = 'Lösung';
 $s_status = 'Status';
-$s_duplicate_id = 'ID doppelt';
+$s_duplicate_id = 'Duplikat von';
 $s_os = 'Betriebssystem';
 $s_projection = 'Projektion';
 $s_os_version = 'BS-Version';
