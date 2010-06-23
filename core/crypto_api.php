@@ -69,6 +69,7 @@ function crypto_init() {
 function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = true ) {
 
 	# First we attempt to use the secure PRNG provided by OpenSSL in PHP 5.3
+	# Exclude Windows as per http://bugs.php.net/bug.php?id=51636
 	if ( !is_windows_server() && function_exists( 'openssl_random_pseudo_bytes' ) ) {
 		$t_random_bytes = openssl_random_pseudo_bytes( $p_bytes, $t_strong );
 		if ( $t_random_bytes !== false ) {
@@ -169,7 +170,14 @@ function crypto_generate_uri_safe_nonce( $p_minimum_length ) {
 	$t_length_mod4 = $p_minimum_length % 4;
 	$t_adjusted_length = $p_minimum_length + 4 - ($t_length_mod4 ? $t_length_mod4 : 4);
 	$t_raw_bytes_required = ( $t_adjusted_length / 4 ) * 3;
-	$t_random_bytes = crypto_generate_strong_random_string( $t_raw_bytes_required );
+	if ( !is_windows_server() ) {
+		$t_random_bytes = crypto_generate_strong_random_string( $t_raw_bytes_required );
+	} else {
+		# It's currently not possible to generate strong random numbers
+		# with PHP on Windows so we have to resort to using PHP's
+		# built-in insecure PRNG.
+		$t_random_bytes = crypto_generate_random_string( $t_raw_bytes_required, false );
+	}
 	$t_base64_encoded = base64_encode( $t_random_bytes );
 	# Note: no need to translate trailing = padding characters because our
 	# length rounding ensures that padding is never required.
