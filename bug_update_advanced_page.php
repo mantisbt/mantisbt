@@ -166,7 +166,6 @@ echo '<table class="width100" cellspacing="1">';
 echo '<tr>';
 echo '<td class="form-title" colspan="3">';
 echo '<input type="hidden" name="bug_id" value="', $tpl_bug_id, '" />';
-echo '<input type="hidden" name="update_mode" value="1" />';
 echo lang_get( 'updating_bug_advanced_title' );
 echo '</td><td class="right" colspan="3">';
 print_bracket_link( string_get_bug_view_url( $tpl_bug_id ), lang_get( 'back_to_bug_link' ) );
