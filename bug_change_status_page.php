@@ -314,29 +314,6 @@ if ( ( $t_resolved <= $f_new_status ) ) {
 <?php }
 	} ?>
 
-<?php
-if ( ( $t_resolved <= $f_new_status ) && ( $f_new_status < $t_closed ) ) { ?>
-<!-- Close Immediately (if enabled) -->
-<?php if ( ( ON == config_get( 'allow_close_immediately' ) )
-				&& ( access_has_bug_level( access_get_status_threshold( $t_closed, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ) { ?>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'close_immediately' ) ?>
-	</th>
-	<td>
-		<input type="checkbox" name="close_now" />
-	</td>
-</tr>
-<?php } ?>
-<?php } ?>
-
-<?php
-	if ( ON == $f_reopen_flag ) {
-		# bug was re-opened
-		printf("	<input type=\"hidden\" name=\"resolution\" value=\"%s\" />\n",  config_get( 'bug_reopen_resolution' ) );
-	}
-?>
-
 <!-- Bugnote -->
 <tr <?php echo helper_alternate_class() ?>>
 	<th class="category">

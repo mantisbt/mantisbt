@@ -2647,13 +2647,6 @@ $g_login_method = MD5;
 $g_limit_reporters = OFF;
 
 /**
- * close immediately
- * Allow developers and above to close bugs immediately when resolving bugs
- * @global int $g_allow_close_immediately
- */
-$g_allow_close_immediately = OFF;
-
-/**
  * reporter can close. Allow reporters to close the bugs they reported, after
  * they are marked resolved.
  * @global int $g_allow_reporter_close

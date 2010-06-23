@@ -698,7 +698,6 @@ $s_workflow_change_access_label = 'Utilisateurs habilités à modifier le flux d
 $s_access_change_access_label = 'Utilisateurs habilités à changer les niveaux d\'accès :';
 $s_default_not_in_flow = 'La phase par défaut de %1$s n\'est pas définie pour %2$s dans les phases suivantes. Elle sera ignorée.';
 $s_assign_issue = 'Assigner un bogue';
-$s_allow_close_immediate = 'Permettre la fermeture d\'un bogue à sa résolution';
 $s_allow_reporter_close = 'Permettre aux demandeurs de fermer un bogue';
 $s_allow_reporter_reopen = 'Permettre aux demandeurs de rouvrir un bogue';
 $s_set_status_assigned = 'Changer l\'état à l\'assignement';

@@ -682,7 +682,6 @@ $s_workflow_change_access_label = 'Quem pode alterar o fluxo de trabalho:';
 $s_access_change_access_label = 'Quem pode alterar os níveis de acesso:';
 $s_default_not_in_flow = 'O status padrão de %1$s não está selecionado nos próximos status de %2$s. Este será ignorado';
 $s_assign_issue = 'Atribuir um caso';
-$s_allow_close_immediate = 'Permitir que o caso seja fechado ao ser Resolvido';
 $s_allow_reporter_close = 'Permitir ao relator fechar o caso';
 $s_allow_reporter_reopen = 'Permitir ao relator reabrir o caso';
 $s_set_status_assigned = 'Ajustar status na atribuição';

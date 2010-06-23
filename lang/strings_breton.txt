@@ -676,7 +676,6 @@ $s_workflow_change_access_label = 'Piv a c\'hall cheñch hent al labour :';
 $s_access_change_access_label = 'Piv a c\'hall cheñch al liveoù moned :';
 $s_default_not_in_flow = 'Statud dre ziouer %1$s n\'eo ket diuzet er statudoù da zont evit %2$s. Dianavezet e vo.';
 $s_assign_issue = 'Deverkañ un draen';
-$s_allow_close_immediate = 'Lezel an draen da vezañ serret pa vez diskoulmet';
 $s_allow_reporter_close = 'Aotren an titourer da serriñ an draen';
 $s_allow_reporter_reopen = 'Aotren an titourer da addigeriñ an draen';
 $s_set_status_assigned = 'Cheñch ar statud pa vez deverket';

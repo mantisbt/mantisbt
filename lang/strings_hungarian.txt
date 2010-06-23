@@ -654,7 +654,6 @@ $s_desc_bug_resolved_status_threshold = 'A megoldottnak tekinthető ügy státus
 $s_desc_bug_closed_status_threshold = 'Állapot, ahol egy ügy lezártnak tekinthető';
 $s_default_not_in_flow = 'A(z) %1$s alapértelmezett státusza nem lett kiválasztva a(z) %2$s utáni státuszok közül; figyelmen kívül hagyjuk';
 $s_assign_issue = 'Egy ügy hozzárendelése';
-$s_allow_close_immediate = 'Ügy lezárásának engedélyezése annak megoldásakor';
 $s_allow_reporter_close = 'A bejelentő lezárhatja-e az ügyet';
 $s_allow_reporter_reopen = 'A bejelentő újranyithatja-e az ügyet';
 $s_set_status_assigned = 'A kezelő hozzárendelésekor beállítandó státusz';

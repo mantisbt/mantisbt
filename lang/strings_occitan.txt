@@ -645,7 +645,6 @@ $s_desc_bug_resolved_status_threshold = 'Fasa a laquina un bòg es considerat co
 $s_desc_bug_closed_status_threshold = 'Estatuts pels quals un bòg es considerat coma tampat';
 $s_default_not_in_flow = 'La fasa per defaut de %1$s es pas definida per %2$s dins las fasas seguentas. Serà ignorada.';
 $s_assign_issue = 'Assignar un bòg';
-$s_allow_close_immediate = 'Permetre la tampadura d\'un bòg a sa resolucion';
 $s_allow_reporter_close = 'Permetre als demandaires de tampar un bòg';
 $s_allow_reporter_reopen = 'Permetre als demandaires de tornar dobrir un bòg';
 $s_set_status_assigned = 'Cambiar l\'estat de l\'assignament';

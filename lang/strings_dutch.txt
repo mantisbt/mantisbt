@@ -687,7 +687,6 @@ $s_workflow_change_access_label = 'Wie kan de workflow wijzigen:';
 $s_access_change_access_label = 'Wie kan de toegangsniveaus wijzigen:';
 $s_default_not_in_flow = 'De standaardstatus %1$s is niet geselecteerd in de volgende statussen voor %2$s. Die wordt genegeerd.';
 $s_assign_issue = 'Melding toewijzen';
-$s_allow_close_immediate = 'Afsluiten van een melding bij afgehandeld toestaan';
 $s_allow_reporter_close = 'Aanmelder toestaan een melding te sluiten';
 $s_allow_reporter_reopen = 'Aanmelder toestaan een melding te heropenen';
 $s_set_status_assigned = 'Status wijzigen bij toewijzen van behandelaar';

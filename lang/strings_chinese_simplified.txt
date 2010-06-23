@@ -569,7 +569,6 @@ $s_desc_bug_reopen_status = '重新打开的问题的状态';
 $s_desc_bug_resolved_status_threshold = '被设置为已解决的问题的状态';
 $s_default_not_in_flow = '%1$s 的默认状态没有被选定为 %2$s 的下一个状态，它将被忽略';
 $s_assign_issue = '分派问题';
-$s_allow_close_immediate = '允许关闭解决状态问题';
 $s_allow_reporter_close = '允许报告人关闭问题';
 $s_allow_reporter_reopen = '允许报告人重新打开问题';
 $s_set_status_assigned = '管理人分配时设置的状态';

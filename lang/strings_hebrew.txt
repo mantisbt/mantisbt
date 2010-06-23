@@ -628,7 +628,6 @@ $s_desc_bug_resolved_status_threshold = 'הסטטוס שבו הבאג נחשב �
 $s_desc_bug_closed_status_threshold = 'הסטטוס שבו הבאג נחשב סגור';
 $s_default_not_in_flow = 'הסטטוס ברירת המחדל עבור %1$s לא נבחר בסטטוסים הבאים עבור %2$s. המערכת תתעלם ממנו.';
 $s_assign_issue = 'לשייך באג';
-$s_allow_close_immediate = 'לאפשר לבאג להיות סגור כאשר הוא מסומן כפתור';
 $s_allow_reporter_close = 'לאפשר למדווח לסגור את הבאג';
 $s_allow_reporter_reopen = 'לאפשר למדווח לפתוח מחדש את הבאג';
 $s_set_status_assigned = 'הגדר סטטוס לשיוך מטפל';

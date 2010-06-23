@@ -295,7 +295,6 @@ get_section_begin_mcwt( lang_get( 'issues' ) );
 get_capability_row( lang_get( 'report_issue' ), 'report_bug_threshold' );
 get_capability_enum( lang_get( 'submit_status' ), 'bug_submit_status', 'status' );
 get_capability_row( lang_get( 'update_issue' ), 'update_bug_threshold' );
-get_capability_boolean( lang_get( 'allow_close_immediate' ), 'allow_close_immediately' );
 get_capability_boolean( lang_get( 'allow_reporter_close' ), 'allow_reporter_close' );
 get_capability_row( lang_get( 'monitor_issue' ), 'monitor_bug_threshold' );
 get_capability_row( lang_get( 'handle_issue' ), 'handle_bug_threshold' );

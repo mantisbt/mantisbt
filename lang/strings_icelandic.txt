@@ -513,7 +513,6 @@ $s_desc_bug_reopen_status = 'Staða sem enduropnaðar beiðnir fá';
 $s_desc_bug_resolved_status_threshold = 'Staða þar sem beiðnin er álitin leyst';
 $s_default_not_in_flow = 'Sjálfgefin staða %1$s er ekki valinn fyrir næstu stöðu %2$s. Því verður hafnað';
 $s_assign_issue = 'Úthluta verkbeiðni';
-$s_allow_close_immediate = 'Heimila að Leystri beiðni sé lokað';
 $s_allow_reporter_close = 'Heimila tilkynnanda að loka beiðni';
 $s_allow_reporter_reopen = 'Heimila tilkynnanda að opna aftur beiðni';
 $s_set_status_assigned = 'Setja úthlutunarstöðu á höndlara atriðis';

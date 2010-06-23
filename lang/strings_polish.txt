@@ -651,7 +651,6 @@ $s_desc_bug_resolved_status_threshold = 'Status który oznacza, że zgłoszenie 
 $s_desc_bug_closed_status_threshold = 'Status gdy problem jest uznawany za zamknięty';
 $s_default_not_in_flow = 'Domyślna wartość „%1$s” nie została wybrana wśród następnych statusów dla „%2$s”. To ustawienie zostanie zignorowanie.';
 $s_assign_issue = 'Przypisz zgłoszenie';
-$s_allow_close_immediate = 'Zezwól na zamknięcie zgłoszenia przy rozwiązywaniu';
 $s_allow_reporter_close = 'Zezwól zgłaszającemu na zamknięcie zgłoszenia';
 $s_allow_reporter_reopen = 'Zezwól zgłaszającemu na ponowne otwarcie zgłoszenia';
 $s_set_status_assigned = 'Ustaw status przy przypisaniu obsługującego zgłoszenie';

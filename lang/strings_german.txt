@@ -698,7 +698,6 @@ $s_workflow_change_access_label = 'Wer darf den Arbeitsablauf ändern:';
 $s_access_change_access_label = 'Wer darf Zugriffsberechtigungen ändern:';
 $s_default_not_in_flow = 'Der Vorgabestatus von %1$s ist nicht in den nächsten zulässigen Statuswerten von %2$s enthalten. Er wird ignoriert.';
 $s_assign_issue = 'Einen Eintrag zuweisen';
-$s_allow_close_immediate = 'Erlaubt erledigte Einträge zu schließen';
 $s_allow_reporter_close = 'Erlaubt Reportern Einträge zu schließen';
 $s_allow_reporter_reopen = 'Erlaubt Reportern Einträge wiederzueröffnen';
 $s_set_status_assigned = 'Setze Status bei Zuweisung eines Bearbeiters';

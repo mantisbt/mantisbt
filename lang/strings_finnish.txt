@@ -667,7 +667,6 @@ $s_desc_bug_resolved_status_threshold = 'Tapahtuman tila, jolla tapahtumaa pidet
 $s_desc_bug_closed_status_threshold = 'Tila, joka kertoo tapahtuman olevan suljettu';
 $s_default_not_in_flow = '%1$s:n oletustilaa ei ole valittu %2$s:n seuraavissa tiloissa ja se ohitetaan.';
 $s_assign_issue = 'Osoita tapahtuma';
-$s_allow_close_immediate = 'Salli tapahtuman sulkeminen ratkaisun jälkeen';
 $s_allow_reporter_close = 'Salli raportoijien sulkea tapahtuma';
 $s_allow_reporter_reopen = 'Salli raportoijien uudelleenavata tapahtuma';
 $s_set_status_assigned = 'Salli tapahtuman tilan muokkaus, kun tapahtuma osoitetaan';

@@ -565,7 +565,6 @@ $s_desc_bug_reopen_status = '狀態已被重設為未結案的問題';
 $s_desc_bug_resolved_status_threshold = '狀態已被設為已解決問題';
 $s_default_not_in_flow = '%1$s 的預設狀態沒被選擇 %2$s 的下個狀態. 這個會被忽略的';
 $s_assign_issue = '分派問題';
-$s_allow_close_immediate = '允許問題在解決後就結案';
 $s_allow_reporter_close = '允許回報人能結案';
 $s_allow_reporter_reopen = '允許回報人能重設未結案';
 $s_set_status_assigned = '設定處理者分派的狀態';

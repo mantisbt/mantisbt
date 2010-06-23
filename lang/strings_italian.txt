@@ -605,7 +605,6 @@ $s_desc_bug_reopen_status = 'Stato assegnato ad anomalia riaperta';
 $s_desc_bug_resolved_status_threshold = 'Stato in cui una anomalia si considera risolta';
 $s_default_not_in_flow = 'Lo stato di default di %1$s non è previsto nello stato seguente ad %2$s.  Sarà ignorato.';
 $s_assign_issue = 'Assegna anomalia';
-$s_allow_close_immediate = 'Permette ad una anomalia di essere chiusa non appena risolta';
 $s_allow_reporter_close = 'Permette all\'utente che ha segnalato anomalia di chiuderla';
 $s_allow_reporter_reopen = 'Permette all\'utente che ha segnalato anomalia di riaprirla';
 $s_set_status_assigned = 'Stato assegnato quando anomalia viene assegnata';

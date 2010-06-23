@@ -680,7 +680,6 @@ $s_workflow_change_access_label = 'Wär derf dr Arbestablauf ändere:';
 $s_access_change_access_label = 'Wär derf d Zuegangsebene ändere:';
 $s_default_not_in_flow = 'Dr Vorgabstatus vu %1$s isch nit in dr negschte zuelässige Statuswärt vu %2$s din. Är wird ignoriert.';
 $s_assign_issue = 'E Probläm zuewyse';
-$s_allow_close_immediate = 'Erlaube, ass erledigti Probläm zuegmacht wäre';
 $s_allow_reporter_close = 'Erlaube, ass Reporter chenne Probläm zuemache';
 $s_allow_reporter_reopen = 'Erlaube, ass Reporter chenne Probläm wider ufmache';
 $s_set_status_assigned = 'Setz Status bi dr Zuewysig vun eme Bearbeiter';

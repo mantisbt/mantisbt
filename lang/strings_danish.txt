@@ -496,7 +496,6 @@ $s_desc_bug_submit_status = 'Status som tildeles en ny fejl';
 $s_desc_bug_reopen_status = 'Status som genåbnede fejl får';
 $s_desc_bug_resolved_status_threshold = 'Status hvor en fejl betragtes som løse';
 $s_assign_issue = 'Tildel en fejl';
-$s_allow_close_immediate = 'Tillad at fejlen markeres som lukket eller løst';
 $s_allow_reporter_close = 'Tillad at raportøren lukker fejlen';
 $s_allow_reporter_reopen = 'Tillad at raportøren genåbner fejlen';
 $s_set_status_assigned = 'Sæt status på tildeling af behandler';

@@ -136,7 +136,6 @@ function set_capability_enum( $p_threshold, $p_all_projects_only=false ) {
 set_capability_row( 'report_bug_threshold' );
 set_capability_enum( 'bug_submit_status' );
 set_capability_row( 'update_bug_threshold' );
-set_capability_boolean( 'allow_close_immediately' );
 set_capability_boolean( 'allow_reporter_close' );
 set_capability_row( 'monitor_bug_threshold' );
 set_capability_row( 'handle_bug_threshold' );

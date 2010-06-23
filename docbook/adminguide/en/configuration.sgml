@@ -2015,14 +2015,6 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_allow_close_immediately</term>
-                <listitem>
-                    <para>If set, bugs are allowed to be resolved and closed in one
-                        action. The default is OFF.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
                 <term>$g_allow_reporter_close</term>
                 <listitem>
                     <para>If set, the bug reporter is allowed to close their own bugs,
@@ -2180,14 +2172,6 @@
                 <term>$g_allow_reporter_close</term>
                 <listitem>
                     <para>Allow reporters to close the bugs they reported.</para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_allow_close_immediately</term>
-                <listitem>
-                    <para>Allow developers and above to close bugs immediately when
-                        resolving bugs.
-                    </para>
                 </listitem>
             </varlistentry>
             <varlistentry>

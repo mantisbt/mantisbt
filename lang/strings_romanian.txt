@@ -568,7 +568,6 @@ $s_desc_bug_reopen_status = 'Starea atribuită unei probleme redeschise';
 $s_desc_bug_resolved_status_threshold = 'Starea în care o problemă este considerată rezolvată';
 $s_default_not_in_flow = 'Starea implicită a %1$s nu este selectată în următoarele stări pentru %2$s. Va fi ignorată.';
 $s_assign_issue = 'Atribuie o problemă';
-$s_allow_close_immediate = 'Permite închiderea problemei odată cu rezolvarea';
 $s_allow_reporter_close = 'Permite raportorului să închidă problema';
 $s_allow_reporter_reopen = 'Permite raportorului să redeschidă problema';
 $s_set_status_assigned = 'Modifică starea când se procesează o atribuire';

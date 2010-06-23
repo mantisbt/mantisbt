@@ -683,7 +683,6 @@ $s_workflow_change_access_label = 'ワークフローの変更が可能な利用
 $s_access_change_access_label = 'アクセスレベルの変更が可能な利用者:';
 $s_default_not_in_flow = '%1$s のデフォルトステータスは、%2$s の次のステータスでは選択されていませんので、無視します。';
 $s_assign_issue = 'チケットの割当て';
-$s_allow_close_immediate = '解決済時に完了への変更を許可する';
 $s_allow_reporter_close = '報告者に完了への変更を許可する';
 $s_allow_reporter_reopen = '報告者に差し戻しを許可する';
 $s_set_status_assigned = '担当者割り当て時にステータスを設定する';

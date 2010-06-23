@@ -678,7 +678,6 @@ $s_workflow_change_access_label = 'Kes saab muuta töövoogu:';
 $s_access_change_access_label = 'Kes saab muuta pöördumistasemeid:';
 $s_default_not_in_flow = 'Vaikimisi olek %1$s pole valitud järgmises olekus kandele %2$s. Seda ignoreeritakse';
 $s_assign_issue = 'Määra kanne';
-$s_allow_close_immediate = 'Luba kanne sulgeda või lahendada';
 $s_allow_reporter_close = 'Luba teavitajal sulgeda kanne';
 $s_allow_reporter_reopen = 'Luba teavitajal taasavada kanne';
 $s_set_status_assigned = 'Olek, mis käsitleja määramisel antakse';

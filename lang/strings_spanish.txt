@@ -686,7 +686,6 @@ $s_workflow_change_access_label = 'Quién puede cambiar el flujo de trabajo:';
 $s_access_change_access_label = 'Quién puede cambiar niveles de acceso:';
 $s_default_not_in_flow = 'El Estado por defecto de %1$s no está seleccionado en los siguientes Estados para %2$s. Será ignorado';
 $s_assign_issue = 'Asignar una Incidencia';
-$s_allow_close_immediate = 'Permitir que la incidencia sea cerrada al resolverla';
 $s_allow_reporter_close = 'Permitir al Informador Cerrar la Incidencia';
 $s_allow_reporter_reopen = 'Permitir al Informador Reabrir la Incidencia';
 $s_set_status_assigned = 'Definir Estado al realizar la asignación';

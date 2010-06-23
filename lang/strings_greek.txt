@@ -401,7 +401,6 @@ $s_desc_bug_submit_status = 'Κατάσταση στην οποία ένα νέ�
 $s_desc_bug_reopen_status = 'Κατάσταση στην οποία επανεξεταζόμενα θέματα ορίζονται';
 $s_desc_bug_resolved_status_threshold = 'Κατάσταση στην οποία ένα θέμα θεωρείται επιλυμένο';
 $s_assign_issue = 'Ορίσμος θέματος';
-$s_allow_close_immediate = 'Επιτρέπεται το θέμα να κλείνει στην Επίλυση';
 $s_allow_reporter_close = 'Επιτρέπεται ο Reporter να κλείνει το Θέμα';
 $s_allow_reporter_reopen = 'Επιτρέπεται ο Reporter να επανεξετάζει το Θέμα';
 $s_set_status_assigned = 'Όρισε κατάσταση στον καθορισμό Υπευθύνου';

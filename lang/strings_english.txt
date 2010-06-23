@@ -852,7 +852,6 @@ $s_default_not_in_flow = 'The default status of %1$s is not selected in the next
 
 # manage_config_work_threshold_page
 $s_assign_issue = 'Assign an issue';
-$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
 $s_allow_reporter_close = 'Allow Reporter to close Issue';
 $s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
 $s_set_status_assigned = 'Set status on assignment of Handler';

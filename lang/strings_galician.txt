@@ -680,7 +680,6 @@ $s_workflow_change_access_label = 'Quen pode cambiar o fluxo de traballo:';
 $s_access_change_access_label = 'Quen pode cambiar os niveis de acceso:';
 $s_default_not_in_flow = 'O estado por defecto de %1$s non está seleccionado nos próximos estados de %2$s. Este será ignorado.';
 $s_assign_issue = 'Asignar un problema';
-$s_allow_close_immediate = 'Permitir o peche dun problema ao ser resolto';
 $s_allow_reporter_close = 'Permitir ao informador pechar o problema';
 $s_allow_reporter_reopen = 'Permitir ao informador reabrir o problema';
 $s_set_status_assigned = 'Establecer o estado na asignación do manipulador';

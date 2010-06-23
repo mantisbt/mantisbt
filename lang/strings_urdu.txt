@@ -557,7 +557,6 @@ $s_desc_bug_reopen_status = 'مقام جہاں دوبارہ کھلنے والہ 
 $s_desc_bug_resolved_status_threshold = ' مقام جہاں پر   ایشوذ حل نظر آے';
 $s_default_not_in_flow = '  کا ڈیفالٹ مقام منتخب نہی کیا گیا اگلے مقام ٪  ایس کیلیے اس کو نہی دیکھا جاے گا    %s';
 $s_assign_issue = 'ایک ایشوذ سپرد کرو';
-$s_allow_close_immediate = ' ایشوذ کو اجاذت دو کے وہ حل ھونے پر بند ھو جاے';
 $s_allow_reporter_close = 'رپوٹ کرنے والے کو اجاذت دو کہ وہ ایشوذ کو بند کر سکے';
 $s_allow_reporter_reopen = 'رپوٹ کرنے والے کو اجاذت دو کہ وہ ایشوذ کو دوبارہ کھول سکے';
 $s_set_status_assigned = 'مقام کو سہٹ کرو ھہنڈلر کی سپردگی پر';

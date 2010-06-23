@@ -666,7 +666,6 @@ $s_desc_bug_resolved_status_threshold = 'الحاله حيث يتم اعتبار
 $s_desc_bug_closed_status_threshold = 'الحاله حيث قضيه ما تعتبر مغلقة';
 $s_default_not_in_flow = 'الحاله الافتراضيه ل%1$s لم يتم اختيارها فى الحالات القادمه ل%2$s. سيتم تجاهلها.';
 $s_assign_issue = 'إيكال قضية';
-$s_allow_close_immediate = 'يسمح للقضايا بأن يتم إغلاقها عند الحل';
 $s_allow_reporter_close = 'يسمح للمبلغ بإغلاق القضية';
 $s_allow_reporter_reopen = 'يسمح للمبلغ بإعاده فتح القضية';
 $s_set_status_assigned = 'ضبط الحاله عند تكليف المعالج';

@@ -660,11 +660,6 @@
                                 <entry>threshold to update an issue</entry>
                             </row>
                             <row>
-                                <entry>Allow Issue to be closed on Resolve</entry>
-                                <entry>$g_allow_close_immediately</entry>
-                                <entry>allow close immediately on resolve</entry>
-                            </row>
-                            <row>
                                 <entry>Allow Reporter to close an issue</entry>
                                 <entry>$g_allow_reporter_close</entry>
                                 <entry>allow reporter to close issues they reported</entry>

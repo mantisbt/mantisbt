@@ -641,7 +641,6 @@ $s_desc_bug_resolved_status_threshold = 'Status när ett ärende betraktas som l
 $s_desc_bug_closed_status_threshold = 'Status när ett ärende ska anses stängt';
 $s_default_not_in_flow = 'Angivet förval för status för %1$s är inte valt bland nästkommande statusvärden för %2$s. Det kommer att ignoreras';
 $s_assign_issue = 'Tilldela ett ärende';
-$s_allow_close_immediate = 'Tillåt ärendet att stängas när det löses';
 $s_allow_reporter_close = 'Tillåt rapporterare att stänga ärendet';
 $s_allow_reporter_reopen = 'Tillåt rapporterare att återöppna ärendet';
 $s_set_status_assigned = 'Sätt status vid tilldelning';

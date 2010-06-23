@@ -650,7 +650,6 @@ $s_desc_bug_resolved_status_threshold = 'Stav ve kterém je problém považovan�
 $s_desc_bug_closed_status_threshold = 'Stav ve kterém je problém považovaný za uzavřený';
 $s_default_not_in_flow = 'Výchozí stav %1$s není přítomen v dalších stavech pro %2$s a bude ignorován.';
 $s_assign_issue = 'Přiřadit problém';
-$s_allow_close_immediate = 'Povol uzavření problému při jeho vyřešení';
 $s_allow_reporter_close = 'Dovol reportérovi uzavřít problém.';
 $s_allow_reporter_reopen = 'Dovol reportérovi znovuotevřít problém.';
 $s_set_status_assigned = 'Nastav stav při přiřazení operátorovi.';

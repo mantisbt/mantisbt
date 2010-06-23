@@ -686,7 +686,6 @@ $s_workflow_change_access_label = 'Som kan endre arbeidsflyt:';
 $s_access_change_access_label = 'Som kan endre tilgangsnivå:';
 $s_default_not_in_flow = 'Standardstatus til %1$s er ikke valgt i de neste statusene for %2$s. Status vil bli ignorert';
 $s_assign_issue = 'Delegere en sak';
-$s_allow_close_immediate = 'Tillate å lukke en sak ved \'Løse sak\'';
 $s_allow_reporter_close = 'Tillate rapporter å lukke sak';
 $s_allow_reporter_reopen = 'Tillate rapportør å gjenåpne sak';
 $s_set_status_assigned = 'Sette status ved tildeling av behandler';

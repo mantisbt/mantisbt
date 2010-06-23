@@ -631,7 +631,6 @@ $s_desc_bug_resolved_status_threshold = 'Kalagayan kung saan itinuturing na nalu
 $s_desc_bug_closed_status_threshold = 'Kalagayan kung saan ang isang labas ay itinuturing na nakasara';
 $s_default_not_in_flow = 'Ang likas na nakatakdang kalagayan ng %1$s ay hindi pinili sa loob ng susunod na mga kalagayan para sa %2$s. Hindi ito papansinin.';
 $s_assign_issue = 'Magtalaga ng isang labas';
-$s_allow_close_immediate = 'Pahintulutang maisara ang labas kapag Nalutas na';
 $s_allow_reporter_close = 'Pahintulutan ang Tagapag-ulat na maisara ang labas';
 $s_allow_reporter_reopen = 'Pahintulutan ang Tagapag-ulat na muling buksan ang Labas';
 $s_set_status_assigned = 'Itakda ang kalagayan kapag nakapagtalaga ng Tagahawak';

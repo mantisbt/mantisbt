@@ -678,7 +678,6 @@ $s_workflow_change_access_label = 'Qui pot canviar els fluxes de treball:';
 $s_access_change_access_label = 'Qui pot canviar els nivells d\'accés:';
 $s_default_not_in_flow = 'L\'estat per defecte %1$s no està seleccionat en els següents estats per %2$s. Serà ignorat';
 $s_assign_issue = 'Assigna una incidència';
-$s_allow_close_immediate = 'Permetre que una incidència sigui tancada al resoldre\'s';
 $s_allow_reporter_close = 'Permetre al Informador tancar la incidència';
 $s_allow_reporter_reopen = 'Permetre al Informador reobrir una incidència';
 $s_set_status_assigned = 'Definir l\'Estat al realitzar l\'assignació';

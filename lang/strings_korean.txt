@@ -514,7 +514,6 @@ $s_desc_bug_submit_status = '새로운 이슈가 설정되어 있는 상태';
 $s_desc_bug_reopen_status = '재오픈된 이슈가 설정되어 있는 상태';
 $s_desc_bug_resolved_status_threshold = '이슈가 해결된 것으로 간주되는 상태';
 $s_assign_issue = '이슈 할당';
-$s_allow_close_immediate = '[해결]상태의 이슈를 [폐쇄]할 수 있도록 합';
 $s_allow_reporter_close = '[보고자]에게 이슈를 [폐쇄]할 수 있도록 함';
 $s_allow_reporter_reopen = '[보고자]에게 이슈를 [재오픈]할 수 있도록 함';
 $s_set_status_assigned = '핸들러 할당에 대한 상태를 설정 함';
