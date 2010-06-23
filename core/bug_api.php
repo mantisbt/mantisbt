@@ -108,7 +108,7 @@ class BugData {
 
 	# omitted:
 	# var $bug_text_id
-	protected $profile_id;
+	protected $profile_id = 0;
 
 	# extended info
 	protected $description = '';
@@ -310,7 +310,14 @@ class BugData {
 
 		# check due_date format
 		if( is_blank( $this->due_date ) ) {
-			$this_due_date = date_get_null();
+			$this->due_date = date_get_null();
+		}
+		# check date submitted and last modified
+		if( is_blank( $this->date_submitted ) ) {
+			$this->date_submitted = db_now();
+		}
+		if( is_blank( $this->last_updated ) ) {
+			$this->last_updated = db_now();
 		}
 
 		$t_bug_table = db_get_table( 'bug' );
@@ -374,7 +381,8 @@ class BugData {
 					      " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ",
 					      " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 
-		db_query_bound( $query, Array( $this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, db_now(), db_now(), $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date ) );
+		db_query_bound( $query, Array( $this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, $this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date ) );
+
 
 		$this->id = db_insert_id( $t_bug_table );
 

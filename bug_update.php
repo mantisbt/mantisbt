@@ -311,6 +311,7 @@ if ( $t_bug_note->note ||
 if ( $t_bug_note->note &&
      config_get( 'reassign_on_feedback' ) &&
      $t_existing_bug->status === config_get( 'bug_feedback_status' ) &&
+     $t_updated_bug->handler_id !== auth_get_current_user_id() &&
      $t_updated_bug->reporter_id === auth_get_current_user_id() ) {
 	if ( $t_updated_bug->handler_id !== NO_USER ) {
 		$t_updated_bug->status = config_get( 'bug_assigned_status' );

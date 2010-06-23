@@ -146,6 +146,93 @@ foreach( $t_result as $t_row ) {
 				$writer->writeElement( $t_element, $t_value );
 		}
 	}
+
+	# fetch and export custom fields
+	$t_custom_fields = custom_field_get_all_linked_fields( $t_row->id );
+	if ( is_array( $t_custom_fields ) && count( $t_custom_fields ) > 0 ) {
+		$writer->startElement( 'custom_fields' );
+		foreach ( $t_custom_fields as $custom_field_name => $t_custom_field ) {
+			$writer->startElement( 'custom_field' );
+			# id
+			$writer->writeElement( 'id', custom_field_get_id_from_name( $custom_field_name ) );
+			# title
+			$writer->writeElement( 'name', $custom_field_name );
+			# filename
+			$writer->writeElement( 'type', $t_custom_field['type'] );
+			# filesize
+			$writer->writeElement( 'value', $t_custom_field['value'] );
+			# file_type
+			$writer->writeElement( 'access_level_r', $t_custom_field['access_level_r'] );
+
+			$writer->endElement(); # custom_field
+		}
+		$writer->endElement(); # custom_fields
+	}
+
+	# fetch and export bugnotes
+	$t_bugnotes = bugnote_get_all_bugnotes( $t_row->id );
+	if ( is_array( $t_bugnotes ) && count( $t_bugnotes ) > 0 ) {
+		$writer->startElement( 'bugnotes' );
+		foreach ( $t_bugnotes as $t_bugnote ) {
+			$writer->startElement( 'bugnote' );
+			# id
+			$writer->writeElement( 'id', $t_bugnote->id );
+			# reporter
+			$writer->startElement( 'reporter' );
+			$writer->writeAttribute( 'id', $t_bugnote->reporter_id );
+			$writer->text( user_get_name( $t_bugnote->reporter_id ) );
+			$writer->endElement( );
+			# bug note
+			$writer->writeElement( 'note', $t_bugnote->note );
+			# view state
+			$writer->startElement( 'view_state' );
+			$writer->writeAttribute( 'id', $t_bugnote->view_state );
+			$writer->text( get_enum_element( 'view_state', $t_bugnote->view_state ) );
+			$writer->endElement( );
+			# date submitted
+			$writer->writeElement( 'date_submitted', $t_bugnote->date_submitted );
+			# last modified
+			$writer->writeElement( 'last_modified', $t_bugnote->last_modified );
+			# note type
+			$writer->writeElement( 'note_type', $t_bugnote->note_type );
+			# note attr
+			$writer->writeElement( 'note_attr', $t_bugnote->note_attr );
+			# time tracking
+			$writer->writeElement( 'time_tracking', $t_bugnote->time_tracking );
+
+			$writer->endElement(); # bugnote
+		}
+		$writer->endElement(); # bugnotes
+	}
+
+	# fetch and export attachments
+	$t_attachments = bug_get_attachments( $t_row->id );
+	if ( is_array( $t_attachments ) && count( $t_attachments ) > 0 ) {
+		$writer->startElement( 'attachments' );
+		foreach ( $t_attachments as $t_attachment ) {
+			$writer->startElement( 'attachment' );
+			# id
+			$writer->writeElement( 'id', $t_attachment['id'] );
+			# title
+			$writer->writeElement( 'title', $t_attachment['title'] );
+			# filename
+			$writer->writeElement( 'filename', $t_attachment['filename'] );
+			# filesize
+			$writer->writeElement( 'filesize', $t_attachment['filesize'] );
+			# file_type
+			$writer->writeElement( 'file_type', $t_attachment['file_type'] );
+			# last added
+			$writer->writeElement( 'date_added',  $t_attachment['date_added'] );
+			# content
+			$content = file_get_content( $t_attachment['id'] );
+
+			$writer->writeElement( 'content',  base64_encode( $content['content'] ) );
+
+			$writer->endElement(); # attachment
+		}
+		$writer->endElement(); # bugnotes
+	}
+
 	$writer->endElement(); # issue
 
 	// Save memory by clearing cache

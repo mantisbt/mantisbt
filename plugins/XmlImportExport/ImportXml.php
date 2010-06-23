@@ -102,23 +102,42 @@ class ImportXML {
 
 		echo " Done\n";
 
+		// replace references in bug description and additional information
 		$importedIssues = $this->itemsMap_->getall( 'issue' );
 		printf( "Processing cross-references for %s issues...", count( $importedIssues ) );
 		foreach( $importedIssues as $oldId => $newId ) {
 			$bugData = bug_get( $newId, true );
 
 			$bugLinkRegexp = '/(^|[^\w])(' . preg_quote( $this->source_->issuelink, '/' ) . ')(\d+)\b/e';
-			$replacement = '"\\1" . $this->getReplacementString( "\\2", "\\3" )';
-
-			$bugData->description = preg_replace( $bugLinkRegexp, $replacement, $bugData->description );
-			bug_update( $newId, $bugData, true, true );
+			// replace links in description
+			preg_match_all( $bugLinkRegexp, $bugData->description, $matches );
+			if ( is_array( $matches[3] && count( $matches[3] ) > 0 ) ) {
+				$content_replaced = true;
+				foreach ( $matches[3] as $old_id ) {
+					$bugData->description = str_replace( $this->source_->issuelink . $old_id, $this->getReplacementString( $this->source_->issuelink, $old_id ), $bugData->description);
+				}
+			}
+			// replace links in additional information
+			preg_match_all( $bugLinkRegexp, $bugData->additional_information, $matches );
+			if ( is_array( $matches[3] && count( $matches[3] ) > 0 ) ) {
+				$content_replaced = true;
+				foreach ( $matches[3] as $old_id ) {
+					$bugData->additional_information = str_replace( $this->source_->issuelink . $old_id, $this->getReplacementString( $this->source_->issuelink, $old_id ), $bugData->additional_information);
+				}
+			}
+			if ( $content_replaced ) {
+				// only update bug if necessary (otherwise last update date would be unnecessarily overwritten)
+				$bugData->update( true );
+			}
 		}
+
+		// @todo: replace references within bugnotes
 		echo " Done\n";
 	}
 
 	/**
 	 * Compute and return the new link
- *
+	 *
 	 */
 	private function getReplacementString( $oldLinkTag, $oldId ) {
 		$linkTag = config_get( 'bug_link_tag' );
