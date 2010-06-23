@@ -333,10 +333,9 @@ if ( $t_existing_bug->handler_id === NO_USER &&
 helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_updated_bug, $t_bug_note->note ) );
 
 # Allow plugins to validate/modify the update prior to it being committed.
-$t_event_updated_bug = event_signal( 'EVENT_UPDATE_BUG', $t_updated_bug, $f_bug_id );
-if ( !is_null( $t_event_updated_bug ) ) {
-	$t_updated_bug = $t_event_updated_bug;
-}
+$t_event_updated_bug = event_signal( 'EVENT_UPDATE_BUG_DATA', array( $t_existing_bug, $t_updated_bug ) );
+$t_existing_bug = $t_event_updated_bug[0];
+$t_updated_bug = $t_event_updated_bug[1];
 
 # Commit the bug updates to the database.
 $t_text_field_update_required = ( $t_existing_bug->description !== $t_updated_bug->description ) ||
@@ -367,6 +366,8 @@ if ( $t_updated_bug->duplicate_id !== 0 ) {
 	}
 	bug_monitor_copy( $f_bug_id, $t_updated_bug->duplicate_id );
 }
+
+event_signal( 'EVENT_UPDATE_BUG', array( $t_existing_bug, $t_updated_bug ) );
 
 # Allow a custom function to respond to the modifications made to the bug. Note
 # that custom functions are being deprecated in MantisBT. You should migrate to

@@ -174,25 +174,43 @@
 			</blockquote>
 		</blockquote>
 
-		<blockquote id="dev.eventref.bug.action.updatebug">
-			<title>EVENT_UPDATE_BUG (Chain)</title>
+		<blockquote id="dev.eventref.bug.action.updatebugdata">
+			<title>EVENT_UPDATE_BUG_DATA (Chain)</title>
 
 			<blockquote>
 				<para>
-					This event allows plugins to perform both pre- and post-processing of
-					the updated bug data structure after being modified by the user, but
-					before being saved to the database.
+					This event allows plugins to perform pre-processing of the updated
+					bug data structure after being modified by the user, but before
+					being saved to the database.
 				</para>
 
 				<itemizedlist>
 					<title>Parameters</title>
-					<listitem><para>&lt;Complex&gt;: Bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
-					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+					<listitem><para>&lt;Complex&gt;: Original bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>&lt;Complex&gt;: Updated bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
 				</itemizedlist>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>&lt;Complex&gt;: Bug data structure</para></listitem>
+					<listitem><para>&lt;Complex&gt;: Original bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>&lt;Complex&gt;: Updated bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.action.updatebug">
+			<title>EVENT_UPDATE_BUG (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to perform post-processing of the bug data
+					structure after being updated.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Complex&gt;: Original bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>&lt;Complex&gt;: Updated bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
