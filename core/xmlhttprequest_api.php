@@ -30,7 +30,6 @@
  * @uses gpc_api.php
  * @uses print_api.php
  * @uses profile_api.php
- * @uses projax_api.php
  */
 
 require_api( 'access_api.php' );
@@ -40,7 +39,22 @@ require_api( 'constant_inc.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
-require_api( 'projax_api.php' );
+
+/**
+ * Filter a set of strings by finding strings that start with a case-insensitive prefix.
+ * @param array $p_set An array of strings to search through.
+ * @param string $p_prefix The prefix to filter by.
+ * @return array An array of strings which match the supplied prefix.
+ */
+function xmlhttprequest_filter_by_prefix( $p_set, $p_prefix ) {
+	$t_matches = array();
+	foreach ( $p_set as $p_item ) {
+		if ( utf8_strtolower( utf8_substr( $p_item, 0, utf8_strlen( $p_prefix ) ) ) === utf8_strtolower( $p_prefix ) ) {
+			$t_matches[] = $p_item;
+		}
+	}
+	return $t_matches;
+}
 
 /**
  *
@@ -81,9 +95,9 @@ function xmlhttprequest_platform_get_with_prefix() {
 	$f_platform = gpc_get_string( 'platform' );
 
 	$t_unique_entries = profile_get_field_all_for_user( 'platform' );
-	$t_matching_entries = projax_array_filter_by_prefix( $t_unique_entries, $f_platform );
+	$t_matching_entries = xmlhttprequest_filter_by_prefix( $t_unique_entries, $f_platform );
 
-	echo projax_array_serialize_for_autocomplete( $t_matching_entries );
+	echo json_encode( $t_matching_entries );
 }
 
 /**
@@ -95,9 +109,9 @@ function xmlhttprequest_platform_get_with_prefix() {
 	$f_os = gpc_get_string( 'os' );
 
 	$t_unique_entries = profile_get_field_all_for_user( 'os' );
-	$t_matching_entries = projax_array_filter_by_prefix( $t_unique_entries, $f_os );
+	$t_matching_entries = xmlhttprequest_filter_by_prefix( $t_unique_entries, $f_os );
 
-	echo projax_array_serialize_for_autocomplete( $t_matching_entries );
+	echo json_encode( $t_matching_entries );
 }
 
 /**
@@ -109,7 +123,7 @@ function xmlhttprequest_os_build_get_with_prefix() {
 	$f_os_build = gpc_get_string( 'os_build' );
 
 	$t_unique_entries = profile_get_field_all_for_user( 'os_build' );
-	$t_matching_entries = projax_array_filter_by_prefix( $t_unique_entries, $f_os_build );
+	$t_matching_entries = xmlhttprequest_filter_by_prefix( $t_unique_entries, $f_os_build );
 
-	echo projax_array_serialize_for_autocomplete( $t_matching_entries );
+	echo json_encode( $t_matching_entries );
 }

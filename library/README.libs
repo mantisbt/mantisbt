@@ -9,7 +9,6 @@ disposable      | disposable      | 1.1.0    | unpatched
 ezc             | ez Components   | 2009.2.1 | unpatched
 nusoap          | nusoap          | 0.9.5    | unpatched
 phpmailer       | PHPMailer       | 5.1      | unpatched
-projax          | projax          |          | unpatched
 rssbuilder      | RSSBuilder      | 2.2.1    | patched: removed __autoload function
 utf8            | phputf8         | 0.5      | unpatched
 
@@ -20,6 +19,5 @@ disposable -  http://github.com/vboctor/disposable_email_checker/tree/master
 ezc        -  http://ezcomponents.org/
 nusoap     -  http://sourceforge.net/projects/nusoap/
 phpmailer  -  http://phpmailer.codeworxtech.com/
-projax     -  http://script.aculo.us/downloads / http://www.ngcoders.com/projax/
 rssbuilder -  http://code.google.com/p/flaimo-php/
 utf8       -  http://sourceforge.net/projects/phputf8

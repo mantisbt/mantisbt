@@ -42,7 +42,6 @@
  * @uses lang_api.php
  * @uses print_api.php
  * @uses profile_api.php
- * @uses projax_api.php
  * @uses project_api.php
  * @uses relationship_api.php
  * @uses string_api.php
@@ -70,7 +69,6 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
-require_api( 'projax_api.php' );
 require_api( 'project_api.php' );
 require_api( 'relationship_api.php' );
 require_api( 'string_api.php' );
@@ -332,7 +330,7 @@ print_recently_visited();
 							</select>
 							<?php
 								} else {
-									projax_autocomplete( 'platform_get_with_prefix', 'platform', array( 'value' => $f_platform, 'size' => '32', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+									echo '<input type="text" id="platform" name="platform" class="autocomplete" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_platform ) . '" />';
 								}
 							?>
 						</td>
@@ -349,7 +347,7 @@ print_recently_visited();
 							</select>
 							<?php
 								} else {
-									projax_autocomplete( 'os_get_with_prefix', 'os', array( 'value' => $f_os, 'size' => '32', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+									echo '<input type="text" id="os" name="os" class="autocomplete" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os) . '" />';
 								}
 							?>
 						</td>
@@ -368,7 +366,7 @@ print_recently_visited();
 								</select>
 							<?php
 								} else {
-									projax_autocomplete( 'os_build_get_with_prefix', 'os_build', array( 'value' => $f_os_build, 'size' => '16', 'maxlength' => '16', 'tabindex' => helper_get_tab_index_value() ) );
+									echo '<input type="text" id="os_build" name="os_build" class="autocomplete" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os_build ) . '" />';
 								}
 							?>
 						</td>

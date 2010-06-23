@@ -38,24 +38,43 @@ if (a!= -1) {
 }
 style_display = 'block';
 
-$j(document).ready( function() {
+$(document).ready( function() {
 	/* Global Tag change event added only if #tag_select exists */
-	$j('#tag_select').live('change', function() {
-		var selected_tag = $j('#tag_select option:selected').text();
+	$('#tag_select').live('change', function() {
+		var selected_tag = $('#tag_select option:selected').text();
 		tag_string_append( selected_tag );
 	});
 
-	$j('.collapse-open').show();
-	$j('.collapse-closed').hide();
-	$j('.collapse-link').click( function(event) {
+	$('.collapse-open').show();
+	$('.collapse-closed').hide();
+	$('.collapse-link').click( function(event) {
 		event.preventDefault();
-		var id = $j(this).attr('id');
+		var id = $(this).attr('id');
 		var t_pos = id.indexOf('_closed_link' );
 		if( t_pos == -1 ) {
 			t_pos = id.indexOf('_open_link' );
 		}
 		var t_div = id.substring(0, t_pos );
 		ToggleDiv( t_div );
+	});
+
+	$('input[type=text].autocomplete').autocomplete({
+		source: function(request, callback) {
+			var fieldName = $(this).attr('element').attr('id');
+			var postData = {};
+			postData['entrypoint']= fieldName + '_get_with_prefix';
+			postData[fieldName] = request.term;
+			$.getJSON('xmlhttprequest.php', postData, function(data) {
+				var results = [];
+				$.each(data, function(i, value) {
+					var item = {};
+					item.label = $('<div/>').text(value).html();
+					item.value = value;
+					results.push(item);
+				});
+				callback(results);
+			});
+		}
 	});
 });
 
@@ -131,11 +150,11 @@ function ToggleDiv( p_div ) {
 		t_cookie = "";
 		g_collapse_clear = 0;
 	}
-	var t_open_display = $j(t_open_div).css('display');
-	$j(t_open_div).toggle();
+	var t_open_display = $(t_open_div).css('display');
+	$(t_open_div).toggle();
 
-	if( $j(t_closed_div).length ) {
-		$j(t_closed_div).toggle();
+	if( $(t_closed_div).length ) {
+		$(t_closed_div).toggle();
 	}
 
 	if ( t_open_display == "none" ) {
@@ -176,9 +195,9 @@ function toggleDisplay(idTag)
 
 /* Append a tag name to the tag input box, with repect for tag separators, etc */
 function tag_string_append( p_string ) {
-	t_tag_separator = $j('#tag_separator').val();
-	t_tag_string = $j('#tag_string');
-	t_tag_select = $j('#tag_select');
+	t_tag_separator = $('#tag_separator').val();
+	t_tag_string = $('#tag_string');
+	t_tag_select = $('#tag_select');
 
 	if ( Trim( p_string ) == '' ) { return; }
 

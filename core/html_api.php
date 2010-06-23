@@ -112,10 +112,6 @@ $g_robots_meta = '';
 # flag for error handler to skip header menus
 $g_error_send_page_header = true;
 
-# Projax library disabled by default.  It will be enabled if projax_api.php
-# is included.  But it must be included after html_api.php
-$g_enable_projax = false;
-
 /**
  * Sets the url for the rss link associated with the current page.
  * null: means no feed (default).
@@ -415,17 +411,6 @@ function html_head_javascript() {
 		html_javascript_link( 'ajax.js' );
 		html_javascript_link( 'jquery.js' );
 		html_javascript_link( 'jquery-ui.js' );
-
-		global $g_enable_projax;
-
-		if( $g_enable_projax ) {
-			html_javascript_link( 'projax/prototype.js' );
-			html_javascript_link( 'projax/scriptaculous.js' );
-		}
-		echo '<script type="text/javascript">';
-		echo '/* Prevent jQuery from conflicting with projax...for now */';
-		echo 'var $j = jQuery.noConflict();';
-		echo '</script>';
 		html_javascript_link( 'common.js' );
 	}
 }

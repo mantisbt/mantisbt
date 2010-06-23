@@ -40,7 +40,6 @@
  * @uses last_visited_api.php
  * @uses prepare_api.php
  * @uses print_api.php
- * @uses projax_api.php
  * @uses project_api.php
  * @uses string_api.php
  * @uses user_api.php
@@ -67,7 +66,6 @@ require_api( 'lang_api.php' );
 require_api( 'last_visited_api.php' );
 require_api( 'prepare_api.php' );
 require_api( 'print_api.php' );
-require_api( 'projax_api.php' );
 require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
@@ -481,7 +479,7 @@ if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) {
 			print_platform_option_list( $tpl_bug->platform );
 			echo '</select>';
 		} else {
-			projax_autocomplete( 'platform_get_with_prefix', 'platform', array( 'value' => $tpl_bug->platform, 'size' => '16', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+			echo '<input type="text" id="platform" name="platform" class="autocomplete" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $tpl_bug->platform ) . '" />';
 		}
 
 		echo '</td>';
@@ -499,7 +497,7 @@ if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) {
 			print_os_option_list( $tpl_bug->os );
 			echo '</select>';
 		} else {
-			projax_autocomplete( 'os_get_with_prefix', 'os', array( 'value' => $tpl_bug->os, 'size' => '16', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+			echo '<input type="text" id="os" name="os" class="autocomplete" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $tpl_bug->os ) . '" />';
 		}
 
 		echo '</td>';
@@ -517,7 +515,7 @@ if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) {
 			print_os_build_option_list( $tpl_bug->os_build );
 			echo '</select>';
 		} else {
-			projax_autocomplete( 'os_build_get_with_prefix', 'os_build', array( 'value' => $tpl_bug->os_build, 'size' => '16', 'maxlength' => '16', 'tabindex' => helper_get_tab_index_value() ) );
+			echo '<input type="text" id="os_build" name="os_build" class="autocomplete" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $tpl_bug->os_build ) . '" />';
 		}
 
 		echo '</td>';
