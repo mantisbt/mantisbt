@@ -77,7 +77,7 @@ $(document).ready( function() {
 		}
 	});
 
-	$('input.autofocus:first').focus();
+	$('input.autofocus:first, select.autofocus:first, textarea.autofocus:first').focus();
 
 	var stopwatch = {
 		timerID: null,

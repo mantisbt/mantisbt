@@ -713,12 +713,12 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 
 <tr class="row-1">
 	<th class="category"><?php echo lang_get( 'username' );?></th>
-	<td><input type="text" disabled="disabled" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo $p_username;?>" /></td>
+	<td><input type="text" disabled="disabled" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $p_username );?>" /></td>
 </tr>
 
 <tr class="row-2">
 	<th class="category"><?php echo lang_get( 'password' );?></th>
-	<td><input type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" /></td>
+	<td><input type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" class="autofocus" /></td>
 </tr>
 
 <tr>
@@ -729,18 +729,8 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 </form>
 </div>
 
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<!-- Autofocus JS -->
-<script type="text/javascript">
-<!--
-	window.document.reauth_form.password.focus();
-// -->
-</script>
-<?php } ?>
-
-		<?php
-		html_page_bottom();
-
+<?php
+	html_page_bottom();
 	exit;
 }
 

@@ -222,7 +222,7 @@ print_recently_visited();
 			<?php if ( $t_changed_project ) {
 				echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
 			} ?>
-			<select <?php echo helper_get_tab_index() ?> name="category_id">
+			<select <?php echo helper_get_tab_index() ?> name="category_id" class="autofocus">
 				<?php
 					print_category_option_list( $f_category_id );
 				?>
@@ -563,15 +563,7 @@ print_recently_visited();
 </table>
 </form>
 </div>
-
-<!-- Autofocus JS -->
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/javascript">
-<!--
-	window.document.report_bug_form.category_id.focus();
--->
-</script>
-<?php  }
+<?php
 if ( $tpl_show_due_date ) {
 	date_finish_calendar( 'due_date', 'trigger' );
 }
