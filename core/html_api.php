@@ -407,7 +407,7 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
  */
 function html_head_javascript() {
 	if( ON == config_get( 'use_javascript' ) ) {
-		echo '<script type="text/javascript">var loading_lang = "' . lang_get( 'loading' ) . '";</script>';
+		echo '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
 		html_javascript_link( 'ajax.js' );
 		html_javascript_link( 'jquery.js' );
 		html_javascript_link( 'jquery-ui.js' );

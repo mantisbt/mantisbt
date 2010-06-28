@@ -76,6 +76,65 @@ $(document).ready( function() {
 			});
 		}
 	});
+
+	$('input.autofocus:first').focus();
+
+	var stopwatch = {
+		timerID: null,
+		elapsedTime: 0,
+		tick: function() {
+			this.elapsedTime += 1000;
+			var seconds = Math.floor(this.elapsedTime / 1000) % 60;
+			var minutes = Math.floor(this.elapsedTime / 60000) % 60;
+			var hours = Math.floor(this.elapsedTime / 3600000) % 60;
+			if (seconds < 10) {
+				seconds = '0' + seconds;
+			}
+			if (minutes < 10) {
+				minutes = '0' + minutes;
+			}
+			if (hours < 10) {
+				hours = '0' + hours;
+			}
+			$('input[type=text].stopwatch_time').attr('value', hours + ':' + minutes + ':' + seconds);
+			this.start();
+		},
+		reset: function() {
+			this.stop();
+			this.elapsedTime = 0;
+			$('input[type=text].stopwatch_time').attr('value', '00:00:00');
+		},
+		start: function() {
+			this.stop();
+			var self = this;
+			this.timerID = window.setTimeout(function() {
+				self.tick();
+			}, 1000);
+		},
+		stop: function() {
+			if (typeof this.timerID == 'number') {
+				window.clearTimeout(this.timerID);
+				delete this.timerID;
+			}
+		}
+	}
+	$('input[type=button].stopwatch_toggle').click(function() {
+		if (stopwatch.elapsedTime == 0) {
+			stopwatch.stop();
+			stopwatch.start();
+			$('input[type=button].stopwatch_toggle').attr('value', translations['time_tracking_stopwatch_stop']);
+		} else if (typeof stopwatch.timerID == 'number') {
+			stopwatch.stop();
+			$('input[type=button].stopwatch_toggle').attr('value', translations['time_tracking_stopwatch_start']);
+		} else {
+			stopwatch.start();
+			$('input[type=button].stopwatch_toggle').attr('value', translations['time_tracking_stopwatch_stop']);
+		}
+	});
+	$('input[type=button].stopwatch_reset').click(function() {
+		stopwatch.reset();
+		$('input[type=button].stopwatch_toggle').attr('value', translations['time_tracking_stopwatch_start']);
+	});
 });
 
 /*

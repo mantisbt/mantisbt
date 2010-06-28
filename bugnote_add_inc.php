@@ -100,22 +100,15 @@ require_api( 'lang_api.php' );
 <?php if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<th class="category">
-		<?php echo lang_get( 'time_tracking' ) ?> (HH:MM)
+		<?php echo lang_get( 'time_tracking' ) ?>
 	</th>
 	<td>
 		<?php if ( config_get( 'time_tracking_stopwatch' ) && config_get( 'use_javascript' ) ) { ?>
-		<script type="text/javascript">
-			var time_tracking_stopwatch_lang_start = "<?php echo lang_get( 'time_tracking_stopwatch_start' ) ?>";
-			var time_tracking_stopwatch_lang_stop = "<?php echo lang_get( 'time_tracking_stopwatch_stop' ) ?>";
-		</script>
-		<?php
-			html_javascript_link( 'time_tracking_stopwatch.js' );
-		?>
-		<input type="text" name="time_tracking" size="5" value="00:00" />
-		<input type="button" name="time_tracking_ssbutton" value="<?php echo lang_get( 'time_tracking_stopwatch_start' ) ?>" onclick="time_tracking_swstartstop()" />
-		<input type="button" name="time_tracking_reset" value="<?php echo lang_get( 'time_tracking_stopwatch_reset' ) ?>" onclick="time_tracking_swreset()" />
+		<input type="text" name="time_tracking" class="stopwatch_time" size="8" value="hh:mm:ss" />
+		<input type="button" name="time_tracking_toggle" class="stopwatch_toggle" value="<?php echo lang_get( 'time_tracking_stopwatch_start' ) ?>" />
+		<input type="button" name="time_tracking_reset" class="stopwatch_reset" value="<?php echo lang_get( 'time_tracking_stopwatch_reset' ) ?>" />
 		<?php } else { ?>
-		<input type="text" name="time_tracking" size="5" value="00:00" />
+		<input type="text" name="time_tracking" size="5" value="hh:mm" />
 		<?php } ?>
 	</td>
 </tr>
