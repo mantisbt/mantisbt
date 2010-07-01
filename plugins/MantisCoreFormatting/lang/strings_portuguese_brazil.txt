@@ -27,12 +27,14 @@
  * @file
  *
  * @author Eduardo.mps
+ * @author Giro720
  */
 
 $s_plugin_format_title = 'Formatação do MantisBT';
 $s_plugin_format_description = 'Plugin oficial de processamento e formatação de texto';
 $s_plugin_format_config = 'Configuração';
 $s_plugin_format_process_text = 'Processamento de Texto';
+$s_plugin_format_process_text_warning_notice = 'Não desligue, a menos que você esteja tenha certeza do que está fazendo. Quando desligado, tornam-se possíveis ataques de \'\'cross site scripting\'\' (XSS).';
 $s_plugin_format_process_urls = 'Processamento de URL';
 $s_plugin_format_process_buglinks = 'Ligações do MantisBT ( Caso/Anotação )';
 $s_plugin_format_process_vcslinks = 'Ligações VCS';
