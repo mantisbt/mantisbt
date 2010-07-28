@@ -17,9 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /** Italian (Italiano)
- *
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *
@@ -525,6 +524,7 @@ $s_updating_bug_simple_title = 'Aggiorna le informazioni sull\'anomalia';
 $s_view_revisions = 'Visualizza versioni';
 $s_revision = 'Revisione';
 $s_revision_by = '%1$s di %2$s';
+$s_revision_drop = 'Scarica';
 $s_bug_revision_dropped_history = 'Revisione anomalia scaricata';
 $s_bugnote_revision_dropped_history = 'Note di revisione scaricate';
 $s_all_revisions = 'Tutte le revisioni';
@@ -950,19 +950,23 @@ $s_query_name = 'Nome filtro';
 $s_query_exists = 'Questo filtro sembra sia già presente.';
 $s_query_dupe_name = 'Esiste un altro filtro con questo nome.  Inserisci un nome differente.';
 $s_query_blank_name = 'Non è possibile memorizzare un filtro senza nome.  Inserisci un nome.';
+$s_query_name_too_long = 'Non puoi memorizzare un nome di filtro più lungo di 64 caratteri. Per favore, dai un nome più corto al filtro.';
 $s_query_store_error = 'Si è verificato un errore durante la memorizzazione del filtro';
 $s_open_queries = 'Gestione filtri';
 $s_query_delete_msg = 'Sei sicuro di voler eliminare questo filtro?';
 $s_view_simple_link = 'Scheda normale';
 $s_product_build = 'Release del prodotto';
 $s_system_profile = 'Descrizione del Sistema';
-$s_update_bug_button = 'Aggiorna anomalia';
+$s_update_bug_button = 'Modifica';
 $s_bug_assign_to_button = 'Assegna a:';
 $s_bug_status_to_button = 'Cambia stato in:';
 $s_reopen_bug_button = 'Riapri';
 $s_move_bug_button = 'Sposta';
 $s_attached_files = 'File allegati';
 $s_publish = 'Pubblica';
+$s_cached = 'Copiato in cache';
+$s_add_user_to_monitor = 'Aggiungi';
+$s_bug_view_title = 'Visualizza dettagli anomalia';
 $s_no_users_monitoring_bug = 'Nessuno ha chiesto di essere notificato su questa anomalia.';
 $s_users_monitoring_bug = 'Utenti che tengono sotto controllo questa anomalia';
 $s_monitoring_user_list = 'Elenco utenti';
@@ -988,6 +992,7 @@ $s_custom_field_access_level_r = 'Visibile';
 $s_custom_field_access_level_rw = 'Modificabile';
 $s_custom_field_length_min = 'Lunghezza min.';
 $s_custom_field_length_max = 'Lunghezza max.';
+$s_custom_field_filter_by = 'Aggiungi un filtro';
 $s_custom_field_display_report = 'Visualizza quando "Riporti anomalia"';
 $s_custom_field_display_update = 'Visualizza quando "Aggiorni anomalia"';
 $s_custom_field_display_resolved = 'Visualizza in "Risolvi anomalia"';
@@ -1016,6 +1021,10 @@ $s_advanced_filters = 'Filtro avanzato';
 $s_simple_filters = 'Filtro semplice';
 $s_monitored_by = 'Sotto controllo da';
 $s_attachments = 'Allegati';
+$s_bytes = 'bytes';
+$s_attachment_missing = 'Allegato mancante';
+$s_attachment_count = 'Numero allegati';
+$s_view_attachments_for_issue = 'Visualizza %1$d allegato(i) per l\'anomalia #%2$d';
 $s_phpmailer_language = 'it';
 $s_sponsors = '%1$d sponsor';
 $s_sponsorship_added = 'Aggiunta sponsorizzazione';
@@ -1026,8 +1035,11 @@ $s_sponsorship_more_info = 'Maggiori informazioni sulla sponsorizzazione';
 $s_sponsorship_total = 'Totale sponsorizzazioni';
 $s_changelog = 'Registro modifiche';
 $s_changelog_empty = 'Il registro non contiene nessuna informazione';
+$s_roadmap = 'Roadmap';
 $s_resolved_progress = '%1$d di %2$d anomalie risolte (%3$d%%).';
+$s_http_auth_realm = 'MantisBT Login';
 $s_bug = 'anomalia';
+$s_bugs = 'anomalie';
 $s_add_new_relationship = 'Nuova relazione';
 $s_add_new_relationship_button = 'Crea';
 $s_this_bug = 'Questa anomalia è';
@@ -1052,6 +1064,7 @@ $s_dependency_graph = 'Grafico dipendenze';
 $s_vertical = 'Verticale';
 $s_horizontal = 'Orizzontale';
 $s_view_issue = 'Dettaglio anomalia';
+$s_checkin = 'Checkin';
 $s_perm_rpt_capability = 'Funzionalità';
 $s_view = 'Visualizzare';
 $s_issues = 'ANOMALIE';
@@ -1171,9 +1184,22 @@ $s_development_team = 'Gruppo di sviluppo';
 $s_manage_columns_config = 'Gestisci colonne';
 $s_all_columns_title = 'Tutte le colonne disponibili';
 $s_csv_columns_title = 'Colonne CSV';
-$s_view_issues_columns_title = 'Visualizza colonne anomalia';
-$s_print_issues_columns_title = 'Stampa colonne anomalie';
+$s_view_issues_columns_title = 'Colonne anomalia in visualizzazione';
+$s_print_issues_columns_title = 'Colonne anomalia in Stampa';
 $s_excel_columns_title = 'Colonne Excel';
+$s_update_columns_as_global_default = 'Aggiorna Colonne come Standard Globale per tutti i Progetti';
+$s_update_columns_for_current_project = 'Aggiorna Colonne per il progetto corrente';
+$s_update_columns_as_my_default = 'Aggiorna colonne come Standard per Tutti i progetti';
+$s_reset_columns_configuration = 'Ripristina configurazione colonne';
+$s_copy_columns_from = 'Copia colonne da';
+$s_copy_columns_to = 'Copia colonne a';
+$s_due_date = 'Data di scadenza';
+$s_overdue = 'In ritardo';
+$s_view_account_title = 'Informazioni Utente';
+$s_manage_user = 'Gestisci Utente';
+$s_install_information = 'MantisBT Informazioni d\'installazione';
+$s_database_information = 'MantisBT Informazioni del Database';
+$s_path_information = 'MantisBT Informazioni percorso';
 $s_month_january = 'Gennaio';
 $s_month_february = 'Febbraio';
 $s_month_march = 'Marzo';

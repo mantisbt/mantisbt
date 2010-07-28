@@ -17,9 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /** Hebrew (עברית)
- *
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *
@@ -1021,6 +1020,8 @@ $s_monitored_by = 'במעקב של';
 $s_attachments = 'קבצים';
 $s_bytes = 'בתים';
 $s_attachment_missing = 'צרופה חסרה';
+$s_attachment_count = 'מספר הצרופות';
+$s_view_attachments_for_issue = 'הצגת %1$d צרופה/ות לבאג #%2$d';
 $s_phpmailer_language = 'he';
 $s_sponsors = '%1$d נותני חסות';
 $s_sponsorship_added = 'נוספה חסות';

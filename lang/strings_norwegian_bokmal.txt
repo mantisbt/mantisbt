@@ -17,9 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /** Norwegian (bokmål)‬ (‪Norsk (bokmål)‬)
- *
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *
@@ -93,7 +92,7 @@ $s_change = 'Endring';
 $s_bugnote_view_state = 'Notatstatus';
 $s_bug_monitor = 'Saken overvåkes';
 $s_bug_end_monitor = 'Avslutt overvåkning av saken';
-$s_announcement = 'Annonsering';
+$s_announcement = 'Kunngjøring';
 $s_stays_on_top = 'Forblir på toppen';
 $s_bugnote_link_title = 'Direktelenke til notat';
 $s_delete_bugnote_button = 'Slett notat';
@@ -773,7 +772,7 @@ $s_reset_password_button = 'Nullstill passord';
 $s_delete_user_button = 'Slett bruker';
 $s_reset_password_msg = '\'Nullstill passord\' sender bekreftelses-URL via epost.';
 $s_reset_password_msg2 = 'Nullstille passord setter passordet til blank.';
-$s_show_all_users = 'ALLE';
+$s_show_all_users = 'Alle';
 $s_users_unused = 'IKKE I BRUK';
 $s_users_new = 'NY';
 $s_account_reset_protected_msg = 'Kontoen er beskyttet. Kan ikke nullstille passord.';
@@ -967,7 +966,7 @@ $s_move_bug_button = 'Flytt';
 $s_attached_files = 'Filvedlegg';
 $s_publish = 'Publisere';
 $s_cached = 'Midlertidig lagret';
-$s_add_user_to_monitor = 'Legge til';
+$s_add_user_to_monitor = 'Legg til';
 $s_bug_view_title = 'Vis problemdetaljer';
 $s_no_users_monitoring_bug = 'Ingen brukere overvåker denne saken.';
 $s_users_monitoring_bug = 'Brukere som overvåker denne saken';
@@ -1025,6 +1024,8 @@ $s_monitored_by = 'Overvåket av';
 $s_attachments = 'vedlegg';
 $s_bytes = 'bytes';
 $s_attachment_missing = 'Vedlegg mangler';
+$s_attachment_count = 'Antall vedlegg';
+$s_view_attachments_for_issue = 'Vis %1$d vedlegg for problem #%2$d';
 $s_phpmailer_language = 'no';
 $s_sponsors = '%1$d sponsor(er)';
 $s_sponsorship_added = 'Sponsing lagt til';

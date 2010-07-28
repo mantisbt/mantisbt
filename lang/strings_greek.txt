@@ -17,9 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /** Greek (Ελληνικά)
- *
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *

@@ -1,0 +1,47 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Italian (Italiano)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Massimo itaca
+ */
+
+$s_plugin_XmlImportExport_title = 'Importa/Esporta anomalie';
+$s_plugin_XmlImportExport_description = 'Aggiungi a MantisBT la capacità di Importare e Esportare basata su XML.';
+$s_plugin_XmlImportExport_import = 'Importa anomalia';
+$s_plugin_XmlImportExport_export = 'Esporta XML';
+$s_plugin_XmlImportExport_importing_in_project = 'Importa anomalia nel progetto:';
+$s_plugin_XmlImportExport_import_options = 'Opzioni di importazione';
+$s_plugin_XmlImportExport_cross_references = 'Riferimenti incrociati';
+$s_plugin_XmlImportExport_default_strategy = 'Strategia standard di conversione:';
+$s_plugin_XmlImportExport_renumber = 'Rinumera';
+$s_plugin_XmlImportExport_renumber_desc = 'Prova a convertire i riferimenti ad una nuova numerazione';
+$s_plugin_XmlImportExport_link = 'Collegamenti';
+$s_plugin_XmlImportExport_link_desc = 'Converte in un collegamento alla voce originale';
+$s_plugin_XmlImportExport_disable = 'Disabilita';
+$s_plugin_XmlImportExport_disable_desc = 'Disabilita il collegamento';
+$s_plugin_XmlImportExport_fallback = 'Strategia Fallback (non si applica quando "Rinumera"):';
+$s_plugin_XmlImportExport_fallback_category = 'Categoria Fallback:';
+$s_plugin_XmlImportExport_keep_same_category = 'Prova a mantenere la stessa categoria';

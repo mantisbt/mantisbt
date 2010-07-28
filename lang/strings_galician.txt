@@ -17,9 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /** Galician (Galego)
- *
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *
@@ -610,7 +609,7 @@ $s_never_logged_in_title = 'Nunca accedeu ao sistema';
 $s_prune_accounts = 'Borrar as contas';
 $s_hide_inactive = 'Agochar os inactivos';
 $s_manage_accounts_title = 'Xestionar as contas';
-$s_date_created = 'Data da creación';
+$s_date_created = 'Data de creación';
 $s_last_visit = 'Última visita';
 $s_edit_user_link = 'Editar o usuario';
 $s_config_all_projects = 'Nota: estes axustes afectan a TODOS OS PROXECTOS, a menos que superen o nivel do proxecto.';

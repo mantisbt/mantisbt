@@ -17,9 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /** French (Français)
- *
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *
@@ -318,7 +317,7 @@ $s_sponsorship_enum_string = '0:non payé,1:demandé,2:payé';
 $s_new_account_subject = 'Enregistrement de compte';
 $s_new_account_greeting = 'Merci de vous être enregistré. Votre code d\'utilisateur est « %1$s ». Pour compléter votre enregistrement, visiter l\'hyperlien suivant (vérifiez qu\'il est donné sur une seule ligne) et entrer votre propre mot de passe d\'accès :';
 $s_new_account_greeting_admincreated = 'L\'utilisateur %1$s vous a créé un compte avec le nom d\'utilisateur « %2$s ». Pour terminer la création, visitez l\'URL suivante (soyez sûr qu\'elle soit entrée comme une seule ligne) et définissez votre mot de passe :';
-$s_new_account_username = 'Utilisateur :';
+$s_new_account_username = 'Nom d’utilisateur :';
 $s_new_account_message = 'Si vous n\'aviez fait aucune demande d\'enregistrement, ignorez ce message et rien ne sera fait.';
 $s_new_account_do_not_reply = 'Ne pas répondre à ce message';
 $s_new_account_email = 'Adresse électronique :';

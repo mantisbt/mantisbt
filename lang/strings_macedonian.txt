@@ -17,9 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /** Macedonian (Македонски)
- *
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *
@@ -211,7 +210,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Прилагодливото по
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ова е дуплирано име.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Барем еден проект сè уште го користи ова поле.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Неважечка вредност за во полето „%1$s“.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Неважечка дефиниција за прилагодливото поле.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Неважечко задавање за прилагодливото поле.';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP заверувањето не успеа.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Поврзувањето со LDAP-опслужувачот не успеа.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Подновувањето на LDAP записи не успеа.';
@@ -553,7 +552,7 @@ $s_error_database_version_out_of_date_2 = '<strong>Предупредување:
 $s_error_code_version_out_of_date = '<strong>Предупредување:</strong> Структурата на базата на податоци е понова од инсталираниот код. Подновете го кодот.';
 $s_login_page_info = 'Добредојдовте на Системот за следење на проблеми';
 $s_login_title = 'Најава';
-$s_save_login = 'Запомни ме на овој компјутер';
+$s_save_login = 'Запомни ме на овој сметач';
 $s_secure_session = 'Заштитена сесија';
 $s_secure_session_long = 'Дозволи пристап до мојата сесија само преку оваа IP-адреса.';
 $s_choose_project = 'Одберете проект';

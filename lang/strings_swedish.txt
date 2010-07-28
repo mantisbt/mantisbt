@@ -17,9 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /** Swedish (Svenska)
- *
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *
@@ -27,6 +26,7 @@
  * @file
  *
  * @author Najami
+ * @author Nghtwlkr
  * @author Sannab
  * @author Skalman
  * @author Thomas Sjogren <thomas.sjogren@multicomsecurity.se>
@@ -758,7 +758,7 @@ $s_reset_password_button = 'Nollställ lösenord';
 $s_delete_user_button = 'Ta bort kontot';
 $s_reset_password_msg = 'Nollställ lösenord skickar godkännandelänk via e-post.';
 $s_reset_password_msg2 = 'Nollställ lösenord sätter ett tomt lösenord.';
-$s_show_all_users = 'ALLA';
+$s_show_all_users = 'Alla';
 $s_users_unused = 'OANVÄNT';
 $s_users_new = 'NY';
 $s_account_reset_protected_msg = 'Kontot skyddat. Kan inte nollställa lösenordet.';
