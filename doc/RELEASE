@@ -1,5 +1,23 @@
 MantisBT Release Notes
 
+1.2.2 Security Release
+-------------------------------------------------
+
+MantisBT 1.2.2 is a security update for the stable 1.2.x branch. All
+installations that are currently running any 1.2.x version are advised to
+upgrade to this release.
+
+Issue #11952 covers a security fix to the display of inline attachments, where
+"Arbitrary inline attachment rendering could lead to cross-domain scripting or
+other browser attacks".  See http://www.mantisbt.org/bugs/view.php?id=11952
+for further details and information.
+
+Also included with 1.2.2 are a range of translation updates, regression fixes,
+and bug fixes, including multiple SOAP API-related bugs and regressions.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
 1.2.1 Maintenance Release
 -------------------------------------------------
 
@@ -76,6 +94,7 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
+	1.2.2      http://www.mantisbt.org/bugs/changelog_page.php?version_id=110
 	1.2.1      http://www.mantisbt.org/bugs/changelog_page.php?version_id=109
 	1.2.0      http://www.mantisbt.org/bugs/changelog_page.php?version_id=108
     1.2.0rc2   http://www.mantisbt.org/bugs/changelog_page.php?version_id=106
