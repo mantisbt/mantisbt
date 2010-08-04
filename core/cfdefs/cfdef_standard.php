@@ -211,11 +211,11 @@ function cfdef_prepare_date_default( $p_value ) {
 #string_custom_field_value
 function cfdef_prepare_list_value($p_value) {
 	// strip start and end markers before converting markers to commas
-	return str_replace( '|', ', ', utf8_substr( str_replace( '||', '|', '|' . $p_value . '|' ), 1, -1 ) );
+	return string_display_line( str_replace( '|', ', ', utf8_substr( str_replace( '||', '|', '|' . $p_value . '|' ), 1, -1 ) ) );
 }
 
 function cfdef_prepare_email_value($p_value) {
-	return "<a href=\"mailto:$p_value\">$p_value</a>";
+	return "<a href=\"mailto:" . string_attribute( $p_value ) . "\">" . string_display_line( $p_value ) . "</a>";
 }
 
 function cfdef_prepare_date_value($p_value) {
@@ -248,9 +248,9 @@ function cfdef_input_list($p_field_def, $t_custom_field_value) {
 	$t_selected_values = explode( '|', $t_custom_field_value );
 	foreach( $t_values as $t_option ) {
 		if( in_array( $t_option, $t_selected_values, true ) ) {
-			echo '<option value="' . $t_option . '" selected="selected"> ' . $t_option . '</option>';
+			echo '<option value="' . string_attribute( $t_option ) . '" selected="selected"> ' . string_display_line( $t_option ) . '</option>';
 		} else {
-			echo '<option value="' . $t_option . '">' . $t_option . '</option>';
+			echo '<option value="' . string_attribute( $t_option ) . '">' . string_display_line( $t_option ) . '</option>';
 		}
 	}
 	echo '</select>';
@@ -262,9 +262,9 @@ function cfdef_input_checkbox($p_field_def, $t_custom_field_value) {
 	foreach( $t_values as $t_option ) {
 		echo '<input ', helper_get_tab_index(), ' type="checkbox" name="custom_field_' . $p_field_def['id'] . '[]"';
 		if( in_array( $t_option, $t_checked_values, true ) ) {
-			echo ' value="' . $t_option . '" checked="checked">&nbsp;' . $t_option . '&nbsp;&nbsp;';
+			echo ' value="' . string_attribute( $t_option ) . '" checked="checked">&nbsp;' . string_display_line( $t_option ) . '&nbsp;&nbsp;';
 		} else {
-			echo ' value="' . $t_option . '">&nbsp;' . $t_option . '&nbsp;&nbsp;';
+			echo ' value="' . string_attribute( $t_option ) . '">&nbsp;' . string_display_line( $t_option ) . '&nbsp;&nbsp;';
 		}
 	}
 }
@@ -283,9 +283,9 @@ function cfdef_input_radio( $p_field_def, $p_custom_field_value ) {
 		echo '<input ', helper_get_tab_index(), ' type="radio" name="custom_field_' . $p_field_def['id'] . '"';
 
 		if ( $t_option == $t_checked_value ) {
-			echo ' value="' . $t_option . '" checked="checked">&nbsp;' . $t_option . '&nbsp;&nbsp;';
+			echo ' value="' . string_attribute( $t_option ) . '" checked="checked">&nbsp;' . string_display_line( $t_option ) . '&nbsp;&nbsp;';
 		} else {
-			echo ' value="' . $t_option . '">&nbsp;' . $t_option . '&nbsp;&nbsp;';
+			echo ' value="' . string_attribute( $t_option ) . '">&nbsp;' . string_display_line( $t_option ) . '&nbsp;&nbsp;';
 		}
 	}
 }
@@ -297,7 +297,7 @@ function cfdef_input_textbox($p_field_def, $t_custom_field_value) {
 	} else {
 		echo ' maxlength="255"';
 	}
-	echo ' value="' . $t_custom_field_value .'"></input>';
+	echo ' value="' . string_attribute( $t_custom_field_value ) .'"></input>';
 }
 
 /**
