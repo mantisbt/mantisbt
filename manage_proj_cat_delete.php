@@ -31,7 +31,7 @@
 
 	auth_reauthenticate();
 
-	$f_category_id = gpc_get_string( 'id' );
+	$f_category_id = gpc_get_int( 'id' );
 	$f_project_id = gpc_get_int( 'project_id' );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
@@ -46,7 +46,7 @@
 	$t_bug_count = db_result( db_query_bound( $t_query, array( $f_category_id ) ) );
 
 	# Confirm with the user
-	helper_ensure_confirmed( sprintf( lang_get( 'category_delete_sure_msg' ), $t_name, $t_bug_count ),
+	helper_ensure_confirmed( sprintf( lang_get( 'category_delete_sure_msg' ), string_display_line( $t_name ), $t_bug_count ),
 		lang_get( 'delete_category_button' ) );
 
 	category_remove( $f_category_id );
