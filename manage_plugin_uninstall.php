@@ -44,6 +44,7 @@ require_api( 'helper_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'plugin_api.php' );
 require_api( 'print_api.php' );
+require_api( 'string_api.php' );
 
 form_security_validate( 'manage_plugin_uninstall' );
 
@@ -56,7 +57,7 @@ plugin_register_installed();
 $f_basename = gpc_get_string( 'name' );
 $t_plugin = plugin_register( $f_basename, true );
 
-helper_ensure_confirmed( sprintf( lang_get( 'plugin_uninstall_message' ), $t_plugin->name ), lang_get( 'plugin_uninstall' ) );
+helper_ensure_confirmed( sprintf( lang_get( 'plugin_uninstall_message' ), string_display_line( $t_plugin->name ) ), lang_get( 'plugin_uninstall' ) );
 
 if ( !is_null( $t_plugin ) ) {
 	plugin_uninstall( $t_plugin );
