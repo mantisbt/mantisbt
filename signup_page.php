@@ -72,7 +72,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 		<?php echo lang_get( 'username_label' ) ?>
 	</th>
 	<td width="70%" colspan="2">
-		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" />
+		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" class="autofocus" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -136,18 +136,5 @@ print_login_link();
 echo '&nbsp;';
 print_lost_password_link();
 echo '</div>';
-
-if ( ON == config_get( 'use_javascript' ) ) {
-?>
-<!-- Autofocus JS -->
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/javascript">
-<!--
-	window.document.signup_form.username.focus();
-// -->
-</script>
-<?php
-	}
-}
 
 html_page_bottom1a( __FILE__ );

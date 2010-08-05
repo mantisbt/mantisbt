@@ -113,6 +113,14 @@ if ( $t_session_validation ) {
 	}
 }
 
+# Determine whether the username or password field should receive automatic focus.
+$t_username_field_autofocus = 'autofocus';
+$t_password_field_autofocus = '';
+if ( $f_username ) {
+	$t_username_field_autofocus = '';
+	$t_password_field_autofocus = 'autofocus';
+}
+
 echo '</div>';
 ?>
 
@@ -145,7 +153,7 @@ echo '</div>';
 		<?php echo lang_get( 'username' ) ?>
 	</th>
 	<td>
-		<input type="text" name="username" size="28" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $f_username ); ?>" />
+		<input type="text" name="username" size="28" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $f_username ); ?>" class="<?php echo $t_username_field_autofocus ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -153,7 +161,7 @@ echo '</div>';
 		<?php echo lang_get( 'password' ) ?>
 	</th>
 	<td>
-		<input type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" />
+		<input type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" class="<?php echo $t_password_field_autofocus ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -265,16 +273,5 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 	}
 
 } # if 'admin_checks'
-?>
-
-<!-- Autofocus JS -->
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/javascript">
-<!--
-	window.document.login_form.<?php if ( is_blank( $f_username ) ) { echo 'username'; } else { echo 'password'; } ?>.focus();
-// -->
-</script>
-<?php
-}
 
 html_page_bottom1a( __FILE__ );
