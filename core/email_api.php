@@ -486,8 +486,7 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name =
  * @return null
  */
 function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-	if( OFF == config_get( 'lost_password_feature' ) ||
-		OFF == config_get( 'send_reset_password' ) ||
+	if ( OFF == config_get( 'send_reset_password' ) ||
 		OFF == config_get( 'enable_email_notification' ) ) {
 		return;
 	}
