@@ -215,7 +215,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo $t_id ?>
 	</td>
 	<td class="print">
-		<?php echo "[$t_project_name] $t_category_name" ?>
+		<?php echo '[' . string_display_line( $t_project_name ) . '] ' . string_display_line( $t_category_name ) ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'severity', $t_bug->severity ) ?>
@@ -555,7 +555,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 							}
 							echo implode( ', ', $t_to ) . '<br />';
 						default:
-							echo $t_bugnote->note;
+							echo string_display_links( $t_bugnote->note );
 					}
 				?>
 			</td>
