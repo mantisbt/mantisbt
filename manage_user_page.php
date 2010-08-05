@@ -110,39 +110,35 @@
 
 	# Manage Form BEGIN
 
-	$t_prefix_array = array( 'ALL' );
+	$t_prefix_array = array();
+
+	$t_prefix_array['ALL'] = lang_get( 'show_all_users' );
 
 	for ( $i = 'A'; $i != 'AA'; $i++ ) {
-		$t_prefix_array[] = $i;
+		$t_prefix_array[$i] = $i;
 	}
 
 	for ( $i = 0; $i <= 9; $i++ ) {
-		$t_prefix_array[] = "$i";
+		$t_prefix_array["$i"] = "$i";
 	}
-	$t_prefix_array[] = lang_get( 'users_unused' );
-	$t_prefix_array[] = lang_get( 'users_new' );
+
+	$t_prefix_array['UNUSED'] = lang_get( 'users_unused' );
+	$t_prefix_array['NEW'] = lang_get( 'users_new' );
 
 	echo '<br /><center><table class="width75"><tr>';
-	foreach ( $t_prefix_array as $t_prefix ) {
-		if ( $t_prefix === 'ALL' ) {
-			$t_caption = lang_get( 'show_all_users' );
-		} else {
-			$t_caption = $t_prefix;
-		}
-
+	foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 		echo '<td>';
-		if ( $t_prefix == $f_filter ) {
+		if ( $t_prefix === $f_filter ) {
 			$c_filter = $f_filter;
 			echo "<strong>$t_caption</strong>";
 		} else {
 			print_link( "manage_user_page.php?sort=$c_sort&dir=$c_dir&save=1$t_hide_filter&filter=$t_prefix", $t_caption );
 		}
 
-		if ($t_prefix == 'UNUSED' ) {
-			echo '[' . $unused_user_count . ']' . '<br />' . lang_get( 'never_logged_in_title' ) . '<br />';
-			echo print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) );
-		} else if ($t_prefix == 'NEW' ) {
-			echo '[' . $new_user_count . ']<br />' . '(' . lang_get( '1_week_title' ) . ')';
+		if ( $t_prefix === 'UNUSED' ) {
+			echo ' [' . $unused_user_count . '] (' . lang_get( 'never_logged_in_title' ) . ')';
+		} else if ( $t_prefix === 'NEW' ) {
+			echo ' [' . $new_user_count . '] (' . lang_get( '1_week_title' ) . ')';
 		}
 		echo '</td>';
 	}
@@ -223,6 +219,7 @@
 	<td class="form-title" colspan="5">
 		<?php echo lang_get( 'manage_accounts_title' ) ?> [<?php echo $total_user_count ?>]
 		<?php print_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ) ) ?>
+		<?php if ( $f_filter === 'UNUSED' ) echo print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) ); ?>
 	</td>
 	<td class="center" colspan="3">
 		<form method="post" action="manage_user_page.php">
