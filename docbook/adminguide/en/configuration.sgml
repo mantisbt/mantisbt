@@ -2812,17 +2812,6 @@
 
         <variablelist>
             <varlistentry>
-                <term>$g_show_extended_project_browser</term>
-                <listitem>
-                    <para>
-                        Whether to use the extended project selector, where top level projects have their
-                        separate selector, and sub-projects have another.  If OFF, there will be one combo box
-                        at the top right to select the project/sub-project.  If ON, there will be two.  The default
-                        is OFF.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
                 <term>$g_subprojects_inherit_versions</term>
                 <listitem>
                     <para>

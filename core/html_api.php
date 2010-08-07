@@ -561,17 +561,13 @@ function html_login_info() {
 		# CSRF protection not required here - form does not result in modifications
 
 		echo lang_get( 'email_project' ), ': ';
-		if( ON == config_get( 'show_extended_project_browser' ) ) {
-			print_extended_project_browser( helper_get_current_project_trace() );
+		if( ON == config_get( 'use_javascript' ) ) {
+			echo '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
 		} else {
-			if( ON == config_get( 'use_javascript' ) ) {
-				echo '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
-			} else {
-				echo '<select name="project_id" class="small">';
-			}
-			print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
-			echo '</select> ';
+			echo '<select name="project_id" class="small">';
 		}
+		print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
+		echo '</select> ';
 		echo '<input type="submit" class="button-small" value="' . lang_get( 'switch' ) . '" />';
 		echo '</form>';
 	}

@@ -3753,14 +3753,6 @@ $g_due_date_view_threshold = NOBODY;
  *****************
 
 /**
- * show extra dropdown for subprojects
- * Shows only top projects in the project dropdown and adds an extra dropdown for
- * subprojects.
- * @global int $g_show_extended_project_browser
- */
-$g_show_extended_project_browser = OFF;
-
-/**
  * Sub-projects should inherit categories from parent projects.
  */
 $g_subprojects_inherit_categories = ON;
