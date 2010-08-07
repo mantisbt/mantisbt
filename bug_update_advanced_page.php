@@ -29,7 +29,6 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses custom_field_api.php
- * @uses date_api.php
  * @uses error_api.php
  * @uses event_api.php
  * @uses form_api.php
@@ -55,7 +54,6 @@ require_api( 'columns_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
-require_api( 'date_api.php' );
 require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'form_api.php' );
@@ -92,10 +90,6 @@ if ( bug_is_readonly( $f_bug_id ) ) {
 }
 
 access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
-
-html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
-
-print_recently_visited();
 
 $t_fields = config_get( 'bug_update_page_fields' );
 $t_fields = columns_filter_disabled( $t_fields );
@@ -156,6 +150,17 @@ if ( $tpl_show_product_version ) {
 
 $tpl_formatted_bug_id = $tpl_show_id ? bug_format_id( $f_bug_id ) : '';
 $tpl_project_name = $tpl_show_project ? string_display_line( project_get_name( $tpl_bug->project_id ) ) : '';
+
+if ( $tpl_show_due_date ) {
+	require_js( 'jscalendar/calendar.js' );
+	require_js( 'jscalendar/lang/calendar-en.js' );
+	require_js( 'jscalendar/calendar-setup.js' );
+	require_css( 'calendar-blue.css' );
+}
+
+html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+
+print_recently_visited();
 
 echo '<br />';
 echo '<form name="update_bug_form" method="post" action="bug_update.php">';
@@ -315,10 +320,7 @@ if ( $tpl_show_handler || $tpl_show_due_date ) {
 			if ( !date_is_null( $tpl_bug->due_date ) ) {
 				$t_date_to_display = date( config_get( 'calendar_date_format' ), $tpl_bug->due_date );
 			}
-
-			echo '<input ', helper_get_tab_index(), ' type="text" id="due_date" name="due_date" size="20" maxlength="16" value="', $t_date_to_display, '">';
-			date_print_calendar();
-			date_finish_calendar( 'due_date', 'trigger');
+			echo "<input " . helper_get_tab_index() . " type=\"text\" id=\"due_date\" name=\"due_date\" class=\"datetime\" size=\"20\" maxlength=\"10\" value=\"" . $t_date_to_display . "\" />";
 		} else {
 			if ( !date_is_null( $tpl_bug->due_date ) ) {
 				echo date( config_get( 'short_date_format' ), $tpl_bug->due_date  );

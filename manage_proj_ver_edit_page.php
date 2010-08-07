@@ -25,7 +25,6 @@
  * @uses authentication_api.php
  * @uses config_api.php
  * @uses constant_inc.php
- * @uses date_api.php
  * @uses event_api.php
  * @uses form_api.php
  * @uses gpc_api.php
@@ -41,7 +40,6 @@ require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
-require_api( 'date_api.php' );
 require_api( 'event_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
@@ -50,6 +48,11 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'string_api.php' );
 require_api( 'version_api.php' );
+
+require_js( 'jscalendar/calendar.js' );
+require_js( 'jscalendar/lang/calendar-en.js' );
+require_js( 'jscalendar/calendar-setup.js' );
+require_css( 'calendar-blue.css' );
 
 auth_reauthenticate();
 
@@ -87,11 +90,7 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 		<?php echo lang_get( 'date_order' ) ?>
 	</th>
 	<td>
-		<input type="text" id="date_order" name="date_order" size="32" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'calendar_date_format' ), $t_version->date_order ) ) ) ?>" />
-		<?php
-			date_print_calendar();
-			date_finish_calendar( 'date_order', 'trigger');
-		?>
+		<input type="text" id="date_order" name="date_order" class="datetime" size="32" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'calendar_date_format' ), $t_version->date_order ) ) ) ?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>

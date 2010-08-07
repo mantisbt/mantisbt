@@ -190,6 +190,13 @@ $tpl_show_due_date = in_array( 'due_date', $t_fields ) && access_has_project_lev
 $tpl_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload();
 $tpl_show_view_state = in_array( 'view_state', $t_fields ) && access_has_project_level( config_get( 'set_view_status_threshold' ) );
 
+if ( $tpl_show_due_date ) {
+	require_js( 'jscalendar/calendar.js' );
+	require_js( 'jscalendar/lang/calendar-en.js' );
+	require_js( 'jscalendar/calendar-setup.js' );
+	require_css( 'calendar-blue.css' );
+}
+
 # don't index bug report page
 html_robots_noindex();
 
@@ -289,10 +296,7 @@ print_recently_visited();
 			<?php print_documentation_link( 'due_date' ) ?>
 		</th>
 		<td>
-		<?php
-		    print "<input ".helper_get_tab_index()." type=\"text\" id=\"due_date\" name=\"due_date\" size=\"20\" maxlength=\"10\" value=\"".$t_date_to_display."\" />";
-			date_print_calendar();
-		?>
+			<?php echo "<input " . helper_get_tab_index() . " type=\"text\" id=\"due_date\" name=\"due_date\" class=\"datetime\" size=\"20\" maxlength=\"10\" value=\"" . $t_date_to_display . "\" />" ?>
 		</td>
 	</tr>
 <?php } ?>
@@ -564,8 +568,4 @@ print_recently_visited();
 </form>
 </div>
 <?php
-if ( $tpl_show_due_date ) {
-	date_finish_calendar( 'due_date', 'trigger' );
-}
-
 html_page_bottom();

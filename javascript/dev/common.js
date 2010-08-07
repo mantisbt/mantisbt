@@ -135,6 +135,17 @@ $(document).ready( function() {
 		stopwatch.reset();
 		$('input[type=button].stopwatch_toggle').attr('value', translations['time_tracking_stopwatch_start']);
 	});
+
+	$('input[type=text].datetime').each(function(index, element) {
+		$(this).after('<input type="image" class="button datetime" id="' + element.id + '_datetime_button' + '" src="' + config['icon_path'] + 'calendar-img.gif" />');
+		Calendar.setup({
+			inputField: element.id,
+			timeFormat: 24,
+			showsTime: true,
+			ifFormat: config['calendar_js_date_format'],
+			button: element.id + '_datetime_button'
+		});
+	});
 });
 
 /*

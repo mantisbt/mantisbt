@@ -89,7 +89,15 @@ if ( !( ( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_
 		) ) {
 	access_denied();
 }
+
 $t_can_update_due_date = access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id );
+if ( $t_can_update_due_date ) {
+	require_js( 'jscalendar/calendar.js' );
+	require_js( 'jscalendar/lang/calendar-en.js' );
+	require_js( 'jscalendar/calendar-setup.js' );
+	require_css( 'calendar-blue.css' );
+}
+
 # get new issue handler if set, otherwise default to original handler
 $f_handler_id = gpc_get_int( 'handler_id', bug_get_field( $f_bug_id, 'handler_id' ) );
 
@@ -226,10 +234,7 @@ if ( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get
 		<?php print_documentation_link( 'due_date' ) ?>
 	</th>
 	<td>
-	<?php
-	    print "<input ".helper_get_tab_index()." type=\"text\" id=\"due_date\" name=\"due_date\" size=\"20\" maxlength=\"10\" value=\"".$t_date_to_display."\" />";
-		date_print_calendar();
-	?>
+		<?php echo "<input " . helper_get_tab_index() . " type=\"text\" id=\"due_date\" name=\"due_date\" class=\"datetime\" size=\"20\" maxlength=\"10\" value=\"" . $t_date_to_display . "\" />" ?>
 	</td>
 </tr>
 <?php } ?>
@@ -372,13 +377,7 @@ if ( ( $t_resolved <= $f_new_status ) ) {
 </table>
 </form>
 </div>
-
+<br />
 <?php
-if ( $t_can_update_due_date ) {
-	date_finish_calendar( 'due_date', 'trigger');
-}
-
-echo '<br />';
-
 define( 'BUG_VIEW_INC_ALLOW', true );
 include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' );
