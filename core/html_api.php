@@ -112,6 +112,9 @@ $g_robots_meta = '';
 # flag for error handler to skip header menus
 $g_error_send_page_header = true;
 
+$g_stylesheets_included = array();
+$g_scripts_included = array();
+
 /**
  * Sets the url for the rss link associated with the current page.
  * null: means no feed (default).
@@ -343,17 +346,25 @@ function html_title( $p_page_title = null ) {
 	echo '</title>', "\n";
 }
 
+function require_css( $p_stylesheet_path ) {
+	global $g_stylesheets_included;
+	$g_stylesheets_included[$p_stylesheet_path] = $p_stylesheet_path;
+}
+
 /**
  * (5) Print the link to include the css file
  * @return null
  */
 function html_css() {
+	global $g_stylesheets_included;
 	html_css_link( config_get( 'css_include_file' ) );
 	html_css_link( 'jquery-ui.css' );
-
 	# Add right-to-left css if needed
-	if( lang_get( 'directionality' ) == 'rtl' ) {
+	if ( lang_get( 'directionality' ) == 'rtl' ) {
 		html_css_link( config_get( 'css_rtl_include_file' ) );
+	}
+	foreach ( $g_stylesheets_included as $t_stylesheet_path ) {
+		html_css_link ( $t_stylesheet_path );
 	}
 }
 
@@ -401,17 +412,27 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 	return true;
 }
 
+function require_js( $p_script_path ) {
+	global $g_scripts_included;
+	$g_scripts_included[$p_script_path] = $p_script_path;
+}
+
 /**
  * (6a) Javascript...
  * @return null
  */
 function html_head_javascript() {
-	if( ON == config_get( 'use_javascript' ) ) {
+	if ( config_get( 'use_javascript' ) ) {
+		global $g_scripts_included;
+		echo '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
 		echo '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
 		html_javascript_link( 'ajax.js' );
 		html_javascript_link( 'jquery.js' );
 		html_javascript_link( 'jquery-ui.js' );
 		html_javascript_link( 'common.js' );
+		foreach ( $g_scripts_included as $t_script_path ) {
+			html_javascript_link( $t_script_path );
+		}
 	}
 }
 
