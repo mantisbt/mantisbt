@@ -424,8 +424,8 @@ function require_js( $p_script_path ) {
 function html_head_javascript() {
 	if ( config_get( 'use_javascript' ) ) {
 		global $g_scripts_included;
-		echo '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
-		echo '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
+		echo "\t<script type=\"text/javascript\" src=\"" . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
+		echo "\t<script type=\"text/javascript\" src=\"" . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
 		html_javascript_link( 'ajax.js' );
 		html_javascript_link( 'jquery.js' );
 		html_javascript_link( 'jquery-ui.js' );
