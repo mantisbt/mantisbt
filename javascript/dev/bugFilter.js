@@ -1,31 +1,31 @@
 var begin_form = '';
 var form_fields = new Array();
 var serialized_form_fields = new Array();
-$j(document).ready(function(){
+$(document).ready(function(){
 	var i = 0;
-	$j('[name=filters_open]').find('input').each(function() {
-		var formname = $j(this).parent('form').attr('name');
+	$('[name=filters_open]').find('input').each(function() {
+		var formname = $(this).parent('form').attr('name');
 		if( formname != 'list_queries_open' && formname != 'open_queries' && formname != 'save_query' ) {
 			// serialize the field and add it to an array
 
-			if( $j.inArray($j(this).attr('name'),form_fields) == -1 ) {
-				form_fields[i] = $j(this).attr('name');
+			if( $.inArray($(this).attr('name'),form_fields) == -1 ) {
+				form_fields[i] = $(this).attr('name');
 				i++;
 			}
 		}
 	});
-	$j.each( form_fields, function (index, value) {
-		serialized_form_fields[value] = $j('[name=filters_open]').find('[name='+value+']').serialize();
+	$.each( form_fields, function (index, value) {
+		serialized_form_fields[value] = $('[name=filters_open]').find('[name='+value+']').serialize();
 	});
 
 	/* Set up events to modify the form css to show when a stored query has been modified */
-	begin_form = $j('[name=filters_open]').serialize();
+	begin_form = $('[name=filters_open]').serialize();
 
-	$j('[:input').live("change", function() {
-		filter_highlight_changes($j(this));
+	$('[:input').live("change", function() {
+		filter_highlight_changes($(this));
 	});
-	$j(':checkbox').live("click", function() {
-		filter_highlight_changes($j(this));
+	$(':checkbox').live("click", function() {
+		filter_highlight_changes($(this));
 	});
 });
 
@@ -52,7 +52,7 @@ function filter_highlight_changes(item) {
 	filter_toggle_field_changed( item );
 
 	/* Check if form is different that started with */
-	var changed_form = $j('[name=filters_open]').serialize();
+	var changed_form = $('[name=filters_open]').serialize();
 	if( begin_form == changed_form ) {
 		filter_clean_all();
 	}
@@ -60,25 +60,25 @@ function filter_highlight_changes(item) {
 
 function filter_named_filter_clean() {
 	/* be sure it's clean whether it's stored filter or not */
-	var selected_text = $j('[name=source_query_id] option:selected').html();
+	var selected_text = $('[name=source_query_id] option:selected').html();
 	if( selected_text.charAt(0) == '*' ) {
-		$j('[name=source_query_id]').removeClass('tainted');
+		$('[name=source_query_id]').removeClass('tainted');
 		var reset_text = selected_text.substring(2,selected_text.length);
-		$j('[name=source_query_id] option:selected').html(reset_text);
+		$('[name=source_query_id] option:selected').html(reset_text);
 	}
 }
 
 function filter_named_filter_dirty() {
-	var stored_query_id = $j('[name=source_query_id]').val();
+	var stored_query_id = $('[name=source_query_id]').val();
 	if( stored_query_id == -1 ) {
 		/* Only make it dirty if it's a stored filter */
 		return;
 	}
 	/* stored query in filter is tainted */
-	var selected_text = $j('[name=source_query_id] option:selected').html();
+	var selected_text = $('[name=source_query_id] option:selected').html();
 	if( selected_text.charAt(0) != '*' ) {
-		$j('[name=source_query_id] option:selected').prepend('* ');
-		$j('[name=source_query_id]').addClass('tainted');
+		$('[name=source_query_id] option:selected').prepend('* ');
+		$('[name=source_query_id]').addClass('tainted');
 	}
 }
 
@@ -94,7 +94,7 @@ function filter_field_dirty( item ) {
 
 function filter_clean_all() {
 	filter_named_filter_clean();
-	$j('.tainted').each(function() {
-		$j(this).removeClass('tainted');
+	$('.tainted').each(function() {
+		$(this).removeClass('tainted');
 	});
 }
