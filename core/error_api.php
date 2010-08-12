@@ -38,17 +38,12 @@ require_api( 'database_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-# Error API
-# set up error_handler() as the new default error handling function
-set_error_handler( 'error_handler' );
-
-# ########################################
-# SECURITY NOTE: these globals are initialized here to prevent them
-#   being spoofed if register_globals is turned on
-#
 $g_error_parameters = array();
 $g_error_handled = false;
 $g_error_proceed_url = null;
+$g_error_send_page_header = true;
+
+set_error_handler( 'error_handler' );
 
 /**
  * Default error handler
@@ -166,7 +161,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 			}
 
 			# don't send the page header information if it has already been sent
-			if( $g_error_send_page_header || $g_error_send_page_header == null ) {
+			if( $g_error_send_page_header ) {
 				if( $t_html_api ) {
 					html_page_top1();
 					if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
