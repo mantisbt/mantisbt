@@ -447,3 +447,12 @@ function excel_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field 
 	// field is not linked to project
 	return excel_prepare_string( '' );
 }
+
+/**
+ * Gets the formatted due date.
+ * @param $p_due_date The due date.
+ * @returns The formatted due date.
+ */
+function excel_format_due_date( $p_due_date ) {
+	return excel_prepare_string( date( config_get( 'short_date_format' ), $p_due_date ) );
+}
