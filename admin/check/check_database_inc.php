@@ -193,7 +193,8 @@ if( db_is_mysql() ) {
 
 	$t_result = db_query_bound( 'SHOW TABLE STATUS' );
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		if( preg_match( "/^$t_table_prefix_regex_safe.+?$t_table_suffix_regex_safe\$/", $t_row['Name'] ) ) {
+		if( $t_row['Comment'] !== 'VIEW' &&
+		    preg_match( "/^$t_table_prefix_regex_safe.+?$t_table_suffix_regex_safe\$/", $t_row['Name'] ) ) {
 			check_print_test_row(
 				'Table <em>' . htmlentities( $t_row['Name'] ) . '</em> is using UTF-8 collation',
 				substr( $t_row['Collation'], 0, 5 ) === 'utf8_',
