@@ -743,8 +743,10 @@ if( 3 == $t_install_state ) {
 				}
 			}
 			if( $f_log_queries ) {
-				foreach( $sqlarray as $sql ) {
-					echo htmlentities( $sql ) . ";\r\n\r\n";
+				if( $t_sql ) {
+					foreach( $sqlarray as $sql ) {
+						echo htmlentities( $sql ) . ";\r\n\r\n";
+					}
 				}
 			} else {
 				echo 'Schema ' . $upgrade[$i][0] . ' ( ' . $t_target . ' )</td>';
