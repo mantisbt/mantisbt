@@ -196,7 +196,9 @@ function test_database_utf8() {
 	// table collation/character set check
 	$result = db_query_bound( 'SHOW TABLE STATUS' );
 	while( $row = db_fetch_array( $result ) ) {
-		print_test_row( 'Checking Table Collation is utf8 for ' . $row['Name'] . '....', substr( $row['Collation'], 0, 5 ) === 'utf8_', $row['Collation'] );
+		if( $row['Comment'] !== 'VIEW' ) {
+			print_test_row( 'Checking Table Collation is utf8 for ' . $row['Name'] . '....', substr( $row['Collation'], 0, 5 ) === 'utf8_', $row['Collation'] );
+		}
 	}
 
 	foreach( db_get_table_list() as $t_table ) {
