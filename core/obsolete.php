@@ -151,3 +151,4 @@ config_obsolete( 'source_control_set_resolution_to' );
 config_obsolete( 'source_control_regexp' );
 config_obsolete( 'source_control_fixed_regexp' );
 config_obsolete( 'allow_close_immediately' );
+config_obsolete( 'show_extended_project_browser' );
