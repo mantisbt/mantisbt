@@ -230,7 +230,7 @@ function html_page_top2() {
 		}
 	}
 	print_menu();
-
+	echo '<div id="content">', "\n";
 	event_signal( 'EVENT_LAYOUT_CONTENT_BEGIN' );
 }
 
@@ -273,7 +273,7 @@ function html_page_bottom1( $p_file = null ) {
 	}
 
 	event_signal( 'EVENT_LAYOUT_CONTENT_END' );
-
+	echo '</div>', "\n";
 	if( config_get( 'show_footer_menu' ) ) {
 		echo '<br />';
 		print_menu();
@@ -452,6 +452,7 @@ function html_head_end() {
  */
 function html_body_begin() {
 	echo '<body>', "\n";
+	echo '<div id="mantis">', "\n";
 
 	event_signal( 'EVENT_LAYOUT_BODY_BEGIN' );
 }
@@ -496,11 +497,11 @@ function html_top_banner() {
 			$t_align = 'left';
 		}
 
-		echo '<div align="', $t_align, '">';
+		echo '<div id="banner" align="', $t_align, '">';
 		if( $t_show_url ) {
-			echo '<a href="', config_get( 'logo_url' ), '">';
+			echo '<a id="logo-link" href="', config_get( 'logo_url' ), '">';
 		}
-		echo '<img border="0" alt="Mantis Bug Tracker" src="' . helper_mantis_url( config_get( 'logo_image' ) ) . '" />';
+		echo '<img border="0" id="logo-image" alt="Mantis Bug Tracker" src="' . helper_mantis_url( config_get( 'logo_image' ) ) . '" />';
 		if( $t_show_url ) {
 			echo '</a>';
 		}
@@ -521,7 +522,7 @@ function html_login_info() {
 	$t_now = date( config_get( 'complete_date_format' ) );
 	$t_realname = current_user_get_field( 'realname' );
 
-	echo '<table class="hide">';
+	echo '<table class="hide" id="login-info">';
 	echo '<tr>';
 	echo '<td class="login-info-left">';
 	if( current_user_is_anonymous() ) {
@@ -722,6 +723,7 @@ function html_footer( $p_file = null ) {
 	}
 
 	echo "</div>\n";
+
 }
 
 /**
@@ -730,6 +732,8 @@ function html_footer( $p_file = null ) {
  */
 function html_body_end() {
 	event_signal( 'EVENT_LAYOUT_BODY_END' );
+
+	echo '</div>', "\n";
 
 	echo '</body>', "\n";
 }
@@ -772,7 +776,7 @@ function print_menu() {
 		$t_protected = current_user_get_field( 'protected' );
 		$t_current_project = helper_get_current_project();
 
-		echo '<table class="width100" cellspacing="0">';
+		echo '<table class="main-menu-container width100" cellspacing="0">';
 		echo '<tr>';
 		echo '<td class="menu">';
 		$t_menu_options = array();
