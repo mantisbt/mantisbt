@@ -319,6 +319,8 @@ if ( ( $t_resolved <= $f_new_status ) ) {
 <?php }
 	} ?>
 
+<?php event_signal( 'EVENT_BUG_CHANGE_STATUS_FORM', array( $f_bug_id ) ); ?>
+
 <!-- Bugnote -->
 <tr <?php echo helper_alternate_class() ?>>
 	<th class="category">
