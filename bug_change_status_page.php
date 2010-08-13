@@ -306,6 +306,8 @@ if ( ( $f_new_status >= $t_resolved ) && ( $t_closed > $f_new_status ) ) { ?>
 	}
 ?>
 
+<?php event_signal( 'EVENT_BUG_CHANGE_STATUS_FORM', array( $f_bug_id ) ); ?>
+
 <!-- Bugnote -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
