@@ -958,7 +958,7 @@ function print_subproject_menu_bar( $p_project_id, $p_parents = '' ) {
  * @return null
  */
 function print_summary_submenu() {
-	echo '<div align="center">';
+	echo '<div id="summary-submenu" align="center">';
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_SUBMENU_SUMMARY' );
@@ -1028,7 +1028,7 @@ function print_manage_menu( $p_page = '' ) {
 			break;
 	}
 
-	echo '<div align="center"><p>';
+	echo '<div id="manage-menu" align="center"><p>';
 	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
 		print_bracket_link( helper_mantis_url( $t_manage_user_page ), lang_get( 'manage_users_link' ) );
 	}
@@ -1116,7 +1116,7 @@ function print_manage_config_menu( $p_page = '' ) {
 	}
 
 	if ( access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
-		echo '<br /><div align="center">';
+		echo '<div id="manage-config-menu">';
 
 		if ( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
 			print_bracket_link( helper_mantis_url( $t_configuration_report ), lang_get_defaulted( 'configuration_report' ) );
@@ -1182,6 +1182,7 @@ function print_account_menu( $p_page = '' ) {
 			break;
 	}
 
+	echo '<div id="account-menu">';
 	print_bracket_link( $t_account_page, lang_get( 'account_link' ) );
 	print_bracket_link( $t_account_prefs_page, lang_get( 'change_preferences_link' ) );
 	print_bracket_link( $t_account_manage_columns_page, lang_get( 'manage_columns_config' ) );
@@ -1216,6 +1217,7 @@ function print_account_menu( $p_page = '' ) {
 		echo $t_menu_item;
 		echo '&nbsp;]</span> ';
 	}
+	echo '</div>';
 }
 
 /**
@@ -1240,11 +1242,13 @@ function print_doc_menu( $p_page = '' ) {
 			break;
 	}
 
+	echo '<div id="doc-menu">';
 	print_bracket_link( $t_documentation_html, lang_get( 'user_documentation' ) );
 	print_bracket_link( helper_mantis_url( $t_proj_doc_page ), lang_get( 'project_documentation' ) );
 	if( file_allow_project_upload() ) {
 		print_bracket_link( helper_mantis_url( $t_proj_doc_add_page ), lang_get( 'add_file' ) );
 	}
+	echo '</div>';
 }
 
 /**
@@ -1253,7 +1257,7 @@ function print_doc_menu( $p_page = '' ) {
  * @return null
  */
 function print_summary_menu( $p_page = '' ) {
-	echo '<div align="center">';
+	echo '<div id="summary-menu" align="center">';
 	print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
 	print_bracket_link( helper_mantis_url( 'summary_page.php' ), lang_get( 'summary_link' ) );
 
