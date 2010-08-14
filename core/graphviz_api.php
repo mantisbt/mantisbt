@@ -326,82 +326,19 @@ class Graph {
 		if( $p_headers ) {
 			header( 'Content-Type: ' . $t_mime );
 		}
-
 		# Retrieve the source dot document into a buffer
 		ob_start();
 		$this->generate();
 		$t_dot_source = ob_get_contents();
 		ob_end_clean();
 
-		# There are three different ways to generate the output depending
-		# on the operating system and PHP version.
-		if( is_windows_server() ) {
-			# If we are under Windows, we use the COM interface provided
-			# by WinGraphviz. Thanks Paul!
-			# Issue #4625: Work around WinGraphviz bug that fails with
-			# graphs with zero or one node. It is probably too much to
-			# generate a graphic output just to explain it to the user,
-			# so we just return a null content.
-			if( count( $this->nodes ) <= 1 ) {
-				return;
-			}
+		# Start dot process
 
-			$t_graphviz = new COM( $this->graphviz_com_module );
-
-			# Check if we managed to instantiate the COM object.
-			if( is_null( $t_graphviz ) ) {
-				# We can't display any message or trigger an error on
-				# failure, since we may have already sent a Content-type
-				# header potentially incompatible with the any html output.
-				return;
-			}
-
-			if( $t_binary ) {
-				# Image formats
-				$t_dot_output = $t_graphviz->ToBinaryGraph( $t_dot_source, $t_type );
-
-				if( $p_headers ) {
-					# Headers were requested, use another output buffer
-					# to retrieve the size for Content-Length.
-					ob_start();
-					echo base64_decode( $t_dot_output->ToBase64String() );
-					header( 'Content-Length: ' . ob_get_length() );
-					ob_end_flush();
-				} else {
-					# No need for headers, send output directly.
-					echo base64_decode( $ret->ToBase64String() );
-				}
-			} else {
-				# Text formats
-				$t_dot_output = $t_graphviz->ToTextGraph( $t_dot_source, $t_type );
-
-				if( $p_headers ) {
-					header( 'Content-Length: ' . utf8_strlen( $t_dot_output ) );
-				}
-
-				echo $t_dot_output;
-			}
-
-			unset( $t_graphviz );
-		} else {
-			# If we are not under Windows, use proc_open,
-			# since it avoids the need of temporary files.
-			# Start dot process
-			$t_command = $this->graphviz_tool . ' -T' . $p_format;
-			$t_descriptors = array(
-				0 => array(
-					'pipe',
-					'r',
-				),
-				1 => array(
-					'pipe',
-					'w',
-				),
-				2 => array(
-					'file',
-					'php://stderr',
-					'w',
-				),
+		$t_command = $this->graphviz_tool . ' -T' . $p_format;
+		$t_descriptors = array(
+			0 => array( 'pipe', 'r', ),
+			1 => array( 'pipe', 'w', ),
+			2 => array( 'file', 'php://stderr', 'w', ),
 			);
 
 			$t_pipes = array();

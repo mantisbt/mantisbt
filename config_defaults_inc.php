@@ -3381,17 +3381,30 @@ $g_rss_enabled = ON;
  * Enable relationship graphs support.
  * Show issue relationships using graphs.
  *
- * In order to use this feature, you must first install either GraphViz
- * (all OSs except Windows) or WinGraphviz (only Windows).
+ * In order to use this feature, you must first install GraphViz.
  *
  * Graphviz homepage:    http://www.research.att.com/sw/tools/graphviz/
- * WinGraphviz homepage: http://home.so-net.net.tw/oodtsen/wingraphviz/
  *
  * Refer to the notes near the top of core/graphviz_api.php and
  * core/relationship_graph_api.php for more information.
  * @global int $g_relationship_graph_enable
  */
 $g_relationship_graph_enable = OFF;
+
+/**
+ * Complete path to dot and neato tools. Your webserver must have execute
+ * permission to these programs in order to generate relationship graphs.
+ * NOTE: On windows, the IIS user may require permissions to cmd.exe to be able to use PHP's proc_open
+ * @global string $g_dot_tool
+ */
+$g_dot_tool = '/usr/bin/dot';
+/**
+ * Complete path to dot and neato tools. Your webserver must have execute
+ * permission to these programs in order to generate relationship graphs.
+ * NOTE: On windows, the IIS user may require permissions to cmd.exe to be able to use PHP's proc_open
+ * @global string $g_neato_tool
+ */
+$g_neato_tool = '/usr/bin/neato';
 
 /**
  * Font name and size, as required by Graphviz. If Graphviz fails to run
@@ -3432,21 +3445,6 @@ $g_relationship_graph_max_depth = 2;
  * @global int $g_relationship_graph_view_on_click
  */
 $g_relationship_graph_view_on_click = OFF;
-
-/**
- * Complete path to dot and neato tools. Your webserver must have execute
- * permission to these programs in order to generate relationship graphs.
- * NOTE: These are meaningless under Windows! Just ignore them!
- * @global string $g_dot_tool
- */
-$g_dot_tool = '/usr/bin/dot';
-/**
- * Complete path to dot and neato tools. Your webserver must have execute
- * permission to these programs in order to generate relationship graphs.
- * NOTE: These are meaningless under Windows! Just ignore them!
- * @global string $g_neato_tool
- */
-$g_neato_tool = '/usr/bin/neato';
 
 /**
  * Number of years in the past that custom date fields will display in
