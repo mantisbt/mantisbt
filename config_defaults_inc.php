@@ -127,8 +127,8 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 	}
 
 	$t_path = str_replace( basename( $_SERVER['PHP_SELF'] ), '', $_SERVER['PHP_SELF'] );
-	$t_path = basename( $t_path ) == "admin" ? dirname( $t_path ) . DIRECTORY_SEPARATOR : $t_path;
-	$t_path = basename( $t_path ) == "soap" ? dirname( dirname( $t_path ) ) . DIRECTORY_SEPARATOR : $t_path;
+	$t_path = basename( $t_path ) == "admin" ? rtrim( dirname( $t_path ), '/\\' ) . '/' : $t_path;
+	$t_path = basename( $t_path ) == "soap" ? rtrim( dirname( dirname( $t_path ) ), '/\\' ) . '/' : $t_path;
 
 	$t_url	= $t_protocol . '://' . $t_host . $t_path;
 
