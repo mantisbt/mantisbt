@@ -18,15 +18,12 @@
  * GraphViz API
  *
  * Wrapper classes around GraphViz utilities (dot and neato) for
- * directed and undirected graph generation. Under Windows, the COM
- * API provided by WinGraphviz is used. These wrappers are enhanced
+ * directed and undirected graph generation. These wrappers are enhanced
  * enough just to support relationship_graph_api.php. They don't
  * support subgraphs yet.
  *
  * The original Graphviz package is available at:
- * 	- http://www.research.att.com/sw/tools/graphviz/
- * WinGraphviz can be installed from:
- * 	- http://home.so-net.net.tw/oodtsen/wingraphviz/
+ * 	- http://www.graphviz.org/
  * Additional documentation can be found at:
  * 	- http://www.graphviz.org/Documentation.html
  *
