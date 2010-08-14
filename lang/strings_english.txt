@@ -791,6 +791,7 @@ $s_manage_config_link = 'Manage Configuration';
 $s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'E-mail Notifications';
 $s_manage_workflow_config = 'Workflow Transitions';
+$s_manage_workflow_graph = 'Workflow Graph';
 $s_manage_tags_link = 'Manage Tags';
 $s_create_new_account_link = 'Create New Account';
 $s_projects_link = 'Projects';

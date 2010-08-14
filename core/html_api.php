@@ -1087,69 +1087,68 @@ function print_manage_menu( $p_page = '' ) {
  * @return null
  */
 function print_manage_config_menu( $p_page = '' ) {
-	$t_configuration_report = 'adm_config_report.php';
-	$t_permissions_summary_report = 'adm_permissions_report.php';
-	$t_manage_work_threshold = 'manage_config_work_threshold_page.php';
-	$t_manage_email = 'manage_config_email_page.php';
-	$t_manage_workflow = 'manage_config_workflow_page.php';
-	$t_manage_columns = 'manage_config_columns_page.php';
-
-	switch( $p_page ) {
-		case $t_configuration_report:
-			$t_configuration_report = '';
-			break;
-		case $t_permissions_summary_report:
-			$t_permissions_summary_report = '';
-			break;
-		case $t_manage_work_threshold:
-			$t_manage_work_threshold = '';
-			break;
-		case $t_manage_email:
-			$t_manage_email = '';
-			break;
-		case $t_manage_workflow:
-			$t_manage_workflow = '';
-			break;
-		case $t_manage_columns:
-			$t_manage_columns = '';
-			break;
+	if ( !access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
+		return;
 	}
 
-	if ( access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
-		echo '<div id="manage-config-menu">';
+	$t_pages = array();
 
-		if ( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
-			print_bracket_link( helper_mantis_url( $t_configuration_report ), lang_get_defaulted( 'configuration_report' ) );
-		}
+	if ( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
+		$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php',
+		                                           'label' => 'configuration_report' );
+	}
 
-		print_bracket_link( helper_mantis_url( $t_permissions_summary_report ), lang_get( 'permissions_summary_report' ) );
-		print_bracket_link( helper_mantis_url( $t_manage_work_threshold ), lang_get( 'manage_threshold_config' ) );
-		print_bracket_link( helper_mantis_url( $t_manage_workflow ), lang_get( 'manage_workflow_config' ) );
-		print_bracket_link( helper_mantis_url( $t_manage_email ), lang_get( 'manage_email_config' ) );
-		print_bracket_link( $t_manage_columns, lang_get( 'manage_columns_config' ) );
+	$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php',
+	                                                'label' => 'permissions_summary_report' );
 
-		# Plugin / Event added options
-		$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );
-		$t_menu_options = array();
-		foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-			foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-				if( is_array( $t_callback_menu_options ) ) {
-					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-				} else {
-					if ( !is_null( $t_callback_menu_options ) ) {
-						$t_menu_options[] = $t_callback_menu_options;
-					}
+	$t_pages['manage_config_work_threshold_page.php'] = array( 'url'   => 'manage_config_work_threshold_page.php',
+	                                                           'label' => 'manage_threshold_config' );
+
+	$t_pages['manage_config_workflow_page.php'] = array( 'url'   => 'manage_config_workflow_page.php',
+	                                                     'label' => 'manage_workflow_config' );
+
+	if ( config_get( 'relationship_graph_enable' ) ) {
+		$t_pages['manage_config_workflow_graph_page.php'] = array( 'url'   => 'manage_config_workflow_graph_page.php',
+		                                                           'label' => 'manage_workflow_graph' );
+	}
+
+	$t_pages['manage_config_email_page.php'] = array( 'url'   => 'manage_config_email_page.php',
+	                                                  'label' => 'manage_email_config' );
+
+	$t_pages['manage_config_columns_page.php'] = array( 'url'   => 'manage_config_columns_page.php',
+	                                                    'label' => 'manage_columns_config' );
+
+	# Remove the link from the current page
+	if ( isset( $t_pages[$p_page] ) ) {
+		$t_pages[$p_page]['url'] = '';
+	}
+
+	echo '<br /><div id="manage-config-menu">';
+
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );
+	$t_menu_options = array();
+	foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if ( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				if ( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
 				}
 			}
 		}
-
-		// Plugins menu items
-		foreach( $t_menu_options as $t_menu_item ) {
-			print_bracket_link_prepared( $t_menu_item );
-		}
-
-		echo '</div>';
 	}
+
+	foreach ( $t_pages as $t_page ) {
+		print_bracket_link( helper_mantis_url( $t_page['url'] ), lang_get( $t_page['label'] ) );
+	}
+
+	foreach ( $t_menu_options as $t_menu_item ) {
+		print_bracket_link_prepared( $t_menu_item );
+	}
+
+	echo '</div>';
 }
 
 /**

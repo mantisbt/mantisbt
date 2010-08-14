@@ -32,6 +32,7 @@
  * @uses print_api.php
  * @uses project_api.php
  * @uses string_api.php
+ * @uses workflow_api.php
  */
 
 require_once( 'core.php' );
@@ -46,6 +47,7 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'project_api.php' );
 require_api( 'string_api.php' );
+require_api( 'workflow_api.php' );
 
 auth_reauthenticate();
 
@@ -66,69 +68,6 @@ function set_overrides( $p_config ) {
 	   $t_overrides[] = $p_config;
    }
 }
-
-function parse_workflow( $p_enum_workflow ) {
-	$t_status_arr  = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-	if ( 0 == count( $p_enum_workflow ) ) {
-		# workflow is not set, default it to all transitions
-		foreach ( $t_status_arr as $t_status => $t_label ) {
-			$t_temp_workflow = array();
-			foreach ( $t_status_arr as $t_next => $t_next_label ) {
-				if ( $t_status <> $t_next ) {
-				   $t_temp_workflow[] = $t_next . ':' . $t_next_label;
-				}
-			}
-			$p_enum_workflow[$t_status] = implode( ',', $t_temp_workflow );
-		}
-	}
-
-	$t_entry = array();
-	$t_exit = array();
-
-	# prepopulate new bug state (bugs go from nothing to here)
-	$t_submit_status_array = config_get( 'bug_submit_status' );
-	$t_new_label = MantisEnum::getLabel( lang_get( 'status_enum_string' ), config_get( 'bug_submit_status' ) );
-	if ( is_array( $t_submit_status_array ) ) {
-		# @@@ (thraxisp) this is not implemented in bug_api.php
-		foreach ($t_submit_status_array as $t_access => $t_status ) {
-			$t_entry[$t_status][0] = $t_new_label;
-			$t_exit[0][$t_status] = $t_new_label;
-		}
-	} else {
-		$t_status = $t_submit_status_array;
-		$t_entry[$t_status][0] = $t_new_label;
-		$t_exit[0][$t_status] = $t_new_label;
-	}
-
-	# add user defined arcs and implicit reopen arcs
-	$t_reopen = config_get( 'bug_reopen_status' );
-	$t_reopen_label = MantisEnum::getLabel( lang_get( 'resolution_enum_string' ), config_get( 'bug_reopen_resolution' ) );
-	$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
-	$t_default = array();
-	foreach ( $t_status_arr as $t_status => $t_status_label ) {
-		if ( isset( $p_enum_workflow[$t_status] ) ) {
-			$t_next_arr = MantisEnum::getAssocArrayIndexedByValues( $p_enum_workflow[$t_status] );
-			foreach ( $t_next_arr as $t_next => $t_next_label) {
-				if ( !isset( $t_default[$t_status] ) ) {
-					$t_default[$t_status] = $t_next;
-				}
-				$t_exit[$t_status][$t_next] = '';
-				$t_entry[$t_next][$t_status] = '';
-			}
-		} else {
-			$t_exit[$t_status] = array();
-		}
-		if ( $t_status >= $t_resolved_status ) {
-			$t_exit[$t_status][$t_reopen] = $t_reopen_label;
-			$t_entry[$t_reopen][$t_status] = $t_reopen_label;
-		}
-		if ( !isset( $t_entry[$t_status] ) ) {
-			$t_entry[$t_status] = array();
-		}
-	}
-	return array( 'entry' => $t_entry, 'exit' => $t_exit, 'default' => $t_default );
-}
-
 
 # Get the value associated with the specific action and flag.
 function show_flag( $p_from_status_id, $p_to_status_id ) {
@@ -383,9 +322,9 @@ $t_lang_enum_status = '0:' . lang_get( 'non_existent' ) . ',' . lang_get( 'statu
 $t_all_status = explode( ',', $t_extra_enum_status);
 
 # gather all versions of the workflow
-$t_file_workflow = parse_workflow( config_get_global( 'status_enum_workflow' ) );
-$t_global_workflow = parse_workflow( config_get( 'status_enum_workflow', null, null, ALL_PROJECTS ) );
-$t_project_workflow = parse_workflow( config_get( 'status_enum_workflow' ) );
+$t_file_workflow = workflow_parse( config_get_global( 'status_enum_workflow' ) );
+$t_global_workflow = workflow_parse( config_get( 'status_enum_workflow', null, null, ALL_PROJECTS ) );
+$t_project_workflow = workflow_parse( config_get( 'status_enum_workflow' ) );
 
 # validate the project workflow
 $t_validation_result = '';
