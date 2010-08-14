@@ -115,8 +115,8 @@
 		$t_self = $_SERVER['SCRIPT_NAME'];
 		$t_self = trim( str_replace( "\0", '', $t_self ) );
 		$t_path = str_replace( basename( $t_self ), '', $t_self );
-		$t_path = basename( $t_path ) == "admin" ? dirname( $t_path ) . '/' : $t_path;
-		$t_path = basename( $t_path ) == "soap" ? dirname( dirname( $t_path ) ) . '/' : $t_path;
+		$t_path = basename( $t_path ) == "admin" ? rtrim( dirname( $t_path ), '/\\' ) . '/' : $t_path;
+		$t_path = basename( $t_path ) == "soap" ? rtrim( dirname( dirname( $t_path ) ), '/\\' ) . '/' : $t_path;
 		if ( strpos( $t_path, '&#' ) ) {
 			echo 'Can not safely determine $g_path. Please set $g_path manually in config_inc.php';
 			die;
