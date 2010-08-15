@@ -404,16 +404,9 @@ function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAG
 		$t_keys_to_remove[] = 'overdue';
 	}
 
-	$t_enable_sponsorship = config_get( 'enable_sponsorship' );
-	if( OFF == $t_enable_sponsorship ) {
-		$t_keys_to_remove[] = 'sponsorship_total';
-	}
-
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE || $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE || OFF == config_get( 'show_attachment_indicator' ) ) {
 		$t_keys_to_remove[] = 'attachment';
 	}
-
-	$t_keys_to_remove[] = 'duplicate_id';
 
 	$t_current_project_id = helper_get_current_project();
 

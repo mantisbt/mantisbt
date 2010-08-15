@@ -144,12 +144,19 @@ function columns_get_standard() {
 		unset( $t_columns['build'] );
 	}
 
+	if( config_get( 'enable_sponsorship' ) == OFF ) {
+		unset( $t_columns['sponsorship_total'] );
+	}
+		
 	# The following fields are used internally and don't make sense as columns
 	unset( $t_columns['_stats'] );
 	unset( $t_columns['profile_id'] );
 	unset( $t_columns['sticky'] );
 	unset( $t_columns['loading'] );
 
+	# legacy field
+	unset( $t_columns['duplicate_id'] );
+	
 	return array_keys($t_columns);
 }
 
