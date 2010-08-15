@@ -83,21 +83,31 @@ function lang_load( $p_lang, $p_dir = null ) {
 		# this may be loaded multiple times, once per language
 	}
 
-	$t_vars = get_defined_vars();
-
-	foreach( array_keys( $t_vars ) as $t_var ) {
-		$t_lang_var = preg_replace( '/^s_/', '', $t_var );
-		if( $t_lang_var != $t_var ) {
-			$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
+	if( isset( $s_messages ) ) {
+		if( isset( $g_lang_strings[$p_lang] ) ) {
+			$g_lang_strings[$p_lang] = array_merge( ((array)$g_lang_strings[$p_lang]), (array)$s_messages);
+		} else {
+			$g_lang_strings[$p_lang] = $s_messages;
 		}
-		else if( 'MANTIS_ERROR' == $t_var ) {
-			if( isset( $g_lang_strings[$p_lang][$t_lang_var] ) ) {
-				foreach( $$t_var as $key => $val ) {
-					$g_lang_strings[$p_lang][$t_lang_var][$key] = $val;
+	}
+ 
+	if( !isset( $s_messages ) || file_exists( $t_custom_strings ) ) {	
+		$t_vars = get_defined_vars();
+ 
+		foreach( array_keys( $t_vars ) as $t_var ) {
+			$t_lang_var = preg_replace( '/^s_/', '', $t_var );
+			if( $t_lang_var != $t_var ) {
+ 				$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
+ 			}
+			else if( 'MANTIS_ERROR' == $t_var ) {
+				if( isset( $g_lang_strings[$p_lang][$t_lang_var] ) ) {
+					foreach( $$t_var as $key => $val ) {
+						$g_lang_strings[$p_lang][$t_lang_var][$key] = $val;
+					}
+				} else {
+					$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
 				}
-			} else {
-				$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
-			}
+			}	
 		}
 	}
 }
