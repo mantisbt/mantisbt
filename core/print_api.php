@@ -160,7 +160,7 @@ function print_successful_redirect_to_bug( $p_bug_id ) {
 #  configured system wait time.
 # If the show query count is OFF, redirect right away.
 function print_successful_redirect( $p_redirect_to ) {
-	if( helper_show_queries() ) {
+	if( helper_log_to_page() ) {
 		html_page_top( null, $p_redirect_to );
 		echo '<br /><div class="center">';
 		echo lang_get( 'operation_successful' ) . '<br />';

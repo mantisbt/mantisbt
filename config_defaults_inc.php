@@ -3797,26 +3797,6 @@ $g_debug_email = OFF;
 $g_show_queries_count = OFF;
 
 /**
- * Indicates the access level required for a user to see the query count / list.
- * This only has an effect if $g_show_queries_count is ON.  Note that this
- * threshold is compared against the user's default global access level rather
- * than the threshold based on the current active project.
- *
- * @global int $g_show_queries_threshold
- */
-$g_show_queries_threshold = ADMINISTRATOR;
-
-/**
- * Shows the list of all queries that are executed in chronological order from
- * top to bottom.  This option is only effective when $g_show_queries_count is
- * ON.
- * WARNING: Potential security hazard. Only turn this on when you really need
- * it (for debugging/profiling)
- * @global int $g_show_queries_list
- */
-$g_show_queries_list = OFF;
-
-/**
  * --- detailed error messages -----
  * Shows a list of variables and their values when an error is triggered
  * Only applies to error types configured to 'halt' in $g_display_errors, below
@@ -3879,10 +3859,24 @@ $g_stop_on_errors = OFF;
 $g_log_level = LOG_NONE;
 
 /**
- *
+ * 4 Options currently exist for log destination:
+ * a) '': The default value (empty string) means default PHP error log settings
+ * b) 'file': Log to a specific file - specified as 'file:/var/log/mantis.log'
+ * c) 'firebug': make use of firefox's firebug addon from http://getfirebug.com/ - Note: if user is 
+ *    not running firefox, this options falls through to the default php error log settings.
+ * d) 'page': Display log output at bottom of the page.
  * @global string $g_log_destination
  */
 $g_log_destination = '';
+
+/**
+ * Indicates the access level required for a user to see the log output (if log_destination is page)
+ * Note that this threshold is compared against the user's default global access level rather than 
+ * the threshold based on the current active project.
+ *
+ * @global int $g_show_log_threshold
+ */
+$g_show_log_threshold = ADMINISTRATOR;
 
 /**
  * if OFF, will include original javascript files

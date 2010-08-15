@@ -137,7 +137,7 @@ $graph->driver->options->imageFormat = IMG_JPEG;
 	$graph->AddY2( $p2 );
 */
 
-/*	if( helper_show_queries() ) {
+/*	if( helper_show_query_count() ) {
 		$graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
 		$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 	}*/

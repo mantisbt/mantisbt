@@ -662,7 +662,7 @@ function html_footer( $p_file = null ) {
 	}
 
 	# Determine number of unique queries executed
-	if ( config_get( 'show_queries_count' ) || helper_show_queries() ) {
+	if ( config_get( 'show_queries_count' ) ) {
 		$t_total_queries_count = count( $g_queries_array );
 		$t_unique_queries_count = 0;
 		$t_total_query_execution_time = 0;
@@ -677,51 +677,20 @@ function html_footer( $p_file = null ) {
 			}
 			$t_total_query_execution_time += $g_queries_array[$i][1];
 		}
-	}
 
-	# Print query counts
-	if ( config_get( 'show_queries_count' ) ) {
 		$t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
 		echo "\t<p id=\"total-queries-count\">$t_total_queries_executed</p>\n";
-		$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
-		echo "\t<p id=\"unique-queries-count\">$t_unique_queries_executed</p>\n";
+		if ( config_get_global( 'db_log_queries' ) ) {
+			$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
+			echo "\t<p id=\"unique-queries-count\">$t_unique_queries_executed</p>\n";
+		}
 		$t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
 		echo "\t<p id=\"total-query-execution-time\">$t_total_query_time</p>\n";
 	}
 
-	# Print table of database queries executed
-	if ( helper_show_queries() ) {
-		echo "\t<hr />\n";
-		echo "\t<table id=\"query-list\">\n";
-		echo "\t\t<caption>" . lang_get( 'sql_queries_list_caption' ) . "</caption>\n";
-		echo "\t\t<thead>\n";
-		echo "\t\t\t<tr>\n";
-		echo "\t\t\t\t<th>" . lang_get( 'sql_query_number' ) . "</th>\n";
-		echo "\t\t\t\t<th>" . lang_get( 'sql_query_time' ) . "</th>\n";
-		echo "\t\t\t\t<th>" . lang_get( 'sql_query_caller' ) . "</th>\n";
-		echo "\t\t\t\t<th>" . lang_get( 'sql_query' ) . "</th>\n";
-		echo "\t\t\t</tr>\n";
-		echo "\t\t</thead>\n";
-		echo "\t\t<tbody>\n";
-		for ( $t_query_number = 1; $t_query_number <= $t_total_queries_count; $t_query_number++ ) {
-			$t_query_time = $g_queries_array[$t_query_number - 1][1];
-			$t_query_caller = string_html_specialchars( $g_queries_array[$t_query_number - 1][2] );
-			$t_query = string_html_specialchars( $g_queries_array[$t_query_number - 1][0] );
-			$t_query_duplicate_class = '';
-			if ( $g_queries_array[$t_query_number - 1][3] ) {
-				$t_query_duplicate_class = ' class="duplicate-query"';
-			}
-			echo "\t\t\t<tr$t_query_duplicate_class>\n";
-			echo "\t\t\t\t<td>$t_query_number</td>\n";
-			echo "\t\t\t\t<td>$t_query_time</td>\n";
-			echo "\t\t\t\t<td>$t_query_caller</td>\n";
-			echo "\t\t\t\t<td>$t_query</td>\n";
-			echo "\t\t\t</tr>\n";
-		}
-		echo "\t\t</tbody>\n";
-		echo "\t</table>\n";
-	}
-
+	# Print table of log events
+	log_print_to_page();
+		
 	echo "</div>\n";
 
 }

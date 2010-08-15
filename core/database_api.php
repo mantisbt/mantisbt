@@ -56,7 +56,7 @@ $g_db_connected = false;
  * Store whether to log queries ( used for show_queries_count/query list)
  * @global bool $g_db_log_queries
  */
-$g_db_log_queries = config_get_global( 'show_queries_list' );
+$g_db_log_queries = ( 0 != ( config_get_global( 'log_level' ) & LOG_DATABASE ) );
 
 /**
  * set adodb fetch mode
@@ -252,21 +252,7 @@ function db_is_db2() {
 function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 	global $g_queries_array, $g_db, $g_db_log_queries;
 
-	if( ON == $g_db_log_queries ) {
-		$t_start = microtime(true);
-
-		$t_backtrace = debug_backtrace();
-		$t_caller = basename( $t_backtrace[0]['file'] );
-		$t_caller .= ":" . $t_backtrace[0]['line'];
-
-		# Is this called from another function?
-		if( isset( $t_backtrace[1] ) ) {
-			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
-		} else {
-			# or from a script directly?
-			$t_caller .= ' ' . $_SERVER['SCRIPT_NAME'];
-		}
-	}
+	$t_start = microtime(true);
 
 	if(( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
 		$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset );
@@ -274,13 +260,13 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 		$t_result = $g_db->Execute( $p_query );
 	}
 
-	if( ON == $g_db_log_queries ) {
-		$t_elapsed = number_format( microtime(true) - $t_start, 4 );
+	$t_elapsed = number_format( microtime(true) - $t_start, 4 );
 
-		log_event( LOG_DATABASE, var_export( array( $p_query, $t_elapsed, $t_caller ), true ) );
-		array_push( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
+	if( ON == $g_db_log_queries ) {
+		log_event( LOG_DATABASE, array( $p_query, $t_elapsed), debug_backtrace() );
+		array_push( $g_queries_array, array( $p_query, $t_elapsed ) );
 	} else {
-		array_push( $g_queries_array, 1 );
+		array_push( $g_queries_array, array( '', $t_elapsed ) );
 	}
 
 	if( !$t_result ) {
@@ -312,23 +298,7 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 		$s_check_params = ( db_is_pgsql() || config_get_global( 'db_type' ) == 'odbc_mssql' );
 	}
 
-	if( ON == $g_db_log_queries ) {
-		$t_db_type = config_get_global( 'db_type' );
-
-		$t_start = microtime(true);
-
-		$t_backtrace = debug_backtrace();
-		$t_caller = basename( $t_backtrace[0]['file'] );
-		$t_caller .= ":" . $t_backtrace[0]['line'];
-
-		# Is this called from another function?
-		if( isset( $t_backtrace[1] ) ) {
-			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
-		} else {
-			# or from a script directly?
-			$t_caller .= ' - ';
-		}
-	}
+	$t_start = microtime(true);
 
 	if( $arr_parms != null && $s_check_params ) {
 		$params = count( $arr_parms );
@@ -345,9 +315,10 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 		$t_result = $g_db->Execute( $p_query, $arr_parms );
 	}
 
+	$t_elapsed = number_format( microtime(true) - $t_start, 4 );
+	
 	if( ON == $g_db_log_queries ) {
-		$t_elapsed = number_format( microtime(true) - $t_start, 4 );
-
+		$t_db_type = config_get_global( 'db_type' );
 		$lastoffset = 0;
 		$i = 1;
 		if( !( is_null( $arr_parms ) || empty( $arr_parms ) ) ) {
@@ -383,10 +354,10 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 				$i++;
 			}
 		}
-		log_event( LOG_DATABASE, var_export( array( $p_query, $t_elapsed, $t_caller ), true ) );
-		array_push( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
+		log_event( LOG_DATABASE, array( $p_query, $t_elapsed), debug_backtrace() );
+		array_push( $g_queries_array, array( $p_query, $t_elapsed ) );
 	} else {
-		array_push( $g_queries_array, 1 );
+		array_push( $g_queries_array, array( '', $t_elapsed ) );
 	}
 
 	# We can't reset the counter because we have queries being built

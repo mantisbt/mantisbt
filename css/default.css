@@ -200,7 +200,7 @@ div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; float: ri
 	font-size: 9pt;
 }
 
-#footer #query-list .duplicate-query {
+#footer #log-event-list .duplicate-query {
 	color: red;
 }
 td.tainted { color: red; }

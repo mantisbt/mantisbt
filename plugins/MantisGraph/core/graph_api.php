@@ -166,7 +166,7 @@ function graph_bar( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_he
 		$p1->SetFillColor( 'yellow' );
 		$p1->SetWidth( 0.8 );
 		$graph->Add( $p1 );
-		if( helper_show_queries() ) {
+		if( helper_show_query_count() ) {
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
 			$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 		}
@@ -276,7 +276,7 @@ function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_
 		$gbplot = new GroupBarPlot( array( $p1, $p3, $p2 ) );
 		$graph->Add( $gbplot );
 
-		if( helper_show_queries() ) {
+		if( helper_show_query_count() ) {
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
 			$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 		}
@@ -345,7 +345,7 @@ function graph_pie( $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_he
 		$p1->value->SetFont( $t_graph_font );
 
 		$graph->Add( $p1 );
-		if( helper_show_queries() ) {
+		if( helper_show_query_count() ) {
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
 			$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 		}
@@ -461,7 +461,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 		$p2->SetLegend( plugin_lang_get( 'legend_resolved' ) );
 		$graph->AddY2( $p2 );
 
-		if( helper_show_queries() ) {
+		if( helper_show_query_count() ) {
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
 			$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 		}
@@ -554,7 +554,7 @@ function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p
 			$graph->Add( $t_line[$i] );
 		}
 
-		if( helper_show_queries() ) {
+		if( helper_show_query_count() ) {
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
 			$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 		}
