@@ -218,13 +218,13 @@ function custom_function_default_get_columns_to_view( $p_columns_target = COLUMN
 	$t_project_id = helper_get_current_project();
 
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
-		$t_columns = config_get( 'csv_columns', $t_project_id, $p_user_id );
+		$t_columns = config_get( 'csv_columns', $p_user_id, $t_project_id );
 	} else if( $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
-		$t_columns = config_get( 'excel_columns', $t_project_id, $p_user_id );
+		$t_columns = config_get( 'excel_columns', $p_user_id, $t_project_id );
 	} else if( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
-		$t_columns = config_get( 'view_issues_page_columns', $t_project_id, $p_user_id );
+		$t_columns = config_get( 'view_issues_page_columns', $p_user_id, $t_project_id );
 	} else {
-		$t_columns = config_get( 'print_issues_page_columns', $t_project_id, $p_user_id );
+		$t_columns = config_get( 'print_issues_page_columns', $p_user_id, $t_project_id );
 	}
 
 	$t_columns = columns_remove_invalid( $t_columns, columns_get_all( $t_project_id ) );
