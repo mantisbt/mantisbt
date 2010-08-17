@@ -5,13 +5,13 @@
 ]>
 <bookinfo id="book-Admin_Guide-Admin_Guide">
 	<title>Admin Guide</title>
-	<subtitle>short description</subtitle>
-	<productname>Documentation</productname>
-	<productnumber>0.1</productnumber>
-	<edition>0</edition>
-	<pubsnumber>0</pubsnumber>
+	<subtitle>Mantis Issue Tracker Administration Guide</subtitle>
+	<productname>MantisBT</productname>
+	<productnumber>1.2</productnumber>
+	<edition>1.0</edition>
+	<pubsnumber>1</pubsnumber>
 	<abstract>
-		<para>
+		<para> 
 			A short overview and summary of the book&#39;s subject and purpose, traditionally no more than one paragraph long. Note: the abstract will appear in the front matter of your book and will also be placed in the description field of the book&#39;s RPM spec file.
 		</para>
 	</abstract>

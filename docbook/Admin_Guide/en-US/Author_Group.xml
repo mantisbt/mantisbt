@@ -5,13 +5,14 @@
 ]>
 <authorgroup>
 	<author>
-		<firstname>Dude</firstname>
-		<surname>McPants</surname>
-		<affiliation>
+		<firstname>Gianluca</firstname>
+		<surname>Sforna</surname>
+		<!--affiliation>
 			<orgname>Somewhere</orgname>
 			<orgdiv>Someone</orgdiv>
-		</affiliation>
-		<email>Dude.McPants@example.com</email>
+		</affiliation-->
+		<email>giallu@gmail.com</email>
 	</author>
+        <!-- TODO add other authors -->
 </authorgroup>
 
