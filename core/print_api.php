@@ -1470,19 +1470,6 @@ function print_lost_password_link() {
 # Deprecated Functions
 # ===============================
 
-# print our standard mysql query error
-# this function should rarely (if ever) be reached.  instead the db_()
-# functions should trap (although inelegantly).
-function print_sql_error( $p_query ) {
-	global $g_administrator_email;
-
-	$error = error_string( ERROR_SQL );
-	$error .= lang_get( 'word_separator' );
-	$error .= sprintf( lang_get( 'please_report' ), prepare_email_link( $g_administrator_email, lang_get( 'administrator' ) ) );
-	$error .= "<br />$p_query;<br />";
-	echo $error;
-}
-
 # Get icon corresponding to the specified filename
 function print_file_icon( $p_filename ) {
 	$t_icon = file_get_icon_url( $p_filename );

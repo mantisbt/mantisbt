@@ -154,3 +154,4 @@ config_obsolete( 'allow_close_immediately' );
 config_obsolete( 'show_extended_project_browser' );
 config_obsolete( 'show_queries_threshold', 'show_log_threshold' );
 config_obsolete( 'show_queries_list' );
+config_obsolete( 'administrator_email', 'webmaster_email' );

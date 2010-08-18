@@ -36,7 +36,6 @@ require_api( 'utility_api.php' );
 check_print_section_header_row( 'Email' );
 
 $t_email_options = array(
-	'administrator_email',
 	'webmaster_email',
 	'from_email',
 	'return_path_email'

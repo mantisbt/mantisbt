@@ -48,24 +48,22 @@ html_page_top();
 			lang_push( 'english' );
 
 			$t_email_data = new EmailData;
-			$t_email_data->email = config_get_global( 'administrator_email' );
+			$t_email_data->email = config_get_global( 'webmaster_email' );
 			$t_email_data->subject = 'Testing PHP mail() function';
 			$t_email_data->body = 'Your PHP mail settings appear to be correctly set.';
 			$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
 			$t_email_data->metadata['charset'] = 'utf-8';
 			$result = email_send( $t_email_data );
 
-			# $result = email_send( config_get_global( 'administrator_email' ), 'Testing PHP mail() function',	'Your PHP mail settings appear to be correctly set.');
-
 			if( !$result ) {
-				echo ' PROBLEMS SENDING MAIL TO: ' . config_get_global( 'administrator_email' ) . '. Please check your php/mail server settings.<br />';
+				echo ' PROBLEMS SENDING MAIL TO: ' . config_get_global( 'webmaster_email' ) . '. Please check your php/mail server settings.<br />';
 			} else {
 				echo ' mail() send successful.<br />';
 			}
 		}
 ?>
 		<form method="post" action="<?php echo $_SERVER['SCRIPT_NAME']?>#email">
-		Email Address: <?php echo config_get_global( 'administrator_email' );?><br />
+		Email Address: <?php echo config_get_global( 'webmaster_email' );?><br />
 		<input type="submit" value="Send Mail" name="mail_test" />
 		</form>
 	</td>

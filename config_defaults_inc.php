@@ -359,12 +359,6 @@ $g_max_lost_password_in_progress_count = 3;
  ***************************/
 
 /**
- * Administrator email address
- * @global string $g_administrator_email
- */
-$g_administrator_email	= 'administrator@example.com';
-
-/**
  * Webmaster email address. This is shown publicly at the bottom of each page
  * and thus may be suspectible to being detected by spam email harvesters.
  * @global string $g_webmaster_email
