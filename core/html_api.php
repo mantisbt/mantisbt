@@ -157,11 +157,7 @@ function html_rss_link() {
  * @return null
  */
 function html_javascript_link( $p_filename) {
-	if( config_get_global( 'minimal_jscss' ) ) {
-		echo "\t", '<script type="text/javascript" src="', helper_mantis_url( 'javascript/min/' . $p_filename ), '"></script>' . "\n";
-	} else {
-		echo "\t", '<script type="text/javascript" src="', helper_mantis_url( 'javascript/dev/' . $p_filename ), '"></script>' . "\n";
-	}
+	echo "\t", '<script type="text/javascript" src="', helper_mantis_url( 'javascript/' . $p_filename ), '"></script>' . "\n";
 }
 
 /**

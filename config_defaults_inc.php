@@ -3872,13 +3872,6 @@ $g_log_destination = '';
  */
 $g_show_log_threshold = ADMINISTRATOR;
 
-/**
- * if OFF, will include original javascript files
- * if ON, will include javascript files that have been compressed by yuicompressor if available
- * @global int $g_minimal_jscss
- */
-$g_minimal_jscss = ON;
-
 /**************************
  * Configuration Settings *
  **************************/
@@ -3907,7 +3900,6 @@ $g_global_settings = array(
 	'html_valid_tags',
 	'language',
 	'login_method',
-	'minimal_jscss',
 	'plugins_enabled',
 	'plugins_installed',
 	'session_',
