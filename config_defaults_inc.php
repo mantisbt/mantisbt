@@ -3777,12 +3777,6 @@ $g_show_timer = OFF;
 $g_show_memory_usage = OFF;
 
 /**
- * used for development only.  Leave OFF
- * @global int $g_debug_timer
- */
-$g_debug_timer = OFF;
-
-/**
  * Used for debugging e-mail feature, when set to OFF the emails work as normal.
  * when set to e-mail address, all e-mails are sent to this address with the
  * original To, Cc, Bcc included in the message body.
