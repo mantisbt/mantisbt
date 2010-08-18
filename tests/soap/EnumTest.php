@@ -259,7 +259,6 @@ class EnumTest extends SoapBase {
 	// TODO: mc_enum_project_status
 	// TODO: mc_enum_project_view_states
 	// TODO: mc_enum_custom_field_types
-	// TODO: mc_enum_get
 
 	/**
 	 * Converts an array of ObjectRefs array into an associate
@@ -274,5 +273,15 @@ class EnumTest extends SoapBase {
 		}
 
 		return $assocArray;
+	}
+	
+	/**
+	 * Tests mc_enum_get with severities parameter
+	 */
+	public function testEnumGet() {
+		
+		$result = $this->client->mc_enum_get($this->userName, $this->password, 'severity');
+		
+		$this->assertEquals( '10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block', $result);
 	}
 }

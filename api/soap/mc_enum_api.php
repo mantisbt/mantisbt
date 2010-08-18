@@ -198,7 +198,11 @@ function mc_enum_get( $p_username, $p_password, $p_enumeration ) {
 	if ( ! mci_validate_enum_access($p_username, $p_password)) {
 		return new soap_fault( 'Client', '', 'Access Denied' );
 	}
+	
+	// safe to call directly after login checks
+	$t_user_id = auth_get_current_user_id();
 	$t_lang = mci_get_user_lang( $t_user_id );
+	
 	return lang_get( $p_enumeration . '_enum_string', $t_lang );
 }
 
