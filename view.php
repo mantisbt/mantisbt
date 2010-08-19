@@ -23,6 +23,9 @@
  * @uses core.php
  */
 
+/**
+ * MantisBT Core API's
+ */
 require_once( 'core.php' );
 
 $tpl_file = __FILE__;

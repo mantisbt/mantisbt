@@ -29,6 +29,9 @@
  * @uses html_api.php
  */
 
+/**
+ * MantisBT Core API's
+ */
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'html_api.php' );

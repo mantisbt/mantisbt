@@ -26,6 +26,9 @@
  * @uses lang_api.php
  */
 
+/**
+ * MantisBT Core API's
+ */
 require_once( 'core.php' );
 require_api( 'current_user_api.php' );
 require_api( 'html_api.php' );

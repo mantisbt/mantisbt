@@ -23,6 +23,9 @@
  * @uses config_api.php
  */
 
+/**
+ * MantisBT Core API's
+ */
 require_once( 'core.php' );
 require_api( 'config_api.php' );
 
