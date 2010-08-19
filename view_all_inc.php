@@ -220,7 +220,7 @@ write_bug_rows($rows);
 			<span class="floatleft">
 <?php
 		if ( $g_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
-			echo "<input type=\"checkbox\" name=\"all_bugs\" value=\"all\" onclick=\"checkall('bug_action', this.form.all_bugs.checked)\" /><span class=\"small\">" . lang_get( 'select_all' ) . '</span>';
+			echo '<input type="checkbox" name="bug_arr_all" value="all" class="check_all" /><span class="small">' . lang_get( 'select_all' ) . '</span>';
 		}
 
 		if ( $g_checkboxes_exist ) {

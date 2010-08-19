@@ -79,6 +79,11 @@ $(document).ready( function() {
 
 	$('input.autofocus:first, select.autofocus:first, textarea.autofocus:first').focus();
 
+	$('input[type=checkbox].check_all').click(function() {
+		var matchingName = $(this).attr('name').replace(/_all$/, '');
+		$(this).closest('form').find('input[type=checkbox][name=' + matchingName + '\[\]]').attr('checked', this.checked);
+	});
+
 	var stopwatch = {
 		timerID: null,
 		elapsedTime: 0,
@@ -234,17 +239,6 @@ function ToggleDiv( p_div ) {
 	}
 
 	SetCookie( "collapse_settings", t_cookie );
-}
-
-/* Check checkboxes */
-function checkall( p_formname, p_state) {
-	var t_elements = (eval("document." + p_formname + ".elements"));
-
-	for (var i = 0; i < t_elements.length; i++) {
-		if(t_elements[i].type == 'checkbox') {
-			t_elements[i].checked = p_state;
-		}
-	}
 }
 
 function setDisplay(idTag, state)
