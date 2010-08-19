@@ -94,20 +94,6 @@ $t_status_legend_position = config_get( 'status_legend_position' );
 if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 	html_status_legend();
 }
-
-/** @todo (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...) */
-if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ){
-	?>
-	<script type="text/javascript">
-	<!--
-		var string_loading = '<?php echo lang_get( 'loading' );?>';
-	// -->
-	</script>
-	<?php
-		html_javascript_link( 'xmlhttprequest.js');
-		html_javascript_link( 'addLoadEvent.js');
-		html_javascript_link( 'dynamic_filters.js');
-}
 ?>
 <br />
 <form name="bug_action" method="get" action="bug_actiongroup_page.php">

@@ -111,7 +111,7 @@ function liveReqDoReq() {
 	liveReq.open("GET", processURI + "?view_type=" + t_view + "&filter_target=" + this.id);
 
 	// show "Loading..." while waiting
-	document.getElementById(this.id+'_target').innerHTML = string_loading;
+	document.getElementById(this.id+'_target').innerHTML = translations['loading'];
 
 	liveReq.send(null);
 
