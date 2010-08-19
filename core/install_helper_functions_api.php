@@ -172,7 +172,7 @@ function install_date_migrate( $p_data) {
 	if ( is_array( $p_data[2] ) ) {
 		$t_old_column = implode( ',', $p_data[2] );
 		$t_date_array = true;
-		$t_cnt_fields = sizeof( $p_data[2] );
+		$t_cnt_fields = count( $p_data[2] );
 		$t_pairs = array();
 		foreach( $p_data[3] as $var ) {
 			array_push( $t_pairs, "$var=" . db_param() ) ;

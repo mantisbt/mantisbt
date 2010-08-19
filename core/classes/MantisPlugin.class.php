@@ -87,7 +87,7 @@ abstract class MantisPlugin {
 	 * This function allows plugins to add new error messages for Mantis usage
 	 * 
 	 * @returns array The error_name=>error_message list to add
-	 */ 
+	 */
 	public function errors() {
 		return array();
 	}
