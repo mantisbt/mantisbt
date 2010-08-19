@@ -27,6 +27,9 @@ if ( !defined( 'CHECK_CONFIG_INC_ALLOW' ) ) {
 	return;
 }
 
+/**
+ * MantisBT Check API
+ */
 require_once( 'check_api.php' );
 
 check_print_section_header_row( 'Configuration' );

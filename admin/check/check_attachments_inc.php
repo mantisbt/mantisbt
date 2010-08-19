@@ -30,6 +30,9 @@ if ( !defined( 'CHECK_ATTACHMENTS_INC_ALLOW' ) ) {
 	return;
 }
 
+/**
+ * MantisBT Check API
+ */
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
