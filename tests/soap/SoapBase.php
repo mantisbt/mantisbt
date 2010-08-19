@@ -34,6 +34,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	protected $userName = 'administrator';
 	protected $password = 'root';
 	private   $issueIdsToDelete = array();
+	private   $versionIdsToDelete = array();
 	private   $defaultSoapClientOptions = array(  'trace'      => true,
 								                  'exceptions' => true,
 								        		  'cache_wsdl' => WSDL_CACHE_NONE,
@@ -64,6 +65,10 @@ class SoapBase extends PHPUnit_Framework_TestCase {
     }
     
     protected function tearDown() {
+    	
+    	foreach ( $this->versionIdsToDelete as $versionIdToDelete ) {
+    		$this->client->mc_project_version_delete($this->userName, $this->password, $versionIdToDelete);
+    	}
 
     	foreach ( $this->issueIdsToDelete as $issueIdToDelete ) {
     		$this->client->mc_issue_delete(
@@ -106,6 +111,17 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	protected function deleteAfterRun( $issueId ) {
 
 		$this->issueIdsToDelete[] = $issueId;
+	}
+	
+	/**
+	 * Registers an version for deletion after the test method has run
+	 *
+	 * @param int $versionId
+	 * @return void
+	 */
+	protected function deleteVersionAfterRun( $versionId ) {
+		
+		$this->versionIdsToDelete[] = $versionId;
 	}
 
 	protected function skipIfDueDateIsNotEnabled() {
