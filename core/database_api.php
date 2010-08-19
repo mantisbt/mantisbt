@@ -316,7 +316,7 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 	}
 
 	$t_elapsed = number_format( microtime(true) - $t_start, 4 );
-	
+
 	if( ON == $g_db_log_queries ) {
 		$t_db_type = config_get_global( 'db_type' );
 		$lastoffset = 0;

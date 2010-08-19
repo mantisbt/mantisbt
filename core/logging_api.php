@@ -66,12 +66,12 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 		$t_event = $p_msg;
 		$s_msg = var_export( $p_msg, true );
 	} else {
-		$t_event = array( $p_msg, 0 );	
+		$t_event = array( $p_msg, 0 );
 	}
 
 	if( $p_backtrace === null ) {
 		$t_backtrace = debug_backtrace();
-	} else { 
+	} else {
 		$t_backtrace = $p_backtrace;
 	}
 	$t_caller = basename( $t_backtrace[0]['file'] );
@@ -83,8 +83,8 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 	} else {
 		# or from a script directly?
 		$t_caller .= ' ' . $_SERVER['SCRIPT_NAME'];
-	}	
-	
+	}
+
 	$t_now = date( config_get_global( 'complete_date_format' ) );
 	$t_level = $g_log_levels[$p_level];
 
@@ -127,7 +127,7 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 				return;
 			}
 			// if firebug is not available, fall through
-		default:			
+		default:
 			# use default PHP error log settings
 			$t_php_event = $t_now . ' ' . $t_level . ' ' . $s_msg;
 			error_log( $t_php_event . PHP_EOL );
@@ -156,7 +156,7 @@ function log_print_to_page() {
 		$t_unique_queries = array();
 		$t_total_queries_count = 0;
 		$t_total_event_count = count( $g_log_events );
-		
+
 		if( $t_total_event_count == 0 ) {
 			echo "\t</tbody>\n\t</table>\n";
 			echo "<!--END Mantis Debug Log Output-->\n\n";
@@ -186,14 +186,14 @@ function log_print_to_page() {
 					$t_query_duplicate_class = '';
 					if ( $t_log_event[2][2] ) {
 						$t_query_duplicate_class = ' class="duplicate-query"';
-					}				
+					}
 					echo "\t\t<tr$t_query_duplicate_class><td>" . $t_level . '-' . $t_count[$t_log_event[1]] . "</td><td>" . $t_log_event[2][1] . "</td><td>" . string_html_specialchars ( $t_log_event[3] ) . "</td><td>" . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
 					break;
 				default:
 					echo "\t\t<tr><td>" . $t_level . '-' . $t_count[$t_log_event[1]] . "</td><td>" . $t_log_event[2][1] . "</td><td>" . string_html_specialchars ( $t_log_event[3] ) . "</td><td>" . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
 			}
 		}
-		
+
 		# output any summary data
 		if ( $t_unique_queries_count != 0 ) {
 			$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );

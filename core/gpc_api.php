@@ -314,7 +314,8 @@ function gpc_get_bool_array( $p_var_name, $p_default = null ) {
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
 
-	for( $i = 0;$i < count( $t_result );$i++ ) {
+	$t_count = count( $t_result );
+	for( $i = 0; $i < $t_count; $i++ ) {
 		$t_result[$i] = gpc_string_to_bool( $t_result[$i] );
 	}
 

@@ -686,7 +686,7 @@ function html_footer( $p_file = null ) {
 
 	# Print table of log events
 	log_print_to_page();
-		
+
 	echo "</div>\n";
 
 }

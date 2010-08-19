@@ -90,10 +90,10 @@ function lang_load( $p_lang, $p_dir = null ) {
 			$g_lang_strings[$p_lang] = $s_messages;
 		}
 	}
- 
-	if( !isset( $s_messages ) || file_exists( $t_custom_strings ) ) {	
+
+	if( !isset( $s_messages ) || file_exists( $t_custom_strings ) ) {
 		$t_vars = get_defined_vars();
- 
+
 		foreach( array_keys( $t_vars ) as $t_var ) {
 			$t_lang_var = preg_replace( '/^s_/', '', $t_var );
 			if( $t_lang_var != $t_var ) {
@@ -107,7 +107,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 				} else {
 					$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
 				}
-			}	
+			}
 		}
 	}
 }

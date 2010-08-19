@@ -2503,8 +2503,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				&nbsp;
 			</td>
 			<?php
-			}?>
-			<?php if( $t_filter_cols > 8 ) {
+			}
+			if( $t_filter_cols > 8 ) {
 			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&nbsp;</td>';
 		}?>
 		</tr>
