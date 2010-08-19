@@ -544,17 +544,17 @@ class BugData {
 
 		# allow bypass if user is sending mail separately
 		if( false == $p_bypass_mail ) {
+			# bug assigned
+			if( $t_old_data->handler_id != $this->handler_id ) {
+				email_generic( $c_bug_id, 'owner', 'email_notification_title_for_action_bug_assigned' );
+				return true;
+			}
+
 			# status changed
 			if( $t_old_data->status != $this->status ) {
 				$t_status = MantisEnum::getLabel( config_get( 'status_enum_string' ), $this->status );
 				$t_status = str_replace( ' ', '_', $t_status );
 				email_generic( $c_bug_id, $t_status, 'email_notification_title_for_status_bug_' . $t_status );
-				return true;
-			}
-
-			# bug assigned
-			if( $t_old_data->handler_id != $this->handler_id ) {
-				email_generic( $c_bug_id, 'owner', 'email_notification_title_for_action_bug_assigned' );
 				return true;
 			}
 
