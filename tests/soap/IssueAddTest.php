@@ -384,4 +384,53 @@ class IssueAddTest extends SoapBase {
 
 		$this->assertEquals( $this->userName,  $issue->handler->name );
 	}
+	
+	/**
+	 * Tests that a created issue with a non-existent version returns the correct error message.
+	 */
+	public function testCreateIssueWithFaultyVersionGeneratesError() {
+
+		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithFaultyVersionGeneratesError' );
+		$issueToAdd['version'] = 'noSuchVersion';
+		
+		try {
+			$this->client->mc_issue_add(
+				$this->userName,
+				$this->password,
+				$issueToAdd);
+			
+			$this->fail( "Invalid version did not raise error." );
+		} catch ( SoapFault $e) {
+			$this->assertContains( "Version 'noSuchVersion' does not exist in project", $e->getMessage() );	
+		}
+	}
+	
+	/**
+	 * Tests that an issue with a proper version set is correctly created
+	 */
+	public function testCreateIssueWithVersion() {
+		
+		$version = array (
+			'project_id' => $this->getProjectId(),
+			'name' => '1.0',
+			'released' => 'true',
+			'description' => 'Test version',
+			'date_order' => ''
+		);
+		
+		$versionId = $this->client->mc_project_version_add( $this->userName, $this->password, $version );
+		
+		$this->deleteVersionAfterRun( $versionId );
+		
+		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithVersion' );
+		$issueToAdd['version'] = $version['name'];
+		
+		$issueId = $this->client->mc_issue_add( $this->userName, $this->password, $issueToAdd );
+		
+		$this->deleteAfterRun($issueId);
+		
+		$createdIssue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
+		
+		$this->assertEquals( $version['name'], $createdIssue->version );
+	}
 }
