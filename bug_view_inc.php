@@ -58,6 +58,7 @@ require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'category_api.php' );
 require_api( 'columns_api.php' );
+require_api( 'compress_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'current_user_api.php' );
