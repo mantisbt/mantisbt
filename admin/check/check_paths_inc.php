@@ -99,10 +99,6 @@ foreach( $t_moveable_paths as $t_moveable_path ) {
 
 $t_removeable_directories = array(
 	'doc',
-	'docbook',
-	'packages',
-	'scripts',
-	'tests'
 );
 
 foreach( $t_removeable_directories as $t_removeable_directory ) {
@@ -110,6 +106,22 @@ foreach( $t_removeable_directories as $t_removeable_directory ) {
 		'Directory <em><a href="' . htmlentities( config_get_global( 'short_path' ) ) . $t_removeable_directory . '">' . $t_removeable_directory . '</a></em> does not need to exist within the MantisBT root',
 		!is_dir( $t_paths['absolute_path']['config_value'] . $t_removeable_directory ),
 		array( false => 'The ' . $t_removeable_directory . ' directory within the MantisBT root should be removed as it is not needed for the live operation of MantisBT.' )
+	);
+}
+
+$t_developer_directories = array(
+	'docbook',
+	'packages',
+	'scripts',
+	'tests',
+	'javascript' . DIRECTORY_SEPARATOR . 'dev'
+);
+
+foreach( $t_developer_directories as $t_developer_directory ) {
+	check_print_test_warn_row(
+		'Directory <em><a href="' . htmlentities( config_get_global( 'short_path' ) ) . $t_developer_directory . '">' . $t_developer_directory . '</a></em> exists. These files are not included in MantisBT builds. For production use, please use a release build/snapshot, and not the developer git code.',
+		!is_dir( $t_paths['absolute_path']['config_value'] . $t_developer_directory ),
+		array( false => 'The ' . $t_developer_directory . ' directory within the MantisBT root is for development use and is not included in official releases of MantisBT.' )
 	);
 }
 
