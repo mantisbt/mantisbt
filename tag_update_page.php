@@ -21,7 +21,6 @@
  *
  * @uses core.php
  * @uses access_api.php
- * @uses ajax_api.php
  * @uses authentication_api.php
  * @uses compress_api.php
  * @uses config_api.php
@@ -43,7 +42,6 @@
  */
 require_once( 'core.php' );
 require_api( 'access_api.php' );
-require_api( 'ajax_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'compress_api.php' );
 require_api( 'config_api.php' );
@@ -107,14 +105,9 @@ html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
 	<td><input type="text" <?php echo helper_get_tab_index() ?> name="name" value="<?php echo $t_name ?>"/></td>
 	<td><?php
 			if ( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
-				if ( ON == config_get( 'use_javascript' ) ) {
-					$t_username = prepare_user_name( $t_tag_row['user_id'] );
-					echo ajax_click_to_edit( $t_username, 'user_id', 'entrypoint=user_combobox&user_id=' . $t_tag_row['user_id'] . '&access_level=' . config_get( 'tag_create_threshold' ) );
-				} else {
-					echo '<select ', helper_get_tab_index(), ' name="user_id">';
-					print_user_option_list( $t_tag_row['user_id'], ALL_PROJECTS, config_get( 'tag_create_threshold' ) );
-					echo '</select>';
-				}
+				echo '<select ', helper_get_tab_index(), ' name="user_id">';
+				print_user_option_list( $t_tag_row['user_id'], ALL_PROJECTS, config_get( 'tag_create_threshold' ) );
+				echo '</select>';
 			} else {
 				echo string_display_line( user_get_name($t_tag_row['user_id']) );
 			}

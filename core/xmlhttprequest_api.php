@@ -57,36 +57,6 @@ function xmlhttprequest_filter_by_prefix( $p_set, $p_prefix ) {
 }
 
 /**
- *
- * @return null
- * @access public
- */
-function xmlhttprequest_issue_reporter_combobox() {
-	$f_bug_id = gpc_get_int( 'issue_id' );
-
-	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
-
-	$t_reporter_id = bug_get_field( $f_bug_id, 'reporter_id' );
-	$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
-
-	echo '<select name="reporter_id">';
-	print_reporter_option_list( $t_reporter_id, $t_project_id );
-	echo '</select>';
-}
-
-/**
- * Print a generic combobox with a list of users above a given access level.
- */
-function xmlhttprequest_user_combobox() {
-	$f_user_id = gpc_get_int( 'user_id' );
-	$f_user_access = gpc_get_int( 'access_level' );
-
-	echo '<select name="user_id">';
-	print_user_option_list( $f_user_id, ALL_PROJECTS, $f_user_access );
-	echo '</select>';
-}
-
-/**
  * Echos a serialized list of platforms starting with the prefix specified in the $_POST
  * @return null
  * @access public

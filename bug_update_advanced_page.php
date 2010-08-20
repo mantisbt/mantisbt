@@ -22,7 +22,6 @@
  *
  * @uses core.php
  * @uses access_api.php
- * @uses ajax_api.php
  * @uses authentication_api.php
  * @uses bug_api.php
  * @uses columns_api.php
@@ -50,7 +49,6 @@
  */
 require_once( 'core.php' );
 require_api( 'access_api.php' );
-require_api( 'ajax_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'columns_api.php' );
@@ -263,14 +261,9 @@ if ( $tpl_show_reporter ) {
 		echo '<th class="category">', lang_get( 'reporter' ), '</th>';
 		echo '<td>';
 
-		if ( ON == config_get( 'use_javascript' ) ) {
-			$t_username = prepare_user_name( $tpl_bug->reporter_id );
-			echo ajax_click_to_edit( $t_username, 'reporter_id', 'entrypoint=issue_reporter_combobox&issue_id=' . $tpl_bug_id );
-		} else {
-			echo '<select ', helper_get_tab_index(), ' name="reporter_id">';
-			print_reporter_option_list( $tpl_bug->reporter_id, $tpl_bug->project_id );
-			echo '</select>';
-		}
+		echo '<select ', helper_get_tab_index(), ' name="reporter_id">';
+		print_reporter_option_list( $tpl_bug->reporter_id, $tpl_bug->project_id );
+		echo '</select>';
 
 		echo '</td>';
 	} else {
