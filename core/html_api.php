@@ -740,9 +740,6 @@ function print_menu() {
 		$t_protected = current_user_get_field( 'protected' );
 		$t_current_project = helper_get_current_project();
 
-		echo '<table class="main-menu-container width100" cellspacing="0">';
-		echo '<tr>';
-		echo '<td class="menu">';
 		$t_menu_options = array();
 
 		# Main Page
@@ -815,7 +812,7 @@ function print_menu() {
 		# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
 		if( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
 			$t_link = helper_mantis_url( 'manage_overview_page.php' );
-			$t_menu_options[] = "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a>';
+			$t_menu_options[] = '<a id="manage-menu-link" href="' . $t_link . '">' . lang_get( 'manage_link' ) . '</a>';
 		} else {
 			$t_show_access = min( config_get( 'manage_user_threshold' ), config_get( 'manage_project_threshold' ), config_get( 'manage_custom_fields_threshold' ) );
 			if( access_has_global_level( $t_show_access ) || access_has_any_project( $t_show_access ) ) {
@@ -846,7 +843,7 @@ function print_menu() {
 
 		# Account Page (only show accounts that are NOT protected)
 		if( OFF == $t_protected ) {
-			$t_menu_options[] = '<a href="' . helper_mantis_url( 'account_page.php">' ) . lang_get( 'account_link' ) . '</a>';
+			$t_menu_options[] = '<a id="account-menu-link" href="' . helper_mantis_url( 'account_page.php">' ) . lang_get( 'account_link' ) . '</a>';
 		}
 
 		# Add custom options
@@ -860,9 +857,13 @@ function print_menu() {
 		if( !current_user_is_anonymous() ) {
 			$t_menu_options[] = '<a href="' . helper_mantis_url( 'logout_page.php">' ) . lang_get( 'logout_link' ) . '</a>';
 		}
-		echo implode( $t_menu_options, ' | ' );
-		echo '</td>';
-		echo '<td class="menu right nowrap">';
+		echo '<div class="main-menu">';
+		echo '<ul class="menu">';
+		echo '<li>';
+		echo implode( $t_menu_options, "</li>\n<li>" );
+		echo '</li>';
+		echo '</div>';
+		echo '<div class="bug-jump">';
 		echo '<form method="post" action="' . helper_mantis_url( 'jump_to_bug.php">' );
 		# CSRF protection not required here - form does not result in modifications
 
@@ -875,9 +876,7 @@ function print_menu() {
 
 		echo '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&nbsp;';
 		echo '</form>';
-		echo '</td>';
-		echo '</tr>';
-		echo '</table>';
+		echo '</div>';
 	}
 }
 
@@ -922,8 +921,6 @@ function print_subproject_menu_bar( $p_project_id, $p_parents = '' ) {
  * @return null
  */
 function print_summary_submenu() {
-	echo '<div id="summary-submenu" align="center">';
-
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_SUBMENU_SUMMARY' );
 	$t_menu_options = array();
@@ -939,13 +936,13 @@ function print_summary_submenu() {
 		}
 	}
 
-	// Plugins menu items
-	// TODO: this would be a call to print_pracket_link but the events returns cooked links so we cant
-	foreach( $t_menu_options as $t_menu_item ) {
-		echo '<span class="bracket-link">[&nbsp;';
-		echo $t_menu_item;
-		echo '&nbsp;]</span> ';
+	echo '<div id="summary-submenu">';
+	echo '<ul class="menu">';
+	// Plugins menu items - these are cooked links
+	foreach ( $t_menu_options as $t_menu_item ) {
+		echo '<li>', $t_menu_item, '</li>';
 	}
+	echo '</ul>';
 	echo '</div>';
 }
 
@@ -956,70 +953,35 @@ function print_summary_submenu() {
  * @return null
  */
 function print_manage_menu( $p_page = '' ) {
-	$t_manage_user_page = 'manage_user_page.php';
-	$t_manage_project_menu_page = 'manage_proj_page.php';
-	$t_manage_custom_field_page = 'manage_custom_field_page.php';
-	$t_manage_plugin_page = 'manage_plugin_page.php';
-	$t_manage_config_page = 'adm_config_report.php';
-	$t_permissions_summary_report = 'adm_permissions_report.php';
-	$t_manage_prof_menu_page = 'manage_prof_menu_page.php';
-	$t_manage_tags_page = 'manage_tags_page.php';
-
-	switch( $p_page ) {
-		case $t_manage_user_page:
-			$t_manage_user_page = '';
-			break;
-		case $t_manage_project_menu_page:
-			$t_manage_project_menu_page = '';
-			break;
-		case $t_manage_custom_field_page:
-			$t_manage_custom_field_page = '';
-			break;
-		case $t_manage_config_page:
-			$t_manage_config_page = '';
-			break;
-		case $t_permissions_summary_report:
-			$t_permissions_summary_report = '';
-			break;
-		case $t_manage_plugin_page:
-			$t_manage_plugin_page = '';
-			break;
-		case $t_manage_prof_menu_page:
-			$t_manage_prof_menu_page = '';
-			break;
-		case $t_manage_tags_page:
-			$t_manage_tags_page = '';
-			break;
-	}
-
-	echo '<div id="manage-menu" align="center"><p>';
 	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_user_page ), lang_get( 'manage_users_link' ) );
+		$t_pages['manage_user_page.php'] = array( 'url'   => 'manage_user_page.php', 'label' => 'manage_users_link' );
 	}
 	if( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_project_menu_page ), lang_get( 'manage_projects_link' ) );
+		$t_pages['manage_proj_page.php'] = array( 'url'   => 'manage_proj_page.php', 'label' => 'manage_projects_link' );
 	}
 	if( access_has_project_level( config_get( 'tag_edit_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_tags_page ), lang_get( 'manage_tags_link' ) );
+		$t_pages['manage_tags_page.php'] = array( 'url'   => 'manage_tags_page.php', 'label' => 'manage_tags_link' );
 	}
 	if( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_custom_field_page ), lang_get( 'manage_custom_field_link' ) );
+		$t_pages['manage_custom_field_page.php'] = array( 'url'   => 'manage_custom_field_page.php', 'label' => 'manage_custom_field_link' );
 	}
 	if( access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_prof_menu_page ), lang_get( 'manage_global_profiles_link' ) );
+		$t_pages['manage_prof_menu_page.php'] = array( 'url'   => 'manage_prof_menu_page.php', 'label' => 'manage_global_profiles_link' );
 	}
 	if( access_has_global_level( config_get( 'manage_plugin_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_plugin_page ), lang_get( 'manage_plugin_link' ) );
+		$t_pages['manage_plugin_page.php'] = array( 'url'   => 'manage_plugin_page.php', 'label' => 'manage_plugin_link' );
 	}
 
 	if ( access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
 		if ( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
-			$t_config_page = $t_manage_config_page;
+			$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php', 'label' => 'manage_config_link' );
 		} else {
-			$t_config_page = $t_permissions_summary_report;
+			$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php', 'label' => 'manage_config_link' );
 		}
-
-		print_bracket_link( helper_mantis_url( $t_config_page ), lang_get( 'manage_config_link' ) );
+	}
+	# Remove the link from the current page
+	if ( isset( $t_pages[$p_page] ) ) {
+		$t_pages[$p_page]['url'] = '';
 	}
 
 	# Plugin / Event added options
@@ -1037,12 +999,23 @@ function print_manage_menu( $p_page = '' ) {
 		}
 	}
 
-	// Plugins menu items
-	foreach( $t_menu_options as $t_menu_item ) {
-		print_bracket_link_prepared( $t_menu_item );
+	echo '<div id="manage-menu">';
+	echo '<ul class="menu">';
+	foreach( $t_pages AS $t_page ) {
+		if( $t_page['url'] == '' ) {
+			echo '<li>', lang_get( $t_page['label'] ), '</li>';
+		} else {
+			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
+		}
 	}
 
-	echo '</p></div>';
+	// Plugins menu items - these are cooked links
+	foreach( $t_menu_options as $t_menu_item ) {
+		echo '<li>', $t_menu_item, '</li>';
+	}
+
+	echo '</ul>';
+	echo '</div>';
 }
 
 /**
@@ -1087,8 +1060,6 @@ function print_manage_config_menu( $p_page = '' ) {
 		$t_pages[$p_page]['url'] = '';
 	}
 
-	echo '<br /><div id="manage-config-menu">';
-
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );
 	$t_menu_options = array();
@@ -1104,14 +1075,21 @@ function print_manage_config_menu( $p_page = '' ) {
 		}
 	}
 
+	echo '<br /><div id="manage-config-menu">';
+	echo '<ul class="menu">';
 	foreach ( $t_pages as $t_page ) {
-		print_bracket_link( helper_mantis_url( $t_page['url'] ), lang_get( $t_page['label'] ) );
+		if( $t_page['url'] == '' ) {
+			echo '<li>', lang_get( $t_page['label'] ), '</li>';
+		} else {
+			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
+		}
 	}
 
 	foreach ( $t_menu_options as $t_menu_item ) {
-		print_bracket_link_prepared( $t_menu_item );
+		echo '<li>', $t_menu_item, '</li>';
 	}
 
+	echo '</ul>';
 	echo '</div>';
 }
 
@@ -1121,41 +1099,21 @@ function print_manage_config_menu( $p_page = '' ) {
  * @return null
  */
 function print_account_menu( $p_page = '' ) {
-	$t_account_page = 'account_page.php';
-	$t_account_prefs_page = 'account_prefs_page.php';
-	$t_account_profile_menu_page = 'account_prof_menu_page.php';
-	$t_account_sponsor_page = 'account_sponsor_page.php';
-	$t_account_manage_columns_page = 'account_manage_columns_page.php';
-
-	switch( $p_page ) {
-		case $t_account_page:
-			$t_account_page = '';
-			break;
-		case $t_account_prefs_page:
-			$t_account_prefs_page = '';
-			break;
-		case $t_account_profile_menu_page:
-			$t_account_profile_menu_page = '';
-			break;
-		case $t_account_sponsor_page:
-			$t_account_sponsor_page = '';
-			break;
-		case $t_account_manage_columns_page:
-			$t_account_manage_columns_page = '';
-			break;
-	}
-
-	echo '<div id="account-menu">';
-	print_bracket_link( $t_account_page, lang_get( 'account_link' ) );
-	print_bracket_link( $t_account_prefs_page, lang_get( 'change_preferences_link' ) );
-	print_bracket_link( $t_account_manage_columns_page, lang_get( 'manage_columns_config' ) );
+	$t_pages['account_page.php'] = array( 'url'=>'account_page.php', 'label'=>'account_link' );
+	$t_pages['account_prefs_page.php'] = array( 'url'=>'account_prefs_page.php', 'label'=>'change_preferences_link' );
+	$t_pages['account_manage_columns_page.php'] = array( 'url'=>'account_manage_columns_page.php', 'label'=>'manage_columns_config' );
 
 	if( config_get ( 'enable_profiles' ) == ON && access_has_project_level( config_get( 'add_profile_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_account_profile_menu_page ), lang_get( 'manage_profiles_link' ) );
+		$t_pages['account_prof_menu_page.php'] = array( 'url'=>'account_prof_menu_page.php', 'label'=>'manage_profiles_link' );
 	}
 
 	if( config_get( 'enable_sponsorship' ) == ON && access_has_project_level( config_get( 'view_sponsorship_total_threshold' ) ) && !current_user_is_anonymous() ) {
-		print_bracket_link( helper_mantis_url( $t_account_sponsor_page ), lang_get( 'my_sponsorship' ) );
+		$t_pages['account_sponsor_page.php'] = array( 'url'=>'account_sponsor_page.php', 'label'=>'my_sponsorship' );
+	}
+
+	# Remove the link from the current page
+	if ( isset( $t_pages[$p_page] ) ) {
+		$t_pages[$p_page]['url'] = '';
 	}
 
 	# Plugin / Event added options
@@ -1173,13 +1131,21 @@ function print_account_menu( $p_page = '' ) {
 		}
 	}
 
-	// Plugins menu items
-	// TODO: this would be a call to print_pracket_link but the events returns cooked links so we cant
-	foreach( $t_menu_options as $t_menu_item ) {
-		echo '<span class="bracket-link">[&nbsp;';
-		echo $t_menu_item;
-		echo '&nbsp;]</span> ';
+	echo '<div id="account-menu">';
+	echo '<ul class="menu">';
+	foreach ( $t_pages as $t_page ) {
+		if( $t_page['url'] == '' ) {
+			echo '<li>', lang_get( $t_page['label'] ), '</li>';
+		} else {
+			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
+		}
 	}
+
+	// Plugins menu items - these are cooked links
+	foreach ( $t_menu_options as $t_menu_item ) {
+		echo '<li>', $t_menu_item, '</li>';
+	}
+	echo '</ul>';
 	echo '</div>';
 }
 
@@ -1190,27 +1156,27 @@ function print_account_menu( $p_page = '' ) {
  */
 function print_doc_menu( $p_page = '' ) {
 	$t_documentation_html = config_get( 'manual_url' );
-	$t_proj_doc_page = 'proj_doc_page.php';
-	$t_proj_doc_add_page = 'proj_doc_add_page.php';
+	$t_pages[$t_documentation_html] = array( 'url'=>$t_documentation_html, 'label'=>'user_documentation' );
+	$t_pages['proj_doc_page.php'] = array( 'url'=>'proj_doc_page.php', 'label'=>'project_documentation' );
+	if( file_allow_project_upload() ) {
+		$t_pages['proj_doc_add_page.php'] = array( 'url'=>'proj_doc_add_page.php', 'label'=>'add_file' );
+	}
 
-	switch( $p_page ) {
-		case $t_documentation_html:
-			$t_documentation_html = '';
-			break;
-		case $t_proj_doc_page:
-			$t_proj_doc_page = '';
-			break;
-		case $t_proj_doc_add_page:
-			$t_proj_doc_add_page = '';
-			break;
+	# Remove the link from the current page
+	if ( isset( $t_pages[$p_page] ) ) {
+		$t_pages[$p_page]['url'] = '';
 	}
 
 	echo '<div id="doc-menu">';
-	print_bracket_link( $t_documentation_html, lang_get( 'user_documentation' ) );
-	print_bracket_link( helper_mantis_url( $t_proj_doc_page ), lang_get( 'project_documentation' ) );
-	if( file_allow_project_upload() ) {
-		print_bracket_link( helper_mantis_url( $t_proj_doc_add_page ), lang_get( 'add_file' ) );
+	echo '<ul class="menu">';
+	foreach ( $t_pages as $t_page ) {
+		if( $t_page['url'] == '' ) {
+			echo '<li>', lang_get( $t_page['label'] ), '</li>';
+		} else {
+			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
+		}
 	}
+	echo '</ul>';
 	echo '</div>';
 }
 
@@ -1220,10 +1186,6 @@ function print_doc_menu( $p_page = '' ) {
  * @return null
  */
 function print_summary_menu( $p_page = '' ) {
-	echo '<div id="summary-menu" align="center">';
-	print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
-	print_bracket_link( helper_mantis_url( 'summary_page.php' ), lang_get( 'summary_link' ) );
-
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_SUMMARY' );
 	$t_menu_options = array();
@@ -1239,13 +1201,29 @@ function print_summary_menu( $p_page = '' ) {
 		}
 	}
 
-	// Plugins menu items
-	// TODO: this would be a call to print_pracket_link but the events returns cooked links so we cant
-	foreach( $t_menu_options as $t_menu_item ) {
-		echo '<span class="bracket-link">[&nbsp;';
-		echo $t_menu_item;
-		echo '&nbsp;]</span> ';
+	$t_pages['print_all_bug_page.php'] = array( 'url'=>'print_all_bug_page.php', 'label'=>'print_all_bug_page_link' );
+	$t_pages['summary_page.php'] = array( 'url'=>'summary_page.php', 'label'=>'summary_link' );
+	# Remove the link from the current page
+	if ( isset( $t_pages[$p_page] ) ) {
+		$t_pages[$p_page]['url'] = '';
 	}
+
+	echo '<div id="summary-menu">';
+	echo '<ul class="menu">';
+
+	foreach ( $t_pages as $t_page ) {
+		if( $t_page['url'] == '' ) {
+			echo '<li>', lang_get( $t_page['label'] ), '</li>';
+		} else {
+			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
+		}
+	}
+
+	// Plugins menu items - these are cooked links
+	foreach ( $t_menu_options as $t_menu_item ) {
+		echo '<li>', $t_menu_item, '</li>';
+	}
+	echo '</ul>';
 	echo '</div>';
 }
 
