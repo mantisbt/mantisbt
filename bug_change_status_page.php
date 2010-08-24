@@ -325,7 +325,7 @@ if ( ( $t_resolved <= $f_new_status ) ) {
 <?php event_signal( 'EVENT_BUG_CHANGE_STATUS_FORM', array( $f_bug_id ) ); ?>
 
 <!-- Bugnote -->
-<tr <?php echo helper_alternate_class() ?>>
+<tr id="bug-change-status-note" <?php echo helper_alternate_class() ?>>
 	<th class="category">
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
 	</th>
