@@ -138,7 +138,7 @@ print_recently_visited();
 
 <br />
 <div align="center">
-<form method="post" action="bug_update.php">
+<form id="bug-change-status-form" name="bug_change_status_form" method="post" action="bug_update.php">
 <?php echo form_security_field( 'bug_update' ) ?>
 <table class="width75" cellspacing="1">
 
