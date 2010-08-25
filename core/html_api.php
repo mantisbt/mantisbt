@@ -865,15 +865,12 @@ function print_menu() {
 		echo '</ul>';
 		echo '</div>';
 		echo '<div class="bug-jump">';
-		echo '<form method="post" action="' . helper_mantis_url( 'jump_to_bug.php">' );
+		echo '<form method="post" action="' . helper_mantis_url( 'jump_to_bug.php" class="bug-jump-form">' );
 		# CSRF protection not required here - form does not result in modifications
 
-		if( ON == config_get( 'use_javascript' ) ) {
-			$t_bug_label = lang_get( 'issue_id' );
-			echo "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" value=\"$t_bug_label\" onfocus=\"if (this.value == '$t_bug_label') this.value = ''\" onblur=\"if (this.value == '') this.value = '$t_bug_label'\" />&nbsp;";
-		} else {
-			echo "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" />&nbsp;";
-		}
+		$t_bug_label = lang_get( 'issue_id' );
+		echo '<input type="hidden" name="bug_label" value="', $t_bug_label, '" />';
+		echo '<input type="text" name="bug_id" size="10" class="small" />&nbsp;';
 
 		echo '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&nbsp;';
 		echo '</form>';

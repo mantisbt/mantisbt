@@ -147,7 +147,33 @@ $(document).ready( function() {
 			button: element.id + '_datetime_button'
 		});
 	});
+
+
+	$('.bug-jump').find('[name=bug_id]').focus( function() {
+		var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();
+		if( $(this).val() == bug_label ) {
+			$(this).val('');
+			$(this).removeClass('field-default');
+		}
+	});
+	$('.bug-jump').find('[name=bug_id]').blur( function() {
+		var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();
+		if( $(this).val() == '' ) {
+			$(this).val(bug_label);
+			$(this).addClass('field-default');
+		}
+	});
+	setBugLabel();
 });
+
+function setBugLabel() {
+	var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();
+	var field = $('.bug-jump').find('[name=bug_id]');
+	if( field.val() == '' ) {
+		field.val(bug_label);
+		field.addClass('field-default');
+	}
+}
 
 /*
  * String manipulation

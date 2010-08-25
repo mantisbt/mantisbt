@@ -111,7 +111,8 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 #content { clear: both; margin: 0; padding: .5em; }
 br { clear:both; }
 
-.bug-jump { position: relative; top: -2.5em; right: .5em; float: right;  }
+.bug-jump { position: relative; top: -2.5em; right: .5em; float: right;  z-index: 100; }
+.field-default { color: #999; }
 
 td.menu
 {
