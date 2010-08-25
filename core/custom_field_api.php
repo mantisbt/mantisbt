@@ -62,6 +62,7 @@ require_api( 'utility_api.php' );
 # *******************************************
 
 $g_custom_field_types[CUSTOM_FIELD_TYPE_STRING] = 'standard';
+$g_custom_field_types[CUSTOM_FIELD_TYPE_TEXTAREA] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_NUMERIC] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_FLOAT] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_ENUM] = 'standard';
@@ -1008,8 +1009,10 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 		return false;
 	}
 
+	$t_value_field = ( $row['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
+
 	$t_custom_field_string_table = db_get_table( 'custom_field_string' );
-	$query = "SELECT value
+	$query = "SELECT $t_value_field
 				  FROM $t_custom_field_string_table
 				  WHERE bug_id=" . db_param() . " AND
 				  		field_id=" . db_param();
@@ -1351,8 +1354,10 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 	$t_type = custom_field_get_field( $p_field_id, 'type' );
 	$t_custom_field_string_table = db_get_table( 'custom_field_string' );
 
+	$t_value_field = ( $t_type == CUSTOM_FIELD_TYPE_TEXTAREA ) ? 'text' : 'value';
+
 	# Determine whether an existing value needs to be updated or a new value inserted
-	$query = "SELECT value
+	$query = "SELECT $t_value_field
 				  FROM $t_custom_field_string_table
 				  WHERE field_id=" . db_param() . " AND
 				  		bug_id=" . db_param();
@@ -1360,16 +1365,16 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 
 	if( db_num_rows( $result ) > 0 ) {
 		$query = "UPDATE $t_custom_field_string_table
-					  SET value=" . db_param() . "
+					  SET $t_value_field=" . db_param() . "
 					  WHERE field_id=" . db_param() . " AND
 					  		bug_id=" . db_param();
 		db_query_bound( $query, Array( custom_field_value_to_database( $p_value, $t_type ), $c_field_id, $c_bug_id ) );
 
 		$row = db_fetch_array( $result );
-		history_log_event_direct( $c_bug_id, $t_name, custom_field_database_to_value( $row['value'], $t_type ), $p_value );
+		history_log_event_direct( $c_bug_id, $t_name, custom_field_database_to_value( $row[$t_value_field], $t_type ), $p_value );
 	} else {
 		$query = "INSERT INTO $t_custom_field_string_table
-						( field_id, bug_id, value )
+						( field_id, bug_id, $t_value_field )
 					  VALUES
 						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
 		db_query_bound( $query, Array( $c_field_id, $c_bug_id, custom_field_value_to_database( $p_value, $t_type ) ) );

@@ -938,10 +938,11 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 			if( strpos( $c_sort, 'custom_' ) === 0 ) {
 				$t_custom_field = utf8_substr( $c_sort, utf8_strlen( 'custom_' ) );
 				$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
-
+				$t_def = custom_field_get_definition( $t_custom_field_id );
+				$t_value_field = ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
 				$c_cf_alias = str_replace( ' ', '_', $t_custom_field );
 				$t_cf_table_alias = $t_custom_field_string_table . '_' . $t_custom_field_id;
-				$t_cf_select = "$t_cf_table_alias.value $c_cf_alias";
+				$t_cf_select = "$t_cf_table_alias.$t_value_field $c_cf_alias";
 
 				# check to be sure this field wasn't already added to the query.
 				if( !in_array( $t_cf_select, $p_query_clauses['select'] ) ) {
@@ -1923,6 +1924,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 							case CUSTOM_FIELD_TYPE_MULTILIST:
 								$t_where_params[] = '%|' . $t_filter_member . '|%';
 								array_push( $t_filter_array, db_helper_like( "$t_table_name.value" ) );
+								break;
+							case CUSTOM_FIELD_TYPE_TEXTAREA:
+								$t_where_params[] = '%' . $t_filter_member . '%';
+								array_push( $t_filter_array, db_helper_like( "$t_table_name.text" ) );
 								break;
 							default:
 								array_push( $t_filter_array, "$t_table_name.value = '" . db_prepare_string( $t_filter_member ) . "'" );
@@ -4029,6 +4034,8 @@ function print_filter_custom_field( $p_field_id ) {
 	} else if( isset( $t_accessible_custom_fields_names[$j] ) ) {
 		if( $t_accessible_custom_fields_types[$j] == CUSTOM_FIELD_TYPE_DATE ) {
 			print_filter_custom_field_date( $j, $p_field_id );
+		} else if( $t_accessible_custom_fields_types[$j] == CUSTOM_FIELD_TYPE_TEXTAREA ) {
+			echo '<input type="text" name="custom_field_', $p_field_id, '" size="10" value="" />';
 		} else {
 			echo '<select ' . $t_select_modifier . ' name="custom_field_' . $p_field_id . '[]">';
 			echo '<option value="' . META_FILTER_ANY . '" ';

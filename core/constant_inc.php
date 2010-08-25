@@ -419,6 +419,7 @@ define( 'CUSTOM_FIELD_TYPE_LIST', 6 );
 define( 'CUSTOM_FIELD_TYPE_MULTILIST', 7 );
 define( 'CUSTOM_FIELD_TYPE_DATE', 8 );
 define( 'CUSTOM_FIELD_TYPE_RADIO', 9 );
+define( 'CUSTOM_FIELD_TYPE_TEXTAREA', 10 );
 
 # Meta filter values
 define( 'META_FILTER_MYSELF', -1 );

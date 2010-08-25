@@ -31,6 +31,20 @@ $g_custom_field_type_definition[ CUSTOM_FIELD_TYPE_STRING ] = array (
 	'#function_string_value_for_email' => null,
 );
 
+$g_custom_field_type_definition[ CUSTOM_FIELD_TYPE_TEXTAREA] = array (
+	'#display_possible_values' => TRUE,
+	'#display_valid_regexp' => TRUE,
+	'#display_length_min' => TRUE,
+	'#display_length_max' => TRUE,
+	'#display_default_value' => TRUE,
+	'#function_return_distinct_values' => null,
+	'#function_value_to_database' => null,
+	'#function_database_to_value' => null,
+	'#function_print_input' => 'cfdef_input_textarea',
+	'#function_string_value' => null,
+	'#function_string_value_for_email' => null,
+);
+
 $g_custom_field_type_definition[ CUSTOM_FIELD_TYPE_NUMERIC ] = array (
 	'#display_possible_values' => TRUE,
 	'#display_valid_regexp' => TRUE,
@@ -298,6 +312,16 @@ function cfdef_input_textbox($p_field_def, $t_custom_field_value) {
 		echo ' maxlength="255"';
 	}
 	echo ' value="' . string_attribute( $t_custom_field_value ) .'"></input>';
+}
+
+function cfdef_input_textarea($p_field_def, $t_custom_field_value) {
+	echo '<textarea ', helper_get_tab_index(), ' name="custom_field_' . $p_field_def['id'] . '"';
+	if( 0 < $p_field_def['length_max'] ) {
+		echo ' maxlength="' . $p_field_def['length_max'] . '"';
+	} else {
+		echo ' maxlength="255"';
+	}
+	echo 'cols="70" rows="8">' . $t_custom_field_value .'</textarea>';
 }
 
 /**

@@ -3041,7 +3041,7 @@ $g_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
  *
  * @global string $g_custom_field_type_enum_string
  */
-$g_custom_field_type_enum_string = '0:string,1:numeric,2:float,3:enum,4:email,5:checkbox,6:list,7:multiselection list,8:date,9:radio';
+$g_custom_field_type_enum_string = '0:string,1:numeric,2:float,3:enum,4:email,5:checkbox,6:list,7:multiselection list,8:date,9:radio,10:textarea';
 
 /*********************************
  * MantisBT Javascript Variables *
