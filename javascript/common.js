@@ -163,6 +163,9 @@ $(document).ready( function() {
 			$(this).addClass('field-default');
 		}
 	});
+	$('[name=source_query_id]').change( function() {
+		$(this).parent().submit();
+	});
 	setBugLabel();
 });
 
