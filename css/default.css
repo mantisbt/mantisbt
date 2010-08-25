@@ -108,7 +108,9 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 #account-menu ul, #doc-menu ul { margin: 0 auto; padding: .25em; float: right; text-align: center; }
 #account-menu ul li, #doc-menu ul li { display: block; float: left; padding: 0; margin: 0; }
 
-#content { clear: both; margin: 0; padding: .5em; }
+#content { position: relative; top: 0; margin: 0; padding: .5em; }
+.recently-visited { position: relative; top: .5em; right: -14em; float: right; text-align: right; font-size: x-small; }
+
 br { clear:both; }
 
 .bug-jump { position: relative; top: -2.5em; right: .5em; float: right;  z-index: 100; }

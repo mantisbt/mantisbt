@@ -1494,7 +1494,7 @@ function print_recently_visited() {
 		return;
 	}
 
-	echo '<div align="right" class="recently-visited"><small>' . lang_get( 'recently_visited' ) . ': ';
+	echo '<div class="recently-visited">' . lang_get( 'recently_visited' ) . ': ';
 	$t_first = true;
 
 	foreach( $t_ids as $t_id ) {
@@ -1506,7 +1506,7 @@ function print_recently_visited() {
 
 		echo string_get_bug_view_link( $t_id );
 	}
-	echo '</small></div>';
+	echo '</div>';
 }
 
 # print a dropdown box from input array
