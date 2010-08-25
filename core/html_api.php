@@ -369,7 +369,7 @@ function html_css() {
  * @return null
  */
 function html_css_link( $p_filename ) {
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( 'css/' . $p_filename ), true ), '" >' . "\n";
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( 'css/' . $p_filename ), true ), '" />' . "\n";
 }
 
 
@@ -862,6 +862,7 @@ function print_menu() {
 		echo '<li>';
 		echo implode( $t_menu_options, "</li>\n<li>" );
 		echo '</li>';
+		echo '</ul>';
 		echo '</div>';
 		echo '<div class="bug-jump">';
 		echo '<form method="post" action="' . helper_mantis_url( 'jump_to_bug.php">' );
