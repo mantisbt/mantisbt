@@ -812,7 +812,7 @@ function print_menu() {
 		# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
 		if( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
 			$t_link = helper_mantis_url( 'manage_overview_page.php' );
-			$t_menu_options[] = '<a id="manage-menu-link" href="' . $t_link . '">' . lang_get( 'manage_link' ) . '</a>';
+			$t_menu_options[] = '<a class="manage-menu-link" href="' . $t_link . '">' . lang_get( 'manage_link' ) . '</a>';
 		} else {
 			$t_show_access = min( config_get( 'manage_user_threshold' ), config_get( 'manage_project_threshold' ), config_get( 'manage_custom_fields_threshold' ) );
 			if( access_has_global_level( $t_show_access ) || access_has_any_project( $t_show_access ) ) {
@@ -843,7 +843,7 @@ function print_menu() {
 
 		# Account Page (only show accounts that are NOT protected)
 		if( OFF == $t_protected ) {
-			$t_menu_options[] = '<a id="account-menu-link" href="' . helper_mantis_url( 'account_page.php">' ) . lang_get( 'account_link' ) . '</a>';
+			$t_menu_options[] = '<a class="account-menu-link" href="' . helper_mantis_url( 'account_page.php">' ) . lang_get( 'account_link' ) . '</a>';
 		}
 
 		# Add custom options
