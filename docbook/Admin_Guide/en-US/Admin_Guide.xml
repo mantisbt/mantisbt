@@ -5,7 +5,9 @@
 ]>
 <book>
 	<xi:include href="Book_Info.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	<xi:include href="Preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<!-- TODO Add common preface stuff, possibly adapting the default one
+        <xi:include href="Preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+        -->
 	<xi:include href="About.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Installation.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="User_Management.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
