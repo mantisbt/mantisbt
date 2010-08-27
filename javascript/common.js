@@ -166,6 +166,10 @@ $(document).ready( function() {
 	$('[name=source_query_id]').change( function() {
 		$(this).parent().submit();
 	});
+	$('[name=form_set_project]').children('[name=project_id]').change( function() {
+		$(this).parent().submit();
+	});
+	$('[name=form_set_project]').children('.button').hide();
 	setBugLabel();
 });
 

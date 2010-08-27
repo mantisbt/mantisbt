@@ -517,9 +517,7 @@ function html_login_info() {
 	$t_now = date( config_get( 'complete_date_format' ) );
 	$t_realname = current_user_get_field( 'realname' );
 
-	echo '<table class="hide" id="login-info">';
-	echo '<tr>';
-	echo '<td class="login-info-left">';
+	echo '<div id="login-info">';
 	if( current_user_is_anonymous() ) {
 		$t_return_page = $_SERVER['SCRIPT_NAME'];
 		if( isset( $_SERVER['QUERY_STRING'] ) ) {
@@ -527,20 +525,23 @@ function html_login_info() {
 		}
 
 		$t_return_page = string_url( $t_return_page );
-		echo lang_get( 'anonymous' ) . ' | <a href="' . helper_mantis_url( 'login_page.php?return=' . $t_return_page ) . '">' . lang_get( 'login_link' ) . '</a>';
+
+		echo '<span id="logged-anon-label">' . lang_get( 'anonymous' ) . '</span>';
+		echo '<span id="login-link"><a href="' . helper_mantis_url( 'login_page.php?return=' . $t_return_page ) . '">' . lang_get( 'login_link' ) . '</a></span>';
 		if( config_get_global( 'allow_signup' ) == ON ) {
-			echo ' | <a href="' . helper_mantis_url( 'signup_page.php' ) . '">' . lang_get( 'signup_link' ) . '</a>';
+			echo '<span id="signup-link"><a href="' . helper_mantis_url( 'signup_page.php' ) . '">' . lang_get( 'signup_link' ) . '</a></span>';
 		}
 	} else {
-		echo lang_get( 'logged_in_as' ), ": <span class=\"italic\">", string_html_specialchars( $t_username ), "</span> <span class=\"small\">";
-		echo is_blank( $t_realname ) ? "($t_access_level)" : "(" . string_html_specialchars( $t_realname ) . " - $t_access_level)";
-		echo "</span>";
+		echo '<span id="logged-in-label">' . lang_get( 'logged_in_as' ) . '</span>';
+		echo '<span id="logged-in-user">' . string_html_specialchars( $t_username ) . '</span>';
+		echo '<span id="logged-in">';
+		echo !is_blank( $t_realname ) ?  '<span id="logged-in-realname">' . string_html_specialchars( $t_realname ) . '</span>' : '';
+		echo '<span id="logged-in-accesslevel" class="' . $t_access_level . '">' . $t_access_level . '</span>';
+		echo '</span>';
 	}
-	echo '</td>';
-	echo '<td class="login-info-middle">';
-	echo "<span class=\"italic\">$t_now</span>";
-	echo '</td>';
-	echo '<td class="login-info-right">';
+	echo '</div>';
+
+
 	$t_show_project_selector = true;
 	if( count( current_user_get_accessible_projects() ) == 1 ) {
 
@@ -552,32 +553,31 @@ function html_login_info() {
 		}
 	}
 
+	if( OFF != config_get( 'rss_enabled' ) ) {
+		echo '<div id="rss-feed">';
+		# Link to RSS issues feed for the selected project, including authentication details.
+		echo '<a href="' . htmlspecialchars( rss_get_issues_feed_url() ) . '">';
+		echo '<img src="' . helper_mantis_url( 'images/rss.png' ) . '" alt="' . lang_get( 'rss' ) . '" title="' . lang_get( 'rss' ) . '" />';
+		echo '</a>';
+		echo '</div>';
+	}
+
 	if( $t_show_project_selector ) {
+		echo '<div id="project-selector">';
 		echo '<form method="post" name="form_set_project" action="' . helper_mantis_url( 'set_project.php' ) . '">';
 		# CSRF protection not required here - form does not result in modifications
 
-		echo lang_get( 'email_project' ), ': ';
-		if( ON == config_get( 'use_javascript' ) ) {
-			echo '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
-		} else {
-			echo '<select name="project_id" class="small">';
-		}
+		echo '<label for="form-set-project-id">' . lang_get( 'email_project' ) . '</label>';
+		echo '<select id="form-set-project-id" name="project_id">';
 		print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
 		echo '</select> ';
-		echo '<input type="submit" class="button-small" value="' . lang_get( 'switch' ) . '" />';
+		echo '<input type="submit" class="button" value="' . lang_get( 'switch' ) . '" />';
 		echo '</form>';
+		echo '</div>';
+		echo '<div id="current-time">' . $t_now . '</div>';
+	} else {
+		echo '<div id="current-time-centered">' . $t_now . '</div>';
 	}
-	if( OFF != config_get( 'rss_enabled' ) ) {
-
-		# Link to RSS issues feed for the selected project, including authentication details.
-		echo '<a href="' . htmlspecialchars( rss_get_issues_feed_url() ) . '">';
-		echo '<img src="' . helper_mantis_url( 'images/rss.png' ) . '" alt="' . lang_get( 'rss' ) . '" style="border-style: none; margin: 5px; vertical-align: middle;" />';
-		echo '</a>';
-	}
-
-	echo '</td>';
-	echo '</tr>';
-	echo '</table>';
 }
 
 /**
