@@ -80,7 +80,7 @@ echo '<br />';
 ?>
 
 <div align="center">
-<form name="report_bug_form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="manage_config_columns_set.php">
+<form name="manage_columns_form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="manage_config_columns_set.php">
 <?php echo form_security_field( 'manage_config_columns_set' ) ?>
 <table class="width50" cellspacing="1">
 
