@@ -1846,7 +1846,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 					array_push( $t_where_clauses, $t_filter_query['where'] );
 				}
 				if ( isset( $t_filter_query['params'] ) && is_array( $t_filter_query['params'] ) ) {
-					array_merge( $t_where_params, $t_filter_query['params'] );
+					$t_where_params = array_merge( $t_where_params, $t_filter_query['params'] );
 				}
 			}
 		}
