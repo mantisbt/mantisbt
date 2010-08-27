@@ -91,11 +91,13 @@ td.login-info-left		{ width: 33%; padding: 0px; text-align: left; }
 td.login-info-middle	{ width: 33%; padding: 0px; text-align: center; }
 td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space: nowrap; }
 
-.main-menu { float: left; width:100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; border: 1px solid #999; background-color: #e8e8e8; z-index: 99; }
-.main-menu ul { clear: left; float: left; list-style: none; position: relative; left: 50%; margin: 0 0 0 -3em; padding: .25em; }
-.main-menu ul li { display:block; float: left; list-style: none; padding: .5em; margin: 0; position: relative; right: 50%; }
-.main-menu ul li a { padding-left: .9em; border-left: 1px solid #000; text-decoration: underline; }
-.main-menu ul li:first-child > a { padding-left: 0; border-left: none;  }
+.bug-jump { display:block; float: right; padding: .25em; margin: 0; position: relative; top: .3em; z-index: 100; }
+.main-menu { float: right; width:100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -2em; border: 1px solid #999; background-color: #e8e8e8; z-index: 99; }
+.main-menu div { width: 93.75%; }
+.main-menu ul { clear: left; float: left; list-style: none; position: relative; left: 50%; margin: 0 0 0 -3.75em; padding: .25em; width: 90%; }
+.main-menu ul li { display:block; float: left; list-style: none; padding: .15em .5em; margin: 0; position: relative; right: 50%; }
+.main-menu ul li a { padding-right: .9em; border-right: 1px solid #000; text-decoration: underline; }
+.main-menu ul li > a#logout-link { padding-right: 0; border-right: none; }
 
 #manage-menu, #account-menu, #summary-menu , #summary-submenu, #manage-config-menu { float: left; width: 100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -1.5em; }
 #manage-menu ul, #manage-config-menu ul, #summary-menu ul, #summary-submenu ul { clear: left; float: left; list-style: none; position: relative; left: 50%; padding: 0; margin: 0; text-align: center; }
@@ -126,11 +128,10 @@ span.permalink:after,
 span.switch-view:after { content: "]" }
 
 #content { position: relative; top: 0; margin: 0; padding: .5em; }
-.recently-visited { position: relative; top: .5em; right: -14em; float: right; text-align: right; font-size: x-small; }
+.recently-visited { position: relative; top: -2.5em; float: right; text-align: right; font-size: x-small; }
 
 br { clear:both; }
 
-.bug-jump { position: relative; top: -2.5em; right: .5em; float: right;  z-index: 100; }
 .field-default { color: #999; }
 
 td.menu

@@ -855,15 +855,8 @@ function print_menu() {
 
 		# Logout (no if anonymously logged in)
 		if( !current_user_is_anonymous() ) {
-			$t_menu_options[] = '<a href="' . helper_mantis_url( 'logout_page.php">' ) . lang_get( 'logout_link' ) . '</a>';
+			$t_menu_options[] = '<a id="logout-link" href="' . helper_mantis_url( 'logout_page.php">' ) . lang_get( 'logout_link' ) . '</a>';
 		}
-		echo '<div class="main-menu">';
-		echo '<ul class="menu">';
-		echo '<li>';
-		echo implode( $t_menu_options, "</li>\n<li>" );
-		echo '</li>';
-		echo '</ul>';
-		echo '</div>';
 		echo '<div class="bug-jump">';
 		echo '<form method="post" action="' . helper_mantis_url( 'jump_to_bug.php" class="bug-jump-form">' );
 		# CSRF protection not required here - form does not result in modifications
@@ -874,6 +867,15 @@ function print_menu() {
 
 		echo '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&nbsp;';
 		echo '</form>';
+		echo '</div>';
+		echo '<div class="main-menu">';
+		echo '<div>';
+		echo '<ul class="menu">';
+		echo '<li>';
+		echo implode( $t_menu_options, "</li>\n<li>" );
+		echo '</li>';
+		echo '</ul>';
+		echo '</div>';
 		echo '</div>';
 	}
 }
