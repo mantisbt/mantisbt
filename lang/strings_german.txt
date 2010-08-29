@@ -43,6 +43,7 @@
  * @author Revolus
  * @author Smeuser
  * @author Stefan Meier, Stefan.Meier@cimsource.com
+ * @author The Evil IP address
  * @author Umherirrender
  */
 
@@ -60,7 +61,7 @@ $s_actiongroup_menu_update_category = 'Kategorie ändern';
 $s_actiongroup_menu_set_sticky = 'Fixierung setzen/lösen';
 $s_actiongroup_menu_update_field = 'Bearbeiten %1$s';
 $s_actiongroup_menu_update_target_version = 'Zielversion ändern';
-$s_actiongroup_menu_update_fixed_in_version = 'Erledigungs-Version ändern';
+$s_actiongroup_menu_update_fixed_in_version = 'Behoben in-Version ändern';
 $s_actiongroup_menu_update_product_build = 'Produkt-Version aktualisieren';
 $s_actiongroup_menu_add_note = 'Notiz hinzufügen';
 $s_actiongroup_menu_attach_tags = 'Tag zuordnen';
@@ -152,7 +153,7 @@ $s_status_bugs_conf_msg = 'Neuer Eintragsstatus:';
 $s_view_status_bugs_conf_msg = 'Sichtbarkeit des Eintrags auswählen';
 $s_category_bugs_conf_msg = 'Eintrag-Kategorie wählen';
 $s_set_sticky_bugs_conf_msg = 'Sind Sie sicher, dass Sie die Fixierung dieses Eintrags ändern wollen?';
-$s_fixed_in_version_bugs_conf_msg = 'Erledigungs-Version auswählen';
+$s_fixed_in_version_bugs_conf_msg = 'Behoben in-Version auswählen';
 $s_target_version_bugs_conf_msg = 'Zielversion auswählen';
 $s_close_group_bugs_button = 'Einträge schließen';
 $s_delete_group_bugs_button = 'Einträge löschen';
@@ -367,7 +368,7 @@ $s_email_priority = 'Priorität';
 $s_email_status = 'Status';
 $s_email_resolution = 'Lösung';
 $s_email_duplicate = 'Duplikat';
-$s_email_fixed_in_version = 'Erledigt in Version';
+$s_email_fixed_in_version = 'Behoben in Version';
 $s_email_target_version = 'Zielversion';
 $s_email_date_submitted = 'Erstellt am';
 $s_email_last_modified = 'Letzte Aktualisierung';
@@ -383,7 +384,7 @@ $s_manage_profiles_link = 'Profil-Verwaltung';
 $s_change_preferences_link = 'Einstellungen ändern';
 $s_edit_account_title = 'Konto bearbeiten';
 $s_username = 'Benutzername';
-$s_realname = 'Vollständiger Name';
+$s_realname = 'Bürgerlicher Name';
 $s_email = 'E-Mail';
 $s_password = 'Passwort';
 $s_no_password_change = 'Das Passwort wird durch ein anderes System kontrolliert und kann daher hier nicht bearbeitet werden.';
@@ -570,7 +571,7 @@ $s_error_database_version_out_of_date_2 = '<strong>WARNUNG:</strong> Die Datenba
 $s_error_code_version_out_of_date = '<strong>WARNUNG:</strong> Die Datenbank-Struktur ist neuer als die installierte Version. Bitte aktualisieren Sie das Programm.';
 $s_login_page_info = 'Willkommen beim Issue Tracker.';
 $s_login_title = 'Anmeldung';
-$s_save_login = 'Anmeldung auf diesem Computer merken';
+$s_save_login = 'Auf diesem Computer dauerhaft angemeldet bleiben';
 $s_secure_session = 'Sichere Sitzung';
 $s_secure_session_long = 'Diese Sitzung ist nur für diese IP-Adresse gültig.';
 $s_choose_project = 'Projekt wählen';

@@ -30,7 +30,7 @@
  * @author Matej Rizman, matej.rizman@guest.arnes.si
  */
 
-$s_actiongroup_menu_move = 'Premakni';
+$s_actiongroup_menu_move = 'Prestavi';
 $s_actiongroup_menu_copy = 'Kopiraj';
 $s_actiongroup_menu_assign = 'Priredi';
 $s_actiongroup_menu_close = 'Zapri';
@@ -590,7 +590,7 @@ $s_prev = 'Naslednja';
 $s_next = 'Prejšnja';
 $s_first = 'Prva';
 $s_last = 'Zadnja';
-$s_start_date = 'Začetni datum';
+$s_start_date = 'Datum začetka';
 $s_end_date = 'Končni datum';
 $s_use_date_filters = 'Filter po datumu';
 $s_yes = 'Da';
@@ -616,7 +616,7 @@ $s_system_profile = 'Opis sistema';
 $s_update_bug_button = 'Uredi';
 $s_bug_assign_to_button = 'Dodeli:';
 $s_reopen_bug_button = 'Ponovno odpri';
-$s_move_bug_button = 'Premakni';
+$s_move_bug_button = 'Prestavi';
 $s_attached_files = 'Dodane datoteke';
 $s_publish = 'Objavi';
 $s_cached = 'Predpomnjen';

@@ -176,7 +176,7 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'De Zeijshereih „%1$s“ woodt ni
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Notiz nit jefonge';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Dat Projäk „%1$d“ kunnt mer nit fenge.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'E Feld „%1$s“ en de Daatebangk ham_mer nit jefonge.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Mer han kei Verbendung noh däm <i lang="en">FTP</i>-ßööver krääje.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Mer han kei Verbendung noh däm ftp-ẞööver krääje.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'E Projäk met däm Name jit et ald. Jangk retuur un jif ene andere Name aan.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Dat es ene onjöltijje Name för e Projäk. Dä Name kann nit fottjelohße wääde.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Ene Metmaacher met däm Name „%1$s“ kunnt mer nit fenge.';
@@ -203,7 +203,8 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Winnishßdens ei Projäk bruch dat D
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ene onjöltije Wäät för dat Daate_Feld „%1$s“.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'En onjöltijje Faßlääjung för e selfsjemaat Daate_Feld.';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'De Zohjangspröövung per <i lang="en">LDAP</i> es donevve jejange.';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'De Verbendung zom <i lang="en">LDAP</i> ßööver hät nit jeklapp.';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'De Verbendung nohm <i lang="en">ldap</i>-ẞööver hät nit jeklapp.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Dä ldap-Enndraach op der neuste Shtand ze bränge hät nit jeflupp.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Dä Metmaacher-Name es nit jöltesch. Zohjelohße sen bloß lateinesche Bochstabe, de Zeffere, Zweschreräum, dä Bendeshtresh, der Pungk, et „plus“-Zeijsche, un dä Ungershtresh.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Dä „reschtejje Name“ es onjöltesch udder Kappes.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Dä Metmaacher hät nit et nüüdeje Zohjangsrääsch.';
