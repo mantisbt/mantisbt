@@ -3015,6 +3015,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 				$t_fields = '';
 				$t_values = '';
+				$t_column = 0;
 			}
 		}
 
