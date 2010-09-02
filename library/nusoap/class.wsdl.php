@@ -842,9 +842,9 @@ class wsdl extends nusoap_base {
 		<body>
 		<div class=content>
 			<br><br>
-			<div class=title>'.$this->serviceName.'</div>
+			<div class=title>'.htmlentities($this->serviceName).'</div>
 			<div class=nav>
-				<p>View the <a href="'.$PHP_SELF.'?wsdl">WSDL</a> for the service.
+				<p>View the <a href="'.htmlentities($PHP_SELF).'?wsdl">WSDL</a> for the service.
 				Click on an operation name to view it&apos;s details.</p>
 				<ul>';
 				foreach($this->getOperations() as $op => $data){
@@ -854,21 +854,21 @@ class wsdl extends nusoap_base {
 				    <a href='#' onclick='popout()'><font color='#ffffff'>Close</font></a><br><br>";
 				    foreach($data as $donnie => $marie){ // loop through opdata
 						if($donnie == 'input' || $donnie == 'output'){ // show input/output data
-						    $b .= "<font color='white'>".ucfirst($donnie).':</font><br>';
+						    $b .= "<font color='white'>".htmlentities(ucfirst($donnie)).':</font><br>';
 						    foreach($marie as $captain => $tenille){ // loop through data
 								if($captain == 'parts'){ // loop thru parts
-								    $b .= "&nbsp;&nbsp;$captain:<br>";
+								    $b .= "&nbsp;&nbsp;".htmlentities($captain).":<br>";
 					                //if(is_array($tenille)){
 								    	foreach($tenille as $joanie => $chachi){
-											$b .= "&nbsp;&nbsp;&nbsp;&nbsp;$joanie: $chachi<br>";
+											$b .= "&nbsp;&nbsp;&nbsp;&nbsp;".htmlentities($joanie).": ".htmlentities($chachi)."<br>";
 								    	}
 					        		//}
 								} else {
-								    $b .= "&nbsp;&nbsp;$captain: $tenille<br>";
+								    $b .= "&nbsp;&nbsp;".htmlentities($captain).": ".htmlentities($tenille)."<br>";
 								}
 						    }
 						} else {
-						    $b .= "<font color='white'>".ucfirst($donnie).":</font> $marie<br>";
+						    $b .= "<font color='white'>".htmlentities(ucfirst($donnie)).":</font> ".htmlentities($marie)."<br>";
 						}
 				    }
 					$b .= '</div>';
