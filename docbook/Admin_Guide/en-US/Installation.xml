@@ -10,13 +10,12 @@
     <itemizedlist>
         <listitem>
             <para>
-                <link linkend="admin.about.download">Download</link>
-                Mantis
+                Download Mantis (see <xref linkend="admin.about.download" />)
             </para>
         </listitem>
         <listitem>
             <para>
-                Go through MantisBT <link linkend="admin.config">Configuration</link>
+                Go through <xref linkend="admin.config" />
                 and set the database options + whatever options where you need to
                 override the default values.
             </para>
@@ -137,7 +136,7 @@
                         work with yourspecific setup.Open the file in an editor and add
                         anyother values that are required. There aremany more that you can
                         use to customize your MantisBT installation.
-                        See <link linkend="admin.config">Configuration</link> for
+                        See <xref linkend="admin.config" /> for
                         in depth explanations.The file will overwrite the default values
                         with those necessary for setup.You can load up admin/check.php to
                         see if you set things up correctly.
@@ -281,9 +280,8 @@
 
             <para>
                 It is recommended that you make an backup in case you wish to use
-                your data in the future. See the
-                <link linkend="admin.install.backups">Backups</link>
-                page for details.
+                your data in the future. See <xref linkend="admin.install.backups" />
+                for details.
                 To uninstall MantisBT:
                 <itemizedlist>
                     <listitem>

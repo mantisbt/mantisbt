@@ -73,10 +73,9 @@
                 </para>
             </formalpara>
 
-            <para>Also setup the LDAP parameters explained in the
-                <link linkend="admin.config.auth">Authentication</link>
-                section. Don't forget to change your $g_login_method to
-                LDAP.
+            <para>Also setup the LDAP parameters explained in 
+                <xref linkend="admin.config.auth" />.
+                Don't forget to change your $g_login_method to LDAP.
             </para>
 
             <formalpara>

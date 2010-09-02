@@ -1287,7 +1287,7 @@
             </varlistentry>
         </variablelist>
         <para>See also:
-            <link linkend="admin.customize.email">Email Notifications</link>
+            <xref linkend="admin.customize.email" />
         </para>
     </section>
 
@@ -2040,7 +2040,7 @@
         </variablelist>
 
         <para>See also:
-            <link linkend="admin.customize.status">Customizing Status Values</link>
+            <xref linkend="admin.customize.status" />
         </para>
     </section>
 

@@ -85,9 +85,11 @@
             text in the "Updated" column will be bold if the issue has changed
             in the last "Changed(hrs)" field which is specified in the viewing
             filters. Each table row is color coded according to the issue
-            status. The colors can be customised through MantisBT
-            <link linkend="admin.config">Configuration</link>
-            .Severitiesblock
+            status. The colors can be customised through MantisBT configuration pages
+            (see <xref linkend="admin.config" /> for details).
+
+            Severities
+            block
             - prevents further work/progress from being made
             crash - crashes the application or blocking,
             major - major issue,
