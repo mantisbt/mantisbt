@@ -1,0 +1,49 @@
+<sect1 id="dev.eventref.account">
+	<title>User Account Events</title>
+
+	<sect2 id="dev.eventref.account.prefs">
+		<title>Account Preferences</title>
+	
+		<blockquote id="dev.eventref.account.prefs.updateform">
+			<title>EVENT_ACCOUNT_PREFS_UPDATE_FORM (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do processing or display form elements on
+					the Account Preferences page.  It is triggered immediately after the last
+					core preference element.
+				</para>
+
+				<para>
+					Any output here should be defining appropriate rows and columns for the
+					surrounding &lt;table&gt; elements.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.account.prefs.update">
+			<title>EVENT_ACCOUNT_PREFS_UPDATE (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do pre-processing of form elements from the
+					Account Preferences page.  It is triggered immediately before the user
+					preferences are saved to the database.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+	</sect2>
+
+</sect1>
+

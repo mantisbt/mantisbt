@@ -1,17 +1,18 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE authorgroup PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "Developers_Guide.ent">
+<!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <authorgroup>
 	<author>
-		<firstname>Dude</firstname>
-		<surname>McPants</surname>
-		<affiliation>
+		<firstname>Gianluca</firstname>
+		<surname>Sforna</surname>
+		<!--affiliation>
 			<orgname>Somewhere</orgname>
 			<orgdiv>Someone</orgdiv>
-		</affiliation>
-		<email>Dude.McPants@example.com</email>
+		</affiliation-->
+		<email>giallu@gmail.com</email>
 	</author>
+        <!-- TODO add other authors -->
 </authorgroup>
 

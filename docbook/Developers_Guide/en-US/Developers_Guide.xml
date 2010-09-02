@@ -5,8 +5,15 @@
 ]>
 <book>
 	<xi:include href="Book_Info.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	<xi:include href="Preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	<xi:include href="Chapter.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+        <!-- TODO Add common preface stuff, possibly adapting the default one
+        <xi:include href="Preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+        -->
+	<xi:include href="Contributors.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="Database.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="Events.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="Plugins.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="Events_Reference.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="Appendix.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Revision_History.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<index />
 </book>
