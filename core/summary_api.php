@@ -333,7 +333,7 @@ function summary_print_by_activity() {
 
 	foreach( $t_summarydata as $row ) {
 		$t_bugid = string_get_bug_view_link( $row['id'] );
-		$t_summary = string_html_specialchars( $row['summary'] );
+		$t_summary = string_display_line( $row['summary'] );
 		$t_notescount = $row['count'];
 
 		print "<tr " . helper_alternate_class() . ">\n";
@@ -377,7 +377,7 @@ function summary_print_by_age() {
 		}
 
 		$t_bugid = string_get_bug_view_link( $row['id'] );
-		$t_summary = $row['summary'];
+		$t_summary = string_display_line( $row['summary'] );
 		$t_days_open = intval(( time() - $row['date_submitted'] ) / SECONDS_PER_DAY );
 
 		print "<tr " . helper_alternate_class() . ">\n";
