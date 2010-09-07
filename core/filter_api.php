@@ -109,6 +109,7 @@ function filter_get_plugin_filters() {
 
 	return $s_field_array;
 }
+
 /**
  *  Get a permalink for the current active filter.  The results of using these fields by other users
  *  can be inconsistent with the original results due to fields like "Myself", "Current Project",
@@ -2119,8 +2120,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	}
 	?>
 
-		<br />
-		<div class="filter-box">
+	<div class="filter-box">
 		<form method="post" name="filters<?php echo $t_form_name_suffix?>" id="filters_form<?php echo $t_form_name_suffix?>" action="<?php echo $t_action;?>">
 		<?php # CSRF protection not required here - form does not result in modifications ?>
 		<input type="hidden" name="type" value="1" />
@@ -3390,33 +3390,32 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	echo '<input type="text" size="16" name="', FILTER_PROPERTY_SEARCH, '" value="', string_html_specialchars( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
 	echo '</div>';
 	?>
-	<div class="submit-query"><input type="submit" name="filter" class="button-small" value="<?php echo lang_get( 'filter_button' )?>" /></div>
+	<div class="submit-query"><input type="submit" name="filter" value="<?php echo lang_get( 'filter_button' )?>" /></div>
 	</form>
-	<div class="other-forms">
-		<div class="filter-links"><?php
-			$f_switch_view_link = (  ON == config_get( 'dhtml_filters' ) ? 'view_all_set.php?type=6&view_type=' : 'view_filters_page.php?view_type=' );
-			$t_view_filters = config_get( 'view_filters' );
-			if(( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
-				if( 'advanced' == $t_view_type ) {
-					echo '<span class="switch-view"><a href="', $f_switch_view_link, 'simple">', lang_get('simple_filters'), '</a></span>';
-				} else {
-					echo '<span class="switch-view"><a href="', $f_switch_view_link, 'advanced">', lang_get('advanced_filters'), '</a></span>';
-				}
-			}
+	<?php
+	$t_stored_queries_arr = array();
+	$t_stored_queries_arr = filter_db_get_available_queries();
 
-			if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
-				echo '<span class="permalink"><a href="permalink_page.php?url=', urlencode( filter_get_url( $t_filter ) ), '">', lang_get( 'create_filter_link' ), '</a></span>';
-			} ?>
-		</div><?php
-		$t_stored_queries_arr = array();
-		$t_stored_queries_arr = filter_db_get_available_queries();
-
-		if( count( $t_stored_queries_arr ) > 0 ) { ?>
-		<div class="stored-queries">
-			<form method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
-				<?php # CSRF protection not required here - form does not result in modifications ?>
-				<input type="hidden" name="type" value="3" />
-				<select name="source_query_id">
+	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) { ?>
+	<div class="save-query">
+		<form method="post" name="save_query" action="query_store_page.php">
+			<?php # CSRF protection not required here - form does not result in modifications ?>
+			<input type="submit" name="save_query_button" class="button-small" value="<?php echo lang_get( 'save_query' )?>" />
+		</form>
+	</div><?php
+	}
+	if( count( $t_stored_queries_arr ) > 0 ) { ?>
+	<div class="manage-queries">
+		<form method="post" name="open_queries" action="query_view_page.php">
+			<?php # CSRF protection not required here - form does not result in modifications ?>
+			<input type="submit" name="switch_to_query_button" class="button-small" value="<?php echo lang_get( 'open_queries' )?>" />
+		</form>
+	</div>
+	<div class="stored-queries">
+		<form method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
+			<?php # CSRF protection not required here - form does not result in modifications ?>
+			<input type="hidden" name="type" value="3" />
+			<select name="source_query_id">
 				<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
 				<option value="-1"></option>
 				<?php
@@ -3427,35 +3426,38 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					echo '>' . string_display_line( $t_query_name ) . '</option>';
 				}
 				?>
-				</select>
-				<input type="submit" name="switch_to_query_button" class="button-small" value="<?php echo lang_get( 'use_query' )?>" />
-			</form>
-			<form method="post" name="open_queries" action="query_view_page.php">
-				<?php # CSRF protection not required here - form does not result in modifications ?>
-				<input type="submit" name="switch_to_query_button" class="button-small" value="<?php echo lang_get( 'open_queries' )?>" />
-			</form>
-		</div><?php
-		} else { ?>
-		<div class="reset-query">
-			<form method="get" name="reset_query" action="view_all_set.php">
-				<?php # CSRF protection not required here - form does not result in modifications ?>
-				<input type="hidden" name="type" value="3" />
-				<input type="hidden" name="source_query_id" value="-1" />
-				<input type="submit" name="reset_query_button" class="button-small" value="<?php echo lang_get( 'reset_query' )?>" />
-			</form>
-		</div><?php
+			</select>
+			<input type="submit" name="switch_to_query_button" class="button-small" value="<?php echo lang_get( 'use_query' )?>" />
+		</form>
+	</div> <?php
+	} else { ?>
+	<div class="reset-query">
+		<form method="get" name="reset_query" action="view_all_set.php">
+			<?php # CSRF protection not required here - form does not result in modifications ?>
+			<input type="hidden" name="type" value="3" />
+			<input type="hidden" name="source_query_id" value="-1" />
+			<input type="submit" name="reset_query_button" class="button-small" value="<?php echo lang_get( 'reset_query' )?>" />
+		</form>
+	</div><?php
+	}
+	?>
+	<div class="filter-links"><?php
+		$f_switch_view_link = (  ON == config_get( 'dhtml_filters' ) ? 'view_all_set.php?type=6&view_type=' : 'view_filters_page.php?view_type=' );
+		$t_view_filters = config_get( 'view_filters' );
+		if(( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
+			if( 'advanced' == $t_view_type ) {
+				echo '<span class="switch-view"><a href="', $f_switch_view_link, 'simple">', lang_get('simple_filters'), '</a></span>';
+			} else {
+				echo '<span class="switch-view"><a href="', $f_switch_view_link, 'advanced">', lang_get('advanced_filters'), '</a></span>';
+			}
 		}
 
-		if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) { ?>
-		<div class="save-query">
-			<form method="post" name="save_query" action="query_store_page.php">
-				<?php # CSRF protection not required here - form does not result in modifications ?>
-				<input type="submit" name="save_query_button" class="button-small" value="<?php echo lang_get( 'save_query' )?>" />
-			</form>
-		</div><?php
+		if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
+			echo '<span class="permalink"><a href="permalink_page.php?url=', urlencode( filter_get_url( $t_filter ) ), '">', lang_get( 'create_filter_link' ), '</a></span>';
 		} ?>
 	</div>
 	</div>
+	<br />
 <?php
 }
 
