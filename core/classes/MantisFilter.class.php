@@ -50,6 +50,11 @@ abstract class MantisFilter {
 	public $size = null;
 
 	/**
+	 * Number of columns to use in the bug filter.
+	 */
+	public $colspan = 1;
+
+	/**
 	 * Validate the filter input, returning true if input is
 	 * valid, or returning false if invalid.  Invalid inputs will
 	 * be replaced with the filter's default value.

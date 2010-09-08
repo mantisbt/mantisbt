@@ -2990,16 +2990,53 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 		# get plugin filters
 		$t_plugin_filters = filter_get_plugin_filters();
-		$t_column = 0;
-		$t_fields = '';
-		$t_values = '';
+		$t_plugin_filter_links = array();
+		$t_plugin_filter_fields = array();
+		$t_column_count_by_row = array();
+		$t_row = 0;
+		foreach( $t_plugin_filters AS $t_field_name=>$t_filter_object ) {
+			# be sure the colspan is an integer
+			$t_colspan = (int) $t_filter_object->colspan;
 
-		# output a filter form element for each plugin filter
-		foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
-			$t_fields .= '<td class="small-caption" valign="top"> <a href="' . $t_filters_url . $t_field_name .
+			# prevent silliness.
+			if( $t_colspan < 0 ) {
+				$t_colspan = abs( $t_colspan );
+			} else if( $t_colspan > $t_filter_cols ) {
+				$t_colspan = $t_filter_cols;
+			} else if( $t_colspan == 0 ) {
+				$t_colspan = 1;
+			}
+			# the row may already have elements in it. find out.
+			$t_columns_available = $t_filter_cols - $t_column_count_by_row[$t_row];
+			if( $t_columns_available == 0 ) {
+				$t_row++;
+			}
+
+			# see if there is room in the current row
+			if( $t_columns_available >= $t_colspan ) {
+				$t_assigned_row = $t_row;
+				$t_column_count_by_row[$t_row] += $t_colspan;
+			} else {
+				$t_is_assigned = false;
+				# find a row with space
+				foreach( $t_column_count_by_row AS $t_row_num=>$t_col_count ) {
+					if( $t_colspan <= ( $t_filter_cols - $t_col_count ) ) {
+						$t_assigned_row = $t_row_num;
+						$t_column_count_by_row[$t_row_num] += $t_colspan;
+						$t_is_assigned = true;
+						break;
+					}
+				}
+				if( !$t_is_assigned ) {
+					# no space was found in existing rows. Add a new row for it.
+					$t_assigned_row = count( $t_plugin_filter_links );
+					$t_column_count_by_row[$t_assigned_row] = $t_colspan;
+				}
+			}
+			$t_colspan_attr = ( $t_colspan > 1 ? 'colspan="' . $t_colspan . '" ' : '' );
+			$t_plugin_filter_links[$t_assigned_row][] = '<td ' . $t_colspan_attr . 'class="small-caption" valign="top"> <a href="' . $t_filters_url . $t_field_name .
 				'" id="' . $t_field_name . '_filter">' . string_display_line( $t_filter_object->title ) . '</a> </td>';
-
-			$t_values .= '<td class="small-caption" valign="top" id="' . $t_field_name . '_filter_target"> ';
+			$t_values = '<td ' . $t_colspan_attr . 'class="small-caption" valign="top" id="' . $t_field_name . '_filter_target"> ';
 
 			if ( !isset( $t_filter[ $t_field_name ] ) ) {
 				$t_values .= lang_get( 'any' );
@@ -3046,28 +3083,19 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 			$t_values .= '</td>';
 
-			$t_column++;
-
-			# wrap at the appropriate column
-			if ( $t_column >= $t_filter_cols ) {
-				echo '<tr class="', $t_trclass, '">', $t_fields, '</tr>';
-				echo '<tr class="row-1">', $t_values, '</tr>';
-
-				$t_fields = '';
-				$t_values = '';
-				$t_column = 0;
-			}
+			$t_plugin_filter_fields[$t_assigned_row][] = $t_values;
 		}
 
-		# output any remaining plugin filters
-		if ( $t_column > 0 ) {
-			if ( $t_column < $t_filter_cols ) {
-				$t_fields .= '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) . '">&nbsp;</td>';
-				$t_values .= '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) . '">&nbsp;</td>';
+		$t_row_count = count( $t_plugin_filter_links );
+		for( $i=0; $i<$t_row_count; $i++ ) {
+			if( $t_column_count_by_row[$i] < $t_filter_cols ) {
+				$t_plugin_filter_links[$i][] = '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column_count_by_row[$i] ) . '">&nbsp;</td>';
+				$t_plugin_filter_fields[$i][] = '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column_count_by_row[$i] ) . '">&nbsp;</td>';
 			}
-
-			echo '<tr class="', $t_trclass, '">', $t_fields, '</tr>';
-			echo '<tr class="row-1">', $t_values, '</tr>';
+			$t_links_row = "\n\t\t" . join( "\n\t\t", $t_plugin_filter_links[$i] );
+			$t_values_row = "\n\t\t" . join( "\n\t\t", $t_plugin_filter_fields[$i] );
+			echo "\n\t" . '<tr class="', $t_trclass, '">', $t_links_row, "\n\t</tr>";
+			echo "\n\t" . '<tr class="row-1">', $t_values_row, "\n\t</tr>\n\t";
 		}
 
 		if( ON == config_get( 'filter_by_custom_fields' ) ) {
