@@ -10,6 +10,7 @@ mantis_offline.php
 docbook/*/*/builddate
 docbook/*/*/build
 docbook/*/*/install
+docbook/*/tmp
 
 # Build output
 build/
