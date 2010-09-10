@@ -338,33 +338,32 @@ class Graph {
 			2 => array( 'file', 'php://stderr', 'w', ),
 			);
 
-			$t_pipes = array();
-			$t_proccess = proc_open( $t_command, $t_descriptors, $t_pipes );
+		$t_pipes = array();
+		$t_proccess = proc_open( $t_command, $t_descriptors, $t_pipes );
 
-			if( is_resource( $t_proccess ) ) {
-				# Filter generated output through dot
-				fwrite( $t_pipes[0], $t_dot_source );
-				fclose( $t_pipes[0] );
+		if( is_resource( $t_proccess ) ) {
+			# Filter generated output through dot
+			fwrite( $t_pipes[0], $t_dot_source );
+			fclose( $t_pipes[0] );
 
-				if( $p_headers ) {
-					# Headers were requested, use another output buffer to
-					# retrieve the size for Content-Length.
-					ob_start();
-					while( !feof( $t_pipes[1] ) ) {
-						echo fgets( $t_pipes[1], 1024 );
-					}
-					header( 'Content-Length: ' . ob_get_length() );
-					ob_end_flush();
-				} else {
-					# No need for headers, send output directly.
-					while( !feof( $t_pipes[1] ) ) {
-						print( fgets( $t_pipes[1], 1024 ) );
-					}
+			if( $p_headers ) {
+				# Headers were requested, use another output buffer to
+				# retrieve the size for Content-Length.
+				ob_start();
+				while( !feof( $t_pipes[1] ) ) {
+					echo fgets( $t_pipes[1], 1024 );
 				}
-
-				fclose( $t_pipes[1] );
-				proc_close( $t_proccess );
+				header( 'Content-Length: ' . ob_get_length() );
+				ob_end_flush();
+			} else {
+				# No need for headers, send output directly.
+				while( !feof( $t_pipes[1] ) ) {
+					print( fgets( $t_pipes[1], 1024 ) );
+				}
 			}
+
+			fclose( $t_pipes[1] );
+			proc_close( $t_proccess );
 		}
 	}
 
