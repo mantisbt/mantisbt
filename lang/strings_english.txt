@@ -606,7 +606,7 @@ If you requested this verification, visit the following URL to change your passw
 	# login_page.php
 	'login_page_info' => 'Welcome to the Issue Tracker.',
 	'login_title' => 'Login',
-	'save_login' => 'Remember my login on this computer',
+	'save_login' => 'Remember my login in this browser',
 	'secure_session' => 'Secure Session',
 	'secure_session_long' => 'Only allow your session to be used from this IP address.',
 	'choose_project' => 'Choose Project',
