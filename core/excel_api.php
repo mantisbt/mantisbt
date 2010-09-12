@@ -118,13 +118,8 @@ function excel_get_default_filename() {
 function excel_prepare_string( $p_value ) {
 	$t_type = is_numeric( $p_value ) ? 'Number' : 'String';
 
-	$t_ret = "<Cell><Data ss:Type=\"$t_type\">";
-	$t_value = $p_value;
-	$t_value = str_replace( "\n", '&#10;', $t_value );
-	$t_value = str_replace( '<', '&lt;', $t_value );
-	$t_value = str_replace( '>', '&gt;', $t_value );
-	$t_ret .= $t_value;
-	$t_ret .= "</Data></Cell>\n";
+	$t_value = str_replace( array ( '&', "\n", '<', '>'), array ( '&amp;', '&#10;', '&lt;', '&gt;' ),  $p_value );
+	$t_ret = "<Cell><Data ss:Type=\"$t_type\">" . $t_value . "</Data></Cell>\n";
 
 	return $t_ret;
 }
