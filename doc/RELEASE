@@ -1,5 +1,24 @@
 MantisBT Release Notes
 
+1.2.3 Security Release
+-------------------------------------------------
+
+MantisBT 1.2.3 is a security update for the stable 1.2.x branch. All
+installations that are currently running any 1.2.x version are advised to
+upgrade to this release.
+
+Issue #12312 covers an XSS vulnerability in the upstream NuSOAP library.
+The fix has been applied to the library included in MantisBT releases, and a
+patch has been submitted upstream for future releases of NuSOAP. See
+http://www.mantisbt.org/bugs/view.php?id=12312 for further details.
+
+Also included with 1.2.3 are another round of XSS fixes to MantisBT, improved
+excel export, translation updates, and bug fixes to the SOAP API, installation,
+plugin system, and email notifications.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
 1.2.2 Security Release
 -------------------------------------------------
 
