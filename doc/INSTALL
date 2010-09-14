@@ -38,12 +38,12 @@ UPGRADING
  * Extract the tarball into a clean directory; do not extract into an existing
    installation, as some files have been moved or deleted between releases
 
- * Point your browser to http://path/to/mantisbt/admin/check.php to ensure that
-   your webserver is compatible with MantisBT and configured correctly
-
  * Copy your configuration from the old installation to the new directory,
    including config_inc.php, custom_strings_inc.php, and
-   custom_constants_inc.php if they exist.
+   custom_constants_inc.php if they exist
+
+ * Point your browser to http://path/to/mantisbt/admin/check.php to ensure that
+   your webserver is compatible with MantisBT and configured correctly
 
  * Point your browser to http://path/to/mantisbt/admin/install.php to upgrade
    the database schema
