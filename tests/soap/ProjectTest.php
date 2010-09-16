@@ -34,15 +34,12 @@ class ProjectTest extends SoapBase {
         * A test case that tests the following:
         * 1. Create a project.
         * 2. Rename the project.
-        */
+        */        
        public function testAddRenameDeleteProject() {
                $projectName = $this->getOriginalNameProject();
                $projectNewName = $this->getNewNameProject();
 
-               $projectDataStructure = array();
-               $projectDataStructure['name'] = $projectName;
-               $projectDataStructure['status'] = "development";
-               $projectDataStructure['view_state'] = 10;
+               $projectDataStructure = $this->newProjectAsArray($projectName);
 
                $projectId = $this->client->mc_project_add(
                        $this->userName,
@@ -78,6 +75,44 @@ class ProjectTest extends SoapBase {
                                $this->assertEquals($projectNewName, $project->name);
                        }
                }
+       }
+       
+       /**
+        * A test case which does the following
+        * 
+        * 1. Create a project
+        * 2. Retrieve the project id by name
+        * 
+        */
+       public function testGetIdFromName() {
+
+       		   $projectName = 'TestProjectForIdFromName';
+       	
+               $projectDataStructure = $this->newProjectAsArray($projectName);
+
+               $projectId = $this->client->mc_project_add(
+                       $this->userName,
+                       $this->password,
+                       $projectDataStructure);
+
+               $this->projectIdToDelete[] = $projectId;
+               
+               $projectIdFromName = $this->client->mc_project_get_id_from_name(
+                       $this->userName,
+                       $this->password,
+                       $projectName);
+                       
+                $this->assertEquals($projectIdFromName, $projectId);
+       }
+       
+       private function newProjectAsArray($projectName) {
+       	
+       	       $projectDataStructure = array();
+               $projectDataStructure['name'] = $projectName;
+               $projectDataStructure['status'] = "development";
+               $projectDataStructure['view_state'] = 10;
+               
+               return $projectDataStructure;
        }
 
        protected function tearDown() {
