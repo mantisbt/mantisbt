@@ -27,6 +27,7 @@
  *
  * @author Bernat
  * @author Bernat Pegueroles - bpf@pegueroles.com
+ * @author Martorell
  * @author Paucabot
  * @author Solde
  * @author Ssola
@@ -522,6 +523,8 @@ $s_view_revisions = 'Veure revisions';
 $s_revision = 'Revisió';
 $s_revision_by = '%1$s pel %2$s';
 $s_revision_drop = 'Perdre';
+$s_bug_revision_dropped_history = 'S\'ha descartat la revisió de l\'error';
+$s_bugnote_revision_dropped_history = 'S\'ha descartat la revisió de la nota';
 $s_all_revisions = 'Totes les revisions';
 $s_back_to_issue = 'Retorna a l\'incidència';
 $s_confirm_revision_drop = 'Està segur que vol eliminar aquesta revisió de l\'error?';
@@ -554,7 +557,7 @@ $s_error_database_version_out_of_date_2 = '<strong>ATENCIÓ:</strong> L\'estruct
 $s_error_code_version_out_of_date = '<strong>ATENCIÓ:</strong> L\'estructura de la base de dades és més actual que el codi instal·lat. Si us plau actualitzi el codi.';
 $s_login_page_info = 'Benvingut al Gestor d\'Incidències.';
 $s_login_title = 'Inici de sessió';
-$s_save_login = 'Recorda la sessió en aquesta màquina';
+$s_save_login = 'Recorda la contrasenya entre sessions';
 $s_secure_session = 'Sessió Segura';
 $s_secure_session_long = 'Només permet usar la vostra sessió des d\'aquesta adreça IP.';
 $s_choose_project = 'Esculli un Projecte';
@@ -1018,6 +1021,9 @@ $s_simple_filters = 'Filtres simples';
 $s_monitored_by = 'Monitoritzat per';
 $s_attachments = 'adjunt(s)';
 $s_bytes = 'bytes';
+$s_attachment_missing = 'Manca l\'adjunt';
+$s_attachment_count = 'Nombre d\'adjunts';
+$s_view_attachments_for_issue = 'Veure %1$d fitxer adjunt(s) per a l\'edició #%2$d';
 $s_phpmailer_language = 'ca';
 $s_sponsors = '%1$d patrocinador(s)';
 $s_sponsorship_added = 'Patrocinador Afegit';
@@ -1168,6 +1174,9 @@ $s_time_tracking_get_info_button = 'Mostra Informació del Seguiment de Temps';
 $s_time_tracking_cost_per_hour = 'Cost / Hora';
 $s_time_tracking_cost = 'Cost';
 $s_total_time_for_issue = 'Temps total per incidència = %1$s';
+$s_time_tracking_stopwatch_start = 'Inicia';
+$s_time_tracking_stopwatch_stop = 'Atura';
+$s_time_tracking_stopwatch_reset = 'Reinicia';
 $s_access_denied = 'Accés Denegat.';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (resolt per %4$s a %5$s)';
 $s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (resolt per %4$s)';

@@ -44,6 +44,7 @@
  * @author Roland Meyer, Daniel Coquette
  * @author Réda Bourebaba, bzctoons@free.fr
  * @author Samuel Tardieu, sam@rfc1149.net
+ * @author Sherbrooke
  */
 
 $s_actiongroup_menu_move = 'Déplacer';

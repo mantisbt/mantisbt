@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author McDutchie
  * @author Najami
  * @author Nghtwlkr
  * @author Sannab

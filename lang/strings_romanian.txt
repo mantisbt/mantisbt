@@ -27,6 +27,7 @@
  *
  * @author Claudiu Cristea <claudiu@cristea.info>
  * @author KlaudiuMihaila
+ * @author McDutchie
  * @author Stelistcristi
  */
 

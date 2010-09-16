@@ -26,6 +26,7 @@
  * @file
  *
  * @author Cedric31
+ * @author McDutchie
  */
 
 $s_actiongroup_menu_move = 'Desplaçar';
@@ -473,7 +474,7 @@ $s_from = 'De';
 $s_to = 'A';
 $s_sent_you_this_reminder_about = 'vos a mandat un rampèl a prepaus de';
 $s_bug_reminder = 'Mandar un rampèl';
-$s_reminder_sent_to = 'Rampèl mandat a:';
+$s_reminder_sent_to = 'Rampèl mandat a :';
 $s_bug_send_button = 'Mandar';
 $s_reminder = 'Rampèl';
 $s_reminder_explain = 'Aquesta nòta serà mandada als destinataris que susvelhan aqueste bòg.';

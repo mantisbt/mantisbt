@@ -27,6 +27,7 @@
  *
  * @author Prima klasy4na
  * @author Yuri Kirghisov, yuri@apple.com.ua
+ * @author Тест
  */
 
 $s_actiongroup_menu_move = 'Перенести';
@@ -426,7 +427,7 @@ $s_edited_on = 'змінений:';
 $s_click_to_login = 'Вхід';
 $s_login_page_info = 'Ласкаво просимо до Системи Обліку Проблем.';
 $s_login_title = 'Вхід';
-$s_save_login = 'Запам\'ятати мій обліковий запис на цьому комп\'ютері';
+$s_save_login = 'Запам\'ятати мій обліковий запис для цього браузера';
 $s_choose_project = 'Оберіть проект';
 $s_login_button = 'Увійти';
 $s_signup_link = 'Новий обліковий запис';

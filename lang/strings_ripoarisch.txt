@@ -350,6 +350,7 @@ $s_email_updated = 'De Addräß för de <i lang="en">e-mail</i> es jeändert';
 $s_realname_duplicated = 'Dä reschtejje Name hät ald ene andere Metmaacher';
 $s_realname_updated = 'Dä reschtejje Name es jeändert';
 $s_password_updated = 'Paßwoot jeändert';
+$s_warning_plain_password_authentication = '<strong>Opjepaß:</strong> Do bruchs e Paßwoot em Klohtäx, doh künne ävver de verantwootlesche Administratoore Ding Passwoot lässe.';
 $s_login_button = 'Enlogge';
 $s_signup_link = 'För ene neuje Zohjang aanmälde';
 $s_lost_password_link = 'Häß De Ding Paßwoot verjäße?';
