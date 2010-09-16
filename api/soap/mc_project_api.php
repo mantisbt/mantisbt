@@ -652,6 +652,24 @@ function mci_project_as_array_by_id( $p_project_id ) {
 	return $t_result;
 }
 
+/**
+ * Get the id of a project via the project's name.
+ *
+ * @param string $p_username  The name of the user trying to access the versions.
+ * @param string $p_password  The password of the user.
+ * @param string $p_project_name  The name of the project to retrieve.
+ * @return integer  The id of the project with the given name, -1 if there is no such project.
+ */
+function mc_project_get_id_from_name( $p_username, $p_password, $p_project_name ) {
+        $t_user_id = mci_check_login( $p_username, $p_password );
+        if( $t_user_id === false ) {
+                return mci_soap_fault_login_failed();
+        }
+        
+        return project_get_id_by_name ( $p_project_name );
+}
+
+
 ### MantisConnect Administrative Webservices ###
 
 /**

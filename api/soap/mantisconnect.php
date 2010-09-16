@@ -1017,6 +1017,21 @@ $l_oServer->register( 'mc_project_update',
         'Update a specific project to the tracker (must have admin privileges)'
 );
 
+### mc_project_get_id_from_name
+$l_oServer->register( 'mc_project_get_id_from_name',
+	array(
+		'username' => 'xsd:string',
+		'password' => 'xsd:string',	
+		'project_name' => 'xsd:string'		
+	),
+	array(
+		'return' => 'xsd:integer'
+	),
+	$t_namespace,
+	false, false, false,
+	'Get the id of the project with the specified name.'
+);
+
 ### mc_project_get_issues
 $l_oServer->register( 'mc_project_get_issues',
 	array(
