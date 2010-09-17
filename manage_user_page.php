@@ -336,7 +336,7 @@
 			<span class="small">
 				<?php
 					/* @todo hack - pass in the hide inactive filter via cheating the actual filter value */
-					print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number, $c_filter . $t_hide_filter);
+					print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number, $c_filter . $t_hide_filter . "&sort=$c_sort&dir=$c_dir");
 				?>
 			</span>
 		</td>
