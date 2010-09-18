@@ -51,12 +51,9 @@ if( OFF == plugin_config_get( 'eczlibrary' ) ) {
 }
 
 function graph_get_font() {
-	$t_font = plugin_config_get( 'font', '' );
+	$t_font = plugin_config_get( 'font', 'arial' );
 
 	if ( plugin_config_get( 'eczlibrary' ) == ON ) {
-		$ttf_dir = '';
-		$t_font = '';
-		
 		$t_font_map = array(
 			'arial' => 'arial.ttf',
 			'verdana' => 'verdana.ttf',
@@ -70,21 +67,10 @@ function graph_get_font() {
 		);
 
 		if( isset( $t_font_map[$t_font] ) ) {
-			$t_font = $t_font_map[$t_font];
+			return $t_font_map[$t_font];
 		} else {
-			$t_font = 'arial.ttf';
+			return 'arial.ttf';
 		}
-
-		
-		$t_font_path = get_font_path();
-		if( empty($t_font_path) ) {
-			error_text('unable to load font(s)', 'unable to load font(s)');
-		}
-		$f = $t_font_path . $t_font;
-		if( file_exists($f) === false || is_readable($f) === false ) {
-			error_text('unable to read/find font', 'unable to read/find font');
-		}
-		return $f;
 	} else {
 		$t_font_map = array(
 			'arial' => FF_ARIAL,
