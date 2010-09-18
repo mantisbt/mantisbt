@@ -1218,9 +1218,9 @@
 			$t_selected_values = explode( '|', $t_custom_field_value );
  			foreach( $t_values as $t_option ) {
 				if( in_array( $t_option, $t_selected_values, true ) ) {
- 					echo '<option value="' . $t_option . '" selected="selected"> ' . $t_option . '</option>';
+ 					echo '<option value="' . string_attribute( $t_option ) . '" selected="selected"> ' . string_display_line( $t_option ) . '</option>';
  				} else {
- 					echo '<option value="' . $t_option . '">' . $t_option . '</option>';
+ 					echo '<option value="' . string_attribute( $t_option ) . '">' . string_display_line( $t_option ) . '</option>';
  				}
  			}
  			echo '</select>';
@@ -1231,9 +1231,9 @@
 			foreach( $t_values as $t_option ) {
 				echo '<input ', helper_get_tab_index(), ' type="checkbox" name="custom_field_' . $t_id . '[]"';
 				if( in_array( $t_option, $t_checked_values, true ) ) {
-					echo ' value="' . $t_option . '" checked="checked">&nbsp;' . $t_option . '&nbsp;&nbsp;';
+					echo ' value="' . string_attribute( $t_option ) . '" checked="checked">&nbsp;' . string_display_line( $t_option ) . '&nbsp;&nbsp;';
 				} else {
-					echo ' value="' . $t_option . '">&nbsp;' . $t_option . '&nbsp;&nbsp;';
+					echo ' value="' . string_attribute( $t_option ) . '">&nbsp;' . string_display_line( $t_option ) . '&nbsp;&nbsp;';
 				}
 			}
  			break;
@@ -1266,14 +1266,14 @@
 		$t_custom_field_value = custom_field_get_value( $p_field_id, $p_bug_id );
 		switch( $p_def['type'] ) {
 			case CUSTOM_FIELD_TYPE_EMAIL:
-				return "<a href=\"mailto:$t_custom_field_value\">$t_custom_field_value</a>";
+				return '<a href="mailto:' . string_attribute( $t_custom_field_value ) . '">' . string_display_line( $t_custom_field_value ) . '</a>';
 				break;
 			case CUSTOM_FIELD_TYPE_ENUM:
 			case CUSTOM_FIELD_TYPE_LIST:
 			case CUSTOM_FIELD_TYPE_MULTILIST:
 			case CUSTOM_FIELD_TYPE_CHECKBOX:
 				// strip possible start and end markers before converting markers to commas
-				return str_replace( '|', ', ', substr( str_replace( "||", "|", '|' . $t_custom_field_value . '|' ), 1, -1 ) );
+				return string_display_line( str_replace( '|', ', ', substr( str_replace( "||", "|", '|' . $t_custom_field_value . '|' ), 1, -1 ) ) );
 				break;
 			case CUSTOM_FIELD_TYPE_DATE:
 				if ($t_custom_field_value != null) {
@@ -1310,7 +1310,7 @@
 			case CUSTOM_FIELD_TYPE_MULTILIST:
 			case CUSTOM_FIELD_TYPE_CHECKBOX:
 				// strip start and end markers before converting markers to commas
-				return str_replace( '|', ', ', substr( str_replace( "||", "|", '|' . $p_value . '|' ), 1, -1 ) );
+				return string_display_line( str_replace( '|', ', ', substr( str_replace( "||", "|", '|' . $p_value . '|' ), 1, -1 ) ) );
 				break;
 			case CUSTOM_FIELD_TYPE_DATE:
 				if ($p_value != null) {
