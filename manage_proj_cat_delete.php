@@ -38,7 +38,7 @@
 
 	# Confirm with the user
 	helper_ensure_confirmed( lang_get( 'category_delete_sure_msg' ) .
-		'<br/>' . lang_get( 'category' ) . ': ' . $f_category,
+		'<br/>' . lang_get( 'category' ) . ': ' . string_display_line($f_category),
 		lang_get( 'delete_category_button' ) );
 
 	category_remove( $f_project_id, $f_category );
