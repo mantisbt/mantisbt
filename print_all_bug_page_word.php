@@ -160,7 +160,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $v_id ?>
 	</td>
 	<td class="print">
-		<?php echo "[$t_project_name] $v_category" ?>
+		<?php echo '[' . string_display_line( $t_project_name ) . '] ' . string_display_line( $v_category ) ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'severity', $v_severity ) ?>
@@ -503,7 +503,11 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 							}
 							echo implode( ', ', $t_to ) . '<br />';
 						default:
+<<<<<<< HEAD
 							echo $v3_note;
+=======
+							echo string_display_links( $t_bugnote->note );
+>>>>>>> bfc9e9f... Fix #12238: XSS in print_all_bug_page_word.php project/category names
 					}
 				?>
 			</td>
