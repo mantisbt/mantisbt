@@ -722,8 +722,8 @@ function prepare_custom_menu_options( $p_config ) {
 	foreach( $t_custom_menu_options as $t_custom_option ) {
 		$t_access_level = $t_custom_option[1];
 		if( access_has_project_level( $t_access_level ) ) {
-			$t_caption = lang_get_defaulted( $t_custom_option[0] );
-			$t_link = $t_custom_option[2];
+			$t_caption = string_html_specialchars( lang_get_defaulted( $t_custom_option[0] ) );
+			$t_link = string_attribute( $t_custom_option[2] );
 			$t_options[] = "<a href=\"$t_link\">$t_caption</a>";
 		}
 	}
