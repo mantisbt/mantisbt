@@ -111,7 +111,7 @@ class ImportXML {
 			$replacement = '"\\1" . $this->getReplacementString( "\\2", "\\3" )';
 
 			$bugData->description = preg_replace( $bugLinkRegexp, $replacement, $bugData->description );
-			bug_update( $newId, $bugData, true, true );
+			$bugData->update( true, true );
 		}
 		echo " Done\n";
 	}
