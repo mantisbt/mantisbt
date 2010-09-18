@@ -108,7 +108,6 @@ if ( 0 != strcasecmp( $t_old_username, $f_username )
 $t_realname = string_normalize( $f_realname );
 
 user_ensure_name_valid( $f_username );
-user_ensure_realname_valid( $f_realname );
 user_ensure_realname_unique( $f_username, $f_realname );
 
 $f_email = email_append_domain( $f_email );

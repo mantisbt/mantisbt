@@ -881,16 +881,3 @@ function string_prepare_header( $p_string ) {
 	$t_string= explode( "\r", $t_string[0], 2 );
 	return $t_string[0];
 }
-
-/**
- * Checks the supplied string for scripting characters, if it contains any, then return true, otherwise return false.
- * @param string $p_string
- * @return bool
- */
-function string_contains_scripting_chars( $p_string ) {
-	if(( strstr( $p_string, '<' ) !== false ) || ( strstr( $p_string, '>' ) !== false ) ) {
-		return true;
-	}
-
-	return false;
-}

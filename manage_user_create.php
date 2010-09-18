@@ -82,7 +82,6 @@ if ( is_blank( $f_username ) ) {
 # strip extra space from real name
 $t_realname = string_normalize( $f_realname );
 user_ensure_name_valid( $f_username );
-user_ensure_realname_valid( $t_realname );
 user_ensure_realname_unique( $f_username, $f_realname );
 
 if ( $f_password != $f_password_verify ) {

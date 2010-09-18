@@ -291,21 +291,6 @@ function user_ensure_realname_unique( $p_username, $p_realname ) {
 }
 
 # --------------------
-# Check if the realname is a valid (does not account for uniqueness)
-# true: valid, false: not valid
-function user_is_realname_valid( $p_realname ) {
-	return( !string_contains_scripting_chars( $p_realname ) );
-}
-
-# --------------------
-# Check if the realname is a valid (does not account for uniqueness), if not, trigger an error
-function user_ensure_realname_valid( $p_realname ) {
-	if( !user_is_realname_valid( $p_realname ) ) {
-		trigger_error( ERROR_USER_REAL_NAME_INVALID, ERROR );
-	}
-}
-
-# --------------------
 # Check if the username is a valid username (does not account for uniqueness)
 #  realname can match
 # Return true if it is, false otherwise
@@ -489,7 +474,6 @@ function user_create( $p_username, $p_password, $p_email = '',
 
 	user_ensure_name_valid( $p_username );
 	user_ensure_name_unique( $p_username );
-	user_ensure_realname_valid( $p_realname );
 	user_ensure_realname_unique( $p_username, $p_realname );
 	email_ensure_valid( $p_email );
 
@@ -1328,8 +1312,6 @@ function user_set_email( $p_user_id, $p_email ) {
 # --------------------
 # Set the user's realname to the given string after checking validity
 function user_set_realname( $p_user_id, $p_realname ) {
-	/** @todo ensure_realname_valid( $p_realname ); */
-
 	return user_set_field( $p_user_id, 'realname', $p_realname );
 }
 

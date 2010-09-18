@@ -406,9 +406,6 @@ function custom_field_has_write_access( $p_field_id, $p_bug_id, $p_user_id = nul
  * @access public
  */
 function custom_field_create( $p_name ) {
-	if( string_contains_scripting_chars( $p_name ) ) {
-		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
-	}
 
 	$c_name = trim( $p_name );
 
