@@ -397,7 +397,7 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 function html_head_javascript() {
 	if( ON == config_get( 'use_javascript' ) ) {
 		html_javascript_link( 'common.js' );
-		echo '<script language="javascript">var loading_lang = "' . lang_get( 'loading' ) . '";</script>';
+		echo '<script language="text/javascript">var loading_lang = "' . lang_get( 'loading' ) . '";</script>';
 		html_javascript_link( 'ajax.js' );
 
 		global $g_enable_projax;
