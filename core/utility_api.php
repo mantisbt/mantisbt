@@ -113,20 +113,34 @@ function ini_get_bool( $p_name ) {
 }
 
 /**
- * Get the named php ini variable but return it as a number after converting "K" and "M"
- * @param string $p_name
- * @return int
+ * Get the named php.ini variable but return it as a number after converting
+ * the giga (g/G), mega (m/M) and kilo (k/K) postfixes. These postfixes do not
+ * adhere to IEEE 1541 in that k=1024, not k=1000. For more information see
+ * http://www.php.net/manual/en/faq.using.php#faq.using.shorthandbytes
+ * @param string $p_name Name of the configuration option to read.
+ * @return int Integer value of the configuration option.
  * @access public
  */
 function ini_get_number( $p_name ) {
-	$t_result = ini_get( $p_name );
-	$t_val = explode( 'm', strtolower( $t_result ) );
-	if( $t_val[0] != $t_result ) {
-		return $t_val[0] * 1000000;
-	}
-	$t_val = explode( 'k', strtolower( $t_result ) );
-	if( $t_val[0] != $t_result ) {
-		return $t_val[0] * 1000;
+	$t_value = ini_get( $p_name );
+
+	$t_result = 0;
+	switch( substr( $t_value, -1 ) ) {
+		case 'G':
+		case 'g':
+			$t_result = (int)$t_value * 1073741824;
+			break;
+		case 'M':
+		case 'm':
+			$t_result = (int)$t_value * 1048576;
+			break;
+		case 'K':
+		case 'k':
+			$t_result = (int)$t_value * 1024;
+			break;
+		default:
+			$t_result = (int)$t_value;
+			break;
 	}
 	return $t_result;
 }
