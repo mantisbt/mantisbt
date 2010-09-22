@@ -67,6 +67,7 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 		$s_msg = var_export( $p_msg, true );
 	} else {
 		$t_event = array( $p_msg, 0 );
+		$s_msg = $p_msg;
 	}
 
 	if( $p_backtrace === null ) {
