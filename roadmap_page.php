@@ -34,7 +34,6 @@
 		$t_version_name = $p_version_row['version'];
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 
-		$t_release_title_without_hyperlinks = string_display_line( $t_project_name ) . ' - ' . string_display_line( $t_version_name );
 		$t_release_title = '<a href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a> - <a href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
 
 		if ( config_get( 'show_roadmap_dates' ) ) {
@@ -48,7 +47,7 @@
 		echo '<tt>';
 		echo '<br />', $t_release_title, $t_scheduled_release_date, lang_get( 'word_separator' ), print_bracket_link( 'view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ), lang_get( 'view_bugs_link' ) ), '<br />';
 
-		$t_release_title_without_hyperlinks .= $t_scheduled_release_date;
+		$t_release_title_without_hyperlinks = $t_project_name . ' - ' . $t_version_name . $t_scheduled_release_date;
 		echo utf8_str_pad( '', utf8_strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';
 	}
 
