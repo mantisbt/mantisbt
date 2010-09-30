@@ -280,14 +280,8 @@ function plugin_error( $p_error_name, $p_error_type = ERROR, $p_basename = null 
 	}
 
 	$t_error_code = "plugin_${t_basename}_${p_error_name}";
-	$MANTIS_ERROR = lang_get( 'MANTIS_ERROR' );
 
-	if( isset( $MANTIS_ERROR[$t_error_code] ) ) {
-		trigger_error( $t_error_code, $p_error_type );
-	} else {
-		error_parameters( $p_error_name, $t_basename );
-		trigger_error( ERROR_PLUGIN_GENERIC, ERROR );
-	}
+	trigger_error( $t_error_code, $p_error_type );
 
 	return null;
 }

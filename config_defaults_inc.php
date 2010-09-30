@@ -191,6 +191,18 @@ $g_library_path = $g_absolute_path . 'library' . DIRECTORY_SEPARATOR;
 $g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
 
 /**
+ * absolute path to custom strings file.
+ * This file allows overriding of strings declared in the language file, or in plugin language files
+ * Two formats are supported:
+ * Legacy format: $s_*
+ * New format: define a $s_custom_messages array as follows:
+ * $s_custom_messages = array( 'en' => array( string => string ) ) ;
+ * NOTE: you can not mix/merge old/new formats within this file.
+ * @global string $g_custom_strings_file
+ */
+$g_custom_strings_file = $g_absolute_path . 'custom_strings_inc.php';
+
+/**
  * Used to link to manual for User Documentation.
  * @global string $g_manual_url
  */
