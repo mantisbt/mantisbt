@@ -98,7 +98,7 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 	if ( is_blank( $t_log_destination ) ) {
 		$t_destination = '';
 	} else {
-		list( $t_destination, $t_modifiers ) = explode( ':', $t_log_destination, 2 );
+		@list( $t_destination, $t_modifiers ) = explode( ':', $t_log_destination, 2 );
 	}
 
 	switch( $t_destination ) {
@@ -124,7 +124,7 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 					$firephp = FirePHP::getInstance(true);
 				}
 				$t_php_event = $t_now . ' ' . $t_level . ' ' . $s_msg;
-				$firephp->log( $t_php_event );
+				$firephp->log( $p_msg, $t_php_event );
 				return;
 			}
 			// if firebug is not available, fall through
