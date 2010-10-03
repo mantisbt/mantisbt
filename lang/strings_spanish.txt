@@ -34,6 +34,7 @@
  * @author Jorge Andrés Brugger - jbrugger@gmx.net
  * @author Locos epraix
  * @author Luis Miguel Cruz Miranda - luismi@b2bi.es
+ * @author McDutchie
  * @author Pablo Corral - PabloCorral@ciudad.com.ar
  * @author Pertile
  * @author Peter17
@@ -200,7 +201,7 @@ $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Usuario con nombre "%1$s" no enco
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Usuario con id "%1$d" no encontrado.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'La información de ingreso almacenada por su navegador es incorrecta. Quizá su cuenta ha sido borrada.';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'No se encontraron preferencias para este usuario.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Nnoticia no encontrada.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Noticia no encontrada.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'La contraseña no pasó la verificación.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Se esperaba una matriz, pero se ha recibido una cadena de caracteres para %1$s.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Se esperaba una cadena de caracteres pero se ha recibido una matriz para %1$s.';

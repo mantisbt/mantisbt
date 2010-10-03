@@ -29,6 +29,7 @@
  * @author Jan-Bart de Vreede, jvreede@outdare.nl
  * @author Jeroen Latour, jlatour@calaquendi.net
  * @author Klaasjan Brand, kjb@dds.nl
+ * @author McDutchie
  * @author Siebrand
  * @author Siebrand Mazeland, s.mazeland@xs4all.nl
  * @author Tvdm
@@ -203,7 +204,7 @@ $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Melding %1$d niet gevonden.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s niet gevonden.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'De filter die u probeert te gebruiken is te oud om bijgewerkt te worden. Maak hem alstublieft opnieuw aan.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ongeldig e-mailadres.';
-$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Het is niet toegestaan om wegwerpe-mailadressen te te gebruiken.';
+$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Het is niet toegestaan om wegwerp-e-mailadressen te gebruiken.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiel niet gevonden.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Dat bestandstype mag niet toegevoegd worden.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Dit bestand bestaat al. Verwijder het bestaande bestand eerst.';
@@ -368,7 +369,7 @@ $s_account_removed_msg = 'Uw gebruiker is verwijderd...';
 $s_confirm_delete_msg = 'Weet u zeker dat u uw gebruiker wilt verwijderen?';
 $s_delete_account_button = 'Gebruiker verwijderen';
 $s_manage_profiles_link = 'Profielen';
-$s_change_preferences_link = 'Instellingen';
+$s_change_preferences_link = 'Voorkeuren';
 $s_edit_account_title = 'Instellingen aanpassen';
 $s_username = 'Gebruikersnaam';
 $s_realname = 'Volledige naam';

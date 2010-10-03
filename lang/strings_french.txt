@@ -39,12 +39,14 @@
  * @author Langis Gagnon, gagnon.langis@ic.gc.ca
  * @author Laurent LABAT, wizzz@apinc.org
  * @author Maurice A. LeBlanc, leblancma@cooptel.qc.ca
+ * @author McDutchie
  * @author Peter17
  * @author Quentin Delance, quentin.delance@insalien.org
  * @author Roland Meyer, Daniel Coquette
  * @author Réda Bourebaba, bzctoons@free.fr
  * @author Samuel Tardieu, sam@rfc1149.net
  * @author Sherbrooke
+ * @author Verdy p
  */
 
 $s_actiongroup_menu_move = 'Déplacer';
@@ -120,7 +122,7 @@ $s_inherit_parent = 'Hériter les catégories parents';
 $s_update_subproject_inheritance = 'Mettre à jour l\'héritage du sous-projet';
 $s_duplicate_of = 'doublon de';
 $s_has_duplicate = 'a pour doublon';
-$s_related_to = 'lié à';
+$s_related_to = 'relatif à';
 $s_dependant_on = 'dépendant de';
 $s_blocks = 'bloque';
 $s_new_bug = 'Nouveau bogue';
@@ -138,7 +140,7 @@ $s_make_private = 'Rendre privé';
 $s_make_public = 'Rendre public';
 $s_create_new_project_link = 'Créer un nouveau projet';
 $s_login_link = 'Ouvrir la session';
-$s_select_option = 'Choisir';
+$s_select_option = '(choisir)';
 $s_bug_actiongroup_access = 'Vous n\'aviez pas les permissions appropriées pour effectuer cette action.';
 $s_bug_actiongroup_status = 'Ce bogue ne peut pas être changé pour l\'état demandé';
 $s_bug_actiongroup_category = 'Ce bogue ne peut pas être changé pour la catégorie demandée';
@@ -206,7 +208,7 @@ $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nom de projet spécifié non valide
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Utilisateur avec le nom "%1$s" non trouvé.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Aucun utilisateur avec l\'ID « %1$d » n\'a été trouvé.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Les informations de connexion enregistrées par votre navigateur ne sont pas valides.  Votre compte a peut-être été supprimé ?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Les préférences pourraient être introuvables pour cet utilisateur.';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Les préférences n\'ont pas pu être trouvées pour cet utilisateur.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Nouvelle introuvable.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Le mot de passe ne correspond pas à la vérification.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Tableau attendu mais chaîne reçue pour %1$s.';
@@ -619,7 +621,7 @@ $s_manage_threshold_config = 'Seuils du cheminement de travail';
 $s_manage_email_config = 'Notifications par courriel';
 $s_manage_workflow_config = 'Cheminement de travail';
 $s_manage_tags_link = 'Gérer les balises';
-$s_create_new_account_link = 'Créer un compte';
+$s_create_new_account_link = 'Créer un nouveau compte';
 $s_projects_link = 'Projets';
 $s_documentation_link = 'Documentation';
 $s_new_accounts_title = 'Nouveaux comptes';
