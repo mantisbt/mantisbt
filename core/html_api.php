@@ -1686,8 +1686,10 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 		echo '<td class="center">';
 		html_button_bug_assign_to( $p_bug_id );
 		echo '</td>';
+	}
 
-		# Change State button
+	# Change status button/dropdown
+	if ( !$t_readonly || config_get( 'allow_reporter_close' ) ) {
 		echo '<td class="center">';
 		html_button_bug_change_status( $p_bug_id );
 		echo '</td>';
