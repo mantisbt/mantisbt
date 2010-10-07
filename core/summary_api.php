@@ -322,7 +322,7 @@
 			if ( $t_count++ == 10 ) break;
 
 			$t_bugid = string_get_bug_view_link( $row['id'] );
-			$t_summary = string_html_specialchars( $row['summary'] );
+			$t_summary = string_display_line( $row['summary'] );
 			$t_notescount = $row['count'];
 
 			print "<tr " . helper_alternate_class() . ">\n";
@@ -362,7 +362,7 @@
 			if ( $t_count++ == 10 ) break;
 
 			$t_bugid = string_get_bug_view_link( $row['id'] );
-			$t_summary = $row['summary'];
+			$t_summary = string_display_line( $row['summary'] );
 			$t_days_open = intval ( ( time() - strtotime( $row['date_submitted'] ) ) / 86400 );
 
 			print "<tr " . helper_alternate_class() . ">\n";
