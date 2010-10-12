@@ -436,10 +436,6 @@ function custom_field_create( $p_name ) {
  * @access public
  */
 function custom_field_update( $p_field_id, $p_def_array ) {
-	if( string_contains_scripting_chars( $p_def_array['name'] ) ) {
-		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
-	}
-
 	$c_field_id = db_prepare_int( $p_field_id );
 	$c_name = db_prepare_string( trim( $p_def_array['name'] ) );
 	$c_type = db_prepare_int( $p_def_array['type'] );
