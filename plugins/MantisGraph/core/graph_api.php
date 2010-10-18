@@ -67,10 +67,19 @@ function graph_get_font() {
 		);
 
 		if( isset( $t_font_map[$t_font] ) ) {
-			return $t_font_map[$t_font];
+			$t_font = $t_font_map[$t_font];
 		} else {
-			return 'arial.ttf';
+			$t_font = 'arial.ttf';
 		}
+		$t_font_path = get_font_path();
+		if( empty($t_font_path) ) {
+			error_text('Unable to read/find font', 'Unable to read/find font');
+		}
+		$t_font_file = $t_font_path . $t_font;
+		if( file_exists($t_font_file) === false || is_readable($t_font_file) === false ) {
+			error_text('Unable to read/find font', 'Unable to read/find font');
+		}
+		return $t_font_file;
 	} else {
 		$t_font_map = array(
 			'arial' => FF_ARIAL,
