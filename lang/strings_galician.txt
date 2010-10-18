@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author McDutchie
  * @author Toliño
  */
 
@@ -854,7 +855,7 @@ $s_or_fill_in = 'OU encha';
 $s_assign_to = 'Asignar a';
 $s_additional_information = 'Información adicional';
 $s_submit_report_button = 'Enviar o informe';
-$s_check_report_more_bugs = 'verificar para informar de máis problemas';
+$s_check_report_more_bugs = 'marcar para informar de máis problemas';
 $s_report_stay = 'Continuar o informe';
 $s_selected_project = 'Proxecto seleccionado';
 $s_valid_project_msg = 'Debe seleccionar un proxecto válido.';

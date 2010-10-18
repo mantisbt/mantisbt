@@ -32,6 +32,7 @@
  * @author Marcello Scatà, marcello@marcelloscata.com
  * @author Marco Vassura, m.vassura@itools.it
  * @author Massimo itaca
+ * @author McDutchie
  * @author Stefano-c
  */
 
@@ -976,7 +977,7 @@ $s_sponsors_list = 'Lista degli sponsor';
 $s_total_sponsorship_amount = 'Totale sponsorizzazione = %1$s';
 $s_add_custom_field_button = 'Nuovo campo personalizzato';
 $s_delete_custom_field_button = 'Elimina campo personalizzato';
-$s_delete_custom_field_everywhere = 'Elimina tutti i campi personalizzati';
+$s_delete_custom_field_everywhere = 'Elimina il campo personalizzato in ogni luogo';
 $s_update_custom_field_button = 'Aggiorna campo personalizzato';
 $s_add_existing_custom_field = 'Aggiungi questo campo personalizzato esistente';
 $s_edit_custom_field_title = 'Modifica campo personalizzato';
@@ -992,7 +993,7 @@ $s_custom_field_access_level_r = 'Visibile';
 $s_custom_field_access_level_rw = 'Modificabile';
 $s_custom_field_length_min = 'Lunghezza min.';
 $s_custom_field_length_max = 'Lunghezza max.';
-$s_custom_field_filter_by = 'Aggiungi un filtro';
+$s_custom_field_filter_by = 'Aggiungi al filtro';
 $s_custom_field_display_report = 'Visualizza quando "Riporti anomalia"';
 $s_custom_field_display_update = 'Visualizza quando "Aggiorni anomalia"';
 $s_custom_field_display_resolved = 'Visualizza in "Risolvi anomalia"';

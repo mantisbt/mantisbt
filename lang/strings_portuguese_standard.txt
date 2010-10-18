@@ -31,6 +31,7 @@
  * @author Luís Martins, lmar@ualg.pt
  * @author M42
  * @author Malafaya
+ * @author McDutchie
  * @author Rui Alexandre Coelho, rac@iosoft.pt
  * @author Waldir
  */
@@ -783,7 +784,7 @@ $s_email_user_updated_msg = 'A sua conta foi actualizada por um administrador. S
 $s_main_link = 'Principal';
 $s_view_bugs_link = 'ver problemas';
 $s_report_bug_link = 'Relatar Problema';
-$s_changelog_link = 'Alterar registo (log)';
+$s_changelog_link = 'Registo de alterações';
 $s_roadmap_link = 'Roadmap';
 $s_summary_link = 'Sumário';
 $s_account_link = 'Conta Pessoal';
@@ -1019,7 +1020,7 @@ $s_and_above = 'E acima';
 $s_advanced_filters = 'Filtros avançados';
 $s_simple_filters = 'Filtros simples';
 $s_monitored_by = 'Acompanhado por';
-$s_attachments = 'anexos(s)';
+$s_attachments = 'anexo(s)';
 $s_bytes = 'bytes';
 $s_attachment_missing = 'Anexo em falta';
 $s_attachment_count = 'Contagem de anexos';
