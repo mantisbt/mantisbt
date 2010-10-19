@@ -17,6 +17,9 @@ build/
 
 # Untracked plugins
 plugins/*
+!plugins/MantisCoreFormatting
+!plugins/MantisGraph
+!plugins/XmlImportExport
 
 # IDE/Editor temporary files
 *~
