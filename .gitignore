@@ -17,6 +17,9 @@ docbook/*/*/install
 # Build output
 build/
 
+# Untracked plugins
+plugins/*
+
 # IDE/Editor temporary files
 *~
 *.swp
