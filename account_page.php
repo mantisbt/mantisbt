@@ -128,7 +128,7 @@
 		</td>
 	</tr>
 
-<!-- Without LDAP -->
+	<!-- Without LDAP -->
 <?php } else {
 	$t_show_update_button = true;
 ?>
@@ -173,10 +173,8 @@
 		</td>
 	</tr>
 
-<?php
-} // End LDAP conditional
-
-if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email-->
+<?php } ?>
+	<!-- End LDAP conditional -->
 
 	<!-- Email -->
 	<tr <?php echo helper_alternate_class() ?>>
@@ -184,26 +182,22 @@ if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email
 			<?php echo lang_get( 'email' ) ?>
 		</td>
 		<td>
-			<?php echo $u_email ?>
-		</td>
-	</tr>
-
-<?php } else { ?> <!-- Without LDAP Email -->
-
-	<!-- Email -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
-			<?php echo lang_get( 'email' ) ?>
-		</td>
-		<td>
-			<?php
+		<?php
+			// With LDAP
+			if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
+				echo string_display_line( $u_email );
+		?>
+			<input type="hidden" name="email" value="<?php echo string_attribute( $u_email ) ?>" />
+		<?php
+			}
+			// Without LDAP
+			else {
 				$t_show_update_button = true;
 				print_email_input( 'email', $u_email );
-			?>
+			}
+		?>
 		</td>
 	</tr>
-
-<?php } ?> <!-- End LDAP Email conditional -->
 
 	<!-- Realname -->
 	<tr <?php echo helper_alternate_class() ?> valign="top">
@@ -211,14 +205,22 @@ if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email
 			<?php echo lang_get( 'realname' ) ?>
 		</td>
 		<td>
-<?php
-if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
-	echo string_display( ldap_realname_from_username( $u_username ) );
-} else {
-	$t_show_update_button = true;
-?>
+		<?php
+			// With LDAP
+			if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
+				echo string_display_line( ldap_realname_from_username( $u_username ) );
+		?>
+			<input type="hidden" name="realname" value="<?php echo string_attribute( ldap_realname_from_username( $u_username ) ) ?>" />
+		<?php
+			}
+			// Without LDAP
+			else {
+				$t_show_update_button = true;
+		?>
 			<input type="text" size="32" maxlength="<?php echo REALLEN;?>" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
-<?php } ?>
+		<?php
+			}
+		?>
 		</td>
 	</tr>
 
