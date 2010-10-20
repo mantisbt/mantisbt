@@ -223,9 +223,9 @@ function print_email_input( $p_field_name, $p_email ) {
 
 		# remove the domain part
 		$p_email = preg_replace( '/@' . preg_quote( $t_limit_email_domain, '/' ) . '$/i', '', $p_email );
-		echo '<input type="text" name="' . $p_field_name . '" size="20" maxlength="64" value="' . $p_email . '" />@' . $t_limit_email_domain;
+		echo '<input type="text" name="' . string_attribute( $p_field_name ) . '" size="20" maxlength="64" value="' . string_attribute( $p_email ) . '" />@' . string_display_line( $t_limit_email_domain );
 	} else {
-		echo '<input type="text" name="' . $p_field_name . '" size="32" maxlength="64" value="' . $p_email . '" />';
+		echo '<input type="text" name="' . string_attribute( $p_field_name ) . '" size="32" maxlength="64" value="' . string_attribute( $p_email ) . '" />';
 	}
 }
 

@@ -96,7 +96,7 @@ print_manage_menu();
 <!-- Title -->
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+		<input type="hidden" name="user_id" value="<?php echo string_attribute( $t_user['id'] ) ?>" />
 		<?php echo lang_get( 'edit_user_title' ) ?>
 	</td>
 </tr>
@@ -107,7 +107,7 @@ print_manage_menu();
 		<?php echo lang_get( 'username_label' ) ?>
 	</th>
 	<td width="70%">
-		<input type="text" size="16" maxlength="<?php echo USERLEN;?>" name="username" value="<?php echo $t_user['username'] ?>" />
+		<input type="text" size="16" maxlength="<?php echo USERLEN;?>" name="username" value="<?php echo string_attribute( $t_user['username'] ) ?>" />
 	</td>
 </tr>
 
@@ -118,12 +118,18 @@ print_manage_menu();
 	</th>
 	<td width="70%">
 		<?php
-			if ( !$t_ldap || config_get( 'use_ldap_realname' ) == OFF ) {
+			// With LDAP
+			if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
+				echo string_display_line( user_get_realname( $f_user_id ) );
+		?>
+			<input type="hidden" name="realname" value="<?php echo string_attribute( user_get_realname( $f_user_id ) ) ?>" />
+		<?php
+			}
+			// Without LDAP
+			else {
 		?>
 				<input type="text" size="16" maxlength="<?php echo REALLEN;?>" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" />
 		<?php
-			} else {
-				echo string_display( user_get_realname( $f_user_id ) );
 			}
 		?>
 	</td>
@@ -136,10 +142,16 @@ print_manage_menu();
 	</th>
 	<td>
 		<?php
-			if ( !$t_ldap || config_get( 'use_ldap_email' ) == OFF ) {
+			// With LDAP
+			if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
+				echo string_display_line( user_get_email( $f_user_id ) );
+		?>
+			<input type="hidden" name="email" value="<?php echo string_attribute( user_get_email( $f_user_id ) ) ?>" />
+		<?php
+			}
+			// Without LDAP
+			else {
 				print_email_input( 'email', $t_user['email'] );
-			} else {
-				echo string_display( user_get_email( $f_user_id ) );
 			}
 		?>
 	</td>
