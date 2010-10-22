@@ -104,23 +104,33 @@ if ( 0 != strcasecmp( $t_old_username, $f_username )
 	trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
 }
 
-# strip extra space from real name
-$t_realname = string_normalize( $f_realname );
-
 user_ensure_name_valid( $f_username );
-user_ensure_realname_unique( $f_username, $f_realname );
 
-$f_email = email_append_domain( $f_email );
-email_ensure_valid( $f_email );
-email_ensure_not_disposable( $f_email );
+$t_ldap = ( LDAP == config_get( 'login_method' ) );
 
-$c_email		= $f_email;
-$c_username		= $f_username;
-$c_realname		= $t_realname;
-$c_protected	= db_prepare_bool( $f_protected );
-$c_enabled		= db_prepare_bool( $f_enabled );
-$c_user_id		= db_prepare_int( $f_user_id );
-$c_access_level	= db_prepare_int( $f_access_level );
+if ( $t_ldap && config_get( 'use_ldap_realname' ) ) {
+	$t_realname = ldap_realname_from_username( $f_username );
+} else {
+	# strip extra space from real name
+	$t_realname = string_normalize( $f_realname );
+	user_ensure_realname_unique( $f_username, $t_realname );
+}
+
+if ( $t_ldap && config_get( 'use_ldap_email' ) ) {
+	$t_email = ldap_email( $f_user_id );
+} else {
+	$t_email = email_append_domain( $f_email );
+	email_ensure_valid( $t_email );
+	email_ensure_not_disposable( $t_email );
+}
+
+$c_email = $t_email;
+$c_username = $f_username;
+$c_realname = $t_realname;
+$c_protected = db_prepare_bool( $f_protected );
+$c_enabled = db_prepare_bool( $f_enabled );
+$c_user_id = db_prepare_int( $f_user_id );
+$c_access_level = db_prepare_int( $f_access_level );
 
 $t_user_table = db_get_table( 'user' );
 
@@ -175,8 +185,8 @@ if ( $f_send_email_notification ) {
 	if ( strcmp( $t_realname, $t_old_realname ) ) {
 		$t_changes .= lang_get( 'realname_label' ) . lang_get( 'word_separator' ) . $t_old_realname . ' => ' . $t_realname . "\n";
 	}
-	if ( strcmp( $f_email, $t_old_email ) ) {
-		$t_changes .= lang_get( 'email_label' ) . lang_get( 'word_separator' ) . $t_old_email . ' => ' . $f_email . "\n";
+	if ( strcmp( $t_email, $t_old_email ) ) {
+		$t_changes .= lang_get( 'email_label' ) . lang_get( 'word_separator' ) . $t_old_email . ' => ' . $t_email . "\n";
 	}
 	if ( strcmp( $f_access_level, $t_old_access_level ) ) {
 		$t_old_access_string = get_enum_element( 'access_levels', $t_old_access_level );
@@ -188,7 +198,7 @@ if ( $f_send_email_notification ) {
 		$t_updated_msg = lang_get( 'email_user_updated_msg' );
 		$t_message = $t_updated_msg . "\n\n" . config_get( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
 		email_store( $f_email, $t_subject, $t_message );
-		log_event( LOG_EMAIL, sprintf( 'Account update notification sent to ' . $f_username . ' (' . $f_email . ')' ) );
+		log_event( LOG_EMAIL, sprintf( 'Account update notification sent to ' . $f_username . ' (' . $t_email . ')' ) );
 		if ( config_get( 'email_send_using_cronjob' ) == OFF ) {
 			email_send_all();
 		}

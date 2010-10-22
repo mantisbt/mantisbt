@@ -121,9 +121,6 @@ print_manage_menu();
 			// With LDAP
 			if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 				echo string_display_line( user_get_realname( $f_user_id ) );
-		?>
-			<input type="hidden" name="realname" value="<?php echo string_attribute( user_get_realname( $f_user_id ) ) ?>" />
-		<?php
 			}
 			// Without LDAP
 			else {
@@ -145,9 +142,6 @@ print_manage_menu();
 			// With LDAP
 			if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
 				echo string_display_line( user_get_email( $f_user_id ) );
-		?>
-			<input type="hidden" name="email" value="<?php echo string_attribute( user_get_email( $f_user_id ) ) ?>" />
-		<?php
 			}
 			// Without LDAP
 			else {
