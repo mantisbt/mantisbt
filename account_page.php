@@ -114,7 +114,7 @@
 			<?php echo lang_get( 'username' ) ?>
 		</td>
 		<td width="75%">
-			<?php echo $u_username ?>
+			<?php echo string_display_line( $u_username ) ?>
 		</td>
 	</tr>
 
@@ -139,7 +139,7 @@
 			<?php echo lang_get( 'username' ) ?>
 		</td>
 		<td width="75%">
-			<?php echo $u_username ?>
+			<?php echo string_display_line( $u_username ) ?>
 		</td>
 	</tr>
 
@@ -186,9 +186,6 @@
 			// With LDAP
 			if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
 				echo string_display_line( $u_email );
-		?>
-			<input type="hidden" name="email" value="<?php echo string_attribute( $u_email ) ?>" />
-		<?php
 			}
 			// Without LDAP
 			else {
@@ -209,9 +206,6 @@
 			// With LDAP
 			if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 				echo string_display_line( ldap_realname_from_username( $u_username ) );
-		?>
-			<input type="hidden" name="realname" value="<?php echo string_attribute( ldap_realname_from_username( $u_username ) ) ?>" />
-		<?php
 			}
 			// Without LDAP
 			else {

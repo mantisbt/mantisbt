@@ -48,13 +48,15 @@
 
 	$t_redirect = 'account_page.php';
 
+	/** @todo Listing what fields were updated is not standard behaviour of MantisBT - it also complicates the code. */
 	$t_email_updated = false;
 	$t_password_updated = false;
 	$t_realname_updated = false;
 
-	/** @todo Listing what fields were updated is not standard behaviour of MantisBT - it also complicates the code. */
+	$t_ldap = ( LDAP == config_get( 'login_method' ) );
 
-	if ( OFF == config_get( 'use_ldap_email' ) ) {
+	# Update email (but only if LDAP isn't being used)
+	if ( !( $t_ldap && config_get( 'use_ldap_email' ) ) ) {
 		$f_email = email_append_domain( $f_email );
 		email_ensure_valid( $f_email );
 		email_ensure_not_disposable( $f_email );
@@ -65,15 +67,18 @@
 		}
 	}
 
-    # strip extra spaces from real name
-    $t_realname = string_normalize( $f_realname );
-	if ( $t_realname != user_get_field( $t_user_id, 'realname' ) ) {
-		# checks for problems with realnames
-		user_ensure_realname_valid( $t_realname );
-		$t_username = user_get_field( $t_user_id, 'username' );
-		user_ensure_realname_unique( $t_username, $t_realname );
-		user_set_realname( $t_user_id, $t_realname );
-		$t_realname_updated = true;
+	# Update real name (but only if LDAP isn't being used)
+	if ( !( $t_ldap && config_get( 'use_ldap_realname' ) ) ) {
+		# strip extra spaces from real name
+		$t_realname = string_normalize( $f_realname );
+		if ( $t_realname != user_get_field( $t_user_id, 'realname' ) ) {
+			# checks for problems with realnames
+			user_ensure_realname_valid( $t_realname );
+			$t_username = user_get_field( $t_user_id, 'username' );
+			user_ensure_realname_unique( $t_username, $t_realname );
+			user_set_realname( $t_user_id, $t_realname );
+			$t_realname_updated = true;
+		}
 	}
 
 	# Update password if the two match and are not empty

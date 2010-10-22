@@ -71,24 +71,34 @@
 		trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
 	}
 
-    # strip extra space from real name
-    $t_realname = string_normalize( $f_realname );
-
 	user_ensure_name_valid( $f_username );
-	user_ensure_realname_valid( $f_realname );
-	user_ensure_realname_unique( $f_username, $f_realname );
 
-	$f_email = email_append_domain( $f_email );
-	email_ensure_valid( $f_email );
-	email_ensure_not_disposable( $f_email );
+	$t_ldap = ( LDAP == config_get( 'login_method' ) );
 
-	$c_email		= $f_email;
-	$c_username		= $f_username;
-	$c_realname		= $t_realname;
-	$c_protected	= db_prepare_bool( $f_protected );
-	$c_enabled		= db_prepare_bool( $f_enabled );
-	$c_user_id		= db_prepare_int( $f_user_id );
-	$c_access_level	= db_prepare_int( $f_access_level );
+	if ( $t_ldap && config_get( 'use_ldap_realname' ) ) {
+		$t_realname = ldap_realname_from_username( $f_username );
+	} else {
+		# strip extra space from real name
+		$t_realname = string_normalize( $f_realname );
+		user_ensure_realname_valid( $t_realname );
+		user_ensure_realname_unique( $f_username, $t_realname );
+	}
+
+	if ( $t_ldap && config_get( 'use_ldap_email' ) ) {
+		$t_email = ldap_email( $f_user_id );
+	} else {
+		$t_email = email_append_domain( $f_email );
+		email_ensure_valid( $t_email );
+		email_ensure_not_disposable( $t_email );
+	}
+
+	$c_email = $t_email;
+	$c_username = $f_username;
+	$c_realname = $t_realname;
+	$c_protected = db_prepare_bool( $f_protected );
+	$c_enabled = db_prepare_bool( $f_enabled );
+	$c_user_id = db_prepare_int( $f_user_id );
+	$c_access_level = db_prepare_int( $f_access_level );
 
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
