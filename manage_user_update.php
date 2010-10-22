@@ -153,8 +153,8 @@
 		if ( strcmp( $t_realname, $t_old_realname ) ) {
 			$t_changes .= lang_get( 'realname' ) . ': ' . $t_old_realname . ' => ' . $t_realname . "\n";
 		}
-		if ( strcmp( $f_email, $t_old_email ) ) {
-			$t_changes .= lang_get( 'email' ) . ': ' . $t_old_email . ' => ' . $f_email . "\n";
+		if ( strcmp( $t_email, $t_old_email ) ) {
+			$t_changes .= lang_get( 'email' ) . ': ' . $t_old_email . ' => ' . $t_email . "\n";
 		}
 		if ( strcmp( $f_access_level, $t_old_access_level ) ) {
 			$t_old_access_string = get_enum_element( 'access_levels', $t_old_access_level );
@@ -166,7 +166,7 @@
 			$t_updated_msg = lang_get( 'email_user_updated_msg' );
 			$t_message = $t_updated_msg . "\n\n" . config_get( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
 			email_store( $f_email, $t_subject, $t_message );
-			log_event( LOG_EMAIL, sprintf( 'Account update notification sent to ' . $f_username . ' (' . $f_email . ')' ) );
+			log_event( LOG_EMAIL, sprintf( 'Account update notification sent to ' . $f_username . ' (' . $t_email . ')' ) );
 			if ( config_get( 'email_send_using_cronjob' ) == OFF ) {
 				email_send_all();
 			}
