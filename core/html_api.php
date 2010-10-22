@@ -1260,8 +1260,11 @@ function html_status_percentage_legend() {
 
 	$query = "SELECT status, COUNT(*) AS number
 				FROM $t_mantis_bug_table
-				WHERE $t_specific_where
-				GROUP BY status";
+				WHERE $t_specific_where";
+	if ( !access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
+		$query .= ' AND view_state < ' . VS_PRIVATE;
+	}
+	$query .= ' GROUP BY status';
 	$result = db_query_bound( $query );
 
 	$t_bug_count = 0;
