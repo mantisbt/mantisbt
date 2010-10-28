@@ -337,6 +337,7 @@ $s_reset_prefs_button = 'Enshtellunge retuur säze';
 $s_timezone = 'Zickzohn';
 $s_operating_system = 'Bedriefsüsteem';
 $s_additional_description = 'Zohsäzlejje Enfommazjuhne';
+$s_submit_button = 'Lohß Jonn!';
 $s_sponsor = 'Schponser';
 $s_sponsor_verb = 'Schponser';
 $s_amount = 'Bedraach';
