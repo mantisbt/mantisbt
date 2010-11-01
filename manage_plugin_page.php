@@ -53,7 +53,7 @@ foreach( $t_plugins as $t_basename => $t_plugin ) {
 
 if ( 0 < count( $t_plugins_installed ) ) { 
 ?>
-<br/>
+<br />
 <form action="manage_plugin_update.php" method="post">
 <?php echo form_security_field( 'manage_plugin_update' ) ?>
 <table class="width100" cellspacing="1">
@@ -98,15 +98,15 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 			$t_author = implode( $t_author, ', ' );
 		}
 		if ( !is_blank( $t_contact ) ) {
-			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ),
+			$t_author = '<br />' . sprintf( lang_get( 'plugin_author' ),
 				'<a href="mailto:' . string_attribute( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
 		} else {
-			$t_author = '<br/>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
+			$t_author = '<br />' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
 		}
 	}
 
 	if ( !is_blank( $t_url ) ) {
-		$t_url = '<br/>' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . "<a href=\"$t_url\">$t_url</a>";
+		$t_url = '<br />' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . "<a href=\"$t_url\">$t_url</a>";
 	}
 
 	$t_upgrade = plugin_needs_upgrade( $t_plugin );
@@ -130,7 +130,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	}
 
 	if ( 0 < count( $t_depends ) ) {
-		$t_depends = implode( $t_depends, '<br/>' );
+		$t_depends = implode( $t_depends, '<br />' );
 	} else {
 		$t_depends = '<span class="small dependency_met">' . lang_get( 'plugin_no_depends' ) . '</span>';
 	}
@@ -143,7 +143,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 		echo '<td class="center">','<select name="priority_',$t_basename,'">',print_plugin_priority_list( $t_priority ),'</select>','</td>';
 		echo '<td class="center">','<input type="checkbox" name="protected_',$t_basename,'" '.( $t_protected ? 'checked="checked" ' : '').'/>','</td>';
 	} else {
-		echo '<td>&nbsp;</td><td>&nbsp;</td>';
+		echo '<td>&#160;</td><td>&#160;</td>';
 	}
 	echo '<td class="center">';
 	if ( $t_upgrade ) { print_bracket_link( 'manage_plugin_upgrade.php?name=' . $t_basename . form_security_param( 'manage_plugin_upgrade' ), lang_get( 'plugin_upgrade' ) ); }
@@ -164,7 +164,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 
 if ( 0 < count( $t_plugins_available ) ) { 
 ?>
-<br/>
+<br />
 <table class="width100" cellspacing="1">
 
 <!-- Title -->
@@ -199,15 +199,15 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 			$t_author = implode( $t_author, ', ' );
 		}
 		if ( !is_blank( $t_contact ) ) {
-			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ),
+			$t_author = '<br />' . sprintf( lang_get( 'plugin_author' ),
 				'<a href="mailto:' . string_display_line( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
 		} else {
-			$t_author = '<br/>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
+			$t_author = '<br />' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
 		}
 	}
 
 	if ( !is_blank( $t_url ) ) {
-		$t_url = '<br/>' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . "<a href=\"$t_url\">$t_url</a>";
+		$t_url = '<br />' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . "<a href=\"$t_url\">$t_url</a>";
 	}
 
 	$t_ready = true;
@@ -227,7 +227,7 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 	}
 
 	if ( 0 < count( $t_depends ) ) {
-		$t_depends = implode( $t_depends, '<br/>' );
+		$t_depends = implode( $t_depends, '<br />' );
 	} else {
 		$t_depends = '<span class="small dependency_met">' . lang_get( 'plugin_no_depends' ) . '</span>';
 	}
@@ -244,7 +244,7 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 </table>
 <?php } ?>
 
-<br/><?php echo lang_get( 'plugin_key' ) ?>:
+<br /><?php echo lang_get( 'plugin_key' ) ?>:
 <span class='dependency_met'><?php echo lang_get( 'plugin_key_met' ) ?></span>,
 <span class='dependency_unmet'><?php echo lang_get( 'plugin_key_unmet' ) ?></span>,
 <span class='dependency_dated'><?php echo lang_get( 'plugin_key_dated' ) ?></span>,

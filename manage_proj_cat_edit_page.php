@@ -77,7 +77,7 @@
 </tr>
 <tr>
 	<td>
-		&nbsp;
+		&#160;
 	</td>
 	<td>
 		<input type="submit" class="button" value="<?php echo lang_get( 'update_category_button' ) ?>" />

@@ -126,7 +126,7 @@ $t_result = db_query_bound( $t_query, $t_where_params, $t_per_page, $t_offset );
 
 ?>
 
-<br/>
+<br />
 
 <!--  Tag Table Start -->
 <table class="width100" cellspacing="1">

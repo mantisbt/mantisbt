@@ -98,9 +98,9 @@
 ?>
 <tr>
 	<td colspan="3">
-		<br/>
+		<br />
 		<?php echo lang_get( 'signup_info' ) ?>
-		<br/><br/>
+		<br /><br />
 	</td>
 </tr>
 <tr>
@@ -115,7 +115,7 @@
 <?php
 	echo '<br /><div align="center">';
 	print_login_link();
-	echo '&nbsp;';
+	echo '&#160;';
 	print_lost_password_link();
 	echo '</div>';
 

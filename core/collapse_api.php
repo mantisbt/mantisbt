@@ -142,7 +142,7 @@ function collapse_icon( $p_name, $p_section = '' ) {
 	}
 
 	echo "<a href=\"\" onclick=\"ToggleDiv( '$t_block' ); return false;\"
-			><img border=\"0\" src=\"images/$t_icon\" alt=\"$t_alt\" /></a>&nbsp;";
+			><img border=\"0\" src=\"images/$t_icon\" alt=\"$t_alt\" /></a>&#160;";
 }
 
 /**

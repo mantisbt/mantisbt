@@ -141,7 +141,7 @@
 
 <!-- Submit Button -->
 <tr>
-	<td>&nbsp;</td>
+	<td>&#160;</td>
 	<td>
 		<input type="submit" class="button" value="<?php echo lang_get( 'update_project_button' ) ?>" />
 	</td>
@@ -364,7 +364,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 					$t_project_id = urlencode( $f_project_id );
 
 					print_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'edit_link' ) );
-					echo '&nbsp;';
+					echo '&#160;';
 					print_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'delete_link' ) );
 				} ?>
 			</td>
@@ -480,7 +480,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 
 					if ( !$t_inherited ) {
 						print_button( 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id, lang_get( 'edit_link' ) );
-						echo '&nbsp;';
+						echo '&#160;';
 						print_button( 'manage_proj_ver_delete.php?version_id=' . $t_version_id, lang_get( 'delete_link' ) );
 					}
 				?>
@@ -677,7 +677,7 @@ if ( $t_can_manage_users ) {
 				<td class="category">
 					<?php echo lang_get( 'access_level' ) ?>
 				</td>
-				<td class="category">&nbsp;  </td>
+				<td class="category">&#160;  </td>
 			</tr>
 			<tr class="row-1" valign="top">
 				<td>
@@ -803,9 +803,9 @@ if ( $t_can_manage_users ) {
 	}  # end for
 ?>
 	<tr>
-	<td>&nbsp;  </td>
-	<td>&nbsp;  </td>
-	<td>&nbsp;  </td>
+	<td>&#160;  </td>
+	<td>&#160;  </td>
+	<td>&#160;  </td>
 	<td class="center">
 	<?php
 		# You need global or project-specific permissions to remove users
@@ -817,7 +817,7 @@ if ( $t_can_manage_users ) {
 		}
 
 		if ( $t_removable_users_exist ) {
-			echo '&nbsp;';
+			echo '&#160;';
 			print_button( "manage_proj_user_remove.php?project_id=$f_project_id", lang_get( 'remove_all_link' ) );
 		}
 	?>

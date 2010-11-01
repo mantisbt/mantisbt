@@ -41,7 +41,7 @@
 	html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) );
 ?>
 
-<br/>
+<br />
 <table class="width100" cellspacing="1">
 
 <!-- Title -->

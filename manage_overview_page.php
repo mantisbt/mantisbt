@@ -34,7 +34,7 @@
 	print_manage_menu();
 ?>
 
-<br/>
+<br />
 <table class="width75" align="center" cellspacing="1">
 
 <tr>

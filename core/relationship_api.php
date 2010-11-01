@@ -628,13 +628,13 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 	$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
 	$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
 
-	$t_relationship_info_html = $t_td . string_no_break( $t_relationship_descr ) . '&nbsp;</td>';
+	$t_relationship_info_html = $t_td . string_no_break( $t_relationship_descr ) . '&#160;</td>';
 	if( $p_html_preview == false ) {
 		$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . bug_format_id( $t_related_bug_id ) . '</a></td>';
 		$t_relationship_info_html .= '<td><span class="issue-status" title="' . $t_resolution . '">' . $t_status . '</span></td>';
 	} else {
 		$t_relationship_info_html .= $t_td . bug_format_id( $t_related_bug_id ) . '</td>';
-		$t_relationship_info_html .= $t_td . $t_status . '&nbsp;</td>';
+		$t_relationship_info_html .= $t_td . $t_status . '&#160;</td>';
 	}
 
 	$t_relationship_info_text = utf8_str_pad( $t_relationship_descr, 20 );
@@ -645,11 +645,11 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 	if( $t_bug->handler_id > 0 ) {
 		$t_relationship_info_html .= string_no_break( prepare_user_name( $t_bug->handler_id ) );
 	}
-	$t_relationship_info_html .= '&nbsp;</td>';
+	$t_relationship_info_html .= '&#160;</td>';
 
 	# add project name
 	if( $p_show_project ) {
-		$t_relationship_info_html .= $t_td . string_display_line( $t_related_project_name ) . '&nbsp;</td>';
+		$t_relationship_info_html .= $t_td . string_display_line( $t_related_project_name ) . '&#160;</td>';
 	}
 
 	# add summary
@@ -673,7 +673,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 		}
 	}
 
-	$t_relationship_info_html .= '&nbsp;</td>';
+	$t_relationship_info_html .= '&#160;</td>';
 	$t_relationship_info_text .= "\n";
 
 	if( $p_html_preview == false ) {
@@ -802,7 +802,7 @@ function relationship_list_box( $p_default_rel_type = -1, $p_select_name = "rel_
  */
 function relationship_view_box( $p_bug_id ) {
 	?>
-<br/>
+<br />
 
 <?php collapse_open( 'relationships' );?>
 <table class="width100" cellspacing="1">

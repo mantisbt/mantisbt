@@ -840,12 +840,12 @@ function print_menu() {
 
 		if( ON == config_get( 'use_javascript' ) ) {
 			$t_bug_label = lang_get( 'issue_id' );
-			echo "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" value=\"$t_bug_label\" onfocus=\"if (this.value == '$t_bug_label') this.value = ''\" onblur=\"if (this.value == '') this.value = '$t_bug_label'\" />&nbsp;";
+			echo "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" value=\"$t_bug_label\" onfocus=\"if (this.value == '$t_bug_label') this.value = ''\" onblur=\"if (this.value == '') this.value = '$t_bug_label'\" />&#160;";
 		} else {
-			echo "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" />&nbsp;";
+			echo "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" />&#160;";
 		}
 
-		echo '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&nbsp;';
+		echo '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&#160;';
 		echo '</form>';
 		echo '</td>';
 		echo '</tr>';
@@ -914,9 +914,9 @@ function print_summary_submenu() {
 	// Plugins menu items
 	// TODO: this would be a call to print_pracket_link but the events returns cooked links so we cant
 	foreach( $t_menu_options as $t_menu_item ) {
-		echo '<span class="bracket-link">[&nbsp;';
+		echo '<span class="bracket-link">[&#160;';
 		echo $t_menu_item;
-		echo '&nbsp;]</span> ';
+		echo '&#160;]</span> ';
 	}
 	echo '</div>';
 }
@@ -1133,9 +1133,9 @@ function print_account_menu( $p_page = '' ) {
 	// Plugins menu items
 	// TODO: this would be a call to print_pracket_link but the events returns cooked links so we cant
 	foreach( $t_menu_options as $t_menu_item ) {
-		echo '<span class="bracket-link">[&nbsp;';
+		echo '<span class="bracket-link">[&#160;';
 		echo $t_menu_item;
-		echo '&nbsp;]</span> ';
+		echo '&#160;]</span> ';
 	}
 }
 
@@ -1196,9 +1196,9 @@ function print_summary_menu( $p_page = '' ) {
 	// Plugins menu items
 	// TODO: this would be a call to print_pracket_link but the events returns cooked links so we cant
 	foreach( $t_menu_options as $t_menu_item ) {
-		echo '<span class="bracket-link">[&nbsp;';
+		echo '<span class="bracket-link">[&#160;';
 		echo $t_menu_item;
-		echo '&nbsp;]</span> ';
+		echo '&#160;]</span> ';
 	}
 	echo '</div>';
 }

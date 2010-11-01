@@ -262,9 +262,9 @@ function cfdef_input_checkbox($p_field_def, $t_custom_field_value) {
 	foreach( $t_values as $t_option ) {
 		echo '<input ', helper_get_tab_index(), ' type="checkbox" name="custom_field_' . $p_field_def['id'] . '[]"';
 		if( in_array( $t_option, $t_checked_values, true ) ) {
-			echo ' value="' . string_attribute( $t_option ) . '" checked="checked">&nbsp;' . string_display_line( $t_option ) . '&nbsp;&nbsp;';
+			echo ' value="' . string_attribute( $t_option ) . '" checked="checked">&#160;' . string_display_line( $t_option ) . '&#160;&#160;';
 		} else {
-			echo ' value="' . string_attribute( $t_option ) . '">&nbsp;' . string_display_line( $t_option ) . '&nbsp;&nbsp;';
+			echo ' value="' . string_attribute( $t_option ) . '">&#160;' . string_display_line( $t_option ) . '&#160;&#160;';
 		}
 	}
 }
@@ -283,9 +283,9 @@ function cfdef_input_radio( $p_field_def, $p_custom_field_value ) {
 		echo '<input ', helper_get_tab_index(), ' type="radio" name="custom_field_' . $p_field_def['id'] . '"';
 
 		if ( $t_option == $t_checked_value ) {
-			echo ' value="' . string_attribute( $t_option ) . '" checked="checked">&nbsp;' . string_display_line( $t_option ) . '&nbsp;&nbsp;';
+			echo ' value="' . string_attribute( $t_option ) . '" checked="checked">&#160;' . string_display_line( $t_option ) . '&#160;&#160;';
 		} else {
-			echo ' value="' . string_attribute( $t_option ) . '">&nbsp;' . string_display_line( $t_option ) . '&nbsp;&nbsp;';
+			echo ' value="' . string_attribute( $t_option ) . '">&#160;' . string_display_line( $t_option ) . '&#160;&#160;';
 		}
 	}
 }

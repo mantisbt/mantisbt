@@ -155,7 +155,7 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 }
 ?>
 <tr>
-	<td>&nbsp;</td>
+	<td>&#160;</td>
 	<td>
 		<input type="submit" class="button" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
 	</td>

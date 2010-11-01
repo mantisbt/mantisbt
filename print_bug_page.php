@@ -185,7 +185,7 @@
 		echo '<td class="print">';
 		print_user_with_subject( $tpl_bug->reporter_id, $f_bug_id );
 		echo '</td>';
-		echo '<td class="print" colspan="4">&nbsp;</td>';
+		echo '<td class="print" colspan="4">&#160;</td>';
 		echo '</tr>';
 	}
 
@@ -214,7 +214,7 @@
 			$t_spacer += 2;
 		}
 
-		echo '<td class="print" colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td class="print" colspan="', $t_spacer, '">&#160;</td>';
 		echo '</tr>';
 	}
 
@@ -249,7 +249,7 @@
 		}
 
 		if ( $t_spacer > 0 ) {
-			echo '<td class="print" colspan="', $t_spacer, '">&nbsp;</td>';
+			echo '<td class="print" colspan="', $t_spacer, '">&#160;</td>';
 		}
 
 		echo '</tr>';
@@ -278,7 +278,7 @@
 			$t_spacer += 2;
 		}
 
-		echo '<td class="print" colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td class="print" colspan="', $t_spacer, '">&#160;</td>';
 		echo '</tr>';
 	}
 
@@ -305,7 +305,7 @@
 			$t_spacer += 2;
 		}
 
-		echo '<td class="print" colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td class="print" colspan="', $t_spacer, '">&#160;</td>';
 		echo '</tr>';
 	}
 
@@ -340,7 +340,7 @@
 		}
 
 		if ( $t_spacer > 0 ) {
-			echo '<td class="print" colspan="', $t_spacer, '">&nbsp;</td>';
+			echo '<td class="print" colspan="', $t_spacer, '">&#160;</td>';
 		}
 
 		echo '</tr>';
@@ -369,7 +369,7 @@
 			$t_spacer += 2;
 		}
 
-		echo '<td class="print" colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td class="print" colspan="', $t_spacer, '">&#160;</td>';
 		echo '</tr>';
 	}
 
@@ -396,7 +396,7 @@
 			$t_spacer += 2;
 		}
 
-		echo '<td class="print" colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td class="print" colspan="', $t_spacer, '">&#160;</td>';
 		echo '</tr>';
 	}
 
@@ -480,7 +480,7 @@
 			$c_filesize = number_format( $t_attachment['size'] );
 			$c_date_added = date( config_get( 'normal_date_format' ), $t_attachment['date_added'] );
 			if ( isset( $t_attachment['icon'] ) ) {
-				echo '<img src="', $t_attachment['icon']['url'], '" alt="', $t_attachment['icon']['alt'], '" />&nbsp;';
+				echo '<img src="', $t_attachment['icon']['url'], '" alt="', $t_attachment['icon']['alt'], '" />&#160;';
 			}
 
 			echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span><br />$c_download_url";

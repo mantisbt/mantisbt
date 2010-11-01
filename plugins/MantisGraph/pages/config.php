@@ -60,7 +60,7 @@ function print_font_checked( $p_font_name ) {
 
 ?>
 
-<br/>
+<br />
 <form action="<?php echo plugin_page( 'config_edit' )?>" method="post">
 <?php echo form_security_field( 'plugin_graph_config_edit' ) ?>
 <table align="center" class="width75" cellspacing="1">

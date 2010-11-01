@@ -126,7 +126,7 @@ print_recently_visited();
 
 ?>
 
-<br/>
+<br />
 <table class="width100" cellspacing="1">
 
 <tr>

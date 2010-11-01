@@ -77,17 +77,17 @@
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="center">
-		<b><?php echo lang_get( 'signup_done_title' ) ?></b><br/>
+		<b><?php echo lang_get( 'signup_done_title' ) ?></b><br />
 		<?php echo "[$f_username - $f_email] " ?>
 	</td>
 </tr>
 <tr>
 	<td>
-		<br/>
+		<br />
 		<?php echo lang_get( 'password_emailed_msg' ) ?>
-		<br /><br/>
+		<br /><br />
 		<?php echo lang_get( 'no_reponse_msg') ?>
-		<br/><br/>
+		<br /><br />
 	</td>
 </tr>
 </table>

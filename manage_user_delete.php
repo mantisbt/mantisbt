@@ -54,7 +54,7 @@
 	}
 
 	helper_ensure_confirmed( lang_get( 'delete_account_sure_msg' ) .
-		'<br/>' . lang_get( 'username' ) . ': ' . $t_user['username'],
+		'<br />' . lang_get( 'username' ) . ': ' . $t_user['username'],
 		lang_get( 'delete_account_button' ) );
 
 	user_delete( $f_user_id );

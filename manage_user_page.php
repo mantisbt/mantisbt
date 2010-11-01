@@ -319,7 +319,7 @@
 		if ( $u_protected ) {
 			echo " $t_lock_image";
 		} else {
-			echo '&nbsp;';
+			echo '&#160;';
 		}
           ?>
         </td>

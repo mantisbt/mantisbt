@@ -74,9 +74,9 @@
 </tr>
 <tr>
 	<td colspan="2">
-		<br/>
+		<br />
 		<?php echo lang_get( 'lost_password_info' ) ?>
-		<br/><br/>
+		<br /><br />
 	</td>
 </tr>
 <tr>
@@ -89,9 +89,9 @@
 ?>
 <tr>
 	<td colspan="2">
-		<br/>
+		<br />
 		<?php echo lang_get( 'no_password_request' ) ?>
-		<br/><br/>
+		<br /><br />
 	</td>
 </tr>
 <?php
@@ -105,7 +105,7 @@
 <?php
 	echo '<br /><div align="center">';
 	print_login_link();
-	echo '&nbsp;';
+	echo '&#160;';
 	print_signup_link();
 	echo '</div>';
 

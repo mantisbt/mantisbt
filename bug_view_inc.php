@@ -206,7 +206,7 @@
 
 	echo $tpl_form_title;
 
-	echo '&nbsp;<span class="small">';
+	echo '&#160;<span class="small">';
 
 	# Jump to Bugnotes
 	print_bracket_link( "#bugnotes", lang_get( 'jump_to_bugnotes' ) );
@@ -338,7 +338,7 @@
 			$t_spacer += 2;
 		}
 
-		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
 		echo '</tr>';
 	}
@@ -371,7 +371,7 @@
 			$t_spacer += 2;
 		}
 
-		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
 		echo '</tr>';
 	}
 
@@ -410,7 +410,7 @@
 
 		# spacer
 		if ( $t_spacer > 0 ) {
-			echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+			echo '<td colspan="', $t_spacer, '">&#160;</td>';
 		}
 
 		echo '</tr>';
@@ -443,7 +443,7 @@
 
 		# spacer
 		if ( $t_spacer > 0 ) {
-			echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+			echo '<td colspan="', $t_spacer, '">&#160;</td>';
 		}
 
 		echo '</tr>';
@@ -474,7 +474,7 @@
 			$t_spacer += 2;
 		}
 
-		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
 		echo '</tr>';
 	}
 
@@ -512,7 +512,7 @@
 		}
 
 		if ( $t_spacer > 0 ) {
-			echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+			echo '<td colspan="', $t_spacer, '">&#160;</td>';
 		}
 
 		echo '</tr>';
@@ -544,7 +544,7 @@
 		}
 
 		# spacer
-		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
 		echo '</tr>';
 	}
@@ -576,7 +576,7 @@
 		}
 
 		# spacer
-		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
 		echo '</tr>';
 	}

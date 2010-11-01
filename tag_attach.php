@@ -72,7 +72,7 @@
 	if ( count( $t_tags_failed ) > 0 ) {
 		html_page_top( lang_get( 'tag_attach_long' ) . ' ' . bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 ?>
-<br/>
+<br />
 <table class="width75" align="center">
 	<tr class="row-category">
 	<td colspan="2"><?php echo lang_get( 'tag_attach_failed' ) ?></td>

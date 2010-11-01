@@ -498,7 +498,7 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 			}
 			echo $t_full_id . '"';
 			check_selected( $p_project_id, $t_full_id );
-			echo '>' . str_repeat( '&nbsp;', count( $p_parents ) ) . str_repeat( '&raquo;', count( $p_parents ) ) . ' ' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
+			echo '>' . str_repeat( '&#160;', count( $p_parents ) ) . str_repeat( '&raquo;', count( $p_parents ) ) . ' ' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
 		}
 	}
@@ -597,7 +597,7 @@ function print_extended_project_browser_subproject_javascript( $p_trace ) {
 
 	for( $i = 0;$i < $t_project_count;$i++ ) {
 		$t_id = $t_project_ids[$i];
-		$t_name = addslashes( str_repeat(( '&nbsp;' ), $t_level ) . str_repeat(( '&raquo;' ), $t_level ) . ' ' . project_get_field( $t_id, 'name' ) );
+		$t_name = addslashes( str_repeat(( '&#160;' ), $t_level ) . str_repeat(( '&raquo;' ), $t_level ) . ' ' . project_get_field( $t_id, 'name' ) );
 		echo 'subprojects[\'' . $t_top_id . '\'][\'' . $p_trace . ';' . $t_id . '\'] = \'' . $t_name . '\';' . "\n";
 
 		print_extended_project_browser_subproject_javascript( $p_trace . ';' . $t_id );
@@ -1348,16 +1348,16 @@ function print_button( $p_action_page, $p_label, $p_args_to_post = null ) {
 
 # print brackets around a pre-prepared link (i.e. '<a href' html tag).
 function print_bracket_link_prepared( $p_link ) {
-	echo '<span class="bracket-link">[&nbsp;' . $p_link . '&nbsp;]</span> ';
+	echo '<span class="bracket-link">[&#160;' . $p_link . '&#160;]</span> ';
 }
 
 # print the bracketed links used near the top
 # if the $p_link is blank then the text is printed but no link is created
 # if $p_new_window is true, link will open in a new window, default false.
 function print_bracket_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
-	echo '<span class="bracket-link">[&nbsp;';
+	echo '<span class="bracket-link">[&#160;';
 	print_link( $p_link, $p_url_text, $p_new_window, $p_class );
-	echo '&nbsp;]</span> ';
+	echo '&#160;]</span> ';
 }
 
 # print a HTML link
@@ -1424,9 +1424,9 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 
 	# First and previous links
 	print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_id );
-	echo '&nbsp;';
+	echo '&#160;';
 	print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_id );
-	echo '&nbsp;';
+	echo '&#160;';
 
 	# Page numbers ...
 
@@ -1453,20 +1453,20 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 			}
 		}
 	}
-	echo implode( '&nbsp;', $t_items );
+	echo implode( '&#160;', $t_items );
 
 	if( $t_last_page < $p_end ) {
 		print( ' ... ' );
 	}
 
 	# Next and Last links
-	echo '&nbsp;';
+	echo '&#160;';
 	if( $p_current < $p_end ) {
 		print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_id );
 	} else {
 		print_page_link( $p_page, $t_next, null, null, $p_temp_filter_id );
 	}
-	echo '&nbsp;';
+	echo '&#160;';
 	print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_id );
 
 	print( ' ]' );
@@ -1706,14 +1706,14 @@ function print_bug_attachments_list( $p_bug_id ) {
 
 		if ( !$t_attachment['exists'] ) {
 			print_file_icon( $t_file_display_name );
-			echo '&nbsp;<span class="strike">' . $t_file_display_name . '</span>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
+			echo '&#160;<span class="strike">' . $t_file_display_name . '</span>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
 		} else {
 			echo $t_href_start;
 			print_file_icon( $t_file_display_name );
-			echo $t_href_end . '&nbsp;' . $t_href_start . $t_file_display_name . $t_href_end . $t_href_clicket . ' (' . $t_filesize . ' ' . lang_get( 'bytes' ) . ') ' . '<span class=\"italic\">' . $t_date_added . '</span>';
+			echo $t_href_end . '&#160;' . $t_href_start . $t_file_display_name . $t_href_end . $t_href_clicket . ' (' . $t_filesize . ' ' . lang_get( 'bytes' ) . ') ' . '<span class=\"italic\">' . $t_date_added . '</span>';
 
 			if ( $t_attachment['can_delete'] ) {
-				echo '&nbsp;[';
+				echo '&#160;[';
 				print_link( 'bug_file_delete.php?file_id=' . $t_attachment['id'] . form_security_param( 'bug_file_delete' ), lang_get( 'delete_link' ), false, 'small' );
 				echo ']';
 			}

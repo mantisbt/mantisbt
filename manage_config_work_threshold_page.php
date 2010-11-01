@@ -56,9 +56,9 @@
 		echo '<tr><td class="form-title" colspan="' . ( count( $t_access_levels ) + 2 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</td>';
 		echo '<td class="form-title"style="text-align:center"  width="40%" colspan="' . count( $t_access_levels ) . '">' . lang_get( 'access_levels' ) . '</td>';
-		echo '<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'alter_level' ) . '&nbsp;</td></tr><tr>';
+		echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'alter_level' ) . '&#160;</td></tr><tr>';
 		foreach( $t_access_levels as $t_access_level => $t_access_label ) {
-			echo '<td class="form-title" style="text-align:center">&nbsp;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&nbsp;</td>';
+			echo '<td class="form-title" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</td>';
 		}
 		echo '</tr>' . "\n";
 	}
@@ -133,7 +133,7 @@
 			    if ( $t_project ) {
 				    $t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';
 			    } else {
-				    $t_value = '&nbsp;';
+				    $t_value = '&#160;';
 			    }
             }
 			echo '<td class="center"' . $t_colour . '>' . $t_value . '</td>';
@@ -143,7 +143,7 @@
 			print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
 			echo '</select> </td>';
 		} else {
-			echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&nbsp;</td>';
+			echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>';
 		}
 
 		echo '</tr>' . "\n";
@@ -182,7 +182,7 @@
 		    if ( ON == config_get( $p_threshold ) ) {
 			    $t_value = '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />';
 		    } else {
-			    $t_value = '&nbsp;';
+			    $t_value = '&#160;';
 		    }
         }
 		echo '<td' . $t_colour . '>' . $t_value . '</td><td class="left" colspan="' . ( count( $t_access_levels ) - 1 ). '"></td>';
@@ -192,7 +192,7 @@
 			print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
 			echo '</select> </td>';
 		} else {
-			echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&nbsp;</td>';
+			echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>';
 		}
 
 		echo '</tr>' . "\n";
@@ -229,7 +229,7 @@
 			echo '</select></td><td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>';
 		    $t_show_submit = true;
 		} else {
-			$t_value = MantisEnum::getLabel( lang_get( $p_enum . '_enum_string' ), config_get( $p_threshold ) ) . '&nbsp;';
+			$t_value = MantisEnum::getLabel( lang_get( $p_enum . '_enum_string' ), config_get( $p_threshold ) ) . '&#160;';
 		    echo '<td class="left" colspan="3"' . $t_colour . '>' . $t_value . '</td><td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>';
         }
 
@@ -238,7 +238,7 @@
 			print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
 			echo '</select> </td>';
 		} else {
-			echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&nbsp;</td>';
+			echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>';
 		}
 
 		echo '</tr>' . "\n";

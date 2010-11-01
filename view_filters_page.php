@@ -212,7 +212,7 @@
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'severity' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'resolution' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'profile' ) ?></td>
-	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&nbsp;</td> -->
+	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&#160;</td> -->
 </tr>
 <tr class="row-1">
 	<!-- Reporter -->
@@ -243,7 +243,7 @@
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_profile(); ?>
 	</td>
-	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&nbsp;</td> -->
+	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&#160;</td> -->
 </tr>
 
 <tr class="row-category2">
@@ -253,7 +253,7 @@
 	if ( 'simple' == $f_view_type ) {
 		echo lang_get( 'hide_status' );
 	} else {
-		echo '&nbsp;';
+		echo '&#160;';
 	}
 	?>
 	</td>
@@ -262,14 +262,14 @@
 		<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_version' ) ?></td>
 		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'fixed_in_version' ) ?></td>
 	<?php } else { ?>
-		<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">&nbsp;</td>
-		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
+		<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">&#160;</td>
+		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&#160;</td>
 	<?php } ?>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'priority' ) ?></td>
 	<?php if ( $t_show_product_version ) { ?>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'target_version' ) ?></td>
 	<?php } else { ?>
-	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 7 ) * $t_custom_cols ); ?>">&nbsp;</td>
+	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 7 ) * $t_custom_cols ); ?>">&#160;</td>
 	<?php } ?>
 </tr>
 <tr class="row-1">
@@ -283,7 +283,7 @@
 	if ( 'simple' == $f_view_type ) {
 		print_filter_hide_status();
 	} else {
-		echo '&nbsp;';
+		echo '&#160;';
 	}
 	?>
 	</td>
@@ -298,7 +298,7 @@
 		<?php if ( $t_show_product_version ) {
  			print_filter_show_version();
  		} else {
- 			echo "&nbsp;";
+ 			echo "&#160;";
  		} ?>
 	</td>
 	<!-- Fixed in Version -->
@@ -306,7 +306,7 @@
 		<?php if ( $t_show_product_version ) {
  			print_filter_show_fixed_in_version();
  		} else {
- 			echo "&nbsp;";
+ 			echo "&#160;";
  		} ?>
  	</td>
 	<!-- Priority -->
@@ -318,7 +318,7 @@
 		<?php if ( $t_show_product_version ) {
  			print_filter_show_target_version();
  		} else {
- 			echo "&nbsp;";
+ 			echo "&#160;";
  		} ?>
  	</td>
 </tr>
@@ -338,7 +338,7 @@
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php echo lang_get( 'bug_relationships' ) ?>
 	</td>
-	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&nbsp;</td> -->
+	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&#160;</td> -->
 </tr>
 <tr class="row-2">
 	<!-- Number of bugs per page -->
@@ -363,7 +363,7 @@
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
         <?php print_filter_relationship_type(); ?>
 	</td>
-	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&nbsp;</td> -->
+	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&#160;</td> -->
 </tr>
 
 <?php
@@ -384,7 +384,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 				if ( isset( $t_accessible_custom_fields_names[$t_base + $j] ) ) {
 					echo string_display( lang_get_defaulted( $t_accessible_custom_fields_names[$t_base + $j] ) );
 				} else {
-					echo '&nbsp;';
+					echo '&#160;';
 				}
 				echo '</td>';
 			}
@@ -397,7 +397,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 				if ( isset( $t_accessible_custom_fields_ids[$t_base + $j] ) ) {
 					print_filter_custom_field($t_accessible_custom_fields_ids[$t_base + $j]);
 				} else {
-					echo '&nbsp;';
+					echo '&#160;';
 				}
 				echo '</td>';
 			}
@@ -475,7 +475,7 @@ foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 # output any remaining plugin filters
 if ( $t_column > 0 ) {
 	if ( $t_column < $t_filter_cols ) {
-		$t_fields .= '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) * $t_custom_cols . '">&nbsp;</td>';
+		$t_fields .= '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) * $t_custom_cols . '">&#160;</td>';
 	}
 
 	echo '<tr class="row-category2">', $t_fields, '</tr>';
@@ -486,7 +486,7 @@ if ( $t_column > 0 ) {
 	}
 
 	if ( $t_column < $t_filter_cols ) {
-		echo '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) * $t_custom_cols . '">&nbsp;</td>';
+		echo '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) * $t_custom_cols . '">&#160;</td>';
 	}
 
 	echo '</tr>';

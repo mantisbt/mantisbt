@@ -166,7 +166,7 @@ function check_zend_optimiser_version() {
 	$t_output = ob_get_contents();
 	ob_end_clean();
 
-	$t_output = str_replace(array("&gt;", "&lt;", "&quot;", "&amp;", "&#039;", "&nbsp;"), array(">", "<", "\"", "&", "'", " "), $t_output);
+	$t_output = str_replace(array("&gt;", "&lt;", "&quot;", "&amp;", "&#039;", "&#160;"), array(">", "<", "\"", "&", "'", " "), $t_output);
 
 	$t_zend_optimizer_min_version = '3.3.3';
 

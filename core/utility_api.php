@@ -39,7 +39,7 @@
  */
 function trans_bool( $p_num ) {
 	if( 0 == $p_num ) {
-		return '&nbsp;';
+		return '&#160;';
 	} else {
 		return 'X';
 	}

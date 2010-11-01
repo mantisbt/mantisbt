@@ -206,7 +206,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td>&nbsp;</td>
+			<td>&#160;</td>
 			<td>
 				<input type="submit" class="button" value="<?php echo lang_get( 'update_custom_field_button' ) ?>" />
 			</td>

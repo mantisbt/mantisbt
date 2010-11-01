@@ -104,12 +104,12 @@
 			<td class="print">
 				<?php
 				echo print_user( $v3_reporter_id );
-				?>&nbsp;&nbsp;&nbsp;
+				?>&#160;&#160;&#160;
 			</td>
 		</tr>
 		<tr>
 			<td class="print">
-				<?php echo $v3_date_submitted ?>&nbsp;&nbsp;&nbsp;
+				<?php echo $v3_date_submitted ?>&#160;&#160;&#160;
 				<?php if ( $v3_date_submitted != $v3_last_modified ) {
 					echo '<br />(' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . $v3_last_modified . ')';
 				} ?>

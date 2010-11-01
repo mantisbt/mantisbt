@@ -51,7 +51,7 @@
 	html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
 ?>
 
-<br/>
+<br />
 <form method="post" action="tag_update.php">
 <?php echo form_security_field( 'tag_update' ) ?>
 <table class="width100" cellspacing="1">
