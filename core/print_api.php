@@ -543,7 +543,7 @@ function print_extended_project_browser( $p_trace = Array(), $p_project_id = nul
 	echo "\t" . 'var spInput = document.form_set_project.project_id;' . "\n";
 	echo "\t" . 'spInput.options.length = 0' . "\n";
 	echo "\t" . 'if (projectVal == "' . ALL_PROJECTS . '") {' . "\n";
-	echo "\t\t" . 'spInput.options[0] = new Option(\'--- All Projects ---\', \'' . ALL_PROJECTS . '\');' . "\n";
+	echo "\t\t" . 'spInput.options[0] = new Option(\'' . lang_get( 'all_projects' ) . '\', \'' . ALL_PROJECTS . '\');' . "\n";
 	echo "\t" . '} else {' . "\n";
 	echo "\t\t" . 'var i = 0;' . "\n";
 	echo "\t\t" . 'var project = subprojects[ projectVal ];' . "\n";
