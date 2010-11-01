@@ -44,7 +44,7 @@
 	# Confirm with the user
 	helper_ensure_confirmed( lang_get( 'remove_user_sure_msg' ) .
 		'<br />' . lang_get( 'project_name' ) . ': ' . $t_project_name,
-		lang_get( 'remove_user_button' ) );
+		sprintf( lang_get( 'remove_user_from_project_button' ), $t_project_name ) );
 
 	$result = project_remove_user( $f_project_id, $f_user_id );
 

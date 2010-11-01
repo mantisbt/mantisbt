@@ -47,11 +47,12 @@
 		access_ensure_project_level( access_get_project_level( $f_project_id, $f_user_id ), $f_project_id );
 
 		$t_user = user_get_row( $f_user_id );
+		$t_project_name = project_get_name( $f_project_id );
 
 		# Confirm with the user
 		helper_ensure_confirmed( lang_get( 'remove_user_sure_msg' ) .
 			'<br />' . lang_get( 'username' ) . ': ' . $t_user['username'],
-			lang_get( 'remove_user_button' ) );
+			sprintf( lang_get( 'remove_user_from_project_button' ), $t_project_name ) );
 
 		project_remove_user( $f_project_id, $f_user_id );
 	}
