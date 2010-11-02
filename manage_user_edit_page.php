@@ -63,8 +63,7 @@ access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 $f_username = gpc_get_string( 'username', '' );
 
 if ( is_blank( $f_username ) ) {
-	$f_user_id = gpc_get_int( 'user_id' );
-	$t_user_id = $f_user_id;
+	$t_user_id = gpc_get_int( 'user_id' );
 } else {
 	$t_user_id = user_get_id_by_name( $f_username );
 	if ( $t_user_id === false ) {
@@ -120,7 +119,7 @@ print_manage_menu();
 		<?php
 			// With LDAP
 			if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
-				echo string_display_line( user_get_realname( $f_user_id ) );
+				echo string_display_line( user_get_realname( $t_user_id ) );
 			}
 			// Without LDAP
 			else {
@@ -141,7 +140,7 @@ print_manage_menu();
 		<?php
 			// With LDAP
 			if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
-				echo string_display_line( user_get_email( $f_user_id ) );
+				echo string_display_line( user_get_email( $t_user_id ) );
 			}
 			// Without LDAP
 			else {
