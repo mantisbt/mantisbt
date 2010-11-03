@@ -57,7 +57,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		$t_protocol_version = config_get( 'ldap_protocol_version' );
 
 		if( $t_protocol_version > 0 ) {
-			log_event( LOG_LDAP, "Setting LDAP protocol to  to ldap server to " . $t_protocol_version );
+			log_event( LOG_LDAP, "Setting LDAP protocol version to " . $t_protocol_version );
 			ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
 		}
 
