@@ -1650,13 +1650,20 @@
 	 **************************/
 
 	/**
+	 * The LDAP server can be provided either as
+	 * - a simple hostname (in that case, g_ldap_port must be defined)
+	 * - a complete URI (then g_ldap_port is ignored, and the port number
+	 *   has to be specified as part of the URI itself, e.g.
+	 *   ldaps://ldap.example.com:636/)
 	 *
 	 * @global string $g_ldap_server
 	 */
-	$g_ldap_server			= 'ldaps://ldap.example.com.au/';
+	$g_ldap_server			= 'ldap.example.com';
 
 	/**
-	 * LDAP port (default 389).  If this doesn't work, try 636.
+	 * LDAP port (default 389).  If this doesn't work, try 636 (ldaps)
+	 * or for Active Directory Global Catalog forest-wide search,
+	 * default port 3268 (ldap) or 3269 (ldaps)
 	 *
 	 * @global integer $g_ldap_port
 	 */

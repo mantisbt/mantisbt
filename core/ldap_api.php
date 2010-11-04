@@ -38,10 +38,27 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	$t_ldap_server = config_get( 'ldap_server' );
 	$t_ldap_port = config_get( 'ldap_port' );
 
-	log_event( LOG_LDAP, "Attempting connection to LDAP server '{$t_ldap_server}' port '{$t_ldap_port}'." );
-	$t_ds = @ldap_connect( $t_ldap_server, $t_ldap_port );
+    # Verify if LDAP server provided is a URI or just a host name
+    # Connect and log accordingly
+    $t_message = "Attempting connection to LDAP ";
+    $t_ldap_uri = parse_url( $t_ldap_server );
+    if ( count( $t_ldap_uri ) > 1 ) {
+        $t_message .= "URI '{$t_ldap_server}'.";
+        $t_ds = @ldap_connect( $t_ldap_server );
+    } else {
+        $t_message .= "server '{$t_ldap_server}' port '{$t_ldap_port}'.";
+        if (is_numeric( $t_ldap_port ) ) {
+            $t_ds = @ldap_connect( $t_ldap_server, $t_ldap_port );
+        } else {
+            log_event( LOG_LDAP, "ERROR - LDAP port '$t_ldap_port' is not numeric" );
+            trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
+            return false;
+        }
+    }
+    log_event( LOG_LDAP, $t_message );
+    
 	if ( $t_ds !== false && $t_ds > 0 ) {
-		log_event( LOG_LDAP, "Connection accepted to LDAP server" );
+		log_event( LOG_LDAP, "Connection accepted by LDAP server" );
 		$t_protocol_version = config_get( 'ldap_protocol_version' );
 
 		if( $t_protocol_version > 0 ) {
@@ -70,10 +87,10 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		}
 
 		if ( !$t_br ) {
-			log_event( LOG_LDAP, "bind to ldap server failed: " . ldap_error( $t_ds ) );
+			log_event( LOG_LDAP, "Bind to ldap server failed: " . ldap_error( $t_ds ) );
 			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
 		} else {
-			log_event( LOG_LDAP, "bind to ldap server successful" );
+			log_event( LOG_LDAP, "Bind to ldap server successful" );
 		}
 	} else {
 		log_event( LOG_LDAP, "Connection to ldap server failed" );
@@ -332,10 +349,11 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 
 		$t_authenticated = false;
 
-		if ( $t_info ) {
+		if ( $t_info['count'] > 0 ) {
 			# Try to authenticate to each until we get a match
 			for ( $i = 0; $i < $t_info['count']; $i++ ) {
 				$t_dn = $t_info[$i]['dn'];
+                log_event( LOG_LDAP, "Checking {$t_info[$i]['dn']}" );
 
 				# Attempt to bind with the DN and password
 				if ( @ldap_bind( $t_ds, $t_dn, $p_password ) ) {
@@ -343,8 +361,11 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 					break;
 				}
 			}
+		} else {
+		    log_event( LOG_LDAP, "No matching entries found" );
 		}
-
+		
+		log_event( LOG_LDAP, "Unbinding from LDAP server" );
 		ldap_free_result( $t_sr );
 		ldap_unbind( $t_ds );
 	}
@@ -368,6 +389,9 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 				user_set_field( $t_user_id, 'email', $t_email );
 			}
 		}
+        log_event( LOG_LDAP, "User '$p_username' authenticated" );
+	} else {
+        log_event( LOG_LDAP, "Authentication failed" );
 	}
 
 	return $t_authenticated;
