@@ -627,7 +627,6 @@ $s_project_document_updated = 'Projektet er blevet opdateret';
 $s_project_user_added_msg = 'Brugertilføjet projektet';
 $s_project_removed_user_msg = 'Bruger fjernet fra projektet';
 $s_remove_user_sure_msg = 'Er du sikker på at du vil fjerne denne bruger?';
-$s_remove_user_button = 'Fjern brugeren';
 $s_remove_all_users_sure_msg = 'Er du sikker på at du vil fjerne alle brugere fra dette projekt?';
 $s_remove_all_users_button = 'Fjern alle brugere';
 $s_add_user_title = 'Tilføj bruger til projekt';

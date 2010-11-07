@@ -838,7 +838,6 @@ $s_project_document_updated = 'Projekt został pomyślnie zaktualizowany';
 $s_project_user_added_msg = 'Użytkownik został pomyślnie dodany do projektu';
 $s_project_removed_user_msg = 'Użytkownik został pomyślnie usunięty z projektu';
 $s_remove_user_sure_msg = 'Czy na pewno chcesz usunąć tego użytkownika?';
-$s_remove_user_button = 'Usuń użytkownika';
 $s_remove_all_users_sure_msg = 'Czy na pewno chcesz usunąć wszystkich użytkowników z tego projektu?';
 $s_remove_all_users_button = 'Usuń wszystkich użytkowników';
 $s_add_user_title = 'Dodawanie użytkownika do projektu';

@@ -702,7 +702,6 @@ $s_project_document_updated = 'Proiect modificat cu succes';
 $s_project_user_added_msg = 'Utilizator adăugat cu succes proiectului';
 $s_project_removed_user_msg = 'Utilizator șters din proiect';
 $s_remove_user_sure_msg = 'Sigur dorți ștergerea acestui utilizator?';
-$s_remove_user_button = 'Şterge utilizator';
 $s_remove_all_users_sure_msg = 'Sigur ștergeți toți utilizatorii acestui proiect?';
 $s_remove_all_users_button = 'Ştergere toți utilizatorii';
 $s_add_user_title = 'Adaugă utilizator la proiect';

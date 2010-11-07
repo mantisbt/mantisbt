@@ -646,7 +646,6 @@ $s_project_document_updated = '프로젝트가 갱신되었습니다.';
 $s_project_user_added_msg = '프로젝트에 사용자가 추가되었습니다.';
 $s_project_removed_user_msg = '프로젝트에 사용자가 제거되었습니다.';
 $s_remove_user_sure_msg = '현재 사용자를 제거하시겠습니까?';
-$s_remove_user_button = '사용자 제거';
 $s_remove_all_users_sure_msg = '이 프로젝트의 모든 사용자들을 제거하시겠습니까?';
 $s_remove_all_users_button = '모든 사용자 제거';
 $s_add_user_title = '프로젝트에 사용자 추가';

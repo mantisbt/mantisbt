@@ -29,6 +29,7 @@
  * @author Fievarsty
  * @author Fryed-peach
  * @author Hosiryuhosi
+ * @author Iwai.masaharu
  * @author Seiji
  * @author Seiji Sogabe, sogabe@alles.or.jp
  * @author Tadashi Jokagi, elf2000@users.sourceforge.net
@@ -181,7 +182,7 @@ $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'アクセスが拒否されました。';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'ファイルのアップロードに失敗しました。MantisBT がファイルを読めません。プロジェクト管理を確認してください。';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ファイルのアップロードに失敗しました。PHP で設定されているファイルサイズより大きいことが問題です。設定を確認してください。';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'このページで必須のパラメーター「%1$s」がありません。';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ユーザー名は既に使用されています。戻って別のユーザー名を選択してください。';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '利用者名は既に使用されています。戻って別の利用者名を選択してください。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '設定項目「%1$s」がありません。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = '設定項目「%1$s」をデータベースに設定することはできません。config_inc.php に設定してください。';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '文字列「%1$s」がありません。';
@@ -837,7 +838,7 @@ $s_project_document_updated = '更新されました。';
 $s_project_user_added_msg = 'プロジェクトに利用者を追加しました。';
 $s_project_removed_user_msg = 'プロジェクトから利用者を削除しました。';
 $s_remove_user_sure_msg = '本当にこの利用者をプロジェクトから削除しますか？';
-$s_remove_user_button = '利用者を削除';
+$s_remove_user_from_project_button = 'プロジェクト %s から利用者を削除する';
 $s_remove_all_users_sure_msg = 'このプロジェクトからすべての利用者を削除してよろしいですか？';
 $s_remove_all_users_button = '全利用者削除';
 $s_add_user_title = 'プロジェクトへの利用者追加';
@@ -1010,7 +1011,7 @@ $s_custom_field_type_enum_string = '0:文字列,1:整数,2:浮動小数点,3:列
 $s_confirm_used_custom_field_deletion = 'このカスタム項目は、現在1つ以上のプロジェクトで使用されています。<br />もし続行するならば、この項目のすべての値は削除されます。削除したら戻すことはできません。<br />削除したくないなら、ブラウザの戻るボタンを選択してください。続行するなら、下のボタンをクリックしてください。';
 $s_confirm_custom_field_deletion = 'このカスタム項目とすべての設定した値を削除してよろしいですか。';
 $s_field_delete_button = '項目の削除';
-$s_confirm_custom_field_unlinking = 'このカスタム項目をプロジェクトから削除して値を削除してよろしいですか。';
+$s_confirm_custom_field_unlinking = 'このカスタム項目をプロジェクトから削除してもいいですか？カスタム項目自体を削除しない限り、値は削除されません。';
 $s_field_remove_button = '項目の削除';
 $s_hide_status = 'ステータス非表示';
 $s_filter_closed = '完了';

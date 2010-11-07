@@ -703,7 +703,6 @@ $s_project_document_updated = '專案更新成功';
 $s_project_user_added_msg = '成功新增這專案使用者';
 $s_project_removed_user_msg = '成功刪除這專案使用者';
 $s_remove_user_sure_msg = '你確定要移除這使用者在這專案的權限嗎?';
-$s_remove_user_button = '移除使用者';
 $s_remove_all_users_sure_msg = '你確定要移除這專案全部使用者權限嗎?';
 $s_remove_all_users_button = '移除全部使用者';
 $s_add_user_title = '新增使用者在專案的權限';

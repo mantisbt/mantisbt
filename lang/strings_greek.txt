@@ -538,7 +538,6 @@ $s_user_documentation = 'Εγχειρίδιο Χρήστη';
 $s_project_documentation = 'Τεκμηρίωση Εφαρμογής';
 $s_add_file = 'Προσθήκη Αρχείου';
 $s_remove_user_sure_msg = 'Είστε σίγουρος πως επιθυμείτε να αφαιρέσετε τον χρήστη;';
-$s_remove_user_button = 'Αφαίρεση Χρήστη';
 $s_remove_all_users_sure_msg = 'Είστε σίγουρος πως θέλετε να αφαιρέθούν όλοι οι χρήστες;';
 $s_remove_all_users_button = 'Αφαίρεση Όλων των Χρηστών';
 $s_add_user_title = 'Προσθήκη Χρήστη στην Εφαρμογή';

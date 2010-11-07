@@ -834,7 +834,6 @@ $s_project_document_updated = 'Projecte actualitzat';
 $s_project_user_added_msg = 'Usuari agregat al projecte';
 $s_project_removed_user_msg = 'Usuari eliminat del projecte';
 $s_remove_user_sure_msg = 'Està segur que desitja eliminar aquest usuari?';
-$s_remove_user_button = 'Elimina Usuari';
 $s_remove_all_users_sure_msg = 'Està segur que vol eliminar tots els usuaris d\'aquest projecte?';
 $s_remove_all_users_button = 'Elimina Tots els Usuaris';
 $s_add_user_title = 'Afegeix un usuari al projecte';

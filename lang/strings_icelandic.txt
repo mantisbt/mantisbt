@@ -659,7 +659,6 @@ $s_project_document_updated = 'Verkið uppfært';
 $s_project_user_added_msg = 'Notanda bætt við verkefnið';
 $s_project_removed_user_msg = 'Notandi fjarlægður frá verkefni';
 $s_remove_user_sure_msg = 'Ertu viss um að vilja fjarlægja þennan notenda?';
-$s_remove_user_button = 'Fjarlægja notenda';
 $s_remove_all_users_sure_msg = 'Ertu viss um að vilja fjarlægja alla notendur þessa verkefnis?';
 $s_remove_all_users_button = 'Fjarlægja alla notendur';
 $s_add_user_title = 'Bæti við notenda við verkefnið';

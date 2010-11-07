@@ -828,7 +828,6 @@ $s_project_document_updated = 'Lo projècte es estat modificat amb succès.';
 $s_project_user_added_msg = 'L\'utilizaire es estat apondut al projècte.';
 $s_project_removed_user_msg = 'L\'utilizaire es estat levat del projècte.';
 $s_remove_user_sure_msg = 'Sètz segur que volètz levar aqueste utilizaire del projècte ?';
-$s_remove_user_button = 'Levar un utilizaire';
 $s_remove_all_users_sure_msg = 'Sètz segur que volètz levar totes los utilizaires del projècte ?';
 $s_remove_all_users_button = 'Levar totes los utilizaires';
 $s_add_user_title = 'Apondre un utilizaire al projècte';

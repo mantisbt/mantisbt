@@ -833,7 +833,6 @@ $s_project_document_updated = 'Projekt sikeresen frissítve';
 $s_project_user_added_msg = 'Felhasználó sikeresen hozzáadva a projekthez';
 $s_project_removed_user_msg = 'Felhasználó sikeresen törölve a projektből';
 $s_remove_user_sure_msg = 'Valóban törölni akarja ezt a felhasználót?';
-$s_remove_user_button = 'Felhasználó törlése';
 $s_remove_all_users_sure_msg = 'Valóban törölni akarja ezen projekt összes felhasználóját?';
 $s_remove_all_users_button = 'Minden felhasználó törlése';
 $s_add_user_title = 'Felhasználó hozzáadása projekthez';

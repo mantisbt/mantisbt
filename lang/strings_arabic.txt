@@ -823,7 +823,6 @@ $s_project_document_updated = 'تحديث المشروع نجح.';
 $s_project_user_added_msg = 'أضاف المستخدم بنجاح إلى المشروع.';
 $s_project_removed_user_msg = 'أزال المستخدم بنجاح من المشروع.';
 $s_remove_user_sure_msg = 'هل أنت متأكد أنك تريد إزالة هذا المستخدم؟';
-$s_remove_user_button = 'إزالة المستخدم';
 $s_remove_all_users_sure_msg = 'هل أنت متأكد أنك تريد إزالة كل المستخدمين من هذا المشروع؟';
 $s_remove_all_users_button = 'إزالة كل المستخدمين';
 $s_add_user_title = 'إضافة مستخدم إلى المشروع';

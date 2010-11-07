@@ -840,7 +840,6 @@ $s_project_document_updated = 'Proyecto actualizado';
 $s_project_user_added_msg = 'Usuario agregado al proyecto';
 $s_project_removed_user_msg = 'Usuario eliminado del proyecto';
 $s_remove_user_sure_msg = '¿Está seguro que desea eliminar este usuario?';
-$s_remove_user_button = 'Eliminar usuario';
 $s_remove_all_users_sure_msg = '¿Está seguro que desea eliminar a todos los usuarios de este proyecto?';
 $s_remove_all_users_button = 'Eliminar todos los usuarios';
 $s_add_user_title = 'Agregar usuario al proyecto';

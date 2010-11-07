@@ -832,7 +832,6 @@ $s_project_document_updated = 'Проектът е обновен успешно
 $s_project_user_added_msg = 'Добавянето на новия потребител в проекта е успешно';
 $s_project_removed_user_msg = 'Премахването на потребителя от проекта е успешно';
 $s_remove_user_sure_msg = 'Премахване на потребителя?';
-$s_remove_user_button = 'Премахване на потребителя';
 $s_remove_all_users_sure_msg = 'Премахване на всички потребители от този проект?';
 $s_remove_all_users_button = 'Премахване на всички потребители';
 $s_add_user_title = 'Добавяне на потребител към проект';

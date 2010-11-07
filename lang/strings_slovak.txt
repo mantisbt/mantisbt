@@ -823,7 +823,6 @@ $s_project_document_updated = 'Projekt bol úspešne aktualizovný';
 $s_project_user_added_msg = 'Používateľ bol úspešne priradený k projektu';
 $s_project_removed_user_msg = 'Používateľ bol úspešne odobratý z projektu';
 $s_remove_user_sure_msg = 'Naozaj odobrať tohto používateľa?';
-$s_remove_user_button = 'Odstrániť Užívateľa';
 $s_remove_all_users_sure_msg = 'Naozaj si prajete odobrať všetkých používateľov tohto projektu?';
 $s_remove_all_users_button = 'Odstrániť Všetkých Užívateľov';
 $s_add_user_title = 'Pridať používateľa k projektu';

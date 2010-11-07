@@ -671,7 +671,6 @@ $s_project_document_updated = 'Projektas sėkmingai atnaujintas';
 $s_project_user_added_msg = 'Vartotojas sėkmingai įtrauktas į projektą';
 $s_project_removed_user_msg = 'Vartotojas sėkmingai pašalintas iš projekto';
 $s_remove_user_sure_msg = 'Ar tikrai norite pašalinti šį vartotoją?';
-$s_remove_user_button = 'Pašalinti vartotoją';
 $s_remove_all_users_sure_msg = 'Ar tikrai norite pašalinti visus šio projekto vartotojus?';
 $s_remove_all_users_button = 'Pašalinti visus vartotojus';
 $s_add_user_title = 'Vartotojo įtraukimas į projektą';

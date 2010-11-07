@@ -828,7 +828,6 @@ $s_project_document_updated = 'Matagumpay ang pagsasapanahon ng proyekto.';
 $s_project_user_added_msg = 'Matagumpay na naidagdag sa proyekto ang tagagamit.';
 $s_project_removed_user_msg = 'Matagumpay na natanggal mula sa proyekto ang tagagamit.';
 $s_remove_user_sure_msg = 'Nakatitiyak ka bang nais mong tanggalin ang tagagamit na ito?';
-$s_remove_user_button = 'Tanggalin ang Tagagamit';
 $s_remove_all_users_sure_msg = 'Nakatitiyak ka bang nais mong tanggalin mula sa proyektong ito ang lahat ng mga tagagamit?';
 $s_remove_all_users_button = 'Tanggalin ang Lahat ng mga Tagagamit';
 $s_add_user_title = 'Idagdag sa Proyekto ang Tagagamit';

@@ -830,7 +830,6 @@ $s_project_document_updated = 'Hizivaet-mat eo bet ar raktres.';
 $s_project_user_added_msg = 'Ouzhpennet eo bet an implijer d\'ar raktres.';
 $s_project_removed_user_msg = 'Lamet eo bet an implijer eus ar raktres.';
 $s_remove_user_sure_msg = 'Ha sur oc\'h hoc\'h eus c\'hoant da lemel an implijer-mañ ?';
-$s_remove_user_button = 'Lemel un implijer';
 $s_remove_all_users_sure_msg = 'Ha sur oc\'h hoc\'h eus c\'hoant da lemel holl implijerien ar raktres-mañ ?';
 $s_remove_all_users_button = 'Lemel an holl implijerien';
 $s_add_user_title = 'Ouzhpennañ un implijer d\'ar raktres';

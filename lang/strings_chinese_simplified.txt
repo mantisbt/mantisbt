@@ -806,7 +806,6 @@ $s_project_document_updated = '更新项目成功';
 $s_project_user_added_msg = '成功添加用户至项目';
 $s_project_removed_user_msg = '从项目删除用户成功';
 $s_remove_user_sure_msg = '确定要删除该用户吗？';
-$s_remove_user_button = '删除用户';
 $s_remove_all_users_sure_msg = '确定要删除该项目的所有用户吗？';
 $s_remove_all_users_button = '删除所有用户';
 $s_add_user_title = '添加用户至项目';

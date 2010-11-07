@@ -829,7 +829,6 @@ $s_project_document_updated = 'Projekt uuendatud';
 $s_project_user_added_msg = 'Kasutaja lisatud projektile';
 $s_project_removed_user_msg = 'Kasutaja eemaldatud projektist';
 $s_remove_user_sure_msg = 'Oled kindel, et soovid eemaldada selle kasutaja?';
-$s_remove_user_button = 'Eemalda kasutaja';
 $s_remove_all_users_sure_msg = 'Oled kindel, et soovid kõik projekti kasutajad eemaldada?';
 $s_remove_all_users_button = 'Eemalda kõik kasutajad';
 $s_add_user_title = 'Kasutaja lisamine projektile';
