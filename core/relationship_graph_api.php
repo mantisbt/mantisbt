@@ -48,6 +48,25 @@ require_once( 'relationship_api.php' );
  */
 require_once( 'graphviz_api.php' );
 
+/*
+ * Generate a pretty bug ID string that is safe to use in the DOT language
+ * defined at http://www.graphviz.org/doc/info/lang.html
+ * For now we allow formatted strings in these formats:
+ *  - Containing only a-z, A-Z, 0-9 and _ where the first character is NOT an
+ *    integer/digit.
+ *  - Containing only digits 0-9.
+ * The fallback is to use the raw bug ID without any pretty formatting applied.
+ * @param int $p_bug_id ID of the bug to pretty format
+ * @return string Pretty formatted bug ID
+ */
+function relgraph_bug_format_id( $p_bug_id ) {
+	$t_pretty_bug_id = bug_format_id( $p_bug_id );
+	if ( !preg_match( '/^(([a-zA-z_][0-9a-zA-Z_]*)|(\d+))$/', $t_pretty_bug_id ) ) {
+		$t_pretty_bug_id = $p_bug_id;
+	}
+	return $t_pretty_bug_id;
+}
+
 # Generate a relationship graph for the given issue.
 function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
 
@@ -118,7 +137,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
 	# We have already collected all the information we need to generate
 	# the graph. Now it is the matter to create a Digraph object and
 	# store the information there, along with graph formatting attributes.
-	$t_id_string = bug_format_id( $p_bug_id );
+	$t_id_string = relgraph_bug_format_id( $p_bug_id );
 	$t_graph_fontname = config_get( 'relationship_graph_fontname' );
 	$t_graph_fontsize = config_get( 'relationship_graph_fontsize' );
 	$t_graph_fontpath = get_font_path();
@@ -151,7 +170,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
 	# Add all issue nodes and edges to the graph.
 	ksort( $v_bug_list );
 	foreach( $v_bug_list as $t_id => $t_bug ) {
-		$t_id_string = bug_format_id( $t_id );
+		$t_id_string = relgraph_bug_format_id( $t_id );
 
 		if( $t_view_on_click ) {
 			$t_url = string_get_bug_view_url( $t_id );
@@ -175,7 +194,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
 					continue;
 				}
 
-				$t_related_id = bug_format_id( $t_dst );
+				$t_related_id = relgraph_bug_format_id( $t_dst );
 
 				global $g_relationships;
 				if( isset( $g_relationships[$t_relation] ) && isset( $g_relationships[$t_relation]['#edge_style'] ) ) {
@@ -239,7 +258,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_bug = null, $p_horizontal = 
 	# We have already collected all the information we need to generate
 	# the graph. Now it is the matter to create a Digraph object and
 	# store the information there, along with graph formatting attributes.
-	$t_id_string = bug_format_id( $p_bug_id );
+	$t_id_string = relgraph_bug_format_id( $p_bug_id );
 	$t_graph_fontname = config_get( 'relationship_graph_fontname' );
 	$t_graph_fontsize = config_get( 'relationship_graph_fontsize' );
 	$t_graph_fontpath = get_font_path();
@@ -278,7 +297,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_bug = null, $p_horizontal = 
 
 	# Add all issue nodes and edges to the graph.
 	foreach( $v_bug_list as $t_related_bug_id => $t_related_bug ) {
-		$t_id_string = bug_format_id( $t_related_bug_id );
+		$t_id_string = relgraph_bug_format_id( $t_related_bug_id );
 
 		if( $t_view_on_click ) {
 			$t_url = string_get_bug_view_url( $t_related_bug_id );
@@ -296,7 +315,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_bug = null, $p_horizontal = 
 				continue;
 			}
 
-			$t_parent_node = bug_format_id( $t_parent_id );
+			$t_parent_node = relgraph_bug_format_id( $t_parent_id );
 			$t_graph->add_edge( $t_parent_node, $t_id_string );
 		}
 	}
