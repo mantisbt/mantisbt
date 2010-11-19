@@ -120,9 +120,9 @@ function http_caching_headers( $p_allow_caching=false ) {
  */
 function http_content_headers() {
 	if ( !headers_sent() ) {
-		header( 'Content-Type: text/html; charset=utf-8' );
-		# For Internet Explorer 8 as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
-		# Don't let IE second guess our content-type!
+		header( 'Content-Type: text/html; charset=UTF-8' );
+		// Disallow Internet Explorer from attempting to second guess the Content-Type
+		// header as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
 		header( 'X-Content-Type-Options: nosniff' );
 	}
 }
