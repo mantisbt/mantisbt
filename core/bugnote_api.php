@@ -589,7 +589,7 @@ function bugnote_format_id( $p_bugnote_id ) {
  */
 function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
-	$c_to = strtotime( $p_to, SECONDS_PER_DAY - 1 ); // @23:59:59
+	$c_to = strtotime( $p_to ) + SECONDS_PER_DAY - 1;
 	$c_from = strtotime( $p_from );
 
 	$t_user_table = db_get_table( 'mantis_user_table' );
@@ -637,7 +637,7 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
-	$c_to = strtotime( $p_to ) + SECONDS_PER_DAY;
+	$c_to = strtotime( $p_to ) + SECONDS_PER_DAY - 1;
 	$c_from = strtotime( $p_from );
 
 	if ( $c_to === false || $c_from === false ) {
