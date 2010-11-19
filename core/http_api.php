@@ -120,7 +120,7 @@ function http_caching_headers( $p_allow_caching=false ) {
  */
 function http_content_headers() {
 	if ( !headers_sent() ) {
-		header( 'Content-Type: text/html; charset=UTF-8' );
+		header( 'Content-Type: application/xhtml+xml; charset=UTF-8' );
 		// Disallow Internet Explorer from attempting to second guess the Content-Type
 		// header as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
 		header( 'X-Content-Type-Options: nosniff' );
