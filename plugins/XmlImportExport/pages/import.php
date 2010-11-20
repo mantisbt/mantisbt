@@ -99,7 +99,7 @@ if( ALL_PROJECTS == $t_project_id ) {
 	<th class="category" width="25%"><?php echo lang_get( 'categories' );?></th>
 	<td>
 	<p><label for="keepcategory"><?php echo plugin_lang_get( 'keep_same_category' );?></label>
-	<input type="checkbox" checked=checked id="keepcategory" name="keepcategory" /></p>
+	<input type="checkbox" checked="checked" id="keepcategory" name="keepcategory" /></p>
 
 	<p><?php echo plugin_lang_get( 'fallback_category' );?>
 	<select name="defaultcategory">
