@@ -171,19 +171,44 @@ function check_selected( $p_var, $p_val = true ) {
 }
 
 /**
- * If $p_var and $p_val are equal to each other then we PRINT CHECKED
+ * If $p_var is not an array and is equal to $p_val then we PRINT CHECKED.
+ * If $p_var is an array, then if any member is equal to $p_val we PRINT CHECKED.
  * This is used when we want to know if a variable indicated a certain
- * element is checked
+ * option element is selected
  *
  * If the second parameter is not given, the first parameter is compared
- * to the boolean value true
+ *  to the boolean value true
  * @param mixed $p_var
  * @param mixed $p_val
  * @return null
  */
 function check_checked( $p_var, $p_val = true ) {
-	if( $p_var == $p_val ) {
-		echo ' checked="checked" ';
+	if( is_array( $p_var ) ) {
+		foreach( $p_var as $t_this_var ) {
+
+			# catch the case where one entry is 0 and the other is a string.
+			if( is_string( $t_this_var ) && is_string( $p_val ) ) {
+				if( $t_this_var === $p_val ) {
+					echo ' checked="checked" ';
+					return;
+				}
+			}
+			else if( $t_this_var == $p_val ) {
+				echo ' checked="checked" ';
+				return;
+			}
+		}
+	} else {
+		if( is_string( $p_var ) && is_string( $p_val ) ) {
+			if( $p_var === $p_val ) {
+				echo ' checked="checked" ';
+				return;
+			}
+		}
+		else if( $p_var == $p_val ) {
+			echo ' checked="checked" ';
+			return;
+		}
 	}
 }
 
