@@ -193,7 +193,7 @@ foreach ( $t_result as $t_tag_row ) {
 <?php if ( $t_can_edit ) { ?>
 
 <br />
-<a name="tagcreate">
+<a name="tagcreate" />
 
 <!-- Create Tag Form -->
 
