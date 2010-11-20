@@ -293,7 +293,7 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	</th>
 	<td>
 		<select name="timezone">
-			<?php print_timezone_option_list( $t_pref->timezone ?  $t_pref->timezone  : config_get_global( 'default_timezone' ) ) ?>
+<?php print_timezone_option_list( $t_pref->timezone ?  $t_pref->timezone  : config_get_global( 'default_timezone' ) ) ?>
 		</select>
 	</td>
 </tr>

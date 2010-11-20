@@ -1667,7 +1667,7 @@ document.getElementById( span ).style.display = displayType;
 # Print the option list for timezones
 function print_timezone_option_list( $p_timezone ) {
 	if ( !function_exists( 'timezone_identifiers_list' ) ) {
-		echo '<option value="', $p_timezone, '" selected="selected">', $p_timezone, '</option>';
+		echo "\t<option value=\"$p_timezone\" selected=\"selected\">$p_timezone</option>\n";
 		return;
 	}
 
@@ -1697,11 +1697,12 @@ function print_timezone_option_list( $p_timezone ) {
 	}
 
 	foreach( $t_locations as $t_continent => $t_locations ) {
-		echo '<optgroup label="'.$t_continent.'">';
+		echo "\t<optgroup label=\"$t_continent\">\n";
 		foreach ( $t_locations as $t_location ) {
-			echo '<option value="' . $t_location[1] . '"';
+			echo "\t\t<option value=\"" . $t_location[1] . '"';
 			check_selected( $p_timezone, $t_location[1] );
-			echo '>' . $t_location[0] . '</option>';
+			echo '>' . $t_location[0] . "</option>\n";
 		}
+		echo "\t</optgroup>\n";
 	}
 }
