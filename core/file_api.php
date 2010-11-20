@@ -690,7 +690,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 				}
 
 				if( !move_uploaded_file( $t_tmp_file, $t_disk_file_name ) ) {
-					trigger_error( FILE_MOVE_FAILED, ERROR );
+					trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
 				}
 
 				chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
