@@ -795,7 +795,7 @@ function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 
 		echo '<option value="' . $t_key . '"';
 		check_selected( $p_val, $t_key );
-		echo '>' . $t_elem2 . '</option>';
+		echo '>' . string_html_specialchars( $t_elem2 ) . '</option>';
 	}
 }
 
@@ -856,7 +856,7 @@ function print_status_option_list( $p_select_label, $p_current_value = 0, $p_all
 		foreach( $t_enum_list as $key => $val ) {
 			echo '<option value="' . $key . '"';
 			check_selected( $key, $p_current_value );
-			echo '>' . $val . '</option>';
+			echo '>' . string_html_specialchars( $val ) . '</option>';
 		}
 		echo '</select>';
 	} else if ( count( $t_enum_list ) == 1 ) {
@@ -886,7 +886,7 @@ function print_project_access_levels_option_list( $p_val, $p_project_id = null )
 		$t_access_level = get_enum_element( 'access_levels', $t_enum_value );
 		echo '<option value="' . $t_enum_value . '"';
 		check_selected( $p_val, $t_enum_value );
-		echo '>' . $t_access_level . '</option>';
+		echo '>' . string_html_specialchars( $t_access_level ) . '</option>';
 	}
 }
 
