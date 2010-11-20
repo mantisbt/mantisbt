@@ -54,8 +54,8 @@ set_time_limit( 60 * 5 );
 $g_show_all = gpc_get_bool( 'show_all', false );
 $g_show_errors = gpc_get_bool( 'show_errors', false );
 
-$t_show_all_mode_link = '<a href="index.php?show_all=' . ($g_show_all ? '0' : '1') . '&show_errors=' . ($g_show_errors ? '1' : '0') . '">' . ($g_show_all ? 'Hide passed tests' : 'Show passed tests') . '</a>';
-$t_show_errors_mode_link = '<a href="index.php?show_all=' . ($g_show_all ? '1' : '0') . '&show_errors=' . ($g_show_errors ? '0' : '1') . '">' . ($g_show_errors ? 'Hide verbose error messages' : 'Show verbose error messages') . '</a>';
+$t_show_all_mode_link = '<a href="index.php?show_all=' . ($g_show_all ? '0' : '1') . '&amp;show_errors=' . ($g_show_errors ? '1' : '0') . '">' . ($g_show_all ? 'Hide passed tests' : 'Show passed tests') . '</a>';
+$t_show_errors_mode_link = '<a href="index.php?show_all=' . ($g_show_all ? '1' : '0') . '&amp;show_errors=' . ($g_show_errors ? '0' : '1') . '">' . ($g_show_errors ? 'Hide verbose error messages' : 'Show verbose error messages') . '</a>';
 
 ?>
 <html>

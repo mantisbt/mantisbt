@@ -152,7 +152,7 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	relgraph_output_map( $t_graph, 'relationship_graph_map' );
 ?>
 		<div class="center relationship-graph">
-			<img src="bug_relationship_graph_img.php?bug_id=<?php echo $f_bug_id ?>&amp;graph=<?php echo $t_graph_type ?>&orientation=<?php echo $t_graph_orientation ?>"
+			<img src="bug_relationship_graph_img.php?bug_id=<?php echo $f_bug_id ?>&amp;graph=<?php echo $t_graph_type ?>&amp;orientation=<?php echo $t_graph_orientation ?>"
 				border="0" usemap="#relationship_graph_map" />
 		</div>
 	</td>

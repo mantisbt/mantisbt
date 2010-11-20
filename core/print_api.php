@@ -1327,7 +1327,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 		} else {
 			$t_delimiter = ( strpos( $p_page, "?" ) ? "&" : "?" ) ;
 			if( $p_temp_filter_id !== 0 ) {
-				array_push( $t_items, "<a href=\"$p_page${t_delimiter}filter=$p_temp_filter_id&page_number=$i\">$i</a>" );
+				array_push( $t_items, "<a href=\"$p_page${t_delimiter}filter=$p_temp_filter_id&amp;page_number=$i\">$i</a>" );
 			} else {
 				array_push( $t_items, "<a href=\"$p_page${t_delimiter}page_number=$i\">$i</a>" );
 			}

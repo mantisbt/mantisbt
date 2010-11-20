@@ -3034,7 +3034,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				}
 			}
 			$t_colspan_attr = ( $t_colspan > 1 ? 'colspan="' . $t_colspan . '" ' : '' );
-			$t_plugin_filter_links[$t_assigned_row][] = '<td ' . $t_colspan_attr . 'class="small-caption" valign="top"> <a href="' . $t_filters_url . $t_field_name .
+			$t_plugin_filter_links[$t_assigned_row][] = '<td ' . $t_colspan_attr . 'class="small-caption" valign="top"> <a href="' . string_attribute( $t_filters_url . $t_field_name ) .
 				'" id="' . $t_field_name . '_filter">' . string_display_line( $t_filter_object->title ) . '</a> </td>';
 			$t_values = '<td ' . $t_colspan_attr . 'class="small-caption" valign="top" id="' . $t_field_name . '_filter_target"> ';
 
@@ -3470,7 +3470,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	}
 	?>
 	<div class="filter-links"><?php
-		$f_switch_view_link = (  ON == config_get( 'dhtml_filters' ) ? 'view_all_set.php?type=6&view_type=' : 'view_filters_page.php?view_type=' );
+		$f_switch_view_link = (  ON == config_get( 'dhtml_filters' ) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=' );
 		$t_view_filters = config_get( 'view_filters' );
 		if(( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
 			if( 'advanced' == $t_view_type ) {
