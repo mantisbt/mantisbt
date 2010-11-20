@@ -120,7 +120,7 @@ if ( is_uploaded_file( $v_tmp_name ) ) {
 				file_delete_local( $t_disk_file_name );
 			}
 			if ( !move_uploaded_file( $v_tmp_name, $t_disk_file_name ) ) {
-				trigger_error( FILE_MOVE_FAILED, ERROR );
+				trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
 			}
 			chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
