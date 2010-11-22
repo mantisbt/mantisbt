@@ -338,7 +338,7 @@ function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
 function print_tag_option_list( $p_bug_id = 0 ) {
 	$t_rows = tag_get_candidates_for_bug( $p_bug_id );
 
-	echo '<option value="0">', lang_get( 'tag_existing' ), '</option>';
+	echo '<option value="0">', string_html_specialchars( lang_get( 'tag_existing' ) ), '</option>';
 	foreach ( $t_rows as $row ) {
 		$t_string = $row['name'];
 		if ( !empty( $row['description'] ) ) {
