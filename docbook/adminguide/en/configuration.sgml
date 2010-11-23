@@ -2280,11 +2280,12 @@
             <varlistentry>
                 <term>$g_cookie_prefix</term>
                 <listitem>
-                    <para>This should be set to a unique identifier which does not
-                        include spaces. Again, this should be unique per MantisBT
-                        installation, specially if the $g_cookie_path is not restricting
-                        the cookies scope to the actual MantisBT directory.
-                    </para>
+                     <para>This should be set to a unique identifier which does not
+                         include spaces or periods. Again, this should be unique per
+                         MantisBT installation, especially if $g_cookie_path is not
+                         restricting the cookies scope to the actual MantisBT
+                         directory.
+                     </para>
                 </listitem>
             </varlistentry>
         </variablelist>
