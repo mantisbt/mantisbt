@@ -2868,7 +2868,7 @@ $g_cookie_version = 'v8';
 
 /**
  * --- cookie prefix ---------------
- * set this to a unique identifier.  No spaces.
+ * set this to a unique identifier.  No spaces or periods.
  * @global string $g_cookie_prefix
  */
 $g_cookie_prefix = 'MANTIS';
