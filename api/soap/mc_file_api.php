@@ -175,9 +175,10 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 		$t_project_id = $row['project_id'];
 	} else if ( $p_type == 'bug' ) {
 		$t_bug_id = $row['bug_id'];
+		$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
 	}
 
-	$t_diskfile = $row['diskfile'];
+	$t_diskfile = file_normalize_attachment_path( $row['diskfile'], $t_project_id );
 	$t_content = $row['content'];
 
 	# Check access rights
