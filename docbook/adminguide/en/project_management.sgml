@@ -207,7 +207,27 @@ http://www.example.com/mantisbt/project_page.php?project_id=1
     <section id="admin.project.timetracking">
         <title>Time Tracking</title>
 
-        <para></para>
+        <para>
+					This is currently a work in progress. To follow the work have a look on the wiki page <ulink url="http://www.mantisbt.org/wiki/doku.php/mantisbt:issue:4428">Time Tracking (Issue 4428)</ulink>
+				</para>
+
+        <para>
+					To activate the Time Tracking feature you have to set the configuration option "time_tracking_enabled" to ON. To activating the Time Tracking you can :
+					<itemizedlist>
+						<listitem><para>
+
+							Static solution : change the variable '$g_time_tracking_enabled' in the configuration file 'config_defaults_inc.php', this will change the configuration for all the MantisBT instance ; 
+						</para></listitem>
+						<listitem><para>
+							Dynamic and "project by project" solution : Use the administration page "Manage Configuration" and set the variable 'time_tracking_enabled' to '1' for which user and which project of you choice.
+						</para></listitem>
+					</itemizedlist>
+				</para>
+		
+				<para>
+					All Time Tracking configuration options are described in the configuration section off this guide.
+				</para>
+				
     </section>
 
     <section id="admin.project.graphs">
