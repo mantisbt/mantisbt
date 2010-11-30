@@ -47,6 +47,7 @@
  * @author Samuel Tardieu, sam@rfc1149.net
  * @author Sherbrooke
  * @author Verdy p
+ * @author Vincent
  */
 
 $s_actiongroup_menu_move = 'Déplacer';
@@ -297,7 +298,7 @@ $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Impossible de mettre à jour la zone h
 $s_login_error = 'Votre compte est peut être désactivé ou alors le code utilisateur et le mot de passe que vous avez saisi sont incorrects.';
 $s_login_cookies_disabled = 'Votre navigateur ne sait pas gérer les témoins ou refuse de les gérer.';
 $s_go_back = 'Retour';
-$s_proceed = 'Procéder';
+$s_proceed = 'Poursuivre';
 $s_switch = 'Afficher';
 $s_logged_in_as = 'Connecté en tant que ';
 $s_prefix_for_deleted_users = 'utilisateur';
@@ -748,7 +749,7 @@ $s_add_and_edit_version_button = 'Ajouter et modifier la version';
 $s_edit_link = 'Modifier';
 $s_actions = 'Actions';
 $s_version = 'Version';
-$s_timestamp = 'Marqueur de temps';
+$s_timestamp = 'Horodatage';
 $s_update = 'Mettre à jour';
 $s_subprojects = 'Sous projets';
 $s_add_subproject = 'Ajouter en tant que sous projet';
@@ -1172,7 +1173,7 @@ $s_tag_attach_long = 'Associer balises';
 $s_tag_attach_failed = 'Échec de l\'association de la balise.';
 $s_tag_detach = 'Dissocier « %1$s »';
 $s_tag_separate_by = '(Séparer par \'%1$s\')';
-$s_tag_invalid_name = 'Nom de balise non valide.';
+$s_tag_invalid_name = 'Nom de balise invalide.';
 $s_tag_create_denied = 'La création de la balise est refusée.';
 $s_tag_filter_default = 'Bogues associés (%1$s)';
 $s_tag_history_attached = 'Balise associée';

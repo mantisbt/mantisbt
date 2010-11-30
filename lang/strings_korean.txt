@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Wtspout
  * @author aporie@kornet.net
  * @author hardkoder@gmail.com - (마지막 수정일:2004/09/22)
  * @author kwon37xi@gmail.com - (마지막 수정일: 2006/12/29)
@@ -85,6 +86,12 @@ $s_delete_bugnote_sure_msg = '이 이슈노트를 삭제하겠습니까?';
 $s_bug_relationships = '관계';
 $s_empty_password_sure_msg = '비밀번호가 설정되지 않았습니다. 이대로 사용하시겠습니까?';
 $s_empty_password_button = '비밀번호 없이 사용';
+$s_reauthenticate_title = '인증';
+$s_no_category = '(분류 없음)';
+$s_global_categories = '전역 분류';
+$s_inherit = '분류 상속';
+$s_inherit_global = '전역 분류 상속';
+$s_inherit_parent = '상위 카테고리 상속';
 $s_duplicate_of = '다음 이슈와 동일함';
 $s_has_duplicate = '다음 이슈와 동일한 것으로 지정됨';
 $s_related_to = '다음 이슈와 관련됨';
@@ -218,6 +225,10 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '이 주소는 이미 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '요청이 한계 범위를 초과 하였습니다. 관리자에게 문의하시기 바랍니다.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '해당 동작은 서브프로젝트 계층구조에서 루프를 생성합니다.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '시스템 관리자만이 접근권한을 변경할 수 있습니다.';
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = '해당 태그 이름이 올바르지 않습니다.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = '플러그인이 MantisBT에 등록 되지 않았습니다.';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = '플러그인이 이미 설치되어 있습니다.';
+$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = '플러그인 페이지를 찾을 수 없습니다.';
 $s_login_error = '계정이 사용 정지 됐거나, 사용자이름/비밀번호가 올바르지 않습니다.';
 $s_login_cookies_disabled = '쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
 $s_go_back = '뒤로';
