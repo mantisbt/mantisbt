@@ -210,6 +210,13 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 			}
 		}
 
+		// monitoring
+		if( $v_type == BUG_MONITOR || $v_type == BUG_UNMONITOR ) {
+			if( !access_has_global_level( config_get( 'show_monitor_list_threshold' ) ) ) {
+				continue;
+			}
+		}
+
 		$raw_history[$j]['date'] = $v_date_modified;
 		$raw_history[$j]['userid'] = $v_user_id;
 
