@@ -172,11 +172,14 @@ if ( $t_existing_bug->status !== $t_updated_bug->status ) {
 		            $t_existing_bug->reporter_id === auth_get_current_user_id() &&
 		            config_get( 'allow_reporter_reopen' ) ) {
 			$t_can_bypass_status_access_thresholds = true;
-			$t_updated_bug->resolution = config_get( 'bug_reopen_resolution' );
 		}
 		if ( !$t_can_bypass_status_access_thresholds ) {
 			trigger_error( ERROR_ACCESS_DENIED, ERROR );
 		}
+	}
+	if( $t_reopen_issue ) {
+		# for everyone allowed to reopen an issue, set the reopen resolution
+		$t_updated_bug->resolution = config_get( 'bug_reopen_resolution' );
 	}
 }
 
