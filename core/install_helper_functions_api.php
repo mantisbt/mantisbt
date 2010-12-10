@@ -178,13 +178,18 @@ function install_date_migrate( $p_data) {
 			array_push( $t_pairs, "$var=" . db_param() ) ;
 		}
 		$t_new_column = implode( ',', $t_pairs );
+		$query = "SELECT $t_id_column, $t_old_column FROM $t_table";
 	} else {
 		$t_old_column = $p_data[2];
 		$t_new_column = $p_data[3] . "=" . db_param();
 		$t_date_array = false;
+
+		# The check for timestamp being = 1 is to make sure the field wasn't upgraded
+		# already in a previous run - see bug #12601 for more details.
+		$t_new_column_name = $p_data[3];
+		$query = "SELECT $t_id_column, $t_old_column FROM $t_table WHERE $t_new_column_name = 1";
 	}
 
-	$query = "SELECT $t_id_column, $t_old_column FROM $t_table";
 	$t_result = db_query_bound( $query );
 
 	while( $row = db_fetch_array( $t_result ) ) {
@@ -198,7 +203,6 @@ function install_date_migrate( $p_data) {
 				if ($t_new_value[$i] < 100000 ) {
 					$t_new_value[$i] = 1;
 				}
-
 			}
 			$t_values = $t_new_value;
 			$t_values[] = $t_id;
