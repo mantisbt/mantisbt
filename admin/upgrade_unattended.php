@@ -89,7 +89,7 @@ $f_db_exists = gpc_get_bool( 'db_exists', false );
 
 # install the tables
 $c_db_type = string_attribute( $f_db_type );
-if ( !file_exists( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'adodb' . DIRECTORY_SEPARATOR . 'drivers' . DIRECTORY_SEPARATOR . 'adodb-' . $c_db_type . '.php' ) ) {
+if ( !file_exists( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'adodb' . DIRECTORY_SEPARATOR . 'drivers' . DIRECTORY_SEPARATOR . 'adodb-' . $c_db_type . '.inc.php' ) ) {
 	echo "Invalid db type '$c_db_type'.";
 	exit;
 }
