@@ -31,6 +31,10 @@ INSTALLATION
  * Installation is complete -- you may need to copy the default configuration
    to mantisbt/config_inc.php if your web server does not have write access
 
+ * Remove the admin/ directory from within the MantisBT installation path. The
+   scripts within this directory should not be accessible on a live MantisBT
+   site or on any installation that is accessible via the Internet.
+
 UPGRADING
 
  * Backup your existing installation and database -- really!
@@ -50,5 +54,8 @@ UPGRADING
 
  * Click install/upgrade
 
- * Upgrading is complete
+ * Remove the admin/ directory from within the MantisBT installation path. The
+   scripts within this directory should not be accessible on a live MantisBT
+   site or on any installation that is accessible via the Internet.
 
+ * Upgrading is complete
