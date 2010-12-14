@@ -31,6 +31,10 @@ INSTALLATION
  * Point your browser to http://path/to/mantisbt/admin/check.php to ensure that
    your webserver is compatible with MantisBT and configured correctly
 
+ * Remove the admin/ directory from within the MantisBT installation path. The
+   scripts within this directory should not be accessible on a live MantisBT
+   site or on any installation that is accessible via the Internet.
+
 UPGRADING
 
  * Backup your existing installation and database -- really!
@@ -49,6 +53,10 @@ UPGRADING
 
  * Point your browser to http://path/to/_NEW_mantisbt/admin/check.php to ensure that
    your webserver is compatible with MantisBT and configured correctly
+
+ * Remove the admin/ directory from within the MantisBT installation path. The
+   scripts within this directory should not be accessible on a live MantisBT
+   site or on any installation that is accessible via the Internet.
 
  * To restore your original MantisBT URL operation it is best at this point
    to delete the old MantisBT directory and rename the directory you
