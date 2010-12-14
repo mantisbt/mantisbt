@@ -92,9 +92,15 @@ $f_db_password = gpc_get( 'db_password', config_get( 'db_password', '' ) );
 $f_db_exists = gpc_get_bool( 'db_exists', false );
 
 # install the tables
-$GLOBALS['g_db_type'] = $f_db_type; # database_api references this
+$c_db_type = string_attribute( $f_db_type );
+if ( !file_exists( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'adodb' . DIRECTORY_SEPARATOR . 'drivers' . DIRECTORY_SEPARATOR . 'adodb-' . $c_db_type . '.php' ) ) {
+	echo "Invalid db type '$c_db_type'.";
+	exit;
+}
+
+$GLOBALS['g_db_type'] = $c_db_type; # database_api references this
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'schema.php' );
-$g_db = ADONewConnection( $f_db_type );
+$g_db = ADONewConnection( $c_db_type );
 
 echo "\nPost 1.0 schema changes\n";
 echo "Connecting to database... ";
