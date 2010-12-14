@@ -32,6 +32,16 @@
 
 	$g_failed = false;
 
+	/* This script is probably meant to be executed from PHP CLI and hence should
+	 * not be interpreted as text/html. However saying that, we do call gpc_
+	 * functions that only make sense in PHP CGI mode. Given this mismatch we'll
+	 * just assume for now that this script is meant to be used from PHP CGI and
+	 * the output is meant to be text/plain. We also need to prevent Internet
+	 * Explorer from ignoring our MIME type and using it's own MIME sniffing.
+	 */
+	header( 'Content-Type: text/plain;' );
+	header( 'X-Content-Type-Options: nosniff' );
+
 	# -------
 	# print test result
 	function print_test_result( $p_result, $p_hard_fail=true, $p_message='' ) {
@@ -99,6 +109,12 @@
 	$f_db_exists = gpc_get_bool( 'db_exists', false );
 
 	# install the tables
+	if ( !preg_match( '/^[a-zA-Z0-9_]+$/', $f_db_type ) ||
+	     !file_exists( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'adodb' . DIRECTORY_SEPARATOR . 'drivers' . DIRECTORY_SEPARATOR . 'adodb-' . $f_db_type . '.inc.php' ) ) {
+		echo 'Invalid db type ' . htmlspecialchars( $f_db_type ) . '.';
+		exit;
+	}
+
 	$GLOBALS['g_db_type'] = $f_db_type; # database_api references this
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'schema.php' );
 	$g_db = ADONewConnection( $f_db_type );
