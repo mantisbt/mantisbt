@@ -186,11 +186,12 @@
 
 		# Check if the admin directory is available and is readable.
 		$t_admin_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
-		if ( is_dir( $t_admin_dir ) && is_executable( $t_admin_dir ) ) {
+		if ( is_dir( $t_admin_dir ) ) {
 			echo '<div class="warning" align="center">', "\n";
 			echo '<p><font color="red">', lang_get( 'warning_admin_directory_present' ), '</font></p>', "\n";
 			echo '</div>', "\n";
-
+		}
+		if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) && is_executable( $t_admin_dir ) && @file_exists( "$t_admin_dir/." ) ) {
 			# since admin directory and db_upgrade lists are available check for missing db upgrades
 			# Check for db upgrade for versions < 1.0.0 using old upgrader
 			$t_db_version = config_get( 'database_version' , 0 );
