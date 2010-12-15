@@ -29,6 +29,8 @@ $g_skip_lang_load = true;
  */
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
+access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
+
 if( function_exists( 'xdebug_disable' ) ) {
 	xdebug_disable();
 }
@@ -47,8 +49,6 @@ if (!checkfile( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . 
 
 unset( $g_skip_lang_load ) ;
 lang_push( 'english' );
-
-access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
 set_time_limit( 0 );
 
