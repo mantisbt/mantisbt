@@ -1,5 +1,29 @@
 MantisBT Release Notes
 
+1.2.4 Security Release
+-------------------------------------------------
+
+MantisBT 1.2.4 is a security update for the stable 1.2.x branch. All
+installations that are currently running any 1.2.x version are advised to
+upgrade to this release.
+
+Gjoko Krstic of Zero Science Lab reported multiple vulnerabilities in the
+admin/upgrade_unattended.php script. Issue #12607 provides more detail on the
+vulnerabilities discovered. We thank Gjoko for his detailed assistance with
+testing, patching and answering questions. Please note that the /admin/
+directory should be removed from all MantisBT installations after the
+installation or upgrade has been completed. This is particularly true for
+MantisBT installations accessible over the Internet.
+
+Also included with 1.2.4 are some bug fixes relating to fonts in the
+MantisGraph plugin, SOAP API, CSV export, custom field values, relationship
+graphs, fields on the manage user page, built-in time tracking and the
+allow_reporter_close feature. This release includes updated translations for
+many languages and improved installation documentation in doc/INSTALL.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
 1.2.3 Security Release
 -------------------------------------------------
 
@@ -113,15 +137,16 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
+	1.2.4      http://www.mantisbt.org/bugs/changelog_page.php?version_id=112
 	1.2.3      http://www.mantisbt.org/bugs/changelog_page.php?version_id=111
 	1.2.2      http://www.mantisbt.org/bugs/changelog_page.php?version_id=110
 	1.2.1      http://www.mantisbt.org/bugs/changelog_page.php?version_id=109
 	1.2.0      http://www.mantisbt.org/bugs/changelog_page.php?version_id=108
-    1.2.0rc2   http://www.mantisbt.org/bugs/changelog_page.php?version_id=106
-    1.2.0rc1   http://www.mantisbt.org/bugs/changelog_page.php?version_id=98
-    1.2.0a3    http://www.mantisbt.org/bugs/changelog_page.php?version_id=104
-    1.2.0a2    http://www.mantisbt.org/bugs/changelog_page.php?version_id=96
-    1.2.0a1    http://www.mantisbt.org/bugs/changelog_page.php?version_id=89
+	1.2.0rc2   http://www.mantisbt.org/bugs/changelog_page.php?version_id=106
+	1.2.0rc1   http://www.mantisbt.org/bugs/changelog_page.php?version_id=98
+	1.2.0a3    http://www.mantisbt.org/bugs/changelog_page.php?version_id=104
+	1.2.0a2    http://www.mantisbt.org/bugs/changelog_page.php?version_id=96
+	1.2.0a1    http://www.mantisbt.org/bugs/changelog_page.php?version_id=89
 
 [2] MantisForge is now the preferred code collaboration site for MantisBT,
     including free hosting of MantisBT-related Git repositories for development
