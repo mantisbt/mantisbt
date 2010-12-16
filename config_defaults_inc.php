@@ -637,6 +637,7 @@
 		'turkish',
 		'ukrainian',
 		'urdu',
+		'vietnamese',
 		'volapuk',
 	);
 
@@ -693,6 +694,7 @@
 		'tl' => 'tagalog',
 		'tr' => 'turkish',
 		'uk' => 'ukrainian',
+		'vi' => 'vietnamese',
 		'vo' => 'volapuk',
 	);
 
