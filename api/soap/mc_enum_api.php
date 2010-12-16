@@ -217,7 +217,7 @@ function mci_explode_to_objectref( $p_enumeration_name ) {
 	
 	$t_config_var_name = $p_enumeration_name . '_enum_string';
 	$t_config_var_value = config_get( $t_config_var_name );
-	$t_translated_values = lang_get( $t_config_var_name );
+	$t_translated_values = lang_get( $t_config_var_name, mci_get_user_lang( auth_get_current_user_id() ) );
 
 	$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 	
