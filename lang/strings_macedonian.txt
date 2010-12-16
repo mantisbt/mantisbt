@@ -28,6 +28,7 @@
  * @author Bjankuloski06
  */
 
+$s_directionality = 'ltr';
 $s_actiongroup_menu_move = 'Премести';
 $s_actiongroup_menu_copy = 'Копирај';
 $s_actiongroup_menu_assign = 'Назначи';
@@ -609,6 +610,7 @@ $s_never_logged_in_title = 'Никогаш ненајавени';
 $s_prune_accounts = 'Отстрани сметки';
 $s_hide_inactive = 'Сокриј неактивни';
 $s_manage_accounts_title = 'Раководи со сметки';
+$s_p = 'з';
 $s_date_created = 'Создадена на';
 $s_last_visit = 'Последна посета';
 $s_edit_user_link = 'Уреди корисник';
@@ -914,6 +916,7 @@ $s_sticky = 'Прикажи залепени проблеми';
 $s_sort = 'Подреди по';
 $s_issue_id = 'Проблем #';
 $s_recently_visited = 'Неодамна посетени';
+$s_priority_abbreviation = 'П';
 $s_note_user_id = 'Белешка од';
 $s_none = 'нема';
 $s_current = 'тековен';
@@ -1017,6 +1020,7 @@ $s_bytes = 'бајти';
 $s_attachment_missing = 'Недостасува прилог';
 $s_attachment_count = 'Број на прилози';
 $s_view_attachments_for_issue = 'Прикажи %1$d прилог(зи) за задачата #%2$d';
+$s_phpmailer_language = 'mk';
 $s_sponsors = '%1$d спонзор(и)';
 $s_sponsorship_added = 'Спонзорството е додадено';
 $s_sponsorship_updated = 'Спонзорството е подновено';

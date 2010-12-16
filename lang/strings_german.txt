@@ -34,6 +34,7 @@
  * @author Hermann-Josef Beckers, hjb-rheine@t-online.de
  * @author Imre
  * @author KarlReichert
+ * @author Kghbln
  * @author Martin Fuchs, martin-fuchs@gmx.net
  * @author Matthias Bauer, mantis-de@moeffju.de
  * @author Melancholie
