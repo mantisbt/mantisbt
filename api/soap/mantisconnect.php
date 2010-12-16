@@ -1269,8 +1269,7 @@ $l_oServer->register( 'mc_project_get_attachments',
 	'Get the attachments that belong to the specified project.'
 );
 
-## mc_project_get_custom_fields
-### mc_project_get_unreleased_versions
+### mc_project_get_custom_fields
 $l_oServer->register( 'mc_project_get_custom_fields',
 	array(
 		'username'		=>	'xsd:string',
@@ -1334,6 +1333,22 @@ $l_oServer->register( 'mc_project_attachment_delete',
 	false, false, false,
 	'Delete the project attachment with the specified id.'
 );
+
+### mc_project_get_subprojects
+$l_oServer->register( 'mc_project_get_all_subprojects',
+    array(
+        'username'    =>  'xsd:string',
+        'password'    =>  'xsd:string',
+        'project_id'  =>  'xsd:integer'
+    ),
+    array(
+        'return'      =>  'tns:StringArray'
+    ),
+    $t_namespace,
+    false, false, false,
+    'Get the subprojects ID of a specific project.'
+);
+
 
 ###
 ###  PUBLIC METHODS (defined in mc_filter_api.php)

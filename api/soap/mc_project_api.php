@@ -173,7 +173,7 @@ function mc_project_delete_category ($p_username, $p_password, $p_project_id, $p
  * @return bool returns true or false depending on the success of the update action
  */
 
-function mc_project_rename_category_by_name ($p_username, $p_password, $p_project_id, $p_category_name, $p_category_name_new, $p_assigned_to) {
+function mc_project_rename_category_by_name( $p_username, $p_password, $p_project_id, $p_category_name, $p_category_name_new, $p_assigned_to ) {
         $t_user_id = mci_check_login( $p_username, $p_password );
 
         if ( null === $p_assigned_to ) {
@@ -637,6 +637,24 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	}
 
 	return $t_result;
+}
+
+function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id ) {
+	$t_user_id = mci_check_login( $p_username, $p_password );
+
+	if( $t_user_id === false ) {
+		return new soap_fault( 'Client', '', 'Access Denied' );
+	}
+
+	if( !project_exists( $p_project_id ) ) {
+		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+	}
+
+	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id );
+	}
+
+	return user_get_all_accessible_subprojects( $t_user_id, $p_project_id );
 }
 
 /**
