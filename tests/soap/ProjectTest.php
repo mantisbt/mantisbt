@@ -28,111 +28,111 @@ require_once 'SoapBase.php';
  */
 class ProjectTest extends SoapBase {
 
-       private $projectIdToDelete = array();
+    private $projectIdToDelete = array();
 
-       /**
-        * A test case that tests the following:
-        * 1. Create a project.
-        * 2. Rename the project.
-        */        
-       public function testAddRenameDeleteProject() {
-               $projectName = $this->getOriginalNameProject();
-               $projectNewName = $this->getNewNameProject();
+    /**
+     * A test case that tests the following:
+     * 1. Create a project.
+     * 2. Rename the project.
+     */
+    public function testAddRenameDeleteProject() {
+        $projectName = $this->getOriginalNameProject();
+        $projectNewName = $this->getNewNameProject();
 
-               $projectDataStructure = $this->newProjectAsArray($projectName);
+        $projectDataStructure = $this->newProjectAsArray($projectName);
 
-               $projectId = $this->client->mc_project_add(
-                       $this->userName,
-                       $this->password,
-                       $projectDataStructure);
+        $projectId = $this->client->mc_project_add(
+        $this->userName,
+        $this->password,
+        $projectDataStructure);
 
-               $this->projectIdToDelete[] = $projectId;
+        $this->projectIdToDelete[] = $projectId;
 
-               $projectsArray = $this->client->mc_projects_get_user_accessible(
-                       $this->userName,
-                       $this->password);
+        $projectsArray = $this->client->mc_projects_get_user_accessible(
+        $this->userName,
+        $this->password);
 
-               foreach ( $projectsArray as $project ) {
-                       if ( $project->id == $projectId ) {
-                               $this->assertEquals($projectName, $project->name);
-                       }
-               }
+        foreach ( $projectsArray as $project ) {
+            if ( $project->id == $projectId ) {
+                $this->assertEquals($projectName, $project->name);
+            }
+        }
 
-               $projectDataStructure['name'] = $projectNewName;
+        $projectDataStructure['name'] = $projectNewName;
 
-               $return_bool = $this->client->mc_project_update(
-                       $this->userName,
-                       $this->password,
-                       $projectId,
-                       $projectDataStructure);
+        $return_bool = $this->client->mc_project_update(
+        $this->userName,
+        $this->password,
+        $projectId,
+        $projectDataStructure);
 
-               $projectsArray = $this->client->mc_projects_get_user_accessible(
-                       $this->userName,
-                       $this->password);
+        $projectsArray = $this->client->mc_projects_get_user_accessible(
+        $this->userName,
+        $this->password);
 
-               foreach ( $projectsArray as $project ) {
-                       if ( $project->id == $projectId ) {
-                               $this->assertEquals($projectNewName, $project->name);
-                       }
-               }
-       }
-       
-       /**
-        * A test case which does the following
-        * 
-        * 1. Create a project
-        * 2. Retrieve the project id by name
-        * 
-        */
-       public function testGetIdFromName() {
+        foreach ( $projectsArray as $project ) {
+            if ( $project->id == $projectId ) {
+                $this->assertEquals($projectNewName, $project->name);
+            }
+        }
+    }
+     
+    /**
+     * A test case which does the following
+     *
+     * 1. Create a project
+     * 2. Retrieve the project id by name
+     *
+     */
+    public function testGetIdFromName() {
 
-       		   $projectName = 'TestProjectForIdFromName';
-       	
-               $projectDataStructure = $this->newProjectAsArray($projectName);
+        $projectName = 'TestProjectForIdFromName';
 
-               $projectId = $this->client->mc_project_add(
-                       $this->userName,
-                       $this->password,
-                       $projectDataStructure);
+        $projectDataStructure = $this->newProjectAsArray($projectName);
 
-               $this->projectIdToDelete[] = $projectId;
-               
-               $projectIdFromName = $this->client->mc_project_get_id_from_name(
-                       $this->userName,
-                       $this->password,
-                       $projectName);
-                       
-                $this->assertEquals($projectIdFromName, $projectId);
-       }
-       
-       private function newProjectAsArray($projectName) {
-       	
-       	       $projectDataStructure = array();
-               $projectDataStructure['name'] = $projectName;
-               $projectDataStructure['status'] = "development";
-               $projectDataStructure['view_state'] = 10;
-               
-               return $projectDataStructure;
-       }
+        $projectId = $this->client->mc_project_add(
+        $this->userName,
+        $this->password,
+        $projectDataStructure);
 
-       protected function tearDown() {
+        $this->projectIdToDelete[] = $projectId;
+         
+        $projectIdFromName = $this->client->mc_project_get_id_from_name(
+        $this->userName,
+        $this->password,
+        $projectName);
+         
+        $this->assertEquals($projectIdFromName, $projectId);
+    }
+     
+    private function newProjectAsArray($projectName) {
 
-               parent::tearDown();
+        $projectDataStructure = array();
+        $projectDataStructure['name'] = $projectName;
+        $projectDataStructure['status'] = "development";
+        $projectDataStructure['view_state'] = 10;
+         
+        return $projectDataStructure;
+    }
 
-               foreach ( $this->projectIdToDelete as $projectId )  {
-                       $this->client->mc_project_delete(
-                               $this->userName,
-                               $this->password,
-                               $projectId);
-               }
-       }
+    protected function tearDown() {
 
-       private function getOriginalNameProject() {
-               return 'my_project_name';
-       }
+        parent::tearDown();
 
-       private function getNewNameProject() {
-               return 'my_new_project_name';
-       }
+        foreach ( $this->projectIdToDelete as $projectId )  {
+            $this->client->mc_project_delete(
+            $this->userName,
+            $this->password,
+            $projectId);
+        }
+    }
+
+    private function getOriginalNameProject() {
+        return 'my_project_name';
+    }
+
+    private function getNewNameProject() {
+        return 'my_new_project_name';
+    }
 
 }
