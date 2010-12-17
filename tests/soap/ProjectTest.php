@@ -114,6 +114,29 @@ class ProjectTest extends SoapBase {
          
         return $projectDataStructure;
     }
+    
+    public function testGetUsersForProject() {
+       
+        $this->doTestGetUsersForProject( $this->getProjectId() );
+    }
+    
+    private function doTestGetUsersForProject( $projectId ) {
+        
+        $users = $this->client->mc_project_get_users( $this->userName, $this->password, $projectId, -1 );
+        
+        $this->assertGreaterThan(0, count($users), "Expected at least one user");
+        
+        foreach ( $users as $user ) {
+            $this->assertTrue( !empty( $user->id) );
+            $this->assertTrue( !empty( $user->email) );
+            $this->assertTrue( !empty( $user->name) );
+        }
+    }
+    
+    public function testGetUsersForAllProjects() {
+       
+        $this->doTestGetUsersForProject(0 /* ALL_PROJECTS */);
+    }
 
     protected function tearDown() {
 
