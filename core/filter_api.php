@@ -1931,7 +1931,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 								array_push( $t_filter_array, db_helper_like( "$t_table_name.text" ) );
 								break;
 							default:
-								array_push( $t_filter_array, "$t_table_name.value = '" . db_prepare_string( $t_filter_member ) . "'" );
+								$t_where_params[] = $t_filter_member;
+								array_push( $t_filter_array, "$t_table_name.value = " . db_param() );
 						}
 					}
 					$t_custom_where_clause .= '(' . implode( ' OR ', $t_filter_array );
