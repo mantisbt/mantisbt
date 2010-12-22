@@ -924,7 +924,7 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 				# check to be sure this field wasn't already added to the query.
 				if( !in_array( $t_cf_select, $p_query_clauses['select'] ) ) {
 					$p_query_clauses['select'][] = $t_cf_select;
-					$p_query_clauses['join'][] = "LEFT JOIN $t_custom_field_string_table $t_cf_table_alias ON $t_bug_table.id  = $t_cf_table_alias.bug_id AND $t_cf_table_alias.field_id = $t_custom_field_id";
+					$p_query_clauses['join'][] = "LEFT JOIN $t_custom_field_string_table $t_cf_table_alias ON $t_bug_table.id = $t_cf_table_alias.bug_id AND $t_cf_table_alias.field_id = $t_custom_field_id";
 				}
 
 				$p_query_clauses['order'][] = "$c_cf_alias $c_dir";
@@ -1857,7 +1857,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				# Each custom field will result in a exponential growth like Number_of_Issues^Number_of_Custom_Fields
 				# and only after this process ends (if it is able to) the result query will be filtered
 				# by the WHERE clause and by the DISTINCT clause
-				$t_cf_join_clause = "LEFT JOIN $t_custom_field_string_table $t_table_name ON $t_table_name.bug_id = $t_bug_table.id AND $t_table_name.field_id = $t_cfid ";
+				$t_cf_join_clause = "LEFT JOIN $t_custom_field_string_table $t_table_name ON $t_bug_table.id = $t_table_name.bug_id AND $t_table_name.field_id = $t_cfid";
 
 				if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE ) {
 					switch( $t_filter['custom_fields'][$t_cfid][0] ) {
