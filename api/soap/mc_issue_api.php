@@ -962,8 +962,9 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
 		history_log_event_special( $p_issue_id, BUG_ADD_RELATIONSHIP, $t_rel_type['id'], $t_dest_issue_id );
 		history_log_event_special( $t_dest_issue_id, BUG_ADD_RELATIONSHIP, relationship_get_complementary_type( $t_rel_type['id'] ), $p_issue_id );
 
-		# update bug last updated (just for the src bug)
+		# update bug last updated for both bugs
 		bug_update_date( $p_issue_id );
+		bug_update_date( $p_test_issue_id );
 
 		# send email notification to the users addressed by both the bugs
 		email_relationship_added( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
