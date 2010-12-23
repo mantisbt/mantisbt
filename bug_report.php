@@ -216,6 +216,9 @@ if ( $f_master_bug_id > 0 ) {
 
 		# Send the email notification
 		email_relationship_added( $f_master_bug_id, $t_bug_id, relationship_get_complementary_type( $f_rel_type ) );
+		
+		# update relationship target bug last updated
+		bug_update_date( $t_bug_id );
 	}
 }
 
