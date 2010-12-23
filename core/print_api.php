@@ -683,42 +683,18 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 	}
 }
 
-# Now that categories are identified by numerical ID, we need an old-style name
-# based option list to keep existing filter functionality.
+/**
+ *	Now that categories are identified by numerical ID, we need an old-style name
+ *	based option list to keep existing filter functionality.
+ *	@param string $p_category_name The selected category
+ *	@param mixed $p_project_id A specific project or null
+ */
 function print_category_filter_option_list( $p_category_name = '', $p_project_id = null ) {
-	$t_category_table = db_get_table( 'mantis_category_table' );
-	$t_project_table = db_get_table( 'mantis_project_table' );
+	$t_cat_arr = category_get_filter_list( $p_project_id );
 
-	if( null === $p_project_id ) {
-		$c_project_id = helper_get_current_project();
-	} else {
-		$c_project_id = db_prepare_int( $p_project_id );
-	}
-
-	$t_project_ids = project_hierarchy_inheritance( $c_project_id );
-
-	$t_subproject_ids = array();
-	foreach( $t_project_ids as $t_project_id ) {
-		$t_subproject_ids = array_merge( $t_subproject_ids, current_user_get_all_accessible_subprojects( $t_project_id ) );
-	}
-
-	$t_project_ids = array_merge( $t_project_ids, $t_subproject_ids );
-	$t_project_where = ' project_id IN ( ' . implode( ', ', $t_project_ids ) . ' ) ';
-
-	# grab all categories in the project category table
-	$cat_arr = array();
-	$query = "SELECT DISTINCT name FROM $t_category_table
-				WHERE $t_project_where
-				ORDER BY name";
-	$result = db_query( $query );
-
-	while( $row = db_fetch_array( $result ) ) {
-		$cat_arr[] = $row['name'];
-	}
-	sort( $cat_arr );
-
-	foreach( $cat_arr as $t_name ) {
-		$t_name = string_attribute( $t_name );
+	natcasesort( $t_cat_arr );
+	foreach( $t_cat_arr as $t_cat ) {
+		$t_name = string_attribute( $t_cat );
 		echo '<option value="' . $t_name . '"';
 		check_selected( string_attribute( $p_category_name ), $t_name );
 		echo '>' . $t_name . '</option>';
