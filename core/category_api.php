@@ -400,6 +400,49 @@ function category_cache_array_rows_by_project( $p_project_id_array ) {
 }
 
 /**
+ *	Get a distinct array of categories accessible to the current user for
+ *	the specified projects.  If no project is specified, use the current project.
+ *	If the current project is ALL_PROJECTS get all categories for all accessible projects.
+ *	For all cases, get global categories and subproject categories according to configured inheritance settings.
+ *	@param mixed $p_project_id A specific project or null
+ *	@return array A unique array of category names
+ */
+function category_get_filter_list( $p_project_id = null ) {
+	if( null === $p_project_id ) {
+		$t_project_id = helper_get_current_project();
+	} else {
+		$t_project_id = $p_project_id;
+	}
+
+	if( $t_project_id == ALL_PROJECTS ) {
+		$t_project_ids = current_user_get_accessible_projects();
+	} else {
+		$t_project_ids = array( $t_project_id );
+	}
+
+	$t_subproject_ids = array();
+	foreach( $t_project_ids as $t_project_id ) {
+		$t_subproject_ids = array_merge( $t_subproject_ids, current_user_get_all_accessible_subprojects( $t_project_id ) );
+	}
+
+	$t_project_ids = array_merge( $t_project_ids, $t_subproject_ids );
+
+	$t_categories = array();
+	foreach( $t_project_ids AS $t_id ) {
+		$t_categories = array_merge( $t_categories, category_get_all_rows( $t_id ) );
+	}
+
+	$t_unique = array();
+	foreach( $t_categories AS $t_category ) {
+		if( !in_array( $t_category['name'], $t_unique ) ) {
+			$t_unique[] = $t_category['name'];
+		}
+	}
+
+	return $t_unique;
+}
+
+/**
  * Return all categories for the specified project id.
  * Obeys project hierarchies and such.
  * @param int $p_project_id Project id
