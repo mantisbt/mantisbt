@@ -124,11 +124,6 @@
 					include 'my_view_inc.php';
 					echo '</td></tr>';
 				}
-
-				# for odd number of box display one empty table cell in second column
-				if ( ( $t_counter == $t_number_of_boxes ) && 1 == $t_counter%2 ) {
-					echo '<td valign="top" width="50%"></td></tr>';
-				}
 			}
 			else if ( OFF == $t_boxes_position ) {
 				# start new table row and column for first box
@@ -149,13 +144,18 @@
 				if ( $t_counter == ceil ($t_number_of_boxes/2) ) {
 					echo '</td>';
 				}
-
-				# close the table row after all of the boxes
-				if ( $t_counter == $t_number_of_boxes ) {
-					echo '</td></tr>';
-				}
 			}
 		}
+	}
+
+
+	# Close the box groups depending on the layout mode and whether an empty cell
+	# is required to pad the number of cells in the last row to the full width of
+	# the table.
+	if ( ON == $t_boxes_position && $t_counter == $t_number_of_boxes && 1 == $t_counter%2 ) {
+		echo '<td valign="top" width="50%"></td></tr>';
+	} else if ( OFF == $t_boxes_position && $t_counter == $t_number_of_boxes ) {
+		echo '</td></tr>';
 	}
 
 	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
