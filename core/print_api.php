@@ -1670,7 +1670,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 		}
 
 		if ( $t_attachment['can_download'] ) {
-			$t_href_start = "<a href=\"${t_attachment['download_url']}\">";
+			$t_href_start = '<a href="' . string_attribute( $t_attachment['download_url'] ) . '">';
 			$t_href_end = '</a>';
 
 			$t_href_clicket = " [<a href=\"file_download.php?file_id={$t_attachment['id']}&amp;type=bug\" target=\"_blank\">^</a>]";
@@ -1686,7 +1686,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 		} else {
 			echo $t_href_start;
 			print_file_icon( $t_file_display_name );
-			echo $t_href_end . '&#160;' . $t_href_start . $t_file_display_name . $t_href_end . $t_href_clicket . ' (' . $t_filesize . ' ' . lang_get( 'bytes' ) . ') ' . '<span class=\"italic\">' . $t_date_added . '</span>';
+			echo $t_href_end . '&#160;' . $t_href_start . $t_file_display_name . $t_href_end . $t_href_clicket . ' (' . $t_filesize . ' ' . lang_get( 'bytes' ) . ') ' . '<span class="italic">' . $t_date_added . '</span>';
 
 			if ( $t_attachment['can_delete'] ) {
 				echo '&#160;[';
