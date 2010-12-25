@@ -127,40 +127,30 @@ function file_bug_has_attachments( $p_bug_id ) {
 }
 
 # Check if the current user can view attachments for the specified bug.
-function file_can_view_bug_attachments( $p_bug_id ) {
-	$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
+function file_can_view_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
+	$t_uploaded_by_me = auth_get_current_user_id() === $p_uploader_user_id;
 	$t_can_view = access_has_bug_level( config_get( 'view_attachments_threshold' ), $p_bug_id );
-
-	/** @todo Fix this to be readable */
-	$t_can_view = $t_can_view || ( $t_reported_by_me && config_get( 'allow_view_own_attachments' ) );
-
+	$t_can_view = $t_can_view || ( $t_uploaded_by_me && config_get( 'allow_view_own_attachments' ) );
 	return $t_can_view;
 }
 
 # Check if the current user can download attachments for the specified bug.
-function file_can_download_bug_attachments( $p_bug_id ) {
-	$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
+function file_can_download_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
+	$t_uploaded_by_me = auth_get_current_user_id() === $p_uploader_user_id;
 	$t_can_download = access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
-
-	/** @todo Fix this to be readable */
-	$t_can_download = $t_can_download || ( $t_reported_by_me && config_get( 'allow_download_own_attachments' ) );
-
+	$t_can_download = $t_can_download || ( $t_uploaded_by_me && config_get( 'allow_download_own_attachments' ) );
 	return $t_can_download;
 }
 
 # Check if the current user can delete attachments from the specified bug.
-function file_can_delete_bug_attachments( $p_bug_id ) {
+function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
 	if( bug_is_readonly( $p_bug_id ) ) {
 		return false;
 	}
-
-	$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
-	$t_can_download = access_has_bug_level( config_get( 'delete_attachments_threshold' ), $p_bug_id );
-
-	/** @todo Fix this to be readable */
-	$t_can_download = $t_can_download || ( $t_reported_by_me && config_get( 'allow_delete_own_attachments' ) );
-
-	return $t_can_download;
+	$t_uploaded_by_me = auth_get_current_user_id() === $p_uploader_user_id;
+	$t_can_delete = access_has_bug_level( config_get( 'delete_attachments_threshold' ), $p_bug_id );
+	$t_can_delete = $t_can_delete || ( $t_uploaded_by_me && config_get( 'allow_delete_own_attachments' ) );
+	return $t_can_delete;
 }
 
 # Get icon corresponding to the specified filename
@@ -282,14 +272,16 @@ function file_get_visible_attachments( $p_bug_id ) {
 
 	$t_attachments = array();
 
-	$t_can_download = file_can_download_bug_attachments( $p_bug_id );
-	$t_can_delete = file_can_delete_bug_attachments( $p_bug_id );
 	$t_preview_text_ext = config_get( 'preview_text_extensions' );
 	$t_preview_image_ext = config_get( 'preview_image_extensions' );
 
 	$image_previewed = false;
 	for( $i = 0;$i < $t_attachments_count;$i++ ) {
 		$t_row = $t_attachment_rows[$i];
+
+		if ( !file_can_view_bug_attachments( $p_bug_id, (int)$t_row['user_id'] ) ) {
+			continue;
+		}
 
 		$t_id = $t_row['id'];
 		$t_filename = $t_row['filename'];
@@ -302,10 +294,12 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_attachment['display_name'] = file_get_display_name( $t_filename );
 		$t_attachment['size'] = $t_filesize;
 		$t_attachment['date_added'] = $t_date_added;
-		$t_attachment['can_download'] = $t_can_download;
 		$t_attachment['diskfile'] = $t_diskfile;
 
-		if( $t_can_download ) {
+		$t_attachment['can_download'] = file_can_download_bug_attachments( $p_bug_id, (int)$t_row['user_id'] );
+		$t_attachment['can_delete'] = file_can_delete_bug_attachments( $p_bug_id, (int)$t_row['user_id'] );
+
+		if( $t_attachment['can_download'] ) {
 			$t_attachment['download_url'] = "file_download.php?file_id=$t_id&type=bug";
 		}
 
@@ -315,7 +309,6 @@ function file_get_visible_attachments( $p_bug_id ) {
 
 		$t_attachment['exists'] = config_get( 'file_upload_method' ) != DISK || file_exists( $t_diskfile );
 		$t_attachment['icon'] = file_get_icon_url( $t_attachment['display_name'] );
-		$t_attachment['can_delete'] = $t_can_delete;
 
 		$t_attachment['preview'] = false;
 		$t_attachment['type'] = '';
@@ -323,7 +316,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_ext = strtolower( file_get_extension( $t_attachment['display_name'] ) );
 		$t_attachment['alt'] = $t_ext;
 
-		if ( $t_attachment['exists'] && $t_can_download && $t_filesize != 0 && $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) {
+		if ( $t_attachment['exists'] && $t_attachment['can_download'] && $t_filesize != 0 && $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) {
 			if ( in_array( $t_ext, $t_preview_text_ext, true ) ) {
 				$t_attachment['preview'] = true;
 				$t_attachment['type'] = 'text';

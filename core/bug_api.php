@@ -1368,7 +1368,7 @@ function bug_get_bugnote_stats( $p_bug_id ) {
 /**
  * Get array of attachments associated with the specified bug id.  The array will be
  * sorted in terms of date added (ASC).  The array will include the following fields:
- * id, title, diskfile, filename, filesize, file_type, date_added.
+ * id, title, diskfile, filename, filesize, file_type, date_added, user_id.
  * @param int p_bug_id integer representing bug id
  * @return array array of results or null
  * @access public
@@ -1376,15 +1376,11 @@ function bug_get_bugnote_stats( $p_bug_id ) {
  * @uses file_api.php
  */
 function bug_get_attachments( $p_bug_id ) {
-	if( !file_can_view_bug_attachments( $p_bug_id ) ) {
-		return;
-	}
-
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
 	$t_bug_file_table = db_get_table( 'bug_file' );
 
-	$query = "SELECT id, title, diskfile, filename, filesize, file_type, date_added
+	$query = "SELECT id, title, diskfile, filename, filesize, file_type, date_added, user_id
 		                FROM $t_bug_file_table
 		                WHERE bug_id=" . db_param() . "
 		                ORDER BY date_added";

@@ -233,6 +233,9 @@ function mci_issue_get_attachments( $p_issue_id ) {
 
 	$t_result = array();
 	foreach( $t_attachment_rows as $t_attachment_row ) {
+		if ( !file_can_view_bug_attachments( $p_issue_id, (int)$t_attachment_row['user_id'] ) ) {
+			continue;
+		}
 		$t_attachment = array();
 		$t_attachment['id'] = $t_attachment_row['id'];
 		$t_attachment['filename'] = $t_attachment_row['filename'];

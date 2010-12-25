@@ -207,7 +207,7 @@ $tpl_show_projection = in_array( 'projection', $t_fields );
 $tpl_projection = $tpl_show_projection ? string_display_line( get_enum_element( 'projection', $tpl_bug->projection ) ) : '';
 $tpl_show_eta = in_array( 'eta', $t_fields );
 $tpl_eta = $tpl_show_eta ? string_display_line( get_enum_element( 'eta', $tpl_bug->eta ) ) : '';
-$tpl_show_attachments = in_array( 'attachments', $t_fields ) && ( ( $tpl_bug->reporter_id == auth_get_current_user_id() ) || access_has_bug_level( config_get( 'view_attachments_threshold' ), $f_bug_id ) );
+$tpl_show_attachments = in_array( 'attachments', $t_fields );
 $tpl_can_attach_tag = $tpl_show_tags && !$tpl_force_readonly && access_has_bug_level( config_get( 'tag_attach_threshold' ), $f_bug_id );
 $tpl_show_category = in_array( 'category_id', $t_fields );
 $tpl_category = $tpl_show_category ? string_display_line( category_full_name( $tpl_bug->category_id ) ) : '';
