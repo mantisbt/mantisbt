@@ -521,3 +521,6 @@
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'print_bugnote_inc.php' ) ;
 
 	last_visited_issue( $f_bug_id );
+
+	html_body_end();
+	html_end();
