@@ -350,7 +350,7 @@ function html_css() {
 	}
 
 	# fix for NS 4.x css
-	echo "\t", '<script type="text/javascript" language="JavaScript"><!--', "\n";
+	echo "\t", '<script type="text/javascript"><!--', "\n";
 	echo "\t\t", 'if(document.layers) {document.write("<style>td{padding:0px;}<\/style>")}', "\n";
 	echo "\t", '// --></script>', "\n";
 }
@@ -397,7 +397,7 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 function html_head_javascript() {
 	if( ON == config_get( 'use_javascript' ) ) {
 		html_javascript_link( 'common.js' );
-		echo '<script language="text/javascript">var loading_lang = "' . lang_get( 'loading' ) . '";</script>';
+		echo '<script type="text/javascript">var loading_lang = "' . lang_get( 'loading' ) . '";</script>';
 		html_javascript_link( 'ajax.js' );
 
 		global $g_enable_projax;
