@@ -128,7 +128,7 @@
 							$v3_note_attr = utf8_substr( $v3_note_attr, 1, utf8_strlen( $v3_note_attr ) - 2 );
 							$t_to = array();
 							foreach ( explode( '|', $v3_note_attr ) as $t_recipient ) {
-								$t_to[] = user_get_name( $t_recipient );
+								$t_to[] = string_display_line( user_get_name( $t_recipient ) );
 							}
 							echo implode( ', ', $t_to ) . '</div><br />';
 						default:
