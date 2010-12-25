@@ -290,3 +290,31 @@ select.tainted { background-color: #ffffff; color: red; }
 .stored-queries select { font-size: .9em; }
 #error-msg { clear: both; }
 .error-msg { color: red; }
+
+.bug-attachments {
+	margin: 0;
+	padding: 0;
+}
+
+.bug-attachments > ul {
+	list-style: none;
+	margin: 0.5em;
+	padding: 0;
+}
+
+.bug-attachments > ul > li {
+	margin: 0.5em 0;
+	padding: 0;
+}
+
+.bug-attachments > ul > li > div {
+	margin: 0;
+	padding: 0;
+}
+
+.bug-attachment-preview-text, .bug-attachment-preview-image {
+	border-top: 1px dotted black;
+	border-bottom: 1px dotted black;
+	margin: 1em;
+	padding: 1em;
+}
