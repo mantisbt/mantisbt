@@ -438,7 +438,9 @@ echo "($v_start - $v_end / $t_bug_count)";
 
 	# Check for attachments
 	$t_attachment_count = 0;
-	if(( file_can_view_bug_attachments( $t_bug->id ) ) ) {
+	# TODO: factor in the allow_view_own_attachments configuration option
+	# instead of just using a global check.
+	if(( file_can_view_bug_attachments( $t_bug->id, null ) ) ) {
 		$t_attachment_count = file_bug_attachment_count( $t_bug->id );
 	}
 
