@@ -58,7 +58,6 @@
 
 	header( 'Content-Type: application/vnd.ms-excel; charset=UTF-8' );
 	header( 'Pragma: public' );
-	header( 'Content-Type: application/vnd.ms-excel' );
 	header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_export_title ) ) . '.xml"' ) ;
 
 	echo excel_get_header( $t_export_title );
