@@ -43,7 +43,7 @@ $g_failed = false;
  * the output is meant to be text/plain. We also need to prevent Internet
  * Explorer from ignoring our MIME type and using it's own MIME sniffing.
  */
-header( 'Content-Type: text/plain;' );
+header( 'Content-Type: text/plain' );
 header( 'X-Content-Type-Options: nosniff' );
 
 /**
