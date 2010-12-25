@@ -235,13 +235,6 @@ if ( isset( $_SERVER['SERVER_SOFTWARE'] ) ) {
 $g_session_handler = 'php';
 
 /**
- * Session key name. Should be unique between multiple installations to prevent
- * conflicts.
- * @global string $g_session_key
- */
-$g_session_key = 'MantisBT';
-
-/**
  * Session save path.  If false, uses default value as set by session handler.
  * @global bool $g_session_save_path
  */
