@@ -1407,17 +1407,6 @@ function print_documentation_link( $p_a_name = '' ) {
 	# echo "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
 }
 
-# print the hr
-function print_hr( $p_hr_size = null, $p_hr_width = null ) {
-	if( null === $p_hr_size ) {
-		$p_hr_size = config_get( 'hr_size' );
-	}
-	if( null === $p_hr_width ) {
-		$p_hr_width = config_get( 'hr_width' );
-	}
-	echo "<hr size=\"$p_hr_size\" width=\"$p_hr_width%\" />";
-}
-
 # prints the signup link
 function print_signup_link() {
 	if ( ( ON == config_get_global( 'allow_signup' ) ) &&

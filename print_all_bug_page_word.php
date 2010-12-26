@@ -190,7 +190,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 </tr>
 <tr>
 	<td class="print-spacer" colspan="6">
-		<hr size="1" width="100%" />
+		<hr />
 	</td>
 </tr>
 <tr class="print-category">
@@ -235,7 +235,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 </tr>
 <tr>
 	<td class="print-spacer" colspan="6">
-		<hr size="1" width="100%" />
+		<hr />
 	</td>
 </tr>
 <tr class="print">
@@ -400,7 +400,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 ?>
 <tr>
 	<td class="print-spacer" colspan="6">
-		<hr size="1" width="100%" />
+		<hr />
 	</td>
 </tr>
 <tr class="print">
@@ -517,7 +517,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 	?>
 <tr>
 	<td class="print-spacer" colspan="2">
-		<hr size="1" width="100%" />
+		<hr />
 	</td>
 </tr>
 <tr>

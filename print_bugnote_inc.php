@@ -116,7 +116,7 @@ require_api( 'user_api.php' );
 ?>
 <tr>
 	<td class="print-spacer" colspan="2">
-		<hr size="1" />
+		<hr />
 	</td>
 </tr>
 <tr>

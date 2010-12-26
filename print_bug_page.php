@@ -195,7 +195,7 @@ echo '<tr>';
 echo '<td class="form-title" colspan="6">', lang_get( 'bug_view_title' ), '</td>';
 echo '</tr>';
 
-echo '<tr><td class="print-spacer" colspan="6"><hr size="1" /></td></tr>';
+echo '<tr><td class="print-spacer" colspan="6"><hr /></td></tr>';
 
 if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_state ||
 	 $tpl_show_date_submitted || $tpl_show_last_updated ) {
@@ -217,7 +217,7 @@ if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_s
 	echo '<td class="print">', $tpl_last_updated, '</td>';
 	echo '</tr>';
 
-	echo '<tr><td class="print-spacer" colspan="6"><hr size="1" /></td></tr>';
+	echo '<tr><td class="print-spacer" colspan="6"><hr /></td></tr>';
 }
 
 #
@@ -461,7 +461,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	echo '</tr>';
 }       // foreach
 
-echo '<tr><td class="print-spacer" colspan="6"><hr size="1" /></td></tr>';
+echo '<tr><td class="print-spacer" colspan="6"><hr /></td></tr>';
 
 if ( $tpl_show_summary ) {
 	echo '<tr class="print">';
@@ -538,7 +538,7 @@ if ( $tpl_show_attachments ) {
 	echo '</td></tr>';
 }
 
-echo '<tr><td class="print-spacer" colspan="6"><hr size="1" /></td></tr>';
+echo '<tr><td class="print-spacer" colspan="6"><hr /></td></tr>';
 
 # ISSUE HISTORY
 echo '<tr><th class="form-title">', lang_get( 'bug_history' ), '</th></tr>';
