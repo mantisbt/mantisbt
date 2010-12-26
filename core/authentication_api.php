@@ -692,7 +692,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 <?php
 		echo lang_get( 'reauthenticate_message' );
 	if( $t_error != false ) {
-		echo '<br/><font color="red">', lang_get( 'login_error' ), '</font>';
+		echo '<br /><span class="error-msg">', lang_get( 'login_error' ), '</span>';
 	}
 	?>
 </p>

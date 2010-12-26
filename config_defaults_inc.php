@@ -1706,16 +1706,16 @@ $g_html_make_links = ON;
 
 /**
  * These are the valid html tags for multi-line fields (e.g. description)
- * do NOT include href or img tags here
- * do NOT include tags that have parameters (eg. <font face="arial">)
+ * do NOT include a or img tags here
+ * do NOT include tags that require attributes
  * @global string $g_html_valid_tags
  */
 $g_html_valid_tags = 'p, li, ul, ol, br, pre, i, b, u, em';
 
 /**
  * These are the valid html tags for single line fields (e.g. issue summary).
- * do NOT include href or img tags here
- * do NOT include tags that have parameters (eg. <font face="arial">)
+ * do NOT include a or img tags here
+ * do NOT include tags that require attributes
  * @global string $g_html_valid_tags_single_line
  */
 $g_html_valid_tags_single_line = 'i, b, u, em';

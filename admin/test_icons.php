@@ -38,7 +38,7 @@ foreach( $g_file_type_icons as $t_ext => $t_filename ) {
 	if( file_exists( $t_file_path ) ) {
 		echo 'OK';
 	} else {
-		echo '<font color="red">NOT FOUND</font>';
+		echo '<span class="error-msg">NOT FOUND</span>';
 	}
 
 	echo '<br />';

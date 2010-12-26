@@ -98,7 +98,7 @@ echo '<br /><div align="center">';
 
 # Only echo error message if error variable is set
 if ( $f_error ) {
-	echo '<font color="red">' . lang_get( 'login_error' ) . '</font>';
+	echo '<span class="error-msg">' . lang_get( 'login_error' ) . '</span>';
 }
 if ( $f_cookie_error ) {
 	echo lang_get( 'login_cookies_disabled' ) . '<br />';
@@ -214,7 +214,7 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 	if ( $t_admin_user_id !== false ) {
 		if ( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
 			echo '<div class="warning" align="center">', "\n";
-			echo "\t", '<p><font color="red">', lang_get( 'warning_default_administrator_account_present' ), '</font></p>', "\n";
+			echo "\t", '<p class="error-msg">', lang_get( 'warning_default_administrator_account_present' ), '</p>', "\n";
 			echo '</div>', "\n";
 		}
 	}
@@ -223,7 +223,7 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 	$t_admin_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
 	if ( is_dir( $t_admin_dir ) ) {
 		echo '<div class="warning" align="center">', "\n";
-		echo '<p><font color="red">', lang_get( 'warning_admin_directory_present' ), '</font></p>', "\n";
+		echo '<p class="error-msg">', lang_get( 'warning_admin_directory_present' ), '</p>', "\n";
 		echo '</div>', "\n";
 	}
 	if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) && is_executable( $t_admin_dir ) && @file_exists( "$t_admin_dir/." ) ) {
@@ -247,12 +247,12 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 				# old upgrade tables exist.
 				# assume user is upgrading from <1.0 and therefore needs to update to 1.x before upgrading to 1.2
 				echo '<div class="warning" align="center">';
-				echo '<p><font color="red">', lang_get( 'error_database_version_out_of_date_1' ), '</font></p>';
+				echo '<p class="error-msg">', lang_get( 'error_database_version_out_of_date_1' ), '</p>';
 				echo '</div>';
 			} else {
 				# old upgrade tables do not exist, yet config database_version is 0
 				echo '<div class="warning" align="center">';
-				echo '<p><font color="red">', lang_get( 'error_database_no_schema_version' ), '</font></p>';
+				echo '<p class="error-msg">', lang_get( 'error_database_no_schema_version' ), '</p>';
 				echo '</div>';
 			}
 		}
@@ -266,11 +266,11 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 
 			if ( $t_db_version < $t_upgrades_reqd ) {
 				echo '<div class="warning" align="center">';
-				echo '<p><font color="red">', lang_get( 'error_database_version_out_of_date_2' ), '</font></p>';
+				echo '<p class="error-msg">', lang_get( 'error_database_version_out_of_date_2' ), '</p>';
 				echo '</div>';
 			} else {
 				echo '<div class="warning" align="center">';
-				echo '<p><font color="red">', lang_get( 'error_code_version_out_of_date' ), '</font></p>';
+				echo '<p class="error-msg">', lang_get( 'error_code_version_out_of_date' ), '</p>';
 				echo '</div>';
 			}
 		}

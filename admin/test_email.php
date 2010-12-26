@@ -41,7 +41,7 @@ html_page_top();
 		<p>You can test the ability for MantisBT to send email notifications with this form.  Just click "Send Mail".  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings (see PHPMailer related settings in your config_inc.php, if they don't exist, copy from config_defaults_inc.php).  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a> if you are using the mail() PHPMailer sending mode.</p>
 		<?php
 		if( $f_mail_test ) {
-			echo '<b><font color="#ff0000">Testing Mail</font></b> - ';
+			echo '<strong>Testing Mail</strong> - ';
 
 			# @@@ thraxisp - workaround to ensure a language is set without authenticating
 			#  will disappear when this is properly localized

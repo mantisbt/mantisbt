@@ -829,7 +829,7 @@ if( 5 == $t_install_state ) {
 		<?php
 			if( !$t_config_exists ) {
 		echo 'Creating Configuration File (config_inc.php)<br />';
-		echo '<font color="red">(if this file is not created, create it manually with the contents below)</font>';
+		echo '<span class="error-msg">(if this file is not created, create it manually with the contents below)</span>';
 	} else {
 		echo 'Updating Configuration File (config_inc.php)<br />';
 	}

@@ -211,9 +211,9 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
 		$t_email = user_get_email( $p_user_id );
 		print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
 	} else {
-		echo '<font STYLE="text-decoration: line-through">';
+		echo '<span style="text-decoration: line-through">';
 		echo $t_username;
-		echo '</font>';
+		echo '</span>';
 	}
 }
 

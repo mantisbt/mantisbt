@@ -356,7 +356,7 @@ function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 }
 
 function print_error( $p_string ) {
-	echo "<font color='red'>ERROR: ", $p_string, '</font><br />';
+	echo '<p class="error-msg">ERROR: ', $p_string, '</p>';
 }
 
 html_page_bottom();
