@@ -41,6 +41,7 @@ require_once( 'check_api.php' );
 
 require_api( 'gpc_api.php' );
 require_api( 'html_api.php' );
+require_api( 'http_api.php' );
 
 # Initialise a special error handler for use with check.php so that errors are
 # not treated as being fatal. Instead, integrate error handling inline with the
@@ -57,9 +58,13 @@ $g_show_errors = gpc_get_bool( 'show_errors', false );
 $t_show_all_mode_link = '<a href="index.php?show_all=' . ($g_show_all ? '0' : '1') . '&amp;show_errors=' . ($g_show_errors ? '1' : '0') . '">' . ($g_show_all ? 'Hide passed tests' : 'Show passed tests') . '</a>';
 $t_show_errors_mode_link = '<a href="index.php?show_all=' . ($g_show_all ? '1' : '0') . '&amp;show_errors=' . ($g_show_errors ? '0' : '1') . '">' . ($g_show_errors ? 'Hide verbose error messages' : 'Show verbose error messages') . '</a>';
 
+http_content_headers();
 ?>
-<html>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" >
 <head>
+<meta http-equiv="Content-type" content="application/xhtml+xml; charset=UTF-8" />
 <title>MantisBT Administration - Check Installation</title>
 <link rel="stylesheet" href="../admin.css" type="text/css" />
 </head>
