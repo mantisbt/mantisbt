@@ -767,7 +767,7 @@ if( 3 == $t_install_state ) {
 				} else {
 					$all_sql = '';
 					foreach ( $sqlarray as $single_sql )
-						$all_sql .= $single_sql . '<br>';
+						$all_sql .= $single_sql . '<br />';
 					print_test_result( BAD, true, $all_sql  . $g_db->ErrorMsg() );
 				}
 				echo '</tr>';

@@ -352,11 +352,11 @@ function checktoken( $file, $base = false ) {
 }
 
 function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-	print_error( "error handler thrown: " . $p_type . '<br>' . $p_error . '<br>' . $p_file . '<br>' . $p_line . '<br>' . $p_context );
+	print_error( "error handler thrown: " . $p_type . '<br />' . $p_error . '<br />' . $p_file . '<br />' . $p_line . '<br />' . $p_context );
 }
 
 function print_error( $p_string ) {
-	echo "<font color='red'>ERROR: ", $p_string, '</font><br>';
+	echo "<font color='red'>ERROR: ", $p_string, '</font><br />';
 }
 
 html_page_bottom();
