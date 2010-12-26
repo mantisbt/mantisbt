@@ -156,3 +156,4 @@ config_obsolete( 'show_queries_threshold', 'show_log_threshold' );
 config_obsolete( 'show_queries_list' );
 config_obsolete( 'administrator_email', 'webmaster_email' );
 config_obsolete( 'session_key' );
+config_obsolete( 'dhtml_filters', 'use_dynamic_filters' );

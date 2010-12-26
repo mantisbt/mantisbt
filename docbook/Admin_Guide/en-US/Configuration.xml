@@ -2095,13 +2095,16 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_dhtml_filters = OFF;</term>
+                <term>$g_use_dynamic_filters = ON;</term>
                 <listitem>
-                    <para>Controls the use of DHTML filters that will display the
-                        filter in view page using DHTML and javascript. Default is OFF.
-                        This requires $g_use_javascript to ne set to ON. This may not work
-                        in all browsers as it requires xmlhttprequest
-                        functionality.
+                    <para>This switch enables the use of AJAX to dynamically
+                        load and create filter form controls upon request.
+                        This method will reduce the amount of data that needs
+                        to be transferred upon each page load dealing with
+                        filters and thus will result in speed improvements and
+                        bandwidth reduction. This requires $g_use_javascript
+                        to be set to ON. By default, this configuration option
+                        is set to ON.
                     </para>
                 </listitem>
             </varlistentry>

@@ -50,11 +50,6 @@ require_api( 'print_api.php' );
 require_api( 'project_api.php' );
 require_api( 'user_api.php' );
 
-if ( config_get( 'dhtml_filters' ) ) {
-	require_js( 'xmlhttprequest.js' );
-	require_js( 'addLoadEvent.js' );
-	require_js( 'dynamic_filters.js' );
-}
 require_js( 'bugFilter.js' );
 
 auth_ensure_user_authenticated();

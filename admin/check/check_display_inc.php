@@ -37,8 +37,8 @@ require_api( 'config_api.php' );
 check_print_section_header_row( 'Display' );
 
 check_print_test_row(
-	'dhtml_filters = ON requires use_javascript = ON',
-	!config_get_global( 'dhtml_filters' ) || config_get_global( 'use_javascript' )
+	'use_dynamic_filters = ON requires use_javascript = ON',
+	!config_get_global( 'use_dynamic_filters' ) || ( config_get_global( 'use_dynamic_filters' ) && config_get_global( 'use_javascript' ) )
 );
 
 check_print_test_row(

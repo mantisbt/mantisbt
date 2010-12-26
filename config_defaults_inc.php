@@ -2925,12 +2925,13 @@ $g_filter_custom_fields_per_row = 8;
 $g_view_filters = SIMPLE_DEFAULT;
 
 /**
- * This switch enables the use of xmlhttprequest protocol to speed up the
- * filter display. Rather than launching a separate page, the filters are
- * updated in-line in the view_all_bugs_page.
- * @global int $g_dhtml_filters
+ * This switch enables the use of AJAX to dynamically load and create filter
+ * form controls upon request. This method will reduce the amount of data that
+ * needs to be transferred upon each page load dealing with filters and thus
+ * will result in speed improvements and bandwidth reduction.
+ * @global int $g_use_dynamic_filters
  */
-$g_dhtml_filters = ON;
+$g_use_dynamic_filters = ON;
 
 /**
  * The threshold required for users to be able to create permalinks.  To turn

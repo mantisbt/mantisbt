@@ -1366,7 +1366,7 @@ If you requested this verification, visit the following URL to change your passw
 	'email_on_sponsorship_changed' => 'E-mail on Sponsorship changed',
 	'email_on_relationship_changed' => 'E-mail on Relationship changed',
 	
-	# DHTML filters
+	# Dynamic filters (load filter controls via AJAX upon request)
 	'loading' => 'Loading...',
 	
 	# filter_api.php

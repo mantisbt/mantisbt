@@ -72,52 +72,6 @@ if ( !isset( $t_filter[ $t_target_field ] ) ) {
 	$t_target_field = '';
 }
 
-if ( ON == config_get( 'use_javascript' ) ) {
-	?>
-	<body onload="SetInitialFocus();">
-
-	<script type="text/javascript">
-	<!--
-	function SetInitialFocus() {
-		<?php
-		global $t_target_field;
-		if ( $t_target_field ) {
-			$f_view_type = gpc_get_string( 'view_type', '' );
-			if ( ( FILTER_PROPERTY_HIDE_STATUS . '[]' == $t_target_field ) && ( 'advanced' == $f_view_type ) ) {
-				echo 'field_to_focus = "', FILTER_PROPERTY_STATUS, '[]";';
-			} else {
-				echo 'field_to_focus = "', $t_target_field, '";';
-			}
-		} else {
-			print "field_to_focus = null;";
-		}
-		?>
-		if ( field_to_focus ) {
-			eval( "document.filters['" + field_to_focus + "'].focus()" );
-		}
-
-		SwitchDateFields();
-	}
-
-	function SwitchDateFields() {
-		// All fields need to be enabled to go back to the script
-		<?php
-		echo 'document.filters.', FILTER_PROPERTY_START_MONTH, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
-		echo 'document.filters.', FILTER_PROPERTY_START_DAY, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
-		echo 'document.filters.', FILTER_PROPERTY_START_YEAR, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
-		echo 'document.filters.', FILTER_PROPERTY_END_MONTH, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
-		echo 'document.filters.', FILTER_PROPERTY_END_DAY, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
-		echo 'document.filters.', FILTER_PROPERTY_END_YEAR, '.disabled = ! document.filters.', FILTER_PROPERTY_FILTER_BY_DATE, '.checked;';
-		?>
-
-		return true;
-	}
-	// -->
-	</script>
-
-	<?php
-}
-
 /** @todo thraxisp - could this be replaced by a call to filter_draw_selection_area2 */
 
 $t_filter = current_user_get_bug_filter();
@@ -195,7 +149,7 @@ if ( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
 
 $t_select_modifier = '';
 if ( 'advanced' == $f_view_type ) {
-	$t_select_modifier = 'multiple="multiple" size="10" ';
+	$t_select_modifier = ' multiple="multiple" size="10"';
 }
 
 $t_show_product_version = version_should_show_product_version( $t_project_id );
@@ -203,7 +157,6 @@ $t_show_build = $t_show_product_version && ( config_get( 'enable_product_build' 
 
 $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 ?>
-<br />
 <form method="post" name="filters" action="<?php echo $t_action; ?>">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <input type="hidden" name="type" value="1" />
@@ -359,11 +312,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'sticky' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
-		<input type="checkbox" name="do_filter_by_date" <?php
-			check_checked( $t_filter['do_filter_by_date'], 'on' );
-			if ( ON == config_get( 'use_javascript' ) ) {
-				print "onclick=\"SwitchDateFields();\""; } ?> />
-		<?php echo lang_get( 'use_date_filters' ) ?>
+		<label><input type="checkbox" id="use_date_filters" name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE ?>" <?php check_checked( $t_filter['filter_by_date'], 'on' ) ?> /><?php echo lang_get( 'use_date_filters' )?></label>
 	</td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php echo lang_get( 'bug_relationships' ) ?>
@@ -544,6 +493,5 @@ if ( $t_column > 0 ) {
 </tr>
 </table>
 </form>
-
 <?php
 html_page_bottom();

@@ -73,6 +73,40 @@ $(document).ready( function() {
 		}
 	});
 
+	$('a.dynamic-filter-expander').click(function(event) {
+		event.preventDefault();
+		var fieldID = $(this).attr('id');
+		var targetID = fieldID + '_target';
+		var viewType = $('#filters_form_open input[name=view_type]').val();
+		$('#' + targetID).html('<span class="dynamic-filter-loading">' + translations['loading'] + "</span>");
+		$.ajax({
+			url: 'return_dynamic_filters.php',
+			data: 'view_type=' + viewType + '&filter_target=' + fieldID,
+			cache: false,
+			context: $('#' + targetID),
+			success: function(html) {
+				$(this).html(html);
+				$('input[type=checkbox]#use_date_filters').click(function() {
+					if (!$(this).is(':checked')) {
+						$('form#filters_form_open select[name=start_year]').attr('disabled', 'disabled');
+						$('form#filters_form_open select[name=start_month]').attr('disabled', 'disabled');
+						$('form#filters_form_open select[name=start_day]').attr('disabled', 'disabled');
+						$('form#filters_form_open select[name=end_year]').attr('disabled', 'disabled');
+						$('form#filters_form_open select[name=end_month]').attr('disabled', 'disabled');
+						$('form#filters_form_open select[name=end_day]').attr('disabled', 'disabled');
+					} else {
+						$('form#filters_form_open select[name=start_year]').removeAttr('disabled');
+						$('form#filters_form_open select[name=start_month]').removeAttr('disabled');
+						$('form#filters_form_open select[name=start_day]').removeAttr('disabled');
+						$('form#filters_form_open select[name=end_year]').removeAttr('disabled');
+						$('form#filters_form_open select[name=end_month]').removeAttr('disabled');
+						$('form#filters_form_open select[name=end_day]').removeAttr('disabled');
+					}
+				});
+			}
+		});
+	});
+
 	$('input.autofocus:first, select.autofocus:first, textarea.autofocus:first').focus();
 
 	$('input[type=checkbox].check_all').click(function() {
@@ -171,6 +205,24 @@ $(document).ready( function() {
 	});
 	$('[name=form_set_project]').children('.button').hide();
 	setBugLabel();
+
+	$('input[type=checkbox]#use_date_filters').click(function() {
+		if (!$(this).is(':checked')) {
+			$('form[name=filters] select[name=start_year]').attr('disabled', 'disabled');
+			$('form[name=filters] select[name=start_month]').attr('disabled', 'disabled');
+			$('form[name=filters] select[name=start_day]').attr('disabled', 'disabled');
+			$('form[name=filters] select[name=end_year]').attr('disabled', 'disabled');
+			$('form[name=filters] select[name=end_month]').attr('disabled', 'disabled');
+			$('form[name=filters] select[name=end_day]').attr('disabled', 'disabled');
+		} else {
+			$('form[name=filters] select[name=start_year]').removeAttr('disabled');
+			$('form[name=filters] select[name=start_month]').removeAttr('disabled');
+			$('form[name=filters] select[name=start_day]').removeAttr('disabled');
+			$('form[name=filters] select[name=end_year]').removeAttr('disabled');
+			$('form[name=filters] select[name=end_month]').removeAttr('disabled');
+			$('form[name=filters] select[name=end_day]').removeAttr('disabled');
+		}
+	});
 });
 
 function setBugLabel() {

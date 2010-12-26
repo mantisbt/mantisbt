@@ -115,7 +115,7 @@ if ( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
 
 $t_select_modifier = '';
 if ( 'advanced' == $f_view_type ) {
-	$t_select_modifier = 'multiple="multiple" size="10" ';
+	$t_select_modifier = ' multiple="multiple" size="10"';
 }
 
 /**
