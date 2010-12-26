@@ -83,7 +83,6 @@ function bug_group_action_print_bug_list( $p_bug_ids_array ) {
 	}
 
 	echo '</table>';
-	echo '</form>';
 	echo '</div>';
 
 	if( STATUS_LEGEND_POSITION_BOTTOM == $t_legend_position ) {
