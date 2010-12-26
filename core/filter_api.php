@@ -2183,7 +2183,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			);
 		}
 
-		$t_dynamic_filter_expander_class = config_get( 'use_javascript' ) && config_get( 'use_dynamic_filters' ) ? ' class="dynamic-filter-expander"' : '';
+		$t_dynamic_filter_expander_class = ( config_get( 'use_javascript' ) && config_get( 'use_dynamic_filters' ) ) ? ' class="dynamic-filter-expander"' : '';
 		?>
 
 		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
@@ -3407,7 +3407,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	}
 	?>
 	<div class="filter-links"><?php
-		$f_switch_view_link = config_get( 'use_javascript' ) && config_get( 'use_dynamic_filters' ) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
+		$f_switch_view_link = ( config_get( 'use_javascript' ) && config_get( 'use_dynamic_filters' ) ) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
 		$t_view_filters = config_get( 'view_filters' );
 		if(( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
 			if( 'advanced' == $t_view_type ) {

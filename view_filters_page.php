@@ -157,6 +157,7 @@ $t_show_build = $t_show_product_version && ( config_get( 'enable_product_build' 
 
 $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 ?>
+<div class="filter-box">
 <form method="post" name="filters" action="<?php echo $t_action; ?>">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <input type="hidden" name="type" value="1" />
@@ -493,5 +494,6 @@ if ( $t_column > 0 ) {
 </tr>
 </table>
 </form>
+</div>
 <?php
 html_page_bottom();
