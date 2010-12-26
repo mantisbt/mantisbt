@@ -975,7 +975,7 @@ Wänn Du die Bstetigung aagforderet hesch, no gang uf die URL go Dyy Passwort ä
 	'delete_relationship_button' => 'Lesche',
 	'delete_relationship_sure_msg' => 'Bisch sicher, ass Du die Beziehig witt lesche?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Nit alli Probläm, wu blockiere, sin scho glest oder zuegmacht.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>OBACHT</b>. Nit alli Probläm, wu blockiere, sin scho behobe oder zuegmacht.<br />Voreb Du ne <b>behebsch/zuemachsch</b>, sotte alli Probläm, wu s blockiere, erledigt, behobe oder zuegmacht wäre.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>OBACHT</strong>. Nit alli Probläm, wu blockiere, sin scho behobe oder zuegmacht.<br />Voreb Du ne <strong>behebsch/zuemachsch</strong>, sotte alli Probläm, wu s blockiere, erledigt, behobe oder zuegmacht wäre.',
 	'create_child_bug_button' => 'Klon aalege',
 	'bug_cloned_to' => 'Probläm dupliziert',
 	'bug_created_from' => 'Probläm aagleit vu',

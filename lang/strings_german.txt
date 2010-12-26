@@ -977,7 +977,7 @@ Wenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL, um i
 	'delete_relationship_button' => 'Löschen',
 	'delete_relationship_sure_msg' => 'Sind Sie sicher, dass Sie diese Beziehung löschen wollen?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Nicht alle abhängigen Einträge sind bereits behoben oder geschlossen.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>ACHTUNG</b> Nicht alle abhängigen Einträge sind bereits behoben oder geschlossen.<br />Bevor Sie einen Eintrag auf <b>behoben/geschlossen</b> setzen, sollten alle abhängigen Einträge, die ihn blockieren, erledigt, behoben oder geschlossen werden.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>ACHTUNG</strong> Nicht alle abhängigen Einträge sind bereits behoben oder geschlossen.<br />Bevor Sie einen Eintrag auf <strong>behoben/geschlossen</strong> setzen, sollten alle abhängigen Einträge, die ihn blockieren, erledigt, behoben oder geschlossen werden.',
 	'create_child_bug_button' => 'Klonen',
 	'bug_cloned_to' => 'Eintrag dupliziert',
 	'bug_created_from' => 'Eintrag angelegt von',

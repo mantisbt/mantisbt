@@ -967,7 +967,7 @@ Se você solicitou esta verificação, visite o seguinte endereço para alterar 
 	'delete_relationship_button' => 'Apagar',
 	'delete_relationship_sure_msg' => 'Você tem certeza que deseja apagar esta relação?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Nem todos os casos filhos foram resolvidos ou fechados.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>ATENÇÃO</b>. Nem todos os casos filhos já foram resolvidos ou fechados.<br />Antes de <b>resolver/fechar</b> um caso pai, todos os casos relacionados como filhos deste devem ser resolvidos ou fechados.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>ATENÇÃO</strong>. Nem todos os casos filhos já foram resolvidos ou fechados.<br />Antes de <strong>resolver/fechar</strong> um caso pai, todos os casos relacionados como filhos deste devem ser resolvidos ou fechados.',
 	'create_child_bug_button' => 'Criar Clone',
 	'bug_cloned_to' => 'Caso clonado',
 	'bug_created_from' => 'Caso gerado à partir de',

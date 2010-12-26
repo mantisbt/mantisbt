@@ -106,8 +106,8 @@ class IssueAddTest extends SoapBase {
 	public function testCreateIssueWithHtmlMarkup() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithHtmlMarkup' );
 
-		$issueToAdd['summary'] .= " <b>WithHtmlMarkup</b>";
-		$issueToAdd['description'] .= " <b>WithHtmlMarkup</b>";
+		$issueToAdd['summary'] .= " <strong>WithHtmlMarkup</strong>";
+		$issueToAdd['description'] .= " <strong>WithHtmlMarkup</strong>";
 
 		$issueId = $this->client->mc_issue_add(
 			$this->userName,

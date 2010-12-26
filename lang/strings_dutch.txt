@@ -978,7 +978,7 @@ Als u deze wijziging wilt voortzetten, bezoek dan de volgende URL om uw wachtwoo
 	'delete_relationship_button' => 'Verwijderen',
 	'delete_relationship_sure_msg' => 'Weet u zeker dat u deze relatie wilt verwijderen?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Nog niet alle onderliggende meldingen van deze melding zijn afgemeld of gesloten.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>ATTENTIE</b>. Nog niet alle onderliggende meldingen van deze melding zijn afgemeld of gesloten.<br />Voordat een bovenliggende melding afgemeld of gesloten kan worden, moeten alle onderliggende meldingen afgemeld of gesloten zijn.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>ATTENTIE</strong>. Nog niet alle onderliggende meldingen van deze melding zijn afgemeld of gesloten.<br />Voordat een bovenliggende melding afgemeld of gesloten kan worden, moeten alle onderliggende meldingen afgemeld of gesloten zijn.',
 	'create_child_bug_button' => 'Klonen',
 	'bug_cloned_to' => 'Melding gekloond',
 	'bug_created_from' => 'Melding gemaakt van',

@@ -801,7 +801,7 @@ Dacă aţi fost dumneavoastră vizitaţi adresa următoare pentru a vă modifica
 	'delete_relationship_button' => 'Şterge',
 	'delete_relationship_sure_msg' => 'Sigur doriţi ştergerea acestei relaţionări?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Nu toţi descendenţii acestei probleme sunt rezolvaţi sau închişi.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>ATENŢIE</b>. Nu toţi descendenţii acestei probleme sunt rezolvaţi sau închişi.<br />Înainte de a <b>rezolva/închide</b> o problemă părinte toate problemele relaţionate ca şi descendenţi trebuie rezolvate sau închise.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>ATENŢIE</strong>. Nu toţi descendenţii acestei probleme sunt rezolvaţi sau închişi.<br />Înainte de a <strong>rezolva/închide</strong> o problemă părinte toate problemele relaţionate ca şi descendenţi trebuie rezolvate sau închise.',
 	'create_child_bug_button' => 'Crează clonă',
 	'bug_cloned_to' => 'Problemă clonată',
 	'bug_created_from' => 'Problemă generată din',

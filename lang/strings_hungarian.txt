@@ -926,7 +926,7 @@ Ha Ön kérte ezt a megerősítést, látogassa meg a következő címet a jelsz
 	'delete_relationship_button' => 'Törlés',
 	'delete_relationship_sure_msg' => 'Valóban törölni szeretné ezt a kapcsolatot?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Ezen ügynek még nem minden gyermekét oldották meg vagy zárták le.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>FIGYELEM</b>. Ezen ügynek még nem minden gyermekét oldották meg vagy zárták le.<br />Mielőtt <b>megoldana/lezárna</b> egy szülő ügyet, minden, gyermekeként megjelölt ügyet meg kell oldani vagy le kell zárni.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>FIGYELEM</strong>. Ezen ügynek még nem minden gyermekét oldották meg vagy zárták le.<br />Mielőtt <strong>megoldana/lezárna</strong> egy szülő ügyet, minden, gyermekeként megjelölt ügyet meg kell oldani vagy le kell zárni.',
 	'create_child_bug_button' => 'Klónozás',
 	'bug_cloned_to' => 'Ügy klónozva',
 	'bug_created_from' => 'Ügy generálva a következőből:',

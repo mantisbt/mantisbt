@@ -61,7 +61,7 @@ html_page_top();
 ?>
 <br />
 <div align="center">
-<center><b><?php print string_display( filter_db_get_name( $f_query_id ) ); ?></b></center>
+<center><strong><?php print string_display( filter_db_get_name( $f_query_id ) ); ?></strong></center>
 <?php echo lang_get( 'query_delete_msg' ); ?>
 
 <form method="post" action="<?php print $t_delete_url; ?>">

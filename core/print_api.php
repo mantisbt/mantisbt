@@ -1017,7 +1017,7 @@ function print_custom_field_projects_list( $p_field_id ) {
 	foreach( $t_project_ids as $t_project_id ) {
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 		$t_sequence = custom_field_get_sequence( $p_field_id, $t_project_id );
-		echo '<b>', string_display_line( $t_project_name ), '</b>: ';
+		echo '<strong>', string_display_line( $t_project_name ), '</strong>: ';
 		print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$c_field_id&project_id=$t_project_id&return=custom_field$t_security_token", lang_get( 'remove_link' ) );
 		echo '<br />- ';
 

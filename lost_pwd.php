@@ -115,7 +115,7 @@ html_page_top();
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="center">
-		<b><?php echo lang_get( 'lost_password_done_title' ) ?></b>
+		<strong><?php echo lang_get( 'lost_password_done_title' ) ?></strong>
 	</td>
 </tr>
 <tr>

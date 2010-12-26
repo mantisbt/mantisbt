@@ -545,7 +545,7 @@ print_recently_visited();
 		</th>
 		<td>
 			<?php relationship_list_box( /* none */ -2, "rel_type", false, true ) ?>
-			<?php echo '<b>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</b>' ?>
+			<?php echo '<strong>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</strong>' ?>
 		</td>
 	</tr>
 <?php

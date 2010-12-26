@@ -341,7 +341,7 @@ function error_print_stack_trace() {
  */
 function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 0 ) {
 	if( $p_depth++ > 10 ) {
-		return '<b>***Nesting Level Too Deep***</b>';
+		return '<strong>***Nesting Level Too Deep***</strong>';
 	}
 
 	if( is_array( $p_param ) ) {

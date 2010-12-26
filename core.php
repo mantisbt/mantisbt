@@ -166,7 +166,7 @@ require_api( 'php_api.php' );
 # Enforce our minimum PHP requirements
 if( !php_version_at_least( PHP_MIN_VERSION ) ) {
 	@ob_end_clean();
-	echo '<b>FATAL ERROR: Your version of PHP is too old. MantisBT requires PHP version ' . PHP_MIN_VERSION . ' or newer</b><br />Your version of PHP is version ' . phpversion();
+	echo '<strong>FATAL ERROR: Your version of PHP is too old. MantisBT requires PHP version ' . PHP_MIN_VERSION . ' or newer</strong><br />Your version of PHP is version ' . phpversion();
 	die();
 }
 

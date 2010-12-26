@@ -735,7 +735,7 @@ function relationship_get_summary_html( $p_bug_id ) {
 
 	if( !is_blank( $t_summary ) ) {
 		if( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr class="row-2"><td colspan="' . ( 5 + $t_show_project ) . '"><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
+			$t_summary .= '<tr class="row-2"><td colspan="' . ( 5 + $t_show_project ) . '"><strong>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</strong></td></tr>';
 		}
 		$t_summary = '<table border="0" width="100%" cellpadding="0" cellspacing="1">' . $t_summary . '</table>';
 	}
@@ -762,7 +762,7 @@ function relationship_get_summary_html_preview( $p_bug_id ) {
 
 	if( !is_blank( $t_summary ) ) {
 		if( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr class="print"><td class="print" colspan=' . ( 5 + $t_show_project ) . '><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
+			$t_summary .= '<tr class="print"><td class="print" colspan=' . ( 5 + $t_show_project ) . '><strong>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</strong></td></tr>';
 		}
 		$t_summary = '<table border="0" width="100%" cellpadding="0" cellspacing="1">' . $t_summary . '</table>';
 	}

@@ -965,7 +965,7 @@ M\'hoc\'h eus goulennet ar gwiriadur-mañ, kit d\'an URL-mañ evit cheñch ho ke
 	'delete_relationship_button' => 'Dilemel',
 	'delete_relationship_sure_msg' => 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel an darempred-mañ ?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Holl vugale an draen-mañ n\'int ket diskoulmet pe serret c\'hoazh.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>Evezh :</b> Holl vugale an draen-mañ n\'int ket bet diskoulmet pe serret c\'hoazh.<br/>A-raok <b>diskoulmañ/serriñ</b> un draen tad e tlefe an holl zrein liammet outañ evel bugale bezañ diskoulmet pe serret.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>Evezh :</strong> Holl vugale an draen-mañ n\'int ket bet diskoulmet pe serret c\'hoazh.<br/>A-raok <strong>diskoulmañ/serriñ</strong> un draen tad e tlefe an holl zrein liammet outañ evel bugale bezañ diskoulmet pe serret.',
 	'create_child_bug_button' => 'Klonañ',
 	'bug_cloned_to' => 'Draen klonet',
 	'bug_created_from' => 'Draen krouet diwar',

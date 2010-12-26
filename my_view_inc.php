@@ -517,7 +517,7 @@ echo "<span class=\"my-buglist-count\">($v_start - $v_end / $t_bug_count)</span>
 
     echo '<span class="small last-modified"> - ';
 	if( $t_bug->last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
-		echo '<b>' . $t_last_updated . '</b>';
+		echo '<strong>' . $t_last_updated . '</strong>';
 	} else {
 		echo $t_last_updated;
 	}

@@ -978,7 +978,7 @@ Si vous avez demandé cette vérification, visitez l\'URL suivante pour changer 
 	'delete_relationship_button' => 'Supprimer',
 	'delete_relationship_sure_msg' => 'Êtes-vous certain de vouloir supprimer cette relation ?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Tous les fils de ce bogue ne sont pas encore résolus ou fermés.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>ATTENTION</b>. Tous les fils de ce bogue ne sont pas encore résolus ou fermés.<br />Avant de <b>résoudre/fermer</b> un bogue père, tous ses bogues fils reliés devraient être résolus ou fermés.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>ATTENTION</strong>. Tous les fils de ce bogue ne sont pas encore résolus ou fermés.<br />Avant de <strong>résoudre/fermer</strong> un bogue père, tous ses bogues fils reliés devraient être résolus ou fermés.',
 	'create_child_bug_button' => 'Cloner',
 	'bug_cloned_to' => 'Bogue dupliqué',
 	'bug_created_from' => 'Bogue généré depuis',

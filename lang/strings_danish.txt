@@ -722,7 +722,7 @@ Hvis du bad om denne verifikation, så besøg denne URL for at ændre din adgang
 	'delete_relationship_button' => 'Slet',
 	'delete_relationship_sure_msg' => 'Er du sikker på at du vil fjerne denne afhængighed?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Ikke alle underordnede af denne fejl er løste eller lukkede endnu.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>BEMÆRK</b>. Ikke alle underordnede af denne fejl er løste eller lukkede endnu.<br />Før en overordnet fejl kan makeres som <b>løst/lukket</b>, skal alle underordnede fejl være lukkede eller løst.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>BEMÆRK</strong>. Ikke alle underordnede af denne fejl er løste eller lukkede endnu.<br />Før en overordnet fejl kan makeres som <strong>løst/lukket</strong>, skal alle underordnede fejl være lukkede eller løst.',
 	'create_child_bug_button' => 'Opret klon',
 	'bug_cloned_to' => 'Fejl klonet',
 	'bug_created_from' => 'Fejl genereret fra',

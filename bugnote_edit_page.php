@@ -134,7 +134,7 @@ html_page_top( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
 <?php if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) { ?>
 <tr class="row-2">
 	<td class="center" colspan="2">
-		<b><?php echo lang_get( 'time_tracking') ?> (HH:MM)</b><br />
+		<strong><?php echo lang_get( 'time_tracking') ?> (HH:MM)</strong><br />
 		<input type="text" name="time_tracking" size="5" value="<?php echo $t_time_tracking ?>" />
 	</td>
 </tr>

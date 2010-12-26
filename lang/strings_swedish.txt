@@ -904,7 +904,7 @@ Om du begärde denna verifikation, gå till följande webbadress för att ändra
 	'delete_relationship_button' => 'Ta bort',
 	'delete_relationship_sure_msg' => 'Är du säker på att du vill bryta detta förhållande?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Alla barn till detta ärende har ännu inte lösts eller stängts.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>VARNING</b>. Alla barn till detta ärende har ännu inte lösts eller stängts.<br />Innan du <b>löser/stänger</b> ett föräldraärende, bör barnärendena till denna lösas eller stängas.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>VARNING</strong>. Alla barn till detta ärende har ännu inte lösts eller stängts.<br />Innan du <strong>löser/stänger</strong> ett föräldraärende, bör barnärendena till denna lösas eller stängas.',
 	'create_child_bug_button' => 'Klon',
 	'bug_cloned_to' => 'Ärende klonat',
 	'bug_created_from' => 'Ärende skapat från',

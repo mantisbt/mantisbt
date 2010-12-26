@@ -1293,7 +1293,7 @@ If you requested this verification, visit the following URL to change your passw
 	'delete_relationship_button' => 'Delete',
 	'delete_relationship_sure_msg' => 'Are you sure you wish to delete this relationship?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Not all the children of this issue are yet resolved or closed.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>Attention:</b> Not all the children of this issue are yet resolved or closed.<br />Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>Attention:</strong> Not all the children of this issue are yet resolved or closed.<br />Before <strong>resolving/closing</strong> a parent issue, all the issues related as child with this one should be resolved or closed.',
 	'create_child_bug_button' => 'Clone',
 	'bug_cloned_to' => 'Issue cloned',
 	'bug_created_from' => 'Issue generated from',

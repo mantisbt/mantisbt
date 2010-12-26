@@ -969,7 +969,7 @@ Si va sol·licitar aquest canvi, visiti aquesta URL per a canviar la contrasenya
 	'delete_relationship_button' => 'Elimina',
 	'delete_relationship_sure_msg' => 'Estar segur que desitja eliminar aquesta relació?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'No tots els fills d\'aquesta incidència estan resolts o tancats.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>ATENCIó</b>. No tots els fills d\'aquesta incidència estan resolts o tancats.<br />Abans de <b>tancar/resoldre</b> una incidència pare, totes les seves incidències filles han d\'estar resoltes o tancades.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>ATENCIó</strong>. No tots els fills d\'aquesta incidència estan resolts o tancats.<br />Abans de <strong>tancar/resoldre</strong> una incidència pare, totes les seves incidències filles han d\'estar resoltes o tancades.',
 	'create_child_bug_button' => 'Clon',
 	'bug_cloned_to' => 'Incidència clonada',
 	'bug_created_from' => 'Incidència generada des de',

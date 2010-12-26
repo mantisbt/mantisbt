@@ -893,7 +893,7 @@ Kung hiniling ang pagpapatotoong ito, dalawin ang sumusunod na URL upang mabago 
 	'delete_relationship_button' => 'Burahin',
 	'delete_relationship_sure_msg' => 'Nakatitiyak ka bang nais mong burahin ang ugnayang ito?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Hindi lahat ng mga anak ng labas na ito ay nalutas o naisara na.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>BIGYANG-PANSIN</b>. Hindi lahat ng mga anak ng labas na ito ay nalutas o naisara na.<br />Bago <b>lutasin/isara</b> ang isang pinagmulan/magulang na labas, dapat na lutasin o isara muna ang lahat ng mga labas na umuugnay bilang anak ng isang ito.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>BIGYANG-PANSIN</strong>. Hindi lahat ng mga anak ng labas na ito ay nalutas o naisara na.<br />Bago <strong>lutasin/isara</strong> ang isang pinagmulan/magulang na labas, dapat na lutasin o isara muna ang lahat ng mga labas na umuugnay bilang anak ng isang ito.',
 	'create_child_bug_button' => 'Lumikha ng Kahawig',
 	'bug_cloned_to' => 'Nagaya na ang labas',
 	'bug_created_from' => 'Ginawa ang labas mula sa',

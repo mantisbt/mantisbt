@@ -634,7 +634,7 @@ Ukoliko ste vi zatrazili proveru, molim posetite sledecu adresu radi promene loz
 	'delete_relationship_button' => 'Brisanje',
 	'delete_relationship_sure_msg' => 'Da li ste sigurni da zelite da izbrisete ovu relaciju?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Nisu svi potomci ove greske reseni ili zatvoreni.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>UPOZORENJE</b>. Nisu svi potomci ove greske zatvoreni ili reseni.<br />Pre <b>resenja/zatvaranja</b> roditeljske greske, sve njima pripadajuce greske bi trebale da budu resene ili zatvorene.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>UPOZORENJE</strong>. Nisu svi potomci ove greske zatvoreni ili reseni.<br />Pre <strong>resenja/zatvaranja</strong> roditeljske greske, sve njima pripadajuce greske bi trebale da budu resene ili zatvorene.',
 	'bug_created_from' => 'Greska generisana iz',
 	'see_email_addresses_of_other_users' => 'See email addresses of other users',
 	'email_notification' => 'EMAIL NOTIFICATION',

@@ -102,7 +102,7 @@ html_page_top2a();
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="center">
-		<b><?php echo lang_get( 'signup_done_title' ) ?></b><br/>
+		<strong><?php echo lang_get( 'signup_done_title' ) ?></strong><br/>
 		<?php echo "[$f_username - $f_email] " ?>
 	</td>
 </tr>

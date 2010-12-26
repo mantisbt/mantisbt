@@ -965,7 +965,7 @@ Kui sa soovisid seda uuendust, siis külasta järgmist URL-i, et vahetada oma pa
 	'delete_relationship_button' => 'Kustuta',
 	'delete_relationship_sure_msg' => 'Oled kindel, et soovid seda seost kustutada?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Mitte kõik selle kande lapsed pole lahendatud või suletud.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>TäHELEPANU</b>. Mitte kõik selle kande lapsed pole lahendatud või suletud.<br />Enne vanema kande <b>lahendamist/sulgemist</b> peavad kõik selle kande lapsed olema lahendatud või suletud.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>TäHELEPANU</strong>. Mitte kõik selle kande lapsed pole lahendatud või suletud.<br />Enne vanema kande <strong>lahendamist/sulgemist</strong> peavad kõik selle kande lapsed olema lahendatud või suletud.',
 	'create_child_bug_button' => 'Klooni',
 	'bug_cloned_to' => 'Kanne kloonitud',
 	'bug_created_from' => 'Kanne genereeritud lähtekandest',

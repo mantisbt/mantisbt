@@ -915,7 +915,7 @@ S\'avètz demandat aquesta verificacion, visitatz l\'URL seguenta per cambiar v�
 	'delete_relationship_button' => 'Suprimir',
 	'delete_relationship_sure_msg' => 'Sètz segur(a) que volètz suprimir aquesta relacion ?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Totes los filhs d\'aqueste bòg son pas encara resolguts o tampats.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>ATENCION</b>. Totes los filhs d\'aqueste bòg son pas encara resolguts o tampats.<br />Abans de <b>resòlvre/tampar</b> un bòg paire, totes sos bògues filhs religats deurián èsser resolguts o tampats.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>ATENCION</strong>. Totes los filhs d\'aqueste bòg son pas encara resolguts o tampats.<br />Abans de <strong>resòlvre/tampar</strong> un bòg paire, totes sos bògues filhs religats deurián èsser resolguts o tampats.',
 	'create_child_bug_button' => 'Clonar',
 	'bug_cloned_to' => 'Bòg duplicat',
 	'bug_created_from' => 'Bòg generit dempuèi',

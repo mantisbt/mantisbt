@@ -910,7 +910,7 @@ Pokud jste si skutečně přáli tuto změnu, navštivte následující stránku
 	'delete_relationship_button' => 'Odebrat',
 	'delete_relationship_sure_msg' => 'Opravdu chcete odebrat tento vztah?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Ne všechny potomci tohoto problému jsou vyřešeni nebo uzavřeni.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>Pozor:</b> ne všechny potomci tohoto problému jsou vyřešeni nebo uzavřeni.<br />Před <b>vyřešením/uzavřením</b> otcovského problému musí být vyřešeny nebo uzavřeny všechny problémy považované za jeho potomky.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>Pozor:</strong> ne všechny potomci tohoto problému jsou vyřešeni nebo uzavřeni.<br />Před <strong>vyřešením/uzavřením</strong> otcovského problému musí být vyřešeny nebo uzavřeny všechny problémy považované za jeho potomky.',
 	'create_child_bug_button' => 'Vytvořit potomka',
 	'bug_cloned_to' => 'Problém je klonován',
 	'bug_created_from' => 'Problém generován z',

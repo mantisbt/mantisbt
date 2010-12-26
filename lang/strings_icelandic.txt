@@ -756,7 +756,7 @@ Ef þú óskaðir eftir þessari staðfestingu, heimsóttu eftirfarandi veffang 
 	'delete_relationship_button' => 'Eyða',
 	'delete_relationship_sure_msg' => 'Ertu viss um að vilja eyða þessum tengslum?',
 	'relationship_warning_blocking_bugs_not_resolved' => 'Ekki er búið að leysa eða loka öllum undiratriðum þessarar beiðni.',
-	'relationship_warning_blocking_bugs_not_resolved_2' => '<b>ATHUGAÐU</b>. Ekki hafa öll undiratriði þessarar beiðni enn verið leyst eða lokuð.<br />Áður en hægt er að <b>leysa/loka<b> æðri beiðni þarf að vera búið að leysa eða loka öllum undiratriðum tengdum þessari beiðni.',
+	'relationship_warning_blocking_bugs_not_resolved_2' => '<strong>ATHUGAÐU</strong>. Ekki hafa öll undiratriði þessarar beiðni enn verið leyst eða lokuð.<br />Áður en hægt er að <strong>leysa/loka<strong> æðri beiðni þarf að vera búið að leysa eða loka öllum undiratriðum tengdum þessari beiðni.',
 	'create_child_bug_button' => 'Útbúa samrit',
 	'bug_cloned_to' => 'Samrit verkbeiðnar',
 	'bug_created_from' => 'Beiðni mynduð af',

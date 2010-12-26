@@ -63,7 +63,7 @@ else
 	?>
 	<br />
 	<div align="center">
-	<center><b><?php print filter_db_get_name( $f_query_id ) . ' ' . lang_get( 'query_deleted' ); ?></b></center>
+	<center><strong><?php print filter_db_get_name( $f_query_id ) . ' ' . lang_get( 'query_deleted' ); ?></strong></center>
 	<form method="post" action="<?php print $t_redirect_url; ?>">
 	<?php # CSRF protection not required here - form does not result in modifications ?>
 	<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
