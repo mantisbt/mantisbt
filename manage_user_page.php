@@ -67,7 +67,7 @@ $f_page_number		= gpc_get_int( 'page_number', 1 );
 
 $t_user_table = db_get_table( 'user' );
 $t_cookie_name = config_get( 'manage_cookie' );
-$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" border="0" alt="' . lang_get( 'protected' ) . '" />';
+$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" alt="' . lang_get( 'protected' ) . '" />';
 $c_filter = '';
 
 # Clean up the form variables

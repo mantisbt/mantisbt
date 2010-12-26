@@ -52,12 +52,12 @@
 </tr>
 <tr>
 	<td class="center">
-		 <img src="<?php echo plugin_page( 'summary_graph_bystatus.php')?>&amp;width=<?php echo $t_graph_width?>" border="0" alt="" />
+		 <img src="<?php echo plugin_page( 'summary_graph_bystatus.php')?>&amp;width=<?php echo $t_graph_width?>" alt="" />
 	</td>
 </tr>
 <tr>
 	<td class="center">
-		<img src="<?php echo plugin_page( 'summary_graph_bystatus_pct.php')?>&amp;width=<?php echo $t_graph_width?>" border="0" alt="" />
+		<img src="<?php echo plugin_page( 'summary_graph_bystatus_pct.php')?>&amp;width=<?php echo $t_graph_width?>" alt="" />
 	</td>
 </tr>
 </table>

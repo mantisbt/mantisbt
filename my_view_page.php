@@ -91,7 +91,7 @@ $t_project_id = helper_get_current_project();
 ?>
 
 <div>
-<table class="hide" border="0" cellspacing="3" cellpadding="0">
+<table class="hide" cellspacing="3" cellpadding="0">
 
 <?php
 $t_status_legend_position = config_get( 'status_legend_position' );

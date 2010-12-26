@@ -531,7 +531,7 @@ if ( $tpl_show_attachments ) {
 		echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span><br />$c_download_url";
 
 		if ( $t_attachment['preview'] && $t_attachment['type'] == 'image' ) {
-			echo '<br /><img src="', $t_attachment['download_url'], '" alt="', $t_attachment['alt'], '" border="0" /><br />';
+			echo '<br /><img src="', $t_attachment['download_url'], '" alt="', $t_attachment['alt'], '" /><br />';
 		}
 	}
 

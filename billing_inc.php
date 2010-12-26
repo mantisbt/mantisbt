@@ -92,7 +92,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 <form method="post" action="<?php echo form_action_self() ?>">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
-<table border="0" class="width100" cellspacing="0">
+<table class="width100" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
 <?php
@@ -145,7 +145,7 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	$t_prev_id = -1;
 ?>
 <br />
-<table border="0" class="width100" cellspacing="0">
+<table class="width100" cellspacing="0">
 <tr class="row-category-history">
 	<td class="small-caption">
 		<?php echo lang_get( 'username' ) ?>
@@ -208,7 +208,7 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 <br />
 <br />
 
-<table border="0" class="width100" cellspacing="0">
+<table class="width100" cellspacing="0">
 <tr class="row-category-history">
         <td class="small-caption">
                 <?php echo lang_get( 'username' ) ?>

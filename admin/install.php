@@ -94,7 +94,7 @@ $t_install_state = gpc_get_int( 'install', 0 );
 <link rel="stylesheet" type="text/css" href="admin.css" />
 </head>
 <body>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+<table width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
 	<tr class="top-bar">
 		<td class="links">
 			[ <a href="index.php">Back to Administration</a> ]
@@ -135,7 +135,7 @@ switch( $t_install_state ) {
 <?php
 if( 0 == $t_install_state ) {
 	?>
-<table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+<table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
 		<span class="title">Checking Installation...</span>
@@ -235,7 +235,7 @@ print_test( 'Checking if safe mode is enabled for install script',
 if( 2 == $t_install_state ) {
 	?>
 
-<table width="100%" border="0" cellpadding="10" cellspacing="1">
+<table width="100%" cellpadding="10" cellspacing="1">
 <!-- Setting config variables -->
 <?php print_test( 'Setting Database Hostname', '' !== $f_hostname, true, 'host name is blank' )?>
 
@@ -390,7 +390,7 @@ if( 2 == $t_install_state ) {
 if( 1 == $t_install_state ) {
 	?>
 
-<table width="100%" border="0" cellpadding="10" cellspacing="1">
+<table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
 		<span class="title"><?php echo $g_database_upgrade ? 'Upgrade Options' : 'Installation Options'?></span>
@@ -539,7 +539,7 @@ if( !$g_database_upgrade ) {?>
 # all checks have passed, install the database
 if( 3 == $t_install_state ) {
 	?>
-<table width="100%" border="0" cellpadding="10" cellspacing="1">
+<table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
 		<span class="title">Installing Database</span>
@@ -817,7 +817,7 @@ if( 5 == $t_install_state ) {
 	$t_config_filename = $g_absolute_path . 'config_inc.php';
 	$t_config_exists = file_exists( $t_config_filename );
 	?>
-<table width="100%" border="0" cellpadding="10" cellspacing="1">
+<table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
 		<span class="title">Write Configuration File(s)</span>
@@ -880,7 +880,7 @@ if( 5 == $t_install_state ) {
 </tr>
 <?php
 	if( true == $t_write_failed ) {
-		echo '<tr><table width="50%" border="0" cellpadding="10" cellspacing="1">';
+		echo '<tr><table width="50%" cellpadding="10" cellspacing="1">';
 		echo '<tr><td>Please add the following lines to ' . $g_absolute_path . 'config_inc.php before continuing to the database upgrade check:</td></tr>';
 		echo '<tr><td><pre>' . htmlentities( $t_config ) . '</pre></td></tr></table></tr>';
 	}
@@ -900,7 +900,7 @@ if( 6 == $t_install_state ) {
 
 	# post install checks
 	?>
-<table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+<table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
 		<span class="title">Checking Installation...</span>
@@ -1020,7 +1020,7 @@ if( 7 == $t_install_state ) {
 
 if( $g_failed ) {
 	?>
-<table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+<table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
 		<span class="title">Checks Failed...</span>

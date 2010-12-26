@@ -42,7 +42,7 @@ $f_advanced = gpc_get_bool( 'advanced', false );
 </head>
 <body>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+<table width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
 	<tr class="top-bar">
 		<td class="links">
 			[ <a href="index.php">Back to Administration</a> ]
@@ -64,7 +64,7 @@ $f_advanced = gpc_get_bool( 'advanced', false );
 <p>Upgrades may take several minutes depending on the size of your database.</p>
 
 <div>
-	<table width="80%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+	<table width="80%" bgcolor="#222222" cellpadding="10" cellspacing="1">
 		<tr bgcolor="#ffffff">
 				<?php
 # check to see if the new installer was used

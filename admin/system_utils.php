@@ -31,7 +31,7 @@ access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 html_page_top( 'MantisBT Administration - System Utilities' );
 
 ?>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+<table width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
 	<tr class="top-bar">
 		<td class="links">
 			[ <a href="index.php">Back to MantisBT Administration</a> ]
@@ -43,7 +43,7 @@ html_page_top( 'MantisBT Administration - System Utilities' );
 </table>
 <br /><br />
 
-<table width="80%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+<table width="80%" bgcolor="#222222" cellpadding="10" cellspacing="1">
 	<tr><td bgcolor=\"#e8e8e8\" colspan=\"2\"><span class=\"title\">Upgrade Utilities</span></td></tr>
 
 	<!-- # Headings -->

@@ -54,17 +54,17 @@
 </tr>
 <tr>
 	<td class="center">
-		<img src="<?php echo plugin_page( 'summary_graph_byresolution.php')?>&amp;width=<?php echo $t_graph_width?>" border="0" alt="" />
+		<img src="<?php echo plugin_page( 'summary_graph_byresolution.php')?>&amp;width=<?php echo $t_graph_width?>" alt="" />
 	</td>
 </tr>
 <tr>
 	<td class="center">
-		<img src="<?php echo plugin_page( 'summary_graph_byresolution_pct.php')?>&amp;width=<?php echo $t_graph_width?>" border="0" alt="" />
+		<img src="<?php echo plugin_page( 'summary_graph_byresolution_pct.php')?>&amp;width=<?php echo $t_graph_width?>" alt="" />
 	</td>
 </tr>
 <tr>
 	<td class="center">
-		<img src="<?php echo plugin_page( 'summary_graph_byresolution_mix.php')?>&amp;width=<?php echo $t_graph_width?>" border="0" alt="" />
+		<img src="<?php echo plugin_page( 'summary_graph_byresolution_mix.php')?>&amp;width=<?php echo $t_graph_width?>" alt="" />
 	</td>
 </tr>
 </table>

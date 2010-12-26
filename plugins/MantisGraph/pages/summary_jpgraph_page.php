@@ -60,7 +60,7 @@
 			print( "<tr>\n" );
 		}
 		echo '<td width="50%">';
-		printf("<img src=\"%s.php&width=%d\" border=\"0\" alt=\"\" />", plugin_page( $t_graphs[$t_pos] ), $t_graph_width );
+		printf("<img src=\"%s.php&amp;width=%d\" alt=\"\" />", plugin_page( $t_graphs[$t_pos] ), $t_graph_width );
 		echo '</td>';
 		if ( ( $t_wide - 1 ) == ( $t_pos % $t_wide ) ) {
 			print( "</tr>\n" );

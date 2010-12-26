@@ -1451,13 +1451,13 @@ function print_lost_password_link() {
 # Get icon corresponding to the specified filename
 function print_file_icon( $p_filename ) {
 	$t_icon = file_get_icon_url( $p_filename );
-	echo '<img src="' . string_attribute( $t_icon['url'] ) . '" alt="' . string_attribute( $t_icon['alt'] ) . ' file icon" width="16" height="16" border="0" />';
+	echo '<img src="' . string_attribute( $t_icon['url'] ) . '" alt="' . string_attribute( $t_icon['alt'] ) . ' file icon" width="16" height="16" />';
 }
 
 # Prints an RSS image that is hyperlinked to an RSS feed.
 function print_rss( $p_feed_url, $p_title = '' ) {
 	$t_path = config_get( 'path' );
-	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><img src="', $t_path, '/images/', 'rss.png" width="16" height="16" border="0" alt="', $p_title, '" /></a>';
+	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><img src="', $t_path, '/images/', 'rss.png" width="16" height="16" alt="', $p_title, '" /></a>';
 }
 
 # Prints the recently visited issues.

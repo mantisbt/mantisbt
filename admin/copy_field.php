@@ -39,7 +39,7 @@ $f_dest_field = gpc_get( 'dest_id' );
 </head>
 <body>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+<table width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
 	<tr class="top-bar">
 		<td class="links">
 			[ <a href="system_utils.php">Back to System Utilities</a> ]
@@ -80,7 +80,7 @@ else {
 	$t_failures = 0;
 
 	if( $count > 0 ) {
-		echo '<table width="80%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">';
+		echo '<table width="80%" bgcolor="#222222" cellpadding="10" cellspacing="1">';
 
 		# Headings
 		echo '<tr bgcolor="#ffffff"><th width="10%">Bug Id</th><th width="20%">Field Value</th><th width="70%">Status</th></tr>';
