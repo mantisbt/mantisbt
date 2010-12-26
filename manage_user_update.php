@@ -214,7 +214,7 @@ html_page_top( null, $result ? $t_redirect_url : null );
 ?>
 
 <br />
-<div align="center">
+<div>
 <?php
 if ( $f_protected && $t_old_protected ) {				# PROTECTED
 	echo lang_get( 'manage_user_protected_msg' ) . '<br />';

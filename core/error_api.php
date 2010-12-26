@@ -174,7 +174,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 				}
 			}
 
-			echo '<br /><div align="center"><table class="width50" cellspacing="1">';
+			echo '<br /><div><table class="width50" cellspacing="1">';
 			echo '<tr><td class="form-title">', $t_error_type, '</td></tr>';
 			echo '<tr><td><p class="center" style="color:red">', $t_error_description, '</p></td></tr>';
 
@@ -239,21 +239,19 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
  */
 function error_print_details( $p_file, $p_line, $p_context ) {
 	?>
-		<center>
-			<table class="width75">
-				<tr>
-					<td>Full path: <?php echo htmlentities( $p_file, ENT_COMPAT, 'UTF-8' );?></td>
-				</tr>
-				<tr>
-					<td>Line: <?php echo $p_line?></td>
-				</tr>
-				<tr>
-					<td>
-						<?php error_print_context( $p_context )?>
-					</td>
-				</tr>
-			</table>
-		</center>
+		<table class="width75">
+			<tr>
+				<td>Full path: <?php echo htmlentities( $p_file, ENT_COMPAT, 'UTF-8' );?></td>
+			</tr>
+			<tr>
+				<td>Line: <?php echo $p_line?></td>
+			</tr>
+			<tr>
+				<td>
+					<?php error_print_context( $p_context )?>
+				</td>
+			</tr>
+		</table>
 <?php
 }
 
@@ -287,7 +285,7 @@ function error_print_context( $p_context ) {
 	# print arrays
 	foreach( $p_context as $t_var => $t_val ) {
 		if( is_array( $t_val ) && ( $t_var != 'GLOBALS' ) ) {
-			echo '<tr><td colspan="3" align="left"><br /><strong>', $t_var, '</strong></td></tr>';
+			echo '<tr><td colspan="3"><br /><strong>', $t_var, '</strong></td></tr>';
 			echo '<tr><td colspan="3">';
 			error_print_context( $t_val );
 			echo '</td></tr>';
@@ -303,7 +301,7 @@ function error_print_context( $p_context ) {
  * @uses error_alternate_class
  */
 function error_print_stack_trace() {
-	echo '<center><table class="width75">';
+	echo '<table class="width75">';
 	echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>';
 
 	$t_stack = debug_backtrace();
@@ -329,7 +327,7 @@ function error_print_stack_trace() {
 			echo '<td>-</td></tr>';
 		}
 	}
-	echo '</table></center>';
+	echo '</table>';
 }
 
 /**

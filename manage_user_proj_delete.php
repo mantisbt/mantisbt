@@ -78,7 +78,7 @@ $t_redirect_url = 'manage_user_edit_page.php?user_id=' .$f_user_id;
 html_page_top( null, $t_redirect_url );
 ?>
 <br />
-<div align="center">
+<div>
 <?php
 echo lang_get( 'operation_successful' ).'<br />';
 print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );

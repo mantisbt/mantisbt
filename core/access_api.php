@@ -95,19 +95,17 @@ function access_denied() {
 					$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 				}
 				$t_return_page = string_url( string_sanitize_url( $t_return_page ) );
-				echo '<center>';
-				echo '<p>' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
+				echo '<p class="center">' . error_string( ERROR_ACCESS_DENIED ) . '</p><p class="center">';
 				print_bracket_link( helper_mantis_url( 'login_page.php' ) . '?return=' . $t_return_page, lang_get( 'click_to_login' ) );
-				echo '<p></p>';
+				echo '</p><p class="center">';
 				print_bracket_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
-
-				echo '</center>';
+				echo '</p>';
 			}
 		} else {
-			echo '<center>';
-			echo '<p>' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
+			echo '<p class="center">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
+			echo '<p class="center">';
 			print_bracket_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
-			echo '</center>';
+			echo '</p>';
 		}
 	}
 	exit;

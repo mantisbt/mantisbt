@@ -105,7 +105,7 @@ html_page_top( null, $t_redirect_url );
 ?>
 
 <br />
-<div align="center">
+<div>
 <?php
 echo lang_get( 'operation_successful' ) . '<br />';
 

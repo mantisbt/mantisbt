@@ -78,7 +78,7 @@ html_page_top( null, $f_return );
 ?>
 
 <br />
-<div align="center">
+<div>
 <?php
 echo lang_get( 'operation_successful' ) . '<br />';
 print_bracket_link( $f_return, lang_get( 'proceed' ) );

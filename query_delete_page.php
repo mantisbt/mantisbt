@@ -60,8 +60,8 @@ if ( !filter_db_can_delete_filter( $f_query_id ) ) {
 html_page_top();
 ?>
 <br />
-<div align="center">
-<center><strong><?php print string_display( filter_db_get_name( $f_query_id ) ); ?></strong></center>
+<div class="center">
+<strong><?php print string_display( filter_db_get_name( $f_query_id ) ); ?></strong>
 <?php echo lang_get( 'query_delete_msg' ); ?>
 
 <form method="post" action="<?php print $t_delete_url; ?>">

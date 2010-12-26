@@ -195,31 +195,31 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 </tr>
 <tr class="row-1">
 	<!-- Reporter -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_reporter_id(); ?>
 	</td>
 	<!-- Monitored by -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_user_monitor(); ?>
 	</td>
 	<!-- Handler -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_handler_id(); ?>
 	</td>
 	<!-- Category -->
-	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 		<?php print_filter_show_category(); ?>
 	</td>
     <!-- Severity -->
-    <td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+    <td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_severity(); ?>
     </td>
 	<!-- Resolution -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_resolution(); ?>
 	</td>
 	<!-- Profile -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_profile(); ?>
 	</td>
 	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&#160;</td> -->
@@ -257,11 +257,11 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 </tr>
 <tr class="row-1">
 	<!-- Status -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_status(); ?>
 	</td>
 	<!-- Hide Status -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 	<?php
 	if ( 'simple' == $f_view_type ) {
 		print_filter_hide_status();
@@ -271,13 +271,13 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	?>
 	</td>
 	<!-- Build -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php if ( $t_show_build ) {
 			print_filter_show_build();
 		} ?>
 	</td>
 	<!-- Version -->
-	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 		<?php if ( $t_show_product_version ) {
  			print_filter_show_version();
  		} else {
@@ -285,7 +285,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
  		} ?>
 	</td>
 	<!-- Fixed in Version -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php if ( $t_show_product_version ) {
  			print_filter_show_fixed_in_version();
  		} else {
@@ -293,11 +293,11 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
  		} ?>
  	</td>
 	<!-- Priority -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_priority(); ?>
 	</td>
 	<!-- Target Version -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php if ( $t_show_product_version ) {
  			print_filter_show_target_version();
  		} else {
@@ -321,25 +321,25 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 </tr>
 <tr class="row-2">
 	<!-- Number of bugs per page -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_per_page(); ?>
 	</td>
 	<!-- View Status -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_view_state(); ?>
 	</td>
 	<!-- Show Sticky bugs -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_sticky_issues(); ?>
 	</td>
 	<!-- Highlight changed bugs -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_highlight_changed(); ?>
 	</td>
-	<td valign="top" class="left" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
+	<td class="left" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
 		<?php print_filter_do_filter_by_date( true ); # hide checkbox as it's already been shown ?>
 	</td>
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
         <?php print_filter_relationship_type(); ?>
 	</td>
 	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&#160;</td> -->
@@ -397,10 +397,10 @@ if ( 'simple' == $f_view_type ) {
 ?>
 
 <tr class="row-1">
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>" valign="top">
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php echo lang_get( 'sort_label' ) ?>
 	</td>
-	<td valign="top" colspan="<?php echo ( ( $t_filter_cols - 1 - $t_project_cols ) * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( ( $t_filter_cols - 1 - $t_project_cols ) * $t_custom_cols ); ?>">
 		<?php
 			print_filter_show_sort();
 		?>
@@ -408,10 +408,10 @@ if ( 'simple' == $f_view_type ) {
 	<?php
 		if ( 'advanced' == $f_view_type ) {
 	?>
-			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>" valign="top">
+			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 				<?php echo lang_get( 'email_project_label' ) ?>
 			</td>
-			<td valign="top" colspan="<?php echo( 2 * $t_custom_cols ); ?>">
+			<td colspan="<?php echo( 2 * $t_custom_cols ); ?>">
 				<?php
 					print_filter_project_id();
 				?>
@@ -431,7 +431,7 @@ $t_row_filters = array();
 
 # output a filter form element for each plugin filter
 foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
-	$t_fields .= '<td class="small-caption" valign="top" colspan="' . $t_custom_cols . '"> ' . string_display_line( $t_filter_object->title ) . ' </td>';
+	$t_fields .= '<td class="small-caption" colspan="' . $t_custom_cols . '"> ' . string_display_line( $t_filter_object->title ) . ' </td>';
 	$t_row_filters[] = $t_field_name;
 
 	$t_column++;
@@ -441,7 +441,7 @@ foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 		echo '<tr class="row-category2">', $t_fields, '</tr>';
 		echo '<tr class="row-1">';
 		foreach( $t_row_filters as $t_row_field_name ) {
-			echo '<td class="small-caption" valign="top" colspan="' . $t_custom_cols . '"> ',
+			echo '<td class="small-caption" colspan="' . $t_custom_cols . '"> ',
 				print_filter_plugin_field( $t_row_field_name, $t_plugin_filters[ $t_row_field_name ] ), '</td>';
 		}
 		echo '</tr>';
@@ -460,7 +460,7 @@ if ( $t_column > 0 ) {
 	echo '<tr class="row-category2">', $t_fields, '</tr>';
 	echo '<tr class="row-1">';
 	foreach( $t_row_filters as $t_row_field_name ) {
-		echo '<td class="small-caption" valign="top" colspan="' . $t_custom_cols . '"> ',
+		echo '<td class="small-caption" colspan="' . $t_custom_cols . '"> ',
 			print_filter_plugin_field( $t_row_field_name, $t_plugin_filters[ $t_row_field_name ] ), '</td>';
 	}
 

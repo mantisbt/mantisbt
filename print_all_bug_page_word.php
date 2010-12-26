@@ -454,7 +454,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 	} # profile description
 ?>
 <tr class="print">
-	<td class="print-category" valign="top">
+	<td class="print-category">
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_attached_files ) ?>
 	</td>
 	<td class="print" colspan="5">
@@ -521,7 +521,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 	</td>
 </tr>
 <tr>
-	<td class="nopad" valign="top" width="20%">
+	<td class="nopad" width="20%">
 		<table class="hide" cellspacing="1">
 		<tr>
 			<td class="print">
@@ -543,7 +543,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		</tr>
 		</table>
 	</td>
-	<td class="nopad" valign="top" width="85%">
+	<td class="nopad" width="85%">
 		<table class="hide" cellspacing="1">
 		<tr>
 			<td class="print">

@@ -487,13 +487,7 @@ function html_top_banner() {
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 		include( $t_page );
 	} else if( $t_show_logo ) {
-		if( is_page_name( 'login_page' ) ) {
-			$t_align = 'center';
-		} else {
-			$t_align = 'left';
-		}
-
-		echo '<div id="banner" align="', $t_align, '">';
+		echo '<div id="banner">';
 		if( $t_show_url ) {
 			echo '<a id="logo-link" href="', config_get( 'logo_url' ), '">';
 		}

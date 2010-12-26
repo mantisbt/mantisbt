@@ -54,8 +54,8 @@ function action_update_product_build_print_title() {
  * A row has two columns.
  */
 function action_update_product_build_print_fields() {
-	echo '<tr class="row-1" valign="top"><th class="category">', lang_get( 'product_build' ), '</th><td><input type="text" name="build" size="32" maxlength="32" /></td></tr>';
-	echo '<tr><td colspan="2"><center><input type="submit" class="button" value="' . lang_get( 'actiongroup_menu_update_product_build' ) . ' " /></center></td></tr>';
+	echo '<tr class="row-1"><th class="category">', lang_get( 'product_build' ), '</th><td><input type="text" name="build" size="32" maxlength="32" /></td></tr>';
+	echo '<tr><td colspan="2" class="center"><input type="submit" class="button" value="' . lang_get( 'actiongroup_menu_update_product_build' ) . ' " /></td></tr>';
 }
 
 /**

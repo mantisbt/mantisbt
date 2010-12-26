@@ -55,7 +55,7 @@ config_delete_for_user( 'excel_columns', $t_user_id );
 form_security_purge( 'manage_config_columns_reset' );
 
 echo '<br />';
-echo '<div align="center">';
+echo '<div>';
 
 $t_redirect_url = 'account_manage_columns_page.php';
 html_page_top( lang_get( 'manage_email_config' ), $t_redirect_url );

@@ -85,7 +85,7 @@ form_security_purge( 'account_sponsor_update' );
 $t_redirect = 'account_sponsor_page.php';
 html_page_top( null, $t_redirect );
 
-echo '<br /><div align="center">';
+echo '<br /><div>';
 
 echo lang_get( 'payment_updated' ) . '<br />';
 

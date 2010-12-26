@@ -56,12 +56,12 @@ function action_update_severity_print_title() {
  * A row has two columns.
  */
 function action_update_severity_print_fields() {
-	echo '<tr class="row-1" valign="top"><th class="category">';
+	echo '<tr class="row-1"><th class="category">';
 	echo lang_get( 'update_severity_msg' );
 	echo '</th><td><select name="severity">';
 	print_enum_string_option_list( 'severity' );
 	echo '</select></td></tr>';
-	echo '<tr><td colspan="2"><center><input type="submit" class="button" value="' . lang_get( 'update_severity_button' ) . ' " /></center></td></tr>';
+	echo '<tr><td colspan="2" class="center"><input type="submit" class="button" value="' . lang_get( 'update_severity_button' ) . ' " /></td></tr>';
 }
 
 /**

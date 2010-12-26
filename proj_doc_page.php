@@ -113,7 +113,7 @@ $num_files = db_num_rows( $result );
 html_page_top( lang_get( 'docs_link' ) );
 ?>
 <br />
-<div align="center">
+<div>
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
@@ -133,7 +133,7 @@ for ($i=0;$i<$num_files;$i++) {
 	$v_date_added = date( config_get( 'normal_date_format' ), $v_date_added );
 
 ?>
-<tr valign="top" <?php echo helper_alternate_class( $i ) ?>>
+<tr <?php echo helper_alternate_class( $i ) ?>>
 	<td>
 <?php
 	$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';

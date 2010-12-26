@@ -88,7 +88,7 @@ if ( $g_global_profiles ) {
 # Add Profile Form BEGIN
 ?>
 <br />
-<div align="center">
+<div>
 <form method="post" action="account_prof_update.php">
 <?php  echo form_security_field( 'profile_update' )?>
 <input type="hidden" name="action" value="add" />
@@ -157,7 +157,7 @@ if ( $g_global_profiles ) {
 	if( $t_profiles ) {
 ?>
 <br />
-<div align="center">
+<div>
 <form method="post" action="account_prof_update.php">
 <?php  echo form_security_field( 'profile_update' )?>
 <table class="width75" cellspacing="1">

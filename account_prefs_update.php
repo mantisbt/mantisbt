@@ -134,7 +134,7 @@ form_security_purge( 'account_prefs_update' );
 
 html_page_top( null, $f_redirect_url );
 
-echo '<br /><div align="center">';
+echo '<br /><div>';
 
 echo lang_get( 'operation_successful' );
 

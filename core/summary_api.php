@@ -834,7 +834,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 		# users that aren't actually developers...
 
 		if( $t_arr2['total'] > 0 ) {
-			echo '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
+			echo '<tr ' . helper_alternate_class( $t_row_count ) . '>';
 			$t_row_count++;
 			echo '<td>';
 			echo string_display_line( user_get_name( $t_handler_id ) );
@@ -947,7 +947,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 		if( $t_total_user_bugs > 0 ) {
 			$t_arr2 = $t_reporter_res_arr[$t_reporter_id];
 
-			echo '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
+			echo '<tr ' . helper_alternate_class( $t_row_count ) . '>';
 			$t_row_count++;
 			echo '<td>';
 			echo string_display_line( user_get_name( $t_reporter_id ) );

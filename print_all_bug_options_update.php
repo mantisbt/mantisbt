@@ -94,7 +94,7 @@ form_security_purge( 'print_all_bug_options_update' );
 
 html_page_top( null, $f_redirect_url );
 
-echo '<br /><div align="center">';
+echo '<br /><div>';
 
 if ( $result ) {
 	print lang_get( 'operation_successful' );

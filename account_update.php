@@ -123,7 +123,7 @@ form_security_purge('account_update');
 
 html_page_top( null, $t_redirect );
 
-echo '<br /><div align="center">';
+echo '<br /><div>';
 
 if ( $t_email_updated ) {
 	echo lang_get( 'email_updated' ) . '<br />';

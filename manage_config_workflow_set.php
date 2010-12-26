@@ -148,7 +148,7 @@ form_security_purge( 'manage_config_workflow_set' );
 ?>
 
 <br />
-<div align="center">
+<div>
 <?php
 echo lang_get( 'operation_successful' ) . '<br />';
 print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );

@@ -151,7 +151,7 @@ for ( $i = 0; $i <= 9; $i++ ) {
 $t_prefix_array['UNUSED'] = lang_get( 'users_unused' );
 $t_prefix_array['NEW'] = lang_get( 'users_new' );
 
-echo '<br /><center><table class="width75"><tr>';
+echo '<br /><table class="width75"><tr>';
 foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 	echo '<td>';
 	if ( $t_prefix === $f_filter ) {
@@ -167,7 +167,7 @@ foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 	}
 	echo '</td>';
 }
-echo '</tr></table></center>';
+echo '</tr></table>';
 
 $t_where_params = null;
 if ( $f_filter === 'ALL' ) {

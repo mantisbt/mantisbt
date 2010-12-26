@@ -57,9 +57,9 @@
 	$t_graph_count = count($t_graphs );
 	for ( $t_pos = 0; $t_pos < $t_graph_count; $t_pos++ ) {
 		if ( 0 == ( $t_pos % $t_wide ) ) {
-			print( "<tr valign=\"top\">\n" );
+			print( "<tr>\n" );
 		}
-		echo '<td width="50%" align="center">';
+		echo '<td width="50%">';
 		printf("<img src=\"%s.php&width=%d\" border=\"0\" alt=\"\" />", plugin_page( $t_graphs[$t_pos] ), $t_graph_width );
 		echo '</td>';
 		if ( ( $t_wide - 1 ) == ( $t_pos % $t_wide ) ) {

@@ -133,7 +133,7 @@ if ( 0 == $t_sponsors ) {
 
 <!-- # Edit own sponsorship Form BEGIN -->
 <br />
-<div align="center">
+<div>
 <table class="width100" cellspacing="1">
 
 	<!-- Headings -->
@@ -240,7 +240,7 @@ if ( 0 == $t_sponsors ) {
 
 <!-- # Edit sponsorship Form BEGIN -->
 <br />
-<div align="center">
+<div>
 <form method="post" action="account_sponsor_update.php">
 <?php echo form_security_field( 'account_sponsor_update' ) ?>
 <table class="width100" cellspacing="1">
@@ -340,7 +340,7 @@ if ( 0 == $t_sponsors ) {
 <?php } # end sponsored issues ?>
 
 <br />
-<div align="center">
+<div>
 <?php
 html_button ( 'account_sponsor_page.php',
 	lang_get( ( $t_show_all ? 'sponsor_hide' : 'sponsor_show' ) ),

@@ -337,7 +337,7 @@ $t_redirect_url = 'view_all_bug_page.php';
 if ( count( $t_failed_ids ) > 0 ) {
 	html_page_top();
 
-	echo '<div align="center"><br />';
+	echo '<div><br />';
 	echo '<table class="width75">';
 	$separator = lang_get( 'word_separator' );
 	foreach( $t_failed_ids as $t_id => $t_reason ) {

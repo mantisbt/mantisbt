@@ -189,7 +189,7 @@ print_manage_menu( 'manage_proj_page.php' );
 <br/>
 
 <!-- GLOBAL CATEGORIES -->
-<div align="center" id="categories">
+<div id="categories">
 <table class="width75" cellspacing="1">
 
 <!-- Title -->

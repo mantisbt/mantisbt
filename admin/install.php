@@ -880,7 +880,7 @@ if( 5 == $t_install_state ) {
 </tr>
 <?php
 	if( true == $t_write_failed ) {
-		echo '<tr><table width="50%" border="0" cellpadding="10" cellspacing="1" align="center">';
+		echo '<tr><table width="50%" border="0" cellpadding="10" cellspacing="1">';
 		echo '<tr><td>Please add the following lines to ' . $g_absolute_path . 'config_inc.php before continuing to the database upgrade check:</td></tr>';
 		echo '<tr><td><pre>' . htmlentities( $t_config ) . '</pre></td></tr></table></tr>';
 	}

@@ -52,19 +52,19 @@
 		<?php echo plugin_lang_get( 'graph_imp_resolution_title' ) ?>
 	</td>
 </tr>
-<tr valign="top">
-	<td>
-		<center><img src="<?php echo plugin_page( 'summary_graph_byresolution.php')?>&width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
+<tr>
+	<td class="center">
+		<img src="<?php echo plugin_page( 'summary_graph_byresolution.php')?>&amp;width=<?php echo $t_graph_width?>" border="0" alt="" />
 	</td>
 </tr>
-<tr valign="top">
-	<td>
-		<center><img src="<?php echo plugin_page( 'summary_graph_byresolution_pct.php')?>&width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
+<tr>
+	<td class="center">
+		<img src="<?php echo plugin_page( 'summary_graph_byresolution_pct.php')?>&amp;width=<?php echo $t_graph_width?>" border="0" alt="" />
 	</td>
 </tr>
-<tr valign="top">
-	<td>
-		<center><img src="<?php echo plugin_page( 'summary_graph_byresolution_mix.php')?>&width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
+<tr>
+	<td class="center">
+		<img src="<?php echo plugin_page( 'summary_graph_byresolution_mix.php')?>&amp;width=<?php echo $t_graph_width?>" border="0" alt="" />
 	</td>
 </tr>
 </table>

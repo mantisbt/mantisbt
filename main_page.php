@@ -112,7 +112,7 @@ if ( news_is_enabled() ) {
 		echo '<br />';
 	}  # end for loop
 
-	echo '<div align="center">';
+	echo '<div>';
 
 	print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) );
 	$t_news_view_limit = config_get( 'news_view_limit' );

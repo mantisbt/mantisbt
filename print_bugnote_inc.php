@@ -120,7 +120,7 @@ require_api( 'user_api.php' );
 	</td>
 </tr>
 <tr>
-	<td class="nopad" valign="top" width="20%">
+	<td class="nopad" width="20%">
 		<table class="hide" cellspacing="1">
 		<tr>
 			<td class="print">
@@ -144,7 +144,7 @@ require_api( 'user_api.php' );
 		</tr>
 		</table>
 	</td>
-	<td class="nopad" valign="top" width="85%">
+	<td class="nopad" width="85%">
 		<table class="hide" cellspacing="1">
 		<tr>
 			<td class="print">

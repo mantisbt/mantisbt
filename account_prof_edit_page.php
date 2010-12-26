@@ -82,7 +82,7 @@ if ( profile_is_global( $f_profile_id ) ) {
 
 <?php # Edit Profile Form BEGIN ?>
 <br />
-<div align="center">
+<div>
 <form method="post" action="account_prof_update.php">
 <?php  echo form_security_field( 'profile_update' )?>
 <input type="hidden" name="action" value="update" />

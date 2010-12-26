@@ -110,7 +110,7 @@ form_security_purge( 'bug_reminder' );
 html_page_top( null, string_get_bug_view_url( $f_bug_id ) );
 ?>
 <br />
-<div align="center">
+<div>
 <?php
 echo lang_get( 'operation_successful' ).'<br />';
 print_bracket_link( string_get_bug_view_url( $f_bug_id ), lang_get( 'proceed' ) );

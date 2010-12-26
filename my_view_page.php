@@ -90,7 +90,7 @@ reset ($t_boxes);
 $t_project_id = helper_get_current_project();
 ?>
 
-<div align="center">
+<div>
 <table class="hide" border="0" cellspacing="3" cellpadding="0">
 
 <?php
@@ -140,14 +140,14 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 		if ( ON == $t_boxes_position ) {
 			# for even box number start new row and column
 			if ( 1 == $t_counter%2 ) {
-				echo '<tr><td valign="top" width="50%">';
+				echo '<tr><td width="50%">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
 				echo '</td>';
 			}
 
 			# for odd box number only start new column
 			else if ( 0 == $t_counter%2 ) {
-				echo '<td valign="top" width="50%">';
+				echo '<td width="50%">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
 				echo '</td></tr>';
 			}
@@ -155,12 +155,12 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 		else if ( OFF == $t_boxes_position ) {
 			# start new table row and column for first box
 			if ( 1 == $t_counter ) {
-				echo '<tr><td valign="top" width="50%">';
+				echo '<tr><td width="50%">';
 			}
 
 			# start new table column for the second half of boxes
 			if ( $t_counter == ceil ($t_number_of_boxes/2) + 1 ) {
-				echo '<td valign="top" width="50%">';
+				echo '<td width="50%">';
 			}
 
 			# display the required box
@@ -179,7 +179,7 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 # is required to pad the number of cells in the last row to the full width of
 # the table.
 if ( ON == $t_boxes_position && $t_counter == $t_number_of_boxes && 1 == $t_counter%2 ) {
-	echo '<td valign="top" width="50%"></td></tr>';
+	echo '<td width="50%"></td></tr>';
 } else if ( OFF == $t_boxes_position && $t_counter == $t_number_of_boxes ) {
 	echo '</td></tr>';
 }

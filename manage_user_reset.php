@@ -71,7 +71,7 @@ form_security_purge('manage_user_reset');
 html_page_top( null, $t_result ? $t_redirect_url : null );
 
 echo '<br />';
-echo '<div align="center">';
+echo '<div>';
 
 if ( false == $t_result ) {
 	# PROTECTED

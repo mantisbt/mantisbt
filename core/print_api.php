@@ -416,7 +416,7 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 		$t_news_css = 'news-heading-public';
 	}
 
-	$output = '<div align="center">';
+	$output = '<div>';
 	$output .= '<table class="width75" cellspacing="0">';
 	$output .= '<tr>';
 	$output .= "<td class=\"$t_news_css\">";

@@ -64,7 +64,7 @@ function action_add_note_print_title() {
  * A row has two columns.
  */
 function action_add_note_print_fields() {
-	echo '<tr class="row-1" valign="top"><th class="category">', lang_get( 'add_bugnote_title' ), '</th><td><textarea name="bugnote_text" cols="80" rows="10"></textarea></td></tr>';
+	echo '<tr class="row-1"><th class="category">', lang_get( 'add_bugnote_title' ), '</th><td><textarea name="bugnote_text" cols="80" rows="10"></textarea></td></tr>';
 ?>
 	<!-- View Status -->
 	<tr class="row-2">
@@ -87,7 +87,7 @@ function action_add_note_print_fields() {
 	</td>
 	</tr>
 	<?php
-	echo '<tr><td colspan="2"><center><input type="submit" class="button" value="' . lang_get( 'add_bugnote_button' ) . ' " /></center></td></tr>';
+	echo '<tr><td colspan="2" class="center"><input type="submit" class="button" value="' . lang_get( 'add_bugnote_button' ) . ' " /></td></tr>';
 }
 
 /**

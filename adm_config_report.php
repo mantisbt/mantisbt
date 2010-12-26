@@ -124,7 +124,7 @@ $query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $
 $result = db_query_bound( $query );
 ?>
 <br />
-<div align="center">
+<div>
 <table class="width100" cellspacing="1">
 
 <!-- Title -->
@@ -164,7 +164,7 @@ $result = db_query_bound( $query );
 
 ?>
 <!-- Repeated Info Rows -->
-		<tr <?php echo helper_alternate_class() ?> valign="top">
+		<tr <?php echo helper_alternate_class() ?>>
 			<td class="center">
 				<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
 			</td>
@@ -214,7 +214,7 @@ $result = db_query_bound( $query );
 		<?php echo lang_get( 'set_configuration_option' ) ?>
 	</td>
 </tr>
-<tr <?php echo helper_alternate_class() ?> valign="top">
+<tr <?php echo helper_alternate_class() ?>>
 	<td>
 		<?php echo lang_get( 'username' ) ?>
 	</td>
@@ -225,7 +225,7 @@ $result = db_query_bound( $query );
 		</select>
 	</td>
 </tr>
-<tr <?php echo helper_alternate_class() ?> valign="top">
+<tr <?php echo helper_alternate_class() ?>>
 	<td>
 		<?php echo lang_get( 'project_name' ) ?>
 	</td>
@@ -236,7 +236,7 @@ $result = db_query_bound( $query );
 		</select>
 	</td>
 </tr>
-<tr <?php echo helper_alternate_class() ?> valign="top">
+<tr <?php echo helper_alternate_class() ?>>
 	<td>
 		<?php echo lang_get( 'configuration_option' ) ?>
 	</td>
@@ -244,7 +244,7 @@ $result = db_query_bound( $query );
 			<input type="text" name="config_option" value="" size="64" maxlength="64" />
 	</td>
 </tr>
-<tr <?php echo helper_alternate_class() ?> valign="top">
+<tr <?php echo helper_alternate_class() ?>>
 	<td>
 		<?php echo lang_get( 'configuration_option_type' ) ?>
 	</td>
@@ -257,7 +257,7 @@ $result = db_query_bound( $query );
 		</select>
 	</td>
 </tr>
-<tr <?php echo helper_alternate_class() ?> valign="top">
+<tr <?php echo helper_alternate_class() ?>>
 	<td>
 		<?php echo lang_get( 'configuration_option_value' ) ?>
 	</td>

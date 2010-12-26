@@ -171,7 +171,7 @@ $t_icon_path = config_get( 'icon_path' );
 			"&amp;export=$f_export" .
 			"&amp;show_flag=$t_show_flag" .
 			'" ' . $t_icon[2] . '>' .
-			'<img src="' . $t_icon_path . $t_icon[3] . '" border="0" align="absmiddle" alt="' . $t_icon[4] . '" /></a> ';
+			'<img src="' . $t_icon_path . $t_icon[3] . '" border="0" alt="' . $t_icon[4] . '" /></a> ';
 	}
 ?>
 	</td>
@@ -231,7 +231,7 @@ $t_icon_path = config_get( 'icon_path' );
 		$status_color = helper_alternate_colors( $i, '#ffffff', '#dddddd' );
 		if ( isset( $t_bug_arr_sort[ $t_row->id ] ) || ( $t_show_flag==0 ) ) {
 ?>
-<tr bgcolor="<?php echo $status_color ?>" border="1" valign="top">
+<tr bgcolor="<?php echo $status_color ?>" border="1">
 <?php
 		foreach( $t_columns as $t_column ) {
 			$t_column_value_function = 'print_column_value';

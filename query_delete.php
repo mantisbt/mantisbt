@@ -62,8 +62,8 @@ else
 	form_security_purge( 'query_delete' );
 	?>
 	<br />
-	<div align="center">
-	<center><strong><?php print filter_db_get_name( $f_query_id ) . ' ' . lang_get( 'query_deleted' ); ?></strong></center>
+	<div class="center">
+	<strong><?php print filter_db_get_name( $f_query_id ) . ' ' . lang_get( 'query_deleted' ); ?></strong>
 	<form method="post" action="<?php print $t_redirect_url; ?>">
 	<?php # CSRF protection not required here - form does not result in modifications ?>
 	<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>

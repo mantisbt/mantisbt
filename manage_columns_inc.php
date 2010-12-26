@@ -79,7 +79,7 @@ $t_excel = implode( ', ', $t_columns );
 echo '<br />';
 ?>
 
-<div align="center">
+<div>
 <form name="manage_columns_form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="manage_config_columns_set.php">
 <?php echo form_security_field( 'manage_config_columns_set' ) ?>
 <table class="width50" cellspacing="1">
@@ -173,7 +173,7 @@ echo '<br />';
 </form>
 </div>
 
-<div align="center">
+<div>
 <form method="post" action="manage_columns_copy.php">
 <?php echo form_security_field( 'manage_columns_copy' ) ?>
 <table class="width50" cellspacing="1">

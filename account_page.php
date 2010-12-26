@@ -108,17 +108,17 @@ html_page_top( lang_get( 'account_link' ) );
 <!-- # Edit Account Form BEGIN -->
 <br />
 <?php if ( $t_force_pw_reset ) { ?>
-<center><div style="color:red; width:75%">
+<div class="center" style="color:red; width:75%">
 	<?php
 		echo lang_get( 'verify_warning' );
 		if ( helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 			echo '<br />' . lang_get( 'verify_change_password' );
 		}
 	?>
-</div></center>
+</div>
 <br />
 <?php } ?>
-<div align="center">
+<div>
 <form method="post" action="account_update.php">
 <?php echo form_security_field( 'account_update' ); ?>
 <table class="width75" cellspacing="1">
@@ -223,7 +223,7 @@ html_page_top( lang_get( 'account_link' ) );
 	</tr>
 
 	<!-- Realname -->
-	<tr <?php echo helper_alternate_class() ?> valign="top">
+	<tr <?php echo helper_alternate_class() ?>>
 		<th class="category">
 			<?php echo lang_get( 'realname' ) ?>
 		</th>
@@ -265,7 +265,7 @@ html_page_top( lang_get( 'account_link' ) );
 	</tr>
 
 	<!-- Assigned project list -->
-	<tr <?php echo helper_alternate_class() ?> valign="top">
+	<tr <?php echo helper_alternate_class() ?>>
 		<th class="category">
 			<?php echo lang_get( 'assigned_projects' ) ?>
 		</th>

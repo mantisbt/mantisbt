@@ -65,7 +65,7 @@ html_page_top( lang_get( 'select_project_button' ) );
 
 <!-- Project Select Form BEGIN -->
 <br />
-<div align="center">
+<div>
 <form method="post" action="set_project.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <table class="width50" cellspacing="1">

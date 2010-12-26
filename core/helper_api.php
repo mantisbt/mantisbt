@@ -341,7 +341,7 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 
 	html_page_top();
 
-	echo "<br />\n<div align=\"center\">\n";
+	echo "<br />\n<div class=\"center\">\n";
 	print_hr();
 	echo "\n$p_message\n";
 

@@ -141,7 +141,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 	$t_index_count=0;
 ?>
 <br />
-<div align="center">
+<div>
 <form method="post" action="print_all_bug_options_update.php">
 <?php echo form_security_field( 'print_all_bug_options_update' ) ?>
 <input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />

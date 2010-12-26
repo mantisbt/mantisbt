@@ -56,7 +56,7 @@ print_manage_menu();
 ?>
 
 <br/>
-<table class="width75" align="center" cellspacing="1">
+<table class="width75" cellspacing="1">
 
 <tr>
 <td class="form-title" width="30%"><?php echo lang_get( 'site_information' ) ?></td>

@@ -76,7 +76,7 @@ html_page_top();
 ?>
 
 <br />
-<div align="center">
+<div>
 <table class="width75" cellspacing="1">
 	<tr>
 		<td class="form-title">
@@ -109,7 +109,7 @@ html_page_top();
 			?>
 		</td>
 	</tr>
-	<tr <?php echo helper_alternate_class() ?> valign="top">
+	<tr <?php echo helper_alternate_class() ?>>
 		<th class="category">
 			<?php echo lang_get( 'realname' ) ?>
 		</th>

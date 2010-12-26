@@ -93,7 +93,7 @@ html_page_top( lang_get( 'edit_news_title' ) );
 # Edit News Form BEGIN
 ?>
 <br />
-<div align="center">
+<div>
 <form method="post" action="news_update.php">
 <?php echo form_security_field( 'news_update' ); ?>
 <table class="width75" cellspacing="1">

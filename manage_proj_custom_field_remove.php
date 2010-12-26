@@ -84,7 +84,7 @@ form_security_purge( 'manage_proj_custom_field_remove' );
 html_page_top( null, $t_redirect_url );
 ?>
 <br />
-<div align="center">
+<div>
 <?php
 echo lang_get( 'operation_successful' ).'<br />';
 print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );

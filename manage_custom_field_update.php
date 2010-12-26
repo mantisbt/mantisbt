@@ -79,7 +79,7 @@ form_security_purge('manage_custom_field_update');
 html_page_top( null, $f_return );
 
 echo '<br />';
-echo '<div align="center">';
+echo '<div>';
 
 echo lang_get( 'operation_successful' ) . '<br />';
 

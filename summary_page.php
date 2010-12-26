@@ -138,7 +138,7 @@ print_summary_submenu(); ?>
 		<?php echo lang_get( 'summary_title' ) ?>
 	</td>
 </tr>
-<tr valign="top">
+<tr>
 	<td width="50%">
 		<?php # PROJECT #
 			if ( 1 < count( $t_project_ids ) ) { ?>
@@ -339,7 +339,7 @@ print_summary_submenu(); ?>
 	</td>
 </tr>
 
-<tr valign="top">
+<tr>
 	<td colspan="2">
 		<table class="width100" cellspacing="1">
 		<tr>
@@ -361,7 +361,7 @@ print_summary_submenu(); ?>
 	</td>
 </tr>
 
-<tr valign="top">
+<tr>
 	<td colspan="2">
 		<table class="width100" cellspacing="1">
 		<tr>

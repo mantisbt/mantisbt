@@ -69,7 +69,7 @@ $t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 html_page_top( null, $t_redirect_url );
 ?>
 <br />
-<div align="center">
+<div>
 <?php
 echo lang_get( 'operation_successful' ).'<br />';
 

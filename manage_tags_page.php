@@ -75,7 +75,7 @@ for ( $i = 0; $i <= 9; $i++ ) {
 	$t_prefix_array[] = "$i";
 }
 
-echo '<br /><table align="center" class="width75"><tr>';
+echo '<br /><table class="width75"><tr>';
 
 foreach ( $t_prefix_array as $t_prefix ) {
 	if ( $t_prefix === 'ALL' ) {
@@ -200,7 +200,7 @@ foreach ( $t_result as $t_tag_row ) {
 <form method="post" action="tag_create.php">
 <?php echo form_security_field( 'tag_create' ); ?>
 
-<table align="center" class="width75" cellspacing="1">
+<table class="width75" cellspacing="1">
 
 	<!-- Title -->
 

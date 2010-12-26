@@ -60,7 +60,7 @@ $f_parent_id = gpc_get( 'parent_id', null );
 ?>
 
 <br />
-<div align="center">
+<div>
 <form method="post" action="manage_proj_create.php">
 <?php
 	echo form_security_field( 'manage_proj_create' );

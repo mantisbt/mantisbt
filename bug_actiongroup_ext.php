@@ -102,7 +102,7 @@ form_security_purge( $t_form_name );
 if ( count( $t_failed_ids ) > 0 ) {
 	html_page_top();
 
-	echo '<div align="center">';
+	echo '<div>';
 
 	$t_word_separator = lang_get( 'word_separator' );
 	foreach( $t_failed_ids as $t_id => $t_reason ) {

@@ -76,7 +76,7 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 # Account Preferences Form BEGIN
 ?>
 <br />
-<div align="center">
+<div>
 <form method="post" action="account_prefs_update.php">
 <?php echo form_security_field( 'account_prefs_update' ) ?>
 <input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />

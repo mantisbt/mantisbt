@@ -128,7 +128,7 @@ html_page_top1();
 ?>
 
 <br />
-<div align="center">
+<div>
 <?php
 echo lang_get( 'operation_successful' ).'<br />';
 

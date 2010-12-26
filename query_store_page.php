@@ -57,7 +57,7 @@ compress_enable();
 html_page_top();
 ?>
 <br />
-<div align="center">
+<div>
 <?php
 $t_query_to_store = filter_db_get_filter( gpc_get_cookie( config_get( 'view_all_cookie' ), '' ) );
 $t_query_arr = filter_db_get_available_queries();

@@ -53,19 +53,19 @@
 		<?php echo plugin_lang_get( 'graph_imp_priority_title' ) ?>
 	</td>
 </tr>
-<tr valign="top">
-	<td>
-		<center><img src="<?php echo plugin_page( 'summary_graph_bypriority.php' ) ?>&width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
+<tr>
+	<td class="center">
+		<img src="<?php echo plugin_page( 'summary_graph_bypriority.php' ) ?>&amp;width=<?php echo $t_graph_width?>" border="0" alt="" />
 	</td>
 </tr>
-<tr valign="top">
-	<td>
-		 <center><img src="<?php echo plugin_page( 'summary_graph_bypriority_pct.php' ) ?>&width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
+<tr>
+	<td class="center">
+		 <img src="<?php echo plugin_page( 'summary_graph_bypriority_pct.php' ) ?>&amp;width=<?php echo $t_graph_width?>" border="0" alt="" />
 	</td>
 </tr>
-<tr valign="top">
-	<td>
-		<center><img src="<?php echo plugin_page( 'summary_graph_bypriority_mix.php' ) ?>&width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
+<tr>
+	<td class="center">
+		<img src="<?php echo plugin_page( 'summary_graph_bypriority_mix.php' ) ?>&amp;width=<?php echo $t_graph_width?>" border="0" alt="" />
 	</td>
 </tr>
 </table>

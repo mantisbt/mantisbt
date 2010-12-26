@@ -68,7 +68,7 @@ bug_group_action_print_top();
 
 	<br />
 
-	<div align="center">
+	<div>
 	<form method="post" action="bug_actiongroup_ext.php">
 <?php echo form_security_field( $t_form_name ); ?>
 		<input type="hidden" name="action" value="<?php echo string_attribute( $t_external_action ) ?>" />

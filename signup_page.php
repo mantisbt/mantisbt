@@ -61,7 +61,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 ?>
 
 <br />
-<div align="center">
+<div>
 <form name="signup_form" method="post" action="signup.php">
 <?php echo form_security_field( 'signup' ); ?>
 <table class="width50" cellspacing="1">
@@ -134,7 +134,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 </div>
 
 <?php
-echo '<br /><div align="center">';
+echo '<br /><div>';
 print_login_link();
 echo '&#160;';
 print_lost_password_link();

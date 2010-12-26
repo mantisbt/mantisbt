@@ -85,7 +85,7 @@ $t_redirect_url = 'print_all_bug_options_page.php';
 
 html_page_top( null, $t_redirect_url );
 
-echo '<br /><div align="center">';
+echo '<br /><div>';
 
 if ( $result ) {
 	print lang_get( 'operation_successful' );

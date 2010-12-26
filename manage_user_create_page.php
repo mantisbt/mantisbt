@@ -57,7 +57,7 @@ html_page_top();
 print_manage_menu( 'manage_user_create_page.php' );
 ?>
 <br />
-<div align="center">
+<div>
 <form method="post" action="manage_user_create.php">
 <?php echo form_security_field( 'manage_user_create' ) ?>
 <table class="width50" cellspacing="1">

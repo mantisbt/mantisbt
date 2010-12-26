@@ -54,7 +54,7 @@ html_page_top( lang_get( 'edit_news_link' ) );
 ?>
 
 <br />
-<div align="center">
+<div>
 <form method="post" action="news_add.php">
 <?php echo form_security_field( 'news_add' ); ?>
 <table class="width75" cellspacing="1">
@@ -115,7 +115,7 @@ html_page_top( lang_get( 'edit_news_link' ) );
 if ( news_get_count( helper_get_current_project(), current_user_is_administrator() ) > 0 ) {
 ?>
 <br />
-<div align="center">
+<div>
 <form method="post" action="news_edit_page.php">
 <?php echo form_security_field( 'news_delete' ); ?>
 <table class="width75" cellspacing="1">

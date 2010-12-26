@@ -64,7 +64,7 @@ html_page_top();
 $t_rss_enabled = config_get( 'rss_enabled' );
 ?>
 <br />
-<div align="center">
+<div>
 <table class="width75" cellspacing="0">
 <?php
 $t_column_count = 0;

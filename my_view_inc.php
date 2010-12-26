@@ -469,7 +469,7 @@ echo "<span class=\"my-buglist-count\">($v_start - $v_end / $t_bug_count)</span>
 <tr class="my-buglist-bug <?php echo $t_bug_class?>" bgcolor="<?php echo $status_color?>">
 	<?php
 	# -- Bug ID and details link + Pencil shortcut --?>
-	<td class="center my-buglist-id" valign="top" width ="0" nowrap="nowrap">
+	<td class="center my-buglist-id" width ="0" nowrap="nowrap">
 		<span class="small">
 		<?php
 			print_bug_link( $t_bug->id );
@@ -502,7 +502,7 @@ echo "<span class=\"my-buglist-count\">($v_start - $v_end / $t_bug_count)</span>
 
 	<?php
 	# -- Summary --?>
-	<td class="left my-buglist-description" valign="top" width="100%">
+	<td class="left my-buglist-description" width="100%">
 		<?php
 		 	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $t_bug->project_id ) {
 				echo '<span class="small project">[', string_display_line( project_get_name( $t_bug->project_id ) ), '] </span>';

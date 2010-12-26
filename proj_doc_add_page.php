@@ -57,7 +57,7 @@ html_page_top();
 ?>
 
 <br />
-<div align="center">
+<div>
 <form method="post" enctype="multipart/form-data" action="proj_doc_add.php">
 <?php echo form_security_field( 'proj_doc_add' ) ?>
 <table class="width75" cellspacing="1">

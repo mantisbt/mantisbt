@@ -313,8 +313,8 @@ echo '</td>';
 echo '</tr>';
 
 if ( $tpl_top_buttons_enabled ) {
-	echo '<tr align="center" class="top-buttons">';
-	echo '<td align="center" colspan="6">';
+	echo '<tr class="top-buttons">';
+	echo '<td colspan="6">';
 	html_buttons_view_bug_page( $tpl_bug_id );
 	echo '</td>';
 	echo '</tr>';
@@ -324,7 +324,7 @@ echo '</thead>';
 
 if ( $tpl_bottom_buttons_enabled ) {
 	echo '<tfoot>';
-	echo '<tr align="center" class="bottom-buttons"><td align="center" colspan="6">';
+	echo '<tr class="bottom-buttons"><td colspan="6">';
 	html_buttons_view_bug_page( $tpl_bug_id );
 	echo '</td></tr>';
 	echo '</tfoot>';

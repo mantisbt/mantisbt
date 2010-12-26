@@ -66,7 +66,7 @@ print_manage_menu( 'manage_custom_field_edit_page.php' );
 $t_definition = custom_field_get_definition( $f_field_id );
 ?>
 <br />
-<div align="center">
+<div>
 <form method="post" action="manage_custom_field_update.php">
 <?php echo form_security_field( 'manage_custom_field_update' ); ?>
 	<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
@@ -254,7 +254,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 		   * can't link/unlink fields from/to. */
 ?>
 <br />
-<div align="center">
+<div>
 <form method="post" action="manage_custom_field_proj_add.php">
 <?php echo form_security_field( 'manage_custom_field_proj_add' ); ?>
 <table class="width75" cellspacing="1">
@@ -267,7 +267,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 </tr>
 
 <!-- Assigned Projects -->
-<tr <?php echo helper_alternate_class( 1 ) ?> valign="top">
+<tr <?php echo helper_alternate_class( 1 ) ?>>
 	<th class="category" width="30%">
 		<?php echo lang_get( 'linked_projects_label' ) ?>
 	</th>
@@ -277,7 +277,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 </tr>
 
 <!-- Unassigend Project Selection -->
-<tr <?php echo helper_alternate_class() ?> valign="top">
+<tr <?php echo helper_alternate_class() ?>>
 	<th class="category">
 		<?php echo lang_get( 'projects_title_label' ) ?>
 	</th>
@@ -289,7 +289,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 </tr>
 
 <!-- Sequence Number -->
-<tr <?php echo helper_alternate_class() ?> valign="top">
+<tr <?php echo helper_alternate_class() ?>>
 	<th class="category">
 		<?php echo lang_get( 'custom_field_sequence_label' ) ?>
 	</th>

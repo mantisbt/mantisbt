@@ -240,7 +240,7 @@ if ( !$f_report_stay ) {
 html_page_top2();
 ?>
 <br />
-<div align="center">
+<div>
 <?php
 echo lang_get( 'operation_successful' ) . '<br />';
 print_bracket_link( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );

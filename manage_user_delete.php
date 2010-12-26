@@ -90,7 +90,7 @@ html_page_top( null, 'manage_user_page.php' );
 ?>
 
 <br />
-<div align="center">
+<div>
 <?php
 echo lang_get( 'operation_successful' ) . '<br />';
 print_bracket_link( 'manage_user_page.php', lang_get( 'proceed' ) );

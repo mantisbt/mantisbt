@@ -53,14 +53,14 @@
 		<?php echo plugin_lang_get( 'graph_imp_category_title' ) ?>
 	</td>
 </tr>
-<tr valign="top">
-	<td width='100%'>
-		<center><img src="<?php echo plugin_page( 'summary_graph_bycategory.php' )?>&width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
+<tr>
+	<td width="100%" class="center">
+		<img src="<?php echo plugin_page( 'summary_graph_bycategory.php' )?>&amp;width=<?php echo $t_graph_width?>" border="0" alt="" />
 	</td>
 </tr>
-<tr valign="top">
-	<td align="center">
-		<center><img src="<?php echo plugin_page( 'summary_graph_bycategory_pct.php' )?>&width=<?php echo $t_graph_width?>" border="0" alt="" /></center>
+<tr>
+	<td class="center">
+		<img src="<?php echo plugin_page( 'summary_graph_bycategory_pct.php' )?>&amp;width=<?php echo $t_graph_width?>" border="0" alt="" />
 	</td>
 </tr>
 </table>

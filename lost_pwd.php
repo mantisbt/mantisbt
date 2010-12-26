@@ -111,7 +111,7 @@ html_page_top();
 ?>
 
 <br />
-<div align="center">
+<div>
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="center">

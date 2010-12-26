@@ -346,7 +346,7 @@ if ( $tpl_show_priority || $tpl_show_severity || $tpl_show_reproducibility ) {
 	if ( $tpl_show_priority ) {
 		# Priority
 		echo '<th class="category">', lang_get( 'priority' ), '</th>';
-		echo '<td align="left">', '<select ', helper_get_tab_index(), ' name="priority">';
+		echo '<td>', '<select ', helper_get_tab_index(), ' name="priority">';
 		print_enum_string_option_list( 'priority', $tpl_bug->priority );
 		echo '</select></td>';
 	} else {

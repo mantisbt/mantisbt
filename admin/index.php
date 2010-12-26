@@ -39,7 +39,7 @@ function print_info_row( $p_description, $p_value ) {
 ?>
 <br />
 
-<div align="center">
+<div>
 		<p>[ <a href="check/index.php">Check your installation</a> ]</p>
 	<?php if ( count($upgrade) - 1 != config_get( 'database_version' ) ) { ?>
 		<p>[ <a href="upgrade_warning.php"><strong>Upgrade your installation</strong></a> ]</p>
@@ -51,7 +51,7 @@ function print_info_row( $p_description, $p_value ) {
 		<p>[ <a href="email_queue.php">Email Queue</a> ]</p>
 </div>
 
-<table class="width75" align="center" cellspacing="1">
+<table class="width75" cellspacing="1">
 <tr>
 <td class="form-title" width="30%" colspan="2"><?php echo lang_get( 'install_information' ) ?></td>
 </tr>

@@ -112,7 +112,7 @@ $t_redirect_url = string_get_bug_view_url( $t_bug_id );
 html_page_top( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
 ?>
 <br />
-<div align="center">
+<div>
 <form method="post" action="bugnote_update.php">
 <?php echo form_security_field( 'bugnote_update' ) ?>
 <table class="width75" cellspacing="1">

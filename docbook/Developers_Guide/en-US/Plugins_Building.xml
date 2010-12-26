@@ -445,7 +445,7 @@ $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
 
 &lt;form action="&lt;?php echo plugin_page( 'config_update' ) ?&gt;" method="post"&gt;
 &lt;?php echo form_security_field( 'plugin_Example_config_update' ) ?&gt;
-&lt;table class="width60" align="center"&gt;
+&lt;table class="width60"&gt;
 
 &lt;tr&gt;
     &lt;td class="form-title" rowspan="2"&gt;&lt;?php echo plugin_lang_get( 'configuration' ) ?&gt;&lt;/td&gt;

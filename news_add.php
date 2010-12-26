@@ -69,7 +69,7 @@ html_page_top();
 ?>
 
 <br />
-<div align="center">
+<div>
 <?php
 echo lang_get( 'operation_successful' ) . '<br />';
 print_bracket_link( 'news_menu_page.php', lang_get( 'proceed' ) );
