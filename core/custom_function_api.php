@@ -110,8 +110,8 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 	$t_bug = bug_get( $p_issue_id );
 
 	if( bug_is_resolved( $p_issue_id ) ) {
-		$t_strike_start = '<strike>';
-		$t_strike_end = '</strike>';
+		$t_strike_start = '<span class="strike">';
+		$t_strike_end = '</span>';
 	} else {
 		$t_strike_start = $t_strike_end = '';
 	}
