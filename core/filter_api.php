@@ -2211,7 +2211,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<?php } ?>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
+			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
 		}?>
 		</tr>
 
@@ -2464,7 +2464,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<td></td>
 			<?php }
 				  if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
+			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
 		}?>
 			</tr>
 
@@ -2493,10 +2493,10 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<?php
 		} else {?>
 			<td colspan="2" class="small-caption" valign="top">
-				&nbsp;
+				&#160;
 			</td>
 			<td colspan="1" class="small-caption" valign="top">
-				&nbsp;
+				&#160;
 			</td>
 			<?php
 		}?>
@@ -2510,12 +2510,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<?php
 			} else {?>
 			<td colspan="1" class="small-caption" valign="top">
-				&nbsp;
+				&#160;
 			</td>
 			<?php
 			}
 			if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&nbsp;</td>';
+			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&#160;</td>';
 		}?>
 		</tr>
 
@@ -2700,10 +2700,10 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<?php
 		} else {?>
 			<td colspan="2" class="small-caption" valign="top">
-				&nbsp;
+				&#160;
 			</td>
 			<td colspan="1" class="small-caption" valign="top">
-				&nbsp;
+				&#160;
 			</td>
 			<?php
 		}?>
@@ -2775,12 +2775,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 		<?php } else { ?>
 			<td colspan="1" class="small-caption" valign="top">
-				&nbsp;
+				&#160;
 			</td>
 		<?php }
 
 		if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&nbsp;</td>';
+			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&#160;</td>';
 		}?>
 
 		</tr>
@@ -2805,7 +2805,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_RELATIONSHIP_TYPE;?>" id="relationship_type_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'bug_relationships_label' )?></a>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
+			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
 		}?>
 		</tr>
 		<tr class="row-1">
@@ -2907,7 +2907,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
+			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
 		}?>
 		</tr>
 		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
@@ -2932,7 +2932,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<?php } ?>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
+			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
 		}?>
 		</tr>
 		<tr class="row-1">
@@ -2953,7 +2953,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 			</td>
 			<?php } else {?>
-				<td colspan="3">&nbsp;</td>
+				<td colspan="3">&#160;</td>
 			<?php } ?>
 
 			<td class="small-caption" valign="top" id="tag_string_filter_target" colspan="5">
@@ -3071,8 +3071,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_row_count = count( $t_plugin_filter_links );
 		for( $i=0; $i<$t_row_count; $i++ ) {
 			if( $t_column_count_by_row[$i] < $t_filter_cols ) {
-				$t_plugin_filter_links[$i][] = '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column_count_by_row[$i] ) . '">&nbsp;</td>';
-				$t_plugin_filter_fields[$i][] = '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column_count_by_row[$i] ) . '">&nbsp;</td>';
+				$t_plugin_filter_links[$i][] = '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column_count_by_row[$i] ) . '">&#160;</td>';
+				$t_plugin_filter_fields[$i][] = '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column_count_by_row[$i] ) . '">&#160;</td>';
 			}
 			$t_links_row = "\n\t\t" . join( "\n\t\t", $t_plugin_filter_links[$i] );
 			$t_values_row = "\n\t\t" . join( "\n\t\t", $t_plugin_filter_fields[$i] );
@@ -3191,8 +3191,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 					if( $t_col_idx == $t_per_row ) {
 						if( $t_filter_cols > $t_per_row ) {
-							$t_fields .= '<td colspan="' . ( $t_filter_cols - $t_per_row ) . '">&nbsp;</td> ';
-							$t_values .= '<td colspan="' . ( $t_filter_cols - $t_per_row ) . '">&nbsp;</td> ';
+							$t_fields .= '<td colspan="' . ( $t_filter_cols - $t_per_row ) . '">&#160;</td> ';
+							$t_values .= '<td colspan="' . ( $t_filter_cols - $t_per_row ) . '">&#160;</td> ';
 						}
 
 						$t_fields .= '</tr>' . "\n";
@@ -3208,13 +3208,13 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 				if( $t_col_idx > 0 ) {
 					if( $t_col_idx < $t_per_row ) {
-						$t_fields .= '<td colspan="' . ( $t_per_row - $t_col_idx ) . '">&nbsp;</td> ';
-						$t_values .= '<td colspan="' . ( $t_per_row - $t_col_idx ) . '">&nbsp;</td> ';
+						$t_fields .= '<td colspan="' . ( $t_per_row - $t_col_idx ) . '">&#160;</td> ';
+						$t_values .= '<td colspan="' . ( $t_per_row - $t_col_idx ) . '">&#160;</td> ';
 					}
 
 					if( $t_filter_cols > $t_per_row ) {
-						$t_fields .= '<td colspan="' . ( $t_filter_cols - $t_per_row ) . '">&nbsp;</td> ';
-						$t_values .= '<td colspan="' . ( $t_filter_cols - $t_per_row ) . '">&nbsp;</td> ';
+						$t_fields .= '<td colspan="' . ( $t_filter_cols - $t_per_row ) . '">&#160;</td> ';
+						$t_values .= '<td colspan="' . ( $t_filter_cols - $t_per_row ) . '">&#160;</td> ';
 					}
 
 					$t_fields .= '</tr>' . "\n";
@@ -3335,11 +3335,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					</td>
 					<?php
 					if( $t_filter_cols > 6 ) {
-				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 5 ) . '">&nbsp;</td>';
+				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 5 ) . '">&#160;</td>';
 			}
 		} else {
 			if( $t_filter_cols > 3 ) {
-				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 2 ) . '">&nbsp;</td>';
+				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 2 ) . '">&#160;</td>';
 			}
 		}
 		?>
@@ -3351,7 +3351,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	// expanded
 	collapse_icon( 'filter' );
 	echo '<div class="search-box">';
-	echo lang_get( 'search' ) . '&nbsp;';
+	echo lang_get( 'search' ) . '&#160;';
 	echo '<input type="text" size="16" name="', FILTER_PROPERTY_SEARCH, '" value="', string_html_specialchars( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
 	echo '</div>';
 	?>

@@ -122,7 +122,7 @@ if ( $t_allow_passwd ) {
 <?php
 echo '<br /><div align="center">';
 print_login_link();
-echo '&nbsp;';
+echo '&#160;';
 print_signup_link();
 echo '</div>';
 

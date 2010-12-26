@@ -167,7 +167,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	echo '<td class="small">',$t_description,$t_author,$t_url,'</td>';
 	echo '<td class="small center">',$t_depends,'</td>';
 	if ( 'MantisCore' == $t_basename ) {
-		echo '<td>&nbsp;</td><td>&nbsp;</td>';
+		echo '<td>&#160;</td><td>&#160;</td>';
 	} else if ( $t_forced ) {
 		echo '<td class="center">','<select disabled="disabled">',print_plugin_priority_list( $t_priority ),'</select>','</td>';
 		echo '<td class="center">','<input type="checkbox" checked="checked" disabled="disabled"/>','</td>';

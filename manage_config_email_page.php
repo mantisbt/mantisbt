@@ -122,7 +122,7 @@ function show_notify_flag( $p_action, $p_flag ) {
 		$t_set = $t_flag ? "checked=\"checked\"" : "";
 		return "<input type=\"checkbox\" name=\"flag[]\" value=\"$t_flag_name\" $t_set />";
 	} else {
-		return ( $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&nbsp;' );
+		return ( $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;' );
 	}
 }
 
@@ -155,7 +155,7 @@ function show_notify_threshold( $p_access, $p_action ) {
 		$t_set = $t_flag ? "checked=\"checked\"" : "";
 		return "<input type=\"checkbox\" name=\"flag_threshold[]\" value=\"$t_flag_name\" $t_set />";
 	} else {
-		return $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&nbsp;';
+		return $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;';
 	}
 }
 
@@ -165,14 +165,14 @@ function get_section_begin_for_email( $p_section_name ) {
 	echo '<table class="width100">';
 	echo '<tr><td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 	echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'message' ) . '</td>';
-	echo'<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'issue_reporter' ) . '&nbsp;</td>';
-	echo '<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'issue_handler' ) . '&nbsp;</td>';
-	echo '<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'users_monitoring_bug' ) . '&nbsp;</td>';
-	echo '<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'users_added_bugnote' ) . '&nbsp;</td>';
-	echo '<td class="form-title" style="text-align:center" colspan="' . count( $t_access_levels ) . '">&nbsp;' . lang_get( 'access_levels' ) . '&nbsp;</td></tr><tr>';
+	echo'<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_reporter' ) . '&#160;</td>';
+	echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_handler' ) . '&#160;</td>';
+	echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_monitoring_bug' ) . '&#160;</td>';
+	echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_added_bugnote' ) . '&#160;</td>';
+	echo '<td class="form-title" style="text-align:center" colspan="' . count( $t_access_levels ) . '">&#160;' . lang_get( 'access_levels' ) . '&#160;</td></tr><tr>';
 
 	foreach( $t_access_levels as $t_access_level ) {
-		echo '<td class="form-title" style="text-align:center">&nbsp;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&nbsp;</td>';
+		echo '<td class="form-title" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</td>';
 	}
 
 	echo '</tr>' . "\n";

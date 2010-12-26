@@ -343,7 +343,7 @@ for ($i=0;$i<$user_count;$i++) {
 		if ( $u_protected ) {
 			echo " $t_lock_image";
 		} else {
-			echo '&nbsp;';
+			echo '&#160;';
 		}
           ?>
         </td>

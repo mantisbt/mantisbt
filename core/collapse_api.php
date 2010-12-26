@@ -137,7 +137,7 @@ function collapse_icon( $p_name, $p_section = '' ) {
 		$t_id = $p_name. '_closed_link';
 	}
 
-	echo '<a id="', $t_id, '" href="" class="collapse-link"><img border="0" src="images/', $t_icon, '" alt="', $t_alt, '" /></a>&nbsp;';
+	echo '<a id="', $t_id, '" href="" class="collapse-link"><img border="0" src="images/', $t_icon, '" alt="', $t_alt, '" /></a>&#160;';
 }
 
 /**

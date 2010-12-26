@@ -103,7 +103,7 @@ foreach( $t_query_arr as $t_id => $t_name ) {
 # Tidy up this row
 if ( ( $t_column_count > 0 ) && ( $t_column_count < $t_max_column_count ) ) {
 	for ( $i = $t_column_count; $i < $t_max_column_count; $i++ ) {
-		print '<td>&nbsp;</td>';
+		print '<td>&#160;</td>';
 	}
 	print '</tr>';
 }

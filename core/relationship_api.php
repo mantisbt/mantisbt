@@ -655,13 +655,13 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 	$t_status_string = get_enum_element( 'status', $t_bug->status );
 	$t_resolution_string = get_enum_element( 'resolution', $t_bug->resolution );
 
-	$t_relationship_info_html = $t_td . string_no_break( $t_relationship_descr ) . '&nbsp;</td>';
+	$t_relationship_info_html = $t_td . string_no_break( $t_relationship_descr ) . '&#160;</td>';
 	if( $p_html_preview == false ) {
 		$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</a></td>';
 		$t_relationship_info_html .= '<td><span class="issue-status" title="' . string_attribute( $t_resolution_string ) . '">' . string_display_line( $t_status_string ) . '</span></td>';
 	} else {
 		$t_relationship_info_html .= $t_td . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</td>';
-		$t_relationship_info_html .= $t_td . string_display_line( $t_status_string ) . '&nbsp;</td>';
+		$t_relationship_info_html .= $t_td . string_display_line( $t_status_string ) . '&#160;</td>';
 	}
 
 	$t_relationship_info_text = utf8_str_pad( $t_relationship_descr, 20 );
@@ -672,11 +672,11 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 	if( $t_bug->handler_id > 0 ) {
 		$t_relationship_info_html .= string_no_break( prepare_user_name( $t_bug->handler_id ) );
 	}
-	$t_relationship_info_html .= '&nbsp;</td>';
+	$t_relationship_info_html .= '&#160;</td>';
 
 	# add project name
 	if( $p_show_project ) {
-		$t_relationship_info_html .= $t_td . string_display_line( $t_related_project_name ) . '&nbsp;</td>';
+		$t_relationship_info_html .= $t_td . string_display_line( $t_related_project_name ) . '&#160;</td>';
 	}
 
 	# add summary
@@ -700,7 +700,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 		}
 	}
 
-	$t_relationship_info_html .= '&nbsp;</td>';
+	$t_relationship_info_html .= '&#160;</td>';
 	$t_relationship_info_text .= "\n";
 
 	if( $p_html_preview == false ) {

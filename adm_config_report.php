@@ -189,7 +189,7 @@ $result = db_query_bound( $query );
 					if ( config_can_delete( $v_config_id ) ) {
 						print_button( "adm_config_delete.php?user_id=$v_user_id&project_id=$v_project_id&config_option=$v_config_id", lang_get( 'delete_link' ) );
 					} else {
-						echo '&nbsp;';
+						echo '&#160;';
 					}
 				?>
 			</td>

@@ -415,7 +415,7 @@ function columns_remove_invalid( $p_columns, $p_columns_all ) {
  * @access public
  */
 function print_column_title_selection( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th class="column-selection"> &nbsp; </th>';
+	echo '<th class="column-selection"> &#160; </th>';
 }
 
 /**
@@ -427,7 +427,7 @@ function print_column_title_selection( $p_sort, $p_dir, $p_columns_target = COLU
  * @access public
  */
 function print_column_title_edit( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th class="column-edit"> &nbsp; </th>';
+	echo '<th class="column-edit"> &#160; </th>';
 }
 
 /**
@@ -904,7 +904,7 @@ function print_column_selection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW
 		$g_checkboxes_exist = true;
 		printf( "<input type=\"checkbox\" name=\"bug_arr[]\" value=\"%d\" />", $p_bug->id );
 	} else {
-		echo "&nbsp;";
+		echo "&#160;";
 	}
 	echo '</td>';
 }
@@ -963,7 +963,7 @@ function print_column_edit( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE
 		echo '" alt="' . lang_get( 'update_bug_button' ) . '"';
 		echo ' title="' . lang_get( 'update_bug_button' ) . '" /></a>';
 	} else {
-		echo '&nbsp;';
+		echo '&#160;';
 	}
 
 	echo '</td>';
@@ -1047,7 +1047,7 @@ function print_column_bugnotes_count( $p_bug, $p_columns_target = COLUMNS_TARGET
 			echo '</span>';
 		}
 	} else {
-		echo '&nbsp;';
+		echo '&#160;';
 	}
 
 	echo '</td>';
@@ -1083,7 +1083,7 @@ function print_column_attachment_count( $p_bug, $p_columns_target = COLUMNS_TARG
 			echo "<a href=\"$t_href\" title=\"$t_href_title\">$t_attachment_count</a>";
 		}
 	} else {
-		echo ' &nbsp; ';
+		echo ' &#160; ';
 	}
 
 	echo "</td>\n";
@@ -1361,7 +1361,7 @@ function print_column_view_state( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 		$t_view_state_text = lang_get( 'private' );
 		echo '<img src="' . $t_icon_path . 'protected.gif" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '" />';
 	} else {
-		echo '&nbsp;';
+		echo '&#160;';
 	}
 
 	echo '</td>';
@@ -1377,7 +1377,7 @@ function print_column_view_state( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 function print_column_due_date( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	if ( !access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ||
 		date_is_null( $p_bug->due_date ) ) {
-		echo '<td class="column-due-date">&nbsp;</td>';
+		echo '<td class="column-due-date">&#160;</td>';
 		return;
 	}
 
@@ -1411,7 +1411,7 @@ function print_column_overdue( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_P
 		$t_overdue_text_hover = $t_overdue_text . '. Due date was: ' . string_display_line( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
 		echo '<img src="' . $t_icon_path . 'overdue.png" alt="' . $t_overdue_text . '" title="' . $t_overdue_text_hover . '" />';
 	} else {
-		echo '&nbsp;';
+		echo '&#160;';
 	}
 
 	echo '</td>';

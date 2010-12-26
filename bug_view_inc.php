@@ -244,7 +244,7 @@ echo '<td class="form-title" colspan="', $t_bugslist ? '3' : '4', '">';
 
 echo $tpl_form_title;
 
-echo '&nbsp;<span class="small">';
+echo '&#160;<span class="small">';
 
 # Jump to Bugnotes
 print_bracket_link( "#bugnotes", lang_get( 'jump_to_bugnotes' ), false, 'jump-to-bugnotes' );
@@ -383,7 +383,7 @@ if ( $tpl_show_reporter ) {
 	echo '<td class="bug-reporter">';
 	print_user_with_subject( $tpl_bug->reporter_id, $tpl_bug_id );
 	echo '</td>';
-	echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
 	echo '</tr>';
 }
@@ -416,7 +416,7 @@ if ( $tpl_show_handler || $tpl_show_due_date ) {
 		$t_spacer += 2;
 	}
 
-	echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 	echo '</tr>';
 }
 
@@ -455,7 +455,7 @@ if ( $tpl_show_priority || $tpl_show_severity || $tpl_show_reproducibility ) {
 
 	# spacer
 	if ( $t_spacer > 0 ) {
-		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
 	}
 
 	echo '</tr>';
@@ -488,7 +488,7 @@ if ( $tpl_show_status || $tpl_show_resolution ) {
 
 	# spacer
 	if ( $t_spacer > 0 ) {
-		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
 	}
 
 	echo '</tr>';
@@ -519,7 +519,7 @@ if ( $tpl_show_projection || $tpl_show_eta ) {
 		$t_spacer += 2;
 	}
 
-	echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 	echo '</tr>';
 }
 
@@ -557,7 +557,7 @@ if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) {
 	}
 
 	if ( $t_spacer > 0 ) {
-		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
 	}
 
 	echo '</tr>';
@@ -589,7 +589,7 @@ if ( $tpl_show_product_version || $tpl_show_product_build ) {
 	}
 
 	# spacer
-	echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
 	echo '</tr>';
 }
@@ -621,7 +621,7 @@ if ( $tpl_show_target_version || $tpl_show_fixed_in_version ) {
 	}
 
 	# spacer
-	echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
 	echo '</tr>';
 }

@@ -1206,7 +1206,7 @@ function print_button( $p_action_page, $p_label, $p_args_to_post = null ) {
 
 # print brackets around a pre-prepared link (i.e. '<a href' html tag).
 function print_bracket_link_prepared( $p_link ) {
-	echo '<span class="bracket-link">[&nbsp;' . $p_link . '&nbsp;]</span> ';
+	echo '<span class="bracket-link">[&#160;' . $p_link . '&#160;]</span> ';
 }
 
 # print the bracketed links used near the top
@@ -1217,9 +1217,9 @@ function print_bracket_link( $p_link, $p_url_text, $p_new_window = false, $p_cla
 	if ($p_class !== '') {
 	    echo ' bracket-link-',$p_class; # prefix on a container allows styling of whole link, including brackets
     }
-	echo '">[&nbsp;';
+	echo '">[&#160;';
 	print_link( $p_link, $p_url_text, $p_new_window, $p_class );
-	echo '&nbsp;]</span> ';
+	echo '&#160;]</span> ';
 }
 
 # print a HTML link
@@ -1282,9 +1282,9 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 
 	# First and previous links
 	print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_id );
-	echo '&nbsp;';
+	echo '&#160;';
 	print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_id );
-	echo '&nbsp;';
+	echo '&#160;';
 
 	# Page numbers ...
 
@@ -1311,20 +1311,20 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 			}
 		}
 	}
-	echo implode( '&nbsp;', $t_items );
+	echo implode( '&#160;', $t_items );
 
 	if( $t_last_page < $p_end ) {
 		print( ' ... ' );
 	}
 
 	# Next and Last links
-	echo '&nbsp;';
+	echo '&#160;';
 	if( $p_current < $p_end ) {
 		print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_id );
 	} else {
 		print_page_link( $p_page, $t_next, null, null, $p_temp_filter_id );
 	}
-	echo '&nbsp;';
+	echo '&#160;';
 	print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_id );
 
 	print( ' ]' );

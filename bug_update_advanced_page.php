@@ -271,7 +271,7 @@ if ( $tpl_show_reporter ) {
 	}
 
 	# spacer
-	echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
 	echo '</tr>';
 }
@@ -329,7 +329,7 @@ if ( $tpl_show_handler || $tpl_show_due_date ) {
 	}
 
 	# spacer
-	echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
 	echo '</tr>';
 }
@@ -375,7 +375,7 @@ if ( $tpl_show_priority || $tpl_show_severity || $tpl_show_reproducibility ) {
 
 	# spacer
 	if ( $t_spacer > 0 ) {
-		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
 	}
 
 	echo '</tr>';
@@ -414,7 +414,7 @@ if ( $tpl_show_status || $tpl_show_resolution ) {
 
 	# spacer
 	if ( $t_spacer > 0 ) {
-		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
 	}
 
 	echo '</tr>';
@@ -453,7 +453,7 @@ if ( $tpl_show_projection || $tpl_show_eta ) {
 	}
 
 	# spacer
-	echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
 	echo '</tr>';
 }
@@ -523,7 +523,7 @@ if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) {
 
 	# spacer
 	if ( $t_spacer > 0 ) {
-		echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
 	}
 
 	echo '</tr>';
@@ -558,7 +558,7 @@ if ( $tpl_show_product_version || $tpl_show_product_build ) {
 	}
 
 	# spacer
-	echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
 	echo '</tr>';
 }
@@ -598,7 +598,7 @@ if ( $tpl_show_target_version || $tpl_show_fixed_in_version ) {
 	}
 
 	# spacer
-	echo '<td colspan="', $t_spacer, '">&nbsp;</td>';
+	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
 	echo '</tr>';
 }

@@ -119,7 +119,7 @@ html_page_top();
 			$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';
 			echo $t_href;
 			print_file_icon( $v_filename );
-			echo '</a>&nbsp;' . $t_href . file_get_display_name( $v_filename ) . '</a>';
+			echo '</a>&#160;' . $t_href . file_get_display_name( $v_filename ) . '</a>';
 		?>
 	</td>
 </tr>

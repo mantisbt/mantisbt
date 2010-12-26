@@ -47,7 +47,7 @@ function custom_function_override_changelog_print_issue( $p_issue_id, $p_issue_l
     }
 
     $t_category = is_blank( $t_category_name ) ? '' : '&lt;b&gt;[' . $t_category_name . ']&lt;/b&gt; ';
-    echo str_pad( '', $p_issue_level * 6, '&nbsp;' ), '- ', string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_display_line_links( $t_bug->summary );
+    echo str_pad( '', $p_issue_level * 6, '&#160;' ), '- ', string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_display_line_links( $t_bug->summary );
 
     if ( $t_bug->handler_id != 0 ) {
         echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
@@ -151,7 +151,7 @@ function custom_function_override_roadmap_print_issue( $p_issue_id, $p_issue_lev
 
     $t_category = is_blank( $t_category_name ) ? '' : '&lt;b&gt;[' . $t_category_name . ']&lt;/b&gt; ';
 
-    echo str_pad( '', $p_issue_level * 6, '&nbsp;' ), '- ', $t_strike_start, string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_display_line_links( $t_bug->summary );
+    echo str_pad( '', $p_issue_level * 6, '&#160;' ), '- ', $t_strike_start, string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_display_line_links( $t_bug->summary );
 
     if ( $t_bug->handler_id != 0 ) {
         echo ' (', prepare_user_name( $t_bug->handler_id ), ')';

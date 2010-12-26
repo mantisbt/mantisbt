@@ -241,7 +241,7 @@ print_manage_menu( 'manage_proj_page.php' );
 					$t_project_id = urlencode( ALL_PROJECTS );
 
 					print_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit_link' ) );
-					echo '&nbsp;';
+					echo '&#160;';
 					print_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete_link' ) );
 				?>
 			</td>

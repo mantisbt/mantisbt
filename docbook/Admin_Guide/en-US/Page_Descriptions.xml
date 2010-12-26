@@ -1065,7 +1065,7 @@
             rights (i.e. the same as what the user would see if they were to
             logged into MantisBT).To get access to the News RSS as anonymous
             user, visit the following
-            page:&nbsp;http://www.example.com/mantisbt/news_rss.php&nbsp;While a
+            page:&#160;http://www.example.com/mantisbt/news_rss.php&#160;While a
             user is logged in, the RSS links provided in the UI will always
             provide links to the authenticated feeds, if no user is logged in
             (i.e. anonymous), then anonymous links will be provided.

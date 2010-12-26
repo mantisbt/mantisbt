@@ -151,7 +151,7 @@ if ( 0 == $t_sponsors ) {
 		<td class="form-title" width="30%"><?php echo lang_get( 'email_summary' ) ?></td>
 		<td class="form-title" width="8%"><?php echo lang_get( 'amount' ) ?></td>
 		<td class="form-title" width="7%"><?php echo lang_get( 'status' ) ?></td>
-		<td class="form-title" width="10%">&nbsp;</td>
+		<td class="form-title" width="10%">&#160;</td>
 	</tr>
 <?php
 	$t_total_owing = 0;
@@ -173,8 +173,8 @@ if ( 0 == $t_sponsors ) {
 
 		echo '<tr bgcolor="' . get_status_color( $t_bug->status ) . '">';
 		echo '<td><a href="' . string_get_bug_view_url( $row['bug'] ) . '">' . bug_format_id( $row['bug'] ) . '</a></td>';
-		echo '<td>' . project_get_field( $t_bug->project_id, 'name' ) . '&nbsp;</td>';
-		echo '<td class="right">' . $t_released_label . '&nbsp;</td>';
+		echo '<td>' . project_get_field( $t_bug->project_id, 'name' ) . '&#160;</td>';
+		echo '<td class="right">' . $t_released_label . '&#160;</td>';
 		echo '<td><span class="issue-status" title="' . $t_resolution . '">' . $t_status . '</span></td>';
 		echo '<td>';
 		print_user( $t_bug->handler_id );
@@ -201,7 +201,7 @@ if ( 0 == $t_sponsors ) {
 		if ( $t_payment ) {
 			echo '(paypal button)';
 		} else {
-			echo '&nbsp;';
+			echo '&#160;';
 		}
 		echo '</td>';
 		echo '</tr>';
@@ -283,9 +283,9 @@ if ( 0 == $t_sponsors ) {
 
 		echo '<tr bgcolor="' . get_status_color( $t_bug->status ) . '">';
 		echo '<td><a href="' . string_get_bug_view_url( $row['bug'] ) . '">' . bug_format_id( $row['bug'] ) . '</a></td>';
-		echo '<td>' . project_get_field( $t_bug->project_id, 'name' ) . '&nbsp;</td>';
-		echo '<td class="right">' . $t_released_label . '&nbsp;</td>';
-		echo '<td><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>';
+		echo '<td>' . project_get_field( $t_bug->project_id, 'name' ) . '&#160;</td>';
+		echo '<td class="right">' . $t_released_label . '&#160;</td>';
+		echo '<td><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&#160;</a></td>';
 
 		# summary
 		echo '<td>' . string_display_line( $t_bug->summary );
@@ -328,7 +328,7 @@ if ( 0 == $t_sponsors ) {
 	<input type="hidden" name="buglist" value="<?php echo $t_hidden_bug_list ?>" />
 	<!-- BUTTONS -->
 	<tr>
-		<td colspan="5">&nbsp;</td>
+		<td colspan="5">&#160;</td>
 		<!-- Update Button -->
 		<td colspan="2">
 			<input type="submit" class="button" value="<?php echo lang_get( 'update_sponsorship_button' ) ?>" />

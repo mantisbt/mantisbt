@@ -100,7 +100,7 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 </tr>
 <tr>
 	<td>
-		&nbsp;
+		&#160;
 	</td>
 	<td>
 		<input type="submit" class="button" value="<?php echo lang_get( 'update_category_button' ) ?>" />

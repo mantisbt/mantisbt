@@ -47,7 +47,7 @@ function icon_get_status_icon( $p_icon ) {
 	if( isset( $t_status_icon_arr[$p_icon] ) && !is_blank( $t_status_icon_arr[$p_icon] ) ) {
 		return "<img src=\"$t_icon_path$t_status_icon_arr[$p_icon]\" alt=\"\" title=\"$t_priotext\" />";
 	} else {
-		return "&nbsp;";
+		return "&#160;";
 	}
 }
 

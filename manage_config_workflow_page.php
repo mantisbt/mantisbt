@@ -103,14 +103,14 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 			$t_set = $t_flag ? "checked=\"checked\"" : "";
 			$t_value .= "<input type=\"checkbox\" name=\"flag[]\" value=\"$t_flag_name\" $t_set />";
 		} else {
-			$t_value .= $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&nbsp;';
+			$t_value .= $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;';
 		}
 
 		if ( $t_flag && ( '' != $t_label ) ) {
 			$t_value .= '<br />(' . $t_label . ')';
 		}
 	} else {
-		$t_value = '<td>&nbsp;';
+		$t_value = '<td>&#160;';
 	}
 
 	$t_value .= '</td>';
@@ -129,7 +129,7 @@ function section_begin( $p_section_name ) {
 	echo "\n<tr>";
 
 	foreach( $t_enum_statuses as $t_status ) {
-		echo '<td class="form-title" style="text-align:center">&nbsp;' . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) ) . '&nbsp;</td>';
+		echo '<td class="form-title" style="text-align:center">&#160;' . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) ) . '&#160;</td>';
 	}
 
 	echo '<td class="form-title" style="text-align:center">' . lang_get( 'custom_field_default_value' ) . '</td>';
@@ -217,8 +217,8 @@ function threshold_row( $p_threshold ) {
 		echo '</select> </td>';
 		$t_can_change_flags = true;
 	} else {
-		echo '<td' . $t_colour . '>' . MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_project ) . '&nbsp;</td>';
-		echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&nbsp;</td>';
+		echo '<td' . $t_colour . '>' . MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_project ) . '&#160;</td>';
+		echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>';
 	}
 
 	echo '</tr>' . "\n";

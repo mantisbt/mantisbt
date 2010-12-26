@@ -82,7 +82,7 @@ $g_cache_html_valid_tags_single_line = '';
 		}
 
 		for( $j = 0;$j < $spaces;$j++ ) {
-			$prefix .= '&nbsp;';
+			$prefix .= '&#160;';
 		}
 
 		$lines[$i] = $prefix . utf8_substr( $lines[$i], $count );
@@ -121,7 +121,7 @@ function string_nl2br( $p_string, $p_wrap = 100 ) {
 
 				# @@@ thraxisp - this may want to be replaced by html_entity_decode (or equivalent)
 				#     if other encoded characters are a problem
-				$piece = preg_replace( '/&nbsp;/', ' ', $piece );
+				$piece = preg_replace( '/&#160;/', ' ', $piece );
 				if( ON == config_get( 'wrap_in_preformatted_text' ) ) {
 					$output .= preg_replace( '/([^\n]{' . $p_wrap . ',}?[\s]+)(?!<\/pre>)/', "$1\n", $piece );
 				} else {
@@ -185,7 +185,7 @@ function string_display_line_links( $p_string ) {
  * @return string
  */
 function string_rss_links( $p_string ) {
-	# rss can not start with &nbsp; which spaces will be replaced into by string_display().
+	# rss can not start with &#160; which spaces will be replaced into by string_display().
 	$t_string = trim( $p_string );
 
 	$t_string = event_signal( 'EVENT_DISPLAY_RSS', $t_string );

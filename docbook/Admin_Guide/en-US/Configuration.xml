@@ -1592,8 +1592,8 @@
                         parameters (eg. )The HTML code is allowed to enter the database as
                         is. The $g_allow_href_tags does not have to be enabled to make URL
                         links. The package will automatically hyperlink properly formatted
-                        URLs&nbsp;eg. http://blah.blah/ or
-                        mailto://me@more.com/&nbsp;
+                        URLs&#160;eg. http://blah.blah/ or
+                        mailto://me@more.com/&#160;
                     </para>
                 </listitem>
             </varlistentry>

@@ -269,7 +269,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		}
 	} else {
 ?>
-	<td class="print" colspan="2">&nbsp;</td>
+	<td class="print" colspan="2">&#160;</td>
 <?php } ?>
 </tr>
 <tr class="print">
@@ -289,7 +289,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	<td class="print">
 		<?php echo string_display_line( $t_bug->os ) ?>
 	</td>
-	<td class="print" colspan="2">&nbsp;</td>
+	<td class="print" colspan="2">&#160;</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -304,7 +304,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	<td class="print">
 		<?php echo string_display_line( $t_bug->os_build ) ?>
 	</td>
-	<td class="print" colspan="2">&nbsp;</td>
+	<td class="print" colspan="2">&#160;</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -319,7 +319,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	<td class="print">
 		<?php echo string_display_line( $t_bug->version ) ?>
 	</td>
-	<td class="print" colspan="2">&nbsp;</td>
+	<td class="print" colspan="2">&#160;</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -334,7 +334,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	<td class="print">
 		<?php echo get_enum_element( 'resolution', $t_bug->resolution ) ?>
 	</td>
-	<td class="print" colspan="2">&nbsp;</td>
+	<td class="print" colspan="2">&#160;</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -344,12 +344,12 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo get_enum_element( 'projection', $t_bug->projection ) ?>
 	</td>
 	<td class="print-category">
-		&nbsp;
+		&#160;
 	</td>
 	<td class="print">
-		&nbsp;
+		&#160;
 	</td>
-	<td class="print" colspan="2">&nbsp;</td>
+	<td class="print" colspan="2">&#160;</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -364,15 +364,15 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	<td class="print">
 		<?php echo string_display_line( $t_bug->fixed_in_version ) ?>
 	</td>
-	<td class="print" colspan="2">&nbsp;</td>
+	<td class="print" colspan="2">&#160;</td>
 
 </tr>
 <tr class="print">
 	<td class="print-category">
-		&nbsp;
+		&#160;
 	</td>
 	<td class="print">
-		&nbsp;
+		&#160;
 	</td>
 	<td class="print-category">
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_target_version ) ?>
@@ -380,7 +380,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	<td class="print">
 		<?php echo string_display_line( $t_bug->target_version ) ?>
 	</td>
-	<td class="print" colspan="2">&nbsp;</td>
+	<td class="print" colspan="2">&#160;</td>
 </tr>
 <?php
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
@@ -530,12 +530,12 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		</tr>
 		<tr>
 			<td class="print">
-				<?php print_user( $t_bugnote->reporter_id ) ?>&nbsp;&nbsp;&nbsp;
+				<?php print_user( $t_bugnote->reporter_id ) ?>&#160;&#160;&#160;
 			</td>
 		</tr>
 		<tr>
 			<td class="print">
-				<?php echo $t_date_submitted ?>&nbsp;&nbsp;&nbsp;
+				<?php echo $t_date_submitted ?>&#160;&#160;&#160;
 				<?php if ( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
 					echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $t_last_modified . ')';
 				} ?>

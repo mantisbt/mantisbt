@@ -198,7 +198,7 @@ echo '</div>';
 <?php
 echo '<br /><div align="center">';
 print_signup_link();
-echo '&nbsp;';
+echo '&#160;';
 print_lost_password_link();
 echo '</div>';
 

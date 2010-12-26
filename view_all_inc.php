@@ -121,11 +121,11 @@ if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend
 		<span class="floatleft small">
 		<?php
 			# -- Print and Export links --
-			echo '&nbsp;';
+			echo '&#160;';
 			print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
-			echo '&nbsp;';
+			echo '&#160;';
 			print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
-			echo '&nbsp;';
+			echo '&#160;';
 			print_bracket_link( 'excel_xml_export.php', lang_get( 'excel_export' ) );
 
 			$t_event_menu_options = $t_links = event_signal( 'EVENT_MENU_FILTER' );
@@ -188,7 +188,7 @@ function write_bug_rows ( $p_rows )
 		if ( ( 0 == $t_row->sticky ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
 ?>
 		   <tr>
-				   <td class="left" colspan="<?php echo count( $t_columns ); ?>" bgcolor="#999999">&nbsp;</td>
+				   <td class="left" colspan="<?php echo count( $t_columns ); ?>" bgcolor="#999999">&#160;</td>
 		   </tr>
 <?php
 			$t_in_stickies = false;
@@ -231,7 +231,7 @@ write_bug_rows($rows);
 			<input type="submit" class="button" value="<?php echo lang_get( 'ok' ); ?>" />
 <?php
 		} else {
-			echo '&nbsp;';
+			echo '&#160;';
 		}
 ?>			</span>
 			<span class="floatright small">

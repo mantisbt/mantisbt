@@ -864,9 +864,9 @@ function print_menu() {
 
 		$t_bug_label = lang_get( 'issue_id' );
 		echo '<input type="hidden" name="bug_label" value="', $t_bug_label, '" />';
-		echo '<input type="text" name="bug_id" size="10" class="small" />&nbsp;';
+		echo '<input type="text" name="bug_id" size="10" class="small" />&#160;';
 
-		echo '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&nbsp;';
+		echo '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&#160;';
 		echo '</form>';
 		echo '</div>';
 		echo '<div class="main-menu">';

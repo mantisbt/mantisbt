@@ -136,7 +136,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 <?php
 echo '<br /><div align="center">';
 print_login_link();
-echo '&nbsp;';
+echo '&#160;';
 print_lost_password_link();
 echo '</div>';
 

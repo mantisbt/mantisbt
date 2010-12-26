@@ -229,7 +229,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</td>
 		</tr>
 		<tr>
-			<td>&nbsp;</td>
+			<td>&#160;</td>
 			<td>
 				<input type="submit" class="button" value="<?php echo lang_get( 'update_custom_field_button' ) ?>" />
 			</td>

@@ -139,7 +139,7 @@ for ($i=0;$i<$num_files;$i++) {
 	$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';
 	echo $t_href;
 	print_file_icon( $v_filename );
-	echo '</a>&nbsp;' . $t_href . $v_title . '</a> (' . $v_filesize . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
+	echo '</a>&#160;' . $t_href . $v_title . '</a> (' . $v_filesize . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
 ?>
 	<br />
 	<span class="small">
@@ -153,9 +153,9 @@ for ($i=0;$i<$num_files;$i++) {
 	}
 	echo '(' . $v_date_added . ')';
 	if ( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
-		echo '&nbsp;';
+		echo '&#160;';
 		print_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
-		echo '&nbsp;';
+		echo '&#160;';
 		print_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ) );
 	}
 ?>
