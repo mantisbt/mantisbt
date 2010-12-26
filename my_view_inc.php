@@ -469,7 +469,7 @@ echo "<span class=\"my-buglist-count\">($v_start - $v_end / $t_bug_count)</span>
 <tr class="my-buglist-bug <?php echo $t_bug_class?>" bgcolor="<?php echo $status_color?>">
 	<?php
 	# -- Bug ID and details link + Pencil shortcut --?>
-	<td class="center my-buglist-id" width ="0" nowrap="nowrap">
+	<td class="center nowrap my-buglist-id" width="0">
 		<span class="small">
 		<?php
 			print_bug_link( $t_bug->id );

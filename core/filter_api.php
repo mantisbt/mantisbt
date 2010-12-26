@@ -3803,7 +3803,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 			<td>
 			<?php echo lang_get( 'start_date_label' )?>
 			</td>
-			<td nowrap="nowrap">
+			<td class="nowrap">
 			<?php
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
