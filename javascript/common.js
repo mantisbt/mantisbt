@@ -223,6 +223,18 @@ $(document).ready( function() {
 			$('form[name=filters] select[name=end_day]').removeAttr('disabled');
 		}
 	});
+
+	/* For Period.php bundled with the core MantisGraph plugin */
+	$('#dates > input[type=image].datetime').hide();
+	$('#period_menu > select#interval').change(function() {
+		if ($(this).val() == 10) {
+			$('#dates > input[type=text].datetime').removeAttr('disabled');
+			$('#dates > input[type=image].datetime').show();
+		} else {
+			$('#dates > input[type=text].datetime').attr('disabled', 'disabled');
+			$('#dates > input[type=image].datetime').hide();
+		}
+	});
 });
 
 function setBugLabel() {

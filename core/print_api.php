@@ -1477,7 +1477,7 @@ function print_recently_visited() {
 }
 
 # print a dropdown box from input array
-function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_any = false, $p_multiple = false, $p_change_script = '' ) {
+function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_any = false, $p_multiple = false ) {
 	$t_control_array = $p_control_array;
 	if( $p_multiple ) {
 		$t_size = ' size="5"';
@@ -1486,8 +1486,7 @@ function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_
 		$t_size = '';
 		$t_multiple = '';
 	}
-	$t_script = ( $p_change_script == '' ? '' : ' onchange="' . $p_change_script . '"' );
-	$t_info = sprintf( "<select %s name=\"%s\" id=\"%s\"%s%s>", $t_multiple, $p_control_name, $p_control_name, $t_size, $t_script );
+	$t_info = sprintf( "<select %s name=\"%s\" id=\"%s\"%s>", $t_multiple, $p_control_name, $p_control_name, $t_size );
 	if( $p_add_any ) {
 		array_unshift_assoc( $t_control_array, META_FILTER_ANY, lang_trans( '[any]' ) );
 	}

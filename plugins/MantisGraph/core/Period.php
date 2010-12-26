@@ -267,18 +267,12 @@ class Period {
 		$t_formatted_start = $this->get_start_formatted();
 		$t_formatted_end = $this->get_end_formatted();
 		$t_ret = '<div id="period_menu">';
-		$t_ret .= get_dropdown( $t_periods, $p_control_name, $t_default, false, false, 'setDisplay(\'dates\', document.getElementById(\'' . $p_control_name . '\').value == 10)' );
-		$t_ret .= '</div><div id="dates">' . lang_get( 'from_date' ) . '&#160;' . '<input type="text" id="start_date" name="start_date" size="10" value="' . $t_formatted_start . '" />' . '<img src="images/calendar-img.gif" id="f_trigger_s" style="cursor: pointer; border: 1px solid red;" ' . ' title="Date selector" alt="Date" onmouseover="this.style.background=\'red\';"' . ' onmouseout="this.style.background=\'white\'" />' . "\n" . '<br />' . lang_get( 'to_date' ) . '&#160;&#160;&#160;&#160;' . '<input type="text" id="end_date" name="end_date" size="10" value="' . $t_formatted_end . '" />' . '<img src="images/calendar-img.gif" id="f_trigger_e" style="cursor: pointer; border: 1px solid red;" ' . ' alt="Date" title="Date selector" onmouseover="this.style.background=\'red\';"' . ' onmouseout="this.style.background=\'white\'" />' . "\n" . '<script type="text/javascript">
-			<!--
-			Calendar.setup({ inputField : "start_date", ifFormat : "%Y-%m-%d", button : "f_trigger_s",
-			    align : "cR", singleClick : false,  showTime : false });
-    		Calendar.setup({ inputField : "end_date", ifFormat : "%Y-%m-%d", button : "f_trigger_e",
-    			    align : "cR", singleClick : false,  showTime : false });
-    		var t = document.getElementById(\'' . $p_control_name . '\').value;
-    		setDisplay(\'' . $p_control_name . '\',true);
-    		setDisplay(\'dates\', document.getElementById(\'' . $p_control_name . '\').value == 10);
-    			//-->
-    		</script>' . "\n" . '</div>';
+		$t_ret .= get_dropdown( $t_periods, $p_control_name, $t_default, false, false );
+		$t_ret .= "</div>\n";
+		$t_ret .= "<div id=\"dates\">\n";
+		$t_ret .= '<label for="start_date">' . lang_get( 'from_date' ) . '</label><input type="text" id="start_date" name="start_date" size="20" value="' . $t_formatted_start . '" class="datetime" disabled="disabled" />' . "<br />\n";
+		$t_ret .= '<label for="end_date">' . lang_get( 'to_date' ) . '</label><input type="text" id="end_date" name="end_date" size="20" value="' . $t_formatted_end . '" class="datetime" disabled="disabled" />' . "\n";
+		$t_ret .= "</div>\n";
 		return $t_ret;
 	}
 
