@@ -118,7 +118,7 @@ require_api( 'lang_api.php' );
 <?php event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) ); ?>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'add_bugnote_button' ) ?>"  onclick="this.disabled=1;document.bugnoteadd.submit();" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'add_bugnote_button' ) ?>" />
 	</td>
 </tr>
 </table>
