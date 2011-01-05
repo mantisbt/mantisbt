@@ -50,7 +50,6 @@
 
 	$t_user = user_get_row( $f_user_id );
 
-	$f_email	= trim( $f_email );
 	$f_username	= trim( $f_username );
 
 	$t_old_username = $t_user['username'];
@@ -87,7 +86,7 @@
 	if ( $t_ldap && config_get( 'use_ldap_email' ) ) {
 		$t_email = ldap_email( $f_user_id );
 	} else {
-		$t_email = email_append_domain( $f_email );
+		$t_email = email_append_domain( trim( $f_email ) );
 		email_ensure_valid( $t_email );
 		email_ensure_not_disposable( $t_email );
 	}
@@ -165,7 +164,7 @@
 			$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'email_user_updated_subject' );
 			$t_updated_msg = lang_get( 'email_user_updated_msg' );
 			$t_message = $t_updated_msg . "\n\n" . config_get( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
-			email_store( $f_email, $t_subject, $t_message );
+			email_store( $t_email, $t_subject, $t_message );
 			log_event( LOG_EMAIL, sprintf( 'Account update notification sent to ' . $f_username . ' (' . $t_email . ')' ) );
 			if ( config_get( 'email_send_using_cronjob' ) == OFF ) {
 				email_send_all();
