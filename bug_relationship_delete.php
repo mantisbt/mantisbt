@@ -22,7 +22,7 @@
 	 * - Relationship must exist
 	 * @package MantisBT
 	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2011  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 	 * @author Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
 	 * @link http://www.mantisbt.org
 	 */

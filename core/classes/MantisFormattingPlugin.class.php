@@ -1,7 +1,7 @@
 <?php
 # MantisBT - a php based bugtracking system
 
-# Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.
+# Copyright (C) 2002 - 2011  MantisBT Team - mantisbt-dev@lists.sourceforge.
 
 # MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 /**
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2011  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  * @package MantisBT
  */
