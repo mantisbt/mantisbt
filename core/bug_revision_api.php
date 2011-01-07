@@ -19,7 +19,7 @@
  *
  * @package CoreAPI
  * @subpackage BugRevisionAPI
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2011  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses constant_inc.php

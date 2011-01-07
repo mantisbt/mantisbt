@@ -17,7 +17,7 @@
 /**
  * @package Tests
  * @subpackage UnitTests
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2011  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -40,7 +40,7 @@ require_once 'ProjectTest.php';
 /**
  * @package    Tests
  * @subpackage UnitTests
- * @copyright Copyright (C) 2002 - 2010  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2011  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 class Soap_AllTests extends PHPUnit_Framework_TestSuite
