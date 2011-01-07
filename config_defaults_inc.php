@@ -1153,6 +1153,13 @@
 	$g_default_bug_eta = ETA_NONE;
 
 	/**
+	 * Default global category to be used when an issue is moved from a project to another
+	 * that doesn't have a category with a matching name.  The default is 1 which is the "General"
+	 * category that is created in the default database.
+	 */
+	$g_default_category_for_moves = 1;
+
+	/**
 	 *
 	 * @global int $g_default_limit_view
 	 */
