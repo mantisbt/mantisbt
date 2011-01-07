@@ -123,7 +123,7 @@ function http_content_headers() {
 		// Only use the application/xhtml+xml MIME type if the browser
 		// has indicated support for this type. Internet Explorer
 		// prior to version 9 only supports the text/html MIME type.
-		if ( stristr( $_SERVER[HTTP_ACCEPT], 'application/xhtml+xml' ) ) {
+		if ( stristr( $_SERVER['HTTP_ACCEPT'], 'application/xhtml+xml' ) ) {
 			header( 'Content-Type: application/xhtml+xml; charset=UTF-8' );
 		} else {
 			header( 'Content-Type: text/html; charset=UTF-8' );
