@@ -120,7 +120,15 @@ function http_caching_headers( $p_allow_caching=false ) {
  */
 function http_content_headers() {
 	if ( !headers_sent() ) {
-		header( 'Content-Type: application/xhtml+xml; charset=UTF-8' );
+		// Only use the application/xhtml+xml MIME type if the browser
+		// has indicated support for this type. Internet Explorer
+		// prior to version 9 only supports the text/html MIME type.
+		if ( stristr( $_SERVER[HTTP_ACCEPT], 'application/xhtml+xml' ) ) {
+			header( 'Content-Type: application/xhtml+xml; charset=UTF-8' );
+		} else {
+			header( 'Content-Type: text/html; charset=UTF-8' );
+		}
+
 		// Disallow Internet Explorer from attempting to second guess the Content-Type
 		// header as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
 		header( 'X-Content-Type-Options: nosniff' );
