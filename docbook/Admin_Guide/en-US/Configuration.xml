@@ -1153,6 +1153,16 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_default_category_for_moves</term>
+                <listitem>
+                    <para>
+                        Default global category to be used when an issue is moved from a project to another
+                        that doesn't have a category with a matching name.  The default is 1 which is the "General"
+                        category that is created in the default database.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_default_limit_view</term>
                 <listitem>
                     <para>Number of bugs to show in the View Bugs page. The default
