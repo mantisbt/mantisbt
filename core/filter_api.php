@@ -2463,6 +2463,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<td colspan="1" class="small-caption" valign="top">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_FIXED_IN_VERSION . '[]';?>" id="show_fixed_in_version_filter"><?php echo lang_get( 'fixed_in_version' )?>:</a>
 			</td>
+			<td colspan="1" class="small-caption" valign="top">
+				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_TARGET_VERSION . '[]';?>" id="show_target_version_filter"><?php echo lang_get( 'target_version' )?>:</a>
+			</td>
 			<?php
 		} else {?>
 			<td colspan="2" class="small-caption" valign="top">
@@ -2471,13 +2474,13 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<td colspan="1" class="small-caption" valign="top">
 				&#160;
 			</td>
+			<td colspan="1" class="small-caption" valign="top">
+				&nbsp;
+			</td>
 			<?php
 		}?>
 			<td colspan="1" class="small-caption" valign="top">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRIORITY_ID . '[]';?>" id="show_priority_filter"><?php echo lang_get( 'priority' )?>:</a>
-			</td>
-			<td colspan="1" class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_TARGET_VERSION . '[]';?>" id="show_target_version_filter"><?php echo lang_get( 'target_version' )?>:</a>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
 			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&#160;</td>';
@@ -2662,6 +2665,40 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			}
 			?>
 			</td>
+				<td colspan="1" class="small-caption" valign="top" id="show_target_version_filter_target">
+								<?php
+									$t_output = '';
+			$t_any_found = false;
+			if( count( $t_filter[FILTER_PROPERTY_TARGET_VERSION] ) == 0 ) {
+				echo lang_get( 'any' );
+			} else {
+				$t_first_flag = true;
+				foreach( $t_filter[FILTER_PROPERTY_TARGET_VERSION] as $t_current ) {
+					$t_current = stripslashes( $t_current );
+					echo '<input type="hidden" name="', FILTER_PROPERTY_TARGET_VERSION, '[]" value="', string_display( $t_current ), '" />';
+					$t_this_string = '';
+					if( filter_field_is_any( $t_current ) ) {
+						$t_any_found = true;
+					} else if( filter_field_is_none( $t_current ) ) {
+						$t_this_string = lang_get( 'none' );
+					} else {
+						$t_this_string = string_display( $t_current );
+					}
+					if( $t_first_flag != true ) {
+						$t_output = $t_output . '<br />';
+					} else {
+						$t_first_flag = false;
+					}
+					$t_output = $t_output . $t_this_string;
+				}
+				if( true == $t_any_found ) {
+					echo lang_get( 'any' );
+				} else {
+					echo $t_output;
+				}
+			}
+			?>
+				</td>
 			<?php
 		} else {?>
 			<td colspan="2" class="small-caption" valign="top">
@@ -2669,6 +2706,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 			<td colspan="1" class="small-caption" valign="top">
 				&#160;
+			</td>
+			<td colspan="1" class="small-caption" valign="top">
+				&nbsp;
 			</td>
 			<?php
 		}?>
@@ -2703,40 +2743,6 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		}
 		?>
 	    	</td>
-			<td colspan="1" class="small-caption" valign="top" id="show_target_version_filter_target">
-							<?php
-								$t_output = '';
-		$t_any_found = false;
-		if( count( $t_filter[FILTER_PROPERTY_TARGET_VERSION] ) == 0 ) {
-			echo lang_get( 'any' );
-		} else {
-			$t_first_flag = true;
-			foreach( $t_filter[FILTER_PROPERTY_TARGET_VERSION] as $t_current ) {
-				$t_current = stripslashes( $t_current );
-				echo '<input type="hidden" name="', FILTER_PROPERTY_TARGET_VERSION, '[]" value="', string_display( $t_current ), '" />';
-				$t_this_string = '';
-				if( filter_field_is_any( $t_current ) ) {
-					$t_any_found = true;
-				} else if( filter_field_is_none( $t_current ) ) {
-					$t_this_string = lang_get( 'none' );
-				} else {
-					$t_this_string = string_display( $t_current );
-				}
-				if( $t_first_flag != true ) {
-					$t_output = $t_output . '<br />';
-				} else {
-					$t_first_flag = false;
-				}
-				$t_output = $t_output . $t_this_string;
-			}
-			if( true == $t_any_found ) {
-				echo lang_get( 'any' );
-			} else {
-				echo $t_output;
-			}
-		}
-		?>
-			</td>
 			<?php if( $t_filter_cols > 8 ) {
 			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&#160;</td>';
 		}?>
