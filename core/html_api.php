@@ -1558,8 +1558,6 @@ function html_button_bug_assign_to( $p_bug_id ) {
  * @return null
  */
 function html_button_bug_move( $p_bug_id ) {
-	$t_status = bug_get_field( $p_bug_id, 'status' );
-
 	if( access_has_bug_level( config_get( 'move_bug_threshold' ), $p_bug_id ) ) {
 		html_button( 'bug_actiongroup_page.php', lang_get( 'move_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
 	}
@@ -1728,18 +1726,15 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 		echo '</td>';
 	}
 
-	if( !$t_readonly ) {
+	# MOVE button
+	echo '<td class="center">';
+	html_button_bug_move( $p_bug_id );
+	echo '</td>';
 
-		# MOVE button
-		echo '<td class="center">';
-		html_button_bug_move( $p_bug_id );
-		echo '</td>';
-
-		# DELETE button
-		echo '<td class="center">';
-		html_button_bug_delete( $p_bug_id );
-		echo '</td>';
-	}
+	# DELETE button
+	echo '<td class="center">';
+	html_button_bug_delete( $p_bug_id );
+	echo '</td>';
 
 	helper_call_custom_function( 'print_bug_view_page_custom_buttons', array( $p_bug_id ) );
 
