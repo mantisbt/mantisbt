@@ -1185,8 +1185,8 @@ function custom_field_validate( $p_field_id, $p_value ) {
 		case CUSTOM_FIELD_TYPE_LIST:
 		case CUSTOM_FIELD_TYPE_ENUM:
 		case CUSTOM_FIELD_TYPE_RADIO:
-			# List fields can hold be empty (when no checkboxes are ticked)
-			if ( $p_value === '' ) {
+			# List fields can be empty (when they are not shown on the form or shown with no default values and never clicked)
+			if ( is_blank( $p_value ) ) {
 				break;
 			}
 
