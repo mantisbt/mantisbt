@@ -31,6 +31,7 @@
  * @author Paucabot
  * @author Solde
  * @author Ssola
+ * @author Toniher
  */
 
 $s_actiongroup_menu_move = 'Mou';
@@ -465,7 +466,7 @@ $s_file_upload_msg = 'Arxiu penjat';
 $s_upload_file = 'Carrega Arxiu';
 $s_select_file = 'Selecciona Arxiu';
 $s_upload_file_button = 'Carrega Arxiu';
-$s_max_file_size = 'Tamany Màxim';
+$s_max_file_size = 'Mida màxima';
 $s_bug_reopened_msg = 'La incidència ha estat reoberta...';
 $s_reopen_add_bugnote_title = 'Afegeixi una nota per a reobrir la incidència';
 $s_bugnote_add_reopen_button = 'Afegeix nota i reobre la incidència';

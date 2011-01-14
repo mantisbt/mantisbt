@@ -27,6 +27,7 @@
  *
  * @author Consta
  * @author Crazymadlover
+ * @author Evropi
  * @author Kostas Vorilas, math1890@yahoo.gr
  * @author Omnipaedista
  * @author ZaDiak
@@ -304,7 +305,7 @@ $s_fixed_in_version = 'Έκδοση Διόρθωσης';
 $s_target_version = 'Εκδοχή Στόχου';
 $s_votes = 'Ψήφοι';
 $s_summary = 'Περίληψη (μέχρι 64 χαρακτήρες)';
-$s_description = 'Αναλυτική Περιγραφή';
+$s_description = 'Περιγραφή';
 $s_steps_to_reproduce = 'Βήματα για Αναπαραγωγή';
 $s_update_information_button = 'Ενήμερωση Πληροφοριών';
 $s_sticky_issue = 'Θέμα Στο Προσκήνιο';

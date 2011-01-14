@@ -48,6 +48,7 @@
  * @author Sherbrooke
  * @author Verdy p
  * @author Vincent
+ * @author Zetud
  */
 
 $s_actiongroup_menu_move = 'Déplacer';
@@ -228,11 +229,11 @@ $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Aucun fichier déposé. Vous ête
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Le fichier envoyé n\'a pas pu être déplacé vers le répertoire de dépôt. Soit le répertoire n\'existe pas, soit le serveur ne peut pas y accéder.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Impossible de marquer ce bogue comme doublon de lui même.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Révision du bogue introuvable.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Champs personnalisé introuvables';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Champ personnalisé introuvable';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ceci est un nom dupliqué.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Au moins un projet utilise encore ce champs.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Au moins un projet utilise encore ce champ.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valeur non valide pour le champ « %1$s ».';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Définition de champs personnalisé non valide';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Définition de champ personnalisé non valide';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Échec d\'indentification par LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Échec de connexion au serveur LDAP';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Échec de mise à jour de l\'enregistrement LDAP.';

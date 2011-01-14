@@ -785,6 +785,7 @@ $s_dependency_graph = 'Діаграма залежностей';
 $s_vertical = 'Вертикально';
 $s_horizontal = 'Горизонтально';
 $s_view_issue = 'Переглянути проблему';
+$s_view = 'Перегляд';
 $s_delete_attachment_button = 'Вилучити';
 $s_filters = 'фільтри';
 $s_see_email_addresses_of_other_users = 'See email addresses of other users';
