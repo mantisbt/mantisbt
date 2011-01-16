@@ -87,8 +87,9 @@ function InsertData( $p_table, $p_data ) {
 #	6 = post install checks
 #	7 = done, link to login or db updater
 $t_install_state = gpc_get_int( 'install', 0 );
+
+html_begin();
 ?>
-<html>
 <head>
 <title> MantisBT Administration - Installation  </title>
 <link rel="stylesheet" type="text/css" href="admin.css" />
@@ -377,6 +378,7 @@ if( 2 == $t_install_state ) {
 		print_test_result(( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
 		?>
 </tr>
+</table>
 <?php
 	}
 	if( false == $g_failed ) {
@@ -777,7 +779,7 @@ if( 3 == $t_install_state ) {
 		if( $f_log_queries ) {
 			# add a query to set the database version
 			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . "\r\n";
-			echo '</pre></br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</td></tr>';
+			echo '</pre><br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</p></td></tr>';
 		}
 	}
 	if( false == $g_failed ) {
