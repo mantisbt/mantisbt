@@ -174,31 +174,30 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 				}
 			}
 
-			echo '<br /><div><table class="width50" cellspacing="1">';
-			echo '<tr><td class="form-title">', $t_error_type, '</td></tr>';
-			echo '<tr><td><p class="center" style="color:red">', $t_error_description, '</p></td></tr>';
-
-			echo '<tr><td><p class="center">';
+			echo '<div id="error-msg">';
+			echo '<div class="error-type">' . $t_error_type . '</div>';
+			echo '<div class="error-description">', $t_error_description, '</div>';
+			echo '<div class="error-info">';
 			if( null === $g_error_proceed_url ) {
 				echo lang_get( 'error_no_proceed' );
 			} else {
 				echo '<a href="', $g_error_proceed_url, '">', lang_get( 'proceed' ), '</a>';
 			}
-			echo '</p></td></tr>';
+			echo '</div>';
 
 			if( ON == config_get_global( 'show_detailed_errors' ) ) {
-				echo '<tr><td>';
+				echo '<div class="error-details">';
 				error_print_details( $p_file, $p_line, $p_context );
-				echo '</td></tr>';
-				echo '<tr><td>';
+				echo '</div>';
+				echo '<div class="error-trace">';
 				error_print_stack_trace();
-				echo '</td></tr>';
+				echo '</div>';
 			}
-			echo '</table></div>';
+			echo '</div>';
 
 			if( isset( $t_old_contents ) ) {
-				echo '<p>Previous non-fatal errors occurred.  Page contents follow.</p>';
-				echo '<div style="border: solid 1px black;padding: 4px">';
+				echo '<div class="warning">Previous non-fatal errors occurred.  Page contents follow.</div>';
+				echo '<div id="old-contents">';
 				echo $t_old_contents;
 				echo '</div>';
 			}
@@ -215,7 +214,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 			}
 			exit();
 		case 'inline':
-			echo '<p style="color:red">', $t_error_type, ': ', $t_error_description, '</p>';
+			echo '<div class="error-inline">', $t_error_type, ': ', $t_error_description, '</div>';
 			$g_error_handled = true;
 			break;
 		default:

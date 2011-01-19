@@ -290,6 +290,10 @@ select.tainted { background-color: #ffffff; color: red; }
 .stored-queries select { font-size: .9em; }
 #error-msg { clear: both; }
 .error-msg { color: red; text-align: center; }
+div#error-msg { width: 50%; margin: 0em auto; border: 1px solid #000; }
+div.error-type { font-weight: bold; }
+div.error-description { color: red; text-align: center; margin: 1.5em; }
+div.error-info { text-align: center; margin: 1em; }
 
 .bug-attachments {
 	margin: 0;
