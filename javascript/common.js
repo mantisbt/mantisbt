@@ -177,10 +177,10 @@ $(document).ready( function() {
 	$('[name=source_query_id]').change( function() {
 		$(this).parent().submit();
 	});
-	$('[name=form_set_project]').children('[name=project_id]').change( function() {
-		$(this).parent().submit();
+	$('#project-selector').children('[name=project_id]').change( function() {
+		$('#form-set-project').submit();
 	});
-	$('[name=form_set_project]').children('.button').hide();
+	$('#project-selector').children('.button').hide();
 	setBugLabel();
 
 	$('input[type=checkbox]#use_date_filters').live('click', function() {

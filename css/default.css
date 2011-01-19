@@ -105,7 +105,7 @@ tr.bugnote .time-tracked,
 
 #current-time-centered{ position: absolute; width: 100%; text-align: center; }
 #current-time{ margin-right: -2em; float: right; text-align: center; width: 17%; padding: .5em .25em; z-index: 0; line-height: 1em; }
-#project-selector { float: right; z-index: 100; width: 42%; text-align: right; font-size: small; padding: .1em 0 .05em 0; line-height: 1em; margin: 0 .5em 0 1em; }
+#project-selector { border: none; float: right; z-index: 100; width: 42%; text-align: right; font-size: small; padding: .1em 0 .05em 0; line-height: 1em; margin: 0 .5em 0 1em; }
 #project-selector label { padding: .5em; }
 #project-selector label:after { content: ':' }
 #project-selector select{ font-size: small; line-height: 1em; }
@@ -117,7 +117,7 @@ td.login-info-left		{ width: 33%; padding: 0px; text-align: left; }
 td.login-info-middle	{ width: 33%; padding: 0px; text-align: center; }
 td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space: nowrap; }
 
-.bug-jump { clear: both; display:block; float: right; padding: .25em; margin: 0; position: relative; top: .3em; z-index: 100; }
+.bug-jump { clear: both; display:block; float: right; padding: .25em; margin: 0; position: relative; top: .3em; z-index: 100; border: none; }
 .main-menu { float: right; width:100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -2em; border: 1px solid #999; background-color: #e8e8e8; z-index: 99; }
 .main-menu div { width: 93.75%; }
 .main-menu ul { clear: left; float: left; list-style: none; position: relative; left: 50%; margin: 0 0 0 -3.75em; padding: .25em; width: 90%; }

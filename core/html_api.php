@@ -558,8 +558,8 @@ function html_login_info() {
 	}
 
 	if( $t_show_project_selector ) {
-		echo '<div id="project-selector">';
-		echo '<form method="post" name="form_set_project" action="' . helper_mantis_url( 'set_project.php' ) . '">';
+		echo '<form method="post" id="form-set-project" action="' . helper_mantis_url( 'set_project.php' ) . '">';
+		echo '<fieldset id="project-selector">';
 		# CSRF protection not required here - form does not result in modifications
 
 		echo '<label for="form-set-project-id">' . lang_get( 'email_project' ) . '</label>';
@@ -567,8 +567,8 @@ function html_login_info() {
 		print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
 		echo '</select> ';
 		echo '<input type="submit" class="button" value="' . lang_get( 'switch' ) . '" />';
+		echo '</fieldset>';
 		echo '</form>';
-		echo '</div>';
 		echo '<div id="current-time">' . $t_now . '</div>';
 	} else {
 		echo '<div id="current-time-centered">' . $t_now . '</div>';
@@ -852,8 +852,8 @@ function print_menu() {
 		if( !current_user_is_anonymous() ) {
 			$t_menu_options[] = '<a id="logout-link" href="' . helper_mantis_url( 'logout_page.php">' ) . lang_get( 'logout_link' ) . '</a>';
 		}
-		echo '<div class="bug-jump">';
 		echo '<form method="post" action="' . helper_mantis_url( 'jump_to_bug.php" class="bug-jump-form">' );
+		echo '<fieldset class="bug-jump">';
 		# CSRF protection not required here - form does not result in modifications
 
 		$t_bug_label = lang_get( 'issue_id' );
@@ -861,8 +861,8 @@ function print_menu() {
 		echo '<input type="text" name="bug_id" size="10" class="small" />&#160;';
 
 		echo '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&#160;';
+		echo '</fieldset>';
 		echo '</form>';
-		echo '</div>';
 		echo '<div class="main-menu">';
 		echo '<div>';
 		echo '<ul class="menu">';
