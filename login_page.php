@@ -54,6 +54,7 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
+require_css( 'login.css' );
 
 if ( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
 	print_header_redirect( config_get( 'default_home_page' ) );
@@ -85,25 +86,6 @@ if ( auth_automatic_logon_bypass_form() ) {
 	exit;
 }
 
-# Login page shouldn't be indexed by search engines
-html_robots_noindex();
-
-html_page_top1();
-html_page_top2a();
-
-echo '<br /><div>';
-
-# Display short greeting message
-# echo lang_get( 'login_page_info' ) . '<br />';
-
-# Only echo error message if error variable is set
-if ( $f_error ) {
-	echo '<span class="error-msg">' . lang_get( 'login_error' ) . '</span>';
-}
-if ( $f_cookie_error ) {
-	echo lang_get( 'login_cookies_disabled' ) . '<br />';
-}
-
 # Determine if secure_session should default on or off?
 # - If no errors, and no cookies set, default to on.
 # - If no errors, but cookie is set, use the cookie value.
@@ -124,107 +106,109 @@ if ( $f_username ) {
 	$t_password_field_autofocus = 'autofocus';
 }
 
-echo '</div>';
+# Login page shouldn't be indexed by search engines
+html_robots_noindex();
+
+html_page_top1();
+html_page_top2a();
+
+if( $f_error || $f_cookie_error ) {
+	echo '<div id="login-error">';
+	echo '<ul>';
+
+	# Display short greeting message
+	# echo lang_get( 'login_page_info' ) . '<br />';
+
+	# Only echo error message if error variable is set
+	if ( $f_error ) {
+		echo '<li>' . lang_get( 'login_error' ) . '</li>';
+	}
+	if ( $f_cookie_error ) {
+		echo '<li>' . lang_get( 'login_cookies_disabled' ) . '</li>';
+	}
+	echo '</ul>';
+	echo '</div>';
+}
 ?>
 
 <!-- Login Form BEGIN -->
-<br />
-<div>
-<form name="login_form" method="post" action="login.php">
-<?php # CSRF protection not required here - form does not result in modifications ?>
-<table class="width50" cellspacing="1">
-<tr>
-	<td class="form-title">
-		<?php
+<div id="login-div">
+	<form id="login-form" method="post" action="login.php">
+		<fieldset>
+			<legend><?php echo lang_get( 'login_title' ) ?></legend>
+			<?php
 			if ( !is_blank( $f_return ) ) {
-			?>
-				<input type="hidden" name="return" value="<?php echo string_html_specialchars( $f_return ) ?>" />
-				<?php
+				echo '<input type="hidden" name="return" value="', string_html_specialchars( $f_return ), '" />';
 			}
-			echo lang_get( 'login_title' ) ?>
-	</td>
-	<td class="right">
-	<?php
-		if ( ON == config_get( 'allow_anonymous_login' ) ) {
-			print_bracket_link( 'login_anon.php?return=' . string_url( $f_return ), lang_get( 'login_anonymously' ) );
-		}
-	?>
-	</td>
-</tr>
-<tr class="row-1">
-	<th class="category">
-		<?php echo lang_get( 'username' ) ?>
-	</th>
-	<td>
-		<input type="text" name="username" size="28" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $f_username ); ?>" class="<?php echo $t_username_field_autofocus ?>" />
-	</td>
-</tr>
-<tr class="row-2">
-	<th class="category">
-		<?php echo lang_get( 'password' ) ?>
-	</th>
-	<td>
-		<input type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" class="<?php echo $t_password_field_autofocus ?>" />
-	</td>
-</tr>
-<tr class="row-1">
-	<th class="category">
-		<?php echo lang_get( 'save_login' ) ?>
-	</th>
-	<td>
-	<input type="checkbox" name="perm_login" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?>/>
-	</td>
-</tr>
-<?php if ( $t_session_validation ) { ?>
-<tr class="row-2">
-	<th class="category">
-		<?php echo lang_get( 'secure_session' ) ?>
-	</th>
-	<td>
-	<input type="checkbox" name="secure_session" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?>/>
-	<?php echo '<span class="small">' . lang_get( 'secure_session_long' ) . '</span>' ?>
-	</td>
-</tr>
-<?php } ?>
-<tr>
-	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'login_button' ) ?>" />
-	</td>
-</tr>
-</table>
-</form>
+			# CSRF protection not required here - form does not result in modifications
+			echo '<ul id="login-links">';
+
+			if ( ON == config_get( 'allow_anonymous_login' ) ) {
+				echo '<li><a href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a></li>';
+			}
+
+			if ( ( ON == config_get_global( 'allow_signup' ) ) &&
+				( LDAP != config_get_global( 'login_method' ) ) &&
+				( ON == config_get( 'enable_email_notification' ) )
+			) {
+				echo '<li><a href="signup_page.php">', lang_get( 'signup_link' ), '</a></li>';
+			}
+			# lost password feature disabled or reset password via email disabled -> stop here!
+			if ( ( LDAP != config_get_global( 'login_method' ) ) &&
+				( ON == config_get( 'lost_password_feature' ) ) &&
+				( ON == config_get( 'send_reset_password' ) ) &&
+				( ON == config_get( 'enable_email_notification' ) ) ) {
+				echo '<li><a href="lost_pwd_page.php">', lang_get( 'lost_password_link' ), '</a></li>';
+			}
+			?>
+			</ul>
+			<label for="username" class="odd">
+				<span class="label"><?php echo lang_get( 'username' ) ?></span>
+				<span class="input"><input id="username" type="text" name="username" size="28" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $f_username ); ?>" class="<?php echo $t_username_field_autofocus ?>" /></span>
+			</label>
+			<label for="password" class="even">
+				<span class="label"><?php echo lang_get( 'password' ) ?></span>
+				<span class="input"><input id="password" type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" class="<?php echo $t_password_field_autofocus ?>" /></span>
+			</label>
+			<label for="remember-login" class="odd">
+				<span class="label"><?php echo lang_get( 'save_login' ) ?></span>
+				<span class="input"><input id="remember-login" type="checkbox" name="perm_login" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?>/></span>
+			</label>
+			<?php if ( $t_session_validation ) { ?>
+			<label id="secure-session-label" for="secure-session" class="even">
+				<span class="label"><?php echo lang_get( 'secure_session' ) ?></span>
+				<span class="input">
+					<input id="secure-session" type="checkbox" name="secure_session" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?>/>
+					<span id="session-msg"><?php echo lang_get( 'secure_session_long' ); ?></span>
+				</span>
+			</label>
+			<?php } ?>
+			<span id="login-submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' ) ?>" /></span>
+		</fieldset>
+	</form>
 </div>
 
 <?php
-echo '<br /><div>';
-print_signup_link();
-echo '&#160;';
-print_lost_password_link();
-echo '</div>';
-
 #
 # Do some checks to warn administrators of possible security holes.
 # Since this is considered part of the admin-checks, the strings are not translated.
 #
 
 if ( config_get_global( 'admin_checks' ) == ON ) {
+	$t_warnings = array();
 
 	# Generate a warning if administrator/root is valid.
 	$t_admin_user_id = user_get_id_by_name( 'administrator' );
 	if ( $t_admin_user_id !== false ) {
 		if ( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
-			echo '<div class="warning">', "\n";
-			echo "\t", '<p class="error-msg">', lang_get( 'warning_default_administrator_account_present' ), '</p>', "\n";
-			echo '</div>', "\n";
+			$t_warnings[] = lang_get( 'warning_default_administrator_account_present' );
 		}
 	}
 
 	# Check if the admin directory is available and is readable.
 	$t_admin_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
 	if ( is_dir( $t_admin_dir ) ) {
-		echo '<div class="warning">', "\n";
-		echo '<p class="error-msg">', lang_get( 'warning_admin_directory_present' ), '</p>', "\n";
-		echo '</div>', "\n";
+		$t_warnings[] = lang_get( 'warning_admin_directory_present' );
 	}
 	if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) && is_executable( $t_admin_dir ) && @file_exists( "$t_admin_dir/." ) ) {
 		# since admin directory and db_upgrade lists are available check for missing db upgrades
@@ -246,14 +230,10 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 				# new config table database version is 0.
 				# old upgrade tables exist.
 				# assume user is upgrading from <1.0 and therefore needs to update to 1.x before upgrading to 1.2
-				echo '<div class="warning">';
-				echo '<p class="error-msg">', lang_get( 'error_database_version_out_of_date_1' ), '</p>';
-				echo '</div>';
+				$t_warnings[] = lang_get( 'error_database_version_out_of_date_1' );
 			} else {
 				# old upgrade tables do not exist, yet config database_version is 0
-				echo '<div class="warning">';
-				echo '<p class="error-msg">', lang_get( 'error_database_no_schema_version' ), '</p>';
-				echo '</div>';
+				$t_warnings[] = lang_get( 'error_database_no_schema_version' );
 			}
 		}
 
@@ -265,17 +245,21 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 				( $t_db_version != $t_upgrades_reqd ) ) {
 
 			if ( $t_db_version < $t_upgrades_reqd ) {
-				echo '<div class="warning">';
-				echo '<p class="error-msg">', lang_get( 'error_database_version_out_of_date_2' ), '</p>';
-				echo '</div>';
+				$t_warnings[] = lang_get( 'error_database_version_out_of_date_2' );
 			} else {
-				echo '<div class="warning">';
-				echo '<p class="error-msg">', lang_get( 'error_code_version_out_of_date' ), '</p>';
-				echo '</div>';
+				$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
 			}
 		}
 	}
-
+	if( count( $t_warnings ) > 0 ) {
+		echo '<div id="login-warnings">';
+		echo '<ul>';
+		foreach( $t_warnings AS $t_warning ) {
+			echo '<li>' . $t_warning . '</li>';
+		}
+		echo '</ul>';
+		echo '</div>';
+	}
 } # if 'admin_checks'
 
 html_page_bottom1a( __FILE__ );

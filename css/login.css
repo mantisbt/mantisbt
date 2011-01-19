@@ -1,0 +1,89 @@
+#login-div {
+	position: relative;
+	margin: 2em auto 0em auto;
+	padding: 1px;
+	width: 65%;
+	border: 1px solid #000;
+}
+#login-form fieldset {
+	width: 100%;
+	border: none;
+	margin: 0em;
+	padding: 0em;
+}
+#login-form fieldset legend {
+	margin: 0em;
+	padding: .5em .15em;
+	text-indent: .5em;
+	border: none;
+	font-weight: bold;
+}
+.label {
+	width: 40%;
+}
+.input {
+	float: left;
+	padding-left: .25em;
+	line-height: 2.5em;
+}
+#secure-session-label span.input {
+	float: left;
+	margin: 0em;
+	width: 57%;
+	padding: .5em 0em 0em .25em;
+}
+#secure-session-label span.input input {
+	float: left;
+	margin-right: .25em;
+}
+span#session-msg {
+	padding-top: .25em;
+	line-height: 1em;
+	display:block;
+	font-size: .8em;
+}
+#login-submit-button {
+	clear: both;
+	display: block;
+	padding: .5em;
+	text-align: center;
+}
+div#login-warnings, div#login-error {
+	display: block;
+	width: 60%;
+	margin: 2em auto;
+	color: red;
+	border: 1px solid red;
+	background-color: #fceded; 
+}
+div#login-warnings ul, div#login-error ul {
+	margin: 0em;
+	padding: 2em 2em 2em 4em;
+}
+div#login-warnings ul li, div#login-error ul li {
+	margin-left: 2em;
+	background-color: #fceded;
+}
+
+#login-links {
+	position: absolute;
+	top: .5em;
+	right: 0em;
+	list-style: none;
+	margin: 0em;
+	padding: 0em;
+}
+
+#login-links li {
+	float: left;
+	padding: 0em .25em;
+}
+#login-links li:before {
+	content: '[';
+}
+#login-links li:after {
+	content: ']';
+}
+#login-links li a {
+	padding: 0em .35em;
+}

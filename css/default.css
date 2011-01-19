@@ -89,7 +89,7 @@ tr.bugnote .time-tracked,
 
 #login-info { clear: both; position: relative; display: block; float: left; padding: .5em 0; z-index: 100; line-height: 1em; }
 
-#logged-anon-label, #login-link, #signup-link { float: left; margin: .25; padding: 0; font-size: 1em; }
+#logged-anon-label, #login-link, #signup-link { float: left; margin: .25em; padding: 0em; font-size: 1em; }
 #logged-anon-label { padding: 0 .5em; }
 #login-link a, #signup-link a { padding: 0 .5em; }
 #login-link:before, #signup-link:before { content: '|'; }
@@ -289,7 +289,7 @@ select.tainted { background-color: #ffffff; color: red; }
 .filter-links { padding: .5em; }
 .stored-queries select { font-size: .9em; }
 #error-msg { clear: both; }
-.error-msg { color: red; }
+.error-msg { color: red; text-align: center; }
 
 .bug-attachments {
 	margin: 0;
@@ -322,4 +322,35 @@ select.tainted { background-color: #ffffff; color: red; }
 #dates label[for=start_date], #dates > label[for=end_date] {
 	float: left;
 	width: 3em;
+}
+
+span.label {
+	clear: left;
+	float: left;
+	display: block;
+	padding: .5em;
+	margin: 0em;
+	border-right: 1px solid #fff;
+	font-weight: bold;
+	background-color: #B8CBDF;
+}
+
+label.odd {
+	position: relative;
+	float: left;
+	display:block;
+	width: 100%;
+	margin: 0em 0em 1px 0em;
+	line-height: 1.7em;
+	background-color: #d8d8d8;
+}
+
+label.even {
+	position: relative;
+	float: left;
+	display:block;
+	width: 100%;
+	margin: 0em 0em 1px 0em;
+	line-height: 1.7em;
+	background-color: #e8e8e8;
 }
