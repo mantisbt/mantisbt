@@ -45,6 +45,7 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'utility_api.php' );
+require_css( 'login.css' );
 
 # Check for invalid access to signup page
 if ( OFF == config_get_global( 'allow_signup' ) || LDAP == config_get_global( 'login_method' ) ) {
@@ -60,84 +61,54 @@ html_page_top2a();
 $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 ?>
 
-<br />
-<div>
-<form name="signup_form" method="post" action="signup.php">
-<?php echo form_security_field( 'signup' ); ?>
-<table class="width50" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="3">
-		<?php echo lang_get( 'signup_title' ) ?>
-	</td>
-</tr>
-<tr class="row-1">
-	<th class="category" width="30%">
-		<?php echo lang_get( 'username_label' ) ?>
-	</th>
-	<td width="70%" colspan="2">
-		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" class="autofocus" />
-	</td>
-</tr>
-<tr class="row-2">
-	<th class="category">
-		<?php echo lang_get( 'email_label' ) ?>
-	</th>
-	<td colspan="2">
-		<?php print_email_input( 'email', '' ) ?>
-	</td>
-</tr>
-<?php
-	$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
-	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && ( true == $t_allow_passwd ) ) {
-		# captcha image requires GD library and related option to ON
-?>
-<tr class="row-1">
-	<th class="category">
-		<?php echo lang_get( 'signup_captcha_request_label' ) ?>
-	</th>
-	<td>
-		<?php print_captcha_input( 'captcha', '' ) ?>
-	</td>
-	<td>
-		<img src="make_captcha_img.php?public_key=<?php echo $t_public_key ?>" alt="visual captcha" />
-		<input type="hidden" name="public_key" value="<?php echo $t_public_key ?>" />
-	</td>
-</tr>
-<?php
-	}
-	if( false == $t_allow_passwd ) {
-?>
-<tr class="row-1">
-	<td class="category">
-	</td>
-	<td colspan="2">
-		<?php echo lang_get( 'no_password_request' ) ?>
-	</td>
-</tr>
-<?php
-	}
-?>
-<tr>
-	<td colspan="3">
-		<br/>
-		<?php echo lang_get( 'signup_info' ) ?>
-		<br/><br/>
-	</td>
-</tr>
-<tr>
-	<td class="center" colspan="3">
-		<input type="submit" class="button" value="<?php echo lang_get( 'signup_button' ) ?>" />
-	</td>
-</tr>
-</table>
-</form>
+<div id="signup-div">
+	<form id="signup-form" method="post" action="signup.php">
+		<fieldset>
+			<legend><?php echo lang_get( 'signup_title' ) ?></legend>
+			<?php echo form_security_field( 'signup' ); ?>
+			<ul id="login-links">
+			<li><a href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a></li>
+			<?php
+			# lost password feature disabled or reset password via email disabled
+			if ( ( LDAP != config_get_global( 'login_method' ) ) &&
+				( ON == config_get( 'lost_password_feature' ) ) &&
+				( ON == config_get( 'send_reset_password' ) ) &&
+				( ON == config_get( 'enable_email_notification' ) ) ) {
+				echo '<li><a href="lost_pwd_page.php">', lang_get( 'lost_password_link' ), '</a></li>';
+			}
+			?>
+			</ul>
+			<label for="username" class="odd">
+				<span class="label"><?php echo lang_get( 'username' ) ?></span>
+				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" class="autofocus" /></span>
+			</label>
+			<label for="email-field" class="even">
+				<span class="label"><?php echo lang_get( 'email_label' ) ?></span>
+				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
+			</label>
+			<?php
+			$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
+			if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && ( true == $t_allow_passwd ) ) {
+				# captcha image requires GD library and related option to ON
+				echo '<label id="captcha-label" for="captcha-field" class="odd">';
+				echo '<span class="label">' . lang_get( 'signup_captcha_request_label' ) . '</span>';
+				echo '<span class="input">';
+				print_captcha_input( 'captcha', '' );
+				echo '</span>';
+				echo '<span class="captcha-image"><img src="make_captcha_img.php?public_key=' . $t_public_key . '" alt="visual captcha" /></span>';
+				echo '<input type="hidden" name="public_key" value="' . $t_public_key . '" />';
+				echo '</label>';
+			}
+			if( false == $t_allow_passwd ) {
+				echo '<span id="no-password-msg">';
+				echo lang_get( 'no_password_request' );
+				echo '</span>';
+			}
+			?>
+			<span id="signup-info"><?php echo lang_get( 'signup_info' ); ?></span>
+			<span id="signup-submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'signup_button' ) ?>" /></span>
+		</fieldset>
+	</form>
 </div>
 
-<?php
-echo '<br /><div>';
-print_login_link();
-echo '&#160;';
-print_lost_password_link();
-echo '</div>';
-
-html_page_bottom1a( __FILE__ );
+<?php html_page_bottom1a( __FILE__ );

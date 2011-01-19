@@ -1,17 +1,17 @@
-#login-div {
+#login-div, #signup-div {
 	position: relative;
 	margin: 2em auto 0em auto;
 	padding: 1px;
 	width: 65%;
 	border: 1px solid #000;
 }
-#login-form fieldset {
+#login-form fieldset, #signup-form fieldset {
 	width: 100%;
 	border: none;
 	margin: 0em;
 	padding: 0em;
 }
-#login-form fieldset legend {
+#login-form fieldset legend, #signup-form fieldset legend {
 	margin: 0em;
 	padding: .5em .15em;
 	text-indent: .5em;
@@ -42,7 +42,27 @@ span#session-msg {
 	display:block;
 	font-size: .8em;
 }
-#login-submit-button {
+label#captcha-label span.input {
+	float: left;
+	display: block;
+	line-height: 3.5em;
+	padding: .5em 1em .45em 1em;
+	margin: 0em;
+	border-right: 1px solid #fff;
+	width: 6em;
+}
+label#captcha-label span.captcha-image {
+	display: block;
+	float: left;
+	padding: .75em 1em 0em 2em;
+	width: 10em;
+}
+span#no-password-msg, #signup-info {
+	clear: both;
+	display: block;
+	padding: 1em;
+}
+#login-submit-button, #signup-submit-button {
 	clear: both;
 	display: block;
 	padding: .5em;
