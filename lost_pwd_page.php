@@ -58,7 +58,7 @@ html_robots_noindex();
 html_page_top1();
 html_page_top2a();
 ?>
-<div id="lost-password-div">
+<div id="lost-password-div" class="form-container">
 	<form id="lost-password-form" method="post" action="lost_pwd.php">
 		<fieldset>
 			<legend><?php echo lang_get( 'lost_password_title' ); ?></legend>
@@ -71,16 +71,16 @@ html_page_top2a();
 
 			$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
 			if ( $t_allow_passwd ) { ?>
-			<label for="username" class="odd">
-				<span class="label"><?php echo lang_get( 'username' ) ?></span>
+			<span class="field-container odd">
+				<span class="label"><label for="username"><?php echo lang_get( 'username' ) ?></label></span>
 				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" class="autofocus" /></span>
-			</label>
-			<label for="email-field" class="even">
-				<span class="label"><?php echo lang_get( 'email' ) ?></span>
+			</span>
+			<span class="field-container even">
+				<span class="label"><label for="email-field"><?php echo lang_get( 'email' ) ?></label></span>
 				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
-			</label>
+			</span>
 			<span id="lost-password-msg"><?php echo lang_get( 'lost_password_info' ); ?></span>
-			<span id="lost-password-submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" /></span><?php
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" /></span><?php
 			} else {
 				echo '<span id="no-password-msg">';
 				echo lang_get( 'no_password_request' );

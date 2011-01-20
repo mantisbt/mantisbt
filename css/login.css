@@ -1,31 +1,11 @@
-#login-div, #signup-div, #lost-password-div, #select-project-div {
-	position: relative;
-	margin: 2em auto 0em auto;
-	padding: 1px;
-	width: 65%;
-	border: 1px solid #000;
-}
-#login-form fieldset, #signup-form fieldset, #lost-password-form fieldset, #select-project-form fieldset {
-	width: 100%;
-	border: none;
-	margin: 0em;
-	padding: 0em;
-}
-#login-form fieldset legend, #signup-form fieldset legend, #lost-password-form fieldset legend, #select-project-form fieldset legend {
-	margin: 0em;
-	padding: .5em .15em;
-	text-indent: .5em;
-	border: none;
-	font-weight: bold;
-}
-.label {
+div#login-div { min-width: 45em; }
+#login-form .label, #signup-form .label, #lost-password-form .label {
 	width: 40%;
 }
-.input {
-	float: left;
-	padding-left: .25em;
-	line-height: 2.5em;
+#login-form .input, #signup-form .input, #lost-password-form .input {
+	width: 55%;
 }
+
 #secure-session-label span.input {
 	float: left;
 	margin: 0em;
@@ -39,34 +19,27 @@
 span#session-msg {
 	padding-top: .25em;
 	line-height: 1em;
-	display:block;
 	font-size: .8em;
 }
-label#captcha-label span.input {
-	float: left;
+span#captcha-input {
 	display: block;
-	line-height: 3.5em;
-	padding: .5em 1em .45em 1em;
-	margin: 0em;
-	border-right: 1px solid #fff;
 	width: 6em;
+	line-height: 3.5em;
+	padding: 0em;
 }
-label#captcha-label span.captcha-image {
+span.captcha-image {
+	position: relative;
 	display: block;
-	float: left;
-	padding: .75em 1em 0em 2em;
+	float: right;
 	width: 10em;
+	margin: 0em 0em 0em -10em;
+	padding: 1em 0em 0em 3em;
+	border-left: 1px solid #fff;
 }
 span#no-password-msg, #signup-info, #lost-password-msg {
 	clear: both;
 	display: block;
 	padding: 1em;
-}
-#login-submit-button, #signup-submit-button, #lost-password-submit-button, #select-project-submit-button {
-	clear: both;
-	display: block;
-	padding: .5em;
-	text-align: center;
 }
 div#login-warnings, div#login-error {
 	display: block;

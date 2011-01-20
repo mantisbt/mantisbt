@@ -132,7 +132,7 @@ if( $f_error || $f_cookie_error ) {
 ?>
 
 <!-- Login Form BEGIN -->
-<div id="login-div">
+<div id="login-div" class="form-container">
 	<form id="login-form" method="post" action="login.php">
 		<fieldset>
 			<legend><?php echo lang_get( 'login_title' ) ?></legend>
@@ -162,28 +162,28 @@ if( $f_error || $f_cookie_error ) {
 			}
 			?>
 			</ul>
-			<label for="username" class="odd">
-				<span class="label"><?php echo lang_get( 'username' ) ?></span>
-				<span class="input"><input id="username" type="text" name="username" size="28" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $f_username ); ?>" class="<?php echo $t_username_field_autofocus ?>" /></span>
-			</label>
-			<label for="password" class="even">
-				<span class="label"><?php echo lang_get( 'password' ) ?></span>
+			<span class="field-container odd">
+				<span class="label"><label for="username"><?php echo lang_get( 'username' ) ?></label></span>
+				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $f_username ); ?>" class="<?php echo $t_username_field_autofocus ?>" /></span>
+			</span>
+			<span class="field-container even">
+				<span class="label"><label for="password"><?php echo lang_get( 'password' ) ?></label></span>
 				<span class="input"><input id="password" type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" class="<?php echo $t_password_field_autofocus ?>" /></span>
-			</label>
-			<label for="remember-login" class="odd">
-				<span class="label"><?php echo lang_get( 'save_login' ) ?></span>
+			</span>
+			<span class="field-container odd">
+				<span class="label"><label for="remember-login"><?php echo lang_get( 'save_login' ) ?></label></span>
 				<span class="input"><input id="remember-login" type="checkbox" name="perm_login" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?>/></span>
-			</label>
+			</span>
 			<?php if ( $t_session_validation ) { ?>
-			<label id="secure-session-label" for="secure-session" class="even">
-				<span class="label"><?php echo lang_get( 'secure_session' ) ?></span>
+			<span class="field-container even">
+				<span class="label"><label id="secure-session-label" for="secure-session"><?php echo lang_get( 'secure_session' ) ?></label></span>
 				<span class="input">
 					<input id="secure-session" type="checkbox" name="secure_session" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?>/>
 					<span id="session-msg"><?php echo lang_get( 'secure_session_long' ); ?></span>
 				</span>
-			</label>
+			</span>
 			<?php } ?>
-			<span id="login-submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' ) ?>" /></span>
 		</fieldset>
 	</form>
 </div>

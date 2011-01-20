@@ -61,7 +61,7 @@ html_page_top2a();
 $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 ?>
 
-<div id="signup-div">
+<div id="signup-div" class="form-container">
 	<form id="signup-form" method="post" action="signup.php">
 		<fieldset>
 			<legend><?php echo lang_get( 'signup_title' ) ?></legend>
@@ -78,26 +78,28 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			}
 			?>
 			</ul>
-			<label for="username" class="odd">
-				<span class="label"><?php echo lang_get( 'username' ) ?></span>
+			<span class="field-container odd">
+				<span class="label"><label for="username"><?php echo lang_get( 'username' ) ?></label></span>
 				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" class="autofocus" /></span>
-			</label>
-			<label for="email-field" class="even">
-				<span class="label"><?php echo lang_get( 'email_label' ) ?></span>
+			</span>
+			<span class="field-container even">
+				<span class="label"><label for="email-field"><?php echo lang_get( 'email_label' ) ?></label></span>
 				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
-			</label>
+			</span>
+
 			<?php
 			$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
 			if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && ( true == $t_allow_passwd ) ) {
 				# captcha image requires GD library and related option to ON
-				echo '<label id="captcha-label" for="captcha-field" class="odd">';
-				echo '<span class="label">' . lang_get( 'signup_captcha_request_label' ) . '</span>';
-				echo '<span class="input">';
+
+				echo '<span class="field-container odd">';
+				echo '<span class="label"><label for="captcha-field">' . lang_get( 'signup_captcha_request_label' ) . '</label></span>';
+				echo '<span id="captcha-input" class="input">';
 				print_captcha_input( 'captcha', '' );
-				echo '</span>';
 				echo '<span class="captcha-image"><img src="make_captcha_img.php?public_key=' . $t_public_key . '" alt="visual captcha" /></span>';
+				echo '</span>';
 				echo '<input type="hidden" name="public_key" value="' . $t_public_key . '" />';
-				echo '</label>';
+				echo '</span>';
 			}
 			if( false == $t_allow_passwd ) {
 				echo '<span id="no-password-msg">';
@@ -106,7 +108,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			}
 			?>
 			<span id="signup-info"><?php echo lang_get( 'signup_info' ); ?></span>
-			<span id="signup-submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'signup_button' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'signup_button' ) ?>" /></span>
 		</fieldset>
 	</form>
 </div>

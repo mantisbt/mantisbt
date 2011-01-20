@@ -356,6 +356,7 @@ function html_css() {
 	global $g_stylesheets_included;
 	html_css_link( config_get( 'css_include_file' ) );
 	html_css_link( 'jquery-ui.css' );
+	html_css_link( 'common_config.php' );
 	# Add right-to-left css if needed
 	if ( lang_get( 'directionality' ) == 'rtl' ) {
 		html_css_link( config_get( 'css_rtl_include_file' ) );
