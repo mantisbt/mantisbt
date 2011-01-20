@@ -1284,11 +1284,12 @@ function html_status_legend() {
 
 	# draw the status bar
 	$width = (int)( 100 / count( $t_status_array ) );
+	$t_status_enum_string = config_get('status_enum_string' );
 	foreach( $t_status_array as $t_status => $t_name ) {
 		$t_val = $t_status_names[$t_status];
-		$t_color = get_status_color( $t_status );
+		$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
 
-		echo "<td class=\"small-caption\" width=\"$width%\" bgcolor=\"$t_color\">$t_val</td>";
+		echo "<td class=\"small-caption $t_status_label-color\">$t_val</td>";
 	}
 
 	echo '</tr>';
@@ -1303,32 +1304,12 @@ function html_status_legend() {
  * @return null
  */
 function html_status_percentage_legend() {
-	$t_mantis_bug_table = db_get_table( 'bug' );
-	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
-
-	# checking if it's a per project statistic or all projects
-	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
-
-	$query = "SELECT status, COUNT(*) AS number
-				FROM $t_mantis_bug_table
-				WHERE $t_specific_where";
-	if ( !access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
-		$query .= ' AND view_state < ' . VS_PRIVATE;
-	}
-	$query .= ' GROUP BY status';
-	$result = db_query_bound( $query );
-
-	$t_bug_count = 0;
-	$t_status_count_array = array();
-
-	while( $row = db_fetch_array( $result ) ) {
-		$t_status_count_array[$row['status']] = $row['number'];
-		$t_bug_count += $row['number'];
-	}
-
-	$t_enum_values = MantisEnum::getValues( config_get( 'status_enum_string' ) );
+	$t_status_percents = get_percentage_by_status();
+	$t_status_enum_string = config_get('status_enum_string' );
+	$t_enum_values = MantisEnum::getValues( $t_status_enum_string );
 	$enum_count = count( $t_enum_values );
+
+	$t_bug_count = array_sum( $t_status_percents );
 
 	if( $t_bug_count > 0 ) {
 		echo '<br />';
@@ -1339,16 +1320,11 @@ function html_status_percentage_legend() {
 		echo '<tr>';
 
 		foreach ( $t_enum_values as $t_status ) {
-			$t_color = get_status_color( $t_status );
+			$t_percent = ( isset( $t_status_percents[$t_status] ) ?  $t_status_percents[$t_status] : 0 );
 
-			if ( !isset( $t_status_count_array[$t_status] ) ) {
-				$t_status_count_array[$t_status] = 0;
-			}
-
-			$width = round(( $t_status_count_array[$t_status] / $t_bug_count ) * 100 );
-
-			if( $width > 0 ) {
-				echo "<td class=\"small-caption-center\" width=\"$width%\" bgcolor=\"$t_color\">$width%</td>";
+			if( $t_percent > 0 ) {
+				$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
+				echo "<td class=\"small-caption-center $t_status_label-color $t_status_label-percentage\">$t_percent%</td>";
 			}
 		}
 

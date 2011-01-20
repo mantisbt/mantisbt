@@ -116,6 +116,41 @@ function get_status_color( $p_status ) {
 }
 
 /**
+ * get the status percentages
+ * @return array key is the status value, value is the percentage of bugs for the status
+ */
+function get_percentage_by_status() {
+	$t_mantis_bug_table = db_get_table( 'bug' );
+	$t_project_id = helper_get_current_project();
+	$t_user_id = auth_get_current_user_id();
+
+	# checking if it's a per project statistic or all projects
+	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
+
+	$query = "SELECT status, COUNT(*) AS number
+				FROM $t_mantis_bug_table
+				WHERE $t_specific_where";
+	if ( !access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
+		$query .= ' AND view_state < ' . VS_PRIVATE;
+	}
+	$query .= ' GROUP BY status';
+	$result = db_query_bound( $query );
+
+	$t_bug_count = 0;
+	$t_status_count_array = array();
+
+	while( $row = db_fetch_array( $result ) ) {
+		$t_status_count_array[$row['status']] = $row['number'];
+	}
+	$t_bug_count = array_sum( $t_status_count_array );
+	foreach( $t_status_count_array AS $t_status=>$t_value ) {
+		$t_status_count_array[$t_status] = round(( $t_value / $t_bug_count ) * 100 );
+	}
+
+	return $t_status_count_array;
+}
+
+/**
  * Given a enum string and num, return the appropriate string
  * @param string $p_enum_name
  * @param int $p_val

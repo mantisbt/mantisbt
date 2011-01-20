@@ -438,15 +438,18 @@ echo "<span class=\"my-buglist-count\">($v_start - $v_end / $t_bug_count)</span>
 </thead><tbody>
 <?php
 # -- Loop over bug rows and create $v_* variables --
-	$t_count = count( $rows );
-	for( $i = 0;$i < $t_count; $i++ ) {
-		$t_bug = $rows[$i];
+$t_count = count( $rows );
+if( $t_count == 0 ) {
+	echo '<tr><td>&#160;</td></tr>';
+}
+for( $i = 0;$i < $t_count; $i++ ) {
+	$t_bug = $rows[$i];
 
 	$t_summary = string_display_line_links( $t_bug->summary );
 	$t_last_updated = date( config_get( 'normal_date_format' ), $t_bug->last_updated );
 
 	# choose color based on status
-	$status_color = get_status_color( $t_bug->status );
+	$status_label = MantisEnum::getLabel( config_get('status_enum_string' ), $t_bug->status );
 
 	# Check for attachments
 	$t_attachment_count = 0;
@@ -466,10 +469,10 @@ echo "<span class=\"my-buglist-count\">($v_start - $v_end / $t_bug_count)</span>
     }
 	?>
 
-<tr class="my-buglist-bug <?php echo $t_bug_class?>" bgcolor="<?php echo $status_color?>">
+<tr class="my-buglist-bug <?php echo $t_bug_class?> <?php echo $status_label . '-color'; ?>">
 	<?php
 	# -- Bug ID and details link + Pencil shortcut --?>
-	<td class="center nowrap my-buglist-id" width="0">
+	<td class="center nowrap my-buglist-id">
 		<span class="small">
 		<?php
 			print_bug_link( $t_bug->id );
@@ -502,7 +505,7 @@ echo "<span class=\"my-buglist-count\">($v_start - $v_end / $t_bug_count)</span>
 
 	<?php
 	# -- Summary --?>
-	<td class="left my-buglist-description" width="100%">
+	<td class="left my-buglist-description">
 		<?php
 		 	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $t_bug->project_id ) {
 				echo '<span class="small project">[', string_display_line( project_get_name( $t_bug->project_id ) ), '] </span>';

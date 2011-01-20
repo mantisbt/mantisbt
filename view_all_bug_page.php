@@ -51,6 +51,7 @@ require_api( 'project_api.php' );
 require_api( 'user_api.php' );
 
 require_js( 'bugFilter.js' );
+require_css( 'status_config.php' );
 
 auth_ensure_user_authenticated();
 

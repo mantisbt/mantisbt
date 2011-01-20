@@ -358,3 +358,5 @@ label.even {
 	line-height: 1.7em;
 	background-color: #e8e8e8;
 }
+
+.myview-left-col, .myview-right-col { width: 50%; vertical-align: top; }
