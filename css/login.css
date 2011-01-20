@@ -1,17 +1,17 @@
-#login-div, #signup-div, #lost-password-div {
+#login-div, #signup-div, #lost-password-div, #select-project-div {
 	position: relative;
 	margin: 2em auto 0em auto;
 	padding: 1px;
 	width: 65%;
 	border: 1px solid #000;
 }
-#login-form fieldset, #signup-form fieldset, #lost-password-form fieldset {
+#login-form fieldset, #signup-form fieldset, #lost-password-form fieldset, #select-project-form fieldset {
 	width: 100%;
 	border: none;
 	margin: 0em;
 	padding: 0em;
 }
-#login-form fieldset legend, #signup-form fieldset legend, #lost-password-form fieldset legend {
+#login-form fieldset legend, #signup-form fieldset legend, #lost-password-form fieldset legend, #select-project-form fieldset legend {
 	margin: 0em;
 	padding: .5em .15em;
 	text-indent: .5em;
@@ -62,7 +62,7 @@ span#no-password-msg, #signup-info, #lost-password-msg {
 	display: block;
 	padding: 1em;
 }
-#login-submit-button, #signup-submit-button, #lost-password-submit-button {
+#login-submit-button, #signup-submit-button, #lost-password-submit-button, #select-project-submit-button {
 	clear: both;
 	display: block;
 	padding: .5em;
@@ -84,7 +84,6 @@ div#login-warnings ul li, div#login-error ul li {
 	margin-left: 2em;
 	background-color: #fceded;
 }
-
 #login-links {
 	position: absolute;
 	top: .5em;
@@ -93,7 +92,6 @@ div#login-warnings ul li, div#login-error ul li {
 	margin: 0em;
 	padding: 0em;
 }
-
 #login-links li {
 	float: left;
 	padding: 0em .25em;

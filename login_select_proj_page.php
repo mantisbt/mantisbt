@@ -45,6 +45,7 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
+require_css( 'login.css' );
 
 auth_ensure_user_authenticated();
 
@@ -64,42 +65,27 @@ html_page_top( lang_get( 'select_project_button' ) );
 ?>
 
 <!-- Project Select Form BEGIN -->
-<br />
-<div>
-<form method="post" action="set_project.php">
-<?php # CSRF protection not required here - form does not result in modifications ?>
-<table class="width50" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<input type="hidden" name="ref" value="<?php echo string_html_specialchars( $f_ref ) ?>" />
-		<?php echo lang_get( 'select_project_button' ) ?>
-	</td>
-</tr>
-<tr class="row-1">
-	<th class="category" width="40%">
-		<?php echo lang_get( 'choose_project' ) ?>
-	</th>
-	<td width="60%">
-		<select name="project_id">
-		<?php print_project_option_list( ALL_PROJECTS, false, null, true ) ?>
-		</select>
-	</td>
-</tr>
-<tr class="row-2">
-	<th class="category">
-		<?php echo lang_get( 'make_default' ) ?>
-	</th>
-	<td>
-		<input type="checkbox" name="make_default" />
-	</td>
-</tr>
-<tr>
-	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'select_project_button') ?>" />
-	</td>
-</tr>
-</table>
-</form>
+<div id="select-project-div">
+	<form id="select-project-form" method="post" action="set_project.php">
+		<?php # CSRF protection not required here - form does not result in modifications ?>
+		<fieldset>
+			<legend><?php echo lang_get( 'choose_project' ) ?></legend>
+			<input type="hidden" name="ref" value="<?php echo string_html_specialchars( $f_ref ) ?>" />
+			<label for="select-project-id" class="odd">
+				<span class="label"><?php echo lang_get( 'select_project_button' ) ?></span>
+				<span class="input">
+					<select id="select-project-id" name="project_id">
+						<?php print_project_option_list( ALL_PROJECTS, false, null, true ) ?>
+					</select>
+				</span>
+			</label>
+			<label for="set-default" class="even">
+				<span class="label"><?php echo lang_get( 'make_default' ) ?></span>
+				<span class="input"><input id="set-default" type="checkbox" name="make_default" /></span>
+			</label>
+			<span id="select-project-submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'select_project_button') ?>" /></span>
+		</fieldset>
+	</form>
 </div>
 
 <?php
