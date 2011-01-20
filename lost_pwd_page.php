@@ -42,6 +42,7 @@ require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
+require_css( 'login.css' );
 
 # lost password feature disabled or reset password via email disabled -> stop here!
 if ( LDAP == config_get_global( 'login_method' ) ||
@@ -56,74 +57,37 @@ html_robots_noindex();
 
 html_page_top1();
 html_page_top2a();
+?>
+<div id="lost-password-div">
+	<form id="lost-password-form" method="post" action="lost_pwd.php">
+		<fieldset>
+			<legend><?php echo lang_get( 'lost_password_title' ); ?></legend>
+			 <ul id="login-links">
+				<li><a href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a></li>
+				<li><a href="signup_page.php"><?php echo lang_get( 'signup_link' ); ?></a></li>
+            </ul>
+			<?php
+			echo form_security_field( 'lost_pwd' );
 
-echo "<br />";
-?>
-<br />
-<div>
-<form name="lost_password_form" method="post" action="lost_pwd.php">
-<?php echo form_security_field( 'lost_pwd' ) ?>
-<table class="width50" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'lost_password_title' ) ?>
-	</td>
-</tr>
-<?php
-$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
-if ( $t_allow_passwd ) {
-?>
-<tr class="row-1">
-	<th class="category" width="25%">
-		<?php echo lang_get( 'username' ) ?>
-	</th>
-	<td width="75%">
-		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" class="autofocus" />
-	</td>
-</tr>
-<tr class="row-2">
-	<th class="category" width="25%">
-		<?php echo lang_get( 'email' ) ?>
-	</th>
-	<td width="75%">
-		<?php print_email_input( 'email', '' ) ?>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br/>
-		<?php echo lang_get( 'lost_password_info' ) ?>
-		<br/><br/>
-	</td>
-</tr>
-<tr>
-	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" />
-	</td>
-</tr>
-<?php
-} else {
-?>
-<tr>
-	<td colspan="2">
-		<br/>
-		<?php echo lang_get( 'no_password_request' ) ?>
-		<br/><br/>
-	</td>
-</tr>
-<?php
-}
-?>
-
-</table>
-</form>
-</div>
-
-<?php
-echo '<br /><div>';
-print_login_link();
-echo '&#160;';
-print_signup_link();
-echo '</div>';
+			$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
+			if ( $t_allow_passwd ) { ?>
+			<label for="username" class="odd">
+				<span class="label"><?php echo lang_get( 'username' ) ?></span>
+				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" class="autofocus" /></span>
+			</label>
+			<label for="email-field" class="even">
+				<span class="label"><?php echo lang_get( 'email' ) ?></span>
+				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
+			</label>
+			<span id="lost-password-msg"><?php echo lang_get( 'lost_password_info' ); ?></span>
+			<span id="lost-password-submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" /></span><?php
+			} else {
+				echo '<span id="no-password-msg">';
+				echo lang_get( 'no_password_request' );
+				echo '</span>';
+			} ?>
+		</fieldset>
+	</form>
+</div><?php
 
 html_page_bottom1a( __FILE__ );

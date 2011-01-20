@@ -1,17 +1,17 @@
-#login-div, #signup-div {
+#login-div, #signup-div, #lost-password-div {
 	position: relative;
 	margin: 2em auto 0em auto;
 	padding: 1px;
 	width: 65%;
 	border: 1px solid #000;
 }
-#login-form fieldset, #signup-form fieldset {
+#login-form fieldset, #signup-form fieldset, #lost-password-form fieldset {
 	width: 100%;
 	border: none;
 	margin: 0em;
 	padding: 0em;
 }
-#login-form fieldset legend, #signup-form fieldset legend {
+#login-form fieldset legend, #signup-form fieldset legend, #lost-password-form fieldset legend {
 	margin: 0em;
 	padding: .5em .15em;
 	text-indent: .5em;
@@ -57,12 +57,12 @@ label#captcha-label span.captcha-image {
 	padding: .75em 1em 0em 2em;
 	width: 10em;
 }
-span#no-password-msg, #signup-info {
+span#no-password-msg, #signup-info, #lost-password-msg {
 	clear: both;
 	display: block;
 	padding: 1em;
 }
-#login-submit-button, #signup-submit-button {
+#login-submit-button, #signup-submit-button, #lost-password-submit-button {
 	clear: both;
 	display: block;
 	padding: .5em;
