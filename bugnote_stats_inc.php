@@ -80,7 +80,7 @@ $t_bugnote_stats_to_y = gpc_get_string( 'end_year', $t_bugnote_stats_to_def_y );
 
 $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 ?>
-<form method="post" action="<?php echo form_action_self() ?>">
+<form method="post" action="">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
 <table class="width100" cellspacing="0">

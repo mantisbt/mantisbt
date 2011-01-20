@@ -352,7 +352,7 @@ if ( $t_show_submit && ( 0 < count( $t_overrides ) ) ) {
 	echo form_security_field( 'manage_config_revert' );
 	echo "<input name=\"revert\" type=\"hidden\" value=\"" . implode( ',', $t_overrides ) . "\"></input>";
 	echo "<input name=\"project\" type=\"hidden\" value=\"$t_project_id\"></input>";
-	echo "<input name=\"return\" type=\"hidden\" value=\"" . form_action_self() ."\"></input>";
+	echo "<input name=\"return\" type=\"hidden\" value=\"\"></input>";
 	echo "<input type=\"submit\" class=\"button\" value=\"";
 	if ( ALL_PROJECTS == $t_project_id ) {
 		echo lang_get( 'revert_to_system' );

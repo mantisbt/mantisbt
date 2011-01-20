@@ -89,7 +89,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 }
 
 ?>
-<form method="post" action="<?php echo form_action_self() ?>">
+<form method="post" action="">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
 <table class="width100" cellspacing="0">

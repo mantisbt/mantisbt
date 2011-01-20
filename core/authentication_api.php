@@ -696,7 +696,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 	}
 	?>
 </p>
-<form name="reauth_form" method="post" action="<?php echo form_action_self();?>">
+<form name="reauth_form" method="post" action="">
 <?php
 	# CSRF protection not required here - user needs to enter password
 	# (confirmation step) before the form is accepted.
