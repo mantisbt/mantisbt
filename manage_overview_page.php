@@ -54,58 +54,48 @@ html_page_top( lang_get( 'manage_link' ) );
 
 print_manage_menu();
 ?>
+<div id="manage-overview-div">
+	<table id="manage-overview-table" cellspacing="1">
+		<tr>
+			<td class="form-title"><?php echo lang_get( 'site_information' ) ?></td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<th class="category"><?php echo lang_get( 'mantis_version' ) ?></th>
+			<td><?php echo MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ) ?></td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<th class="category"><?php echo lang_get( 'schema_version' ) ?></th>
+			<td><?php echo config_get( 'database_version' ) ?></td>
+		</tr>
+		<tr class="spacer">
+			<td></td>
+		</tr>
+	<?php
+	$t_is_admin = current_user_is_administrator();
+	if ( $t_is_admin ) {
+	?>
+		<tr <?php echo helper_alternate_class() ?>>
+			<th class="category"><?php echo lang_get( 'site_path' ) ?></th>
+			<td><?php echo config_get( 'absolute_path' ) ?></td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<th class="category"><?php echo lang_get( 'core_path' ) ?></th>
+			<td><?php echo config_get( 'core_path' ) ?></td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<th class="category"><?php echo lang_get( 'plugin_path' ) ?></th>
+			<td><?php echo config_get( 'plugin_path' ) ?></td>
+		</tr>
+		<tr class="spacer">
+			<td></td>
+		</tr>
+	<?php
+	}
 
-<br/>
-<table class="width75" cellspacing="1">
-
-<tr>
-<td class="form-title" width="30%"><?php echo lang_get( 'site_information' ) ?></td>
-</tr>
-
-<tr <?php echo helper_alternate_class() ?>>
-<th class="category"><?php echo lang_get( 'mantis_version' ) ?></th>
-<td><?php echo MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ) ?></td>
-</tr>
-
-<tr <?php echo helper_alternate_class() ?>>
-<th class="category"><?php echo lang_get( 'schema_version' ) ?></th>
-<td><?php echo config_get( 'database_version' ) ?></td>
-</tr>
-
-<tr class="spacer">
-<td></td>
-</tr>
-
-<?php
-$t_is_admin = current_user_is_administrator();
-if ( $t_is_admin ) {
-?>
-<tr <?php echo helper_alternate_class() ?>>
-<th class="category"><?php echo lang_get( 'site_path' ) ?></th>
-<td><?php echo config_get( 'absolute_path' ) ?></td>
-</tr>
-
-<tr <?php echo helper_alternate_class() ?>>
-<th class="category"><?php echo lang_get( 'core_path' ) ?></th>
-<td><?php echo config_get( 'core_path' ) ?></td>
-</tr>
-
-<tr <?php echo helper_alternate_class() ?>>
-<th class="category"><?php echo lang_get( 'plugin_path' ) ?></th>
-<td><?php echo config_get( 'plugin_path' ) ?></td>
-</tr>
-
-<tr class="spacer">
-<td></td>
-</tr>
-<?php
-}
-
-event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) )
-?>
-
-</table>
-
+	event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) )
+	?>
+	</table>
+</div>
 <?php
 html_page_bottom();
 

@@ -360,3 +360,6 @@ label.even {
 }
 
 .myview-left-col, .myview-right-col { width: 50%; vertical-align: top; }
+#manage-overview-div { width: 75%; margin: 1em auto; }
+#manage-overview-table { width: 100%; border: 1px solid #000; }
+#manage-overview-table th { width: 30%; }
