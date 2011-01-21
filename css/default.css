@@ -329,7 +329,7 @@ div.error-info { text-align: center; margin: 1em; }
 }
 
 .myview-left-col, .myview-right-col { width: 50%; vertical-align: top; }
-#manage-overview-div { width: 75%; margin: 1em auto; }
+#manage-overview-div, #account-update-div { width: 75%; margin: 1em auto; }
 #manage-overview-table { width: 100%; border: 1px solid #000; }
 #manage-overview-table th { width: 30%; }
 div.form-container {
@@ -354,15 +354,17 @@ div.form-container fieldset legend {
 	border: none;
 	font-weight: bold;
 }
-div.form-container span.field-container {
+div.form-container .field-container {
 	position: relative;
 	display:block;
 	float: left;
 	width: 100%;
 	margin: 0em 0em 1px 0em;
+	padding: 0em;
 	line-height: 1em;
 }
-div.form-container fieldset label {
+div.form-container fieldset label,
+div.form-container fieldset .label span {
 	display: block;
 	line-height: 1.5em;
 	padding: .5em;
@@ -372,14 +374,14 @@ div.form-container fieldset label.required:before {
 	content: '* ';
 	color: red;
 }
-div.form-container span.odd {
+div.form-container .odd {
 	background-color: #d8d8d8;
 }
-div.form-container span.even {
+div.form-container .even {
 	background-color: #e8e8e8;
 }
 
-div.form-container span.label {
+div.form-container .label {
 	position: absolute;
 	display: block;
 	float: left;
@@ -389,15 +391,21 @@ div.form-container span.label {
 	font-weight: bold;
 	background-color: #c8c8e8;
 	height: 100%;
+	width: 30%; /* default width */
 }
-div.form-container span.input {
+div.form-container .input {
 	position: relative;
 	display: block;
 	float: right;
 	margin-right: 1em;
 	padding: .25em;
+	width: 65%; /* default width */
 }
-div.form-container span.input textarea, div.form-container span.input input {
+div.form-container .input span.field-value {
+	display:block;
+	line-height: 1.8em;
+}
+div.form-container .input textarea, div.form-container .input input {
 	max-width: 98%;
 }
 
@@ -422,23 +430,47 @@ div.form-container #account-menu {
 #account-profile-form .input, #account-profile-update-form .input, #select-project-form .input {
 	width: 65%;
 }
-#account-profile-update-form fieldset fieldset span.label,
-#account-profile-update-form fieldset fieldset span.input {
+#account-profile-update-form fieldset fieldset .label,
+#account-profile-update-form fieldset fieldset .input {
 	position: relative;
 	float: left;
 }
-#account-profile-update-form fieldset fieldset span.field-container span {
+#account-profile-update-form fieldset fieldset .field-container span {
 	left: 15%;
 }
-#account-profile-update-form fieldset fieldset span.label {
+#account-profile-update-form fieldset fieldset .label {
 	float: left;
 	background-color: transparent;
 	margin: 0em 2em 0em 0em;
 	border: none;
 	width: auto;
 }
-#account-profile-update-form fieldset fieldset span.input {
+#account-profile-update-form fieldset fieldset .input {
 	float: left;
 	margin: .25em 0em 0em 0em;
 	width: 1em;
 }
+div.important-msg {
+	display: block;
+	width: 60%;
+	margin: 2em auto;
+	color: red;
+	border: 1px solid red;
+	background-color: #fceded;
+}
+div.important-msg ul {
+	margin: 0em;
+	padding: 2em 2em 2em 4em;
+}
+div.important-msg ul li {
+	margin-left: 2em;
+	background-color: #fceded;
+}
+ul.project-list { list-style: none; margin: .5em 0em 2em 0em; padding: 0em .5em; }
+ul.project-list li { margin: 0em; line-height: 1.25em; clear: both; min-width: 30em; }
+ul.project-list li span.access-level:before { content: ' ['; }
+ul.project-list li span.access-level:after { content: '] '; }
+ul.project-list li span.view-state:before { content: ' ('; }
+ul.project-list li span.view-state:after { content: ') '; }
+ul.project-list li span.project-name { display: block; float: left; min-width: 15em; }
+ul.project-list li span.access-level, ul.project-list li span.view-state { display: block; float: left; margin: 0em .25em; }

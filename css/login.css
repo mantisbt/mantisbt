@@ -41,22 +41,6 @@ span#no-password-msg, #signup-info, #lost-password-msg {
 	display: block;
 	padding: 1em;
 }
-div#login-warnings, div#login-error {
-	display: block;
-	width: 60%;
-	margin: 2em auto;
-	color: red;
-	border: 1px solid red;
-	background-color: #fceded; 
-}
-div#login-warnings ul, div#login-error ul {
-	margin: 0em;
-	padding: 2em 2em 2em 4em;
-}
-div#login-warnings ul li, div#login-error ul li {
-	margin-left: 2em;
-	background-color: #fceded;
-}
 #login-links {
 	position: absolute;
 	top: .5em;

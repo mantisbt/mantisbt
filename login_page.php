@@ -113,7 +113,7 @@ html_page_top1();
 html_page_top2a();
 
 if( $f_error || $f_cookie_error ) {
-	echo '<div id="login-error">';
+	echo '<div class="important-msg">';
 	echo '<ul>';
 
 	# Display short greeting message
@@ -252,7 +252,7 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 		}
 	}
 	if( count( $t_warnings ) > 0 ) {
-		echo '<div id="login-warnings">';
+		echo '<div class="important-msg">';
 		echo '<ul>';
 		foreach( $t_warnings AS $t_warning ) {
 			echo '<li>' . $t_warning . '</li>';

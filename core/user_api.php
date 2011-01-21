@@ -1036,6 +1036,33 @@ function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
 	return $t_project_ids;
 }
 
+/**
+ * Get a list of projects the specified user is assigned to.
+ * @param int $p_user_id
+ * @return array An array of projects by project id the specified user is assigned to.
+ *		The array contains the id, name, view state, and project access level for the user.
+ */
+function user_get_assigned_projects( $p_user_id ) {
+	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
+	$t_mantis_project_table = db_get_table( 'project' );
+
+	$t_query = "SELECT DISTINCT p.id, p.name, p.view_state, u.access_level
+                FROM $t_mantis_project_table p
+                LEFT JOIN $t_mantis_project_user_list_table u
+                ON p.id=u.project_id
+                WHERE p.enabled = '1' AND
+                    u.user_id=" . db_param() . "
+                ORDER BY p.name";
+	$t_result = db_query_bound( $t_query, array( $p_user_id ) );
+	$category_count = db_num_rows( $t_result );
+	$t_projects = array();
+	for( $i = 0;$i < $category_count;$i++ ) {
+		$t_row = db_fetch_array( $t_result );
+		$t_project_id = $t_row['id'];
+		$t_projects[$t_project_id] = $t_row;
+	}
+	return $t_projects;
+}
 
 # --------------------
 # return the number of open assigned bugs to a user in a project

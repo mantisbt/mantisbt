@@ -971,26 +971,12 @@ function print_project_user_list_option_list2( $p_user_id ) {
 
 # list of projects that a user is in
 function print_project_user_list( $p_user_id, $p_include_remove_link = true ) {
-	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
-	$t_mantis_project_table = db_get_table( 'project' );
+	$t_projects = user_get_assigned_projects( $p_user_id );
 
-	$c_user_id = db_prepare_int( $p_user_id );
-
-	$query = "SELECT DISTINCT p.id, p.name, p.view_state, u.access_level
-				FROM $t_mantis_project_table p
-				LEFT JOIN $t_mantis_project_user_list_table u
-				ON p.id=u.project_id
-				WHERE p.enabled = '1' AND
-					u.user_id=" . db_param() . "
-				ORDER BY p.name";
-	$result = db_query_bound( $query, Array( $c_user_id ) );
-	$category_count = db_num_rows( $result );
-	for( $i = 0;$i < $category_count;$i++ ) {
-		$row = db_fetch_array( $result );
-		$t_project_id = $row['id'];
-		$t_project_name = string_attribute( $row['name'] );
-		$t_view_state = $row['view_state'];
-		$t_access_level = $row['access_level'];
+	foreach( $t_projects AS $t_project_id=>$t_project ) {
+		$t_project_name = string_attribute( $t_project['name'] );
+		$t_view_state = $t_project['view_state'];
+		$t_access_level = $t_project['access_level'];
 		$t_access_level = get_enum_element( 'access_levels', $t_access_level );
 		$t_view_state = get_enum_element( 'project_view_state', $t_view_state );
 

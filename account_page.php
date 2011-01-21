@@ -103,212 +103,131 @@ $t_force_pw_reset = is_page_name( 'verify.php' );
 $t_show_update_button = false;
 
 html_page_top( lang_get( 'account_link' ) );
+
+if ( $t_force_pw_reset ) {
+	echo '<div id="reset-passwd-msg" class="important-msg">';
+	echo '<ul>';
+	echo '<li>' . lang_get( 'verify_warning' ) . '</li>';
+	if ( helper_call_custom_function( 'auth_can_change_password', array() ) ) {
+		echo '<li>' . lang_get( 'verify_change_password' ) . '</li>';
+	}
+	echo '</ul>';
+	echo '</div>';
+}
 ?>
 
-<!-- # Edit Account Form BEGIN -->
-<br />
-<?php if ( $t_force_pw_reset ) { ?>
-<div class="center" style="color:red; width:75%">
-	<?php
-		echo lang_get( 'verify_warning' );
-		if ( helper_call_custom_function( 'auth_can_change_password', array() ) ) {
-			echo '<br />' . lang_get( 'verify_change_password' );
-		}
-	?>
-</div>
-<br />
-<?php } ?>
-<div>
-<form method="post" action="account_update.php">
-<?php echo form_security_field( 'account_update' ); ?>
-<table class="width75" cellspacing="1">
-	<!-- Headings -->
-	<tr>
-		<td class="form-title">
-			<?php echo lang_get( 'edit_account_title' ) ?>
-		</td>
-		<td class="right">
-			<?php print_account_menu( 'account_page.php' ) ?>
-		</td>
-	</tr>
+<div id="account-update-div" class="form-container">
+	<form id="account-update-form" method="post" action="account_update.php">
+		<fieldset <?php if ( $t_force_pw_reset ) { ?> class="has-required"<?php } ?>>
+			<legend><?php echo lang_get( 'edit_account_title' ); ?></legend>
+			<?php echo form_security_field( 'account_update' );
+			print_account_menu( 'account_page.php' );
 
-<?php if ( !helper_call_custom_function( 'auth_can_change_password', array() ) ) { ?> <!-- With LDAP -->
-
-	<!-- Username -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<th class="category" width="25%">
-			<?php echo lang_get( 'username' ) ?>
-		</th>
-		<td width="75%">
-			<?php echo string_display_line( $u_username ) ?>
-		</td>
-	</tr>
-
-	<!-- Password -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<th class="category">
-			<?php echo lang_get( 'password' ) ?>
-		</th>
-		<td>
-			<?php echo lang_get( 'no_password_change' ) ?>
-		</td>
-	</tr>
-
-	<!-- Without LDAP -->
-<?php } else {
-	$t_show_update_button = true;
-?>
-
-	<!-- Username -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<th class="category" width="25%">
-			<?php echo lang_get( 'username' ) ?>
-		</th>
-		<td width="75%">
-			<?php echo string_display_line( $u_username ) ?>
-		</td>
-	</tr>
-
-	<!-- Password -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<th class="category">
-			<?php
-				echo lang_get( 'password' );
-				if ( $t_force_pw_reset ) {
+		if ( !helper_call_custom_function( 'auth_can_change_password', array() ) ) {
+			# With LDAP --> ?>
+			<div class="field-container odd">
+				<span class="label"><span><?php echo lang_get( 'username' ) ?></span></span>
+				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
+			</div>
+			<div class="field-container odd">
+				<span class="label"><span><?php echo lang_get( 'password' ) ?></span></span>
+				<span class="input"><span class="field-value"><?php echo lang_get( 'no_password_change' ) ?></span></span>
+			</div><?php
+		} else {
+			# Without LDAP
+			$t_show_update_button = true;
 			?>
-			<span class="required">*</span>
-			<?php } ?>
-		</th>
-		<td>
-			<input type="password" size="32" maxlength="<?php echo PASSLEN;?>" name="password" />
-		</td>
-	</tr>
-
-	<!-- Password confirmation -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<th class="category">
+			<div class="field-container odd">
+				<span class="label"><span><?php echo lang_get( 'username' ) ?></span></span>
+				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
+			</div>
+			<div class="field-container even">
+				<span class="label"><label for="password" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><?php echo lang_get( 'password' ) ?></label></span>
+				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo PASSLEN; ?>" /></span>
+			</div>
+			<div class="field-container odd">
+				<span class="label"><label for="password-confirm" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><?php echo lang_get( 'confirm_password' ) ?></label></span>
+				<span class="input"><input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo PASSLEN; ?>" /></span>
+			</div><?php
+		} ?>
+			<div class="field-container even">
+				<span class="label"><span><?php echo lang_get( 'email' ) ?></span></span>
+				<span class="input"><?php
+				if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
+					// With LDAP
+					echo '<span class="field-value">' . string_display_line( $u_email ) . '</span>';
+				} else {
+					// Without LDAP
+					$t_show_update_button = true;
+					print_email_input( 'email', $u_email );
+				} ?>
+				</span>
+			</div>
+			<div class="field-container odd"><?php
+				if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
+					# With LDAP
+					echo '<span class="label"><span>' . lang_get( 'realname' ) . '</span></span>';
+					echo '<span class="input">';
+					echo '<span class="field-value">';
+					echo string_display_line( ldap_realname_from_username( $u_username ) );
+					echo '</span>';
+					echo '</span>';
+				} else {
+					# Without LDAP
+					$t_show_update_button = true;
+					echo '<span class="label"><label for="realname">' . lang_get( 'realname' ) . '</label></span>';
+					echo '<span class="input">';
+					echo '<input id="realname" type="text" size="32" maxlength="' . REALLEN . '" name="realname" value="' . string_attribute( $u_realname ) . '" />';
+					echo '</span>';
+				} ?>
+			</div>
+			<div class="field-container even">
+				<span class="label"><span><?php echo lang_get( 'access_level' ) ?></span></span>
+				<span class="input"><span class="field-value"><?php echo get_enum_element( 'access_levels', $u_access_level ); ?></span></span>
+			</div>
+			<div class="field-container odd">
+				<span class="label"><span><?php echo lang_get( 'access_level_project' ) ?></span></span>
+				<span class="input"><span class="field-value"><?php echo get_enum_element( 'access_levels', current_user_get_access_level() ); ?></span></span>
+			</div>
 			<?php
-				echo lang_get( 'confirm_password' );
-				if ( $t_force_pw_reset ) {
+			$t_projects = user_get_assigned_projects( auth_get_current_user_id() );
+			if( count( $t_projects ) > 0 ) {
+				echo '<div class="field-container even">';
+				echo '<span class="label"><span>' . lang_get( 'assigned_projects' ) . '</span></span>';
+				echo '<div class="input">';
+				echo '<ul class="project-list">';
+				foreach( $t_projects AS $t_project_id=>$t_project ) {
+					$t_project_name = string_attribute( $t_project['name'] );
+					$t_view_state = $t_project['view_state'];
+					$t_access_level = $t_project['access_level'];
+					$t_access_level = get_enum_element( 'access_levels', $t_access_level );
+					$t_view_state = get_enum_element( 'project_view_state', $t_view_state );
+
+					echo '<li><span class="project-name">' . $t_project_name . '</span> <span class="access-level">' . $t_access_level . '</span> <span class="view-state">' . $t_view_state . '</span></li>'; 
+				}
+				echo '</ul>';
+				echo '</div>';
+				echo '</div>';
+			}
 			?>
-			<span class="required">*</span>
-			<?php } ?>
-		</th>
-		<td>
-			<input type="password" size="32" maxlength="<?php echo PASSLEN;?>" name="password_confirm" />
-		</td>
-	</tr>
-
-<?php } ?>
-	<!-- End LDAP conditional -->
-
-	<!-- Email -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<th class="category">
-			<?php echo lang_get( 'email' ) ?>
-		</th>
-		<td>
-		<?php
-			// With LDAP
-			if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
-				echo string_display_line( $u_email );
-			}
-			// Without LDAP
-			else {
-				$t_show_update_button = true;
-				print_email_input( 'email', $u_email );
-			}
-		?>
-		</td>
-	</tr>
-
-	<!-- Realname -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<th class="category">
-			<?php echo lang_get( 'realname' ) ?>
-		</th>
-		<td>
-		<?php
-			// With LDAP
-			if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
-				echo string_display_line( ldap_realname_from_username( $u_username ) );
-			}
-			// Without LDAP
-			else {
-				$t_show_update_button = true;
-		?>
-			<input type="text" size="32" maxlength="<?php echo REALLEN;?>" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
-		<?php
-			}
-		?>
-		</td>
-	</tr>
-
-	<!-- Access level -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<th class="category">
-			<?php echo lang_get( 'access_level' ) ?>
-		</th>
-		<td>
-			<?php echo get_enum_element( 'access_levels', $u_access_level ) ?>
-		</td>
-	</tr>
-
-	<!-- Project access level -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<th class="category">
-			<?php echo lang_get( 'access_level_project' ) ?>
-		</th>
-		<td>
-			<?php echo get_enum_element( 'access_levels', current_user_get_access_level() ) ?>
-		</td>
-	</tr>
-
-	<!-- Assigned project list -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<th class="category">
-			<?php echo lang_get( 'assigned_projects' ) ?>
-		</th>
-		<td>
-			<?php print_project_user_list( auth_get_current_user_id(), false ) ?>
-		</td>
-	</tr>
-
 	<?php if ( $t_show_update_button ) { ?>
-	<!-- BUTTONS -->
-	<tr>
-		<td class="left">
-			<?php if ( $t_force_pw_reset ) { ?>
-			<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
-			<?php } ?>
-		</td>
-		<!-- Update Button -->
-		<td>
-			<input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" />
-		</td>
-	</tr>
+		<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" /></span>
 	<?php } ?>
-</table>
-</form>
-</div>
-
-<br />
-<?php # Delete Account Form BEGIN ?>
-<?php
-	# check if users can't delete their own accounts
-	if ( ON == config_get( 'allow_account_delete' ) ) {
-?>
-
-<!-- Delete Button -->
-<div class="border center">
-	<form method="post" action="account_delete.php">
-	<?php echo form_security_field( 'account_delete' ) ?>
-	<input type="submit" class="button" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
+		</fieldset>
 	</form>
 </div>
+<?php # check if users can't delete their own accounts
+if ( ON == config_get( 'allow_account_delete' ) ) { ?>
 
+<!-- Delete Button -->
+<div class="form-container">
+	<form method="post" action="account_delete.php">
+		<fieldset>
+			<?php echo form_security_field( 'account_delete' ) ?>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'delete_account_button' ) ?>" /></span>
+		</fieldset>
+	</form>
+</div>
 <?php
 }
-# Delete Account Form END
-
 html_page_bottom();
