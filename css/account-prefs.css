@@ -1,0 +1,49 @@
+div#account-prefs-update-div {
+	width: 85%;
+	min-width: 56em;
+}
+div#account-prefs-update-div fieldset .field-container {
+	position: relative;
+	margin-bottom: 1px;
+}
+div#account-prefs-update-div fieldset .field-container fieldset {
+	width: auto;
+	padding-left: 33%;
+}
+div#account-prefs-update-div fieldset fieldset legend {
+	position: absolute;
+	top: 0em;
+	left: 0em;	
+	width: 30%;
+	min-width: 18em;
+	padding: 0em;
+	margin: 0em;
+	display: block;
+	background-color: #c8c8e8;
+	border-right: 1px solid #fff;
+	text-indent: 0em;
+}
+div#account-prefs-update-div fieldset fieldset legend label {
+}
+	
+div#account-prefs-update-div fieldset .label {
+	min-width: 18em;
+}
+div#account-prefs-update-div fieldset .radio-label {
+	/*min-width: 10em;*/
+}
+div#account-prefs-update-div fieldset fieldset .label,
+div#account-prefs-update-div fieldset fieldset .radio-label {
+	position: relative;
+	float: left;
+	font-weight: normal;
+	border: none;
+	background-color: transparent;
+	width: auto;
+	text-align: left;
+}
+div#account-prefs-update-div fieldset fieldset .input {
+	float: left;
+	width: auto;
+	margin-right: 0em;
+}

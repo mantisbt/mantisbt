@@ -99,22 +99,22 @@ if ( $g_global_profiles ) {
 				print_account_menu( 'account_prof_menu_page.php' );
 			}
 			?>
-			<span class="field-container odd">
+			<div class="field-container odd">
 				<span class="label"><label for="platform" class="required"><?php echo lang_get( 'platform' ) ?></label></span>
 				<span class="input"><input id="platform" type="text" name="platform" size="32" maxlength="32" /></span>
-			</span>
-			<span class="field-container even">
+			</div>
+			<div class="field-container even">
 				<span class="label"><label for="os" class="required"><?php echo lang_get( 'operating_system' ) ?></label></span>
 				<span class="input"><input id="os" type="text" name="os" size="32" maxlength="32" /></span>
-			</span>
-			<span class="field-container odd">
+			</div>
+			<div class="field-container odd">
 					<span class="label"><label for="os-version" class="required"><?php echo lang_get( 'os_version' ) ?></label></span>
 					<span class="input"><input id="os-version" type="text" name="os_build" size="16" maxlength="16" /></span>
-			</span>
-			<span class="field-container even">
+			</div>
+			<div class="field-container even">
 				<span class="label"><label for="description" class="textarea"><?php echo lang_get( 'additional_description' ) ?></label></span>
 				<span class="input"><textarea id="description" name="description" cols="60" rows="8"></textarea></span>
-			</span>
+			</div>
 			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'add_profile_button' ) ?>" /></span>
 		</fieldset>
 	</form>
