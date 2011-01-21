@@ -419,6 +419,7 @@ div.form-container .submit-button {
 #account-profile-div, #account-profile-update-div {
 	width: 75%;
 }
+#reauth-div { width: 50%; }
 div.form-container #account-menu {
 	position: absolute;
 	float: right;

@@ -687,46 +687,38 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 	html_page_top();
 
 	?>
-<div>
-<p>
+<div class="important-msg">
 <?php
-		echo lang_get( 'reauthenticate_message' );
+	echo lang_get( 'reauthenticate_message' );
 	if( $t_error != false ) {
 		echo '<br /><span class="error-msg">', lang_get( 'login_error' ), '</span>';
 	}
-	?>
-</p>
-<form name="reauth_form" method="post" action="">
-<?php
-	# CSRF protection not required here - user needs to enter password
-	# (confirmation step) before the form is accepted.
-	print_hidden_inputs( gpc_strip_slashes( $_POST ) );
-	print_hidden_inputs( gpc_strip_slashes( $_GET ) );
 ?>
+</div>
+<div id="reauth-div" class="form-container">
+	<form id="reauth-form" method="post" action="">
+		<fieldset>
+			<legend><?php echo lang_get( 'reauthenticate_title' ); ?></legend>
 
-<input type="hidden" name="_authenticate" value="1" />
+		<?php
+			# CSRF protection not required here - user needs to enter password
+			# (confirmation step) before the form is accepted.
+			print_hidden_inputs( gpc_strip_slashes( $_POST ) );
+			print_hidden_inputs( gpc_strip_slashes( $_GET ) );
+		?>
 
-<table class="width50 center">
-<tr>
-	<td class="form-title" colspan="2"><?php echo lang_get( 'reauthenticate_title' ); ?></td>
-</tr>
-
-<tr class="row-1">
-	<th class="category"><?php echo lang_get( 'username' );?></th>
-	<td><input type="text" disabled="disabled" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $p_username );?>" /></td>
-</tr>
-
-<tr class="row-2">
-	<th class="category"><?php echo lang_get( 'password' );?></th>
-	<td><input type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" class="autofocus" /></td>
-</tr>
-
-<tr>
-	<td class="center" colspan="2"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' );?>" /></td>
-</tr>
-</table>
-
-</form>
+			<input type="hidden" name="_authenticate" value="1" />
+			<div class="field-container odd">
+				<span class="label"><label for="username"><?php echo lang_get( 'username' );?></label></span>
+				<span class="input"><input id="username" type="text" disabled="disabled" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $p_username );?>" /></span>
+			</div>
+			<div class="field-container even">
+				<span class="label"><label for="password"><?php echo lang_get( 'password' );?></label></span>
+				<span class="input"><input id="password" type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" class="autofocus" /></span>
+			</div>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' );?>" /></span>
+		</fieldset>
+	</form>
 </div>
 
 <?php
