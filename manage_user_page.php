@@ -88,7 +88,7 @@ if ($f_hide == 0) { # a 0 will turn it off
 } else {            # anything else (including 'on') will turn it on
 	$c_hide = 1;
 }
-$t_hide_filter = '&hide=' . $c_hide;
+$t_hide_filter = '&amp;hide=' . $c_hide;
 
 # set cookie values for hide, sort by, and dir
 if ( $f_save ) {
@@ -151,23 +151,27 @@ for ( $i = 0; $i <= 9; $i++ ) {
 $t_prefix_array['UNUSED'] = lang_get( 'users_unused' );
 $t_prefix_array['NEW'] = lang_get( 'users_new' );
 
-echo '<br /><table class="width75"><tr>';
+echo '<div id="manage-user-filter-menu">';
+echo '<ul class="menu">';
 foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
-	echo '<td>';
+	echo '<li>';
+	if ( $t_prefix === 'UNUSED' ) {
+		$t_title = ' title="[' . $unused_user_count . '] (' . lang_get( 'never_logged_in_title' ) . ')"';
+	} else if ( $t_prefix === 'NEW' ) {
+		$t_title = ' title="[' . $new_user_count . '] (' . lang_get( '1_week_title' ) . ')"';
+	} else {
+		$t_title = '';
+	}
 	if ( $t_prefix === $f_filter ) {
 		$c_filter = $f_filter;
-		echo "<strong>$t_caption</strong>";
+		echo '<span class="current-filter">' . $t_caption . '</span>';
 	} else {
-		print_link( "manage_user_page.php?sort=$c_sort&dir=$c_dir&save=1$t_hide_filter&filter=$t_prefix", $t_caption );
+		echo '<a' . $t_title . ' href="manage_user_page.php?sort=' . $c_sort . '&amp;dir=' . $c_dir . '&amp;save=1' . $t_hide_filter . '&amp;filter=' . $t_prefix . '">' . $t_caption . '</a>';
 	}
-	if ( $t_prefix === 'UNUSED' ) {
-		echo ' [' . $unused_user_count . '] (' . lang_get( 'never_logged_in_title' ) . ')';
-	} else if ( $t_prefix === 'NEW' ) {
-		echo ' [' . $new_user_count . '] (' . lang_get( '1_week_title' ) . ')';
-	}
-	echo '</td>';
+	echo '</li>';
 }
-echo '</tr></table>';
+echo '</ul>';
+echo '</div>';
 
 $t_where_params = null;
 if ( $f_filter === 'ALL' ) {
@@ -246,14 +250,16 @@ $user_count = db_num_rows( $result );
 		<?php if ( $f_filter === 'UNUSED' ) echo print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) ); ?>
 	</td>
 	<td class="center" colspan="3">
-		<form method="post" action="manage_user_page.php">
-		<?php # CSRF protection not required here - form does not result in modifications ?>
-		<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
-		<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
-		<input type="hidden" name="save" value="1" />
-		<input type="hidden" name="filter" value="<?php echo $c_filter ?>" />
-		<input type="checkbox" name="hide" value="1" <?php check_checked( $c_hide, 1 ); ?> /> <?php echo lang_get( 'hide_inactive' ) ?>
-		<input type="submit" class="button" value="<?php echo lang_get( 'filter_button' ) ?>" />
+		<form id="manage-user-filter" method="post" action="manage_user_page.php">
+			<fieldset>
+				<?php # CSRF protection not required here - form does not result in modifications ?>
+				<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
+				<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
+				<input type="hidden" name="save" value="1" />
+				<input type="hidden" name="filter" value="<?php echo $c_filter ?>" />
+				<input type="checkbox" name="hide" value="1" <?php check_checked( $c_hide, 1 ); ?> /> <?php echo lang_get( 'hide_inactive' ) ?>
+				<input type="submit" class="button" value="<?php echo lang_get( 'filter_button' ) ?>" />
+			</fieldset>
 		</form>
 	</td>
 </tr>
@@ -360,7 +366,7 @@ for ($i=0;$i<$user_count;$i++) {
 			<span class="small">
 				<?php
 					/* @todo hack - pass in the hide inactive filter via cheating the actual filter value */
-					print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number, $c_filter . $t_hide_filter . "&sort=$c_sort&dir=$c_dir");
+					print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number, $c_filter . $t_hide_filter . "&amp;sort=$c_sort&amp;dir=$c_dir");
 				?>
 			</span>
 		</td>
@@ -369,11 +375,16 @@ for ($i=0;$i<$user_count;$i++) {
 <?php
 	# Manage Form END
 ?>
-	<br />
-	<form method="get" action="manage_user_edit_page.php"<?php # CSRF protection not required here - form does not result in modifications ?>>
-		<?php echo lang_get( 'username' ) ?>
-		<input type="text" name="username" value="" />
-		<input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" />
-	</form>
+	<div id="manage-user-edit-div" class="form-container">
+		<form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php"<?php # CSRF protection not required here - form does not result in modifications ?>>
+			<fieldset>
+				<span class="field-container">
+					<span class="label"><label for="username"><?php echo lang_get( 'username' ) ?></label></span>
+					<span class="input"><input id="username" type="text" name="username" value="" /></span>
+				</span>
+				<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" /></span>
+			</fieldset>
+		</form>
+	</div>
 <?php
 html_page_bottom();

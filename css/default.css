@@ -125,10 +125,10 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 .main-menu ul li a { padding-right: .9em; border-right: 1px solid #000; text-decoration: underline; }
 .main-menu ul li > a#logout-link { padding-right: 0; border-right: none; }
 
-#manage-menu, #account-menu, #summary-menu , #summary-submenu, #manage-config-menu { float: left; width: 100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -1.5em; }
-#manage-menu ul, #manage-config-menu ul, #summary-menu ul, #summary-submenu ul { clear: left; float: left; list-style: none; position: relative; left: 50%; padding: 0; margin: 0; text-align: center; }
-#manage-menu ul li, #manage-config-menu ul li, #summary-menu ul li, #summary-submenu ul li { display:block; float: left; list-style: none; margin: .5em 0; padding: 0; position: relative; right: 50%; }
-#manage-menu ul a, #manage-config-menu ul a, #summary-menu ul a, #summary-submenu ul a, #account-menu ul a, #doc-menu ul a { text-decoration: underline; padding: 0 .25em; }
+#manage-menu, #account-menu, #summary-menu , #summary-submenu, #manage-config-menu, #manage-user-filter-menu { float: left; width: 100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -1.5em; }
+#manage-menu ul, #manage-config-menu ul, #summary-menu ul, #summary-submenu ul, #manage-user-filter-menu ul { clear: left; float: left; list-style: none; position: relative; left: 50%; padding: 0; margin: 0; text-align: center; }
+#manage-menu ul li, #manage-config-menu ul li, #summary-menu ul li, #summary-submenu ul li, #manage-user-filter-menu ul li { display:block; float: left; list-style: none; margin: .5em 0; padding: 0; position: relative; right: 50%; }
+#manage-menu ul a, #manage-config-menu ul a, #summary-menu ul a, #summary-submenu ul a, #account-menu ul a, #doc-menu ul a, #manage-user-filter-menu ul a { text-decoration: underline; padding: 0 .25em; }
 
 #account-menu, #doc-menu { top: 0; }
 #account-menu ul, #doc-menu ul { margin: 0 auto; padding: .25em; float: right; text-align: center; }
@@ -455,6 +455,15 @@ div#manage-columns-div { min-width: 51.5em; }
 #manage-columns-copy-div div.field-container { float: left; width: auto; }
 #manage-columns-copy-div span.input { float: left; width: auto; }
 #manage-columns-copy-div span.submit-button { clear: none; padding: .25em; text-align: left; }
+div#manage-user-edit-div { border: none; margin: 0em; }
+div#manage-user-edit-div .field-container { width: auto; float: left; }
+div#manage-user-edit-div .label { position: relative; min-width: 5em; width: auto; background-color: transparent; }
+div#manage-user-edit-div .input { width: auto; }
+div#manage-user-edit-div .submit-button { clear: none; float: left; padding: .25em; }
+#manage-user-filter fieldset, form.action-button fieldset { border: none; padding: 0em; margin: 0em; display:inline; }
+#manage-user-filter-menu { clear: both; margin-top: .5em; }
+#manage-user-filter-menu .current-filter { font-weight: bold; }
+
 div.important-msg {
 	display: block;
 	width: 60%;
