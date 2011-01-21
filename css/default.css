@@ -392,6 +392,7 @@ div.form-container .label {
 	background-color: #c8c8e8;
 	height: 100%;
 	width: 30%; /* default width */
+	min-width: 12.5em; /* default width */
 }
 div.form-container .input {
 	position: relative;
@@ -424,6 +425,7 @@ div.form-container #account-menu {
 	padding: .25em;
 	right: .5em;
 }
+div#manage-columns-div { min-width: 51.5em; }
 #account-profile-form .label, #account-profile-update-form .label, #select-project-form .label {
 	width: 30%;
 }
@@ -450,6 +452,9 @@ div.form-container #account-menu {
 	margin: .25em 0em 0em 0em;
 	width: 1em;
 }
+#manage-columns-copy-div div.field-container { float: left; width: auto; }
+#manage-columns-copy-div span.input { float: left; width: auto; }
+#manage-columns-copy-div span.submit-button { clear: none; padding: .25em; text-align: left; }
 div.important-msg {
 	display: block;
 	width: 60%;
