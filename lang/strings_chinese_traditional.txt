@@ -27,6 +27,7 @@
  *
  * @author Firesueprtom
  * @author Jonathan Tsai, tryweb@ichiayi.com
+ * @author Mark85296341
  */
 
 $s_actiongroup_menu_move = '搬移';
@@ -520,7 +521,7 @@ $s_manage_config_link = '管理參數設定';
 $s_manage_threshold_config = '工作流程門檻';
 $s_manage_email_config = 'E-Mail 通知';
 $s_manage_workflow_config = '工作流程';
-$s_create_new_account_link = '建立帳號';
+$s_create_new_account_link = '建立新帳號';
 $s_projects_link = '建立專案';
 $s_documentation_link = '說明';
 $s_new_accounts_title = '新帳號';
@@ -780,7 +781,7 @@ $s_updated = '已更新';
 $s_sticky = '顯示棘手問題';
 $s_sort = '排序方式';
 $s_none = '無';
-$s_search = '搜尋 Bug 內容關鍵字';
+$s_search = '搜尋';
 $s_view_prev_link = '檢視前一筆';
 $s_view_next_link = '檢視下一筆';
 $s_prev = '前一筆';
