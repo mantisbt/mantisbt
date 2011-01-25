@@ -168,7 +168,7 @@ function print_font_checked( $p_font_name ) {
 </tr>
 
 </table>
-<form>
+</form>
 
 <?php
 html_page_bottom();
