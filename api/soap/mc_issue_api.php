@@ -61,6 +61,10 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
+	if( !access_has_bug_level( VIEWER, $p_issue_id, $t_user_id ) ){
+	    return mci_soap_fault_access_denied( $t_user_id );
+	}
+
 	$t_bug = bug_get( $p_issue_id, true );
 	$t_issue_data = array();
 
