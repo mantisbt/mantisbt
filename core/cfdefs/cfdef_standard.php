@@ -315,12 +315,7 @@ function cfdef_input_textbox($p_field_def, $t_custom_field_value) {
 
 function cfdef_input_textarea($p_field_def, $t_custom_field_value) {
 	echo '<textarea ', helper_get_tab_index(), ' name="custom_field_' . $p_field_def['id'] . '"';
-	if( 0 < $p_field_def['length_max'] ) {
-		echo ' maxlength="' . $p_field_def['length_max'] . '"';
-	} else {
-		echo ' maxlength="255"';
-	}
-	echo 'cols="70" rows="8">' . $t_custom_field_value .'</textarea>';
+	echo ' cols="70" rows="8">' . $t_custom_field_value .'</textarea>';
 }
 
 /**
