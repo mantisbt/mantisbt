@@ -121,6 +121,22 @@ function install_date_migrate( $p_data) {
 		}		
 		$t_new_column = implode( ',', $t_pairs );
 		$query = "SELECT $t_id_column, $t_old_column FROM $t_table";
+
+		$t_first_column = true;
+
+		# In order to handle large databases where we may timeout during the upgrade, we don't
+		# start form the beginning everytime.  Here we will only pickup rows where at least one
+		# of the datetime fields wasn't upgraded yet and upgrade them all.
+		foreach ( $p_data[3] as $t_new_column_name ) {
+			if ( $t_first_column ) {
+				$t_first_column = false;
+				$query .= ' WHERE ';
+			} else {
+				$query .= ' OR ';
+			}
+
+			$query .= "$t_new_column_name = 1";
+		}
 	} else {
 		$t_old_column = $p_data[2];
 		$t_new_column = $p_data[3] . "=" . db_param();
