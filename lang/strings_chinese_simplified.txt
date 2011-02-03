@@ -29,6 +29,7 @@
  * @author Fwolf
  * @author Gaoxuewei
  * @author Hacked by justin schnell_18@yahoo.com
+ * @author Hydra
  * @author Kai-Zheng Cheng, neek@sina.com
  * @author NetCobra, netcobra@gmail.com
  * @author PhiLiP
@@ -458,7 +459,7 @@ $s_closed_bug_title = '关闭问题';
 $s_bug_deleted_msg = '问题已经被删除...';
 $s_delete_bug_sure_msg = '确定要删除此问题吗？';
 $s_delete_bug_button = '删除问题';
-$s_monitor_bug_button = '监视问题';
+$s_monitor_bug_button = '显示器';
 $s_unmonitor_bug_button = '取消监视';
 $s_file_upload_msg = '文件上传成功';
 $s_upload_file = '上传文件';
@@ -657,7 +658,7 @@ $s_resolved_status = '问题已经被认为已解决的状态';
 $s_readonly_status = '只读问题的状态设置为';
 $s_reopen_status = '重新打开的问题状态设置为';
 $s_reopen_resolution = '重新打开的问题的处理状况设置为';
-$s_config_delete_sure = '确定要删除该条目的设置';
+$s_config_delete_sure = '您确实要删除的设置：';
 $s_in_project = '在项目';
 $s_delete_config_button = '删除设置';
 $s_configuration_report = '配置报告';
@@ -923,12 +924,12 @@ $s_query_deleted = '过滤器已删除';
 $s_save_query = '保存当前过滤器';
 $s_reset_query = '重置过滤器';
 $s_query_name = '过滤器名称';
-$s_query_exists = '这个特定的查询可能已经存在了。';
+$s_query_exists = '此特定的筛选器似乎已经存在。';
 $s_query_dupe_name = '这个名称已经被另外一个筛选器使用，请选择一个不同的名称。';
 $s_query_blank_name = '没有名称就不能保存过滤器，在保存前请给当前过滤器起一个名字。';
-$s_query_store_error = '保存这个查询时发生错误。';
+$s_query_store_error = '保存此筛选器时出错。';
 $s_open_queries = '管理过滤器';
-$s_query_delete_msg = '你确定要删除这个查询吗？';
+$s_query_delete_msg = '您确实要删除此筛选器吗？';
 $s_view_simple_link = '简易查看';
 $s_product_build = '产品Build';
 $s_system_profile = '系统说明';
@@ -936,7 +937,7 @@ $s_update_bug_button = '编辑';
 $s_bug_assign_to_button = '分派给：';
 $s_bug_status_to_button = '状态改为:';
 $s_reopen_bug_button = '重启问题';
-$s_move_bug_button = '移动问题';
+$s_move_bug_button = '移动';
 $s_attached_files = '附件';
 $s_publish = '发布';
 $s_cached = '已缓存';
@@ -984,7 +985,7 @@ $s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类
 $s_confirm_used_custom_field_deletion = '当前有至少一个项目链接到了这个字段，如果继续，这个字段的所有值都将被永久删除；删除操作无法恢复。如果你不想删除这个字段，请点击浏览器的“返回”按钮；点击下面的按钮继续删除。';
 $s_confirm_custom_field_deletion = '你确定要删除这个自定义字段和所有相关联的值吗？';
 $s_field_delete_button = '删除字段';
-$s_confirm_custom_field_unlinking = '确定要从该项目中移除（取消链接）该自定义字段，并删除所有关联值吗？';
+$s_confirm_custom_field_unlinking = '确实要取消链接此自定义的字段，从项目吗？将删除的值，只要自定义字段本身不会被删除。';
 $s_field_remove_button = '移除字段';
 $s_hide_status = '隐藏状态';
 $s_filter_closed = '已关闭';
@@ -1052,13 +1053,13 @@ $s_view_private_issues = '查看私有问题';
 $s_update_readonly_issues = '修改只读问题';
 $s_update_issue_status = '修改问题状态';
 $s_set_view_status = '设置视图状态（公开 vs 私有）';
-$s_update_view_status = '修改视图状态(公开的 vs 私有的)';
+$s_update_view_status = '设置视图状态（公开 vs 私有）';
 $s_show_list_of_users_monitoring_issue = '显示正在监视问题的用户列表';
 $s_notes = '<b>注释</b>';
 $s_add_notes = '添加注释';
 $s_update_notes = '修改注释';
 $s_delete_note = '删除注释';
-$s_view_private_notes = '查看私有注释';
+$s_view_private_notes = '查看私人备注';
 $s_news = '<b>新闻</b>';
 $s_view_private_news = '查看私有新闻';
 $s_manage_news = '管理新闻';

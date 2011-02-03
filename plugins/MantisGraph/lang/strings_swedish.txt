@@ -25,8 +25,12 @@
  * @ingroup Language
  * @file
  *
+ * @author Tobulos1
  */
 
+$s_plugin_MantisGraph_config = 'Konfiguration';
+$s_plugin_MantisGraph_enabled = 'På';
+$s_plugin_MantisGraph_disabled = 'Av';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Sammanfattningsgraf - status';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Sammanfattningsgraf - prioritet';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Sammanfattningsgraf - allvarlighet';

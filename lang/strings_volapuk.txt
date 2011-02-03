@@ -17,15 +17,15 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /** Volapük (Volapük)
- *
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author Malafaya
  * @author Smeira
  */
 
@@ -251,7 +251,7 @@ $s_click_to_login = 'Klikolös is ad nunädön oli';
 $s_warning_default_administrator_account_present = '<strong>NUNED:</strong> Sötol negebidükön kali kösömik: „guvan“ u votükön letavödi oni.';
 $s_warning_admin_directory_present = '<strong>NUNED:</strong> Guvanaragiviär söton pemoükön.';
 $s_login_title = 'Nunädam';
-$s_save_login = 'Dakipön Nunädami';
+$s_save_login = 'Dakipön nunädamanünis obik in nünöm at';
 $s_choose_project = 'Välön Proyegi';
 $s_login_button = 'Nunädam';
 $s_signup_link = 'Jafön kali nulik';
@@ -382,7 +382,6 @@ $s_add_file = 'Läükön Ragivi';
 $s_project_user_added_msg = 'Geban peläükön proyege benosekiko.';
 $s_project_removed_user_msg = 'Geban pemoükon benosekiko se proyeg.';
 $s_remove_user_sure_msg = 'Vilol-li fümiko moükön gebani at?';
-$s_remove_user_button = 'Moükön Gebani';
 $s_remove_all_users_sure_msg = 'Vilol-li fümiko moükön gebanis valik se proyeg at?';
 $s_remove_all_users_button = 'Moükön Gebanis Valik';
 $s_add_user_title = 'Läükön gebani proyege';
@@ -422,7 +421,7 @@ $s_start_date = 'Primadät';
 $s_end_date = 'Finadät';
 $s_use_date_filters = 'Gebön Dätisulis';
 $s_yes = 'Si';
-$s_no = 'No';
+$s_no = 'Nö';
 $s_open_filters = 'Votükön Suli';
 $s_select_all = 'Välön Vali';
 $s_use_query = 'Gebön Suli';
