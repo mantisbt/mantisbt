@@ -92,7 +92,8 @@
 <div class="border center">
 	<form method="post" action="manage_proj_cat_delete.php">
 		<?php echo form_security_field( 'manage_proj_cat_delete' ) ?>
-		<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
+		<input type="hidden" name="id" value="<?php echo string_attribute( $f_category_id ) ?>" />
+		<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
 	</form>
 </div>
