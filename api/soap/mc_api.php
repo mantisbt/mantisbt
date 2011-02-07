@@ -165,21 +165,13 @@ function mci_null_if_empty( $p_value ) {
 }
 
 /**
- * Gets the url for MantisBT.  This is based on the 'path' config variable in MantisBT.  However,
- * the default value for 'path' does not work properly when access from within MantisConnect.
- * This internal function fixes this bug.
+ * Gets the url for MantisBT.
  *
  * @return MantisBT URL terminated by a /.
  */
 function mci_get_mantis_path() {
-	$t_path = config_get( 'path' );
-	$t_dir = basename( dirname( __FILE__ ) );
-
-	# for some reason str_replace() doesn't work when DIRECTORY_SEPARATOR (/) is in the search
-	# string.
-	$t_path = str_replace( $t_dir . '/', '', $t_path );
-
-	return $t_path;
+    
+	return config_get( 'path' );
 }
 
 # Given a enum string and num, return the appropriate localized string
