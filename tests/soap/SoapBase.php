@@ -33,6 +33,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	protected $client;
 	protected $userName = 'administrator';
 	protected $password = 'root';
+	protected $mantisPath;
 	private   $issueIdsToDelete = array();
 	private   $versionIdsToDelete = array();
 	private   $defaultSoapClientOptions = array(  'trace'      => true,
@@ -54,6 +55,8 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 		       	array_merge($this->defaultSoapClientOptions, $this->extraSoapClientFlags()
 				)		     
 		    );
+	    
+	    $this->mantisPath = substr($GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'], 0, -strlen('api/soap/mantisconnect.php?wsdl'));
     }
     
     /**
