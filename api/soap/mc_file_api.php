@@ -103,7 +103,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 					chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 				}
 
-				$c_content = '';
+				$c_content = "''";
 			}
 			break;
 		case DATABASE:
