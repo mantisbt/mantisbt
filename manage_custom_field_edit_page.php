@@ -65,187 +65,131 @@ print_manage_menu( 'manage_custom_field_edit_page.php' );
 
 $t_definition = custom_field_get_definition( $f_field_id );
 ?>
-<br />
-<div>
-<form method="post" action="manage_custom_field_update.php">
-<?php echo form_security_field( 'manage_custom_field_update' ); ?>
-	<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
-	<input type="hidden" name="return" value="<?php echo $f_return ?>" />
 
-	<table class="width50" cellspacing="1">
-		<tr>
-			<td class="form-title" colspan="2">
-				<?php echo lang_get( 'edit_custom_field_title' ) ?>
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_name' ) ?>
-			</th>
-			<td>
-				<input type="text" name="name" size="32" maxlength="64" value="<?php echo string_attribute( $t_definition['name'] ) ?>" />
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_type' ) ?>
-			</th>
-			<td>
-				<select name="type">
-					<?php print_enum_string_option_list( 'custom_field_type', $t_definition['type'] ) ?>
-				</select>
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_possible_values' ) ?>
-			</th>
-			<td>
-				<input type="text" name="possible_values" size="32" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" />
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_default_value' ) ?>
-			</th>
-			<td>
-				<input type="text" name="default_value" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['default_value'] ) ?>" />
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_valid_regexp' ) ?>
-			</th>
-			<td>
-				<input type="text" name="valid_regexp" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['valid_regexp'] ) ?>" />
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_access_level_r' ) ?>
-			</th>
-			<td>
-				<select name="access_level_r">
-					<?php print_enum_string_option_list( 'access_levels', $t_definition['access_level_r'] ) ?>
-				</select>
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_access_level_rw' ) ?>
-			</th>
-			<td>
-				<select name="access_level_rw">
-					<?php print_enum_string_option_list( 'access_levels', $t_definition['access_level_rw'] ) ?>
-				</select>
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_length_min' ) ?>
-			</th>
-			<td>
-				<input type="text" name="length_min" size="32" maxlength="64" value="<?php echo $t_definition['length_min'] ?>" />
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_length_max' ) ?>
-			</th>
-			<td>
-				<input type="text" name="length_max" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" />
-			</td>
-		</tr>
-        <tr <?php echo helper_alternate_class() ?>>
-            <th class="category">
-                <?php echo lang_get( 'custom_field_filter_by' ) ?>
-            </th>
-            <td>
-                <input type="checkbox" name="filter_by" <?php if ( $t_definition['filter_by'] ) { ?>checked="checked"<?php } ?>  />
-            </td>
-        </tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_display_report' ) ?>
-			</th>
-			<td>
-				<input type="checkbox" name="display_report" value="1" <?php check_checked( $t_definition['display_report'] ) ?> />
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_display_update' ) ?>
-			</th>
-			<td>
-				<input type="checkbox" name="display_update" value="1" <?php check_checked( $t_definition['display_update'] ) ?> />
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_display_resolved' ) ?>
-			</th>
-			<td>
-				<input type="checkbox" name="display_resolved" value="1" <?php check_checked( $t_definition['display_resolved'] ) ?> />
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_display_closed' ) ?>
-			</th>
-			<td>
-				<input type="checkbox" name="display_closed" value="1" <?php check_checked( $t_definition['display_closed'] ) ?> />
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_require_report' ) ?>
-			</th>
-			<td>
-				<input type="checkbox" name="require_report" value="1" <?php check_checked( $t_definition['require_report'] ) ?> />
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_require_update' ) ?>
-			</th>
-			<td>
-				<input type="checkbox" name="require_update" value="1" <?php check_checked( $t_definition['require_update'] ) ?> />
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_require_resolved' ) ?>
-			</th>
-			<td>
-				<input type="checkbox" name="require_resolved" value="1" <?php check_checked( $t_definition['require_resolved'] ) ?> />
-			</td>
-		</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-			<th class="category">
-				<?php echo lang_get( 'custom_field_require_closed' ) ?>
-			</th>
-			<td>
-				<input type="checkbox" name="require_closed" value="1" <?php check_checked( $t_definition['require_closed'] ) ?> />
-			</td>
-		</tr>
-		<tr>
-			<td>&#160;</td>
-			<td>
-				<input type="submit" class="button" value="<?php echo lang_get( 'update_custom_field_button' ) ?>" />
-			</td>
-		</tr>
-	</table>
-</form>
+<div id="manage-custom-field-update-div" class="form-container">
+	<form id="manage-custom-field-update-form" method="post" action="manage_custom_field_update.php">
+		<fieldset>
+			<legend><span><?php echo lang_get( 'edit_custom_field_title' ) ?></span></legend>
+			<?php echo form_security_field( 'manage_custom_field_update' ); ?>
+			<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
+			<input type="hidden" name="return" value="<?php echo $f_return ?>" />
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-name"><span><?php echo lang_get( 'custom_field_name' ) ?></span></label>
+				<span class="input"><input type="text" id="custom-field-name" name="name" size="32" maxlength="64" value="<?php echo string_attribute( $t_definition['name'] ) ?>" /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-type"><span><?php echo lang_get( 'custom_field_type' ) ?></span></label>
+				<span class="select">
+					<select id="custom-field-type" name="type">
+						<?php print_enum_string_option_list( 'custom_field_type', $t_definition['type'] ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-possible-values"><span><?php echo lang_get( 'custom_field_possible_values' ) ?></span></label>
+				<span class="input"><input type="text" id="custom-field-possible-values" name="possible_values" size="32" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-default-value"><span><?php echo lang_get( 'custom_field_default_value' ) ?></span></label>
+				<span class="input"><input type="text" id="custom-field-default-value" name="default_value" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['default_value'] ) ?>" /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-valid-regexp"><span><?php echo lang_get( 'custom_field_valid_regexp' ) ?></span></label>
+				<span class="input"><input type="text" id="custom-field-valid-regexp" name="valid_regexp" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['valid_regexp'] ) ?>" /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-access-level-r"><span><?php echo lang_get( 'custom_field_access_level_r' ) ?></span></label>
+				<span class="select">
+					<select id="custom-field-access-level-r" name="access_level_r">
+						<?php print_enum_string_option_list( 'access_levels', $t_definition['access_level_r'] ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-access-level-rw"><span><?php echo lang_get( 'custom_field_access_level_rw' ) ?></span></label>
+				<span class="select">
+					<select id="custom-field-access-level-rw" name="access_level_rw">
+						<?php print_enum_string_option_list( 'access_levels', $t_definition['access_level_rw'] ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-length-min"><span><?php echo lang_get( 'custom_field_length_min' ) ?></span></label>
+				<span class="input"><input type="text" id="custom-field-length-min" name="length_min" size="32" maxlength="64" value="<?php echo $t_definition['length_min'] ?>" /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-length-max"><span><?php echo lang_get( 'custom_field_length_max' ) ?></span></label>
+				<span class="input"><input type="text" id="custom-field-length-max" name="length_max" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-filter-by"><span><?php echo lang_get( 'custom_field_filter_by' ) ?></span></label>
+				<span class="checkbox"><input type="checkbox" id="custom-field-filter-by" name="filter_by" <?php if ( $t_definition['filter_by'] ) { ?>checked="checked"<?php } ?>  /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-display-report"><span><?php echo lang_get( 'custom_field_display_report' ) ?></span></label>
+				<span class="checkbox"><input type="checkbox" id="custom-field-display-report" name="display_report" value="1" <?php check_checked( $t_definition['display_report'] ) ?> /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-display-update"><span><?php echo lang_get( 'custom_field_display_update' ) ?></span></label>
+				<span class="checkbox"><input type="checkbox" id="custom-field-display-update" name="display_update" value="1" <?php check_checked( $t_definition['display_update'] ) ?> /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-display-resolved"><span><?php echo lang_get( 'custom_field_display_resolved' ) ?></span></label>
+				<span class="checkbox"><input type="checkbox" id="custom-field-display-resolved" name="display_resolved" value="1" <?php check_checked( $t_definition['display_resolved'] ) ?> /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-display-closed"><span><?php echo lang_get( 'custom_field_display_closed' ) ?></span></label>
+				<span class="checkbox"><input type="checkbox" id="custom-field-display-closed" name="display_closed" value="1" <?php check_checked( $t_definition['display_closed'] ) ?> /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-require-report"><span><?php echo lang_get( 'custom_field_require_report' ) ?></span></label>
+				<span class="checkbox"><input type="checkbox" id="custom-field-require-report" name="require_report" value="1" <?php check_checked( $t_definition['require_report'] ) ?> /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-require-update"><span><?php echo lang_get( 'custom_field_require_update' ) ?></span></label>
+				<span class="checkbox"><input type="checkbox" id="custom-field-require-update" name="require_update" value="1" <?php check_checked( $t_definition['require_update'] ) ?> /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-require-resolved"><span><?php echo lang_get( 'custom_field_require_resolved' ) ?></span></label>
+				<span class="checkbox"><input type="checkbox" id="custom-field-require-resolved" name="require_resolved" value="1" <?php check_checked( $t_definition['require_resolved'] ) ?> /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-require-closed"><span><?php echo lang_get( 'custom_field_require_closed' ) ?></span></label>
+				<span class="checkbox"><input type="checkbox" id="custom-field-require-closed" name="require_closed" value="1" <?php check_checked( $t_definition['require_closed'] ) ?> /></span>
+				<span class="label-style"></span>
+			</div>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_custom_field_button' ) ?>" /></span>
+		</fieldset>
+	</form>
 </div>
 
 <br />
 
-<div class="border center">
-	<form method="post" action="manage_custom_field_delete.php">
-<?php echo form_security_field( 'manage_custom_field_delete' ); ?>
-		<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
-		<input type="hidden" name="return" value="<?php echo string_attribute( $f_return ) ?>" />
-		<input type="submit" class="button" value="<?php echo lang_get( 'delete_custom_field_button' ) ?>" />
+<div class="form-container">
+	<form method="post" action="manage_custom_field_delete.php" class="action-button">
+		<fieldset>
+			<?php echo form_security_field( 'manage_custom_field_delete' ); ?>
+			<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
+			<input type="hidden" name="return" value="<?php echo string_attribute( $f_return ) ?>" />
+			<input type="submit" class="button" value="<?php echo lang_get( 'delete_custom_field_button' ) ?>" />
+		</fieldset>
 	</form>
 </div>
 
@@ -253,60 +197,35 @@ $t_definition = custom_field_get_definition( $f_field_id );
            * We may need to add extra checks to exclude projects from the list that the user
 		   * can't link/unlink fields from/to. */
 ?>
-<br />
-<div>
-<form method="post" action="manage_custom_field_proj_add.php">
-<?php echo form_security_field( 'manage_custom_field_proj_add' ); ?>
-<table class="width75" cellspacing="1">
-<!-- Title -->
-<tr>
-	<td class="form-title" colspan="2">
-		<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
-		<?php echo lang_get( 'link_custom_field_to_project_title' ) ?>
-	</td>
-</tr>
+<div class="form-container">
+	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+		<span class="display-label"><span><?php echo lang_get( 'link_custom_field_to_project_title' ) ?></span></span>
+		<div class="display-value">
+			<?php print_custom_field_projects_list( $f_field_id ) ?>
+		</div>
+		<span class="label-style"></span>
+	</div>
+	<form method="post" action="manage_custom_field_proj_add.php">
+		<fieldset>
+			<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
+			<?php echo form_security_field( 'manage_custom_field_proj_add' ); ?>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-project-id"><span><?php echo lang_get( 'projects_title_label' ) ?></span></label>
+				<span class="select">
+					<select id="custom-field-project-id" name="project_id[]" multiple="multiple" size="5">
+						<?php print_project_option_list( null, false ); ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="custom-field-sequence"><span><?php echo lang_get( 'custom_field_sequence_label' ) ?></span></label>
+				<span class="input"><input type="text" id="custom-field-sequence" name="sequence" value="0" /></span>
+				<span class="label-style"></span>
+			</div>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'link_custom_field_to_project_button' ) ?>" /></span>
+		</fieldset>
+	</form>
+</div><?php
 
-<!-- Assigned Projects -->
-<tr <?php echo helper_alternate_class( 1 ) ?>>
-	<th class="category" width="30%">
-		<?php echo lang_get( 'linked_projects_label' ) ?>
-	</th>
-	<td width="70%">
-		<?php print_custom_field_projects_list( $f_field_id ) ?>
-	</td>
-</tr>
-
-<!-- Unassigend Project Selection -->
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'projects_title_label' ) ?>
-	</th>
-	<td>
-		<select name="project_id[]" multiple="multiple" size="5">
-			<?php print_project_option_list( null, false ); ?>
-		</select>
-	</td>
-</tr>
-
-<!-- Sequence Number -->
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'custom_field_sequence_label' ) ?>
-	</th>
-	<td>
-		<input type="text" name="sequence" value="0" />
-	</td>
-</tr>
-
-<!-- Submit Buttom -->
-<tr>
-	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'link_custom_field_to_project_button' ) ?>" />
-	</td>
-</tr>
-</table>
-</form>
-</div>
-
-<?php
 html_page_bottom();
