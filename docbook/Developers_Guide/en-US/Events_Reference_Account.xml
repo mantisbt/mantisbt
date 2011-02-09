@@ -15,8 +15,8 @@
 				</para>
 
 				<para>
-					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					Any output here should follow the format found in account_prefs_inc.php.  As of 1.3.x this is
+					no longer table elements.
 				</para>
 
 				<itemizedlist>
