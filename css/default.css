@@ -40,7 +40,7 @@ span.dependency_unmet		{ color: red; }
 span.dependency_upgrade		{ color: orange; }
 
 table				{ border: none; }
-table td, table th	{ border: none; border-spacing: none; }
+table td, table th	{ border: none; border-spacing: 0px; }
 table.hide			{ width: 100%; border: solid 0px #ffffff; }
 table.width100		{ width: 100%; border: solid 1px #000000; }
 table.width90		{ width: 90%;  border: solid 1px #000000; }
