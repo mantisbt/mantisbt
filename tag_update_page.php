@@ -74,70 +74,55 @@ if ( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
 
 html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
 ?>
-
-<br/>
-<form method="post" action="tag_update.php">
-<?php echo form_security_field( 'tag_update' ) ?>
-<table class="width100" cellspacing="1">
-
-<!-- Title -->
-<tr>
-	<td class="form-title" colspan="2">
-		<?php echo sprintf( lang_get( 'tag_update' ), $t_name ) ?>
-		<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>"/>
-	</td>
-	<td class="right" colspan="3">
-		<?php print_bracket_link( 'tag_view_page.php?tag_id='.$f_tag_id, lang_get( 'tag_update_return' ) ); ?>
-	</td>
-</tr>
-
-<!-- Info -->
-<tr class="row-category">
-	<td width="15%"><?php echo lang_get( 'tag_id' ) ?></td>
-	<td width="25%"><?php echo lang_get( 'tag_name' ) ?></td>
-	<td width="20%"><?php echo lang_get( 'tag_creator' ) ?></td>
-	<td width="20%"><?php echo lang_get( 'tag_created' ) ?></td>
-	<td width="20%"><?php echo lang_get( 'tag_updated' ) ?></td>
-</tr>
-
-<tr <?php echo helper_alternate_class() ?>>
-	<td><?php echo $t_tag_row['id'] ?></td>
-	<td><input type="text" <?php echo helper_get_tab_index() ?> name="name" value="<?php echo $t_name ?>"/></td>
-	<td><?php
-			if ( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
-				echo '<select ', helper_get_tab_index(), ' name="user_id">';
-				print_user_option_list( $t_tag_row['user_id'], ALL_PROJECTS, config_get( 'tag_create_threshold' ) );
-				echo '</select>';
-			} else {
-				echo string_display_line( user_get_name($t_tag_row['user_id']) );
-			}
-		?></td>
-	<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?> </td>
-	<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?> </td>
-</tr>
-
-<!-- spacer -->
-<tr class="spacer">
-	<td colspan="5"></td>
-</tr>
-
-<!-- Description -->
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category"><?php echo lang_get( 'tag_description' ) ?></th>
-	<td colspan="4">
-		<textarea name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo string_textarea( $t_description ) ?></textarea>
-	</td>
-</tr>
-
-<!-- Submit Button -->
-<tr>
-	<td class="center" colspan="6">
-		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'tag_update_button' ) ?>" />
-	</td>
-</tr>
-
-</table>
-</form>
+<div class="form-container">
+	<form method="post" action="tag_update.php">
+		<fieldset>
+			<legend><span><?php echo sprintf( lang_get( 'tag_update' ), $t_name ) ?></span></legend>
+			<div class="section-link"><?php print_bracket_link( 'tag_view_page.php?tag_id='.$f_tag_id, lang_get( 'tag_update_return' ) ); ?></div>
+			<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>"/>
+			<?php echo form_security_field( 'tag_update' ) ?>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<span class="display-label"><span><?php echo lang_get( 'tag_id' ) ?></span></span>
+				<span class="display-value"><span><?php echo $t_tag_row['id'] ?></span></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="tag-name"><span><?php echo lang_get( 'tag_name' ) ?></span></label>
+				<span class="input"><input type="text" <?php echo helper_get_tab_index() ?> id="tag-name" name="name" value="<?php echo $t_name ?>"/></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<?php
+					if ( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
+						echo '<label for="tag-user-id"><span>', lang_get( 'tag_creator' ), '</span></label>';
+						echo '<span class="select"><select ', helper_get_tab_index(), ' id="tag-user-id" name="user_id">';
+						print_user_option_list( $t_tag_row['user_id'], ALL_PROJECTS, config_get( 'tag_create_threshold' ) );
+						echo '</select></span>';
+					} else { ?>
+						<span class="display-label"><span><?php echo lang_get( 'tag_creator' ); ?></span></span>
+						<span class="display-value"><span><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ); ?></span></span><?php
+					} ?>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<span class="display-label"><span><?php echo lang_get( 'tag_created' ) ?></span></span>
+				<span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></span></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<span class="display-label"><span><?php echo lang_get( 'tag_updated' ) ?></span></span>
+				<span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></span></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="tag-description"><span><?php echo lang_get( 'tag_description' ) ?></span></label>
+				<span class="textarea"><textarea id="tag-description" name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo string_textarea( $t_description ) ?></textarea></span>
+				<span class="label-style"></span>
+			</div>
+			<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'tag_update_button' ) ?>" /></span>
+		</fieldset>
+	</form>
+</div>
 
 <?php
 html_page_bottom();

@@ -126,10 +126,10 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 .main-menu ul li a { padding-right: .9em; border-right: 1px solid #000; text-decoration: underline; }
 .main-menu ul li > a#logout-link { padding-right: 0; border-right: none; }
 
-#manage-menu, #account-menu, #summary-menu , #summary-submenu, #manage-config-menu, #manage-user-filter-menu { float: left; width: 100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -1.5em; }
-#manage-menu ul, #manage-config-menu ul, #summary-menu ul, #summary-submenu ul, #manage-user-filter-menu ul { clear: left; float: left; list-style: none; position: relative; left: 50%; padding: 0; margin: 0; text-align: center; }
-#manage-menu ul li, #manage-config-menu ul li, #summary-menu ul li, #summary-submenu ul li, #manage-user-filter-menu ul li { display:block; float: left; list-style: none; margin: .5em 0; padding: 0; position: relative; right: 50%; }
-#manage-menu ul a, #manage-config-menu ul a, #summary-menu ul a, #summary-submenu ul a, #account-menu ul a, #doc-menu ul a, #manage-user-filter-menu ul a { text-decoration: underline; padding: 0 .25em; }
+#manage-menu, #account-menu, #summary-menu , #summary-submenu, #manage-config-menu, #manage-user-filter-menu, #manage-tags-filter-menu { float: left; width: 100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -1.5em; }
+#manage-menu ul, #manage-config-menu ul, #summary-menu ul, #summary-submenu ul, #manage-user-filter-menu ul, #manage-tags-filter-menu ul { clear: left; float: left; list-style: none; position: relative; left: 50%; padding: 0; margin: 0; text-align: center; }
+#manage-menu ul li, #manage-config-menu ul li, #summary-menu ul li, #summary-submenu ul li, #manage-user-filter-menu ul li, #manage-tags-filter-menu ul li { display:block; float: left; list-style: none; margin: .5em 0; padding: 0; position: relative; right: 50%; }
+#manage-menu ul a, #manage-config-menu ul a, #summary-menu ul a, #summary-submenu ul a, #account-menu ul a, #doc-menu ul a, #manage-user-filter-menu ul a, #manage-tags-filter-menu ul a { text-decoration: underline; padding: 0 .25em; }
 
 #account-menu, #doc-menu { top: 0; }
 #account-menu ul, #doc-menu ul { margin: 0 auto; padding: .25em; float: right; text-align: center; }
@@ -547,3 +547,9 @@ ul.project-list li span.view-state:before { content: ' ('; }
 ul.project-list li span.view-state:after { content: ') '; }
 ul.project-list li span.project-name { display: block; float: left; min-width: 15em; }
 ul.project-list li span.access-level, ul.project-list li span.view-state { display: block; float: left; margin: 0em .25em; }
+
+.tag-list td span.tag-filter:before { content: ' ['; padding: 0em .5em; }
+.tag-list td span.tag-filter:after { content: '] '; padding: 0em .5em; }
+.tag-link {
+	margin: 0em .5em;
+}
