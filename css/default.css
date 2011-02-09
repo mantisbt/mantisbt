@@ -375,6 +375,9 @@ div#account-profile-div,
 div#account-profile-update-div {
 	width: 65%;
 }
+div#project-delete-div {
+	text-align: center;
+}
 fieldset {
 	border: none;
 	margin: 0em;
@@ -447,6 +450,14 @@ div#account-prefs-update-div fieldset fieldset>label {
 }
 div#manage-user-actions-div {
 	text-align: center;
+}
+#manage-user-filter,
+#manage-project-subproject-add-form,
+#manage-project-category-copy-form,
+#manage-project-version-copy-form,
+#manage-project-custom-field-copy-form,
+#manage-project-users-copy-form {
+	float: right;
 }
 fieldset fieldset legend label {
 	z-index: 9999;

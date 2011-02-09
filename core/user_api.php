@@ -1064,6 +1064,62 @@ function user_get_assigned_projects( $p_user_id ) {
 	return $t_projects;
 }
 
+/**
+ * List of users that are NOT in the specified project and that are enabled
+ * if no project is specified use the current project
+ * also exclude any administrators
+ *	@param int $p_project_id
+ *	@return array List of users not assigned to the specified project
+ */
+function user_get_unassigned_by_project_id( $p_project_id = null ) {
+    $t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
+    $t_mantis_user_table = db_get_table( 'user' );
+
+    if( null === $p_project_id ) {
+        $p_project_id = helper_get_current_project();
+    }
+
+    $t_adm = config_get_global( 'admin_site_threshold' );
+    $t_query = "SELECT DISTINCT u.id, u.username, u.realname
+                FROM $t_mantis_user_table u
+                LEFT JOIN $t_mantis_project_user_list_table p
+                ON p.user_id=u.id AND p.project_id=" . db_param() . "
+                WHERE u.access_level<" . db_param() . " AND
+                    u.enabled = " . db_param() . " AND
+                    p.user_id IS NULL
+                ORDER BY u.realname, u.username";
+    $t_result = db_query_bound( $t_query, Array( $p_project_id, $t_adm, true ) );
+    $t_display = array();
+    $t_sort = array();
+    $t_users = array();
+    $t_show_realname = ( ON == config_get( 'show_realname' ) );
+    $t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
+    $t_user_count = db_num_rows( $t_result );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+        $t_users[] = $t_row['id'];
+        $t_user_name = string_attribute( $t_row['username'] );
+        $t_sort_name = $t_user_name;
+        if(( isset( $t_row['realname'] ) ) && ( $t_row['realname'] <> '' ) && $t_show_realname ) {
+            $t_user_name = string_attribute( $t_row['realname'] );
+            if( $t_sort_by_last_name ) {
+                $t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
+                $t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
+            } else {
+                $t_sort_name = utf8_strtolower( $t_user_name );
+            }
+        }
+        $t_display[] = $t_user_name;
+        $t_sort[] = $t_sort_name;
+    }
+    array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
+    $t_count = count( $t_sort );
+	$t_user_list = array();
+    for( $i = 0;$i < $t_count; $i++ ) {
+		$t_user_list[$t_users[$i]] = $t_display[$i];
+    }
+	return $t_user_list;
+}
+
 # --------------------
 # return the number of open assigned bugs to a user in a project
 function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJECTS ) {
