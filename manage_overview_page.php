@@ -54,11 +54,9 @@ html_page_top( lang_get( 'manage_link' ) );
 
 print_manage_menu();
 ?>
-<div id="manage-overview-div">
-	<table id="manage-overview-table" cellspacing="1">
-		<tr>
-			<td class="form-title"><?php echo lang_get( 'site_information' ) ?></td>
-		</tr>
+<div id="manage-overview-div" class="table-container">
+	<h2><?php echo lang_get( 'site_information' ) ?></h2>
+	<table id="manage-overview-table" cellspacing="1" cellpadding="5" border="1">
 		<tr <?php echo helper_alternate_class() ?>>
 			<th class="category"><?php echo lang_get( 'mantis_version' ) ?></th>
 			<td><?php echo MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ) ?></td>
@@ -68,7 +66,7 @@ print_manage_menu();
 			<td><?php echo config_get( 'database_version' ) ?></td>
 		</tr>
 		<tr class="spacer">
-			<td></td>
+			<td colspan="2"></td>
 		</tr>
 	<?php
 	$t_is_admin = current_user_is_administrator();
@@ -87,7 +85,7 @@ print_manage_menu();
 			<td><?php echo config_get( 'plugin_path' ) ?></td>
 		</tr>
 		<tr class="spacer">
-			<td></td>
+			<td colspan="2"></td>
 		</tr>
 	<?php
 	}

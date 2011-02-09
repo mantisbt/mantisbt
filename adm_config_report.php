@@ -123,66 +123,31 @@ $t_config_table = db_get_table( 'config' );
 $query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table ORDER BY user_id, project_id, config_id";
 $result = db_query_bound( $query );
 ?>
-<br />
-<div>
-<table class="width100" cellspacing="1">
-
-<!-- Title -->
-<tr>
-	<td class="form-title" colspan="7">
-		<?php echo lang_get( 'database_configuration' ) ?>
-	</td>
-</tr>
+<div id="adm-config-div" class="table-container">
+	<h2><?php echo lang_get( 'database_configuration' ) ?></h2>
+	<table cellspacing="1" cellpadding="5" border="1">
 		<tr class="row-category">
-			<td class="center">
-				<?php echo lang_get( 'username' ) ?>
-			</td>
-			<td class="center">
-				<?php echo lang_get( 'project_name' ) ?>
-			</td>
-			<td>
-				<?php echo lang_get( 'configuration_option' ) ?>
-			</td>
-			<td class="center">
-				<?php echo lang_get( 'configuration_option_type' ) ?>
-			</td>
-			<td class="center">
-				<?php echo lang_get( 'configuration_option_value' ) ?>
-			</td>
-			<td class="center">
-				<?php echo lang_get( 'access_level' ) ?>
-			</td>
-<?php if ( $t_read_write_access ): ?>
-			<td class="center">
-				<?php echo lang_get( 'actions' ) ?>
-			</td>
-<?php endif; ?>
-		</tr>
-<?php
-	while ( $row = db_fetch_array( $result ) ) {
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
-
-?>
-<!-- Repeated Info Rows -->
+			<th class="center"><?php echo lang_get( 'username' ) ?></th>
+			<th class="center"><?php echo lang_get( 'project_name' ) ?></th>
+			<th><?php echo lang_get( 'configuration_option' ) ?></th>
+			<th class="center"><?php echo lang_get( 'configuration_option_type' ) ?></th>
+			<th class="center"><?php echo lang_get( 'configuration_option_value' ) ?></th>
+			<th class="center"><?php echo lang_get( 'access_level' ) ?></th>
+			<?php if ( $t_read_write_access ): ?>
+			<th class="center"><?php echo lang_get( 'actions' ) ?></th>
+			<?php endif; ?>
+		</tr><?php
+		while ( $row = db_fetch_array( $result ) ) {
+			extract( $row, EXTR_PREFIX_ALL, 'v' ); ?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td class="center">
 				<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
 			</td>
-			<td class="center">
-				<?php echo string_display_line( project_get_name( $v_project_id, false ) ) ?>
-			</td>
-			<td>
-				<?php echo string_display_line( $v_config_id ) ?>
-			</td>
-			<td class="center">
-				<?php echo string_display_line( get_config_type( $v_type ) ) ?>
-			</td>
-			<td class="left">
-				<?php print_config_value_as_string( $v_type, $v_value ) ?>
-			</td>
-			<td class="center">
-				<?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?>
-			</td>
+			<td class="center"><?php echo string_display_line( project_get_name( $v_project_id, false ) ) ?></td>
+			<td><?php echo string_display_line( $v_config_id ) ?></td>
+			<td class="center"><?php echo string_display_line( get_config_type( $v_type ) ) ?></td>
+			<td class="left"><?php print_config_value_as_string( $v_type, $v_value ) ?></td>
+			<td class="center"><?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?></td>
 			<?php if ( $t_read_write_access ): ?>
 			<td class="center">
 				<?php
@@ -194,87 +159,63 @@ $result = db_query_bound( $query );
 				?>
 			</td>
 			<?php endif; ?>
-		</tr>
-<?php
-	} # end for loop
-?>
-</table>
-<?php
-    if ( $t_read_write_access ) {
-?>
-<br />
-<!-- Config Set Form -->
-<form method="post" action="adm_config_set.php">
-<?php echo form_security_field( 'adm_config_set' ) ?>
-<table class="width100" cellspacing="1">
+		</tr><?php
+		} # end for loop ?>
+	</table>
+</div><?php
 
-<!-- Title -->
-<tr>
-	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'set_configuration_option' ) ?>
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td>
-		<?php echo lang_get( 'username' ) ?>
-	</td>
-	<td>
-		<select name="user_id">
-			<option value="0" selected="selected"><?php echo lang_get( 'all_users' ); ?></option>
-			<?php print_user_option_list( auth_get_current_user_id() ) ?>
-		</select>
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td>
-		<?php echo lang_get( 'project_name' ) ?>
-	</td>
-	<td>
-		<select name="project_id">
-			<option value="0" selected="selected"><?php echo lang_get( 'all_projects' ); ?></option>
-			<?php print_project_option_list( ALL_PROJECTS, false ) ?>
-		</select>
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td>
-		<?php echo lang_get( 'configuration_option' ) ?>
-	</td>
-	<td>
-			<input type="text" name="config_option" value="" size="64" maxlength="64" />
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td>
-		<?php echo lang_get( 'configuration_option_type' ) ?>
-	</td>
-	<td>
-		<select name="type">
-			<option value="default" selected="selected">default</option>
-			<option value="string">string</option>
-			<option value="integer">integer</option>
-			<option value="complex">complex</option>
-		</select>
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td>
-		<?php echo lang_get( 'configuration_option_value' ) ?>
-	</td>
-	<td>
-			<textarea name="value" cols="80" rows="10"></textarea>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-			<input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option' ) ?>" />
-	</td>
-</tr>
-</table>
-</form>
-<?php
-	} # end user can change config
-?>
-</div>
-<?php
+if ( $t_read_write_access ) { ?>
+<div class="form-container">
+	<form method="post" action="adm_config_set.php">
+		<fieldset>
+			<legend><span><?php echo lang_get( 'set_configuration_option' ) ?></span></legend>
+			<?php echo form_security_field( 'adm_config_set' ) ?>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="config-user-id"><span><?php echo lang_get( 'username' ) ?></span></label>
+				<span class="select">
+					<select id="config-user-id" name="user_id">
+						<option value="0" selected="selected"><?php echo lang_get( 'all_users' ); ?></option>
+						<?php print_user_option_list( auth_get_current_user_id() ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="config-project-id"><span><?php echo lang_get( 'project_name' ) ?></span></label>
+				<span class="select">
+					<select id="config-project-id" name="project_id">
+						<option value="0" selected="selected"><?php echo lang_get( 'all_projects' ); ?></option>
+						<?php print_project_option_list( ALL_PROJECTS, false ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="config-option"><span><?php echo lang_get( 'configuration_option' ) ?></span></label>
+				<span class="input"><input type="text" id="config-option" name="config_option" value="" size="64" maxlength="64" /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="config-type"><span><?php echo lang_get( 'configuration_option_type' ) ?></span></label>
+				<span class="select">
+					<select id="config-type" name="type">
+						<option value="default" selected="selected">default</option>
+						<option value="string">string</option>
+						<option value="integer">integer</option>
+						<option value="complex">complex</option>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="config-value"><span><?php echo lang_get( 'configuration_option_value' ) ?></span></label>
+				<span class="textarea"><textarea id="config-value" name="value" cols="80" rows="10"></textarea></span>
+				<span class="label-style"></span>
+			</div>
+			<span class="submit-button"><input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option' ) ?>" /></span>
+		</fieldset>
+	</form>
+</div><?php
+} # end user can change config
+
 html_page_bottom();
