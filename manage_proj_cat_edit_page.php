@@ -64,62 +64,44 @@ $t_name = $t_row['name'];
 
 html_page_top();
 
-print_manage_menu( 'manage_proj_cat_edit_page.php' );
-?>
+print_manage_menu( 'manage_proj_cat_edit_page.php' ); ?>
 
-<br />
-<div>
-<form method="post" action="manage_proj_cat_update.php">
-<?php echo form_security_field( 'manage_proj_cat_update' ) ?>
-<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>"/>
-<table class="width50" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'edit_project_category_title' ) ?>
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
-		<?php echo lang_get( 'category' ) ?>
-	</td>
-	<td>
-		<input type="text" name="name" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>" />
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'assigned_to' ) ?>
-	</th>
-	<td>
-		<select name="assigned_to">
-			<option value="0"></option>
-			<?php print_assign_to_option_list( $t_assigned_to, $t_project_id ) ?>
-		</select>
-	</td>
-</tr>
-<tr>
-	<td>
-		&#160;
-	</td>
-	<td>
-		<input type="submit" class="button" value="<?php echo lang_get( 'update_category_button' ) ?>" />
-	</td>
-</tr>
-</table>
-</form>
-</div>
-
-<br />
-
-<div class="border center">
-	<form method="post" action="manage_proj_cat_delete.php">
-		<?php echo form_security_field( 'manage_proj_cat_delete' ) ?>
-		<input type="hidden" name="id" value="<?php echo string_attribute( $f_category_id ) ?>" />
-		<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
-		<input type="submit" class="button" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
+<div id="manage-proj-category-update-div" class="form-container">
+	<form id="manage-proj-category-update-form" method="post" action="manage_proj_cat_update.php">
+		<fieldset>
+			<legend><span><?php echo lang_get( 'edit_project_category_title' ) ?></span></legend>
+			<?php echo form_security_field( 'manage_proj_cat_update' ) ?>
+			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>"/>
+			<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="proj-category-name"><span><?php echo lang_get( 'category' ) ?></span></label>
+				<span class="input"><input type="text" id="proj-category-name" name="name" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>" /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="proj-category-assigned-to"><span><?php echo lang_get( 'assigned_to' ) ?></span></label>
+				<span class="select">
+					<select id="proj-category-assigned-to" name="assigned_to">
+						<option value="0"></option>
+						<?php print_assign_to_option_list( $t_assigned_to, $t_project_id ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_category_button' ) ?>" /></span>
+		</fieldset>
 	</form>
 </div>
 
-<?php
+<div class="form-container">
+	<form method="post" action="manage_proj_cat_delete.php" class="action-button">
+		<fieldset>
+			<?php echo form_security_field( 'manage_proj_cat_delete' ) ?>
+			<input type="hidden" name="id" value="<?php echo string_attribute( $f_category_id ) ?>" />
+			<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'delete_category_button' ) ?>" /></span>
+		</fieldset>
+	</form>
+</div><?php
+
 html_page_bottom();

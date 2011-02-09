@@ -67,79 +67,53 @@ access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_versio
 
 html_page_top();
 
-print_manage_menu( 'manage_proj_ver_edit_page.php' );
-?>
-<br />
-<div>
-<form method="post" action="manage_proj_ver_update.php">
-<?php echo form_security_field( 'manage_proj_ver_update' ) ?>
-<input type="hidden" name="version_id" value="<?php echo string_attribute( $t_version->id ) ?>" />
-<table class="width50" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'edit_project_version_title' ) ?>
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'version' ) ?>
-	</th>
-	<td>
-		<input type="text" name="new_version" size="32" maxlength="64" value="<?php echo string_attribute( $t_version->version ) ?>" />
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'date_order' ) ?>
-	</th>
-	<td>
-		<input type="text" id="date_order" name="date_order" class="datetime" size="32" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'calendar_date_format' ), $t_version->date_order ) ) ) ?>" />
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'description' ) ?>
-	</th>
-	<td>
-		<textarea name="description" cols="60" rows="5"><?php echo string_attribute( $t_version->description ) ?></textarea>
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'released' ) ?>
-	</th>
-	<td>
-		<input type="checkbox" name="released" <?php check_checked( $t_version->released, VERSION_RELEASED ); ?> />
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'obsolete' ) ?>
-	</th>
-	<td>
-		<input type="checkbox" name="obsolete" <?php check_checked( $t_version->obsolete, true ); ?> />
-	</td>
-</tr>
-<?php event_signal( 'EVENT_MANAGE_VERSION_UPDATE_FORM', array( $t_version->id ) ); ?>
-<tr>
-	<td>
-		&#160;
-	</td>
-	<td>
-		<input type="submit" class="button" value="<?php echo lang_get( 'update_version_button' ) ?>" />
-	</td>
-</tr>
-</table>
-</form>
+print_manage_menu( 'manage_proj_ver_edit_page.php' ); ?>
+
+<div id="manage-proj-version-update-div" class="form-container">
+	<form id="manage-proj-version-update-form" method="post" action="manage_proj_ver_update.php">
+		<fieldset>
+			<legend><span><?php echo lang_get( 'edit_project_version_title' ) ?></span></legend>
+			<?php echo form_security_field( 'manage_proj_ver_update' ) ?>
+			<input type="hidden" name="version_id" value="<?php echo string_attribute( $t_version->id ) ?>" />
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="proj-version-new-version"><span><?php echo lang_get( 'version' ) ?></span></label>
+				<span class="input"><input type="text" id="proj-version-new-version" name="new_version" size="32" maxlength="64" value="<?php echo string_attribute( $t_version->version ) ?>" /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="proj-version-date-order"><span><?php echo lang_get( 'date_order' ) ?></span></label>
+				<span class="input"><input type="text" id="proj-version-date-order" name="date_order" class="datetime" size="32" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'calendar_date_format' ), $t_version->date_order ) ) ) ?>" /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="proj-version-description"><span><?php echo lang_get( 'description' ) ?></span></label>
+				<span class="textarea"><textarea id="proj-version-description" name="description" cols="60" rows="5"><?php echo string_attribute( $t_version->description ) ?></textarea></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="proj-version-released"><span><?php echo lang_get( 'released' ) ?></span></label>
+				<span class="checkbox"><input type="checkbox" id="proj-version-released" name="released" <?php check_checked( $t_version->released, VERSION_RELEASED ); ?> /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="proj-version-obsolete"><span><?php echo lang_get( 'obsolete' ) ?></span></label>
+				<span class="checkbox"><input type="checkbox" id="proj-version-obsolete" name="obsolete" <?php check_checked( $t_version->obsolete, true ); ?> /></span>
+				<span class="label-style"></span>
+			</div>
+			
+			<?php event_signal( 'EVENT_MANAGE_VERSION_UPDATE_FORM', array( $t_version->id ) ); ?>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_version_button' ) ?>" /></span>
+		</fieldset>
+	</form>
 </div>
 
-<br />
-
-<div class="border center">
-	<form method="post" action="manage_proj_ver_delete.php">
-	<?php echo form_security_field( 'manage_proj_ver_delete' ) ?>
-	<input type="hidden" name="version_id" value="<?php echo string_attribute( $t_version->id ) ?>" />
-	<input type="submit" class="button" value="<?php echo lang_get( 'delete_version_button' ) ?>" />
+<div class="form-container">
+	<form method="post" action="manage_proj_ver_delete.php" class="action-button">
+		<fieldset>
+			<?php echo form_security_field( 'manage_proj_ver_delete' ) ?>
+			<input type="hidden" name="version_id" value="<?php echo string_attribute( $t_version->id ) ?>" />
+			<input type="submit" class="button" value="<?php echo lang_get( 'delete_version_button' ) ?>" />
+		</fieldset>
 	</form>
 </div>
 

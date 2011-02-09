@@ -476,7 +476,6 @@ div.form-container .display-value {
 	float: left;
 	padding: .25em;
 	margin: 0em .5em;
-	z-index: 9999;
 }
 div.form-container .radio input,
 div.form-container .checkbox input,
