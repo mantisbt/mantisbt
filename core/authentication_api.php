@@ -698,7 +698,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 <div id="reauth-div" class="form-container">
 	<form id="reauth-form" method="post" action="">
 		<fieldset>
-			<legend><?php echo lang_get( 'reauthenticate_title' ); ?></legend>
+			<legend><span><?php echo lang_get( 'reauthenticate_title' ); ?></span></legend>
 
 		<?php
 			# CSRF protection not required here - user needs to enter password
@@ -708,13 +708,15 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 		?>
 
 			<input type="hidden" name="_authenticate" value="1" />
-			<div class="field-container odd">
-				<span class="label"><label for="username"><?php echo lang_get( 'username' );?></label></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="username"><span><?php echo lang_get( 'username' );?></span></label>
 				<span class="input"><input id="username" type="text" disabled="disabled" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $p_username );?>" /></span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container even">
-				<span class="label"><label for="password"><?php echo lang_get( 'password' );?></label></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="password"><span><?php echo lang_get( 'password' );?></span></label>
 				<span class="input"><input id="password" type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" class="autofocus" /></span>
+				<span class="label-style"></span>
 			</div>
 			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' );?>" /></span>
 		</fieldset>

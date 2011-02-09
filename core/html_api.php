@@ -1356,7 +1356,8 @@ function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = '
 		$t_method = 'post';
 	}
 
-	echo "<form method=\"$t_method\" action=\"$p_action\">\n";
+	echo "<form method=\"$t_method\" action=\"$p_action\" class=\"action-button\">\n";
+	echo "\t<fieldset>";
 	# Add a CSRF token only when the form is being sent via the POST method
 	if ( $t_method == 'post' ) {
 		echo form_security_field( $t_form_name[0] );
@@ -1366,10 +1367,11 @@ function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = '
 		$key = string_attribute( $key );
 		$val = string_attribute( $val );
 
-		echo "	<input type=\"hidden\" name=\"$key\" value=\"$val\" />\n";
+		echo "\t\t<input type=\"hidden\" name=\"$key\" value=\"$val\" />\n";
 	}
 
-	echo "	<input type=\"submit\" class=\"button\" value=\"$p_button_text\" />\n";
+	echo "\t\t<input type=\"submit\" class=\"button\" value=\"$p_button_text\" />\n";
+	echo "\t</fieldset>";
 	echo "</form>\n";
 }
 

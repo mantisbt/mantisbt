@@ -50,7 +50,6 @@ require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
-require_css( 'account-prefs.css' );
 
 function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '') {
 	if ( null === $p_user_id ) {
@@ -80,7 +79,7 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 <div id="account-prefs-update-div" class="form-container">
 	<form id="account-prefs-update-form" method="post" action="account_prefs_update.php">
 		<fieldset>
-			<legend><?php echo lang_get( 'default_account_preferences_title' ) ?></legend>
+			<legend><span><?php echo lang_get( 'default_account_preferences_title' ) ?></span></legend>
 			<?php echo form_security_field( 'account_prefs_update' ) ?>
 			<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
 			<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
@@ -89,161 +88,155 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 				print_account_menu( 'account_prefs_page.php' );
 			}
 		?>
-			<div class="field-container odd">
-				<span class="label"><label for="default-project-id"><?php echo lang_get( 'default_project' ) ?></label></span>
-				<span class="input">
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="default-project-id"><span><?php echo lang_get( 'default_project' ) ?></span></label>
+				<span class="select">
 					<select id="default-project-id" name="default_project">
 						<?php print_project_option_list( $t_pref->default_project ) ?>
 					</select>
 				</span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container even">
-				<span class="label"><label for="refresh-delay"><?php echo lang_get( 'refresh_delay' ) ?></label></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="refresh-delay"><span><?php echo lang_get( 'refresh_delay' ) ?></span></label>
 				<span class="input"><input id="refresh-delay" type="text" name="refresh_delay" size="4" maxlength="4" value="<?php echo $t_pref->refresh_delay ?>" /> <?php echo lang_get( 'minutes' ) ?></span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container odd">
-				<span class="label"><label for="redirect-delay"><?php echo lang_get( 'redirect_delay' ) ?></label></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="redirect-delay"><span><?php echo lang_get( 'redirect_delay' ) ?></span></label>
 				<span class="input"><input id="redirect-delay" type="text" name="redirect_delay" size="4" maxlength="3" value="<?php echo $t_pref->redirect_delay ?>" /> <?php echo lang_get( 'seconds' ) ?></span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container even">
-				<fieldset>
-					<legend><label><?php echo lang_get( 'bugnote_order' ) ?></label></legend>
-					<span class="input"><input id="bugnote-order-asc" type="radio" name="bugnote_order" value="ASC" <?php check_checked( $t_pref->bugnote_order, 'ASC' ); ?> /></span>
-					<span class="radio-label"><label for="bugnote-order-asc"><?php echo lang_get( 'bugnote_order_asc' ) ?></label></span>
-					<span class="input"><input id="bugnote-order-desc" type="radio" name="bugnote_order" value="DESC" <?php check_checked( $t_pref->bugnote_order, 'DESC' ); ?> /></span>
-					<span class="radio-label"><label for="bugnote-order-desc"><?php echo lang_get( 'bugnote_order_desc' ) ?></label></span>
-				</fieldset>
-			</div>
+			<fieldset class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<legend><span><?php echo lang_get( 'bugnote_order' ) ?></span></legend>
+				<span class="radio"><input id="bugnote-order-desc" type="radio" name="bugnote_order" value="DESC" <?php check_checked( $t_pref->bugnote_order, 'DESC' ); ?> /></span>
+				<label for="bugnote-order-desc"><span><?php echo lang_get( 'bugnote_order_desc' ) ?></span></label>
+				<span class="radio"><input id="bugnote-order-asc" type="radio" name="bugnote_order" value="ASC" <?php check_checked( $t_pref->bugnote_order, 'ASC' ); ?> /></span>
+				<label for="bugnote-order-asc"><span><?php echo lang_get( 'bugnote_order_asc' ) ?></span></label>
+				<span class="label-style"></span>
+			</fieldset>
 			<?php if ( ON == config_get( 'enable_email_notification' ) ) { ?>
-			<div class="field-container odd">
-				<fieldset>
-					<legend><label for="email-on-new"><?php echo lang_get( 'email_on_new' ) ?></label></legend>
-					<span class="input"><input id="email-on-new" type="checkbox" name="email_on_new" <?php check_checked( $t_pref->email_on_new, ON ); ?> /></span>
-					<span class="label"><label for="email-on-new-min-severity"><?php echo lang_get( 'with_minimum_severity' ) ?></label></span>
-					<span class="input">
-						<select id="email-on-new-min-severity" name="email_on_new_min_severity">
-							<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-							<option disabled="disabled">-----</option>
-							<?php print_enum_string_option_list( 'severity', $t_pref->email_on_new_min_severity ) ?>
-						</select>
-					</span>
-				</fieldset>
-			</div>
-			<div class="field-container even">
-				<fieldset>
-					<legend><label for="email-on-assigned"><?php echo lang_get( 'email_on_assigned' ) ?></label></legend>
-					<span class="input"><input id="email-on-assigned" type="checkbox" name="email_on_assigned" <?php check_checked( $t_pref->email_on_assigned, ON ); ?> /></span>
-					<span class="label"><label for="email-on-assigned-min-severity"><?php echo lang_get( 'with_minimum_severity' ) ?></label></span>
-					<span class="input">
-						<select id="email-on-assigned-min-severity" name="email_on_assigned_min_severity">
-							<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-							<option disabled="disabled">-----</option>
-							<?php print_enum_string_option_list( 'severity', $t_pref->email_on_assigned_min_severity ) ?>
-						</select>
-					</span>
-				</fieldset>
-			</div>
-			<div class="field-container odd">
-				<fieldset>
-					<legend><label for="email-on-feedback"><?php echo lang_get( 'email_on_feedback' ) ?></label></legend>
-					<span class="input"><input id="email-on-feedback" type="checkbox" name="email_on_feedback" <?php check_checked( $t_pref->email_on_feedback, ON ); ?> /></span>
-					<span class="label"><label for="email-on-feedback-min-severity"><?php echo lang_get( 'with_minimum_severity' ) ?></label></span>
-					<span class="input">
-						<select id="email-on-feedback-min-severity" name="email_on_feedback_min_severity">
-							<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-							<option disabled="disabled">-----</option>
-							<?php print_enum_string_option_list( 'severity', $t_pref->email_on_feedback_min_severity ) ?>
-						</select>
-					</span>
-				</fieldset>
-			</div>
-			<div class="field-container even">
-				<fieldset>
-					<legend><label for="email-on-resolved"><?php echo lang_get( 'email_on_resolved' ) ?></label></legend>
-					<span class="input"><input id="email-on-resolved" type="checkbox" name="email_on_resolved" <?php check_checked( $t_pref->email_on_resolved, ON ); ?> /></span>
-					<span class="label"><label for="email-on-resolved-min-severity"><?php echo lang_get( 'with_minimum_severity' ) ?></label></span>
-					<span class="input">
-						<select id="email-on-resolved-min-severity" name="email_on_resolved_min_severity">
-							<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-							<option disabled="disabled">-----</option>
-							<?php print_enum_string_option_list( 'severity', $t_pref->email_on_resolved_min_severity ) ?>
-						</select>
-					</span>
-				</fieldset>
-			</div>
-			<div class="field-container odd">
-				<fieldset>
-					<legend><label for="email-on-closed"><?php echo lang_get( 'email_on_closed' ) ?></label></legend>
-					<span class="input"><input id="email-on-closed" type="checkbox" name="email_on_closed" <?php check_checked( $t_pref->email_on_closed, ON ); ?> /></span>
-					<span class="label"><label for="email-on-closed-min-severity"><?php echo lang_get( 'with_minimum_severity' ) ?></label></span>
-					<span class="input">
-						<select id="email-on-closed-min-severity" name="email_on_closed_min_severity">
-							<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-							<option disabled="disabled">-----</option>
-							<?php print_enum_string_option_list( 'severity', $t_pref->email_on_closed_min_severity ) ?>
-						</select>
-					</span>
-				</fieldset>
-			</div>
-			<div class="field-container even">
-				<fieldset>
-					<legend><label for="email-on-reopened"><?php echo lang_get( 'email_on_reopened' ) ?></label></legend>
-					<span class="input"><input id="email-on-reopened" type="checkbox" name="email_on_reopened" <?php check_checked( $t_pref->email_on_reopened, ON ); ?> /></span>
-					<span class="label"><label for="email-on-reopened-min-severity"><?php echo lang_get( 'with_minimum_severity' ) ?></label></span>
-					<span class="input">
-						<select id="email-on-reopened-min-severity" name="email_on_reopened_min_severity">
-							<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-							<option disabled="disabled">-----</option>
-							<?php print_enum_string_option_list( 'severity', $t_pref->email_on_reopened_min_severity ) ?>
-						</select>
-					</span>
-				</fieldset>
-			</div>
-			<div class="field-container odd">
-				<fieldset>
-					<legend><label for="email-on-bugnote-added"><?php echo lang_get( 'email_on_bugnote_added' ) ?></label></legend>
-					<span class="input"><input id="email-on-bugnote-added" type="checkbox" name="email_on_bugnote" <?php check_checked( $t_pref->email_on_bugnote, ON ); ?> /></span>
-					<span class="label"><label for="email-on-bugnote-min-severity"><?php echo lang_get( 'with_minimum_severity' ) ?></label></span>
-					<span class="input">
-						<select id="email-on-bugnote-min-severity" name="email_on_bugnote_min_severity">
-							<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-							<option disabled="disabled">-----</option>
-							<?php print_enum_string_option_list( 'severity', $t_pref->email_on_bugnote_min_severity ) ?>
-						</select>
-					</span>
-				</fieldset>
-			</div>
-			<div class="field-container even">
-				<fieldset>
-					<legend><label for="email-on-status"><?php echo lang_get( 'email_on_status_change' ) ?></label></legend>
-					<span class="input"><input id="email-on-status" type="checkbox" name="email_on_status" <?php check_checked( $t_pref->email_on_status, ON ); ?> /></span>
-					<span class="label"><label for="email-on-status-min-severity"><?php echo lang_get( 'with_minimum_severity' ) ?></label></span>
-					<span class="input">
-						<select id="email-on-status-min-severity" name="email_on_status_min_severity">
-							<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-							<option disabled="disabled">-----</option>
-							<?php print_enum_string_option_list( 'severity', $t_pref->email_on_status_min_severity ) ?>
-						</select>
-					</span>
-				</fieldset>
-			</div>
-			<div class="field-container odd">
-				<fieldset>
-					<legend><label for="email-on-priority-change"><?php echo lang_get( 'email_on_priority_change' ) ?></label></legend>
-					<span class="input"><input id="email-on-priority-change" type="checkbox" name="email_on_priority" <?php check_checked( $t_pref->email_on_priority , ON); ?> /></span>
-					<span class="label"><label for="email-on-priority-min-severity"><?php echo lang_get( 'with_minimum_severity' ) ?></label></span>
-					<span class="input">
-						<select id="email-on-priority-min-severity" name="email_on_priority_min_severity">
-							<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
-							<option disabled="disabled">-----</option>
-							<?php print_enum_string_option_list( 'severity', $t_pref->email_on_priority_min_severity ) ?>
-						</select>
-					</span>
-				</fieldset>
-			</div>
-			<div class="field-container even">
-				<span class="label"><label for="email-bugnote-limit"><?php echo lang_get( 'email_bugnote_limit' ) ?></label></span>
+			<fieldset class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<legend><label for="email-on-new"><?php echo lang_get( 'email_on_new' ) ?></label></legend>
+				<span class="checkbox"><input id="email-on-new" type="checkbox" name="email_on_new" <?php check_checked( $t_pref->email_on_new, ON ); ?> /></span>
+				<label for="email-on-new-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
+				<span class="select email-on-severity">
+					<select id="email-on-new-min-severity" name="email_on_new_min_severity">
+						<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+						<option disabled="disabled">-----</option>
+						<?php print_enum_string_option_list( 'severity', $t_pref->email_on_new_min_severity ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</fieldset>
+			<fieldset class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<legend><label for="email-on-assigned"><?php echo lang_get( 'email_on_assigned' ) ?></label></legend>
+				<span class="checkbox"><input id="email-on-assigned" type="checkbox" name="email_on_assigned" <?php check_checked( $t_pref->email_on_assigned, ON ); ?> /></span>
+				<label for="email-on-assigned-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
+				<span class="select email-on-severity">
+					<select id="email-on-assigned-min-severity" name="email_on_assigned_min_severity">
+						<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+						<option disabled="disabled">-----</option>
+						<?php print_enum_string_option_list( 'severity', $t_pref->email_on_assigned_min_severity ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</fieldset>
+			<fieldset class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<legend><label for="email-on-feedback"><?php echo lang_get( 'email_on_feedback' ) ?></label></legend>
+				<span class="checkbox"><input id="email-on-feedback" type="checkbox" name="email_on_feedback" <?php check_checked( $t_pref->email_on_feedback, ON ); ?> /></span>
+				<label for="email-on-feedback-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
+				<span class="select email-on-severity">
+					<select id="email-on-feedback-min-severity" name="email_on_feedback_min_severity">
+						<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+						<option disabled="disabled">-----</option>
+						<?php print_enum_string_option_list( 'severity', $t_pref->email_on_feedback_min_severity ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</fieldset>
+			<fieldset class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<legend><label for="email-on-resolved"><?php echo lang_get( 'email_on_resolved' ) ?></label></legend>
+				<span class="checkbox"><input id="email-on-resolved" type="checkbox" name="email_on_resolved" <?php check_checked( $t_pref->email_on_resolved, ON ); ?> /></span>
+				<label for="email-on-resolved-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
+				<span class="select email-on-severity">
+					<select id="email-on-resolved-min-severity" name="email_on_resolved_min_severity">
+						<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+						<option disabled="disabled">-----</option>
+						<?php print_enum_string_option_list( 'severity', $t_pref->email_on_resolved_min_severity ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</fieldset>
+			<fieldset class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<legend><label for="email-on-closed"><?php echo lang_get( 'email_on_closed' ) ?></label></legend>
+				<span class="checkbox"><input id="email-on-closed" type="checkbox" name="email_on_closed" <?php check_checked( $t_pref->email_on_closed, ON ); ?> /></span>
+				<label for="email-on-closed-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
+				<span class="select email-on-severity">
+					<select id="email-on-closed-min-severity" name="email_on_closed_min_severity">
+						<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+						<option disabled="disabled">-----</option>
+						<?php print_enum_string_option_list( 'severity', $t_pref->email_on_closed_min_severity ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</fieldset>
+			<fieldset class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<legend><label for="email-on-reopened"><?php echo lang_get( 'email_on_reopened' ) ?></label></legend>
+				<span class="checkbox"><input id="email-on-reopened" type="checkbox" name="email_on_reopened" <?php check_checked( $t_pref->email_on_reopened, ON ); ?> /></span>
+				<label for="email-on-reopened-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
+				<span class="select email-on-severity">
+					<select id="email-on-reopened-min-severity" name="email_on_reopened_min_severity">
+						<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+						<option disabled="disabled">-----</option>
+						<?php print_enum_string_option_list( 'severity', $t_pref->email_on_reopened_min_severity ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</fieldset>
+			<fieldset class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<legend><label for="email-on-bugnote-added"><?php echo lang_get( 'email_on_bugnote_added' ) ?></label></legend>
+				<span class="checkbox"><input id="email-on-bugnote-added" type="checkbox" name="email_on_bugnote" <?php check_checked( $t_pref->email_on_bugnote, ON ); ?> /></span>
+				<label for="email-on-bugnote-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
+				<span class="select email-on-severity">
+					<select id="email-on-bugnote-min-severity" name="email_on_bugnote_min_severity">
+						<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+						<option disabled="disabled">-----</option>
+						<?php print_enum_string_option_list( 'severity', $t_pref->email_on_bugnote_min_severity ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</fieldset>
+			<fieldset class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<legend><label for="email-on-status"><?php echo lang_get( 'email_on_status_change' ) ?></label></legend>
+				<span class="checkbox"><input id="email-on-status" type="checkbox" name="email_on_status" <?php check_checked( $t_pref->email_on_status, ON ); ?> /></span>
+				<label for="email-on-status-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
+				<span class="select email-on-severity">
+					<select id="email-on-status-min-severity" name="email_on_status_min_severity">
+						<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+						<option disabled="disabled">-----</option>
+						<?php print_enum_string_option_list( 'severity', $t_pref->email_on_status_min_severity ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</fieldset>
+			<fieldset class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<legend><label for="email-on-priority-change"><?php echo lang_get( 'email_on_priority_change' ) ?></label></legend>
+				<span class="checkbox"><input id="email-on-priority-change" type="checkbox" name="email_on_priority" <?php check_checked( $t_pref->email_on_priority , ON); ?> /></span>
+				<label for="email-on-priority-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
+				<span class="select email-on-severity">
+					<select id="email-on-priority-min-severity" name="email_on_priority_min_severity">
+						<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+						<option disabled="disabled">-----</option>
+						<?php print_enum_string_option_list( 'severity', $t_pref->email_on_priority_min_severity ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</fieldset>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="email-bugnote-limit"><span><?php echo lang_get( 'email_bugnote_limit' ) ?></span></label>
 				<span class="input"><input id="email-bugnote-limit" type="text" name="email_bugnote_limit" maxlength="2" size="2" value="<?php echo $t_pref->email_bugnote_limit ?>" /></span>
+				<span class="label-style"></span>
 			</div>
 <?php } else { ?>
 			<input type="hidden" name="email_on_new"      value="<?php echo $t_pref->email_on_new ?>" />
@@ -266,21 +259,23 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 			<input type="hidden" name="email_on_priority_min_severity" value="<?php echo $t_pref->email_on_priority_min_severity ?>" />
 			<input type="hidden" name="email_bugnote_limit" value="<?php echo $t_pref->email_bugnote_limit ?>" />
 <?php } ?>
-			<div class="field-container odd">
-				<span class="label"><label for="timezone"><?php echo lang_get( 'timezone' ) ?></label></span>
-				<span class="input">
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="timezone"><span><?php echo lang_get( 'timezone' ) ?></span></label>
+				<span class="select">
 					<select id="timezone" name="timezone">
 						<?php print_timezone_option_list( $t_pref->timezone ?  $t_pref->timezone  : config_get_global( 'default_timezone' ) ) ?>
 					</select>
 				</span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container even">
-				<span class="label"><label for="language"><?php echo lang_get( 'language' ) ?></label></span>
-				<span class="input">
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="language"><span><?php echo lang_get( 'language' ) ?></span></label>
+				<span class="select">
 					<select id="language" name="language">
 						<?php print_language_option_list( $t_pref->language ) ?>
 					</select>
 				</span>
+				<span class="label-style"></span>
 			</div>
 
 			<?php event_signal( 'EVENT_ACCOUNT_PREF_UPDATE_FORM', array( $p_user_id ) ); ?>

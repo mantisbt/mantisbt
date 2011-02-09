@@ -68,20 +68,22 @@ html_page_top( lang_get( 'select_project_button' ) );
 	<form id="select-project-form" method="post" action="set_project.php">
 		<?php # CSRF protection not required here - form does not result in modifications ?>
 		<fieldset>
-			<legend><?php echo lang_get( 'choose_project' ) ?></legend>
+			<legend><span><?php echo lang_get( 'choose_project' ) ?></span></legend>
 			<input type="hidden" name="ref" value="<?php echo string_html_specialchars( $f_ref ) ?>" />
-			<span class="field-container odd">
-				<span class="label"><label for="select-project-id"><?php echo lang_get( 'select_project_button' ) ?></label></span>
-				<span class="input">
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="select-project-id"><span><?php echo lang_get( 'select_project_button' ) ?></span></label>
+				<span class="select">
 					<select id="select-project-id" name="project_id">
 						<?php print_project_option_list( ALL_PROJECTS, false, null, true ) ?>
 					</select>
 				</span>
-			</span>
-			<span class="field-container even">
-				<span class="label"><label for="set-default" class="even"><?php echo lang_get( 'make_default' ) ?></label></span>
-				<span class="input"><input id="set-default" type="checkbox" name="make_default" /></span>
-			</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="set-default"><span><?php echo lang_get( 'make_default' ) ?></span></label>
+				<span class="checkbox"><input id="set-default" type="checkbox" name="make_default" /></span>
+				<span class="label-style"></span>
+			</div>
 			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'select_project_button') ?>" /></span>
 		</fieldset>
 	</form>

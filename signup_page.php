@@ -64,7 +64,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 <div id="signup-div" class="form-container">
 	<form id="signup-form" method="post" action="signup.php">
 		<fieldset>
-			<legend><?php echo lang_get( 'signup_title' ) ?></legend>
+			<legend><span><?php echo lang_get( 'signup_title' ) ?></span></legend>
 			<?php echo form_security_field( 'signup' ); ?>
 			<ul id="login-links">
 			<li><a href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a></li>
@@ -78,28 +78,31 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			}
 			?>
 			</ul>
-			<span class="field-container odd">
-				<span class="label"><label for="username"><?php echo lang_get( 'username' ) ?></label></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
 				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" class="autofocus" /></span>
-			</span>
-			<span class="field-container even">
-				<span class="label"><label for="email-field"><?php echo lang_get( 'email_label' ) ?></label></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="email-field"><span><?php echo lang_get( 'email_label' ) ?></span></label>
 				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
-			</span>
+				<span class="label-style"></span>
+			</div>
 
 			<?php
 			$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
 			if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && ( true == $t_allow_passwd ) ) {
 				# captcha image requires GD library and related option to ON
 
-				echo '<span class="field-container odd">';
-				echo '<span class="label"><label for="captcha-field">' . lang_get( 'signup_captcha_request_label' ) . '</label></span>';
+				echo '<div class="field-container ', helper_alternate_class_no_attribute(), '">';
+				echo '<label for="captcha-field"><span>' . lang_get( 'signup_captcha_request_label' ) . '</span></label>';
 				echo '<span id="captcha-input" class="input">';
 				print_captcha_input( 'captcha', '' );
 				echo '<span class="captcha-image"><img src="make_captcha_img.php?public_key=' . $t_public_key . '" alt="visual captcha" /></span>';
 				echo '</span>';
 				echo '<input type="hidden" name="public_key" value="' . $t_public_key . '" />';
-				echo '</span>';
+				echo '<span class="label-style"></span>';
+				echo '</div>';
 			}
 			if( false == $t_allow_passwd ) {
 				echo '<span id="no-password-msg">';

@@ -99,6 +99,28 @@ function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_eve
 }
 
 /**
+ * return alternate classes for rows, no attribute
+ * If no index is given, continue alternating based on the last index given
+ * @param int $p_index
+ * @param string $p_odd_class default: odd
+ * @param string $p_even_class default: even
+ * @return string
+ */
+function helper_alternate_class_no_attribute( $p_index = null, $p_odd_class = 'odd', $p_even_class = 'even' ) {
+	static $t_index = 1;
+
+	if( null !== $p_index ) {
+		$t_index = $p_index;
+	}
+
+	if( 1 == $t_index++ % 2 ) {
+		return $p_odd_class;
+	} else {
+		return $p_even_class;
+	}
+}
+
+/**
  * get the color string for the given status
  * @param int $p_status
  * @return string

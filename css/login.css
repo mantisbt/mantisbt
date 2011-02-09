@@ -1,19 +1,7 @@
-div#login-div { min-width: 45em; }
-#login-form .label, #signup-form .label, #lost-password-form .label {
-	width: 40%;
-}
-#login-form .input, #signup-form .input, #lost-password-form .input {
-	width: 55%;
-}
-
 #secure-session-label span.input {
-	float: left;
-	margin: 0em;
 	width: 57%;
-	padding: .5em 0em 0em .25em;
 }
 #secure-session-label span.input input {
-	float: left;
 	margin-right: .25em;
 }
 span#session-msg {
@@ -21,20 +9,15 @@ span#session-msg {
 	line-height: 1em;
 	font-size: .8em;
 }
-span#captcha-input {
-	display: block;
-	width: 6em;
-	line-height: 3.5em;
-	padding: 0em;
+#captcha-field {
+	float: left;
 }
 span.captcha-image {
 	position: relative;
 	display: block;
-	float: right;
-	width: 10em;
-	margin: 0em 0em 0em -10em;
-	padding: 1em 0em 0em 3em;
-	border-left: 1px solid #fff;
+	float: left;
+	margin: 0em 0em 0em 1em;
+	padding: 0em;
 }
 span#no-password-msg, #signup-info, #lost-password-msg {
 	clear: both;

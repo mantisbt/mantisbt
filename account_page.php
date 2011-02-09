@@ -119,39 +119,44 @@ if ( $t_force_pw_reset ) {
 <div id="account-update-div" class="form-container">
 	<form id="account-update-form" method="post" action="account_update.php">
 		<fieldset <?php if ( $t_force_pw_reset ) { ?> class="has-required"<?php } ?>>
-			<legend><?php echo lang_get( 'edit_account_title' ); ?></legend>
+			<legend><span><?php echo lang_get( 'edit_account_title' ); ?></span></legend>
 			<?php echo form_security_field( 'account_update' );
 			print_account_menu( 'account_page.php' );
 
 		if ( !helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 			# With LDAP --> ?>
-			<div class="field-container odd">
-				<span class="label"><span><?php echo lang_get( 'username' ) ?></span></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
 				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container odd">
-				<span class="label"><span><?php echo lang_get( 'password' ) ?></span></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<span class="display-label"><span><?php echo lang_get( 'password' ) ?></span></span>
 				<span class="input"><span class="field-value"><?php echo lang_get( 'no_password_change' ) ?></span></span>
+				<span class="label-style"></span>
 			</div><?php
 		} else {
 			# Without LDAP
 			$t_show_update_button = true;
 			?>
-			<div class="field-container odd">
-				<span class="label"><span><?php echo lang_get( 'username' ) ?></span></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
 				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container even">
-				<span class="label"><label for="password" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><?php echo lang_get( 'password' ) ?></label></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="password" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'password' ) ?></span></label>
 				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo PASSLEN; ?>" /></span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container odd">
-				<span class="label"><label for="password-confirm" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><?php echo lang_get( 'confirm_password' ) ?></label></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="password-confirm" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'confirm_password' ) ?></span></label>
 				<span class="input"><input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo PASSLEN; ?>" /></span>
+				<span class="label-style"></span>
 			</div><?php
 		} ?>
-			<div class="field-container even">
-				<span class="label"><span><?php echo lang_get( 'email' ) ?></span></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<span class="display-label"><span><?php echo lang_get( 'email' ) ?></span></span>
 				<span class="input"><?php
 				if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
 					// With LDAP
@@ -162,11 +167,12 @@ if ( $t_force_pw_reset ) {
 					print_email_input( 'email', $u_email );
 				} ?>
 				</span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container odd"><?php
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>"><?php
 				if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 					# With LDAP
-					echo '<span class="label"><span>' . lang_get( 'realname' ) . '</span></span>';
+					echo '<span class="display-label"><span>' . lang_get( 'realname' ) . '</span></span>';
 					echo '<span class="input">';
 					echo '<span class="field-value">';
 					echo string_display_line( ldap_realname_from_username( $u_username ) );
@@ -175,25 +181,28 @@ if ( $t_force_pw_reset ) {
 				} else {
 					# Without LDAP
 					$t_show_update_button = true;
-					echo '<span class="label"><label for="realname">' . lang_get( 'realname' ) . '</label></span>';
+					echo '<label for="realname"><span>' . lang_get( 'realname' ) . '</span></label>';
 					echo '<span class="input">';
 					echo '<input id="realname" type="text" size="32" maxlength="' . REALLEN . '" name="realname" value="' . string_attribute( $u_realname ) . '" />';
 					echo '</span>';
 				} ?>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container even">
-				<span class="label"><span><?php echo lang_get( 'access_level' ) ?></span></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<span class="display-label"><span><?php echo lang_get( 'access_level' ) ?></span></span>
 				<span class="input"><span class="field-value"><?php echo get_enum_element( 'access_levels', $u_access_level ); ?></span></span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container odd">
-				<span class="label"><span><?php echo lang_get( 'access_level_project' ) ?></span></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<span class="display-label"><span><?php echo lang_get( 'access_level_project' ) ?></span></span>
 				<span class="input"><span class="field-value"><?php echo get_enum_element( 'access_levels', current_user_get_access_level() ); ?></span></span>
+				<span class="label-style"></span>
 			</div>
 			<?php
 			$t_projects = user_get_assigned_projects( auth_get_current_user_id() );
 			if( count( $t_projects ) > 0 ) {
-				echo '<div class="field-container even">';
-				echo '<span class="label"><span>' . lang_get( 'assigned_projects' ) . '</span></span>';
+				echo '<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">';
+				echo '<span class="display-label"><span>' . lang_get( 'assigned_projects' ) . '</span></span>';
 				echo '<div class="input">';
 				echo '<ul class="project-list">';
 				foreach( $t_projects AS $t_project_id=>$t_project ) {
@@ -207,6 +216,7 @@ if ( $t_force_pw_reset ) {
 				}
 				echo '</ul>';
 				echo '</div>';
+				echo '<span class="label-style"></span>';
 				echo '</div>';
 			}
 			?>

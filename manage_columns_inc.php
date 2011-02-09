@@ -80,7 +80,7 @@ $t_excel = implode( ', ', $t_columns );
 <div id="manage-columns-div" class="form-container">
 	<form id="manage-columns-form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="manage_config_columns_set.php">
 		<fieldset class="has-required">
-			<legend><?php echo lang_get( 'manage_columns_config' ) ?></legend>
+			<legend><span><?php echo lang_get( 'manage_columns_config' ) ?></span></legend>
 			<?php
 			if ( $t_account_page ) {
 				print_account_menu( 'account_manage_columns_page.php' );
@@ -90,25 +90,30 @@ $t_excel = implode( ', ', $t_columns );
 			<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
 			<input type="hidden" name="form_page" value="<?php echo $t_account_page ? 'account' : 'manage'; ?>" />
 
-			<div class="field-container odd">
-				<span class="label"><label for="all-columns"><?php echo lang_get( 'all_columns_title' )?></label></span>
-				<span class="input"><textarea id="all-columns" <?php echo helper_get_tab_index() ?> name="all_columns" readonly="readonly" cols="80" rows="5"><?php echo $t_all ?></textarea></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="all-columns"><span><?php echo lang_get( 'all_columns_title' )?></span></label>
+				<span class="textarea"><textarea id="all-columns" <?php echo helper_get_tab_index() ?> name="all_columns" readonly="readonly" cols="80" rows="5"><?php echo $t_all ?></textarea></span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container even">
-				<span class="label"><label for="view-issues-columns" class="required"><?php echo lang_get( 'view_issues_columns_title' )?></label></span>
-				<span class="input"><textarea id="view-issues-columns" <?php echo helper_get_tab_index() ?> name="view_issues_columns" cols="80" rows="5"><?php echo $t_view_issues ?></textarea></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="view-issues-columns" class="required"><span><?php echo lang_get( 'view_issues_columns_title' )?></span></label>
+				<span class="textarea"><textarea id="view-issues-columns" <?php echo helper_get_tab_index() ?> name="view_issues_columns" cols="80" rows="5"><?php echo $t_view_issues ?></textarea></span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container odd">
-				<span class="label"><label for="print-issues-columns" class="required"><?php echo lang_get( 'print_issues_columns_title' )?></label></span>
-				<span class="input"><textarea id="print-issues-columns" <?php echo helper_get_tab_index() ?> name="print_issues_columns" cols="80" rows="5"><?php echo $t_print_issues ?></textarea></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="print-issues-columns" class="required"><span><?php echo lang_get( 'print_issues_columns_title' )?></span></label>
+				<span class="textarea"><textarea id="print-issues-columns" <?php echo helper_get_tab_index() ?> name="print_issues_columns" cols="80" rows="5"><?php echo $t_print_issues ?></textarea></span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container even">
-				<span class="label"><label for="csv-columns" class="required"><?php echo lang_get( 'csv_columns_title' )?></label></span>
-				<span class="input"><textarea id="csv-columns" <?php echo helper_get_tab_index() ?> name="csv_columns" cols="80" rows="5"><?php echo $t_csv ?></textarea></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="csv-columns" class="required"><span><?php echo lang_get( 'csv_columns_title' )?></span></label>
+				<span class="textarea"><textarea id="csv-columns" <?php echo helper_get_tab_index() ?> name="csv_columns" cols="80" rows="5"><?php echo $t_csv ?></textarea></span>
+				<span class="label-style"></span>
 			</div>
-			<div class="field-container odd">
-				<span class="label"><label for="excel-columns" class="required"><?php echo lang_get( 'excel_columns_title' )?></label></span>
-				<span class="input"><textarea id="excel-columns" <?php echo helper_get_tab_index() ?> name="excel_columns" cols="80" rows="5"><?php echo $t_excel ?></textarea></span>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="excel-columns" class="required"><span><?php echo lang_get( 'excel_columns_title' )?></span></label>
+				<span class="textarea"><textarea id="excel-columns" <?php echo helper_get_tab_index() ?> name="excel_columns" cols="80" rows="5"><?php echo $t_excel ?></textarea></span>
+				<span class="label-style"></span>
 			</div>
 			<?php
 			if ( $t_account_page ) {
@@ -134,20 +139,15 @@ $t_excel = implode( ', ', $t_columns );
 			<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
 			<input type="hidden" name="manage_page" value="<?php echo $t_manage_page ?>" />
 
-			<div class="field-container">
-				<span class="input">
-					<select name="other_project_id">
-						<?php print_project_option_list( /* project_id */ null, /* include_all_projects */ true, /* filter_project_id */ $t_project_id ); ?>
-					</select>
-				</span>
-			</div>
-			<span class="submit-button">
+			<select name="other_project_id">
+				<?php print_project_option_list( /* project_id */ null, /* include_all_projects */ true, /* filter_project_id */ $t_project_id ); ?>
+			</select>
+
 			<?php # Skip "Copy From" if the current project is ALL PROJECTS, the current page is management page, and the user is not administrator
 			if ( !$t_manage_page || ( $t_project_id != ALL_PROJECTS ) || current_user_is_administrator() ) { ?>
-				<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_columns_from' ) ?>" /><?php
+			<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_columns_from' ) ?>" /><?php
 			} ?>
-				<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_columns_to' ) ?>" />
-			</span>
+			<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_columns_to' ) ?>" />
 		</fieldset>
 	</form>
 </div>
