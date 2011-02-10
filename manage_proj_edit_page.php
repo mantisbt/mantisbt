@@ -380,6 +380,7 @@ helper_alternate_class( 0 ); ?>
 		</tr><?php
 		} # end for loop
 	} ?>
+	</table>
 	<form id="manage-project-add-version-form" method="post" action="manage_proj_ver_add.php">
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_ver_add' ) ?>
