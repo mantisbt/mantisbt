@@ -243,15 +243,18 @@ function plugin_config_defaults( $p_options ) {
  * @return string Language string
  */
 function plugin_lang_get( $p_name, $p_basename = null ) {
-	if( is_null( $p_basename ) ) {
-		$t_basename = plugin_get_current();
-	} else {
-		$t_basename = $p_basename;
+	if( !is_null( $p_basename ) ) {
+		plugin_push_current( $p_basename );
 	}
 
+	$t_basename = plugin_get_current();
 	$t_name = 'plugin_' . $t_basename . '_' . $p_name;
+	$t_string = lang_get( $t_name );
 
-	return lang_get( $t_name );
+	if( !is_null( $p_basename ) ) {
+		plugin_pop_current();
+	}
+	return $t_string;
 }
 
 function plugin_history_log( $p_bug_id, $p_field_name, $p_old_value, $p_new_value = '', $p_user_id = null, $p_basename = null ) {
