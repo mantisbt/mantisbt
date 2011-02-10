@@ -378,9 +378,9 @@ helper_alternate_class( 0 ); ?>
 				} ?>
 			</td>
 		</tr><?php
-		} # end for loop
+		} # end for loop ?>
+	</table><?php
 	} ?>
-	</table>
 	<form id="manage-project-add-version-form" method="post" action="manage_proj_ver_add.php">
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_ver_add' ) ?>
