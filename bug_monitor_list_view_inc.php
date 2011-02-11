@@ -49,24 +49,9 @@ require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 
 if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id ) ) {
-	$c_bug_id = db_prepare_int( $f_bug_id );
-	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
-	$t_user_table = db_get_table( 'user' );
-
-	# get the bugnote data
-	$query = "SELECT user_id, enabled
-			FROM $t_bug_monitor_table m, $t_user_table u
-			WHERE m.bug_id=" . db_param() . " AND m.user_id = u.id
-			ORDER BY u.realname, u.username";
-	$result = db_query_bound($query, Array( $c_bug_id ) );
-	$num_users = db_num_rows($result);
-
-	$t_users = array();
-	for ( $i = 0; $i < $num_users; $i++ ) {
-		$row = db_fetch_array( $result );
-		$t_users[$i] = $row['user_id'];
-	}
-	user_cache_array_rows( $t_users );
+	
+	$t_users = bug_get_monitors( $f_bug_id );
+	$num_users = sizeof ( $t_users );
 
 	echo '<a id="monitors"></a><br />';
 
