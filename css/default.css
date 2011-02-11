@@ -448,6 +448,7 @@ div.form-container fieldset fieldset legend {
 	white-space: normal;
 	z-index: 9999;
 }
+div#news-edit-div fieldset fieldset>label,
 div#account-prefs-update-div fieldset fieldset>label {
 	width: auto;
 	font-weight: normal;
