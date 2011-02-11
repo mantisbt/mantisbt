@@ -56,105 +56,65 @@ html_page_top();
 
 print_manage_menu( 'manage_user_create_page.php' );
 ?>
-<br />
-<div>
-<form method="post" action="manage_user_create.php">
-<?php echo form_security_field( 'manage_user_create' ) ?>
-<table class="width50" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'create_new_account_title' ) ?>
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category" width="25%">
-		<?php echo lang_get( 'username' ) ?>
-	</th>
-	<td width="75%">
-		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" />
-	</td>
-</tr>
-<?php
-	if ( !$t_ldap || config_get( 'use_ldap_realname' ) == OFF ) {
-?>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'realname' ) ?>
-	</th>
-	<td>
-		<input type="text" name="realname" size="32" maxlength="<?php echo REALLEN;?>" />
-	</td>
-</tr>
-<?php
-	}
+<div id="manage-user-create-div" class="form-container">
+	<form id="manage-user-create-form" method="post" action="manage_user_create.php">
+		<fieldset>
+			<legend><span><?php echo lang_get( 'create_new_account_title' ) ?></span></legend>
+			<?php echo form_security_field( 'manage_user_create' ) ?>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="user-username"><span><?php echo lang_get( 'username' ) ?></span></label>
+				<span class="input"><input type="text" id="user-username" name="username" size="32" maxlength="<?php echo USERLEN;?>" /></span>
+				<span class="label-style"></span>
+			</div><?php
+			if ( !$t_ldap || config_get( 'use_ldap_realname' ) == OFF ) { ?>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="user-realname"><span><?php echo lang_get( 'realname' ) ?></span></label>
+				<span class="input"><input type="text" id="user-realname" name="realname" size="32" maxlength="<?php echo REALLEN;?>" /></span>
+				<span class="label-style"></span>
+			</div><?php
+			}
+			if ( !$t_ldap || config_get( 'use_ldap_email' ) == OFF ) { ?>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="email-field"><span><?php echo lang_get( 'email' ) ?></span></label>
+				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
+				<span class="label-style"></span>
+			</div><?php
+			}
 
-	if ( !$t_ldap || config_get( 'use_ldap_email' ) == OFF ) {
-?>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'email' ) ?>
-	</th>
-	<td>
-		<?php print_email_input( 'email', '' ) ?>
-	</td>
-</tr>
-<?php
-	}
-
-	if ( OFF == config_get( 'send_reset_password' ) )  {
-?>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'password' ) ?>
-	</th>
-	<td>
-		<input type="password" name="password" size="32" maxlength="<?php echo PASSLEN;?>" />
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'verify_password' ) ?>
-	</th>
-	<td>
-		<input type="password" name="password_verify" size="32" maxlength="<?php echo PASSLEN;?>" />
-	</td>
-</tr>
-<?php
-	}
-?>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'access_level' ) ?>
-	</th>
-	<td>
-		<select name="access_level">
-			<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
-		</select>
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'enabled' ) ?>
-	</th>
-	<td>
-		<input type="checkbox" name="enabled" checked="checked" />
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<th class="category">
-		<?php echo lang_get( 'protected' ) ?>
-	</th>
-	<td>
-		<input type="checkbox" name="protected" />
-	</td>
-</tr>
-<tr>
-	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'create_user_button' ) ?>" />
-	</td>
-</tr>
-</table>
-</form>
+			if ( OFF == config_get( 'send_reset_password' ) )  { ?>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="user-password"><span><?php echo lang_get( 'password' ) ?></span></label>
+				<span class="input"><input type="password" id="user-password" name="password" size="32" maxlength="<?php echo PASSLEN;?>" /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="user-verify-password"><span><?php echo lang_get( 'verify_password' ) ?></span></label>
+				<span class="input"><input type="password" id="user-verify-password" name="password_verify" size="32" maxlength="<?php echo PASSLEN;?>" /></span>
+				<span class="label-style"></span>
+			</div><?php
+			} ?>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="user-access-level"><span><?php echo lang_get( 'access_level' ) ?></span></label>
+				<span class="select">
+					<select id="user-access-level" name="access_level">
+						<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="user-enabled"><span><?php echo lang_get( 'enabled' ) ?></span></label>
+				<span class="checkbox"><input type="checkbox" id="user-enabled" name="enabled" checked="checked" /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="user-protected"><span><?php echo lang_get( 'protected' ) ?></span></label>
+				<span class="checkbox"><input type="checkbox" id="user-protected" name="protected" /></span>
+				<span class="label-style"></span>
+			</div>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'create_user_button' ) ?>" /></span>
+		</fieldset>
+	</form>
 </div>
 
 <?php
