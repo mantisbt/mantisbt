@@ -448,6 +448,14 @@ div.form-container fieldset fieldset legend {
 	white-space: normal;
 	z-index: 9999;
 }
+div.form-container .field-container>label span.help-text {
+	clear: both;
+	display: block;
+	font-size: .8em;
+	font-weight: normal;
+}
+div.form-container .field-container>label span.help-text:before { content: '('; }
+div.form-container .field-container>label span.help-text:after { content: ')'; }
 div#news-edit-div fieldset fieldset>label,
 div#account-prefs-update-div fieldset fieldset>label {
 	width: auto;

@@ -69,7 +69,7 @@ html_page_top( lang_get( 'edit_news_link' ) );
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
-				<label for="news-announcement"><span><?php echo lang_get( 'announcement' ) ?></span> <span><?php echo lang_get( 'stays_on_top' ) ?></span></label>
+				<label for="news-announcement"><span><?php echo lang_get( 'announcement' ) ?></span> <span class="help-text"><?php echo lang_get( 'stays_on_top' ) ?></span></label>
 				<span class="checkbox"><input type="checkbox" id="news-announcement" name="announcement" /></span>
 				<span class="label-style"></span>
 			</div>
