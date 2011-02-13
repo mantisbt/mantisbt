@@ -31,6 +31,7 @@ function mc_filter_get( $p_username, $p_password, $p_project_id ) {
 		$t_filter['is_public'] = $t_filter_row['is_public'];
 		$t_filter['name'] = $t_filter_row['name'];
 		$t_filter['filter_string'] = $t_filter_row['filter_string'];
+		$t_filter['url'] = $t_filter_row['url'];
 		$t_result[] = $t_filter;
 	}
 	return $t_result;
