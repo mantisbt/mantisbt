@@ -325,6 +325,37 @@ function mci_issue_get_notes( $p_issue_id ) {
 }
 
 /**
+ * Sets the monitors of the specified issue
+ * 
+ * <p>This functions performs access level checks.</p>
+ * 
+ * @param int $p_issue_id the issue id to set the monitors for
+ * @param int $p_user_id the user which requests the monitor change
+ * @param array $p_monitors An array of arrays with the <em>id</em> field set to the id 
+ *  of the users which should monitor this issue.
+ */
+function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
+    
+    foreach ( $p_monitors as $t_monitor ) {
+        
+        $t_user_id = $t_monitor['id'];
+
+        $t_has_access;
+        
+    	if ( $p_user_id == $t_user_id ) {
+    		$t_has_access = access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id );
+	    } else {
+	    	$t_has_access = access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $p_issue_id );
+	    }
+	    
+	    if ( !$t_has_access )
+	        continue;
+	        
+        bug_monitor( $p_issue_id, $t_user_id );
+    }
+}
+
+/**
  * Get the biggest issue id currently used.
  *
  * @param string $p_username  The name of the user trying to retrieve the information
@@ -579,7 +610,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
 		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
 	}
-
+	
 	# omitted:
 	# var $bug_text_id
 	# $t_bug_data->profile_id;
@@ -592,6 +623,8 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_issue_id = $t_bug_data->create();
 
 	mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'], false );
+	if ( isset ( $p_issue['monitors'] ) )
+	    mci_issue_set_monitors( $t_issue_id , $t_user_id, $p_issue['monitors'] );
 
 	if( isset( $t_notes ) && is_array( $t_notes ) ) {
 		foreach( $t_notes as $t_note ) {

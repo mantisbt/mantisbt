@@ -51,4 +51,41 @@ class IssueMonitorTest extends SoapBase {
 		// no monitors on new issue
 		$this->assertEquals(0, sizeof($issue->monitors));
 	}
+	
+	/**
+	 * A test case that tests the following
+	 * 
+	 * 1. Creates a new issue
+	 * 2. Adds a monitor to it
+	 * 3. Retrieves the issue and verifies that the user is in the monitor list
+	 * 4. Removes a monitor from the issue
+	 * 5. Retrieves the issue and verifies that the user is not in the monitor list
+	 */
+	public function testAddMonitorWhenCreatingAnIssue() {
+
+	    $issueToAdd = $this->getIssueToAdd( 'IssueMonitorTest.testAddRemoveMonitorFromIssue' );
+	    $issueToAdd['monitors'] = array(
+	        array ('id' =>  $this->userId )
+        );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
+		
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);		
+		
+		self::assertEquals(1, sizeof($issue->monitors));
+		
+		$monitor = $issue->monitors[0];
+		
+		self::assertEquals( $this->userId, $monitor->id );
+		self::assertEquals( $this->userName, $monitor->name );
+		
+	}
 }
