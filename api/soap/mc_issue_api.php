@@ -336,10 +336,14 @@ function mci_issue_get_notes( $p_issue_id ) {
  */
 function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
     
-    foreach ( $p_monitors as $t_monitor ) {
-        
-        $t_user_id = $t_monitor['id'];
+    $t_existing_monitors = bug_get_monitors( $p_issue_id );
 
+    $t_monitors = array();
+    foreach ( $p_monitors as $t_monitor ) 
+        $t_monitors[] = $t_monitor['id'];
+    
+    foreach ( $t_monitors as $t_user_id ) {
+        
         $t_has_access;
         
     	if ( $p_user_id == $t_user_id ) {
@@ -351,8 +355,31 @@ function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
 	    if ( !$t_has_access )
 	        continue;
 	        
-        bug_monitor( $p_issue_id, $t_user_id );
+       if ( in_array( $p_user_id, $t_existing_monitors) )
+           continue;
+	        
+        bug_monitor( $p_issue_id, $t_user_id);
     }
+    
+    foreach ( $t_existing_monitors as $t_user_id ) {
+
+        $t_has_access;
+        
+    	if ( $p_user_id == $t_user_id ) {
+    		$t_has_access = access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id );
+	    } else {
+	    	$t_has_access = access_has_bug_level( config_get( 'monitor_remove_others_bug_threshold' ), $p_issue_id );
+	    }
+	    
+	    if ( !$t_has_access )
+	        continue;
+        
+        if ( in_array( $p_user_id, $t_monitors) )
+            continue;
+            
+        bug_unmonitor( $p_issue_id, $t_user_id);
+    }
+                
 }
 
 /**
