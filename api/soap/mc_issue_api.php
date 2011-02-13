@@ -110,7 +110,8 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['relationships'] = mci_issue_get_relationships( $p_issue_id, $t_user_id );
 	$t_issue_data['notes'] = mci_issue_get_notes( $p_issue_id );
 	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
-
+	$t_issue_data['monitors'] = mci_account_get_array_by_ids( bug_get_monitors ( $p_issue_id ) );
+	
 	return $t_issue_data;
 }
 
