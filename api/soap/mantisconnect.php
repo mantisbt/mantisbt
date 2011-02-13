@@ -428,7 +428,8 @@ $l_oServer->wsdl->addComplexType(
 		'project_id'	=>	array( 'name' => 'project_id',		'type' => 'xsd:integer', 	'minOccurs' => '0' ),
 		'is_public'		=>	array( 'name' => 'is_public',		'type' => 'xsd:boolean', 	'minOccurs' => '0' ),
 		'name'			=>	array( 'name' => 'name',			'type' => 'xsd:string', 	'minOccurs' => '0' ),
-		'filter_string'	=>	array( 'name' => 'filter_string',	'type' => 'xsd:string', 	'minOccurs' => '0' )
+		'filter_string'	=>	array( 'name' => 'filter_string',	'type' => 'xsd:string', 	'minOccurs' => '0' ),
+	    'url'           =>  array( 'name' => 'url',				'type' => 'xsd:string', 	'minOccurs' => '0' )
 	)
 );
 
