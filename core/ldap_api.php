@@ -82,7 +82,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		}
 
 		if ( !$t_br ) {
-			log_event( LOG_LDAP, "bind to ldap server  failed - authentication error?" );
+			log_event( LOG_LDAP, "bind to ldap server failed: " . ldap_error( $t_ds ) );
 			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
 		} else {
 			log_event( LOG_LDAP, "bind to ldap server successful" );
