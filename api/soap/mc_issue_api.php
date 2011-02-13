@@ -327,7 +327,8 @@ function mci_issue_get_notes( $p_issue_id ) {
 /**
  * Sets the monitors of the specified issue
  * 
- * <p>This functions performs access level checks.</p>
+ * <p>This functions performs access level checks and only performs operations which would
+ * modify the existing monitors list.</p>
  * 
  * @param int $p_issue_id the issue id to set the monitors for
  * @param int $p_user_id the user which requests the monitor change
@@ -336,22 +337,42 @@ function mci_issue_get_notes( $p_issue_id ) {
  */
 function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
     
-    foreach ( $p_monitors as $t_monitor ) {
-        
-        $t_user_id = $t_monitor['id'];
+    $t_existing_monitors = bug_get_monitors( $p_issue_id );
 
-        $t_has_access;
+    $t_monitors = array();
+    foreach ( $p_monitors as $t_monitor ) 
+        $t_monitors[] = $t_monitor['id'];
+    
+    foreach ( $t_monitors as $t_user_id ) {
         
     	if ( $p_user_id == $t_user_id ) {
-    		$t_has_access = access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id );
+    		if ( ! access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id ) )
+    		    continue;
 	    } else {
-	    	$t_has_access = access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $p_issue_id );
+	    	if ( !access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $p_issue_id ) )
+	    	    continue;
 	    }
-	    
-	    if ( !$t_has_access )
-	        continue;
 	        
-        bug_monitor( $p_issue_id, $t_user_id );
+       if ( in_array( $p_user_id, $t_existing_monitors) )
+           continue;
+	        
+        bug_monitor( $p_issue_id, $t_user_id);
+    }
+    
+    foreach ( $t_existing_monitors as $t_user_id ) {
+
+    	if ( $p_user_id == $t_user_id ) {
+    		if ( ! access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id ) )
+    		    continue;
+	    } else {
+	    	if ( !access_has_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $p_issue_id ) )
+	    	    continue;
+	    }
+        
+        if ( in_array( $p_user_id, $t_monitors) )
+            continue;
+            
+        bug_unmonitor( $p_issue_id, $t_user_id);
     }
 }
 
