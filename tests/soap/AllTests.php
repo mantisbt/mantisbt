@@ -28,6 +28,7 @@ require_once dirname(__FILE__) . '/../TestConfig.php';
 
 require_once 'EnumTest.php';
 require_once 'IssueAddTest.php';
+require_once 'IssueMonitorTest.php';
 require_once 'IssueNoteTest.php';
 require_once 'IssueUpdateTest.php';
 require_once 'FilterTest.php';
@@ -61,6 +62,7 @@ class Soap_AllTests extends PHPUnit_Framework_TestSuite
 
         $suite->addTestSuite('EnumTest');
         $suite->addTestSuite('IssueAddTest');
+        $suite->addTestSuite('IssueMonitorTest');
         $suite->addTestSuite('IssueNoteTest');
         $suite->addTestSuite('IssueUpdateTest');
         $suite->addTestSuite('FilterTest');
@@ -68,7 +70,7 @@ class Soap_AllTests extends PHPUnit_Framework_TestSuite
         $suite->addTestSuite('LoginTest');
         $suite->addTestSuite('CategoryTest');
         $suite->addTestSuite('CompressionTest');
-	$suite->addTestSuite('ProjectTest');
+	    $suite->addTestSuite('ProjectTest');
 
         return $suite;
     }
