@@ -26,3 +26,14 @@ function mci_account_get_array_by_id( $p_user_id ) {
 	}
 	return $t_result;
 }
+
+function mci_account_get_array_by_ids ( $p_user_ids ) {
+    
+    $t_result = array();
+    
+    foreach ( $p_user_ids as $t_user_id ) {
+        $t_result[] = mci_account_get_array_by_id( $t_user_id );
+    }
+    
+    return $t_result;
+}
