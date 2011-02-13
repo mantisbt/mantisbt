@@ -803,6 +803,8 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_is_success = $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
 
 	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'], true );
+	if ( isset ( $p_issue['monitors'] ) )
+	    mci_issue_set_monitors( $p_issue_id , $t_user_id, $p_issue['monitors'] );
 
 	if ( isset( $p_issue['notes'] ) && is_array( $p_issue['notes'] ) ) {
 		foreach ( $p_issue['notes'] as $t_note ) {
