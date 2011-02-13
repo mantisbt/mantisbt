@@ -327,7 +327,8 @@ function mci_issue_get_notes( $p_issue_id ) {
 /**
  * Sets the monitors of the specified issue
  * 
- * <p>This functions performs access level checks.</p>
+ * <p>This functions performs access level checks and only performs operations which would
+ * modify the existing monitors list.</p>
  * 
  * @param int $p_issue_id the issue id to set the monitors for
  * @param int $p_user_id the user which requests the monitor change
@@ -344,16 +345,13 @@ function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
     
     foreach ( $t_monitors as $t_user_id ) {
         
-        $t_has_access;
-        
     	if ( $p_user_id == $t_user_id ) {
-    		$t_has_access = access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id );
+    		if ( ! access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id ) )
+    		    continue;
 	    } else {
-	    	$t_has_access = access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $p_issue_id );
+	    	if ( !access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $p_issue_id ) )
+	    	    continue;
 	    }
-	    
-	    if ( !$t_has_access )
-	        continue;
 	        
        if ( in_array( $p_user_id, $t_existing_monitors) )
            continue;
@@ -363,16 +361,13 @@ function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
     
     foreach ( $t_existing_monitors as $t_user_id ) {
 
-        $t_has_access;
-        
     	if ( $p_user_id == $t_user_id ) {
-    		$t_has_access = access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id );
+    		if ( ! access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id ) )
+    		    continue;
 	    } else {
-	    	$t_has_access = access_has_bug_level( config_get( 'monitor_remove_others_bug_threshold' ), $p_issue_id );
+	    	if ( !access_has_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $p_issue_id ) )
+	    	    continue;
 	    }
-	    
-	    if ( !$t_has_access )
-	        continue;
         
         if ( in_array( $p_user_id, $t_monitors) )
             continue;
