@@ -136,6 +136,7 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 #account-menu ul li, #doc-menu ul li { display: block; float: left; padding: 0; margin: 0; }
 
 /* bracket links */
+#manage-user-link:before,
 #manage-menu ul li:before,
 #manage-config-menu ul li:before,
 #summary-menu ul li:before,
@@ -145,6 +146,7 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 span.permalink:before,
 span.switch-view:before { content: "[" }
 
+#manage-user-link:after,
 #manage-menu ul li:after,
 #manage-config-menu ul li:after,
 #summary-menu ul li:after,
@@ -347,6 +349,7 @@ div.error-info { text-align: center; margin: 1em; }
 .myview-left-col, .myview-right-col { width: 50%; vertical-align: top; }
 #manage-overview-table th { width: 30%; }
 
+div.section-container,
 div.form-container,
 div.table-container {
 	clear: both;
@@ -360,6 +363,7 @@ div.table-container {
 #manage-user-div {
 	min-width: 57em;
 }
+div.section-container h2,
 div.form-container h2,
 div.table-container h2 {
 	float: left;
@@ -371,10 +375,12 @@ div.table-container h2 {
 	padding: .5em;
 	margin: 0em;
 }
+div.section-container table,
 div.form-container table,
 div.table-container table {
 	width: 100%;
 }
+div.section-container table th,
 div.form-container table th,
 div.table-container table th {
 	text-align: center;
@@ -432,18 +438,18 @@ div.form-container fieldset label.required:before {
 	font-weight: normal;
 	text-align: right;
 }
-div.table-container .section-link,
-div.form-container .section-link {
+.section-link {
 	padding: .5em;
 	float: right;
 }
-div.form-container .odd {
+.odd {
 	background-color: #d8d8d8;
 }
-div.form-container .even {
+.even {
 	background-color: #e8e8e8;
 }
-div.form-container .field-container {
+fieldset fieldset.field-container,
+div.field-container {
 	position: relative;
 	display:block;
 	width: 100%;
@@ -451,7 +457,7 @@ div.form-container .field-container {
 	margin: 0em 0em 1px 0em;
 	padding: 0em;
 }
-div.form-container .field-container>.display-label,
+.field-container>.display-label,
 div.form-container .field-container>label,
 div.form-container fieldset fieldset legend {
 	position: relative;
@@ -463,7 +469,7 @@ div.form-container fieldset fieldset legend {
 	white-space: normal;
 	z-index: 9999;
 }
-div.form-container .field-container>label span.help-text {
+.field-container>label span.help-text {
 	clear: both;
 	display: block;
 	font-size: .8em;
@@ -495,7 +501,7 @@ div.form-container .checkbox,
 div.form-container .select,
 div.form-container .textarea,
 div.form-container .input,
-div.form-container .display-value {
+.display-value {
 	position: relative;
 	float: left;
 	padding: .25em;
@@ -506,7 +512,7 @@ div.form-container .checkbox input,
 div.form-container .select select,
 div.form-container .textarea textarea,
 div.form-container .input  input,
-div.form-container .display-value span {
+.display-value span {
 	max-width: 98%;
 }
 .label-style {
@@ -520,6 +526,7 @@ div.form-container .display-value span {
 	border-right: 1px solid #fff;
 	z-index: 0;
 }
+.section-links,
 div.form-container .submit-button {
 	clear: both;
 	display: block;
@@ -527,17 +534,17 @@ div.form-container .submit-button {
 	text-align: center;
 }
 /* 30% label width - these are the defaults */
-div.form-container .label-style {
+.label-style {
 	width: 31%;
 }
 div.form-container label,
-div.form-container .display-label,
+.display-label,
 #account-prefs-update-div legend {
 	width: 30%;
 }
 div.form-container .textarea,
 div.form-container .input,
-div.form-container .display-value {
+.display-value {
 	width: 65%;
 }
 div.success-msg,

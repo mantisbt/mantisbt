@@ -75,27 +75,16 @@ $u_realname = user_get_realname( $u_id );
 html_page_top();
 ?>
 
-<br />
-<div>
-<table class="width75" cellspacing="1">
-	<tr>
-		<td class="form-title">
-			<?php echo lang_get( 'view_account_title' ) ?>
-		</td>
-	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
-		<th class="category" width="25%">
-			<?php echo lang_get( 'username' ) ?>
-		</th>
-		<td width="75%">
-			<?php echo string_display_line( $u_username ) ?>
-		</td>
-	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
-		<th class="category">
-			<?php echo lang_get( 'email' ) ?>
-		</th>
-		<td>
+<div class="section-container">
+	<h2><?php echo lang_get( 'view_account_title' ) ?></h2>
+	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+		<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
+		<span class="display-value"><span><?php echo string_display_line( $u_username ) ?></span></span>
+		<span class="label-style"></span>
+	</div>
+	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+		<span class="display-label"><span><?php echo lang_get( 'email' ) ?></span></span>
+		<span class="display-value"><span>
 			<?php
 				if ( ! ( $t_can_manage || $t_can_see_email ) ) {
 					print error_string(ERROR_ACCESS_DENIED);
@@ -105,35 +94,26 @@ html_page_top();
 					} else {
 						echo " - ";
 					}
-				}
-			?>
-		</td>
-	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
-		<th class="category">
-			<?php echo lang_get( 'realname' ) ?>
-		</th>
-		<td>
-			<?php
-				if ( ! ( $t_can_manage || $t_can_see_realname ) ) {
-					print error_string(ERROR_ACCESS_DENIED);
-				} else {
-					echo string_display_line( $u_realname );
-				}
-			?>
-		</td>
-	</tr>
+				} ?>
+		</span></span>
+		<span class="label-style"></span>
+	</div>
+	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+		<span class="display-label"><span><?php echo lang_get( 'realname' ) ?></span></span>
+		<span class="display-value"><span><?php
+			if ( ! ( $t_can_manage || $t_can_see_realname ) ) {
+				print error_string(ERROR_ACCESS_DENIED);
+			} else {
+				echo string_display_line( $u_realname );
+			} ?>
+		</span></span>
+		<span class="label-style"></span>
+	</div>
+	<span class="section-links">
 	<?php if ( $t_can_manage ) { ?>
-	<tr>
-		<td colspan="2" class="center">
-			<?php print_bracket_link( 'manage_user_edit_page.php?user_id=' . $f_user_id, lang_get( 'manage_user' ) ); ?>
-		</td>
-	</tr>
+			<span id="manage-user-link"><a href="<?php echo string_html_specialchars( 'manage_user_edit_page.php?user_id=' . $f_user_id ); ?>"><?php echo lang_get( 'manage_user' ); ?></a></span>
 	<?php } ?>
-</table>
-</div>
+	</span>
+</div><?php
 
-<br />
-
-<?php
 html_page_bottom();
