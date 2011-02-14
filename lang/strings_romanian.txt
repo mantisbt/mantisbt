@@ -26,6 +26,7 @@
  * @file
  *
  * @author Claudiu Cristea <claudiu@cristea.info>
+ * @author Danutz
  * @author KlaudiuMihaila
  * @author McDutchie
  * @author Stelistcristi
@@ -470,7 +471,7 @@ $s_no_bugnotes_msg = 'Nu există comentarii atașate acestei probleme.';
 $s_delete_link = 'Şterge';
 $s_add_bugnote_title = 'Adaugă comentariu';
 $s_add_bugnote_button = 'Adaugă';
-$s_bugnote_edit_link = 'Modifică';
+$s_bugnote_edit_link = 'Modificare';
 $s_closed_bug_button = 'Închide problema';
 $s_bugnote_updated_msg = 'Comentariul a fost modificat cu succes...';
 $s_edited_on = 'modificat la:';
@@ -610,7 +611,7 @@ $s_add_category_button = 'Adaugă o categorie';
 $s_versions = 'Versiuni';
 $s_add_version_button = 'Adaugă o versiune';
 $s_add_and_edit_version_button = 'Adaugă și modifică versiune';
-$s_edit_link = 'modifică';
+$s_edit_link = 'modificare';
 $s_actions = 'Acțiuni';
 $s_version = 'Versiune/Build';
 $s_timestamp = 'Marcă timp';
@@ -811,7 +812,7 @@ $s_query_delete_msg = 'Sigur doriți să ștergeți această interogare?';
 $s_view_simple_link = 'Vizualizare simplă';
 $s_product_build = 'Versiune produs';
 $s_system_profile = 'Descriere sistem';
-$s_update_bug_button = 'Modifică problemă';
+$s_update_bug_button = 'Modificare problemă';
 $s_bug_assign_to_button = 'Atribuită lui:';
 $s_bug_status_to_button = 'Schimbă starea în:';
 $s_reopen_bug_button = 'Redeschide problemă';
