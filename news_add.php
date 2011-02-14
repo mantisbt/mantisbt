@@ -68,17 +68,11 @@ $t_news_row = news_get_row( $t_news_id );
 html_page_top();
 ?>
 
-<br />
-<div>
-<?php
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( 'news_menu_page.php', lang_get( 'proceed' ) );
-
-echo '<br /><br />';
+<div class="success-msg"><?php
+	echo lang_get( 'operation_successful' ) . '<br />';
+	print_bracket_link( 'news_menu_page.php', lang_get( 'proceed' ) ); ?>
+</div><?php
 
 print_news_entry_from_row( $t_news_row );
-?>
-</div>
 
-<?php
 html_page_bottom();

@@ -89,30 +89,28 @@ if ( !current_user_is_anonymous() ) {
 	echo '</div>';
 }
 
-echo '<br />';
-echo '<br />';
-
 if ( news_is_enabled() ) {
-	echo '<br />';
-
 	$t_news_rows = news_get_limited_rows( $f_offset, $t_project_id );
 	$t_news_count = count( $t_news_rows );
 
-	# Loop through results
-	for ( $i = 0; $i < $t_news_count; $i++ ) {
-		$t_row = $t_news_rows[$i];
+	if( $t_news_count ) {
+		echo '<div id="news-items">';
+		# Loop through results
+		for ( $i = 0; $i < $t_news_count; $i++ ) {
+			$t_row = $t_news_rows[$i];
 
-		# only show VS_PRIVATE posts to configured threshold and above
-		if ( ( VS_PRIVATE == $t_row[ 'view_state' ] ) &&
-			 !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
-			continue;
-		}
+			# only show VS_PRIVATE posts to configured threshold and above
+			if ( ( VS_PRIVATE == $t_row[ 'view_state' ] ) &&
+				 !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
+				continue;
+			}
 
-		print_news_entry_from_row( $t_row );
-		echo '<br />';
-	}  # end for loop
+			print_news_entry_from_row( $t_row );
+		}  # end for loop
+		echo '</div>';
+	}
 
-	echo '<div>';
+	echo '<div id="news-menu">';
 
 	print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) );
 	$t_news_view_limit = config_get( 'news_view_limit' );
@@ -135,4 +133,3 @@ if ( news_is_enabled() ) {
 }
 
 html_page_bottom();
-

@@ -50,7 +50,6 @@ $f_news_id = gpc_get_int( 'news_id', null );
 
 html_page_top();
 ?>
-<br />
 
 <?php
 if ( $f_news_id !== null ) {
@@ -66,8 +65,7 @@ if ( $f_news_id !== null ) {
 }
 ?>
 
-<br />
-<div>
+<div id="news-menu">
 	<?php print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) ); ?>
 </div>
 

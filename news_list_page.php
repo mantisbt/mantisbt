@@ -59,41 +59,31 @@ html_page_top();
 $rows = news_get_rows( helper_get_current_project() );
 $t_count = count( $rows );
 
-if ( $t_count > 0 ) {
-	echo '<ul>';
-}
+if ( $t_count > 0 ) { ?>
+	<ul><?php
+	# Loop through results
+	for ( $i=0 ; $i < $t_count ; $i++ ) {
+		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
+		if ( VS_PRIVATE == $v_view_state &&
+			 ! access_has_project_level( config_get( 'private_news_threshold' ), $v_project_id ) ) 		{
+			continue;
+		}
 
-# Loop through results
-for ( $i=0 ; $i < $t_count ; $i++ ) {
-	extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
-	if ( VS_PRIVATE == $v_view_state &&
-		 ! access_has_project_level( config_get( 'private_news_threshold' ), $v_project_id ) ) 		{
-		continue;
-	}
-
-	$v_headline 	= string_display( $v_headline );
-	$v_date_posted 	= date( config_get( 'complete_date_format' ), $v_date_posted );
-
-	$t_notes = array();
-	$t_note_string = '';
-	if ( 1 == $v_announcement ) {
-		array_push( $t_notes, lang_get( 'announcement' ) );
-	}
-	if ( VS_PRIVATE == $v_view_state ) {
-		array_push( $t_notes, lang_get( 'private' ) );
-	}
-	if ( count( $t_notes ) > 0 ) {
-		$t_note_string = '['.implode( ' ', $t_notes ).']';
-	}
-
-	echo "<li><span class=\"italic-small\">$v_date_posted</span> - <span class=\"bold\"><a href=\"news_view_page.php?news_id=$v_id\">$v_headline</a></span> <span class=\"small\"> ";
-	print_user( $v_poster_id );
-	echo ' ' . $t_note_string;
-	echo "</span></li>";
-}  # end for loop
-
-if ( $t_count > 0 ) {
-		echo '</ul>';
+		$v_headline 	= string_display( $v_headline );
+		$v_date_posted 	= date( config_get( 'complete_date_format' ), $v_date_posted ); ?>
+		<li>
+			<span class="news-date-posted"><?php echo $v_date_posted; ?></span>
+			<span class="news-headline"><a href="news_view_page.php?news_id=<?php echo $v_id; ?>"><?php echo $v_headline; ?></a></span>
+			<span class="news-author"><?php echo prepare_user_name( $v_poster_id ); ?></span><?php
+			if( 1 == $v_announcement ) { ?>
+				<span class="news-announcement"><?php echo lang_get( 'announcement' ); ?></span><?php
+			}
+			if( VS_PRIVATE == $v_view_state ) { ?>
+				<span class="news-private"><?php echo lang_get( 'private' ); ?></span><?php
+			} ?>
+		</li><?php
+	}  	# end for loop ?>
+	</ul><?php
 }
 
 html_page_bottom();

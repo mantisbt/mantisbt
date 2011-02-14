@@ -414,40 +414,23 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 		$t_news_css = 'news-heading-private';
 	} else {
 		$t_news_css = 'news-heading-public';
-	}
+	} ?>
 
-	$output = '<div>';
-	$output .= '<table class="width75" cellspacing="0">';
-	$output .= '<tr>';
-	$output .= "<td class=\"$t_news_css\">";
-	$output .= "<span class=\"bold\">$t_headline</span> - ";
-	$output .= "<span class=\"italic-small\">$t_date_posted</span> - ";
-	echo $output;
+	<div class="news-item">
+		<h3 class="<?php echo $t_news_css; ?>">
+			<span class="news-title"><?php echo $t_headline; ?></span>
+			<span class="news-date-posted"><?php echo $t_date_posted; ?></span>
+			<span class="news-author"><?php echo prepare_user_name( $p_poster_id ); ?></span><?php
 
-	/** @todo eventually we should replace print's with methods to construct the strings. */
-	print_user( $p_poster_id );
-	$output = '';
-
-	if( 1 == $p_announcement ) {
-		$output .= ' <span class="small">';
-		$output .= '[' . lang_get( 'announcement' ) . ']';
-		$output .= '</span>';
-	}
-	if( VS_PRIVATE == $p_view_state ) {
-		$output .= ' <span class="small">';
-		$output .= '[' . lang_get( 'private' ) . ']';
-		$output .= '</span>';
-	}
-
-	$output .= '</td>';
-	$output .= '</tr>';
-	$output .= '<tr>';
-	$output .= "<td class=\"news-body\">$t_body</td>";
-	$output .= '</tr>';
-	$output .= '</table>';
-	$output .= '</div>';
-
-	echo $output;
+			if( 1 == $p_announcement ) { ?>
+				<span class="news-announcement"><?php echo lang_get( 'announcement' ); ?></span><?php
+			}
+			if( VS_PRIVATE == $p_view_state ) { ?>
+				<span class="news-private"><?php echo lang_get( 'private' ); ?></span><?php
+			} ?>
+		</h3>
+		<p class="news-body"><?php echo $t_body; ?></p>
+	</div><?php
 }
 
 # --------------------
