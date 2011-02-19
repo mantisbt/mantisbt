@@ -3351,8 +3351,10 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	// expanded
 	collapse_icon( 'filter' );
 	echo '<div class="search-box">';
+	echo '<label>';
 	echo lang_get( 'search' ) . '&#160;';
 	echo '<input type="text" size="16" name="', FILTER_PROPERTY_SEARCH, '" value="', string_html_specialchars( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
+	echo '</label>';
 	echo '</div>';
 	?>
 	<div class="submit-query"><input type="submit" name="filter" value="<?php echo lang_get( 'filter_button' )?>" /></div>
