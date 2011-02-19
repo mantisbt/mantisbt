@@ -1275,7 +1275,6 @@ function mci_iso8601_to_timestamp( $p_date ) {
 
 }
 
-
 /**
  * Returns an array for SOAP encoding from a BugData object
  *
@@ -1356,4 +1355,39 @@ function mci_issue_get_tags_for_bug_id( $p_bug_id, $p_user_id ) {
 	}
 	
 	return $t_result;
+}
+
+/**
+ * Returns an array for SOAP encoding from a BugData object
+ * 
+ * @param BugData $p_issue_data
+ * @return array The issue header data as an array
+ */
+function mci_issue_data_as_header_array( $p_issue_data ) {
+
+		$t_issue = array();
+
+		$t_id = $p_issue_data->id;
+		
+		$t_issue['id'] = $t_id;
+		$t_issue['view_state'] = $p_issue_data->view_state;
+		$t_issue['last_updated'] = timestamp_to_iso8601( $p_issue_data->last_updated );
+
+		$t_issue['project'] = $p_issue_data->project_id;
+		$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
+		$t_issue['priority'] = $p_issue_data->priority;
+		$t_issue['severity'] = $p_issue_data->severity;
+		$t_issue['status'] = $p_issue_data->status;
+
+		$t_issue['reporter'] = $p_issue_data->reporter_id;
+		$t_issue['summary'] = $p_issue_data->summary;
+		if( !empty( $p_issue_data->handler_id ) ) {
+			$t_issue['handler'] = $p_issue_data->handler_id;
+		}
+		$t_issue['resolution'] = $p_issue_data->resolution;
+
+		$t_issue['attachments_count'] = count( mci_issue_get_attachments( $p_issue_data->id ) );
+		$t_issue['notes_count'] = count( mci_issue_get_notes( $p_issue_data->id ) );
+
+		return $t_issue;
 }
