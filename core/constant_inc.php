@@ -500,6 +500,7 @@ define( 'LOG_FILTERING',                4 );  # logging for filtering.
 define( 'LOG_AJAX',                     8 );  # logging for AJAX / XmlHttpRequests
 define( 'LOG_LDAP',                     16 );  # logging for ldap
 define( 'LOG_DATABASE',                 32 );  # logging for ldap
+define( 'LOG_SOAP',                     64 );  # logging for SOAP
 
 # COLUMNS_TARGET_*
 define( 'COLUMNS_TARGET_VIEW_PAGE', 1 );
