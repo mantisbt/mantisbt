@@ -31,6 +31,7 @@ $g_log_levels = array(
 	LOG_AJAX => 'ajax',
 	LOG_LDAP => 'ldap',
 	LOG_DATABASE => 'database',
+	LOG_SOAP => 'soap'
 );
 
 /**
