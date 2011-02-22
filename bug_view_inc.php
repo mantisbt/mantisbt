@@ -527,7 +527,8 @@ if ( $tpl_show_projection || $tpl_show_eta ) {
 # Platform, OS, OS Version
 #
 
-if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) {
+if (( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) &&
+    ( $tpl_platform || $tpl_os || $tpl_os_version )) {
 	$t_spacer = 0;
 
 	echo '<tr ', helper_alternate_class(), '>';
