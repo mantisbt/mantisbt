@@ -175,7 +175,7 @@ if ( $t_read_write_access ) { ?>
 				<span class="select">
 					<select id="config-user-id" name="user_id">
 						<option value="0" selected="selected"><?php echo lang_get( 'all_users' ); ?></option>
-						<?php print_user_option_list( auth_get_current_user_id() ) ?>
+						<?php print_user_option_list( 0 ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
