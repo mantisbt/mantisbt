@@ -91,7 +91,7 @@ function print_config_value_as_string( $p_type, $p_value ) {
 			return;
 		case CONFIG_TYPE_STRING:
 			$t_value = config_eval( $p_value );
-			echo string_nl2br( string_html_specialchars( "'$t_value'" ) );
+			echo string_nl2br( string_html_specialchars( $t_value ) );
 			return;
 		case CONFIG_TYPE_COMPLEX:
 			$t_value = @unserialize( $p_value );
