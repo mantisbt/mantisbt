@@ -25,8 +25,10 @@
  * @ingroup Language
  * @file
  *
+ * @author Tkh
  */
 
+$s_plugin_MantisGraph_font = 'Kirjasin';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Synteesitaulukot tilan mukaan';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Synteesitaulukot prioriteetin mukaan';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Synteesitaulukot vakavuusasteen mukaan';

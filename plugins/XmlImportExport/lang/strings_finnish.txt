@@ -26,8 +26,10 @@
  * @file
  *
  * @author Centerlink
+ * @author Tkh
  */
 
+$s_plugin_XmlImportExport_import = 'Tuo tapahtumia';
 $s_plugin_XmlImportExport_export = 'XML-vienti';
 $s_plugin_XmlImportExport_import_options = 'Tuontivalitsimet';
 $s_plugin_XmlImportExport_cross_references = 'Ristiviitteet';

@@ -836,6 +836,7 @@ $s_project_document_updated = 'Projekti päivitetty onnistuneesti';
 $s_project_user_added_msg = 'Käyttäjä onnistuneesti lisätty tähän projektiin';
 $s_project_removed_user_msg = 'Käyttäjä onnistuneesti poistettu tästä projektista';
 $s_remove_user_sure_msg = 'Oletko varma, että haluat poistaa tämän käyttäjätunnuksen?';
+$s_remove_user_from_project_button = 'Poista käyttäjä projektista %s';
 $s_remove_all_users_sure_msg = 'Oletko varma, että haluat poistaa kaikki käyttäjät tästä projektista?';
 $s_remove_all_users_button = 'Poista kaikki käyttäjät';
 $s_add_user_title = 'Lisää käyttäjä projektiin';

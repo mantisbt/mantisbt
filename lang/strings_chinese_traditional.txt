@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Andrew971218
  * @author Firesueprtom
  * @author Jonathan Tsai, tryweb@ichiayi.com
  * @author Mark85296341
@@ -193,12 +194,13 @@ $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '無法找到這使用者的設定�
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = '新的項目找不到.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '輸入的密碼與圖形中的英數字不符。';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = '預期是陣列但收到的是字串 \"%1$s\"';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '預期是字串但收到的是陣列。';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '預期 %1$s 接收到的是字符串，但實際收到的是數組。';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%1$s的預期數據為數值。';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Bug %1$d 找不到.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = '過濾條件 %1$s 無法找到。';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = '你所要使用的過濾條件版本過舊, 煩請重新建立';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'E-Mail 格式不正確.';
+$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = '不允許使用免費電子郵件地址。';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '找不到個人設定。';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = '上傳檔案的類型不被接受。';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = '這是重複的檔案。請先刪除已重複的檔案。';

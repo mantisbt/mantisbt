@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Hydra
  * @author Kenzaburo Ito, kenito@300baud.org
  */
 
@@ -37,6 +38,7 @@ $s_plugin_XmlImportExport_import_options = '导入选项';
 $s_plugin_XmlImportExport_cross_references = '前后对照';
 $s_plugin_XmlImportExport_default_strategy = '默认转换策略:';
 $s_plugin_XmlImportExport_renumber = '重新编号';
+$s_plugin_XmlImportExport_renumber_desc = '尝试转换到新的编号引用';
 $s_plugin_XmlImportExport_link = '链接';
 $s_plugin_XmlImportExport_link_desc = '转换为原问题的一个链接';
 $s_plugin_XmlImportExport_disable = '禁止';
