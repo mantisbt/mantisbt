@@ -813,7 +813,7 @@ function print_status_option_list( $p_select_label, $p_current_value = 0, $p_all
 		# resort the list into ascending order
 		ksort( $t_enum_list );
 		reset( $t_enum_list );
-		echo '<select ', helper_get_tab_index(), ' name="' . $p_select_label . '">';
+		echo '<select ' . helper_get_tab_index() . ' id="' . $p_select_label . '" name="' . $p_select_label . '">';
 		foreach( $t_enum_list as $key => $val ) {
 			echo '<option value="' . $key . '"';
 			check_selected( $key, $p_current_value );

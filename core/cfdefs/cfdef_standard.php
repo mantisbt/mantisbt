@@ -254,9 +254,9 @@ function cfdef_input_list($p_field_def, $t_custom_field_value) {
 	}
 
 	if ( $p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ) {
-		echo '<select ', helper_get_tab_index(), ' name="custom_field_' . $p_field_def['id'] . '[]" size="' . $t_list_size . '" multiple="multiple">';
+		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '[]" size="' . $t_list_size . '" multiple="multiple">';
 	} else {
-		echo '<select ', helper_get_tab_index(), ' name="custom_field_' . $p_field_def['id'] . '" size="' . $t_list_size . '">';
+		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="' . $t_list_size . '">';
 	}
 
 	$t_selected_values = explode( '|', $t_custom_field_value );
@@ -304,7 +304,7 @@ function cfdef_input_radio( $p_field_def, $p_custom_field_value ) {
 }
 
 function cfdef_input_textbox($p_field_def, $t_custom_field_value) {
-	echo '<input ', helper_get_tab_index(), ' type="text" name="custom_field_' . $p_field_def['id'] . '" size="80"';
+	echo '<input ' . helper_get_tab_index() . ' type="text" id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="80"';
 	if( 0 < $p_field_def['length_max'] ) {
 		echo ' maxlength="' . $p_field_def['length_max'] . '"';
 	} else {
@@ -314,7 +314,7 @@ function cfdef_input_textbox($p_field_def, $t_custom_field_value) {
 }
 
 function cfdef_input_textarea($p_field_def, $t_custom_field_value) {
-	echo '<textarea ', helper_get_tab_index(), ' name="custom_field_' . $p_field_def['id'] . '"';
+	echo '<textarea ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '"';
 	echo ' cols="70" rows="8">' . $t_custom_field_value .'</textarea>';
 }
 
