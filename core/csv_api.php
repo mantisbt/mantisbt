@@ -412,13 +412,3 @@ function csv_format_due_date( $p_due_date ) {
 		$s_date_format = config_get( 'short_date_format' );
 	return csv_escape_string( date( $s_date_format, $p_due_date ) );
 }
-
-/**
- * return the sponsorship total for an issue
- * @param int $p_sponsorship_total
- * @return string
- * @access public
- */
-function csv_format_sponsorship_total( $p_sponsorship_total ) {
-	return number_format( $p_sponsorship_total );
-}
