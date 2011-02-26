@@ -182,7 +182,7 @@ if ( $f_filter === 'ALL' ) {
 	$t_where = db_helper_compare_days("" . db_now() . "","date_created","<= $days_old");
 } else {
 	$c_prefix = db_prepare_string($f_filter);
-	$t_where = "(username like '$c_prefix%')";
+	$t_where = "(UPPER(username) LIKE '$c_prefix%')";
 }
 
 $p_per_page = 50;
