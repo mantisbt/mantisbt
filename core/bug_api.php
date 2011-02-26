@@ -1089,13 +1089,16 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 /**
  * Moves an issue from a project to another.
+ *
  * @todo Validate with sub-project / category inheritance scenarios.
- * @todo Fix #11687: Bugs with attachments that are moved will lose attachments.
  * @param int p_bug_id The bug to be moved.
  * @param int p_target_project_id The target project to move the bug to.
  * @access public
  */
 function bug_move( $p_bug_id, $p_target_project_id ) {
+	// Attempt to move disk based attachments to new project file directory.
+	file_move_bug_attachments( $p_bug_id, $p_target_project_id );
+
 	// Move the issue to the new project.
 	bug_set_field( $p_bug_id, 'project_id', $p_target_project_id );
 

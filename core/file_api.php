@@ -970,3 +970,72 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 			break;
 	}
 }
+
+/**
+ * Move any attachments as needed when a bug is moved from project to project.
+ *
+ * @param int $p_bug_id ID of bug containing attachments to be moved
+ * @param int $p_project_id_to destination project ID for the bug
+ * @return null
+ */
+function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
+	$t_project_id_from = bug_get_field( $p_bug_id, 'project_id' );
+	if ( $t_project_id_from == $p_project_id_to ) {
+		return;
+	}
+
+	$t_method = config_get( 'file_upload_method' );
+	if ( $t_method != DISK ) {
+		return;
+	}
+
+	if ( !file_bug_has_attachments( $p_bug_id ) ) {
+		return;
+	}
+
+	$t_path_from = project_get_field( $t_project_id_from, 'file_path' );
+	if ( is_blank( $t_path_from ) ) {
+		$t_path_from = config_get( 'absolute_path_default_upload_folder', null, null, $t_project_id_from );
+	}
+	file_ensure_valid_upload_path( $t_path_from );
+	$t_path_to = project_get_field( $p_project_id_to, 'file_path' );
+	if ( is_blank( $t_path_to ) ) {
+		$t_path_to = config_get( 'absolute_path_default_upload_folder', null, null, $p_project_id_to );
+	}
+	file_ensure_valid_upload_path( $t_path_to );
+	if ( $t_path_from == $t_path_to ) {
+		return;
+	}
+
+	# Initialize the update query to update a single row
+	$t_bug_file_table = db_get_table( 'bug_file' );
+	$c_bug_id = db_prepare_int( $p_bug_id );
+	$query_disk_attachment_update = "UPDATE $t_bug_file_table
+	                                 SET folder=" . db_param() . "
+	                                 WHERE bug_id=" . db_param() . "
+	                                 AND id =" . db_param();
+
+	$t_attachment_rows = bug_get_attachments( $p_bug_id );
+	$t_attachments_count = count( $t_attachment_rows );
+	for ( $i = 0; $i < $t_attachments_count; $i++ ) {
+		$t_row = $t_attachment_rows[$i];
+		$t_basename = basename( $t_row['diskfile'] );
+
+		$t_disk_file_name_from = file_path_combine( $t_path_from, $t_basename );
+		$t_disk_file_name_to = file_path_combine( $t_path_to, $t_basename );
+
+		if ( !file_exists( $t_disk_file_name_to ) ) {
+			chmod( $t_disk_file_name_from, 0775 );
+			if ( !rename( $t_disk_file_name_from, $t_disk_file_name_to ) ) {
+				if ( !copy( $t_disk_file_name_from, $t_disk_file_name_to ) ) {
+					trigger_error( FILE_MOVE_FAILED, ERROR );
+				}
+				file_delete_local( $t_disk_file_name_from );
+			}
+			chmod( $t_disk_file_name_to, config_get( 'attachments_file_permissions' ) );
+			db_query_bound( $query_disk_attachment_update, Array( db_prepare_string( $t_path_to ), $c_bug_id, db_prepare_int( $t_row['id'] ) ) );
+		} else {
+			trigger_error( ERROR_FILE_DUPLICATE, ERROR );
+		}
+	}
+}
