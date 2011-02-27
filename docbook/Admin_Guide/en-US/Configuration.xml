@@ -2883,25 +2883,38 @@
                 <term>$g_bug_report_page_fields</term>
                 <listitem>
                     <para>
-                        An array of fields to show on the issue view page.  Some of these fields may be
-                        filtered out if their features are disabled or if the user doesn't have access
-                        to view them.  See BUG_FIELD_* in constant_inc.php for all possible values.
+                        An array of optional fields to show on the bug report page.
                     </para>
                     <para>
-                        The following fields can not be included: BUG_FIELD_ID, BUG_FIELD_PROJECT,
-                        BUG_FIELD_DATE_SUBMITTED, BUG_FIELD_LAST_UPDATED, BUG_FIELD_STATUS,
-                        BUG_FIELD_RESOLUTION, BUG_FIELD_TAGS, BUG_FIELD_FIXED_IN_VERSION,
-                        BUG_FIELD_PROJECTION, BUG_FIELD_ETA, BUG_FIELD_REPORTER.
+                        The following optional fields are allowed:
+                        additional_info,
+                        attachments,
+                        category_id,
+                        due_date,
+                        handler,
+                        os,
+                        os_version,
+                        platform,
+                        priority,
+                        product_build,
+                        product_version,
+                        reproducibility,
+                        severity,
+                        steps_to_reproduce,
+                        target_version,
+                        view_state.
                     </para>
                     <para>
-                        The following fields must be included:
-                        BUG_FIELD_CATEGORY, BUG_FIELD_SUMMARY, BUG_FIELD_DESCRIPTION.
+                        The summary and description fields are always shown
+                        and do not need to be listed in this option. Fields
+                        not listed above cannot be shown on the bug report
+                        page. Visibility of custom fields is handled via the
+                        Manage => Manage Custom Fields administrator page.
                     </para>
                     <para>
-                        To overload these settings per project, then the settings must be included in the database through
-                        the generic configuration form.  Note that the array in the database should consistent of the
-                        values of the constants below.  For example, replace BUG_FIELD_CATEGORY with 'category_id'.
-                        See constant_inc.php for the values of the constants.
+                        This setting can be set on a per-project basis by
+                        using the Manage => Manage Configuration
+                        administrator page.
                     </para>
                 </listitem>
             </varlistentry>
@@ -2909,15 +2922,49 @@
                 <term>$g_bug_view_page_fields</term>
                 <listitem>
                     <para>
-                        An array of fields to show on the issue view page.  Some of these fields may be
-                        filtered out if their features are disabled or if the user doesn't have access
-                        to view them.  See BUG_FIELD_* in constant_inc.php for all possible values.
+                        An array of optional fields to show on the bug view page.
                     </para>
                     <para>
-                        To overload this setting per project, then the setting must be included in the database through
-                        the generic configuration form.  Note that the array in the database should consistent of the
-                        values of the constants.  For example, replace BUG_FIELD_CATEGORY with 'category_id'.
-                        See constant_inc.php for the values of the constants.
+                        The following optional fields are allowed:
+                        additional_info,
+                        attachments,
+                        category_id,
+                        date_submitted,
+                        description,
+                        due_date,
+                        eta,
+                        fixed_in_version,
+                        handler,
+                        id,
+                        last_updated,
+                        os,
+                        os_version,
+                        platform,
+                        priority,
+                        product_build,
+                        product_version,
+                        project,
+                        projection,
+                        reporter,
+                        reproducibility,
+                        resolution,
+                        severity,
+                        status,
+                        steps_to_reproduce,
+                        summary,
+                        tags,
+                        target_version,
+                        view_state.
+                    </para>
+                    <para>
+                        Fields not listed above cannot be shown on the bug
+                        view page. Visibility of custom fields is handled via
+                        the Manage => Manage Custom Fields administrator page.
+                    </para>
+                    <para>
+                        This setting can be set on a per-project basis by
+                        using the Manage => Manage Configuration
+                        administrator page.
                     </para>
                 </listitem>
             </varlistentry>
@@ -2925,9 +2972,49 @@
                 <term>$g_bug_print_page_fields</term>
                 <listitem>
                     <para>
-                        An array of fields to show on the issue print page.  Some of these fields may be
-                        filtered out if their features are disabled or if the user doesn't have access
-                        to view them.  See BUG_FIELD_* in constant_inc.php for all possible values.
+                        An array of optional fields to show on the bug print page.
+                    </para>
+                    <para>
+                        The following optional fields are allowed:
+                        additional_info,
+                        attachments,
+                        category_id,
+                        date_submitted,
+                        description,
+                        due_date,
+                        eta,
+                        fixed_in_version,
+                        handler,
+                        id,
+                        last_updated,
+                        os,
+                        os_version,
+                        platform,
+                        priority,
+                        product_build,
+                        product_version,
+                        project,
+                        projection,
+                        reporter,
+                        reproducibility,
+                        resolution,
+                        severity,
+                        status,
+                        steps_to_reproduce,
+                        summary,
+                        tags,
+                        target_version,
+                        view_state.
+                    </para>
+                    <para>
+                        Fields not listed above cannot be shown on the bug
+                        print page. All custom field values are shown on the
+                        bug print page.
+                    </para>
+                    <para>
+                        This setting can be set on a per-project basis by
+                        using the Manage => Manage Configuration
+                        administrator page.
                     </para>
                 </listitem>
             </varlistentry>
@@ -2935,15 +3022,48 @@
                 <term>$g_bug_update_page_fields</term>
                 <listitem>
                     <para>
-                        An array of fields to show on the issue update page.  Some of these fields may be
-                        filtered out if their features are disabled or if the user doesn't have access
-                        to view them.  See BUG_FIELD_* in constant_inc.php for all possible values.
+                        An array of optional fields to show on the bug update page.
                     </para>
                     <para>
-                        To overload this setting per project, then the setting must be included in the database through
-                        the generic configuration form.  Note that the array in the database should consistent of the
-                        values of the constants.  For example, replace BUG_FIELD_CATEGORY with 'category_id'.
-                        See constant_inc.php for the values of the constants.
+                        The following optional fields are allowed:
+                        additional_info,
+                        category_id,
+                        date_submitted,
+                        description,
+                        due_date,
+                        eta,
+                        fixed_in_version,
+                        handler,
+                        id,
+                        last_updated,
+                        os,
+                        os_version,
+                        platform,
+                        priority,
+                        product_build,
+                        product_version,
+                        project,
+                        projection,
+                        reporter,
+                        reproducibility,
+                        resolution,
+                        severity,
+                        status,
+                        steps_to_reproduce,
+                        summary,
+                        target_version,
+                        view_state.
+                    </para>
+                    <para>
+                        Fields not listed above cannot be shown on the bug
+                        update page. Visibility of custom fields is handled
+                        via the Manage => Manage Custom Fields administrator
+                        page.
+                    </para>
+                    <para>
+                        This setting can be set on a per-project basis by
+                        using the Manage => Manage Configuration
+                        administrator page.
                     </para>
                 </listitem>
             </varlistentry>
@@ -2951,15 +3071,54 @@
                 <term>$g_bug_change_status_page_fields</term>
                 <listitem>
                     <para>
-                        An array of fields to show on the issue change status page.  Some of these fields may be
-                        filtered out of their features are disabled or if the user doesn't have access
-                        to view them.  See BUG_FIELD_* in constant_inc.php for all possible values.
+                        An array of optional fields to show on the bug change
+                        status page. This only changes the visibibility of
+                        fields shown below the form used for updating the
+                        status of an issue.
                     </para>
                     <para>
-                        To overload this setting per project, then the setting must be included in the database through
-                        the generic configuration form.  Note that the array in the database should consistent of the
-                        values of the constants.  For example, replace BUG_FIELD_CATEGORY with 'category_id'.
-                        See constant_inc.php for the values of the constants.
+                        The following optional fields are allowed:
+                        additional_info,
+                        attachments,
+                        category_id,
+                        date_submitted,
+                        description,
+                        due_date,
+                        eta,
+                        fixed_in_version,
+                        handler,
+                        id,
+                        last_updated,
+                        os,
+                        os_version,
+                        platform,
+                        priority,
+                        product_build,
+                        product_version,
+                        project,
+                        projection,
+                        reporter,
+                        reproducibility,
+                        resolution,
+                        severity,
+                        status,
+                        steps_to_reproduce,
+                        summary,
+                        tags,
+                        target_version,
+                        view_state.
+                    </para>
+                    <para>
+                        Fields not listed above cannot be shown on the bug
+                        change status page. Visibility of custom fields is
+                        handled via the Manage => Manage Custom Fields
+                        administrator page (use the same settings as the bug
+                        view page).
+                    </para>
+                    <para>
+                        This setting can be set on a per-project basis by
+                        using the Manage => Manage Configuration
+                        administrator page.
                     </para>
                 </listitem>
             </varlistentry>

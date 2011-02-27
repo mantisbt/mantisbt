@@ -2095,196 +2095,351 @@ $g_enable_projection = OFF;
 $g_enable_product_build = OFF;
 
 /**
- * An array of the fields to show on the bug report page.
+ * An array of optional fields to show on the bug report page.
  *
- * The following fields can not be included:
- * id, project, date_submitted,
- * last_updated, status, resolution,
- * tags, fixed_in_version, projection,
- * eta, reporter.
+ * The following optional fields are allowed:
+ *   - additional_info
+ *   - attachments
+ *   - category_id
+ *   - due_date
+ *   - handler
+ *   - os
+ *   - os_version
+ *   - platform
+ *   - priority
+ *   - product_build
+ *   - product_version
+ *   - reproducibility
+ *   - severity
+ *   - steps_to_reproduce
+ *   - target_version
+ *   - view_state
  *
- * The following fields must be included:
- * category_id, summary, description.
+ * The summary and description fields are always shown and do not need to be
+ * listed in this option. Fields not listed above cannot be shown on the bug
+ * report page. Visibility of custom fields is handled via the Manage =>
+ * Manage Custom Fields administrator page.
  *
- * To overload this setting per project, then the settings must be included in
- * the database through the generic configuration form.
+ * This setting can be set on a per-project basis by using the
+ * Manage => Manage Configuration administrator page.
  *
  * @global array $g_bug_report_page_fields
  */
 $g_bug_report_page_fields = array(
+	'additional_info',
+	'attachments',
 	'category_id',
-	'view_state',
+	'due_date',
 	'handler',
-	'priority',
-	'severity',
-	'reproducibility',
-	'platform',
 	'os',
 	'os_version',
-	'product_version',
+	'platform',
+	'priority',
 	'product_build',
-	'target_version',
-	'summary',
-	'description',
-	'additional_info',
+	'product_version',
+	'reproducibility',
+	'severity',
 	'steps_to_reproduce',
-	'attachments',
-	'due_date',
+	'target_version',
+	'view_state',
 );
 
 /**
- * An array of the fields to show on the bug view page.
+ * An array of optional fields to show on the bug view page.
  *
- * To overload this setting per project, then the settings must be included in
- * the database through the generic configuration form.
+ * The following optional fields are allowed:
+ *   - additional_info
+ *   - attachments
+ *   - category_id
+ *   - date_submitted
+ *   - description
+ *   - due_date
+ *   - eta
+ *   - fixed_in_version
+ *   - handler
+ *   - id
+ *   - last_updated
+ *   - os
+ *   - os_version
+ *   - platform
+ *   - priority
+ *   - product_build
+ *   - product_version
+ *   - project
+ *   - projection
+ *   - reporter
+ *   - reproducibility
+ *   - resolution
+ *   - severity
+ *   - status
+ *   - steps_to_reproduce
+ *   - summary
+ *   - tags
+ *   - target_version
+ *   - view_state
+ *
+ * Fields not listed above cannot be shown on the bug view page. Visibility of
+ * custom fields is handled via the Manage => Manage Custom Fields
+ * administrator page.
+ *
+ * This setting can be set on a per-project basis by using the
+ * Manage => Manage Configuration administrator page.
  *
  * @global array $g_bug_view_page_fields
  */
 $g_bug_view_page_fields = array (
-	'id',
-	'project',
+	'additional_info',
+	'attachments',
 	'category_id',
-	'view_state',
 	'date_submitted',
-	'last_updated',
-	'reporter',
-	'handler',
-	'priority',
-	'severity',
-	'reproducibility',
-	'status',
-	'resolution',
-	'projection',
+	'description',
+	'due_date',
 	'eta',
-	'platform',
+	'fixed_in_version',
+	'handler',
+	'id',
+	'last_updated',
 	'os',
 	'os_version',
-	'product_version',
+	'platform',
+	'priority',
 	'product_build',
-	'target_version',
-	'fixed_in_version',
-	'summary',
-	'description',
-	'additional_info',
+	'product_version',
+	'project',
+	'projection',
+	'reporter',
+	'reproducibility',
+	'resolution',
+	'severity',
+	'status',
 	'steps_to_reproduce',
+	'summary',
 	'tags',
-	'attachments',
-	'due_date',
+	'target_version',
+	'view_state',
 );
 
 /**
- * An array of the fields to show on the bug print page.
+ * An array of optional fields to show on the bug print page.
+ *
+ * The following optional fields are allowed:
+ *   - additional_info
+ *   - attachments
+ *   - category_id
+ *   - date_submitted
+ *   - description
+ *   - due_date
+ *   - eta
+ *   - fixed_in_version
+ *   - handler
+ *   - id
+ *   - last_updated
+ *   - os
+ *   - os_version
+ *   - platform
+ *   - priority
+ *   - product_build
+ *   - product_version
+ *   - project
+ *   - projection
+ *   - reporter
+ *   - reproducibility
+ *   - resolution
+ *   - severity
+ *   - status
+ *   - steps_to_reproduce
+ *   - summary
+ *   - tags
+ *   - target_version
+ *   - view_state
+ *
+ * Fields not listed above cannot be shown on the bug print page. All custom
+ * field values are shown on the bug print page.
+ *
+ * This setting can be set on a per-project basis by using the
+ * Manage => Manage Configuration administrator page.
+ *
  * @global array $g_bug_print_page_fields
  */
 $g_bug_print_page_fields = array (
-	'id',
-	'project',
+	'additional_info',
+	'attachments',
 	'category_id',
-	'view_state',
 	'date_submitted',
-	'last_updated',
-	'reporter',
-	'handler',
-	'priority',
-	'severity',
-	'reproducibility',
-	'status',
-	'resolution',
-	'projection',
+	'description',
+	'due_date',
 	'eta',
-	'platform',
+	'fixed_in_version',
+	'handler',
+	'id',
+	'last_updated',
 	'os',
 	'os_version',
-	'product_version',
+	'platform',
+	'priority',
 	'product_build',
-	'target_version',
-	'fixed_in_version',
-	'summary',
-	'description',
-	'additional_info',
+	'product_version',
+	'project',
+	'projection',
+	'reporter',
+	'reproducibility',
+	'resolution',
+	'severity',
+	'status',
 	'steps_to_reproduce',
+	'summary',
 	'tags',
-	'attachments',
-	'due_date',
+	'target_version',
+	'view_state',
 );
 
 /**
- * An array of the fields to show on the bug update page.
+ * An array of optional fields to show on the bug update page.
  *
- * To overload this setting per project, then the settings must be included in
- * the database through the generic configuration form.
+ * The following optional fields are allowed:
+ *   - additional_info
+ *   - category_id
+ *   - date_submitted
+ *   - description
+ *   - due_date
+ *   - eta
+ *   - fixed_in_version
+ *   - handler
+ *   - id
+ *   - last_updated
+ *   - os
+ *   - os_version
+ *   - platform
+ *   - priority
+ *   - product_build
+ *   - product_version
+ *   - project
+ *   - projection
+ *   - reporter
+ *   - reproducibility
+ *   - resolution
+ *   - severity
+ *   - status
+ *   - steps_to_reproduce
+ *   - summary
+ *   - target_version
+ *   - view_state
+ *
+ * Fields not listed above cannot be shown on the bug update page. Visibility
+ * of custom fields is handled via the Manage => Manage Custom Fields
+ * administrator page.
+ *
+ * This setting can be set on a per-project basis by using the
+ * Manage => Manage Configuration administrator page.
  *
  * @global array $g_bug_update_page_fields
  */
 $g_bug_update_page_fields = array (
-	'id',
-	'project',
+	'additional_info',
 	'category_id',
-	'view_state',
 	'date_submitted',
-	'last_updated',
-	'reporter',
-	'handler',
-	'priority',
-	'severity',
-	'reproducibility',
-	'status',
-	'resolution',
-	'projection',
+	'description',
+	'due_date',
 	'eta',
-	'platform',
+	'fixed_in_version',
+	'handler',
+	'id',
+	'last_updated',
 	'os',
 	'os_version',
-	'product_version',
+	'platform',
+	'priority',
 	'product_build',
-	'target_version',
-	'fixed_in_version',
-	'summary',
-	'description',
-	'additional_info',
+	'product_version',
+	'project',
+	'projection',
+	'reporter',
+	'reproducibility',
+	'resolution',
+	'severity',
+	'status',
 	'steps_to_reproduce',
-	'attachments',
-	'due_date',
+	'summary',
+	'target_version',
+	'view_state',
 );
 
 /**
- * An array of the fields to show on the bug change status page.
+ * An array of optional fields to show on the bug change status page. This
+ * only changes the visibibility of fields shown below the form used for
+ * updating the status of an issue.
  *
- * To overload this setting per project, then the settings must be included in
- * the database through the generic configuration form.
+ * The following optional fields are allowed:
+ *   - additional_info
+ *   - attachments
+ *   - category_id
+ *   - date_submitted
+ *   - description
+ *   - due_date
+ *   - eta
+ *   - fixed_in_version
+ *   - handler
+ *   - id
+ *   - last_updated
+ *   - os
+ *   - os_version
+ *   - platform
+ *   - priority
+ *   - product_build
+ *   - product_version
+ *   - project
+ *   - projection
+ *   - reporter
+ *   - reproducibility
+ *   - resolution
+ *   - severity
+ *   - status
+ *   - steps_to_reproduce
+ *   - summary
+ *   - tags
+ *   - target_version
+ *   - view_state
+ *
+ * Fields not listed above cannot be shown on the bug change status page.
+ * Visibility of custom fields is handled via the Manage =>
+ * Manage Custom Fields administrator page (use the same settings as the
+ * bug view page).
+ *
+ * This setting can be set on a per-project basis by using the
+ * Manage => Manage Configuration administrator page.
  *
  * @global array $g_bug_change_status_page_fields
  */
 $g_bug_change_status_page_fields = array (
-	'id',
-	'project',
+	'additional_info',
+	'attachments',
 	'category_id',
-	'view_state',
 	'date_submitted',
-	'last_updated',
-	'reporter',
-	'handler',
-	'priority',
-	'severity',
-	'reproducibility',
-	'status',
-	'resolution',
-	'projection',
+	'description',
+	'due_date',
 	'eta',
-	'platform',
+	'fixed_in_version',
+	'handler',
+	'id',
+	'last_updated',
 	'os',
 	'os_version',
-	'product_version',
+	'platform',
+	'priority',
 	'product_build',
-	'target_version',
-	'fixed_in_version',
-	'summary',
-	'description',
-	'additional_info',
+	'product_version',
+	'project',
+	'projection',
+	'reporter',
+	'reproducibility',
+	'resolution',
+	'severity',
+	'status',
 	'steps_to_reproduce',
+	'summary',
 	'tags',
-	'attachments',
-	'due_date',
+	'target_version',
+	'view_state',
 );
 
 /**************************
