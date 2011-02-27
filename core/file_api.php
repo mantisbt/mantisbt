@@ -158,7 +158,7 @@ function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null 
 function file_get_icon_url( $p_display_filename ) {
 	$t_file_type_icons = config_get( 'file_type_icons' );
 
-	$ext = utf8_strtolower( file_get_extension( $p_display_filename ) );
+	$ext = utf8_strtolower( pathinfo( $p_display_filename, PATHINFO_EXTENSION ) );
 	if( is_blank( $ext ) || !isset( $t_file_type_icons[$ext] ) ) {
 		$ext = '?';
 	}
@@ -313,7 +313,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_attachment['preview'] = false;
 		$t_attachment['type'] = '';
 
-		$t_ext = strtolower( file_get_extension( $t_attachment['display_name'] ) );
+		$t_ext = strtolower( pathinfo( $t_attachment['display_name'], PATHINFO_EXTENSION ) );
 		$t_attachment['alt'] = $t_ext;
 
 		if ( $t_attachment['exists'] && $t_attachment['can_download'] && $t_filesize != 0 && $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) {
@@ -531,7 +531,7 @@ function file_type_check( $p_file_name ) {
 	$t_disallowed_files = config_get( 'disallowed_files' );;
 
 	# grab extension
-	$t_extension = file_get_extension( $p_file_name );
+	$t_extension = pathinfo( $p_file_name, PATHINFO_EXTENSION );
 
 	# check against disallowed files
 	$t_disallowed_arr = explode( ',', $t_disallowed_files );
@@ -847,28 +847,6 @@ function file_ensure_uploaded( $p_file ) {
 	if( !is_readable( $p_file['tmp_name'] ) ) {
 		trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
 	}
-}
-
-# Get extension given the filename or its full path.
-function file_get_extension( $p_filename ) {
-	$t_extension = '';
-	$t_basename = $p_filename;
-	if( utf8_strpos( $t_basename, '/' ) !== false ) {
-		// Note that we can't use end(explode(...)) on a single line because
-		// end() expects a reference to a variable and thus we first need to
-		// copy the result of explode() into a variable that end() can modify.
-		$t_components = explode( '/', $t_basename );
-		$t_basename = end( $t_components );
-	}
-	if( utf8_strpos( $t_basename, '\\' ) !== false ) {
-		$t_components = explode( '\\', $t_basename );
-		$t_basename = end( $t_components );
-	}
-	if( utf8_strpos( $t_basename, '.' ) !== false ) {
-		$t_components = explode( '.', $t_basename );
-		$t_extension = end( $t_components );
-	}
-	return $t_extension;
 }
 
 /**
