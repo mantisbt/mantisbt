@@ -161,16 +161,6 @@
 
     <section id="admin.config.webserver">
         <title>Webserver</title>
-
-        <variablelist>
-            <varlistentry>
-                <term>$g_use_iis</term>
-                <listitem>
-                    <para>Indicates the IIS (Microsoft Internet Information Server) is the web server on which MantisBT is hosted.
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
     </section>
 
     <section id="admin.config.settings">

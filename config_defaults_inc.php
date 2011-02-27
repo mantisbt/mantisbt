@@ -212,19 +212,6 @@ $g_manual_url = 'http://www.mantisbt.org/docs/master-1.2.x/';
  * Web Server *
  **************/
 
-if ( isset( $_SERVER['SERVER_SOFTWARE'] ) ) {
-	// SERVER_SOFTWARE not defined in case of php-cgi.exe
-	$t_use_iis = ( strstr( $_SERVER['SERVER_SOFTWARE'], 'IIS' ) !== false ) ? ON : OFF;
-} else {
-	$t_use_iis = OFF;
-}
-/**
- * Using Microsoft Internet Information Server (IIS)
- * ON or OFF
- * @global int $g_use_iis
- */
- $g_use_iis = $t_use_iis;
-
 /**
  * Session handler.  Possible values:
  *  'php' -> Default PHP filesystem sessions
@@ -4068,7 +4055,6 @@ $g_global_settings = array(
 	'show_detailed_errors',
 	'show_queries_',
 	'stop_on_errors',
-	'use_iis',
 	'use_javascript',
 	'version_suffix',
 	'[^_]file[(_(?!threshold))$]',

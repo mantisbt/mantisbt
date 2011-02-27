@@ -186,17 +186,8 @@ compress_start_handler();
 # they can complete installation and configuration of MantisBT
 if ( false === $t_config_inc_found ) {
 	if ( !( isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], 'admin' ) ) ) ) {
-		if ( OFF == $g_use_iis ) {
-			header( 'Status: 302' );
-		}
 		header( 'Content-Type: text/html' );
-
-		if ( ON == $g_use_iis ) {
-			header( "Refresh: 0;url=admin/install.php" );
-		} else {
-			header( "Location: admin/install.php" );
-		}
-
+		header( "Location: admin/install.php" );
 		exit;
 	}
 }

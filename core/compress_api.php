@@ -47,7 +47,7 @@ $g_compression_started = false;
  * @access public
  */
 function compress_handler_is_enabled() {
-	global $g_compress_html, $g_use_iis;
+	global $g_compress_html;
 
 	// indicates compression should be disabled for a page. Note: php.ini may still enable zlib.output_compression.
 	// it may be possible to turn this off through the use of ini_set within that specific page.
@@ -76,11 +76,6 @@ function compress_handler_is_enabled() {
 			return false;
 		}
 
-		if( OFF == $g_use_iis ) {
-			// disable compression when using IIS because of issue #2953.
-			// For windows compression, use zlib.output_compression in php.ini or a later version of php
-			return false;
-		}
 		// if php.ini does not already use ob_gzhandler by default, return true.
 		return ( 'ob_gzhandler' != ini_get( 'output_handler' ) );
 	}

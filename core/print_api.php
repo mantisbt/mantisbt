@@ -96,8 +96,6 @@ require_api( 'version_api.php' );
 # @param boolean apply string_sanitize_url to passed url
 # @return boolean
 function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute = false ) {
-	$t_use_iis = config_get( 'use_iis' );
-
 	if( ON == config_get_global( 'stop_on_errors' ) && error_handled() ) {
 		return false;
 	}
@@ -122,12 +120,7 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 	# don't send more headers if they have already been sent (guideweb)
 	if( !headers_sent() ) {
 		header( 'Content-Type: text/html; charset=utf-8' );
-
-		if( ON == $t_use_iis ) {
-			header( "Refresh: 0;url=$t_url" );
-		} else {
-			header( "Location: $t_url" );
-		}
+		header( "Location: $t_url" );
 	} else {
 		trigger_error( ERROR_PAGE_REDIRECTION, ERROR );
 		return false;
