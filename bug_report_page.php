@@ -226,7 +226,12 @@ print_recently_visited();
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<th class="category" width="30%">
-			<?php echo config_get( 'allow_no_category' ) ? '' : '<span class="required">*</span><label for="category_id">'; print_documentation_link( 'category' ); echo '</label>' ?>
+			<?php
+			echo config_get( 'allow_no_category' ) ? '' : '<span class="required">*</span>';
+			echo '<label for="category_id">';
+			print_documentation_link( 'category' );
+			echo '</label>';
+			?>
 		</th>
 		<td width="70%">
 			<?php if ( $t_changed_project ) {
