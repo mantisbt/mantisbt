@@ -195,8 +195,8 @@
                         </row>
                         <row>
                             <entry>PHP</entry>
-                            <entry>5.1.2</entry>
-                            <entry>5.2.x</entry>
+                            <entry>5.3.0</entry>
+                            <entry>5.3.x</entry>
                         </row>
                         <row>
                             <entry>Web Server</entry>

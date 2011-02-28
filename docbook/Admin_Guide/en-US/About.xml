@@ -82,8 +82,7 @@
                     <ulink url="http://www.php.net/">PHP</ulink>: The web server
                     must have PHP installed on it.  It can be installed as CGI or
                     whatever other integration technology that is supported by PHP
-                    and the web server.  Required version is PHP 5.1.x or higher.
-                    Recommended version is PHP 5.2.x.
+                    and the web server.  Required version is PHP 5.3.0 or higher.
                 </para>
             </listitem>
             <listitem>
