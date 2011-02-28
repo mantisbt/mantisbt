@@ -310,7 +310,7 @@ function column_get_title( $p_column ) {
  * @access public
  */
 function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns_all ) {
-	$t_columns_all_lower = array_map( 'strtolower', $p_columns_all );
+	$t_columns_all_lower = array_map( 'utf8_strtolower', $p_columns_all );
 
 	# Check for invalid fields
 	foreach( $p_columns_to_validate as $t_column ) {
@@ -346,7 +346,7 @@ function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns
  * @access public
  */
 function columns_remove_invalid( $p_columns, $p_columns_all ) {
-	$t_columns_all_lower = array_values( array_map( 'strtolower', $p_columns_all ) );
+	$t_columns_all_lower = array_values( array_map( 'utf8_strtolower', $p_columns_all ) );
 	$t_columns = array();
 
 	foreach( $p_columns as $t_column ) {
