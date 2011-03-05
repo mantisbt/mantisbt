@@ -378,9 +378,10 @@ if( 2 == $t_install_state ) {
 		print_test_result(( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
 		?>
 </tr>
+<?php
+	}?>
 </table>
 <?php
-	}
 	if( false == $g_failed ) {
 		$t_install_state++;
 	} else {
@@ -1012,7 +1013,7 @@ if( 7 == $t_install_state ) {
 <p><a href="../login_page.php">Continue</a> to log into Mantis</p>
 <?php
 	} else {?>
-<p>Please log in as the administrator and <a href="../manage_proj_create_page.php">create</a> your first project.
+<p>Please log in as the administrator and <a href="../manage_proj_create_page.php">create</a> your first project.</p>
 
 <?php
 	}
