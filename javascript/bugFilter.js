@@ -15,7 +15,8 @@ $(document).ready(function(){
 		}
 	});
 	$.each( form_fields, function (index, value) {
-		serialized_form_fields[value] = $('[name=filters_open]').find('[name=' + value.replace(/[]/g, '\\$1') + ']').serialize();
+		var escaped_field_name = value.replace(/\[\]/g, '\\[\\]');
+		serialized_form_fields[value] = $('[name=filters_open]').find('[name=' + escaped_field_name + ']').serialize();
 	});
 
 	/* Set up events to modify the form css to show when a stored query has been modified */
