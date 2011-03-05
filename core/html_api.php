@@ -151,9 +151,8 @@ function html_rss_link() {
 }
 
 /**
- * Prints a <script> tag to include a javascript file.
- * This includes either minimal or development file from /javascript depending on whether mantis is set for debug/production use
- * @param string $p_filename
+ * Prints a <script> tag to include a JavaScript file.
+ * @param string $p_filename Name of JavaScript file (with extension) to include
  * @return null
  */
 function html_javascript_link( $p_filename) {

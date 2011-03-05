@@ -114,7 +114,6 @@ $t_developer_directories = array(
 	'packages',
 	'scripts',
 	'tests',
-	'javascript' . DIRECTORY_SEPARATOR . 'dev'
 );
 
 foreach( $t_developer_directories as $t_developer_directory ) {
