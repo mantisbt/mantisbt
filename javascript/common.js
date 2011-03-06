@@ -86,10 +86,32 @@ $(document).ready( function() {
 
 	$('input.autofocus:first, select.autofocus:first, textarea.autofocus:first').focus();
 
-	$('input[type=checkbox].check_all').click(function() {
-		var matchingName = $(this).attr('name').replace(/_all$/, '');
-		$(this).closest('form').find('input[type=checkbox][name=' + matchingName + '\[\]]').attr('checked', this.checked);
+	/*
+	 * jQuery bug http://bugs.jquery.com/ticket/4283 prevents the check_all
+	 * functionality from working when the Content-Type is set to
+	 * application/xhtml+xml.
+	 */
+	var checkAllSelectors = '';
+	$(':checkbox.check_all').each(function() {
+		var baseFieldName = $(this).attr('name').replace(/_all$/, '');
+		if (checkAllSelectors.length > 0) {
+			checkAllSelectors += ', ';
+		}
+		checkAllSelectors += ':checkbox[name="' + baseFieldName + '[]"]';
 	});
+	if (checkAllSelectors.length > 0) {
+		$(checkAllSelectors).click(function() {
+			var fieldName = $(this).attr('name').replace(/\[\]/g, '');
+			var checkedCount = $(this).closest('form').find(':checkbox[name="' + fieldName + '[]"]:checked').length;
+			var totalCount = $(this).closest('form').find(':checkbox[name="' + fieldName + '[]"]').length;
+			var allSelected = checkedCount == totalCount;
+			$(this).closest('form').find(':checkbox[name=' + fieldName + '_all]').attr('checked', allSelected);
+		});
+		$(':checkbox.check_all').click(function() {
+			var baseFieldName = $(this).attr('name').replace(/_all$/, '');
+			$(this).closest('form').find(':checkbox[name="' + baseFieldName + '[]"]').attr('checked', $(this).is(':checked'));
+		});
+	}
 
 	var stopwatch = {
 		timerID: null,
