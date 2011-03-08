@@ -1,0 +1,40 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2011  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Turkish (Türkçe)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Korayal
+ */
+
+$s_plugin_format_title = 'MantisBT Biçimlendirme';
+$s_plugin_format_description = 'Resmi metin işleme ve biçimlendirme eklentisi.';
+$s_plugin_format_config = 'Yapılandırma';
+$s_plugin_format_process_text = 'Metin İşleme';
+$s_plugin_format_process_text_warning_notice = 'Gerçekten ne yaptığınızı bilmiyorsanız kapatmayın. Kapalı durumda iken çapraz kod çalıştırma saldırılarına uğrayabilirsiniz ! (cross site scripting (XSS))';
+$s_plugin_format_process_urls = 'URL İşleme';
+$s_plugin_format_process_buglinks = 'MantisBT Bağlantıları (Sorun/Sorun Notu)';
+$s_plugin_format_process_vcslinks = 'VCS Linkleri';
+$s_plugin_format_enabled = 'Açık';
+$s_plugin_format_disabled = 'Kapalı';

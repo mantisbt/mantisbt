@@ -26,6 +26,7 @@
  * @file
  *
  * @author Antanas Vipartas, <antanas.vipartas@gmail.com>
+ * @author Garas
  * @author Vilius Šumskas, vilius@lnk.lt (for Mantis 0.19.0-RC1)
  * @author Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
  */
@@ -278,7 +279,7 @@ $s_projection_enum_string = '10:nėra,30:nežymūs patobulinimai,50:nedideli pak
 $s_eta_enum_string = '10:nėra,20:< 1 diena,30:2-3 dienos,40:< 1 savaitė,50:< 1 mėnuo,60:> 1 mėnuo';
 $s_new_account_subject = 'Vartotojo registracija';
 $s_new_account_greeting = 'Ačiū, kad užsiregistravote. Jūsų vartotojo vardas \'%1$s\'. Norėdami baigti registracijos procedūrą, aplankykite puslapį šiuo adresu (įsitikinkite, kad jis įrašytas vienoje eilutėje) ir įrašykite savo slaptažodį:';
-$s_new_account_username = 'Vartotojo vardas:';
+$s_new_account_username = 'Naudotojo vardas:';
 $s_new_account_message = 'Jeigu jūs nesiregistravote, nekreipkite dėmesio į šį laišką.';
 $s_new_account_do_not_reply = 'NEATSAKINĖKITE Į ŠĮ LAIŠKĄ';
 $s_new_account_email = 'El. pašto adresas:';
@@ -330,7 +331,7 @@ $s_delete_account_button = 'Ištrinti vartotojo vardą';
 $s_manage_profiles_link = 'Aprašymai';
 $s_change_preferences_link = 'Nustatymai';
 $s_edit_account_title = 'Vartotojo vardo redagavimas';
-$s_username = 'Vartotojo vardas';
+$s_username = 'Naudotojo vardas';
 $s_realname = 'Tikras vardas';
 $s_email = 'El. pašto adresas';
 $s_password = 'Slaptažodis';
