@@ -431,7 +431,7 @@ function custom_function_override_enum_mine() {
 </para>
 
 <para>Notice "override" in the function name. This is because this method is
-defined by the MantisBT adminstrator/webmaster and not part of the MantisBT source.
+defined by the MantisBT administrator/webmaster and not part of the MantisBT source.
 It is OK to override a method that doesn't exist.</para>
 
 <para>As usual, when MantisBT is upgraded to future releases, the custom functions
@@ -741,9 +741,9 @@ functions section.</para>
             <title>Custom Functions</title>
 
             <para>Custom functions are used to extend the functionality of
-                MantisBT by integrating user writtenfunctions into the issue
+                MantisBT by integrating user written functions into the issue
                 processing at strategic places. This allows the system
-                administrator to changethe functionality without re-writing parts
+                administrator to change the functionality without re-writing parts
                 of the internals of the code.
             </para>
             <para>User versions of these functions are
@@ -754,12 +754,12 @@ functions section.</para>
                 them instead of the provided default functions.</para>
             <para>Custom functions have
                     names like custom_function_override_descriptive_name where
-                    descriptive namedescribed the particular function. The specific
-                    functions are described below. The simplest way tocreate a custom
+                    descriptive name described the particular function. The specific
+                    functions are described below. The simplest way to create a custom
                     function is to copy the default function, named
                     custom_function_default_descriptive_namefrom the
                     core/custom_function_api.php file to your override file
-                    (custom_functions_inc.php), andrename it. The specific
+                    (custom_functions_inc.php), and rename it. The specific
                     functionality you need can then be coded into the override
                     function.
             </para>

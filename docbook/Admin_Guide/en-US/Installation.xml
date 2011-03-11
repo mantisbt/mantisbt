@@ -37,7 +37,7 @@
 
         <orderedlist>
             <listitem>
-                <para>Tranfer files</para>
+                <para>Transfer files</para>
             </listitem>
             <listitem>
                 <para>Uncompress files</para>
@@ -68,7 +68,7 @@
                 <listitem>
                     <para>First, transfer the file to your webserver using whatever
                         method you likebest (ftp, scp, etc). You will need to telnet/ssh
-                        into the server machine forthe next steps.
+                        into the server machine for the next steps.
                     </para>
                 </listitem>
                 <listitem>
@@ -87,7 +87,7 @@
                 </listitem>
                 <listitem>
                     <para>Next we will create the necessary database tables and a
-                        basic configurationfile.From your web server, access
+                        basic configuration file.  From your web server, access
                         http://yoursite/mantisbt/admin/install.php.  This page will walk through
                         the following steps:
 
@@ -133,8 +133,8 @@
                 </listitem>
                 <listitem>
                     <para>The next part involves configuring the installation to
-                        work with yourspecific setup.Open the file in an editor and add
-                        anyother values that are required. There aremany more that you can
+                        work with your specific setup.  Open the file in an editor and add
+                        any other values that are required. There are many more that you can
                         use to customize your MantisBT installation.
                         See <xref linkend="admin.config" /> for
                         in depth explanations.The file will overwrite the default values
@@ -143,16 +143,16 @@
                         NOTE: check.php sometimes reports the value of
                         register_globalsincorrectly.
                         Create a page with this line in it: &lt;? phpinfo() ?&gt;, save
-                        itwith a .php extension and load it up in your web browser. It
-                        will, among amultitude of other things, have the correct value of
-                        register_globals that youare using.
+                        it with a .php extension and load it up in your web browser. It
+                        will, among a multitude of other things, have the correct value of
+                        register_globals that you are using.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>MantisBT now uses only .php files.If your webserver is
-                        configured for other extensions (.PHP3, .PHTML) then youwill have
-                        to have the administrator add support for .PHP files. This shouldbe
+                        configured for other extensions (.PHP3, .PHTML) then you will have
+                        to have the administrator add support for .PHP files. This should be
                         a trivial modification.Documentation can be found at:
                         http://www.php.net/manual/en/installation.php
                     </para>
@@ -213,7 +213,7 @@
 
             <itemizedlist>
                 <listitem>
-                    <para>Mysqli or PostgreSQL or another vendor specific
+                    <para>MySQL or PostgreSQL or another vendor specific
                     database extension that matches the type of database you
                     are using with MantisBT - mandatory.</para>
                 </listitem>

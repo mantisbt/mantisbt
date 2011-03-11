@@ -170,7 +170,7 @@
             <varlistentry>
                 <term>$g_global_settings</term>
                 <listitem>
-                    <para>This option contains the list of regular expressions that are used to determine if it is allowed for a specific configuraiton option to be saved to or loaded from the database.  Configuration options that matches the regular expressions are considered global only and hence are only configurable via the config_inc.php file and defaulted by config_defaults_inc.php file.</para>
+                    <para>This option contains the list of regular expressions that are used to determine if it is allowed for a specific configuration option to be saved to or loaded from the database.  Configuration options that matches the regular expressions are considered global only and hence are only configurable via the config_inc.php file and defaulted by config_defaults_inc.php file.</para>
                 </listitem>
             </varlistentry>
         </variablelist>
@@ -500,7 +500,7 @@
                 <term>$g_smtp_host</term>
                 <listitem>
                     <para>This option specifies the SMTP server to submit messages to.  The SMTP
-                    server (MTA) then takes on the responsibility of deliverying such messages
+                    server (MTA) then takes on the responsibility of delivering such messages
                     to their final destinations.  To use the local SMTP (if available) set this
                     to 'localhost', otherwise use the fully qualified domain name of the remote
                     SMTP server.  Default value is 'localhost'.
@@ -636,7 +636,7 @@
                     </para>
                 </listitem>
                 <listitem>
-                    <para>the recipient has no email address extered</para>
+                    <para>the recipient has no email address entered</para>
                 </listitem>
             </itemizedlist>
         </para>
@@ -849,7 +849,7 @@
                     <para>In view all bug page, show a clip icon next to bugs that has
                         one or more attachments. The default value is OFF.
                         The reason why this is defaulted to OFF is that it adds an extra
-                        query for every bug dispayed in the list.
+                        query for every bug displayed in the list.
                     </para>
                 </listitem>
             </varlistentry>
@@ -880,7 +880,7 @@
                 <term>$g_show_realname</term>
                 <listitem>
                     <para>This control will replace the user's userid with their
-                        realname. If it is set to ON, and the real name fiels has been
+                        realname. If it is set to ON, and the real name field has been
                         populated, the replacement will occur. It defaults to OFF.
                     </para>
                 </listitem>
@@ -1320,10 +1320,10 @@
             <varlistentry>
                 <term>$g_summary_category_include_project</term>
                 <listitem>
-                    <para>Specifies whether category names should be preceeded by
+                    <para>Specifies whether category names should be preceded by
                         project names (eg: [Project] Category) when the summary page is
                         viewed for all projects. This is useful in the case where category
-                        names are common accross projects. The default is OFF.
+                        names are common across projects. The default is OFF.
                     </para>
                 </listitem>
             </varlistentry>
@@ -1444,7 +1444,7 @@
             <varlistentry>
                 <term>$g_file_upload_method</term>
                 <listitem>
-                    <para>Specify the location for uploading attachements. This can be
+                    <para>Specify the location for uploading attachments. This can be
                         DISK, DATABASE, or FTP. In case of FTP, the files are saved on the
                         webserver (same as disk) as well as on the specified FTP server.
                         Default value is DATABASE.
@@ -1485,7 +1485,7 @@
             <varlistentry>
                 <term>$g_file_upload_ftp_pass</term>
                 <listitem>
-                    <para>Password to use when loggin in to the FTP server.</para>
+                    <para>Password to use when logging in to the FTP server.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
@@ -1612,7 +1612,7 @@
             <varlistentry>
                 <term>$g_bottom_include_page</term>
                 <listitem>
-                    <para>If this page eixsts it will be displayed at the bottom of
+                    <para>If this page exists it will be displayed at the bottom of
                         every page. It makes a good company branding include page.
                     </para>
                 </listitem>
@@ -2669,7 +2669,7 @@
             <varlistentry>
                 <term>$$g_custom_field_edit_after_create</term>
                 <listitem>
-                    <para>This flag determines whether to start editng a custom field
+                    <para>This flag determines whether to start editing a custom field
                         immediately after creating it, or return to the definition list.
                         The default is ON (edit the custom field after creating).
                     </para>
@@ -3062,7 +3062,7 @@
                 <listitem>
                     <para>
                         An array of optional fields to show on the bug change
-                        status page. This only changes the visibibility of
+                        status page. This only changes the visibility of
                         fields shown below the form used for updating the
                         status of an issue.
                     </para>
@@ -3201,7 +3201,7 @@
 					<term>$g_time_tracking_stopwatch</term>
 					<listitem>
 						<para>
-							Instead of a text field turning this option on places a stopwatch on the page with <guibutton>Start/Stop</guibutton> and <guibutton>Reset</guibutton> buttons next to it. You must have $g_use_javascript switched on for this to take effect. A bit gimickie, but who cares.
+							Instead of a text field turning this option on places a stopwatch on the page with <guibutton>Start/Stop</guibutton> and <guibutton>Reset</guibutton> buttons next to it. You must have $g_use_javascript switched on for this to take effect. A bit gimmicky, but who cares.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -3219,7 +3219,7 @@
 					<term>$g_time_tracking_edit_threshold</term>
 					<listitem>
 						<para>
-							Access level required to add/edit time tracking information (If you give a user $g_time_tracking_edit_threshold you must give them $g_time_tracking_view_threshold aswell) - Default DEVELOPER.
+							Access level required to add/edit time tracking information (If you give a user $g_time_tracking_edit_threshold you must give them $g_time_tracking_view_threshold as well) - Default DEVELOPER.
 						</para>
 					</listitem>
 				</varlistentry>

@@ -196,7 +196,7 @@
 
 	<para>The pruning function allows deleting of user accounts for accounts
 	that have been created more than a week ago, and they never logged in.
-	This is particulary useful for users who signed up with an invalid email
+	This is particularly useful for users who signed up with an invalid email
 	or with a typo in their email address address.</para>
 
 	<para>The account pruning can be done by administrators by going to
@@ -237,7 +237,7 @@
 	access levels.  For example, a user may have REPORTER as the global
 	access level, but have a MANAGER access level to a specific project.  Or
 	a user may have MANAGER as the global access level by VIEWER access to
-	a specific project.  Access levels can be overriden for both public and
+	a specific project.  Access levels can be overridden for both public and
 	private projects.  However, overriding access level is not allowed for
 	users with global access ADMINISTRATOR.</para>
 
