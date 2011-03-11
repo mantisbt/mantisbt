@@ -357,7 +357,7 @@
                 <listitem>
                     <para>Associated with each action a list of flags to control who
                         should be notified.The default will be used if the action is not
-                        included in $g_notify_flags orif the flag is not included in the
+                        included in $g_notify_flags or if the flag is not included in the
                         specific action definition. The list of actions include: new,
                         assigned, resolved, bugnote, reopened, closed, deleted,
                         feedback.The default is:

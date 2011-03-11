@@ -101,7 +101,7 @@ event_hook( $events, [$plugin] );
 			<para>
 				Each type of event (and individual events themselves) will use different
 				combinations of parameters and return values, so use of the
-				<link linkend="dev.eventref">Event Reference</link> is reccommended for
+				<link linkend="dev.eventref">Event Reference</link> is recommended for
 				determining the unique needs of each event when signalling and hooking them.
 			</para>
 		</blockquote>
@@ -121,7 +121,7 @@ event_hook( $events, [$plugin] );
 		<para>
 			Each type of event (and individual events themselves) will use different
 			combinations of parameters and return values, so use of the
-			<link linkend="dev.eventref">Event Reference</link> is reccommended for
+			<link linkend="dev.eventref">Event Reference</link> is recommended for
 			determining the unique needs of each event when signalling and hooking them.
 		</para>
 
@@ -154,7 +154,7 @@ event_hook( $events, [$plugin] );
 
 			<para>
 				These events only use the first parameter array, and return values from
-				hooked functions are immediatly sent to the output buffer via 'echo'.
+				hooked functions are immediately sent to the output buffer via 'echo'.
 				Example usage:
 			</para>
 
@@ -165,7 +165,7 @@ event_hook( $events, [$plugin] );
 			<title>EVENT_TYPE_CHAIN</title>
 
 			<para>
-				This event type is designed to allow plugins to succesively alter the
+				This event type is designed to allow plugins to successively alter the
 				parameters given to them, such that the end result returned to the caller
 				is a mutated version of the original parameters.  This is very useful
 				for such things as output markup parsers.
