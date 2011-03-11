@@ -30,7 +30,7 @@
 /**
  * Constant for our minimum required PHP version
  */
-define( 'PHP_MIN_VERSION', '5.3.0' );
+define( 'PHP_MIN_VERSION', '5.3.2' );
 
 # cache array of comparisons
 $g_cached_version = array();
