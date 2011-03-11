@@ -12,7 +12,7 @@
 	    into MantisBT and reports a new issue.</para></listitem>
 	    <listitem><para>SOAP API - Where an application automatically
 	    reports an issue into MantisBT using the SOAP API web services
-	    interfaces.  For example, the nighlty build script can automatically
+	    interfaces.  For example, the nightly build script can automatically
 	    report an issue if the build fails.</para></listitem>
 	    <listitem><para>Email - This is not supported out of the box, but
 	    there are existing MantisBT patches that would listen to emails on

@@ -13,7 +13,7 @@
             remain at the login page. An error message will be displayed.The
             administrator may allow users to sign up for their own accounts. If
             so, a link to Signup for your own account will be available.The
-            administrator may also have annonymous login allowed. Annonymous
+            administrator may also have anonymous login allowed. Anonymous
             users will be logged in under a common account.You will be allowed
             to select a project to work in after logging in. You can make a
             project your default selection from the Select Project screen or
@@ -82,7 +82,9 @@
             filters. Each table row is color coded according to the issue
             status. The colors can be customised through MantisBT
             <link linkend="admin.config">Configuration</link>
-            .Severitiesblock
+
+            Severities
+            block
             - prevents further work/progress from being made
             crash - crashes the application or blocking,
             major - major issue,
@@ -222,7 +224,7 @@
 
         <title>Issue Edit page</title>
 
-        <para>The layout of this page resemples the Simple Issue View
+        <para>The layout of this page resembles the Simple Issue View
             page, but here you can update various issue fields. The Reporter,
             Category, Severity, and Reproducibility fields are editable but
             shouldn't be unless there is a gross mis-categorization.Also
@@ -429,7 +431,7 @@
             </para>
             <para>
                 All fields are compared in length to be greater than or equal to
-                the minimum length, and less than or equal to the manimum length,
+                the minimum length, and less than or equal to the minimum length,
                 unless these values are 0. If the values are 0, the check is
                 skipped. All fields are also compared against the regular
                 expression. If the value matches the expression, then the value is
@@ -947,7 +949,7 @@
                             </para>
                         </listitem>
                         <listitem>
-                            <para>the recipient has no email address extered</para>
+                            <para>the recipient has no email address entered</para>
                         </listitem>
                     </itemizedlist>
                     The matrix on this page selects who will receive messages for each

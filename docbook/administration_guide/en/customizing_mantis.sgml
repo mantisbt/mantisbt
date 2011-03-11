@@ -431,7 +431,7 @@ function custom_function_override_enum_mine() {
 </para>
 
 <para>Notice "override" in the function name. This is because this method is
-defined by the MantisBT adminstrator/webmaster and not part of the MantisBT source.
+defined by the MantisBT administrator/webmaster and not part of the MantisBT source.
 It is OK to override a method that doesn't exist.</para>
 
 <para>As usual, when MantisBT is upgraded to future releases, the custom functions
@@ -806,21 +806,21 @@ $g_status_enum_workflow[CLOSED]       ='20:feedback,50:assigned';
 
                 <para>custom_function_default_changelog_include_issue( $p_issue_id
                     ) returns true or false if the issue if to be included in the
-                    Changelogcustom_function_default_changelog_print_issue( $p_issue_id
+                    Changelog. custom_function_default_changelog_print_issue( $p_issue_id
                     ) returns a formatted string to be included for the issue in the
-                    Changelogcustom_function_default_checkin( $p_issue_id, $p_comment,
+                    Changelog. custom_function_default_issue_update_validate( $p_issue_id,
                     $p_file, $p_new_version ) registers a checkin in source control in
                     MantisBT custom_function_default_issue_update_validate( $p_issue_id,
                     $p_new_bug, $p_bug_note_text ) validate issue field settings before
                     an update occurs. It returns true or fails with an
                     error.custom_function_default_issue_update_notify( $p_issue_id )
                     notify after an issue has been
-                    updatedcustom_function_default_issue_create_validate( $p_new_bug )
+                    updated. custom_function_default_issue_create_validate( $p_new_bug )
                     validate issue field settings before an issue is created. It returns
                     true or fails with an
                     error.custom_function_default_issue_create_notify( $p_issue_id )
                     notify after an issue has been
-                    openedcustom_function_default_issue_delete_validate( $p_issue_id )
+                    opened. custom_function_default_issue_delete_validate( $p_issue_id )
                     validate issue field settings before an issue can be deleted. It
                     returns true or fails with an
                     error.custom_function_default_issue_delete_notify( $p_issue_id )
