@@ -302,7 +302,7 @@
 				<para>
 					This event allows plugins to output HTML code from inside the
 					<literal>&lt;head&gt;</literal> tag, for use with CSS, Javascript, RSS,
-					or any other similary resources.  Note that this event is signaled
+					or any other similar resources.  Note that this event is signaled
 					after all other CSS and Javascript resources are linked by MantisBT.
 				</para>
 
@@ -317,7 +317,7 @@
 			<title>EVENT_LAYOUT_BODY_BEGIN (Output)</title>
 			<blockquote>
 				<para>
-					This event allows plugins to output HTML code immediatly after the
+					This event allows plugins to output HTML code immediately after the
 					<literal>&lt;body&gt;</literal> tag is opened, so that MantisBT may be
 					integrated within another website's template, or other similar use.
 				</para>
@@ -333,7 +333,7 @@
 			<title>EVENT_LAYOUT_PAGE_HEADER (Output)</title>
 			<blockquote>
 				<para>
-					This event allows plugins to output HTML code immediatly after the
+					This event allows plugins to output HTML code immediately after the
 					MantisBT header content, such as the logo image.
 				</para>
 
@@ -395,7 +395,7 @@
 			<title>EVENT_LAYOUT_BODY_END (Output)</title>
 			<blockquote>
 				<para>
-					This event allows plugins to output HTML code immediatly before
+					This event allows plugins to output HTML code immediately before
 					the <literal>&lt;/body&gt;</literal> end tag, to so that MantisBT may be
 					integrated within another website's template, or other similar use.
 				</para>

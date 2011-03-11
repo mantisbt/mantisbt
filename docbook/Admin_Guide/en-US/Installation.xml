@@ -67,7 +67,7 @@
             <orderedlist>
                 <listitem>
                     <para>First, transfer the file to your webserver using whatever
-                        method you likebest (ftp, scp, etc). You will need to telnet/ssh
+                        method you like best (ftp, scp, etc). You will need to telnet/ssh
                         into the server machine for the next steps.
                     </para>
                 </listitem>
@@ -97,10 +97,10 @@
                             </listitem>
                             <listitem>
                                 <para>prompt for the database type and location, and a database
-                                    user/passwordpair. For installion, an administrative user/password
+                                    user/passwordpair. For installation, an administrative user/password
                                     pair can also be provided. The operating user requires SELECT,
                                     INSERT, UPDATE, and DELETE privileges. For installation, INDEX,
-                                    CREATE, ALTER, and DROP privileges arealso required.
+                                    CREATE, ALTER, and DROP privileges are also required.
                                 </para>
                             </listitem>
                             <listitem>
@@ -141,7 +141,7 @@
                         with those necessary for setup.You can load up admin/check.php to
                         see if you set things up correctly.
                         NOTE: check.php sometimes reports the value of
-                        register_globalsincorrectly.
+                        register_globals incorrectly.
                         Create a page with this line in it: &lt;? phpinfo() ?&gt;, save
                         it with a .php extension and load it up in your web browser. It
                         will, among a multitude of other things, have the correct value of

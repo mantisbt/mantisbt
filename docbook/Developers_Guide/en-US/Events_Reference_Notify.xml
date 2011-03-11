@@ -38,9 +38,9 @@
 
 			<blockquote>
 				<para>
-					This event allows a plugin to selectively exclude indivdual users from
+					This event allows a plugin to selectively exclude individual users from
 					the recipient list for a notification.  The event is signalled for every
-					user in the final reicipient list, including recipients added by the
+					user in the final recipient list, including recipients added by the
 					event NOTIFY_USER_INCLUDE as described above.
 				</para>
 

@@ -17,7 +17,7 @@
 		<title>Initial Setup</title>
 
 		<para>
-			There are a few steps the MantisBT team requires of contributers and
+			There are a few steps the MantisBT team requires of contributors and
 			developers when accepting code submissions.  The user needs to configure
 			Git to know their full name (not a screen name) and an email address they
 			can be contacted at (not a throwaway address).
@@ -57,7 +57,7 @@ $ git config --global alias.ci "commit"
 
 		<para>
 			The primary repository for MantisBT is hosted and available in multiple
-			methods depending on user status and intentions.  For most contributers,
+			methods depending on user status and intentions.  For most contributors,
 			the public clone URL is
 			<ulink url="git://mantisbt.org/mantisbt.git">git://mantisbt.org/mantisbt.git</ulink>.
 			To clone the repository, perform the following from your target workspace:
@@ -83,7 +83,7 @@ $ git clone git@mantisbt.org:mantisbt.git
 			After performing the cloning operation, you should end up with a new
 			directory in your workspace, <filename>mantisbt/</filename>.  By default,
 			it will only track code from the primary remote branch, <literal>master</literal>,
-			which is the latest development version of MantisBT.  For contributers
+			which is the latest development version of MantisBT.  For contributors
 			planning to work with stable release branches, or other development
 			branches, you will need to set up local tracking branches in your
 			repository.  The following commands will set up a tracking branch for the
@@ -255,7 +255,7 @@ $ phing test
 				to point to your local installation.</para></listitem>
 				<listitem><para>Customize the <literal>config_inc.php</literal>
 				to enable all the features tested using the SOAP tests. The
-				simplest way to do that is to run all the tests once and ajust it
+				simplest way to do that is to run all the tests once and adjust it
 				based on the skipped tests.</para></listitem>
 			</itemizedlist>
 
@@ -286,7 +286,7 @@ $ phing test
 		<para>
 			Using a public repository to host your changes is marginally more complicated
 			than submitting a formatted patch, but is more versatile.  It allows you to
-			keep your changesets up to date with the offiicial development repository,
+			keep your changesets up to date with the official development repository,
 			and it lets anyone stay up to date with your repository, without needing to
 			constantly upload and download new formatted patches whenever you change
 			anything.  There is no need for a special server, as free hosting for public
