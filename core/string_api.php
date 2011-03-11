@@ -584,10 +584,11 @@ function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info 
 		$t_link .= string_get_bug_view_url( $p_bug_id, $p_user_id ) . '"';
 		if( $p_detail_info ) {
 			$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
-			$t_status = string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ) ) );
+            $t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+            $t_status = string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ), $t_project_id ) );
 			$t_link .= ' title="[' . $t_status . '] ' . $t_summary . '"';
 
-			$t_resolved = bug_get_field( $p_bug_id, 'status' ) >= config_get( 'bug_resolved_status_threshold' );
+			$t_resolved = bug_get_field( $p_bug_id, 'status' ) >= config_get( 'bug_resolved_status_threshold', null, null, $t_project_id );
 			if( $t_resolved ) {
 				$t_link .= ' class="resolved"';
 			}
