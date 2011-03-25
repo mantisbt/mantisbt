@@ -150,6 +150,9 @@ function http_security_headers() {
 			}
 		}
 		header( "X-Content-Security-Policy: allow 'self';$t_avatar_img_allow; frame-ancestors 'none'" );
+		if ( isset( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+			header( 'Strict-Transport-Security: max-age=7776000' );
+		}
 	}
 }
 
