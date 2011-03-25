@@ -201,7 +201,7 @@ if ( $t_force_pw_reset ) {
 			<?php
 			$t_projects = user_get_assigned_projects( auth_get_current_user_id() );
 			if( count( $t_projects ) > 0 ) {
-				echo '<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">';
+				echo '<div class="field-container ' . helper_alternate_class_no_attribute() . '">';
 				echo '<span class="display-label"><span>' . lang_get( 'assigned_projects' ) . '</span></span>';
 				echo '<div class="input">';
 				echo '<ul class="project-list">';
