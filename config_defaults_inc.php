@@ -1750,6 +1750,13 @@ $g_hr_width = 50;
  **************************/
 
 /**
+ * The LDAP server must be provided as an URI, e.g.
+ * ldaps://ldap.example.com:636/
+ *
+ * - The protocol is optional, and defaults to ldap
+ * - The port is optional, and defaults to 389. If this doesn't work, try one
+ *   of the following standard port numbers: 636 (ldaps); for Active Directory
+ *   Global Catalog forest-wide search, use 3268 (ldap) or 3269 (ldaps)
  *
  * @global string $g_ldap_server
  */
@@ -1768,6 +1775,7 @@ $g_ldap_root_dn = 'dc=example,dc=com,dc=au';
 $g_ldap_organization = '';
 
 /**
+ * The LDAP field for username
  * Use 'sAMAccountName' for Active Directory
  * @global string $g_ldap_uid_field
  */
@@ -1780,7 +1788,8 @@ $g_ldap_uid_field = 'uid';
 $g_ldap_realname_field = 'cn';
 
 /**
- * The distinguished of the user account to use for binding to the LDAP server.
+ * The distinguished name of the service account to use for binding to the
+ * LDAP server.
  * For example, 'CN=ldap,OU=Administrators,DC=example,DC=com'.
  *
  * @global string $g_ldap_bind_dn
@@ -1808,8 +1817,8 @@ $g_use_ldap_email = OFF;
 $g_use_ldap_realname = OFF;
 
 /**
- * The LDAP Protocol Version, if 0, then the protocol version is not set.  For
- * Active Directory use version 3.
+ * The LDAP Protocol Version, if 0, then the protocol version is not set.
+ * For Active Directory use version 3.
  *
  * @global int $g_ldap_protocol_version
  */
