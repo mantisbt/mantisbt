@@ -798,18 +798,6 @@ $g_logo_image = 'images/mantis_logo.gif';
 $g_logo_url = '%default_home_page%';
 
 /**
- * Re-authentication required for admin areas
- * @global int $g_reauthentication
- */
-$g_reauthentication = ON;
-
-/**
- *
- * @global int $g_reauthentication_expiry
- */
-$g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
-
-/**
  * Specifies whether to enable support for project documents or not.
  * This feature is deprecated and is expected to be moved to a plugin
  * in the future.
@@ -1745,76 +1733,62 @@ $g_hr_size = 1;
  */
 $g_hr_width = 50;
 
-/**************************
- * MantisBT LDAP Settings *
- **************************/
+/*********************************************
+ * MantisBT Authentication and LDAP Settings *
+ *********************************************/
 
 /**
- * The LDAP server must be provided as an URI, e.g.
- * ldaps://ldap.example.com:636/
+ * Login authentication method. Must be one of
+ * MD5, LDAP, BASIC_AUTH or HTTP_AUTH. You can simply change this at
+ * will. MantisBT will try to figure out how the passwords were encrypted.
+ * @global int $g_login_method
+ */
+$g_login_method = MD5;
+
+/**
+ * Re-authentication required for admin areas
+ * @global int $g_reauthentication
+ */
+$g_reauthentication = ON;
+
+/**
+ * Duration of the reauthentication timeout, in seconds
+ * @global int $g_reauthentication_expiry
+ */
+$g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
+
+
+/**
+ * Specifies the LDAP or Active Directory server to connect to, and must be
+ * provided as an URI
+ * - Protocol is optional, can be one of ldap or ldaps, defaults to ldap
+ * - Port number is optional, and defaults to 389. If this doesn't work, try
+ *   using one of the following standard port numbers: 636 (ldaps); for Active
+ *   Directory Global Catalog forest-wide search, use 3268 (ldap) or 3269 (ldaps)
  *
- * - The protocol is optional, and defaults to ldap
- * - The port is optional, and defaults to 389. If this doesn't work, try one
- *   of the following standard port numbers: 636 (ldaps); for Active Directory
- *   Global Catalog forest-wide search, use 3268 (ldap) or 3269 (ldaps)
+ * Examples of valid URI:
+ *
+ *   ldap.example.com
+ *   ldap.example.com:3268
+ *   ldap://ldap.example.com/
+ *   ldaps://ldap.example.com:3269/
  *
  * @global string $g_ldap_server
  */
-$g_ldap_server = 'ldaps://ldap.example.com.au/';
+$g_ldap_server = 'ldaps://ldap.example.com/';
 
 /**
- *
+ * The root distinguished name for LDAP searches
  * @global string $g_ldap_root_dn
  */
-$g_ldap_root_dn = 'dc=example,dc=com,dc=au';
+$g_ldap_root_dn = 'dc=example,dc=com';
 
 /**
+ * LDAP search filter for the organization
  * e.g. '(organizationname=*Traffic)'
  * @global string $g_ldap_organization
  */
 $g_ldap_organization = '';
-
-/**
- * The LDAP field for username
- * Use 'sAMAccountName' for Active Directory
- * @global string $g_ldap_uid_field
- */
-$g_ldap_uid_field = 'uid';
-
-/**
- * The LDAP field for real name (i.e. common name).
- * @global string $g_ldap_uid_field
- */
-$g_ldap_realname_field = 'cn';
-
-/**
- * The distinguished name of the service account to use for binding to the
- * LDAP server.
- * For example, 'CN=ldap,OU=Administrators,DC=example,DC=com'.
- *
- * @global string $g_ldap_bind_dn
- */
-$g_ldap_bind_dn = '';
-
-/**
- * The password for the service account to be used for connecting to the LDAP server.
- *
- * @global string $g_ldap_bind_passwd
- */
-$g_ldap_bind_passwd = '';
-
-/**
- * Should we send to the LDAP email address or what MySql tells us
- * @global int $g_use_ldap_email
- */
-$g_use_ldap_email = OFF;
-
-/**
- * Whether or not to pull the real name from LDAP.
- * ON from LDAP, OFF from database.
- * @global int $g_use_ldap_realname
- */
-$g_use_ldap_realname = OFF;
 
 /**
  * The LDAP Protocol Version, if 0, then the protocol version is not set.
@@ -1834,10 +1808,62 @@ $g_ldap_protocol_version = 0;
 $g_ldap_follow_referrals = ON;
 
 /**
- * For development purposes, this is a configuration option that allows
- * replacing the LDAP communication with a comma separated text file.  The text
- * file has a line per user. Each line includes: user name, user real name,
- * email, password.  For production systems this option should be set to ''.
+ * The distinguished name of the service account to use for binding to the
+ * LDAP server.
+ * For example, 'CN=ldap,OU=Administrators,DC=example,DC=com'.
+ *
+ * @global string $g_ldap_bind_dn
+ */
+$g_ldap_bind_dn = '';
+
+/**
+ * The password for the service account used to establish the connection to
+ * the LDAP server.
+ *
+ * @global string $g_ldap_bind_passwd
+ */
+$g_ldap_bind_passwd = '';
+
+/**
+ * The LDAP field for username
+ * Use 'sAMAccountName' for Active Directory
+ * @global string $g_ldap_uid_field
+ */
+$g_ldap_uid_field = 'uid';
+
+/**
+ * The LDAP field for the user's real name (i.e. common name).
+ * @global string $g_ldap_uid_field
+ */
+$g_ldap_realname_field = 'cn';
+
+/**
+ * Use the realname specified in LDAP (ON) rather than the one stored in the
+ * database (OFF).
+ * @global int $g_use_ldap_realname
+ */
+$g_use_ldap_realname = OFF;
+
+/**
+ * Use the email address specified in LDAP (ON) rather than the one stored
+ * in the database (OFF).
+ * @global int $g_use_ldap_email
+ */
+$g_use_ldap_email = OFF;
+
+/**
+ * This configuration option allows replacing the ldap server with a comma-
+ * delimited text file for development or testing purposes.
+ * The LDAP simulation file format is as follows:
+ *   - One line per user
+ *   - Each line has 4 comma-delimited fields
+ *        - username,
+ *        - realname,
+ *        - e-mail,
+ *        - password
+ *   - Any extra fields are ignored
+ * On production systems, this option should be set to ''.
+ * @global int $g_ldap_simulation_file_path
  */
 $g_ldap_simulation_file_path = '';
 
@@ -2787,14 +2813,6 @@ $g_bugnote_user_change_view_state_threshold = '%change_view_status_threshold%';
  * @global int $g_allow_no_category
  */
 $g_allow_no_category = OFF;
-
-/**
- * login method
- * CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH. You can simply change this at
- * will. MantisBT will try to figure out how the passwords were encrypted.
- * @global int $g_login_method
- */
-$g_login_method = MD5;
 
 /**
  * limit reporters. Set to ON if you wish to limit reporters to only viewing
