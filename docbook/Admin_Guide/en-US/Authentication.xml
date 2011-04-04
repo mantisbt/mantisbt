@@ -10,19 +10,22 @@
 
     <para>Although MantisBT supports multiple authentication techniques, it is important to note that MantisBT doesn't yet support hybrid authentication scenarios.  For example, internal staff authentications against LDAP where customer authentications against MantisBT database.</para>
 
+    <para>See $g_login_method in <xref linkend="admin.config.auth.global" />
+    for more details about how to configure MantisBT to use one of these
+    authentication techniques.</para>
+
     <section id="admin.auth.standard">
         <title>Standard Authentication</title>
 
         <para>Standard, or native, authentication is where MantisBT users are authenticated against user records in the MantisBT database.  The passwords are stored in the database in one of several formats:
             <itemizedlist>
+                <listitem><para>MD5 - This is default and recommended approach.  See <ulink url="http://en.wikipedia.org/wiki/MD5">MD5 topic on Wikipedia</ulink> for more details.</para></listitem>
                 <listitem><para>CRYPT - deprecated.</para></listitem>
                 <listitem><para>CRYPT_FULL_SALT - deprecated.</para></listitem>
                 <listitem><para>PLAIN - deprecated.</para></listitem>
-                <listitem><para>MD5 - This is default and recommended approach.  See <ulink url="http://en.wikipedia.org/wiki/MD5">MD5 topic on Wikipedia</ulink> for more details.</para></listitem>
             </itemizedlist>
         </para>
 
-        <para>See $g_login_methods for more details about how to configure MantisBT to use one of the above authentication techniques.</para>
     </section>
 
     <section id="admin.auth.http">
@@ -38,7 +41,7 @@
     </section>
 
     <section id="admin.auth.ldap">
-        <title>LDAP</title>
+        <title>LDAP and Microsoft Active Directory</title>
 
         <para>Functionality is provided by using the php-ldap module
             (/usr/lib/php4/ldap.so). An extra login method is defined within
@@ -73,8 +76,8 @@
                 </para>
             </formalpara>
 
-            <para>Also setup the LDAP parameters explained in 
-                <xref linkend="admin.config.auth" />.
+            <para>Also setup the LDAP parameters as explained in
+                <xref linkend="admin.config.auth.ldap" />.
                 Don't forget to change your $g_login_method to LDAP.
             </para>
 
@@ -90,9 +93,4 @@
 
         </section>
 
-        <section id="admin.auth.msad">
-            <title>Microsoft Active Directory</title>
-
-            <para>TODO</para>
-        </section>
 </chapter>
