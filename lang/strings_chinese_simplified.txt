@@ -551,6 +551,7 @@ $s_click_to_login = '登录';
 $s_warning_plain_password_authentication = '<strong>警告：</strong>身份验证使用了明文方式，您的密码对于管理员是可见的。';
 $s_warning_default_administrator_account_present = '<strong>警告:</strong>建议禁止缺省管理员帐号或修改该账号密码';
 $s_warning_admin_directory_present = '<strong>警告：</strong>Admin 目录应该被删除。';
+$s_error_code_version_out_of_date = '<strong>警告：</strong>更多最新安装的代码比数据库结构。请升级代码。';
 $s_login_page_info = '欢迎访问问题跟踪管理系统';
 $s_login_title = '登录';
 $s_save_login = '在此浏览器上保留我的登录信息';

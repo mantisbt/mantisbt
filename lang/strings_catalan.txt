@@ -29,6 +29,7 @@
  * @author Bernat Pegueroles - bpf@pegueroles.com
  * @author Martorell
  * @author Paucabot
+ * @author SMP
  * @author Solde
  * @author Ssola
  * @author Toniher
@@ -835,6 +836,7 @@ $s_project_document_updated = 'Projecte actualitzat';
 $s_project_user_added_msg = 'Usuari agregat al projecte';
 $s_project_removed_user_msg = 'Usuari eliminat del projecte';
 $s_remove_user_sure_msg = 'Està segur que desitja eliminar aquest usuari?';
+$s_remove_user_from_project_button = 'Treure usuari del projecte %s';
 $s_remove_all_users_sure_msg = 'Està segur que vol eliminar tots els usuaris d\'aquest projecte?';
 $s_remove_all_users_button = 'Elimina Tots els Usuaris';
 $s_add_user_title = 'Afegeix un usuari al projecte';
@@ -1008,7 +1010,7 @@ $s_custom_field_type_enum_string = '0:Cadena,1:Numèric,2:Flotant,3:Enumeració,
 $s_confirm_used_custom_field_deletion = 'Aquest camp està enllaçat al menys a un projecte.  Si continua tots els valors per a aquest camp seran esborrats permanentment.  Aquesta acció no pot desfer-se. Si no desitja eliminar el camp, faci clic sobre el botó Enrere del seu navegador.  Per a procedir, faci clic sobre el botó que hi ha sota';
 $s_confirm_custom_field_deletion = 'Està segur que desitja eliminar aquest camp personalitzat i tots els valors associats?';
 $s_field_delete_button = 'Elimina camp';
-$s_confirm_custom_field_unlinking = 'Està segur que vol desenllaçar aquest camp personalitzat del projecte i eliminar tots els valors associats?';
+$s_confirm_custom_field_unlinking = 'Esteu segurs de voler desenllaçar aquest camp personalitzat del projecte? Els valors associats no seran esborrats mentre el camp personalitzat en si no sigui esborrat?';
 $s_field_remove_button = 'Elimina camp';
 $s_hide_status = 'Amagar amb Estat';
 $s_filter_closed = 'Tancat';
