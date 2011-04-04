@@ -198,15 +198,15 @@ function log_print_to_page() {
 		# output any summary data
 		if ( $t_unique_queries_count != 0 ) {
 			$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
-			echo "\t\t<tr><td>" . $g_log_levels[LOG_DATABASE] . "</td><td> <td colspan=3>" . $t_unique_queries_executed . "</td></tr>\n";
+			echo "\t\t<tr><td>" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3">' . $t_unique_queries_executed . "</td></tr>\n";
 		}
 		if ( $t_total_queries_count != 0 ) {
 			$t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
-			echo "\t\t<tr><td>" . $g_log_levels[LOG_DATABASE] . "</td><td> <td colspan=3>" . $t_total_queries_executed . "</td></tr>\n";
+			echo "\t\t<tr><td>" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3">' . $t_total_queries_executed . "</td></tr>\n";
 		}
 		if ( $t_total_query_execution_time != 0 ) {
 			$t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
-			echo "\t\t<tr><td>" . $g_log_levels[LOG_DATABASE] . "</td><td> <td colspan=3>" . $t_total_query_time . "</td></tr>\n";
+			echo "\t\t<tr><td>" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3">' . $t_total_query_time . "</td></tr>\n";
 		}
 		echo "\t</tbody>\n\t</table>\n";
 	}
