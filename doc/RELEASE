@@ -1,6 +1,20 @@
 MantisBT Release Notes
 
-1.2.4 Security Release
+
+1.2.5 Maintenance Release (pending release)
+-------------------------------------------------
+
+MantisBT 1.2.5 is a maintenance update for the stable 1.2.x branch. It is
+recommended that all MantisBT users (including those still using 1.1.x or
+earlier versions) upgrade to this latest release.
+
+This release brings improved translations in many languages as well as
+numerous bug fixes across a range of MantisBT features.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
+1.2.4 Security Release (2010-12-15)
 -------------------------------------------------
 
 MantisBT 1.2.4 is a security update for the stable 1.2.x branch. All
@@ -24,7 +38,7 @@ many languages and improved installation documentation in doc/INSTALL.
 A full changelog for the 1.2.x series can be found on the official site. [1]
 
 
-1.2.3 Security Release
+1.2.3 Security Release (2010-09-14)
 -------------------------------------------------
 
 MantisBT 1.2.3 is a security update for the stable 1.2.x branch. All
@@ -43,7 +57,7 @@ plugin system, and email notifications.
 A full changelog for the 1.2.x series can be found on the official site. [1]
 
 
-1.2.2 Security Release
+1.2.2 Security Release (2010-07-29)
 -------------------------------------------------
 
 MantisBT 1.2.2 is a security update for the stable 1.2.x branch. All
@@ -61,7 +75,7 @@ and bug fixes, including multiple SOAP API-related bugs and regressions.
 A full changelog for the 1.2.x series can be found on the official site. [1]
 
 
-1.2.1 Maintenance Release
+1.2.1 Maintenance Release (2010-04-23)
 -------------------------------------------------
 
 MantisBT 1.2.1 is a maintenance update for the stable 1.2.x branch. All
@@ -76,7 +90,7 @@ detection, and updates to the plugin event system.
 A full changelog for the 1.2.x series can be found on the official site. [1]
 
 
-1.2.0 Stable Release
+1.2.0 Stable Release (2010-02-22)
 -------------------------------------------------
 
 This release marks the first official release in the 1.2.x series of MantisBT.
@@ -137,6 +151,7 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
+	1.2.5      http://www.mantisbt.org/bugs/changelog_page.php?version_id=113
 	1.2.4      http://www.mantisbt.org/bugs/changelog_page.php?version_id=112
 	1.2.3      http://www.mantisbt.org/bugs/changelog_page.php?version_id=111
 	1.2.2      http://www.mantisbt.org/bugs/changelog_page.php?version_id=110
