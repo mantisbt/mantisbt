@@ -237,7 +237,7 @@ if ( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get
 		<?php print_documentation_link( 'due_date' ) ?>
 	</th>
 	<td>
-		<?php echo "<input " . helper_get_tab_index() . " type=\"text\" id=\"due_date\" name=\"due_date\" class=\"datetime\" size=\"20\" maxlength=\"10\" value=\"" . $t_date_to_display . "\" />" ?>
+		<?php echo "<input " . helper_get_tab_index() . " type=\"text\" id=\"due_date\" name=\"due_date\" class=\"datetime\" size=\"20\" maxlength=\"16\" value=\"" . $t_date_to_display . "\" />" ?>
 	</td>
 </tr>
 <?php } ?>

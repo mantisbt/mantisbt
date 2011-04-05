@@ -316,7 +316,7 @@ if ( $tpl_show_handler || $tpl_show_due_date ) {
 			if ( !date_is_null( $tpl_bug->due_date ) ) {
 				$t_date_to_display = date( config_get( 'calendar_date_format' ), $tpl_bug->due_date );
 			}
-			echo "<input " . helper_get_tab_index() . " type=\"text\" id=\"due_date\" name=\"due_date\" class=\"datetime\" size=\"20\" maxlength=\"10\" value=\"" . $t_date_to_display . "\" />";
+			echo "<input " . helper_get_tab_index() . " type=\"text\" id=\"due_date\" name=\"due_date\" class=\"datetime\" size=\"20\" maxlength=\"16\" value=\"" . $t_date_to_display . "\" />";
 		} else {
 			if ( !date_is_null( $tpl_bug->due_date ) ) {
 				echo date( config_get( 'short_date_format' ), $tpl_bug->due_date  );
