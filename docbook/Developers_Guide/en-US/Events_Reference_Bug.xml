@@ -213,13 +213,12 @@
 
 				<itemizedlist>
 					<title>Parameters</title>
-					<listitem><para>&lt;Complex&gt;: Original bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
 					<listitem><para>&lt;Complex&gt;: Updated bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>&lt;Complex&gt;: Original bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
 				</itemizedlist>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>&lt;Complex&gt;: Original bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
 					<listitem><para>&lt;Complex&gt;: Updated bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
 				</itemizedlist>
 			</blockquote>
