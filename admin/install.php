@@ -409,39 +409,39 @@ if( 1 == $t_install_state ) {
 		<select name="db_type">
 		<?php
 			if( $f_db_type == 'mysql' ) {
-			echo '<option value="mysql" selected="selected">MySql (default)</option>';
+			echo '<option value="mysql" selected="selected">MySQL (default)</option>';
 		} else {
-			echo '<option value="mysql">MySql (default)</option>';
+			echo '<option value="mysql">MySQL (default)</option>';
 		}
 
 		if( $f_db_type == 'mysqli' ) {
-			echo '<option value="mysqli" selected="selected">MySqli</option>';
+			echo '<option value="mysqli" selected="selected">MySQLi</option>';
 		} else {
-			echo '<option value="mysqli">MySqli</option>';
+			echo '<option value="mysqli">MySQLi</option>';
 		}
 
 		if( $f_db_type == 'mssql' ) {
-			echo '<option value="mssql" selected="selected">Microsoft SQL Server (experimental)</option>';
+			echo '<option value="mssql" selected="selected">Microsoft SQL Server</option>';
 		} else {
-			echo '<option value="mssql">Microsoft SQL Server (experimental)</option>';
+			echo '<option value="mssql">Microsoft SQL Server</option>';
 		}
 
 		if( $f_db_type == 'pgsql' ) {
-			echo '<option value="pgsql" selected="selected">PGSQL (experimental)</option>';
+			echo '<option value="pgsql" selected="selected">PostgreSQL</option>';
 		} else {
-			echo '<option value="pgsql">PGSQL (experimental)</option>';
+			echo '<option value="pgsql">PostgreSQL</option>';
 		}
 
 		if( $f_db_type == 'oci8' ) {
-			echo '<option value="oci8" selected="selected">Oracle - oci8 (Experimental)</option>';
+			echo '<option value="oci8" selected="selected">Oracle</option>';
 		} else {
-			echo '<option value="oci8">Oracle - oci8 (Experimental)</option>';
+			echo '<option value="oci8">Oracle</option>';
 		}
 
 		if( $f_db_type == 'db2' ) {
-			echo '<option value="db2" selected="selected">db2/400 (experimental)</option>';
+			echo '<option value="db2" selected="selected">IBM DB2</option>';
 		} else {
-			echo '<option value="db2">db2/400 (experimental)</option>';
+			echo '<option value="db2">IBM DB2</option>';
 		}
 		?>
 		</select>
