@@ -608,42 +608,8 @@ if( 3 == $t_install_state ) {
 		?>
 </tr>
 <?php
-	if( $t_db_open ) {
-			?>
-<!-- display database version -->
-<tr>
-	<td bgcolor="#ffffff">
-		Checking Database Server Version
-		<?php
-			# due to a bug in ADODB, this call prompts warnings, hence the @
-			$t_version_info = @$g_db->ServerInfo();
-			echo '<br /> Running ' . $f_db_type . ' version ' . $t_version_info['description'];
-			?>
-	</td>
-	<?php
-		$t_warning = '';
-			$t_error = '';
-			switch( $f_db_type ) {
-				case 'mysql':
-				case 'mysqli':
-					if( version_compare( $t_version_info['version'], '4.1.0', '<' ) ) {
-						$t_error = 'MySQL 4.1.0 or later is required for installation.';
-					}
-					break;
-				case 'pgsql':
-				case 'mssql':
-				case 'db2':
-				default:
-					break;
-			}
-
-			print_test_result(( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
-			?>
-</tr>
-<?php
-		}
-		$g_db->Close();
-		?>
+	$g_db->Close();
+?>
 <tr>
 	<td bgcolor="#ffffff">
 		Attempting to connect to database as user
