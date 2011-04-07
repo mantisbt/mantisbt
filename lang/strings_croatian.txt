@@ -127,7 +127,6 @@ $s_messages = array(
 	'profile_updated_msg' => 'Profil ažuriran...',
 	'account_updated_msg' => 'Vaš korisnički račun je uspješno ažuriran...',
 	'email_updated' => 'Email address successfully updated',
-	'bug_assign_msg' => 'Bug je uspješno dodijeljen...',
 	'feedback_bug_title' => 'Provide Feedback to Issue',
 	'feedback_bug_button' => 'Provide Feedback',
 	'bug_close_msg' => 'Bug je zatvoren...',

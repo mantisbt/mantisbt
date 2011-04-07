@@ -299,7 +299,6 @@ $s_messages = array(
 	'realname_updated' => '真实姓名已经成功修改',
 	'password_updated' => '密码更新成功',
 	'multiple_projects' => '你选择的问题时从属于多个不同的项目，下面的参数将影响所有的项目。如果这不是你所预期的结果，请少选择一些问题，重试你的修改。',
-	'bug_assign_msg' => '已成功分派问题...',
 	'new_bug_title' => '创建新的问题',
 	'feedback_bug_title' => '给问题的打回提供信息',
 	'acknowledged_bug_title' => '告知问题已收到',

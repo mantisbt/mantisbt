@@ -321,7 +321,6 @@ Pokud jste si skutečnš přáli tuto změnu, navštivte Nasledujúci stránku a
 	'realname_updated' => 'Skutočné meno bolo úspešne aktualizováné',
 	'password_updated' => 'Heslo bolo úspešne aktualizováné',
 	'multiple_projects' => 'Vybrali ste problémy z rôznych projektov. Nižšie uvedené parametre zodpovedajú nastaveniam pre všetky projekty. Pokiaľ to není správne, opakujte Váš pokyn k zmene s výberom menšieho množstva problémov.',
-	'bug_assign_msg' => 'Problém bol úspešne priradený...',
 	'new_bug_title' => 'Nový problém',
 	'feedback_bug_title' => 'Zaistenie odozvy na problém',
 	'acknowledged_bug_title' => 'Prijatie problému',

@@ -334,7 +334,6 @@ Wenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL, um i
 	'realname_updated' => '„Vollständiger Name“ erfolgreich aktualisiert',
 	'password_updated' => 'Passwort erfolgreich aktualisiert.',
 	'multiple_projects' => 'Die von Ihnen ausgewählten Einträge gehören zu verschiedenen Projekten. Die unten stehenden Parameter berücksichtigen die Einstellungen aller Projekte. Falls das falsch ist, versuchen Sie eine Änderung mit weniger ausgewählten Einträgen.',
-	'bug_assign_msg' => 'Der Eintrag wurde zugewiesen …',
 	'new_bug_title' => 'Neuer Eintrag',
 	'feedback_bug_title' => 'Rückmeldung zum Eintrag machen',
 	'acknowledged_bug_title' => 'Eintrag anerkennen',

@@ -335,7 +335,6 @@ Se você solicitou esta verificação, visite o seguinte endereço para alterar 
 	'realname_updated' => 'Nome verdadeiro atualizado com sucesso',
 	'password_updated' => 'Senha atualizada com sucesso',
 	'multiple_projects' => 'Os casos que você selecionou são de diferentes projetos. Os parâmetros abaixo refletem as configurações para todos os projetos. Se esta informação estiver incorreta, por favor, tente sua alteração com um número menor de casos selecionados.',
-	'bug_assign_msg' => 'O caso foi atribuído com sucesso...',
 	'new_bug_title' => 'Novo Caso',
 	'feedback_bug_title' => 'Solicitar Retorno para o Caso',
 	'acknowledged_bug_title' => 'Admitir Caso',

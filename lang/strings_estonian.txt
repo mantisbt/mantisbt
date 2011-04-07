@@ -334,7 +334,6 @@ Kui sa soovisid seda uuendust, siis külasta järgmist URL-i, et vahetada oma pa
 	'realname_updated' => 'Tegelik nimi on edukalt uuendatud',
 	'password_updated' => 'Sinu parool on vahetatud',
 	'multiple_projects' => 'Kanded, mida sa valisid on erinevatest projektidest. Alljärgnev parameeter mõjutab kõikide projektide seadeid. Kui see on vale, palun korda muudatust väiksema valitud kannete arvuga.',
-	'bug_assign_msg' => 'Kanne on määratud...',
 	'new_bug_title' => 'Uus kanne',
 	'feedback_bug_title' => 'Anna kandele tagasiside',
 	'acknowledged_bug_title' => 'Tunnista kanne',

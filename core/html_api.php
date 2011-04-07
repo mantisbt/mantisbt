@@ -1481,8 +1481,8 @@ function html_button_bug_assign_to( $p_bug_id ) {
 		}
 	}
 
-	echo "<form method=\"post\" action=\"bug_assign.php\">";
-	echo form_security_field( 'bug_assign' );
+	echo "<form method=\"post\" action=\"bug_update.php\">";
+	echo form_security_field( 'bug_update' );
 
 	$t_button_text = lang_get( 'bug_assign_to_button' );
 	echo "<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />";

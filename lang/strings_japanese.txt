@@ -334,7 +334,6 @@ $s_messages = array(
 	'realname_updated' => '本名の更新に成功しました。',
 	'password_updated' => 'パスワードが正常に更新されました。',
 	'multiple_projects' => '選択したチケットは、複数の異なるプロジェクトのチケットです。変更は全てのプロジェクトに影響します。そうしたくなければ、もう一度選択ししてください。',
-	'bug_assign_msg' => 'チケットが担当者に割り当てられました。',
 	'new_bug_title' => '新規チケット',
 	'feedback_bug_title' => 'チケットへのフィードバックを要求',
 	'acknowledged_bug_title' => 'チケット承認',

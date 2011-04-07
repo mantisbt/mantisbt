@@ -320,7 +320,6 @@ Om du begärde denna verifikation, gå till följande webbadress för att ändra
 	'realname_updated' => 'Riktigt namn har uppdaterats',
 	'password_updated' => 'Lösenordet har uppdaterats',
 	'multiple_projects' => 'Ärendena du har markerat tillhör olika projekt. Parametrarna nedan rör alla projekt. Om detta är felaktigt, försök göra om din ändring med färre ärenden markerade.',
-	'bug_assign_msg' => 'Ärendet har tilldelats...',
 	'new_bug_title' => 'Nytt ärende',
 	'feedback_bug_title' => 'Begär återkoppling till ärende',
 	'acknowledged_bug_title' => 'Acceptera ärende',

@@ -211,7 +211,6 @@ $s_messages = array(
 	'profile_updated_msg' => 'Profils saglabāts...',
 	'account_updated_msg' => 'Lietotāja konts saglabāts...',
 	'email_updated' => 'Email address successfully updated',
-	'bug_assign_msg' => 'Kļūdas atbildīgais tika noteikts...',
 	'bug_close_msg' => 'Kļūda aizvērta...',
 	'close_immediately' => 'Nekavējoties aizvērt:',
 	'closed_bug_title' => 'Aizvērt kļūdu',

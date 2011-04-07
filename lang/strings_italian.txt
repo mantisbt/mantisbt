@@ -313,7 +313,6 @@ Se invece hai effettivamente richiesto tu la modifica, visita l\'indirizzo di se
 	'realname_updated' => 'Nominativo aggiornato con successo',
 	'password_updated' => 'La password è stata aggiornata correttamente',
 	'multiple_projects' => 'Le anomalie che hai selezionato sono relative a progetti differenti.  I seguenti parametri rispecchiano le impostazioni di tutti i progetti.  Se questo non è corretto, riproponi la modifica selezionando un minor numero di anomalie.',
-	'bug_assign_msg' => 'L\'anomalia è stato assegnata correttamente...',
 	'new_bug_title' => 'Nuova anomalia',
 	'feedback_bug_title' => 'Poni in discussione anomalia',
 	'acknowledged_bug_title' => 'Riconosci anomalia',

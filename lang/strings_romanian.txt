@@ -308,7 +308,6 @@ Dacă aţi fost dumneavoastră vizitaţi adresa următoare pentru a vă modifica
 	'realname_updated' => 'Numele real actualizat cu succes',
 	'password_updated' => 'Parola a fost actualizată cu succes',
 	'multiple_projects' => 'Problemele selectate sunt din proiecte diferite. Parametrii de mai jos reflectă configuraţia tuturor proiectelor. Daca e incorect, vă rugăm reîncercaţi schimbările cu un număr mai mic de probleme selectate.',
-	'bug_assign_msg' => 'Problema a fost atribuită cu success...',
 	'new_bug_title' => 'Problemă nouă',
 	'feedback_bug_title' => 'Formulaţi o opinie la problemă',
 	'acknowledged_bug_title' => 'Luaţi la cunoştinţă problema',

@@ -319,7 +319,6 @@ $s_messages = array(
 	'realname_updated' => 'השם עודכן',
 	'password_updated' => 'הססמה עודכנה',
 	'multiple_projects' => 'הבאגים שבחרת שייכים לפרויקטים שונים. הפרמטרים להלן משקפים את ההגדרות לכל הפרויקטים. במקרה של שגיאה, עליך לנסות שוב, אך לסמן מספר קטן יותר של באגים.',
-	'bug_assign_msg' => 'הבאג שויך',
 	'new_bug_title' => 'באג חדש',
 	'feedback_bug_title' => 'באג בהמתנה למידע נוסף',
 	'acknowledged_bug_title' => 'באג התקבל - טרם נבדק',

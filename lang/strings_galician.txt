@@ -334,7 +334,6 @@ Se solicitou esta verificación, visite o seguinte enderezo URL para cambiar o s
 	'realname_updated' => 'O nome real foi actualizado con éxito',
 	'password_updated' => 'O contrasinal foi actualizado con éxito',
 	'multiple_projects' => 'Os problemas que seleccionou son de diferentes proxectos. Os parámetros de embaixo reflicten as configuracións de todos os proxectos. Se isto é incorrecto, por favor, repita o seu cambio cun número menor de problemas seleccionados.',
-	'bug_assign_msg' => 'O problema foi asignado con éxito...',
 	'new_bug_title' => 'Novo problema',
 	'feedback_bug_title' => 'Solicitar un comentario sobre o problema',
 	'acknowledged_bug_title' => 'Recoñecer un problema',

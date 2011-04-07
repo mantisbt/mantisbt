@@ -334,7 +334,6 @@ Si vous avez demandé cette vérification, visitez l\'URL suivante pour changer 
 	'realname_updated' => 'Nom réel mis à jour avec succès',
 	'password_updated' => 'Mot de passe mis à jour avec succès',
 	'multiple_projects' => 'Les bogues sélectionnés proviennent de différents projets. Les paramètres ci-dessous s\'appliquent à tous les projets. Si cela ne convient pas, sélectionnez un plus petit nombre de bogues.',
-	'bug_assign_msg' => 'Le bogue a été assigné avec succès...',
 	'new_bug_title' => 'Nouveau bogue',
 	'feedback_bug_title' => 'Demander un commentaire sur le bogue',
 	'acknowledged_bug_title' => 'Accepter le bogue',

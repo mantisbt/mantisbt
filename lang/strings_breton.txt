@@ -334,7 +334,6 @@ M\'hoc\'h eus goulennet ar gwiriadur-mañ, kit d\'an URL-mañ evit cheñch ho ke
 	'realname_updated' => 'Hizivaet-mat eo bet ar gwir anv',
 	'password_updated' => 'Hizivaet-mat eo bet ar ger-tremen',
 	'multiple_projects' => 'An drein hoc\'h eus diuzet zo da veur a raktres. An arventennoù amañ dindan a vez arloet ouzh an holl raktresoù. Ma n\'eo ket mat, diuzit un niver bihanoc\'h a zrein.',
-	'bug_assign_msg' => 'Deverket-mat eo bet an draen...',
 	'new_bug_title' => 'Draen nevez',
 	'feedback_bug_title' => 'Goulenn un evezhiadenn war an draen',
 	'acknowledged_bug_title' => 'Anavezout an draen',

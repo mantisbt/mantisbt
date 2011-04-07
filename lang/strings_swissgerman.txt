@@ -334,7 +334,6 @@ Wänn Du die Bstetigung aagforderet hesch, no gang uf die URL go Dyy Passwort ä
 	'realname_updated' => '„Vollständige Name“ erfolgryych aktualisiert',
 	'password_updated' => 'Passwort erfolgryych aktualisiert.',
 	'multiple_projects' => 'Die vu Dir uusgwehlte Probläm ghere zue verschidene Projäkt. D Parameter, wu do unte stehn, berucksichtige d Yystellige vu alle Projäkt. Wänn des imfall falsch isch, versuech e Änderig mit weniger uusgwehlte Probläm.',
-	'bug_assign_msg' => 'S Probläm isch zuegwise wore …',
 	'new_bug_title' => 'Nej Probläm',
 	'feedback_bug_title' => 'Ruckmäldig zum Probläm mache',
 	'acknowledged_bug_title' => 'Probläm anerkänne',

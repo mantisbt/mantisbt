@@ -241,7 +241,6 @@ Caso você tenha solicitado esta verificação, visite o seguinte URL para alter
 	'account_updated_msg' => 'A sua Conta Foi Actualizada com Sucesso...',
 	'email_updated' => 'Endereço de Email Alterado com Sucesso',
 	'password_updated' => 'Password Alterada com Sucesso',
-	'bug_assign_msg' => 'O Bug Foi Atribuido Com Sucesso...',
 	'feedback_bug_title' => 'Provide Feedback to Issue',
 	'feedback_bug_button' => 'Provide Feedback',
 	'bug_close_msg' => 'O Bug foi Encerrado...',

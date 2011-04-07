@@ -326,7 +326,6 @@ Ha Ön kérte ezt a megerősítést, látogassa meg a következő címet a jelsz
 	'realname_updated' => 'Teljes név sikeresen frissítve',
 	'password_updated' => 'Jelszó sikeresen frissítve',
 	'multiple_projects' => 'A kiválasztott ügyek különböző projektekből valók. Az alábbi paraméterek minden projektre vonatkoznak. Ha ez nem megfelelő, próbálja meg újra kevesebb ügyet választva.',
-	'bug_assign_msg' => 'Ügy sikeresen hozzárendelve...',
 	'new_bug_title' => 'Új ügy',
 	'feedback_bug_title' => 'Visszajelzés kérése az ügyről',
 	'acknowledged_bug_title' => 'Ügy nyugtázása',

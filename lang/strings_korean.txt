@@ -271,7 +271,6 @@ $s_messages = array(
 	'realname_duplicated' => '이 실명은 다른 사용자가 쓰고 있습니다.',
 	'realname_updated' => '실명이 수정 되었습니다.',
 	'password_updated' => '비밀번호가 변경되었습니다...',
-	'bug_assign_msg' => '이슈가 할당되었습니다...',
 	'new_bug_title' => '새로운 이슈',
 	'feedback_bug_title' => '정보 부족',
 	'acknowledged_bug_title' => '이슈 검토',

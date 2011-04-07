@@ -334,7 +334,6 @@ Hvis du ba om denne bekreftelsen, gå til følgende URL for å forandre passorde
 	'realname_updated' => 'Oppdatert navn',
 	'password_updated' => 'Passordet er oppdatert',
 	'multiple_projects' => 'Du har valgt saker fra forskjellige prosjekter. Parameterne under viser innstillingene for alle prosjektene. Dersom dette ikke er korrekt: Vennligst forsøk å gjenta operasjonen etter at du har valgt færre saker.',
-	'bug_assign_msg' => 'Saken har blitt delegert ...',
 	'new_bug_title' => 'Ny sak',
 	'feedback_bug_title' => 'Be om tilbakemelding på sak',
 	'acknowledged_bug_title' => 'Godkjenne sak',

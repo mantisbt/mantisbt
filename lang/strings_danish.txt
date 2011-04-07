@@ -264,7 +264,6 @@ Hvis du bad om denne verifikation, så besøg denne URL for at ændre din adgang
 	'realname_duplicated' => 'Det rigtige navn bruges af en anden bruger',
 	'realname_updated' => 'Vellykket opdatering af rigtigt navn',
 	'password_updated' => 'Vellykket opdatering af adgangskode',
-	'bug_assign_msg' => 'Fejlen er blevet tildelt...',
 	'new_bug_title' => 'Ny fejl',
 	'feedback_bug_title' => 'Giv tilbagemelding til fejlen',
 	'acknowledged_bug_title' => 'Modtaget fejl',

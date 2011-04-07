@@ -325,7 +325,6 @@ S\'avètz demandat aquesta verificacion, visitatz l\'URL seguenta per cambiar v�
 	'realname_updated' => 'Nom vertadièr mes a jorn amb succès',
 	'password_updated' => 'Senhal mes a jorn amb succès',
 	'multiple_projects' => 'Los bògues seleccionats provenon de projèctes diferents. Los paramètres çaijós s\'aplican a totes los projèctes. S\'aquò conven pas, seleccionatz un nombre de bògues mai pichon.',
-	'bug_assign_msg' => 'Lo bòg es estat assignat amb succès...',
 	'new_bug_title' => 'Bòg novèl',
 	'feedback_bug_title' => 'Demandar un comentari sul bòg',
 	'acknowledged_bug_title' => 'Acceptar lo bòg',

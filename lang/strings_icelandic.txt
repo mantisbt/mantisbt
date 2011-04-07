@@ -272,7 +272,6 @@ Ef þú óskaðir eftir þessari staðfestingu, heimsóttu eftirfarandi veffang 
 	'realname_updated' => 'Rétt nafn uppfært',
 	'password_updated' => 'Lykilorð uppfært',
 	'multiple_projects' => 'Atriðin sem þú hefur valið tilheyra öðrum verkefnum. Breyturnar fyrir neðan endurspegla stillingar fyrir öll verkefnin. Ef þetta er rangt, reyndu aftur að breyta en með færri valin atriði.',
-	'bug_assign_msg' => 'Efninu hefur verið úthlutað...',
 	'new_bug_title' => 'Ný verkbeiðni',
 	'feedback_bug_title' => 'Óska viðbragða við beiðni',
 	'acknowledged_bug_title' => 'Móttekin beiðni',

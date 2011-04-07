@@ -262,7 +262,6 @@ $s_messages = array(
 	'realname_duplicated' => 'Таке повне ім\'я вже зайняте іншим користувачем',
 	'realname_updated' => 'Повне ім\'я було успішно змінене',
 	'password_updated' => 'Пароль був успішно змінений',
-	'bug_assign_msg' => 'Проблема була успішно призначена...',
 	'new_bug_title' => 'Нова проблема',
 	'feedback_bug_title' => 'Запит стосовно проблеми',
 	'acknowledged_bug_title' => 'Визнання проблеми',

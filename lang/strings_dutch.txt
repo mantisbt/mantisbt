@@ -334,7 +334,6 @@ Als u deze wijziging wilt voortzetten, bezoek dan de volgende URL om uw wachtwoo
 	'realname_updated' => 'De volledige naam is aangepast.',
 	'password_updated' => 'Het wachtwoord is aangepast.',
 	'multiple_projects' => 'De door u geselecteerde meldingen komen uit verschillende projecten. De parameters hieronder hebben betrekking op alle projecten. Als dit onjuist is, probeer het dan opnieuw met een kleinere selectie.',
-	'bug_assign_msg' => 'De melding is toegewezen.',
 	'new_bug_title' => 'Nieuwe melding',
 	'feedback_bug_title' => 'Feedback vragen',
 	'acknowledged_bug_title' => 'Melding erkennen',

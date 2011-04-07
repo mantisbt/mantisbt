@@ -315,7 +315,6 @@ $s_messages = array(
 	'realname_updated' => '真實姓名已成功更新',
 	'password_updated' => '密碼已成功更新',
 	'multiple_projects' => '你所選擇的問題屬於不同的專案。以下參數將影響到所有專案的設定, 如果你不是想這樣的話, 請重新選定較少的問題.',
-	'bug_assign_msg' => 'Bug 已經成功被指定...',
 	'new_bug_title' => '新問題',
 	'feedback_bug_title' => '提供對這問題的回覆',
 	'acknowledged_bug_title' => '已收到問題',

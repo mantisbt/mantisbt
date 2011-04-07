@@ -243,7 +243,6 @@ Ukoliko ste vi zatrazili proveru, molim posetite sledecu adresu radi promene loz
 	'realname_duplicated' => 'Pravo ime je korisceno od strane drugog korisnika',
 	'realname_updated' => 'Pravo ime je uspesno izmenjeno',
 	'password_updated' => 'Lozinka je uspesno ažurirana',
-	'bug_assign_msg' => 'Greška je uspesno dodeljena...',
 	'new_bug_title' => 'Nova greska',
 	'feedback_bug_title' => 'Obezbedite potvrdnu informaciju o greski',
 	'acknowledged_bug_title' => 'Primljena greska',

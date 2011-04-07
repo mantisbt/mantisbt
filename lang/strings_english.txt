@@ -404,9 +404,6 @@ If you requested this verification, visit the following URL to change your passw
 	# bug_action_group_page
 	'multiple_projects' => 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.',
 	
-	# bug_assign.php
-	'bug_assign_msg' => 'Issue has been successfully assigned...',
-	
 	# bug_change_status_page.php
 	'new_bug_title' => 'New Issue',
 	'feedback_bug_title' => 'Request Feedback on Issue',

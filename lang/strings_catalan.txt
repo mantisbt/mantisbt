@@ -334,7 +334,6 @@ Si va sol·licitar aquest canvi, visiti aquesta URL per a canviar la contrasenya
 	'realname_updated' => 'Nom real actualitzat correctament',
 	'password_updated' => 'Contrasenya actualitzada',
 	'multiple_projects' => 'Les incidències que ha seleccionat són de diferents projectes. Els paràmetres de sota mostren les posicions per a tots els projectes. Si és incorrecte, si us plau reintenti el canvi amb un nombre més petit d\'incidències seleccionades.',
-	'bug_assign_msg' => 'L\'incidència ha estat assignada correctament...',
 	'new_bug_title' => 'Nova Incidència',
 	'feedback_bug_title' => 'Sol·licita més informació de la incidència',
 	'acknowledged_bug_title' => 'Incidència acceptada',

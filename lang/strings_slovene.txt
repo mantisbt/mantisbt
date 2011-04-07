@@ -238,7 +238,6 @@ $s_messages = array(
 	'email_updated' => 'Elektronski naslov je bil uspešno posodobljen...',
 	'realname_updated' => 'Pravo ime je bilo uspešno posodobljeno',
 	'password_updated' => 'Geslo je bilo uspešno posodobljeno',
-	'bug_assign_msg' => 'Zadeva je bila uspešno dodeljena...',
 	'feedback_bug_title' => 'Provide Feedback to Issue',
 	'feedback_bug_button' => 'Provide Feedback',
 	'bug_close_msg' => 'Zadeva je bila uspešno zaprta...',

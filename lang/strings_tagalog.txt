@@ -318,7 +318,6 @@ Kung hiniling ang pagpapatotoong ito, dalawin ang sumusunod na URL upang mabago 
 	'realname_updated' => 'Matagumpay na naisapanahon ang tunay na pangalan',
 	'password_updated' => 'Matagumpay na naisapanahon ang hudyat',
 	'multiple_projects' => 'Ang napili mong mga labas ay nanggaling mula sa iba\'t ibang mga proyekto. Nagpapakita ang mga parametrong nasa ibaba ng mga katakdaan para sa lahat ng mga proyekto. Kung hindi ito tama, pakisubok na muli ang pagbabago mo na may mas maliit na bilang ng napiling mga labas.',
-	'bug_assign_msg' => 'Matagumpay na naitalaga ang labas...',
 	'new_bug_title' => 'Bagong Labas',
 	'feedback_bug_title' => 'Humiling ng Balik-Ulat hinggil sa Labas',
 	'acknowledged_bug_title' => 'Kilalanin ang Labas',

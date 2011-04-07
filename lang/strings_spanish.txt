@@ -332,7 +332,6 @@ $s_messages = array(
 	'realname_updated' => 'Nombre real actualizado correctamente',
 	'password_updated' => 'Contraseña actualizada',
 	'multiple_projects' => 'Las incidencias que usted ha seleccionado pertenecen a diferentes proyectos. Los siguientes parámetros reflejan las opciones para todos los proyectos. Si esto es incorrecto, por favor re-intente su cambio con una selección menor de incidencias.',
-	'bug_assign_msg' => 'La incidencia se ha asignado correctamente...',
 	'new_bug_title' => 'Nueva Incidencia',
 	'feedback_bug_title' => 'Solicitar más Información sobre la Incidencia',
 	'acknowledged_bug_title' => 'Incidencia Aceptada',
