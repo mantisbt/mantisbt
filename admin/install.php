@@ -573,7 +573,7 @@ if( 3 == $t_install_state ) {
 		} else {
 			// create db
 			$g_db = ADONewConnection( $f_db_type );
-			$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
+			$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
 
 			$dict = NewDataDictionary( $g_db );
 
