@@ -221,17 +221,10 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
-
+	
 	$t_result = array();
 	foreach( version_get_all_rows( $p_project_id, VERSION_ALL ) as $t_version ) {
-		$t_result[] = array(
-			'id' => $t_version['id'],
-			'name' => $t_version['version'],
-			'project_id' => $p_project_id,
-			'date_order' => timestamp_to_iso8601( $t_version['date_order'] ),
-			'description' => mci_null_if_empty( $t_version['description'] ),
-			'released' => $t_version['released'],
-		);
+		$t_result[] = mci_project_version_as_array ( $t_version );
 	}
 
 	return $t_result;
@@ -263,14 +256,7 @@ function mc_project_get_released_versions( $p_username, $p_password, $p_project_
 	$t_result = array();
 
 	foreach( version_get_all_rows( $p_project_id, VERSION_RELEASED ) as $t_version ) {
-		$t_result[] = array(
-			'id' => $t_version['id'],
-			'name' => $t_version['version'],
-			'project_id' => $p_project_id,
-			'date_order' => timestamp_to_iso8601( $t_version['date_order'] ),
-			'description' => mci_null_if_empty( $t_version['description'] ),
-			'released' => $t_version['released'],
-		);
+		$t_result[] = mci_project_version_as_array ( $t_version );
 	}
 
 	return $t_result;
@@ -301,16 +287,8 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
 
 	$t_result = array();
 
-	foreach( version_get_all_rows( $p_project_id, VERSION_FUTURE ) as $t_version ) {
-		$t_result[] = array(
-			'id' => $t_version['id'],
-			'name' => $t_version['version'],
-			'project_id' => $p_project_id,
-			'date_order' => timestamp_to_iso8601( $t_version['date_order'] ),
-			'description' => mci_null_if_empty( $t_version['description'] ),
-			'released' => $t_version['released'],
-		);
-	}
+	foreach( version_get_all_rows( $p_project_id, VERSION_FUTURE ) as $t_version )
+		$t_result[] = mci_project_version_as_array ( $t_version );
 
 	return $t_result;
 }
@@ -334,8 +312,14 @@ function mc_project_version_add( $p_username, $p_password, $p_version ) {
 	$t_name = $p_version['name'];
 	$t_released = $p_version['released'];
 	$t_description = $p_version['description'];
-	$t_date_order = $p_version['date_order'];
-
+	$t_date_order =  $p_version['date_order'];
+	if ( is_blank( $t_date_order ) ) 
+	    $t_date_order = null;
+	else 
+	    $t_date_order = date( "Y-m-d H:i:s", strtotime( $t_date_order ) );
+	
+	$t_obsolete = isset ( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
+	
 	if ( is_blank( $t_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Mandatory field "project_id" was missing' );
 	}
@@ -365,18 +349,9 @@ function mc_project_version_add( $p_username, $p_password, $p_version ) {
 	} else {
 		$t_released = VERSION_RELEASED;
 	}
-
-	if ( version_add( $t_project_id, $t_name, $t_released, $t_description ) ) {
-		$t_version_id = version_get_id( $t_name, $t_project_id );
-
-		if ( !is_blank( $t_date_order ) ) {
-			$t_version = version_get( $t_version_id );
-			$t_version->date_order = date( "Y-m-d H:i:s", strtotime( $t_date_order ) );
-			version_update( $t_version );
-		}
-
-		return $t_version_id;
-	}
+	
+	if ( version_add( $t_project_id, $t_name, $t_released, $t_description, $t_date_order, $t_obsolete ) )
+		return version_get_id( $t_name, $t_project_id );
 
 	return null;
 }
@@ -410,6 +385,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_
 	$t_released = $p_version['released'];
 	$t_description = $p_version['description'];
 	$t_date_order = $p_version['date_order'];
+	$t_obsolete = isset ( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
 
 	if ( is_blank( $t_project_id ) ) {
 		return new soap_fault( 'Client', '', 'Mandatory field "project_id" was missing' );
@@ -450,6 +426,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_
 	$t_version_data->description = $t_description;
 	$t_version_data->released = $t_released;
 	$t_version_data->date_order = date( "Y-m-d H:i:s", strtotime( $t_date_order ) );
+	$t_version_data->obsolete = $t_obsolete;
 
 	return version_update( $t_version_data );
 }
