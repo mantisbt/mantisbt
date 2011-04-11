@@ -442,7 +442,7 @@ class IssueAddTest extends SoapBase {
 	    $firstIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( 'IssueAddTest.testGetBiggestId1'));
         $this->deleteAfterRun( $firstIssueId );
 	    
-	    $secondIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( 'IssueAddTest.testGetBiggestId1'));
+	    $secondIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( 'IssueAddTest.testGetBiggestId2'));
 	    $this->deleteAfterRun( $secondIssueId );
 	    
 	    $firstIssue = $this->client->mc_issue_get( $this->userName, $this->password, $firstIssueId );

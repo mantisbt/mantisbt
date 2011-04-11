@@ -32,7 +32,7 @@ function mci_file_write_local( $p_diskfile, $p_content ) {
 	fclose( $t_handle );
 }
 
-function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_title = '', $p_desc = '' ) {
+function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_title = '', $p_desc = '', $p_user_id = null ) {
 	if( !file_type_check( $p_name ) ) {
 		return new soap_fault( 'Client', '', 'File type not allowed.' );
 	}
@@ -60,6 +60,13 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	$c_file_type = db_prepare_string( $p_file_type );
 	$c_title = db_prepare_string( $p_title );
 	$c_desc = db_prepare_string( $p_desc );
+	
+	if( $p_user_id === null ) {
+		$c_user_id = auth_get_current_user_id();
+	} else {
+		$c_user_id = (int)$p_user_id;
+	}
+	
 
 	if( $t_project_id == ALL_PROJECTS ) {
 		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
@@ -114,9 +121,9 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	$t_file_table = db_get_table( 'mantis_' . $p_table . '_file_table' );
 	$c_id = ( 'bug' == $p_table ) ? $c_issue_id : $c_project_id;
 	$query = "INSERT INTO $t_file_table
-			(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
+			(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id)
 		VALUES
-			($c_id, '$c_title', '$c_desc', '$c_disk_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now() . "', $c_content)";
+			($c_id, '$c_title', '$c_desc', '$c_disk_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now() . "', $c_content, $c_user_id)";
 	db_query( $query );
 
 	# get attachment id
