@@ -426,7 +426,7 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 			'0' => $t_any,
 		),
 		'dir' => 'DESC',
-		'sort' => 'date_submitted',
+		'sort' => 'id',
 	);
 
 	$t_page_number = 1;
