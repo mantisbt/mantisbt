@@ -433,4 +433,24 @@ class IssueAddTest extends SoapBase {
 		
 		$this->assertEquals( $version['name'], $createdIssue->version );
 	}
+	
+	/**
+	 * Test that the biggest id is correctly retrieved
+	 */
+	public function testGetBiggestId() {
+	    
+	    $firstIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( 'IssueAddTest.testGetBiggestId1'));
+        $this->deleteAfterRun( $firstIssueId );
+	    
+	    $secondIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( 'IssueAddTest.testGetBiggestId1'));
+	    $this->deleteAfterRun( $secondIssueId );
+	    
+	    $firstIssue = $this->client->mc_issue_get( $this->userName, $this->password, $firstIssueId );
+	    
+	    // this update should trigger this issue's id to be returned as the biggest
+	    // reported as bug #12887
+		$this->client->mc_issue_update( $this->userName, $this->password, $firstIssueId, $firstIssue);
+		
+		$this->assertEquals( $secondIssueId, $this->client->mc_issue_get_biggest_id( $this->userName, $this->password, $this->getProjectId() ));
+	}
 }
