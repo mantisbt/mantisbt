@@ -122,7 +122,8 @@ $l_oServer->wsdl->addComplexType(
 		'size'				=>	array( 'name' => 'size',			'type' => 'xsd:integer', 	'minOccurs' => '0'),
 		'content_type'		=>	array( 'name' => 'content_type',	'type' => 'xsd:string', 	'minOccurs' => '0'),
 		'date_submitted'	=>	array( 'name' => 'date_submitted',	'type' => 'xsd:dateTime', 	'minOccurs' => '0'),
-		'download_url'		=>	array( 'name' => 'download_url',	'type' => 'xsd:anyURI', 	'minOccurs' => '0')
+		'download_url'		=>	array( 'name' => 'download_url',	'type' => 'xsd:anyURI', 	'minOccurs' => '0'),
+		'user_id'		    =>	array( 'name' => 'user_id',			'type' => 'xsd:integer', 	'minOccurs' => '0')
 	)
 );
 
@@ -156,7 +157,8 @@ $l_oServer->wsdl->addComplexType(
 		'size'				=>	array( 'name' => 'size',			'type' => 'xsd:integer', 	'minOccurs' => '0'),
 		'content_type'		=>	array( 'name' => 'content_type',	'type' => 'xsd:string', 	'minOccurs' => '0'),
 		'date_submitted'	=>	array( 'name' => 'date_submitted',	'type' => 'xsd:dateTime', 	'minOccurs' => '0'),
-		'download_url'		=>	array( 'name' => 'download_url',	'type' => 'xsd:anyURI', 	'minOccurs' => '0')
+		'download_url'		=>	array( 'name' => 'download_url',	'type' => 'xsd:anyURI', 	'minOccurs' => '0'),
+		'user_id'		    =>	array( 'name' => 'user_id',			'type' => 'xsd:integer', 	'minOccurs' => '0')
 	)
 );
 
