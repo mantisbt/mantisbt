@@ -396,7 +396,8 @@ $l_oServer->wsdl->addComplexType(
 		'project_id'	=>	array( 'name' => 'project_id',	'type' => 'xsd:integer', 	'minOccurs' => '0' ),
 		'date_order'	=>	array( 'name' => 'date_order',	'type' => 'xsd:dateTime', 	'minOccurs' => '0' ),
 		'description'	=>	array( 'name' => 'description',	'type' => 'xsd:string', 	'minOccurs' => '0' ),
-		'released'		=>	array( 'name' => 'released',	'type' => 'xsd:boolean', 	'minOccurs' => '0' )
+		'released'		=>	array( 'name' => 'released',	'type' => 'xsd:boolean', 	'minOccurs' => '0' ),
+		'obsolete'		=>	array( 'name' => 'obsolete',	'type' => 'xsd:boolean', 	'minOccurs' => '0' )
 	)
 );
 

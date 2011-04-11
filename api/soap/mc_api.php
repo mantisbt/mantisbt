@@ -289,6 +289,24 @@ function mci_category_as_array_by_id( $p_category_id ) {
 }
 
 /**
+ * Transforms a version array into an array suitable for marshalling into ProjectVersionData
+ * 
+ * @param array $p_version
+ */
+function mci_project_version_as_array( $p_version ) {
+    
+    return array(
+			'id' => $p_version['id'],
+			'name' => $p_version['version'],
+			'project_id' => $p_version['project_id'],
+			'date_order' => timestamp_to_iso8601( $p_version['date_order'] ),
+			'description' => mci_null_if_empty( $p_version['description'] ),
+			'released' => $p_version['released'],
+		    'obsolete' => $p_version['obsolete']
+		);
+}
+
+/**
  * Returns time tracking information from a bug note.
  * 
  * @param int $p_issue_id The id of the issue
