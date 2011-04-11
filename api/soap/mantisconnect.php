@@ -220,7 +220,9 @@ $l_oServer->wsdl->addComplexType(
 		'view_state'		=>	array( 'name' => 'view_state',		'type' => 'tns:ObjectRef', 'minOccurs' => '0'),
 		'date_submitted'	=>	array( 'name' => 'date_submitted',	'type' => 'xsd:dateTime', 'minOccurs' => '0'),
 		'last_modified'		=>	array( 'name' => 'last_modified',	'type' => 'xsd:dateTime', 'minOccurs' => '0'),
-		'time_tracking'		=> 	array( 'name' => 'time_tracking',	'type' => 'xsd:integer', 'minOccurs' => '0')
+		'time_tracking'		=> 	array( 'name' => 'time_tracking',	'type' => 'xsd:integer', 'minOccurs' => '0'),
+	    'note_type'			=>  array( 'name' => 'note_type',		'type' => 'xsd:integer', 'minOccurs' => '0'),
+		'note_attr'			=>  array( 'name' => 'note_attr',		'type' => 'xsd:string', 'minOccurs' => '0')
 	)
 );
 
