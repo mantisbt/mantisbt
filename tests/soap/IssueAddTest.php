@@ -453,4 +453,40 @@ class IssueAddTest extends SoapBase {
 		
 		$this->assertEquals( $secondIssueId, $this->client->mc_issue_get_biggest_id( $this->userName, $this->password, $this->getProjectId() ));
 	}
+	
+	/**
+	 * A test cases that tests the creation of issues 
+	 * with a note passed in which contains time tracking data.
+	 */
+	public function testCreateIssueWithMiscNote() {
+		
+		$issueToAdd = $this->getIssueToAdd( 'testCreateIssueWithMiscNote' );
+		$issueToAdd['notes'] = array(
+			array(
+				'text' => "first note",
+				'note_type' => 2,
+			    'note_attr' => 'attr_value'
+			)
+		);
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun($issueId);
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
+
+		// verify note existence and time tracking data
+		$this->assertEquals( 1, count( $issue->notes ) );
+
+		$note = $issue->notes[0];
+		
+		$this->assertEquals( 2, $note->note_type );
+		$this->assertEquals( 'attr_value', $note->note_attr );
+	}
 }

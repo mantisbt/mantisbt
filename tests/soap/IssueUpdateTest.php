@@ -208,7 +208,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 1, count( $issueWithNoteAfterUpdate->notes ) );
 
 		$issueWithOneNewNote = $issueWithNoteAfterUpdate;
-		$issueWithOneNewNote->notes[] = array( 'text' => 'second note' );
+		$issueWithOneNewNote->notes[] = array( 'text' => 'second note', 'note_type' => 2, 'note_attr' => 'attr_value' );
 
 		$this->client->mc_issue_update(
 			$this->userName,
@@ -222,6 +222,13 @@ class IssueUpdateTest extends SoapBase {
 			$issueId);
 
 		$this->assertEquals( 2, count( $issueWithTwoNotes->notes ) );
+		
+		$newNote = $issueWithTwoNotes->notes[1];
+		
+		$this->assertEquals( 'second note', $newNote->text );
+		$this->assertEquals( 2, $newNote->note_type );
+		$this->assertEquals( 'attr_value', $newNote->note_attr );
+		
 	}
 	
 	/**

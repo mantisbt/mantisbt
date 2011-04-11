@@ -55,7 +55,9 @@ class IssueNoteTest extends SoapBase {
 			$issueId);
 
 		$noteData = array(
-			'text' => "first note"
+			'text' => "first note",
+		    'note_type' => 2,
+		    'note_attr' => 'attr_value'
 		);
 		
 		$issueNoteId = $this->client->mc_issue_note_add(
@@ -79,6 +81,8 @@ class IssueNoteTest extends SoapBase {
 		$this->assertEquals( 10, $note->view_state->id );
 		$this->assertEquals( 'public', $note->view_state->name );
 		$this->assertEquals( $note->date_submitted, $note->last_modified );
+		$this->assertEquals( 2, $note->note_type );
+		$this->assertEquals( 'attr_value', $note->note_attr );
 
 		/*
 		$timestamp = strtotime( $note->date_submitted );
