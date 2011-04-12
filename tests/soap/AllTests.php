@@ -38,6 +38,7 @@ require_once 'CategoryTest.php';
 require_once 'CompressionTest.php';
 require_once 'ProjectTest.php';
 require_once 'VersionTest.php';
+require_once 'RelationshipTest.php';
 
 /**
  * @package    Tests
@@ -73,6 +74,7 @@ class Soap_AllTests extends PHPUnit_Framework_TestSuite
         $suite->addTestSuite('CompressionTest');
 	    $suite->addTestSuite('ProjectTest');
 	    $suite->addTestSuite('VersionTest');
+	    $suite->addTestSuite('RelationshipTest');
 
         return $suite;
     }
