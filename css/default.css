@@ -271,6 +271,7 @@ div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; float: ri
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 8pt;
 	margin-top: 2em;
+	clear: both;
 }
 
 #footer #powered-by-mantisbt-logo {
