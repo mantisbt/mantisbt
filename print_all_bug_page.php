@@ -250,3 +250,7 @@ $t_icon_path = config_get( 'icon_path' );
 
 <input type="submit" class="button" value="<?php echo lang_get( 'hide_button' ) ?>" />
 </form>
+
+<?php
+html_body_end();
+html_end();
