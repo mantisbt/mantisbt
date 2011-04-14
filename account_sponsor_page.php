@@ -292,6 +292,7 @@ if ( 0 == $t_sponsors ) {
 		if ( VS_PRIVATE == $t_bug->view_state ) {
 			printf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
 		}
+		echo '</td>';
 
 		# describe sponsorship amount
 		echo '<td>';
