@@ -1718,3 +1718,12 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 
 	echo '</tr></table>';
 }
+
+/**
+ * get the css class name for the given status
+ * @param int $p_status
+ * @return string
+ */
+function html_get_status_css_class( $p_status ) {
+	return string_attribute( MantisEnum::getLabel( config_get('status_enum_string' ), $p_status ) . '-color' );
+}

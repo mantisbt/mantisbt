@@ -79,6 +79,8 @@ require_api( 'sponsorship_api.php' );
 require_api( 'string_api.php' );
 require_api( 'version_api.php' );
 
+require_css( 'status_config.php' );
+
 if ( !config_get( 'enable_sponsorship' ) ) {
 	trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
 }
@@ -171,7 +173,10 @@ if ( 0 == $t_sponsors ) {
 			$t_released_label = $t_bug->fixed_in_version;
 		}
 
-		echo '<tr bgcolor="' . get_status_color( $t_bug->status ) . '">';
+		# choose color based on status
+		$status_label = html_get_status_css_class( $t_bug->status );
+
+		echo '<tr class="' . $status_label .  '">';
 		echo '<td><a href="' . string_get_bug_view_url( $row['bug'] ) . '">' . bug_format_id( $row['bug'] ) . '</a></td>';
 		echo '<td>' . project_get_field( $t_bug->project_id, 'name' ) . '&#160;</td>';
 		echo '<td class="right">' . $t_released_label . '&#160;</td>';
@@ -281,7 +286,10 @@ if ( 0 == $t_sponsors ) {
 			$t_released_label = $t_bug->fixed_in_version;
 		}
 
-		echo '<tr bgcolor="' . get_status_color( $t_bug->status ) . '">';
+		# choose color based on status
+		$status_label = html_get_status_css_class( $t_bug->status );
+
+		echo '<tr class="' . $status_label .  '">';
 		echo '<td><a href="' . string_get_bug_view_url( $row['bug'] ) . '">' . bug_format_id( $row['bug'] ) . '</a></td>';
 		echo '<td>' . project_get_field( $t_bug->project_id, 'name' ) . '&#160;</td>';
 		echo '<td class="right">' . $t_released_label . '&#160;</td>';

@@ -195,9 +195,9 @@ function write_bug_rows ( $p_rows )
 		}
 
 		# choose color based on status
-		$status_color = get_status_color( $t_row->status );
+		$status_label = html_get_status_css_class( $t_row->status );
 
-		echo '<tr bgcolor="', $status_color, '">';
+		echo '<tr class="' . $status_label . '">';
 
 		foreach( $t_columns as $t_column ) {
 			$t_column_value_function = 'print_column_value';

@@ -70,6 +70,8 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'version_api.php' );
 
+require_css( 'status_config.php' );
+
 $g_allow_browser_cache = 1;
 
 $f_bug_id = gpc_get_int( 'bug_id' );
@@ -393,7 +395,11 @@ if ( $tpl_show_status || $tpl_show_resolution ) {
 	if ( $tpl_show_status ) {
 		# Status
 		echo '<th class="category"><label for="status">' . lang_get( 'status' ) . '</label></th>';
-		echo '<td bgcolor="', get_status_color( $tpl_bug->status ), '">';
+
+		# choose color based on status
+		$status_label = html_get_status_css_class( $tpl_bug->status );
+
+		echo '<td class="' . $status_label .  '">';
 		print_status_option_list( 'status', $tpl_bug->status,
 							( $tpl_bug->reporter_id == auth_get_current_user_id() &&
 									( ON == config_get( 'allow_reporter_close' ) ) ), $tpl_bug->project_id );
