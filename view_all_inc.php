@@ -195,9 +195,9 @@ function write_bug_rows ( $p_rows )
 		}
 
 		# choose color based on status
-		$status_label = MantisEnum::getLabel( config_get('status_enum_string' ), $t_row->status );
+		$status_label = get_status_css_class( $t_row->status );
 		
-		echo '<tr class="' . $status_label . '-color">';
+		echo '<tr class="' . $status_label . '">';
 
 		foreach( $t_columns as $t_column ) {
 			$t_column_value_function = 'print_column_value';

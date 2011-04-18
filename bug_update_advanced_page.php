@@ -397,9 +397,9 @@ if ( $tpl_show_status || $tpl_show_resolution ) {
 		echo '<th class="category"><label for="status">' . lang_get( 'status' ) . '</label></th>';
 		
 		# choose color based on status
-		$status_label = MantisEnum::getLabel( config_get('status_enum_string' ), $tpl_bug->status );
+		$status_label = get_status_css_class( $tpl_bug->status );
 		
-		echo '<td class="' . $status_label .  '-color">';
+		echo '<td class="' . $status_label .  '">';
 		print_status_option_list( 'status', $tpl_bug->status,
 							( $tpl_bug->reporter_id == auth_get_current_user_id() &&
 									( ON == config_get( 'allow_reporter_close' ) ) ), $tpl_bug->project_id );

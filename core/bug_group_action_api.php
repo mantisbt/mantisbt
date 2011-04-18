@@ -84,9 +84,9 @@ function bug_group_action_print_bug_list( $p_bug_ids_array ) {
 		$t_class = sprintf( "row-%d", ( $t_i++ % 2 ) + 1 );
 		
 		# choose color based on status
-		$status_label = MantisEnum::getLabel( config_get('status_enum_string' ), bug_get_field( $t_bug_id, 'status' ) );
+		$status_label = get_status_css_class( bug_get_field( $t_bug_id, 'status' ) );
 		
-		echo sprintf( "<tr class=\"%s-color\"> <td>%s</td> <td>%s</td> </tr>\n", $status_label, string_get_bug_view_link( $t_bug_id ), string_attribute( bug_get_field( $t_bug_id, 'summary' ) ) );
+		echo sprintf( "<tr class=\"%s\"> <td>%s</td> <td>%s</td> </tr>\n", $status_label, string_get_bug_view_link( $t_bug_id ), string_attribute( bug_get_field( $t_bug_id, 'summary' ) ) );
 	}
 
 	echo '</table>';
