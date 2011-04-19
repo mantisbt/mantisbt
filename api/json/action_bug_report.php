@@ -161,6 +161,7 @@ if ( !$f_report_stay ) {
  */
 
 $t_output['result'] =  lang_get( 'operation_successful' ) ;
+$t_output['bug_id'] =  $t_bug_id;
 
 echo json_encode($t_output);
 
