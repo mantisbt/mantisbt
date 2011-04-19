@@ -46,7 +46,7 @@ header( 'Content-Type: application/javascript; charset=UTF-8' );
  */
 header( 'X-Content-Type-Options: nosniff' );
 
-echo "var translations = new array();\n";
+echo "var translations = new Array();\n";
 print_translation( 'time_tracking_stopwatch_start' );
 print_translation( 'time_tracking_stopwatch_stop' );
 print_translation( 'loading' );
