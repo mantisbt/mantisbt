@@ -251,6 +251,8 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 		}
 
 		# Check for db upgrade for versions > 1.0.0 using new installer and schema
+		# Note: install_helper_functions_api.php required for db_null_date() function definition
+		require_api( 'install_helper_functions_api.php' );
 		require_once( 'admin' . DIRECTORY_SEPARATOR . 'schema.php' );
 		$t_upgrades_reqd = count( $upgrade ) - 1;
 
