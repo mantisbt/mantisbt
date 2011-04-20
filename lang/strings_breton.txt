@@ -1169,7 +1169,7 @@ $s_time_tracking_cost = 'Koust';
 $s_total_time_for_issue = 'Amzer evit an draen en holl = %1$s';
 $s_time_tracking_stopwatch_start = 'Deroù';
 $s_time_tracking_stopwatch_stop = 'Paouez';
-$s_time_tracking_stopwatch_reset = 'Adderaouiñ';
+$s_time_tracking_stopwatch_reset = 'Adderaouekaat';
 $s_access_denied = 'Moned nac\'het.';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (diskoulmet gant %4$s e-barzh %5$s)';
 $s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (diskoulmet gant %4$s)';
