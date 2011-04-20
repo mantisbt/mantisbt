@@ -100,13 +100,101 @@ function json_get_file( $p_var_name, $p_default = null ) {
 	return $file_struct;
 }
 
-function json_exit() {
-	global $g_json_file_tmp_name;
+function json_isset( $p_var_name ) {
+	return (isset($g_json_message->{$p_var_name})) ? true : false;
+}
 
-	if ($g_json_file_tmp_name != '') {
-		@unlink($g_json_file_tmp_name);
+/**
+ * see if a custom field variable is set.  Uses json_isset().
+ * @param string $p_var_name
+ * @param int $p_custom_field_type
+ * @return bool
+ */
+function json_isset_custom_field( $p_var_name, $p_custom_field_type ) {
+	$t_field_name = 'custom_field_' . $p_var_name;
+
+	switch ($p_custom_field_type ) {
+		case CUSTOM_FIELD_TYPE_DATE:
+			// date field is three dropdowns that default to 0
+			// Dropdowns are always present, so check if they are set
+			return json_isset( $t_field_name . '_day' ) &&
+				json_get_int( $t_field_name . '_day', 0 ) != 0 &&
+				json_isset( $t_field_name . '_month' ) &&
+				json_get_int( $t_field_name . '_month', 0 ) != 0 &&
+				json_isset( $t_field_name . '_year' ) &&
+				json_get_int( $t_field_name . '_year', 0 ) != 0 ;
+		case CUSTOM_FIELD_TYPE_STRING:
+		case CUSTOM_FIELD_TYPE_NUMERIC:
+		case CUSTOM_FIELD_TYPE_FLOAT:
+		case CUSTOM_FIELD_TYPE_ENUM:
+		case CUSTOM_FIELD_TYPE_EMAIL:
+			return json_isset( $t_field_name ) && !is_blank( json_get_string( $t_field_name ) );
+		default:
+			return json_isset( $t_field_name );
 	}
-	exit();
+}
+
+
+/**
+ * Retrieve a custom field variable.  Uses json_get().
+ * If you pass in *no* default, an error will be triggered if
+ * the variable does not exist
+ * @param string $p_var_name
+ * @param int $p_custom_field_Type
+ * @param mixed $p_default
+ * @return string
+ */
+function json_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = null ) {
+	switch( $p_custom_field_type ) {
+		case CUSTOM_FIELD_TYPE_MULTILIST:
+		case CUSTOM_FIELD_TYPE_CHECKBOX:
+		    // ensure that the default is an array, if set
+		    if ( ($p_default !== null) && !is_array($p_default) ) {
+		        $p_default = array( $p_default );
+		    }
+			$t_values = json_get( $p_var_name, $p_default );
+			if( is_array( $t_values ) ) {
+				return implode( '|', $t_values );
+			} else {
+				return '';
+			}
+			break;
+		case CUSTOM_FIELD_TYPE_DATE:
+			$t_day = json_get_int( $p_var_name . '_day', 0 );
+			$t_month = json_get_int( $p_var_name . '_month', 0 );
+			$t_year = json_get_int( $p_var_name . '_year', 0 );
+			if(( $t_year == 0 ) || ( $t_month == 0 ) || ( $t_day == 0 ) ) {
+				if( $p_default == null ) {
+					return '';
+				} else {
+					return $p_default;
+				}
+			} else {
+				return strtotime( $t_year . '-' . $t_month . '-' . $t_day );
+			}
+			break;
+		default:
+			return json_get_string( $p_var_name, $p_default );
+	}
+}
+
+
+/**
+ * JSON API
+ * ---------------
+ * Retrieve a JSON variable.
+ * If the variable is not set, the default is returned.
+ *
+ *  You may pass in any variable as a default (including null) but if
+ *  you pass in *no* default then an error will be triggered if the field
+ *  cannot be found
+ *
+ * @param string
+ * @return null
+ */
+function json_get( $p_var_name, $p_default = null ) {
+	global $g_json_message;
+	return (isset($g_json_message->{$p_var_name}))? $g_json_message->{$p_var_name}: $p_default;
 }
 
 function json_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {

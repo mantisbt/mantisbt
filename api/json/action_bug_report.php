@@ -112,14 +112,14 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	}
 
 	$t_def = custom_field_get_definition( $t_id );
-	if( !custom_field_set_value( $t_id, $t_bug_id, gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], '' ), false ) ) {
+	if( !custom_field_set_value( $t_id, $t_bug_id, json_get_custom_field( "custom_field_$t_id", $t_def['type'], '' ), false ) ) {
 		error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 	}
 }
 
-$f_master_bug_id = gpc_get_int( 'm_id', 0 );
-$f_rel_type = gpc_get_int( 'rel_type', -1 );
+$f_master_bug_id = json_get_int( 'm_id', 0 );
+$f_rel_type = json_get_int( 'rel_type', -1 );
 
 if ( $f_master_bug_id > 0 ) {
 	# it's a child generation... let's create the relationship and add some lines in the history
