@@ -20,6 +20,11 @@ function json_auth_get_current_user_id($json_message) {
 	//list($user_id , $user_pw) = explode($user_token
 
 	$t_user_table = db_get_table( 'user' );
+	//support older versions
+	if (empty($t_user_table) ) {
+		$t_user_table = db_get_table('mantis_user_table');
+	}
+
 	/** @todo error with an error saying they aren't logged in? Or redirect to the login page maybe? */
 	$query = "SELECT id
 				  FROM $t_user_table
@@ -208,3 +213,7 @@ function json_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	}
 }
 
+
+function json_exit() {
+exit();
+}
