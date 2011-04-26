@@ -1428,6 +1428,26 @@ $l_oServer->register( 'mc_config_get_string',
 );
 
 ###
+###  PUBLIC METHODS (defined in mc_user_pref_api.php)
+###
+
+### mc_user_pref_get_pref
+$l_oServer->register( 'mc_user_pref_get_pref',
+	array(
+		'username'		=>	'xsd:string',
+		'password'		=>	'xsd:string',
+		'project_id'	=>	'xsd:integer',
+		'pref_name'		=>	'xsd:string'
+	),
+	array(
+		'return'	=>	'xsd:string'
+	),
+	$t_namespace,
+	false, false, false,
+	'Get the value for the specified user preference.'
+);
+
+###
 ###  IMPLEMENTATION
 ###
 
