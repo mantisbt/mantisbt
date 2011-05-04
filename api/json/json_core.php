@@ -106,6 +106,7 @@ function json_get_file( $p_var_name, $p_default = null ) {
 }
 
 function json_isset( $p_var_name ) {
+	global $g_json_message;
 	return (isset($g_json_message->{$p_var_name})) ? true : false;
 }
 
@@ -149,7 +150,13 @@ function json_isset_custom_field( $p_var_name, $p_custom_field_type ) {
  * @param mixed $p_default
  * @return string
  */
-function json_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = null ) {
+function json_get_custom_field( $p_var_id, $p_var_name, $p_custom_field_type, $p_default = null ) {
+	if (json_isset('custom_field_' . $p_var_name)) {
+		$t_field_name = 'custom_field_' . $p_var_name;
+	} else {
+		$t_field_name = 'custom_field_' . $p_var_id;
+	}
+
 	switch( $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_MULTILIST:
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
@@ -157,7 +164,7 @@ function json_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = 
 		    if ( ($p_default !== null) && !is_array($p_default) ) {
 		        $p_default = array( $p_default );
 		    }
-			$t_values = json_get( $p_var_name, $p_default );
+			$t_values = json_get( $t_field_name, $p_default );
 			if( is_array( $t_values ) ) {
 				return implode( '|', $t_values );
 			} else {
@@ -165,9 +172,9 @@ function json_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = 
 			}
 			break;
 		case CUSTOM_FIELD_TYPE_DATE:
-			$t_day = json_get_int( $p_var_name . '_day', 0 );
-			$t_month = json_get_int( $p_var_name . '_month', 0 );
-			$t_year = json_get_int( $p_var_name . '_year', 0 );
+			$t_day = json_get_int( $t_field_name . '_day', 0 );
+			$t_month = json_get_int( $t_field_name . '_month', 0 );
+			$t_year = json_get_int( $t_field_name . '_year', 0 );
 			if(( $t_year == 0 ) || ( $t_month == 0 ) || ( $t_day == 0 ) ) {
 				if( $p_default == null ) {
 					return '';
@@ -179,7 +186,7 @@ function json_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = 
 			}
 			break;
 		default:
-			return json_get_string( $p_var_name, $p_default );
+			return json_get_string( $t_field_name, $p_default );
 	}
 }
 
