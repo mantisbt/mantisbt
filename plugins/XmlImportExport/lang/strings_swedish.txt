@@ -26,13 +26,20 @@
  * @file
  *
  * @author Lokal Profil
- * @author Tobulos1
+ * @author Per
  */
 
-$s_plugin_format_title = 'MantisBT-formatering';
-$s_plugin_format_description = 'Officiell insticksmodul för textbehandling och formatering.';
-$s_plugin_format_config = 'Konfiguration';
-$s_plugin_format_process_text = 'Textbehandling';
-$s_plugin_format_process_vcslinks = 'VCS-länkar';
-$s_plugin_format_enabled = 'På';
-$s_plugin_format_disabled = 'Av';
+$s_plugin_XmlImportExport_title = 'Importera/exportera problem';
+$s_plugin_XmlImportExport_description = 'Lägger XML-baserade import- och exportmöjligheter till MantisBT.';
+$s_plugin_XmlImportExport_import = 'Importera problem';
+$s_plugin_XmlImportExport_export = 'XML export';
+$s_plugin_XmlImportExport_importing_in_project = 'Importerar problem i projektet:';
+$s_plugin_XmlImportExport_import_options = 'Importalternativ';
+$s_plugin_XmlImportExport_default_strategy = 'Standard konverteringsstrategi:';
+$s_plugin_XmlImportExport_renumber = 'Numrera om';
+$s_plugin_XmlImportExport_renumber_desc = 'Försök att konvertera referenser till ny numrering';
+$s_plugin_XmlImportExport_link = 'Länk';
+$s_plugin_XmlImportExport_link_desc = 'Konvertera till en länk till det ursprungliga objektet';
+$s_plugin_XmlImportExport_disable = 'Inaktivera';
+$s_plugin_XmlImportExport_disable_desc = 'Inaktivera länken';
+$s_plugin_XmlImportExport_keep_same_category = 'Försök behålla samma kategori';

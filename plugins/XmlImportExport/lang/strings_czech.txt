@@ -1,0 +1,47 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2011  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Czech (Česky)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Luk
+ */
+
+$s_plugin_XmlImportExport_title = 'Importovat/exportovat problémy';
+$s_plugin_XmlImportExport_description = 'Přidává do MantisBT schopnost importovat a exportovat data na bázi XML';
+$s_plugin_XmlImportExport_import = 'Importovat problémy';
+$s_plugin_XmlImportExport_export = 'XML export';
+$s_plugin_XmlImportExport_importing_in_project = 'Import problémů do projektu:';
+$s_plugin_XmlImportExport_import_options = 'Možnosti importu';
+$s_plugin_XmlImportExport_cross_references = 'Křížové odkazy';
+$s_plugin_XmlImportExport_default_strategy = 'Výchozí strategie konverze:';
+$s_plugin_XmlImportExport_renumber = 'Přečíslovat';
+$s_plugin_XmlImportExport_renumber_desc = 'Zkusit převést odkazy na nové číslování';
+$s_plugin_XmlImportExport_link = 'Odkaz';
+$s_plugin_XmlImportExport_link_desc = 'Převést na odkaz na původní položku';
+$s_plugin_XmlImportExport_disable = 'Deaktivovat';
+$s_plugin_XmlImportExport_disable_desc = 'Deaktivovat odkaz';
+$s_plugin_XmlImportExport_fallback = 'Záložní strategie (když se nepoužije "Přečíslovat"):';
+$s_plugin_XmlImportExport_fallback_category = 'Záložní kategorie:';
+$s_plugin_XmlImportExport_keep_same_category = 'Zkusit zachovat stejnou kategorii';

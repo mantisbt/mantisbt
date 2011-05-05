@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-/** Swedish (Svenska)
+/** Czech (Česky)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -25,14 +25,16 @@
  * @ingroup Language
  * @file
  *
- * @author Lokal Profil
- * @author Tobulos1
+ * @author Luk
  */
 
-$s_plugin_format_title = 'MantisBT-formatering';
-$s_plugin_format_description = 'Officiell insticksmodul för textbehandling och formatering.';
-$s_plugin_format_config = 'Konfiguration';
-$s_plugin_format_process_text = 'Textbehandling';
-$s_plugin_format_process_vcslinks = 'VCS-länkar';
-$s_plugin_format_enabled = 'På';
-$s_plugin_format_disabled = 'Av';
+$s_plugin_format_title = 'Formátování MantisBT';
+$s_plugin_format_description = 'Oficiální plugin pro zpracování a formátování textu.';
+$s_plugin_format_config = 'Konfigurace';
+$s_plugin_format_process_text = 'Zpracování textu';
+$s_plugin_format_process_text_warning_notice = 'Nevypínejte, aniž opravdu víte, co děláte. Ve vypnutém stavu hrozí útoky typu „cross site scripting“ (XSS).';
+$s_plugin_format_process_urls = 'Zpracování URL';
+$s_plugin_format_process_buglinks = 'Odkazy MantisBT (problém/poznámka k problému)';
+$s_plugin_format_process_vcslinks = 'Odkazy VCS';
+$s_plugin_format_enabled = 'Zapnuto';
+$s_plugin_format_disabled = 'Vypnuto';

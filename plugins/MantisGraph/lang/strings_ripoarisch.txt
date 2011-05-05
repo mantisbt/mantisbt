@@ -52,7 +52,7 @@ $s_plugin_MantisGraph_jpgraph_antialias = 'Donn bei <i lang="en">JPGRAPH</i> et 
 $s_plugin_MantisGraph_jpgraph_antialias_info = 'Et <i lang="en">Anti-aliasing</i>-Verfahre määt bei beshtemmpte Bellder, dat se bäßer ußsinn, ävver doför koß dat bes aach Mohl esu vill Zick';
 $s_plugin_MantisGraph_enabled = 'Enjeschalldt';
 $s_plugin_MantisGraph_disabled = 'Affjeschalldt';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Zosammejefaß als Zeijshnung noh em Shatattus';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Zosammejefaß als Zeijshnung noh em Shtattus';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Zosammejefaß als Zeijshnung noh de Weschteschkeit';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Zosammejefaß als Zeijshnung noh em Jeweesch';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Zosammejefaß als Zeijshnung noh de Saachjroppe';

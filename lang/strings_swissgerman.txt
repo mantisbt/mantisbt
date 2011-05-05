@@ -26,6 +26,7 @@
  * @file
  *
  * @author Als-Holder
+ * @author Purodha
  */
 
 $s_actiongroup_menu_move = 'Verschiebe';
@@ -419,7 +420,8 @@ $s_submit_button = 'Absände';
 $s_profile_updated_msg = 'Profil aktualisiert …';
 $s_my_sponsorship = 'Myy Sponsoreschafte';
 $s_update_sponsorship_button = 'Bezahlstatus ändere';
-$s_no_sponsored = 'Kei vu Dir gsponsereti Probläm gfunde.';
+$s_no_sponsored = 'Kei gsponsereti Probläm gfunde, wu Dir zuegordnet sin.
+';
 $s_own_sponsored = 'Vu Dir gsponsereti Probläm:';
 $s_issues_handled = 'Gsponsereti Probläm, wu Dir zuegordnet sin:';
 $s_no_own_sponsored = 'Du hesch kei Probläm gsponseret.';
@@ -439,7 +441,7 @@ $s_password_updated = 'Passwort erfolgryych aktualisiert.';
 $s_multiple_projects = 'Die vu Dir uusgwehlte Probläm ghere zue verschidene Projäkt. D Parameter, wu do unte stehn, berucksichtige d Yystellige vu alle Projäkt. Wänn des imfall falsch isch, versuech e Änderig mit weniger uusgwehlte Probläm.';
 $s_bug_assign_msg = 'S Probläm isch zuegwise wore …';
 $s_new_bug_title = 'Nej Probläm';
-$s_feedback_bug_title = 'Ruckmäldig zum Probläm mache';
+$s_feedback_bug_title = 'Ruckmäldig zum Probläm frage';
 $s_acknowledged_bug_title = 'Probläm anerkänne';
 $s_confirmed_bug_title = 'Probläm bstätige';
 $s_assigned_bug_title = 'Probläm zuewyse';

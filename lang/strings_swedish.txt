@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Lokal Profil
  * @author McDutchie
  * @author Najami
  * @author Nghtwlkr
@@ -254,7 +255,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Den angivna informatione
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'URL:en är ogiltig för verfiering eller används redan. Var vänlig och ansök igen.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maximalt antal samtidiga förfrågningar har uppnåtts. Var vänlig kontakta din systemadministratör.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Den operationen skulle skapa en loop i underprojekthierarkin.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Du kan inte ändra accessnivå på den enda ADMINISTRATÖREN i systemet.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Du kan inte radera eller degradera det sista administratörskontot. För att utföra den åtgärd du begärt, måste du först skapa ett annat administratörskonto.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Omdirigeringsfel, verifiera att det inte finns blanksteg utanför PHP-blocket (&lt;?php ?&gt;) i config_inc.php eller custom_*.php filerna.';
 $MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Twitterintegration kräver PHP CURL som inte är installerad.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Kunde inte hitta en tagg med det namnet.';
@@ -1004,7 +1005,7 @@ $s_custom_field_type_enum_string = '0:Sträng,1:Numerisk,2:Flyttal,3:Uppräkning
 $s_confirm_used_custom_field_deletion = 'Detta fält är för närvarande länkat till åtminstone ett projekt.  Om du fortsätter kommer alla värden för dett fält att tas bort permanent.  Denna åtgärd kan inte ångras.  Om du inte vill ta bort detta fält, tryck \'Bakåt\' i din webbläsare.  För att fortsätta, tryck på knappen nedan';
 $s_confirm_custom_field_deletion = 'Är du säker på att du vill ta bort detta skräddarsydda fält och alla associerade värden?';
 $s_field_delete_button = 'Ta bort fält';
-$s_confirm_custom_field_unlinking = 'Är du säker på att du vill ta bort (avlänka) detta skräddarsydda fält från projektet och ta bort alla associerade värden?';
+$s_confirm_custom_field_unlinking = 'Är du säker på att du vill avlänka detta skräddarsydda fält från projektet? Värdena kommer inte raderas så länge det skräddarsydda fältet inte tas bort.';
 $s_field_remove_button = 'Ta bort fält';
 $s_hide_status = 'Dölj status';
 $s_filter_closed = 'stängda';

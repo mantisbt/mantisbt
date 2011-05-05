@@ -26,9 +26,31 @@
  * @file
  *
  * @author Kuvaly
+ * @author Luk
  */
 
+$s_plugin_graph_title = 'Grafy Mantis';
+$s_plugin_graph_description = 'Oficiální grafový plugin.';
+$s_plugin_MantisGraph_title = 'Grafy Mantis';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Rozšířené shrnutí';
+$s_plugin_MantisGraph_config = 'Konfigurace';
+$s_plugin_MantisGraph_synthesis_link = 'Syntéza';
+$s_plugin_MantisGraph_status_link = 'Podle stavu';
+$s_plugin_MantisGraph_priority_link = 'Podle priority';
+$s_plugin_MantisGraph_severity_link = 'Podle závažnosti';
+$s_plugin_MantisGraph_category_link = 'Podle kategorie';
+$s_plugin_MantisGraph_resolution_link = 'Podle řešení';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Graf';
+$s_plugin_MantisGraph_library = 'Použitá grafová knihovna';
+$s_plugin_MantisGraph_bundled = 'Přibalený (bundled)';
+$s_plugin_MantisGraph_window_width = 'Šířka grafu (v pixelech)';
+$s_plugin_MantisGraph_bar_aspect = 'Poměr stran sloupcového grafu (výška/šířka)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Kolik grafů na řádek se zobrazí na stránce rozšířeného shrnutí';
+$s_plugin_MantisGraph_font = 'Písmo';
+$s_plugin_MantisGraph_jpgraph_path = 'Systémová cesta ke knihovně JpGraph';
+$s_plugin_MantisGraph_jpgraph_path_default = 'Nechte prázdné pro výchozí: {mantisroot}/library/jpgraph';
+$s_plugin_MantisGraph_jpgraph_antialias = 'Antialiasing JpGraph';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'Antialiasing zlepšuje vzhled některých grafů na úkor výkonu (až 8x pomalejší)';
 $s_plugin_MantisGraph_enabled = 'Zapnuto';
 $s_plugin_MantisGraph_disabled = 'Vypnuto';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Graf podle stavu';

@@ -25,8 +25,12 @@
  * @ingroup Language
  * @file
  *
+ * @author DCLXVI
  */
 
+$s_plugin_MantisGraph_config = 'Конфигурация';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Граф';
+$s_plugin_MantisGraph_library = 'Граф библиотека за използване';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Синтетична диаграма по Статус';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Синтетична диаграма по Приоритет';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Синтетична диаграма по Значимост';

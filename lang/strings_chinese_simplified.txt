@@ -31,6 +31,7 @@
  * @author Hacked by justin schnell_18@yahoo.com
  * @author Hydra
  * @author Kai-Zheng Cheng, neek@sina.com
+ * @author Liangent
  * @author NetCobra, netcobra@gmail.com
  * @author PhiLiP
  * @author Riceball LEE riceballl@hotmail.com
@@ -635,7 +636,7 @@ $s_current_status = '当前状态';
 $s_next_status = '下一状态';
 $s_workflow = '工作流';
 $s_workflow_thresholds = '影响工作流的阀值';
-$s_threshold = '阀值';
+$s_threshold = '阈值';
 $s_status_level = '状态';
 $s_alter_level = '有权修改该值的人';
 $s_validation = '工作流校验';

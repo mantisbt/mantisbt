@@ -26,6 +26,7 @@
  * @file
  *
  * @author Asya
+ * @author DCLXVI
  */
 
 $s_plugin_format_title = 'Форматиране в MantisBT';
@@ -33,3 +34,5 @@ $s_plugin_format_description = 'Официален плъгин за обраб�
 $s_plugin_format_config = 'Конфигурация';
 $s_plugin_format_process_text = 'Обработка на текст';
 $s_plugin_format_process_urls = 'Обработка на URL';
+$s_plugin_format_enabled = 'Вкл.';
+$s_plugin_format_disabled = 'Изкл.';

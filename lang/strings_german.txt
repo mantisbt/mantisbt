@@ -29,6 +29,7 @@
  * @author Andre Eisenbach, andre@eisenbach.com
  * @author Atrol
  * @author Campmaster
+ * @author Diebuche
  * @author Dr. Jürgen Kehrel, jkehrel@kehrel.de
  * @author Heiko Gierer, gierer@rittershaus.de
  * @author Hermann-Josef Beckers, hjb-rheine@t-online.de
@@ -439,7 +440,7 @@ $s_submit_button = 'Absenden';
 $s_profile_updated_msg = 'Profil aktualisiert …';
 $s_my_sponsorship = 'Meine Sponsorenschaften';
 $s_update_sponsorship_button = 'Bezahlstatus ändern';
-$s_no_sponsored = 'Keine von Ihnen gesponserten Einträge gefunden.';
+$s_no_sponsored = 'Keine Ihnen zugewiesenen gesponserten Einträge gefunden.';
 $s_own_sponsored = 'Von Ihnen gesponserte Einträge:';
 $s_issues_handled = 'Gesponserte Einträge, die Ihnen zugeordnet sind:';
 $s_no_own_sponsored = 'Sie haben keine Einträge gesponsert.';
@@ -459,7 +460,7 @@ $s_password_updated = 'Passwort erfolgreich aktualisiert.';
 $s_multiple_projects = 'Die von Ihnen ausgewählten Einträge gehören zu verschiedenen Projekten. Die unten stehenden Parameter berücksichtigen die Einstellungen aller Projekte. Falls das falsch ist, versuchen Sie eine Änderung mit weniger ausgewählten Einträgen.';
 $s_bug_assign_msg = 'Der Eintrag wurde zugewiesen …';
 $s_new_bug_title = 'Neuer Eintrag';
-$s_feedback_bug_title = 'Rückmeldung zum Eintrag machen';
+$s_feedback_bug_title = 'Rückmeldung zum Eintrag erfragen';
 $s_acknowledged_bug_title = 'Eintrag anerkennen';
 $s_confirmed_bug_title = 'Eintrag bestätigen';
 $s_assigned_bug_title = 'Eintrag zuweisen';
