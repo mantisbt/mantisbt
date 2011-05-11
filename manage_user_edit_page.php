@@ -73,7 +73,7 @@
 <!-- Username -->
 <tr <?php echo helper_alternate_class( 1 ) ?>>
 	<td class="category" width="30%">
-		<?php echo lang_get( 'username' ) ?>:
+		<?php echo lang_get( 'username' ) ?>
 	</td>
 	<td width="70%">
 		<input type="text" size="16" maxlength="<?php echo USERLEN;?>" name="username" value="<?php echo string_attribute( $t_user['username'] ) ?>" />
@@ -123,7 +123,7 @@
 <!-- Access Level -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'access_level' ) ?>:
+		<?php echo lang_get( 'access_level' ) ?>
 	</td>
 	<td>
 		<select name="access_level">
@@ -141,7 +141,7 @@
 <!-- Enabled Checkbox -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'enabled' ) ?>:
+		<?php echo lang_get( 'enabled' ) ?>
 	</td>
 	<td>
 		<input type="checkbox" name="enabled" <?php check_checked( $t_user['enabled'], ON ); ?> />
@@ -151,7 +151,7 @@
 <!-- Protected Checkbox -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'protected' ) ?>:
+		<?php echo lang_get( 'protected' ) ?>
 	</td>
 	<td>
 		<input type="checkbox" name="protected" <?php check_checked( $t_user['protected'], ON ); ?> />
@@ -227,7 +227,7 @@
 <!-- Assigned Projects -->
 <tr <?php echo helper_alternate_class( 1 ) ?> valign="top">
 	<td class="category" width="30%">
-		<?php echo lang_get( 'assigned_projects' ) ?>:
+		<?php echo lang_get( 'assigned_projects' ) ?>
 	</td>
 	<td width="70%">
 		<?php print_project_user_list( $t_user['id'] ) ?>
@@ -240,7 +240,7 @@
 <!-- Unassigned Project Selection -->
 <tr <?php echo helper_alternate_class() ?> valign="top">
 	<td class="category">
-		<?php echo lang_get( 'unassigned_projects' ) ?>:
+		<?php echo lang_get( 'unassigned_projects' ) ?>
 	</td>
 	<td>
 		<select name="project_id[]" multiple="multiple" size="5">
@@ -252,7 +252,7 @@
 <!-- New Access Level -->
 <tr <?php echo helper_alternate_class() ?> valign="top">
 	<td class="category">
-		<?php echo lang_get( 'access_level' ) ?>:
+		<?php echo lang_get( 'access_level' ) ?>
 	</td>
 	<td>
 		<select name="access_level">
