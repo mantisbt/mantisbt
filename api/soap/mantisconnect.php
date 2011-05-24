@@ -894,6 +894,21 @@ $l_oServer->register( 'mc_issue_note_delete',
 	'Delete the note with the specified id.'
 );
 
+### mc_issue_note_update
+$l_oServer->register( 'mc_issue_note_update',
+    array(
+        'username'  =>  'xsd:string',
+        'password'  =>  'xsd:string',
+        'note'      =>  'tns:IssueNoteData'
+    ),
+    array(
+        'return'    =>  'xsd:boolean'
+    ),
+    $t_namespace,
+    false, false, false,
+    'Update a specific note of a specific issue.'
+);
+
 ### mc_issue_relationship_add
 $l_oServer->register( 'mc_issue_relationship_add',
 	array(
