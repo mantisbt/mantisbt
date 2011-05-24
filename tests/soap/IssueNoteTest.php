@@ -148,13 +148,15 @@ class IssueNoteTest extends SoapBase {
 	 * 2. Add a note to the issue.
 	 * 3. Get the issue.
 	 * 4. Verify that the issue has one note.
-	 * 5. Delete the note.
-	 * 6. Get the issue.
-	 * 7. Verify that the issue has no notes.
-	 * 8. Delete the issue.
+     * 5.  Update this note
+     * 6.  Verify that the note has been updated
+     * 7.  Delete the note.
+     * 8.  Get the issue.
+     * 9.  Verify that the issue has no notes.
+     * 10. Delete the issue.
 	 */
-	public function testAddThenDeleteNote() {
-		$issueToAdd = $this->getIssueToAdd( 'IssueNoteTest.testAddThenDeleteNote' );
+	public function testAddThenUpdateThenDeleteNote() {
+		$issueToAdd = $this->getIssueToAdd( 'IssueNoteTest.testAddThenUpdateThenDeleteNote' );
 
 		$issueId = $this->client->mc_issue_add(
 			$this->userName,
@@ -185,6 +187,25 @@ class IssueNoteTest extends SoapBase {
 
 		$this->assertEquals( 1, count( $issueWithNote->notes ) );
 		
+        $noteDataNew = array(
+            'id' => $issueNoteId,
+            'text' => "some new note"
+        );
+
+        $this->client->mc_issue_note_update(
+            $this->userName,
+            $this->password,
+            $noteDataNew);
+
+        $issueWithNewNote = $this->client->mc_issue_get(
+            $this->userName,
+            $this->password,
+            $issueId);
+
+        $this->assertEquals( 1, count( $issueWithNote->notes ) );
+
+        $this->assertEquals( $noteDataNew['text'], $issueWithNewNote->notes[0]->text );
+
 		$this->client->mc_issue_note_delete(
 			$this->userName,
 			$this->password,
