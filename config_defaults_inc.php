@@ -1605,7 +1605,7 @@
 	 * do NOT include tags that have parameters (eg. <font face="arial">)
 	 * @global string $g_html_valid_tags
 	 */
-	$g_html_valid_tags		= 'p, li, ul, ol, br, pre, i, b, u, em';
+	$g_html_valid_tags		= 'p, li, ul, ol, br, pre, i, b, u, em, strong';
 
 	/**
 	 * These are the valid html tags for single line fields (e.g. issue summary).
@@ -1613,7 +1613,7 @@
 	 * do NOT include tags that have parameters (eg. <font face="arial">)
 	 * @global string $g_html_valid_tags_single_line
 	 */
-	$g_html_valid_tags_single_line		= 'i, b, u, em';
+	$g_html_valid_tags_single_line		= 'i, b, u, em, strong';
 
 	/**
 	 * maximum length of the description in a dropdown menu (for search)
