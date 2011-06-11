@@ -51,8 +51,6 @@
 
 	compress_enable();
 
-	$t_history = history_get_events_array( $f_bug_id );
-
 	$tpl_show_id = in_array( 'id', $t_fields );
 	$tpl_show_project = in_array( 'project', $t_fields );
 	$tpl_show_category = in_array( 'category_id', $t_fields );
@@ -83,6 +81,7 @@
 	$tpl_show_additional_information = in_array( 'additional_info', $t_fields );
 	$tpl_show_tags = in_array( 'tags', $t_fields );
 	$tpl_show_attachments = in_array( 'attachments', $t_fields );
+	$tpl_show_history = access_has_bug_level( config_get( 'view_history_threshold' ), $f_bug_id );
 
 	$tpl_window_title = string_display_line( config_get( 'window_title' ) );
 	$tpl_project_name = $tpl_show_project ? string_display_line( project_get_name( $tpl_bug->project_id ) ) : '';
@@ -493,29 +492,36 @@
 		echo '</td></tr>';
 	}
 
-	echo '<tr><td class="print-spacer" colspan="6"><hr size="1" /></td></tr>';
+	#
+	# Issue History
+	#
 
-	# ISSUE HISTORY
-	echo '<tr><td class="form-title">', lang_get( 'bug_history' ), '</td></tr>';
+	if ( $tpl_show_history ) {
+		echo '<tr><td class="print-spacer" colspan="6"><hr size="1" /></td></tr>';
 
-	echo '<tr class="print-category">';
-	echo '<td class="row-category-history">', lang_get( 'date_modified' ), '</td>';
-	echo '<td class="row-category-history">', lang_get( 'username' ), '</td>';
-	echo '<td class="row-category-history">', lang_get( 'field' ), '</td>';
-	echo '<td class="row-category-history">', lang_get( 'change' ), '</td>';
-	echo '</tr>';
+		echo '<tr><td class="form-title">', lang_get( 'bug_history' ), '</td></tr>';
 
-	foreach ( $t_history as $t_item ) {
-		echo '<tr class="print">';
-		echo '<td class="print">', $t_item['date'], '</td>';
-		echo '<td class="print">';
-		print_user( $t_item['userid'] );
-		echo '</td>';
-		echo '<td class="print">', string_display( $t_item['note'] ), '</td>';
-		echo '<td class="print">', string_display_line_links( $t_item['change'] ), '</td>';
+		echo '<tr class="print-category">';
+		echo '<td class="row-category-history">', lang_get( 'date_modified' ), '</td>';
+		echo '<td class="row-category-history">', lang_get( 'username' ), '</td>';
+		echo '<td class="row-category-history">', lang_get( 'field' ), '</td>';
+		echo '<td class="row-category-history">', lang_get( 'change' ), '</td>';
 		echo '</tr>';
-	}
 
+		$t_history = history_get_events_array( $f_bug_id );
+		
+		foreach ( $t_history as $t_item ) {
+			echo '<tr class="print">';
+			echo '<td class="print">', $t_item['date'], '</td>';
+			echo '<td class="print">';
+			print_user( $t_item['userid'] );
+			echo '</td>';
+			echo '<td class="print">', string_display( $t_item['note'] ), '</td>';
+			echo '<td class="print">', string_display_line_links( $t_item['change'] ), '</td>';
+			echo '</tr>';
+		}
+	}
+	
 	echo '</table>';
 
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'print_bugnote_inc.php' ) ;
