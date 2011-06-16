@@ -967,7 +967,7 @@ function print_manage_menu( $p_page = '' ) {
 	if( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
 		print_bracket_link( helper_mantis_url( $t_manage_project_menu_page ), lang_get( 'manage_projects_link' ) );
 	}
-	if( access_has_project_level( config_get( 'tag_edit_threshold' ) ) ) {
+	if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
 		print_bracket_link( helper_mantis_url( $t_manage_tags_page ), lang_get( 'manage_tags_link' ) );
 	}
 	if( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {

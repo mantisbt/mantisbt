@@ -32,7 +32,7 @@ require_once( 'tag_api.php' );
 require_once( 'user_pref_api.php' );
 require_once( 'form_api.php' );
 
-access_ensure_global_level( config_get( 'tag_view_threshold' ) );
+access_ensure_global_level( config_get( 'tag_edit_threshold' ) );
 
 compress_enable();
 
