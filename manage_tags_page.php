@@ -132,8 +132,12 @@ $t_result = db_query_bound( $t_query, $t_where_params, $t_per_page, $t_offset );
 <table class="width100" cellspacing="1">
 	<tr>
 		<td class="form-title" colspan="4">
-			<?php echo lang_get( 'manage_tags_link' ) ?> [<?php echo $t_total_tag_count ?>]
-			<?php print_link( '#tagcreate', lang_get( 'tag_create' ) ) ?>
+			<?php
+				echo lang_get( 'manage_tags_link' ) . ' [' . $t_total_tag_count . '] ';
+				if ( $t_can_edit ) {
+					print_link( '#tagcreate', lang_get( 'tag_create' ) );
+				}
+			?>
 		</td>
 	</tr>
 	<tr class="row-category">
