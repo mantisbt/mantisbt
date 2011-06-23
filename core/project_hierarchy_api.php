@@ -120,7 +120,7 @@ function project_hierarchy_remove_all( $p_project_id ) {
 
 /**
  * Returns true if project is at top of hierarchy
- * @param bool $p_project_id Project ID
+ * @param int $p_project_id Project ID
  * @param bool $p_show_disabled Whether or not to consider projects which are disabled
  * @return bool
  */
@@ -134,6 +134,30 @@ function project_hierarchy_is_toplevel( $p_project_id, $p_show_disabled = false 
 	} else {
 		return false;
 	}
+}
+
+/**
+ * Returns the id of the project's parent (0 if top-level or not found)
+ * @param int $p_project_id Project ID
+ * @param bool $p_show_disabled Whether or not to consider projects which are disabled
+ * @return int
+ */
+function project_hierarchy_get_parent( $p_project_id, $p_show_disabled = false ) {
+	global $g_cache_project_hierarchy;
+
+	project_hierarchy_cache( $p_show_disabled );
+
+	if( ALL_PROJECTS == $p_project_id ) {
+		return 0;
+	}
+
+	foreach( $g_cache_project_hierarchy as $key => $value ) {
+		if( in_array( $p_project_id, $g_cache_project_hierarchy[$key] ) ) {
+			return $key;
+		}
+	}
+
+	return 0;
 }
 
 /**
