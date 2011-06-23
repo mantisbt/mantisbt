@@ -227,9 +227,19 @@ function helper_get_current_project_trace() {
 
 	if( null === $t_project_id ) {
 		$t_bottom = current_user_get_pref( 'default_project' );
+		$t_parent = $t_bottom;
 		$t_project_id = Array(
 			$t_bottom,
 		);
+
+		while( true ) {
+			$t_parent = project_hierarchy_get_parent( $t_parent );
+			if( 0 == $t_parent ) {
+				break;
+			}
+			array_unshift($t_project_id, $t_parent);
+		}
+
 	} else {
 		$t_project_id = explode( ';', $t_project_id );
 		$t_bottom = $t_project_id[count( $t_project_id ) - 1];
