@@ -265,6 +265,9 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 		if(( $row['user_id'] == $t_user_id ) || db_prepare_bool( $row['is_public'] ) ) {
 
 		    $t_filter_detail = explode( '#', $row['filter_string'], 2 );
+		    if ( !isset($t_filter_detail[1]) ) {
+		    	continue;
+		    }
         	$t_filter = unserialize( $t_filter_detail[1] );
 	        $t_filter = filter_ensure_valid_filter( $t_filter );
 		    $row['url'] = filter_get_url( $t_filter );
