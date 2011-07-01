@@ -1,0 +1,48 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2011  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Traditional Chinese (‪中文(繁體)‬)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Cwlin0416
+ * @author Mark85296341
+ */
+
+$s_plugin_XmlImportExport_title = '匯入/匯出問題';
+$s_plugin_XmlImportExport_description = '開啟 MantisBT XML 匯入/匯出功能。';
+$s_plugin_XmlImportExport_import = '匯入問題';
+$s_plugin_XmlImportExport_export = 'XML 匯出';
+$s_plugin_XmlImportExport_importing_in_project = '匯入問題到專案:';
+$s_plugin_XmlImportExport_import_options = '匯入選項';
+$s_plugin_XmlImportExport_cross_references = '交叉參照';
+$s_plugin_XmlImportExport_default_strategy = '預設轉換方式';
+$s_plugin_XmlImportExport_renumber = '重新編號';
+$s_plugin_XmlImportExport_renumber_desc = '嘗試轉換參照為新編號';
+$s_plugin_XmlImportExport_link = '連結';
+$s_plugin_XmlImportExport_link_desc = '轉換為連結至原來項目';
+$s_plugin_XmlImportExport_disable = '關閉';
+$s_plugin_XmlImportExport_disable_desc = '關閉連結';
+$s_plugin_XmlImportExport_fallback = '還原方式 (當 重新編號 無法使用時):';
+$s_plugin_XmlImportExport_fallback_category = '還原類別:';
+$s_plugin_XmlImportExport_keep_same_category = '嘗試保留在相同類別';

@@ -1,0 +1,97 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2011  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author EugeneZelenko
+ * @author Jim-by
+ */
+
+$s_plugin_graph_title = 'Графікі MantisBT';
+$s_plugin_graph_description = 'Афіцыйнае дапаўненьне для графікаў.';
+$s_plugin_MantisGraph_title = 'Графікі MantisBT';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Поўнае апісаньне';
+$s_plugin_MantisGraph_config = 'Канфігурацыя';
+$s_plugin_MantisGraph_synthesis_link = 'Сынтэз';
+$s_plugin_MantisGraph_status_link = 'Па статусе';
+$s_plugin_MantisGraph_priority_link = 'Па прыярытэце';
+$s_plugin_MantisGraph_severity_link = 'Па сур’ёзнасьці';
+$s_plugin_MantisGraph_category_link = 'Па катэгорыі';
+$s_plugin_MantisGraph_resolution_link = 'Па вырашэньні';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Графік';
+$s_plugin_MantisGraph_library = 'Бібліятэка графікаў для выкарыстаньня';
+$s_plugin_MantisGraph_bundled = 'Убудаваная';
+$s_plugin_MantisGraph_window_width = 'Шырыня графіка (у піксэлях)';
+$s_plugin_MantisGraph_bar_aspect = 'Суадносіны бакоў слупковага графіка (вышыня/шырыня)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Колькасьць графікаў для паказу ў радку на палепшанай старонцы апісаньня';
+$s_plugin_MantisGraph_font = 'Шрыфт';
+$s_plugin_MantisGraph_jpgraph_path = 'Сыстэмны шлях да бібліятэкі JpGraph';
+$s_plugin_MantisGraph_jpgraph_path_default = 'Пакіньце пустым для шляху па змоўчваньні: {mantisroot}/library/jpgraph';
+$s_plugin_MantisGraph_jpgraph_antialias = 'Згладжваньне JpGraph';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'Згладжваньне паляпшае выгляд некаторых графікаў за кошт хуткадзейнасьці (да 8 разоў павольней)';
+$s_plugin_MantisGraph_enabled = 'Уключыць';
+$s_plugin_MantisGraph_disabled = 'Выключыць';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Сумарныя графікі па статусе';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Сумарныя графікі па прыярытэце';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Сумарныя графікі па сур’ёзнасьці';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Сумарныя графікі па катэгорыі';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Сумарны графік па вырашэньні';
+$s_plugin_MantisGraph_by_status_pct = 'Па статусе ў адсотках';
+$s_plugin_MantisGraph_by_priority_pct = 'Па прыярытэце ў адсотках';
+$s_plugin_MantisGraph_by_severity_pct = 'Па сур’ёзнасьці ў адсотках';
+$s_plugin_MantisGraph_by_category_pct = 'Па катэгорыях у адсотках';
+$s_plugin_MantisGraph_by_resolution_pct = 'Па вырашэньні ў адсотках';
+$s_plugin_MantisGraph_by_severity_mix = 'Па сур’ёзнасьці і статусе';
+$s_plugin_MantisGraph_by_priority_mix = 'Па прыярытэце і статусе';
+$s_plugin_MantisGraph_by_resolution_mix = 'Па вырашэньні і статусе';
+$s_plugin_MantisGraph_legend_still_open = 'Адкрытыя';
+$s_plugin_MantisGraph_legend_resolved = 'Вырашаныя';
+$s_plugin_MantisGraph_legend_assigned = 'Прызначаныя';
+$s_plugin_MantisGraph_legend_total = 'Усяго';
+$s_plugin_MantisGraph_legend_opened = 'Адкрытыя';
+$s_plugin_MantisGraph_legend_closed = 'Закрытыя';
+$s_plugin_MantisGraph_legend_reported = 'Ініцыяваныя';
+$s_plugin_MantisGraph_cumulative = 'Агульны';
+$s_plugin_MantisGraph_not_enough_data = 'Недастаткова зьвестак для стварэньня графіка';
+$s_plugin_MantisGraph_period_none = 'Няма';
+$s_plugin_MantisGraph_period_this_week = 'Гэты тыдзень';
+$s_plugin_MantisGraph_period_last_week = 'Мінулы тыдзень';
+$s_plugin_MantisGraph_period_two_weeks = 'Апошнія два тыдні';
+$s_plugin_MantisGraph_period_this_month = 'Гэты месяц';
+$s_plugin_MantisGraph_period_last_month = 'Мінулы месяц';
+$s_plugin_MantisGraph_period_this_quarter = 'Гэты квартал';
+$s_plugin_MantisGraph_period_last_quarter = 'Папярэдні квартал';
+$s_plugin_MantisGraph_period_year_to_date = 'З пачатку года';
+$s_plugin_MantisGraph_period_select = 'Адвольныя даты';
+$s_plugin_MantisGraph_period_last_year = 'Папярэдні год';
+$s_plugin_MantisGraph_select = 'Калі ласка, зрабіце выбар';
+$s_plugin_MantisGraph_select_bystatus = 'па статусе';
+$s_plugin_MantisGraph_select_summbystatus = 'Падсумаваньне па статусе';
+$s_plugin_MantisGraph_select_bycat = 'Падсумаваньне па катэгорыі';
+$s_plugin_MantisGraph_select_both = 'Падсумаваньне па статусе і катэгорыі';
+$s_plugin_MantisGraph_show_as_graph = 'Паказаць як графік';
+$s_plugin_MantisGraph_show_as_table = 'Паказаць як табліцу';
+$s_plugin_MantisGraph_show_graph = 'Паказаць графік';
+$s_plugin_MantisGraph_graph_page = 'Графік гісторыі праблемаў';

@@ -1,0 +1,41 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2011  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Traditional Chinese (‪中文(繁體)‬)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Cwlin0416
+ * @author Mark85296341
+ */
+
+$s_plugin_format_title = 'MantisBT 格式化文字';
+$s_plugin_format_description = '官方文字處理及格式化元件';
+$s_plugin_format_config = '設定';
+$s_plugin_format_process_text = '文字處理';
+$s_plugin_format_process_text_warning_notice = '請勿關閉此項目，除非您已明白可能導致的問題。當此項目關閉時可能導致跨網站指令碼(XSS)攻擊。';
+$s_plugin_format_process_urls = 'URL 處理';
+$s_plugin_format_process_buglinks = 'MantisBT 連結 ( 問題/問題說明 )';
+$s_plugin_format_process_vcslinks = 'VCS 連結';
+$s_plugin_format_enabled = '開啟';
+$s_plugin_format_disabled = '關閉';

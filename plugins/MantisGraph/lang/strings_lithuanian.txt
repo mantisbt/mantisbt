@@ -25,8 +25,13 @@
  * @ingroup Language
  * @file
  *
+ * @author Eitvys200
  */
 
+$s_plugin_MantisGraph_config = 'Konfigūracija';
+$s_plugin_MantisGraph_font = 'Šriftas';
+$s_plugin_MantisGraph_enabled = 'Įjungti';
+$s_plugin_MantisGraph_disabled = 'Išjungti';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Sukurti grafiką pagal būseną';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Sukurti grafiką pagal prioritetą';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Sukurti grafiką pagal svarbą';
@@ -49,6 +54,7 @@ $s_plugin_MantisGraph_legend_closed = 'Uždarytų';
 $s_plugin_MantisGraph_legend_reported = 'Praštų';
 $s_plugin_MantisGraph_cumulative = 'Bendras';
 $s_plugin_MantisGraph_not_enough_data = 'Neužtenka duomenų';
+$s_plugin_MantisGraph_period_none = 'Nėra';
 $s_plugin_MantisGraph_period_this_week = 'Šią savaitę';
 $s_plugin_MantisGraph_period_last_week = 'Praeitą savaitę';
 $s_plugin_MantisGraph_period_two_weeks = 'Paskutines 2 sav.';

@@ -30,6 +30,7 @@
  * @author Bernardo Hernández - b.magno@terra.es
  * @author Bithunter
  * @author Crazymadlover
+ * @author Fitoschido
  * @author Javier Poveda - javierpoveda@arsystel.com
  * @author Jorge Andrés Brugger - jbrugger@gmx.net
  * @author Locos epraix
@@ -47,11 +48,11 @@ $s_actiongroup_menu_assign = 'Asignar';
 $s_actiongroup_menu_close = 'Cerrar';
 $s_actiongroup_menu_delete = 'Borrar';
 $s_actiongroup_menu_resolve = 'Resolver';
-$s_actiongroup_menu_update_priority = 'Cambiar Prioridad';
-$s_actiongroup_menu_update_status = 'Cambiar Estado';
+$s_actiongroup_menu_update_priority = 'Actualizar prioridad';
+$s_actiongroup_menu_update_status = 'Actualizar estado';
 $s_actiongroup_menu_update_severity = 'Actualizar severidad';
-$s_actiongroup_menu_update_view_status = 'Cambiar Visibilidad';
-$s_actiongroup_menu_update_category = 'Cambiar Categoría';
+$s_actiongroup_menu_update_view_status = 'Actualizar visibilidad';
+$s_actiongroup_menu_update_category = 'Actualizar categoría';
 $s_actiongroup_menu_set_sticky = 'Fijar/Desfijar';
 $s_actiongroup_menu_update_field = 'Actualizar %1$s';
 $s_actiongroup_menu_update_target_version = 'Actualizar Previsto para Versión';
@@ -68,7 +69,7 @@ $s_date_order = 'Marca de tiempo';
 $s_print_all_bug_page_link = 'Imprimir Informes';
 $s_csv_export = 'Exportar a CSV';
 $s_excel_export = 'Exportar a Excel';
-$s_login_anonymously = 'Conectarse Anónimamente';
+$s_login_anonymously = 'Iniciar sesión de forma anónima';
 $s_anonymous = 'Anónimo';
 $s_jump_to_bugnotes = 'Ir a Notas';
 $s_public_project_msg = 'Este proyecto es PÚBLICO.  Todos los usuarios tienen acceso al mismo.';
@@ -99,7 +100,7 @@ $s_bug_end_monitor = 'Concluir Monitorización';
 $s_announcement = 'Anuncio';
 $s_stays_on_top = 'Siempre Arriba';
 $s_bugnote_link_title = 'Acceso directo a nota';
-$s_delete_bugnote_button = 'Eliminar Nota';
+$s_delete_bugnote_button = 'Eliminar nota';
 $s_delete_bugnote_sure_msg = '¿Está seguro que desea eliminar esta nota?';
 $s_bug_relationships = 'Relaciones';
 $s_empty_password_sure_msg = 'El usuario tiene una contraseña vacía. ¿Está seguro que es lo que desea?';
