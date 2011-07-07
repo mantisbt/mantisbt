@@ -60,95 +60,114 @@ if ( ON != config_get('time_tracking_enabled') ) {
 	$t_bugnote_stats_to_y = gpc_get_string( 'end_year', $t_bugnote_stats_to_def_y );
 
 	$f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
-?>
-<form method="post" action="<?php echo form_action_self() ?>">
-<?php # CSRF protection not required here - form does not result in modifications ?>
-<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
-<table border=0 class="width100" cellspacing="0">
-<tr>
-	<td class="form-title" colspan="4">
-<?php
-		collapse_icon( 'bugnotestats' );
-		echo lang_get( 'time_tracking' ) ?>
-	</td>
-</tr>
-<tr class="row-2">
-        <td class="category" width="25%">
-                <?php
-		$t_filter = array();
-		$t_filter['do_filter_by_date'] = 'on';
-		$t_filter['start_day'] = $t_bugnote_stats_from_d;
-		$t_filter['start_month'] = $t_bugnote_stats_from_m;
-		$t_filter['start_year'] = $t_bugnote_stats_from_y;
-		$t_filter['end_day'] = $t_bugnote_stats_to_d;
-		$t_filter['end_month'] = $t_bugnote_stats_to_m;
-		$t_filter['end_year'] = $t_bugnote_stats_to_y;
-		print_filter_do_filter_by_date( true );
-		?>
-        </td>
-</tr>
-<tr>
-        <td class="center" colspan="2">
-                <input type="submit" class="button" name="get_bugnote_stats_button" value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>" />
-        </td>
-</tr>
 
-</table>
+	# Time tracking date range input form
+	# CSRF protection not required here - form does not result in modifications
+?>
+
+<form method="post" action="<?php echo form_action_self() ?>">
+	<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
+	<table border=0 class="width100" cellspacing="0">
+		<tr>
+			<td class="form-title" colspan="4">
+				<?php
+					collapse_icon( 'bugnotestats' );
+					echo lang_get( 'time_tracking' )
+				?>
+			</td>
+		</tr>
+		<tr class="row-2">
+			<td class="category" width="25%">
+				<?php
+					$t_filter = array();
+					$t_filter['do_filter_by_date'] = 'on';
+					$t_filter['start_day'] = $t_bugnote_stats_from_d;
+					$t_filter['start_month'] = $t_bugnote_stats_from_m;
+					$t_filter['start_year'] = $t_bugnote_stats_from_y;
+					$t_filter['end_day'] = $t_bugnote_stats_to_d;
+					$t_filter['end_month'] = $t_bugnote_stats_to_m;
+					$t_filter['end_year'] = $t_bugnote_stats_to_y;
+					print_filter_do_filter_by_date( true );
+				?>
+			</td>
+		</tr>
+		<tr>
+			<td class="center" colspan="2">
+				<input type="submit" class="button"
+					name="get_bugnote_stats_button"
+					value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>"
+				/>
+			</td>
+		</tr>
+	</table>
 </form>
+
+
 <?php
-if ( !is_blank( $f_get_bugnote_stats_button ) ) {
-	$t_from = "$t_bugnote_stats_from_y-$t_bugnote_stats_from_m-$t_bugnote_stats_from_d";
-	$t_to = "$t_bugnote_stats_to_y-$t_bugnote_stats_to_m-$t_bugnote_stats_to_d";
-	$t_bugnote_stats = bugnote_stats_get_events_array( $f_bug_id, $t_from, $t_to );
+	# Print time tracking information if requested
+
+	if ( !is_blank( $f_get_bugnote_stats_button ) ) {
+		# Retrieve time tracking information
+		$t_from = "$t_bugnote_stats_from_y-$t_bugnote_stats_from_m-$t_bugnote_stats_from_d";
+		$t_to = "$t_bugnote_stats_to_y-$t_bugnote_stats_to_m-$t_bugnote_stats_to_d";
+		$t_bugnote_stats = bugnote_stats_get_events_array( $f_bug_id, $t_from, $t_to );
 ?>
 <br />
 <table border=0 class="width100" cellspacing="0">
-<tr class="row-category-history">
-	<td class="small-caption">
-		<?php echo lang_get( 'username' ) ?>
-	</td>
-	<td class="small-caption">
-		<?php echo lang_get( 'time_tracking' ) ?>
-	</td>
-</tr>
+	<tr class="row-category-history">
+		<td class="small-caption">
+			<?php echo lang_get( 'username' ) ?>
+		</td>
+		<td class="small-caption">
+			<?php echo lang_get( 'time_tracking' ) ?>
+		</td>
+	</tr>
+
 <?php
-	$t_sum_in_minutes = 0;
-	foreach ( $t_bugnote_stats as $t_item ) {
-		$t_sum_in_minutes += $t_item['sum_time_tracking'];
-		$t_item['sum_time_tracking'] = db_minutes_to_hhmm ( $t_item['sum_time_tracking'] );
+		# Loop on all time tracking entries
+		$t_sum_in_minutes = 0;
+		foreach ( $t_bugnote_stats as $t_item ) {
+			$t_sum_in_minutes += $t_item['sum_time_tracking'];
+			$t_item['sum_time_tracking'] = db_minutes_to_hhmm ( $t_item['sum_time_tracking'] );
 ?>
 
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="small-caption">
-		<?php echo string_display_line( $t_item['username'] ) ?>
-	</td>
-	<td class="small-caption">
-		<?php echo $t_item['sum_time_tracking'] ?>
-	</td>
-</tr>
-<?php } # end for loop ?>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="small-caption">
-		<?php echo lang_get( 'total_time' ) ?>
-	</td>
-	<td class="small-caption">
-		<?php echo db_minutes_to_hhmm ( $t_sum_in_minutes ) ?>
-	</td>
-</tr>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="small-caption">
+			<?php echo string_display_line( $t_item['username'] ) ?>
+		</td>
+		<td class="small-caption">
+			<?php echo $t_item['sum_time_tracking'] ?>
+		</td>
+	</tr>
+<?php
+		} # end for loop
+?>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="small-caption">
+			<?php echo lang_get( 'total_time' ) ?>
+		</td>
+		<td class="small-caption">
+			<?php echo db_minutes_to_hhmm ( $t_sum_in_minutes ) ?>
+		</td>
+	</tr>
 </table>
+
 <?php 
-} # end if
+	} # end if
 
 	collapse_closed( 'bugnotestats' );
 ?>
+
 <table class="width100" cellspacing="0">
-<tr>
-	<td class="form-title" colspan="4">
-		<?php
-			collapse_icon( 'bugnotestats' );
-			echo lang_get( 'time_tracking' ) ?>
-	</td>
-</tr>
+	<tr>
+		<td class="form-title" colspan="4">
+			<?php
+				collapse_icon( 'bugnotestats' );
+				echo lang_get( 'time_tracking' )
+			?>
+		</td>
+	</tr>
 </table>
+
 <?php
 	collapse_end( 'bugnotestats' );
