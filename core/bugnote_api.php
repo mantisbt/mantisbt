@@ -611,10 +611,10 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 
 	$query = "SELECT username, SUM(time_tracking) AS sum_time_tracking
 				FROM $t_user_table u, $t_bugnote_table bn
-				WHERE u.id = bn.reporter_id AND
+				WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND
 				bn.bug_id = '$c_bug_id'
 				$t_from_where $t_to_where
-			GROUP BY u.id, u.username";
+				GROUP BY u.id, u.username";
 
 	$result = db_query( $query );
 
