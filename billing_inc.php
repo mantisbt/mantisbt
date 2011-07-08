@@ -126,16 +126,24 @@ if ( !config_get('time_tracking_enabled') )
 
 <?php
 	if ( !is_blank( $f_get_bugnote_stats_button ) ) {
+		# Retrieve time tracking information
 		$t_from = "$t_bugnote_stats_from_y-$t_bugnote_stats_from_m-$t_bugnote_stats_from_d";
 		$t_to = "$t_bugnote_stats_to_y-$t_bugnote_stats_to_m-$t_bugnote_stats_to_d";
 		$t_bugnote_stats = bugnote_stats_get_project_array( $f_project_id, $t_from, $t_to, $f_bugnote_cost );
 
+		# Sort the array by bug_id, user/real name
 		if ( ON == config_get( 'show_realname' ) ) {
 			$t_name_field = 'realname';
 		}
 		else {
 			$t_name_field = 'username';
 		}
+		foreach ( $t_bugnote_stats as $t_key => $t_item ) {
+			$t_sort_bug[$t_key] = $t_item['bug_id'];
+			$t_sort_name[$t_key] = $t_item[$t_name_field];
+		}
+		array_multisort( $t_sort_bug, SORT_NUMERIC, $t_sort_name, $t_bugnote_stats );
+		unset( $t_sort_bug, $t_sort_name );
 
 		if ( is_blank( $f_bugnote_cost ) || ( (double)$f_bugnote_cost == 0 ) ) {
 			$t_cost_col = false;
