@@ -130,12 +130,19 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 		$t_from = "$t_bugnote_stats_from_y-$t_bugnote_stats_from_m-$t_bugnote_stats_from_d";
 		$t_to = "$t_bugnote_stats_to_y-$t_bugnote_stats_to_m-$t_bugnote_stats_to_d";
 		$t_bugnote_stats = bugnote_stats_get_events_array( $f_bug_id, $t_from, $t_to );
+
+		if ( ON == config_get( 'show_realname' ) ) {
+			$t_name_field = 'realname';
+		}
+		else {
+			$t_name_field = 'username';
+		}
 ?>
 <br />
 <table class="width100" cellspacing="0">
 	<tr class="row-category-history">
 		<td class="small-caption">
-			<?php echo lang_get( 'username' ) ?>
+			<?php echo lang_get( $t_name_field ) ?>
 		</td>
 		<td class="small-caption">
 			<?php echo lang_get( 'time_tracking' ) ?>
@@ -152,7 +159,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="small-caption">
-			<?php echo string_display_line( $t_item['username'] ) ?>
+			<?php echo string_display_line( $t_item[$t_name_field] ) ?>
 		</td>
 		<td class="small-caption">
 			<?php echo $t_item['sum_time_tracking'] ?>

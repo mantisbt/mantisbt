@@ -147,6 +147,13 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 		$t_to = "$t_bugnote_stats_to_y-$t_bugnote_stats_to_m-$t_bugnote_stats_to_d";
 		$t_bugnote_stats = bugnote_stats_get_project_array( $f_project_id, $t_from, $t_to, $f_bugnote_cost );
 
+		if ( ON == config_get( 'show_realname' ) ) {
+			$t_name_field = 'realname';
+		}
+		else {
+			$t_name_field = 'username';
+		}
+
 		if ( is_blank( $f_bugnote_cost ) || ( (double)$f_bugnote_cost == 0 ) ) {
 			$t_cost_col = false;
 		}
@@ -157,7 +164,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 <table class="width100" cellspacing="0">
 	<tr class="row-category-history">
 		<td class="small-caption">
-			<?php echo lang_get( 'username' ) ?>
+			<?php echo lang_get( $t_name_field ) ?>
 		</td>
 		<td class="small-caption">
 			<?php echo lang_get( 'time_tracking' ) ?>
@@ -175,13 +182,13 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 
 		# Initialize the user summary array
 		foreach ( $t_bugnote_stats as $t_item ) {
-			$t_user_summary[$t_item['username']] = 0;
+			$t_user_summary[$t_item[$t_name_field]] = 0;
 		}
 
 		# Calculate the totals
 		foreach ( $t_bugnote_stats as $t_item ) {
 			$t_sum_in_minutes += $t_item['sum_time_tracking'];
-			$t_user_summary[$t_item['username']] += $t_item['sum_time_tracking'];
+			$t_user_summary[$t_item[$t_name_field]] += $t_item['sum_time_tracking'];
 
 			$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
 			if ( $t_item['bug_id'] != $t_prev_id) {
@@ -192,7 +199,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="small-caption">
-			<?php echo $t_item['username'] ?>
+			<?php echo $t_item[$t_name_field] ?>
 		</td>
 		<td class="small-caption">
 			<?php echo $t_item['sum_time_tracking'] ?>
@@ -227,7 +234,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 <table class="width100" cellspacing="0">
 	<tr class="row-category-history">
 		<td class="small-caption">
-			<?php echo lang_get( 'username' ) ?>
+			<?php echo lang_get( $t_name_field ) ?>
 		</td>
 		<td class="small-caption">
 			<?php echo lang_get( 'time_tracking' ) ?>
