@@ -131,12 +131,18 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 		$t_to = "$t_bugnote_stats_to_y-$t_bugnote_stats_to_m-$t_bugnote_stats_to_d";
 		$t_bugnote_stats = bugnote_stats_get_events_array( $f_bug_id, $t_from, $t_to );
 
+		# Sort the array by user/real name
 		if ( ON == config_get( 'show_realname' ) ) {
 			$t_name_field = 'realname';
 		}
 		else {
 			$t_name_field = 'username';
 		}
+		foreach ( $t_bugnote_stats as $t_key => $t_item ) {
+			$t_sort_name[$t_key] = $t_item[$t_name_field];
+		}
+		array_multisort( $t_sort_name, $t_bugnote_stats );
+		unset( $t_sort_name );
 ?>
 <br />
 <table class="width100" cellspacing="0">
