@@ -65,7 +65,7 @@ if ( ON != config_get('time_tracking_enabled') ) {
 	# CSRF protection not required here - form does not result in modifications
 ?>
 
-<form method="post" action="<?php echo form_action_self() ?>">
+<form method="post" action="<?php echo form_action_self() . '#bugnotestats' ?>">
 	<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
 	<table border=0 class="width100" cellspacing="0">
 		<tr>
