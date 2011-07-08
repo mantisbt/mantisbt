@@ -173,6 +173,12 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 		$t_sum_in_minutes = 0;
 		$t_user_summary = array();
 
+		# Initialize the user summary array
+		foreach ( $t_bugnote_stats as $t_item ) {
+			$t_user_summary[$t_item['username']] = 0;
+		}
+
+		# Calculate the totals
 		foreach ( $t_bugnote_stats as $t_item ) {
 			$t_sum_in_minutes += $t_item['sum_time_tracking'];
 			$t_user_summary[$t_item['username']] += $t_item['sum_time_tracking'];
