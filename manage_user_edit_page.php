@@ -178,7 +178,7 @@
 <div class="border center">
 
 <!-- Reset Button -->
-<?php if( !$t_ldap ) { ?>
+<?php if( helper_call_custom_function( 'auth_can_change_password', array() ) ) { ?>
 	<form method="post" action="manage_user_reset.php">
 <?php echo form_security_field( 'manage_user_reset' ) ?>
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
