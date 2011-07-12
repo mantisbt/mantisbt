@@ -172,7 +172,7 @@ print_manage_menu();
 </div>
 
 <div id="manage-user-actions-div" class="form-container">
-<?php if( !$t_ldap ) { ?>
+<?php if( helper_call_custom_function( 'auth_can_change_password', array() ) ) { ?>
 	<form id="manage-user-reset-form" method="post" action="manage_user_reset.php" class="action-button">
 		<fieldset>
 		<?php echo form_security_field( 'manage_user_reset' ) ?>
