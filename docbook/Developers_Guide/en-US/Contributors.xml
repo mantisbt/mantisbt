@@ -59,12 +59,12 @@ $ git config --global alias.ci "commit"
 			The primary repository for MantisBT is hosted and available in multiple
 			methods depending on user status and intentions.  For most contributors,
 			the public clone URL is
-			<ulink url="git://mantisbt.org/mantisbt.git">git://mantisbt.org/mantisbt.git</ulink>.
+			<ulink url="git://github.com/mantisbt/mantisbt.git">git://github.com/mantisbt/mantisbt.git</ulink>.
 			To clone the repository, perform the following from your target workspace:
 		</para>
 
 		<programlisting>
-$ git clone git://mantisbt.org/mantisbt.git
+$ git clone git://github.com/mantisbt/mantisbt.git
 		</programlisting>
 
 		<para>
@@ -76,7 +76,7 @@ $ git clone git://mantisbt.org/mantisbt.git
 		</para>
 
 		<programlisting>
-$ git clone git@mantisbt.org:mantisbt.git
+$ git clone git@github.com:mantisbt/mantisbt.git
 		</programlisting>
 
 		<para>
