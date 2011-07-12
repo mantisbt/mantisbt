@@ -1089,7 +1089,7 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 	$t_category_project_id = category_get_field( $t_category_id, 'project_id' );
 
 	// If not global, then attempt mapping it to the new project.
-	if ( $t_category_project_id != ALL_PROJECTS ) {
+	if ( $t_category_project_id != ALL_PROJECTS && !project_hierarchy_inherit_parent( $p_target_project_id, $t_category_project_id ) ) {
 		// Map by name
 		$t_category_name = category_get_field( $t_category_id, 'name' );
 		$t_target_project_category_id = category_get_id_by_name( $t_category_name, $p_target_project_id, /* triggerErrors */ false );
