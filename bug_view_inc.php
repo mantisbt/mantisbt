@@ -286,11 +286,11 @@ if ( $t_bugslist ) {
 	$t_index = array_search( $f_bug_id, $t_bugslist );
 	if ( false !== $t_index ) {
 		if ( isset( $t_bugslist[$t_index-1] ) ) {
-			print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index-1], '&lt;&lt;', false, 'previous-bug' );
+			print_bracket_link( 'view.php?id='.$t_bugslist[$t_index-1], '&lt;&lt;', false, 'previous-bug' );
 		}
 
 		if ( isset( $t_bugslist[$t_index+1] ) ) {
-			print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index+1], '&gt;&gt;', false, 'next-bug' );
+			print_bracket_link( 'view.php?id='.$t_bugslist[$t_index+1], '&gt;&gt;', false, 'next-bug' );
 		}
 	}
 	echo '</span></td>';
