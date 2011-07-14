@@ -84,7 +84,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 # CSRF protection not required here - form does not result in modifications
 ?>
 
-<form method="post" action="">
+<form method="post" action="#bugnotestats">
 	<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
 	<table class="width100" cellspacing="0">
 		<tr>
