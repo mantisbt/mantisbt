@@ -1503,7 +1503,7 @@ $s_tag_create = 'Create Tag';
 $s_show_all_tags = 'All';
 
 # Time Tracking
-$s_time_tracking_billing_link = 'Billing';
+$s_time_tracking_billing_link = 'Time Tracking';
 $s_time_tracking = 'Time tracking';
 $s_time_tracking_get_info_button = 'Get Time Tracking Information';
 $s_time_tracking_cost_per_hour = 'Cost / Hour';
