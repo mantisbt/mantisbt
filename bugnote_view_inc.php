@@ -186,7 +186,7 @@ $num_notes = count( $t_bugnotes );
 					break;
 				case TIME_TRACKING:
 					if ( access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
-						echo '<b><big>', $t_time_tracking_hhmm, '</big></b><br /><br />';
+						echo '<b>', lang_get( 'time_tracking_time_spent' ) . ' ' . $t_time_tracking_hhmm, '</b><br /><br />';
 					}
 					break;
 			}

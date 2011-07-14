@@ -1505,6 +1505,7 @@ $s_show_all_tags = 'All';
 # Time Tracking
 $s_time_tracking_billing_link = 'Time Tracking';
 $s_time_tracking = 'Time tracking';
+$s_time_tracking_time_spent = 'Time spent:';
 $s_time_tracking_get_info_button = 'Get Time Tracking Information';
 $s_time_tracking_cost_per_hour = 'Cost / Hour';
 $s_time_tracking_cost = 'Cost';
