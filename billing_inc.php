@@ -123,7 +123,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 ?>
 		<tr class="row-1">
 			<td>
-				<?php echo lang_get( 'time_tracking_cost_label' ) ?>
+				<?php echo lang_get( 'time_tracking_cost_per_hour_label' ) ?>
 				<input type="text" name="bugnote_cost" value="<?php echo $f_bugnote_cost ?>" />
 			</td>
 		</tr>

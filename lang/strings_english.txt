@@ -1426,6 +1426,7 @@ If you requested this verification, visit the following URL to change your passw
 	'time_tracking' => 'Time tracking',
 	'time_tracking_get_info_button' => 'Get Time Tracking Information',
 	'time_tracking_cost_per_hour' => 'Cost / Hour',
+	'time_tracking_cost_per_hour_label' => 'Cost / Hour:',
 	'time_tracking_cost' => 'Cost',
 	'time_tracking_cost_label' => 'Cost:',
 	'total_time_for_issue' => 'Total time for issue = %1$s',
