@@ -85,7 +85,7 @@ tr.print-category	{ color: #000000; font-weight: bold; }
 tr.bugnote .bugnote-meta { background-color: #c8c8e8; color: #000000; font-weight: bold; width: 25%; line-height: 1.4; vertical-align: top; }
 tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%; vertical-align: top; }
 tr.bugnote .time-tracked,
-.time-tracking-total .time-tracked { font-size: larger; font-weight:bold; margin: 0 0 1em; padding:0; }
+.time-tracking-total .time-tracked { font-weight:bold; margin: 0 0 1em; padding:0; }
 .time-tracking-total { text-align:right; }
 
 #login-info { clear: both; position: relative; display: block; float: left; padding: .5em 0; z-index: 100; line-height: 1em; }
