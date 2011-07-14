@@ -106,7 +106,7 @@ if ( !config_get('time_tracking_enabled') )
 ?>
 		<tr class="row-1">
 			<td>
-				<?php echo lang_get( 'time_tracking_cost' ) ?>:
+				<?php echo lang_get( 'time_tracking_cost_per_hour' ) ?>:
 				<input type="text" name="bugnote_cost" value="<?php echo $f_bugnote_cost ?>" />
 			</td>
 		</tr>
