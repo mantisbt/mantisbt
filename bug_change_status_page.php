@@ -362,7 +362,7 @@ if ( ( $t_resolved <= $f_new_status ) ) {
 		<?php echo lang_get( 'time_tracking' ) ?>
 	</th>
 	<td>
-		<input type="text" name="time_tracking" size="5" value="hh:mm" />
+		<input type="text" name="time_tracking" size="5" placeholder="hh:mm" />
 	</td>
 </tr>
 <?php } ?>

@@ -130,13 +130,13 @@ $(document).ready( function() {
 			if (hours < 10) {
 				hours = '0' + hours;
 			}
-			$('input[type=text].stopwatch_time').attr('value', hours + ':' + minutes + ':' + seconds);
+			$('input[type=text].stopwatch_time').val(hours + ':' + minutes + ':' + seconds);
 			this.start();
 		},
 		reset: function() {
 			this.stop();
 			this.elapsedTime = 0;
-			$('input[type=text].stopwatch_time').attr('value', '00:00:00');
+			$('input[type=text].stopwatch_time').val('');
 		},
 		start: function() {
 			this.stop();
@@ -156,18 +156,18 @@ $(document).ready( function() {
 		if (stopwatch.elapsedTime == 0) {
 			stopwatch.stop();
 			stopwatch.start();
-			$('input[type=button].stopwatch_toggle').attr('value', translations['time_tracking_stopwatch_stop']);
+			$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_stop']);
 		} else if (typeof stopwatch.timerID == 'number') {
 			stopwatch.stop();
-			$('input[type=button].stopwatch_toggle').attr('value', translations['time_tracking_stopwatch_start']);
+			$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_start']);
 		} else {
 			stopwatch.start();
-			$('input[type=button].stopwatch_toggle').attr('value', translations['time_tracking_stopwatch_stop']);
+			$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_stop']);
 		}
 	});
 	$('input[type=button].stopwatch_reset').click(function() {
 		stopwatch.reset();
-		$('input[type=button].stopwatch_toggle').attr('value', translations['time_tracking_stopwatch_start']);
+		$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_start']);
 	});
 
 	$('input[type=text].datetime').each(function(index, element) {
