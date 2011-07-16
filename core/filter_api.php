@@ -1180,7 +1180,9 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 			foreach( $t_top_project_ids as $t_pid ) {
 				log_event( LOG_FILTERING, 'Getting sub-projects for project id @P' . $t_pid );
-				$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $t_user_id, $t_pid ) );
+				$t_subproject_ids = user_get_all_accessible_subprojects( $t_user_id, $t_pid );
+				if (!$t_subproject_ids) continue;
+				$t_project_ids = array_merge( $t_project_ids, $t_subproject_ids );
 			}
 
 			$t_project_ids = array_unique( $t_project_ids );
