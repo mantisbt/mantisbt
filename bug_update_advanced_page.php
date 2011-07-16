@@ -701,8 +701,8 @@ if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $tpl_bug_i
 if ( config_get('time_tracking_enabled') ) {
 	if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $tpl_bug_id ) ) {
 		echo '<tr ', helper_alternate_class(), '>';
-		echo '<th class="category"><label for="time_tracking">' . lang_get( 'time_tracking' ) . ' (HH:MM)</label></th>';
-		echo '<td colspan="5"><input type="text" id="time_tracking" name="time_tracking" size="5" value="0:00" /></td></tr>';
+		echo '<th class="category"><label for="time_tracking">' . lang_get( 'time_tracking' ) . '</label></th>';
+		echo '<td colspan="5"><input type="text" id="time_tracking" name="time_tracking" size="5" placeholder="hh:mm" /></td></tr>';
 	}
 }
 
