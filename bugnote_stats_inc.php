@@ -119,6 +119,7 @@ if ( ON != config_get('time_tracking_enabled') ) {
 		else {
 			$t_name_field = 'username';
 		}
+		$t_sort_name = array();
 		foreach ( $t_bugnote_stats as $t_key => $t_item ) {
 			$t_sort_name[$t_key] = $t_item[$t_name_field];
 		}
