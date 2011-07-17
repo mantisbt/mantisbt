@@ -138,6 +138,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 		else {
 			$t_name_field = 'username';
 		}
+		$t_sort_name = array();
 		foreach ( $t_bugnote_stats as $t_key => $t_item ) {
 			$t_sort_name[$t_key] = $t_item[$t_name_field];
 		}
