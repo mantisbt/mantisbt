@@ -146,9 +146,9 @@
 	<!-- Password -->
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
-			<?php 
+			<?php
 				echo lang_get( 'password' );
-				if ( $t_force_pw_reset ) { 
+				if ( $t_force_pw_reset ) {
 			?>
 			<span class="required">*</span>
 			<?php } ?>
@@ -161,9 +161,9 @@
 	<!-- Password confirmation -->
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
-			<?php 
+			<?php
 				echo lang_get( 'confirm_password' );
-				if ( $t_force_pw_reset ) { 
+				if ( $t_force_pw_reset ) {
 			?>
 			<span class="required">*</span>
 			<?php } ?>
@@ -281,8 +281,8 @@
 	</form>
 </div>
 
-<?php 
-} 
+<?php
+}
 # Delete Account Form END
 
 html_page_bottom();
