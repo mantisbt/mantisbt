@@ -1171,6 +1171,7 @@ $s_tag_create = 'Label aanmaken';
 $s_show_all_tags = 'Alle';
 $s_time_tracking_billing_link = 'Tijdsbesteding';
 $s_time_tracking = 'Tijdsbesteding bijhouden';
+$s_time_tracking_time_spent = 'Bestede tijd:';
 $s_time_tracking_get_info_button = 'Tijdsbesteding ophalen';
 $s_time_tracking_cost_per_hour = 'Tarief / uur';
 $s_time_tracking_cost = 'Kosten';

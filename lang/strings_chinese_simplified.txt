@@ -37,6 +37,7 @@
  * @author Riceball LEE riceballl@hotmail.com
  * @author Singoo, singoo@163.com
  * @author XanaduNWH
+ * @author Xiaomingyan
  * @author liaobin@jite.net
  * @author rerbin@lonmo.com
  * @author zoomq@itcase.com
@@ -516,14 +517,14 @@ $s_fixed_in_version = '修正版本';
 $s_target_version = '目标版本';
 $s_votes = '投票';
 $s_summary = '摘要';
-$s_description = '描述';
+$s_description = '说明';
 $s_steps_to_reproduce = '问题重现步骤';
 $s_update_information_button = '更新信息';
 $s_sticky_issue = '置顶问题';
 $s_profile = '配置';
 $s_updating_bug_simple_title = '正在更新问题信息';
 $s_view_revisions = '查看修订历史';
-$s_revision = '修订';
+$s_revision = '修订版本';
 $s_revision_drop = '删除';
 $s_bug_revision_dropped_history = '删除的 bug 修正';
 $s_bugnote_revision_dropped_history = '删除的注释修订';
@@ -681,7 +682,7 @@ $s_configuration_corrupted = '在数据库中的配置已损坏。';
 $s_plugin = '插件';
 $s_plugins_installed = '已装插件';
 $s_plugins_available = '可用插件';
-$s_plugin_description = '描述';
+$s_plugin_description = '说明';
 $s_plugin_author = '作者： %1$s';
 $s_plugin_url = '网址：';
 $s_plugin_depends = '依赖于';
