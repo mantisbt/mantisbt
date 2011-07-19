@@ -86,11 +86,6 @@ $(document).ready( function() {
 
 	$('input.autofocus:first, select.autofocus:first, textarea.autofocus:first').focus();
 
-	/*
-	 * jQuery bug http://bugs.jquery.com/ticket/4283 prevents the check_all
-	 * functionality from working when the Content-Type is set to
-	 * application/xhtml+xml.
-	 */
 	var checkAllSelectors = '';
 	$(':checkbox.check_all').each(function() {
 		var baseFieldName = $(this).attr('name').replace(/_all$/, '');
