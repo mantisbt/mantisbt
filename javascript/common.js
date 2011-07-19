@@ -105,11 +105,11 @@ $(document).ready( function() {
 			var checkedCount = $(this).closest('form').find(':checkbox[name="' + fieldName + '[]"]:checked').length;
 			var totalCount = $(this).closest('form').find(':checkbox[name="' + fieldName + '[]"]').length;
 			var allSelected = checkedCount == totalCount;
-			$(this).closest('form').find(':checkbox[name=' + fieldName + '_all]').attr('checked', allSelected);
+			$(this).closest('form').find(':checkbox[name=' + fieldName + '_all]').prop('checked', allSelected);
 		});
 		$(':checkbox.check_all').click(function() {
 			var baseFieldName = $(this).attr('name').replace(/_all$/, '');
-			$(this).closest('form').find(':checkbox[name="' + baseFieldName + '[]"]').attr('checked', $(this).is(':checked'));
+			$(this).closest('form').find(':checkbox[name="' + baseFieldName + '[]"]').prop('checked', $(this).is(':checked'));
 		});
 	}
 
@@ -207,19 +207,19 @@ $(document).ready( function() {
 
 	$('input[type=checkbox]#use_date_filters').live('click', function() {
 		if (!$(this).is(':checked')) {
-			$('div.filter-box select[name=start_year]').attr('disabled', 'disabled');
-			$('div.filter-box select[name=start_month]').attr('disabled', 'disabled');
-			$('div.filter-box select[name=start_day]').attr('disabled', 'disabled');
-			$('div.filter-box select[name=end_year]').attr('disabled', 'disabled');
-			$('div.filter-box select[name=end_month]').attr('disabled', 'disabled');
-			$('div.filter-box select[name=end_day]').attr('disabled', 'disabled');
+			$('div.filter-box select[name=start_year]').prop('disabled', true);
+			$('div.filter-box select[name=start_month]').prop('disabled', true);
+			$('div.filter-box select[name=start_day]').prop('disabled', true);
+			$('div.filter-box select[name=end_year]').prop('disabled', true);
+			$('div.filter-box select[name=end_month]').prop('disabled', true);
+			$('div.filter-box select[name=end_day]').prop('disabled', true);
 		} else {
-			$('div.filter-box select[name=start_year]').removeAttr('disabled');
-			$('div.filter-box select[name=start_month]').removeAttr('disabled');
-			$('div.filter-box select[name=start_day]').removeAttr('disabled');
-			$('div.filter-box select[name=end_year]').removeAttr('disabled');
-			$('div.filter-box select[name=end_month]').removeAttr('disabled');
-			$('div.filter-box select[name=end_day]').removeAttr('disabled');
+			$('div.filter-box select[name=start_year]').prop('disabled', false);
+			$('div.filter-box select[name=start_month]').prop('disabled', false);
+			$('div.filter-box select[name=start_day]').prop('disabled', false);
+			$('div.filter-box select[name=end_year]').prop('disabled', false);
+			$('div.filter-box select[name=end_month]').prop('disabled', false);
+			$('div.filter-box select[name=end_day]').prop('disabled', false);
 		}
 	});
 
@@ -227,10 +227,10 @@ $(document).ready( function() {
 	$('#dates > input[type=image].datetime').hide();
 	$('#period_menu > select#interval').change(function() {
 		if ($(this).val() == 10) {
-			$('#dates > input[type=text].datetime').removeAttr('disabled');
+			$('#dates > input[type=text].datetime').prop('disabled', false);
 			$('#dates > input[type=image].datetime').show();
 		} else {
-			$('#dates > input[type=text].datetime').attr('disabled', 'disabled');
+			$('#dates > input[type=text].datetime').prop('disabled', true);
 			$('#dates > input[type=image].datetime').hide();
 		}
 	});
