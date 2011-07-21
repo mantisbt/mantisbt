@@ -146,12 +146,12 @@ if ( $t_force_pw_reset ) {
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="password" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'password' ) ?></span></label>
-				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo PASSLEN; ?>" /></span>
+				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="password-confirm" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'confirm_password' ) ?></span></label>
-				<span class="input"><input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo PASSLEN; ?>" /></span>
+				<span class="input"><input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div><?php
 		} ?>

@@ -363,6 +363,26 @@ function auth_automatic_logon_bypass_form() {
 }
 
 /**
+ * Return the user's password maximum length for the current login method
+ *
+ * @return int
+ * @access public
+ */
+function auth_get_password_max_size() {
+	switch( config_get( 'login_method' ) ) {
+		# Max password size cannot be bigger than the database field
+		case PLAIN:
+		case BASIC_AUTH:
+		case HTTP_AUTH:
+			return PASSLEN;
+
+		# All other cases, i.e. password is stored as a hash
+		default:
+			return PASSWORD_MAX_SIZE_BEFORE_HASH;
+	}
+}
+
+/**
  * Return true if the password for the user id given matches the given
  * password (taking into account the global login method)
  * @param int $p_user_id User id to check password against
@@ -446,7 +466,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 			break;
 	}
 
-	# cut this off to PASSLEN cahracters which the largest possible string in the database
+	# cut this off to PASSLEN characters which the largest possible string in the database
 	return utf8_substr( $t_processed_password, 0, PASSLEN );
 }
 
@@ -715,7 +735,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="password"><span><?php echo lang_get( 'password' );?></span></label>
-				<span class="input"><input id="password" type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" class="autofocus" /></span>
+				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="autofocus" /></span>
 				<span class="label-style"></span>
 			</div>
 			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' );?>" /></span>

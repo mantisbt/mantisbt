@@ -84,12 +84,12 @@ print_manage_menu( 'manage_user_create_page.php' );
 			if ( OFF == config_get( 'send_reset_password' ) )  { ?>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="user-password"><span><?php echo lang_get( 'password' ) ?></span></label>
-				<span class="input"><input type="password" id="user-password" name="password" size="32" maxlength="<?php echo PASSLEN;?>" /></span>
+				<span class="input"><input type="password" id="user-password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="user-verify-password"><span><?php echo lang_get( 'verify_password' ) ?></span></label>
-				<span class="input"><input type="password" id="user-verify-password" name="password_verify" size="32" maxlength="<?php echo PASSLEN;?>" /></span>
+				<span class="input"><input type="password" id="user-verify-password" name="password_verify" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div><?php
 			} ?>

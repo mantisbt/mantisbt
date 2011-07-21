@@ -169,7 +169,7 @@ if( $f_error || $f_cookie_error ) {
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="password"><span><?php echo lang_get( 'password' ) ?></span></label>
-				<span class="input"><input id="password" type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" class="<?php echo $t_password_field_autofocus ?>" /></span>
+				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="<?php echo $t_password_field_autofocus ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">

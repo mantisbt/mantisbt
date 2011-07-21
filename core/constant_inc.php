@@ -531,4 +531,7 @@ define( 'USERLEN', 32);
 define( 'REALLEN', 64);
 define( 'PASSLEN', 32);
 
+# Maximum size for the user's password when storing it as a hash
+define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );
+
 define( 'SECONDS_PER_DAY', 86400 );
