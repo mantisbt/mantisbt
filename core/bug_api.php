@@ -1007,37 +1007,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 	# Copy attachments
 	if( $p_copy_attachments ) {
-		$query = 'SELECT * FROM ' . $t_mantis_bug_file_table . ' WHERE bug_id = ' . db_param();
-		$result = db_query_bound( $query, Array( $t_bug_id ) );
-		$t_count = db_num_rows( $result );
-
-		$t_bug_file = array();
-		for( $i = 0;$i < $t_count;$i++ ) {
-			$t_bug_file = db_fetch_array( $result );
-
-			# prepare the new diskfile name and then copy the file
-			$t_file_path = dirname( $t_bug_file['folder'] );
-			$t_new_diskfile_name = $t_file_path . file_generate_unique_name( 'bug-' . $t_bug_file['filename'], $t_file_path );
-			$t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
-			if(( config_get( 'file_upload_method' ) == DISK ) ) {
-				copy( $t_bug_file['diskfile'], $t_new_diskfile_name );
-				chmod( $t_new_diskfile_name, config_get( 'attachments_file_permissions' ) );
-			}
-
-			$query = "INSERT INTO $t_mantis_bug_file_table
-						( bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content )
-						VALUES ( " . db_param() . ",
-								 " . db_param() . ",
-								 " . db_param() . ",
-								 " . db_param() . ",
-								 " . db_param() . ",
-								 " . db_param() . ",
-								 " . db_param() . ",
-								 " . db_param() . ",
-								 " . db_param() . ",
-								 " . db_param() . ");";
-			db_query_bound( $query, Array( $t_new_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_bug_file['folder'], $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
-		}
+	    file_copy_attachments( $t_bug_id , $t_new_bug_id );
 	}
 
 	# Copy users monitoring bug
