@@ -87,7 +87,7 @@
 		<?php echo lang_get( 'password' ) ?>
 	</td>
 	<td>
-		<input type="password" name="password" size="32" maxlength="<?php echo PASSLEN;?>" />
+		<input type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -95,7 +95,7 @@
 		<?php echo lang_get( 'verify_password' ) ?>
 	</td>
 	<td>
-		<input type="password" name="password_verify" size="32" maxlength="<?php echo PASSLEN;?>" />
+		<input type="password" name="password_verify" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
 	</td>
 </tr>
 <?php

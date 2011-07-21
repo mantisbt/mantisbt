@@ -154,7 +154,7 @@
 			<?php } ?>
 		</td>
 		<td>
-			<input type="password" size="32" maxlength="<?php echo PASSLEN;?>" name="password" />
+			<input type="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" name="password" />
 		</td>
 	</tr>
 
@@ -169,7 +169,7 @@
 			<?php } ?>
 		</td>
 		<td>
-			<input type="password" size="32" maxlength="<?php echo PASSLEN;?>" name="password_confirm" />
+			<input type="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" name="password_confirm" />
 		</td>
 	</tr>
 

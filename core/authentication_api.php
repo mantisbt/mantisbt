@@ -329,6 +329,29 @@ function auth_automatic_logon_bypass_form() {
 }
 
 /**
+ * Return the user's password maximum length
+ *
+ * @return int
+ * @param int $p_field_size size of the field, defaults to 32
+ * @access public
+ */
+function auth_get_password_max_size() {
+
+	switch( config_get( 'login_method' ) ) {
+
+	    # Max password size cannot be bigger than the database field
+		case PLAIN:
+		case BASIC_AUTH:
+			return PASSLEN;
+
+		# Not sure how to handle HTTP_AUTH
+		# All other cases, i.e. password is stored as a hash
+		default:
+			return PASSWORD_MAX_SIZE;
+	}
+}
+
+/**
  * Return true if the password for the user id given matches the given
  * password (taking into account the global login method)
  * @param int $p_user_id User id to check password against
@@ -412,7 +435,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 			break;
 	}
 
-	# cut this off to PASSLEN cahracters which the largest possible string in the database
+	# cut this off to PASSLEN characters which the largest possible string in the database
 	return utf8_substr( $t_processed_password, 0, PASSLEN );
 }
 
@@ -696,7 +719,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 
 <tr class="row-2">
 	<td class="category"><?php echo lang_get( 'password' );?></td>
-	<td><input type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" /></td>
+	<td><input type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></td>
 </tr>
 
 <tr>

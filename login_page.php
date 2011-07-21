@@ -129,7 +129,7 @@
 		<?php echo lang_get( 'password' ) ?>
 	</td>
 	<td>
-		<input type="password" name="password" size="16" maxlength="<?php echo PASSLEN;?>" />
+		<input type="password" name="password" size="28" maxlength="<?php echo auth_get_password_max_size(); ?>" />
 	</td>
 </tr>
 <tr class="row-1">
