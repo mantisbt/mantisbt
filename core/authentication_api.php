@@ -339,9 +339,9 @@ function auth_get_password_max_size() {
 		# Max password size cannot be bigger than the database field
 		case PLAIN:
 		case BASIC_AUTH:
+		case HTTP_AUTH:
 			return DB_FIELD_SIZE_PASSWORD;
 
-		# Not sure how to handle HTTP_AUTH
 		# All other cases, i.e. password is stored as a hash
 		default:
 			return PASSWORD_MAX_SIZE_BEFORE_HASH;
