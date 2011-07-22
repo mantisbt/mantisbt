@@ -92,19 +92,16 @@ $t_project_id = helper_get_current_project();
 ?>
 
 <div>
-<table class="hide" cellspacing="3" cellpadding="0">
-
 <?php
 $t_status_legend_position = config_get( 'status_legend_position' );
 
 if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
-	echo '<tr>';
-	echo '<td colspan="2">';
 	html_status_legend();
-	echo '</td>';
-	echo '</tr>';
+	echo '<br />';
 }
-
+?>
+<table class="hide" cellspacing="3" cellpadding="0">
+<?php
 $t_number_of_boxes = count ( $t_boxes );
 $t_boxes_position = config_get( 'my_view_boxes_fixed_position' );
 $t_counter = 0;
@@ -184,17 +181,14 @@ if ( ON == $t_boxes_position && $t_counter == $t_number_of_boxes && 1 == $t_coun
 } else if ( OFF == $t_boxes_position && $t_counter == $t_number_of_boxes ) {
 	echo '</td></tr>';
 }
-
-if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
-	echo '<tr>';
-	echo '<td colspan="2">';
-	html_status_legend();
-	echo '</td>';
-	echo '</tr>';
-}
 ?>
 
 </table>
+<?php
+if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
+	html_status_legend();
+}
+?>
 </div>
 
 <?php
