@@ -329,17 +329,14 @@ function auth_automatic_logon_bypass_form() {
 }
 
 /**
- * Return the user's password maximum length
+ * Return the user's password maximum length for the current login method
  *
  * @return int
- * @param int $p_field_size size of the field, defaults to 32
  * @access public
  */
 function auth_get_password_max_size() {
-
 	switch( config_get( 'login_method' ) ) {
-
-	    # Max password size cannot be bigger than the database field
+		# Max password size cannot be bigger than the database field
 		case PLAIN:
 		case BASIC_AUTH:
 			return PASSLEN;
@@ -347,7 +344,7 @@ function auth_get_password_max_size() {
 		# Not sure how to handle HTTP_AUTH
 		# All other cases, i.e. password is stored as a hash
 		default:
-			return PASSWORD_MAX_SIZE;
+			return PASSWORD_MAX_SIZE_BEFORE_HASH;
 	}
 }
 

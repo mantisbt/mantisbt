@@ -121,7 +121,7 @@
 		<?php echo lang_get( 'username' ) ?>
 	</td>
 	<td>
-		<input type="text" name="username" size="28" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $f_username ); ?>" />
+		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $f_username ); ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -129,7 +129,7 @@
 		<?php echo lang_get( 'password' ) ?>
 	</td>
 	<td>
-		<input type="password" name="password" size="28" maxlength="<?php echo auth_get_password_max_size(); ?>" />
+		<input type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
 	</td>
 </tr>
 <tr class="row-1">
