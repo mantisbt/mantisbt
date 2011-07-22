@@ -211,7 +211,7 @@
 			else {
 				$t_show_update_button = true;
 		?>
-			<input type="text" size="32" maxlength="<?php echo REALLEN;?>" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
+			<input type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
 		<?php
 			}
 		?>

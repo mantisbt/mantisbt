@@ -339,7 +339,7 @@ function auth_get_password_max_size() {
 		# Max password size cannot be bigger than the database field
 		case PLAIN:
 		case BASIC_AUTH:
-			return PASSLEN;
+			return DB_FIELD_SIZE_PASSWORD;
 
 		# Not sure how to handle HTTP_AUTH
 		# All other cases, i.e. password is stored as a hash
@@ -406,7 +406,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
  * @param string $p_password
  * @param string $p_salt salt, defaults to null
  * @param string $p_method logon method, defaults to null (use config login method)
- * @return string processed password, maximum PASSLEN chars in length
+ * @return string processed password, maximum DB_FIELD_SIZE_PASSWORD chars in length
  * @access public
  */
  function auth_process_plain_password( $p_password, $p_salt = null, $p_method = null ) {
@@ -432,8 +432,8 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 			break;
 	}
 
-	# cut this off to PASSLEN characters which the largest possible string in the database
-	return utf8_substr( $t_processed_password, 0, PASSLEN );
+	# cut this off to DB_FIELD_SIZE_PASSWORD characters which the largest possible string in the database
+	return utf8_substr( $t_processed_password, 0, DB_FIELD_SIZE_PASSWORD );
 }
 
 /**
@@ -711,7 +711,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 
 <tr class="row-1">
 	<td class="category"><?php echo lang_get( 'username' );?></td>
-	<td><input type="text" disabled="disabled" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo $p_username;?>" /></td>
+	<td><input type="text" disabled="disabled" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo $p_username;?>" /></td>
 </tr>
 
 <tr class="row-2">

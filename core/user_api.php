@@ -284,8 +284,8 @@ function user_ensure_realname_valid( $p_realname ) {
 # Return true if it is, false otherwise
 function user_is_name_valid( $p_username ) {
 
-	# The DB field is hard-coded. USERLEN should not be modified.
-	if( utf8_strlen( $p_username ) > USERLEN ) {
+	# The DB field is hard-coded. DB_FIELD_SIZE_USERNAME should not be modified.
+	if( utf8_strlen( $p_username ) > DB_FIELD_SIZE_USERNAME ) {
 		return false;
 	}
 
