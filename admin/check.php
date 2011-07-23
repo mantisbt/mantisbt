@@ -326,7 +326,7 @@ if( plugin_is_installed( 'MantisGraph' ) ) {
 	plugin_push_current( 'MantisGraph' );
 
 	print_test_row( 'checking gd is enabled, and version 2...', get_gd_version() == 2 );
-	if ( plugin_config_get( 'eczlibrary', OFF ) == OFF ) {
+	if ( plugin_config_get( 'eczlibrary', ON ) == OFF ) {
 		$t_jpgraph_path = config_get( 'absolute_path' ) . 'library' . DIRECTORY_SEPARATOR . 'jpgraph' . DIRECTORY_SEPARATOR;
 
 		if( !file_exists( $t_jpgraph_path . 'jpgraph.php') ) {
