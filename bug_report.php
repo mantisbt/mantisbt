@@ -67,7 +67,10 @@
 
 	$f_file					= gpc_get_file( 'file', null ); /** @todo (thraxisp) Note that this always returns a structure */
 															# size = 0, if no file
-	$f_report_stay			= gpc_get_bool( 'report_stay', false );
+	$f_report_stay			          = gpc_get_bool( 'report_stay', false );
+	$f_copy_notes_from_parent         = gpc_get_bool( 'copy_notes_from_parent', false);
+	$f_copy_attachments_from_parent   = gpc_get_bool( 'copy_attachments_from_parent', false);
+
 	$t_bug_data->project_id			= gpc_get_int( 'project_id' );
 
 	$t_bug_data->reporter_id		= auth_get_current_user_id();
@@ -170,6 +173,26 @@
 			
 			# Send the email notification
 			email_relationship_added( $f_master_bug_id, $t_bug_id, relationship_get_complementary_type( $f_rel_type ) );
+		}
+		
+		# copy notes from parent
+		if ( $f_copy_notes_from_parent ) {
+		    
+		    $t_parent_bugnotes = bugnote_get_all_bugnotes( $f_master_bug_id );
+		    
+		    foreach ( $t_parent_bugnotes as $t_parent_bugnote ) {
+		        
+		        $t_private = $t_parent_bugnote->view_state == VS_PRIVATE;
+
+		        bugnote_add( $t_bug_id, $t_parent_bugnote->note, $t_parent_bugnote->time_tracking, 
+		            $t_private, $t_parent_bugnote->note_type, $t_parent_bugnote->note_attr,
+		            $t_parent_bugnote->reporter_id, /* send_email */ FALSE , /* log history */ FALSE);
+		    }
+		}
+		
+		# copy attachments from parent
+		if ( $f_copy_attachments_from_parent ) {
+            file_copy_attachments( $f_master_bug_id, $t_bug_id );
 		}
 	}
 
