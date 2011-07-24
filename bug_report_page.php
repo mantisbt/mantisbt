@@ -169,6 +169,8 @@ if ( $f_master_bug_id > 0 ) {
 }
 
 $f_report_stay			= gpc_get_bool( 'report_stay', false );
+$f_copy_notes_from_parent         = gpc_get_bool( 'copy_notes_from_parent', false);
+$f_copy_attachments_from_parent   = gpc_get_bool( 'copy_attachments_from_parent', false);
 
 $t_fields = config_get( 'bug_report_page_fields' );
 $t_fields = columns_filter_disabled( $t_fields );
@@ -553,6 +555,16 @@ print_recently_visited();
 		<td>
 			<?php relationship_list_box( /* none */ -2, "rel_type", false, true ) ?>
 			<?php echo '<strong>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</strong>' ?>
+		</td>
+	</tr>
+
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<?php echo lang_get( 'copy_from_parent' ) ?>
+		</td>
+		<td>
+			<label><input <?php echo helper_get_tab_index() ?> type="checkbox" id="copy_notes_from_parent" name="copy_notes_from_parent" <?php check_checked( $f_copy_notes_from_parent ) ?> /> <?php echo lang_get( 'copy_notes_from_parent' ) ?></label>
+			<label><input <?php echo helper_get_tab_index() ?> type="checkbox" id="copy_attachments_from_parent" name="copy_attachments_from_parent" <?php check_checked( $f_copy_attachments_from_parent ) ?> /> <?php echo lang_get( 'copy_attachments_from_parent' ) ?></label>
 		</td>
 	</tr>
 <?php

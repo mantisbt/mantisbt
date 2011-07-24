@@ -1294,6 +1294,9 @@ If you requested this verification, visit the following URL to change your passw
 	'create_child_bug_button' => 'Clone',
 	'bug_cloned_to' => 'Issue cloned',
 	'bug_created_from' => 'Issue generated from',
+	'copy_from_parent' => 'Copy extended data from parent issue',
+	'copy_notes_from_parent' => 'Copy bug notes',
+	'copy_attachments_from_parent' => 'Copy attachments',
 
 	# Relationship Graphs
 	'viewing_bug_relationship_graph_title' => 'Relationship Graph',
