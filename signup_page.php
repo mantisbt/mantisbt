@@ -54,7 +54,7 @@
 		<?php echo lang_get( 'username' ) ?>:
 	</td>
 	<td width="70%" colspan="2">
-		<input type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" />
+		<input type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" />
 	</td>
 </tr>
 <tr class="row-2">
