@@ -28,6 +28,16 @@
 
     </section>
 
+    <section id="admin.auth.ldap">
+        <title>LDAP and Microsoft Active Directory</title>
+
+        <para>Value for $g_login_method: <emphasis>LDAP</emphasis></para>
+        <para>Authentication is made against an <ulink url="http://en.wikipedia.org/wiki/LDAP">LDAP</ulink> or <ulink url="http://en.wikipedia.org/wiki/Active_Directory">Active Directory</ulink> server.</para>
+        <para>The LDAP parameters should be setup as explained in <xref linkend="admin.config.auth.ldap" />.</para>
+        <para>An MD5 hash of the user's password will be stored in the database upon successful login, allowing fall-back to Standard Authentication when the LDAP server is not available.</para>
+        <para>The user's ID and password is checked against the Directory; if the credentials are valid, then the user is allowed to login and their user account in MantisBT is created automatically.</para>
+    </section>
+
     <section id="admin.auth.basic">
         <title>Basic Authentication</title>
 
@@ -43,59 +53,6 @@
         <para>TODO</para>
         <para>The password length is limited to the size of the underlying database field (DB_FIELD_SIZE_PASSWORD constant), currently 32 characters.</para>
     </section>
-
-    <section id="admin.auth.ldap">
-        <title>LDAP and Microsoft Active Directory</title>
-
-        <para>Functionality is provided by using the php-ldap module
-            (/usr/lib/php4/ldap.so). An extra login method is defined within
-            core/user_API.php inside of function is_password_match $f_username,
-            $p_test_password, $p_password ).This has a simple, non encrypted
-            (yet) test of the LDAP directory for that user by asking for an
-            entry with uid=username and password=test_password, if this exists,
-            it is presumed that the user should be granted access.</para>
-            <formalpara>
-                <title>Configuration basics</title>
-                <para>the LDIF format that was tested is as follows:
-                    <programlisting>dn: uid=tests,
-                        dc=test, dc=com, dc=au
-                        department: testdep
-                        organizationname: Testing Organization
-                        cn: Test Smith
-                        assignedgroup: users
-                        givename: Test
-                        sn: Smith
-                        mail: tests@example.com.au
-                        uid: testsuser
-                        Password: password
-                        objectclass: testPerson
-                    </programlisting>
-
-                    The password may be in clear, taken
-                    from the /etc/passwd or /etc/shadow file, or simply encrypted and
-                    added using current LDAP tools.There are some specialized software
-                    for replicating passwd to LDAP and inversely (eg.
-                    <ulink url="http://freshmeat.net/projects/cpu/">http://freshmeat.net/projects/cpu/</ulink>
-                    ).
-                </para>
-            </formalpara>
-
-            <para>Also setup the LDAP parameters as explained in
-                <xref linkend="admin.config.auth.ldap" />.
-                Don't forget to change your $g_login_method to LDAP.
-            </para>
-
-            <formalpara>
-                <title>Creating new accounts</title><para>There is still a bit of problem when you
-                    want to create a new user to MantisBT using LDAP, you must create the
-                    LDIF entry to LDAP, and also sign up for a new account, if both of
-                    these line up correctly, authentication will proceed.  Email
-                    is queried from the LDAP database if the
-                    authentication is set to use LDAP instead of the user record in the
-                    database entry.</para>
-            </formalpara>
-
-        </section>
 
     <section id="admin.auth.deprecated">
         <title>Deprecated authentication methods</title>
