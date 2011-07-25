@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8' ?>
+﻿<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
 %BOOK_ENTITIES;
@@ -6,9 +6,9 @@
 <chapter id="admin.auth">
     <title>Authentication</title>
 
-    <para>MantisBT supports several authentication techniques out of the box.  In addition, there is work in progress relating to supporting authentication plug-ins.  Once authentication plug-ins are implemented, then authentication against any protocol or repository of user names and passwords can be done without having to touch MantisBT core code.</para>
+    <para>MantisBT supports several authentication methods out of the box.  In addition, there is work in progress relating to supporting authentication plug-ins.  Once these are implemented, authentication against any protocol or repository of user names and passwords will be possible without having to touch MantisBT core code.</para>
 
-    <para>Although MantisBT supports multiple authentication techniques, it is important to note that MantisBT doesn't yet support hybrid authentication scenarios.  For example, internal staff authentications against LDAP where customer authentications against MantisBT database.</para>
+    <para>It is important to note that MantisBT does not yet support hybrid authentication scenarios.  For example, internal staff authenticating against LDAP while customers authenticate against the MantisBT database with MD5 hash.</para>
 
     <para>See $g_login_method in <xref linkend="admin.config.auth.global" />
     for more details about how to configure MantisBT to use one of these
@@ -17,27 +17,31 @@
     <section id="admin.auth.standard">
         <title>Standard Authentication</title>
 
-        <para>Standard, or native, authentication is where MantisBT users are authenticated against user records in the MantisBT database.  The passwords are stored in the database in one of several formats:
+        <para>With Standard login method, MantisBT users are authenticated against records in the MantisBT database, where the passwords are stored as a hash.</para>
+        <para>Note: while technically unlimited, the password's length is arbitrarily restricted to 1024 characters (PASSWORD_MAX_SIZE_BEFORE_HASH constant).</para>
+        <para>Values for $g_login_method:
             <itemizedlist>
-                <listitem><para>MD5 - This is default and recommended approach.  See <ulink url="http://en.wikipedia.org/wiki/MD5">MD5 topic on Wikipedia</ulink> for more details.</para></listitem>
-                <listitem><para>CRYPT - deprecated.</para></listitem>
-                <listitem><para>CRYPT_FULL_SALT - deprecated.</para></listitem>
-                <listitem><para>PLAIN - deprecated.</para></listitem>
+                <listitem><para><emphasis><ulink url="http://en.wikipedia.org/wiki/MD5">MD5</ulink></emphasis> is the default - and recommended - method</para></listitem>
+                <listitem><para>Support for additional methods (e.g. <ulink url="http://en.wikipedia.org/wiki/SHA-1">SHA-1</ulink>) could be added in the future</para></listitem>
             </itemizedlist>
         </para>
 
     </section>
 
-    <section id="admin.auth.http">
-        <title>HTTP_AUTH</title>
+    <section id="admin.auth.basic">
+        <title>Basic Authentication</title>
 
+        <para>Value for $g_login_method: <emphasis>BASIC_AUTH</emphasis></para>
         <para>When MantisBT is configured to use basic auth, it automatically detects the logged in user and checks if they are already registered in MantisBT, if not, then a new account is automatically created for the username.</para>
+        <para>The password length is limited to the size of the underlying database field (DB_FIELD_SIZE_PASSWORD constant), currently 32 characters.</para>
     </section>
 
-    <section id="admin.auth.basic">
-        <title>BASIC_AUTH</title>
+    <section id="admin.auth.http">
+        <title>HTTP Authentication</title>
 
+        <para>Value for $g_login_method: <emphasis>HTTP_AUTH</emphasis></para>
         <para>TODO</para>
+        <para>The password length is limited to the size of the underlying database field (DB_FIELD_SIZE_PASSWORD constant), currently 32 characters.</para>
     </section>
 
     <section id="admin.auth.ldap">
@@ -92,5 +96,19 @@
             </formalpara>
 
         </section>
+
+    <section id="admin.auth.deprecated">
+        <title>Deprecated authentication methods</title>
+
+        <para>The following methods of authentication are deprecated, and supported for backwards-compatibility reasons only.  It is strongly recommended to update MantisBT installations relying on these to use <xref linkend="admin.auth.standard" /> instead.</para>
+        <para>Deprecated values for $g_login_method:
+            <itemizedlist>
+                <listitem><para>CRYPT</para></listitem>
+                <listitem><para>CRYPT_FULL_SALT</para></listitem>
+                <listitem><para>PLAIN</para></listitem>
+            </itemizedlist>
+        With CRYPT-based methods, the password's length is limited as per Standard Authentication. With PLAIN, its size is restricted as for Basic Authentication.
+        </para>
+    </section>
 
 </chapter>

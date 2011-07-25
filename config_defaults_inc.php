@@ -1739,8 +1739,10 @@ $g_hr_width = 50;
 
 /**
  * Login authentication method. Must be one of
- * MD5, LDAP, BASIC_AUTH or HTTP_AUTH. You can simply change this at
- * will. MantisBT will try to figure out how the passwords were encrypted.
+ * MD5, LDAP, BASIC_AUTH or HTTP_AUTH.
+ * Note: you may not be able to easily switch encryption methods, so this
+ * should be carefully chosen at install time. However, MantisBT will attempt
+ * to "fall back" to older methods if possible.
  * @global int $g_login_method
  */
 $g_login_method = MD5;

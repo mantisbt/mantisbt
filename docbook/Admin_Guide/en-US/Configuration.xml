@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8' ?>
+﻿<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
 %BOOK_ENTITIES;
@@ -1681,16 +1681,10 @@
                         (defaults to <emphasis>MD5</emphasis>):
                             <itemizedlist>
                                 <listitem>
-                                    <para>MD5 - user's password is stored as
-                                    a hash in the database</para>
+                                    <para>MD5 - user's password is stored as a hash in the database</para>
                                 </listitem>
                                 <listitem>
-                                    <para>LDAP - authenticates against an LDAP
-                                    (or Active Directory) server</para>
-                                </listitem>
-                                <listitem>
-                                    <para>PLAIN - password is stored in plain,
-                                    unencrypted text in the database</para>
+                                    <para>LDAP - authenticates against an LDAP (or Active Directory) server</para>
                                 </listitem>
                                 <listitem>
                                     <para>BASIC_AUTH</para>
@@ -1698,15 +1692,23 @@
                                 <listitem>
                                     <para>HTTP_AUTH</para>
                                 </listitem>
+                            </itemizedlist>
+                            In addition, the following deprecated values are supported for backwards-compatibility, and should no longer be used:
+                            <itemizedlist>
+                                <listitem>
+                                    <para>PLAIN - password is stored in plain, unencrypted text in the database</para>
+                                </listitem>
+                                <listitem>
+                                    <para>CRYPT</para>
+                                </listitem>
+                                <listitem>
+                                    <para>CRYPT_FULL_SALT</para>
+                                </listitem>
                             </itemizedlist></para>
 
-                        <para>CRYPT and CRYPT_FULL_SALT authentication methods
-                        are deprecated and should not be used.</para>
+                        <para>Note: you may not be able to easily switch encryption methods, so this should be carefully chosen at install time.
+                        However, MantisBT will attempt to "fall back" to older methods if possible.</para>
 
-                        <para>Note: you will not be able to easily convert
-                        between encryption methods, so this needs to be
-                        carefully chosen at install time. However, MantisBT
-                        will attempt to "fall back" to older methods.</para>
                     </listitem>
                 </varlistentry>
 
