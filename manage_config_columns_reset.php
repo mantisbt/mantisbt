@@ -42,9 +42,6 @@ require_api( 'print_api.php' );
 
 form_security_validate( 'manage_config_columns_reset' );
 
-auth_ensure_user_authenticated();
-auth_reauthenticate();
-
 $t_user_id = auth_get_current_user_id();
 
 config_delete_for_user( 'view_issues_page_columns', $t_user_id );
