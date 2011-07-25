@@ -80,7 +80,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			</ul>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
-				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" class="autofocus" /></span>
+				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="autofocus" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">

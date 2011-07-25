@@ -164,7 +164,7 @@ if( $f_error || $f_cookie_error ) {
 			</ul>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
-				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $f_username ); ?>" class="<?php echo $t_username_field_autofocus ?>" /></span>
+				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $f_username ); ?>" class="<?php echo $t_username_field_autofocus ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">

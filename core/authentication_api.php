@@ -374,7 +374,7 @@ function auth_get_password_max_size() {
 		case PLAIN:
 		case BASIC_AUTH:
 		case HTTP_AUTH:
-			return PASSLEN;
+			return DB_FIELD_SIZE_PASSWORD;
 
 		# All other cases, i.e. password is stored as a hash
 		default:
@@ -440,7 +440,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
  * @param string $p_password
  * @param string $p_salt salt, defaults to null
  * @param string $p_method logon method, defaults to null (use config login method)
- * @return string processed password, maximum PASSLEN chars in length
+ * @return string processed password, maximum DB_FIELD_SIZE_PASSWORD chars in length
  * @access public
  */
  function auth_process_plain_password( $p_password, $p_salt = null, $p_method = null ) {
@@ -466,8 +466,8 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 			break;
 	}
 
-	# cut this off to PASSLEN characters which the largest possible string in the database
-	return utf8_substr( $t_processed_password, 0, PASSLEN );
+	# cut this off to DB_FIELD_SIZE_PASSWORD characters which the largest possible string in the database
+	return utf8_substr( $t_processed_password, 0, DB_FIELD_SIZE_PASSWORD );
 }
 
 /**
@@ -730,7 +730,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 			<input type="hidden" name="_authenticate" value="1" />
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="username"><span><?php echo lang_get( 'username' );?></span></label>
-				<span class="input"><input id="username" type="text" disabled="disabled" size="32" maxlength="<?php echo USERLEN;?>" value="<?php echo string_attribute( $p_username );?>" /></span>
+				<span class="input"><input id="username" type="text" disabled="disabled" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $p_username );?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">

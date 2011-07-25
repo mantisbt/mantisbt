@@ -183,7 +183,7 @@ if ( $t_force_pw_reset ) {
 					$t_show_update_button = true;
 					echo '<label for="realname"><span>' . lang_get( 'realname' ) . '</span></label>';
 					echo '<span class="input">';
-					echo '<input id="realname" type="text" size="32" maxlength="' . REALLEN . '" name="realname" value="' . string_attribute( $u_realname ) . '" />';
+					echo '<input id="realname" type="text" size="32" maxlength="' . DB_FIELD_SIZE_REALNAME . '" name="realname" value="' . string_attribute( $u_realname ) . '" />';
 					echo '</span>';
 				} ?>
 				<span class="label-style"></span>

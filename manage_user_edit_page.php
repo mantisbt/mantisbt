@@ -97,7 +97,7 @@ print_manage_menu();
 			<!-- Username -->
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="edit-username"><span><?php echo lang_get( 'username_label' ) ?></span></label>
-				<span class="input"><input id="edit-username" type="text" size="32" maxlength="<?php echo USERLEN;?>" name="username" value="<?php echo string_attribute( $t_user['username'] ) ?>" /></span>
+				<span class="input"><input id="edit-username" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" name="username" value="<?php echo string_attribute( $t_user['username'] ) ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 
@@ -112,7 +112,7 @@ print_manage_menu();
 			} else {
 				# Without LDAP ?>
 				<label for="edit-realname"><span><?php echo lang_get( 'realname_label' ) ?></span></label>
-				<span class="input"><input id="edit-realname" type="text" size="32" maxlength="<?php echo REALLEN;?>" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" /></span><?php
+				<span class="input"><input id="edit-realname" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" /></span><?php
 			}
 		?>
 				<span class="label-style"></span>

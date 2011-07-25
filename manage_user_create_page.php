@@ -63,13 +63,13 @@ print_manage_menu( 'manage_user_create_page.php' );
 			<?php echo form_security_field( 'manage_user_create' ) ?>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="user-username"><span><?php echo lang_get( 'username' ) ?></span></label>
-				<span class="input"><input type="text" id="user-username" name="username" size="32" maxlength="<?php echo USERLEN;?>" /></span>
+				<span class="input"><input type="text" id="user-username" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" /></span>
 				<span class="label-style"></span>
 			</div><?php
 			if ( !$t_ldap || config_get( 'use_ldap_realname' ) == OFF ) { ?>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="user-realname"><span><?php echo lang_get( 'realname' ) ?></span></label>
-				<span class="input"><input type="text" id="user-realname" name="realname" size="32" maxlength="<?php echo REALLEN;?>" /></span>
+				<span class="input"><input type="text" id="user-realname" name="realname" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" /></span>
 				<span class="label-style"></span>
 			</div><?php
 			}
