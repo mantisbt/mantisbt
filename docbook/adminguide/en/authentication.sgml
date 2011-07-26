@@ -5,9 +5,9 @@
 
     <para>It is important to note that MantisBT does not yet support hybrid authentication scenarios.  For example, internal staff authenticating against LDAP while customers authenticate against the MantisBT database with MD5 hash.</para>
 
-    <para>See $g_login_method in <xref linkend="admin.config.auth.global" />
-    for more details about how to configure MantisBT to use one of these
-    authentication techniques.</para>
+    <para>See $g_login_method in <link linkend="admin.config.auth.global">Global
+	authentication parameters</link> for more details about how to configure
+	MantisBT to use one of these authentication techniques.</para>
 
     <section id="admin.auth.standard">
         <title>Standard Authentication</title>
@@ -28,7 +28,7 @@
 
         <para>Value for $g_login_method: <emphasis>LDAP</emphasis></para>
         <para>Authentication is made against an <ulink url="http://en.wikipedia.org/wiki/LDAP">LDAP</ulink> or <ulink url="http://en.wikipedia.org/wiki/Active_Directory">Active Directory</ulink> server.</para>
-        <para>The LDAP parameters should be setup as explained in <xref linkend="admin.config.auth.ldap" />.</para>
+        <para>The LDAP parameters should be setup as explained in <link linkend="admin.config.auth.ldap">LDAP authentication parameters</link>.</para>
         <para>An MD5 hash of the user's password will be stored in the database upon successful login, allowing fall-back to Standard Authentication when the LDAP server is not available.</para>
         <para>The user's ID and password is checked against the Directory; if the credentials are valid, then the user is allowed to login and their user account in MantisBT is created automatically.</para>
     </section>
@@ -52,7 +52,7 @@
     <section id="admin.auth.deprecated">
         <title>Deprecated authentication methods</title>
 
-        <para>The following methods of authentication are deprecated, and supported for backwards-compatibility reasons only.  It is strongly recommended to update MantisBT installations relying on these to use <xref linkend="admin.auth.standard" /> instead.</para>
+        <para>The following methods of authentication are deprecated, and supported for backwards-compatibility reasons only.  It is strongly recommended to update MantisBT installations relying on these to use <link linkend="admin.auth.standard">standard authentication</link> instead.</para>
         <para>Deprecated values for $g_login_method:
             <itemizedlist>
                 <listitem><para>CRYPT</para></listitem>
