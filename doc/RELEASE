@@ -3,14 +3,16 @@ MantisBT Release Notes
 1.2.6 Maintenance Release (2011-07-26)
 -------------------------------------------------
 
-MantisBT 1.2.5 is a maintenance update for the stable 1.2.x branch. It is
+MantisBT 1.2.6 is a maintenance update for the stable 1.2.x branch. It is
 recommended that all MantisBT users (including those still using 1.1.x or
 earlier versions) upgrade to this latest release.
 
 This release brings bug fixes and improvements across a range of MantisBT
-features, especially the SOAP API and the Time tracking and billing areas.
+features, especially the SOAP API, authentication, time tracking, and
+billing areas. Documentation and translation updates are also included.
 
 A full changelog for the 1.2.x series can be found on the official site. [1]
+
 
 1.2.5 Maintenance Release (2011-04-05)
 -------------------------------------------------
