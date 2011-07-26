@@ -175,8 +175,9 @@ There have also been many improvements to the codebase beyond adding features:
 	1.2.0a2    http://www.mantisbt.org/bugs/changelog_page.php?version_id=96
 	1.2.0a1    http://www.mantisbt.org/bugs/changelog_page.php?version_id=89
 
-[2] MantisForge is now the preferred code collaboration site for MantisBT,
-    including free hosting of MantisBT-related Git repositories for development
-    of contributions to MantisBT itself or community plugins.
-
-    http://git.mantisforge.org/
+[2] GitHub is now the preferred code collaboration site for MantisBT,
+	including the official MantisBT repository and a MantisBT-plugins
+	organisation which is used to host repositories of community plugins.
+    
+    https://github.com/mantisbt
+    https://github.com/mantisbt-plugins
