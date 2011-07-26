@@ -1107,8 +1107,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	);
 	$t_select_clauses = array(
 		"$t_bug_table.*",
-		"$t_bug_table.last_updated",
-		"$t_bug_table.date_submitted",
 	);
 
 	$t_join_clauses = array();
