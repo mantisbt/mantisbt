@@ -17,6 +17,19 @@
 		</phpunit>
 	</target>
 
+	<!-- requires a 512M memory limit to complete -->
+	<target name="phpdoc" depends="init">
+		<mkdir dir="build/phpdoc"/>
+		<phpdoc title="MantisBT API Docs" sourcecode="yes" destdir="build/phpdoc" 
+			output="HTML:Smarty:PHP">
+			<fileset dir=".">
+				<include name="core/**/*.php" />
+				<include name="plugins/**/*.php" />
+				<include name="api/**/*.php" />
+			</fileset>
+		</phpdoc>
+	</target>
+
 	<target name="clean">
 		<delete dir="build"/>
 	</target>
