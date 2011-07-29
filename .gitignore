@@ -13,6 +13,7 @@ custom_constant_inc.php
 docbook/*/*/builddate
 docbook/*/*/build
 docbook/*/*/install
+docbook/*/builddate
 
 # Build output
 build/

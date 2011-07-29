@@ -88,7 +88,7 @@ $(BUILD_DIR)/$(BOOK).txt: $(FILES)
 
 
 .PHONY: valid install clean dist help
-valid:
+valid: builddate
 	nsgmls -s $(BOOK).sgml
 
 install:
