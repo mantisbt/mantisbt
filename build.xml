@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="MantisBT" default="test">
 	
+	<fileset dir="." id="fileset.deploy.id">
+		<!-- directories which should not be deployed -->
+		<exclude name="build/**"/>
+		<exclude name="doc/**"/>
+		<exclude name="docbook/**"/>
+		<exclude name="packages/**"/>
+		<exclude name="phing/**"/>
+		<exclude name="tests/**"/>
+		
+		<!-- customisations and IDE settings -->
+		<exclude name="config_inc.php"/>
+		<exclude name="custom_constant_inc.php"/>
+		<exclude name="custom_strings_inc.php"/>
+		<exclude name="custom_functions_inc.php"/>
+		<exclude name="mantis_offline.php"/>
+		<exclude name="web.config"/>
+		<exclude name=".*"/>
+		<exclude name=".settings/**"/>
+		
+		<!-- git repo -->
+		<exclude name=".git/**"/>
+		
+		<!-- build file -->
+		<exclude name="phing.xml"/>
+	</fileset>
+	
 	<includepath classpath="phing/tasks"/>
 	<taskdef name="extractMantisBTVersion" classname="mantisbt.ExtractMantisBTVersion"/>
 	
@@ -37,39 +63,40 @@
 	<target name="package" depends="init">
 		<extractMantisBTVersion file="core/constant_inc.php"/>
 		
-		<tar destfile="build/mantisbt-${mantisbtversion}.tar.gz" compression="gzip">
-			<fileset dir=".">
-				<!-- directories which should not be deployed -->
-				<exclude name="build/**"/>
-				<exclude name="doc/**"/>
-				<exclude name="docbook/**"/>
-				<exclude name="packages/**"/>
-				<exclude name="phing/**"/>
-				<exclude name="tests/**"/>
-				
-				<!-- customisations and IDE settings -->
-				<exclude name="config_inc.php"/>
-				<exclude name="custom_constant_inc.php"/>
-				<exclude name="custom_strings_inc.php"/>
-				<exclude name="custom_functions_inc.php"/>
-				<exclude name="mantis_offline.php"/>
-				<exclude name="web.config"/>
-				<exclude name=".*"/>
-				<exclude name=".settings/**"/>
-				
-				<!-- git repo -->
-				<exclude name=".git/**"/>
-				
-				<!-- build file -->
-				<exclude name="phing.xml"/>
-			</fileset>
-		</tar>
+		<!-- build tar gz file -->
+		<phingcall target="-package">
+			<property name="package.extension" value="tar.gz"/>
+			<property name="package.compression" value="gzip"/>
+		</phingcall>
 		
-		<filehash file="build/mantisbt-${mantisbtversion}.tar.gz" hashtype="1" />
-		<echo file="build/mantisbt-${mantisbtversion}.tar.gz.sha1" msg="${filehashvalue}"/>
+		<!-- build zip file -->
+		<phingcall target="-package">
+			<property name="package.extension" value="zip"/>
+			<property name="package.compression" value="zip"/>
+		</phingcall>
+		
+	</target>
+	
+	<target name="-package">
+		<if>
+			<equals arg1="${package.compression}" arg2="zip"/>
+			<then>
+				<zip destfile="build/mantisbt-${mantisbtversion}.${package.extension}">
+					<fileset refid="fileset.deploy.id"/>
+				</zip>
+			</then>
+			<else>
+				<tar destfile="build/mantisbt-${mantisbtversion}.${package.extension}" compression="${package.compression}">
+					<fileset refid="fileset.deploy.id"/>
+				</tar>
+			</else>
+		</if>
+		
+		<filehash file="build/mantisbt-${mantisbtversion}.${package.extension}" hashtype="1" />
+		<echo file="build/mantisbt-${mantisbtversion}.${package.extension}.sha1" msg="${filehashvalue}"/>
 
-		<filehash file="build/mantisbt-${mantisbtversion}.tar.gz" hashtype="0" />
-		<echo file="build/mantisbt-${mantisbtversion}.tar.gz.md5" msg="${filehashvalue}"/>
+		<filehash file="build/mantisbt-${mantisbtversion}.${package.extension}" hashtype="0" />
+		<echo file="build/mantisbt-${mantisbtversion}.${package.extension}.md5" msg="${filehashvalue}"/>
 	</target>
 
 	<target name="clean">
