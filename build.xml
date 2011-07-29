@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="MantisBT" default="test">
+	
+	<includepath classpath="phing/tasks"/>
+	<taskdef name="extractMantisBTVersion" classname="mantisbt.ExtractMantisBTVersion"/>
+	
 	<target name="init">
 		<mkdir dir="build"/>
 	</target>
@@ -31,13 +35,16 @@
 	</target>
 	
 	<target name="package" depends="init">
-		<tar destfile="build/mantisbt.tar.gz" compression="gzip">
+		<extractMantisBTVersion file="core/constant_inc.php"/>
+		
+		<tar destfile="build/mantisbt-${mantisbtversion}.tar.gz" compression="gzip">
 			<fileset dir=".">
 				<!-- directories which should not be deployed -->
 				<exclude name="build/**"/>
 				<exclude name="doc/**"/>
 				<exclude name="docbook/**"/>
 				<exclude name="packages/**"/>
+				<exclude name="phing/**"/>
 				<exclude name="tests/**"/>
 				
 				<!-- customisations and IDE settings -->
@@ -58,11 +65,11 @@
 			</fileset>
 		</tar>
 		
-		<filehash file="build/mantisbt.tar.gz" hashtype="1" />
-		<echo file="build/mantisbt.tar.gz.sha1" msg="${filehashvalue}"/>
+		<filehash file="build/mantisbt-${mantisbtversion}.tar.gz" hashtype="1" />
+		<echo file="build/mantisbt-${mantisbtversion}.tar.gz.sha1" msg="${filehashvalue}"/>
 
-		<filehash file="build/mantisbt.tar.gz" hashtype="0" />
-		<echo file="build/mantisbt.tar.gz.md5" msg="${filehashvalue}"/>
+		<filehash file="build/mantisbt-${mantisbtversion}.tar.gz" hashtype="0" />
+		<echo file="build/mantisbt-${mantisbtversion}.tar.gz.md5" msg="${filehashvalue}"/>
 	</target>
 
 	<target name="clean">
