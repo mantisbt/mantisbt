@@ -3890,6 +3890,20 @@ $g_plugin_path = $g_absolute_path . 'plugins' . DIRECTORY_SEPARATOR;
 $g_manage_plugin_threshold = ADMINISTRATOR;
 
 /**
+* A mapping of file extensions to mime types, used when serving resources from plugins
+*
+* @global array $g_plugin_mime_types
+*/
+$g_plugin_mime_types = array(
+	    'css' => 'text/css',
+	    'js'  => 'text/javascript',
+	    'gif' => 'image/gif',
+	    'png' => 'image/png',
+	    'jpg' => 'image/jpeg',
+	    'jpeg' => 'image/jpeg'
+);
+
+/**
  * Force installation and protection of certain plugins.
  * Note that this is not the preferred method of installing plugins,
  * which should generally be done directly through the plugin management
