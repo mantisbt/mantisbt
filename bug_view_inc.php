@@ -400,10 +400,14 @@ if ( $tpl_show_handler || $tpl_show_due_date ) {
 	$t_spacer = 2;
 
 	# Handler
-	echo '<th class="bug-assigned-to category">', lang_get( 'assigned_to' ), '</th>';
-	echo '<td class="bug-assigned-to">';
-	print_user_with_subject( $tpl_bug->handler_id, $tpl_bug_id );
-	echo '</td>';
+	if ( $tpl_show_handler ) {
+		echo '<th class="bug-assigned-to category">', lang_get( 'assigned_to' ), '</th>';
+		echo '<td class="bug-assigned-to">';
+		print_user_with_subject( $tpl_bug->handler_id, $tpl_bug_id );
+		echo '</td>';
+	} else {
+		$t_spacer += 2;
+	}
 
 	# Due Date
 	if ( $tpl_show_due_date ) {
