@@ -145,7 +145,9 @@
 						}
 
 						foreach ( $t_callback_menu_options as $t_menu_option ) {
-							print_bracket_link_prepared( $t_menu_option );
+						    if ( $t_menu_option ) {
+							    print_bracket_link_prepared( $t_menu_option );
+						    }
 						}
 					}
 				}
