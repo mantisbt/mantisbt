@@ -123,6 +123,9 @@ function plugin_file( $p_file, $p_redirect = false, $p_basename = null ) {
  * @param string Plugin basename
  */
 function plugin_file_include( $p_filename, $p_basename = null ) {
+    
+    global $g_plugin_mime_types;
+    
 	if( is_null( $p_basename ) ) {
 		$t_current = plugin_get_current();
 	} else {
@@ -133,7 +136,12 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 	if( false === $t_file_path ) {
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
-
+	
+	$t_extension = pathinfo( $t_file_path, PATHINFO_EXTENSION );
+	if ( $t_extension && array_key_exists( $t_extension , $g_plugin_mime_types ) ) {
+	    header('Content-Type: ' . $g_plugin_mime_types [ $t_extension ] );
+	}
+	
 	readfile( $t_file_path );
 }
 

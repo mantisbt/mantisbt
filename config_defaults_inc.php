@@ -3667,6 +3667,21 @@
 	 * @global int $g_manage_plugin_threshold
 	 */
 	$g_manage_plugin_threshold = ADMINISTRATOR;
+	
+	
+	/**
+	 * A mapping of file extensions to mime types, used when serving resources from plugins
+	 * 
+	 * @global array $g_plugin_mime_types
+	 */
+	$g_plugin_mime_types = array(
+	    'css' => 'text/css',
+	    'js'  => 'text/javascript',
+	    'gif' => 'image/gif',
+	    'png' => 'image/png',
+	    'jpg' => 'image/jpeg',
+	    'jpeg' => 'image/jpeg'
+	);
 
 	/************
 	 * Due Date *
