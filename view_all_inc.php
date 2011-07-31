@@ -137,7 +137,9 @@ if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend
 					}
 
 					foreach ( $t_callback_menu_options as $t_menu_option ) {
-						print_bracket_link_prepared( $t_menu_option );
+					    if ( $t_menu_option ) {
+						    print_bracket_link_prepared( $t_menu_option );
+					    }
 					}
 				}
 			}
