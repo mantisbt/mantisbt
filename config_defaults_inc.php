@@ -1651,24 +1651,23 @@
 	 **************************/
 
 	/**
-	 * The LDAP server can be provided either as
-	 * - a simple hostname (in that case, g_ldap_port must be defined)
-	 * - a complete URI (then g_ldap_port is ignored, and the port number
-	 *   has to be specified as part of the URI itself, e.g.
-	 *   ldaps://ldap.example.com:636/)
+	 * Specifies the LDAP or Active Directory server to connect to, and must be
+	 * provided as an URI
+	 * - Protocol is optional, can be one of ldap or ldaps, defaults to ldap
+	 * - Port number is optional, and defaults to 389. If this doesn't work, try
+	 *   using one of the following standard port numbers: 636 (ldaps); for Active
+	 *   Directory Global Catalog forest-wide search, use 3268 (ldap) or 3269 (ldaps)
+	 *
+	 * Examples of valid URI:
+	 *
+	 *   ldap.example.com
+	 *   ldap.example.com:3268
+	 *   ldap://ldap.example.com/
+	 *   ldaps://ldap.example.com:3269/
 	 *
 	 * @global string $g_ldap_server
 	 */
 	$g_ldap_server			= 'ldap.example.com';
-
-	/**
-	 * LDAP port (default 389).  If this doesn't work, try 636 (ldaps)
-	 * or for Active Directory Global Catalog forest-wide search,
-	 * default port 3268 (ldap) or 3269 (ldaps)
-	 *
-	 * @global integer $g_ldap_port
-	 */
-	$g_ldap_port			= 389;
 
 	/**
 	 *
