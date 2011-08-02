@@ -45,25 +45,10 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	}
 
 	$t_ldap_server = config_get( 'ldap_server' );
-	$t_ldap_port = config_get( 'ldap_port' );
 
-    # Verify if LDAP server provided is a URI or just a host name
-    # Connect and log accordingly
-    $t_message = "Attempting connection to LDAP ";
-    $t_ldap_uri = parse_url( $t_ldap_server );
-    if ( count( $t_ldap_uri ) > 1 ) {
-        $t_message .= "URI '{$t_ldap_server}'.";
-        $t_ds = @ldap_connect( $t_ldap_server );
-    } else {
-        $t_message .= "server '{$t_ldap_server}' port '{$t_ldap_port}'.";
-        if (is_numeric( $t_ldap_port ) ) {
-            $t_ds = @ldap_connect( $t_ldap_server, $t_ldap_port );
-        } else {
-            log_event( LOG_LDAP, "ERROR - LDAP port '$t_ldap_port' is not numeric" );
-            trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
-        }
-    }
-    log_event( LOG_LDAP, $t_message );
+    # Connect to LDAP server 
+    log_event( LOG_LDAP, "Attempting connection to LDAP URI '{$t_ldap_server}'." );
+    $t_ds = @ldap_connect( $t_ldap_server );
     
 	if ( $t_ds !== false && $t_ds > 0 ) {
 		log_event( LOG_LDAP, "Connection accepted by LDAP server" );
