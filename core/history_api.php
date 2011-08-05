@@ -229,7 +229,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 				continue;
 			}
 
-			if ( ( $v_field_name == 'handler_id' ) && !access_has_bug_level( $t_show_handler_threshold, $t_user_id ) ) {
+			if ( ( $v_field_name == 'handler_id' ) && !access_has_bug_level( $t_show_handler_threshold, $p_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
