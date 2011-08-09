@@ -1687,13 +1687,15 @@ function print_bug_attachments_list( $p_bug_id ) {
 			echo $t_href_start;
 			print_file_icon( $t_file_display_name );
 			echo $t_href_end . '&#160;' . $t_href_start . $t_file_display_name . $t_href_end . $t_href_clicket . ' (' . $t_filesize . ' ' . lang_get( 'bytes' ) . ') ' . '<span class="italic">' . $t_date_added . '</span>';
+		}
 
-			if ( $t_attachment['can_delete'] ) {
-				echo '&#160;[';
-				print_link( 'bug_file_delete.php?file_id=' . $t_attachment['id'] . form_security_param( 'bug_file_delete' ), lang_get( 'delete_link' ), false, 'small' );
-				echo ']';
-			}
+		if ( $t_attachment['can_delete'] ) {
+			echo '&#160;[';
+			print_link( 'bug_file_delete.php?file_id=' . $t_attachment['id'] . form_security_param( 'bug_file_delete' ), lang_get( 'delete_link' ), false, 'small' );
+			echo ']';
+		}
 
+		if ( $t_attachment['exists'] ) {
 			if ( ( FTP == config_get( 'file_upload_method' ) ) && $t_attachment['exists'] ) {
 				echo ' (' . lang_get( 'cached' ) . ')';
 			}
