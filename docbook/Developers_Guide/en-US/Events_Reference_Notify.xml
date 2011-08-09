@@ -60,4 +60,31 @@
 
 	</sect2>
 
+	<sect2 id="dev.eventref.notify.email">
+		<title>Email notification </title>
+
+		<blockquote id="dev.eventref.notify.email">
+			<title>EVENT_NOTIFY_EMAIL (Chained)</title>
+
+			<blockquote>
+				<para>
+					This event allows a plugin to modify an email notification message before it is sent.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Complex&gt;: email message to be sent, EmailData object (see core\email_queue_api.php)</para></listitem>
+					<listitem><para>&lt;String&gt;: message type identificator</para></listitem>
+					<listitem><para>&lt;Array&gt;: message parameters</para></listitem>
+
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Complex&gt;: email message to be sent, EmailData object</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+	</sect2>
+
 </sect1>

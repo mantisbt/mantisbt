@@ -196,7 +196,7 @@ if ( $f_send_email_notification ) {
 		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'email_user_updated_subject' );
 		$t_updated_msg = lang_get( 'email_user_updated_msg' );
 		$t_message = $t_updated_msg . "\n\n" . config_get( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
-		email_store( $t_email, $t_subject, $t_message );
+		email_store( 'email_notification_user_update', $t_email, $t_subject, $t_message, null, array( 'changes' => $t_changes ) );
 		log_event( LOG_EMAIL, sprintf( 'Account update notification sent to ' . $f_username . ' (' . $t_email . ')' ) );
 		if ( config_get( 'email_send_using_cronjob' ) == OFF ) {
 			email_send_all();
