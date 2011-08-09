@@ -375,11 +375,18 @@ if ( config_get_global( 'allow_file_upload' ) ) {
 
 	print_test_row( 'Checking MantisBT upload file size is less than php', ( config_get_global( 'max_file_size' ) <= ini_get_number( 'post_max_size' ) ) && ( config_get_global( 'max_file_size' ) <= ini_get_number( 'upload_max_filesize' ) ) );
 
-	if( DATABASE == config_get_global( 'file_upload_method' ) ) {
-		print_info_row( 'There may also be settings in your web server and database that prevent you from  uploading files or limit the maximum file size.  See the documentation for those packages if you need more information.');
-		if( 500 < min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get_global( 'max_file_size' ) ) ) {
-			print_info_row( '<span class="error">Your current settings will most likely need adjustments to the PHP max_execution_time or memory_limit settings, the MySQL max_allowed_packet setting, or equivalent.' );
-		}
+	switch( config_get_global( 'file_upload_method' ) ) {
+		case DATABASE:
+			print_info_row( 'There may also be settings in your web server and database that prevent you from  uploading files or limit the maximum file size.  See the documentation for those packages if you need more information.');
+			if( 500 < min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get_global( 'max_file_size' ) ) ) {
+				print_info_row( '<span class="error">Your current settings will most likely need adjustments to the PHP max_execution_time or memory_limit settings, the MySQL max_allowed_packet setting, or equivalent.' );
+			}
+			break;
+		case DISK:
+			$t_upload_path = config_get_global( 'absolute_path_default_upload_folder' );
+			print_test_row( 'Checking that absolute_path_default_upload_folder has a trailing directory separator: "' . $t_upload_path . '"', 
+				( DIRECTORY_SEPARATOR == substr( $t_upload_path, -1, 1 ) ) );
+			break;
 	}
 	
 	print_info_row( 'There may also be settings in your web server that prevent you from  uploading files or limit the maximum file size.  See the documentation for those packages if you need more information.');
