@@ -44,6 +44,11 @@ $t_path_config_names = array(
 	'language_path'
 );
 
+# Handle file upload default path only if attachments stored on disk
+if( DISK == config_get_global( 'file_upload_method' ) ) {
+	$t_path_config_names[] = 'absolute_path_default_upload_folder';
+}
+
 $t_paths = array();
 foreach( $t_path_config_names as $t_path_config_name ) {
 	$t_new_path = array();
