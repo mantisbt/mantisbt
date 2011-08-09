@@ -265,6 +265,33 @@ function project_includes_user( $p_project_id, $p_user_id ) {
 	}
 }
 
+/**
+ * Make sure that the project file path is valid: add trailing slash and
+ * set it to blank if equal to default path
+ * @param string $p_file_path
+ * @return string
+ * @access public
+ */
+function validate_project_file_path( $p_file_path ) {
+
+	if( !is_blank( $p_file_path ) ) {
+		# Make sure file path has trailing slash
+		$p_file_path = terminate_directory_path( $p_file_path );
+
+		# If the provided path is the same as the default, make the path blank.
+		# This means that if the default upload path is changed, you don't have
+		# to update the upload path for every single project.
+		if ( !strcmp( $p_file_path, config_get( 'absolute_path_default_upload_folder' ) ) ) {
+			$p_file_path = '';
+		} else {
+			file_ensure_valid_upload_path( $p_file_path );
+		}
+	}
+
+	return $p_file_path;
+}
+
+
 # =======================================
 # Creation / Deletion / Updating / Copy
 # =======================================
@@ -281,11 +308,7 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 
 	project_ensure_name_unique( $p_name );
 
-	if( !is_blank( $p_file_path ) ) {
-		# Make sure file path has trailing slash
-		$p_file_path = terminate_directory_path( $p_file_path );
-		file_ensure_valid_upload_path( $p_file_path );
-	}
+	$p_file_path = validate_project_file_path( $p_file_path );
 
 	$t_project_table = db_get_table( 'project' );
 
@@ -374,11 +397,7 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 		project_ensure_name_unique( $p_name );
 	}
 
-	if( !is_blank( $p_file_path ) ) {
-		# Make sure file path has trailing slash
-		$p_file_path = terminate_directory_path( $p_file_path );
-		file_ensure_valid_upload_path( $p_file_path );
-	}
+	$p_file_path = validate_project_file_path( $p_file_path );
 
 	$t_project_table = db_get_table( 'project' );
 
