@@ -73,6 +73,17 @@ foreach( $t_paths as $t_path_config_name => $t_path ) {
 	);
 }
 
+# File upload default path must be writeable
+if( DISK == config_get_global( 'file_upload_method' ) ) {
+	$t_path_config_name = 'absolute_path_default_upload_folder';
+	$t_path = $t_paths[$t_path_config_name];
+	check_print_test_row(
+		$t_path_config_name . ' configuration option points to a writable directory',
+		is_writable( $t_path['config_value'] ),
+		array( false => "The path specified by the $t_path_config_name configuration option ('" . $t_path['config_value'] . "') must be writable." )
+	);
+}
+
 if( $g_failed_test ) {
 	return;
 }
