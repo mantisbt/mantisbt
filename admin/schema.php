@@ -233,7 +233,9 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('project'),"
   file_path 		C(250) NOTNULL DEFAULT \" '' \",
   description 		XL NOTNULL
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_project_id',db_get_table('project'),'id'));
+# Index autocreated when oci used
+if( $GLOBALS['g_db_type'] != 'oci8' )
+	$upgrade[] = array('CreateIndexSQL',array('idx_project_id',db_get_table('project'),'id'));
 $upgrade[] = array('CreateIndexSQL',array('idx_project_name',db_get_table('project'),'name',array('UNIQUE')));
 $upgrade[] = array('CreateIndexSQL',array('idx_project_view',db_get_table('project'),'view_state'));
 $upgrade[] = array('CreateTableSQL',array(db_get_table('project_user_list'),"
@@ -339,10 +341,17 @@ $upgrade[] = array('CreateIndexSQL',array('idx_user_username',db_get_table('user
 $upgrade[] = array('CreateIndexSQL',array('idx_enable',db_get_table('user'),'enabled'));
 /* 50 */
 $upgrade[] = array('CreateIndexSQL',array('idx_access',db_get_table('user'),'access_level'));
-$upgrade[] = array('InsertData', array( db_get_table('user'),
-    "(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES
-        ('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', '" . installer_db_now() . "', '" . installer_db_now() . "', '1', '0', 90, 3, 0, 0, '" .
-             md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . "')" ) );
+# Oci uses other date literal syntax
+if( $GLOBALS['g_db_type'] != 'oci8' )
+	$upgrade[] = array('InsertData', array( db_get_table('user'),
+		"(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES
+		('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', '" . installer_db_now() . "', '" . installer_db_now() . "', '1', '0', 90, 3, 0, 0, '" .
+		md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . "')" ) );
+else
+	$upgrade[] = array('InsertData', array( db_get_table('user'),
+		"(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES
+		('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', timestamp" . installer_db_now() . ", timestamp" . installer_db_now() . ", '1', '0', 90, 3, 0, 0, '" .
+		md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . "')" ) );
 $upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "old_value C(255) NOTNULL" ) );
 $upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "new_value C(255) NOTNULL" ) );
 
@@ -354,7 +363,9 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('email'),"
   metadata 		XL NOTNULL,
   body 			XL NOTNULL
   ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_email_id',db_get_table('email'),'email_id'));
+# Index autocreated when oci used
+if( $GLOBALS['g_db_type'] != 'oci8' )
+	$upgrade[] = array('CreateIndexSQL',array('idx_email_id',db_get_table('email'),'email_id'));
 $upgrade[] = array('AddColumnSQL',array(db_get_table('bug'), "target_version C(64) NOTNULL DEFAULT \" '' \""));
 $upgrade[] = array('AddColumnSQL',array(db_get_table('bugnote'), "time_tracking I UNSIGNED NOTNULL DEFAULT \" 0 \""));
 $upgrade[] = array('CreateIndexSQL',array('idx_diskfile',db_get_table('bug_file'),'diskfile'));
@@ -388,7 +399,11 @@ $upgrade[] = array('CreateTableSQL', array( db_get_table( 'plugin' ), "
 	enabled			L		NOTNULL DEFAULT \" '0' \"
 	", array( 'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS' ) ) );
 
-$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_pref' ), "redirect_delay 	I NOTNULL DEFAULT 0" ) );
+# Field cannot be null with oci because of empty string equals NULL
+if( $GLOBALS['g_db_type'] != 'oci8' )
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_pref' ), "redirect_delay 	I NOTNULL DEFAULT 0" ) );
+else
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_pref' ), "redirect_delay 	I DEFAULT 0" ) );
 
 /* apparently mysql now has a STRICT mode, where setting a DEFAULT value on a blob/text is now an error, instead of being silently ignored */
 if ( isset( $f_db_type ) && ( $f_db_type == 'mysql' || $f_db_type == 'mysqli' ) ) {
@@ -606,13 +621,34 @@ $upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'user_pref'), "advance
 $upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'user_pref'), "advanced_view" ) );
 $upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'user_pref'), "advanced_update" ) );
 $upgrade[] = array( 'CreateIndexSQL', array( 'idx_project_hierarchy_child_id', db_get_table( 'project_hierarchy' ), 'child_id' ) );
-$upgrade[] = array( 'CreateIndexSQL', array( 'idx_project_hierarchy_parent_id', db_get_table( 'project_hierarchy' ), 'parent_id' ) );
+# Decrease index name length for oci8(30 chars max)
+if( $GLOBALS['g_db_type'] != 'oci8' )
+	$upgrade[] = array( 'CreateIndexSQL', array( 'idx_project_hierarchy_parent_id', db_get_table( 'project_hierarchy' ), 'parent_id' ) );
+else
+	$upgrade[] = array( 'CreateIndexSQL', array( 'idx_prj_hier_parent_id', db_get_table( 'project_hierarchy' ), 'parent_id' ) );
 
 /* 180 */
 $upgrade[] = array( 'CreateIndexSQL', array( 'idx_tag_name', db_get_table( 'tag' ), 'name' ) );
 $upgrade[] = array( 'CreateIndexSQL', array( 'idx_bug_tag_tag_id', db_get_table( 'bug_tag' ), 'tag_id' ) );
 $upgrade[] = array( 'CreateIndexSQL', array( 'idx_email_id', db_get_table( 'email' ), 'email_id', array( 'DROP' ) ), array( 'db_index_exists', array( db_get_table( 'email' ), 'idx_email_id') ) );
 $upgrade[] = array( 'UpdateFunction', 'correct_multiselect_custom_fields_db_format' );
+
+# Field cannot be null with oci because of empty string equals NULL
+if( $GLOBALS['g_db_type'] == 'oci8' )	{
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug' ), "sticky NULL" ) );
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "new_value NULL" ) );
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "old_value NULL" ) );
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "field_name NULL" ) );
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_text' ), "additional_information  NULL" ) );
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_text' ), "steps_to_reproduce NULL" ) );
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'project' ), "description NULL" ) );
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'project_version' ), "description NULL" ) );
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'tag' ), "description NULL" ) );
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_pref' ), "email_on_priority NULL" ) );
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_pref' ), "email_on_status NULL" ) );
+	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_profile' ), "description NULL" ) );
+}
+
 $upgrade[] = array( 'UpdateFunction', "stored_filter_migrate" );
 $upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'custom_field_string' ), "
 	text		XL  			NULL DEFAULT NULL " ) );

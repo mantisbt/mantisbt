@@ -277,7 +277,7 @@ if( 2 == $t_install_state ) {
 
 	print_test( 'Setting Database Username', '' !== $f_db_username, true, 'database username is blank' );
 	print_test( 'Setting Database Password', '' !== $f_db_password, false, 'database password is blank' );
-	print_test( 'Setting Database Name', '' !== $f_database_name, true, 'database name is blank' );
+	print_test( 'Setting Database Name', '' !== $f_database_name || $f_db_type == 'oci8' , true, 'database name is blank' );
 
 	if( $f_db_type == 'db2' ) {
 		print_test( 'Setting Database Schema', !is_blank( $f_db_schema ), true, 'must have a schema name for AS400 in the form of DBNAME/SCHEMA' );
