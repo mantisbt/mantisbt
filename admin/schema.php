@@ -16,13 +16,13 @@
 
 /**
  * Each entry below defines the schema. The upgrade array consists of two elements
- * The first is the function to generate SQL statements e.g., CreateTableSQL, DropTableSQL, 
- * ChangeTableSQL, RenameTableSQL, RenameColumnSQL, DropTableSQL, ChangeTableSQL, RenameTableSQL, 
+ * The first is the function to generate SQL statements e.g., CreateTableSQL, DropTableSQL,
+ * ChangeTableSQL, RenameTableSQL, RenameColumnSQL, DropTableSQL, ChangeTableSQL, RenameTableSQL,
  * RenameColumnSQL, AlterColumnSQL, DropColumnSQL
  *
  * A local function "InsertData" has been provided to add data to the db
  * The second parameter is an array of the parameters to be passed to the function.
- * 
+ *
  * An update identifier is inferred from the ordering of this table. ONLY ADD NEW CHANGES TO THE
  * END OF THE TABLE!!!
  */
@@ -38,9 +38,23 @@ if ( !function_exists( 'db_null_date' ) ) {
 
 
 function installer_db_now() {
-        global $g_db;
+	global $g_db;
 
-       return $g_db->BindTimeStamp( time() );
+	return $g_db->BindTimeStamp( time() );
+}
+
+# Special handling for Oracle (oci8):
+# - Field cannot be null with oci because empty string equals NULL
+# - Oci uses a different date literal syntax
+switch( $GLOBALS['g_db_type'] ) {
+	case 'oci8':
+		$t_notnull = "";
+		$t_timestamp = 'timestamp' . installer_db_now();
+		break;
+	default:
+		$t_notnull = 'NOTNULL';
+		$t_timestamp = installer_db_now();
+		break;
 }
 
 $upgrade[] = array('CreateTableSQL',array(db_get_table( 'config' ),"
@@ -71,9 +85,9 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('bug_history'),"
   user_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   bug_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   date_modified 	T NOTNULL DEFAULT '" . db_null_date() . "',
-  field_name 		C(32) NOTNULL DEFAULT \" '' \",
-  old_value 		C(128) NOTNULL DEFAULT \" '' \",
-  new_value 		C(128) NOTNULL DEFAULT \" '' \",
+  field_name 		C(32) $t_notnull DEFAULT \" '' \",
+  old_value 		C(128) $t_notnull DEFAULT \" '' \",
+  new_value 		C(128) $t_notnull DEFAULT \" '' \",
   type 			I2 NOTNULL DEFAULT '0'
   ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = array('CreateIndexSQL',array('idx_bug_history_bug_id',db_get_table('bug_history'),'bug_id'));
@@ -118,7 +132,7 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('bug'),"
   view_state 		I2 NOTNULL DEFAULT '10',
   summary 		C(128) NOTNULL DEFAULT \" '' \",
   sponsorship_total 	 I  NOTNULL DEFAULT '0',
-  sticky		L  NOTNULL DEFAULT  \"'0'\"
+  sticky		L  $t_notnull DEFAULT  \"'0'\"
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = array('CreateIndexSQL',array('idx_bug_sponsorship_total',db_get_table('bug'),'sponsorship_total'));
 $upgrade[] = array('CreateIndexSQL',array('idx_bug_fixed_in_version',db_get_table('bug'),'fixed_in_version'));
@@ -127,8 +141,8 @@ $upgrade[] = array('CreateIndexSQL',array('idx_project',db_get_table('bug'),'pro
 $upgrade[] = array('CreateTableSQL',array(db_get_table('bug_text'),"
   id 			 I  PRIMARY UNSIGNED NOTNULL AUTOINCREMENT,
   description 		XL NOTNULL,
-  steps_to_reproduce 	XL NOTNULL,
-  additional_information XL NOTNULL
+  steps_to_reproduce 	XL $t_notnull,
+  additional_information XL $t_notnull
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = array('CreateTableSQL',array(db_get_table('bugnote'),"
   id 			 I  UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
@@ -231,11 +245,13 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('project'),"
   view_state 		I2 NOTNULL DEFAULT '10',
   access_min 		I2 NOTNULL DEFAULT '10',
   file_path 		C(250) NOTNULL DEFAULT \" '' \",
-  description 		XL NOTNULL
+  description 		XL $t_notnull
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
+
 # Index autocreated when oci used
-if( $GLOBALS['g_db_type'] != 'oci8' )
+if( 'oci8' != $GLOBALS['g_db_type'] ) {
 	$upgrade[] = array('CreateIndexSQL',array('idx_project_id',db_get_table('project'),'id'));
+}
 $upgrade[] = array('CreateIndexSQL',array('idx_project_name',db_get_table('project'),'name',array('UNIQUE')));
 $upgrade[] = array('CreateIndexSQL',array('idx_project_view',db_get_table('project'),'view_state'));
 $upgrade[] = array('CreateTableSQL',array(db_get_table('project_user_list'),"
@@ -249,7 +265,7 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('project_version'),"
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   version 		C(64) NOTNULL DEFAULT \" '' \",
   date_order 		T NOTNULL DEFAULT '" . db_null_date() . "',
-  description 		XL NOTNULL,
+  description 		XL $t_notnull,
   released 		L NOTNULL DEFAULT \" '1' \"
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = array('CreateIndexSQL',array('idx_project_version',db_get_table('project_version'),'project_id,version',array('UNIQUE')));
@@ -285,7 +301,7 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('user_pref'),"
   advanced_view 	L NOTNULL DEFAULT \" '0' \",
   advanced_update 	L NOTNULL DEFAULT \" '0' \",
   refresh_delay 	 I  NOTNULL DEFAULT '0',
-  redirect_delay 	L NOTNULL DEFAULT \" '0' \",
+  redirect_delay 	L $t_notnull DEFAULT \" '0' \",
   bugnote_order 	C(4) NOTNULL DEFAULT 'ASC',
   email_on_new 		L NOTNULL DEFAULT \" '0' \",
   email_on_assigned 	L NOTNULL DEFAULT \" '0' \",
@@ -294,8 +310,8 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('user_pref'),"
   email_on_closed 	L NOTNULL DEFAULT \" '0' \",
   email_on_reopened 	L NOTNULL DEFAULT \" '0' \",
   email_on_bugnote 	L NOTNULL DEFAULT \" '0' \",
-  email_on_status 	L NOTNULL DEFAULT \" '0' \",
-  email_on_priority 	L NOTNULL DEFAULT \" '0' \",
+  email_on_status 	L $t_notnull DEFAULT \" '0' \",
+  email_on_priority 	L $t_notnull DEFAULT \" '0' \",
   email_on_priority_min_severity 	I2 NOTNULL DEFAULT '10',
   email_on_status_min_severity 	I2 NOTNULL DEFAULT '10',
   email_on_bugnote_min_severity 	I2 NOTNULL DEFAULT '10',
@@ -318,7 +334,7 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('user_profile'),"
   platform 		C(32) NOTNULL DEFAULT \" '' \",
   os 			C(32) NOTNULL DEFAULT \" '' \",
   os_build 		C(32) NOTNULL DEFAULT \" '' \",
-  description 		XL NOTNULL
+  description 		XL $t_notnull
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = array('CreateTableSQL',array(db_get_table('user'),"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
@@ -341,37 +357,33 @@ $upgrade[] = array('CreateIndexSQL',array('idx_user_username',db_get_table('user
 $upgrade[] = array('CreateIndexSQL',array('idx_enable',db_get_table('user'),'enabled'));
 /* 50 */
 $upgrade[] = array('CreateIndexSQL',array('idx_access',db_get_table('user'),'access_level'));
-# Oci uses other date literal syntax
-if( $GLOBALS['g_db_type'] != 'oci8' )
-	$upgrade[] = array('InsertData', array( db_get_table('user'),
-		"(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES
-		('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', '" . installer_db_now() . "', '" . installer_db_now() . "', '1', '0', 90, 3, 0, 0, '" .
-		md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . "')" ) );
-else
-	$upgrade[] = array('InsertData', array( db_get_table('user'),
-		"(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES
-		('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', timestamp" . installer_db_now() . ", timestamp" . installer_db_now() . ", '1', '0', 90, 3, 0, 0, '" .
-		md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . "')" ) );
-$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "old_value C(255) NOTNULL" ) );
-$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "new_value C(255) NOTNULL" ) );
+$upgrade[] = array('InsertData', array( db_get_table('user'),
+	"(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES
+		('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', '" . $t_timestamp . "', '" . $t_timestamp . "', '1', '0', 90, 3, 0, 0, '" .
+			md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . "')" ) );
+$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "old_value C(255) $t_notnull" ) );
+$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "new_value C(255) $t_notnull" ) );
 
 $upgrade[] = array('CreateTableSQL',array(db_get_table('email'),"
   email_id 		I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   email		 	C(64) NOTNULL DEFAULT \" '' \",
   subject		C(250) NOTNULL DEFAULT \" '' \",
-  submitted 	T NOTNULL DEFAULT '" . db_null_date() . "',
+  submitted		T NOTNULL DEFAULT '" . db_null_date() . "',
   metadata 		XL NOTNULL,
   body 			XL NOTNULL
   ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
+
 # Index autocreated when oci used
-if( $GLOBALS['g_db_type'] != 'oci8' )
+if( 'oci8' != $GLOBALS['g_db_type'] ) {
 	$upgrade[] = array('CreateIndexSQL',array('idx_email_id',db_get_table('email'),'email_id'));
+}
+
 $upgrade[] = array('AddColumnSQL',array(db_get_table('bug'), "target_version C(64) NOTNULL DEFAULT \" '' \""));
 $upgrade[] = array('AddColumnSQL',array(db_get_table('bugnote'), "time_tracking I UNSIGNED NOTNULL DEFAULT \" 0 \""));
 $upgrade[] = array('CreateIndexSQL',array('idx_diskfile',db_get_table('bug_file'),'diskfile'));
 $upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_print_pref' ), "print_pref C(64) NOTNULL" ) );
 /* 60 */
-$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "field_name C(64) NOTNULL" ) );
+$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "field_name C(64) $t_notnull" ) );
 
 # Release marker: 1.1.0a4
 
@@ -379,7 +391,7 @@ $upgrade[] = array('CreateTableSQL', array( db_get_table( 'tag' ), "
 	id				I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	user_id			I		UNSIGNED NOTNULL DEFAULT '0',
 	name			C(100)	NOTNULL PRIMARY DEFAULT \" '' \",
-	description		XL		NOTNULL,
+	description		XL		$t_notnull,
 	date_created	T		NOTNULL DEFAULT '" . db_null_date() . "',
 	date_updated	T		NOTNULL DEFAULT '" . db_null_date() . "'
 	", array( 'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS' ) ) );
@@ -399,11 +411,7 @@ $upgrade[] = array('CreateTableSQL', array( db_get_table( 'plugin' ), "
 	enabled			L		NOTNULL DEFAULT \" '0' \"
 	", array( 'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS' ) ) );
 
-# Field cannot be null with oci because of empty string equals NULL
-if( $GLOBALS['g_db_type'] != 'oci8' )
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_pref' ), "redirect_delay 	I NOTNULL DEFAULT 0" ) );
-else
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_pref' ), "redirect_delay 	I DEFAULT 0" ) );
+$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_pref' ), "redirect_delay 	I $t_notnull DEFAULT 0" ) );
 
 /* apparently mysql now has a STRICT mode, where setting a DEFAULT value on a blob/text is now an error, instead of being silently ignored */
 if ( isset( $f_db_type ) && ( $f_db_type == 'mysql' || $f_db_type == 'mysqli' ) ) {
@@ -495,8 +503,6 @@ $upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'bugnote' ), "last_m
 $upgrade[] = array('CreateIndexSQL',array('idx_last_mod',db_get_table('bugnote'),'last_modified'));
 $upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'bugnote' ), "date_submitted" ) );
 $upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'bugnote' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-
-
 $upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'bug_file' ), "
 	date_added_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 $upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'bug_file' ), 'id', 'date_added', 'date_added_int' ) );
@@ -621,34 +627,20 @@ $upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'user_pref'), "advance
 $upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'user_pref'), "advanced_view" ) );
 $upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'user_pref'), "advanced_update" ) );
 $upgrade[] = array( 'CreateIndexSQL', array( 'idx_project_hierarchy_child_id', db_get_table( 'project_hierarchy' ), 'child_id' ) );
-# Decrease index name length for oci8(30 chars max)
-if( $GLOBALS['g_db_type'] != 'oci8' )
-	$upgrade[] = array( 'CreateIndexSQL', array( 'idx_project_hierarchy_parent_id', db_get_table( 'project_hierarchy' ), 'parent_id' ) );
-else
-	$upgrade[] = array( 'CreateIndexSQL', array( 'idx_prj_hier_parent_id', db_get_table( 'project_hierarchy' ), 'parent_id' ) );
+
+# Decrease index name length for oci8 (30 chars max)
+if( 'oci8' != $GLOBALS['g_db_type'] ) {
+	$t_index_name = 'idx_project_hierarchy_parent_id';
+} else {
+	$t_index_name = 'idx_prj_hier_parent_id';
+}
+$upgrade[] = array( 'CreateIndexSQL', array( $t_index_name, db_get_table( 'project_hierarchy' ), 'parent_id' ) );
 
 /* 180 */
 $upgrade[] = array( 'CreateIndexSQL', array( 'idx_tag_name', db_get_table( 'tag' ), 'name' ) );
 $upgrade[] = array( 'CreateIndexSQL', array( 'idx_bug_tag_tag_id', db_get_table( 'bug_tag' ), 'tag_id' ) );
 $upgrade[] = array( 'CreateIndexSQL', array( 'idx_email_id', db_get_table( 'email' ), 'email_id', array( 'DROP' ) ), array( 'db_index_exists', array( db_get_table( 'email' ), 'idx_email_id') ) );
 $upgrade[] = array( 'UpdateFunction', 'correct_multiselect_custom_fields_db_format' );
-
-# Field cannot be null with oci because of empty string equals NULL
-if( $GLOBALS['g_db_type'] == 'oci8' )	{
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug' ), "sticky NULL" ) );
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "new_value NULL" ) );
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "old_value NULL" ) );
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "field_name NULL" ) );
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_text' ), "additional_information  NULL" ) );
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_text' ), "steps_to_reproduce NULL" ) );
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'project' ), "description NULL" ) );
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'project_version' ), "description NULL" ) );
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'tag' ), "description NULL" ) );
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_pref' ), "email_on_priority NULL" ) );
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_pref' ), "email_on_status NULL" ) );
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_profile' ), "description NULL" ) );
-}
-
 $upgrade[] = array( 'UpdateFunction', "stored_filter_migrate" );
 $upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'custom_field_string' ), "
 	text		XL  			NULL DEFAULT NULL " ) );
