@@ -3207,12 +3207,24 @@ $g_create_short_url = 'http://tinyurl.com/create.php?url=%s';
 
 /**
  * table prefix
+ * To avoid the 30-char limit on identifiers in Oracle, the prefix
+ * should be set to blank or kept as short as possible (e.g. 'm')
  * @global string $g_db_table_prefix
  */
 $g_db_table_prefix = 'mantis';
 
 /**
+ * plugin table prefix
+ * To avoid the 30-char limit on identifiers in Oracle, the prefix
+ * should be kept as short as possible (e.g. 'plg')
+ * @global string $g_db_table_prefix
+ */
+$g_db_table_plugin_prefix	= 'plugin';
+
+/**
  * table suffix
+ * To avoid the 30-char limit on identifiers in Oracle, the suffix
+ * should be set to blank or kept as short as possible
  * @global string $g_db_table_suffix
  */
 $g_db_table_suffix = '_table';

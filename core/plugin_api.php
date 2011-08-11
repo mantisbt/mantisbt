@@ -194,7 +194,17 @@ function plugin_table( $p_name, $p_basename = null ) {
 	} else {
 		$t_current = $p_basename;
 	}
-	return db_get_table( 'plugin_' . $t_current . '_' . $p_name );
+
+	$t_table_name = config_get_global( 'db_table_prefix' );
+	if( !isempty( $t_table_name ) ) {
+		$t_table_name .= '_';
+	}
+	$t_table_name .=
+		config_get_global( 'db_table_plugin_prefix' ) .
+		$t_current . '_' . $p_name .
+		config_get_global( 'db_table_suffix' );
+
+	return $t_table_name;
 }
 
 /**
