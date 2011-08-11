@@ -70,7 +70,7 @@ if( db_is_oracle() ) {
 }
 
 /**
- * Tracks the query parameter count for use with db_aparam().
+ * Tracks the query parameter count for use with db_aparam:().
  * @global int $g_db_param_count
  */
 $g_db_param_count = 0;
@@ -485,9 +485,9 @@ function db_fetch_array( &$p_result ) {
 
 		# Oci8 returns null values for empty strings
 		if( db_is_oracle() ) {
-			foreach( $t_row as $k => &$v )	{
-				if( $v=='' && $v!=='' )	{
-					$v='';
+			foreach( $t_row as &$t_value )	{
+				if( !isset( $t_value ) )	{
+					$t_value = '';
 				}
 			}
 		}
@@ -579,7 +579,7 @@ function db_insert_id( $p_table = null, $p_field = "id" ) {
 		} elseif( db_is_pgsql() ) {
 			$query = "SELECT currval('" . $p_table . "_" . $p_field . "_seq')";
 		}
-		if( isset( $query ) )	{
+		if( isset( $query ) ) {
 			$result = db_query_bound( $query );
 			return db_result( $result );
 		}
@@ -989,11 +989,14 @@ function db_get_table_list() {
 }
 
 /**
- * Sorts bind variable numbers. input: "... WHERE F1=:12 and F2=:97 ", output: "... WHERE F1=:0 and F2=:1 ". Used in adopt_query_syntax_ora().
+ * Sorts bind variable numbers and puts them in sequential order
+ * e.g. input:  "... WHERE F1=:12 and F2=:97 ",
+ *      output: "... WHERE F1=:0 and F2=:1 ".
+ * Used in db_oracle_adapt_query_syntax().
  * @param string $p_query Query string to sort
  * @return string Query string with sorted bind variable numbers.
  */
-function order_binds_sequentally( $p_query )	{
+function db_oracle_order_binds_sequentially( $p_query ) {
 	$t_new_query= '';
 	$t_is_odd = true;
 	$t_after_quote = false;
@@ -1001,31 +1004,30 @@ function order_binds_sequentally( $p_query )	{
 
 	# Divide statement to skip processing string literals
 	$t_p_query_arr = explode( '\'' , $p_query );
-	foreach( $t_p_query_arr as $t_p_query_part )	{
-		if( $t_new_query != '' )
-			$t_new_query = $t_new_query . '\'';
+	foreach( $t_p_query_arr as $t_p_query_part ) {
+		if( $t_new_query != '' ) {
+			$t_new_query .= '\'';
+		}
 		if( $t_is_odd )   {
 			# Divide to process all bindvars
 			$t_p_query_subpart_arr = explode( ':' , $t_p_query_part );
-			if( count( $t_p_query_subpart_arr ) > 1 )     {
+			if( count( $t_p_query_subpart_arr ) > 1 ) {
 				foreach( $t_p_query_subpart_arr as $t_p_query_subpart )  {
 					if( ( !$t_after_quote ) && ( $t_new_query != '' ) )	{
-						$t_new_query = $t_new_query . ":";
-
-						$t_new_query = $t_new_query . preg_replace( '/^(\d+?)/U' , strval( $t_iter ) , $t_p_query_subpart );
-						$t_iter = $t_iter + 1;
-					}else	{
-						$t_new_query = $t_new_query . $t_p_query_subpart;
+						$t_new_query .= ":" . preg_replace( '/^(\d+?)/U' , strval( $t_iter ) , $t_p_query_subpart );
+						$t_iter++;
+					} else {
+						$t_new_query .= $t_p_query_subpart;
 					}
 					$t_after_quote = false;
 				}
-			}else	{
-				$t_new_query = $t_new_query . $t_p_query_part;
+			} else	{
+				$t_new_query .= $t_p_query_part;
 			}
-                        $t_is_odd = false;
-                } else   {
+			$t_is_odd = false;
+		} else {
 			$t_after_quote = true;
-			$t_new_query = $t_new_query . $t_p_query_part;
+			$t_new_query .= $t_p_query_part;
 			$t_is_odd = true;
 		}
 	}
@@ -1035,6 +1037,7 @@ function order_binds_sequentally( $p_query )	{
 /**
  * Adopt input query string and bindvars array to Oracle DB syntax:
  * 1. Change bind vars id's to sequence beginnging with 0(calls order_binds_sequentally() )
+ *    (calls db_oracle_order_binds_sequentially() )
  * 2. Remove "AS" keyword, because it not supported with table aliasing
  * 3. Remove null bind variables in insert statements for default values support
  * 4. Replace "tab.column=:bind" to "tab.column IS NULL" when :bind is empty string
@@ -1043,37 +1046,39 @@ function order_binds_sequentally( $p_query )	{
  * @param array $arr_parms Array of parameters matching $p_query, function sorts array keys
  * @return string Query string with sorted bind variable numbers.
  */
-function adopt_query_syntax_ora( $p_query , &$arr_parms = null )  {
+function db_oracle_adapt_query_syntax_ora( $p_query , &$arr_parms = null )  {
 	# Remove "AS" keyword, because not supported with table aliasing
+	#@@@ Could potentially cause issues if ' AS ' is contained within a string ?
 	$p_query = preg_replace( '/ AS /im' , ' ' , $p_query );
 
 	# Remove null bind variables in insert statements for default values support
 	if( is_array ( $arr_parms ) )        {
 		preg_match( '/^[\s\n\r]*insert[\s\n\r]+(into){0,1}[\s\n\r]+(?P<table>[a-z0-9_]+)[\s\n\r]*\([\s\n\r]*[\s\n\r]*(?P<fields>[a-z0-9_,\s\n\r]+)[\s\n\r]*\)[\s\n\r]*values[\s\n\r]*\([\s\n\r]*(?P<values>[:a-z0-9_,\s\n\r]+)\)/i' , $p_query , $t_matches );
-                if(isset($t_matches['values'])) { #if statement is a INSERT INTO ... (...) VALUES(...)
-			$i = 0; # iterates non-empty bind variables
+
+		if(isset($t_matches['values'])) { #if statement is a INSERT INTO ... (...) VALUES(...)
+			# iterates non-empty bind variables
+			$i = 0;
 			$t_fields_left = $t_matches['fields'];
 			$t_values_left = $t_matches['values'];
 
 			for( $t_arr_index = 0 ; $t_arr_index < count($arr_parms) ; $t_arr_index++ ) {
-				#inserting fieldname search
-				if( preg_match( '/^[\s\n\r]*([a-z0-9_]+)[\s\n\r]*,{0,1}([\d\D]*)\z/i' , $t_fields_left , $t_fieldmatch ) )    {
+				# inserting fieldname search
+				if( preg_match( '/^[\s\n\r]*([a-z0-9_]+)[\s\n\r]*,{0,1}([\d\D]*)\z/i' , $t_fields_left , $t_fieldmatch ) ) {
 					$t_fields_left = $t_fieldmatch[2];
 					$t_fields_arr[$i] = $t_fieldmatch[1];
 				}
-				#inserting bindvar name search
-				if( preg_match( '/^[\s\n\r]*(:[a-z0-9_]+)[\s\n\r]*,{0,1}([\d\D]*)\z/i' , $t_values_left , $t_valuematch ) )   {
+				# inserting bindvar name search
+				if( preg_match( '/^[\s\n\r]*(:[a-z0-9_]+)[\s\n\r]*,{0,1}([\d\D]*)\z/i' , $t_values_left , $t_valuematch ) ) {
 					$t_values_left = $t_valuematch[2];
 					$t_values_arr[$i] = $t_valuematch[1];
 				}
-				#skip unsetting if bind array value not empty
-				if( $arr_parms[$t_arr_index] !== '' )	{
-					$i = $i + 1;
-				}
-				else    {
-					$t_arr_index = $t_arr_index - 1;
-					#Shift array and unset bind array element
-					for( $n = $i + 1 ; $n < count( $arr_parms ) ; $n++ )	{
+				# skip unsetting if bind array value not empty
+				if( $arr_parms[$t_arr_index] !== '' ) {
+					$i++;
+				} else {
+					$t_arr_index--;
+					# Shift array and unset bind array element
+					for( $n = $i + 1 ; $n < count( $arr_parms ) ; $n++ ) {
 						$arr_parms[$n-1] = $arr_parms[$n];
 					}
 					unset( $t_fields_arr[$i] );
@@ -1082,54 +1087,58 @@ function adopt_query_syntax_ora( $p_query , &$arr_parms = null )  {
 				}
 			}
 
-			#Combine statement from arrays
+			# Combine statement from arrays
 			$p_query = 'INSERT INTO ' . $t_matches['table'] . ' (' . $t_fields_arr[0];
-			for( $i = 1 ; $i < count( $arr_parms ) ; $i++ )
+			for( $i = 1 ; $i < count( $arr_parms ) ; $i++ ) {
 				$p_query = $p_query . ', ' . $t_fields_arr[$i];
+			}
 			$p_query = $p_query . ') values (' . $t_values_arr[0];
-			for ( $i = 1 ; $i < count( $arr_parms ) ; $i++ )
+			for ( $i = 1 ; $i < count( $arr_parms ) ; $i++ ) {
 				$p_query = $p_query . ', ' . $t_values_arr[$i];
+			}
 			$p_query = $p_query . ')';
-		}else	{ #if input statement is NOT a INSERT INTO (...) VALUES(...)
+		} else {
+			# if input statement is NOT a INSERT INTO (...) VALUES(...)
 
 			# "IS NULL" adoptation here
-			$t_set_where_template_str = substr( md5( uniqid( rand() , true)), 0, 50);
+			$t_set_where_template_str = substr( md5( uniqid( rand() , true) ), 0, 50 );
 			$t_removed_set_where = '';
 
 			# Need to order parameter array element correctly
-			$p_query = order_binds_sequentally( $p_query );
+			$p_query = db_oracle_order_binds_sequentally( $p_query );
 
 			# Find and remove temporarily "SET var1=:bind1, var2=:bind2 WHERE" part
 			preg_match( '/^(?P<before_set_where>.*)(?P<set_where>[\s\n\r]*set[\s\n\r]+[\s\n\ra-z0-9_\.=,:\']+)(?P<after_set_where>where[\d\D]*)$/i' , $p_query, $t_matches );
 			$t_set_where_stmt = isset( $t_matches['after_set_where'] );
 
-			if( $t_set_where_stmt )	{
+			if( $t_set_where_stmt ) {
 				$t_removed_set_where = $t_matches['set_where'];
-				#Now work with statement without "SET ... WHERE" part
+				# Now work with statement without "SET ... WHERE" part
 				$t_templated_query = $t_matches['before_set_where'] . $t_set_where_template_str . $t_matches['after_set_where'];
-			}else	{
+			} else {
 				$t_templated_query = $p_query;
 			}
 
-			#Replace "var1=''" to "var1 IS NULL"
-			while( preg_match( '/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)[\s\n\r]*=[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i' , $t_templated_query , $t_matches ) > 0 )	{
+			# Replace "var1=''" by "var1 IS NULL"
+			while( preg_match( '/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)[\s\n\r]*=[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i' , $t_templated_query , $t_matches ) > 0 ) {
 				$t_templated_query = $t_matches['before_empty_literal'] . " IS NULL " . $t_matches['after_empty_literal'];
 			}
-			#Replace "var1!=''" and "var1<>''" to "var1 IS NOT NULL"
-			while( preg_match('/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)[\s\n\r]*(![\s\n\r]*=|<[\s\n\r]*>)[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i' , $t_templated_query , $t_matches ) > 0 )	{
+			# Replace "var1!=''" and "var1<>''" by "var1 IS NOT NULL"
+			while( preg_match('/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)[\s\n\r]*(![\s\n\r]*=|<[\s\n\r]*>)[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i' , $t_templated_query , $t_matches ) > 0 ) {
 				$t_templated_query = $t_matches['before_empty_literal'] . " IS NOT NULL " . $t_matches['after_empty_literal'];
 			}
 
 			$p_query = $t_templated_query;
-			# Process input bind variable array to replace "WHERE fld=:12" to "WHERE fld IS NULL" if :12 is empty
-			while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r(]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[\s\n\r]*[\d\D]*\z)/i' , $t_templated_query , $t_matches ) > 0 )	{
+			# Process input bind variable array to replace "WHERE fld=:12"
+			# by "WHERE fld IS NULL" if :12 is empty
+			while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r(]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[\s\n\r]*[\d\D]*\z)/i' , $t_templated_query , $t_matches ) > 0 ) {
 				$t_bind_num = $t_matches['bind_name'];
 
 				$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] . $t_matches['after_var'];
 				$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . "=:" . $t_matches['bind_name']. $t_matches['after_var'];
 
-				if( $arr_parms[$t_bind_num] === '' )	{
-					for( $n = $t_bind_num + 1 ; $n < count($arr_parms) ; $n++ )	{
+				if( $arr_parms[$t_bind_num] === '' ) {
+					for( $n = $t_bind_num + 1 ; $n < count($arr_parms) ; $n++ ) {
 						$arr_parms[$n - 1] = $arr_parms[$n];
 					}
 					unset( $arr_parms[count( $arr_parms ) - 1] );
@@ -1140,11 +1149,11 @@ function adopt_query_syntax_ora( $p_query , &$arr_parms = null )  {
 				$t_templated_query = $t_matches['before_var'] . $t_matches['after_var'];
 			}
 
-			if( $t_set_where_stmt )	{
-				#Return temporary removed "SET ... WHERE" part
+			if( $t_set_where_stmt ) {
+				# Put temporarily removed "SET ... WHERE" part back
 				$p_query = str_replace( $t_set_where_template_str , $t_removed_set_where , $p_query );
 				# Need to order parameter array element correctly
-				$p_query = order_binds_sequentally( $p_query );
+				$p_query = order_binds_sequentially( $p_query );
 				# Find and remove temporary "SET var1=:bind1, var2=:bind2 WHERE" part again
 				preg_match( '/^(?P<before_set_where>.*)(?P<set_where>[\s\n\r]*set[\s\n\r]+[\s\n\ra-z0-9_\.=,:\']+)(?P<after_set_where>where[\d\D]*)$/i' , $p_query , $t_matches );
 				$t_removed_set_where = $t_matches['set_where'];
@@ -1153,13 +1162,13 @@ function adopt_query_syntax_ora( $p_query , &$arr_parms = null )  {
 				#Replace "SET fld1=:1" to "SET fld1=DEFAULT" if bind array value is empty
 				$t_removed_set_where_parsing = $t_removed_set_where;
 
-				while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r,]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[,\s\n\r]*[\d\D]*\z)/i' , $t_removed_set_where_parsing , $t_matches ) > 0 )	{
+				while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r,]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[,\s\n\r]*[\d\D]*\z)/i' , $t_removed_set_where_parsing , $t_matches ) > 0 ) {
 					$t_bind_num = $t_matches['bind_name'];
 					$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] ;
 					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] ;
 
-					if( $arr_parms[$t_bind_num] === '' )	{
-						for( $n = $t_bind_num + 1 ; $n < count( $arr_parms ) ; $n++ )	{
+					if( $arr_parms[$t_bind_num] === '' ) {
+						for( $n = $t_bind_num + 1 ; $n < count( $arr_parms ) ; $n++ ) {
 							$arr_parms[$n - 1] = $arr_parms[ $n ];
 						}
 						unset( $arr_parms[count( $arr_parms ) - 1] );
@@ -1172,6 +1181,6 @@ function adopt_query_syntax_ora( $p_query , &$arr_parms = null )  {
 			}
 		}
 	}
-	$p_query = order_binds_sequentally( $p_query );
-        return $p_query;
+	$p_query = db_oracle_order_binds_sequentially( $p_query );
+		return $p_query;
 }
