@@ -243,6 +243,17 @@ function db_is_db2() {
 	}
 
 	return false;
+/**
+ * Validates that the given identifier's length is OK for the db platform
+ * Triggers an error if the identifier is too long
+ * @param string p_identifier Identifier to check
+ */
+function db_check_identifier_size( $p_identifier ) {
+	# Oracle does not support long object names (30 chars max)
+	if( db_is_oracle() && 30 < strlen( $p_identifier ) ) {
+		error_parameters( $p_identifier );
+		trigger_error( ERROR_DB_IDENTIFIER_TOO_LONG, ERROR );
+	}
 }
 
 /**
@@ -939,6 +950,8 @@ function db_get_table( $p_name ) {
 	if ( $t_suffix && $GLOBALS['g_db_type'] == 'oci8' ) {
 		$t_table .= $t_suffix;
 	}
+	db_check_identifier_size( $t_table );
+
 	return $t_table;
 }
 
