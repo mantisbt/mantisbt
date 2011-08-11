@@ -62,11 +62,12 @@ $g_db_log_queries = ( 0 != ( config_get_global( 'log_level' ) & LOG_DATABASE ) )
  * set adodb fetch mode
  * @global bool $ADODB_FETCH_MODE
  */
-if( $GLOBALS['g_db_type'] == 'oci8' )
+if( db_is_oracle() ) {
 	# To get non-empty field values in case of oci8 from GetRowAssoc() indexed result returning must be enabled
 	$ADODB_FETCH_MODE = ADODB_FETCH_BOTH;
-else
+} else {
 	$ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
+}
 
 /**
  * Tracks the query parameter count for use with db_aparam().
@@ -243,6 +244,23 @@ function db_is_db2() {
 	}
 
 	return false;
+}
+
+/**
+ * Checks if the database driver is Oracle
+ * @return bool true if oracle
+ */
+function db_is_oracle() {
+	$t_db_type = config_get_global( 'db_type' );
+
+	switch( $t_db_type ) {
+		case 'oci8':
+			return true;
+	}
+
+	return false;
+}
+
 /**
  * Validates that the given identifier's length is OK for the db platform
  * Triggers an error if the identifier is too long
@@ -273,8 +291,9 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 
 	$t_start = microtime(true);
 
-	if( $GLOBALS['g_db_type'] == 'oci8' )
-		$p_query = adopt_query_syntax_ora( $p_query );
+	if( db_is_oracle() ) {
+		$p_query = db_oracle_adapt_query_syntax( $p_query );
+	}
 
 	if(( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
 		$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset );
@@ -336,9 +355,10 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 		}
 	}
 
-	if( $GLOBALS['g_db_type'] == 'oci8' )	{
-		$p_query = adopt_query_syntax_ora( $p_query , $arr_parms );
+	if( db_is_oracle() ) {
+		$p_query = db_oracle_adapt_query_syntax( $p_query , $arr_parms );
 	}
+
 	if(( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
 		$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset, $arr_parms );
 	} else {
@@ -464,7 +484,7 @@ function db_fetch_array( &$p_result ) {
 		static $t_array_fields;
 
 		# Oci8 returns null values for empty strings
-		if( $g_db_type == 'oci8' )	{
+		if( db_is_oracle() ) {
 			foreach( $t_row as $k => &$v )	{
 				if( $v=='' && $v!=='' )	{
 					$v='';
@@ -554,13 +574,10 @@ function db_insert_id( $p_table = null, $p_field = "id" ) {
 	$t_db_type = config_get_global( 'db_type' );
 
 	if( isset( $p_table ) ) {
-		switch( $t_db_type ) {
-			case 'pgsql':
-				$query = "SELECT currval('" . $p_table . "_" . $p_field . "_seq')";
-				break;
-			case 'oci8':
-				$query = "SELECT seq_" . $p_table . ".CURRVAL FROM DUAL";
-				break;
+		if( db_is_oracle() ) {
+			$query = "SELECT seq_" . $p_table . ".CURRVAL FROM DUAL";
+		} elseif( db_is_pgsql() ) {
+			$query = "SELECT currval('" . $p_table . "_" . $p_field . "_seq')";
 		}
 		if( isset( $query ) )	{
 			$result = db_query_bound( $query );
