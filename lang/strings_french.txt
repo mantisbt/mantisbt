@@ -40,6 +40,7 @@
  * @author Laurent LABAT, wizzz@apinc.org
  * @author Maurice A. LeBlanc, leblancma@cooptel.qc.ca
  * @author McDutchie
+ * @author Od1n
  * @author Peter17
  * @author Philou2024
  * @author Quentin Delance, quentin.delance@insalien.org
@@ -1099,7 +1100,7 @@ $s_update_issue_status = 'Mettre à jour le statut d\'un bogue';
 $s_set_view_status = 'Définir l\'état d\'affichage (public versus privé) lors du rapport d\'un nouveau bogue ou note';
 $s_update_view_status = 'Mettre à jour l\'état d\'affichage (public versus privé) des bogues ou notes existantes';
 $s_show_list_of_users_monitoring_issue = 'Afficher la liste des utilisateurs surveillant un bogue';
-$s_notes = 'NOTES';
+$s_notes = 'Notes';
 $s_add_notes = 'Ajouter des notes';
 $s_update_notes = 'Mettre à jours les notes';
 $s_delete_note = 'Supprimer une note';
@@ -1149,7 +1150,7 @@ $s_before_date = 'Avant';
 $s_after_date = 'Après';
 $s_on_or_after_date = 'Pendant ou après';
 $s_from_date = 'De';
-$s_to_date = 'A';
+$s_to_date = 'À';
 $s_on_date = 'Le';
 $s_on = 'Allumé';
 $s_off = 'Éteint';
@@ -1186,9 +1187,10 @@ $s_tag_related_issues = 'Bogues partagés (%1$s)';
 $s_tag_stats_attached = 'Bogues associés : %1$s';
 $s_tag_create = 'Créer la balise';
 $s_show_all_tags = 'Tous';
-$s_time_tracking_billing_link = 'Facturation';
+$s_time_tracking_billing_link = 'Suivi du temps';
 $s_time_tracking = 'Suivi du temps';
-$s_time_tracking_get_info_button = 'Obtenir l\'information sur le suivi du temps';
+$s_time_tracking_time_spent = 'Temps passé :';
+$s_time_tracking_get_info_button = 'Obtenir les informations sur le suivi du temps';
 $s_time_tracking_cost_per_hour = 'Coût à l\'heure';
 $s_time_tracking_cost = 'Coût';
 $s_total_time_for_issue = 'Temps total pour le bogue = %1$s';

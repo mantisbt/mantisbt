@@ -28,6 +28,7 @@
  * @author Als-Holder
  * @author Andre Eisenbach, andre@eisenbach.com
  * @author Atrol
+ * @author Ayonik
  * @author Campmaster
  * @author Diebuche
  * @author Dr. Jürgen Kehrel, jkehrel@kehrel.de
@@ -497,7 +498,7 @@ $s_bug_reminder = 'Erinnerung senden';
 $s_reminder_sent_to = 'Erinnerung gesendet an:';
 $s_bug_send_button = 'Absenden';
 $s_reminder = 'Erinnerung';
-$s_reminder_explain = 'Diese Notiz wird an die aufgeführten Empfänger gesandt, die eine Benachrichtigung zu diesem Eintrag wünschten.';
+$s_reminder_explain = 'Diese Notiz wird an die aufgeführten Empfänger gesandt, um eine Rückmeldung zu diesem Eintrag anzufordern.';
 $s_reminder_monitor = 'Diese Empfänger beginnen auch, den Eintrag zu beobachten. Sie können sich abmelden mit Klick auf den „Beobachtung beenden“-Knopf.';
 $s_reminder_store = 'Diese Notiz wird mit dem Eintrag abgespeichert.';
 $s_confirm_sponsorship = 'Bitte bestätigen Sie, dass Sie den Eintrag %1$d mit %2$s sponsern möchten.';
@@ -911,15 +912,15 @@ $s_developer_by_resolution = 'Entwickler gruppiert nach Lösungs-Status';
 $s_percentage_fixed = '% behoben';
 $s_percentage_errors = '% fehlerhaft';
 $s_errors = 'Fehlerhaft';
-$s_opened = 'Offen';
+$s_opened = 'Geöffnet';
 $s_resolved = 'Erledigt';
 $s_total = 'Gesamt';
 $s_balance = 'Bilanz';
 $s_most_active = 'Maximale Aktivität';
 $s_score = 'Punktzahl';
 $s_days = 'Tage';
-$s_time_stats = 'Dauer der Fehlerbehebung (Tage)';
-$s_longest_open_bug = 'ältester offener Eintrag';
+$s_time_stats = 'Zeit-Statistik f&uuml;r erledigte Eintr&auml;ge (Tage)';
+$s_longest_open_bug = 'Eintrag mit maximaler Bearbeitungsdauer';
 $s_longest_open = 'Maximale Bearbeitungsdauer';
 $s_average_time = 'durchschnittlich';
 $s_total_time = 'insgesamt';
@@ -1182,8 +1183,9 @@ $s_tag_related_issues = 'Gemeinsame Einträge (%1$s)';
 $s_tag_stats_attached = 'Zugeordnete Einträge: %1$s';
 $s_tag_create = 'Tag erstellen';
 $s_show_all_tags = 'ALLE';
-$s_time_tracking_billing_link = 'Abrechnung';
+$s_time_tracking_billing_link = 'Zeiterfassung';
 $s_time_tracking = 'Zeiterfassung';
+$s_time_tracking_time_spent = 'Investierte Zeit:';
 $s_time_tracking_get_info_button = 'Zeiterfassungs-Informationen abfragen';
 $s_time_tracking_cost_per_hour = 'Kosten / Stunde';
 $s_time_tracking_cost = 'Kosten';

@@ -44,6 +44,7 @@ $s_plugin_MantisGraph_library = '使用繪圖套件';
 $s_plugin_MantisGraph_bundled = '內建';
 $s_plugin_MantisGraph_window_width = '圖表寬度 (像素)';
 $s_plugin_MantisGraph_bar_aspect = '長條圖長寬比 (高/寬)';
+$s_plugin_MantisGraph_summary_graphs_per_row = '進階摘要中每列併排顯示的圖片數';
 $s_plugin_MantisGraph_font = '字型';
 $s_plugin_MantisGraph_jpgraph_path = 'JpGraph 套件系統路徑';
 $s_plugin_MantisGraph_jpgraph_path_default = '使用預設值則留白: {mantisroot}/library/jpgraph';

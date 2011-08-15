@@ -1171,6 +1171,7 @@ $s_tag_create = 'Criar Marcador';
 $s_show_all_tags = 'TODAS';
 $s_time_tracking_billing_link = 'Fatura';
 $s_time_tracking = 'Acompanhamento de tempo';
+$s_time_tracking_time_spent = 'Tempo gasto:';
 $s_time_tracking_get_info_button = 'Obter informações de acompanhamento de tempo';
 $s_time_tracking_cost_per_hour = 'Custo / Hora';
 $s_time_tracking_cost = 'Custo';
