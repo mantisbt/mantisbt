@@ -1048,8 +1048,21 @@ function db_oracle_order_binds_sequentially( $p_query ) {
  */
 function db_oracle_adapt_query_syntax_ora( $p_query , &$arr_parms = null )  {
 	# Remove "AS" keyword, because not supported with table aliasing
-	#@@@ Could potentially cause issues if ' AS ' is contained within a string ?
-	$p_query = preg_replace( '/ AS /im' , ' ' , $p_query );
+	$t_is_odd = true;
+	$t_query = '';
+	# Divide statement to skip processing string literals
+	$t_p_query_arr = explode( '\'' , $p_query );
+	foreach( $t_p_query_arr as $t_p_query_part ) {
+		if( $t_query != '' )
+			$t_query .= '\'';
+		if( $t_is_odd ) {
+			$t_query .= preg_replace( '/ AS /im' , ' ' , $t_p_query_part );
+		} else {
+			$t_query .= $t_p_query_part;
+			$t_is_odd = true;
+		}
+	}
+	$p_query = $t_query;
 
 	# Remove null bind variables in insert statements for default values support
 	if( is_array ( $arr_parms ) )        {

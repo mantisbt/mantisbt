@@ -49,11 +49,11 @@ function installer_db_now() {
 switch( $GLOBALS['g_db_type'] ) {
 	case 'oci8':
 		$t_notnull = "";
-		$t_timestamp = 'timestamp' . installer_db_now();
+		$t_timestamp = "timestamp" . installer_db_now();
 		break;
 	default:
 		$t_notnull = 'NOTNULL';
-		$t_timestamp = installer_db_now();
+		$t_timestamp = "'" . installer_db_now() . "'";
 		break;
 }
 
@@ -359,7 +359,7 @@ $upgrade[] = array('CreateIndexSQL',array('idx_enable',db_get_table('user'),'ena
 $upgrade[] = array('CreateIndexSQL',array('idx_access',db_get_table('user'),'access_level'));
 $upgrade[] = array('InsertData', array( db_get_table('user'),
 	"(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES
-		('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', '" . $t_timestamp . "', '" . $t_timestamp . "', '1', '0', 90, 3, 0, 0, '" .
+		('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', " . $t_timestamp . ", " . $t_timestamp . ", '1', '0', 90, 3, 0, 0, '" .
 			md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . "')" ) );
 $upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "old_value C(255) $t_notnull" ) );
 $upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "new_value C(255) $t_notnull" ) );
