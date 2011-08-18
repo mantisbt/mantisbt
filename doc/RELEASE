@@ -1,5 +1,23 @@
 MantisBT Release Notes
 
+1.2.7 Security Release (2011-08-19)
+-------------------------------------------------
+
+MantisBT 1.2.7 is a security update for the stable 1.2.x branch. All
+installations that are currently running any 1.2.x version are advised to
+upgrade to this release.
+
+Net.Edit0r from BlACK Hat Group posted a vulnerability report for an XSS issue
+in search.php. All MantisBT users (including anonymous users that are not
+logged in to public bug trackers) could be impacted by this vulnerability.
+Full full details refer to issue #13245.
+
+This release also contains numerous minor bug fixes to MantisBT and improved
+translations in many languages.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
 1.2.6 Maintenance Release (2011-07-26)
 -------------------------------------------------
 
