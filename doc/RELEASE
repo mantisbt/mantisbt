@@ -10,7 +10,7 @@ upgrade to this release.
 Net.Edit0r from BlACK Hat Group posted a vulnerability report for an XSS issue
 in search.php. All MantisBT users (including anonymous users that are not
 logged in to public bug trackers) could be impacted by this vulnerability.
-Full full details refer to issue #13245.
+Refer to issue #13245 for full details.
 
 This release also contains numerous minor bug fixes to MantisBT and improved
 translations in many languages.
