@@ -955,7 +955,7 @@ function email_send( $p_email_data ) {
 			break;
 	}
 
-	$mail->IsHTML ( isset( $t_email_data->metadata['Content-Type'] ) && stripos( $t_email_data->metadata['Content-Type'], "text/html" ) !== false ) ;              # set email format to plain text
+	$mail->IsHTML( isset( $t_email_data->metadata['Content-Type'] ) && stripos( $t_email_data->metadata['Content-Type'], "text/html" ) !== false );
 	$mail->WordWrap = 80;              # set word wrap to 50 characters
 	$mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
 	$mail->CharSet = $t_email_data->metadata['charset'];
@@ -1013,6 +1013,17 @@ function email_send( $p_email_data ) {
 		}
 	}
 
+	if( isset( $t_email_data->metadata['attachments'] ) && is_array( $t_email_data->metadata['attachments'] ) ) {
+		if( count( $t_email_data->metadata['attachments'] ) > 0 ){
+			log_event( LOG_EMAIL, 'Attachments: '.print_r($t_email_data->metadata['attachments'],true ) );
+			$t_files = file_get_attachments( $t_email_data->metadata['attachments'] );
+			log_event( LOG_EMAIL, 'Read '.count( $t_files ).' file(s) to be attached to the email' );
+			foreach( $t_files as $t_index => $t_file ) {
+				$mail->AddStringAttachment( $t_file['content'], $t_file['display_name']  );
+				log_event( LOG_EMAIL, 'Attachment '.$t_file['display_name'].', size = '.$t_file['size'].' added' );
+			}
+		}
+	}
 	try
 	{
 		if ( !$mail->Send() ) {
