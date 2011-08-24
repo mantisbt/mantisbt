@@ -452,6 +452,7 @@ function file_ftp_put( $p_conn_id, $p_remote_filename, $p_local_filename ) {
 function file_ftp_get( $p_conn_id, $p_local_filename, $p_remote_filename ) {
 	helper_begin_long_process();
 	$download = ftp_get( $p_conn_id, $p_local_filename, $p_remote_filename, FTP_BINARY );
+	return $download;
 }
 
 # Delete a file from the ftp server
@@ -470,6 +471,61 @@ function file_delete_local( $p_filename ) {
 		chmod( $p_filename, 0775 );
 		unlink( $p_filename );
 	}
+}
+
+
+# --------------------
+# Gets an array of attachments whose ids are included in the passed array.
+# Content of the files are fetched basing on the 'file_upload_method' config value
+# Each element of the result array contains the following:
+# id - Id of the file in the database
+# bug_id - Id of the bug that the file is attached to
+# display_name - The attachment display name (i.e. file name dot extension)
+# size - The attachment size in bytes.
+# date_added - The date where the attachment was added.
+# content - content of the file
+# diskfile - The name of the file on disk.  Typically this is a hash without an extension.
+function file_get_attachments( $p_file_ids ) {
+	$t_result_array = array();
+	$t_ids = is_array( $p_file_ids ) ? $p_file_ids : array( $p_file_ids );
+	$t_ids = array_unique( $t_ids );
+	$t_bug_file_table = db_get_table( 'bug_file' );
+	$query = "SELECT id, bug_id, filename AS display_name, filesize AS size, date_added, content, diskfile
+		FROM $t_bug_file_table
+		WHERE id IN (" .implode( ",", $t_ids ).")";
+	$result = db_query_bound( $query );
+	$t_project_id = -1;
+	$t_bug_id = -1;
+	while ( $row = db_fetch_array( $result ) ) {
+		if( $t_bug_id != $row['bug_id'] ){
+			$t_bug_id = $row['bug_id'];
+			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
+		}
+		switch ( config_get( 'file_upload_method' ) ) {
+		case DISK:
+			$t_local_disk_file = file_normalize_attachment_path( $row['diskfile'], $t_project_id );
+			if ( file_exists( $t_local_disk_file ) )
+				$row['content'] = file_get_contents( $t_local_disk_file );
+			else
+				$row['content'] = "file [".$row['display_name']."] not found (disk)";
+			break;
+		case FTP:
+			$t_local_disk_file = file_normalize_attachment_path( $row['diskfile'], $t_project_id );
+			if ( !file_exists( $t_local_disk_file ) ) {
+				$t_ftp = file_ftp_connect();
+				$t_downloaded = file_ftp_get( $t_ftp, $t_local_disk_file, $row['diskfile'] );
+				file_ftp_disconnect( $ftp );
+				if( $downloaded )
+					$row['content'] = file_get_contents( $t_local_disk_file );
+				else
+					$row['content'] = "file [".$row['display_name']."] not found (ftp)";
+			} else {
+				$row['content'] = file_get_contents( $t_local_disk_file );
+			}
+		}
+		$t_result_array[] = $row;
+	}
+	return $t_result_array;
 }
 
 # Return the specified field value

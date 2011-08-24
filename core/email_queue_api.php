@@ -48,6 +48,7 @@ class EmailData {
 	var $body = '';
 	var $metadata = array(
 		'headers' => array(),
+		'attachments' => array(),
 	);
 
 	// auto-populated properties

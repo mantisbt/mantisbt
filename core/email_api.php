@@ -468,7 +468,8 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name =
 	# Send signup email regardless of mail notification pref
 	# or else users won't be able to sign up
 	if( !is_blank( $t_email ) ) {
-		email_store( $t_email, $t_subject, $t_message );
+		$t_params = array( 'admin_name' => $p_admin_name, 'user_id' => $p_user_id, 'confirm_hash' => $p_confirm_hash );
+		email_store( 'email_notification_signup', $t_email, $t_subject, $t_message, null, $t_params );
 		log_event( LOG_EMAIL, sprintf( 'Signup Email = %s, Hash = %s, User = @U%d', $t_email, $p_confirm_hash, $p_user_id ) );
 
 		if( OFF == config_get( 'email_send_using_cronjob' ) ) {
@@ -504,7 +505,8 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	# Send password reset regardless of mail notification prefs
 	# or else users won't be able to receive their reset pws
 	if( !is_blank( $t_email ) ) {
-		email_store( $t_email, $t_subject, $t_message );
+		$t_params = array( 'user_id' => $p_user_id, 'confirm_hash' => $p_confirm_hash );
+		email_store( 'email_notification_forgotten_password', $t_email, $t_subject, $t_message, null, $t_params );
 		log_event( LOG_EMAIL, sprintf( 'Password reset for email = %s', $t_email ) );
 
 		if( OFF == config_get( 'email_send_using_cronjob' ) ) {
@@ -536,7 +538,7 @@ function email_notify_new_account( $p_username, $p_email ) {
 		$t_message = lang_get( 'new_account_signup_msg' ) . "\n\n" . lang_get( 'new_account_username' ) . ' ' . $p_username . "\n" . lang_get( 'new_account_email' ) . ' ' . $p_email . "\n" . lang_get( 'new_account_IP' ) . ' ' . $_SERVER["REMOTE_ADDR"] . "\n" . $g_path . "\n\n" . lang_get( 'new_account_do_not_reply' );
 
 		if( !is_blank( $t_recipient_email ) ) {
-			email_store( $t_recipient_email, $t_subject, $t_message );
+			email_store( 'email_notification_new_account', $t_recipient_email, $t_subject, $t_message );
 			log_event( LOG_EMAIL, sprintf( 'New Account Notify for email = \'%s\'', $t_recipient_email ) );
 
 			if( OFF == config_get( 'email_send_using_cronjob' ) ) {
@@ -802,7 +804,7 @@ function email_bug_deleted( $p_bug_id ) {
  * @param array $p_headers
  * @return int
  */
-function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) {
+function email_store( $p_message_id, $p_recipient, $p_subject, $p_message, $p_headers = null, $p_params = null ) {
 	$t_recipient = trim( $p_recipient );
 	$t_subject = string_email( trim( $p_subject ) );
 	$t_message = string_email_links( trim( $p_message ) );
@@ -838,6 +840,8 @@ function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) 
 	}
 	$t_email_data->metadata['hostname'] = $t_hostname;
 
+	$t_email_data = event_signal( 'EVENT_NOTIFY_EMAIL', $t_email_data, array( 'message_id' => $p_message_id, 'params' => $p_params ) );
+	
 	$t_email_id = email_queue_add( $t_email_data );
 
 	return $t_email_id;
@@ -951,7 +955,7 @@ function email_send( $p_email_data ) {
 			break;
 	}
 
-	$mail->IsHTML( false );              # set email format to plain text
+	$mail->IsHTML( isset( $t_email_data->metadata['Content-Type'] ) && stripos( $t_email_data->metadata['Content-Type'], "text/html" ) !== false );
 	$mail->WordWrap = 80;              # set word wrap to 50 characters
 	$mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
 	$mail->CharSet = $t_email_data->metadata['charset'];
@@ -1009,6 +1013,17 @@ function email_send( $p_email_data ) {
 		}
 	}
 
+	if( isset( $t_email_data->metadata['attachments'] ) && is_array( $t_email_data->metadata['attachments'] ) ) {
+		if( count( $t_email_data->metadata['attachments'] ) > 0 ){
+			log_event( LOG_EMAIL, 'Attachments: '.print_r($t_email_data->metadata['attachments'],true ) );
+			$t_files = file_get_attachments( $t_email_data->metadata['attachments'] );
+			log_event( LOG_EMAIL, 'Read '.count( $t_files ).' file(s) to be attached to the email' );
+			foreach( $t_files as $t_index => $t_file ) {
+				$mail->AddStringAttachment( $t_file['content'], $t_file['display_name']  );
+				log_event( LOG_EMAIL, 'Attachment '.$t_file['display_name'].', size = '.$t_file['size'].' added' );
+			}
+		}
+	}
 	try
 	{
 		if ( !$mail->Send() ) {
@@ -1147,8 +1162,10 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 		$t_header = "\n" . lang_get( 'on_date' ) . " $t_date, $t_sender $t_sender_email " . lang_get( 'sent_you_this_reminder_about' ) . ": \n\n";
 		$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) . " \n\n$p_message";
 
+		$t_params = array( 'message' => $p_message, 'bug_id' => $p_bug_id, 'recipient' => $t_recipient, 'sender' => $t_sender, 'sender_email' => $t_sender_email );
+		
 		if( ON == config_get( 'enable_email_notification' ) ) {
-			email_store( $t_email, $t_subject, $t_contents );
+			email_store( 'email_bug_reminder', $t_email, $t_subject, $t_contents, null, $t_params );
 		}
 
 		lang_pop();
@@ -1210,7 +1227,7 @@ function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_proj
 	}
 
 	# send mail
-	$t_ok = email_store( $t_user_email, $t_subject, $t_message, $t_mail_headers );
+	$t_ok = email_store( $p_message_id, $t_user_email, $t_subject, $t_message, $t_mail_headers, array_merge( $p_visible_bug_data, array( 'header_optional_params' => $p_header_optional_params ) ) );
 
 	return $t_ok;
 }
