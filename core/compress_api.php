@@ -29,7 +29,6 @@
  */
 
 require_api( 'constant_inc.php' );
-require_api( 'php_api.php' );
 require_api( 'utility_api.php' );
 
 /**
@@ -68,9 +67,9 @@ function compress_handler_is_enabled() {
 			return false;
 		}
 
-		// Since php 5.2.10, it's possible to set zlib.output_compression via ini_set.
+		// It's possible to set zlib.output_compression via ini_set.
 		// This method is preferred over ob_gzhandler
-		if( php_version_at_least( '5.2.10' ) && ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) ) {
+		if( ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) ) {
 			ini_set( 'zlib.output_compression', true );
 			// do it transparently
 			return false;
