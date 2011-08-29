@@ -112,10 +112,15 @@
 			$t_host = 'localhost';
 		}
 
-		$t_path = str_replace( basename( $_SERVER['PHP_SELF'] ), '', $_SERVER['PHP_SELF'] );
+		$t_self = $_SERVER['SCRIPT_NAME'];
+		$t_self = filter_var( $t_self, FILTER_SANITIZE_STRING );
+		$t_path = str_replace( basename( $t_self ), '', $t_self );
 		$t_path = basename( $t_path ) == "admin" ? dirname( $t_path ) . '/' : $t_path;
 		$t_path = basename( $t_path ) == "soap" ? dirname( dirname( $t_path ) ) . '/' : $t_path;
-		
+		if ( strpos( $t_path, '&#' ) ) {
+			echo 'Can not safely determine $g_path. Please set $g_path manually in config_inc.php';
+			die;
+		}
 
 		$t_url	= $t_protocol . '://' . $t_host . $t_path;
 
