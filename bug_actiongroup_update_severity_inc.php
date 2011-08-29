@@ -28,7 +28,7 @@
  * @uses print_api.php
  */
 
-if ( !defined( 'BUG_ACTIONGROUP_UPDATE_SEVERITY_INC_ALLOW' ) ) {
+if ( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
 	return;
 }
 

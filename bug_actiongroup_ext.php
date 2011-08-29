@@ -57,12 +57,11 @@ helper_begin_long_process();
 $f_action = gpc_get_string( 'action' );
 $f_bug_arr	= gpc_get_int_array( 'bug_arr', array() );
 
-$t_action_include_file = 'bug_actiongroup_' . $f_action . '_inc.php';
 $t_form_name = 'bug_actiongroup_' . $f_action;
 
 form_security_validate( $t_form_name );
 
-require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $t_action_include_file );
+bug_group_action_init( $f_action );
 
 # group bugs by project
 $t_projects_bugs = array();

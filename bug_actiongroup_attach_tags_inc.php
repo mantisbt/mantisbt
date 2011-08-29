@@ -30,7 +30,7 @@
  * @uses tag_api.php
  */
 
-if ( !defined( 'BUG_ACTIONGROUP_ATTACH_TAGS_INC_ALLOW' ) ) {
+if ( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
 	return;
 }
 

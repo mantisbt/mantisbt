@@ -32,7 +32,7 @@
  * @uses utility_api.php
  */
 
-if ( !defined( 'BUG_ACTIONGROUP_ADD_NOTE_INC_ALLOW' ) ) {
+if ( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
 	return;
 }
 

@@ -27,7 +27,7 @@
  * @uses lang_api.php
  */
 
-if ( !defined( 'BUG_ACTIONGROUP_UPDATE_PRODUCT_BUILD_INC_ALLOW' ) ) {
+if ( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
 	return;
 }
 
