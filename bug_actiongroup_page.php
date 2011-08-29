@@ -42,6 +42,7 @@
 	# run through the issues to see if they are all from one project
 	$t_project_id = ALL_PROJECTS;
 	$t_multiple_projects = false;
+	$t_projects = array();
 
 	bug_cache_array_rows( $f_bug_arr );
 
@@ -52,11 +53,13 @@
 				$t_multiple_projects = true;
 			} else {
 				$t_project_id = $t_bug->project_id;
+				$t_projects[$t_project_id] = $t_project_id;
 			}
 		}
 	}
 	if ( $t_multiple_projects ) {
 		$t_project_id = ALL_PROJECTS;
+		$t_projects[ALL_PROJECTS] = ALL_PROJECTS;
 	}
 	# override the project if necessary
 	if( $t_project_id != helper_get_current_project() ) {

@@ -20,33 +20,14 @@
 	 * @copyright Copyright (C) 2002 - 2011  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
-	 /**
-	  * MantisBT Core API's
-	  */
-	require_once( 'core.php' );
 
+	require_once( 'core.php' );
 	require_once( 'bug_group_action_api.php' );
 
-	auth_ensure_user_authenticated();
-
-	$f_action = gpc_get_string( 'action' );
-	$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
-
-	# redirect to view issues if nothing is selected
-	if ( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
-		print_header_redirect( 'view_all_bug_page.php' );
-	}
-
-  # redirect to view issues page if action doesn't have ext_* prefix.
-  # This should only occur if this page is called directly.
-	$t_external_action_prefix = 'EXT_';
-	if ( strpos( $f_action, $t_external_action_prefix ) !== 0 ) {
-		print_header_redirect( 'view_all_bug_page.php' );
-  }
-
 	$t_external_action = utf8_strtolower( utf8_substr( $f_action, utf8_strlen( $t_external_action_prefix ) ) );
-	$t_form_fields_page = 'bug_actiongroup_' . $t_external_action . '_inc.php';
 	$t_form_name = 'bug_actiongroup_' . $t_external_action;
+
+	bug_group_action_init( $t_external_action );
 
 	bug_group_action_print_top();
 ?>
