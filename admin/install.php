@@ -689,7 +689,7 @@ if( 3 == $t_install_state ) {
 				$t_target = $upgrade[$i][1];
 			} else if( $upgrade[$i][0] == 'UpdateFunction' ) {
 				$sqlarray = array(
-					$upgrade[$i][1],					
+					$upgrade[$i][1],
 				);
 				if( isset( $upgrade[$i][2] ) ) {
 					$sqlarray[] = $upgrade[$i][2];
@@ -740,7 +740,7 @@ if( 3 == $t_install_state ) {
 		}
 		if( $f_log_queries ) {
 			# add a query to set the database version
-			echo 'INSERT INTO mantis_config_table ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . "\r\n";
+			echo 'INSERT INTO ' . db_get_table( 'mantis_config_table' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . "\r\n";
 			echo '</pre></br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</td></tr>';
 		}
 	}
