@@ -882,7 +882,7 @@ $g_severity_significant_threshold = MAJOR;
  */
 $g_view_issues_page_columns = array (
 	'selection', 'edit', 'priority', 'id', 'sponsorship_total',
-	'bugnotes_count', 'attachment', 'category_id', 'severity', 'status',
+	'bugnotes_count', 'attachment_count', 'category_id', 'severity', 'status',
 	'last_updated', 'summary'
 );
 
@@ -894,7 +894,8 @@ $g_view_issues_page_columns = array (
  */
 $g_print_issues_page_columns = array (
 	'selection', 'priority', 'id', 'sponsorship_total', 'bugnotes_count',
-	'attachment', 'category_id', 'severity', 'status', 'last_updated', 'summary'
+	'attachment_count', 'category_id', 'severity', 'status', 'last_updated',
+	'summary'
 );
 
 /**
