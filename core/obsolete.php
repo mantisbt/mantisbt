@@ -139,7 +139,10 @@ config_obsolete( 'default_graph_type', '' );
 config_obsolete( 'graph_font', '' );
 config_obsolete( 'graph_colors', '' );
 
-#changes in 1.3.0dev
+# changes in 1.2.8
+config_obsolete( 'show_attachment_indicator' );
+
+# changes in 1.3.0dev
 config_obsolete( 'bugnote_allow_user_edit_delete', '' );
 config_obsolete( 'password_confirm_hash_magic_string', 'crypto_master_salt' );
 config_obsolete( 'rss_key_seed', 'crypto_master_salt' );
