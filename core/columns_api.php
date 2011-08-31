@@ -1064,8 +1064,6 @@ function print_column_attachment_count( $p_bug, $p_columns_target = COLUMNS_TARG
 	global $t_icon_path;
 
 	# Check for attachments
-	# TODO: factor in the allow_view_own_attachments configuration option
-	# instead of just using a global check.
 	$t_attachment_count = 0;
 	if( file_can_view_bug_attachments( $p_bug->id, null ) ) {
 		$t_attachment_count = file_bug_attachment_count( $p_bug->id );
