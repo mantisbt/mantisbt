@@ -1903,18 +1903,6 @@
 	$g_preview_max_height = 250;
 
 	/**
-	 * Show an attachment indicator on bug list
-	 * Show a clickable attachment indicator on the bug
-	 * list page if the bug has one or more files attached.
-	 * Note: This option is disabled by default since it adds
-	 * 1 database query per bug listed and thus might slow
-	 * down the page display.
-	 *
-	 * @global int $g_show_attachment_indicator
-	 */
-	$g_show_attachment_indicator = OFF;
-
-	/**
 	 * access level needed to view bugs attachments.  View means to see the file names
 	 * sizes, and timestamps of the attachments.
 	 * @global int $g_view_attachments_threshold
