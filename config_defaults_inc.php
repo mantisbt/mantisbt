@@ -115,7 +115,7 @@
 		$t_path = str_replace( basename( $_SERVER['PHP_SELF'] ), '', $_SERVER['PHP_SELF'] );
 		$t_path = basename( $t_path ) == "admin" ? dirname( $t_path ) . '/' : $t_path;
 		$t_path = basename( $t_path ) == "soap" ? dirname( dirname( $t_path ) ) . '/' : $t_path;
-		
+
 
 		$t_url	= $t_protocol . '://' . $t_host . $t_path;
 
@@ -825,7 +825,7 @@
 	 *
 	 * @global array $g_view_issues_page_columns
 	 */
-	$g_view_issues_page_columns = array ( 'selection', 'edit', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment', 'category_id', 'severity', 'status', 'last_updated', 'summary' );
+	$g_view_issues_page_columns = array ( 'selection', 'edit', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment_count', 'category_id', 'severity', 'status', 'last_updated', 'summary' );
 
 	/**
 	 * The default columns to be included in the Print Issues Page.
@@ -833,7 +833,7 @@
 	 * Also each user can configure their own columns using My Account -> Manage Columns
 	 * @global array $g_print_issues_page_columns
 	 */
-	$g_print_issues_page_columns = array ( 'selection', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment', 'category_id', 'severity', 'status', 'last_updated', 'summary' );
+	$g_print_issues_page_columns = array ( 'selection', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment_count', 'category_id', 'severity', 'status', 'last_updated', 'summary' );
 
 	/**
 	 * The default columns to be included in the CSV export.
@@ -3666,11 +3666,11 @@
 	 * @global int $g_manage_plugin_threshold
 	 */
 	$g_manage_plugin_threshold = ADMINISTRATOR;
-	
-	
+
+
 	/**
 	 * A mapping of file extensions to mime types, used when serving resources from plugins
-	 * 
+	 *
 	 * @global array $g_plugin_mime_types
 	 */
 	$g_plugin_mime_types = array(
@@ -3718,7 +3718,7 @@
 	 * Sub-projects should inherit versions from parent projects.
 	 */
 	$g_subprojects_inherit_versions = ON;
-	
+
 	/**********************************
 	 * Debugging / Developer Settings *
 	 **********************************/
@@ -3836,7 +3836,7 @@
 	 * @global string $g_log_destination
 	 */
 	$g_log_destination = '';
-	
+
 	/**
 	 * if OFF, will include original javascript files
 	 * if ON, will include javascript files that have been compressed by yuicompressor if available

@@ -149,7 +149,7 @@ function check_selected( $p_var, $p_val = true ) {
  * @param mixed $p_var
  * @param mixed $p_val
  * @return null
- */ 
+ */
 function check_checked( $p_var, $p_val = true ) {
 	if( $p_var == $p_val ) {
 		echo ' checked="checked" ';
@@ -360,7 +360,7 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 }
 
 /**
- * 
+ *
  * @param int $p_columns_target
  * @param bool $p_viewable_only
  * @param int $p_user_id
@@ -401,7 +401,7 @@ function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAG
 	}
 
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE || $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE || OFF == config_get( 'show_attachment_indicator' ) ) {
-		$t_keys_to_remove[] = 'attachment';
+		$t_keys_to_remove[] = 'attachment_count';
 	}
 
 	$t_keys_to_remove[] = 'duplicate_id';
