@@ -40,12 +40,18 @@
   # redirect to view issues page if action doesn't have ext_* prefix.
   # This should only occur if this page is called directly.
 	$t_external_action_prefix = 'EXT_';
-	if ( strpos( $f_action, $t_external_action_prefix ) !== 0 ) {
+	$t_matches = array();
+	preg_match( '/^EXT_(\w+)$/', $f_action, $t_matches );
+	if ( count( $t_matches ) !== 2 ) {
 		print_header_redirect( 'view_all_bug_page.php' );
-  }
+		exit;
+	}
+	$t_external_action = $t_matches[1];
+	$t_include_file = 'bug_actiongroup_' . $t_external_action . '_inc.php';
+	if ( !file_exists( $t_include_file ) ) {
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
 
-	$t_external_action = utf8_strtolower( utf8_substr( $f_action, utf8_strlen( $t_external_action_prefix ) ) );
-	$t_form_fields_page = 'bug_actiongroup_' . $t_external_action . '_inc.php';
 	$t_form_name = 'bug_actiongroup_' . $t_external_action;
 
 	bug_group_action_print_top();

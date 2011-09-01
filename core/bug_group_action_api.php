@@ -94,7 +94,14 @@ function bug_group_action_print_hidden_fields( $p_bug_ids_array ) {
  * @param $p_action   The custom action name without the "EXT_" prefix.
  */
 function bug_group_action_print_action_fields( $p_action ) {
-	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
+	if ( !preg_match( '/^\w+$/', $p_action ) ) {
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+	$t_include_file = 'bug_actiongroup_' . $p_action . '_inc.php';
+	if ( !file_exists( $t_include_file ) ) {
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+	require_once( $t_include_file );
 	$t_function_name = 'action_' . $p_action . '_print_fields';
 	$t_function_name();
 }
@@ -106,7 +113,14 @@ function bug_group_action_print_action_fields( $p_action ) {
  * @param $p_action   The custom action name without the "EXT_" prefix.
  */
 function bug_group_action_print_title( $p_action ) {
-	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
+	if ( !preg_match( '/^\w+$/', $p_action ) ) {
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+	$t_include_file = 'bug_actiongroup_' . $p_action . '_inc.php';
+	if ( !file_exists( $t_include_file ) ) {
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+	require_once( $t_include_file );
 	$t_function_name = 'action_' . $p_action . '_print_title';
 	$t_function_name();
 }
@@ -121,7 +135,14 @@ function bug_group_action_print_title( $p_action ) {
  * @returns true|array true if action can be applied or array of ( bug_id => reason for failure to validate )
  */
 function bug_group_action_validate( $p_action, $p_bug_id ) {
-	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
+	if ( !preg_match( '/^\w+$/', $p_action ) ) {
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+	$t_include_file = 'bug_actiongroup_' . $p_action . '_inc.php';
+	if ( !file_exists( $t_include_file ) ) {
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+	require_once( $t_include_file );
 	$t_function_name = 'action_' . $p_action . '_validate';
 	return $t_function_name( $p_bug_id );
 }
@@ -136,7 +157,14 @@ function bug_group_action_validate( $p_action, $p_bug_id ) {
  * @returns true|array Action can be applied., ( bug_id => reason for failure to process )
  */
 function bug_group_action_process( $p_action, $p_bug_id ) {
-	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
+	if ( !preg_match( '/^\w+$/', $p_action ) ) {
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+	$t_include_file = 'bug_actiongroup_' . $p_action . '_inc.php';
+	if ( !file_exists( $t_include_file ) ) {
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+	require_once( $t_include_file );
 	$t_function_name = 'action_' . $p_action . '_process';
 	return $t_function_name( $p_bug_id );
 }
