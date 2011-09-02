@@ -748,7 +748,13 @@ if( 3 == $t_install_state ) {
 			if( $f_log_queries ) {
 				if( $t_sql ) {
 					foreach( $sqlarray as $sql ) {
-						echo htmlentities( $sql ) . ";\n\n";
+						# "CREATE OR REPLACE TRIGGER" statements must end with "END;\n/" for Oracle sqlplus
+						if ( $f_db_type == 'oci8' && stripos( $sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
+							$t_sql_end = "\n/";
+						} else {
+							$t_sql_end = ";";
+						}
+						echo htmlentities( $sql ) . $t_sql_end . "\n\n";
 					}
 				}
 			} else {
