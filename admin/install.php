@@ -185,7 +185,20 @@ if( $t_config_exists ) {
 
 	if( 0 == $t_install_state ) {
 		print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
-		print_test( 'Checking Database connection settings exist', ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) ), true, 'database connection settings do not exist?' );
+
+		$t_db_conn_exists = ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) );
+		# Oracle supports binding in two ways:
+		#  - hostname, username/password and database name
+		#  - tns name (insert into hostname field) and username/password, database name is still empty
+		if ( $f_db_type == 'oci8' ) {
+			$t_db_conn_exists = $t_db_conn_exists || ( $f_database_name == '' && $f_db_username !== '' && $f_hostname !== '' );
+		}
+		print_test( 'Checking Database connection settings exist',
+			$t_db_conn_exists,
+			true,
+			'database connection settings do not exist?'
+		);
+
 		print_test( 'Checking PHP support for database type',
 			db_check_database_support( $f_db_type ), true,
 			'database is not supported by PHP. Check that it has been compiled into your server.'
