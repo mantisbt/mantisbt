@@ -126,6 +126,12 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 		$t_host = 'localhost';
 	}
 
+	if ( !isset( $_SERVER['SCRIPT_NAME'] )) {
+		echo 'Invalid server configuration detected. Please set $g_path manually in config_inc.php.';
+		if ( isset( $_SERVER['SERVER_SOFTWARE'] ) && ( stripos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false ) )
+			echo ' Please try to add "fastcgi_param SCRIPT_NAME $fastcgi_script_name;" to the nginx server configuration.';
+		die;
+    }
 	$t_self = $_SERVER['SCRIPT_NAME'];
 	$t_self = filter_var($t_self, FILTER_SANITIZE_STRING);
 	$t_path = str_replace( basename( $t_self ), '', $t_self );
