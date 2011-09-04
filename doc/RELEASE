@@ -1,5 +1,27 @@
 MantisBT Release Notes
 
+1.2.8 Security Release (2011-09-05)
+-------------------------------------------------
+
+MantisBT 1.2.8 is a security update for the stable 1.2.x branch. All
+installations that are currently running any 1.2.x version are advised to
+upgrade to this release.
+
+Paulino Calderon from Websec, High-Tech Bridge Security Research Lab and Paul
+Richards discovered 3 vulnerabilities:
+ - 1x local file inclusion (LFI)/directory traversal
+ - 2x cross site scriptin (XSS)
+
+These vulnerabilities could have very severe consequences for users of
+MantisBT, particularly as a result of the local file inclusion vulnerability.
+If an attacker can upload their own PHP script to the server as an attachment,
+they may be able to execute this script using the LFI vulnerability.
+
+Refer to issues #13191 and #13281 for detailed information.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
 1.2.7 Security Release (2011-08-19)
 -------------------------------------------------
 
@@ -182,6 +204,7 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
+	1.2.8      http://www.mantisbt.org/bugs/changelog_page.php?version_id=139
 	1.2.7      http://www.mantisbt.org/bugs/changelog_page.php?version_id=138
 	1.2.6      http://www.mantisbt.org/bugs/changelog_page.php?version_id=114
 	1.2.5      http://www.mantisbt.org/bugs/changelog_page.php?version_id=113
