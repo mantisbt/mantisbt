@@ -51,16 +51,39 @@ require_api( 'user_api.php' );
 /**
  * A method that returns the header for an Excel Xml file.
  *
- * @param $p_worksheet_title  The worksheet title.
+ * @param string $p_worksheet_title  The worksheet title.
+ * @param array $p_styles An optional array of ExcelStyle entries . Parent entries must be placed before child entries
  * @returns the header Xml.
  */
-function excel_get_header( $p_worksheet_title ) {
+function excel_get_header( $p_worksheet_title, $p_styles = array() ) {
 	$p_worksheet_title = preg_replace( '/[\/:*?"<>|]/', '', $p_worksheet_title );
 	return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><?mso-application progid=\"Excel.Sheet\"?>
  <Workbook xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\"
  xmlns:x=\"urn:schemas-microsoft-com:office:excel\"
  xmlns:ss=\"urn:schemas-microsoft-com:office:spreadsheet\"
- xmlns:html=\"http://www.w3.org/TR/REC-html40\">\n<Worksheet ss:Name=\"" . urlencode( $p_worksheet_title ) . "\">\n<Table>\n<Column ss:Index=\"1\" ss:AutoFitWidth=\"0\" ss:Width=\"110\"/>\n";
+ xmlns:html=\"http://www.w3.org/TR/REC-html40\">\n ". excel_get_styles( $p_styles ). "<Worksheet ss:Name=\"" . urlencode( $p_worksheet_title ) . "\">\n<Table>\n<Column ss:Index=\"1\" ss:AutoFitWidth=\"0\" ss:Width=\"110\"/>\n";
+}
+
+/**
+ * Returns an XML string containing the <tt>ss:Styles</tt> entry, possibly empty
+ * 
+ * @param array $p_styles an array of ExcelStyle entries
+ * @return void|string
+ */
+function excel_get_styles( $p_styles ) {
+    
+    if ( count ( $p_styles ) == 0 ) {
+        return;
+    }
+    
+    $t_styles_string = '<ss:Styles>';
+    
+    foreach ( $p_styles as $t_style ) {
+        $t_styles_string .= $t_style->asXml();
+    }
+    $t_styles_string .= '</ss:Styles>';
+    
+    return $t_styles_string;
 }
 
 /**
@@ -81,10 +104,16 @@ function excel_format_column_title( $p_column_title ) {
 
 /**
  * Generates the xml for the start of an Excel row.
+ * 
+ * @param string $p_style_id The optional style id
  * @returns The Row tag.
  */
-function excel_get_start_row() {
-	return '<Row>';
+function excel_get_start_row( $p_style_id = '') {
+    if ( $p_style_id != '' ) {
+        return '<Row ss:StyleID="' . $p_style_id . '">';
+    } else {
+	    return '<Row>';
+    }
 }
 
 /**
@@ -96,12 +125,13 @@ function excel_get_end_row() {
 }
 
 /**
- * Gets an Xml Row that contains all column titles.
+ * Gets an Xml Row that contains all column titles
+ * @param string $p_style_id The optional style id.
  * @returns The xml row.
  */
-function excel_get_titles_row() {
+function excel_get_titles_row( $p_style_id = '') {
 	$t_columns = excel_get_columns();
-	$t_ret = '<Row>';
+	$t_ret = excel_get_start_row( $p_style_id );
 
 	foreach( $t_columns as $t_column ) {
 		$t_custom_field = column_get_custom_field_name( $t_column );
@@ -144,9 +174,34 @@ function excel_prepare_string( $p_value ) {
 	$t_type = is_numeric( $p_value ) ? 'Number' : 'String';
 
 	$t_value = str_replace( array ( '&', "\n", '<', '>'), array ( '&amp;', '&#10;', '&lt;', '&gt;' ),  $p_value );
-	$t_ret = "<Cell><Data ss:Type=\"$t_type\">" . $t_value . "</Data></Cell>\n";
+	
+	return excel_get_cell( $t_value,  $t_type );
+}
 
-	return $t_ret;
+/**
+ * Returns an <tt>Cell</tt> as an XML string
+ * 
+ * <p>All the parameters are assumed to be valid and escaped, as this function performs no
+ * escaping of its own.</p>
+ *
+ * @param string $p_value
+ * @param string $p_type
+ * @param array $p_attributes An array where the keys are attribute names and values attribute 
+ * values for the <tt>Cell</tt> object
+ * @return string
+ */
+function excel_get_cell( $p_value, $p_type, $p_attributes = array() ) {
+    $t_ret = "<Cell ";
+    
+    foreach ( $p_attributes as $t_attribute_name => $t_attribute_value ) {
+        $t_ret .= $t_attribute_name. '="' . $t_attribute_value . '" ';
+    }
+    
+    $t_ret .= ">";
+    
+    $t_ret .= "<Data ss:Type=\"$p_type\">" . $p_value . "</Data></Cell>\n";
+    
+    return $t_ret;
 }
 
 /**
@@ -450,4 +505,219 @@ function excel_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field 
  */
 function excel_format_due_date( $p_due_date ) {
 	return excel_prepare_string( date( config_get( 'short_date_format' ), $p_due_date ) );
+}
+
+/**
+ * The <tt>ExcelStyle</tt> class is able to render style information
+ * 
+ * <p>For more information regarding the values taken by the parameters of this class' methods
+ * please see <a href="http://msdn.microsoft.com/en-us/library/aa140066(v=office.10).aspx#odc_xmlss_ss:style">
+ * the ss:Style documentation</a>.</p>
+ *
+ */
+class ExcelStyle {
+    
+    private $id;
+    private $parent_id;
+    
+    private $interior;
+    private $font;
+    private $border;
+    
+    /**
+     * @param string $p_id The unique style id
+     * @param string $p_parent_id The parent style id
+     */
+    function __construct( $p_id , $p_parent_id  = '') {
+        
+        $this->id = $p_id;
+        $this->parent_id = $p_parent_id;
+    }
+    
+    function getId() {
+        
+        return $this->id;
+    }
+    
+    /**
+     * @param string $p_color the color in #rrggbb format or a named color
+     * @param string $p_pattern
+     */
+    function setBackgroundColor( $p_color, $p_pattern = 'Solid' ) {
+
+        if ( ! isset ( $this->interior ) ) {
+            $this->interior = new Interior(); 
+        }
+        
+        $this->interior->color = $p_color;
+        $this->interior->pattern = $p_pattern;
+    }
+    
+    /**
+     * 
+     * @param int $p_bold 1 for bold, 0 for not bold 
+     * @param string $p_color the color in #rrggbb format or a named color
+     * @param string $p_name the name of the font
+     * @param int $p_italic 1 for italic, 0 for not italic 
+     */
+    
+    function setFont( $p_bold, $p_color = '', $p_name = '', $p_italic = -1 ) {
+
+        if ( ! isset ( $this->font ) ) {
+            $this->font = new Font();
+        }
+        
+        if ( $p_bold != -1 ) {
+            $this->font->bold = $p_bold;
+        }
+        if ( $p_color != '' ) {
+            $this->font->color = $p_color;
+        }
+        if ( $p_name != '' ) {
+            $this->font->fontName = $p_name;
+        }
+        if ( $p_italic != -1 ) {
+            $this->font->italic = $p_italic;            
+        }
+    }
+
+    
+    /**
+     * Sets the border values for the style
+     * 
+     * <p>The values are set for the following positions: Left, Top, Right, Bottom. There is no
+     * support for setting individual values.</p>
+     * 
+     * @param string $p_color the color in #rrggbb format or a named color
+     * @param string $p_line_style None, Continuous, Dash, Dot, DashDot, DashDotDot, SlantDashDot, or Double
+     * @param string $p_weight Thickness in points
+     */
+    function setBorder( $p_color, $p_line_style = 'Continuous', $p_weight = 1) {
+        
+        if ( ! isset ( $this->border ) ) {
+            $this->border = new Border();
+        }
+        
+        if ( $p_color != '' ) {
+            $this->border->color = $p_color;
+        }
+        
+        if ( $p_line_style != '' ) {
+            $this->border->lineStyle = $p_line_style;
+        }
+        
+        if ( $p_weight != -1 ) {
+            $this->border->weight = $p_weight;
+        }
+    }
+    
+    function asXml() {
+        
+        $xml = '<ss:Style ss:ID="' . $this->id.'" ss:Name="'.$this->id.'" ';
+        if ( $this->parent_id != '' ) {
+            $xml .= 'ss:Parent="' . $this->parent_id .'" ';
+        }
+        $xml .= '>';
+        if ( $this->interior ) {
+            $xml .= $this->interior->asXml(); 
+        }
+        if ( $this->font ) {
+            $xml .= $this->font->asXml();
+        }
+        if ( $this->border ) {
+            $xml .= $this->border->asXml();
+        }
+        $xml .= '</ss:Style>'."\n";
+        
+        return $xml;
+    }
+}
+
+class Interior {
+       
+    public $color;
+    public $pattern;
+       
+    function asXml() {
+   
+        $xml = '<ss:Interior ';
+        
+        if ( $this->color ) {
+           $xml .= 'ss:Color="' . $this->color .'" ss:Pattern="'. $this->pattern . '" ';
+        }
+        
+        $xml .= '/>';
+        
+        return $xml;
+    }
+}
+
+class Font {
+    
+    public $bold;
+    public $color;
+    public $fontName;
+    public $italic;
+    
+    function asXml() {
+    
+        $xml = '<ss:Font ';
+
+        if ( $this->bold ) {
+            $xml .= 'ss:Bold="' . $this->bold .'" ';
+        }
+        
+        if ( $this->color ) {
+            $xml .= 'ss:Color="' . $this->color .'" ';
+        }
+
+        if ( $this->fontName) {
+            $xml .= 'ss:FontName="' . $this->fontName .'" ';
+        }
+
+        if ( $this->italic ) {
+            $xml .= 'ss:Italic="' . $this->italic .'" ';
+        }
+    
+        $xml .= '/>';
+    
+        return $xml;
+    }    
+}
+
+class Border {
+    
+    private $positions = array('Left', 'Top', 'Right', 'Bottom');
+    
+    public $color;
+    public $lineStyle;
+    public $weight;
+    
+    function asXml() {
+    
+        $xml = '<ss:Borders>';
+        
+        foreach ( $this->positions as $p_position ) {
+    
+            $xml.= '<ss:Border ss:Position="' . $p_position .'" ';
+            
+            if ( $this->lineStyle ) {
+                $xml .= 'ss:LineStyle="' . $this->lineStyle .'" ';
+            }
+        
+            if ( $this->color ) {
+                $xml .= 'ss:Color="' . $this->color .'" ';
+            }
+        
+            if ( $this->weight) {
+                $xml .= 'ss:Weight="' . $this->weight .'" ';
+            }
+            
+            $xml.= '/>';
+        }
+    
+        $xml .= '</ss:Borders>';
+    
+        return $xml;
+    }
 }
