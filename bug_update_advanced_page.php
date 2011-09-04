@@ -438,7 +438,7 @@ if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) {
 			print_platform_option_list( $tpl_bug->platform );
 			echo '</select>';
 		} else {
-			projax_autocomplete( 'platform_get_with_prefix', 'platform', array( 'value' => $tpl_bug->platform, 'size' => '16', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+			projax_autocomplete( 'platform_get_with_prefix', 'platform', array( 'value' => string_attribute( $tpl_bug->platform ), 'size' => '16', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
 		}
 
 		echo '</td>';
@@ -456,7 +456,7 @@ if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) {
 			print_os_option_list( $tpl_bug->os );
 			echo '</select>';
 		} else {
-			projax_autocomplete( 'os_get_with_prefix', 'os', array( 'value' => $tpl_bug->os, 'size' => '16', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+			projax_autocomplete( 'os_get_with_prefix', 'os', array( 'value' => string_attribute( $tpl_bug->os ), 'size' => '16', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
 		}
 
 		echo '</td>';
@@ -474,7 +474,7 @@ if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) {
 			print_os_build_option_list( $tpl_bug->os_build );
 			echo '</select>';
 		} else {
-			projax_autocomplete( 'os_build_get_with_prefix', 'os_build', array( 'value' => $tpl_bug->os_build, 'size' => '16', 'maxlength' => '16', 'tabindex' => helper_get_tab_index_value() ) );
+			projax_autocomplete( 'os_build_get_with_prefix', 'os_build', array( 'value' => string_attribute( $tpl_bug->os_build ), 'size' => '16', 'maxlength' => '16', 'tabindex' => helper_get_tab_index_value() ) );
 		}
 
 		echo '</td>';
