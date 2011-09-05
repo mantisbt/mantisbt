@@ -4484,7 +4484,7 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 		}
 
 		# check that the user has access to non current filters
-		if(( ALL_PROJECTS <= $row['project_id'] ) && ( !is_blank( $row['name'] ) ) && ( !access_has_project_level( config_get( 'stored_query_use_threshold', $row['project_id'], $t_user_id ) ) ) ) {
+		if(( ALL_PROJECTS <= $row['project_id'] ) && ( !is_blank( $row['name'] ) ) && ( !access_has_project_level( config_get( 'stored_query_use_threshold', null, $t_user_id, $row['project_id'] ) ) ) ) {
 			return null;
 		}
 
