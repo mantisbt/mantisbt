@@ -100,7 +100,7 @@ if ( $f_master_bug_id > 0 ) {
 	$t_bug = bug_get( $f_master_bug_id, true );
 
 	# the user can at least update the master bug (needed to add the relationship)...
-	access_ensure_bug_level( config_get( 'update_bug_threshold', null, $t_bug->project_id ), $f_master_bug_id );
+	access_ensure_bug_level( config_get( 'update_bug_threshold', null, null, $t_bug->project_id ), $f_master_bug_id );
 
 	#@@@ (thraxisp) Note that the master bug is cloned into the same project as the master, independent of
 	#       what the current project is set to.
