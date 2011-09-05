@@ -34,6 +34,27 @@
 
 	form_security_validate( 'bug_report' );
 
+	$t_project_id = null;
+	$f_master_bug_id = gpc_get_int( 'm_id', 0 );
+	if ( $f_master_bug_id > 0 ) {
+		bug_ensure_exists( $f_master_bug_id );
+		if ( bug_is_readonly( $f_master_bug_id ) ) {
+			error_parameters( $f_master_bug_id );
+			trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+		}
+		$t_master_bug = bug_get( $f_master_bug_id, true );
+		project_ensure_exists( $t_master_bug->project_id );
+		access_ensure_bug_level( config_get( 'update_bug_threshold', null, null, $t_master_bug->project_id ), $f_master_bug_id );
+		$t_project_id = $t_master_bug->project_id;
+	} else {
+		$f_project_id = gpc_get_int( 'project_id' );
+		project_ensure_exists( $f_project_id );
+		$t_project_id = $f_project_id;
+	}
+	if ( $t_project_id != helper_get_current_project() ) {
+		$g_project_override = $t_project_id;
+	}
+
 	access_ensure_project_level( config_get('report_bug_threshold' ) );
 
 	$t_bug_data = new BugData;
@@ -71,7 +92,7 @@
 	$f_copy_notes_from_parent         = gpc_get_bool( 'copy_notes_from_parent', false);
 	$f_copy_attachments_from_parent   = gpc_get_bool( 'copy_attachments_from_parent', false);
 
-	$t_bug_data->project_id			= gpc_get_int( 'project_id' );
+	$t_bug_data->project_id			= $t_project_id;
 
 	$t_bug_data->reporter_id		= auth_get_current_user_id();
 
