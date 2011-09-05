@@ -75,7 +75,7 @@ if ( !config_get('time_tracking_enabled') )
 	# CSRF protection not required here - form does not result in modifications
 ?>
 
-<form method="post" action="<?php echo form_action_self() ?>">
+<form method="post" action="<?php echo string_attribute( form_action_self() ) ?>">
 	<input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
 	<table border="0" class="width100" cellspacing="0">
 		<tr>

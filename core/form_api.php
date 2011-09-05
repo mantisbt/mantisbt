@@ -35,7 +35,8 @@
  * @return string Form action value
  */
 function form_action_self() {
-	return basename($_SERVER['PHP_SELF']);
+	$t_self = trim( str_replace( "\0", '', $_SERVER['SCRIPT_NAME'] ) );
+	return basename( $t_self );
 }
 
 /**

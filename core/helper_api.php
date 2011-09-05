@@ -299,7 +299,7 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 	print_hr();
 	echo "\n$p_message\n";
 
-	echo '<form method="post" action="' . form_action_self() . "\">\n";
+	echo '<form method="post" action="' . string_attribute( form_action_self() ) . "\">\n";
 	# CSRF protection not required here - user needs to confirm action
 	# before the form is accepted.
 	print_hidden_inputs( gpc_strip_slashes( $_POST ) );
