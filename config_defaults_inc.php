@@ -113,7 +113,7 @@
 		}
 
 		$t_self = $_SERVER['SCRIPT_NAME'];
-		$t_self = filter_var( $t_self, FILTER_SANITIZE_STRING );
+		$t_self = trim( str_replace( "\0", '', $t_self ) );
 		$t_path = str_replace( basename( $t_self ), '', $t_self );
 		$t_path = basename( $t_path ) == "admin" ? dirname( $t_path ) . '/' : $t_path;
 		$t_path = basename( $t_path ) == "soap" ? dirname( dirname( $t_path ) ) . '/' : $t_path;
