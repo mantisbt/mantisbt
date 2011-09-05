@@ -1201,8 +1201,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		// this array is populated with project ids that the current user has full access to.
 		$t_private_and_public_project_ids = array();
 
-		$t_access_required_to_view_private_bugs = config_get( 'private_bug_threshold' );
 		foreach( $t_project_ids as $t_pid ) {
+			$t_access_required_to_view_private_bugs = config_get( 'private_bug_threshold', null, null, $t_pid );
 			if( access_has_project_level( $t_access_required_to_view_private_bugs, $t_pid, $t_user_id ) ) {
 				$t_private_and_public_project_ids[] = $t_pid;
 			} else {
