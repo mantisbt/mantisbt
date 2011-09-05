@@ -680,6 +680,13 @@ if( 3 == $t_install_state ) {
 		# fake out database access routines used by config_get
 		$GLOBALS['g_db_type'] = $f_db_type;
 
+		# Initialize short table prefixes and suffix for Oracle
+		if ( $f_db_type == 'oci8' ) {
+			$GLOBALS['g_db_table_prefix']        = $t_db_table_prefix        = 'm';
+			$GLOBALS['g_db_table_plugin_prefix'] = $t_db_table_plugin_prefix = 'plg';
+			$GLOBALS['g_db_table_suffix']        = $t_db_table_suffix        = '_t';
+		}
+
 		# database_api references this
 		require_once( dirname( __FILE__ ) . '/schema.php' );
 		$g_db = ADONewConnection( $f_db_type );
@@ -843,17 +850,26 @@ if( 5 == $t_install_state ) {
 	?>
 	</td>
 	<?php
-	$t_config = '<?php' . "\n";
-	$t_config .= "\t\$g_hostname = '$f_hostname';\n";
-	$t_config .= "\t\$g_db_type = '$f_db_type';\n";
-	$t_config .= "\t\$g_database_name = '$f_database_name';\n";
-	$t_config .= "\t\$g_db_username = '$f_db_username';\n";
-	$t_config .= "\t\$g_db_password = '$f_db_password';\n";
+	$t_config = '<?php' . "\n"
+		. "\t\$g_hostname      = '$f_hostname';\n"
+		. "\t\$g_db_type       = '$f_db_type';\n"
+		. "\t\$g_database_name = '$f_database_name';\n"
+		. "\t\$g_db_username   = '$f_db_username';\n"
+		. "\t\$g_db_password   = '$f_db_password';\n";
 
-	if( $f_db_type == 'db2' ) {
-		$t_config .= "\t\$g_db_schema = '$f_db_schema';\n";
+	switch( $f_db_type ) {
+		case 'db2':
+			$t_config .= "\t\$g_db_schema     = '$f_db_schema';\n";
+			break;
+		case 'oci8':
+			$t_config .= "\n"
+				. "\t\$g_db_table_prefix        = '$t_db_table_prefix';\n"
+				. "\t\$g_db_table_plugin_prefix = '$t_db_table_plugin_prefix';\n"
+				. "\t\$g_db_table_suffix        = '$t_db_table_suffix';\n";
+			break;
+		default:
+			break;
 	}
-
 	$t_config .= "\n";
 
 	/* Automatically generate a strong master salt/nonce for MantisBT
