@@ -110,35 +110,7 @@ switch( $t_type ) {
 		break;
 	case CONFIG_TYPE_COMPLEX:
 	default:
-		# We support these kind of variables here:
-		# 1. constant values (like the ON/OFF switches): they are
-		#    defined as constants mapping to numeric values
-		# 2. simple arrays with the form: array( a, b, c )
-		# 3. associative arrays with the form: array( a=>1, b=>2, c=>3 )
-		# @TODO: allow multi-dimensional arrays, allow commas and => within strings (see #13298)
-		$t_full_string = trim( $f_value );
-		if ( preg_match('/array[\s]*\((.*)\)/s', $t_full_string, $t_match ) === 1 ) {
-			# we have an array here
-			$t_values = explode( ',', trim( $t_match[1] ) );
-			foreach ( $t_values as $key => $value ) {
-				if ( !trim( $value ) ) {
-					continue;
-				}
-				$t_split = explode( '=>', $value, 2 );
-				if ( count( $t_split ) == 2 ) {
-					# associative array
-					$t_new_key = constant_replace( trim( $t_split[0], " \t\n\r\0\x0B\"'" ) );
-					$t_new_value = constant_replace( trim( $t_split[1], " \t\n\r\0\x0B\"'" ) );
-					$t_value[ $t_new_key ] = $t_new_value;
-				} else {
-					# regular array
-					$t_value[ $key ] = constant_replace( trim( $value, " \t\n\r\0\x0B\"'" ) );
-				}
-			}
-		} else {
-			# scalar value
-			$t_value = constant_replace( $t_full_string );
-		}
+		$t_value = process_complex_value( $f_value );
 		break;
 }
 
@@ -147,6 +119,96 @@ config_set( $f_config_option, $t_value, $f_user_id, $f_project_id );
 form_security_purge( 'adm_config_set' );
 
 print_successful_redirect( 'adm_config_report.php' );
+
+
+/**
+ * Helper function to recursively process complex types
+ * We support the following kind of variables here:
+ * 1. constant values (like the ON/OFF switches): they are defined as constants mapping to numeric values
+ * 2. simple arrays with the form: array( a, b, c, d )
+ * 3. associative arrays with the form: array( a=>1, b=>2, c=>3, d=>4 )
+ * 4. multi-dimensional arrays
+ * commas and '=>' within strings are handled
+ *
+ * @param string $p_value Complex value to process
+ * @return parsed variable
+ */
+function process_complex_value( $p_value, $p_trimquotes = false ) {
+	$t_value = trim( $p_value );
+
+	if( preg_match('/^array[\s]*\((.*)\)$/s', $t_value, $t_match ) === 1 ) {
+		# It's an array - process each element
+		$t_elements = special_split( $t_match[1] );
+		$t_processed = array();
+		foreach( $t_elements as $key => $element ) {
+			if ( !trim( $element ) ) {
+				continue;
+			}
+			# Check if element is associative array
+			$t_split = preg_split("/\(.*\)|'.*'|=>/", $element, 2, PREG_SPLIT_NO_EMPTY);
+			if ( count( $t_split ) == 2 ) {
+				# associative array
+				$t_new_key = constant_replace( trim( $t_split[0], " \t\n\r\0\x0B\"'" ) );
+				$t_new_value = process_complex_value( $t_split[1], true );
+				$t_processed[$t_new_key] = $t_new_value;
+			} else {
+				# regular array
+				$t_new_value = process_complex_value( $element );
+				$t_processed[$key] = $t_new_value;
+			}
+		}
+		return $t_processed;
+	} else {
+		# Scalar value
+		if( $p_trimquotes ) {
+			$t_value = trim( $t_value, " \t\n\r\0\x0B\"'" );
+	}
+		return constant_replace( $t_value );
+	}
+}
+
+/**
+ * Split by commas, but ignore commas that are within quotes or parenthesis.
+ * Ignoring commas within parenthesis helps allow for multi-dimensional arrays.
+ * @param $p_string string to split
+ * @return array
+ */
+function special_split ( $p_string ) {
+	$t_values = array();
+	$t_array_element = "";
+	$t_paren_level = 0;
+	$t_inside_quote = False;
+	$t_escape_next = False;
+
+	foreach( str_split( trim( $p_string ) ) as $character ) {
+		if( $t_escape_next ) {
+			$t_array_element .= $character;
+			$t_escape_next = False;
+		} else if( $character == "," && $t_paren_level==0 && !$t_inside_quote ) {
+			array_push( $t_values, $t_array_element );
+			$t_array_element = "";
+		} else {
+			if( $character == "(" && !$t_inside_quote ) {
+				$t_paren_level ++;
+			} else if( $character == ")" && !$t_inside_quote ) {
+				$t_paren_level --;
+			} else if( $character == "'" ) {
+				$t_inside_quote = !$t_inside_quote;
+			} else if( $character == "\\" ) {
+				// escape character
+				$t_escape_next = true;
+				// keep the escape if the string will be going through another recursion
+				if( $t_paren_level > 0 ) {
+					$t_array_element .= $character;
+				}
+				continue;
+			}
+			$t_array_element .= $character;
+		}
+	}
+	array_push( $t_values, $t_array_element );
+	return $t_values;
+}
 
 
 /**
