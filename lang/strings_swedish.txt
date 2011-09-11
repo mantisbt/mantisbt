@@ -33,6 +33,7 @@
  * @author Skalman
  * @author Thomas Sjogren <thomas.sjogren@multicomsecurity.se>
  * @author Thosjo
+ * @author WikiPhoenix
  */
 
 $s_actiongroup_menu_move = 'Flytta';
@@ -1165,8 +1166,9 @@ $s_tag_related_issues = 'Delade ärenden (%1$s)';
 $s_tag_stats_attached = 'Kopplade ärenden: %1$s';
 $s_tag_create = 'Skapa tagg';
 $s_show_all_tags = 'Alla';
-$s_time_tracking_billing_link = 'Kostnadsberäkning';
+$s_time_tracking_billing_link = 'Tidsspårning';
 $s_time_tracking = 'Tidsåtgång';
+$s_time_tracking_time_spent = 'Spenderad tid:';
 $s_time_tracking_get_info_button = 'Hämta information om tidsåtgång';
 $s_time_tracking_cost_per_hour = 'Kostnad / Timme';
 $s_time_tracking_cost = 'Kostnad';

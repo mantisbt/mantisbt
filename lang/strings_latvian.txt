@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Papuass
  * @author Sergis Kanters, "kanters at yahoo dot com"
  */
 
@@ -500,7 +501,7 @@ $s_changed = 'Izmaiņas (pa stundu)';
 $s_viewing_bugs_title = 'Kļūdu apskate';
 $s_updated = 'Atjaunots';
 $s_none = 'nav';
-$s_search = 'meklēt';
+$s_search = 'Meklēt';
 $s_view_prev_link = 'iepriekšējos';
 $s_view_next_link = 'nākošos';
 $s_prev = 'iepr.';

@@ -37,6 +37,7 @@
  * @author Mikhail Oleynik (MiTo Team), m.oleynik@gmail.com
  * @author Oleg Gashev gashev@zahav.net.il
  * @author Prima klasy4na
+ * @author Sabbah
  * @author Yuri Volokhov <volohovy@niiri.kharkov.com>
  * @author Александр Сигачёв
  */
@@ -1062,6 +1063,9 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ВНИМАНИЕ</b>.
 $s_create_child_bug_button = 'Клонировать';
 $s_bug_cloned_to = 'Инцидент клонирован в';
 $s_bug_created_from = 'Инцидент создан из';
+$s_copy_from_parent = 'Скопировать расширенные данные из родительской проблемы';
+$s_copy_notes_from_parent = 'Скопировать заметки к ошибке';
+$s_copy_attachments_from_parent = 'Скопировать вложения';
 $s_viewing_bug_relationship_graph_title = 'Граф связей';
 $s_viewing_bug_dependency_graph_title = 'Граф Зависимостей';
 $s_relation_graph = 'Граф связей';

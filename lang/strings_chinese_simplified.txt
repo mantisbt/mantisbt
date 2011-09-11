@@ -32,6 +32,7 @@
  * @author Hydra
  * @author Kai-Zheng Cheng, neek@sina.com
  * @author Liangent
+ * @author Mmyangfl
  * @author NetCobra, netcobra@gmail.com
  * @author PhiLiP
  * @author Riceball LEE riceballl@hotmail.com
@@ -535,7 +536,7 @@ $s_vote_added_msg = '投票已添加...';
 $s_bugnote_added_msg = '已添加问题注释...';
 $s_bugnote_deleted_msg = '已删除问题注释...';
 $s_bug_notes_title = '问题注释';
-$s_edit_bugnote_title = '编辑问题注释';
+$s_edit_bugnote_title = '编辑注释';
 $s_no_bugnotes_msg = '这个问题没有注释信息';
 $s_delete_link = '删除';
 $s_add_bugnote_title = '添加问题注释';
@@ -1120,7 +1121,7 @@ $s_status_changed_to = '状态已修改为';
 $s_email_on_deleted = '删除时发送 Email';
 $s_email_on_sponsorship_changed = '资助改变时发送 Email';
 $s_email_on_relationship_changed = '关联改变时发送 Email';
-$s_loading = '载入中……';
+$s_loading = '正在载入...';
 $s_between_date = '介于';
 $s_on_or_before_date = '不晚于';
 $s_before_date = '早于';

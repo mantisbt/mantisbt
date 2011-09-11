@@ -35,6 +35,7 @@
  * @author Marcin Ulanecki <marcin dot ulanecki at vm dot pl> 2005/09/17
  * @author Sp5uhe
  * @author Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
+ * @author Woytecr
  */
 
 $s_actiongroup_menu_move = 'Przenieś';
@@ -1060,6 +1061,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>UWAGA</b>. Nie wszyst
 $s_create_child_bug_button = 'Klonuj';
 $s_bug_cloned_to = 'Zgłoszenie sklonowane';
 $s_bug_created_from = 'Zgłoszenie wygenerowane z';
+$s_copy_attachments_from_parent = 'Skopiuj załączniki';
 $s_viewing_bug_relationship_graph_title = 'Graf powiązań';
 $s_viewing_bug_dependency_graph_title = 'Wykres zależności';
 $s_relation_graph = 'Graf powiązań';
@@ -1171,8 +1173,9 @@ $s_tag_related_issues = 'Powiązane zgłoszenia (%1$s)';
 $s_tag_stats_attached = 'Dołączone zgłoszenia: %1$s';
 $s_tag_create = 'Utwórz tag';
 $s_show_all_tags = 'WSZYSTKIE';
-$s_time_tracking_billing_link = 'Rachunki';
+$s_time_tracking_billing_link = 'Śledzenie czasu';
 $s_time_tracking = 'Śledzenie czasu pracy';
+$s_time_tracking_time_spent = 'Spędzony czas:';
 $s_time_tracking_get_info_button = 'Pobierz informacje o Śledzeniu czasu pracy';
 $s_time_tracking_cost_per_hour = 'stawka godzinowa';
 $s_time_tracking_cost = 'Koszt';

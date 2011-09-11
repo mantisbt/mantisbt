@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Emperyan
  * @author Karduelis
  * @author Korayal
  * @author Oktay Altunergil - oktay@bellatlantic.net
@@ -1156,7 +1157,7 @@ $s_tag_related_issues = 'Paylaşılan Etiketler (%1$s)';
 $s_tag_stats_attached = 'Sorunlar eklendi: %1$s';
 $s_tag_create = 'Etiket Oluştur';
 $s_show_all_tags = 'Hepsi';
-$s_time_tracking_billing_link = 'Fatura';
+$s_time_tracking_billing_link = 'Zaman İzleme';
 $s_time_tracking = 'Zaman izleme';
 $s_time_tracking_get_info_button = 'Zaman İzleme Bilgisini Al';
 $s_time_tracking_cost_per_hour = 'Maliyet / Saat';

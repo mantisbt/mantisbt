@@ -29,6 +29,7 @@
  * @author Cwlin0416
  * @author Firesueprtom
  * @author Jonathan Tsai, tryweb@ichiayi.com
+ * @author Lauhenry
  * @author Mark85296341
  */
 
@@ -1052,6 +1053,9 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>注意：</b>不是�
 $s_create_child_bug_button = '複製';
 $s_bug_cloned_to = '問題已被複製';
 $s_bug_created_from = '問題建立來源';
+$s_copy_from_parent = '從母問題複製擴充資料';
+$s_copy_notes_from_parent = '複製錯誤說明';
+$s_copy_attachments_from_parent = '複製附件';
 $s_viewing_bug_relationship_graph_title = '相關問題圖';
 $s_viewing_bug_dependency_graph_title = '相依圖';
 $s_relation_graph = '相關問題圖';

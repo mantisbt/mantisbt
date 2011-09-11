@@ -25,8 +25,15 @@
  * @ingroup Language
  * @file
  *
+ * @author Woytecr
  */
 
+$s_plugin_MantisGraph_config = 'Konfiguracja';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Wykres';
+$s_plugin_MantisGraph_window_width = 'Szerokość wykresu (w pikselach)';
+$s_plugin_MantisGraph_font = 'Czcionka';
+$s_plugin_MantisGraph_enabled = 'Włączony';
+$s_plugin_MantisGraph_disabled = 'Wyłączony';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Wykres podsumowujący wg statusu';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Wykres podsumowujący wg priorytetu';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Wykres podsumowujący wg ważności';

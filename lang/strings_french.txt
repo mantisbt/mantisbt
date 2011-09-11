@@ -31,6 +31,7 @@
  * @author Crochet.david
  * @author Eric Hartmann, eric@rhinfo.com
  * @author Francis Labrie, francis.labrie@smoguli.com
+ * @author Hashar
  * @author Hellekin O. Wolf, hellekin@mmania.com
  * @author IAlex
  * @author Jean-Charles Trosset, jean-charles.trosset@laposte.net
@@ -1076,6 +1077,9 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>Attention :</b>. Tous
 $s_create_child_bug_button = 'Cloner';
 $s_bug_cloned_to = 'Bogue dupliqué';
 $s_bug_created_from = 'Bogue généré depuis';
+$s_copy_from_parent = 'Copier les données étendues du père';
+$s_copy_notes_from_parent = 'Copier les notes';
+$s_copy_attachments_from_parent = 'Copier les pièces jointes';
 $s_viewing_bug_relationship_graph_title = 'Graphique relationnel';
 $s_viewing_bug_dependency_graph_title = 'Graphique des dépendances';
 $s_relation_graph = 'Graphique des relations';
