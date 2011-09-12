@@ -1858,6 +1858,17 @@ $g_ldap_organization = '';
 $g_ldap_protocol_version = 0;
 
 /**
+ * Duration of the timeout for TCP connection to the LDAP server (in seconds).
+ * Set this to a low value when the hostname defined in $g_ldap_server resolves
+ * to multiple IP addresses, allowing rapid failover to the next available LDAP
+ * server.
+ * Defaults to 0 (infinite)
+ *
+ * @global int $g_ldap_network_timeout
+ */
+$g_ldap_network_timeout = 0;
+
+/**
  * Determines whether the LDAP library automatically follows referrals returned
  * by LDAP servers or not. This maps to LDAP_OPT_REFERRALS ldap library option.
  * For Active Directory, this should be set to OFF.
