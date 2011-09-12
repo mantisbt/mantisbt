@@ -49,6 +49,7 @@ if( DISK == config_get_global( 'file_upload_method' ) ) {
 	$t_path_config_names[] = 'absolute_path_default_upload_folder';
 }
 
+# Build paths for all configs
 $t_paths = array();
 foreach( $t_path_config_names as $t_path_config_name ) {
 	$t_new_path = array();
@@ -57,19 +58,39 @@ foreach( $t_path_config_names as $t_path_config_name ) {
 	$t_paths[$t_path_config_name] = $t_new_path;
 }
 
+# Trailing directory separator
 foreach( $t_paths as $t_path_config_name => $t_path ) {
 	check_print_test_row(
 		$t_path_config_name . ' configuration option has a trailing directory separator',
 		substr( $t_path['config_value'], -1, 1 ) == DIRECTORY_SEPARATOR,
-		array( false => 'You must provide a trailing directory separator (' . DIRECTORY_SEPARATOR . ') to the end of the ' . $t_path_config_name . ' configuration value.' )
+		array( false =>
+			"You must provide a trailing directory separator (" . DIRECTORY_SEPARATOR .
+			") to the end of '" . htmlspecialchars( $t_path['config_value'] ) . "'."
+		) )
 	);
 }
 
+# Is a directory
 foreach( $t_paths as $t_path_config_name => $t_path ) {
 	check_print_test_row(
 		$t_path_config_name . ' configuration option points to a valid directory',
 		is_dir( $t_path['config_value'] ),
-		array( false => 'The path specified by the ' . $t_path_config_name . ' configuration option does not point to a valid and accessible directory.' )
+		array( false =>
+			"The path '" . htmlspecialchars( $t_path['config_value'] ) .
+			"' is not a valid directory."
+		)
+	);
+}
+
+# Is readable
+foreach( $t_paths as $t_path_config_name => $t_path ) {
+	check_print_test_row(
+		$t_path_config_name . ' configuration option points to an accessible directory',
+		is_readable( $t_path['config_value'] ),
+		array( false =>
+			"The path '" . htmlspecialchars( $t_path['config_value'] ) .
+			"' is not accessible."
+		)
 	);
 }
 
@@ -80,7 +101,9 @@ if( DISK == config_get_global( 'file_upload_method' ) ) {
 	check_print_test_row(
 		$t_path_config_name . ' configuration option points to a writable directory',
 		is_writable( $t_path['config_value'] ),
-		array( false => "The path specified by the $t_path_config_name configuration option ('" . $t_path['config_value'] . "') must be writable." )
+		array( false =>
+			"The path '" . htmlspecialchars( $t_path['config_value'] ) . "' must be writable."
+		)
 	);
 }
 
