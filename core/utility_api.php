@@ -91,7 +91,7 @@ function ini_get_bool( $p_name ) {
 	$result = ini_get( $p_name );
 
 	if( is_string( $result ) ) {
-		switch( $result ) {
+		switch( strtolower( $result ) ) {
 			case 'off':
 			case 'false':
 			case 'no':
