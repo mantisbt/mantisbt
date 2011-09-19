@@ -157,15 +157,15 @@ if ( !config_get('time_tracking_enabled') )
 ?>
 <br />
 <table border="0" class="width100" cellspacing="0">
-	<tr class="row-category-history">
-		<td class="small-caption">
+	<tr class="row-category2">
+		<td class="small-caption bold">
 			<?php echo lang_get( $t_name_field ) ?>
 		</td>
-		<td class="small-caption">
+		<td class="small-caption bold">
 			<?php echo lang_get( 'time_tracking' ) ?>
 		</td>
 <?php	if ( $t_cost_col) { ?>
-		<td class="small-caption">
+		<td class="small-caption bold right">
 			<?php echo lang_get( 'time_tracking_cost' ) ?>
 		</td>
 <?php 	} ?>
@@ -190,6 +190,7 @@ if ( !config_get('time_tracking_enabled') )
 				$t_link = string_get_bug_view_link( $t_item['bug_id'] ) . ": " . string_display( $t_item['summary'] );
 				echo '<tr class="row-category-history"><td colspan="4">' . $t_link . "</td></tr>";
 				$t_prev_id = $t_item['bug_id'];
+				helper_alternate_class( 1 );
 			}
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -200,7 +201,7 @@ if ( !config_get('time_tracking_enabled') )
 			<?php echo $t_item['sum_time_tracking'] ?>
 		</td>
 <?php		if ($t_cost_col) { ?>
-		<td class="small-caption">
+		<td class="small-caption right">
 			<?php echo string_attribute( number_format( $t_item['cost'], 2 ) ); ?>
 		</td>
 <?php		} ?>
@@ -208,15 +209,15 @@ if ( !config_get('time_tracking_enabled') )
 
 <?php	} # end for loop ?>
 
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="small-caption">
+	<tr class="row-category2">
+		<td class="small-caption bold">
 			<?php echo lang_get( 'total_time' ); ?>
 		</td>
-		<td class="small-caption">
+		<td class="small-caption bold">
 			<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
 		</td>
 <?php if ( $t_cost_col ) { ?>
-		<td class="small-caption">
+		<td class="small-caption bold right">
 			<?php echo string_attribute( number_format( $t_sum_in_minutes * $f_bugnote_cost / 60, 2 ) ); ?>
 		</td>
 <?php } ?>
@@ -227,21 +228,22 @@ if ( !config_get('time_tracking_enabled') )
 <br />
 
 <table border="0" class="width100" cellspacing="0">
-	<tr class="row-category-history">
-		<td class="small-caption">
+	<tr class="row-category2">
+		<td class="small-caption bold">
 			<?php echo lang_get( $t_name_field ) ?>
 		</td>
-		<td class="small-caption">
+		<td class="small-caption bold">
 			<?php echo lang_get( 'time_tracking' ) ?>
 		</td>
 <?php if ( $t_cost_col ) { ?>
-		<td class="small-caption">
+		<td class="small-caption bold right">
 			<?php echo lang_get( 'time_tracking_cost' ) ?>
 		</td>
 <?php } ?>
 	</tr>
 
 <?php
+	helper_alternate_class( 1 );
 	foreach ( $t_user_summary as $t_username => $t_total_time ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -252,22 +254,22 @@ if ( !config_get('time_tracking_enabled') )
 			<?php echo db_minutes_to_hhmm($t_total_time); ?>
 		</td>
 <?php 	if ( $t_cost_col ) { ?>
-		<td class="small-caption">
+		<td class="small-caption right">
 			<?php echo string_attribute( number_format( $t_total_time * $f_bugnote_cost / 60, 2 ) ); ?>
 		</td>
 <?php 	} ?>
 	</tr>
 <?php } ?>
 
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="small-caption">
+	<tr class="row-category2">
+		<td class="small-caption bold">
 			<?php echo lang_get( 'total_time' ); ?>
 		</td>
-		<td class="small-caption">
+		<td class="small-caption bold">
 			<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
 		</td>
 <?php if ( $t_cost_col ) { ?>
-		<td class="small-caption">
+		<td class="small-caption bold right">
 			<?php echo string_attribute( number_format( $t_sum_in_minutes * $f_bugnote_cost / 60, 2 ) ); ?>
 		</td>
 <?php } ?>

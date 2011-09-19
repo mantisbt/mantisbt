@@ -156,17 +156,17 @@ if ( ON != config_get('time_tracking_enabled') ) {
 <?php
 		} # end for loop
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="small-caption">
+	<tr class="row-category2">
+		<td class="small-caption bold">
 			<?php echo lang_get( 'total_time' ) ?>
 		</td>
-		<td class="small-caption">
+		<td class="small-caption bold">
 			<?php echo db_minutes_to_hhmm ( $t_sum_in_minutes ) ?>
 		</td>
 	</tr>
 </table>
 
-<?php 
+<?php
 	} # end if
 
 	collapse_closed( 'bugnotestats' );
