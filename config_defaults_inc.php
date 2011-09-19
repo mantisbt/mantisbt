@@ -1159,6 +1159,12 @@
 	$g_default_bug_eta = ETA_NONE;
 
 	/**
+	 * Default relationship between a new bug and its parent when cloning it
+	 * @global int $g_default_bug_relationship_clone
+	 */
+	$g_default_bug_relationship_clone = BUG_REL_NONE;
+
+	/**
 	 * Default global category to be used when an issue is moved from a project to another
 	 * that doesn't have a category with a matching name.  The default is 1 which is the "General"
 	 * category that is created in the default database.
@@ -3671,11 +3677,10 @@
 	 * @global int $g_manage_plugin_threshold
 	 */
 	$g_manage_plugin_threshold = ADMINISTRATOR;
-	
-	
+
 	/**
 	 * A mapping of file extensions to mime types, used when serving resources from plugins
-	 * 
+	 *
 	 * @global array $g_plugin_mime_types
 	 */
 	$g_plugin_mime_types = array(
@@ -3723,7 +3728,7 @@
 	 * Sub-projects should inherit versions from parent projects.
 	 */
 	$g_subprojects_inherit_versions = ON;
-	
+
 	/**********************************
 	 * Debugging / Developer Settings *
 	 **********************************/
@@ -3841,7 +3846,7 @@
 	 * @global string $g_log_destination
 	 */
 	$g_log_destination = '';
-	
+
 	/**
 	 * if OFF, will include original javascript files
 	 * if ON, will include javascript files that have been compressed by yuicompressor if available
