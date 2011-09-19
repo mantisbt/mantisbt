@@ -200,7 +200,7 @@ if ( !config_get('time_tracking_enabled') )
 			<?php echo $t_item['sum_time_tracking'] ?>
 		</td>
 <?php		if ($t_cost_col) { ?>
-		<td>
+		<td class="small-caption">
 			<?php echo string_attribute( number_format( $t_item['cost'], 2 ) ); ?>
 		</td>
 <?php		} ?>
@@ -216,7 +216,7 @@ if ( !config_get('time_tracking_enabled') )
 			<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
 		</td>
 <?php if ( $t_cost_col ) { ?>
-		<td>
+		<td class="small-caption">
 			<?php echo string_attribute( number_format( $t_sum_in_minutes * $f_bugnote_cost / 60, 2 ) ); ?>
 		</td>
 <?php } ?>
@@ -252,7 +252,7 @@ if ( !config_get('time_tracking_enabled') )
 			<?php echo db_minutes_to_hhmm($t_total_time); ?>
 		</td>
 <?php 	if ( $t_cost_col ) { ?>
-		<td>
+		<td class="small-caption">
 			<?php echo string_attribute( number_format( $t_total_time * $f_bugnote_cost / 60, 2 ) ); ?>
 		</td>
 <?php 	} ?>
@@ -267,7 +267,7 @@ if ( !config_get('time_tracking_enabled') )
 			<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
 		</td>
 <?php if ( $t_cost_col ) { ?>
-		<td>
+		<td class="small-caption">
 			<?php echo string_attribute( number_format( $t_sum_in_minutes * $f_bugnote_cost / 60, 2 ) ); ?>
 		</td>
 <?php } ?>
