@@ -1159,6 +1159,12 @@
 	$g_default_bug_eta = ETA_NONE;
 
 	/**
+	 * Default for new bug relationships
+	 * @global int $g_default_bug_relationship
+	 */
+	$g_default_bug_relationship = BUG_RELATED;
+
+	/**
 	 * Default relationship between a new bug and its parent when cloning it
 	 * @global int $g_default_bug_relationship_clone
 	 */

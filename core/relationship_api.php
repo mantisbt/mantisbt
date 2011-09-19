@@ -833,7 +833,7 @@ function relationship_view_box( $p_bug_id ) {
 		<form method="post" action="bug_relationship_add.php">
 		<?php echo form_security_field( 'bug_relationship_add' ) ?>
 		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" size="4" />
-		<?php relationship_list_box( BUG_REL_ANY )?>
+		<?php relationship_list_box( config_get( 'default_bug_relationship' ) )?>
 		<input type="text" name="dest_bug_id" value="" />
 		<input type="submit" name="add_relationship" class="button" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
 		</form>
