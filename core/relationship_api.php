@@ -772,17 +772,17 @@ function relationship_get_summary_text( $p_bug_id ) {
  * @param int $p_bug_id Bug id
  * @return null
  */
-function relationship_list_box( $p_default_rel_type = -1, $p_select_name = "rel_type", $p_include_any = false, $p_include_none = false ) {
+function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_name = "rel_type", $p_include_any = false, $p_include_none = false ) {
 	global $g_relationships;
 	?>
 <select name="<?php echo $p_select_name?>">
 <?php if( $p_include_any ) {?>
-<option value="-1" <?php echo( $p_default_rel_type == -1 ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'any' )?>]</option>
+<option value="<?php BUG_REL_ANY ?>" <?php echo( $p_default_rel_type == BUG_REL_ANY ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'any' )?>]</option>
 <?php
 	}
 
 	if( $p_include_none ) {?>
-<option value="-2" <?php echo( $p_default_rel_type == -2 ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'none' )?>]</option>
+<option value="<?php BUG_REL_NONE ?>" <?php echo( $p_default_rel_type == BUG_REL_NONE ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'none' )?>]</option>
 <?php
 	}
 
@@ -833,7 +833,7 @@ function relationship_view_box( $p_bug_id ) {
 		<form method="post" action="bug_relationship_add.php">
 		<?php echo form_security_field( 'bug_relationship_add' ) ?>
 		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" size="4" />
-		<?php relationship_list_box( -1 )?>
+		<?php relationship_list_box( BUG_REL_ANY )?>
 		<input type="text" name="dest_bug_id" value="" />
 		<input type="submit" name="add_relationship" class="button" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
 		</form>
