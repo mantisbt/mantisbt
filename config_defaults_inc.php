@@ -1226,6 +1226,12 @@ $g_default_bug_projection = PROJECTION_NONE;
 $g_default_bug_eta = ETA_NONE;
 
 /**
+ * Default relationship between a new bug and its parent when cloning it
+ * @global int $g_default_bug_relationship_clone
+ */
+$g_default_bug_relationship_clone = BUG_REL_NONE;
+
+/**
  * Default global category to be used when an issue is moved from a project to another
  * that doesn't have a category with a matching name.  The default is 1 which is the "General"
  * category that is created in the default database.
@@ -4059,7 +4065,7 @@ $g_log_level = LOG_NONE;
  * 4 Options currently exist for log destination:
  * a) '': The default value (empty string) means default PHP error log settings
  * b) 'file': Log to a specific file - specified as 'file:/var/log/mantis.log'
- * c) 'firebug': make use of firefox's firebug addon from http://getfirebug.com/ - Note: if user is 
+ * c) 'firebug': make use of firefox's firebug addon from http://getfirebug.com/ - Note: if user is
  *    not running firefox, this options falls through to the default php error log settings.
  * d) 'page': Display log output at bottom of the page.
  * @global string $g_log_destination
@@ -4068,7 +4074,7 @@ $g_log_destination = '';
 
 /**
  * Indicates the access level required for a user to see the log output (if log_destination is page)
- * Note that this threshold is compared against the user's default global access level rather than 
+ * Note that this threshold is compared against the user's default global access level rather than
  * the threshold based on the current active project.
  *
  * @global int $g_show_log_threshold
