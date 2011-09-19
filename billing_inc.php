@@ -79,7 +79,10 @@ $t_bugnote_stats_to_m = gpc_get_int('end_month', $t_bugnote_stats_to_def_m);
 $t_bugnote_stats_to_y = gpc_get_int('end_year', $t_bugnote_stats_to_def_y);
 
 $f_get_bugnote_stats_button = gpc_get_string('get_bugnote_stats_button', '');
-$f_bugnote_cost = gpc_get_int( 'bugnote_cost', '' );
+
+# Retrieve the cost as a string and convert to floating point
+$f_bugnote_cost = floatval( gpc_get_string( 'bugnote_cost', '' ) );
+
 $f_project_id = helper_get_current_project();
 
 if ( ON == config_get( 'time_tracking_with_billing' ) ) {
