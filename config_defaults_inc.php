@@ -1232,6 +1232,12 @@ $g_default_bug_eta = ETA_NONE;
 $g_default_bug_relationship_clone = BUG_REL_NONE;
 
 /**
+ * Default for new bug relationships
+ * @global int $g_default_bug_relationship
+ */
+$g_default_bug_relationship = BUG_RELATED;
+
+/**
  * Default global category to be used when an issue is moved from a project to another
  * that doesn't have a category with a matching name.  The default is 1 which is the "General"
  * category that is created in the default database.
