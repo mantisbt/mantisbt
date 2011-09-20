@@ -252,7 +252,7 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 	ldap_unbind( $t_ds );
 
 	# If no matches, return null.
-	if ( count( $t_info ) == 0 ) {
+	if ( $t_info['count'] == 0 ) {
 		log_event( LOG_LDAP, "No matches found." );
 		return null;
 	}
