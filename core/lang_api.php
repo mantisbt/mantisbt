@@ -85,9 +85,9 @@ function lang_load( $p_lang, $p_dir = null ) {
 	$t_custom_strings = config_get( 'custom_strings_file' ) ;
 	if( file_exists( $t_custom_strings ) ) {
 		# this may be loaded multiple times, once per language
-		require( $t_custom_strings );		
+		require( $t_custom_strings );
 	}
-	
+
 	// Step 3  - New Language file format
 	// Language file consists of an array
 	if( isset( $s_messages ) ) {
@@ -96,7 +96,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 			if( isset( $s_custom_messages[$p_lang] ) ) {
 				// Step 4 - handle merging in custom strings:
 				// Possible states:
-				// 4.a - new string format + new custom string format	
+				// 4.a - new string format + new custom string format
 				$g_lang_strings[$p_lang] = array_replace( ((array)$g_lang_strings[$p_lang]), (array)$s_messages, (array)$s_custom_messages[$p_lang]);
 				return;
 			} else {
@@ -106,7 +106,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 			// new language loaded
 			$g_lang_strings[$p_lang] = $s_messages;
 			if( isset( $s_custom_messages[$p_lang] ) ) {
-				// 4.a - new string format + new custom string format	
+				// 4.a - new string format + new custom string format
 				$g_lang_strings[$p_lang] = array_replace( ((array)$g_lang_strings[$p_lang]), (array)$s_custom_messages[$p_lang]);
 				return;
 			}
@@ -231,7 +231,7 @@ function lang_ensure_loaded( $p_lang ) {
 */
 function lang_language_exists( $p_lang ) {
 	$t_valid_langs = config_get( 'language_choices_arr' );
-	$t_valid = in_array( $p_lang, $t_valid_langs, true );
+	$t_valid = ( 'english' == $p_lang || in_array( $p_lang, $t_valid_langs, true ) );
 	return $t_valid;
 }
 
@@ -329,7 +329,7 @@ function lang_get( $p_string, $p_lang = null, $p_error = true ) {
 		return $g_lang_strings[$t_lang][$p_string];
 	} else {
 		// Language string doesn't exist in requested language
-		
+
 		// Step 2 - See if language string exists in current plugin
 		$t_plugin_current = plugin_get_current();
 		if( !is_null( $t_plugin_current ) ) {
@@ -338,12 +338,12 @@ function lang_get( $p_string, $p_lang = null, $p_error = true ) {
 			if( lang_exists( $p_string, $t_lang ) ) {
 				return $g_lang_strings[$t_lang][$p_string];
 			}
-			
+
 			// Step 4 - Localised language entry didn't exist - fallback to english for plugin
 			lang_load( 'english', config_get( 'plugin_path' ) . $t_plugin_current . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR );
 			if( lang_exists( $p_string, $t_lang ) ) {
 				return $g_lang_strings[$t_lang][$p_string];
-			}			
+			}
 		}
 
 		// Step 5 - string didn't exist, try fall back to english:
