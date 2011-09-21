@@ -498,6 +498,7 @@ class ExcelStyle {
     private $interior;
     private $font;
     private $border;
+    private $alignment;
     
     /**
      * @param string $p_id The unique style id
@@ -586,6 +587,33 @@ class ExcelStyle {
         }
     }
     
+    /**
+     * Sets the aligment for the style
+     * 
+     * @param int $p_wrap_text 1 to wrap, 0 to not wrap
+     * @param string $p_horizontal Automatic, Left, Center, Right, Fill, Justify, CenterAcrossSelection, Distributed, and JustifyDistributed
+     * @param string $p_vertical Automatic, Top, Bottom, Center, Justify, Distributed, and JustifyDistributed
+     */
+    function setAlignment( $p_wrap_text, $p_horizontal = '', $p_vertical = '') {
+        
+        if ( ! isset ( $this->alignment ) ) {
+            $this->alignment = new Alignment();
+        }
+        
+        if ( $p_wrap_text != '' ) {
+            $this->alignment->wrapText = $p_wrap_text;
+        }
+        
+        if ( $p_horizontal != '' ) {
+            $this->alignment->horizontal = $p_horizontal;
+        }
+        
+        if ( $p_vertical != '' ) {
+            $this->alignment->vertical = $p_vertical;
+        }
+        
+    }
+    
     function asXml() {
         
         $xml = '<ss:Style ss:ID="' . $this->id.'" ss:Name="'.$this->id.'" ';
@@ -601,6 +629,9 @@ class ExcelStyle {
         }
         if ( $this->border ) {
             $xml .= $this->border->asXml();
+        }
+        if ( $this->alignment ) {
+            $xml .= $this->alignment->asXml();
         }
         $xml .= '</ss:Style>'."\n";
         
@@ -693,6 +724,34 @@ class Border {
     
         $xml .= '</ss:Borders>';
     
+        return $xml;
+    }
+}
+
+class Alignment {
+    
+    public $wrapText;
+    public $horizontal;
+    public $vertical;
+    
+    function asXml() {
+        
+        $xml = '<ss:Alignment ';
+        
+        if ( $this->wrapText ) {
+            $xml .= 'ss:WrapText="' . $this->wrapText.'" ';
+        }
+        
+        if ( $this->horizontal ) {
+            $xml .= 'ss:Horizontal="' . $this->horizontal.'" ';
+        }
+        
+        if ( $this->vertical ) {
+            $xml .= 'ss:Vertical="' . $this->vertical.'" ';
+        }
+        
+        $xml .= '/>';
+        
         return $xml;
     }
 }
