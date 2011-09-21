@@ -180,7 +180,7 @@ function lang_ensure_loaded( $p_lang ) {
 */
 function lang_language_exists( $p_lang ) {
 	$t_valid_langs = config_get( 'language_choices_arr' );
-	$t_valid = in_array( $p_lang, $t_valid_langs, true );
+	$t_valid = ( 'english' == $p_lang || in_array( $p_lang, $t_valid_langs, true ) );
 	return $t_valid;
 }
 
@@ -271,13 +271,6 @@ function lang_get( $p_string, $p_lang = null ) {
 
 	// Now we'll make sure that the requested language is loaded
 	lang_ensure_loaded( $t_lang );
-
-	# note in the current implementation we always return the same value
-	#  because we don't have a concept of falling back on a language.  The
-	#  language files actually *contain* English strings if none has been
-	#  defined in the correct language
-	# @todo thraxisp - not sure if this is still true. Strings from last language loaded
-	#      may still be in memeory if a new language is loaded.
 
 	if( lang_exists( $p_string, $t_lang ) ) {
 		return $g_lang_strings[$t_lang][$p_string];
