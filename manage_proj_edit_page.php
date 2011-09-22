@@ -337,26 +337,15 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	foreach ( $t_categories as $t_category ) {
 		$t_id = $t_category['id'];
 
-		if ( $t_category['project_id'] != $f_project_id ) {
-			$t_inherited = true;
-		} else {
-			$t_inherited = false;
-		}
-
-		$t_name = $t_category['name'];
-		if ( NO_USER != $t_category['user_id'] && user_exists( $t_category['user_id'] )) {
-			$t_user_name = user_get_name( $t_category['user_id'] );
-		} else {
-			$t_user_name = '';
-		}
+		$t_inherited = ( $t_category['project_id'] != $f_project_id );
 ?>
 <!-- Repeated Info Row -->
 		<tr <?php echo helper_alternate_class() ?>>
 			<td>
-				<?php echo string_display( category_full_name( $t_category['id'] , /* showProject */ $t_inherited, $f_project_id ) )  ?>
+				<?php echo string_display( category_full_name( $t_id , /* showProject */ $t_inherited, $f_project_id ) ) ?>
 			</td>
 			<td>
-				<?php echo string_display_line( $t_user_name ) ?>
+				<?php echo prepare_user_name( $t_category['user_id'] ) ?>
 			</td>
 			<td class="center">
 				<?php if ( !$t_inherited ) {

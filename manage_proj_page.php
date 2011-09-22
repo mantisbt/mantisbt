@@ -185,21 +185,14 @@
 
 	foreach ( $t_categories as $t_category ) {
 		$t_id = $t_category['id'];
-
-		$t_name = $t_category['name'];
-		if ( NO_USER != $t_category['user_id'] && user_exists( $t_category['user_id'] )) {
-			$t_user_name = user_get_name( $t_category['user_id'] );
-		} else {
-			$t_user_name = '';
-		}
 ?>
 <!-- Repeated Info Row -->
 		<tr <?php echo helper_alternate_class() ?>>
 			<td>
-				<?php echo string_display( category_full_name( $t_category['id'], false ) )  ?>
+				<?php echo string_display( category_full_name( $t_id, false ) )  ?>
 			</td>
 			<td>
-				<?php echo string_display_line( $t_user_name ) ?>
+				<?php echo prepare_user_name( $t_category['user_id'] ) ?>
 			</td>
 			<td class="center">
 				<?php
