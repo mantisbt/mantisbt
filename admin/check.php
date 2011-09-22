@@ -224,7 +224,7 @@ function test_database_utf8() {
 <td class="form-title" width="30%" colspan="2"><?php echo 'Checking your installation' ?></td>
 </tr>
 
-<?php 
+<?php
 
 	require_once( 'obsolete.php' );
 
@@ -251,7 +251,7 @@ print_test_warn_row( 'Checking adodb version...', $t_adodb_version_check_ok, $AD
 
 print_test_row('Checking using bundled adodb with some drivers...', !(db_is_pgsql() || db_is_mssql() || db_is_db2()) || strstr($ADODB_vers, 'MantisBT Version') !== false );
 $t_serverinfo = $g_db->ServerInfo();
-	
+
 print_info_row( 'Database Type (adodb)', $g_db->databaseType );
 print_info_row( 'Database Provider (adodb)', $g_db->dataProvider );
 print_info_row( 'Database Server Description (adodb)', $t_serverinfo['description'] );
@@ -368,7 +368,7 @@ print_test_warn_row( 'Warn if CRYPT is used (not MD5) for passwords', ! ( CRYPT 
 
 if ( config_get_global( 'allow_file_upload' ) ) {
 	print_test_row( 'Checking that fileuploads are allowed in php (enabled in mantis config)', ini_get_bool( 'file_uploads' ) );
-	
+
 	print_info_row( 'PHP variable "upload_max_filesize"', ini_get_number( 'upload_max_filesize' ) );
 	print_info_row( 'PHP variable "post_max_size"', ini_get_number( 'post_max_size' ) );
 	print_info_row( 'MantisBT variable "max_file_size"', config_get_global( 'max_file_size' ) );
@@ -384,11 +384,11 @@ if ( config_get_global( 'allow_file_upload' ) ) {
 			break;
 		case DISK:
 			$t_upload_path = config_get_global( 'absolute_path_default_upload_folder' );
-			print_test_row( 'Checking that absolute_path_default_upload_folder has a trailing directory separator: "' . $t_upload_path . '"', 
+			print_test_row( 'Checking that absolute_path_default_upload_folder has a trailing directory separator: "' . $t_upload_path . '"',
 				( DIRECTORY_SEPARATOR == substr( $t_upload_path, -1, 1 ) ) );
 			break;
 	}
-	
+
 	print_info_row( 'There may also be settings in your web server that prevent you from  uploading files or limit the maximum file size.  See the documentation for those packages if you need more information.');
 }
 ?>
@@ -409,7 +409,7 @@ if ( config_get_global( 'allow_file_upload' ) ) {
 		<td bgcolor="#f4f4f4">All Tests Passed. If you would like to view passed tests click <a href="check.php?showall=1">here</a>.</td>
 	</tr>
 	</table>
-<?php	
+<?php
 	}
 ?>
 </body>
