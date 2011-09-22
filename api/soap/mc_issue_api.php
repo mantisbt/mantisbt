@@ -806,10 +806,6 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
 	}
 
-
-	# submit the issue
-	$t_is_success = $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
-
 	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'], true );
 	if ( isset ( $p_issue['monitors'] ) )
 	    mci_issue_set_monitors( $p_issue_id , $t_user_id, $p_issue['monitors'] );
@@ -830,7 +826,6 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 				if ( bugnote_exists( $t_bugnote_id ) ) {
 					bugnote_set_text( $t_bugnote_id, $t_note['text'] );
 					bugnote_set_view_state( $t_bugnote_id, $t_view_state_id == VS_PRIVATE );
-	$t_eta_id = isset( $p_issue['eta'] ) ? mci_get_eta_id( $p_issue['eta'] ) : config_get('default_bug_eta');
 					bugnote_date_update( $t_bugnote_id );
 					if ( isset( $t_note['time_tracking'] ) )
 						bugnote_set_time_tracking( $t_bugnote_id, mci_get_time_tracking_from_note( $p_issue_id, $t_note ) );
@@ -846,7 +841,9 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		}
 	}
 
-	return $t_is_success;
+	# submit the issue
+	return $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
+	
 }
 
 /**
