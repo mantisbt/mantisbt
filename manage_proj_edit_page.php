@@ -179,7 +179,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <!-- Title -->
 <tr>
 	<td class="form-title" colspan="6">
-		<?php 
+		<?php
 			echo lang_get( 'subprojects' );
 
 			# Check the user's global access level before allowing project creation
@@ -455,7 +455,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		$t_released = $t_version['released'];
 		$t_obsolete = $t_version['obsolete'];
 		if( !date_is_null( $t_version['date_order'] ) ) {
-			$t_date_formatted = date( config_get( 'complete_date_format' ), $t_version['date_order'] );		
+			$t_date_formatted = date( config_get( 'complete_date_format' ), $t_version['date_order'] );
 		} else {
 			$t_date_formatted = ' ';
 		}
@@ -630,7 +630,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 <?php
 }
 
-event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) ); 
+event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 ?>
 
 <!-- PROJECT VIEW STATUS -->
