@@ -33,9 +33,8 @@ $g_error_send_page_header = false; # suppress page headers in the error handler
 
 $f_advanced = gpc_get_bool( 'advanced', false );
 
+html_begin();
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
 <head>
 <title>MantisBT Administration - Check Installation </title>
 <link rel="stylesheet" type="text/css" href="admin.css" />
@@ -56,10 +55,10 @@ $f_advanced = gpc_get_bool( 'advanced', false );
 
 <p><strong>WARNING:</strong> - Always backup your database data before upgrading.  For example, if you use a mysql database, From the command line you can do this with the mysqldump command.</p>
 <p>eg:</p>
-<p><tt>mysqldump -u[username] -p[password] [database_name] > [filename]</tt></p>
+<p><tt>mysqldump -u[username] -p[password] [database_name] &gt; [filename]</tt></p>
 <p>This will dump the contents of the specified database into the specified filename.</p>
 <p>If an error occurs you can re-create your previous database by just importing your backed up database data.  You'll need to drop and recreate your database (or remove each table).</p>
-<p><tt>mysql -u[username] -p[password] [database_name] < [filename]</tt></p>
+<p><tt>mysql -u[username] -p[password] [database_name] &lt; [filename]</tt></p>
 
 <p>Upgrades may take several minutes depending on the size of your database.</p>
 
