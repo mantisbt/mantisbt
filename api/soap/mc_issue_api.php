@@ -507,6 +507,9 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
  * @return integer  The id of the created issue.
  */
 function mc_issue_add( $p_username, $p_password, $p_issue ) {
+	
+	global $g_project_override;
+	
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -515,6 +518,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_project = $p_issue['project'];
 
 	$t_project_id = mci_get_project_id( $t_project );
+	$g_project_override = $t_project_id; // ensure that helper_get_current_project() calls resolve to this project id
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
@@ -681,6 +685,8 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
  * @return integer The id of the created issue.
  */
 function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
+	global $g_project_override;
+	
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -695,6 +701,8 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
+	
+	$g_project_override = $t_project_id; // ensure that helper_get_current_project() calls resolve to this project id
 
 	$t_project_id = mci_get_project_id( $p_issue['project'] );
 	$t_reporter_id = isset( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : $t_user_id ;
