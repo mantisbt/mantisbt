@@ -180,15 +180,18 @@ function plugin_table( $p_name, $p_basename = null ) {
  * Get a plugin configuration option.
  * @param string Configuration option name
  * @param multi Default option value
+ * @param boolean Global value
+ * @param int User ID
+ * @param int Project ID
  */
-function plugin_config_get( $p_option, $p_default = null, $p_global = false ) {
+function plugin_config_get( $p_option, $p_default = null, $p_global = false, $p_user = null, $p_project = null ) {
 	$t_basename = plugin_get_current();
 	$t_full_option = 'plugin_' . $t_basename . '_' . $p_option;
 
 	if( $p_global ) {
 		return config_get_global( $t_full_option, $p_default );
 	} else {
-		return config_get( $t_full_option, $p_default );
+		return config_get( $t_full_option, $p_default, $p_user, $p_project );
 	}
 }
 
