@@ -174,7 +174,7 @@ print_manage_menu( 'manage_proj_page.php' );
 
 	foreach ( $t_categories as $t_category ) {
 		$t_id = $t_category['id'];
-
+	?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td><?php echo string_display( category_full_name( $t_id, false ) )  ?></td>
 			<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>

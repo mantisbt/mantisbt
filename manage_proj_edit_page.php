@@ -282,7 +282,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		foreach ( $t_categories as $t_category ) {
 			$t_id = $t_category['id'];
 			$t_inherited = ( $t_category['project_id'] != $f_project_id );
-
+		?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td><?php echo string_display( category_full_name( $t_id, /* showProject */ $t_inherited, $f_project_id ) )  ?></td>
 			<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
