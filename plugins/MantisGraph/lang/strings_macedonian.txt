@@ -26,6 +26,7 @@
  * @file
  *
  * @author Bjankuloski06
+ * @author Rancher
  */
 
 $s_plugin_graph_title = 'Графикони за MantisBT';
@@ -67,7 +68,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'По приоритет и статус
 $s_plugin_MantisGraph_by_resolution_mix = 'По резолуција и статус';
 $s_plugin_MantisGraph_legend_still_open = 'Сè уште отворени';
 $s_plugin_MantisGraph_legend_resolved = 'Решени';
-$s_plugin_MantisGraph_legend_assigned = 'Назначени';
+$s_plugin_MantisGraph_legend_assigned = 'Доделено';
 $s_plugin_MantisGraph_legend_total = 'Вкупно';
 $s_plugin_MantisGraph_legend_opened = 'Отворени';
 $s_plugin_MantisGraph_legend_closed = 'Затворени';

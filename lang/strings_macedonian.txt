@@ -26,19 +26,20 @@
  * @file
  *
  * @author Bjankuloski06
+ * @author Rancher
  */
 
 $s_directionality = 'ltr';
 $s_actiongroup_menu_move = 'Премести';
 $s_actiongroup_menu_copy = 'Копирај';
-$s_actiongroup_menu_assign = 'Назначи';
+$s_actiongroup_menu_assign = 'Додели';
 $s_actiongroup_menu_close = 'Затвори';
 $s_actiongroup_menu_delete = 'Избриши';
 $s_actiongroup_menu_resolve = 'Реши';
-$s_actiongroup_menu_update_priority = 'Поднови Приоритет';
-$s_actiongroup_menu_update_status = 'Поднови Статус';
-$s_actiongroup_menu_update_severity = 'Поднови Сериозност';
-$s_actiongroup_menu_update_view_status = 'Поднови Видливост';
+$s_actiongroup_menu_update_priority = 'Поднови приоритет';
+$s_actiongroup_menu_update_status = 'Поднови статус';
+$s_actiongroup_menu_update_severity = 'Поднови сериозност';
+$s_actiongroup_menu_update_view_status = 'Поднови видливост';
 $s_actiongroup_menu_update_category = 'Поднови категорија';
 $s_actiongroup_menu_set_sticky = 'залепи/одлепи';
 $s_actiongroup_menu_update_field = 'Поднови %1$s';
