@@ -110,6 +110,7 @@ event_declare_many( array(
 	# Email notification events
 	'EVENT_NOTIFY_USER_INCLUDE' => EVENT_TYPE_DEFAULT,
 	'EVENT_NOTIFY_USER_EXCLUDE' => EVENT_TYPE_DEFAULT,
+	'EVENT_NOTIFY_EMAIL' => EVENT_TYPE_CHAIN,
 
 	# Wiki events
 	'EVENT_WIKI_INIT' => EVENT_TYPE_FIRST,
