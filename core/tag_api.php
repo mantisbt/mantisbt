@@ -439,6 +439,11 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 			while( $row = db_fetch_array( $result ) ) {
 				$t_subquery_results[] = (int)$row;
 			}
+			
+			if ( count ( $t_subquery_results ) == 0 ) {
+			    return array();
+			}
+			
 			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN ( " . implode( ', ', $t_subquery_results ) . ')';
 		} else {
 			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN (
