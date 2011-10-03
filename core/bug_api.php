@@ -247,9 +247,9 @@ class BugData {
 	/**
 	 * Returns the number of bugnotes for the given bug_id
 	 * @return int number of bugnotes
- 	 * @access private
+	 * @access private
 	 * @uses database_api.php
- 	 */
+	 */
 	private function bug_get_bugnote_count() {
 		if( !access_has_project_level( config_get( 'private_bugnote_threshold' ), $this->project_id ) ) {
 			$t_restriction = 'AND view_state=' . VS_PUBLIC;
@@ -1072,21 +1072,32 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 	// Move the issue to the new project.
 	bug_set_field( $p_bug_id, 'project_id', $p_target_project_id );
 
-	// Check if the category for the issue is global or not.
+	// Update the category if needed
 	$t_category_id = bug_get_field( $p_bug_id, 'category_id' );
-	$t_category_project_id = category_get_field( $t_category_id, 'project_id' );
 
-	// If not global, then attempt mapping it to the new project.
-	if ( $t_category_project_id != ALL_PROJECTS && !project_hierarchy_inherit_parent( $p_target_project_id, $t_category_project_id ) ) {
-		// Map by name
-		$t_category_name = category_get_field( $t_category_id, 'name' );
-		$t_target_project_category_id = category_get_id_by_name( $t_category_name, $p_target_project_id, /* triggerErrors */ false );
-		if ( $t_target_project_category_id === false ) {
-			// Use default category after moves, since there is no match by name.
-			$t_target_project_category_id = config_get( 'default_category_for_moves' );
+	// Bug has no category
+	if( $t_category_id == 0 ) {
+		// Category is required in target project, set it to default
+		if( ON != config_get( 'allow_no_category', null, null, $p_target_project_id ) ) {
+			bug_set_field( $p_bug_id, 'category_id', config_get( 'default_category_for_moves' ) );
 		}
+	}
+	// Check if the category is global, and if not attempt mapping it to the new project
+	else {
+		$t_category_project_id = category_get_field( $t_category_id, 'project_id' );
 
-		bug_set_field( $p_bug_id, 'category_id', $t_target_project_category_id );
+		if ( $t_category_project_id != ALL_PROJECTS
+		  && !project_hierarchy_inherit_parent( $p_target_project_id, $t_category_project_id )
+		) {
+			// Map by name
+			$t_category_name = category_get_field( $t_category_id, 'name' );
+			$t_target_project_category_id = category_get_id_by_name( $t_category_name, $p_target_project_id, /* triggerErrors */ false );
+			if ( $t_target_project_category_id === false ) {
+				// Use default category after moves, since there is no match by name.
+				$t_target_project_category_id = config_get( 'default_category_for_moves' );
+			}
+			bug_set_field( $p_bug_id, 'category_id', $t_target_project_category_id );
+		}
 	}
 }
 
@@ -1761,15 +1772,15 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
 
 /**
  * Returns the list of users monitoring the specified bug
- * 
+ *
  * @param int $p_bug_id
  */
 function bug_get_monitors( $p_bug_id ) {
-    
-    if ( ! access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $p_bug_id ) ) {
-        return Array();
-    }
-    
+
+	if ( ! access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $p_bug_id ) ) {
+		return Array();
+	}
+
 	$c_bug_id = db_prepare_int( $p_bug_id );
 	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
 	$t_user_table = db_get_table( 'user' );
@@ -1787,9 +1798,9 @@ function bug_get_monitors( $p_bug_id ) {
 		$row = db_fetch_array( $result );
 		$t_users[$i] = $row['user_id'];
 	}
-	
+
 	user_cache_array_rows( $t_users );
-	
+
 	return $t_users;
 }
 
