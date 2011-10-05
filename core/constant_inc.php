@@ -200,6 +200,8 @@ define( 'REV_ADDITIONAL_INFO', 3 );
 define( 'REV_BUGNOTE', 4 );
 
 # bug relationship constants
+define( 'BUG_REL_NONE', -2 );
+define( 'BUG_REL_ANY', -1 );
 define( 'BUG_DUPLICATE', 0 );
 define( 'BUG_RELATED', 1 );
 define( 'BUG_DEPENDANT', 2 );
