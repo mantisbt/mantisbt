@@ -354,7 +354,7 @@ if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_s
 	echo '<td class="bug-project">', $tpl_project_name, '</td>';
 
 	# Category
-	echo '<th class="bug-category">', $tpl_category, '</th>';
+	echo '<td class="bug-category">', $tpl_category, '</td>';
 
 	# View Status
 	echo '<td class="bug-view-status">', $tpl_bug_view_state_enum, '</td>';
