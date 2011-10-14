@@ -435,13 +435,15 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 			$result = db_query_bound( $query, $t_params );
 
 			$t_subquery_results = array();
-
-			while( $row = db_fetch_array( $result ) ) {
-				$t_subquery_results[] = (int)$row;
+			
+			// if no tags available => return an empty array
+			if( count ( $t_subquery_results ) == 0 ){
+				return $t_subquery_results;
 			}
 			
-			if ( count ( $t_subquery_results ) == 0 ) {
-			    return array();
+			// read the id of tags
+			while( $row = db_fetch_array( $result ) ) {				
+				$t_subquery_results[] = (int)$row['id'];				
 			}
 			
 			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN ( " . implode( ', ', $t_subquery_results ) . ')';
