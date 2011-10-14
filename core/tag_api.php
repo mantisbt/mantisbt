@@ -437,7 +437,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 			$t_subquery_results = array();
 
 			while( $row = db_fetch_array( $result ) ) {
-				$t_subquery_results[] = (int)$row;
+				$t_subquery_results[] = (int)$row['id'];
 			}
 			
 			if ( count ( $t_subquery_results ) == 0 ) {
