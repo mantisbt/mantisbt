@@ -331,6 +331,9 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 	} else if( is_int( $p_value ) || is_numeric( $p_value ) ) {
 		$t_type = CONFIG_TYPE_INT;
 		$c_value = (string) $p_value;
+	} else if( is_bool( $p_value ) ) {
+		$t_type = CONFIG_TYPE_INT;
+		$c_value = (string)(int)$p_value;				
 	} else {
 		$t_type = CONFIG_TYPE_STRING;
 		$c_value = $p_value;
