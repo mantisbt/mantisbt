@@ -69,9 +69,9 @@ $g_cookie_httponly_flag_enabled = version_compare( PHP_VERSION, '5.2.0', '>=' );
  */
 function gpc_get( $p_var_name, $p_default = null ) {
 	if( isset( $_POST[$p_var_name] ) ) {
-		$t_result = gpc_strip_slashes( $_POST[$p_var_name] );
+		$t_result = $_POST[$p_var_name];
 	} else if( isset( $_GET[$p_var_name] ) ) {
-		$t_result = gpc_strip_slashes( $_GET[$p_var_name] );
+		$t_result = $_GET[$p_var_name];
 	}
 	else if( func_num_args() > 1 ) {
 		# check for a default passed in (allowing null)
@@ -334,7 +334,7 @@ function gpc_get_bool_array( $p_var_name, $p_default = null ) {
  */
 function gpc_get_cookie( $p_var_name, $p_default = null ) {
 	if( isset( $_COOKIE[$p_var_name] ) ) {
-		$t_result = gpc_strip_slashes( $_COOKIE[$p_var_name] );
+		$t_result = $_COOKIE[$p_var_name];
 	}
 	else if( func_num_args() > 1 ) {
 		# check for a default passed in (allowing null)
@@ -473,23 +473,5 @@ function gpc_string_to_bool( $p_string ) {
 		return false;
 	} else {
 		return true;
-	}
-}
-
-/**
- * Strip slashes if necessary (supports arrays)
- * @param mixed $p_var
- * @return mixed
- */
-function gpc_strip_slashes( $p_var ) {
-	if( 0 == get_magic_quotes_gpc() ) {
-		return $p_var;
-	} else if( !is_array( $p_var ) ) {
-		return stripslashes( $p_var );
-	} else {
-		foreach( $p_var as $key => $value ) {
-			$p_var[$key] = gpc_strip_slashes( $value );
-		}
-		return $p_var;
 	}
 }

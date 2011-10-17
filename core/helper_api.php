@@ -463,8 +463,8 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 	echo '<form method="post" action="">' . "\n";
 	# CSRF protection not required here - user needs to confirm action
 	# before the form is accepted.
-	print_hidden_inputs( gpc_strip_slashes( $_POST ) );
-	print_hidden_inputs( gpc_strip_slashes( $_GET ) );
+	print_hidden_inputs( $_POST );
+	print_hidden_inputs( $_GET );
 
 	echo "<input type=\"hidden\" name=\"_confirmed\" value=\"1\" />\n";
 	echo '<br /><br /><input type="submit" class="button" value="' . $p_button_label . '" />';

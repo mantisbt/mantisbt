@@ -75,7 +75,7 @@ check_print_test_row(
 
 check_print_test_row(
 	'magic_quotes_gpc php.ini directive is disabled',
-	!( function_exists( 'get_magic_quotes_gpc' ) && get_magic_quotes_gpc() ),
+	!( function_exists( 'get_magic_quotes_gpc' ) && @get_magic_quotes_gpc() ),
 	array( false => 'PHP\'s magic quotes feature is <a href="http://www.php.net/manual/en/security.magicquotes.whynot.php">deprecated in PHP 5.3.0</a> and should not be used.' )
 );
 
