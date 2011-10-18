@@ -668,7 +668,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
 	} else {
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
-		if( $t_file_path == '' ) {
+		if( is_blank( $t_file_path ) ) {
 			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
 		}
 	}
@@ -1019,26 +1019,26 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 }
 
 /**
- * 
+ *
  * Copies all attachments from the source bug to the destination bug
- * 
+ *
  * <p>Does not perform history logging and does not perform access checks.</p>
- * 
+ *
  * @param int $p_source_bug_id
  * @param int $p_dest_bug_id
  */
 function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
-    
+
     $t_mantis_bug_file_table = db_get_table( 'bug_file' );
-    
+
     $query = 'SELECT * FROM ' . $t_mantis_bug_file_table . ' WHERE bug_id = ' . db_param();
     $result = db_query_bound( $query, Array( $p_source_bug_id ) );
     $t_count = db_num_rows( $result );
-    
+
     $t_bug_file = array();
     for( $i = 0;$i < $t_count;$i++ ) {
         $t_bug_file = db_fetch_array( $result );
-    
+
         # prepare the new diskfile name and then copy the file
         $t_file_path = dirname( $t_bug_file['folder'] );
         $t_new_diskfile_name = $t_file_path . file_generate_unique_name( 'bug-' . $t_bug_file['filename'], $t_file_path );
@@ -1047,7 +1047,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
             copy( $t_bug_file['diskfile'], $t_new_diskfile_name );
             chmod( $t_new_diskfile_name, config_get( 'attachments_file_permissions' ) );
         }
-    
+
         $query = "INSERT INTO $t_mantis_bug_file_table
     						( bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content )
     						VALUES ( " . db_param() . ",
