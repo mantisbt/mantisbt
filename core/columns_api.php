@@ -32,7 +32,7 @@
 function columns_filter_disabled( $p_columns ) {
 	$t_columns = array();
 	$t_enable_profiles = ( config_get( 'enable_profiles' ) == ON );
-	
+
 	foreach ( $p_columns as $t_column ) {
 		switch( $t_column ) {
 			case 'os':
@@ -94,11 +94,11 @@ function columns_get_standard() {
 	if( config_get( 'enable_eta' ) == OFF ) {
 		unset( $t_columns['eta'] );
 	}
-	
-	if( config_get( 'enable_projection' ) == OFF ) { 
+
+	if( config_get( 'enable_projection' ) == OFF ) {
 		unset( $t_columns['projection'] );
 	}
-	
+
 	if( config_get( 'enable_product_build' ) == OFF ) {
 		unset( $t_columns['build'] );
 	}
@@ -1016,8 +1016,6 @@ function print_column_attachment_count( $p_bug, $p_columns_target = COLUMNS_TARG
 	global $t_icon_path;
 
 	# Check for attachments
-	# TODO: factor in the allow_view_own_attachments configuration option
-	# instead of just using a global check.
 	$t_attachment_count = 0;
 	if( file_can_view_bug_attachments( $p_bug->id, null ) ) {
 		$t_attachment_count = file_bug_attachment_count( $p_bug->id );
@@ -1028,12 +1026,7 @@ function print_column_attachment_count( $p_bug, $p_columns_target = COLUMNS_TARG
 	if ( $t_attachment_count > 0 ) {
 		$t_href = string_get_bug_view_url( $p_bug->id ) . '#attachments';
 		$t_href_title = sprintf( lang_get( 'view_attachments_for_issue' ), $t_attachment_count, $p_bug->id );
-		if ( config_get( 'show_attachment_indicator' ) ) {
-			$t_alt_text = $t_attachment_count . lang_get( 'word_separator' ) . lang_get( 'attachments' );
-			echo "<a href=\"$t_href\" title=\"$t_href_title\"><img src=\"${t_icon_path}attachment.png\" alt=\"$t_alt_text\" title=\"$t_alt_text\" /></a>";
-		} else {
-			echo "<a href=\"$t_href\" title=\"$t_href_title\">$t_attachment_count</a>";
-		}
+		echo "<a href=\"$t_href\" title=\"$t_href_title\">$t_attachment_count</a>";
 	} else {
 		echo ' &#160; ';
 	}

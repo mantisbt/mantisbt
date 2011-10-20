@@ -138,3 +138,6 @@ config_obsolete( 'default_advanced_update', '' );
 config_obsolete( 'default_graph_type', '' );
 config_obsolete( 'graph_font', '' );
 config_obsolete( 'graph_colors', '' );
+
+# changes in 1.2.8
+config_obsolete( 'show_attachment_indicator' );

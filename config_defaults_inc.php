@@ -823,14 +823,16 @@
 	 * To include custom field 'xyz', include the column name as 'custom_xyz'.
 	 *
 	 * Standard Column Names (i.e. names to choose from):
-	 * selection, edit, id, project_id, reporter_id, handler_id, priority, reproducibility, projection, eta,
-	 * resolution, fixed_in_version, view_state, os, os_build, build (for product build), platform, version, date_submitted, attachment,
-	 * category, sponsorship_total, severity, status, last_updated, summary, bugnotes_count, description,
-	 * steps_to_reproduce, additional_information
+	 * id, project_id, reporter_id, handler_id, duplicate_id, priority, severity,
+	 * reproducibility, status, resolution, category_id, date_submitted, last_updated,
+	 * os, os_build, platform, version, fixed_in_version, target_version, view_state,
+	 * summary, sponsorship_total, due_date, description, steps_to_reproduce,
+	 * additional_information, attachment_count, bugnotes_count, selection, edit,
+	 * overdue
 	 *
 	 * @global array $g_view_issues_page_columns
 	 */
-	$g_view_issues_page_columns = array ( 'selection', 'edit', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment', 'category_id', 'severity', 'status', 'last_updated', 'summary' );
+	$g_view_issues_page_columns = array ( 'selection', 'edit', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment_count', 'category_id', 'severity', 'status', 'last_updated', 'summary' );
 
 	/**
 	 * The default columns to be included in the Print Issues Page.
@@ -838,7 +840,7 @@
 	 * Also each user can configure their own columns using My Account -> Manage Columns
 	 * @global array $g_print_issues_page_columns
 	 */
-	$g_print_issues_page_columns = array ( 'selection', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment', 'category_id', 'severity', 'status', 'last_updated', 'summary' );
+	$g_print_issues_page_columns = array ( 'selection', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment_count', 'category_id', 'severity', 'status', 'last_updated', 'summary' );
 
 	/**
 	 * The default columns to be included in the CSV export.
@@ -1916,18 +1918,6 @@
 	 * @global int $g_preview_max_height
 	 */
 	$g_preview_max_height = 250;
-
-	/**
-	 * Show an attachment indicator on bug list
-	 * Show a clickable attachment indicator on the bug
-	 * list page if the bug has one or more files attached.
-	 * Note: This option is disabled by default since it adds
-	 * 1 database query per bug listed and thus might slow
-	 * down the page display.
-	 *
-	 * @global int $g_show_attachment_indicator
-	 */
-	$g_show_attachment_indicator = OFF;
 
 	/**
 	 * access level needed to view bugs attachments.  View means to see the file names
