@@ -226,8 +226,6 @@ function test_database_utf8() {
 
 <?php
 
-	require_once( 'obsolete.php' );
-
 print_test_row( 'MantisBT requires at least <b>PHP ' . PHP_MIN_VERSION . '</b>. You are running <b>PHP ' . phpversion(), $result = version_compare( phpversion(), PHP_MIN_VERSION, '>=' ) );
 
 if ( !print_test_row( 'Checking Config File Exists', file_exists( $g_absolute_path . 'config_inc.php' ), array( false => 'Please use install.php to perform initial installation <a href="install.php">Click here</a>' ) ) ) {
@@ -238,6 +236,8 @@ print_test_row( 'Opening connection to database [' . config_get_global( 'databas
 if( !db_is_connected() ) {
 	print_info_row( 'Database is not connected - Can not continue checks' );
 }
+
+require_once( 'obsolete.php' );
 
 if( isset( $ADODB_vers ) ) {
 	# ADOConnection::Version() is broken as it treats v5.1 the same as v5.10
