@@ -532,7 +532,7 @@ function config_flush_cache( $p_option = '', $p_user = ALL_USERS, $p_project = A
 # ------------------
 # Checks if an obsolete configuration variable is still in use.  If so, an error
 # will be generated and the script will exit.  This is called from admin_check.php.
-function config_obsolete( $p_var, $p_replace ) {
+function config_obsolete( $p_var, $p_replace = '' ) {
 
 	# @@@ we could trigger a WARNING here, once we have errors that can
 	#     have extra data plugged into them (we need to give the old and
