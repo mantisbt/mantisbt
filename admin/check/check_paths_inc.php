@@ -66,7 +66,7 @@ foreach( $t_paths as $t_path_config_name => $t_path ) {
 		array( false =>
 			"You must provide a trailing directory separator (" . DIRECTORY_SEPARATOR .
 			") to the end of '" . htmlspecialchars( $t_path['config_value'] ) . "'."
-		) )
+		)
 	);
 }
 
