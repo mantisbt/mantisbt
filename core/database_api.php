@@ -626,11 +626,13 @@ function db_index_exists( $p_table_name, $p_index_name ) {
 
 	if( is_blank( $p_index_name ) || is_blank( $p_table_name ) ) {
 		return false;
-
-		// no index found
 	}
 
 	$t_indexes = $g_db->MetaIndexes( $p_table_name );
+	if( $t_indexes === false ) {
+		// no index found
+		return false;
+	}
 
 	if( !empty( $t_indexes ) ) {
 		# Can't use in_array() since it is case sensitive
