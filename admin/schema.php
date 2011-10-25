@@ -251,7 +251,11 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('project'),"
 # Index autocreated when oci used
 if( 'oci8' != $GLOBALS['g_db_type'] ) {
 	$upgrade[] = array('CreateIndexSQL',array('idx_project_id',db_get_table('project'),'id'));
+} else {
+	# No-op - required to ensure schema version consistency
+	$upgrade[] = NULL;
 }
+
 $upgrade[] = array('CreateIndexSQL',array('idx_project_name',db_get_table('project'),'name',array('UNIQUE')));
 $upgrade[] = array('CreateIndexSQL',array('idx_project_view',db_get_table('project'),'view_state'));
 $upgrade[] = array('CreateTableSQL',array(db_get_table('project_user_list'),"
@@ -376,6 +380,9 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('email'),"
 # Index autocreated when oci used
 if( 'oci8' != $GLOBALS['g_db_type'] ) {
 	$upgrade[] = array('CreateIndexSQL',array('idx_email_id',db_get_table('email'),'email_id'));
+} else {
+	# No-op - required to ensure schema version consistency
+	$upgrade[] = NULL;
 }
 
 $upgrade[] = array('AddColumnSQL',array(db_get_table('bug'), "target_version C(64) NOTNULL DEFAULT \" '' \""));

@@ -218,7 +218,7 @@ if( $t_config_exists ) {
 	}
 
 	$t_cur_version = config_get( 'database_version', -1 );
-	
+
 	if( $t_cur_version > 1 ) {
 		$g_database_upgrade = true;
 		$f_db_exists = true;
@@ -723,34 +723,50 @@ if( 3 == $t_install_state ) {
 			$dict = NewDataDictionary( $g_db );
 			$t_sql = true;
 			$t_target = $upgrade[$i][1][0];
-			if( $upgrade[$i][0] == 'InsertData' ) {
-				$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
-			}
-			else if( $upgrade[$i][0] == 'UpdateSQL' ) {
-				$sqlarray = array(
-					$upgrade[$i][1],
-				);
-				$t_target = $upgrade[$i][1];
-			} else if( $upgrade[$i][0] == 'UpdateFunction' ) {
-				$sqlarray = array(
-					$upgrade[$i][1],
-				);
-				if( isset( $upgrade[$i][2] ) ) {
-					$sqlarray[] = $upgrade[$i][2];
-				}
-				$t_sql = false;
-				$t_target = $upgrade[$i][1];
-			} else {
-				/* 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade. */
-				if( isset( $upgrade[$i][2] ) ) {
-					if( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) ) {
-						$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
-					} else {
-						$sqlarray = array();
+
+			switch ($upgrade[$i][0]) {
+
+				case 'InsertData':
+					$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
+					break;
+
+				case 'UpdateSQL':
+					$sqlarray = array(
+						$upgrade[$i][1],
+					);
+					$t_target = $upgrade[$i][1];
+					break;
+
+				case 'UpdateFunction':
+					$sqlarray = array(
+						$upgrade[$i][1],
+					);
+					if( isset( $upgrade[$i][2] ) ) {
+						$sqlarray[] = $upgrade[$i][2];
 					}
-				} else {
-					$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
-				}
+					$t_sql = false;
+					$t_target = $upgrade[$i][1];
+					break;
+
+				case NULL:
+					// No-op upgrade step - required for oci8
+					$sqlarray = array();
+					break;
+
+				default:
+						$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+
+					/* 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade. */
+					if( isset( $upgrade[$i][2] ) ) {
+						if( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) ) {
+							$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+						} else {
+							$sqlarray = array();
+						}
+					} else {
+						$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+					}
+					break;
 			}
 			if( $f_log_queries ) {
 				if( $t_sql ) {
