@@ -678,7 +678,7 @@ if( 3 == $t_install_state ) {
 		$g_db_connected = false;
 
 		# fake out database access routines used by config_get
-		$GLOBALS['g_db_type'] = $f_db_type;
+		config_set_global( 'db_type', $f_db_type );
 
 		# Initialize short table prefixes and suffix for Oracle
 		if ( $f_db_type == 'oci8' ) {
@@ -720,7 +720,7 @@ if( 3 == $t_install_state ) {
 				echo '<tr><td bgcolor="#ffffff">';
 			}
 
-			$dict = NewDataDictionary( $g_db );
+			$dict = @NewDataDictionary( $g_db );
 			$t_sql = true;
 			$t_target = $upgrade[$i][1][0];
 
