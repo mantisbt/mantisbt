@@ -166,7 +166,7 @@
 	if ( ( $t_old_bug_status != $t_bug_data->status ) && ( FALSE == $f_update_mode ) ) {
 		# handle status transitions that come from pages other than bug_*update_page.php
 		# this does the minimum to act on the bug and sends a specific message
-		if ( $t_bug_data->status >= $t_resolved
+		if ( $t_bug_data->status == $t_resolved
 			&& $t_bug_data->status < $t_closed
 			&& $t_old_bug_status < $t_resolved ) {
 			# bug_resolve updates the status, fixed_in_version, resolution, handler_id and bugnote and sends message
@@ -184,7 +184,7 @@
 			// in bug_update() call below.
 			$t_bug_data->handler_id = bug_get_field( $f_bug_id, 'handler_id' );
 			$t_bug_data->status = bug_get_field( $f_bug_id, 'status' );
-		} else if ( $t_bug_data->status >= $t_closed
+		} else if ( $t_bug_data->status == $t_closed
 			&& $t_old_bug_status < $t_closed ) {
 			# bug_close updates the status and bugnote and sends message
 			bug_close( $f_bug_id, $f_bugnote_text, $f_private, $f_time_tracking );
