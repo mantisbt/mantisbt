@@ -302,7 +302,7 @@ function mci_project_version_as_array( $p_version ) {
 			'id' => $p_version['id'],
 			'name' => $p_version['version'],
 			'project_id' => $p_version['project_id'],
-			'date_order' => timestamp_to_iso8601( $p_version['date_order'] ),
+			'date_order' => timestamp_to_iso8601( $p_version['date_order'], false ),
 			'description' => mci_null_if_empty( $p_version['description'] ),
 			'released' => $p_version['released'],
 		    'obsolete' => $p_version['obsolete']

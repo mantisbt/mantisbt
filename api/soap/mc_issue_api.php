@@ -70,7 +70,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 
 	$t_issue_data['id'] = $p_issue_id;
 	$t_issue_data['view_state'] = mci_enum_get_array_by_id( $t_bug->view_state, 'view_state', $t_lang );
-	$t_issue_data['last_updated'] = timestamp_to_iso8601( $t_bug->last_updated );
+	$t_issue_data['last_updated'] = timestamp_to_iso8601( $t_bug->last_updated, false );
 
 	$t_issue_data['project'] = mci_project_as_array_by_id( $t_bug->project_id );
 	$t_issue_data['category'] = mci_get_category( $t_bug->category_id );
@@ -86,7 +86,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['os'] = mci_null_if_empty( $t_bug->os );
 	$t_issue_data['os_build'] = mci_null_if_empty( $t_bug->os_build );
 	$t_issue_data['reproducibility'] = mci_enum_get_array_by_id( $t_bug->reproducibility, 'reproducibility', $t_lang );
-	$t_issue_data['date_submitted'] = timestamp_to_iso8601( $t_bug->date_submitted );
+	$t_issue_data['date_submitted'] = timestamp_to_iso8601( $t_bug->date_submitted, false );
 
 	$t_issue_data['sponsorship_total'] = $t_bug->sponsorship_total;
 
@@ -135,7 +135,7 @@ function mci_get_category( $p_category_id ) {
  */
 function mci_issue_get_due_date( $p_bug ) {
 	if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id )  && !date_is_null( $p_bug->due_date ) ) {
-		return new soapval( 'due_date', 'xsd:dateTime', timestamp_to_iso8601( $p_bug->due_date ) );
+		return new soapval( 'due_date', 'xsd:dateTime', timestamp_to_iso8601( $p_bug->due_date, false ) );
 	} else {
 		return new soapval( 'due_date','xsd:dateTime', null );
 	}
@@ -246,7 +246,7 @@ function mci_issue_get_attachments( $p_issue_id ) {
 		$t_attachment['filename'] = $t_attachment_row['filename'];
 		$t_attachment['size'] = $t_attachment_row['filesize'];
 		$t_attachment['content_type'] = $t_attachment_row['file_type'];
-		$t_attachment['date_submitted'] = timestamp_to_iso8601( $t_attachment_row['date_added'] );
+		$t_attachment['date_submitted'] = timestamp_to_iso8601( $t_attachment_row['date_added'], false );
 		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&amp;type=bug';
 		$t_attachment['user_id'] = $t_attachment_row['user_id'];
 		$t_result[] = $t_attachment;
@@ -313,8 +313,8 @@ function mci_issue_get_notes( $p_issue_id ) {
 		$t_bugnote = array();
 		$t_bugnote['id'] = $t_value->id;
 		$t_bugnote['reporter'] = mci_account_get_array_by_id( $t_value->reporter_id );
-		$t_bugnote['date_submitted'] = timestamp_to_iso8601( $t_value->date_submitted );
-		$t_bugnote['last_modified'] = timestamp_to_iso8601( $t_value->last_modified );
+		$t_bugnote['date_submitted'] = timestamp_to_iso8601( $t_value->date_submitted, false );
+		$t_bugnote['last_modified'] = timestamp_to_iso8601( $t_value->last_modified, false );
 		$t_bugnote['text'] = $t_value->note;
 		$t_bugnote['view_state'] = mci_enum_get_array_by_id( $t_value->view_state, 'view_state', $t_lang );
 		$t_bugnote['time_tracking'] = $t_has_time_tracking_access ? $t_value->time_tracking : 0;
@@ -1207,7 +1207,7 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue = array();
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = mci_enum_get_array_by_id( $p_issue_data->view_state, 'view_state', $p_lang );
-		$t_issue['last_updated'] = timestamp_to_iso8601( $p_issue_data->last_updated );
+		$t_issue['last_updated'] = timestamp_to_iso8601( $p_issue_data->last_updated, false );
 
 		$t_issue['project'] = mci_project_as_array_by_id( $p_issue_data->project_id );
 		$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
@@ -1223,7 +1223,7 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['os'] = mci_null_if_empty( $p_issue_data->os );
 		$t_issue['os_build'] = mci_null_if_empty( $p_issue_data->os_build );
 		$t_issue['reproducibility'] = mci_enum_get_array_by_id( $p_issue_data->reproducibility, 'reproducibility', $p_lang );
-		$t_issue['date_submitted'] = timestamp_to_iso8601( $p_issue_data->date_submitted );
+		$t_issue['date_submitted'] = timestamp_to_iso8601( $p_issue_data->date_submitted, false );
 		$t_issue['sponsorship_total'] = $p_issue_data->sponsorship_total;
 
 		if( !empty( $p_issue_data->handler_id ) ) {

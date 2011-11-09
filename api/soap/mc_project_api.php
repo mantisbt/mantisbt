@@ -614,7 +614,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		$t_attachment['description'] = $row['description'];
 		$t_attachment['size'] = $row['filesize'];
 		$t_attachment['content_type'] = $row['file_type'];
-		$t_attachment['date_submitted'] = timestamp_to_iso8601( $row['date_added'] );
+		$t_attachment['date_submitted'] = timestamp_to_iso8601( $row['date_added'], false );
 		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $row['id'] . '&amp;type=doc';
 		$t_attachment['user_id'] = $row['user_id'];
 		$t_result[] = $t_attachment;
@@ -880,7 +880,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = $t_issue_data->view_state;
-		$t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data->last_updated );
+		$t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data->last_updated, false );
 
 		$t_issue['project'] = $t_issue_data->project_id;
 		$t_issue['category'] = mci_get_category( $t_issue_data->category_id );
