@@ -127,7 +127,7 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = $t_issue_data->view_state;
-		$t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data->last_updated );
+		$t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data->last_updated, false );
 
 		$t_issue['project'] = $t_issue_data->project_id;
 		$t_issue['category'] = mci_get_category( $t_issue_data->category_id );
