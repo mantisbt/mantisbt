@@ -941,10 +941,20 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 				$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
 				$t_def = custom_field_get_definition( $t_custom_field_id );
 				$t_value_field = ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
-				$c_cf_alias = str_replace( ' ', '_', $t_custom_field );
+				$c_cf_alias = '\''. str_replace( ' ', '_', $t_custom_field ).'\'';
 				$t_cf_table_alias = $t_custom_field_string_table . '_' . $t_custom_field_id;
-				$t_cf_select = "$t_cf_table_alias.$t_value_field $c_cf_alias";
-
+				$t_def = custom_field_get_definition( $t_custom_field_id  );
+				
+				if( ( $t_def['type'] == CUSTOM_FIELD_TYPE_NUMERIC ) ||
+				    ( $t_def['type'] == CUSTOM_FIELD_TYPE_ENUM ) )
+				{
+						$t_cf_select = "CONVERT(int,$t_cf_table_alias.value) $c_cf_alias";
+				}else if ($t_def['type'] == CUSTOM_FIELD_TYPE_FLOAT )
+					$t_cf_select = "CONVERT(float,$t_cf_table_alias.value) $c_cf_alias";
+				else {
+						$t_cf_select = "$t_cf_table_alias.value $c_cf_alias";
+				}
+				
 				# check to be sure this field wasn't already added to the query.
 				if( !in_array( $t_cf_select, $p_query_clauses['select'] ) ) {
 					$p_query_clauses['select'][] = $t_cf_select;
