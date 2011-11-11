@@ -213,7 +213,7 @@ class IssueAddTest extends SoapBase {
 		
 		$this->skipIfDueDateIsNotEnabled();
 		
-		$date = '2015-10-29T12:59:14Z';
+		$date = '2015-10-29T12:59:14+00:00';
 		
 		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithDueDate' );
 		
