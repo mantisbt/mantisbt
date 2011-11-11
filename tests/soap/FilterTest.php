@@ -190,26 +190,49 @@ class FilterTest extends SoapBase {
 	 * Verifies that after the last page no more issues are being returned
 	 */
 	public function testGetIssueHeadersPaged() {
-	    
-	    $issue = $this->getIssueToAdd('FilterTest.getIssueHeadersPaged');
-	    $issueId = $this->client->mc_issue_add($this->userName, $this->password, $issue);
-	    $this->deleteAfterRun($issueId);
-	    
-	    self::assertEquals(1, count($this->client->mc_project_get_issue_headers($this->userName, $this->password, $this->getProjectId(),1, 1 )));
-	    self::assertEquals(0, count($this->client->mc_project_get_issue_headers($this->userName, $this->password, $this->getProjectId(),2, 1 )));
+		
+		$this->doTestGetPages('mc_project_get_issue_headers');
+	}
+	
+	private function doTestGetPages( $methodName ) {
+
+		$issueCount;
+		$currentIssues = count($this->getProjectIssues());
+		if ( $currentIssues >= 3) {
+			$issueCount = $currentIssues;
+		} else {
+			// need to add
+				
+			$issueCount = 3;
+				
+			$toAdd = $issueCount - $currentIssues;
+				
+			while ( $toAdd > 0 ) {
+		
+				$issue = $this->getIssueToAdd('FilterTest.doTestGatePages.' .$methodName);
+				$issueId = $this->client->mc_issue_add($this->userName, $this->password, $issue);
+				$this->deleteAfterRun($issueId);
+		
+				$toAdd--;
+			}
+		}
+		
+		$pageSize = $issueCount - 1;
+		
+		// first page should be full
+		self::assertEquals($pageSize, count(call_user_func_array(array($this->client, $methodName), array($this->userName, $this->password, $this->getProjectId(), 1, $pageSize ))));
+		// second page should get just one issue, as $pageSize = $issueCount - 1;
+		self::assertEquals(1, count(call_user_func_array(array($this->client, $methodName), array($this->userName, $this->password, $this->getProjectId(), 2, $pageSize ))));
+		// third page should be empty
+		self::assertEquals(0, count(call_user_func_array(array($this->client, $methodName), array($this->userName, $this->password, $this->getProjectId(), 3, $pageSize ))));
 	}
 	
 	/**
 	 * Verifies that after the last page no more issues are being returned
 	 */
 	public function testGetIssuesPaged() {
-	    
-	    $issue = $this->getIssueToAdd('FilterTest.getIssuesPaged');
-	    $issueId = $this->client->mc_issue_add($this->userName, $this->password, $issue);
-	    $this->deleteAfterRun($issueId);
-	    
-	    self::assertEquals(1, count($this->client->mc_project_get_issues($this->userName, $this->password, $this->getProjectId(),1, 1 )));
-	    self::assertEquals(0, count($this->client->mc_project_get_issues($this->userName, $this->password, $this->getProjectId(),2, 1 )));
+
+		$this->doTestGetPages('mc_project_get_issues');
 	}
 	
 
