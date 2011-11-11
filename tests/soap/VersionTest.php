@@ -44,6 +44,8 @@ class VersionTest extends SoapBase {
      * Tests creating a new version
      */
     public function testAddVersion() {
+    	
+    	$initialVersions  = $this->countVersions();
         
         $versionId = $this->client->mc_project_version_add($this->userName, $this->password, $this->getTestVersion() );
         
@@ -53,7 +55,7 @@ class VersionTest extends SoapBase {
         
         $versions = $this->client->mc_project_get_versions( $this->userName, $this->password, $this->getProjectId() );
         
-        $this->assertEquals(1, count($versions));
+        $this->assertEquals(1, count($versions) - $initialVersions);
         
         $version = $versions[0];
         
@@ -70,6 +72,8 @@ class VersionTest extends SoapBase {
      * Tests updating a version
      */
     public function testUpdateVersion() {
+    	
+    	$initialVersions  = $this->countVersions();
         
         $versionId = $this->client->mc_project_version_add($this->userName, $this->password, $this->getTestVersion() );
         
@@ -84,10 +88,20 @@ class VersionTest extends SoapBase {
         
         $versions = $this->client->mc_project_get_versions( $this->userName, $this->password, $this->getProjectId() );
         
-        $this->assertEquals(1, count($versions));
+        $this->assertEquals(1, count($versions) - $initialVersions);
         
-        $version = $versions[0];
+        foreach ( $versions as $version ) {
+        	if ( $version->id == $versionId ) { 
+        		$this->assertEquals('1.1', $version->name);
+         		return;
+        	}
+        }
         
-        $this->assertEquals('1.1', $version->name);
+        self::fail('Did not find version with id ' . $versionId . ' in the reply');
+    }
+    
+    private function countVersions() {
+    	
+    	return count ( $this->client->mc_project_get_versions( $this->userName, $this->password, $this->getProjectId() ) );
     }
 }
