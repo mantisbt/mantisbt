@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
  * Test fixture for filter related webservice method.
  */
 class FilterTest extends SoapBase {
+	
+	const ISSUES_TO_RETRIEVE = 50;
+	
 	/**
 	 * A test case that tests the following:
 	 * 1. Retrieving all the project's issues
@@ -221,7 +224,7 @@ class FilterTest extends SoapBase {
 			$this->password,
 			$this->getProjectId(),
 			0,
-			50);
+			self::ISSUES_TO_RETRIEVE);
 	}
 	
 	/**
@@ -235,6 +238,6 @@ class FilterTest extends SoapBase {
 			$this->password,
 			$this->getProjectId(),
 			0,
-			50);
+			self::ISSUES_TO_RETRIEVE);
 	}
 }
