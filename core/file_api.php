@@ -1040,11 +1040,11 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
         $t_bug_file = db_fetch_array( $result );
 
         # prepare the new diskfile name and then copy the file
-        $t_file_path = dirname( $t_bug_file['folder'] );
+        $t_file_path = $t_bug_file['folder'];
         $t_new_diskfile_name = $t_file_path . file_generate_unique_name( 'bug-' . $t_bug_file['filename'], $t_file_path );
         $t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
         if(( config_get( 'file_upload_method' ) == DISK ) ) {
-            copy( $t_bug_file['diskfile'], $t_new_diskfile_name );
+            copy( $t_file_path.$t_bug_file['diskfile'], $t_new_diskfile_name );
             chmod( $t_new_diskfile_name, config_get( 'attachments_file_permissions' ) );
         }
 
