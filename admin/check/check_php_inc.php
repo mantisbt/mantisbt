@@ -117,7 +117,7 @@ check_print_test_warn_row(
 
 check_print_test_warn_row(
 	'PHP errors are being logged or reported',
-	!( ini_get_bool( 'display_errors' ) || ini_get_bool( 'log_errors' ) ),
+	ini_get_bool( 'display_errors' ) || ini_get_bool( 'log_errors' ),
 	array( false => 'PHP is not currently set to log or report errors and thus you may be unaware of PHP errors that occur.' )
 );
 
