@@ -83,6 +83,11 @@ define( 'CHECK_PHP_INC_ALLOW', true );
 include( 'check_php_inc.php' );
 
 if( !$g_failed_test ) {
+	define( 'CHECK_DATABASE_INC_ALLOW', true );
+	include( 'check_database_inc.php' );
+}
+
+if( !$g_failed_test ) {
 	define( 'CHECK_CONFIG_INC_ALLOW', true );
 	include( 'check_config_inc.php' );
 }
@@ -95,11 +100,6 @@ if( !$g_failed_test ) {
 if( !$g_failed_test ) {
 	define( 'CHECK_INTEGRITY_INC_ALLOW', true );
 	include( 'check_integrity_inc.php' );
-}
-
-if( !$g_failed_test ) {
-	define( 'CHECK_DATABASE_INC_ALLOW', true );
-	include( 'check_database_inc.php' );
 }
 
 if( !$g_failed_test ) {
