@@ -104,44 +104,37 @@ if ( $t_project_id != helper_get_current_project() ) {
 access_ensure_project_level( config_get('report_bug_threshold' ) );
 
 $t_bug_data = new BugData;
-$t_bug_data->build				= gpc_get_string( 'build', '' );
-$t_bug_data->platform				= gpc_get_string( 'platform', '' );
-$t_bug_data->os					= gpc_get_string( 'os', '' );
-$t_bug_data->os_build				= gpc_get_string( 'os_build', '' );
-$t_bug_data->version			= gpc_get_string( 'product_version', '' );
-$t_bug_data->profile_id			= gpc_get_int( 'profile_id', 0 );
-$t_bug_data->handler_id			= gpc_get_int( 'handler_id', 0 );
-$t_bug_data->view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
-
-$t_bug_data->category_id			= gpc_get_int( 'category_id', 0 );
-$t_bug_data->reproducibility		= gpc_get_int( 'reproducibility', config_get( 'default_bug_reproducibility' ) );
-$t_bug_data->severity				= gpc_get_int( 'severity', config_get( 'default_bug_severity' ) );
-$t_bug_data->priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
-$t_bug_data->projection				= gpc_get_int( 'projection', config_get( 'default_bug_projection' ) );
-$t_bug_data->eta					= gpc_get_int( 'eta', config_get( 'default_bug_eta' ) );
-$t_bug_data->resolution				= config_get( 'default_bug_resolution' );
-$t_bug_data->status					= config_get( 'bug_submit_status' );
-$t_bug_data->summary				= gpc_get_string( 'summary' );
-$t_bug_data->description			= gpc_get_string( 'description' );
-$t_bug_data->steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
-$t_bug_data->additional_information	= gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
-$t_bug_data->due_date 				= gpc_get_string( 'due_date', '');
+$t_bug_data->project_id             = $t_project_id;
+$t_bug_data->reporter_id            = auth_get_current_user_id();
+$t_bug_data->build                  = gpc_get_string( 'build', '' );
+$t_bug_data->platform               = gpc_get_string( 'platform', '' );
+$t_bug_data->os                     = gpc_get_string( 'os', '' );
+$t_bug_data->os_build               = gpc_get_string( 'os_build', '' );
+$t_bug_data->version                = gpc_get_string( 'product_version', '' );
+$t_bug_data->profile_id             = gpc_get_int( 'profile_id', 0 );
+$t_bug_data->handler_id             = gpc_get_int( 'handler_id', 0 );
+$t_bug_data->view_state             = gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
+$t_bug_data->category_id            = gpc_get_int( 'category_id', 0 );
+$t_bug_data->reproducibility        = gpc_get_int( 'reproducibility', config_get( 'default_bug_reproducibility' ) );
+$t_bug_data->severity               = gpc_get_int( 'severity', config_get( 'default_bug_severity' ) );
+$t_bug_data->priority               = gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
+$t_bug_data->projection             = gpc_get_int( 'projection', config_get( 'default_bug_projection' ) );
+$t_bug_data->eta                    = gpc_get_int( 'eta', config_get( 'default_bug_eta' ) );
+$t_bug_data->resolution             = config_get( 'default_bug_resolution' );
+$t_bug_data->status                 = config_get( 'bug_submit_status' );
+$t_bug_data->summary                = trim( gpc_get_string( 'summary' ) );
+$t_bug_data->description            = gpc_get_string( 'description' );
+$t_bug_data->steps_to_reproduce     = gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
+$t_bug_data->additional_information = gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
+$t_bug_data->due_date               = gpc_get_string( 'due_date', '');
 if ( is_blank ( $t_bug_data->due_date ) ) {
 	$t_bug_data->due_date = date_get_null();
-} else {
-	$t_bug_data->due_date = $t_bug_data->due_date;
 }
 
-$f_file					= gpc_get_file( 'file', null ); /** @todo (thraxisp) Note that this always returns a structure */
-														# size = 0, if no file
-$f_report_stay			= gpc_get_bool( 'report_stay', false );
-$f_copy_notes_from_parent         = gpc_get_bool( 'copy_notes_from_parent', false);
-$f_copy_attachments_from_parent   = gpc_get_bool( 'copy_attachments_from_parent', false);
-
-
-$t_bug_data->project_id			= $t_project_id;
-
-$t_bug_data->reporter_id		= auth_get_current_user_id();
+$f_file                             = gpc_get_file( 'file', null ); /** @todo (thraxisp) Note that this always returns a structure */
+$f_report_stay                      = gpc_get_bool( 'report_stay', false );
+$f_copy_notes_from_parent           = gpc_get_bool( 'copy_notes_from_parent', false);
+$f_copy_attachments_from_parent     = gpc_get_bool( 'copy_attachments_from_parent', false);
 
 $t_bug_data->summary			= trim( $t_bug_data->summary );
 
