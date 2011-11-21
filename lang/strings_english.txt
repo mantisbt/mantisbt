@@ -443,8 +443,11 @@ If you requested this verification, visit the following URL to change your passw
 
 	# bug_file_upload_inc.php
 	'upload_file' => 'Upload File',
+	'upload_files' => 'Upload Files',
 	'select_file' => 'Select File',
+	'select_files' => 'Select Files',
 	'upload_file_button' => 'Upload File',
+	'upload_files_button' => 'Upload Files',
 	'max_file_size' => 'Maximum size',
 	'max_file_size_label' => 'Maximum size:',
 

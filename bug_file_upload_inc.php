@@ -53,6 +53,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 
 <?php
 	collapse_open( 'upload_form' );
+	$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 ?>
 <form method="post" enctype="multipart/form-data" action="bug_file_add.php">
 <?php echo form_security_field( 'bug_file_add' ) ?>
@@ -62,12 +63,13 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	<td class="form-title" colspan="2">
 <?php
 		collapse_icon( 'upload_form' );
-		echo lang_get( 'upload_file' ) ?>
+		echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' );
+?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category" width="15%">
-		<?php echo lang_get( 'select_file' ) ?><br />
+		<?php echo lang_get( $t_file_upload_max_num == 1 ? 'select_file' : 'select_files' ) ?><br />
 		<?php //FIXME: hard coded "k" in here. ?>
 		<span class="small"><?php echo lang_get( 'max_file_size_label' ) . lang_get( 'word_separator' ) . number_format( $t_max_file_size/1000 ) ?>k</span>
 	</td>
@@ -76,7 +78,6 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 <?php
 	// Display multiple file upload fields
-	$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 	for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
 ?>
 		<input id="ufile[]" name="ufile[]" type="file" size="50" />
@@ -86,7 +87,9 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 		}
 	}
 ?>
-		<input type="submit" class="button" value="<?php echo lang_get( 'upload_file_button' ) ?>" />
+		<input type="submit" class="button"
+			value="<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file_button' : 'upload_files_button' ) ?>"
+		/>
 	</td>
 </tr>
 </table>
