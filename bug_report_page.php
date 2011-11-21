@@ -487,7 +487,7 @@
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
-			<?php echo lang_get( 'upload_file' ) ?>
+			<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
 			<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
 		</td>
 		<td>
