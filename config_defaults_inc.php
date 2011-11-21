@@ -1651,6 +1651,12 @@ $g_file_upload_ftp_pass = 'readwritepass';
 $g_max_file_size = 5000000;
 
 /**
+ * Maximum number of files that can be uploaded simultaneously
+ * @global int $g_file_upload_max_num
+ */
+$g_file_upload_max_num = 1;
+
+/**
  * Files that are allowed or not allowed.  Separate items by commas.
  * eg. 'php,html,java,exe,pl'
  * if $g_allowed_files is filled in NO other file types will be allowed.
