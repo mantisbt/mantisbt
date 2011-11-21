@@ -1568,6 +1568,12 @@
 	$g_file_upload_ftp_pass		= 'readwritepass';
 
 	/**
+	 * Maximum number of files that can be uploaded simultaneously
+	 * @global int $g_file_upload_max_num
+	 */
+	$g_file_upload_max_num = 1;
+
+	/**
 	 * Maximum file size that can be uploaded
 	 * Also check your PHP settings (default is usually 2MBs)
 	 * @global int $g_max_file_size

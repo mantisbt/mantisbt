@@ -56,7 +56,18 @@
 	<td width="85%">
 		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-		<input name="file" type="file" size="40" />
+<?php
+	// Display multiple file upload fields
+	$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
+	for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
+?>
+		<input id="ufile[]" name="ufile[]" type="file" size="50" />
+<?php
+		if( $t_file_upload_max_num > 1 ) {
+			echo '<br />';
+		}
+	}
+?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'upload_file_button' ) ?>" />
 	</td>
 </tr>
