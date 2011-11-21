@@ -131,12 +131,10 @@ if ( is_blank ( $t_bug_data->due_date ) ) {
 	$t_bug_data->due_date = date_get_null();
 }
 
-$f_file                             = gpc_get_file( 'file', null ); /** @todo (thraxisp) Note that this always returns a structure */
+$f_files                            = gpc_get_file( 'ufile', null ); /** @todo (thraxisp) Note that this always returns a structure */
 $f_report_stay                      = gpc_get_bool( 'report_stay', false );
 $f_copy_notes_from_parent           = gpc_get_bool( 'copy_notes_from_parent', false);
 $f_copy_attachments_from_parent     = gpc_get_bool( 'copy_attachments_from_parent', false);
-
-$t_bug_data->summary			= trim( $t_bug_data->summary );
 
 if ( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ) {
 	$t_bug_data->target_version = gpc_get_string( 'target_version', '' );
@@ -193,8 +191,16 @@ $t_bug_id = $t_bug_data->create();
 last_visited_issue( $t_bug_id );
 
 # Handle the file upload
-if ( !is_blank( $f_file['tmp_name'] ) && ( 0 < $f_file['size'] ) ) {
-	file_add( $t_bug_id, $f_file, 'bug' );
+for( $i = 0; $i < count( $f_files ); $i++ ) {
+	if( !empty( $f_files['name'][$i] ) ) {
+		$t_file['name']     = $f_files['name'][$i];
+		$t_file['tmp_name'] = $f_files['tmp_name'][$i];
+		$t_file['type']     = $f_files['type'][$i];
+		$t_file['error']    = $f_files['error'][$i];
+		$t_file['size']     = $f_files['size'][$i];
+
+		file_add( $t_bug_id, $t_file, 'bug' );
+	}
 }
 
 # Handle custom field submission
