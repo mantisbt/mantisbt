@@ -69,7 +69,7 @@ $t_session_validation = ( ON == config_get_global( 'session_validation' ) );
 // If user is already authenticated and not anonymous
 if( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
 	// If return URL is specified redirect to it; otherwise use default page
-	if( !is_blank( $f_return ) {
+	if( !is_blank( $f_return ) ) {
 		print_header_redirect( $f_return, false, false, true );
 	}
 	else {
