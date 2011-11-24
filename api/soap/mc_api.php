@@ -105,6 +105,8 @@ function mci_get_user_id( $p_user ) {
 		$t_user_id = (int) $p_user['id'];
 	} elseif ( isset( $p_user['name'] ) ) {
 		$t_user_id = user_get_id_by_name( $p_user['name'] );
+	} elseif ( isset( $p_user['email'] ) ) {
+		$t_user_id = user_get_id_by_email( $p_user['email'] );
 	}
 
 	return $t_user_id;
