@@ -48,7 +48,7 @@
 
 	$f_page_number = 1;
 
-	$t_per_page = 0;
+	$t_per_page = -1;
 	$t_bug_count = null;
 	$t_page_count = 0;
 
