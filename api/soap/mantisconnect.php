@@ -553,6 +553,41 @@ $l_oServer->wsdl->addComplexType(
 	'tns:CustomFieldValueForIssueData'
 );
 
+
+### TagData
+$l_oServer->wsdl->addComplexType(
+	'TagData',
+	'complexType',
+	'struct',
+	'all',
+	'',
+	array(
+			'id'			=>	array( 'name' => 'id',				'type' => 'xsd:integer', 	'minOccurs' => '0' ),
+			'user_id'		=>	array( 'name' => 'user_id',			'type' => 'tns:AccountData', 	'minOccurs' => '0' ),
+			'name'			=>	array( 'name' => 'name',			'type' => 'xsd:string', 	'minOccurs' => '0' ),
+			'description'	=>	array( 'name' => 'description',		'type' => 'xsd:string', 	'minOccurs' => '0' ),
+			'date_created'	=>	array( 'name' => 'date_created',	'type' => 'xsd:dateTime', 	'minOccurs' => '0' ),
+		    'date_updated'  =>  array( 'name' => 'date_updated',	'type' => 'xsd:dateTime', 	'minOccurs' => '0' )
+	)
+);
+
+### FilterDataArray
+$l_oServer->wsdl->addComplexType(
+	'TagDataArray',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array(
+			'ref'				=> 'SOAP-ENC:arrayType',
+			'wsdl:arrayType'	=> 'tns:TagData[]'
+		),
+		'count'			=> array ( 'name' => 'count',			'type' => 'xsd:integer',	'minOccurs' => 0)
+	),
+	'tns:FilterData'
+);
+
 ###
 ###  PUBLIC METHODS
 ###
