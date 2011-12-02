@@ -76,29 +76,19 @@ foreach ( $t_prefix_array as $t_prefix ) {
 
 echo '</tr></table>';
 
-$t_where_params = array();
-
-if ( $f_filter === 'ALL' ) {
-	$t_where = '';
-} else {
-	$t_where_params[] = $f_filter . '%';
-	$t_where = 'WHERE ' . db_helper_like( 'name' );
-}
-
 # Set the number of Tags per page.
 $t_per_page = 20;
 $t_offset = (( $f_page_number - 1 ) * $t_per_page );
 
 # Determine number of tags in tag table
-$t_total_tag_count = 0;
-$t_result = '';
-$t_query = "SELECT count(*)
-			FROM $t_tag_table
-			$t_where";
+# Retrive Tags from tag table
+if ( $f_filter === 'ALL' ) {
+	$t_name_filter = '';
+} else {
+	$t_name_filter = $f_filter;
+}
 
-$t_result = db_query_bound( $t_query, $t_where_params );
-$t_row = db_fetch_array( $t_result );
-$t_total_tag_count = (int)db_result( $t_result );
+$t_total_tag_count = tag_count($t_name_filter);
 
 #Number of pages from result
 $t_page_count = ceil( $t_total_tag_count / $t_per_page );
@@ -117,13 +107,7 @@ if ( $f_page_number < 1 ) {
 	$f_page_number = 1;
 }
 
-# Retrive Tags from tag table
-$t_query = "SELECT *
-		FROM $t_tag_table
-		$t_where ORDER BY name";
-
-$t_result = db_query_bound( $t_query, $t_where_params, $t_per_page, $t_offset );
-
+$t_tags = tag_get_all($t_name_filter, $t_per_page, $t_offset);
 ?>
 
 <br />
@@ -147,7 +131,7 @@ $t_result = db_query_bound( $t_query, $t_where_params, $t_per_page, $t_offset );
 		<td width="20%"><?php echo lang_get( 'tag_updated' ) ?></td>
 	</tr>
 <?php
-foreach ( $t_result as $t_tag_row ) {
+foreach ( $t_tags as $t_tag_row ) {
 	$t_tag_name = string_display_line( $t_tag_row['name'] );
 	$t_tag_description = string_display( $t_tag_row['description'] );
 ?>
