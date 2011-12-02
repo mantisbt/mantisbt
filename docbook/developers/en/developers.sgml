@@ -41,6 +41,7 @@
 	&events;
 	&plugins;
 	&eventref;
+	&integrators;
 
 	&appendix;
 </book>

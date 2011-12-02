@@ -1,6 +1,7 @@
 <!ENTITY contributers SYSTEM "contributers.sgml">
 <!ENTITY database SYSTEM "database.sgml">
 <!ENTITY events SYSTEM "events.sgml">
+<!ENTITY integrators SYSTEM "integrators.sgml">
 <!ENTITY plugins SYSTEM "plugins.sgml">
 <!ENTITY plugins-building SYSTEM "plugins-building.sgml">
 <!ENTITY plugins-building-source SYSTEM "plugins-building-source.sgml">
