@@ -533,27 +533,49 @@ function config_flush_cache( $p_option = '', $p_user = ALL_USERS, $p_project = A
 # Checks if an obsolete configuration variable is still in use.  If so, an error
 # will be generated and the script will exit.  This is called from admin_check.php.
 function config_obsolete( $p_var, $p_replace = '' ) {
+	global $g_cache_config;
 
 	# @@@ we could trigger a WARNING here, once we have errors that can
 	#     have extra data plugged into them (we need to give the old and
 	#     new config option names in the warning text)
 
 	if( config_is_set( $p_var ) ) {
-		$t_description = '<p><strong>Warning:</strong> The configuration option <tt>$g_' . $p_var . '</tt> is now obsolete</p>';
+		$t_description = 'The configuration option <em>' . $p_var . '</em> is now obsolete';
+		$t_info = '';
+
+		// Check if set in the database
+		if( is_array( $g_cache_config ) && array_key_exists( $p_var, $g_cache_config ) ) {
+			$t_info .= 'it is currently defined in ';
+			if( isset( $GLOBALS['g_' . $p_var] ) ) {
+				$t_info .= 'config_inc.php, as well as in ';
+			}
+			$t_info .= 'the database configuration for: <ul>';
+
+			foreach( $g_cache_config[$p_var] as $t_user_id => $t_user ) {
+				$t_info .= '<li>'
+					. (($t_user_id == 0)? lang_get('all_users') : user_get_name( $t_user_id ))
+					. ': ';
+				foreach ( $t_user as $t_project_id => $t_project ) {
+					$t_info .= project_get_name( $t_project_id ) . ', ';
+				}
+				$t_info = rtrim( $t_info, ', ') . '</li>';
+			}
+			$t_info .= '</ul>';
+		}
+
+		// Replacement defined
 		if( is_array( $p_replace ) ) {
-			$t_info = 'please see the following options: <ul>';
+			$t_info .= 'please see the following options: <ul>';
 			foreach( $p_replace as $t_option ) {
-				$t_info .= '<li>$g_' . $t_option . '</li>';
+				$t_info .= '<li>' . $t_option . '</li>';
 			}
 			$t_info .= '</ul>';
 		}
 		else if( !is_blank( $p_replace ) ) {
-			$t_info = 'please use <tt>$g_' . $p_replace . '</tt> instead.';
-		} else {
-			$t_info = '';
+			$t_info .= 'please use ' . $p_replace . ' instead.';
 		}
 
-		print_test_warn_row( $t_description, false, $t_info );
+		check_print_test_warn_row( $t_description, false, $t_info );
 	}
 }
 

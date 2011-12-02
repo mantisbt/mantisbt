@@ -48,3 +48,5 @@ check_print_test_warn_row( 'Check whether log output is sent to end user',
 	!($g_log_destination == 'firebug' || $g_log_destination == 'page'),
 	array( false => 'Diagnostic output destination is currently sent to end users browser' )
 );
+
+require_api( 'obsolete.php' );

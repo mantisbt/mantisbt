@@ -1136,7 +1136,7 @@ function bug_delete( $p_bug_id ) {
 	bugnote_delete_all( $p_bug_id );
 
 	# Delete all sponsorships
-	sponsorship_delete( sponsorship_get_all_ids( $p_bug_id ) );
+	sponsorship_delete_all( $p_bug_id );
 
 	# MASC RELATIONSHIP
 	# we delete relationships even if the feature is currently off.

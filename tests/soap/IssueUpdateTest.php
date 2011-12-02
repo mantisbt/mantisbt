@@ -1,5 +1,5 @@
 <?php
-# MantisBT - a php based bugtracking system
+# MantisBT - A PHP based bugtracking system
 
 # MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ class IssueUpdateTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$createdIssue = $this->client->mc_issue_get(
@@ -51,7 +51,7 @@ class IssueUpdateTest extends SoapBase {
 
 		$t_summary_update = $issueToAdd['summary'] . ' - updated';
 
-		$issueToUpdate = $createdIssue;	
+		$issueToUpdate = $createdIssue;
 		$issueToUpdate->summary = $t_summary_update;
 
 		$this->client->mc_issue_update(
@@ -108,7 +108,7 @@ class IssueUpdateTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$issueToUpdate = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateSummaryBasedOnMandatoryFields' );
@@ -169,7 +169,7 @@ class IssueUpdateTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$createdIssue = $this->client->mc_issue_get(
@@ -199,12 +199,12 @@ class IssueUpdateTest extends SoapBase {
 			$this->password,
 			$issueId,
 			$issueWithNote);
-			
+
 		$issueWithNoteAfterUpdate = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
 			$issueId);
-			
+
 		$this->assertEquals( 1, count( $issueWithNoteAfterUpdate->notes ) );
 
 		$issueWithOneNewNote = $issueWithNoteAfterUpdate;
@@ -230,7 +230,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 'attr_value', $newNote->note_attr );
 		
 	}
-	
+
 	/**
 	 * This issue tests the following:
 	 * 1. Retrieving all the administrator users, and verifying only one is present
@@ -242,7 +242,7 @@ class IssueUpdateTest extends SoapBase {
 	 */
 	public function testUpdateIssueWithHandler() {
 
-		$adminUsers = $this->client->mc_project_get_users($this->userName, $this->password, $this->getProjectId(), 90); 
+		$adminUsers = $this->client->mc_project_get_users($this->userName, $this->password, $this->getProjectId(), 90);
 
 		$this->assertTrue(count($adminUsers) >= 1 , "count(adminUsers) >= 1");
 
@@ -254,7 +254,7 @@ class IssueUpdateTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$issue = $this->client->mc_issue_get(
@@ -263,13 +263,13 @@ class IssueUpdateTest extends SoapBase {
 			$issueId);
 
 		$issue->handler = $adminUser;
-		
+
 		$this->client->mc_issue_update(
 			$this->userName,
 			$this->password,
 			$issueId,
 			$issue);
-		
+
 		$updatedIssue = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
@@ -277,10 +277,10 @@ class IssueUpdateTest extends SoapBase {
 
 		$this->assertEquals( $adminUser->id, $updatedIssue->handler->id, 'handler.id' );
 	}
-	
+
 	/**
 	 * This issue tests the following
-	 * 
+	 *
 	 * 1. Creating an issue
 	 * 2. Retrieving the issue
 	 * 3. Updating the issue with a new date
@@ -289,7 +289,7 @@ class IssueUpdateTest extends SoapBase {
 	 */
 	public function testUpdateIssueDueDate() {
 		$this->skipIfDueDateIsNotEnabled();
-		
+
 		$date = '2015-10-29T12:59:14+00:00';
 
 		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateIssueDueDate' );
@@ -298,22 +298,22 @@ class IssueUpdateTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$issue = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
 			$issueId);
-			
+
 		$issue->due_date = $date;
-		
+
 		$this->client->mc_issue_update(
 			$this->userName,
 			$this->password,
 			$issueId,
 			$issue);
-		
+
 		$updatedIssue = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
@@ -321,10 +321,10 @@ class IssueUpdateTest extends SoapBase {
 
 		$this->assertEquals( $date, $updatedIssue->due_date, "due_date");
 	}
-	
+
 	/**
 	 * This issue tests the following
-	 * 
+	 *
 	 * 1. Creating an issue with no category
 	 * 2. Updating the issue to unset the category
 	 * 3. Retrieving the issue
@@ -332,38 +332,38 @@ class IssueUpdateTest extends SoapBase {
 	 */
 	public function testUpdateBugWithNoCategory() {
 		$this->skipIfAllowNoCategoryIsDisabled();
-		
+
 		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateBugWithNoCategory' );
-		
+
         $issueId = $this->client->mc_issue_add(
 			$this->userName,
             $this->password,
             $issueToAdd);
-		
-		$this->deleteAfterRun( $issueId );	
-		
+
+		$this->deleteAfterRun( $issueId );
+
 		$issueToUpdate = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
 			$issueId);
-			
+
 		unset ( $issueToUpdate->category );
-		
+
 		$this->client->mc_issue_update(
 			$this->userName,
 			$this->password,
 			$issueId,
 			$issueToUpdate);
-			
+
 		$issue = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
 			$issueId);
-			
+
 		$this->assertEquals( '', $issue->category, 'category' );
 	}
-	
-	/*		
+
+	/*
 	 * This test case tests the following:
 	 * 1. Creation of an issue.
 	 * 2. Updating the issue with a time tracking note
@@ -371,47 +371,47 @@ class IssueUpdateTest extends SoapBase {
 	 * 4. Deleting the issue.
 	 */
 	public function testUpdateWithTimeTrackingNote() {
-		
+
 		$this->skipIfTimeTrackingIsNotEnabled();
-		
+
 		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithTimeTrackingNote' );
 
 		$issueId = $this->client->mc_issue_add(
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$issue = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
 			$issueId);
-			
+
 		$issue->notes = array(
-			array (	
+			array (
 				'text' => "first note",
 				'time_tracking' => "30"
 			)
 		);
-		
+
  		$this->client->mc_issue_update(
 			$this->userName,
 			$this->password,
 			$issueId,
-			$issue);		
+			$issue);
 
-		$issueWithNote = $this->client->mc_issue_get(	
+		$issueWithNote = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
 			$issueId);
-		
+
 		$this->assertEquals( 1, count( $issueWithNote->notes ) );
-		
+
 		$this->assertEquals( 30, $issueWithNote->notes[0]->time_tracking);
 	}
-	
-	/*		
+
+	/*
 	 * This test case tests the following:
 	 * 1. Creation of an issue.
 	 * 2. Updating the issue with rare fields
@@ -420,42 +420,42 @@ class IssueUpdateTest extends SoapBase {
 	 * 5. Deleting the issue.
 	 */
 	public function testUpdateWithRareFields() {
-		
+
 		$this->skipIfTimeTrackingIsNotEnabled();
-		
+
 		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithRareFields' );
 
 		$issueId = $this->client->mc_issue_add(
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$issue = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
 			$issueId);
-			
+
 		$issue->build = 'build';
 		$issue->platform = 'platform';
 		$issue->os_build = 'os_build';
 		$issue->os = 'os';
-		
+
  		$this->client->mc_issue_update(
 			$this->userName,
 			$this->password,
 			$issueId,
-			$issue);		
+			$issue);
 
-		$retrievedIssue = $this->client->mc_issue_get(	
+		$retrievedIssue = $this->client->mc_issue_get(
 			$this->userName,
 			$this->password,
 			$issueId);
-		
+
 		$this->assertEquals( 'build', $retrievedIssue->build );
 		$this->assertEquals( 'platform', $retrievedIssue->platform );
 		$this->assertEquals( 'os', $retrievedIssue->os );
 		$this->assertEquals( 'os_build', $retrievedIssue->os_build);
-	}	
+	}
 }
