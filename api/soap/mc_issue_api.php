@@ -820,6 +820,13 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	    mci_issue_set_monitors( $p_issue_id , $t_user_id, $p_issue['monitors'] );
 
 	if ( isset( $p_issue['notes'] ) && is_array( $p_issue['notes'] ) ) {
+
+		$t_bugnotes = bugnote_get_all_visible_bugnotes( $p_issue_id, 'DESC', 0 );
+		$t_bugnotes_by_id = array();
+		foreach ( $t_bugnotes as $t_bugnote ) {
+			$t_bugnotes_by_id[$t_bugnote->id] = $t_bugnote;
+		}
+
 		foreach ( $p_issue['notes'] as $t_note ) {
 			if ( isset( $t_note['view_state'] ) ) {
 				$t_view_state = $t_note['view_state'];
@@ -829,15 +836,32 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 
 			if ( isset( $t_note['id'] ) && ( (int)$t_note['id'] > 0 ) ) {
 				$t_bugnote_id = (integer)$t_note['id'];
-				
+
 				$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
 
-				if ( bugnote_exists( $t_bugnote_id ) ) {
-					bugnote_set_text( $t_bugnote_id, $t_note['text'] );
-					bugnote_set_view_state( $t_bugnote_id, $t_view_state_id == VS_PRIVATE );
-					bugnote_date_update( $t_bugnote_id );
-					if ( isset( $t_note['time_tracking'] ) )
+				if ( array_key_exists( $t_bugnote_id , $t_bugnotes_by_id) ) {
+
+					$t_bugnote_changed = false;
+
+					if ( $t_bugnote->note !== $t_note['text']) {
+						bugnote_set_text( $t_bugnote_id, $t_note['text'] );
+						$t_bugnote_changed = true;
+					}
+
+					if ( $t_bugnote->view_state !== $t_view_state_id ) {
+						bugnote_set_view_state( $t_bugnote_id, $t_view_state_id == VS_PRIVATE );
+						$t_bugnote_changed = true;
+					}
+
+					if ( isset( $t_note['time_tracking']) && $t_note['time_tracking'] !== $t_bugnote->time_tracking ) {
 						bugnote_set_time_tracking( $t_bugnote_id, mci_get_time_tracking_from_note( $p_issue_id, $t_note ) );
+						$t_bugnote_changed = true;
+					}
+
+					if ( $t_bugnote_changed ) {
+						bugnote_date_update( $t_bugnote_id );
+					}
+
 				}
 			} else {
 				$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
