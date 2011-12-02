@@ -347,6 +347,23 @@ function sponsorship_set( $p_sponsorship ) {
 }
 
 /**
+ * delete all sponsorships of a bug
+ * @param int $p_bug_id
+ * @return null
+ */
+function sponsorship_delete_all( $p_bug_id ) {
+	$c_bug_id = db_prepare_int( $p_bug_id );
+
+	$t_sponsorship_table = db_get_table( 'mantis_sponsorship_table' );
+
+	$query = "DELETE FROM $t_sponsorship_table
+				  WHERE bug_id=" . db_param();
+	db_query_bound( $query, $c_bug_id );
+
+	sponsorship_clear_cache();
+}
+
+/**
  * delete a sponsorship given its id
  * id can be an array of ids or just an id.
  * @param int $p_sponsorship_id
