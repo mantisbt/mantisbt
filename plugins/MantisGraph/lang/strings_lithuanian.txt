@@ -25,10 +25,12 @@
  * @ingroup Language
  * @file
  *
+ * @author Cyklopas
  * @author Eitvys200
  */
 
 $s_plugin_MantisGraph_config = 'Konfigūracija';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Grafikas';
 $s_plugin_MantisGraph_font = 'Šriftas';
 $s_plugin_MantisGraph_enabled = 'Įjungti';
 $s_plugin_MantisGraph_disabled = 'Išjungti';

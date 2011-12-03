@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Dregad
  * @author Helix84
  * @author Lubos Magat <lubos@magat.sk>
  * @author Rudko
@@ -917,7 +918,7 @@ $s_search = 'Hľadať';
 $s_view_prev_link = 'Predchádzajúci';
 $s_view_next_link = 'Následujúci';
 $s_prev = 'Predchádzajúci';
-$s_next = 'Nalsedujúci';
+$s_next = 'Nasledujúci';
 $s_first = 'Prvý';
 $s_last = 'Posledný';
 $s_start_date = 'Počiatočný dátum';

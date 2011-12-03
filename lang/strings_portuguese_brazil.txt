@@ -34,6 +34,7 @@
  * @author Jefersonfoliveira
  * @author Juliano F. Ravasi, dev at juliano info
  * @author Luckas Blade
+ * @author Pedroca cerebral
  */
 
 $s_actiongroup_menu_move = 'Mover';
@@ -1058,6 +1059,9 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ATENÇÃO</b>. Nem to
 $s_create_child_bug_button = 'Criar Clone';
 $s_bug_cloned_to = 'Caso clonado';
 $s_bug_created_from = 'Caso gerado à partir de';
+$s_copy_from_parent = 'Copiar os dados adicionais do problema principal';
+$s_copy_notes_from_parent = 'Copiar notas de bug';
+$s_copy_attachments_from_parent = 'Copiar anexos';
 $s_viewing_bug_relationship_graph_title = 'Gráfico de Relacionamentos';
 $s_viewing_bug_dependency_graph_title = 'Gráfico de Dependências';
 $s_relation_graph = 'Gráfico de Relações';
@@ -1169,7 +1173,7 @@ $s_tag_related_issues = 'Casos compartilhados (%1$s)';
 $s_tag_stats_attached = 'Casos relacionados: %1$s';
 $s_tag_create = 'Criar Marcador';
 $s_show_all_tags = 'TODAS';
-$s_time_tracking_billing_link = 'Fatura';
+$s_time_tracking_billing_link = 'Acompanhamento de Tempo';
 $s_time_tracking = 'Acompanhamento de tempo';
 $s_time_tracking_time_spent = 'Tempo gasto:';
 $s_time_tracking_get_info_button = 'Obter informações de acompanhamento de tempo';

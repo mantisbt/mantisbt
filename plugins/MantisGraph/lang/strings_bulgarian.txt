@@ -26,11 +26,33 @@
  * @file
  *
  * @author DCLXVI
+ * @author Emostoyanov
  */
 
+$s_plugin_graph_title = 'MantisBT - Графики';
+$s_plugin_graph_description = 'Официален плъгин за графики.';
+$s_plugin_MantisGraph_title = 'MantisBT - Графики';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Разширено резюме';
 $s_plugin_MantisGraph_config = 'Конфигурация';
+$s_plugin_MantisGraph_synthesis_link = 'Синтез';
+$s_plugin_MantisGraph_status_link = 'По статус';
+$s_plugin_MantisGraph_priority_link = 'По приоритет';
+$s_plugin_MantisGraph_severity_link = 'По тежест';
+$s_plugin_MantisGraph_category_link = 'По категория';
+$s_plugin_MantisGraph_resolution_link = 'По резолюция';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Граф';
 $s_plugin_MantisGraph_library = 'Граф библиотека за използване';
+$s_plugin_MantisGraph_bundled = 'Пакетиран';
+$s_plugin_MantisGraph_window_width = 'Ширина на графика (в пиксели)';
+$s_plugin_MantisGraph_bar_aspect = 'Пропорции на лентата на графиката (височина/ширина)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Брой графики на един ред, показвани на страницата за разширено резюме';
+$s_plugin_MantisGraph_font = 'Шрифт';
+$s_plugin_MantisGraph_jpgraph_path = 'Системен път на библиотеката за графики JpGraph';
+$s_plugin_MantisGraph_jpgraph_path_default = 'Оставете празно по подразбиране: {mantisroot}/library/jpgraph';
+$s_plugin_MantisGraph_jpgraph_antialias = 'Заглаждане (Anti-Aliasing) в библиотеката JpGraph';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'Заглаждането (Anti-Aliasing) подобрява изгледа на графиките за сметка на производителността (до 8x бавно генериране)';
+$s_plugin_MantisGraph_enabled = 'Вкл.';
+$s_plugin_MantisGraph_disabled = 'Изкл.';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Синтетична диаграма по статут';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Синтетична диаграма по приоритет';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Синтетична диаграма по значимост';
@@ -46,7 +68,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'По приоритет и Статут
 $s_plugin_MantisGraph_by_resolution_mix = 'По резолюция и статут';
 $s_plugin_MantisGraph_legend_still_open = 'Все още отворен';
 $s_plugin_MantisGraph_legend_resolved = 'Решен';
-$s_plugin_MantisGraph_legend_assigned = 'Назначен';
+$s_plugin_MantisGraph_legend_assigned = 'Възложен';
 $s_plugin_MantisGraph_legend_total = 'Общо';
 $s_plugin_MantisGraph_legend_opened = 'Отворен';
 $s_plugin_MantisGraph_legend_closed = 'Приключен';
@@ -58,8 +80,11 @@ $s_plugin_MantisGraph_period_this_week = 'Тази седмица';
 $s_plugin_MantisGraph_period_last_week = 'Последната седмица';
 $s_plugin_MantisGraph_period_two_weeks = 'Последните две седмици';
 $s_plugin_MantisGraph_period_this_month = 'Този месец';
+$s_plugin_MantisGraph_period_last_month = 'Последния месец';
 $s_plugin_MantisGraph_period_this_quarter = 'Това тримесечие';
 $s_plugin_MantisGraph_period_last_quarter = 'Последното тримесечие';
+$s_plugin_MantisGraph_period_year_to_date = 'Година до дата';
+$s_plugin_MantisGraph_period_select = 'Произволни дати';
 $s_plugin_MantisGraph_period_last_year = 'Последната година';
 $s_plugin_MantisGraph_select = 'Избиране';
 $s_plugin_MantisGraph_select_bystatus = 'по статут';
@@ -69,3 +94,4 @@ $s_plugin_MantisGraph_select_both = 'Резюме по статут и кате�
 $s_plugin_MantisGraph_show_as_graph = 'Показване като графика';
 $s_plugin_MantisGraph_show_as_table = 'Показване като таблица';
 $s_plugin_MantisGraph_show_graph = 'Показване на графиката';
+$s_plugin_MantisGraph_graph_page = 'Хронология на графиките';

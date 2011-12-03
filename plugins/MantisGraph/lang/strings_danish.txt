@@ -1,0 +1,60 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2011  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Danish (Dansk)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Tjernobyl
+ */
+
+$s_plugin_MantisGraph_graph_imp_status_title = 'Sammenfattende grafik efter status';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Sammenfattende grafik efter prioritering';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Sammenfattende grafik efter alvorlighed';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Sammenfattende grafik efter kategori';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Sammenfattende grafik efter løsning';
+$s_plugin_MantisGraph_by_status_pct = 'efter status i procent';
+$s_plugin_MantisGraph_by_priority_pct = 'efter prioritering i procent';
+$s_plugin_MantisGraph_by_severity_pct = 'efter alvorlighed i procent';
+$s_plugin_MantisGraph_by_category_pct = 'efter kategori i procent';
+$s_plugin_MantisGraph_by_resolution_pct = 'efter løsning i procent';
+$s_plugin_MantisGraph_by_severity_mix = 'efter alvorlighed og status';
+$s_plugin_MantisGraph_by_priority_mix = 'efter prioritering og status';
+$s_plugin_MantisGraph_by_resolution_mix = 'efter løsning og status';
+$s_plugin_MantisGraph_legend_still_open = 'Stadig åben';
+$s_plugin_MantisGraph_legend_resolved = 'Løst';
+$s_plugin_MantisGraph_legend_assigned = 'Tildelt';
+$s_plugin_MantisGraph_legend_opened = 'Åben';
+$s_plugin_MantisGraph_legend_closed = 'Lukket';
+$s_plugin_MantisGraph_legend_reported = 'Raporteret';
+$s_plugin_MantisGraph_cumulative = 'Kumulativ';
+$s_plugin_MantisGraph_not_enough_data = 'Ikke data nok til at lave graf';
+$s_plugin_MantisGraph_period_last_week = 'Sidste uge';
+$s_plugin_MantisGraph_period_two_weeks = 'Sidste to uger';
+$s_plugin_MantisGraph_period_this_month = 'Denne måned';
+$s_plugin_MantisGraph_period_last_month = 'Sidste måned';
+$s_plugin_MantisGraph_period_this_quarter = 'Dette kvartal';
+$s_plugin_MantisGraph_period_last_quarter = 'Sidste kvartal';
+$s_plugin_MantisGraph_period_last_year = 'Sidste år';
+$s_plugin_MantisGraph_select = 'Vælg venligst';
+$s_plugin_MantisGraph_select_bystatus = 'efter status';

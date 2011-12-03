@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Khutuck
  * @author Korayal
  */
 
@@ -39,6 +40,7 @@ $s_plugin_XmlImportExport_default_strategy = 'Varsayılan dönüştürme stratej
 $s_plugin_XmlImportExport_renumber = 'Yeniden Numaralandır';
 $s_plugin_XmlImportExport_renumber_desc = 'Referansları Numaralandırmaya dönüştürmeyi dene';
 $s_plugin_XmlImportExport_link = 'Bağlantı';
+$s_plugin_XmlImportExport_link_desc = 'Orijinal nesneye bir bağlantıya dönüştür';
 $s_plugin_XmlImportExport_disable = 'Devre dışı bırak';
 $s_plugin_XmlImportExport_disable_desc = 'Bağlantıyı devre dışı bırak';
 $s_plugin_XmlImportExport_fallback = 'Dönüş stratejisi ("Yeniden Numaralandırma" uygulanamadığında)';

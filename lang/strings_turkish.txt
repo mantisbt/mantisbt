@@ -27,6 +27,7 @@
  *
  * @author Emperyan
  * @author Karduelis
+ * @author Khutuck
  * @author Korayal
  * @author Oktay Altunergil - oktay@bellatlantic.net
  */
@@ -429,7 +430,9 @@ $s_no_own_sponsored = 'Her hangi bir sorun üstlenmediniz.';
 $s_sponsor = 'Üstlenen';
 $s_sponsor_verb = 'Üstlenen';
 $s_amount = 'Miktar';
+$s_total_owing = 'Toplam Borç';
 $s_total_paid = 'Toplam Ödenen';
+$s_sponsor_hide = 'Çözülen ve Ödeneni Gizle';
 $s_sponsor_show = 'Hepsini göster';
 $s_payment_updated = 'Ödeme bilgilerini güncellendi.';
 $s_account_updated_msg = 'Hesabınız başarıyla güncellendi...';
@@ -640,6 +643,7 @@ $s_status_level = 'Durum';
 $s_alter_level = 'Bu değeri kim değiştirebilir';
 $s_validation = 'İş İlerleyişi Doğrulama';
 $s_comment = 'Doğrulama Yorumu';
+$s_superfluous = 'Kendisine dönüş ima edilmiş, özellikle belirtilmesine gerek yok.';
 $s_unreachable = 'Bu durumun içine bir sorun taşıyamazsınız';
 $s_no_exit = 'Bu durumun dışına bir sorun taşıyamazsınız';
 $s_access_levels = 'Erişim Seviyeleri';
@@ -662,6 +666,8 @@ $s_submit_status = 'Yeni sorun için yeni bir durum ayarla';
 $s_assigned_status = 'Otomatik ataması yapılacak sorunların durumu';
 $s_resolved_status = 'Çözümlenmiş olarak ayarlanan sorunun durumu';
 $s_readonly_status = 'Sadece okunabilir olan sorun durumu';
+$s_reopen_status = 'Yeniden açılan konunun durumu ayarlandı';
+$s_reopen_resolution = 'Yeniden açılan konunun çözümü ayarlandı';
 $s_config_delete_sure = 'Bunun ayarları silmek istediğinizden emin misiniz?  :';
 $s_in_project = 'Projede';
 $s_delete_config_button = 'Ayarları Sil';
@@ -955,6 +961,7 @@ $s_reopen_bug_button = 'Yeniden Aç';
 $s_move_bug_button = 'Taşı';
 $s_attached_files = 'Eklenen Dosyalar';
 $s_publish = 'Yayınla';
+$s_cached = 'Önbelleğe alındı';
 $s_add_user_to_monitor = 'Ekle';
 $s_bug_view_title = 'Sorun Detaylarını Görüntüle';
 $s_no_users_monitoring_bug = 'Bu sorunu izleyen her hangi bir kullanıcı yok.';
@@ -1020,6 +1027,7 @@ $s_sponsors = '%1$d üstlenen(ler)';
 $s_sponsorship_added = 'Üstlenme Eklendi';
 $s_sponsorship_updated = 'Üstlenme Güncellendi';
 $s_sponsorship_deleted = 'Üstlenme Silindi';
+$s_sponsorship_paid = 'Sponsorluk ödendi';
 $s_sponsorship_more_info = 'Üstlenme hakkında daha fazla bilgi';
 $s_sponsorship_total = 'Toplam Üstlenme';
 $s_changelog = 'Değişiklik Kütüğü';
@@ -1046,6 +1054,9 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>Dikkat:</b> Bu sorunu
 $s_create_child_bug_button = 'Klonla';
 $s_bug_cloned_to = 'Sorun klonlanmış';
 $s_bug_created_from = 'Sorunu oluşturan:';
+$s_copy_from_parent = 'Ana konudan genişletilmiş bilgi kopyala';
+$s_copy_notes_from_parent = 'Hata notları kopyala';
+$s_copy_attachments_from_parent = 'Ekleri kopyala';
 $s_viewing_bug_relationship_graph_title = 'İlişki Grafiği';
 $s_viewing_bug_dependency_graph_title = 'Bağımlılık Grafiği';
 $s_relation_graph = 'İlişki Grafiği';
@@ -1159,6 +1170,7 @@ $s_tag_create = 'Etiket Oluştur';
 $s_show_all_tags = 'Hepsi';
 $s_time_tracking_billing_link = 'Zaman İzleme';
 $s_time_tracking = 'Zaman izleme';
+$s_time_tracking_time_spent = 'Harcanan süre:';
 $s_time_tracking_get_info_button = 'Zaman İzleme Bilgisini Al';
 $s_time_tracking_cost_per_hour = 'Maliyet / Saat';
 $s_time_tracking_cost = 'Maliyet';

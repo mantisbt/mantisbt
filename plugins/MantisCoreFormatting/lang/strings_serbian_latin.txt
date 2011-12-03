@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-/** Bulgarian (Български)
+/** Serbian (Latin script) (‪Srpski (latinica)‬)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -25,18 +25,16 @@
  * @ingroup Language
  * @file
  *
- * @author Asya
- * @author DCLXVI
- * @author Emostoyanov
+ * @author Rancher
  */
 
-$s_plugin_format_title = 'Форматиране в MantisBT';
-$s_plugin_format_description = 'Официален плъгин за обработка и форматиране на текст.';
-$s_plugin_format_config = 'Конфигурация';
-$s_plugin_format_process_text = 'Обработка на текст';
-$s_plugin_format_process_text_warning_notice = 'Не изключвайте освен ако наистина знаете какво точно правите. В изключено състояние са възможни cross site scripting (XSS) атаки.';
-$s_plugin_format_process_urls = 'Обработка на URL';
-$s_plugin_format_process_buglinks = 'Връзки в MantisBT  ( проблем/бележка )';
-$s_plugin_format_process_vcslinks = 'VCS връзки';
-$s_plugin_format_enabled = 'Вкл.';
-$s_plugin_format_disabled = 'Изкл.';
+$s_plugin_format_title = 'Oblikovanje za MantisBT';
+$s_plugin_format_description = 'Zvanični dodatak za obradu i oblikovanje teksta.';
+$s_plugin_format_config = 'Podešavanje';
+$s_plugin_format_process_text = 'Obrada teksta';
+$s_plugin_format_process_text_warning_notice = 'Ne isključujte ako niste sigurni šta radite. U isključenom stanju, mogući su međumesni napadi (XSS) na mrežnom mestu.';
+$s_plugin_format_process_urls = 'Obrada adresa';
+$s_plugin_format_process_buglinks = 'MantisBT veze (zadaci/komentari)';
+$s_plugin_format_process_vcslinks = 'Veze VCS';
+$s_plugin_format_enabled = 'Uključeno';
+$s_plugin_format_disabled = 'Isključeno';

@@ -28,6 +28,7 @@
  * @author Woytecr
  */
 
+$s_plugin_graph_title = 'Wykresy Mantis';
 $s_plugin_MantisGraph_config = 'Konfiguracja';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Wykres';
 $s_plugin_MantisGraph_window_width = 'Szerokość wykresu (w pikselach)';

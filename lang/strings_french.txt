@@ -49,6 +49,7 @@
  * @author Réda Bourebaba, bzctoons@free.fr
  * @author Samuel Tardieu, sam@rfc1149.net
  * @author Sherbrooke
+ * @author Urhixidur
  * @author Verdy p
  * @author Vincent
  * @author Zetud
@@ -1007,7 +1008,7 @@ $s_custom_field_project_count = 'Nombre de projets';
 $s_custom_field_type = 'Type';
 $s_custom_field_possible_values = 'Valeurs possibles';
 $s_custom_field_default_value = 'Valeur par défaut';
-$s_custom_field_valid_regexp = 'Expression régulière';
+$s_custom_field_valid_regexp = 'Expression rationnelle';
 $s_custom_field_access_level_r = 'Accès en lecture';
 $s_custom_field_access_level_rw = 'Accès en écriture';
 $s_custom_field_length_min = 'Taille min.';

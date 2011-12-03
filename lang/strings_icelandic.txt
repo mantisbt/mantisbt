@@ -26,6 +26,7 @@
  * @file
  *
  * @author Gretar Einarsson, gretar@vedur.is
+ * @author Snævar
  */
 
 $s_actiongroup_menu_move = 'Færa';
@@ -151,7 +152,7 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Stillingar möguleiki \'%1$s\' fann
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Ekki er hægt að breyta stillingar möguleikanum \'%1$s\' í gagnagrunninum. Það verður að breyta honum í config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Strengur \'%1$s\' fannst ekki.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Athugasemd fannst ekki.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Verkefni fannst ekki.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Verkefniið "%1$d" fannst ekki.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Gagnagrunns svæðið \'%1$s\' fannst ekki.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Get ekki tengst FTP þjóni.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Sá sem fer með verkbeiðnina hefur ekki nægilegan aðgang til þess að meðhöndla það á þessu stigi.';
@@ -178,7 +179,7 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Þú getur ekki sett inn beiðni sem 
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Sérsniðið svæði finnst ekki';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Þetta er nafn afrits.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Að minnsta kosti eitt verkefni notar þetta svæði.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Óleyfileg gildi fyrir þetta svæði';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Óleyfileg gildi fyrir þetta svæðið "%1$s".';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Sérsniðin svæðisskilgreining er ógilt';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP staðfesting mistókst.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP tenging þjóns mistókst.';
@@ -211,7 +212,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Hámarksf
 $s_login_error = 'Aðgangi þínum hefur hugsanlega verið lokað eða hindraður eða notendanafn/lykilorð sem þú notar er rangt.';
 $s_login_cookies_disabled = 'Vafrarinn þinn veit hugsanlega ekki hvernig á að höndla kökur (cookies), eða neitar að taka við þeim.';
 $s_go_back = 'Farðu til baka';
-$s_proceed = 'Smelltu hér til að halda áfram';
+$s_proceed = 'Halda áfram';
 $s_switch = 'Skipta';
 $s_logged_in_as = 'Skráður inn sem';
 $s_prefix_for_deleted_users = 'notandi';
@@ -431,7 +432,7 @@ $s_closed_bug_button = 'Loka verkbeiðni';
 $s_bugnote_updated_msg = 'Athugasemdin hefur verið uppfærð...';
 $s_edited_on = 'leiðrétting á:';
 $s_show_content = 'Sýna innihald';
-$s_click_to_login = 'Ýtið hér til innskráningar';
+$s_click_to_login = 'Innskrá';
 $s_login_page_info = 'Velkomin í verkbeiðnakerfið.';
 $s_login_title = 'Innskráning';
 $s_save_login = 'Vista innskráningu';
@@ -544,7 +545,7 @@ $s_delete_config_sure_msg = 'Ertu viss um að vilja eyða þessum stillingar mö
 $s_project_added_msg = 'Verkefninu hefur verið bætt við...';
 $s_category_added_msg = 'Verkþættinum hefur verið bætt við...';
 $s_category_deleted_msg = 'Verkþættinum hefur verið eytt...';
-$s_category_delete_sure_msg = 'Ertu viss um að þú viljir eyða þessum verkþætti?';
+$s_category_delete_sure_msg = 'Ertu viss um að þú viljir eyða þessum verkþætti?<br />Verkþátturinn "%1$s" inniheldur %2$d villur.';
 $s_delete_category_button = 'Eyða verkþætti';
 $s_edit_project_category_title = 'Skrifa verkþátt';
 $s_update_category_button = 'Uppfæra verkþátt';

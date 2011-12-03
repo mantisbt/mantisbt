@@ -28,6 +28,7 @@
  * @author Avjoska
  * @author Klemens Kasemaa, Elion Ettevõtted AS, klem (at) estpak.ee (27.01.2005)
  * @author Pikne
+ * @author Suwa
  * @author Villem Vannas, willu60 (at) hotmail.com (14.09.2004)
  * @author Willux
  */
@@ -764,7 +765,7 @@ $s_reset_password_button = 'Taasta parooli algseade';
 $s_delete_user_button = 'Kustuta kasutaja';
 $s_reset_password_msg = 'Taasta parool saadab kinnituse URL-i e-posti teel.';
 $s_reset_password_msg2 = 'Parooli algseade taastamine annab kasutajale tühja parooli.';
-$s_show_all_users = 'KõIK';
+$s_show_all_users = 'Kõik';
 $s_users_unused = 'Pole kasutuses';
 $s_users_new = 'Uus';
 $s_account_reset_protected_msg = 'Kasutajatunnus kaitstud. Parooli algseade taastamine pole võimalik.';
@@ -1160,6 +1161,7 @@ $s_time_tracking_get_info_button = 'Anna ajajälgimise informatsioon';
 $s_time_tracking_cost_per_hour = 'Hind / tund';
 $s_time_tracking_cost = 'Hind';
 $s_total_time_for_issue = 'Kokku aega kandele = %1$s';
+$s_time_tracking_stopwatch_reset = 'Lähtesta';
 $s_access_denied = 'Pöördumine keelatud.';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (lahendatdu %4$s poolt %5$s)';
 $s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (lahendatud %4$s)';

@@ -27,10 +27,12 @@
  *
  * @author Attila Vági, avagi@v-comp.hu
  * @author CSÉCSY László, boobaa@nospam.frugalware.org (complete retranslation)
+ * @author Dj
  * @author Gergő Bácskai, gergo@bacskai.hu
  * @author Glanthor Reviol
  * @author Istvan Back, back@webmuves.hu
  * @author Leiric
+ * @author Sucy
  */
 
 $s_actiongroup_menu_move = 'Mozgatás';
@@ -833,6 +835,7 @@ $s_project_document_updated = 'Projekt sikeresen frissítve';
 $s_project_user_added_msg = 'Felhasználó sikeresen hozzáadva a projekthez';
 $s_project_removed_user_msg = 'Felhasználó sikeresen törölve a projektből';
 $s_remove_user_sure_msg = 'Valóban törölni akarja ezt a felhasználót?';
+$s_remove_user_from_project_button = 'Felhasználó eltávolítása a(z) %s projektből';
 $s_remove_all_users_sure_msg = 'Valóban törölni akarja ezen projekt összes felhasználóját?';
 $s_remove_all_users_button = 'Minden felhasználó törlése';
 $s_add_user_title = 'Felhasználó hozzáadása projekthez';
@@ -1005,7 +1008,7 @@ $s_custom_field_type_enum_string = '0:Sztring,1:Numerikus,2:Lebegőpontos,3:Fels
 $s_confirm_used_custom_field_deletion = 'Ez a mező jelenleg legalább egy projekthez csatlakozik. Ha folytatja, a hozzá tartozó összes érték menthetetlenül elveszik. Ez a művelet nem visszavonható. Ha mégsem akarja törölni ezt a mezőt, nyomja meg a böngészője Vissza gombját. A törléshez nyomja meg az alábbi gombot';
 $s_confirm_custom_field_deletion = 'Valóban törölni szeretné ezt az egyedi mezőt és az összes társított értéket?';
 $s_field_delete_button = 'Mező törlése';
-$s_confirm_custom_field_unlinking = 'Valóban törölni (lecsatlakoztatni) szeretné ezt az egyedi mezőt a projektből, és törölni az összes társított értéket?';
+$s_confirm_custom_field_unlinking = 'Valóban törölni (lecsatlakoztatni) szeretné ezt az egyedi mezőt a projektből? Az értékek nem kerülnek törlésre, amíg maga az egyedi mező nem kerül eltörlésre.';
 $s_field_remove_button = 'Mező törlése a projektből';
 $s_hide_status = 'Státusz elrejtése';
 $s_filter_closed = 'Lezárva';
@@ -1053,6 +1056,9 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>FIGYELEM</b>. Ezen ü
 $s_create_child_bug_button = 'Klónozás';
 $s_bug_cloned_to = 'Ügy klónozva';
 $s_bug_created_from = 'Ügy generálva a következőből:';
+$s_copy_from_parent = 'Kiterjesztett adatok másolása a szülő ügyből';
+$s_copy_notes_from_parent = 'Ügy megjegyzés másolása';
+$s_copy_attachments_from_parent = 'Mellékletek másolása';
 $s_viewing_bug_relationship_graph_title = 'Kapcsolati háló';
 $s_viewing_bug_dependency_graph_title = 'Függőségi háló';
 $s_relation_graph = 'Kapcsolati grafikon';
@@ -1164,8 +1170,9 @@ $s_tag_related_issues = 'Osztozó ügyek (%1$s)';
 $s_tag_stats_attached = '%1$s ügyhöz csatolva';
 $s_tag_create = 'Címke létrehozása';
 $s_show_all_tags = 'Mind';
-$s_time_tracking_billing_link = 'Számlázás';
+$s_time_tracking_billing_link = 'Időkövetés';
 $s_time_tracking = 'Időkövetés';
+$s_time_tracking_time_spent = 'Eltöltött idő:';
 $s_time_tracking_get_info_button = 'Időkövetési információk megtekintése';
 $s_time_tracking_cost_per_hour = 'Óradíj';
 $s_time_tracking_cost = 'Költség';
