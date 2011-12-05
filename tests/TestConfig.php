@@ -28,9 +28,9 @@
 ob_start();
 
 /*
- * Include PHPUnit dependencies
+ * Include PHPUnit dependencies ; insure compatibility with 3.5 and 3.6
  */
-require_once 'PHPUnit/Framework.php';
+@include_once 'PHPUnit/Framework.php';
 /*
  * Set error reporting to the level to which Zend Framework code must comply.
  */

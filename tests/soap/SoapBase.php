@@ -22,7 +22,6 @@
  * @link http://www.mantisbt.org
  */
 
-require_once 'PHPUnit/Framework.php';
 
 $t_root_path = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
 
