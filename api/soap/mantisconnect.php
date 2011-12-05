@@ -288,7 +288,8 @@ $l_oServer->wsdl->addComplexType(
 		'notes'						=>	array( 'name' => 'notes',					'type' => 'tns:IssueNoteDataArray', 	'minOccurs' => '0' ),
 		'custom_fields'				=>  array( 'name' => 'custom_fields',			'type' => 'tns:CustomFieldValueForIssueDataArray', 	'minOccurs' => '0' ),
 		'due_date'					=>  array( 'name' => 'due_date',				'type' => 'xsd:dateTime', 	'minOccurs' => '0' ),
-	    'monitors'					=>  array( 'name' => 'monitors',                'type' => 'tns:AccountDataArray', 'minOccurs' => '0')
+	    'monitors'					=>  array( 'name' => 'monitors',                'type' => 'tns:AccountDataArray', 'minOccurs' => '0'),
+	    'tags'						=>  array( 'name' => 'tags',                	'type' => 'tns:ObjectRefArray', 'minOccurs' => '0')
 	)
 );
 

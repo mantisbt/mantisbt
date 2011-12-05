@@ -115,3 +115,41 @@ function mc_tag_delete( $p_username, $p_password, $p_tag_id ) {
 
 	return tag_delete( $p_tag_id );
 }
+
+function mci_tag_set_for_issue ( $p_issue_id, $p_tags ) {
+	
+	$t_tag_ids_to_attach = array();
+	$t_tag_ids_to_detach = array();
+	
+	$t_submitted_tag_ids = array();
+	$t_attached_tags = tag_bug_get_attached( $p_issue_id );
+	$t_attached_tag_ids = array();
+	foreach ( $t_attached_tags as $t_attached_tag )
+		$t_attached_tag_ids[] = $t_attached_tag['id'];
+	
+	foreach ( $p_tags as $t_tag ) {
+			
+		$t_submitted_tag_ids[] = $t_tag['id'];
+			
+		if ( in_array( $t_tag['id'], $t_attached_tag_ids) ) {
+			continue;
+		} else {
+			$t_tag_ids_to_attach[] = $t_tag['id'];
+		}
+	}
+	
+	foreach ( $t_attached_tag_ids as $t_attached_tag_id ) {
+			
+		if  ( in_array ( $t_attached_tag_id, $t_submitted_tag_ids) ) {
+			continue;
+		} else {
+			$t_tag_ids_to_detach[] = $t_attached_tag_id;
+		}
+	}
+	
+	foreach ( $t_tag_ids_to_detach as $t_tag_id )
+		tag_bug_detach( $t_tag_id, $p_issue_id, true);
+	
+	foreach ( $t_tag_ids_to_attach as $t_tag_id )
+		tag_bug_attach( $t_tag_id, $p_issue_id, true);
+}

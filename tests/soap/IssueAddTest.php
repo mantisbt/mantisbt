@@ -489,4 +489,27 @@ class IssueAddTest extends SoapBase {
 		$this->assertEquals( 2, $note->note_type );
 		$this->assertEquals( 'attr_value', $note->note_attr );
 	}
+	
+	public function testCreateIssueWithTags() {
+		
+		// initialise tags
+		$tagId1 = $this->client->mc_tag_add( $this->userName, $this->password, array (
+					'name' => 'IssueCreateTest.createIssueWithTags'
+		));
+		$this->deleteTagAfterRun( $tagId1 );
+		
+		$tagId2 = $this->client->mc_tag_add( $this->userName, $this->password, array (
+					'name' => 'IssueCreateTest.createIssueWithTags2'
+		));
+		$this->deleteTagAfterRun( $tagId2 );
+		
+		// create issue
+		$issueToAdd = $this->getIssueToAdd( 'IssueCreateTest.createIssueWithTags' );
+		$issueToAdd['tags'] = array ( array( 'id' => $tagId1), array('id' => $tagId2 ) );
+		$issueId = $this->client->mc_issue_add( $this->userName, $this->password, $issueToAdd);
+		$this->deleteAfterRun( $issueId );
+		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
+		
+		self::assertEquals ( 2, count ( $issue->tags ) );
+	}
 }
