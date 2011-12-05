@@ -96,6 +96,7 @@ class IssueAddTest extends SoapBase {
 		$this->assertEquals( 'none', $issue->eta->name );
 		$this->assertEquals( 10, $issue->resolution->id );
 		$this->assertEquals( 'open', $issue->resolution->name );
+		$this->assertEquals( 0, $issue->sticky );
 
 	}
 
@@ -145,6 +146,7 @@ class IssueAddTest extends SoapBase {
 		$issueToAdd['status'] = array( 'id' => 40 );        // confirmed
 		$issueToAdd['fixed_in_version'] = 'fixed version';
 		$issueToAdd['target_version'] = 'target version';
+		$issueToAdd['sticky'] = 1;
 
 		$issueId = $this->client->mc_issue_add(
 			$this->userName,
@@ -165,6 +167,7 @@ class IssueAddTest extends SoapBase {
 		$this->assertEquals( $issueToAdd['status']['id'], $issue->status->id );
 		$this->assertEquals( $issueToAdd['fixed_in_version'], $issue->fixed_in_version );
 		$this->assertEquals( $issueToAdd['target_version'], $issue->target_version );
+		$this->assertEquals( $issueToAdd['sticky'], $issue->sticky );
 	}
 
 	/**

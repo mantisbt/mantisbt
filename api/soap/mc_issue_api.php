@@ -87,6 +87,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['os_build'] = mci_null_if_empty( $t_bug->os_build );
 	$t_issue_data['reproducibility'] = mci_enum_get_array_by_id( $t_bug->reproducibility, 'reproducibility', $t_lang );
 	$t_issue_data['date_submitted'] = timestamp_to_iso8601( $t_bug->date_submitted, false );
+	$t_issue_data['sticky'] = $t_bug->sticky;
 
 	$t_issue_data['sponsorship_total'] = $t_bug->sponsorship_total;
 
@@ -630,6 +631,10 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
 	$t_bug_data->sponsorship_total = isset( $p_issue['sponsorship_total'] ) ? $p_issue['sponsorship_total'] : 0;
+	if (  isset ( $p_issue['sticky']) && 
+	     access_has_project_level( config_get( 'set_bug_sticky_threshold', null, null, $t_project_id ), $t_project_id ) ) {
+	    $t_bug_data->sticky = $p_issue['sticky'];
+	}
 	
 	if ( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
 		$t_bug_data->due_date = mci_iso8601_to_timestamp( $p_issue['due_date'] );
@@ -809,6 +814,9 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		$t_bug_data->version = $p_issue['version'];
 	if ( isset ( $p_issue['fixed_in_version'] ) )
 		$t_bug_data->fixed_in_version = $p_issue['fixed_in_version'];
+	if (  isset ( $p_issue['sticky']) && access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $t_bug_data->id ) ) {
+	    $t_bug_data->sticky = $p_issue['sticky'];
+	}
 
 	if ( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
 		$t_bug_data->due_date = mci_iso8601_to_timestamp( $p_issue['due_date'] );
@@ -1309,6 +1317,8 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['os_build'] = mci_null_if_empty( $p_issue_data->os_build );
 		$t_issue['reproducibility'] = mci_enum_get_array_by_id( $p_issue_data->reproducibility, 'reproducibility', $p_lang );
 		$t_issue['date_submitted'] = timestamp_to_iso8601( $p_issue_data->date_submitted, false );
+		$t_issue['sticky'] = $p_issue_data->sticky;
+		
 		$t_issue['sponsorship_total'] = $p_issue_data->sponsorship_total;
 
 		if( !empty( $p_issue_data->handler_id ) ) {
