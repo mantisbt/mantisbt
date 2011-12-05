@@ -111,6 +111,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['notes'] = mci_issue_get_notes( $p_issue_id );
 	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
 	$t_issue_data['monitors'] = mci_account_get_array_by_ids( bug_get_monitors ( $p_issue_id ) );
+	$t_issue_data['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_id , $t_user_id );
 	
 	return $t_issue_data;
 }
@@ -669,6 +670,10 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 			bugnote_add( $t_issue_id, $t_note['text'], mci_get_time_tracking_from_note( $t_issue_id, $t_note ), $t_view_state_id == VS_PRIVATE, $note_type, $note_attr, $t_user_id, FALSE );
 		}
 	}
+	
+	if ( isset ( $p_issue['tags']) && is_array ( $p_issue['tags']) ) {
+		mci_tag_set_for_issue( $t_issue_id, $p_issue['tags'] );
+	}	
 
 	email_new_bug( $t_issue_id );
 
@@ -872,7 +877,11 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 			}
 		}
 	}
-
+	
+	if ( isset ( $p_issue['tags']) && is_array ( $p_issue['tags']) ) {
+		mci_tag_set_for_issue( $p_issue_id, $p_issue['tags'] );
+	}
+	
 	# submit the issue
 	return $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
 	
@@ -1272,6 +1281,25 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['relationships'] = mci_issue_get_relationships( $p_issue_data->id, $p_user_id );
 		$t_issue['notes'] = mci_issue_get_notes( $p_issue_data->id );
 		$t_issue['custom_fields'] = mci_issue_get_custom_fields( $p_issue_data->id );
+		$t_issue['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_data->id, $p_user_id );
 
 		return $t_issue;
+}
+
+function mci_issue_get_tags_for_bug_id( $p_bug_id, $p_user_id ) {
+	
+	if ( !access_has_global_level( config_get( 'tag_view_threshold' ), $p_user_id ) )
+		return array();
+	
+	$t_tag_rows = tag_bug_get_attached( $p_bug_id );
+	$t_result = array();
+	
+	foreach ( $t_tag_rows as $t_tag_row ) {
+		$t_result[] = array (
+			'id' => $t_tag_row['id'],
+			'name' => $t_tag_row['name']
+		);
+	}
+	
+	return $t_result;
 }

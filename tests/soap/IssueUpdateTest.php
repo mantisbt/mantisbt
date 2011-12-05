@@ -458,4 +458,54 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 'os', $retrievedIssue->os );
 		$this->assertEquals( 'os_build', $retrievedIssue->os_build);
 	}
+
+	public function testUpdateWithTagOperations() {
+		
+		// initialise tags
+		$tagId1 = $this->client->mc_tag_add( $this->userName, $this->password, array (
+			'name' => 'IssueUpdateTest.testUpdateWithTagAdditions'
+		));
+		$this->deleteTagAfterRun( $tagId1 );
+		
+		$tagId2 = $this->client->mc_tag_add( $this->userName, $this->password, array (
+			'name' => 'IssueUpdateTest.testUpdateWithTagAdditions2'
+		));
+		$this->deleteTagAfterRun( $tagId2 );
+		
+		$tag1 = new stdClass();
+		$tag1->id = $tagId1;
+		
+		$tag2 = new stdClass();
+		$tag2->id = $tagId2;
+		
+		// create issue
+		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithRareFields' );
+		$issueId = $this->client->mc_issue_add( $this->userName, $this->password, $issueToAdd);
+		$this->deleteAfterRun( $issueId );
+		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
+		
+		// update from 0 to 2 tags -> test attaching tags
+		$issue->tags = array ( $tag1, $tag2 );
+		$this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue);
+		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
+		self::assertEquals(2, count ( $issue->tags ) );
+		
+		// update from 2 to 1 tags -> test partially detaching tags
+		$issue->tags = array ( $tag1 );
+		$this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue);
+		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
+		self::assertEquals(1, count ( $issue->tags ) );
+
+		// update from 1 to 2 tags -> test partially attaching tags 
+		$issue->tags = array ( $tag1, $tag2 );
+		$this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue);
+		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
+		self::assertEquals(2, count ( $issue->tags ) );
+		
+		// update from 2 to 0 tags -> test detaching tags
+		$issue->tags = array();
+		$this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue);
+		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
+		self::assertEquals(0, count ( $issue->tags ) );
+	}
 }
