@@ -40,6 +40,7 @@ require_once 'ProjectTest.php';
 require_once 'VersionTest.php';
 require_once 'RelationshipTest.php';
 require_once 'UserTest.php';
+require_once 'TagTest.php';
 
 /**
  * @package    Tests
@@ -77,6 +78,7 @@ class Soap_AllTests extends PHPUnit_Framework_TestSuite
 	    $suite->addTestSuite('VersionTest');
 	    $suite->addTestSuite('RelationshipTest');
 	    $suite->addTestSuite('UserTest');
+	    $suite->addTestSuite('TagTest');
 
         return $suite;
     }
