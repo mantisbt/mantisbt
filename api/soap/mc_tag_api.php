@@ -73,7 +73,7 @@ function mc_tag_add( $p_username, $p_password, $p_tag ) {
 	}
 	
 	if ( !access_has_global_level( config_get( 'tag_create_threshold' ) ) )
-		return mci_soap_fault_access_denied( $p_user_id );
+		return mci_soap_fault_access_denied( $t_user_id );
 	
 	$t_valid_matches = array();
 	
