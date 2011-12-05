@@ -571,7 +571,7 @@ $l_oServer->wsdl->addComplexType(
 	)
 );
 
-### FilterDataArray
+### TagDataArray
 $l_oServer->wsdl->addComplexType(
 	'TagDataArray',
 	'complexType',
@@ -582,11 +582,25 @@ $l_oServer->wsdl->addComplexType(
 	array(array(
 			'ref'				=> 'SOAP-ENC:arrayType',
 			'wsdl:arrayType'	=> 'tns:TagData[]'
-		),
-		'count'			=> array ( 'name' => 'count',			'type' => 'xsd:integer',	'minOccurs' => 0)
+		)
 	),
-	'tns:FilterData'
+	'tns:TagData'
 );
+
+### TagDataSearchResult
+$l_oServer->wsdl->addComplexType(
+	'TagDataSearchResult',
+	'complexType',
+	'struct',
+	'all',
+	'',
+array(
+			'results'		=>	array( 'name' => 'results',			'type' => 'tns:TagDataArray', 	'minOccurs' => '0' ),
+		    'total_results' =>  array( 'name' => 'total_results',	'type' => 'xsd:integer', 		'minOccurs' => '0' )
+)
+);
+
+
 
 ###
 ###  PUBLIC METHODS
@@ -1495,6 +1509,53 @@ $l_oServer->register( 'mc_user_pref_get_pref',
 	$t_namespace,
 	false, false, false,
 	'Get the value for the specified user preference.'
+);
+
+###
+###  PUBLIC METHODS (defined in mc_tag_api.php)
+###
+
+$l_oServer->register( 'mc_tag_get_all',
+	array(
+			'username'		=>	'xsd:string',
+			'password'		=>	'xsd:string',
+			'page_number'	=>	'xsd:integer',
+			'per_page'		=>	'xsd:integer'
+	),
+	array(
+			'return'	=>	'tns:TagDataSearchResult'
+	),
+	$t_namespace,
+	false, false, false,
+	'Gets all the tags.'
+);
+
+$l_oServer->register( 'mc_tag_add',
+	array(
+			'username'			=>	'xsd:string',
+			'password'			=>	'xsd:string',
+			'tag'				=>	'tns:TagData'
+	),
+	array(
+			'return'	=>	'xsd:integer'
+	),
+	$t_namespace,
+	false, false, false,
+	'Creates a tag.'
+);
+
+$l_oServer->register( 'mc_tag_delete',
+	array(
+			'username'			=>	'xsd:string',
+			'password'			=>	'xsd:string',
+			'tag_id'			=>	'xsd:integer'
+	),
+	array(
+			'return'	=>	'xsd:boolean'
+	),
+	$t_namespace,
+	false, false, false,
+	'Deletes a tag.'
 );
 
 ###
