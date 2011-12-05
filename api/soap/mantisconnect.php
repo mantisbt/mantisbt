@@ -898,6 +898,22 @@ $l_oServer->register( 'mc_issue_update',
 	'Update Issue method.'
 );
 
+$l_oServer->register( 'mc_issue_set_tags',
+	array(
+				'username'			=>	'xsd:string',
+				'password'			=>	'xsd:string',
+				'issue_id'			=>	'xsd:integer',
+				'tags'				=>  'tns:TagDataArray'
+	),
+	array(
+				'return'	=>	'xsd:boolean'
+	),
+	$t_namespace,
+	false, false, false,
+	'Sets the tags for a specified issue.'
+);
+
+
 ### mc_issue_delete
 $l_oServer->register( 'mc_issue_delete',
 	array(

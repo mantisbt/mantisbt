@@ -672,7 +672,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	}
 	
 	if ( isset ( $p_issue['tags']) && is_array ( $p_issue['tags']) ) {
-		mci_tag_set_for_issue( $t_issue_id, $p_issue['tags'] );
+		mci_tag_set_for_issue( $t_issue_id, $p_issue['tags'], $t_user_id );
 	}	
 
 	email_new_bug( $t_issue_id );
@@ -879,12 +879,34 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	}
 	
 	if ( isset ( $p_issue['tags']) && is_array ( $p_issue['tags']) ) {
-		mci_tag_set_for_issue( $p_issue_id, $p_issue['tags'] );
+		mci_tag_set_for_issue( $p_issue_id, $p_issue['tags'] , $t_user_id );
 	}
 	
 	# submit the issue
 	return $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
 	
+}
+
+function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, $p_tags ) {
+	
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if( $t_user_id === false ) {
+		return mci_soap_fault_login_failed();
+	}
+	
+	if( !bug_exists( $p_issue_id ) ) {
+		return new soap_fault( 'Client', '', "Issue '$p_issue_id' does not exist." );
+	}
+	
+	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
+	
+	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id );
+	}
+	
+	mci_tag_set_for_issue( $p_issue_id,  $p_tags, $t_user_id );
+	
+	return true;
 }
 
 /**
