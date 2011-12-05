@@ -21,8 +21,6 @@
  * @link http://www.mantisbt.org
  */
 
-require_once 'PHPUnit/Framework.php';
-
 require_once 'MantisEnum.class.php';
 
 /**

@@ -21,10 +21,6 @@
  * @link http://www.mantisbt.org
  */
 
-require_once 'PHPUnit/Framework.php';
-
-//require_once 'string_api.php';
-
 class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 
     /**
