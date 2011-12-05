@@ -108,7 +108,7 @@ function mc_tag_delete( $p_username, $p_password, $p_tag_id ) {
 	}
 
 	if ( !access_has_global_level( config_get( 'tag_edit_threshold' ) ) )
-		return mci_soap_fault_access_denied( $p_user_id );
+		return mci_soap_fault_access_denied( $t_user_id );
 	
 	if ( ! tag_exists( $p_tag_id ) )
 		return new soap_fault('Client', '', 'No tag with id ' . $p_tag_id);
