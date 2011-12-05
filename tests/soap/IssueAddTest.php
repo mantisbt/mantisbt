@@ -508,6 +508,7 @@ class IssueAddTest extends SoapBase {
 		$issueToAdd['tags'] = array ( array( 'id' => $tagId1), array('id' => $tagId2 ) );
 		$issueId = $this->client->mc_issue_add( $this->userName, $this->password, $issueToAdd);
 		$this->deleteAfterRun( $issueId );
+
 		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
 		
 		self::assertEquals ( 2, count ( $issue->tags ) );
