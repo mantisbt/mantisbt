@@ -112,6 +112,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->deleteAfterRun( $issueId );
 
 		$issueToUpdate = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateSummaryBasedOnMandatoryFields' );
+		$issueToUpdate['sticky'] = '1';
 
 		$this->client->mc_issue_update(
 			$this->userName,
@@ -131,6 +132,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( $issueToUpdate['summary'], $issue->summary );
 		$this->assertEquals( $issueToUpdate['description'], $issue->description );
 		$this->assertEquals( $issueToUpdate['project']['id'], $issue->project->id );
+		$this->assertEquals( $issueToUpdate['sticky'], $issue->sticky );
 
 		// defaulted fields
 		$this->assertEquals( $issueId, $issue->id );
