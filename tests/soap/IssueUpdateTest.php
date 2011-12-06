@@ -112,7 +112,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->deleteAfterRun( $issueId );
 
 		$issueToUpdate = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateSummaryBasedOnMandatoryFields' );
-		$issueToUpdate['sticky'] = '1';
+		$issueToUpdate['sticky'] = true;
 
 		$this->client->mc_issue_update(
 			$this->userName,
