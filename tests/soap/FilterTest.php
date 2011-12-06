@@ -235,6 +235,43 @@ class FilterTest extends SoapBase {
 		$this->doTestGetPages('mc_project_get_issues');
 	}
 	
+	public function testGetAllProjectsIssues() {
+	
+		$initialIssues = $this->getAllProjectsIssues();
+	
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetAllProjectsIssues' );
+	
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
+	
+		$projectIssues = $this->getAllProjectsIssues();
+	
+		$this->assertEquals( 1, count( $projectIssues ) - count( $initialIssues ), "count(projectIssues) - count(initialIssues)");
+		$this->assertEquals( $issueId, $projectIssues[0]->id, "issueId");
+	}
+	
+	public function testGetAllProjectsIssueHeaders() {
+	
+		$initialIssues = $this->getAllProjectsIssueHeaders();
+	
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetProjectIssueHeaders' );
+	
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
+	
+		$projectIssues = $this->getAllProjectsIssueHeaders();
+	
+		$this->assertEquals( 1, count( $projectIssues ) - count( $initialIssues ), "count(projectIssues) - count(initialIssues)" );
+		$this->assertEquals( $issueId, $projectIssues[0]->id, "issueId" );
+	}
 
 	/**
 	 *
@@ -254,12 +291,40 @@ class FilterTest extends SoapBase {
 	 *
 	 * @return Array the project issues
 	 */
+	private function getAllProjectsIssues() {
+
+		return $this->client->mc_project_get_issues(
+			$this->userName,
+			$this->password,
+			0,
+			0,
+			self::ISSUES_TO_RETRIEVE);
+	}
+	
+	/**
+	 *
+	 * @return Array the project issues
+	 */
 	private function getProjectIssueHeaders() {
 
 		return $this->client->mc_project_get_issue_headers(
 			$this->userName,
 			$this->password,
 			$this->getProjectId(),
+			0,
+			self::ISSUES_TO_RETRIEVE);
+	}
+
+	/**
+	 *
+	 * @return Array the project issues
+	 */
+	private function getAllProjectsIssueHeaders() {
+
+		return $this->client->mc_project_get_issue_headers(
+			$this->userName,
+			$this->password,
+			0,
 			0,
 			self::ISSUES_TO_RETRIEVE);
 	}
