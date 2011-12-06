@@ -14,7 +14,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 	
 	$t_lang = mci_get_user_lang( $t_user_id );
 	
-	if( !project_exists( $p_project_id ) ) {
+	if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
 		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
 	}
 
@@ -854,7 +854,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
-	if( !project_exists( $p_project_id ) ) {
+	if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
 		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
 	}
 
