@@ -3487,6 +3487,22 @@ $g_file_type_icons = array(
 	'?'	=> 'generic.gif' );
 
 /**
+ * 
+ * Content types which will be overriden when downloading files
+ * 
+ * @global array $g_file_download_content_type_overrides
+ */
+$g_file_download_content_type_overrides = array (
+	'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+	'dotx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
+	'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+	'ppsx' => 'application/vnd.openxmlformats-officedocument.presentationml.slideshow',
+	'potx' => 'application/vnd.openxmlformats-officedocument.presentationml.template',
+	'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+	'xltx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.template'
+);
+
+/**
  * Icon associative arrays
  * Status to icon mapping
  * @global array $g_status_icon_arr

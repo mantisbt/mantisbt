@@ -167,6 +167,8 @@ $finfo = finfo_get_if_available();;
 
 $t_content_type = $v_file_type;
 
+$t_content_type_override = file_get_content_type_override ( $t_filename );
+
 # dump file content to the connection.
 switch ( config_get( 'file_upload_method' ) ) {
 	case DISK:
@@ -180,6 +182,9 @@ switch ( config_get( 'file_upload_method' ) ) {
 					$t_content_type = $t_file_info_type;
 				}
 			}
+			
+			if ( $t_content_type_override )
+				$t_content_type = $t_content_type_override;
 
 			header( 'Content-Type: ' . $t_content_type );
 			if ( config_get( 'file_download_xsendfile_enabled' ) ) {
@@ -206,6 +211,9 @@ switch ( config_get( 'file_upload_method' ) ) {
 				$t_content_type = $t_file_info_type;
 			}
 		}
+		
+		if ( $t_content_type_override )
+			$t_content_type = $t_content_type_override;
 
 		header( 'Content-Type: ' . $t_content_type );
 		readfile( $t_local_disk_file );
@@ -218,6 +226,9 @@ switch ( config_get( 'file_upload_method' ) ) {
 				$t_content_type = $t_file_info_type;
 			}
 		}
+		
+		if ( $t_content_type_override )
+			$t_content_type = $t_content_type_override;
 
 		header( 'Content-Type: ' . $t_content_type );
 		echo $v_content;

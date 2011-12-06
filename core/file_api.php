@@ -1063,3 +1063,18 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
         db_query_bound( $query, Array( $p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_bug_file['folder'], $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
     }
 }
+
+/**
+ * Returns a possibly override content type for a file name
+ * 
+ * @param string $p_filename the filename of the file which will be downloaded
+ * @return string the content type, or empty if it should not be overriden
+ */
+function file_get_content_type_override( $p_filename ) {
+	
+	global $g_file_download_content_type_overrides;
+	
+	$t_extension = pathinfo( $p_filename, PATHINFO_EXTENSION );
+	
+	return $g_file_download_content_type_overrides[$t_extension];
+}
