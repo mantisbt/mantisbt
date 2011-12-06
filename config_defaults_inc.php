@@ -2220,7 +2220,7 @@
 	 * Access level needed to delete other users from the list of users
 	 * monitoring a bug.
 	 * Look in the constant_inc.php file if you want to set a different value.
-	 * @global int $g_monitor_add_others_bug_threshold
+	 * @global int $g_monitor_delete_others_bug_threshold
 	 */
 	$g_monitor_delete_others_bug_threshold = DEVELOPER;
 
