@@ -1859,7 +1859,7 @@ $g_ldap_uid_field = 'uid';
 
 /**
  * The LDAP field for the user's real name (i.e. common name).
- * @global string $g_ldap_uid_field
+ * @global string $g_ldap_realname_field
  */
 $g_ldap_realname_field = 'cn';
 
