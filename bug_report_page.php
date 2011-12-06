@@ -82,6 +82,7 @@
 
 		$f_category_id			= $t_bug->category_id;
 		$f_reproducibility		= $t_bug->reproducibility;
+		$f_eta					= $t_bug->eta;
 		$f_severity				= $t_bug->severity;
 		$f_priority				= $t_bug->priority;
 		$f_summary				= $t_bug->summary;
@@ -106,6 +107,7 @@
 
 		$f_category_id			= gpc_get_int( 'category_id', 0 );
 		$f_reproducibility		= gpc_get_int( 'reproducibility', config_get( 'default_bug_reproducibility' ) );
+		$f_eta					= gpc_get_int( 'eta', config_get( 'default_bug_eta' ) );
 		$f_severity				= gpc_get_int( 'severity', config_get( 'default_bug_severity' ) );
 		$f_priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
 		$f_summary				= gpc_get_string( 'summary', '' );
@@ -133,6 +135,7 @@
 
 	$tpl_show_category = in_array( 'category_id', $t_fields );
 	$tpl_show_reproducibility = in_array( 'reproducibility', $t_fields );
+	$tpl_show_eta = in_array( 'eta', $t_fields );
 	$tpl_show_severity = in_array( 'severity', $t_fields );
 	$tpl_show_priority = in_array( 'priority', $t_fields );
 	$tpl_show_steps_to_reproduce = in_array( 'steps_to_reproduce', $t_fields );
@@ -207,7 +210,23 @@
 	</tr>
 <?php
 	}
+	
+	if ( $tpl_show_eta ) {
+?>
 
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<label for="eta"><?php print_documentation_link( 'eta' ) ?></label>
+		</td>
+		<td>
+			<select <?php echo helper_get_tab_index() ?> id="eta" name="eta">
+				<?php print_enum_string_option_list( 'eta', $f_eta ) ?>
+			</select>
+		</td>
+	</tr>
+<?php
+	}
+	
 	if ( $tpl_show_severity ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
