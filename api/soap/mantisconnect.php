@@ -595,12 +595,58 @@ $l_oServer->wsdl->addComplexType(
 	'struct',
 	'all',
 	'',
-array(
-			'results'		=>	array( 'name' => 'results',			'type' => 'tns:TagDataArray', 	'minOccurs' => '0' ),
-		    'total_results' =>  array( 'name' => 'total_results',	'type' => 'xsd:integer', 		'minOccurs' => '0' )
-)
+	array(
+				'results'		=>	array( 'name' => 'results',			'type' => 'tns:TagDataArray', 	'minOccurs' => '0' ),
+			    'total_results' =>  array( 'name' => 'total_results',	'type' => 'xsd:integer', 		'minOccurs' => '0' )
+	)
 );
 
+### ProfileData
+$l_oServer->wsdl->addComplexType(
+	'ProfileData',
+	'complexType',
+	'struct',
+	'all',
+	'',
+	array(
+				'id'			=>	array( 'name' => 'id',				'type' => 'xsd:integer', 	'minOccurs' => '0' ),
+				'user_id'		=>	array( 'name' => 'user_id',			'type' => 'tns:AccountData', 	'minOccurs' => '0' ),
+				'platform'		=>	array( 'name' => 'platform',		'type' => 'xsd:string', 	'minOccurs' => '0' ),
+				'os'			=>	array( 'name' => 'os',				'type' => 'xsd:string', 	'minOccurs' => '0' ),
+				'os_build'		=>	array( 'name' => 'os_build',		'type' => 'xsd:string', 	'minOccurs' => '0' ),
+			    'description'  	=>  array( 'name' => 'description',		'type' => 'xsd:string', 	'minOccurs' => '0' )
+	)
+);
+
+### ProfileDataArray
+$l_oServer->wsdl->addComplexType(
+	'ProfileDataArray',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array(
+				'ref'				=> 'SOAP-ENC:arrayType',
+				'wsdl:arrayType'	=> 'tns:ProfileData[]'
+	)
+	),
+	'tns:ProfileData'
+);
+
+
+### ProfileDataSearchResult
+$l_oServer->wsdl->addComplexType(
+	'ProfileDataSearchResult',
+	'complexType',
+	'struct',
+	'all',
+	'',
+	array(
+					'results'		=>	array( 'name' => 'results',			'type' => 'tns:ProfileDataArray', 	'minOccurs' => '0' ),
+				    'total_results' =>  array( 'name' => 'total_results',	'type' => 'xsd:integer', 			'minOccurs' => '0' )
+	)
+);
 ###
 ###  PUBLIC METHODS
 ###
@@ -1541,6 +1587,27 @@ $l_oServer->register( 'mc_user_pref_get_pref',
 	$t_namespace,
 	false, false, false,
 	'Get the value for the specified user preference.'
+);
+
+###
+###  PUBLIC METHODS (defined in mc_user_profile_api.php)
+###
+
+
+### mc_user_profiles_get_all
+$l_oServer->register( 'mc_user_profiles_get_all',
+	array(
+		'username'		=>	'xsd:string',
+		'password'		=>	'xsd:string',
+		'page_number'	=>	'xsd:integer',
+		'per_page'		=>	'xsd:integer'
+	),
+	array(
+		'return'	=>	'tns:ProfileDataSearchResult'
+	),
+	$t_namespace,
+	false, false, false,
+	'Get profiles available to the current user.'
 );
 
 ###

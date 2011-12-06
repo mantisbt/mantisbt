@@ -42,3 +42,4 @@ require_once( $t_current_dir . 'mc_config_api.php' );
 require_once( $t_current_dir . 'mc_custom_field_api.php' );
 require_once( $t_current_dir . 'mc_user_pref_api.php' );
 require_once( $t_current_dir . 'mc_tag_api.php' );
+require_once( $t_current_dir . 'mc_user_profile_api.php' );
