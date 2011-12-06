@@ -264,3 +264,22 @@ function get_font_path() {
 		}
 		return $t_font_path;
 }
+
+function finfo_get_if_available() {
+	
+	if ( class_exists( 'finfo' ) ) {
+		$t_info_file = config_get( 'fileinfo_magic_db_file' );
+	
+		if ( is_blank( $t_info_file ) ) {
+			$finfo = new finfo( FILEINFO_MIME );
+		} else {
+			$finfo = new finfo( FILEINFO_MIME, $t_info_file );
+		}
+	
+		if ( $finfo ) {
+			return $finfo;
+		}
+	}
+
+	return null;
+}
