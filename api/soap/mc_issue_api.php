@@ -82,6 +82,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['summary'] = $t_bug->summary;
 	$t_issue_data['version'] = mci_null_if_empty( $t_bug->version );
 	$t_issue_data['build'] = mci_null_if_empty( $t_bug->build );
+	$t_issue_data['profile_id'] = mci_null_if_empty( $t_bug->profile_id );
 	$t_issue_data['platform'] = mci_null_if_empty( $t_bug->platform );
 	$t_issue_data['os'] = mci_null_if_empty( $t_bug->os );
 	$t_issue_data['os_build'] = mci_null_if_empty( $t_bug->os_build );
@@ -621,6 +622,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_bug_data->date_submitted = isset( $p_issue['date_submitted'] ) ? $p_issue['date_submitted'] : '';
 	$t_bug_data->last_updated = isset( $p_issue['last_updated'] ) ? $p_issue['last_updated'] : '';
 	$t_bug_data->eta = $t_eta_id;
+	$t_bug_data->profile_id = isset ( $p_issue['profile_id'] ) ? $p_issue['profile_id'] : 0;
 	$t_bug_data->os = isset( $p_issue['os'] ) ? $p_issue['os'] : '';
 	$t_bug_data->os_build = isset( $p_issue['os_build'] ) ? $p_issue['os_build'] : '';
 	$t_bug_data->platform = isset( $p_issue['platform'] ) ? $p_issue['platform'] : '';
@@ -801,6 +803,8 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		$t_bug_data->date_submitted = $p_issue['date_submitted'];
 	if ( isset ( $p_issue['date_updated'] ) )
 		$t_bug_data->last_updated = $p_issue['last_updated'];
+	if ( isset ( $p_issue['profile_id'] ) )
+		$t_bug_data->profile_id = $p_issue['profile_id'];
 	if ( isset ( $p_issue['os'] ) )
 		$t_bug_data->os = $p_issue['os'];
 	if ( isset ( $p_issue['os_build'] ) )
@@ -1282,6 +1286,7 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['summary'] = $p_issue_data->summary;
 		$t_issue['version'] = mci_null_if_empty( $p_issue_data->version );
 		$t_issue['build'] = mci_null_if_empty( $p_issue_data->build );
+		$t_issue['profile_id'] = mci_null_if_empty( $p_issue_data->profile_id );
 		$t_issue['platform'] = mci_null_if_empty( $p_issue_data->platform );
 		$t_issue['os'] = mci_null_if_empty( $p_issue_data->os );
 		$t_issue['os_build'] = mci_null_if_empty( $p_issue_data->os_build );
