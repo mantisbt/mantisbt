@@ -941,7 +941,7 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 				$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
 				$t_def = custom_field_get_definition( $t_custom_field_id );
 				$t_value_field = ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
-				$c_cf_alias = str_replace( ' ', '_', $t_custom_field );
+				$c_cf_alias = 'custom_field_' . $t_custom_field_id;
 				$t_cf_table_alias = $t_custom_field_string_table . '_' . $t_custom_field_id;
 				$t_cf_select = "$t_cf_table_alias.$t_value_field $c_cf_alias";
 
