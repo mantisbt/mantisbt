@@ -917,7 +917,7 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 				$t_custom_field = utf8_substr( $c_sort, utf8_strlen( 'custom_' ) );
 				$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
 
-				$c_cf_alias = str_replace( ' ', '_', $t_custom_field );
+				$c_cf_alias = 'custom_field_' . $t_custom_field_id;
 				$t_cf_table_alias = $t_custom_field_string_table . '_' . $t_custom_field_id;
 				$t_cf_select = "$t_cf_table_alias.value $c_cf_alias";
 
