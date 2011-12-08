@@ -2954,6 +2954,14 @@ $g_default_manage_tag_prefix = 'ALL';
 $g_csv_separator = ',';
 
 /**
+ * CSV Export
+ * Add Byte Order Mark (BOM) at the begining of the file, some tools need it (Excel)
+ * @global string $g_csv_add_bom
+ */
+$g_csv_add_bom = ON;
+
+
+/**
  * The threshold required for users to be able to manage configuration of a project.
  * This includes workflow, email notifications, columns to view, and others.
  */
