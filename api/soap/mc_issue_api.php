@@ -943,6 +943,10 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
+	
+	if ( !access_has_bug_level( config_get( 'delete_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
+	    return mci_soap_fault_access_denied( $t_user_id );
+	}
 
 	return bug_delete( $p_issue_id );
 }
