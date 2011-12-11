@@ -299,7 +299,8 @@ if ( !$t_finished ) {
 					break;
 				case 'UP_TARGET_VERSION':
 				case 'UP_FIXED_IN_VERSION':
-					print_version_option_list( '', $t_project_id, VERSION_ALL );
+					print_version_option_list( '', $t_project_id, VERSION_ALL,
+						/* allow blank version */ true, /* include subprojects */ true );
 					break;
 			}
 
