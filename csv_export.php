@@ -78,9 +78,14 @@ header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_na
 # Get columns to be exported
 $t_columns = csv_get_columns();
 
+ob_start();
+# export BOM
+if ( config_get( 'csv_add_bom' ) == ON ) {
+	echo "\xEF\xBB\xBF";
+}
+
 # export the titles
 $t_first_column = true;
-ob_start();
 $t_titles = array();
 foreach ( $t_columns as $t_column ) {
 	if ( !$t_first_column ) {
