@@ -33,7 +33,7 @@
 $s_messages = array(
 	# Script directionality (currently supported: ltr and rtl)
 	'directionality' => 'ltr',
-	
+
 	# Group commands menuitems
 	'actiongroup_menu_move' => 'Move',
 	'actiongroup_menu_copy' => 'Copy',
@@ -55,7 +55,7 @@ $s_messages = array(
 	'actiongroup_menu_attach_tags' => 'Attach Tags',
 	'actiongroup_bugs' => 'Selected Issues',
 	'actiongroup_error_issue_is_readonly' => 'Issue is readonly.',
-	
+
 	# new strings:
 	'all_projects' => 'All Projects',
 	'move_bugs' => 'Move Issues',
@@ -136,7 +136,7 @@ $s_messages = array(
 	'create_new_project_link' => 'Create New Project',
 
 	'login_link' => 'Login',
-	
+
 	# comboboxes default to this to instruct user to explicitly select an entry.
 	'select_option' => '(select)',
 
@@ -144,6 +144,8 @@ $s_messages = array(
 	'bug_actiongroup_access' => 'You did not have appropriate permissions to perform that action.',
 	'bug_actiongroup_status' => 'This issue cannot be changed to the requested status',
 	'bug_actiongroup_category' => 'This issue cannot be changed to the requested category',
+	'bug_actiongroup_handler' => 'The requested user is not allowed to handle this issue',
+	'bug_actiongroup_version' => 'The requested version does not exist in this issue\'s project',
 	'close_bugs_conf_msg' => 'Are you sure you wish to close these issues?',
 	'delete_bugs_conf_msg' => 'Are you sure you wish to delete these issues?',
 	'move_bugs_conf_msg' => 'Move issues to',
@@ -173,19 +175,19 @@ $s_messages = array(
 	'update_severity_title' => 'Update Severity',
 	'update_severity_msg' => 'Choose issue severity',
 	'update_severity_button' => 'Update Severity',
-	
+
 	# print_all_bug_page.php : display selected issues
 	'hide_button' => 'Display selected only',
-	
+
 	# print_all_bug_options.php : printing preferences
 	'printing_preferences_title' => 'Choose fields to print',
 	'printing_options_link' => 'Printing Options',
-	
+
 	# word and excel export
 	'bugnote_title' => 'Note handler',
 	'bugnote_date' => 'Date of note',
 	'bugnote_description' => 'Note description',
-	
+
 	'error_no_proceed' => 'Please use the "Back" button in your web browser to return to the previous page. There you can correct whatever problems were identified in this error or select another action. You can also click an option from the menu bar to go directly to a new section.',
 	'login_error' => 'Your account may be disabled or blocked or the username/password you entered is incorrect.',
 	'login_cookies_disabled' => 'Your browser either does not know how to handle cookies, or refuses to handle them.',
@@ -193,18 +195,18 @@ $s_messages = array(
 	# General Strings
 	'go_back' => 'Go Back',
 	'proceed' => 'Proceed',
-	
+
 	'switch' => 'Switch',
 	'logged_in_as' => 'Logged in as',
-	
+
 	'prefix_for_deleted_users' => 'user',
-	
+
 	'administrator' => 'administrator',
 	'myself' => 'Myself',
 	'default_access_level' => 'Default access level',
-	
+
 	'issue_status_percentage' => 'Issue Status Percentage',
-	
+
 	# Enum Strings
 	'access_levels_enum_string' => '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator',
 	'project_status_enum_string' => '10:development,30:release,50:stable,70:obsolete',
@@ -230,7 +232,7 @@ $s_messages = array(
 	'new_account_email' => 'E-mail:',
 	'new_account_IP' => 'Remote IP address:',
 	'new_account_signup_msg' => 'The following account has been created:',
-	
+
 	'reset_request_msg' => 'Someone (presumably you) requested a password change through e-mail verification. If this was not you, ignore this message and nothing will happen.
 
 If you requested this verification, visit the following URL to change your password:',
@@ -290,11 +292,11 @@ If you requested this verification, visit the following URL to change your passw
 	# account_delete.php
 	'account_protected_msg' => 'Account protected. Cannot change settings...',
 	'account_removed_msg' => 'Your account has been removed...',
-	
+
 	# account_delete_page.php
 	'confirm_delete_msg' => 'Are you sure you wish to delete your account?',
 	'delete_account_button' => 'Delete Account',
-	
+
 	# account_page.php
 	'manage_profiles_link' => 'Profiles',
 	'change_preferences_link' => 'Preferences',
@@ -313,7 +315,7 @@ If you requested this verification, visit the following URL to change your passw
 	'update_user_button' => 'Update User',
 	'verify_warning' => 'Your account information has been verified. The account confirmation message you have received is now invalid.',
 	'verify_change_password' => 'You must set a password here to allow you to log in again.',
-	
+
 	# account_prefs_page.php
 	'default_account_preferences_title' => 'Account Preferences',
 	'default_project' => 'Default Project',
@@ -339,19 +341,19 @@ If you requested this verification, visit the following URL to change your passw
 	'update_prefs_button' => 'Update Prefs',
 	'reset_prefs_button' => 'Reset Prefs',
 	'timezone' => 'Time Zone',
-	
+
 	# account_prefs_reset.php
 	'prefs_reset_msg' => 'Preferences have been reset...',
-	
+
 	# account_prefs_update.php
 	'prefs_updated_msg' => 'Preferences have been updated...',
-	
+
 	# account_profile_add.php
 	'profile_added_msg' => 'Profile added...',
-	
+
 	# account_profile_delete.php
 	'profile_deleted_msg' => 'Deleted profile...',
-	
+
 	# account_profile_edit_page.php
 	'edit_profile_title' => 'Edit Profile',
 	'platform' => 'Platform',
@@ -359,10 +361,10 @@ If you requested this verification, visit the following URL to change your passw
 	'operating_system' => 'Operating System',
 	'additional_description' => 'Additional Description',
 	'update_profile_button' => 'Update Profile',
-	
+
 	# account_profile_make_default.php
 	'profile_defaulted_msg' => 'Default profile updated...',
-	
+
 	# account_profile_manage_page.php
 	'add_profile_title' => 'Add Profile',
 	'add_profile_button' => 'Add Profile',
@@ -372,10 +374,10 @@ If you requested this verification, visit the following URL to change your passw
 	'delete_profile' => 'Delete Profile',
 	'select_profile' => 'Select Profile',
 	'submit_button' => 'Submit',
-	
+
 	# account_profile_update.php
 	'profile_updated_msg' => 'Profile updated...',
-	
+
 	# account_sponsor_page.php
 	'my_sponsorship' => 'My Sponsorships',
 	'update_sponsorship_button' => 'Change Payment Status',
@@ -390,20 +392,20 @@ If you requested this verification, visit the following URL to change your passw
 	'total_paid' => 'Total Paid',
 	'sponsor_hide' => 'Hide Resolved and Paid',
 	'sponsor_show' => 'Show All',
-	
+
 	# account_sponsor_update.php
 	'payment_updated' => 'Payment information updated.',
-	
+
 	# account_update.php
 	'account_updated_msg' => 'Your account has been successfully updated...',
 	'email_updated' => 'E-mail address successfully updated',
 	'realname_duplicated' => 'Real name is used by another user',
 	'realname_updated' => 'Real name successfully updated',
 	'password_updated' => 'Password successfully updated',
-	
+
 	# bug_action_group_page
 	'multiple_projects' => 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.',
-	
+
 	# bug_change_status_page.php
 	'new_bug_title' => 'New Issue',
 	'feedback_bug_title' => 'Request Feedback on Issue',
@@ -415,51 +417,51 @@ If you requested this verification, visit the following URL to change your passw
 	'acknowledged_bug_button' => 'Acknowledge Issue',
 	'confirmed_bug_button' => 'Confirm Issue',
 	'assigned_bug_button' => 'Assign Issue',
-	
+
 	# bug_close.php
 	'bug_close_msg' => 'Issue has been closed...',
 	'close_immediately' => 'Close immediately:',
-	
+
 	# bug_close_page.php
 	'closed_bug_title' => 'Close Issue',
-	
+
 	# bug_delete.php
 	'bug_deleted_msg' => 'Issue has been deleted...',
-	
+
 	# bug_delete_page.php
 	'delete_bug_sure_msg' => 'Are you sure you wish to delete this issue?',
 	'delete_bug_button' => 'Delete',
-	
+
 	# bug_monitor_add.php
 	'monitor_bug_button' => 'Monitor',
-	
+
 	# bug_monitor_delete.php
 	'unmonitor_bug_button' => 'End Monitoring',
-	
+
 	# bug_file_add.php
 	'file_upload_msg' => 'File upload successful.',
-	
+
 	# bug_file_upload_inc.php
 	'upload_file' => 'Upload File',
 	'select_file' => 'Select File',
 	'upload_file_button' => 'Upload File',
 	'max_file_size' => 'Maximum size',
 	'max_file_size_label' => 'Maximum size:',
-	
+
 	# bug_reopen.php
 	'bug_reopened_msg' => 'Issue has been reopened...',
 	'reopen_add_bugnote_title' => 'Add Note Reason For Reopening Issue',
 	'bugnote_add_reopen_button' => 'Add Note and Reopen Issue',
-	
+
 	# bug_resolve_page.php
 	'resolved_bug_title' => 'Resolve Issue',
 	'resolved_bug_button' => 'Resolve Issue',
-	
+
 	# bug_resolve_page2.php
 	'bug_resolved_msg' => 'Issue has been resolved. Enter note below...',
 	'resolve_add_bugnote_title' => 'Add Note Reason For Resolving Issue',
 	'bugnote_add_resolve_button' => 'Add Note',
-	
+
 	# bug_reminder_page.php
 	'from' => 'From',
 	'to' => 'To',
@@ -471,17 +473,17 @@ If you requested this verification, visit the following URL to change your passw
 	'reminder_explain' => 'This note will be sent to the recipients listed requesting feedback on this issue.',
 	'reminder_monitor' => 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.',
 	'reminder_store' => 'This note will be stored with the issue.',
-	
+
 	# bug_set_sponsorship.php
 	'confirm_sponsorship' => 'Please confirm you want to sponsor issue %1$d for %2$s.',
-	
+
 	# bug_stick.php
 	'stick_bug_button' => 'Stick',
 	'unstick_bug_button' => 'Unstick',
-	
+
 	# bug_update.php
 	'bug_updated_msg' => 'Issue has been successfully updated...',
-	
+
 	# bug_update_advanced_page.php
 	'back_to_bug_link' => 'Back To Issue',
 	'update_simple_link' => 'Update Simple',
@@ -526,10 +528,10 @@ If you requested this verification, visit the following URL to change your passw
 	'sticky_issue' => 'Sticky Issue',
 	'profile' => 'Profile',
 	'profile_label' => 'Profile:',
-	
+
 	# bug_update_page.php
 	'updating_bug_simple_title' => 'Updating Issue Information',
-	
+
 	# bug_view*
 	'view_revisions' => 'View Revisions',
 	'view_num_revisions' => 'View %1$d revisions',
@@ -541,20 +543,20 @@ If you requested this verification, visit the following URL to change your passw
 	'all_revisions' => 'All Revisions',
 	'back_to_issue' => 'Back to Issue',
 	'confirm_revision_drop' => 'Are you sure you want to drop this issue revision?',
-	
+
 	# bug_vote_add.php
 	'vote_added_msg' => 'Vote has been added...',
-	
+
 	# bugnote_add.php
 	'bugnote_added_msg' => 'Note added...',
-	
+
 	# bugnote_delete.php
 	'bugnote_deleted_msg' => 'Note has been successfully deleted...',
 	'bug_notes_title' => 'Notes',
-	
+
 	# bugnote_edit_page.php
 	'edit_bugnote_title' => 'Edit Note',
-	
+
 	# bugnote_inc.php
 	'no_bugnotes_msg' => 'There are no notes attached to this issue.',
 	'delete_link' => 'Delete',
@@ -562,15 +564,15 @@ If you requested this verification, visit the following URL to change your passw
 	'add_bugnote_button' => 'Add Note',
 	'bugnote_edit_link' => 'Edit',
 	'closed_bug_button' => 'Close Issue',
-	
+
 	# bugnote_update.php
 	'bugnote_updated_msg' => 'Note has been successfully updated...',
 	'last_edited' => 'Last edited:',
-	
+
 	# file_api.php
 	'hide_content' => 'Hide Content',
 	'show_content' => 'Show Content',
-	
+
 	# html_api.php
 	'webmaster_contact_information' => 'If you encounter problems accessing this bug tracker please <a href="mailto:%1$s" title="Contact the webmaster via e-mail.">contact us via e-mail</a> for assistance.',
 	'total_queries_executed' => 'Total queries executed: %1$d',
@@ -578,19 +580,19 @@ If you requested this verification, visit the following URL to change your passw
 	'total_query_execution_time' => 'Total query execution time: %1$s seconds',
 	'page_execution_time' => 'Page execution time: %1$s seconds',
 	'memory_usage_in_kb' => 'Memory usage: %1$s KiB',
-	
+
 	# log_api.php
 	'log_page_number' => 'Number',
 	'log_page_time' => 'Execution time',
 	'log_page_caller' => 'Caller',
 	'log_page_event' => 'Event',
-	
+
 	# print_api.php
 	'please_report' => 'Please report this to the %1$s.',
-	
+
 	# index.php
 	'click_to_login' => 'Login',
-	
+
 	# login.php
 	'warning_plain_password_authentication' => '<strong>Warning:</strong> Plain password authentication is used, this will expose your passwords to administrators.',
 	'warning_default_administrator_account_present' => '<strong>Warning:</strong> You should disable the default \'administrator\' account or change its password.',
@@ -599,7 +601,7 @@ If you requested this verification, visit the following URL to change your passw
 	'error_database_no_schema_version' => '<strong>Error:</strong> The database structure appears to be out of date (config(databaseversion) is 0 and old upgrade tables do not exist). Please check that your database is running - we can not retrieve the database schema version. Config Table did not return a valid database schema version - please ask for support on the mantis-help mailing list if required.',
 	'error_database_version_out_of_date_2' => '<strong>Warning:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.',
 	'error_code_version_out_of_date' => '<strong>Warning:</strong> The database structure is more up-to-date than the code installed. Please upgrade the code.',
-	
+
 	# login_page.php
 	'login_page_info' => 'Welcome to the Issue Tracker.',
 	'login_title' => 'Login',
@@ -608,19 +610,19 @@ If you requested this verification, visit the following URL to change your passw
 	'secure_session_long' => 'Only allow your session to be used from this IP address.',
 	'choose_project' => 'Choose Project',
 	'login_button' => 'Login',
-	'signup_link' => 'Signup for a new account',	
+	'signup_link' => 'Signup for a new account',
 	'lost_password_link' => 'Lost your password?',
-	
+
 	# login_select_proj_page.php
 	'select_project_button' => 'Select Project',
-	
+
 	# lost_pwd_page.php
 	'lost_password_title' => 'Password Reset',
 	'lost_password_done_title' => 'Password Message Sent',
 	'lost_password_subject' => 'Password Reset',
 	'lost_password_info' => 'To reinstate your lost password, please supply the name and e-mail address for the account.<br /><br />If the data corresponds to a valid account, you will be sent a special URL via e-mail that contains a validation code for your account. Please follow this link to change your password.',
 	'lost_password_confirm_hash_OK' => 'Your confirmation has been accepted. Please update your password.',
-	
+
 	# main_page.php
 	'open_and_assigned_to_me_label' => 'Open and assigned to me:',
 	'open_and_reported_to_me_label' => 'Open and reported by me:',
@@ -628,7 +630,7 @@ If you requested this verification, visit the following URL to change your passw
 	'older_news_link' => 'Older News',
 	'archives' => 'Archives',
 	'rss' => 'RSS',
-	
+
 	# manage_overview_page
 	'site_information' => 'Site Information',
 	'mantis_version' => 'MantisBT Version',
@@ -636,11 +638,11 @@ If you requested this verification, visit the following URL to change your passw
 	'site_path' => 'Site Path',
 	'core_path' => 'Core Path',
 	'plugin_path' => 'Plugin Path',
-	
+
 	# manage_create_new_user.php
 	'created_user_part1' => 'Created user',
 	'created_user_part2' => 'with an access level of',
-	
+
 	# manage_create_user_page.php
 	'create_new_account_title' => 'Create New Account',
 	'verify_password' => 'Verify Password',
@@ -649,7 +651,7 @@ If you requested this verification, visit the following URL to change your passw
 	'protected' => 'Protected',
 	'protected_label' => 'Protected',
 	'create_user_button' => 'Create User',
-	
+
 	# manage_page.php
 	'hide_disabled' => 'Hide Disabled',
 	'filter_button' => 'Apply Filter',
@@ -682,7 +684,7 @@ If you requested this verification, visit the following URL to change your passw
 	'last_visit' => 'Last Visit',
 	'last_visit_label' => 'Last Visit:',
 	'edit_user_link' => 'Edit User',
-	
+
 	# manage_config_email_page
 	'config_all_projects' => 'Note: These configurations affect all projects, unless overridden at the project level.',
 	'config_project' => 'Note: These configurations affect only the %1$s project.',
@@ -700,7 +702,7 @@ If you requested this verification, visit the following URL to change your passw
 	'notify_actions_change_access' => 'Who can change notifications:',
 	'revert_to_system' => 'Delete All Projects Settings',
 	'revert_to_all_project' => 'Delete Project Specific Settings',
-	
+
 	# manage_config_workflow_page
 	'non_existent' => 'non-existent',
 	'current_status' => 'Current Status',
@@ -723,10 +725,10 @@ If you requested this verification, visit the following URL to change your passw
 	'desc_bug_closed_status_threshold' => 'Status where an issue is considered closed',
 	'workflow_change_access_label' => 'Who can change workflow:',
 	'access_change_access_label' => 'Who can change access levels:',
-	
+
 	# manage_config_workflow_set
 	'default_not_in_flow' => 'The default status of %1$s is not selected in the next statuses for %2$s. It will be ignored.',
-	
+
 	# manage_config_work_threshold_page
 	'assign_issue' => 'Assign an issue',
 	'allow_reporter_close' => 'Allow Reporter to close Issue',
@@ -744,12 +746,12 @@ If you requested this verification, visit the following URL to change your passw
 	'readonly_status' => 'Status where an issue becomes read only',
 	'reopen_status' => 'Status to which a reopened issue is set',
 	'reopen_resolution' => 'Resolution to which a reopened issue is set',
-	
+
 	# manage_config_revert_page
 	'config_delete_sure' => 'Are you sure you want to delete the settings for:',
 	'in_project' => 'in project',
 	'delete_config_button' => 'Delete Settings',
-	
+
 	# adm_config_report.php
 	'configuration_report' => 'Configuration Report',
 	'database_configuration' => 'Database Configuration',
@@ -760,7 +762,7 @@ If you requested this verification, visit the following URL to change your passw
 	'set_configuration_option' => 'Set Configuration Option',
 	'delete_config_sure_msg' => 'Are you sure you wish to delete this configuration option?',
 	'configuration_corrupted' => 'The configuration in database is corrupted.',
-	
+
 	# manage_plugin_page.php
 	'plugin' => 'Plugin',
 	'plugins_installed' => 'Installed Plugins',
@@ -783,37 +785,37 @@ If you requested this verification, visit the following URL to change your passw
 	'plugin_key_unmet' => 'unmet dependencies',
 	'plugin_key_dated' => 'outdated dependencies',
 	'plugin_key_upgrade' => 'upgrade needed',
-	
+
 	# manage_proj_add.php
 	'project_added_msg' => 'Project has been successfully added...',
-	
+
 	# manage_proj_category_add.php
 	'category_added_msg' => 'Category has been successfully added...',
-	
+
 	# manage_proj_category_delete.php
 	'category_deleted_msg' => 'Category has been successfully deleted...',
-	
+
 	# manage_proj_category_delete_page.php
 	'category_delete_sure_msg' => 'Are you sure you want to delete this category?<br />Category "%1$s" contains %2$d issues.',
 	'delete_category_button' => 'Delete Category',
-	
+
 	# manage_proj_category_edit_page.php
 	'edit_project_category_title' => 'Edit Project Category',
 	'update_category_button' => 'Update Category',
-	
+
 	# manage_proj_category_update.php
 	'category_updated_msg' => 'Category has been successfully updated...',
-	
+
 	# manage_proj_create_page.php
 	'add_subproject_title' => 'Add Subproject',
-	
+
 	# manage_proj_delete.php
 	'project_deleted_msg' => 'Project successfully removed...',
-	
+
 	# manage_proj_delete_page.php
 	'project_delete_msg' => 'Are you sure you want to delete this project and all attached issue reports?',
 	'project_delete_button' => 'Delete Project',
-	
+
 	# manage_proj_edit_page.php
 	'edit_project_title' => 'Edit Project',
 	'project_name' => 'Project Name',
@@ -844,7 +846,7 @@ If you requested this verification, visit the following URL to change your passw
 	'unlink_link' => 'Unlink',
 	'show_global_users' => 'Show Users with Global Access',
 	'hide_global_users' => 'Hide Users with Global Access',
-	
+
 	# manage_proj_menu_page.php
 	'add_project_title' => 'Add Project',
 	'upload_file_path' => 'Upload File Path',
@@ -852,20 +854,20 @@ If you requested this verification, visit the following URL to change your passw
 	'projects_title' => 'Projects',
 	'projects_title_label' => 'Projects',
 	'name' => 'Name',
-	
+
 	# manage_proj_update.php
 	'project_updated_msg' => 'Project has been successfully updated...',
-	
+
 	# manage_proj_version_add.php
 	'version_added_msg' => 'Version has been successfully added...',
-	
+
 	# manage_proj_version_delete.php
 	'version_deleted_msg' => 'Version has been successfully deleted...',
-	
+
 	# manage_proj_version_delete_page.php
 	'version_delete_sure' => 'Are you sure you want to delete this version?',
 	'delete_version_button' => 'Delete Version',
-	
+
 	# manage_proj_version_edit_page.php
 	'edit_project_version_title' => 'Edit Project Version',
 	'update_version_button' => 'Update Version',
@@ -873,25 +875,25 @@ If you requested this verification, visit the following URL to change your passw
 	'not_released' => 'Not Yet Released',
 	'scheduled_release' => 'Scheduled For Release',
 	'obsolete' => 'Obsolete',
-	
+
 	# manage_proj_version_update.php
 	'version_updated_msg' => 'Version has been successfully updated...',
-	
+
 	# manage_user_delete.php
 	'account_delete_protected_msg' => 'Account protected. Cannot delete this account.',
 	'account_deleted_msg' => 'Account deleted...',
-	
+
 	# manage_user_delete_page.php
 	'delete_account_sure_msg' => 'Are you sure you wish to delete this account?',
-	
+
 	# manage_user_edit_page.php
 	'notify_user' => 'Notify User',
-	
+
 	# manage_user_prune.php
 	'accounts_pruned_msg' => 'All accounts that have never logged in and are older than 1 week have been removed',
 	'prune_accounts_button' => 'Prune',
 	'confirm_account_pruning' => 'Are you sure you want to delete old accounts that have never logged in?',
-	
+
 	# manage_user_page.php
 	'edit_user_title' => 'Edit User',
 	'reset_password_button' => 'Reset Password',
@@ -901,18 +903,18 @@ If you requested this verification, visit the following URL to change your passw
 	'show_all_users' => 'All',
 	'users_unused' => 'Unused',
 	'users_new' => 'New',
-	
+
 	# manage_user_reset.php
 	'account_reset_protected_msg' => 'Account protected. Cannot reset the password.',
 	'account_reset_msg' => 'A confirmation request has been sent to the selected user\'s e-mail address. Using this, the user will be able to change their password.',
 	'account_reset_msg2' => 'Account password has been set to blank...',
-	
+
 	# manage_user_update.php
 	'manage_user_protected_msg' => 'Account protected. Access level and enabled protected. Otherwise, account has been updated...',
 	'manage_user_updated_msg' => 'Account successfully updated...',
 	'email_user_updated_subject' => 'Account updated',
 	'email_user_updated_msg' => 'Your account has been updated by an administrator. A list of these changes is provided below. You can update your account details and preferences at any time by visiting the following URL:',
-	
+
 	# menu_inc.php
 	'main_link' => 'Main',
 	'view_bugs_link' => 'View Issues',
@@ -927,7 +929,7 @@ If you requested this verification, visit the following URL to change your passw
 	'docs_link' => 'Docs',
 	'logout_link' => 'Logout',
 	'my_view_link' => 'My View',
-	
+
 	# my_view_page.php
 	'my_view_title_unassigned' => 'Unassigned',
 	'my_view_title_recent_mod' => 'Recently Modified',
@@ -938,23 +940,23 @@ If you requested this verification, visit the following URL to change your passw
 	'my_view_title_feedback' => 'Awaiting Feedback from Me',
 	'my_view_title_verify' => 'Awaiting Confirmation of Resolution from Me',
 	'my_view_title_my_comments' => 'Issues I Have Commented On',
-	
+
 	# news_add.php
 	'news_added_msg' => 'News item added...',
-	
+
 	# news_delete.php
 	'news_deleted_msg' => 'Deleted news item...',
-	
+
 	# news_delete_page.php
 	'delete_news_sure_msg' => 'Are you sure you wish to delete this news item?',
 	'delete_news_item_button' => 'Delete News Item',
-	
+
 	# news_edit_page.php
 	'edit_news_title' => 'Edit News',
 	'headline' => 'Headline',
 	'body' => 'Body',
 	'update_news_button' => 'Update News',
-	
+
 	# news_menu_page.php
 	'add_news_title' => 'Add News',
 	'post_to' => 'Post to',
@@ -963,63 +965,63 @@ If you requested this verification, visit the following URL to change your passw
 	'edit_post' => 'Edit Post',
 	'delete_post' => 'Delete Post',
 	'select_post' => 'Select Post',
-	
+
 	# news_update.php
 	'news_updated_msg' => 'News item updated...',
-	
+
 	# news_view_page.php
 	'back_link' => 'Back',
-	
+
 	# proj_doc_add.php
 	'file_uploaded_msg' => 'File upload successful.',
-	
+
 	# proj_doc_add_page.php
 	'upload_file_title' => 'Upload File',
 	'title' => 'Title',
-	
+
 	# proj_doc_delete.php
 	'project_file_deleted_msg' => 'Project file deleted.',
-	
+
 	# proj_doc_delete_page.php
 	'confirm_file_delete_msg' => 'Are you sure you wish to delete this file?',
-	
+
 	# proj_doc_edit_page.php
 	'filename' => 'Filename',
 	'filename_label' => 'Filename:',
 	'file_update_button' => 'Update File',
 	'file_delete_button' => 'Delete File',
-	
+
 	# proj_doc_page.php
 	'project_documentation_title' => 'Project Documentation',
 	'user_documentation' => 'User Documentation',
 	'project_documentation' => 'Project Documentation',
 	'add_file' => 'Add File',
-	
+
 	# proj_doc_update.php
 	'project_document_updated' => 'Project update successful.',
-	
+
 	# proj_user_add.php
 	'project_user_added_msg' => 'Successfully added user to project.',
-	
+
 	# proj_user_delete.php
 	'project_removed_user_msg' => 'Successfully removed user from project.',
-	
+
 	# proj_user_delete_page.php
 	'remove_user_sure_msg' => 'Are you sure you wish to remove this user?',
 	'remove_user_button' => 'Remove User',
 	'remove_all_users_sure_msg' => 'Are you sure you wish to remove all the users of this project?',
 	'remove_all_users_button' => 'Remove All Users',
-	
+
 	# proj_user_menu_page.php
 	'add_user_title' => 'Add user to project',
 	'add_user_button' => 'Add User',
 	'project_selection_title' => 'Project Selection',
 	'remove_link' => 'Remove',
 	'remove_all_link' => 'Remove all',
-	
+
 	# proj_user_update.php
 	'updated_user_msg' => 'Successfully updated user.',
-	
+
 	# report_add.php
 	'must_enter_category' => 'You must select a category.',
 	'must_enter_severity' => 'You must select a severity.',
@@ -1028,7 +1030,7 @@ If you requested this verification, visit the following URL to change your passw
 	'must_enter_description' => 'You must enter a description.',
 	'report_more_bugs' => 'Report More Issues',
 	'submission_thanks_msg' => 'Thank you for your submission.',
-	
+
 	# report_bug_advanced_page.php
 	'simple_report_link' => 'Simple Report',
 	'enter_report_details_title' => 'Enter Report Details',
@@ -1041,38 +1043,38 @@ If you requested this verification, visit the following URL to change your passw
 	'additional_information' => 'Additional Information',
 	'submit_report_button' => 'Submit Report',
 	'check_report_more_bugs' => 'check to report more issues',
-	
+
 	# report_bug_page.php
 	'report_stay' => 'Report Stay',
-	
+
 	# set_project.php
 	'selected_project' => 'Selected project',
 	'valid_project_msg' => 'You must choose a valid project.',
-	
+
 	# signup.php
 	'signup_done_title' => 'Account registration processed.',
 	'password_emailed_msg' => 'Congratulations. You have registered successfully. You are now being sent a confirmation e-mail to verify your e-mail address. Visiting the link sent to you in this e-mail will activate your account.',
 	'no_reponse_msg' => 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.',
-	
+
 	# signup_page.php
 	'signup_captcha_request_label' => 'Enter the code as it is shown in the box on the right:',
 	'signup_info' => 'On completion of this form and verification of your answers, you will be sent a confirmation e-mail to the e-mail address you specified.<br />Using the confirmation e-mail, you will be able to activate your account. If you fail to activate your account within seven days, it will be purged.<br />You must specify a valid e-mail address in order to receive the account confirmation e-mail.',
 	'signup_title' => 'Signup',
 	'signup_button' => 'Signup',
 	'no_password_request' => 'Your password is managed by another system. Please contact your system administrator.',
-	
+
 	# site_settings_edit_page.php
 	'edit_site_settings_title' => 'Edit Site Settings',
 	'save_settings_button' => 'Save Settings',
-	
+
 	# site_settings_page.php
 	'site_settings_title' => 'Site Settings',
 	'system_info_link' => 'System Info',
 	'site_settings_link' => 'Site Settings',
-	
+
 	# site_settings_update.php
 	'site_settings_updated_msg' => 'Site settings have been updated',
-	
+
 	# summary_page.php
 	'summary_title' => 'Summary',
 	'summary_advanced_link' => 'Advanced summary',
@@ -1106,7 +1108,7 @@ If you requested this verification, visit the following URL to change your passw
 	'developer_stats' => 'Developer Stats',
 	'reporter_stats' => 'Reporter Stats',
 	'orct' => '(open/resolved/closed/total)',
-	
+
 	# view_all_bug_page.php
 	'any' => 'any',
 	'all' => 'all',
@@ -1123,7 +1125,7 @@ If you requested this verification, visit the following URL to change your passw
 	'recently_visited' => 'Recently Visited',
 	'priority_abbreviation' => 'P',
 	'note_user_id_label' => 'Note By:',
-	
+
 	# view_all_inc.php
 	'none' => 'none',
 	'current' => 'current',
@@ -1144,7 +1146,7 @@ If you requested this verification, visit the following URL to change your passw
 	'or_unassigned' => 'Or Unassigned',
 	'ok' => 'OK',
 	'select_all' => 'Select All',
-	
+
 	# stored query strings
 	'use_query' => 'Use Filter',
 	'delete_query' => 'Delete Filter',
@@ -1160,7 +1162,7 @@ If you requested this verification, visit the following URL to change your passw
 	'query_store_error' => 'There was an error saving this filter.',
 	'open_queries' => 'Manage Filters',
 	'query_delete_msg' => 'Are you sure you wish to delete this filter?',
-	
+
 	# bug_view_advanced_page.php
 	'view_simple_link' => 'View Simple',
 	'product_build' => 'Product Build',
@@ -1175,21 +1177,21 @@ If you requested this verification, visit the following URL to change your passw
 	'publish' => 'Publish',
 	'cached' => 'Cached',
 	'add_user_to_monitor' => 'Add',
-	
+
 	# view_bug_page.php
 	'bug_view_title' => 'View Issue Details',
-	
+
 	# bug_monitor_list_view_inc.php
 	'no_users_monitoring_bug' => 'There are no users monitoring this issue.',
 	'users_monitoring_bug' => 'Users monitoring this issue',
 	'monitoring_user_list' => 'User List',
-	
+
 	# bug_sponsorship_list_view_inc.php
 	'no_users_sponsoring_bug' => 'There are no users sponsoring this issue.',
 	'users_sponsoring_bug' => 'Users sponsoring this issue',
 	'sponsors_list' => 'Sponsors List',
 	'total_sponsorship_amount' => 'Total Sponsorship = %1$s',
-	
+
 	# custom field strings
 	'add_custom_field_button' => 'New Custom Field',
 	'delete_custom_field_button' => 'Delete Custom Field',
@@ -1246,10 +1248,10 @@ If you requested this verification, visit the following URL to change your passw
 	'attachment_missing' => 'Attachment missing',
 	'attachment_count' => 'Attachment count',
 	'view_attachments_for_issue' => 'View %1$d attachment(s) for issue #%2$d',
-	
+
 	# PHPMailer
 	'phpmailer_language' => 'en',
-	
+
 	# Sponsorship Strings
 	'sponsors' => '%1$d sponsor(s)',
 	'sponsorship_added' => 'Sponsorship Added',
@@ -1258,20 +1260,20 @@ If you requested this verification, visit the following URL to change your passw
 	'sponsorship_paid' => 'Sponsorship Paid',
 	'sponsorship_more_info' => 'More information about sponsorship',
 	'sponsorship_total' => 'Sponsorship Total',
-	
+
 	# URL explaining the process of sponsoring an issue. This is defined here rather than
 	# in the config to allow for a URL per language. This can be set to an empty string if there
-	# is not need to provide such process information.	
+	# is not need to provide such process information.
 	'sponsorship_process_url' => '',
-	
+
 	# Changelog
 	'changelog' => 'Change Log',
 	'changelog_empty' => 'No Change Log information available',
-	
+
 	# Roadmap
 	'roadmap' => 'Roadmap',
 	'resolved_progress' => '%1$d of %2$d issue(s) resolved. Progress (%3$d%%).',
-	
+
 	# Http auth
 	'http_auth_realm' => 'MantisBT Login',
 
@@ -1306,7 +1308,7 @@ If you requested this verification, visit the following URL to change your passw
 	'vertical' => 'Vertical',
 	'horizontal' => 'Horizontal',
 	'view_issue' => 'View Issue',
-	
+
 	# Pemissions report
 	'perm_rpt_capability' => 'Capability',
 	'view' => 'View',
@@ -1365,29 +1367,29 @@ If you requested this verification, visit the following URL to change your passw
 	'email_on_deleted' => 'E-mail on Deleted',
 	'email_on_sponsorship_changed' => 'E-mail on Sponsorship changed',
 	'email_on_relationship_changed' => 'E-mail on Relationship changed',
-	
+
 	# Dynamic filters (load filter controls via AJAX upon request)
 	'loading' => 'Loading...',
-	
+
 	# filter_api.php
 	'between_date' => 'Between',
 	'on_or_before_date' => 'On Or Before',
 	'before_date' => 'Before',
 	'after_date' => 'After',
 	'on_or_after_date' => 'On Or After',
-	
+
 	# Date constants
 	'from_date' => 'From',
 	'to_date' => 'To',
 	'on_date' => 'On',
-	
+
 	# Switch constants
 	'on' => 'On',
 	'off' => 'Off',
-	
+
 	# wiki related strings
 	'wiki' => 'Wiki',
-	
+
 	# Tagging
 	'tags' => 'Tags',
 	'tags_label' => 'Tags:',
@@ -1423,7 +1425,7 @@ If you requested this verification, visit the following URL to change your passw
 	'tag_stats_attached' => 'Issues attached: %1$s',
 	'tag_create' => 'Create Tag',
 	'show_all_tags' => 'All',
-	
+
 	# Time Tracking
 	'time_tracking_billing_link' => 'Time Tracking',
 	'time_tracking' => 'Time tracking',
@@ -1437,16 +1439,16 @@ If you requested this verification, visit the following URL to change your passw
 	'time_tracking_stopwatch_start' => 'Start',
 	'time_tracking_stopwatch_stop' => 'Stop',
 	'time_tracking_stopwatch_reset' => 'Reset',
-	
+
 	'access_denied' => 'Access Denied.',
-	
+
 	# Twitter Integration
 	'twitter_resolved' => '%1$d: [%2$s] %3$s (resolved by %4$s in %5$s)',
 	'twitter_resolved_no_version' => '%1$d: [%2$s] %3$s (resolved by %4$s)',
-	
+
 	# Project Page
 	'development_team' => 'Development Team',
-	
+
 	# manage columns page
 	'manage_columns_config' => 'Manage Columns',
 	'all_columns_title' => 'All Available Columns',
@@ -1460,26 +1462,26 @@ If you requested this verification, visit the following URL to change your passw
 	'reset_columns_configuration' => 'Reset Columns Configuration',
 	'copy_columns_from' => 'Copy Columns From',
 	'copy_columns_to' => 'Copy Columns To',
-	
+
 	# due date
 	'due_date' => 'Due Date',
 	'overdue' => 'Overdue',
-	
+
 	#account_view_page.php
 	'view_account_title' => 'User Information',
-	
+
 	# view_user_page.php
 	'manage_user' => 'Manage User',
-	
+
 	# separators
 	'word_separator' => '&#32;',
 	'label' => '%1$s:',
-	
+
 	# admin pages
 	'install_information' => 'MantisBT Installation Information',
 	'database_information' => 'MantisBT Database Information',
 	'path_information' => 'MantisBT Path Information',
-	
+
 	# months
 	'month_january' => 'January',
 	'month_february' => 'February',
@@ -1493,7 +1495,7 @@ If you requested this verification, visit the following URL to change your passw
 	'month_october' => 'October',
 	'month_november' => 'November',
 	'month_december' => 'December',
-	
+
 	'missing_error_string' => 'Missing Error String: ',
 	ERROR_GENERIC => 'An error occurred during this action. You may wish to report this error to your local administrator.',
 	ERROR_SQL => 'SQL error detected.',
