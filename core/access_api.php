@@ -224,7 +224,7 @@ function access_get_global_level( $p_user_id = null ) {
 	# Deal with not logged in silently in this case
 	# @@@ we may be able to remove this and just error
 	#     and once we default to anon login, we can remove it for sure
-	if( !auth_is_user_authenticated() ) {
+	if( empty( $p_user_id ) && !auth_is_user_authenticated() ) {
 		return false;
 	}
 
@@ -278,14 +278,14 @@ function access_ensure_global_level( $p_access_level, $p_user_id = null ) {
  * @access public
  */
 function access_get_project_level( $p_project_id = null, $p_user_id = null ) {
-	# Deal with not logged in silently in this case
-	/** @todo we may be able to remove this and just error and once we default to anon login, we can remove it for sure */
-	if( !auth_is_user_authenticated() ) {
-		return ANYBODY;
-	}
-
 	if( null === $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
+	}
+
+	# Deal with not logged in silently in this case
+	/** @todo we may be able to remove this and just error and once we default to anon login, we can remove it for sure */
+	if( empty( $p_user_id ) && !auth_is_user_authenticated() ) {
+		return ANYBODY;
 	}
 
 	if( null === $p_project_id ) {
@@ -405,15 +405,15 @@ function access_has_any_project( $p_access_level, $p_user_id = null ) {
  * @access public
  */
 function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
+	if( $p_user_id === null ) {
+		$p_user_id = auth_get_current_user_id();
+	}
+
 	# Deal with not logged in silently in this case
 	# @@@ we may be able to remove this and just error
 	#     and once we default to anon login, we can remove it for sure
-	if( !auth_is_user_authenticated() ) {
+	if( empty( $p_user_id ) && !auth_is_user_authenticated() ) {
 		return false;
-	}
-
-	if( $p_user_id === null ) {
-		$p_user_id = auth_get_current_user_id();
 	}
 
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
