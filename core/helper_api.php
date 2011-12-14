@@ -85,13 +85,16 @@ function get_status_color( $p_status ) {
 }
 
 /**
- * Given a enum string and num, return the appropriate string
+ * Given a enum string and num, return the appropriate string for the
+ * specified user/project
  * @param string $p_enum_name
  * @param int $p_val
+ * @param int|null $p_user user id, defaults to null (all users)
+ * @param int|null $p_project project id, defaults to null (all projects)
  * @return string
  */
-function get_enum_element( $p_enum_name, $p_val ) {
-	$config_var = config_get( $p_enum_name . '_enum_string' );
+function get_enum_element( $p_enum_name, $p_val, $p_user = null, $p_project = null ) {
+	$config_var = config_get( $p_enum_name . '_enum_string', null, $p_user, $p_project );
 	$string_var = lang_get( $p_enum_name . '_enum_string' );
 
 	return MantisEnum::getLocalizedLabel( $config_var, $string_var, $p_val );
