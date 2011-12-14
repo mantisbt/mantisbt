@@ -654,7 +654,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 
 	# get the information from the related bug and prepare the link
 	$t_bug = bug_get( $t_related_bug_id, false );
-	$t_status_string = get_enum_element( 'status', $t_bug->status );
+	$t_status_string = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 	$t_resolution_string = get_enum_element( 'resolution', $t_bug->resolution );
 
 	$t_relationship_info_html = $t_td . string_no_break( $t_relationship_descr ) . '&#160;</td>';
