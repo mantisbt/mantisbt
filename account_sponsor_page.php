@@ -136,7 +136,7 @@
 				$t_released_label = $t_bug->fixed_in_version;
 			}
 
-			echo '<tr bgcolor="' . get_status_color( $t_bug->status ) . '">';
+			echo '<tr bgcolor="' . get_status_color( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) . '">';
 			echo '<td><a href="' . string_get_bug_view_url( $row['bug'] ) . '">' . bug_format_id( $row['bug'] ) . '</a></td>';
 			echo '<td>' . project_get_field( $t_bug->project_id, 'name' ) . '&#160;</td>';
 			echo '<td class="right">' . $t_released_label . '&#160;</td>';
@@ -246,7 +246,7 @@
 				$t_released_label = $t_bug->fixed_in_version;
 			}
 
-			echo '<tr bgcolor="' . get_status_color( $t_bug->status ) . '">';
+			echo '<tr bgcolor="' . get_status_color( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) . '">';
 			echo '<td><a href="' . string_get_bug_view_url( $row['bug'] ) . '">' . bug_format_id( $row['bug'] ) . '</a></td>';
 			echo '<td>' . project_get_field( $t_bug->project_id, 'name' ) . '&#160;</td>';
 			echo '<td class="right">' . $t_released_label . '&#160;</td>';

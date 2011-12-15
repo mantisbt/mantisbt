@@ -202,7 +202,7 @@
 			}
 
 			# choose color based on status
-			$status_color = get_status_color( $t_row->status );
+			$status_color = get_status_color( $t_row->status, auth_get_current_user_id(), $t_row->project_id );
 
 			echo '<tr bgcolor="', $status_color, '" border="1" valign="top">';
 
