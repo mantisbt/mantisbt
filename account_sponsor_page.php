@@ -164,7 +164,7 @@ if ( 0 == $t_sponsors ) {
 		$t_sponsor = sponsorship_get( $row['sponsor'] );
 
 		# describe bug
-		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
+		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) );
 		$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
 		$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_project );
 		if ( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
@@ -277,7 +277,7 @@ if ( 0 == $t_sponsors ) {
 		$t_buglist[] = $row['bug'] . ':' . $row['sponsor'];
 
 		# describe bug
-		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
+		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) );
 		$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
 		$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_project );
 		if ( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
