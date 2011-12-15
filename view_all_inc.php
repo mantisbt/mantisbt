@@ -34,7 +34,7 @@
  * @uses print_api.php
  */
 
-if ( !defined( 'VIEW_ALL_INC_ALLOW' ) ) {
+if( !defined( 'VIEW_ALL_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -53,7 +53,7 @@ require_api( 'print_api.php' );
 
 $t_filter = current_user_get_bug_filter();
 # NOTE: this check might be better placed in current_user_get_bug_filter()
-if ( $t_filter === false ) {
+if( $t_filter === false ) {
 	$t_filter = filter_get_default();
 }
 
@@ -65,7 +65,7 @@ $g_checkboxes_exist = false;
 $t_icon_path = config_get( 'icon_path' );
 
 # Improve performance by caching category data in one pass
-if ( helper_get_current_project() > 0 ) {
+if( helper_get_current_project() > 0 ) {
 	category_get_all_rows( helper_get_current_project() );
 } else {
 	$t_categories = array();
@@ -81,7 +81,7 @@ $col_count = count( $t_columns );
 $t_filter_position = config_get( 'filter_position' );
 
 # -- ====================== FILTER FORM ========================= --
-if ( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
+if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 	filter_draw_selection_area( $f_page_number );
 }
 # -- ====================== end of FILTER FORM ================== --
@@ -91,7 +91,7 @@ if ( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 
 $t_status_legend_position = config_get( 'status_legend_position' );
 
-if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
+if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 	html_status_legend();
 }
 ?>
@@ -109,7 +109,7 @@ if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend
 			$v_start = 0;
 			$v_end   = 0;
 
-			if ( count( $rows ) > 0 ) {
+			if( count( $rows ) > 0 ) {
 				$v_start = $t_filter['per_page'] * ($f_page_number - 1) + 1;
 				$v_end = $v_start + count( $rows ) - 1;
 			}
@@ -132,14 +132,14 @@ if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend
 
 			foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
 				foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-					if ( !is_array( $t_callback_menu_options ) ) {
+					if( !is_array( $t_callback_menu_options ) ) {
 						$t_callback_menu_options = array( $t_callback_menu_options );
 					}
 
 					foreach ( $t_callback_menu_options as $t_menu_option ) {
-					    if ( $t_menu_option ) {
-						    print_bracket_link_prepared( $t_menu_option );
-					    }
+						if( $t_menu_option ) {
+							print_bracket_link_prepared( $t_menu_option );
+						}
 					}
 				}
 			}
@@ -155,8 +155,8 @@ if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend
 <?php # -- Bug list column header row -- ?>
 <tr class="buglist-headers row-category">
 <?php
+	$t_title_function = 'print_column_title';
 	foreach( $t_columns as $t_column ) {
-		$t_title_function = 'print_column_title';
 		helper_call_custom_function( $t_title_function, array( $t_column ) );
 	}
 ?>
@@ -184,10 +184,10 @@ function write_bug_rows ( $p_rows )
 	for( $i=0; $i < $t_rows; $i++ ) {
 		$t_row = $p_rows[$i];
 
-		if ( ( 0 == $t_row->sticky ) && ( 0 == $i ) ) {
+		if( ( 0 == $t_row->sticky ) && ( 0 == $i ) ) {
 			$t_in_stickies = false;
 		}
-		if ( ( 0 == $t_row->sticky ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
+		if( ( 0 == $t_row->sticky ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
 ?>
 		   <tr>
 				   <td class="left" colspan="<?php echo count( $t_columns ); ?>" bgcolor="#999999">&#160;</td>
@@ -201,8 +201,8 @@ function write_bug_rows ( $p_rows )
 
 		echo '<tr class="' . $status_label . '">';
 
+		$t_column_value_function = 'print_column_value';
 		foreach( $t_columns as $t_column ) {
-			$t_column_value_function = 'print_column_value';
 			helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row ) );
 		}
 
@@ -221,12 +221,12 @@ write_bug_rows($rows);
 		<td class="left" colspan="<?php echo $col_count; ?>">
 			<span class="floatleft">
 <?php
-		if ( $g_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
+		if( $g_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
 			echo '<input type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all" class="check_all" />';
 			echo '<label for="bug_arr_all">' . lang_get( 'select_all' ) . '</label>';
 		}
 
-		if ( $g_checkboxes_exist ) {
+		if( $g_checkboxes_exist ) {
 ?>
 			<select name="action">
 				<?php print_all_bug_action_option_list( $t_unique_project_ids ) ?>
@@ -252,12 +252,12 @@ write_bug_rows($rows);
 
 <?php
 
-if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
+if( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 	html_status_legend();
 }
 
 # -- ====================== FILTER FORM ========================= --
-if ( ( $t_filter_position & FILTER_POSITION_BOTTOM ) == FILTER_POSITION_BOTTOM ) {
+if( ( $t_filter_position & FILTER_POSITION_BOTTOM ) == FILTER_POSITION_BOTTOM ) {
 	filter_draw_selection_area( $f_page_number );
 }
 # -- ====================== end of FILTER FORM ================== --
