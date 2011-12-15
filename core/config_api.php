@@ -189,7 +189,7 @@ function config_get_global( $p_option, $p_default = null ) {
 	global $g_cache_config_eval;
 	if( isset( $GLOBALS['g_' . $p_option] ) ) {
 		if( !isset( $g_cache_config_eval['g_' . $p_option] ) ) {
-			$t_value = config_eval( $GLOBALS['g_' . $p_option] );
+			$t_value = config_eval( $GLOBALS['g_' . $p_option], true );
 			$g_cache_config_eval['g_' . $p_option] = $t_value;
 		} else {
 			$t_value = $g_cache_config_eval['g_' . $p_option];
@@ -579,11 +579,17 @@ function config_obsolete( $p_var, $p_replace = '' ) {
 	}
 }
 
-# ------------------
-# check for recursion in defining config variables
-# If there is a %text% in the returned value, re-evaluate the "text" part and replace
-#  the string
-function config_eval( $p_value ) {
+/**
+ * check for recursion in defining config variables
+ *
+ * If there is a %text% in the returned value, re-evaluate the "text"
+ * part and replace the string
+ *
+ * @param string $p_value config variable to evaluate
+ * @param bool if true, gets  %text% as a global config, defaults to false
+ * @return string
+ */
+function config_eval( $p_value, $p_global = false ) {
 	$t_value = $p_value;
 	if( !empty( $t_value ) && is_string( $t_value ) && !is_numeric( $t_value ) ) {
 		if( 0 < preg_match_all( '/(?:^|[^\\\\])(%([^%]+)%)/U', $t_value, $t_matches ) ) {
@@ -592,7 +598,11 @@ function config_eval( $p_value ) {
 
 				# $t_matches[0][$i] is the matched string including the delimiters
 				# $t_matches[1][$i] is the target parameter string
-				$t_repl = config_get( $t_matches[2][$i] );
+				if( $p_global ) {
+					$t_repl = config_get_global( $t_matches[2][$i] );
+				} else {
+					$t_repl = config_get( $t_matches[2][$i] );
+				}
 				$t_value = str_replace( $t_matches[1][$i], $t_repl, $t_value );
 			}
 		}
