@@ -48,7 +48,7 @@
 
 	$t_filter = current_user_get_bug_filter();
 	# NOTE: this check might be better placed in current_user_get_bug_filter()
-	if ( $t_filter === false ) {
+	if( $t_filter === false ) {
 		$t_filter = filter_get_default();
 	}
 
@@ -60,11 +60,11 @@
 	$t_icon_path = config_get( 'icon_path' );
 
 	# Improve performance by caching category data in one pass
-	if ( helper_get_current_project() > 0 ) {
+	if( helper_get_current_project() > 0 ) {
 		category_get_all_rows( helper_get_current_project() );
 	} else {
 		$t_categories = array();
-		foreach ($rows as $t_row) {
+		foreach( $rows as $t_row ) {
 			$t_categories[] = $t_row->category_id;
 		}
 		category_cache_array_rows( array_unique( $t_categories ) );
@@ -76,7 +76,7 @@
 	$t_filter_position = config_get( 'filter_position' );
 
 	# -- ====================== FILTER FORM ========================= --
-	if ( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
+	if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 		filter_draw_selection_area( $f_page_number );
 	}
 	# -- ====================== end of FILTER FORM ================== --
@@ -86,12 +86,12 @@
 
 	$t_status_legend_position = config_get( 'status_legend_position' );
 
-	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
+	if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 		html_status_legend();
 	}
 
 	/** @todo (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...) */
-	if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ){
+	if( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ){
 		?>
 		<script type="text/javascript" language="JavaScript">
 		<!--
@@ -117,7 +117,7 @@
 			$v_start = 0;
 			$v_end   = 0;
 
-			if ( count( $rows ) > 0 ) {
+			if( count( $rows ) > 0 ) {
 				$v_start = $t_filter['per_page'] * ($f_page_number - 1) + 1;
 				$v_end = $v_start + count( $rows ) - 1;
 			}
@@ -137,16 +137,16 @@
 
 				$t_event_menu_options = $t_links = event_signal( 'EVENT_MENU_FILTER' );
 
-				foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-					foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-						if ( !is_array( $t_callback_menu_options ) ) {
+				foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+					foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+						if( !is_array( $t_callback_menu_options ) ) {
 							$t_callback_menu_options = array( $t_callback_menu_options );
 						}
 
-						foreach ( $t_callback_menu_options as $t_menu_option ) {
-						    if ( $t_menu_option ) {
-							    print_bracket_link_prepared( $t_menu_option );
-						    }
+						foreach( $t_callback_menu_options as $t_menu_option ) {
+							if( $t_menu_option ) {
+								print_bracket_link_prepared( $t_menu_option );
+							}
 						}
 					}
 				}
@@ -162,8 +162,8 @@
 <?php # -- Bug list column header row -- ?>
 <tr class="row-category">
 <?php
+		$t_title_function = 'print_column_title';
 		foreach( $t_columns as $t_column ) {
-			$t_title_function = 'print_column_title';
 			helper_call_custom_function( $t_title_function, array( $t_column ) );
 		}
 ?>
@@ -174,7 +174,7 @@
 	<td colspan="<?php echo $col_count; ?>"></td>
 </tr>
 <?php
-	function write_bug_rows ( $p_rows )
+	function write_bug_rows( $p_rows )
 	{
 		global $t_columns, $t_filter;
 
@@ -189,14 +189,14 @@
 		for( $i=0; $i < $t_rows; $i++ ) {
 			$t_row = $p_rows[$i];
 
-			if ( ( 0 == $t_row->sticky ) && ( 0 == $i ) ) {
+			if( ( 0 == $t_row->sticky ) && ( 0 == $i ) ) {
 				$t_in_stickies = false;
 			}
-			if ( ( 0 == $t_row->sticky ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
+			if( ( 0 == $t_row->sticky ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
 ?>
-               <tr>
-                       <td class="left" colspan="<?php echo count( $t_columns ); ?>" bgcolor="#999999">&#160;</td>
-               </tr>
+				<tr>
+					<td class="left" colspan="<?php echo count( $t_columns ); ?>" bgcolor="#999999">&#160;</td>
+				</tr>
 <?php
 				$t_in_stickies = false;
 			}
@@ -206,8 +206,8 @@
 
 			echo '<tr bgcolor="', $status_color, '" border="1" valign="top">';
 
+			$t_column_value_function = 'print_column_value';
 			foreach( $t_columns as $t_column ) {
-				$t_column_value_function = 'print_column_value';
 				helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row ) );
 			}
 
@@ -216,7 +216,7 @@
 	}
 
 
-	write_bug_rows($rows);
+	write_bug_rows( $rows );
 	# -- ====================== end of BUG LIST ========================= --
 
 	# -- ====================== MASS BUG MANIPULATION =================== --
@@ -225,11 +225,11 @@
 		<td class="left" colspan="<?php echo $col_count; ?>">
 			<span class="floatleft">
 <?php
-		if ( $g_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
+		if( $g_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
 			echo "<input type=\"checkbox\" name=\"all_bugs\" value=\"all\" onclick=\"checkall('bug_action', this.form.all_bugs.checked)\" /><span class=\"small\">" . lang_get( 'select_all' ) . '</span>';
 		}
 
-		if ( $g_checkboxes_exist ) {
+		if( $g_checkboxes_exist ) {
 ?>
 			<select name="action">
 				<?php print_all_bug_action_option_list( $t_unique_project_ids ) ?>
@@ -254,12 +254,12 @@
 
 <?php
 
-	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
+	if( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 		html_status_legend();
 	}
 
 	# -- ====================== FILTER FORM ========================= --
-	if ( ( $t_filter_position & FILTER_POSITION_BOTTOM ) == FILTER_POSITION_BOTTOM ) {
+	if( ( $t_filter_position & FILTER_POSITION_BOTTOM ) == FILTER_POSITION_BOTTOM ) {
 		filter_draw_selection_area( $f_page_number );
 	}
 	# -- ====================== end of FILTER FORM ================== --
