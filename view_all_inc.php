@@ -197,7 +197,7 @@ function write_bug_rows ( $p_rows )
 		}
 
 		# choose color based on status
-		$status_label = html_get_status_css_class( $t_row->status );
+		$status_label = html_get_status_css_class( $t_row->status, auth_get_current_user_id(), $t_row->project_id );
 
 		echo '<tr class="' . $status_label . '">';
 

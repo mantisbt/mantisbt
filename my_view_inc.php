@@ -449,7 +449,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	$t_last_updated = date( config_get( 'normal_date_format' ), $t_bug->last_updated );
 
 	# choose color based on status
-	$status_label = html_get_status_css_class( $t_bug->status );
+	$status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 
 	# Check for attachments
 	$t_attachment_count = 0;

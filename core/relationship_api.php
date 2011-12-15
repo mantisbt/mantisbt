@@ -707,7 +707,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 
 	if( $p_html_preview == false ) {
 		# choose color based on status
-		$status_label = html_get_status_css_class( $t_bug->status );
+		$status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 
 		$t_relationship_info_html = '<tr class="' . $status_label . '">' . $t_relationship_info_html . '</tr>' . "\n";
 	} else {

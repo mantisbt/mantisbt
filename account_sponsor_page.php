@@ -174,7 +174,7 @@ if ( 0 == $t_sponsors ) {
 		}
 
 		# choose color based on status
-		$status_label = html_get_status_css_class( $t_bug->status );
+		$status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 
 		echo '<tr class="' . $status_label .  '">';
 		echo '<td><a href="' . string_get_bug_view_url( $row['bug'] ) . '">' . bug_format_id( $row['bug'] ) . '</a></td>';
@@ -287,7 +287,7 @@ if ( 0 == $t_sponsors ) {
 		}
 
 		# choose color based on status
-		$status_label = html_get_status_css_class( $t_bug->status );
+		$status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 
 		echo '<tr class="' . $status_label .  '">';
 		echo '<td><a href="' . string_get_bug_view_url( $row['bug'] ) . '">' . bug_format_id( $row['bug'] ) . '</a></td>';

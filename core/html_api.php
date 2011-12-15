@@ -1723,10 +1723,10 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 }
 
 /**
- * get the css class name for the given status
+ * get the css class name for the given status, user and project
  * @param int $p_status
  * @return string
  */
-function html_get_status_css_class( $p_status ) {
-	return string_attribute( MantisEnum::getLabel( config_get('status_enum_string' ), $p_status ) . '-color' );
+function html_get_status_css_class( $p_status, $p_user = null, $p_project = null ) {
+	return string_attribute( MantisEnum::getLabel( config_get('status_enum_string', null, $p_user, $p_project ), $p_status ) . '-color' );
 }
