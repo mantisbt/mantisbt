@@ -1127,7 +1127,7 @@ function print_column_resolution( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
  */
 function print_column_status( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="center">';
-	printf( '<span class="issue-status" title="%s">%s</span>', get_enum_element( 'resolution', $p_bug->resolution ), get_enum_element( 'status', $p_bug->status ) );
+	printf( '<span class="issue-status" title="%s">%s</span>', get_enum_element( 'resolution', $p_bug->resolution ), get_enum_element( 'status', $p_bug->status, auth_get_current_user_id(), $p_bug->project_id ) );
 
 	# print username instead of status
 	if(( ON == config_get( 'show_assigned_names' ) ) && ( $p_bug->handler_id > 0 ) && ( access_has_project_level( config_get( 'view_handler_threshold' ), $p_bug->project_id ) ) ) {
