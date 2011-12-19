@@ -119,7 +119,7 @@
 		?>
 	</td>
 </tr>
- 
+
 <!-- Access Level -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -175,38 +175,49 @@
 <br />
 
 <!-- RESET AND DELETE -->
+<?php
+	$t_reset = helper_call_custom_function( 'auth_can_change_password', array() );
+	$t_unlock = OFF != config_get( 'max_failed_login_count' ) && $t_user['failed_login_count'] > 0;
+	$t_delete = !( ( user_is_administrator( $t_user_id ) && ( user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1 ) ) );
+
+	if( $t_reset || $t_unlock || $t_delete ) {
+?>
 <div class="border center">
 
-<!-- Reset Button -->
-<?php if( helper_call_custom_function( 'auth_can_change_password', array() ) ) { ?>
+<!-- Reset/Unlock Button -->
+<?php if( $t_reset || $t_unlock ) { ?>
 	<form method="post" action="manage_user_reset.php">
 <?php echo form_security_field( 'manage_user_reset' ) ?>
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+<?php if( $t_reset ) { ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'reset_password_button' ) ?>" />
+<?php } else { ?>
+		<input type="submit" class="button" value="<?php echo lang_get( 'account_unlock_button' ) ?>" />
+<?php } ?>
 	</form>
 <?php } ?>
 
 <!-- Delete Button -->
-<?php if ( !( ( user_is_administrator( $t_user_id ) && ( user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1 ) ) ) ) { ?>
+<?php if ( $t_delete ) { ?>
 	<form method="post" action="manage_user_delete.php">
 <?php echo form_security_field( 'manage_user_delete' ) ?>
-
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
 	</form>
 <?php } ?>
 </div>
-<br />
-<?php if( !$t_ldap ) { ?>
-<div align="center">
-<?php
-	if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
-		echo lang_get( 'reset_password_msg' );
-	} else {
-		echo lang_get( 'reset_password_msg2' );
-	}
-?>
-</div>
+	<?php if( $t_reset ) { ?>
+	<div align="center">
+	<br />
+	<?php
+		if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
+			echo lang_get( 'reset_password_msg' );
+		} else {
+			echo lang_get( 'reset_password_msg2' );
+		}
+	?>
+	</div>
+	<?php } ?>
 <?php } ?>
 
 
