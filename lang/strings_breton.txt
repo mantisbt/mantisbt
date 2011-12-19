@@ -553,7 +553,7 @@ $s_error_database_no_schema_version = '<strong>Fazi :</strong> Diamzeret eo fram
 $s_error_database_version_out_of_date_2 = '<strong>Evezh :</strong> Diamzeret eo framm an diaz roadennoù marteze. Lakait-eñ a-live <a href="admin/install.php">amañ</a>, mar plij, a-raok kevreañ.';
 $s_error_code_version_out_of_date = '<strong>Evezh :</strong> Nevesoc\'h eo framm an diaz roadennoù eget ar c\'hod staliet. Lakait ar c\'hod a-live, mar plij.';
 $s_login_page_info = 'Degemer mat er reizhiad da verañ drein.';
-$s_login_title = 'Anv implijer';
+$s_login_title = 'Kevreañ';
 $s_save_login = 'Derc\'hel soñj eus an titouroù kevreañ war ar merdeer-mañ';
 $s_secure_session = 'Dalc\'h suraet';
 $s_secure_session_long = 'Aotren ho talc\'h da vezañ implijet diwar ar chomlec\'h IP-mañ hepken.';

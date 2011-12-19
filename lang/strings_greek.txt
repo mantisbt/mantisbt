@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author AK
  * @author Consta
  * @author Crazymadlover
  * @author Evropi
@@ -127,6 +128,7 @@ $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Το εγχείρημα "%1$d" δεν 
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%1$s\' not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Invalid email.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Άκυρη τιμή για το πεδίο "%1$s".';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Δε βρέθηκε κατηγορία.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version \'%1$s\' not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Το όνομα χρήστη δεν είναι δεκτό. Τα ονόματα μπορούν να περιέχουν μόνο λατινικούς χαρακτήρες, αριθμούς, κενά, παύλες και underscores(-).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';

@@ -26,12 +26,14 @@
  * @file
  *
  * @author Rudko
+ * @author Wizzard
  */
 
 $s_plugin_format_title = 'Formátovanie MantisBT';
 $s_plugin_format_description = 'Oficiálne textové spracovanie a formátovacie rozšírenie.';
 $s_plugin_format_config = 'Nastavenie';
 $s_plugin_format_process_text = 'Textové Spracovanie';
+$s_plugin_format_process_text_warning_notice = 'Nevypínajte, ak naozaj neviete, čo robíte. Vo vypnutom stave hrozia útoky typu cross site scripting (XSS).';
 $s_plugin_format_process_urls = 'URL Spracovanie';
 $s_plugin_format_process_buglinks = 'MantisBT Odkazy (Problém/Poznámka o probléme)';
 $s_plugin_format_process_vcslinks = 'VCS Odkazy';

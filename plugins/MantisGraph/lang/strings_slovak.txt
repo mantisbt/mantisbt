@@ -26,6 +26,7 @@
  * @file
  *
  * @author Rudko
+ * @author Wizzard
  */
 
 $s_plugin_graph_title = 'Grafiky Mantis';
@@ -40,12 +41,16 @@ $s_plugin_MantisGraph_severity_link = 'Podľa náročnosti';
 $s_plugin_MantisGraph_category_link = 'Podľa kategórie';
 $s_plugin_MantisGraph_resolution_link = 'Podľa riešenia';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Grafika';
-$s_plugin_MantisGraph_library = 'Knižnica Grafík';
+$s_plugin_MantisGraph_library = 'Použitá grafová knižnica';
 $s_plugin_MantisGraph_bundled = 'Zväzok použitia';
 $s_plugin_MantisGraph_window_width = 'Šírka grafiky (v pixeloch)';
 $s_plugin_MantisGraph_bar_aspect = 'pomer rozmeru strán grafík (výška/šírka)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'koľko grafík v riadku sa má zobraziť v rozšírenom súhrne';
-$s_plugin_MantisGraph_jpgraph_antialias = 'LEN JPGRAPH: anti-aliasing: Zlepší výzor určitých grafík. Poznámka: Používanie anti-aliasingu spomaluje kreslenie línií o faktor 8';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Koľko grafov na riadok sa zobrazí na stránke rozšíreného zhrnutia';
+$s_plugin_MantisGraph_font = 'Písmo';
+$s_plugin_MantisGraph_jpgraph_path = 'Systémová cesta ku knižnici JpGraph';
+$s_plugin_MantisGraph_jpgraph_path_default = 'Nechajte prázdne pre predvolené: {mantisroot} / library/jpgraph';
+$s_plugin_MantisGraph_jpgraph_antialias = 'Antialiasing JpGraph';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'Antialiasing zlepšuje vzhľad niektorých grafov na úkor výkonu (až 8x pomalšie)';
 $s_plugin_MantisGraph_enabled = 'Zapnúť';
 $s_plugin_MantisGraph_disabled = 'Vypnúť';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Graf podľa stavu';

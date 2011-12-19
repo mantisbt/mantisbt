@@ -35,6 +35,7 @@
  * @author Jon Harald Søby
  * @author Laaknor
  * @author Nghtwlkr
+ * @author Njardarlogar
  */
 
 $s_actiongroup_menu_move = 'Flytt til annet prosjekt';

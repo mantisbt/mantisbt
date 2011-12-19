@@ -26,6 +26,7 @@
  * @file
  *
  * @author Emperyan
+ * @author Joseph
  * @author Karduelis
  * @author Khutuck
  * @author Korayal
@@ -606,7 +607,7 @@ $s_manage_workflow_config = 'Workflow';
 $s_manage_tags_link = 'Etiketleri Yönet';
 $s_create_new_account_link = 'Hesap Ekle';
 $s_projects_link = 'Projeler';
-$s_documentation_link = 'Dökümantasyon';
+$s_documentation_link = 'Dokümantasyon';
 $s_new_accounts_title = 'Yeni Hesaplar';
 $s_1_week_title = '1 Hafta';
 $s_never_logged_in_title = 'Sisteme hiç girmeyen kullanıcılar';

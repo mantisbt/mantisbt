@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Beta16
  * @author Darth Kule
  * @author Giallu
  * @author Lele Gaifax, lele@seldati.it
@@ -1058,6 +1059,8 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ATTENZIONE</b>: non t
 $s_create_child_bug_button = 'Duplica';
 $s_bug_cloned_to = 'Anomalia duplicata';
 $s_bug_created_from = 'Anomalia generata da';
+$s_copy_notes_from_parent = 'Copia le note del bug';
+$s_copy_attachments_from_parent = 'Copia gli allegati';
 $s_viewing_bug_relationship_graph_title = 'Grafico delle relazioni';
 $s_viewing_bug_dependency_graph_title = 'Grafico delle dipendenze';
 $s_relation_graph = 'Grafico relazioni';
@@ -1169,8 +1172,9 @@ $s_tag_related_issues = 'Anomalie correlate (%1$s)';
 $s_tag_stats_attached = 'Anomalie contrassegnate: %1$s';
 $s_tag_create = 'Crea voce';
 $s_show_all_tags = 'Tutto';
-$s_time_tracking_billing_link = 'Riepilogo costi';
+$s_time_tracking_billing_link = 'Tempistiche';
 $s_time_tracking = 'Tempistiche';
+$s_time_tracking_time_spent = 'Tempo trascorso:';
 $s_time_tracking_get_info_button = 'Informazioni sulle tempistiche';
 $s_time_tracking_cost_per_hour = 'Costo orario';
 $s_time_tracking_cost = 'Costo';
