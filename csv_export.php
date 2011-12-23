@@ -63,6 +63,11 @@
 	# Get columns to be exported
 	$t_columns = csv_get_columns();
 
+	# export BOM
+	if ( config_get( 'csv_add_bom' ) == ON ) {
+		echo "\xEF\xBB\xBF";
+	}
+
 	# export the titles
 	$t_first_column = true;
 	ob_start();

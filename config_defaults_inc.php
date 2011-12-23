@@ -2702,6 +2702,13 @@
 	$g_csv_separator = ',';
 
 	/**
+	  * CSV Export
+	  * Add Byte Order Mark (BOM) at the begining of the file as it helps Excel display the file in UTF-8
+	  * @global string $g_csv_add_bom
+	  */
+	$g_csv_add_bom = OFF;
+
+	/**
 	 * threshold for users to view the system configurations
 	 * @global int $g_view_configuration_threshold
 	 */
