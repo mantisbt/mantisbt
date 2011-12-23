@@ -3030,6 +3030,18 @@
 
                         <variablelist>
                             <varlistentry>
+                                <term>LOG_AJAX</term>
+                                <listitem>
+                                    <para></para>
+                                </listitem>
+                            </varlistentry>
+                            <varlistentry>
+                                <term>LOG_DATABASE</term>
+                                <listitem>
+                                    <para></para>
+                                </listitem>
+                            </varlistentry>
+                            <varlistentry>
                                 <term>LOG_EMAIL</term>
                                 <listitem>
                                     <para>logs issue id, message type and recipients for all emails
@@ -3046,8 +3058,23 @@
                                     </para>
                                 </listitem>
                             </varlistentry>
+                            <varlistentry>
+                                <term>LOG_FILTERING</term>
+                                <listitem>
+                                    <para></para>
+                                </listitem>
+                            </varlistentry>
+                            <varlistentry>
+                                <term>LOG_LDAP</term>
+                                <listitem>
+                                    <para>logs the details of LDAP operations</para>
+                                </listitem>
+                            </varlistentry>
                         </variablelist>
                     </para>
+                    
+                    <para>Multiple logging levels can be specified by XOR'ing them, e.g. 
+                    	<literal>LOG_EMAIL | LOG_EMAIL_RECIPIENT</literal></para>
                 </listitem>
             </varlistentry>
             <varlistentry>
