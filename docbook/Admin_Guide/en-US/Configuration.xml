@@ -2439,6 +2439,14 @@
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry>
+                <term>$g_csv_add_bom</term>
+                <listitem>
+                    <para>Add Byte Order Mark (BOM) at the begining of the file as it helps Excel display the file in UTF-8.
+                    The default value is OFF;
+                    </para>
+                </listitem>
+            </varlistentry>
         </variablelist>
     </section>
 
