@@ -710,6 +710,9 @@
 		include( $tpl_mantis_dir . 'bug_monitor_list_view_inc.php' );
 	}
 
+	# Allow plugins to display stuff before notes
+	event_signal( 'EVENT_VIEW_BUG_BEFORE_NOTES', array( $f_bug_id ) );
+
 	# Bugnotes and "Add Note" box
 	if ( 'ASC' == current_user_get_pref( 'bugnote_order' ) ) {
 		include( $tpl_mantis_dir . 'bugnote_view_inc.php' );
@@ -738,6 +741,9 @@
 	if ( $tpl_show_history ) {
 		include( $tpl_mantis_dir . 'history_inc.php' );
 	}
+
+	# Allow plugins to display stuff after history
+	event_signal( 'EVENT_VIEW_BUG_AFTER_HISTORY', array( $f_bug_id ) );
 
 	html_page_bottom();
 
