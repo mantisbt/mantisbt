@@ -3274,7 +3274,7 @@
                         </variablelist>
                     </para>
                     
-                    <para>Multiple logging levels can be specified by XOR'ing them, e.g. 
+                    <para>Multiple logging levels can be combined by using an inclusive or operator, e.g. 
                     	<literal>LOG_EMAIL | LOG_EMAIL_RECIPIENT</literal></para>
                 </listitem>
             </varlistentry>
