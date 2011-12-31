@@ -171,19 +171,34 @@ print_manage_menu();
 	</form>
 </div>
 
+<?php
+// User action buttons: RESET/UNLOCK and DELETE
+
+$t_reset = helper_call_custom_function( 'auth_can_change_password', array() );
+$t_unlock = OFF != config_get( 'max_failed_login_count' ) && $t_user['failed_login_count'] > 0;
+$t_delete = !( ( user_is_administrator( $t_user_id ) && ( user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1 ) ) );
+
+if( $t_reset || $t_unlock || $t_delete ) {
+?>
 <div id="manage-user-actions-div" class="form-container">
-<?php if( helper_call_custom_function( 'auth_can_change_password', array() ) ) { ?>
+
+<!-- Reset/Unlock Button -->
+<?php if( $t_reset || $t_unlock ) { ?>
 	<form id="manage-user-reset-form" method="post" action="manage_user_reset.php" class="action-button">
 		<fieldset>
-		<?php echo form_security_field( 'manage_user_reset' ) ?>
-		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+			<?php echo form_security_field( 'manage_user_reset' ) ?>
+			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+<?php	if( $t_reset ) { ?>
 			<span><input type="submit" class="button" value="<?php echo lang_get( 'reset_password_button' ) ?>" /></span>
+<?php	} else { ?>
+			<span><input type="submit" class="button" value="<?php echo lang_get( 'account_unlock_button' ) ?>" /></span>
+<?php	} ?>
 		</fieldset>
 	</form>
 <?php } ?>
 
 <!-- Delete Button -->
-<?php if ( !( ( user_is_administrator( $t_user_id ) && ( user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1 ) ) ) ) { ?>
+<?php if ( $t_delete ) { ?>
 	<form id="manage-user-delete-form" method="post" action="manage_user_delete.php" class="action-button">
 		<fieldset>
 			<?php echo form_security_field( 'manage_user_delete' ) ?>
@@ -193,8 +208,9 @@ print_manage_menu();
 	</form>
 <?php } ?>
 </div>
+<?php } ?>
 
-<?php if( !$t_ldap ) { ?>
+<?php if( $t_reset ) { ?>
 <div class="important-msg">
 <?php
 	if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
