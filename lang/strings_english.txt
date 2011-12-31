@@ -975,6 +975,7 @@ $s_confirm_account_pruning = 'Are you sure you want to delete old accounts that 
 
 # manage_user_page.php
 $s_edit_user_title = 'Edit User';
+$s_account_unlock_button = 'Unlock Account';
 $s_reset_password_button = 'Reset Password';
 $s_delete_user_button = 'Delete User';
 $s_reset_password_msg = 'Reset Password sends the confirmation URL via e-mail.';
@@ -987,6 +988,7 @@ $s_users_new = 'New';
 $s_account_reset_protected_msg = 'Account protected. Cannot reset the password.';
 $s_account_reset_msg = 'A confirmation request has been sent to the selected user\'s e-mail address. Using this, the user will be able to change their password.';
 $s_account_reset_msg2 = 'Account password has been set to blank...';
+$s_account_unlock_msg = 'The account has been unlocked.';
 
 # manage_user_update.php
 $s_manage_user_protected_msg = 'Account protected. Access level and enabled protected. Otherwise, account has been updated...';
