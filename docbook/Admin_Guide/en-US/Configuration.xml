@@ -2336,8 +2336,31 @@
                 <term>$g_bug_link_tag</term>
                 <listitem>
                     <para>If a number follows this tag it will create a link to a
-                        bug. eg. for # a link would be #45 eg. for bug: a
-                        link would be bug:98
+                        bug. Default is '#'.
+                        <itemizedlist>
+                            <listitem>
+                                <para>'#': a link would be #45</para>
+                            </listitem>
+                            <listitem>
+                                <para>'bug:' a link would be bug:98</para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_bugnote_link_tag</term>
+                <listitem>
+                    <para>If a number follows this tag it will create a link to a
+                        bug note. Default is '~'.
+                        <itemizedlist>
+                            <listitem>
+                                <para>'~': a link would be ~45</para>
+                            </listitem>
+                            <listitem>
+                                <para>'bugnote:' a link would be bugnote:98</para>
+                            </listitem>
+                        </itemizedlist>
                     </para>
                 </listitem>
             </varlistentry>
@@ -3273,8 +3296,8 @@
                             </varlistentry>
                         </variablelist>
                     </para>
-                    
-                    <para>Multiple logging levels can be combined by using an inclusive or operator, e.g. 
+
+                    <para>Multiple logging levels can be combined by using an inclusive or operator, e.g.
                     	<literal>LOG_EMAIL | LOG_EMAIL_RECIPIENT</literal></para>
                 </listitem>
             </varlistentry>
