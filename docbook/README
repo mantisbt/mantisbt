@@ -1,0 +1,17 @@
+Building the DocBook Manuals
+============================
+
+Go to the directory containing manual to build, e.g. :
+
+    $ cd adminguide/en
+
+Build the guide in the desired format, e.g. :
+
+    $ make html
+
+Resulting files will be placed in build/ subdirectory.
+
+Please refer to the MantisBT wiki[1] for complete details on how to
+install the required tools and build the documentation.
+
+[1] http://www.mantisbt.org/wiki/doku.php/mantisbt:docbook
