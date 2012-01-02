@@ -200,7 +200,7 @@ function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id =
 	$t_query = "INSERT INTO $t_tokens_table
 					( type, value, timestamp, expiry, owner )
 					VALUES ( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query_bound( $t_query, Array( $c_type, $p_value, $c_timestamp, $c_expiry, $c_user_id ) );
+	db_query_bound( $t_query, Array( $c_type, (string)$p_value, $c_timestamp, $c_expiry, $c_user_id ) );
 	return db_insert_id( $t_tokens_table );
 }
 
@@ -221,7 +221,7 @@ function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
 	$t_query = "UPDATE $t_tokens_table
 					SET value=" . db_param() . ", expiry=" . db_param() . "
 					WHERE id=" . db_param();
-	db_query_bound( $t_query, Array( $p_value, $c_expiry, $c_token_id ) );
+	db_query_bound( $t_query, Array( (string)$p_value, $c_expiry, $c_token_id ) );
 
 	return true;
 }
