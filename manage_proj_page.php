@@ -166,6 +166,7 @@
 </tr>
 <?php
 	$t_categories = category_get_all_rows( ALL_PROJECTS );
+	$t_can_update_global_cat = access_has_global_level( config_get( 'manage_site_threshold' ) );
 
 	if ( count( $t_categories ) > 0 ) {
 ?>
@@ -176,14 +177,16 @@
 			<td>
 				<?php echo lang_get( 'assign_to' ) ?>
 			</td>
+<?php	if( $t_can_update_global_cat ) { ?>
 			<td class="center">
 				<?php echo lang_get( 'actions' ) ?>
 			</td>
+<?php	} ?>
 		</tr>
 <?php
 	}
 
-	foreach ( $t_categories as $t_category ) {
+	foreach( $t_categories as $t_category ) {
 		$t_id = $t_category['id'];
 ?>
 <!-- Repeated Info Row -->
@@ -194,6 +197,7 @@
 			<td>
 				<?php echo prepare_user_name( $t_category['user_id'] ) ?>
 			</td>
+<?php	if( $t_can_update_global_cat ) { ?>
 			<td class="center">
 				<?php
 					$t_id = urlencode( $t_id );
@@ -204,11 +208,13 @@
 					print_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete_link' ) );
 				?>
 			</td>
+<?php	} ?>
 		</tr>
 <?php
 	} # end for loop
-?>
 
+	if( $t_can_update_global_cat ) {
+?>
 <!-- Add Category Form -->
 <tr>
 	<td class="left" colspan="3">
@@ -220,6 +226,7 @@
 		</form>
 	</td>
 </tr>
+<?php } ?>
 
 </table>
 </div>
