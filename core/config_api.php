@@ -357,7 +357,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 						project_id = " . db_param() . " AND
 						user_id = " . db_param();
 			$t_params = Array(
-				$c_value,
+				(string)$c_value,
 				$t_type,
 				$c_access,
 				$c_option,
@@ -370,7 +370,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 					VALUES
 					(" . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ' )';
 			$t_params = Array(
-				$c_value,
+				(string)$c_value,
 				$t_type,
 				$c_access,
 				$c_option,
