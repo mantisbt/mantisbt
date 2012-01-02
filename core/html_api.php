@@ -950,6 +950,7 @@ function print_summary_submenu() {
  * @return null
  */
 function print_manage_menu( $p_page = '' ) {
+	$t_pages = array();
 	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
 		$t_pages['manage_user_page.php'] = array( 'url'   => 'manage_user_page.php', 'label' => 'manage_users_link' );
 	}
