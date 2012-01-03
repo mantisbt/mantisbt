@@ -53,7 +53,7 @@
 		$t_valid_actions[] = 'sponsor';
 	}
 
-	$t_valid_actions[] = 'relationship';
+	$t_valid_actions[] = 'relation';
 
 	$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
     ksort( $t_statuses );
