@@ -216,7 +216,7 @@ if( config_get( 'enable_sponsorship' ) == ON ) {
 	$t_actions[] = 'sponsor';
 }
 
-$t_actions[] = 'relationship';
+$t_actions[] = 'relation';
 
 $t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 foreach( $t_statuses as $t_status ) {
@@ -286,7 +286,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 		get_capability_row_for_email( lang_get( 'email_on_sponsorship_changed' ), 'sponsor' );
 	}
 
-	get_capability_row_for_email( lang_get( 'email_on_relationship_changed' ), 'relationship' );
+	get_capability_row_for_email( lang_get( 'email_on_relationship_changed' ), 'relation' );
 
 	$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	foreach ( $t_statuses as $t_status => $t_label ) {
