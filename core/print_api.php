@@ -1014,13 +1014,13 @@ function print_bug_link( $p_bug_id, $p_detail_info = true ) {
 
 # formats the priority given the status
 # shows the priority in BOLD if the bug is NOT closed and is of significant priority
-function print_formatted_priority_string( $p_status, $p_priority ) {
-	$t_pri_str = get_enum_element( 'priority', $p_priority );
+function print_formatted_priority_string( $p_bug ) {
+	$t_pri_str = get_enum_element( 'priority', $p_bug->priority, auth_get_current_user_id(), $p_bug->project_id );
 	$t_priority_threshold = config_get( 'priority_significant_threshold' );
 
 	if( $t_priority_threshold >= 0 &&
-		$p_priority >= $t_priority_threshold &&
-		$p_status < config_get( 'bug_closed_status_threshold' ) ) {
+		$p_bug->priority >= $t_priority_threshold &&
+		$p_bug->status < config_get( 'bug_closed_status_threshold' ) ) {
 		echo "<span class=\"bold\">$t_pri_str</span>";
 	} else {
 		echo $t_pri_str;
@@ -1029,13 +1029,13 @@ function print_formatted_priority_string( $p_status, $p_priority ) {
 
 # formats the severity given the status
 # shows the severity in BOLD if the bug is NOT closed and is of significant severity
-function print_formatted_severity_string( $p_status, $p_severity ) {
-	$t_sev_str = get_enum_element( 'severity', $p_severity );
+function print_formatted_severity_string( $p_bug ) {
+	$t_sev_str = get_enum_element( 'severity', $p_bug->severity, auth_get_current_user_id(), $p_bug->project_id );
 	$t_severity_threshold = config_get( 'severity_significant_threshold' );
 
 	if( $t_severity_threshold >= 0 &&
-		$p_severity >= $t_severity_threshold &&
-		$p_status < config_get( 'bug_closed_status_threshold' ) ) {
+		$p_bug->severity >= $t_severity_threshold &&
+		$p_bug->status < config_get( 'bug_closed_status_threshold' ) ) {
 		echo "<span class=\"bold\">$t_sev_str</span>";
 	} else {
 		echo $t_sev_str;

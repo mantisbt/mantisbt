@@ -484,7 +484,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	}
 
 	if( ON == config_get( 'show_priority_text' ) ) {
-		print_formatted_priority_string( $t_bug->status, $t_bug->priority );
+		print_formatted_priority_string( $t_bug );
 	} else {
 		print_status_icon( $t_bug->priority );
 	}
