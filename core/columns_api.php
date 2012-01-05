@@ -931,7 +931,7 @@ function print_column_edit( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE
 function print_column_priority( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	if( ON == config_get( 'show_priority_text' ) ) {
-		print_formatted_priority_string( $p_bug->status, $p_bug->priority );
+		print_formatted_priority_string( $p_bug );
 	} else {
 		print_status_icon( $p_bug->priority );
 	}
@@ -1070,7 +1070,7 @@ function print_column_category_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
  */
 function print_column_severity( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="center">';
-	print_formatted_severity_string( $p_bug->status, $p_bug->severity );
+	print_formatted_severity_string( $p_bug );
 	echo '</td>';
 }
 
