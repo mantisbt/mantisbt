@@ -1397,7 +1397,7 @@ function mci_issue_data_as_header_array( $p_issue_data ) {
 		
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = $p_issue_data->view_state;
-		$t_issue['last_updated'] = timestamp_to_iso8601( $p_issue_data->last_updated );
+		$t_issue['last_updated'] = timestamp_to_iso8601( $p_issue_data->last_updated, false );
 
 		$t_issue['project'] = $p_issue_data->project_id;
 		$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
