@@ -143,6 +143,15 @@ function columns_get_plugin_columns() {
 }
 
 /**
+ * Returns true if the specified $p_column is a plugin column.
+ * @param string $p_column A column name.
+ */
+function column_is_plugin_column( $p_column ) {
+	$t_plugin_columns = columns_get_plugin_columns();
+	return isset( $t_plugin_columns[ $p_column ] );
+}
+
+/**
  * Allow plugin columns to pre-cache data for a set of issues
  * rather than requiring repeated queries for each issue.
  * @param array Bug objects
