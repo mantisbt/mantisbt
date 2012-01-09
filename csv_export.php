@@ -46,6 +46,9 @@
 	if ( $t_rows === false ) {
 		print_header_redirect( 'view_all_set.php?type=0' );
 	}
+	
+	# pre-cache custom column data
+	columns_plugin_cache_issue_data( $t_rows );
 
 	$t_filename = csv_get_default_filename();
 
@@ -103,8 +106,7 @@
 				$t_first_column = false;
 			}
 
-			$t_custom_field = column_get_custom_field_name( $t_column );
-			if ( $t_custom_field !== null ) {
+			if ( column_get_custom_field_name( $t_column ) !== null || column_is_plugin_column( $t_column )) {
 				ob_start();
 				$t_column_value_function = 'print_column_value';
 				helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_CSV_PAGE ) );
