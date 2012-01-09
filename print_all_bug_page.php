@@ -102,6 +102,9 @@ $t_page_count = null;
 $result = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
 $row_count = count( $result );
 
+# pre-cache custom column data
+columns_plugin_cache_issue_data( $result );
+
 # for export
 $t_show_flag = gpc_get_int( 'show_flag', 0 );
 
