@@ -699,10 +699,6 @@ function db_prepare_string( $p_string ) {
 			$t_escaped = $g_db->qstr( $p_string, false );
 			return utf8_substr( $t_escaped, 1, utf8_strlen( $t_escaped ) - 2 );
 			break;
-		case 'mssql':
-			break;
-		case 'odbc_mssql':
-			break;
 		case 'mysql':
 			return mysql_real_escape_string( $p_string );
 		case 'mysqli':
