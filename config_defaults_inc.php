@@ -3891,3 +3891,19 @@
 		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'plugins_enabled', 'session_', 'form_security_',
 		'compress_html', '_page$', '_url$',
 	);
+
+	/***************
+	 * MantisTouch *
+	 ***************/
+
+	/**
+	 * The MantisTouch URL to direct to.  The %s will be replaced by the contents of $g_path.
+	 * A blank value will disable redirection.  The %s is not required when redirecting to
+	 * MantisTouch instances that point to a single MantisBT instance and hence have a hard-coded URL.
+	 *
+	 * Following are three examples:
+	 * - 'http://mantisbt.mobi?url=%s'
+	 * - 'http://MyOwnMantisTouch.com/'
+	 * - ''
+	 */
+	$g_mantistouch_url = '';
