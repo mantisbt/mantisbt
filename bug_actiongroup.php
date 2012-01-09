@@ -136,8 +136,8 @@ foreach( $f_bug_arr as $t_bug_id ) {
 
 	case 'MOVE':
 		$f_project_id = gpc_get_int( 'project_id' );
-		if ( access_has_bug_level( config_get( 'move_bug_threshold' ), $t_bug_id ) &&
-		     access_has_project_level( config_get( 'report_bug_threshold' ), $f_project_id ) ) {
+		if( access_has_bug_level( config_get( 'move_bug_threshold' ), $t_bug_id ) &&
+		    access_has_project_level( config_get( 'report_bug_threshold', null, null, $f_project_id ), $f_project_id ) ) {
 			/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
 			bug_move( $t_bug_id, $f_project_id );
 			helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
