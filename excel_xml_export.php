@@ -55,6 +55,9 @@
 	if ( $result === false ) {
 		print_header_redirect( 'view_all_set.php?type=0&print=1' );
 	}
+	
+	# pre-cache custom column data
+	columns_plugin_cache_issue_data( $result );
 
 	header( 'Content-Type: application/vnd.ms-excel; charset=UTF-8' );
 	header( 'Pragma: public' );
@@ -91,7 +94,9 @@
 						$t_custom_field = column_get_custom_field_name( $t_column );
 						if ( $t_custom_field !== null ) {
 							echo excel_format_custom_field( $t_row->id, $t_row->project_id, $t_custom_field );
-						} else {
+						} else if ( column_is_plugin_column( $t_column ) ) {
+							echo excel_format_plugin_column_value( $t_column, $t_row );
+						} else{
 							$t_function = 'excel_format_' . $t_column;
 							echo $t_function( $t_row->$t_column );
 						}

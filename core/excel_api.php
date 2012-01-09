@@ -474,6 +474,26 @@ function excel_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field 
 }
 
 /**
+ * Gets the formatted value for the specified plugin column value.
+ * @param $p_custom_field The plugin column name.
+ * @param $p_bug The bug to print the column for (needed for the display function of the plugin column).
+ * @returns The custom field value.
+ */
+function excel_format_plugin_column_value( $p_column, $p_bug ) {
+	$t_plugin_columns = columns_get_plugin_columns();
+	
+	if ( !isset( $t_plugin_columns[$p_column] ) ) {
+		return excel_prepare_string( '' );
+	} else {
+		$t_column_object = $t_plugin_columns[ $p_column ];
+		ob_start();
+		$t_column_object->display( $p_bug, COLUMNS_TARGET_EXCEL_PAGE );
+		$t_value = ob_get_clean();
+		return excel_prepare_string( $t_value );
+	}
+}
+
+/**
  * Gets the formatted due date.
  * @param $p_due_date The due date.
  * @returns The formatted due date.
