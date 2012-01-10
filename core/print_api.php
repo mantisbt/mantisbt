@@ -672,6 +672,11 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 		null );
 	}
 
+	# Ensure the current version (if specified) is included in the list
+	if( !empty( $p_version ) ) {
+		$versions[] = version_cache_row( version_get_id( $p_version, $c_project_id ) );
+	}
+
 	if( $p_leading_blank ) {
 		echo '<option value=""></option>';
 	}
