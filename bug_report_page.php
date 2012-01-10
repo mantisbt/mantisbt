@@ -466,7 +466,7 @@ print_recently_visited();
 		</th>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> id="target_version" name="target_version">
-				<?php print_version_option_list() ?>
+				<?php print_version_option_list( '', null, VERSION_FUTURE ) ?>
 			</select>
 		</td>
 	</tr>

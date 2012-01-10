@@ -579,7 +579,7 @@ if ( $tpl_show_target_version || $tpl_show_fixed_in_version ) {
 	if ( $tpl_show_target_version ) {
 		echo '<th class="category"><label for="target_version">' . lang_get( 'target_version' ) . '</label></th>';
 		echo '<td><select ' . helper_get_tab_index() . ' id="target_version" name="target_version">';
-		print_version_option_list( $tpl_bug->target_version, $tpl_bug->project_id, VERSION_ALL );
+		print_version_option_list( $tpl_bug->target_version, $tpl_bug->project_id, VERSION_FUTURE );
 		echo '</select></td>';
 	} else {
 		$t_spacer += 2;
