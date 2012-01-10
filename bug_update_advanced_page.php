@@ -206,7 +206,7 @@ if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_s
 
 if ( $tpl_show_reporter ) {
 	echo '<tr ', helper_alternate_class(), '>';
-	
+
 	$t_spacer = 4;
 
 	if ( $tpl_show_reporter ) {
@@ -240,7 +240,7 @@ if ( $tpl_show_reporter ) {
 
 if ( $tpl_show_handler || $tpl_show_due_date ) {
 	echo '<tr ', helper_alternate_class(), '>';
-	
+
 	$t_spacer = 2;
 
 	# Assigned To
@@ -288,7 +288,7 @@ if ( $tpl_show_handler || $tpl_show_due_date ) {
 	} else {
 		$t_spacer += 2;
 	}
-	
+
 	# spacer
 	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
@@ -301,7 +301,7 @@ if ( $tpl_show_handler || $tpl_show_due_date ) {
 
 if ( $tpl_show_priority || $tpl_show_severity || $tpl_show_reproducibility ) {
 	echo '<tr ', helper_alternate_class(), '>';
-	
+
 	$t_spacer = 0;
 
 	if ( $tpl_show_priority ) {
@@ -525,7 +525,7 @@ if ( $tpl_show_product_version || $tpl_show_product_build ) {
 }
 
 #
-# Target Versiom, Fixed in Version
+# Target Version, Fixed in Version
 #
 
 if ( $tpl_show_target_version || $tpl_show_fixed_in_version ) {
@@ -537,7 +537,7 @@ if ( $tpl_show_target_version || $tpl_show_fixed_in_version ) {
 	if ( $tpl_show_target_version ) {
 		echo '<td class="category">', lang_get( 'target_version' ), '</td>';
 		echo '<td><select ', helper_get_tab_index(), ' name="target_version">';
-		print_version_option_list( $tpl_bug->target_version, $tpl_bug->project_id, VERSION_ALL );
+		print_version_option_list( $tpl_bug->target_version, $tpl_bug->project_id, VERSION_FUTURE );
 		echo '</select></td>';
 	} else {
 		$t_spacer += 2;
