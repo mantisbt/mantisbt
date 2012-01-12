@@ -335,7 +335,7 @@ foreach ( $t_status_arr as $t_status => $t_label ) {
 	if ( isset( $t_project_workflow['exit'][$t_status][$t_status] ) ) {
 		$t_validation_result .= '<tr ' . helper_alternate_class() . '><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
-						. '</td><td bgcolor="#FFED4F">' . lang_get( 'superfluous' ) . '</td>';
+						. '</td><td bgcolor="#FFED4F">' . lang_get( 'superfluous' ) . '</td></tr>';
 	}
 }
 
@@ -344,7 +344,7 @@ foreach ( $t_status_arr as $t_status => $t_status_label) {
 	if ( ( 0 == count( $t_project_workflow['entry'][$t_status] ) ) && ( 0 < count( $t_project_workflow['exit'][$t_status] ) ) ){
 		$t_validation_result .= '<tr ' . helper_alternate_class() . '><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
-						. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '</td>';
+						. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '</td></tr>';
 	}
 }
 
@@ -353,7 +353,7 @@ foreach ( $t_status_arr as $t_status => $t_status_label ) {
 	if ( ( 0 == count( $t_project_workflow['exit'][$t_status] ) ) && ( 0 < count( $t_project_workflow['entry'][$t_status] ) ) ){
 		$t_validation_result .= '<tr ' . helper_alternate_class() . '><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
-						. '</td><td bgcolor="#FF0088">' . lang_get( 'no_exit' ) . '</td>';
+						. '</td><td bgcolor="#FF0088">' . lang_get( 'no_exit' ) . '</td></tr>';
 	}
 }
 
@@ -362,7 +362,7 @@ foreach ( $t_status_arr as $t_status => $t_status_label ) {
 	if ( ( 0 == count( $t_project_workflow['exit'][$t_status] ) ) && ( 0 == count( $t_project_workflow['entry'][$t_status] ) ) ){
 		$t_validation_result .= '<tr ' . helper_alternate_class() . '><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
-						. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '<br />' . lang_get( 'no_exit' ) . '</td>';
+						. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '<br />' . lang_get( 'no_exit' ) . '</td></tr>';
 	}
 }
 
