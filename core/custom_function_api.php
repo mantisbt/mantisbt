@@ -332,7 +332,7 @@ function custom_function_default_print_column_value( $p_column, $p_bug, $p_colum
 			if( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
 				$t_function( $p_bug, $p_columns_target );
 			} else {
-				$t_function( $p_bug->$p_column );
+				$t_function( $p_bug );
 			}
 
 		} else if ( isset( $t_plugin_columns[ $p_column ] ) ) {

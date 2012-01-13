@@ -93,7 +93,7 @@
 							echo excel_format_custom_field( $t_row->id, $t_row->project_id, $t_custom_field );
 						} else {
 							$t_function = 'excel_format_' . $t_column;
-							echo $t_function( $t_row->$t_column );
+							echo $t_function( $t_row );
 						}
 					}
 				}
