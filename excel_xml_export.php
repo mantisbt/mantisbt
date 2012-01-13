@@ -90,14 +90,12 @@ $t_columns = excel_get_columns();
 
 do {
 	foreach( $result as $t_row ) {
-
 		$t_bug = null;
 
 		if ( is_blank( $f_export ) || in_array( $t_row->id, $f_bug_arr ) ) {
 			echo excel_get_start_row();
 
 			foreach ( $t_columns as $t_column ) {
-
 				$t_custom_field = column_get_custom_field_name( $t_column );
 				if ( $t_custom_field !== null ) {
 					echo excel_format_custom_field( $t_row->id, $t_row->project_id, $t_custom_field );
@@ -111,7 +109,7 @@ do {
 						}
 						echo $t_function( $t_bug->$t_column );
 					} else {
-						echo $t_function( $t_row->$t_column );
+						echo $t_function( $t_row );
 					}
 				}
 			}
