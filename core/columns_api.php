@@ -1082,7 +1082,7 @@ function print_column_severity( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_
  * @access public
  */
 function print_column_eta( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">', get_enum_element( 'eta', $p_bug->eta ), '</td>';
+	echo '<td class="center">', get_enum_element( 'eta', $p_bug->eta, auth_get_current_user_id(), $t_bug->project_id ), '</td>';
 }
 
 /**
@@ -1093,7 +1093,7 @@ function print_column_eta( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE 
  * @access public
  */
 function print_column_projection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">', get_enum_element( 'projection', $p_bug->projection ), '</td>';
+	echo '<td class="center">', get_enum_element( 'projection', $p_bug->projection, auth_get_current_user_id(), $t_bug->project_id ), '</td>';
 }
 
 /**
@@ -1104,7 +1104,7 @@ function print_column_projection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
  * @access public
  */
 function print_column_reproducibility( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">', get_enum_element( 'reproducibility', $p_bug->reproducibility ), '</td>';
+	echo '<td class="center">', get_enum_element( 'reproducibility', $p_bug->reproducibility, auth_get_current_user_id(), $t_bug->project_id ), '</td>';
 }
 
 /**
