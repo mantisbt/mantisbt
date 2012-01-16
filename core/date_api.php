@@ -307,3 +307,26 @@ function date_finish_calendar( $p_field_name, $p_button_name ) {
 		echo "</script>\n";
 	}
 }
+
+/**
+ * Fixes 0013332: Due date not saved successfully when date-format is set to 'd/m/Y'
+ * The normal strtotime can't handle the format d/m/Y, since it will interpret
+ * it as m/d/Y. To determine whether this is the case, this function looks 
+ * at the short_date_format setting.
+ * Also, if the passed argument is null and parameter $p_allow_null is false (default), 
+ * date_get_null() is returned.
+ * @param string $p_date
+ * @param bool $p_allow_null
+ * @return number
+ */
+function strtotime_safe( $p_date, $p_allow_null = false ) {
+    if( !$p_allow_null && ( $p_date == null || is_blank ( $p_date ) || date_is_null( $p_date ) ) ) {
+       return date_get_null();
+    }
+	
+	if ( config_get( 'short_date_format' ) == 'd/m/Y' ) {
+		return strtotime( str_replace( '/', '-', $p_date ) );
+	} else {
+		return strtotime( $p_date );
+	}
+}
