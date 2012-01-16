@@ -49,7 +49,7 @@ class VersionData {
 					if( $value == '' ) {
 						$value = date_get_null();
 					}  else {
-						$value = strtotime( $value );
+						$value = strtotime_safe( $value );
 						if ( $value === false ) {
 							trigger_error( ERROR_INVALID_DATE_FORMAT, ERROR );
 						}
