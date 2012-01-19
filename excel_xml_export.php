@@ -68,8 +68,6 @@ $t_short_date_format = config_get( 'short_date_format' );
 # This is where we used to do the entire actual filter ourselves
 $t_page_number = gpc_get_int( 'page_number', 1 );
 $t_per_page = 100;
-$t_bug_count = null;
-$t_page_count = null;
 
 $result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 if ( $result === false ) {
@@ -90,34 +88,29 @@ $f_bug_arr = explode( ',', $f_export );
 
 $t_columns = excel_get_columns();
 
-do
-{
-	$t_more = true;
-	$t_row_count = count( $result );
+do {
+	foreach( $result as $t_row ) {
 
-	for( $i = 0; $i < $t_row_count; $i++ ) {
-		$t_row = $result[$i];
 		$t_bug = null;
 
 		if ( is_blank( $f_export ) || in_array( $t_row->id, $f_bug_arr ) ) {
 			echo excel_get_start_row();
 
 			foreach ( $t_columns as $t_column ) {
-				if ( column_is_extended( $t_column ) ) {
-					if ( $t_bug === null ) {
-						$t_bug = bug_get( $t_row->id, /* extended = */ true );
-					}
 
-					$t_function = 'excel_format_' . $t_column;
-					echo $t_function( $t_bug->$t_column );
+				$t_custom_field = column_get_custom_field_name( $t_column );
+				if ( $t_custom_field !== null ) {
+					echo excel_format_custom_field( $t_row->id, $t_row->project_id, $t_custom_field );
+				} else if ( column_is_plugin_column( $t_column ) ) {
+					echo excel_format_plugin_column_value( $t_column, $t_row );
 				} else {
-					$t_custom_field = column_get_custom_field_name( $t_column );
-					if ( $t_custom_field !== null ) {
-						echo excel_format_custom_field( $t_row->id, $t_row->project_id, $t_custom_field );
-					} else if ( column_is_plugin_column( $t_column ) ) {
-						echo excel_format_plugin_column_value( $t_column, $t_row );
+					$t_function = 'excel_format_' . $t_column;
+					if ( column_is_extended( $t_column ) ) {
+						if( $t_bug === null ) {
+							$t_bug = bug_get( $t_row->id, /* extended = */ true );
+						}
+						echo $t_function( $t_bug->$t_column );
 					} else {
-						$t_function = 'excel_format_' . $t_column;
 						echo $t_function( $t_row->$t_column );
 					}
 				}
@@ -130,17 +123,11 @@ do
 	// Get the next page if we are not processing the last one
 	// @@@ Note that since we are not using a transaction, there is a risk that we get a duplicate record or we miss
 	// one due to a submit or update that happens in parallel.
-	if ( $t_page_number < $t_page_count ) {
+	$t_more = ( $t_page_number < $t_page_count );
+	if ( $t_more ) {
 		$t_page_number++;
-		$t_bug_count = null;
-		$t_page_count = null;
-
 		$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-		if ( $result === false ) {
-			$t_more = false;
-		}
-	} else {
-		$t_more = false;
+		$t_more !== false;
 	}
 } while ( $t_more );
 
