@@ -127,10 +127,10 @@ do
 		} #in_array
 	} #for loop
 
-	// If got a full page, then attempt for the next one.
+	// Get the next page if we are not processing the last one
 	// @@@ Note that since we are not using a transaction, there is a risk that we get a duplicate record or we miss
 	// one due to a submit or update that happens in parallel.
-	if ( $t_row_count == $t_per_page ) {
+	if ( $t_page_number < $t_page_count ) {
 		$t_page_number++;
 		$t_bug_count = null;
 		$t_page_count = null;
