@@ -777,12 +777,12 @@ function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_nam
 	?>
 <select name="<?php echo $p_select_name?>">
 <?php if( $p_include_any ) {?>
-<option value="<?php BUG_REL_ANY ?>" <?php echo( $p_default_rel_type == BUG_REL_ANY ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'any' )?>]</option>
+<option value="<?php echo BUG_REL_ANY ?>" <?php echo( $p_default_rel_type == BUG_REL_ANY ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'any' )?>]</option>
 <?php
 	}
 
 	if( $p_include_none ) {?>
-<option value="<?php BUG_REL_NONE ?>" <?php echo( $p_default_rel_type == BUG_REL_NONE ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'none' )?>]</option>
+<option value="<?php echo BUG_REL_NONE ?>" <?php echo( $p_default_rel_type == BUG_REL_NONE ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'none' )?>]</option>
 <?php
 	}
 
