@@ -277,6 +277,13 @@ while( list( $t_foo, $t_var ) = each( $t_vars ) ) {
 }
 
 if ( db_is_mssql() ) {
+	if( 'mssql' == config_get_global( 'db_type' ) ) {
+		print_test_warn_row( 'Checking PHP support for Microsoft SQL Server driver',
+			version_compare( phpversion(), '5.3' ) < 0,
+			"'mssql' driver is no longer supported in PHP >= 5.3, please use 'mssqlnative' instead"
+		);
+	}
+
 	if ( print_test_row( 'check mssql textsize in php.ini...', ini_get( 'mssql.textsize' ) != 4096, ini_get( 'mssql.textsize' ) ) ) {
 		print_test_warn_row( 'check mssql textsize in php.ini...', ini_get( 'mssql.textsize' ) == 2147483647, ini_get( 'mssql.textsize' ) );
 	}
@@ -284,6 +291,7 @@ if ( db_is_mssql() ) {
 		print_test_warn_row( 'check mssql textsize in php.ini...', ini_get( 'mssql.textsize' ) == 2147483647, ini_get( 'mssql.textsize' ) );
 	}
 }
+
 print_test_row( 'check variables_order includes GPCS', stristr( ini_get( 'variables_order' ), 'G' ) && stristr( ini_get( 'variables_order' ), 'P' ) && stristr( ini_get( 'variables_order' ), 'C' ) && stristr( ini_get( 'variables_order' ), 'S' ), ini_get( 'variables_order' ) );
 
 
