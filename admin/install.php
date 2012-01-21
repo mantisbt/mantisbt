@@ -169,7 +169,16 @@ if( $t_config_exists ) {
 	if( 0 == $t_install_state ) {
 		print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
 		print_test( 'Checking Database connection settings exist', ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) ), true, 'database connection settings do not exist?' );
-		print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
+		print_test( 'Checking PHP support for database type',
+			db_check_database_support( $f_db_type ), true,
+			'database is not supported by PHP. Check that it has been compiled into your server.'
+		);
+		if( $f_db_type == 'mssql' ) {
+			print_test( 'Checking PHP support for Microsoft SQL Server driver',
+				version_compare( phpversion(), '5.3' ) < 0, true,
+				'mssql driver is no longer supported in PHP >= 5.3, please use mssqlnative instead'
+			);
+		}
 	}
 
 	$g_db = ADONewConnection( $f_db_type );
@@ -244,16 +253,17 @@ if( 2 == $t_install_state ) {
 <?php print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' )?>
 
 <!-- Checking DB support-->
-<?php print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' )?>
-
-<?php print_test( 'Setting Database Username', '' !== $f_db_username, true, 'database username is blank' )?>
-<?php print_test( 'Setting Database Password', '' !== $f_db_password, false, 'database password is blank' )?>
-<?php print_test( 'Setting Database Name', '' !== $f_database_name, true, 'database name is blank' )?>
 <?php
+	print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
+
+	print_test( 'Setting Database Username', '' !== $f_db_username, true, 'database username is blank' );
+	print_test( 'Setting Database Password', '' !== $f_db_password, false, 'database password is blank' );
+	print_test( 'Setting Database Name', '' !== $f_database_name, true, 'database name is blank' );
+
 	if( $f_db_type == 'db2' ) {
 		print_test( 'Setting Database Schema', !is_blank( $f_db_schema ), true, 'must have a schema name for AS400 in the form of DBNAME/SCHEMA' );
 	}
-	?>
+?>
 <tr>
 	<td bgcolor="#ffffff">
 		Setting Admin Username
@@ -370,6 +380,7 @@ if( 2 == $t_install_state ) {
 				break;
 			case 'pgsql':
 			case 'mssql':
+			case 'mssqlnative':
 			case 'db2':
 			default:
 				break;
@@ -399,7 +410,6 @@ if( 1 == $t_install_state ) {
 		<span class="title"><?php echo $g_database_upgrade ? 'Upgrade Options' : 'Installation Options'?></span>
 	</td>
 </tr>
-
 <?php if( !$g_database_upgrade ) {?>
 <tr>
 	<td>
@@ -408,41 +418,27 @@ if( 1 == $t_install_state ) {
 	<td>
 		<select name="db_type">
 		<?php
-			if( $f_db_type == 'mysql' ) {
-			echo '<option value="mysql" selected="selected">MySQL (default)</option>';
-		} else {
-			echo '<option value="mysql">MySQL (default)</option>';
-		}
+			// Build selection list of available DB types
+			$t_db_list = array(
+				'mysql'       => 'MySQL (default)',
+				'mysqli'      => 'MySQLi',
+				'mssql'       => 'Microsoft SQL Server',
+				'mssqlnative' => 'Microsoft SQL Server Native Driver',
+				'pgsql'       => 'PostgreSQL',
+				'oci8'        => 'Oracle',
+				'db2'         => 'IBM DB2',
+			);
 
-		if( $f_db_type == 'mysqli' ) {
-			echo '<option value="mysqli" selected="selected">MySQLi</option>';
-		} else {
-			echo '<option value="mysqli">MySQLi</option>';
-		}
+			// mssql is not supported with PHP >= 5.3
+			if( version_compare( phpversion(), '5.3' ) >= 0 ) {
+				unset( $t_db_list['mssql']);
+			}
 
-		if( $f_db_type == 'mssql' ) {
-			echo '<option value="mssql" selected="selected">Microsoft SQL Server</option>';
-		} else {
-			echo '<option value="mssql">Microsoft SQL Server</option>';
-		}
-
-		if( $f_db_type == 'pgsql' ) {
-			echo '<option value="pgsql" selected="selected">PostgreSQL</option>';
-		} else {
-			echo '<option value="pgsql">PostgreSQL</option>';
-		}
-
-		if( $f_db_type == 'oci8' ) {
-			echo '<option value="oci8" selected="selected">Oracle</option>';
-		} else {
-			echo '<option value="oci8">Oracle</option>';
-		}
-
-		if( $f_db_type == 'db2' ) {
-			echo '<option value="db2" selected="selected">IBM DB2</option>';
-		} else {
-			echo '<option value="db2">IBM DB2</option>';
-		}
+			foreach( $t_db_list as $t_db => $t_db_descr ) {
+				echo '<option value="' . $t_db . '"' .
+					( $t_db == $f_db_type ? ' selected="selected"' : '' ) . '>' .
+					$t_db_descr . '</option>';
+			}
 		?>
 		</select>
 	</td>

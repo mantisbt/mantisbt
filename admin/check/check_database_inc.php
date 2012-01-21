@@ -83,6 +83,12 @@ check_print_test_row(
 
 if ( db_is_mssql() ) {
 
+	check_print_test_warn_row(
+		'PHP support for Microsoft SQL Server driver',
+		'mssql' != config_get_global( 'db_type' ),
+		array( false => "'mssql' driver is no longer supported in PHP >= 5.3, please use 'mssqlnative' instead" )
+	);
+
 	$t_mssql_textsize = ini_get_number( 'mssql.textsize' );
 	check_print_info_row(
 		'php.ini directive: mssql.textsize',
@@ -106,7 +112,6 @@ if ( db_is_mssql() ) {
 		$t_mssql_textlimit == -1,
 		array( false => 'The value of the mssql.textlimit directive is currently ' . htmlentities( $t_mssql_textlimit ) . '. You should set this value to -1 to prevent large text fields being truncated upon being read from the database.' )
 	);
-
 }
 
 $t_database_hostname = config_get_global( 'hostname' );

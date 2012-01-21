@@ -140,7 +140,7 @@ function db_is_connected() {
 }
 
 /**
- * Returns whether php supprot for a database is enabled
+ * Returns whether php support for a database is enabled
  * @return bool indicating if php current supports the given database type
  */
 function db_check_database_support( $p_db_type ) {
@@ -157,6 +157,9 @@ function db_check_database_support( $p_db_type ) {
 			break;
 		case 'mssql':
 			$t_support = function_exists( 'mssql_connect' );
+			break;
+		case 'mssqlnative':
+			$t_support = function_exists( 'sqlsrv_connect' );
 			break;
 		case 'oci8':
 			$t_support = function_exists( 'OCILogon' );
@@ -208,13 +211,14 @@ function db_is_pgsql() {
 
 /**
  * Checks if the database driver is MS SQL
- * @return bool true if postgres
+ * @return bool true if mssql
  */
 function db_is_mssql() {
 	$t_db_type = config_get_global( 'db_type' );
 
 	switch( $t_db_type ) {
 		case 'mssql':
+		case 'mssqlnative':
 		case 'odbc_mssql':
 			return true;
 	}
@@ -293,9 +297,11 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset = -1 ) {
 	global $g_queries_array, $g_db, $g_db_log_queries, $g_db_param_count;
 
+	$t_db_type = config_get_global( 'db_type' );
+
 	static $s_check_params;
 	if( $s_check_params === null ) {
-		$s_check_params = ( db_is_pgsql() || config_get_global( 'db_type' ) == 'odbc_mssql' );
+		$s_check_params = ( db_is_pgsql() || $t_db_type == 'odbc_mssql' || $t_db_type == 'mssqlnative');
 	}
 
 	$t_start = microtime(true);
@@ -305,6 +311,9 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 		for( $i = 0;$i < $params;$i++ ) {
 			if( $arr_parms[$i] === false ) {
 				$arr_parms[$i] = 0;
+			}
+			elseif( $arr_parms[$i] === true && $t_db_type == 'mssqlnative' ) {
+				$arr_parms[$i] = 1;
 			}
 		}
 	}
@@ -318,7 +327,6 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 	$t_elapsed = number_format( microtime(true) - $t_start, 4 );
 
 	if( ON == $g_db_log_queries ) {
-		$t_db_type = config_get_global( 'db_type' );
 		$lastoffset = 0;
 		$i = 1;
 		if( !( is_null( $arr_parms ) || empty( $arr_parms ) ) ) {
@@ -424,7 +432,7 @@ function db_fetch_array( &$p_result ) {
 	}
 
 	# mysql obeys FETCH_MODE_BOTH, hence ->fields works, other drivers do not support this
-	if( $g_db_type == 'mysql' || $g_db_type == 'odbc_mssql' ) {
+	if( $g_db_type == 'mysql' || $g_db_type == 'odbc_mssql'  || $g_db_type == 'mssqlnative' ) {
 		$t_array = $p_result->fields;
 		$p_result->MoveNext();
 		return $t_array;
@@ -515,6 +523,11 @@ function db_insert_id( $p_table = null, $p_field = "id" ) {
 
 	if( isset( $p_table ) && db_is_pgsql() ) {
 		$query = "SELECT currval('" . $p_table . "_" . $p_field . "_seq')";
+		$result = db_query_bound( $query );
+		return db_result( $result );
+	}
+	if( db_is_mssql() ) {
+		$query = "SELECT IDENT_CURRENT('$p_table')";
 		$result = db_query_bound( $query );
 		return db_result( $result );
 	}
@@ -651,6 +664,7 @@ function db_prepare_string( $p_string ) {
 
 	switch( $t_db_type ) {
 		case 'mssql':
+		case 'mssqlnative':
 		case 'odbc_mssql':
 		case 'ado_mssql':
 			if( ini_get( 'magic_quotes_sybase' ) ) {
@@ -698,6 +712,7 @@ function db_prepare_binary_string( $p_string ) {
 
 	switch( $t_db_type ) {
 		case 'mssql':
+		case 'mssqlnative':
 		case 'odbc_mssql':
 		case 'ado_mssql':
 			$content = unpack( "H*hex", $p_string );
