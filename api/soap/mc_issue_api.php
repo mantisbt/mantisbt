@@ -1143,7 +1143,7 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
 
 	# bug is not read-only...
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return new mci_soap_fault_access_denied( $t_user_id, "Issue '$p_issue_id' is readonly" );
+		return mci_soap_fault_access_denied( $t_user_id, "Issue '$p_issue_id' is readonly" );
 	}
 
 	# user can access to the related bug at least as viewer...
