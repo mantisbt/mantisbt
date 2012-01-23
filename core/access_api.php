@@ -425,10 +425,12 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 		return false;
 	}
 
-	# If the bug is private and the user is not the reporter, then the
-	#  the user must also have higher access than private_bug_threshold
+	# If the bug is private and the user is not the reporter, then
+	# they must also have higher access than private_bug_threshold
 	if( VS_PRIVATE == bug_get_field( $p_bug_id, 'view_state' ) && !bug_is_user_reporter( $p_bug_id, $p_user_id ) ) {
-		$p_access_level = max( $p_access_level, config_get( 'private_bug_threshold' ) );
+		$t_access_level = access_get_project_level( $t_project_id, $p_user_id );
+		return access_compare_level( $t_access_level, config_get( 'private_bug_threshold' ) )
+		    && access_compare_level( $t_access_level, $p_access_level );
 	}
 
 	return access_has_project_level( $p_access_level, $t_project_id, $p_user_id );
