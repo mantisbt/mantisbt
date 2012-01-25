@@ -217,13 +217,24 @@ print_recently_visited();
 <form name="report_bug_form" method="post" <?php if ( $tpl_show_attachments ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
 <?php echo form_security_field( 'bug_report' ) ?>
 <table class="width90" cellspacing="1">
-	<tr>
-		<td class="form-title" colspan="2">
-			<input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
-			<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
-			<?php echo lang_get( 'enter_report_details_title' ) ?>
-		</td>
-	</tr>
+    <tr>
+        <td class="form-title" colspan="2">
+            <input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
+            <?php echo lang_get( 'enter_report_details_title' ) ?>
+        </td>
+    </tr>
+    <tr <?php echo helper_alternate_class() ?>>
+        <th class="category" width="30%">
+            <label for="bug_report_id"><?php echo lang_get('email_project'); ?></label>
+        </th>
+        <td width="70%">
+            <select name="project_id" id="bug_project_id">
+            <?php
+                print_project_option_list( $t_project_id );
+            ?>
+            </select>
+        </td>
+    </tr>
 <?php
 	event_signal( 'EVENT_REPORT_BUG_FORM_TOP', array( $t_project_id ) );
 
