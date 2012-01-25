@@ -39,3 +39,6 @@ web.config
 #libraries
 library/jpgraph
 library/FirePHPCore
+
+# KDevelop
+*.kdev4
