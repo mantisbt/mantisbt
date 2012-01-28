@@ -29,6 +29,7 @@ plugins/*
 .cache
 .project
 .settings
+*.kdev4
 
 # IIS7 
 web.config
@@ -36,6 +37,3 @@ web.config
 #libraries
 library/jpgraph
 library/FirePHPCore
-
-# KDevelop
-*.kdev4
