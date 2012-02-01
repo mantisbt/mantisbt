@@ -269,8 +269,14 @@ if ( ( $f_new_status >= $t_resolved ) ) {
 	</td>
 	<td>
 		<select name="fixed_in_version">
-			<?php print_version_option_list( bug_get_field( $f_bug_id, 'fixed_in_version' ),
-							bug_get_field( $f_bug_id, 'project_id' ), VERSION_ALL ) ?>
+			<?php
+				$t_fixed_in_version = bug_get_field( $f_bug_id, 'fixed_in_version' );
+				if ( empty( $t_fixed_in_version ) && ON == config_get( 'auto_set_fixed_in_version' ) ) {
+					$t_fixed_in_version = bug_get_field( $f_bug_id, 'target_version' );
+				}
+				print_version_option_list( $t_fixed_in_version,
+					bug_get_field( $f_bug_id, 'project_id' ), VERSION_ALL )
+				?>
 		</select>
 	</td>
 </tr>

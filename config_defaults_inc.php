@@ -2723,6 +2723,13 @@
 	 */
 	$g_set_configuration_threshold = ADMINISTRATOR;
 
+	/**
+	 * Automatically default the fixed_in_version to target_version
+	 * upon resolving tickets.
+	 * @global int $g_auto_set_fixed_in_version
+	 */
+	$g_auto_set_fixed_in_version = ON;
+
 	/************************************
 	 * MantisBT Look and Feel Variables *
 	 ************************************/
