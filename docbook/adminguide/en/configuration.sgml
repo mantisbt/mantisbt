@@ -2360,6 +2360,14 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_auto_set_fixed_in_version</term>
+                <listitem>
+                    <para>Upon resolving a bug, suggest the 'Fixed in version' field to be filled in with the 
+                    	'Target version' in case the latter was specified and the former was still blank.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_csv_add_bom</term>
                 <listitem>
                     <para>Add Byte Order Mark (BOM) at the begining of the file as it helps Excel display the file in UTF-8.
