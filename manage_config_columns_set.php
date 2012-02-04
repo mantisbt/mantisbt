@@ -123,16 +123,16 @@ if ( serialize( config_get( 'excel_columns', '', $t_user_id, $t_project_id ) ) !
 }
 
 form_security_purge( 'manage_config_columns_set' );
-?>
-<br />
-<div>
-<?php
+
 $t_redirect_url = $f_form_page === 'account' ? 'account_manage_columns_page.php' : 'manage_config_columns_page.php';
 html_page_top( null, $t_redirect_url );
-echo '<br />';
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
+<div>
+	<br />
+	<?php
+		echo lang_get( 'operation_successful' ) . '<br />';
+		print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	?>
 </div>
 
 <?php
