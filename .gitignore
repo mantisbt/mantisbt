@@ -33,6 +33,7 @@ plugins/*
 .project
 .settings
 *.kdev4
+*.idea/
 
 # IIS7 
 web.config
