@@ -182,6 +182,7 @@ function gpc_isset_custom_field( $p_var_name, $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_FLOAT:
 		case CUSTOM_FIELD_TYPE_ENUM:
 		case CUSTOM_FIELD_TYPE_EMAIL:
+		case CUSTOM_FIELD_TYPE_TEMPLATE:
 			return gpc_isset( $t_field_name ) && !is_blank( gpc_get_string( $t_field_name ) );
 		default:
 			return gpc_isset( $t_field_name );
