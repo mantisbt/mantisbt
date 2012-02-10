@@ -473,7 +473,7 @@ function html_top_banner() {
 		if( $t_show_url ) {
 			echo '<a href="', config_get( 'logo_url' ), '">';
 		}
-		echo '<img border="0" alt="Mantis Bug Tracker" src="' . helper_mantis_url( config_get( 'logo_image' ) ) . '" />';
+		echo '<img border="0" alt="Mantis Bug Tracker" src="' . helper_mantis_url( $t_logo_image ) . '" />';
 		if( $t_show_url ) {
 			echo '</a>';
 		}
@@ -659,9 +659,16 @@ function html_footer( $p_file = null ) {
 		}
 	}
 
-	echo '</td><td>', "\n\t", '<div align="right">';
-	echo '<a href="http://www.mantisbt.org" title="Free Web Based Bug Tracker"><img src="' . helper_mantis_url( 'images/mantis_logo_button.gif' ) . '" width="88" height="35" alt="Powered by Mantis Bugtracker" border="0" /></a>';
-	echo '</div>', "\n", '</td></tr></table>', "\n";
+	echo '</td><td>', "\n\t";
+	
+	# We don't have a button anymore, so for now we will only show the resized version of the logo when not on login page.
+	if ( !is_page_name( 'login_page' ) ) {
+		echo '<div align="right">';
+		echo '<a href="http://www.mantisbt.org" title="Free Web Based Bug Tracker"><img src="' . helper_mantis_url( 'images/mantis_logo_232x80.png' ) . '" width="145" height="50" alt="Powered by Mantis Bugtracker" border="0" /></a>';
+		echo '</div>', "\n";
+	}
+
+	echo '</td></tr></table>', "\n";
 }
 
 /**
