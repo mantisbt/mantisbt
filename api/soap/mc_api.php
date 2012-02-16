@@ -51,6 +51,11 @@ function mci_check_login( $p_username, $p_password ) {
 
 		# do not use password validation.
 		$p_password = null;
+	} else {
+		if( is_blank( $p_password ) ) {
+			# require password for authenticated access
+			return false;
+		}
 	}
 
 	if( false === auth_attempt_script_login( $p_username, $p_password ) ) {
