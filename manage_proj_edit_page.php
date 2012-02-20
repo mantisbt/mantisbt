@@ -133,7 +133,14 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			if ( file_is_uploading_enabled() ) { ?>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="project-file-path"><span><?php echo lang_get( 'upload_file_path' ) ?></span></label>
-				<span class="input"><input type="text" id="project-file-path" name="file_path" size="50" maxlength="250" value="<?php echo string_attribute( $row['file_path'] ) ?>" /></span>
+				<?php
+					$t_file_path = $row['file_path'];
+					# Don't reveal the absolute path to non-administrators for security reasons
+					if ( is_blank( $t_file_path ) && current_user_is_administrator() ) {
+						$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+					}
+				?>
+				<span class="input"><input type="text" id="project-file-path" name="file_path" size="50" maxlength="250" value="<?php echo string_attribute( $t_file_path ) ?>" /></span>
 				<span class="label-style"></span>
 			</div><?php
 			} ?>
