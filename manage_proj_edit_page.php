@@ -121,8 +121,15 @@
 	<td class="category">
 		<?php echo lang_get( 'upload_file_path' ) ?>
 	</td>
+<?php
+	$t_file_path = $row['file_path'];
+	# Don't reveal the absolute path to non-administrators for security reasons
+	if ( is_blank( $t_file_path ) && current_user_is_administrator() ) {
+		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+	}
+?>
 	<td>
-		<input type="text" name="file_path" size="50" maxlength="250" value="<?php echo string_attribute( $row['file_path'] ) ?>" />
+		<input type="text" name="file_path" size="50" maxlength="250" value="<?php echo string_attribute( $t_file_path ) ?>" />
 	</td>
 </tr>
 <?php } ?>
