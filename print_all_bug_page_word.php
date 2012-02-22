@@ -377,7 +377,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<?php echo $t_lang_description ?>:
 	</td>
 	<td class="print" colspan="5">
-		<?php echo string_display_line_links( $t_bug->description ) ?>
+		<?php echo string_display_links( $t_bug->description ) ?>
 	</td>
 </tr>
 <tr class="print">
@@ -385,7 +385,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<?php echo $t_lang_steps_to_reproduce ?>:
 	</td>
 	<td class="print" colspan="5">
-		<?php echo string_display_line_links( $t_bug->steps_to_reproduce ) ?>
+		<?php echo string_display_links( $t_bug->steps_to_reproduce ) ?>
 	</td>
 </tr>
 <tr class="print">
@@ -393,7 +393,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<?php echo $t_lang_additional_information ?>:
 	</td>
 	<td class="print" colspan="5">
-		<?php echo string_display_line_links( $t_bug->additional_information ) ?>
+		<?php echo string_display_links( $t_bug->additional_information ) ?>
 	</td>
 </tr>
 <?php
