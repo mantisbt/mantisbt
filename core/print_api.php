@@ -768,7 +768,10 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 	# Note: Filter API specifies selected versions as an array
 	if( !is_array( $p_version ) ) {
 		if( !empty( $p_version ) ) {
-			$versions[] = version_cache_row( version_get_id( $p_version, $c_project_id ) );
+			$t_version_id = version_get_id( $p_version, $c_project_id );
+			if( $t_version_id !== false ) {
+				$versions[] = version_cache_row( t_version_id );
+			}
 		}
 	}
 
