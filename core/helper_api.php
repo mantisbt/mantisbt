@@ -186,55 +186,12 @@ function get_enum_element( $p_enum_name, $p_val ) {
 }
 
 /**
- * If $p_var is not an array and is equal to $p_val then we PRINT SELECTED.
- * If $p_var is an array, then if any member is equal to $p_val we PRINT SELECTED.
- * This is used when we want to know if a variable indicated a certain
- * option element is selected
+ * Attach a "checked" attribute to a HTML element if $p_var === $p_val or
+ * a {value within an array passed via $p_var} === $p_val.
  *
- * If the second parameter is not given, the first parameter is compared
- *  to the boolean value true
- * @param mixed $p_var
- * @param mixed $p_val
- * @return null
- */
-function check_selected( $p_var, $p_val = true ) {
-	if( is_array( $p_var ) ) {
-		foreach( $p_var as $t_this_var ) {
-
-			# catch the case where one entry is 0 and the other is a string.
-			if( is_string( $t_this_var ) && is_string( $p_val ) ) {
-				if( $t_this_var === $p_val ) {
-					echo ' selected="selected"';
-					return;
-				}
-			}
-			else if( $t_this_var == $p_val ) {
-				echo ' selected="selected"';
-				return;
-			}
-		}
-	} else {
-		if( is_string( $p_var ) && is_string( $p_val ) ) {
-			if( $p_var === $p_val ) {
-				echo ' selected="selected"';
-				return;
-			}
-		}
-		else if( $p_var == $p_val ) {
-			echo ' selected="selected"';
-			return;
-		}
-	}
-}
-
-/**
- * If $p_var is not an array and is equal to $p_val then we PRINT CHECKED.
- * If $p_var is an array, then if any member is equal to $p_val we PRINT CHECKED.
- * This is used when we want to know if a variable indicated a certain
- * option element is selected
+ * If the second parameter is not given, the first parameter is compared to
+ * the boolean value true.
  *
- * If the second parameter is not given, the first parameter is compared
- *  to the boolean value true
  * @param mixed $p_var
  * @param mixed $p_val
  * @return null
@@ -242,28 +199,66 @@ function check_selected( $p_var, $p_val = true ) {
 function check_checked( $p_var, $p_val = true ) {
 	if( is_array( $p_var ) ) {
 		foreach( $p_var as $t_this_var ) {
-
-			# catch the case where one entry is 0 and the other is a string.
-			if( is_string( $t_this_var ) && is_string( $p_val ) ) {
-				if( $t_this_var === $p_val ) {
-					echo ' checked="checked"';
-					return;
-				}
-			}
-			else if( $t_this_var == $p_val ) {
+			# We need to be careful when comparing an array of
+			# version number strings (["1.0", "1.1", "1.10"]) to
+			# a selected version number of "1.10". If a ==
+			# comparison were to be used, PHP would treat
+			# "1.1" and "1.10" as being the same as the strings
+			# would be converted to numerals before being compared
+			# as numerals.
+			#
+			# This is further complicated by filter dropdowns
+			# containing a mixture of string and integer values.
+			# The following "meta filter values" exist as integer
+			# values in dropdowns:
+			#   META_FILTER_MYSELF = -1
+			#   META_FILTER_NONE = -2
+			#   META_FILTER_CURRENT = -3
+			#   META_FILTER_ANY = 0
+			#
+			# For these reasons, a === comparison is required.
+			if( $t_this_var === $p_val ) {
 				echo ' checked="checked"';
 				return;
 			}
 		}
 	} else {
-		if( is_string( $p_var ) && is_string( $p_val ) ) {
-			if( $p_var === $p_val ) {
-				echo ' checked="checked"';
+		# Refer to the comment above for the is_array($p_var)===true
+		# case. The same reasoning applies here too!
+		if( $p_var === $p_val ) {
+			echo ' checked="checked"';
+			return;
+		}
+	}
+}
+
+/**
+ * Attach a "selected" attribute to a HTML element if $p_var === $p_val or
+ * a {value within an array passed via $p_var} === $p_val.
+ *
+ * If the second parameter is not given, the first parameter is compared to
+ * the boolean value true.
+ *
+ * @param mixed $p_var
+ * @param mixed $p_val
+ * @return null
+ */
+function check_selected( $p_var, $p_val = true ) {
+	if ( is_array( $p_var ) ) {
+		foreach ( $p_var as $t_this_var ) {
+			# Refer to the comment in this same place within the
+			# check_checked function. The same reasoning applies
+			# here too!
+			if ( $t_this_var === $p_val ) {
+				echo ' selected="selected"';
 				return;
 			}
 		}
-		else if( $p_var == $p_val ) {
-			echo ' checked="checked"';
+	} else {
+		#Refer to the comment in this same place within the
+		# check_checked function. The same reasoning applies here too!
+		if ( $p_var === $p_val ) {
+			echo ' selected="selected"';
 			return;
 		}
 	}
