@@ -335,7 +335,7 @@ function profile_get_default( $p_user_id ) {
 			WHERE user_id=" . db_param();
 	$result = db_query_bound( $query, Array( $c_user_id ) );
 
-	$t_default_profile = db_result( $result, 0, 0 );
+	$t_default_profile = (int)db_result( $result, 0, 0 );
 
 	return $t_default_profile;
 }

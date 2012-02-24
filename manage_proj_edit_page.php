@@ -105,26 +105,26 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				<label for="project-status"><span><?php echo lang_get( 'status' ) ?></span></label>
 				<span class="select">
 					<select id="project-status" name="status">
-						<?php print_enum_string_option_list( 'project_status', $row['status'] ) ?>
+						<?php print_enum_string_option_list( 'project_status', (int)$row['status'] ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="project-enabled"><span><?php echo lang_get( 'enabled' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="project-enabled" name="enabled" <?php check_checked( $row['enabled'], ON ); ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="project-enabled" name="enabled" <?php check_checked( (int)$row['enabled'], ON ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="project-inherit-global"><span><?php echo lang_get( 'inherit_global' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="project-inherit-global" name="inherit_global" <?php check_checked( $row['inherit_global'], ON ); ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="project-inherit-global" name="inherit_global" <?php check_checked( (int)$row['inherit_global'], ON ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="project-view-state"><span><?php echo lang_get( 'view_status' ) ?></span></label>
 				<span class="select">
 					<select id="project-view-state" name="view_state">
-						<?php print_enum_string_option_list( 'view_state', $row['view_state']) ?>
+						<?php print_enum_string_option_list( 'view_state', (int)$row['view_state']) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>

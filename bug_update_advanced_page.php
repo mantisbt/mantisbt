@@ -229,7 +229,7 @@ if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_s
 
 	if ( $tpl_can_change_view_state ) {
 		echo '<select ' . helper_get_tab_index() . ' id="view_state" name="view_state">';
-		print_enum_string_option_list( 'view_state', $tpl_bug->view_state);
+		print_enum_string_option_list( 'view_state', (int)$tpl_bug->view_state);
 		echo '</select>';
 	} else if ( $tpl_show_view_state ) {
 		echo $tpl_view_state;
@@ -449,7 +449,7 @@ if ( $tpl_show_projection || $tpl_show_eta ) {
 	if ( $tpl_show_eta ) {
 		echo '<th class="category"><label for="eta">' . lang_get( 'eta' ) . '</label></th>';
 		echo '<td><select ' . helper_get_tab_index() . ' id="eta" name="eta">';
-		print_enum_string_option_list( 'eta', $tpl_bug->eta );
+		print_enum_string_option_list( 'eta', (int)$tpl_bug->eta );
 		echo '</select></td>';
 	} else {
 		$t_spacer += 2;

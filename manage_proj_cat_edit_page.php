@@ -56,8 +56,8 @@ $f_category_id		= gpc_get_int( 'id' );
 $f_project_id		= gpc_get_int( 'project_id' );
 
 $t_row = category_get_row( $f_category_id );
-$t_assigned_to = $t_row['user_id'];
-$t_project_id = $t_row['project_id'];
+$t_assigned_to = (int)$t_row['user_id'];
+$t_project_id = (int)$t_row['project_id'];
 $t_name = $t_row['name'];
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_project_id );

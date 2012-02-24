@@ -199,6 +199,12 @@ function get_enum_element( $p_enum_name, $p_val ) {
 function check_checked( $p_var, $p_val = true ) {
 	if( is_array( $p_var ) ) {
 		foreach( $p_var as $t_this_var ) {
+			if ( gettype( $t_this_var ) !== gettype( $p_val ) ) {
+				# Reaching this point is a a sign that you need to
+				# check the types of the parameters passed to this
+				# function. They should match.
+				trigger_error( ERROR_GENERIC, ERROR );
+			}
 			# We need to be careful when comparing an array of
 			# version number strings (["1.0", "1.1", "1.10"]) to
 			# a selected version number of "1.10". If a ==
@@ -223,6 +229,12 @@ function check_checked( $p_var, $p_val = true ) {
 			}
 		}
 	} else {
+		if ( gettype( $p_var ) !== gettype( $p_val ) ) {
+			# Reaching this point is a a sign that you need to
+			# check the types of the parameters passed to this
+			# function. They should match.
+			trigger_error( ERROR_GENERIC, ERROR );
+		}
 		# Refer to the comment above for the is_array($p_var)===true
 		# case. The same reasoning applies here too!
 		if( $p_var === $p_val ) {
@@ -246,6 +258,12 @@ function check_checked( $p_var, $p_val = true ) {
 function check_selected( $p_var, $p_val = true ) {
 	if ( is_array( $p_var ) ) {
 		foreach ( $p_var as $t_this_var ) {
+			if ( gettype( $t_this_var ) !== gettype( $p_val ) ) {
+				# Reaching this point is a a sign that you need to
+				# check the types of the parameters passed to this
+				# function. They should match.
+				trigger_error( ERROR_GENERIC, ERROR );
+			}
 			# Refer to the comment in this same place within the
 			# check_checked function. The same reasoning applies
 			# here too!
@@ -255,6 +273,12 @@ function check_selected( $p_var, $p_val = true ) {
 			}
 		}
 	} else {
+		if ( gettype( $p_var ) !== gettype( $p_val ) ) {
+			# Reaching this point is a a sign that you need to
+			# check the types of the parameters passed to this
+			# function. They should match.
+			trigger_error( ERROR_GENERIC, ERROR );
+		}
 		#Refer to the comment in this same place within the
 		# check_checked function. The same reasoning applies here too!
 		if ( $p_var === $p_val ) {

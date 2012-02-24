@@ -537,7 +537,7 @@ function plugin_protected( $p_basename ) {
 		return 1;
 	}
 
-	return $g_plugin_cache_protected[$p_basename];
+	return (bool)$g_plugin_cache_protected[$p_basename];
 }
 
 /**
@@ -553,7 +553,7 @@ function plugin_priority( $p_basename ) {
 		return 3;
 	}
 
-	return $g_plugin_cache_priority[$p_basename];
+	return (int)$g_plugin_cache_priority[$p_basename];
 }
 
 # ## Plugin management functions

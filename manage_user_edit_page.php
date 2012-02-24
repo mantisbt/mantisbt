@@ -141,7 +141,7 @@ print_manage_menu();
 						if ( !MantisEnum::hasValue( config_get( 'access_levels_enum_string' ), $t_access_level ) ) {
 							$t_access_level = config_get( 'default_new_account_access_level' );
 						}
-						print_project_access_levels_option_list( $t_access_level ); ?>
+						print_project_access_levels_option_list( (int)$t_access_level ); ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
@@ -149,13 +149,13 @@ print_manage_menu();
 			<!-- Enabled Checkbox -->
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="edit-enabled"><span><?php echo lang_get( 'enabled_label' ) ?></span></label>
-				<span class="checkbox"><input id="edit-enabled" type="checkbox" name="enabled" <?php check_checked( $t_user['enabled'], ON ); ?> /></span>
+				<span class="checkbox"><input id="edit-enabled" type="checkbox" name="enabled" <?php check_checked( (int)$t_user['enabled'], ON ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<!-- Protected Checkbox -->
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="edit-protected"><span><?php echo lang_get( 'protected_label' ) ?></span></label>
-				<span class="checkbox"><input id="edit-protected" type="checkbox" name="protected" <?php check_checked( $t_user['protected'], ON ); ?> /></span>
+				<span class="checkbox"><input id="edit-protected" type="checkbox" name="protected" <?php check_checked( (int)$t_user['protected'], ON ); ?> /></span>
 				<span class="label-style"></span>
 			</div><?php
 			if ( config_get( 'enable_email_notification' ) == ON ) {
@@ -250,7 +250,7 @@ if( $t_reset || $t_unlock || $t_delete ) {
 				<label for="add-user-project-access"><span><?php echo lang_get( 'access_level_label' ) ?></span></label>
 				<span class="select">
 					<select id="add-user-project-access" name="access_level">
-						<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
+						<?php print_project_access_levels_option_list( (int)config_get( 'default_new_account_access_level' ) ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>

@@ -82,7 +82,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 				<label for="custom-field-type"><span><?php echo lang_get( 'custom_field_type' ) ?></span></label>
 				<span class="select">
 					<select id="custom-field-type" name="type">
-						<?php print_enum_string_option_list( 'custom_field_type', $t_definition['type'] ) ?>
+						<?php print_enum_string_option_list( 'custom_field_type', (int)$t_definition['type'] ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
@@ -106,7 +106,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 				<label for="custom-field-access-level-r"><span><?php echo lang_get( 'custom_field_access_level_r' ) ?></span></label>
 				<span class="select">
 					<select id="custom-field-access-level-r" name="access_level_r">
-						<?php print_enum_string_option_list( 'access_levels', $t_definition['access_level_r'] ) ?>
+						<?php print_enum_string_option_list( 'access_levels', (int)$t_definition['access_level_r'] ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
@@ -115,7 +115,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 				<label for="custom-field-access-level-rw"><span><?php echo lang_get( 'custom_field_access_level_rw' ) ?></span></label>
 				<span class="select">
 					<select id="custom-field-access-level-rw" name="access_level_rw">
-						<?php print_enum_string_option_list( 'access_levels', $t_definition['access_level_rw'] ) ?>
+						<?php print_enum_string_option_list( 'access_levels', (int)$t_definition['access_level_rw'] ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
@@ -137,42 +137,42 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="custom-field-display-report"><span><?php echo lang_get( 'custom_field_display_report' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="custom-field-display-report" name="display_report" value="1" <?php check_checked( $t_definition['display_report'] ) ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="custom-field-display-report" name="display_report" value="1" <?php check_checked( (bool)$t_definition['display_report'] ) ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="custom-field-display-update"><span><?php echo lang_get( 'custom_field_display_update' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="custom-field-display-update" name="display_update" value="1" <?php check_checked( $t_definition['display_update'] ) ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="custom-field-display-update" name="display_update" value="1" <?php check_checked( (bool)$t_definition['display_update'] ) ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="custom-field-display-resolved"><span><?php echo lang_get( 'custom_field_display_resolved' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="custom-field-display-resolved" name="display_resolved" value="1" <?php check_checked( $t_definition['display_resolved'] ) ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="custom-field-display-resolved" name="display_resolved" value="1" <?php check_checked( (bool)$t_definition['display_resolved'] ) ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="custom-field-display-closed"><span><?php echo lang_get( 'custom_field_display_closed' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="custom-field-display-closed" name="display_closed" value="1" <?php check_checked( $t_definition['display_closed'] ) ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="custom-field-display-closed" name="display_closed" value="1" <?php check_checked( (bool)$t_definition['display_closed'] ) ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="custom-field-require-report"><span><?php echo lang_get( 'custom_field_require_report' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="custom-field-require-report" name="require_report" value="1" <?php check_checked( $t_definition['require_report'] ) ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="custom-field-require-report" name="require_report" value="1" <?php check_checked( (bool)$t_definition['require_report'] ) ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="custom-field-require-update"><span><?php echo lang_get( 'custom_field_require_update' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="custom-field-require-update" name="require_update" value="1" <?php check_checked( $t_definition['require_update'] ) ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="custom-field-require-update" name="require_update" value="1" <?php check_checked( (bool)$t_definition['require_update'] ) ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="custom-field-require-resolved"><span><?php echo lang_get( 'custom_field_require_resolved' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="custom-field-require-resolved" name="require_resolved" value="1" <?php check_checked( $t_definition['require_resolved'] ) ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="custom-field-require-resolved" name="require_resolved" value="1" <?php check_checked( (bool)$t_definition['require_resolved'] ) ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="custom-field-require-closed"><span><?php echo lang_get( 'custom_field_require_closed' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="custom-field-require-closed" name="require_closed" value="1" <?php check_checked( $t_definition['require_closed'] ) ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="custom-field-require-closed" name="require_closed" value="1" <?php check_checked( (bool)$t_definition['require_closed'] ) ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_custom_field_button' ) ?>" /></span>

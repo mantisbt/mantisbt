@@ -274,7 +274,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 	for( $i = 0;$i < $t_count;$i++ ) {
 		$t_row = $t_users[$i];
 		echo '<option value="' . $t_row['id'] . '" ';
-		check_selected( $p_user_id, $t_row['id'] );
+		check_selected( $p_user_id, (int)$t_row['id'] );
 		echo '>' . $t_display[$i] . '</option>';
 	}
 }
@@ -477,7 +477,9 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 
 	if( $p_include_all_projects ) {
 		echo '<option value="' . ALL_PROJECTS . '"';
-		check_selected( $p_project_id, ALL_PROJECTS );
+		if ( $p_project_id !== null ) {
+			check_selected( (int)$p_project_id, ALL_PROJECTS );
+		}
 		echo '>' . lang_get( 'all_projects' ) . '</option>' . "\n";
 	}
 
@@ -486,7 +488,9 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 		$t_id = $t_project_ids[$i];
 		if( $t_id != $p_filter_project_id ) {
 			echo '<option value="' . $t_id . '"';
-			check_selected( $p_project_id, $t_id );
+			if ( $p_project_id !== null ) {
+				check_selected( (int)$p_project_id, $t_id );
+			}
 			echo '>' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, Array() );
 		}
@@ -507,7 +511,9 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 				$t_full_id = join( $p_parents, ";" ) . ';' . $t_id;
 			}
 			echo $t_full_id . '"';
-			check_selected( $p_project_id, $t_full_id );
+			if ( $p_project_id !== null ) {
+				check_selected( $p_project_id, $t_full_id );
+			}
 			echo '>' . str_repeat( '&#160;', count( $p_parents ) ) . str_repeat( '&#187;', count( $p_parents ) ) . ' ' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
 		}
@@ -554,7 +560,9 @@ function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
 		$t_os_build = string_attribute( $t_profile['os_build'] );
 
 		echo '<option value="' . $t_profile['id'] . '"';
-		check_selected( $p_select_id, $t_profile['id'] );
+		if ( $p_select_id !== false ) {
+			check_selected( $p_select_id, (int)$t_profile['id'] );
+		}
 		echo '>' . $t_platform . ' ' . $t_os . ' ' . $t_os_build . '</option>';
 	}
 }
@@ -586,7 +594,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 	$cat_arr = category_get_all_rows( $t_project_id, /* inherit */ null, /* sortByProject */ true );
 
 	foreach( $cat_arr as $t_category_row ) {
-		$t_category_id = $t_category_row['id'];
+		$t_category_id = (int)$t_category_row['id'];
 		echo "<option value=\"$t_category_id\"";
 		check_selected( $p_category_id, $t_category_id );
 		echo '>' . string_attribute( category_full_name( $t_category_id, $t_category_row['project_id'] != $t_project_id ) ) . '</option>';
@@ -606,7 +614,7 @@ function print_category_filter_option_list( $p_category_name = '', $p_project_id
 	foreach( $t_cat_arr as $t_cat ) {
 		$t_name = string_attribute( $t_cat );
 		echo '<option value="' . $t_name . '"';
-		check_selected( string_attribute( $p_category_name ), $t_name );
+		check_selected( $p_category_name, $t_cat );
 		echo '>' . $t_name . '</option>';
 	}
 }
@@ -616,10 +624,10 @@ function print_category_filter_option_list( $p_category_name = '', $p_project_id
 function print_platform_option_list( $p_platform, $p_user_id = null ) {
 	$t_platforms_array = profile_get_field_all_for_user( 'platform', $p_user_id );
 
-	foreach( $t_platforms_array as $t_platform ) {
-		$t_platform = string_attribute( $t_platform );
+	foreach( $t_platforms_array as $t_platform_unescaped ) {
+		$t_platform = string_attribute( $t_platform_unescaped );
 		echo '<option value="' . $t_platform . '"';
-		check_selected( string_attribute( $p_platform ), $t_platform );
+		check_selected( $p_platform, $t_platform_unescaped );
 		echo '>' . $t_platform . '</option>';
 	}
 }
@@ -629,10 +637,10 @@ function print_platform_option_list( $p_platform, $p_user_id = null ) {
 function print_os_option_list( $p_os, $p_user_id = null ) {
 	$t_os_array = profile_get_field_all_for_user( 'os', $p_user_id );
 
-	foreach( $t_os_array as $t_os ) {
-		$t_os = string_attribute( $t_os );
+	foreach( $t_os_array as $t_os_unescaped ) {
+		$t_os = string_attribute( $t_os_unescaped );
 		echo '<option value="' . $t_os . '"';
-		check_selected( string_attribute( $p_os ), $t_os );
+		check_selected( $p_os, $t_os_unescaped );
 		echo '>' . $t_os . '</option>';
 	}
 }
@@ -641,10 +649,10 @@ function print_os_option_list( $p_os, $p_user_id = null ) {
 function print_os_build_option_list( $p_os_build, $p_user_id = null ) {
 	$t_os_build_array = profile_get_field_all_for_user( 'os_build', $p_user_id );
 
-	foreach( $t_os_build_array as $t_os_build ) {
-		$t_os_build = string_attribute( $t_os_build );
+	foreach( $t_os_build_array as $t_os_build_unescaped ) {
+		$t_os_build = string_attribute( $t_os_build_unescaped );
 		echo '<option value="' . $t_os_build . '"';
-		check_selected( string_attribute( $p_os_build ), $t_os_build );
+		check_selected( $p_os_build, $t_os_build_unescaped );
 		echo '>' . $t_os_build . '</option>';
 	}
 }
@@ -706,7 +714,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 		if ( !in_array( $t_version, $t_listed ) ) {
 			$t_listed[] = $t_version;
 			echo '<option value="' . $t_version . '"';
-			check_selected( string_attribute( $p_version ), $t_version );
+			check_selected( $p_version, $version['version'] );
 
 			$t_version_string = string_attribute( prepare_version_string( $c_project_id, $version['id'] ) );
 
@@ -738,10 +746,10 @@ function print_build_option_list( $p_build = '' ) {
 
 	$t_max_length = config_get( 'max_dropdown_length' );
 
-	foreach( $t_overall_build_arr as $t_build ) {
-		$t_build = string_attribute( $t_build );
+	foreach( $t_overall_build_arr as $t_build_unescaped ) {
+		$t_build = string_attribute( $t_build_unescaped );
 		echo "<option value=\"$t_build\"";
-		check_selected( string_attribute( $p_build ), $t_build );
+		check_selected( $p_build, $t_build_unescaped );
 		echo ">" . string_shorten( $t_build, $t_max_length ) . "</option>";
 	}
 }

@@ -1497,7 +1497,7 @@ function html_button_bug_assign_to( $p_bug_id ) {
 	$t_already_selected = false;
 
 	foreach( $t_options as $t_entry ) {
-		$t_id = string_attribute( $t_entry[0] );
+		$t_id = (int)$t_entry[0];
 		$t_caption = string_attribute( $t_entry[1] );
 
 		# if current user and reporter can't be selected, then select the first

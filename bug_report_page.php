@@ -133,7 +133,7 @@ if ( $f_master_bug_id > 0 ) {
 	$f_description			= $t_bug->description;
 	$f_steps_to_reproduce	= $t_bug->steps_to_reproduce;
 	$f_additional_info		= $t_bug->additional_information;
-	$f_view_state			= $t_bug->view_state;
+	$f_view_state			= (int)$t_bug->view_state;
 	$f_due_date				= $t_bug->due_date;
 
 	$t_project_id			= $t_bug->project_id;
@@ -150,15 +150,15 @@ if ( $f_master_bug_id > 0 ) {
 	$f_handler_id			= gpc_get_int( 'handler_id', 0 );
 
 	$f_category_id			= gpc_get_int( 'category_id', 0 );
-	$f_reproducibility		= gpc_get_int( 'reproducibility', config_get( 'default_bug_reproducibility' ) );
-	$f_eta					= gpc_get_int( 'eta', config_get( 'default_bug_eta' ) );
-	$f_severity				= gpc_get_int( 'severity', config_get( 'default_bug_severity' ) );
-	$f_priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
+	$f_reproducibility		= gpc_get_int( 'reproducibility', (int)config_get( 'default_bug_reproducibility' ) );
+	$f_eta					= gpc_get_int( 'eta', (int)config_get( 'default_bug_eta' ) );
+	$f_severity				= gpc_get_int( 'severity', (int)config_get( 'default_bug_severity' ) );
+	$f_priority				= gpc_get_int( 'priority', (int)config_get( 'default_bug_priority' ) );
 	$f_summary				= gpc_get_string( 'summary', '' );
 	$f_description			= gpc_get_string( 'description', '' );
 	$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 	$f_additional_info		= gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
-	$f_view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
+	$f_view_state			= gpc_get_int( 'view_state', (int)config_get( 'default_bug_view_status' ) );
 	$f_due_date				= gpc_get_string( 'due_date', '');
 
 	if ( $f_due_date == '' ) {

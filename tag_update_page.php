@@ -96,7 +96,7 @@ html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
 					if ( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
 						echo '<label for="tag-user-id"><span>', lang_get( 'tag_creator' ), '</span></label>';
 						echo '<span class="select"><select ', helper_get_tab_index(), ' id="tag-user-id" name="user_id">';
-						print_user_option_list( $t_tag_row['user_id'], ALL_PROJECTS, config_get( 'tag_create_threshold' ) );
+						print_user_option_list( (int)$t_tag_row['user_id'], ALL_PROJECTS, (int)config_get( 'tag_create_threshold' ) );
 						echo '</select></span>';
 					} else { ?>
 						<span class="display-label"><span><?php echo lang_get( 'tag_creator' ); ?></span></span>
