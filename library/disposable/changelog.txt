@@ -1,4 +1,10 @@
 DisposableEmailChecker ChangeLog
+2011.08.19  -  1.1.1
+- 36 disposable forwarding email providers.
+- 132 disposable trash email providers (24 new).
+- 1 disposable shredder email provider.
+- 42 disposable time bound email provider.
+- 83 free email providers (1 new).
 
 2008.04.13  -  1.1.0
 
