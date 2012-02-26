@@ -430,9 +430,9 @@ function config_can_set_in_database( $p_option ) {
 
 	# bypass table lookup for certain options
 	if( $g_cache_can_set_in_database == '' ) {
-		$g_cache_can_set_in_database = '/' . implode( '|', config_get_global( 'global_settings' ) ) . '/';
+		$g_cache_can_set_in_database = config_get_global( 'global_settings' );
 	}
-	$t_bypass_lookup = ( 0 < preg_match( $g_cache_can_set_in_database, $p_option ) );
+	$t_bypass_lookup = in_array( $p_option, $g_cache_can_set_in_database, true );
 
 	$g_cache_bypass_lookup[$p_option] = $t_bypass_lookup;
 
