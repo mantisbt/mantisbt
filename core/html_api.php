@@ -463,11 +463,7 @@ function html_top_banner() {
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 		include( $t_page );
 	} else if( $t_show_logo ) {
-		if ( is_page_name( 'login_page' ) || is_page_name( 'signup_page' ) || is_page_name( 'signup' ) ) {
-			$t_align = 'center';
-		} else {
-			$t_align = 'left';
-		}
+		$t_align = should_center_logo() ? 'center' : 'left';
 
 		echo '<div align="', $t_align, '">';
 		if( $t_show_url ) {
