@@ -2030,7 +2030,43 @@ function filter_cache_result( $p_rows, $p_id_array_lastmod ) {
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 
 	$t_id_array_lastmod = array_unique( $p_id_array_lastmod );
-	$t_where_string = "WHERE $t_bugnote_table.bug_id in (" . implode( ", ", $t_id_array_lastmod ) . ')';
+
+	$t_access_required_to_view_private_notes = config_get( 'private_bugnote_threshold' );
+	$t_user_id = auth_get_current_user_id();
+
+	$t_id_allowed_to_see_private_notes = array();
+	foreach( $p_rows as $t_row ) {
+		$t_project_id = $t_row['project_id'];
+
+		if( access_has_project_level( $t_access_required_to_view_private_notes, $t_project_id, $t_user_id ) ) {
+			if ( !in_array( $t_row['id'], $t_id_allowed_to_see_private_notes ) ) {
+
+				//User is allowed to see private notes on this issue
+				$t_id_allowed_to_see_private_notes[] = $t_row['id'];
+
+				//We unset it from the original array, because it will already fit on the "issues where user is allowed to see private bugnotes" condition.
+				//Avoids the id to be unnecessarily on the 2 conditions
+				$key_to_unset = array_keys( $t_id_array_lastmod, $t_row['id'] );
+				unset($t_id_array_lastmod[$key_to_unset[0]]);
+			}
+		}
+	}
+
+	if( !empty( $t_id_array_lastmod ) ) {
+		$t_where_string_condition[] = "($t_bugnote_table.bug_id in (" . implode( ", ", $t_id_array_lastmod ) . ") AND $t_bugnote_table.view_state = " . VS_PUBLIC . ')';
+	}
+
+	if( !empty( $t_id_allowed_to_see_private_notes ) ) {
+		$t_where_string_condition[] = "($t_bugnote_table.bug_id in (" . implode( ", ", $t_id_allowed_to_see_private_notes ) . '))';
+	}
+
+	if( empty( $t_where_string_condition ) ) { //It is always better to take care...
+		$t_where_string = '';
+	}
+	else {
+		$t_where_string = "WHERE " . implode( ' OR ', $t_where_string_condition );
+	}
+
 	$t_query = "SELECT DISTINCT bug_id,MAX(last_modified) as last_modified, COUNT(last_modified) as count FROM $t_bugnote_table $t_where_string GROUP BY bug_id";
 
 	# perform query
@@ -2049,6 +2085,7 @@ function filter_cache_result( $p_rows, $p_id_array_lastmod ) {
 			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row, $t_stats[ $t_row['id'] ] ) );
 		}
 	}
+
 	return $t_rows;
 }
 
