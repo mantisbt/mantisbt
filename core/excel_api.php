@@ -482,7 +482,7 @@ function excel_format_additional_information( $p_bug ) {
  * @param $p_custom_field The custom field name (without 'custom_' prefix).
  * @returns The custom field value.
  */
-function excel_format_custom_field( $p_bug ) {
+function excel_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field ) {
 	$t_field_id = custom_field_get_id_from_name( $p_custom_field );
 
 	if( $t_field_id === false ) {
@@ -502,7 +502,7 @@ function excel_format_custom_field( $p_bug ) {
  * Gets the formatted value for the specified plugin column value.
  * @param $p_custom_field The plugin column name.
  * @param $p_bug The bug to print the column for (needed for the display function of the plugin column).
- * @returns The custom field value.
+ * @returns The plugin column value.
  */
 function excel_format_plugin_column_value( $p_column, $p_bug ) {
 	$t_plugin_columns = columns_get_plugin_columns();
