@@ -404,5 +404,5 @@ function csv_format_due_date( $p_bug ) {
  * @access public
  */
 function csv_format_sponsorship_total( $p_bug ) {
-	return number_format( $p_bug->sponsorship_total );
+	return csv_escape_string( $p_bug->sponsorship_total );
 }
