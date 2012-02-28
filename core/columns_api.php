@@ -940,7 +940,7 @@ function print_column_edit( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE
 function print_column_priority( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td>';
 	if( ON == config_get( 'show_priority_text' ) ) {
-		print_formatted_priority_string( $p_bug->status, $p_bug->priority );
+		print_formatted_priority_string( $p_bug );
 	} else {
 		print_status_icon( $p_bug->priority );
 	}
@@ -1079,7 +1079,7 @@ function print_column_category_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
  */
 function print_column_severity( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="center">';
-	print_formatted_severity_string( $p_bug->status, $p_bug->severity );
+	print_formatted_severity_string( $p_bug );
 	echo '</td>';
 }
 
@@ -1091,7 +1091,7 @@ function print_column_severity( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_
  * @access public
  */
 function print_column_eta( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">', get_enum_element( 'eta', $p_bug->eta ), '</td>';
+	echo '<td class="center">', get_enum_element( 'eta', $p_bug->eta, auth_get_current_user_id(), $p_bug->project_id ), '</td>';
 }
 
 /**
@@ -1102,7 +1102,7 @@ function print_column_eta( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE 
  * @access public
  */
 function print_column_projection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">', get_enum_element( 'projection', $p_bug->projection ), '</td>';
+	echo '<td class="center">', get_enum_element( 'projection', $p_bug->projection, auth_get_current_user_id(), $p_bug->project_id ), '</td>';
 }
 
 /**
@@ -1113,7 +1113,7 @@ function print_column_projection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
  * @access public
  */
 function print_column_reproducibility( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">', get_enum_element( 'reproducibility', $p_bug->reproducibility ), '</td>';
+	echo '<td class="center">', get_enum_element( 'reproducibility', $p_bug->reproducibility, auth_get_current_user_id(), $p_bug->project_id ), '</td>';
 }
 
 /**
@@ -1124,7 +1124,9 @@ function print_column_reproducibility( $p_bug, $p_columns_target = COLUMNS_TARGE
  * @access public
  */
 function print_column_resolution( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="center">', get_enum_element( 'resolution', $p_bug->resolution ), '</td>';
+	echo '<td class="center">',
+		get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ),
+		'</td>';
 }
 
 /**
@@ -1136,7 +1138,10 @@ function print_column_resolution( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
  */
 function print_column_status( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="center">';
-	printf( '<span class="issue-status" title="%s">%s</span>', get_enum_element( 'resolution', $p_bug->resolution ), get_enum_element( 'status', $p_bug->status ) );
+	printf( '<span class="issue-status" title="%s">%s</span>',
+		get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ),
+		get_enum_element( 'status', $p_bug->status, auth_get_current_user_id(), $p_bug->project_id )
+	);
 
 	# print username instead of status
 	if(( ON == config_get( 'show_assigned_names' ) ) && ( $p_bug->handler_id > 0 ) && ( access_has_project_level( config_get( 'view_handler_threshold' ), $p_bug->project_id ) ) ) {

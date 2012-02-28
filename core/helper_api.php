@@ -68,13 +68,15 @@ function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_eve
 }
 
 /**
- * get the color string for the given status
+ * get the color string for the given status, user and project
  * @param int $p_status
+ * @param int|null $p_user user id, defaults to null (all users)
+ * @param int|null $p_project project id, defaults to null (all projects)
  * @return string
  */
-function get_status_color( $p_status ) {
-	$t_status_label = MantisEnum::getLabel( config_get( 'status_enum_string' ), $p_status );
-	$t_status_colors = config_get( 'status_colors' );
+function get_status_color( $p_status, $p_user = null, $p_project = null ) {
+	$t_status_label = MantisEnum::getLabel( config_get( 'status_enum_string', null, $p_user, $p_project ), $p_status );
+	$t_status_colors = config_get( 'status_colors', null, $p_user, $p_project );
 	$t_color = '#ffffff';
 
 	if ( isset( $t_status_colors[$t_status_label] ) ) {
@@ -85,13 +87,16 @@ function get_status_color( $p_status ) {
 }
 
 /**
- * Given a enum string and num, return the appropriate string
+ * Given a enum string and num, return the appropriate string for the
+ * specified user/project
  * @param string $p_enum_name
  * @param int $p_val
+ * @param int|null $p_user user id, defaults to null (all users)
+ * @param int|null $p_project project id, defaults to null (all projects)
  * @return string
  */
-function get_enum_element( $p_enum_name, $p_val ) {
-	$config_var = config_get( $p_enum_name . '_enum_string' );
+function get_enum_element( $p_enum_name, $p_val, $p_user = null, $p_project = null ) {
+	$config_var = config_get( $p_enum_name . '_enum_string', null, $p_user, $p_project );
 	$string_var = lang_get( $p_enum_name . '_enum_string' );
 
 	return MantisEnum::getLocalizedLabel( $config_var, $string_var, $p_val );

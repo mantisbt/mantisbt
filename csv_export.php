@@ -117,10 +117,10 @@
 				helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_CSV_PAGE ) );
 				$t_value = ob_get_clean();
 
-				echo csv_escape_string($t_value);
+				echo csv_escape_string( $t_value );
 			} else {
 				$t_function = 'csv_format_' . $t_column;
-				echo $t_function( $t_row->$t_column );
+				echo $t_function( $t_row );
 			}
 		}
 

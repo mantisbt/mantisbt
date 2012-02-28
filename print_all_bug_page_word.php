@@ -79,7 +79,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	html_body_begin();
 
 	$f_bug_arr = explode( ',', $f_export );
-	$t_count_exported = 0;	
+	$t_count_exported = 0;
 	$t_date_format = config_get( 'normal_date_format' );
 	$t_short_date_format = config_get( 'short_date_format' );
 
@@ -182,10 +182,10 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo '[' . string_display_line( $t_project_name ) . '] ' . string_display_line( $t_category_name ) ?>
 	</td>
 	<td class="print">
-		<?php echo get_enum_element( 'severity', $t_bug->severity ) ?>
+		<?php echo get_enum_element( 'severity', $t_bug->severity, auth_get_current_user_id(), $t_bug->project_id ) ?>
 	</td>
 	<td class="print">
-		<?php echo get_enum_element( 'reproducibility', $t_bug->reproducibility ) ?>
+		<?php echo get_enum_element( 'reproducibility', $t_bug->reproducibility, auth_get_current_user_id(), $t_bug->project_id ) ?>
 	</td>
 	<td class="print">
 		<?php echo date( $t_date_format, $t_bug->date_submitted ) ?>
@@ -257,7 +257,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $t_lang_priority ?>:
 	</td>
 	<td class="print">
-		<?php echo get_enum_element( 'priority', $t_bug->priority ) ?>
+		<?php echo get_enum_element( 'priority', $t_bug->priority, auth_get_current_user_id(), $t_bug->project_id ) ?>
 	</td>
 	<td class="print-category">
 		<?php echo $t_lang_os_version ?>:
@@ -272,7 +272,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $t_lang_status ?>:
 	</td>
 	<td class="print">
-		<?php echo get_enum_element( 'status', $t_bug->status ) ?>
+		<?php echo get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) ?>
 	</td>
 	<td class="print-category">
 		<?php echo $t_lang_product_version ?>:
@@ -293,7 +293,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $t_lang_resolution ?>:
 	</td>
 	<td class="print">
-		<?php echo get_enum_element( 'resolution', $t_bug->resolution ) ?>
+		<?php echo get_enum_element( 'resolution', $t_bug->resolution, auth_get_current_user_id(), $t_bug->project_id ) ?>
 	</td>
 	<td class="print" colspan="2">&#160;</td>
 </tr>
@@ -302,7 +302,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $t_lang_projection ?>:
 	</td>
 	<td class="print">
-		<?php echo get_enum_element( 'projection', $t_bug->projection ) ?>
+		<?php echo get_enum_element( 'projection', $t_bug->projection, auth_get_current_user_id(), $t_bug->project_id ) ?>
 	</td>
 	<td class="print-category">
 		&#160;
@@ -317,7 +317,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $t_lang_eta ?>:
 	</td>
 	<td class="print">
-		<?php echo get_enum_element( 'eta', $t_bug->eta ) ?>
+		<?php echo get_enum_element( 'eta', $t_bug->eta, auth_get_current_user_id(), $t_bug->project_id ) ?>
 	</td>
 	<td class="print-category">
 		<?php echo $t_lang_fixed_in_version ?>:

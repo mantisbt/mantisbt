@@ -89,7 +89,8 @@
 							}
 							echo $t_function( $t_bug->$t_column );
 						} else {
-							echo $t_function( $t_row->$t_column );
+							$t_function = 'excel_format_' . $t_column;
+							echo $t_function( $t_row );
 						}
 					}
 				}
