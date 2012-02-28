@@ -481,7 +481,7 @@ function excel_format_custom_field( $p_bug ) {
  */
 function excel_format_plugin_column_value( $p_column, $p_bug ) {
 	$t_plugin_columns = columns_get_plugin_columns();
-	
+
 	if ( !isset( $t_plugin_columns[$p_column] ) ) {
 		return excel_prepare_string( '' );
 	} else {
@@ -500,6 +500,16 @@ function excel_format_plugin_column_value( $p_column, $p_bug ) {
  */
 function excel_format_due_date( $p_bug ) {
 	return excel_prepare_string( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
+}
+
+/**
+ * Gets the sponsorship total for an issue
+ * @param object $p_bug the bug
+ * @return string
+ * @access public
+ */
+function excel_format_sponsorship_total( $p_bug ) {
+	return excel_prepare_string( $p_bug->sponsorship_total );
 }
 
 /**
