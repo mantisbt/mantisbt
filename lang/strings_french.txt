@@ -29,8 +29,10 @@
  * @author Atrol
  * @author Cedric31
  * @author Crochet.david
+ * @author Dregad
  * @author Eric Hartmann, eric@rhinfo.com
  * @author Francis Labrie, francis.labrie@smoguli.com
+ * @author Gomoko
  * @author Hashar
  * @author Hellekin O. Wolf, hellekin@mmania.com
  * @author IAlex
@@ -150,6 +152,8 @@ $s_select_option = '(choisir)';
 $s_bug_actiongroup_access = 'Vous n\'aviez pas les permissions appropriées pour effectuer cette action.';
 $s_bug_actiongroup_status = 'Ce bogue ne peut pas être changé pour l\'état demandé';
 $s_bug_actiongroup_category = 'Ce bogue ne peut pas être changé pour la catégorie demandée';
+$s_bug_actiongroup_handler = 'L\'utilisateur demandé n\'est pas autorisé à traiter cette question';
+$s_bug_actiongroup_version = 'La version demandée n\'existe pas dans le projet de ce problème';
 $s_close_bugs_conf_msg = 'Voulez-vous vraiment fermer ces bogues ?';
 $s_delete_bugs_conf_msg = 'Voulez-vous vraiment supprimer ces bogues ?';
 $s_move_bugs_conf_msg = 'Déplacer vers';
@@ -497,7 +501,7 @@ $s_bug_resolved_msg = 'Le bogue a été résolu. Entrez une note ci-dessous...';
 $s_resolve_add_bugnote_title = 'Ajouter une note pour la résolution du bogue';
 $s_bugnote_add_resolve_button = 'Ajouter une note';
 $s_from = 'De';
-$s_to = 'A';
+$s_to = 'À';
 $s_sent_you_this_reminder_about = 'vous a envoyé un rappel à propos de';
 $s_bug_reminder = 'Envoyer un rappel';
 $s_reminder_sent_to = 'Rappel envoyé à :';
@@ -662,7 +666,7 @@ $s_next_status = 'Phase suivante';
 $s_workflow = 'Workflow';
 $s_workflow_thresholds = 'Seuils qui affectent le workflow';
 $s_threshold = 'Seuil';
-$s_status_level = 'Phase';
+$s_status_level = 'État';
 $s_alter_level = 'Qui peut changer cette valeur';
 $s_validation = 'Validation du workflow';
 $s_comment = 'Commentaire de validation';
@@ -787,6 +791,7 @@ $s_accounts_pruned_msg = 'Tous les comptes de plus d\'une semaine et qui ne se s
 $s_prune_accounts_button = 'Supprimer';
 $s_confirm_account_pruning = 'Êtes vous sûr de vouloir supprimer les comptes qui ne se sont jamais branchés ?';
 $s_edit_user_title = 'Modifier un utilisateur';
+$s_account_unlock_button = 'Déverrouiller le compte';
 $s_reset_password_button = 'Effacer le mot de passe';
 $s_delete_user_button = 'Supprimer l\'utilisateur';
 $s_reset_password_msg = 'La réinitialisation du mot de passe envoie un hyperlien de confirmation par courriel.';
@@ -797,6 +802,7 @@ $s_users_new = 'Nouveau';
 $s_account_reset_protected_msg = 'Ce compte est protégé. Vous ne pouvez pas réinitialiser le mot de passe.';
 $s_account_reset_msg = 'Le message de confirmation a été envoyé à votre courriel...';
 $s_account_reset_msg2 = 'Mot de passe du compte a été mis à vide...';
+$s_account_unlock_msg = 'Le compte a été déverrouillé.';
 $s_manage_user_protected_msg = 'Compte protégé. Accréditation et activation protégées. Autrement, le compte a été mis à jour...';
 $s_manage_user_updated_msg = 'Le compte a été mis à jour...';
 $s_email_user_updated_subject = 'Compte mis à jour';
@@ -829,7 +835,7 @@ $s_delete_news_sure_msg = 'Voulez-vous vraiment supprimer cette information ?';
 $s_delete_news_item_button = 'Supprimer l\'information';
 $s_edit_news_title = 'Modifier les informations';
 $s_headline = 'Titre';
-$s_body = 'Message';
+$s_body = 'Corps';
 $s_update_news_button = 'Mettre à jour les nouvelles';
 $s_add_news_title = 'Ajouter une nouvelle';
 $s_post_to = 'Poster dans';
@@ -839,7 +845,7 @@ $s_edit_post = 'Modifier l\'information';
 $s_delete_post = 'Supprimer l\'information';
 $s_select_post = 'Sélectionner l\'information';
 $s_news_updated_msg = 'Les informations ont été mises à jour...';
-$s_back_link = 'Retour';
+$s_back_link = 'Arrière';
 $s_file_uploaded_msg = 'Le fichier a bien été envoyé.';
 $s_upload_file_title = 'Joindre un fichier';
 $s_title = 'Titre';
@@ -984,7 +990,7 @@ $s_bug_status_to_button = 'Changer l\'état en :';
 $s_reopen_bug_button = 'Rouvrir';
 $s_move_bug_button = 'Déplacer';
 $s_attached_files = 'Pièces jointes';
-$s_publish = 'Publié';
+$s_publish = 'Publier';
 $s_cached = 'Mis en cache';
 $s_add_user_to_monitor = 'Ajouter';
 $s_bug_view_title = 'Visualiser les détails du résultat';
@@ -1187,7 +1193,7 @@ $s_tag_filter_default = 'Bogues associés (%1$s)';
 $s_tag_history_attached = 'Balise associée';
 $s_tag_history_detached = 'Balise dissociée';
 $s_tag_history_renamed = 'Balise renommée';
-$s_tag_related = 'Balises associées';
+$s_tag_related = 'Étiquettes apparentées';
 $s_tag_related_issues = 'Bogues partagés (%1$s)';
 $s_tag_stats_attached = 'Bogues associés : %1$s';
 $s_tag_create = 'Créer la balise';
@@ -1200,7 +1206,7 @@ $s_time_tracking_cost_per_hour = 'Coût à l\'heure';
 $s_time_tracking_cost = 'Coût';
 $s_total_time_for_issue = 'Temps total pour le bogue = %1$s';
 $s_time_tracking_stopwatch_start = 'Démarrer';
-$s_time_tracking_stopwatch_stop = 'Arrêter';
+$s_time_tracking_stopwatch_stop = 'Arrêt';
 $s_time_tracking_stopwatch_reset = 'Réinitialiser';
 $s_access_denied = 'Accès refusé.';
 $s_twitter_resolved = '%1$d : [%2$s] %3$s (résolu par %4$s version %5$s)';

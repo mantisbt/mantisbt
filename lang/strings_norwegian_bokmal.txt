@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-/** Norwegian (bokmål)‬ (‪Norsk (bokmål)‬)
+/** Norwegian Bokmål (‪Norsk (bokmål)‬)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -32,7 +32,6 @@
  * @author Harald Khan
  * @author Holje
  * @author Ingvald Skaug, dev@skaug.no
- * @author Jon Harald Søby
  * @author Laaknor
  * @author Nghtwlkr
  * @author Njardarlogar
@@ -133,6 +132,8 @@ $s_select_option = '(velg)';
 $s_bug_actiongroup_access = 'Du hadde ikke rettighet til å utføre den handlingen.';
 $s_bug_actiongroup_status = 'Status kan ikke endres til den forespurte statusen';
 $s_bug_actiongroup_category = 'Saken kan ikke endres til den forespurte kategorien';
+$s_bug_actiongroup_handler = 'Den forespurte brukeren er ikke tillatt å håndtere denne utgaven';
+$s_bug_actiongroup_version = 'Den forespurte versjonen finnes ikke i denne utgavens prosjekt';
 $s_close_bugs_conf_msg = 'Er du sikker på at du vil lukke disse sakene?';
 $s_delete_bugs_conf_msg = 'Er du sikker på at du vil slette disse sakene?';
 $s_move_bugs_conf_msg = 'Flytte saker til';
@@ -769,6 +770,7 @@ $s_accounts_pruned_msg = 'Alle kontoer som ikke har vært benyttet og som er eld
 $s_prune_accounts_button = 'Slett';
 $s_confirm_account_pruning = 'Er du sikker på at du vil slette gamle kontoer som ikke har vært logget inn?';
 $s_edit_user_title = 'Redigere bruker';
+$s_account_unlock_button = 'Lås opp konto';
 $s_reset_password_button = 'Nullstill passord';
 $s_delete_user_button = 'Slett bruker';
 $s_reset_password_msg = '\'Nullstill passord\' sender bekreftelses-URL via epost.';
@@ -779,6 +781,7 @@ $s_users_new = 'NY';
 $s_account_reset_protected_msg = 'Kontoen er beskyttet. Kan ikke nullstille passord.';
 $s_account_reset_msg = 'En bekreftelse har blitt sendt til epostadressen din ...';
 $s_account_reset_msg2 = 'Kontopassordet er satt til blank ...';
+$s_account_unlock_msg = 'Kontoen har blitt låst opp.';
 $s_manage_user_protected_msg = 'Kontoen er beskyttet. Tilgangsnivå beskyttet. Hvis ikke har kontoen blit oppdatert ...';
 $s_manage_user_updated_msg = 'Kontoen er oppdatert ...';
 $s_email_user_updated_subject = 'Konto oppdatert';

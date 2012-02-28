@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Dj
  * @author Glanthor Reviol
  */
 
@@ -68,7 +69,7 @@ $s_plugin_MantisGraph_by_resolution_mix = 'döntés és státusz szerint';
 $s_plugin_MantisGraph_legend_still_open = 'Még nyitva';
 $s_plugin_MantisGraph_legend_resolved = 'Megoldva';
 $s_plugin_MantisGraph_legend_assigned = 'Hozzárendelve';
-$s_plugin_MantisGraph_legend_total = 'Össesen';
+$s_plugin_MantisGraph_legend_total = 'Összesen';
 $s_plugin_MantisGraph_legend_opened = 'Nyitva';
 $s_plugin_MantisGraph_legend_closed = 'Lezárva';
 $s_plugin_MantisGraph_legend_reported = 'Bejelentve';

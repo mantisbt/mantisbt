@@ -28,6 +28,7 @@
  * @author Beta16
  * @author Darth Kule
  * @author Giallu
+ * @author Gianfranco
  * @author Lele Gaifax, lele@seldati.it
  * @author Luca Pescatore, l.pescatore@network.it
  * @author Marcello Scatà, marcello@marcelloscata.com
@@ -132,6 +133,8 @@ $s_select_option = '(seleziona)';
 $s_bug_actiongroup_access = 'Non disponi dell\'autorizzazione necessaria per eseguire questa azione';
 $s_bug_actiongroup_status = 'Non è possibile impostare lo stato richiesto per la presente anomalia';
 $s_bug_actiongroup_category = 'Non è possibile impostare la categoria richiesta per la presente anomalia';
+$s_bug_actiongroup_handler = 'L\'utente richiesto non è autorizzato a gestire questo problema';
+$s_bug_actiongroup_version = 'La versione richiesta non esiste nel progetto che si occupa di questo problema';
 $s_close_bugs_conf_msg = 'Confermi di voler chiudere queste anomalie?';
 $s_delete_bugs_conf_msg = 'Confermi di voler eliminare queste anomalie?';
 $s_move_bugs_conf_msg = 'Sposta anomalia su';
@@ -769,6 +772,7 @@ $s_accounts_pruned_msg = 'Tutti gli account che non hanno mai effettuato il logi
 $s_prune_accounts_button = 'Elimina';
 $s_confirm_account_pruning = 'Sei sicuro di voler eliminare i vecchi account che non sono mai stati utilizzati?';
 $s_edit_user_title = 'Modifica utente';
+$s_account_unlock_button = 'Sblocca l\'account';
 $s_reset_password_button = 'Resetta password';
 $s_delete_user_button = 'Elimina utente';
 $s_reset_password_msg = 'Resettando la password, verrà inviata all\'utente una email di verifica con il codice di convalida.';
@@ -779,6 +783,7 @@ $s_users_new = 'Nuovo';
 $s_account_reset_protected_msg = 'Account protetto.  Non è possibile resettare la password.';
 $s_account_reset_msg = 'Il codice di convalida è stata inviato via email all\'utente...  Con quello l\'utente sarà in grado di cambiare la propria password.';
 $s_account_reset_msg2 = 'La password è stata rimossa...';
+$s_account_unlock_msg = 'L\'account è stato sbloccato.';
 $s_manage_user_protected_msg = 'Account protetto.  Il livello di accesso e l\'abilitazione non sono modificabili.  Per il resto, l\'account è stato aggiornato...';
 $s_manage_user_updated_msg = 'Account aggiornato correttamente...';
 $s_email_user_updated_subject = 'Utenza aggiornata';
@@ -1059,6 +1064,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ATTENZIONE</b>: non t
 $s_create_child_bug_button = 'Duplica';
 $s_bug_cloned_to = 'Anomalia duplicata';
 $s_bug_created_from = 'Anomalia generata da';
+$s_copy_from_parent = 'Copia i dati estesi dalla questione superiore';
 $s_copy_notes_from_parent = 'Copia le note del bug';
 $s_copy_attachments_from_parent = 'Copia gli allegati';
 $s_viewing_bug_relationship_graph_title = 'Grafico delle relazioni';

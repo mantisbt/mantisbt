@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-/** Italian (Italiano)
+/** Polish (Polski)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -25,17 +25,19 @@
  * @ingroup Language
  * @file
  *
- * @author Massimo itaca
- * @author Nemo bis
+ * @author BeginaFelicysym
+ * @author Cysioland
+ * @author Sp5uhe
+ * @author Woytecr
  */
 
-$s_plugin_format_title = 'MantisBT Formattazione';
-$s_plugin_format_description = 'Documento ufficiale sull\'elaborazione e la formattazione dei plugin.';
-$s_plugin_format_config = 'Configurazione';
-$s_plugin_format_process_text = 'Elaborazione del Test';
-$s_plugin_format_process_text_warning_notice = 'Non disattivare a meno che tu non sappia cosa stai facendo. Nello stato "disattivo", sono possibili attacchi di tipo "crosso site scripting" (XSS).';
-$s_plugin_format_process_urls = 'Elaborazione URL';
-$s_plugin_format_process_buglinks = 'MantisBT Collegamenti (anomalie/Note anomalia)';
-$s_plugin_format_process_vcslinks = 'Collegamento VCS';
-$s_plugin_format_enabled = 'Attivo';
-$s_plugin_format_disabled = 'Disattivato';
+$s_plugin_format_title = 'Formatowanie MantisBT';
+$s_plugin_format_description = 'Oficjalna wtyczka edycji i formatowania tekstu.';
+$s_plugin_format_config = 'Konfiguracja';
+$s_plugin_format_process_text = 'Edycja tekstu';
+$s_plugin_format_process_text_warning_notice = 'Nie wyłączaj, chyba że dobrze wiesz, co robisz. Jeśli wyłączone, możliwe są ataki cross site scripting (XSS).';
+$s_plugin_format_process_urls = 'Przetwarzanie adresu URL';
+$s_plugin_format_process_buglinks = 'Linki MantisBT ( Zagadnienie/Komentarz )';
+$s_plugin_format_process_vcslinks = 'Linki VCS';
+$s_plugin_format_enabled = 'zał.';
+$s_plugin_format_disabled = 'wył.';
