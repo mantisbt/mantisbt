@@ -60,13 +60,13 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	$c_file_type = db_prepare_string( $p_file_type );
 	$c_title = db_prepare_string( $p_title );
 	$c_desc = db_prepare_string( $p_desc );
-	
+
 	if( $p_user_id === null ) {
 		$c_user_id = auth_get_current_user_id();
 	} else {
 		$c_user_id = (int)$p_user_id;
 	}
-	
+
 
 	if( $t_project_id == ALL_PROJECTS ) {
 		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
@@ -92,6 +92,10 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	switch( $t_method ) {
 		case FTP:
 		case DISK:
+			// Chdir to mantis base directory because otherwise all disk
+			// uploads fail due to bad paths.
+			chdir(dirname(__FILE__) . "/../../");
+
 			if( !file_exists( $t_file_path ) || !is_dir( $t_file_path ) || !is_writable( $t_file_path ) || !is_readable( $t_file_path ) ) {
 				return new soap_fault( 'Server', '', "Upload folder '{$t_file_path}' doesn't exist." );
 			}
@@ -171,11 +175,11 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	}
 
 	$result = db_query( $query );
-	
+
 	if ( $result->EOF ) {
 		return new soap_fault( 'Client', '', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
 	}
-	
+
 	$row = db_fetch_array( $result );
 
 	if ( $p_type == 'doc' ) {
