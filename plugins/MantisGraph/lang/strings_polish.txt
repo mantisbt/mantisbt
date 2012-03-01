@@ -25,14 +25,32 @@
  * @ingroup Language
  * @file
  *
+ * @author BeginaFelicysym
  * @author Woytecr
  */
 
 $s_plugin_graph_title = 'Wykresy Mantis';
+$s_plugin_graph_description = 'Oficjalna wtyczka wykresów.';
+$s_plugin_MantisGraph_title = 'Wykresy Mantis';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Zestawienie zaawansowane';
 $s_plugin_MantisGraph_config = 'Konfiguracja';
+$s_plugin_MantisGraph_synthesis_link = 'Synteza';
+$s_plugin_MantisGraph_status_link = 'Według statusu';
+$s_plugin_MantisGraph_priority_link = 'Według priorytetu';
+$s_plugin_MantisGraph_severity_link = 'Według ważności';
+$s_plugin_MantisGraph_category_link = 'Według kategorii';
+$s_plugin_MantisGraph_resolution_link = 'Według rozwiązania';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Wykres';
+$s_plugin_MantisGraph_library = 'Użyta biblioteka wykresów';
+$s_plugin_MantisGraph_bundled = 'Dołączone';
 $s_plugin_MantisGraph_window_width = 'Szerokość wykresu (w pikselach)';
+$s_plugin_MantisGraph_bar_aspect = 'Wykres słupkowy proporcjonalny (wysokość/szerokość)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Wykresy wyświetlane dla każdego wiersza na stronie zestawienia zaawansowanego';
 $s_plugin_MantisGraph_font = 'Czcionka';
+$s_plugin_MantisGraph_jpgraph_path = 'Ścieżka systemowa do biblioteki JpGraph';
+$s_plugin_MantisGraph_jpgraph_path_default = 'Pozostaw puste by przyjąć wartość domyślną: {mantisroot}/library/jpgraph';
+$s_plugin_MantisGraph_jpgraph_antialias = 'Antyaliasing JpGraph';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'Antyaliasing poprawia czytelność niektórych wykresów kosztem wydajności (spowolnienie do 8x)';
 $s_plugin_MantisGraph_enabled = 'Włączony';
 $s_plugin_MantisGraph_disabled = 'Wyłączony';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Wykres podsumowujący wg statusu';
@@ -40,14 +58,14 @@ $s_plugin_MantisGraph_graph_imp_priority_title = 'Wykres podsumowujący wg prior
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Wykres podsumowujący wg ważności';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Wykres podsumowujący wg kategorii';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Wykres podsumowujący wg rozwiązania';
-$s_plugin_MantisGraph_by_status_pct = 'wg statusu procentowo';
-$s_plugin_MantisGraph_by_priority_pct = 'wg priorytetu procentowo';
-$s_plugin_MantisGraph_by_severity_pct = 'wg ważności procentowo';
-$s_plugin_MantisGraph_by_category_pct = 'wg kategorii procentowo';
-$s_plugin_MantisGraph_by_resolution_pct = 'wg rozwiązania procentowo';
-$s_plugin_MantisGraph_by_severity_mix = 'wg ważności i statusu';
-$s_plugin_MantisGraph_by_priority_mix = 'wg priorytetu i statusu';
-$s_plugin_MantisGraph_by_resolution_mix = 'wg rozwiązania i statusu';
+$s_plugin_MantisGraph_by_status_pct = 'Wg statusu procentowo';
+$s_plugin_MantisGraph_by_priority_pct = 'Wg priorytetu procentowo';
+$s_plugin_MantisGraph_by_severity_pct = 'Wg ważności procentowo';
+$s_plugin_MantisGraph_by_category_pct = 'Wg kategorii procentowo';
+$s_plugin_MantisGraph_by_resolution_pct = 'Wg rozwiązania procentowo';
+$s_plugin_MantisGraph_by_severity_mix = 'Wg ważności i statusu';
+$s_plugin_MantisGraph_by_priority_mix = 'Wg priorytetu i statusu';
+$s_plugin_MantisGraph_by_resolution_mix = 'Wg rozwiązania i statusu';
 $s_plugin_MantisGraph_legend_still_open = 'Otwarte';
 $s_plugin_MantisGraph_legend_resolved = 'Rozwiązane';
 $s_plugin_MantisGraph_legend_assigned = 'Przypisane';

@@ -31,6 +31,7 @@
  * @author Luk
  * @author Matěj Grabovský
  * @author Milan Cizek, cizek.milan@seznam.cz
+ * @author Mormegil
  * @author Pavel Loupal, Pavel.Loupal@seznam.cz
  * @author Petr Švec, petr.svec@pak.izscr.cz
  * @author Přemek Brada, brada@kiv.zcu.cz
@@ -736,7 +737,7 @@ $s_add_version_button = 'Přidat verzi';
 $s_add_and_edit_version_button = 'Přidat a změnit verzi';
 $s_edit_link = 'upravit';
 $s_actions = 'Akce';
-$s_version = 'Verze/Sestavení';
+$s_version = 'Verze';
 $s_timestamp = 'Časová značka';
 $s_update = 'Aktualizace';
 $s_subprojects = 'Podprojekty';

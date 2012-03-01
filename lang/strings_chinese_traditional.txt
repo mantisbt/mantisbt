@@ -25,12 +25,14 @@
  * @ingroup Language
  * @file
  *
+ * @author Anakmalaysia
  * @author Andrew971218
  * @author Cwlin0416
  * @author Firesueprtom
  * @author Jonathan Tsai, tryweb@ichiayi.com
  * @author Lauhenry
  * @author Mark85296341
+ * @author Oapbtommy
  */
 
 $s_actiongroup_menu_move = '移動';
@@ -92,7 +94,7 @@ $s_announcement = '公告';
 $s_stays_on_top = '置頂';
 $s_bugnote_link_title = '連結說明';
 $s_delete_bugnote_button = '刪除說明';
-$s_delete_bugnote_sure_msg = '你確定要刪除此說明?';
+$s_delete_bugnote_sure_msg = '你確定要刪除此說明嗎？';
 $s_bug_relationships = '關聯性';
 $s_empty_password_sure_msg = '這使用者的密碼為空白。你確定這樣是正確的嗎？';
 $s_empty_password_button = '使用空白密碼';
@@ -409,7 +411,7 @@ $s_profile_added_msg = '已新增基本資料...';
 $s_profile_deleted_msg = '已刪除基本資料...';
 $s_edit_profile_title = '編輯基本資料';
 $s_platform = '作業平台';
-$s_operating_system = '作業系統';
+$s_operating_system = '操作系統';
 $s_additional_description = '附註說明';
 $s_update_profile_button = '更新基本資料';
 $s_profile_defaulted_msg = '已更新預設基本資料...';
@@ -420,7 +422,7 @@ $s_edit_profile = '編輯基本資料';
 $s_make_default = '設定為預設值';
 $s_delete_profile = '刪除基本資料';
 $s_select_profile = '請選擇基本資料';
-$s_submit_button = '送出';
+$s_submit_button = '提交';
 $s_profile_updated_msg = '已更新基本資料...';
 $s_my_sponsorship = '我的贊助商';
 $s_update_sponsorship_button = '更改付款狀態';
@@ -613,7 +615,7 @@ $s_1_week_title = '一週內';
 $s_never_logged_in_title = '未曾登入';
 $s_prune_accounts = '清除帳號';
 $s_hide_inactive = '隱藏未啟用';
-$s_manage_accounts_title = '管理帳號';
+$s_manage_accounts_title = '管理帳戶';
 $s_date_created = '建立日期';
 $s_last_visit = '上次瀏覽';
 $s_edit_user_link = '編輯使用者';
@@ -634,7 +636,7 @@ $s_notify_actions_change_access = '可更改通知設定的使用者:';
 $s_revert_to_system = '刪除全部專案設定值';
 $s_revert_to_all_project = '刪除專案特定設定值';
 $s_non_existent = '不存在的';
-$s_current_status = '目前狀態';
+$s_current_status = '現時狀態';
 $s_next_status = '下個狀態';
 $s_workflow = '工作流程';
 $s_workflow_thresholds = '可影響工作流程門檻';
@@ -764,6 +766,7 @@ $s_accounts_pruned_msg = '所有未登入過以及超過一星期還未通過認
 $s_prune_accounts_button = '清除';
 $s_confirm_account_pruning = '你確定你要刪除尚未登入過的帳號嗎？';
 $s_edit_user_title = '編輯使用者';
+$s_account_unlock_button = '解鎖帳戶';
 $s_reset_password_button = '重設密碼';
 $s_delete_user_button = '刪除使用者';
 $s_reset_password_msg = '重設密碼會以 E-mail 寄送確認 URL。';
@@ -774,6 +777,7 @@ $s_users_new = '新增';
 $s_account_reset_protected_msg = '帳號受保護。不可以重設密碼。';
 $s_account_reset_msg = '確認訊息已經被寄送到你的 E-Mail 信箱...';
 $s_account_reset_msg2 = '這帳號的密碼已經被設為空白...';
+$s_account_unlock_msg = '這個帳戶已經解鎖。';
 $s_manage_user_protected_msg = '帳號受保護。存取權限且保護功能已啟動。否則，帳號將會被更新...';
 $s_manage_user_updated_msg = '帳號成功更新...';
 $s_email_user_updated_subject = '帳號已更新';
@@ -956,7 +960,7 @@ $s_product_build = '產品 Build';
 $s_system_profile = '系統說明';
 $s_update_bug_button = '編輯';
 $s_bug_assign_to_button = '分配給:';
-$s_bug_status_to_button = '更改狀態為:';
+$s_bug_status_to_button = '更改狀態為：';
 $s_reopen_bug_button = '重新開啟';
 $s_move_bug_button = '移動';
 $s_attached_files = '附加檔案';
@@ -981,7 +985,7 @@ $s_custom_field = '欄位';
 $s_custom_fields_setup = '自訂欄位';
 $s_custom_field_name = '名稱';
 $s_custom_field_project_count = '已使用專案';
-$s_custom_field_type = '資料型態';
+$s_custom_field_type = '類型';
 $s_custom_field_possible_values = '可能值';
 $s_custom_field_default_value = '預設值';
 $s_custom_field_valid_regexp = '正規表示法';
@@ -1195,7 +1199,7 @@ $s_copy_columns_from = '複製欄位從';
 $s_copy_columns_to = '複製欄位至';
 $s_due_date = '到期日';
 $s_overdue = '逾期';
-$s_view_account_title = '使用者資訊';
+$s_view_account_title = '用戶資訊';
 $s_manage_user = '管理使用者';
 $s_install_information = 'MantisBT 安裝資訊';
 $s_database_information = 'MantisBT 資料庫';

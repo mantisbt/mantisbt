@@ -26,6 +26,7 @@
  * @file
  *
  * @author Massimo itaca
+ * @author Nemo bis
  */
 
 $s_plugin_graph_title = 'Grafici Mantis';
@@ -51,7 +52,7 @@ $s_plugin_MantisGraph_jpgraph_path_default = 'Lascia "spazio" per default: {mant
 $s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph anti-aliasing';
 $s_plugin_MantisGraph_jpgraph_antialias_info = 'Anti-aliasing migliora l\'aspetto visivo di alcuni grafici a discapito delle prestazioni (fino a 8 volte più lento)';
 $s_plugin_MantisGraph_enabled = 'Attivo';
-$s_plugin_MantisGraph_disabled = 'Disattivo';
+$s_plugin_MantisGraph_disabled = 'Disattivato';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Grafico di sintesi per stato';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Grafico di sintesi per priorità';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Grafico di sintesi per severità';

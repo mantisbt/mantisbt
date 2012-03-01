@@ -33,6 +33,7 @@
  * @author Eleferen
  * @author EugeneZelenko
  * @author Ferrer
+ * @author KPu3uC B Poccuu
  * @author Kirill
  * @author Mikhail Oleynik (MiTo Team), m.oleynik@gmail.com
  * @author Oleg Gashev gashev@zahav.net.il
@@ -137,6 +138,8 @@ $s_select_option = '(выбрать)';
 $s_bug_actiongroup_access = 'У вас недостаточно прав для выполнения этого действия.';
 $s_bug_actiongroup_status = 'Этот инцидент нельзя перевести в выбранное состояние';
 $s_bug_actiongroup_category = 'Этот инцидент нельзя перевести в выбранную категорию';
+$s_bug_actiongroup_handler = 'Указанному пользователю не разрешается заниматься этим вопросом';
+$s_bug_actiongroup_version = 'Запрошенной версии нет в этом проекте';
 $s_close_bugs_conf_msg = 'Вы уверены, что хотите закрыть эти инциденты?';
 $s_delete_bugs_conf_msg = 'Вы уверены, что хотите удалить эти инциденты?';
 $s_move_bugs_conf_msg = 'Переместить инциденты в';
@@ -564,7 +567,7 @@ $s_error_database_version_out_of_date_2 = '<strong>ПРЕДУПЛЕЖДЕНИЕ:
 $s_error_code_version_out_of_date = '<strong>ПРЕДУПРЕЖДЕНИЕ:</strong> Структура базы данных более новой версии, нежели чем установленное приложение.  Пожалуйста, обновите приложение.';
 $s_login_page_info = 'Добро пожаловать в систему отслеживания инцидентов.';
 $s_login_title = 'Вход';
-$s_save_login = 'Помнить мой логин на этом компьютере';
+$s_save_login = 'Помнить мою учётную запись в этом браузере';
 $s_secure_session = 'Защищенная сессия';
 $s_secure_session_long = 'Доступ к этой сессии будет только для данного IP-адреса (не рекомендуется для плохих средств связи где возможны частые обновления ip-адреса).';
 $s_choose_project = 'Выбор проекта';
@@ -772,6 +775,7 @@ $s_accounts_pruned_msg = 'Все пользователи, ни разу не в
 $s_prune_accounts_button = 'Очистить';
 $s_confirm_account_pruning = 'Вы уверены, что хотите удалить старые неиспользовавшиеся учетные записи?';
 $s_edit_user_title = 'Изменение сведений о пользователе';
+$s_account_unlock_button = 'Разблокировать учётную запись';
 $s_reset_password_button = 'Сбросить пароль';
 $s_delete_user_button = 'Удалить учетную запись';
 $s_reset_password_msg = 'Сброс пароля приводит к отправке по электронной почте ссылки на страницу подтверждения.';
@@ -782,6 +786,7 @@ $s_users_new = 'Новые';
 $s_account_reset_protected_msg = 'Учетная запись защищена. Сброс пароля невозможен.';
 $s_account_reset_msg = 'По адресу электронной почты указанного пользователя отправлен запрос подтверждения. С его помощью пользователь сможет изменить пароль.';
 $s_account_reset_msg2 = 'Пароль к учетной записи установлен пустым...';
+$s_account_unlock_msg = 'Учётная запись разблокирована.';
 $s_manage_user_protected_msg = 'Учетная запись защищена. Уровень доступа и признак активности заблокированы. Все остальные данные изменены...';
 $s_manage_user_updated_msg = 'Учетная запись изменена ...';
 $s_email_user_updated_subject = 'Учётная запись обновлена';

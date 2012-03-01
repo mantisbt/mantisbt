@@ -68,7 +68,7 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
 	return db_insert_id( $t_user_profile_table );
 }
 
-/** 
+/**
  * Delete a profile for the user
  *
  * Note that although profile IDs are currently globally unique, the existing
@@ -190,18 +190,25 @@ function profile_get_row_direct( $p_profile_id ) {
 /**
  * Return an array containing all rows for a given user
  * @param int $p_user_id
+ * @param bool $p_all_users Include profiles for all users
  * @return array
  */
-function profile_get_all_rows( $p_user_id ) {
-	$c_user_id = db_prepare_int( $p_user_id );
-
+function profile_get_all_rows( $p_user_id, $p_all_users = false ) {
 	$t_user_profile_table = db_get_table( 'mantis_user_profile_table' );
+
+	$query_where = 'user_id = ' . db_param();
+	$param[] = db_prepare_int( $p_user_id );
+
+	if( $p_all_users && ALL_USERS != $p_user_id ) {
+		$query_where .= ' OR user_id = ' . db_param();
+		$param[] = ALL_USERS;
+	}
 
 	$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE user_id=" . db_param() . "
+				  WHERE $query_where
 				  ORDER BY platform, os, os_build";
-	$result = db_query_bound( $query, Array( $c_user_id ) );
+	$result = db_query_bound( $query, $param );
 
 	$t_rows = array();
 	$t_row_count = db_num_rows( $result );
@@ -220,13 +227,7 @@ function profile_get_all_rows( $p_user_id ) {
  * @return array
  */
 function profile_get_all_for_user( $p_user_id ) {
-	if( ALL_USERS == $p_user_id ) {
-		return profile_get_all_rows( ALL_USERS );
-	} else {
-		$t_profiles_array = array_merge( profile_get_all_rows( ALL_USERS ), profile_get_all_rows( $p_user_id ) );
-		asort( $t_profiles_array );
-		return $t_profiles_array;
-	}
+	return profile_get_all_rows( $p_user_id, $p_user_id != ALL_USERS );
 }
 
 /**

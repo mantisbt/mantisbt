@@ -27,8 +27,10 @@
  *
  * @author Alberto Serrano - apserrano@grupobbva.net
  * @author Ariel Arjona - beerfrick@users.sf.net
+ * @author Armando-Martin
  * @author Bernardo Hernández - b.magno@terra.es
  * @author Bithunter
+ * @author Ciencia Al Poder
  * @author Crazymadlover
  * @author Fitoschido
  * @author Javier Poveda - javierpoveda@arsystel.com
@@ -138,6 +140,8 @@ $s_select_option = '(seleccionar)';
 $s_bug_actiongroup_access = 'No posee los permisos necesarios para realizar esta acción.';
 $s_bug_actiongroup_status = 'El estado de esta incidencia no se puede cambiar a solicitado';
 $s_bug_actiongroup_category = 'La categoría de esta incidencia no se puede cambiar a la solicitada';
+$s_bug_actiongroup_handler = 'El usuario solicitado no está autorizado para tratar este tema';
+$s_bug_actiongroup_version = 'La versión solicitada no existe en esta edición del proyecto';
 $s_close_bugs_conf_msg = '¿Está seguro que desea cerrar estas incidencias?';
 $s_delete_bugs_conf_msg = '¿Está seguro que desea eliminar estas incidencias?';
 $s_move_bugs_conf_msg = 'Mover Incidencias a';
@@ -685,7 +689,7 @@ $s_database_configuration = 'Configuración de la Base de Datos';
 $s_configuration_option = 'Opción de Configuración';
 $s_configuration_option_type = 'Tipo';
 $s_configuration_option_value = 'Valor';
-$s_all_users = 'Todos los Usuarios';
+$s_all_users = 'Todos los usuarios';
 $s_set_configuration_option = 'Establecer Opción de Configuración';
 $s_delete_config_sure_msg = '¿Está seguro que desea borrar esta opción de configuración?';
 $s_configuration_corrupted = 'La configuración en la base de datos está corrupta.';
@@ -773,6 +777,7 @@ $s_accounts_pruned_msg = 'Todas las cuentas cuyos usuarios nunca se conectaron y
 $s_prune_accounts_button = 'Purgar';
 $s_confirm_account_pruning = '¿Está seguro que desea eliminar las cuentas antiguas que nunca han iniciado sesión?';
 $s_edit_user_title = 'Editar Usuario';
+$s_account_unlock_button = 'Desbloquear cuenta';
 $s_reset_password_button = 'Reinicializar Contraseña';
 $s_delete_user_button = 'Eliminar Usuario';
 $s_reset_password_msg = 'Reinicializar Contraseña envía una dirección de confirmación por e-mail.';
@@ -783,6 +788,7 @@ $s_users_new = 'NUEVO';
 $s_account_reset_protected_msg = 'Cuenta Protegida. No es posible reinicializar la contraseña.';
 $s_account_reset_msg = 'Se ha enviado un e-mail de solicitud de confirmación a las direcciones de e-mail del usuario seleccionado. Utilizándolo, el usuario podrá cambiar si contraseña.';
 $s_account_reset_msg2 = 'La contraseña de la cuenta fue establecida en blanco...';
+$s_account_unlock_msg = 'Se ha desbloqueado la cuenta.';
 $s_manage_user_protected_msg = 'Cuenta Protegida. Nivel de acceso y protección activada. Además, la cuenta ha sido actualizada...';
 $s_manage_user_updated_msg = 'La cuenta ha sido actualizada...';
 $s_email_user_updated_subject = 'Cuenta actualizada';
