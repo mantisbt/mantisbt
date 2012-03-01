@@ -516,12 +516,10 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					}
 					break;
 				case BUG_CLONED_TO:
-					$t_note = lang_get( 'bug_cloned_to' );
-					$t_change = bug_format_id( $p_new_value );
+					$t_note = lang_get( 'bug_cloned_to' ) . ': ' . bug_format_id( $p_new_value );
 					break;
 				case BUG_CREATED_FROM:
-					$t_note = lang_get( 'bug_created_from' );
-					$t_change = bug_format_id( $p_new_value );
+					$t_note = lang_get( 'bug_created_from' ) . ': ' . bug_format_id( $p_new_value );
 					break;
 				case CHECKIN:
 					$t_note = lang_get( 'checkin' );

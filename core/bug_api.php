@@ -892,6 +892,10 @@ function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
  * @param int p_target_project_id
  * @param bool p_copy_custom_fields
  * @param bool p_copy_relationships
+ * @param bool p_copy_history
+ * @param bool p_copy_attachments
+ * @param bool p_copy_bugnotes
+ * @param bool p_copy_monitoring_users
  * @return int representing the new bugid
  * @access public
  */
@@ -1038,6 +1042,10 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 			db_query_bound( $query, Array( $t_bug_history['user_id'], $t_new_bug_id, $t_bug_history['date_modified'], $t_bug_history['field_name'], $t_bug_history['old_value'], $t_bug_history['new_value'], $t_bug_history['type'] ) );
 		}
 	}
+
+	# Create history entries to reflect the copy operation
+	history_log_event_special( $t_new_bug_id, BUG_CREATED_FROM, '', $t_bug_id );
+	history_log_event_special( $t_bug_id, BUG_CLONED_TO, '', $t_new_bug_id );
 
 	return $t_new_bug_id;
 }
