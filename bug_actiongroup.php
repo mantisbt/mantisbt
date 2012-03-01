@@ -150,7 +150,8 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		$f_project_id = gpc_get_int( 'project_id' );
 
 		if ( access_has_project_level( config_get( 'report_bug_threshold' ), $f_project_id ) ) {
-			bug_copy( $t_bug_id, $f_project_id, true, true, true, true, true, true );
+			# Copy everything except history
+			bug_copy( $t_bug_id, $f_project_id, true, true, false, true, true, true );
 		} else {
 			$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 		}
