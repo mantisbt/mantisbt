@@ -1037,6 +1037,8 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	# COPY HISTORY
 	history_delete( $t_new_bug_id );	# should history only be deleted inside the if statement below?
 	if( $p_copy_history ) {
+		# @todo problem with this code: the generated history trail is incorrect because the note IDs are those of the original bug, not the copied ones
+		# @todo actually, does it even make sense to copy the history ?
 		$query = "SELECT *
 					  FROM $t_mantis_bug_history_table
 					  WHERE bug_id = " . db_param();
@@ -1056,6 +1058,9 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 						  		   " . db_param() . " );";
 			db_query_bound( $query, Array( $t_bug_history['user_id'], $t_new_bug_id, $t_bug_history['date_modified'], $t_bug_history['field_name'], $t_bug_history['old_value'], $t_bug_history['new_value'], $t_bug_history['type'] ) );
 		}
+	} else {
+		# Create a "New Issue" history entry
+		history_log_event_special( $t_new_bug_id, NEW_BUG );
 	}
 
 	# Create history entries to reflect the copy operation
