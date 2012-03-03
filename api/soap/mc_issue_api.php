@@ -491,7 +491,8 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 			$t_issue_id = (int) $row['id'];
 			$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
 
-			if( mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
+			if( mci_has_readonly_access( $t_user_id, $t_project_id ) &&
+				access_has_bug_level( VIEWER, $t_issue_id, $t_user_id ) ) {
 				return $t_issue_id;
 			}
 		}
