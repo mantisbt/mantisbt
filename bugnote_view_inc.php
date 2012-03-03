@@ -111,7 +111,7 @@ $num_notes = count( $t_bugnotes );
 ?>
 <tr class="bugnote" id="c<?php echo $t_bugnote->id ?>">
         <td class="<?php echo $t_bugnote_css ?>">
-		<?php if ( ON  == config_get("show_avatar") ) print_avatar( $t_bugnote->reporter_id ); ?>
+		<?php print_avatar( $t_bugnote->reporter_id ); ?>
 		<span class="small">(<a href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" title="<?php echo lang_get( 'bugnote_link_title' ) ?>"><?php echo $t_bugnote_id_formatted ?>)</a></span><br />
 		<?php
 			echo print_user( $t_bugnote->reporter_id );
