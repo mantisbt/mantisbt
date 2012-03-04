@@ -262,6 +262,12 @@ div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; float: ri
 {
 	float: right;
 	border: 0;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius-bottomright: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	border-radius: 5px;
 }
 
 .progress400				{ position: relative; width: 400px; border: 1px solid #d7d7d7; margin-top: 1em; margin-bottom: 1em; padding: 1px; }
