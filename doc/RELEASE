@@ -1,5 +1,23 @@
 MantisBT Release Notes
 
+1.2.10 Maintenance Release (2012-03-05)
+-------------------------------------------------
+
+MantisBT 1.2.10 release fixes an issue caused by the rename of the logo file,
+and the fact that the docbook documentation was missing from the 1.2.9 package.
+
+
+1.2.9 Maintenance Release (2012-03-03)
+-------------------------------------------------
+
+MantisBT 1.2.9 release delivers 92 fixes and improvements including security
+fixes, new MantisBT logo, MantisTouch integration, MS SQL fixes, SOAP API
+improvements, and others.  We recommend that all instances be upgraded to this
+release.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
 1.2.8 Security Release (2011-09-05)
 -------------------------------------------------
 
@@ -222,6 +240,6 @@ There have also been many improvements to the codebase beyond adding features:
 [2] GitHub is now the preferred code collaboration site for MantisBT,
 	including the official MantisBT repository and a MantisBT-plugins
 	organisation which is used to host repositories of community plugins.
-    
+
     https://github.com/mantisbt
     https://github.com/mantisbt-plugins
