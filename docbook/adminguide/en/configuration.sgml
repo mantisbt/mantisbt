@@ -834,12 +834,6 @@
                     <para>The threshold of users for which MantisBT should attempt to show the avatar (default DEVELOPER).  Note that the threshold is related to the user for whom the avatar is being shown, rather than the user who is currently logged in.</para>
                 </listitem>
             </varlistentry>
-            <varlistentry>
-                <term>$g_default_avatar</term>
-                <listitem>
-                    <para>The full URL to the image to be used when a user doesn't have an avatar account.</para>
-                </listitem>
-            </varlistentry>
         </variablelist>
     </section>
 

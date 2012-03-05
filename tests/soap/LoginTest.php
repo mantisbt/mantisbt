@@ -76,6 +76,33 @@ class LoginTest extends SoapBase {
 		}
 	}
 	
+	public function testLoginWithNullPasswordIsRejected() {
+		try {
+			$this->client->mc_enum_status( $this->userName, null);
+			$this->fail( "Should have failed." );
+		} catch ( SoapFault $e) {
+			$this->assertIsLoginFailure( $e );
+		}
+	}
+	
+	public function testLoginWithEmptyPasswordIsRejected() {
+		try {
+			$this->client->mc_enum_status( $this->userName, '');
+			$this->fail( "Should have failed." );
+		} catch ( SoapFault $e) {
+			$this->assertIsLoginFailure( $e );
+		}
+	}
+
+	public function testLoginWithIncorrectPasswordIsRejected() {
+		try {
+			$this->client->mc_enum_status( $this->userName, "This really should be incorrect");
+			$this->fail( "Should have failed." );
+		} catch ( SoapFault $e) {
+			$this->assertIsLoginFailure( $e );
+		}
+	}
+	
 	/**
 	 * @param $e SoapFault
 	 * @return void

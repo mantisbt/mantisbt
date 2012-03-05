@@ -627,7 +627,6 @@ function config_is_private( $p_config_var ) {
 		case 'global_settings':
 		case 'system_font_folder':
 		case 'phpMailer_method':
-		case 'default_avatar':
 		case 'file_upload_ftp_server':
 		case 'file_upload_ftp_user':
 		case 'file_upload_ftp_pass':
