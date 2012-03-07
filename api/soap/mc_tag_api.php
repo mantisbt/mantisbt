@@ -149,13 +149,13 @@ function mci_tag_set_for_issue ( $p_issue_id, $p_tags, $p_user_id ) {
 	
 	foreach ( $t_tag_ids_to_detach as $t_tag_id ) {
 		if ( access_has_bug_level ( config_get('tag_detach_threshold'), $p_issue_id, $p_user_id ) ) {
-			tag_bug_detach( $t_tag_id, $p_issue_id, true);
+			tag_bug_detach( $t_tag_id, $p_issue_id, $p_user_id);
 		}
 	}
 	
 	foreach ( $t_tag_ids_to_attach as $t_tag_id ) {
 		if ( access_has_bug_level ( config_get('tag_attach_threshold'), $p_issue_id, $p_user_id ) ) {
-			tag_bug_attach( $t_tag_id, $p_issue_id, true);
+			tag_bug_attach( $t_tag_id, $p_issue_id, $p_user_id);
 		}
 	}
 }
