@@ -878,6 +878,11 @@ function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
 		return true;
 	}
 
+	# There should always be a possible next status, if not defined, then allow all.
+	if ( !isset( $t_status_enum_workflow[$p_bug_status] ) ) {
+		return true;
+	}
+
 	# workflow defined - find allowed states
 	$t_allowed_states = $t_status_enum_workflow[$p_bug_status];
 
