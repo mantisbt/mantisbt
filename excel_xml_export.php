@@ -90,8 +90,6 @@ $t_columns = excel_get_columns();
 
 do {
 	foreach( $result as $t_row ) {
-		$t_bug = null;
-
 		if ( is_blank( $f_export ) || in_array( $t_row->id, $f_bug_arr ) ) {
 			echo excel_get_start_row();
 
@@ -103,14 +101,7 @@ do {
 					echo excel_format_plugin_column_value( $t_column, $t_row );
 				} else {
 					$t_function = 'excel_format_' . $t_column;
-					if ( column_is_extended( $t_column ) ) {
-						if( $t_bug === null ) {
-							$t_bug = bug_get( $t_row->id, /* extended = */ true );
-						}
-						echo $t_function( $t_bug->$t_column );
-					} else {
-						echo $t_function( $t_row );
-					}
+					echo $t_function( $t_row );
 				}
 			}
 
@@ -125,7 +116,6 @@ do {
 	if ( $t_more ) {
 		$t_page_number++;
 		$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-		$t_more !== false;
 	}
 } while ( $t_more );
 
