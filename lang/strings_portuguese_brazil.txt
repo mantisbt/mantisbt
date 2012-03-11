@@ -34,6 +34,7 @@
  * @author Jefersonfoliveira
  * @author Juliano F. Ravasi, dev at juliano info
  * @author Luckas Blade
+ * @author Luigipiccoli
  * @author Pedroca cerebral
  */
 
@@ -771,6 +772,7 @@ $s_accounts_pruned_msg = 'Todas as contas que nunca foram acessadas e foram cria
 $s_prune_accounts_button = 'Apagar contas velhas';
 $s_confirm_account_pruning = 'Você tem certeza que deseja apagar as contas velhas que nunca foram acessadas?';
 $s_edit_user_title = 'Alterar Usuário';
+$s_account_unlock_button = 'Desbloquear conta';
 $s_reset_password_button = 'Redefinir Senha';
 $s_delete_user_button = 'Apagar Usuário';
 $s_reset_password_msg = 'Redefinir Senha enviará o endereço de confirmação via e-mail.';
@@ -781,6 +783,7 @@ $s_users_new = 'NOVO';
 $s_account_reset_protected_msg = 'Conta protegida. Não se pode limpar a senha.';
 $s_account_reset_msg = 'Uma solicitação de confirmação foi enviada ao endereço de e-mail do usuário selecionado. Através deste, o usuário será capaz de alterar sua senha.';
 $s_account_reset_msg2 = 'A senha da conta foi deixada em branco...';
+$s_account_unlock_msg = 'A conta foi desbloqueada.';
 $s_manage_user_protected_msg = 'Conta protegida. Nível de acesso e proteção ativada. Caso contrário, a conta foi atualizada...';
 $s_manage_user_updated_msg = 'Conta atualizada com sucesso...';
 $s_email_user_updated_subject = 'Conta atualizada';
