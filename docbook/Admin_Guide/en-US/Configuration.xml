@@ -1447,6 +1447,13 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_file_upload_max_num</term>
+                <listitem>
+                    <para>Maximum number of files that can be uploaded simultaneously.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_max_file_size</term>
                 <listitem>
                     <para>The maximum file size to allow as an attachment.
