@@ -44,9 +44,11 @@ require_api( 'print_api.php' );
 require_api( 'session_api.php' );
 require_api( 'string_api.php' );
 
+$t_allow_perm_login = ( ON == config_get( 'allow_permanent_cookie' ) );
+
 $f_username		= gpc_get_string( 'username', '' );
 $f_password		= gpc_get_string( 'password', '' );
-$f_perm_login	= gpc_get_bool( 'perm_login' );
+$f_perm_login	= $t_allow_perm_login && gpc_get_bool( 'perm_login' );
 $t_return		= string_url( string_sanitize_url( gpc_get_string( 'return', config_get( 'default_home_page' ) ) ) );
 $f_from			= gpc_get_string( 'from', '' );
 $f_secure_session = gpc_get_bool( 'secure_session', false );
@@ -64,8 +66,10 @@ if ( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 } else {
 	$t_redirect_url = 'login_page.php?return=' . $t_return .
 		'&error=1&username=' . urlencode( $f_username ) .
-		'&perm_login=' . ( $f_perm_login ? 1 : 0 ) .
 		'&secure_session=' . ( $f_secure_session ? 1 : 0 );
+	if( $t_allow_perm_login ) {
+		$t_redirect_url .= '&perm_login=' . ( $f_perm_login ? 1 : 0 );
+	}
 
 	if ( HTTP_AUTH == config_get( 'login_method' ) ) {
 		auth_http_prompt();

@@ -179,11 +179,13 @@ if( $f_error || $f_cookie_error ) {
 				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="<?php echo $t_password_field_autofocus ?>" /></span>
 				<span class="label-style"></span>
 			</div>
+			<?php if( ON == config_get( 'allow_permanent_cookie' ) ) { ?>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="remember-login"><span><?php echo lang_get( 'save_login' ) ?></span></label>
 				<span class="input"><input id="remember-login" type="checkbox" name="perm_login" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?>/></span>
 				<span class="label-style"></span>
 			</div>
+			<?php } ?>
 			<?php if ( $t_session_validation ) { ?>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label id="secure-session-label" for="secure-session"><span><?php echo lang_get( 'secure_session' ) ?></span></label>

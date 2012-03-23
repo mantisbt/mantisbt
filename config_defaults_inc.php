@@ -1035,6 +1035,15 @@ $g_show_roadmap_dates = ON;
 $g_cookie_time_length = 30000000;
 
 /**
+ * Allow users to opt for a 'permanent' cookie when logging in
+ * Controls the display of the 'Remember my login in this browser' checkbox
+ * on the login page
+ * @see $g_cookie_time_length
+ * @global int $g_allow_permanent_cookie
+ */
+$g_allow_permanent_cookie = ON;
+
+/**
  * minutes to wait before document is stale (in minutes)
  * @global int $g_content_expire
  */
@@ -3495,9 +3504,9 @@ $g_file_type_icons = array(
 	'?'	=> 'generic.gif' );
 
 /**
- * 
+ *
  * Content types which will be overriden when downloading files
- * 
+ *
  * @global array $g_file_download_content_type_overrides
  */
 $g_file_download_content_type_overrides = array (
@@ -4113,9 +4122,10 @@ $g_show_log_threshold = ADMINISTRATOR;
  */
 $g_global_settings = array(
 	'global_settings', 'admin_checks', 'allow_signup', 'allow_anonymous_login',
-	'anonymous_account', 'compress_html', 'content_expire', 'cookie_time_length', 'cookie_path',
-	'cookie_domain', 'cookie_version', 'cookie_prefix',	'string_cookie', 'project_cookie',
-	'view_all_cookie', 'manage_cookie', 'logout_cookie', 'bug_list_cookie', 'crypto_master_salt',
+	'anonymous_account', 'compress_html', 'content_expire', 'allow_permanent_cookie',
+	'cookie_time_length', 'cookie_path', 'cookie_domain', 'cookie_version',
+	'cookie_prefix', 'string_cookie', 'project_cookie', 'view_all_cookie',
+	'manage_cookie', 'logout_cookie', 'bug_list_cookie', 'crypto_master_salt',
 	'custom_headers', 'database_name', 'db_username', 'db_password', 'db_schema', 'db_type',
 	'db_table_prefix','db_table_suffix', 'display_errors', 'form_security_validation',
 	'hostname','html_valid_tags', 'html_valid_tags_single_line', 'default_language',
