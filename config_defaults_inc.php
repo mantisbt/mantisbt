@@ -971,6 +971,15 @@
 	$g_cookie_time_length	= 30000000;
 
 	/**
+	 * Allow users to opt for a 'permanent' cookie when logging in
+	 * Controls the display of the 'Remember my login in this browser' checkbox
+	 * on the login page
+	 * @see $g_cookie_time_length
+	 * @global int $g_allow_permanent_cookie
+	 */
+	$g_allow_permanent_cookie = ON;
+
+	/**
 	 * minutes to wait before document is stale (in minutes)
 	 * @global int $g_content_expire
 	 */

@@ -139,6 +139,9 @@
 		<input type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
 	</td>
 </tr>
+<?php
+	if( ON == config_get( 'allow_permanent_cookie' ) ) {
+?>
 <tr class="row-1">
 	<td class="category">
 		<?php echo lang_get( 'save_login' ) ?>
@@ -147,7 +150,11 @@
 	<input type="checkbox" name="perm_login" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?>/>
 	</td>
 </tr>
-<?php if ( $t_session_validation ) { ?>
+<?php
+	}
+
+	if ( $t_session_validation ) {
+?>
 <tr class="row-2">
 	<td class="category">
 		<?php echo lang_get( 'secure_session' ) ?>
