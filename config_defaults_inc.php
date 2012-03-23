@@ -1653,9 +1653,9 @@
 	$g_max_dropdown_length = 40;
 
 	/**
-	 * This flag conntrolls whether pre-formatted text (delimited by <pre> tags
-	 *  is wrapped to a maximum linelength (defaults to 100 chars in strings_api)
-	 *  If turned off, the display may be wide when viewing the text
+	 * This flag controls whether pre-formatted text (delimited by HTML pre tags
+	 * is wrapped to a maximum line length (defaults to 100 chars in strings_api)
+	 * If turned off, the display may be wide when viewing the text
 	 * @global int $g_wrap_in_preformatted_text
 	 */
 	$g_wrap_in_preformatted_text = ON;
