@@ -1614,7 +1614,7 @@ If you requested this verification, visit the following URL to change your passw
 	ERROR_SESSION_VAR_NOT_FOUND => 'Session variable "%1$s" not found.',
 	ERROR_SESSION_NOT_VALID => 'Your session has become invalidated.',
 	ERROR_FORM_TOKEN_INVALID => 'Invalid form security token. Did you submit the form twice by accident?',
-	ERROR_CRYPTO_MASTER_SALT_INVALID => 'For security reasons MantisBT will not operate when $g_crypto_master_salt is not specified correctly in config_inc.php.',
+	ERROR_CRYPTO_MASTER_SALT_INVALID => 'For security reasons MantisBT will not operate when $g_crypto_master_salt is not specified correctly in config_inc.php or is shorter than 16 characters long.',
 	ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS => 'Unable to find a source of strong randomness for cryptographic purposes.',
 	ERROR_INVALID_REQUEST_METHOD => 'This page cannot be accessed using this method.',
 	ERROR_INVALID_SORT_FIELD => 'Invalid sort field.',
