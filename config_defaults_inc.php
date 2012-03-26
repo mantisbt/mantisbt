@@ -4129,3 +4129,20 @@ $g_global_settings = array(
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
 );
+
+/***************
+ * MantisTouch *
+ ***************/
+
+/**
+ * The MantisTouch URL to direct to.  The %s will be replaced by the contents of $g_path.
+ * A blank value will disable redirection.  The %s is not required when redirecting to
+ * MantisTouch instances that point to a single MantisBT instance and hence have a hard-coded URL.
+ *
+ * Following are three examples:
+ * - 'http://mantisbt.mobi?url=%s'
+ * - 'http://MyOwnMantisTouch.com/'
+ * - ''
+ */
+$g_mantistouch_url = '';
+

@@ -3387,4 +3387,24 @@
 			</variablelist>
     </section>
 
+    <section id="admin.config.mantistouch">
+        <title>MantisTouch</title>
+        <para>
+			These options are used to integrate with MantisTouch (http://www.mantistouch.org) to provide experience targeted to mobile devices.
+        </para>
+
+        <variablelist>
+            <varlistentry>
+                <term>$g_mantistouch_url</term>
+                <listitem>
+                    <para>
+						The MantisTouch URL to direct to.  The %s will be replaced by the contents of $g_path configuration option.
+						A blank value will disable redirection.  The %s is not required when redirecting to
+						MantisTouch instances that point to a single MantisBT instance and hence have a hard-coded URL.
+						Examples include: '' (default), 'http://mantisbt.mobi?url=%s', and 'http://MyOwnMantisTouch.com/'.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
 </chapter>
