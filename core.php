@@ -237,7 +237,11 @@ if ( function_exists( 'timezone_identifiers_list' ) ) {
 	require_api( 'authentication_api.php' );
 	if( auth_is_user_authenticated() ) {
 		require_api( 'user_pref_api.php' );
-		date_default_timezone_set( user_pref_get_pref( auth_get_current_user_id(), 'timezone' ) );
+
+		$t_user_timezone = user_pref_get_pref( auth_get_current_user_id(), 'timezone' );
+		if ( !is_blank( $t_user_timezone ) ) {
+			date_default_timezone_set( $t_user_timezone );
+		}
 	}
 }
 
