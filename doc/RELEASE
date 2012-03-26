@@ -1,12 +1,5 @@
 MantisBT Release Notes
 
-1.2.10 Maintenance Release (2012-03-05)
--------------------------------------------------
-
-MantisBT 1.2.10 release fixes an issue caused by the rename of the logo file,
-and the fact that the docbook documentation was missing from the 1.2.9 package.
-
-
 1.2.9 Maintenance Release (2012-03-03)
 -------------------------------------------------
 
