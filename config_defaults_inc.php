@@ -875,7 +875,7 @@ $g_severity_significant_threshold = MAJOR;
  * reproducibility, status, resolution, category_id, date_submitted, last_updated,
  * os, os_build, platform, version, fixed_in_version, target_version, view_state,
  * summary, sponsorship_total, due_date, description, steps_to_reproduce,
- * additional_information, attachment_count, bugnotes_count, selection, edit,
+ * additional_info, attachment_count, bugnotes_count, selection, edit,
  * overdue
  *
  * @global array $g_view_issues_page_columns
