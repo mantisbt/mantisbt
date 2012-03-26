@@ -155,7 +155,7 @@ function __autoload( $className ) {
 # Register the autoload function to make it effective immediately
 spl_autoload_register( '__autoload' );
 
-require_once( 'mobile_api.php' );
+require_once( 'core/mobile_api.php' );
 
 if ( strlen( $GLOBALS['g_mantistouch_url'] ) > 0 && mobile_is_mobile_browser() ) {
 	$t_url = sprintf( $GLOBALS['g_mantistouch_url'], $GLOBALS['g_path'] );
