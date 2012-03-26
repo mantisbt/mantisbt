@@ -157,7 +157,7 @@ $num_notes = count( $t_bugnotes );
 ?>
 <tr class="bugnote <?php echo $t_bugnote_css ?>" id="c<?php echo $t_bugnote->id ?>">
         <td class="bugnote-meta">
-		<?php if ( ON  == config_get("show_avatar") ) print_avatar( $t_bugnote->reporter_id ); ?>
+		<?php print_avatar( $t_bugnote->reporter_id ); ?>
 		<span class="small bugnote-permalink"><a rel="bookmark" href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" title="<?php echo lang_get( 'bugnote_link_title' ) ?>"><?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_bugnote_id_formatted ?></a></span><br />
 
 		<span class="bugnote-reporter">

@@ -808,11 +808,10 @@ function user_get_name( $p_user_id ) {
 * @return array|bool an array( URL, width, height ) or false when the given user has no avatar
 */
 function user_get_avatar( $p_user_id, $p_size = 80 ) {
-	$t_email = utf8_strtolower( user_get_email( $p_user_id ) );
+	$t_email = utf8_strtolower( trim( user_get_email( $p_user_id ) ) );
 	if( is_blank( $t_email ) ) {
 		$t_result = false;
 	} else {
-		$t_default_image = config_get( 'default_avatar' );
 		$t_size = $p_size;
 
 		$t_use_ssl = false;
@@ -826,7 +825,8 @@ function user_get_avatar( $p_user_id, $p_size = 80 ) {
 			$t_gravatar_domain = 'https://secure.gravatar.com/';
 		}
 
-		$t_avatar_url = $t_gravatar_domain . 'avatar/' . md5( $t_email ) . '?default=' . urlencode( $t_default_image ) . '&size=' . $t_size . '&rating=G';
+		$t_avatar_url = $t_gravatar_domain . 'avatar/' . md5( $t_email ) . '?d=identicon&r=G&s=' . $t_size;
+
 		$t_result = array(
 			$t_avatar_url,
 			$t_size,

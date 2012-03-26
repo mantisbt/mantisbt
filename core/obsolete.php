@@ -141,6 +141,7 @@ config_obsolete( 'graph_colors', '' );
 
 # changes in 1.2.8
 config_obsolete( 'show_attachment_indicator' );
+config_obsolete( 'default_avatar', '' );
 
 # changes in 1.3.0dev
 config_obsolete( 'bugnote_allow_user_edit_delete', '' );

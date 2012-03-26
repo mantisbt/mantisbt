@@ -169,6 +169,10 @@ function print_successful_redirect( $p_redirect_to ) {
 
 # Print avatar image for the given user ID
 function print_avatar( $p_user_id, $p_size = 80 ) {
+	if ( OFF == config_get( 'show_avatar' ) ) {
+		return;
+	}
+
 	if( !user_exists( $p_user_id ) ) {
 		return;
 	}

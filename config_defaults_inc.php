@@ -1013,12 +1013,6 @@ $g_show_avatar = OFF;
 $g_show_avatar_threshold = DEVELOPER;
 
 /**
- * Default avatar for users without a gravatar account
- * @global string $g_default_avatar
- */
-$g_default_avatar = "%path%images/no_avatar.png";
-
-/**
  * Show release dates on changelog
  * @global int $g_show_changelog_dates
  */
