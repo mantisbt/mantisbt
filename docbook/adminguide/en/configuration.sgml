@@ -3189,7 +3189,7 @@
     <section id="admin.config.mantistouch">
         <title>MantisTouch</title>
         <para>
-			These options are used to integrate with MantisTouch (http://www.mantisbt.org/mantistouch.php) to provide experience targeted to mobile devices.
+			These options are used to integrate with MantisTouch (http://www.mantistouch.org) to provide experience targeted to mobile devices.
         </para>
 
         <variablelist>
