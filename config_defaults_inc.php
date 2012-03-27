@@ -3894,18 +3894,23 @@
 	 * @global array $g_global_settings
 	 */
 	$g_global_settings = array(
-		'path', 'icon_path', 'short_path', 'absolute_path', 'core_path', 'class_path', 'absolute_path_default_upload_folder',
-		'ldap_simulation_file_path', 'cookie_path', 'plugin_path', 'db_table_prefix', 'db_table_suffix', 'db_table',
-		'cookie_time_length', 'cookie_domain', 'cookie_version', 'cookie_prefix', 'string_cookie', 'project_cookie',
-		'view_all_cookie', 'manage_cookie', 'logout_cookie', 'bug_list_cookie', 'db_username', 'db_password', 'db_schema', 'db_type',
-		'hostname', 'allow_signup', 'database_name', 'show_queries_count', 'show_queries_threshold', 'show_queries_list',
-		'admin_checks', 'version_suffix', 'global_settings', 'use_iis', 'default_language', 'language_choices_arr',
-		'language_auto_map', 'fallback_language', 'use_javascript', 'minimal_jscss', 'display_errors', 'show_detailed_errors',
-		'stop_on_errors', 'login_method', 'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file', 'meta_include_file', 
-		'allow_anonymous_login', 'anonymous_account', 'content_expire', 'html_valid_tags', 'html_valid_tags_single_line',
-		'custom_headers', 'rss_key_seed', 'plugins_enabled', 'session_handler', 'session_key', 'session_save_path',
-		'session_validation', 'form_security_validation', 'compress_html', 'bottom_include_page', 'top_include_page',
-		'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'create_short_url', 'wiki_engine_url',
+		'path', 'icon_path', 'short_path', 'absolute_path', 'core_path', 'class_path',
+		'absolute_path_default_upload_folder', 'ldap_simulation_file_path', 'cookie_path',
+		'plugin_path', 'db_table_prefix', 'db_table_suffix', 'db_table', 'allow_permanent_cookie',
+		'cookie_time_length', 'cookie_domain', 'cookie_version', 'cookie_prefix',
+		'string_cookie', 'project_cookie', 'view_all_cookie', 'manage_cookie', 'logout_cookie',
+		'bug_list_cookie', 'db_username', 'db_password', 'db_schema', 'db_type', 'hostname',
+		'allow_signup', 'database_name', 'show_queries_count', 'show_queries_threshold',
+		'show_queries_list', 'admin_checks', 'version_suffix', 'global_settings', 'use_iis',
+		'default_language', 'language_choices_arr', 'language_auto_map', 'fallback_language',
+		'use_javascript', 'minimal_jscss', 'display_errors', 'show_detailed_errors',
+		'stop_on_errors', 'login_method', 'fileinfo_magic_db_file', 'css_include_file',
+		'css_rtl_include_file', 'meta_include_file', 'allow_anonymous_login', 'anonymous_account',
+		'content_expire', 'html_valid_tags', 'html_valid_tags_single_line', 'custom_headers',
+		'rss_key_seed', 'plugins_enabled', 'session_handler', 'session_key', 'session_save_path',
+		'session_validation', 'form_security_validation', 'compress_html', 'bottom_include_page',
+		'top_include_page', 'default_home_page', 'logout_redirect_page', 'manual_url',
+		'logo_url', 'create_short_url', 'wiki_engine_url',
 	);
 
 	/***************
