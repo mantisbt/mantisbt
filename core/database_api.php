@@ -335,7 +335,7 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 				# Realign the offset returned by preg_match as it is byte-based,
 				# which causes issues with UTF-8 characters in the query string
 				# (e.g. from custom fields names)
-				$matches[1] = utf8_strlen( substr( $p_query, 0, $matches[1]), mb_internal_encoding() );
+				$t_utf8_offset = utf8_strlen( substr( $p_query, 0, $matches[1]), mb_internal_encoding() );
 				if( $i <= count( $arr_parms ) ) {
 					if( is_null( $arr_parms[$i - 1] ) ) {
 						$replace = 'NULL';
@@ -359,8 +359,8 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 						echo( "Invalid argument type passed to query_bound(): $i" );
 						exit( 1 );
 					}
-					$p_query = utf8_substr( $p_query, 0, $matches[1] ) . $replace . utf8_substr( $p_query, $matches[1] + utf8_strlen( $matches[0] ) );
-					$lastoffset = $matches[1] + utf8_strlen( $replace );
+					$p_query = utf8_substr( $p_query, 0, $t_utf8_offset ) . $replace . utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $matches[0] ) );
+					$lastoffset = $matches[1] + strlen( $replace ) + 1;
 				} else {
 					$lastoffset = $matches[1] + 1;
 				}
