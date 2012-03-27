@@ -50,7 +50,7 @@ $g_db_connected = false;
  * Store whether to log queries ( used for show_queries_count/query list)
  * @global bool $g_db_log_queries
  	 */
-$g_db_log_queries = config_get_global( 'show_queries_list' );
+$g_db_log_queries = config_get_global( 'show_queries_count' ) && config_get_global( 'show_queries_list' );
 
 /**
  * set adodb fetch mode
