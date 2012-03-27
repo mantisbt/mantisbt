@@ -2380,17 +2380,6 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_show_queries_list</term>
-                <listitem>
-                    <para>Shows the list of all queries that are executed in
-                        chronological order from top to bottom. This option is only
-                        effective when $g_show_queries_count is ON. Default is OFF.
-                        WARNING: Potential security hazard. Only turn this on when you
-                        really need it (for debugging or profiling)
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
                 <term>$g_register_globals</term>
                 <listitem>
                     <para>If your register_globals is Off then set this to OFF. Check
