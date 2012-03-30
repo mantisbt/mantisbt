@@ -210,7 +210,7 @@
 	</tr>
 <?php
 	}
-
+	
 	if ( $tpl_show_eta ) {
 ?>
 
@@ -226,7 +226,7 @@
 	</tr>
 <?php
 	}
-
+	
 	if ( $tpl_show_severity ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -413,7 +413,7 @@
 		</td>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="target_version">
-				<?php print_version_option_list( '', null, VERSION_FUTURE ) ?>
+				<?php print_version_option_list() ?>
 			</select>
 		</td>
 	</tr>
