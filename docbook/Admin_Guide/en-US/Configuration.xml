@@ -908,6 +908,15 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_allow_permanent_cookie</term>
+                <listitem>
+                    <para>Allow users to opt for a 'permanent' cookie when logging in.
+                        Controls the display of the 'Remember my login in this browser'
+                        checkbox on the login page. See $g_cookie_time_length.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_wait_time</term>
                 <listitem>
                     <para>Time to delay between page redirects (in seconds). Users can
