@@ -611,8 +611,17 @@ function config_eval( $p_value, $p_global = false ) {
 	return $t_value;
 }
 
-# list of configuration variable which may expose webserver details and shouldn't be
-# exposed to users or webservices
+/**
+ * Defines if a config variable is considered "private"
+ *
+ * The purpose of this function is to avoid exposure of potentially
+ * sensitive or confidential information to users or web services.
+ * This includes things such as webserver details, paths, usernames and
+ * passwords, hostnames/IP addresses, etc.
+ *
+ * @param string $p_config_var config variable to evaluate
+ * @return bool
+ */
 function config_is_private( $p_config_var ) {
 	switch( $p_config_var ) {
 		case 'hostname':
