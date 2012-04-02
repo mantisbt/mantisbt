@@ -50,7 +50,7 @@ $g_db_connected = false;
  * Store whether to log queries ( used for show_queries_count/query list)
  * @global bool $g_db_log_queries
  	 */
-$g_db_log_queries = config_get_global( 'show_queries_list' );
+$g_db_log_queries = config_get_global( 'show_queries_count' ) && config_get_global( 'show_queries_list' );
 
 /**
  * set adodb fetch mode
@@ -351,39 +351,39 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 		$t_elapsed = number_format( microtime(true) - $t_start, 4 );
 
 		$lastoffset = 0;
-		$i = 1;
+		$i = 0;
 		if( !( is_null( $arr_parms ) || empty( $arr_parms ) ) ) {
 			while( preg_match( '/\?/', $p_query, $matches, PREG_OFFSET_CAPTURE, $lastoffset ) ) {
 				$matches = $matches[0];
 				# Realign the offset returned by preg_match as it is byte-based,
 				# which causes issues with UTF-8 characters in the query string
 				# (e.g. from custom fields names)
-				$matches[1] = utf8_strlen( substr( $p_query, 0, $matches[1]), mb_internal_encoding() );
+				$t_utf8_offset = utf8_strlen( substr( $p_query, 0, $matches[1]), mb_internal_encoding() );
 				if( $i <= count( $arr_parms ) ) {
-					if( is_null( $arr_parms[$i - 1] ) ) {
+					if( is_null( $arr_parms[$i] ) ) {
 						$replace = 'NULL';
 					}
-					else if( is_string( $arr_parms[$i - 1] ) ) {
-						$replace = "'" . $arr_parms[$i - 1] . "'";
+					else if( is_string( $arr_parms[$i] ) ) {
+						$replace = "'" . $arr_parms[$i] . "'";
 					}
-					else if( is_integer( $arr_parms[$i - 1] ) || is_float( $arr_parms[$i - 1] ) ) {
-						$replace = (float) $arr_parms[$i - 1];
+					else if( is_integer( $arr_parms[$i] ) || is_float( $arr_parms[$i] ) ) {
+						$replace = (float) $arr_parms[$i];
 					}
-					else if( is_bool( $arr_parms[$i - 1] ) ) {
+					else if( is_bool( $arr_parms[$i] ) ) {
 						switch( $t_db_type ) {
 							case 'pgsql':
-								$replace = "'" . $arr_parms[$i - 1] . "'";
+								$replace = "'" . $arr_parms[$i] . "'";
 							break;
 						default:
-							$replace = $arr_parms[$i - 1];
+							$replace = $arr_parms[$i];
 							break;
 						}
 					} else {
-						echo( "Invalid argument type passed to query_bound(): $i" );
+						echo( "Invalid argument type passed to query_bound(): " . $i + 1 );
 						exit( 1 );
 					}
-					$p_query = utf8_substr( $p_query, 0, $matches[1] ) . $replace . utf8_substr( $p_query, $matches[1] + utf8_strlen( $matches[0] ) );
-					$lastoffset = $matches[1] + utf8_strlen( $replace );
+					$p_query = utf8_substr( $p_query, 0, $t_utf8_offset ) . $replace . utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $matches[0] ) );
+					$lastoffset = $matches[1] + strlen( $replace ) + 1;
 				} else {
 					$lastoffset = $matches[1] + 1;
 				}

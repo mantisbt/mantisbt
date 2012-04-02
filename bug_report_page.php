@@ -210,7 +210,7 @@
 	</tr>
 <?php
 	}
-
+	
 	if ( $tpl_show_eta ) {
 ?>
 
@@ -226,7 +226,7 @@
 	</tr>
 <?php
 	}
-
+	
 	if ( $tpl_show_severity ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -413,7 +413,7 @@
 		</td>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="target_version">
-				<?php print_version_option_list( '', null, VERSION_FUTURE ) ?>
+				<?php print_version_option_list() ?>
 			</select>
 		</td>
 	</tr>
@@ -479,22 +479,36 @@
 		}
 	} # foreach( $t_related_custom_field_ids as $t_id )
 ?>
-<?php if ( $tpl_show_attachments ) { // File Upload (if enabled)
-	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+<?php
+	// File Upload (if enabled)
+	if ( $tpl_show_attachments ) {
+		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
-			<?php echo lang_get( 'upload_file' ) ?>
+			<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
 			<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
 		</td>
 		<td>
 			<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-			<input <?php echo helper_get_tab_index() ?> name="file" type="file" size="60" />
+<?php
+		// Display multiple file upload fields
+		for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
+?>
+			<input id="ufile[]" name="ufile[]" type="file" size="50" />
+<?php
+			if( $t_file_upload_max_num > 1 ) {
+				echo '<br />';
+			}
+		}
+	}
+?>
 		</td>
 	</tr>
-<?php
-	}
 
+
+<?php
 	if ( $tpl_show_view_state ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>

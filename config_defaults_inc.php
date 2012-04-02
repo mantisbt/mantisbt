@@ -971,6 +971,15 @@
 	$g_cookie_time_length	= 30000000;
 
 	/**
+	 * Allow users to opt for a 'permanent' cookie when logging in
+	 * Controls the display of the 'Remember my login in this browser' checkbox
+	 * on the login page
+	 * @see $g_cookie_time_length
+	 * @global int $g_allow_permanent_cookie
+	 */
+	$g_allow_permanent_cookie = ON;
+
+	/**
 	 * minutes to wait before document is stale (in minutes)
 	 * @global int $g_content_expire
 	 */
@@ -1568,6 +1577,12 @@
 	$g_file_upload_ftp_pass		= 'readwritepass';
 
 	/**
+	 * Maximum number of files that can be uploaded simultaneously
+	 * @global int $g_file_upload_max_num
+	 */
+	$g_file_upload_max_num = 1;
+
+	/**
 	 * Maximum file size that can be uploaded
 	 * Also check your PHP settings (default is usually 2MBs)
 	 * @global int $g_max_file_size
@@ -1638,9 +1653,9 @@
 	$g_max_dropdown_length = 40;
 
 	/**
-	 * This flag conntrolls whether pre-formatted text (delimited by <pre> tags
-	 *  is wrapped to a maximum linelength (defaults to 100 chars in strings_api)
-	 *  If turned off, the display may be wide when viewing the text
+	 * This flag controls whether pre-formatted text (delimited by HTML pre tags
+	 * is wrapped to a maximum line length (defaults to 100 chars in strings_api)
+	 * If turned off, the display may be wide when viewing the text
 	 * @global int $g_wrap_in_preformatted_text
 	 */
 	$g_wrap_in_preformatted_text = ON;
@@ -3879,18 +3894,23 @@
 	 * @global array $g_global_settings
 	 */
 	$g_global_settings = array(
-		'path', 'icon_path', 'short_path', 'absolute_path', 'core_path', 'class_path', 'absolute_path_default_upload_folder',
-		'ldap_simulation_file_path', 'cookie_path', 'plugin_path', 'db_table_prefix', 'db_table_suffix', 'db_table',
-		'cookie_time_length', 'cookie_domain', 'cookie_version', 'cookie_prefix', 'string_cookie', 'project_cookie',
-		'view_all_cookie', 'manage_cookie', 'logout_cookie', 'bug_list_cookie', 'db_username', 'db_password', 'db_schema', 'db_type',
-		'hostname', 'allow_signup', 'database_name', 'show_queries_count', 'show_queries_threshold', 'show_queries_list',
-		'admin_checks', 'version_suffix', 'global_settings', 'use_iis', 'default_language', 'language_choices_arr',
-		'language_auto_map', 'fallback_language', 'use_javascript', 'minimal_jscss', 'display_errors', 'show_detailed_errors',
-		'stop_on_errors', 'login_method', 'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file', 'meta_include_file', 
-		'allow_anonymous_login', 'anonymous_account', 'content_expire', 'html_valid_tags', 'html_valid_tags_single_line',
-		'custom_headers', 'rss_key_seed', 'plugins_enabled', 'session_handler', 'session_key', 'session_save_path',
-		'session_validation', 'form_security_validation', 'compress_html', 'bottom_include_page', 'top_include_page',
-		'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'create_short_url', 'wiki_engine_url',
+		'path', 'icon_path', 'short_path', 'absolute_path', 'core_path', 'class_path',
+		'absolute_path_default_upload_folder', 'ldap_simulation_file_path', 'cookie_path',
+		'plugin_path', 'db_table_prefix', 'db_table_suffix', 'db_table', 'allow_permanent_cookie',
+		'cookie_time_length', 'cookie_domain', 'cookie_version', 'cookie_prefix',
+		'string_cookie', 'project_cookie', 'view_all_cookie', 'manage_cookie', 'logout_cookie',
+		'bug_list_cookie', 'db_username', 'db_password', 'db_schema', 'db_type', 'hostname',
+		'allow_signup', 'database_name', 'show_queries_count', 'show_queries_threshold',
+		'show_queries_list', 'admin_checks', 'version_suffix', 'global_settings', 'use_iis',
+		'default_language', 'language_choices_arr', 'language_auto_map', 'fallback_language',
+		'use_javascript', 'minimal_jscss', 'display_errors', 'show_detailed_errors',
+		'stop_on_errors', 'login_method', 'fileinfo_magic_db_file', 'css_include_file',
+		'css_rtl_include_file', 'meta_include_file', 'allow_anonymous_login', 'anonymous_account',
+		'content_expire', 'html_valid_tags', 'html_valid_tags_single_line', 'custom_headers',
+		'rss_key_seed', 'plugins_enabled', 'session_handler', 'session_key', 'session_save_path',
+		'session_validation', 'form_security_validation', 'compress_html', 'bottom_include_page',
+		'top_include_page', 'default_home_page', 'logout_redirect_page', 'manual_url',
+		'logo_url', 'create_short_url', 'wiki_engine_url',
 	);
 
 	/***************
