@@ -74,7 +74,10 @@ function set_overrides( $p_config ) {
 
 # Get the value associated with the specific action and flag.
 function show_flag( $p_from_status_id, $p_to_status_id ) {
-	global $t_can_change_workflow, $t_overrides, $t_file_workflow, $t_global_workflow, $t_project_workflow, $t_colour_global, $t_colour_project;
+	global $t_can_change_workflow, $t_overrides,
+		$t_file_workflow, $t_global_workflow, $t_project_workflow,
+		$t_colour_global, $t_colour_project,
+		$t_resolved_status, $t_reopen_status, $t_reopen_label;
 	if ( $p_from_status_id <> $p_to_status_id ) {
 		$t_file = isset( $t_file_workflow['exit'][$p_from_status_id][$p_to_status_id] ) ? 1 : 0 ;
 		$t_global = isset( $t_global_workflow['exit'][$p_from_status_id][$p_to_status_id] ) ? 1 : 0 ;
@@ -96,7 +99,6 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 		$t_value = '<td class="center"' . $t_colour . '>';
 
 		$t_flag = ( 1 == $t_project );
-		$t_label = $t_flag ? $t_project_workflow['exit'][$p_from_status_id][$p_to_status_id] : '';
 
 		if ( $t_can_change_workflow ) {
 			$t_flag_name = $p_from_status_id . ':' . $p_to_status_id;
@@ -106,8 +108,9 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 			$t_value .= $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;';
 		}
 
-		if ( $t_flag && ( '' != $t_label ) ) {
-			$t_value .= '<br />(' . $t_label . ')';
+		# Add 'reopened' label
+		if ( $p_from_status_id >= $t_resolved_status && $p_to_status_id == $t_reopen_status ) {
+			$t_value .= "<br />($t_reopen_label)";
 		}
 	} else {
 		$t_value = '<td>&#160;';
@@ -403,6 +406,11 @@ if ( '' <> $t_validation_result ) {
 	echo $t_validation_result;
 	echo '</table><br /><br />';
 }
+
+# Initialization for 'reopened' label handling
+$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
+$t_reopen_status = config_get( 'bug_reopen_status' );
+$t_reopen_label = MantisEnum::getLabel( lang_get( 'resolution_enum_string' ), config_get( 'bug_reopen_resolution' ) );
 
 # display the graph as a matrix
 section_begin( lang_get( 'workflow' ) );

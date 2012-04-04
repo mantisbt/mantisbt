@@ -83,10 +83,7 @@ function workflow_parse( $p_enum_workflow ) {
 		$t_exit[0][$t_status] = $t_new_label;
 	}
 
-	# add user defined arcs and implicit reopen arcs
-	$t_reopen = config_get( 'bug_reopen_status' );
-	$t_reopen_label = MantisEnum::getLabel( lang_get( 'resolution_enum_string' ), config_get( 'bug_reopen_resolution' ) );
-	$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
+	# add user defined arcs
 	$t_default = array();
 	foreach ( $t_status_arr as $t_status => $t_status_label ) {
 		if ( isset( $p_enum_workflow[$t_status] ) ) {
@@ -100,10 +97,6 @@ function workflow_parse( $p_enum_workflow ) {
 			}
 		} else {
 			$t_exit[$t_status] = array();
-		}
-		if ( $t_status >= $t_resolved_status ) {
-			$t_exit[$t_status][$t_reopen] = $t_reopen_label;
-			$t_entry[$t_reopen][$t_status] = $t_reopen_label;
 		}
 		if ( !isset( $t_entry[$t_status] ) ) {
 			$t_entry[$t_status] = array();
