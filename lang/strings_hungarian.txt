@@ -174,7 +174,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Hiba volt a jelentésében.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nincs fájl megadva';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'A fájltípus nem megengedett';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'A könyvtár nem létezik. Ellenőrizze a projekt beállításait.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Ez a fájl már létezik, először törölnie kell.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Már létezik ilyen nevű projekt.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Egy kötelező \'%1$s\' mező üres. Ellenőrizze a megadott adatokat.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ez egy védett felhasználó. Hozzáférés a felhasználó-védelem megszüntetetéséig megtagadva.';

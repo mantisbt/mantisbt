@@ -182,7 +182,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Во введенной информации об
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Не указан файл.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Этот тип файлов запрещен.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Каталог не существует. Проверьте настройки проекта.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Дубликат файла. Сначала удалите старый файл.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Проект с таким названием уже существует.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Обязательное поле \'%1$s\' не заполнено. Пожалуйста, проверьте правильность заполнения.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Эта учетная запись защищена. Вы не сможете получить к ней доступ, пока защита не снята.';

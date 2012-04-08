@@ -174,7 +174,6 @@ $MANTIS_ERROR[ERROR_REPORT] = '報告に間違いがあります。';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ファイルが選択されていません。';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'そのファイル形式は許可されていません。';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ディレクトリが存在しません。プロジェクトの設定を確認してください。';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ファイルが重複しています。先にファイルを削除してください。';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'その名前のプロジェクトが既に存在します。';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = '必須欄「%1$s」が入力されていません。入力を確認してください。';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '権限がありません。権限を上げてアクセスしてください。';

@@ -85,7 +85,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'In nunod oli ädabinon pöl.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Ragiv nonik pegivon.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Ragivatip no pedälon.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Ragiviär no dabinon. Kontrololös parametemi proyega.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Atos binon ragiv petelüköl. Büo moükolös ragivi.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Proyeg labü nem at ya dabinon.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Fel zesüdik: „$1$s“ ävagon. Kontrololös utosi, kelosi epenol.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Kal at pejelon. No dalol gebön ani jüs kalijel ponosükon.';

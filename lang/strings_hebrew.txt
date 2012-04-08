@@ -172,7 +172,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'נמצאה שגיאה בדו״ח שלך.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'לא צוין קובץ';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'סוג הקובץ אסור';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'המחיצה אינה קיימת - יש לבדוק את הגדרות הפרויקט.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'קובץ זה כבר קיים. יש למחוק את הקובץ הקודם.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'קיים פרויקט בשם זה.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'שדה חובה „%1$s” הושאר ריק. יש לבדוק את הנתונים שהזנת.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'חשבון זה מוגן. אין אפשרות לגשת לחשבון זה אלא לאחר הסרת ההגנה.';

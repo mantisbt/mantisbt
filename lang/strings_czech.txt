@@ -26,6 +26,7 @@
  * @file
  *
  * @author Adam Zivner
+ * @author Jezevec
  * @author Jirí Kuchta, kuchta@feec.vutbr.cz
  * @author Kuvaly
  * @author Luk
@@ -134,6 +135,8 @@ $s_select_option = '(vybrat)';
 $s_bug_actiongroup_access = 'Nemáte potřebné oprávnění k této činnosti.';
 $s_bug_actiongroup_status = 'Tento problém nelze převést do požadovaného stavu';
 $s_bug_actiongroup_category = 'Tento problém nelze změnit do požadované kategorie';
+$s_bug_actiongroup_handler = 'Požadovaný uživatel není oprávněn řešit tento problém';
+$s_bug_actiongroup_version = 'Požadovaná verze v tomto projektu neexistuje';
 $s_close_bugs_conf_msg = 'Opravdu si přejete uzavřít tyto problémy ?';
 $s_delete_bugs_conf_msg = 'Opravdu si přejete smazat tyto problémy ?';
 $s_move_bugs_conf_msg = 'Přesunout problémy do';
@@ -176,7 +179,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Chybná data ve vašem reportu.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Soubor nebyl zadán.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Nepovolený typ souboru';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Adresář neexistuje, zkontrolujte nastavení projektu.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Duplicitní soubor. Prosím, napřed soubor smažte.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekt s tímto jménem už existuje.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Povinné pole "%1$s" je prázdné. Prosím, zkontrolujte zadané údaje.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Tento účet je chráněn. Nesmíte sem přistupovat dokud nebude ochrana účtu odstraněna.';
@@ -771,6 +773,7 @@ $s_accounts_pruned_msg = 'Všechny účty, na které se nikdo nepřihlásil a js
 $s_prune_accounts_button = 'Vyčistit';
 $s_confirm_account_pruning = 'Opravdu chcete odstranit všechny staré účty, na které se dosud nikdo nepřihlásil?';
 $s_edit_user_title = 'Úpravy ušivatele';
+$s_account_unlock_button = 'Odemknout účet';
 $s_reset_password_button = 'Změnit heslo';
 $s_delete_user_button = 'Smazat uživatele';
 $s_reset_password_msg = 'Změna hesla odešle potvrzovací URL elektronickým dopisem.';
@@ -781,6 +784,7 @@ $s_users_new = 'Nové';
 $s_account_reset_protected_msg = 'Účet je chráněn. Není možné změnit heslo.';
 $s_account_reset_msg = 'Potvrzovací dopis byl odeslán na vaši elektronickou adresu...';
 $s_account_reset_msg2 = 'Heslo k účtu bylo nastaveno na prázdné...';
+$s_account_unlock_msg = 'Účet byl odemčen.';
 $s_manage_user_protected_msg = 'Účet je chráněn. Úroveň přístupu a příznak jsou chráněny. Pokud ne, účet byl aktualizován...';
 $s_manage_user_updated_msg = 'Účet byl úspěšně aktualizován...';
 $s_email_user_updated_subject = 'Účet aktualizován';

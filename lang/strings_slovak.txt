@@ -169,7 +169,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Vo vašej správe bola chyba.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Žiadny súbor nebol určený.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Tento typ súboru nie je povolený.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Adresár neexistuje. Prosím skontrolujte nastavenia projektu.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Toto je duplikátny súbor. Prosím, najprv súbor zmažte.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekt s takým názvom už existuje.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Potrebné pole „%1$s“ nebolo vyplnené. Prosím, znova skontrolujte údaje, ktoré ste zadali.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Toto konto je chránené. Nemáte povolený vstup dokiaľ nebude ochrana odstránená.';

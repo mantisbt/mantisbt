@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Als-Chlämens
  * @author Als-Holder
  * @author Purodha
  */
@@ -86,7 +87,7 @@ $s_bug_monitor = 'Probläm beobachte';
 $s_bug_end_monitor = 'Ufhere mit dr Problämbeobachtig';
 $s_announcement = 'Aachindigung';
 $s_stays_on_top = 'Im Vordergrund blybe';
-$s_bugnote_link_title = 'Diräkt Gleich uf d Aamerkig';
+$s_bugnote_link_title = 'Diräkt Link uf d Aamerkig';
 $s_delete_bugnote_button = 'Problämnotiz lesche';
 $s_delete_bugnote_sure_msg = 'Witt die Notiz wirkli lesche?';
 $s_bug_relationships = 'Probläm-Beziehige';
@@ -166,7 +167,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'In Dyynem Report het s e Fähler din.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Kei Datei aagee.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Dää Dateityp isch nit erlaubt.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'S Verzeichnis git s nit. Iberprief d Yystellige.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Des isch e doppleti Datei. Lesch zerscht säli Datei.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'S het scho ne Projäkt mit däm Name.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'E notwändig Fäld „%1$s“ isch läär gsi. Iberprief Dyyni Yygabe.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Des Konto isch gschitzt. Du chasch nit druf zuegryfe, voreb dr Schutz ufghoben isch.';
@@ -564,7 +564,7 @@ $s_select_project_button = 'Projäkt wehle';
 $s_lost_password_title = 'Passwort zrucksetze';
 $s_lost_password_done_title = 'Passwort-Nochricht gschickt';
 $s_lost_password_subject = 'Passwort zrucksetze';
-$s_lost_password_info = 'Go Dyy verlore Passwort iberchuu, gib bitte Benutzername un E-Mail Adräss zu Dyynem Konto aa.<br /><br />Wänn d Date zuen eme giltige Konto stimme, wird Dir e speziälli URL iber E-Mail gschickt, wu s e Bstätigungscode fir Dyy Konto din het. Bitte gang däm Gleich (Link) no un ändere Dyy Passwort.';
+$s_lost_password_info = 'Go Dyy verlore Passwort iberchuu, gib bitte Benutzername un E-Mail Adräss zu Dyynem Konto aa.<br /><br />Wänn d Date zuen eme giltige Konto stimme, wird Dir e speziälli URL iber E-Mail gschickt, wu s e Bstätigungscode fir Dyy Konto din het. Bitte gang däm Link no un ändere Dyy Passwort.';
 $s_lost_password_confirm_hash_OK = 'Dyy Bstätigung isch akzeptiert wore. Bitte aktualisier Dyy Passwort.';
 $s_open_and_assigned_to_me = 'Ufe un mir zuegwise';
 $s_open_and_reported_to_me = 'Ufe un vu mir brichtet';
@@ -860,7 +860,7 @@ $s_report_stay = 'Im Yygabmodus blybe';
 $s_selected_project = 'Gwehlt Projäkt';
 $s_valid_project_msg = 'Du muesch e giltig Projäkt uuswehle.';
 $s_signup_done_title = 'Benutzerkonte-Regischtrierig uusgfiert.';
-$s_password_emailed_msg = 'Glickwunsch. Du hesch Di erfolgryych regischtriert. Dir wird jetz e Bstätigungs-E-Mail gschickt go Dyy E-Mail-Adräss iberpriefe. Wänn Du s Gleich (Link) in dr E-Mail drucksch, wird Dyy Konto frej gschalte.';
+$s_password_emailed_msg = 'Glickwunsch. Du hesch Di erfolgryych regischtriert. Dir wird jetz e Bstätigungs-E-Mail gschickt go Dyy E-Mail-Adräss iberpriefe. Wänn Du de Link in dr E-Mail drucksch, wird Dyy Konto frej gschalte.';
 $s_no_reponse_msg = 'Du hesch sibe Täg Zyt go d Kontobstätigung uusfiere. Wänn Du d Kontobstätigung nit innerhalb vu sibe Täg uusfiersch, no wird s nej regischtriert Konto glescht.';
 $s_signup_captcha_request = 'Gib dr Code yy, wu im Ramme uf dr rächte Syte stoht.';
 $s_signup_info = 'Noch em Abschicke vu däm Formular un dr Iberpriefig vu Dyyne Antworte wird Dir e Bstätigungs-E-Mail an d Adräss gschickt, wu Du aagee hesch.<br />Mit däre Mail chasch Dyy Konto aktiviere. Wänn Du Dyy Konto nit innerhalb vu sibe Täg frej schaltsch, wird s Konto glescht.<br />Du muesch e giltigi E-Mail-Adräss aagee go d Bstätigungs-Mail iberchuu.';

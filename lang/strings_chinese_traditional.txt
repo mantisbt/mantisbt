@@ -174,7 +174,6 @@ $MANTIS_ERROR[ERROR_REPORT] = '在你的回報中發生錯誤.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '沒有指定檔案';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = '檔案類型不被接受';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = '檔案路徑不存在。請檢查專案設定值或洽系統管理員建立檔案路徑。';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '這是重複的檔案。請先刪除原本檔案。';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = '這專案的名稱已經存在。';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = '一個必要欄位 \'%1$s\' 是空值.  請重新檢查你輸入的資料.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '這個帳戶目前為保護狀態. 你不可以去執行這個作業. 如果要執行這個作業, 必須要先將這個保護狀態取消.';

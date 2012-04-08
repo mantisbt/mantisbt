@@ -168,7 +168,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Pronađena je greška u vašoj prijavi.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nema naznačene datoteke.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Ova vrsta datoteke nije dozvoljena.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Fascikla ne postoji. Proverite projektne postavke.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Ova datoteka je duplikat. Prvo je obrišite.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekat s tim nazivom već postoji.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Obavezno polje „%1$s“ je prazno. Proverite da li ste ga popunili kako treba.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Nalog je zaštićen. Nemate dozvolu za pristup sve dok se zaštita na ukloni.';

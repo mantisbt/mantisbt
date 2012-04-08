@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Als-Chlämens
  * @author Als-Holder
  * @author Purodha
  */
@@ -39,10 +40,10 @@ $s_plugin_XmlImportExport_cross_references = 'Zwärchverwyys';
 $s_plugin_XmlImportExport_default_strategy = 'Standard-Konvertierigsstrategii:';
 $s_plugin_XmlImportExport_renumber = 'Renummerierig';
 $s_plugin_XmlImportExport_renumber_desc = 'Versuech, Referänze mit Renummerierig z konvertiere';
-$s_plugin_XmlImportExport_link = 'Gleich (Link)';
-$s_plugin_XmlImportExport_link_desc = 'Konvertier in e Gleich (Link) zum Originalelemänt';
+$s_plugin_XmlImportExport_link = 'Link';
+$s_plugin_XmlImportExport_link_desc = 'Konvertier in e Link zum Originalelemänt';
 $s_plugin_XmlImportExport_disable = 'Deaktiviere';
-$s_plugin_XmlImportExport_disable_desc = 'Gleich (Link) deaktiviere';
+$s_plugin_XmlImportExport_disable_desc = 'Link deaktiviere';
 $s_plugin_XmlImportExport_fallback = 'Fallback-Strategii (wänn ohni Renummerierig):';
 $s_plugin_XmlImportExport_fallback_category = '!!Fuzzy!!Fallback-Strategii:';
 $s_plugin_XmlImportExport_keep_same_category = 'Versuech, di glych Kategorii byyzbhalte';

@@ -168,7 +168,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Houbo un erro no informe.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Non se especificou ningún ficheiro.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'O tipo de ficheiro non está permitido.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'O directorio non existe. Por favor, comprobe as características do proxecto.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Este é o duplicado dun ficheiro. Por favor, borre primeiro o ficheiro.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Xa existe un proxecto con ese nome.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'O campo necesario "%1$s" estaba baleiro. Por favor, comprobe o texto de entrada.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protexida. Non ten permiso para acceder a ela ata que a protección da conta sexa retirada.';

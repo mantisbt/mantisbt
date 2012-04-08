@@ -172,7 +172,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Raportissasi oli virhe.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Tiedostoa ei ole määritelty';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Tämä tiedostotyyppi ei ole sallittu';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Hakemistoa ei ole olemassa. Ole hyvä ja tarkista projektin asetukset.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Tämä tiedosto on kaksoiskappale.  Ole hyvä ja poista alkuperäinen tiedosto ensin.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Samanniminen projekti on jo olemassa.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Tarvittu kenttä %1$s on tyhjä. Tarkista syötteet.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Tämä käyttäjätunnus on suojattu.  Pääsy on sallittu vasta kun suojaus poistetaan.';

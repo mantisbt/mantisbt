@@ -162,7 +162,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'En Dingem Bereesch es ene Fähler opjetrodde.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Kein Dattei aanjejovve.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Di Zoot Dattei es nit zohjelohße.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Dat Verzeijshneß jidd_et nit. Loor donoh en de Enshtellunge för et Projäk.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Dat es en dubbelte Datei. Donn eets de eezte dovun fottschmiiße.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'E Projäk met däm Name jidd_et ald.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'De nüüdejje Aanjab „%1$s“ es nit jemaat. Donn ens Ding Enjaabe nohloore.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Heh dä Zohjang es extra jeschöz. Do kanns De nix met maache, bes dat dä Schoz wider opjehovve es.';

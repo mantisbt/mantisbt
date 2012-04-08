@@ -172,7 +172,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'S\'ha trobat un error en la seva incidència.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Arxiu no especificat';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Aquest tipus d\'arxiu no està permès';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'El directori no existeix. Si us plau revisi la configuració del projecte.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Aquest és un arxiu duplicat. Si us plau esborri l\'arxiu primer.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ja existeix un projecte amb aquest nom.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'El camp requerit "%1$s" està buit. Si us plau, comprovi les dades.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Aquest compte està protegit. No hi té accés fins que la protecció del compte hagi estat retirada.';

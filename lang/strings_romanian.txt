@@ -173,7 +173,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'A apărut o eroare în raportul dumneavoastră.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nici un fişier specificat.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Acest tip de fișier nu este acceptat.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Calea specificată nu există. Te rog verifică configurația proiectului.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Acesta este un fișier duplicat. Te rog șterge mai întâi fișierul.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Un proiect cu acest nume există deja.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Un câmp necesar „%1$s” a fost vid. Reverificați datele de intrare.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Acest cont este protejat și nu poate fi accesat până când protecția nu este ridicată.';

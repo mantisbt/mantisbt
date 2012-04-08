@@ -166,7 +166,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'I aviá una error dins vòstre rapòrt.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Pas cap de fichièr especificat';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Tipe de fichièr interdich';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Lo repertòri existís pas. Mercés de verificar los paramètres del projècte.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Fichièr duplicat.  Suprimir d\'en primièr lo primièr.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Un projècte amb aqueste nom existís ja.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Un camp obligatòri "%1$s" es pas entresenhat.  Mercés de verificar vòstra picada.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Aqueste compte es protegit.  Sètz pas autorizat(ada) a i accedir tant que la proteccion existís.';

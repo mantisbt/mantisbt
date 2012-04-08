@@ -170,7 +170,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Raporunuzda bir hata tespit edildi.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Dosya adı belirtilmedi.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Bu dosya türüne izin verilmemektedir';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Dizin bulunamadı. Lütfen proje ayarlarınızı kontrol ediniz.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Bu daha önce girilmiş bir dosya adı. Lütfen önce dosyayı siliniz.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Bu isimde bir proje zaten mevcut.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Gerekli olan "%1$s" girdi alanı boş bırakıldı. Lütfen girdilerinizi kontrol ediniz.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Bu kullanıcı hesabı koruma altında. Koruma kaldırılana kadar erişime izin verilmeyecektir.';

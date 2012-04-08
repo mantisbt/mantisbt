@@ -172,7 +172,6 @@ $MANTIS_ERROR[ERROR_REPORT] = '입력내용에 오류가 발생했습니다.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '파일이 없습니다.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = '허용되지 않는 파일 종류입니다.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = '디렉토리가 존재하지 않습니다.. 프로젝트 환경을 확인하세요.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '파일 중복. 먼저 파일을 삭제하세요.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = '같은 이름의 프로젝트가 이미 존재합니다.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = '필수 입력 필드 "%1$s" 누락, 입력사항을 확인하세요.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '보호중인 계정입니다. 보호를 해제하기전에는 이 계정에 접근할 수 없습니다.';

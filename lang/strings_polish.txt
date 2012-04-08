@@ -180,7 +180,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Wystąpił błąd w zgłoszeniu.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Żaden plik nie został wybrany.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Typ przesyłanego pliku nie jest dozwolony.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Podany katalog nie istnieje. Sprawdź ustawienia projektu.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Plik o podanej nazwie już istnieje. Usuń najpierw istniejący plik.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Istnieje już projekt o takiej nazwie.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Wymagane pole „%1$s” nie zostało wypełnione. Sprawdź wprowadzone dane.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Konto jest zabezpieczone. Nie masz uprawnień dostępu do tego konta dopóki zabezpieczenie jest aktywne.';

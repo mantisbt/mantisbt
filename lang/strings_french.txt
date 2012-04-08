@@ -196,7 +196,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Il y avait une erreur dans votre rapport.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Aucun fichier spécifié';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Type de fichier interdit';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Le répertoire n\'existe pas. Merci de vérifier les paramètres du projet.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Fichier dupliqué.  Supprimer d\'abord le premier.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Un projet ayant ce nom existe déjà.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Le champ obligatoire « %1$s » n\'est pas renseigné.  Merci de vérifier votre saisie.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ce compte est protégé.  Vous n\'êtes pas autorisés à y accéder tant que la protection existe.';

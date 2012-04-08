@@ -36,6 +36,7 @@
  * @author Luckas Blade
  * @author Luigipiccoli
  * @author Pedroca cerebral
+ * @author 555
  */
 
 $s_actiongroup_menu_move = 'Mover';
@@ -177,7 +178,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Houve um erro em seu relatório.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Arquivo não especificado';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'O tipo de arquivo não é permitido';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'O diretório não existe. Por favor, verifique as configurações do projeto.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Este é um arquivo duplicado.  Por favor, apague o arquivo antes.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Um projeto com este nome já existe.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Um campo necessário \'%1$s\' estava vazio.  Por favor, verifique novamente suas entradas.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protegida.  Você não tem permissão para acessá-la até que a proteção da conta seja retirada.';
@@ -556,8 +556,8 @@ $s_unique_queries_executed = '%1$d consultas únicas executadas.';
 $s_memory_usage_in_kb = 'uso de memória: %1$s KB';
 $s_please_report = 'Por favor, reporte isto ao %1$s.';
 $s_click_to_login = 'Autenticar-se';
-$s_warning_plain_password_authentication = '<strong>AVISO:</strong> É utilizada a autenticação plena de palavra-chave, isto pode expor suas palavras-chave aos administradores.';
-$s_warning_default_administrator_account_present = '<strong>AVISO:</strong> Você deve desabilitar a conta padrão \'administrador\' ou alterar sua palavra-chave.';
+$s_warning_plain_password_authentication = '<strong>AVISO:</strong> É utilizada a autenticação plena de senha, isto pode expor suas senhas aos administradores.';
+$s_warning_default_administrator_account_present = '<strong>AVISO:</strong> Você deve desabilitar a conta padrão \'administrador\' ou alterar sua senha.';
 $s_warning_admin_directory_present = '<strong>AVISO:</strong> Diretório Admin deve ser removido.';
 $s_error_database_version_out_of_date_1 = '<strong>ERRO:</strong> A estrutura da base de dados aparenta estar desatualizada (config(databaseversion) está em 0 e existem antigas tabelas de atualização). A versão 1.x do MantisBT introduziu um novo processo de atualização. Você aparenta estar atualizando a partir de um Release 0.XX. Por favor atualize para 1.0.8 ou 1.1.X, e então atualize para 1.2.';
 $s_error_database_no_schema_version = '<strong>ERRO:</strong> A estrutura da base de dados parece estar desatualizada (config(databaseversion) esta em 0 e não existem tabelas de antigas atualizações). Por favor verifique se a sua base de dados está rodando - não conseguimos obter a versão do schema da base de dados. A Tabela de Configuração não retornou uma versão do schema da base de dados válida - por favor, solicite suporte na lista de e-mails mantis-help caso seja necessário.';
@@ -921,7 +921,7 @@ $s_reporter_stats = 'Estatísticas de Relatores';
 $s_orct = '(aberto/resolvido/fechado/total)';
 $s_any = 'qualquer';
 $s_all = 'todos';
-$s_show = 'Mostrar';
+$s_show = 'Exibir';
 $s_changed = 'Alterado(hrs)';
 $s_viewing_bugs_title = 'Visualizando Casos';
 $s_updated = 'Atualizado';

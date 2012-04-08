@@ -110,7 +110,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Daar was \'n fout in u verslag.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Geen lêer is verskaf nie.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Die lêertipe word nie toegelaat nie.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Die gids bestaan nie. Kontroleer asseblief die projek se instellings.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Die lêer bestaan reeds. Verwyder eers die bestaande lêer.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Die projek bestaan reeds.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Toegang geweier.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String %1$s" is nie gevind nie.';

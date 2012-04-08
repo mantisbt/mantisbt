@@ -167,7 +167,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Il habeva un error in tu reporto.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nulle file specificate.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Iste typo de file non es permittite.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Le directorio non existe. Per favor verifica le configuration del projecto.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Isto es un file duplicate. Per favor dele primo le file.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Existe ja un projecto con iste nomine.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Le campo obligatori "%1$s" esseva vacue. Per favor verifica tu entrata.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Iste conto es protegite. Tu non ha le permission de acceder a illo usque le protection del conto es levate.';

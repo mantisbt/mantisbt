@@ -165,7 +165,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'كان هناك خطأ في تقريرك.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'لا ملف تم تحديده';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'نوع الملف غير مسموح به';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'المجلد غير موجود. من فضلك تحقق من إعدادات المشروع.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'هذا ملف مكرر. من فضلك احذف الملف أولا.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'هناك مشروع بهذا الاسم بالفعل.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'حقل ضروري "%1$s" كان فارغا. من فضلك تحقق مرة أخرى من مدخلاتك.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'هذا الحساب محمي.  أنت غير مسموح لك بالدخول إلى هذا حتى يتم رفع حماية الحساب.';

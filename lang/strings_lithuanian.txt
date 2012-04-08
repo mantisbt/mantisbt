@@ -171,7 +171,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Jūsų pranešime yra klaida.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nenurodėte failo';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Neleistinas failo tipas';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Šis katalogas neegzistuoja. Prašome patikrinti projekto nustatymus.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Toks failas jau yra.  Prašome pirmiau ištrinti seną failą.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projektas tokiu pavadinimu jau yra.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Privalomas laukas \'%1$s\' tuščias.  Prašome užpildyti iki galo.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Šis vartotojas apsaugotas.  Jūs neturite teisių prie jo prieiti, kol apsauga nebus išjungta.';

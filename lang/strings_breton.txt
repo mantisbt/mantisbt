@@ -169,7 +169,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Ur fazi a oa en ho tanevell.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'N\'eus bet diferet restr ebet';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Ar seurt restr n\'eo ket aotreet.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'N\'eus ket eus ar c\'havlec\'h. Gwiriit arventennoù ar raktres, mar plij.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Ur restr doublet eo. Dilamit ar restr da gentañ, mar plij.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ur raktres en anv-se zo anezhañ dija.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Goullo e oa ur vaezienn rekis. Gwiriit ho roadennoù, mar plij.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Gwarezet eo ar gont-mañ. N\'oc\'h ket aotreet da vont dezhañ keit ha ma\'z eo gwarezet.';

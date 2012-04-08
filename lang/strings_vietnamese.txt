@@ -167,7 +167,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Có một lỗi trong báo cáo của bạn';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Không có tập tin chỉ định.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Loại tệp là không được phép';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Thư mục không tồn tại. Hãy kiểm tra các thiết lập của dự án.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Đây là một tập tin trùng lặp. Hãy xoá các tệp trước.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Một dự án với tên đó đã tồn tại.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Một trường cần thiết "%1$s" đã trống. Xin vui lòng kiểm tra lại các đầu vào của bạn.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Tài khoản này được bảo vệ. Bạn không được phép truy cập vào tài khoản cho đến khi bảo vệ được nâng lên.';

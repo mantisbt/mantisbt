@@ -169,7 +169,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Најдена е грешка во вашата 
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Нема назначено податотека.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Тој тип на податотеки е забранет.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Директориумот не постои. Проверете ги проектните нагодувања.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Оваа податотека е дупликат. Најпрвин избришете ја првата.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Веќе постои проект со тоа име.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Неопходното поле „%1$s“ е празно. Проверете дали сè ви е пополнето како што треба.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Сметката е заштитена. Немате дозвола за пристап сè додека заштитата не се отстрани.';

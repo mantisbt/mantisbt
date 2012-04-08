@@ -175,7 +175,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Грешка в отчета.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Не е зададен файл';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Този файлов тип е забранен за зареждане';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Няма такава директория. Моля  проверете проектните настройки.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Зареденият файл вече съществува.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Вече съществува проект с такова име.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Задължителното поле \'%1$s\' е празно. Моля допълнете формата.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Профилът е защитен. Нямате право на достъп докато не се премахне защитата.';

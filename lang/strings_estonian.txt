@@ -170,7 +170,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Teate loomisel esines viga.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Fail pole määratletud';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Failitüüp pole lubatud';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Kataloogi pole olemas. Palun kontrolli projekti seadeid.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'See on korduv fail.  Palun kustuta kõigepealt varasem fail.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Sellise nimega projekt on juba olemas.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Vajalik väli "%1$s" oli tühi.  Palun kontrolli oma sisestust.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'See kasutajakonto on kaitstud.  Saad selle poole pöörduda alles peale kaitse eemaldamist.';
