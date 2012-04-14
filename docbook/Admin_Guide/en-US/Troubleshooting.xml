@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="admin.troubleshooting">
+	<title>Troubleshooting</title>
+
+	<para>This chapter provides the Administrator with additional information
+	related to Application Errors and common problems in MantisBT.
+	</para>
+
+	<para>Useful additional reference information and support may also be
+	found on the <ulink url="http://www.mantisbt.org/">MantisBT website</ulink>,
+	more specifically the <ulink url="http://www.mantisbt.org/forums/">Forums</ulink>
+	and the <ulink url="http://www.mantisbt.org/bugs/">Bugtracker</ulink>.
+	</para>
+
+	<section id="admin.troubleshooting.errors">
+		<title>Application Errors</title>
+
+		<para>Additional information about MantisBT common errors.
+		</para>
+
+		<section id="admin.troubleshooting.errors.2800">
+			<title>Error 2800 - Invalid form security token</title>
+
+			<para>This error may only occur when Form Validation is enabled with
+			$g_form_security_validation = ON (see <xref linkend="admin.config.webserver" />).
+			There are several known cases that could trigger it:
+				<itemizedlist>
+					<listitem><para>Multiple submissions of a form by clicking
+						on the submit button several times (user error)</para>
+					</listitem>
+					<listitem><para>Invalid or unauthorized submission of a
+						form, e.g. by hand-crafting the URL (CSRF attack)</para>
+					</listitem>
+					<listitem><para>Expired PHP session</para>
+					</listitem>
+				</itemizedlist>
+				In the first two instances, MantisBT's behavior is by design, and
+				the response as expected.
+				For expired sessions however, the user is impacted by system behavior, which
+				could not only cause confusion, but also potential loss of submitted form data.
+				What happens is driven by several php.ini configuration settings:
+				<itemizedlist>
+					<listitem><para>The ratio
+						<ulink url="http://php.net/session.gc-probability">
+							session.gc_probability</ulink>
+						divided by
+						<ulink url="http://php.net/session.gc-divisor">
+							session.gc_divisor</ulink>,
+						which determines the probability that the garbage collection process
+						will start when a session is initialized.
+						</para>
+					</listitem>
+					<listitem><para>
+						<ulink url="http://php.net/session.gc-maxlifetime">
+							session.gc_maxlifetime</ulink> which specifies (as the name does not indicate)
+							the <emphasis>minimum</emphasis> validity of session data.
+						</para>
+					</listitem>
+				</itemizedlist>
+				With PHP default values, sessions created more than 1440 seconds (24 minutes) ago
+				have a 1% chance to be invalidated each time a new session is initialized.
+				This explains the seemingly random occurence of this error.
+			</para>
+
+			<para>Unfortunately, this problem cannot be fixed without a major rework of the way sessions and
+			form security are handled in MantisBT.
+			</para>
+
+			<para>As a workaround, the Administrator can
+				<itemizedlist>
+					<listitem><para>Increase the value of
+						<ulink url="http://php.net/session.gc-maxlifetime">session.gc_maxlifetime</ulink></para>
+					</listitem>
+					<listitem><para>Set $g_form_security_validation = OFF.
+						<emphasis>Note that for security reasons, it is strongly recommended not to do this.</emphasis>
+						</para>
+					</listitem>
+				</itemizedlist>
+			Users may also install local tools to avoid loss of form data, e.g.
+			<ulink url="http://lazarus.interclue.com/">Lazarus Form Recovery</ulink>
+			add-on for Firefox.
+			</para>
+
+			<para>Further references and reading:
+				<itemizedlist>
+					<listitem>
+						<para>MantisBT issues
+						<ulink url="http://www.mantisbt.org/bugs/view.php?id=12381">12381</ulink>,
+						<ulink url="http://www.mantisbt.org/bugs/view.php?id=12492">12492</ulink>,
+						<ulink url="http://www.mantisbt.org/bugs/view.php?id=13106">13106</ulink>,
+						<ulink url="http://www.mantisbt.org/bugs/view.php?id=13246">13246</ulink>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+	</section>
+
+</chapter>

@@ -16,6 +16,7 @@
 	<xi:include href="Page_Descriptions.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Customizing.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Authentication.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="Troubleshooting.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Project_Management.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Contributing.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Revision_History.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
