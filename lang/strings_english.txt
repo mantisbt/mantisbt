@@ -1177,6 +1177,7 @@ If you requested this verification, visit the following URL to change your passw
 	'bug_assign_to_button' => 'Assign To:',
 	'bug_status_to_button' => 'Change Status To:',
 	'reopen_bug_button' => 'Reopen',
+	'close_bug_button' => 'Close',
 	'move_bug_button' => 'Move',
 	'attached_files' => 'Attached Files',
 	'publish' => 'Publish',

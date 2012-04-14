@@ -846,8 +846,20 @@ function bug_is_readonly( $p_bug_id ) {
  * @uses config_api.php
  */
 function bug_is_resolved( $p_bug_id ) {
-	$t_status = bug_get_field( $p_bug_id, 'status' );
-	return( $t_status >= config_get( 'bug_resolved_status_threshold' ) );
+	$t_bug = bug_get( $p_bug_id );
+	return( $t_bug->status >= config_get( 'bug_resolved_status_threshold', null, null, $t_bug->project_id ) );
+}
+
+/**
+ * Check if a given bug is closed
+ * @param int p_bug_id integer representing bug id
+ * @return bool true if bug is closed, false otherwise
+ * @access public
+ * @uses config_api.php
+ */
+function bug_is_closed( $p_bug_id ) {
+	$t_bug = bug_get( $p_bug_id );
+	return( $t_bug->status >= config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id ) );
 }
 
 /**

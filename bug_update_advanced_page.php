@@ -401,8 +401,9 @@ if ( $tpl_show_status || $tpl_show_resolution ) {
 
 		echo '<td class="' . $status_label .  '">';
 		print_status_option_list( 'status', $tpl_bug->status,
-							( $tpl_bug->reporter_id == auth_get_current_user_id() &&
-									( ON == config_get( 'allow_reporter_close' ) ) ), $tpl_bug->project_id );
+			access_can_close_bug( $tpl_bug->id ),
+			$tpl_bug->project_id
+		);
 		echo '</td>';
 	} else {
 		$t_spacer += 2;

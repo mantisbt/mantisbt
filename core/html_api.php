@@ -1339,7 +1339,7 @@ function html_status_percentage_legend() {
 /**
  * Print an html button inside a form
  * @param string $p_action
- * @param string $p_buttion_text
+ * @param string $p_button_text
  * @param array $p_fields
  * @param string $p_method
  * @return null
@@ -1401,7 +1401,12 @@ function html_button_bug_change_status( $p_bug_id ) {
 	$t_bug_current_state = bug_get_field( $p_bug_id, 'status' );
 	$t_current_access = access_get_project_level( $t_bug_project_id );
 
-	$t_enum_list = get_status_option_list( $t_current_access, $t_bug_current_state, false, ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() && ( ON == config_get( 'allow_reporter_close' ) ) ), $t_bug_project_id );
+	$t_enum_list = get_status_option_list(
+		$t_current_access,
+		$t_bug_current_state,
+		false,
+		bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() ) && ( ON == config_get( 'allow_reporter_close' ) ),
+		$t_bug_project_id );
 
 	if( count( $t_enum_list ) > 0 ) {
 
@@ -1561,13 +1566,29 @@ function html_button_bug_create_child( $p_bug_id ) {
  * @return null
  */
 function html_button_bug_reopen( $p_bug_id ) {
-	$t_status = bug_get_field( $p_bug_id, 'status' );
-	$t_project = bug_get_field( $p_bug_id, 'project_id' );
+	if( access_can_reopen_bug( $p_bug_id ) ) {
 	$t_reopen_status = config_get( 'bug_reopen_status', null, null, $t_project );
+		html_button(
+			'bug_change_status_page.php',
+			lang_get( 'reopen_bug_button' ),
+			array( 'id' => $p_bug_id, 'new_status' => $t_reopen_status, 'reopen_flag' => ON )
+		);
+	}
+}
 
-	if( access_has_bug_level( config_get( 'reopen_bug_threshold', null, null, $t_project ), $p_bug_id ) ||
-			(( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) && ( ON == config_get( 'allow_reporter_reopen', null, null, $t_project ) ) ) ) {
-		html_button( 'bug_change_status_page.php', lang_get( 'reopen_bug_button' ), array( 'id' => $p_bug_id, 'new_status' => $t_reopen_status, 'reopen_flag' => ON ) );
+/**
+ * Print a button to close the given bug
+ * @param int $p_bug_id
+ * @return null
+ */
+function html_button_bug_close( $p_bug_id ) {
+	if( access_can_close_bug( $p_bug_id ) ) {
+		$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $t_project );
+		html_button(
+			'bug_change_status_page.php',
+			lang_get( 'close_bug_button' ),
+			array( 'id' => $p_bug_id, 'new_status' => $t_closed_status )
+		);
 	}
 }
 
@@ -1645,6 +1666,7 @@ function html_button_wiki( $p_bug_id ) {
  */
 function html_buttons_view_bug_page( $p_bug_id ) {
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
+	$t_closed = config_get( 'bug_closed_status_threshold' );
 	$t_status = bug_get_field( $p_bug_id, 'status' );
 	$t_readonly = bug_is_readonly( $p_bug_id );
 	$t_sticky = config_get( 'set_bug_sticky_threshold' );
@@ -1663,7 +1685,7 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 	}
 
 	# Change status button/dropdown
-	if ( !$t_readonly || config_get( 'allow_reporter_close' ) ) {
+	if ( !$t_readonly ) {
 		echo '<td class="center">';
 		html_button_bug_change_status( $p_bug_id );
 		echo '</td>';
@@ -1691,21 +1713,23 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 		echo '</td>';
 	}
 
+	# CLONE button
 	if( !$t_readonly ) {
-		# CREATE CHILD button
 		echo '<td class="center">';
 		html_button_bug_create_child( $p_bug_id );
 		echo '</td>';
 	}
 
-	if( $t_resolved <= $t_status ) {
-		# resolved is not the same as readonly
-		echo '<td class="center">';
+	# REOPEN button
+	echo '<td class="center">';
+	html_button_bug_reopen( $p_bug_id );
+	echo '</td>';
 
-		# REOPEN button
-		html_button_bug_reopen( $p_bug_id );
-		echo '</td>';
-	}
+	# CLOSE button
+	echo '<td class="center">';
+	html_button_bug_close( $p_bug_id );
+	echo '</td>';
+
 
 	# MOVE button
 	echo '<td class="center">';

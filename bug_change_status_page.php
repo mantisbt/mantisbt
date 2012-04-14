@@ -82,14 +82,20 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 $f_new_status = gpc_get_int( 'new_status' );
 $f_reopen_flag = gpc_get_int( 'reopen_flag', OFF );
 
+$t_reopen = config_get( 'bug_reopen_status', null, null, $t_bug->project_id );
+$t_resolved = config_get( 'bug_resolved_status_threshold', null, null, $t_bug->project_id );
+$t_closed = config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id );
 $t_current_user_id = auth_get_current_user_id();
 
-if ( !( ( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
-			( ( bug_get_field( $f_bug_id, 'reporter_id' ) == $t_current_user_id ) &&
-					( ( ON == config_get( 'allow_reporter_reopen' ) ) ||
-							( ON == config_get( 'allow_reporter_close' ) ) ) ) ||
-			( ( ON == $f_reopen_flag ) && ( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $f_bug_id ) ) )
-		) ) {
+# Ensure user has proper access level before proceeding
+if( $f_new_status == $t_reopen && $f_reopen_flag ) {
+	access_ensure_can_reopen_bug( $f_bug_id, $t_current_user_id );
+}
+else if( $f_new_status == $t_closed ) {
+	access_ensure_can_close_bug( $f_bug_id, $t_current_user_id );
+}
+else if ( bug_is_readonly( $f_bug_id )
+	|| !access_has_bug_level( access_get_status_threshold( $f_new_status, $t_bug->project_id ), $f_bug_id, $t_current_user_id ) ) {
 	access_denied();
 }
 
@@ -126,10 +132,6 @@ if ( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 }
 
 $t_status_label = str_replace( " ", "_", MantisEnum::getLabel( config_get( 'status_enum_string' ), $f_new_status ) );
-$t_resolved = config_get( 'bug_resolved_status_threshold' );
-$t_closed = config_get( 'bug_closed_status_threshold' );
-
-$t_bug = bug_get( $f_bug_id );
 
 html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
@@ -225,13 +227,13 @@ if ( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get
 </tr>
 <?php } ?>
 
-<!-- Due date -->
 <?php if ( $t_can_update_due_date ) {
 	$t_date_to_display = '';
 	if ( !date_is_null( $t_bug->due_date ) ) {
 			$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
 	}
 ?>
+<!-- Due date -->
 <tr <?php echo helper_alternate_class() ?>>
 	<th class="category">
 		<?php print_documentation_link( 'due_date' ) ?>
@@ -301,11 +303,11 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 ?>
 
 <?php
-if ( ( $t_resolved <= $f_new_status ) ) {
-	$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
-		|| ( ( AUTO == config_get( 'show_product_version' ) )
-					&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
-	if ( $t_show_product_version ) {
+if ( ( $f_new_status >= $t_resolved ) ) {
+	if (   version_should_show_product_version( $t_bug->project_id )
+		&& !bug_is_readonly( $f_bug_id )
+		&& access_has_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id )
+	) {
 ?>
 <!-- Fixed in Version -->
 <tr <?php echo helper_alternate_class() ?>>
@@ -314,15 +316,23 @@ if ( ( $t_resolved <= $f_new_status ) ) {
 	</th>
 	<td>
 		<select name="fixed_in_version">
-			<?php print_version_option_list( bug_get_field( $f_bug_id, 'fixed_in_version' ),
-							bug_get_field( $f_bug_id, 'project_id' ), VERSION_ALL ) ?>
+			<?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL ) ?>
 		</select>
 	</td>
 </tr>
-<?php }
-	} ?>
-
+<?php
+	}
+}
+?>
 <?php event_signal( 'EVENT_BUG_CHANGE_STATUS_FORM', array( $f_bug_id ) ); ?>
+<?php
+if ( ON == $f_reopen_flag ) {
+?>
+<!-- Bug was re-opened -->
+<?php
+	printf("	<input type=\"hidden\" name=\"resolution\" value=\"%s\" />\n",  config_get( 'bug_reopen_resolution' ) );
+}
+?>
 
 <!-- Bugnote -->
 <tr id="bug-change-status-note" <?php echo helper_alternate_class() ?>>
