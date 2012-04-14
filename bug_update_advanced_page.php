@@ -206,7 +206,7 @@ if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_s
 
 if ( $tpl_show_reporter ) {
 	echo '<tr ', helper_alternate_class(), '>';
-	
+
 	$t_spacer = 4;
 
 	if ( $tpl_show_reporter ) {
@@ -240,7 +240,7 @@ if ( $tpl_show_reporter ) {
 
 if ( $tpl_show_handler || $tpl_show_due_date ) {
 	echo '<tr ', helper_alternate_class(), '>';
-	
+
 	$t_spacer = 2;
 
 	# Assigned To
@@ -288,7 +288,7 @@ if ( $tpl_show_handler || $tpl_show_due_date ) {
 	} else {
 		$t_spacer += 2;
 	}
-	
+
 	# spacer
 	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
@@ -301,7 +301,7 @@ if ( $tpl_show_handler || $tpl_show_due_date ) {
 
 if ( $tpl_show_priority || $tpl_show_severity || $tpl_show_reproducibility ) {
 	echo '<tr ', helper_alternate_class(), '>';
-	
+
 	$t_spacer = 0;
 
 	if ( $tpl_show_priority ) {
@@ -356,8 +356,9 @@ if ( $tpl_show_status || $tpl_show_resolution ) {
 		echo '<td class="category">', lang_get( 'status' ), '</td>';
 		echo '<td bgcolor="', get_status_color( $tpl_bug->status ), '">';
 		print_status_option_list( 'status', $tpl_bug->status,
-							( $tpl_bug->reporter_id == auth_get_current_user_id() &&
-									( ON == config_get( 'allow_reporter_close' ) ) ), $tpl_bug->project_id );
+			access_can_close_bug( $tpl_bug->id ),
+			$tpl_bug->project_id
+		);
 		echo '</td>';
 	} else {
 		$t_spacer += 2;

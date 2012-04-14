@@ -1250,6 +1250,7 @@ $s_update_bug_button = 'Edit';
 $s_bug_assign_to_button = 'Assign To:';
 $s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = 'Reopen';
+$s_close_bug_button = 'Close';
 $s_move_bug_button = 'Move';
 $s_attached_files = 'Attached Files';
 $s_publish = 'Publish';
