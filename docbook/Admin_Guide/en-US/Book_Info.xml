@@ -7,11 +7,11 @@
 	<title>Admin Guide</title>
 	<subtitle>Mantis Issue Tracker Administration Guide</subtitle>
 	<productname>MantisBT</productname>
-	<productnumber>1.2</productnumber>
+	<productnumber>1.3</productnumber>
 	<edition>1.0</edition>
 	<pubsnumber>1</pubsnumber>
 	<abstract>
-		<para> 
+		<para>
 			A short overview and summary of the book&#39;s subject and purpose, traditionally no more than one paragraph long. Note: the abstract will appear in the front matter of your book and will also be placed in the description field of the book&#39;s RPM spec file.
 		</para>
 	</abstract>
