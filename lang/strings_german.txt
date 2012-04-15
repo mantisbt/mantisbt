@@ -37,6 +37,7 @@
  * @author Imre
  * @author KarlReichert
  * @author Kghbln
+ * @author Manuae
  * @author Martin Fuchs, martin-fuchs@gmx.net
  * @author Matthias Bauer, mantis-de@moeffju.de
  * @author Melancholie
@@ -481,8 +482,11 @@ $s_monitor_bug_button = 'Beobachten';
 $s_unmonitor_bug_button = 'Beobachtung beenden';
 $s_file_upload_msg = 'Dateitransfer erfolgreich';
 $s_upload_file = 'Datei übertragen';
+$s_upload_files = 'Dateien übertragen';
 $s_select_file = 'Datei wählen';
+$s_select_files = 'Dateien wählen';
 $s_upload_file_button = 'Datei übertragen';
+$s_upload_files_button = 'Dateien übertragen';
 $s_max_file_size = 'Max. Größe';
 $s_bug_reopened_msg = 'Eintrag wurde wiedereröffnet …';
 $s_reopen_add_bugnote_title = 'Notiz für Eintragswiedereröffnung hinzufügen';
