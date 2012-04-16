@@ -642,7 +642,7 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 	$c_from = strtotime( $p_from );
 
 	if ( $c_to === false || $c_from === false ) {
-		error_parameters( array( $p_form, $p_to ) );
+		error_parameters( array( $p_from, $p_to ) );
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
