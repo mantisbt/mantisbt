@@ -32,6 +32,7 @@
  * @author Campmaster
  * @author Diebuche
  * @author Dr. Jürgen Kehrel, jkehrel@kehrel.de
+ * @author Exit91
  * @author Heiko Gierer, gierer@rittershaus.de
  * @author Hermann-Josef Beckers, hjb-rheine@t-online.de
  * @author Imre
@@ -983,6 +984,7 @@ $s_update_bug_button = 'Aktualisieren';
 $s_bug_assign_to_button = 'Zuordnen zu';
 $s_bug_status_to_button = 'Status wechseln zu:';
 $s_reopen_bug_button = 'Wiedereröffnen';
+$s_close_bug_button = 'Schließen';
 $s_move_bug_button = 'Verschieben';
 $s_attached_files = 'Angehängte Dateien';
 $s_publish = 'Veröffentlichen';

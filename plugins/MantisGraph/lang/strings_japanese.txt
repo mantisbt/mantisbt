@@ -26,10 +26,11 @@
  * @file
  *
  * @author Fryed-peach
+ * @author Shirayuki
  */
 
 $s_plugin_graph_title = 'Mantis グラフ';
-$s_plugin_graph_description = '公式なグラフ用プラグイン。';
+$s_plugin_graph_description = '公式のグラフ プラグイン。';
 $s_plugin_MantisGraph_title = 'Mantis グラフ';
 $s_plugin_MantisGraph_menu_advanced_summary = '詳細な要約';
 $s_plugin_MantisGraph_config = '設定';
@@ -40,7 +41,7 @@ $s_plugin_MantisGraph_severity_link = '重要度ごと';
 $s_plugin_MantisGraph_category_link = 'カテゴリごと';
 $s_plugin_MantisGraph_resolution_link = '解決状況ごと';
 $s_plugin_MantisGraph_graph_bug_page_link = 'グラフ';
-$s_plugin_MantisGraph_library = '使用するグラフ・ライブラリー';
+$s_plugin_MantisGraph_library = '使用するグラフ ライブラリー';
 $s_plugin_MantisGraph_bundled = 'バンドルのものを使用';
 $s_plugin_MantisGraph_window_width = 'グラフ幅 (単位：ピクセル)';
 $s_plugin_MantisGraph_bar_aspect = '棒グラフの縦横比 (高さ/横幅)';
@@ -66,18 +67,18 @@ $s_plugin_MantisGraph_by_severity_mix = '重要度とステータス';
 $s_plugin_MantisGraph_by_priority_mix = '優先度とステータス';
 $s_plugin_MantisGraph_by_resolution_mix = '解決状況とステータス';
 $s_plugin_MantisGraph_legend_still_open = '未解決';
-$s_plugin_MantisGraph_legend_resolved = '解決済';
-$s_plugin_MantisGraph_legend_assigned = '割当済';
+$s_plugin_MantisGraph_legend_resolved = '解決済み';
+$s_plugin_MantisGraph_legend_assigned = '割当済み';
 $s_plugin_MantisGraph_legend_total = '合計';
 $s_plugin_MantisGraph_legend_opened = '未完了';
 $s_plugin_MantisGraph_legend_closed = '完了';
-$s_plugin_MantisGraph_legend_reported = '登録済';
+$s_plugin_MantisGraph_legend_reported = '登録済み';
 $s_plugin_MantisGraph_cumulative = '累積';
 $s_plugin_MantisGraph_not_enough_data = '十分なデータがないので、グラフを作成できません。';
 $s_plugin_MantisGraph_period_none = '未指定';
 $s_plugin_MantisGraph_period_this_week = '今週';
 $s_plugin_MantisGraph_period_last_week = '先週';
-$s_plugin_MantisGraph_period_two_weeks = '先週、先々週';
+$s_plugin_MantisGraph_period_two_weeks = '過去 2 週間';
 $s_plugin_MantisGraph_period_this_month = '今月';
 $s_plugin_MantisGraph_period_last_month = '先月';
 $s_plugin_MantisGraph_period_this_quarter = '四半期';
@@ -85,7 +86,7 @@ $s_plugin_MantisGraph_period_last_quarter = '直前の四半期';
 $s_plugin_MantisGraph_period_year_to_date = '1年前から今日まで';
 $s_plugin_MantisGraph_period_select = '日付選択';
 $s_plugin_MantisGraph_period_last_year = '去年';
-$s_plugin_MantisGraph_select = '選択してください。';
+$s_plugin_MantisGraph_select = '選択してください';
 $s_plugin_MantisGraph_select_bystatus = 'ステータス';
 $s_plugin_MantisGraph_select_summbystatus = '概要(ステータス)';
 $s_plugin_MantisGraph_select_bycat = '概要(カテゴリ)';

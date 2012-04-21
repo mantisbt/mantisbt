@@ -27,13 +27,14 @@
  *
  * @author Aotake
  * @author Fryed-peach
+ * @author Shirayuki
  */
 
 $s_plugin_format_title = 'MantisBT フォーマティング';
-$s_plugin_format_description = '公式なテキスト・プロセッシングおよびフォーマティングのプラグイン。';
+$s_plugin_format_description = '公式のテキストの処理および整形のプラグイン。';
 $s_plugin_format_config = '設定';
-$s_plugin_format_process_text = 'テキスト・プロセッシング';
-$s_plugin_format_process_text_warning_notice = '自分が何をしようとしているのか理解していない限り停止させないでください。「切」の状態ではクロスサイトスクリプティング (XSS) が可能となります。';
+$s_plugin_format_process_text = 'テキスト処理';
+$s_plugin_format_process_text_warning_notice = '何をしているかを完全には理解していない場合は OFF にしないでください。OFF の状態ではクロス サイト スクリプティング (XSS) 攻撃ができてしまいます。';
 $s_plugin_format_process_urls = 'URLプロセッシング';
 $s_plugin_format_process_buglinks = 'MantisBTリンク (チケット/チケットコメント)';
 $s_plugin_format_process_vcslinks = 'VCSリンク';

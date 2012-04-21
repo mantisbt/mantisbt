@@ -974,6 +974,7 @@ $s_update_bug_button = 'Edytuj';
 $s_bug_assign_to_button = 'Przypisz do:';
 $s_bug_status_to_button = 'Zmień status na:';
 $s_reopen_bug_button = 'Otwórz ponownie';
+$s_close_bug_button = 'Zamknij';
 $s_move_bug_button = 'Przenieś';
 $s_attached_files = 'Dołączone pliki';
 $s_publish = 'Opublikuj';

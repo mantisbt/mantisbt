@@ -28,6 +28,7 @@
  * @author Cedric31
  * @author IAlex
  * @author Peter17
+ * @author Urhixidur
  */
 
 $s_plugin_graph_title = 'Graphiques Mantis';
@@ -95,4 +96,4 @@ $s_plugin_MantisGraph_select_both = 'Synthèse par état et catégorie';
 $s_plugin_MantisGraph_show_as_graph = 'Afficher en graphique';
 $s_plugin_MantisGraph_show_as_table = 'Afficher en tableau';
 $s_plugin_MantisGraph_show_graph = 'Afficher graphique';
-$s_plugin_MantisGraph_graph_page = 'Afficher graphique de l\'historique';
+$s_plugin_MantisGraph_graph_page = 'Afficher le graphique de l’historique';

@@ -27,6 +27,7 @@
  *
  * @author Bernat
  * @author Bernat Pegueroles - bpf@pegueroles.com
+ * @author BroOk
  * @author Martorell
  * @author Paucabot
  * @author SMP
@@ -866,7 +867,7 @@ $s_report_stay = 'Continua informant';
 $s_selected_project = 'Projecte Seleccionat';
 $s_valid_project_msg = 'Ha de seleccionar un projecte vàlid';
 $s_signup_done_title = 'Alta processada';
-$s_password_emailed_msg = 'Enhorabona. S\'ha registrat correctament. Rebrà un missatge per correu per a verificar la seva adreça de correu electrònic. Cliqui en el link que rebrà per a activar el seu compte.';
+$s_password_emailed_msg = 'Enhorabona. T\'has registrat correctament. Rebràs un una confirmació per correu per a verificar la teva adreça de correu electrònic. Clica en l\'enllaç que rebràs per a activar el teu compte.';
 $s_no_reponse_msg = 'Té set dies per completar el procés de registre. Si no el completa en aquest termini, el seu compte serà eliminat.';
 $s_signup_captcha_request = 'Introdueixi el codi tal com el veu en el camp de la dreta';
 $s_signup_info = 'Al completar aquest procés i la verificació de les seves respostes, li enviarem un correu de confirmació a l\'adreça especificada.<br />Amb aquest correu podrà activar el seu compte. Si la confirmació no s\'efectua en set dies, el compte serà eliminat.<br />Ha de consignar una adreça de correu vàlida per a rebre el missatge de confirmació.';

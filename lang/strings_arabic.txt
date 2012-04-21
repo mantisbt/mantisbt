@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author DRIHEM
  * @author Meno25
  * @author OsamaK
  */
@@ -125,6 +126,8 @@ $s_select_option = '(اختر)';
 $s_bug_actiongroup_access = 'أنت لا تمتلك السماحات المناسبة للقيام بهذا الفعل.';
 $s_bug_actiongroup_status = 'هذه القضية لا يمكن تغييرها إلى الحالة المطلوبة';
 $s_bug_actiongroup_category = 'هذه القضية لا يمكن تغييرها إلى التصنيف المطلوب';
+$s_bug_actiongroup_handler = 'لا يسمح لهذا المستخدم بمعالجة هذه المشكلة';
+$s_bug_actiongroup_version = 'الإصدار المطلوب لا وجود له في مشروع هذه المشكلة';
 $s_close_bugs_conf_msg = 'هل أنت متأكد من أنك تريد إغلاق هذه القضايا؟';
 $s_delete_bugs_conf_msg = 'هل أنت متأكد من أنك تريد حذف هذه القضايا؟';
 $s_move_bugs_conf_msg = 'نقل القضايا إلى';
@@ -152,6 +155,8 @@ $s_set_sticky_group_bugs_button = 'ضبط/عدم ضبط كملصوقة';
 $s_fixed_in_version_group_bugs_button = 'تحديث أصلحت في النسخة';
 $s_target_version_group_bugs_button = 'تحديث النسخة الهدف';
 $s_update_severity_title = 'تحديث الشدة';
+$s_update_severity_msg = 'حدد أولوية المشكلة';
+$s_update_severity_button = 'حدث الشدة';
 $s_hide_button = 'عرض المختار فقط';
 $s_printing_preferences_title = 'اختر الحقول للطبع';
 $s_printing_options_link = 'خيارات الطبع';
@@ -267,7 +272,7 @@ $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'الحقل "%1$s" يحتوي على ال
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'معالج جلسة غير صحيح.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'متغير الجلسة "%1$s" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'جلستك أصبحت غير صحيحة.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'نص استمارة سرية غير صحيح.  هل أرسلت الاستمارة مرتين بطريق الخطأ؟';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'نص استمارة سرية غير صحيح. قد يرجع السبب إلى انتهاء وقت الجلسة، أو إرسال النموذج عن طريق الخطأ مرتين.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'هذه الصفحة لا يمكن الوصول إليها باستخدام هذه الطريقة.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'حقل ترتيب غير صحيح.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'نسق تاريخ غير صالح.';
@@ -297,6 +302,7 @@ $s_eta_enum_string = '10:لا شيء,20:< 1 يوم,30:2-3 أيام,40:< 1 أسب
 $s_sponsorship_enum_string = '0:غير مدفوعة,1:مطلوبة,2:مدفوعة';
 $s_new_account_subject = 'تسجيل حساب';
 $s_new_account_greeting = 'شكرا لك للتسجيل. لديك حساب باسم المتخدم "%1$s". لإكمال تسجيلك، زر المسار التالي (تأكد من أنه مدخل كسطر وحيد) واضبط كلمة السر الخاصة بدخولك:';
+$s_new_account_greeting_admincreated = 'قام المستخدم %1$s بإنشاء حساب تحت اسم "%2$s". لإكمال عملية التسجيل رجاءً، قم بزيارة الصفحة التالية (تأكد من إدخاله في سطر واحد) و أضبط كلمة السر الخاصة بك:';
 $s_new_account_username = 'اسم المستخدم:';
 $s_new_account_message = 'لو أنك لم تطلب أي تسجيل، تجاهل هذه الرسالة ولا شيء سيحدث.';
 $s_new_account_do_not_reply = 'لا ترد على هذه الرسالة';
@@ -456,8 +462,11 @@ $s_monitor_bug_button = 'تابع';
 $s_unmonitor_bug_button = 'إنهاء المراقبة';
 $s_file_upload_msg = 'رفع الملف نجح';
 $s_upload_file = 'رفع ملف';
+$s_upload_files = 'رفع الملفات';
 $s_select_file = 'اختر ملفا';
+$s_select_files = 'اختر الملفّات';
 $s_upload_file_button = 'رفع ملف';
+$s_upload_files_button = 'رفع الملفات';
 $s_max_file_size = 'الحجم الأقصى';
 $s_bug_reopened_msg = 'القضية تمت إعادة فتحها...';
 $s_reopen_add_bugnote_title = 'إضافة ملاحظة كسبب لإعادة فتح القضية';
