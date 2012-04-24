@@ -747,6 +747,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		if ( isset( $p_issue['category'] ) && !is_blank( $p_issue['category'] ) ) {
 			return new soap_fault( 'Client', '', "Category field must be supplied." );
 		} else {
+			$t_project_name = project_get_name( $t_project_id );
 			return new soap_fault( 'Client', '', "Category '" . $p_issue['category'] . "' not found for project '$t_project_name'." );
 		}
 	}
