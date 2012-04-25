@@ -44,7 +44,7 @@ html_page_top( 'MantisBT Administration - System Utilities' );
 <br /><br />
 
 <table width="80%" bgcolor="#222222" cellpadding="10" cellspacing="1">
-	<tr><td bgcolor=\"#e8e8e8\" colspan=\"2\"><span class=\"title\">Upgrade Utilities</span></td></tr>
+	<tr><td bgcolor="#e8e8e8" colspan="2"><span class="title">Upgrade Utilities</span></td></tr>
 
 	<!-- # Headings -->
 	<tr bgcolor="#ffffff"><th width="70%">Description</th><th width="30%">Execute</th></tr>
@@ -68,7 +68,7 @@ html_page_top( 'MantisBT Administration - System Utilities' );
 			<?php
 				$t_custom_ids = custom_field_get_ids();
 foreach( $t_custom_ids as $t_id ) {
-	printf( "<OPTION VALUE=\"%d\">%s", $t_id, custom_field_get_field( $t_id, 'name' ) );
+	printf( "<OPTION VALUE=\"%d\">%s</OPTION>", $t_id, custom_field_get_field( $t_id, 'name' ) );
 }
 ?>
 		</SELECT> to
@@ -80,7 +80,7 @@ $t_dest_ids = array(
 	'fixed_in_version',
 );
 foreach( $t_dest_ids as $t_id ) {
-	printf( "<OPTION VALUE=\"%s\">%s", $t_id, $t_id );
+	printf( "<OPTION VALUE=\"%s\">%s</OPTION>", $t_id, $t_id );
 }
 ?>
 		</SELECT>
