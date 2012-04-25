@@ -22,6 +22,20 @@
 		<para>Additional information about MantisBT common errors.
 		</para>
 
+		<section id="admin.troubleshooting.errors.1502">
+			<title>Error 1502 - Category not found</title>
+
+			<para>This error generally occurs when the Category specified by
+			$g_default_category_for_moves (see <xref linkend="admin.config.defaults" />)
+			has been deleted from the database.
+			</para>
+
+			<para>To resolve this issue, you need to set this parameter to a valid Category Id.
+			This can be done either globally in config_inc.php, or via the Manage Configuration
+			page (globally or per project).
+			</para>
+		</section>
+
 		<section id="admin.troubleshooting.errors.2800">
 			<title>Error 2800 - Invalid form security token</title>
 
