@@ -72,7 +72,7 @@
 
 		case 'CLOSE':
 			$t_closed = config_get( 'bug_closed_status_threshold' );
-			if ( access_can_close_bug( $t_bug_id ) ) {
+			if ( access_can_close_bug( $t_bug ) ) {
 				if( ( $t_status < $t_closed ) &&
 					bug_check_workflow( $t_status, $t_closed ) ) {
 

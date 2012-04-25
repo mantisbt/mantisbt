@@ -59,10 +59,10 @@
 
 	# Ensure user has proper access level before proceeding
 	if( $f_new_status == $t_reopen && $f_reopen_flag ) {
-		access_ensure_can_reopen_bug( $f_bug_id, $t_current_user_id );
+		access_ensure_can_reopen_bug( $t_bug, $t_current_user_id );
 	}
 	else if( $f_new_status == $t_closed ) {
-		access_ensure_can_close_bug( $f_bug_id, $t_current_user_id );
+		access_ensure_can_close_bug( $t_bug, $t_current_user_id );
 	}
 	else if ( bug_is_readonly( $f_bug_id )
 		|| !access_has_bug_level( access_get_status_threshold( $f_new_status, $t_bug->project_id ), $f_bug_id, $t_current_user_id ) ) {
