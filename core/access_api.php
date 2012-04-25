@@ -483,7 +483,7 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
  * @param int|null $p_user_id integer representing user id, defaults to null to use current user
  * @access public
  */
- function access_ensure_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = null ) {
+function access_ensure_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = null ) {
 	if( !access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id ) ) {
 		access_denied();
 	}
@@ -491,13 +491,13 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
 
 /**
  * Check if the specified bug can be closed
- * @param int $p_bug_id integer representing bug id to check access against
+ * @param BugData $p_bug Bug to check access against
  * @param int|null $p_user_id integer representing user id, defaults to null to use current user
  * @return bool true if user can close the bug
  * @access public
  */
- function access_can_close_bug( $p_bug_id, $p_user_id = null ) {
-	if( bug_is_closed( $p_bug_id ) ) {
+function access_can_close_bug( $p_bug, $p_user_id = null ) {
+	if( bug_is_closed( $p_bug->id ) ) {
 		# Can't close a bug that's already closed
 		return false;
 	}
@@ -506,44 +506,42 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
 		$p_user_id = auth_get_current_user_id();
 	}
 
-	$t_bug = bug_get( $p_bug_id );
-
 	# If allow_reporter_close is enabled, then reporters can close their own bugs
 	# if they are in resolved status
-	if(    ON == config_get( 'allow_reporter_close', null, null, $t_bug->project_id )
-		&& bug_is_user_reporter( $p_bug_id, $p_user_id )
-		&& bug_is_resolved( $p_bug_id )
+	if(    ON == config_get( 'allow_reporter_close', null, null, $p_bug->project_id )
+		&& bug_is_user_reporter( $p_bug->id, $p_user_id )
+		&& bug_is_resolved( $p_bug->id )
 	) {
 		return true;
 	}
 
-	$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id );
-	$t_closed_status_threshold = access_get_status_threshold( $t_closed_status, $t_bug->project_id );
-	return access_has_bug_level( $t_closed_status_threshold, $p_bug_id, $p_user_id );
+	$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $p_bug->project_id );
+	$t_closed_status_threshold = access_get_status_threshold( $t_closed_status, $p_bug->project_id );
+	return access_has_bug_level( $t_closed_status_threshold, $p_bug->id, $p_user_id );
 }
 
 /**
  * Make sure that the user can close the specified bug
  * @see access_can_close_bug
- * @param int $p_bug_id integer representing bug id to check access against
+ * @param BugData $p_bug Bug to check access against
  * @param int|null $p_user_id integer representing user id, defaults to null to use current user
  * @access public
  */
- function access_ensure_can_close_bug( $p_bug_id, $p_user_id = null ) {
-	if( !access_can_close_bug( $p_bug_id, $p_user_id ) ) {
+function access_ensure_can_close_bug( $p_bug, $p_user_id = null ) {
+	if( !access_can_close_bug( $p_bug, $p_user_id ) ) {
 		access_denied();
 	}
 }
 
 /**
  * Check if the specified bug can be reopened
- * @param int $p_bug_id integer representing bug id to check access against
+ * @param BugData $p_bug Bug to check access against
  * @param int|null $p_user_id integer representing user id, defaults to null to use current user
  * @return bool whether user has access to reopen bugs
  * @access public
  */
- function access_can_reopen_bug( $p_bug_id, $p_user_id = null ) {
-	if( !bug_is_resolved( $p_bug_id ) ) {
+function access_can_reopen_bug( $p_bug, $p_user_id = null ) {
+	if( !bug_is_resolved( $p_bug->id ) ) {
 		# Can't reopen a bug that's not resolved
 		return false;
 	}
@@ -552,31 +550,29 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
 		$p_user_id = auth_get_current_user_id();
 	}
 
-	$t_bug = bug_get( $p_bug_id );
-
 	# If allow_reporter_reopen is enabled, then reporters can always reopen their own bugs
-	if(    ON == config_get( 'allow_reporter_reopen', null, null, $t_bug->project_id )
-		&& bug_is_user_reporter( $p_bug_id, $p_user_id )
+	if(    ON == config_get( 'allow_reporter_reopen', null, null, $p_bug->project_id )
+		&& bug_is_user_reporter( $p_bug->id, $p_user_id )
 	) {
 		return true;
 	}
 
-	$t_reopen_status = config_get( 'reopen_bug_threshold', null, null, $t_bug->project_id );
-	$t_reopen_status_threshold = access_get_status_threshold( $t_reopen_status, $t_bug->project_id );
+	$t_reopen_status = config_get( 'reopen_bug_threshold', null, null, $p_bug->project_id );
+	$t_reopen_status_threshold = access_get_status_threshold( $t_reopen_status, $p_bug->project_id );
 
-	return access_has_bug_level( $t_reopen_status_threshold, $p_bug_id, $p_user_id );
+	return access_has_bug_level( $t_reopen_status_threshold, $p_bug->id, $p_user_id );
 }
 
 /**
  * Make sure that the user can reopen the specified bug.
  * Calls access_denied if user has no access to terminate script
  * @see access_can_reopen_bug
- * @param int $p_bug_id integer representing bug id to check access against
+ * @param BugData $p_bug Bug to check access against
  * @param int|null $p_user_id integer representing user id, defaults to null to use current user
  * @access public
  */
- function access_ensure_can_reopen_bug( $p_bug_id, $p_user_id = null ) {
-	if( !access_can_reopen_bug( $p_bug_id, $p_user_id ) ) {
+function access_ensure_can_reopen_bug( $p_bug, $p_user_id = null ) {
+	if( !access_can_reopen_bug( $p_bug, $p_user_id ) ) {
 		access_denied();
 	}
 }

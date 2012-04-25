@@ -401,7 +401,7 @@ if ( $tpl_show_status || $tpl_show_resolution ) {
 
 		echo '<td class="' . $status_label .  '">';
 		print_status_option_list( 'status', $tpl_bug->status,
-			access_can_close_bug( $tpl_bug->id ),
+			access_can_close_bug( $tpl_bug ),
 			$tpl_bug->project_id
 		);
 		echo '</td>';
