@@ -550,7 +550,14 @@
             <varlistentry>
                 <term>$g_email_send_using_cronjob</term>
                 <listitem>
-                    <para>TODO</para>
+                    <para>Disables sending of emails as soon as an action is performed.
+			Emails are instead queued and must be sent by running 
+			scripts/send_emails.php periodically. This script can only be
+			executed from the CLI, not from the web interface, for security
+			reasons.</para>
+		    <para>Enabling this option can help with performance problems if large 
+			numbers of emails are generated or mail delivery is slow by not
+			delaying page execution when sending emails.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
