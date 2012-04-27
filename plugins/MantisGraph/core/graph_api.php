@@ -492,7 +492,8 @@ function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p
 
 		$graph->xAxis->labelCallback =  'graph_date_format';
 		$graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
-		$graph->xAxis->axisLabelRenderer->angle = -45;
+		$graph->xAxis->axisLabelRenderer->angle = -60;
+		$graph->xAxis->axisSpace = .15;
 
 		$graph->legend->position      = ezcGraph::BOTTOM;
 		$graph->legend->background    = '#FFFFFF80';
@@ -503,6 +504,7 @@ function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p
 		$graph->driver->options->imageFormat = IMG_JPEG;
 
 		$graph->title = $p_title . ' ' . lang_get( 'by_date' );
+		$graph->title->maxHeight = .03;
 		$graph->options->font = $t_graph_font ;
 
 		$graph->renderToOutput( $p_graph_width, $p_graph_height);
