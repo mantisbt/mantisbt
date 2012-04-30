@@ -752,7 +752,7 @@ function create_category_summary() {
 
 	$query = "SELECT id, name
 				FROM $t_cat_table
-				WHERE $specific_where
+				WHERE $specific_where or project_id=" . ALL_PROJECTS . "
 				ORDER BY name";
 	$result = db_query_bound( $query );
 	$category_count = db_num_rows( $result );
@@ -769,7 +769,8 @@ function create_category_summary() {
 		if ( isset($t_metrics[$t_cat_name]) ) {
 			$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + db_result( $result2, 0, 0 );
 		} else {
-			$t_metrics[$t_cat_name] = db_result( $result2, 0, 0 );
+      if (db_result( $result2, 0, 0 ) > 0)
+					$t_metrics[$t_cat_name] = db_result( $result2, 0, 0 );
 		}
 	}
 
