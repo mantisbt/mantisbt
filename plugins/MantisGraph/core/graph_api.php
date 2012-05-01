@@ -752,7 +752,7 @@ function create_category_summary() {
 
 	$query = "SELECT id, name
 				FROM $t_cat_table
-				WHERE $specific_where or project_id=" . ALL_PROJECTS . "
+				WHERE $specific_where OR project_id=" . ALL_PROJECTS . "
 				ORDER BY name";
 	$result = db_query_bound( $query );
 	$category_count = db_num_rows( $result );
