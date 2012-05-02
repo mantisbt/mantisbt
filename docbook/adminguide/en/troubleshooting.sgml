@@ -29,6 +29,20 @@
 			This can be done either globally in config_inc.php, or via the Manage Configuration
 			page (globally or per project).
 			</para>
+
+			<para>Note: to retrieve the category ID, you can either
+				<itemizedlist>
+					<listitem><para>Look up the value directly in the database:
+						mantis_category_table, column 'id'
+						</para>
+					</listitem>
+					<listitem><para>Go to Manage Projects, click the
+						<emphasis>Edit</emphasis> button for the desired category
+						and look for the the value next to 'id=' in the page's URL
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
 		</section>
 
 		<section id="admin.troubleshooting.errors.2800">
