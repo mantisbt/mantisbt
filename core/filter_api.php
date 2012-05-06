@@ -3369,7 +3369,6 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	<div class="submit-query"><input type="submit" name="filter" value="<?php echo lang_get( 'filter_button' )?>" /></div>
 	</form>
 	<?php
-	$t_stored_queries_arr = array();
 	$t_stored_queries_arr = filter_db_get_available_queries();
 
 	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) { ?>

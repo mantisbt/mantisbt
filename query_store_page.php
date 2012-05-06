@@ -57,7 +57,7 @@ compress_enable();
 html_page_top();
 ?>
 <br />
-<div>
+<div id="save-filter">
 <?php
 $t_query_to_store = filter_db_get_filter( gpc_get_cookie( config_get( 'view_all_cookie' ), '' ) );
 $t_query_arr = filter_db_get_available_queries();
@@ -88,7 +88,7 @@ if ( access_has_project_level( config_get( 'stored_query_create_shared_threshold
 	print '<br />';
 }
 ?>
-<input type="checkbox" name="all_projects" value="on" <?php check_checked( ALL_PROJECTS == helper_get_current_project() ) ?> >
+<input type="checkbox" name="all_projects" value="on" <?php check_checked( ALL_PROJECTS == helper_get_current_project() ) ?> />
 <?php print lang_get( 'all_projects' ); ?><br /><br />
 <input type="submit" class="button" value="<?php print lang_get( 'save_query' ); ?>" />
 </form>
