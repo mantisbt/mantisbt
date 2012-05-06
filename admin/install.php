@@ -815,17 +815,18 @@ if( 5 == $t_install_state ) {
 
 	$t_config .= "\n";
 
-    /* Automatically generate a strong master salt/nonce for MantisBT
-     * cryptographic purposes. If a strong source of randomness is not
-     * available the user will have to manually set this value post
-     * installation.
-     */
-    $t_crypto_master_salt = crypto_generate_random_string(32);
-    if ($t_crypto_master_salt !== null) {
-    	$t_config .= "\t\$g_crypto_master_salt = '$t_crypto_master_salt';\n";
-    }
+	/* Automatically generate a strong master salt/nonce for MantisBT
+	 * cryptographic purposes. If a strong source of randomness is not
+	 * available the user will have to manually set this value post
+	 * installation.
+	 */
+	$t_crypto_master_salt_raw = crypto_generate_random_string(32);
+	if ( $t_crypto_master_salt_raw !== null ) {
+		$t_crypto_master_salt = base64_encode( $t_crypto_master_salt_raw );
+		$t_config .= "\t\$g_crypto_master_salt = '$t_crypto_master_salt';\n";
+	}
 
-    $t_write_failed = true;
+	$t_write_failed = true;
 
 	if( !$t_config_exists ) {
 		if( $fd = @fopen( $t_config_filename, 'w' ) ) {
