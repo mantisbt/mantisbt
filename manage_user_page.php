@@ -67,24 +67,27 @@
 		gpc_set_cookie( $t_cookie_name, $t_manage_string, true );
 	} else if ( !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
 		$t_manage_arr = explode( ':', gpc_get_cookie( $t_cookie_name ) );
-		$f_hide_inactive = $t_manage_arr[0];
 
+		# Hide Inactive
+		$c_hide_inactive = $t_manage_arr[0];
+
+		# Sort field
 		if ( isset( $t_manage_arr[1] ) ) {
-			$f_sort = $t_manage_arr[1];
+			$c_sort = $t_manage_arr[1];
 		} else {
-			$f_sort = 'username';
+			$c_sort = 'username';
 		}
 
+		# Sort order
 		if ( isset( $t_manage_arr[2] ) ) {
-			$f_dir  = $t_manage_arr[2];
+			$c_dir  = $t_manage_arr[2];
 		} else {
-			$f_dir = 'DESC';
+			$c_dir = 'DESC';
 		}
 
+		# Show Disabled
 		if ( isset( $t_manage_arr[3] ) ) {
-			$f_hide_inactive = $t_manage_arr[3];
-		} else {
-			$f_hide_inactive = $c_hide_inactive;
+			$c_show_disabled = $t_manage_arr[3];
 		}
 	}
 
