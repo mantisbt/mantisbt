@@ -43,10 +43,10 @@ table				{ border: none; }
 table td, table th	{ border: none; border-spacing: 0px; }
 table.hide			{ width: 100%; border: solid 0px #ffffff; }
 table.width100		{ width: 100%; border: solid 1px #000000; }
-table.width90		{ width: 90%;  border: solid 1px #000000; }
-table.width75		{ width: 75%;  border: solid 1px #000000; }
-table.width60		{ width: 60%;  border: solid 1px #000000; }
-table.width50		{ width: 50%;  border: solid 1px #000000; }
+table.width90		{ width: 90%;  margin-left: 5%; margin-right: 5%; border: solid 1px #000000; }
+table.width75		{ width: 74%;  margin-left: 13%; margin-right: 13%; border: solid 1px #000000; }
+table.width60		{ width: 60%;  margin-left: 20%; margin-right: 20%; border: solid 1px #000000; }
+table.width50		{ width: 50%;  margin-left: 25%; margin-right: 25%; border: solid 1px #000000; }
 
 td,th 				{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; padding: 4px; text-align: left; }
 td.center			{ text-align: center; }
@@ -602,3 +602,4 @@ ul.project-list li span.access-level, ul.project-list li span.view-state { displ
 tr.bugnote-private td.bugnote-meta { background-color: #e8e8e8; }
 
 div#mantis.centered_page div#banner { text-align: center; }
+
