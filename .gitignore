@@ -29,6 +29,7 @@ plugins/*
 .cache
 .project
 .settings
+.idea/
 *.kdev4
 
 # IIS7 
