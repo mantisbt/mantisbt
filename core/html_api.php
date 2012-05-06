@@ -447,8 +447,15 @@ function html_head_end() {
  * @return null
  */
 function html_body_begin() {
-	echo '<body>', "\n";
-	echo '<div id="mantis">', "\n";
+    $t_centered_page = is_page_name( 'login_page' ) || is_page_name( 'signup_page' ) || is_page_name( 'signup' ) || is_page_name( 'lost_pwd_page' );
+
+    echo '<body>', "\n";
+
+    if ( $t_centered_page ) {
+        echo '<div id="mantis" class="centered_page">', "\n";
+    } else {
+        echo '<div id="mantis">', "\n";
+    }
 
 	event_signal( 'EVENT_LAYOUT_BODY_BEGIN' );
 }

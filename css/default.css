@@ -599,3 +599,5 @@ ul.project-list li span.access-level, ul.project-list li span.view-state { displ
 }
 
 tr.bugnote-private td.bugnote-meta { background-color: #e8e8e8; }
+
+div#mantis.centered_page div#banner { text-align: center; }
