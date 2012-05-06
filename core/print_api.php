@@ -1237,7 +1237,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 	}
 }
 
-function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide = 0, $p_filter = ALL, $p_show_disabled = 0 ) {
+function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide_inactive = 0, $p_filter = ALL, $p_show_disabled = 0 ) {
 	if( $p_sort_by == $p_field ) {
 
 		# If this is the selected field flip the order
@@ -1252,7 +1252,7 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 	}
 
 	$t_field = rawurlencode( $p_field );
-	print_link( "$p_page?sort=$t_field&dir=$t_dir&save=1&hide=$p_hide&showdisabled=$p_show_disabled&filter=$p_filter", $p_string );
+	print_link( "$p_page?sort=$t_field&dir=$t_dir&save=1&hideinactive=$p_hide_inactive&showdisabled=$p_show_disabled&filter=$p_filter", $p_string );
 }
 
 function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by ) {

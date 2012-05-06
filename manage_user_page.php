@@ -31,13 +31,13 @@
 
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-	$f_sort	= gpc_get_string( 'sort', 'username' );
-	$f_dir	= gpc_get_string( 'dir', 'ASC' );
-	$f_hide = gpc_get_bool( 'hide' );
+	$f_sort          = gpc_get_string( 'sort', 'username' );
+	$f_dir           = gpc_get_string( 'dir', 'ASC' );
+	$f_hide_inactive = gpc_get_bool( 'hideinactive' );
 	$f_show_disabled = gpc_get_bool( 'showdisabled' );
-	$f_save = gpc_get_bool( 'save' );
-	$f_filter = utf8_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
-	$f_page_number		= gpc_get_int( 'page_number', 1 );
+	$f_save          = gpc_get_bool( 'save' );
+	$f_filter        = utf8_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
+	$f_page_number   = gpc_get_int( 'page_number', 1 );
 
 	$t_user_table = db_get_table( 'mantis_user_table' );
 	$t_cookie_name = config_get( 'manage_cookie' );
@@ -48,33 +48,26 @@
 	if ( !db_field_exists( $f_sort, $t_user_table ) ) {
 		$c_sort = 'username';
 	} else {
-		$c_sort = addslashes($f_sort);
+		$c_sort = addslashes( $f_sort );
 	}
 
-	if ($f_dir == 'ASC') {
-		$c_dir = 'ASC';
-	} else {
-		$c_dir = 'DESC';
-	}
+	$c_dir = ( $f_dir == 'ASC' ) ? 'ASC' : 'DESC';
 
-	if ($f_hide == 0) { # a 0 will turn it off
-		$c_hide = 0;
-	} else {            # anything else (including 'on') will turn it on
-		$c_hide = 1;
-	}
-	$t_hide_filter = '&hide=' . $c_hide;
+	# 0 = show inactive users, anything else = hide them
+	$c_hide_inactive = ( $f_hide_inactive == 0 ) ? 0 : 1;
+	$t_hide_inactive_filter = '&hideinactive=' . $c_hide_inactive;
 
 	# 0 = hide disabled users, anything else = show them
 	$c_show_disabled = ( $f_show_disabled == 0 ) ? 0 : 1;
 	$t_show_disabled_filter = '&showdisabled=' . $c_show_disabled;
 
-	# set cookie values for hide, sort by, and dir
+	# set cookie values for hide inactive, sort by, dir and show disabled
 	if ( $f_save ) {
-		$t_manage_string = $c_hide.':'.$c_sort.':'.$c_dir.':'.$c_show_disabled;
+		$t_manage_string = $c_hide_inactive.':'.$c_sort.':'.$c_dir.':'.$c_show_disabled;
 		gpc_set_cookie( $t_cookie_name, $t_manage_string, true );
 	} else if ( !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
 		$t_manage_arr = explode( ':', gpc_get_cookie( $t_cookie_name ) );
-		$f_hide = $t_manage_arr[0];
+		$f_hide_inactive = $t_manage_arr[0];
 
 		if ( isset( $t_manage_arr[1] ) ) {
 			$f_sort = $t_manage_arr[1];
@@ -87,10 +80,11 @@
 		} else {
 			$f_dir = 'DESC';
 		}
+
 		if ( isset( $t_manage_arr[3] ) ) {
-			$f_show_disabled = $t_manage_arr[3];
+			$f_hide_inactive = $t_manage_arr[3];
 		} else {
-			$f_show_disabled = $c_show_disabled;
+			$f_hide_inactive = $c_hide_inactive;
 		}
 	}
 
@@ -142,7 +136,11 @@
 			$c_filter = $f_filter;
 			echo "<strong>$t_caption</strong>";
 		} else {
-			print_link( "manage_user_page.php?sort=$c_sort&dir=$c_dir&save=1$t_hide_filter$t_show_disabled_filter&filter=$t_prefix", $t_caption );
+			print_manage_user_sort_link( 'manage_user_page.php',
+				$t_caption,
+				$c_sort,
+				$c_dir, null, $c_hide_inactive, $t_prefix, $c_show_disabled
+			);
 		}
 
 		if ( $t_prefix === 'UNUSED' ) {
@@ -177,7 +175,7 @@
 
 	$t_show_disabled_cond = ( 1 == $c_show_disabled ? '' : ' AND enabled = 1' );
 
-	if ( 0 == $c_hide ) {
+	if ( 0 == $c_hide_inactive ) {
 		$query = "SELECT count(*) as usercnt
 				FROM $t_user_table
 				WHERE $t_where
@@ -211,7 +209,7 @@
 	}
 
 
-	if ( 0 == $c_hide ) {
+	if ( 0 == $c_hide_inactive ) {
 		$query = "SELECT *
 				FROM $t_user_table
 				WHERE $t_where
@@ -245,62 +243,34 @@
 		<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
 		<input type="hidden" name="save" value="1" />
 		<input type="hidden" name="filter" value="<?php echo $c_filter ?>" />
-		<input type="checkbox" name="hide" value="1" <?php check_checked( $c_hide, 1 ); ?> /> <?php echo lang_get( 'hide_inactive' ) ?>
+		<input type="checkbox" name="hideinactive" value="1" <?php check_checked( $c_hide_inactive, 1 ); ?> /> <?php echo lang_get( 'hide_inactive' ) ?>
 		<input type="checkbox" name="showdisabled" value="1" <?php check_checked( $c_show_disabled, 1 ); ?> /> <?php echo lang_get( 'show_disabled' ) ?>
 		<input type="submit" class="button" value="<?php echo lang_get( 'filter_button' ) ?>" />
 		</form>
 	</td>
 </tr>
+
 <tr class="row-category">
-	<td>
-		<?php
-			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'username' ), 'username', $c_dir, $c_sort, $c_hide, $c_filter, $c_show_disabled );
-			print_sort_icon( $c_dir, $c_sort, 'username' );
-		?>
-	</td>
-	<td>
-		<?php
-			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'realname' ), 'realname', $c_dir, $c_sort, $c_hide, $c_filter, $c_show_disabled );
-			print_sort_icon( $c_dir, $c_sort, 'realname' );
-		?>
-	</td>
-	<td>
-		<?php
-			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'email' ), 'email', $c_dir, $c_sort, $c_hide, $c_filter, $c_show_disabled );
-			print_sort_icon( $c_dir, $c_sort, 'email' );
-		?>
-	</td>
-	<td>
-		<?php
-			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'access_level' ), 'access_level', $c_dir, $c_sort, $c_hide, $c_filter, $c_show_disabled );
-			print_sort_icon( $c_dir, $c_sort, 'access_level' );
-		?>
-	</td>
-	<td>
-		<?php
-			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'enabled' ), 'enabled', $c_dir, $c_sort, $c_hide, $c_filter, $c_show_disabled );
-			print_sort_icon( $c_dir, $c_sort, 'enabled' );
-		?>
-	</td>
-	<td>
-		<?php
-			print_manage_user_sort_link(  'manage_user_page.php', $t_lock_image, 'protected', $c_dir, $c_sort, $c_hide, $c_filter, $c_show_disabled );
-			print_sort_icon( $c_dir, $c_sort, 'protected' );
-		?>
-	</td>
-	<td>
-		<?php
-			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'date_created' ), 'date_created', $c_dir, $c_sort, $c_hide, $c_filter, $c_show_disabled );
-			print_sort_icon( $c_dir, $c_sort, 'date_created' );
-		?>
-	</td>
-	<td>
-		<?php
-			print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'last_visit' ), 'last_visit', $c_dir, $c_sort, $c_hide, $c_filter, $c_show_disabled );
-			print_sort_icon( $c_dir, $c_sort, 'last_visit' );
-		?>
-	</td>
+<?php
+	# Print column headers with sort links
+	$t_columns = array(
+		'username', 'realname', 'email', 'access_level',
+		'enabled', 'protected', 'date_created', 'last_visit'
+	);
+
+	foreach( $t_columns as $t_col ) {
+		echo "\t<td>";
+		print_manage_user_sort_link( 'manage_user_page.php',
+			lang_get( $t_col ),
+			$t_col,
+			$c_dir, $c_sort, $c_hide_inactive, $c_filter, $c_show_disabled
+		);
+		print_sort_icon( $c_dir, $c_sort, $t_col );
+		echo "</td>\n";
+	}
+?>
 </tr>
+
 <?php
 	$t_date_format = config_get( 'normal_date_format' );
 	$t_access_level = Array();
@@ -331,16 +301,16 @@
 	<td><?php echo string_display_line( $u_realname ) ?></td>
 	<td><?php print_email_link( $u_email, $u_email ) ?></td>
 	<td><?php echo $t_access_level[$u_access_level] ?></td>
-	<td><?php echo trans_bool( $u_enabled ) ?></td>
+	<td class="center"><?php echo trans_bool( $u_enabled ) ?></td>
 	<td class="center">
-          <?php
+		<?php
 		if ( $u_protected ) {
 			echo " $t_lock_image";
 		} else {
 			echo '&#160;';
 		}
-          ?>
-        </td>
+		  ?>
+		</td>
 	<td><?php echo $u_date_created ?></td>
 	<td><?php echo $u_last_visit ?></td>
 </tr>
@@ -353,9 +323,10 @@
 		<td class="right" colspan="8">
 			<span class="small">
 				<?php
-					/* @todo hack - pass in the hide inactive filter via cheating the actual filter value */
+					/* @todo hack - pass in the page filter via cheating the actual filter value */
 					print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number,
-						$c_filter . $t_hide_filter . $t_show_disabled_filter . "&sort=$c_sort&dir=$c_dir" );
+						$c_filter . $t_hide_inactive_filter . $t_show_disabled_filter . "&sort=$c_sort&dir=$c_dir"
+					);
 				?>
 			</span>
 		</td>
