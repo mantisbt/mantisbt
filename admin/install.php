@@ -813,7 +813,12 @@ if( 5 == $t_install_state ) {
 	}
 
 	$t_config .= "\r\n";
-	$t_write_failed = true;
+
+    # generate a crypto salt based on time of installation.
+    $t_crypto_master_salt = md5((string)time());
+    $t_config .= "\t\$g_crypto_master_salt = '$t_crypto_master_salt';\r\n";
+
+    $t_write_failed = true;
 
 	if( !$t_config_exists ) {
 		if( $fd = @fopen( $t_config_filename, 'w' ) ) {
