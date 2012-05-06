@@ -67,14 +67,6 @@ form_security_purge('manage_custom_field_create');
 
 html_page_top( null, $t_redirect_url );
 
-echo '<br />';
-echo '<div>';
-
-echo lang_get( 'operation_successful' ) . '<br />';
-
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-
-echo '</div>';
+html_operation_successful( $t_redirect_url );
 
 html_page_bottom();
-

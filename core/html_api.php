@@ -588,6 +588,22 @@ function html_bottom_banner() {
 }
 
 /**
+ * A function that outputs that an operation was successful and provides a redirect link.
+ * @param $p_redirect_url  The url to redirect to.
+ */
+function html_operation_successful( $p_redirect_url, $p_message = '' ) {
+    echo '<div class="success-msg">';
+
+    if ( !is_blank( $p_message ) ) {
+        echo $p_message . '<br />';
+    }
+
+    echo lang_get( 'operation_successful' ).'<br />';
+    print_bracket_link( $p_redirect_url, lang_get( 'proceed' ) );
+    echo '</div>';
+}
+
+/**
  * (13) Print the page footer information
  * @param string $p_file
  * @return null

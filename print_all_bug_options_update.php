@@ -94,15 +94,13 @@ form_security_purge( 'print_all_bug_options_update' );
 
 html_page_top( null, $f_redirect_url );
 
-echo '<br /><div>';
-
 if ( $result ) {
-	print lang_get( 'operation_successful' );
+    html_operation_successful( $f_redirect_url );
 } else {
-	print error_string( ERROR_GENERIC );
+    echo '<div class="failure-msg">';
+    print error_string( ERROR_GENERIC ) . '<br />';
+    print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
+    echo '</div>';
 }
 
-echo '<br />';
-print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
-echo '<br /></div>';
 html_page_bottom();

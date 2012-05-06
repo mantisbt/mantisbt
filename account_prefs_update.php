@@ -134,11 +134,6 @@ form_security_purge( 'account_prefs_update' );
 
 html_page_top( null, $f_redirect_url );
 
-echo '<br /><div>';
+html_operation_successful( $f_redirect_url );
 
-echo lang_get( 'operation_successful' );
-
-echo '<br />';
-print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
-echo '<br /></div>';
 html_page_bottom();

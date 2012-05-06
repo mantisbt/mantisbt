@@ -75,15 +75,7 @@ custom_field_destroy( $f_field_id );
 form_security_purge('manage_custom_field_delete');
 
 html_page_top( null, $f_return );
-?>
 
-<br />
-<div>
-<?php
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( $f_return, lang_get( 'proceed' ) );
-?>
-</div>
+html_operation_successful( $f_return );
 
-<?php
 html_page_bottom();

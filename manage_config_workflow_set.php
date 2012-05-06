@@ -145,15 +145,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 }
 
 form_security_purge( 'manage_config_workflow_set' );
-?>
 
-<br />
-<div>
-<?php
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-?>
-</div>
+html_operation_successful( $t_redirect_url );
 
-<?php
 html_page_bottom();

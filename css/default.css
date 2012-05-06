@@ -555,12 +555,14 @@ div.form-container .input,
 	width: 65%;
 }
 div.success-msg,
+div.failure-msg,
 div.important-msg {
 	display: block;
 	width: 60%;
 	margin: 2em auto;
 }
-div.success-msg {
+div.success-msg,
+div.failure-msg {
 	text-align: center;
 }
 div.important-msg {
@@ -568,7 +570,7 @@ div.important-msg {
 	border: 1px solid red;
 	background-color: #fceded;
 }
-div.important-msg ul, .success-msg {
+div.important-msg ul, .success-msg, .failure-msg {
 	margin: 0em;
 	padding: 2em 2em 2em 4em;
 }

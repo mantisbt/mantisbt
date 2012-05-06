@@ -96,14 +96,7 @@ form_security_purge( 'bug_file_add' );
 $t_redirect_url = string_get_bug_view_url( $f_bug_id );
 
 html_page_top( null, $t_redirect_url );
-?>
-<br />
-<div>
-<?php
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-?>
-</div>
 
-<?php
+html_operation_successful( $t_redirect_url );
+
 html_page_bottom();

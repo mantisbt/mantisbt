@@ -73,7 +73,7 @@ $f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 // admins / managers to change details of other users.
 $t_user_id = auth_get_current_user_id();
 
-$t_redirect = 'account_page.php';
+$t_redirect_url = 'account_page.php';
 
 /** @todo Listing what fields were updated is not standard behaviour of MantisBT - it also complicates the code. */
 $t_email_updated = false;
@@ -121,23 +121,24 @@ if ( !is_blank( $f_password ) ) {
 
 form_security_purge('account_update');
 
-html_page_top( null, $t_redirect );
+html_page_top( null, $t_redirect_url );
 
-echo '<br /><div>';
+$t_message = '';
 
 if ( $t_email_updated ) {
-	echo lang_get( 'email_updated' ) . '<br />';
+    $t_message .= lang_get( 'email_updated' );
 }
 
 if ( $t_password_updated ) {
-	echo lang_get( 'password_updated' ) . '<br />';
+    $t_message = is_blank( $t_message ) ? '' : $t_message . '<br />';
+    $t_message .= lang_get( 'password_updated' );
 }
 
 if ( $t_realname_updated ) {
-	echo lang_get( 'realname_updated' ) . '<br />';
+    $t_message = is_blank( $t_message ) ? '' : $t_message . '<br />';
+    $t_message .= lang_get( 'realname_updated' );
 }
 
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
-echo '</div>';
+html_operation_successful( $t_redirect_url, $t_message );
+
 html_page_bottom();

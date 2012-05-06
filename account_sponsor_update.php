@@ -82,14 +82,9 @@ foreach ( $t_bug_list as $t_bug ) {
 
 form_security_purge( 'account_sponsor_update' );
 
-$t_redirect = 'account_sponsor_page.php';
-html_page_top( null, $t_redirect );
+$t_redirect_url = 'account_sponsor_page.php';
+html_page_top( null, $t_redirect_url );
 
-echo '<br /><div>';
+html_operation_successful( $t_redirect_url, lang_get( 'payment_updated' ) );
 
-echo lang_get( 'payment_updated' ) . '<br />';
-
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
-echo '</div>';
 html_page_bottom();

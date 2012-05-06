@@ -78,13 +78,6 @@ form_security_purge('manage_custom_field_update');
 
 html_page_top( null, $f_return );
 
-echo '<br />';
-echo '<div>';
-
-echo lang_get( 'operation_successful' ) . '<br />';
-
-print_bracket_link( $f_return, lang_get( 'proceed' ) );
-
-echo '</div>';
+html_operation_successful( $f_return );
 
 html_page_bottom();

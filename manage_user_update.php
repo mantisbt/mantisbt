@@ -210,20 +210,14 @@ $t_redirect_url = 'manage_user_edit_page.php?user_id=' . $c_user_id;
 form_security_purge('manage_user_update');
 
 html_page_top( null, $result ? $t_redirect_url : null );
-?>
 
-<br />
-<div>
-<?php
 if ( $f_protected && $t_old_protected ) {				# PROTECTED
-	echo lang_get( 'manage_user_protected_msg' ) . '<br />';
+    echo '<div class="failure-msg">';
+    echo lang_get( 'manage_user_protected_msg' ) . '<br />';
+    print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+    echo '</div>';
 } else if ( $result ) {					# SUCCESS
-	echo lang_get( 'operation_successful' ) . '<br />';
+    html_operation_successful( $t_redirect_url );
 }
 
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-?>
-</div>
-
-<?php
 html_page_bottom();

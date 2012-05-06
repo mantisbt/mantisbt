@@ -92,16 +92,7 @@ form_security_purge( 'manage_proj_create' );
 $t_redirect_url = 'manage_proj_page.php';
 
 html_page_top( null, $t_redirect_url );
-?>
 
-<br />
-<div>
-<?php
-echo lang_get( 'operation_successful' ) . '<br />';
+html_operation_successful( $t_redirect_url );
 
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-?>
-</div>
-
-<?php
 html_page_bottom();

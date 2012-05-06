@@ -85,15 +85,14 @@ $t_redirect_url = 'print_all_bug_options_page.php';
 
 html_page_top( null, $t_redirect_url );
 
-echo '<br /><div>';
 
 if ( $result ) {
-	print lang_get( 'operation_successful' );
+    html_operation_successful( $t_redirect_url );
 } else {
-	print error_string( ERROR_GENERIC );
+    echo '<div class="failure-msg">';
+    echo error_string( ERROR_GENERIC ) . '<br />';
+    print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+    echo '</div>';
 }
 
-echo '<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-echo '<br /></div>';
 html_page_bottom();

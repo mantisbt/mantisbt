@@ -177,15 +177,7 @@ set_capability_row( 'view_history_threshold' );
 set_capability_row( 'bug_reminder_threshold' );
 
 form_security_purge( 'manage_config_work_threshold_set' );
-?>
 
-<br />
-<div>
-<?php
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-?>
-</div>
+html_operation_successful( $t_redirect_url );
 
-<?php
 html_page_bottom();

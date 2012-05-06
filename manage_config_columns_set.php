@@ -126,14 +126,7 @@ form_security_purge( 'manage_config_columns_set' );
 
 $t_redirect_url = $f_form_page === 'account' ? 'account_manage_columns_page.php' : 'manage_config_columns_page.php';
 html_page_top( null, $t_redirect_url );
-?>
-<div>
-	<br />
-	<?php
-		echo lang_get( 'operation_successful' ) . '<br />';
-		print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-	?>
-</div>
 
-<?php
+html_operation_successful( $t_redirect_url );
+
 html_page_bottom();

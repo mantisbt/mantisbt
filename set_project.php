@@ -125,16 +125,7 @@ html_page_top1();
 html_meta_redirect( $t_redirect_url );
 
 html_page_top1();
-?>
 
-<br />
-<div>
-<?php
-echo lang_get( 'operation_successful' ).'<br />';
+html_operation_successful( $t_redirect_url );
 
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-?>
-</div>
-
-<?php
 html_page_bottom();
