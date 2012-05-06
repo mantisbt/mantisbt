@@ -597,3 +597,5 @@ ul.project-list li span.access-level, ul.project-list li span.view-state { displ
 .tag-link {
 	margin: 0em .5em;
 }
+
+tr.bugnote-private td.bugnote-meta { background-color: #e8e8e8; }
