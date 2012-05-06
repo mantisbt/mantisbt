@@ -681,6 +681,7 @@ If you requested this verification, visit the following URL to change your passw
 	'never_logged_in_title' => 'Never Logged In',
 	'prune_accounts' => 'Prune Accounts',
 	'hide_inactive' => 'Hide Inactive',
+	'show_disabled' => 'Show Disabled',
 	'manage_accounts_title' => 'Manage Accounts',
 	'p' => 'p',
 	'date_created' => 'Date Created',
