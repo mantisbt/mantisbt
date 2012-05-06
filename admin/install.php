@@ -33,6 +33,7 @@ define( 'MANTIS_MAINTENANCE_MODE', true );
 
 @require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 require_api( 'install_helper_functions_api.php' );
+require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # bypass page headers in error handler
 
 $g_failed = false;
@@ -712,7 +713,7 @@ if( 3 == $t_install_state ) {
 			if( $f_log_queries ) {
 				if( $t_sql ) {
 					foreach( $sqlarray as $sql ) {
-						echo htmlentities( $sql ) . ";\r\n\r\n";
+						echo htmlentities( $sql ) . ";\n\n";
 					}
 				}
 			} else {
@@ -741,7 +742,7 @@ if( 3 == $t_install_state ) {
 		}
 		if( $f_log_queries ) {
 			# add a query to set the database version
-			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . "\r\n";
+			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . "\n";
 			echo '</pre><br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</p></td></tr>';
 		}
 	}
@@ -801,22 +802,28 @@ if( 5 == $t_install_state ) {
 	?>
 	</td>
 	<?php
-		$t_config = '<?php' . "\r\n";
-	$t_config .= "\t\$g_hostname = '$f_hostname';\r\n";
-	$t_config .= "\t\$g_db_type = '$f_db_type';\r\n";
-	$t_config .= "\t\$g_database_name = '$f_database_name';\r\n";
-	$t_config .= "\t\$g_db_username = '$f_db_username';\r\n";
-	$t_config .= "\t\$g_db_password = '$f_db_password';\r\n";
+	$t_config = '<?php' . "\n";
+	$t_config .= "\t\$g_hostname = '$f_hostname';\n";
+	$t_config .= "\t\$g_db_type = '$f_db_type';\n";
+	$t_config .= "\t\$g_database_name = '$f_database_name';\n";
+	$t_config .= "\t\$g_db_username = '$f_db_username';\n";
+	$t_config .= "\t\$g_db_password = '$f_db_password';\n";
 
 	if( $f_db_type == 'db2' ) {
-		$t_config .= "\t\$g_db_schema = '$f_db_schema';\r\n";
+		$t_config .= "\t\$g_db_schema = '$f_db_schema';\n";
 	}
 
-	$t_config .= "\r\n";
+	$t_config .= "\n";
 
-    # generate a crypto salt based on time of installation.
-    $t_crypto_master_salt = md5((string)time());
-    $t_config .= "\t\$g_crypto_master_salt = '$t_crypto_master_salt';\r\n";
+    /* Automatically generate a strong master salt/nonce for MantisBT
+     * cryptographic purposes. If a strong source of randomness is not
+     * available the user will have to manually set this value post
+     * installation.
+     */
+    $t_crypto_master_salt = crypto_generate_random_string(32);
+    if ($t_crypto_master_salt !== null) {
+    	$t_config .= "\t\$g_crypto_master_salt = '$t_crypto_master_salt';\n";
+    }
 
     $t_write_failed = true;
 
