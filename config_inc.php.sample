@@ -69,7 +69,7 @@ $g_disallowed_files		= '';		# extensions comma separated
 
 # --- Branding ---
 $g_window_title			= 'MantisBT';
-$g_logo_image			= 'images/mantis_logo.gif';
+$g_logo_image			= 'images/mantis_logo_232x80.png';
 $g_favicon_image		= 'images/favicon.ico';
 
 # --- Real names ---
