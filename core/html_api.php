@@ -639,7 +639,7 @@ function html_footer( $p_file = null ) {
 		$t_mantisbt_logo_url = helper_mantis_url( 'images/mantis_logo.png' );
 		echo "\t\t<a href=\"http://www.mantisbt.org\" ".
 			"title=\"Mantis Bug Tracker: a free and open source web based bug tracking system.\">" .
-			"<img src=\"$t_mantisbt_logo_url\" width=\"145\" height=\"50\" " .
+			"<img src=\"$t_mantisbt_logo_url\" width=\"102\" height=\"35\" " .
 				"alt=\"Powered by Mantis Bug Tracker: a free and open source web based bug tracking system.\" />" .
 			"</a>\n";
 		echo "\t</div>\n";
