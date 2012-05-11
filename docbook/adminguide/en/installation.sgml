@@ -33,7 +33,7 @@
 
         <orderedlist>
             <listitem>
-                <para>Tranfer files</para>
+                <para>Transfer files</para>
             </listitem>
             <listitem>
                 <para>Uncompress files</para>
@@ -62,30 +62,35 @@
 
             <orderedlist>
                 <listitem>
-                    <para>First, transfer the file to your webserver using whatever
-                        method you likebest (ftp, scp, etc). You will need to telnet/ssh
-                        into the server machine forthe next steps.
+					<para>First, transfer the downloaded file to your webserver
+						using whatever method you like best (ftp, scp, etc). You
+						will need to telnet/ssh into the server machine for the
+						next steps.
                     </para>
                 </listitem>
                 <listitem>
                     <para>Next, untar/gunzip it to the directory that you want.The
                         usual command is (1 step):
-                        tar zxvf &lt;filename.tar.gz&gt;
+						<programlisting>tar -xzf <emphasis>filename.tar.gz</emphasis></programlisting>
                         OR (2 steps):
-                        gunzip &lt;filename.tar.gz&gt; tar xvf &lt;filename.tar&gt;
+						<programlisting>
+gunzip <emphasis>filename.tar.gz</emphasis>
+tar -xf <emphasis>filename.tar</emphasis>
+</programlisting>
                         Winzip, Stuffit, and other programs should also be able to
-                        handledecompression of the archive.At this point you may want to
+                        handle decompression of the archive. At this point you may want to
                         rename the directory to something simpler like 'mantisbt'. You will
                         use the mv command to rename a directory (Windows users substitute
                         the "ren" command or use explorer).
-                        mv &lt;directoryname&gt; mantisbt
+						<programlisting>mv <emphasis>directoryname</emphasis> mantisbt</programlisting>
                     </para>
                 </listitem>
                 <listitem>
-                    <para>Next we will create the necessary database tables and a
-                        basic configurationfile.From your web server, access
-                        http://yoursite/mantisbt/admin/install.php.  This page will walk through
-                        the following steps:
+					<para>Next we will create the necessary database tables and a
+						basic configuration file. From your web browser, access
+					</para>
+					<programlisting>http://yoursite/mantisbt/admin/install.php</programlisting>
+					<para>This page will walk you through the following steps:
 
                         <orderedlist>
                             <listitem>
@@ -93,29 +98,28 @@
                             </listitem>
                             <listitem>
                                 <para>prompt for the database type and location, and a database
-                                    user/passwordpair. For installion, an administrative user/password
-                                    pair can also be provided. The operating user requires SELECT,
-                                    INSERT, UPDATE, and DELETE privileges. For installation, INDEX,
-                                    CREATE, ALTER, and DROP privileges arealso required.
+                                    user/password pair. For installation, a high-privileged account
+                                    can also be provided. If unspecified, the database user will be
+                                    used.
+                                    The database user requires SELECT, INSERT, UPDATE, and DELETE privileges.
+                                    For installation, additional INDEX, CREATE, ALTER, and DROP privileges
+                                    are also required.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>create the database and tables.
-                                    WARNING: A DEFAULT ADMINISTRATOR level account is created. The
-                                    account name and password are administrator / root.
-                                    Use this when you first login to MantisBT. Immediately go to Manage
-                                    and create at least one administrator level account. Immediately
-                                    after that DISABLE or DELETE the administrator account. You can
-                                    recreate it but you should delete the account to prevent the
-                                    cookie_string from being used to trick the package. It would be
-                                    even better to rename the account or delete it permanently.
-                                    REMEMBER: After setting up the package, REMOVE the default
-                                    administrator account.
+                                    WARNING: a default Administrator user account
+                                    is created at this stage, to allow the initial login
+                                    and setup of MantisBT.
+                                    The id and password are <emphasis>administrator / root</emphasis>.
+                                    You should immediately go to Manage Users,
+                                    and create another administrator level account,
+                                    then either DISABLE or DELETE the default one.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>write a basic "config_inc.php file to define the
-                                    database.
+                                    database connection parameters.
                                 </para>
                             </listitem>
                             <listitem>
@@ -129,28 +133,32 @@
                 </listitem>
                 <listitem>
                     <para>The next part involves configuring the installation to
-                        work with yourspecific setup.Open the file in an editor and add
-                        anyother values that are required. There aremany more that you can
-                        use to customize your MantisBT installation.
-                        See <link linkend="admin.config">Configuration</link> for
-                        in depth explanations.The file will overwrite the default values
-                        with those necessary for setup.You can load up admin/check.php to
-                        see if you set things up correctly.
+                        work with your specific setup. There are many options that
+                        you can set to customize your MantisBT installation. See
+                        <link linkend="admin.config">Configuration</link> for
+                        in depth explanations.
+                    </para>
+                    <para>Open the file <emphasis>config_inc.php</emphasis> in an
+                        editor and add any values that are required. These will
+                        override the default values.
+                    </para>
+                    <para>You can load up admin/check.php to validate if you set
+                        things up correctly.
                         NOTE: check.php sometimes reports the value of
-                        register_globalsincorrectly.
-                        Create a page with this line in it: &lt;? phpinfo() ?&gt;, save
-                        itwith a .php extension and load it up in your web browser. It
-                        will, among amultitude of other things, have the correct value of
-                        register_globals that youare using.
+                        <emphasis>register_globals</emphasis> incorrectly. To
+                        confirm the correct value,
+                        Create a page with this line in it:
+                        <programlisting>&lt;?php phpinfo(); ?&gt;</programlisting>
+                        save it with a .php extension and load it up in your web browser.
                     </para>
                 </listitem>
 
                 <listitem>
-                    <para>MantisBT now uses only .php files.If your webserver is
-                        configured for other extensions (.PHP3, .PHTML) then youwill have
-                        to have the administrator add support for .PHP files. This shouldbe
-                        a trivial modification.Documentation can be found at:
-                        http://www.php.net/manual/en/installation.php
+                    <para>MantisBT uses only <emphasis>.php</emphasis> files. If your webserver is
+                        configured for other extensions (.PHP3, .PHTML) then you will have
+                        to have the administrator add support for .PHP files. This should be
+                        a trivial modification. Further details can be found in the
+                        <ulink url="http://www.php.net/manual/en/installation.php">PHP documentation</ulink>
                     </para>
                 </listitem>
 
@@ -158,11 +166,12 @@
                     <para>Login to your bugtracker and go to the manage section.
                         Click on the projects link. You will need to ADD a new project. Then
                         EDIT the new project and remember to ADD at least one category.
-                        Otherwise you won't be able to add any issues. That should be
-                        it. You're off and running.
+                        Otherwise you won't be able to add any issues.
                     </para>
                 </listitem>
             </orderedlist>
+            <para>That should be it. You're off and running.
+            </para>
 
         </section>
 
