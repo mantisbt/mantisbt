@@ -1,4 +1,4 @@
-<chapter id="admin.customize.">
+<chapter id="admin.customize">
     <title>Customizing MantisBT</title>
 
     <section id="admin.customize.customfields">
@@ -674,6 +674,7 @@ functions section.</para>
 </programlisting>
                     </para>
                 </listitem>
+
                 <listitem>
 					<para>Define the new status in the enumeration, as well as
 						the corresponding color code.
@@ -693,6 +694,7 @@ $g_status_colors['<emphasis>testing</emphasis>'] = '#ACE7AE';
 						$g_status_enum_string.
 					</para>
 				</listitem>
+
 				<listitem>
 					<para>Define the required translation strings for the new
 						status, for each language used in the installation.
