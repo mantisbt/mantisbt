@@ -163,7 +163,7 @@ function string_display_line_links( $p_string ) {
 
 /**
  * Prepare a string for display in rss
- * @param string 
+ * @param string
  * @return string
  */
 function string_rss_links( $p_string ) {
@@ -188,7 +188,7 @@ function string_email( $p_string ) {
 /**
  * Prepare a string for plain text display in email and add URLs for bug
  * links and cvs links
- * @param string 
+ * @param string
  * @return string
  */
 function string_email_links( $p_string ) {
@@ -199,7 +199,7 @@ function string_email_links( $p_string ) {
 # Process a string for display in a textarea box
 /**
  * @todo function documentation
- * @param string 
+ * @param string
  * @return string
  */
 function string_textarea( $p_string ) {
@@ -208,7 +208,7 @@ function string_textarea( $p_string ) {
 
 /**
  * Process a string for display in a text box
- * @param string 
+ * @param string
  * @return string
  */
 function string_attribute( $p_string ) {
@@ -446,6 +446,7 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
  */
 function string_insert_hrefs( $p_string ) {
 	static $s_url_regex = null;
+	static $s_email_regex = null;
 
 	if( !config_get( 'html_make_links' ) ) {
 		return $p_string;
@@ -458,6 +459,7 @@ function string_insert_hrefs( $p_string ) {
 	}
 
 	# Find any URL in a string and replace it by a clickable link
+	$t_url_protocol = '([[:alpha:]][-+.[:alnum:]]*):\/\/';
 	if ( is_null( $s_url_regex ) ) {
 		# %2A notation in url's
 		$t_url_hex = '%[[:digit:]A-Fa-f]{2}';
@@ -473,7 +475,7 @@ function string_insert_hrefs( $p_string ) {
 		$t_url_part1 = "${t_url_chars}";
 		$t_url_part2 = "(?:\(${t_url_chars_in_parens}*\)|\[${t_url_chars_in_brackets}*\]|${t_url_chars2})";
 
-		$s_url_regex = "/(([[:alpha:]][-+.[:alnum:]]*):\/\/(${t_url_part1}*?${t_url_part2}+))/sue";
+		$s_url_regex = "/(${t_url_protocol}(${t_url_part1}*?${t_url_part2}+))/sue";
 	}
 
 	$p_string = preg_replace( $s_url_regex, "'<a href=\"'.rtrim('\\1','.').'\">\\1</a> [<a href=\"'.rtrim('\\1','.').'\" target=\"_blank\">^</a>]'", $p_string );
@@ -481,7 +483,28 @@ function string_insert_hrefs( $p_string ) {
 		ini_set( 'magic_quotes_sybase', true );
 	}
 
-	$p_string = preg_replace( email_regex_simple(), '<a href="mailto:\0">\0</a>', $p_string );
+	# Find any email addresses in the string and replace them with a clickable
+	# mailto: link, making sure that URLs such as http://user@example.com/ or
+	# http://user:password@example.com/ are not processed as an email
+	if( is_null( $s_email_regex ) ) {
+		$s_email_regex = email_regex_simple();
+		$s_email_regex =
+			substr( $s_email_regex, 0, 1 ) .
+			'(' . $t_url_protocol . '.*?)?' .
+			substr( $s_email_regex, 1 );
+	}
+
+	$p_string = preg_replace_callback(
+		$s_email_regex,
+		create_function(
+			'$p_match',
+			'if( 0 === preg_match( "/' . $t_url_protocol . '/", $p_match[0] ) ) {
+				return \'<a href="mailto:\' . $p_match[0] . \'">\' . $p_match[0] . \'</a>\';
+			} else {
+				return $p_match[0];
+			}'
+		),
+		$p_string );
 
 	return $p_string;
 }
