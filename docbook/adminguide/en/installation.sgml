@@ -1,180 +1,497 @@
 <chapter id="admin.install">
-    <title>Installation</title>
+	<title>Installation</title>
 
-    <para>Following are the steps for a new MantisBT installation:</para>
-    <itemizedlist>
-        <listitem>
-            <para>
-                <link linkend="admin.about.download">Download</link>
-                Mantis
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-                Go through MantisBT <link linkend="admin.config">Configuration</link>
-                and set the database options + whatever options where you need to
-                override the default values.
-            </para>
-        </listitem>
-        <listitem>
-            <para>Test your configuration through the admin
-                folder
-            </para>
-        </listitem>
-        <listitem>
-            <para>Create a new administrator account and remove the
-                standard user 'administrator'
-            </para>
-        </listitem>
-    </itemizedlist>
+	<para>This chapter explains how to install or upgrade MantisBT.
+	</para>
 
-    <section id="admin.install.summary">
-        <title>Summary</title>
+	<para>The table below contains a high-level overview of the processes.
+		Refer to the subsequent chapters for details.
+	</para>
 
-        <orderedlist>
-            <listitem>
-                <para>Transfer files</para>
-            </listitem>
-            <listitem>
-                <para>Uncompress files</para>
-            </listitem>
-            <listitem>
-                <para>Generate database tables</para>
-            </listitem>
-            <listitem>
-                <para>Edit configuration file, if needed</para>
-            </listitem>
-            <listitem>
-                <para>PHP File extensions</para>
-            </listitem>
-            <listitem>
-                <para>Login</para>
-            </listitem>
-            <listitem>
-                <para>Add projects and users</para>
-            </listitem>
-        </orderedlist>
-    </section>
+	<informaltable>
+		<tgroup cols="2">
+			<thead>
+				<row>
+					<entry>New Installation</entry>
+					<entry>Upgrade</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+		<orderedlist>
+			<listitem><para>
+				<link linkend="admin.install.prereq">Check system requirements</link>
+			</para></listitem>
+			<listitem><para>
+				<link linkend="admin.install.preinstall">Download and deploy MantisBT</link>
+			</para></listitem>
+			<listitem><para>
+				<link linkend="admin.install.new">Execute the Installation script</link>
+			</para></listitem>
+			<listitem><para>
+				<link linkend="admin.install.config">Configure the system</link>
+			</para></listitem>
+			<listitem><para>
+				<link linkend="admin.install.postcommon">Execute post-installation common tasks</link>
+			</para></listitem>
+			<listitem><para>
+				<link linkend="admin.install.postinstall">Execute post-installation specific tasks</link>
+			</para></listitem>
+		</orderedlist>
+					</entry>
+					<entry>
+		<orderedlist>
+			<listitem><para>
+				<link linkend="admin.install.preinstall">Download and deploy MantisBT</link>
+			</para></listitem>
+			<listitem><para>
+				<link linkend="admin.install.backups">Backup your system</link>
+			</para></listitem>
+			<listitem><para>
+				Put the site down for maintenance
+			</para></listitem>
+			<listitem><para>
+				<link linkend="admin.install.upgrade">Execute the Upgrade script</link>
+			</para></listitem>
+			<listitem><para>
+				<link linkend="admin.install.postcommon">Execute post-installation common tasks</link>
+			</para></listitem>
+			<listitem><para>
+				<link linkend="admin.install.postupgrade">Execute post-upgrade specific tasks</link>
+			</para></listitem>
+		</orderedlist>
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</informaltable>
 
+	<section id="admin.install.prereq">
+		<title>Prerequisites</title>
 
-        <section id="admin.install.new">
-            <title>New Installations</title>
+		<itemizedlist>
+			<listitem>
+				<para>Install required software and ensure they are on
+					the correct version.
+				</para>
+				<para>Refer to
+				<link linkend="admin.about.requirments">Minimum Requirements</link>
+				and
+				<link linkend="admin.install.requirements">Requirements</link>
+				for further details.
+				</para>
+<para>@TODO these 2 sections should be combined into one</para>
+			</listitem>
 
-            <orderedlist>
-                <listitem>
-					<para>First, transfer the downloaded file to your webserver
-						using whatever method you like best (ftp, scp, etc). You
-						will need to telnet/ssh into the server machine for the
-						next steps.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Next, untar/gunzip it to the directory that you want.The
-                        usual command is (1 step):
-						<programlisting>tar -xzf <emphasis>filename.tar.gz</emphasis></programlisting>
-                        OR (2 steps):
-						<programlisting>
+			<listitem>
+				<para>PHP File extensions</para>
+				<para>MantisBT uses only <emphasis>.php</emphasis> files.
+					If your webserver is configured for other extensions
+					(e.g. .PHP3, .PHTML) then you will have to have the administrator
+					add support for .PHP files. This should be a trivial
+					modification. Further details can be found in the
+					<ulink url="http://www.php.net/manual/en/installation.php">PHP documentation</ulink>
+				</para>
+			</listitem>
+		</itemizedlist>
+	</section>
+
+	<section id="admin.install.preinstall">
+		<title>Pre-installation / upgrade tasks</title>
+
+		<para>These tasks cover the download and deployment of MantisBT, and
+			should be performed prior to any new installation or upgrade.
+		</para>
+
+		<orderedlist>
+			<listitem><para>
+				<link linkend="admin.about.download">Download</link>
+				MantisBT
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>Transfer the downloaded file to your webserver
+				</para>
+				<para>This can be done using whatever method you like best
+					(ftp, scp, etc). You will need to telnet/ssh into the
+					server machine for the next steps.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>Extract the release
+				</para>
+				<para>It is highly recommended to maintain a separate
+					directory for each release.
+					This not only avoids mismatch between versions,
+					(files may have been added or removed)
+					but also provides an easy path to downgrade your installation,
+					should you need to.
+				</para>
+				<para>
+					The usual command is (1 step):
+					<programlisting>tar -xzf <emphasis>filename.tar.gz</emphasis></programlisting>
+					OR (2 steps):
+					<programlisting>
 gunzip <emphasis>filename.tar.gz</emphasis>
 tar -xf <emphasis>filename.tar</emphasis>
 </programlisting>
-                        Winzip, Stuffit, and other programs should also be able to
-                        handle decompression of the archive. At this point you may want to
-                        rename the directory to something simpler like 'mantisbt'. You will
-                        use the mv command to rename a directory (Windows users substitute
-                        the "ren" command or use explorer).
-						<programlisting>mv <emphasis>directoryname</emphasis> mantisbt</programlisting>
-                    </para>
-                </listitem>
-                <listitem>
-					<para>Next we will create the necessary database tables and a
-						basic configuration file. From your web browser, access
-					</para>
-					<programlisting>http://yoursite/mantisbt/admin/install.php</programlisting>
-					<para>This page will walk you through the following steps:
+					Other file archiving tools such as
+					<ulink url="http://www.7-zip.org/">7-Zip</ulink>
+					should also be able to handle decompression of the archive.
+				</para>
+				<para>The extraction process should create a new directory like
+					<emphasis>mantisbt-1.2.x</emphasis>
+				</para>
+			</listitem>
 
-                        <orderedlist>
-                            <listitem>
-                                <para>check basic parameters for the web server</para>
-                            </listitem>
-                            <listitem>
-                                <para>prompt for the database type and location, and a database
-                                    user/password pair. For installation, a high-privileged account
-                                    can also be provided. If unspecified, the database user will be
-                                    used.
-                                    The database user requires SELECT, INSERT, UPDATE, and DELETE privileges.
-                                    For installation, additional INDEX, CREATE, ALTER, and DROP privileges
-                                    are also required.
-                                </para>
-                            </listitem>
-                            <listitem>
-                                <para>create the database and tables.
-                                    WARNING: a default Administrator user account
-                                    is created at this stage, to allow the initial login
-                                    and setup of MantisBT.
-                                    The id and password are <emphasis>administrator / root</emphasis>.
-                                    You should immediately go to Manage Users,
-                                    and create another administrator level account,
-                                    then either DISABLE or DELETE the default one.
-                                </para>
-                            </listitem>
-                            <listitem>
-                                <para>write a basic "config_inc.php file to define the
-                                    database connection parameters.
-                                </para>
-                            </listitem>
-                            <listitem>
-                                <para>perform some post installation checks on the
-                                    system.
-                                </para>
-                            </listitem>
-                        </orderedlist>
+			<listitem>
+				<para>Rename the directory
+				</para>
+				<para>For new installations, you may want to rename the
+					directory just created to something simpler, e.g.
+					<emphasis>mantisbt</emphasis>
+					<programlisting>mv mantisbt-1.2.x mantisbt</programlisting>
+				</para>
+			</listitem>
+	</section>
 
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>The next part involves configuring the installation to
-                        work with your specific setup. There are many options that
-                        you can set to customize your MantisBT installation. See
-                        <link linkend="admin.config">Configuration</link> for
-                        in depth explanations.
-                    </para>
-                    <para>Open the file <emphasis>config_inc.php</emphasis> in an
-                        editor and add any values that are required. These will
-                        override the default values.
-                    </para>
-                    <para>You can load up admin/check.php to validate if you set
-                        things up correctly.
-                        NOTE: check.php sometimes reports the value of
-                        <emphasis>register_globals</emphasis> incorrectly. To
-                        confirm the correct value,
-                        Create a page with this line in it:
-                        <programlisting>&lt;?php phpinfo(); ?&gt;</programlisting>
-                        save it with a .php extension and load it up in your web browser.
-                    </para>
-                </listitem>
+	<section id="admin.install.new">
+		<title>New Installation</title>
 
-                <listitem>
-                    <para>MantisBT uses only <emphasis>.php</emphasis> files. If your webserver is
-                        configured for other extensions (.PHP3, .PHTML) then you will have
-                        to have the administrator add support for .PHP files. This should be
-                        a trivial modification. Further details can be found in the
-                        <ulink url="http://www.php.net/manual/en/installation.php">PHP documentation</ulink>
-                    </para>
-                </listitem>
+		<para>This chapter explains how to perform a new installation of
+			MantisBT.
+		</para>
 
-                <listitem>
-                    <para>Login to your bugtracker and go to the manage section.
-                        Click on the projects link. You will need to ADD a new project. Then
-                        EDIT the new project and remember to ADD at least one category.
-                        Otherwise you won't be able to add any issues.
-                    </para>
-                </listitem>
-            </orderedlist>
-            <para>That should be it. You're off and running.
-            </para>
+		<para>Start by Performing the steps described in
+			<link linkend="admin.install.preinstall">Pre-installation tasks</link>
+			above.
+		</para>
 
-        </section>
+		<para>Once that is done, execute the installation script.
+			From your web browser, access
+			<programlisting>http://yoursite/mantisbt/admin/install.php</programlisting>
+			The installation procedure will go through the following steps:
+		</para>
 
+		<orderedlist>
+			<listitem>
+				<para>The script checks basic parameters for the web server
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>Provide required information for the installation</para>
+				<itemizedlist>
+					<listitem><para>database type</para></listitem>
+					<listitem><para>database server hostname</para></listitem>
+					<listitem>
+						<para>user and password</para>
+						<para>Required privileges:
+							SELECT, INSERT, UPDATE, and DELETE
+						</para>
+					</listitem>
+					<listitem>
+						<para>high-privileged database account</para>
+						<para>Additional privileges required:
+							INDEX, CREATE, ALTER, and DROP
+						</para>
+						<para>If this account is not specified, the database
+							user will be used.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</listitem>
+
+			<listitem>
+				<para>Click the <emphasis>Install/Upgrade Database</emphasis>
+					button
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>The script creates the database and tables.
+				</para>
+				<para>The default Administrator user account is created
+					at this stage, to allow the initial login
+					and setup of MantisBT.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>The script attempts to write a basic
+					<emphasis>config_inc.php</emphasis>
+					file to define the database connection parameters.
+				</para>
+				<para>This operation may fail if the web server's user account
+					does not have write permissions to the directory
+					(which is recommended for obvious security reasons).
+					In this case, you will have to manually create the
+					file and copy/paste the contents from the page.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>The script perform post installation checks on the system.
+				</para>
+				<para>Review and correct any errors.
+				</para>
+			</listitem>
+		</orderedlist>
+
+	</section>
+
+	<section id="admin.install.upgrade">
+		<title>Upgrading</title>
+
+		<para>This chapter explains how to upgrade an existing
+			MantisBT installation.
+		</para>
+
+		<para>Start by Performing the steps described in
+			<link linkend="admin.install.preinstall">Pre-installation tasks</link>
+			above.
+		</para>
+
+		<orderedlist>
+			<listitem>
+				<para>Put the site down for maintenance
+					<programlisting>cp mantis_offline.php.sample mantis_offline.php
+</programlisting>
+					This will prevent users from using the system while
+					the upgrade is in progress.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>Always <emphasis>Backup your code, data and
+					config files</emphasis> before upgrading !
+				</para>
+				<para>This includes your Mantis directory, your attachments,
+					and your database. Refer to the
+					<link linkend="admin.install.backups">Backups</link>
+					section for details.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>Copy the configuration files
+				</para>
+				<para>To preserve your system settings, you should copy the
+					files listed below to the new directory, as well as any other
+					custom files such as logo, favicon, css, etc.
+				</para>
+				<para><emphasis>
+					config_inc.php
+					custom_strings_inc.php
+					custom_constants_inc.php
+					custom_functions_inc.php
+					</emphasis>
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>Execute the upgrade script.
+					From your web browser, access
+					<programlisting>http://yoursite/mantisbt-NEW/admin/install.php</programlisting>
+					where <emphasis>mantisbt-NEW</emphasis> is the name of the
+					directory where the new release was extracted
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>Provide required information for the upgrade</para>
+				<itemizedlist>
+					<listitem>
+						<para>high-privileged database account</para>
+						<para>Additional privileges required:
+							INDEX, CREATE, ALTER, and DROP
+						</para>
+						<para>If this account is not specified, the database
+							user will be used.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</listitem>
+
+			<listitem>
+				<para>Click the <emphasis>Install/Upgrade Database</emphasis>
+					button
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>At the end of the upgrade, review and correct any
+					warnings or errors.
+				</para>
+			</listitem>
+
+		</orderedlist>
+
+	</section>
+
+
+	<section id="admin.install.config">
+		<title>Configure your installation</title>
+
+		<para>There are many settings that you can adjust to configure
+			and customize MantisBT.
+			Refer to the
+			<link linkend="admin.config">Configuration</link>
+			section, as well as the
+			<emphasis>config_default_inc.php</emphasis> file
+			for in depth explanations of the available options.
+			Check out also the
+			<link linkend="admin.customize">Customizing MantisBT</link>
+			section for further options to personalize your installation.
+		</para>
+
+		<para>This step is normally only required for new installations, but
+			when upgrading you may want to review and possibly customize any
+			new configuration options.
+		</para>
+
+		<para>Open or create the file <emphasis>config_inc.php</emphasis> in an
+			editor and add or modify any values as required. These will
+			override the default values.
+		</para>
+
+		<para>You may want to use the provided
+			<emphasis>config_inc.php.sample</emphasis> file
+			as a starting point.
+		</para>
+
+		<para>WARNING: you should never edit the
+			<emphasis>config_default_inc.php</emphasis> file
+			directly, as it could cause issues with future upgrades.
+		</para>
+
+	</section>
+
+	<section id="admin.install.postcommon">
+		<title>Post-installation and upgrade tasks</title>
+
+		<para>Instructions in this section are common to both new installations
+			and upgrades, and should be applied after completing either process.
+		</para>
+
+		<orderedlist>
+			<listitem>
+				<para>Test your configuration
+				</para>
+				<para>Load up <emphasis>admin/check.php</emphasis>
+					to validate if everything is setup correctly.
+				</para>
+				<para>NOTE (for PHP 5.2 only):
+					check.php sometimes reports the value of
+					<emphasis>register_globals</emphasis> incorrectly.
+					To confirm the correct value,
+					Create a page with this line in it:
+					<programlisting>&lt;?php phpinfo(); ?&gt;</programlisting>
+					save it with a .php extension and load it up in your
+					web browser.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>Delete the <emphasis>admin</emphasis> folder
+				</para>
+				<para>For security reasons, the scripts within this directory
+					should not be accessible on a live MantisBT site or on any
+					installation that is accessible via the Internet.
+				</para>
+				<para>Once you have confirmed that the install/upgrade
+					was successful, you should delete this directory
+					<programlisting>rm -r admin</programlisting>
+				</para>
+			</listitem>
+		</orderedlist>
+	</section>
+
+
+	<section id="admin.install.postinstall">
+		<title>Post-installation tasks</title>
+
+		<para>Instructions in this section should only be applied after a
+			new installation
+		</para>
+
+		<orderedlist>
+			<listitem>
+				<para>Login to your bugtracker
+				</para>
+				<para>Use the default Administrator account.
+					The id and password are <emphasis>administrator / root</emphasis>.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>Create a new Administrator account
+				</para>
+				<para>Go to <emphasis>Manage &gt; Manage Users</emphasis>
+					and create a new account with 'administrator'
+					access level.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>Disable or delete the default Administrator account
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>Create a new Project
+				</para>
+				<para>Go to <emphasis>Manage &gt; Manage Projects</emphasis>
+					and create a new project
+				</para>
+			</listitem>
+
+		</orderedlist>
+	</section>
+
+	<section id="admin.install.postupgrade">
+		<title>Post-upgrade tasks</title>
+
+		<para>Instructions in this section should only be applied after
+			upgrading an existing installation.
+		</para>
+
+		<orderedlist>
+			<listitem>
+				<para>Test the new release
+				</para>
+				<para>Perform any additional testing as appropriate to ensure
+					the new version does not introduce any regressions.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>Switch the site to the new version
+				</para>
+				<para>The commands below should be executed from the web root
+					(or wherever the mantisbt scripts are installed)
+					and assume that the "live" directory (old version)
+					is named <emphasis>mantisbt</emphasis> and the new release
+					directory is <emphasis>mantisbt-1.2.x</emphasis>.
+					<programlisting>
+mv mantisbt mantisbt-old
+mv mantisbt-1.2.x mantisbt
+</programlisting>
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>Put the site back on line
+					<programlisting>rm mantis_offline.php</programlisting>
+					This should be the final step in the upgrade process, as
+					it will let users login again.
+				</para>
+			</listitem>
+		</orderedlist>
+	</section>
         <section id="admin.install.requirements">
 
             <title>Requirements</title>
@@ -182,12 +499,15 @@ tar -xf <emphasis>filename.tar</emphasis>
 
             <para>The following versions are required for proper operation:</para>
             <informaltable>
-                <tgroup cols="3"><tbody>
+                <tgroup cols="3">
+					<thead>
                         <row>
                             <entry>Package</entry>
                             <entry>Minimum Version</entry>
                             <entry>Tested with</entry>
                         </row>
+					</thead>
+					<tbody>
                         <row>
                             <entry>MySQL</entry>
                             <entry>4.1.x</entry>
@@ -262,7 +582,7 @@ tar -xf <emphasis>filename.tar</emphasis>
                 ).
                 Using the current date in the filename can prevent overwriting and
                 make cataloguing easier.
-                !!! Backups should always be performed before an upgrade !!!
+				<emphasis>!!! Backups should always be performed before an upgrade !!!</emphasis>
                 Make sure to backup MantisBT code (which includes your configs +
                 possibly customization), issue attachments / project documents, and
                 database contents.
