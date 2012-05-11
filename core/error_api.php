@@ -148,8 +148,15 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 			}
 
 			$t_oblen = ob_get_length();
-			if( error_handled() && $t_oblen > 0 ) {
+			if( $t_oblen > 0 ) {
 				$t_old_contents = ob_get_contents();
+				if( !error_handled() ) {
+					# Retrieve the previously output header
+					if( false !== preg_match_all( '|^(.*)(</head>.*$)|is', $t_old_contents, $result ) ) {
+						$t_old_headers = $result[1][0];
+						unset( $t_old_contents );
+					}
+				}
 			}
 
 			# We need to ensure compression is off - otherwise the compression headers are output.
@@ -172,11 +179,18 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 				} else {
 					echo '<html><head><title>', $t_error_type, '</title></head><body>';
 				}
+			} else {
+				# Output the previously sent headers, if defined
+				if( isset( $t_old_headers ) ) {
+					echo $t_old_headers, "\n";
+					html_page_top2();
+				}
 			}
 
 			echo '<div id="error-msg">';
 			echo '<div class="error-type">' . $t_error_type . '</div>';
 			echo '<div class="error-description">', $t_error_description, '</div>';
+
 			echo '<div class="error-info">';
 			if( null === $g_error_proceed_url ) {
 				echo lang_get( 'error_no_proceed' );
@@ -238,7 +252,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
  */
 function error_print_details( $p_file, $p_line, $p_context ) {
 	?>
-		<table class="width75">
+		<table class="width90">
 			<tr>
 				<td>Full path: <?php echo htmlentities( $p_file, ENT_COMPAT, 'UTF-8' );?></td>
 			</tr>
@@ -264,7 +278,7 @@ function error_print_context( $p_context ) {
 		return;
 	}
 
-	echo '<table class="width100"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
+	echo '<table class="width100" style="table-layout:fixed;"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
 
 	# print normal variables
 	foreach( $p_context as $t_var => $t_val ) {
@@ -277,14 +291,16 @@ function error_print_context( $p_context ) {
 				$t_val = '**********';
 			}
 
-			echo '<tr><td>', $t_var, '</td><td>', $t_val, '</td><td>', $t_type, '</td></tr>', "\n";
+			echo '<tr><td style="width=20%; word-wrap:break-word; overflow:auto;">', $t_var,
+				'</td><td style="width=70%; word-wrap:break-word; overflow:auto;">', $t_val,
+				'</td><td style="width=10%;">', $t_type, '</td></tr>', "\n";
 		}
 	}
 
 	# print arrays
 	foreach( $p_context as $t_var => $t_val ) {
 		if( is_array( $t_val ) && ( $t_var != 'GLOBALS' ) ) {
-			echo '<tr><td colspan="3"><br /><strong>', $t_var, '</strong></td></tr>';
+			echo '<tr><td colspan="3" style="word-wrap:break-word"><br /><strong>', $t_var, '</strong></td></tr>';
 			echo '<tr><td colspan="3">';
 			error_print_context( $t_val );
 			echo '</td></tr>';
@@ -300,7 +316,7 @@ function error_print_context( $p_context ) {
  * @uses error_alternate_class
  */
 function error_print_stack_trace() {
-	echo '<table class="width75">';
+	echo '<table class="width90">';
 	echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>';
 
 	$t_stack = debug_backtrace();
@@ -388,7 +404,7 @@ function error_string( $p_error ) {
 	if( $t_error == '' ) {
 		return lang_get( 'missing_error_string' ) . $p_error;
 	}
-	
+
 	# ripped from string_api
 	$t_string = call_user_func_array( 'sprintf', array_merge( array( $t_error ), $g_error_parameters, $t_padding ) );
 	return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $t_string, ENT_COMPAT, 'UTF-8' ) );
