@@ -37,6 +37,7 @@
  * @author McDutchie
  * @author Nemo bis
  * @author Stefano-c
+ * @author Ximo17
  */
 
 $s_actiongroup_menu_move = 'Sposta';
@@ -441,7 +442,7 @@ $s_amount = 'Somma';
 $s_total_owing = 'Totale dovuto';
 $s_total_paid = 'Totale pagato';
 $s_sponsor_hide = 'Nascondi risolte e pagate';
-$s_sponsor_show = 'Mostrale tutte';
+$s_sponsor_show = 'Mostra tutte';
 $s_payment_updated = 'Informazioni sul pagamento aggiornate.';
 $s_account_updated_msg = 'Il tuo Account è stato aggiornato con successo...';
 $s_email_updated = 'L\'indirizzo email è stato aggiornato con successo';
@@ -624,6 +625,7 @@ $s_1_week_title = '1 Settimana';
 $s_never_logged_in_title = 'Mai entrato nel sistema';
 $s_prune_accounts = 'Pulisci account';
 $s_hide_inactive = 'Nascondi inattivi';
+$s_show_disabled = 'Visualizza non abilitati';
 $s_manage_accounts_title = 'Gestione account';
 $s_date_created = 'Data inserimento';
 $s_last_visit = 'Ultima visita';
@@ -696,7 +698,7 @@ $s_plugins_installed = 'Plugin installati';
 $s_plugins_available = 'Plugin disponibili';
 $s_plugin_description = 'Descrizione';
 $s_plugin_author = 'Autore: %1$s';
-$s_plugin_url = 'Website:';
+$s_plugin_url = 'Sito web:';
 $s_plugin_depends = 'Dipendenze';
 $s_plugin_no_depends = 'Nessuna dipendenza';
 $s_plugin_priority = 'Priorità';
@@ -780,7 +782,7 @@ $s_reset_password_button = 'Resetta password';
 $s_delete_user_button = 'Elimina utente';
 $s_reset_password_msg = 'Resettando la password, verrà inviata all\'utente una email di verifica con il codice di convalida.';
 $s_reset_password_msg2 = 'Resettando la password, questa verrà impostata come vuota.';
-$s_show_all_users = 'TUTTI';
+$s_show_all_users = 'Tutti';
 $s_users_unused = 'Non usato';
 $s_users_new = 'Nuovo';
 $s_account_reset_protected_msg = 'Account protetto.  Non è possibile resettare la password.';

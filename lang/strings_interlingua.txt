@@ -612,6 +612,7 @@ $s_1_week_title = '1 septimana';
 $s_never_logged_in_title = 'Nunquam aperiva session';
 $s_prune_accounts = 'Purgar contos';
 $s_hide_inactive = 'Celar inactives';
+$s_show_disabled = 'Monstrar disactivates';
 $s_manage_accounts_title = 'Gerer contos';
 $s_date_created = 'Data de creation';
 $s_last_visit = 'Ultime visita';

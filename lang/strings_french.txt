@@ -641,6 +641,7 @@ $s_1_week_title = '1 semaine';
 $s_never_logged_in_title = 'Ne s\'est jamais connecté';
 $s_prune_accounts = 'Effacer comptes';
 $s_hide_inactive = 'Cacher inactifs';
+$s_show_disabled = 'Affichage désactivé';
 $s_manage_accounts_title = 'Gérer les comptes';
 $s_p = 'p';
 $s_date_created = 'Date de création';

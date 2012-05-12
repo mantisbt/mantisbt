@@ -617,6 +617,7 @@ $s_1_week_title = 'שבוע אחרון';
 $s_never_logged_in_title = 'מעולם לא נכנסו';
 $s_prune_accounts = 'ניקוי חשבונות';
 $s_hide_inactive = 'הסתר לא פעילים';
+$s_show_disabled = 'הצגת כבויים';
 $s_manage_accounts_title = 'ניהול חשבונות';
 $s_date_created = 'מועד פתיחה';
 $s_last_visit = 'כניסה אחרונה';

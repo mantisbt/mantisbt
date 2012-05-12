@@ -619,6 +619,7 @@ $s_1_week_title = '1 week';
 $s_never_logged_in_title = 'Nooit aangemeld';
 $s_prune_accounts = 'Gebruikers opschonen';
 $s_hide_inactive = 'Inactieve gebruikers verbergen';
+$s_show_disabled = 'Uitgeschakeld weergeven';
 $s_manage_accounts_title = 'Gebruikersbeheer';
 $s_p = 'p';
 $s_date_created = 'Aangemaakt op';

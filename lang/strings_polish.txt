@@ -625,6 +625,7 @@ $s_1_week_title = '1 tydzień';
 $s_never_logged_in_title = 'Nigdy nie zalogowani';
 $s_prune_accounts = 'Usuń konta';
 $s_hide_inactive = 'Ukryj nieaktywne';
+$s_show_disabled = 'Pokaż zablokowane';
 $s_manage_accounts_title = 'Zarządzanie kontami';
 $s_p = 'z';
 $s_date_created = 'Stworzone';

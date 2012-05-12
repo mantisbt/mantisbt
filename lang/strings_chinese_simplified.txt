@@ -629,6 +629,7 @@ $s_1_week_title = '一周内';
 $s_never_logged_in_title = '从未登录';
 $s_prune_accounts = '清理帐号';
 $s_hide_inactive = '隐藏非活动的';
+$s_show_disabled = '显示已禁用';
 $s_manage_accounts_title = '管理帐号';
 $s_date_created = '创建日期';
 $s_last_visit = '最近一次登录';
