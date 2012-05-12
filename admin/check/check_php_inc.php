@@ -199,3 +199,11 @@ while( list( $t_foo, $t_var ) = each( $t_vars ) ) {
 		check_print_info_row( 'php.ini directive: ' . $t_var, htmlentities( $t_value ) );
 	}
 }
+
+if( is_windows_server() ) {
+	check_print_test_warn_row(
+		'There is a performance issue on windows for PHP versions &lt; 5.4 in openssl_random_pseudo_bytes' ,
+		version_compare( phpversion(), '5.4.0', '>=' ),
+		array( false => 'For best performance upgrade to PHP > 5.4.0.' )
+	);
+}

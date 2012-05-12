@@ -58,19 +58,14 @@ function crypto_init() {
  * available. The use of weak randomness for cryptographic purposes is strongly
  * discouraged because it contains low entropy and is predictable.
  *
- * Note that openssl_random_pseudo_bytes seems to perform very poorly on
- * Windows servers. Therefore we don't event attempt to use this PRNG source
- * if the server is running Windows.
- *
  * @param int $p_bytes Number of bytes of randomness required
  * @param bool $p_require_strong_generator Whether or not a weak source of randomness can be used by this function
  * @return string|null Raw binary string containing the requested number of bytes of random output or null if the output couldn't be created
  */
 function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = true ) {
 
-	# First we attempt to use the secure PRNG provided by OpenSSL in PHP 5.3
-	# Exclude Windows as per http://bugs.php.net/bug.php?id=51636
-	if ( !is_windows_server() && function_exists( 'openssl_random_pseudo_bytes' ) ) {
+	# First we attempt to use the secure PRNG provided by OpenSSL in PHP
+	if ( function_exists( 'openssl_random_pseudo_bytes' ) ) {
 		$t_random_bytes = openssl_random_pseudo_bytes( $p_bytes, $t_strong );
 		if ( $t_random_bytes !== false ) {
 			if ( $p_require_strong_generator && $t_strong === true ) {
@@ -95,10 +90,6 @@ function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = 
 			@fclose( $t_urandom_fp );
 		}
 	}
-
-	# For Windows systems, we can try using Microsoft CryptoAPI to retrieve
-	# more reliable PRNG output than what PHP can provide by itself.
-	# !TODO
 
 	# At this point we've run out of possibilities for generating randomness
 	# from a strong source. Unless weak output is specifically allowed by the
