@@ -73,12 +73,12 @@ if ( $f_bug_id ) {
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 	$t_bug_data = bug_get( $t_bug_id, true );
 
-	$t_bug_revisions = array_reverse( bug_revision_list( $t_bug_id, REV_ANY, $f_bugnote_id ), true );
+	$t_bug_revisions = bug_revision_list( $t_bug_id, REV_ANY, $f_bugnote_id );
 
 	$t_title = lang_get( 'bugnote' ) . ' ' . $f_bugnote_id;
 
 } else if ( $f_rev_id ) {
-	$t_bug_revisions = array_reverse( bug_revision_like( $f_rev_id ), true );
+	$t_bug_revisions = bug_revision_like( $f_rev_id );
 
 	if ( count( $t_bug_revisions ) < 1 ) {
 		trigger_error( ERROR_GENERIC, ERROR );
@@ -97,7 +97,6 @@ function show_revision( $t_revision ) {
 	static $s_can_drop = null;
 	static $s_drop_token = null;
 	static $s_user_access = null;
-
 	if ( is_null( $s_can_drop ) ) {
 		$s_can_drop = access_has_bug_level( config_get( 'bug_revision_drop_threshold' ), $t_revision['bug_id'] );
 		$s_drop_token = form_security_param( 'bug_revision_drop' );

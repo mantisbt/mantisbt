@@ -274,7 +274,8 @@ function bug_revision_last( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
 }
 
 /**
- * Retrieve a full list of changes to the bug's information.
+ * Retrieve a full list of changes to the bug's information, sorted in
+ * reverse chronological order.
  * @param int $p_bug_id Bug ID
  * @param int $p_type Revision Type
  * @param int $p_bugnote_id Bugnote ID
@@ -299,7 +300,7 @@ function bug_revision_list( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
 		$t_query .= ' AND bugnote_id=0';
 	}
 
-	$t_query .= ' ORDER BY timestamp ASC';
+	$t_query .= ' ORDER BY id DESC';
 	$t_result = db_query_bound( $t_query, $t_params );
 
 	$t_revisions = array();
@@ -312,7 +313,7 @@ function bug_revision_list( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
 
 /**
  * Retrieve a list of changes to a bug of the same type as the
- * given revision ID.
+ * given revision ID, sorted in reverse chronological order.
  * @param int $p_rev_id Revision ID
  * @return array|null Array of Revision rows
  */
@@ -347,7 +348,7 @@ function bug_revision_like( $p_rev_id ) {
 		$t_query .= ' AND bugnote_id=0';
 	}
 
-	$t_query .= ' ORDER BY timestamp ASC';
+	$t_query .= ' ORDER BY id DESC';
 	$t_result = db_query_bound( $t_query, $t_params );
 
 	$t_revisions = array();
