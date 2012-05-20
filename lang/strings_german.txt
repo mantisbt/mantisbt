@@ -32,6 +32,7 @@
  * @author Campmaster
  * @author Diebuche
  * @author Dr. Jürgen Kehrel, jkehrel@kehrel.de
+ * @author Erdemaslancan
  * @author Exit91
  * @author Heiko Gierer, gierer@rittershaus.de
  * @author Hermann-Josef Beckers, hjb-rheine@t-online.de
@@ -293,7 +294,7 @@ $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Das Feld „%1$s“ enthält ungültiges
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Ungültiger Session-Handler.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session-Variable „%1$s“ wurde nicht gefunden.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Ihre Sitzung ist ungültig geworden.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ungültiges Formular Sicherheits-Token. Haben Sie das Formular versehentlich zweimal abgeschickt?';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ungültiges Sicherheitstoken zum Formular. Dies kann durch einen Sitzungsablauf oder durch versehentliches doppeltes Speichern des Formulars verursacht worden sein.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Auf diese Seite kann nicht mit dieser Methode zugegriffen werden.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Ungültiges Sortierfeld.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Ungültiges Datumsformat';
@@ -636,6 +637,7 @@ $s_1_week_title = '1 Woche';
 $s_never_logged_in_title = 'Noch nie angemeldet';
 $s_prune_accounts = 'Konten löschen';
 $s_hide_inactive = 'Inaktive ausblenden';
+$s_show_disabled = 'Deaktivierte anzeigen';
 $s_manage_accounts_title = 'Konten verwalten';
 $s_p = 'Änderungsgeschützt';
 $s_date_created = 'Erstellungsdatum';

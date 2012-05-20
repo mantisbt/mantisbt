@@ -618,6 +618,7 @@ $s_1_week_title = '1 недеља';
 $s_never_logged_in_title = 'Никада пријављен';
 $s_prune_accounts = 'Уклони налоге';
 $s_hide_inactive = 'Сакриј неактивне';
+$s_show_disabled = 'Прикажи онемогућено';
 $s_manage_accounts_title = 'Управљање налозима';
 $s_p = 'з';
 $s_date_created = 'Датум стварања';

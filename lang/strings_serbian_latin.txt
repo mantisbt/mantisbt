@@ -613,6 +613,7 @@ $s_1_week_title = '1 nedelja';
 $s_never_logged_in_title = 'Nikada prijavljen';
 $s_prune_accounts = 'Ukloni naloge';
 $s_hide_inactive = 'Sakrij neaktivne';
+$s_show_disabled = 'Prikaži onemogućeno';
 $s_manage_accounts_title = 'Upravljanje nalozima';
 $s_p = 'z';
 $s_date_created = 'Datum stvaranja';
