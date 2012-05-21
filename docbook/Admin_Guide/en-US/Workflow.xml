@@ -88,45 +88,89 @@
 
 	<para>Now that we have covered how an issue gets created, and what are
 	the different statuses during the life cycle of such issues, the next
-	step is to define the workflow.  In other words, how issues move from
-	one status to another and who has access to trigger such transitions.
-	MantisBT provides the ability for teams to define their own custom
-	workflow which works on top of their custom status.  The workflow
-	dictates the valid transitions between statuses and the user access
-	level required of the user who triggers such transition.</para>
+	step is to define the workflow.
+	The workflow dictates the valid transitions between statuses and the user
+	access level required of the user who triggers such transitions;
+	in other words, how issues move from one status to another and who is
+	authorized to trigger such transitions.
+	</para>
+	<para>MantisBT provides the ability for teams to define their own custom
+	workflow which works on top of their custom status
+	(see <xref linkend="admin.customize.status" />).
+	</para>
 
         <section id="admin.lifecycle.workflow.transitions">
 	    <title>Workflow Transitions</title>
 
-	    <para>This "Manage &gt; Manage Configuration &gt; Workflow
-	    Transitions" page allows users with ADMINISTRATOR access level to do the
-	    following tasks.
+		<para>By default, there is no workflow defined, which means that all
+			states are accessible from any other, by anyone.
+		</para>
 
-	    <itemizedlist>
-	        <listitem><para>Define the valid next statuses for each status.</para></listitem>
-		<listitem><para>Define the default next status for each
-		status.</para></listitem>
-		<listitem><para>Define the minimum access level required for a
-		user to transition to each status.</para></listitem>
-		<listitem><para>Define the default status for newly created
-		issues.</para></listitem>
-		<listitem><para>Define the status at which the issue is
-		considered resolved.  Any issues with this status code greater
-		than or equal to the specified status will be considered
-		resolved.</para></listitem>
-		<listitem><para>Define the status which is assigned to issues
-		that are re-opened.</para></listitem>
-		<listitem><para>Define the required access level to change the
-		workflow.</para></listitem>
+		<para>The "Manage &gt; Manage Configuration &gt; Workflow
+			Transitions" page allows users with ADMINISTRATOR access level to do the
+			following tasks:
+
+			<itemizedlist>
+				<listitem><para>Define the valid next statuses for each status.
+				</para></listitem>
+				<listitem><para>Define the default next status for each status.
+				</para></listitem>
+				<listitem><para>Define the minimum access level required for a
+					user to transition to each status.
+				</para></listitem>
+				<listitem><para>Define the default status for newly created issues.
+				</para></listitem>
+				<listitem><para>Define the status at which the issue is
+					considered resolved.  Any issues a status code greater
+					than or equal to the specified status will be considered
+					resolved.
+				</para></listitem>
+				<listitem><para>Define the status which is assigned to issues
+					that are re-opened.
+				</para></listitem>
+				<listitem><para>Define the required access level to change the
+					workflow.
+				</para></listitem>
             </itemizedlist>
 	    </para>
 
 	    <para>Note that the scope of the applied change is
 	    dependent on the selected project.  If "All Projects" is selected,
 	    then the configuration is to be used as the default for all
-	    projects, unless overridden by a specific project.  To configure for
-	    a specific project, switch to the project via the combobox at the
-	    top right corner of the screen.</para>
+			projects, unless overidden by a specific project.  To configure for
+			a specific project, switch to it via the combobox at the
+			top right corner of the screen.
+		</para>
+
+		<para>The Global ("All Projects") workflow can also be defined in the
+			<emphasis>config_inc.php</emphasis> file, as per the following
+			example.
+			<programlisting>
+$g_status_enum_workflow[NEW_]           ='30:acknowledged,20:feedback,40:confirmed,50:assigned,80:resolved';
+$g_status_enum_workflow[FEEDBACK]       ='30:acknowledged,40:confirmed,50:assigned,80:resolved';
+$g_status_enum_workflow[ACKNOWLEDGED]   ='40:confirmed,20:feedback,50:assigned,80:resolved';
+$g_status_enum_workflow[CONFIRMED]      ='50:assigned,20:feedback,30:acknowledged,80:resolved';
+$g_status_enum_workflow[ASSIGNED]       ='80:resolved,20:feedback,30:acknowledged,40:confirmed';
+$g_status_enum_workflow[RESOLVED]       ='90:closed,20:feedback,50:assigned';
+$g_status_enum_workflow[CLOSED]         ='20:feedback,50:assigned';
+</programlisting>
+		</para>
+		<para>Notes:
+			<itemizedlist>
+				<listitem><para>The workflow needs to have a path from the
+					statuses greater than or equal to the 'resolved' state
+					back to the 'feedback' state (see 
+					<emphasis>$g_bug_resolved_status_threshold</emphasis> and 
+					<emphasis>$g_bug_feedback_status</emphasis> under 
+					<xref linkend="admin.config.status" />),
+					otherwise, the re-open operation won't work.
+				</para></listitem>
+				<listitem><para>The first item in each list denotes the default
+					value for this status, which will be pre-selected in the
+					Change Status combobox in the View Issues page.
+				</para></listitem>
+			</itemizedlist>
+		</para>
         </section>
 
 	<section id="admin.lifecycle.workflow.thresholds">
