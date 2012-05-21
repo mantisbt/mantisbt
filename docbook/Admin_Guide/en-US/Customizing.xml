@@ -659,78 +659,112 @@ functions section.</para>
 
     <section id="admin.customize.status">
         <title>Customizing Status Values</title>
-        <para>The default is no workflow, where all states
-            are accessible from any others. The following example can be
-            transferred to config_inc.php. The workflow needs to have a path
-            from the statuses greater than or equal to the resolved state back
-            to the feedback state. Otherwise, the re-open operation won't work.
-            <programlisting>$g_status_enum_workflow[NEW_]=
-                '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
-                $g_status_enum_workflow[FEEDBACK] =
-                '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
-                $g_status_enum_workflow[ACKNOWLEDGED] =
-                '20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
-                $g_status_enum_workflow[CONFIRMED] =
-                '20:feedback,40:confirmed,50:assigned,80:resolved';
-                $g_status_enum_workflow[ASSIGNED] =
-                '20:feedback,50:assigned,80:resolved,90:closed';
-                $g_status_enum_workflow[RESOLVED] =
-                '50:assigned,80:resolved,90:closed';
-                $g_status_enum_workflow[CLOSED] = '50:assigned';
-            </programlisting>
-        </para>
 
-        <para>To add a status:
+		<para>This section describes how to add a custom status.
             <orderedlist>
                 <listitem>
-                    <para>Define a constant to map the new status to.In a new file
-                        custom_constants_inc.php in the main mantisbt directory:
-                        <programlisting>&lt;?php define ( 'TEST', 60 ); ?&gt;</programlisting>
+					<para>Define a constant to map the new status to.</para>
+					<para>In the main mantisbt directory, locate and edit file
+						<emphasis>custom_constants_inc.php</emphasis>;
+						(create it if it does not exist)
+						<programlisting>
+&lt;?php
+	# Custom status code
+	define( 'TESTING', 60 );
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
-                    <para>Define the language strings required. This may need to be
-                        defined in several languages.In a new file custom_strings_inc.php
-                        in the main mantisbt directory:
-                        <programlisting language="PHP (HTML)">&lt;?php if ( lang_get_current() == 'german' ) {
-    $s_status_enum_string = '10:neu,20:Rückmeldung,30:anerkannt,40:bestätigt,50:zugewiesen,60:zu testen,80:behoben,90:geschlossen';
-} else {
-    $s_status_enum_string = '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned, 60:to be tested,80:resolved,90:closed';
-    $s_to_be_tested_bug_button = "Issue Ready to Test"; 
-    $s_to_be_tested_bug_title = "Set Issue Ready to Test";
-    $s_email_notification_title_for_status_bug_to_be_tested = "The following issue is ready TO BE TESTED.";
-} 
-?&gt;
-                        </programlisting>
+					<para>Define the new status in the enumeration, as well as
+						the corresponding color code.
+					</para>
+					<para>In the main mantisbt directory, edit your
+						<emphasis>config_inc.php</emphasis>
+
+						<programlisting>
+# Revised enum string with new 'testing' status
+$g_status_enum_string = '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,<emphasis>60:testing,</emphasis>80:resolved,90:closed';
+
+# Status color additions
+$g_status_colors['<emphasis>testing</emphasis>'] = '#ACE7AE';
+</programlisting>
+						Note that the key in the $g_status_colors array must be
+						equal to the value defined for the new status code in
+						$g_status_enum_string.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Define the required translation strings for the new
+						status, for each language used in the installation.
+						<itemizedlist>
+							<listitem><para><emphasis>s_status_enum_string</emphasis>:
+								status codes translation (refer to the original
+								language strings for standard values)
+							</para></listitem>
+							<listitem><para><emphasis>s_XXXX_bug_title</emphasis>:
+								title displayed in the change status page
+							</para></listitem>
+							<listitem><para><emphasis>s_XXXX_bug_button</emphasis>:
+								label for the submit button in the change status page
+							</para></listitem>
+							<listitem><para><emphasis>s_email_notification_title_for_status_bug_XXXX</emphasis>:
+								title for notification e-mails
+							</para></listitem>
+						</itemizedlist>
+						where XXXX is the name of the new status as it was defined
+						in <emphasis>g_status_enum_string</emphasis> above. If
+						XXXX contains spaces, they should be replaced by
+						underscores in the language strings names (e.g.
+						for '35:pending user', use '$s_pending_user_bug_button')
+					</para>
+					<para>In the main mantisbt directory, locate and edit file
+						<emphasis>custom_strings_inc.php</emphasis>;
+						(create it if it does not exist)
+<programlisting>
+&lt;?php
+# Translation for Custom Status Code: <emphasis>testing</emphasis>
+switch( lang_get_current() ) {
+
+	french:
+		$s_status_enum_string = '10:nouveau,20:commentaire,30:accepté,40:confirmé,50:affecté,60:à tester,80:résolu,90:fermé';
+
+		$s_testing_bug_title = 'Mettre le bogue en test';
+		$s_testing_bug_button = 'A tester';
+
+		$s_email_notification_title_for_status_bug_testing = 'Le bogue suivant est prêt à être TESTE.';
+		;;
+
+	default: # english
+		$s_status_enum_string = '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,60:testing,80:resolved,90:closed';
+
+		$s_testing_bug_title = 'Mark issue Ready for Testing';
+		$s_testing_bug_button = 'Ready for Testing';
+
+		$s_email_notification_title_for_status_bug_testing = 'The following issue is ready for TESTING.';
+}
+</programlisting>
                     </para>
                 </listitem>
+
                 <listitem>
-                    <para>Define any configurations required.In the existing file
-                        config_inc.php in the main mantisbt directory:
-                        <programlisting>$g_status_enum_string =
-                            '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned, 60:to
-                            be tested,80:resolved,90:closed'; # Status color additions
-                            $g_status_colors['to be tested'] = '#ACE7AE';
-                        </programlisting>
+					<para>Add the new status to the workflow as required.
                     </para>
-                </listitem>
-                <listitem>
-                    <para>Add the status to any workflow defined.In config_inc.php:
-                        <programlisting>$g_status_enum_workflow[NEW_]=
-                            '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,60:to
-                            be tested'; $g_status_enum_workflow[FEEDBACK] =
-                            '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,60:to
-                            be tested'; $g_status_enum_workflow[ACKNOWLEDGED] =
-                            '20:feedback,30:acknowledged,40:confi rmed,50:assigned,60:to be
-                            tested'; $g_status_enum_workflow[CONFIRMED] =
-                            '20:feedback,40:confirmed,50:assigned,60:to be tested';
-                            $g_status_enum_workflow[ASSIGNED] = '20:feedback,50:assigned,60:to
-                            be tested,90:closed'; $g_status_enum_workflow[TEST] =
-                            '10:new,20:feedback,50:assigned,60:to be
-                            tested,80:resolved,90:closed'; $g_status_enum_workflow[RESOLVED] =
-                            '50:assigned,60:to be tested,80:resolved,90:closed';
-                            $g_status_enum_workflow[CLOSED] = '50:assigned,90:closed';
-                        </programlisting>
+					<para>This can either be done from the
+						Manage Workflow Transitions page
+						(see <xref linkend="admin.lifecycle.workflow.transitions" />)
+						or by manually editing <emphasis>config_inc.php</emphasis>
+						as per the example below:
+
+						<programlisting>
+$g_status_enum_workflow[NEW_]         ='30:acknowledged,20:feedback,40:confirmed,50:assigned,80:resolved';
+$g_status_enum_workflow[FEEDBACK]     ='30:acknowledged,40:confirmed,50:assigned,80:resolved';
+$g_status_enum_workflow[ACKNOWLEDGED] ='40:confirmed,20:feedback,50:assigned,80:resolved';
+$g_status_enum_workflow[CONFIRMED]    ='50:assigned,20:feedback,30:acknowledged,80:resolved';
+$g_status_enum_workflow[ASSIGNED]     ='60:testing,20:feedback,30:acknowledged,40:confirmed,80:resolved';
+$g_status_enum_workflow[TESTING]      ='80:resolved,20:feedback,50:assigned';
+$g_status_enum_workflow[RESOLVED]     ='90:closed,20:feedback,50:assigned';
+$g_status_enum_workflow[CLOSED]       ='20:feedback,50:assigned';
+</programlisting>
                     </para>
                 </listitem>
             </orderedlist>
