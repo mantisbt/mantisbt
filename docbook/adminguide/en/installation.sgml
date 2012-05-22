@@ -4,97 +4,311 @@
 	<para>This chapter explains how to install or upgrade MantisBT.
 	</para>
 
-	<para>The table below contains a high-level overview of the processes.
-		Refer to the subsequent chapters for details.
-	</para>
+	<section id="admin.install.overview">
+		<title>Overview</title>
 
-	<informaltable>
-		<tgroup cols="2">
-			<thead>
-				<row>
-					<entry>New Installation</entry>
-					<entry>Upgrade</entry>
-				</row>
-			</thead>
-			<tbody>
-				<row>
-					<entry>
-		<orderedlist>
-			<listitem><para>
-				<link linkend="admin.install.prereq">Check system requirements</link>
-			</para></listitem>
-			<listitem><para>
-				<link linkend="admin.install.preinstall">Download and deploy MantisBT</link>
-			</para></listitem>
-			<listitem><para>
-				<link linkend="admin.install.new">Execute the Installation script</link>
-			</para></listitem>
-			<listitem><para>
-				<link linkend="admin.install.config">Configure the system</link>
-			</para></listitem>
-			<listitem><para>
-				<link linkend="admin.install.postcommon">Execute post-installation common tasks</link>
-			</para></listitem>
-			<listitem><para>
-				<link linkend="admin.install.postinstall">Execute post-installation specific tasks</link>
-			</para></listitem>
-		</orderedlist>
-					</entry>
-					<entry>
-		<orderedlist>
-			<listitem><para>
-				<link linkend="admin.install.preinstall">Download and deploy MantisBT</link>
-			</para></listitem>
-			<listitem><para>
-				<link linkend="admin.install.backups">Backup your system</link>
-			</para></listitem>
-			<listitem><para>
-				Put the site down for maintenance
-			</para></listitem>
-			<listitem><para>
-				<link linkend="admin.install.upgrade">Execute the Upgrade script</link>
-			</para></listitem>
-			<listitem><para>
-				<link linkend="admin.install.postcommon">Execute post-installation common tasks</link>
-			</para></listitem>
-			<listitem><para>
-				<link linkend="admin.install.postupgrade">Execute post-upgrade specific tasks</link>
-			</para></listitem>
-		</orderedlist>
-					</entry>
-				</row>
-			</tbody>
-		</tgroup>
-	</informaltable>
+		<para>The table below contains a high-level overview of the processes.
+			Refer to the corresponding sections for details.
+		</para>
 
-	<section id="admin.install.prereq">
-		<title>Prerequisites</title>
+		<informaltable>
+			<tgroup cols="2">
+				<thead>
+					<row>
+						<entry>New Installation</entry>
+						<entry>Upgrade</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>
+			<orderedlist>
+				<listitem><para>
+					<link linkend="admin.install.requirements">Check system requirements</link>
+				</para></listitem>
+				<listitem><para>
+					<link linkend="admin.install.preinstall">Download and deploy MantisBT</link>
+				</para></listitem>
+				<listitem><para>
+					<link linkend="admin.install.new">Execute the Installation script</link>
+				</para></listitem>
+				<listitem><para>
+					<link linkend="admin.install.config">Configure the system</link>
+				</para></listitem>
+				<listitem><para>
+					<link linkend="admin.install.postcommon">Execute post-installation common tasks</link>
+				</para></listitem>
+				<listitem><para>
+					<link linkend="admin.install.postinstall">Execute post-installation specific tasks</link>
+				</para></listitem>
+			</orderedlist>
+						</entry>
+						<entry>
+			<orderedlist>
+				<listitem><para>
+					<link linkend="admin.install.preinstall">Download and deploy MantisBT</link>
+				</para></listitem>
+				<listitem><para>
+					<link linkend="admin.install.backups">Backup your system</link>
+				</para></listitem>
+				<listitem><para>
+					Put the site down for maintenance
+				</para></listitem>
+				<listitem><para>
+					<link linkend="admin.install.upgrade">Execute the Upgrade script</link>
+				</para></listitem>
+				<listitem><para>
+					<link linkend="admin.install.postcommon">Execute post-installation common tasks</link>
+				</para></listitem>
+				<listitem><para>
+					<link linkend="admin.install.postupgrade">Execute post-upgrade specific tasks</link>
+				</para></listitem>
+			</orderedlist>
+						</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</informaltable>
+	</section>
 
-		<itemizedlist>
-			<listitem>
-				<para>Install required software and ensure they are on
-					the correct version.
-				</para>
-				<para>Refer to
-				<link linkend="admin.about.requirments">Minimum Requirements</link>
-				and
-				<link linkend="admin.install.requirements">Requirements</link>
-				for further details.
-				</para>
-<para>@TODO these 2 sections should be combined into one</para>
-			</listitem>
+	<section id="admin.install.requirements">
+		<title>System Requirements</title>
 
-			<listitem>
-				<para>PHP File extensions</para>
-				<para>MantisBT uses only <emphasis>.php</emphasis> files.
-					If your webserver is configured for other extensions
-					(e.g. .PHP3, .PHTML) then you will have to have the administrator
-					add support for .PHP files. This should be a trivial
-					modification. Further details can be found in the
-					<ulink url="http://www.php.net/manual/en/installation.php">PHP documentation</ulink>
-				</para>
-			</listitem>
-		</itemizedlist>
+		<section id="admin.install.requirements.hardware">
+			<title>Server Hardware Requirements</title>
+
+			<para>MantisBT has modest hardware requirements.
+				It requires a computer that is able to run the
+				<link linkend="admin.install.requirements.software">server software</link>.
+			</para>
+
+			<itemizedlist>
+				<listitem>
+					<para>Server type</para>
+					<para>The server can be a shared public web server or
+						a dedicated co-located box.
+					</para>
+				</listitem>
+
+				<listitem>
+					<para>CPU and Memory</para>
+					<para>As for any web application, you should size your
+						server based on the traffic on the site.
+					</para>
+				</listitem>
+
+				<listitem>
+					<para>Disk</para>
+					<para>The application code is less than 20 MB
+					</para>
+					<para>The amount of disk space required for the database
+						will vary depending on the RDBMS and the volume of
+						data, the main driving factor being the expected number
+						and size of attachments.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+
+		<section id="admin.install.requirements.software">
+			<title>Server Software Requirements</title>
+
+			<para>All of the required software is free for commercial and
+				non-commercial use (open source). Please refer to the
+				<link linkend="admin.install.requirements.software.versions">table below</link>
+				for minimum and recommended versions.
+			</para>
+
+			<itemizedlist>
+				<listitem>
+					<para>Operating System</para>
+					<para>MantisBT runs on Windows, MacOS, OS/2, Linux, Solaris,
+						the BSDs, and just about anything that supports the
+						required server software.
+					</para>
+				</listitem>
+
+				<listitem>
+					<para>Web Server</para>
+					<para>MantisBT is mainly tested with
+						<ulink url="http://www.microsoft.com/iis">Microsoft IIS</ulink> and
+						<ulink url="http://www.apache.org/">Apache</ulink>.
+						However, it is expected to work with any recent web
+						server software.
+					</para>
+					<para>File Extensions:
+						MantisBT uses only <emphasis>.php</emphasis> files.
+						If your webserver is configured for other extensions
+						(e.g. .PHP3, .PHTML) then you will have to request the
+						administrator to add support for .PHP files. This should
+						be a trivial modification. Further details can be found
+						in the
+						<ulink url="http://www.php.net/manual/en/installation.php">PHP documentation</ulink>
+					</para>
+				</listitem>
+
+				<listitem>
+					<para><ulink url="http://www.php.net/">PHP</ulink></para>
+					<para>The web server must support PHP.  It can be installed
+						as CGI or any other integration technology.
+					</para>
+				</listitem>
+
+				<listitem>
+					<para>PHP extensions</para>
+					<para>MantisBT is designed to work in as many environments
+						as possible. Hence the required extensions are minimal
+						and many of them are optional affecting only one
+						feature.
+						<itemizedlist>
+							<listitem><para><emphasis>mandatory</emphasis>:
+								the extension for the RDBMS being used (
+									mysqli,
+									pgsql,
+									oci8,
+									mssql/sqlsrv,
+									ibm-db2
+								)
+							</para></listitem>
+
+							<listitem><para><emphasis>Curl</emphasis> -
+								required for the Twitter integration feature
+							</para></listitem>
+
+							<listitem><para><emphasis>GD</emphasis> -
+								required for the graphs feature
+							</para></listitem>
+
+							<listitem>
+								<para><emphasis>fileinfo</emphasis> -
+									Guesses the MIME type of attachments
+								</para>
+								<para>Without this extension, file attachment
+									previews and downloads may not work
+									correctly as MantisBT won't be able to send
+									the Content-Type header to a browser
+									requesting an attachment.
+								</para>
+								<para>This extension is included by default from
+									PHP version 5.3.x and above. For older versions
+									you will need to install the fileinfo PECL
+									extension (this requires root access to the
+									server you're using).
+							</para></listitem>
+						</itemizedlist>
+					</para>
+				</listitem>
+
+				<listitem>
+					<para>Database</para>
+					<para>MantisBT requires a database to store its data.
+						The supported RDBMS are
+							MySQL,
+							PostgreSQL,
+							DB2,
+							MS SQL and
+							Oracle (experimental).
+					</para>
+				</listitem>
+
+			</itemizedlist>
+
+			<section id="admin.install.requirements.software.versions">
+				<title>Versions compatibility table</title>
+
+				<informaltable>
+					<tgroup cols="5">
+						<thead>
+							<row>
+								<entry>Category</entry>
+								<entry>Package</entry>
+								<entry>Minimum Version</entry>
+								<entry>Recommended</entry>
+								<entry>Comments</entry>
+							</row>
+						</thead>
+						<tbody>
+							<row>
+								<entry morerows='4' valign='middle'>RDBMS</entry>
+								<entry>MySQL</entry>
+								<entry>4.1.x</entry>
+								<entry>5.0.x or above</entry>
+								<entry>PHP extension: mysqli</entry>
+							</row>
+							<row>
+								<entry>PostgreSQL</entry>
+								<entry>7.0</entry>
+								<entry>8.0 or above</entry>
+								<entry>PHP extension: pgsql</entry>
+							</row>
+							<row>
+								<entry>IBM DB2</entry>
+								<entry></entry>
+								<entry></entry>
+								<entry>PHP extension: ibm-db2</entry>
+							</row>
+							<row>
+								<entry>MS SQL Server</entry>
+								<entry></entry>
+								<entry></entry>
+								<entry>PHP extension: mssql or sqlsrv</entry>
+							</row>
+							<row>
+								<entry>Oracle</entry>
+								<entry>8i</entry>
+								<entry>11gR2</entry>
+								<entry>PHP extension: oci8</entry>
+							</row>
+
+							<row>
+								<entry morerows='2' valign='middle'>Web Server</entry>
+								<entry>Apache</entry>
+								<entry>1.3.x</entry>
+								<entry>2.2.x</entry>
+								<entry></entry>
+							</row>
+							<row>
+								<entry>lighttpd</entry>
+								<entry>1.4.x</entry>
+								<entry>1.4.x</entry>
+								<entry></entry>
+							</row>
+							<row>
+								<entry>IIS</entry>
+								<entry>6.0</entry>
+								<entry>6.0</entry>
+								<entry></entry>
+							</row>
+
+							<row>
+								<entry>PHP</entry>
+								<entry>PHP</entry>
+								<entry>5.1.x</entry>
+								<entry>5.2.x or above</entry>
+								<entry>See above for PHP extensions</entry>
+							</row>
+						</tbody>
+					</tgroup>
+				</informaltable>
+
+			</section>
+		</section>
+
+		<section id="admin.install.requirements.client">
+			<title>Client Requirements</title>
+
+			<para>MantisBT should run on most recent browsers in
+				the market, including but not limited to
+			</para>
+
+			<itemizedlist>
+				<listitem><para>Firefox 3 and above</para></listitem>
+				<listitem><para>Internet Explorer 6 and above</para></listitem>
+				<listitem><para>Chrome</para></listitem>
+				<listitem><para>Safari</para></listitem>
+				<listitem><para>Opera</para></listitem>
+			</itemizedlist>
+		</section>
 	</section>
 
 	<section id="admin.install.preinstall">
@@ -156,6 +370,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 					<programlisting>mv mantisbt-1.2.x mantisbt</programlisting>
 				</para>
 			</listitem>
+		</orderedlist>
 	</section>
 
 	<section id="admin.install.new">
@@ -165,9 +380,9 @@ tar -xf <emphasis>filename.tar</emphasis>
 			MantisBT.
 		</para>
 
-		<para>Start by Performing the steps described in
-			<link linkend="admin.install.preinstall">Pre-installation tasks</link>
-			above.
+		<para>Start by checking the <link linkend="admin.install.requirements">
+			system requirements</link> and installing the appropriate version
+			of required software.
 		</para>
 
 		<para>Once that is done, execute the installation script.
@@ -492,73 +707,6 @@ mv mantisbt-1.2.x mantisbt
 			</listitem>
 		</orderedlist>
 	</section>
-        <section id="admin.install.requirements">
-
-            <title>Requirements</title>
-
-
-            <para>The following versions are required for proper operation:</para>
-            <informaltable>
-                <tgroup cols="3">
-					<thead>
-                        <row>
-                            <entry>Package</entry>
-                            <entry>Minimum Version</entry>
-                            <entry>Tested with</entry>
-                        </row>
-					</thead>
-					<tbody>
-                        <row>
-                            <entry>MySQL</entry>
-                            <entry>4.1.x</entry>
-                            <entry>5.0.x</entry>
-                        </row>
-                        <row>
-                            <entry>PostgreSQL (experimental)</entry>
-                            <entry>7.0</entry>
-                            <entry>8.0</entry>
-                        </row>
-                        <row>
-                            <entry>PHP</entry>
-                            <entry>5.2.x</entry>
-                            <entry>5.2.x</entry>
-                        </row>
-                        <row>
-                            <entry>Web Server</entry>
-                            <entry></entry>
-                            <entry>Apache 1.3.x, Apache 2.2.x, lighttpd 1.4.x, IIS 6.0</entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </informaltable>
-
-            <para>MantisBT is designed in a way to work in as many environments as possible.
-            Hence the required extensions are minimal and many of them are optional affecting
-            only one feature.  The following PHP extensions are the ones used:</para>
-
-            <itemizedlist>
-                <listitem>
-                    <para>mysqli (or the extension for the DBMS being used) - mandatory.</para>
-                </listitem>
-                <listitem>
-                    <para>Curl - if the Twitter integration feature is required.</para>
-                </listitem>
-                <listitem>
-                    <para>GD - if the graphs feature is required.</para>
-                </listitem>
-                <listitem>
-                    <para>fileinfo - Guesses the MIME type of attachments.
-                    This extension is included by default from version 5.3.x
-                    of PHP. For older versions of PHP you will need to install
-                    the fileinfo PECL extension (this requires root access to
-                    the server you're using). Without this extension, file
-                    attachment previews and downloads may not work correctly as
-                    MantisBT won't be able to send the Content-Type header to a
-                    browser requesting an attachment.</para>
-                </listitem>
-            </itemizedlist>
-
-        </section>
 
         <section id="admin.install.backups">
 
