@@ -49,61 +49,6 @@
         </para>
     </section>
 
-    <section id="admin.about.requirments">
-        <title>Minimum Requirements</title>
-
-        <para>
-            MantisBT has modest software and hardware requirements.
-            It requires a computer that is able to run the server software.  All of the required
-            software is free for commercial or non-commercial use.  The
-            server can be a shared public web server or a dedicated co-located box.
-            The disk space required will depend on the size of the database,
-            however, it is typically driven by the expected number and size of
-            the attachments.
-        </para>
-
-        <itemizedlist>
-            <listitem>
-                <para>
-                    Operating System: MantisBT runs on Windows, MacOS, OS/2, Linux, Solaris, the
-                    BSDs, and just about anything that supports the required server software.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    Web Server: MantisBT is mainly tested with
-                    <ulink url="http://www.microsoft.com/iis">Microsoft IIS</ulink> and
-                    <ulink url="http://www.apache.org/">Apache</ulink>.  However,
-                    it is expected to work with any decent web server software.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <ulink url="http://www.php.net/">PHP</ulink>: The web server
-                    must have PHP installed on it.  It can be installed as CGI or
-                    whatever other integration technology that is supported by PHP
-                    and the web server.  Required version is PHP 5.3.0 or higher.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    Database: MantisBT requires a database to store its data.
-                    The supported DBMSes include MySQL (4.1.x or higher), MS SQL,
-                    PostgreSQL and DB2.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    Browser: MantisBT aims to support most of the browsers in
-                    the market.  The mainly supported ones are Internet Explorer and
-                    Firefox.  However, browsers like Safari, Chrome and Opera should
-                    also work fine although they are not used by most developers during
-                    development and testing.
-                </para>
-             </listitem>
-        </itemizedlist>
-    </section>
-
     <section id="admin.about.download">
         <title>How to get it?</title>
 
