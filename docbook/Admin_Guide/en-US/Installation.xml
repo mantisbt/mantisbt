@@ -13,7 +13,7 @@
 		<title>Overview</title>
 
 		<para>The table below contains a high-level overview of the processes.
-			Refer to the corresponding chapters for details.
+			Refer to the corresponding sections for details.
 		</para>
 
 		<informaltable>
@@ -302,7 +302,7 @@
 								<entry>PHP</entry>
 								<entry>5.3.2</entry>
 								<entry>5.3.x or above</entry>
-								<entry></entry>
+								<entry>See above for PHP extensions</entry>
 							</row>
 						</tbody>
 					</tgroup>
@@ -721,68 +721,110 @@ mv mantisbt-1.2.x mantisbt
 		</orderedlist>
 	</section>
 
-        <section id="admin.install.backups">
+	<section id="admin.install.backups">
+		<title>Backups</title>
 
-            <title>Backups</title>
+		<para>It is strongly recommended to backup your MantisBT database on a
+			regular basis. The method to perform this operation depends on
+			which RDBMS you use.
+		</para>
 
+		<para>Backups are a complex subject, and the specificities of
+			implementing and handling them for each RDBMS are beyond the scope
+			of this document.
+			For your convenience, the section below provides a simple method
+			to backup MySQL databases.
+		</para>
 
-            <para>It is recommended to backup your MantisBT database on a
-                regular basis. This is easy to accomplish using the mysqldump
-                command:
-                mysqldump -u&lt;username&gt; -p&lt;password&gt; &lt;database
-                name&gt; &gt; &lt;output file&gt;
-                To restore a backup you will need to have a clean database. Then
-                run:
-                mysql -u&lt;username&gt; -p&lt;password&gt; &lt;database name&gt;
-                &lt; &lt;input file&gt;
-                You can also perform both of these tasks using
-                <ulink url="http://www.phpmyadmin.net/">phpMyAdmin</ulink>
-                A good idea is to make a backup script and run it regularly through
-                cron or a task scheduler (for Windows see
-                <ulink url="http://www.wincron.com/">WinCron</ulink>
-                ).
-                Using the current date in the filename can prevent overwriting and
-                make cataloguing easier.
-				<emphasis>!!! Backups should always be performed before an upgrade !!!</emphasis>
-                Make sure to backup MantisBT code (which includes your configs +
-                possibly customization), issue attachments / project documents, and
-                database contents.
-            </para>
+		<para>You should also consider implementing backups of your MantisBT
+			code (which includes your configs and possibly customization),
+			as well as issue attachments (if stored on disk) and project
+			documents.
+		</para>
 
-        </section>
+		<para><emphasis>
+				!!! Backups should always be performed before an upgrade !!!
+			</emphasis>
+		</para>
 
-        <section id="admin.install.uninstall">
+		<section id="admin.install.backups.mysql">
+			<title>MySQL Backups</title>
 
-            <title>Uninstall</title>
+			<para>MySQL databases are easy to backup using the
+				<emphasis>mysqldump</emphasis> command:
+				<programlisting>
+mysqldump -u&lt;username&gt; -p&lt;password&gt; &lt;database name&gt; &gt; &lt;output file&gt;
+</programlisting>
+			</para>
 
+			<para>To restore a backup you will need to have a clean database. Then
+				run:
+				<programlisting>
+mysql -u&lt;username&gt; -p&lt;password&gt; &lt;database name&gt; &lt; &lt;input file&gt;
+</programlisting>
+			</para>
 
-            <para>
-                It is recommended that you make an backup in case you wish to use
-                your data in the future. See <xref linkend="admin.install.backups" />
-                for details.
-                To uninstall MantisBT:
-                <itemizedlist>
-                    <listitem>
-                        <para>Delete the MantisBT directory and all files and
-                            subdirectories.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Drop all MantisBT tables from the database, these can be
-                            identified by the configured prefix for the installation. The
-                            default prefix is 'mantis'.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Remove any customizations or additions that you may have
-                            made.
-                        </para>
-                    </listitem>
-                </itemizedlist>
-                If you have the permissions to create/drop databases and you have a
-                specific database for MantisBT that does not contain any other data,
-                you can drop the whole database.
-            </para>
+			<para>You can also perform both of these tasks using
+				<ulink url="http://www.phpmyadmin.net/">phpMyAdmin</ulink>
+			</para>
 
-        </section>
+			<para>A good idea is to make a backup script and run it regularly
+				through cron or a task scheduler (for Windows see
+				<ulink url="http://www.wincron.com/">WinCron</ulink>
+				).
+				Using the current date in the filename can prevent overwriting and
+				make cataloguing easier.
+			</para>
+
+			<para>References and useful links:
+				<itemizedlist>
+					<listitem><para>
+						<ulink url="http://dev.mysql.com/doc/refman/5.1/en/mysqlhotcopy.html">
+							mysqlhotcopy documentation
+						</ulink></para>
+					</listitem>
+					<listitem><para>
+						<ulink url="http://sourceforge.net/projects/automysqlbackup/">
+							automysqlbackup script
+						</ulink></para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+
+	</section>
+
+	<section id="admin.install.uninstall">
+		<title>Uninstall</title>
+
+		<para>It is recommended that you make a backup in case you wish to use
+			your data in the future. See
+			<xref linkend="admin.install.backups" /> for details.
+		</para>
+		<para>
+			To uninstall MantisBT:
+			<itemizedlist>
+				<listitem>
+					<para>Delete the MantisBT directory and all files and
+						subdirectories.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Drop all MantisBT tables from the database, these can be
+						identified by the configured prefix for the installation. The
+						default prefix is 'mantis'.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Remove any customizations or additions that you may have
+						made.
+					</para>
+				</listitem>
+			</itemizedlist>
+			If you have the permissions to create/drop databases and you have a
+			specific database for MantisBT that does not contain any other data,
+			you can drop the whole database.
+		</para>
+
+	</section>
 </chapter>
