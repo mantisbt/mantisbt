@@ -790,7 +790,12 @@ function db_prepare_double( $p_double ) {
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
  */
 function db_prepare_bool( $p_bool ) {
-	return (int) (bool) $p_bool;
+	global $g_db;
+	if( db_is_pgsql() ) {
+		return $g_db->qstr( $p_bool );
+	} else {
+		return (int) (bool) $p_bool;
+	}
 }
 
 /**

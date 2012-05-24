@@ -4398,7 +4398,7 @@ function filter_clear_cache( $p_filter_id = null ) {
 function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $p_filter_string ) {
 	$t_user_id = auth_get_current_user_id();
 	$c_project_id = db_prepare_int( $p_project_id );
-	$c_is_public = db_prepare_bool( $p_is_public, false );
+	$c_is_public = db_prepare_bool( $p_is_public );
 
 	$t_filters_table = db_get_table( 'mantis_filters_table' );
 
@@ -4670,7 +4670,7 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 
 	for( $i = 0;$i < $query_count;$i++ ) {
 		$row = db_fetch_array( $result );
-		if(( $row['user_id'] == $t_user_id ) || db_prepare_bool( $row['is_public'] ) ) {
+		if(( $row['user_id'] == $t_user_id ) || (bool) $row['is_public'] ) {
 			$t_overall_query_arr[$row['id']] = $row['name'];
 		}
 	}

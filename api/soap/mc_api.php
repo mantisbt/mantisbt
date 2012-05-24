@@ -177,7 +177,7 @@ function mci_null_if_empty( $p_value ) {
  * @return MantisBT URL terminated by a /.
  */
 function mci_get_mantis_path() {
-    
+
 	return config_get( 'path' );
 }
 
@@ -269,7 +269,7 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 
 	for( $i = 0;$i < $query_count;$i++ ) {
 		$row = db_fetch_array( $result );
-		if(( $row['user_id'] == $t_user_id ) || db_prepare_bool( $row['is_public'] ) ) {
+		if(( $row['user_id'] == $t_user_id ) || (bool) $row['is_public'] ) {
 
 		    $t_filter_detail = explode( '#', $row['filter_string'], 2 );
 		    if ( !isset($t_filter_detail[1]) ) {
@@ -300,11 +300,11 @@ function mci_category_as_array_by_id( $p_category_id ) {
 
 /**
  * Transforms a version array into an array suitable for marshalling into ProjectVersionData
- * 
+ *
  * @param array $p_version
  */
 function mci_project_version_as_array( $p_version ) {
-    
+
     return array(
 			'id' => $p_version['id'],
 			'name' => $p_version['version'],
@@ -318,20 +318,20 @@ function mci_project_version_as_array( $p_version ) {
 
 /**
  * Returns time tracking information from a bug note.
- * 
+ *
  * @param int $p_issue_id The id of the issue
  * @param Array $p_note A note as passed to the soap api methods
- * 
+ *
  * @return String the string time entry to be added to the bugnote, in 'HH:mm' format
  */
 function mci_get_time_tracking_from_note( $p_issue_id, $p_note) {
-	
+
 	if ( !access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_issue_id ) )
 		return '00:00';
 
 	if ( !isset( $p_note['time_tracking'] ))
 		return '00:00';
-		
+
 	return db_minutes_to_hhmm($p_note['time_tracking']);
 }
 
@@ -482,9 +482,9 @@ function error_get_stack_trace() {
 }
 
 /**
- * Returns a soap_fault signalling corresponding to a failed login 
+ * Returns a soap_fault signalling corresponding to a failed login
  * situation
- * 
+ *
  * @return soap_fault
  */
 function mci_soap_fault_login_failed() {
@@ -494,7 +494,7 @@ function mci_soap_fault_login_failed() {
 /**
  * Returns a soap_fault signalling that the user does not have
  * access rights for the specific action.
- * 
+ *
  * @param int $p_user_id a valid user id
  * @param string $p_detail The optional details to append to the error message
  * @return soap_fault
@@ -504,6 +504,6 @@ function mci_soap_fault_access_denied( $p_user_id, $p_detail = '' ) {
 	$t_reason = 'Access denied for user '. $t_user_name . '.';
 	if ( !is_blank( $p_detail ))
 		$t_reason .= ' Reason: ' . $p_detail . '.';
-	
+
 	return new soap_fault( 'Client', '',  $t_reason );
 }
