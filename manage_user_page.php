@@ -209,7 +209,11 @@ $total_user_count = 0;
 # Get the user data in $c_sort order
 $result = '';
 
-$t_show_disabled_cond = ( 1 == $c_show_disabled ? '' : ' AND enabled = 1' );
+if( 1 == $c_show_disabled ) {
+	$t_show_disabled_cond = '';
+} else {
+	$t_show_disabled_cond = ' AND enabled = ' . db_prepare_bool(true);
+}
 
 if ( 0 == $c_hide_inactive ) {
 	$query = "SELECT count(*) as usercnt

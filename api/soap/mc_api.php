@@ -177,7 +177,7 @@ function mci_null_if_empty( $p_value ) {
  * @return MantisBT URL terminated by a /.
  */
 function mci_get_mantis_path() {
-    
+
 	return config_get( 'path' );
 }
 
@@ -269,7 +269,7 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 
 	for( $i = 0;$i < $query_count;$i++ ) {
 		$row = db_fetch_array( $result );
-		if(( $row['user_id'] == $t_user_id ) || db_prepare_bool( $row['is_public'] ) ) {
+		if(( $row['user_id'] == $t_user_id ) || (bool) $row['is_public'] ) {
 
 		    $t_filter_detail = explode( '#', $row['filter_string'], 2 );
 		    if ( !isset($t_filter_detail[1]) ) {
@@ -300,11 +300,11 @@ function mci_category_as_array_by_id( $p_category_id ) {
 
 /**
  * Transforms a version array into an array suitable for marshalling into ProjectVersionData
- * 
+ *
  * @param array $p_version
  */
 function mci_project_version_as_array( $p_version ) {
-    
+
     return array(
 			'id' => $p_version['id'],
 			'name' => $p_version['version'],
