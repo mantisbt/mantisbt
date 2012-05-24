@@ -260,26 +260,26 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 	# first, we can override any query that has the same name as a private query
 	# with that private one
 	$query = "SELECT * FROM $t_filters_table
-				WHERE (project_id='$t_project_id'
-				OR project_id='0')
-				AND name!=''
-				ORDER BY is_public DESC, name ASC";
-	$result = db_query( $query );
+					WHERE (project_id=" . db_param() . "
+						OR project_id=0)
+					AND name!=''
+					AND (is_public = " . db_prepare_bool(true) . "
+						OR user_id = " . db_param() . ")
+					ORDER BY is_public DESC, name ASC";
+	$result = db_query_bound( $query, Array( $t_project_id, $t_user_id ) );
 	$query_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $query_count;$i++ ) {
 		$row = db_fetch_array( $result );
-		if(( $row['user_id'] == $t_user_id ) || (bool) $row['is_public'] ) {
 
-		    $t_filter_detail = explode( '#', $row['filter_string'], 2 );
-		    if ( !isset($t_filter_detail[1]) ) {
-		    	continue;
-		    }
-        	$t_filter = unserialize( $t_filter_detail[1] );
-	        $t_filter = filter_ensure_valid_filter( $t_filter );
-		    $row['url'] = filter_get_url( $t_filter );
-			$t_overall_query_arr[$row['name']] = $row;
+		$t_filter_detail = explode( '#', $row['filter_string'], 2 );
+		if ( !isset($t_filter_detail[1]) ) {
+			continue;
 		}
+		$t_filter = unserialize( $t_filter_detail[1] );
+		$t_filter = filter_ensure_valid_filter( $t_filter );
+		$row['url'] = filter_get_url( $t_filter );
+		$t_overall_query_arr[$row['name']] = $row;
 	}
 
 	return array_values( $t_overall_query_arr );
