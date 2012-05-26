@@ -615,6 +615,7 @@ $s_1_week_title = '1 أسبوع';
 $s_never_logged_in_title = 'لم يسجل الدخول أبدا';
 $s_prune_accounts = 'إلغاء الحسابات';
 $s_hide_inactive = 'إخفاء غير النشط';
+$s_show_disabled = 'أظهر المعطلة';
 $s_manage_accounts_title = 'التحكم بالحسابات';
 $s_p = 'بي';
 $s_date_created = 'تاريخ الإنشاء';

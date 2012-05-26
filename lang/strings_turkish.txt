@@ -26,6 +26,7 @@
  * @file
  *
  * @author Emperyan
+ * @author Incelemeelemani
  * @author Joseph
  * @author Karduelis
  * @author Khutuck
@@ -272,7 +273,7 @@ $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '"%1$s" alanı geçersiz geçersiz "%2$s"
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Geçersiz oturum işleyicisi.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = '"%1$s" oturum değişkeni bulunamadı.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Uzun süredir sayfaya bakılmadığı için oturumunuz sonlandırılmıştır.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Geçersiz form güvenlik anahtarı. Formu yanlışlıkla iki kere mi gönderdiniz?';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Geçersiz form güvenlik anahtarı. Bu durum oturumda zaman aşımı veya formun yanlışlıkla iki defa gönderilmesinden kaynaklanıyor olabilir.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Bu sayfaya bu şekilde erişilemez.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Geçersiz alan sıralaması.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Geçersiz tarih biçimi.';
@@ -462,8 +463,11 @@ $s_monitor_bug_button = 'Takip et';
 $s_unmonitor_bug_button = 'İzlemeyi Sonlandır';
 $s_file_upload_msg = 'Dosya başarıyla gönderildi';
 $s_upload_file = 'Dosya Gönder';
+$s_upload_files = 'Dosyaları yükle';
 $s_select_file = 'Dosya Seç';
+$s_select_files = 'Dosyaları seçin';
 $s_upload_file_button = 'Dosya Gönder';
+$s_upload_files_button = 'Dosyaları yükle';
 $s_max_file_size = 'Maksimum boyut';
 $s_bug_reopened_msg = 'Konu yeniden açıldı...';
 $s_reopen_add_bugnote_title = 'Konuyu yeniden açma sebebini giriniz';
@@ -612,6 +616,7 @@ $s_1_week_title = '1 Hafta';
 $s_never_logged_in_title = 'Sisteme hiç girmeyen kullanıcılar';
 $s_prune_accounts = 'Hesapları Temizle';
 $s_hide_inactive = 'Aktif Olmayanları Gizle';
+$s_show_disabled = 'Devre dışı';
 $s_manage_accounts_title = 'Hesapları Düzenle';
 $s_p = 'k';
 $s_date_created = 'Açılış Tarihi';
@@ -960,6 +965,7 @@ $s_update_bug_button = 'Düzenle';
 $s_bug_assign_to_button = 'Atanan:';
 $s_bug_status_to_button = 'Durum Değiştir:';
 $s_reopen_bug_button = 'Yeniden Aç';
+$s_close_bug_button = 'Kapat';
 $s_move_bug_button = 'Taşı';
 $s_attached_files = 'Eklenen Dosyalar';
 $s_publish = 'Yayınla';
