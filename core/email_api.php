@@ -201,7 +201,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	# add explicitly specified users
 	if ( ON == email_notify_flag( $p_notify_type, 'explicit' ) ) {
 		foreach ( $p_extra_user_ids_to_email as $t_user_id ) {
-			$t_recipients[$t_user_id] = true;
+			array_push($t_recipients, $t_user_id);
 			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add explicitly specified user = @U%d', $p_bug_id, $t_user_id ) );
 		}
 	}
@@ -209,7 +209,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	# add Reporter
 	if( ON == email_notify_flag( $p_notify_type, 'reporter' ) ) {
 		$t_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
-		$t_recipients[$t_reporter_id] = true;
+		array_push($t_recipients, $t_reporter_id);
 		log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Reporter = @U%d', $p_bug_id, $t_reporter_id ) );
 	}
 
@@ -218,7 +218,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
 
 		if( $t_handler_id > 0 ) {
-			$t_recipients[$t_handler_id] = true;
+			array_push($t_recipients, $t_handler_id);
 			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Handler = @U%d', $p_bug_id, $t_handler_id ) );
 		}
 	}
@@ -236,7 +236,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		$count = db_num_rows( $result );
 		for( $i = 0;$i < $count;$i++ ) {
 			$t_user_id = db_result( $result, $i );
-			$t_recipients[$t_user_id] = true;
+			array_push($t_recipients, $t_user_id);
 			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Monitor = @U%d', $p_bug_id, $t_user_id ) );
 		}
 	}
@@ -258,7 +258,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		$count = db_num_rows( $result );
 		for( $i = 0;$i < $count;$i++ ) {
 			$t_user_id = db_result( $result, $i );
-			$t_recipients[$t_user_id] = true;
+			array_push($t_recipients, $t_user_id);
 			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Note Author = @U%d', $p_bug_id, $t_user_id ) );
 		}
 	}
@@ -271,7 +271,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	foreach( $t_threshold_users as $t_user ) {
 		if( $t_user['access_level'] <= $t_threshold_max ) {
 			if( !$t_bug_is_private || access_compare_level( $t_user['access_level'], config_get( 'private_bug_threshold' ) ) ) {
-				$t_recipients[$t_user['id']] = true;
+				array_push($t_recipients, $t_user['id']);
 				log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Project User = @U%d', $p_bug_id, $t_user['id'] ) );
 			}
 		}
@@ -284,7 +284,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 			# only handle if we get an array from the callback
 			if ( is_array( $t_recipients_included ) ) {
 				foreach( $t_recipients_included as $t_user_id ) {
-					$t_recipients[ $t_user_id ] = true;
+					array_push($t_recipients, $t_user_id);
 					log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, %s plugin added user @U%d', $p_bug_id, $t_plugin, $t_user_id ) );
 				}
 			}
@@ -332,14 +332,29 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	#  of user ids so we could pull them all in.  We'll see if it's necessary
 	$t_final_recipients = array();
 
-	$t_user_ids = array_keys( $t_recipients );
+	# Collect user IDs
+	$t_user_ids = array();
+	foreach ($t_recipients as $t_current_recipient) {
+		if (!is_array($t_current_recipient))
+		{
+			array_push($t_user_ids, $t_current_recipient);
+		}
+	}
+
 	user_cache_array_rows( $t_user_ids );
 	user_pref_cache_array_rows( $t_user_ids );
 	user_pref_cache_array_rows( $t_user_ids, $t_bug->project_id );
 
 	# Check whether users should receive the emails
 	# and put email address to $t_recipients[user_id]
-	foreach( $t_recipients as $t_id => $t_ignore ) {
+	foreach( $t_recipients as $t_current_recipient ) {
+		if ( is_array( $t_current_recipient ) ) {
+			$t_id = $t_current_recipient['user_id'];
+		}
+		else {
+			$t_id = $t_current_recipient;
+		}
+
 		# Possibly eliminate the current user
 		if(( auth_get_current_user_id() == $t_id ) && ( OFF == config_get( 'email_receive_own' ) ) ) {
 			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (own)', $p_bug_id, $t_id ) );
@@ -399,13 +414,26 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		}
 
 		# Finally, let's get their emails, if they've set one
-		$t_email = user_get_email( $t_id );
+		if ( is_array( $t_current_recipient ) )
+		{
+			$t_email = user_get_email( $t_id );	
+		}
+		else
+		{
+			$t_email = $t_current_recipient['email'];
+		}
+		
 		if( is_blank( $t_email ) ) {
 			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (no email)', $p_bug_id, $t_id ) );
 		} else {
 			# @@@ we could check the emails for validity again but I think
 			#   it would be too slow
-			$t_final_recipients[$t_id] = $t_email;
+			$t_current_user = array(
+				'user_id' => $t_id,
+				'email' => $t_email
+			);
+			
+			array_push($t_final_recipients, $t_current_user);
 		}
 	}
 
@@ -556,7 +584,10 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_head
 
 		if( is_array( $t_recipients ) ) {
 			# send email to every recipient
-			foreach( $t_recipients as $t_user_id => $t_user_email ) {
+			foreach( $t_recipients as $t_current_recipient ) {
+				$t_user_id = $t_current_recipient['user_id'];
+				$t_user_email = $t_current_recipient['email'];
+
 				log_event( LOG_EMAIL, sprintf( "Issue = #%d, Type = %s, Msg = '%s', User = @U%d, Email = '%s'.", $p_bug_id, $p_notify_type, $p_message_id, $t_user_id, $t_user_email ) );
 
 				# load (push) user language here as build_visible_bug_data assumes current language
