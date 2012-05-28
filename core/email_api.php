@@ -416,11 +416,11 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		# Finally, let's get their emails, if they've set one
 		if ( is_array( $t_current_recipient ) )
 		{
-			$t_email = user_get_email( $t_id );	
+			$t_email = $t_current_recipient['email'];
 		}
 		else
 		{
-			$t_email = $t_current_recipient['email'];
+			$t_email = user_get_email( $t_id );	
 		}
 		
 		if( is_blank( $t_email ) ) {
@@ -594,7 +594,7 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_head
 				lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
 
 				$t_visible_bug_data = email_build_visible_bug_data( $t_user_id, $p_bug_id, $p_message_id );
-				$t_ok = email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_project_id, $t_user_id, $p_header_optional_params ) && $t_ok;
+				$t_ok = email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_project_id, $t_user_email, $p_header_optional_params ) && $t_ok;
 
 				lang_pop();
 			}
@@ -1182,8 +1182,7 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
  * @param array $p_header_optional_params
  * @return bool
  */
-function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_project_id, $p_user_id, $p_header_optional_params = null ) {
-	$t_user_email = user_get_email( $p_user_id );
+function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_project_id, $t_user_email, $p_header_optional_params = null ) {
 
 	# check whether email should be sent
 	# @@@ can be email field empty? if yes - then it should be handled here
