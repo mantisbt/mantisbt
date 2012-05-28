@@ -414,8 +414,10 @@ function mc_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 
 	$t_error_description = $t_error_description;
 	$t_error_stack = error_get_stack_trace();
+	
+	error_log("[mantisconnect.php] Error Type: $t_error_type,\nError Description: $t_error_description\nStack Trace:\n$t_error_stack");
 
-	$l_oServer->fault( 'Server', "Error Type: $t_error_type,\nError Description:\n$t_error_description,\nStack Trace:\n$t_error_stack" );
+	$l_oServer->fault( 'Server', "Error Type: $t_error_type,\nError Description: $t_error_description" );
 	$l_oServer->send_response();
 	exit();
 }
