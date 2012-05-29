@@ -54,9 +54,6 @@
 		print_header_redirect( 'view_all_set.php?type=0&print=1' );
 	}
 
-	# pre-cache custom column data
-	columns_plugin_cache_issue_data( $result );
-
 	header( 'Content-Type: application/vnd.ms-excel; charset=UTF-8' );
 	header( 'Pragma: public' );
 	header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_export_title ) ) . '.xml"' ) ;
@@ -69,6 +66,9 @@
 	$t_columns = excel_get_columns();
 
 	do {
+		# pre-cache custom column data
+		columns_plugin_cache_issue_data( $result );
+
 		foreach( $result as $t_row ) {
 			if ( is_blank( $f_export ) || in_array( $t_row->id, $f_bug_arr ) ) {
 				echo excel_get_start_row();
