@@ -2069,11 +2069,7 @@ function filter_cache_result( $p_rows, $p_id_array_lastmod ) {
  * @see filter_draw_selection_area2
  */
 function filter_draw_selection_area( $p_page_number, $p_for_screen = true ) {
-	collapse_open( 'filter' );
 	filter_draw_selection_area2( $p_page_number, $p_for_screen, true );
-	collapse_closed( 'filter' );
-	filter_draw_selection_area2( $p_page_number, $p_for_screen, false );
-	collapse_end( 'filter' );
 }
 
 /**
@@ -2104,9 +2100,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_action = 'view_all_set.php';
 	}
 	?>
-
-		<br />
-		<form method="post" name="filters<?php echo $t_form_name_suffix?>" id="filters_form<?php echo $t_form_name_suffix?>" action="<?php echo $t_action;?>">
+<div class="row-fluid">
+	<div class="span3">
+			<form method="post" name="filters<?php echo $t_form_name_suffix?>" id="filters_form<?php echo $t_form_name_suffix?>" action="<?php echo $t_action;?>">
 		<?php # CSRF protection not required here - form does not result in modifications ?>
 		<input type="hidden" name="type" value="1" />
 		<?php
@@ -2117,7 +2113,6 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	?>
 		<input type="hidden" name="page_number" value="<?php echo $t_page_number?>" />
 		<input type="hidden" name="view_type" value="<?php echo $t_view_type?>" />
-		<table class="width100" cellspacing="1">
 
 		<?php
 		$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
@@ -2165,44 +2160,70 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				META_FILTER_ANY,
 			);
 		}
-		?>
+		?>	
+			
+						<div class="input-append">
 
-		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
-			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_REPORTER_ID . '[]';?>" id="reporter_id_filter"><?php echo lang_get( 'reporter' )?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_MONITOR_USER_ID . '[]';?>" id="user_monitor_filter"><?php echo lang_get( 'monitored_by' )?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HANDLER_ID . '[]';?>" id="handler_id_filter"><?php echo lang_get( 'assigned_to' )?>:</a>
-			</td>
-			<td colspan="2" class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_CATEGORY . '[]';?>" id="show_category_filter"><?php echo lang_get( 'category' )?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_SEVERITY_ID . '[]';?>" id="show_severity_filter"><?php echo lang_get( 'severity' )?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_RESOLUTION_ID . '[]';?>" id="show_resolution_filter"><?php echo lang_get( 'resolution' )?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-					<a href="<?php echo $t_filters_url . 'show_profile[]';?>" id="show_profile_filter"><?php echo lang_get( 'profile' )?>:</a>
-				<?php } ?>
-			</td>
-			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
-		}?>
-		</tr>
+			<?php echo '<input type="text" size="16" class="appendedInputButton" style="width:160px; float:left; height:16px;" placeholder="'.lang_get( 'search' ).'" name="', FILTER_PROPERTY_FREE_TEXT, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FREE_TEXT] ), '" />'; ?>
+			<input type="submit" name="filter" class="btn" value="<?php echo lang_get( 'filter_button' )?>" />
+			
+			</div>
+			<div class="well sidebar-nav">
+						<ul class="nav nav-list">
 
-		<tr class="row-1">
-			<td class="small-caption" valign="top" id="reporter_id_filter_target">
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_REPORTER_ID . '[]';?>" id="reporter_id_filter"><?php echo lang_get( 'reporter' )?>:</label></a><span id="reporter_id_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_MONITOR_USER_ID . '[]';?>" id="user_monitor_filter"><?php echo lang_get( 'monitored_by' )?>:</label></a><span id="user_monitor_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_HANDLER_ID . '[]';?>" id="handler_id_filter"><?php echo lang_get( 'assigned_to' )?>:</label></a><span id="handler_id_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_CATEGORY . '[]';?>" id="show_category_filter"><?php echo lang_get( 'category' )?>:</label></a><span id="show_category_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_SEVERITY_ID . '[]';?>" id="show_severity_filter"><?php echo lang_get( 'severity' )?>:</label></a><span id="show_severity_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_RESOLUTION_ID . '[]';?>" id="show_resolution_filter"><?php echo lang_get( 'resolution' )?>:</label></a><span id="show_resolution_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
+			<li><label><a href="<?php echo $t_filters_url . 'show_profile[]';?>" id="show_profile_filter"><?php echo lang_get( 'profile' )?>:</label></a><span id="show_profile_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<?php } ?>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_ISSUES_PER_PAGE;?>" id="per_page_filter"><?php echo lang_get( 'show' )?>:</label></a><span id="per_page_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_VIEW_STATE_ID;?>" id="view_state_filter"><?php echo lang_get( 'view_status' )?>:</label></a><span id="view_state_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_SHOW_STICKY_ISSUES;?>" id="sticky_issues_filter"><?php echo lang_get( 'sticky' )?>:</label></a><span id="sticky_issues_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_HIGHLIGHT_CHANGED;?>" id="highlight_changed_filter"><?php echo lang_get( 'changed' )?>:</label></a><span id="highlight_changed_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_FILTER_BY_DATE;?>" id="do_filter_by_date_filter"><?php echo lang_get( 'use_date_filters' )?>:</label></a><span id="do_filter_by_date_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_RELATIONSHIP_TYPE;?>" id="relationship_type_filter"><?php echo lang_get( 'bug_relationships' )?>:</label></a><span id="relationship_type_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_STATUS_ID . '[]';?>" id="show_status_filter"><?php echo lang_get( 'status' )?>:</label></a><span id="show_status_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<?php if( 'simple' == $t_view_type ) {?>
+				<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_HIDE_STATUS_ID . '[]';?>" id="hide_status_filter"><?php echo lang_get( 'hide_status' )?>:</label></a><span id="hide_status_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<?php }?>
+			<?php if ( $t_show_build ) { ?>
+				<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRODUCT_BUILD . '[]';?>" id="show_build_filter"><?php echo lang_get( 'product_build' )?>:</label></a><span id="show_build_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<?php } ?>
+			<?php if( $t_show_product_version ) {?>
+				<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRODUCT_VERSION . '[]';?>" id="show_version_filter"><?php echo lang_get( 'product_version' )?>:</label></a><span id="show_version_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+				<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_FIXED_IN_VERSION . '[]';?>" id="show_fixed_in_version_filter"><?php echo lang_get( 'fixed_in_version' )?>:</label></a><span id="show_fixed_in_version_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+				<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_TARGET_VERSION . '[]';?>" id="show_target_version_filter"><?php echo lang_get( 'target_version' )?>:</label></a><span id="show_target_version_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<?php } ?>
+				<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRIORITY_ID . '[]';?>" id="show_priority_filter"><?php echo lang_get( 'priority' )?>:</label></a><span id="show_priority_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
+				<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_PLATFORM;?>" id="platform_filter"><?php echo lang_get( 'platform' )?>:</label></a><span id="platform_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<?php } ?>
+			<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
+				<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_OS;?>" id="os_filter"><?php echo lang_get( 'os' )?>:</label></a><span id="os_filter_target"></span></li>
+			<?php } ?>
+			<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
+				<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_OS_BUILD;?>" id="os_build_filter"><?php echo lang_get( 'os_version' )?>:</label></a><span id="os_build_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<?php } ?>
+			<?php if ( access_has_global_level( config_get( 'tag_view_threshold' ) ) ) { ?>
+				<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_TAG_STRING;?>" id="tag_string_filter"><?php echo lang_get( 'tags' )?>:</label></a><span id="tag_string_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<?php } ?>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_NOTE_USER_ID;?>" id="note_user_id_filter"><?php echo lang_get( 'note_user_id' )?>:</label></a><span id="note_user_id_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<li><label><a href="<?php echo $t_filters_url . 'show_sort';?>" id="show_sort_filter"><?php echo lang_get( 'sort' )?>:</label></a><span id="show_sort_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></li>
+			<li><label><a href="<?php echo $t_filters_url . FILTER_PROPERTY_PROJECT_ID;?>" id="project_id_filter"><?php echo lang_get( 'email_project' )?>:</a><span id="project_id_filter_target"><?php if( count( $t_filter[FILTER_USER_MONITOR] ) == 0 ) { echo lang_get( 'any' ); } ?></span></label></li>
+
+			
+			</ul>
+			</div>
+			<div class="well">
 							<?php
 								$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_REPORTER_ID] ) == 0 ) {
-			echo lang_get( 'any' );
+			//
 		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_REPORTER_ID] as $t_current ) {
@@ -2230,19 +2251,18 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_output = $t_output . string_display_line( $t_this_name );
 			}
 			if( true == $t_any_found ) {
-				echo lang_get( 'any' );
+				
 			} else {
 				echo $t_output;
 			}
 		}
 		?>
-			</td>
-			<td class="small-caption" valign="top" id="user_monitor_filter_target">
+			
 							<?php
 								$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] ) == 0 ) {
-			echo lang_get( 'any' );
+			//
 		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] as $t_current ) {
@@ -2268,19 +2288,19 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_output = $t_output . string_display_line( $t_this_name );
 			}
 			if( true == $t_any_found ) {
-				echo lang_get( 'any' );
+				
 			} else {
 				echo string_display( $t_output );
 			}
 		}
 		?>
-			</td>
-			<td class="small-caption" valign="top" id="handler_id_filter_target">
+			
+			
 							<?php
 								$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_HANDLER_ID] ) == 0 ) {
-			echo lang_get( 'any' );
+			//
 		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_HANDLER_ID] as $t_current ) {
@@ -2307,19 +2327,19 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_output = $t_output . string_display_line( $t_this_name );
 			}
 			if( true == $t_any_found ) {
-				echo lang_get( 'any' );
+				
 			} else {
 				echo string_display( $t_output );
 			}
 		}
 		?>
-			</td>
-			<td colspan="2" class="small-caption" valign="top" id="show_category_filter_target">
+			
+			
 							<?php
 								$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_CATEGORY] ) == 0 ) {
-			echo lang_get( 'any' );
+			//
 		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_CATEGORY] as $t_current ) {
@@ -2338,19 +2358,19 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_output = $t_output . string_display_line( $t_this_string );
 			}
 			if( true == $t_any_found ) {
-				echo lang_get( 'any' );
+				
 			} else {
 				echo $t_output;
 			}
 		}
 		?>
-			</td>
-			<td class="small-caption" valign="top" id="show_severity_filter_target">
+			
+			
 							<?php
 								$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_SEVERITY_ID] ) == 0 ) {
-			echo lang_get( 'any' );
+			//
 		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_SEVERITY_ID] as $t_current ) {
@@ -2369,19 +2389,19 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_output = $t_output . string_display_line( $t_this_string );
 			}
 			if( true == $t_any_found ) {
-				echo lang_get( 'any' );
+				
 			} else {
 				echo $t_output;
 			}
 		}
 		?>
-			</td>
-			<td class="small-caption" valign="top" id="show_resolution_filter_target">
+			
+			
 							<?php
 								$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_RESOLUTION_ID] ) == 0 ) {
-			echo lang_get( 'any' );
+			//
 		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_RESOLUTION_ID] as $t_current ) {
@@ -2402,20 +2422,20 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_output = $t_output . string_display_line( $t_this_string );
 			}
 			if( true == $t_any_found ) {
-				echo lang_get( 'any' );
+				
 			} else {
 				echo $t_output;
 			}
 		}
 		?>
-			</td>
+			
 			<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-			<td class="small-caption" valign="top" id="show_profile_filter_target">
+			
 							<?php
 								$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter['show_profile'] ) == 0 ) {
-			echo lang_get( 'any' );
+			//
 		} else {
 			$t_first_flag = true;
 			foreach( $t_filter['show_profile'] as $t_current ) {
@@ -2438,74 +2458,21 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_output = $t_output . string_display_line( $t_this_string );
 			}
 			if( true == $t_any_found ) {
-				echo lang_get( 'any' );
+				
 			} else {
 				echo $t_output;
 			}
 		}
 		?>
-			</td>
-			<?php } else { ?>
-				<td></td>
-			<?php }
-				  if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
-		}?>
-			</tr>
-
-		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
-			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_STATUS_ID . '[]';?>" id="show_status_filter"><?php echo lang_get( 'status' )?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<?php if( 'simple' == $t_view_type ) {?>
-					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HIDE_STATUS_ID . '[]';?>" id="hide_status_filter"><?php echo lang_get( 'hide_status' )?>:</a>
-				<?php
-		}?>
-			</td>
-			<td class="small-caption" valign="top">
-			<?php if ( $t_show_build ) { ?>
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRODUCT_BUILD . '[]';?>" id="show_build_filter"><?php echo lang_get( 'product_build' )?>:</a>
-			<?php } ?>
-			</td>
-			<?php if( $t_show_product_version ) {?>
-			<td colspan="2" class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRODUCT_VERSION . '[]';?>" id="show_version_filter"><?php echo lang_get( 'product_version' )?>:</a>
-			</td>
-			<td colspan="1" class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_FIXED_IN_VERSION . '[]';?>" id="show_fixed_in_version_filter"><?php echo lang_get( 'fixed_in_version' )?>:</a>
-			</td>
-			<td colspan="1" class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_TARGET_VERSION . '[]';?>" id="show_target_version_filter"><?php echo lang_get( 'target_version' )?>:</a>
-			</td>
-			<?php
-		} else {?>
-			<td colspan="2" class="small-caption" valign="top">
-				&#160;
-			</td>
-			<td colspan="1" class="small-caption" valign="top">
-				&#160;
-			</td>
-			<td colspan="1" class="small-caption" valign="top">
-				&nbsp;
-			</td>
-			<?php
-		}?>
-			<td colspan="1" class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRIORITY_ID . '[]';?>" id="show_priority_filter"><?php echo lang_get( 'priority' )?>:</a>
-			</td>
-			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&#160;</td>';
-		}?>
-		</tr>
-
-		<tr class="row-1">
-			<td class="small-caption" valign="top" id="show_status_filter_target">
+			
+			<?php }?>
+			
+			
 							<?php
 								$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_STATUS_ID] ) == 0 ) {
-			echo lang_get( 'any' );
+			//
 		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_STATUS_ID] as $t_current ) {
@@ -2524,20 +2491,20 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_output = $t_output . string_display_line( $t_this_string );
 			}
 			if( true == $t_any_found ) {
-				echo lang_get( 'any' );
+				
 			} else {
 				echo $t_output;
 			}
 		}
 		?>
-			</td>
-			<td class="small-caption" valign="top" id="hide_status_filter_target">
+			
+			
 							<?php
 								if( 'simple' == $t_view_type ) {
 			$t_output = '';
 			$t_none_found = false;
 			if( count( $t_filter[FILTER_PROPERTY_HIDE_STATUS_ID] ) == 0 ) {
-				echo lang_get( 'none' );
+				//echo lang_get( 'none' );
 			} else {
 				$t_first_flag = true;
 				foreach( $t_filter[FILTER_PROPERTY_HIDE_STATUS_ID] as $t_current ) {
@@ -2560,21 +2527,21 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_hide_status_post = ' (' . lang_get( 'and_above' ) . ')';
 				}
 				if( true == $t_none_found ) {
-					echo lang_get( 'none' );
+					//echo lang_get( 'none' );
 				} else {
-					echo $t_output . string_display_line( $t_hide_status_post );
+					//echo $t_output . string_display_line( $t_hide_status_post );
 				}
 			}
 		}
 		?>
-			</td>
+			
 			<?php if ( $t_show_build ) { ?>
-			<td class="small-caption" valign="top" id="show_build_filter_target">
+			
 							<?php
 								$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_PRODUCT_BUILD] ) == 0 ) {
-			echo lang_get( 'any' );
+			//
 		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_PRODUCT_BUILD] as $t_current ) {
@@ -2596,24 +2563,23 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_output = $t_output . string_display_line( $t_this_string );
 			}
 			if( true == $t_any_found ) {
-				echo lang_get( 'any' );
+				
 			} else {
-				echo $t_output;
+				//echo $t_output;
 			}
 		}
 		?>
-			</td>
+			
 			<?php } else { ?>
-			<td class="small-caption" valign="top"></td>
 			<?php }
 				if( $t_show_product_version ) {
 			?>
-			<td colspan="2" class="small-caption" valign="top" id="show_version_filter_target">
+			
 							<?php
 								$t_output = '';
 			$t_any_found = false;
 			if( count( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION] ) == 0 ) {
-				echo lang_get( 'any' );
+				//
 			} else {
 				$t_first_flag = true;
 				foreach( $t_filter[FILTER_PROPERTY_PRODUCT_VERSION] as $t_current ) {
@@ -2636,19 +2602,19 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_output = $t_output . string_display_line( $t_this_string );
 				}
 				if( true == $t_any_found ) {
-					echo lang_get( 'any' );
+					
 				} else {
-					echo $t_output;
+					//echo $t_output;
 				}
 			}
 			?>
-			</td>
-			<td colspan="1" class="small-caption" valign="top" id="show_fixed_in_version_filter_target">
+			
+			
 							<?php
 								$t_output = '';
 			$t_any_found = false;
 			if( count( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION] ) == 0 ) {
-				echo lang_get( 'any' );
+				//
 			} else {
 				$t_first_flag = true;
 				foreach( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION] as $t_current ) {
@@ -2670,19 +2636,19 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_output = $t_output . string_display_line( $t_this_string );
 				}
 				if( true == $t_any_found ) {
-					echo lang_get( 'any' );
+					
 				} else {
-					echo $t_output;
+					//echo $t_output;
 				}
 			}
 			?>
-			</td>
-				<td colspan="1" class="small-caption" valign="top" id="show_target_version_filter_target">
+			
+				
 								<?php
 									$t_output = '';
 			$t_any_found = false;
 			if( count( $t_filter[FILTER_PROPERTY_TARGET_VERSION] ) == 0 ) {
-				echo lang_get( 'any' );
+				//
 			} else {
 				$t_first_flag = true;
 				foreach( $t_filter[FILTER_PROPERTY_TARGET_VERSION] as $t_current ) {
@@ -2704,32 +2670,23 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_output = $t_output . string_display_line( $t_this_string );
 				}
 				if( true == $t_any_found ) {
-					echo lang_get( 'any' );
+					
 				} else {
-					echo $t_output;
+					//echo $t_output;
 				}
 			}
 			?>
-				</td>
+				
 			<?php
 		} else {?>
-			<td colspan="2" class="small-caption" valign="top">
-				&#160;
-			</td>
-			<td colspan="1" class="small-caption" valign="top">
-				&#160;
-			</td>
-			<td colspan="1" class="small-caption" valign="top">
-				&nbsp;
-			</td>
 			<?php
 		}?>
-			<td colspan="1" class="small-caption" valign="top" id="show_priority_filter_target">
+			
               <?php
 							  $t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_PRIORITY_ID] ) == 0 ) {
-			echo lang_get( 'any' );
+			//
 		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_PRIORITY_ID] as $t_current ) {
@@ -2748,76 +2705,47 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_output = $t_output . string_display_line( $t_this_string );
 			}
 			if( true == $t_any_found ) {
-				echo lang_get( 'any' );
+				
 			} else {
-				echo $t_output;
+				//echo $t_output;
 			}
 		}
 		?>
-	    	</td>
-			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&#160;</td>';
-		}?>
+	    	
 
-		</tr>
-
-		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
-			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_ISSUES_PER_PAGE;?>" id="per_page_filter"><?php echo lang_get( 'show' )?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_VIEW_STATE_ID;?>" id="view_state_filter"><?php echo lang_get( 'view_status' )?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_SHOW_STICKY_ISSUES;?>" id="sticky_issues_filter"><?php echo lang_get( 'sticky' )?>:</a>
-			</td>
-			<td class="small-caption" valign="top" colspan="2">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HIGHLIGHT_CHANGED;?>" id="highlight_changed_filter"><?php echo lang_get( 'changed' )?>:</a>
-			</td>
-			<td class="small-caption" valign="top" >
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_FILTER_BY_DATE;?>" id="do_filter_by_date_filter"><?php echo lang_get( 'use_date_filters' )?>:</a>
-			</td>
-			<td class="small-caption" valign="top" colspan="2">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_RELATIONSHIP_TYPE;?>" id="relationship_type_filter"><?php echo lang_get( 'bug_relationships' )?>:</a>
-			</td>
-			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
-		}?>
-		</tr>
-		<tr class="row-1">
-			<td class="small-caption" valign="top" id="per_page_filter_target">
+			
 				<?php
-					echo( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] == 0 ) ? lang_get( 'all' ) : string_display_line( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
+					//echo( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] == 0 ) ? lang_get( 'all' ) : string_display_line( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
 		echo '<input type="hidden" name="', FILTER_PROPERTY_ISSUES_PER_PAGE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] ), '" />';
 		?>
-			</td>
-			<td class="small-caption" valign="top" id="view_state_filter_target">
+			
+			
 				<?php
 				if( VS_PUBLIC === $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) {
-			echo lang_get( 'public' );
-		} else if( VS_PRIVATE === $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) {
-			echo lang_get( 'private' );
-		} else {
-			echo lang_get( 'any' );
+					echo lang_get( 'public' );
+				} else if( VS_PRIVATE === $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) {
+					echo lang_get( 'private' );
+				} else {
+			
 			$t_filter[FILTER_PROPERTY_VIEW_STATE_ID] = META_FILTER_ANY;
 		}
 		echo '<input type="hidden" name="', FILTER_PROPERTY_VIEW_STATE_ID, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_VIEW_STATE_ID] ), '" />';
 		?>
-			</td>
-			<td class="small-caption" valign="top" id="sticky_issues_filter_target">
+			
+			
 				<?php
 					$t_sticky_filter_state = gpc_string_to_bool( $t_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] );
-		print( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
+					//SI NO print( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
 		?>
 				<input type="hidden" name="sticky_issues" value="<?php echo $t_sticky_filter_state ? 'on' : 'off';?>" />
-			</td>
-			<td class="small-caption" valign="top" colspan="2" id="highlight_changed_filter_target">
+			
+			
 				<?php
-					echo $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
+					//echo $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
 		echo '<input type="hidden" name="', FILTER_PROPERTY_HIGHLIGHT_CHANGED, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] ), '" />';
 		?>
-			</td>
-			<td class="small-caption" valign="top"  id="do_filter_by_date_filter_target">
+			
+			<span  id="do_filter_by_date_filter_target">
 							<?php
 							if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
 			?>
@@ -2884,76 +2812,46 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				}
 			}
 		} else {
-			echo lang_get( 'no' );
+			//echo lang_get( 'no' );
 		}
 		?>
-			</td>
+			
 
-			<td class="small-caption" valign="top" colspan="2" id="relationship_type_filter_target">
+			
 							<?php
-								echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_TYPE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE]), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_TYPE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE]), '" />';
 		echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] ), '" />';
 		$c_rel_type = $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
 		$c_rel_bug = $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG];
 		if( -1 == $c_rel_type || 0 == $c_rel_bug ) {
-			echo lang_get( 'any' );
+			//
 		} else {
 			echo relationship_get_description_for_history( $c_rel_type ) . ' ' . $c_rel_bug;
 		}
 
 		?>
-			</td>
-			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
-		}?>
-		</tr>
-		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
-			<td class="small-caption" valign="top">
+			
+			
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PLATFORM;?>" id="platform_filter"><?php echo lang_get( 'platform' )?>:</a>
-				<?php } ?>
-			</td>
-			<td class="small-caption" valign="top">
-				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_OS;?>" id="os_filter"><?php echo lang_get( 'os' )?>:</a>
-				<?php } ?>
-			</td>
-			<td class="small-caption" valign="top">
-				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_OS_BUILD;?>" id="os_build_filter"><?php echo lang_get( 'os_version' )?>:</a>
-				<?php } ?>
-			</td>
-			<td class="small-caption" valign="top" colspan="5">
-				<?php if ( access_has_global_level( config_get( 'tag_view_threshold' ) ) ) { ?>
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_TAG_STRING;?>" id="tag_string_filter"><?php echo lang_get( 'tags' )?>:</a>
-				<?php } ?>
-			</td>
-			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
-		}?>
-		</tr>
-		<tr class="row-1">
-			<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-			<td class="small-caption" valign="top" id="platform_filter_target">
+			
 				<?php
 					print_multivalue_field( FILTER_PROPERTY_PLATFORM, $t_filter[FILTER_PROPERTY_PLATFORM] );
 		?>
-			</td>
-			<td class="small-caption" valign="top" id="os_filter_target">
+			
+			
 				<?php
 					print_multivalue_field( FILTER_PROPERTY_OS, $t_filter[FILTER_PROPERTY_OS] );
 		?>
-			</td>
-			<td class="small-caption" valign="top" id="os_build_filter_target">
+			
+			
 				<?php
 					print_multivalue_field( FILTER_PROPERTY_OS_BUILD, $t_filter[FILTER_PROPERTY_OS_BUILD] );
 		?>
-			</td>
+			
 			<?php } else {?>
-				<td colspan="3">&#160;</td>
 			<?php } ?>
 
-			<td class="small-caption" valign="top" id="tag_string_filter_target" colspan="5">
+			
 				<?php
 					$t_tag_string = $t_filter[FILTER_PROPERTY_TAG_STRING];
 		if( $t_filter[FILTER_PROPERTY_TAG_SELECT] != 0 && tag_exists( $t_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
@@ -2963,8 +2861,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		echo string_html_entities( $t_tag_string );
 		echo '<input type="hidden" name="', FILTER_PROPERTY_TAG_STRING, '" value="', string_attribute( $t_tag_string ), '" />';
 		?>
-			</td>
-		</tr>
+			
 		<?php
 
 		# get plugin filters
@@ -2975,10 +2872,10 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 		# output a filter form element for each plugin filter
 		foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
-			$t_fields .= '<td class="small-caption" valign="top"> <a href="' . $t_filters_url . string_attribute( $t_field_name ) .
+			$t_fields .= '<span> <a href="' . $t_filters_url . string_attribute( $t_field_name ) .
 				'" id="' . string_attribute( $t_field_name ) . '_filter">' . string_display_line( $t_filter_object->title ) . '</a> </td>';
 
-			$t_values .= '<td class="small-caption" valign="top" id="' . string_attribute( $t_field_name ) . '_filter_target"> ';
+			$t_values .= ' ';
 
 			if ( !isset( $t_filter[ $t_field_name ] ) ) {
 				$t_values .= lang_get( 'any' );
@@ -3069,7 +2966,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					}
 
 					if( isset( $t_accessible_custom_fields_names[$i] ) ) {
-						$t_fields .= '<td class="small-caption" valign="top"> ';
+						$t_fields .= '<span> ';
 						$t_fields .= '<a href="' . $t_filters_url . 'custom_field_' . $t_accessible_custom_fields_ids[$i] . '[]" id="custom_field_' . $t_accessible_custom_fields_ids[$i] . '_filter">';
 						$t_fields .= string_display_line( lang_get_defaulted( $t_accessible_custom_fields_names[$i] ) );
 						$t_fields .= '</a> </td> ';
@@ -3077,7 +2974,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_output = '';
 					$t_any_found = false;
 
-					$t_values .= '<td class="small-caption" valign="top" id="custom_field_' . $t_accessible_custom_fields_ids[$i] . '_filter_target"> ';
+					$t_values .= ' ';
 					if( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] ) ) {
 						$t_values .= lang_get( 'any' );
 					} else {
@@ -3240,16 +3137,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			}
 		}
 		?>
-		<tr class="row-1">
-			<td class="small-caption category2" valign="top">
-                <a href="<?php echo $t_filters_url . FILTER_PROPERTY_NOTE_USER_ID;?>" id="note_user_id_filter"><?php echo lang_get( 'note_user_id' )?>:</a>
-            </td>
-            <td class="small-caption" valign="top" id="note_user_id_filter_target">
+            
                 <?php
                     $t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] ) == 0 ) {
-			echo lang_get( 'any' );
+			//
 		} else {
 			$t_first_flag = true;
 			foreach( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] as $t_current ) {
@@ -3276,17 +3169,13 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_output = $t_output . string_display_line( $t_this_name );
 			}
 			if( true == $t_any_found ) {
-				echo lang_get( 'any' );
+				
 			} else {
 				$t_output;
 			}
 		}
 		?>
-            </td>
-			<td class="small-caption" valign="top">
-				<a href="<?php echo $t_filters_url . 'show_sort';?>" id="show_sort_filter"><?php echo lang_get( 'sort' )?>:</a>
-			</td>
-			<td class="small-caption" valign="top" id="show_sort_filter_target">
+			
 				<?php
 					$t_sort_fields = explode( ',', $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
 		$t_dir_fields = explode( ',', $t_filter[FILTER_PROPERTY_SORT_DIRECTION] );
@@ -3309,14 +3198,10 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			}
 		}
 		?>
-			</td>
 			<?php
 				if( 'advanced' == $t_view_type ) {
 			?>
-					<td class="small-caption" valign="top" colspan="2">
-						<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PROJECT_ID;?>" id="project_id_filter"><?php echo lang_get( 'email_project' )?>:</a>
-					</td>
-					<td class="small-caption" valign="top"  id="project_id_filter_target">
+					<span  id="project_id_filter_target">
 						<?php
 							$t_output = '';
 			if( !is_array( $t_filter[FILTER_PROPERTY_PROJECT_ID] ) ) {
@@ -3346,35 +3231,15 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				echo $t_output;
 			}
 			?>
-					</td>
 					<?php
-					if( $t_filter_cols > 6 ) {
-				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 5 ) . '">&#160;</td>';
-			}
-		} else {
-			if( $t_filter_cols > 3 ) {
-				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 2 ) . '">&#160;</td>';
-			}
-		}
-		?>
-		</tr>
+							}		?>
 		<?php
 	}
 
 	// expanded
 	?>
-		<tr>
-			<td colspan="2">
-				<?php
-					collapse_icon( 'filter' );
-	echo lang_get( 'search' ) . '&#160;';
-	echo '<input type="text" size="16" name="', FILTER_PROPERTY_FREE_TEXT, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FREE_TEXT] ), '" />';
-	?>
-
-				<input type="submit" name="filter" class="button-small" value="<?php echo lang_get( 'filter_button' )?>" />
-			</td>
+			
 			</form>
-			<td class="center" colspan="<?php echo( $t_filter_cols - 6 )?>"> <!-- use this label for padding -->
 				<?php
 					if( ON == config_get( 'dhtml_filters' ) ) {
 		$f_switch_view_link = 'view_all_set.php?type=6&view_type=';
@@ -3398,8 +3263,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		true );
 	}
 	?>
-			</td>
-			<td class="right" colspan="4">
+	
+
 			<?php
 			$t_stored_queries_arr = array();
 	$t_stored_queries_arr = filter_db_get_available_queries();
@@ -3424,11 +3289,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		}
 		?>
 					</select>
-					<input type="submit" name="switch_to_query_button" class="button-small" value="<?php echo lang_get( 'use_query' )?>" />
+					<input type="submit" name="switch_to_query_button" class="btn" value="<?php echo lang_get( 'use_query' )?>" />
 					</form>
 					<form method="post" name="open_queries" action="query_view_page.php">
 					<?php # CSRF protection not required here - form does not result in modifications ?>
-					<input type="submit" name="switch_to_query_button" class="button-small" value="<?php echo lang_get( 'open_queries' )?>" />
+					<input type="submit" name="switch_to_query_button" class="btn" value="<?php echo lang_get( 'open_queries' )?>" />
 					</form>
 				<?php
 	} else {
@@ -3437,7 +3302,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					<?php # CSRF protection not required here - form does not result in modifications ?>
 					<input type="hidden" name="type" value="3" />
 					<input type="hidden" name="source_query_id" value="-1" />
-					<input type="submit" name="reset_query_button" class="button-small" value="<?php echo lang_get( 'reset_query' )?>" />
+					<input type="submit" name="reset_query_button" class="btn" value="<?php echo lang_get( 'reset_query' )?>" />
 					</form>
 				<?php
 	}
@@ -3446,14 +3311,13 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 					<form method="post" name="save_query" action="query_store_page.php">
 					<?php # CSRF protection not required here - form does not result in modifications ?>
-					<input type="submit" name="save_query_button" class="button-small" value="<?php echo lang_get( 'save_query' )?>" />
+					<input type="submit" name="save_query_button" class="btn" value="<?php echo lang_get( 'save_query' )?>" />
 					</form>
+					</div>
+					</div>
 			<?php
 	}
 	?>
-			</td>
-		</tr>
-		</table>
 <?php
 }
 
@@ -4216,7 +4080,6 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 			break;
 	}
 
-	echo "\n<table cellspacing=\"0\" cellpadding=\"0\"><tr><td>\n";
 	echo "<select size=\"1\" name=\"custom_field_" . $p_field_id . "_control\" OnChange=\"" . $t_js_toggle_func . "();\">\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ANY . '"';
 	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ANY );
@@ -4244,12 +4107,9 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 	echo '>' . lang_get( 'on_or_after_date' ) . '</option>' . "\n";
 	echo '</select>' . "\n";
 
-	echo "</td></tr>\n<tr><td>";
 
 	print_date_selection_set( 'custom_field_' . $p_field_id . '_start', config_get( 'short_date_format' ), $t_start, $t_start_disable, false, $t_sel_start_year, $t_sel_end_year );
-	print "</td></tr>\n<tr><td>";
 	print_date_selection_set( 'custom_field_' . $p_field_id . '_end', config_get( 'short_date_format' ), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year );
-	print "</td></tr>\n</table>";
 }
 
 /**
@@ -4305,7 +4165,7 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
 		}
 
 		if( true == $t_any_found ) {
-			echo lang_get( 'any' );
+			//echo lang_get( 'any' );
 		} else {
 			echo $t_output;
 		}

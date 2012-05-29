@@ -54,7 +54,7 @@
 <br />
 <form method="post" action="tag_update.php">
 <?php echo form_security_field( 'tag_update' ) ?>
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 
 <!-- Title -->
 <tr>

@@ -53,7 +53,7 @@
 ?>
 
 <br />
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 <?php
 	# no bugnotes
 	if ( 0 == $num_notes ) {

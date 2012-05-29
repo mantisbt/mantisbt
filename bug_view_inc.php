@@ -196,28 +196,29 @@
 	#
 	# Start of Template
 	#
-
-	echo '<br />';
-	echo '<table class="width100" cellspacing="1">';
-	echo '<tr>';
-
-	# Form Title
 	echo '<td class="form-title" colspan="', $t_bugslist ? '3' : '4', '">';
 
-	echo $tpl_form_title;
+	echo '<div class="page-header"><h1>'.$tpl_form_title.' #'.$tpl_formatted_bug_id.", ".$tpl_project_name.'</h1></div>';
 
-	echo '&#160;<span class="small">';
+	echo '<div class="subnav">';
+	echo '<ul class="nav nav-pills">';
+
+	# Form Title
+	
 
 	# Jump to Bugnotes
-	print_bracket_link( "#bugnotes", lang_get( 'jump_to_bugnotes' ) );
+	echo '<li><a href="#bugnotes" >'.lang_get( 'jump_to_bugnotes' ).'</a></li>';
+	
 
 	# Send Bug Reminder
 	if ( $tpl_show_reminder_link ) {
-		print_bracket_link( $tpl_bug_reminder_link, lang_get( 'bug_reminder' ) );
+		echo '<li><a href="'.$tpl_bug_reminder_link.'" >'.lang_get( 'bug_reminder' ).'</a></li>';
+
 	}
 
 	if ( !is_blank( $tpl_wiki_link ) ) {
-		print_bracket_link( $tpl_wiki_link, lang_get( 'wiki' ) );
+		echo '<li><a href="'.$tpl_wiki_link.'" >'.lang_get( 'wiki' ).'</a></li>';
+
 	}
 
 	foreach ( $tpl_links as $t_plugin => $t_hooks ) {
@@ -236,43 +237,41 @@
 		}
 	}
 
-	echo '</span></td>';
 
 	# prev/next links
 	if ( $t_bugslist ) {
-		echo '<td class="center"><span class="small">';
 
 		$t_bugslist = explode( ',', $t_bugslist );
 		$t_index = array_search( $f_bug_id, $t_bugslist );
 		if ( false !== $t_index ) {
 			if ( isset( $t_bugslist[$t_index-1] ) ) {
-				print_bracket_link( 'view.php?id='.$t_bugslist[$t_index-1], '&lt;&lt;' );
+				//print_bracket_link( 'view.php?id='.$t_bugslist[$t_index-1], '&lt;&lt;' );
+				echo '<li><a href="view.php?id='.$t_bugslist[$t_index-1].'" >'.lang_get( 'prev' ).'</a></li>';
+
+				
 			}
 
 			if ( isset( $t_bugslist[$t_index+1] ) ) {
-				print_bracket_link( 'view.php?id='.$t_bugslist[$t_index+1], '&gt;&gt;' );
+				echo '<li><a href="view.php?id='.$t_bugslist[$t_index+1].'" >'.lang_get( 'next' ).'</a></li>';
 			}
 		}
-		echo '</span></td>';
 	}
 
 
 	# Links
-	echo '<td class="right" colspan="2">';
 
 	if ( !is_blank( $tpl_history_link ) ) {
 		# History
-		echo '<span class="small">';
-		print_bracket_link( $tpl_history_link, lang_get( 'bug_history' ) );
-		echo '</span>';
+		echo '<li><a href="'.$tpl_history_link.'" >'.lang_get( 'bug_history' ).'</a></li>';
+
 	}
 
 	# Print Bug
-	echo '<span class="small">';
-	print_bracket_link( $tpl_print_link, lang_get( 'print' ) );
-	echo '</span>';
-	echo '</td>';
-	echo '</tr>';
+	echo '<li><a href="'.$tpl_print_link.'" >'.lang_get( 'print' ).'</a></li>';
+
+	echo '</ul>';
+	echo '</div>';
+	echo '<table class="table table-striped table-bordered table-condensed">';
 
 	if ( $tpl_top_buttons_enabled ) {
 		echo '<tr align="center">';
@@ -683,14 +682,15 @@
 		print_bug_attachments_list( $tpl_bug_id );
 		echo '</td></tr>';
 	}
+		echo '</table>';
+
 
 	if ( $tpl_bottom_buttons_enabled ) {
-		echo '<tr align="center"><td align="center" colspan="6">';
+		echo '<div class="well">';
 		html_buttons_view_bug_page( $tpl_bug_id );
-		echo '</td></tr>';
+		echo '</div>';
 	}
 
-	echo '</table>';
 
 	# User list sponsoring the bug
 	include( $tpl_mantis_dir . 'bug_sponsorship_list_view_inc.php' );

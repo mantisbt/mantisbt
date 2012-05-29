@@ -118,7 +118,7 @@ $tpl_project_name = $tpl_show_project ? string_display_line( project_get_name( $
 echo '<br />';
 echo '<form name="update_bug_form" method="post" action="bug_update.php">';
 echo form_security_field( 'bug_update' );
-echo '<table class="width100" cellspacing="1">';
+echo '<table class="table table-striped table-bordered table-condensed" cellspacing="1">';
 echo '<tr>';
 echo '<td class="form-title" colspan="3">';
 echo '<input type="hidden" name="bug_id" value="', $tpl_bug_id, '" />';

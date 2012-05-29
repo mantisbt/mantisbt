@@ -804,15 +804,16 @@ function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_nam
  */
 function relationship_view_box( $p_bug_id ) {
 	?>
-<br />
 
+
+<div class="well">
 <?php collapse_open( 'relationships' );?>
-<table class="width100" cellspacing="1">
-<tr class="row-2" valign="top">
-	<td width="15%" class="form-title" colspan="2">
+
 		<?php
+			echo '<h2>';
 			collapse_icon( 'relationships' );
-	echo lang_get( 'bug_relationships' );
+			echo lang_get( 'bug_relationships' );
+			echo '</h2>';
 	if( ON == config_get( 'relationship_graph_enable' ) ) {
 		?>
 		<span class="small"><?php print_bracket_link( "bug_relationship_graph.php?bug_id=$p_bug_id&graph=relation", lang_get( 'relation_graph' ) )?></span>
@@ -820,8 +821,7 @@ function relationship_view_box( $p_bug_id ) {
 		<?php
 	}
 	?>
-	</td>
-</tr>
+
 <?php
 	# bug not read-only and user authenticated
 	if( !bug_is_readonly( $p_bug_id ) ) {
@@ -829,9 +829,9 @@ function relationship_view_box( $p_bug_id ) {
 		# user access level at least updater
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 			?>
-<tr class="row-1">
-	<td class="category"><?php echo lang_get( 'add_new_relationship' )?></td>
-	<td><?php echo lang_get( 'this_bug' )?>
+
+	<?php echo lang_get( 'add_new_relationship' )?>
+	<?php echo lang_get( 'this_bug' )?>
 		<form method="post" action="bug_relationship_add.php">
 		<?php echo form_security_field( 'bug_relationship_add' ) ?>
 		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" size="4" />
@@ -839,16 +839,14 @@ function relationship_view_box( $p_bug_id ) {
 		<input type="text" name="dest_bug_id" value="" />
 		<input type="submit" name="add_relationship" class="button" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
 		</form>
-	</td></tr>
 <?php
 		}
 	}
 	?>
-<tr>
-	<td colspan="2"><?php echo relationship_get_summary_html( $p_bug_id )?></td>
-</tr>
-</table>
 
+<?php echo relationship_get_summary_html( $p_bug_id )?>
+
+</div>
 <?php collapse_closed( 'relationships' );?>
 <table class="width100" cellspacing="1">
 <tr>

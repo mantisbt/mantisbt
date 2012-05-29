@@ -52,7 +52,7 @@
 	function get_section_begin_mcwt( $p_section_name ) {
 		global $t_access_levels;
 
-		echo '<table class="width100">';
+		echo '<table class="table table-striped table-bordered table-condensed">';
 		echo '<tr><td class="form-title" colspan="' . ( count( $t_access_levels ) + 2 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</td>';
 		echo '<td class="form-title"style="text-align:center"  width="40%" colspan="' . count( $t_access_levels ) . '">' . lang_get( 'access_levels' ) . '</td>';

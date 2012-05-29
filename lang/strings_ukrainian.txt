@@ -25,7 +25,6 @@
  * @ingroup Language
  * @file
  *
- * @author Igorko
  * @author Olvin
  * @author Prima klasy4na
  * @author Yuri Kirghisov, yuri@apple.com.ua
@@ -415,7 +414,7 @@ $s_projection = 'Прогноз';
 $s_os_version = 'Версія';
 $s_eta = 'Очікувана швидкість вирішення';
 $s_product_version = 'Версія продукту';
-$s_build = 'Будувати';
+$s_build = 'Збірка';
 $s_fixed_in_version = 'Виправлена у версії';
 $s_votes = 'Голосів';
 $s_summary = 'Статистика';

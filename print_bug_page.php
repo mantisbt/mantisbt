@@ -133,7 +133,7 @@
 
 	echo '<br />';
 
-	echo '<table class="width100" cellspacing="1">';
+	echo '<table class="table table-striped table-bordered table-condensed" cellspacing="1">';
 	echo '<tr>';
 	echo '<td class="form-title" colspan="6">';
 	echo '<div class="center">', $tpl_window_title;

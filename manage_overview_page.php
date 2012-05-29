@@ -35,7 +35,7 @@
 ?>
 
 <br />
-<table class="width75" align="center" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed">
 
 <tr>
 <td class="form-title" width="30%"><?php echo lang_get( 'site_information' ) ?></td>

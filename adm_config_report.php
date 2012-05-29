@@ -94,7 +94,7 @@
 ?>
 <br />
 <div align="center">
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 
 <!-- Title -->
 <tr>
@@ -171,7 +171,7 @@
 <!-- Config Set Form -->
 <form method="post" action="adm_config_set.php">
 <?php echo form_security_field( 'adm_config_set' ) ?>
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 
 <!-- Title -->
 <tr>

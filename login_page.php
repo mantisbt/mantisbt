@@ -101,7 +101,7 @@
 
 <!-- Login Form BEGIN -->
 <br />
-<div align="center">
+<div class="well" style="width:500px; margin:0 auto;">
 <form name="login_form" method="post" action="login.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <table class="width50" cellspacing="1">
@@ -167,7 +167,7 @@
 <?php } ?>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'login_button' ) ?>" />
+		<input type="submit" class="btn btn-primary btn-medium" value="<?php echo lang_get( 'login_button' ) ?>" />
 	</td>
 </tr>
 </table>

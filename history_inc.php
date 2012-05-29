@@ -32,13 +32,13 @@
 	}
 ?>
 
-<a name="history" id="history" /><br />
+<a name="history" id="history" > </a>
 
 <?php
 	collapse_open( 'history' );
 	$t_history = history_get_events_array( $f_bug_id );
 ?>
-<table class="width100" cellspacing="0">
+<table class="table table-striped table-bordered table-condensed">
 <tr>
 	<td class="form-title" colspan="4">
 <?php
@@ -84,7 +84,7 @@
 <?php
 	collapse_closed( 'history' );
 ?>
-<table class="width100" cellspacing="0">
+<table class="table table-striped table-bordered table-condensed" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
 	<?php	collapse_icon( 'history' );

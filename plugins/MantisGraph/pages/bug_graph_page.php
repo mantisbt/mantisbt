@@ -93,22 +93,24 @@
         $f_end = $t_period->get_end_formatted();
         if ( ($t_body == 1 ) || ($t_body == 3) ) {
             if ( $f_show_as_table ) {
-                echo '<br />';
-                include(  config_get_global('plugin_path' ). plugin_get_current() .  DIRECTORY_SEPARATOR .
-                     'pages' .  DIRECTORY_SEPARATOR . 'bug_graph_bystatus.php' );
+                echo '<br /><iframe src="' . plugin_page( 'bug_graph_bystatus.php' ) . '&width='.$t_width.'&amp;interval=' . $f_interval .
+                    '&amp;start_date=' . $f_start . '&amp;end_date=' . $f_end .
+                    '&amp;summary=' . $t_summary . '&amp;show_table=1" width="100%" height="80%" frameborder="0"' .
+                    ' marginwidth="0" marginheight="0"></iframe>';
             } else {
-                echo '<br /><img src="' . plugin_page( 'bug_graph_bystatus.php' ) . '&amp;width=600&amp;interval=' . $f_interval .
+                echo '<br /><img src="' . plugin_page( 'bug_graph_bystatus.php' ) . '&width=600&amp;interval=' . $f_interval .
                     '&amp;start_date=' . $f_start . '&amp;end_date=' . $f_end .
                     '&amp;summary=' . $t_summary . '&amp;show_table=0" alt="Bug Graph" />';
             }
         }
         if ( ($t_body == 2 ) || ($t_body == 3) ) {
             if ( $f_show_as_table ) {
-                echo '<br />';
-                include(  config_get_global('plugin_path' ). plugin_get_current() .  DIRECTORY_SEPARATOR . 
-                     'pages' .  DIRECTORY_SEPARATOR . 'bug_graph_bycategory.php' );
+                echo '<br /><iframe src="' . plugin_page( 'bug_graph_bycategory.php' ) . '&width='.$t_width.'&amp;interval=' . $f_interval .
+                    '&amp;start_date=' . $f_start . '&amp;end_date=' . $f_end .
+                    '&amp;summary=' . $t_summary . '&amp;show_table=1" width="100%" height="80%" frameborder="0"' .
+                    ' marginwidth="0" marginheight="0"></iframe>';
             } else {
-                echo '<br /><img src="' . plugin_page( 'bug_graph_bycategory.php' ) . '&amp;width=600&amp;interval=' . $f_interval .
+                echo '<br /><img src="' . plugin_page( 'bug_graph_bycategory.php' ) . '&width=600&amp;interval=' . $f_interval .
                     '&amp;start_date=' . $f_start . '&amp;end_date=' . $f_end .
                     '&amp;summary=' . $t_summary . '&amp;show_table=0" alt="Bug Graph" />';
             }

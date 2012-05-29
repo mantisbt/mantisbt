@@ -585,7 +585,7 @@
 	 * language preference.
 	 * @global string $g_default_language
 	 */
-	$g_default_language		= 'english';
+	$g_default_language		= 'spanish';
 
 	/**
 	 * list the choices that the users are allowed to choose

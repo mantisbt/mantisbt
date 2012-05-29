@@ -80,7 +80,7 @@ if ( !config_get('time_tracking_enabled') )
 
 <form method="post" action="<?php echo string_attribute( form_action_self() ) ?>">
 	<input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
-	<table border="0" class="width100" cellspacing="0">
+	<table border="0" class="table table-striped table-bordered table-condensed" cellspacing="0">
 		<tr>
 			<td class="form-title" colspan="4">
 				<?php
@@ -156,7 +156,7 @@ if ( !config_get('time_tracking_enabled') )
 		$t_prev_id = -1;
 ?>
 <br />
-<table border="0" class="width100" cellspacing="0">
+<table border="0" class="table table-striped table-bordered table-condensed" cellspacing="0">
 	<tr class="row-category2">
 		<td class="small-caption bold">
 			<?php echo lang_get( $t_name_field ) ?>
@@ -227,7 +227,7 @@ if ( !config_get('time_tracking_enabled') )
 <br />
 <br />
 
-<table border="0" class="width100" cellspacing="0">
+<table border="0" class="table table-striped table-bordered table-condensed" cellspacing="0">
 	<tr class="row-category2">
 		<td class="small-caption bold">
 			<?php echo lang_get( $t_name_field ) ?>
@@ -281,7 +281,7 @@ if ( !config_get('time_tracking_enabled') )
 	collapse_closed( 'bugnotestats' );
 ?>
 
-<table class="width100" cellspacing="0">
+<table class="table table-striped table-bordered table-condensed" cellspacing="0">
 	<tr>
 		<td class="form-title" colspan="4">
 			<?php

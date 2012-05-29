@@ -62,35 +62,19 @@
 
 
 <!-- USER INFO -->
-<div align="center">
-<form method="post" action="manage_user_update.php">
+<form method="post" action="manage_user_update.php" class="well">
 <?php echo form_security_field( 'manage_user_update' ) ?>
-<table class="width75" cellspacing="1">
 <!-- Title -->
-<tr>
-	<td class="form-title" colspan="2">
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-		<?php echo lang_get( 'edit_user_title' ) ?>
-	</td>
-</tr>
-
+		<h1><?php echo lang_get( 'edit_user_title' ) ?></h1>
 <!-- Username -->
-<tr <?php echo helper_alternate_class( 1 ) ?>>
-	<td class="category" width="30%">
-		<?php echo lang_get( 'username' ) ?>
-	</td>
-	<td width="70%">
+		<label><?php echo lang_get( 'username' ) ?></label>
+
 		<input type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" name="username" value="<?php echo string_attribute( $t_user['username'] ) ?>" />
-	</td>
-</tr>
 
 <!-- Realname -->
-<tr <?php echo helper_alternate_class( 1 ) ?>>
-	<td class="category" width="30%">
-		<?php echo lang_get( 'realname' ) ?>
-	</td>
-	<td width="70%">
-		<?php
+		<label><?php echo lang_get( 'realname' ) ?></label>
+				<?php
 			// With LDAP
 			if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 				echo string_display_line( user_get_realname( $t_user_id ) );
@@ -102,15 +86,10 @@
 		<?php
 			}
 		?>
-	</td>
-</tr>
-
+	
 <!-- Email -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'email' ) ?>
-	</td>
-	<td>
+		<label><?php echo lang_get( 'email' ) ?></label>
+	
 		<?php
 			// With LDAP
 			if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
@@ -121,15 +100,11 @@
 				print_email_input( 'email', $t_user['email'] );
 			}
 		?>
-	</td>
-</tr>
+
 
 <!-- Access Level -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'access_level' ) ?>
-	</td>
-	<td>
+
+		<label><?php echo lang_get( 'access_level' ) ?></label>
 		<select name="access_level">
 			<?php
 				$t_access_level = $t_user['access_level'];
@@ -139,44 +114,31 @@
 				print_project_access_levels_option_list( $t_access_level )
 			?>
 		</select>
-	</td>
-</tr>
+
 
 <!-- Enabled Checkbox -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'enabled' ) ?>
-	</td>
-	<td>
+		<label class="checkbox">
+
 		<input type="checkbox" name="enabled" <?php check_checked( $t_user['enabled'], ON ); ?> />
-	</td>
-</tr>
+		<?php echo lang_get( 'enabled' ) ?></label>
 
 <!-- Protected Checkbox -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'protected' ) ?>
-	</td>
-	<td>
+		<label class="checkbox">
+
 		<input type="checkbox" name="protected" <?php check_checked( $t_user['protected'], ON ); ?> />
-	</td>
-</tr>
+		<?php echo lang_get( 'protected' ) ?></label>
+
 
 <!-- Submit Button -->
-<tr>
-	<td colspan="2" class="center">
-	<?php if ( config_get( 'enable_email_notification' ) == ON ) {
-		echo lang_get( 'notify_user' ); ?>
-		<input type="checkbox" name="send_email_notification" checked />
-	<?php } ?>
-		<input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" />
-	</td>
-</tr>
-</table>
-</form>
-</div>
 
-<br />
+	<?php if ( config_get( 'enable_email_notification' ) == ON ) {
+		echo "<label class='checkbox'>";?>
+		<input type="checkbox" name="send_email_notification" checked />
+		<?php echo lang_get( 'notify_user' )."</label>"; ?>
+	<?php } ?>
+		<input type="submit" class="btn btn-primary" value="<?php echo lang_get( 'update_user_button' ) ?>" />
+	
+</form>
 
 <!-- RESET AND DELETE -->
 <?php
@@ -186,105 +148,83 @@
 
 	if( $t_reset || $t_unlock || $t_delete ) {
 ?>
-<div class="border center">
 
 <!-- Reset/Unlock Button -->
 <?php if( $t_reset || $t_unlock ) { ?>
-	<form method="post" action="manage_user_reset.php">
+	<form method="post" action="manage_user_reset.php" class="well">
 <?php echo form_security_field( 'manage_user_reset' ) ?>
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 <?php if( $t_reset ) { ?>
-		<input type="submit" class="button" value="<?php echo lang_get( 'reset_password_button' ) ?>" />
+		<input type="submit" class="btn btn-info" value="<?php echo lang_get( 'reset_password_button' ) ?>" />
+		<?php if( $t_reset ) { ?>
+	<?php
+		if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
+			echo "<p class='help-block'>".lang_get( 'reset_password_msg' )."</p>";
+		} else {
+			echo "<p class='help-block'>".lang_get( 'reset_password_msg2')."</p>";
+		}
+	?>
+	<?php } ?>
+
+		
+		
+		
 <?php } else { ?>
-		<input type="submit" class="button" value="<?php echo lang_get( 'account_unlock_button' ) ?>" />
+		<input type="submit" class="btn btn-warning" value="<?php echo lang_get( 'account_unlock_button' ) ?>" />
 <?php } ?>
 	</form>
 <?php } ?>
 
 <!-- Delete Button -->
 <?php if ( $t_delete ) { ?>
-	<form method="post" action="manage_user_delete.php">
+	<form method="post" action="manage_user_delete.php" class="well">
 <?php echo form_security_field( 'manage_user_delete' ) ?>
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-		<input type="submit" class="button" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
+		<input type="submit" class="btn btn-danger" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
 	</form>
 <?php } ?>
-</div>
-	<?php if( $t_reset ) { ?>
-	<div align="center">
-	<br />
-	<?php
-		if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
-			echo lang_get( 'reset_password_msg' );
-		} else {
-			echo lang_get( 'reset_password_msg2' );
-		}
-	?>
-	</div>
 	<?php } ?>
-<?php } ?>
 
 
 <!-- PROJECT ACCESS (if permissions allow) and user is not ADMINISTRATOR -->
 <?php if ( access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
     !user_is_administrator( $t_user_id ) ) {
 ?>
-<br />
-<div align="center">
-<table class="width75" cellspacing="1">
 <!-- Title -->
-<tr>
-	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'add_user_title' ) ?>
-	</td>
-</tr>
-
+		<div class="well">
+		<h1><?php echo lang_get( 'add_user_title' ) ?></h1>
+	
 <!-- Assigned Projects -->
-<tr <?php echo helper_alternate_class( 1 ) ?> valign="top">
-	<td class="category" width="30%">
-		<?php echo lang_get( 'assigned_projects' ) ?>
-	</td>
-	<td width="70%">
-		<?php print_project_user_list( $t_user['id'] ) ?>
-	</td>
-</tr>
 
-<form method="post" action="manage_user_proj_add.php">
-<?php echo form_security_field( 'manage_user_proj_add' ) ?>
+		<h2><?php echo lang_get( 'assigned_projects' ) ?></h2>
+	
+		<ul><?php print_project_user_list( $t_user['id'] ) ?></ul>
+	</div>
+	
+<form method="post" action="manage_user_proj_add.php" class="well">
+		<label><?php echo form_security_field( 'manage_user_proj_add' ) ?></label>
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 <!-- Unassigned Project Selection -->
-<tr <?php echo helper_alternate_class() ?> valign="top">
-	<td class="category">
-		<?php echo lang_get( 'unassigned_projects' ) ?>
-	</td>
-	<td>
+
+		<label><?php echo lang_get( 'unassigned_projects' ) ?></label>
+	
 		<select name="project_id[]" multiple="multiple" size="5">
 			<?php print_project_user_list_option_list2( $t_user['id'] ) ?>
 		</select>
-	</td>
-</tr>
 
 <!-- New Access Level -->
-<tr <?php echo helper_alternate_class() ?> valign="top">
-	<td class="category">
-		<?php echo lang_get( 'access_level' ) ?>
-	</td>
-	<td>
-		<select name="access_level">
+
+		<label><?php echo lang_get( 'access_level' ) ?></label>
+			<select name="access_level">
 			<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
 		</select>
-	</td>
-</tr>
+
 
 <!-- Submit Buttom -->
-<tr>
-	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'add_user_button' ) ?>" />
-	</td>
-</tr>
+
+		<input type="submit" class="btn btn-primary" value="<?php echo lang_get( 'add_user_button' ) ?>" />
+	
 </form>
-</table>
-</div>
 <?php
 	} # End of PROJECT ACCESS conditional section
 

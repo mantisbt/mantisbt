@@ -188,7 +188,7 @@
 		print '<input type="hidden" name="offset" value="0" />';
 	}
 ?>
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 <tr>
 	<td class="right" colspan="<?php echo ( 8 * $t_custom_cols ); ?>">
 	<?php

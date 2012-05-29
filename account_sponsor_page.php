@@ -61,7 +61,7 @@
 	$t_project = helper_get_current_project();
 ?>
 <br />
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 <tr>
 	<td class="form-title">
 		<?php echo lang_get( 'my_sponsorship' ) ?>
@@ -99,7 +99,7 @@
 <!-- # Edit own sponsorship Form BEGIN -->
 <br />
 <div align="center">
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 
 	<!-- Headings -->
 	<tr>
@@ -208,7 +208,7 @@
 <div align="center">
 <form method="post" action="account_sponsor_update.php">
 <?php echo form_security_field( 'account_sponsor_update' ) ?>
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 
 	<!-- Headings -->
 	<tr>

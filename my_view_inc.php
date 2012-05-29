@@ -397,18 +397,17 @@ $box_title = lang_get( 'my_view_title_' . $t_box_title );
 # -- ====================== BUG LIST ========================= --
 ?>
 
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed">
 <?php
 # -- Navigation header row --?>
 <tr>
 <?php
 # -- Viewing range info --?>
-	<td class="form-title" colspan="2">
+	<th colspan="6">
 <?php
+echo "<div class='btn-group'>";
 print_link( html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ).'&' . $url_link_parameters[$t_box_title], $box_title, false, 'subtle' );
-echo '&#160;';
-print_bracket_link( html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ).'&' . $url_link_parameters[$t_box_title], '^', true, 'subtle' );
-
+print_bracket_link( html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ).'&' . $url_link_parameters[$t_box_title], '<i class="icon-share-alt"></i> ', true, 'subtle' );
 if( count( $rows ) > 0 ) {
 	$v_start = $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] * ( $f_page_number - 1 ) + 1;
 	$v_end = $v_start + count( $rows ) - 1;
@@ -417,9 +416,12 @@ else {
 	$v_start = 0;
 	$v_end = 0;
 }
-echo "($v_start - $v_end / $t_bug_count)";
+echo "<span class='result label label-info'>$v_start - $v_end / $t_bug_count</span>";
+echo "</div>";
+
 ?>
-	</td>
+
+	</th>
 </tr>
 
 <?php
@@ -446,38 +448,38 @@ echo "($v_start - $v_end / $t_bug_count)";
 	$project_name = project_get_field( $t_bug->project_id, 'name' );
 	?>
 
-<tr bgcolor="<?php echo $status_color?>">
+<tr>
 	<?php
 	# -- Bug ID and details link + Pencil shortcut --?>
+	<td style="background:<?php echo $status_color?> !important;"></td><td><?php print_status_icon( $t_bug->priority );
+?></td>
 	<td class="center" valign="top" width ="0" nowrap="nowrap">
-		<span class="small">
 		<?php
-			print_bug_link( $t_bug->id );
+			echo $t_bug->id."</td><td>";
+			print_bug_link( $t_bug->id )."</td><td>";
 
-	echo '<br />';
 
 	if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
-		echo '<a href="' . string_get_bug_update_url( $t_bug->id ) . '"><img border="0" src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
+		echo '<a class="btn" href="' . string_get_bug_update_url( $t_bug->id ) . '"><i class="icon-pencil"></i> Editar</a></td><td>';
 	}
 
 	if( ON == config_get( 'show_priority_text' ) ) {
 		print_formatted_priority_string( $t_bug );
 	} else {
-		print_status_icon( $t_bug->priority );
+		//print_status_icon( $t_bug->priority );
 	}
 
 	if ( $t_attachment_count > 0 ) {
 		$t_href = string_get_bug_view_url( $t_bug->id ) . '#attachments';
 		$t_href_title = sprintf( lang_get( 'view_attachments_for_issue' ), $t_attachment_count, $t_bug->id );
 		$t_alt_text = $t_attachment_count . lang_get( 'word_separator' ) . lang_get( 'attachments' );
-		echo "<a href=\"$t_href\" title=\"$t_href_title\"><img src=\"${t_icon_path}attachment.png\" alt=\"$t_alt_text\" title=\"$t_alt_text\" /></a>";
+		echo "<a href=\"$t_href\" title=\"$t_href_title\"><i class='icon-file'></i></a>";
 	}
 
 	if( VS_PRIVATE == $t_bug->view_state ) {
 		echo '<img src="' . $t_icon_path . 'protected.gif" width="8" height="15" alt="' . lang_get( 'private' ) . '" />';
 	}
 	?>
-		</span>
 	</td>
 
 	<?php

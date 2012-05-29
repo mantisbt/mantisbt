@@ -47,28 +47,29 @@
 ?>
 
 <?php # Send reminder Form BEGIN ?>
-<br />
-<div align="center">
-<form method="post" action="bug_reminder.php">
-<?php echo form_security_field( 'bug_reminder' ) ?>
-<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-<table class="width75" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'bug_reminder' ) ?>
-	</td>
-</tr>
-<tr>
-	<td class="category">
-		<?php echo lang_get( 'to' ) ?>
-	</td>
-	<td class="category">
-		<?php echo lang_get( 'reminder' ) ?>
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td>
-		<select name="to[]" multiple="multiple" size="10">
+  <script type="text/javascript">    $('#myModal').modal()</script>
+    <div class="modal" id="myModal">
+    <div class="modal-header">
+    <button class="close" data-dismiss="modal">×</button>
+    <h3><?php echo lang_get( 'bug_reminder' ) ?></h3>
+    </div>
+    <div class="modal-body">
+
+		<?php
+			echo lang_get( 'reminder_explain' ) . ' ';
+			if ( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
+				echo "<p>".lang_get( 'reminder_monitor' ) . '</p> ';
+			}
+			if ( ON == config_get( 'store_reminders' ) ) {
+				echo "<p>".lang_get( 'reminder_store' ). '</p>';
+			}
+		?>
+		<form method="post" action="bug_reminder.php">
+		<?php echo form_security_field( 'bug_reminder' ) ?>
+		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
+
+		<?php echo lang_get( 'to' ) ?><br />
+		<select name="to[]" multiple="multiple" size="5">
 			<?php
 				$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
 				$t_access_level = config_get( 'reminder_receive_threshold' );
@@ -76,37 +77,22 @@
 				print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
 			?>
 		</select>
-	</td>
-	<td class="center">
-		<textarea name="body" cols="65" rows="10"></textarea>
-	</td>
-</tr>
-<tr>
-	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
-	</td>
-</tr>
-</table>
-</form>
-<br />
-<table class="width75" cellspacing="1">
-<tr>
-	<td>
-		<?php
-			echo lang_get( 'reminder_explain' ) . ' ';
-			if ( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
-				echo lang_get( 'reminder_monitor' ) . ' ';
-			}
-			if ( ON == config_get( 'store_reminders' ) ) {
-				echo lang_get( 'reminder_store' );
-			}
-		?>
-	</td>
-</tr>
-</table>
-</div>
+		<br />
+		<?php echo lang_get( 'reminder' ) ?><br />
+		<textarea name="body" cols="65" rows="5" style="width:99%;"></textarea>
 
-<br />
+	</form>
+
+
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn">Cerrar</a>
+	<input type="submit" class="btn btn-primary" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
+    </div>
+    </div>
+    
+    
+
 <?php
 define ( 'BUG_VIEW_INC_ALLOW', true );
 $_GET['id'] = $f_bug_id;

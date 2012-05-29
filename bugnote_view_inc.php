@@ -54,30 +54,27 @@ $num_notes = count( $t_bugnotes );
 ?>
 
 <?php # Bugnotes BEGIN ?>
-<a name="bugnotes" id="bugnotes" /><br />
+<a name="bugnotes" id="bugnotes"></a>
 
 <?php
 	collapse_open( 'bugnotes' );
 ?>
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
+<div class="well">
 <?php
-		collapse_icon( 'bugnotes' ); ?>
-		<?php echo lang_get( 'bug_notes_title' ) ?>
-	</td>
-</tr>
+		echo '<h2>';
+		collapse_icon( 'bugnotes' );
+		echo lang_get( 'bug_notes_title' );
+		echo '</h2>';
+		?>
 <?php
 	# no bugnotes
 	if ( 0 == $num_notes ) {
 ?>
-<tr>
-	<td class="center" colspan="2">
-		<?php echo lang_get( 'no_bugnotes_msg' ) ?>
-	</td>
-</tr>
-<?php }
 
+		<?php echo lang_get( 'no_bugnotes_msg' ) ?>
+
+<?php }
+echo '<div class="row-fluid">';
 	event_signal( 'EVENT_VIEW_BUGNOTES_START', array( $f_bug_id, $t_bugnotes ) );
 
 	$t_normal_date_format = config_get( 'normal_date_format' );
@@ -109,14 +106,13 @@ $num_notes = count( $t_bugnotes );
 			$t_bugnote_note_css	= 'bugnote-note-public';
 		}
 ?>
-<tr class="bugnote" id="c<?php echo $t_bugnote->id ?>">
-        <td class="<?php echo $t_bugnote_css ?>">
+<div class="bugnote span4 <?php echo ' '. $t_bugnote_css?>" id="c<?php echo $t_bugnote->id ?>">
 		<?php print_avatar( $t_bugnote->reporter_id ); ?>
-		<span class="small">(<a href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" title="<?php echo lang_get( 'bugnote_link_title' ) ?>"><?php echo $t_bugnote_id_formatted ?>)</a></span><br />
+		<a href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" title="<?php echo lang_get( 'bugnote_link_title' ) ?>"><?php echo $t_bugnote_id_formatted ?></a>
 		<?php
 			echo print_user( $t_bugnote->reporter_id );
 		?>
-		<span class="small"><?php
+		<?php
 			if ( user_exists( $t_bugnote->reporter_id ) ) {
 				$t_access_level = access_get_project_level( null, (int)$t_bugnote->reporter_id );
 				// Only display access level when higher than 0 (ANYBODY)
@@ -124,18 +120,16 @@ $num_notes = count( $t_bugnotes );
 					echo '(', get_enum_element( 'access_levels', $t_access_level ), ')';
 				}
 			}
-		?></span>
+		?>
 		<?php if ( VS_PRIVATE == $t_bugnote->view_state ) { ?>
-		<span class="small">[ <?php echo lang_get( 'private' ) ?> ]</span>
+		[ <?php echo lang_get( 'private' ) ?> ]
 		<?php } ?>
-		<br />
-		<span class="small"><?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?></span><br />
+		<?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?>
 		<?php
 		if ( $t_bugnote_modified ) {
 			echo '<span class="small">' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</span><br />';
 		}
 		?>
-		<br /><div class="small">
 		<?php
 			# bug must be open to be editable
 			if ( !bug_is_readonly( $f_bug_id ) ) {
@@ -173,9 +167,7 @@ $num_notes = count( $t_bugnotes );
 				}
 			}
 		?>
-		</div>
-	</td>
-	<td class="<?php echo $t_bugnote_note_css ?>">
+	<span class="<?php echo $t_bugnote_note_css ?>"> 
 		<?php
 			switch ( $t_bugnote->note_type ) {
 				case REMINDER:
@@ -196,34 +188,29 @@ $num_notes = count( $t_bugnotes );
 
 			echo string_display_links( $t_bugnote->note );;
 		?>
-	</td>
-</tr>
+
 <?php event_signal( 'EVENT_VIEW_BUGNOTE', array( $f_bug_id, $t_bugnote->id, VS_PRIVATE == $t_bugnote->view_state ) ); ?>
-<tr class="spacer">
-	<td colspan="2"></td>
-</tr>
+		</span>
+		</div>
+
 <?php
 	} # end for loop
-
+echo "</div>";
 	if ( $t_total_time > 0 && access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
 		echo '<tr><td colspan="2">', sprintf ( lang_get( 'total_time_for_issue' ), db_minutes_to_hhmm( $t_total_time ) ), '</td></tr>';
 	}
 
 	event_signal( 'EVENT_VIEW_BUGNOTES_END', $f_bug_id );
 ?>
-</table>
 
-<?php
-	collapse_closed( 'bugnotes' );
-?>
-
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
+</div>
+<?php collapse_closed( 'bugnotes' ); ?>
+<div class="well">
+	<h2>
 		<?php collapse_icon( 'bugnotes' ); ?>
 		<?php echo lang_get( 'bug_notes_title' ) ?>
-	</td>
-</tr>
-</table>
+	</h2>
+</div>
+
 <?php
 	collapse_end( 'bugnotes' );

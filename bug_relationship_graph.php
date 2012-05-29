@@ -74,7 +74,7 @@
 ?>
 <br />
 
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 
 <tr>
 	<!-- Title -->

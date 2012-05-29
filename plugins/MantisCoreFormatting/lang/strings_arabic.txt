@@ -25,17 +25,11 @@
  * @ingroup Language
  * @file
  *
- * @author DRIHEM
  * @author Meno25
  */
 
-$s_plugin_format_title = 'فرمتت MantisBT';
-$s_plugin_format_description = 'مساعد تجهيز النص الأصلي و الفرمته.';
 $s_plugin_format_config = 'ضبط';
 $s_plugin_format_process_text = 'معالجة النص';
-$s_plugin_format_process_text_warning_notice = 'لا تقم بإطفائه إلا إذا كنت تعي ما تقوم به. في حالة الإيقاف، بالإمكان حصول هجمات البرمجة النصية (XSS).';
 $s_plugin_format_process_urls = 'معالجة المسار';
-$s_plugin_format_process_buglinks = 'روابط MantisBT ( المشكلة/ملاحظة المشكلة )';
-$s_plugin_format_process_vcslinks = 'روابط VCS';
 $s_plugin_format_enabled = 'مفعل';
 $s_plugin_format_disabled = 'معطل';

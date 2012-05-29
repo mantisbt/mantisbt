@@ -56,7 +56,7 @@
 <?php echo form_security_field( 'account_prefs_update' ) ?>
 <input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
 <input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
-<table class="width75" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed">
 <tr>
 	<td class="form-title">
 		<?php echo lang_get( 'default_account_preferences_title' ) ?>
@@ -285,7 +285,7 @@
 <?php event_signal( 'EVENT_ACCOUNT_PREF_UPDATE_FORM', array( $p_user_id ) ); ?>
 <tr>
 	<td colspan="2" class="center">
-		<input type="submit" class="button" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
+		<input type="submit" class="btn btn-primary" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
 	</td>
 </tr>
 </table>
@@ -299,7 +299,7 @@
 	<?php echo form_security_field( 'account_prefs_reset' ) ?>
 	<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
 	<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
-	<input type="submit" class="button" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
+	<input type="submit" class="btn btn-danger" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
 	</form>
 </div>
 

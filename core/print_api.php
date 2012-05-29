@@ -286,7 +286,7 @@ function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
 		<?php
 			print_tag_input( $p_bug_id, $p_string );
 	?>
-		<input type="submit" value="<?php echo lang_get( 'tag_attach' )?>" class="button" />
+		<input type="submit" value="<?php echo lang_get( 'tag_attach' )?>" class="btn" />
 		</form>
 		<?php
 		return true;
@@ -488,6 +488,31 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 		}
 	}
 }
+
+function print_project_li_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false ) {
+	$t_project_ids = current_user_get_accessible_projects();
+	project_cache_array_rows( $t_project_ids );
+
+	
+	if( $p_include_all_projects ) {
+		($p_project_id == ALL_PROJECTS ) ? $activepro="active" : $activepro="";
+		echo '<li class="'.$activepro.'"><a onclick="projectsel('. ALL_PROJECTS .'); return false;" href="#" title="' . ALL_PROJECTS . '"';
+		echo '>' . lang_get( 'all_projects' ) .'</a></li>' . "\n";
+	}
+
+	$t_project_count = count( $t_project_ids );
+	for( $i = 0;$i < $t_project_count;$i++ ) {
+		$t_id = $t_project_ids[$i];
+		if( $t_id != $p_filter_project_id ) {
+			($p_project_id == $t_id)? $activepro="active" : $activepro="";
+			echo '<li class="'.$activepro.'"><a onclick="projectsel(' . $t_id . '); return false;" href="#" title="' . $t_id . '"';
+			echo '>' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</a></li>' . "\n";
+			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, Array() );
+		}
+	}
+}
+
+
 
 # --------------------
 # List projects that the current user has access to
@@ -1085,11 +1110,11 @@ function print_project_user_list( $p_user_id, $p_include_remove_link = true ) {
 		$t_access_level = get_enum_element( 'access_levels', $t_access_level );
 		$t_view_state = get_enum_element( 'project_view_state', $t_view_state );
 
-		echo $t_project_name . ' [' . $t_access_level . '] (' . $t_view_state . ')';
+		echo "<li>".$t_project_name . ' [' . $t_access_level . '] (' . $t_view_state . ')';
 		if( $p_include_remove_link && access_has_project_level( config_get( 'project_user_threshold' ), $t_project_id ) ) {
 			html_button( 'manage_user_proj_delete.php', lang_get( 'remove_link' ), array( 'project_id' => $t_project_id, 'user_id' => $p_user_id ) );
 		}
-		echo '<br />';
+		echo '</li>';
 	}
 }
 
@@ -1237,7 +1262,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 	}
 }
 
-function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide_inactive = 0, $p_filter = ALL, $p_show_disabled = 0 ) {
+function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide = 0, $p_filter = ALL ) {
 	if( $p_sort_by == $p_field ) {
 
 		# If this is the selected field flip the order
@@ -1252,7 +1277,7 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 	}
 
 	$t_field = rawurlencode( $p_field );
-	print_link( "$p_page?sort=$t_field&dir=$t_dir&save=1&hideinactive=$p_hide_inactive&showdisabled=$p_show_disabled&filter=$p_filter", $p_string );
+	print_link( "$p_page?sort=$t_field&dir=$t_dir&save=1&hide=$p_hide&filter=$p_filter", $p_string );
 }
 
 function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by ) {
@@ -1284,7 +1309,7 @@ function print_button( $p_action_page, $p_label, $p_args_to_post = null ) {
 	# arguments are being sent via the POST method.
 	echo '<form method="post" action="', htmlspecialchars( $p_action_page ), '">';
 	echo form_security_field( $t_form_name[0] );
-	echo '<input type="submit" class="button-small" value="', $p_label, '" />';
+	echo '<input type="submit" class="btn btn-primary" value="', $p_label, '" />';
 
 	if( $p_args_to_post !== null ) {
 		foreach( $p_args_to_post as $t_var => $t_value ) {
@@ -1297,16 +1322,14 @@ function print_button( $p_action_page, $p_label, $p_args_to_post = null ) {
 
 # print brackets around a pre-prepared link (i.e. '<a href' html tag).
 function print_bracket_link_prepared( $p_link ) {
-	echo '<span class="bracket-link">[&#160;' . $p_link . '&#160;]</span> ';
+	echo '' . $p_link . '';
 }
 
 # print the bracketed links used near the top
 # if the $p_link is blank then the text is printed but no link is created
 # if $p_new_window is true, link will open in a new window, default false.
 function print_bracket_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
-	echo '<span class="bracket-link">[&#160;';
 	print_link( $p_link, $p_url_text, $p_new_window, $p_class );
-	echo '&#160;]</span> ';
 }
 
 # print a HTML link
@@ -1319,17 +1342,18 @@ function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' 
 			if( $p_class !== '') {
 				echo "<a class=\"$p_class\" href=\"$t_link\" target=\"_blank\">$p_url_text</a>";
 			} else {
-				echo "<a href=\"$t_link\" target=\"_blank\">$p_url_text</a>";
+				echo "<a class=\"btn\" href=\"$t_link\" target=\"_blank\">$p_url_text</a>";
 			}
 		} else {
 			if( $p_class !== '') {
 				echo "<a class=\"$p_class\" href=\"$t_link\">$p_url_text</a>";
 			} else {
-				echo "<a href=\"$t_link\">$p_url_text</a>";
+				echo "<a class=\"btn\" href=\"$t_link\">$p_url_text</a>";
 			}
 		}
 	}
 }
+
 
 # print a HTML page link
 function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur = 0, $p_temp_filter_id = 0 ) {
@@ -1663,9 +1687,7 @@ function print_bug_attachments_list( $p_bug_id ) {
 		}
 
 		if ( $t_attachment['can_delete'] ) {
-			echo '&#160;[';
 			print_link( 'bug_file_delete.php?file_id=' . $t_attachment['id'] . form_security_param( 'bug_file_delete' ), lang_get( 'delete_link' ), false, 'small' );
-			echo ']';
 		}
 
 		if ( $t_attachment['exists'] ) {

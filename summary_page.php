@@ -94,81 +94,102 @@
 
 	$t_orcttab = "";
 	foreach ( $t_orct_arr as $t_orct_s ) {
-		$t_orcttab .= '<td class="right">';
+		$t_orcttab .= '<th class="right">';
 		$t_orcttab .= $t_orct_s;
-		$t_orcttab .= '</td>';
+		$t_orcttab .= '</th>';
 	}
 
 	html_page_top( lang_get( 'summary_link' ) );
 ?>
 
-<br />
+<div class="page-header">
+	<h1><?php echo lang_get( 'summary_title' ) ?></h1>
+</div>
 <?php 
-	print_summary_menu( 'summary_page.php' );
-	print_summary_submenu(); ?>
+	echo "<div class='btn-group'>";
+		print_summary_menu( 'summary_page.php' );
+	echo "</div>";
+
+	print_summary_submenu();
+	?>
 <br />
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'summary_title' ) ?>
-	</td>
-</tr>
-<tr valign="top">
-	<td width="50%">
-		<?php # PROJECT # 
+
+
+<div class="tabbable tabs-left">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#lA"><?php echo lang_get( 'by_project' ) ?></a></li>
+          <li class=""><a data-toggle="tab" href="#lB"><?php echo lang_get( 'by_status' ) ?></a></li>
+          <li class=""><a data-toggle="tab" href="#lC"><?php echo lang_get( 'by_severity' ) ?></a></li>
+          <li class=""><a data-toggle="tab" href="#lD"><?php echo lang_get( 'by_category' ) ?></a></li>
+          <li class=""><a data-toggle="tab" href="#lE"><?php echo lang_get( 'developer_stats' ) ?></a></li>
+          <li class=""><a data-toggle="tab" href="#lF"><?php echo lang_get( 'by_date' ) ?></a></li>
+          <li class=""><a data-toggle="tab" href="#lG"><?php echo lang_get( 'most_active' ); ?></a></li>
+          <li class=""><a data-toggle="tab" href="#lH"><?php echo lang_get( 'longest_open' ); ?></a></li>
+          <li class=""><a data-toggle="tab" href="#lI"><?php echo lang_get( 'by_resolution' ) ?></a></li>
+          <li class=""><a data-toggle="tab" href="#lJ"><?php echo lang_get( 'by_priority' ) ?></a></li>
+          <li class=""><a data-toggle="tab" href="#lK"><?php echo lang_get( 'reporter_stats' ) ?></a></li>
+          <li class=""><a data-toggle="tab" href="#lL"><?php echo lang_get( 'reporter_effectiveness' ) ?></a></li>
+          <li class=""><a data-toggle="tab" href="#lM"><?php echo lang_get( 'reporter_by_resolution' ) ?></a></li>
+          <li class=""><a data-toggle="tab" href="#lN"><?php echo lang_get( 'developer_by_resolution' ) ?></a></li>
+
+
+        </ul>
+        <div class="tab-content">
+          <div id="lA" class="tab-pane active">
+           	<?php # PROJECT # 
 			if ( 1 < count( $t_project_ids ) ) { ?>
-		<table class="width100" cellspacing="1">
+		<table class="table table-striped table-bordered table-condensed">
 		<tr>
-			<td class="form-title" colspan="1">
+			<th class="form-title" colspan="1">
 				<?php echo lang_get( 'by_project' ) ?>
-			</td>
+			</th>
 			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_project(); ?>
 		</table>
 
-		<br />
 		<?php } ?>
-
-		<table class="width100" cellspacing="1">
+          </div>
+          <div id="lB" class="tab-pane">
+			<table class="table table-striped table-bordered table-condensed">
+				<tr>
+					<th class="form-title" colspan="1">
+						<?php echo lang_get( 'by_status' ) ?>
+					</th>
+					<?php echo $t_orcttab ?>
+				</tr>
+				<?php summary_print_by_enum( 'status' ) ?>
+			</table>
+		</div>
+        <div id="lC" class="tab-pane">
+			<table class="table table-striped table-bordered table-condensed">
+				<tr>
+					<th class="form-title" colspan="1">
+					<?php echo lang_get( 'by_severity' ) ?>
+					</td>
+					<?php echo $t_orcttab ?>
+				</tr>
+				<?php summary_print_by_enum( 'severity' ) ?>
+			</table>
+          </div>
+         	<div id="lD" class="tab-pane">
+			
+			<table class="table table-striped table-bordered table-condensed">
 		<tr>
-			<td class="form-title" colspan="1">
-				<?php echo lang_get( 'by_status' ) ?>
-			</td>
-			<?php echo $t_orcttab ?>
-		</tr>
-		<?php summary_print_by_enum( 'status' ) ?>
-		</table>
-
-		<br />
-
-		<table class="width100" cellspacing="1">
-		<tr>
-			<td class="form-title" colspan="1">
-				<?php echo lang_get( 'by_severity' ) ?>
-			</td>
-			<?php echo $t_orcttab ?>
-		</tr>
-		<?php summary_print_by_enum( 'severity' ) ?>
-		</table>
-
-		<br />
-
-		<table class="width100" cellspacing="1">
-		<tr>
-			<td class="form-title" colspan="1">
+			<th class="form-title" colspan="1">
 				<?php echo lang_get( 'by_category' ) ?>
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_category() ?>
 		</table>
-
-		<br />
-
-		<table class="width100">
+		</div>
+		
+		 <div id="lD" class="tab-pane">
+	
+	<table class="table table-striped table-bordered table-condensed">
 		<tr>
-			<td class="form-title" colspan="5">
+			<th class="form-title" colspan="5">
 				<?php echo lang_get( 'time_stats' ) ?>
 			</td>
 		</tr>
@@ -209,26 +230,25 @@
 			</td>
 		</tr>
 		</table>
-
-		<br />
-
-		<table class="width100" cellspacing="1">
+	</div>
+       	<div id="lE" class="tab-pane">
+		
+		<table class="table table-striped table-bordered table-condensed">
 		<tr>
-			<td class="form-title" colspan="1">
+			<th class="form-title" colspan="1">
 				<?php echo lang_get( 'developer_stats' ) ?>
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_developer() ?>
 		</table>
-	</td>
-
-
-
-	<td width="50%">
-		<table class="width100" cellspacing="1">
+		</div>
+		
+       	<div id="lF" class="tab-pane">
+		
+		<table class="table table-striped table-bordered table-condensed">
 		<tr>
-			<td class="form-title"><?php echo lang_get( 'by_date' ); ?></td>
+			<th class="form-title"><?php echo lang_get( 'by_date' ); ?></td>
 			<td class="right"><?php echo lang_get( 'opened' ); ?></td>
 			<td class="right"><?php echo lang_get( 'resolved' ); ?></td>
 			<td class="right"><?php echo lang_get( 'balance' ); ?></td>
@@ -236,128 +256,134 @@
 		<?php summary_print_by_date( config_get( 'date_partitions' ) ) ?>
 		</table>
 
-		<br />
-
-		<table class="width100" cellspacing="1">
+		</div>
+		
+             	<div id="lG" class="tab-pane">
+				<table class="table table-striped table-bordered table-condensed">
 		<tr>
-			<td class="form-title" width="86%"><?php echo lang_get( 'most_active' ); ?></td>
+			<th class="form-title" width="86%"><?php echo lang_get( 'most_active' ); ?></td>
 			<td class="right" width="14%"><?php echo lang_get( 'score' ); ?></td>
 		</tr>
 		<?php summary_print_by_activity() ?>
 		</table>
+				
+				</div>
+    
+		
+             	<div id="lH" class="tab-pane">
 
-		<br />
-
-		<table class="width100" cellspacing="1">
+		<table class="table table-striped table-bordered table-condensed">
 		<tr>
-			<td class="form-title" width="86%"><?php echo lang_get( 'longest_open' ); ?></td>
+			<th class="form-title" width="86%"><?php echo lang_get( 'longest_open' ); ?></td>
 			<td class="right" width="14%"><?php echo lang_get( 'days' ); ?></td>
 		</tr>
 		<?php summary_print_by_age() ?>
 		</table>
+		</div>
+		             	<div id="lI" class="tab-pane">
 
-		<br />
 
-		<table class="width100" cellspacing="1">
+		<table class="table table-striped table-bordered table-condensed">
 		<tr>
-			<td class="form-title" colspan="1">
+			<th class="form-title" colspan="1">
 				<?php echo lang_get( 'by_resolution' ) ?>
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_enum( 'resolution' ) ?>
 		</table>
+		</div>
+		             	<div id="lJ" class="tab-pane">
 
-		<br />
 
-		<table class="width100" cellspacing="1">
+		<table class="table table-striped table-bordered table-condensed">
 		<tr>
-			<td class="form-title" colspan="1">
+			<th class="form-title" colspan="1">
 				<?php echo lang_get( 'by_priority' ) ?>
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_enum( 'priority' ) ?>
 		</table>
+		</div>
+		             	<div id="lK" class="tab-pane">
 
-		<br />
-
-		<table class="width100" cellspacing="1">
+		<table class="table table-striped table-bordered table-condensed">
 		<tr>
-			<td class="form-title" colspan="1">
+			<th class="form-title" colspan="1">
 				<?php echo lang_get( 'reporter_stats' ) ?>
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_reporter() ?>
 		</table>
+		</div>
+		             	<div id="lL" class="tab-pane">
 
-		<br />
 
-		<table class="width100" cellspacing="1">
+
+		<table class="table table-striped table-bordered table-condensed">
 		<tr>
-			<td class="form-title" colspan="1">
+			<th class="form-title" colspan="1">
 				<?php echo lang_get( 'reporter_effectiveness' ) ?>
 			</td>
-			<td>
+			<th>
 				<?php echo lang_get( 'severity' ) ?>
-			</td>
-			<td>
+			</th>
+			<th>
 				<?php echo lang_get( 'errors' ) ?>
 			</td>
-			<td>
+			<th>
 				<?php echo lang_get( 'total' ) ?>
-			</td>
+			</th>
 		</tr>
 		<?php summary_print_reporter_effectiveness( config_get( 'severity_enum_string' ), config_get( 'resolution_enum_string' ) ) ?>
 		</table>
-	</td>
-</tr>
+	</div>
+	             	<div id="lM" class="tab-pane">
 
-<tr valign="top">
-	<td colspan="2">
-		<table class="width100" cellspacing="1">
+		<table class="table table-striped table-bordered table-condensed">
 		<tr>
-			<td class="form-title" colspan="1">
+			<th class="form-title" colspan="1">
 				<?php echo lang_get( 'reporter_by_resolution' ) ?>
 			</td>
 			<?php
 			$t_resolutions = MantisEnum::getValues( config_get( 'resolution_enum_string' ) );
 
 			foreach ( $t_resolutions as $t_resolution ) {
-				echo '<td>', get_enum_element( 'resolution', $t_resolution ), '</td>';
+				echo '<th>', get_enum_element( 'resolution', $t_resolution ), '</th>';
 			}
 
-			echo '<td>', lang_get( 'percentage_errors' ), '</td>';
+			echo '<th>', lang_get( 'percentage_errors' ), '</th>';
 			?>
 		</tr>
 		<?php summary_print_reporter_resolution( config_get( 'resolution_enum_string' ) ) ?>
 		</table>
-	</td>
-</tr>
+	</div>
+	             	<div id="lN" class="tab-pane">
 
-<tr valign="top">
-	<td colspan="2">
-		<table class="width100" cellspacing="1">
+
+		<table class="table table-striped table-bordered table-condensed">
 		<tr>
-			<td class="form-title" colspan="1">
+			<th class="form-title" colspan="1">
 				<?php echo lang_get( 'developer_by_resolution' ) ?>
-			</td>
+			</th>
 			<?php
 			$t_resolutions = MantisEnum::getValues( config_get( 'resolution_enum_string' ) );
 
 			foreach ( $t_resolutions as $t_resolution ) {
-				echo '<td>', get_enum_element( 'resolution', $t_resolution ), '</td>';
+				echo '<th>', get_enum_element( 'resolution', $t_resolution ), '</th>';
 			}
 
-			echo '<td>', lang_get( 'percentage_fixed' ), '</td>';
+			echo '<th>', lang_get( 'percentage_fixed' ), '</th>';
 			?>
 		</tr>
 		<?php summary_print_developer_resolution( config_get( 'resolution_enum_string' ) ) ?>
 		</table>
-	</td>
-</tr>
-</table>
+		</div>
+		</div>
+		<div class="clear"></div>
+
 
 <?php
 	html_page_bottom();

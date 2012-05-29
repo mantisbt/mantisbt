@@ -33,20 +33,16 @@ if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_i
 
 	collapse_open( 'monitoring' );
 ?>
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
+<div class="well">
 <?php
+	echo '<h2>';
 	collapse_icon( 'monitoring' );
- ?>
-		<?php echo lang_get( 'users_monitoring_bug' ); ?>
-	</td>
-</tr>
-<tr class="row-1">
-	<td class="category" width="15%">
+	echo lang_get( 'users_monitoring_bug' ); 
+	echo '</h2>';
+	?>
+
 		<?php echo lang_get( 'monitoring_user_list' ); ?>
-	</td>
-	<td>
+
 <?php
 		if ( 0 == $num_users ) {
 			echo lang_get( 'no_users_monitoring_bug' );
@@ -71,20 +67,18 @@ if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_i
 			<input type="submit" class="button" value="<?php echo lang_get( 'add_user_to_monitor' ) ?>" />
 		</form>
 		<?php } ?>
-	</td>
-</tr>
-</table>
+</div>
 <?php
 	collapse_closed( 'monitoring' );
 ?>
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2"><?php collapse_icon( 'monitoring' ); ?>
-		<?php echo lang_get( 'users_monitoring_bug' ); ?>
-	</td>
-</tr>
-</table>
 <?php
+echo '<div class="well">';
+echo '<h2>';
+collapse_icon( 'monitoring' );
+echo lang_get( 'users_monitoring_bug' ); echo '</h2>';
+echo '</div>';
+?>
+	<?php
 	collapse_end( 'monitoring' );
 ?>
 

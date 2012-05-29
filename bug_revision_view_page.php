@@ -127,7 +127,7 @@ print_recently_visited();
 ?>
 
 <br />
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 
 <tr>
 <td class="form-title" colspan="2"><?php echo lang_get( 'view_revisions' ), ': ', $t_title ?></td>

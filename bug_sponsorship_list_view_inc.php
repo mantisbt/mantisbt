@@ -54,8 +54,7 @@
 <?php
 	collapse_open( 'sponsorship' );
 ?>
-
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 	<tr>
 		<td width="50" rowspan="3">
 			<img src="images/dollars.gif" alt="<?php echo lang_get( 'sponsor_verb' ) ?>" border="0" />
@@ -135,7 +134,7 @@
 	collapse_closed( 'sponsorship' );
 ?>
 
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 	<tr>
 		<td class="form-title">
 <?php

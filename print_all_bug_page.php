@@ -92,7 +92,7 @@
 	html_body_begin();
 ?>
 
-<table class="width100"><tr><td class="form-title">
+<table class="table table-striped table-bordered table-condensed"><tr><td class="form-title">
 	<div class="center">
 		<?php echo string_display( config_get( 'window_title' ) ) . ' - ' . string_display( project_get_name( $t_project_id ) ); ?>
 	</div>
@@ -108,7 +108,7 @@
 <input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_FIELD_NAME; ?>" value="<?php echo $f_sort ?>" />
 <input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_DIRECTION; ?>" value="<?php echo $f_dir ?>" />
 
-<table class="width100" cellpadding="2px">
+<table class="table table-striped table-bordered table-condensed" cellpadding="2px">
 <?php
 	#<SQLI> Excel & Print export
 	#$f_bug_array stores the number of the selected rows
@@ -167,7 +167,7 @@
 
 <form method="post" action="print_all_bug_page.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
-<table class="width100" cellspacing="1" cellpadding="2px">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1" cellpadding="2px">
 <tr>
 	<td class="form-title" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
 		<?php 

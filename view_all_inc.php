@@ -79,17 +79,13 @@
 	if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 		filter_draw_selection_area( $f_page_number );
 	}
+
 	# -- ====================== end of FILTER FORM ================== --
 
 
 	# -- ====================== BUG LIST ============================ --
-
-	$t_status_legend_position = config_get( 'status_legend_position' );
-
-	if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
+		echo "<div class='span9'>";
 		html_status_legend();
-	}
-
 	/** @todo (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...) */
 	if( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ){
 		?>
@@ -104,11 +100,11 @@
 			html_javascript_link( 'dynamic_filters.js');
 	}
 ?>
-<br />
 <form name="bug_action" method="get" action="bug_actiongroup_page.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
-<table id="buglist" class="width100" cellspacing="1">
+<table id="buglist" class="table table-striped table-bordered table-condensed">
 <tr>
+<td></td>
 	<td class="form-title" colspan="<?php echo $col_count; ?>">
 		<span class="floatleft">
 		<?php
@@ -123,16 +119,14 @@
 			}
 
 			echo lang_get( 'viewing_bugs_title' );
-			echo " ($v_start - $v_end / $t_bug_count)";
+			echo " $v_start - $v_end / $t_bug_count";
 		?> </span>
 
-		<span class="floatleft small"> <?php
+		<span class="btn-group" style="float:left;"><?php
 				# -- Print and Export links --
-				echo '&#160;';
+				
 				print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
-				echo '&#160;';
 				print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
-				echo '&#160;';
 				print_bracket_link( 'excel_xml_export.php', lang_get( 'excel_export' ) );
 
 				$t_event_menu_options = $t_links = event_signal( 'EVENT_MENU_FILTER' );
@@ -150,7 +144,8 @@
 						}
 					}
 				}
-		?> </span>
+		?> 
+		</span>
 
 		<span class="floatright small"><?php
 			# -- Page number links --
@@ -163,16 +158,13 @@
 <tr class="row-category">
 <?php
 		$t_title_function = 'print_column_title';
+		echo "<td>Estado</td>";
 		foreach( $t_columns as $t_column ) {
 			helper_call_custom_function( $t_title_function, array( $t_column ) );
 		}
 ?>
 </tr>
 
-<?php # -- Spacer row -- ?>
-<tr class="spacer">
-	<td colspan="<?php echo $col_count; ?>"></td>
-</tr>
 <?php
 	function write_bug_rows( $p_rows )
 	{
@@ -204,8 +196,8 @@
 			# choose color based on status
 			$status_color = get_status_color( $t_row->status, auth_get_current_user_id(), $t_row->project_id );
 
-			echo '<tr bgcolor="', $status_color, '" border="1" valign="top">';
-
+			//echo '<tr bgcolor="', $status_color, '" border="1" valign="top">';
+			echo '<td bgcolor="', $status_color, '" style="background:',$status_color,'!important;">';
 			$t_column_value_function = 'print_column_value';
 			foreach( $t_columns as $t_column ) {
 				helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row ) );
@@ -254,12 +246,9 @@
 
 <?php
 
-	if( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
-		html_status_legend();
-	}
-
 	# -- ====================== FILTER FORM ========================= --
 	if( ( $t_filter_position & FILTER_POSITION_BOTTOM ) == FILTER_POSITION_BOTTOM ) {
 		filter_draw_selection_area( $f_page_number );
 	}
 	# -- ====================== end of FILTER FORM ================== --
+echo "</div></div>";

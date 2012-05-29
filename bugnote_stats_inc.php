@@ -67,7 +67,7 @@ if ( ON != config_get('time_tracking_enabled') ) {
 
 <form method="post" action="<?php echo string_attribute( form_action_self() . '#bugnotestats' ) ?>">
 	<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
-	<table border=0 class="width100" cellspacing="0">
+	<table border=0 class="table table-striped table-bordered table-condensed" cellspacing="0">
 		<tr>
 			<td class="form-title" colspan="4">
 				<?php
@@ -127,7 +127,7 @@ if ( ON != config_get('time_tracking_enabled') ) {
 		unset( $t_sort_name );
 ?>
 <br />
-<table border=0 class="width100" cellspacing="0">
+<table border=0 class="table table-striped table-bordered table-condensed" cellspacing="0">
 	<tr class="row-category-history">
 		<td class="small-caption">
 			<?php echo lang_get( $t_name_field ) ?>
@@ -172,7 +172,7 @@ if ( ON != config_get('time_tracking_enabled') ) {
 	collapse_closed( 'bugnotestats' );
 ?>
 
-<table class="width100" cellspacing="0">
+<table class="table table-striped table-bordered table-condensed" cellspacing="0">
 	<tr>
 		<td class="form-title" colspan="4">
 			<?php

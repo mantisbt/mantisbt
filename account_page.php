@@ -94,7 +94,7 @@
 <div align="center">
 <form method="post" action="account_update.php">
 <?php echo form_security_field( 'account_update' ); ?>
-<table class="width75" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed">
 
 	<!-- Headings -->
 	<tr>
@@ -258,7 +258,7 @@
 		</td>
 		<!-- Update Button -->
 		<td>
-			<input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" />
+			<input type="submit" class="btn btn-primary" value="<?php echo lang_get( 'update_user_button' ) ?>" />
 		</td>
 	</tr>
 	<?php } ?>
@@ -277,7 +277,7 @@
 <div class="border center">
 	<form method="post" action="account_delete.php">
 	<?php echo form_security_field( 'account_delete' ) ?>
-	<input type="submit" class="button" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
+	<input type="submit" class="btn btn-danger" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
 	</form>
 </div>
 

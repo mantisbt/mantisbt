@@ -65,22 +65,26 @@
 	$t_project_id = helper_get_current_project();
 ?>
 
-<div align="center">
-<?php
-	$t_status_legend_position = config_get( 'status_legend_position' );
+<div class="row-fluid">
+<?php html_status_legend(); ?>
+<div class="tabbable tabs-left">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#l1">Pendientes</a></li>
+          <li class=""><a data-toggle="tab" href="#l2">No Asignadas</a></li>
+          <li class=""><a data-toggle="tab" href="#l3">Reportadas por mí</a></li>
+          <li class=""><a data-toggle="tab" href="#l4">Resueltas</a></li>
+          <li class=""><a data-toggle="tab" href="#l5">Modificadas Recientemente</a></li>
+          <li class=""><a data-toggle="tab" href="#l6">Monitorizadas por mí</a></li>
 
-	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
-		html_status_legend();
-		echo '<br />';
-	}
-?>
-<table class="hide" border="0" cellspacing="3" cellpadding="0">
+
+        </ul>
+        <div class="tab-content">
 
 <?php
 	$t_number_of_boxes = count ( $t_boxes );
 	$t_boxes_position = config_get( 'my_view_boxes_fixed_position' );
 	$t_counter = 0;
-
+	
 	while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 		# don't display bugs that are set as 0
 		if ($t_box_display == 0) {
@@ -106,64 +110,18 @@
 		# display the box
 		else {
 			$t_counter++;
-
 			# check the style of displaying boxes - fixed (ie. each box in a separate table cell) or not
-			if ( ON == $t_boxes_position ) {
 				# for even box number start new row and column
-				if ( 1 == $t_counter%2 ) {
-					echo '<tr><td valign="top" width="50%">';
+					($t_counter == 1)? $actived=" active": $actived="";
+					echo "<div id='l".$t_counter."' class='tab-pane".$actived."'>";
 					include 'my_view_inc.php';
-					echo '</td>';
-				}
-
-				# for odd box number only start new column
-				else if ( 0 == $t_counter%2 ) {
-					echo '<td valign="top" width="50%">';
-					include 'my_view_inc.php';
-					echo '</td></tr>';
-				}
-			}
-			else if ( OFF == $t_boxes_position ) {
-				# start new table row and column for first box
-				if ( 1 == $t_counter ) {
-					echo '<tr><td valign="top" width="50%">';
-				}
-
-				# start new table column for the second half of boxes
-				if ( $t_counter == ceil ($t_number_of_boxes/2) + 1 ) {
-					echo '<td valign="top" width="50%">';
-				}
-
-				# display the required box
-				include 'my_view_inc.php';
-				echo '<br />';
-
-				# close the first column for first half of boxes
-				if ( $t_counter == ceil ($t_number_of_boxes/2) ) {
-					echo '</td>';
-				}
+					echo "</div>";
 			}
 		}
-	}
-
-
-	# Close the box groups depending on the layout mode and whether an empty cell
-	# is required to pad the number of cells in the last row to the full width of
-	# the table.
-	if ( ON == $t_boxes_position && $t_counter == $t_number_of_boxes && 1 == $t_counter%2 ) {
-		echo '<td valign="top" width="50%"></td></tr>';
-	} else if ( OFF == $t_boxes_position && $t_counter == $t_number_of_boxes ) {
-		echo '</td></tr>';
-	}
 
 ?>
 
-</table>
-<?php
-	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
-		html_status_legend();
-	}
-?>
+</div>
 </div>
 
 <?php

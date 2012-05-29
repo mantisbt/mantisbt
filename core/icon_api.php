@@ -32,8 +32,12 @@ function icon_get_status_icon( $p_icon ) {
 	$t_icon_path = config_get( 'icon_path' );
 	$t_status_icon_arr = config_get( 'status_icon_arr' );
 	$t_priotext = get_enum_element( 'priority', $p_icon );
+	
+	$boot_status_icon_arr = array('10' => '', '20' => 'icon-minus','30' => 'icon-asterisk','40' => 'icon-exclamation-sign','50' => 'icon-fire');
+	
 	if( isset( $t_status_icon_arr[$p_icon] ) && !is_blank( $t_status_icon_arr[$p_icon] ) ) {
-		return "<img src=\"$t_icon_path$t_status_icon_arr[$p_icon]\" alt=\"\" title=\"$t_priotext\" />";
+		//return "<img src=\"$t_icon_path$t_status_icon_arr[$p_icon]\" alt=\"\" title=\"$t_priotext\" />";
+		return "<i class='".$boot_status_icon_arr[$p_icon]."'></i>";
 	} else {
 		return "&#160;";
 	}
@@ -73,16 +77,16 @@ function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
 	}
 
 	if(( 'DESC' == $p_dir ) || ( DESCENDING == $p_dir ) ) {
-		$t_dir = DESCENDING;
+		$t_dir = "down";
 	} else {
-		$t_dir = ASCENDING;
+		$t_dir = "up";
 	}
 
 	$t_none = NONE;
-	if( !is_blank( $t_sort_icon_arr[$t_dir] ) ) {
-		echo "<img src=\"$t_icon_path$t_sort_icon_arr[$t_dir]\" alt=\"\" />";
+	if( !is_blank( $t_dir) ) {
+		echo "<button class='btn'><i class='icon-chevron-".$t_dir."'></i></button>";
 	} else {
-		echo "<img src=\"$t_icon_path$t_status_icon_arr[$t_none]\" alt=\"\" />";
+		echo "<i class='icon-minus'></i>";
 	}
 }
 

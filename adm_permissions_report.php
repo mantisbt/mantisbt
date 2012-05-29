@@ -36,7 +36,7 @@
 	function get_section_begin_apr( $p_section_name ) {
 		$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
-		$t_output = '<table class="width100">';
+		$t_output = '<table class="table table-striped table-bordered table-condensed">';
 		$t_output .= '<tr><td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 1 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 		$t_output .= '<tr><td class="form-title" width="40%">' . lang_get( 'perm_rpt_capability' ) . '</td>';
 

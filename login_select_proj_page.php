@@ -44,43 +44,18 @@
 ?>
 
 <!-- Project Select Form BEGIN -->
-<br />
-<div align="center">
 <form method="post" action="set_project.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
-<table class="width50" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
+
 		<input type="hidden" name="ref" value="<?php echo string_html_specialchars( $f_ref ) ?>" />
 		<?php echo lang_get( 'select_project_button' ) ?>
-	</td>
-</tr>
-<tr class="row-1">
-	<td class="category" width="40%">
-		<?php echo lang_get( 'choose_project' ) ?>
-	</td>
-	<td width="60%">
+			<?php echo lang_get( 'choose_project' ) ?>
 		<select name="project_id">
 		<?php print_project_option_list( ALL_PROJECTS, false, null, true ) ?>
-		</select>
-	</td>
-</tr>
-<tr class="row-2">
-	<td class="category">
 		<?php echo lang_get( 'make_default' ) ?>
-	</td>
-	<td>
-		<input type="checkbox" name="make_default" />
-	</td>
-</tr>
-<tr>
-	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'select_project_button') ?>" />
-	</td>
-</tr>
-</table>
-</form>
-</div>
+			<input type="checkbox" name="make_default" />
+			<input type="submit" class="btn btn-primary" value="<?php echo lang_get( 'select_project_button') ?>" />
+	</form>
 
 <?php
 	html_page_bottom();

@@ -143,7 +143,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 			$t_category_name = category_full_name( $t_bug->category_id, false );
 ?>
 <br />
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">
 		<?php echo $t_lang_bug_view_title ?>
@@ -450,7 +450,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 	$t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t_user_bugnote_limit );
 ?>
 <br />
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 <?php
 	# no bugnotes
 	if ( 0 == count( $t_bugnotes ) ) {

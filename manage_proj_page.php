@@ -45,7 +45,7 @@
 	# Project Menu Form BEGIN
 ?>
 <br />
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="5">
 		<?php
@@ -154,9 +154,9 @@
 <br />
 
 <!-- GLOBAL CATEGORIES -->
-<a name="categories" />
+<a name="categories"></a>
 <div align="center">
-<table class="width75" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed">
 
 <!-- Title -->
 <tr>
@@ -222,14 +222,13 @@
 			<?php echo form_security_field( 'manage_proj_cat_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo ALL_PROJECTS ?>" />
 			<input type="text" name="name" size="32" maxlength="128" />
-			<input type="submit" class="button" value="<?php echo lang_get( 'add_category_button' ) ?>" />
+			<input type="submit" class="btn btn-primary" value="<?php echo lang_get( 'add_category_button' ) ?>" />
 		</form>
 	</td>
 </tr>
 <?php } ?>
 
 </table>
-</div>
-
+			
 <?php
 	html_page_bottom();

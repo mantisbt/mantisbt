@@ -38,7 +38,7 @@
 	<br />
 
 <!-- List of custom field -->
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 	<tr>
 		<td class="form-title" colspan="6">
 				<?php echo lang_get( 'custom_fields_setup' ) ?>

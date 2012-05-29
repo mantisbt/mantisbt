@@ -66,7 +66,7 @@
 <div align="center">
 <form name="report_bug_form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="manage_config_columns_set.php">
 <?php echo form_security_field( 'manage_config_columns_set' ) ?>
-<table class="width50" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed">
 
 <!-- Title -->
 <tr>
@@ -143,12 +143,12 @@
 		<?php
 			if ( $t_account_page ) {
 				if ( $t_project_id == ALL_PROJECTS ) { ?>
-		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_my_default" value="<?php echo lang_get( 'update_columns_as_my_default' ) ?>" />
+		<input <?php echo helper_get_tab_index() ?> type="submit" class="btn btn-primary" name="update_columns_as_my_default" value="<?php echo lang_get( 'update_columns_as_my_default' ) ?>" />
 		<?php } else { ?>
-		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_for_current_project" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" />
+		<input <?php echo helper_get_tab_index() ?> type="submit" class="btn btn-primary" name="update_columns_for_current_project" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" />
 		<?php } } ?>
 <?php if ( $t_manage_page && current_user_is_administrator() ) { ?>
-		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_global_default" value="<?php echo lang_get( 'update_columns_as_global_default' ) ?>" />
+		<input <?php echo helper_get_tab_index() ?> type="submit" class="btn btn-primary" name="update_columns_as_global_default" value="<?php echo lang_get( 'update_columns_as_global_default' ) ?>" />
 <?php } ?>
 	</td>
 </tr>
@@ -160,7 +160,7 @@
 <div align="center">
 <form method="post" action="manage_columns_copy.php">
 <?php echo form_security_field( 'manage_columns_copy' ) ?>
-<table class="width50" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed">
 
 <!-- Copy Columns -->
 <tr>
@@ -175,11 +175,11 @@
 		# Skip "Copy From" if the current project is ALL PROJECTS, the current page is management page, and the user is not administrator
 		if ( !$t_manage_page || ( $t_project_id != ALL_PROJECTS ) || current_user_is_administrator() ) {
 ?>
-			<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_columns_from' ) ?>" />
+			<input type="submit" name="copy_from" class="btn" value="<?php echo lang_get( 'copy_columns_from' ) ?>" />
 <?php
 		}
 ?>
-			<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_columns_to' ) ?>" />
+			<input type="submit" name="copy_to" class="btn" value="<?php echo lang_get( 'copy_columns_to' ) ?>" />
 	</td>
 </tr>
 </table>
@@ -196,7 +196,7 @@
 <!-- Reset Button -->
 	<form method="post" action="manage_config_columns_reset.php">
 		<?php echo form_security_field( 'manage_config_columns_reset' ) ?>
-		<input type="submit" class="button" value="<?php echo lang_get( 'reset_columns_configuration' ) ?>" />
+		<input type="submit" class="btn btn-danger" value="<?php echo lang_get( 'reset_columns_configuration' ) ?>" />
 	</form>
 </div>
 <?php

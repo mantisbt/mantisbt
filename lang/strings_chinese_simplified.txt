@@ -31,7 +31,6 @@
  * @author Gaoxuewei
  * @author Hacked by justin schnell_18@yahoo.com
  * @author Hydra
- * @author Hzy980512
  * @author Kai-Zheng Cheng, neek@sina.com
  * @author Liangent
  * @author Mmyangfl
@@ -288,7 +287,7 @@ $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '字段 "%1$s" 包含无效字段 "%2$s"�
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = '会话句柄无效';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = '未找到会话变量"%1$s"';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = '您的会话已经失效';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = '无效的安全权标。这可能是会话超时或者重复提交表单导致的。';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = '无效的表单安全权标。您是否重复提交了该表单？';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = '无法使用该方法访问此页面';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = '无效的排序字段。';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = '无效日期格式';
@@ -476,11 +475,8 @@ $s_monitor_bug_button = '监视';
 $s_unmonitor_bug_button = '取消监视';
 $s_file_upload_msg = '文件上传成功';
 $s_upload_file = '上传文件';
-$s_upload_files = '上传文件';
 $s_select_file = '选择文件';
-$s_select_files = '选择文件';
 $s_upload_file_button = '上传文件';
-$s_upload_files_button = '上传文件';
 $s_max_file_size = '最大大小';
 $s_bug_reopened_msg = '问题已经被重新打开...';
 $s_reopen_add_bugnote_title = '重启问题的原因...';
@@ -976,7 +972,6 @@ $s_update_bug_button = '编辑';
 $s_bug_assign_to_button = '分派给：';
 $s_bug_status_to_button = '状态改为:';
 $s_reopen_bug_button = '重启问题';
-$s_close_bug_button = '关闭';
 $s_move_bug_button = '移动';
 $s_attached_files = '附件';
 $s_publish = '发布';

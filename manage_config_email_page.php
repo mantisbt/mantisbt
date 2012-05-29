@@ -139,7 +139,7 @@
 	function get_section_begin_for_email( $p_section_name ) {
 		global $t_project;
 		$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
-		echo '<table class="width100">';
+		echo '<table class="table table-striped table-bordered table-condensed">';
 		echo '<tr><td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'message' ) . '</td>';
 		echo'<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_reporter' ) . '&#160;</td>';

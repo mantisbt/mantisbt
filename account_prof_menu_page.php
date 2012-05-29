@@ -67,7 +67,7 @@
 <form method="post" action="account_prof_update.php">
 <?php  echo form_security_field( 'profile_update' )?>
 <input type="hidden" name="action" value="add" />
-<table class="width75" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed">
 <tr>
 	<td class="form-title">
 		<input type="hidden" name="user_id" value="<?php echo $t_user_id ?>" />
@@ -118,7 +118,7 @@
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td class="center">
-		<input type="submit" class="button" value="<?php echo lang_get( 'add_profile_button' ) ?>" />
+		<input type="submit" class="btn btn-primary" value="<?php echo lang_get( 'add_profile_button' ) ?>" />
 	</td>
 </tr>
 </table>
@@ -166,7 +166,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" />
+		<input type="submit" class="btn btn-primary" value="<?php echo lang_get( 'submit_button' ) ?>" />
 	</td>
 </tr>
 </table>

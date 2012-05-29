@@ -32,30 +32,28 @@
 
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 ?>
-<br />
+
 
 <?php
 	collapse_open( 'upload_form' );
 	$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 ?>
+<div class="well">
 <form method="post" enctype="multipart/form-data" action="bug_file_add.php">
 <?php echo form_security_field( 'bug_file_add' ) ?>
 
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-<?php
+
+<?php	echo '<h2>';
 		collapse_icon( 'upload_form' );
 		echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' );
+		echo '</h2>';
+
 ?>
-	</td>
-</tr>
-<tr class="row-1">
-	<td class="category" width="15%">
+
+
 		<?php echo lang_get( $t_file_upload_max_num == 1 ? 'select_file' : 'select_files' ) ?><br />
 		<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
-	</td>
-	<td width="85%">
+
 		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 <?php
@@ -72,22 +70,21 @@
 		<input type="submit" class="button"
 			value="<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file_button' : 'upload_files_button' ) ?>"
 		/>
-	</td>
-</tr>
-</table>
+
 </form>
+</div>
 <?php
 	collapse_closed( 'upload_form' );
 ?>
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<?php
-			collapse_icon( 'upload_form' );
-			echo lang_get( 'upload_file' ) ?>
-	</td>
-</tr>
-</table>
+<div class="well">
+	<?php
+		echo '<h2>';
+		collapse_icon( 'upload_form' );
+		echo lang_get( 'upload_file' );
+		echo '</h2>';
+	?>
 
 <?php
 	collapse_end( 'upload_form' );
+	?>
+</div>

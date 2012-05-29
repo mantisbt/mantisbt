@@ -767,7 +767,6 @@ $s_1_week_title = '1 Week';
 $s_never_logged_in_title = 'Never Logged In';
 $s_prune_accounts = 'Prune Accounts';
 $s_hide_inactive = 'Hide Inactive';
-$s_show_disabled = 'Show Disabled';
 $s_manage_accounts_title = 'Manage Accounts';
 $s_p = 'p';
 $s_date_created = 'Date Created';

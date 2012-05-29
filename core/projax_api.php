@@ -29,7 +29,7 @@
 require_once( 'projax' . DIRECTORY_SEPARATOR . 'projax.php' );
 
 # enables the projax library for this page.
-$g_enable_projax = true;
+$g_enable_projax = false;
 
 $g_projax = new Projax();
 

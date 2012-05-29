@@ -113,7 +113,7 @@ $t_tags = tag_get_all($t_name_filter, $t_per_page, $t_offset);
 <br />
 
 <!--  Tag Table Start -->
-<table class="width100" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed" cellspacing="1">
 	<tr>
 		<td class="form-title" colspan="4">
 			<?php
