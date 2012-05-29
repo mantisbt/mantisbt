@@ -552,7 +552,7 @@ print_recently_visited();
 		// Display multiple file upload fields
 		for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
 ?>
-			<input id="ufile[]" name="ufile[]" type="file" size="60" />
+			<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="60" />
 <?php
 			if( $t_file_upload_max_num > 1 ) {
 				echo '<br />';
