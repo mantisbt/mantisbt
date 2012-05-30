@@ -41,3 +41,10 @@ web.config
 #libraries
 library/jpgraph
 library/FirePHPCore
+
+#MAC
+.DS_Store
+
+#PHP
+
+php-errors.log
