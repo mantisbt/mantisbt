@@ -79,109 +79,120 @@
 ?>
 
 <!-- # Edit Account Form BEGIN -->
-<br />
 <?php if ( $t_force_pw_reset ) { ?>
-<center><div style="color:red; width:75%">
 		<?php
 			echo lang_get( 'verify_warning' );
 			if ( helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 				echo '<br />' . lang_get( 'verify_change_password' );
 			}
 		?>
-</div></center>
-<br />
 <?php } ?>
-<div align="center">
 <form method="post" action="account_update.php">
 <?php echo form_security_field( 'account_update' ); ?>
-<table class="table table-striped table-bordered table-condensed">
 
 	<!-- Headings -->
-	<tr>
-		<td class="form-title">
-			<?php echo lang_get( 'edit_account_title' ) ?>
-		</td>
-		<td class="right">
+	<div class="page-header">
+		<h1><?php echo lang_get( 'edit_account_title' ) ?></h1>
+	</div>
+	
+	<div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav" style="padding:19px 0px;">	
 			<?php print_account_menu( 'account_page.php' ) ?>
-		</td>
-	</tr>
+          </div>
+          	<?php 
+		if ( !helper_call_custom_function( 'auth_can_change_password', array() ) ) {
+		}
+		else{
+			$t_show_update_button = true;
 
-<?php if ( !helper_call_custom_function( 'auth_can_change_password', array() ) ) { ?> <!-- With LDAP -->
+		}
+		 ?> 
+          
+          
+          <?php if ( $t_show_update_button ) { ?>
+	<!-- BUTTONS -->
+
+			<?php if ( $t_force_pw_reset ) { ?>
+			<label>
+			<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
+			</label>
+			<?php } ?>
+		
+	
+			<input type="submit" class="btn btn-primary btn-large span12" value="<?php echo lang_get( 'update_user_button' ) ?>" />
+		
+	
+	<?php } ?>
+
+        </div>
+        <div class="span9">
+				<?php if ( !helper_call_custom_function( 'auth_can_change_password', array() ) ) { ?> <!-- With LDAP -->
 
 	<!-- Username -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category" width="25%">
-			<?php echo lang_get( 'username' ) ?>
-		</td>
-		<td width="75%">
+	
+			<label><?php echo lang_get( 'username' ) ?></label>
+	
 			<?php echo string_display_line( $u_username ) ?>
-		</td>
-	</tr>
+
 
 	<!-- Password -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
-			<?php echo lang_get( 'password' ) ?>
-		</td>
-		<td>
+			<label><?php echo lang_get( 'password' ) ?></label>
+	
 			<?php echo lang_get( 'no_password_change' ) ?>
-		</td>
-	</tr>
-
 	<!-- Without LDAP -->
 <?php } else {
 	$t_show_update_button = true;
 ?>
 
 	<!-- Username -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category" width="25%">
-			<?php echo lang_get( 'username' ) ?>
-		</td>
-		<td width="75%">
-			<?php echo string_display_line( $u_username ) ?>
-		</td>
-	</tr>
+				<label><?php echo lang_get( 'username' ) ?></label>
+					<?php echo string_display_line( $u_username ) ?>
+		
 
 	<!-- Password -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
-			<?php
+	
+		
+			<label><?php
 				echo lang_get( 'password' );
 				if ( $t_force_pw_reset ) {
 			?>
+			</label>
 			<span class="required">*</span>
 			<?php } ?>
-		</td>
-		<td>
+		
+		
 			<input type="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" name="password" />
-		</td>
-	</tr>
+		
+	
 
 	<!-- Password confirmation -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
-			<?php
+	
+		
+			<label><?php
 				echo lang_get( 'confirm_password' );
 				if ( $t_force_pw_reset ) {
 			?>
+			</label>
 			<span class="required">*</span>
 			<?php } ?>
-		</td>
-		<td>
+		
+		
 			<input type="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" name="password_confirm" />
-		</td>
-	</tr>
+		
+	
 
 <?php } ?>
 	<!-- End LDAP conditional -->
 
 	<!-- Email -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
+	
+		
+			<label>
 			<?php echo lang_get( 'email' ) ?>
-		</td>
-		<td>
+			</label>
+		
+		
 		<?php
 			// With LDAP
 			if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
@@ -193,15 +204,14 @@
 				print_email_input( 'email', $u_email );
 			}
 		?>
-		</td>
-	</tr>
+		
+	
 
 	<!-- Realname -->
-	<tr <?php echo helper_alternate_class() ?> valign="top">
-		<td class="category">
-			<?php echo lang_get( 'realname' ) ?>
-		</td>
-		<td>
+		
+			<label><?php echo lang_get( 'realname' ) ?></label>
+		
+		
 		<?php
 			// With LDAP
 			if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
@@ -215,58 +225,42 @@
 		<?php
 			}
 		?>
-		</td>
-	</tr>
+		
+	
 
 	<!-- Access level -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
-			<?php echo lang_get( 'access_level' ) ?>
-		</td>
-		<td>
+	
+		
+			<label><?php echo lang_get( 'access_level' ) ?></label>
+		
+		
 			<?php echo get_enum_element( 'access_levels', $u_access_level ) ?>
-		</td>
-	</tr>
+		
+	
 
 	<!-- Project access level -->
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">
-			<?php echo lang_get( 'access_level_project' ) ?>
-		</td>
-		<td>
+	
+		
+			<label><?php echo lang_get( 'access_level_project' ) ?></label>
+		
+		
 			<?php echo get_enum_element( 'access_levels', current_user_get_access_level() ) ?>
-		</td>
-	</tr>
+		
+	
 
 	<!-- Assigned project list -->
-	<tr <?php echo helper_alternate_class() ?> valign="top">
-		<td class="category">
-			<?php echo lang_get( 'assigned_projects' ) ?>
-		</td>
-		<td>
+		
+			<label><?php echo lang_get( 'assigned_projects' ) ?></label>
+		
+		
 			<?php print_project_user_list( auth_get_current_user_id(), false ) ?>
-		</td>
-	</tr>
+		
+	
 
-	<?php if ( $t_show_update_button ) { ?>
-	<!-- BUTTONS -->
-	<tr>
-		<td class="left">
-			<?php if ( $t_force_pw_reset ) { ?>
-			<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
-			<?php } ?>
-		</td>
-		<!-- Update Button -->
-		<td>
-			<input type="submit" class="btn btn-primary" value="<?php echo lang_get( 'update_user_button' ) ?>" />
-		</td>
-	</tr>
-	<?php } ?>
-</table>
-</form>
+	</form>
+</div>
 </div>
 
-<br />
 <?php # Delete Account Form BEGIN ?>
 <?php
 	# check if users can't delete their own accounts
@@ -274,12 +268,10 @@
 ?>
 
 <!-- Delete Button -->
-<div class="border center">
 	<form method="post" action="account_delete.php">
 	<?php echo form_security_field( 'account_delete' ) ?>
 	<input type="submit" class="btn btn-danger" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
 	</form>
-</div>
 
 <?php
 }

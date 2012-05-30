@@ -1092,21 +1092,31 @@ function print_account_menu( $p_page = '' ) {
 			$isactive3 = "active";
 			break;
 	}
-	echo "<div class='btn-group'>";
+	echo "<ul class='nav nav-list'>";
 
+	echo "<li class='".$isactive1."'>";
 	print_bracket_link( $t_account_page, lang_get( 'account_link' ), false, $isactive1 );
+	echo "</li><li class='".$isactive2."'>";
 	print_bracket_link( $t_account_prefs_page, lang_get( 'change_preferences_link' ) , false, $isactive2 );
+	echo "</li><li class='".$isactive3."'>";
 	print_bracket_link( $t_account_manage_columns_page, lang_get( 'manage_columns_config' ) , false, $isactive3 );
+	echo "</li>";
 	
 
 	if( config_get ( 'enable_profiles' ) == ON && access_has_project_level( config_get( 'add_profile_threshold' ) ) ) {
+		echo "<li class='".$isactive4."'>";
 		print_bracket_link( helper_mantis_url( $t_account_profile_menu_page ), lang_get( 'manage_profiles_link' ), false, $isactive4 );
+		echo "</li>";
+
+		
 	}
 
 	if( config_get( 'enable_sponsorship' ) == ON && access_has_project_level( config_get( 'view_sponsorship_total_threshold' ) ) && !current_user_is_anonymous() ) {
+	echo "<li class='".$isactive5."'>";
 		print_bracket_link( helper_mantis_url( $t_account_sponsor_page ), lang_get( 'my_sponsorship' ), false, $isactive5 );
+		echo "</li>";
 	}
-	echo "</div>";
+	echo "</ul>";
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_ACCOUNT' );

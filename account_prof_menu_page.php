@@ -62,68 +62,64 @@
 
 	# Add Profile Form BEGIN
 ?>
-<br />
-<div align="center">
 <form method="post" action="account_prof_update.php">
 <?php  echo form_security_field( 'profile_update' )?>
 <input type="hidden" name="action" value="add" />
-<table class="table table-striped table-bordered table-condensed">
-<tr>
-	<td class="form-title">
+
+	
 		<input type="hidden" name="user_id" value="<?php echo $t_user_id ?>" />
-		<?php echo lang_get( 'add_profile_title' ) ?>
-	</td>
-	<td class="right">
+		<div class="page-header">
+			<h1><?php echo lang_get( 'add_profile_title' ) ?></h1>
+		</div>
+	
+	<div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav" style="padding:19px 0px;">	
+	
 	<?php
 		if ( !$g_global_profiles ) {
 			print_account_menu( 'account_prof_menu_page.php' );
 		}
 	?>
-	</td>
-</tr>
-<tr class="row-1">
-	<td class="category" width="25%">
+        </div>
+        		<input type="submit" class="btn btn-primary btn-large span12" value="<?php echo lang_get( 'add_profile_button' ) ?>" />
+
+        </div>
+        <div class="span9">
+	
+
+
+        <label>
 		<span class="required">*</span><?php echo lang_get( 'platform' ) ?>
-	</td>
-	<td width="75%">
+        </label>
+	
 		<input type="text" name="platform" size="32" maxlength="32" />
-	</td>
-</tr>
-<tr class="row-2">
-	<td class="category">
+	
+
+
+	<label>
 		<span class="required">*</span><?php echo lang_get( 'operating_system' ) ?>
-	</td>
-	<td>
+	</label>
+	
 		<input type="text" name="os" size="32" maxlength="32" />
-	</td>
-</tr>
-<tr class="row-1">
-	<td class="category">
+	
+
+
+	<label>
 		<span class="required">*</span><?php echo lang_get( 'os_version' ) ?>
-	</td>
-	<td>
+	</label>
+	
 		<input type="text" name="os_build" size="16" maxlength="16" />
-	</td>
-</tr>
-<tr class="row-2">
-	<td class="category">
+	
+
+
+	<label>
 		<?php echo lang_get( 'additional_description' ) ?>
-	</td>
-	<td>
+	</label>
+	
 		<textarea name="description" cols="60" rows="8"></textarea>
-	</td>
-</tr>
-<tr>
-	<td class="left">
-		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
-	</td>
-	<td class="center">
-		<input type="submit" class="btn btn-primary" value="<?php echo lang_get( 'add_profile_button' ) ?>" />
-	</td>
-</tr>
-</table>
+	
 </form>
-</div>
 <?php 
 	# Add Profile Form END
 	# Edit or Delete Profile Form BEGIN
@@ -131,18 +127,13 @@
 	$t_profiles = profile_get_all_for_user( $t_user_id );
 	if( $t_profiles ) {
 ?>
-<br />
-<div align="center">
 <form method="post" action="account_prof_update.php">
 <?php  echo form_security_field( 'profile_update' )?>
-<table class="width75" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'edit_or_delete_profiles_title' ) ?>
-	</td>
-</tr>
-<tr class="row-1">
-	<td class="center" colspan="2">
+
+		<h2><?php echo lang_get( 'edit_or_delete_profiles_title' ) ?></h2>
+	
+
+
 		<input type="radio" name="action" value="edit" checked="checked" /> <?php echo lang_get( 'edit_profile' ) ?>
 <?php
 	if ( !$g_global_profiles ) {
@@ -152,26 +143,22 @@
 	}
 ?>
 		<input type="radio" name="action" value="delete" /> <?php echo lang_get( 'delete_profile' ) ?>
-	</td>
-</tr>
-<tr class="row-2">
-	<td class="category" width="25%">
-		<?php echo lang_get( 'select_profile' ) ?>
-	</td>
-	<td width="75%">
+	
+
+
+	
+		<label><?php echo lang_get( 'select_profile' ) ?></label>
+	
+	
 		<select name="profile_id">
 			<?php print_profile_option_list( $t_user_id, '', $t_profiles ) ?>
 		</select>
-	</td>
-</tr>
-<tr>
-	<td class="center" colspan="2">
-		<input type="submit" class="btn btn-primary" value="<?php echo lang_get( 'submit_button' ) ?>" />
-	</td>
-</tr>
-</table>
+	
+
+
+		<input type="submit" class="btn" value="<?php echo lang_get( 'submit_button' ) ?>" />
+	
 </form>
-</div>
 <?php 
 } # Edit or Delete Profile Form END
 
