@@ -30,6 +30,14 @@
 require_api( 'config_api.php' );
 
 /**
+ * Checks to see if script was queried through the HTTPS protocol
+ * @return boolean True if protocol is HTTPS
+ */
+function http_is_protocol_https() {
+	return !empty( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' );
+}
+
+/**
  * Check to see if the client is using Microsoft Internet Explorer so we can
  * enable quirks and hacky non-standards-compliant workarounds.
  * @return boolean True if Internet Explorer is detected as the user agent
@@ -143,14 +151,14 @@ function http_security_headers() {
 		header( 'X-Frame-Options: DENY' );
 		$t_avatar_img_allow = '';
 		if ( config_get_global( 'show_avatar' ) ) {
-			if ( isset( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+			if ( http_is_protocol_https() ) {
 				$t_avatar_img_allow = "; img-src 'self' https://secure.gravatar.com:443";
 			} else {
 				$t_avatar_img_allow = "; img-src 'self' http://www.gravatar.com:80";
 			}
 		}
 		header( "X-Content-Security-Policy: allow 'self';$t_avatar_img_allow; frame-ancestors 'none'" );
-		if ( isset( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+		if ( http_is_protocol_https() ) {
 			header( 'Strict-Transport-Security: max-age=7776000' );
 		}
 	}

@@ -141,7 +141,7 @@ header( 'Pragma: public' );
 # attached files via HTTPS, we disable the "Pragma: no-cache"
 # command when IE is used over HTTPS.
 global $g_allow_file_cache;
-if ( ( isset( $_SERVER["HTTPS"] ) && ( "on" == utf8_strtolower( $_SERVER["HTTPS"] ) ) ) && is_browser_internet_explorer() ) {
+if ( http_is_protocol_https() && is_browser_internet_explorer() ) {
 	# Suppress "Pragma: no-cache" header.
 } else {
 	if ( !isset( $g_allow_file_cache ) ) {
@@ -182,7 +182,7 @@ switch ( config_get( 'file_upload_method' ) ) {
 					$t_content_type = $t_file_info_type;
 				}
 			}
-			
+
 			if ( $t_content_type_override )
 				$t_content_type = $t_content_type_override;
 
@@ -211,7 +211,7 @@ switch ( config_get( 'file_upload_method' ) ) {
 				$t_content_type = $t_file_info_type;
 			}
 		}
-		
+
 		if ( $t_content_type_override )
 			$t_content_type = $t_content_type_override;
 
@@ -226,7 +226,7 @@ switch ( config_get( 'file_upload_method' ) ) {
 				$t_content_type = $t_file_info_type;
 			}
 		}
-		
+
 		if ( $t_content_type_override )
 			$t_content_type = $t_content_type_override;
 

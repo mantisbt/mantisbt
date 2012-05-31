@@ -29,11 +29,13 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses error_api.php
+ * @uses http_api.php
  */
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'error_api.php' );
+require_api( 'http_api.php' );
 
 /**
  * Determines (once-off) whether the client is accessing this script via a
@@ -41,7 +43,7 @@ require_api( 'error_api.php' );
  * prevent the cookie from being transmitted to other domains.
  * @global bool $g_cookie_secure_flag_enabled
  */
-$g_cookie_secure_flag_enabled = isset( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' );
+$g_cookie_secure_flag_enabled = http_is_protocol_https();
 
 /**
  * Determines (once-off) whether the version of PHP executing this script has

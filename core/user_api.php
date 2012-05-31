@@ -814,15 +814,10 @@ function user_get_avatar( $p_user_id, $p_size = 80 ) {
 	} else {
 		$t_size = $p_size;
 
-		$t_use_ssl = false;
-		if( isset( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
-			$t_use_ssl = true;
-		}
-
-		if( !$t_use_ssl ) {
-			$t_gravatar_domain = 'http://www.gravatar.com/';
-		} else {
+		if( http_is_protocol_https() ) {
 			$t_gravatar_domain = 'https://secure.gravatar.com/';
+		} else {
+			$t_gravatar_domain = 'http://www.gravatar.com/';
 		}
 
 		$t_avatar_url = $t_gravatar_domain . 'avatar/' . md5( $t_email ) . '?d=identicon&r=G&s=' . $t_size;
