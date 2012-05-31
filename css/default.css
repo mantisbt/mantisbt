@@ -181,3 +181,6 @@ margin-top: 5px;
 .az.pagination a{
 padding: 0px 8px;
 }
+li a.inactive{
+color:#CCCCCC;
+}

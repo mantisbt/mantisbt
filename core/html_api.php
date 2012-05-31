@@ -639,20 +639,23 @@ function print_menu() {
 	if( auth_is_user_authenticated() ) {
 		$t_protected = current_user_get_field( 'protected' );
 		$t_current_project = helper_get_current_project();
-echo '<div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <div class="nav-collapse">
-            ';
-            if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
+		echo '<div class="navbar navbar-fixed-top">
+		      <div class="navbar-inner">
+		        <div class="container-fluid">
+		          <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		          </a>
+		          <div class="nav-collapse">
+		            ';
+        if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
 			echo "<a class='btn btn-primary' style='float:left; margin-right:20px;' href='bug_report_page.php'><i class='icon-plus icon-white'></i> Reportar Incidencia</a>";
-		} 
-            echo '<ul class="nav">';
+		}else{
+			echo "<a class='btn btn-primary disabled' style='float:left; margin-right:20px;' href='#'><i class='icon-plus icon-white'></i> Reportar Incidencia</a>";
+			
+		}
+        echo '<ul class="nav">';
 
 		$t_menu_options = array();
 
@@ -687,6 +690,8 @@ echo '<div class="navbar navbar-fixed-top">
 		# Changelog Page
 		if( access_has_project_level( config_get( 'view_changelog_threshold' ) ) ) {
 			$t_menu_options[] = '<li><a href="' . helper_mantis_url( 'changelog_page.php">' ) . lang_get( 'changelog_link' ) . '</a></li>';
+		}else{
+			$t_menu_options[] = '<li><a class="inactive">' . lang_get( 'changelog_link' ) . '</a></li>';			
 		}
 
 		# Roadmap Page
@@ -763,9 +768,6 @@ echo '<div class="navbar navbar-fixed-top">
 		if( config_get( 'time_tracking_enabled' ) && access_has_global_level( config_get( 'time_tracking_reporting_threshold' ) ) ) {
 			$t_menu_options[] = '<li><a href="' . helper_mantis_url( 'billing_page.php">' ) . lang_get( 'time_tracking_billing_link' ) . '</a></li>';
 		}
-
-	
-		
 		
 		
 		echo implode( $t_menu_options );
@@ -781,52 +783,43 @@ echo '<div class="navbar navbar-fixed-top">
 		}
 	}
 
-	if( $t_show_project_selector ) {
-		echo '<form class="projselect" method="post" name="form_set_project" id="formproject" action="' . helper_mantis_url( 'set_project.php' ) . '">';
-		# CSRF protection not required here - form does not result in modifications
-
-		//echo lang_get( 'email_project' ), ': ';
-		if( ON == config_get( 'show_extended_project_browser' ) ) {
-			print_extended_project_browser( helper_get_current_project_trace() );
-		} else {
-				echo '<select name="project_id" style="display:none;" onchange="document.forms.form_set_project.submit();">';
-				print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
-				echo '</select>';
-		}
-		//echo '<input type="submit" class="btn btn-primary" value="' . lang_get( 'switch' ) . '" />';
-			if( OFF != config_get( 'rss_enabled' ) ) {
-	}
-		
-		echo '</form>';
-	}
-		
-		
-		
 		if( !current_user_is_anonymous() ) {
-		
-		echo "<div class='btn-group pull-right'>";
-		echo "<a href='#' data-toggle='dropdown' class='btn dropdown-toggle'>";
-        echo "<i class='icon-user'></i>".current_user_get_field( 'realname' );
-        echo "<span class='caret'></span>";
-        echo "</a>";
-        echo "<ul class='dropdown-menu'>";
-        echo "<li><a href='".helper_mantis_url( 'account_page.php' )."'>Mi Cuenta</a></li>";
-        echo $adminlink;
-        echo "<li><a href='" . htmlspecialchars( rss_get_issues_feed_url() ) . "'>Feed RSS</a></li>";
-        echo "<li class='divider' id='dividerpro'></li>";
-		print_project_li_list( join( ';', helper_get_current_project_trace() ), true, null, true );
-        echo "<li class='divider'></li>";
-        echo "<li><a href='".helper_mantis_url( 'logout_page.php' )."'>Salir</a></li>";
-        echo "</ul>";
-        echo "</div>";
-		
-		
-		
-		
-		}
-		
+			echo "<div>";
+			if( $t_show_project_selector ) {
+				echo '<form class="projselect" method="post" name="form_set_project" id="formproject" action="' . helper_mantis_url( 'set_project.php' ) . '">';
+				# CSRF protection not required here - form does not result in modifications
 	
-				
+				//echo lang_get( 'email_project' ), ': ';
+				if( ON == config_get( 'show_extended_project_browser' ) ) {
+					print_extended_project_browser( helper_get_current_project_trace() );
+				} else {
+					echo '<select class="span5" name="project_id" onchange="document.forms.form_set_project.submit();">';
+					print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
+					echo '</select>';
+				}
+				//echo '<input type="submit" class="btn btn-primary" value="' . lang_get( 'switch' ) . '" />';
+				if( OFF != config_get( 'rss_enabled' ) ) {
+				}
+		
+				echo '</form>';
+				echo '</div>';
+			}
+			echo "<div class='btn-group pull-right'>";
+			echo "<a href='#' data-toggle='dropdown' class='btn dropdown-toggle'>";
+	        echo "<i class='icon-user'></i>".current_user_get_field( 'realname' );
+	        echo "<span class='caret'></span>";
+	        echo "</a>";
+	        echo "<ul class='dropdown-menu'>";
+	        echo "<li><a href='".helper_mantis_url( 'account_page.php' )."'>Mi Cuenta</a></li>";
+	        echo $adminlink;
+	        echo "<li><a href='" . htmlspecialchars( rss_get_issues_feed_url() ) . "'>Feed RSS</a></li>";
+	        echo "<li class='divider' id='dividerpro'></li>";
+	        echo "<li><a href='".helper_mantis_url( 'logout_page.php' )."'>Salir</a></li>";
+	        echo "</ul>";
+	        echo "</div>";
+
+        }
+						
 		
 		echo '<form method="post" action="' . helper_mantis_url( 'jump_to_bug.php" style="display:none;">' );
 		# CSRF protection not required here - form does not result in modifications

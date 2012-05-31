@@ -37,7 +37,16 @@ $nav.removeClass('subnav-fixed')
 //SELECCIONAR PROYECTO
 
 function projectsel(idpro){
-	$('.projselect select').val(idpro);
-	$('.projselect').submit();
+	//$('.projselect select').val(idpro);
+	//$.post('/mantisbt/set_project.php?project_id='+idpro);
+	$.ajax({
+	  type: 'POST',
+	  url: '/mantisbt/set_project.php',
+	  data: { project_id: idpro },
+	  success: function(data){
+		  $("body").html(data);
+	  }
+	});
+	//$('.projselect').submit();
 }
 

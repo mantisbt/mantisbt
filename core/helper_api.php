@@ -114,6 +114,68 @@ function get_enum_element( $p_enum_name, $p_val, $p_user = null, $p_project = nu
  * @param mixed $p_val
  * @return null
  */
+function check_li_selected( $p_var, $p_val = true ) {
+	
+	
+	      
+	
+	if( is_array( $p_var ) ) {
+		foreach( $p_var as $t_this_var ) {
+
+			# catch the case where one entry is 0 and the other is a string.
+			if( is_string( $t_this_var ) && is_string( $p_val ) ) {
+				if( $t_this_var === $p_val ) {
+					$html =  "<a  data-toggle='dropdown' class='btn dropdown-toggle' href='" . helper_mantis_url( 'set_project.php?project_id=' . $p_val ) . "'>"
+							."<i class='icon-ok-sign'></i> ".project_get_field( $p_var, 'name' )
+							."<span class='caret'></span>"
+							."</a>";
+					echo $html;
+					return;
+				}
+			}
+			else if( $t_this_var == $p_val ) {
+				$html =  "<a  data-toggle='dropdown' class='btn dropdown-toggle' href='" . helper_mantis_url( 'set_project.php?project_id=' . $p_val ) . "'>"
+							."<i class='icon-ok-sign'></i> ".project_get_field( $p_var, 'name' )
+							."<span class='caret'></span>"
+							."</a>";
+					echo $html;
+				return;
+			}
+		}
+	} else {
+		if( is_string( $p_var ) && is_string( $p_val ) ) {
+			if( $p_var === $p_val ) {
+				$html =  "<a  data-toggle='dropdown' class='btn dropdown-toggle' href='" . helper_mantis_url( 'set_project.php?project_id=' . $p_val ) . "'>"
+							."<i class='icon-ok-sign'></i> ".project_get_field( $p_var, 'name' )
+							."<span class='caret'></span>"
+							."</a>";
+					echo $html;
+				return;
+			}
+		}
+		else if( $p_var == $p_val ) {
+			$html =  "<a  data-toggle='dropdown' class='btn dropdown-toggle' href='" . helper_mantis_url( 'set_project.php?project_id=' . $p_val ) . "'>"
+							."<i class='icon-ok-sign'></i> ".project_get_field( $p_var, 'name' )
+							."<span class='caret'></span>"
+							."</a>";
+					echo $html;
+			return;
+		}
+	}
+}
+
+/**
+ * If $p_var is not an array and is equal to $p_val then we PRINT SELECTED.
+ * If $p_var is an array, then if any member is equal to $p_val we PRINT SELECTED.
+ * This is used when we want to know if a variable indicated a certain
+ * option element is selected
+ *
+ * If the second parameter is not given, the first parameter is compared
+ *  to the boolean value true
+ * @param mixed $p_var
+ * @param mixed $p_val
+ * @return null
+ */
 function check_selected( $p_var, $p_val = true ) {
 	if( is_array( $p_var ) ) {
 		foreach( $p_var as $t_this_var ) {

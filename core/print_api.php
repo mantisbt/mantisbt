@@ -483,6 +483,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 		if( $t_id != $p_filter_project_id ) {
 			echo '<option value="' . $t_id . '"';
 			check_selected( $p_project_id, $t_id );
+			echo ' title="' . string_attribute( project_get_field( $t_id, 'name' ) ) . '"';
 			echo '>' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, Array() );
 		}
@@ -529,6 +530,7 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 			}
 			echo $t_full_id . '"';
 			check_selected( $p_project_id, $t_full_id );
+			echo ' title="' . string_attribute( project_get_field( $t_id, 'name' ) ) . '"';
 			echo '>' . str_repeat( '&#160;', count( $p_parents ) ) . str_repeat( '&raquo;', count( $p_parents ) ) . ' ' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
 		}
