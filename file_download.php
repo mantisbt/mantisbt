@@ -119,7 +119,7 @@
 	# attached files via HTTPS, we disable the "Pragma: no-cache"
 	# command when IE is used over HTTPS.
 	global $g_allow_file_cache;
-	if ( ( isset( $_SERVER["HTTPS"] ) && ( "on" == utf8_strtolower( $_SERVER["HTTPS"] ) ) ) && is_browser_internet_explorer() ) {
+	if ( http_is_protocol_https() && is_browser_internet_explorer() ) {
 		# Suppress "Pragma: no-cache" header.
 	} else {
 		if ( !isset( $g_allow_file_cache ) ) {
@@ -143,7 +143,7 @@
 	$finfo = finfo_get_if_available();
 
 	$t_content_type = $v_file_type;
-	
+
 	$t_content_type_override = file_get_content_type_override ( $t_filename );
 
 	# dump file content to the connection.
@@ -159,7 +159,7 @@
 						$t_content_type = $t_file_info_type;
 					}
 				}
-				
+
 				if ( $t_content_type_override ) {
 					$t_content_type = $t_content_type_override;
 				}
@@ -184,7 +184,7 @@
 					$t_content_type = $t_file_info_type;
 				}
 			}
-			
+
 			if ( $t_content_type_override ) {
 				$t_content_type = $t_content_type_override;
 			}
@@ -200,7 +200,7 @@
 					$t_content_type = $t_file_info_type;
 				}
 			}
-			
+
 			if ( $t_content_type_override ) {
 				$t_content_type = $t_content_type_override;
 			}

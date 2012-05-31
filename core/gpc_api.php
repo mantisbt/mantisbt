@@ -20,7 +20,11 @@
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @uses http_api.php
  */
+
+require_once( 'http_api.php' );
 
 /**
  * Determines (once-off) whether the client is accessing this script via a
@@ -28,7 +32,7 @@
  * prevent the cookie from being transmitted to other domains.
  * @global bool $g_cookie_secure_flag_enabled
  */
-$g_cookie_secure_flag_enabled = isset( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' );
+$g_cookie_secure_flag_enabled = http_is_protocol_https();
 
 /**
  * Determines (once-off) whether the version of PHP executing this script has
