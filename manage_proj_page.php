@@ -39,17 +39,21 @@
 	}
 
 	html_page_top( lang_get( 'manage_projects_link' ) );
+?>
+	<div class="page-header">
+		<h1><?php echo lang_get( 'projects_title' ) ?></h1>
+	</div>
 
+<?php
 	print_manage_menu( 'manage_proj_page.php' );
 
 	# Project Menu Form BEGIN
 ?>
-<br />
+<div class="span10">
 <table class="table table-striped table-bordered table-condensed" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="5">
 		<?php
-			echo lang_get( 'projects_title' );
 
 			# Check the user's global access level before allowing project creation
 			if ( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
@@ -59,35 +63,45 @@
 	</td>
 </tr>
 <tr class="row-category">
-	<td width="20%">
+	<td width="18%">
+		<div class="btn-group">
 		<?php
 			print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'name' ), 'name', $t_direction, $f_sort );
 			print_sort_icon( $t_direction, $f_sort, 'name' );
 		?>
+		</div>
 	</td>
 	<td width="10%">
+	<div class="btn-group">
 		<?php
 			print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'status' ), 'status', $t_direction, $f_sort );
 			print_sort_icon( $t_direction, $f_sort, 'status' );
 		?>
+	</div>
 	</td>
-	<td width="10%">
+	<td width="12%">
+	<div class="btn-group">
 		<?php
 			print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'enabled' ), 'enabled', $t_direction, $f_sort );
 			print_sort_icon( $t_direction, $f_sort, 'enabled' );
 		?>
+	</div>
 	</td>
-	<td width="10%">
+	<td width="12%">
+	<div class="btn-group">
 		<?php
 			print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'view_status' ), 'view_state', $t_direction, $f_sort );
 			print_sort_icon( $t_direction, $f_sort, 'view_state' );
 		?>
+	</div>
 	</td>
-	<td width="40%">
+	<td width="38%">
+	<div class="btn-group">
 		<?php
 			print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'description' ), 'description', $t_direction, $f_sort );
 			print_sort_icon( $t_direction, $f_sort, 'description' );
 		?>
+	</div>
 	</td>
 </tr>
 <?php
@@ -122,7 +136,7 @@
 	<td>
 		<?php echo get_enum_element( 'project_status', $t_project['status'] ) ?>
 	</td>
-	<td>
+	<td style="text-align:center">
 		<?php echo trans_bool( $t_project['enabled'] ) ?>
 	</td>
 	<td>
@@ -151,19 +165,13 @@
 	}
 ?>
 </table>
-<br />
-
+<h2><?php echo lang_get( 'global_categories' ) ?></h2>
 <!-- GLOBAL CATEGORIES -->
 <a name="categories"></a>
 <div align="center">
 <table class="table table-striped table-bordered table-condensed">
 
-<!-- Title -->
-<tr>
-	<td class="form-title" colspan="3">
-		<?php echo lang_get( 'global_categories' ) ?>
-	</td>
-</tr>
+
 <?php
 	$t_categories = category_get_all_rows( ALL_PROJECTS );
 	$t_can_update_global_cat = access_has_global_level( config_get( 'manage_site_threshold' ) );
@@ -171,16 +179,16 @@
 	if ( count( $t_categories ) > 0 ) {
 ?>
 		<tr class="row-category">
-			<td>
+			<th>
 				<?php echo lang_get( 'category' ) ?>
-			</td>
-			<td>
+			</th>
+			<th>
 				<?php echo lang_get( 'assign_to' ) ?>
-			</td>
+			</th>
 <?php	if( $t_can_update_global_cat ) { ?>
-			<td class="center">
+			<th>
 				<?php echo lang_get( 'actions' ) ?>
-			</td>
+			</th>
 <?php	} ?>
 		</tr>
 <?php
@@ -198,13 +206,12 @@
 				<?php echo prepare_user_name( $t_category['user_id'] ) ?>
 			</td>
 <?php	if( $t_can_update_global_cat ) { ?>
-			<td class="center">
+			<td>
 				<?php
 					$t_id = urlencode( $t_id );
 					$t_project_id = urlencode( ALL_PROJECTS );
 
 					print_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit_link' ) );
-					echo '&#160;';
 					print_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete_link' ) );
 				?>
 			</td>
@@ -229,6 +236,7 @@
 <?php } ?>
 
 </table>
+</div></div></div>
 			
 <?php
 	html_page_bottom();

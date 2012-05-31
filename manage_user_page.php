@@ -85,8 +85,15 @@
 	}
 
 	html_page_top( lang_get( 'manage_users_link' ) );
+?>
 
-	print_manage_menu( 'manage_user_page.php' );
+	<div class="page-header">
+		<h1><?php echo lang_get( 'manage_users_link' ) ?></h1>
+	</div>
+
+<?php	print_manage_menu( 'manage_user_page.php' );
+
+	echo "<div class='span10'>";
 
 	# New Accounts Form BEGIN
 
@@ -124,7 +131,7 @@
 
 	$t_prefix_array['UNUSED'] = lang_get( 'users_unused' );
 	$t_prefix_array['NEW'] = lang_get( 'users_new' );
-	echo '<div class="az pagination"><ul>';
+	echo '<div class="btn-group"><a class="btn dropdown-toggle" data-toggle="dropdown" href="#">A-Z<span class="caret"></span></a><ul class="dropdown-menu">';
 	foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 		echo '<li>';
 		if ( $t_prefix === $f_filter ) {
@@ -377,5 +384,6 @@
 		<input type="text" name="username" value="" />
 		<input type="submit" class="btn" value="<?php echo lang_get( 'manage_user' ) ?>" />
 	</form>
+	</div></div>
 <?php
 	html_page_bottom();

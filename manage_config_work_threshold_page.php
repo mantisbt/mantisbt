@@ -30,8 +30,10 @@
 	auth_reauthenticate();
 
 	html_page_top( lang_get( 'manage_threshold_config' ) );
+		echo "<div class='page-header'><h1>". lang_get( 'manage_config_link' ) ."</h1></div>";
 
 	print_manage_menu( 'adm_permissions_report.php' );
+	echo "<div class='span10'>";
 	print_manage_config_menu( 'manage_config_work_threshold_page.php' );
 
     $t_user = auth_get_current_user_id();
@@ -56,7 +58,7 @@
 		echo '<tr><td class="form-title" colspan="' . ( count( $t_access_levels ) + 2 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</td>';
 		echo '<td class="form-title"style="text-align:center"  width="40%" colspan="' . count( $t_access_levels ) . '">' . lang_get( 'access_levels' ) . '</td>';
-		echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'alter_level' ) . '&#160;</td></tr><tr>';
+		echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'alter_level' ) . '&#160;</td></tr><tr style="font-size:70%";>';
 		foreach( $t_access_levels as $t_access_level => $t_access_label ) {
 			echo '<td class="form-title" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</td>';
 		}
@@ -245,13 +247,13 @@
 	}
 
 	function get_section_end() {
-		echo '</table><br />' . "\n";
+		echo '</table>' . "\n";
 	}
 
 	$t_colour_project = config_get( 'colour_project');
 	$t_colour_global = config_get( 'colour_global');
 
-    echo "<br /><br />\n";
+    echo "\n";
 
 	if ( ALL_PROJECTS == $t_project_id ) {
 	    $t_project_title = lang_get( 'config_all_projects' );
@@ -259,9 +261,9 @@
 	    $t_project_title = sprintf( lang_get( 'config_project' ) , string_display( project_get_name( $t_project_id ) ) );
 	}
 	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
-	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
+	echo '<p>' . lang_get( 'colour_coding' ) . '';
 	if ( ALL_PROJECTS <> $t_project_id ) {
-	    echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
+	    echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) .'</span>';
 	}
 	echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
 
@@ -316,7 +318,7 @@
 
 
     if ( $t_show_submit ) {
-        echo "<input type=\"submit\" class=\"button\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
+        echo "<input type=\"submit\" class=\"btn\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
     }
 
 	echo "</form>\n";
@@ -336,5 +338,5 @@
         echo "\" />\n";
         echo "</form></div>\n";
     }
-
+echo "</div></div>";
 	html_page_bottom();

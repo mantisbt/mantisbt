@@ -32,34 +32,31 @@
 	access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
 	html_page_top( lang_get( 'manage_custom_field_link' ) );
+	echo"<div class='page-header'><h1>".lang_get( 'custom_fields_setup' )."</h1></div>";
 
 	print_manage_menu( 'manage_custom_field_page.php' );
-?>
-	<br />
 
+?>
+<div class="span10">
 <!-- List of custom field -->
-<table class="table table-striped table-bordered table-condensed" cellspacing="1">
+<table class="table table-striped table-bordered table-condensed">
+
 	<tr>
-		<td class="form-title" colspan="6">
-				<?php echo lang_get( 'custom_fields_setup' ) ?>
-		</td>
-	</tr>
-	<tr>
-		<td class="category" width="12%">
+		<th class="category" width="12%">
 			<?php echo lang_get( 'custom_field_name' ) ?>
-		</td>
-		<td class="category" width="12%">
+		</th>
+		<th class="category" width="12%">
 			<?php echo lang_get( 'custom_field_project_count' ) ?>
-		</td>
-		<td class="category" width="12%">
+		</th>
+		<th class="category" width="12%">
 			<?php echo lang_get( 'custom_field_type' ) ?>
-		</td>
-		<td class="category" width="40%">
+		</th>
+		<th class="category" width="40%">
 			<?php echo lang_get( 'custom_field_possible_values' ) ?>
-		</td>
-		<td class="category" width="12%">
+		</th>
+		<th class="category" width="12%">
 			<?php echo lang_get( 'custom_field_default_value' ) ?>
-		</td>
+		</th>
 	</tr>
 	<?php
 		$t_custom_fields = custom_field_get_ids();
@@ -89,15 +86,13 @@
 	?>
 </table>
 
-<br />
 
 <form method="post" action="manage_custom_field_create.php">
 <?php echo form_security_field( 'manage_custom_field_create' ); ?>
 		<input type="text" name="name" size="32" maxlength="64" />
-		<input type="submit" class="button" value="<?php echo lang_get( 'add_custom_field_button' ) ?>" />
+		<input type="submit" class="btn" value="<?php echo lang_get( 'add_custom_field_button' ) ?>" />
 </form>
 
-<br />
-
+</div></div>
 <?php
 	html_page_bottom();

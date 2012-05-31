@@ -297,25 +297,39 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 	if( true == gpc_get_bool( '_confirmed' ) ) {
 		return true;
 	}
-
+	
 	html_page_top();
 
-	echo "<br />\n<div align=\"center\">\n";
-	print_hr();
+	echo "<div class='modal' id='myModal' style='display:none;'>";
+	
+	echo "<div class='modal-header'>";
+	echo "<h3>ALERT!!!</h3>";
+	echo "</div>";
+	
+	echo "<div class='modal-body'>";
 	echo "\n$p_message\n";
-
-	echo '<form method="post" action="' . string_attribute( form_action_self() ) . "\">\n";
+	echo "</div>";
+	
+	echo "<div class='modal-footer'>";
+	echo '<form style="margin:0px;" method="post" action="' . string_attribute( form_action_self() ) . "\">";
 	# CSRF protection not required here - user needs to confirm action
 	# before the form is accepted.
 	print_hidden_inputs( gpc_strip_slashes( $_POST ) );
 	print_hidden_inputs( gpc_strip_slashes( $_GET ) );
 
-	echo "<input type=\"hidden\" name=\"_confirmed\" value=\"1\" />\n";
-	echo '<br /><br /><input type="submit" class="button" value="' . $p_button_label . '" />';
-	echo "\n</form>\n";
+	echo "<input type=\"hidden\" name=\"_confirmed\" value=\"1\" />";
+	echo "<a class='btn' href='#' onclick='history.back();'>Volver</a>";
+	echo '<input type="submit" class="btn btn-danger" value="' . $p_button_label . '" />';
+	echo "</form>";
+	echo "</div>";
+	
+	echo "</div>";
+	echo "<script type='text/javascript'>$('#myModal').modal({
+		keyboard: false,
+		backdrop: 'static',
+		
+		});</script>";
 
-	print_hr();
-	echo "</div>\n";
 	html_page_bottom();
 	exit;
 }

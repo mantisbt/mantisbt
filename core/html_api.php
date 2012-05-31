@@ -934,43 +934,75 @@ function print_manage_menu( $p_page = '' ) {
 	switch( $p_page ) {
 		case $t_manage_user_page:
 			break;
+			$isactive6 = 'active';
 		case $t_manage_project_menu_page:
 			break;
+			$isactive7 = 'active';
 		case $t_manage_custom_field_page:
 			break;
+			$isactive8 = 'active';
 		case $t_manage_config_page:
 			break;
+			$isactive9 = 'active';
 		case $t_manage_plugin_page:
 			break;
+			$isactive10 = 'active';
 		case $t_manage_prof_menu_page:
 			break;
+			$isactive11 = 'active';
 		case $t_manage_tags_page:
 			break;
+			$isactive12 = 'active';
+
 	}
 
 
-	echo "<div class='btn-group'>";
+	echo "<div class='row-fluid'>
+			<div class='span2'>
+			<div class='well' style='padding:19px 0px;'>
+			<ul class='nav nav-list'>";
+        
 	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_user_page ), lang_get( 'manage_users_link' ) );
+		echo "<li class=".$isactive6.">";
+		print_bracket_link( helper_mantis_url( $t_manage_user_page ), lang_get( 'manage_users_link' ),false, "none" );
+		echo "</li>";
 	}
 	if( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_project_menu_page ), lang_get( 'manage_projects_link' ) );
+		echo "<li class=".$isactive7.">";
+		print_bracket_link( helper_mantis_url( $t_manage_project_menu_page ), lang_get( 'manage_projects_link')  ,false, "none");
+		echo "</li>";
+	
 	}
 	if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_tags_page ), lang_get( 'manage_tags_link' ) );
+		echo "<li class=".$isactive8.">";
+		print_bracket_link( helper_mantis_url( $t_manage_tags_page ), lang_get( 'manage_tags_link' ) ,false, "none");
+		echo "</li>";
+
 	}
 	if( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_custom_field_page ), lang_get( 'manage_custom_field_link' ) );
+		echo "<li class=".$isactive9.">";
+		print_bracket_link( helper_mantis_url( $t_manage_custom_field_page ), lang_get( 'manage_custom_field_link' ) ,false, "none");
+		echo "</li>";
+
 	}
 	if( access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_prof_menu_page ), lang_get( 'manage_global_profiles_link' ) );
+		echo "<li class=".$isactive10.">";
+		print_bracket_link( helper_mantis_url( $t_manage_prof_menu_page ), lang_get( 'manage_global_profiles_link' ),false, "none" );
+		echo "</li>";
 	}
 	if( access_has_global_level( config_get( 'manage_plugin_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_plugin_page ), lang_get( 'manage_plugin_link' ) );
+		echo "<li class=".$isactive11.">";
+		print_bracket_link( helper_mantis_url( $t_manage_plugin_page ), lang_get( 'manage_plugin_link' ) ,false, "none");
+		echo "</li>";
+
 	}
 	if( access_has_project_level( config_get( 'view_configuration_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_manage_config_page ), lang_get( 'manage_config_link' ) );
+		echo "<li class=".$isactive12.">";
+		print_bracket_link( helper_mantis_url( $t_manage_config_page ), lang_get( 'manage_config_link' ) ,false, "none");
+		echo "</li>";
+
 	}
+	
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE' );
@@ -992,7 +1024,7 @@ function print_manage_menu( $p_page = '' ) {
 		print_bracket_link_prepared( $t_menu_item );
 	}
 
-	echo '</div>';
+	echo '</ul></div></div>';
 }
 
 /**
@@ -1008,35 +1040,43 @@ function print_manage_config_menu( $p_page = '' ) {
 	$t_manage_workflow = 'manage_config_workflow_page.php';
 	$t_manage_columns = 'manage_config_columns_page.php';
 
-	switch( $p_page ) {
+	
+switch( $p_page ) {
 		case $t_configuration_report:
-			$t_configuration_report = '';
+			//$t_configuration_report = '';
+			$pressed1 = "active";
 			break;
 		case $t_permissions_summary_report:
-			$t_permissions_summary_report = '';
+			//$t_permissions_summary_report = '';
+			$pressed2 = "active";
 			break;
 		case $t_manage_work_threshold:
-			$t_manage_work_threshold = '';
+			//$t_manage_work_threshold = '';
+			$pressed3 = "active";
 			break;
 		case $t_manage_email:
-			$t_manage_email = '';
+			//$t_manage_email = '';
+			$pressed4 = "active";
 			break;
 		case $t_manage_workflow:
-			$t_manage_workflow = '';
+			//$t_manage_workflow = '';
+			$pressed5 = "active";
 			break;
 		case $t_manage_columns:
-			$t_manage_columns = '';
+			//$t_manage_columns = '';
+			$pressed6 = "active";
 			break;
 	}
 
-	echo '<br /><div align="center">';
+
+	echo '<div class="btn-group">';
 	if( access_has_project_level( config_get( 'view_configuration_threshold' ) ) ) {
-		print_bracket_link( helper_mantis_url( $t_configuration_report ), lang_get_defaulted( 'configuration_report' ) );
-		print_bracket_link( helper_mantis_url( $t_permissions_summary_report ), lang_get( 'permissions_summary_report' ) );
-		print_bracket_link( helper_mantis_url( $t_manage_work_threshold ), lang_get( 'manage_threshold_config' ) );
-		print_bracket_link( helper_mantis_url( $t_manage_workflow ), lang_get( 'manage_workflow_config' ) );
-		print_bracket_link( helper_mantis_url( $t_manage_email ), lang_get( 'manage_email_config' ) );
-		print_bracket_link( $t_manage_columns, lang_get( 'manage_columns_config' ) );
+		print_bracket_link( helper_mantis_url( $t_configuration_report ), lang_get_defaulted( 'configuration_report' ),false, "btn " . $pressed1 );
+		print_bracket_link( helper_mantis_url( $t_permissions_summary_report ), lang_get( 'permissions_summary_report' ),false, "btn " . $pressed2 );
+		print_bracket_link( helper_mantis_url( $t_manage_work_threshold ), lang_get( 'manage_threshold_config' ),false, "btn " . $pressed3 );
+		print_bracket_link( helper_mantis_url( $t_manage_workflow ), lang_get( 'manage_workflow_config' ),false, "btn " . $pressed5 );
+		print_bracket_link( helper_mantis_url( $t_manage_email ), lang_get( 'manage_email_config' ),false, "btn " . $pressed4 );
+		print_bracket_link( $t_manage_columns, lang_get( 'manage_columns_config' ),false, "btn " . $pressed6 );
 	}
 
 	# Plugin / Event added options
@@ -1059,7 +1099,7 @@ function print_manage_config_menu( $p_page = '' ) {
 		print_bracket_link_prepared( $t_menu_item );
 	}
 
-	echo '</div>';
+	echo '</div><br />';
 }
 
 /**

@@ -58,7 +58,7 @@
 	print_manage_menu();
 ?>
 
-<br />
+<div class="span10">
 
 
 <!-- USER INFO -->
@@ -230,5 +230,5 @@
 
 	include ( 'account_prefs_inc.php' );
 	edit_account_prefs( $t_user['id'], false, false, 'manage_user_edit_page.php?user_id=' . $t_user_id );
-
+echo "</div></div>";
 	html_page_bottom();

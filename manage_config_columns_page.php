@@ -33,7 +33,7 @@
 
 	html_page_top( lang_get( 'manage_columns_config' ) );
 
-	print_manage_menu( 'adm_permissions_report.php' );
+	//print_manage_menu( 'adm_permissions_report.php' );
 	print_manage_config_menu( 'manage_config_columns_page.php' );
 
 	# Define constant that will be checked by the include page.

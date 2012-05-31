@@ -181,3 +181,10 @@ margin-top: 5px;
 .az.pagination a{
 padding: 0px 8px;
 }
+
+h2{
+border-bottom: solid 1px #ccc;
+margin-bottom: 10px;	
+	
+}
+
