@@ -784,29 +784,10 @@ function print_menu() {
 	}
 
 		if( !current_user_is_anonymous() ) {
-			echo "<div>";
-			if( $t_show_project_selector ) {
-				echo '<form class="projselect" method="post" name="form_set_project" id="formproject" action="' . helper_mantis_url( 'set_project.php' ) . '">';
-				# CSRF protection not required here - form does not result in modifications
-	
-				//echo lang_get( 'email_project' ), ': ';
-				if( ON == config_get( 'show_extended_project_browser' ) ) {
-					print_extended_project_browser( helper_get_current_project_trace() );
-				} else {
-					echo '<select class="span5" name="project_id" onchange="document.forms.form_set_project.submit();">';
-					print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
-					echo '</select>';
-				}
-				//echo '<input type="submit" class="btn btn-primary" value="' . lang_get( 'switch' ) . '" />';
-				if( OFF != config_get( 'rss_enabled' ) ) {
-				}
-		
-				echo '</form>';
-				echo '</div>';
-			}
+			$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
 			echo "<div class='btn-group pull-right'>";
 			echo "<a href='#' data-toggle='dropdown' class='btn dropdown-toggle'>";
-	        echo "<i class='icon-user'></i>".current_user_get_field( 'realname' );
+	        echo "<i class='icon-user'></i> ".current_user_get_field( 'realname' )." ($t_access_level)";
 	        echo "<span class='caret'></span>";
 	        echo "</a>";
 	        echo "<ul class='dropdown-menu'>";
@@ -836,8 +817,37 @@ function print_menu() {
 		
 		echo '          </div><!--/.nav-collapse -->
         </div>
-      </div>
-    </div>';
+      </div>';
+
+      // Line below navigation bar with project list
+      if( !current_user_is_anonymous() ) {
+			echo "<div class='subnav'>";
+			echo "<div class='span8 pull-right'>";
+			if( $t_show_project_selector ) {
+				echo '<form class="projselect" method="post" name="form_set_project" id="formproject" action="' . helper_mantis_url( 'set_project.php' ) . '">';
+				# CSRF protection not required here - form does not result in modifications
+	
+				//echo lang_get( 'email_project' ), ': ';
+				if( ON == config_get( 'show_extended_project_browser' ) ) {
+					print_extended_project_browser( helper_get_current_project_trace() );
+				} else {
+					echo '<select class="span8" name="project_id" onchange="document.forms.form_set_project.submit();">';
+					print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
+					echo '</select>';
+				}
+				//echo '<input type="submit" class="btn btn-primary" value="' . lang_get( 'switch' ) . '" />';
+				if( OFF != config_get( 'rss_enabled' ) ) {
+				}
+		
+				echo '</form>';
+				
+			}
+			echo '</div>';
+			echo '</div>';
+		}
+		// Line end
+		
+		echo "</div>";
 	}
 }
 
