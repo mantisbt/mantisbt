@@ -28,8 +28,9 @@
 	access_ensure_project_level( config_get( 'view_configuration_threshold' ) );
 
 	html_page_top( lang_get( 'configuration_report' ) );
-
+	echo "<div class='page-header'><h1>". lang_get( 'manage_config_link' ) ."</h1></div>";
 	print_manage_menu( 'adm_config_report.php' );
+	echo "<div class='span10'>";
 	print_manage_config_menu( 'adm_config_report.php' );
 
 	function get_config_type( $p_type ) {
@@ -92,8 +93,6 @@
 	$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table ORDER BY user_id, project_id, config_id";
 	$result = db_query_bound( $query );
 ?>
-<br />
-<div align="center">
 <table class="table table-striped table-bordered table-condensed" cellspacing="1">
 
 <!-- Title -->
@@ -240,6 +239,7 @@
 <?php
 	} # end user can change config
 ?>
+</div>
 </div>
 <?php
 	html_page_bottom();

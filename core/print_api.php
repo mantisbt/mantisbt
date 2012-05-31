@@ -1311,7 +1311,7 @@ function print_button( $p_action_page, $p_label, $p_args_to_post = null ) {
 	# arguments are being sent via the POST method.
 	echo '<form method="post" action="', htmlspecialchars( $p_action_page ), '">';
 	echo form_security_field( $t_form_name[0] );
-	echo '<input type="submit" class="btn btn-primary" value="', $p_label, '" />';
+	echo '<input type="submit" class="btn" value="', $p_label, '" />';
 
 	if( $p_args_to_post !== null ) {
 		foreach( $p_args_to_post as $t_var => $t_value ) {

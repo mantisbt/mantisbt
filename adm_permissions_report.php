@@ -29,10 +29,12 @@
 	access_ensure_project_level( config_get( 'view_configuration_threshold' ) );
 
 	html_page_top( lang_get( 'permissions_summary_report' ) );
+	echo "<div class='page-header'><h1>". lang_get( 'manage_config_link' ) ."</h1></div>";
 
 	print_manage_menu( 'adm_permissions_report.php' );
+	echo "<div class='span10'>";
 	print_manage_config_menu( 'adm_permissions_report.php' );
-
+	
 	function get_section_begin_apr( $p_section_name ) {
 		$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
@@ -55,7 +57,7 @@
 		$t_output = '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		foreach( $t_access_levels as $t_access_level ) {
 			if ( $t_access_level >= (int)$p_access_level ) {
-				$t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';
+				$t_value = '<i class="icon-ok-sign"></i>';
 			} else {
 				$t_value = '&#160;';
 			}
@@ -69,11 +71,11 @@
 	}
 
 	function get_section_end() {
-		$t_output = '</table><br />' . "\n";
+		$t_output = '</table>' . "\n";
 		return $t_output;
 	}
 
-	echo '<br /><br />';
+	echo '';
 
 	# News
 	echo get_section_begin_apr( lang_get( 'news' ) );

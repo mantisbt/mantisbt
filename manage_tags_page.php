@@ -37,7 +37,7 @@ access_ensure_global_level( config_get( 'tag_edit_threshold' ) );
 compress_enable();
 
 html_page_top( lang_get( 'manage_tags_link' ) );
-
+echo"<div class='page-header'><h1>".lang_get( 'manage_tags_link' )."</h1></div>";
 print_manage_menu( 'manage_tags_page.php' );
 
 $t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
@@ -55,8 +55,8 @@ for ( $i = 'A'; $i != 'AA'; $i++ ) {
 for ( $i = 0; $i <= 9; $i++ ) {
 	$t_prefix_array[] = "$i";
 }
-
-echo '<br /><table align="center" class="width75"><tr>';
+echo "<div class='span10'>";
+echo '<table class="table"><tr>';
 
 foreach ( $t_prefix_array as $t_prefix ) {
 	if ( $t_prefix === 'ALL' ) {
@@ -110,7 +110,6 @@ if ( $f_page_number < 1 ) {
 $t_tags = tag_get_all($t_name_filter, $t_per_page, $t_offset);
 ?>
 
-<br />
 
 <!--  Tag Table Start -->
 <table class="table table-striped table-bordered table-condensed" cellspacing="1">
@@ -161,15 +160,13 @@ foreach ( $t_tags as $t_tag_row ) {
 
 <?php if ( $t_can_edit ) { ?>
 
-<br />
-<a name="tagcreate">
 
 <!-- Create Tag Form -->
 
 <form method="post" action="tag_create.php">
 <?php echo form_security_field( 'tag_create' ); ?>
 
-<table align="center" class="width75" cellspacing="1">
+<table class="table">
 
 	<!-- Title -->
 
@@ -200,12 +197,13 @@ foreach ( $t_tags as $t_tag_row ) {
 			<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 		</td>
 		<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'tag_create' ) ?>" />
+		<input type="submit" class="btn" value="<?php echo lang_get( 'tag_create' ) ?>" />
 		</td>
 	</tr>
 
 </table>
 </form>
+</div></div>
 
 <?php
 } #End can Edit

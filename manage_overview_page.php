@@ -30,61 +30,35 @@
 	$t_version_suffix = config_get_global( 'version_suffix' );
 
 	html_page_top( lang_get( 'manage_link' ) );
+?>
 
+	<div class="page-header">
+		<h1><?php echo lang_get( 'site_information' ) ?></h1>
+	</div>
+
+<?php
 	print_manage_menu();
 ?>
 
-<br />
-<table class="table table-striped table-bordered table-condensed">
-
-<tr>
-<td class="form-title" width="30%"><?php echo lang_get( 'site_information' ) ?></td>
-</tr>
-
-<tr <?php echo helper_alternate_class() ?>>
-<td class="category"><?php echo lang_get( 'mantis_version' ) ?></td>
-<td><?php echo MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ) ?></td>
-</tr>
-
-<tr <?php echo helper_alternate_class() ?>>
-<td class="category"><?php echo lang_get( 'schema_version' ) ?></td>
-<td><?php echo config_get( 'database_version' ) ?></td>
-</tr>
-
-<tr class="spacer">
-<td></td>
-</tr>
+<div class="span9">
+<ul>
+	<li><?php echo lang_get( 'mantis_version' ) .": ";?><?php echo MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ) ?></li>
+	<li><?php echo lang_get( 'schema_version' ) .": "; ?><?php echo config_get( 'database_version' ) ?></li>
 
 <?php
 	$t_is_admin = current_user_is_administrator(); 
 	if ( $t_is_admin ) {
 ?>
-<tr <?php echo helper_alternate_class() ?>>
-<td class="category"><?php echo lang_get( 'site_path' ) ?></td>
-<td><?php echo config_get( 'absolute_path' ) ?></td>
-</tr>
+	<li><?php echo lang_get( 'site_path' ) .": ";?><?php echo config_get( 'absolute_path' ) ?></li>
+	<li><?php echo lang_get( 'core_path' ) .": ";?><?php echo config_get( 'core_path' ) ?></li>
+	<li><?php echo lang_get( 'plugin_path' ) .": ";?><?php echo config_get( 'plugin_path' ) ?></li>
 
-<tr <?php echo helper_alternate_class() ?>>
-<td class="category"><?php echo lang_get( 'core_path' ) ?></td>
-<td><?php echo config_get( 'core_path' ) ?></td>
-</tr>
-
-<tr <?php echo helper_alternate_class() ?>>
-<td class="category"><?php echo lang_get( 'plugin_path' ) ?></td>
-<td><?php echo config_get( 'plugin_path' ) ?></td>
-</tr>
-
-<tr class="spacer">
-<td></td>
-</tr>
 <?php
 }
-
 event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) ) 
 ?>
-
-</table>
-
+</ul>
+</div>
+</div>
 <?php
 html_page_bottom();
-

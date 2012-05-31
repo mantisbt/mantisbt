@@ -30,8 +30,10 @@
 	auth_reauthenticate();
 
 	html_page_top( lang_get( 'manage_workflow_config' ) );
+		echo "<div class='page-header'><h1>". lang_get( 'manage_config_link' ) ."</h1></div>";
 
 	print_manage_menu( 'adm_permissions_report.php' );
+	echo "<div class='span10'>";
 	print_manage_config_menu( 'manage_config_workflow_page.php' );
 
 	$t_access = current_user_get_access_level();
@@ -141,7 +143,7 @@
 
 			# Add 'reopened' label
 			if ( $p_from_status_id >= $t_resolved_status && $p_to_status_id == $t_reopen_status ) {
-				$t_value .= "<br />($t_reopen_label)";
+				$t_value .= "($t_reopen_label)";
 			}
 		} else {
             $t_value = '<td>&#160;';
@@ -208,7 +210,7 @@
 	}
 
 	function section_end() {
-		echo '</table><br />' . "\n";
+		echo '</table>' . "\n";
 	}
 
 	function threshold_begin( $p_section_name ) {
@@ -259,7 +261,7 @@
 	}
 
 	function threshold_end() {
-		echo '</table><br />' . "\n";
+		echo '</table>' . "\n";
 	}
 
 	function access_begin( $p_section_name ) {
@@ -348,7 +350,7 @@
 		}
 	}
 
-	echo '<br /><br />';
+	echo '';
 
 	# count arcs in and out of each status
 	$t_enum_status = config_get( 'status_enum_string' );
@@ -396,7 +398,7 @@
 		if ( ( 0 == count( $t_project_workflow['exit'][$t_status] ) ) && ( 0 == count( $t_project_workflow['entry'][$t_status] ) ) ){
 			$t_validation_result .= '<tr ' . helper_alternate_class() . '><td>'
 							. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
-							. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '<br />' . lang_get( 'no_exit' ) . '</td>';
+							. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '' . lang_get( 'no_exit' ) . '</td>';
 		}
 	}
 
@@ -412,9 +414,9 @@
 	    $t_project_title = sprintf( lang_get( 'config_project' ) , string_display( project_get_name( $t_project ) ) );
 	}
 	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
-	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
+	echo '<p>' . lang_get( 'colour_coding' ) . '';
 	if ( ALL_PROJECTS <> $t_project ) {
-	    echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
+	    echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) .'</span>';
 	}
 	echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
 
@@ -426,7 +428,7 @@
 	threshold_row( 'bug_resolved_status_threshold' );
 	threshold_row( 'bug_reopen_status' );
 	threshold_end();
-	echo '<br />';
+	echo '';
 
 	if ( '' <> $t_validation_result ) {
 		echo '<table class="table table-striped table-bordered table-condensed">';
@@ -435,7 +437,7 @@
 		echo '<td class="form-title" >' . lang_get( 'comment' ) . '</td></tr>';
 		echo "\n";
 		echo $t_validation_result;
-		echo '</table><br /><br />';
+		echo '</table>';
 	}
 
 	# Initialization for 'reopened' label handling
@@ -454,7 +456,7 @@
 		echo '<p>' . lang_get( 'workflow_change_access' ) . ':';
 		echo '<select name="workflow_access">';
 		print_enum_string_option_list( 'access_levels', config_get_access( 'status_enum_workflow' ) );
-		echo '</select> </p><br />';
+		echo '</select> </p>';
 	}
 
 	# display the access levels required to move an issue
@@ -466,11 +468,11 @@
 		echo '<p>' . lang_get( 'access_change_access' ) . ':';
 		echo '<select name="status_access">';
 		print_enum_string_option_list( 'access_levels', config_get_access( 'set_status_threshold' ) );
-		echo '</select> </p><br />';
+		echo '</select> </p>';
 	}
 
 	if ( $t_can_change_flags ) {
-		echo "<input type=\"submit\" class=\"button\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
+		echo "<input type=\"submit\" class=\"btn\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
 		echo "</form>\n";
 
         if ( 0 < count( $t_overrides ) ) {
@@ -479,7 +481,7 @@
             echo "<input name=\"revert\" type=\"hidden\" value=\"" . implode( ',', $t_overrides ) . "\"></input>";
             echo "<input name=\"project\" type=\"hidden\" value=\"$t_project\"></input>";
             echo "<input name=\"return\" type=\"hidden\" value=\"" . string_attribute( form_action_self() ) ."\"></input>";
-            echo "<input type=\"submit\" class=\"button\" value=\"";
+            echo "<input type=\"submit\" class=\"btn\" value=\"";
             if ( ALL_PROJECTS == $t_project ) {
                 echo lang_get( 'revert_to_system' );
             } else {
@@ -492,5 +494,5 @@
 	} else {
         echo "</form>\n";
     }
-
+echo "</div></div>";
 	html_page_bottom();
