@@ -326,14 +326,6 @@ function mci_get_time_tracking_from_note( $p_issue_id, $p_note) {
 	return db_minutes_to_hhmm($p_note['time_tracking']);
 }
 
-/**
- * SECURITY NOTE: these globals are initialized here to prevent them
- * being spoofed if register_globals is turned on
- */
-$g_error_parameters = array();
-$g_error_handled = false;
-$g_error_proceed_url = null;
-
 # Default error handler
 #
 # This handler will not receive E_ERROR, E_PARSE, E_CORE_*, or E_COMPILE_*
@@ -343,9 +335,6 @@ $g_error_proceed_url = null;
 # The others, being system errors, will come with a string in $p_error
 #
 function mc_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-	global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
-	global $g_lang_overrides;
-	global $g_error_send_page_header;
 	global $l_oServer;
 
 	# check if errors were disabled with @ somewhere in this call chain
@@ -354,22 +343,11 @@ function mc_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 		return;
 	}
 
-	$t_lang_pushed = false;
-
 	# flush any language overrides to return to user's natural default
 	if( function_exists( 'db_is_connected' ) ) {
 		if( db_is_connected() ) {
 			lang_push( lang_get_default() );
-			$t_lang_pushed = true;
 		}
-	}
-
-	$t_short_file = basename( $p_file );
-	$t_method_array = config_get( 'display_errors' );
-	if( isset( $t_method_array[$p_type] ) ) {
-		$t_method = $t_method_array[$p_type];
-	} else {
-		$t_method = 'none';
 	}
 
 	# build an appropriate error string
@@ -391,19 +369,16 @@ function mc_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 			$t_error_description = error_string( $p_error );
 			break;
 		case E_USER_NOTICE:
-
 			# used for debugging
 			$t_error_type = 'DEBUG';
 			$t_error_description = $p_error;
 			break;
 		default:
-
 			#shouldn't happen, just display the error just in case
 			$t_error_type = '';
 			$t_error_description = $p_error;
 	}
 
-	$t_error_description = $t_error_description;
 	$t_error_stack = error_get_stack_trace();
 	
 	error_log("[mantisconnect.php] Error Type: $t_error_type,\nError Description: $t_error_description\nStack Trace:\n$t_error_stack");
