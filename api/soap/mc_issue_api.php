@@ -342,7 +342,10 @@ function mci_issue_get_notes( $p_issue_id ) {
  *  of the users which should monitor this issue.
  */
 function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
-    
+	if ( bug_is_readonly( $p_issue_id ) ) {
+		return mci_soap_fault_access_denied( $p_user_id, "Issue '$p_issue_id' is readonly" );
+	}
+
     $t_existing_monitors = bug_get_monitors( $p_issue_id );
 
     $t_monitors = array();
@@ -710,6 +713,10 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		return new soap_fault( 'Client', '', "Issue '$p_issue_id' does not exist." );
 	}
 
+	if( bug_is_readonly( $p_issue_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id, "Issue '$p_issue_id' is readonly" );
+	}
+
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
@@ -917,7 +924,11 @@ function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, $p_tags ) {
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
-	
+
+	if( bug_is_readonly( $p_issue_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id, "Issue '$p_issue_id' is readonly" );
+	}
+
 	mci_tag_set_for_issue( $p_issue_id,  $p_tags, $t_user_id );
 	
 	return true;
@@ -1044,6 +1055,10 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 	    if ( !access_has_bugnote_level( config_get( 'delete_bugnote_threshold' ), $p_issue_note_id ) ) {
 	        return mci_soap_fault_access_denied( $t_user_id );
 	    }
+	}
+
+	if( bug_is_readonly( $t_issue_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id, "Issue '$t_issue_id' is readonly" );
 	}
 
 	return bugnote_delete( $p_issue_note_id );
