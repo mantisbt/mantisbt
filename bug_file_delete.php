@@ -42,8 +42,6 @@
 		$g_project_override = $t_bug->project_id;
 	}
 
-	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id );
-
 	$t_attachment_owner = file_get_field( $f_file_id, 'user_id' );
 	$t_current_user_is_attachment_owner = $t_attachment_owner == auth_get_current_user_id();
 	if ( !$t_current_user_is_attachment_owner || ( $t_current_user_is_attachment_owner && !config_get( 'allow_delete_own_attachments' ) ) ) {

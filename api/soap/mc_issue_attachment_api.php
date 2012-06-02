@@ -71,11 +71,7 @@ function mc_issue_attachment_delete( $p_username, $p_password, $p_issue_attachme
 
 	$t_bug_id = file_get_field( $p_issue_attachment_id, 'bug_id' );
 
-	# Check access against update_bug_threshold
-	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
-	}
-
+	# Perform access control checks
 	$t_attachment_owner = file_get_field( $f_file_id, 'user_id' );
 	$t_current_user_is_attachment_owner = $t_attachment_owner == $t_user_id;
 	# Factor in allow_delete_own_attachments=ON|OFF
