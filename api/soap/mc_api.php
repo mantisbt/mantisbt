@@ -9,17 +9,6 @@
 # set up error_handler() as the new default error handling function
 set_error_handler( 'mc_error_handler' );
 
-# override some MantisBT configurations
-$g_show_detailed_errors = OFF;
-$g_stop_on_errors = ON;
-$g_display_errors = array(
-	E_WARNING => 'halt',
-	E_NOTICE => 'halt',
-	E_USER_ERROR => 'halt',
-	E_USER_WARNING => 'halt',
-	E_USER_NOTICE => 'halt',
-);
-
 /**
  * Get the MantisConnect webservice version.
  */
