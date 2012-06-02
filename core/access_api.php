@@ -415,16 +415,18 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 
 	# check limit_Reporter (Issue #4769)
 	# reporters can view just issues they reported
-	$t_limit_reporters = config_get( 'limit_reporters' );
-	if(( ON === $t_limit_reporters ) && ( !bug_is_user_reporter( $p_bug_id, $p_user_id ) ) && ( !access_has_project_level( REPORTER + 1, $t_project_id, $p_user_id ) ) ) {
+	$t_limit_reporters = config_get( 'limit_reporters', null, $p_user_id, $t_project_id );
+	$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $p_user_id, $t_project_id );
+	if ( $t_limit_reporters && !bug_is_user_reporter( $p_bug_id, $p_user_id ) && !access_has_project_level( $t_report_bug_threshold + 1, $t_project_id, $p_user_id ) ) {
 		return false;
 	}
 
 	# If the bug is private and the user is not the reporter, then
 	# they must also have higher access than private_bug_threshold
-	if( VS_PRIVATE == bug_get_field( $p_bug_id, 'view_state' ) && !bug_is_user_reporter( $p_bug_id, $p_user_id ) ) {
+	if( bug_get_field( $p_bug_id, 'view_state' ) == VS_PRIVATE && !bug_is_user_reporter( $p_bug_id, $p_user_id ) ) {
 		$t_access_level = access_get_project_level( $t_project_id, $p_user_id );
-		return access_compare_level( $t_access_level, config_get( 'private_bug_threshold' ) )
+		$t_private_bug_threshold = config_get( 'private_bug_threshold', null, $p_user_id, $t_project_id );
+		return access_compare_level( $t_access_level, $t_private_bug_threshold )
 		    && access_compare_level( $t_access_level, $p_access_level );
 	}
 
@@ -463,13 +465,15 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
 		$p_user_id = auth_get_current_user_id();
 	}
 
-	# If the bug is private and the user is not the reporter, then the
-	#  the user must also have higher access than private_bug_threshold
-	if( VS_PRIVATE == bugnote_get_field( $p_bugnote_id, 'view_state' ) && !bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) ) {
-		$p_access_level = max( $p_access_level, config_get( 'private_bugnote_threshold' ) );
-	}
-
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
+	$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
+
+	# If the bug is private and the user is not the reporter, then the
+	# the user must also have higher access than private_bug_threshold
+	if ( bugnote_get_field( $p_bugnote_id, 'view_state' ) == VS_PRIVATE && !bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) ) {
+		$t_private_bugnote_threshold = config_get( 'private_bugnote_threshold', null, $p_user_id, $t_project_id );
+		$p_access_level = max( $p_access_level, $t_private_bugnote_threshold );
+	}
 
 	return access_has_bug_level( $p_access_level, $t_bug_id, $p_user_id );
 }
