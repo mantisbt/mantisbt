@@ -86,10 +86,12 @@ function mci_has_administrator_access( $p_user_id, $p_project_id = ALL_PROJECTS 
 }
 
 function mci_get_project_id( $p_project ) {
-	if( (int) $p_project['id'] != 0 ) {
+	if ( isset( $p_project['id'] ) && (int) $p_project['id'] != 0 ) {
 		$t_project_id = (int) $p_project['id'];
-	} else {
+	} else if ( isset( $p_project['name'] ) && !is_blank( $p_project['name'] ) ) {
 		$t_project_id = project_get_id_by_name( $p_project['name'] );
+	} else {
+		$t_project_id = ALL_PROJECTS;
 	}
 
 	return $t_project_id;
