@@ -1113,7 +1113,7 @@ function mc_issue_note_update( $p_username, $p_password, $p_note ) {
 	# Check if the user has an access level beyond update_bugnote_threshold for the
 	# project containing the bugnote to update.
 	$t_update_bugnote_threshold = config_get( 'update_bugnote_threshold', null, $t_user_id, $t_project_id );
-	if ( !$t_user_owns_the_bugnote && !access_has_bugnote_level( $t_update_bugnote_threshold, $t_user_id, $t_project_id ) ) {
+	if ( !$t_user_owns_the_bugnote && !access_has_bugnote_level( $t_update_bugnote_threshold, $t_issue_note_id, $t_user_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
