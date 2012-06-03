@@ -1084,7 +1084,7 @@ function mc_issue_note_update( $p_username, $p_password, $p_note ) {
 	}
 
 	if ( !isset( $p_note['id'] ) || is_blank( $p_note['id'] ) ) {
-		return new soap_fault( 'Client', '', "Issue id must not be blank." );
+		return new soap_fault( 'Client', '', "Issue note id must not be blank." );
 	}
 
 	if ( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
