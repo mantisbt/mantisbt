@@ -62,7 +62,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	}
 
 	if( !access_has_bug_level( VIEWER, $p_issue_id, $t_user_id ) ){
-	    return mci_soap_fault_access_denied( $t_user_id );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_bug = bug_get( $p_issue_id, true );
@@ -114,7 +114,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
 	$t_issue_data['monitors'] = mci_account_get_array_by_ids( bug_get_monitors ( $p_issue_id ) );
 	$t_issue_data['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_id , $t_user_id );
-	
+
 	return $t_issue_data;
 }
 
@@ -323,7 +323,7 @@ function mci_issue_get_notes( $p_issue_id ) {
 		$t_bugnote['time_tracking'] = $t_has_time_tracking_access ? $t_value->time_tracking : 0;
 		$t_bugnote['note_type'] = $t_value->note_type;
 		$t_bugnote['note_attr'] = $t_value->note_attr;
-		
+
 		$t_result[] = $t_bugnote;
 	}
 
@@ -332,13 +332,13 @@ function mci_issue_get_notes( $p_issue_id ) {
 
 /**
  * Sets the monitors of the specified issue
- * 
+ *
  * <p>This functions performs access level checks and only performs operations which would
  * modify the existing monitors list.</p>
- * 
+ *
  * @param int $p_issue_id the issue id to set the monitors for
  * @param int $p_user_id the user which requests the monitor change
- * @param array $p_monitors An array of arrays with the <em>id</em> field set to the id 
+ * @param array $p_monitors An array of arrays with the <em>id</em> field set to the id
  *  of the users which should monitor this issue.
  */
 function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
@@ -346,43 +346,43 @@ function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
 		return mci_soap_fault_access_denied( $p_user_id, "Issue '$p_issue_id' is readonly" );
 	}
 
-    $t_existing_monitors = bug_get_monitors( $p_issue_id );
+	$t_existing_monitors = bug_get_monitors( $p_issue_id );
 
-    $t_monitors = array();
-    foreach ( $p_monitors as $t_monitor ) 
-        $t_monitors[] = $t_monitor['id'];
-    
-    foreach ( $t_monitors as $t_user_id ) {
-        
-    	if ( $p_user_id == $t_user_id ) {
-    		if ( ! access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id ) )
-    		    continue;
-	    } else {
-	    	if ( !access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $p_issue_id ) )
-	    	    continue;
-	    }
-	        
-       if ( in_array( $p_user_id, $t_existing_monitors) )
-           continue;
-	        
-        bug_monitor( $p_issue_id, $t_user_id);
-    }
-    
-    foreach ( $t_existing_monitors as $t_user_id ) {
+	$t_monitors = array();
+	foreach ( $p_monitors as $t_monitor )
+		$t_monitors[] = $t_monitor['id'];
 
-    	if ( $p_user_id == $t_user_id ) {
-    		if ( ! access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id ) )
-    		    continue;
-	    } else {
-	    	if ( !access_has_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $p_issue_id ) )
-	    	    continue;
-	    }
-        
-        if ( in_array( $p_user_id, $t_monitors) )
-            continue;
-            
-        bug_unmonitor( $p_issue_id, $t_user_id);
-    }
+	foreach ( $t_monitors as $t_user_id ) {
+
+		if ( $p_user_id == $t_user_id ) {
+			if ( ! access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id ) )
+				continue;
+		} else {
+			if ( !access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $p_issue_id ) )
+				continue;
+		}
+
+		if ( in_array( $p_user_id, $t_existing_monitors) )
+			continue;
+
+		bug_monitor( $p_issue_id, $t_user_id);
+	}
+
+	foreach ( $t_existing_monitors as $t_user_id ) {
+
+		if ( $p_user_id == $t_user_id ) {
+			if ( ! access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id ) )
+				continue;
+		} else {
+			if ( !access_has_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $p_issue_id ) )
+				continue;
+		}
+
+		if ( in_array( $p_user_id, $t_monitors) )
+			continue;
+
+		bug_unmonitor( $p_issue_id, $t_user_id);
+	}
 }
 
 /**
@@ -514,9 +514,9 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
  * @return integer  The id of the created issue.
  */
 function mc_issue_add( $p_username, $p_password, $p_issue ) {
-	
+
 	global $g_project_override;
-	
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -636,11 +636,11 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
 	$t_bug_data->sponsorship_total = isset( $p_issue['sponsorship_total'] ) ? $p_issue['sponsorship_total'] : 0;
-	if (  isset ( $p_issue['sticky']) && 
-	     access_has_project_level( config_get( 'set_bug_sticky_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-	    $t_bug_data->sticky = $p_issue['sticky'];
+	if (  isset ( $p_issue['sticky']) &&
+		 access_has_project_level( config_get( 'set_bug_sticky_threshold', null, null, $t_project_id ), $t_project_id ) ) {
+		$t_bug_data->sticky = $p_issue['sticky'];
 	}
-	
+
 	if ( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
 		$t_bug_data->due_date = mci_iso8601_to_timestamp( $p_issue['due_date'] );
 	} else {
@@ -650,7 +650,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
 		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
 	}
-	
+
 	# omitted:
 	# var $bug_text_id
 	# $t_bug_data->profile_id;
@@ -664,7 +664,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
 	mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'], false );
 	if ( isset ( $p_issue['monitors'] ) )
-	    mci_issue_set_monitors( $t_issue_id , $t_user_id, $p_issue['monitors'] );
+		mci_issue_set_monitors( $t_issue_id , $t_user_id, $p_issue['monitors'] );
 
 	if( isset( $t_notes ) && is_array( $t_notes ) ) {
 		foreach( $t_notes as $t_note ) {
@@ -673,7 +673,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 			} else {
 				$t_view_state = config_get( 'default_bugnote_view_status' );
 			}
-			
+
 			$note_type = isset ( $t_note['note_type'] ) ? (int) $t_note['note_type'] : BUGNOTE;
 			$note_attr = isset ( $t_note['note_type'] ) ? $t_note['note_attr'] : '';
 
@@ -681,10 +681,10 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 			bugnote_add( $t_issue_id, $t_note['text'], mci_get_time_tracking_from_note( $t_issue_id, $t_note ), $t_view_state_id == VS_PRIVATE, $note_type, $note_attr, $t_user_id, FALSE );
 		}
 	}
-	
+
 	if ( isset ( $p_issue['tags']) && is_array ( $p_issue['tags']) ) {
 		mci_tag_set_for_issue( $t_issue_id, $p_issue['tags'], $t_user_id );
-	}	
+	}
 
 	email_new_bug( $t_issue_id );
 
@@ -702,7 +702,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
  */
 function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	global $g_project_override;
-	
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -721,7 +721,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
-	
+
 	$g_project_override = $t_project_id; // ensure that helper_get_current_project() calls resolve to this project id
 
 	$t_project_id = mci_get_project_id( $p_issue['project'] );
@@ -730,8 +730,8 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_project = $p_issue['project'];
 	$t_summary = isset( $p_issue['summary'] ) ? $p_issue['summary'] : '';
 	$t_description = isset( $p_issue['description'] ) ? $p_issue['description'] : '';
-	
-	
+
+
 	if(( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id == 0 ) {
 			return new soap_fault( 'Client', '', "Project '" . $t_project['name'] . "' does not exist." );
@@ -827,7 +827,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	if ( isset ( $p_issue['fixed_in_version'] ) )
 		$t_bug_data->fixed_in_version = $p_issue['fixed_in_version'];
 	if (  isset ( $p_issue['sticky']) && access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $t_bug_data->id ) ) {
-	    $t_bug_data->sticky = $p_issue['sticky'];
+		$t_bug_data->sticky = $p_issue['sticky'];
 	}
 
 	if ( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
@@ -842,7 +842,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 
 	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'], true );
 	if ( isset ( $p_issue['monitors'] ) )
-	    mci_issue_set_monitors( $p_issue_id , $t_user_id, $p_issue['monitors'] );
+		mci_issue_set_monitors( $p_issue_id , $t_user_id, $p_issue['monitors'] );
 
 	if ( isset( $p_issue['notes'] ) && is_array( $p_issue['notes'] ) ) {
 
@@ -890,37 +890,37 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 				}
 			} else {
 				$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-				
+
 				$note_type = isset ( $t_note['note_type'] ) ? (int) $t_note['note_type'] : BUGNOTE;
-			    $note_attr = isset ( $t_note['note_type'] ) ? $t_note['note_attr'] : '';
-				
+				$note_attr = isset ( $t_note['note_type'] ) ? $t_note['note_attr'] : '';
+
 				bugnote_add( $p_issue_id, $t_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $t_note ), $t_view_state_id == VS_PRIVATE, $note_type, $note_attr, $t_user_id, FALSE );
 			}
 		}
 	}
-	
+
 	if ( isset ( $p_issue['tags']) && is_array ( $p_issue['tags']) ) {
 		mci_tag_set_for_issue( $p_issue_id, $p_issue['tags'] , $t_user_id );
 	}
-	
+
 	# submit the issue
 	return $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
-	
+
 }
 
 function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, $p_tags ) {
-	
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
-	
+
 	if( !bug_exists( $p_issue_id ) ) {
 		return new soap_fault( 'Client', '', "Issue '$p_issue_id' does not exist." );
 	}
-	
+
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
-	
+
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
@@ -930,7 +930,7 @@ function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, $p_tags ) {
 	}
 
 	mci_tag_set_for_issue( $p_issue_id,  $p_tags, $t_user_id );
-	
+
 	return true;
 }
 
@@ -956,9 +956,9 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
-	
+
 	if ( !access_has_bug_level( config_get( 'delete_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
-	    return mci_soap_fault_access_denied( $t_user_id );
+		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	return bug_delete( $p_issue_id );
@@ -1013,7 +1013,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 	}
 
 	$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-	
+
 	$note_type = isset ( $p_note['note_type'] ) ? (int) $p_note['note_type'] : BUGNOTE;
 	$note_attr = isset ( $p_note['note_type'] ) ? $p_note['note_attr'] : '';
 
@@ -1047,19 +1047,19 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
-	
-	$t_reporter_id = bugnote_get_field( $p_issue_note_id, 'reporter_id' );	
-	
+
+	$t_reporter_id = bugnote_get_field( $p_issue_note_id, 'reporter_id' );
+
 	// mirrors check from bugnote_delete.php
 	if ( $t_user_id == $t_reporter_id ) {
 		$t_threshold_config_name =  'bugnote_user_delete_threshold';
 	} else {
 		$t_threshold_config_name =  'delete_bugnote_threshold';
-	}	
+	}
 
-    if ( !access_has_bugnote_level( config_get ( $t_threshold_config_name ) , $p_issue_note_id ) ) {
-        return mci_soap_fault_access_denied( $t_user_id );
-    }
+	if ( !access_has_bugnote_level( config_get ( $t_threshold_config_name ) , $p_issue_note_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id );
+	}
 
 	if( bug_is_readonly( $t_issue_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id, "Issue '$t_issue_id' is readonly" );
@@ -1339,7 +1339,7 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['reproducibility'] = mci_enum_get_array_by_id( $p_issue_data->reproducibility, 'reproducibility', $p_lang );
 		$t_issue['date_submitted'] = timestamp_to_iso8601( $p_issue_data->date_submitted, false );
 		$t_issue['sticky'] = $p_issue_data->sticky;
-		
+
 		$t_issue['sponsorship_total'] = $p_issue_data->sponsorship_total;
 
 		if( !empty( $p_issue_data->handler_id ) ) {
@@ -1370,26 +1370,26 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 }
 
 function mci_issue_get_tags_for_bug_id( $p_bug_id, $p_user_id ) {
-	
+
 	if ( !access_has_global_level( config_get( 'tag_view_threshold' ), $p_user_id ) )
 		return array();
-	
+
 	$t_tag_rows = tag_bug_get_attached( $p_bug_id );
 	$t_result = array();
-	
+
 	foreach ( $t_tag_rows as $t_tag_row ) {
 		$t_result[] = array (
 			'id' => $t_tag_row['id'],
 			'name' => $t_tag_row['name']
 		);
 	}
-	
+
 	return $t_result;
 }
 
 /**
  * Returns an array for SOAP encoding from a BugData object
- * 
+ *
  * @param BugData $p_issue_data
  * @return array The issue header data as an array
  */
@@ -1398,7 +1398,7 @@ function mci_issue_data_as_header_array( $p_issue_data ) {
 		$t_issue = array();
 
 		$t_id = $p_issue_data->id;
-		
+
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = $p_issue_data->view_state;
 		$t_issue['last_updated'] = timestamp_to_iso8601( $p_issue_data->last_updated, false );
