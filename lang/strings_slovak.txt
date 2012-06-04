@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-/** Slovak (Slovenčina)
+/** Slovak (slovenčina)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -127,6 +127,8 @@ $s_select_option = '(vybrať)';
 $s_bug_actiongroup_access = 'Nemáte potrebné oprávnenie k tejto činnosti.';
 $s_bug_actiongroup_status = 'Tento problém nejde previesť do požadovaného stavu';
 $s_bug_actiongroup_category = 'Tento problém nejde previesť do požadovanej kategórie';
+$s_bug_actiongroup_handler = 'Požadovaný používateľ nie je oprávnený riešiť tento záznam';
+$s_bug_actiongroup_version = 'Požadovania verzia v tomto zázname projektu neexistuje';
 $s_close_bugs_conf_msg = 'Ste si istý že chcete zavrieť tieto problémy?';
 $s_delete_bugs_conf_msg = 'Ste si istý že chcete zmazať tieto problémy?';
 $s_move_bugs_conf_msg = 'Presunúť problémy do';
@@ -271,7 +273,7 @@ $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Pole "%1$s" obsahuje neplatné pole "%2$
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Neplatný radič sedení.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Premenná sedenia "%1$s" nebola nájdená.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Sedenie je neplatné.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neplatný zabezpečujúci token formulára. Neodoslali ste neúmyselne formulár dvakrát?';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neplatný bezpečnostný kód formulára. Príčinou môže byť uplynutie časového limitu alebo náhodné odosielanie formulára dvakrát.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Táto stránka nie je touto metódou prístupná.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Neplatné radiace pole.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Neplatný formát dátumu.';
@@ -461,8 +463,11 @@ $s_monitor_bug_button = 'Monitorovať';
 $s_unmonitor_bug_button = 'Skončiť monitorovanie';
 $s_file_upload_msg = 'Upload súboru prebehol úspešne';
 $s_upload_file = 'Upload súboru';
+$s_upload_files = 'Nahrať súbory';
 $s_select_file = 'Vyberte súbor';
+$s_select_files = 'Vybrať súbory';
 $s_upload_file_button = 'Uložit';
+$s_upload_files_button = 'Nahrať súbory';
 $s_max_file_size = 'Maximálna veľkosť';
 $s_bug_reopened_msg = 'Problém bol znovu otvorený...';
 $s_reopen_add_bugnote_title = 'Pridať dôvod pre znovuotvorenie problému';
@@ -611,6 +616,7 @@ $s_1_week_title = '1 týždeň';
 $s_never_logged_in_title = 'Nikdy nepprihlásení';
 $s_prune_accounts = 'Prečistiť účty';
 $s_hide_inactive = 'Skryť neaktívnych';
+$s_show_disabled = 'Zobraziť vypnuté';
 $s_manage_accounts_title = 'Správa účtov';
 $s_date_created = 'Dátum vytvorenia';
 $s_last_visit = 'Posledná návšteva';
@@ -762,6 +768,7 @@ $s_accounts_pruned_msg = 'Všetky účty, na ktoré sa nikto neprihlásil a sú 
 $s_prune_accounts_button = 'Vyčistiť';
 $s_confirm_account_pruning = 'Naozaj chcete odstrániť všetky staré účty, na ktoré sa doposial nikdo neprihlásil?';
 $s_edit_user_title = 'Úpravy používateľa';
+$s_account_unlock_button = 'Odomknutie účtu';
 $s_reset_password_button = 'Vynulovať heslo';
 $s_delete_user_button = 'Zmazať používateľa';
 $s_reset_password_msg = 'Zmena hesla odošle potvrdzovací URL elektronickým dopisom.';
@@ -772,6 +779,7 @@ $s_users_new = 'Nové';
 $s_account_reset_protected_msg = 'Účet je chránený. Nie je možné vynulovať heslo.';
 $s_account_reset_msg = 'Potvrdzovací dopis bol odoslaný na vašu elektronickú adresu...';
 $s_account_reset_msg2 = 'Heslo k účtu bolo nastavené na prázdne...';
+$s_account_unlock_msg = 'Účet bol odomknutý.';
 $s_manage_user_protected_msg = 'Účet je chránený. Prístupová úroveň a príznak sú chránené. Pokiaľ nie, účet bol aktualizovaný...';
 $s_manage_user_updated_msg = 'Účet bol úspešne aktualizovaný...';
 $s_email_user_updated_subject = 'Účet aktualizovaný';
@@ -956,6 +964,7 @@ $s_update_bug_button = 'Upraviť';
 $s_bug_assign_to_button = 'Priradiť k:';
 $s_bug_status_to_button = 'Zmeniť stav na:';
 $s_reopen_bug_button = 'Znovu otvoriť';
+$s_close_bug_button = 'Zatvoriť';
 $s_move_bug_button = 'Presunúť';
 $s_attached_files = 'Pripojené súbory';
 $s_publish = 'Poblikovať';

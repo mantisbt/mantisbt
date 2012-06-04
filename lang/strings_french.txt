@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-/** French (Français)
+/** French (français)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -29,6 +29,7 @@
  * @author Atrol
  * @author Cedric31
  * @author Crochet.david
+ * @author DavidL
  * @author Dregad
  * @author Eric Hartmann, eric@rhinfo.com
  * @author Francis Labrie, francis.labrie@smoguli.com
@@ -79,7 +80,7 @@ $s_actiongroup_bugs = 'Bogues sélectionnés';
 $s_actiongroup_error_issue_is_readonly = 'Le bogue est en lecture seule.';
 $s_all_projects = 'Tous les projets';
 $s_move_bugs = 'Déplacer les bogues';
-$s_operation_successful = 'Opération réussie';
+$s_operation_successful = 'Opération réussie.';
 $s_date_order = 'Par date';
 $s_print_all_bug_page_link = 'Rapport imprimable';
 $s_csv_export = 'Export CSV';
@@ -126,7 +127,7 @@ $s_no_category = '(Aucune catégorie)';
 $s_global_categories = 'Catégories globales';
 $s_inherit = 'Hériter les catégories';
 $s_inherit_global = 'Hériter les catégories globales';
-$s_inherit_parent = 'Hériter les catégories parents';
+$s_inherit_parent = 'Hériter les catégories parentes';
 $s_update_subproject_inheritance = 'Mettre à jour l\'héritage du sous-projet';
 $s_duplicate_of = 'doublon de';
 $s_has_duplicate = 'a pour doublon';

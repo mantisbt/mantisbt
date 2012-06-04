@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-/** Polish (Polski)
+/** Polish (polski)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -282,7 +282,7 @@ $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Pole „%1$s” zawiera nieprawidłowe p
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Nieprawidłowy handler sesji.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Zmienna sesyjna „%1$s” nie została znaleziona.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Twoja sesja została unieważniona.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Nieprawidłowy znacznik bezpieczeństwa formularza. Czy przez przypadek nie złożyłeś formularza dwa razy?';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Niewłaściwy token bezpieczeństwa. Może być to spowodowane wygaśnięciem sesji lub przypadkowo wysłanym dwukrotnie formularzem.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Tej strony nie moża uzyskać za pomocą tej metody.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Nieprawidłowe pole sortowania.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Nieprawidłowy format daty.';

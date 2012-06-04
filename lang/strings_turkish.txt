@@ -26,6 +26,7 @@
  * @file
  *
  * @author Emperyan
+ * @author Erdemaslancan
  * @author Incelemeelemani
  * @author Joseph
  * @author Karduelis
@@ -404,7 +405,7 @@ $s_update_prefs_button = 'Tercihleri Güncelle';
 $s_reset_prefs_button = 'Tercihleri Sıfırla';
 $s_timezone = 'Saat dilimi:';
 $s_prefs_reset_msg = 'Tercihler sıfırlandı...';
-$s_prefs_updated_msg = 'Tercihler güncellendi...';
+$s_prefs_updated_msg = 'Tercihi newenyayê...';
 $s_profile_added_msg = 'Profil eklendi...';
 $s_profile_deleted_msg = 'Profil silindi...';
 $s_edit_profile_title = 'Profil Düzenle';

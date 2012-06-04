@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-/** Portuguese (Português)
+/** Portuguese (português)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -596,7 +596,7 @@ $s_verify_password = 'Verificar palavra-chave';
 $s_enabled = 'Activado';
 $s_protected = 'Protegido';
 $s_create_user_button = 'Criar Utilizador';
-$s_hide_disabled = 'Esconder Desabilitados';
+$s_hide_disabled = 'Esconder desativados';
 $s_filter_button = 'Aplicar Filtro';
 $s_create_filter_link = 'Criar Permalink';
 $s_create_short_link = 'Criar link curto';
@@ -620,6 +620,7 @@ $s_1_week_title = '1 Semana';
 $s_never_logged_in_title = 'Nunca Entrou';
 $s_prune_accounts = 'Cortar Contas';
 $s_hide_inactive = 'Esconder Inactivas';
+$s_show_disabled = 'Mostrar desativados';
 $s_manage_accounts_title = 'Gestor de Contas';
 $s_date_created = 'Data de Criação';
 $s_last_visit = 'Última Visita';

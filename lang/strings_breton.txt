@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-/** Breton (Brezhoneg)
+/** Breton (brezhoneg)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -614,6 +614,7 @@ $s_1_week_title = '1 sizhun';
 $s_never_logged_in_title = 'N\'eo ket kevreet morse';
 $s_prune_accounts = 'Lemel ar c\'hontoù';
 $s_hide_inactive = 'Kuzhat ar re zioberiant';
+$s_show_disabled = 'Diskouez ar re zo bet diweredekaet';
 $s_manage_accounts_title = 'Merañ ar c\'hontoù';
 $s_date_created = 'Deiziad krouiñ';
 $s_last_visit = 'Gweladenn diwezhañ';
@@ -1150,7 +1151,7 @@ $s_tag_description = 'Deskrivadur ar valizenn';
 $s_tag_statistics = 'Stadegoù implij';
 $s_tag_update = 'Hizivaat ar valizenn : %1$s';
 $s_tag_update_return = 'Distreiñ d\'ar valizenn';
-$s_tag_update_button = 'Hizivaat ar valizenn';
+$s_tag_update_button = 'Hizivaat an dikedenn';
 $s_tag_delete_button = 'Dilemel ar valizenn';
 $s_tag_delete_message = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel ar valizenn-mañ ?';
 $s_tag_existing = 'Balizennoù zo anezho';
