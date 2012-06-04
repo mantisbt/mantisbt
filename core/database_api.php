@@ -427,7 +427,7 @@ function db_affected_rows() {
 function db_fetch_array( &$p_result ) {
 	global $g_db, $g_db_type;
 
-	if( is_null( $p_result ) || $p_result->EOF ) {
+	if( $p_result->EOF ) {
 		return false;
 	}
 
