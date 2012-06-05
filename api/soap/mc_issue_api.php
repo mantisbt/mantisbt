@@ -1109,7 +1109,7 @@ function mc_issue_note_update( $p_username, $p_password, $p_note ) {
 	# Check if the user owns the bugnote and is allowed to update their own bugnotes
 	# regardless of the update_bugnote_threshold level.
 	$t_user_owns_the_bugnote = bugnote_is_user_reporter( $t_issue_note_id, $t_user_id );
-	$t_user_can_update_own_bugnote = config_get( 'bugnote_allow_user_edit_delete', null, $t_user_id, $t_project_id );
+	$t_user_can_update_own_bugnote = config_get( 'bugnote_user_edit_threshold', null, $t_user_id, $t_project_id );
 	if ( $t_user_owns_the_bugnote && !$t_user_can_update_own_bugnote ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
