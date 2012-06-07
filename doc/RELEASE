@@ -1,5 +1,19 @@
 MantisBT Release Notes
 
+1.2.11 Maintenance Release (2012-06-06)
+-------------------------------------------------
+
+MantisBT 1.2.11 is a security update for the stable 1.2.x branch. All
+installations that are currently running any 1.2.x or older version are
+advised to upgrade to this release.
+
+This release also contains numerous minor bug fixes to MantisBT,
+enhancements to the admin guide and improved translations in many
+languages.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
 1.2.10 Maintenance Release (2012-04-01)
 -------------------------------------------------
 
@@ -224,6 +238,9 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
+	1.2.11     http://www.mantisbt.org/bugs/changelog_page.php?version_id=148
+	1.2.10     http://www.mantisbt.org/bugs/changelog_page.php?version_id=146
+	1.2.9      http://www.mantisbt.org/bugs/changelog_page.php?version_id=140
 	1.2.8      http://www.mantisbt.org/bugs/changelog_page.php?version_id=139
 	1.2.7      http://www.mantisbt.org/bugs/changelog_page.php?version_id=138
 	1.2.6      http://www.mantisbt.org/bugs/changelog_page.php?version_id=114
