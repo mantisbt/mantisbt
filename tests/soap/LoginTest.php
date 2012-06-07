@@ -31,6 +31,25 @@ class LoginTest extends SoapBase {
 	private $dummyUser = 'no';
 	private $dummyPassword = 'user';
 
+	public function testLoginFailed() {
+		try {
+			$this->client->mc_login( $this->dummyUser , $this->dummyPassword );
+			$this->fail( "Should have failed." );
+		} catch ( SoapFault $e) {
+			$this->assertIsLoginFailure( $e );
+		}
+	}
+
+	public function testLoginSuccessfully() {
+		$t_user_data = $this->client->mc_login( $this->userName, $this->password );
+
+		$this->assertEquals( $this->userName, $t_user_data->account_data->name, 'name' );
+		$this->assertEquals( $this->userId, $t_user_data->account_data->id, 'id' );
+		$this->assertEquals( $this->email, $t_user_data->account_data->email, 'email' );
+		$this->assertEquals( false, empty( $t_user_data->timezone ), 'timezone' );
+		$this->assertEquals( 90, (integer)$t_user_data->access_level, 'access_level' );
+	}
+
 	public function testGetIssueGetLoginFailed() {
 		try {
 			$this->client->mc_issue_get( $this->dummyUser , $this->dummyPassword, 1 );
@@ -70,6 +89,33 @@ class LoginTest extends SoapBase {
 	public function testFilterGetIssuesLoginFailed() {
 		try {
 			$this->client->mc_filter_get_issues( $this->dummyUser , $this->dummyPassword, $this->getProjectId(), 1, 0, 15 );
+			$this->fail( "Should have failed." );
+		} catch ( SoapFault $e) {
+			$this->assertIsLoginFailure( $e );
+		}
+	}
+
+	public function testLoginWithNullPasswordIsRejected() {
+		try {
+			$this->client->mc_enum_status( $this->userName, null);
+			$this->fail( "Should have failed." );
+		} catch ( SoapFault $e) {
+			$this->assertIsLoginFailure( $e );
+		}
+	}
+
+	public function testLoginWithEmptyPasswordIsRejected() {
+		try {
+			$this->client->mc_enum_status( $this->userName, '');
+			$this->fail( "Should have failed." );
+		} catch ( SoapFault $e) {
+			$this->assertIsLoginFailure( $e );
+		}
+	}
+
+	public function testLoginWithIncorrectPasswordIsRejected() {
+		try {
+			$this->client->mc_enum_status( $this->userName, "This really should be incorrect");
 			$this->fail( "Should have failed." );
 		} catch ( SoapFault $e) {
 			$this->assertIsLoginFailure( $e );
