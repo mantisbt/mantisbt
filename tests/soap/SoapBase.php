@@ -32,6 +32,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	protected $client;
 	protected $userName = 'administrator';
 	protected $password = 'root';
+	protected $email = 'root@localhost';
 	protected $userId = '1';
 	
 	protected $mantisPath;

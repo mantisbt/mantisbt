@@ -16,7 +16,37 @@ function mc_version() {
 	return MANTIS_VERSION;
 }
 
-# Checks if MantisBT installation is marked as offline by the administrator.
+/**
+ * Attempts to login the user.
+ * If logged in successfully, return user information.
+ * If failed to login in, then throw a fault.
+ */
+function mc_login( $p_username, $p_password ) {
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if ( $t_user_id === false ) {
+		return mci_soap_fault_login_failed();
+	}
+
+	return mci_user_get( $p_username, $p_password, $t_user_id );
+}
+
+/**
+ * Given an id, this method returns the user.
+ * When calling this method make sure that the caller has the right to retrieve
+ * information about the target user.
+ */
+function mci_user_get( $p_username, $p_password, $p_user_id ) {
+	$t_user_data = array();
+
+	// if user doesn't exist, then mci_account_get_array_by_id() will throw.
+	$t_user_data['account_data'] = mci_account_get_array_by_id( $p_user_id );
+	$t_user_data['access_level'] = access_get_global_level( $p_user_id );
+	$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
+
+	return $t_user_data;
+}
+
+# access_ if MantisBT installation is marked as offline by the administrator.
 # true: offline, false: online
 function mci_is_mantis_offline() {
 	$t_offline_file = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'mantis_offline.php';
