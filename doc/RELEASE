@@ -1,6 +1,6 @@
 MantisBT Release Notes
 
-1.2.11 Maintenance Release (2012-06-06)
+1.2.11 Maintenance Release (2012-06-08)
 -------------------------------------------------
 
 MantisBT 1.2.11 is a security update for the stable 1.2.x branch. All
@@ -8,7 +8,7 @@ installations that are currently running any 1.2.x or older version are
 advised to upgrade to this release.
 
 This release also contains numerous minor bug fixes to MantisBT,
-enhancements to the admin guide and improved translations in many
+SOAP API fixes, enhancements to the admin guide and improved translations in many
 languages.
 
 A full changelog for the 1.2.x series can be found on the official site. [1]
