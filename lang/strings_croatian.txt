@@ -51,7 +51,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Greška u izvješću.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nije naznačena datoteka';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Tip datoteke nije dozvoljen';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Mapa ne postoji. Molimo Vas da provjerite postavke projekta.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Ovo je duplicirana datoteka. Molimo Vas da najprije obrišete datoteku.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Potrebno polje je prazno. Molimo Vas da ponovno provjerite ulazne podatke.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Korisnički račun je zaštićen. Za to vrijeme Vam nije omogućen pristup.';
 $s_go_back = 'Idi natrag';
