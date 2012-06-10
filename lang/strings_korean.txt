@@ -33,6 +33,7 @@
  * @author miren.info@gmail.com
  * @author torija@users.sourceforge.net
  * @author yesdi@nate.com - (마지막 수정일: 2005/04/23)
+ * @author 아라
  */
 
 $s_actiongroup_menu_move = '이동';
@@ -934,7 +935,7 @@ $s_start_date = '시작 날짜';
 $s_end_date = '끝 날짜';
 $s_use_date_filters = '날짜 필터 사용';
 $s_yes = '예';
-$s_no = '아니요';
+$s_no = '아니오';
 $s_open_filters = '필터 바꾸기';
 $s_or_unassigned = '혹은 할당되지 않은 이슈';
 $s_ok = '확인';
