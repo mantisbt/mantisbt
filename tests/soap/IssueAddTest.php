@@ -515,4 +515,32 @@ class IssueAddTest extends SoapBase {
 		
 		self::assertEquals ( 2, count ( $issue->tags ) );
 	}
+	
+	/**
+	 * Tests that an issue with enumerated fields set by name has the field values correctly set
+	 * 
+	 */
+	public function testCreateIssueWithFieldsByName() {
+		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithFieldsByName' );
+	
+		$issueToAdd['view_state'] = array( 'name' => 'private');
+		$issueToAdd['resolution'] = array( 'name' => 'suspended');
+		$issueToAdd['status'] = array( 'name' => 'confirmed');
+	
+		$issueId = $this->client->mc_issue_add(
+				$this->userName,
+				$this->password,
+				$issueToAdd);
+			
+		$this->deleteAfterRun( $issueId );
+	
+		$issue = $this->client->mc_issue_get(
+				$this->userName,
+				$this->password,
+				$issueId);
+		
+		$this->assertEquals( $issueToAdd['view_state']['name'], $issue->view_state->name);
+		$this->assertEquals( $issueToAdd['resolution']['name'], $issue->resolution->name);
+		$this->assertEquals( $issueToAdd['status']['name'], $issue->status->name);
+	}
 }
