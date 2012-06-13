@@ -1206,7 +1206,7 @@ $l_oServer->register( 'mc_project_get_issues',
 	),
 	$t_namespace,
 	false, false, false,
-	'Get the issues that match the specified project id and paging details.'
+	'Get the issues that match the specified project id and paging details. Pass "-1" for the per_page parameter to get all issues.'
 );
 
 ### mc_project_get_issue_headers
@@ -1223,7 +1223,7 @@ $l_oServer->register( 'mc_project_get_issue_headers',
 	),
 	$t_namespace,
 	false, false, false,
-	'Get the issue headers that match the specified project id and paging details.'
+	'Get the issue headers that match the specified project id and paging details. Pass "-1" for the per_page parameter to get all issues.'
 );
 
 ### mc_project_get_users
@@ -1544,7 +1544,7 @@ $l_oServer->register( 'mc_filter_get_issues',
 	),
 	$t_namespace,
 	false, false, false,
-	'Get the issues that match the specified filter and paging details.'
+	'Get the issues that match the specified filter and paging details. Pass "-1" for the per_page parameter to get all issues.'
 );
 
 ### mc_filter_get_issue_headers
@@ -1562,7 +1562,7 @@ $l_oServer->register( 'mc_filter_get_issue_headers',
 	),
 	$t_namespace,
 	false, false, false,
-	'Get the issue headers that match the specified filter and paging details.'
+	'Get the issue headers that match the specified filter and paging details.  Pass "-1" for the per_page parameter to get all issues.'
 );
 
 ### mc_config_get_string
