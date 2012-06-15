@@ -620,7 +620,7 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 		$query = "SELECT COUNT(*)
 					FROM $t_bug_table
 					WHERE $p_enum='$t_value' AND
-						status='$t_clo_val' $specific_where";
+						status>='$t_clo_val' $specific_where";
 		$result2 = db_query( $query );
 		$t_metrics['closed'][$t_label] = db_result( $result2, 0, 0 );
 
@@ -892,9 +892,9 @@ function error_check( $bug_count, $title ) {
 
 function error_text( $title, $text ) {
 		if( OFF == plugin_config_get( 'eczlibrary' ) ) {
-			
+
 			$t_graph_font = graph_get_font();
-			
+
 			$graph = new CanvasGraph( 300, 380 );
 
 			$txt = new Text( $text, 150, 100 );
