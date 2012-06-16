@@ -1041,11 +1041,12 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 
         # prepare the new diskfile name and then copy the file
         $t_file_path = $t_bug_file['folder'];
-        $t_new_diskfile_name = $t_file_path . file_generate_unique_name( 'bug-' . $t_bug_file['filename'], $t_file_path );
+        $t_new_diskfile_name = file_generate_unique_name( 'bug-' . $t_bug_file['filename'], $t_file_path );
+        $t_new_diskfile_location = $t_file_path . $t_new_diskfile_name;
         $t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
         if(( config_get( 'file_upload_method' ) == DISK ) ) {
-            copy( $t_file_path.$t_bug_file['diskfile'], $t_new_diskfile_name );
-            chmod( $t_new_diskfile_name, config_get( 'attachments_file_permissions' ) );
+            copy( $t_file_path.$t_bug_file['diskfile'], $t_new_diskfile_location );
+            chmod( $t_new_diskfile_location, config_get( 'attachments_file_permissions' ) );
         }
 
         $query = "INSERT INTO $t_mantis_bug_file_table
