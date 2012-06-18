@@ -27,7 +27,7 @@
 $g_cache_project_hierarchy = null;
 $g_cache_project_inheritance = null;
 $g_cache_show_disabled = null;
- 
+
 /**
  * Add project to project hierarchy
  * @param int $p_child_id Child project ID
@@ -44,7 +44,13 @@ function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = t
 
 	$c_child_id = db_prepare_int( $p_child_id );
 	$c_parent_id = db_prepare_int( $p_parent_id );
-	$c_inherit_parent = db_prepare_bool( $p_inherit_parent );
+
+	# Workaround for #14385 - inherit_parent column is wrongly defined as int
+	if( db_is_pgsql() ) {
+		$c_inherit_parent = db_prepare_int( $p_inherit_parent );
+	} else {
+		$c_inherit_parent = db_prepare_bool( $p_inherit_parent );
+	}
 
 	$query = "INSERT INTO $t_project_hierarchy_table
 		                ( child_id, parent_id, inherit_parent )

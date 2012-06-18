@@ -287,7 +287,13 @@ function validate_project_file_path( $p_file_path ) {
 function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_PUBLIC, $p_file_path = '', $p_enabled = true, $p_inherit_global = true ) {
 
 	$c_enabled = db_prepare_bool( $p_enabled );
-	$c_inherit_global = db_prepare_bool( $p_inherit_global );
+
+	# Workaround for #14385 - inherit_global column is wrongly defined as int
+	if( db_is_pgsql() ) {
+		$c_inherit_global = db_prepare_int( $p_inherit_global );
+	} else {
+		$c_inherit_global = db_prepare_bool( $p_inherit_global );
+	}
 
 	if( is_blank( $p_name ) ) {
 		trigger_error( ERROR_PROJECT_NAME_INVALID, ERROR );
