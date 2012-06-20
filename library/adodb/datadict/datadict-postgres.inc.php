@@ -223,7 +223,6 @@ class ADODB2_postgres extends ADODB_DataDict {
 	            $sql[] = $alter . $colname . ' TYPE ' . $rest;
 	         }
 
-	         list($colname) = explode(' ',$v);
 	         if ($not_null) {
 	            // this does not error out if the column is already not null
 	            $sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' SET NOT NULL';
