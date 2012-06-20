@@ -484,7 +484,7 @@ select viewname,'V' from pg_views where viewname like $mask";
 		if ($this->fetchMode !== false) $savem = $this->SetFetchMode(false);
 
 		if ($schema) $rs = $this->Execute(sprintf($this->metaColumnsSQL1,$table,$table,$schema));
-		else $rs = $this->Execute(sprintf($this->metaColumnsSQL,$table,$table));
+		else $rs = $this->Execute(sprintf($this->metaColumnsSQL,$table,$table,$table));
 		if (isset($savem)) $this->SetFetchMode($savem);
 		$ADODB_FETCH_MODE = $save;
 
