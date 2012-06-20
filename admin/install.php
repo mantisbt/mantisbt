@@ -592,7 +592,7 @@ if( 3 == $t_install_state ) {
 				}
 			} else {
 				$sqlarray = $dict->CreateDatabase( $f_database_name, Array( 'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci' ) );
-				$ret = $dict->ExecuteSQLArray( $sqlarray );
+				$ret = $dict->ExecuteSQLArray( $sqlarray, false );
 				if( $ret == 2 ) {
 					print_test_result( GOOD );
 					$t_db_open = true;
@@ -719,7 +719,7 @@ if( 3 == $t_install_state ) {
 			} else {
 				echo 'Schema ' . $upgrade[$i][0] . ' ( ' . $t_target . ' )</td>';
 				if( $t_sql ) {
-					$ret = $dict->ExecuteSQLArray( $sqlarray );
+					$ret = $dict->ExecuteSQLArray( $sqlarray, false );
 				} else {
 					if( isset( $sqlarray[1] ) ) {
 						$ret = call_user_func( 'install_' . $sqlarray[0], $sqlarray[1] );
