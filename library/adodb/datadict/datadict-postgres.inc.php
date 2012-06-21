@@ -204,16 +204,26 @@ class ADODB2_postgres extends ADODB_DataDict {
 			if (preg_match('/^([^ ]+) .*DEFAULT (\'[^\']+\'|\"[^\"]+\"|[^ ]+)/',$v,$matches)) {
 				$existing = $this->MetaColumns($tabname);
 				list(,$colname,$default) = $matches;
+				$old_coltype = $this->connection->MetaType($existing[strtoupper($colname)]);
 				$v = preg_replace('/^' . preg_quote($colname) . '\s/', '', $v);
 				$t = trim(str_replace('DEFAULT '.$default,'',$v));
+
 				// Type change from bool to int
-				if ( $existing[strtoupper($colname)]->type == 'bool' && $t == 'INTEGER' ) {
-					$sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' DROP DEFAULT';
-					$sql[] = $alter . $colname . ' TYPE ' . $t . ' USING (' . $colname . '::BOOL)::INT ';
-					$sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' SET DEFAULT ' . $default;
-				} else {
-					$sql[] = $alter . $colname . ' TYPE ' . $t;
-					$sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' SET DEFAULT ' . $default;
+				if ( $old_coltype == 'L' && $t == 'INTEGER' ) {
+					$sql[] = $alter . $colname . ' DROP DEFAULT';
+					$sql[] = $alter . $colname . " TYPE $t USING ($colname::BOOL)::INT";
+					$sql[] = $alter . $colname . " SET DEFAULT $default";
+				}
+				// Type change from int to bool
+				else if ( $old_coltype == 'I' && $t == 'BOOLEAN' ) {
+					$sql[] = $alter . $colname . ' DROP DEFAULT';
+					$sql[] = $alter . $colname . " TYPE $t USING CASE WHEN $colname = 0 THEN false ELSE true END";
+					$sql[] = $alter . $colname . " SET DEFAULT " . $this->connection->qstr($default);
+				}
+				// Any other column types conversion
+				else {
+					$sql[] = $alter . $colname . " TYPE $t";
+					$sql[] = $alter . $colname . " SET DEFAULT $default";
 				}
 	         }
 	         else {
@@ -225,11 +235,11 @@ class ADODB2_postgres extends ADODB_DataDict {
 
 	         if ($not_null) {
 	            // this does not error out if the column is already not null
-	            $sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' SET NOT NULL';
+				$sql[] = $alter . $colname . ' SET NOT NULL';
 	         }
 	         if ($set_null) {
 	            // this does not error out if the column is already null
-	            $sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' DROP NOT NULL';
+				$sql[] = $alter . $colname . ' DROP NOT NULL';
 	         }
 	      }
 	      return $sql;
