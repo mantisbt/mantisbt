@@ -33,6 +33,7 @@
  * @author Skalman
  * @author Thomas Sjogren <thomas.sjogren@multicomsecurity.se>
  * @author Thosjo
+ * @author Warrakkk
  * @author WikiPhoenix
  */
 
@@ -131,6 +132,8 @@ $s_select_option = '(välj)';
 $s_bug_actiongroup_access = 'Du hade inte tillräckliga rättigheter för att utföra åtgärden.';
 $s_bug_actiongroup_status = 'Detta ärende kan inte ändras till den valda statusen.';
 $s_bug_actiongroup_category = 'Detta ärende kan inte ändras till den valda kategorin';
+$s_bug_actiongroup_handler = 'Den begärda användaren tillåts inte hantera denna fråga';
+$s_bug_actiongroup_version = 'Den begärda versionen existerar inte i denna frågas projekt';
 $s_close_bugs_conf_msg = 'Är du säker på att du vill stänga dessa ärenden?';
 $s_delete_bugs_conf_msg = 'Är du säker på att du vill ta bort dessa ärenden?';
 $s_move_bugs_conf_msg = 'Flytta ärenden till';
@@ -275,7 +278,7 @@ $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Fält "%1$s" innehåller ogiltigt fält 
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Ogiltig sessionshanterare.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Sessionsvariabel "%1$s" hittades inte.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Din session är inte längre giltig.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ogiltigt säkerhetselement.  Sände du in formuläret två gånger av misstag?';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ogiltigt säkerhetsnyckel för formuläret. Detta kan bero på en utgången session, eller att formuläret av misstag skickats två gånger.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Denna sida kan inte besökas med den här metoden.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Ogiltigt sorteringsfält.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Ogiltigt datumformat.';
@@ -490,6 +493,8 @@ $s_reminder_explain = 'Meddelandet kommer att skickas till mottagare som begärt
 $s_reminder_monitor = 'Mottagarna kommer också börja bevaka ärendet. De kan sluta bevaka det genom att använda motsvarande knapp.';
 $s_reminder_store = 'Detta meddelande kommer att sparas med ärendet.';
 $s_confirm_sponsorship = 'Bekräfta att du vill sponsra ärende %1$d med %2$s.';
+$s_stick_bug_button = 'Fästa';
+$s_unstick_bug_button = 'Avfästa';
 $s_bug_updated_msg = 'Ärendet har uppdaterats...';
 $s_back_to_bug_link = 'Tillbaka till ärende';
 $s_update_simple_link = 'Uppdatera enkel';
@@ -526,6 +531,8 @@ $s_view_revisions = 'Visa revisioner';
 $s_revision = 'Revision';
 $s_revision_by = '%1$s av %2$s';
 $s_revision_drop = 'Släpp';
+$s_bug_revision_dropped_history = 'Buggrevision tappad';
+$s_bugnote_revision_dropped_history = 'Kommentarsrevision tappad';
 $s_all_revisions = 'Alla revisioner';
 $s_back_to_issue = 'Tillbaka till ärende';
 $s_confirm_revision_drop = 'Är du säker på att du vill släppa denna ärenderevision?';
@@ -581,6 +588,7 @@ $s_site_information = 'Site information';
 $s_mantis_version = 'Version av MantisBT';
 $s_schema_version = 'Version av schema';
 $s_site_path = 'Sökväg till webbplats';
+$s_core_path = 'Coresökväg';
 $s_plugin_path = 'Sökväg till insticksmoduler';
 $s_created_user_part1 = 'Skapade användare';
 $s_created_user_part2 = 'med åtkomstnivån';
@@ -613,6 +621,7 @@ $s_1_week_title = '1 vecka';
 $s_never_logged_in_title = 'Har aldrig loggat in';
 $s_prune_accounts = 'Ta bort inaktiva konton';
 $s_hide_inactive = 'Göm inaktiva';
+$s_show_disabled = 'Visa avaktiverade';
 $s_manage_accounts_title = 'Hantera konton';
 $s_p = 'Skyddad';
 $s_date_created = 'Skapad';
@@ -1060,6 +1069,9 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>VARNING</b>. Alla bar
 $s_create_child_bug_button = 'Klon';
 $s_bug_cloned_to = 'Ärende klonat';
 $s_bug_created_from = 'Ärende skapat från';
+$s_copy_from_parent = 'Kopiera utökad data från föräldrabuggen';
+$s_copy_notes_from_parent = 'Kopiera buggnoteringar';
+$s_copy_attachments_from_parent = 'Kopiera bilagor';
 $s_viewing_bug_relationship_graph_title = 'Graf över relationer';
 $s_viewing_bug_dependency_graph_title = 'Beroendegraf';
 $s_relation_graph = 'Graf över relationer';

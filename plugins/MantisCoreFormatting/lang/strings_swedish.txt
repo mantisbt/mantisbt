@@ -27,12 +27,16 @@
  *
  * @author Lokal Profil
  * @author Tobulos1
+ * @author Warrakkk
  */
 
 $s_plugin_format_title = 'MantisBT-formatering';
 $s_plugin_format_description = 'Officiell insticksmodul för textbehandling och formatering.';
 $s_plugin_format_config = 'Konfiguration';
 $s_plugin_format_process_text = 'Textbehandling';
+$s_plugin_format_process_text_warning_notice = 'Stäng inte av såvida du inte verkligen vet vad du gör. Cross site scripting (XSS) attacker är möjliga när avstängt.';
+$s_plugin_format_process_urls = 'URL-bearbetning';
+$s_plugin_format_process_buglinks = 'MantisBT-länkar (bugg/buggkommentar)';
 $s_plugin_format_process_vcslinks = 'VCS-länkar';
 $s_plugin_format_enabled = 'På';
 $s_plugin_format_disabled = 'Av';

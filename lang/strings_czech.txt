@@ -624,6 +624,7 @@ $s_1_week_title = '1 týden';
 $s_never_logged_in_title = 'Nikdy nepřihlášení';
 $s_prune_accounts = 'Pročistit účty';
 $s_hide_inactive = 'Skrýt neaktivní';
+$s_show_disabled = 'Zobrazit nepovolené';
 $s_manage_accounts_title = 'Správa účtu';
 $s_p = 'nesmazatelné';
 $s_date_created = 'Datum vytvoření';

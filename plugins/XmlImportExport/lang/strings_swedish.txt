@@ -27,6 +27,7 @@
  *
  * @author Lokal Profil
  * @author Per
+ * @author Warrakkk
  */
 
 $s_plugin_XmlImportExport_title = 'Importera/exportera problem';
@@ -35,6 +36,7 @@ $s_plugin_XmlImportExport_import = 'Importera problem';
 $s_plugin_XmlImportExport_export = 'XML export';
 $s_plugin_XmlImportExport_importing_in_project = 'Importerar problem i projektet:';
 $s_plugin_XmlImportExport_import_options = 'Importalternativ';
+$s_plugin_XmlImportExport_cross_references = 'Korsreferera';
 $s_plugin_XmlImportExport_default_strategy = 'Standard konverteringsstrategi:';
 $s_plugin_XmlImportExport_renumber = 'Numrera om';
 $s_plugin_XmlImportExport_renumber_desc = 'Försök att konvertera referenser till ny numrering';
@@ -42,4 +44,6 @@ $s_plugin_XmlImportExport_link = 'Länk';
 $s_plugin_XmlImportExport_link_desc = 'Konvertera till en länk till det ursprungliga objektet';
 $s_plugin_XmlImportExport_disable = 'Inaktivera';
 $s_plugin_XmlImportExport_disable_desc = 'Inaktivera länken';
+$s_plugin_XmlImportExport_fallback = 'Reservstrategi (när "Numrera om" inte går att använda):';
+$s_plugin_XmlImportExport_fallback_category = 'Reservstategi:';
 $s_plugin_XmlImportExport_keep_same_category = 'Försök behålla samma kategori';

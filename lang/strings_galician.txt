@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-/** Galician (Galego)
+/** Galician (galego)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -27,6 +27,7 @@
  *
  * @author McDutchie
  * @author Toliño
+ * @author Vivaelcelta
  */
 
 $s_actiongroup_menu_move = 'Mover';
@@ -390,9 +391,9 @@ $s_email_on_new = 'Enviar un correo en caso dun problema novo';
 $s_email_on_assigned = 'Enviar un correo en caso de cambio de asignación';
 $s_email_on_feedback = 'Enviar un correo en caso dun comentario';
 $s_email_on_resolved = 'Enviar un correo en caso dun problema resolto';
-$s_email_on_closed = 'Enviar un correo en caso dun problema pechado';
+$s_email_on_closed = 'Enviar un correo electrónico en caso dun problema pechado';
 $s_email_on_reopened = 'Enviar un correo en caso dun problema reaberto';
-$s_email_on_bugnote_added = 'Enviar un correo en caso da adición dunha nota';
+$s_email_on_bugnote_added = 'Enviar un correo electrónico en caso da adición dunha nota';
 $s_email_on_status_change = 'Enviar un correo en caso de cambio de estado';
 $s_email_on_priority_change = 'Enviar un correo en caso de cambio da prioridade';
 $s_email_bugnote_limit = 'Enviar un correo en caso de límite de notas';

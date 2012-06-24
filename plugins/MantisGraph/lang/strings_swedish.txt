@@ -27,6 +27,7 @@
  *
  * @author Lokal Profil
  * @author Tobulos1
+ * @author Warrakkk
  */
 
 $s_plugin_graph_title = 'Mantis-grafer';
@@ -35,7 +36,11 @@ $s_plugin_MantisGraph_title = 'Mantis-grafer';
 $s_plugin_MantisGraph_menu_advanced_summary = 'Avancerad sammanfattning';
 $s_plugin_MantisGraph_config = 'Konfiguration';
 $s_plugin_MantisGraph_synthesis_link = 'Syntes';
+$s_plugin_MantisGraph_status_link = 'Per tillstånd';
+$s_plugin_MantisGraph_priority_link = 'Per prioritet';
+$s_plugin_MantisGraph_severity_link = 'Per allvarlighetsgrad';
 $s_plugin_MantisGraph_category_link = 'Per kategori';
+$s_plugin_MantisGraph_resolution_link = 'Per lösning';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Graf';
 $s_plugin_MantisGraph_library = 'Grafbibliotek som ska användas';
 $s_plugin_MantisGraph_bundled = 'Buntade';
