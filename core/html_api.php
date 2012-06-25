@@ -469,7 +469,8 @@ function html_top_banner() {
 		if( $t_show_url ) {
 			echo '<a href="', config_get( 'logo_url' ), '">';
 		}
-		echo '<img border="0" alt="Mantis Bug Tracker" src="' . helper_mantis_url( $t_logo_image ) . '" />';
+		$t_alternate_text = string_html_specialchars( config_get( 'window_title' ) );
+		echo '<img border="0" alt="', $t_alternate_text, '" src="' . helper_mantis_url( $t_logo_image ) . '" />';
 		if( $t_show_url ) {
 			echo '</a>';
 		}
