@@ -246,7 +246,7 @@
 					$x += (int)($size + ($this->minsize / 5));
 				}
 				header('Content-type: image/jpeg');
-				@ImageJPEG($image, '', $this->jpegquality);
+				@ImageJPEG($image, null, $this->jpegquality);
 				@ImageDestroy($image);
 				if($this->debug) echo "\n<br />-Captcha-Debug: Destroy Imagestream.";
 			}
