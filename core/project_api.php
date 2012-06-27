@@ -378,7 +378,12 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 
 	$p_project_id = (int) $p_project_id;
 	$c_enabled = db_prepare_bool( $p_enabled );
-	$c_inherit_global = db_prepare_bool( $p_inherit_global );
+	# Workaround for #14385 - inherit_global column is wrongly defined as int
+	if( db_is_pgsql() ) {
+		$c_inherit_global = db_prepare_int( $p_inherit_global );
+	} else {
+		$c_inherit_global = db_prepare_bool( $p_inherit_global );
+	}
 
 	if( is_blank( $p_name ) ) {
 		trigger_error( ERROR_PROJECT_NAME_INVALID, ERROR );
