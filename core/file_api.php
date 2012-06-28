@@ -1006,7 +1006,7 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 			chmod( $t_disk_file_name_from, 0775 );
 			if ( !rename( $t_disk_file_name_from, $t_disk_file_name_to ) ) {
 				if ( !copy( $t_disk_file_name_from, $t_disk_file_name_to ) ) {
-					trigger_error( FILE_MOVE_FAILED, ERROR );
+					trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
 				}
 				file_delete_local( $t_disk_file_name_from );
 			}
