@@ -77,7 +77,7 @@ if ( OFF == config_get_global( 'allow_signup' ) ) {
 if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 	&&
 			helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 	# captcha image requires GD library and related option to ON
-	$t_private_key = substr( hash( 'whirlpool', 'captcha' . config_get_global( 'crypto_master_salt' ) . $f_public_key, false ), 0, 5 );
+	$t_private_key = substr( hash_hmac( 'sha512', 'captcha' . $f_public_key, config_get_global( 'crypto_master_salt' ), false ), 0, 5 );
 
 	if ( $t_private_key != $f_captcha ) {
 		trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );

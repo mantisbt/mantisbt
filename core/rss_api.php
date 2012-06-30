@@ -46,7 +46,7 @@ require_api( 'user_api.php' );
  * cookie and password. If the user changes their user name or password, this
  * RSS authentication key will become invalidated.
  * @param int $p_user_id User ID for the user which the key is being calculated for
- * @return string RSS authentication key (384bit) encoded according to the base64 with URI safe alphabet approach described in RFC4648
+ * @return string RSS authentication key (512bit) encoded according to the base64 with URI safe alphabet approach described in RFC4648
  */
 function rss_calculate_key( $p_user_id = null ) {
 	if( $p_user_id === null ) {
@@ -59,10 +59,8 @@ function rss_calculate_key( $p_user_id = null ) {
 	$t_password = user_get_field( $t_user_id, 'password' );
 	$t_cookie = user_get_field( $t_user_id, 'cookie_string' );
 
-	$t_key_raw = hash( 'whirlpool', 'rss_key' . config_get_global( 'crypto_master_salt' ) . $t_username . $t_password . $t_cookie, true );
-	# Note: We truncate the last 8 bits from the hash output so that base64
-	# encoding can be performed without any trailing padding.
-	$t_key_base64_encoded = base64_encode( substr( $t_key_raw, 0, 63 ) );
+	$t_key_raw = hash_hmac( 'sha512', 'rss_key' . $t_username . $t_password . $t_cookie, config_get_global( 'crypto_master_salt' ), true );
+	$t_key_base64_encoded = base64_encode( $t_key_raw ) );
 	$t_key = strtr( $t_key_base64_encoded, '+/', '-_' );
 
 	return $t_key;

@@ -124,7 +124,7 @@ function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = 
 			}
 			$t_random_segment .= $i;
 			$t_random_segment .= $t_secret_key;
-			$t_random_bytes .= hash( 'whirlpool', $t_random_segment, true );
+			$t_random_bytes .= hash( 'sha512', $t_random_segment, true );
 		}
 		$t_random_string = substr( $t_random_bytes, 0, $p_bytes );
 		if ( $t_random_string === false ) {
