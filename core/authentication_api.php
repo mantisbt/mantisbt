@@ -477,7 +477,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
  * @return string 16 character random password
  * @access public
  */
-function auth_generate_random_password( $p_email ) {
+function auth_generate_random_password() {
 	# !TODO: create memorable passwords?
 	return crypto_generate_uri_safe_nonce( 16 );
 }

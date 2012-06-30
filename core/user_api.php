@@ -477,8 +477,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 	user_ensure_realname_unique( $p_username, $p_realname );
 	email_ensure_valid( $p_email );
 
-	$t_seed = $p_email . $p_username;
-	$t_cookie_string = auth_generate_unique_cookie_string( $t_seed );
+	$t_cookie_string = auth_generate_unique_cookie_string();
 	$t_user_table = db_get_table( 'user' );
 
 	$query = "INSERT INTO $t_user_table
@@ -540,10 +539,8 @@ function user_signup( $p_username, $p_email = null ) {
 
 	$p_email = trim( $p_email );
 
-	$t_seed = $p_email . $p_username;
-
 	# Create random password
-	$t_password = auth_generate_random_password( $t_seed );
+	$t_password = auth_generate_random_password();
 
 	return user_create( $p_username, $t_password, $p_email );
 }
@@ -1362,8 +1359,7 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 
 	# When the password is changed, invalidate the cookie to expire sessions that
 	# may be active on all browsers.
-	$t_seed = $t_email . $t_username;
-	$c_cookie_string = auth_generate_unique_cookie_string( $t_seed );
+	$c_cookie_string = auth_generate_unique_cookie_string();
 
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_password = auth_process_plain_password( $p_password );
@@ -1426,8 +1422,7 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 	if(( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 
 		# Create random password
-		$t_email = user_get_field( $p_user_id, 'email' );
-		$t_password = auth_generate_random_password( $t_email );
+		$t_password = auth_generate_random_password();
 		$t_password2 = auth_process_plain_password( $t_password );
 
 		user_set_field( $p_user_id, 'password', $t_password2 );
