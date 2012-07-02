@@ -485,7 +485,7 @@ function auth_generate_random_password( $p_email ) {
 /**
  * Generate a confirmation code to validate password reset requests.
  * @param int $p_user_id User ID to generate a confirmation code for
- * @return string Confirmation code (512bit) encoded according to the base64 with URI safe alphabet approach described in RFC4648
+ * @return string Confirmation code (128bit) encoded according to the base64 with URI safe alphabet approach described in RFC4648
  * @access public
  */
 function auth_generate_confirm_hash( $p_user_id ) {
@@ -493,7 +493,7 @@ function auth_generate_confirm_hash( $p_user_id ) {
 	$t_last_visit = user_get_field( $p_user_id, 'last_visit' );
 
 	$t_confirm_hash_raw = hash_hmac( 'sha512', 'confirm_hash' . $t_password . $t_last_visit, config_get_global( 'crypto_master_salt' ), true );
-	$t_confirm_hash_base64_encoded = base64_encode( $t_confirm_hash_raw );
+	$t_confirm_hash_base64_encoded = base64_encode( substr( $t_confirm_hash_raw, 48 );
 	$t_confirm_hash = strtr( $t_confirm_hash_base64_encoded, '+/', '-_' );
 
 	return $t_confirm_hash;
