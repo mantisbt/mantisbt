@@ -752,7 +752,7 @@ function user_get_field( $p_user_id, $p_field_name ) {
 # lookup the user's email in LDAP or the db as appropriate
 function user_get_email( $p_user_id ) {
 	$t_email = '';
-	if( ON == config_get( 'use_ldap_email' ) ) {
+	if( LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_email' ) ) {
 		$t_email = ldap_email( $p_user_id );
 	}
 	if( is_blank( $t_email ) ) {
@@ -766,7 +766,7 @@ function user_get_email( $p_user_id ) {
 function user_get_realname( $p_user_id ) {
 	$t_realname = '';
 
-	if ( ON == config_get( 'use_ldap_realname' ) ) {
+	if ( LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_realname' ) ) {
 		$t_realname = ldap_realname( $p_user_id );
 	}
 
