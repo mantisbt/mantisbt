@@ -874,12 +874,12 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 						$t_bugnote_changed = true;
 					}
 
-					if ( $t_bugnote->view_state !== $t_view_state_id ) {
+					if ( $t_bugnote->view_state != $t_view_state_id ) {
 						bugnote_set_view_state( $t_bugnote_id, $t_view_state_id == VS_PRIVATE );
 						$t_bugnote_changed = true;
 					}
 
-					if ( isset( $t_note['time_tracking']) && $t_note['time_tracking'] !== $t_bugnote->time_tracking ) {
+					if ( isset( $t_note['time_tracking']) && $t_note['time_tracking'] != $t_bugnote->time_tracking ) {
 						bugnote_set_time_tracking( $t_bugnote_id, mci_get_time_tracking_from_note( $p_issue_id, $t_note ) );
 						$t_bugnote_changed = true;
 					}
