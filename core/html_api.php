@@ -1321,7 +1321,7 @@ function html_status_legend() {
 	$width = (int)( 100 / count( $t_status_array ) );
 	$t_status_enum_string = config_get('status_enum_string' );
 	foreach( $t_status_array as $t_status => $t_name ) {
-		$t_val = $t_status_names[$t_status];
+		$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
 		$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
 
 		echo "<td class=\"small-caption $t_status_label-color\">$t_val</td>";
