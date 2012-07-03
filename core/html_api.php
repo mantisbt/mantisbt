@@ -1239,7 +1239,7 @@ function html_status_legend() {
 	# draw the status bar
 	$width = (int)( 100 / count( $t_status_array ) );
 	foreach( $t_status_array as $t_status => $t_name ) {
-		$t_val = $t_status_names[$t_status];
+		$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
 		$t_color = get_status_color( $t_status );
 
 		echo "<td class=\"small-caption\" width=\"$width%\" bgcolor=\"$t_color\">$t_val</td>";
