@@ -169,10 +169,13 @@
 		if ( $t_bug_data->status >= $t_resolved
 			&& $t_bug_data->status < $t_closed
 			&& $t_old_bug_status < $t_resolved ) {
-			# bug_resolve updates the status, fixed_in_version, resolution, handler_id and bugnote and sends message
-			bug_resolve( $f_bug_id, $t_bug_data->resolution, $t_bug_data->fixed_in_version,
-				$f_bugnote_text, $t_bug_data->duplicate_id, $t_bug_data->handler_id,
-				$f_private, $f_time_tracking );
+			# bug_resolve updates the status, fixed_in_version, resolution,
+			# handler_id and bugnote and sends message
+			bug_resolve( $f_bug_id,
+				$t_bug_data->resolution, $t_bug_data->status,
+				$t_bug_data->fixed_in_version,
+				$t_bug_data->duplicate_id, $t_bug_data->handler_id,
+				$f_bugnote_text, $f_private, $f_time_tracking );
 			$t_notify = false;
 			$t_bug_note_set = true;
 
