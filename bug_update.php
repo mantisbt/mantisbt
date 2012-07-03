@@ -33,11 +33,12 @@
 
 	form_security_validate( 'bug_update' );
 
-	$f_bug_id = gpc_get_int( 'bug_id' );
-	$f_update_mode = gpc_get_bool( 'update_mode', FALSE ); # set if called from generic update page
-	$f_new_status	= gpc_get_int( 'status', bug_get_field( $f_bug_id, 'status' ) );
+	$f_bug_id 						= gpc_get_int( 'bug_id' );
+	$t_bug_data 					= bug_get( $f_bug_id, true );
 
-	$t_bug_data = bug_get( $f_bug_id, true );
+	$f_update_mode 					= gpc_get_bool( 'update_mode', FALSE ); # set if called from generic update page
+	$f_new_status					= gpc_get_int( 'status', $t_bug_data->status );
+
 	if( $t_bug_data->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...
 		# ... override the current project. This to avoid problems with categories and handlers lists etc.
@@ -73,21 +74,21 @@
 	$t_bug_data->platform			= gpc_get_string( 'platform', $t_bug_data->platform );
 	$t_bug_data->version			= gpc_get_string( 'version', $t_bug_data->version );
 	$t_bug_data->build				= gpc_get_string( 'build', $t_bug_data->build );
-	$t_bug_data->fixed_in_version		= gpc_get_string( 'fixed_in_version', $t_bug_data->fixed_in_version );
+	$t_bug_data->fixed_in_version	= gpc_get_string( 'fixed_in_version', $t_bug_data->fixed_in_version );
 	$t_bug_data->view_state			= gpc_get_int( 'view_state', $t_bug_data->view_state );
 	$t_bug_data->summary			= gpc_get_string( 'summary', $t_bug_data->summary );
-	$t_due_date = gpc_get_string( 'due_date', null );
+	$t_due_date 					= gpc_get_string( 'due_date', null );
 
 	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ) {
-		$t_bug_data->target_version		= gpc_get_string( 'target_version', $t_bug_data->target_version );
+		$t_bug_data->target_version	= gpc_get_string( 'target_version', $t_bug_data->target_version );
 	}
-	
+
 	if( $t_due_date !== null) {
 		if ( is_blank ( $t_due_date ) ) {
 			$t_bug_data->due_date = 1;
 		} else {
 			$t_bug_data->due_date = strtotime( $t_due_date );
-		}		
+		}
 	}
 
 	$t_bug_data->description		= gpc_get_string( 'description', $t_bug_data->description );
@@ -96,7 +97,7 @@
 
 	$f_private						= gpc_get_bool( 'private' );
 	$f_bugnote_text					= gpc_get_string( 'bugnote_text', '' );
-	$f_time_tracking			= gpc_get_string( 'time_tracking', '0:00' );
+	$f_time_tracking				= gpc_get_string( 'time_tracking', '0:00' );
 	$f_close_now					= gpc_get_string( 'close_now', false );
 
 	# Handle auto-assigning
@@ -124,7 +125,7 @@
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
 
-		# Only update the field if it would have been display for editing
+		# Only update the field if it would have been displayed for editing
 		if( !( ( !$f_update_mode && $t_def['require_' . $t_custom_status_label] ) ||
 						( !$f_update_mode && $t_def['display_' . $t_custom_status_label] && in_array( $t_custom_status_label, array( "resolved", "closed" ) ) ) ||
 						( $f_update_mode && $t_def['display_update'] ) ||
@@ -183,8 +184,8 @@
 				bug_set_field( $f_bug_id, 'status', $t_closed );
 			}
 
-			// update bug data with fields that may be updated inside bug_resolve(), otherwise changes will be overwritten
-			// in bug_update() call below.
+			# update bug data with fields that may be updated inside bug_resolve(),
+			# otherwise changes will be overwritten in bug_update() call below.
 			$t_bug_data->handler_id = bug_get_field( $f_bug_id, 'handler_id' );
 			$t_bug_data->status = bug_get_field( $f_bug_id, 'status' );
 		} else if ( $t_bug_data->status >= $t_closed
@@ -195,14 +196,15 @@
 			$t_bug_note_set = true;
 		} else if ( $t_bug_data->status == config_get( 'bug_reopen_status' )
 			&& $t_old_bug_status >= $t_resolved ) {
-			bug_set_field( $f_bug_id, 'handler_id', $t_bug_data->handler_id ); # fix: update handler_id before calling bug_reopen
+			# fix: update handler_id before calling bug_reopen
+			bug_set_field( $f_bug_id, 'handler_id', $t_bug_data->handler_id );
 			# bug_reopen updates the status and bugnote and sends message
 			bug_reopen( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private );
 			$t_notify = false;
 			$t_bug_note_set = true;
 
-			// update bug data with fields that may be updated inside bug_resolve(), otherwise changes will be overwritten
-			// in bug_update() call below.
+			# update bug data with fields that may be updated inside bug_reopen(),
+			# otherwise changes will be overwritten in bug_update() call below.
 			$t_bug_data->status = bug_get_field( $f_bug_id, 'status' );
 			$t_bug_data->resolution = bug_get_field( $f_bug_id, 'resolution' );
 		}
