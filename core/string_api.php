@@ -446,6 +446,7 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
  */
 function string_insert_hrefs( $p_string ) {
 	static $s_url_regex = null;
+	static $s_url_replace = null;
 	static $s_email_regex = null;
 	static $s_anchor_regex = '/(<a[^>]*>.*?<\/a>)/is';
 
@@ -479,12 +480,16 @@ function string_insert_hrefs( $p_string ) {
 
 		$s_url_regex = "/(${t_url_protocol}(${t_url_part1}*?${t_url_part2}+))/sue";
 
+		# URL replacement
+		$t_url_href    = "href=\"'.rtrim('\\1','.').'\"";
+		$s_url_replace = "'<a ${t_url_href}>\\1</a> [<a ${t_url_href} target=\"_blank\">^</a>]'";
+
 		# e-mail regex
 		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
 	}
 
 	# Find any URL in a string and replace it by a clickable link
-	$p_string = preg_replace( $s_url_regex, "'<a href=\"'.rtrim('\\1','.').'\">\\1</a> [<a href=\"'.rtrim('\\1','.').'\" target=\"_blank\">^</a>]'", $p_string );
+	$p_string = preg_replace( $s_url_regex, $s_url_replace, $p_string );
 	if( $t_change_quotes ) {
 		ini_set( 'magic_quotes_sybase', true );
 	}
