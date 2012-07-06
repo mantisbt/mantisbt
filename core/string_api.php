@@ -443,6 +443,7 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
  */
 function string_insert_hrefs( $p_string ) {
 	static $s_url_regex = null;
+	static $s_email_regex = null;
 	static $s_anchor_regex = '/(<a[^>]*>.*?<\/a>)/is';
 
 	if( !config_get( 'html_make_links' ) ) {
@@ -455,8 +456,9 @@ function string_insert_hrefs( $p_string ) {
 		ini_set( 'magic_quotes_sybase', false );
 	}
 
-	# Initialize URL regex static variable
+	# Initialize static variables
 	if ( is_null( $s_url_regex ) ) {
+		# URL regex
 		$t_url_protocol = '(?:[[:alpha:]][-+.[:alnum:]]*):\/\/';
 
 		# %2A notation in url's
@@ -473,6 +475,9 @@ function string_insert_hrefs( $p_string ) {
 		$t_url_part2 = "(?:\(${t_url_chars_in_parens}*\)|\[${t_url_chars_in_brackets}*\]|${t_url_chars2})";
 
 		$s_url_regex = "/(${t_url_protocol}(${t_url_part1}*?${t_url_part2}+))/sue";
+
+		# e-mail regex
+		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
 	}
 
 	# Find any URL in a string and replace it by a clickable link
@@ -491,11 +496,7 @@ function string_insert_hrefs( $p_string ) {
 		if( preg_match( $s_anchor_regex, $piece ) ) {
 			$p_string .= $piece;
 			} else {
-			$p_string .= preg_replace(
-				email_regex_simple(),
-				'<a href="mailto:\0">\0</a>',
-				$piece
-			);
+			$p_string .= preg_replace( $s_email_regex, '<a href="mailto:\0">\0</a>', $piece );
 			}
 	}
 
