@@ -493,7 +493,7 @@ function auth_generate_confirm_hash( $p_user_id ) {
 	$t_last_visit = user_get_field( $p_user_id, 'last_visit' );
 
 	$t_confirm_hash_raw = hash_hmac( 'sha512', 'confirm_hash' . $t_password . $t_last_visit, config_get_global( 'crypto_master_salt' ), true );
-	$t_confirm_hash_base64_encoded = base64_encode( substr( $t_confirm_hash_raw, 48 );
+	$t_confirm_hash_base64_encoded = base64_encode( substr( $t_confirm_hash_raw, 48 ) );
 	$t_confirm_hash = strtr( $t_confirm_hash_base64_encoded, '+/', '-_' );
 
 	return $t_confirm_hash;
