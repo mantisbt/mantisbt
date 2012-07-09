@@ -907,7 +907,11 @@ function file_get_content_type_override( $p_filename ) {
 
 	$t_extension = pathinfo( $p_filename, PATHINFO_EXTENSION );
 
-	return $g_file_download_content_type_overrides[$t_extension];
+	if ( isset ( $g_file_download_content_type_overrides[$t_extension] ) ) {
+		return $g_file_download_content_type_overrides[$t_extension];
+	}
+
+	return null;
 }
 
 /**
