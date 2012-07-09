@@ -48,6 +48,18 @@ function csv_get_separator() {
 }
 
 /**
+ * get the characters that force a string to be escape before writing it to csv file
+ * @return string
+ * @access public
+ */
+function csv_get_escape_characters() {
+	static $s_escape_characters = null;
+	if ( $s_escape_characters === null )
+		$s_escape_characters = config_get( 'csv_escape_characters' );
+	return $s_escape_characters;
+}
+
+/**
  * if all projects selected, default to <username>.csv, otherwise default to
  * <projectname>.csv.
  * @return string filename
@@ -72,7 +84,7 @@ function csv_get_default_filename() {
  * @access public
  */
 function csv_escape_string( $p_str ) {
-		$t_escaped = str_split( '"' . csv_get_separator() . csv_get_newline() );
+		$t_escaped = str_split( '"' . csv_get_separator() . csv_get_newline() . csv_get_escape_characters() );
 		$t_must_escape = false;
 		while( ( $t_char = current( $t_escaped ) ) !== false && !$t_must_escape ) {
 			$t_must_escape = strpos( $p_str, $t_char ) !== false;

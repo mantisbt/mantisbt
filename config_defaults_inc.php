@@ -2718,6 +2718,15 @@
 	$g_csv_add_bom = OFF;
 
 	/**
+	 * CSV Export
+	 * Customize the characters that force a string to be escape before writing it to csv file,
+	 * in addition of csv_separator, new_line and "
+	 * example : $g_csv_escape_characters = ';,\'\t'
+	 * @global string $g_csv_add_bom
+	 */
+	$g_csv_escape_characters = '';
+
+	/**
 	 * threshold for users to view the system configurations
 	 * @global int $g_view_configuration_threshold
 	 */
