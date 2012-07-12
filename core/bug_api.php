@@ -171,7 +171,7 @@ class BugData {
 				break;
 			case 'due_date':
 				if ( !is_numeric( $value ) ) {
-					$value = strtotime($value);
+					$value = strtotime_safe( $value );
 				}
 				break;
 		}
