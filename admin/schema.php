@@ -608,6 +608,6 @@ $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_tag_name', db_get_table( 'tag'
 $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_bug_tag_tag_id', db_get_table( 'bug_tag' ), 'tag_id' ) );
 $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_email_id', db_get_table( 'email' ), 'email_id', array( 'DROP' ) ), Array( 'db_index_exists', Array( db_get_table( 'email' ), 'idx_email_id') ) );
 $upgrade[] = Array( 'UpdateFunction', 'correct_multiselect_custom_fields_db_format' );
-$upgrade[] = Array( 'UpdateFunction', "stored_filter_migrate" );
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'custom_field_string' ), "
 	text		XL  			NULL DEFAULT NULL " ) );
+$upgrade[] = Array( 'UpdateFunction', "stored_filter_migrate" );
